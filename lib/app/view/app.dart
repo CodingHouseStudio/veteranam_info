@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:kozak/counter/counter.dart';
-import 'package:kozak/l10n/l10n.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -14,8 +13,8 @@ class App extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
+      // localizationsDelegates: AppLocalizations.localizationsDelegates,
+      // supportedLocales: AppLocalizations.supportedLocales,
       home: const CounterPage(),
     );
   }
