@@ -74,7 +74,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v4.0.1
         with:
           role-to-assume: ${{ secrets.AWS_ASSUME_ROLE_S3_SYNC }} # we use Github OIDC authentication for this action
-          aws-region: ca-central-1
+          aws-region: us-east-1
       - name: Flutter action
         uses: subosito/flutter-action@v2.12.0
         with:
@@ -92,7 +92,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v4.0.1
         with:
           role-to-assume: ${{ secrets.AWS_ASSUME_ROLE_CLOUDFRONT_INVALIDATE }}
-          aws-region: ca-central-1
+          aws-region: us-east-1
       - name: Invalidate CloudFront
         run: aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
 #  android-build:
