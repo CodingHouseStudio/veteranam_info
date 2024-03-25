@@ -82,14 +82,14 @@ jobs:
       - name: Build the Web static pages # generate deployment files
         run: flutter build web --release -t lib/main_development.dart --web-renderer canvaskit
       - name: Configure AWS Credentials Action for GitHub Actions
-        uses: aws-actions/configure-aws-credentials@v4.0.1
+        uses: aws-actions/configure-aws-credentials@v4.0.2
         with:
           role-to-assume: ${{ secrets.AWS_ASSUME_ROLE_S3_SYNC }} # we use Github OIDC authentication for this action
           aws-region: us-east-1
       - name: Deploy static site to S3 bucket  # we will use delete option so that we can replace any of the same files
         run: aws s3 sync ./build/web ${{ secrets.S3_WEB_BUCKET }} --delete
       - name: Configure AWS Credentials Action for GitHub Actions
-        uses: aws-actions/configure-aws-credentials@v4.0.1
+        uses: aws-actions/configure-aws-credentials@v4.0.2
         with:
           role-to-assume: ${{ secrets.AWS_ASSUME_ROLE_CLOUDFRONT_INVALIDATE }}
           aws-region: us-east-1
