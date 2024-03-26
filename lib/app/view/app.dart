@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:kozak/counter/counter.dart';
+import 'package:kozak/shared/navigation/navigation.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       theme: ThemeData(
         appBarTheme: AppBarTheme(
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -15,7 +15,7 @@ class App extends StatelessWidget {
       ),
       // localizationsDelegates: AppLocalizations.localizationsDelegates,
       // supportedLocales: AppLocalizations.supportedLocales,
-      home: const CounterPage(),
+      routerConfig: router,
     );
   }
 }
