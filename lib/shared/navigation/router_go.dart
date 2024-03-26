@@ -7,8 +7,7 @@ import 'package:kozak/components/investors/investors.dart';
 import 'package:kozak/components/profile/profile.dart';
 import 'package:kozak/components/story/story.dart';
 import 'package:kozak/components/work/work.dart';
-import 'package:kozak/shared/constants/rout_constants.dart';
-import 'package:kozak/shared/navigation/redirect_authenticate_guard.dart';
+import 'package:kozak/shared/shared.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 
