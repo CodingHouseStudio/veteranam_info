@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kozak/components/investors/investors.dart';
+import 'package:kozak/shared/shared.dart';
 
 class InvestorsScreen extends StatelessWidget {
   const InvestorsScreen({super.key});
@@ -7,6 +8,7 @@ class InvestorsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: KWIdgetkeys.investorsKeys.screen,
       appBar: AppBar(
         title: const Text('Investors Page'),
       ),
