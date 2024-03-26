@@ -17,11 +17,13 @@ dependencies:
   intl: ^0.18.1
   web: 0.5.1
 dev_dependencies:
-  bloc_test: ^9.1.6
-  build_runner:
+  bloc_test: ^9.1.7
+  build_runner: ^2.4.8
   flutter_test:
     sdk: flutter
-  intl_utils:
+  integration_test:
+    sdk: flutter
+  intl_utils: ^2.8.7
 
   mocktail: ^1.0.3
   very_good_analysis: ^5.1.0

@@ -11,35 +11,50 @@ class InformationBodyWidget extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          TextButton(
-            onPressed: () => context.go(
-              '${KRouteStatic.home.path}${KRouteStatic.discounts.path}',
+          Expanded(
+            child: TextButton(
+              key: KWIdgetkeys.informationKeys.discountsButton,
+              onPressed: () => context.go(
+                '${KRouteStatic.home.path}${KRouteStatic.discounts.path}',
+              ),
+              child: const Text('Discounts Page'),
             ),
-            child: const Text('Discounts Page'),
           ),
-          TextButton(
-            onPressed: () => context.go(
-              '${KRouteStatic.home.path}${KRouteStatic.story.path}',
+          Expanded(
+            child: TextButton(
+              key: KWIdgetkeys.informationKeys.storyButton,
+              onPressed: () => context.go(
+                '${KRouteStatic.home.path}${KRouteStatic.story.path}',
+              ),
+              child: const Text('Story Page'),
             ),
-            child: const Text('Story Page'),
           ),
-          TextButton(
-            onPressed: () => context.go(
-              '${KRouteStatic.home.path}${KRouteStatic.work.path}',
+          Expanded(
+            child: TextButton(
+              key: KWIdgetkeys.informationKeys.workButton,
+              onPressed: () => context.go(
+                '${KRouteStatic.home.path}${KRouteStatic.work.path}',
+              ),
+              child: const Text('Work Page'),
             ),
-            child: const Text('Work Page'),
           ),
-          TextButton(
-            onPressed: () => context.go(
-              '${KRouteStatic.home.path}${KRouteStatic.profile.path}',
+          Expanded(
+            child: TextButton(
+              key: KWIdgetkeys.informationKeys.profileButton,
+              onPressed: () => context.go(
+                '${KRouteStatic.home.path}${KRouteStatic.profile.path}',
+              ),
+              child: const Text('Profile Page'),
             ),
-            child: const Text('Profile Page'),
           ),
-          TextButton(
-            onPressed: () => context.go(
-              '${KRouteStatic.home.path}${KRouteStatic.investors.path}',
+          Expanded(
+            child: TextButton(
+              key: KWIdgetkeys.informationKeys.investorsButton,
+              onPressed: () => context.go(
+                '${KRouteStatic.home.path}${KRouteStatic.investors.path}',
+              ),
+              child: const Text('Investors Page'),
             ),
-            child: const Text('Investors Page'),
           ),
         ],
       ),
