@@ -33,6 +33,7 @@ void main() {
       await questionHelper(
         tester,
       );
+      await iconsAreaHelper(tester);
     });
     group('Mock Go Router', () {
       late MockGoRouter mockGoRouter;
@@ -73,6 +74,7 @@ void main() {
         await questionHelper(
           tester,
         );
+        await iconsAreaHelper(tester);
       });
 
       testWidgets('go to ${KScreenName.discounts}', (tester) async {
