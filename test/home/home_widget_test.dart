@@ -29,6 +29,7 @@ void main() {
 
       expect(find.byKey(KWidgetkeys.homeKeys.workButton), findsOneWidget);
 
+      await nawbarDescHelper(tester: tester, searchText: '');
       await questionHelper(
         tester,
       );
@@ -68,6 +69,7 @@ void main() {
 
         expect(find.byKey(KWidgetkeys.homeKeys.workButton), findsOneWidget);
 
+        await nawbarDescHelper(tester: tester, searchText: '');
         await questionHelper(
           tester,
         );

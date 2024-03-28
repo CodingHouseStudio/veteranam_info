@@ -7,11 +7,11 @@ class HomeBodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        children: [
-          const QuestionWidget(),
-          Row(
+    return Column(
+      children: [
+        const Expanded(child: QuestionWidget()),
+        Expanded(
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Expanded(
@@ -70,8 +70,8 @@ class HomeBodyWidget extends StatelessWidget {
               ),
             ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
