@@ -7,6 +7,6 @@ abstract class KSize {
 
   static const kRadiusM = 32.0;
 
-  static const kFontSizeM = 14.0;
-  static const kFontSizeML = 16.0;
+  static const kFontSizeM = 24.0;
+  static const kFontSizeL = 40.0;
 }
