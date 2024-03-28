@@ -23,54 +23,39 @@ class _QuestionWidgetState extends State<QuestionWidget> {
         borderRadius: KBorderRadius.kBorderRadiusM,
         border: Border.all(color: KColorTheme.widgetBackground),
       ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: KPadding.kPaddingSizeML,
-          vertical: KPadding.kPaddingSizeSM,
+      child: Theme(
+        data: ThemeData(
+          dividerColor: Colors.transparent,
         ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: ExpansionTile(
+          title: Text(
+            'Як мені знайти роботу за допомогою цього сайту?',
+            key: KWidgetkeys.questionKeys.title,
+            style: KAppTextStyle.lableLarge,
+            maxLines: 1,
+          ),
+          onExpansionChanged: (expanded) {
+            setState(() {
+              openQuestion = expanded;
+            });
+          },
+          trailing: IconWidget(
+            icon: openQuestion ? KIcon.minus : KIcon.plus,
+            background: KColorTheme.widgetBackground,
+          ),
           children: [
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(
-                    child: Text(
-                      'Як мені знайти роботу за допомогою цього сайту?',
-                      key: KWidgetkeys.questionKeys.title,
-                      style: KAppTextStyle.lableLarge,
-                    ),
-                  ),
-                  if (openQuestion)
-                    Expanded(
-                      child: Column(
-                        children: [
-                          KSizedBox.kHeightSizedBoxM,
-                          Expanded(
-                            child: Text(
-                              // ignore: lines_longer_than_80_chars
-                              'Використовуйте веб-сайти спеціалізованих сервісів для пошуку роботи, таких як Indeed, LinkedIn, Glassdoor, Monster, або регіональні ресурси. Виберіть свою область інтересів та регіон, і шукайте вакансії, які відповідають вашим критеріям.',
-                              key: KWidgetkeys.questionKeys.subtitle,
-                              style: KAppTextStyle.lableMedium,
-                              softWrap: true,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                ],
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: KPadding.kPaddingSizeML,
+                vertical: KPadding.kPaddingSizeSM,
               ),
-            ),
-            InkWell(
-              onTap: () => setState(() {
-                openQuestion = !openQuestion;
-              }),
-              child: IconWidget(
-                key: KWidgetkeys.questionKeys.icon,
-                icon: openQuestion ? KIcon.minus : KIcon.plus,
-                background: KColorTheme.widgetBackground,
+              child: Text(
+                // ignore: lines_longer_than_80_chars
+                'Використовуйте веб-сайти спеціалізованих сервісів для пошуку роботи, таких як Indeed, LinkedIn, Glassdoor, Monster, або регіональні ресурси. Виберіть свою область інтересів та регіон, і шукайте вакансії, які відповідають вашим критеріям.',
+                key: KWidgetkeys.questionKeys.subtitle,
+                style: KAppTextStyle.lableMedium,
+                softWrap: true,
+                maxLines: 3,
               ),
             ),
           ],
