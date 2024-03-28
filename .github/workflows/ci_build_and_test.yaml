@@ -26,6 +26,7 @@ jobs:
       flutter_channel: stable
       flutter_version: 3.19.1
       min_coverage: 50
+      analyze_directories: "lib test"
 
 
   spell-check:
