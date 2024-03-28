@@ -37,7 +37,7 @@ class NawbarDesc extends StatelessWidget {
             ),
             IconWidget(
               key: KWidgetkeys.searchKeys.iconMic,
-              icon: KIcon.micIcon,
+              icon: KIcon.mic,
             ),
             KSizedBox.kWidthSizedBoxML,
             TextButton(
@@ -51,7 +51,7 @@ class NawbarDesc extends StatelessWidget {
             ),
             IconWidget(
               key: KWidgetkeys.searchKeys.iconPerson,
-              icon: KIcon.personIcon,
+              icon: KIcon.person,
             ),
           ],
         ),
