@@ -13,6 +13,7 @@ class HomeBodyWidget extends StatelessWidget {
         const FilterBoxWidget(
           filters: ['Пільги', 'Житло', 'Гарячі лінії'],
         ),
+        const IconsAreaWidget(),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
