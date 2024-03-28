@@ -13,45 +13,45 @@ class StoryBodyWidget extends StatelessWidget {
         children: [
           Expanded(
             child: TextButton(
-              key: KWIdgetkeys.storyKeys.informationButton,
+              key: KWidgetkeys.storyKeys.informationButton,
               onPressed: () => context.go(
-                '${KRouteStatic.home.path}${KRouteStatic.information.path}',
+                '${KRoute.home.path}${KRoute.information.path}',
               ),
               child: const Text('Information Page'),
             ),
           ),
           Expanded(
             child: TextButton(
-              key: KWIdgetkeys.storyKeys.discountsButton,
+              key: KWidgetkeys.storyKeys.discountsButton,
               onPressed: () => context.go(
-                '${KRouteStatic.home.path}${KRouteStatic.discounts.path}',
+                '${KRoute.home.path}${KRoute.discounts.path}',
               ),
               child: const Text('Discounts Page'),
             ),
           ),
           Expanded(
             child: TextButton(
-              key: KWIdgetkeys.storyKeys.workButton,
+              key: KWidgetkeys.storyKeys.workButton,
               onPressed: () => context.go(
-                '${KRouteStatic.home.path}${KRouteStatic.work.path}',
+                '${KRoute.home.path}${KRoute.work.path}',
               ),
               child: const Text('Work Page'),
             ),
           ),
           Expanded(
             child: TextButton(
-              key: KWIdgetkeys.storyKeys.profileButton,
+              key: KWidgetkeys.storyKeys.profileButton,
               onPressed: () => context.go(
-                '${KRouteStatic.home.path}${KRouteStatic.profile.path}',
+                '${KRoute.home.path}${KRoute.profile.path}',
               ),
               child: const Text('Profile Page'),
             ),
           ),
           Expanded(
             child: TextButton(
-              key: KWIdgetkeys.storyKeys.investorsButton,
+              key: KWidgetkeys.storyKeys.investorsButton,
               onPressed: () => context.go(
-                '${KRouteStatic.home.path}${KRouteStatic.investors.path}',
+                '${KRoute.home.path}${KRoute.investors.path}',
               ),
               child: const Text('Investors Page'),
             ),

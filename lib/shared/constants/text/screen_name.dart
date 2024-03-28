@@ -1,4 +1,4 @@
-abstract class ScreenName {
+abstract class KScreenName {
   static const app = 'App Screen';
   static const home = 'Home Screen';
   static const discounts = 'Discounts Screen';
