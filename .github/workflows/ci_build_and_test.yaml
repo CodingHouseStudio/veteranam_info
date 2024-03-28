@@ -26,9 +26,8 @@ jobs:
       flutter_channel: stable
       flutter_version: 3.19.1
       min_coverage: 50
-      format_directories: lib test
-
-
+      format_directories: "lib test"
+      
   spell-check:
     uses: CodingHouseStudio/flutter_workflows/.github/workflows/spell_check.yml@main
     with:
