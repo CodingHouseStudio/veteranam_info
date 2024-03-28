@@ -29,9 +29,9 @@ void main() {
 
       expect(find.byKey(KWidgetkeys.homeKeys.workButton), findsOneWidget);
 
-      await nawbarDescHelper(
-        tester: tester,
-        searchText: '',
+      await nawbarDescHelper(tester: tester, searchText: '');
+      await questionHelper(
+        tester,
       );
     });
     group('Mock Go Router', () {
@@ -69,9 +69,9 @@ void main() {
 
         expect(find.byKey(KWidgetkeys.homeKeys.workButton), findsOneWidget);
 
-        await nawbarDescHelper(
-          tester: tester,
-          searchText: '',
+        await nawbarDescHelper(tester: tester, searchText: '');
+        await questionHelper(
+          tester,
         );
       });
 

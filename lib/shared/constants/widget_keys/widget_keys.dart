@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 
+part 'widget/question.dart';
+part 'widget/icons_area.dart';
 part 'widget/search.dart';
 part 'screen/home.dart';
 part 'screen/app.dart';
@@ -23,4 +25,6 @@ abstract class KWidgetkeys {
   static _WorkKeys get workKeys => _WorkKeys();
 
   static _SearchKeys get searchKeys => _SearchKeys();
+  static _IconsAreaKeys get iconsAreKeys => _IconsAreaKeys();
+  static _QuestionKeys get questionKeys => _QuestionKeys();
 }

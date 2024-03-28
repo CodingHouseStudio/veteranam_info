@@ -46,7 +46,7 @@ class NawbarDesc extends StatelessWidget {
               onPressed: null,
               child: const Text(
                 KAppText.enterButtonText,
-                style: KAppTextStyle.subTitle,
+                style: KAppTextStyle.lableMedium,
               ),
             ),
             IconWidget(

@@ -87,7 +87,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
       keyboardType: widget.keyboardType ?? TextInputType.text,
       textInputAction: TextInputAction.done,
       textAlign: widget.textAlign,
-      style: KAppTextStyle.m3BodyMedium,
+      style: KAppTextStyle.lableMedium,
       // Theme.of(context).textTheme.headlineSmall,
       key: widget.widgetKey,
       onChanged: widget.onChanged,

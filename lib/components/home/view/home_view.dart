@@ -11,7 +11,7 @@ class HomeScreen extends StatelessWidget {
       key: KWidgetkeys.homeKeys.screen,
       appBar: AppBar(
         title: NawbarDesc(
-          search: (String text) {},
+          search: (text) {},
         ),
       ),
       body: const HomeBodyWidget(),
