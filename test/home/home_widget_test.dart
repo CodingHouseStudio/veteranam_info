@@ -29,7 +29,7 @@ void main() {
 
       expect(find.byKey(KWidgetkeys.homeKeys.workButton), findsOneWidget);
 
-      await iconsAreaHelper(
+      await questionHelper(
         tester,
       );
     });
@@ -68,7 +68,7 @@ void main() {
 
         expect(find.byKey(KWidgetkeys.homeKeys.workButton), findsOneWidget);
 
-        await iconsAreaHelper(
+        await questionHelper(
           tester,
         );
       });
