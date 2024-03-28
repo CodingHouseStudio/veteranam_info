@@ -10,6 +10,7 @@ class HomeBodyWidget extends StatelessWidget {
     return Column(
       children: [
         const QuestionWidget(),
+        const IconsAreaWidget(),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
