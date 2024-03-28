@@ -28,6 +28,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
           dividerColor: Colors.transparent,
         ),
         child: ExpansionTile(
+          key: KWidgetkeys.questionKeys.widget,
           title: Text(
             'Як мені знайти роботу за допомогою цього сайту?',
             key: KWidgetkeys.questionKeys.title,
