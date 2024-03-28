@@ -1,12 +1,19 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:get_it/get_it.dart';
 import 'package:kozak/components/work/work.dart';
 import 'package:kozak/shared/shared.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../helpers/helpers.dart';
-import '../test_mocks/test_mocks.dart';
+import '../text_dependency.dart';
 
 void main() {
+  setupFirebaseAuthMocks();
+
+  setUpAll(setUpGlobal);
+
+  setUp(configureDependenciesTest);
+
+  tearDown(GetIt.I.reset);
   group(KScreenName.work, () {
     testWidgets('renders initial', (tester) async {
       await tester.pumpApp(const WorkScreen());

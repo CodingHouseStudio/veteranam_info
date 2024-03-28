@@ -2,15 +2,16 @@
 
 import 'package:flutter/material.dart';
 
-part 'search.dart';
-part 'home.dart';
-part 'app.dart';
-part 'discounts.dart';
-part 'information.dart';
-part 'investors.dart';
-part 'profile.dart';
-part 'story.dart';
-part 'work.dart';
+part 'widget/filter.dart';
+part 'widget/search.dart';
+part 'screen/home.dart';
+part 'screen/app.dart';
+part 'screen/discounts.dart';
+part 'screen/information.dart';
+part 'screen/investors.dart';
+part 'screen/profile.dart';
+part 'screen/story.dart';
+part 'screen/work.dart';
 
 abstract class KWidgetkeys {
   static _HomeKeys get homeKeys => _HomeKeys();
@@ -23,4 +24,5 @@ abstract class KWidgetkeys {
   static _WorkKeys get workKeys => _WorkKeys();
 
   static _SearchKeys get searchKeys => _SearchKeys();
+  static _FilterKeys get filterKeys => _FilterKeys();
 }

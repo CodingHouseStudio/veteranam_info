@@ -1,4 +1,4 @@
-part of 'widget_keys.dart';
+part of '../widget_keys.dart';
 
 class _SearchKeys {
   final title = const Key('search_title');

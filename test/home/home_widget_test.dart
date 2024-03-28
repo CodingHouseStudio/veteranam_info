@@ -1,12 +1,19 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:get_it/get_it.dart';
 import 'package:kozak/components/home/home.dart';
 import 'package:kozak/shared/shared.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../helpers/helpers.dart';
-import '../test_mocks/test_mocks.dart';
+import '../text_dependency.dart';
 
 void main() {
+  setUp(configureDependenciesTest);
+
+  setUpAll(setUpGlobal);
+
+  setupFirebaseAuthMocks();
+
+  tearDown(GetIt.I.reset);
   group(KScreenName.home, () {
     testWidgets('renders initial', (tester) async {
       await tester.pumpApp(const HomeScreen());
@@ -29,14 +36,15 @@ void main() {
 
       expect(find.byKey(KWidgetkeys.homeKeys.workButton), findsOneWidget);
 
-      await nawbarDescHelper(
-        tester: tester,
-        searchText: '',
+      await filterBoxHelper(
+        tester,
       );
     });
     group('Mock Go Router', () {
       late MockGoRouter mockGoRouter;
-      setUp(() => mockGoRouter = MockGoRouter());
+      setUp(() {
+        mockGoRouter = MockGoRouter();
+      });
       testWidgets('renders initial', (tester) async {
         await tester.pumpApp(
           MockGoRouterProvider(
@@ -69,9 +77,8 @@ void main() {
 
         expect(find.byKey(KWidgetkeys.homeKeys.workButton), findsOneWidget);
 
-        await nawbarDescHelper(
-          tester: tester,
-          searchText: '',
+        await filterBoxHelper(
+          tester,
         );
       });
 
