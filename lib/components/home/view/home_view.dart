@@ -10,7 +10,9 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       key: KWidgetkeys.homeKeys.screen,
       appBar: AppBar(
-        title: const Text('Home Page'),
+        title: NawbarDesc(
+          search: (text) {},
+        ),
       ),
       body: const HomeBodyWidget(),
     );
