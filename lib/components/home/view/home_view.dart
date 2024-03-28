@@ -14,7 +14,7 @@ class HomeScreen extends StatelessWidget {
           search: (text) {},
         ),
       ),
-      body: const HomeBodyWidget(),
+      body: const HomeBlocprovider(childWidget: HomeBodyWidget()),
     );
   }
 }

@@ -12,25 +12,31 @@ abstract class KAppTextStyle {
   /// FontStyle: normal
   static const TextStyle inputHintTextStyle = TextStyle(
     color: KColorTheme.black,
-    fontSize: KSize.kFontSizeM,
+    fontSize: KSize.kFontM,
     fontStyle: FontStyle.normal,
   );
 
   static const title = TextStyle(
     color: KColorTheme.black,
-    fontSize: KSize.kFontSizeM,
+    fontSize: KSize.kFontM,
     fontWeight: FontWeight.w400,
   );
 
   static const lableLarge = TextStyle(
     color: KColorTheme.black,
-    fontSize: KSize.kFontSizeL,
+    fontSize: KSize.kFontL,
     fontWeight: FontWeight.w400,
   );
 
   static const lableMedium = TextStyle(
     color: KColorTheme.black,
-    fontSize: KSize.kFontSizeM,
+    fontSize: KSize.kFontM,
+    fontWeight: FontWeight.w400,
+  );
+
+  static const lableMediumSmall = TextStyle(
+    color: KColorTheme.black,
+    fontSize: KSize.kFontM,
     fontWeight: FontWeight.w400,
   );
 }
