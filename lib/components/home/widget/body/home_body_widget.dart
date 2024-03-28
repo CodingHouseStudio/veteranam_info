@@ -10,6 +10,9 @@ class HomeBodyWidget extends StatelessWidget {
     return Column(
       children: [
         const QuestionWidget(),
+        const FilterBoxWidget(
+          filters: ['Пільги', 'Житло', 'Гарячі лінії'],
+        ),
         const IconsAreaWidget(),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,

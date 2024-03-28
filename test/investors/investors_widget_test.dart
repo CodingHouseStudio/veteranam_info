@@ -1,13 +1,20 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:get_it/get_it.dart';
 import 'package:kozak/components/investors/investors.dart';
 import 'package:kozak/shared/shared.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../helpers/helpers.dart';
-import '../test_mocks/test_mocks.dart';
+import '../text_dependency.dart';
 
 void main() {
   group(KScreenName.investors, () {
+    setUp(configureDependenciesTest);
+
+    setUpAll(setUpGlobal);
+
+    setupFirebaseAuthMocks();
+
+    tearDown(GetIt.I.reset);
     testWidgets('renders initial', (tester) async {
       await tester.pumpApp(const InvestorsScreen());
 

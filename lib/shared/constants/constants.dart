@@ -1,4 +1,5 @@
 export 'dimensions/dimensions.dart';
+export 'platform_constants.dart';
 export 'rout_constants.dart';
 export 'style/style.dart';
 export 'text/text.dart';
