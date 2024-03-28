@@ -2,16 +2,17 @@
 
 import 'package:flutter/material.dart';
 
-part 'home.dart';
-part 'app.dart';
-part 'discounts.dart';
-part 'information.dart';
-part 'investors.dart';
-part 'profile.dart';
-part 'story.dart';
-part 'work.dart';
+part 'widget/search.dart';
+part 'screen/home.dart';
+part 'screen/app.dart';
+part 'screen/discounts.dart';
+part 'screen/information.dart';
+part 'screen/investors.dart';
+part 'screen/profile.dart';
+part 'screen/story.dart';
+part 'screen/work.dart';
 
-abstract class KWIdgetkeys {
+abstract class KWidgetkeys {
   static _HomeKeys get homeKeys => _HomeKeys();
   static _AppKeys get appKeys => _AppKeys();
   static _DiscountsKeys get discountsKeys => _DiscountsKeys();
@@ -20,4 +21,6 @@ abstract class KWIdgetkeys {
   static _ProfileKeys get profileKeys => _ProfileKeys();
   static _StoryKeys get storyKeys => _StoryKeys();
   static _WorkKeys get workKeys => _WorkKeys();
+
+  static _SearchKeys get searchKeys => _SearchKeys();
 }

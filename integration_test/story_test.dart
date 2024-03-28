@@ -2,7 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:kozak/shared/shared.dart';
 
-import 'helper_home.dart';
+import 'helper/helper.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -15,22 +15,22 @@ void main() {
   testWidgets('Home Page opened', (tester) async {
     await homeHelper(tester);
 
-    await tester.tap(find.byKey(KWIdgetkeys.homeKeys.storyButton));
+    await tester.tap(find.byKey(KWidgetkeys.homeKeys.storyButton));
     await tester.pumpAndSettle();
 
-    expect(find.byKey(KWIdgetkeys.storyKeys.screen), findsOneWidget);
+    expect(find.byKey(KWidgetkeys.storyKeys.screen), findsOneWidget);
 
-    expect(find.byKey(KWIdgetkeys.storyKeys.discountsButton), findsOneWidget);
+    expect(find.byKey(KWidgetkeys.storyKeys.discountsButton), findsOneWidget);
 
     expect(
-      find.byKey(KWIdgetkeys.storyKeys.informationButton),
+      find.byKey(KWidgetkeys.storyKeys.informationButton),
       findsOneWidget,
     );
 
-    expect(find.byKey(KWIdgetkeys.storyKeys.investorsButton), findsOneWidget);
+    expect(find.byKey(KWidgetkeys.storyKeys.investorsButton), findsOneWidget);
 
-    expect(find.byKey(KWIdgetkeys.storyKeys.profileButton), findsOneWidget);
+    expect(find.byKey(KWidgetkeys.storyKeys.profileButton), findsOneWidget);
 
-    expect(find.byKey(KWIdgetkeys.storyKeys.workButton), findsOneWidget);
+    expect(find.byKey(KWidgetkeys.storyKeys.workButton), findsOneWidget);
   });
 }

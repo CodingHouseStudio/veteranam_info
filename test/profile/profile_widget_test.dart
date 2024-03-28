@@ -7,31 +7,31 @@ import '../helpers/helpers.dart';
 import '../test_mocks/test_mocks.dart';
 
 void main() {
-  group(ScreenName.profile, () {
+  group(KScreenName.profile, () {
     testWidgets('renders initial', (tester) async {
       await tester.pumpApp(const ProfileScreen());
 
-      expect(find.byKey(KWIdgetkeys.profileKeys.screen), findsOneWidget);
+      expect(find.byKey(KWidgetkeys.profileKeys.screen), findsOneWidget);
 
       await tester.pumpAndSettle();
       expect(
-        find.byKey(KWIdgetkeys.profileKeys.discountsButton),
+        find.byKey(KWidgetkeys.profileKeys.discountsButton),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWIdgetkeys.profileKeys.informationButton),
+        find.byKey(KWidgetkeys.profileKeys.informationButton),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWIdgetkeys.profileKeys.investorsButton),
+        find.byKey(KWidgetkeys.profileKeys.investorsButton),
         findsOneWidget,
       );
 
-      expect(find.byKey(KWIdgetkeys.profileKeys.storyButton), findsOneWidget);
+      expect(find.byKey(KWidgetkeys.profileKeys.storyButton), findsOneWidget);
 
-      expect(find.byKey(KWIdgetkeys.profileKeys.workButton), findsOneWidget);
+      expect(find.byKey(KWidgetkeys.profileKeys.workButton), findsOneWidget);
     });
     group('Mock Go Router', () {
       late MockGoRouter mockGoRouter;
@@ -44,30 +44,30 @@ void main() {
           ),
         );
 
-        expect(find.byKey(KWIdgetkeys.profileKeys.screen), findsOneWidget);
+        expect(find.byKey(KWidgetkeys.profileKeys.screen), findsOneWidget);
 
         await tester.pumpAndSettle();
         expect(
-          find.byKey(KWIdgetkeys.profileKeys.discountsButton),
+          find.byKey(KWidgetkeys.profileKeys.discountsButton),
           findsOneWidget,
         );
 
         expect(
-          find.byKey(KWIdgetkeys.profileKeys.informationButton),
+          find.byKey(KWidgetkeys.profileKeys.informationButton),
           findsOneWidget,
         );
 
         expect(
-          find.byKey(KWIdgetkeys.profileKeys.investorsButton),
+          find.byKey(KWidgetkeys.profileKeys.investorsButton),
           findsOneWidget,
         );
 
-        expect(find.byKey(KWIdgetkeys.profileKeys.storyButton), findsOneWidget);
+        expect(find.byKey(KWidgetkeys.profileKeys.storyButton), findsOneWidget);
 
-        expect(find.byKey(KWIdgetkeys.profileKeys.workButton), findsOneWidget);
+        expect(find.byKey(KWidgetkeys.profileKeys.workButton), findsOneWidget);
       });
 
-      testWidgets('go to ${ScreenName.discounts}', (tester) async {
+      testWidgets('go to ${KScreenName.discounts}', (tester) async {
         await tester.pumpApp(
           MockGoRouterProvider(
             goRouter: mockGoRouter,
@@ -75,24 +75,24 @@ void main() {
           ),
         );
 
-        expect(find.byKey(KWIdgetkeys.profileKeys.screen), findsOneWidget);
+        expect(find.byKey(KWidgetkeys.profileKeys.screen), findsOneWidget);
 
         await tester.pumpAndSettle();
 
         expect(
-          find.byKey(KWIdgetkeys.profileKeys.discountsButton),
+          find.byKey(KWidgetkeys.profileKeys.discountsButton),
           findsOneWidget,
         );
-        await tester.tap(find.byKey(KWIdgetkeys.profileKeys.discountsButton));
+        await tester.tap(find.byKey(KWidgetkeys.profileKeys.discountsButton));
 
         verify(
           () => mockGoRouter.go(
-            '${KRouteStatic.home.path}${KRouteStatic.discounts.path}',
+            '${KRoute.home.path}${KRoute.discounts.path}',
           ),
         ).called(1);
       });
 
-      testWidgets('go to ${ScreenName.information}', (tester) async {
+      testWidgets('go to ${KScreenName.information}', (tester) async {
         await tester.pumpApp(
           MockGoRouterProvider(
             goRouter: mockGoRouter,
@@ -100,24 +100,24 @@ void main() {
           ),
         );
 
-        expect(find.byKey(KWIdgetkeys.profileKeys.screen), findsOneWidget);
+        expect(find.byKey(KWidgetkeys.profileKeys.screen), findsOneWidget);
 
         await tester.pumpAndSettle();
 
         expect(
-          find.byKey(KWIdgetkeys.profileKeys.informationButton),
+          find.byKey(KWidgetkeys.profileKeys.informationButton),
           findsOneWidget,
         );
-        await tester.tap(find.byKey(KWIdgetkeys.profileKeys.informationButton));
+        await tester.tap(find.byKey(KWidgetkeys.profileKeys.informationButton));
 
         verify(
           () => mockGoRouter.go(
-            '${KRouteStatic.home.path}${KRouteStatic.information.path}',
+            '${KRoute.home.path}${KRoute.information.path}',
           ),
         ).called(1);
       });
 
-      testWidgets('go to ${ScreenName.investors}', (tester) async {
+      testWidgets('go to ${KScreenName.investors}', (tester) async {
         await tester.pumpApp(
           MockGoRouterProvider(
             goRouter: mockGoRouter,
@@ -125,24 +125,24 @@ void main() {
           ),
         );
 
-        expect(find.byKey(KWIdgetkeys.profileKeys.screen), findsOneWidget);
+        expect(find.byKey(KWidgetkeys.profileKeys.screen), findsOneWidget);
 
         await tester.pumpAndSettle();
 
         expect(
-          find.byKey(KWIdgetkeys.profileKeys.investorsButton),
+          find.byKey(KWidgetkeys.profileKeys.investorsButton),
           findsOneWidget,
         );
-        await tester.tap(find.byKey(KWIdgetkeys.profileKeys.investorsButton));
+        await tester.tap(find.byKey(KWidgetkeys.profileKeys.investorsButton));
 
         verify(
           () => mockGoRouter.go(
-            '${KRouteStatic.home.path}${KRouteStatic.investors.path}',
+            '${KRoute.home.path}${KRoute.investors.path}',
           ),
         ).called(1);
       });
 
-      testWidgets('go to ${ScreenName.story}', (tester) async {
+      testWidgets('go to ${KScreenName.story}', (tester) async {
         await tester.pumpApp(
           MockGoRouterProvider(
             goRouter: mockGoRouter,
@@ -150,24 +150,24 @@ void main() {
           ),
         );
 
-        expect(find.byKey(KWIdgetkeys.profileKeys.screen), findsOneWidget);
+        expect(find.byKey(KWidgetkeys.profileKeys.screen), findsOneWidget);
 
         await tester.pumpAndSettle();
 
         expect(
-          find.byKey(KWIdgetkeys.profileKeys.storyButton),
+          find.byKey(KWidgetkeys.profileKeys.storyButton),
           findsOneWidget,
         );
-        await tester.tap(find.byKey(KWIdgetkeys.profileKeys.storyButton));
+        await tester.tap(find.byKey(KWidgetkeys.profileKeys.storyButton));
 
         verify(
           () => mockGoRouter.go(
-            '${KRouteStatic.home.path}${KRouteStatic.story.path}',
+            '${KRoute.home.path}${KRoute.story.path}',
           ),
         ).called(1);
       });
 
-      testWidgets('go to ${ScreenName.work}', (tester) async {
+      testWidgets('go to ${KScreenName.work}', (tester) async {
         await tester.pumpApp(
           MockGoRouterProvider(
             goRouter: mockGoRouter,
@@ -175,19 +175,19 @@ void main() {
           ),
         );
 
-        expect(find.byKey(KWIdgetkeys.profileKeys.screen), findsOneWidget);
+        expect(find.byKey(KWidgetkeys.profileKeys.screen), findsOneWidget);
 
         await tester.pumpAndSettle();
 
         expect(
-          find.byKey(KWIdgetkeys.profileKeys.workButton),
+          find.byKey(KWidgetkeys.profileKeys.workButton),
           findsOneWidget,
         );
-        await tester.tap(find.byKey(KWIdgetkeys.profileKeys.workButton));
+        await tester.tap(find.byKey(KWidgetkeys.profileKeys.workButton));
 
         verify(
           () => mockGoRouter.go(
-            '${KRouteStatic.home.path}${KRouteStatic.work.path}',
+            '${KRoute.home.path}${KRoute.work.path}',
           ),
         ).called(1);
       });
