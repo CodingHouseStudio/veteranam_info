@@ -8,11 +8,9 @@ Future<void> questionHelper(
 
   expect(find.byKey(KWidgetkeys.questionKeys.subtitle), findsNothing);
 
-  expect(find.byKey(KWidgetkeys.questionKeys.icon), findsOneWidget);
-
   expect(find.byIcon(KIcon.plus.icon!), findsOneWidget);
 
-  await tester.tap(find.byKey(KWidgetkeys.questionKeys.icon));
+  await tester.tap(find.byKey(KWidgetkeys.questionKeys.title));
 
   await tester.pumpAndSettle();
 
