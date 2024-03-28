@@ -18,7 +18,7 @@ final GoRouter router = GoRouter(
   // errorBuilder: (context, state) => const ErrorScreen(),
   // refreshListenable:
   //     GoRouterRefreshStream(GetIt.instance<AuthenticationBloc>().stream),
-  initialLocation: KRouteStatic.home.path,
+  initialLocation: KRoute.home.path,
   // redirect: (BuildContext context, GoRouterState state) async {
   //   if (context.read<AuthenticationBloc>().state.status ==
   //       AuthenticationStatus.authenticated) {
@@ -31,8 +31,8 @@ final GoRouter router = GoRouter(
   // },
   routes: [
     GoRoute(
-      name: KRouteStatic.home.name,
-      path: KRouteStatic.home.path,
+      name: KRoute.home.name,
+      path: KRoute.home.path,
       redirect: redirect,
       pageBuilder: (context, state) => NoTransitionPage(
         key: state.pageKey,
@@ -40,8 +40,8 @@ final GoRouter router = GoRouter(
       ),
       routes: [
         GoRoute(
-          name: KRouteStatic.information.name,
-          path: KRouteStatic.information.path,
+          name: KRoute.information.name,
+          path: KRoute.information.path,
           redirect: redirect,
           pageBuilder: (context, state) => NoTransitionPage(
             key: state.pageKey,
@@ -49,8 +49,8 @@ final GoRouter router = GoRouter(
           ),
         ),
         GoRoute(
-          name: KRouteStatic.discounts.name,
-          path: KRouteStatic.discounts.path,
+          name: KRoute.discounts.name,
+          path: KRoute.discounts.path,
           redirect: redirect,
           pageBuilder: (context, state) => NoTransitionPage(
             key: state.pageKey,
@@ -58,8 +58,8 @@ final GoRouter router = GoRouter(
           ),
         ),
         GoRoute(
-          name: KRouteStatic.story.name,
-          path: KRouteStatic.story.path,
+          name: KRoute.story.name,
+          path: KRoute.story.path,
           redirect: redirect,
           pageBuilder: (context, state) => NoTransitionPage(
             key: state.pageKey,
@@ -67,8 +67,8 @@ final GoRouter router = GoRouter(
           ),
         ),
         GoRoute(
-          name: KRouteStatic.work.name,
-          path: KRouteStatic.work.path,
+          name: KRoute.work.name,
+          path: KRoute.work.path,
           redirect: redirect,
           pageBuilder: (context, state) => NoTransitionPage(
             key: state.pageKey,
@@ -76,8 +76,8 @@ final GoRouter router = GoRouter(
           ),
         ),
         GoRoute(
-          name: KRouteStatic.profile.name,
-          path: KRouteStatic.profile.path,
+          name: KRoute.profile.name,
+          path: KRoute.profile.path,
           redirect: redirect,
           pageBuilder: (context, state) => NoTransitionPage(
             key: state.pageKey,
@@ -85,8 +85,8 @@ final GoRouter router = GoRouter(
           ),
         ),
         GoRoute(
-          name: KRouteStatic.investors.name,
-          path: KRouteStatic.investors.path,
+          name: KRoute.investors.name,
+          path: KRoute.investors.path,
           redirect: redirect,
           pageBuilder: (context, state) => NoTransitionPage(
             key: state.pageKey,

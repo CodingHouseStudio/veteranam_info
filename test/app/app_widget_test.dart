@@ -3,11 +3,11 @@ import 'package:kozak/app/app.dart';
 import 'package:kozak/shared/shared.dart';
 
 void main() {
-  group('${ScreenName.app} Page', () {
+  group('${KScreenName.app} Page', () {
     testWidgets('renders initial', (tester) async {
       await tester.pumpWidget(const App());
 
-      expect(find.byKey(KWIdgetkeys.appKeys.screen), findsOneWidget);
+      expect(find.byKey(KWidgetkeys.appKeys.screen), findsOneWidget);
     });
   });
 }

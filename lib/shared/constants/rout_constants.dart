@@ -1,33 +1,35 @@
-class RouteItem {
-  const RouteItem({required this.path, required this.name});
+// ignore_for_file: library_private_types_in_public_api
+
+class _RouteItem {
+  const _RouteItem({required this.path, required this.name});
 
   final String path;
   final String name;
 }
 
-class KRouteStatic {
-  static const RouteItem home = RouteItem(path: '/', name: 'Home');
-  static const RouteItem information = RouteItem(
+abstract class KRoute {
+  static const _RouteItem home = _RouteItem(path: '/', name: 'Home');
+  static const _RouteItem information = _RouteItem(
     path: 'information',
     name: 'Information',
   );
-  static const RouteItem discounts = RouteItem(
+  static const _RouteItem discounts = _RouteItem(
     path: 'discounts',
     name: 'Discounts',
   );
-  static const RouteItem story = RouteItem(
+  static const _RouteItem story = _RouteItem(
     path: 'story',
     name: 'Story',
   );
-  static const RouteItem work = RouteItem(
+  static const _RouteItem work = _RouteItem(
     path: 'work',
     name: 'Work',
   );
-  static const RouteItem profile = RouteItem(
+  static const _RouteItem profile = _RouteItem(
     path: 'profile',
     name: 'Profile',
   );
-  static const RouteItem investors = RouteItem(
+  static const _RouteItem investors = _RouteItem(
     path: 'investors',
     name: 'Investors',
   );
