@@ -6,4 +6,5 @@ abstract class KIcon {
   static const Icon search = Icon(Icons.search);
   static const Icon plus = Icon(Icons.add);
   static const Icon minus = Icon(Icons.remove);
+  static const Icon filter = Icon(Icons.filter_alt_outlined);
 }
