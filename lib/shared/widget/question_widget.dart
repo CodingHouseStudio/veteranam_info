@@ -41,7 +41,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
                       Text(
                         'Як мені знайти роботу за допомогою цього сайту?',
                         key: KWidgetkeys.questionKeys.title,
-                        style: KAppTextStyle.title,
+                        style: KAppTextStyle.lableLarge,
                       ),
                       if (openQuestion)
                         Column(
@@ -51,7 +51,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
                               // ignore: lines_longer_than_80_chars
                               'Використовуйте веб-сайти спеціалізованих сервісів для пошуку роботи, таких як Indeed, LinkedIn, Glassdoor, Monster, або регіональні ресурси. Виберіть свою область інтересів та регіон, і шукайте вакансії, які відповідають вашим критеріям.',
                               key: KWidgetkeys.questionKeys.subtitle,
-                              style: KAppTextStyle.subTitle,
+                              style: KAppTextStyle.lableMedium,
                               softWrap: true,
                             ),
                           ],
