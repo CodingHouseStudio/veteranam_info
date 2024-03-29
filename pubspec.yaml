@@ -13,6 +13,7 @@ dependencies:
   flutter_bloc: ^8.1.4
   flutter_localizations:
     sdk: flutter
+  font_awesome_flutter: ^10.7.0
   get_it: ^7.6.0 # Used for dependency injection
   go_router: ^13.2.0 # Decoupled routing package which is a must for any app
   injectable: ^2.3.4 # Used for dependency injection

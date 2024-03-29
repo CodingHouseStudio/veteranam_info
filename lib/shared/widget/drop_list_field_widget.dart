@@ -29,7 +29,7 @@ class _DropListFieldWidgetState extends State<DropListFieldWidget> {
   @override
   Widget build(BuildContext context) {
     return Autocomplete<String>(
-      key: KWidgetkeys.dropListField.widget,
+      key: KWidgetkeys.dropListFieldKeys.widget,
       optionsBuilder: (TextEditingValue textEditingValue) {
         if (textEditingValue.text.isEmpty) {
           return widget.dropDownList;
@@ -44,13 +44,17 @@ class _DropListFieldWidgetState extends State<DropListFieldWidget> {
             .toList();
       },
       optionsViewBuilder: (context, onSelected, options) {
-        return ListView.separated(
-          key: KWidgetkeys.dropListField.list,
+        return ListView.builder(
+          key: KWidgetkeys.dropListFieldKeys.list,
           padding: EdgeInsets.zero,
           itemBuilder: (context, index) => TextButton(
-            key: KWidgetkeys.dropListField.items,
+            key: KWidgetkeys.dropListFieldKeys.items,
             onPressed: () => onSelected(options.elementAt(index)),
-            style: KButtonStyles.whiteButtonStyle,
+            style: KButtonStyles.whiteButtonStyle.copyWith(
+              shape: MaterialStateProperty.all(
+                const RoundedRectangleBorder(),
+              ),
+            ),
             child: Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: KPadding.kPaddingSizeML,
@@ -64,7 +68,7 @@ class _DropListFieldWidgetState extends State<DropListFieldWidget> {
               ),
             ),
           ),
-          separatorBuilder: (context, index) => const Divider(),
+          // separatorBuilder: (context, index) => const Divider(),
           itemCount: options.length,
         );
       },
@@ -76,7 +80,7 @@ class _DropListFieldWidgetState extends State<DropListFieldWidget> {
           });
         });
         return TextFieldWidget(
-          widgetKey: KWidgetkeys.dropListField.field,
+          widgetKey: KWidgetkeys.dropListFieldKeys.field,
           controller: textEditingController,
           focusNode: focusNode,
           prefixIcon: isFocused ? KIcon.trailingUp : KIcon.trailing,
