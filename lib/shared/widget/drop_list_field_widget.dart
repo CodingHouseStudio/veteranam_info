@@ -19,6 +19,7 @@ class DropListFieldWidget extends StatefulWidget {
 
 class _DropListFieldWidgetState extends State<DropListFieldWidget> {
   late bool isFocused;
+
   @override
   void initState() {
     isFocused = false;
@@ -43,17 +44,27 @@ class _DropListFieldWidgetState extends State<DropListFieldWidget> {
             .toList();
       },
       optionsViewBuilder: (context, onSelected, options) {
-        return ListView.builder(
+        return ListView.separated(
+          key: KWidgetkeys.dropListField.list,
+          padding: EdgeInsets.zero,
           itemBuilder: (context, index) => TextButton(
             key: KWidgetkeys.dropListField.items,
-            onPressed: () {},
-            child: Text(
-              options.elementAt(index),
-              style: KAppTextStyle.lableMedium,
-            ),
+            onPressed: () => onSelected(options.elementAt(index)),
             style: KButtonStyles.whiteButtonStyle,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: KPadding.kPaddingSizeML,
+              ),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  options.elementAt(index),
+                  style: KAppTextStyle.lableMedium,
+                ),
+              ),
+            ),
           ),
-          // separatorBuilder: (context, index) => const Divider(),
+          separatorBuilder: (context, index) => const Divider(),
           itemCount: options.length,
         );
       },
@@ -71,6 +82,7 @@ class _DropListFieldWidgetState extends State<DropListFieldWidget> {
           prefixIcon: isFocused ? KIcon.trailingUp : KIcon.trailing,
           onChanged: widget.onChanged,
           hintText: widget.hintText,
+          disposeFocusNode: false,
         );
       },
     );
