@@ -7,4 +7,6 @@ abstract class KIcon {
   static const Icon plus = Icon(Icons.add);
   static const Icon minus = Icon(Icons.remove);
   static const Icon filter = Icon(Icons.filter_alt_outlined);
+  static const Icon trailing = Icon(Icons.arrow_drop_down);
+  static const Icon trailingUp = Icon(Icons.arrow_drop_up);
 }
