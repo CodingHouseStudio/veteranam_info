@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:kozak/shared/shared.dart';
 
 class ProfileBodyWidget extends StatelessWidget {
@@ -7,57 +6,10 @@ class ProfileBodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          Expanded(
-            child: TextButton(
-              key: KWidgetkeys.profileKeys.informationButton,
-              onPressed: () => context.go(
-                '${KRoute.home.path}${KRoute.information.path}',
-              ),
-              child: const Text('Information Page'),
-            ),
-          ),
-          Expanded(
-            child: TextButton(
-              key: KWidgetkeys.profileKeys.discountsButton,
-              onPressed: () => context.go(
-                '${KRoute.home.path}${KRoute.discounts.path}',
-              ),
-              child: const Text('Discounts Page'),
-            ),
-          ),
-          Expanded(
-            child: TextButton(
-              key: KWidgetkeys.profileKeys.storyButton,
-              onPressed: () => context.go(
-                '${KRoute.home.path}${KRoute.story.path}',
-              ),
-              child: const Text('Story Page'),
-            ),
-          ),
-          Expanded(
-            child: TextButton(
-              key: KWidgetkeys.profileKeys.workButton,
-              onPressed: () => context.go(
-                '${KRoute.home.path}${KRoute.work.path}',
-              ),
-              child: const Text('Work Page'),
-            ),
-          ),
-          Expanded(
-            child: TextButton(
-              key: KWidgetkeys.profileKeys.investorsButton,
-              onPressed: () => context.go(
-                '${KRoute.home.path}${KRoute.investors.path}',
-              ),
-              child: const Text('Investors Page'),
-            ),
-          ),
-        ],
-      ),
+    return ListView(
+      children: const [
+        FooterDescWidget(),
+      ],
     );
   }
 }

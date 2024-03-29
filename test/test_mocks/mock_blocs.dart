@@ -1,9 +1,6 @@
 // ignore_for_file: lines_longer_than_80_chars
 // import 'package:bloc_test/bloc_test.dart';
-// import 'package:checkmybuilding/components/home/bloc/home_bloc.dart';
-// import 'package:checkmybuilding/components/profile/bloc/profile_bloc.dart';
-// import 'package:checkmybuilding/components/profile/bloc/profile_watcher_bloc.dart';
-// import 'package:checkmybuilding/components/template_new_audit_next_screen/bloc/template_new_audit_next_page_bloc.dart';
+// import 'package:kozak/components/components.dart';
 //
 // class MockProfileWatcherBloc
 //     extends MockBloc<ProfileWatcherEvent, ProfileWatcherState>
