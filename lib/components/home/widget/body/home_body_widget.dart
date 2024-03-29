@@ -7,15 +7,24 @@ class HomeBodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return ListView(
       children: [
         const QuestionWidget(),
         const FilterBoxWidget(
           filters: ['Пільги', 'Житло', 'Гарячі лінії'],
         ),
         const IconsAreaWidget(),
-        NameFieldWidget(
-          changeName: (text) {},
+        DropListFieldWidget(
+          onChanged: (String? text) {},
+          hintText: '',
+          dropDownList: const [
+            'Житомир',
+            'Львів',
+            'Київ',
+            'Жовква',
+            'Трускавець',
+            'Стебник',
+          ],
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,

@@ -44,6 +44,10 @@ void main() {
         tester,
       );
       await iconsAreaHelper(tester);
+      await dropListFieldBoxHelper(
+        tester: tester,
+        dropListitem: 'Житомир',
+      );
     });
     group('Mock Go Router', () {
       late MockGoRouter mockGoRouter;
