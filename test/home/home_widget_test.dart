@@ -46,7 +46,7 @@ void main() {
       await iconsAreaHelper(tester);
       await dropListFieldBoxHelper(
         tester: tester,
-        dropListitem: 'Житомир',
+        dropListitem: KMockText.dropDownList.elementAt(0),
       );
     });
     group('Mock Go Router', () {

@@ -28,6 +28,7 @@ class _DropListFieldWidgetState extends State<DropListFieldWidget> {
   @override
   Widget build(BuildContext context) {
     return Autocomplete<String>(
+      key: KWidgetkeys.dropListField.widget,
       optionsBuilder: (TextEditingValue textEditingValue) {
         if (textEditingValue.text.isEmpty) {
           return widget.dropDownList;
@@ -40,6 +41,21 @@ class _DropListFieldWidgetState extends State<DropListFieldWidget> {
                   ),
             )
             .toList();
+      },
+      optionsViewBuilder: (context, onSelected, options) {
+        return ListView.builder(
+          itemBuilder: (context, index) => TextButton(
+            key: KWidgetkeys.dropListField.items,
+            onPressed: () {},
+            child: Text(
+              options.elementAt(index),
+              style: KAppTextStyle.lableMedium,
+            ),
+            style: KButtonStyles.whiteButtonStyle,
+          ),
+          // separatorBuilder: (context, index) => const Divider(),
+          itemCount: options.length,
+        );
       },
       fieldViewBuilder:
           (context, textEditingController, focusNode, onFieldSubmitted) {
