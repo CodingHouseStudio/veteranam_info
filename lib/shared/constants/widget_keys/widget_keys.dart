@@ -12,9 +12,9 @@ part 'screen/story.dart';
 part 'screen/work.dart';
 
 part 'widget/question.dart';
-part 'widget/icons_area.dart';
 part 'widget/nawbar.dart';
 part 'widget/filter.dart';
+part 'widget/footer.dart';
 part 'widget/message_field.dart';
 
 abstract class KWidgetkeys {
@@ -27,9 +27,9 @@ abstract class KWidgetkeys {
   static _StoryKeys get storyKeys => _StoryKeys();
   static _WorkKeys get workKeys => _WorkKeys();
 
-  static _NawbarKeys get searchKeys => _NawbarKeys();
-  static _IconsAreaKeys get iconsAreKeys => _IconsAreaKeys();
+  static _NawbarKeys get nawbarKeys => _NawbarKeys();
   static _QuestionKeys get questionKeys => _QuestionKeys();
   static _FilterKeys get filterKeys => _FilterKeys();
   static _MessageFieldKeys get inputKeys => _MessageFieldKeys();
+  static _FooterKeys get footerKeys => _FooterKeys();
 }

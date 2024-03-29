@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:kozak/shared/shared.dart';
 
-class InputWidget extends StatelessWidget {
-  const InputWidget({required this.changeMessage, super.key});
+class MessageFieldWidget extends StatelessWidget {
+  const MessageFieldWidget({required this.changeMessage, super.key});
   final void Function(String text) changeMessage;
 
   @override
