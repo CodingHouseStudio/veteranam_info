@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:kozak/shared/shared.dart';
 
 class DropListFieldWidget extends StatefulWidget {
@@ -19,66 +18,45 @@ class DropListFieldWidget extends StatefulWidget {
 }
 
 class _DropListFieldWidgetState extends State<DropListFieldWidget> {
-  late TextEditingController controller;
-  late FocusNode focusNode;
-  bool isFocused = false;
-
+  late bool isFocused;
   @override
   void initState() {
-    controller = TextEditingController();
-    focusNode = FocusNode();
-    focusNode.addListener(() {
-      setState(() {
-        isFocused = focusNode.hasFocus;
-      });
-    });
+    isFocused = false;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        TypeAheadField<String>(
-          key: KWidgetkeys.dropListField.widget,
-          controller: controller,
+    return Autocomplete<String>(
+      optionsBuilder: (TextEditingValue textEditingValue) {
+        if (textEditingValue.text.isEmpty) {
+          return widget.dropDownList;
+        }
+
+        return widget.dropDownList
+            .where(
+              (element) => element.toLowerCase().contains(
+                    textEditingValue.text.toLowerCase(),
+                  ),
+            )
+            .toList();
+      },
+      fieldViewBuilder:
+          (context, textEditingController, focusNode, onFieldSubmitted) {
+        focusNode.addListener(() {
+          setState(() {
+            isFocused = focusNode.hasFocus;
+          });
+        });
+        return TextFieldWidget(
+          widgetKey: KWidgetkeys.dropListField.field,
+          controller: textEditingController,
           focusNode: focusNode,
-          builder: (
-            context,
-            controller,
-            focusNode,
-          ) =>
-              TextFieldWidget(
-            widgetKey: KWidgetkeys.dropListField.field,
-            controller: controller,
-            focusNode: focusNode,
-            prefixIcon: isFocused ? KIcon.trailingUp : KIcon.trailing,
-            onChanged: widget.onChanged,
-            hintText: widget.hintText,
-          ),
-          itemBuilder: (BuildContext context, String value) => Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: KPadding.kPaddingSizeML,
-            ),
-            child: Text(
-              value,
-              style: KAppTextStyle.lableMedium,
-              key: KWidgetkeys.dropListField.items,
-            ),
-          ),
-          onSelected: (String value) => setState(() {
-            controller.text = value;
-          }),
-          suggestionsCallback: (String search) => widget.dropDownList
-              .where(
-                (element) => element.toLowerCase().startsWith(
-                      search.toLowerCase(),
-                    ),
-              )
-              .toList(),
-          itemSeparatorBuilder: (_, __) => const SizedBox.shrink(),
-        ),
-      ],
+          prefixIcon: isFocused ? KIcon.trailingUp : KIcon.trailing,
+          onChanged: widget.onChanged,
+          hintText: widget.hintText,
+        );
+      },
     );
   }
 }

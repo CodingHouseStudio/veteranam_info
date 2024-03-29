@@ -5,3 +5,14 @@ abstract class KAppText {
   static const String filterItemResetAll = 'Скинути фільтри';
   static const String nameTextFieldHint = "Напишіть ваще ім'я";
 }
+
+abstract class KMockText {
+  static const dropDownList = [
+    'Житомир',
+    'Львів',
+    'Київ',
+    'Жовква',
+    'Трускавець',
+    'Стебник',
+  ];
+}

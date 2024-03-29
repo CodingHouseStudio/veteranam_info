@@ -17,14 +17,7 @@ class HomeBodyWidget extends StatelessWidget {
         DropListFieldWidget(
           onChanged: (String? text) {},
           hintText: '',
-          dropDownList: const [
-            'Житомир',
-            'Львів',
-            'Київ',
-            'Жовква',
-            'Трускавець',
-            'Стебник',
-          ],
+          dropDownList: KMockText.dropDownList,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
