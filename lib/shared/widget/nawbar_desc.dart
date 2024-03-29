@@ -36,7 +36,7 @@ class NawbarDesc extends StatelessWidget {
               ),
             ),
             IconWidget(
-              key: KWidgetkeys.searchKeys.iconMic,
+              key: KWidgetkeys.searchKeys.micIcon,
               icon: KIcon.mic,
             ),
             KSizedBox.kWidthSizedBoxML,
@@ -50,7 +50,7 @@ class NawbarDesc extends StatelessWidget {
               ),
             ),
             IconWidget(
-              key: KWidgetkeys.searchKeys.iconPerson,
+              key: KWidgetkeys.searchKeys.personIcon,
               icon: KIcon.person,
             ),
           ],

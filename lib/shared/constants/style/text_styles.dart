@@ -28,6 +28,12 @@ abstract class KAppTextStyle {
     fontWeight: FontWeight.w400,
   );
 
+  static const lableMediumLarge = TextStyle(
+    color: KColorTheme.black,
+    fontSize: KSize.kFontML,
+    fontWeight: FontWeight.w400,
+  );
+
   static const lableMedium = TextStyle(
     color: KColorTheme.black,
     fontSize: KSize.kFontM,

@@ -16,28 +16,10 @@ void main() {
   testWidgets('Home Page opened', (tester) async {
     await homeHelper(tester);
 
-    await tester.tap(find.byKey(KWidgetkeys.homeKeys.investorsButton));
-    await tester.pumpAndSettle();
+    await footerInvestorsRoutHelper(tester);
 
     expect(find.byKey(KWidgetkeys.investorsKeys.screen), findsOneWidget);
 
-    expect(
-      find.byKey(KWidgetkeys.investorsKeys.discountsButton),
-      findsOneWidget,
-    );
-
-    expect(
-      find.byKey(KWidgetkeys.investorsKeys.informationButton),
-      findsOneWidget,
-    );
-
-    expect(
-      find.byKey(KWidgetkeys.investorsKeys.profileButton),
-      findsOneWidget,
-    );
-
-    expect(find.byKey(KWidgetkeys.investorsKeys.storyButton), findsOneWidget);
-
-    expect(find.byKey(KWidgetkeys.investorsKeys.workButton), findsOneWidget);
+    await footerHelper(tester);
   });
 }

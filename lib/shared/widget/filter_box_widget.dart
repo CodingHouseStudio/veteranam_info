@@ -41,18 +41,22 @@ class _FilterBoxWidgetState extends State<FilterBoxWidget> {
             }
           },
         ),
-        KSizedBox.kHeightSizedBoxS,
+        KSizedBox.kWidthSizedBoxS,
         if (!isWebMobile)
-          Wrap(
-            key: KWidgetkeys.filterKeys.chips,
-            children: _buildChips(),
-          ),
-        if (isWebMobile)
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
+          Expanded(
+            child: Wrap(
               key: KWidgetkeys.filterKeys.chips,
               children: _buildChips(),
+            ),
+          ),
+        if (isWebMobile)
+          Expanded(
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                key: KWidgetkeys.filterKeys.chips,
+                children: _buildChips(),
+              ),
             ),
           ),
       ],

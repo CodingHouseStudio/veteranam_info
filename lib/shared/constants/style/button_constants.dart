@@ -13,4 +13,12 @@ abstract class KButtonStyles {
       borderRadius: KBorderRadius.kBorderRadiusM,
     ),
   );
+  static final ButtonStyle transparentButtonStyle = TextButton.styleFrom(
+    minimumSize: const Size(KMinMaxSize.minWidth100, KMinMaxSize.minHeight50),
+    padding: const EdgeInsets.all(KPadding.kPaddingSizeXSS),
+    alignment: Alignment.centerLeft,
+    shape: RoundedRectangleBorder(
+      borderRadius: KBorderRadius.kBorderRadiusM,
+    ),
+  );
 }
