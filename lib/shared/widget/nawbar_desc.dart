@@ -19,25 +19,25 @@ class NawbarDesc extends StatelessWidget {
             KSizedBox.kWidthSizedBoxM,
             Text(
               KAppText.appName,
-              key: KWidgetkeys.searchKeys.title,
+              key: KWidgetkeys.nawbarKeys.title,
               style: KAppTextStyle.title,
             ),
             KSizedBox.kWidthSizedBoxML,
             Expanded(
               child: TextFieldWidget(
-                widgetKey: KWidgetkeys.searchKeys.field,
+                widgetKey: KWidgetkeys.nawbarKeys.field,
                 prefixIcon: KIcon.search,
                 onChanged: search,
                 hintText: KAppText.searchTextFieldHint,
               ),
             ),
             IconWidget(
-              key: KWidgetkeys.searchKeys.iconMic,
+              key: KWidgetkeys.nawbarKeys.micIcon,
               icon: KIcon.mic,
             ),
             KSizedBox.kWidthSizedBoxML,
             TextButton(
-              key: KWidgetkeys.searchKeys.button,
+              key: KWidgetkeys.nawbarKeys.button,
               style: KButtonStyles.whiteButtonStyle,
               onPressed: null,
               child: const Text(
@@ -46,7 +46,7 @@ class NawbarDesc extends StatelessWidget {
               ),
             ),
             IconWidget(
-              key: KWidgetkeys.searchKeys.iconPerson,
+              key: KWidgetkeys.nawbarKeys.personIcon,
               icon: KIcon.person,
             ),
           ],
