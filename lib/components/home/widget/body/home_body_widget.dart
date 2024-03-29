@@ -10,6 +10,7 @@ class HomeBodyWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       children: const [
+        // MessageFieldWidget(changeMessage: (_) {}),
         FilterBoxWidget(
           filters: KMockText.filter,
         ),

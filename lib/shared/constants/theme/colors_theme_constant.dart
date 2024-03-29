@@ -11,6 +11,10 @@ abstract class KColorTheme {
   /// opacity: 1
   static const widgetBackground = Color(0xffd9d9d9);
 
+  /// hex: #959595
+  /// opacity: 1
+  static const Color lightGray = Color(0xff959595);
+
   /// c52707 figma properties
   /// hex: #c52707
   /// opacity: 1
@@ -32,8 +36,4 @@ abstract class KColorTheme {
   static const Color error = Color(0xffba2525);
 
   static const Color black = Color(0xff000000);
-
-  /// hex: #959595
-  /// opacity: 1
-  static const Color lightGray = Color(0xff959595);
 }

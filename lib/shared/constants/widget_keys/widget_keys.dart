@@ -16,6 +16,7 @@ part 'widget/nawbar.dart';
 part 'widget/filter.dart';
 part 'widget/drop_list_field.dart';
 part 'widget/footer.dart';
+part 'widget/message_field.dart';
 
 abstract class KWidgetkeys {
   static _HomeKeys get homeKeys => _HomeKeys();
@@ -30,6 +31,7 @@ abstract class KWidgetkeys {
   static _NawbarKeys get nawbarKeys => _NawbarKeys();
   static _QuestionKeys get questionKeys => _QuestionKeys();
   static _FilterKeys get filterKeys => _FilterKeys();
+  static _MessageFieldKeys get inputKeys => _MessageFieldKeys();
   static _FooterKeys get footerKeys => _FooterKeys();
   static _DropListFieldKeys get dropListFieldKeys => _DropListFieldKeys();
 }
