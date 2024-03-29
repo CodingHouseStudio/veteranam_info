@@ -9,11 +9,13 @@ Future<void> dropListFieldBoxHelper({
 
   expect(find.byKey(KWidgetkeys.dropListField.field), findsOneWidget);
 
+  expect(find.byKey(KWidgetkeys.dropListField.list), findsNothing);
+
   expect(find.byKey(KWidgetkeys.dropListField.items), findsNothing);
 
   expect(
     find.descendant(
-      of: find.byKey(KWidgetkeys.dropListField.widget),
+      of: find.byKey(KWidgetkeys.dropListField.list),
       matching: find.text(dropListitem),
     ),
     findsNothing,
@@ -24,11 +26,13 @@ Future<void> dropListFieldBoxHelper({
   );
   await tester.pumpAndSettle();
 
+  expect(find.byKey(KWidgetkeys.dropListField.list), findsOneWidget);
+
   expect(find.byKey(KWidgetkeys.dropListField.items), findsWidgets);
 
   expect(
     find.descendant(
-      of: find.byKey(KWidgetkeys.dropListField.widget),
+      of: find.byKey(KWidgetkeys.dropListField.list),
       matching: find.text(dropListitem),
     ),
     findsOneWidget,
@@ -36,14 +40,14 @@ Future<void> dropListFieldBoxHelper({
 
   await tester.tap(
     find.descendant(
-      of: find.byKey(KWidgetkeys.dropListField.widget),
+      of: find.byKey(KWidgetkeys.dropListField.list),
       matching: find.text(dropListitem),
     ),
   );
 
   await tester.pumpAndSettle();
 
-  expect(find.byKey(KWidgetkeys.dropListField.items), findsNothing);
+  expect(find.byKey(KWidgetkeys.dropListField.list), findsNothing);
 
   expect(
     find.descendant(
