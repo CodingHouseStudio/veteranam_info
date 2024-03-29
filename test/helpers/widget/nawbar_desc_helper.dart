@@ -19,4 +19,12 @@ Future<void> nawbarDescHelper({
   expect(find.byKey(KWidgetkeys.searchKeys.iconPerson), findsOneWidget);
 
   await tester.enterText(find.byKey(KWidgetkeys.searchKeys.field), searchText);
+
+  expect(
+    find.descendant(
+      of: find.byKey(KWidgetkeys.searchKeys.field),
+      matching: find.text(searchText),
+    ),
+    findsOneWidget,
+  );
 }

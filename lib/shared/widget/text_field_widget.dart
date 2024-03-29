@@ -5,9 +5,9 @@ import 'package:kozak/shared/shared.dart';
 class TextFieldWidget extends StatefulWidget {
   const TextFieldWidget({
     required this.widgetKey,
-    required this.textAlign,
     required this.onChanged,
     required this.hintText,
+    this.textAlign,
     super.key,
     this.width,
     this.height,
@@ -34,11 +34,12 @@ class TextFieldWidget extends StatefulWidget {
     this.expands,
     this.labelText,
     this.minLines,
+    this.hintStyle,
   });
   final Key widgetKey;
   final double? width;
   final double? height;
-  final TextAlign textAlign;
+  final TextAlign? textAlign;
   final ValueChanged<String> onChanged;
   final String hintText;
   final String? errorText;
@@ -64,6 +65,7 @@ class TextFieldWidget extends StatefulWidget {
   final bool? disposeFocusNode;
   final bool? expands;
   final String? labelText;
+  final TextStyle? hintStyle;
 
   @override
   State<TextFieldWidget> createState() => _TextFieldWidgetState();
@@ -86,13 +88,13 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
       maxLength: widget.maxLength,
       keyboardType: widget.keyboardType ?? TextInputType.text,
       textInputAction: TextInputAction.done,
-      textAlign: widget.textAlign,
+      textAlign: widget.textAlign ?? TextAlign.start,
       style: KAppTextStyle.lableMedium,
       // Theme.of(context).textTheme.headlineSmall,
       key: widget.widgetKey,
       onChanged: widget.onChanged,
       decoration: InputDecoration(
-        hintStyle: KAppTextStyle.inputHintTextStyle,
+        hintStyle: widget.hintStyle ?? KAppTextStyle.hint,
         contentPadding:
             widget.contentPadding ?? const EdgeInsets.only(left: 20, right: 20),
         floatingLabelBehavior: FloatingLabelBehavior.auto,
@@ -160,8 +162,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
 
   @override
   void dispose() {
-    // ignore: use_if_null_to_convert_nulls_to_bools
-    if (widget.disposeFocusNode == true) {
+    if (widget.disposeFocusNode != null && widget.disposeFocusNode!) {
       widget.focusNode?.dispose();
     }
     super.dispose();
