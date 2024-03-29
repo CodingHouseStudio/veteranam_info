@@ -14,6 +14,9 @@ class HomeBodyWidget extends StatelessWidget {
           filters: ['Пільги', 'Житло', 'Гарячі лінії'],
         ),
         const IconsAreaWidget(),
+        NameFieldWidget(
+          changeName: (text) {},
+        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [

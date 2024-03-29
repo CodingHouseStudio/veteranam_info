@@ -3,4 +3,5 @@ abstract class KAppText {
   static const String enterButtonText = 'Увійти';
   static const String searchTextFieldHint = 'Погук...';
   static const String filterItemResetAll = 'Скинути фільтри';
+  static const String nameTextFieldHint = "Напишіть ваще ім'я";
 }
