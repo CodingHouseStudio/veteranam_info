@@ -4,6 +4,7 @@ abstract class KAppText {
   static const String searchTextFieldHint = 'Пошук...';
   static const String filterItemResetAll = 'Скинути фільтри';
   static const String messageTextFieldHint = 'Напишіть Ваше повідомлення';
+  static const String nameTextFieldHint = "Напишіть ваще ім'я";
   static const String footerAboutUs = 'Про нас';
   static const String footerContact = 'Контакти';
   static const String footerConsultationOnline = 'Консультація онлайн';
@@ -13,4 +14,16 @@ abstract class KAppText {
   static const String footerWork = 'Робота';
   static const String footerInformation = 'Інформація';
   static const String footerForInvestors = 'Для інвесторів';
+}
+
+abstract class KMockText {
+  static const dropDownList = [
+    'Житомир',
+    'Львів',
+    'Київ',
+    'Жовква',
+    'Трускавець',
+    'Стебник',
+  ];
+  static const filter = ['Пільги', 'Житло', 'Гарячі лінії'];
 }

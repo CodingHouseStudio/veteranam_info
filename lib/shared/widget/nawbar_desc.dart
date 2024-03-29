@@ -30,9 +30,6 @@ class NawbarDesc extends StatelessWidget {
                 prefixIcon: KIcon.search,
                 onChanged: search,
                 hintText: KAppText.searchTextFieldHint,
-                fillColor: KColorTheme.white,
-                enabledBorder: KBorder.outlineInput,
-                focusedBorder: KBorder.outlineInput,
               ),
             ),
             IconWidget(

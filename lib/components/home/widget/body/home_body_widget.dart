@@ -12,7 +12,7 @@ class HomeBodyWidget extends StatelessWidget {
       children: const [
         // MessageFieldWidget(changeMessage: (_) {}),
         FilterBoxWidget(
-          filters: ['Пільги', 'Житло', 'Гарячі лінії'],
+          filters: KMockText.filter,
         ),
         FooterDescWidget(),
       ],
