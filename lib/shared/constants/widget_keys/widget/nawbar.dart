@@ -1,6 +1,6 @@
 part of '../widget_keys.dart';
 
-class _SearchKeys {
+class _NawbarKeys {
   final title = const Key('search_title');
   final field = const Key('search_field');
   final micIcon = const Key('search_micro_icon');
