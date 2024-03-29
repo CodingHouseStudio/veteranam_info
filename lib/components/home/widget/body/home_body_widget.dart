@@ -11,7 +11,7 @@ class HomeBodyWidget extends StatelessWidget {
     return ListView(
       children: const [
         FilterBoxWidget(
-          filters: ['Пільги', 'Житло', 'Гарячі лінії'],
+          filters: KMockText.filter,
         ),
         FooterDescWidget(),
       ],

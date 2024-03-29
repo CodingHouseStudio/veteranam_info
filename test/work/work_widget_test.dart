@@ -22,6 +22,11 @@ void main() {
       await tester.pumpAndSettle();
 
       await footerHelper(tester);
+
+      await dropListFieldBoxHelper(
+        tester: tester,
+        dropListitem: KMockText.dropDownList.elementAt(0),
+      );
     });
     group('Mock Go Router', () {
       late MockGoRouter mockGoRouter;
@@ -39,6 +44,11 @@ void main() {
         await tester.pumpAndSettle();
 
         await footerHelper(tester);
+
+        await dropListFieldBoxHelper(
+          tester: tester,
+          dropListitem: KMockText.dropDownList.elementAt(0),
+        );
       });
 
       testWidgets('go to ${KScreenName.information}', (tester) async {

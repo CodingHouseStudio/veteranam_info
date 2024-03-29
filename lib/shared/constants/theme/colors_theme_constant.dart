@@ -16,11 +16,6 @@ abstract class KColorTheme {
   /// opacity: 1
   static const Color c52707 = Color(0xffc52707);
 
-  /// typographyPrimary figma properties
-  /// hex: #1f2933
-  /// opacity: 1
-  static const Color typographyPrimary = Color(0xff1f2933);
-
   /// white figma properties
   /// hex: #ffffff
   /// opacity: 1
@@ -37,4 +32,8 @@ abstract class KColorTheme {
   static const Color error = Color(0xffba2525);
 
   static const Color black = Color(0xff000000);
+
+  /// hex: #959595
+  /// opacity: 1
+  static const Color lightGray = Color(0xff959595);
 }

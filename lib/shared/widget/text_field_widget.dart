@@ -5,9 +5,9 @@ import 'package:kozak/shared/shared.dart';
 class TextFieldWidget extends StatefulWidget {
   const TextFieldWidget({
     required this.widgetKey,
-    required this.textAlign,
     required this.onChanged,
     required this.hintText,
+    this.textAlign,
     super.key,
     this.width,
     this.height,
@@ -38,7 +38,7 @@ class TextFieldWidget extends StatefulWidget {
   final Key widgetKey;
   final double? width;
   final double? height;
-  final TextAlign textAlign;
+  final TextAlign? textAlign;
   final ValueChanged<String> onChanged;
   final String hintText;
   final String? errorText;
@@ -86,7 +86,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
       maxLength: widget.maxLength,
       keyboardType: widget.keyboardType ?? TextInputType.text,
       textInputAction: TextInputAction.done,
-      textAlign: widget.textAlign,
+      textAlign: widget.textAlign ?? TextAlign.start,
       style: KAppTextStyle.lableMedium,
       // Theme.of(context).textTheme.headlineSmall,
       key: widget.widgetKey,
@@ -107,42 +107,18 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
                 )
             : widget.border,
         enabledBorder: kIsWeb
-            ? widget.enabledBorder ??
-                OutlineInputBorder(
-                  borderSide: const BorderSide(
-                    color: KColorTheme.lightBlue,
-                  ),
-                  borderRadius: BorderRadius.circular(20),
-                )
+            ? widget.enabledBorder ?? KBorder.outlineInput
             : widget.enabledBorder ??
                 Theme.of(context).inputDecorationTheme.enabledBorder,
-        disabledBorder: kIsWeb
-            ? widget.border ??
-                OutlineInputBorder(
-                  borderSide: const BorderSide(
-                    color: KColorTheme.lightBlue,
-                  ),
-                  borderRadius: BorderRadius.circular(20),
-                )
-            : widget.border,
+        disabledBorder:
+            kIsWeb ? widget.border ?? KBorder.outlineInput : widget.border,
         focusedBorder: kIsWeb
-            ? widget.focusedBorder ??
-                OutlineInputBorder(
-                  borderSide: const BorderSide(
-                    color: KColorTheme.lightBlue,
-                  ),
-                  borderRadius: BorderRadius.circular(20),
-                )
+            ? widget.focusedBorder ?? KBorder.outlineInput
             : widget.focusedBorder ??
                 Theme.of(context).inputDecorationTheme.focusedBorder,
-        focusedErrorBorder: kIsWeb
-            ? const OutlineInputBorder(
-                borderSide: BorderSide(color: KColorTheme.c52707),
-                borderRadius: BorderRadius.zero,
-              )
-            : widget.border,
+        focusedErrorBorder: kIsWeb ? KBorder.outlineInputError : widget.border,
         filled: true,
-        fillColor: widget.fillColor ?? KColorTheme.typographyPrimary,
+        fillColor: widget.fillColor ?? KColorTheme.white,
         hintText: widget.hintText,
         errorText: widget.errorText,
         suffixIcon: widget.suffixIcon,
