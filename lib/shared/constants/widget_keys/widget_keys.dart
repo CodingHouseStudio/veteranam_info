@@ -15,7 +15,7 @@ part 'widget/question.dart';
 part 'widget/icons_area.dart';
 part 'widget/nawbar.dart';
 part 'widget/filter.dart';
-part 'widget/input.dart';
+part 'widget/message_field.dart';
 
 abstract class KWidgetkeys {
   static _HomeKeys get homeKeys => _HomeKeys();
@@ -31,5 +31,5 @@ abstract class KWidgetkeys {
   static _IconsAreaKeys get iconsAreKeys => _IconsAreaKeys();
   static _QuestionKeys get questionKeys => _QuestionKeys();
   static _FilterKeys get filterKeys => _FilterKeys();
-  static _InputKeys get inputKeys => _InputKeys();
+  static _MessageFieldKeys get inputKeys => _MessageFieldKeys();
 }
