@@ -3,6 +3,7 @@ abstract class KAppText {
   static const String enterButtonText = 'Увійти';
   static const String searchTextFieldHint = 'Пошук...';
   static const String filterItemResetAll = 'Скинути фільтри';
+  static const String messageTextFieldHint = 'Напишіть Ваше повідомлення';
   static const String nameTextFieldHint = "Напишіть ваще ім'я";
   static const String footerAboutUs = 'Про нас';
   static const String footerContact = 'Контакти';

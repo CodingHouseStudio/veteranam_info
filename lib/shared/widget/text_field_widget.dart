@@ -34,6 +34,7 @@ class TextFieldWidget extends StatefulWidget {
     this.expands,
     this.labelText,
     this.minLines,
+    this.hintStyle,
   });
   final Key widgetKey;
   final double? width;
@@ -64,6 +65,7 @@ class TextFieldWidget extends StatefulWidget {
   final bool? disposeFocusNode;
   final bool? expands;
   final String? labelText;
+  final TextStyle? hintStyle;
 
   @override
   State<TextFieldWidget> createState() => _TextFieldWidgetState();
@@ -92,7 +94,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
       key: widget.widgetKey,
       onChanged: widget.onChanged,
       decoration: InputDecoration(
-        hintStyle: KAppTextStyle.inputHintTextStyle,
+        hintStyle: widget.hintStyle ?? KAppTextStyle.hint,
         contentPadding:
             widget.contentPadding ?? const EdgeInsets.only(left: 20, right: 20),
         floatingLabelBehavior: FloatingLabelBehavior.auto,
@@ -136,8 +138,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
 
   @override
   void dispose() {
-    // ignore: use_if_null_to_convert_nulls_to_bools
-    if (widget.disposeFocusNode == true) {
+    if (widget.disposeFocusNode != null && widget.disposeFocusNode!) {
       widget.focusNode?.dispose();
     }
     super.dispose();

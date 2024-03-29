@@ -10,6 +10,9 @@ Future<void> footerInvestorsRoutHelper({
 }) async {
   expect(find.byKey(KWidgetkeys.footerKeys.investorsButton), findsOneWidget);
 
+  await tester
+      .ensureVisible(find.byKey(KWidgetkeys.footerKeys.investorsButton));
+
   await tester.tap(find.byKey(KWidgetkeys.footerKeys.investorsButton));
 
   verify(

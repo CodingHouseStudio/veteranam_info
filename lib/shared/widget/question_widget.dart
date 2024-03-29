@@ -21,7 +21,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
     return Container(
       decoration: BoxDecoration(
         borderRadius: KBorderRadius.kBorderRadiusM,
-        border: Border.all(color: KColorTheme.widgetBackground),
+        border: Border.all(color: KColorTheme.lightGray),
       ),
       child: Theme(
         data: ThemeData(
