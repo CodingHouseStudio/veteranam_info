@@ -44,7 +44,7 @@ void main() {
         tester,
       );
       await iconsAreaHelper(tester);
-      await inputHelper(tester: tester, message: '');
+      await messageFieldHelper(tester: tester, message: '');
     });
     group('Mock Go Router', () {
       late MockGoRouter mockGoRouter;
