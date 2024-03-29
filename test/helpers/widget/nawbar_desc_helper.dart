@@ -9,14 +9,14 @@ Future<void> nawbarDescHelper({
 
   expect(find.byKey(KWidgetkeys.searchKeys.field), findsOneWidget);
 
-  expect(find.byKey(KWidgetkeys.searchKeys.iconMic), findsOneWidget);
+  expect(find.byKey(KWidgetkeys.searchKeys.micIcon), findsOneWidget);
 
   expect(
     find.byKey(KWidgetkeys.searchKeys.button),
     findsOneWidget,
   );
 
-  expect(find.byKey(KWidgetkeys.searchKeys.iconPerson), findsOneWidget);
+  expect(find.byKey(KWidgetkeys.searchKeys.personIcon), findsOneWidget);
 
   await tester.enterText(find.byKey(KWidgetkeys.searchKeys.field), searchText);
 }
