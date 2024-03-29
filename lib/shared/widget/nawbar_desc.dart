@@ -27,7 +27,6 @@ class NawbarDesc extends StatelessWidget {
               child: TextFieldWidget(
                 widgetKey: KWidgetkeys.searchKeys.field,
                 prefixIcon: KIcon.search,
-                textAlign: TextAlign.left,
                 onChanged: search,
                 hintText: KAppText.searchTextFieldHint,
                 fillColor: KColorTheme.white,
