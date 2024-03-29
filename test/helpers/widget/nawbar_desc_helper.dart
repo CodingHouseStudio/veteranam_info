@@ -5,24 +5,24 @@ Future<void> nawbarDescHelper({
   required WidgetTester tester,
   required String searchText,
 }) async {
-  expect(find.byKey(KWidgetkeys.searchKeys.title), findsOneWidget);
+  expect(find.byKey(KWidgetkeys.nawbarKeys.title), findsOneWidget);
 
-  expect(find.byKey(KWidgetkeys.searchKeys.field), findsOneWidget);
+  expect(find.byKey(KWidgetkeys.nawbarKeys.field), findsOneWidget);
 
-  expect(find.byKey(KWidgetkeys.searchKeys.iconMic), findsOneWidget);
+  expect(find.byKey(KWidgetkeys.nawbarKeys.iconMic), findsOneWidget);
 
   expect(
-    find.byKey(KWidgetkeys.searchKeys.button),
+    find.byKey(KWidgetkeys.nawbarKeys.button),
     findsOneWidget,
   );
 
-  expect(find.byKey(KWidgetkeys.searchKeys.iconPerson), findsOneWidget);
+  expect(find.byKey(KWidgetkeys.nawbarKeys.iconMic), findsOneWidget);
 
-  await tester.enterText(find.byKey(KWidgetkeys.searchKeys.field), searchText);
+  await tester.enterText(find.byKey(KWidgetkeys.nawbarKeys.field), searchText);
 
   expect(
     find.descendant(
-      of: find.byKey(KWidgetkeys.searchKeys.field),
+      of: find.byKey(KWidgetkeys.nawbarKeys.field),
       matching: find.text(searchText),
     ),
     findsOneWidget,

@@ -43,6 +43,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
           trailing: IconWidget(
             icon: openQuestion ? KIcon.minus : KIcon.plus,
             background: KColorTheme.widgetBackground,
+            padding: KPadding.kPaddingSizeM,
           ),
           children: [
             Padding(
