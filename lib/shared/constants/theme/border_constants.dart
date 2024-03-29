@@ -6,4 +6,8 @@ abstract class KBorder {
     borderSide: const BorderSide(color: KColorTheme.lightGray),
     borderRadius: KBorderRadius.kBorderRadiusM,
   );
+  static OutlineInputBorder outlineInputError = OutlineInputBorder(
+    borderSide: const BorderSide(color: KColorTheme.error),
+    borderRadius: KBorderRadius.kBorderRadiusM,
+  );
 }

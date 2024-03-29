@@ -109,42 +109,18 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
                 )
             : widget.border,
         enabledBorder: kIsWeb
-            ? widget.enabledBorder ??
-                OutlineInputBorder(
-                  borderSide: const BorderSide(
-                    color: KColorTheme.lightBlue,
-                  ),
-                  borderRadius: BorderRadius.circular(20),
-                )
+            ? widget.enabledBorder ?? KBorder.outlineInput
             : widget.enabledBorder ??
                 Theme.of(context).inputDecorationTheme.enabledBorder,
-        disabledBorder: kIsWeb
-            ? widget.border ??
-                OutlineInputBorder(
-                  borderSide: const BorderSide(
-                    color: KColorTheme.lightBlue,
-                  ),
-                  borderRadius: BorderRadius.circular(20),
-                )
-            : widget.border,
+        disabledBorder:
+            kIsWeb ? widget.border ?? KBorder.outlineInput : widget.border,
         focusedBorder: kIsWeb
-            ? widget.focusedBorder ??
-                OutlineInputBorder(
-                  borderSide: const BorderSide(
-                    color: KColorTheme.lightBlue,
-                  ),
-                  borderRadius: BorderRadius.circular(20),
-                )
+            ? widget.focusedBorder ?? KBorder.outlineInput
             : widget.focusedBorder ??
                 Theme.of(context).inputDecorationTheme.focusedBorder,
-        focusedErrorBorder: kIsWeb
-            ? const OutlineInputBorder(
-                borderSide: BorderSide(color: KColorTheme.c52707),
-                borderRadius: BorderRadius.zero,
-              )
-            : widget.border,
+        focusedErrorBorder: kIsWeb ? KBorder.outlineInputError : widget.border,
         filled: true,
-        fillColor: widget.fillColor ?? KColorTheme.typographyPrimary,
+        fillColor: widget.fillColor ?? KColorTheme.white,
         hintText: widget.hintText,
         errorText: widget.errorText,
         suffixIcon: widget.suffixIcon,
