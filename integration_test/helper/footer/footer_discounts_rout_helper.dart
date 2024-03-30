@@ -8,6 +8,9 @@ Future<void> footerDiscountsRoutHelper(
 ) async {
   await scrollingHelper(
     tester: tester,
+  );
+  await scrollingHelper(
+    tester: tester,
     item: find.byKey(KWidgetkeys.footerKeys.discountsButton),
   );
 
