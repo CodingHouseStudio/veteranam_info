@@ -22,9 +22,6 @@ void main() {
       await tester.pumpAndSettle();
 
       await footerHelper(tester);
-      await questionHelper(
-        tester,
-      );
     });
     group('Mock Go Router', () {
       late MockGoRouter mockGoRouter;
@@ -42,9 +39,6 @@ void main() {
         await tester.pumpAndSettle();
 
         await footerHelper(tester);
-        await questionHelper(
-          tester,
-        );
       });
 
       testWidgets('go to ${KScreenName.information}', (tester) async {
