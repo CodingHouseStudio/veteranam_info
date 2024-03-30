@@ -93,34 +93,22 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
       // Theme.of(context).textTheme.headlineSmall,
       key: widget.widgetKey,
       onChanged: widget.onChanged,
-      decoration: InputDecoration(
-        hintStyle: widget.hintStyle ?? KAppTextStyle.hint,
-        contentPadding:
-            widget.contentPadding ?? const EdgeInsets.only(left: 20, right: 20),
-        floatingLabelBehavior: FloatingLabelBehavior.auto,
+      decoration: KWidetTheme.inputDecoration.copyWith(
+        hintStyle: widget.hintStyle,
+        contentPadding: widget.contentPadding,
         labelText: widget.labelText,
-        border: kIsWeb
-            ? widget.border ??
-                OutlineInputBorder(
-                  borderSide: const BorderSide(
-                    color: KColorTheme.lightBlue,
-                  ),
-                  borderRadius: BorderRadius.circular(20),
-                )
-            : widget.border,
+        border: kIsWeb ? widget.border : widget.border,
         enabledBorder: kIsWeb
-            ? widget.enabledBorder ?? KBorder.outlineInput
+            ? widget.enabledBorder
             : widget.enabledBorder ??
                 Theme.of(context).inputDecorationTheme.enabledBorder,
-        disabledBorder:
-            kIsWeb ? widget.border ?? KBorder.outlineInput : widget.border,
+        disabledBorder: kIsWeb ? widget.border : widget.border,
         focusedBorder: kIsWeb
-            ? widget.focusedBorder ?? KBorder.outlineInput
+            ? widget.focusedBorder
             : widget.focusedBorder ??
                 Theme.of(context).inputDecorationTheme.focusedBorder,
-        focusedErrorBorder: kIsWeb ? KBorder.outlineInputError : widget.border,
-        filled: true,
-        fillColor: widget.fillColor ?? KColorTheme.white,
+        focusedErrorBorder: kIsWeb ? null : widget.border,
+        fillColor: widget.fillColor,
         hintText: widget.hintText,
         errorText: widget.errorText,
         suffixIcon: widget.suffixIcon,
