@@ -10,10 +10,7 @@ Future<void> footerStoryRoutHelper({
 }) async {
   await scrollingHelper(
     tester: tester,
-  );
-  await scrollingHelper(
-    tester: tester,
-    item: find.byKey(KWidgetkeys.footerKeys.storyButton),
+    item: KWidgetkeys.footerKeys.storyButton,
   );
 
   expect(find.byKey(KWidgetkeys.footerKeys.storyButton), findsOneWidget);
