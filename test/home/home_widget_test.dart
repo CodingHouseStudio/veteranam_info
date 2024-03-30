@@ -21,8 +21,6 @@ void main() {
 
       await tester.pumpAndSettle();
 
-      await footerHelper(tester);
-
       await nawbarDescHelper(tester: tester, searchText: '');
       await filterBoxHelper(
         tester,
@@ -33,6 +31,8 @@ void main() {
         tester: tester,
         dropListitem: KMockText.dropDownList.elementAt(0),
       );
+
+      await footerHelper(tester);
     });
     group('Mock Go Router', () {
       late MockGoRouter mockGoRouter;
@@ -49,8 +49,6 @@ void main() {
 
         await tester.pumpAndSettle();
 
-        await footerHelper(tester);
-
         await nawbarDescHelper(tester: tester, searchText: '');
         await filterBoxHelper(
           tester,
@@ -61,6 +59,8 @@ void main() {
           tester: tester,
           dropListitem: KMockText.dropDownList.elementAt(0),
         );
+
+        await footerHelper(tester);
       });
 
       testWidgets('go to ${KScreenName.information}', (tester) async {

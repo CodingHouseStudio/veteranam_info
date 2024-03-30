@@ -1,9 +1,15 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:kozak/shared/shared.dart';
 
+import '../../helpers.dart';
+
 Future<void> footerHelper(
   WidgetTester tester,
 ) async {
+  await scrollingHelper(
+    tester: tester,
+  );
+
   expect(find.byKey(KWidgetkeys.footerKeys.aboutUsButton), findsOneWidget);
 
   expect(
