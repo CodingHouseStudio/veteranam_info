@@ -14,8 +14,8 @@ class MessageFieldWidget extends StatelessWidget {
         hintText: KAppText.messageTextFieldHint,
         maxLines: 4,
         fillColor: KColorTheme.white,
-        enabledBorder: KBorder.outlineInput,
-        focusedBorder: KBorder.outlineInput,
+        enabledBorder: KWidetTheme.outlineInputBorder,
+        focusedBorder: KWidetTheme.outlineInputBorder,
         suffixIcon: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [

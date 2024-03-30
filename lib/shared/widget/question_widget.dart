@@ -19,10 +19,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        borderRadius: KBorderRadius.kBorderRadiusM,
-        border: Border.all(color: KColorTheme.lightGray),
-      ),
+      decoration: KWidetTheme.boxDecorationWidget,
       child: Theme(
         data: ThemeData(
           dividerColor: Colors.transparent,
