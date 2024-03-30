@@ -1,9 +1,16 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_test/flutter_test.dart';
+
+import '../../text_dependency.dart';
 
 Future<void> scrollingHelper({
   required WidgetTester tester,
-  required Finder item,
+  Finder? item,
 }) async {
-  await tester.ensureVisible(item);
+  if (item != null) {
+    await tester.ensureVisible(item);
+  } else {
+    await tester.drag(find.byType(ListView), KTestConstants.scrolling);
+  }
   await tester.pumpAndSettle();
 }
