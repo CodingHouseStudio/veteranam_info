@@ -11,7 +11,7 @@ Future<void> footerProfileRoutHelper(
   );
   await scrollingHelper(
     tester: tester,
-    item: find.byKey(KWidgetkeys.footerKeys.profileButton),
+    item: KWidgetkeys.footerKeys.profileButton,
   );
 
   expect(find.byKey(KWidgetkeys.footerKeys.profileButton), findsOneWidget);
