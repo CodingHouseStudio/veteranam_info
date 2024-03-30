@@ -9,12 +9,18 @@ class HomeBodyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      children: const [
-        // MessageFieldWidget(changeMessage: (_) {}),
-        FilterBoxWidget(
+      children: [
+        MessageFieldWidget(changeMessage: (_) {}),
+        const FilterBoxWidget(
           filters: KMockText.filter,
         ),
-        FooterDescWidget(),
+        DropListFieldWidget(
+          onChanged: (_) {},
+          hintText: '',
+          dropDownList: KMockText.dropDownList,
+        ),
+        const QuestionWidget(),
+        const FooterDescWidget(),
       ],
     );
   }
