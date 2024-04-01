@@ -19,7 +19,7 @@ void main() {
 
       expect(find.byKey(KWidgetkeys.appKeys.screen), findsOneWidget);
 
-      await nawbarDescHelper(tester: tester, searchText: '');
+      await nawbarHelper(tester: tester, searchText: '');
     });
   });
 }

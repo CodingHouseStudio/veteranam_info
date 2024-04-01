@@ -14,7 +14,7 @@ class ScaffoldWithNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: NawbarDesc(
+      appBar: NawbarWidget(
         search: (text) {},
       ),
       body: navigationShell,
