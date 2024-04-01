@@ -7,12 +7,6 @@ class InformationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: KWidgetkeys.informationKeys.screen,
-      appBar: AppBar(
-        title: const Text('Information Page'),
-      ),
-      body: const InformationBodyWidget(),
-    );
+    return InformationBodyWidget(key: KWidgetkeys.informationKeys.screen);
   }
 }

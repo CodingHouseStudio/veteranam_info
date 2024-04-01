@@ -8,12 +8,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       key: KWidgetkeys.appKeys.screen,
-      theme: ThemeData(
-        appBarTheme: AppBarTheme(
-          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        ),
-        useMaterial3: true,
-      ),
+      theme: themeData,
       // localizationsDelegates: AppLocalizations.localizationsDelegates,
       // supportedLocales: AppLocalizations.supportedLocales,
       routerConfig: router,
