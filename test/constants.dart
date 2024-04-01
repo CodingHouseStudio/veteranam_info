@@ -12,8 +12,8 @@ Future<void> setUpGlobal({bool? kIsWeb}) async {
   Bloc.observer = const AppBlocObserver();
 }
 
-abstract class KBlocName {
-  static const filter = 'Filter Cubit';
+abstract class KTestData {
+  static const windowTableetSize = Size(1200, 1200);
 }
 
 abstract class KTestText {
@@ -25,6 +25,8 @@ abstract class KTestText {
   static const String passwordEmpty = '';
   static const String usernameIncorrect = 'test_';
   static const String passwordIncorrect = 'test_';
+
+  static const filterCubit = 'Filter Cubit';
 }
 
 abstract class KTestConstants {

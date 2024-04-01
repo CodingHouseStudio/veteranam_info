@@ -18,6 +18,7 @@ part 'widget/drop_list_field.dart';
 part 'widget/footer.dart';
 part 'widget/message_field.dart';
 part 'widget/story_card.dart';
+part 'widget/box.dart';
 
 abstract class KWidgetkeys {
   static _HomeKeys get homeKeys => _HomeKeys();
@@ -36,4 +37,5 @@ abstract class KWidgetkeys {
   static _FooterKeys get footerKeys => _FooterKeys();
   static _DropListFieldKeys get dropListFieldKeys => _DropListFieldKeys();
   static _StoryCardKeys get storyCardKeys => _StoryCardKeys();
+  static _BoxKeys get boxKeys => _BoxKeys();
 }
