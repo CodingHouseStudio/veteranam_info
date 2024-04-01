@@ -2,7 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:kozak/shared/shared.dart';
 
 class QuestionWidget extends StatefulWidget {
-  const QuestionWidget({super.key});
+  const QuestionWidget({
+    required this.title,
+    required this.subtitle,
+    super.key,
+  });
+  final String title;
+  final String subtitle;
 
   @override
   State<QuestionWidget> createState() => _QuestionWidgetState();
@@ -19,10 +25,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        borderRadius: KBorderRadius.kBorderRadiusM,
-        border: Border.all(color: KColorTheme.widgetBackground),
-      ),
+      decoration: KWidetTheme.boxDecorationWidget,
       child: Theme(
         data: ThemeData(
           dividerColor: Colors.transparent,
@@ -30,7 +33,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
         child: ExpansionTile(
           key: KWidgetkeys.questionKeys.widget,
           title: Text(
-            'Як мені знайти роботу за допомогою цього сайту?',
+            widget.title,
             key: KWidgetkeys.questionKeys.title,
             style: KAppTextStyle.lableLarge,
             maxLines: 1,
@@ -43,6 +46,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
           trailing: IconWidget(
             icon: openQuestion ? KIcon.minus : KIcon.plus,
             background: KColorTheme.widgetBackground,
+            // padding: KPadding.kPaddingSizeM,
           ),
           children: [
             Padding(
@@ -51,8 +55,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
                 vertical: KPadding.kPaddingSizeSM,
               ),
               child: Text(
-                // ignore: lines_longer_than_80_chars
-                'Використовуйте веб-сайти спеціалізованих сервісів для пошуку роботи, таких як Indeed, LinkedIn, Glassdoor, Monster, або регіональні ресурси. Виберіть свою область інтересів та регіон, і шукайте вакансії, які відповідають вашим критеріям.',
+                widget.subtitle,
                 key: KWidgetkeys.questionKeys.subtitle,
                 style: KAppTextStyle.lableMedium,
                 softWrap: true,

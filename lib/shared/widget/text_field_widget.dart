@@ -5,9 +5,9 @@ import 'package:kozak/shared/shared.dart';
 class TextFieldWidget extends StatefulWidget {
   const TextFieldWidget({
     required this.widgetKey,
-    required this.textAlign,
     required this.onChanged,
     required this.hintText,
+    this.textAlign,
     super.key,
     this.width,
     this.height,
@@ -34,11 +34,12 @@ class TextFieldWidget extends StatefulWidget {
     this.expands,
     this.labelText,
     this.minLines,
+    this.hintStyle,
   });
   final Key widgetKey;
   final double? width;
   final double? height;
-  final TextAlign textAlign;
+  final TextAlign? textAlign;
   final ValueChanged<String> onChanged;
   final String hintText;
   final String? errorText;
@@ -64,6 +65,7 @@ class TextFieldWidget extends StatefulWidget {
   final bool? disposeFocusNode;
   final bool? expands;
   final String? labelText;
+  final TextStyle? hintStyle;
 
   @override
   State<TextFieldWidget> createState() => _TextFieldWidgetState();
@@ -86,63 +88,27 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
       maxLength: widget.maxLength,
       keyboardType: widget.keyboardType ?? TextInputType.text,
       textInputAction: TextInputAction.done,
-      textAlign: widget.textAlign,
+      textAlign: widget.textAlign ?? TextAlign.start,
       style: KAppTextStyle.lableMedium,
       // Theme.of(context).textTheme.headlineSmall,
       key: widget.widgetKey,
       onChanged: widget.onChanged,
-      decoration: InputDecoration(
-        hintStyle: KAppTextStyle.inputHintTextStyle,
-        contentPadding:
-            widget.contentPadding ?? const EdgeInsets.only(left: 20, right: 20),
-        floatingLabelBehavior: FloatingLabelBehavior.auto,
+      decoration: KWidetTheme.inputDecoration.copyWith(
+        hintStyle: widget.hintStyle,
+        contentPadding: widget.contentPadding,
         labelText: widget.labelText,
-        border: kIsWeb
-            ? widget.border ??
-                OutlineInputBorder(
-                  borderSide: const BorderSide(
-                    color: KColorTheme.lightBlue,
-                  ),
-                  borderRadius: BorderRadius.circular(20),
-                )
-            : widget.border,
+        border: kIsWeb ? widget.border : widget.border,
         enabledBorder: kIsWeb
-            ? widget.enabledBorder ??
-                OutlineInputBorder(
-                  borderSide: const BorderSide(
-                    color: KColorTheme.lightBlue,
-                  ),
-                  borderRadius: BorderRadius.circular(20),
-                )
+            ? widget.enabledBorder
             : widget.enabledBorder ??
                 Theme.of(context).inputDecorationTheme.enabledBorder,
-        disabledBorder: kIsWeb
-            ? widget.border ??
-                OutlineInputBorder(
-                  borderSide: const BorderSide(
-                    color: KColorTheme.lightBlue,
-                  ),
-                  borderRadius: BorderRadius.circular(20),
-                )
-            : widget.border,
+        disabledBorder: kIsWeb ? widget.border : widget.border,
         focusedBorder: kIsWeb
-            ? widget.focusedBorder ??
-                OutlineInputBorder(
-                  borderSide: const BorderSide(
-                    color: KColorTheme.lightBlue,
-                  ),
-                  borderRadius: BorderRadius.circular(20),
-                )
+            ? widget.focusedBorder
             : widget.focusedBorder ??
                 Theme.of(context).inputDecorationTheme.focusedBorder,
-        focusedErrorBorder: kIsWeb
-            ? const OutlineInputBorder(
-                borderSide: BorderSide(color: KColorTheme.c52707),
-                borderRadius: BorderRadius.zero,
-              )
-            : widget.border,
-        filled: true,
-        fillColor: widget.fillColor ?? KColorTheme.typographyPrimary,
+        focusedErrorBorder: kIsWeb ? null : widget.border,
+        fillColor: widget.fillColor,
         hintText: widget.hintText,
         errorText: widget.errorText,
         suffixIcon: widget.suffixIcon,
@@ -160,8 +126,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
 
   @override
   void dispose() {
-    // ignore: use_if_null_to_convert_nulls_to_bools
-    if (widget.disposeFocusNode == true) {
+    if (widget.disposeFocusNode != null && widget.disposeFocusNode!) {
       widget.focusNode?.dispose();
     }
     super.dispose();

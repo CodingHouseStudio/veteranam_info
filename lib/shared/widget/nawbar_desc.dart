@@ -8,10 +8,7 @@ class NawbarDesc extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        borderRadius: KBorderRadius.kBorderRadiusM,
-        color: KColorTheme.widgetBackground,
-      ),
+      decoration: KWidetTheme.boxDecorationCard,
       child: Padding(
         padding: const EdgeInsets.all(KPadding.kPaddingSizeS),
         child: Row(
@@ -19,29 +16,26 @@ class NawbarDesc extends StatelessWidget {
             KSizedBox.kWidthSizedBoxM,
             Text(
               KAppText.appName,
-              key: KWidgetkeys.searchKeys.title,
+              key: KWidgetkeys.nawbarKeys.title,
               style: KAppTextStyle.title,
             ),
             KSizedBox.kWidthSizedBoxML,
             Expanded(
               child: TextFieldWidget(
-                widgetKey: KWidgetkeys.searchKeys.field,
+                hintStyle: KAppTextStyle.lableMedium,
+                widgetKey: KWidgetkeys.nawbarKeys.field,
                 prefixIcon: KIcon.search,
-                textAlign: TextAlign.left,
                 onChanged: search,
                 hintText: KAppText.searchTextFieldHint,
-                fillColor: KColorTheme.white,
-                enabledBorder: KBorder.outlineInput,
-                focusedBorder: KBorder.outlineInput,
               ),
             ),
             IconWidget(
-              key: KWidgetkeys.searchKeys.iconMic,
+              key: KWidgetkeys.nawbarKeys.iconMic,
               icon: KIcon.mic,
             ),
             KSizedBox.kWidthSizedBoxML,
             TextButton(
-              key: KWidgetkeys.searchKeys.button,
+              key: KWidgetkeys.nawbarKeys.button,
               style: KButtonStyles.whiteButtonStyle,
               onPressed: null,
               child: const Text(
@@ -50,7 +44,7 @@ class NawbarDesc extends StatelessWidget {
               ),
             ),
             IconWidget(
-              key: KWidgetkeys.searchKeys.iconPerson,
+              key: KWidgetkeys.nawbarKeys.iconPerson,
               icon: KIcon.person,
             ),
           ],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 abstract class KIcon {
   static const Icon mic = Icon(Icons.mic_none_outlined);
@@ -9,4 +10,10 @@ abstract class KIcon {
   static const Icon filter = Icon(Icons.filter_alt_outlined);
   static const Icon edit = Icon(Icons.mode_edit_outline_outlined);
   static const Icon button = Icon(Icons.smart_button);
+  static const Icon trailing = Icon(Icons.arrow_drop_down);
+  static const Icon trailingUp = Icon(Icons.arrow_drop_up);
+  static const Icon linkedIn = Icon(FontAwesomeIcons.linkedinIn);
+  static const Icon instagram = Icon(FontAwesomeIcons.instagram);
+  static const Icon facebook = Icon(FontAwesomeIcons.facebookF);
+  static const Icon arrowUpRight = Icon(Icons.arrow_outward);
 }

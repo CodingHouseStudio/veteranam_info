@@ -2,20 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:kozak/shared/shared.dart';
 
 abstract class KAppTextStyle {
-  /// fontFamily: none
-  /// fontSize: 16px
-  /// height: none
-  /// fontWeight: none
-  /// letterSpacing: none
-  /// fontStyle: none
-  /// decoration: none
-  /// FontStyle: normal
-  static const TextStyle inputHintTextStyle = TextStyle(
-    color: KColorTheme.black,
-    fontSize: KSize.kFontM,
-    fontStyle: FontStyle.normal,
-  );
-
   static const title = TextStyle(
     color: KColorTheme.black,
     fontSize: KSize.kFontM,
@@ -25,6 +11,12 @@ abstract class KAppTextStyle {
   static const lableLarge = TextStyle(
     color: KColorTheme.black,
     fontSize: KSize.kFontL,
+    fontWeight: FontWeight.w400,
+  );
+
+  static const lableMediumLarge = TextStyle(
+    color: KColorTheme.black,
+    fontSize: KSize.kFontML,
     fontWeight: FontWeight.w400,
   );
 
@@ -40,6 +32,7 @@ abstract class KAppTextStyle {
     fontWeight: FontWeight.w400,
   );
 
+
   static const lableMediumSmallGrey = TextStyle(
     color: KColorTheme.grey,
     fontSize: KSize.kFontM,
@@ -49,6 +42,12 @@ abstract class KAppTextStyle {
   static const lableSmallGrey = TextStyle(
     color: KColorTheme.grey,
     fontSize: KSize.kFontXS,
+    fontWeight: FontWeight.w400,
+  );
+
+  static const hint = TextStyle(
+    color: KColorTheme.lightGray,
+    fontSize: KSize.kFontM,
     fontWeight: FontWeight.w400,
   );
 }
