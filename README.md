@@ -27,7 +27,7 @@ fvm flutter clean; fvm flutter pub get; fvm flutter pub run build_runner build -
 fvm flutter clean && fvm flutter pub get && fvm flutter pub run build_runner build --delete-conflicting-outputs
 fvm dart format --line-length 80 --set-exit-if-changed lib test integration_test
 fvm flutter analyze lib test integration_test
-fvm flutter test
+fvm flutter test --coverage
 
 # How to merge or rebase from DEV
 

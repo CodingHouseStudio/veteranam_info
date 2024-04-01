@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/foundation.dart';
 // ignore: depend_on_referenced_packages
 import 'package:flutter_web_plugins/url_strategy.dart' show usePathUrlStrategy;
@@ -33,3 +35,7 @@ Future<void> setUpGlobalIntegration() async {
 
 //   return '$timestamp$randomNumber$salt@test.com';
 // }
+
+abstract class KTestConstants {
+  static const scrolling = Offset(0, -500);
+}
