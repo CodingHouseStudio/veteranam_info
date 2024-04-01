@@ -9,13 +9,13 @@ abstract class AppTextStyle {
   );
 
   static const titleSmall = TextStyle(
-    color: KColorTheme.black,
+    color: AppColors.black,
     fontSize: KSize.kFontXS,
     fontWeight: FontWeight.w400,
   );
 
   static const titleMediumSmall = TextStyle(
-    color: KColorTheme.black,
+    color: AppColors.black,
     fontSize: KSize.kFontS,
     fontWeight: FontWeight.w400,
   );
@@ -39,15 +39,14 @@ abstract class AppTextStyle {
   );
 
   static const lableMediumSmall = TextStyle(
-     color: AppColors.black,
+    color: AppColors.black,
     fontSize: KSize.kFontM,
-     fontWeight: FontWeight.w400,
-    );
-  
+    fontWeight: FontWeight.w400,
+  );
+
   static const lableSmall = TextStyle(
-    color: KColorTheme.black,
+    color: AppColors.black,
     fontSize: KSize.kFontSSM,
-   
   );
 
   static const hint = TextStyle(
