@@ -13,4 +13,12 @@ abstract class KButtonStyles {
       borderRadius: KBorderRadius.kBorderRadiusM,
     ),
   );
+  static final ButtonStyle backgroundButtonStyleUI = TextButton.styleFrom(
+    backgroundColor: KColorTheme.background,
+    shape: RoundedRectangleBorder(
+      borderRadius: KBorderRadius.kBorderRadiusS,
+      side: const BorderSide(color: KColorTheme.widgetBackground),
+    ),
+    minimumSize: const Size(704, 92),
+  );
 }

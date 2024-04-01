@@ -39,4 +39,16 @@ abstract class KAppTextStyle {
     fontSize: KSize.kFontM,
     fontWeight: FontWeight.w400,
   );
+
+  static const lableMediumSmallGrey = TextStyle(
+    color: KColorTheme.grey,
+    fontSize: KSize.kFontM,
+    fontWeight: FontWeight.w400,
+  );
+
+  static const lableSmallGrey = TextStyle(
+    color: KColorTheme.grey,
+    fontSize: KSize.kFontXS,
+    fontWeight: FontWeight.w400,
+  );
 }

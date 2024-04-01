@@ -37,4 +37,6 @@ abstract class KColorTheme {
   static const Color error = Color(0xffba2525);
 
   static const Color black = Color(0xff000000);
+
+  static const Color grey = Color(0xff959595);
 }
