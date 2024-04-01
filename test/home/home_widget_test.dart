@@ -21,13 +21,22 @@ void main() {
 
       await tester.pumpAndSettle();
 
-      await footerHelper(tester);
-
       await nawbarDescHelper(tester: tester, searchText: '');
+
       await filterBoxHelper(
         tester,
       );
-      // await messageFieldHelper(tester: tester, message: '');
+
+      await messageFieldHelper(tester: tester, message: '');
+
+      await dropListFieldBoxHelper(
+        tester: tester,
+        dropListitem: KMockText.dropDownList.elementAt(0),
+      );
+
+      await boxHelper(tester);
+
+      await footerHelper(tester);
     });
     group('Mock Go Router', () {
       late MockGoRouter mockGoRouter;
@@ -44,12 +53,22 @@ void main() {
 
         await tester.pumpAndSettle();
 
-        await footerHelper(tester);
-
         await nawbarDescHelper(tester: tester, searchText: '');
+
         await filterBoxHelper(
           tester,
         );
+
+        await messageFieldHelper(tester: tester, message: '');
+
+        await dropListFieldBoxHelper(
+          tester: tester,
+          dropListitem: KMockText.dropDownList.elementAt(0),
+        );
+
+        await boxHelper(tester);
+
+        await footerHelper(tester);
       });
 
       testWidgets('go to ${KScreenName.information}', (tester) async {

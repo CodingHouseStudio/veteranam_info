@@ -14,6 +14,13 @@ abstract class KAppText {
   static const String footerWork = 'Робота';
   static const String footerInformation = 'Інформація';
   static const String footerForInvestors = 'Для інвесторів';
+  static const String questionTitle =
+      'Як мені знайти роботу за допомогою цього сайту?';
+  static const String questionSubtitle =
+      'Використовуйте веб-сайти спеціалізованих сервісів для пошуку роботи, '
+      'таких як Indeed, LinkedIn, Glassdoor, Monster, або регіональні '
+      'ресурси. Виберіть свою область інтересів та регіон, і шукайте '
+      'вакансії, які відповідають вашим критеріям.';
 }
 
 abstract class KMockText {

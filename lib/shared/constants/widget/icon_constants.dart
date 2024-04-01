@@ -13,4 +13,5 @@ abstract class KIcon {
   static const Icon linkedIn = Icon(FontAwesomeIcons.linkedinIn);
   static const Icon instagram = Icon(FontAwesomeIcons.instagram);
   static const Icon facebook = Icon(FontAwesomeIcons.facebookF);
+  static const Icon arrowUpRight = Icon(Icons.arrow_outward);
 }

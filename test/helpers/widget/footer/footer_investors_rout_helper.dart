@@ -8,10 +8,11 @@ Future<void> footerInvestorsRoutHelper({
   required WidgetTester tester,
   required MockGoRouter mockGoRouter,
 }) async {
+  await scrollingHelper(
+    tester: tester,
+    item: KWidgetkeys.footerKeys.investorsButton,
+  );
   expect(find.byKey(KWidgetkeys.footerKeys.investorsButton), findsOneWidget);
-
-  await tester
-      .ensureVisible(find.byKey(KWidgetkeys.footerKeys.investorsButton));
 
   await tester.tap(find.byKey(KWidgetkeys.footerKeys.investorsButton));
 

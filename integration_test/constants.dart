@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:kozak/shared/shared.dart';
 
 // const String usernameCorrectIntegrationTest = 'andreytest@gmail.com';
@@ -30,3 +32,7 @@ Future<void> setUpGlobalIntegration() async {
 
 //   return '$timestamp$randomNumber$salt@test.com';
 // }
+
+abstract class KTestConstants {
+  static const scrolling = Offset(0, -500);
+}
