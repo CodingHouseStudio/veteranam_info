@@ -42,14 +42,14 @@ class _FilterBoxWidgetState extends State<FilterBoxWidget> {
           },
         ),
         KSizedBox.kWidthSizedBoxSSM,
-        if (!isWebMobile)
+        if (!PlatformConstants.isWebMobile)
           Expanded(
             child: Wrap(
               key: KWidgetkeys.filterKeys.chips,
               children: _buildChips(),
             ),
           ),
-        if (isWebMobile)
+        if (PlatformConstants.isWebMobile)
           Expanded(
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,

@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:kozak/shared/shared.dart';
 
 abstract class KSizedBox {
+  static const SizedBox kHeightSizedBoxXXL = SizedBox(
+    height: KSize.kPixelXXL,
+  );
   static const SizedBox kHeightSizedBoxL = SizedBox(
     height: KSize.kPixelL,
   );
@@ -25,6 +28,9 @@ abstract class KSizedBox {
     height: KSize.kPixelXS,
   );
 
+  static const SizedBox kWidthSizedBoxXXL = SizedBox(
+    width: KSize.kPixelXXL,
+  );
   static const SizedBox kWidthSizedBoxL = SizedBox(
     width: KSize.kPixelL,
   );
@@ -43,7 +49,6 @@ abstract class KSizedBox {
   static const SizedBox kWidthSizedBoxS = SizedBox(
     width: KSize.kPixelS,
   );
-
   static const SizedBox kWidthSizedBoxXS = SizedBox(
     width: KSize.kPixelXS,
   );

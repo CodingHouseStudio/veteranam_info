@@ -1,10 +1,16 @@
 import 'package:flutter/foundation.dart';
 
-final bool isWebMobile = kIsWeb &&
-    (defaultTargetPlatform == TargetPlatform.android ||
-        defaultTargetPlatform == TargetPlatform.iOS);
-final bool isWebDesktop = kIsWeb &&
-    (defaultTargetPlatform == TargetPlatform.fuchsia ||
-        defaultTargetPlatform == TargetPlatform.linux ||
-        defaultTargetPlatform == TargetPlatform.macOS ||
-        defaultTargetPlatform == TargetPlatform.windows);
+abstract class PlatformConstants {
+  static final bool isWebMobile = kIsWeb &&
+      (defaultTargetPlatform == TargetPlatform.android ||
+          defaultTargetPlatform == TargetPlatform.iOS);
+  static final bool isWebDesktop = kIsWeb &&
+      (defaultTargetPlatform == TargetPlatform.fuchsia ||
+          defaultTargetPlatform == TargetPlatform.linux ||
+          defaultTargetPlatform == TargetPlatform.macOS ||
+          defaultTargetPlatform == TargetPlatform.windows);
+  static const minWidthThresholdMobile = 800; // Example threshold for mobile
+  static const minWidthThresholdTablet = 1000; // Existing threshold for tablet
+  static const minWidthThresholdDesktop =
+      1400; // Existing threshold for desktop
+}

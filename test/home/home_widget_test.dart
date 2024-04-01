@@ -21,16 +21,19 @@ void main() {
 
       await tester.pumpAndSettle();
 
-      await nawbarDescHelper(tester: tester, searchText: '');
+      await nawbarHelper(tester: tester, searchText: '');
       await filterBoxHelper(
         tester,
       );
+
       await messageFieldHelper(tester: tester, message: '');
 
       await dropListFieldBoxHelper(
         tester: tester,
         dropListitem: KMockText.dropDownList.elementAt(0),
       );
+
+      await boxHelper(tester);
 
       await footerHelper(tester);
     });
@@ -49,16 +52,19 @@ void main() {
 
         await tester.pumpAndSettle();
 
-        await nawbarDescHelper(tester: tester, searchText: '');
+        await nawbarHelper(tester: tester, searchText: '');
         await filterBoxHelper(
           tester,
         );
+
         await messageFieldHelper(tester: tester, message: '');
 
         await dropListFieldBoxHelper(
           tester: tester,
           dropListitem: KMockText.dropDownList.elementAt(0),
         );
+
+        await boxHelper(tester);
 
         await footerHelper(tester);
       });
