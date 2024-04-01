@@ -4,6 +4,7 @@ abstract class KMinMaxSize {
 
   static const minWidth100 = 100.0;
   static const minWidth150 = 150.0;
+  static const maxWidth640 = 640.0;
   static const maxWidth500 = 500.0;
   static const minWidth200 = 200.0;
   static const minWidth300 = 300.0;

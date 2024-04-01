@@ -8,6 +8,18 @@ abstract class KAppTextStyle {
     fontWeight: FontWeight.w400,
   );
 
+  static const titleSmall = TextStyle(
+    color: KColorTheme.black,
+    fontSize: KSize.kFontXS,
+    fontWeight: FontWeight.w400,
+  );
+
+  static const titleMediumSmall = TextStyle(
+    color: KColorTheme.black,
+    fontSize: KSize.kFontS,
+    fontWeight: FontWeight.w400,
+  );
+
   static const lableLarge = TextStyle(
     color: KColorTheme.black,
     fontSize: KSize.kFontL,
@@ -28,7 +40,13 @@ abstract class KAppTextStyle {
 
   static const lableMediumSmall = TextStyle(
     color: KColorTheme.black,
-    fontSize: KSize.kFontM,
+    fontSize: KSize.kFontSM,
+    fontWeight: FontWeight.w400,
+  );
+
+  static const lableSmall = TextStyle(
+    color: KColorTheme.black,
+    fontSize: KSize.kFontSSM,
     fontWeight: FontWeight.w400,
   );
 

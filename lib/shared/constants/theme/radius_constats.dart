@@ -3,4 +3,6 @@ import 'package:kozak/shared/shared.dart';
 
 abstract class KBorderRadius {
   static BorderRadius kBorderRadiusM = BorderRadius.circular(KSize.kRadiusM);
+  static BorderRadius kBorderRadiusLeftM =
+      const BorderRadius.horizontal(left: Radius.circular(KSize.kRadiusM));
 }
