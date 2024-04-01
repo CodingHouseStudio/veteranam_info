@@ -21,7 +21,7 @@ abstract class KWidetTheme {
   );
   static BoxDecoration boxDecorationImage = BoxDecoration(
     borderRadius: KBorderRadius.kBorderRadiusLeftM,
-    color: KColorTheme.lightGray,
+    color: AppColors.lightGray,
   );
   static BoxDecoration boxDecorationCircular = const BoxDecoration(
     shape: BoxShape.circle,

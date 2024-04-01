@@ -113,21 +113,21 @@ class _StoryCardWidgetImplementationState
                   children: [
                     const IconWidget(
                       icon: KIcon.person,
-                      background: KColorTheme.widgetBackground,
+                      background: AppColors.widgetBackground,
                     ),
                     KSizedBox.kWidthSizedBoxXS,
                     Text(
                       widget.userName,
                       key: KWidgetkeys.storyCardKeys.userName,
-                      style: KAppTextStyle.titleSmall,
+                      style: AppTextStyle.titleSmall,
                     ),
                   ],
                 ),
                 Text(
                   widget.storyDate.toLocal().toString().split(' ')[0],
                   key: KWidgetkeys.storyCardKeys.date,
-                  style: KAppTextStyle.titleMediumSmall
-                      .copyWith(color: KColorTheme.lightGray),
+                  style: AppTextStyle.titleMediumSmall
+                      .copyWith(color: AppColors.lightGray),
                 ),
               ],
             ),
@@ -136,7 +136,7 @@ class _StoryCardWidgetImplementationState
               widget.story,
               key: KWidgetkeys.storyCardKeys.text,
               maxLines: maxLines,
-              style: KAppTextStyle.lableSmall,
+              style: AppTextStyle.lableSmall,
               overflow: TextOverflow.clip,
             ),
             // AnimatedBuilder(
@@ -170,7 +170,7 @@ class _StoryCardWidgetImplementationState
                   maxLines == null
                       ? KAppText.storyCardButtonNotDetail
                       : KAppText.storyCardButtonDetail,
-                  style: KAppTextStyle.lableMediumSmall,
+                  style: AppTextStyle.lableMediumSmall,
                 ),
               ),
             ),
