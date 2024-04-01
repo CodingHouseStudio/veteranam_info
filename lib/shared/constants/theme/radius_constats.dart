@@ -5,4 +5,6 @@ abstract class KBorderRadius {
   static BorderRadius kBorderRadiusM = BorderRadius.circular(KSize.kRadiusM);
   static BorderRadius kBorderRadiusS = BorderRadius.circular(KSize.kPixelS);
   static BorderRadius kBorderRadiusL = BorderRadius.circular(KSize.kPixelML);
+  static BorderRadius kBorderRadiusLeftM =
+      const BorderRadius.horizontal(left: Radius.circular(KSize.kRadiusM));
 }

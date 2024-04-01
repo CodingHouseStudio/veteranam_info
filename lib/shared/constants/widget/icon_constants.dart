@@ -16,4 +16,11 @@ abstract class KIcon {
   static const Icon instagram = Icon(FontAwesomeIcons.instagram);
   static const Icon facebook = Icon(FontAwesomeIcons.facebookF);
   static const Icon arrowUpRight = Icon(Icons.arrow_outward);
+  static const Icon like = Icon(Icons.thumb_up_outlined);
+  static const Icon activeLike = Icon(Icons.thumb_up);
+  static const Icon smile = Icon(Icons.sentiment_very_satisfied);
+  static const Icon dislike = Icon(Icons.thumb_down_outlined);
+  static const Icon activeDislike = Icon(Icons.thumb_down);
+  static const Icon share = Icon(Icons.file_upload_outlined);
+  static const Icon error = Icon(Icons.error);
 }
