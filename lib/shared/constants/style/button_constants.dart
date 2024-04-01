@@ -14,11 +14,10 @@ abstract class KButtonStyles {
     ),
   );
   static final ButtonStyle whiteButtonStyleBorder = TextButton.styleFrom(
-    backgroundColor: AppColors.white,
     minimumSize: const Size(KMinMaxSize.minWidth100, KMinMaxSize.minHeight50),
     padding: const EdgeInsets.all(KPadding.kPaddingSizeXSS),
     side: const BorderSide(
-      color: AppColors.white,
+      color: AppColors.lightGray,
     ),
     shape: RoundedRectangleBorder(
       borderRadius: KBorderRadius.kBorderRadiusM,
