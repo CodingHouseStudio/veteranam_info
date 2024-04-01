@@ -6,8 +6,19 @@ abstract class KButtonStyles {
     backgroundColor: KColorTheme.white,
     minimumSize: const Size(KMinMaxSize.minWidth100, KMinMaxSize.minHeight50),
     padding: const EdgeInsets.all(KPadding.kPaddingSizeXSS),
+    // side: const BorderSide(
+    //   color: KColorTheme.white,
+    // ),
+    shape: RoundedRectangleBorder(
+      borderRadius: KBorderRadius.kBorderRadiusM,
+    ),
+  );
+  static final ButtonStyle whiteButtonStyleBorder = TextButton.styleFrom(
+    backgroundColor: KColorTheme.white,
+    minimumSize: const Size(KMinMaxSize.minWidth100, KMinMaxSize.minHeight50),
+    padding: const EdgeInsets.all(KPadding.kPaddingSizeXSS),
     side: const BorderSide(
-      color: KColorTheme.white,
+      color: KColorTheme.lightGray,
     ),
     shape: RoundedRectangleBorder(
       borderRadius: KBorderRadius.kBorderRadiusM,
