@@ -23,6 +23,8 @@ abstract class KAppText {
       'таких як Indeed, LinkedIn, Glassdoor, Monster, або регіональні '
       'ресурси. Виберіть свою область інтересів та регіон, і шукайте '
       'вакансії, які відповідають вашим критеріям.';
+  static const String errorTitle = 'Помилка';
+  static const String error = 'Помилка при завнтаженні сторінки';
 }
 
 abstract class KMockText {

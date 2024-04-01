@@ -7,12 +7,6 @@ class DiscountsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: KWidgetkeys.discountsKeys.screen,
-      appBar: AppBar(
-        title: const Text('Discounts Page'),
-      ),
-      body: const DiscountsBodyWidget(),
-    );
+    return DiscountsBodyWidget(key: KWidgetkeys.discountsKeys.screen);
   }
 }
