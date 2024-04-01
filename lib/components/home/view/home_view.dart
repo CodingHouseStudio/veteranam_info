@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kozak/components/home/home.dart';
+import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -10,7 +10,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       key: KWidgetkeys.homeKeys.screen,
       appBar: AppBar(
-        title: NawbarDesc(
+        title: NawbarWidget(
           search: (text) {},
         ),
       ),

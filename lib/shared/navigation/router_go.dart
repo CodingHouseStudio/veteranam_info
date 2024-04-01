@@ -1,12 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:kozak/components/discounts/discounts.dart';
-import 'package:kozak/components/home/home.dart';
-import 'package:kozak/components/information/information.dart';
-import 'package:kozak/components/investors/investors.dart';
-import 'package:kozak/components/profile/profile.dart';
-import 'package:kozak/components/story/story.dart';
-import 'package:kozak/components/work/work.dart';
+import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();

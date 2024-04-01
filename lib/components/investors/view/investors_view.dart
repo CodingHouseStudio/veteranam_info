@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kozak/components/investors/investors.dart';
+import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
 
 class InvestorsScreen extends StatelessWidget {

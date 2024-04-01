@@ -20,5 +20,12 @@ abstract class KButtonStyles {
       side: const BorderSide(color: KColorTheme.widgetBackground),
     ),
     minimumSize: const Size(704, 92),
+  static final ButtonStyle transparentButtonStyle = TextButton.styleFrom(
+    minimumSize: const Size(KMinMaxSize.minWidth100, KMinMaxSize.minHeight50),
+    padding: const EdgeInsets.all(KPadding.kPaddingSizeXSS),
+    alignment: Alignment.centerLeft,
+    shape: RoundedRectangleBorder(
+      borderRadius: KBorderRadius.kBorderRadiusM,
+    ),
   );
 }
