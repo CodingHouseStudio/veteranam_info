@@ -89,12 +89,12 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
       keyboardType: widget.keyboardType ?? TextInputType.text,
       textInputAction: TextInputAction.done,
       textAlign: widget.textAlign ?? TextAlign.start,
-      style: KAppTextStyle.lableMedium,
+      style: AppTextStyle.lableMedium,
       // Theme.of(context).textTheme.headlineSmall,
       key: widget.widgetKey,
       onChanged: widget.onChanged,
       decoration: InputDecoration(
-        hintStyle: widget.hintStyle ?? KAppTextStyle.hint,
+        hintStyle: widget.hintStyle ?? AppTextStyle.hint,
         contentPadding:
             widget.contentPadding ?? const EdgeInsets.only(left: 20, right: 20),
         floatingLabelBehavior: FloatingLabelBehavior.auto,
@@ -103,7 +103,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
             ? widget.border ??
                 OutlineInputBorder(
                   borderSide: const BorderSide(
-                    color: KColorTheme.lightBlue,
+                    color: AppColors.lightBlue,
                   ),
                   borderRadius: BorderRadius.circular(20),
                 )
@@ -120,7 +120,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
                 Theme.of(context).inputDecorationTheme.focusedBorder,
         focusedErrorBorder: kIsWeb ? KBorder.outlineInputError : widget.border,
         filled: true,
-        fillColor: widget.fillColor ?? KColorTheme.white,
+        fillColor: widget.fillColor ?? AppColors.white,
         hintText: widget.hintText,
         errorText: widget.errorText,
         suffixIcon: widget.suffixIcon,

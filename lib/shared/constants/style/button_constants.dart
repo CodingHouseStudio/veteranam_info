@@ -3,11 +3,11 @@ import 'package:kozak/shared/shared.dart';
 
 abstract class KButtonStyles {
   static final ButtonStyle whiteButtonStyle = TextButton.styleFrom(
-    backgroundColor: KColorTheme.white,
+    backgroundColor: AppColors.white,
     minimumSize: const Size(KMinMaxSize.minWidth100, KMinMaxSize.minHeight50),
     padding: const EdgeInsets.all(KPadding.kPaddingSizeXSS),
     side: const BorderSide(
-      color: KColorTheme.white,
+      color: AppColors.white,
     ),
     shape: RoundedRectangleBorder(
       borderRadius: KBorderRadius.kBorderRadiusM,

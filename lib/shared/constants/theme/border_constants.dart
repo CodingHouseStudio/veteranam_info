@@ -3,11 +3,11 @@ import 'package:kozak/shared/shared.dart';
 
 abstract class KBorder {
   static OutlineInputBorder outlineInput = OutlineInputBorder(
-    borderSide: const BorderSide(color: KColorTheme.lightGray),
+    borderSide: const BorderSide(color: AppColors.lightGray),
     borderRadius: KBorderRadius.kBorderRadiusM,
   );
   static OutlineInputBorder outlineInputError = OutlineInputBorder(
-    borderSide: const BorderSide(color: KColorTheme.error),
+    borderSide: const BorderSide(color: AppColors.error),
     borderRadius: KBorderRadius.kBorderRadiusM,
   );
 }

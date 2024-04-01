@@ -21,7 +21,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
     return Container(
       decoration: BoxDecoration(
         borderRadius: KBorderRadius.kBorderRadiusM,
-        border: Border.all(color: KColorTheme.lightGray),
+        border: Border.all(color: AppColors.lightGray),
       ),
       child: Theme(
         data: ThemeData(
@@ -32,7 +32,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
           title: Text(
             'Як мені знайти роботу за допомогою цього сайту?',
             key: KWidgetkeys.questionKeys.title,
-            style: KAppTextStyle.lableLarge,
+            style: AppTextStyle.lableLarge,
             maxLines: 1,
           ),
           onExpansionChanged: (expanded) {
@@ -42,7 +42,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
           },
           trailing: IconWidget(
             icon: openQuestion ? KIcon.minus : KIcon.plus,
-            background: KColorTheme.widgetBackground,
+            background: AppColors.widgetBackground,
             // padding: KPadding.kPaddingSizeM,
           ),
           children: [
@@ -55,7 +55,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
                 // ignore: lines_longer_than_80_chars
                 'Використовуйте веб-сайти спеціалізованих сервісів для пошуку роботи, таких як Indeed, LinkedIn, Glassdoor, Monster, або регіональні ресурси. Виберіть свою область інтересів та регіон, і шукайте вакансії, які відповідають вашим критеріям.',
                 key: KWidgetkeys.questionKeys.subtitle,
-                style: KAppTextStyle.lableMedium,
+                style: AppTextStyle.lableMedium,
                 softWrap: true,
                 maxLines: 3,
               ),

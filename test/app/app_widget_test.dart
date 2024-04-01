@@ -18,6 +18,8 @@ void main() {
       await tester.pumpWidget(const App());
 
       expect(find.byKey(KWidgetkeys.appKeys.screen), findsOneWidget);
+
+      await nawbarDescHelper(tester: tester, searchText: '');
     });
   });
 }
