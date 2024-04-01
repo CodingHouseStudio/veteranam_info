@@ -1,4 +1,5 @@
 export 'discounts/discounts.dart';
+export 'error/error.dart';
 export 'home/home.dart';
 export 'information/information.dart';
 export 'investors/investors.dart';

@@ -14,6 +14,8 @@ abstract class KAppText {
   static const String footerWork = 'Робота';
   static const String footerInformation = 'Інформація';
   static const String footerForInvestors = 'Для інвесторів';
+  static const String errorTitle = 'Помилка';
+  static const String error = 'Помилка при завнтаженні сторінки';
 }
 
 abstract class KMockText {

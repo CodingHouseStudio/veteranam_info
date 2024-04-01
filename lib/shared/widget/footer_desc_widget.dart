@@ -10,7 +10,7 @@ class FooterDescWidget extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: KBorderRadius.kBorderRadiusM,
-        color: KColorTheme.widgetBackground,
+        color: AppColors.widgetBackground,
       ),
       child: Padding(
         padding: const EdgeInsets.all(KPadding.kPaddingSizeXL),
@@ -26,7 +26,7 @@ class FooterDescWidget extends StatelessWidget {
                     onPressed: () {},
                     child: const Text(
                       KAppText.footerAboutUs,
-                      style: KAppTextStyle.lableMediumLarge,
+                      style: AppTextStyle.lableMediumLarge,
                     ),
                   ),
                 ),
@@ -39,7 +39,7 @@ class FooterDescWidget extends StatelessWidget {
                     },
                     child: const Text(
                       KAppText.footerStories,
-                      style: KAppTextStyle.lableMediumLarge,
+                      style: AppTextStyle.lableMediumLarge,
                     ),
                   ),
                 ),
@@ -52,7 +52,7 @@ class FooterDescWidget extends StatelessWidget {
                     },
                     child: const Text(
                       KAppText.footerWork,
-                      style: KAppTextStyle.lableMediumLarge,
+                      style: AppTextStyle.lableMediumLarge,
                     ),
                   ),
                 ),
@@ -69,7 +69,7 @@ class FooterDescWidget extends StatelessWidget {
                     onPressed: () {},
                     child: const Text(
                       KAppText.footerContact,
-                      style: KAppTextStyle.lableMediumLarge,
+                      style: AppTextStyle.lableMediumLarge,
                     ),
                   ),
                 ),
@@ -82,7 +82,7 @@ class FooterDescWidget extends StatelessWidget {
                     },
                     child: const Text(
                       KAppText.footerDiscountsCoupons,
-                      style: KAppTextStyle.lableMediumLarge,
+                      style: AppTextStyle.lableMediumLarge,
                     ),
                   ),
                 ),
@@ -96,7 +96,7 @@ class FooterDescWidget extends StatelessWidget {
                     },
                     child: const Text(
                       KAppText.footerInformation,
-                      style: KAppTextStyle.lableMediumLarge,
+                      style: AppTextStyle.lableMediumLarge,
                     ),
                   ),
                 ),
@@ -113,7 +113,7 @@ class FooterDescWidget extends StatelessWidget {
                     onPressed: () {},
                     child: const Text(
                       KAppText.footerConsultationOnline,
-                      style: KAppTextStyle.lableMediumLarge,
+                      style: AppTextStyle.lableMediumLarge,
                     ),
                   ),
                 ),
@@ -126,7 +126,7 @@ class FooterDescWidget extends StatelessWidget {
                     },
                     child: const Text(
                       KAppText.footerMyProfiel,
-                      style: KAppTextStyle.lableMediumLarge,
+                      style: AppTextStyle.lableMediumLarge,
                     ),
                   ),
                 ),
@@ -139,7 +139,7 @@ class FooterDescWidget extends StatelessWidget {
                     },
                     child: const Text(
                       KAppText.footerForInvestors,
-                      style: KAppTextStyle.lableMediumLarge,
+                      style: AppTextStyle.lableMediumLarge,
                     ),
                   ),
                 ),

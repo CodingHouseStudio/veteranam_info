@@ -2,7 +2,10 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+// ignore: depend_on_referenced_packages
+import 'package:flutter_web_plugins/url_strategy.dart' show usePathUrlStrategy;
 import 'package:kozak/shared/shared.dart';
 
 class AppBlocObserver extends BlocObserver {
@@ -28,6 +31,11 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
 
   Bloc.observer = const AppBlocObserver();
   configureDependencies();
+
+  // Add cross-flavor configuration here
+  if (kIsWeb) {
+    usePathUrlStrategy();
+  }
 
   // Add cross-flavor configuration here
 

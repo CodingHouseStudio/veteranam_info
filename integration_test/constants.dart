@@ -1,3 +1,6 @@
+import 'package:flutter/foundation.dart';
+// ignore: depend_on_referenced_packages
+import 'package:flutter_web_plugins/url_strategy.dart' show usePathUrlStrategy;
 import 'package:kozak/shared/shared.dart';
 
 // const String usernameCorrectIntegrationTest = 'andreytest@gmail.com';
@@ -10,9 +13,9 @@ Future<void> setUpGlobalIntegration() async {
   //   options: DefaultFirebaseOptions.currentPlatform,
   // );
 
-  // if (kIsWeb) {
-  //   usePathUrlStrategy();
-  // }
+  if (kIsWeb) {
+    usePathUrlStrategy();
+  }
 
   // FlutterError.onError = (details) {
   //   dev.log(details.exceptionAsString(), stackTrace: details.stack);

@@ -16,7 +16,7 @@ class IconWidget extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: background ?? KColorTheme.white,
+        color: background ?? AppColors.white,
       ),
       child: Padding(
         padding: EdgeInsets.all(padding ?? KPadding.kPaddingSizeSSM),
