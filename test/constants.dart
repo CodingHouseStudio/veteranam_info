@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:kozak/bootstrap.dart';
 
@@ -26,4 +25,8 @@ abstract class KTestText {
   static const String passwordEmpty = '';
   static const String usernameIncorrect = 'test_';
   static const String passwordIncorrect = 'test_';
+}
+
+abstract class KTestConstants {
+  static const scrolling = Offset(0, -500);
 }

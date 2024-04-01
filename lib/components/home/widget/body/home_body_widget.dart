@@ -8,14 +8,35 @@ class HomeBodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: const [
-        // MessageFieldWidget(changeMessage: (_) {}),
-        FilterBoxWidget(
-          filters: KMockText.filter,
-        ),
-        FooterDescWidget(),
-      ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: KPadding.kPaddingSizeXXL),
+      child: ListView(
+        children: [
+          KSizedBox.kHeightSizedBoxM,
+          MessageFieldWidget(changeMessage: (_) {}),
+          KSizedBox.kHeightSizedBoxM,
+          const FilterBoxWidget(
+            filters: KMockText.filter,
+          ),
+          KSizedBox.kHeightSizedBoxM,
+          DropListFieldWidget(
+            onChanged: (_) {},
+            hintText: '',
+            dropDownList: KMockText.dropDownList,
+          ),
+          KSizedBox.kHeightSizedBoxM,
+          const QuestionWidget(
+            title: KAppText.questionTitle,
+            subtitle: KAppText.questionSubtitle,
+          ),
+          KSizedBox.kHeightSizedBoxM,
+          const BoxWidget(
+            text: KAppText.footerDiscountsCoupons,
+          ),
+          KSizedBox.kHeightSizedBoxM,
+          const FooterDescWidget(),
+        ],
+      ),
     );
   }
 }

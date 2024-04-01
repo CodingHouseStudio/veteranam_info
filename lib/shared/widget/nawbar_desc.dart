@@ -8,10 +8,7 @@ class NawbarDesc extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        borderRadius: KBorderRadius.kBorderRadiusM,
-        color: KColorTheme.widgetBackground,
-      ),
+      decoration: KWidetTheme.boxDecorationCard,
       child: Padding(
         padding: const EdgeInsets.all(KPadding.kPaddingSizeS),
         child: Row(
