@@ -5,6 +5,7 @@ abstract class KSize {
   static const kPixelM = 30.0;
   static const kPixelML = 48.0;
   static const kPixelL = 60.0;
+  static const kPixelXXL = 90.0;
 
   static const kRadiusM = 32.0;
 

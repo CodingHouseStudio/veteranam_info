@@ -28,3 +28,7 @@ abstract class KTestText {
 
   static const filterCubit = 'Filter Cubit';
 }
+
+abstract class KTestConstants {
+  static const scrolling = Offset(0, -500);
+}

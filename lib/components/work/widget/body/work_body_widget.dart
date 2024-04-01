@@ -7,13 +7,8 @@ class WorkBodyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      children: [
-        DropListFieldWidget(
-          onChanged: (_) {},
-          hintText: '',
-          dropDownList: KMockText.dropDownList,
-        ),
-        const FooterDescWidget(),
+      children: const [
+        FooterDescWidget(),
       ],
     );
   }

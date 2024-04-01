@@ -3,8 +3,8 @@ part of '../widget_keys.dart';
 class _FooterKeys {
   final aboutUsButton = const Key('footer_about_us');
   final contactButton = const Key('footer_contact');
-  final informationButton = const Key('footer_consultation_online');
-  final consultationOnlineButton = const Key('footer_information_button');
+  final informationButton = const Key('footer_information_button');
+  final consultationOnlineButton = const Key('footer_consultation_online');
   final discountsButton = const Key('footer_discounts_button');
   final storyButton = const Key('footer_story_button');
   final workButton = const Key('footer_work_button');
