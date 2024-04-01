@@ -10,6 +10,7 @@ part 'screen/investors.dart';
 part 'screen/profile.dart';
 part 'screen/story.dart';
 part 'screen/work.dart';
+part 'screen/error.dart';
 
 part 'widget/question.dart';
 part 'widget/nawbar.dart';
@@ -17,6 +18,7 @@ part 'widget/filter.dart';
 part 'widget/drop_list_field.dart';
 part 'widget/footer.dart';
 part 'widget/message_field.dart';
+part 'widget/box.dart';
 
 abstract class KWidgetkeys {
   static _HomeKeys get homeKeys => _HomeKeys();
@@ -27,6 +29,7 @@ abstract class KWidgetkeys {
   static _ProfileKeys get profileKeys => _ProfileKeys();
   static _StoryKeys get storyKeys => _StoryKeys();
   static _WorkKeys get workKeys => _WorkKeys();
+  static _ErrorKeys get errorKeys => _ErrorKeys();
 
   static _NawbarKeys get nawbarKeys => _NawbarKeys();
   static _QuestionKeys get questionKeys => _QuestionKeys();
@@ -34,4 +37,5 @@ abstract class KWidgetkeys {
   static _MessageFieldKeys get inputKeys => _MessageFieldKeys();
   static _FooterKeys get footerKeys => _FooterKeys();
   static _DropListFieldKeys get dropListFieldKeys => _DropListFieldKeys();
+  static _BoxKeys get boxKeys => _BoxKeys();
 }

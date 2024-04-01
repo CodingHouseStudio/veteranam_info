@@ -6,14 +6,14 @@ import 'package:kozak/shared/shared.dart';
 import '../text_dependency.dart';
 
 void main() {
+  setUp(configureDependenciesTest);
+
+  setUpAll(setUpGlobal);
+
+  setupFirebaseAuthMocks();
+
+  tearDown(GetIt.I.reset);
   group(KScreenName.home, () {
-    setUp(configureDependenciesTest);
-
-    setUpAll(setUpGlobal);
-
-    setupFirebaseAuthMocks();
-
-    tearDown(GetIt.I.reset);
     testWidgets('renders initial', (tester) async {
       await tester.pumpApp(const HomeScreen());
 
@@ -21,13 +21,20 @@ void main() {
 
       await tester.pumpAndSettle();
 
-      await footerHelper(tester);
-
-      // await nawbarDescHelper(tester: tester, searchText: '');
       await filterBoxHelper(
         tester,
       );
-      // await messageFieldHelper(tester: tester, message: '');
+
+      await messageFieldHelper(tester: tester, message: '');
+
+      await dropListFieldBoxHelper(
+        tester: tester,
+        dropListitem: KMockText.dropDownList.elementAt(0),
+      );
+
+      await boxHelper(tester);
+
+      await footerHelper(tester);
     });
     group('Mock Go Router', () {
       late MockGoRouter mockGoRouter;
@@ -44,120 +51,130 @@ void main() {
 
         await tester.pumpAndSettle();
 
-        await footerHelper(tester);
-
-        // await nawbarDescHelper(tester: tester, searchText: '');
         await filterBoxHelper(
           tester,
         );
+
+        await messageFieldHelper(tester: tester, message: '');
+
+        await dropListFieldBoxHelper(
+          tester: tester,
+          dropListitem: KMockText.dropDownList.elementAt(0),
+        );
+
+        await boxHelper(tester);
+
+        await footerHelper(tester);
       });
 
-      testWidgets('go to ${KScreenName.information}', (tester) async {
-        await tester.pumpApp(
-          MockGoRouterProvider(
-            goRouter: mockGoRouter,
-            child: const HomeScreen(),
-          ),
-        );
+      group('go to', () {
+        testWidgets(KScreenName.information, (tester) async {
+          await tester.pumpApp(
+            MockGoRouterProvider(
+              goRouter: mockGoRouter,
+              child: const HomeScreen(),
+            ),
+          );
 
-        expect(find.byKey(KWidgetkeys.homeKeys.screen), findsOneWidget);
+          expect(find.byKey(KWidgetkeys.homeKeys.screen), findsOneWidget);
 
-        await tester.pumpAndSettle();
+          await tester.pumpAndSettle();
 
-        await footerInformationRoutHelper(
-          tester: tester,
-          mockGoRouter: mockGoRouter,
-        );
-      });
+          await footerInformationRoutHelper(
+            tester: tester,
+            mockGoRouter: mockGoRouter,
+          );
+        });
 
-      testWidgets('go to ${KScreenName.investors}', (tester) async {
-        await tester.pumpApp(
-          MockGoRouterProvider(
-            goRouter: mockGoRouter,
-            child: const HomeScreen(),
-          ),
-        );
+        testWidgets(KScreenName.investors, (tester) async {
+          await tester.pumpApp(
+            MockGoRouterProvider(
+              goRouter: mockGoRouter,
+              child: const HomeScreen(),
+            ),
+          );
 
-        expect(find.byKey(KWidgetkeys.homeKeys.screen), findsOneWidget);
+          expect(find.byKey(KWidgetkeys.homeKeys.screen), findsOneWidget);
 
-        await tester.pumpAndSettle();
+          await tester.pumpAndSettle();
 
-        await footerInvestorsRoutHelper(
-          tester: tester,
-          mockGoRouter: mockGoRouter,
-        );
-      });
+          await footerInvestorsRoutHelper(
+            tester: tester,
+            mockGoRouter: mockGoRouter,
+          );
+        });
 
-      testWidgets('go to ${KScreenName.profile}', (tester) async {
-        await tester.pumpApp(
-          MockGoRouterProvider(
-            goRouter: mockGoRouter,
-            child: const HomeScreen(),
-          ),
-        );
+        testWidgets(KScreenName.profile, (tester) async {
+          await tester.pumpApp(
+            MockGoRouterProvider(
+              goRouter: mockGoRouter,
+              child: const HomeScreen(),
+            ),
+          );
 
-        expect(find.byKey(KWidgetkeys.homeKeys.screen), findsOneWidget);
+          expect(find.byKey(KWidgetkeys.homeKeys.screen), findsOneWidget);
 
-        await tester.pumpAndSettle();
+          await tester.pumpAndSettle();
 
-        await footerProfileRoutHelper(
-          tester: tester,
-          mockGoRouter: mockGoRouter,
-        );
-      });
+          await footerProfileRoutHelper(
+            tester: tester,
+            mockGoRouter: mockGoRouter,
+          );
+        });
 
-      testWidgets('go to ${KScreenName.story}', (tester) async {
-        await tester.pumpApp(
-          MockGoRouterProvider(
-            goRouter: mockGoRouter,
-            child: const HomeScreen(),
-          ),
-        );
+        testWidgets(KScreenName.story, (tester) async {
+          await tester.pumpApp(
+            MockGoRouterProvider(
+              goRouter: mockGoRouter,
+              child: const HomeScreen(),
+            ),
+          );
 
-        expect(find.byKey(KWidgetkeys.homeKeys.screen), findsOneWidget);
+          expect(find.byKey(KWidgetkeys.homeKeys.screen), findsOneWidget);
 
-        await tester.pumpAndSettle();
+          await tester.pumpAndSettle();
 
-        await footerStoryRoutHelper(
-          tester: tester,
-          mockGoRouter: mockGoRouter,
-        );
-      });
+          await footerStoryRoutHelper(
+            tester: tester,
+            mockGoRouter: mockGoRouter,
+          );
+        });
 
-      testWidgets('go to ${KScreenName.work}', (tester) async {
-        await tester.pumpApp(
-          MockGoRouterProvider(
-            goRouter: mockGoRouter,
-            child: const HomeScreen(),
-          ),
-        );
+        testWidgets(KScreenName.work, (tester) async {
+          await tester.pumpApp(
+            MockGoRouterProvider(
+              goRouter: mockGoRouter,
+              child: const HomeScreen(),
+            ),
+          );
 
-        expect(find.byKey(KWidgetkeys.homeKeys.screen), findsOneWidget);
+          expect(find.byKey(KWidgetkeys.homeKeys.screen), findsOneWidget);
 
-        await tester.pumpAndSettle();
+          await tester.pumpAndSettle();
 
-        await footerWorkRoutHelper(
-          tester: tester,
-          mockGoRouter: mockGoRouter,
-        );
-      });
+          await footerWorkRoutHelper(
+            tester: tester,
+            mockGoRouter: mockGoRouter,
+          );
+        });
 
-      testWidgets('go to ${KScreenName.discounts}', (tester) async {
-        await tester.pumpApp(
-          MockGoRouterProvider(
-            goRouter: mockGoRouter,
-            child: const HomeScreen(),
-          ),
-        );
+        testWidgets(KScreenName.discounts, (tester) async {
+          await tester.pumpApp(
+            MockGoRouterProvider(
+              goRouter: mockGoRouter,
+              child: const HomeScreen(),
+            ),
+          );
 
-        expect(find.byKey(KWidgetkeys.homeKeys.screen), findsOneWidget);
+          expect(find.byKey(KWidgetkeys.homeKeys.screen), findsOneWidget);
 
-        await tester.pumpAndSettle();
+          await tester.pumpAndSettle();
 
-        await footerDiscountsRoutHelper(
-          tester: tester,
-          mockGoRouter: mockGoRouter,
-        );
+          await footerDiscountsRoutHelper(
+            tester: tester,
+            mockGoRouter: mockGoRouter,
+          );
+        });
       });
     });
   });

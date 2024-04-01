@@ -11,10 +11,7 @@ class NawbarDesc extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        borderRadius: KBorderRadius.kBorderRadiusM,
-        color: AppColors.widgetBackground,
-      ),
+      decoration: KWidetTheme.boxDecorationCard,
       child: Padding(
         padding: const EdgeInsets.all(KPadding.kPaddingSizeS),
         child: Row(

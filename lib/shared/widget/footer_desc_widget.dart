@@ -8,10 +8,7 @@ class FooterDescWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        borderRadius: KBorderRadius.kBorderRadiusM,
-        color: AppColors.widgetBackground,
-      ),
+      decoration: KWidetTheme.boxDecorationCard,
       child: Padding(
         padding: const EdgeInsets.all(KPadding.kPaddingSizeXL),
         child: Column(

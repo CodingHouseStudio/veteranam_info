@@ -14,10 +14,11 @@ class IconWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: background ?? AppColors.white,
-      ),
+      decoration: KWidetTheme.boxDecorationCircular.copyWith(color: background),
+      //  BoxDecoration(
+      //   shape: BoxShape.circle,
+      //   color: background ?? KColorTheme.white,
+      // ),
       child: Padding(
         padding: EdgeInsets.all(padding ?? KPadding.kPaddingSizeSSM),
         child: icon,
