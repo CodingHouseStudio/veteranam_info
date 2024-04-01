@@ -30,7 +30,7 @@ class BoxWidget extends StatelessWidget {
             child: Text(
               text,
               key: KWidgetkeys.boxKeys.text,
-              style: KAppTextStyle.lableLarge,
+              style: AppTextStyle.lableLarge,
             ),
           ),
         ],

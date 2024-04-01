@@ -1,12 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:kozak/shared/shared.dart';
 
-class NawbarWidget extends StatefulWidget {
+class NawbarWidget extends StatefulWidget implements PreferredSizeWidget {
   const NawbarWidget({required this.search, super.key});
+
   final void Function(String text) search;
 
   @override
+  Size get preferredSize => const Size.fromHeight(KSize.kPreferredSize);
+
+  @override
   State<NawbarWidget> createState() => _NawbarWidgetState();
+
+  @override
+  StatefulElement createElement() {
+    return StatefulElement(this);
+  }
 }
 
 class _NawbarWidgetState extends State<NawbarWidget> {
@@ -30,7 +39,7 @@ class _NawbarWidgetState extends State<NawbarWidget> {
     return Container(
       decoration: BoxDecoration(
         borderRadius: KBorderRadius.kBorderRadiusM,
-        color: KColorTheme.widgetBackground,
+        color: AppColors.widgetBackground,
       ),
       child: Padding(
         padding: const EdgeInsets.all(KPadding.kPaddingSizeS),
@@ -47,7 +56,7 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                       Text(
                         KAppText.appName,
                         key: KWidgetkeys.nawbarKeys.title,
-                        style: KAppTextStyle.title,
+                        style: AppTextStyle.title,
                       ),
                       KSizedBox.kWidthSizedBoxML,
                     ],
@@ -56,7 +65,7 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                   child: TextFieldWidget(
                     key: _formKey,
                     widgetKey: KWidgetkeys.nawbarKeys.field,
-                    hintStyle: KAppTextStyle.lableMedium,
+                    hintStyle: AppTextStyle.lableMedium,
                     focusNode: focusNode,
                     prefixIcon: KIcon.search,
                     onChanged: widget.search,
@@ -87,7 +96,7 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                         onPressed: null,
                         child: const Text(
                           KAppText.enterButtonText,
-                          style: KAppTextStyle.lableMedium,
+                          style: AppTextStyle.lableMedium,
                         ),
                       ),
                     ],

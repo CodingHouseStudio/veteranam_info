@@ -78,7 +78,7 @@ class _FilterBoxWidgetState extends State<FilterBoxWidget> {
                   : null,
               label: Text(
                 filter,
-                style: KAppTextStyle.lableMediumSmall,
+                style: AppTextStyle.lableMediumSmall,
               ),
               shape: RoundedRectangleBorder(
                 borderRadius: KBorderRadius.kBorderRadiusM,

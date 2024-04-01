@@ -11,7 +11,7 @@ extension PumpApp on WidgetTester {
               // ignore: lines_longer_than_80_chars
               // localizationsDelegates: AppLocalizations.localizationsDelegates,
               // supportedLocales: AppLocalizations.supportedLocales,
-              home: widget,
+              home: Scaffold(body: widget),
             )
           : MockGoRouterProvider(
               goRouter: mockGoRouter,
@@ -19,7 +19,7 @@ extension PumpApp on WidgetTester {
                 // ignore: lines_longer_than_80_chars
                 // localizationsDelegates: AppLocalizations.localizationsDelegates,
                 // supportedLocales: AppLocalizations.supportedLocales,
-                home: widget,
+                home: Scaffold(body: widget),
               ),
             ),
     );

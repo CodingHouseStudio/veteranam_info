@@ -63,7 +63,7 @@ class _DropListFieldWidgetState extends State<DropListFieldWidget> {
                 alignment: Alignment.centerLeft,
                 child: Text(
                   options.elementAt(index),
-                  style: KAppTextStyle.lableMedium,
+                  style: AppTextStyle.lableMedium,
                 ),
               ),
             ),

@@ -74,53 +74,49 @@ class TextFieldWidget extends StatefulWidget {
 class _TextFieldWidgetState extends State<TextFieldWidget> {
   @override
   Widget build(BuildContext context) {
-    final Widget customTextField = TextField(
-      expands: widget.expands ?? false,
-      focusNode: widget.focusNode,
-      enabled: widget.enabled,
-      readOnly: widget.readOnly ?? false,
-      onSubmitted: widget.onSubmitted,
-      onEditingComplete: widget.onEditingCompleted,
-      obscureText: widget.obscureText,
-      autocorrect: !widget.obscureText,
-      controller: widget.controller,
-      maxLines: widget.expands == null ? widget.maxLines ?? 1 : null,
-      maxLength: widget.maxLength,
-      keyboardType: widget.keyboardType ?? TextInputType.text,
-      textInputAction: TextInputAction.done,
-      textAlign: widget.textAlign ?? TextAlign.start,
-      style: KAppTextStyle.lableMedium,
-      // Theme.of(context).textTheme.headlineSmall,
-      key: widget.widgetKey,
-      onChanged: widget.onChanged,
-      decoration: KWidetTheme.inputDecoration.copyWith(
-        hintStyle: widget.hintStyle,
-        contentPadding: widget.contentPadding,
-        labelText: widget.labelText,
-        border: kIsWeb ? widget.border : widget.border,
-        enabledBorder: kIsWeb
-            ? widget.enabledBorder
-            : widget.enabledBorder ??
-                Theme.of(context).inputDecorationTheme.enabledBorder,
-        disabledBorder: kIsWeb ? widget.border : widget.border,
-        focusedBorder: kIsWeb
-            ? widget.focusedBorder
-            : widget.focusedBorder ??
-                Theme.of(context).inputDecorationTheme.focusedBorder,
-        focusedErrorBorder: kIsWeb ? null : widget.border,
-        fillColor: widget.fillColor,
-        hintText: widget.hintText,
-        errorText: widget.errorText,
-        suffixIcon: widget.suffixIcon,
-        prefixIcon: widget.prefixIcon,
-        errorMaxLines: widget.errorMaxLines,
-      ),
-    );
-
     return SizedBox(
       width: widget.width,
       height: widget.height,
-      child: customTextField,
+      child: TextField(
+        expands: widget.expands ?? false,
+        focusNode: widget.focusNode,
+        enabled: widget.enabled,
+        readOnly: widget.readOnly ?? false,
+        onSubmitted: widget.onSubmitted,
+        onEditingComplete: widget.onEditingCompleted,
+        obscureText: widget.obscureText,
+        autocorrect: !widget.obscureText,
+        controller: widget.controller,
+        maxLines: widget.expands == null ? widget.maxLines ?? 1 : null,
+        maxLength: widget.maxLength,
+        keyboardType: widget.keyboardType ?? TextInputType.text,
+        textInputAction: TextInputAction.done,
+        textAlign: widget.textAlign ?? TextAlign.start,
+        style: AppTextStyle.lableMedium,
+        // Theme.of(context).textTheme.headlineSmall,
+        key: widget.widgetKey,
+        onChanged: widget.onChanged,
+        decoration: KWidetTheme.inputDecoration.copyWith(
+          hintStyle: widget.hintStyle,
+          contentPadding: widget.contentPadding,
+          labelText: widget.labelText,
+          border: kIsWeb ? widget.border : widget.border,
+          enabledBorder: kIsWeb ? widget.enabledBorder : widget.enabledBorder,
+          //??
+          // Theme.of(context).inputDecorationTheme.enabledBorder,
+          disabledBorder: kIsWeb ? widget.border : widget.border,
+          focusedBorder: kIsWeb ? widget.focusedBorder : widget.focusedBorder,
+          //??
+          //Theme.of(context).inputDecorationTheme.focusedBorder,
+          focusedErrorBorder: kIsWeb ? null : widget.border,
+          fillColor: widget.fillColor,
+          hintText: widget.hintText,
+          errorText: widget.errorText,
+          suffixIcon: widget.suffixIcon,
+          prefixIcon: widget.prefixIcon,
+          errorMaxLines: widget.errorMaxLines,
+        ),
+      ),
     );
   }
 

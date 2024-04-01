@@ -4,12 +4,13 @@ import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
+final _shellNavigatorKey = GlobalKey<NavigatorState>();
 
 final GoRouter router = GoRouter(
   routerNeglect: true,
   navigatorKey: _rootNavigatorKey,
   debugLogDiagnostics: true,
-  // errorBuilder: (context, state) => const ErrorScreen(),
+  errorBuilder: (context, state) => const ErrorScreen(),
   // refreshListenable:
   //     GoRouterRefreshStream(GetIt.instance<AuthenticationBloc>().stream),
   initialLocation: KRoute.home.path,
@@ -24,68 +25,76 @@ final GoRouter router = GoRouter(
   //   return null;
   // },
   routes: [
-    GoRoute(
-      name: KRoute.home.name,
-      path: KRoute.home.path,
-      redirect: redirect,
-      pageBuilder: (context, state) => NoTransitionPage(
-        key: state.pageKey,
-        child: const HomeScreen(),
-      ),
+    ShellRoute(
+      navigatorKey: _shellNavigatorKey,
+      builder: (context, state, child) {
+        return ScaffoldWithNavBar(goRouterState: state, navigationShell: child);
+      },
       routes: [
         GoRoute(
-          name: KRoute.information.name,
-          path: KRoute.information.path,
+          name: KRoute.home.name,
+          path: KRoute.home.path,
           redirect: redirect,
           pageBuilder: (context, state) => NoTransitionPage(
             key: state.pageKey,
-            child: const InformationScreen(),
+            child: const HomeScreen(),
           ),
-        ),
-        GoRoute(
-          name: KRoute.discounts.name,
-          path: KRoute.discounts.path,
-          redirect: redirect,
-          pageBuilder: (context, state) => NoTransitionPage(
-            key: state.pageKey,
-            child: const DiscountsScreen(),
-          ),
-        ),
-        GoRoute(
-          name: KRoute.story.name,
-          path: KRoute.story.path,
-          redirect: redirect,
-          pageBuilder: (context, state) => NoTransitionPage(
-            key: state.pageKey,
-            child: const StoryScreen(),
-          ),
-        ),
-        GoRoute(
-          name: KRoute.work.name,
-          path: KRoute.work.path,
-          redirect: redirect,
-          pageBuilder: (context, state) => NoTransitionPage(
-            key: state.pageKey,
-            child: const WorkScreen(),
-          ),
-        ),
-        GoRoute(
-          name: KRoute.profile.name,
-          path: KRoute.profile.path,
-          redirect: redirect,
-          pageBuilder: (context, state) => NoTransitionPage(
-            key: state.pageKey,
-            child: const ProfileScreen(),
-          ),
-        ),
-        GoRoute(
-          name: KRoute.investors.name,
-          path: KRoute.investors.path,
-          redirect: redirect,
-          pageBuilder: (context, state) => NoTransitionPage(
-            key: state.pageKey,
-            child: const InvestorsScreen(),
-          ),
+          routes: [
+            GoRoute(
+              name: KRoute.information.name,
+              path: KRoute.information.path,
+              redirect: redirect,
+              pageBuilder: (context, state) => NoTransitionPage(
+                key: state.pageKey,
+                child: const InformationScreen(),
+              ),
+            ),
+            GoRoute(
+              name: KRoute.discounts.name,
+              path: KRoute.discounts.path,
+              redirect: redirect,
+              pageBuilder: (context, state) => NoTransitionPage(
+                key: state.pageKey,
+                child: const DiscountsScreen(),
+              ),
+            ),
+            GoRoute(
+              name: KRoute.story.name,
+              path: KRoute.story.path,
+              redirect: redirect,
+              pageBuilder: (context, state) => NoTransitionPage(
+                key: state.pageKey,
+                child: const StoryScreen(),
+              ),
+            ),
+            GoRoute(
+              name: KRoute.work.name,
+              path: KRoute.work.path,
+              redirect: redirect,
+              pageBuilder: (context, state) => NoTransitionPage(
+                key: state.pageKey,
+                child: const WorkScreen(),
+              ),
+            ),
+            GoRoute(
+              name: KRoute.profile.name,
+              path: KRoute.profile.path,
+              redirect: redirect,
+              pageBuilder: (context, state) => NoTransitionPage(
+                key: state.pageKey,
+                child: const ProfileScreen(),
+              ),
+            ),
+            GoRoute(
+              name: KRoute.investors.name,
+              path: KRoute.investors.path,
+              redirect: redirect,
+              pageBuilder: (context, state) => NoTransitionPage(
+                key: state.pageKey,
+                child: const InvestorsScreen(),
+              ),
+            ),
+          ],
         ),
       ],
     ),
