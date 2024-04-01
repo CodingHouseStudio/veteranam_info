@@ -35,7 +35,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
           title: Text(
             widget.title,
             key: KWidgetkeys.questionKeys.title,
-            style: KAppTextStyle.lableLarge,
+            style: AppTextStyle.lableLarge,
             maxLines: 1,
           ),
           onExpansionChanged: (expanded) {
@@ -45,7 +45,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
           },
           trailing: IconWidget(
             icon: openQuestion ? KIcon.minus : KIcon.plus,
-            background: KColorTheme.widgetBackground,
+            background: AppColors.widgetBackground,
             // padding: KPadding.kPaddingSizeM,
           ),
           children: [
@@ -57,7 +57,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
               child: Text(
                 widget.subtitle,
                 key: KWidgetkeys.questionKeys.subtitle,
-                style: KAppTextStyle.lableMedium,
+                style: AppTextStyle.lableMedium,
                 softWrap: true,
                 maxLines: 3,
               ),

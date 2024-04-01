@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-abstract class KColorTheme {
+abstract class AppColors {
   /// background figma properties
   /// hex: #f5f7fa
   /// opacity: 1

@@ -7,12 +7,6 @@ class WorkScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: KWidgetkeys.workKeys.screen,
-      appBar: AppBar(
-        title: const Text('Work Page'),
-      ),
-      body: const WorkBodyWidget(),
-    );
+    return WorkBodyWidget(key: KWidgetkeys.workKeys.screen);
   }
 }

@@ -7,12 +7,6 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: KWidgetkeys.profileKeys.screen,
-      appBar: AppBar(
-        title: const Text('Profile Page'),
-      ),
-      body: const ProfileBodyWidget(),
-    );
+    return ProfileBodyWidget(key: KWidgetkeys.profileKeys.screen);
   }
 }
