@@ -41,7 +41,7 @@ class _FilterBoxWidgetState extends State<FilterBoxWidget> {
             }
           },
         ),
-        KSizedBox.kWidthSizedBoxS,
+        KSizedBox.kWidthSizedBoxSSM,
         if (!PlatformConstants.isWebMobile)
           Expanded(
             child: Wrap(

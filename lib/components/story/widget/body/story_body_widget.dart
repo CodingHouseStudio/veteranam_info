@@ -7,8 +7,15 @@ class StoryBodyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      children: const [
-        FooterDescWidget(),
+      children: [
+        StoryCardWidget(
+          storyDate: KMockText.storyDate,
+          userPhoto: '',
+          userName: KMockText.userName,
+          story: KMockText.story,
+        ),
+        KSizedBox.kHeightSizedBoxM,
+        const FooterDescWidget(),
       ],
     );
   }
