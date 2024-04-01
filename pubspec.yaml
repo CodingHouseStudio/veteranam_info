@@ -21,7 +21,7 @@ dependencies:
   web: 0.5.1
 dev_dependencies:
   bloc_test: ^9.1.7
-  build_runner: ^2.4.8
+  build_runner: ^2.4.9
   flutter_test:
     sdk: flutter
   injectable_generator: ^2.5.0 # Used for dependency injection for get_it
