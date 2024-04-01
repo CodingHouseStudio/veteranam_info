@@ -30,5 +30,6 @@ abstract class KTestText {
 }
 
 abstract class KTestConstants {
-  static const scrolling = Offset(0, -500);
+  static const scrollingDown = Offset(0, -500);
+  static const scrollingUp = Offset(0, 500);
 }
