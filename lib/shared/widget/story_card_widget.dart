@@ -79,9 +79,6 @@ class _StoryCardWidgetImplementationState
     extends State<_StoryCardWidgetImplementation>
     with TickerProviderStateMixin {
   late bool? like;
-  // bool showFullStory = false;
-  // late AnimationController _controller;
-  // late Animation<int> _textAnimation;
   late int? maxLines;
 
   @override
@@ -89,12 +86,6 @@ class _StoryCardWidgetImplementationState
     super.initState();
     like = null;
     maxLines = 10;
-    // _controller = AnimationController(
-    //   vsync: this,
-    //   duration: const Duration(milliseconds: 1000),
-    // );
-    // _textAnimation =
-    //     IntTween(begin: 500, end: widget.story.length).animate(_controller);
   }
 
   @override
@@ -139,20 +130,6 @@ class _StoryCardWidgetImplementationState
               style: AppTextStyle.lableSmall,
               overflow: TextOverflow.clip,
             ),
-            // AnimatedBuilder(
-            //   animation: _textAnimation,
-            //   builder: (context, child) {
-            //     late var text = '';
-            //     if (showFullStory && _textAnimation.value > 500) {
-            //       text = widget.story.substring(500, _textAnimation.value);
-            //     }
-            //     return Text(
-            //       widget.story.substring(0, 500) + text,
-            //       style: KAppTextStyle.lableSmall,
-            //       overflow: TextOverflow.clip,
-            //     );
-            //   },
-            // ),
             KSizedBox.kHeightSizedBoxSM,
             Align(
               alignment: Alignment.bottomLeft,
@@ -161,8 +138,6 @@ class _StoryCardWidgetImplementationState
                 onPressed: () {
                   setState(() {
                     maxLines == null ? maxLines = 10 : maxLines = null;
-                    // showFullStory = !showFullStory;
-                    // _controller.forward(from: 0);
                   });
                 },
                 style: KButtonStyles.whiteButtonStyleBorder,
