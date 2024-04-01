@@ -25,6 +25,7 @@ class MessageFieldWidget extends StatelessWidget {
                 key: KWidgetkeys.inputKeys.icon,
                 icon: KIcon.mic,
                 background: KColorTheme.widgetBackground,
+                padding: KPadding.kPaddingSizeM,
               ),
             ),
           ],
