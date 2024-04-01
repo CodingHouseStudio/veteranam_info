@@ -10,6 +10,7 @@ part 'screen/investors.dart';
 part 'screen/profile.dart';
 part 'screen/story.dart';
 part 'screen/work.dart';
+part 'screen/error.dart';
 
 part 'widget/question.dart';
 part 'widget/nawbar.dart';
@@ -28,6 +29,7 @@ abstract class KWidgetkeys {
   static _ProfileKeys get profileKeys => _ProfileKeys();
   static _StoryKeys get storyKeys => _StoryKeys();
   static _WorkKeys get workKeys => _WorkKeys();
+  static _ErrorKeys get errorKeys => _ErrorKeys();
 
   static _NawbarKeys get nawbarKeys => _NawbarKeys();
   static _QuestionKeys get questionKeys => _QuestionKeys();

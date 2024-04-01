@@ -7,12 +7,6 @@ class InvestorsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: KWidgetkeys.investorsKeys.screen,
-      appBar: AppBar(
-        title: const Text('Investors Page'),
-      ),
-      body: const InvestorsBodyWidget(),
-    );
+    return InvestorsBodyWidget(key: KWidgetkeys.investorsKeys.screen);
   }
 }

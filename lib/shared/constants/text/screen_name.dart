@@ -1,5 +1,6 @@
 abstract class KScreenName {
   static const app = 'App Screen';
+  static const error = 'Error Screen';
   static const home = 'Home Screen';
   static const discounts = 'Discounts Screen';
   static const information = 'Information Screen';

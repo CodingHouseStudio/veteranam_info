@@ -15,4 +15,6 @@ abstract class KSize {
   static const kFontML = 32.0;
   static const kFontL = 40.0;
   static const kFontXS = 16.0;
+
+  static const kPreferredSize = 160.0;
 }

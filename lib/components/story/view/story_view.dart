@@ -7,12 +7,6 @@ class StoryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: KWidgetkeys.storyKeys.screen,
-      appBar: AppBar(
-        title: const Text('Story Page'),
-      ),
-      body: const StoryBodyWidget(),
-    );
+    return StoryBodyWidget(key: KWidgetkeys.storyKeys.screen);
   }
 }

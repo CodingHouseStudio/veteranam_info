@@ -13,7 +13,7 @@ class MessageFieldWidget extends StatelessWidget {
         onChanged: changeMessage,
         hintText: KAppText.messageTextFieldHint,
         maxLines: 4,
-        fillColor: KColorTheme.white,
+        fillColor: AppColors.white,
         enabledBorder: KBorder.outlineInputLightGray,
         focusedBorder: KBorder.outlineInputLightGray,
         suffixIcon: Column(
@@ -24,7 +24,7 @@ class MessageFieldWidget extends StatelessWidget {
               child: IconWidget(
                 key: KWidgetkeys.inputKeys.icon,
                 icon: KIcon.mic,
-                background: KColorTheme.widgetBackground,
+                background: AppColors.widgetBackground,
                 padding: KPadding.kPaddingSizeM,
               ),
             ),
