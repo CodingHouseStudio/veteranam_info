@@ -23,7 +23,7 @@ void main() {
 
       await footerHelper(tester);
 
-      await nawbarDescHelper(tester: tester, searchText: '');
+      await nawbarHelper(tester: tester, searchText: '');
       await filterBoxHelper(
         tester,
       );
@@ -46,7 +46,7 @@ void main() {
 
         await footerHelper(tester);
 
-        await nawbarDescHelper(tester: tester, searchText: '');
+        await nawbarHelper(tester: tester, searchText: '');
         await filterBoxHelper(
           tester,
         );

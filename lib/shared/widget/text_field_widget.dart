@@ -99,23 +99,26 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
             widget.contentPadding ?? const EdgeInsets.only(left: 20, right: 20),
         floatingLabelBehavior: FloatingLabelBehavior.auto,
         labelText: widget.labelText,
-        border: kIsWeb
-            ? widget.border ??
+        border:
+            //  kIsWeb
+            //     ?
+            widget.border ??
                 OutlineInputBorder(
                   borderSide: const BorderSide(
                     color: KColorTheme.lightBlue,
                   ),
                   borderRadius: BorderRadius.circular(20),
-                )
-            : widget.border,
+                ),
+        // : widget.border,
         enabledBorder: kIsWeb
-            ? widget.enabledBorder ?? KBorder.outlineInput
+            ? widget.enabledBorder ?? KBorder.outlineInputLightGray
             : widget.enabledBorder ??
                 Theme.of(context).inputDecorationTheme.enabledBorder,
-        disabledBorder:
-            kIsWeb ? widget.border ?? KBorder.outlineInput : widget.border,
+        disabledBorder: kIsWeb
+            ? widget.border ?? KBorder.outlineInputLightGray
+            : widget.border,
         focusedBorder: kIsWeb
-            ? widget.focusedBorder ?? KBorder.outlineInput
+            ? widget.focusedBorder ?? KBorder.outlineInputLightGray
             : widget.focusedBorder ??
                 Theme.of(context).inputDecorationTheme.focusedBorder,
         focusedErrorBorder: kIsWeb ? KBorder.outlineInputError : widget.border,
