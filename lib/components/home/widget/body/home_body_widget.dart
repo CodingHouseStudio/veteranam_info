@@ -25,7 +25,14 @@ class HomeBodyWidget extends StatelessWidget {
             dropDownList: KMockText.dropDownList,
           ),
           KSizedBox.kHeightSizedBoxM,
-          const QuestionWidget(),
+          const QuestionWidget(
+            title: KAppText.questionTitle,
+            subtitle: KAppText.questionSubtitle,
+          ),
+          KSizedBox.kHeightSizedBoxM,
+          const BoxWidget(
+            text: KAppText.footerDiscountsCoupons,
+          ),
           KSizedBox.kHeightSizedBoxM,
           const FooterDescWidget(),
         ],
