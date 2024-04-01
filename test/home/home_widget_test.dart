@@ -21,8 +21,7 @@ void main() {
 
       await tester.pumpAndSettle();
 
-      await nawbarDescHelper(tester: tester, searchText: '');
-
+      await nawbarHelper(tester: tester, searchText: '');
       await filterBoxHelper(
         tester,
       );
@@ -53,8 +52,7 @@ void main() {
 
         await tester.pumpAndSettle();
 
-        await nawbarDescHelper(tester: tester, searchText: '');
-
+        await nawbarHelper(tester: tester, searchText: '');
         await filterBoxHelper(
           tester,
         );
