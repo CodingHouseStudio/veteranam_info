@@ -76,6 +76,7 @@ abstract class KMockText {
   static final date = DateTime(2024, 03, 12);
   static const userName = 'Anonim23456';
   static const emial = 'example@gmail.com';
+  static const tags = ['Пільги'];
   static const workTitle = 'Комплектувальник товару в магазин';
   static const workPrice = '12000 грн +%';
   static const workCity = 'м.Одеса';
