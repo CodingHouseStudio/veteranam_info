@@ -13,7 +13,7 @@ Future<void> setUpGlobal({bool? kIsWeb}) async {
 }
 
 abstract class KTestData {
-  static const windowTableetSize = Size(1200, 1200);
+  static const windowTableetSize = Size(1500, 1500);
 }
 
 abstract class KTestText {
@@ -26,10 +26,14 @@ abstract class KTestText {
   static const String usernameIncorrect = 'test_';
   static const String passwordIncorrect = 'test_';
 
+  static const String useremail = 'example@gmail.com';
+
+  static const String footer = 'Контакти\n';
+
   static const filterCubit = 'Filter Cubit';
 }
 
 abstract class KTestConstants {
-  static const scrollingDown = Offset(0, -500);
-  static const scrollingUp = Offset(0, 500);
+  static const scrollingDown = Offset(0, -1000);
+  static const scrollingUp = Offset(0, 1000);
 }

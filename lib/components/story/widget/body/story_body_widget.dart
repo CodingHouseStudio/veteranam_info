@@ -6,17 +6,47 @@ class StoryBodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        StoryCardWidget(
-          storyDate: KMockText.storyDate,
-          userPhoto: '',
-          userName: KMockText.userName,
-          story: KMockText.story,
-        ),
-        KSizedBox.kHeightSizedBoxM,
-        const FooterDescWidget(),
-      ],
+    return LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) {
+        final isMobile =
+            constraints.maxWidth < KPlatformConstants.minWidthThresholdMobile;
+        final isTablet = constraints.maxWidth >=
+                KPlatformConstants.minWidthThresholdMobile &&
+            constraints.maxWidth < KPlatformConstants.minWidthThresholdDesktop;
+        final isDesktop =
+            constraints.maxWidth > KPlatformConstants.minWidthThresholdDesktop;
+
+        return Padding(
+          padding: EdgeInsets.only(
+            top: KPadding.kPaddingSizeS,
+            left: KPadding.kPaddingSizeXXL *
+                (isMobile
+                    ? KPlatformConstants.mobilePaddingKoefficient
+                    : (isTablet
+                        ? KPlatformConstants.tabletPaddingKoefficient
+                        : KPlatformConstants.desktopPaddingKoefficient)),
+            right: KPadding.kPaddingSizeXXL *
+                (isMobile
+                    ? KPlatformConstants.mobilePaddingKoefficient
+                    : (isTablet
+                        ? KPlatformConstants.tabletPaddingKoefficient
+                        : KPlatformConstants.desktopPaddingKoefficient)),
+          ),
+          child: ListView(
+            children: [
+              StoryCardWidget(
+                storyDate: KMockText.storyDate,
+                userPhoto: '',
+                userName: KMockText.userName,
+                story: KMockText.story,
+              ),
+              FooterDescWidget(
+                isDesktop: isDesktop,
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }
