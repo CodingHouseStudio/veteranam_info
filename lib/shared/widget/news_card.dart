@@ -37,6 +37,36 @@ class NewsCardWidget extends StatelessWidget {
           ),
         ],
       ),
+      bottom: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          KSizedBox.kHeightSizedBox28,
+          Wrap(
+            spacing: 8,
+            runSpacing: 4,
+            children: KMockText.tags.map((tag) {
+              return IgnorePointer(
+                child: FilterChip(
+                  key: KWidgetkeys.newsCardKeys.tags,
+                  visualDensity: VisualDensity.compact,
+                  showCheckmark: true,
+                  label: Text(
+                    tag,
+                  ),
+                  selectedColor: AppColors.widgetBackground,
+                  checkmarkColor: AppColors.black,
+                  selected: true,
+                  labelStyle: AppTextStyle.lableXS,
+                  onSelected: (value) {},
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(KSize.kRadiusM),
+                  ),
+                ),
+              );
+            }).toList(),
+          ),
+        ],
+      ),
     );
   }
 }

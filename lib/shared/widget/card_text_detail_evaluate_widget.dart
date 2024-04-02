@@ -9,12 +9,14 @@ class CardTextDetailEvaluateWidget extends StatefulWidget {
     this.buttonText,
     this.image,
     this.buttonStyle,
+    this.bottom,
   });
   final String text;
   final List<String>? buttonText;
   final ButtonStyle? buttonStyle;
   final Widget titleWidget;
   final String? image;
+  final Widget? bottom;
 
   @override
   State<CardTextDetailEvaluateWidget> createState() =>
@@ -96,6 +98,7 @@ class _CardTextDetailEvaluateWidgetState
                   ),
                 ],
               ),
+              if (widget.bottom != null) widget.bottom!,
             ],
           ),
         ),
