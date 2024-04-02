@@ -40,4 +40,12 @@ abstract class KButtonStyles {
       borderRadius: KBorderRadius.kBorderRadiusM,
     ),
   );
+  static final ButtonStyle lightGrayButtonStyle = TextButton.styleFrom(
+    backgroundColor: AppColors.lightGray,
+    minimumSize: const Size(KMinMaxSize.minWidth100, KMinMaxSize.minHeight50),
+    padding: const EdgeInsets.all(KPadding.kPaddingSizeXSS),
+    shape: RoundedRectangleBorder(
+      borderRadius: KBorderRadius.kBorderRadiusM,
+    ),
+  );
 }

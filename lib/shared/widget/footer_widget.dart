@@ -50,7 +50,7 @@ class FooterDescWidget extends StatelessWidget {
                   Text(
                     KAppText.logo,
                     key: KWidgetkeys.footerKeys.logo,
-                    style: AppTextStyle.title,
+                    style: AppTextStyle.titleM,
                   ),
                   KSizedBox.kHeightSizedBoxSM,
                   _FooterDescImplementationWidget(
@@ -133,9 +133,9 @@ class _FooterDescImplementationWidget extends StatelessWidget {
             buttonKey: buttonsKey.elementAt(index),
             route: routes.elementAt(index),
             textStyle: isDesktop
-                ? AppTextStyle.lableMediumLarge
+                ? AppTextStyle.lableML
                 : columnIndex == 0
-                    ? AppTextStyle.lableMedium
+                    ? AppTextStyle.lableM
                     : AppTextStyle.lableXS,
           ),
         );
