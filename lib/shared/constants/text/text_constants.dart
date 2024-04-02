@@ -18,6 +18,13 @@ abstract class KAppText {
   static const footerForInvestors = 'Для інвесторів';
   static const storyCardButtonDetail = 'Детальніше';
   static const storyCardButtonNotDetail = 'Сховати';
+  static const nickname = '@veteran';
+  static const email = 'example@gmail.com';
+  static const anonymous = 'Бути анонімом';
+  static const description =
+      'Якщо ви робите свій профіль анонімним, на вашій сторінці не\n'
+      'буде відображатися персональна інформація, тільки\nnickname.';
+  static const userName = 'Володимир Левандовський';
   static const questionTitle =
       'Як мені знайти роботу за допомогою цього сайту?';
   static const questionSubtitle =
