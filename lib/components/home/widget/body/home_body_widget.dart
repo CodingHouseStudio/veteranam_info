@@ -29,6 +29,8 @@ class HomeBodyWidget extends StatelessWidget {
           text: KAppText.footerDiscountsCoupons,
         ),
         KSizedBox.kHeightSizedBox30,
+        const ButtonMobWidget(),
+        KSizedBox.kHeightSizedBox30,
       ],
     );
   }
