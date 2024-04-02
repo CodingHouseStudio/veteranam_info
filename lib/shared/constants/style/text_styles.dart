@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:kozak/shared/shared.dart';
 
+/// Text Styles
+
 abstract class AppTextStyle {
   static const titleL = TextStyle(
     color: Color.fromRGBO(0, 0, 0, 1),
