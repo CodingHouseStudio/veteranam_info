@@ -20,6 +20,7 @@ abstract class KAppText {
   static const String footerStories = 'Історії';
   static const String footerDiscountsCoupons = 'Знижки і купони';
   static const String footerMyProfiel = 'Мій профіль';
+  static const String inputMassage = 'Напишіть Ваше повідомлення';
   static const String footerWork = 'Робота';
   static const String footerInformation = 'Інформація';
   static const String footerForInvestors = 'Для інвесторів';
