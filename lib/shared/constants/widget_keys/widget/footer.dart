@@ -13,4 +13,5 @@ class _FooterKeys {
   final likedInIcon = const Key('footer_linked_in_icon');
   final instagramIcon = const Key('footer_instagram_icon');
   final facebookIcon = const Key('footer_facebook_icon');
+  final logo = const Key('footer_logo');
 }
