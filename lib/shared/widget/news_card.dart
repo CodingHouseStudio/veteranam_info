@@ -47,8 +47,8 @@ class NewsCardWidget extends StatelessWidget {
             margin: const EdgeInsets.only(top: KPadding.kPaddingSize24),
             child: Padding(
               padding: const EdgeInsets.symmetric(
-                vertical: KPadding.kPaddingSize8,
-                horizontal: KPadding.kPaddingSize4,
+                vertical: KPadding.kPaddingSize4,
+                horizontal: KPadding.kPaddingSize8,
               ),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
