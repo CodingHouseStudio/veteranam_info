@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:kozak/shared/shared.dart';
 
 abstract class AppTextStyle {
+  static const titleL = TextStyle(
+    color: Color.fromRGBO(0, 0, 0, 1),
+    fontSize: KSize.kFontL,
+    fontWeight: FontWeight.w400,
+  );
   static const titleML = TextStyle(
     color: Color.fromRGBO(0, 0, 0, 1),
     fontSize: KSize.kFontML,

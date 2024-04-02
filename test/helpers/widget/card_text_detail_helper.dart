@@ -4,9 +4,10 @@ import 'package:kozak/shared/shared.dart';
 
 import '../../text_dependency.dart';
 
-Future<void> cardTextDetailHelper(
-  WidgetTester tester,
-) async {
+Future<void> cardTextDetailHelper({
+  required WidgetTester tester,
+  List<String>? detailButtonText,
+}) async {
   expect(find.byKey(KWidgetkeys.cardTextDetailKeys.text), findsOneWidget);
 
   expect(find.byKey(KWidgetkeys.cardTextDetailKeys.text), findsOneWidget);
@@ -21,7 +22,9 @@ Future<void> cardTextDetailHelper(
   expect(
     find.descendant(
       of: find.byKey(KWidgetkeys.cardTextDetailKeys.widget),
-      matching: find.text(KAppText.storyCardButtonDetail),
+      matching: find.text(
+        detailButtonText?.elementAt(0) ?? KAppText.storyCardButtonDetail,
+      ),
     ),
     findsOneWidget,
   );
@@ -29,7 +32,7 @@ Future<void> cardTextDetailHelper(
   await scrollingHelper(
     tester: tester,
     offset: null,
-    item: KWidgetkeys.cardTextDetailKeys.button,
+    itemKey: KWidgetkeys.cardTextDetailKeys.button,
   );
 
   await tester.tap(find.byKey(KWidgetkeys.cardTextDetailKeys.button));
@@ -39,13 +42,15 @@ Future<void> cardTextDetailHelper(
   await scrollingHelper(
     tester: tester,
     offset: null,
-    item: KWidgetkeys.cardTextDetailKeys.button,
+    itemKey: KWidgetkeys.cardTextDetailKeys.button,
   );
 
   expect(
     find.descendant(
       of: find.byKey(KWidgetkeys.cardTextDetailKeys.widget),
-      matching: find.text(KAppText.storyCardButtonNotDetail),
+      matching: find.text(
+        detailButtonText?.elementAt(1) ?? KAppText.storyCardButtonNotDetail,
+      ),
     ),
     findsOneWidget,
   );
@@ -70,7 +75,9 @@ Future<void> cardTextDetailHelper(
   expect(
     find.descendant(
       of: find.byKey(KWidgetkeys.cardTextDetailKeys.widget),
-      matching: find.text(KAppText.storyCardButtonDetail),
+      matching: find.text(
+        detailButtonText?.elementAt(0) ?? KAppText.storyCardButtonDetail,
+      ),
     ),
     findsOneWidget,
   );

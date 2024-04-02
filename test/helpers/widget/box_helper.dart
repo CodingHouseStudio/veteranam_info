@@ -8,7 +8,7 @@ Future<void> boxHelper(
 ) async {
   await scrollingHelper(
     tester: tester,
-    item: KWidgetkeys.boxKeys.text,
+    itemKey: KWidgetkeys.boxKeys.text,
   );
 
   expect(find.byKey(KWidgetkeys.boxKeys.text), findsOneWidget);

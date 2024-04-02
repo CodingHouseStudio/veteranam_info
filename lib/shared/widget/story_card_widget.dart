@@ -1,19 +1,18 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import 'package:kozak/shared/shared.dart';
 
 class StoryCardWidget extends StatelessWidget {
   const StoryCardWidget({
-    required this.userPhoto,
     required this.userName,
     required this.storyDate,
     required this.story,
-    this.image,
+    this.userPhoto,
     super.key,
+    this.image,
   });
 
-  final String userPhoto;
+  final String? userPhoto;
   final String userName;
   final DateTime storyDate;
   final String story;
@@ -21,162 +20,42 @@ class StoryCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: KPadding.kPaddingSizeXL,
-        vertical: image != null ? 0 : KPadding.kPaddingSizeXL,
-      ),
-      child: Row(
-        key: KWidgetkeys.storyCardKeys.widget,
-        crossAxisAlignment: CrossAxisAlignment.start,
+    return CardTextDetailEvaluateWidget(
+      image: image,
+      text: story,
+      titleWidget: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          if (image != null)
-            Expanded(
-              child: Container(
-                decoration: KWidetTheme.boxDecorationImage,
-                child: CachedNetworkImage(
-                  key: KWidgetkeys.storyCardKeys.image,
-                  imageUrl: image!,
-                  placeholder: (context, url) => Image.asset(''),
-                  errorWidget: (context, url, error) => KIcon.error,
-                  fit: BoxFit.contain,
-                ),
-              ),
-            ),
           Expanded(
-            child: _StoryCardWidgetImplementation(
-              story: story,
-              storyDate: storyDate,
-              userName: userName,
-              userPhoto: userPhoto,
+            child: Row(
+              children: [
+                IconWidget(
+                  key: KWidgetkeys.storyCardKeys.userIcon,
+                  icon: KIcon.person,
+                  background: AppColors.widgetBackground,
+                ),
+                KSizedBox.kWidthSizedBoxXS,
+                Expanded(
+                  child: Text(
+                    userName,
+                    key: KWidgetkeys.storyCardKeys.userName,
+                    style: AppTextStyle.titleXS,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            child: Align(
+              alignment: Alignment.centerRight,
+              child: Text(
+                storyDate.toLocal().toString().split(' ')[0],
+                key: KWidgetkeys.storyCardKeys.date,
+                style: AppTextStyle.titleS.copyWith(color: AppColors.lightGray),
+              ),
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class _StoryCardWidgetImplementation extends StatefulWidget {
-  const _StoryCardWidgetImplementation({
-    required this.userPhoto,
-    required this.userName,
-    required this.storyDate,
-    required this.story,
-  });
-
-  final String userPhoto;
-  final String userName;
-  final DateTime storyDate;
-  final String story;
-
-  @override
-  State<_StoryCardWidgetImplementation> createState() =>
-      _StoryCardWidgetImplementationState();
-}
-
-class _StoryCardWidgetImplementationState
-    extends State<_StoryCardWidgetImplementation>
-    with TickerProviderStateMixin {
-  late bool? like;
-  late int? maxLines;
-
-  @override
-  void initState() {
-    super.initState();
-    like = null;
-    maxLines = 10;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: ConstrainedBox(
-        constraints: const BoxConstraints(
-          maxWidth: KMinMaxSize.maxWidth640,
-        ),
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: Row(
-                    children: [
-                      const IconWidget(
-                        icon: KIcon.person,
-                        background: AppColors.widgetBackground,
-                      ),
-                      KSizedBox.kWidthSizedBoxXS,
-                      Expanded(
-                        child: Text(
-                          widget.userName,
-                          key: KWidgetkeys.storyCardKeys.userName,
-                          style: AppTextStyle.titleXS,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Expanded(
-                  child: Text(
-                    widget.storyDate.toLocal().toString().split(' ')[0],
-                    key: KWidgetkeys.storyCardKeys.date,
-                    style: AppTextStyle.titleS
-                        .copyWith(color: AppColors.lightGray),
-                  ),
-                ),
-              ],
-            ),
-            KSizedBox.kHeightSizedBoxSM,
-            CardTextDetailWidget(
-              text: widget.story,
-              maxLines: KDimensions.storyCardMaxLines,
-            ),
-            KSizedBox.kHeightSizedBoxSM,
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    InkWell(
-                      key: KWidgetkeys.storyCardKeys.likeIcon,
-                      onTap: () => setState(() {
-                        like == null || like == false
-                            ? like = true
-                            : like = null;
-                      }),
-                      child: like == null || !like!
-                          ? KIcon.like
-                          : KIcon.activeLike,
-                    ),
-                    KSizedBox.kWidthSizedBoxS,
-                    Container(
-                      key: KWidgetkeys.storyCardKeys.smileIcon,
-                      child: KIcon.smile,
-                    ),
-                    KSizedBox.kWidthSizedBoxS,
-                    InkWell(
-                      key: KWidgetkeys.storyCardKeys.dislikeIcon,
-                      onTap: () => setState(() {
-                        like == null || like! == true
-                            ? like = false
-                            : like = null;
-                      }),
-                      child: like == null || like!
-                          ? KIcon.dislike
-                          : KIcon.activeDislike,
-                    ),
-                  ],
-                ),
-                Container(
-                  key: KWidgetkeys.storyCardKeys.share,
-                  child: KIcon.share,
-                ),
-              ],
-            ),
-          ],
-        ),
       ),
     );
   }
