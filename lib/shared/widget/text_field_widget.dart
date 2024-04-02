@@ -92,7 +92,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
         keyboardType: widget.keyboardType ?? TextInputType.text,
         textInputAction: TextInputAction.done,
         textAlign: widget.textAlign ?? TextAlign.start,
-        style: AppTextStyle.lableMedium,
+        style: AppTextStyle.lableM,
         // Theme.of(context).textTheme.headlineSmall,
         key: widget.widgetKey,
         onChanged: widget.onChanged,

@@ -35,7 +35,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
           title: Text(
             widget.title,
             key: KWidgetkeys.questionKeys.title,
-            style: AppTextStyle.lableLarge,
+            style: AppTextStyle.lableL,
             maxLines: 1,
           ),
           onExpansionChanged: (expanded) {
@@ -57,7 +57,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
               child: Text(
                 widget.subtitle,
                 key: KWidgetkeys.questionKeys.subtitle,
-                style: AppTextStyle.lableMedium,
+                style: AppTextStyle.lableM,
                 softWrap: true,
                 maxLines: 3,
               ),

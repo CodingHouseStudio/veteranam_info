@@ -23,4 +23,5 @@ abstract class KIcon {
   static const Icon activeDislike = Icon(Icons.thumb_down);
   static const Icon share = Icon(Icons.file_upload_outlined);
   static const Icon error = Icon(Icons.error);
+  static const Icon safe = Icon(Icons.bookmark_border_sharp);
 }

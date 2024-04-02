@@ -1,4 +1,5 @@
 export 'box_widget.dart';
+export 'card_text_detail_widget.dart';
 export 'drop_list_field_widget.dart';
 export 'filter_box_widget.dart';
 export 'footer_widget.dart';
@@ -10,3 +11,4 @@ export 'profile_card_widget.dart';
 export 'question_widget.dart';
 export 'story_card_widget.dart';
 export 'text_field_widget.dart';
+export 'work_card_widget.dart';
