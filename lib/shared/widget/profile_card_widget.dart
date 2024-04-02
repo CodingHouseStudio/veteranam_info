@@ -80,7 +80,7 @@ class _ProfileCardWidgetState extends State<ProfileCardWidget> {
               Expanded(
                 child: Text(
                   KAppText.userName,
-                  style: AppTextStyle.lableMediumSmall,
+                  style: AppTextStyle.lableL,
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
@@ -102,7 +102,7 @@ class _ProfileCardWidgetState extends State<ProfileCardWidget> {
           children: [
             const Text(
               'E-mail:',
-              style: AppTextStyle.lableMedium,
+              style: AppTextStyle.lableM,
             ),
             TextField(
               decoration: InputDecoration(
@@ -120,7 +120,7 @@ class _ProfileCardWidgetState extends State<ProfileCardWidget> {
           children: [
             const Text(
               'Nickname:',
-              style: AppTextStyle.lableMedium,
+              style: AppTextStyle.lableM,
             ),
             TextField(
               decoration: InputDecoration(

@@ -37,8 +37,9 @@ part 'widget/story_card.dart';
 part 'widget/box.dart';
 part 'widget/card_text_detail.dart';
 part 'widget/work_card.dart';
-
-part 'widget/input_field_desk.dart';
+part 'widget/card_text_detail_evaluate.dart';
+part 'widget/card_add_image.dart';
+part 'widget/news_card.dart';
 
 abstract class KWidgetkeys {
   static _HomeKeys get homeKeys => _HomeKeys();
@@ -76,8 +77,10 @@ abstract class KWidgetkeys {
   static _BoxKeys get boxKeys => _BoxKeys();
   static _CardTextDetailKeys get cardTextDetailKeys => _CardTextDetailKeys();
   static _WorkCardKeys get workCardKeys => _WorkCardKeys();
-
-  static _InputWriteMsgDesk get inputKeysDesk => _InputWriteMsgDesk();
+  static _CardTextDetailEvaluateKeys get cardTextDetailEvaluateKeys =>
+      _CardTextDetailEvaluateKeys();
+  static _CardAddImageKeys get cardAddImageKeys => _CardAddImageKeys();
+  static _NewsCardKeys get newsCardKeys => _NewsCardKeys();
 }
 
 abstract class KWidgetKeysConstants {

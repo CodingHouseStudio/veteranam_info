@@ -1,14 +1,15 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:kozak/shared/shared.dart';
 
-import '../helpers.dart';
+import '../../text_dependency.dart';
 
 Future<void> boxHelper(
   WidgetTester tester,
 ) async {
   await scrollingHelper(
     tester: tester,
-    item: KWidgetkeys.boxKeys.text,
+    offset: KTestConstants.scrollingDown100,
+    itemKey: KWidgetkeys.boxKeys.text,
   );
 
   expect(find.byKey(KWidgetkeys.boxKeys.text), findsOneWidget);

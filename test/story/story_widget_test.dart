@@ -21,7 +21,7 @@ void main() {
 
       await tester.pumpAndSettle();
 
-      await storyCardHelper(tester);
+      await storyCardHelper(tester: tester);
 
       // await footerHelper(tester: tester, email: KTestText.useremail);
     });
@@ -40,7 +40,7 @@ void main() {
 
         await tester.pumpAndSettle();
 
-        await storyCardHelper(tester);
+        await storyCardHelper(tester: tester);
 
         await footerHelper(tester: tester, email: KTestText.useremail);
       });

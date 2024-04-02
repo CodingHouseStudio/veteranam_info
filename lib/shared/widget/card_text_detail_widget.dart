@@ -7,10 +7,14 @@ class CardTextDetailWidget extends StatefulWidget {
     required this.maxLines,
     this.icon,
     super.key,
+    this.buttonText,
+    this.buttonStyle,
   });
   final String text;
   final int maxLines;
   final Widget? icon;
+  final List<String>? buttonText;
+  final ButtonStyle? buttonStyle;
 
   @override
   State<CardTextDetailWidget> createState() => _CardTextDetailWidgetState();
@@ -51,11 +55,14 @@ class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
                         : maxLines = null;
                   });
                 },
-                style: KButtonStyles.whiteButtonStyleBorder,
+                style:
+                    widget.buttonStyle ?? KButtonStyles.whiteButtonStyleBorder,
                 child: Text(
                   maxLines == null
-                      ? KAppText.storyCardButtonNotDetail
-                      : KAppText.storyCardButtonDetail,
+                      ? widget.buttonText?.elementAt(1) ??
+                          KAppText.storyCardButtonNotDetail
+                      : widget.buttonText?.elementAt(0) ??
+                          KAppText.storyCardButtonDetail,
                   style: AppTextStyle.lableSSM,
                 ),
               ),

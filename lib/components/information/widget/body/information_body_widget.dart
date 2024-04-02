@@ -34,6 +34,11 @@ class InformationBodyWidget extends StatelessWidget {
           ),
           child: ListView(
             children: [
+              NewsCardWidget(
+                news: KMockText.cardData,
+                newsDate: KMockText.date,
+                title: KMockText.title,
+              ),
               FooterDescWidget(
                 isDesktop: isDesktop,
               ),
