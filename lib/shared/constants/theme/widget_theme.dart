@@ -28,6 +28,11 @@ abstract class KWidetTheme {
     color: AppColors.white,
   );
 
+  static BoxDecoration boxDecorationCircularGray = const BoxDecoration(
+    shape: BoxShape.circle,
+    color: Colors.grey,
+  );
+
   static InputDecoration inputDecoration = InputDecoration(
     hintStyle: AppTextStyle.hintM,
     contentPadding: const EdgeInsets.symmetric(
