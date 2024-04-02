@@ -10,7 +10,7 @@ Future<void> footerProfileRoutHelper({
 }) async {
   await scrollingHelper(
     tester: tester,
-    item: KWidgetkeys.footerKeys.profileButton,
+    itemKey: KWidgetkeys.footerKeys.profileButton,
   );
 
   expect(find.byKey(KWidgetkeys.footerKeys.profileButton), findsOneWidget);

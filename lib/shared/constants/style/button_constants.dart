@@ -48,4 +48,10 @@ abstract class KButtonStyles {
       borderRadius: KBorderRadius.kBorderRadiusM,
     ),
   );
+  static final ButtonStyle transparentButtonStyleBottomBorder =
+      TextButton.styleFrom(
+    minimumSize: const Size(KMinMaxSize.minWidth100, KMinMaxSize.minHeight50),
+    padding: const EdgeInsets.symmetric(horizontal: KPadding.kPaddingSizeXSS),
+    shape: LinearBorder.bottom(side: const BorderSide()),
+  );
 }

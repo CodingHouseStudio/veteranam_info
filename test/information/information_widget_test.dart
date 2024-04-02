@@ -21,6 +21,8 @@ void main() {
 
       await tester.pumpAndSettle();
 
+      await newsCardHelper(tester: tester);
+
       await footerHelper(tester: tester, email: KTestText.useremail);
     });
     group('Mock Go Router', () {
@@ -37,6 +39,8 @@ void main() {
         expect(find.byKey(KWidgetkeys.informationKeys.screen), findsOneWidget);
 
         await tester.pumpAndSettle();
+
+        await newsCardHelper(tester: tester);
 
         await footerHelper(tester: tester, email: KTestText.useremail);
       });

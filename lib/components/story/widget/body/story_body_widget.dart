@@ -35,10 +35,9 @@ class StoryBodyWidget extends StatelessWidget {
           child: ListView(
             children: [
               StoryCardWidget(
-                storyDate: KMockText.storyDate,
-                userPhoto: '',
+                storyDate: KMockText.date,
                 userName: KMockText.userName,
-                story: KMockText.story,
+                story: KMockText.cardData,
               ),
               FooterDescWidget(
                 isDesktop: isDesktop,

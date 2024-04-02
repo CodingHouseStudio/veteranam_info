@@ -1,41 +1,41 @@
 import 'package:kozak/shared/shared.dart';
 
 abstract class KAppText {
-  static const String logo = 'Veteran';
-  static const String enterButtonText = 'Увійти';
-  static const String searchTextFieldHint = 'Пошук...';
-  static const String filterItemResetAll = 'Скинути фільтри';
-  static const String nickname = '@veteran';
-  static const String email = 'example@gmail.com';
-  static const String anonymous = 'Бути анонімом';
-  static const String description =
+  static const logo = 'Veteran';
+  static const enterButtonText = 'Увійти';
+  static const searchTextFieldHint = 'Пошук...';
+  static const filterItemResetAll = 'Скинути фільтри';
+  static const messageTextFieldHint = 'Напишіть Ваше повідомлення';
+  static const nameTextFieldHint = "Напишіть ваще ім'я";
+  static const footerAboutUs = 'Про нас';
+  static const footerContact = 'Контакти';
+  static const footerConsultationOnline = 'Консультація онлайн';
+  static const footerStories = 'Історії';
+  static const footerDiscountsCoupons = 'Знижки і купони';
+  static const footerMyProfiel = 'Мій профіль';
+  static const footerWork = 'Робота';
+  static const footerInformation = 'Інформація';
+  static const footerForInvestors = 'Для інвесторів';
+  static const storyCardButtonDetail = 'Детальніше';
+  static const storyCardButtonNotDetail = 'Сховати';
+  static const nickname = '@veteran';
+  static const email = 'example@gmail.com';
+  static const anonymous = 'Бути анонімом';
+  static const description =
       'Якщо ви робите свій профіль анонімним, на вашій сторінці не\n'
       'буде відображатися персональна інформація, тільки\nnickname.';
-  static const String userName = 'Володимир Левандовський';
-  static const String messageTextFieldHint = 'Напишіть Ваше повідомлення';
-  static const String nameTextFieldHint = "Напишіть ваще ім'я";
-  static const String footerAboutUs = 'Про нас';
-  static const String footerContact = 'Контакти';
-  static const String footerConsultationOnline = 'Консультація онлайн';
-  static const String footerStories = 'Історії';
-  static const String footerDiscountsCoupons = 'Знижки і купони';
-  static const String footerMyProfiel = 'Мій профіль';
-  static const String inputMassage = 'Напишіть Ваше повідомлення';
-  static const String footerWork = 'Робота';
-  static const String footerInformation = 'Інформація';
-  static const String footerForInvestors = 'Для інвесторів';
-  static const String storyCardButtonDetail = 'Детальніше';
-  static const String storyCardButtonNotDetail = 'Сховати';
-  static const String questionTitle =
+  static const userName = 'Володимир Левандовський';
+  static const questionTitle =
       'Як мені знайти роботу за допомогою цього сайту?';
-  static const String questionSubtitle =
+  static const questionSubtitle =
       'Використовуйте веб-сайти спеціалізованих сервісів для пошуку роботи, '
       'таких як Indeed, LinkedIn, Glassdoor, Monster, або регіональні '
       'ресурси. Виберіть свою область інтересів та регіон, і шукайте '
       'вакансії, які відповідають вашим критеріям.';
-  static const String errorTitle = 'Помилка';
-  static const String error = 'Помилка при завнтаженні сторінки';
-  static const String workRespondButton = 'Відгукнутись';
+  static const errorTitle = 'Помилка';
+  static const error = 'Помилка при завнтаженні сторінки';
+  static const workRespondButton = 'Відгукнутись';
+  static const newsDetailButton = ['Читати більше', 'Читати менше'];
 
   static const buttonsText = [
     [
@@ -80,13 +80,15 @@ abstract class KMockText {
     'Стебник',
   ];
   static const filter = ['Пільги', 'Житло', 'Гарячі лінії'];
-  static final storyDate = DateTime(2024, 03, 12);
+  static final date = DateTime(2024, 03, 12);
   static const userName = 'Anonim23456';
   static const emial = 'example@gmail.com';
+  static const tags = ['Пільги'];
   static const workTitle = 'Комплектувальник товару в магазин';
   static const workPrice = '12000 грн +%';
   static const workCity = 'м.Одеса';
   static const workEmployer = 'ТОВ Сільпо';
+  static const title = 'Заголовок дуже довгий';
   static const workDescription = '''
 **Ми шукаємо відповідальну та організовану особу на посаду комплектувальника товару в наш магазин.** Це надзвичайно важлива роль, яка допоможе нам забезпечити ефективну роботу нашого магазину та задоволення потреб наших клієнтів.
 
@@ -111,7 +113,7 @@ abstract class KMockText {
 **Якщо ви зацікавлені у цій позиції та готові приєднатися до нашої команди, будь ласка, надсилайте свої резюме за вказаним нижче адресою електронної пошти.**
 ''';
 
-  static const story =
+  static const cardData =
       'У тихому містечку затишно жив пан Джонс, ветеран війни, '
       'який пройшов через низку важких випробувань на службі. Після '
       'повернення додому він зіткнувся з труднощами в адаптації до '
@@ -130,6 +132,7 @@ abstract class KMockText {
       'у містечку. Він показав, що, незважаючи на випробування, '
       'здатність до відновлення та допомога іншим може '
       'принести неймовірну силу та значення у житті.';
-  static const String storyImage =
+
+  static const image =
       'https://static.vecteezy.com/system/resources/thumbnails/008/492/251/small/back-to-school-illustration-cartoon-character-children-kid-png.png';
 }
