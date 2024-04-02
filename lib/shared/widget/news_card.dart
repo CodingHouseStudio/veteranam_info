@@ -42,8 +42,8 @@ class NewsCardWidget extends StatelessWidget {
         children: [
           KSizedBox.kHeightSizedBox28,
           Wrap(
-            spacing: 8,
-            runSpacing: 4,
+            spacing: KSize.kWrapSpacing8,
+            runSpacing: KSize.kWrapRunSpacing4,
             children: KMockText.tags.map((tag) {
               return IgnorePointer(
                 child: FilterChip(

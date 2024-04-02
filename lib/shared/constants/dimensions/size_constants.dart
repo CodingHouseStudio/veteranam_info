@@ -21,4 +21,7 @@ abstract class KSize {
   static const kFontL = 40.0;
 
   static const kPreferredSize = 160.0;
+
+  static const kWrapSpacing8 = 8.0;
+  static const kWrapRunSpacing4 = 4.0;
 }
