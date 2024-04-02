@@ -5,6 +5,7 @@ export 'footer_desc_widget.dart';
 export 'icon_widget.dart';
 export 'message_field_widget.dart';
 export 'nawbar_widget.dart';
+export 'profile_card_widget.dart';
 export 'question_widget.dart';
 export 'story_card_widget.dart';
 export 'text_field_widget.dart';
