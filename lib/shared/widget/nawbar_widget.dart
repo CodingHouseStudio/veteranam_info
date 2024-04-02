@@ -36,81 +36,107 @@ class _NawbarWidgetState extends State<NawbarWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: KBorderRadius.kBorderRadiusM,
-        color: AppColors.widgetBackground,
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(KPadding.kPaddingSizeS),
-        child: LayoutBuilder(
-          builder: (BuildContext context, BoxConstraints constraints) {
-            final isMobile = constraints.maxWidth <
-                PlatformConstants.minWidthThresholdMobile;
-            return Row(
-              children: [
-                if (!(isMobile && isFocused))
-                  Row(
-                    children: [
-                      KSizedBox.kWidthSizedBoxM,
-                      Text(
-                        KAppText.appName,
-                        key: KWidgetkeys.nawbarKeys.title,
-                        style: AppTextStyle.title,
-                      ),
-                      KSizedBox.kWidthSizedBoxML,
-                    ],
-                  ),
-                Expanded(
-                  child: TextFieldWidget(
-                    key: _formKey,
-                    widgetKey: KWidgetkeys.nawbarKeys.field,
-                    hintStyle: AppTextStyle.lableMedium,
-                    focusNode: focusNode,
-                    prefixIcon: KIcon.search,
-                    onChanged: widget.search,
-                    hintText: KAppText.searchTextFieldHint,
-                    suffixIcon: isMobile
-                        ? Container(
-                            key: KWidgetkeys.nawbarKeys.iconMic,
-                            child: KIcon.mic,
-                          )
-                        : null,
-                    border: KBorder.outlineInputTransparent,
-                    enabledBorder: KBorder.outlineInputTransparent,
-                    focusedBorder: KBorder.outlineInputTransparent,
-                    disposeFocusNode: false,
-                  ),
-                ),
-                if (!isMobile)
-                  Row(
-                    children: [
-                      IconWidget(
-                        key: KWidgetkeys.nawbarKeys.iconMic,
-                        icon: KIcon.mic,
-                      ),
-                      KSizedBox.kWidthSizedBoxML,
-                      TextButton(
-                        key: KWidgetkeys.nawbarKeys.button,
-                        style: KButtonStyles.whiteButtonStyle,
-                        onPressed: null,
-                        child: const Text(
-                          KAppText.enterButtonText,
-                          style: AppTextStyle.lableMedium,
+    return LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) {
+        final isMobile =
+            constraints.maxWidth < KPlatformConstants.minWidthThresholdMobile;
+        final isTablet = constraints.maxWidth >=
+                KPlatformConstants.minWidthThresholdMobile &&
+            constraints.maxWidth < KPlatformConstants.minWidthThresholdDesktop;
+        final isDesktop =
+            constraints.maxWidth > KPlatformConstants.minWidthThresholdDesktop;
+
+        return Padding(
+          padding: EdgeInsets.only(
+            left: KPadding.kPaddingSizeXXL *
+                (isMobile
+                    ? KPlatformConstants.mobilePaddingKoefficient
+                    : (isTablet
+                        ? KPlatformConstants.tabletPaddingKoefficient
+                        : KPlatformConstants.desktopPaddingKoefficient)),
+            right: KPadding.kPaddingSizeXXL *
+                (isMobile
+                    ? KPlatformConstants.mobilePaddingKoefficient
+                    : (isTablet
+                        ? KPlatformConstants.tabletPaddingKoefficient
+                        : KPlatformConstants.desktopPaddingKoefficient)),
+          ),
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: KBorderRadius.kBorderRadiusM,
+              color: AppColors.widgetBackground,
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(KPadding.kPaddingSizeS),
+              child: Row(
+                children: [
+                  if (isDesktop || !isFocused)
+                    Row(
+                      children: [
+                        KSizedBox.kWidthSizedBoxM,
+                        Text(
+                          KAppText.logo,
+                          key: KWidgetkeys.nawbarKeys.title,
+                          style: isDesktop
+                              ? AppTextStyle.titleMediumLarge
+                              : AppTextStyle.title,
                         ),
-                      ),
-                    ],
+                        KSizedBox.kWidthSizedBoxML,
+                      ],
+                    ),
+                  Expanded(
+                    child: TextFieldWidget(
+                      key: _formKey,
+                      widgetKey: KWidgetkeys.nawbarKeys.field,
+                      hintStyle: isDesktop
+                          ? AppTextStyle.lableMedium
+                          : AppTextStyle.lableSmall,
+                      focusNode: focusNode,
+                      prefixIcon: KIcon.search,
+                      onChanged: widget.search,
+                      hintText: KAppText.searchTextFieldHint,
+                      suffixIcon: isDesktop
+                          ? null
+                          : Container(
+                              key: KWidgetkeys.nawbarKeys.iconMic,
+                              child: KIcon.mic,
+                            ),
+                      border: KBorder.outlineInputTransparent,
+                      enabledBorder: KBorder.outlineInputTransparent,
+                      focusedBorder: KBorder.outlineInputTransparent,
+                      disposeFocusNode: false,
+                    ),
                   ),
-                if (!(isMobile && isFocused))
-                  IconWidget(
-                    key: KWidgetkeys.nawbarKeys.iconPerson,
-                    icon: KIcon.person,
-                  ),
-              ],
-            );
-          },
-        ),
-      ),
+                  if (isDesktop)
+                    Row(
+                      children: [
+                        IconWidget(
+                          key: KWidgetkeys.nawbarKeys.iconMic,
+                          icon: KIcon.mic,
+                        ),
+                        KSizedBox.kWidthSizedBoxML,
+                        TextButton(
+                          key: KWidgetkeys.nawbarKeys.button,
+                          style: KButtonStyles.whiteButtonStyle,
+                          onPressed: null,
+                          child: const Text(
+                            KAppText.enterButtonText,
+                            style: AppTextStyle.lableMedium,
+                          ),
+                        ),
+                      ],
+                    ),
+                  if (isDesktop || !isFocused)
+                    IconWidget(
+                      key: KWidgetkeys.nawbarKeys.iconPerson,
+                      icon: KIcon.person,
+                    ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 

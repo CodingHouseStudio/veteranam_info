@@ -1,5 +1,7 @@
+import 'package:kozak/shared/shared.dart';
+
 abstract class KAppText {
-  static const String appName = 'Veteran';
+  static const String logo = 'Veteran';
   static const String enterButtonText = 'Увійти';
   static const String searchTextFieldHint = 'Пошук...';
   static const String filterItemResetAll = 'Скинути фільтри';
@@ -32,6 +34,38 @@ abstract class KAppText {
       'вакансії, які відповідають вашим критеріям.';
   static const String errorTitle = 'Помилка';
   static const String error = 'Помилка при завнтаженні сторінки';
+
+  static const buttonsText = [
+    [
+      KAppText.footerAboutUs,
+      KAppText.footerForInvestors,
+      KAppText.footerContact,
+    ],
+    [
+      KAppText.footerStories,
+      KAppText.footerDiscountsCoupons,
+      KAppText.footerMyProfiel,
+    ],
+    [
+      KAppText.footerWork,
+      KAppText.footerInformation,
+      KAppText.footerConsultationOnline,
+    ],
+  ];
+
+  static final routes = [
+    ['', '${KRoute.home.path}${KRoute.investors.path}', ''],
+    [
+      '${KRoute.home.path}${KRoute.story.path}',
+      '${KRoute.home.path}${KRoute.discounts.path}',
+      '${KRoute.home.path}${KRoute.profile.path}',
+    ],
+    [
+      '${KRoute.home.path}${KRoute.work.path}',
+      '${KRoute.home.path}${KRoute.information.path}',
+      '',
+    ],
+  ];
 }
 
 abstract class KMockText {
@@ -46,6 +80,7 @@ abstract class KMockText {
   static const filter = ['Пільги', 'Житло', 'Гарячі лінії'];
   static final storyDate = DateTime(2024, 03, 12);
   static const userName = 'Anonim23456';
+  static const emial = 'example@gmail.com';
   static const String story =
       'У тихому містечку затишно жив пан Джонс, ветеран війни, '
       'який пройшов через низку важких випробувань на службі. Після '
