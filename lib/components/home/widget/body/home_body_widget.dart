@@ -63,6 +63,8 @@ class HomeBodyWidget extends StatelessWidget {
           KSizedBox.kHeightSizedBoxM,
           const FooterDescWidget(),
           KSizedBox.kHeightSizedBoxM,
+          InputWriteMsgDesk(changeMessage: (_) {}),
+          KSizedBox.kHeightSizedBoxM,
           const ProfileCardWidget(),
         ],
       ),

@@ -3,6 +3,7 @@ export 'drop_list_field_widget.dart';
 export 'filter_box_widget.dart';
 export 'footer_widget.dart';
 export 'icon_widget.dart';
+export 'input_write_msg_desk.dart';
 export 'message_field_widget.dart';
 export 'nawbar_widget.dart';
 export 'profile_card_widget.dart';
