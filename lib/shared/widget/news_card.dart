@@ -37,37 +37,32 @@ class NewsCardWidget extends StatelessWidget {
           ),
         ],
       ),
-      bottom: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          KSizedBox.kHeightSizedBox28,
-          Wrap(
-            spacing: KSize.kWrapSpacing8,
-            runSpacing: KSize.kWrapRunSpacing4,
-            children: KMockText.tags.map((tag) {
-              return Container(
-                key: KWidgetkeys.newsCardKeys.tags,
-                decoration: KWidetTheme.boxDecorationCard,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: KPadding.kPaddingSize4,
-                    horizontal: KPadding.kPaddingSizeXSS,
+      bottom: Wrap(
+        spacing: KSize.kWrapSpacing8,
+        runSpacing: KSize.kWrapRunSpacing4,
+        children: KMockText.tags.map((tag) {
+          return Container(
+            key: KWidgetkeys.newsCardKeys.tags,
+            decoration: KWidetTheme.boxDecorationCard,
+            margin: const EdgeInsets.only(top: KPadding.kPaddingSize24),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: KPadding.kPaddingSize8,
+                horizontal: KPadding.kPaddingSize4,
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    tag,
+                    style: AppTextStyle.lableXS,
                   ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        tag,
-                        style: AppTextStyle.lableXS,
-                      ),
-                      KIcon.check,
-                    ],
-                  ),
-                ),
-              );
-            }).toList(),
-          ),
-        ],
+                  KIcon.check,
+                ],
+              ),
+            ),
+          );
+        }).toList(),
       ),
     );
   }
