@@ -2,16 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:kozak/shared/shared.dart';
 
-import '../../constants.dart';
+import '../helpers.dart';
 
 Future<void> nawbarHelper({
   required WidgetTester tester,
   required String searchText,
 }) async {
-  await TestWidgetsFlutterBinding.ensureInitialized()
-      .setSurfaceSize(KTestData.windowTableetSize);
-
-  await tester.pumpAndSettle();
+  await changeWindowSizeHelper(
+    tester: tester,
+  );
 
   expect(find.byKey(KWidgetkeys.nawbarKeys.title), findsOneWidget);
 
@@ -41,7 +40,7 @@ Future<void> nawbarHelper({
   expect(find.byKey(KWidgetkeys.nawbarKeys.iconPerson), findsOneWidget);
   expect(find.byKey(KWidgetkeys.nawbarKeys.title), findsOneWidget);
 
-  await tester.binding.setSurfaceSize(null);
+  await changeWindowSizeHelper(tester: tester, setDefaultSize: true);
 
   final textField = tester.widget<TextField>(
     find.byKey(

@@ -75,3 +75,23 @@ abstract class KWidgetkeys {
 
   static _InputWriteMsgDesk get inputKeysDesk => _InputWriteMsgDesk();
 }
+
+abstract class KWidgetKeysConstants {
+  static final buttonsKey = [
+    [
+      KWidgetkeys.footerKeys.aboutUsButton,
+      KWidgetkeys.footerKeys.investorsButton,
+      KWidgetkeys.footerKeys.contactButton,
+    ],
+    [
+      KWidgetkeys.footerKeys.storyButton,
+      KWidgetkeys.footerKeys.discountsButton,
+      KWidgetkeys.footerKeys.profileButton,
+    ],
+    [
+      KWidgetkeys.footerKeys.workButton,
+      KWidgetkeys.footerKeys.informationButton,
+      KWidgetkeys.footerKeys.consultationOnlineButton,
+    ],
+  ];
+}

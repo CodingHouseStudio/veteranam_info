@@ -100,25 +100,31 @@ class _StoryCardWidgetImplementationState
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Row(
-                  children: [
-                    const IconWidget(
-                      icon: KIcon.person,
-                      background: AppColors.widgetBackground,
-                    ),
-                    KSizedBox.kWidthSizedBoxXS,
-                    Text(
-                      widget.userName,
-                      key: KWidgetkeys.storyCardKeys.userName,
-                      style: AppTextStyle.titleSmall,
-                    ),
-                  ],
+                Expanded(
+                  child: Row(
+                    children: [
+                      const IconWidget(
+                        icon: KIcon.person,
+                        background: AppColors.widgetBackground,
+                      ),
+                      KSizedBox.kWidthSizedBoxXS,
+                      Expanded(
+                        child: Text(
+                          widget.userName,
+                          key: KWidgetkeys.storyCardKeys.userName,
+                          style: AppTextStyle.titleSmall,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-                Text(
-                  widget.storyDate.toLocal().toString().split(' ')[0],
-                  key: KWidgetkeys.storyCardKeys.date,
-                  style: AppTextStyle.titleMediumSmall
-                      .copyWith(color: AppColors.lightGray),
+                Expanded(
+                  child: Text(
+                    widget.storyDate.toLocal().toString().split(' ')[0],
+                    key: KWidgetkeys.storyCardKeys.date,
+                    style: AppTextStyle.titleMediumSmall
+                        .copyWith(color: AppColors.lightGray),
+                  ),
                 ),
               ],
             ),
