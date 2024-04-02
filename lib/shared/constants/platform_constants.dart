@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 
-abstract class PlatformConstants {
+abstract class KPlatformConstants {
   static final bool isWebMobile = kIsWeb &&
       (defaultTargetPlatform == TargetPlatform.android ||
           defaultTargetPlatform == TargetPlatform.iOS);
@@ -13,4 +13,7 @@ abstract class PlatformConstants {
   static const minWidthThresholdTablet = 1000; // Existing threshold for tablet
   static const minWidthThresholdDesktop =
       1400; // Existing threshold for desktop
+  static const mobilePaddingKoefficient = 0.25;
+  static const tabletPaddingKoefficient = 3;
+  static const desktopPaddingKoefficient = 4;
 }

@@ -34,7 +34,7 @@ void main() {
 
       await boxHelper(tester);
 
-      await footerHelper(tester);
+      await footerHelper(tester: tester, email: KTestText.useremail);
     });
     group('Mock Go Router', () {
       late MockGoRouter mockGoRouter;
@@ -64,7 +64,7 @@ void main() {
 
         await boxHelper(tester);
 
-        await footerHelper(tester);
+        await footerHelper(tester: tester, email: KTestText.useremail);
       });
 
       group('go to', () {
