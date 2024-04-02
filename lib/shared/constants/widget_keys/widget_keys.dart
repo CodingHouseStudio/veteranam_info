@@ -41,3 +41,23 @@ abstract class KWidgetkeys {
   static _StoryCardKeys get storyCardKeys => _StoryCardKeys();
   static _BoxKeys get boxKeys => _BoxKeys();
 }
+
+abstract class KWidgetKeysConstants {
+  static final buttonsKey = [
+    [
+      KWidgetkeys.footerKeys.aboutUsButton,
+      KWidgetkeys.footerKeys.investorsButton,
+      KWidgetkeys.footerKeys.contactButton,
+    ],
+    [
+      KWidgetkeys.footerKeys.storyButton,
+      KWidgetkeys.footerKeys.discountsButton,
+      KWidgetkeys.footerKeys.profileButton,
+    ],
+    [
+      KWidgetkeys.footerKeys.workButton,
+      KWidgetkeys.footerKeys.informationButton,
+      KWidgetkeys.footerKeys.consultationOnlineButton,
+    ],
+  ];
+}
