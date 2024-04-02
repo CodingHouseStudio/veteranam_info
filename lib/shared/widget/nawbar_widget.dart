@@ -78,8 +78,8 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                           KAppText.logo,
                           key: KWidgetkeys.nawbarKeys.title,
                           style: isDesktop
-                              ? AppTextStyle.titleMediumLarge
-                              : AppTextStyle.title,
+                              ? AppTextStyle.titleML
+                              : AppTextStyle.titleM,
                         ),
                         KSizedBox.kWidthSizedBoxML,
                       ],
@@ -88,9 +88,8 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                     child: TextFieldWidget(
                       key: _formKey,
                       widgetKey: KWidgetkeys.nawbarKeys.field,
-                      hintStyle: isDesktop
-                          ? AppTextStyle.lableMedium
-                          : AppTextStyle.lableSmall,
+                      hintStyle:
+                          isDesktop ? AppTextStyle.lableM : AppTextStyle.lableS,
                       focusNode: focusNode,
                       prefixIcon: KIcon.search,
                       onChanged: widget.search,
@@ -121,7 +120,7 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                           onPressed: null,
                           child: const Text(
                             KAppText.enterButtonText,
-                            style: AppTextStyle.lableMedium,
+                            style: AppTextStyle.lableM,
                           ),
                         ),
                       ],

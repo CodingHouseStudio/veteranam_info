@@ -20,6 +20,8 @@ part 'widget/footer.dart';
 part 'widget/message_field.dart';
 part 'widget/story_card.dart';
 part 'widget/box.dart';
+part 'widget/card_text_detail.dart';
+part 'widget/work_card.dart';
 
 abstract class KWidgetkeys {
   static _HomeKeys get homeKeys => _HomeKeys();
@@ -40,6 +42,8 @@ abstract class KWidgetkeys {
   static _DropListFieldKeys get dropListFieldKeys => _DropListFieldKeys();
   static _StoryCardKeys get storyCardKeys => _StoryCardKeys();
   static _BoxKeys get boxKeys => _BoxKeys();
+  static _CardTextDetailKeys get cardTextDetailKeys => _CardTextDetailKeys();
+  static _WorkCardKeys get workCardKeys => _WorkCardKeys();
 }
 
 abstract class KWidgetKeysConstants {

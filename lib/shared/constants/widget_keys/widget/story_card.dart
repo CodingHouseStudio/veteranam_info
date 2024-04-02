@@ -6,8 +6,6 @@ class _StoryCardKeys {
   final userIcon = const Key('story_card_user_icon');
   final userName = const Key('story_card_user_name');
   final date = const Key('story_card_date');
-  final text = const Key('story_card_text');
-  final button = const Key('story_card_button');
   final likeIcon = const Key('story_card_like_icon');
   final dislikeIcon = const Key('story_card_dislike_icon');
   final smileIcon = const Key('story_card_smile_icon');

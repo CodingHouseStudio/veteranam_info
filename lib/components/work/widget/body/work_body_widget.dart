@@ -34,6 +34,13 @@ class WorkBodyWidget extends StatelessWidget {
           ),
           child: ListView(
             children: [
+              const WorkCardWidget(
+                title: KMockText.workTitle,
+                city: KMockText.workCity,
+                price: KMockText.workPrice,
+                description: KMockText.workDescription,
+                employer: KMockText.workEmployer,
+              ),
               FooterDescWidget(
                 isDesktop: isDesktop,
               ),
