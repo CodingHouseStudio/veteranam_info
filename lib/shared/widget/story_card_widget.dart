@@ -112,7 +112,7 @@ class _StoryCardWidgetImplementationState
                         child: Text(
                           widget.userName,
                           key: KWidgetkeys.storyCardKeys.userName,
-                          style: AppTextStyle.titleSmall,
+                          style: AppTextStyle.titleXS,
                         ),
                       ),
                     ],
@@ -122,38 +122,16 @@ class _StoryCardWidgetImplementationState
                   child: Text(
                     widget.storyDate.toLocal().toString().split(' ')[0],
                     key: KWidgetkeys.storyCardKeys.date,
-                    style: AppTextStyle.titleMediumSmall
+                    style: AppTextStyle.titleS
                         .copyWith(color: AppColors.lightGray),
                   ),
                 ),
               ],
             ),
             KSizedBox.kHeightSizedBoxSM,
-            Text(
-              widget.story,
-              key: KWidgetkeys.storyCardKeys.text,
-              maxLines: maxLines,
-              style: AppTextStyle.lableSmall,
-              overflow: TextOverflow.clip,
-            ),
-            KSizedBox.kHeightSizedBoxSM,
-            Align(
-              alignment: Alignment.bottomLeft,
-              child: TextButton(
-                key: KWidgetkeys.storyCardKeys.button,
-                onPressed: () {
-                  setState(() {
-                    maxLines == null ? maxLines = 10 : maxLines = null;
-                  });
-                },
-                style: KButtonStyles.whiteButtonStyleBorder,
-                child: Text(
-                  maxLines == null
-                      ? KAppText.storyCardButtonNotDetail
-                      : KAppText.storyCardButtonDetail,
-                  style: AppTextStyle.lableMediumSmall,
-                ),
-              ),
+            CardTextDetailWidget(
+              text: widget.story,
+              maxLines: KDimensions.storyCardMaxLines,
             ),
             KSizedBox.kHeightSizedBoxSM,
             Row(

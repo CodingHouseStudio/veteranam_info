@@ -18,7 +18,7 @@ ThemeData themeData = ThemeData(
   dividerColor: Colors.transparent,
   appBarTheme: const AppBarTheme(
     centerTitle: true,
-    titleTextStyle: AppTextStyle.lableMedium,
+    titleTextStyle: AppTextStyle.lableM,
     backgroundColor: AppColors.background,
     elevation: 0,
   ),

@@ -29,7 +29,7 @@ abstract class KWidetTheme {
   );
 
   static InputDecoration inputDecoration = InputDecoration(
-    hintStyle: AppTextStyle.hint,
+    hintStyle: AppTextStyle.hintM,
     contentPadding: const EdgeInsets.symmetric(
       horizontal: KPadding.kPaddingSizeM,
     ),
