@@ -49,6 +49,18 @@ abstract class AppTextStyle {
     fontWeight: FontWeight.w400,
   );
 
+  static const lableMediumSmallGrey = TextStyle(
+    color: AppColors.grey,
+    fontSize: KSize.kFontM,
+    fontWeight: FontWeight.w400,
+  );
+
+  static const lableSmallGrey = TextStyle(
+    color: AppColors.grey,
+    fontSize: KSize.kFontXS,
+    fontWeight: FontWeight.w400,
+  );
+
   static const lableSmall = TextStyle(
     color: AppColors.black,
     fontSize: KSize.kFontS,
