@@ -45,21 +45,23 @@ class NewsCardWidget extends StatelessWidget {
             spacing: KSize.kWrapSpacing8,
             runSpacing: KSize.kWrapRunSpacing4,
             children: KMockText.tags.map((tag) {
-              return IgnorePointer(
-                child: FilterChip(
-                  key: KWidgetkeys.newsCardKeys.tags,
-                  visualDensity: VisualDensity.compact,
-                  showCheckmark: true,
-                  label: Text(
-                    tag,
+              return Container(
+                key: KWidgetkeys.newsCardKeys.tags,
+                decoration: KWidetTheme.boxDecorationCard,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: KPadding.kPaddingSize4,
+                    horizontal: KPadding.kPaddingSizeXSS,
                   ),
-                  selectedColor: AppColors.widgetBackground,
-                  checkmarkColor: AppColors.black,
-                  selected: true,
-                  labelStyle: AppTextStyle.lableXS,
-                  onSelected: (value) {},
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(KSize.kRadiusM),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        tag,
+                        style: AppTextStyle.lableXS,
+                      ),
+                      KIcon.check,
+                    ],
                   ),
                 ),
               );
