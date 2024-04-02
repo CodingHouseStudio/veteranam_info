@@ -14,8 +14,10 @@ abstract class KBorder {
     borderSide: const BorderSide(color: AppColors.error),
     borderRadius: KBorderRadius.kBorderRadiusM,
   );
-  OutlineInputBorder buttonStyleOutlineInputBorder = OutlineInputBorder(
-    borderSide: const BorderSide(color: KColorTheme.background),
+  static OutlineInputBorder buttonStyleOutlineInputBorder = OutlineInputBorder(
+    borderSide: const BorderSide(
+      color: AppColors.widgetBackground,
+    ),
     borderRadius: BorderRadius.circular(KPadding.kPaddingSizeS),
   );
 }

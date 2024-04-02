@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:kozak/shared/constants/constants.dart';
 import 'package:kozak/shared/shared.dart';
 
 class ProfileCardWidget extends StatefulWidget {
@@ -24,7 +23,7 @@ class _ProfileCardWidgetState extends State<ProfileCardWidget> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _buildProfileHeader(),
-              KSizedBox.kHeightSizedBoxS,
+              KSizedBox.kHeightSizedBoxM,
               _buildProfileInfo(),
               KSizedBox.kHeightSizedBoxS,
               Column(
@@ -33,7 +32,7 @@ class _ProfileCardWidgetState extends State<ProfileCardWidget> {
                   Row(
                     children: [
                       Switch(
-                        activeColor: KColorTheme.error,
+                        activeColor: AppColors.error,
                         value: _value,
                         onChanged: (newValue) {
                           setState(() {
@@ -47,7 +46,7 @@ class _ProfileCardWidgetState extends State<ProfileCardWidget> {
                   ),
                   const Text(
                     KAppText.description,
-                    style: KAppTextStyle.lableSmallGrey,
+                    style: AppTextStyle.lableSmallGrey,
                   ),
                 ],
               ),
@@ -67,23 +66,28 @@ class _ProfileCardWidgetState extends State<ProfileCardWidget> {
           height: 50,
           decoration: BoxDecoration(
             borderRadius: KBorderRadius.kBorderRadiusL,
-            color: KColorTheme.widgetBackground,
+            color: AppColors.widgetBackground,
           ),
           child: const Center(
             child: KIcon.person,
           ),
         ),
-        KSizedBox.kWidthSizedBoxS,
-        const Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              KAppText.userName,
-              style: KAppTextStyle.lableMediumSmall,
-            ),
-            KSizedBox.kWidthSizedBoxXS,
-            KIcon.edit,
-          ],
+        KSizedBox.kWidthSizedBoxM,
+        const Flexible(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Text(
+                  KAppText.userName,
+                  style: AppTextStyle.lableMediumSmall,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+              KSizedBox.kWidthSizedBoxXS,
+              KIcon.edit,
+            ],
+          ),
         ),
       ],
     );
@@ -98,16 +102,15 @@ class _ProfileCardWidgetState extends State<ProfileCardWidget> {
           children: [
             const Text(
               'E-mail:',
-              style: KAppTextStyle.lableMedium,
+              style: AppTextStyle.lableMedium,
             ),
-            TextButton(
-              key: KWidgetkeys.searchKeys.button,
-              style: KButtonStyles.backgroundButtonStyleUI,
-              onPressed: null,
-              child: const Text(
-                KAppText.email,
-                style: KAppTextStyle.lableMediumSmallGrey,
+            TextField(
+              decoration: InputDecoration(
+                border: KBorder.buttonStyleOutlineInputBorder,
+                labelText: KAppText.email,
+                labelStyle: AppTextStyle.lableMediumSmallGrey,
               ),
+              onChanged: (value) {},
             ),
           ],
         ),
@@ -117,16 +120,15 @@ class _ProfileCardWidgetState extends State<ProfileCardWidget> {
           children: [
             const Text(
               'Nickname:',
-              style: KAppTextStyle.lableMedium,
+              style: AppTextStyle.lableMedium,
             ),
-            TextButton(
-              key: KWidgetkeys.searchKeys.button,
-              style: KButtonStyles.backgroundButtonStyleUI,
-              onPressed: null,
-              child: const Text(
-                KAppText.nickname,
-                style: KAppTextStyle.lableMediumSmallGrey,
+            TextField(
+              decoration: InputDecoration(
+                border: KBorder.buttonStyleOutlineInputBorder,
+                labelText: KAppText.nickname,
+                labelStyle: AppTextStyle.lableMediumSmallGrey,
               ),
+              onChanged: (value) {},
             ),
           ],
         ),
