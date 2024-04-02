@@ -1,4 +1,6 @@
 export 'box_widget.dart';
+export 'card_add_image.dart';
+export 'card_text_detail_evaluate_widget.dart';
 export 'card_text_detail_widget.dart';
 export 'drop_list_field_widget.dart';
 export 'filter_box_widget.dart';
@@ -6,6 +8,7 @@ export 'footer_widget.dart';
 export 'icon_widget.dart';
 export 'message_field_widget.dart';
 export 'nawbar_widget.dart';
+export 'news_card.dart';
 export 'question_widget.dart';
 export 'story_card_widget.dart';
 export 'text_field_widget.dart';

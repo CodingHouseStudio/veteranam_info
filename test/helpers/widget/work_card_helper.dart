@@ -20,5 +20,5 @@ Future<void> workCardHelper(
 
   expect(find.byKey(KWidgetkeys.workCardKeys.button), findsOneWidget);
 
-  await cardTextDetailHelper(tester);
+  await cardTextDetailHelper(tester: tester);
 }
