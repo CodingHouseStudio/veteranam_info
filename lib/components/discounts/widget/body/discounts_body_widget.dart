@@ -34,6 +34,9 @@ class DiscountsBodyWidget extends StatelessWidget {
           ),
           child: ListView(
             children: [
+              KSizedBox.kHeightSizedBoxM,
+              const ProfileCardWidget(),
+              KSizedBox.kHeightSizedBoxM,
               FooterDescWidget(
                 isDesktop: isDesktop,
               ),
