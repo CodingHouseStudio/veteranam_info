@@ -1,3 +1,6 @@
+export 'about_us/about_us.dart';
+export 'consultation/consultation.dart';
+export 'contact/contact.dart';
 export 'discounts/discounts.dart';
 export 'error/error.dart';
 export 'home/home.dart';

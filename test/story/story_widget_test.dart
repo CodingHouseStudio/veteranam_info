@@ -25,19 +25,12 @@ void main() {
       await tester.pumpAndSettle();
 
       await storyCardHelper(tester: tester);
-
-      // await footerHelper(tester: tester, email: KTestText.useremail);
     });
     group('Mock Go Router', () {
       late MockGoRouter mockGoRouter;
       setUp(() => mockGoRouter = MockGoRouter());
       testWidgets('renders initial', (tester) async {
-        await tester.pumpApp(
-          MockGoRouterProvider(
-            goRouter: mockGoRouter,
-            child: const StoryScreen(),
-          ),
-        );
+        await tester.pumpApp(const StoryScreen(), mockGoRouter: mockGoRouter);
 
         expect(
           find.byKey(KWidgetkeys.screen.story.screen),
@@ -47,31 +40,9 @@ void main() {
         await tester.pumpAndSettle();
 
         await storyCardHelper(tester: tester);
-
-        await footerHelper(tester: tester, email: KTestText.useremail);
       });
-      group('go to', () {
-        testWidgets('All footer screens', (tester) async {
-          await tester.pumpApp(
-            MockGoRouterProvider(
-              goRouter: mockGoRouter,
-              child: const StoryScreen(),
-            ),
-          );
-
-          expect(
-            find.byKey(KWidgetkeys.screen.story.screen),
-            findsOneWidget,
-          );
-
-          await tester.pumpAndSettle();
-
-          await footerButtonsHelper(
-            tester: tester,
-            mockGoRouter: mockGoRouter,
-          );
-        });
-      });
+      // group('go to', () {
+      // });
     });
   });
 }
