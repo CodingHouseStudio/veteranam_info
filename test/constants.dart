@@ -12,10 +12,6 @@ Future<void> setUpGlobal({bool? kIsWeb}) async {
   Bloc.observer = const AppBlocObserver();
 }
 
-abstract class KTestData {
-  static const windowTableetSize = Size(1500, 1500);
-}
-
 abstract class KTestText {
   static const filter = 'filter_test';
 
@@ -37,4 +33,6 @@ abstract class KTestConstants {
   static const scrollingDown100 = Offset(0, -100);
   static const scrollingDown = Offset(0, -4000);
   static const scrollingUp = Offset(0, 4000);
+
+  static const windowTabletSize = Size(1500, 1500);
 }

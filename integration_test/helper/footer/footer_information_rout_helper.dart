@@ -11,7 +11,7 @@ Future<void> footerInformationRoutHelper(
   );
   await scrollingHelper(
     tester: tester,
-    item: KWidgetkeys.footerKeys.informationButton,
+    itemKey: KWidgetkeys.footerKeys.informationButton,
   );
 
   expect(find.byKey(KWidgetkeys.footerKeys.informationButton), findsOneWidget);

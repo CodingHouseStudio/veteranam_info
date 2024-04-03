@@ -1,8 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:kozak/shared/shared.dart';
 
-import '../../constants.dart';
-import '../helper.dart';
+import '../../text_dependency.dart';
 
 Future<void> footerHelper({
   required WidgetTester tester,
@@ -10,11 +9,6 @@ Future<void> footerHelper({
 }) async {
   await scrollingHelper(
     tester: tester,
-  );
-
-  await changeWindowSizeHelper(
-    tester: tester,
-    windowSize: KTestConstants.windowMobileSize,
   );
 
   expect(find.byKey(KWidgetkeys.footerKeys.logo), findsOneWidget);
@@ -51,5 +45,5 @@ Future<void> footerHelper({
     findsNothing,
   );
 
-  await changeWindowSizeHelper(tester: tester);
+  await changeWindowSizeHelper(tester: tester, setDefaultSize: true);
 }

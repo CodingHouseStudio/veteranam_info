@@ -11,7 +11,7 @@ Future<void> footerWorkRoutHelper(
   );
   await scrollingHelper(
     tester: tester,
-    item: KWidgetkeys.footerKeys.workButton,
+    itemKey: KWidgetkeys.footerKeys.workButton,
   );
 
   expect(find.byKey(KWidgetkeys.footerKeys.workButton), findsOneWidget);
