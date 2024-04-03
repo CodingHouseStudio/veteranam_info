@@ -9,7 +9,7 @@ Future<void> changeWindowSizeHelper({
   if (setDefaultSize) {
     await tester.binding.setSurfaceSize(null);
   } else {
-    await tester.binding.setSurfaceSize(KTestData.windowTableetSize);
+    await tester.binding.setSurfaceSize(KTestConstants.windowTabletSize);
   }
 
   await tester.pumpAndSettle();
