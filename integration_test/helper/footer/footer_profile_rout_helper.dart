@@ -19,4 +19,6 @@ Future<void> footerProfileRoutHelper(
   await tester.tap(find.byKey(KWidgetkeys.footerKeys.profileButton));
 
   await tester.pumpAndSettle();
+
+  expect(find.byKey(KWidgetkeys.profileScreenKeys.screen), findsOneWidget);
 }
