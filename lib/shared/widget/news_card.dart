@@ -28,12 +28,12 @@ class NewsCardWidget extends StatelessWidget {
           Text(
             title,
             key: KWidgetkeys.widget.newsCard.title,
-            style: AppTextStyle.titleL,
+            style: AppTextStyle.text40,
           ),
           Text(
             newsDate.toLocal().toString().split(' ')[0],
             key: KWidgetkeys.widget.newsCard.date,
-            style: AppTextStyle.titleS.copyWith(color: AppColors.lightGray),
+            style: AppTextStyle.text16.copyWith(color: AppColors.lightGray),
           ),
         ],
       ),
@@ -55,7 +55,7 @@ class NewsCardWidget extends StatelessWidget {
                 children: [
                   Text(
                     tag,
-                    style: AppTextStyle.lableXS,
+                    style: AppTextStyle.text14,
                   ),
                   KIcon.check,
                 ],

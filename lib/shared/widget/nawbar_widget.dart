@@ -46,13 +46,13 @@ class _NawbarWidgetState extends State<NawbarWidget> {
 
         return Padding(
           padding: EdgeInsets.only(
-            left: KPadding.kPaddingSizeXXL *
+            left: KPadding.kPaddingSize75 *
                 (isMobile
                     ? KPlatformConstants.mobilePaddingKoefficient
                     : (isTablet
                         ? KPlatformConstants.tabletPaddingKoefficient
                         : KPlatformConstants.desktopPaddingKoefficient)),
-            right: KPadding.kPaddingSizeXXL *
+            right: KPadding.kPaddingSize75 *
                 (isMobile
                     ? KPlatformConstants.mobilePaddingKoefficient
                     : (isTablet
@@ -61,25 +61,25 @@ class _NawbarWidgetState extends State<NawbarWidget> {
           ),
           child: Container(
             decoration: BoxDecoration(
-              borderRadius: KBorderRadius.kBorderRadiusM,
+              borderRadius: KBorderRadius.kBorderRadius32,
               color: AppColors.widgetBackground,
             ),
             child: Padding(
-              padding: const EdgeInsets.all(KPadding.kPaddingSizeS),
+              padding: const EdgeInsets.all(KPadding.kPaddingSize10),
               child: Row(
                 children: [
                   if (isDesktop || !isFocused)
                     Row(
                       children: [
-                        KSizedBox.kWidthSizedBoxM,
+                        KSizedBox.kWidthSizedBox30,
                         Text(
                           KAppText.logo,
                           key: KWidgetkeys.widget.nawbar.title,
                           style: isDesktop
-                              ? AppTextStyle.titleML
-                              : AppTextStyle.titleM,
+                              ? AppTextStyle.text32
+                              : AppTextStyle.text24,
                         ),
-                        KSizedBox.kWidthSizedBoxML,
+                        KSizedBox.kWidthSizedBox48,
                       ],
                     ),
                   Expanded(
@@ -87,7 +87,7 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                       key: _formKey,
                       widgetKey: KWidgetkeys.widget.nawbar.field,
                       hintStyle:
-                          isDesktop ? AppTextStyle.lableM : AppTextStyle.lableS,
+                          isDesktop ? AppTextStyle.text24 : AppTextStyle.text16,
                       focusNode: focusNode,
                       prefixIcon: KIcon.search,
                       onChanged: (text) {},
@@ -111,14 +111,14 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                           key: KWidgetkeys.widget.nawbar.iconMic,
                           icon: KIcon.mic,
                         ),
-                        KSizedBox.kWidthSizedBoxML,
+                        KSizedBox.kWidthSizedBox48,
                         TextButton(
                           key: KWidgetkeys.widget.nawbar.button,
                           style: KButtonStyles.whiteButtonStyle,
                           onPressed: null,
                           child: const Text(
                             KAppText.enterButtonText,
-                            style: AppTextStyle.lableM,
+                            style: AppTextStyle.text24,
                           ),
                         ),
                       ],

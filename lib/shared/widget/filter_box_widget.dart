@@ -41,7 +41,7 @@ class _FilterBoxWidgetState extends State<FilterBoxWidget> {
             }
           },
         ),
-        KSizedBox.kWidthSizedBoxSSM,
+        KSizedBox.kWidthSizedBox10,
         if (!KPlatformConstants.isWebMobile)
           Expanded(
             child: Wrap(
@@ -67,8 +67,8 @@ class _FilterBoxWidgetState extends State<FilterBoxWidget> {
     return widget.filters.map((filter) {
       return Padding(
         padding: const EdgeInsets.only(
-          right: KPadding.kPaddingSizeM,
-          bottom: KPadding.kPaddingSizeS,
+          right: KPadding.kPaddingSize20,
+          bottom: KPadding.kPaddingSize10,
         ),
         child: BlocBuilder<FilterCubit, List<dynamic>>(
           builder: (context, state) {
@@ -78,10 +78,10 @@ class _FilterBoxWidgetState extends State<FilterBoxWidget> {
                   : null,
               label: Text(
                 filter,
-                style: AppTextStyle.lableSSM,
+                style: AppTextStyle.text18,
               ),
               shape: RoundedRectangleBorder(
-                borderRadius: KBorderRadius.kBorderRadiusM,
+                borderRadius: KBorderRadius.kBorderRadius32,
               ),
               materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
               selected: context.read<FilterCubit>().state.isNotEmpty &&

@@ -8,9 +8,9 @@ class ProfileBodyWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Column(
       children: [
-        KSizedBox.kHeightSizedBoxM,
+        KSizedBox.kHeightSizedBox30,
         ProfileCardWidget(),
-        KSizedBox.kHeightSizedBoxM,
+        KSizedBox.kHeightSizedBox30,
       ],
     );
   }

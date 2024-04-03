@@ -4,23 +4,23 @@ import 'package:kozak/shared/shared.dart';
 abstract class KWidetTheme {
   static OutlineInputBorder outlineInputBorder = OutlineInputBorder(
     borderSide: const BorderSide(color: AppColors.lightGray),
-    borderRadius: KBorderRadius.kBorderRadiusM,
+    borderRadius: KBorderRadius.kBorderRadius32,
   );
   static OutlineInputBorder outlineInputBorderError = OutlineInputBorder(
     borderSide: const BorderSide(color: AppColors.error),
-    borderRadius: KBorderRadius.kBorderRadiusM,
+    borderRadius: KBorderRadius.kBorderRadius32,
   );
 
   static BoxDecoration boxDecorationWidget = BoxDecoration(
-    borderRadius: KBorderRadius.kBorderRadiusM,
+    borderRadius: KBorderRadius.kBorderRadius32,
     border: Border.all(color: AppColors.lightGray),
   );
   static BoxDecoration boxDecorationCard = BoxDecoration(
-    borderRadius: KBorderRadius.kBorderRadiusM,
+    borderRadius: KBorderRadius.kBorderRadius32,
     color: AppColors.lightGray,
   );
   static BoxDecoration boxDecorationImage = BoxDecoration(
-    borderRadius: KBorderRadius.kBorderRadiusLeftM,
+    borderRadius: KBorderRadius.kBorderRadiusLeft32,
     color: AppColors.lightGray,
   );
   static BoxDecoration boxDecorationCircular = const BoxDecoration(
@@ -34,9 +34,9 @@ abstract class KWidetTheme {
   );
 
   static InputDecoration inputDecoration = InputDecoration(
-    hintStyle: AppTextStyle.hintM,
+    hintStyle: AppTextStyle.hint24,
     contentPadding: const EdgeInsets.symmetric(
-      horizontal: KPadding.kPaddingSizeM,
+      horizontal: KPadding.kPaddingSize20,
     ),
     floatingLabelBehavior: FloatingLabelBehavior.auto,
     border: KWidetTheme.outlineInputBorder,

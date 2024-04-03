@@ -8,13 +8,13 @@ class InformationBodyWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        KSizedBox.kHeightSizedBoxM,
+        KSizedBox.kHeightSizedBox30,
         NewsCardWidget(
           news: KMockText.cardData,
           newsDate: KMockText.date,
           title: KMockText.title,
         ),
-        KSizedBox.kHeightSizedBoxM,
+        KSizedBox.kHeightSizedBox30,
       ],
     );
   }

@@ -34,12 +34,12 @@ class StoryCardWidget extends StatelessWidget {
                   icon: KIcon.person,
                   background: AppColors.widgetBackground,
                 ),
-                KSizedBox.kWidthSizedBoxXS,
+                KSizedBox.kWidthSizedBox3,
                 Expanded(
                   child: Text(
                     userName,
                     key: KWidgetkeys.widget.storyCard.userName,
-                    style: AppTextStyle.titleXS,
+                    style: AppTextStyle.text14,
                   ),
                 ),
               ],
@@ -51,7 +51,7 @@ class StoryCardWidget extends StatelessWidget {
               child: Text(
                 storyDate.toLocal().toString().split(' ')[0],
                 key: KWidgetkeys.widget.storyCard.date,
-                style: AppTextStyle.titleS.copyWith(color: AppColors.lightGray),
+                style: AppTextStyle.text16.copyWith(color: AppColors.lightGray),
               ),
             ),
           ),

@@ -35,7 +35,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
           title: Text(
             widget.title,
             key: KWidgetkeys.widget.question.title,
-            style: AppTextStyle.lableL,
+            style: AppTextStyle.text40,
             maxLines: 1,
           ),
           onExpansionChanged: (expanded) {
@@ -51,13 +51,13 @@ class _QuestionWidgetState extends State<QuestionWidget> {
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(
-                horizontal: KPadding.kPaddingSizeML,
-                vertical: KPadding.kPaddingSizeSM,
+                horizontal: KPadding.kPaddingSize32,
+                vertical: KPadding.kPaddingSize16,
               ),
               child: Text(
                 widget.subtitle,
                 key: KWidgetkeys.widget.question.subtitle,
-                style: AppTextStyle.lableM,
+                style: AppTextStyle.text24,
                 softWrap: true,
                 maxLines: 3,
               ),
