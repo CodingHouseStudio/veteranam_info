@@ -16,36 +16,34 @@ class WorkBodyWidget extends StatelessWidget {
         final isDesktop =
             constraints.maxWidth > KPlatformConstants.minWidthThresholdDesktop;
 
-        return Padding(
-          padding: EdgeInsets.only(
-            top: KPadding.kPaddingSizeS,
-            left: KPadding.kPaddingSizeXXL *
-                (isMobile
-                    ? KPlatformConstants.mobilePaddingKoefficient
-                    : (isTablet
-                        ? KPlatformConstants.tabletPaddingKoefficient
-                        : KPlatformConstants.desktopPaddingKoefficient)),
-            right: KPadding.kPaddingSizeXXL *
-                (isMobile
-                    ? KPlatformConstants.mobilePaddingKoefficient
-                    : (isTablet
-                        ? KPlatformConstants.tabletPaddingKoefficient
-                        : KPlatformConstants.desktopPaddingKoefficient)),
-          ),
-          child: ListView(
-            children: [
-              const WorkCardWidget(
-                title: KMockText.workTitle,
-                city: KMockText.workCity,
-                price: KMockText.workPrice,
-                description: KMockText.workDescription,
-                employer: KMockText.workEmployer,
-              ),
-              FooterDescWidget(
-                isDesktop: isDesktop,
-              ),
-            ],
-          ),
+        return ListView(
+           padding: EdgeInsets.only(
+          top: KPadding.kPaddingSizeS,
+          left: KPadding.kPaddingSizeXXL *
+              (isMobile
+                  ? KPlatformConstants.mobilePaddingKoefficient
+                  : (isTablet
+                      ? KPlatformConstants.tabletPaddingKoefficient
+                      : KPlatformConstants.desktopPaddingKoefficient)),
+          right: KPadding.kPaddingSizeXXL *
+              (isMobile
+                  ? KPlatformConstants.mobilePaddingKoefficient
+                  : (isTablet
+                      ? KPlatformConstants.tabletPaddingKoefficient
+                      : KPlatformConstants.desktopPaddingKoefficient)),
+        ),
+          children: [
+            const WorkCardWidget(
+              title: KMockText.workTitle,
+              city: KMockText.workCity,
+              price: KMockText.workPrice,
+              description: KMockText.workDescription,
+              employer: KMockText.workEmployer,
+            ),
+            FooterDescWidget(
+              isDesktop: isDesktop,
+            ),
+          ],
         );
       },
     );

@@ -16,34 +16,32 @@ class InformationBodyWidget extends StatelessWidget {
         final isDesktop =
             constraints.maxWidth > KPlatformConstants.minWidthThresholdDesktop;
 
-        return Padding(
-          padding: EdgeInsets.only(
-            top: KPadding.kPaddingSizeS,
-            left: KPadding.kPaddingSizeXXL *
-                (isMobile
-                    ? KPlatformConstants.mobilePaddingKoefficient
-                    : (isTablet
-                        ? KPlatformConstants.tabletPaddingKoefficient
-                        : KPlatformConstants.desktopPaddingKoefficient)),
-            right: KPadding.kPaddingSizeXXL *
-                (isMobile
-                    ? KPlatformConstants.mobilePaddingKoefficient
-                    : (isTablet
-                        ? KPlatformConstants.tabletPaddingKoefficient
-                        : KPlatformConstants.desktopPaddingKoefficient)),
-          ),
-          child: ListView(
-            children: [
-              NewsCardWidget(
-                news: KMockText.cardData,
-                newsDate: KMockText.date,
-                title: KMockText.title,
-              ),
-              FooterDescWidget(
-                isDesktop: isDesktop,
-              ),
-            ],
-          ),
+        return ListView(
+           padding: EdgeInsets.only(
+          top: KPadding.kPaddingSizeS,
+          left: KPadding.kPaddingSizeXXL *
+              (isMobile
+                  ? KPlatformConstants.mobilePaddingKoefficient
+                  : (isTablet
+                      ? KPlatformConstants.tabletPaddingKoefficient
+                      : KPlatformConstants.desktopPaddingKoefficient)),
+          right: KPadding.kPaddingSizeXXL *
+              (isMobile
+                  ? KPlatformConstants.mobilePaddingKoefficient
+                  : (isTablet
+                      ? KPlatformConstants.tabletPaddingKoefficient
+                      : KPlatformConstants.desktopPaddingKoefficient)),
+        ),
+          children: [
+            NewsCardWidget(
+              news: KMockText.cardData,
+              newsDate: KMockText.date,
+              title: KMockText.title,
+            ),
+            FooterDescWidget(
+              isDesktop: isDesktop,
+            ),
+          ],
         );
       },
     );

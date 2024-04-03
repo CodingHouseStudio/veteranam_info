@@ -16,29 +16,27 @@ class InvestorsBodyWidget extends StatelessWidget {
         final isDesktop =
             constraints.maxWidth > KPlatformConstants.minWidthThresholdDesktop;
 
-        return Padding(
+        return ListView(
           padding: EdgeInsets.only(
-            top: KPadding.kPaddingSizeS,
-            left: KPadding.kPaddingSizeXXL *
-                (isMobile
-                    ? KPlatformConstants.mobilePaddingKoefficient
-                    : (isTablet
-                        ? KPlatformConstants.tabletPaddingKoefficient
-                        : KPlatformConstants.desktopPaddingKoefficient)),
-            right: KPadding.kPaddingSizeXXL *
-                (isMobile
-                    ? KPlatformConstants.mobilePaddingKoefficient
-                    : (isTablet
-                        ? KPlatformConstants.tabletPaddingKoefficient
-                        : KPlatformConstants.desktopPaddingKoefficient)),
-          ),
-          child: ListView(
-            children: [
-              FooterDescWidget(
-                isDesktop: isDesktop,
-              ),
-            ],
-          ),
+          top: KPadding.kPaddingSizeS,
+          left: KPadding.kPaddingSizeXXL *
+              (isMobile
+                  ? KPlatformConstants.mobilePaddingKoefficient
+                  : (isTablet
+                      ? KPlatformConstants.tabletPaddingKoefficient
+                      : KPlatformConstants.desktopPaddingKoefficient)),
+          right: KPadding.kPaddingSizeXXL *
+              (isMobile
+                  ? KPlatformConstants.mobilePaddingKoefficient
+                  : (isTablet
+                      ? KPlatformConstants.tabletPaddingKoefficient
+                      : KPlatformConstants.desktopPaddingKoefficient)),
+        ),
+          children: [
+            FooterDescWidget(
+              isDesktop: isDesktop,
+            ),
+          ],
         );
       },
     );
