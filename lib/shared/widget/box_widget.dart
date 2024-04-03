@@ -20,7 +20,7 @@ class BoxWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           IconWidget(
-            key: KWidgetkeys.boxKeys.icon,
+            key: KWidgetkeys.widget.box.icon,
             icon: KIcon.arrowUpRight,
             padding: KPadding.kPaddingSizeM,
           ),
@@ -29,7 +29,7 @@ class BoxWidget extends StatelessWidget {
             alignment: Alignment.bottomLeft,
             child: Text(
               text,
-              key: KWidgetkeys.boxKeys.text,
+              key: KWidgetkeys.widget.box.text,
               style: AppTextStyle.lableL,
             ),
           ),

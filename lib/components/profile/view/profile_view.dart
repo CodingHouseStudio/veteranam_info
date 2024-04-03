@@ -7,6 +7,8 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ProfileBodyWidget(key: KWidgetkeys.profileScreenKeys.screen);
+    return ProfileBodyWidget(
+      key: KWidgetkeys.screen.profile.screen,
+    );
   }
 }

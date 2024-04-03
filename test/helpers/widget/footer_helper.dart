@@ -11,20 +11,29 @@ Future<void> footerHelper({
     tester: tester,
   );
 
-  expect(find.byKey(KWidgetkeys.footerKeys.logo), findsOneWidget);
+  expect(find.byKey(KWidgetkeys.widget.footer.logo), findsOneWidget);
 
-  expect(find.byKey(KWidgetkeys.footerKeys.facebookIcon), findsOneWidget);
+  expect(
+    find.byKey(KWidgetkeys.widget.footer.facebookIcon),
+    findsOneWidget,
+  );
 
-  expect(find.byKey(KWidgetkeys.footerKeys.instagramIcon), findsOneWidget);
+  expect(
+    find.byKey(KWidgetkeys.widget.footer.instagramIcon),
+    findsOneWidget,
+  );
 
-  expect(find.byKey(KWidgetkeys.footerKeys.likedInIcon), findsOneWidget);
+  expect(
+    find.byKey(KWidgetkeys.widget.footer.likedInIcon),
+    findsOneWidget,
+  );
 
-  for (var i = 0; i > KWidgetkeys.footerKeys.buttonsKey.length; i++) {
+  for (var i = 0; i > KWidgetkeys.widget.footer.buttonsKey.length; i++) {
     for (var j = 0;
-        j < KWidgetkeys.footerKeys.buttonsKey.elementAt(i).length;
+        j < KWidgetkeys.widget.footer.buttonsKey.elementAt(i).length;
         j++) {
       final buttonKey =
-          KWidgetkeys.footerKeys.buttonsKey.elementAt(i).elementAt(j);
+          KWidgetkeys.widget.footer.buttonsKey.elementAt(i).elementAt(j);
 
       expect(
         find.byKey(buttonKey),
@@ -35,11 +44,11 @@ Future<void> footerHelper({
 
   await changeWindowSizeHelper(tester: tester);
 
-  expect(find.byKey(KWidgetkeys.footerKeys.logo), findsNothing);
+  expect(find.byKey(KWidgetkeys.widget.footer.logo), findsNothing);
 
   expect(
     find.descendant(
-      of: find.byKey(KWidgetkeys.footerKeys.widget),
+      of: find.byKey(KWidgetkeys.widget.footer.widget),
       matching: find.text('${KTestText.footer}$email'),
     ),
     findsNothing,

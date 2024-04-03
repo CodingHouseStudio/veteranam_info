@@ -74,7 +74,7 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                         KSizedBox.kWidthSizedBoxM,
                         Text(
                           KAppText.logo,
-                          key: KWidgetkeys.nawbarKeys.title,
+                          key: KWidgetkeys.widget.nawbar.title,
                           style: isDesktop
                               ? AppTextStyle.titleML
                               : AppTextStyle.titleM,
@@ -85,7 +85,7 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                   Expanded(
                     child: TextFieldWidget(
                       key: _formKey,
-                      widgetKey: KWidgetkeys.nawbarKeys.field,
+                      widgetKey: KWidgetkeys.widget.nawbar.field,
                       hintStyle:
                           isDesktop ? AppTextStyle.lableM : AppTextStyle.lableS,
                       focusNode: focusNode,
@@ -95,7 +95,7 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                       suffixIcon: isDesktop
                           ? null
                           : Container(
-                              key: KWidgetkeys.nawbarKeys.iconMic,
+                              key: KWidgetkeys.widget.nawbar.iconMic,
                               child: KIcon.mic,
                             ),
                       border: KBorder.outlineInputTransparent,
@@ -108,12 +108,12 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                     Row(
                       children: [
                         IconWidget(
-                          key: KWidgetkeys.nawbarKeys.iconMic,
+                          key: KWidgetkeys.widget.nawbar.iconMic,
                           icon: KIcon.mic,
                         ),
                         KSizedBox.kWidthSizedBoxML,
                         TextButton(
-                          key: KWidgetkeys.nawbarKeys.button,
+                          key: KWidgetkeys.widget.nawbar.button,
                           style: KButtonStyles.whiteButtonStyle,
                           onPressed: null,
                           child: const Text(
@@ -125,7 +125,7 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                     ),
                   if (isDesktop || !isFocused)
                     IconWidget(
-                      key: KWidgetkeys.nawbarKeys.iconPerson,
+                      key: KWidgetkeys.widget.nawbar.iconPerson,
                       icon: KIcon.person,
                     ),
                 ],

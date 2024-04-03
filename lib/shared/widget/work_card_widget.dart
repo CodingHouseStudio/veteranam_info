@@ -28,24 +28,24 @@ class WorkCardWidget extends StatelessWidget {
         children: [
           Text(
             title,
-            key: KWidgetkeys.workCardKeys.title,
+            key: KWidgetkeys.widget.workCard.title,
             style: AppTextStyle.lableL,
           ),
           Text(
             price,
-            key: KWidgetkeys.workCardKeys.price,
+            key: KWidgetkeys.widget.workCard.price,
             style: AppTextStyle.lableL,
           ),
           Text(
             city,
-            key: KWidgetkeys.workCardKeys.city,
+            key: KWidgetkeys.widget.workCard.city,
             style: AppTextStyle.lableSM.copyWith(
               color: AppColors.lightGray,
             ),
           ),
           Text(
             employer,
-            key: KWidgetkeys.workCardKeys.employer,
+            key: KWidgetkeys.widget.workCard.employer,
             style: AppTextStyle.lableSM.copyWith(
               color: AppColors.lightGray,
             ),
@@ -57,12 +57,12 @@ class WorkCardWidget extends StatelessWidget {
             icon: Row(
               children: [
                 Container(
-                  key: KWidgetkeys.workCardKeys.iconShare,
+                  key: KWidgetkeys.widget.workCard.iconShare,
                   child: KIcon.share,
                 ),
                 KSizedBox.kWidthSizedBox16,
                 Container(
-                  key: KWidgetkeys.workCardKeys.iconSafe,
+                  key: KWidgetkeys.widget.workCard.iconSafe,
                   child: KIcon.safe,
                 ),
               ],
@@ -70,7 +70,7 @@ class WorkCardWidget extends StatelessWidget {
           ),
           KSizedBox.kHeightSizedBox16,
           TextButton(
-            key: KWidgetkeys.workCardKeys.button,
+            key: KWidgetkeys.widget.workCard.button,
             style: KButtonStyles.lightGrayButtonStyle,
             onPressed: null,
             child: const Padding(

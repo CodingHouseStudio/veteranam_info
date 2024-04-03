@@ -34,8 +34,6 @@ class DiscountsBodyWidget extends StatelessWidget {
           ),
           children: [
             KSizedBox.kHeightSizedBoxM,
-            const ProfileCardWidget(),
-            KSizedBox.kHeightSizedBoxM,
             FooterDescWidget(
               isDesktop: isDesktop,
             ),

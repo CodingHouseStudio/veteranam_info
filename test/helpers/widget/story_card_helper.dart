@@ -7,11 +7,17 @@ Future<void> storyCardHelper({
   required WidgetTester tester,
   String? image,
 }) async {
-  expect(find.byKey(KWidgetkeys.storyCardKeys.date), findsOneWidget);
+  expect(find.byKey(KWidgetkeys.widget.storyCard.date), findsOneWidget);
 
-  expect(find.byKey(KWidgetkeys.storyCardKeys.userIcon), findsOneWidget);
+  expect(
+    find.byKey(KWidgetkeys.widget.storyCard.userIcon),
+    findsOneWidget,
+  );
 
-  expect(find.byKey(KWidgetkeys.storyCardKeys.userName), findsOneWidget);
+  expect(
+    find.byKey(KWidgetkeys.widget.storyCard.userName),
+    findsOneWidget,
+  );
 
   if (image != null) {
     await cardAddImageHelper(tester: tester, image: image);

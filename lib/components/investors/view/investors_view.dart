@@ -7,6 +7,8 @@ class InvestorsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InvestorsBodyWidget(key: KWidgetkeys.investorsScreenKeys.screen);
+    return InvestorsBodyWidget(
+      key: KWidgetkeys.screen.investors.screen,
+    );
   }
 }

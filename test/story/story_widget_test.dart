@@ -17,7 +17,10 @@ void main() {
     testWidgets('renders initial', (tester) async {
       await tester.pumpApp(const StoryScreen());
 
-      expect(find.byKey(KWidgetkeys.storyScreenKeys.screen), findsOneWidget);
+      expect(
+        find.byKey(KWidgetkeys.screen.story.screen),
+        findsOneWidget,
+      );
 
       await tester.pumpAndSettle();
 
@@ -36,7 +39,10 @@ void main() {
           ),
         );
 
-        expect(find.byKey(KWidgetkeys.storyScreenKeys.screen), findsOneWidget);
+        expect(
+          find.byKey(KWidgetkeys.screen.story.screen),
+          findsOneWidget,
+        );
 
         await tester.pumpAndSettle();
 
@@ -54,7 +60,7 @@ void main() {
           );
 
           expect(
-            find.byKey(KWidgetkeys.storyScreenKeys.screen),
+            find.byKey(KWidgetkeys.screen.story.screen),
             findsOneWidget,
           );
 
