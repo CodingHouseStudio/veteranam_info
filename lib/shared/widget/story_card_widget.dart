@@ -30,7 +30,7 @@ class StoryCardWidget extends StatelessWidget {
             child: Row(
               children: [
                 IconWidget(
-                  key: KWidgetkeys.widgetKeys.storyCardKeys.userIcon,
+                  key: KWidgetkeys.widget.storyCard.userIcon,
                   icon: KIcon.person,
                   background: AppColors.widgetBackground,
                 ),
@@ -38,7 +38,7 @@ class StoryCardWidget extends StatelessWidget {
                 Expanded(
                   child: Text(
                     userName,
-                    key: KWidgetkeys.widgetKeys.storyCardKeys.userName,
+                    key: KWidgetkeys.widget.storyCard.userName,
                     style: AppTextStyle.titleXS,
                   ),
                 ),
@@ -50,7 +50,7 @@ class StoryCardWidget extends StatelessWidget {
               alignment: Alignment.centerRight,
               child: Text(
                 storyDate.toLocal().toString().split(' ')[0],
-                key: KWidgetkeys.widgetKeys.storyCardKeys.date,
+                key: KWidgetkeys.widget.storyCard.date,
                 style: AppTextStyle.titleS.copyWith(color: AppColors.lightGray),
               ),
             ),

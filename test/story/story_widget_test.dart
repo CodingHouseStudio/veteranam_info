@@ -18,7 +18,7 @@ void main() {
       await tester.pumpApp(const StoryScreen());
 
       expect(
-        find.byKey(KWidgetkeys.screenKeys.storyScreenKeys.screen),
+        find.byKey(KWidgetkeys.screen.story.screen),
         findsOneWidget,
       );
 
@@ -40,7 +40,7 @@ void main() {
         );
 
         expect(
-          find.byKey(KWidgetkeys.screenKeys.storyScreenKeys.screen),
+          find.byKey(KWidgetkeys.screen.story.screen),
           findsOneWidget,
         );
 
@@ -60,7 +60,7 @@ void main() {
           );
 
           expect(
-            find.byKey(KWidgetkeys.screenKeys.storyScreenKeys.screen),
+            find.byKey(KWidgetkeys.screen.story.screen),
             findsOneWidget,
           );
 

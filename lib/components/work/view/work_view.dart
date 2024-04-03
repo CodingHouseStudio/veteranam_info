@@ -7,6 +7,6 @@ class WorkScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return WorkBodyWidget(key: KWidgetkeys.screenKeys.workScreenKeys.screen);
+    return WorkBodyWidget(key: KWidgetkeys.screen.work.screen);
   }
 }

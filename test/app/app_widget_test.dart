@@ -18,7 +18,7 @@ void main() {
       await tester.pumpWidget(const App());
 
       expect(
-        find.byKey(KWidgetkeys.screenKeys.appScreenKeys.screen),
+        find.byKey(KWidgetkeys.screen.app.screen),
         findsOneWidget,
       );
 

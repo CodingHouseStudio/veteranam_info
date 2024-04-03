@@ -8,11 +8,11 @@ class ErrorScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: KWidgetkeys.screenKeys.errorScreenKeys.screen,
+      key: KWidgetkeys.screen.error.screen,
       appBar: AppBar(
         title: Text(
           KAppText.errorTitle,
-          key: KWidgetkeys.screenKeys.errorScreenKeys.title,
+          key: KWidgetkeys.screen.error.title,
         ),
       ),
       body: const ErrorBodyWidget(),

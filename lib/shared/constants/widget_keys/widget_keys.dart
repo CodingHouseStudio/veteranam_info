@@ -29,6 +29,6 @@ part 'widget/news_card.dart';
 part 'widget/widget.dart';
 
 abstract class KWidgetkeys {
-  static _ScreenKeys get screenKeys => _ScreenKeys();
-  static _WidgetKeys get widgetKeys => _WidgetKeys();
+  static _ScreenKeys get screen => _ScreenKeys();
+  static _WidgetKeys get widget => _WidgetKeys();
 }

@@ -8,7 +8,7 @@ class InformationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InformationBodyWidget(
-      key: KWidgetkeys.screenKeys.informationScreenKeys.screen,
+      key: KWidgetkeys.screen.information.screen,
     );
   }
 }

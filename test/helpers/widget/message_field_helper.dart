@@ -5,18 +5,18 @@ Future<void> messageFieldHelper({
   required WidgetTester tester,
   required String message,
 }) async {
-  expect(find.byKey(KWidgetkeys.widgetKeys.inputKeys.field), findsOneWidget);
+  expect(find.byKey(KWidgetkeys.widget.input.field), findsOneWidget);
 
-  expect(find.byKey(KWidgetkeys.widgetKeys.inputKeys.icon), findsOneWidget);
+  expect(find.byKey(KWidgetkeys.widget.input.icon), findsOneWidget);
 
   await tester.enterText(
-    find.byKey(KWidgetkeys.widgetKeys.inputKeys.field),
+    find.byKey(KWidgetkeys.widget.input.field),
     message,
   );
 
   expect(
     find.descendant(
-      of: find.byKey(KWidgetkeys.widgetKeys.inputKeys.field),
+      of: find.byKey(KWidgetkeys.widget.input.field),
       matching: find.text(message),
     ),
     findsOneWidget,

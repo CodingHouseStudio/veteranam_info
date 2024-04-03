@@ -20,17 +20,17 @@ void main() {
       await tester.pumpWidget(const MaterialApp(home: ErrorScreen()));
 
       expect(
-        find.byKey(KWidgetkeys.screenKeys.errorScreenKeys.screen),
+        find.byKey(KWidgetkeys.screen.error.screen),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screenKeys.errorScreenKeys.title),
+        find.byKey(KWidgetkeys.screen.error.title),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screenKeys.errorScreenKeys.button),
+        find.byKey(KWidgetkeys.screen.error.button),
         findsOneWidget,
       );
     });
@@ -46,17 +46,17 @@ void main() {
         );
 
         expect(
-          find.byKey(KWidgetkeys.screenKeys.errorScreenKeys.screen),
+          find.byKey(KWidgetkeys.screen.error.screen),
           findsOneWidget,
         );
 
         expect(
-          find.byKey(KWidgetkeys.screenKeys.errorScreenKeys.title),
+          find.byKey(KWidgetkeys.screen.error.title),
           findsOneWidget,
         );
 
         expect(
-          find.byKey(KWidgetkeys.screenKeys.errorScreenKeys.button),
+          find.byKey(KWidgetkeys.screen.error.button),
           findsOneWidget,
         );
       });
@@ -71,12 +71,11 @@ void main() {
           );
 
           expect(
-            find.byKey(KWidgetkeys.screenKeys.errorScreenKeys.button),
+            find.byKey(KWidgetkeys.screen.error.button),
             findsOneWidget,
           );
 
-          await tester
-              .tap(find.byKey(KWidgetkeys.screenKeys.errorScreenKeys.button));
+          await tester.tap(find.byKey(KWidgetkeys.screen.error.button));
 
           verify(
             () => mockGoRouter.go(
