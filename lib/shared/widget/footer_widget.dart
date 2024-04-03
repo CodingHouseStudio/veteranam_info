@@ -9,7 +9,7 @@ class FooterDescWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      key: KWidgetkeys.footerKeys.widget,
+      key: KWidgetkeys.widget.footer.widget,
       decoration: KWidetTheme.boxDecorationCard,
       child: Padding(
         padding: isDesktop
@@ -50,7 +50,7 @@ class FooterDescWidget extends StatelessWidget {
                 children: [
                   Text(
                     KAppText.logo,
-                    key: KWidgetkeys.footerKeys.logo,
+                    key: KWidgetkeys.widget.footer.logo,
                     style: AppTextStyle.titleM,
                   ),
                   KSizedBox.kHeightSizedBoxSM,
@@ -77,17 +77,17 @@ class FooterDescWidget extends StatelessWidget {
             Row(
               children: [
                 IconWidget(
-                  key: KWidgetkeys.footerKeys.likedInIcon,
+                  key: KWidgetkeys.widget.footer.likedInIcon,
                   icon: KIcon.linkedIn,
                 ),
                 KSizedBox.kWidthSizedBoxSM,
                 IconWidget(
-                  key: KWidgetkeys.footerKeys.instagramIcon,
+                  key: KWidgetkeys.widget.footer.instagramIcon,
                   icon: KIcon.instagram,
                 ),
                 KSizedBox.kWidthSizedBoxSM,
                 IconWidget(
-                  key: KWidgetkeys.footerKeys.facebookIcon,
+                  key: KWidgetkeys.widget.footer.facebookIcon,
                   icon: KIcon.facebook,
                 ),
               ],
@@ -111,7 +111,8 @@ class _FooterDescImplementationWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final buttonsText = KAppText.buttonsText.elementAt(columnIndex);
     final routes = KAppText.routes.elementAt(columnIndex);
-    final buttonsKey = KWidgetkeys.footerKeys.buttonsKey.elementAt(columnIndex);
+    final buttonsKey =
+        KWidgetkeys.widget.footer.buttonsKey.elementAt(columnIndex);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: List.generate(buttonsText.length, (index) {

@@ -27,12 +27,12 @@ class NewsCardWidget extends StatelessWidget {
         children: [
           Text(
             title,
-            key: KWidgetkeys.newsCardKeys.title,
+            key: KWidgetkeys.widget.newsCard.title,
             style: AppTextStyle.titleL,
           ),
           Text(
             newsDate.toLocal().toString().split(' ')[0],
-            key: KWidgetkeys.newsCardKeys.date,
+            key: KWidgetkeys.widget.newsCard.date,
             style: AppTextStyle.titleS.copyWith(color: AppColors.lightGray),
           ),
         ],
@@ -42,7 +42,7 @@ class NewsCardWidget extends StatelessWidget {
         runSpacing: KSize.kWrapRunSpacing4,
         children: KMockText.tags.map((tag) {
           return Container(
-            key: KWidgetkeys.newsCardKeys.tags,
+            key: KWidgetkeys.widget.newsCard.tags,
             decoration: KWidetTheme.boxDecorationCard,
             margin: const EdgeInsets.only(top: KPadding.kPaddingSize24),
             child: Padding(

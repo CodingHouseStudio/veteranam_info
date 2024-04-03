@@ -21,14 +21,13 @@ void main() {
       email: KTestText.useremail,
     );
 
-    for (var i = 0; i < KWidgetkeys.footerKeys.buttonsKey.length; i++) {
+    for (var i = 0; i < KWidgetkeys.widget.footer.buttonsKey.length; i++) {
       for (var j = 0;
-          j < KWidgetkeys.footerKeys.buttonsKey.elementAt(i).length;
+          j < KWidgetkeys.widget.footer.buttonsKey.elementAt(i).length;
           j++) {
         final buttonKey =
-            KWidgetkeys.footerKeys.buttonsKey.elementAt(i).elementAt(j);
-        final screenKey =
-            KWidgetkeys.screenKeys.screensKey.elementAt(i).elementAt(j);
+            KWidgetkeys.widget.footer.buttonsKey.elementAt(i).elementAt(j);
+        final screenKey = KWidgetkeys.screen.screens.elementAt(i).elementAt(j);
 
         await scrollingHelper(
           tester: tester,

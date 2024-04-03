@@ -18,7 +18,7 @@ void main() {
       await tester.pumpApp(const InvestorsScreen());
 
       expect(
-        find.byKey(KWidgetkeys.investorsScreenKeys.screen),
+        find.byKey(KWidgetkeys.screen.investors.screen),
         findsOneWidget,
       );
 
@@ -38,7 +38,7 @@ void main() {
         );
 
         expect(
-          find.byKey(KWidgetkeys.investorsScreenKeys.screen),
+          find.byKey(KWidgetkeys.screen.investors.screen),
           findsOneWidget,
         );
 
@@ -56,7 +56,7 @@ void main() {
           );
 
           expect(
-            find.byKey(KWidgetkeys.investorsScreenKeys.screen),
+            find.byKey(KWidgetkeys.screen.investors.screen),
             findsOneWidget,
           );
 

@@ -1,20 +1,30 @@
 part of '../widget_keys.dart';
 
 class _ScreenKeys {
-  List<List<Key?>> get screensKey => [
+  final home = _HomeKeys();
+  final app = _AppKeys();
+  final discounts = _DiscountsKeys();
+  final information = _InformationKeys();
+  final investors = _InvestorsKeys();
+  final profile = _ProfileKeys();
+  final story = _StoryKeys();
+  final work = _WorkKeys();
+  final error = _ErrorKeys();
+
+  List<List<Key?>> get screens => [
         [
           null, //about_us_screen
-          _InvestorsKeys().screen,
+          investors.screen,
           null, //contact_screen
         ],
         [
-          _StoryKeys().screen,
-          _DiscountsKeys().screen,
-          _ProfileKeys().screen,
+          story.screen,
+          discounts.screen,
+          profile.screen,
         ],
         [
-          _WorkKeys().screen,
-          _InformationKeys().screen,
+          work.screen,
+          information.screen,
           null, //consultation_online_screen
         ],
       ];

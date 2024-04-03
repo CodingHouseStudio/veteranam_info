@@ -26,31 +26,9 @@ part 'widget/work_card.dart';
 part 'widget/card_text_detail_evaluate.dart';
 part 'widget/card_add_image.dart';
 part 'widget/news_card.dart';
+part 'widget/widget.dart';
 
 abstract class KWidgetkeys {
-  static _ScreenKeys get screenKeys => _ScreenKeys();
-  static _HomeKeys get homeScreenKeys => _HomeKeys();
-  static _AppKeys get appScreenKeys => _AppKeys();
-  static _DiscountsKeys get discountsScreenKeys => _DiscountsKeys();
-  static _InformationKeys get informationScreenKeys => _InformationKeys();
-  static _InvestorsKeys get investorsScreenKeys => _InvestorsKeys();
-  static _ProfileKeys get profileScreenKeys => _ProfileKeys();
-  static _StoryKeys get storyScreenKeys => _StoryKeys();
-  static _WorkKeys get workScreenKeys => _WorkKeys();
-  static _ErrorKeys get errorScreenKeys => _ErrorKeys();
-
-  static _NawbarKeys get nawbarKeys => _NawbarKeys();
-  static _QuestionKeys get questionKeys => _QuestionKeys();
-  static _FilterKeys get filterKeys => _FilterKeys();
-  static _MessageFieldKeys get inputKeys => _MessageFieldKeys();
-  static _FooterKeys get footerKeys => _FooterKeys();
-  static _DropListFieldKeys get dropListFieldKeys => _DropListFieldKeys();
-  static _StoryCardKeys get storyCardKeys => _StoryCardKeys();
-  static _BoxKeys get boxKeys => _BoxKeys();
-  static _CardTextDetailKeys get cardTextDetailKeys => _CardTextDetailKeys();
-  static _WorkCardKeys get workCardKeys => _WorkCardKeys();
-  static _CardTextDetailEvaluateKeys get cardTextDetailEvaluateKeys =>
-      _CardTextDetailEvaluateKeys();
-  static _CardAddImageKeys get cardAddImageKeys => _CardAddImageKeys();
-  static _NewsCardKeys get newsCardKeys => _NewsCardKeys();
+  static _ScreenKeys get screen => _ScreenKeys();
+  static _WidgetKeys get widget => _WidgetKeys();
 }
