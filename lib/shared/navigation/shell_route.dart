@@ -27,14 +27,14 @@ class ScaffoldWithNavBar extends StatelessWidget {
 
           return ListView(
             padding: EdgeInsets.only(
-              top: KPadding.kPaddingSizeS,
-              left: KPadding.kPaddingSizeXXL *
+              top: KPadding.kPaddingSize10,
+              left: KPadding.kPaddingSize75 *
                   (isMobile
                       ? KPlatformConstants.mobilePaddingKoefficient
                       : (isTablet
                           ? KPlatformConstants.tabletPaddingKoefficient
                           : KPlatformConstants.desktopPaddingKoefficient)),
-              right: KPadding.kPaddingSizeXXL *
+              right: KPadding.kPaddingSize75 *
                   (isMobile
                       ? KPlatformConstants.mobilePaddingKoefficient
                       : (isTablet

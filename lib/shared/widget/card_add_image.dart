@@ -15,8 +15,8 @@ class CardAddImageWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(
-        horizontal: KPadding.kPaddingSizeXL,
-        vertical: image != null ? 0 : KPadding.kPaddingSizeXL,
+        horizontal: KPadding.kPaddingSize48,
+        vertical: image != null ? 0 : KPadding.kPaddingSize48,
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,

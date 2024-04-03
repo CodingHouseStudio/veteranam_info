@@ -10,8 +10,8 @@ class BoxWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.only(
-        top: KPadding.kPaddingSizeXSS,
-        right: KPadding.kPaddingSizeXSS,
+        top: KPadding.kPaddingSize8,
+        right: KPadding.kPaddingSize8,
         bottom: KPadding.kPaddingSize24,
         left: KPadding.kPaddingSize24,
       ),
@@ -22,15 +22,15 @@ class BoxWidget extends StatelessWidget {
           IconWidget(
             key: KWidgetkeys.widget.box.icon,
             icon: KIcon.arrowUpRight,
-            padding: KPadding.kPaddingSizeM,
+            padding: KPadding.kPaddingSize20,
           ),
-          KSizedBox.kHeightSizedBoxXXL,
+          KSizedBox.kHeightSizedBox90,
           Align(
             alignment: Alignment.bottomLeft,
             child: Text(
               text,
               key: KWidgetkeys.widget.box.text,
-              style: AppTextStyle.lableL,
+              style: AppTextStyle.text40,
             ),
           ),
         ],

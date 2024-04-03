@@ -8,7 +8,7 @@ class InvestorsBodyWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Column(
       children: [
-        KSizedBox.kHeightSizedBoxM,
+        KSizedBox.kHeightSizedBox30,
       ],
     );
   }

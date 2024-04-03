@@ -25,7 +25,7 @@ class ButtonWidget extends StatelessWidget {
         padding: padding ??
             const EdgeInsets.symmetric(
               horizontal: KPadding.kPaddingSize80,
-              vertical: KPadding.kPaddingSizeML,
+              vertical: KPadding.kPaddingSize32,
             ),
         child: Row(
           children: [
@@ -33,7 +33,7 @@ class ButtonWidget extends StatelessWidget {
             Expanded(
               child: Text(
                 text,
-                style: AppTextStyle.lableML,
+                style: AppTextStyle.text32,
               ),
             ),
           ],

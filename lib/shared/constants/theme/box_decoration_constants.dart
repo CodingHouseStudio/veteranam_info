@@ -7,6 +7,6 @@ abstract class KBoxDecoration {
     border: Border.all(
       color: AppColors.widgetBackground,
     ),
-    borderRadius: KBorderRadius.kBorderRadiusM,
+    borderRadius: KBorderRadius.kBorderRadius32,
   );
 }

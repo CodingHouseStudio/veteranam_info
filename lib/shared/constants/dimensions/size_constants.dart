@@ -1,25 +1,22 @@
 abstract class KSize {
-  static const kPixelXSS = 3.0;
-  static const kPixelXS = 4.0;
-  static const kPixelS = 8.0;
+  static const kPixel3 = 3.0;
+  static const kPixel8 = 8.0;
   static const kPixel16 = 16.0;
-  static const kPixelSSM = 10.0;
-  static const kPixelSM = 24.0;
-  static const kPixel28 = 28.0;
-  static const kPixelM = 30.0;
-  static const kPixelML = 48.0;
-  static const kPixelL = 60.0;
-  static const kPixelXXL = 90.0;
+  static const kPixel10 = 10.0;
+  static const kPixel24 = 24.0;
+  static const kPixel30 = 30.0;
+  static const kPixel48 = 48.0;
+  static const kPixel90 = 90.0;
 
-  static const kRadiusM = 32.0;
+  static const kRadius32 = 32.0;
 
-  static const kFontXS = 14.0;
-  static const kFontS = 16.0;
-  static const kFontSSM = 18.0;
-  static const kFontSM = 20.0;
-  static const kFontM = 24.0;
-  static const kFontML = 32.0;
-  static const kFontL = 40.0;
+  static const kFont14 = 14.0;
+  static const kFont16 = 16.0;
+  static const kFont18 = 18.0;
+  static const kFont20 = 20.0;
+  static const kFont24 = 24.0;
+  static const kFont32 = 32.0;
+  static const kFont40 = 40.0;
 
   static const kPreferredSize = 160.0;
 
