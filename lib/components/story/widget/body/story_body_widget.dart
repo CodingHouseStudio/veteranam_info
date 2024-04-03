@@ -16,34 +16,32 @@ class StoryBodyWidget extends StatelessWidget {
         final isDesktop =
             constraints.maxWidth > KPlatformConstants.minWidthThresholdDesktop;
 
-        return Padding(
-          padding: EdgeInsets.only(
-            top: KPadding.kPaddingSizeS,
-            left: KPadding.kPaddingSizeXXL *
-                (isMobile
-                    ? KPlatformConstants.mobilePaddingKoefficient
-                    : (isTablet
-                        ? KPlatformConstants.tabletPaddingKoefficient
-                        : KPlatformConstants.desktopPaddingKoefficient)),
-            right: KPadding.kPaddingSizeXXL *
-                (isMobile
-                    ? KPlatformConstants.mobilePaddingKoefficient
-                    : (isTablet
-                        ? KPlatformConstants.tabletPaddingKoefficient
-                        : KPlatformConstants.desktopPaddingKoefficient)),
-          ),
-          child: ListView(
-            children: [
-              StoryCardWidget(
-                storyDate: KMockText.date,
-                userName: KMockText.userName,
-                story: KMockText.cardData,
-              ),
-              FooterDescWidget(
-                isDesktop: isDesktop,
-              ),
-            ],
-          ),
+        return ListView(
+           padding: EdgeInsets.only(
+          top: KPadding.kPaddingSizeS,
+          left: KPadding.kPaddingSizeXXL *
+              (isMobile
+                  ? KPlatformConstants.mobilePaddingKoefficient
+                  : (isTablet
+                      ? KPlatformConstants.tabletPaddingKoefficient
+                      : KPlatformConstants.desktopPaddingKoefficient)),
+          right: KPadding.kPaddingSizeXXL *
+              (isMobile
+                  ? KPlatformConstants.mobilePaddingKoefficient
+                  : (isTablet
+                      ? KPlatformConstants.tabletPaddingKoefficient
+                      : KPlatformConstants.desktopPaddingKoefficient)),
+        ),
+          children: [
+            StoryCardWidget(
+              storyDate: KMockText.date,
+              userName: KMockText.userName,
+              story: KMockText.cardData,
+            ),
+            FooterDescWidget(
+              isDesktop: isDesktop,
+            ),
+          ],
         );
       },
     );

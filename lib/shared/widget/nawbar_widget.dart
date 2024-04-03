@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:kozak/shared/shared.dart';
 
 class NawbarWidget extends StatefulWidget implements PreferredSizeWidget {
-  const NawbarWidget({required this.search, super.key});
+  const NawbarWidget({super.key});
 
-  final void Function(String text) search;
 
   @override
   Size get preferredSize => const Size.fromHeight(KSize.kPreferredSize);
@@ -92,7 +91,7 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                           isDesktop ? AppTextStyle.lableM : AppTextStyle.lableS,
                       focusNode: focusNode,
                       prefixIcon: KIcon.search,
-                      onChanged: widget.search,
+                      onChanged: (text) {},
                       hintText: KAppText.searchTextFieldHint,
                       suffixIcon: isDesktop
                           ? null
