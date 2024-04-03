@@ -11,7 +11,7 @@ Future<void> footerDiscountsRoutHelper(
   );
   await scrollingHelper(
     tester: tester,
-    item: KWidgetkeys.footerKeys.discountsButton,
+    itemKey: KWidgetkeys.footerKeys.discountsButton,
   );
 
   expect(find.byKey(KWidgetkeys.footerKeys.discountsButton), findsOneWidget);
@@ -19,4 +19,6 @@ Future<void> footerDiscountsRoutHelper(
   await tester.tap(find.byKey(KWidgetkeys.footerKeys.discountsButton));
 
   await tester.pumpAndSettle();
+
+  expect(find.byKey(KWidgetkeys.discountsScreenKeys.screen), findsOneWidget);
 }

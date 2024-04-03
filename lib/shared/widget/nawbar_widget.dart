@@ -4,7 +4,6 @@ import 'package:kozak/shared/shared.dart';
 class NawbarWidget extends StatefulWidget implements PreferredSizeWidget {
   const NawbarWidget({super.key});
 
-
   @override
   Size get preferredSize => const Size.fromHeight(KSize.kPreferredSize);
 

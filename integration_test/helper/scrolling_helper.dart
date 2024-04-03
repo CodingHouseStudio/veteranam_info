@@ -5,12 +5,13 @@ import '../constants.dart';
 
 Future<void> scrollingHelper({
   required WidgetTester tester,
-  Key? item,
+  Offset? offset = KTestConstants.scrolling,
+  Key? itemKey,
 }) async {
-  await tester.drag(find.byType(ListView), KTestConstants.scrolling);
+  if (offset != null) await tester.drag(find.byType(ListView), offset);
   await tester.pumpAndSettle();
-  if (item != null) {
-    await tester.ensureVisible(find.byKey(item));
+  if (itemKey != null) {
+    await tester.ensureVisible(find.byKey(itemKey));
   }
   await tester.pumpAndSettle();
 }

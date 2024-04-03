@@ -17,7 +17,10 @@ void main() {
     testWidgets('renders initial', (tester) async {
       await tester.pumpApp(const InformationScreen());
 
-      expect(find.byKey(KWidgetkeys.informationKeys.screen), findsOneWidget);
+      expect(
+        find.byKey(KWidgetkeys.informationScreenKeys.screen),
+        findsOneWidget,
+      );
 
       await tester.pumpAndSettle();
 
@@ -36,7 +39,10 @@ void main() {
           ),
         );
 
-        expect(find.byKey(KWidgetkeys.informationKeys.screen), findsOneWidget);
+        expect(
+          find.byKey(KWidgetkeys.informationScreenKeys.screen),
+          findsOneWidget,
+        );
 
         await tester.pumpAndSettle();
 
@@ -46,7 +52,7 @@ void main() {
       });
 
       group('go to', () {
-        testWidgets(KScreenName.information, (tester) async {
+        testWidgets('All footer screens', (tester) async {
           await tester.pumpApp(
             MockGoRouterProvider(
               goRouter: mockGoRouter,
@@ -55,118 +61,13 @@ void main() {
           );
 
           expect(
-            find.byKey(KWidgetkeys.informationKeys.screen),
+            find.byKey(KWidgetkeys.informationScreenKeys.screen),
             findsOneWidget,
           );
 
           await tester.pumpAndSettle();
 
-          await footerInformationRoutHelper(
-            tester: tester,
-            mockGoRouter: mockGoRouter,
-          );
-        });
-
-        testWidgets(KScreenName.investors, (tester) async {
-          await tester.pumpApp(
-            MockGoRouterProvider(
-              goRouter: mockGoRouter,
-              child: const InformationScreen(),
-            ),
-          );
-
-          expect(
-            find.byKey(KWidgetkeys.informationKeys.screen),
-            findsOneWidget,
-          );
-
-          await tester.pumpAndSettle();
-
-          await footerInvestorsRoutHelper(
-            tester: tester,
-            mockGoRouter: mockGoRouter,
-          );
-        });
-
-        testWidgets(KScreenName.profile, (tester) async {
-          await tester.pumpApp(
-            MockGoRouterProvider(
-              goRouter: mockGoRouter,
-              child: const InformationScreen(),
-            ),
-          );
-
-          expect(
-            find.byKey(KWidgetkeys.informationKeys.screen),
-            findsOneWidget,
-          );
-
-          await tester.pumpAndSettle();
-
-          await footerProfileRoutHelper(
-            tester: tester,
-            mockGoRouter: mockGoRouter,
-          );
-        });
-
-        testWidgets(KScreenName.story, (tester) async {
-          await tester.pumpApp(
-            MockGoRouterProvider(
-              goRouter: mockGoRouter,
-              child: const InformationScreen(),
-            ),
-          );
-
-          expect(
-            find.byKey(KWidgetkeys.informationKeys.screen),
-            findsOneWidget,
-          );
-
-          await tester.pumpAndSettle();
-
-          await footerStoryRoutHelper(
-            tester: tester,
-            mockGoRouter: mockGoRouter,
-          );
-        });
-
-        testWidgets(KScreenName.work, (tester) async {
-          await tester.pumpApp(
-            MockGoRouterProvider(
-              goRouter: mockGoRouter,
-              child: const InformationScreen(),
-            ),
-          );
-
-          expect(
-            find.byKey(KWidgetkeys.informationKeys.screen),
-            findsOneWidget,
-          );
-
-          await tester.pumpAndSettle();
-
-          await footerWorkRoutHelper(
-            tester: tester,
-            mockGoRouter: mockGoRouter,
-          );
-        });
-
-        testWidgets(KScreenName.discounts, (tester) async {
-          await tester.pumpApp(
-            MockGoRouterProvider(
-              goRouter: mockGoRouter,
-              child: const InformationScreen(),
-            ),
-          );
-
-          expect(
-            find.byKey(KWidgetkeys.informationKeys.screen),
-            findsOneWidget,
-          );
-
-          await tester.pumpAndSettle();
-
-          await footerDiscountsRoutHelper(
+          await footerButtonsHelper(
             tester: tester,
             mockGoRouter: mockGoRouter,
           );

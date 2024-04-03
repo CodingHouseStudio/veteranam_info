@@ -1,10 +1,12 @@
 part of '../widget_keys.dart';
 
 class _FooterKeys {
-  final aboutUsButton = const Key('footer_about_us');
-  final contactButton = const Key('footer_contact');
+  final widget = const Key('footer');
+  final aboutUsButton = const Key('footer_about_us_button');
+  final contactButton = const Key('footer_contact_button');
   final informationButton = const Key('footer_information_button');
-  final consultationOnlineButton = const Key('footer_consultation_online');
+  final consultationOnlineButton =
+      const Key('footer_consultation_online_button');
   final discountsButton = const Key('footer_discounts_button');
   final storyButton = const Key('footer_story_button');
   final workButton = const Key('footer_work_button');
@@ -14,4 +16,22 @@ class _FooterKeys {
   final instagramIcon = const Key('footer_instagram_icon');
   final facebookIcon = const Key('footer_facebook_icon');
   final logo = const Key('footer_logo');
+
+  List<List<Key>> get buttonsKey => [
+        [
+          aboutUsButton,
+          investorsButton,
+          contactButton,
+        ],
+        [
+          storyButton,
+          discountsButton,
+          profileButton,
+        ],
+        [
+          workButton,
+          informationButton,
+          consultationOnlineButton,
+        ],
+      ];
 }
