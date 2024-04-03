@@ -17,7 +17,7 @@ void main() {
     testWidgets('renders initial', (tester) async {
       await tester.pumpWidget(const App());
 
-      expect(find.byKey(KWidgetkeys.appKeys.screen), findsOneWidget);
+      expect(find.byKey(KWidgetkeys.appScreenKeys.screen), findsOneWidget);
 
       await nawbarHelper(tester: tester, searchText: '');
     });

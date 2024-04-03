@@ -29,15 +29,15 @@ part 'widget/news_card.dart';
 
 abstract class KWidgetkeys {
   static _ScreenKeys get screenKeys => _ScreenKeys();
-  static _HomeKeys get homeKeys => _HomeKeys();
-  static _AppKeys get appKeys => _AppKeys();
-  static _DiscountsKeys get discountsKeys => _DiscountsKeys();
-  static _InformationKeys get informationKeys => _InformationKeys();
-  static _InvestorsKeys get investorsKeys => _InvestorsKeys();
-  static _ProfileKeys get profileKeys => _ProfileKeys();
-  static _StoryKeys get storyKeys => _StoryKeys();
-  static _WorkKeys get workKeys => _WorkKeys();
-  static _ErrorKeys get errorKeys => _ErrorKeys();
+  static _HomeKeys get homeScreenKeys => _HomeKeys();
+  static _AppKeys get appScreenKeys => _AppKeys();
+  static _DiscountsKeys get discountsScreenKeys => _DiscountsKeys();
+  static _InformationKeys get informationScreenKeys => _InformationKeys();
+  static _InvestorsKeys get investorsScreenKeys => _InvestorsKeys();
+  static _ProfileKeys get profileScreenKeys => _ProfileKeys();
+  static _StoryKeys get storyScreenKeys => _StoryKeys();
+  static _WorkKeys get workScreenKeys => _WorkKeys();
+  static _ErrorKeys get errorScreenKeys => _ErrorKeys();
 
   static _NawbarKeys get nawbarKeys => _NawbarKeys();
   static _QuestionKeys get questionKeys => _QuestionKeys();
