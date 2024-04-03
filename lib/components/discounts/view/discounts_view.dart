@@ -7,6 +7,6 @@ class DiscountsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DiscountsBodyWidget(key: KWidgetkeys.discountsKeys.screen);
+    return DiscountsBodyWidget(key: KWidgetkeys.discountsScreenKeys.screen);
   }
 }

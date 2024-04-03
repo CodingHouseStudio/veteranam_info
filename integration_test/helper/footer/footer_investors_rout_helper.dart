@@ -11,7 +11,7 @@ Future<void> footerInvestorsRoutHelper(
   );
   await scrollingHelper(
     tester: tester,
-    item: KWidgetkeys.footerKeys.investorsButton,
+    itemKey: KWidgetkeys.footerKeys.investorsButton,
   );
 
   expect(find.byKey(KWidgetkeys.footerKeys.investorsButton), findsOneWidget);
@@ -19,4 +19,6 @@ Future<void> footerInvestorsRoutHelper(
   await tester.tap(find.byKey(KWidgetkeys.footerKeys.investorsButton));
 
   await tester.pumpAndSettle();
+
+  expect(find.byKey(KWidgetkeys.investorsScreenKeys.screen), findsOneWidget);
 }

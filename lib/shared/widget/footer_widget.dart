@@ -9,6 +9,7 @@ class FooterDescWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      key: KWidgetkeys.footerKeys.widget,
       decoration: KWidetTheme.boxDecorationCard,
       child: Padding(
         padding: isDesktop
@@ -110,7 +111,7 @@ class _FooterDescImplementationWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final buttonsText = KAppText.buttonsText.elementAt(columnIndex);
     final routes = KAppText.routes.elementAt(columnIndex);
-    final buttonsKey = KWidgetKeysConstants.buttonsKey.elementAt(columnIndex);
+    final buttonsKey = KWidgetkeys.footerKeys.buttonsKey.elementAt(columnIndex);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: List.generate(buttonsText.length, (index) {
@@ -121,47 +122,25 @@ class _FooterDescImplementationWidget extends StatelessWidget {
         }
         return Container(
           margin: EdgeInsets.only(top: topMargin),
-          child: _buildButton(
-            context: context,
-            buttonText: buttonsText.elementAt(index) +
+          child: ButtonWidget(
+            key: buttonsKey.elementAt(index),
+            text: buttonsText.elementAt(index) +
                 (!isDesktop &&
                         buttonsText
                             .elementAt(index)
                             .contains(KAppText.footerContact)
                     ? '\n${KMockText.emial}'
                     : ''),
-            buttonKey: buttonsKey.elementAt(index),
-            route: routes.elementAt(index),
             textStyle: isDesktop
                 ? AppTextStyle.lableML
                 : columnIndex == 0
                     ? AppTextStyle.lableM
                     : AppTextStyle.lableXS,
+            onPressed: () => context.go(routes.elementAt(index)),
+            padding: EdgeInsets.zero,
           ),
         );
       }),
-    );
-  }
-
-  Widget _buildButton({
-    required BuildContext context,
-    required String buttonText,
-    required String route,
-    required Key buttonKey,
-    required TextStyle textStyle,
-  }) {
-    return TextButton(
-      key: buttonKey,
-      style: KButtonStyles.transparentButtonStyle,
-      onPressed: () {
-        if (route.isNotEmpty) {
-          context.go(route);
-        }
-      },
-      child: Text(
-        buttonText,
-        style: textStyle,
-      ),
     );
   }
 }
