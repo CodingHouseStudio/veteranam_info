@@ -10,12 +10,15 @@ class _ScreenKeys {
   final story = _StoryKeys();
   final work = _WorkKeys();
   final error = _ErrorKeys();
+  final aboutUs = _AboutUsKeys();
+  final consultation = _ConsultationKeys();
+  final contact = _ContactKeys();
 
-  List<List<Key?>> get screens => [
+  List<List<Key>> get screens => [
         [
-          null, //about_us_screen
+          aboutUs.screen,
           investors.screen,
-          null, //contact_screen
+          contact.screen,
         ],
         [
           story.screen,
@@ -25,7 +28,7 @@ class _ScreenKeys {
         [
           work.screen,
           information.screen,
-          null, //consultation_online_screen
+          consultation.screen,
         ],
       ];
 }

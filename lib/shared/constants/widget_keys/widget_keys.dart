@@ -12,6 +12,9 @@ part 'screen/profile.dart';
 part 'screen/story.dart';
 part 'screen/work.dart';
 part 'screen/error.dart';
+part 'screen/consultation.dart';
+part 'screen/contact.dart';
+part 'screen/about_us.dart';
 
 part 'widget/question.dart';
 part 'widget/nawbar.dart';

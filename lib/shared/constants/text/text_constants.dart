@@ -56,7 +56,11 @@ abstract class KAppText {
   ];
 
   static final routes = [
-    ['', '${KRoute.home.path}${KRoute.investors.path}', ''],
+    [
+      '${KRoute.home.path}${KRoute.aboutUs.path}',
+      '${KRoute.home.path}${KRoute.investors.path}',
+      '${KRoute.home.path}${KRoute.contact.path}',
+    ],
     [
       '${KRoute.home.path}${KRoute.story.path}',
       '${KRoute.home.path}${KRoute.discounts.path}',
@@ -65,7 +69,7 @@ abstract class KAppText {
     [
       '${KRoute.home.path}${KRoute.work.path}',
       '${KRoute.home.path}${KRoute.information.path}',
-      '',
+      '${KRoute.home.path}${KRoute.consultation.path}',
     ],
   ];
 }
