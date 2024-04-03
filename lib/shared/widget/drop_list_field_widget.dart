@@ -29,7 +29,7 @@ class _DropListFieldWidgetState extends State<DropListFieldWidget> {
   @override
   Widget build(BuildContext context) {
     return Autocomplete<String>(
-      key: KWidgetkeys.widgetKeys.dropListFieldKeys.widget,
+      key: KWidgetkeys.widget.dropListField.widget,
       optionsBuilder: (TextEditingValue textEditingValue) {
         if (textEditingValue.text.isEmpty) {
           return widget.dropDownList;
@@ -45,10 +45,10 @@ class _DropListFieldWidgetState extends State<DropListFieldWidget> {
       },
       optionsViewBuilder: (context, onSelected, options) {
         return ListView.builder(
-          key: KWidgetkeys.widgetKeys.dropListFieldKeys.list,
+          key: KWidgetkeys.widget.dropListField.list,
           padding: EdgeInsets.zero,
           itemBuilder: (context, index) => TextButton(
-            key: KWidgetkeys.widgetKeys.dropListFieldKeys.items,
+            key: KWidgetkeys.widget.dropListField.items,
             onPressed: () => onSelected(options.elementAt(index)),
             style: KButtonStyles.whiteButtonStyle.copyWith(
               shape: MaterialStateProperty.all(
@@ -80,7 +80,7 @@ class _DropListFieldWidgetState extends State<DropListFieldWidget> {
           });
         });
         return TextFieldWidget(
-          widgetKey: KWidgetkeys.widgetKeys.dropListFieldKeys.field,
+          widgetKey: KWidgetkeys.widget.dropListField.field,
           controller: textEditingController,
           focusNode: focusNode,
           prefixIcon: isFocused ? KIcon.trailingUp : KIcon.trailing,

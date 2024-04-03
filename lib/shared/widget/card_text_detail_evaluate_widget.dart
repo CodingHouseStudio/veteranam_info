@@ -40,7 +40,7 @@ class _CardTextDetailEvaluateWidgetState
     return CardAddImageWidget(
       image: widget.image,
       childWidget: Center(
-        key: KWidgetkeys.widgetKeys.cardTextDetailEvaluateKeys.widget,
+        key: KWidgetkeys.widget.cardTextDetailEvaluate.widget,
         child: ConstrainedBox(
           constraints: const BoxConstraints(
             maxWidth: KMinMaxSize.maxWidth640,
@@ -63,8 +63,7 @@ class _CardTextDetailEvaluateWidgetState
                   Row(
                     children: [
                       InkWell(
-                        key: KWidgetkeys
-                            .widgetKeys.cardTextDetailEvaluateKeys.iconLike,
+                        key: KWidgetkeys.widget.cardTextDetailEvaluate.iconLike,
                         onTap: () => setState(() {
                           like == null || like == false
                               ? like = true
@@ -76,14 +75,14 @@ class _CardTextDetailEvaluateWidgetState
                       ),
                       KSizedBox.kWidthSizedBoxS,
                       Container(
-                        key: KWidgetkeys
-                            .widgetKeys.cardTextDetailEvaluateKeys.iconSmile,
+                        key:
+                            KWidgetkeys.widget.cardTextDetailEvaluate.iconSmile,
                         child: KIcon.smile,
                       ),
                       KSizedBox.kWidthSizedBoxS,
                       InkWell(
                         key: KWidgetkeys
-                            .widgetKeys.cardTextDetailEvaluateKeys.iconDislike,
+                            .widget.cardTextDetailEvaluate.iconDislike,
                         onTap: () => setState(() {
                           like == null || like! == true
                               ? like = false
@@ -96,8 +95,7 @@ class _CardTextDetailEvaluateWidgetState
                     ],
                   ),
                   Container(
-                    key: KWidgetkeys
-                        .widgetKeys.cardTextDetailEvaluateKeys.iconShare,
+                    key: KWidgetkeys.widget.cardTextDetailEvaluate.iconShare,
                     child: KIcon.share,
                   ),
                 ],

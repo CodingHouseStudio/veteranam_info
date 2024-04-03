@@ -12,24 +12,24 @@ Future<void> nawbarHelper({
     tester: tester,
   );
 
-  expect(find.byKey(KWidgetkeys.widgetKeys.nawbarKeys.title), findsOneWidget);
+  expect(find.byKey(KWidgetkeys.widget.nawbar.title), findsOneWidget);
 
-  expect(find.byKey(KWidgetkeys.widgetKeys.nawbarKeys.field), findsOneWidget);
+  expect(find.byKey(KWidgetkeys.widget.nawbar.field), findsOneWidget);
 
-  expect(find.byKey(KWidgetkeys.widgetKeys.nawbarKeys.iconMic), findsOneWidget);
+  expect(find.byKey(KWidgetkeys.widget.nawbar.iconMic), findsOneWidget);
 
   expect(
-    find.byKey(KWidgetkeys.widgetKeys.nawbarKeys.button),
+    find.byKey(KWidgetkeys.widget.nawbar.button),
     findsOneWidget,
   );
 
   expect(
-    find.byKey(KWidgetkeys.widgetKeys.nawbarKeys.iconPerson),
+    find.byKey(KWidgetkeys.widget.nawbar.iconPerson),
     findsOneWidget,
   );
 
   await tester.enterText(
-    find.byKey(KWidgetkeys.widgetKeys.nawbarKeys.field),
+    find.byKey(KWidgetkeys.widget.nawbar.field),
     searchText,
   );
 
@@ -37,62 +37,62 @@ Future<void> nawbarHelper({
 
   expect(
     find.descendant(
-      of: find.byKey(KWidgetkeys.widgetKeys.nawbarKeys.field),
+      of: find.byKey(KWidgetkeys.widget.nawbar.field),
       matching: find.text(searchText),
     ),
     findsOneWidget,
   );
 
   expect(
-    find.byKey(KWidgetkeys.widgetKeys.nawbarKeys.iconPerson),
+    find.byKey(KWidgetkeys.widget.nawbar.iconPerson),
     findsOneWidget,
   );
-  expect(find.byKey(KWidgetkeys.widgetKeys.nawbarKeys.title), findsOneWidget);
+  expect(find.byKey(KWidgetkeys.widget.nawbar.title), findsOneWidget);
 
   await changeWindowSizeHelper(tester: tester, setDefaultSize: true);
 
   final textField = tester.widget<TextField>(
     find.byKey(
-      KWidgetkeys.widgetKeys.nawbarKeys.field,
+      KWidgetkeys.widget.nawbar.field,
     ),
   );
   textField.focusNode?.unfocus();
 
   await tester.pumpAndSettle();
 
-  expect(find.byKey(KWidgetkeys.widgetKeys.nawbarKeys.title), findsOneWidget);
+  expect(find.byKey(KWidgetkeys.widget.nawbar.title), findsOneWidget);
 
-  expect(find.byKey(KWidgetkeys.widgetKeys.nawbarKeys.field), findsOneWidget);
+  expect(find.byKey(KWidgetkeys.widget.nawbar.field), findsOneWidget);
 
-  expect(find.byKey(KWidgetkeys.widgetKeys.nawbarKeys.iconMic), findsOneWidget);
+  expect(find.byKey(KWidgetkeys.widget.nawbar.iconMic), findsOneWidget);
 
   expect(
-    find.byKey(KWidgetkeys.widgetKeys.nawbarKeys.button),
+    find.byKey(KWidgetkeys.widget.nawbar.button),
     findsNothing,
   );
 
   expect(
-    find.byKey(KWidgetkeys.widgetKeys.nawbarKeys.iconPerson),
+    find.byKey(KWidgetkeys.widget.nawbar.iconPerson),
     findsOneWidget,
   );
 
   await tester.enterText(
-    find.byKey(KWidgetkeys.widgetKeys.nawbarKeys.field),
+    find.byKey(KWidgetkeys.widget.nawbar.field),
     searchText,
   );
 
   await tester.pumpAndSettle();
   expect(
     find.descendant(
-      of: find.byKey(KWidgetkeys.widgetKeys.nawbarKeys.field),
+      of: find.byKey(KWidgetkeys.widget.nawbar.field),
       matching: find.text(searchText),
     ),
     findsOneWidget,
   );
 
-  expect(find.byKey(KWidgetkeys.widgetKeys.nawbarKeys.title), findsNothing);
+  expect(find.byKey(KWidgetkeys.widget.nawbar.title), findsNothing);
   expect(
-    find.byKey(KWidgetkeys.widgetKeys.nawbarKeys.iconPerson),
+    find.byKey(KWidgetkeys.widget.nawbar.iconPerson),
     findsNothing,
   );
 }

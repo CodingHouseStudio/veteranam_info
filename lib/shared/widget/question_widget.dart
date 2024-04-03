@@ -31,10 +31,10 @@ class _QuestionWidgetState extends State<QuestionWidget> {
           dividerColor: Colors.transparent,
         ),
         child: ExpansionTile(
-          key: KWidgetkeys.widgetKeys.questionKeys.widget,
+          key: KWidgetkeys.widget.question.widget,
           title: Text(
             widget.title,
-            key: KWidgetkeys.widgetKeys.questionKeys.title,
+            key: KWidgetkeys.widget.question.title,
             style: AppTextStyle.lableL,
             maxLines: 1,
           ),
@@ -56,7 +56,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
               ),
               child: Text(
                 widget.subtitle,
-                key: KWidgetkeys.widgetKeys.questionKeys.subtitle,
+                key: KWidgetkeys.widget.question.subtitle,
                 style: AppTextStyle.lableM,
                 softWrap: true,
                 maxLines: 3,

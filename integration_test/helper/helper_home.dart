@@ -9,7 +9,7 @@ Future<void> homeHelper(WidgetTester tester) async {
   await tester.pumpWidget(const App());
 
   expect(
-    find.byKey(KWidgetkeys.screenKeys.appScreenKeys.screen),
+    find.byKey(KWidgetkeys.screen.app.screen),
     findsOneWidget,
   );
   await tester.pumpAndSettle();
