@@ -9,10 +9,10 @@ Future<void> boxHelper(
   await scrollingHelper(
     tester: tester,
     offset: KTestConstants.scrollingDown100,
-    itemKey: KWidgetkeys.boxKeys.text,
+    itemKey: KWidgetkeys.widgetKeys.boxKeys.text,
   );
 
-  expect(find.byKey(KWidgetkeys.boxKeys.text), findsOneWidget);
+  expect(find.byKey(KWidgetkeys.widgetKeys.boxKeys.text), findsOneWidget);
 
-  expect(find.byKey(KWidgetkeys.boxKeys.icon), findsOneWidget);
+  expect(find.byKey(KWidgetkeys.widgetKeys.boxKeys.icon), findsOneWidget);
 }

@@ -9,7 +9,7 @@ class MessageFieldWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return IntrinsicHeight(
       child: TextFieldWidget(
-        widgetKey: KWidgetkeys.inputKeys.field,
+        widgetKey: KWidgetkeys.widgetKeys.inputKeys.field,
         onChanged: changeMessage,
         hintText: KAppText.messageTextFieldHint,
         maxLines: 4,
@@ -22,7 +22,7 @@ class MessageFieldWidget extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(KPadding.kPaddingSizeS),
               child: IconWidget(
-                key: KWidgetkeys.inputKeys.icon,
+                key: KWidgetkeys.widgetKeys.inputKeys.icon,
                 icon: KIcon.mic,
                 background: AppColors.widgetBackground,
                 padding: KPadding.kPaddingSizeM,

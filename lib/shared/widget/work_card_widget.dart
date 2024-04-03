@@ -28,24 +28,24 @@ class WorkCardWidget extends StatelessWidget {
         children: [
           Text(
             title,
-            key: KWidgetkeys.workCardKeys.title,
+            key: KWidgetkeys.widgetKeys.workCardKeys.title,
             style: AppTextStyle.lableL,
           ),
           Text(
             price,
-            key: KWidgetkeys.workCardKeys.price,
+            key: KWidgetkeys.widgetKeys.workCardKeys.price,
             style: AppTextStyle.lableL,
           ),
           Text(
             city,
-            key: KWidgetkeys.workCardKeys.city,
+            key: KWidgetkeys.widgetKeys.workCardKeys.city,
             style: AppTextStyle.lableSM.copyWith(
               color: AppColors.lightGray,
             ),
           ),
           Text(
             employer,
-            key: KWidgetkeys.workCardKeys.employer,
+            key: KWidgetkeys.widgetKeys.workCardKeys.employer,
             style: AppTextStyle.lableSM.copyWith(
               color: AppColors.lightGray,
             ),
@@ -57,12 +57,12 @@ class WorkCardWidget extends StatelessWidget {
             icon: Row(
               children: [
                 Container(
-                  key: KWidgetkeys.workCardKeys.iconShare,
+                  key: KWidgetkeys.widgetKeys.workCardKeys.iconShare,
                   child: KIcon.share,
                 ),
                 KSizedBox.kWidthSizedBox16,
                 Container(
-                  key: KWidgetkeys.workCardKeys.iconSafe,
+                  key: KWidgetkeys.widgetKeys.workCardKeys.iconSafe,
                   child: KIcon.safe,
                 ),
               ],
@@ -70,7 +70,7 @@ class WorkCardWidget extends StatelessWidget {
           ),
           KSizedBox.kHeightSizedBox16,
           TextButton(
-            key: KWidgetkeys.workCardKeys.button,
+            key: KWidgetkeys.widgetKeys.workCardKeys.button,
             style: KButtonStyles.lightGrayButtonStyle,
             onPressed: null,
             child: const Padding(
