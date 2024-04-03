@@ -33,6 +33,9 @@ class ProfileBodyWidget extends StatelessWidget {
                         : KPlatformConstants.desktopPaddingKoefficient)),
           ),
           children: [
+            KSizedBox.kHeightSizedBoxM,
+            const ProfileCardWidget(),
+            KSizedBox.kHeightSizedBoxM,
             FooterDescWidget(
               isDesktop: isDesktop,
             ),
