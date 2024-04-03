@@ -19,4 +19,6 @@ Future<void> footerInformationRoutHelper(
   await tester.tap(find.byKey(KWidgetkeys.footerKeys.informationButton));
 
   await tester.pumpAndSettle();
+
+  expect(find.byKey(KWidgetkeys.informationScreenKeys.screen), findsOneWidget);
 }

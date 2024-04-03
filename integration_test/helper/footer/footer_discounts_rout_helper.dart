@@ -19,4 +19,6 @@ Future<void> footerDiscountsRoutHelper(
   await tester.tap(find.byKey(KWidgetkeys.footerKeys.discountsButton));
 
   await tester.pumpAndSettle();
+
+  expect(find.byKey(KWidgetkeys.discountsScreenKeys.screen), findsOneWidget);
 }

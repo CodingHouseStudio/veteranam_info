@@ -19,4 +19,6 @@ Future<void> footerStoryRoutHelper(
   await tester.tap(find.byKey(KWidgetkeys.footerKeys.storyButton));
 
   await tester.pumpAndSettle();
+
+  expect(find.byKey(KWidgetkeys.storyScreenKeys.screen), findsOneWidget);
 }

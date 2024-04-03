@@ -19,4 +19,6 @@ Future<void> footerInvestorsRoutHelper(
   await tester.tap(find.byKey(KWidgetkeys.footerKeys.investorsButton));
 
   await tester.pumpAndSettle();
+
+  expect(find.byKey(KWidgetkeys.investorsScreenKeys.screen), findsOneWidget);
 }

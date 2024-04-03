@@ -19,4 +19,6 @@ Future<void> footerWorkRoutHelper(
   await tester.tap(find.byKey(KWidgetkeys.footerKeys.workButton));
 
   await tester.pumpAndSettle();
+
+  expect(find.byKey(KWidgetkeys.workScreenKeys.screen), findsOneWidget);
 }
