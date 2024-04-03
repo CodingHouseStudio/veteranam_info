@@ -36,3 +36,18 @@ abstract class KTestConstants {
 
   static const windowTabletSize = Size(1500, 1500);
 }
+
+abstract class KScreenName {
+  static const app = 'App Screen';
+  static const error = 'Error Screen';
+  static const home = 'Home Screen';
+  static const discounts = 'Discounts Screen';
+  static const information = 'Information Screen';
+  static const investors = 'Investors Screen';
+  static const profile = 'Profile Screen';
+  static const story = 'Story Screen';
+  static const work = 'Work Screen';
+  static const aboutUs = 'About Us Screen';
+  static const contact = 'Contact Screen';
+  static const consultation = 'Consultation Screen';
+}

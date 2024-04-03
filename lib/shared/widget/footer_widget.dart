@@ -23,57 +23,47 @@ class FooterDescWidget extends StatelessWidget {
             if (isDesktop)
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
+                children: List.generate(KAppText.buttonsText.length, (index) {
+                  return Expanded(
                     child: _FooterDescImplementationWidget(
-                      columnIndex: 0,
-                      isDesktop: isDesktop,
+                      columnIndex: index,
                     ),
-                  ),
-                  Expanded(
-                    child: _FooterDescImplementationWidget(
-                      columnIndex: 1,
-                      isDesktop: isDesktop,
-                    ),
-                  ),
-                  Expanded(
-                    child: _FooterDescImplementationWidget(
-                      columnIndex: 2,
-                      isDesktop: isDesktop,
-                    ),
-                  ),
-                ],
+                  );
+                }),
               )
             else
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Text(
-                    KAppText.logo,
-                    key: KWidgetkeys.widget.footer.logo,
-                    style: AppTextStyle.titleM,
-                  ),
-                  KSizedBox.kHeightSizedBoxSM,
-                  _FooterDescImplementationWidget(
-                    columnIndex: 0,
-                    isDesktop: isDesktop,
-                  ),
-                  KSizedBox.kHeightSizedBoxSM,
-                  _FooterDescImplementationWidget(
-                    columnIndex: 1,
-                    isDesktop: isDesktop,
-                  ),
-                  KSizedBox.kHeightSizedBoxSM,
-                  _FooterDescImplementationWidget(
-                    columnIndex: 2,
-                    isDesktop: isDesktop,
-                  ),
-                ],
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: KPadding.kPaddingSizeSM,
+                  vertical: KPadding.kPaddingSizeML,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      KAppText.logo,
+                      key: KWidgetkeys.widget.footer.logo,
+                      style: AppTextStyle.titleM,
+                    ),
+                    KSizedBox.kHeightSizedBoxSM,
+                    Column(
+                      children:
+                          List.generate(KAppText.buttonsText.length, (index) {
+                        return Container(
+                          margin: const EdgeInsets.only(
+                            bottom: KPadding.kPaddingSize24,
+                          ),
+                          child: _FooterDescImplementationWidget(
+                            columnIndex: index,
+                            isDesktop: false,
+                          ),
+                        );
+                      }),
+                    ),
+                  ],
+                ),
               ),
-            if (isDesktop)
-              KSizedBox.kHeightSizedBoxML
-            else
-              KSizedBox.kHeightSizedBoxSM,
+            if (isDesktop) KSizedBox.kHeightSizedBoxML,
             Row(
               children: [
                 IconWidget(
@@ -102,7 +92,7 @@ class FooterDescWidget extends StatelessWidget {
 class _FooterDescImplementationWidget extends StatelessWidget {
   const _FooterDescImplementationWidget({
     required this.columnIndex,
-    required this.isDesktop,
+    this.isDesktop = true,
   });
   final int columnIndex;
   final bool isDesktop;
@@ -123,22 +113,26 @@ class _FooterDescImplementationWidget extends StatelessWidget {
         }
         return Container(
           margin: EdgeInsets.only(top: topMargin),
-          child: ButtonWidget(
+          child: TextButton(
             key: buttonsKey.elementAt(index),
-            text: buttonsText.elementAt(index) +
-                (!isDesktop &&
-                        buttonsText
-                            .elementAt(index)
-                            .contains(KAppText.footerContact)
-                    ? '\n${KMockText.emial}'
-                    : ''),
-            textStyle: isDesktop
-                ? AppTextStyle.lableML
-                : columnIndex == 0
-                    ? AppTextStyle.lableM
-                    : AppTextStyle.lableXS,
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                buttonsText.elementAt(index) +
+                    (!isDesktop &&
+                            buttonsText
+                                .elementAt(index)
+                                .contains(KAppText.footerContact)
+                        ? '\n${KMockText.emial}'
+                        : ''),
+                style: isDesktop
+                    ? AppTextStyle.lableML
+                    : columnIndex == 0
+                        ? AppTextStyle.lableM
+                        : AppTextStyle.lableXS,
+              ),
+            ),
             onPressed: () => context.go(routes.elementAt(index)),
-            padding: EdgeInsets.zero,
           ),
         );
       }),

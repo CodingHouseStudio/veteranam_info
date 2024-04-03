@@ -36,19 +36,12 @@ void main() {
       );
 
       await boxHelper(tester);
-
-      await footerHelper(tester: tester, email: KTestText.useremail);
     });
     group('Mock Go Router', () {
       late MockGoRouter mockGoRouter;
       setUp(() => mockGoRouter = MockGoRouter());
       testWidgets('renders initial', (tester) async {
-        await tester.pumpApp(
-          MockGoRouterProvider(
-            goRouter: mockGoRouter,
-            child: const HomeScreen(),
-          ),
-        );
+        await tester.pumpApp(const HomeScreen(), mockGoRouter: mockGoRouter);
 
         expect(
           find.byKey(KWidgetkeys.screen.home.screen),
@@ -69,18 +62,11 @@ void main() {
         );
 
         await boxHelper(tester);
-
-        await footerHelper(tester: tester, email: KTestText.useremail);
       });
 
       group('go to', () {
         testWidgets('All footer screens', (tester) async {
-          await tester.pumpApp(
-            MockGoRouterProvider(
-              goRouter: mockGoRouter,
-              child: const HomeScreen(),
-            ),
-          );
+          await tester.pumpApp(const HomeScreen(), mockGoRouter: mockGoRouter);
 
           expect(
             find.byKey(KWidgetkeys.screen.home.screen),

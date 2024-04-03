@@ -30,6 +30,7 @@ Future<void> footerButtonsHelper({
       );
 
       await tester.tap(find.byKey(buttonKey));
+
       verify(
         () => mockGoRouter.go(
           KAppText.routes.elementAt(i).elementAt(j),

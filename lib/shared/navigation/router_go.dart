@@ -28,7 +28,10 @@ final GoRouter router = GoRouter(
     ShellRoute(
       navigatorKey: _shellNavigatorKey,
       builder: (context, state, child) {
-        return ScaffoldWithNavBar(goRouterState: state, navigationShell: child);
+        return ScaffoldWithNavBar(
+          // goRouterState: state,
+          navigationShell: child,
+        );
       },
       routes: [
         GoRoute(
@@ -92,6 +95,33 @@ final GoRouter router = GoRouter(
               pageBuilder: (context, state) => NoTransitionPage(
                 key: state.pageKey,
                 child: const InvestorsScreen(),
+              ),
+            ),
+            GoRoute(
+              name: KRoute.aboutUs.name,
+              path: KRoute.aboutUs.path,
+              redirect: redirect,
+              pageBuilder: (context, state) => NoTransitionPage(
+                key: state.pageKey,
+                child: const AboutUsScreen(),
+              ),
+            ),
+            GoRoute(
+              name: KRoute.consultation.name,
+              path: KRoute.consultation.path,
+              redirect: redirect,
+              pageBuilder: (context, state) => NoTransitionPage(
+                key: state.pageKey,
+                child: const ConsultationScreen(),
+              ),
+            ),
+            GoRoute(
+              name: KRoute.contact.name,
+              path: KRoute.contact.path,
+              redirect: redirect,
+              pageBuilder: (context, state) => NoTransitionPage(
+                key: state.pageKey,
+                child: const ContactScreen(),
               ),
             ),
           ],

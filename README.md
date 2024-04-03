@@ -89,7 +89,7 @@ WEB tests
 
 Windows(works on the Mac)
 run one test:
-fvm flutter drive --driver=test_driver/integration_test.dart --target=integration_test/your_test.dart  -d chrome
+fvm flutter drive --driver=test_driver/integration_test.dart --target=integration_test/navigation_test.dart  -d chrome
 or
 fvm flutter run -d chrome --web-port 4445 integration_test/your_test.dart
 run all tests
