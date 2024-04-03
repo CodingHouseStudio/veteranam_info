@@ -22,12 +22,12 @@ class _FilterBoxWidgetState extends State<FilterBoxWidget> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         PopupMenuButton<String>(
-          key: KWidgetkeys.filterKeys.popupMenu,
+          key: KWidgetkeys.widgetKeys.filterKeys.popupMenu,
           icon: KIcon.filter,
           itemBuilder: (BuildContext context) {
             return [
               PopupMenuItem<String>(
-                key: KWidgetkeys.filterKeys.popupMenuResetAll,
+                key: KWidgetkeys.widgetKeys.filterKeys.popupMenuResetAll,
                 value: KAppText.filterItemResetAll,
                 child: const ListTile(
                   title: Text(KAppText.filterItemResetAll),
@@ -45,7 +45,7 @@ class _FilterBoxWidgetState extends State<FilterBoxWidget> {
         if (!KPlatformConstants.isWebMobile)
           Expanded(
             child: Wrap(
-              key: KWidgetkeys.filterKeys.chips,
+              key: KWidgetkeys.widgetKeys.filterKeys.chips,
               children: _buildChips(),
             ),
           ),
@@ -54,7 +54,7 @@ class _FilterBoxWidgetState extends State<FilterBoxWidget> {
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
-                key: KWidgetkeys.filterKeys.chips,
+                key: KWidgetkeys.widgetKeys.filterKeys.chips,
                 children: _buildChips(),
               ),
             ),
@@ -74,7 +74,7 @@ class _FilterBoxWidgetState extends State<FilterBoxWidget> {
           builder: (context, state) {
             return FilterChip(
               key: widget.filters.last == filter
-                  ? KWidgetkeys.filterKeys.lastChip
+                  ? KWidgetkeys.widgetKeys.filterKeys.lastChip
                   : null,
               label: Text(
                 filter,

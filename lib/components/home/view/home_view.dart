@@ -8,7 +8,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return HomeBlocprovider(
-      key: KWidgetkeys.homeScreenKeys.screen,
+      key: KWidgetkeys.screenKeys.homeScreenKeys.screen,
       childWidget: const HomeBodyWidget(),
     );
   }

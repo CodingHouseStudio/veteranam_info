@@ -8,7 +8,10 @@ import 'helper.dart';
 Future<void> homeHelper(WidgetTester tester) async {
   await tester.pumpWidget(const App());
 
-  expect(find.byKey(KWidgetkeys.appScreenKeys.screen), findsOneWidget);
+  expect(
+    find.byKey(KWidgetkeys.screenKeys.appScreenKeys.screen),
+    findsOneWidget,
+  );
   await tester.pumpAndSettle();
 
   await footerHelper(tester: tester, email: KTestText.useremail);

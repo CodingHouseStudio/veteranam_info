@@ -12,12 +12,15 @@ Future<void> footerButtonsHelper({
     tester: tester,
   );
 
-  for (var i = 0; i < KWidgetkeys.footerKeys.buttonsKey.length; i++) {
+  for (var i = 0;
+      i < KWidgetkeys.widgetKeys.footerKeys.buttonsKey.length;
+      i++) {
     for (var j = 0;
-        j < KWidgetkeys.footerKeys.buttonsKey.elementAt(i).length;
+        j < KWidgetkeys.widgetKeys.footerKeys.buttonsKey.elementAt(i).length;
         j++) {
-      final buttonKey =
-          KWidgetkeys.footerKeys.buttonsKey.elementAt(i).elementAt(j);
+      final buttonKey = KWidgetkeys.widgetKeys.footerKeys.buttonsKey
+          .elementAt(i)
+          .elementAt(j);
       await scrollingHelper(
         tester: tester,
         offset: null,

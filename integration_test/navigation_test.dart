@@ -21,12 +21,15 @@ void main() {
       email: KTestText.useremail,
     );
 
-    for (var i = 0; i < KWidgetkeys.footerKeys.buttonsKey.length; i++) {
+    for (var i = 0;
+        i < KWidgetkeys.widgetKeys.footerKeys.buttonsKey.length;
+        i++) {
       for (var j = 0;
-          j < KWidgetkeys.footerKeys.buttonsKey.elementAt(i).length;
+          j < KWidgetkeys.widgetKeys.footerKeys.buttonsKey.elementAt(i).length;
           j++) {
-        final buttonKey =
-            KWidgetkeys.footerKeys.buttonsKey.elementAt(i).elementAt(j);
+        final buttonKey = KWidgetkeys.widgetKeys.footerKeys.buttonsKey
+            .elementAt(i)
+            .elementAt(j);
         final screenKey =
             KWidgetkeys.screenKeys.screensKey.elementAt(i).elementAt(j);
 

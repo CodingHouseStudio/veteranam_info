@@ -32,11 +32,11 @@ class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      key: KWidgetkeys.cardTextDetailKeys.widget,
+      key: KWidgetkeys.widgetKeys.cardTextDetailKeys.widget,
       children: [
         Text(
           widget.text,
-          key: KWidgetkeys.cardTextDetailKeys.text,
+          key: KWidgetkeys.widgetKeys.cardTextDetailKeys.text,
           maxLines: maxLines,
           style: AppTextStyle.lableS,
           overflow: TextOverflow.clip,
@@ -47,7 +47,7 @@ class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
           children: [
             Flexible(
               child: TextButton(
-                key: KWidgetkeys.cardTextDetailKeys.button,
+                key: KWidgetkeys.widgetKeys.cardTextDetailKeys.button,
                 onPressed: () {
                   setState(() {
                     maxLines == null

@@ -11,14 +11,20 @@ Future<void> footerStoryRoutHelper(
   );
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.footerKeys.storyButton,
+    itemKey: KWidgetkeys.widgetKeys.footerKeys.storyButton,
   );
 
-  expect(find.byKey(KWidgetkeys.footerKeys.storyButton), findsOneWidget);
+  expect(
+    find.byKey(KWidgetkeys.widgetKeys.footerKeys.storyButton),
+    findsOneWidget,
+  );
 
-  await tester.tap(find.byKey(KWidgetkeys.footerKeys.storyButton));
+  await tester.tap(find.byKey(KWidgetkeys.widgetKeys.footerKeys.storyButton));
 
   await tester.pumpAndSettle();
 
-  expect(find.byKey(KWidgetkeys.storyScreenKeys.screen), findsOneWidget);
+  expect(
+    find.byKey(KWidgetkeys.screenKeys.storyScreenKeys.screen),
+    findsOneWidget,
+  );
 }
