@@ -18,14 +18,14 @@ class _ProfileCardWidgetState extends State<ProfileCardWidget> {
       child: Container(
         decoration: KBoxDecoration.boxDecorPrimary,
         child: Padding(
-          padding: const EdgeInsets.all(KPadding.kPaddingSizeS),
+          padding: const EdgeInsets.all(KPadding.kPaddingSize10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _buildProfileHeader(),
-              KSizedBox.kHeightSizedBoxM,
+              KSizedBox.kHeightSizedBox30,
               _buildProfileInfo(),
-              KSizedBox.kHeightSizedBoxS,
+              KSizedBox.kHeightSizedBox8,
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -40,13 +40,13 @@ class _ProfileCardWidgetState extends State<ProfileCardWidget> {
                           });
                         },
                       ),
-                      KSizedBox.kWidthSizedBoxS,
+                      KSizedBox.kWidthSizedBox8,
                       const Text(KAppText.anonymous),
                     ],
                   ),
                   const Text(
                     KAppText.description,
-                    style: AppTextStyle.lableSmallGrey,
+                    style: AppTextStyle.hint14,
                   ),
                 ],
               ),
@@ -72,7 +72,7 @@ class _ProfileCardWidgetState extends State<ProfileCardWidget> {
             child: KIcon.person,
           ),
         ),
-        KSizedBox.kWidthSizedBoxM,
+        KSizedBox.kWidthSizedBox30,
         const Flexible(
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -80,11 +80,11 @@ class _ProfileCardWidgetState extends State<ProfileCardWidget> {
               Expanded(
                 child: Text(
                   KAppText.userName,
-                  style: AppTextStyle.lableL,
+                  style: AppTextStyle.text40,
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
-              KSizedBox.kWidthSizedBoxXS,
+              KSizedBox.kWidthSizedBox3,
               KIcon.edit,
             ],
           ),
@@ -102,31 +102,31 @@ class _ProfileCardWidgetState extends State<ProfileCardWidget> {
           children: [
             const Text(
               'E-mail:',
-              style: AppTextStyle.lableM,
+              style: AppTextStyle.text24,
             ),
             TextField(
               decoration: InputDecoration(
                 border: KBorder.buttonStyleOutlineInputBorder,
                 labelText: KAppText.email,
-                labelStyle: AppTextStyle.lableMediumSmallGrey,
+                labelStyle: AppTextStyle.hint24,
               ),
               onChanged: (value) {},
             ),
           ],
         ),
-        KSizedBox.kHeightSizedBoxS,
+        KSizedBox.kHeightSizedBox8,
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
               'Nickname:',
-              style: AppTextStyle.lableM,
+              style: AppTextStyle.text24,
             ),
             TextField(
               decoration: InputDecoration(
                 border: KBorder.buttonStyleOutlineInputBorder,
                 labelText: KAppText.nickname,
-                labelStyle: AppTextStyle.lableMediumSmallGrey,
+                labelStyle: AppTextStyle.hint24,
               ),
               onChanged: (value) {},
             ),

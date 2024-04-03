@@ -4,93 +4,55 @@ import 'package:kozak/shared/shared.dart';
 /// Text Styles
 
 abstract class AppTextStyle {
-  static const titleL = TextStyle(
+  static const text40 = TextStyle(
     color: Color.fromRGBO(0, 0, 0, 1),
-    fontSize: KSize.kFontL,
+    fontSize: KSize.kFont40,
     fontWeight: FontWeight.w400,
   );
-  static const titleML = TextStyle(
-    color: Color.fromRGBO(0, 0, 0, 1),
-    fontSize: KSize.kFontML,
-    fontWeight: FontWeight.w400,
-  );
-  static const titleM = TextStyle(
+
+  static const text32 = TextStyle(
     color: AppColors.black,
-    fontSize: KSize.kFontM,
+    fontSize: KSize.kFont32,
     fontWeight: FontWeight.w400,
   );
 
-  static const titleXS = TextStyle(
+  static const text24 = TextStyle(
     color: AppColors.black,
-    fontSize: KSize.kFontXS,
+    fontSize: KSize.kFont24,
     fontWeight: FontWeight.w400,
   );
 
-  static const titleS = TextStyle(
+  static const text20 = TextStyle(
     color: AppColors.black,
-    fontSize: KSize.kFontS,
+    fontSize: KSize.kFont20,
     fontWeight: FontWeight.w400,
   );
 
-  static const lableL = TextStyle(
+  static const text18 = TextStyle(
     color: AppColors.black,
-    fontSize: KSize.kFontL,
+    fontSize: KSize.kFont18,
     fontWeight: FontWeight.w400,
   );
 
-  static const lableML = TextStyle(
+  static const text16 = TextStyle(
     color: AppColors.black,
-    fontSize: KSize.kFontML,
-    fontWeight: FontWeight.w400,
+    fontSize: KSize.kFont16,
   );
 
-  static const lableM = TextStyle(
+  static const text14 = TextStyle(
     color: AppColors.black,
-    fontSize: KSize.kFontM,
-    fontWeight: FontWeight.w400,
+    fontSize: KSize.kFont14,
   );
 
-  static const lableSM = TextStyle(
-    color: AppColors.black,
-    fontSize: KSize.kFontSM,
-    fontWeight: FontWeight.w400,
-  );
-
-  static const lableSSM = TextStyle(
-    color: AppColors.black,
-    fontSize: KSize.kFontSSM,
-    fontWeight: FontWeight.w400,
-  );
-
-  static const lableS = TextStyle(
-    color: AppColors.black,
-    fontSize: KSize.kFontS,
-  );
-  static const lableMediumSmallGrey = TextStyle(
-    color: AppColors.grey,
-    fontSize: KSize.kFontM,
-    fontWeight: FontWeight.w400,
-  );
-
-  static const lableSmallGrey = TextStyle(
-    color: AppColors.grey,
-    fontSize: KSize.kFontXS,
-    fontWeight: FontWeight.w400,
-  );
-
-  static const lableSmall = TextStyle(
-    color: AppColors.black,
-    fontSize: KSize.kFontS,
-  );
-
-  static const lableXS = TextStyle(
-    color: AppColors.black,
-    fontSize: KSize.kFontXS,
-  );
-
-  static const hintM = TextStyle(
+  static const hint24 = TextStyle(
     color: AppColors.lightGray,
-    fontSize: KSize.kFontM,
+    fontSize: KSize.kFont24,
+    fontWeight: FontWeight.w400,
+  );
+
+  static const hint14 = TextStyle(
+    color: AppColors.grey,
+    fontSize: KSize.kFont14,
     fontWeight: FontWeight.w400,
   );
 }

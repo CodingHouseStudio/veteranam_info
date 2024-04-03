@@ -8,7 +8,7 @@ class WorkBodyWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Column(
       children: [
-        KSizedBox.kHeightSizedBoxM,
+        KSizedBox.kHeightSizedBox30,
         WorkCardWidget(
           title: KMockText.workTitle,
           city: KMockText.workCity,
@@ -16,7 +16,7 @@ class WorkBodyWidget extends StatelessWidget {
           description: KMockText.workDescription,
           employer: KMockText.workEmployer,
         ),
-        KSizedBox.kHeightSizedBoxM,
+        KSizedBox.kHeightSizedBox30,
       ],
     );
   }

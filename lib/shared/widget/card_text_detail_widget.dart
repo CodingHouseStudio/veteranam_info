@@ -38,10 +38,10 @@ class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
           widget.text,
           key: KWidgetkeys.widget.cardTextDetail.text,
           maxLines: maxLines,
-          style: AppTextStyle.lableS,
+          style: AppTextStyle.text16,
           overflow: TextOverflow.clip,
         ),
-        KSizedBox.kHeightSizedBoxSM,
+        KSizedBox.kHeightSizedBox24,
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -63,7 +63,7 @@ class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
                           KAppText.storyCardButtonNotDetail
                       : widget.buttonText?.elementAt(0) ??
                           KAppText.storyCardButtonDetail,
-                  style: AppTextStyle.lableSSM,
+                  style: AppTextStyle.text18,
                 ),
               ),
             ),

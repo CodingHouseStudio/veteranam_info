@@ -20,18 +20,18 @@ class MessageFieldWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             Padding(
-              padding: const EdgeInsets.all(KPadding.kPaddingSizeS),
+              padding: const EdgeInsets.all(KPadding.kPaddingSize10),
               child: IconWidget(
                 key: KWidgetkeys.widget.input.icon,
                 icon: KIcon.mic,
                 background: AppColors.widgetBackground,
-                padding: KPadding.kPaddingSizeM,
+                padding: KPadding.kPaddingSize20,
               ),
             ),
           ],
         ),
         contentPadding: const EdgeInsets.all(
-          KPadding.kPaddingSizeML,
+          KPadding.kPaddingSize32,
         ),
       ),
     );

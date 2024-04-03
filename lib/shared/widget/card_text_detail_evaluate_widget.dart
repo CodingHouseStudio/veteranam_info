@@ -49,14 +49,14 @@ class _CardTextDetailEvaluateWidgetState
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               widget.titleWidget,
-              KSizedBox.kHeightSizedBoxSM,
+              KSizedBox.kHeightSizedBox24,
               CardTextDetailWidget(
                 text: widget.text,
                 maxLines: KDimensions.storyCardMaxLines,
                 buttonText: widget.buttonText,
                 buttonStyle: widget.buttonStyle,
               ),
-              KSizedBox.kHeightSizedBoxSM,
+              KSizedBox.kHeightSizedBox24,
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -73,13 +73,13 @@ class _CardTextDetailEvaluateWidgetState
                             ? KIcon.like
                             : KIcon.activeLike,
                       ),
-                      KSizedBox.kWidthSizedBoxS,
+                      KSizedBox.kWidthSizedBox8,
                       Container(
                         key:
                             KWidgetkeys.widget.cardTextDetailEvaluate.iconSmile,
                         child: KIcon.smile,
                       ),
-                      KSizedBox.kWidthSizedBoxS,
+                      KSizedBox.kWidthSizedBox8,
                       InkWell(
                         key: KWidgetkeys
                             .widget.cardTextDetailEvaluate.iconDislike,

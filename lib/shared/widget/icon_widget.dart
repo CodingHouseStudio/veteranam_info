@@ -20,7 +20,7 @@ class IconWidget extends StatelessWidget {
       //   color: background ?? KColorTheme.white,
       // ),
       child: Padding(
-        padding: EdgeInsets.all(padding ?? KPadding.kPaddingSizeSSM),
+        padding: EdgeInsets.all(padding ?? KPadding.kPaddingSize12),
         child: icon,
       ),
     );
