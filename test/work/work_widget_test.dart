@@ -32,12 +32,7 @@ void main() {
       late MockGoRouter mockGoRouter;
       setUp(() => mockGoRouter = MockGoRouter());
       testWidgets('renders initial', (tester) async {
-        await tester.pumpApp(
-          MockGoRouterProvider(
-            goRouter: mockGoRouter,
-            child: const WorkScreen(),
-          ),
-        );
+        await tester.pumpApp(const WorkScreen(), mockGoRouter: mockGoRouter);
 
         expect(
           find.byKey(KWidgetkeys.screen.work.screen),
@@ -47,31 +42,9 @@ void main() {
         await tester.pumpAndSettle();
 
         await workCardHelper(tester);
-
-        await footerHelper(tester: tester, email: KTestText.useremail);
       });
-      group('go to', () {
-        testWidgets('All footer screens', (tester) async {
-          await tester.pumpApp(
-            MockGoRouterProvider(
-              goRouter: mockGoRouter,
-              child: const WorkScreen(),
-            ),
-          );
-
-          expect(
-            find.byKey(KWidgetkeys.screen.work.screen),
-            findsOneWidget,
-          );
-
-          await tester.pumpAndSettle();
-
-          await footerButtonsHelper(
-            tester: tester,
-            mockGoRouter: mockGoRouter,
-          );
-        });
-      });
+      // group('go to', () {
+      // });
     });
   });
 }

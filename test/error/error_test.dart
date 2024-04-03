@@ -63,7 +63,7 @@ void main() {
 
       group('go to', () {
         testWidgets(KScreenName.home, (tester) async {
-          await tester.pumpApp(
+          await tester.pumpWidget(
             MockGoRouterProvider(
               goRouter: mockGoRouter,
               child: const MaterialApp(home: ErrorScreen()),

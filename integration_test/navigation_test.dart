@@ -42,9 +42,8 @@ void main() {
         await tester.tap(find.byKey(buttonKey));
 
         await tester.pumpAndSettle();
-        if (screenKey != null) {
-          expect(find.byKey(screenKey), findsOneWidget);
-        }
+
+        expect(find.byKey(screenKey), findsOneWidget);
       }
     }
   });

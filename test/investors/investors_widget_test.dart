@@ -23,18 +23,14 @@ void main() {
       );
 
       await tester.pumpAndSettle();
-
-      await footerHelper(tester: tester, email: KTestText.useremail);
     });
     group('Mock Go Router', () {
       late MockGoRouter mockGoRouter;
       setUp(() => mockGoRouter = MockGoRouter());
       testWidgets('renders initial', (tester) async {
         await tester.pumpApp(
-          MockGoRouterProvider(
-            goRouter: mockGoRouter,
-            child: const InvestorsScreen(),
-          ),
+          const InvestorsScreen(),
+          mockGoRouter: mockGoRouter,
         );
 
         expect(
@@ -43,31 +39,9 @@ void main() {
         );
 
         await tester.pumpAndSettle();
-
-        await footerHelper(tester: tester, email: KTestText.useremail);
       });
-      group('go to', () {
-        testWidgets('All footer screens', (tester) async {
-          await tester.pumpApp(
-            MockGoRouterProvider(
-              goRouter: mockGoRouter,
-              child: const InvestorsScreen(),
-            ),
-          );
-
-          expect(
-            find.byKey(KWidgetkeys.screen.investors.screen),
-            findsOneWidget,
-          );
-
-          await tester.pumpAndSettle();
-
-          await footerButtonsHelper(
-            tester: tester,
-            mockGoRouter: mockGoRouter,
-          );
-        });
-      });
+      // group('go to', () {
+      // });
     });
   });
 }

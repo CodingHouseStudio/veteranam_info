@@ -23,6 +23,8 @@ void main() {
       );
 
       await nawbarHelper(tester: tester, searchText: '');
+
+      await footerHelper(tester: tester, email: KTestText.useremail);
     });
   });
 }
