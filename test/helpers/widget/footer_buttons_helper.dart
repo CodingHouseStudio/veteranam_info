@@ -18,7 +18,6 @@ Future<void> footerButtonsHelper({
         j++) {
       final buttonKey =
           KWidgetkeys.footerKeys.buttonsKey.elementAt(i).elementAt(j);
-      final route = KAppText.routes.elementAt(i).elementAt(j);
       await scrollingHelper(
         tester: tester,
         offset: null,
@@ -33,7 +32,7 @@ Future<void> footerButtonsHelper({
       await tester.tap(find.byKey(buttonKey));
       verify(
         () => mockGoRouter.go(
-          route,
+          KAppText.routes.elementAt(i).elementAt(j),
         ),
       ).called(1);
     }
