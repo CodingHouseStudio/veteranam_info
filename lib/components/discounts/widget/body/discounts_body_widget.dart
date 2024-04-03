@@ -18,20 +18,20 @@ class DiscountsBodyWidget extends StatelessWidget {
 
         return ListView(
           padding: EdgeInsets.only(
-          top: KPadding.kPaddingSizeS,
-          left: KPadding.kPaddingSizeXXL *
-              (isMobile
-                  ? KPlatformConstants.mobilePaddingKoefficient
-                  : (isTablet
-                      ? KPlatformConstants.tabletPaddingKoefficient
-                      : KPlatformConstants.desktopPaddingKoefficient)),
-          right: KPadding.kPaddingSizeXXL *
-              (isMobile
-                  ? KPlatformConstants.mobilePaddingKoefficient
-                  : (isTablet
-                      ? KPlatformConstants.tabletPaddingKoefficient
-                      : KPlatformConstants.desktopPaddingKoefficient)),
-        ),
+            top: KPadding.kPaddingSizeS,
+            left: KPadding.kPaddingSizeXXL *
+                (isMobile
+                    ? KPlatformConstants.mobilePaddingKoefficient
+                    : (isTablet
+                        ? KPlatformConstants.tabletPaddingKoefficient
+                        : KPlatformConstants.desktopPaddingKoefficient)),
+            right: KPadding.kPaddingSizeXXL *
+                (isMobile
+                    ? KPlatformConstants.mobilePaddingKoefficient
+                    : (isTablet
+                        ? KPlatformConstants.tabletPaddingKoefficient
+                        : KPlatformConstants.desktopPaddingKoefficient)),
+          ),
           children: [
             KSizedBox.kHeightSizedBoxM,
             const ProfileCardWidget(),
