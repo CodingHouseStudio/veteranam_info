@@ -20,8 +20,8 @@ class WorkCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(
-        horizontal: KPadding.kPaddingSizeXL,
-        vertical: KPadding.kPaddingSizeSM,
+        horizontal: KPadding.kPaddingSize48,
+        vertical: KPadding.kPaddingSize16,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -29,24 +29,24 @@ class WorkCardWidget extends StatelessWidget {
           Text(
             title,
             key: KWidgetkeys.widget.workCard.title,
-            style: AppTextStyle.lableL,
+            style: AppTextStyle.text40,
           ),
           Text(
             price,
             key: KWidgetkeys.widget.workCard.price,
-            style: AppTextStyle.lableL,
+            style: AppTextStyle.text40,
           ),
           Text(
             city,
             key: KWidgetkeys.widget.workCard.city,
-            style: AppTextStyle.lableSM.copyWith(
+            style: AppTextStyle.text20.copyWith(
               color: AppColors.lightGray,
             ),
           ),
           Text(
             employer,
             key: KWidgetkeys.widget.workCard.employer,
-            style: AppTextStyle.lableSM.copyWith(
+            style: AppTextStyle.text20.copyWith(
               color: AppColors.lightGray,
             ),
           ),
@@ -75,12 +75,12 @@ class WorkCardWidget extends StatelessWidget {
             onPressed: null,
             child: const Padding(
               padding: EdgeInsets.symmetric(
-                vertical: KPadding.kPaddingSizeML,
+                vertical: KPadding.kPaddingSize32,
                 horizontal: KPadding.kPaddingSize80,
               ),
               child: Text(
                 KAppText.workRespondButton,
-                style: AppTextStyle.lableML,
+                style: AppTextStyle.text32,
               ),
             ),
           ),

@@ -9,26 +9,26 @@ class HomeBodyWidget extends StatelessWidget {
     return Column(
       children: [
         MessageFieldWidget(changeMessage: (_) {}),
-        KSizedBox.kHeightSizedBoxM,
+        KSizedBox.kHeightSizedBox30,
         const FilterBoxWidget(
           filters: KMockText.filter,
         ),
-        KSizedBox.kHeightSizedBoxM,
+        KSizedBox.kHeightSizedBox30,
         DropListFieldWidget(
           onChanged: (_) {},
           hintText: '',
           dropDownList: KMockText.dropDownList,
         ),
-        KSizedBox.kHeightSizedBoxM,
+        KSizedBox.kHeightSizedBox30,
         const QuestionWidget(
           title: KAppText.questionTitle,
           subtitle: KAppText.questionSubtitle,
         ),
-        KSizedBox.kHeightSizedBoxM,
+        KSizedBox.kHeightSizedBox30,
         const BoxWidget(
           text: KAppText.footerDiscountsCoupons,
         ),
-        KSizedBox.kHeightSizedBoxM,
+        KSizedBox.kHeightSizedBox30,
       ],
     );
   }

@@ -57,13 +57,13 @@ class _DropListFieldWidgetState extends State<DropListFieldWidget> {
             ),
             child: Padding(
               padding: const EdgeInsets.symmetric(
-                horizontal: KPadding.kPaddingSizeML,
+                horizontal: KPadding.kPaddingSize32,
               ),
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
                   options.elementAt(index),
-                  style: AppTextStyle.lableM,
+                  style: AppTextStyle.text24,
                 ),
               ),
             ),

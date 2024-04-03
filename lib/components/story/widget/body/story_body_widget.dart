@@ -8,13 +8,13 @@ class StoryBodyWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        KSizedBox.kHeightSizedBoxM,
+        KSizedBox.kHeightSizedBox30,
         StoryCardWidget(
           storyDate: KMockText.date,
           userName: KMockText.userName,
           story: KMockText.cardData,
         ),
-        KSizedBox.kHeightSizedBoxM,
+        KSizedBox.kHeightSizedBox30,
       ],
     );
   }

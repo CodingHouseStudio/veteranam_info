@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:kozak/shared/shared.dart';
 
 abstract class KBorderRadius {
-  static BorderRadius kBorderRadiusM = BorderRadius.circular(KSize.kRadiusM);
-  static BorderRadius kBorderRadiusS = BorderRadius.circular(KSize.kPixelS);
-  static BorderRadius kBorderRadiusL = BorderRadius.circular(KSize.kPixelML);
-  static BorderRadius kBorderRadiusLeftM =
-      const BorderRadius.horizontal(left: Radius.circular(KSize.kRadiusM));
+  static BorderRadius kBorderRadius32 = BorderRadius.circular(KSize.kRadius32);
+  static BorderRadius kBorderRadiusS = BorderRadius.circular(KSize.kPixel8);
+  static BorderRadius kBorderRadiusL = BorderRadius.circular(KSize.kPixel48);
+  static BorderRadius kBorderRadiusLeft32 =
+      const BorderRadius.horizontal(left: Radius.circular(KSize.kRadius32));
 }

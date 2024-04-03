@@ -13,10 +13,10 @@ class FooterDescWidget extends StatelessWidget {
       decoration: KWidetTheme.boxDecorationCard,
       child: Padding(
         padding: isDesktop
-            ? const EdgeInsets.all(KPadding.kPaddingSizeXL)
+            ? const EdgeInsets.all(KPadding.kPaddingSize48)
             : const EdgeInsets.symmetric(
-                horizontal: KPadding.kPaddingSizeSM,
-                vertical: KPadding.kPaddingSizeML,
+                horizontal: KPadding.kPaddingSize16,
+                vertical: KPadding.kPaddingSize32,
               ),
         child: Column(
           children: [
@@ -34,8 +34,8 @@ class FooterDescWidget extends StatelessWidget {
             else
               Padding(
                 padding: const EdgeInsets.symmetric(
-                  horizontal: KPadding.kPaddingSizeSM,
-                  vertical: KPadding.kPaddingSizeML,
+                  horizontal: KPadding.kPaddingSize16,
+                  vertical: KPadding.kPaddingSize32,
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -43,9 +43,9 @@ class FooterDescWidget extends StatelessWidget {
                     Text(
                       KAppText.logo,
                       key: KWidgetkeys.widget.footer.logo,
-                      style: AppTextStyle.titleM,
+                      style: AppTextStyle.text24,
                     ),
-                    KSizedBox.kHeightSizedBoxSM,
+                    KSizedBox.kHeightSizedBox24,
                     Column(
                       children:
                           List.generate(KAppText.buttonsText.length, (index) {
@@ -63,19 +63,19 @@ class FooterDescWidget extends StatelessWidget {
                   ],
                 ),
               ),
-            if (isDesktop) KSizedBox.kHeightSizedBoxML,
+            if (isDesktop) KSizedBox.kHeightSizedBox48,
             Row(
               children: [
                 IconWidget(
                   key: KWidgetkeys.widget.footer.likedInIcon,
                   icon: KIcon.linkedIn,
                 ),
-                KSizedBox.kWidthSizedBoxSM,
+                KSizedBox.kWidthSizedBox24,
                 IconWidget(
                   key: KWidgetkeys.widget.footer.instagramIcon,
                   icon: KIcon.instagram,
                 ),
-                KSizedBox.kWidthSizedBoxSM,
+                KSizedBox.kWidthSizedBox24,
                 IconWidget(
                   key: KWidgetkeys.widget.footer.facebookIcon,
                   icon: KIcon.facebook,
@@ -109,7 +109,7 @@ class _FooterDescImplementationWidget extends StatelessWidget {
         late var topMargin = 0.0;
         if (index > 0) {
           topMargin =
-              isDesktop ? KPadding.kPaddingSizeML : KPadding.kPaddingSizeSM;
+              isDesktop ? KPadding.kPaddingSize32 : KPadding.kPaddingSize16;
         }
         return Container(
           margin: EdgeInsets.only(top: topMargin),
@@ -126,10 +126,10 @@ class _FooterDescImplementationWidget extends StatelessWidget {
                         ? '\n${KMockText.emial}'
                         : ''),
                 style: isDesktop
-                    ? AppTextStyle.lableML
+                    ? AppTextStyle.text32
                     : columnIndex == 0
-                        ? AppTextStyle.lableM
-                        : AppTextStyle.lableXS,
+                        ? AppTextStyle.text24
+                        : AppTextStyle.text14,
               ),
             ),
             onPressed: () => context.go(routes.elementAt(index)),
