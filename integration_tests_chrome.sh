@@ -36,12 +36,7 @@ run_flutter_test() {
 
 # List of tests to run
 TESTS=(
-    "discounts"
-    "information"
-    "investors"
-    "profile"
-    "story"
-    "work"
+    "navigation"
 )
 
 run_flutter_test "${TESTS[@]}"
