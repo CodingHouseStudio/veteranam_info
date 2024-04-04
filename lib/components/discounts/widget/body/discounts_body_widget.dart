@@ -83,7 +83,7 @@ class DiscountsBodyWidget extends StatelessWidget {
             ),
             KSizedBox.kHeightSizedBox16,
           ],
-        ),
+        
     );
   }
 }
