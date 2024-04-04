@@ -27,6 +27,8 @@ abstract class KTestText {
   static const String footer = 'Контакти\n';
 
   static const filterCubit = 'Filter Cubit';
+
+  static const field = 'field_test';
 }
 
 abstract class KTestConstants {
