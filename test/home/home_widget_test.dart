@@ -65,7 +65,7 @@ void main() {
       });
 
       group('go to', () {
-        testWidgets('All footer screens', (tester) async {
+        testWidgets('All footer widget navigation', (tester) async {
           await tester.pumpApp(const HomeScreen(), mockGoRouter: mockGoRouter);
 
           expect(
@@ -76,6 +76,22 @@ void main() {
           await tester.pumpAndSettle();
 
           await footerButtonsHelper(
+            tester: tester,
+            mockGoRouter: mockGoRouter,
+          );
+        });
+
+        testWidgets('nawbar widget navigation', (tester) async {
+          await tester.pumpApp(const HomeScreen(), mockGoRouter: mockGoRouter);
+
+          expect(
+            find.byKey(KWidgetkeys.screen.home.screen),
+            findsOneWidget,
+          );
+
+          await tester.pumpAndSettle();
+
+          await nawbarTitleHelper(
             tester: tester,
             mockGoRouter: mockGoRouter,
           );

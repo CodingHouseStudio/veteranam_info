@@ -28,6 +28,7 @@ abstract class KAppText {
   static const storyCardButtonDetail = 'Детальніше';
   static const storyCardButtonNotDetail = 'Сховати';
   static const nickname = '@veteran';
+  static const String send = 'Надіслати';
   static const email = 'example@gmail.com';
   static const anonymous = 'Бути анонімом';
   static const description =
