@@ -62,6 +62,4 @@ abstract class KWidgetkeys {
   static _ScreenKeys get screen => _ScreenKeys();
 
   static _WidgetKeys get widget => _WidgetKeys();
-
-  static _ButtonMobWidget get buttonMob => _ButtonMobWidget();
 }
