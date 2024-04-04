@@ -70,36 +70,11 @@ class _FilterBoxWidgetState extends State<FilterBoxWidget> {
           right: KPadding.kPaddingSize20,
           bottom: KPadding.kPaddingSize10,
         ),
-        child: BlocBuilder<FilterCubit, List<dynamic>>(
-          builder: (context, state) {
-            return FilterChip(
-              key: widget.filters.last == filter
-                  ? KWidgetkeys.widget.filter.lastChip
-                  : null,
-              label: Text(
-                filter,
-                style: AppTextStyle.text18,
-              ),
-              shape: RoundedRectangleBorder(
-                borderRadius: KBorderRadius.kBorderRadius32,
-              ),
-              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-              selected: context.read<FilterCubit>().state.isNotEmpty &&
-                  context
-                      .read<FilterCubit>()
-                      .state
-                      .elementAt(0)
-                      .toString()
-                      .contains(filter),
-              onSelected: (bool isSelected) =>
-                  context.read<FilterCubit>().change(
-                        filterValue: filter,
-                        index: 0,
-                      ),
-              checkmarkColor: AppColors.black,
-              selectedColor: AppColors.widgetBackground,
-            );
-          },
+        child: ChipWidget(
+          filterKey: widget.filters.last == filter
+              ? KWidgetkeys.widget.filter.lastChip
+              : null,
+          filter: filter,
         ),
       );
     }).toList();
