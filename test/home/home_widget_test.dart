@@ -32,7 +32,7 @@ void main() {
 
       await dropListFieldBoxHelper(
         tester: tester,
-        dropListitem: KMockText.dropDownList.elementAt(0),
+        text: KMockText.dropDownList.elementAt(0),
       );
 
       await boxHelper(tester);
@@ -58,7 +58,7 @@ void main() {
 
         await dropListFieldBoxHelper(
           tester: tester,
-          dropListitem: KMockText.dropDownList.elementAt(0),
+          text: KMockText.dropDownList.elementAt(0),
         );
 
         await boxHelper(tester);

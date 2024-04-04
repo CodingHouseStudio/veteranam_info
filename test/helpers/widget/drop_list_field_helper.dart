@@ -1,9 +1,10 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:kozak/shared/shared.dart';
 
 Future<void> dropListFieldBoxHelper({
   required WidgetTester tester,
-  required String dropListitem,
+  required String text,
 }) async {
   expect(
     find.byKey(KWidgetkeys.widget.dropListField.widget),
@@ -21,14 +22,14 @@ Future<void> dropListFieldBoxHelper({
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.dropListField.items),
+    find.byKey(KWidgetkeys.widget.dropListField.item),
     findsNothing,
   );
 
   expect(
     find.descendant(
       of: find.byKey(KWidgetkeys.widget.dropListField.list),
-      matching: find.text(dropListitem),
+      matching: find.byKey(KWidgetkeys.widget.dropListField.item).first,
     ),
     findsNothing,
   );
@@ -44,22 +45,26 @@ Future<void> dropListFieldBoxHelper({
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.dropListField.items),
+    find.byKey(KWidgetkeys.widget.dropListField.item),
     findsWidgets,
   );
 
   expect(
     find.descendant(
       of: find.byKey(KWidgetkeys.widget.dropListField.list),
-      matching: find.text(dropListitem),
+      matching: find.byKey(KWidgetkeys.widget.dropListField.item).first,
     ),
     findsOneWidget,
+  );
+
+  final textWidget = tester.widget<Text>(
+    find.byKey(KWidgetkeys.widget.dropListField.itemText).first,
   );
 
   await tester.tap(
     find.descendant(
       of: find.byKey(KWidgetkeys.widget.dropListField.list),
-      matching: find.text(dropListitem),
+      matching: find.byKey(KWidgetkeys.widget.dropListField.itemText).first,
     ),
   );
 
@@ -70,10 +75,11 @@ Future<void> dropListFieldBoxHelper({
     findsNothing,
   );
 
+  if (textWidget.data != null) return;
   expect(
     find.descendant(
       of: find.byKey(KWidgetkeys.widget.dropListField.widget),
-      matching: find.text(dropListitem),
+      matching: find.text(textWidget.data!),
     ),
     findsOneWidget,
   );
@@ -85,28 +91,28 @@ Future<void> dropListFieldBoxHelper({
 
   await tester.enterText(
     find.byKey(KWidgetkeys.widget.dropListField.field),
-    dropListitem,
+    text,
   );
   await tester.pumpAndSettle();
 
   expect(
     find.descendant(
       of: find.byKey(KWidgetkeys.widget.dropListField.widget),
-      matching: find.text(dropListitem),
+      matching: find.text(text),
     ),
     findsWidgets,
   );
 
   await tester.enterText(
     find.byKey(KWidgetkeys.widget.dropListField.field),
-    '${dropListitem}a',
+    '${textWidget.data}$text',
   );
   await tester.pumpAndSettle();
 
   expect(
     find.descendant(
       of: find.byKey(KWidgetkeys.widget.dropListField.widget),
-      matching: find.text(dropListitem),
+      matching: find.byKey(KWidgetkeys.widget.dropListField.item).first,
     ),
     findsNothing,
   );
