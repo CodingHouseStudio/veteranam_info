@@ -9,33 +9,29 @@ class ChipWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<FilterCubit, List<dynamic>>(
-      builder: (context, state) {
-        return FilterChip(
-          key: filterKey,
-          label: Text(
-            filter,
-            style: AppTextStyle.text18,
+    return FilterChip(
+      key: filterKey,
+      label: Text(
+        filter,
+        style: AppTextStyle.text18,
+      ),
+      shape: RoundedRectangleBorder(
+        borderRadius: KBorderRadius.kBorderRadius32,
+      ),
+      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+      selected: context.read<FilterCubit>().state.isNotEmpty &&
+          context
+              .read<FilterCubit>()
+              .state
+              .elementAt(0)
+              .toString()
+              .contains(filter),
+      onSelected: (bool isSelected) => context.read<FilterCubit>().change(
+            filterValue: filter,
+            index: 0,
           ),
-          shape: RoundedRectangleBorder(
-            borderRadius: KBorderRadius.kBorderRadius32,
-          ),
-          materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-          selected: context.read<FilterCubit>().state.isNotEmpty &&
-              context
-                  .read<FilterCubit>()
-                  .state
-                  .elementAt(0)
-                  .toString()
-                  .contains(filter),
-          onSelected: (bool isSelected) => context.read<FilterCubit>().change(
-                filterValue: filter,
-                index: 0,
-              ),
-          checkmarkColor: AppColors.black,
-          selectedColor: AppColors.widgetBackground,
-        );
-      },
+      checkmarkColor: AppColors.black,
+      selectedColor: AppColors.widgetBackground,
     );
   }
 }
