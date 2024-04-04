@@ -28,6 +28,7 @@ part 'screen/contact.dart';
 
 part 'screen/about_us.dart';
 
+part 'widget/widget.dart';
 part 'widget/question.dart';
 
 part 'widget/nawbar.dart';
@@ -44,6 +45,7 @@ part 'widget/story_card.dart';
 
 part 'widget/box.dart';
 
+part 'widget/button_mob.dart';
 part 'widget/card_text_detail.dart';
 
 part 'widget/work_card.dart';
@@ -53,8 +55,11 @@ part 'widget/card_text_detail_evaluate.dart';
 part 'widget/card_add_image.dart';
 
 part 'widget/news_card.dart';
-
 part 'widget/widget.dart';
+part 'widget/switch.dart';
+part 'widget/drop_chip.dart';
+part 'widget/chip.dart';
+part 'widget/filter_popup_menu.dart';
 
 part 'widget/discount_card.dart';
 

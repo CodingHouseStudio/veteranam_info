@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kozak/shared/shared.dart';
 
-class FooterDescWidget extends StatelessWidget {
-  const FooterDescWidget({required this.isDesktop, super.key});
+class FooterWidget extends StatelessWidget {
+  const FooterWidget({required this.isDesktop, super.key});
   final bool isDesktop;
 
   @override
@@ -25,7 +25,7 @@ class FooterDescWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: List.generate(KAppText.buttonsText.length, (index) {
                   return Expanded(
-                    child: _FooterDescImplementationWidget(
+                    child: _FooterImplementationWidget(
                       columnIndex: index,
                     ),
                   );
@@ -53,7 +53,7 @@ class FooterDescWidget extends StatelessWidget {
                           margin: const EdgeInsets.only(
                             bottom: KPadding.kPaddingSize24,
                           ),
-                          child: _FooterDescImplementationWidget(
+                          child: _FooterImplementationWidget(
                             columnIndex: index,
                             isDesktop: false,
                           ),
@@ -89,8 +89,8 @@ class FooterDescWidget extends StatelessWidget {
   }
 }
 
-class _FooterDescImplementationWidget extends StatelessWidget {
-  const _FooterDescImplementationWidget({
+class _FooterImplementationWidget extends StatelessWidget {
+  const _FooterImplementationWidget({
     required this.columnIndex,
     this.isDesktop = true,
   });
