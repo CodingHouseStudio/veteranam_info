@@ -46,4 +46,13 @@ abstract class KButtonStyles {
     padding: const EdgeInsets.symmetric(horizontal: KPadding.kPaddingSize8),
     shape: LinearBorder.bottom(side: const BorderSide()),
   );
+
+  static final ButtonStyle secondaryButtonStyle = TextButton.styleFrom(
+    minimumSize: const Size(328, 60),
+    backgroundColor: AppColors.widgetBackground,
+    padding: const EdgeInsets.all(KPadding.kPaddingSize4),
+    shape: RoundedRectangleBorder(
+      borderRadius: KBorderRadius.kBorderRadiusS,
+    ),
+  );
 }

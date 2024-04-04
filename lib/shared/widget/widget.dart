@@ -1,4 +1,5 @@
 export 'box_widget.dart';
+export 'button_mob_widget.dart';
 export 'button_widget.dart';
 export 'card_add_image_widget.dart';
 export 'card_text_detail_evaluate_widget.dart';
