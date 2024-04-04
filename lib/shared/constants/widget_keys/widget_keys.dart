@@ -56,14 +56,10 @@ part 'widget/card_text_detail_evaluate.dart';
 part 'widget/card_add_image.dart';
 
 part 'widget/news_card.dart';
-
-part 'widget/widget.dart';
 part 'widget/switch.dart';
 
 abstract class KWidgetkeys {
   static _ScreenKeys get screen => _ScreenKeys();
 
   static _WidgetKeys get widget => _WidgetKeys();
-
-  static _ButtonMobWidget get buttonMob => _ButtonMobWidget();
 }
