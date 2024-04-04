@@ -1,79 +1,5 @@
 import 'package:kozak/shared/shared.dart';
 
-abstract class KAppText {
-  static const logo = 'Veteran';
-  static const enterButtonText = 'Увійти';
-  static const searchTextFieldHint = 'Пошук...';
-  static const filterItemResetAll = 'Скинути фільтри';
-  static const messageTextFieldHint = 'Напишіть Ваше повідомлення';
-  static const nameTextFieldHint = "Напишіть ваще ім'я";
-  static const footerAboutUs = 'Про нас';
-  static const footerContact = 'Контакти';
-  static const footerConsultationOnline = 'Консультація онлайн';
-  static const footerStories = 'Історії';
-  static const footerDiscountsCoupons = 'Знижки і купони';
-  static const footerMyProfiel = 'Мій профіль';
-  static const footerWork = 'Робота';
-  static const footerInformation = 'Інформація';
-  static const footerForInvestors = 'Для інвесторів';
-  static const storyCardButtonDetail = 'Детальніше';
-  static const storyCardButtonNotDetail = 'Сховати';
-  static const nickname = '@veteran';
-  static const email = 'example@gmail.com';
-  static const anonymous = 'Бути анонімом';
-  static const description =
-      'Якщо ви робите свій профіль анонімним, на вашій сторінці не\n'
-      'буде відображатися персональна інформація, тільки\nnickname.';
-  static const userName = 'Володимир Левандовський';
-  static const questionTitle =
-      'Як мені знайти роботу за допомогою цього сайту?';
-  static const questionSubtitle =
-      'Використовуйте веб-сайти спеціалізованих сервісів для пошуку роботи, '
-      'таких як Indeed, LinkedIn, Glassdoor, Monster, або регіональні '
-      'ресурси. Виберіть свою область інтересів та регіон, і шукайте '
-      'вакансії, які відповідають вашим критеріям.';
-  static const errorTitle = 'Помилка';
-  static const error = 'Помилка при завнтаженні сторінки';
-  static const workRespondButton = 'Відгукнутись';
-  static const newsDetailButton = ['Читати більше', 'Читати менше'];
-
-  static const buttonsText = [
-    [
-      KAppText.footerAboutUs,
-      KAppText.footerForInvestors,
-      KAppText.footerContact,
-    ],
-    [
-      KAppText.footerStories,
-      KAppText.footerDiscountsCoupons,
-      KAppText.footerMyProfiel,
-    ],
-    [
-      KAppText.footerWork,
-      KAppText.footerInformation,
-      KAppText.footerConsultationOnline,
-    ],
-  ];
-
-  static final routes = [
-    [
-      '${KRoute.home.path}${KRoute.aboutUs.path}',
-      '${KRoute.home.path}${KRoute.investors.path}',
-      '${KRoute.home.path}${KRoute.contact.path}',
-    ],
-    [
-      '${KRoute.home.path}${KRoute.story.path}',
-      '${KRoute.home.path}${KRoute.discounts.path}',
-      '${KRoute.home.path}${KRoute.profile.path}',
-    ],
-    [
-      '${KRoute.home.path}${KRoute.work.path}',
-      '${KRoute.home.path}${KRoute.information.path}',
-      '${KRoute.home.path}${KRoute.consultation.path}',
-    ],
-  ];
-}
-
 abstract class KMockText {
   static const dropDownList = [
     'Житомир',
@@ -83,9 +9,15 @@ abstract class KMockText {
     'Трускавець',
     'Стебник',
   ];
+  static const userName = 'Володимир Левандовський';
+  static const nickname = '@veteran';
+  static const email = 'example@gmail.com';
+  static const description =
+      'Якщо ви робите свій профіль анонімним, на вашій сторінці не\n'
+      'буде відображатися персональна інформація, тільки\nnickname.';
   static const filter = ['Пільги', 'Житло', 'Гарячі лінії'];
   static final date = DateTime(2024, 03, 12);
-  static const userName = 'Anonim23456';
+  static const userNameAnonim = 'Anonim23456';
   static const emial = 'example@gmail.com';
   static const tags = ['Пільги'];
   static const workTitle = 'Комплектувальник товару в магазин';
@@ -93,6 +25,13 @@ abstract class KMockText {
   static const workCity = 'м.Одеса';
   static const workEmployer = 'ТОВ Сільпо';
   static const title = 'Заголовок дуже довгий';
+  static const questionTitle =
+      'Як мені знайти роботу за допомогою цього сайту?';
+  static const questionSubtitle =
+      'Використовуйте веб-сайти спеціалізованих сервісів для пошуку роботи, '
+      'таких як Indeed, LinkedIn, Glassdoor, Monster, або регіональні '
+      'ресурси. Виберіть свою область інтересів та регіон, і шукайте '
+      'вакансії, які відповідають вашим критеріям.';
   static const workDescription = '''
 **Ми шукаємо відповідальну та організовану особу на посаду комплектувальника товару в наш магазин.** Це надзвичайно важлива роль, яка допоможе нам забезпечити ефективну роботу нашого магазину та задоволення потреб наших клієнтів.
 
@@ -139,4 +78,24 @@ abstract class KMockText {
 
   static const image =
       'https://static.vecteezy.com/system/resources/thumbnails/008/492/251/small/back-to-school-illustration-cartoon-character-children-kid-png.png';
+}
+
+abstract class KAppText {
+  static final routes = [
+    [
+      '${KRoute.home.path}${KRoute.aboutUs.path}',
+      '${KRoute.home.path}${KRoute.investors.path}',
+      '${KRoute.home.path}${KRoute.contact.path}',
+    ],
+    [
+      '${KRoute.home.path}${KRoute.story.path}',
+      '${KRoute.home.path}${KRoute.discounts.path}',
+      '${KRoute.home.path}${KRoute.profile.path}',
+    ],
+    [
+      '${KRoute.home.path}${KRoute.work.path}',
+      '${KRoute.home.path}${KRoute.information.path}',
+      '${KRoute.home.path}${KRoute.consultation.path}',
+    ],
+  ];
 }

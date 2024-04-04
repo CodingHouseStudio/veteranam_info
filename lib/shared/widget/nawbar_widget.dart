@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kozak/l10n/l10n.dart';
 import 'package:kozak/shared/shared.dart';
 
 class NawbarWidget extends StatefulWidget implements PreferredSizeWidget {
@@ -73,7 +74,7 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                       children: [
                         KSizedBox.kWidthSizedBox30,
                         Text(
-                          KAppText.logo,
+                          context.l10n.logo,
                           key: KWidgetkeys.widget.nawbar.title,
                           style: isDesktop
                               ? AppTextStyle.text32
@@ -91,7 +92,7 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                       focusNode: focusNode,
                       prefixIcon: KIcon.search,
                       onChanged: (text) {},
-                      hintText: KAppText.searchTextFieldHint,
+                      hintText: context.l10n.search,
                       suffixIcon: isDesktop
                           ? null
                           : Container(
@@ -105,24 +106,23 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                     ),
                   ),
                   if (isDesktop)
-                    Row(
-                      children: [
-                        IconWidget(
-                          key: KWidgetkeys.widget.nawbar.iconMic,
-                          icon: KIcon.mic,
-                        ),
-                        KSizedBox.kWidthSizedBox48,
-                        TextButton(
-                          key: KWidgetkeys.widget.nawbar.button,
-                          style: KButtonStyles.whiteButtonStyle,
-                          onPressed: null,
-                          child: const Text(
-                            KAppText.enterButtonText,
-                            style: AppTextStyle.text24,
-                          ),
-                        ),
-                      ],
+                    IconWidget(
+                      key: KWidgetkeys.widget.nawbar.iconMic,
+                      icon: KIcon.mic,
                     ),
+                  KSizedBox.kWidthSizedBox10,
+                  if (isDesktop)
+                    TextButton(
+                      key: KWidgetkeys.widget.nawbar.button,
+                      style: KButtonStyles.whiteButtonStyle,
+                      onPressed: null,
+                      child: Text(
+                        context.l10n.login,
+                        style: AppTextStyle.text24,
+                      ),
+                    ),
+                  KSizedBox.kWidthSizedBox10,
+                  const LanguagesSwitcherWidget(),
                   if (isDesktop || !isFocused)
                     IconWidget(
                       key: KWidgetkeys.widget.nawbar.iconPerson,

@@ -1,7 +1,30 @@
 {
-    "@@locale": "en",
-    "counterAppBarTitle": "Counter",
-    "@counterAppBarTitle": {
-        "description": "Text shown in the AppBar of the Counter Page"
-    }
+  "@@locale": "en",
+  "language": "English",
+  "english": "English",
+  "ukrain": "Ukrain",
+  "logo": "Veteran",
+  "login": "Login",
+  "search": "Search...",
+  "hide": "Hide",
+  "detail": "Detail",
+  "resetAllFilter": "Reset all filter",
+  "aboutUs": "About us",
+  "forInvestors": "For investors",
+  "contact": "Contact",
+  "stories": "Stories",
+  "discountsCoupons": "Discounts & coupons",
+  "myProfile": "My Profile",
+  "work": "Work",
+  "information": "Information",
+  "consultationOnline": "Consultation online",
+  "enterYourMessage": "Enter your message",
+  "readLess": "Read less",
+  "readMore": "Read more",
+  "respond": "Respond",
+  "email": "E-mail",
+  "nickname": "Nickname",
+  "beAnonymous": "Be anonymous",
+  "errorTitle": "Error",
+  "errorMessage": "An error occurred while loading the page"
 }

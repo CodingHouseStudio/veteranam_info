@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kozak/l10n/l10n.dart';
 import 'package:kozak/shared/shared.dart';
 
 class ProfileCardWidget extends StatefulWidget {
@@ -41,11 +42,11 @@ class _ProfileCardWidgetState extends State<ProfileCardWidget> {
                         },
                       ),
                       KSizedBox.kWidthSizedBox8,
-                      const Text(KAppText.anonymous),
+                      Text(context.l10n.beAnonymous),
                     ],
                   ),
                   const Text(
-                    KAppText.description,
+                    KMockText.description,
                     style: AppTextStyle.hint14,
                   ),
                 ],
@@ -79,7 +80,7 @@ class _ProfileCardWidgetState extends State<ProfileCardWidget> {
             children: [
               Expanded(
                 child: Text(
-                  KAppText.userName,
+                  KMockText.userName,
                   style: AppTextStyle.text40,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -107,7 +108,7 @@ class _ProfileCardWidgetState extends State<ProfileCardWidget> {
             TextField(
               decoration: InputDecoration(
                 border: KBorder.buttonStyleOutlineInputBorder,
-                labelText: KAppText.email,
+                labelText: context.l10n.email,
                 labelStyle: AppTextStyle.hint24,
               ),
               onChanged: (value) {},
@@ -125,7 +126,7 @@ class _ProfileCardWidgetState extends State<ProfileCardWidget> {
             TextField(
               decoration: InputDecoration(
                 border: KBorder.buttonStyleOutlineInputBorder,
-                labelText: KAppText.nickname,
+                labelText: context.l10n.nickname,
                 labelStyle: AppTextStyle.hint24,
               ),
               onChanged: (value) {},

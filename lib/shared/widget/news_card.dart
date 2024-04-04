@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kozak/l10n/l10n.dart';
 
 import 'package:kozak/shared/shared.dart';
 
@@ -20,7 +21,10 @@ class NewsCardWidget extends StatelessWidget {
     return CardTextDetailEvaluateWidget(
       image: image,
       text: news,
-      buttonText: KAppText.newsDetailButton,
+      buttonText: [
+        context.l10n.readMore,
+        context.l10n.readMore,
+      ],
       buttonStyle: KButtonStyles.transparentButtonStyleBottomBorder,
       titleWidget: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,

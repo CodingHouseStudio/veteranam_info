@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kozak/l10n/l10n.dart';
 import 'package:kozak/shared/shared.dart';
 
 class WorkCardWidget extends StatelessWidget {
@@ -73,13 +74,13 @@ class WorkCardWidget extends StatelessWidget {
             key: KWidgetkeys.widget.workCard.button,
             style: KButtonStyles.lightGrayButtonStyle,
             onPressed: null,
-            child: const Padding(
-              padding: EdgeInsets.symmetric(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
                 vertical: KPadding.kPaddingSize32,
                 horizontal: KPadding.kPaddingSize80,
               ),
               child: Text(
-                KAppText.workRespondButton,
+                context.l10n.respond,
                 style: AppTextStyle.text32,
               ),
             ),
