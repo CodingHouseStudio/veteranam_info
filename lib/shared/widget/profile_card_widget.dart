@@ -1,15 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:kozak/shared/shared.dart';
 
-class ProfileCardWidget extends StatefulWidget {
+class ProfileCardWidget extends StatelessWidget {
   const ProfileCardWidget({super.key});
-
-  @override
-  State<ProfileCardWidget> createState() => _ProfileCardWidgetState();
-}
-
-class _ProfileCardWidgetState extends State<ProfileCardWidget> {
-  bool _value = false;
 
   @override
   Widget build(BuildContext context) {
@@ -26,25 +19,17 @@ class _ProfileCardWidgetState extends State<ProfileCardWidget> {
               KSizedBox.kHeightSizedBox30,
               _buildProfileInfo(),
               KSizedBox.kHeightSizedBox8,
-              Column(
+              const Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
                     children: [
-                      Switch(
-                        activeColor: AppColors.error,
-                        value: _value,
-                        onChanged: (newValue) {
-                          setState(() {
-                            _value = newValue;
-                          });
-                        },
-                      ),
+                      SwitchWidget(),
                       KSizedBox.kWidthSizedBox8,
-                      const Text(KAppText.anonymous),
+                      Text(KAppText.anonymous),
                     ],
                   ),
-                  const Text(
+                  Text(
                     KAppText.description,
                     style: AppTextStyle.hint14,
                   ),
