@@ -15,4 +15,5 @@ class _WidgetKeys {
   final cardAddImage = _CardAddImageKeys();
   final newsCard = _NewsCardKeys();
   final switchKeys = _SwitchKeys();
+  final buttonMob = _ButtonMobWidget();
 }
