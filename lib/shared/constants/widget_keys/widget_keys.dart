@@ -55,7 +55,6 @@ part 'widget/card_text_detail_evaluate.dart';
 part 'widget/card_add_image.dart';
 
 part 'widget/news_card.dart';
-part 'widget/widget.dart';
 part 'widget/switch.dart';
 part 'widget/drop_chip.dart';
 part 'widget/chip.dart';
