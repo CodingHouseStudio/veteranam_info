@@ -32,7 +32,7 @@ Future<void> cardTextDetailHelper({
     find.descendant(
       of: find.byKey(KWidgetkeys.widget.cardTextDetail.widget),
       matching: find.text(
-        detailButtonText?.elementAt(0) ?? KAppText.storyCardButtonDetail,
+        detailButtonText?.elementAt(0) ?? KTestText.storyCardButtonDetail,
       ),
     ),
     findsOneWidget,
@@ -58,7 +58,7 @@ Future<void> cardTextDetailHelper({
     find.descendant(
       of: find.byKey(KWidgetkeys.widget.cardTextDetail.widget),
       matching: find.text(
-        detailButtonText?.elementAt(1) ?? KAppText.storyCardButtonNotDetail,
+        detailButtonText?.elementAt(1) ?? KTestText.storyCardButtonNotDetail,
       ),
     ),
     findsOneWidget,
@@ -87,7 +87,7 @@ Future<void> cardTextDetailHelper({
     find.descendant(
       of: find.byKey(KWidgetkeys.widget.cardTextDetail.widget),
       matching: find.text(
-        detailButtonText?.elementAt(0) ?? KAppText.storyCardButtonDetail,
+        detailButtonText?.elementAt(0) ?? KTestText.storyCardButtonDetail,
       ),
     ),
     findsOneWidget,

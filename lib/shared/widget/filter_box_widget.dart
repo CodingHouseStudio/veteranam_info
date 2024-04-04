@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kozak/l10n/l10n.dart';
 import 'package:kozak/shared/shared.dart';
 
 class FilterBoxWidget extends StatefulWidget {
@@ -28,15 +29,15 @@ class _FilterBoxWidgetState extends State<FilterBoxWidget> {
             return [
               PopupMenuItem<String>(
                 key: KWidgetkeys.widget.filter.popupMenuResetAll,
-                value: KAppText.filterItemResetAll,
-                child: const ListTile(
-                  title: Text(KAppText.filterItemResetAll),
+                value: context.l10n.resetAllFilter,
+                child: ListTile(
+                  title: Text(context.l10n.resetAllFilter),
                 ),
               ),
             ];
           },
           onSelected: (dynamic selectedValue) {
-            if (selectedValue == KAppText.filterItemResetAll) {
+            if (selectedValue == context.l10n.resetAllFilter) {
               context.read<FilterCubit>().resetAllValues();
             }
           },

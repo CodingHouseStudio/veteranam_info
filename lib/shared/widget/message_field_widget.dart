@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kozak/l10n/l10n.dart';
 import 'package:kozak/shared/shared.dart';
 
 class MessageFieldWidget extends StatelessWidget {
@@ -11,7 +12,7 @@ class MessageFieldWidget extends StatelessWidget {
       child: TextFieldWidget(
         widgetKey: KWidgetkeys.widget.input.field,
         onChanged: changeMessage,
-        hintText: KAppText.messageTextFieldHint,
+        hintText: context.l10n.enterYourMessage,
         maxLines: 4,
         fillColor: AppColors.white,
         enabledBorder: KBorder.outlineInputLightGray,

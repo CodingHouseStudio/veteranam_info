@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kozak/components/components.dart';
+import 'package:kozak/l10n/l10n.dart';
 import 'package:kozak/shared/shared.dart';
 
 class ErrorScreen extends StatelessWidget {
@@ -11,7 +12,7 @@ class ErrorScreen extends StatelessWidget {
       key: KWidgetkeys.screen.error.screen,
       appBar: AppBar(
         title: Text(
-          KAppText.errorTitle,
+          context.l10n.errorTitle,
           key: KWidgetkeys.screen.error.title,
         ),
       ),

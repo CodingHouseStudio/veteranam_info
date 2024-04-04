@@ -17,12 +17,12 @@ Future<void> newsCardHelper({
     await cardAddImageHelper(
       tester: tester,
       image: image,
-      detailButtonText: KAppText.newsDetailButton,
+      detailButtonText: KTestText.newsDetailButton,
     );
   } else {
     await cardTextDetailEvaluateHelper(
       tester: tester,
-      detailButtonText: KAppText.newsDetailButton,
+      detailButtonText: KTestText.newsDetailButton,
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kozak/l10n/l10n.dart';
 import 'package:kozak/shared/shared.dart';
 
 class CardTextDetailWidget extends StatefulWidget {
@@ -59,10 +60,8 @@ class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
                     widget.buttonStyle ?? KButtonStyles.whiteButtonStyleBorder,
                 child: Text(
                   maxLines == null
-                      ? widget.buttonText?.elementAt(1) ??
-                          KAppText.storyCardButtonNotDetail
-                      : widget.buttonText?.elementAt(0) ??
-                          KAppText.storyCardButtonDetail,
+                      ? widget.buttonText?.elementAt(1) ?? context.l10n.hide
+                      : widget.buttonText?.elementAt(0) ?? context.l10n.detail,
                   style: AppTextStyle.text18,
                 ),
               ),

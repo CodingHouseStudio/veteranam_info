@@ -27,6 +27,10 @@ abstract class KTestText {
   static const String footer = 'Контакти\n';
 
   static const filterCubit = 'Filter Cubit';
+
+  static const storyCardButtonDetail = 'Детальніше';
+  static const storyCardButtonNotDetail = 'Сховати';
+  static const newsDetailButton = ['Читати більше', 'Читати менше'];
 }
 
 abstract class KTestConstants {
