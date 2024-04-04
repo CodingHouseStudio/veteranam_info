@@ -58,9 +58,9 @@ abstract class KButtonStyles {
   static final ButtonStyle secondaryButtonStyle = TextButton.styleFrom(
     minimumSize: const Size(328, 60),
     backgroundColor: AppColors.widgetBackground,
-    padding: const EdgeInsets.all(KPadding.kPaddingSizeXSS),
+    padding: const EdgeInsets.all(KPadding.kPaddingSize4),
     shape: RoundedRectangleBorder(
-      borderRadius: KBorderRadius.kBorderRadiusM,
+      borderRadius: KBorderRadius.kBorderRadiusS,
     ),
   );
 }

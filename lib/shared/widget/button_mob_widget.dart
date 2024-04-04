@@ -13,7 +13,7 @@ class ButtonMobWidget extends StatelessWidget {
         key: KWidgetkeys.buttonMob.googleButton,
         label: const Text(
           KAppText.send,
-          style: AppTextStyle.lableMediumSmall,
+          style: AppTextStyle.text24,
         ),
         style: KButtonStyles.secondaryButtonStyle,
         icon: showGoogleIcon ? KIcon.google : const SizedBox.shrink(),
