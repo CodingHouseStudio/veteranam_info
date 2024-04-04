@@ -23,14 +23,6 @@ abstract class KButtonStyles {
       borderRadius: KBorderRadius.kBorderRadius32,
     ),
   );
-  static final ButtonStyle backgroundButtonStyleUI = TextButton.styleFrom(
-    backgroundColor: AppColors.background,
-    shape: RoundedRectangleBorder(
-      borderRadius: KBorderRadius.kBorderRadiusS,
-      side: const BorderSide(color: AppColors.widgetBackground),
-    ),
-    minimumSize: const Size(704, 92),
-  );
 
   static final ButtonStyle transparentButtonStyle = TextButton.styleFrom(
     minimumSize: const Size(KMinMaxSize.minWidth100, KMinMaxSize.minHeight50),
@@ -53,5 +45,14 @@ abstract class KButtonStyles {
     minimumSize: const Size(KMinMaxSize.minWidth100, KMinMaxSize.minHeight50),
     padding: const EdgeInsets.symmetric(horizontal: KPadding.kPaddingSize8),
     shape: LinearBorder.bottom(side: const BorderSide()),
+  );
+
+  static final ButtonStyle secondaryButtonStyle = TextButton.styleFrom(
+    minimumSize: const Size(328, 60),
+    backgroundColor: AppColors.widgetBackground,
+    padding: const EdgeInsets.all(KPadding.kPaddingSize4),
+    shape: RoundedRectangleBorder(
+      borderRadius: KBorderRadius.kBorderRadiusS,
+    ),
   );
 }
