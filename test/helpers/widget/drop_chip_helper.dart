@@ -27,6 +27,7 @@ Future<void> dropChipHelper(
 
   await tester.tap(
     find.byKey(KWidgetkeys.widget.dropChip.button).first,
+    warnIfMissed: false,
   );
 
   await tester.pumpAndSettle();

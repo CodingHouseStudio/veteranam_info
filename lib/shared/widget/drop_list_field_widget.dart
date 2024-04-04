@@ -48,7 +48,7 @@ class _DropListFieldWidgetState extends State<DropListFieldWidget> {
           key: KWidgetkeys.widget.dropListField.list,
           padding: EdgeInsets.zero,
           itemBuilder: (context, index) => TextButton(
-            key: KWidgetkeys.widget.dropListField.items,
+            key: KWidgetkeys.widget.dropListField.item,
             onPressed: () => onSelected(options.elementAt(index)),
             style: KButtonStyles.whiteButtonStyle.copyWith(
               shape: MaterialStateProperty.all(
@@ -63,6 +63,7 @@ class _DropListFieldWidgetState extends State<DropListFieldWidget> {
                 alignment: Alignment.centerLeft,
                 child: Text(
                   options.elementAt(index),
+                  key: KWidgetkeys.widget.dropListField.itemText,
                   style: AppTextStyle.text24,
                 ),
               ),
