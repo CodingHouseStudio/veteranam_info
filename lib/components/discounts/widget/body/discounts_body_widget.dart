@@ -21,13 +21,7 @@ class DiscountsBodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: KPadding.kPaddingSize48,
-          vertical: KPadding.kPaddingSize16,
-        ),
-        child: Column(
+    return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
@@ -90,7 +84,6 @@ class DiscountsBodyWidget extends StatelessWidget {
             KSizedBox.kHeightSizedBox16,
           ],
         ),
-      ),
     );
   }
 }
