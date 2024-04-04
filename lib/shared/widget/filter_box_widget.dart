@@ -96,6 +96,8 @@ class _FilterBoxWidgetState extends State<FilterBoxWidget> {
                         filterValue: filter,
                         index: 0,
                       ),
+              checkmarkColor: AppColors.black,
+              selectedColor: AppColors.widgetBackground,
             );
           },
         ),
