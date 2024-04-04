@@ -44,18 +44,26 @@ class _FilterBoxWidgetState extends State<FilterBoxWidget> {
         KSizedBox.kWidthSizedBox10,
         if (!KPlatformConstants.isWebMobile)
           Expanded(
-            child: Wrap(
-              key: KWidgetkeys.widget.filter.chips,
-              children: _buildChips(),
+            child: BlocBuilder<FilterCubit, List<dynamic>>(
+              builder: (context, state) {
+                return Wrap(
+                  key: KWidgetkeys.widget.filter.chips,
+                  children: _buildChips(),
+                );
+              },
             ),
           ),
         if (KPlatformConstants.isWebMobile)
           Expanded(
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
-              child: Row(
-                key: KWidgetkeys.widget.filter.chips,
-                children: _buildChips(),
+              child: BlocBuilder<FilterCubit, List<dynamic>>(
+                builder: (context, state) {
+                  return Row(
+                    key: KWidgetkeys.widget.filter.chips,
+                    children: _buildChips(),
+                  );
+                },
               ),
             ),
           ),
