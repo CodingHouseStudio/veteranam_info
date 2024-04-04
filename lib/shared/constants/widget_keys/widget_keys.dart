@@ -28,6 +28,7 @@ part 'screen/contact.dart';
 
 part 'screen/about_us.dart';
 
+part 'widget/widget.dart';
 part 'widget/question.dart';
 
 part 'widget/nawbar.dart';
@@ -57,6 +58,7 @@ part 'widget/card_add_image.dart';
 part 'widget/news_card.dart';
 
 part 'widget/widget.dart';
+part 'widget/switch.dart';
 
 abstract class KWidgetkeys {
   static _ScreenKeys get screen => _ScreenKeys();
