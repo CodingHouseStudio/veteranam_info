@@ -27,7 +27,7 @@ void main() {
           j++) {
         final buttonKey =
             KWidgetkeys.widget.footer.buttonsKey.elementAt(i).elementAt(j);
-        final screenKey = KWidgetkeys.screen.screens.elementAt(i).elementAt(j);
+        final screenKey = KTestConstants.screens.elementAt(i).elementAt(j);
 
         await scrollingHelper(
           tester: tester,
