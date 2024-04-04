@@ -28,7 +28,7 @@ void main() {
         tester,
       );
 
-      await messageFieldHelper(tester: tester, message: '');
+      await messageFieldHelper(tester: tester, message: KTestText.field);
 
       await dropListFieldBoxHelper(
         tester: tester,
@@ -54,7 +54,7 @@ void main() {
           tester,
         );
 
-        await messageFieldHelper(tester: tester, message: '');
+        await messageFieldHelper(tester: tester, message: KTestText.field);
 
         await dropListFieldBoxHelper(
           tester: tester,
