@@ -22,7 +22,7 @@ void main() {
         findsOneWidget,
       );
 
-      await nawbarHelper(tester: tester, searchText: '');
+      await nawbarHelper(tester: tester, searchText: KTestText.field);
 
       await footerHelper(tester: tester, email: KTestText.useremail);
     });

@@ -28,11 +28,11 @@ void main() {
         tester,
       );
 
-      await messageFieldHelper(tester: tester, message: '');
+      await messageFieldHelper(tester: tester, message: KTestText.field);
 
       await dropListFieldBoxHelper(
         tester: tester,
-        dropListitem: KMockText.dropDownList.elementAt(0),
+        text: KMockText.dropDownList.elementAt(0),
       );
 
       await boxHelper(tester);
@@ -54,11 +54,11 @@ void main() {
           tester,
         );
 
-        await messageFieldHelper(tester: tester, message: '');
+        await messageFieldHelper(tester: tester, message: KTestText.field);
 
         await dropListFieldBoxHelper(
           tester: tester,
-          dropListitem: KMockText.dropDownList.elementAt(0),
+          text: KMockText.dropDownList.elementAt(0),
         );
 
         await boxHelper(tester);
