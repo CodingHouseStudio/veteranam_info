@@ -25,4 +25,5 @@ abstract class KIcon {
   static const Icon error = Icon(Icons.error);
   static const Icon safe = Icon(Icons.bookmark_border_sharp);
   static const Icon check = Icon(Icons.check);
+  static const Icon google = Icon(FontAwesomeIcons.google);
 }
