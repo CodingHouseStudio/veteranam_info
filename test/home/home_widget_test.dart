@@ -3,7 +3,6 @@ import 'package:get_it/get_it.dart';
 import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
 
-import '../helpers/widget/nawbar_title_helper.dart';
 import '../text_dependency.dart';
 
 void main() {

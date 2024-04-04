@@ -19,35 +19,16 @@ class _FilterBoxWidgetState extends State<FilterBoxWidget> {
   @override
   Widget build(BuildContext context) {
     return Row(
+      key: KWidgetkeys.widget.filter.widget,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        PopupMenuButton<String>(
-          key: KWidgetkeys.widget.filter.popupMenu,
-          icon: KIcon.filter,
-          itemBuilder: (BuildContext context) {
-            return [
-              PopupMenuItem<String>(
-                key: KWidgetkeys.widget.filter.popupMenuResetAll,
-                value: KAppText.filterItemResetAll,
-                child: const ListTile(
-                  title: Text(KAppText.filterItemResetAll),
-                ),
-              ),
-            ];
-          },
-          onSelected: (dynamic selectedValue) {
-            if (selectedValue == KAppText.filterItemResetAll) {
-              context.read<FilterCubit>().resetAllValues();
-            }
-          },
-        ),
+        const FilterPopupMenu(),
         KSizedBox.kWidthSizedBox10,
         if (!KPlatformConstants.isWebMobile)
           Expanded(
             child: BlocBuilder<FilterCubit, List<dynamic>>(
               builder: (context, state) {
                 return Wrap(
-                  key: KWidgetkeys.widget.filter.chips,
                   children: _buildChips(),
                 );
               },
@@ -60,7 +41,6 @@ class _FilterBoxWidgetState extends State<FilterBoxWidget> {
               child: BlocBuilder<FilterCubit, List<dynamic>>(
                 builder: (context, state) {
                   return Row(
-                    key: KWidgetkeys.widget.filter.chips,
                     children: _buildChips(),
                   );
                 },
@@ -78,12 +58,13 @@ class _FilterBoxWidgetState extends State<FilterBoxWidget> {
           right: KPadding.kPaddingSize20,
           bottom: KPadding.kPaddingSize10,
         ),
-        child: ChipWidget(
-          filterKey: widget.filters.last == filter
-              ? KWidgetkeys.widget.filter.lastChip
-              : null,
-          filter: filter,
-        ),
+        child: widget.filters.first == filter
+            ? DropChipWidget(
+                filters: widget.filters,
+              )
+            : ChipWidget(
+                filter: filter,
+              ),
       );
     }).toList();
   }

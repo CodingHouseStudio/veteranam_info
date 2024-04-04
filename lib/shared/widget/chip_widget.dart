@@ -3,14 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kozak/shared/shared.dart';
 
 class ChipWidget extends StatelessWidget {
-  const ChipWidget({required this.filter, super.key, this.filterKey});
+  const ChipWidget({required this.filter, super.key});
   final String filter;
-  final Key? filterKey;
 
   @override
   Widget build(BuildContext context) {
     return FilterChip(
-      key: filterKey,
+      key: KWidgetkeys.widget.chip.widget,
       label: Text(
         filter,
         style: AppTextStyle.text18,

@@ -9,7 +9,7 @@ class ProfileCardWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Container(
-        decoration: KBoxDecoration.boxDecorPrimary,
+        decoration: KWidetTheme.boxDecorPrimary,
         child: Padding(
           padding: const EdgeInsets.all(KPadding.kPaddingSize10),
           child: Column(
