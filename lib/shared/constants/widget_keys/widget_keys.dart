@@ -57,7 +57,6 @@ part 'widget/card_add_image.dart';
 
 part 'widget/news_card.dart';
 
-part 'widget/widget.dart';
 part 'widget/switch.dart';
 
 abstract class KWidgetkeys {
