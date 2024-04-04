@@ -42,6 +42,24 @@ abstract class KTestConstants {
   static const windowTabletSize = Size(1500, 1500);
 
   static const windowMobileSize = Size(800, 800);
+
+  static final screens = [
+    [
+      KWidgetkeys.screen.aboutUs.screen,
+      KWidgetkeys.screen.investors.screen,
+      KWidgetkeys.screen.contact.screen,
+    ],
+    [
+      KWidgetkeys.screen.story.screen,
+      KWidgetkeys.screen.discounts.screen,
+      KWidgetkeys.screen.profile.screen,
+    ],
+    [
+      KWidgetkeys.screen.work.screen,
+      KWidgetkeys.screen.information.screen,
+      KWidgetkeys.screen.consultation.screen,
+    ],
+  ];
 }
 
 abstract class KTestText {

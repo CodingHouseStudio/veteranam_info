@@ -1,4 +1,6 @@
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:kozak/shared/shared.dart';
 
 class NawbarWidget extends StatefulWidget implements PreferredSizeWidget {
@@ -72,12 +74,19 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                     Row(
                       children: [
                         KSizedBox.kWidthSizedBox30,
-                        Text(
-                          KAppText.logo,
-                          key: KWidgetkeys.widget.nawbar.title,
-                          style: isDesktop
-                              ? AppTextStyle.text32
-                              : AppTextStyle.text24,
+                        InkWell(
+                          onTap: () => EasyDebounce.debounce(
+                            KAppText.logo,
+                            const Duration(milliseconds: 500),
+                            () => context.go(KRoute.home.path),
+                          ),
+                          child: Text(
+                            KAppText.logo,
+                            key: KWidgetkeys.widget.nawbar.title,
+                            style: isDesktop
+                                ? AppTextStyle.text32
+                                : AppTextStyle.text24,
+                          ),
                         ),
                         KSizedBox.kWidthSizedBox48,
                       ],
