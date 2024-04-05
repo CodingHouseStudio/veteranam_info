@@ -17,7 +17,7 @@ void main() {
         await cubit.initLanguage();
       },
       expect: () async => [
-        [Language.ukrain],
+        Language.ukrain,
       ],
     );
     blocTest<LanguageCubit, Language?>(
@@ -27,7 +27,7 @@ void main() {
         await cubit.changeLanguage(KTestConstants.englishIndex);
       },
       expect: () async => [
-        [Language.english],
+        Language.english,
       ],
     );
     blocTest<LanguageCubit, Language?>(
@@ -38,10 +38,8 @@ void main() {
         await cubit.changeLanguage(KTestConstants.englishIndex);
       },
       expect: () async => [
-        [
-          Language.ukrain,
-          Language.english,
-        ],
+        Language.ukrain,
+        Language.english,
       ],
     );
   });
