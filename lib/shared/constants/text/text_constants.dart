@@ -8,6 +8,15 @@ abstract class KAppText {
   static const messageTextFieldHint = 'Напишіть Ваше повідомлення';
   static const nameTextFieldHint = "Напишіть ваще ім'я";
   static const footerAboutUs = 'Про нас';
+  static const discount = 'Знижка 10%';
+  static const cityDiscount = 'м.Київ';
+  static const serviceDiscount = 'Стоматологічні послуги';
+  static const descriptionDiscount =
+      'Клініка Happy dentist надає знижки 10% на '
+      'всі види послуг для військових і ветеранів.';
+  static const dateDiscount = 'Діє з 12.03.2024 по 12.10.2024';
+  static const instructionDiscount = 'Щоб отримати потрібно: \nЗаписатися на'
+      ' прийом;\nПоказати документи, що підтверджують участь у бойових діях.';
   static const footerContact = 'Контакти';
   static const footerConsultationOnline = 'Консультація онлайн';
   static const footerStories = 'Історії';

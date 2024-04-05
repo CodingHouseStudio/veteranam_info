@@ -9,6 +9,12 @@ class DiscountsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return DiscountsBodyWidget(
       key: KWidgetkeys.screen.discounts.screen,
+      discount: KAppText.discount,
+      city: KAppText.cityDiscount,
+      service: KAppText.serviceDiscount,
+      description: KAppText.descriptionDiscount,
+      date: KAppText.dateDiscount,
+      instruction: KAppText.instructionDiscount,
     );
   }
 }
