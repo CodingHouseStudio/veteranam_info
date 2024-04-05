@@ -12,6 +12,8 @@ abstract class KIcon {
   static const Icon button = Icon(Icons.smart_button);
   static const Icon trailing = Icon(Icons.arrow_drop_down);
   static const Icon trailingUp = Icon(Icons.arrow_drop_up);
+  static const Icon arrowLeft = Icon(Icons.arrow_left);
+  static const Icon arrowRight = Icon(Icons.arrow_right);
   static const Icon linkedIn = Icon(FontAwesomeIcons.linkedinIn);
   static const Icon instagram = Icon(FontAwesomeIcons.instagram);
   static const Icon facebook = Icon(FontAwesomeIcons.facebookF);
