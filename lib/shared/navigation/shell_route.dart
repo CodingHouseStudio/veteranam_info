@@ -43,7 +43,7 @@ class ScaffoldWithNavBar extends StatelessWidget {
             ),
             children: [
               navigationShell,
-              FooterDescWidget(
+              FooterWidget(
                 isDesktop: isDesk,
               ),
             ],

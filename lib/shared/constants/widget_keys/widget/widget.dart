@@ -14,4 +14,10 @@ class _WidgetKeys {
   final cardTextDetailEvaluate = _CardTextDetailEvaluateKeys();
   final cardAddImage = _CardAddImageKeys();
   final newsCard = _NewsCardKeys();
+  final discountCard = _DiscountCardKeys();
+  final switchKeys = _SwitchKeys();
+  final buttonMob = _ButtonMobWidget();
+  final dropChip = _DropChipKeys();
+  final chip = _ChipKeys();
+  final filterPopupMenu = _FilterPopupMenuKeys();
 }

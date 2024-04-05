@@ -27,4 +27,10 @@ abstract class KIcon {
   static const Icon error = Icon(Icons.error);
   static const Icon safe = Icon(Icons.bookmark_border_sharp);
   static const Icon check = Icon(Icons.check);
+  static const Icon google = Icon(FontAwesomeIcons.google);
+  static const Icon volum = Icon(FontAwesomeIcons.volumeHigh);
+  static const Icon eye = Icon(Icons.visibility_outlined);
+  static const Icon eyeOff = Icon(Icons.visibility_off_outlined);
+  static const Icon refresh = Icon(FontAwesomeIcons.rotate);
+  static const Icon apple = Icon(FontAwesomeIcons.apple);
 }
