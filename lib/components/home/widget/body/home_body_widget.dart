@@ -43,6 +43,7 @@ class HomeBodyWidget extends StatelessWidget {
               },
             );
           },
+        ),
         const ButtonMobWidget(
           showGoogleIcon: true,
         ),
