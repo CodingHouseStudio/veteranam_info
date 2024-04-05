@@ -2,7 +2,6 @@ import 'dart:ui';
 
 import 'package:bloc/bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 const languagePrefsKey = 'languagePrefs';
 
@@ -11,25 +10,12 @@ class LanguageCubit extends Cubit<Language?> {
   LanguageCubit() : super(null);
 
   Future<void> changeLanguage(int languageIndex) async {
-    final language = languageIndex.getLocaleUseIndex;
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString(
-      languagePrefsKey,
-      language.value.languageCode,
-    );
-
-    emit(language);
+    emit(languageIndex.getLocaleUseIndex);
   }
 
   Future<void> initLanguage() async {
-    final prefs = await SharedPreferences.getInstance();
-    final selectedLanguage = prefs.getString(languagePrefsKey);
     emit(
-      selectedLanguage != null
-          ? Language.values
-              .where((item) => item.value.languageCode == selectedLanguage)
-              .first
-          : Language.ukrain,
+      Language.ukrain,
     );
   }
 }
