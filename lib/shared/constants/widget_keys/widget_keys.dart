@@ -46,7 +46,6 @@ part 'widget/story_card.dart';
 part 'widget/box.dart';
 
 part 'widget/button_mob.dart';
-
 part 'widget/card_text_detail.dart';
 
 part 'widget/work_card.dart';
@@ -61,6 +60,8 @@ part 'widget/drop_chip.dart';
 part 'widget/chip.dart';
 part 'widget/filter_popup_menu.dart';
 part 'widget/language_switcher.dart';
+
+part 'widget/discount_card.dart';
 
 abstract class KWidgetkeys {
   static _ScreenKeys get screen => _ScreenKeys();
