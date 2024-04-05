@@ -12,12 +12,12 @@ extension PumpApp on WidgetTester {
     return pumpWidget(
       BlocProvider(
         create: (context) => GetIt.I.get<LanguageCubit>()..initLanguage(),
-        child: BlocBuilder<LanguageCubit, Language>(
+        child: BlocBuilder<LanguageCubit, Language?>(
           builder: (context, state) => mockGoRouter == null
               ? MaterialApp(
                   localizationsDelegates:
                       AppLocalizations.localizationsDelegates,
-                  locale: state.value,
+                  locale: state?.value,
                   supportedLocales: AppLocalizations.supportedLocales,
                   home: ScaffoldWithNavBar(navigationShell: widget),
                 )
@@ -26,7 +26,7 @@ extension PumpApp on WidgetTester {
                   child: MaterialApp(
                     localizationsDelegates:
                         AppLocalizations.localizationsDelegates,
-                    locale: state.value,
+                    locale: state?.value,
                     supportedLocales: AppLocalizations.supportedLocales,
                     home: ScaffoldWithNavBar(navigationShell: widget),
                   ),

@@ -22,11 +22,11 @@ void main() {
       await tester.pumpWidget(
         BlocProvider(
           create: (context) => GetIt.I.get<LanguageCubit>()..initLanguage(),
-          child: BlocBuilder<LanguageCubit, Language>(
+          child: BlocBuilder<LanguageCubit, Language?>(
             builder: (context, state) {
               return MaterialApp(
                 localizationsDelegates: AppLocalizations.localizationsDelegates,
-                locale: state.value,
+                locale: state?.value,
                 supportedLocales: AppLocalizations.supportedLocales,
                 home: const ErrorScreen(),
               );
@@ -57,12 +57,12 @@ void main() {
         await tester.pumpWidget(
           BlocProvider(
             create: (context) => GetIt.I.get<LanguageCubit>()..initLanguage(),
-            child: BlocBuilder<LanguageCubit, Language>(
+            child: BlocBuilder<LanguageCubit, Language?>(
               builder: (context, state) {
                 return MaterialApp(
                   localizationsDelegates:
                       AppLocalizations.localizationsDelegates,
-                  locale: state.value,
+                  locale: state?.value,
                   supportedLocales: AppLocalizations.supportedLocales,
                   home: const ErrorScreen(),
                 );
@@ -92,14 +92,14 @@ void main() {
           await tester.pumpWidget(
             BlocProvider(
               create: (context) => GetIt.I.get<LanguageCubit>()..initLanguage(),
-              child: BlocBuilder<LanguageCubit, Language>(
+              child: BlocBuilder<LanguageCubit, Language?>(
                 builder: (context, state) {
                   return MockGoRouterProvider(
                     goRouter: mockGoRouter,
                     child: MaterialApp(
                       localizationsDelegates:
                           AppLocalizations.localizationsDelegates,
-                      locale: state.value,
+                      locale: state?.value,
                       supportedLocales: AppLocalizations.supportedLocales,
                       home: const ErrorScreen(),
                     ),
