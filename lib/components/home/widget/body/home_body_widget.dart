@@ -6,6 +6,7 @@ class HomeBodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final items = List<int>.generate(100, (index) => index);
     return Column(
       children: [
         MessageFieldWidget(changeMessage: (_) {}),
@@ -27,6 +28,21 @@ class HomeBodyWidget extends StatelessWidget {
         KSizedBox.kHeightSizedBox30,
         const BoxWidget(
           text: KAppText.footerDiscountsCoupons,
+        ),
+        KSizedBox.kHeightSizedBox30,
+        PaginationWidget(
+          items: items,
+          itemBuilder: (context, items) {
+            return ListView.builder(
+              shrinkWrap: true,
+              itemCount: items.length,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  title: Text('Item ${items[index]}'),
+                );
+              },
+            );
+          },
         ),
         KSizedBox.kHeightSizedBox30,
       ],
