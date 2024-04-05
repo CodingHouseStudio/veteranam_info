@@ -13,22 +13,4 @@ class _ScreenKeys {
   final aboutUs = _AboutUsKeys();
   final consultation = _ConsultationKeys();
   final contact = _ContactKeys();
-
-  List<List<Key>> get screens => [
-        [
-          aboutUs.screen,
-          investors.screen,
-          contact.screen,
-        ],
-        [
-          story.screen,
-          discounts.screen,
-          profile.screen,
-        ],
-        [
-          work.screen,
-          information.screen,
-          consultation.screen,
-        ],
-      ];
 }

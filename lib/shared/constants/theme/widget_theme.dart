@@ -32,6 +32,13 @@ abstract class KWidetTheme {
     shape: BoxShape.circle,
     color: Colors.grey,
   );
+  static BoxDecoration boxDecorPrimary = BoxDecoration(
+    color: AppColors.background,
+    border: Border.all(
+      color: AppColors.widgetBackground,
+    ),
+    borderRadius: KBorderRadius.kBorderRadius32,
+  );
 
   static InputDecoration inputDecoration = InputDecoration(
     hintStyle: AppTextStyle.hint24,
