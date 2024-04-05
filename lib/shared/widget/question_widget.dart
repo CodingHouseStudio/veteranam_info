@@ -16,6 +16,7 @@ class QuestionWidget extends StatefulWidget {
 
 class _QuestionWidgetState extends State<QuestionWidget> {
   late bool openQuestion;
+
   @override
   void initState() {
     openQuestion = false;
@@ -26,44 +27,52 @@ class _QuestionWidgetState extends State<QuestionWidget> {
   Widget build(BuildContext context) {
     return Container(
       decoration: KWidetTheme.boxDecorationWidget,
-      child: Theme(
-        data: ThemeData(
-          dividerColor: Colors.transparent,
-        ),
-        child: ExpansionTile(
-          key: KWidgetkeys.widget.question.widget,
-          title: Text(
-            widget.title,
-            key: KWidgetkeys.widget.question.title,
-            style: AppTextStyle.text40,
-            maxLines: 1,
+      child: Column(
+        children: [
+          InkWell(
+            onTap: () {
+              setState(() {
+                openQuestion = !openQuestion;
+              });
+            },
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: KPadding.kPaddingSize32,
+                vertical: KPadding.kPaddingSize16,
+              ),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      widget.title,
+                      style: AppTextStyle.text40,
+                      maxLines: 1,
+                    ),
+                  ),
+                  IconWidget(
+                    icon: openQuestion ? KIcon.minus : KIcon.plus,
+                    background: AppColors.widgetBackground,
+                  ),
+                ],
+              ),
+            ),
           ),
-          onExpansionChanged: (expanded) {
-            setState(() {
-              openQuestion = expanded;
-            });
-          },
-          trailing: IconWidget(
-            icon: openQuestion ? KIcon.minus : KIcon.plus,
-            background: AppColors.widgetBackground,
-            // padding: KPadding.kPaddingSizeM,
-          ),
-          children: [
-            Padding(
+          Visibility(
+            visible: openQuestion,
+            child: Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: KPadding.kPaddingSize32,
                 vertical: KPadding.kPaddingSize16,
               ),
               child: Text(
                 widget.subtitle,
-                key: KWidgetkeys.widget.question.subtitle,
                 style: AppTextStyle.text24,
                 softWrap: true,
                 maxLines: 3,
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
