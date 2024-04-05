@@ -22,4 +22,7 @@ abstract class KSize {
 
   static const kWrapSpacing8 = 8.0;
   static const kWrapRunSpacing4 = 4.0;
+
+  static const kOpacityHalf = 0.5;
+  static const kIconSize = 24.0;
 }
