@@ -13,7 +13,7 @@ void main() {
   setupFirebaseAuthMocks();
 
   tearDown(GetIt.I.reset);
-  group(KScreenName.contact, () {
+  group(KScreenBlocName.contact, () {
     testWidgets('renders initial', (tester) async {
       await tester.pumpApp(const ContactScreen());
 

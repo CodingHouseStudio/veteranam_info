@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:kozak/l10n/l10n.dart';
 import 'package:kozak/shared/shared.dart';
 
 class HomeBodyWidget extends StatelessWidget {
@@ -28,6 +27,10 @@ class HomeBodyWidget extends StatelessWidget {
         KSizedBox.kHeightSizedBox30,
         BoxWidget(
           text: context.l10n.discountsCoupons,
+        ),
+        KSizedBox.kHeightSizedBox30,
+        const ButtonMobWidget(
+          showGoogleIcon: true,
         ),
         KSizedBox.kHeightSizedBox30,
       ],

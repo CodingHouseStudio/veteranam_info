@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:kozak/components/components.dart';
-import 'package:kozak/l10n/l10n.dart';
 import 'package:kozak/shared/shared.dart';
 
 class ErrorScreen extends StatelessWidget {

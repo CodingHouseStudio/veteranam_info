@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kozak/app.dart';
-import 'package:kozak/l10n/l10n.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kozak/shared/shared.dart';
 
 class LanguagesSwitcherWidget extends StatelessWidget {
@@ -13,25 +12,26 @@ class LanguagesSwitcherWidget extends StatelessWidget {
       context.l10n.english,
     ];
     return PopupMenuButton<String>(
-      key: KWidgetkeys.widget.filter.popupMenu,
+      key: KWidgetkeys.widget.languageSwitcher.widget,
       icon: Row(
         children: [
           Text(
             context.l10n.language,
+            key: KWidgetkeys.widget.languageSwitcher.text,
           ),
           KIcon.trailing,
         ],
       ),
-      onSelected: (value) => App.setLocale(
-        context,
-        Locale(getLocaleName(languages.indexOf(value))),
-      ),
+      onSelected: (value) => context
+          .read<LanguageCubit>()
+          .changeLanguage(languages.indexOf(value)),
       itemBuilder: (BuildContext context) {
         return List.generate(languages.length, (index) {
           return PopupMenuItem<String>(
-            key: KWidgetkeys.widget.filter.popupMenuResetAll,
+            key: KWidgetkeys.widget.languageSwitcher.item,
             value: languages.elementAt(index),
-            enabled: getLocaleName(index) != context.l10n.localeName,
+            enabled: index.getLocaleUseIndex.value.languageCode !=
+                context.l10n.localeName,
             child: ListTile(
               title: Text(languages.elementAt(index)),
             ),
@@ -39,16 +39,5 @@ class LanguagesSwitcherWidget extends StatelessWidget {
         }).toList();
       },
     );
-  }
-
-  String getLocaleName(int laguageIndex) {
-    switch (laguageIndex) {
-      case 0:
-        return 'uk';
-      case 1:
-        return 'en';
-      default:
-        return 'uk';
-    }
   }
 }

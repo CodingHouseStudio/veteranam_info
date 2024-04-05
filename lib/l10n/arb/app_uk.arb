@@ -26,5 +26,6 @@
   "nickname": "Nickname",
   "beAnonymous": "Бути анонімним",
   "errorTitle": "Помилка",
-  "errorMessage": "Помилка при завнтаженні сторінки"
+  "errorMessage": "Помилка при завнтаженні сторінки",
+  "send": "Надіслати"
 }
