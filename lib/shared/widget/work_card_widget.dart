@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:kozak/l10n/l10n.dart';
 import 'package:kozak/shared/shared.dart';
 
 class WorkCardWidget extends StatelessWidget {

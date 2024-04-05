@@ -1,19 +1,10 @@
 import 'package:flutter/cupertino.dart';
+import 'package:mockito/annotations.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-// @GenerateNiceMocks(
-//   [
-//     // MockSpec<IAppAuthenticationRepository>(),
-//     // MockSpec<AppAuthenticationRepository>(),
-//     // MockSpec<AuthenticationRepository>(),
-//     // MockSpec<IStorage>(),
-//     // MockSpec<GoogleSignIn>(),
-//     // MockSpec<FirebaseAuth>(),
-//     // MockSpec<FirebaseModule>(),
-//     // MockSpec<IAuditInspectionInProgressRepository>(),
-//     // MockSpec<IAuditRepository>(),
-//     // MockSpec<IHomeRepository>(),
-//     // MockSpec<ImageRepository>(),
-//     // MockSpec<ITemplateNewAuditNextPageRepository>(),
-//   ],
-// )
+@GenerateNiceMocks(
+  [
+    MockSpec<SharedPreferences>(),
+  ],
+)
 void load() => debugPrint('loaded');

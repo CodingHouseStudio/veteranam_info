@@ -32,5 +32,5 @@ Future<void> workCardHelper(
     findsOneWidget,
   );
 
-  await cardTextDetailHelper(tester: tester);
+  await cardTextDetailHelper(tester);
 }

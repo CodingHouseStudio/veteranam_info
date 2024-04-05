@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:kozak/l10n/l10n.dart';
 import 'package:kozak/shared/shared.dart';
 
 class FilterBoxWidget extends StatefulWidget {
@@ -20,43 +19,31 @@ class _FilterBoxWidgetState extends State<FilterBoxWidget> {
   @override
   Widget build(BuildContext context) {
     return Row(
+      key: KWidgetkeys.widget.filter.widget,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        PopupMenuButton<String>(
-          key: KWidgetkeys.widget.filter.popupMenu,
-          icon: KIcon.filter,
-          itemBuilder: (BuildContext context) {
-            return [
-              PopupMenuItem<String>(
-                key: KWidgetkeys.widget.filter.popupMenuResetAll,
-                value: context.l10n.resetAllFilter,
-                child: ListTile(
-                  title: Text(context.l10n.resetAllFilter),
-                ),
-              ),
-            ];
-          },
-          onSelected: (dynamic selectedValue) {
-            if (selectedValue == context.l10n.resetAllFilter) {
-              context.read<FilterCubit>().resetAllValues();
-            }
-          },
-        ),
+        const FilterPopupMenu(),
         KSizedBox.kWidthSizedBox10,
         if (!KPlatformConstants.isWebMobile)
           Expanded(
-            child: Wrap(
-              key: KWidgetkeys.widget.filter.chips,
-              children: _buildChips(),
+            child: BlocBuilder<FilterCubit, List<dynamic>>(
+              builder: (context, state) {
+                return Wrap(
+                  children: _buildChips(),
+                );
+              },
             ),
           ),
         if (KPlatformConstants.isWebMobile)
           Expanded(
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
-              child: Row(
-                key: KWidgetkeys.widget.filter.chips,
-                children: _buildChips(),
+              child: BlocBuilder<FilterCubit, List<dynamic>>(
+                builder: (context, state) {
+                  return Row(
+                    children: _buildChips(),
+                  );
+                },
               ),
             ),
           ),
@@ -71,35 +58,13 @@ class _FilterBoxWidgetState extends State<FilterBoxWidget> {
           right: KPadding.kPaddingSize20,
           bottom: KPadding.kPaddingSize10,
         ),
-        child: BlocBuilder<FilterCubit, List<dynamic>>(
-          builder: (context, state) {
-            return FilterChip(
-              key: widget.filters.last == filter
-                  ? KWidgetkeys.widget.filter.lastChip
-                  : null,
-              label: Text(
-                filter,
-                style: AppTextStyle.text18,
+        child: widget.filters.first == filter
+            ? DropChipWidget(
+                filters: widget.filters,
+              )
+            : ChipWidget(
+                filter: filter,
               ),
-              shape: RoundedRectangleBorder(
-                borderRadius: KBorderRadius.kBorderRadius32,
-              ),
-              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-              selected: context.read<FilterCubit>().state.isNotEmpty &&
-                  context
-                      .read<FilterCubit>()
-                      .state
-                      .elementAt(0)
-                      .toString()
-                      .contains(filter),
-              onSelected: (bool isSelected) =>
-                  context.read<FilterCubit>().change(
-                        filterValue: filter,
-                        index: 0,
-                      ),
-            );
-          },
-        ),
       );
     }).toList();
   }

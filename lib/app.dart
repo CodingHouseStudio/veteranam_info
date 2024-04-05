@@ -1,45 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:get_it/get_it.dart';
 import 'package:kozak/shared/shared.dart';
 
-class App extends StatefulWidget {
+class App extends StatelessWidget {
   const App({super.key});
 
   @override
-  State<App> createState() => _AppState();
-  static void setLocale(BuildContext context, Locale newLocale) {
-    final state = context.findAncestorStateOfType<_AppState>();
-    state?.setLocale(newLocale);
+  Widget build(BuildContext context) {
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => GetIt.I.get<LanguageCubit>()..initLanguage(),
+        ),
+      ],
+      child: const AppWidget(),
+    );
   }
 }
 
-class _AppState extends State<App> {
-  Locale? _locale;
-
-  void setLocale(Locale locale) {
-    setState(() {
-      _locale = locale;
-    });
-  }
+class AppWidget extends StatelessWidget {
+  const AppWidget({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      key: KWidgetkeys.screen.app.screen,
-      theme: themeData,
-      localizationsDelegates: const [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      locale: _locale ?? const Locale('uk'),
-      supportedLocales: const [
-        Locale('en'), // English
-        Locale('uk'), // Ukrain
-      ],
-      routerConfig: router,
+    return BlocBuilder<LanguageCubit, Language>(
+      buildWhen: (previous, current) => current != previous,
+      builder: (context, state) {
+        return MaterialApp.router(
+          key: KWidgetkeys.screen.app.screen,
+          theme: themeData,
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          locale: state.value,
+          supportedLocales: AppLocalizations.supportedLocales,
+          routerConfig: router,
+        );
+      },
     );
   }
 }

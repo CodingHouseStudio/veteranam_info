@@ -10,6 +10,7 @@ Future<void> footerButtonsHelper({
 }) async {
   await scrollingHelper(
     tester: tester,
+    offset: KTestConstants.scrollingDown,
   );
 
   for (var i = 0; i < KWidgetkeys.widget.footer.buttonsKey.length; i++) {
@@ -20,7 +21,6 @@ Future<void> footerButtonsHelper({
           KWidgetkeys.widget.footer.buttonsKey.elementAt(i).elementAt(j);
       await scrollingHelper(
         tester: tester,
-        offset: null,
         itemKey: buttonKey,
       );
 

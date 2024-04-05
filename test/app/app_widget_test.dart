@@ -6,7 +6,7 @@ import 'package:kozak/shared/shared.dart';
 import '../text_dependency.dart';
 
 void main() {
-  group(KScreenName.app, () {
+  group(KScreenBlocName.app, () {
     setUp(configureDependenciesTest);
 
     setUpAll(setUpGlobal);
@@ -22,7 +22,7 @@ void main() {
         findsOneWidget,
       );
 
-      await nawbarHelper(tester: tester, searchText: '');
+      await nawbarHelper(tester: tester, searchText: KTestText.field);
 
       await footerHelper(tester: tester, email: KTestText.useremail);
     });

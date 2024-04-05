@@ -26,5 +26,6 @@
   "nickname": "Nickname",
   "beAnonymous": "Be anonymous",
   "errorTitle": "Error",
-  "errorMessage": "An error occurred while loading the page"
+  "errorMessage": "An error occurred while loading the page",
+  "send": "Send"
 }

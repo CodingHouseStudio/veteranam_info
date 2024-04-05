@@ -13,7 +13,7 @@ void main() {
   setupFirebaseAuthMocks();
 
   tearDown(GetIt.I.reset);
-  group(KScreenName.home, () {
+  group(KScreenBlocName.home, () {
     testWidgets('renders initial', (tester) async {
       await tester.pumpApp(const HomeScreen());
 
@@ -28,11 +28,11 @@ void main() {
         tester,
       );
 
-      await messageFieldHelper(tester: tester, message: '');
+      await messageFieldHelper(tester: tester, message: KTestText.field);
 
       await dropListFieldBoxHelper(
         tester: tester,
-        dropListitem: KMockText.dropDownList.elementAt(0),
+        text: KMockText.dropDownList.elementAt(0),
       );
 
       await boxHelper(tester);
@@ -54,18 +54,18 @@ void main() {
           tester,
         );
 
-        await messageFieldHelper(tester: tester, message: '');
+        await messageFieldHelper(tester: tester, message: KTestText.field);
 
         await dropListFieldBoxHelper(
           tester: tester,
-          dropListitem: KMockText.dropDownList.elementAt(0),
+          text: KMockText.dropDownList.elementAt(0),
         );
 
         await boxHelper(tester);
       });
 
       group('go to', () {
-        testWidgets('All footer screens', (tester) async {
+        testWidgets('All footer widget navigation', (tester) async {
           await tester.pumpApp(const HomeScreen(), mockGoRouter: mockGoRouter);
 
           expect(
@@ -76,6 +76,22 @@ void main() {
           await tester.pumpAndSettle();
 
           await footerButtonsHelper(
+            tester: tester,
+            mockGoRouter: mockGoRouter,
+          );
+        });
+
+        testWidgets('nawbar widget navigation', (tester) async {
+          await tester.pumpApp(const HomeScreen(), mockGoRouter: mockGoRouter);
+
+          expect(
+            find.byKey(KWidgetkeys.screen.home.screen),
+            findsOneWidget,
+          );
+
+          await tester.pumpAndSettle();
+
+          await nawbarTitleHelper(
             tester: tester,
             mockGoRouter: mockGoRouter,
           );

@@ -1,23 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:kozak/l10n/l10n.dart';
 import 'package:kozak/shared/shared.dart';
 
-class ProfileCardWidget extends StatefulWidget {
+class ProfileCardWidget extends StatelessWidget {
   const ProfileCardWidget({super.key});
-
-  @override
-  State<ProfileCardWidget> createState() => _ProfileCardWidgetState();
-}
-
-class _ProfileCardWidgetState extends State<ProfileCardWidget> {
-  bool _value = false;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Container(
-        decoration: KBoxDecoration.boxDecorPrimary,
+        decoration: KWidetTheme.boxDecorPrimary,
         child: Padding(
           padding: const EdgeInsets.all(KPadding.kPaddingSize10),
           child: Column(
@@ -32,15 +24,7 @@ class _ProfileCardWidgetState extends State<ProfileCardWidget> {
                 children: [
                   Row(
                     children: [
-                      Switch(
-                        activeColor: AppColors.error,
-                        value: _value,
-                        onChanged: (newValue) {
-                          setState(() {
-                            _value = newValue;
-                          });
-                        },
-                      ),
+                      const SwitchWidget(),
                       KSizedBox.kWidthSizedBox8,
                       Text(context.l10n.beAnonymous),
                     ],
@@ -108,7 +92,7 @@ class _ProfileCardWidgetState extends State<ProfileCardWidget> {
             TextField(
               decoration: InputDecoration(
                 border: KBorder.buttonStyleOutlineInputBorder,
-                labelText: context.l10n.email,
+                labelText: KMockText.email,
                 labelStyle: AppTextStyle.hint24,
               ),
               onChanged: (value) {},
@@ -126,7 +110,7 @@ class _ProfileCardWidgetState extends State<ProfileCardWidget> {
             TextField(
               decoration: InputDecoration(
                 border: KBorder.buttonStyleOutlineInputBorder,
-                labelText: context.l10n.nickname,
+                labelText: KMockText.nickname,
                 labelStyle: AppTextStyle.hint24,
               ),
               onChanged: (value) {},

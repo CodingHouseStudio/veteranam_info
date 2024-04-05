@@ -3,10 +3,9 @@ import 'package:kozak/shared/shared.dart';
 
 import '../../text_dependency.dart';
 
-Future<void> cardTextDetailEvaluateHelper({
-  required WidgetTester tester,
-  List<String>? detailButtonText,
-}) async {
+Future<void> cardTextDetailEvaluateHelper(
+  WidgetTester tester,
+) async {
   expect(
     find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconDislike),
     findsOneWidget,
@@ -28,8 +27,7 @@ Future<void> cardTextDetailEvaluateHelper({
   );
 
   await cardTextDetailHelper(
-    tester: tester,
-    detailButtonText: detailButtonText,
+    tester,
   );
 
   expect(
@@ -42,7 +40,6 @@ Future<void> cardTextDetailEvaluateHelper({
 
   await scrollingHelper(
     tester: tester,
-    offset: null,
     itemKey: KWidgetkeys.widget.cardTextDetailEvaluate.iconLike,
   );
 
