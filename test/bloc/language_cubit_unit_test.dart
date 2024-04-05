@@ -31,8 +31,7 @@ void main() {
       ],
     );
     blocTest<LanguageCubit, Language?>(
-      // ignore: lines_longer_than_80_chars
-      'emits [Language.ukrain, Language.ukrain] change language use ukrain and english index',
+      'emits [Language.ukrain, Language.ukrain] changes language',
       build: () => languageCubit,
       act: (cubit) async {
         await cubit.changeLanguage(KTestConstants.ukrainIndex);
