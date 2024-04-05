@@ -7,8 +7,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 const languagePrefsKey = 'languagePrefs';
 
 @Singleton()
-class LanguageCubit extends Cubit<Language> {
-  LanguageCubit() : super(Language.ukrain);
+class LanguageCubit extends Cubit<Language?> {
+  LanguageCubit() : super(null);
 
   Future<void> changeLanguage(int languageIndex) async {
     final language = languageIndex.getLocaleUseIndex;

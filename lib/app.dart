@@ -27,14 +27,14 @@ class AppWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<LanguageCubit, Language>(
+    return BlocBuilder<LanguageCubit, Language?>(
       buildWhen: (previous, current) => current != previous,
       builder: (context, state) {
         return MaterialApp.router(
           key: KWidgetkeys.screen.app.screen,
           theme: themeData,
           localizationsDelegates: AppLocalizations.localizationsDelegates,
-          locale: state.value,
+          locale: state?.value,
           supportedLocales: AppLocalizations.supportedLocales,
           routerConfig: router,
         );

@@ -10,7 +10,7 @@ void main() {
   group(KScreenBlocName.languageCubit, () {
     late LanguageCubit languageCubit;
     setUp(() => languageCubit = LanguageCubit());
-    blocTest<LanguageCubit, Language>(
+    blocTest<LanguageCubit, Language?>(
       'emits [Language.ukrain] when init language',
       build: () => languageCubit,
       act: (cubit) async {
@@ -20,7 +20,7 @@ void main() {
         [Language.ukrain],
       ],
     );
-    blocTest<LanguageCubit, Language>(
+    blocTest<LanguageCubit, Language?>(
       'emits [Language.english] change language use english index',
       build: () => languageCubit,
       act: (cubit) async {
@@ -30,14 +30,19 @@ void main() {
         [Language.english],
       ],
     );
-    blocTest<LanguageCubit, Language>(
-      'emits [Language.ukrain] change language use ukrain index',
+    blocTest<LanguageCubit, Language?>(
+      // ignore: lines_longer_than_80_chars
+      'emits [Language.ukrain, Language.ukrain] change language use ukrain and english index',
       build: () => languageCubit,
       act: (cubit) async {
         await cubit.changeLanguage(KTestConstants.ukrainIndex);
+        await cubit.changeLanguage(KTestConstants.englishIndex);
       },
       expect: () async => [
-        [Language.ukrain],
+        [
+          Language.ukrain,
+          Language.english,
+        ],
       ],
     );
   });
