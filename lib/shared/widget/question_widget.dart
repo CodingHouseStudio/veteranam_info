@@ -37,8 +37,8 @@ class _QuestionWidgetState extends State<QuestionWidget> {
             },
             child: Padding(
               padding: const EdgeInsets.symmetric(
-                horizontal: KPadding.kPaddingSize16,
-                vertical: KPadding.kPaddingSize12,
+                horizontal: KPadding.kPaddingSize32,
+                vertical: KPadding.kPaddingSize16,
               ),
               child: Row(
                 children: [
@@ -61,8 +61,8 @@ class _QuestionWidgetState extends State<QuestionWidget> {
             visible: openQuestion,
             child: Padding(
               padding: const EdgeInsets.symmetric(
-                horizontal: KPadding.kPaddingSize16,
-                vertical: KPadding.kPaddingSize12,
+                horizontal: KPadding.kPaddingSize32,
+                vertical: KPadding.kPaddingSize16,
               ),
               child: Text(
                 widget.subtitle,
