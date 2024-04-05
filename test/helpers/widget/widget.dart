@@ -3,6 +3,7 @@ export 'card_add_image_helper.dart';
 export 'card_text_detail_evaluate_helper.dart';
 export 'card_text_detail_helper.dart';
 export 'change_window_size_helper.dart';
+export 'check_point_helper.dart';
 export 'chip_helper.dart';
 export 'drop_chip_helper.dart';
 export 'drop_list_field_helper.dart';

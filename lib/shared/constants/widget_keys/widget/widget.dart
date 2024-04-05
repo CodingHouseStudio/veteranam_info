@@ -20,4 +20,5 @@ class _WidgetKeys {
   final dropChip = _DropChipKeys();
   final chip = _ChipKeys();
   final filterPopupMenu = _FilterPopupMenuKeys();
+  final checkPoint = _CheckPointKeys();
 }

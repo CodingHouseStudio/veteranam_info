@@ -103,9 +103,8 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                       hintText: KAppText.searchTextFieldHint,
                       suffixIcon: isDesktop
                           ? null
-                          : Container(
-                              key: KWidgetkeys.widget.nawbar.iconMic,
-                              child: KIcon.mic,
+                          : KIcon.mic.setIconKey(
+                              KWidgetkeys.widget.nawbar.iconMic,
                             ),
                       border: KBorder.outlineInputTransparent,
                       enabledBorder: KBorder.outlineInputTransparent,

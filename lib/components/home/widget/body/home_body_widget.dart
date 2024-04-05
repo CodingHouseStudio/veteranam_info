@@ -33,7 +33,7 @@ class HomeBodyWidget extends StatelessWidget {
           showGoogleIcon: true,
         ),
         KSizedBox.kHeightSizedBox30,
-        ButtonSecondary(
+        ButtonSecondaryWidget(
           onPressed: () {},
           text: KMockText.title,
           icon: KIcon.plus,
