@@ -1,10 +1,11 @@
 export 'box_widget.dart';
 export 'button_mob_widget.dart';
-export 'button_secondary.dart';
+export 'button_secondary_widget.dart';
 export 'button_widget.dart';
 export 'card_add_image_widget.dart';
 export 'card_text_detail_evaluate_widget.dart';
 export 'card_text_detail_widget.dart';
+export 'check_point_widget.dart';
 export 'chip_widget.dart';
 export 'drop_chip_widget.dart';
 export 'drop_list_field_widget.dart';

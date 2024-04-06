@@ -6,10 +6,14 @@ class ProfileBodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       children: [
         KSizedBox.kHeightSizedBox30,
-        ProfileCardWidget(),
+        const ProfileCardWidget(),
+        KSizedBox.kHeightSizedBox30,
+        CheckPointWidget(
+          onChanged: ({required isCheck}) {},
+        ),
         KSizedBox.kHeightSizedBox30,
       ],
     );
