@@ -67,13 +67,13 @@ class WorkCardWidget extends StatelessWidget {
             key: KWidgetkeys.widget.workCard.button,
             style: KButtonStyles.lightGrayButtonStyle,
             onPressed: null,
-            child: const Padding(
-              padding: EdgeInsets.symmetric(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
                 vertical: KPadding.kPaddingSize32,
                 horizontal: KPadding.kPaddingSize80,
               ),
               child: Text(
-                KAppText.workRespondButton,
+                context.l10n.respond,
                 style: AppTextStyle.text32,
               ),
             ),

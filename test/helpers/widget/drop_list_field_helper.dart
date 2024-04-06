@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:kozak/shared/shared.dart';
 
+import '../../../integration_test/helper/helper.dart';
+
 Future<void> dropListFieldBoxHelper({
   required WidgetTester tester,
   required String text,
@@ -44,9 +46,15 @@ Future<void> dropListFieldBoxHelper({
     findsNothing,
   );
 
+  await scrollingHelper(
+    tester: tester,
+    itemKey: KWidgetkeys.widget.dropListField.field,
+  );
+
   await tester.tap(
     find.byKey(KWidgetkeys.widget.dropListField.field),
   );
+
   await tester.pumpAndSettle();
 
   expect(

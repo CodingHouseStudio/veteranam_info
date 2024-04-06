@@ -1,8 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:kozak/shared/shared.dart';
 
-import '../../constants.dart';
-import '../helper.dart';
+import '../../test_dependency.dart';
 
 Future<void> footerHelper({
   required WidgetTester tester,
@@ -10,6 +9,7 @@ Future<void> footerHelper({
 }) async {
   await scrollingHelper(
     tester: tester,
+    offset: KTestConstants.scrolling,
   );
 
   await changeWindowSizeHelper(

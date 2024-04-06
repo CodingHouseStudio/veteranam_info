@@ -13,7 +13,7 @@ void main() {
   setupFirebaseAuthMocks();
 
   tearDown(GetIt.I.reset);
-  group(KScreenName.home, () {
+  group(KScreenBlocName.home, () {
     testWidgets('renders initial', (tester) async {
       await tester.pumpApp(const HomeScreen());
 

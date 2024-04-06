@@ -19,18 +19,18 @@ class ProfileCardWidget extends StatelessWidget {
               KSizedBox.kHeightSizedBox30,
               _buildProfileInfo(),
               KSizedBox.kHeightSizedBox8,
-              const Column(
+              Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
                     children: [
-                      SwitchWidget(),
+                      const SwitchWidget(),
                       KSizedBox.kWidthSizedBox8,
-                      Text(KAppText.anonymous),
+                      Text(context.l10n.beAnonymous),
                     ],
                   ),
-                  Text(
-                    KAppText.description,
+                  const Text(
+                    KMockText.description,
                     style: AppTextStyle.hint14,
                   ),
                 ],
@@ -64,7 +64,7 @@ class ProfileCardWidget extends StatelessWidget {
             children: [
               Expanded(
                 child: Text(
-                  KAppText.userName,
+                  KMockText.userName,
                   style: AppTextStyle.text40,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -92,7 +92,7 @@ class ProfileCardWidget extends StatelessWidget {
             TextField(
               decoration: InputDecoration(
                 border: KBorder.buttonStyleOutlineInputBorder,
-                labelText: KAppText.email,
+                labelText: KMockText.email,
                 labelStyle: AppTextStyle.hint24,
               ),
               onChanged: (value) {},
@@ -110,7 +110,7 @@ class ProfileCardWidget extends StatelessWidget {
             TextField(
               decoration: InputDecoration(
                 border: KBorder.buttonStyleOutlineInputBorder,
-                labelText: KAppText.nickname,
+                labelText: KMockText.nickname,
                 labelStyle: AppTextStyle.hint24,
               ),
               onChanged: (value) {},

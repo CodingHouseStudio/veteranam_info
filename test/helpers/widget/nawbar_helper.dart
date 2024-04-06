@@ -12,6 +12,8 @@ Future<void> nawbarHelper({
     tester: tester,
   );
 
+  await languageSwitcherHelper(tester);
+
   expect(find.byKey(KWidgetkeys.widget.nawbar.title), findsOneWidget);
 
   expect(find.byKey(KWidgetkeys.widget.nawbar.field), findsOneWidget);

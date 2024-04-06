@@ -13,7 +13,7 @@ void main() {
   setupFirebaseAuthMocks();
 
   tearDown(GetIt.I.reset);
-  group(KScreenName.story, () {
+  group(KScreenBlocName.story, () {
     testWidgets('renders initial', (tester) async {
       await tester.pumpApp(const StoryScreen());
 
