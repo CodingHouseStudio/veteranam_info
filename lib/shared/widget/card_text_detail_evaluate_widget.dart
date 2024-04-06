@@ -63,40 +63,46 @@ class _CardTextDetailEvaluateWidgetState
                   Row(
                     children: [
                       InkWell(
-                        key: KWidgetkeys.widget.cardTextDetailEvaluate.iconLike,
                         onTap: () => setState(() {
                           like == null || like == false
                               ? like = true
                               : like = null;
                         }),
                         child: like == null || !like!
-                            ? KIcon.like
-                            : KIcon.activeLike,
+                            ? KIcon.like.setIconKey(
+                                KWidgetkeys
+                                    .widget.cardTextDetailEvaluate.iconLike,
+                              )
+                            : KIcon.activeLike.setIconKey(
+                                KWidgetkeys.widget.cardTextDetailEvaluate
+                                    .iconActiveLike,
+                              ),
                       ),
                       KSizedBox.kWidthSizedBox8,
-                      Container(
-                        key:
-                            KWidgetkeys.widget.cardTextDetailEvaluate.iconSmile,
-                        child: KIcon.smile,
+                      KIcon.smile.setIconKey(
+                        KWidgetkeys.widget.cardTextDetailEvaluate.iconSmile,
                       ),
                       KSizedBox.kWidthSizedBox8,
                       InkWell(
-                        key: KWidgetkeys
-                            .widget.cardTextDetailEvaluate.iconDislike,
                         onTap: () => setState(() {
                           like == null || like! == true
                               ? like = false
                               : like = null;
                         }),
                         child: like == null || like!
-                            ? KIcon.dislike
-                            : KIcon.activeDislike,
+                            ? KIcon.dislike.setIconKey(
+                                KWidgetkeys
+                                    .widget.cardTextDetailEvaluate.iconDislike,
+                              )
+                            : KIcon.activeDislike.setIconKey(
+                                KWidgetkeys.widget.cardTextDetailEvaluate
+                                    .iconActiveDislike,
+                              ),
                       ),
                     ],
                   ),
-                  Container(
-                    key: KWidgetkeys.widget.cardTextDetailEvaluate.iconShare,
-                    child: KIcon.share,
+                  KIcon.share.setIconKey(
+                    KWidgetkeys.widget.cardTextDetailEvaluate.iconShare,
                   ),
                 ],
               ),

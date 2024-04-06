@@ -40,7 +40,6 @@ Future<void> cardTextDetailHelper({
 
   await scrollingHelper(
     tester: tester,
-    offset: null,
     itemKey: KWidgetkeys.widget.cardTextDetail.button,
   );
 
@@ -50,7 +49,6 @@ Future<void> cardTextDetailHelper({
 
   await scrollingHelper(
     tester: tester,
-    offset: null,
     itemKey: KWidgetkeys.widget.cardTextDetail.button,
   );
 
@@ -76,6 +74,7 @@ Future<void> cardTextDetailHelper({
   await scrollingHelper(
     tester: tester,
     offset: KTestConstants.scrollingUp,
+    itemKey: KWidgetkeys.widget.cardTextDetail.text,
   );
 
   text =

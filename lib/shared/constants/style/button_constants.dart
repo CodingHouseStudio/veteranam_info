@@ -52,7 +52,7 @@ abstract class KButtonStyles {
     backgroundColor: AppColors.widgetBackground,
     padding: const EdgeInsets.all(KPadding.kPaddingSize4),
     shape: RoundedRectangleBorder(
-      borderRadius: KBorderRadius.kBorderRadiusS,
+      borderRadius: KBorderRadius.kBorderRadius8,
     ),
   );
 }

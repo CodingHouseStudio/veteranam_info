@@ -50,7 +50,11 @@ class _QuestionWidgetState extends State<QuestionWidget> {
                     ),
                   ),
                   IconWidget(
-                    icon: openQuestion ? KIcon.minus : KIcon.plus,
+                    icon: openQuestion
+                        ? KIcon.minus
+                            .setIconKey(KWidgetkeys.widget.question.iconMinus)
+                        : KIcon.plus
+                            .setIconKey(KWidgetkeys.widget.question.iconPlus),
                     background: AppColors.widgetBackground,
                   ),
                 ],
