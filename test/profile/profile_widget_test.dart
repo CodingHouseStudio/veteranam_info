@@ -22,6 +22,8 @@ void main() {
         findsOneWidget,
       );
 
+      await chekPointHelper(tester);
+
       await tester.pumpAndSettle();
     });
     group('Mock Go Router', () {
@@ -34,6 +36,8 @@ void main() {
           find.byKey(KWidgetkeys.screen.profile.screen),
           findsOneWidget,
         );
+
+        await chekPointHelper(tester);
 
         await tester.pumpAndSettle();
       });

@@ -21,4 +21,5 @@ class _WidgetKeys {
   final chip = _ChipKeys();
   final filterPopupMenu = _FilterPopupMenuKeys();
   final languageSwitcher = _LanguageSwitcherKeys();
+  final checkPoint = _CheckPointKeys();
 }

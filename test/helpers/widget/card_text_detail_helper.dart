@@ -63,6 +63,7 @@ Future<void> cardTextDetailHelper(
   await scrollingHelper(
     tester: tester,
     offset: KTestConstants.scrollingUp,
+    itemKey: KWidgetkeys.widget.cardTextDetail.text,
   );
 
   text =

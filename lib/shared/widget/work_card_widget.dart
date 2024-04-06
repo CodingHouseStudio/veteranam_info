@@ -56,15 +56,9 @@ class WorkCardWidget extends StatelessWidget {
             maxLines: 3,
             icon: Row(
               children: [
-                Container(
-                  key: KWidgetkeys.widget.workCard.iconShare,
-                  child: KIcon.share,
-                ),
+                KIcon.share.setIconKey(KWidgetkeys.widget.workCard.iconShare),
                 KSizedBox.kWidthSizedBox16,
-                Container(
-                  key: KWidgetkeys.widget.workCard.iconSafe,
-                  child: KIcon.safe,
-                ),
+                KIcon.safe.setIconKey(KWidgetkeys.widget.workCard.iconSafe),
               ],
             ),
           ),
