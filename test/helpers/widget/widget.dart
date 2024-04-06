@@ -11,6 +11,7 @@ export 'filter_box_helper.dart';
 export 'filter_popup_menu_helper.dart';
 export 'footer_buttons_helper.dart';
 export 'footer_helper.dart';
+export 'laguage_switcher_helper.dart';
 export 'message_field_helper.dart';
 export 'nawbar_helper.dart';
 export 'nawbar_title_helper.dart';

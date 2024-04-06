@@ -7,7 +7,6 @@ import '../../text_dependency.dart';
 Future<void> cardAddImageHelper({
   required WidgetTester tester,
   required String image,
-  List<String>? detailButtonText,
 }) async {
   expect(
     find.byKey(KWidgetkeys.widget.cardAddImage.widget),
@@ -27,7 +26,6 @@ Future<void> cardAddImageHelper({
   );
 
   await cardTextDetailEvaluateHelper(
-    tester: tester,
-    detailButtonText: detailButtonText,
+    tester,
   );
 }

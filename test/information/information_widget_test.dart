@@ -6,7 +6,7 @@ import 'package:kozak/shared/shared.dart';
 import '../text_dependency.dart';
 
 void main() {
-  group(KScreenName.information, () {
+  group(KScreenBlocName.information, () {
     setUp(configureDependenciesTest);
 
     setUpAll(setUpGlobal);

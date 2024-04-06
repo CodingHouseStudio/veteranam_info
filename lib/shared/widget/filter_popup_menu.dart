@@ -14,15 +14,15 @@ class FilterPopupMenu extends StatelessWidget {
         return [
           PopupMenuItem<String>(
             key: KWidgetkeys.widget.filterPopupMenu.resetAll,
-            value: KAppText.filterItemResetAll,
-            child: const ListTile(
-              title: Text(KAppText.filterItemResetAll),
+            value: context.l10n.resetAllFilter,
+            child: ListTile(
+              title: Text(context.l10n.resetAllFilter),
             ),
           ),
         ];
       },
       onSelected: (dynamic selectedValue) {
-        if (selectedValue == KAppText.filterItemResetAll) {
+        if (selectedValue == context.l10n.resetAllFilter) {
           context.read<FilterCubit>().resetAllValues();
         }
       },
