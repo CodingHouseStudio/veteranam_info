@@ -3,8 +3,8 @@ import 'package:flutter_test/flutter_test.dart';
 
 Future<void> scrollingHelper({
   required WidgetTester tester,
+  required Key? itemKey,
   Offset? offset,
-  Key? itemKey,
 }) async {
   if (offset != null) await tester.drag(find.byType(ListView), offset);
   await tester.pumpAndSettle();

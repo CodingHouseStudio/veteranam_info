@@ -84,7 +84,12 @@ class _DropListFieldWidgetState extends State<DropListFieldWidget> {
           widgetKey: KWidgetkeys.widget.dropListField.field,
           controller: textEditingController,
           focusNode: focusNode,
-          prefixIcon: isFocused ? KIcon.trailingUp : KIcon.trailing,
+          prefixIcon: isFocused
+              ? KIcon.trailingUp
+                  .setIconKey(KWidgetkeys.widget.dropListField.trailingUp)
+              : KIcon.trailing.setIconKey(
+                  KWidgetkeys.widget.dropListField.trailing,
+                ),
           onChanged: widget.onChanged,
           hintText: widget.hintText,
           disposeFocusNode: false,

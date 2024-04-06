@@ -11,6 +11,7 @@ Future<void> nawbarTitleHelper({
   await scrollingHelper(
     tester: tester,
     offset: KTestConstants.scrollingUp,
+    itemKey: null,
   );
 
   expect(

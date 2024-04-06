@@ -10,6 +10,7 @@ Future<void> footerHelper({
   await scrollingHelper(
     tester: tester,
     offset: KTestConstants.scrollingDown,
+    itemKey: null,
   );
 
   expect(find.byKey(KWidgetkeys.widget.footer.logo), findsOneWidget);
