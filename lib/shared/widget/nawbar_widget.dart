@@ -4,7 +4,9 @@ import 'package:go_router/go_router.dart';
 import 'package:kozak/shared/shared.dart';
 
 class NawbarWidget extends StatefulWidget implements PreferredSizeWidget {
-  const NawbarWidget({super.key});
+  const NawbarWidget({required this.isDesk, required this.padding, super.key});
+  final bool isDesk;
+  final EdgeInsets padding;
 
   @override
   Size get preferredSize => const Size.fromHeight(KSize.kPreferredSize);
@@ -36,114 +38,89 @@ class _NawbarWidgetState extends State<NawbarWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints) {
-        final isMobile =
-            constraints.maxWidth < KPlatformConstants.minWidthThresholdMobile;
-        final isTablet = constraints.maxWidth >=
-                KPlatformConstants.minWidthThresholdMobile &&
-            constraints.maxWidth < KPlatformConstants.minWidthThresholdDesktop;
-        final isDesktop =
-            constraints.maxWidth > KPlatformConstants.minWidthThresholdDesktop;
-
-        return Padding(
-          padding: EdgeInsets.only(
-            left: KPadding.kPaddingSize75 *
-                (isMobile
-                    ? KPlatformConstants.mobilePaddingKoefficient
-                    : (isTablet
-                        ? KPlatformConstants.tabletPaddingKoefficient
-                        : KPlatformConstants.desktopPaddingKoefficient)),
-            right: KPadding.kPaddingSize75 *
-                (isMobile
-                    ? KPlatformConstants.mobilePaddingKoefficient
-                    : (isTablet
-                        ? KPlatformConstants.tabletPaddingKoefficient
-                        : KPlatformConstants.desktopPaddingKoefficient)),
-          ),
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: KBorderRadius.kBorderRadius32,
-              color: AppColors.widgetBackground,
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(KPadding.kPaddingSize10),
-              child: Row(
-                children: [
-                  if (isDesktop || !isFocused)
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: KPadding.kPaddingSize30,
-                      ),
-                      child: InkWell(
-                        onTap: () => EasyDebounce.debounce(
-                          context.l10n.logo,
-                          const Duration(milliseconds: 500),
-                          () => context.go(KRoute.home.path),
-                        ),
-                        child: Text(
-                          context.l10n.logo,
-                          key: KWidgetkeys.widget.nawbar.title,
-                          style: isDesktop
-                              ? AppTextStyle.text32
-                              : AppTextStyle.text24,
-                        ),
-                      ),
+    return Padding(
+      padding: widget.padding,
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: KBorderRadius.kBorderRadius32,
+          color: AppColors.widgetBackground,
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(KPadding.kPaddingSize10),
+          child: Row(
+            children: [
+              if (widget.isDesk || !isFocused)
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: KPadding.kPaddingSize30,
+                  ),
+                  child: InkWell(
+                    onTap: () => EasyDebounce.debounce(
+                      context.l10n.logo,
+                      const Duration(milliseconds: 500),
+                      () => context.go(KRoute.home.path),
                     ),
-                  Expanded(
-                    child: TextFieldWidget(
-                      key: _formKey,
-                      widgetKey: KWidgetkeys.widget.nawbar.field,
-                      hintStyle:
-                          isDesktop ? AppTextStyle.text24 : AppTextStyle.text16,
-                      focusNode: focusNode,
-                      prefixIcon: KIcon.search,
-                      onChanged: (text) {},
-                      hintText: context.l10n.search,
-                      suffixIcon: isDesktop
-                          ? null
-                          : KIcon.mic.setIconKey(
-                              KWidgetkeys.widget.nawbar.iconMic,
-                            ),
-                      border: KBorder.outlineInputTransparent,
-                      enabledBorder: KBorder.outlineInputTransparent,
-                      focusedBorder: KBorder.outlineInputTransparent,
-                      disposeFocusNode: false,
+                    child: Text(
+                      context.l10n.logo,
+                      key: KWidgetkeys.widget.nawbar.title,
+                      style: widget.isDesk
+                          ? AppTextStyle.text32
+                          : AppTextStyle.text24,
                     ),
                   ),
-                  if (isDesktop)
-                    Row(
-                      children: [
-                        IconWidget(
-                          key: KWidgetkeys.widget.nawbar.iconMic,
-                          icon: KIcon.mic,
+                ),
+              Expanded(
+                child: TextFieldWidget(
+                  key: _formKey,
+                  widgetKey: KWidgetkeys.widget.nawbar.field,
+                  hintStyle:
+                      widget.isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
+                  focusNode: focusNode,
+                  prefixIcon: KIcon.search,
+                  onChanged: (text) {},
+                  hintText: context.l10n.search,
+                  suffixIcon: widget.isDesk
+                      ? null
+                      : KIcon.mic.setIconKey(
+                          KWidgetkeys.widget.nawbar.iconMic,
                         ),
-                        KSizedBox.kWidthSizedBox10,
-                        TextButton(
-                          key: KWidgetkeys.widget.nawbar.button,
-                          style: KButtonStyles.whiteButtonStyle,
-                          onPressed: null,
-                          child: Text(
-                            context.l10n.login,
-                            style: AppTextStyle.text24,
-                          ),
-                        ),
-                        KSizedBox.kWidthSizedBox10,
-                        // fail test, I need mobile design for this button
-                        const LanguagesSwitcherWidget(),
-                      ],
-                    ),
-                  if (isDesktop || !isFocused)
-                    IconWidget(
-                      key: KWidgetkeys.widget.nawbar.iconPerson,
-                      icon: KIcon.person,
-                    ),
-                ],
+                  border: KBorder.outlineInputTransparent,
+                  enabledBorder: KBorder.outlineInputTransparent,
+                  focusedBorder: KBorder.outlineInputTransparent,
+                  disposeFocusNode: false,
+                ),
               ),
-            ),
+              if (widget.isDesk)
+                Row(
+                  children: [
+                    IconWidget(
+                      key: KWidgetkeys.widget.nawbar.iconMic,
+                      icon: KIcon.mic,
+                    ),
+                    KSizedBox.kWidthSizedBox10,
+                    TextButton(
+                      key: KWidgetkeys.widget.nawbar.button,
+                      style: KButtonStyles.whiteButtonStyle,
+                      onPressed: null,
+                      child: Text(
+                        context.l10n.login,
+                        style: AppTextStyle.text24,
+                      ),
+                    ),
+                    KSizedBox.kWidthSizedBox10,
+                    // fail test, I need mobile design for this button
+                    const LanguagesSwitcherWidget(),
+                  ],
+                ),
+              if (widget.isDesk || !isFocused)
+                IconWidget(
+                  key: KWidgetkeys.widget.nawbar.iconPerson,
+                  icon: KIcon.person,
+                ),
+            ],
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 
