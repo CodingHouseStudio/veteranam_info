@@ -3,6 +3,7 @@ import 'package:kozak/shared/shared.dart';
 
 class ListQuestionWidget extends StatelessWidget {
   const ListQuestionWidget({required this.questionModelItems, super.key});
+
   final List<QuestionModel> questionModelItems;
 
   @override
@@ -21,14 +22,12 @@ class ListQuestionWidget extends StatelessWidget {
           key: KWidgetkeys.screen.home.questionList,
           shrinkWrap: true,
           itemCount: questionModelItems.length,
-          itemBuilder: (context, index) => Column(
-            children: [
-              QuestionWidget(
-                title: questionModelItems.elementAt(index).title,
-                subtitle: questionModelItems.elementAt(index).subtitle,
-              ),
-              KSizedBox.kHeightSizedBox24,
-            ],
+          itemBuilder: (context, index) => Padding(
+            padding: const EdgeInsets.only(bottom: KPadding.kPaddingSize24),
+            child: QuestionWidget(
+              title: questionModelItems.elementAt(index).title,
+              subtitle: questionModelItems.elementAt(index).subtitle,
+            ),
           ),
         ),
       ],
