@@ -23,4 +23,19 @@ Future<void> newsCardHelper({
       tester,
     );
   }
+
+  await changeWindowSizeHelper(tester: tester);
+
+  if (image != null) {
+    await cardAddImageHelper(
+      tester: tester,
+      image: image,
+    );
+  } else {
+    await cardTextDetailEvaluateHelper(
+      tester,
+    );
+  }
+
+  await changeWindowSizeHelper(tester: tester, setDefaultSize: true);
 }

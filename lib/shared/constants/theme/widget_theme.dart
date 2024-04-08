@@ -19,8 +19,12 @@ abstract class KWidetTheme {
     borderRadius: KBorderRadius.kBorderRadius32,
     color: AppColors.lightGray,
   );
-  static BoxDecoration boxDecorationImage = BoxDecoration(
+  static BoxDecoration boxDecorationImageDesk = BoxDecoration(
     borderRadius: KBorderRadius.kBorderRadiusLeft32,
+    color: AppColors.lightGray,
+  );
+  static BoxDecoration boxDecorationImageMob = BoxDecoration(
+    borderRadius: KBorderRadius.kBorderRadiusTop32,
     color: AppColors.lightGray,
   );
   static BoxDecoration boxDecorationCircular = const BoxDecoration(
