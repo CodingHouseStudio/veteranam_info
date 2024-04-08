@@ -18,12 +18,12 @@ void main() {
       setUp(() {
         mockHomeRepository = MockIHomeRepository();
         when(mockHomeRepository.getQuestions()).thenAnswer(
-          (_) => Stream.value(KTestText.questionModelItems),
+          (_) => KTestText.questionModelItems,
         );
       });
       test('${KGroupText.successfulGet} questions', () async {
         expect(
-          await mockHomeRepository.getQuestions().first,
+          mockHomeRepository.getQuestions(),
           KTestText.questionModelItems,
         );
       });
@@ -37,15 +37,15 @@ void main() {
         homeWatcherBloc = HomeWatcherBloc(
           homeRepository: mockHomeRepository,
         );
-        when(mockHomeRepository.getQuestions()).thenAnswer(
-          (_) => Stream.value(KTestText.questionModelItems),
-        );
       });
 
       blocTest<HomeWatcherBloc, HomeWatcherState>(
         'emits [HomeWatcherState.loading(), HomeWatcherState.success()] when load questionModel list',
         build: () => homeWatcherBloc,
         act: (bloc) async {
+          when(mockHomeRepository.getQuestions()).thenAnswer(
+            (_) => KTestText.questionModelItems,
+          );
           bloc.add(const HomeWatcherEvent.started());
         },
         expect: () async => [
@@ -54,29 +54,15 @@ void main() {
         ],
       );
       blocTest<HomeWatcherBloc, HomeWatcherState>(
-        'emits [HomeWatcherState.success()] when question update',
-        build: () => homeWatcherBloc,
-        act: (bloc) async {
-          bloc.add(
-            const HomeWatcherEvent.updated(
-              questionModelItems: KTestText.questionModelItems,
-            ),
-          );
-        },
-        expect: () async => [
-          const HomeWatcherState.success(
-            questionModelItems: KTestText.questionModelItems,
-          ),
-        ],
-      );
-      blocTest<HomeWatcherBloc, HomeWatcherState>(
         'emits [HomeWatcherState.faulure()] when audit error',
         build: () => homeWatcherBloc,
         act: (bloc) async {
-          bloc.add(const HomeWatcherEvent.failure());
+          when(mockHomeRepository.getQuestions()).thenThrow(Exception());
+          bloc.add(const HomeWatcherEvent.started());
         },
         expect: () async => [
-          const HomeWatcherState.failure(),
+          isA<HomeWatcherStateLoading>(),
+          isA<HomeWatcherStateFailure>(),
         ],
       );
     });
