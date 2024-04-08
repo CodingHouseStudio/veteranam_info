@@ -23,7 +23,9 @@ class ListQuestionWidget extends StatelessWidget {
           shrinkWrap: true,
           itemCount: questionModelItems.length,
           itemBuilder: (context, index) => Padding(
-            padding: const EdgeInsets.only(bottom: KPadding.kPaddingSize24),
+            padding: questionModelItems.length - 1 != index
+                ? const EdgeInsets.only(bottom: KPadding.kPaddingSize24)
+                : EdgeInsets.zero,
             child: QuestionWidget(
               title: questionModelItems.elementAt(index).title,
               subtitle: questionModelItems.elementAt(index).subtitle,
