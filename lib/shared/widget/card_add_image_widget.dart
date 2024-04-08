@@ -5,37 +5,75 @@ import 'package:kozak/shared/shared.dart';
 class CardAddImageWidget extends StatelessWidget {
   const CardAddImageWidget({
     required this.childWidget,
+    required this.isDesk,
     this.image,
     super.key,
+    this.titleWidget,
   });
   final Widget childWidget;
   final String? image;
+  final bool isDesk;
+  final Widget? titleWidget;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: KPadding.kPaddingSize48,
-        vertical: image != null ? 0 : KPadding.kPaddingSize48,
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          if (image != null)
-            Expanded(
-              child: Container(
-                decoration: KWidetTheme.boxDecorationImage,
-                child: CachedNetworkImage(
-                  key: KWidgetkeys.widget.cardAddImage.widget,
-                  imageUrl: image!,
-                  placeholder: (context, url) => Image.asset(''),
-                  errorWidget: (context, url, error) => KIcon.error,
-                  fit: BoxFit.contain,
+    return isDesk
+        ? Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if (image != null)
+                Expanded(
+                  child: buildImage(),
+                ),
+              Expanded(
+                child: Container(
+                  decoration:
+                      image == null ? KWidetTheme.boxDecorationWidget : null,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: KPadding.kPaddingSize32,
+                      vertical: image == null ? KPadding.kPaddingSize48 : 0,
+                    ),
+                    child: childWidget,
+                  ),
                 ),
               ),
+            ],
+          )
+        : Container(
+            decoration: KWidetTheme.boxDecorationWidget,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                if (titleWidget != null)
+                  Padding(
+                    padding: const EdgeInsets.all(KPadding.kPaddingSize8),
+                    child: titleWidget,
+                  ),
+                if (image != null) buildImage(),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: KPadding.kPaddingSize16,
+                    vertical: KPadding.kPaddingSize16,
+                  ),
+                  child: childWidget,
+                ),
+              ],
             ),
-          Expanded(child: childWidget),
-        ],
+          );
+  }
+
+  Widget buildImage() {
+    return Container(
+      decoration: isDesk
+          ? KWidetTheme.boxDecorationImageDesk
+          : KWidetTheme.boxDecorationImageMob,
+      child: CachedNetworkImage(
+        key: KWidgetkeys.widget.cardAddImage.widget,
+        imageUrl: image!,
+        placeholder: (context, url) => Image.asset(''),
+        errorWidget: (context, url, error) => KIcon.error,
+        fit: BoxFit.fill,
       ),
     );
   }

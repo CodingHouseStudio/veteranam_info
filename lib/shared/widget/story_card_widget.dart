@@ -23,39 +23,27 @@ class StoryCardWidget extends StatelessWidget {
     return CardTextDetailEvaluateWidget(
       image: image,
       text: story,
+      titleTopMob: true,
       titleWidget: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Expanded(
-            child: Row(
-              children: [
-                IconWidget(
-                  key: KWidgetkeys.widget.storyCard.userIcon,
-                  icon: KIcon.person,
-                  background: AppColors.widgetBackground,
-                ),
-                KSizedBox.kWidthSizedBox3,
-                Expanded(
-                  child: Text(
-                    userName,
-                    key: KWidgetkeys.widget.storyCard.userName,
-                    style: AppTextStyle.text14,
-                  ),
-                ),
-              ],
-            ),
+          IconWidget(
+            key: KWidgetkeys.widget.storyCard.userIcon,
+            icon: KIcon.person,
+            background: AppColors.widgetBackground,
           ),
-          Expanded(
-            child: Align(
-              alignment: Alignment.centerRight,
-              child: Text(
-                storyDate.toLocal().toString().split(' ')[0],
-                key: KWidgetkeys.widget.storyCard.date,
-                style: AppTextStyle.text16.copyWith(color: AppColors.lightGray),
-              ),
-            ),
+          KSizedBox.kWidthSizedBox3,
+          Text(
+            userName,
+            key: KWidgetkeys.widget.storyCard.userName,
+            style: AppTextStyle.text14,
           ),
         ],
+      ),
+      titleDate: Text(
+        storyDate.toLocal().toString().split(' ')[0],
+        key: KWidgetkeys.widget.storyCard.date,
+        style: AppTextStyle.text16.copyWith(color: AppColors.lightGray),
       ),
     );
   }
