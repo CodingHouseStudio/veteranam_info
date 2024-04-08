@@ -12,45 +12,46 @@ class ScaffoldWithNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const NawbarWidget(),
-      body: LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints constraints) {
-          final isMobile =
-              constraints.maxWidth < KPlatformConstants.minWidthThresholdMobile;
-          final isTablet = constraints.maxWidth >=
-                  KPlatformConstants.minWidthThresholdMobile &&
-              constraints.maxWidth <
-                  KPlatformConstants.minWidthThresholdDesktop;
-          final isDesk = constraints.maxWidth >
-              KPlatformConstants.minWidthThresholdDesktop;
-
-          return ListView(
+    return LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) {
+        final isMobile =
+            constraints.maxWidth < KPlatformConstants.minWidthThresholdMobile;
+        final isTablet = constraints.maxWidth >=
+                KPlatformConstants.minWidthThresholdMobile &&
+            constraints.maxWidth < KPlatformConstants.minWidthThresholdDesktop;
+        final isDesk =
+            constraints.maxWidth > KPlatformConstants.minWidthThresholdDesktop;
+        final padding = EdgeInsets.only(
+          left: KPadding.kPaddingSize75 *
+              (isMobile
+                  ? KPlatformConstants.mobilePaddingKoefficient
+                  : (isTablet
+                      ? KPlatformConstants.tabletPaddingKoefficient
+                      : KPlatformConstants.desktopPaddingKoefficient)),
+          right: KPadding.kPaddingSize75 *
+              (isMobile
+                  ? KPlatformConstants.mobilePaddingKoefficient
+                  : (isTablet
+                      ? KPlatformConstants.tabletPaddingKoefficient
+                      : KPlatformConstants.desktopPaddingKoefficient)),
+        );
+        return Scaffold(
+          appBar: NawbarWidget(
+            isDesk: isDesk,
+            padding: padding,
+          ),
+          body: ListView(
             key: KWidgetkeys.widget.shellRoute.scroll,
-            padding: EdgeInsets.only(
-              top: KPadding.kPaddingSize10,
-              left: KPadding.kPaddingSize75 *
-                  (isMobile
-                      ? KPlatformConstants.mobilePaddingKoefficient
-                      : (isTablet
-                          ? KPlatformConstants.tabletPaddingKoefficient
-                          : KPlatformConstants.desktopPaddingKoefficient)),
-              right: KPadding.kPaddingSize75 *
-                  (isMobile
-                      ? KPlatformConstants.mobilePaddingKoefficient
-                      : (isTablet
-                          ? KPlatformConstants.tabletPaddingKoefficient
-                          : KPlatformConstants.desktopPaddingKoefficient)),
-            ),
+            padding: padding.copyWith(top: KPadding.kPaddingSize10),
             children: [
               navigationShell,
               FooterWidget(
                 isDesktop: isDesk,
               ),
             ],
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 }

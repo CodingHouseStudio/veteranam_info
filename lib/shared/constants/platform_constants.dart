@@ -16,4 +16,8 @@ abstract class KPlatformConstants {
   static const mobilePaddingKoefficient = 0.25;
   static const tabletPaddingKoefficient = 3;
   static const desktopPaddingKoefficient = 4;
+
+  static bool changeToDescWidget(double screenMaxWidth) {
+    return screenMaxWidth > KPlatformConstants.minWidthThresholdMobile;
+  }
 }
