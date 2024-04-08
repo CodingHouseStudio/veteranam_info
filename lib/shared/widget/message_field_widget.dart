@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:kozak/shared/shared.dart';
 
 class MessageFieldWidget extends StatelessWidget {
-  const MessageFieldWidget({required this.changeMessage, super.key});
+  const MessageFieldWidget({
+    required this.changeMessage,
+    required this.hintText,
+    super.key,
+  });
   final void Function(String text) changeMessage;
+  final String hintText;
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +16,7 @@ class MessageFieldWidget extends StatelessWidget {
       child: TextFieldWidget(
         widgetKey: KWidgetkeys.widget.input.field,
         onChanged: changeMessage,
-        hintText: context.l10n.enterYourMessage,
+        hintText: hintText,
         maxLines: 4,
         fillColor: AppColors.white,
         enabledBorder: KBorder.outlineInputLightGray,

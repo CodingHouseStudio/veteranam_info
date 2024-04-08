@@ -27,14 +27,13 @@ class ButtonWidget extends StatelessWidget {
               horizontal: KPadding.kPaddingSize80,
               vertical: KPadding.kPaddingSize32,
             ),
-        child: Row(
+        child: Wrap(
+          crossAxisAlignment: WrapCrossAlignment.center,
           children: [
             if (icon != null) icon!,
-            Expanded(
-              child: Text(
-                text,
-                style: AppTextStyle.text32,
-              ),
+            Text(
+              text,
+              style: AppTextStyle.text32,
             ),
           ],
         ),

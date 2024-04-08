@@ -8,7 +8,10 @@ class HomeBodyWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        MessageFieldWidget(changeMessage: (_) {}),
+        MessageFieldWidget(
+          changeMessage: (_) {},
+          hintText: '',
+        ),
         KSizedBox.kHeightSizedBox30,
         const FilterBoxWidget(
           filters: KMockText.filter,
