@@ -20,7 +20,7 @@ dependencies:
   font_awesome_flutter: ^10.7.0
   freezed: ^2.5.1
   freezed_annotation: ^2.4.1
-  get_it: ^7.6.0 # Used for dependency injection
+  get_it: ^7.6.8 # Used for dependency injection
   go_router: ^13.2.0 # Decoupled routing package which is a must for any app
   injectable: ^2.3.4 # Used for dependency injection
   intl: ^0.18.1
