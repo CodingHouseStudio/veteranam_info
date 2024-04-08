@@ -15,6 +15,8 @@ class _KIcon extends Icon {
 }
 
 abstract class KIcon {
+  static const _KIcon arrowLeft = _KIcon(Icons.arrow_left);
+  static const _KIcon arrowRight = _KIcon(Icons.arrow_right);
   static const _KIcon mic = _KIcon(Icons.mic_none_outlined);
   static const _KIcon person = _KIcon(Icons.person_outline);
   static const _KIcon search = _KIcon(Icons.search);
