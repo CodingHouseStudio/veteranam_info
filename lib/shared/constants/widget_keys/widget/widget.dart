@@ -23,4 +23,5 @@ class _WidgetKeys {
   final pagination = _PaginationKeys();
   final languageSwitcher = _LanguageSwitcherKeys();
   final checkPoint = _CheckPointKeys();
+  final shellRoute = _ShellRouteKeys();
 }

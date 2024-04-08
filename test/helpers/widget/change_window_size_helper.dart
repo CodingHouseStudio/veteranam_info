@@ -12,5 +12,5 @@ Future<void> changeWindowSizeHelper({
     await tester.binding.setSurfaceSize(KTestConstants.windowTabletSize);
   }
 
-  await tester.pumpAndSettle();
+  await tester.pump();
 }

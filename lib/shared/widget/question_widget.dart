@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:kozak/shared/shared.dart';
 
 class QuestionWidget extends StatefulWidget {
@@ -26,6 +27,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      key: KWidgetkeys.widget.question.widget,
       decoration: KWidetTheme.boxDecorationWidget,
       child: Column(
         children: [
@@ -45,6 +47,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
                   Expanded(
                     child: Text(
                       widget.title,
+                      key: KWidgetkeys.widget.question.title,
                       style: AppTextStyle.text40,
                       maxLines: 1,
                     ),
@@ -68,11 +71,13 @@ class _QuestionWidgetState extends State<QuestionWidget> {
                 horizontal: KPadding.kPaddingSize32,
                 vertical: KPadding.kPaddingSize16,
               ),
-              child: Text(
-                widget.subtitle,
-                style: AppTextStyle.text24,
-                softWrap: true,
-                maxLines: 3,
+              child: Markdown(
+                key: KWidgetkeys.widget.question.subtitle,
+                data: widget.subtitle,
+                styleSheet: MarkdownStyleSheet(
+                  p: AppTextStyle.text24,
+                ),
+                shrinkWrap: true,
               ),
             ),
           ),

@@ -14,7 +14,7 @@ void main() {
 
   tearDown(GetIt.I.reset);
   group(KScreenBlocName.contact, () {
-    testWidgets('renders initial', (tester) async {
+    testWidgets(KGroupText.intial, (tester) async {
       await tester.pumpApp(const ContactScreen());
 
       expect(
@@ -23,11 +23,24 @@ void main() {
       );
 
       await tester.pumpAndSettle();
+
+      await filterBoxHelper(
+        tester,
+      );
+
+      await messageFieldHelper(tester: tester, message: KTestText.field);
+
+      await dropListFieldBoxHelper(
+        tester: tester,
+        text: KMockText.dropDownList.elementAt(0),
+      );
+
+      await boxHelper(tester);
     });
-    group('Mock Go Router', () {
+    group(KGroupText.goRouter, () {
       late MockGoRouter mockGoRouter;
       setUp(() => mockGoRouter = MockGoRouter());
-      testWidgets('renders initial', (tester) async {
+      testWidgets(KGroupText.intial, (tester) async {
         await tester.pumpApp(
           const ContactScreen(),
           mockGoRouter: mockGoRouter,
@@ -39,8 +52,21 @@ void main() {
         );
 
         await tester.pumpAndSettle();
+
+        await filterBoxHelper(
+          tester,
+        );
+
+        await messageFieldHelper(tester: tester, message: KTestText.field);
+
+        await dropListFieldBoxHelper(
+          tester: tester,
+          text: KMockText.dropDownList.elementAt(0),
+        );
+
+        await boxHelper(tester);
       });
-      // group('go to', () {
+      // group(KGroupText.goTo, () {
       // });
     });
   });
