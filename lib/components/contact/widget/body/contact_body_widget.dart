@@ -6,6 +6,7 @@ class ContactBodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final items = List<int>.generate(100, (index) => index);
     return Column(
       children: [
         KSizedBox.kHeightSizedBox30,
@@ -23,6 +24,21 @@ class ContactBodyWidget extends StatelessWidget {
         KSizedBox.kHeightSizedBox30,
         BoxWidget(
           text: context.l10n.discountsCoupons,
+        ),
+        KSizedBox.kHeightSizedBox30,
+        PaginationWidget(
+          items: items,
+          itemBuilder: (context, items) {
+            return ListView.builder(
+              shrinkWrap: true,
+              itemCount: items.length,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  title: Text('Item ${items[index]}'),
+                );
+              },
+            );
+          },
         ),
         KSizedBox.kHeightSizedBox30,
         const ButtonMobWidget(

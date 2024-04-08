@@ -17,6 +17,7 @@ export 'languages_switcher_widget.dart';
 export 'message_field_widget.dart';
 export 'nawbar_widget.dart';
 export 'news_card_widget.dart';
+export 'pagination_widget.dart';
 export 'profile_card_widget.dart';
 export 'question_widget.dart';
 export 'story_card_widget.dart';

@@ -40,32 +40,37 @@ class NewsCardWidget extends StatelessWidget {
           ),
         ],
       ),
-      bottom: Wrap(
-        spacing: KSize.kWrapSpacing8,
-        runSpacing: KSize.kWrapRunSpacing4,
-        children: KMockText.tags.map((tag) {
-          return Container(
-            key: KWidgetkeys.widget.newsCard.tags,
-            decoration: KWidetTheme.boxDecorationCard,
-            margin: const EdgeInsets.only(top: KPadding.kPaddingSize24),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: KPadding.kPaddingSize4,
-                horizontal: KPadding.kPaddingSize8,
+      bottom: Padding(
+        padding: const EdgeInsets.only(
+          bottom: KPadding.kPaddingSize16,
+          top: KPadding.kPaddingSize24,
+        ),
+        child: Wrap(
+          spacing: KSize.kWrapSpacing8,
+          runSpacing: KSize.kWrapRunSpacing4,
+          children: KMockText.tags.map((tag) {
+            return Container(
+              key: KWidgetkeys.widget.newsCard.tags,
+              decoration: KWidetTheme.boxDecorationCard,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: KPadding.kPaddingSize4,
+                  horizontal: KPadding.kPaddingSize8,
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      tag,
+                      style: AppTextStyle.text14,
+                    ),
+                    KIcon.check,
+                  ],
+                ),
               ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    tag,
-                    style: AppTextStyle.text14,
-                  ),
-                  KIcon.check,
-                ],
-              ),
-            ),
-          );
-        }).toList(),
+            );
+          }).toList(),
+        ),
       ),
     );
   }
