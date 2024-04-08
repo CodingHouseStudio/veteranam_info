@@ -14,7 +14,7 @@ void main() {
 
   tearDown(GetIt.I.reset);
   group(KScreenBlocName.home, () {
-    testWidgets('renders initial', (tester) async {
+    testWidgets(KGroupText.intial, (tester) async {
       await tester.pumpApp(const HomeScreen());
 
       expect(
@@ -24,23 +24,31 @@ void main() {
 
       await tester.pumpAndSettle();
 
-      await filterBoxHelper(
-        tester,
+      expect(
+        find.byKey(KWidgetkeys.screen.home.buttonMock),
+        findsNothing,
       );
 
-      await messageFieldHelper(tester: tester, message: KTestText.field);
-
-      await dropListFieldBoxHelper(
-        tester: tester,
-        text: KMockText.dropDownList.elementAt(0),
+      expect(
+        find.byKey(KWidgetkeys.screen.home.question),
+        findsOneWidget,
       );
 
-      await boxHelper(tester);
+      expect(
+        find.byKey(KWidgetkeys.screen.home.questionList),
+        findsOneWidget,
+      );
+
+      expect(
+        find.byKey(KWidgetkeys.screen.home.questionListTitle),
+        findsOneWidget,
+      );
+      await questionHelper(tester);
     });
-    group('Mock Go Router', () {
+    group(KGroupText.goRouter, () {
       late MockGoRouter mockGoRouter;
       setUp(() => mockGoRouter = MockGoRouter());
-      testWidgets('renders initial', (tester) async {
+      testWidgets(KGroupText.intial, (tester) async {
         await tester.pumpApp(const HomeScreen(), mockGoRouter: mockGoRouter);
 
         expect(
@@ -50,21 +58,29 @@ void main() {
 
         await tester.pumpAndSettle();
 
-        await filterBoxHelper(
-          tester,
+        expect(
+          find.byKey(KWidgetkeys.screen.home.buttonMock),
+          findsNothing,
         );
 
-        await messageFieldHelper(tester: tester, message: KTestText.field);
-
-        await dropListFieldBoxHelper(
-          tester: tester,
-          text: KMockText.dropDownList.elementAt(0),
+        expect(
+          find.byKey(KWidgetkeys.screen.home.question),
+          findsOneWidget,
         );
 
-        await boxHelper(tester);
+        expect(
+          find.byKey(KWidgetkeys.screen.home.questionList),
+          findsOneWidget,
+        );
+
+        expect(
+          find.byKey(KWidgetkeys.screen.home.questionListTitle),
+          findsOneWidget,
+        );
+        await questionHelper(tester);
       });
 
-      group('go to', () {
+      group(KGroupText.goTo, () {
         testWidgets('All footer widget navigation', (tester) async {
           await tester.pumpApp(const HomeScreen(), mockGoRouter: mockGoRouter);
 

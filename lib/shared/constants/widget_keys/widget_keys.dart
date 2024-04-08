@@ -69,6 +69,7 @@ part 'widget/language_switcher.dart';
 
 part 'widget/discount_card.dart';
 part 'widget/check_point.dart';
+part 'widget/shell_route.dart';
 
 part 'widget/pagination.dart';
 

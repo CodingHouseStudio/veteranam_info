@@ -18,7 +18,7 @@ void main() {
 
   tearDown(GetIt.I.reset);
   group(KScreenBlocName.app, () {
-    testWidgets('renders initial', (tester) async {
+    testWidgets(KGroupText.intial, (tester) async {
       await tester.pumpWidget(
         BlocProvider(
           create: (context) => GetIt.I.get<LanguageCubit>()..initLanguage(),
@@ -50,10 +50,10 @@ void main() {
         findsOneWidget,
       );
     });
-    group('Mock Go Router', () {
+    group(KGroupText.goRouter, () {
       late MockGoRouter mockGoRouter;
       setUp(() => mockGoRouter = MockGoRouter());
-      testWidgets('renders initial', (tester) async {
+      testWidgets(KGroupText.intial, (tester) async {
         await tester.pumpWidget(
           BlocProvider(
             create: (context) => GetIt.I.get<LanguageCubit>()..initLanguage(),
@@ -87,7 +87,7 @@ void main() {
         );
       });
 
-      group('go to', () {
+      group(KGroupText.goTo, () {
         testWidgets(KScreenBlocName.home, (tester) async {
           await tester.pumpWidget(
             BlocProvider(

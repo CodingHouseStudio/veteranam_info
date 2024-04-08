@@ -27,5 +27,8 @@
   "beAnonymous": "Be anonymous",
   "errorTitle": "Error",
   "errorMessage": "An error occurred while loading the page",
-  "send": "Send"
+  "send": "Send",
+  "key": "Key",
+  "getMockData": "No data found, click to add test data once",
+  "faq": "Frequency ask question"
 }

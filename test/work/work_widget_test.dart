@@ -14,7 +14,7 @@ void main() {
 
   tearDown(GetIt.I.reset);
   group(KScreenBlocName.work, () {
-    testWidgets('renders initial', (tester) async {
+    testWidgets(KGroupText.intial, (tester) async {
       await tester.pumpApp(const WorkScreen());
 
       expect(
@@ -28,10 +28,10 @@ void main() {
 
       await footerHelper(tester: tester, email: KTestText.useremail);
     });
-    group('Mock Go Router', () {
+    group(KGroupText.goRouter, () {
       late MockGoRouter mockGoRouter;
       setUp(() => mockGoRouter = MockGoRouter());
-      testWidgets('renders initial', (tester) async {
+      testWidgets(KGroupText.intial, (tester) async {
         await tester.pumpApp(const WorkScreen(), mockGoRouter: mockGoRouter);
 
         expect(
@@ -43,7 +43,7 @@ void main() {
 
         await workCardHelper(tester);
       });
-      // group('go to', () {
+      // group(KGroupText.goTo, () {
       // });
     });
   });
