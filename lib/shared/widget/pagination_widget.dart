@@ -49,24 +49,36 @@ class PaginationWidgetState extends State<PaginationWidget> {
     final isLastPage = _currentPage == totalPages;
 
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            ElevatedButton.icon(
-              label: const Text(KAppText.previousPage),
-              onPressed: isFirstPage ? null : _previousPage,
-              style: KButtonStyles.transparentButtonStyle,
-              icon: KIcon.arrowLeft,
-            ),
-            _buildPageNumbers(context, totalPages),
-            ElevatedButton.icon(
-              label: const Text(KAppText.nextPage),
-              onPressed: isLastPage ? null : _nextPage,
-              style: KButtonStyles.transparentButtonStyle,
-              icon: KIcon.arrowRight,
-            ),
-          ],
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ElevatedButton.icon(
+                key: KWidgetkeys.widget.pagination.buttonPrevious,
+                label: const Text(KAppText.previousPage),
+                onPressed: isFirstPage ? null : _previousPage,
+                style: KButtonStyles.transparentButtonStyle,
+                icon: KIcon.arrowLeft,
+              ),
+              _buildPageNumbers(context, totalPages),
+              ElevatedButton(
+                key: KWidgetkeys.widget.pagination.buttonNext,
+                onPressed: isLastPage ? null : _nextPage,
+                style: KButtonStyles.transparentButtonStyle,
+                child: const Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(KAppText.nextPage),
+                    KIcon.arrowRight,
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ],
     );
@@ -75,30 +87,27 @@ class PaginationWidgetState extends State<PaginationWidget> {
   Widget _buildPageNumbers(BuildContext context, int totalPages) {
     final pageWidgets = <Widget>[];
 
-    var start = _currentPage - 2;
+    var start = _currentPage;
     var end = _currentPage + 1;
 
     if (start < 1) {
       start = 1;
-      end = min(totalPages, start + 4);
+      end = min(totalPages, start + 1);
     }
     if (end > totalPages) {
       end = totalPages;
-      start = max(1, end - 4);
+      start = max(1, end - 1);
     }
-    for (var i = start; i < _currentPage - 1 && i <= start + 2; i++) {
-      pageWidgets.add(_buildPageButton(i));
-    }
-    if (start > 2) {
-      pageWidgets.add(const Text(KAppText.text));
-    }
+
     pageWidgets.add(_buildPageButton(_currentPage));
-    if (end < totalPages - 1) {
-      pageWidgets.add(const Text(KAppText.text));
+
+    if (_currentPage < totalPages) {
+      pageWidgets
+        ..add(_buildPageButton(_currentPage + 1))
+        ..add(const Text(KAppText.text))
+        ..add(_buildPageButton(totalPages));
     }
-    for (var i = _currentPage + 2; i <= end && i >= end - 2; i++) {
-      pageWidgets.add(_buildPageButton(i));
-    }
+
     return Row(
       children: pageWidgets,
     );
@@ -111,7 +120,7 @@ class PaginationWidgetState extends State<PaginationWidget> {
         padding: const EdgeInsets.symmetric(horizontal: KPadding.kPaddingSize8),
         child: _currentPage == pageNumber
             ? Container(
-                padding: const EdgeInsets.all(KSize.kPixel10),
+                padding: const EdgeInsets.all(KSize.kPixel16),
                 decoration: const BoxDecoration(
                   shape: BoxShape.circle,
                   color: AppColors.widgetBackground,

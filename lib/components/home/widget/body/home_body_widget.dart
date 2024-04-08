@@ -44,6 +44,7 @@ class HomeBodyWidget extends StatelessWidget {
             );
           },
         ),
+        KSizedBox.kHeightSizedBox30,
         const ButtonMobWidget(
           showGoogleIcon: true,
         ),
