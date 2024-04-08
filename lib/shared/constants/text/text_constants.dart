@@ -1,92 +1,5 @@
 import 'package:kozak/shared/shared.dart';
 
-abstract class KAppText {
-  static const logo = 'Veteran';
-  static const enterButtonText = 'Увійти';
-  static const searchTextFieldHint = 'Пошук...';
-  static const filterItemResetAll = 'Скинути фільтри';
-  static const messageTextFieldHint = 'Напишіть Ваше повідомлення';
-  static const nameTextFieldHint = "Напишіть ваще ім'я";
-  static const footerAboutUs = 'Про нас';
-  static const discount = 'Знижка 10%';
-  static const cityDiscount = 'м.Київ';
-  static const serviceDiscount = 'Стоматологічні послуги';
-  static const descriptionDiscount =
-      'Клініка Happy dentist надає знижки 10% на '
-      'всі види послуг для військових і ветеранів.';
-  static const dateDiscount = 'Діє з 12.03.2024 по 12.10.2024';
-  static const instructionDiscount = 'Щоб отримати потрібно: \nЗаписатися на'
-      ' прийом;\nПоказати документи, що підтверджують участь у бойових діях.';
-  static const footerContact = 'Контакти';
-  static const footerConsultationOnline = 'Консультація онлайн';
-  static const footerStories = 'Історії';
-  static const footerDiscountsCoupons = 'Знижки і купони';
-  static const footerMyProfiel = 'Мій профіль';
-  static const footerWork = 'Робота';
-  static const text = '...';
-  static const nextPage = 'Наступна';
-  static const previousPage = 'Попередня';
-  static const footerInformation = 'Інформація';
-  static const footerForInvestors = 'Для інвесторів';
-  static const storyCardButtonDetail = 'Детальніше';
-  static const storyCardButtonNotDetail = 'Сховати';
-  static const nickname = '@veteran';
-  static const String send = 'Надіслати';
-  static const email = 'example@gmail.com';
-  static const anonymous = 'Бути анонімом';
-  static const description =
-      'Якщо ви робите свій профіль анонімним, на вашій сторінці не\n'
-      'буде відображатися персональна інформація, тільки\nnickname.';
-  static const userName = 'Володимир Левандовський';
-  static const questionTitle =
-      'Як мені знайти роботу за допомогою цього сайту?';
-  static const questionSubtitle =
-      'Використовуйте веб-сайти спеціалізованих сервісів для пошуку роботи, '
-      'таких як Indeed, LinkedIn, Glassdoor, Monster, або регіональні '
-      'ресурси. Виберіть свою область інтересів та регіон, і шукайте '
-      'вакансії, які відповідають вашим критеріям.';
-  static const errorTitle = 'Помилка';
-  static const error = 'Помилка при завнтаженні сторінки';
-  static const workRespondButton = 'Відгукнутись';
-  static const newsDetailButton = ['Читати більше', 'Читати менше'];
-
-  static const buttonsText = [
-    [
-      KAppText.footerAboutUs,
-      KAppText.footerForInvestors,
-      KAppText.footerContact,
-    ],
-    [
-      KAppText.footerStories,
-      KAppText.footerDiscountsCoupons,
-      KAppText.footerMyProfiel,
-    ],
-    [
-      KAppText.footerWork,
-      KAppText.footerInformation,
-      KAppText.footerConsultationOnline,
-    ],
-  ];
-
-  static final routes = [
-    [
-      '${KRoute.home.path}${KRoute.aboutUs.path}',
-      '${KRoute.home.path}${KRoute.investors.path}',
-      '${KRoute.home.path}${KRoute.contact.path}',
-    ],
-    [
-      '${KRoute.home.path}${KRoute.story.path}',
-      '${KRoute.home.path}${KRoute.discounts.path}',
-      '${KRoute.home.path}${KRoute.profile.path}',
-    ],
-    [
-      '${KRoute.home.path}${KRoute.work.path}',
-      '${KRoute.home.path}${KRoute.information.path}',
-      '${KRoute.home.path}${KRoute.consultation.path}',
-    ],
-  ];
-}
-
 abstract class KMockText {
   static const dropDownList = [
     'Житомир',
@@ -112,6 +25,8 @@ abstract class KMockText {
   static const workCity = 'м.Одеса';
   static const workEmployer = 'ТОВ Сільпо';
   static const title = 'Заголовок дуже довгий';
+  static const previousPage = 'Попередня';
+  static const nextPage = 'Наступна';
   static const questionTitle =
       'Як мені знайти роботу за допомогою цього сайту?';
   static const questionSubtitle =

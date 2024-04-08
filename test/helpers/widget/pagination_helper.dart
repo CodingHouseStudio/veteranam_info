@@ -18,13 +18,13 @@ Future<void> paginationTest(
 
   await tester.pumpAndSettle();
 
-  expect(find.text(KAppText.previousPage), findsOneWidget);
-  expect(find.text(KAppText.nextPage), findsOneWidget);
+  expect(find.text(KMockText.previousPage), findsOneWidget);
+  expect(find.text(KMockText.nextPage), findsOneWidget);
 
   await tester.tap(find.byKey(KWidgetkeys.widget.pagination.buttonNext));
 
   await tester.pumpAndSettle();
 
-  expect(find.text(KAppText.previousPage), findsOneWidget);
-  expect(find.text(KAppText.nextPage), findsOneWidget);
+  expect(find.text(KMockText.previousPage), findsOneWidget);
+  expect(find.text(KMockText.nextPage), findsOneWidget);
 }

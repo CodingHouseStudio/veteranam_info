@@ -59,7 +59,7 @@ class PaginationWidgetState extends State<PaginationWidget> {
             children: [
               ElevatedButton.icon(
                 key: KWidgetkeys.widget.pagination.buttonPrevious,
-                label: const Text(KAppText.previousPage),
+                label: const Text(KMockText.previousPage),
                 onPressed: isFirstPage ? null : _previousPage,
                 style: KButtonStyles.transparentButtonStyle,
                 icon: KIcon.arrowLeft,
@@ -72,7 +72,7 @@ class PaginationWidgetState extends State<PaginationWidget> {
                 child: const Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text(KAppText.nextPage),
+                    Text(KMockText.nextPage),
                     KIcon.arrowRight,
                   ],
                 ),
@@ -104,7 +104,7 @@ class PaginationWidgetState extends State<PaginationWidget> {
     if (_currentPage < totalPages) {
       pageWidgets
         ..add(_buildPageButton(_currentPage + 1))
-        ..add(const Text(KAppText.text))
+        ..add(const Text('...'))
         ..add(_buildPageButton(totalPages));
     }
 
