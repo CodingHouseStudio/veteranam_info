@@ -42,27 +42,3 @@ class MockIHomeRepository extends _i1.Mock implements _i2.IHomeRepository {
         returnValueForMissingStub: null,
       );
 }
-
-/// A class which mocks [HomeRepository].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockHomeRepository extends _i1.Mock implements _i2.HomeRepository {
-  @override
-  List<_i2.QuestionModel> getQuestions() => (super.noSuchMethod(
-        Invocation.method(
-          #getQuestions,
-          [],
-        ),
-        returnValue: <_i2.QuestionModel>[],
-        returnValueForMissingStub: <_i2.QuestionModel>[],
-      ) as List<_i2.QuestionModel>);
-
-  @override
-  void addMockQuestions() => super.noSuchMethod(
-        Invocation.method(
-          #addMockQuestions,
-          [],
-        ),
-        returnValueForMissingStub: null,
-      );
-}
