@@ -17,11 +17,13 @@ Future<void> questionHelper(
   );
 
   expect(
-    find.descendant(
-      of: find.byKey(KWidgetkeys.widget.question.widget),
-      matching: find.byIcon(KIcon.plus.icon!),
-    ),
+    KWidgetkeys.widget.question.iconPlus,
     findsOneWidget,
+  );
+
+  expect(
+    KWidgetkeys.widget.question.iconMinus,
+    findsNothing,
   );
 
   await tester.tap(find.byKey(KWidgetkeys.widget.question.title));
@@ -29,11 +31,13 @@ Future<void> questionHelper(
   await tester.pumpAndSettle();
 
   expect(
-    find.descendant(
-      of: find.byKey(KWidgetkeys.widget.question.widget),
-      matching: find.byIcon(KIcon.minus.icon!),
-    ),
+    KWidgetkeys.widget.question.iconMinus,
     findsOneWidget,
+  );
+
+  expect(
+    KWidgetkeys.widget.question.iconPlus,
+    findsNothing,
   );
 
   expect(

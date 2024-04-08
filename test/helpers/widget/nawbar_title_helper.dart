@@ -8,6 +8,12 @@ Future<void> nawbarTitleHelper({
   required WidgetTester tester,
   required MockGoRouter mockGoRouter,
 }) async {
+  await scrollingHelper(
+    tester: tester,
+    offset: KTestConstants.scrollingUp,
+    itemKey: null,
+  );
+
   expect(
     find.byKey(KWidgetkeys.widget.nawbar.title),
     findsOneWidget,

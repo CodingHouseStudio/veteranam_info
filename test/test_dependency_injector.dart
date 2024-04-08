@@ -3,4 +3,5 @@ import 'package:kozak/shared/shared.dart';
 
 void configureDependenciesTest() {
   GetIt.I.registerFactory<FilterCubit>(FilterCubit.new);
+  GetIt.I.registerSingleton<LanguageCubit>(LanguageCubit());
 }

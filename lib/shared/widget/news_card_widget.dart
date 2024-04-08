@@ -20,7 +20,10 @@ class NewsCardWidget extends StatelessWidget {
     return CardTextDetailEvaluateWidget(
       image: image,
       text: news,
-      buttonText: KAppText.newsDetailButton,
+      buttonText: [
+        context.l10n.readMore,
+        context.l10n.readLess,
+      ],
       buttonStyle: KButtonStyles.transparentButtonStyleBottomBorder,
       titleWidget: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,

@@ -1,16 +1,14 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:kozak/shared/shared.dart';
 
-import '../helper.dart';
+import '../../test_dependency.dart';
 
 Future<void> footerInvestorsRoutHelper(
   WidgetTester tester,
 ) async {
   await scrollingHelper(
     tester: tester,
-  );
-  await scrollingHelper(
-    tester: tester,
+    offset: KTestConstants.scrolling,
     itemKey: KWidgetkeys.widget.footer.investorsButton,
   );
 

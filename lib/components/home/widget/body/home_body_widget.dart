@@ -22,12 +22,12 @@ class HomeBodyWidget extends StatelessWidget {
         ),
         KSizedBox.kHeightSizedBox30,
         const QuestionWidget(
-          title: KAppText.questionTitle,
-          subtitle: KAppText.questionSubtitle,
+          title: KMockText.questionTitle,
+          subtitle: KMockText.questionSubtitle,
         ),
         KSizedBox.kHeightSizedBox30,
-        const BoxWidget(
-          text: KAppText.footerDiscountsCoupons,
+        BoxWidget(
+          text: context.l10n.discountsCoupons,
         ),
         KSizedBox.kHeightSizedBox30,
         PaginationWidget(
@@ -49,7 +49,7 @@ class HomeBodyWidget extends StatelessWidget {
           showGoogleIcon: true,
         ),
         KSizedBox.kHeightSizedBox30,
-        ButtonSecondary(
+        ButtonSecondaryWidget(
           onPressed: () {},
           text: KMockText.title,
           icon: KIcon.plus,

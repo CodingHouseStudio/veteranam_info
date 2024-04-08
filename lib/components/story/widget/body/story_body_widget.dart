@@ -11,7 +11,7 @@ class StoryBodyWidget extends StatelessWidget {
         KSizedBox.kHeightSizedBox30,
         StoryCardWidget(
           storyDate: KMockText.date,
-          userName: KMockText.userName,
+          userName: KMockText.userNameAnonim,
           story: KMockText.cardData,
         ),
         KSizedBox.kHeightSizedBox30,
