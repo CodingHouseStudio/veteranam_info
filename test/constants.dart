@@ -18,6 +18,9 @@ Future<void> setUpGlobal({bool? kIsWeb}) async {
 abstract class KGroupText {
   static const repository = 'Repository';
   static const successfulGet = 'Successful get';
+  static const intial = 'renders initial';
+  static const goRouter = 'Mock Go Router';
+  static const goTo = 'go to';
 }
 
 abstract class KTestText {
