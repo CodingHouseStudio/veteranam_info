@@ -34,7 +34,7 @@ abstract class KTestConstants {
   static const scrollingDown = Offset(0, -4000);
   static const scrollingUp = Offset(0, 4000);
 
-  static const windowTabletSize = Size(1500, 1500);
+  static const windowTabletSize = Size(1700, 1700);
 
   static const englishIndex = 1;
   static const ukrainIndex = 0;
