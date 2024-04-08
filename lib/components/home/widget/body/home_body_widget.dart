@@ -27,8 +27,12 @@ class HomeBodyWidget extends StatelessWidget {
                 else
                   TextButton(
                     key: KWidgetkeys.screen.home.buttonMock,
-                    onPressed: () =>
-                        GetIt.I.get<IHomeRepository>().addMockQuestions(),
+                    onPressed: () {
+                      GetIt.I.get<IHomeRepository>().addMockQuestions();
+                      context
+                          .read<HomeWatcherBloc>()
+                          .add(const HomeWatcherEvent.started());
+                    },
                     child: Text(
                       context.l10n.getMockData,
                     ),

@@ -1,16 +1,13 @@
-import 'dart:async';
-
 import 'package:injectable/injectable.dart';
 import 'package:kozak/shared/shared.dart';
 
 @Singleton(as: IHomeRepository)
 class HomeRepository implements IHomeRepository {
   final List<QuestionModel> _questionModelItems = [];
-  final _questionsController = StreamController<List<QuestionModel>>()..add([]);
 
   @override
-  Stream<List<QuestionModel>> getQuestions() {
-    return _questionsController.stream;
+  List<QuestionModel> getQuestions() {
+    return _questionModelItems;
   }
 
   @override
@@ -24,6 +21,5 @@ class HomeRepository implements IHomeRepository {
         ),
       );
     }
-    _questionsController.add(_questionModelItems);
   }
 }
