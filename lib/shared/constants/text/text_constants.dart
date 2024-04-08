@@ -1,3 +1,5 @@
+// ignore_for_file: lines_longer_than_80_chars
+
 import 'package:kozak/shared/shared.dart';
 
 abstract class KMockText {
@@ -25,8 +27,12 @@ abstract class KMockText {
   static const workCity = 'м.Одеса';
   static const workEmployer = 'ТОВ Сільпо';
   static const title = 'Заголовок дуже довгий';
-  static const questionTitle =
-      'Як мені знайти роботу за допомогою цього сайту?';
+  static const questionTitle = [
+    'Як мені знайти роботу за допомогою цього сайту?',
+    'Де я можу використати знижки і купони?',
+    'Як інформація потрапляє на ваш веб-сайт?',
+    'Які документи мені потрібно показати, щоб отримати допомогу від партнерів?',
+  ];
   static const questionSubtitle =
       'Використовуйте веб-сайти спеціалізованих сервісів для пошуку роботи, '
       'таких як Indeed, LinkedIn, Glassdoor, Monster, або регіональні '

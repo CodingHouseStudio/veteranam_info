@@ -23,6 +23,19 @@ void main() {
       );
 
       await tester.pumpAndSettle();
+
+      await filterBoxHelper(
+        tester,
+      );
+
+      await messageFieldHelper(tester: tester, message: KTestText.field);
+
+      await dropListFieldBoxHelper(
+        tester: tester,
+        text: KMockText.dropDownList.elementAt(0),
+      );
+
+      await boxHelper(tester);
     });
     group('Mock Go Router', () {
       late MockGoRouter mockGoRouter;
@@ -39,6 +52,19 @@ void main() {
         );
 
         await tester.pumpAndSettle();
+
+        await filterBoxHelper(
+          tester,
+        );
+
+        await messageFieldHelper(tester: tester, message: KTestText.field);
+
+        await dropListFieldBoxHelper(
+          tester: tester,
+          text: KMockText.dropDownList.elementAt(0),
+        );
+
+        await boxHelper(tester);
       });
       // group('go to', () {
       // });

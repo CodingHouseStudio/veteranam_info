@@ -26,6 +26,7 @@ class ScaffoldWithNavBar extends StatelessWidget {
               KPlatformConstants.minWidthThresholdDesktop;
 
           return ListView(
+            key: KWidgetkeys.widget.shellRoute.scroll,
             padding: EdgeInsets.only(
               top: KPadding.kPaddingSize10,
               left: KPadding.kPaddingSize75 *

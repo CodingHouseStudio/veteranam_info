@@ -63,6 +63,7 @@ part 'widget/language_switcher.dart';
 
 part 'widget/discount_card.dart';
 part 'widget/check_point.dart';
+part 'widget/shell_route.dart';
 
 abstract class KWidgetkeys {
   static _ScreenKeys get screen => _ScreenKeys();

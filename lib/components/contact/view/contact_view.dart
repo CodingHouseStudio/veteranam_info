@@ -7,8 +7,10 @@ class ContactScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ContactBodyWidget(
-      key: KWidgetkeys.screen.contact.screen,
+    return ContactBlocprovider(
+      childWidget: ContactBodyWidget(
+        key: KWidgetkeys.screen.contact.screen,
+      ),
     );
   }
 }

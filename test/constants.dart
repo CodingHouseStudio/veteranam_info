@@ -1,8 +1,11 @@
+// ignore_for_file: lines_longer_than_80_chars
+
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:kozak/bootstrap.dart';
+import 'package:kozak/shared/shared.dart';
 
 Future<void> setUpGlobal({bool? kIsWeb}) async {
   FlutterError.onError = (details) {
@@ -10,6 +13,11 @@ Future<void> setUpGlobal({bool? kIsWeb}) async {
   };
 
   Bloc.observer = const AppBlocObserver();
+}
+
+abstract class KGroupText {
+  static const repository = 'Repository';
+  static const successfulGet = 'Successful get';
 }
 
 abstract class KTestText {
@@ -27,10 +35,23 @@ abstract class KTestText {
   static const String footer = 'Контакти\n';
 
   static const field = 'field_test';
+
+  static const questionModelItems = <QuestionModel>[
+    QuestionModel(
+      id: '1',
+      title: 'Як мені знайти роботу за допомогою цього сайту?',
+      subtitle:
+          'Використовуйте веб-сайти спеціалізованих сервісів для пошуку роботи, '
+          'таких як Indeed, LinkedIn, Glassdoor, Monster, або регіональні '
+          'ресурси. Виберіть свою область інтересів та регіон, і шукайте '
+          'вакансії, які відповідають вашим критеріям.',
+    ),
+  ];
 }
 
 abstract class KTestConstants {
   static const scrollingDown100 = Offset(0, -100);
+  static const scrollingUp400 = Offset(0, 100);
   static const scrollingDown = Offset(0, -4000);
   static const scrollingUp = Offset(0, 4000);
 
@@ -56,4 +77,5 @@ abstract class KScreenBlocName {
 
   static const filterCubit = 'Filter Cubit';
   static const languageCubit = 'Language Cubit';
+  static const homeBloc = 'Home Bloc';
 }
