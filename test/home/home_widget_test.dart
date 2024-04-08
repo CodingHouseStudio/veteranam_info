@@ -24,18 +24,26 @@ void main() {
 
       await tester.pumpAndSettle();
 
-      await filterBoxHelper(
-        tester,
+      expect(
+        find.byKey(KWidgetkeys.screen.home.buttonMock),
+        findsNothing,
       );
 
-      await messageFieldHelper(tester: tester, message: KTestText.field);
-
-      await dropListFieldBoxHelper(
-        tester: tester,
-        text: KMockText.dropDownList.elementAt(0),
+      expect(
+        find.byKey(KWidgetkeys.screen.home.question),
+        findsOneWidget,
       );
 
-      await boxHelper(tester);
+      expect(
+        find.byKey(KWidgetkeys.screen.home.questionList),
+        findsOneWidget,
+      );
+
+      expect(
+        find.byKey(KWidgetkeys.screen.home.questionListTitle),
+        findsOneWidget,
+      );
+      await questionHelper(tester);
     });
     group('Mock Go Router', () {
       late MockGoRouter mockGoRouter;
@@ -50,18 +58,26 @@ void main() {
 
         await tester.pumpAndSettle();
 
-        await filterBoxHelper(
-          tester,
+        expect(
+          find.byKey(KWidgetkeys.screen.home.buttonMock),
+          findsNothing,
         );
 
-        await messageFieldHelper(tester: tester, message: KTestText.field);
-
-        await dropListFieldBoxHelper(
-          tester: tester,
-          text: KMockText.dropDownList.elementAt(0),
+        expect(
+          find.byKey(KWidgetkeys.screen.home.question),
+          findsOneWidget,
         );
 
-        await boxHelper(tester);
+        expect(
+          find.byKey(KWidgetkeys.screen.home.questionList),
+          findsOneWidget,
+        );
+
+        expect(
+          find.byKey(KWidgetkeys.screen.home.questionListTitle),
+          findsOneWidget,
+        );
+        await questionHelper(tester);
       });
 
       group('go to', () {

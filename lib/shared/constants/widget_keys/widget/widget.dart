@@ -22,4 +22,5 @@ class _WidgetKeys {
   final filterPopupMenu = _FilterPopupMenuKeys();
   final languageSwitcher = _LanguageSwitcherKeys();
   final checkPoint = _CheckPointKeys();
+  final shellRoute = _ShellRouteKeys();
 }

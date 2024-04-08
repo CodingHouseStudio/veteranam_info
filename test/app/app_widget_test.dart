@@ -6,14 +6,14 @@ import 'package:kozak/shared/shared.dart';
 import '../text_dependency.dart';
 
 void main() {
+  setUp(configureDependenciesTest);
+
+  setUpAll(setUpGlobal);
+
+  setupFirebaseAuthMocks();
+
+  tearDown(GetIt.I.reset);
   group(KScreenBlocName.app, () {
-    setUp(configureDependenciesTest);
-
-    setUpAll(setUpGlobal);
-
-    setupFirebaseAuthMocks();
-
-    tearDown(GetIt.I.reset);
     testWidgets('renders initial', (tester) async {
       await tester.pumpWidget(const App());
 
