@@ -20,6 +20,7 @@ class _WidgetKeys {
   final dropChip = _DropChipKeys();
   final chip = _ChipKeys();
   final filterPopupMenu = _FilterPopupMenuKeys();
+  final pagination = _PaginationKeys();
   final languageSwitcher = _LanguageSwitcherKeys();
   final checkPoint = _CheckPointKeys();
 }

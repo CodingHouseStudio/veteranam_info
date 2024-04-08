@@ -25,6 +25,8 @@ abstract class KMockText {
   static const workCity = 'м.Одеса';
   static const workEmployer = 'ТОВ Сільпо';
   static const title = 'Заголовок дуже довгий';
+  static const previousPage = 'Попередня';
+  static const nextPage = 'Наступна';
   static const questionTitle =
       'Як мені знайти роботу за допомогою цього сайту?';
   static const questionSubtitle =
