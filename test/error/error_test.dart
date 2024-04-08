@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:kozak/components/components.dart';
@@ -15,9 +17,23 @@ void main() {
   setupFirebaseAuthMocks();
 
   tearDown(GetIt.I.reset);
-  group(KScreenName.app, () {
+  group(KScreenBlocName.app, () {
     testWidgets('renders initial', (tester) async {
-      await tester.pumpWidget(const MaterialApp(home: ErrorScreen()));
+      await tester.pumpWidget(
+        BlocProvider(
+          create: (context) => GetIt.I.get<LanguageCubit>()..initLanguage(),
+          child: BlocBuilder<LanguageCubit, Language?>(
+            builder: (context, state) {
+              return MaterialApp(
+                localizationsDelegates: AppLocalizations.localizationsDelegates,
+                locale: state?.value,
+                supportedLocales: AppLocalizations.supportedLocales,
+                home: const ErrorScreen(),
+              );
+            },
+          ),
+        ),
+      );
 
       expect(
         find.byKey(KWidgetkeys.screen.error.screen),
@@ -39,9 +55,19 @@ void main() {
       setUp(() => mockGoRouter = MockGoRouter());
       testWidgets('renders initial', (tester) async {
         await tester.pumpWidget(
-          MockGoRouterProvider(
-            goRouter: mockGoRouter,
-            child: const MaterialApp(home: ErrorScreen()),
+          BlocProvider(
+            create: (context) => GetIt.I.get<LanguageCubit>()..initLanguage(),
+            child: BlocBuilder<LanguageCubit, Language?>(
+              builder: (context, state) {
+                return MaterialApp(
+                  localizationsDelegates:
+                      AppLocalizations.localizationsDelegates,
+                  locale: state?.value,
+                  supportedLocales: AppLocalizations.supportedLocales,
+                  home: const ErrorScreen(),
+                );
+              },
+            ),
           ),
         );
 
@@ -62,11 +88,24 @@ void main() {
       });
 
       group('go to', () {
-        testWidgets(KScreenName.home, (tester) async {
+        testWidgets(KScreenBlocName.home, (tester) async {
           await tester.pumpWidget(
-            MockGoRouterProvider(
-              goRouter: mockGoRouter,
-              child: const MaterialApp(home: ErrorScreen()),
+            BlocProvider(
+              create: (context) => GetIt.I.get<LanguageCubit>()..initLanguage(),
+              child: BlocBuilder<LanguageCubit, Language?>(
+                builder: (context, state) {
+                  return MockGoRouterProvider(
+                    goRouter: mockGoRouter,
+                    child: MaterialApp(
+                      localizationsDelegates:
+                          AppLocalizations.localizationsDelegates,
+                      locale: state?.value,
+                      supportedLocales: AppLocalizations.supportedLocales,
+                      home: const ErrorScreen(),
+                    ),
+                  );
+                },
+              ),
             ),
           );
 

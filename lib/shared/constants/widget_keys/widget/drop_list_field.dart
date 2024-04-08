@@ -6,4 +6,6 @@ class _DropListFieldKeys {
   final item = const Key('drop_list_field_item');
   final list = const Key('drop_list_field_list');
   final itemText = const Key('drop_list_field_item_text');
+  final trailing = const Key('drop_list_field_trailing');
+  final trailingUp = const Key('drop_list_field_trailing_up');
 }

@@ -9,6 +9,8 @@ Future<void> dropChipHelper(
 ) async {
   expect(find.byKey(KWidgetkeys.widget.dropChip.widget), findsWidgets);
 
+  expect(find.byKey(KWidgetkeys.widget.dropChip.button), findsNothing);
+
   await tester.tap(
     find.byKey(KWidgetkeys.widget.dropChip.widget).first,
   );

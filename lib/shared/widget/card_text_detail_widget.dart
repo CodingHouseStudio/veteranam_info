@@ -59,10 +59,9 @@ class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
                     widget.buttonStyle ?? KButtonStyles.whiteButtonStyleBorder,
                 child: Text(
                   maxLines == null
-                      ? widget.buttonText?.elementAt(1) ??
-                          KAppText.storyCardButtonNotDetail
-                      : widget.buttonText?.elementAt(0) ??
-                          KAppText.storyCardButtonDetail,
+                      ? widget.buttonText?.elementAt(1) ?? context.l10n.hide
+                      : widget.buttonText?.elementAt(0) ?? context.l10n.detail,
+                  key: KWidgetkeys.widget.cardTextDetail.buttonText,
                   style: AppTextStyle.text18,
                 ),
               ),

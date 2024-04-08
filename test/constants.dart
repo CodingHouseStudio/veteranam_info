@@ -26,8 +26,6 @@ abstract class KTestText {
 
   static const String footer = 'Контакти\n';
 
-  static const filterCubit = 'Filter Cubit';
-
   static const field = 'field_test';
 }
 
@@ -37,9 +35,12 @@ abstract class KTestConstants {
   static const scrollingUp = Offset(0, 4000);
 
   static const windowTabletSize = Size(1500, 1500);
+
+  static const englishIndex = 1;
+  static const ukrainIndex = 0;
 }
 
-abstract class KScreenName {
+abstract class KScreenBlocName {
   static const app = 'App Screen';
   static const error = 'Error Screen';
   static const home = 'Home Screen';
@@ -52,4 +53,7 @@ abstract class KScreenName {
   static const aboutUs = 'About Us Screen';
   static const contact = 'Contact Screen';
   static const consultation = 'Consultation Screen';
+
+  static const filterCubit = 'Filter Cubit';
+  static const languageCubit = 'Language Cubit';
 }

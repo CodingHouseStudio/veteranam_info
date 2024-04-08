@@ -11,8 +11,8 @@ class ButtonMobWidget extends StatelessWidget {
     return Center(
       child: ElevatedButton.icon(
         key: KWidgetkeys.widget.buttonMob.googleButton,
-        label: const Text(
-          KAppText.send,
+        label: Text(
+          context.l10n.send,
           style: AppTextStyle.text24,
         ),
         style: KButtonStyles.secondaryButtonStyle,

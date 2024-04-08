@@ -11,7 +11,7 @@ class ErrorScreen extends StatelessWidget {
       key: KWidgetkeys.screen.error.screen,
       appBar: AppBar(
         title: Text(
-          KAppText.errorTitle,
+          context.l10n.errorTitle,
           key: KWidgetkeys.screen.error.title,
         ),
       ),

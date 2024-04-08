@@ -4,10 +4,9 @@ import 'package:kozak/shared/shared.dart';
 
 import '../../text_dependency.dart';
 
-Future<void> cardTextDetailHelper({
-  required WidgetTester tester,
-  List<String>? detailButtonText,
-}) async {
+Future<void> cardTextDetailHelper(
+  WidgetTester tester,
+) async {
   expect(
     find.byKey(KWidgetkeys.widget.cardTextDetail.text),
     findsOneWidget,
@@ -28,19 +27,11 @@ Future<void> cardTextDetailHelper({
 
   expect(text.maxLines, isNotNull);
 
-  expect(
-    find.descendant(
-      of: find.byKey(KWidgetkeys.widget.cardTextDetail.widget),
-      matching: find.text(
-        detailButtonText?.first ?? KAppText.storyCardButtonDetail,
-      ),
-    ),
-    findsOneWidget,
-  );
+  final buttonText = tester
+      .widget<Text>(find.byKey(KWidgetkeys.widget.cardTextDetail.buttonText));
 
   await scrollingHelper(
     tester: tester,
-    offset: null,
     itemKey: KWidgetkeys.widget.cardTextDetail.button,
   );
 
@@ -50,18 +41,14 @@ Future<void> cardTextDetailHelper({
 
   await scrollingHelper(
     tester: tester,
-    offset: null,
     itemKey: KWidgetkeys.widget.cardTextDetail.button,
   );
 
   expect(
-    find.descendant(
-      of: find.byKey(KWidgetkeys.widget.cardTextDetail.widget),
-      matching: find.text(
-        detailButtonText?.last ?? KAppText.storyCardButtonNotDetail,
-      ),
-    ),
-    findsOneWidget,
+    tester
+        .widget<Text>(find.byKey(KWidgetkeys.widget.cardTextDetail.buttonText))
+        .data,
+    isNot(buttonText.data),
   );
 
   text =
@@ -76,6 +63,7 @@ Future<void> cardTextDetailHelper({
   await scrollingHelper(
     tester: tester,
     offset: KTestConstants.scrollingUp,
+    itemKey: KWidgetkeys.widget.cardTextDetail.text,
   );
 
   text =
@@ -84,13 +72,10 @@ Future<void> cardTextDetailHelper({
   expect(text.maxLines, isNotNull);
 
   expect(
-    find.descendant(
-      of: find.byKey(KWidgetkeys.widget.cardTextDetail.widget),
-      matching: find.text(
-        detailButtonText?.first ?? KAppText.storyCardButtonDetail,
-      ),
-    ),
-    findsOneWidget,
+    tester
+        .widget<Text>(find.byKey(KWidgetkeys.widget.cardTextDetail.buttonText))
+        .data,
+    buttonText.data,
   );
 
   text =

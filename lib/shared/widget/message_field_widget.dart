@@ -11,7 +11,7 @@ class MessageFieldWidget extends StatelessWidget {
       child: TextFieldWidget(
         widgetKey: KWidgetkeys.widget.input.field,
         onChanged: changeMessage,
-        hintText: KAppText.messageTextFieldHint,
+        hintText: context.l10n.enterYourMessage,
         maxLines: 4,
         fillColor: AppColors.white,
         enabledBorder: KBorder.outlineInputLightGray,

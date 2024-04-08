@@ -31,6 +31,7 @@ void main() {
 
         await scrollingHelper(
           tester: tester,
+          offset: KTestConstants.scrolling,
           itemKey: buttonKey,
         );
 
