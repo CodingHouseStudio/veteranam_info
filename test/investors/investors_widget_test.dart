@@ -14,7 +14,7 @@ void main() {
 
   tearDown(GetIt.I.reset);
   group(KScreenBlocName.investors, () {
-    testWidgets('renders initial', (tester) async {
+    testWidgets(KGroupText.intial, (tester) async {
       await tester.pumpApp(const InvestorsScreen());
 
       expect(
@@ -24,10 +24,10 @@ void main() {
 
       await tester.pumpAndSettle();
     });
-    group('Mock Go Router', () {
+    group(KGroupText.goRouter, () {
       late MockGoRouter mockGoRouter;
       setUp(() => mockGoRouter = MockGoRouter());
-      testWidgets('renders initial', (tester) async {
+      testWidgets(KGroupText.intial, (tester) async {
         await tester.pumpApp(
           const InvestorsScreen(),
           mockGoRouter: mockGoRouter,
@@ -40,7 +40,7 @@ void main() {
 
         await tester.pumpAndSettle();
       });
-      // group('go to', () {
+      // group(KGroupText.goTo, () {
       // });
     });
   });

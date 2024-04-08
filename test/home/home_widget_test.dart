@@ -14,7 +14,7 @@ void main() {
 
   tearDown(GetIt.I.reset);
   group(KScreenBlocName.home, () {
-    testWidgets('renders initial', (tester) async {
+    testWidgets(KGroupText.intial, (tester) async {
       await tester.pumpApp(const HomeScreen());
 
       expect(
@@ -45,10 +45,10 @@ void main() {
       );
       await questionHelper(tester);
     });
-    group('Mock Go Router', () {
+    group(KGroupText.goRouter, () {
       late MockGoRouter mockGoRouter;
       setUp(() => mockGoRouter = MockGoRouter());
-      testWidgets('renders initial', (tester) async {
+      testWidgets(KGroupText.intial, (tester) async {
         await tester.pumpApp(const HomeScreen(), mockGoRouter: mockGoRouter);
 
         expect(
@@ -80,7 +80,7 @@ void main() {
         await questionHelper(tester);
       });
 
-      group('go to', () {
+      group(KGroupText.goTo, () {
         testWidgets('All footer widget navigation', (tester) async {
           await tester.pumpApp(const HomeScreen(), mockGoRouter: mockGoRouter);
 
