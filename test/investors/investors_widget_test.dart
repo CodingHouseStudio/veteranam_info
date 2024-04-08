@@ -23,6 +23,53 @@ void main() {
       );
 
       await tester.pumpAndSettle();
+
+      expect(
+        find.byKey(KWidgetkeys.screen.investors.buttonSend),
+        findsOneWidget,
+      );
+
+      expect(
+        find.byKey(KWidgetkeys.screen.investors.email),
+        findsOneWidget,
+      );
+
+      expect(
+        find.byKey(KWidgetkeys.screen.investors.fieldEmail),
+        findsOneWidget,
+      );
+
+      expect(
+        find.byKey(KWidgetkeys.screen.investors.fieldName),
+        findsOneWidget,
+      );
+
+      expect(
+        find.byKey(KWidgetkeys.screen.investors.fieldSuggestions),
+        findsOneWidget,
+      );
+
+      expect(
+        find.byKey(KWidgetkeys.screen.investors.message),
+        findsOneWidget,
+      );
+
+      expect(
+        find.byKey(KWidgetkeys.screen.investors.name),
+        findsOneWidget,
+      );
+
+      expect(
+        find.byKey(KWidgetkeys.screen.investors.subtitle),
+        findsOneWidget,
+      );
+
+      expect(
+        find.byKey(KWidgetkeys.screen.investors.titile),
+        findsOneWidget,
+      );
+
+      await messageFieldHelper(tester: tester, message: KTestText.field);
     });
     group('Mock Go Router', () {
       late MockGoRouter mockGoRouter;
@@ -39,6 +86,53 @@ void main() {
         );
 
         await tester.pumpAndSettle();
+
+        expect(
+          find.byKey(KWidgetkeys.screen.investors.buttonSend),
+          findsOneWidget,
+        );
+
+        expect(
+          find.byKey(KWidgetkeys.screen.investors.email),
+          findsOneWidget,
+        );
+
+        expect(
+          find.byKey(KWidgetkeys.screen.investors.fieldEmail),
+          findsOneWidget,
+        );
+
+        expect(
+          find.byKey(KWidgetkeys.screen.investors.fieldName),
+          findsOneWidget,
+        );
+
+        expect(
+          find.byKey(KWidgetkeys.screen.investors.fieldSuggestions),
+          findsOneWidget,
+        );
+
+        expect(
+          find.byKey(KWidgetkeys.screen.investors.message),
+          findsOneWidget,
+        );
+
+        expect(
+          find.byKey(KWidgetkeys.screen.investors.name),
+          findsOneWidget,
+        );
+
+        expect(
+          find.byKey(KWidgetkeys.screen.investors.subtitle),
+          findsOneWidget,
+        );
+
+        expect(
+          find.byKey(KWidgetkeys.screen.investors.titile),
+          findsOneWidget,
+        );
+
+        await messageFieldHelper(tester: tester, message: KTestText.field);
       });
       // group('go to', () {
       // });
