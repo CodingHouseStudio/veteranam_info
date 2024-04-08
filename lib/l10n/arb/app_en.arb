@@ -18,7 +18,6 @@
   "work": "Work",
   "information": "Information",
   "consultationOnline": "Consultation online",
-  "enterYourMessage": "Enter your message",
   "readLess": "Read less",
   "readMore": "Read more",
   "respond": "Respond",
@@ -27,5 +26,12 @@
   "beAnonymous": "Be anonymous",
   "errorTitle": "Error",
   "errorMessage": "An error occurred while loading the page",
-  "send": "Send"
+  "send": "Send",
+  "investors": "Investors",
+  "investorsSubtitle": "In this section, you can support veterans. If you have a business, you can provide discounts or personalized offers for veterans. Write to us and we will contact you to discuss the details.",
+  "name": "Name",
+  "message": "Message",
+  "writeYourEmail": "Write your email",
+  "text": "text",
+  "writeYourSuggenstions": "Write your suggenstions"
 }

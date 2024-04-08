@@ -4,6 +4,12 @@ import 'package:kozak/shared/shared.dart';
 /// Text Styles
 
 abstract class AppTextStyle {
+  static const text96 = TextStyle(
+    color: Color.fromRGBO(0, 0, 0, 1),
+    fontSize: KSize.kFont96,
+    fontWeight: FontWeight.w400,
+  );
+
   static const text40 = TextStyle(
     color: Color.fromRGBO(0, 0, 0, 1),
     fontSize: KSize.kFont40,

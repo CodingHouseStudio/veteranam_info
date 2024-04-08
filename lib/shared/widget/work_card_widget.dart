@@ -63,20 +63,10 @@ class WorkCardWidget extends StatelessWidget {
             ),
           ),
           KSizedBox.kHeightSizedBox16,
-          TextButton(
+          ButtonWidget(
             key: KWidgetkeys.widget.workCard.button,
-            style: KButtonStyles.lightGrayButtonStyle,
-            onPressed: null,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: KPadding.kPaddingSize32,
-                horizontal: KPadding.kPaddingSize80,
-              ),
-              child: Text(
-                context.l10n.respond,
-                style: AppTextStyle.text32,
-              ),
-            ),
+            onPressed: () {},
+            text: context.l10n.respond,
           ),
         ],
       ),
