@@ -40,6 +40,7 @@ class ProfileBodyWidget extends StatelessWidget {
                 ),
               ),
               Expanded(
+                flex: 3,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
                     horizontal: KPadding.kPaddingSize16,
