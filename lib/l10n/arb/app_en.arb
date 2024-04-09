@@ -33,5 +33,8 @@
   "message": "Message",
   "writeYourEmail": "Write your email",
   "text": "text",
-  "writeYourSuggenstions": "Write your suggenstions"
+  "writeYourSuggenstions": "Write your suggenstions",
+  "feedback": "Feedback",
+  "feedbackSubtitle": "If you want to contact us, or have any questions or requests. We are happy to talk to you! Please fill out the form.",
+  "writeYourMessage": "Write your message"
 }
