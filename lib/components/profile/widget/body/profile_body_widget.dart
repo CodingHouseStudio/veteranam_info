@@ -6,16 +6,60 @@ class ProfileBodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        KSizedBox.kHeightSizedBox30,
-        const ProfileCardWidget(),
-        KSizedBox.kHeightSizedBox30,
-        CheckPointWidget(
-          onChanged: ({required isCheck}) {},
-        ),
-        KSizedBox.kHeightSizedBox30,
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: KPadding.kPaddingSize16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  context.l10n.myProfile,
+                  style: AppTextStyle.text40,
+                ),
+                Text(
+                  context.l10n.profileDetails,
+                  style: AppTextStyle.text16,
+                ),
+                KSizedBox.kHeightSizedBox30,
+              ],
+            ),
+          ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Expanded(
+                flex: 2,
+                child: Padding(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: KPadding.kPaddingSize16),
+                  child: ProfileCardWidget(),
+                ),
+              ),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: KPadding.kPaddingSize16,
+                  ),
+                  child: Column(
+                    children: [
+                      BoxWidget(
+                        text: context.l10n.saved,
+                      ),
+                      KSizedBox.kHeightSizedBox30,
+                      BoxWidget(text: context.l10n.myStory),
+                      KSizedBox.kHeightSizedBox90,
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
