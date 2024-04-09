@@ -28,6 +28,17 @@
   "errorTitle": "Error",
   "errorMessage": "An error occurred while loading the page",
   "send": "Send",
+  "myStory" : "My story",
+  "saved" : "Saved",
+  "profileDetails" : "In this section you can add personal information, set your profile to be anonymous, and find your saved content.",
+   "beAnonymousDetails" : "If you make your profile anonymous, your page will not display personal information, only your nickname.",
+  "writeYouName" : "Write your name",
+  "writeYouLastName" : "Write your last name",
+  "saveChanges" : "Save changes",
+  "editData" : "Edit data",
+  "name" : "Name",
+  "lastName" : "Last name"
+  "send": "Send",
   "key": "Key",
   "getMockData": "No data found, click to add test data once",
   "faq": "Frequency ask question"
