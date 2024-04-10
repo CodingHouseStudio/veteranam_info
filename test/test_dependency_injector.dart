@@ -10,7 +10,8 @@ void configureDependenciesTest() {
   // Repositories
   // Blocs
   GetIt.I.registerFactory<FilterCubit>(FilterCubit.new);
-  GetIt.I.registerSingleton<LanguageCubit>(LanguageCubit());
+  GetIt.I.registerFactory<LanguageCubit>(LanguageCubit.new);
+  GetIt.I.registerFactory<FeedbackBloc>(FeedbackBloc.new);
 
   final HomeWatcherBloc mockHomeWatcherBloc = MockHomeWatcherBloc();
   when(() => mockHomeWatcherBloc.state).thenReturn(

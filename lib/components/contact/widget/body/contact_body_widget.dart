@@ -10,8 +10,6 @@ class ContactBodyWidget extends StatelessWidget {
     return Column(
       children: [
         KSizedBox.kHeightSizedBox30,
-        MessageFieldWidget(changeMessage: (_) {}),
-        KSizedBox.kHeightSizedBox30,
         const FilterBoxWidget(
           filters: KMockText.filter,
         ),
@@ -20,10 +18,6 @@ class ContactBodyWidget extends StatelessWidget {
           onChanged: (_) {},
           hintText: '',
           dropDownList: KMockText.dropDownList,
-        ),
-        KSizedBox.kHeightSizedBox30,
-        BoxWidget(
-          text: context.l10n.discountsCoupons,
         ),
         KSizedBox.kHeightSizedBox30,
         PaginationWidget(
