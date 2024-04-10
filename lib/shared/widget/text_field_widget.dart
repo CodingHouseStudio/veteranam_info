@@ -128,7 +128,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
 
   @override
   void dispose() {
-    if (widget.disposeFocusNode != null && widget.disposeFocusNode!) {
+    if (widget.disposeFocusNode ?? false) {
       widget.focusNode?.dispose();
     }
     super.dispose();
