@@ -39,8 +39,6 @@ Future<void> setUpGlobalIntegration() async {
 abstract class KTestConstants {
   static const scrolling = Offset(0, -10000);
 
-  static const windowTabletSize = Size(1500, 1500);
-
   static const windowMobileSize = Size(800, 800);
 
   static final screens = [
