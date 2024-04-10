@@ -7,10 +7,17 @@ class InvestorsBodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FeedbackWidget(
-      title: context.l10n.investors,
-      subtitle: context.l10n.investorsSubtitle,
-      messageHint: context.l10n.writeYourSuggenstions,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final isDesk =
+            KPlatformConstants.changeToDescWidget(constraints.maxWidth);
+        return FeedbackWidget(
+          title: context.l10n.investors,
+          subtitle: context.l10n.investorsSubtitle,
+          messageHint: context.l10n.writeYourSuggenstions,
+          isDesk: isDesk,
+        );
+      },
     );
   }
 }

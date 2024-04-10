@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 
-import '../../text_dependency.dart';
+import '../text_dependency.dart';
 
 Future<void> changeWindowSizeHelper({
   required WidgetTester tester,
@@ -12,5 +12,5 @@ Future<void> changeWindowSizeHelper({
     await tester.binding.setSurfaceSize(KTestConstants.windowTabletSize);
   }
 
-  await tester.pumpAndSettle();
+  await tester.pump();
 }

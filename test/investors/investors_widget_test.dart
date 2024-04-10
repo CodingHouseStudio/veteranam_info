@@ -14,7 +14,7 @@ void main() {
 
   tearDown(GetIt.I.reset);
   group(KScreenBlocName.investors, () {
-    testWidgets('renders initial', (tester) async {
+    testWidgets(KGroupText.intial, (tester) async {
       await tester.pumpApp(const InvestorsScreen());
 
       expect(
@@ -24,57 +24,26 @@ void main() {
 
       await tester.pumpAndSettle();
 
-      expect(
-        find.byKey(KWidgetkeys.screen.investors.buttonSend),
-        findsOneWidget,
-      );
+      await feedbackHelper(tester);
 
-      expect(
-        find.byKey(KWidgetkeys.screen.investors.email),
-        findsOneWidget,
-      );
+      // await feedbackEnterTextHelper(
+      //   tester: tester,
+      //   email: KTestText.useremailIncorrect,
+      //   field: KTestText.field,
+      //   isValid: false,
+      // );
 
-      expect(
-        find.byKey(KWidgetkeys.screen.investors.fieldEmail),
-        findsOneWidget,
-      );
-
-      expect(
-        find.byKey(KWidgetkeys.screen.investors.fieldName),
-        findsOneWidget,
-      );
-
-      expect(
-        find.byKey(KWidgetkeys.screen.investors.fieldSuggestions),
-        findsOneWidget,
-      );
-
-      expect(
-        find.byKey(KWidgetkeys.screen.investors.message),
-        findsOneWidget,
-      );
-
-      expect(
-        find.byKey(KWidgetkeys.screen.investors.name),
-        findsOneWidget,
-      );
-
-      expect(
-        find.byKey(KWidgetkeys.screen.investors.subtitle),
-        findsOneWidget,
-      );
-
-      expect(
-        find.byKey(KWidgetkeys.screen.investors.titile),
-        findsOneWidget,
-      );
-
-      await messageFieldHelper(tester: tester, message: KTestText.field);
+      // await feedbackEnterTextHelper(
+      //   tester: tester,
+      //   email: KTestText.useremail,
+      //   field: KTestText.field,
+      //   isValid: true,
+      // );
     });
-    group('Mock Go Router', () {
+    group(KGroupText.goRouter, () {
       late MockGoRouter mockGoRouter;
       setUp(() => mockGoRouter = MockGoRouter());
-      testWidgets('renders initial', (tester) async {
+      testWidgets(KGroupText.intial, (tester) async {
         await tester.pumpApp(
           const InvestorsScreen(),
           mockGoRouter: mockGoRouter,
@@ -87,54 +56,23 @@ void main() {
 
         await tester.pumpAndSettle();
 
-        expect(
-          find.byKey(KWidgetkeys.screen.investors.buttonSend),
-          findsOneWidget,
+        await feedbackHelper(tester);
+
+        await feedbackEnterTextHelper(
+          tester: tester,
+          email: KTestText.useremailIncorrect,
+          field: KTestText.field,
+          isValid: false,
         );
 
-        expect(
-          find.byKey(KWidgetkeys.screen.investors.email),
-          findsOneWidget,
+        await feedbackEnterTextHelper(
+          tester: tester,
+          email: KTestText.useremail,
+          field: KTestText.field,
+          isValid: true,
         );
-
-        expect(
-          find.byKey(KWidgetkeys.screen.investors.fieldEmail),
-          findsOneWidget,
-        );
-
-        expect(
-          find.byKey(KWidgetkeys.screen.investors.fieldName),
-          findsOneWidget,
-        );
-
-        expect(
-          find.byKey(KWidgetkeys.screen.investors.fieldSuggestions),
-          findsOneWidget,
-        );
-
-        expect(
-          find.byKey(KWidgetkeys.screen.investors.message),
-          findsOneWidget,
-        );
-
-        expect(
-          find.byKey(KWidgetkeys.screen.investors.name),
-          findsOneWidget,
-        );
-
-        expect(
-          find.byKey(KWidgetkeys.screen.investors.subtitle),
-          findsOneWidget,
-        );
-
-        expect(
-          find.byKey(KWidgetkeys.screen.investors.titile),
-          findsOneWidget,
-        );
-
-        await messageFieldHelper(tester: tester, message: KTestText.field);
       });
-      // group('go to', () {
+      // group(KGroupText.goTo, () {
       // });
     });
   });

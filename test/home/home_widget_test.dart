@@ -4,6 +4,8 @@ import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
 
 import '../text_dependency.dart';
+import 'home_widget/boxes_helper.dart';
+import 'home_widget/home_widget.dart';
 
 void main() {
   setUp(configureDependenciesTest);
@@ -14,7 +16,7 @@ void main() {
 
   tearDown(GetIt.I.reset);
   group(KScreenBlocName.home, () {
-    testWidgets('renders initial', (tester) async {
+    testWidgets(KGroupText.intial, (tester) async {
       await tester.pumpApp(const HomeScreen());
 
       expect(
@@ -24,21 +26,14 @@ void main() {
 
       await tester.pumpAndSettle();
 
-      await filterBoxHelper(
-        tester,
-      );
+      await homeBoxHelper(tester);
 
-      await dropListFieldBoxHelper(
-        tester: tester,
-        text: KMockText.dropDownList.elementAt(0),
-      );
-
-      await boxHelper(tester);
+      await listQuestionHelper(tester);
     });
-    group('Mock Go Router', () {
+    group(KGroupText.goRouter, () {
       late MockGoRouter mockGoRouter;
       setUp(() => mockGoRouter = MockGoRouter());
-      testWidgets('renders initial', (tester) async {
+      testWidgets(KGroupText.intial, (tester) async {
         await tester.pumpApp(const HomeScreen(), mockGoRouter: mockGoRouter);
 
         expect(
@@ -48,19 +43,10 @@ void main() {
 
         await tester.pumpAndSettle();
 
-        await filterBoxHelper(
-          tester,
-        );
-
-        await dropListFieldBoxHelper(
-          tester: tester,
-          text: KMockText.dropDownList.elementAt(0),
-        );
-
-        await boxHelper(tester);
+        await listQuestionHelper(tester);
       });
 
-      group('go to', () {
+      group(KGroupText.goTo, () {
         testWidgets('All footer widget navigation', (tester) async {
           await tester.pumpApp(const HomeScreen(), mockGoRouter: mockGoRouter);
 
@@ -89,6 +75,23 @@ void main() {
 
           await nawbarTitleHelper(
             tester: tester,
+            mockGoRouter: mockGoRouter,
+          );
+        });
+
+        testWidgets('box widget navigation', (tester) async {
+          await tester.pumpApp(const HomeScreen(), mockGoRouter: mockGoRouter);
+
+          expect(
+            find.byKey(KWidgetkeys.screen.home.screen),
+            findsOneWidget,
+          );
+
+          await tester.pumpAndSettle();
+
+          await boxexHelper(
+            tester: tester,
+            routes: KTestText.boxRoutes,
             mockGoRouter: mockGoRouter,
           );
         });
