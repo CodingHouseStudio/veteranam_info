@@ -32,10 +32,10 @@ void main() {
     });
 
     testWidgets('Feedback enter correct text and save it', (tester) async {
-      await tester.pumpApp(const InvestorsScreen());
+      await tester.pumpApp(const HomeScreen());
 
       expect(
-        find.byKey(KWidgetkeys.screen.investors.screen),
+        find.byKey(KWidgetkeys.screen.home.screen),
         findsOneWidget,
       );
 
@@ -50,10 +50,10 @@ void main() {
     });
 
     testWidgets('Feedback enter incorrect text and save it', (tester) async {
-      await tester.pumpApp(const InvestorsScreen());
+      await tester.pumpApp(const HomeScreen());
 
       expect(
-        find.byKey(KWidgetkeys.screen.investors.screen),
+        find.byKey(KWidgetkeys.screen.home.screen),
         findsOneWidget,
       );
 
@@ -68,10 +68,10 @@ void main() {
     });
 
     testWidgets('Feedback enter text and clear it', (tester) async {
-      await tester.pumpApp(const InvestorsScreen());
+      await tester.pumpApp(const HomeScreen());
 
       expect(
-        find.byKey(KWidgetkeys.screen.investors.screen),
+        find.byKey(KWidgetkeys.screen.home.screen),
         findsOneWidget,
       );
 
