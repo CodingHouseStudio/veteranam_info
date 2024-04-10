@@ -3,7 +3,7 @@ import 'package:kozak/shared/shared.dart';
 
 import '../../../text_dependency.dart';
 
-Future<void> feedbackEnterTextHelper({
+Future<void> feedbackClearTextHelper({
   required WidgetTester tester,
   required String field,
   required String email,
@@ -11,6 +11,16 @@ Future<void> feedbackEnterTextHelper({
   expect(
     find.byKey(KWidgetkeys.widget.feedback.buttonSave),
     findsOneWidget,
+  );
+
+  expect(
+    find.byKey(KWidgetkeys.widget.feedback.fieldName),
+    findsOneWidget,
+  );
+
+  await tester.enterText(
+    find.byKey(KWidgetkeys.widget.feedback.fieldName),
+    field,
   );
 
   expect(
@@ -23,7 +33,10 @@ Future<void> feedbackEnterTextHelper({
     email,
   );
 
-  await tester.pumpAndSettle();
+  await scrollingHelper(
+    tester: tester,
+    itemKey: KWidgetkeys.widget.feedback.fieldMessage,
+  );
 
   expect(
     find.byKey(KWidgetkeys.widget.feedback.fieldMessage),
@@ -34,20 +47,6 @@ Future<void> feedbackEnterTextHelper({
     find.byKey(KWidgetkeys.widget.feedback.fieldMessage),
     field,
   );
-
-  await tester.pumpAndSettle();
-
-  expect(
-    find.byKey(KWidgetkeys.widget.feedback.fieldName),
-    findsOneWidget,
-  );
-
-  await tester.enterText(
-    find.byKey(KWidgetkeys.widget.feedback.fieldName),
-    field,
-  );
-
-  await tester.pumpAndSettle();
 
   await scrollingHelper(
     tester: tester,
