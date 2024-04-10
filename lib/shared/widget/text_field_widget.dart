@@ -35,6 +35,7 @@ class TextFieldWidget extends StatefulWidget {
     this.labelText,
     this.minLines,
     this.hintStyle,
+    this.isDesk = true,
   });
   final Key widgetKey;
   final double? width;
@@ -66,6 +67,7 @@ class TextFieldWidget extends StatefulWidget {
   final bool? expands;
   final String? labelText;
   final TextStyle? hintStyle;
+  final bool? isDesk;
 
   @override
   State<TextFieldWidget> createState() => _TextFieldWidgetState();
@@ -92,13 +94,22 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
         keyboardType: widget.keyboardType ?? TextInputType.text,
         textInputAction: TextInputAction.done,
         textAlign: widget.textAlign ?? TextAlign.start,
-        style: AppTextStyle.text24,
+        style: widget.isDesk != null
+            ? widget.isDesk!
+                ? AppTextStyle.text24
+                : AppTextStyle.text16
+            : AppTextStyle.text24,
         // Theme.of(context).textTheme.headlineSmall,
         key: widget.widgetKey,
         onChanged: widget.onChanged,
         decoration: KWidetTheme.inputDecoration.copyWith(
           hintStyle: widget.hintStyle,
-          contentPadding: widget.contentPadding,
+          contentPadding: widget.contentPadding ??
+              (widget.isDesk != null
+                  ? widget.isDesk!
+                      ? null
+                      : const EdgeInsets.all(KPadding.kPaddingSize16)
+                  : null),
           labelText: widget.labelText,
           border: kIsWeb ? widget.border : widget.border,
           enabledBorder: kIsWeb ? widget.enabledBorder : widget.enabledBorder,

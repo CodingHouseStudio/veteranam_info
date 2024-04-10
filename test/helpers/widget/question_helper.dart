@@ -1,15 +1,17 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:kozak/shared/shared.dart';
 
+import '../../text_dependency.dart';
+
 Future<void> questionHelper(
   WidgetTester tester,
 ) async {
   expect(
     find.byKey(KWidgetkeys.widget.question.widget),
-    findsOneWidget,
+    findsWidgets,
   );
 
-  expect(find.byKey(KWidgetkeys.widget.question.title), findsOneWidget);
+  expect(find.byKey(KWidgetkeys.widget.question.title), findsWidgets);
 
   expect(
     find.byKey(KWidgetkeys.widget.question.subtitle),
@@ -17,26 +19,34 @@ Future<void> questionHelper(
   );
 
   expect(
-    KWidgetkeys.widget.question.iconPlus,
-    findsOneWidget,
+    find.byKey(KWidgetkeys.widget.question.iconPlus),
+    findsWidgets,
   );
 
   expect(
-    KWidgetkeys.widget.question.iconMinus,
+    find.byKey(KWidgetkeys.widget.question.iconMinus),
     findsNothing,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.widget.question.title));
+  await scrollingHelper(
+    tester: tester,
+    itemKey: KWidgetkeys.widget.question.title,
+  );
+
+  await tester.tap(find.byKey(KWidgetkeys.widget.question.title).first);
 
   await tester.pumpAndSettle();
 
   expect(
-    KWidgetkeys.widget.question.iconMinus,
+    find.byKey(KWidgetkeys.widget.question.iconMinus),
     findsOneWidget,
   );
 
   expect(
-    KWidgetkeys.widget.question.iconPlus,
+    find.descendant(
+      of: find.byKey(KWidgetkeys.widget.question.title).first,
+      matching: find.byKey(KWidgetkeys.widget.question.iconPlus),
+    ),
     findsNothing,
   );
 

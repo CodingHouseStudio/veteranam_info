@@ -26,6 +26,9 @@
   "beAnonymous": "Be anonymous",
   "errorTitle": "Error",
   "errorMessage": "An error occurred while loading the page",
+  "key": "Key",
+  "getMockData": "No data found, click to add test data once",
+  "faq": "Frequency ask question",
   "send": "Send",
   "investors": "Investors",
   "investorsSubtitle": "In this section, you can support veterans. If you have a business, you can provide discounts or personalized offers for veterans. Write to us and we will contact you to discuss the details.",
@@ -36,5 +39,14 @@
   "writeYourSuggenstions": "Write your suggenstions",
   "feedback": "Feedback",
   "feedbackSubtitle": "If you want to contact us, or have any questions or requests. We are happy to talk to you! Please fill out the form.",
-  "writeYourMessage": "Write your message"
+  "writeYourMessage": "Write your message",
+  "helloVeteran": "Hello, Veteran!",
+  "homeSubtitle": "Here you will find useful information, benefits, discounts and you can also share your story!",
+  "feedbackSaveMessage": "Thank you for your submission",
+  "clear": "Clear",
+  "fieldCannotBeEmpty": "Field cann`t be empty",
+  "tooshort": "too short",
+  "tooshortEmail": "Email too short",
+  "isWrong": "is wrong",
+  "isWrongEmail": "is wrong"
 }

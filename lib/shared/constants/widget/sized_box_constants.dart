@@ -2,14 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:kozak/shared/shared.dart';
 
 abstract class KSizedBox {
+  static const SizedBox kHeightSizedBox160 = SizedBox(
+    height: KSize.kPixel160,
+  );
   static const SizedBox kHeightSizedBox90 = SizedBox(
     height: KSize.kPixel90,
+  );
+  static const SizedBox kHeightSizedBox20 = SizedBox(
+    height: KSize.kPixel20,
   );
   static const SizedBox kHeightSizedBox24 = SizedBox(
     height: KSize.kPixel24,
   );
   static const SizedBox kHeightSizedBox30 = SizedBox(
     height: KSize.kPixel30,
+  );
+  static const SizedBox kHeightSizedBox36 = SizedBox(
+    height: KSize.kPixel36,
   );
   static const SizedBox kHeightSizedBox32 = SizedBox(
     height: KSize.kPixel32,

@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:kozak/shared/shared.dart';
 
 class QuestionWidget extends StatefulWidget {
   const QuestionWidget({
     required this.title,
     required this.subtitle,
+    required this.isDesk,
     super.key,
   });
   final String title;
   final String subtitle;
+  final bool isDesk;
 
   @override
   State<QuestionWidget> createState() => _QuestionWidgetState();
@@ -26,6 +29,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      key: KWidgetkeys.widget.question.widget,
       decoration: KWidetTheme.boxDecorationWidget,
       child: Column(
         children: [
@@ -45,8 +49,11 @@ class _QuestionWidgetState extends State<QuestionWidget> {
                   Expanded(
                     child: Text(
                       widget.title,
-                      style: AppTextStyle.text40,
-                      maxLines: 1,
+                      key: KWidgetkeys.widget.question.title,
+                      style: widget.isDesk
+                          ? AppTextStyle.text40
+                          : AppTextStyle.text18,
+                      maxLines: 2,
                     ),
                   ),
                   IconWidget(
@@ -64,15 +71,20 @@ class _QuestionWidgetState extends State<QuestionWidget> {
           Visibility(
             visible: openQuestion,
             child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: KPadding.kPaddingSize32,
-                vertical: KPadding.kPaddingSize16,
+              padding: EdgeInsets.only(
+                left: widget.isDesk
+                    ? KPadding.kPaddingSize32
+                    : KPadding.kPaddingSize16,
+                bottom: KPadding.kPaddingSize16,
+                top: widget.isDesk ? KPadding.kPaddingSize8 : 0,
               ),
-              child: Text(
-                widget.subtitle,
-                style: AppTextStyle.text24,
-                softWrap: true,
-                maxLines: 3,
+              child: Markdown(
+                key: KWidgetkeys.widget.question.subtitle,
+                data: widget.subtitle,
+                styleSheet: MarkdownStyleSheet(
+                  p: widget.isDesk ? AppTextStyle.text24 : AppTextStyle.text14,
+                ),
+                shrinkWrap: true,
               ),
             ),
           ),

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
+import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
 
 class HomeBodyWidget extends StatelessWidget {
@@ -6,54 +9,70 @@ class HomeBodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final items = List<int>.generate(100, (index) => index);
-    return Column(
-      children: [
-        const FilterBoxWidget(
-          filters: KMockText.filter,
-        ),
-        KSizedBox.kHeightSizedBox30,
-        DropListFieldWidget(
-          onChanged: (_) {},
-          hintText: '',
-          dropDownList: KMockText.dropDownList,
-        ),
-        KSizedBox.kHeightSizedBox30,
-        const QuestionWidget(
-          title: KMockText.questionTitle,
-          subtitle: KMockText.questionSubtitle,
-        ),
-        KSizedBox.kHeightSizedBox30,
-        BoxWidget(
-          text: context.l10n.discountsCoupons,
-        ),
-        KSizedBox.kHeightSizedBox30,
-        PaginationWidget(
-          items: items,
-          itemBuilder: (context, items) {
-            return ListView.builder(
-              shrinkWrap: true,
-              itemCount: items.length,
-              itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text('Item ${items[index]}'),
-                );
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final isDesk =
+            KPlatformConstants.changeToDescWidget(constraints.maxWidth);
+        return Column(
+          children: [
+            if (isDesk)
+              KSizedBox.kHeightSizedBox24
+            else
+              KSizedBox.kHeightSizedBox16,
+            BoxesWidget(
+              isDesk: isDesk,
+            ),
+            if (isDesk)
+              KSizedBox.kHeightSizedBox160
+            else
+              KSizedBox.kHeightSizedBox40,
+            BlocBuilder<HomeWatcherBloc, HomeWatcherState>(
+              builder: (context, state) {
+                switch (state) {
+                  case HomeWatcherStateInitial():
+                    return const CircularProgressIndicator.adaptive();
+                  case HomeWatcherStateLoading():
+                    return const CircularProgressIndicator.adaptive();
+                  case HomeWatcherStateSuccess():
+                    return state.questionModelItems.isNotEmpty
+                        ? ListQuestionWidget(
+                            questionModelItems: state.questionModelItems,
+                            isDesk: isDesk,
+                          )
+                        : TextButton(
+                            key: KWidgetkeys.screen.home.buttonMock,
+                            onPressed: () {
+                              GetIt.I.get<IHomeRepository>().addMockQuestions();
+                              context
+                                  .read<HomeWatcherBloc>()
+                                  .add(const HomeWatcherEvent.started());
+                            },
+                            child: Text(
+                              context.l10n.getMockData,
+                              style: AppTextStyle.text32,
+                            ),
+                          );
+
+                  case HomeWatcherStateFailure():
+                  default:
+                    return const CircularProgressIndicator.adaptive();
+                }
               },
-            );
-          },
-        ),
-        KSizedBox.kHeightSizedBox30,
-        const ButtonMobWidget(
-          showGoogleIcon: true,
-        ),
-        KSizedBox.kHeightSizedBox30,
-        ButtonSecondaryWidget(
-          onPressed: () {},
-          text: KMockText.title,
-          icon: KIcon.plus,
-        ),
-        KSizedBox.kHeightSizedBox30,
-      ],
+            ),
+            if (isDesk)
+              KSizedBox.kHeightSizedBox160
+            else
+              KSizedBox.kHeightSizedBox40,
+            FeedbackWidget(
+              isDesk: isDesk,
+            ),
+            if (isDesk)
+              KSizedBox.kHeightSizedBox160
+            else
+              KSizedBox.kHeightSizedBox10,
+          ],
+        );
+      },
     );
   }
 }

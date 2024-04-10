@@ -88,6 +88,7 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                   enabledBorder: KBorder.outlineInputTransparent,
                   focusedBorder: KBorder.outlineInputTransparent,
                   disposeFocusNode: false,
+                  isDesk: widget.isDesk,
                 ),
               ),
               if (widget.isDesk)

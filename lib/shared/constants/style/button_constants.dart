@@ -38,6 +38,16 @@ abstract class KButtonStyles {
     padding: const EdgeInsets.all(KPadding.kPaddingSize8),
     shape: RoundedRectangleBorder(
       borderRadius: KBorderRadius.kBorderRadius32,
+      side: const BorderSide(color: AppColors.lightGray),
+    ),
+  );
+  static final ButtonStyle lightGrayButtonStyleWInf = TextButton.styleFrom(
+    backgroundColor: AppColors.lightGray,
+    minimumSize: const Size(double.infinity, KMinMaxSize.minHeight50),
+    padding: const EdgeInsets.all(KPadding.kPaddingSize8),
+    shape: RoundedRectangleBorder(
+      borderRadius: KBorderRadius.kBorderRadius32,
+      side: const BorderSide(color: AppColors.lightGray),
     ),
   );
   static final ButtonStyle transparentButtonStyleBottomBorder =
