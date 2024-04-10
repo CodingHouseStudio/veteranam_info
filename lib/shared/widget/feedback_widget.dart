@@ -49,11 +49,13 @@ class _FeedbackWidgetState extends State<FeedbackWidget> {
           nameController.clear();
           emailController.clear();
           messageController.clear();
-          completeWidget = Text(
-            widget.saveMessage ?? context.l10n.feedbackSaveMessage,
-            key: KWidgetkeys.widget.feedback.saveMessage,
-            style: AppTextStyle.text40,
-          );
+          if (state.fieldsState == FeedbackEnum.success) {
+            completeWidget = Text(
+              widget.saveMessage ?? context.l10n.feedbackSaveMessage,
+              key: KWidgetkeys.widget.feedback.saveMessage,
+              style: AppTextStyle.text40,
+            );
+          }
         }
       },
       buildWhen: (previous, current) =>

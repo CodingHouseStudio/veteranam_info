@@ -37,7 +37,7 @@ class EmailFieldModel
     }
 
     // Check for minimum and maximum length
-    if (value.length < 6 || value.length > 254) {
+    if (value.length < 6) {
       return EmailFieldModelValidationError.invalidLength;
     }
 
