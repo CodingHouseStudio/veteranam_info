@@ -4,6 +4,8 @@ import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
 
 import '../text_dependency.dart';
+import 'home_widget/boxes_helper.dart';
+import 'home_widget/home_widget.dart';
 
 void main() {
   setUp(configureDependenciesTest);
@@ -24,27 +26,64 @@ void main() {
 
       await tester.pumpAndSettle();
 
-      expect(
-        find.byKey(KWidgetkeys.screen.home.buttonMock),
-        findsNothing,
-      );
+      await homeBoxHelper(tester);
 
-      expect(
-        find.byKey(KWidgetkeys.screen.home.question),
-        findsOneWidget,
-      );
-
-      expect(
-        find.byKey(KWidgetkeys.screen.home.questionList),
-        findsOneWidget,
-      );
-
-      expect(
-        find.byKey(KWidgetkeys.screen.home.questionListTitle),
-        findsOneWidget,
-      );
-      await questionHelper(tester);
+      await listQuestionHelper(tester);
     });
+
+    testWidgets('Feedback enter correct text and save it', (tester) async {
+      await tester.pumpApp(const HomeScreen());
+
+      expect(
+        find.byKey(KWidgetkeys.screen.home.screen),
+        findsOneWidget,
+      );
+
+      await tester.pumpAndSettle();
+
+      await feedbackEnterTextHelper(
+        tester: tester,
+        email: KTestText.useremail,
+        field: KTestText.field,
+        isValid: true,
+      );
+    });
+
+    testWidgets('Feedback enter incorrect text and save it', (tester) async {
+      await tester.pumpApp(const HomeScreen());
+
+      expect(
+        find.byKey(KWidgetkeys.screen.home.screen),
+        findsOneWidget,
+      );
+
+      await tester.pumpAndSettle();
+
+      await feedbackEnterTextHelper(
+        tester: tester,
+        email: KTestText.useremailIncorrect,
+        field: KTestText.field,
+        isValid: false,
+      );
+    });
+
+    testWidgets('Feedback enter text and clear it', (tester) async {
+      await tester.pumpApp(const HomeScreen());
+
+      expect(
+        find.byKey(KWidgetkeys.screen.home.screen),
+        findsOneWidget,
+      );
+
+      await tester.pumpAndSettle();
+
+      await feedbackClearTextHelper(
+        tester: tester,
+        email: KTestText.useremail,
+        field: KTestText.field,
+      );
+    });
+
     group(KGroupText.goRouter, () {
       late MockGoRouter mockGoRouter;
       setUp(() => mockGoRouter = MockGoRouter());
@@ -58,26 +97,7 @@ void main() {
 
         await tester.pumpAndSettle();
 
-        expect(
-          find.byKey(KWidgetkeys.screen.home.buttonMock),
-          findsNothing,
-        );
-
-        expect(
-          find.byKey(KWidgetkeys.screen.home.question),
-          findsOneWidget,
-        );
-
-        expect(
-          find.byKey(KWidgetkeys.screen.home.questionList),
-          findsOneWidget,
-        );
-
-        expect(
-          find.byKey(KWidgetkeys.screen.home.questionListTitle),
-          findsOneWidget,
-        );
-        await questionHelper(tester);
+        await listQuestionHelper(tester);
       });
 
       group(KGroupText.goTo, () {
@@ -109,6 +129,23 @@ void main() {
 
           await nawbarTitleHelper(
             tester: tester,
+            mockGoRouter: mockGoRouter,
+          );
+        });
+
+        testWidgets('box widget navigation', (tester) async {
+          await tester.pumpApp(const HomeScreen(), mockGoRouter: mockGoRouter);
+
+          expect(
+            find.byKey(KWidgetkeys.screen.home.screen),
+            findsOneWidget,
+          );
+
+          await tester.pumpAndSettle();
+
+          await boxexHelper(
+            tester: tester,
+            routes: KTestText.boxRoutes,
             mockGoRouter: mockGoRouter,
           );
         });

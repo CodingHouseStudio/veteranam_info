@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:kozak/shared/shared.dart';
 
 class InvestorsBodyWidget extends StatelessWidget {
@@ -6,10 +7,17 @@ class InvestorsBodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
-      children: [
-        KSizedBox.kHeightSizedBox30,
-      ],
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final isDesk =
+            KPlatformConstants.changeToDescWidget(constraints.maxWidth);
+        return FeedbackWidget(
+          title: context.l10n.investors,
+          subtitle: context.l10n.investorsSubtitle,
+          messageHint: context.l10n.writeYourSuggenstions,
+          isDesk: isDesk,
+        );
+      },
     );
   }
 }

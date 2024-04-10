@@ -4,9 +4,27 @@ import 'package:kozak/shared/shared.dart';
 /// Text Styles
 
 abstract class AppTextStyle {
+  static const text128 = TextStyle(
+    color: Color.fromRGBO(0, 0, 0, 1),
+    fontSize: KSize.kFont128,
+    fontWeight: FontWeight.w400,
+  );
+
   static const text96 = TextStyle(
     color: Color.fromRGBO(0, 0, 0, 1),
     fontSize: KSize.kFont96,
+    fontWeight: FontWeight.w400,
+  );
+
+  static const text64 = TextStyle(
+    color: Color.fromRGBO(0, 0, 0, 1),
+    fontSize: KSize.kFont64,
+    fontWeight: FontWeight.w400,
+  );
+
+  static const text48 = TextStyle(
+    color: Color.fromRGBO(0, 0, 0, 1),
+    fontSize: KSize.kFont48,
     fontWeight: FontWeight.w400,
   );
 
@@ -53,6 +71,12 @@ abstract class AppTextStyle {
   static const hint24 = TextStyle(
     color: AppColors.lightGray,
     fontSize: KSize.kFont24,
+    fontWeight: FontWeight.w400,
+  );
+
+  static const hint16 = TextStyle(
+    color: AppColors.lightGray,
+    fontSize: KSize.kFont16,
     fontWeight: FontWeight.w400,
   );
 
