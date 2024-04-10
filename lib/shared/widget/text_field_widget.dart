@@ -94,22 +94,17 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
         keyboardType: widget.keyboardType ?? TextInputType.text,
         textInputAction: TextInputAction.done,
         textAlign: widget.textAlign ?? TextAlign.start,
-        style: widget.isDesk != null
-            ? widget.isDesk!
-                ? AppTextStyle.text24
-                : AppTextStyle.text16
-            : AppTextStyle.text24,
+        style:
+            widget.isDesk ?? true ? AppTextStyle.text24 : AppTextStyle.text16,
         // Theme.of(context).textTheme.headlineSmall,
         key: widget.widgetKey,
         onChanged: widget.onChanged,
         decoration: KWidetTheme.inputDecoration.copyWith(
           hintStyle: widget.hintStyle,
           contentPadding: widget.contentPadding ??
-              (widget.isDesk != null
-                  ? widget.isDesk!
-                      ? null
-                      : const EdgeInsets.all(KPadding.kPaddingSize16)
-                  : null),
+              (widget.isDesk ?? true
+                  ? null
+                  : const EdgeInsets.all(KPadding.kPaddingSize16)),
           labelText: widget.labelText,
           border: kIsWeb ? widget.border : widget.border,
           enabledBorder: kIsWeb ? widget.enabledBorder : widget.enabledBorder,
