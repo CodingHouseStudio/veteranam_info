@@ -3,7 +3,10 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:kozak/shared/shared.dart' as _i2;
+import 'dart:async' as _i4;
+
+import 'package:dartz/dartz.dart' as _i2;
+import 'package:kozak/shared/shared.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -19,19 +22,47 @@ import 'package:mockito/mockito.dart' as _i1;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
+class _FakeEither_0<L, R> extends _i1.SmartFake implements _i2.Either<L, R> {
+  _FakeEither_0(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
 /// A class which mocks [IHomeRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockIHomeRepository extends _i1.Mock implements _i2.IHomeRepository {
+class MockIHomeRepository extends _i1.Mock implements _i3.IHomeRepository {
   @override
-  List<_i2.QuestionModel> getQuestions() => (super.noSuchMethod(
+  _i4.Future<
+      _i2.Either<_i3.SomeFailure,
+          List<_i3.QuestionModel>>> getQuestions() => (super.noSuchMethod(
         Invocation.method(
           #getQuestions,
           [],
         ),
-        returnValue: <_i2.QuestionModel>[],
-        returnValueForMissingStub: <_i2.QuestionModel>[],
-      ) as List<_i2.QuestionModel>);
+        returnValue: _i4
+            .Future<_i2.Either<_i3.SomeFailure, List<_i3.QuestionModel>>>.value(
+            _FakeEither_0<_i3.SomeFailure, List<_i3.QuestionModel>>(
+          this,
+          Invocation.method(
+            #getQuestions,
+            [],
+          ),
+        )),
+        returnValueForMissingStub: _i4
+            .Future<_i2.Either<_i3.SomeFailure, List<_i3.QuestionModel>>>.value(
+            _FakeEither_0<_i3.SomeFailure, List<_i3.QuestionModel>>(
+          this,
+          Invocation.method(
+            #getQuestions,
+            [],
+          ),
+        )),
+      ) as _i4.Future<_i2.Either<_i3.SomeFailure, List<_i3.QuestionModel>>>);
 
   @override
   void addMockQuestions() => super.noSuchMethod(
@@ -41,4 +72,37 @@ class MockIHomeRepository extends _i1.Mock implements _i2.IHomeRepository {
         ),
         returnValueForMissingStub: null,
       );
+}
+
+/// A class which mocks [IFeedbackRepository].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockIFeedbackRepository extends _i1.Mock
+    implements _i3.IFeedbackRepository {
+  @override
+  _i4.Future<_i2.Either<_i3.SomeFailure, bool>> sendFeedback(
+          _i3.FeedbackModel? feedback) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #sendFeedback,
+          [feedback],
+        ),
+        returnValue: _i4.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
+            _FakeEither_0<_i3.SomeFailure, bool>(
+          this,
+          Invocation.method(
+            #sendFeedback,
+            [feedback],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i4.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
+                _FakeEither_0<_i3.SomeFailure, bool>(
+          this,
+          Invocation.method(
+            #sendFeedback,
+            [feedback],
+          ),
+        )),
+      ) as _i4.Future<_i2.Either<_i3.SomeFailure, bool>>);
 }

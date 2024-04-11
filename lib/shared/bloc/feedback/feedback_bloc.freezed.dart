@@ -791,6 +791,7 @@ mixin _$FeedbackState {
   EmailFieldModel get email => throw _privateConstructorUsedError;
   MessageFieldModel get message => throw _privateConstructorUsedError;
   FeedbackEnum get fieldsState => throw _privateConstructorUsedError;
+  FeedbackFailure get failure => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $FeedbackStateCopyWith<FeedbackState> get copyWith =>
@@ -807,7 +808,8 @@ abstract class $FeedbackStateCopyWith<$Res> {
       {NameFieldModel name,
       EmailFieldModel email,
       MessageFieldModel message,
-      FeedbackEnum fieldsState});
+      FeedbackEnum fieldsState,
+      FeedbackFailure failure});
 }
 
 /// @nodoc
@@ -827,6 +829,7 @@ class _$FeedbackStateCopyWithImpl<$Res, $Val extends FeedbackState>
     Object? email = null,
     Object? message = null,
     Object? fieldsState = null,
+    Object? failure = null,
   }) {
     return _then(_value.copyWith(
       name: null == name
@@ -845,6 +848,10 @@ class _$FeedbackStateCopyWithImpl<$Res, $Val extends FeedbackState>
           ? _value.fieldsState
           : fieldsState // ignore: cast_nullable_to_non_nullable
               as FeedbackEnum,
+      failure: null == failure
+          ? _value.failure
+          : failure // ignore: cast_nullable_to_non_nullable
+              as FeedbackFailure,
     ) as $Val);
   }
 }
@@ -861,7 +868,8 @@ abstract class _$$FeedbackStateImplCopyWith<$Res>
       {NameFieldModel name,
       EmailFieldModel email,
       MessageFieldModel message,
-      FeedbackEnum fieldsState});
+      FeedbackEnum fieldsState,
+      FeedbackFailure failure});
 }
 
 /// @nodoc
@@ -879,6 +887,7 @@ class __$$FeedbackStateImplCopyWithImpl<$Res>
     Object? email = null,
     Object? message = null,
     Object? fieldsState = null,
+    Object? failure = null,
   }) {
     return _then(_$FeedbackStateImpl(
       name: null == name
@@ -897,6 +906,10 @@ class __$$FeedbackStateImplCopyWithImpl<$Res>
           ? _value.fieldsState
           : fieldsState // ignore: cast_nullable_to_non_nullable
               as FeedbackEnum,
+      failure: null == failure
+          ? _value.failure
+          : failure // ignore: cast_nullable_to_non_nullable
+              as FeedbackFailure,
     ));
   }
 }
@@ -908,7 +921,8 @@ class _$FeedbackStateImpl implements _FeedbackState {
       {required this.name,
       required this.email,
       required this.message,
-      required this.fieldsState});
+      required this.fieldsState,
+      required this.failure});
 
   @override
   final NameFieldModel name;
@@ -918,10 +932,12 @@ class _$FeedbackStateImpl implements _FeedbackState {
   final MessageFieldModel message;
   @override
   final FeedbackEnum fieldsState;
+  @override
+  final FeedbackFailure failure;
 
   @override
   String toString() {
-    return 'FeedbackState(name: $name, email: $email, message: $message, fieldsState: $fieldsState)';
+    return 'FeedbackState(name: $name, email: $email, message: $message, fieldsState: $fieldsState, failure: $failure)';
   }
 
   @override
@@ -933,12 +949,13 @@ class _$FeedbackStateImpl implements _FeedbackState {
             (identical(other.email, email) || other.email == email) &&
             (identical(other.message, message) || other.message == message) &&
             (identical(other.fieldsState, fieldsState) ||
-                other.fieldsState == fieldsState));
+                other.fieldsState == fieldsState) &&
+            (identical(other.failure, failure) || other.failure == failure));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, name, email, message, fieldsState);
+      Object.hash(runtimeType, name, email, message, fieldsState, failure);
 
   @JsonKey(ignore: true)
   @override
@@ -952,7 +969,8 @@ abstract class _FeedbackState implements FeedbackState {
       {required final NameFieldModel name,
       required final EmailFieldModel email,
       required final MessageFieldModel message,
-      required final FeedbackEnum fieldsState}) = _$FeedbackStateImpl;
+      required final FeedbackEnum fieldsState,
+      required final FeedbackFailure failure}) = _$FeedbackStateImpl;
 
   @override
   NameFieldModel get name;
@@ -962,6 +980,8 @@ abstract class _FeedbackState implements FeedbackState {
   MessageFieldModel get message;
   @override
   FeedbackEnum get fieldsState;
+  @override
+  FeedbackFailure get failure;
   @override
   @JsonKey(ignore: true)
   _$$FeedbackStateImplCopyWith<_$FeedbackStateImpl> get copyWith =>

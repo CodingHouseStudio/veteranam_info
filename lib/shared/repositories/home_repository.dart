@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kozak/shared/shared.dart';
 
@@ -6,8 +7,16 @@ class HomeRepository implements IHomeRepository {
   final List<QuestionModel> _questionModelItems = [];
 
   @override
-  List<QuestionModel> getQuestions() {
-    return _questionModelItems;
+  Future<Either<SomeFailure, List<QuestionModel>>> getQuestions() async {
+    try {
+      // ignore: inference_failure_on_instance_creation
+      await Future.delayed(const Duration(seconds: 1));
+      return Right(_questionModelItems);
+    } on Exception catch (e) {
+      return Left(GetFailur.fromCode(e).status);
+    } catch (e) {
+      return const Left(SomeFailure.serverError());
+    }
   }
 
   @override

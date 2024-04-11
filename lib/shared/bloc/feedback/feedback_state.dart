@@ -2,10 +2,21 @@ part of 'feedback_bloc.dart';
 
 enum FeedbackEnum {
   initial,
-  error,
   inProgress,
   success,
   invalidData,
+}
+
+enum FeedbackFailure {
+  none,
+  error,
+  initial,
+}
+
+extension FeedbackFailureExtension on SomeFailure {
+  FeedbackFailure toFeedback() {
+    return FeedbackFailure.error;
+  }
 }
 
 @freezed
@@ -15,5 +26,6 @@ class FeedbackState with _$FeedbackState {
     required EmailFieldModel email,
     required MessageFieldModel message,
     required FeedbackEnum fieldsState,
+    required FeedbackFailure failure,
   }) = _FeedbackState;
 }

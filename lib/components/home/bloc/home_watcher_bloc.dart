@@ -24,11 +24,12 @@ class HomeWatcherBloc extends Bloc<HomeWatcherEvent, HomeWatcherState> {
   ) async {
     emit(const HomeWatcherState.loading());
 
-    try {
-      final result = _homeRepository.getQuestions();
-      emit(HomeWatcherState.success(questionModelItems: result));
-    } catch (e) {
-      emit(const HomeWatcherState.failure());
-    }
+    final result = await _homeRepository.getQuestions();
+    result.fold(
+      (l) => emit(
+        HomeWatcherState.failure(l.toHome()),
+      ),
+      (r) => emit(HomeWatcherState.success(questionModelItems: r)),
+    );
   }
 }
