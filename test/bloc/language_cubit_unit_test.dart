@@ -24,7 +24,7 @@ void main() {
       'emits [Language.english] change language use english index',
       build: () => languageCubit,
       act: (cubit) async {
-        await cubit.changeLanguage(KTestConstants.englishIndex);
+        await cubit.changeLanguage(Language.english.text);
       },
       expect: () async => [
         Language.english,
@@ -34,8 +34,8 @@ void main() {
       'emits [Language.ukrain, Language.ukrain] changes language',
       build: () => languageCubit,
       act: (cubit) async {
-        await cubit.changeLanguage(KTestConstants.ukrainIndex);
-        await cubit.changeLanguage(KTestConstants.englishIndex);
+        await cubit.changeLanguage(Language.ukrain.text);
+        await cubit.changeLanguage(Language.english.text);
       },
       expect: () async => [
         Language.ukrain,
