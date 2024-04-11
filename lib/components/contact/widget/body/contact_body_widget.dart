@@ -24,6 +24,7 @@ class ContactBodyWidget extends StatelessWidget {
           items: items,
           itemBuilder: (context, items) {
             return ListView.builder(
+              physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               itemCount: items.length,
               itemBuilder: (context, index) {

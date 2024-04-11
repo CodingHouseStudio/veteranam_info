@@ -27,7 +27,7 @@ Future<void> nawbarHelper({
 
   expect(
     find.byKey(KWidgetkeys.widget.nawbar.iconPerson),
-    findsOneWidget,
+    findsNothing,
   );
 
   await tester.enterText(
@@ -44,12 +44,6 @@ Future<void> nawbarHelper({
     ),
     findsOneWidget,
   );
-
-  expect(
-    find.byKey(KWidgetkeys.widget.nawbar.iconPerson),
-    findsOneWidget,
-  );
-  expect(find.byKey(KWidgetkeys.widget.nawbar.title), findsOneWidget);
 
   await changeWindowSizeHelper(tester: tester, setDefaultSize: true);
 

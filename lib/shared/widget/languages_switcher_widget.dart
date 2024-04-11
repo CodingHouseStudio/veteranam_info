@@ -7,34 +7,36 @@ class LanguagesSwitcherWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final languages = [
-      context.l10n.ukrain,
-      context.l10n.english,
-    ];
+    final languages = LanguageExtension.getAllLanguage;
     return PopupMenuButton<String>(
       key: KWidgetkeys.widget.languageSwitcher.widget,
-      icon: Row(
-        children: [
-          Text(
-            context.l10n.language,
-            key: KWidgetkeys.widget.languageSwitcher.text,
-          ),
-          KIcon.trailing,
-        ],
+      child: BlocBuilder<LanguageCubit, Language?>(
+        builder: (context, state) {
+          return Container(
+            decoration: KWidetTheme.boxDecorationCircular,
+            padding: const EdgeInsets.symmetric(
+              horizontal: KPadding.kPaddingSize8,
+              vertical: KPadding.kPaddingSize10,
+            ),
+            child: Text(
+              context.read<LanguageCubit>().state?.text ??
+                  languages.elementAt(0).text,
+              key: KWidgetkeys.widget.languageSwitcher.text,
+              style: AppTextStyle.text24,
+            ),
+          );
+        },
       ),
-      onSelected: (value) => context
-          .read<LanguageCubit>()
-          .changeLanguage(languages.indexOf(value)),
+      onSelected: (value) =>
+          context.read<LanguageCubit>().changeLanguage(value),
       itemBuilder: (BuildContext context) {
         return List.generate(languages.length, (index) {
           return PopupMenuItem<String>(
             key: KWidgetkeys.widget.languageSwitcher.item,
-            value: languages.elementAt(index),
-            enabled: index.getLocaleUseIndex.value.languageCode !=
+            value: languages.elementAt(index).text,
+            enabled: languages.elementAt(index).value.languageCode !=
                 context.l10n.localeName,
-            child: ListTile(
-              title: Text(languages.elementAt(index)),
-            ),
+            child: Text(languages.elementAt(index).text),
           );
         }).toList();
       },
