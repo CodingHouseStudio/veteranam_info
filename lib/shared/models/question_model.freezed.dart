@@ -14,10 +14,6 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-QuestionModel _$QuestionModelFromJson(Map<String, dynamic> json) {
-  return _QuestionModel.fromJson(json);
-}
-
 /// @nodoc
 mixin _$QuestionModel {
   String get id => throw _privateConstructorUsedError;
@@ -25,7 +21,6 @@ mixin _$QuestionModel {
   String get subtitle => throw _privateConstructorUsedError;
   String? get navigationLink => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $QuestionModelCopyWith<QuestionModel> get copyWith =>
       throw _privateConstructorUsedError;
@@ -128,16 +123,13 @@ class __$$QuestionModelImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
 class _$QuestionModelImpl implements _QuestionModel {
   const _$QuestionModelImpl(
       {required this.id,
       required this.title,
       required this.subtitle,
       this.navigationLink});
-
-  factory _$QuestionModelImpl.fromJson(Map<String, dynamic> json) =>
-      _$$QuestionModelImplFromJson(json);
 
   @override
   final String id;
@@ -166,7 +158,6 @@ class _$QuestionModelImpl implements _QuestionModel {
                 other.navigationLink == navigationLink));
   }
 
-  @JsonKey(ignore: true)
   @override
   int get hashCode =>
       Object.hash(runtimeType, id, title, subtitle, navigationLink);
@@ -176,13 +167,6 @@ class _$QuestionModelImpl implements _QuestionModel {
   @pragma('vm:prefer-inline')
   _$$QuestionModelImplCopyWith<_$QuestionModelImpl> get copyWith =>
       __$$QuestionModelImplCopyWithImpl<_$QuestionModelImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$QuestionModelImplToJson(
-      this,
-    );
-  }
 }
 
 abstract class _QuestionModel implements QuestionModel {
@@ -191,9 +175,6 @@ abstract class _QuestionModel implements QuestionModel {
       required final String title,
       required final String subtitle,
       final String? navigationLink}) = _$QuestionModelImpl;
-
-  factory _QuestionModel.fromJson(Map<String, dynamic> json) =
-      _$QuestionModelImpl.fromJson;
 
   @override
   String get id;
