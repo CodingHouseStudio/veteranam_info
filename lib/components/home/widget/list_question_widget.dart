@@ -28,6 +28,7 @@ class ListQuestionWidget extends StatelessWidget {
           KSizedBox.kHeightSizedBox24,
         ListView.builder(
           key: KWidgetkeys.screen.home.questionList,
+          physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           itemCount: questionModelItems.length,
           itemBuilder: (context, index) => Padding(

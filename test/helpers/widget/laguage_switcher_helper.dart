@@ -41,6 +41,15 @@ Future<void> languageSwitcherHelper(
   await tester.pumpAndSettle();
 
   await tester.tap(
+    find.byKey(KWidgetkeys.widget.languageSwitcher.item).last,
+  );
+  await tester.pumpAndSettle();
+
+  expect(find.byKey(KWidgetkeys.widget.languageSwitcher.item), findsWidgets);
+
+  expect(find.byKey(KWidgetkeys.widget.languageSwitcher.text), findsWidgets);
+
+  await tester.tap(
     find.byKey(KWidgetkeys.widget.languageSwitcher.item).first,
   );
   await tester.pumpAndSettle();

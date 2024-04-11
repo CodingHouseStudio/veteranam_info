@@ -51,8 +51,10 @@ class _NawbarWidgetState extends State<NawbarWidget> {
             children: [
               if (widget.isDesk || !isFocused)
                 Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: KPadding.kPaddingSize30,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: widget.isDesk
+                        ? KPadding.kPaddingSize30
+                        : KPadding.kPaddingSize10,
                   ),
                   child: InkWell(
                     onTap: () => EasyDebounce.debounce(
@@ -92,13 +94,23 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                 ),
               ),
               if (widget.isDesk)
+                Padding(
+                  padding:
+                      const EdgeInsets.only(right: KPadding.kPaddingSize32),
+                  child: IconWidget(
+                    key: KWidgetkeys.widget.nawbar.iconMic,
+                    icon: KIcon.mic,
+                  ),
+                ),
+              if (widget.isDesk || !isFocused)
+                const Padding(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: KPadding.kPaddingSize8),
+                  child: LanguagesSwitcherWidget(),
+                ),
+              if (widget.isDesk)
                 Row(
                   children: [
-                    IconWidget(
-                      key: KWidgetkeys.widget.nawbar.iconMic,
-                      icon: KIcon.mic,
-                    ),
-                    KSizedBox.kWidthSizedBox10,
                     TextButton(
                       key: KWidgetkeys.widget.nawbar.button,
                       style: KButtonStyles.whiteButtonStyle,
@@ -108,12 +120,9 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                         style: AppTextStyle.text24,
                       ),
                     ),
-                    KSizedBox.kWidthSizedBox10,
-                    // fail test, I need mobile design for this button
-                    const LanguagesSwitcherWidget(),
                   ],
-                ),
-              if (widget.isDesk || !isFocused)
+                )
+              else if (!isFocused)
                 IconWidget(
                   key: KWidgetkeys.widget.nawbar.iconPerson,
                   icon: KIcon.person,
