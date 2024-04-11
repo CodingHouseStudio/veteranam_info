@@ -4,7 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:kozak/bootstrap.dart';
-import 'package:kozak/firebase_options.dart';
+import 'package:kozak/firebase_options_development.dart';
 import 'package:kozak/shared/shared.dart';
 
 Future<void> setUpGlobal({bool? kIsWeb}) async {
@@ -82,8 +82,8 @@ abstract class KTestText {
   ];
 
   static final feedbackModel = FeedbackModel(
-    id: '1',
-    guestId: '1',
+    id: DateTime.now().microsecondsSinceEpoch.toString(),
+    guestId: DateTime.now().microsecondsSinceEpoch.toString(),
     guestName: KTestText.field,
     email: KTestText.useremail,
     timestamp: DateTime.now(),
@@ -91,8 +91,8 @@ abstract class KTestText {
   );
 
   static final feedbackModelIncorect = FeedbackModel(
-    id: '1',
-    guestId: '1',
+    id: DateTime.now().microsecondsSinceEpoch.toString(),
+    guestId: DateTime.now().microsecondsSinceEpoch.toString(),
     guestName: KTestText.field,
     email: KTestText.useremailIncorrect,
     timestamp: DateTime.now(),
