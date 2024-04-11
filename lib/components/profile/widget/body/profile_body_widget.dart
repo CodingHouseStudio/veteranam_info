@@ -51,9 +51,15 @@ class ProfileBodyWidget extends StatelessWidget {
                     children: [
                       BoxWidget(
                         text: context.l10n.saved,
+                        isDesk: true,
+                        onIconTap: () {},
                       ),
                       KSizedBox.kHeightSizedBox30,
-                      BoxWidget(text: context.l10n.myStory),
+                      BoxWidget(
+                        text: context.l10n.myStory,
+                        isDesk: true,
+                        onIconTap: () {},
+                      ),
                       KSizedBox.kHeightSizedBox90,
                     ],
                   ),
