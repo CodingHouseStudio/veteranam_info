@@ -1,41 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:kozak/shared/shared.dart';
 
-class ProfileCardWidget extends StatelessWidget {
+class ProfileCardWidget extends StatefulWidget {
   const ProfileCardWidget({super.key});
 
   @override
+  ProfileCardWidgetState createState() => ProfileCardWidgetState();
+}
+
+class ProfileCardWidgetState extends State<ProfileCardWidget> {
+  bool isEditing = false;
+
+  @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: Container(
-        decoration: KWidetTheme.boxDecorPrimary,
-        child: Padding(
-          padding: const EdgeInsets.all(KPadding.kPaddingSize10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _buildProfileHeader(),
-              KSizedBox.kHeightSizedBox30,
-              _buildProfileInfo(),
-              KSizedBox.kHeightSizedBox8,
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      const SwitchWidget(),
-                      KSizedBox.kWidthSizedBox8,
-                      Text(context.l10n.beAnonymous),
-                    ],
-                  ),
-                  const Text(
-                    KMockText.description,
-                    style: AppTextStyle.hint14,
-                  ),
-                ],
-              ),
-            ],
+    return SingleChildScrollView(
+      child: Padding(
+        padding:
+            const EdgeInsets.symmetric(horizontal: KPadding.kPaddingSize16),
+        key: KWidgetkeys.widget.profileCard.profileCard,
+        child: Container(
+          decoration: KWidetTheme.boxDecorPrimary,
+          child: Padding(
+            padding: const EdgeInsets.all(KPadding.kPaddingSize20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildProfileHeader(),
+                KSizedBox.kHeightSizedBox30,
+                _buildProfileInfo(),
+                KSizedBox.kHeightSizedBox8,
+                _buildProfileFooter(),
+              ],
+            ),
           ),
         ),
       ),
@@ -58,21 +54,57 @@ class ProfileCardWidget extends StatelessWidget {
           ),
         ),
         KSizedBox.kWidthSizedBox30,
-        const Flexible(
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                child: Text(
-                  KMockText.userName,
-                  style: AppTextStyle.text40,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-              KSizedBox.kWidthSizedBox3,
-              KIcon.edit,
-            ],
+        Expanded(
+          child:
+              isEditing ? _editProfileNameAndLastName() : _displayProfileName(),
+        ),
+      ],
+    );
+  }
+
+  Widget _editProfileNameAndLastName() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(context.l10n.editData, style: AppTextStyle.text40),
+        KSizedBox.kHeightSizedBox8,
+        _textField(context.l10n.name, context.l10n.writeYouName),
+        KSizedBox.kHeightSizedBox8,
+        _textField(context.l10n.lastName, context.l10n.writeYouLastName),
+      ],
+    );
+  }
+
+  Widget _displayProfileName() {
+    return Row(
+      children: [
+        const Expanded(
+          child: Text(
+            KMockText.userName,
+            style: AppTextStyle.text40,
+            overflow: TextOverflow.ellipsis,
           ),
+        ),
+        GestureDetector(
+          onTap: () => setState(() => isEditing = !isEditing),
+          child: KIcon.edit,
+        ),
+      ],
+    );
+  }
+
+  Widget _textField(String label, String hint) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(label, style: AppTextStyle.text24),
+        TextField(
+          decoration: InputDecoration(
+            border: KBorder.buttonStyleOutlineInputBorder,
+            labelText: hint,
+            labelStyle: AppTextStyle.hint24,
+          ),
+          onChanged: (value) {},
         ),
       ],
     );
@@ -82,41 +114,39 @@ class ProfileCardWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              'E-mail:',
-              style: AppTextStyle.text24,
-            ),
-            TextField(
-              decoration: InputDecoration(
-                border: KBorder.buttonStyleOutlineInputBorder,
-                labelText: KMockText.email,
-                labelStyle: AppTextStyle.hint24,
-              ),
-              onChanged: (value) {},
-            ),
-          ],
-        ),
+        _textField('E-mail:', KMockText.email),
         KSizedBox.kHeightSizedBox8,
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        _textField('Nickname:', KMockText.nickname),
+      ],
+    );
+  }
+
+  Widget _buildProfileFooter() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
           children: [
-            const Text(
-              'Nickname:',
-              style: AppTextStyle.text24,
-            ),
-            TextField(
-              decoration: InputDecoration(
-                border: KBorder.buttonStyleOutlineInputBorder,
-                labelText: KMockText.nickname,
-                labelStyle: AppTextStyle.hint24,
-              ),
-              onChanged: (value) {},
-            ),
+            const SwitchWidget(),
+            KSizedBox.kHeightSizedBox8,
+            Expanded(child: Text(context.l10n.beAnonymous)),
           ],
         ),
+        const Text(KMockText.description, style: AppTextStyle.hint14),
+        if (isEditing)
+          Padding(
+            padding: const EdgeInsets.only(
+              bottom: 20,
+            ),
+            child: Center(
+              child: ElevatedButton(
+                style: KButtonStyles.lightGrayButtonStyle,
+                onPressed: () => setState(() => isEditing = !isEditing),
+                child:
+                    Text(context.l10n.saveChanges, style: AppTextStyle.text24),
+              ),
+            ),
+          ),
       ],
     );
   }

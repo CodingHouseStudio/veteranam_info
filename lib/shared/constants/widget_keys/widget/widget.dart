@@ -24,5 +24,6 @@ class _WidgetKeys {
   final languageSwitcher = _LanguageSwitcherKeys();
   final checkPoint = _CheckPointKeys();
   final shellRoute = _ShellRouteKeys();
+  final profileCard = _ProfileKeys();
   final feedback = _FeedbackKeys();
 }

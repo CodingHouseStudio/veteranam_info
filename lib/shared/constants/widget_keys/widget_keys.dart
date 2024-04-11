@@ -65,10 +65,13 @@ part 'widget/drop_chip.dart';
 part 'widget/chip.dart';
 
 part 'widget/filter_popup_menu.dart';
+
 part 'widget/language_switcher.dart';
 
 part 'widget/discount_card.dart';
+
 part 'widget/check_point.dart';
+
 part 'widget/shell_route.dart';
 
 part 'widget/pagination.dart';
