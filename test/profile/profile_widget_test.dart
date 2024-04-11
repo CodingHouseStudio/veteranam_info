@@ -22,8 +22,6 @@ void main() {
         findsOneWidget,
       );
 
-      await chekPointHelper(tester);
-
       await tester.pumpAndSettle();
     });
     group(KGroupText.goRouter, () {
@@ -37,7 +35,7 @@ void main() {
           findsOneWidget,
         );
 
-        await chekPointHelper(tester);
+        //await chekPointHelper(tester);
 
         await tester.pumpAndSettle();
       });

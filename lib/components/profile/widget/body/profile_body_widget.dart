@@ -31,16 +31,18 @@ class ProfileBodyWidget extends StatelessWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Expanded(
+              Expanded(
                 flex: 2,
                 child: Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: KPadding.kPaddingSize16),
-                  child: ProfileCardWidget(),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: KPadding.kPaddingSize16,
+                  ),
+                  child: ProfileCardWidget(
+                    key: KWidgetkeys.widget.profileCard.profileCard,
+                  ),
                 ),
               ),
               Expanded(
-                flex: 3,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
                     horizontal: KPadding.kPaddingSize16,
