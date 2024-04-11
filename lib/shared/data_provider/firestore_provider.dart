@@ -18,15 +18,22 @@ class FirestoreService {
   }
 
   Future<void> addFeedback(FeedbackModel feedback) {
-    return _db.collection('feedback').doc(feedback.id).set(feedback.toJson());
+    return _db
+        .collection(FirebaseCollectionName.feedback)
+        .doc(feedback.id)
+        .set(feedback.toJson());
   }
 
   Future<void> addQuestion(QuestionModel question) {
-    return _db.collection('questions').doc(question.id).set(question.toJson());
+    return _db
+        .collection(FirebaseCollectionName.questions)
+        .doc(question.id)
+        .set(question.toJson());
   }
 
   Future<List<QuestionModel>> getQuestions() async {
-    final docSnapshot = await _db.collection('questions').get();
+    final docSnapshot =
+        await _db.collection(FirebaseCollectionName.questions).get();
 
     return docSnapshot.docs
         .map((doc) => QuestionModel.fromJson(doc.data()))
