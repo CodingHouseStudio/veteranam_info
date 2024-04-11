@@ -1,8 +1,10 @@
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:kozak/bootstrap.dart';
+import 'package:kozak/firebase_options.dart';
 import 'package:kozak/shared/shared.dart';
 
 Future<void> setUpGlobal({bool? kIsWeb}) async {
@@ -11,6 +13,15 @@ Future<void> setUpGlobal({bool? kIsWeb}) async {
   };
 
   Bloc.observer = const AppBlocObserver();
+  if (kIsWeb != null) {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+  } else {
+    await Firebase.initializeApp(); // normally would initialize Firebase
+  }
+
+  // FlutterSecureStorage.setMockInitialValues({});
 }
 
 abstract class KGroupText {

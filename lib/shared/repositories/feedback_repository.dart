@@ -1,19 +1,19 @@
 import 'package:dartz/dartz.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kozak/shared/shared.dart';
 
 @Singleton(as: IFeedbackRepository)
 class FeedbackRepository implements IFeedbackRepository {
-  final List<FeedbackModel> _feedbackItems = [];
+  final FirestoreService _firestoreService = GetIt.I.get<FirestoreService>();
 
   @override
   Future<Either<SomeFailure, bool>> sendFeedback(FeedbackModel feedback) async {
     try {
-      _feedbackItems.add(feedback);
-      // ignore: inference_failure_on_instance_creation
-      await Future.delayed(const Duration(seconds: 1));
+      await _firestoreService.addFeedback(feedback);
       return const Right(true);
-    } on Exception catch (e) {
+    } on FirebaseException catch (e) {
       return Left(SendFailure.fromCode(e).status);
     } catch (e) {
       return const Left(SomeFailure.serverError());

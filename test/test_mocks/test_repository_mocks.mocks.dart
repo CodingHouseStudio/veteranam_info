@@ -106,3 +106,42 @@ class MockIFeedbackRepository extends _i1.Mock
         )),
       ) as _i4.Future<_i2.Either<_i3.SomeFailure, bool>>);
 }
+
+/// A class which mocks [FirestoreService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockFirestoreService extends _i1.Mock implements _i3.FirestoreService {
+  @override
+  _i4.Future<void> addFeedback(_i3.FeedbackModel? feedback) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #addFeedback,
+          [feedback],
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
+
+  @override
+  _i4.Future<void> addQuestion(_i3.QuestionModel? question) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #addQuestion,
+          [question],
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
+
+  @override
+  _i4.Future<List<_i3.QuestionModel>> getQuestions() => (super.noSuchMethod(
+        Invocation.method(
+          #getQuestions,
+          [],
+        ),
+        returnValue:
+            _i4.Future<List<_i3.QuestionModel>>.value(<_i3.QuestionModel>[]),
+        returnValueForMissingStub:
+            _i4.Future<List<_i3.QuestionModel>>.value(<_i3.QuestionModel>[]),
+      ) as _i4.Future<List<_i3.QuestionModel>>);
+}
