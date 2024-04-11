@@ -23,7 +23,63 @@ void main() {
       );
 
       await tester.pumpAndSettle();
+
+      await feedbackHelper(tester);
     });
+
+    testWidgets('Feedback enter correct text and save it', (tester) async {
+      await tester.pumpApp(const InvestorsScreen());
+
+      expect(
+        find.byKey(KWidgetkeys.screen.investors.screen),
+        findsOneWidget,
+      );
+
+      await tester.pumpAndSettle();
+
+      await feedbackEnterTextHelper(
+        tester: tester,
+        email: KTestText.useremail,
+        field: KTestText.field,
+        isValid: true,
+      );
+    });
+
+    testWidgets('Feedback enter incorrect text and save it', (tester) async {
+      await tester.pumpApp(const InvestorsScreen());
+
+      expect(
+        find.byKey(KWidgetkeys.screen.investors.screen),
+        findsOneWidget,
+      );
+
+      await tester.pumpAndSettle();
+
+      await feedbackEnterTextHelper(
+        tester: tester,
+        email: KTestText.useremailIncorrect,
+        field: KTestText.field,
+        isValid: false,
+      );
+    });
+
+    testWidgets('Feedback enter text and clear it', (tester) async {
+      await tester.pumpApp(const InvestorsScreen());
+
+      expect(
+        find.byKey(KWidgetkeys.screen.investors.screen),
+        findsOneWidget,
+      );
+
+      await tester.pumpAndSettle();
+
+      await feedbackClearTextHelper(
+        tester: tester,
+        email: KTestText.useremail,
+        field: KTestText.field,
+      );
+    });
+
     group(KGroupText.goRouter, () {
       late MockGoRouter mockGoRouter;
       setUp(() => mockGoRouter = MockGoRouter());
@@ -39,6 +95,8 @@ void main() {
         );
 
         await tester.pumpAndSettle();
+
+        await feedbackHelper(tester);
       });
       // group(KGroupText.goTo, () {
       // });

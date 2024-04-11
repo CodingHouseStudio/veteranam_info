@@ -1,7 +1,6 @@
-import 'package:flutter_test/flutter_test.dart';
-import 'package:kozak/shared/shared.dart';
+part of 'filter_box_helper.dart';
 
-Future<void> filterPopupMenuHelper(
+Future<void> _filterPopupMenuHelper(
   WidgetTester tester,
 ) async {
   await tester.tap(

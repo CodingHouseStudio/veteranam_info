@@ -75,6 +75,7 @@ part 'widget/check_point.dart';
 part 'widget/shell_route.dart';
 
 part 'widget/pagination.dart';
+part 'widget/feedback.dart';
 
 abstract class KWidgetkeys {
   static _ScreenKeys get screen => _ScreenKeys();

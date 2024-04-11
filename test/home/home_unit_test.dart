@@ -1,5 +1,3 @@
-// ignore_for_file: lines_longer_than_80_chars
-
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:kozak/components/components.dart';
@@ -40,7 +38,8 @@ void main() {
       });
 
       blocTest<HomeWatcherBloc, HomeWatcherState>(
-        'emits [HomeWatcherState.loading(), HomeWatcherState.success()] when load questionModel list',
+        'emits [HomeWatcherState.loading(), HomeWatcherState.success()]'
+        ' when load questionModel list',
         build: () => homeWatcherBloc,
         act: (bloc) async {
           when(mockHomeRepository.getQuestions()).thenAnswer(

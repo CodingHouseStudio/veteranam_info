@@ -1,10 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:kozak/shared/shared.dart';
+part of 'filter_box_helper.dart';
 
-import '../../text_dependency.dart';
-
-Future<void> chipHelper(
+Future<void> _chipHelper(
   WidgetTester tester,
 ) async {
   expect(find.byKey(KWidgetkeys.widget.chip.widget), findsWidgets);
@@ -20,7 +16,7 @@ Future<void> chipHelper(
 
   expect(chip.selected, isTrue);
 
-  await filterPopupMenuHelper(tester);
+  await _filterPopupMenuHelper(tester);
 
   chip = tester.widget<FilterChip>(
     find.byKey(KWidgetkeys.widget.chip.widget).first,
