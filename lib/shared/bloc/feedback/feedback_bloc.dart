@@ -82,8 +82,8 @@ class FeedbackBloc extends Bloc<FeedbackEvent, FeedbackState> {
     )) {
       final result = await _feedbackRepository.sendFeedback(
         FeedbackModel(
-          id: '1',
-          guestId: '1',
+          id: ExtendedDateTime.current.microsecondsSinceEpoch.toString(),
+          guestId: ExtendedDateTime.current.microsecondsSinceEpoch.toString(),
           guestName: state.name.value!,
           email: state.email.value!,
           timestamp: ExtendedDateTime.current,
