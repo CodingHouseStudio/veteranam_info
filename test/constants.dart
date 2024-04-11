@@ -15,6 +15,7 @@ Future<void> setUpGlobal({bool? kIsWeb}) async {
 
 abstract class KGroupText {
   static const repository = 'Repository';
+  static const model = 'Model';
   static const successfulGet = 'Successful get';
   static const intial = 'renders initial';
   static const goRouter = 'Mock Go Router';
@@ -23,6 +24,7 @@ abstract class KGroupText {
   static const shouldBe = 'should be';
   static const shouldNotBe = 'should not be';
   static const empty = 'empty';
+  static const modelJson = 'instance from valid JSON';
 }
 
 abstract class KTestText {
