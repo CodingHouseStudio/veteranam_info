@@ -7,6 +7,11 @@ import 'text_dependency.dart';
 
 void configureDependenciesTest() {
   // Services
+  GetIt.I.registerSingleton<FakeClient>(FakeClient());
+  GetIt.I.registerFactory<FirestoreService>(
+    FirestoreService.new,
+  );
+
   // Repositories
   GetIt.I.registerSingleton<IFeedbackRepository>(FeedbackRepository());
   // Blocs
