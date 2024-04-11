@@ -2,9 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:kozak/shared/shared.dart';
 
 class ListQuestionWidget extends StatelessWidget {
-  const ListQuestionWidget({required this.questionModelItems, super.key});
+  const ListQuestionWidget({
+    required this.questionModelItems,
+    required this.isDesk,
+    super.key,
+  });
 
   final List<QuestionModel> questionModelItems;
+  final bool isDesk;
 
   @override
   Widget build(BuildContext context) {
@@ -15,20 +20,28 @@ class ListQuestionWidget extends StatelessWidget {
         Text(
           context.l10n.faq,
           key: KWidgetkeys.screen.home.questionListTitle,
-          style: AppTextStyle.text96,
+          style: isDesk ? AppTextStyle.text96 : AppTextStyle.text48,
         ),
-        KSizedBox.kHeightSizedBox48,
+        if (isDesk)
+          KSizedBox.kHeightSizedBox48
+        else
+          KSizedBox.kHeightSizedBox24,
         ListView.builder(
           key: KWidgetkeys.screen.home.questionList,
           shrinkWrap: true,
           itemCount: questionModelItems.length,
           itemBuilder: (context, index) => Padding(
             padding: questionModelItems.length - 1 != index
-                ? const EdgeInsets.only(bottom: KPadding.kPaddingSize24)
+                ? EdgeInsets.only(
+                    bottom: isDesk
+                        ? KPadding.kPaddingSize24
+                        : KPadding.kPaddingSize16,
+                  )
                 : EdgeInsets.zero,
             child: QuestionWidget(
               title: questionModelItems.elementAt(index).title,
               subtitle: questionModelItems.elementAt(index).subtitle,
+              isDesk: isDesk,
             ),
           ),
         ),

@@ -6,10 +6,12 @@ class QuestionWidget extends StatefulWidget {
   const QuestionWidget({
     required this.title,
     required this.subtitle,
+    required this.isDesk,
     super.key,
   });
   final String title;
   final String subtitle;
+  final bool isDesk;
 
   @override
   State<QuestionWidget> createState() => _QuestionWidgetState();
@@ -48,8 +50,10 @@ class _QuestionWidgetState extends State<QuestionWidget> {
                     child: Text(
                       widget.title,
                       key: KWidgetkeys.widget.question.title,
-                      style: AppTextStyle.text40,
-                      maxLines: 1,
+                      style: widget.isDesk
+                          ? AppTextStyle.text40
+                          : AppTextStyle.text18,
+                      maxLines: 2,
                     ),
                   ),
                   IconWidget(
@@ -67,15 +71,18 @@ class _QuestionWidgetState extends State<QuestionWidget> {
           Visibility(
             visible: openQuestion,
             child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: KPadding.kPaddingSize32,
-                vertical: KPadding.kPaddingSize16,
+              padding: EdgeInsets.only(
+                left: widget.isDesk
+                    ? KPadding.kPaddingSize32
+                    : KPadding.kPaddingSize16,
+                bottom: KPadding.kPaddingSize16,
+                top: widget.isDesk ? KPadding.kPaddingSize8 : 0,
               ),
               child: Markdown(
                 key: KWidgetkeys.widget.question.subtitle,
                 data: widget.subtitle,
                 styleSheet: MarkdownStyleSheet(
-                  p: AppTextStyle.text24,
+                  p: widget.isDesk ? AppTextStyle.text24 : AppTextStyle.text14,
                 ),
                 shrinkWrap: true,
               ),
