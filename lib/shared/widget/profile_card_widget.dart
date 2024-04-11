@@ -17,6 +17,7 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
       child: Padding(
         padding:
             const EdgeInsets.symmetric(horizontal: KPadding.kPaddingSize16),
+        key: KWidgetkeys.widget.profileCard.profileCard,
         child: Container(
           decoration: KWidetTheme.boxDecorPrimary,
           child: Padding(
@@ -28,41 +29,7 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
                 KSizedBox.kHeightSizedBox30,
                 _buildProfileInfo(),
                 KSizedBox.kHeightSizedBox8,
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        const SwitchWidget(),
-                        KSizedBox.kWidthSizedBox8,
-                        Text(context.l10n.beAnonymous),
-                      ],
-                    ),
-                    const Text(
-                      KMockText.description,
-                      style: AppTextStyle.hint14,
-                    ),
-                    if (isEditing) ...[
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 20),
-                        child: Center(
-                          child: ElevatedButton(
-                            style: KButtonStyles.lightGrayButtonStyle,
-                            onPressed: () {
-                              setState(() {
-                                isEditing = !isEditing;
-                              });
-                            },
-                            child: Text(
-                              context.l10n.saveChanges,
-                              style: AppTextStyle.text24,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ],
-                ),
+                _buildProfileFooter(),
               ],
             ),
           ),
@@ -87,65 +54,57 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
           ),
         ),
         KSizedBox.kWidthSizedBox30,
-        Flexible(
-          child: isEditing
-              ? Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      context.l10n.editData,
-                      style: AppTextStyle.text40,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    KSizedBox.kHeightSizedBox8,
-                    Text(
-                      context.l10n.name,
-                      style: AppTextStyle.text24,
-                    ),
-                    TextField(
-                      decoration: InputDecoration(
-                        border: KBorder.buttonStyleOutlineInputBorder,
-                        labelText: context.l10n.writeYouName,
-                        labelStyle: AppTextStyle.hint24,
-                      ),
-                      onChanged: (value) {},
-                    ),
-                    KSizedBox.kHeightSizedBox8,
-                    Text(
-                      context.l10n.lastName,
-                      style: AppTextStyle.text24,
-                    ),
-                    TextField(
-                      decoration: InputDecoration(
-                        border: KBorder.buttonStyleOutlineInputBorder,
-                        labelText: context.l10n.writeYouLastName,
-                        labelStyle: AppTextStyle.hint24,
-                      ),
-                      onChanged: (value) {},
-                    ),
-                  ],
-                )
-              : Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Expanded(
-                      child: Text(
-                        KMockText.userName,
-                        style: AppTextStyle.text40,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                    KSizedBox.kWidthSizedBox3,
-                    GestureDetector(
-                      child: KIcon.edit,
-                      onTap: () {
-                        setState(() {
-                          isEditing = !isEditing;
-                        });
-                      },
-                    ),
-                  ],
-                ),
+        Expanded(
+          child:
+              isEditing ? _editProfileNameAndLastName() : _displayProfileName(),
+        ),
+      ],
+    );
+  }
+
+  Widget _editProfileNameAndLastName() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(context.l10n.editData, style: AppTextStyle.text40),
+        KSizedBox.kHeightSizedBox8,
+        _textField(context.l10n.name, context.l10n.writeYouName),
+        KSizedBox.kHeightSizedBox8,
+        _textField(context.l10n.lastName, context.l10n.writeYouLastName),
+      ],
+    );
+  }
+
+  Widget _displayProfileName() {
+    return Row(
+      children: [
+        const Expanded(
+          child: Text(
+            KMockText.userName,
+            style: AppTextStyle.text40,
+            overflow: TextOverflow.ellipsis,
+          ),
+        ),
+        GestureDetector(
+          onTap: () => setState(() => isEditing = !isEditing),
+          child: KIcon.edit,
+        ),
+      ],
+    );
+  }
+
+  Widget _textField(String label, String hint) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(label, style: AppTextStyle.text24),
+        TextField(
+          decoration: InputDecoration(
+            border: KBorder.buttonStyleOutlineInputBorder,
+            labelText: hint,
+            labelStyle: AppTextStyle.hint24,
+          ),
+          onChanged: (value) {},
         ),
       ],
     );
@@ -155,41 +114,39 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              'E-mail:',
-              style: AppTextStyle.text24,
-            ),
-            TextField(
-              decoration: InputDecoration(
-                border: KBorder.buttonStyleOutlineInputBorder,
-                labelText: KMockText.email,
-                labelStyle: AppTextStyle.hint24,
-              ),
-              onChanged: (value) {},
-            ),
-          ],
-        ),
+        _textField('E-mail:', KMockText.email),
         KSizedBox.kHeightSizedBox8,
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        _textField('Nickname:', KMockText.nickname),
+      ],
+    );
+  }
+
+  Widget _buildProfileFooter() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
           children: [
-            const Text(
-              'Nickname:',
-              style: AppTextStyle.text24,
-            ),
-            TextField(
-              decoration: InputDecoration(
-                border: KBorder.buttonStyleOutlineInputBorder,
-                labelText: KMockText.nickname,
-                labelStyle: AppTextStyle.hint24,
-              ),
-              onChanged: (value) {},
-            ),
+            const SwitchWidget(),
+            KSizedBox.kHeightSizedBox8,
+            Expanded(child: Text(context.l10n.beAnonymous)),
           ],
         ),
+        const Text(KMockText.description, style: AppTextStyle.hint14),
+        if (isEditing)
+          Padding(
+            padding: const EdgeInsets.only(
+              bottom: 20,
+            ),
+            child: Center(
+              child: ElevatedButton(
+                style: KButtonStyles.lightGrayButtonStyle,
+                onPressed: () => setState(() => isEditing = !isEditing),
+                child:
+                    Text(context.l10n.saveChanges, style: AppTextStyle.text24),
+              ),
+            ),
+          ),
       ],
     );
   }
