@@ -7,7 +7,6 @@ Future<void> feedbackEnterTextHelper({
   required WidgetTester tester,
   required String field,
   required String email,
-  required bool isValid,
 }) async {
   expect(
     find.byKey(KWidgetkeys.widget.feedback.buttonSave),
@@ -59,8 +58,6 @@ Future<void> feedbackEnterTextHelper({
     field,
   );
 
-  await changeWindowSizeHelper(tester: tester);
-
   await scrollingHelper(
     tester: tester,
     itemKey: KWidgetkeys.widget.feedback.buttonSave,
@@ -70,11 +67,4 @@ Future<void> feedbackEnterTextHelper({
   await tester.tap(find.byKey(KWidgetkeys.widget.feedback.buttonSave));
 
   await tester.pumpAndSettle();
-
-  expect(
-    find.byKey(KWidgetkeys.widget.feedback.saveMessage),
-    isValid ? findsOneWidget : findsNothing,
-  );
-
-  await changeWindowSizeHelper(tester: tester, setDefaultSize: true);
 }

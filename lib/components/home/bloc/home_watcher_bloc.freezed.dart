@@ -171,7 +171,7 @@ mixin _$HomeWatcherState {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<QuestionModel> questionModelItems) success,
-    required TResult Function() failure,
+    required TResult Function(HomeFailure failure) failure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -179,7 +179,7 @@ mixin _$HomeWatcherState {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(List<QuestionModel> questionModelItems)? success,
-    TResult? Function()? failure,
+    TResult? Function(HomeFailure failure)? failure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -187,7 +187,7 @@ mixin _$HomeWatcherState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<QuestionModel> questionModelItems)? success,
-    TResult Function()? failure,
+    TResult Function(HomeFailure failure)? failure,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -280,7 +280,7 @@ class _$HomeWatcherStateInitialImpl implements HomeWatcherStateInitial {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<QuestionModel> questionModelItems) success,
-    required TResult Function() failure,
+    required TResult Function(HomeFailure failure) failure,
   }) {
     return initial();
   }
@@ -291,7 +291,7 @@ class _$HomeWatcherStateInitialImpl implements HomeWatcherStateInitial {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(List<QuestionModel> questionModelItems)? success,
-    TResult? Function()? failure,
+    TResult? Function(HomeFailure failure)? failure,
   }) {
     return initial?.call();
   }
@@ -302,7 +302,7 @@ class _$HomeWatcherStateInitialImpl implements HomeWatcherStateInitial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<QuestionModel> questionModelItems)? success,
-    TResult Function()? failure,
+    TResult Function(HomeFailure failure)? failure,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -397,7 +397,7 @@ class _$HomeWatcherStateLoadingImpl implements HomeWatcherStateLoading {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<QuestionModel> questionModelItems) success,
-    required TResult Function() failure,
+    required TResult Function(HomeFailure failure) failure,
   }) {
     return loading();
   }
@@ -408,7 +408,7 @@ class _$HomeWatcherStateLoadingImpl implements HomeWatcherStateLoading {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(List<QuestionModel> questionModelItems)? success,
-    TResult? Function()? failure,
+    TResult? Function(HomeFailure failure)? failure,
   }) {
     return loading?.call();
   }
@@ -419,7 +419,7 @@ class _$HomeWatcherStateLoadingImpl implements HomeWatcherStateLoading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<QuestionModel> questionModelItems)? success,
-    TResult Function()? failure,
+    TResult Function(HomeFailure failure)? failure,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -550,7 +550,7 @@ class _$HomeWatcherStateSuccessImpl implements HomeWatcherStateSuccess {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<QuestionModel> questionModelItems) success,
-    required TResult Function() failure,
+    required TResult Function(HomeFailure failure) failure,
   }) {
     return success(questionModelItems);
   }
@@ -561,7 +561,7 @@ class _$HomeWatcherStateSuccessImpl implements HomeWatcherStateSuccess {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(List<QuestionModel> questionModelItems)? success,
-    TResult? Function()? failure,
+    TResult? Function(HomeFailure failure)? failure,
   }) {
     return success?.call(questionModelItems);
   }
@@ -572,7 +572,7 @@ class _$HomeWatcherStateSuccessImpl implements HomeWatcherStateSuccess {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<QuestionModel> questionModelItems)? success,
-    TResult Function()? failure,
+    TResult Function(HomeFailure failure)? failure,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -636,6 +636,8 @@ abstract class _$$HomeWatcherStateFailureImplCopyWith<$Res> {
           _$HomeWatcherStateFailureImpl value,
           $Res Function(_$HomeWatcherStateFailureImpl) then) =
       __$$HomeWatcherStateFailureImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({HomeFailure failure});
 }
 
 /// @nodoc
@@ -646,27 +648,51 @@ class __$$HomeWatcherStateFailureImplCopyWithImpl<$Res>
       _$HomeWatcherStateFailureImpl _value,
       $Res Function(_$HomeWatcherStateFailureImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? failure = null,
+  }) {
+    return _then(_$HomeWatcherStateFailureImpl(
+      null == failure
+          ? _value.failure
+          : failure // ignore: cast_nullable_to_non_nullable
+              as HomeFailure,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$HomeWatcherStateFailureImpl implements HomeWatcherStateFailure {
-  const _$HomeWatcherStateFailureImpl();
+  const _$HomeWatcherStateFailureImpl(this.failure);
+
+  @override
+  final HomeFailure failure;
 
   @override
   String toString() {
-    return 'HomeWatcherState.failure()';
+    return 'HomeWatcherState.failure(failure: $failure)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$HomeWatcherStateFailureImpl);
+            other is _$HomeWatcherStateFailureImpl &&
+            (identical(other.failure, failure) || other.failure == failure));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, failure);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$HomeWatcherStateFailureImplCopyWith<_$HomeWatcherStateFailureImpl>
+      get copyWith => __$$HomeWatcherStateFailureImplCopyWithImpl<
+          _$HomeWatcherStateFailureImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -674,9 +700,9 @@ class _$HomeWatcherStateFailureImpl implements HomeWatcherStateFailure {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<QuestionModel> questionModelItems) success,
-    required TResult Function() failure,
+    required TResult Function(HomeFailure failure) failure,
   }) {
-    return failure();
+    return failure(this.failure);
   }
 
   @override
@@ -685,9 +711,9 @@ class _$HomeWatcherStateFailureImpl implements HomeWatcherStateFailure {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(List<QuestionModel> questionModelItems)? success,
-    TResult? Function()? failure,
+    TResult? Function(HomeFailure failure)? failure,
   }) {
-    return failure?.call();
+    return failure?.call(this.failure);
   }
 
   @override
@@ -696,11 +722,11 @@ class _$HomeWatcherStateFailureImpl implements HomeWatcherStateFailure {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<QuestionModel> questionModelItems)? success,
-    TResult Function()? failure,
+    TResult Function(HomeFailure failure)? failure,
     required TResult orElse(),
   }) {
     if (failure != null) {
-      return failure();
+      return failure(this.failure);
     }
     return orElse();
   }
@@ -744,5 +770,11 @@ class _$HomeWatcherStateFailureImpl implements HomeWatcherStateFailure {
 }
 
 abstract class HomeWatcherStateFailure implements HomeWatcherState {
-  const factory HomeWatcherStateFailure() = _$HomeWatcherStateFailureImpl;
+  const factory HomeWatcherStateFailure(final HomeFailure failure) =
+      _$HomeWatcherStateFailureImpl;
+
+  HomeFailure get failure;
+  @JsonKey(ignore: true)
+  _$$HomeWatcherStateFailureImplCopyWith<_$HomeWatcherStateFailureImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

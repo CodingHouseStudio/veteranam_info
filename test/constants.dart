@@ -16,7 +16,11 @@ Future<void> setUpGlobal({bool? kIsWeb}) async {
 abstract class KGroupText {
   static const repository = 'Repository';
   static const model = 'Model';
+  static const fiedlModel = 'Field model';
   static const successfulGet = 'Successful get';
+  static const successfulSet = 'Successful set';
+  static const failureGet = 'Failure get';
+  static const failureSet = 'Failure set';
   static const intial = 'renders initial';
   static const goRouter = 'Mock Go Router';
   static const goTo = 'go to';
@@ -65,6 +69,24 @@ abstract class KTestText {
           'вакансії, які відповідають вашим критеріям.',
     ),
   ];
+
+  static final feedbackModel = FeedbackModel(
+    id: '1',
+    guestId: '1',
+    guestName: KTestText.field,
+    email: KTestText.useremail,
+    timestamp: DateTime.now(),
+    message: KTestText.field,
+  );
+
+  static final feedbackModelIncorect = FeedbackModel(
+    id: '1',
+    guestId: '1',
+    guestName: KTestText.field,
+    email: KTestText.useremailIncorrect,
+    timestamp: DateTime.now(),
+    message: KTestText.field,
+  );
 }
 
 abstract class KTestConstants {
@@ -90,6 +112,7 @@ abstract class KScreenBlocName {
   static const aboutUs = 'About Us Screen';
   static const contact = 'Contact Screen';
   static const consultation = 'Consultation Screen';
+  static const feedback = 'Feedback Widget';
 
   static const filterCubit = 'Filter Cubit';
   static const languageCubit = 'Language Cubit';

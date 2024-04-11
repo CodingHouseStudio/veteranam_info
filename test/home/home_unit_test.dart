@@ -1,4 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
+import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
@@ -111,17 +112,38 @@ void main() {
     });
     group(KGroupText.repository, () {
       late IHomeRepository mockHomeRepository;
-      setUp(() {
-        mockHomeRepository = MockIHomeRepository();
-        when(mockHomeRepository.getQuestions()).thenAnswer(
-          (_) => KTestText.questionModelItems,
-        );
+      group(KGroupText.successfulGet, () {
+        setUp(() {
+          mockHomeRepository = MockIHomeRepository();
+          when(mockHomeRepository.getQuestions()).thenAnswer(
+            (_) async => const Right(KTestText.questionModelItems),
+          );
+        });
+        test('questions', () async {
+          expect(
+            await mockHomeRepository.getQuestions(),
+            isA<Right<SomeFailure, List<QuestionModel>>>()
+                .having((e) => e.value, 'value', KTestText.questionModelItems),
+          );
+        });
       });
-      test('${KGroupText.successfulGet} questions', () async {
-        expect(
-          mockHomeRepository.getQuestions(),
-          KTestText.questionModelItems,
-        );
+      group(KGroupText.failureGet, () {
+        setUp(() {
+          mockHomeRepository = MockIHomeRepository();
+          when(mockHomeRepository.getQuestions()).thenAnswer(
+            (_) async => const Left(SomeFailure.serverError()),
+          );
+        });
+        test('questions', () async {
+          expect(
+            await mockHomeRepository.getQuestions(),
+            isA<Left<SomeFailure, List<QuestionModel>>>().having(
+              (e) => e.value,
+              'value',
+              equals(const SomeFailure.serverError()),
+            ),
+          );
+        });
       });
     });
 
@@ -141,7 +163,7 @@ void main() {
         build: () => homeWatcherBloc,
         act: (bloc) async {
           when(mockHomeRepository.getQuestions()).thenAnswer(
-            (_) => KTestText.questionModelItems,
+            (_) async => const Right(KTestText.questionModelItems),
           );
           bloc.add(const HomeWatcherEvent.started());
         },
@@ -154,7 +176,9 @@ void main() {
         'emits [HomeWatcherState.faulure()] when audit error',
         build: () => homeWatcherBloc,
         act: (bloc) async {
-          when(mockHomeRepository.getQuestions()).thenThrow(Exception());
+          when(mockHomeRepository.getQuestions()).thenAnswer(
+            (_) async => const Left(SomeFailure.serverError()),
+          );
           bloc.add(const HomeWatcherEvent.started());
         },
         expect: () async => [

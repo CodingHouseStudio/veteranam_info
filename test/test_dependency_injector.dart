@@ -8,10 +8,13 @@ import 'text_dependency.dart';
 void configureDependenciesTest() {
   // Services
   // Repositories
+  GetIt.I.registerSingleton<IFeedbackRepository>(FeedbackRepository());
   // Blocs
   GetIt.I.registerFactory<FilterCubit>(FilterCubit.new);
   GetIt.I.registerFactory<LanguageCubit>(LanguageCubit.new);
-  GetIt.I.registerFactory<FeedbackBloc>(FeedbackBloc.new);
+  GetIt.I.registerSingleton<FeedbackBloc>(
+    FeedbackBloc(feedbackRepository: GetIt.I.get<IFeedbackRepository>()),
+  );
 
   final HomeWatcherBloc mockHomeWatcherBloc = MockHomeWatcherBloc();
   when(() => mockHomeWatcherBloc.state).thenReturn(
