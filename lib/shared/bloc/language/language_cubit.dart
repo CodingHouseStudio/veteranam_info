@@ -9,8 +9,8 @@ const languagePrefsKey = 'languagePrefs';
 class LanguageCubit extends Cubit<Language?> {
   LanguageCubit() : super(null);
 
-  Future<void> changeLanguage(int languageIndex) async {
-    emit(languageIndex.getLocaleUseIndex);
+  Future<void> changeLanguage(String language) async {
+    emit(language.getLocale);
   }
 
   Future<void> initLanguage() async {
@@ -21,15 +21,15 @@ class LanguageCubit extends Cubit<Language?> {
 }
 
 enum Language {
-  english(
-    Locale('en', 'US'),
-    // Assets.english,
-    'English',
-  ),
   ukrain(
     Locale('uk', 'UK'),
     // Assets.indonesia,
-    'Bahasa Indonesia',
+    'UA',
+  ),
+  english(
+    Locale('en', 'US'),
+    // Assets.english,
+    'EN',
   );
 
   /// Add another languages support here
@@ -41,12 +41,18 @@ enum Language {
   final String text; // Optional: this properties used for ListTile details
 }
 
-extension GetLanguageFromIndex on int {
-  Language get getLocaleUseIndex {
+extension LanguageExtension on Language {
+  static List<Language> get getAllLanguage {
+    return Language.values.map((lang) => lang).toList();
+  }
+}
+
+extension GetLanguage on String {
+  Language get getLocale {
     switch (this) {
-      case 0:
+      case 'UA':
         return Language.ukrain;
-      case 1:
+      case 'EN':
         return Language.english;
       default:
         return Language.ukrain;
