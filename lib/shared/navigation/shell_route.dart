@@ -25,6 +25,16 @@ class ScaffoldWithNavBar extends StatelessWidget {
         return Scaffold(
           appBar: NawbarWidget(
             isDesk: isDesk,
+            padding: EdgeInsets.symmetric(
+              horizontal: isDesk
+                  ? 0
+                  : KPadding.kPaddingSize75 *
+                  (isMobile
+                      ? KPlatformConstants.mobilePaddingKoefficient
+                      : (isTablet
+                      ? KPlatformConstants.tabletPaddingKoefficient
+                      : KPlatformConstants.desktopPaddingKoefficient)),
+            ),
             hasMicrophone: goRouterState.fullPath != KRoute.home.path,
           ),
           body: ListView(
