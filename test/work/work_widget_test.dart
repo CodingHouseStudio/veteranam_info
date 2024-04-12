@@ -24,6 +24,8 @@ void main() {
 
       await tester.pumpAndSettle();
 
+      await nawbarHelper(tester: tester, searchText: KTestText.field);
+
       await workCardHelper(tester);
 
       await footerHelper(tester: tester, email: KTestText.useremail);
@@ -40,6 +42,8 @@ void main() {
         );
 
         await tester.pumpAndSettle();
+
+        await nawbarHelper(tester: tester, searchText: KTestText.field);
 
         await workCardHelper(tester);
       });
