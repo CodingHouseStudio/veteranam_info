@@ -41,8 +41,6 @@ linked_*.ds
 unlinked.ds
 unlinked_spec.ds
 .fvm/
-*.g.dart
-*.freezed.dart
 
 # Android related
 **/android/**/gradle-wrapper.jar
@@ -141,3 +139,9 @@ doc/api/
 .flutter-plugins
 .flutter-plugins-dependencies
 >>>>>>> 20c49b4 (Initial commit)
+# generated files flutter
+*.g.dart
+*.freezed.dart
+
+# generated mockito files
+*.mocks.dart
