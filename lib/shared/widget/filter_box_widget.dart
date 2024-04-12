@@ -64,6 +64,18 @@ class _FilterBoxWidgetState extends State<FilterBoxWidget> {
               )
             : ChipWidget(
                 filter: filter,
+                isSelected: context.read<FilterCubit>().state.isNotEmpty &&
+                    context
+                        .read<FilterCubit>()
+                        .state
+                        .elementAt(0)
+                        .toString()
+                        .contains(filter),
+                onSelected: ({required bool isSelected}) =>
+                    context.read<FilterCubit>().change(
+                          filterValue: filter,
+                          index: 0,
+                        ),
               ),
       );
     }).toList();

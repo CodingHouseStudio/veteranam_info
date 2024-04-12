@@ -10,11 +10,14 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
-import 'package:kozak/components/home/bloc/home_watcher_bloc.dart' as _i8;
+import 'package:kozak/components/home/bloc/home_watcher_bloc.dart' as _i9;
+import 'package:kozak/components/information/bloc/information_watcher_bloc.dart'
+    as _i10;
 import 'package:kozak/shared/bloc/feedback/feedback_bloc.dart' as _i3;
 import 'package:kozak/shared/bloc/filter/filter_cubit.dart' as _i4;
 import 'package:kozak/shared/bloc/language/language_cubit.dart' as _i5;
 import 'package:kozak/shared/repositories/home_repository.dart' as _i7;
+import 'package:kozak/shared/repositories/information_repository.dart' as _i8;
 import 'package:kozak/shared/shared.dart' as _i6;
 
 extension GetItInjectableX on _i1.GetIt {
@@ -32,8 +35,11 @@ extension GetItInjectableX on _i1.GetIt {
     gh.factory<_i4.FilterCubit>(() => _i4.FilterCubit());
     gh.singleton<_i5.LanguageCubit>(() => _i5.LanguageCubit());
     gh.singleton<_i6.IHomeRepository>(() => _i7.HomeRepository());
-    gh.factory<_i8.HomeWatcherBloc>(
-        () => _i8.HomeWatcherBloc(homeRepository: gh<_i6.IHomeRepository>()));
+    gh.singleton<_i6.IInformationRepository>(() => _i8.InformationRepository());
+    gh.factory<_i9.HomeWatcherBloc>(
+        () => _i9.HomeWatcherBloc(homeRepository: gh<_i6.IHomeRepository>()));
+    gh.factory<_i10.InformationWatcherBloc>(() => _i10.InformationWatcherBloc(
+        informationRepository: gh<_i6.IInformationRepository>()));
     return this;
   }
 }

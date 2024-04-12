@@ -10,8 +10,8 @@ class ContactBodyWidget extends StatelessWidget {
     return Column(
       children: [
         KSizedBox.kHeightSizedBox30,
-        const FilterBoxWidget(
-          filters: KMockText.filter,
+        FilterBoxWidget(
+          filters: KMockText.tags.elementAt(0)!,
         ),
         KSizedBox.kHeightSizedBox30,
         DropListFieldWidget(
