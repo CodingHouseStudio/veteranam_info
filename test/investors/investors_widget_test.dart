@@ -125,8 +125,27 @@ void main() {
 
         await feedbackHelper(tester: tester);
       });
-      // group(KGroupText.goTo, () {
-      // });
+      group(KGroupText.goTo, () {
+        testWidgets('All footer widget navigation', (tester) async {
+          registerFeedbackBloc();
+          await tester.pumpApp(
+            const InvestorsScreen(),
+            mockGoRouter: mockGoRouter,
+          );
+
+          expect(
+            find.byKey(KWidgetkeys.screen.investors.screen),
+            findsOneWidget,
+          );
+
+          await tester.pumpAndSettle();
+
+          await footerButtonsHelper(
+            tester: tester,
+            mockGoRouter: mockGoRouter,
+          );
+        });
+      });
     });
   });
 }

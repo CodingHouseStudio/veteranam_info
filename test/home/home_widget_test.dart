@@ -144,23 +144,6 @@ void main() {
       });
 
       group(KGroupText.goTo, () {
-        testWidgets('All footer widget navigation', (tester) async {
-          registerHomeBloc();
-          await tester.pumpApp(const HomeScreen(), mockGoRouter: mockGoRouter);
-
-          expect(
-            find.byKey(KWidgetkeys.screen.home.screen),
-            findsOneWidget,
-          );
-
-          await tester.pumpAndSettle();
-
-          await footerButtonsHelper(
-            tester: tester,
-            mockGoRouter: mockGoRouter,
-          );
-        });
-
         testWidgets('nawbar widget navigation', (tester) async {
           registerHomeBloc();
           await tester.pumpApp(const HomeScreen(), mockGoRouter: mockGoRouter);
