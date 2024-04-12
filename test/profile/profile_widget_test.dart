@@ -35,8 +35,6 @@ void main() {
           findsOneWidget,
         );
 
-        //await chekPointHelper(tester);
-
         await tester.pumpAndSettle();
       });
       // group(KGroupText.goTo, () {
