@@ -7,7 +7,7 @@ import '../text_dependency.dart';
 void main() {
   setupFirebaseAuthMocks();
 
-  group(KScreenBlocName.languageCubit, () {
+  group('${KScreenBlocName.languageCubit} ', () {
     late LanguageCubit languageCubit;
     setUp(() => languageCubit = LanguageCubit());
     blocTest<LanguageCubit, Language?>(

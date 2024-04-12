@@ -1,8 +1,10 @@
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:kozak/bootstrap.dart';
+import 'package:kozak/firebase_options_development.dart';
 import 'package:kozak/shared/shared.dart';
 
 Future<void> setUpGlobal({bool? kIsWeb}) async {
@@ -11,12 +13,25 @@ Future<void> setUpGlobal({bool? kIsWeb}) async {
   };
 
   Bloc.observer = const AppBlocObserver();
+  if (kIsWeb != null) {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+  } else {
+    await Firebase.initializeApp(); // normally would initialize Firebase
+  }
+
+  // FlutterSecureStorage.setMockInitialValues({});
 }
 
 abstract class KGroupText {
   static const repository = 'Repository';
   static const model = 'Model';
+  static const fiedlModel = 'Field model';
   static const successfulGet = 'Successful get';
+  static const successfulSet = 'Successful set';
+  static const failureGet = 'Failure get';
+  static const failureSet = 'Failure set';
   static const intial = 'renders initial';
   static const goRouter = 'Mock Go Router';
   static const goTo = 'go to';
@@ -65,6 +80,26 @@ abstract class KTestText {
           'вакансії, які відповідають вашим критеріям.',
     ),
   ];
+
+  static final feedbackModel = FeedbackModel(
+    id: DateTime(2024, 4, 12, 0, 0, 0, 1).microsecondsSinceEpoch.toString(),
+    guestId:
+        DateTime(2024, 4, 12, 0, 0, 0, 1).microsecondsSinceEpoch.toString(),
+    guestName: KTestText.field,
+    email: KTestText.useremail,
+    timestamp: DateTime(2024, 4, 12, 0, 0, 0, 1),
+    message: KTestText.field,
+  );
+
+  static final feedbackModelIncorect = FeedbackModel(
+    id: DateTime(2024, 4, 12, 0, 0, 0, 1).microsecondsSinceEpoch.toString(),
+    guestId:
+        DateTime(2024, 4, 12, 0, 0, 0, 1).microsecondsSinceEpoch.toString(),
+    guestName: KTestText.field,
+    email: KTestText.useremailIncorrect,
+    timestamp: DateTime(2024, 4, 12, 0, 0, 0, 1),
+    message: KTestText.field,
+  );
 }
 
 abstract class KTestConstants {
@@ -90,6 +125,7 @@ abstract class KScreenBlocName {
   static const aboutUs = 'About Us Screen';
   static const contact = 'Contact Screen';
   static const consultation = 'Consultation Screen';
+  static const feedback = 'Feedback Widget';
 
   static const filterCubit = 'Filter Cubit';
   static const languageCubit = 'Language Cubit';

@@ -6,7 +6,7 @@ import 'package:kozak/shared/shared.dart';
 import '../text_dependency.dart';
 
 void main() {
-  group(KScreenBlocName.information, () {
+  group('${KScreenBlocName.information} ', () {
     setUp(configureDependenciesTest);
 
     setUpAll(setUpGlobal);
@@ -14,7 +14,7 @@ void main() {
     setupFirebaseAuthMocks();
 
     tearDown(GetIt.I.reset);
-    testWidgets(KGroupText.intial, (tester) async {
+    testWidgets('${KGroupText.intial} ', (tester) async {
       await tester.pumpApp(const InformationScreen());
 
       expect(
@@ -26,10 +26,10 @@ void main() {
 
       await newsCardHelper(tester: tester);
     });
-    group(KGroupText.goRouter, () {
+    group('${KGroupText.goRouter} ', () {
       late MockGoRouter mockGoRouter;
       setUp(() => mockGoRouter = MockGoRouter());
-      testWidgets(KGroupText.intial, (tester) async {
+      testWidgets('${KGroupText.intial} ', (tester) async {
         await tester.pumpApp(
           const InformationScreen(),
           mockGoRouter: mockGoRouter,
@@ -45,7 +45,7 @@ void main() {
         await newsCardHelper(tester: tester);
       });
 
-      // group(KGroupText.goTo, () {
+      // group('${KGroupText.goTo} ', () {
       // });
     });
   });
