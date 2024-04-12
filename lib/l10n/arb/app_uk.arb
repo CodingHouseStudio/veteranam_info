@@ -55,5 +55,7 @@
   "tooshort": "за коротке",
   "tooshortEmail": "Закоротка",
   "isWrong": "не вірне",
-  "isWrongEmail": "не вірна"
+  "isWrongEmail": "не вірна",
+  "logOut" : "Вийти",
+  "deleteAccount" : "Видалити акаунт"
 }
