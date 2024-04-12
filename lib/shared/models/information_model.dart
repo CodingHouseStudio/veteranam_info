@@ -10,6 +10,7 @@ class InformationModel with _$InformationModel {
     required String title,
     required String news,
     required DateTime date,
+    @Default(<String>[]) List<String>? tags,
     String? image,
   }) = _InformationModel;
 

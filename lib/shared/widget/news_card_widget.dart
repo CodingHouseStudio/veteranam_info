@@ -4,22 +4,18 @@ import 'package:kozak/shared/shared.dart';
 
 class NewsCardWidget extends StatelessWidget {
   const NewsCardWidget({
-    required this.newsDate,
-    required this.news,
-    required this.title,
+    required this.informationItem,
+    required this.isDesk,
     super.key,
-    this.image,
   });
-  final String title;
-  final DateTime newsDate;
-  final String news;
-  final String? image;
+  final InformationModel informationItem;
+  final bool isDesk;
 
   @override
   Widget build(BuildContext context) {
     return CardTextDetailEvaluateWidget(
-      image: image,
-      text: news,
+      image: informationItem.image,
+      text: informationItem.news,
       buttonText: [
         context.l10n.readMore,
         context.l10n.readLess,
@@ -29,49 +25,52 @@ class NewsCardWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
-            title,
+            informationItem.title,
             key: KWidgetkeys.widget.newsCard.title,
-            style: AppTextStyle.text40,
+            style: isDesk ? AppTextStyle.text40 : AppTextStyle.text24,
           ),
           Text(
-            newsDate.toLocal().toString().split(' ')[0],
+            informationItem.date.toLocal().toString().split(' ')[0],
             key: KWidgetkeys.widget.newsCard.date,
-            style: AppTextStyle.text16.copyWith(color: AppColors.lightGray),
+            style: AppTextStyle.hint16,
           ),
         ],
       ),
-      bottom: Padding(
-        padding: const EdgeInsets.only(
-          bottom: KPadding.kPaddingSize16,
-          top: KPadding.kPaddingSize24,
-        ),
-        child: Wrap(
-          spacing: KSize.kWrapSpacing8,
-          runSpacing: KSize.kWrapRunSpacing4,
-          children: KMockText.tags.map((tag) {
-            return Container(
-              key: KWidgetkeys.widget.newsCard.tags,
-              decoration: KWidetTheme.boxDecorationCard,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  vertical: KPadding.kPaddingSize4,
-                  horizontal: KPadding.kPaddingSize8,
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      tag,
-                      style: AppTextStyle.text14,
-                    ),
-                    KIcon.check,
-                  ],
-                ),
+      bottom: informationItem.tags != null
+          ? Padding(
+              padding: const EdgeInsets.only(
+                bottom: KPadding.kPaddingSize16,
+                top: KPadding.kPaddingSize24,
               ),
-            );
-          }).toList(),
-        ),
-      ),
+              child: Wrap(
+                key: KWidgetkeys.widget.newsCard.tags,
+                spacing: KSize.kWrapSpacing8,
+                runSpacing: KSize.kWrapRunSpacing4,
+                children: informationItem.tags!.map((tag) {
+                  return Container(
+                    decoration: KWidetTheme.boxDecorationCard,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: KPadding.kPaddingSize4,
+                        horizontal: KPadding.kPaddingSize8,
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            tag,
+                            style: AppTextStyle.text14,
+                          ),
+                          KIcon.check,
+                        ],
+                      ),
+                    ),
+                  );
+                }).toList(),
+              ),
+            )
+          : null,
+      isDesk: isDesk,
     );
   }
 }
