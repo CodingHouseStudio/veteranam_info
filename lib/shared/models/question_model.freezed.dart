@@ -21,7 +21,9 @@ QuestionModel _$QuestionModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$QuestionModel {
   String get id => throw _privateConstructorUsedError;
+  @TitleConverter()
   String get title => throw _privateConstructorUsedError;
+  @SubtitleConverter()
   String get subtitle => throw _privateConstructorUsedError;
   String? get navigationLink => throw _privateConstructorUsedError;
 
@@ -37,7 +39,11 @@ abstract class $QuestionModelCopyWith<$Res> {
           QuestionModel value, $Res Function(QuestionModel) then) =
       _$QuestionModelCopyWithImpl<$Res, QuestionModel>;
   @useResult
-  $Res call({String id, String title, String subtitle, String? navigationLink});
+  $Res call(
+      {String id,
+      @TitleConverter() String title,
+      @SubtitleConverter() String subtitle,
+      String? navigationLink});
 }
 
 /// @nodoc
@@ -87,7 +93,11 @@ abstract class _$$QuestionModelImplCopyWith<$Res>
       __$$QuestionModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String title, String subtitle, String? navigationLink});
+  $Res call(
+      {String id,
+      @TitleConverter() String title,
+      @SubtitleConverter() String subtitle,
+      String? navigationLink});
 }
 
 /// @nodoc
@@ -132,8 +142,8 @@ class __$$QuestionModelImplCopyWithImpl<$Res>
 class _$QuestionModelImpl implements _QuestionModel {
   const _$QuestionModelImpl(
       {required this.id,
-      required this.title,
-      required this.subtitle,
+      @TitleConverter() required this.title,
+      @SubtitleConverter() required this.subtitle,
       this.navigationLink});
 
   factory _$QuestionModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -142,8 +152,10 @@ class _$QuestionModelImpl implements _QuestionModel {
   @override
   final String id;
   @override
+  @TitleConverter()
   final String title;
   @override
+  @SubtitleConverter()
   final String subtitle;
   @override
   final String? navigationLink;
@@ -188,8 +200,8 @@ class _$QuestionModelImpl implements _QuestionModel {
 abstract class _QuestionModel implements QuestionModel {
   const factory _QuestionModel(
       {required final String id,
-      required final String title,
-      required final String subtitle,
+      @TitleConverter() required final String title,
+      @SubtitleConverter() required final String subtitle,
       final String? navigationLink}) = _$QuestionModelImpl;
 
   factory _QuestionModel.fromJson(Map<String, dynamic> json) =
@@ -198,8 +210,10 @@ abstract class _QuestionModel implements QuestionModel {
   @override
   String get id;
   @override
+  @TitleConverter()
   String get title;
   @override
+  @SubtitleConverter()
   String get subtitle;
   @override
   String? get navigationLink;
