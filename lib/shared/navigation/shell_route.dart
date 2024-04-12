@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:kozak/shared/shared.dart';
 
 class ScaffoldWithNavBar extends StatelessWidget {
   const ScaffoldWithNavBar({
     required this.navigationShell,
-    // required this.goRouterState,
+    required this.goRouterState,
     super.key,
   });
   final Widget navigationShell;
-  // final GoRouterState goRouterState;
+  final GoRouterState goRouterState;
 
   @override
   Widget build(BuildContext context) {
@@ -24,16 +25,8 @@ class ScaffoldWithNavBar extends StatelessWidget {
         return Scaffold(
           appBar: NawbarWidget(
             isDesk: isDesk,
-            padding: EdgeInsets.symmetric(
-              horizontal: isDesk
-                  ? 0
-                  : KPadding.kPaddingSize75 *
-                      (isMobile
-                          ? KPlatformConstants.mobilePaddingKoefficient
-                          : (isTablet
-                              ? KPlatformConstants.tabletPaddingKoefficient
-                              : KPlatformConstants.desktopPaddingKoefficient)),
-            ),
+            padding: padding,
+            hasMicrophone: goRouterState.fullPath != KRoute.home.path,
           ),
           body: ListView(
             key: KWidgetkeys.widget.shellRoute.scroll,

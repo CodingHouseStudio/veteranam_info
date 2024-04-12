@@ -4,9 +4,15 @@ import 'package:go_router/go_router.dart';
 import 'package:kozak/shared/shared.dart';
 
 class NawbarWidget extends StatefulWidget implements PreferredSizeWidget {
-  const NawbarWidget({required this.isDesk, required this.padding, super.key});
+  const NawbarWidget({
+    required this.isDesk,
+    required this.padding,
+    this.hasMicrophone = true,
+    super.key,
+  });
   final bool isDesk;
   final EdgeInsets padding;
+  final bool hasMicrophone;
 
   @override
   Size get preferredSize => const Size.fromHeight(KSize.kPreferredSize);
@@ -85,7 +91,7 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                   prefixIcon: KIcon.search,
                   onChanged: (text) {},
                   hintText: context.l10n.search,
-                  suffixIcon: widget.isDesk
+                  suffixIcon: widget.isDesk || !widget.hasMicrophone
                       ? null
                       : KIcon.mic.setIconKey(
                           KWidgetkeys.widget.nawbar.iconMic,
@@ -97,7 +103,7 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                   isDesk: widget.isDesk,
                 ),
               ),
-              if (widget.isDesk)
+              if (widget.isDesk && widget.hasMicrophone)
                 Padding(
                   padding:
                       const EdgeInsets.only(right: KPadding.kPaddingSize32),

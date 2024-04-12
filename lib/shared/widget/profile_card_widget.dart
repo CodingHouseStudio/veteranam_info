@@ -26,7 +26,11 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _buildProfileHeader(),
-                KSizedBox.kHeightSizedBox30,
+                if (isEditing)
+                  _editProfileNameAndLastName()
+                else
+                  _displayProfileName(),
+                KSizedBox.kHeightSizedBox8,
                 _buildProfileInfo(),
                 KSizedBox.kHeightSizedBox8,
                 _buildProfileFooter(),
@@ -54,10 +58,6 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
           ),
         ),
         KSizedBox.kWidthSizedBox30,
-        Expanded(
-          child:
-              isEditing ? _editProfileNameAndLastName() : _displayProfileName(),
-        ),
       ],
     );
   }
@@ -114,9 +114,9 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _textField('E-mail:', KMockText.email),
+        _textField(context.l10n.email, KMockText.email),
         KSizedBox.kHeightSizedBox8,
-        _textField('Nickname:', KMockText.nickname),
+        _textField(context.l10n.nickname, KMockText.nickname),
       ],
     );
   }
@@ -132,7 +132,7 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
             Expanded(child: Text(context.l10n.beAnonymous)),
           ],
         ),
-        const Text(KMockText.description, style: AppTextStyle.hint14),
+        Text(context.l10n.beAnonymousDetails, style: AppTextStyle.hint14),
         if (isEditing)
           Padding(
             padding: const EdgeInsets.only(
