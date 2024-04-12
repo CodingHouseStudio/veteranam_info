@@ -139,9 +139,3 @@ doc/api/
 .flutter-plugins
 .flutter-plugins-dependencies
 >>>>>>> 20c49b4 (Initial commit)
-# generated files flutter
-*.g.dart
-*.freezed.dart
-
-# generated mockito files
-*.mocks.dart
