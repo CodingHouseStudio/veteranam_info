@@ -46,15 +46,15 @@ class _NawbarWidgetState extends State<NawbarWidget> {
           color: AppColors.widgetBackground,
         ),
         child: Padding(
-          padding: const EdgeInsets.all(KPadding.kPaddingSize10),
+          padding: const EdgeInsets.all(KPadding.kPaddingSize8),
           child: Row(
             children: [
               if (widget.isDesk || !isFocused)
                 Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: widget.isDesk
-                        ? KPadding.kPaddingSize30
-                        : KPadding.kPaddingSize10,
+                  padding: EdgeInsets.only(
+                    left: widget.isDesk
+                        ? KPadding.kPaddingSize24
+                        : KPadding.kPaddingSize8,
                   ),
                   child: InkWell(
                     onTap: () => EasyDebounce.debounce(
@@ -71,6 +71,10 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                     ),
                   ),
                 ),
+              if (widget.isDesk)
+                KSizedBox.kWidthSizedBox40
+              else
+                KSizedBox.kWidthSizedBox22,
               Expanded(
                 child: TextFieldWidget(
                   key: _formKey,
@@ -109,18 +113,14 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                   child: LanguagesSwitcherWidget(),
                 ),
               if (widget.isDesk)
-                Row(
-                  children: [
-                    TextButton(
-                      key: KWidgetkeys.widget.nawbar.button,
-                      style: KButtonStyles.whiteButtonStyle,
-                      onPressed: null,
-                      child: Text(
-                        context.l10n.login,
-                        style: AppTextStyle.text24,
-                      ),
-                    ),
-                  ],
+                TextButton(
+                  key: KWidgetkeys.widget.nawbar.button,
+                  style: KButtonStyles.whiteButtonStyle,
+                  onPressed: null,
+                  child: Text(
+                    context.l10n.login,
+                    style: AppTextStyle.text24,
+                  ),
                 )
               else if (!isFocused)
                 IconWidget(
