@@ -3,9 +3,10 @@ import 'package:kozak/shared/shared.dart';
 
 import '../../../text_dependency.dart';
 
-Future<void> feedbackHelper(
-  WidgetTester tester,
-) async {
+Future<void> feedbackHelper({
+  required WidgetTester tester,
+  bool isSuccess = false,
+}) async {
   expect(
     find.byKey(KWidgetkeys.widget.feedback.buttonSave),
     findsOneWidget,
@@ -43,12 +44,12 @@ Future<void> feedbackHelper(
 
   expect(
     find.byKey(KWidgetkeys.widget.feedback.subtitle),
-    findsOneWidget,
+    isSuccess ? findsNothing : findsOneWidget,
   );
 
   expect(
     find.byKey(KWidgetkeys.widget.feedback.title),
-    findsOneWidget,
+    isSuccess ? findsNothing : findsOneWidget,
   );
 
   expect(
@@ -58,7 +59,7 @@ Future<void> feedbackHelper(
 
   expect(
     find.byKey(KWidgetkeys.widget.feedback.saveMessage),
-    findsNothing,
+    isSuccess ? findsOneWidget : findsNothing,
   );
 
   await messageFieldHelper(tester: tester, message: KTestText.field);

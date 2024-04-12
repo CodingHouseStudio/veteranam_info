@@ -1,7 +1,9 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
+import 'package:mockito/mockito.dart';
 
 import '../text_dependency.dart';
 import 'home_widget/boxes_helper.dart';
@@ -15,8 +17,41 @@ void main() {
   setupFirebaseAuthMocks();
 
   tearDown(GetIt.I.reset);
-  group(KScreenBlocName.home, () {
-    testWidgets(KGroupText.intial, (tester) async {
+  group('${KScreenBlocName.home} ', () {
+    late IHomeRepository mockHomeRepository;
+    late HomeWatcherBloc homeBloc;
+    late IFeedbackRepository mockFeedbackRepository;
+    late FeedbackBloc feedbackBloc;
+    setUp(() {
+      ExtendedDateTime.customTime = KTestText.feedbackModel.timestamp;
+      mockHomeRepository = MockIHomeRepository();
+      when(mockHomeRepository.getQuestions()).thenAnswer(
+        (invocation) async => const Right(KTestText.questionModelItems),
+      );
+      mockFeedbackRepository = MockIFeedbackRepository();
+      when(mockFeedbackRepository.sendFeedback(KTestText.feedbackModel))
+          .thenAnswer(
+        (invocation) async => const Right(true),
+      );
+    });
+    void registerHomeBloc() {
+      homeBloc = HomeWatcherBloc(homeRepository: mockHomeRepository);
+      if (GetIt.I.isRegistered<HomeWatcherBloc>()) {
+        GetIt.I.unregister<HomeWatcherBloc>();
+      }
+      GetIt.I.registerSingleton<HomeWatcherBloc>(homeBloc);
+    }
+
+    void registerFeedbackBloc() {
+      feedbackBloc = FeedbackBloc(feedbackRepository: mockFeedbackRepository);
+      if (GetIt.I.isRegistered<FeedbackBloc>()) {
+        GetIt.I.unregister<FeedbackBloc>();
+      }
+      GetIt.I.registerSingleton<FeedbackBloc>(feedbackBloc);
+    }
+
+    testWidgets('${KGroupText.intial} ', (tester) async {
+      registerHomeBloc();
       await tester.pumpApp(const HomeScreen());
 
       expect(find.byKey(KWidgetkeys.screen.home.screen), findsOneWidget);
@@ -29,6 +64,8 @@ void main() {
     });
 
     testWidgets('Feedback enter correct text and save it', (tester) async {
+      registerHomeBloc();
+      registerFeedbackBloc();
       await tester.pumpApp(const HomeScreen());
 
       expect(find.byKey(KWidgetkeys.screen.home.screen), findsOneWidget);
@@ -39,11 +76,13 @@ void main() {
         tester: tester,
         email: KTestText.useremail,
         field: KTestText.field,
-        isValid: true,
       );
+
+      await feedbackHelper(tester: tester, isSuccess: true);
     });
 
     testWidgets('Feedback enter incorrect text and save it', (tester) async {
+      registerHomeBloc();
       await tester.pumpApp(const HomeScreen());
 
       expect(find.byKey(KWidgetkeys.screen.home.screen), findsOneWidget);
@@ -54,11 +93,14 @@ void main() {
         tester: tester,
         email: KTestText.useremailIncorrect,
         field: KTestText.field,
-        isValid: false,
       );
+
+      await feedbackHelper(tester: tester);
     });
 
     testWidgets('Feedback enter text and clear it', (tester) async {
+      registerHomeBloc();
+      registerFeedbackBloc();
       await tester.pumpApp(const HomeScreen());
 
       expect(find.byKey(KWidgetkeys.screen.home.screen), findsOneWidget);
@@ -72,10 +114,11 @@ void main() {
       );
     });
 
-    group(KGroupText.goRouter, () {
+    group('${KGroupText.goRouter} ', () {
       late MockGoRouter mockGoRouter;
       setUp(() => mockGoRouter = MockGoRouter());
-      testWidgets(KGroupText.intial, (tester) async {
+      testWidgets('${KGroupText.intial} ', (tester) async {
+        registerHomeBloc();
         await tester.pumpApp(const HomeScreen(), mockGoRouter: mockGoRouter);
 
         expect(find.byKey(KWidgetkeys.screen.home.screen), findsOneWidget);
@@ -85,21 +128,9 @@ void main() {
         await listQuestionHelper(tester);
       });
 
-      group(KGroupText.goTo, () {
-        testWidgets('All footer widget navigation', (tester) async {
-          await tester.pumpApp(const HomeScreen(), mockGoRouter: mockGoRouter);
-
-          expect(find.byKey(KWidgetkeys.screen.home.screen), findsOneWidget);
-
-          await tester.pumpAndSettle();
-
-          await footerButtonsHelper(
-            tester: tester,
-            mockGoRouter: mockGoRouter,
-          );
-        });
-
+      group('${KGroupText.goTo} ', () {
         testWidgets('nawbar widget navigation', (tester) async {
+          registerHomeBloc();
           await tester.pumpApp(const HomeScreen(), mockGoRouter: mockGoRouter);
 
           expect(
@@ -116,6 +147,7 @@ void main() {
         });
 
         testWidgets('box widget navigation', (tester) async {
+          registerHomeBloc();
           await tester.pumpApp(const HomeScreen(), mockGoRouter: mockGoRouter);
 
           expect(find.byKey(KWidgetkeys.screen.home.screen), findsOneWidget);

@@ -13,8 +13,8 @@ void main() {
   setupFirebaseAuthMocks();
 
   tearDown(GetIt.I.reset);
-  group(KScreenBlocName.work, () {
-    testWidgets(KGroupText.intial, (tester) async {
+  group('${KScreenBlocName.work} ', () {
+    testWidgets('${KGroupText.intial} ', (tester) async {
       await tester.pumpApp(const WorkScreen());
 
       expect(
@@ -30,10 +30,10 @@ void main() {
 
       await footerHelper(tester: tester, email: KTestText.useremail);
     });
-    group(KGroupText.goRouter, () {
+    group('${KGroupText.goRouter} ', () {
       late MockGoRouter mockGoRouter;
       setUp(() => mockGoRouter = MockGoRouter());
-      testWidgets(KGroupText.intial, (tester) async {
+      testWidgets('${KGroupText.intial} ', (tester) async {
         await tester.pumpApp(const WorkScreen(), mockGoRouter: mockGoRouter);
 
         expect(
@@ -47,7 +47,7 @@ void main() {
 
         await workCardHelper(tester);
       });
-      // group(KGroupText.goTo, () {
+      // group('${KGroupText.goTo} ', () {
       // });
     });
   });

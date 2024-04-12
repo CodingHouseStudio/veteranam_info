@@ -10,13 +10,15 @@ part 'feedback_bloc.freezed.dart';
 
 @Injectable()
 class FeedbackBloc extends Bloc<FeedbackEvent, FeedbackState> {
-  FeedbackBloc()
-      : super(
+  FeedbackBloc({required IFeedbackRepository feedbackRepository})
+      : _feedbackRepository = feedbackRepository,
+        super(
           const _FeedbackState(
             email: EmailFieldModel.pure(),
             message: MessageFieldModel.pure(),
             name: NameFieldModel.pure(),
             fieldsState: FeedbackEnum.initial,
+            failure: FeedbackFailure.initial,
           ),
         ) {
     on<_NameUpdated>(_onNameUpdated);
@@ -25,6 +27,8 @@ class FeedbackBloc extends Bloc<FeedbackEvent, FeedbackState> {
     on<_Save>(_onSave);
     on<_Clear>(_onClear);
   }
+
+  final IFeedbackRepository _feedbackRepository;
 
   Future<void> _onNameUpdated(
     _NameUpdated event,
@@ -76,12 +80,30 @@ class FeedbackBloc extends Bloc<FeedbackEvent, FeedbackState> {
         state.name,
       ],
     )) {
-      emit(
-        const FeedbackState(
-          email: EmailFieldModel.pure(),
-          message: MessageFieldModel.pure(),
-          name: NameFieldModel.pure(),
-          fieldsState: FeedbackEnum.success,
+      final result = await _feedbackRepository.sendFeedback(
+        FeedbackModel(
+          id: ExtendedDateTime.current.microsecondsSinceEpoch.toString(),
+          guestId: ExtendedDateTime.current.microsecondsSinceEpoch.toString(),
+          guestName: state.name.value!,
+          email: state.email.value!,
+          timestamp: ExtendedDateTime.current,
+          message: state.message.value!,
+        ),
+      );
+      result.fold(
+        (l) => emit(
+          state.copyWith(
+            failure: l.toFeedback(),
+          ),
+        ),
+        (r) => emit(
+          const FeedbackState(
+            email: EmailFieldModel.pure(),
+            message: MessageFieldModel.pure(),
+            name: NameFieldModel.pure(),
+            fieldsState: FeedbackEnum.success,
+            failure: FeedbackFailure.none,
+          ),
         ),
       );
     } else {
@@ -99,6 +121,7 @@ class FeedbackBloc extends Bloc<FeedbackEvent, FeedbackState> {
         message: MessageFieldModel.pure(),
         name: NameFieldModel.pure(),
         fieldsState: FeedbackEnum.initial,
+        failure: FeedbackFailure.initial,
       ),
     );
   }

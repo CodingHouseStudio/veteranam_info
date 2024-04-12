@@ -14,7 +14,7 @@ void main() {
   tearDownAll(getIt.reset);
 
   testWidgets('Navigation test', (tester) async {
-    await homeHelper(tester);
+    await appHelper(tester);
 
     await footerHelper(
       tester: tester,
