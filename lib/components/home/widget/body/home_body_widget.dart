@@ -34,10 +34,15 @@ class HomeBodyWidget extends StatelessWidget {
                   case HomeWatcherStateLoading():
                     return const CircularProgressIndicator.adaptive();
                   case HomeWatcherStateSuccess():
-                    return state.questionModelItems.isNotEmpty
-                        ? ListQuestionWidget(
-                            questionModelItems: state.questionModelItems,
-                            isDesk: isDesk,
+                    final questionModelItems = state.questionModelItems;
+                    return questionModelItems.isNotEmpty
+                        ? ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: questionModelItems.length,
+                            itemBuilder: (context, index) => ListQuestionWidget(
+                              questionModelItem: questionModelItems[index],
+                              isDesk: isDesk,
+                            ),
                           )
                         : TextButton(
                             key: KWidgetkeys.screen.home.buttonMock,

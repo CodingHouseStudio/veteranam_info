@@ -19,10 +19,7 @@ void main() {
     testWidgets(KGroupText.intial, (tester) async {
       await tester.pumpApp(const HomeScreen());
 
-      expect(
-        find.byKey(KWidgetkeys.screen.home.screen),
-        findsOneWidget,
-      );
+      expect(find.byKey(KWidgetkeys.screen.home.screen), findsOneWidget);
 
       await tester.pumpAndSettle();
 
@@ -34,10 +31,7 @@ void main() {
     testWidgets('Feedback enter correct text and save it', (tester) async {
       await tester.pumpApp(const HomeScreen());
 
-      expect(
-        find.byKey(KWidgetkeys.screen.home.screen),
-        findsOneWidget,
-      );
+      expect(find.byKey(KWidgetkeys.screen.home.screen), findsOneWidget);
 
       await tester.pumpAndSettle();
 
@@ -52,10 +46,7 @@ void main() {
     testWidgets('Feedback enter incorrect text and save it', (tester) async {
       await tester.pumpApp(const HomeScreen());
 
-      expect(
-        find.byKey(KWidgetkeys.screen.home.screen),
-        findsOneWidget,
-      );
+      expect(find.byKey(KWidgetkeys.screen.home.screen), findsOneWidget);
 
       await tester.pumpAndSettle();
 
@@ -70,10 +61,7 @@ void main() {
     testWidgets('Feedback enter text and clear it', (tester) async {
       await tester.pumpApp(const HomeScreen());
 
-      expect(
-        find.byKey(KWidgetkeys.screen.home.screen),
-        findsOneWidget,
-      );
+      expect(find.byKey(KWidgetkeys.screen.home.screen), findsOneWidget);
 
       await tester.pumpAndSettle();
 
@@ -90,10 +78,7 @@ void main() {
       testWidgets(KGroupText.intial, (tester) async {
         await tester.pumpApp(const HomeScreen(), mockGoRouter: mockGoRouter);
 
-        expect(
-          find.byKey(KWidgetkeys.screen.home.screen),
-          findsOneWidget,
-        );
+        expect(find.byKey(KWidgetkeys.screen.home.screen), findsOneWidget);
 
         await tester.pumpAndSettle();
 
@@ -104,10 +89,7 @@ void main() {
         testWidgets('All footer widget navigation', (tester) async {
           await tester.pumpApp(const HomeScreen(), mockGoRouter: mockGoRouter);
 
-          expect(
-            find.byKey(KWidgetkeys.screen.home.screen),
-            findsOneWidget,
-          );
+          expect(find.byKey(KWidgetkeys.screen.home.screen), findsOneWidget);
 
           await tester.pumpAndSettle();
 
@@ -136,10 +118,7 @@ void main() {
         testWidgets('box widget navigation', (tester) async {
           await tester.pumpApp(const HomeScreen(), mockGoRouter: mockGoRouter);
 
-          expect(
-            find.byKey(KWidgetkeys.screen.home.screen),
-            findsOneWidget,
-          );
+          expect(find.byKey(KWidgetkeys.screen.home.screen), findsOneWidget);
 
           await tester.pumpAndSettle();
 
