@@ -9,7 +9,6 @@ Future<void> footerHelper({
 }) async {
   await changeWindowSizeHelper(
     tester: tester,
-    windowSize: KTestConstants.windowMobileSize,
   );
   await scrollingHelper(
     tester: tester,
@@ -47,7 +46,7 @@ Future<void> footerHelper({
     }
   }
 
-  await changeWindowSizeHelper(tester: tester);
+  await changeWindowSizeHelper(tester: tester, setDefaultSize: true);
 
   expect(find.byKey(KWidgetkeys.widget.footer.logo), findsNothing);
 

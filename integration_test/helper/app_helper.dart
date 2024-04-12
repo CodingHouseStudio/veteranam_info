@@ -10,8 +10,5 @@ Future<void> appHelper(WidgetTester tester) async {
     findsOneWidget,
   );
 
-  await tester.pumpAndSettle();
-
-  // ignore: inference_failure_on_instance_creation
-  await Future.delayed(const Duration(seconds: 4));
+  await tester.pumpAndSettle(const Duration(seconds: 4));
 }
