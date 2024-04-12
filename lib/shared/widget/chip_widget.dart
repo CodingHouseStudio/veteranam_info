@@ -6,11 +6,13 @@ class ChipWidget extends StatelessWidget {
     required this.filter,
     required this.isSelected,
     required this.onSelected,
+    required this.isDesk,
     super.key,
   });
   final String filter;
   final bool isSelected;
   final void Function({required bool isSelected}) onSelected;
+  final bool isDesk;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +20,7 @@ class ChipWidget extends StatelessWidget {
       key: KWidgetkeys.widget.chip.widget,
       label: Text(
         filter,
-        style: AppTextStyle.text18,
+        style: isDesk ? AppTextStyle.text20 : AppTextStyle.text16,
       ),
       shape: RoundedRectangleBorder(
         borderRadius: KBorderRadius.kBorderRadius32,

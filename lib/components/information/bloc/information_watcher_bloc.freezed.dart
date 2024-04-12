@@ -19,7 +19,8 @@ mixin _$InformationWatcherEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(List<InformationModel> informationModel) updated,
+    required TResult Function(List<InformationModel> informationItemsModel)
+        updated,
     required TResult Function() loadNextItems,
     required TResult Function(String? filter) filter,
     required TResult Function() filterReset,
@@ -29,7 +30,7 @@ mixin _$InformationWatcherEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(List<InformationModel> informationModel)? updated,
+    TResult? Function(List<InformationModel> informationItemsModel)? updated,
     TResult? Function()? loadNextItems,
     TResult? Function(String? filter)? filter,
     TResult? Function()? filterReset,
@@ -39,7 +40,7 @@ mixin _$InformationWatcherEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(List<InformationModel> informationModel)? updated,
+    TResult Function(List<InformationModel> informationItemsModel)? updated,
     TResult Function()? loadNextItems,
     TResult Function(String? filter)? filter,
     TResult Function()? filterReset,
@@ -138,7 +139,8 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(List<InformationModel> informationModel) updated,
+    required TResult Function(List<InformationModel> informationItemsModel)
+        updated,
     required TResult Function() loadNextItems,
     required TResult Function(String? filter) filter,
     required TResult Function() filterReset,
@@ -151,7 +153,7 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(List<InformationModel> informationModel)? updated,
+    TResult? Function(List<InformationModel> informationItemsModel)? updated,
     TResult? Function()? loadNextItems,
     TResult? Function(String? filter)? filter,
     TResult? Function()? filterReset,
@@ -164,7 +166,7 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(List<InformationModel> informationModel)? updated,
+    TResult Function(List<InformationModel> informationItemsModel)? updated,
     TResult Function()? loadNextItems,
     TResult Function(String? filter)? filter,
     TResult Function()? filterReset,
@@ -231,7 +233,7 @@ abstract class _$$UpdatedImplCopyWith<$Res> {
           _$UpdatedImpl value, $Res Function(_$UpdatedImpl) then) =
       __$$UpdatedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<InformationModel> informationModel});
+  $Res call({List<InformationModel> informationItemsModel});
 }
 
 /// @nodoc
@@ -245,12 +247,12 @@ class __$$UpdatedImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? informationModel = null,
+    Object? informationItemsModel = null,
   }) {
     return _then(_$UpdatedImpl(
-      null == informationModel
-          ? _value._informationModel
-          : informationModel // ignore: cast_nullable_to_non_nullable
+      null == informationItemsModel
+          ? _value._informationItemsModel
+          : informationItemsModel // ignore: cast_nullable_to_non_nullable
               as List<InformationModel>,
     ));
   }
@@ -259,21 +261,21 @@ class __$$UpdatedImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$UpdatedImpl implements _Updated {
-  const _$UpdatedImpl(final List<InformationModel> informationModel)
-      : _informationModel = informationModel;
+  const _$UpdatedImpl(final List<InformationModel> informationItemsModel)
+      : _informationItemsModel = informationItemsModel;
 
-  final List<InformationModel> _informationModel;
+  final List<InformationModel> _informationItemsModel;
   @override
   List<InformationModel> get informationItemsModel {
-    if (_informationModel is EqualUnmodifiableListView)
-      return _informationModel;
+    if (_informationItemsModel is EqualUnmodifiableListView)
+      return _informationItemsModel;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_informationModel);
+    return EqualUnmodifiableListView(_informationItemsModel);
   }
 
   @override
   String toString() {
-    return 'InformationWatcherEvent.updated(informationModel: $informationItemsModel)';
+    return 'InformationWatcherEvent.updated(informationItemsModel: $informationItemsModel)';
   }
 
   @override
@@ -282,12 +284,12 @@ class _$UpdatedImpl implements _Updated {
         (other.runtimeType == runtimeType &&
             other is _$UpdatedImpl &&
             const DeepCollectionEquality()
-                .equals(other._informationModel, _informationModel));
+                .equals(other._informationItemsModel, _informationItemsModel));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_informationModel));
+      runtimeType, const DeepCollectionEquality().hash(_informationItemsModel));
 
   @JsonKey(ignore: true)
   @override
@@ -299,7 +301,8 @@ class _$UpdatedImpl implements _Updated {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(List<InformationModel> informationModel) updated,
+    required TResult Function(List<InformationModel> informationItemsModel)
+        updated,
     required TResult Function() loadNextItems,
     required TResult Function(String? filter) filter,
     required TResult Function() filterReset,
@@ -312,7 +315,7 @@ class _$UpdatedImpl implements _Updated {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(List<InformationModel> informationModel)? updated,
+    TResult? Function(List<InformationModel> informationItemsModel)? updated,
     TResult? Function()? loadNextItems,
     TResult? Function(String? filter)? filter,
     TResult? Function()? filterReset,
@@ -325,7 +328,7 @@ class _$UpdatedImpl implements _Updated {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(List<InformationModel> informationModel)? updated,
+    TResult Function(List<InformationModel> informationItemsModel)? updated,
     TResult Function()? loadNextItems,
     TResult Function(String? filter)? filter,
     TResult Function()? filterReset,
@@ -383,7 +386,7 @@ class _$UpdatedImpl implements _Updated {
 }
 
 abstract class _Updated implements InformationWatcherEvent {
-  const factory _Updated(final List<InformationModel> informationModel) =
+  const factory _Updated(final List<InformationModel> informationItemsModel) =
       _$UpdatedImpl;
 
   List<InformationModel> get informationItemsModel;
@@ -431,7 +434,8 @@ class _$LoadNextItemsImpl implements _LoadNextItems {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(List<InformationModel> informationModel) updated,
+    required TResult Function(List<InformationModel> informationItemsModel)
+        updated,
     required TResult Function() loadNextItems,
     required TResult Function(String? filter) filter,
     required TResult Function() filterReset,
@@ -444,7 +448,7 @@ class _$LoadNextItemsImpl implements _LoadNextItems {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(List<InformationModel> informationModel)? updated,
+    TResult? Function(List<InformationModel> informationItemsModel)? updated,
     TResult? Function()? loadNextItems,
     TResult? Function(String? filter)? filter,
     TResult? Function()? filterReset,
@@ -457,7 +461,7 @@ class _$LoadNextItemsImpl implements _LoadNextItems {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(List<InformationModel> informationModel)? updated,
+    TResult Function(List<InformationModel> informationItemsModel)? updated,
     TResult Function()? loadNextItems,
     TResult Function(String? filter)? filter,
     TResult Function()? filterReset,
@@ -583,7 +587,8 @@ class _$FilterImpl implements _Filter {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(List<InformationModel> informationModel) updated,
+    required TResult Function(List<InformationModel> informationItemsModel)
+        updated,
     required TResult Function() loadNextItems,
     required TResult Function(String? filter) filter,
     required TResult Function() filterReset,
@@ -596,7 +601,7 @@ class _$FilterImpl implements _Filter {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(List<InformationModel> informationModel)? updated,
+    TResult? Function(List<InformationModel> informationItemsModel)? updated,
     TResult? Function()? loadNextItems,
     TResult? Function(String? filter)? filter,
     TResult? Function()? filterReset,
@@ -609,7 +614,7 @@ class _$FilterImpl implements _Filter {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(List<InformationModel> informationModel)? updated,
+    TResult Function(List<InformationModel> informationItemsModel)? updated,
     TResult Function()? loadNextItems,
     TResult Function(String? filter)? filter,
     TResult Function()? filterReset,
@@ -714,7 +719,8 @@ class _$FilterResetImpl implements _FilterReset {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(List<InformationModel> informationModel) updated,
+    required TResult Function(List<InformationModel> informationItemsModel)
+        updated,
     required TResult Function() loadNextItems,
     required TResult Function(String? filter) filter,
     required TResult Function() filterReset,
@@ -727,7 +733,7 @@ class _$FilterResetImpl implements _FilterReset {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(List<InformationModel> informationModel)? updated,
+    TResult? Function(List<InformationModel> informationItemsModel)? updated,
     TResult? Function()? loadNextItems,
     TResult? Function(String? filter)? filter,
     TResult? Function()? filterReset,
@@ -740,7 +746,7 @@ class _$FilterResetImpl implements _FilterReset {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(List<InformationModel> informationModel)? updated,
+    TResult Function(List<InformationModel> informationItemsModel)? updated,
     TResult Function()? loadNextItems,
     TResult Function(String? filter)? filter,
     TResult Function()? filterReset,
@@ -840,7 +846,8 @@ class _$FailureImpl implements _Failure {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(List<InformationModel> informationModel) updated,
+    required TResult Function(List<InformationModel> informationItemsModel)
+        updated,
     required TResult Function() loadNextItems,
     required TResult Function(String? filter) filter,
     required TResult Function() filterReset,
@@ -853,7 +860,7 @@ class _$FailureImpl implements _Failure {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(List<InformationModel> informationModel)? updated,
+    TResult? Function(List<InformationModel> informationItemsModel)? updated,
     TResult? Function()? loadNextItems,
     TResult? Function(String? filter)? filter,
     TResult? Function()? filterReset,
@@ -866,7 +873,7 @@ class _$FailureImpl implements _Failure {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(List<InformationModel> informationModel)? updated,
+    TResult Function(List<InformationModel> informationItemsModel)? updated,
     TResult Function()? loadNextItems,
     TResult Function(String? filter)? filter,
     TResult Function()? filterReset,

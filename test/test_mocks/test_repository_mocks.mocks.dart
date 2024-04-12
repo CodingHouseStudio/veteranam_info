@@ -3,6 +3,8 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'dart:async' as _i3;
+
 import 'package:kozak/shared/shared.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 
@@ -37,6 +39,33 @@ class MockIHomeRepository extends _i1.Mock implements _i2.IHomeRepository {
   void addMockQuestions() => super.noSuchMethod(
         Invocation.method(
           #addMockQuestions,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+}
+
+/// A class which mocks [IInformationRepository].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockIInformationRepository extends _i1.Mock
+    implements _i2.IInformationRepository {
+  @override
+  _i3.Stream<List<_i2.InformationModel>> getInformationItems() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getInformationItems,
+          [],
+        ),
+        returnValue: _i3.Stream<List<_i2.InformationModel>>.empty(),
+        returnValueForMissingStub:
+            _i3.Stream<List<_i2.InformationModel>>.empty(),
+      ) as _i3.Stream<List<_i2.InformationModel>>);
+
+  @override
+  void addMockInformationItems() => super.noSuchMethod(
+        Invocation.method(
+          #addMockInformationItems,
           [],
         ),
         returnValueForMissingStub: null,
