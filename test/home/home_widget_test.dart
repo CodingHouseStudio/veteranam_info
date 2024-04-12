@@ -17,7 +17,7 @@ void main() {
   setupFirebaseAuthMocks();
 
   tearDown(GetIt.I.reset);
-  group(KScreenBlocName.home, () {
+  group('${KScreenBlocName.home} ', () {
     late IHomeRepository mockHomeRepository;
     late HomeWatcherBloc homeBloc;
     late IFeedbackRepository mockFeedbackRepository;
@@ -50,7 +50,7 @@ void main() {
       GetIt.I.registerSingleton<FeedbackBloc>(feedbackBloc);
     }
 
-    testWidgets(KGroupText.intial, (tester) async {
+    testWidgets('${KGroupText.intial} ', (tester) async {
       registerHomeBloc();
       await tester.pumpApp(const HomeScreen());
 
@@ -114,10 +114,10 @@ void main() {
       );
     });
 
-    group(KGroupText.goRouter, () {
+    group('${KGroupText.goRouter} ', () {
       late MockGoRouter mockGoRouter;
       setUp(() => mockGoRouter = MockGoRouter());
-      testWidgets(KGroupText.intial, (tester) async {
+      testWidgets('${KGroupText.intial} ', (tester) async {
         registerHomeBloc();
         await tester.pumpApp(const HomeScreen(), mockGoRouter: mockGoRouter);
 
@@ -128,7 +128,7 @@ void main() {
         await listQuestionHelper(tester);
       });
 
-      group(KGroupText.goTo, () {
+      group('${KGroupText.goTo} ', () {
         testWidgets('nawbar widget navigation', (tester) async {
           registerHomeBloc();
           await tester.pumpApp(const HomeScreen(), mockGoRouter: mockGoRouter);

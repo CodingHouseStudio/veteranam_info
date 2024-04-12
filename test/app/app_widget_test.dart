@@ -16,7 +16,7 @@ void main() {
   setupFirebaseAuthMocks();
 
   tearDown(GetIt.I.reset);
-  group(KScreenBlocName.app, () {
+  group('${KScreenBlocName.app} ', () {
     late IHomeRepository mockHomeRepository;
     late HomeWatcherBloc homeBloc;
     setUp(() {
@@ -34,7 +34,7 @@ void main() {
       GetIt.I.registerSingleton<HomeWatcherBloc>(homeBloc);
     }
 
-    testWidgets(KGroupText.intial, (tester) async {
+    testWidgets('${KGroupText.intial} ', (tester) async {
       registerHomeBloc();
       await tester.pumpWidget(const App());
 

@@ -15,7 +15,7 @@ void main() {
   setupFirebaseAuthMocks();
 
   tearDown(GetIt.I.reset);
-  group(KScreenBlocName.investors, () {
+  group('${KScreenBlocName.investors} ', () {
     late IFeedbackRepository mockFeedbackRepository;
     late FeedbackBloc feedbackBloc;
     setUp(() {
@@ -37,7 +37,7 @@ void main() {
       GetIt.I.registerSingleton<FeedbackBloc>(feedbackBloc);
     }
 
-    testWidgets(KGroupText.intial, (tester) async {
+    testWidgets('${KGroupText.intial} ', (tester) async {
       await tester.pumpApp(const InvestorsScreen());
 
       expect(
@@ -107,10 +107,10 @@ void main() {
       );
     });
 
-    group(KGroupText.goRouter, () {
+    group('${KGroupText.goRouter} ', () {
       late MockGoRouter mockGoRouter;
       setUp(() => mockGoRouter = MockGoRouter());
-      testWidgets(KGroupText.intial, (tester) async {
+      testWidgets('${KGroupText.intial} ', (tester) async {
         await tester.pumpApp(
           const InvestorsScreen(),
           mockGoRouter: mockGoRouter,
@@ -125,7 +125,7 @@ void main() {
 
         await feedbackHelper(tester: tester);
       });
-      group(KGroupText.goTo, () {
+      group('${KGroupText.goTo} ', () {
         testWidgets('All footer widget navigation', (tester) async {
           registerFeedbackBloc();
           await tester.pumpApp(

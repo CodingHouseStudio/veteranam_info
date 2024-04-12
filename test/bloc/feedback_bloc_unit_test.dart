@@ -7,8 +7,8 @@ import 'package:mockito/mockito.dart';
 import '../text_dependency.dart';
 
 void main() {
-  group(KScreenBlocName.feedback, () {
-    group(KGroupText.model, () {
+  group('${KScreenBlocName.feedback} ', () {
+    group('${KGroupText.model} ', () {
       test('${KGroupText.shouldBe} ${KGroupText.modelJson}', () {
         final json = {
           'id': KTestText.feedbackModel.id,
@@ -53,7 +53,7 @@ void main() {
         );
       });
     });
-    group(KGroupText.fiedlModel, () {
+    group('${KGroupText.fiedlModel} ', () {
       group('Name ${KGroupText.validationError}', () {
         test('${KGroupText.shouldBe} ${KGroupText.empty}', () {
           const result = NameFieldModel.pure();
@@ -120,7 +120,7 @@ void main() {
       });
     });
   });
-  group(KGroupText.repository, () {
+  group('${KGroupText.repository} ', () {
     late IFeedbackRepository mockFeedbackRepository;
     setUp(() {
       mockFeedbackRepository = MockIFeedbackRepository();
@@ -151,7 +151,7 @@ void main() {
         ),
       );
     });
-    group(KScreenBlocName.feedbackBloc, () {
+    group('${KScreenBlocName.feedbackBloc} ', () {
       late FeedbackBloc feedbackBloc;
       late IFeedbackRepository mockFeedbackRepository;
       setUp(() {

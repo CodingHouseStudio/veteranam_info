@@ -11,8 +11,8 @@ void main() {
   setupFirebaseAuthMocks();
 
   setUpAll(setUpGlobal);
-  group(KScreenBlocName.home, () {
-    group(KGroupText.model, () {
+  group('${KScreenBlocName.home} ', () {
+    group('${KGroupText.model} ', () {
       test('${KGroupText.shouldBe} ${KGroupText.modelJson}', () {
         final json = {
           'id': KTestText.questionModelItems.elementAt(0).id,
@@ -110,9 +110,9 @@ void main() {
         expect(questionModel.navigationLink, null);
       });
     });
-    group(KGroupText.repository, () {
+    group('${KGroupText.repository} ', () {
       late IHomeRepository mockHomeRepository;
-      group(KGroupText.successfulGet, () {
+      group('${KGroupText.successfulGet} ', () {
         setUp(() {
           mockHomeRepository = MockIHomeRepository();
           when(mockHomeRepository.getQuestions()).thenAnswer(
@@ -127,7 +127,7 @@ void main() {
           );
         });
       });
-      group(KGroupText.failureGet, () {
+      group('${KGroupText.failureGet} ', () {
         setUp(() {
           mockHomeRepository = MockIHomeRepository();
           when(mockHomeRepository.getQuestions()).thenAnswer(
@@ -147,7 +147,7 @@ void main() {
       });
     });
 
-    group(KScreenBlocName.homeBloc, () {
+    group('${KScreenBlocName.homeBloc} ', () {
       late HomeWatcherBloc homeWatcherBloc;
       late IHomeRepository mockHomeRepository;
       setUp(() {
