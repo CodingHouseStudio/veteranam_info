@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mocktail/mocktail.dart';
@@ -14,6 +15,8 @@ class MockGoRouter extends Mock implements GoRouter {
   //   initialExtra: null,
   // );
 }
+
+class MockGoRouterState extends Mock implements GoRouterState {}
 
 class MockGoRouterProvider extends StatelessWidget {
   const MockGoRouterProvider({
