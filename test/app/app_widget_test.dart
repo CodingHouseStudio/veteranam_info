@@ -43,7 +43,11 @@ void main() {
         findsOneWidget,
       );
 
-      await nawbarHelper(tester: tester, searchText: KTestText.field);
+      await nawbarHelper(
+        tester: tester,
+        searchText: KTestText.field,
+        hasMic: false,
+      );
 
       await footerHelper(tester: tester, email: KTestText.useremail);
     });

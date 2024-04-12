@@ -54,10 +54,7 @@ void main() {
       registerHomeBloc();
       await tester.pumpApp(const HomeScreen());
 
-      expect(
-        find.byKey(KWidgetkeys.screen.home.screen),
-        findsOneWidget,
-      );
+      expect(find.byKey(KWidgetkeys.screen.home.screen), findsOneWidget);
 
       await tester.pumpAndSettle();
 
@@ -71,10 +68,7 @@ void main() {
       registerFeedbackBloc();
       await tester.pumpApp(const HomeScreen());
 
-      expect(
-        find.byKey(KWidgetkeys.screen.home.screen),
-        findsOneWidget,
-      );
+      expect(find.byKey(KWidgetkeys.screen.home.screen), findsOneWidget);
 
       await tester.pumpAndSettle();
 
@@ -91,10 +85,7 @@ void main() {
       registerHomeBloc();
       await tester.pumpApp(const HomeScreen());
 
-      expect(
-        find.byKey(KWidgetkeys.screen.home.screen),
-        findsOneWidget,
-      );
+      expect(find.byKey(KWidgetkeys.screen.home.screen), findsOneWidget);
 
       await tester.pumpAndSettle();
 
@@ -112,10 +103,7 @@ void main() {
       registerFeedbackBloc();
       await tester.pumpApp(const HomeScreen());
 
-      expect(
-        find.byKey(KWidgetkeys.screen.home.screen),
-        findsOneWidget,
-      );
+      expect(find.byKey(KWidgetkeys.screen.home.screen), findsOneWidget);
 
       await tester.pumpAndSettle();
 
@@ -133,10 +121,7 @@ void main() {
         registerHomeBloc();
         await tester.pumpApp(const HomeScreen(), mockGoRouter: mockGoRouter);
 
-        expect(
-          find.byKey(KWidgetkeys.screen.home.screen),
-          findsOneWidget,
-        );
+        expect(find.byKey(KWidgetkeys.screen.home.screen), findsOneWidget);
 
         await tester.pumpAndSettle();
 
@@ -165,10 +150,7 @@ void main() {
           registerHomeBloc();
           await tester.pumpApp(const HomeScreen(), mockGoRouter: mockGoRouter);
 
-          expect(
-            find.byKey(KWidgetkeys.screen.home.screen),
-            findsOneWidget,
-          );
+          expect(find.byKey(KWidgetkeys.screen.home.screen), findsOneWidget);
 
           await tester.pumpAndSettle();
 
