@@ -53,14 +53,17 @@ class _FeedbackWidgetState extends State<FeedbackWidget> {
       },
       buildWhen: (previous, current) =>
           current.fieldsState != previous.fieldsState,
-      builder: (context, _) => _.fieldsState == FeedbackEnum.success
-          ? Text(
+      builder: (context, _) => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          if (_.fieldsState == FeedbackEnum.success)
+            Text(
               widget.saveMessage ?? context.l10n.feedbackSaveMessage,
               key: KWidgetkeys.widget.feedback.saveMessage,
               style: AppTextStyle.text40,
             )
-          : Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+          else
+            Column(
               children: [
                 Text(
                   widget.title ?? context.l10n.feedback,
@@ -77,104 +80,103 @@ class _FeedbackWidgetState extends State<FeedbackWidget> {
                   key: KWidgetkeys.widget.feedback.subtitle,
                   style: AppTextStyle.text24,
                 ),
-                if (widget.isDesk)
-                  KSizedBox.kHeightSizedBox56
-                else
-                  KSizedBox.kHeightSizedBox24,
-                Text(
-                  context.l10n.name,
-                  key: KWidgetkeys.widget.feedback.name,
-                  style:
-                      widget.isDesk ? AppTextStyle.text40 : AppTextStyle.text32,
-                ),
-                if (widget.isDesk)
-                  KSizedBox.kHeightSizedBox24
-                else
-                  KSizedBox.kHeightSizedBox8,
-                TextFieldWidget(
-                  widgetKey: KWidgetkeys.widget.feedback.fieldName,
-                  errorText: _.fieldsState == FeedbackEnum.invalidData
-                      ? _.name.error.value(context)
-                      : null,
-                  controller: nameController,
-                  onChanged: (value) => context.read<FeedbackBloc>().add(
-                        FeedbackEvent.nameUpdated(value),
-                      ),
-                  hintText: context.l10n.text,
-                  contentPadding: const EdgeInsets.all(KPadding.kPaddingSize32),
-                  hintStyle:
-                      widget.isDesk ? AppTextStyle.hint24 : AppTextStyle.hint16,
-                  isDesk: widget.isDesk,
-                ),
-                if (widget.isDesk)
-                  KSizedBox.kHeightSizedBox32
-                else
-                  KSizedBox.kHeightSizedBox16,
-                Text(
-                  '${context.l10n.email}*',
-                  key: KWidgetkeys.widget.feedback.email,
-                  style:
-                      widget.isDesk ? AppTextStyle.text40 : AppTextStyle.text32,
-                ),
-                if (widget.isDesk)
-                  KSizedBox.kHeightSizedBox24
-                else
-                  KSizedBox.kHeightSizedBox8,
-                TextFieldWidget(
-                  widgetKey: KWidgetkeys.widget.feedback.fieldEmail,
-                  errorText: _.fieldsState == FeedbackEnum.invalidData
-                      ? _.email.error.value(context)
-                      : null,
-                  controller: emailController,
-                  onChanged: (value) => context.read<FeedbackBloc>().add(
-                        FeedbackEvent.emailUpdated(value),
-                      ),
-                  hintText: context.l10n.writeYourEmail,
-                  contentPadding: const EdgeInsets.all(KPadding.kPaddingSize32),
-                  hintStyle:
-                      widget.isDesk ? AppTextStyle.hint24 : AppTextStyle.hint16,
-                  isDesk: widget.isDesk,
-                ),
-                if (widget.isDesk)
-                  KSizedBox.kHeightSizedBox32
-                else
-                  KSizedBox.kHeightSizedBox16,
-                Text(
-                  context.l10n.message,
-                  key: KWidgetkeys.widget.feedback.message,
-                  style:
-                      widget.isDesk ? AppTextStyle.text40 : AppTextStyle.text32,
-                ),
-                if (widget.isDesk)
-                  KSizedBox.kHeightSizedBox24
-                else
-                  KSizedBox.kHeightSizedBox8,
-                MessageFieldWidget(
-                  key: KWidgetkeys.widget.feedback.fieldMessage,
-                  errorText: _.fieldsState == FeedbackEnum.invalidData
-                      ? _.message.error.value(context)
-                      : null,
-                  controller: messageController,
-                  changeMessage: (value) => context.read<FeedbackBloc>().add(
-                        FeedbackEvent.messageUpdated(value),
-                      ),
-                  hintText: widget.messageHint ?? context.l10n.writeYourMessage,
-                  hintStyle:
-                      widget.isDesk ? AppTextStyle.hint24 : AppTextStyle.hint16,
-                  isDesk: widget.isDesk,
-                ),
-                KSizedBox.kHeightSizedBox24,
-                if (widget.isDesk)
-                  Row(
-                    children: buildButtons(isDesk: true),
-                  )
-                else
-                  Column(
-                    children: buildButtons(isDesk: false),
-                  ),
-                KSizedBox.kHeightSizedBox56,
               ],
             ),
+          if (widget.isDesk)
+            KSizedBox.kHeightSizedBox56
+          else
+            KSizedBox.kHeightSizedBox24,
+          Text(
+            context.l10n.name,
+            key: KWidgetkeys.widget.feedback.name,
+            style: widget.isDesk ? AppTextStyle.text40 : AppTextStyle.text32,
+          ),
+          if (widget.isDesk)
+            KSizedBox.kHeightSizedBox24
+          else
+            KSizedBox.kHeightSizedBox8,
+          TextFieldWidget(
+            widgetKey: KWidgetkeys.widget.feedback.fieldName,
+            errorText: _.fieldsState == FeedbackEnum.invalidData
+                ? _.name.error.value(context)
+                : null,
+            controller: nameController,
+            onChanged: (value) => context.read<FeedbackBloc>().add(
+                  FeedbackEvent.nameUpdated(value),
+                ),
+            hintText: context.l10n.text,
+            contentPadding: const EdgeInsets.all(KPadding.kPaddingSize32),
+            hintStyle:
+                widget.isDesk ? AppTextStyle.hint24 : AppTextStyle.hint16,
+            isDesk: widget.isDesk,
+          ),
+          if (widget.isDesk)
+            KSizedBox.kHeightSizedBox32
+          else
+            KSizedBox.kHeightSizedBox16,
+          Text(
+            '${context.l10n.email}*',
+            key: KWidgetkeys.widget.feedback.email,
+            style: widget.isDesk ? AppTextStyle.text40 : AppTextStyle.text32,
+          ),
+          if (widget.isDesk)
+            KSizedBox.kHeightSizedBox24
+          else
+            KSizedBox.kHeightSizedBox8,
+          TextFieldWidget(
+            widgetKey: KWidgetkeys.widget.feedback.fieldEmail,
+            errorText: _.fieldsState == FeedbackEnum.invalidData
+                ? _.email.error.value(context)
+                : null,
+            controller: emailController,
+            onChanged: (value) => context.read<FeedbackBloc>().add(
+                  FeedbackEvent.emailUpdated(value),
+                ),
+            hintText: context.l10n.writeYourEmail,
+            contentPadding: const EdgeInsets.all(KPadding.kPaddingSize32),
+            hintStyle:
+                widget.isDesk ? AppTextStyle.hint24 : AppTextStyle.hint16,
+            isDesk: widget.isDesk,
+          ),
+          if (widget.isDesk)
+            KSizedBox.kHeightSizedBox32
+          else
+            KSizedBox.kHeightSizedBox16,
+          Text(
+            context.l10n.message,
+            key: KWidgetkeys.widget.feedback.message,
+            style: widget.isDesk ? AppTextStyle.text40 : AppTextStyle.text32,
+          ),
+          if (widget.isDesk)
+            KSizedBox.kHeightSizedBox24
+          else
+            KSizedBox.kHeightSizedBox8,
+          MessageFieldWidget(
+            key: KWidgetkeys.widget.feedback.fieldMessage,
+            errorText: _.fieldsState == FeedbackEnum.invalidData
+                ? _.message.error.value(context)
+                : null,
+            controller: messageController,
+            changeMessage: (value) => context.read<FeedbackBloc>().add(
+                  FeedbackEvent.messageUpdated(value),
+                ),
+            hintText: widget.messageHint ?? context.l10n.writeYourMessage,
+            hintStyle:
+                widget.isDesk ? AppTextStyle.hint24 : AppTextStyle.hint16,
+            isDesk: widget.isDesk,
+          ),
+          KSizedBox.kHeightSizedBox24,
+          if (widget.isDesk)
+            Row(
+              children: buildButtons(isDesk: true),
+            )
+          else
+            Column(
+              children: buildButtons(isDesk: false),
+            ),
+          KSizedBox.kHeightSizedBox56,
+        ],
+      ),
     );
   }
 

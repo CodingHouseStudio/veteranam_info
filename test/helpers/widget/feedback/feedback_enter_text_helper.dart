@@ -58,12 +58,6 @@ Future<void> feedbackEnterTextHelper({
     field,
   );
 
-  await scrollingHelper(
-    tester: tester,
-    itemKey: KWidgetkeys.widget.feedback.buttonSave,
-    offset: KTestConstants.scrollingDown,
-  );
-
   await tester.tap(find.byKey(KWidgetkeys.widget.feedback.buttonSave));
 
   await tester.pumpAndSettle();

@@ -1,8 +1,9 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
-import 'package:mocktail/mocktail.dart';
+import 'package:mockito/mockito.dart';
 
 import '../text_dependency.dart';
 import 'home_widget/boxes_helper.dart';
@@ -17,7 +18,40 @@ void main() {
 
   tearDown(GetIt.I.reset);
   group(KScreenBlocName.home, () {
+    late IHomeRepository mockHomeRepository;
+    late HomeWatcherBloc homeBloc;
+    late IFeedbackRepository mockFeedbackRepository;
+    late FeedbackBloc feedbackBloc;
+    setUp(() {
+      ExtendedDateTime.customTime = KTestText.feedbackModel.timestamp;
+      mockHomeRepository = MockIHomeRepository();
+      when(mockHomeRepository.getQuestions()).thenAnswer(
+        (invocation) async => const Right(KTestText.questionModelItems),
+      );
+      mockFeedbackRepository = MockIFeedbackRepository();
+      when(mockFeedbackRepository.sendFeedback(KTestText.feedbackModel))
+          .thenAnswer(
+        (invocation) async => const Right(true),
+      );
+    });
+    void registerHomeBloc() {
+      homeBloc = HomeWatcherBloc(homeRepository: mockHomeRepository);
+      if (GetIt.I.isRegistered<HomeWatcherBloc>()) {
+        GetIt.I.unregister<HomeWatcherBloc>();
+      }
+      GetIt.I.registerSingleton<HomeWatcherBloc>(homeBloc);
+    }
+
+    void registerFeedbackBloc() {
+      feedbackBloc = FeedbackBloc(feedbackRepository: mockFeedbackRepository);
+      if (GetIt.I.isRegistered<FeedbackBloc>()) {
+        GetIt.I.unregister<FeedbackBloc>();
+      }
+      GetIt.I.registerSingleton<FeedbackBloc>(feedbackBloc);
+    }
+
     testWidgets(KGroupText.intial, (tester) async {
+      registerHomeBloc();
       await tester.pumpApp(const HomeScreen());
 
       expect(
@@ -33,21 +67,8 @@ void main() {
     });
 
     testWidgets('Feedback enter correct text and save it', (tester) async {
-      final FeedbackBloc mockFeedbackBloc = MockFeedbackBloc();
-      when(() => mockFeedbackBloc.state).thenReturn(
-        const FeedbackState(
-          email: EmailFieldModel.pure(),
-          message: MessageFieldModel.pure(),
-          name: NameFieldModel.pure(),
-          fieldsState: FeedbackEnum.success,
-          failure: FeedbackFailure.none,
-        ),
-      );
-      if (GetIt.I.isRegistered<FeedbackBloc>()) {
-        GetIt.I.unregister<FeedbackBloc>();
-      }
-      GetIt.I.registerSingleton<FeedbackBloc>(mockFeedbackBloc);
-
+      registerHomeBloc();
+      registerFeedbackBloc();
       await tester.pumpApp(const HomeScreen());
 
       expect(
@@ -57,17 +78,17 @@ void main() {
 
       await tester.pumpAndSettle();
 
-      // await feedbackEnterTextHelper(
-      //   tester: tester,
-      //   email: KTestText.useremail,
-      //   field: KTestText.field,
-      //   isValid: true,
-      // );
+      await feedbackEnterTextHelper(
+        tester: tester,
+        email: KTestText.useremail,
+        field: KTestText.field,
+      );
 
-      await feedbackSuccessHelper(tester);
+      await feedbackHelper(tester: tester, isSuccess: true);
     });
 
     testWidgets('Feedback enter incorrect text and save it', (tester) async {
+      registerHomeBloc();
       await tester.pumpApp(const HomeScreen());
 
       expect(
@@ -83,20 +104,12 @@ void main() {
         field: KTestText.field,
       );
 
-      await feedbackHelper(tester);
+      await feedbackHelper(tester: tester);
     });
 
     testWidgets('Feedback enter text and clear it', (tester) async {
-      if (GetIt.I.isRegistered<IFeedbackRepository>()) {
-        GetIt.I.unregister<IFeedbackRepository>();
-      }
-      if (GetIt.I.isRegistered<FeedbackBloc>()) {
-        GetIt.I.unregister<FeedbackBloc>();
-      }
-      GetIt.I.registerSingleton<IFeedbackRepository>(FeedbackRepository());
-      GetIt.I.registerSingleton<FeedbackBloc>(
-        FeedbackBloc(feedbackRepository: GetIt.I.get<IFeedbackRepository>()),
-      );
+      registerHomeBloc();
+      registerFeedbackBloc();
       await tester.pumpApp(const HomeScreen());
 
       expect(
@@ -117,6 +130,7 @@ void main() {
       late MockGoRouter mockGoRouter;
       setUp(() => mockGoRouter = MockGoRouter());
       testWidgets(KGroupText.intial, (tester) async {
+        registerHomeBloc();
         await tester.pumpApp(const HomeScreen(), mockGoRouter: mockGoRouter);
 
         expect(
@@ -131,6 +145,7 @@ void main() {
 
       group(KGroupText.goTo, () {
         testWidgets('All footer widget navigation', (tester) async {
+          registerHomeBloc();
           await tester.pumpApp(const HomeScreen(), mockGoRouter: mockGoRouter);
 
           expect(
@@ -147,6 +162,7 @@ void main() {
         });
 
         testWidgets('nawbar widget navigation', (tester) async {
+          registerHomeBloc();
           await tester.pumpApp(const HomeScreen(), mockGoRouter: mockGoRouter);
 
           expect(
@@ -163,6 +179,7 @@ void main() {
         });
 
         testWidgets('box widget navigation', (tester) async {
+          registerHomeBloc();
           await tester.pumpApp(const HomeScreen(), mockGoRouter: mockGoRouter);
 
           expect(

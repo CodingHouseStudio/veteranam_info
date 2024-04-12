@@ -1,8 +1,9 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
-import 'package:mocktail/mocktail.dart';
+import 'package:mockito/mockito.dart';
 
 import '../text_dependency.dart';
 
@@ -15,6 +16,27 @@ void main() {
 
   tearDown(GetIt.I.reset);
   group(KScreenBlocName.investors, () {
+    late IFeedbackRepository mockFeedbackRepository;
+    late FeedbackBloc feedbackBloc;
+    setUp(() {
+      {
+        ExtendedDateTime.customTime = KTestText.feedbackModel.timestamp;
+        mockFeedbackRepository = MockIFeedbackRepository();
+        when(mockFeedbackRepository.sendFeedback(KTestText.feedbackModel))
+            .thenAnswer(
+          (invocation) async => const Right(true),
+        );
+      }
+    });
+
+    void registerFeedbackBloc() {
+      feedbackBloc = FeedbackBloc(feedbackRepository: mockFeedbackRepository);
+      if (GetIt.I.isRegistered<FeedbackBloc>()) {
+        GetIt.I.unregister<FeedbackBloc>();
+      }
+      GetIt.I.registerSingleton<FeedbackBloc>(feedbackBloc);
+    }
+
     testWidgets(KGroupText.intial, (tester) async {
       await tester.pumpApp(const InvestorsScreen());
 
@@ -25,25 +47,11 @@ void main() {
 
       await tester.pumpAndSettle();
 
-      await feedbackHelper(tester);
+      await feedbackHelper(tester: tester);
     });
 
     testWidgets('Feedback enter correct text and save it', (tester) async {
-      final FeedbackBloc mockFeedbackBloc = MockFeedbackBloc();
-      when(() => mockFeedbackBloc.state).thenReturn(
-        const FeedbackState(
-          email: EmailFieldModel.pure(),
-          message: MessageFieldModel.pure(),
-          name: NameFieldModel.pure(),
-          fieldsState: FeedbackEnum.success,
-          failure: FeedbackFailure.none,
-        ),
-      );
-      if (GetIt.I.isRegistered<FeedbackBloc>()) {
-        GetIt.I.unregister<FeedbackBloc>();
-      }
-      GetIt.I.registerSingleton<FeedbackBloc>(mockFeedbackBloc);
-
+      registerFeedbackBloc();
       await tester.pumpApp(const InvestorsScreen());
 
       expect(
@@ -53,14 +61,13 @@ void main() {
 
       await tester.pumpAndSettle();
 
-      // await feedbackEnterTextHelper(
-      //   tester: tester,
-      //   email: KTestText.useremail,
-      //   field: KTestText.field,
-      //   isValid: true,
-      // );
+      await feedbackEnterTextHelper(
+        tester: tester,
+        email: KTestText.useremail,
+        field: KTestText.field,
+      );
 
-      await feedbackSuccessHelper(tester);
+      await feedbackHelper(tester: tester, isSuccess: true);
     });
 
     testWidgets('Feedback enter incorrect text and save it', (tester) async {
@@ -79,20 +86,11 @@ void main() {
         field: KTestText.field,
       );
 
-      await feedbackHelper(tester);
+      await feedbackHelper(tester: tester);
     });
 
     testWidgets('Feedback enter text and clear it', (tester) async {
-      if (GetIt.I.isRegistered<IFeedbackRepository>()) {
-        GetIt.I.unregister<IFeedbackRepository>();
-      }
-      if (GetIt.I.isRegistered<FeedbackBloc>()) {
-        GetIt.I.unregister<FeedbackBloc>();
-      }
-      GetIt.I.registerSingleton<IFeedbackRepository>(FeedbackRepository());
-      GetIt.I.registerSingleton<FeedbackBloc>(
-        FeedbackBloc(feedbackRepository: GetIt.I.get<IFeedbackRepository>()),
-      );
+      registerFeedbackBloc();
       await tester.pumpApp(const InvestorsScreen());
 
       expect(
@@ -125,7 +123,7 @@ void main() {
 
         await tester.pumpAndSettle();
 
-        await feedbackHelper(tester);
+        await feedbackHelper(tester: tester);
       });
       // group(KGroupText.goTo, () {
       // });
