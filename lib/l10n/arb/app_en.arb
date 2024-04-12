@@ -60,5 +60,7 @@
   "tooshort": "too short",
   "tooshortEmail": "Email too short",
   "isWrong": "is wrong",
-  "isWrongEmail": "is wrong"
+  "isWrongEmail": "is wrong",
+  "logOut" : " Log out",
+  "deleteAccount" : "Delete account"
 }
