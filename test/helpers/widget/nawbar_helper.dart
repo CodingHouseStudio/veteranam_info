@@ -7,6 +7,7 @@ import '../../text_dependency.dart';
 Future<void> nawbarHelper({
   required WidgetTester tester,
   required String searchText,
+  bool hasMic = true,
 }) async {
   await changeWindowSizeHelper(
     tester: tester,
@@ -18,7 +19,10 @@ Future<void> nawbarHelper({
 
   expect(find.byKey(KWidgetkeys.widget.nawbar.field), findsOneWidget);
 
-  expect(find.byKey(KWidgetkeys.widget.nawbar.iconMic), findsOneWidget);
+  expect(
+    find.byKey(KWidgetkeys.widget.nawbar.iconMic),
+    hasMic ? findsOneWidget : findsNothing,
+  );
 
   expect(
     find.byKey(KWidgetkeys.widget.nawbar.button),
@@ -60,7 +64,10 @@ Future<void> nawbarHelper({
 
   expect(find.byKey(KWidgetkeys.widget.nawbar.field), findsOneWidget);
 
-  expect(find.byKey(KWidgetkeys.widget.nawbar.iconMic), findsOneWidget);
+  expect(
+    find.byKey(KWidgetkeys.widget.nawbar.iconMic),
+    hasMic ? findsOneWidget : findsNothing,
+  );
 
   expect(
     find.byKey(KWidgetkeys.widget.nawbar.button),

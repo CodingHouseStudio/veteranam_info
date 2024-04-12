@@ -19,7 +19,10 @@ extension PumpApp on WidgetTester {
                       AppLocalizations.localizationsDelegates,
                   locale: state?.value,
                   supportedLocales: AppLocalizations.supportedLocales,
-                  home: ScaffoldWithNavBar(navigationShell: widget),
+                  home: ScaffoldWithNavBar(
+                    navigationShell: widget,
+                    goRouterState: MockGoRouterState(),
+                  ),
                 )
               : MockGoRouterProvider(
                   goRouter: mockGoRouter,
@@ -28,7 +31,10 @@ extension PumpApp on WidgetTester {
                         AppLocalizations.localizationsDelegates,
                     locale: state?.value,
                     supportedLocales: AppLocalizations.supportedLocales,
-                    home: ScaffoldWithNavBar(navigationShell: widget),
+                    home: ScaffoldWithNavBar(
+                      navigationShell: widget,
+                      goRouterState: MockGoRouterState(),
+                    ),
                   ),
                 ),
         ),

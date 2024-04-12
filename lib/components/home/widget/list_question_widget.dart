@@ -3,12 +3,12 @@ import 'package:kozak/shared/shared.dart';
 
 class ListQuestionWidget extends StatelessWidget {
   const ListQuestionWidget({
-    required this.questionModelItems,
+    required this.questionModelItem,
     required this.isDesk,
     super.key,
   });
 
-  final List<QuestionModel> questionModelItems;
+  final QuestionModel questionModelItem;
   final bool isDesk;
 
   @override
@@ -30,18 +30,15 @@ class ListQuestionWidget extends StatelessWidget {
           key: KWidgetkeys.screen.home.questionList,
           physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
-          itemCount: questionModelItems.length,
+          itemCount: 1,
           itemBuilder: (context, index) => Padding(
-            padding: questionModelItems.length - 1 != index
-                ? EdgeInsets.only(
-                    bottom: isDesk
-                        ? KPadding.kPaddingSize24
-                        : KPadding.kPaddingSize16,
-                  )
-                : EdgeInsets.zero,
+            padding: EdgeInsets.only(
+              bottom:
+                  isDesk ? KPadding.kPaddingSize24 : KPadding.kPaddingSize16,
+            ),
             child: QuestionWidget(
-              title: questionModelItems.elementAt(index).title,
-              subtitle: questionModelItems.elementAt(index).subtitle,
+              title: questionModelItem.title,
+              subtitle: questionModelItem.subtitle,
               isDesk: isDesk,
             ),
           ),
