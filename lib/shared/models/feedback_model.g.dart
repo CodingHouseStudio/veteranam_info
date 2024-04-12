@@ -26,7 +26,7 @@ Map<String, dynamic> _$$FeedbackModelImplToJson(_$FeedbackModelImpl instance) =>
       'email': instance.email,
       'timestamp': instance.timestamp.toIso8601String(),
       'message': instance.message,
-      'status': _$FeedbackStatusEnumMap[instance.status],
+      'status': _$FeedbackStatusEnumMap[instance.status]!,
     };
 
 const _$FeedbackStatusEnumMap = {
