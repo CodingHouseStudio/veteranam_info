@@ -63,6 +63,31 @@ abstract class KTestText {
           'вакансії, які відповідають вашим критеріям.',
     ),
   ];
+
+  static final informationModelItems = <InformationModel>[
+    InformationModel(
+      id: '1',
+      title: 'Як мені знайти роботу за допомогою цього сайту?',
+      news: 'Використовуйте веб-сайти спеціалізованих сервісів для'
+          ' пошуку роботи,'
+          ' таких як Indeed, LinkedIn, Glassdoor, Monster, або регіональні '
+          'ресурси. Виберіть свою область інтересів та регіон, і шукайте '
+          'вакансії, які відповідають вашим критеріям.',
+      date: DateTime.now(),
+      tags: ['test_tags_1', 'test_tags_2'],
+    ),
+    InformationModel(
+      id: '2',
+      title: 'Як мені знайти роботу за допомогою цього сайту?',
+      news:
+          'Використовуйте веб-сайти спеціалізованих сервісів для пошуку роботи,'
+          ' таких як Indeed, LinkedIn, Glassdoor, Monster, або регіональні '
+          'ресурси. Виберіть свою область інтересів та регіон, і шукайте '
+          'вакансії, які відповідають вашим критеріям.',
+      date: DateTime.now(),
+      tags: ['test_tags_2'],
+    ),
+  ];
 }
 
 abstract class KTestConstants {

@@ -5,6 +5,7 @@ import 'package:mockito/annotations.dart';
 @GenerateNiceMocks(
   [
     MockSpec<IHomeRepository>(),
+    MockSpec<IInformationRepository>(),
   ],
 )
 void load() => debugPrint('loaded');

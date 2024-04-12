@@ -76,6 +76,7 @@ class _FilterBoxWidgetState extends State<FilterBoxWidget> {
                           filterValue: filter,
                           index: 0,
                         ),
+                isDesk: true,
               ),
       );
     }).toList();

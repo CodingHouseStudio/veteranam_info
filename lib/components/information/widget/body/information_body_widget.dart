@@ -58,6 +58,7 @@ class InformationBodyWidget extends StatelessWidget {
                                           KWidgetkeys.screen.information.filter,
                                       filtersItem:
                                           _.informationModelItems.overallTags,
+                                      isDesk: isDesk,
                                     ),
                                   if (isDesk)
                                     KSizedBox.kHeightSizedBox40
