@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:kozak/shared/shared.dart';
 
 part 'question_model.freezed.dart';
 part 'question_model.g.dart';
@@ -7,8 +8,8 @@ part 'question_model.g.dart';
 class QuestionModel with _$QuestionModel {
   const factory QuestionModel({
     required String id,
-    required String title,
-    required String subtitle,
+    @TitleConverter() required String title,
+    @SubtitleConverter() required String subtitle,
     String? navigationLink,
   }) = _QuestionModel;
 

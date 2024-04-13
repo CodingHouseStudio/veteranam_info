@@ -45,7 +45,7 @@ class InformationBodyWidget extends StatelessWidget {
                   case LoadingStatus.loaded:
                     return _.informationModelItems.isNotEmpty
                         ? ListView.builder(
-                            key: KWidgetkeys.screen.information.subtitle,
+                            key: KWidgetkeys.screen.information.list,
                             physics: const NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
                             itemCount: _.filteredInformationModelItems.length,

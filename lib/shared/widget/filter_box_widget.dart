@@ -22,7 +22,9 @@ class _FilterBoxWidgetState extends State<FilterBoxWidget> {
       key: KWidgetkeys.widget.filter.widget,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const FilterPopupMenu(),
+        FilterPopupMenuWidget(
+          onResetValue: () => context.read<FilterCubit>().resetAllValues(),
+        ),
         KSizedBox.kWidthSizedBox10,
         if (!KPlatformConstants.isWebMobile)
           Expanded(

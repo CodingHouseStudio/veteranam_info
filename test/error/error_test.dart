@@ -17,8 +17,8 @@ void main() {
   setupFirebaseAuthMocks();
 
   tearDown(GetIt.I.reset);
-  group(KScreenBlocName.app, () {
-    testWidgets(KGroupText.intial, (tester) async {
+  group('${KScreenBlocName.error} ', () {
+    testWidgets('${KGroupText.intial} ', (tester) async {
       await tester.pumpWidget(
         BlocProvider(
           create: (context) => GetIt.I.get<LanguageCubit>()..initLanguage(),
@@ -50,10 +50,10 @@ void main() {
         findsOneWidget,
       );
     });
-    group(KGroupText.goRouter, () {
+    group('${KGroupText.goRouter} ', () {
       late MockGoRouter mockGoRouter;
       setUp(() => mockGoRouter = MockGoRouter());
-      testWidgets(KGroupText.intial, (tester) async {
+      testWidgets('${KGroupText.intial} ', (tester) async {
         await tester.pumpWidget(
           BlocProvider(
             create: (context) => GetIt.I.get<LanguageCubit>()..initLanguage(),
@@ -87,7 +87,7 @@ void main() {
         );
       });
 
-      group(KGroupText.goTo, () {
+      group('${KGroupText.goTo} ', () {
         testWidgets(KScreenBlocName.home, (tester) async {
           await tester.pumpWidget(
             BlocProvider(

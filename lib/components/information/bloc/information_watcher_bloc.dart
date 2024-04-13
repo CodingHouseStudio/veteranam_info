@@ -23,6 +23,7 @@ class InformationWatcherBloc
             filteredInformationModelItems: [],
             filter: null,
             itemsLoaded: 0,
+            failure: null,
           ),
         ) {
     on<_Started>(_onStarted);
@@ -51,7 +52,7 @@ class InformationWatcherBloc
       ),
       onError: (dynamic error) {
         debugPrint('error is $error');
-        add(const InformationWatcherEvent.failure());
+        add(InformationWatcherEvent.failure(error));
       },
     );
   }
@@ -71,6 +72,7 @@ class InformationWatcherBloc
         ),
         filter: null,
         itemsLoaded: event.informationItemsModel.isNotEmpty ? 1 : 0,
+        failure: null,
       ),
     );
   }
@@ -79,6 +81,7 @@ class InformationWatcherBloc
     _LoadNextItems event,
     Emitter<InformationWatcherState> emit,
   ) {
+    if (state.itemsLoaded + 1 > state.informationModelItems.length) return;
     final filterItems = _filter(
       filter: state.filter,
       itemsLoaded: state.itemsLoaded + 1,
@@ -162,8 +165,13 @@ class InformationWatcherBloc
     _Failure event,
     Emitter<InformationWatcherState> emit,
   ) {
-    debugPrint('error is $event');
-    emit(state.copyWith(loadingStatus: LoadingStatus.error));
+    debugPrint('error is ${event.failure}');
+    emit(
+      state.copyWith(
+        loadingStatus: LoadingStatus.error,
+        failure: const SomeFailure.serverError().toInformation(),
+      ),
+    );
   }
 
   @override

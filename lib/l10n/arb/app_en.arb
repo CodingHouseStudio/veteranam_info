@@ -56,5 +56,7 @@
   "isWrong": "is wrong",
   "isWrongEmail": "is wrong",
   "informationSubtitle": "In this section you will find verified information on how to get help, etc. You can use filters for convenience.",
-  "moreNews": "More news"
+  "moreNews": "More news",
+  "logOut": " Log out",
+  "deleteAccount": "Delete account"
 }

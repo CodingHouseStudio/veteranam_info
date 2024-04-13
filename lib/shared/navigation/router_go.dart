@@ -29,7 +29,7 @@ final GoRouter router = GoRouter(
       navigatorKey: _shellNavigatorKey,
       builder: (context, state, child) {
         return ScaffoldWithNavBar(
-          // goRouterState: state,
+          goRouterState: state,
           navigationShell: child,
         );
       },

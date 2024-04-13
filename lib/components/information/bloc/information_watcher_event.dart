@@ -12,5 +12,5 @@ class InformationWatcherEvent with _$InformationWatcherEvent {
   ) = _Filter;
 
   const factory InformationWatcherEvent.filterReset() = _FilterReset;
-  const factory InformationWatcherEvent.failure() = _Failure;
+  const factory InformationWatcherEvent.failure(dynamic failure) = _Failure;
 }
