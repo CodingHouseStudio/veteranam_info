@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kozak/shared/shared.dart';
 
+/// COMMENT: Variables with widget theme that don't have a specific group
 abstract class KWidetTheme {
   static OutlineInputBorder outlineInputBorder = OutlineInputBorder(
     borderSide: const BorderSide(color: AppColors.lightGray),

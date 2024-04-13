@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kozak/shared/shared.dart';
 
+/// COMMENT: Variable with app theme
 ThemeData themeData = ThemeData(
   colorScheme: const ColorScheme(
     primary: AppColors.black,

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kozak/shared/shared.dart';
 
+/// COMMENT: Class to get, update, delete or set values in firebase
 @singleton
 class FirestoreService {
   FirestoreService() {

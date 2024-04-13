@@ -5,6 +5,7 @@ import 'package:injectable/injectable.dart';
 
 const languagePrefsKey = 'languagePrefs';
 
+/// COMMENT: Cubit changes and sets localization in App
 @Singleton()
 class LanguageCubit extends Cubit<Language?> {
   LanguageCubit() : super(null);
