@@ -1,6 +1,10 @@
-part of 'filter_box_helper.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:kozak/shared/shared.dart';
 
-Future<void> _dropChipHelper(
+import '../../../text_dependency.dart';
+
+Future<void> dropChipHelper(
   WidgetTester tester,
 ) async {
   expect(find.byKey(KWidgetkeys.widget.dropChip.widget), findsWidgets);
@@ -43,7 +47,7 @@ Future<void> _dropChipHelper(
     findsNothing,
   );
 
-  await _filterPopupMenuHelper(tester);
+  await filterPopupMenuHelper(tester);
 
   expect(
     find.descendant(

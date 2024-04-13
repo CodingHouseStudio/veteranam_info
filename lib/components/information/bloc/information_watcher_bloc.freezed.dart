@@ -24,7 +24,7 @@ mixin _$InformationWatcherEvent {
     required TResult Function() loadNextItems,
     required TResult Function(String? filter) filter,
     required TResult Function() filterReset,
-    required TResult Function() failure,
+    required TResult Function(dynamic failure) failure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -34,7 +34,7 @@ mixin _$InformationWatcherEvent {
     TResult? Function()? loadNextItems,
     TResult? Function(String? filter)? filter,
     TResult? Function()? filterReset,
-    TResult? Function()? failure,
+    TResult? Function(dynamic failure)? failure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -44,7 +44,7 @@ mixin _$InformationWatcherEvent {
     TResult Function()? loadNextItems,
     TResult Function(String? filter)? filter,
     TResult Function()? filterReset,
-    TResult Function()? failure,
+    TResult Function(dynamic failure)? failure,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -144,7 +144,7 @@ class _$StartedImpl implements _Started {
     required TResult Function() loadNextItems,
     required TResult Function(String? filter) filter,
     required TResult Function() filterReset,
-    required TResult Function() failure,
+    required TResult Function(dynamic failure) failure,
   }) {
     return started();
   }
@@ -157,7 +157,7 @@ class _$StartedImpl implements _Started {
     TResult? Function()? loadNextItems,
     TResult? Function(String? filter)? filter,
     TResult? Function()? filterReset,
-    TResult? Function()? failure,
+    TResult? Function(dynamic failure)? failure,
   }) {
     return started?.call();
   }
@@ -170,7 +170,7 @@ class _$StartedImpl implements _Started {
     TResult Function()? loadNextItems,
     TResult Function(String? filter)? filter,
     TResult Function()? filterReset,
-    TResult Function()? failure,
+    TResult Function(dynamic failure)? failure,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -306,7 +306,7 @@ class _$UpdatedImpl implements _Updated {
     required TResult Function() loadNextItems,
     required TResult Function(String? filter) filter,
     required TResult Function() filterReset,
-    required TResult Function() failure,
+    required TResult Function(dynamic failure) failure,
   }) {
     return updated(informationItemsModel);
   }
@@ -319,7 +319,7 @@ class _$UpdatedImpl implements _Updated {
     TResult? Function()? loadNextItems,
     TResult? Function(String? filter)? filter,
     TResult? Function()? filterReset,
-    TResult? Function()? failure,
+    TResult? Function(dynamic failure)? failure,
   }) {
     return updated?.call(informationItemsModel);
   }
@@ -332,7 +332,7 @@ class _$UpdatedImpl implements _Updated {
     TResult Function()? loadNextItems,
     TResult Function(String? filter)? filter,
     TResult Function()? filterReset,
-    TResult Function()? failure,
+    TResult Function(dynamic failure)? failure,
     required TResult orElse(),
   }) {
     if (updated != null) {
@@ -439,7 +439,7 @@ class _$LoadNextItemsImpl implements _LoadNextItems {
     required TResult Function() loadNextItems,
     required TResult Function(String? filter) filter,
     required TResult Function() filterReset,
-    required TResult Function() failure,
+    required TResult Function(dynamic failure) failure,
   }) {
     return loadNextItems();
   }
@@ -452,7 +452,7 @@ class _$LoadNextItemsImpl implements _LoadNextItems {
     TResult? Function()? loadNextItems,
     TResult? Function(String? filter)? filter,
     TResult? Function()? filterReset,
-    TResult? Function()? failure,
+    TResult? Function(dynamic failure)? failure,
   }) {
     return loadNextItems?.call();
   }
@@ -465,7 +465,7 @@ class _$LoadNextItemsImpl implements _LoadNextItems {
     TResult Function()? loadNextItems,
     TResult Function(String? filter)? filter,
     TResult Function()? filterReset,
-    TResult Function()? failure,
+    TResult Function(dynamic failure)? failure,
     required TResult orElse(),
   }) {
     if (loadNextItems != null) {
@@ -592,7 +592,7 @@ class _$FilterImpl implements _Filter {
     required TResult Function() loadNextItems,
     required TResult Function(String? filter) filter,
     required TResult Function() filterReset,
-    required TResult Function() failure,
+    required TResult Function(dynamic failure) failure,
   }) {
     return filter(this.filter);
   }
@@ -605,7 +605,7 @@ class _$FilterImpl implements _Filter {
     TResult? Function()? loadNextItems,
     TResult? Function(String? filter)? filter,
     TResult? Function()? filterReset,
-    TResult? Function()? failure,
+    TResult? Function(dynamic failure)? failure,
   }) {
     return filter?.call(this.filter);
   }
@@ -618,7 +618,7 @@ class _$FilterImpl implements _Filter {
     TResult Function()? loadNextItems,
     TResult Function(String? filter)? filter,
     TResult Function()? filterReset,
-    TResult Function()? failure,
+    TResult Function(dynamic failure)? failure,
     required TResult orElse(),
   }) {
     if (filter != null) {
@@ -724,7 +724,7 @@ class _$FilterResetImpl implements _FilterReset {
     required TResult Function() loadNextItems,
     required TResult Function(String? filter) filter,
     required TResult Function() filterReset,
-    required TResult Function() failure,
+    required TResult Function(dynamic failure) failure,
   }) {
     return filterReset();
   }
@@ -737,7 +737,7 @@ class _$FilterResetImpl implements _FilterReset {
     TResult? Function()? loadNextItems,
     TResult? Function(String? filter)? filter,
     TResult? Function()? filterReset,
-    TResult? Function()? failure,
+    TResult? Function(dynamic failure)? failure,
   }) {
     return filterReset?.call();
   }
@@ -750,7 +750,7 @@ class _$FilterResetImpl implements _FilterReset {
     TResult Function()? loadNextItems,
     TResult Function(String? filter)? filter,
     TResult Function()? filterReset,
-    TResult Function()? failure,
+    TResult Function(dynamic failure)? failure,
     required TResult orElse(),
   }) {
     if (filterReset != null) {
@@ -812,6 +812,8 @@ abstract class _$$FailureImplCopyWith<$Res> {
   factory _$$FailureImplCopyWith(
           _$FailureImpl value, $Res Function(_$FailureImpl) then) =
       __$$FailureImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({dynamic failure});
 }
 
 /// @nodoc
@@ -821,26 +823,51 @@ class __$$FailureImplCopyWithImpl<$Res>
   __$$FailureImplCopyWithImpl(
       _$FailureImpl _value, $Res Function(_$FailureImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? failure = freezed,
+  }) {
+    return _then(_$FailureImpl(
+      freezed == failure
+          ? _value.failure
+          : failure // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$FailureImpl implements _Failure {
-  const _$FailureImpl();
+  const _$FailureImpl(this.failure);
+
+  @override
+  final dynamic failure;
 
   @override
   String toString() {
-    return 'InformationWatcherEvent.failure()';
+    return 'InformationWatcherEvent.failure(failure: $failure)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$FailureImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$FailureImpl &&
+            const DeepCollectionEquality().equals(other.failure, failure));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(failure));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$FailureImplCopyWith<_$FailureImpl> get copyWith =>
+      __$$FailureImplCopyWithImpl<_$FailureImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -851,9 +878,9 @@ class _$FailureImpl implements _Failure {
     required TResult Function() loadNextItems,
     required TResult Function(String? filter) filter,
     required TResult Function() filterReset,
-    required TResult Function() failure,
+    required TResult Function(dynamic failure) failure,
   }) {
-    return failure();
+    return failure(this.failure);
   }
 
   @override
@@ -864,9 +891,9 @@ class _$FailureImpl implements _Failure {
     TResult? Function()? loadNextItems,
     TResult? Function(String? filter)? filter,
     TResult? Function()? filterReset,
-    TResult? Function()? failure,
+    TResult? Function(dynamic failure)? failure,
   }) {
-    return failure?.call();
+    return failure?.call(this.failure);
   }
 
   @override
@@ -877,11 +904,11 @@ class _$FailureImpl implements _Failure {
     TResult Function()? loadNextItems,
     TResult Function(String? filter)? filter,
     TResult Function()? filterReset,
-    TResult Function()? failure,
+    TResult Function(dynamic failure)? failure,
     required TResult orElse(),
   }) {
     if (failure != null) {
-      return failure();
+      return failure(this.failure);
     }
     return orElse();
   }
@@ -931,7 +958,12 @@ class _$FailureImpl implements _Failure {
 }
 
 abstract class _Failure implements InformationWatcherEvent {
-  const factory _Failure() = _$FailureImpl;
+  const factory _Failure(final dynamic failure) = _$FailureImpl;
+
+  dynamic get failure;
+  @JsonKey(ignore: true)
+  _$$FailureImplCopyWith<_$FailureImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -943,6 +975,7 @@ mixin _$InformationWatcherState {
   String? get filter => throw _privateConstructorUsedError;
   LoadingStatus get loadingStatus => throw _privateConstructorUsedError;
   int get itemsLoaded => throw _privateConstructorUsedError;
+  InformationFailure? get failure => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $InformationWatcherStateCopyWith<InformationWatcherState> get copyWith =>
@@ -960,7 +993,8 @@ abstract class $InformationWatcherStateCopyWith<$Res> {
       List<InformationModel> filteredInformationModelItems,
       String? filter,
       LoadingStatus loadingStatus,
-      int itemsLoaded});
+      int itemsLoaded,
+      InformationFailure? failure});
 }
 
 /// @nodoc
@@ -982,6 +1016,7 @@ class _$InformationWatcherStateCopyWithImpl<$Res,
     Object? filter = freezed,
     Object? loadingStatus = null,
     Object? itemsLoaded = null,
+    Object? failure = freezed,
   }) {
     return _then(_value.copyWith(
       informationModelItems: null == informationModelItems
@@ -1004,6 +1039,10 @@ class _$InformationWatcherStateCopyWithImpl<$Res,
           ? _value.itemsLoaded
           : itemsLoaded // ignore: cast_nullable_to_non_nullable
               as int,
+      failure: freezed == failure
+          ? _value.failure
+          : failure // ignore: cast_nullable_to_non_nullable
+              as InformationFailure?,
     ) as $Val);
   }
 }
@@ -1022,7 +1061,8 @@ abstract class _$$InformationWatcherStateSuccessImplCopyWith<$Res>
       List<InformationModel> filteredInformationModelItems,
       String? filter,
       LoadingStatus loadingStatus,
-      int itemsLoaded});
+      int itemsLoaded,
+      InformationFailure? failure});
 }
 
 /// @nodoc
@@ -1043,6 +1083,7 @@ class __$$InformationWatcherStateSuccessImplCopyWithImpl<$Res>
     Object? filter = freezed,
     Object? loadingStatus = null,
     Object? itemsLoaded = null,
+    Object? failure = freezed,
   }) {
     return _then(_$InformationWatcherStateSuccessImpl(
       informationModelItems: null == informationModelItems
@@ -1065,6 +1106,10 @@ class __$$InformationWatcherStateSuccessImplCopyWithImpl<$Res>
           ? _value.itemsLoaded
           : itemsLoaded // ignore: cast_nullable_to_non_nullable
               as int,
+      failure: freezed == failure
+          ? _value.failure
+          : failure // ignore: cast_nullable_to_non_nullable
+              as InformationFailure?,
     ));
   }
 }
@@ -1078,7 +1123,8 @@ class _$InformationWatcherStateSuccessImpl
       required final List<InformationModel> filteredInformationModelItems,
       required this.filter,
       required this.loadingStatus,
-      required this.itemsLoaded})
+      required this.itemsLoaded,
+      required this.failure})
       : _informationModelItems = informationModelItems,
         _filteredInformationModelItems = filteredInformationModelItems;
 
@@ -1106,10 +1152,12 @@ class _$InformationWatcherStateSuccessImpl
   final LoadingStatus loadingStatus;
   @override
   final int itemsLoaded;
+  @override
+  final InformationFailure? failure;
 
   @override
   String toString() {
-    return 'InformationWatcherState(informationModelItems: $informationModelItems, filteredInformationModelItems: $filteredInformationModelItems, filter: $filter, loadingStatus: $loadingStatus, itemsLoaded: $itemsLoaded)';
+    return 'InformationWatcherState(informationModelItems: $informationModelItems, filteredInformationModelItems: $filteredInformationModelItems, filter: $filter, loadingStatus: $loadingStatus, itemsLoaded: $itemsLoaded, failure: $failure)';
   }
 
   @override
@@ -1126,7 +1174,8 @@ class _$InformationWatcherStateSuccessImpl
             (identical(other.loadingStatus, loadingStatus) ||
                 other.loadingStatus == loadingStatus) &&
             (identical(other.itemsLoaded, itemsLoaded) ||
-                other.itemsLoaded == itemsLoaded));
+                other.itemsLoaded == itemsLoaded) &&
+            (identical(other.failure, failure) || other.failure == failure));
   }
 
   @override
@@ -1136,7 +1185,8 @@ class _$InformationWatcherStateSuccessImpl
       const DeepCollectionEquality().hash(_filteredInformationModelItems),
       filter,
       loadingStatus,
-      itemsLoaded);
+      itemsLoaded,
+      failure);
 
   @JsonKey(ignore: true)
   @override
@@ -1150,11 +1200,13 @@ class _$InformationWatcherStateSuccessImpl
 abstract class InformationWatcherStateSuccess
     implements InformationWatcherState {
   const factory InformationWatcherStateSuccess(
-      {required final List<InformationModel> informationModelItems,
-      required final List<InformationModel> filteredInformationModelItems,
-      required final String? filter,
-      required final LoadingStatus loadingStatus,
-      required final int itemsLoaded}) = _$InformationWatcherStateSuccessImpl;
+          {required final List<InformationModel> informationModelItems,
+          required final List<InformationModel> filteredInformationModelItems,
+          required final String? filter,
+          required final LoadingStatus loadingStatus,
+          required final int itemsLoaded,
+          required final InformationFailure? failure}) =
+      _$InformationWatcherStateSuccessImpl;
 
   @override
   List<InformationModel> get informationModelItems;
@@ -1166,6 +1218,8 @@ abstract class InformationWatcherStateSuccess
   LoadingStatus get loadingStatus;
   @override
   int get itemsLoaded;
+  @override
+  InformationFailure? get failure;
   @override
   @JsonKey(ignore: true)
   _$$InformationWatcherStateSuccessImplCopyWith<

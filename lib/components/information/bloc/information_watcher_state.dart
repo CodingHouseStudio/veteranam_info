@@ -1,6 +1,14 @@
 part of 'information_watcher_bloc.dart';
 
-enum LoadingStatus { initial, loading, loaded, error }
+enum InformationFailure {
+  error,
+}
+
+extension InformationFailureExtension on SomeFailure {
+  InformationFailure toInformation() {
+    return InformationFailure.error;
+  }
+}
 
 @freezed
 class InformationWatcherState with _$InformationWatcherState {
@@ -10,6 +18,7 @@ class InformationWatcherState with _$InformationWatcherState {
     required String? filter,
     required LoadingStatus loadingStatus,
     required int itemsLoaded,
+    required InformationFailure? failure,
   }) = InformationWatcherStateSuccess;
 }
 

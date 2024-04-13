@@ -6,6 +6,8 @@ import 'package:mockito/annotations.dart';
   [
     MockSpec<IHomeRepository>(),
     MockSpec<IInformationRepository>(),
+    MockSpec<IFeedbackRepository>(),
+    MockSpec<FirestoreService>(),
   ],
 )
 void load() => debugPrint('loaded');

@@ -16,25 +16,10 @@ class AuditInspectionInProgresFilters extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        PopupMenuButton<String>(
-          icon: const Icon(Icons.filter_alt_outlined),
-          itemBuilder: (BuildContext context) {
-            return [
-              PopupMenuItem<String>(
-                value: context.l10n.resetAllFilter,
-                child: ListTile(
-                  title: Text(context.l10n.resetAllFilter),
-                ),
+        FilterPopupMenuWidget(
+          onResetValue: () => context.read<InformationWatcherBloc>().add(
+                const InformationWatcherEvent.filterReset(),
               ),
-            ];
-          },
-          onSelected: (dynamic selectedValue) {
-            if (selectedValue == context.l10n.resetAllFilter) {
-              context.read<InformationWatcherBloc>().add(
-                    const InformationWatcherEvent.filterReset(),
-                  );
-            }
-          },
         ),
         KSizedBox.kWidthSizedBox24,
         Expanded(

@@ -8,9 +8,7 @@ class InformationRepository implements IInformationRepository {
   final _controller = StreamController<List<InformationModel>>()..add([]);
 
   @override
-  Stream<List<InformationModel>> getInformationItems() {
-    return _controller.stream;
-  }
+  Stream<List<InformationModel>> getInformationItems() => _controller.stream;
 
   @override
   void addMockInformationItems() {

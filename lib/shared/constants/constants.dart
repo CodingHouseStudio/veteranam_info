@@ -1,4 +1,5 @@
 export 'dimensions/dimensions.dart';
+export 'enum.dart';
 export 'platform_constants.dart';
 export 'rout_constants.dart';
 export 'style/style.dart';

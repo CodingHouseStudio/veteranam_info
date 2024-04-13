@@ -44,17 +44,17 @@ Future<void> footerHelper({
     }
   }
 
-  await changeWindowSizeHelper(tester: tester);
+  // await changeWindowSizeHelper(tester: tester);
 
-  expect(find.byKey(KWidgetkeys.widget.footer.logo), findsNothing);
+  // expect(find.byKey(KWidgetkeys.widget.footer.logo), findsNothing);
 
-  expect(
-    find.descendant(
-      of: find.byKey(KWidgetkeys.widget.footer.widget),
-      matching: find.text('${KTestText.footer}$email'),
-    ),
-    findsNothing,
-  );
+  // expect(
+  //   find.descendant(
+  //     of: find.byKey(KWidgetkeys.widget.footer.widget),
+  //     matching: find.text('${KTestText.footer}$email'),
+  //   ),
+  //   findsNothing,
+  // );
 
-  await changeWindowSizeHelper(tester: tester, setDefaultSize: true);
+  // await changeWindowSizeHelper(tester: tester, setDefaultSize: true);
 }

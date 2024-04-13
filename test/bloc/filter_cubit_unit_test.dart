@@ -7,7 +7,7 @@ import '../text_dependency.dart';
 void main() {
   setupFirebaseAuthMocks();
 
-  group(KScreenBlocName.filterCubit, () {
+  group('${KScreenBlocName.filterCubit} ', () {
     late FilterCubit filterCubit;
     setUp(() => filterCubit = FilterCubit());
     blocTest<FilterCubit, List<dynamic>>(
