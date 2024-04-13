@@ -6,6 +6,7 @@ import 'package:mockito/mockito.dart';
 
 import '../text_dependency.dart';
 
+/// FOLDER FILES COMMENT: Tests blocks that are used on several pages
 void main() {
   group('${KScreenBlocName.feedback} ', () {
     group('${KGroupText.model} ', () {

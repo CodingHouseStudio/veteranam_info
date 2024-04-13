@@ -4,5 +4,6 @@ import 'package:kozak/shared/shared.dart';
 
 final getIt = GetIt.instance;
 
+/// COMMENT: Method registers all classes that use Injectable
 @InjectableInit()
 void configureDependencies() => getIt.init();

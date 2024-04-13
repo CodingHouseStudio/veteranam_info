@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 
+/// COMMENT: Class for caching data
 /// {@template cache_client}
 /// An in-memory cache client.
 /// {@endtemplate}

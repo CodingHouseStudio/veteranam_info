@@ -2,6 +2,7 @@
 
 import 'package:kozak/shared/shared.dart';
 
+/// COMMENT: Variables with mock text. It's temporary data we change it when add firebase for this elements
 abstract class KMockText {
   static const dropDownList = [
     'Житомир',
@@ -97,6 +98,7 @@ abstract class KMockText {
       'https://static.vecteezy.com/system/resources/thumbnails/008/492/251/small/back-to-school-illustration-cartoon-character-children-kid-png.png';
 }
 
+/// README: Variables with specific text
 abstract class KAppText {
   static final routes = [
     [
