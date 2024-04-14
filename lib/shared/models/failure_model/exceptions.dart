@@ -1,5 +1,6 @@
 import 'package:kozak/shared/shared.dart';
 
+/// COMMENT: Error handling classes
 class SendFailure implements Exception {
   const SendFailure([
     this.status = const SomeFailure.initial(),
