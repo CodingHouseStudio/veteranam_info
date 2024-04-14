@@ -1,6 +1,7 @@
 part of '../widget_keys.dart';
 
 class _ScreenKeys {
+  /// COMMENT: Add new variable here when you add a new file for screen keys
   final home = _HomeKeys();
   final app = _AppKeys();
   final discounts = _DiscountsKeys();

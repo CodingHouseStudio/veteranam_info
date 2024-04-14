@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 
+/// COMMENT: Add a part here when you add a new file for keys
 part 'screen/screen.dart';
 
 part 'screen/home.dart';
