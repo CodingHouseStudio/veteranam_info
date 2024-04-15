@@ -126,4 +126,5 @@ class FeedbackBloc extends Bloc<FeedbackEvent, FeedbackState> {
     );
   }
 }
+
 /// FOLDER FILES COMMENT: Blocks that are used on several pages
