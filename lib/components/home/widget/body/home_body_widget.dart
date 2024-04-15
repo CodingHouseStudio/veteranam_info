@@ -35,8 +35,22 @@ class HomeBodyWidget extends StatelessWidget {
                     return const CircularProgressIndicator.adaptive();
                   case HomeWatcherStateSuccess():
                     final questionModelItems = state.questionModelItems;
-                    return questionModelItems.isNotEmpty
-                        ? ListView.builder(
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding:
+                              const EdgeInsets.all(KPadding.kPaddingSize16),
+                          child: Text(
+                            context.l10n.faq,
+                            key: KWidgetkeys.screen.home.questionListTitle,
+                            style: isDesk
+                                ? AppTextStyle.text96
+                                : AppTextStyle.text48,
+                          ),
+                        ),
+                        if (questionModelItems.isNotEmpty)
+                          ListView.builder(
                             shrinkWrap: true,
                             itemCount: questionModelItems.length,
                             itemBuilder: (context, index) => ListQuestionWidget(
@@ -44,7 +58,8 @@ class HomeBodyWidget extends StatelessWidget {
                               isDesk: isDesk,
                             ),
                           )
-                        : TextButton(
+                        else
+                          TextButton(
                             key: KWidgetkeys.screen.home.buttonMock,
                             onPressed: () {
                               GetIt.I.get<IHomeRepository>().addMockQuestions();
@@ -56,7 +71,9 @@ class HomeBodyWidget extends StatelessWidget {
                               context.l10n.getMockData,
                               style: AppTextStyle.text32,
                             ),
-                          );
+                          ),
+                      ],
+                    );
 
                   case HomeWatcherStateFailure():
                   default:
