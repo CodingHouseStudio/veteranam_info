@@ -33,11 +33,12 @@ class DonateButtonWidget extends StatelessWidget {
           top: KPadding.kPaddingSize16,
         ),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              text,
-              style: textStyle ?? AppTextStyle.text32,
+            Expanded(
+              child: Text(
+                text,
+                style: textStyle ?? AppTextStyle.text32,
+              ),
             ),
             IconWidget(
               icon: icon ?? KIcon.arrowUpRight,

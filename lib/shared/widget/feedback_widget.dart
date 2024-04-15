@@ -64,6 +64,7 @@ class _FeedbackWidgetState extends State<FeedbackWidget> {
             )
           else
             Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   widget.title ?? context.l10n.feedback,
