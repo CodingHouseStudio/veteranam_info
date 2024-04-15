@@ -75,6 +75,13 @@ class HomeBodyWidget extends StatelessWidget {
               KSizedBox.kHeightSizedBox160
             else
               KSizedBox.kHeightSizedBox10,
+            const PageIndicatorControl(
+              pageCount: 3,
+            ),
+            if (isDesk)
+              KSizedBox.kHeightSizedBox160
+            else
+              KSizedBox.kHeightSizedBox10,
           ],
         );
       },
