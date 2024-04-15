@@ -7,6 +7,7 @@ import 'package:kozak/shared/shared.dart';
 
 class BoxesWidget extends StatelessWidget {
   const BoxesWidget({required this.isDesk, super.key});
+
   final bool isDesk;
 
   @override
@@ -46,7 +47,7 @@ class BoxesWidget extends StatelessWidget {
               Expanded(
                 child: BoxWidget(
                   text: context.l10n.information,
-                  onIconTap: () => context.go(
+                  onTap: () => context.go(
                     '${KRoute.home.path}${KRoute.information.path}',
                   ),
                   isDesk: isDesk,
@@ -56,7 +57,7 @@ class BoxesWidget extends StatelessWidget {
               Expanded(
                 child: BoxWidget(
                   text: context.l10n.stories,
-                  onIconTap: () =>
+                  onTap: () =>
                       context.go('${KRoute.home.path}${KRoute.story.path}'),
                   isDesk: isDesk,
                 ),
@@ -65,7 +66,7 @@ class BoxesWidget extends StatelessWidget {
               Expanded(
                 child: BoxWidget(
                   text: context.l10n.investors,
-                  onIconTap: () => context.go(
+                  onTap: () => context.go(
                     '${KRoute.home.path}${KRoute.investors.path}',
                   ),
                   isDesk: isDesk,
@@ -79,7 +80,7 @@ class BoxesWidget extends StatelessWidget {
               KSizedBox.kHeightSizedBox16,
               BoxWidget(
                 text: context.l10n.information,
-                onIconTap: () => context.go(
+                onTap: () => context.go(
                   '${KRoute.home.path}${KRoute.information.path}',
                 ),
                 isDesk: isDesk,
@@ -87,14 +88,14 @@ class BoxesWidget extends StatelessWidget {
               KSizedBox.kHeightSizedBox16,
               BoxWidget(
                 text: context.l10n.stories,
-                onIconTap: () =>
+                onTap: () =>
                     context.go('${KRoute.home.path}${KRoute.story.path}'),
                 isDesk: isDesk,
               ),
               KSizedBox.kHeightSizedBox16,
               BoxWidget(
                 text: context.l10n.investors,
-                onIconTap: () =>
+                onTap: () =>
                     context.go('${KRoute.home.path}${KRoute.investors.path}'),
                 isDesk: isDesk,
               ),
@@ -109,7 +110,7 @@ class BoxesWidget extends StatelessWidget {
       children: [
         BoxWidget(
           text: context.l10n.discountsCoupons,
-          onIconTap: () =>
+          onTap: () =>
               context.go('${KRoute.home.path}${KRoute.discounts.path}'),
           isDesk: isDesk,
         ),
@@ -119,7 +120,7 @@ class BoxesWidget extends StatelessWidget {
           KSizedBox.kHeightSizedBox16,
         BoxWidget(
           text: context.l10n.work,
-          onIconTap: () => context.go('${KRoute.home.path}${KRoute.work.path}'),
+          onTap: () => context.go('${KRoute.home.path}${KRoute.work.path}'),
           isDesk: isDesk,
         ),
       ],
