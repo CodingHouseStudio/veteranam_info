@@ -7,6 +7,7 @@ export 'card_text_detail_evaluate_widget.dart';
 export 'card_text_detail_widget.dart';
 export 'check_point_widget.dart';
 export 'chip_widget.dart';
+export 'donate_button_widget.dart';
 export 'drop_chip_widget.dart';
 export 'drop_list_field_widget.dart';
 export 'feedback_widget.dart';
