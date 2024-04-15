@@ -45,6 +45,12 @@ class ContactBodyWidget extends StatelessWidget {
           text: KMockText.title,
           icon: KIcon.plus,
         ),
+        KSizedBox.kHeightSizedBox30,
+        DonateButtonWidget(
+          text: KMockText.nickname,
+          onPressed: () {},
+        ),
+        KSizedBox.kHeightSizedBox30,
       ],
     );
   }
