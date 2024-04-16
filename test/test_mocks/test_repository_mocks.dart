@@ -7,6 +7,7 @@ import 'package:mockito/annotations.dart';
 @GenerateNiceMocks(
   [
     MockSpec<IHomeRepository>(),
+    MockSpec<IInformationRepository>(),
     MockSpec<IFeedbackRepository>(),
     MockSpec<FirestoreService>(),
     MockSpec<IAppAuthenticationRepository>(),

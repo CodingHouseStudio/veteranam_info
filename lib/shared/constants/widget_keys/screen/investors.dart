@@ -11,4 +11,5 @@ class _InvestorsKeys {
   final message = const Key('investors_screen_message');
   final fieldSuggestions = const Key('investors_screen_field_suggestions');
   final buttonSend = const Key('investors_screen_button_send');
+  final donateCards = const Key('investors_screen_donate_cards');
 }

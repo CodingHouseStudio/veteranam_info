@@ -16,3 +16,5 @@ class SubtitleConverter implements JsonConverter<String, String> {
     return object;
   }
 }
+
+/// FOLDER FILES COMMENT: Classes set filtering for getting and adding in json

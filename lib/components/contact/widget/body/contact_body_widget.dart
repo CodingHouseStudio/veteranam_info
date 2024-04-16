@@ -10,8 +10,8 @@ class ContactBodyWidget extends StatelessWidget {
     return Column(
       children: [
         KSizedBox.kHeightSizedBox30,
-        const FilterBoxWidget(
-          filters: KMockText.filter,
+        FilterBoxWidget(
+          filters: KMockText.tags.elementAt(0)!,
         ),
         KSizedBox.kHeightSizedBox30,
         DropListFieldWidget(
@@ -45,6 +45,11 @@ class ContactBodyWidget extends StatelessWidget {
           text: KMockText.title,
           icon: KIcon.plus,
         ),
+        KSizedBox.kHeightSizedBox30,
+        const PageIndicatorControl(
+          pageCount: 3,
+        ),
+        KSizedBox.kHeightSizedBox30,
       ],
     );
   }

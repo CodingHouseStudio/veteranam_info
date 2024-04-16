@@ -105,7 +105,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     Emitter<LoginState> emit,
   ) async {
     emit(
-      state.copyWith(showPassword: false),
+      state.copyWith(showPassword: false, fieldsState: FieldEnum.inProgress),
     );
   }
 }

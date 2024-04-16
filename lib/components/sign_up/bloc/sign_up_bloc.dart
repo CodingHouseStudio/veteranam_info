@@ -104,7 +104,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     Emitter<SignUpState> emit,
   ) async {
     emit(
-      state.copyWith(showPassword: false),
+      state.copyWith(showPassword: false, fieldsState: FieldEnum.inProgress),
     );
   }
 }

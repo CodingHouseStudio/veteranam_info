@@ -45,6 +45,7 @@ class StoryCardWidget extends StatelessWidget {
         key: KWidgetkeys.widget.storyCard.date,
         style: AppTextStyle.text16.copyWith(color: AppColors.lightGray),
       ),
+      isDesk: false,
     );
   }
 }

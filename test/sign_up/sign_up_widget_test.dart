@@ -126,7 +126,8 @@ void main() {
         showPassword: false,
       );
     });
-    testWidgets('Write correct email and incorect password', (tester) async {
+
+    testWidgets('Write correct email and hide password', (tester) async {
       registerSignUpkBloc();
       await tester.pumpApp(
         const SignUpScreen(),
@@ -140,35 +141,20 @@ void main() {
 
       await tester.pumpAndSettle();
 
-      await signUpFieldsHelper(
+      await emailPasswordFieldsEmHelper(
         tester: tester,
-        password: KTestText.passwordIncorrect,
         email: KTestText.useremail,
-        dataIsCorrect: false,
-      );
-    });
-
-    testWidgets('Write correct email and password(navigation to',
-        (tester) async {
-      registerSignUpkBloc();
-      await tester.pumpApp(
-        const SignUpScreen(),
-        fullPath: KRoute.signUp.path,
       );
 
-      expect(
-        find.byKey(KWidgetkeys.screen.signUp.screen),
-        findsOneWidget,
-      );
+      await tester.tap(find.byKey(KWidgetkeys.screen.signUp.button));
 
       await tester.pumpAndSettle();
 
-      await signUpFieldsHelper(
-        tester: tester,
-        password: KTestText.passwordCorrect,
-        email: KTestText.useremail,
-        dataIsCorrect: true,
-      );
+      await emailPasswordFieldsHelper(tester: tester, showPassword: true);
+
+      await emailPasswordFieldsHidePasHelper(tester);
+
+      await emailPasswordFieldsHelper(tester: tester, showPassword: false);
     });
     group('${KGroupText.goRouter} ', () {
       late MockGoRouter mockGoRouter;
@@ -245,6 +231,56 @@ void main() {
 
           await loginNavigationHelper(
             tester: tester,
+            mockGoRouter: mockGoRouter,
+          );
+        });
+        testWidgets('Write correct email and incorect password',
+            (tester) async {
+          registerSignUpkBloc();
+          await tester.pumpApp(
+            const SignUpScreen(),
+            fullPath: KRoute.signUp.path,
+            mockGoRouter: mockGoRouter,
+          );
+
+          expect(
+            find.byKey(KWidgetkeys.screen.signUp.screen),
+            findsOneWidget,
+          );
+
+          await tester.pumpAndSettle();
+
+          await signUpFieldsHelper(
+            tester: tester,
+            password: KTestText.passwordIncorrect,
+            email: KTestText.useremail,
+            dataIsCorrect: false,
+            mockGoRouter: mockGoRouter,
+          );
+        });
+
+        testWidgets(
+            'Write correct email and password and Navigate'
+            ' to ${KScreenBlocName.home}', (tester) async {
+          registerSignUpkBloc();
+          await tester.pumpApp(
+            const SignUpScreen(),
+            fullPath: KRoute.signUp.path,
+            mockGoRouter: mockGoRouter,
+          );
+
+          expect(
+            find.byKey(KWidgetkeys.screen.signUp.screen),
+            findsOneWidget,
+          );
+
+          await tester.pumpAndSettle();
+
+          await signUpFieldsHelper(
+            tester: tester,
+            password: KTestText.passwordCorrect,
+            email: KTestText.useremail,
+            dataIsCorrect: true,
             mockGoRouter: mockGoRouter,
           );
         });

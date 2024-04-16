@@ -5,5 +5,7 @@ export 'home_repository.dart';
 export 'i_app_authentication_repository.dart';
 export 'i_feedback_repository.dart';
 export 'i_home_repository.dart';
+export 'i_information_repository.dart';
 export 'i_storage_repository.dart';
+export 'information_repository.dart';
 export 'secure_storage_repository.dart';

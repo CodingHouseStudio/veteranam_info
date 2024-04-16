@@ -153,7 +153,11 @@ void main() {
       group('${KGroupText.goTo} ', () {
         testWidgets('nawbar widget navigation', (tester) async {
           registerHomeBloc();
-          await tester.pumpApp(const HomeScreen(), mockGoRouter: mockGoRouter);
+          await tester.pumpApp(
+            const HomeScreen(),
+            mockGoRouter: mockGoRouter,
+            fullPath: KRoute.home.path,
+          );
 
           expect(
             find.byKey(KWidgetkeys.screen.home.screen),
@@ -163,6 +167,11 @@ void main() {
           await tester.pumpAndSettle();
 
           await nawbarTitleHelper(
+            tester: tester,
+            mockGoRouter: mockGoRouter,
+          );
+
+          await nawbarLoginNavigationHelper(
             tester: tester,
             mockGoRouter: mockGoRouter,
           );

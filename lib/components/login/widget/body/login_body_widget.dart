@@ -16,7 +16,10 @@ class LoginBodyWidget extends StatelessWidget {
         return LeftCardWidget(
           key: KWidgetkeys.screen.login.card,
           isDesk: isDesk,
-          childWidget: BlocBuilder<LoginBloc, LoginState>(
+          childWidget: BlocConsumer<LoginBloc, LoginState>(
+            listener: (context, state) => state.failure == LoginError.none
+                ? context.go(KRoute.home.path)
+                : null,
             builder: (context, _) {
               return Column(
                 crossAxisAlignment: isDesk
@@ -45,8 +48,8 @@ class LoginBodyWidget extends StatelessWidget {
                         ? _.password.error.value(context)
                         : null,
                     email: context.read<LoginBloc>().state.email.value,
-                    backPassword: () => context.read<SignUpBloc>().add(
-                          const SignUpEvent.passwordHide(),
+                    backPassword: () => context.read<LoginBloc>().add(
+                          const LoginEvent.passwordHide(),
                         ),
                   ),
                   if (isDesk)

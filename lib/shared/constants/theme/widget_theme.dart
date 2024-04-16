@@ -20,6 +20,10 @@ abstract class KWidetTheme {
     borderRadius: KBorderRadius.kBorderRadius32,
     color: AppColors.lightGray,
   );
+  static BoxDecoration boxDecorationDonateCard = BoxDecoration(
+    borderRadius: KBorderRadius.kBorderRadius40,
+    color: AppColors.lightGray,
+  );
   static BoxDecoration boxDecorationImageDesk = BoxDecoration(
     borderRadius: KBorderRadius.kBorderRadiusLeft32,
     color: AppColors.lightGray,

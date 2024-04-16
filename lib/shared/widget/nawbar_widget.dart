@@ -1,6 +1,5 @@
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kozak/shared/shared.dart';
 
@@ -121,9 +120,7 @@ class _NawbarWidgetState extends State<NawbarWidget> {
               TextButton(
                 key: KWidgetkeys.widget.nawbar.button,
                 style: KButtonStyles.whiteButtonStyle,
-                onPressed: () => context.read<AuthenticationBloc>().add(
-                      AuthenticationLogoutRequested(),
-                    ),
+                onPressed: () => context.go(KRoute.login.path),
                 child: Text(
                   context.l10n.login,
                   style: AppTextStyle.text24,
@@ -131,9 +128,7 @@ class _NawbarWidgetState extends State<NawbarWidget> {
               )
             else if (!isFocused)
               InkWell(
-                onTap: () => context.read<AuthenticationBloc>().add(
-                      AuthenticationLogoutRequested(),
-                    ),
+                onTap: () => context.go(KRoute.login.path),
                 child: IconWidget(
                   key: KWidgetkeys.widget.nawbar.iconPerson,
                   icon: KIcon.person,
