@@ -1,6 +1,7 @@
 part of '../widget_keys.dart';
 
 class _WidgetKeys {
+  /// COMMENT: Add new variable here when you add a new file for widget keys
   final nawbar = _NawbarKeys();
   final question = _QuestionKeys();
   final filter = _FilterKeys();
@@ -26,4 +27,5 @@ class _WidgetKeys {
   final shellRoute = _ShellRouteKeys();
   final profileCard = _ProfileKeys();
   final feedback = _FeedbackKeys();
+  final donateCard = _DoanteCardKeys();
 }

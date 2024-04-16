@@ -1,3 +1,4 @@
+/// COMMENT: Variables with widget and font size
 abstract class KSize {
   static const kPixel3 = 3.0;
   static const kPixel8 = 8.0;
@@ -16,6 +17,7 @@ abstract class KSize {
   static const kPixel160 = 160.0;
 
   static const kRadius32 = 32.0;
+  static const kRadius40 = 40.0;
 
   static const kFont14 = 14.0;
   static const kFont16 = 16.0;

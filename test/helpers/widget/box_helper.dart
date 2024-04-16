@@ -15,3 +15,5 @@ Future<void> boxHelper(
 
   expect(find.byKey(KWidgetkeys.widget.box.icon), findsWidgets);
 }
+
+/// FOLDER FILES COMMENT: Files for widgets test

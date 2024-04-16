@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 
+/// COMMENT: Add a part here when you add a new file for keys
 part 'screen/screen.dart';
 
 part 'screen/home.dart';
@@ -76,6 +77,7 @@ part 'widget/shell_route.dart';
 
 part 'widget/pagination.dart';
 part 'widget/feedback.dart';
+part 'widget/donate_card.dart';
 
 abstract class KWidgetkeys {
   static _ScreenKeys get screen => _ScreenKeys();

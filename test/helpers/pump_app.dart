@@ -7,6 +7,9 @@ import 'package:kozak/shared/shared.dart';
 
 import '../test_mocks/test_mocks.dart';
 
+/// COMMENT: Helpers adds common elements to all screens in tests
+///
+/// mockGoRouter sets if you want use go router
 extension PumpApp on WidgetTester {
   Future<void> pumpApp(Widget widget, {MockGoRouter? mockGoRouter}) {
     return pumpWidget(

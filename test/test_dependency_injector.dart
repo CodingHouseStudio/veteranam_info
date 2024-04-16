@@ -2,6 +2,7 @@ import 'package:get_it/get_it.dart';
 import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
 
+/// COMMENT: Method register Services, Repositories and Blocs in tests
 void configureDependenciesTest() {
   // Services
   GetIt.I.registerSingleton<FakeClient>(FakeClient());

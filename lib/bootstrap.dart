@@ -24,6 +24,7 @@ class AppBlocObserver extends BlocObserver {
   }
 }
 
+/// COMMENT: Method adds dependencies in App
 Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
   FlutterError.onError = (details) {
     log(details.exceptionAsString(), stackTrace: details.stack);

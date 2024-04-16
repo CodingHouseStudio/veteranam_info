@@ -11,7 +11,7 @@ import 'package:kozak/shared/shared.dart';
 // const String passwordCorrectIntegrationTest = 'qwerty';
 // String randomUsername = generateRandomUsername();
 // String randomPassword = 'qwerty';
-
+/// COMMENT: Method sets setting for integration tests
 Future<void> setUpGlobalIntegration() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.web,
