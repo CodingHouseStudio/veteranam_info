@@ -6,6 +6,7 @@ import 'package:kozak/shared/shared.dart';
 import 'package:mockito/mockito.dart';
 
 import '../text_dependency.dart';
+import 'investors_widget/investors_widget.dart';
 
 void main() {
   setUp(configureDependenciesTest);
@@ -48,6 +49,8 @@ void main() {
       await tester.pumpAndSettle();
 
       await feedbackHelper(tester: tester);
+
+      await donatesCardHelper(tester);
     });
 
     testWidgets('Feedback enter correct text and save it', (tester) async {
@@ -124,6 +127,8 @@ void main() {
         await tester.pumpAndSettle();
 
         await feedbackHelper(tester: tester);
+
+        await donatesCardHelper(tester);
       });
       group('${KGroupText.goTo} ', () {
         testWidgets('All footer widget navigation', (tester) async {

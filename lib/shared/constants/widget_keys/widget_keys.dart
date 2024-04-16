@@ -77,6 +77,7 @@ part 'widget/shell_route.dart';
 
 part 'widget/pagination.dart';
 part 'widget/feedback.dart';
+part 'widget/donate_card.dart';
 
 abstract class KWidgetkeys {
   static _ScreenKeys get screen => _ScreenKeys();
