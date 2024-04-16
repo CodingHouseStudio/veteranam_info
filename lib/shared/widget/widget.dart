@@ -13,7 +13,7 @@ export 'drop_chip_widget.dart';
 export 'drop_list_field_widget.dart';
 export 'feedback_widget.dart';
 export 'filter_box_widget.dart';
-export 'filter_popup_menu.dart';
+export 'filter_popup_menu_widget.dart';
 export 'footer_widget.dart';
 export 'icon_widget.dart';
 export 'languages_switcher_widget.dart';

@@ -1,4 +1,4 @@
-// ignore_for_file: lines_longer_than_80_chars
+// ignore_for_file: lines_longer_than_80_chars, inference_failure_on_collection_literal
 
 import 'package:kozak/shared/shared.dart';
 
@@ -22,11 +22,15 @@ abstract class KMockText {
   static const description =
       'Якщо ви робите свій профіль анонімним, на вашій сторінці не\n'
       'буде відображатися персональна інформація, тільки\nnickname.';
-  static const filter = ['Пільги', 'Житло', 'Гарячі лінії'];
   static final date = DateTime(2024, 03, 12);
   static const userNameAnonim = 'Anonim23456';
   static const emial = 'example@gmail.com';
-  static const tags = ['Пільги'];
+  static const tags = <List<String>?>[
+    ['Пільги', 'Гарячі лінії'],
+    ['Житло'],
+    [],
+    ['Житло', 'Гарячі лінії'],
+  ];
   static const workTitle = 'Комплектувальник товару в магазин';
   static const workPrice = '12000 грн +%';
   static const workCity = 'м.Одеса';

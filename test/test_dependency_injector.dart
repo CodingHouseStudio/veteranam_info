@@ -13,6 +13,7 @@ void configureDependenciesTest() {
   // Repositories
   GetIt.I.registerSingleton<IFeedbackRepository>(FeedbackRepository());
   GetIt.I.registerSingleton<IHomeRepository>(HomeRepository());
+  GetIt.I.registerSingleton<IInformationRepository>(InformationRepository());
   // Blocs
   GetIt.I.registerFactory<FilterCubit>(FilterCubit.new);
   GetIt.I.registerFactory<LanguageCubit>(LanguageCubit.new);
@@ -21,5 +22,10 @@ void configureDependenciesTest() {
   );
   GetIt.I.registerSingleton<HomeWatcherBloc>(
     HomeWatcherBloc(homeRepository: GetIt.I.get<IHomeRepository>()),
+  );
+  GetIt.I.registerSingleton<InformationWatcherBloc>(
+    InformationWatcherBloc(
+      informationRepository: GetIt.I.get<IInformationRepository>(),
+    ),
   );
 }
