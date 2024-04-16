@@ -27,5 +27,6 @@ class _WidgetKeys {
   final shellRoute = _ShellRouteKeys();
   final profileCard = _ProfileKeys();
   final feedback = _FeedbackKeys();
+  final profileCardWidget = _ProfileCardWidgetKeys();
   final donateCard = _DoanteCardKeys();
 }
