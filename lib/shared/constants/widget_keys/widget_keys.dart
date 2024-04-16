@@ -78,6 +78,7 @@ part 'widget/shell_route.dart';
 part 'widget/pagination.dart';
 
 part 'widget/feedback.dart';
+part 'widget/donate_card.dart';
 
 part 'widget/profile_card_widget.dart';
 
