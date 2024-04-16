@@ -12,6 +12,10 @@ abstract class KMockText {
     'Трускавець',
     'Стебник',
   ];
+  static const donateCardTitle = 'Благодійний фонд '
+      '«ПОВЕРНИСЬ ЖИВИМ»';
+  static const donateCardSubtitle =
+      '«Повернись живим» — це благодійний фонд компетентної допомоги армії, а також громадська організація, яка займається аналітикою у секторі безпеки та оборони, реалізує проєкти з реабілітації ветеранів через спорт.';
   static const userName = 'Володимир Левандовський';
   static const nickname = '@veteran';
   static const email = 'example@gmail.com';

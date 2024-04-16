@@ -32,13 +32,10 @@
   "writeYouLastName" : "Write your last name",
   "saveChanges" : "Save changes",
   "editData" : "Edit data",
-  "name" : "Name",
   "lastName" : "Last name",
   "key" : "Key",
   "getMockData" : "No data found, click to add test data once",
   "faq" : "Frequency ask question",
-  "getMockData": "No data found, click to add test data once",
-  "faq": "Frequency ask question",
   "investors": "Investors",
   "investorsSubtitle": "In this section, you can support veterans. If you have a business, you can provide discounts or personalized offers for veterans. Write to us and we will contact you to discuss the details.",
   "name": "Name",
@@ -59,5 +56,8 @@
   "isWrong": "is wrong",
   "isWrongEmail": "is wrong",
   "logOut" : " Log out",
-  "deleteAccount" : "Delete account"
+  "deleteAccount" : "Delete account",
+  "support":  "Support",
+  "funds":  "Funds",
+  "fundsSubtitle":  "Do you want to support veterans not with words but with deeds? Here are the largest proven foundations you can donate to. You can send any amount of money, because there are no small donations."
 }

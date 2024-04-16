@@ -39,7 +39,6 @@ class FooterWidget extends StatelessWidget {
           children: [
             if (isDesktop)
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: List.generate(buttonsText.length, (index) {
                   return Expanded(
                     child: _FooterImplementationWidget(
