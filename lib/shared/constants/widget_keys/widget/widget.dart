@@ -27,4 +27,7 @@ class _WidgetKeys {
   final shellRoute = _ShellRouteKeys();
   final profileCard = _ProfileKeys();
   final feedback = _FeedbackKeys();
+  final emailPasswordFields = _EmailPasswordFieldsKeys();
+  final leftCard = _LeftCardKeys();
+  final signUpBottomButtons = _SignUpBottomButtonsKeys();
 }

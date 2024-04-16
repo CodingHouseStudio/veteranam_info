@@ -6,8 +6,11 @@ class AboutUsBodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       children: [
+        CheckPointWidget(
+          onChanged: ({required isCheck}) {},
+        ),
         KSizedBox.kHeightSizedBox30,
       ],
     );

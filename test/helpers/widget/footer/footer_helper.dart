@@ -44,6 +44,14 @@ Future<void> footerHelper({
     }
   }
 
+  expect(
+    find.descendant(
+      of: find.byKey(KWidgetkeys.widget.footer.widget),
+      matching: find.text('${KTestText.footer}$email'),
+    ),
+    findsOneWidget,
+  );
+
   // await changeWindowSizeHelper(tester: tester);
 
   // expect(find.byKey(KWidgetkeys.widget.footer.logo), findsNothing);

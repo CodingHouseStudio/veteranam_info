@@ -14,4 +14,6 @@ class _ScreenKeys {
   final aboutUs = _AboutUsKeys();
   final consultation = _ConsultationKeys();
   final contact = _ContactKeys();
+  final login = _LoginKeys();
+  final signUp = _SignUpKeys();
 }

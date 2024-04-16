@@ -100,6 +100,10 @@ abstract class KMockText {
 
 /// README: Variables with specific text
 abstract class KAppText {
+  static const String authTokenKey = 'AUTH_TOKEN';
+  static const String authChange = 'AuthenticationStatusChanged:';
+  static const String backendString = '';
+  static const String usernameToken = 'USERNAME_TOKEN';
   static final routes = [
     [
       '${KRoute.home.path}${KRoute.aboutUs.path}',

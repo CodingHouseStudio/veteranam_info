@@ -3,8 +3,8 @@ import 'package:go_router/go_router.dart';
 import 'package:kozak/shared/shared.dart';
 
 class FooterWidget extends StatelessWidget {
-  const FooterWidget({required this.isDesktop, super.key});
-  final bool isDesktop;
+  const FooterWidget({required this.isDesk, super.key});
+  final bool isDesk;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class FooterWidget extends StatelessWidget {
       key: KWidgetkeys.widget.footer.widget,
       decoration: KWidetTheme.boxDecorationCard,
       child: Padding(
-        padding: isDesktop
+        padding: isDesk
             ? const EdgeInsets.all(KPadding.kPaddingSize48)
             : const EdgeInsets.symmetric(
                 horizontal: KPadding.kPaddingSize16,
@@ -37,7 +37,7 @@ class FooterWidget extends StatelessWidget {
               ),
         child: Column(
           children: [
-            if (isDesktop)
+            if (isDesk)
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: List.generate(buttonsText.length, (index) {
@@ -81,7 +81,7 @@ class FooterWidget extends StatelessWidget {
                   ],
                 ),
               ),
-            if (isDesktop) KSizedBox.kHeightSizedBox48,
+            if (isDesk) KSizedBox.kHeightSizedBox48,
             Row(
               children: [
                 IconWidget(

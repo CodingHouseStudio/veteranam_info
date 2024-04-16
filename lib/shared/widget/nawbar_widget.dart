@@ -1,5 +1,6 @@
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kozak/shared/shared.dart';
 
@@ -97,6 +98,9 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                 focusedBorder: KBorder.outlineInputTransparent,
                 disposeFocusNode: false,
                 isDesk: widget.isDesk,
+                contentPadding: widget.isDesk
+                    ? EdgeInsets.zero
+                    : const EdgeInsets.all(KPadding.kPaddingSize16),
               ),
             ),
             if (widget.isDesk && widget.hasMicrophone)
@@ -117,16 +121,23 @@ class _NawbarWidgetState extends State<NawbarWidget> {
               TextButton(
                 key: KWidgetkeys.widget.nawbar.button,
                 style: KButtonStyles.whiteButtonStyle,
-                onPressed: null,
+                onPressed: () => context.read<AuthenticationBloc>().add(
+                      AuthenticationLogoutRequested(),
+                    ),
                 child: Text(
                   context.l10n.login,
                   style: AppTextStyle.text24,
                 ),
               )
             else if (!isFocused)
-              IconWidget(
-                key: KWidgetkeys.widget.nawbar.iconPerson,
-                icon: KIcon.person,
+              InkWell(
+                onTap: () => context.read<AuthenticationBloc>().add(
+                      AuthenticationLogoutRequested(),
+                    ),
+                child: IconWidget(
+                  key: KWidgetkeys.widget.nawbar.iconPerson,
+                  icon: KIcon.person,
+                ),
               ),
           ],
         ),

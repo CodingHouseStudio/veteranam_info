@@ -15,7 +15,7 @@ extension EmailFieldModelValidationErrorEmpl
       case EmailFieldModelValidationError.empty:
         return context.l10n.fieldCannotBeEmpty;
       case EmailFieldModelValidationError.invalidLength:
-        return '${context.l10n.email} ${context.l10n.tooshortEmail}';
+        return '${context.l10n.email} ${context.l10n.tooShortEmail}';
       case EmailFieldModelValidationError.wrong:
         return '${context.l10n.email} ${context.l10n.isWrongEmail}';
       case null:
@@ -25,14 +25,14 @@ extension EmailFieldModelValidationErrorEmpl
 }
 
 class EmailFieldModel
-    extends FormzInput<String?, EmailFieldModelValidationError> {
-  const EmailFieldModel.pure() : super.pure(null);
+    extends FormzInput<String, EmailFieldModelValidationError> {
+  const EmailFieldModel.pure() : super.pure('');
 
   const EmailFieldModel.dirty([super.value = '']) : super.dirty();
 
   @override
-  EmailFieldModelValidationError? validator(String? value) {
-    if (value == null || value.isEmpty) {
+  EmailFieldModelValidationError? validator(String value) {
+    if (value.isEmpty) {
       return EmailFieldModelValidationError.empty;
     }
 
