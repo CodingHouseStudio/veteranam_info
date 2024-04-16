@@ -6,6 +6,7 @@ import 'package:kozak/shared/shared.dart';
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 final _shellNavigatorKey = GlobalKey<NavigatorState>();
 
+/// COMMENT: Variable for navigation in App
 final GoRouter router = GoRouter(
   routerNeglect: true,
   navigatorKey: _rootNavigatorKey,

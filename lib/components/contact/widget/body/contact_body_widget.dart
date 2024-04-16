@@ -45,6 +45,7 @@ class ContactBodyWidget extends StatelessWidget {
           text: KMockText.title,
           icon: KIcon.plus,
         ),
+        KSizedBox.kHeightSizedBox30,
       ],
     );
   }

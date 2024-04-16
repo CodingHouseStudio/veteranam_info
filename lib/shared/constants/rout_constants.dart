@@ -1,5 +1,6 @@
 // ignore_for_file: library_private_types_in_public_api
 
+/// COMMENT: Class has path and name for all screens
 class _RouteItem {
   const _RouteItem({required this.path, required this.name});
 

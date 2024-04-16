@@ -2,6 +2,7 @@
 
 import 'package:kozak/shared/shared.dart';
 
+/// COMMENT: Variables with mock text. It's temporary data we change it when add firebase for this elements
 abstract class KMockText {
   static const dropDownList = [
     'Житомир',
@@ -11,6 +12,10 @@ abstract class KMockText {
     'Трускавець',
     'Стебник',
   ];
+  static const donateCardTitle = 'Благодійний фонд '
+      '«ПОВЕРНИСЬ ЖИВИМ»';
+  static const donateCardSubtitle =
+      '«Повернись живим» — це благодійний фонд компетентної допомоги армії, а також громадська організація, яка займається аналітикою у секторі безпеки та оборони, реалізує проєкти з реабілітації ветеранів через спорт.';
   static const userName = 'Володимир Левандовський';
   static const nickname = '@veteran';
   static const email = 'example@gmail.com';
@@ -101,6 +106,7 @@ abstract class KMockText {
       'https://static.vecteezy.com/system/resources/thumbnails/008/492/251/small/back-to-school-illustration-cartoon-character-children-kid-png.png';
 }
 
+/// README: Variables with specific text
 abstract class KAppText {
   static final routes = [
     [

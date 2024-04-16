@@ -17,11 +17,6 @@ class ListQuestionWidget extends StatelessWidget {
       key: KWidgetkeys.screen.home.question,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          context.l10n.faq,
-          key: KWidgetkeys.screen.home.questionListTitle,
-          style: isDesk ? AppTextStyle.text96 : AppTextStyle.text48,
-        ),
         if (isDesk)
           KSizedBox.kHeightSizedBox48
         else
