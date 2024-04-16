@@ -9,3 +9,5 @@ extension ExtendedDateTime on DateTime {
     _customTime = customTime;
   }
 }
+
+enum LoadingStatus { initial, loading, loaded, error }

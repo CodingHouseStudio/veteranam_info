@@ -58,6 +58,7 @@ class ButtonWidget extends StatelessWidget {
           crossAxisAlignment: WrapCrossAlignment.center,
           children: [
             if (icon != null) icon!,
+            KSizedBox.kWidthSizedBox16,
             Text(
               text,
               style: textStyle ??

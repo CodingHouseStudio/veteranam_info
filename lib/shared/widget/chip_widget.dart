@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kozak/shared/shared.dart';
 
 class ChipWidget extends StatelessWidget {
-  const ChipWidget({required this.filter, super.key});
+  const ChipWidget({
+    required this.filter,
+    required this.isSelected,
+    required this.onSelected,
+    required this.isDesk,
+    super.key,
+  });
   final String filter;
+  final bool isSelected;
+  final void Function({required bool isSelected}) onSelected;
+  final bool isDesk;
 
   @override
   Widget build(BuildContext context) {
@@ -12,23 +20,14 @@ class ChipWidget extends StatelessWidget {
       key: KWidgetkeys.widget.chip.widget,
       label: Text(
         filter,
-        style: AppTextStyle.text18,
+        style: isDesk ? AppTextStyle.text20 : AppTextStyle.text16,
       ),
       shape: RoundedRectangleBorder(
         borderRadius: KBorderRadius.kBorderRadius32,
       ),
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-      selected: context.read<FilterCubit>().state.isNotEmpty &&
-          context
-              .read<FilterCubit>()
-              .state
-              .elementAt(0)
-              .toString()
-              .contains(filter),
-      onSelected: (bool isSelected) => context.read<FilterCubit>().change(
-            filterValue: filter,
-            index: 0,
-          ),
+      selected: isSelected,
+      onSelected: (value) => onSelected(isSelected: value),
       checkmarkColor: AppColors.black,
       selectedColor: AppColors.widgetBackground,
     );
