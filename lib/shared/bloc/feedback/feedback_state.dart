@@ -1,12 +1,5 @@
 part of 'feedback_bloc.dart';
 
-enum FeedbackEnum {
-  initial,
-  inProgress,
-  success,
-  invalidData,
-}
-
 enum FeedbackFailure {
   none,
   error,
@@ -25,7 +18,7 @@ class FeedbackState with _$FeedbackState {
     required NameFieldModel name,
     required EmailFieldModel email,
     required MessageFieldModel message,
-    required FeedbackEnum fieldsState,
+    required FieldEnum fieldsState,
     required FeedbackFailure failure,
   }) = _FeedbackState;
 }

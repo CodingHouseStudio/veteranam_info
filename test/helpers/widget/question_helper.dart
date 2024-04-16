@@ -54,4 +54,23 @@ Future<void> questionHelper(
     find.byKey(KWidgetkeys.widget.question.subtitle),
     findsOneWidget,
   );
+
+  await scrollingHelper(
+    tester: tester,
+    itemKey: KWidgetkeys.widget.question.title,
+  );
+
+  await tester.tap(find.byKey(KWidgetkeys.widget.question.title).first);
+
+  await tester.pumpAndSettle();
+
+  expect(
+    find.byKey(KWidgetkeys.widget.question.iconMinus),
+    findsNothing,
+  );
+
+  expect(
+    find.byKey(KWidgetkeys.widget.question.subtitle),
+    findsNothing,
+  );
 }

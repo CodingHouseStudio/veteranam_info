@@ -32,6 +32,10 @@ abstract class KWidetTheme {
     shape: BoxShape.circle,
     color: AppColors.white,
   );
+  static BoxDecoration boxDecorationWhite = BoxDecoration(
+    borderRadius: KBorderRadius.kBorderRadiusRight32,
+    color: AppColors.white,
+  );
 
   static BoxDecoration boxDecorationCircularGray = const BoxDecoration(
     shape: BoxShape.circle,

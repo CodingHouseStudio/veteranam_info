@@ -8,4 +8,14 @@ class SomeFailure with _$SomeFailure {
   const factory SomeFailure.initial() = _Initial;
 
   const factory SomeFailure.serverError() = _ServerError;
+
+  const factory SomeFailure.unauthorized() = _Unauthorized;
+
+  const factory SomeFailure.notFound() = _NotFound;
+
+  const factory SomeFailure.duplicate() = _Duplicate;
+
+  const factory SomeFailure.tooManyRequests() = _TooManyRequests;
+
+  const factory SomeFailure.emailSendingFailed() = _EmailSendingFailed;
 }

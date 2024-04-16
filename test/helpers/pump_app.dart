@@ -11,10 +11,24 @@ import '../test_mocks/test_mocks.dart';
 ///
 /// mockGoRouter sets if you want use go router
 extension PumpApp on WidgetTester {
-  Future<void> pumpApp(Widget widget, {MockGoRouter? mockGoRouter}) {
+  Future<void> pumpApp(
+    Widget widget, {
+    MockGoRouter? mockGoRouter,
+    String? fullPath,
+  }) {
     return pumpWidget(
-      BlocProvider(
-        create: (context) => GetIt.I.get<LanguageCubit>()..initLanguage(),
+      MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => GetIt.I.get<LanguageCubit>()..initLanguage(),
+          ),
+          BlocProvider(
+            create: (context) => GetIt.I.get<AuthenticationBloc>()
+              ..add(
+                AuthenticationInitialized(),
+              ),
+          ),
+        ],
         child: BlocBuilder<LanguageCubit, Language?>(
           builder: (context, state) => mockGoRouter == null
               ? MaterialApp(
@@ -24,7 +38,7 @@ extension PumpApp on WidgetTester {
                   supportedLocales: AppLocalizations.supportedLocales,
                   home: ScaffoldWithNavBar(
                     navigationShell: widget,
-                    goRouterState: MockGoRouterState(),
+                    goRouterState: MockGoRouterState(fullPath: fullPath),
                   ),
                 )
               : MockGoRouterProvider(
@@ -36,7 +50,7 @@ extension PumpApp on WidgetTester {
                     supportedLocales: AppLocalizations.supportedLocales,
                     home: ScaffoldWithNavBar(
                       navigationShell: widget,
-                      goRouterState: MockGoRouterState(),
+                      goRouterState: MockGoRouterState(fullPath: fullPath),
                     ),
                   ),
                 ),

@@ -9,3 +9,10 @@ extension ExtendedDateTime on DateTime {
     _customTime = customTime;
   }
 }
+
+enum FieldEnum {
+  initial,
+  inProgress,
+  success,
+  invalidData,
+}

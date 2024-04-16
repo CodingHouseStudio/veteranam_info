@@ -52,15 +52,23 @@ void main() {
 
     testWidgets('${KGroupText.intial} ', (tester) async {
       registerHomeBloc();
-      await tester.pumpApp(const HomeScreen());
+      await tester.pumpApp(const HomeScreen(), fullPath: KRoute.home.path);
 
       expect(find.byKey(KWidgetkeys.screen.home.screen), findsOneWidget);
 
       await tester.pumpAndSettle();
 
+      await nawbarHelper(
+        tester: tester,
+        searchText: KTestText.field,
+        hasMic: false,
+      );
+
       await homeBoxHelper(tester);
 
       await listQuestionHelper(tester);
+
+      await footerHelper(tester: tester, email: KTestText.useremail);
     });
 
     testWidgets('Feedback enter correct text and save it', (tester) async {
@@ -119,13 +127,27 @@ void main() {
       setUp(() => mockGoRouter = MockGoRouter());
       testWidgets('${KGroupText.intial} ', (tester) async {
         registerHomeBloc();
-        await tester.pumpApp(const HomeScreen(), mockGoRouter: mockGoRouter);
+        await tester.pumpApp(
+          const HomeScreen(),
+          mockGoRouter: mockGoRouter,
+          fullPath: KRoute.home.path,
+        );
 
         expect(find.byKey(KWidgetkeys.screen.home.screen), findsOneWidget);
 
         await tester.pumpAndSettle();
 
+        await nawbarHelper(
+          tester: tester,
+          searchText: KTestText.field,
+          hasMic: false,
+        );
+
+        await homeBoxHelper(tester);
+
         await listQuestionHelper(tester);
+
+        await footerHelper(tester: tester, email: KTestText.useremail);
       });
 
       group('${KGroupText.goTo} ', () {
