@@ -33,6 +33,7 @@ void configureDependenciesTest() {
       GetIt.I.get<IAppAuthenticationRepository>(),
     ),
   );
+  GetIt.I.registerSingleton<IInformationRepository>(InformationRepository());
   // Blocs
   GetIt.I.registerFactory<FilterCubit>(FilterCubit.new);
   GetIt.I.registerFactory<LanguageCubit>(LanguageCubit.new);
@@ -55,6 +56,11 @@ void configureDependenciesTest() {
   GetIt.I.registerSingleton<SignUpBloc>(
     SignUpBloc(
       iAppAuthenticationRepository: GetIt.I.get<IAppAuthenticationRepository>(),
+    ),
+  );
+  GetIt.I.registerSingleton<InformationWatcherBloc>(
+    InformationWatcherBloc(
+      informationRepository: GetIt.I.get<IInformationRepository>(),
     ),
   );
 }

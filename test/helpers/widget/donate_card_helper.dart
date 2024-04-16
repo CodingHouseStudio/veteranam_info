@@ -1,0 +1,23 @@
+import 'package:flutter_test/flutter_test.dart';
+import 'package:kozak/shared/shared.dart';
+
+import '../../text_dependency.dart';
+
+Future<void> donateCardHelper(
+  WidgetTester tester,
+) async {
+  await scrollingHelper(
+    tester: tester,
+    itemKey: KWidgetkeys.widget.donateCard.widget,
+  );
+
+  expect(find.byKey(KWidgetkeys.widget.donateCard.widget), findsWidgets);
+
+  expect(find.byKey(KWidgetkeys.widget.donateCard.button), findsWidgets);
+
+  // expect(find.byKey(KWidgetkeys.widget.donateCard.image), findsWidgets);
+
+  expect(find.byKey(KWidgetkeys.widget.donateCard.subtitle), findsNothing);
+
+  expect(find.byKey(KWidgetkeys.widget.donateCard.title), findsWidgets);
+}

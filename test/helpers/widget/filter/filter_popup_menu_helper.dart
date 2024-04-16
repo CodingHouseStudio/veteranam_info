@@ -1,8 +1,16 @@
-part of 'filter_box_helper.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:kozak/shared/shared.dart';
 
-Future<void> _filterPopupMenuHelper(
+import '../../../text_dependency.dart';
+
+Future<void> filterPopupMenuHelper(
   WidgetTester tester,
 ) async {
+  await scrollingHelper(
+    tester: tester,
+    itemKey: KWidgetkeys.widget.filterPopupMenu.widget,
+  );
+
   await tester.tap(
     find.byKey(KWidgetkeys.widget.filterPopupMenu.widget),
   );

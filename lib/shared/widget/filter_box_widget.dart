@@ -22,7 +22,9 @@ class _FilterBoxWidgetState extends State<FilterBoxWidget> {
       key: KWidgetkeys.widget.filter.widget,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const FilterPopupMenu(),
+        FilterPopupMenuWidget(
+          onResetValue: () => context.read<FilterCubit>().resetAllValues(),
+        ),
         KSizedBox.kWidthSizedBox10,
         if (!KPlatformConstants.isWebMobile)
           Expanded(
@@ -64,6 +66,19 @@ class _FilterBoxWidgetState extends State<FilterBoxWidget> {
               )
             : ChipWidget(
                 filter: filter,
+                isSelected: context.read<FilterCubit>().state.isNotEmpty &&
+                    context
+                        .read<FilterCubit>()
+                        .state
+                        .elementAt(0)
+                        .toString()
+                        .contains(filter),
+                onSelected: ({required bool isSelected}) =>
+                    context.read<FilterCubit>().change(
+                          filterValue: filter,
+                          index: 0,
+                        ),
+                isDesk: true,
               ),
       );
     }).toList();

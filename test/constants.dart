@@ -110,6 +110,31 @@ abstract class KTestText {
     timestamp: DateTime(2024, 4, 12, 0, 0, 0, 1),
     message: KTestText.field,
   );
+
+  static final informationModelItems = <InformationModel>[
+    InformationModel(
+      id: '1',
+      title: 'Як мені знайти роботу за допомогою цього сайту?',
+      news: 'Використовуйте веб-сайти спеціалізованих сервісів для'
+          ' пошуку роботи,'
+          ' таких як Indeed, LinkedIn, Glassdoor, Monster, або регіональні '
+          'ресурси. Виберіть свою область інтересів та регіон, і шукайте '
+          'вакансії, які відповідають вашим критеріям.',
+      date: DateTime.now(),
+      tags: ['test_tags_1'],
+    ),
+    InformationModel(
+      id: '2',
+      title: 'Як мені знайти роботу за допомогою цього сайту?',
+      news:
+          'Використовуйте веб-сайти спеціалізованих сервісів для пошуку роботи,'
+          ' таких як Indeed, LinkedIn, Glassdoor, Monster, або регіональні '
+          'ресурси. Виберіть свою область інтересів та регіон, і шукайте '
+          'вакансії, які відповідають вашим критеріям.',
+      date: DateTime.now(),
+      tags: ['test_tags_2'],
+    ),
+  ];
 }
 
 abstract class KTestConstants {
@@ -151,4 +176,5 @@ abstract class KScreenBlocName {
 
   static const iAppAuthenticationRepository = 'App Authentication';
   static const authentication = ' Authentication';
+  static const informationBloc = 'Information Bloc';
 }

@@ -5,6 +5,7 @@ class CardTextDetailEvaluateWidget extends StatefulWidget {
   const CardTextDetailEvaluateWidget({
     required this.text,
     required this.titleWidget,
+    required this.isDesk,
     super.key,
     this.buttonText,
     this.image,
@@ -21,6 +22,7 @@ class CardTextDetailEvaluateWidget extends StatefulWidget {
   final String? image;
   final Widget? bottom;
   final Widget? titleDate;
+  final bool isDesk;
 
   @override
   State<CardTextDetailEvaluateWidget> createState() =>
@@ -41,98 +43,92 @@ class _CardTextDetailEvaluateWidgetState
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints) {
-        final isDesk =
-            KPlatformConstants.changeToDescWidget(constraints.maxWidth);
-        return CardAddImageWidget(
-          titleWidget:
-              !isDesk && widget.titleTopMob ? widget.titleWidget : null,
-          image: widget.image,
-          childWidget: Center(
-            key: KWidgetkeys.widget.cardTextDetailEvaluate.widget,
-            child: ConstrainedBox(
-              constraints: const BoxConstraints(
-                maxWidth: KMinMaxSize.maxWidth640,
+    return CardAddImageWidget(
+      titleWidget:
+          !widget.isDesk && widget.titleTopMob ? widget.titleWidget : null,
+      image: widget.image,
+      childWidget: Center(
+        key: KWidgetkeys.widget.cardTextDetailEvaluate.widget,
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(
+            maxWidth: KMinMaxSize.maxWidth640,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Padding(
+                padding: EdgeInsets.only(
+                  top: widget.isDesk
+                      ? KPadding.kPaddingSize8
+                      : KPadding.kPaddingSize16,
+                  bottom: widget.isDesk
+                      ? KPadding.kPaddingSize32
+                      : KPadding.kPaddingSize16,
+                ),
+                child: buildTitle(isDesk: widget.isDesk),
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
+              CardTextDetailWidget(
+                text: widget.text,
+                maxLines: KDimensions.storyCardMaxLines,
+                buttonText: widget.buttonText,
+                buttonStyle: widget.buttonStyle,
+              ),
+              KSizedBox.kHeightSizedBox24,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Padding(
-                    padding: EdgeInsets.only(
-                      top: isDesk
-                          ? KPadding.kPaddingSize8
-                          : KPadding.kPaddingSize16,
-                      bottom: isDesk
-                          ? KPadding.kPaddingSize32
-                          : KPadding.kPaddingSize16,
-                    ),
-                    child: buildTitle(isDesk: isDesk),
-                  ),
-                  CardTextDetailWidget(
-                    text: widget.text,
-                    maxLines: KDimensions.storyCardMaxLines,
-                    buttonText: widget.buttonText,
-                    buttonStyle: widget.buttonStyle,
-                  ),
-                  KSizedBox.kHeightSizedBox24,
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Row(
-                        children: [
-                          InkWell(
-                            onTap: () => setState(() {
-                              like == null || like == false
-                                  ? like = true
-                                  : like = null;
-                            }),
-                            child: like == null || !like!
-                                ? KIcon.like.setIconKey(
-                                    KWidgetkeys
-                                        .widget.cardTextDetailEvaluate.iconLike,
-                                  )
-                                : KIcon.activeLike.setIconKey(
-                                    KWidgetkeys.widget.cardTextDetailEvaluate
-                                        .iconActiveLike,
-                                  ),
-                          ),
-                          KSizedBox.kWidthSizedBox8,
-                          KIcon.smile.setIconKey(
-                            KWidgetkeys.widget.cardTextDetailEvaluate.iconSmile,
-                          ),
-                          KSizedBox.kWidthSizedBox8,
-                          InkWell(
-                            onTap: () => setState(() {
-                              like == null || like! == true
-                                  ? like = false
-                                  : like = null;
-                            }),
-                            child: like == null || like!
-                                ? KIcon.dislike.setIconKey(
-                                    KWidgetkeys.widget.cardTextDetailEvaluate
-                                        .iconDislike,
-                                  )
-                                : KIcon.activeDislike.setIconKey(
-                                    KWidgetkeys.widget.cardTextDetailEvaluate
-                                        .iconActiveDislike,
-                                  ),
-                          ),
-                        ],
+                      InkWell(
+                        onTap: () => setState(() {
+                          like == null || like == false
+                              ? like = true
+                              : like = null;
+                        }),
+                        child: like == null || !like!
+                            ? KIcon.like.setIconKey(
+                                KWidgetkeys
+                                    .widget.cardTextDetailEvaluate.iconLike,
+                              )
+                            : KIcon.activeLike.setIconKey(
+                                KWidgetkeys.widget.cardTextDetailEvaluate
+                                    .iconActiveLike,
+                              ),
                       ),
-                      KIcon.share.setIconKey(
-                        KWidgetkeys.widget.cardTextDetailEvaluate.iconShare,
+                      KSizedBox.kWidthSizedBox8,
+                      KIcon.smile.setIconKey(
+                        KWidgetkeys.widget.cardTextDetailEvaluate.iconSmile,
+                      ),
+                      KSizedBox.kWidthSizedBox8,
+                      InkWell(
+                        onTap: () => setState(() {
+                          like == null || like! == true
+                              ? like = false
+                              : like = null;
+                        }),
+                        child: like == null || like!
+                            ? KIcon.dislike.setIconKey(
+                                KWidgetkeys
+                                    .widget.cardTextDetailEvaluate.iconDislike,
+                              )
+                            : KIcon.activeDislike.setIconKey(
+                                KWidgetkeys.widget.cardTextDetailEvaluate
+                                    .iconActiveDislike,
+                              ),
                       ),
                     ],
                   ),
-                  if (widget.bottom != null) widget.bottom!,
+                  KIcon.share.setIconKey(
+                    KWidgetkeys.widget.cardTextDetailEvaluate.iconShare,
+                  ),
                 ],
               ),
-            ),
+              if (widget.bottom != null) widget.bottom!,
+            ],
           ),
-          isDesk: isDesk,
-        );
-      },
+        ),
+      ),
+      isDesk: widget.isDesk,
     );
   }
 
@@ -141,7 +137,7 @@ class _CardTextDetailEvaluateWidgetState
       return Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          if (isDesk || !widget.titleTopMob) widget.titleWidget,
+          if (widget.isDesk || !widget.titleTopMob) widget.titleWidget,
           widget.titleDate!,
         ],
       );

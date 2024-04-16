@@ -16,7 +16,10 @@ class SignUpBodyWidget extends StatelessWidget {
         return LeftCardWidget(
           key: KWidgetkeys.screen.signUp.card,
           isDesk: isDesk,
-          childWidget: BlocBuilder<SignUpBloc, SignUpState>(
+          childWidget: BlocConsumer<SignUpBloc, SignUpState>(
+            listener: (context, state) => state.failure == SignUpError.none
+                ? context.go(KRoute.home.path)
+                : null,
             builder: (context, _) {
               return Column(
                 crossAxisAlignment: isDesk

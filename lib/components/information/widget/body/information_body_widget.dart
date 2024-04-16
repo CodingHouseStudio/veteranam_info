@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
+import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
 
 class InformationBodyWidget extends StatelessWidget {
@@ -6,16 +9,118 @@ class InformationBodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        KSizedBox.kHeightSizedBox30,
-        NewsCardWidget(
-          news: KMockText.cardData,
-          newsDate: KMockText.date,
-          title: KMockText.title,
-        ),
-        KSizedBox.kHeightSizedBox30,
-      ],
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final isDesk =
+            KPlatformConstants.changeToDescWidget(constraints.maxWidth);
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (isDesk)
+              KSizedBox.kHeightSizedBox40
+            else
+              KSizedBox.kHeightSizedBox16,
+            Text(
+              context.l10n.information,
+              key: KWidgetkeys.screen.information.title,
+              style: isDesk ? AppTextStyle.text96 : AppTextStyle.text32,
+            ),
+            KSizedBox.kHeightSizedBox8,
+            Text(
+              context.l10n.informationSubtitle,
+              key: KWidgetkeys.screen.information.subtitle,
+              style: isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
+            ),
+            if (isDesk)
+              KSizedBox.kHeightSizedBox56
+            else
+              KSizedBox.kHeightSizedBox24,
+            BlocBuilder<InformationWatcherBloc, InformationWatcherState>(
+              builder: (context, _) {
+                switch (_.loadingStatus) {
+                  case LoadingStatus.initial:
+                    return const CircularProgressIndicator.adaptive();
+                  case LoadingStatus.loading:
+                    return const CircularProgressIndicator.adaptive();
+                  case LoadingStatus.loaded:
+                    return _.informationModelItems.isNotEmpty
+                        ? ListView.builder(
+                            key: KWidgetkeys.screen.information.list,
+                            physics: const NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            itemCount: _.filteredInformationModelItems.length,
+                            itemBuilder: (context, index) {
+                              return Column(
+                                children: [
+                                  if (index == 0)
+                                    AuditInspectionInProgresFilters(
+                                      key:
+                                          KWidgetkeys.screen.information.filter,
+                                      filtersItem:
+                                          _.informationModelItems.overallTags,
+                                      isDesk: isDesk,
+                                    ),
+                                  if (isDesk)
+                                    KSizedBox.kHeightSizedBox40
+                                  else
+                                    KSizedBox.kHeightSizedBox24,
+                                  NewsCardWidget(
+                                    key: KWidgetkeys.screen.information.card,
+                                    informationItem: _
+                                        .filteredInformationModelItems
+                                        .elementAt(index),
+                                    isDesk: isDesk,
+                                  ),
+                                ],
+                              );
+                            },
+                          )
+                        : TextButton(
+                            key: KWidgetkeys.screen.information.buttonMock,
+                            onPressed: () {
+                              GetIt.I
+                                  .get<IInformationRepository>()
+                                  .addMockInformationItems();
+                              context
+                                  .read<InformationWatcherBloc>()
+                                  .add(const InformationWatcherEvent.started());
+                            },
+                            child: Text(
+                              context.l10n.getMockData,
+                              style: AppTextStyle.text32,
+                            ),
+                          );
+                  case LoadingStatus.error:
+                    return const CircularProgressIndicator.adaptive();
+                }
+              },
+            ),
+            if (isDesk)
+              KSizedBox.kHeightSizedBox56
+            else
+              KSizedBox.kHeightSizedBox24,
+            Center(
+              child: ButtonWidget(
+                key: KWidgetkeys.screen.information.button,
+                text: context.l10n.moreNews,
+                onPressed: () => context.read<InformationWatcherBloc>().add(
+                      const InformationWatcherEvent.loadNextItems(),
+                    ),
+                icon: isDesk
+                    ? KIcon.refresh
+                        .setIconKey(KWidgetkeys.screen.information.buttonIcon)
+                    : null,
+                isDesk: isDesk,
+                iconRightMerge: isDesk ? KSizedBox.kWidthSizedBox16 : null,
+              ),
+            ),
+            if (isDesk)
+              KSizedBox.kHeightSizedBox56
+            else
+              KSizedBox.kHeightSizedBox24,
+          ],
+        );
+      },
     );
   }
 }

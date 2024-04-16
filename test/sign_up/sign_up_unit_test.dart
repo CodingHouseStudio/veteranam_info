@@ -187,5 +187,38 @@ void main() {
         ),
       ],
     );
+    blocTest<SignUpBloc, SignUpState>(
+      'emits [SignUpState] when email are changed, submited and hide password',
+      build: () => signUpBloc,
+      act: (bloc) {
+        return bloc
+          ..add(const SignUpEvent.emailUpdated(KTestText.useremail))
+          ..add(const SignUpEvent.signUpSubmitted())
+          ..add(const SignUpEvent.passwordHide());
+      },
+      expect: () => [
+        const SignUpState(
+          email: EmailFieldModel.dirty(KTestText.useremail),
+          password: PasswordFieldModel.pure(),
+          failure: SignUpError.initial,
+          fieldsState: FieldEnum.inProgress,
+          showPassword: false,
+        ),
+        const SignUpState(
+          email: EmailFieldModel.dirty(KTestText.useremail),
+          password: PasswordFieldModel.pure(),
+          failure: SignUpError.initial,
+          fieldsState: FieldEnum.initial,
+          showPassword: true,
+        ),
+        const SignUpState(
+          email: EmailFieldModel.dirty(KTestText.useremail),
+          password: PasswordFieldModel.pure(),
+          failure: SignUpError.initial,
+          fieldsState: FieldEnum.inProgress,
+          showPassword: false,
+        ),
+      ],
+    );
   });
 }

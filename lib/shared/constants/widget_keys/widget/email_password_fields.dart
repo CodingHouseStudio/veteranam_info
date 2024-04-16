@@ -6,4 +6,5 @@ class _EmailPasswordFieldsKeys {
       const Key('email_passwords_fields_email_field_password');
   final textEmail = const Key('email_passwords_fields_email_text_email');
   final textPassword = const Key('email_passwords_fields_email_text_password');
+  final buttonHidePassword = const Key('email_passwords_button_hide_password');
 }

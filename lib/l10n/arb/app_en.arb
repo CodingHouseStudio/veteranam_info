@@ -71,5 +71,10 @@
   "password": "Password",
   "createSecurePassword": "Create a secure password",
   "capitalLetter": "must contain one or more capital letter",
-  "oneNumber": "must contain one or more number"
+  "oneNumber": "must contain one or more number",
+  "informationSubtitle": "In this section you will find verified information on how to get help, etc. You can use filters for convenience.",
+  "moreNews": "More news",
+  "support": "Support",
+  "funds": "Funds",
+  "fundsSubtitle": "Do you want to support veterans not with words but with deeds? Here are the largest proven foundations you can donate to. You can send any amount of money, because there are no small donations."
 }

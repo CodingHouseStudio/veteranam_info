@@ -19,3 +19,5 @@ Future<void> changeWindowSizeHelper({
 
   await tester.pump();
 }
+
+/// FOLDER FILES COMMENT: Files for widgets test or helper for test

@@ -173,7 +173,7 @@ void main() {
         ],
       );
       blocTest<HomeWatcherBloc, HomeWatcherState>(
-        'emits [HomeWatcherState.faulure()] when audit error',
+        'emits [HomeWatcherState.faulure()] when error',
         build: () => homeWatcherBloc,
         act: (bloc) async {
           when(mockHomeRepository.getQuestions()).thenAnswer(

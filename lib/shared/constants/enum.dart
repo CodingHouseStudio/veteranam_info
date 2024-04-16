@@ -10,6 +10,8 @@ extension ExtendedDateTime on DateTime {
   }
 }
 
+enum LoadingStatus { initial, loading, loaded, error }
+
 enum FieldEnum {
   initial,
   inProgress,

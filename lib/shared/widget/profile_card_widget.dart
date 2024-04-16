@@ -25,11 +25,40 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _buildProfileHeader(),
-                if (isEditing)
-                  _editProfileNameAndLastName()
-                else
-                  _displayProfileName(),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      width: 60,
+                      height: 60,
+                      decoration: BoxDecoration(
+                        borderRadius: KBorderRadius.kBorderRadiusL,
+                        color: AppColors.widgetBackground,
+                      ),
+                      child: const Center(
+                        child: KIcon.person,
+                      ),
+                    ),
+                    KSizedBox.kWidthSizedBox16,
+                    Expanded(
+                      child: isEditing
+                          ? Text(
+                              context.l10n.editData,
+                              style: AppTextStyle.text40,
+                            )
+                          : _displayProfileName(),
+                    ),
+                  ],
+                ),
+                if (isEditing) ...[
+                  KSizedBox.kHeightSizedBox8,
+                  _textField(context.l10n.name, context.l10n.writeYouName),
+                  KSizedBox.kHeightSizedBox8,
+                  _textField(
+                    context.l10n.lastName,
+                    context.l10n.writeYouLastName,
+                  ),
+                ],
                 KSizedBox.kHeightSizedBox8,
                 _buildProfileInfo(),
                 KSizedBox.kHeightSizedBox8,
@@ -42,69 +71,38 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
     );
   }
 
-  Widget _buildProfileHeader() {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          width: 50,
-          height: 50,
-          decoration: BoxDecoration(
-            borderRadius: KBorderRadius.kBorderRadiusL,
-            color: AppColors.widgetBackground,
-          ),
-          child: const Center(
-            child: KIcon.person,
-          ),
-        ),
-        KSizedBox.kWidthSizedBox30,
-      ],
-    );
-  }
-
-  Widget _editProfileNameAndLastName() {
+  Widget _textField(String label, String hint) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(context.l10n.editData, style: AppTextStyle.text40),
-        KSizedBox.kHeightSizedBox8,
-        _textField(context.l10n.name, context.l10n.writeYouName),
-        KSizedBox.kHeightSizedBox8,
-        _textField(context.l10n.lastName, context.l10n.writeYouLastName),
+        Text(label, style: AppTextStyle.text24),
+        TextFieldWidget(
+          onChanged: (value) {},
+          widgetKey: KWidgetkeys.widget.profileCardWidget.textFiled,
+          hintText: hint,
+          fillColor: AppColors.transparent,
+        ),
       ],
     );
   }
 
   Widget _displayProfileName() {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Expanded(
+        KSizedBox.kWidthSizedBox24,
+        const Flexible(
+          flex: 2,
           child: Text(
             KMockText.userName,
             style: AppTextStyle.text40,
+            softWrap: true,
             overflow: TextOverflow.ellipsis,
           ),
         ),
         GestureDetector(
           onTap: () => setState(() => isEditing = !isEditing),
           child: KIcon.edit,
-        ),
-      ],
-    );
-  }
-
-  Widget _textField(String label, String hint) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(label, style: AppTextStyle.text24),
-        TextField(
-          decoration: InputDecoration(
-            border: KBorder.buttonStyleOutlineInputBorder,
-            labelText: hint,
-            labelStyle: AppTextStyle.hint24,
-          ),
-          onChanged: (value) {},
         ),
       ],
     );
@@ -133,6 +131,7 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
           ],
         ),
         Text(context.l10n.beAnonymousDetails, style: AppTextStyle.hint14),
+        KSizedBox.kHeightSizedBox24,
         if (isEditing)
           Padding(
             padding: const EdgeInsets.only(

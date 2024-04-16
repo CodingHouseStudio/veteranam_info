@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kozak/components/components.dart';
@@ -18,16 +17,16 @@ final GoRouter router = GoRouter(
   refreshListenable:
       GoRouterRefreshStream(GetIt.instance<AuthenticationBloc>().stream),
   initialLocation: KRoute.home.path,
-  redirect: (BuildContext context, GoRouterState state) async {
-    if (context.read<AuthenticationBloc>().state.status ==
-        AuthenticationStatus.authenticated) {
-      return state.uri.toString().contains(KRoute.login.path) ||
-              state.uri.toString().contains(KRoute.signUp.path)
-          ? KRoute.home.path
-          : null;
-    }
-    return null;
-  },
+  // redirect: (BuildContext context, GoRouterState state) async {
+  //   if (context.read<AuthenticationBloc>().state.status ==
+  //       AuthenticationStatus.authenticated) {
+  //     return state.uri.toString().contains(KRoute.login.path) ||
+  //             state.uri.toString().contains(KRoute.signUp.path)
+  //         ? KRoute.home.path
+  //         : null;
+  //   }
+  //   return null;
+  // },
   routes: [
     ShellRoute(
       navigatorKey: _shellNavigatorKey,
