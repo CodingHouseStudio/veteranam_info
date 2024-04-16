@@ -28,4 +28,5 @@ class _WidgetKeys {
   final profileCard = _ProfileKeys();
   final feedback = _FeedbackKeys();
   final profileCardWidget = _ProfileCardWidgetKeys();
+  final donateCard = _DoanteCardKeys();
 }
