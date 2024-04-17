@@ -51,6 +51,8 @@ class HomeBodyWidget extends StatelessWidget {
                         ),
                         if (questionModelItems.isNotEmpty)
                           ListView.builder(
+                            primary: false,
+                            physics: const NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
                             itemCount: questionModelItems.length,
                             itemBuilder: (context, index) => ListQuestionWidget(
