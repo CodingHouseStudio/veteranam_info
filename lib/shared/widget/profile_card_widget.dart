@@ -2,10 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:kozak/shared/shared.dart';
 
 class ProfileCardWidget extends StatefulWidget {
-  const ProfileCardWidget({super.key});
+  const ProfileCardWidget({
+    required this.isDesk,
+    super.key,
+  });
 
   @override
   ProfileCardWidgetState createState() => ProfileCardWidgetState();
+  final bool isDesk;
 }
 
 class ProfileCardWidgetState extends State<ProfileCardWidget> {
@@ -80,7 +84,10 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
           onChanged: (value) {},
           widgetKey: KWidgetkeys.widget.profileCardWidget.textFiled,
           hintText: hint,
+          hintStyle: widget.isDesk ? AppTextStyle.hint24 : AppTextStyle.hint16,
           fillColor: AppColors.transparent,
+          contentPadding: const EdgeInsets.all(KPadding.kPaddingSize16),
+          isDesk: widget.isDesk,
         ),
       ],
     );
@@ -96,10 +103,11 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
           child: Text(
             KMockText.userName,
             style: AppTextStyle.text40,
-            softWrap: true,
+            maxLines: 2,
             overflow: TextOverflow.ellipsis,
           ),
         ),
+        const Spacer(),
         GestureDetector(
           onTap: () => setState(() => isEditing = !isEditing),
           child: KIcon.edit,
