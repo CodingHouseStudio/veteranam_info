@@ -7,9 +7,15 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return HomeBlocprovider(
-      key: KWidgetkeys.screen.home.screen,
-      childWidget: const HomeBodyWidget(),
+    return Scaffold(
+      appBar: const NawbarWidget(
+        isDesk: false,
+        hasMicrophone: false,
+      ),
+      body: HomeBlocprovider(
+        key: KWidgetkeys.screen.home.screen,
+        childWidget: const HomeBodyWidget(),
+      ),
     );
   }
 }

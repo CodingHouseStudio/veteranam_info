@@ -46,6 +46,10 @@ class ContactBodyWidget extends StatelessWidget {
           icon: KIcon.plus,
         ),
         KSizedBox.kHeightSizedBox30,
+        const PageIndicatorControl(
+          pageCount: 3,
+        ),
+        KSizedBox.kHeightSizedBox30,
       ],
     );
   }
