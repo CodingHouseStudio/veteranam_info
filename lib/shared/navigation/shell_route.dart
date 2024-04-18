@@ -24,6 +24,7 @@ class ScaffoldWithNavBar extends StatelessWidget {
         final isDesk =
             constraints.maxWidth > KPlatformConstants.minWidthThresholdDesktop;
         return Scaffold(
+          extendBodyBehindAppBar: true,
           appBar: NawbarWidget(
             isDesk: isDesk,
             hasMicrophone: goRouterState.fullPath != KRoute.home.path,
@@ -47,7 +48,7 @@ class ScaffoldWithNavBar extends StatelessWidget {
               top: KPadding.kPaddingSize10,
             ),
             children: [
-              navigationShell,
+              SafeArea(child: navigationShell),
               FooterWidget(
                 isDesktop: isDesk,
               ),

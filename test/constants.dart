@@ -130,6 +130,7 @@ abstract class KTestText {
 abstract class KTestConstants {
   static const scrollingDown = Offset(0, -10000);
   static const scrollingUp = Offset(0, 10000);
+  static const scrollingAppBar = Offset(0, KSize.kPreferredSize);
 
   static const windowTabletSize = Size(1700, 1700);
 
