@@ -45,7 +45,7 @@ class _FeedbackWidgetState extends State<FeedbackWidget> {
           current.fieldsState != previous.fieldsState,
       listener: (context, state) {
         if (state.fieldsState == FieldEnum.success ||
-            state.fieldsState == FieldEnum.initial) {
+            state.fieldsState == FieldEnum.clear) {
           nameController.clear();
           emailController.clear();
           messageController.clear();

@@ -12,5 +12,5 @@ class SignUpEvent with _$SignUpEvent {
 
   const factory SignUpEvent.reset() = _SignUpReset;
 
-  const factory SignUpEvent.passwordHide() = _PasswordHide;
+  const factory SignUpEvent.passwordFieldHide() = _PasswordFieldHide;
 }

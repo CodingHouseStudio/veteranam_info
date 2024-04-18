@@ -10,5 +10,5 @@ class LoginEvent with _$LoginEvent {
 
   const factory LoginEvent.loginSubmitted() = _LoginSubmitted;
 
-  const factory LoginEvent.passwordHide() = _PasswordHide;
+  const factory LoginEvent.passwordFieldHide() = _PasswordFieldHide;
 }

@@ -34,22 +34,22 @@ class LoginBodyWidget extends StatelessWidget {
                   EmailPasswordFieldsWidget(
                     key: KWidgetkeys.screen.login.fields,
                     isDesk: isDesk,
-                    showPassword: _.showPassword,
+                    showPassword: _.showPasswordField,
                     onChangedEmail: (value) => context
                         .read<LoginBloc>()
                         .add(LoginEvent.emailUpdated(value)),
                     onChangedPassword: (value) => context
                         .read<LoginBloc>()
                         .add(LoginEvent.passwordUpdated(value)),
-                    errorTextEmail: _.fieldsState == FieldEnum.invalidData
-                        ? _.email.error.value(context)
-                        : null,
-                    errorTextPassword: _.fieldsState == FieldEnum.invalidData
-                        ? _.password.error.value(context)
-                        : null,
+                    errorTextEmail: _.fieldsIsCorrect ?? true
+                        ? null
+                        : _.email.error.value(context),
+                    errorTextPassword: _.fieldsIsCorrect ?? true
+                        ? null
+                        : _.password.error.value(context),
                     email: context.read<LoginBloc>().state.email.value,
                     backPassword: () => context.read<LoginBloc>().add(
-                          const LoginEvent.passwordHide(),
+                          const LoginEvent.passwordFieldHide(),
                         ),
                   ),
                   if (isDesk)
