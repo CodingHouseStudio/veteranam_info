@@ -27,6 +27,7 @@ class HomeBodyWidget extends StatelessWidget {
             case HomeWatcherStateSuccess():
               final questionModelItems = state.questionModelItems;
               return ListView.builder(
+                  key: KWidgetkeys.widget.shellRoute.scroll,
                   itemCount: 1,
                   padding: EdgeInsets.only(
                     left: KPadding.kPaddingSize75 *
