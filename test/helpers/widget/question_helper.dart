@@ -55,11 +55,6 @@ Future<void> questionHelper(
     findsOneWidget,
   );
 
-  await scrollingHelper(
-    tester: tester,
-    itemKey: KWidgetkeys.widget.question.title,
-  );
-
   await tester.tap(find.byKey(KWidgetkeys.widget.question.title).first);
 
   await tester.pumpAndSettle();

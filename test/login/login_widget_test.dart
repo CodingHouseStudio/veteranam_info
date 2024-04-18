@@ -45,7 +45,11 @@ void main() {
     }
 
     testWidgets('${KGroupText.intial} ', (tester) async {
-      await tester.pumpApp(const LoginScreen(), fullPath: KRoute.login.path);
+      await tester.pumpApp(
+        const LoginScreen(),
+        withoutShellRoute: true,
+        fullPath: KRoute.login.path,
+      );
 
       expect(
         find.byKey(KWidgetkeys.screen.login.screen),
@@ -97,7 +101,11 @@ void main() {
     });
     testWidgets('Write incorrect email', (tester) async {
       registerLoginBloc();
-      await tester.pumpApp(const LoginScreen(), fullPath: KRoute.login.path);
+      await tester.pumpApp(
+        const LoginScreen(),
+        withoutShellRoute: true,
+        fullPath: KRoute.login.path,
+      );
 
       expect(
         find.byKey(KWidgetkeys.screen.login.screen),
@@ -130,6 +138,7 @@ void main() {
       registerLoginBloc();
       await tester.pumpApp(
         const LoginScreen(),
+        withoutShellRoute: true,
         fullPath: KRoute.login.path,
       );
 
@@ -161,6 +170,7 @@ void main() {
       testWidgets('${KGroupText.intial} ', (tester) async {
         await tester.pumpApp(
           const LoginScreen(),
+          withoutShellRoute: true,
           mockGoRouter: mockGoRouter,
           fullPath: KRoute.login.path,
         );
@@ -217,6 +227,7 @@ void main() {
         testWidgets('Navigate to ${KScreenBlocName.signUp}', (tester) async {
           await tester.pumpApp(
             const LoginScreen(),
+            withoutShellRoute: true,
             mockGoRouter: mockGoRouter,
             fullPath: KRoute.login.path,
           );
@@ -241,6 +252,7 @@ void main() {
             const LoginScreen(),
             fullPath: KRoute.login.path,
             mockGoRouter: mockGoRouter,
+            withoutShellRoute: true,
           );
 
           expect(
@@ -265,6 +277,7 @@ void main() {
           registerLoginBloc();
           await tester.pumpApp(
             const LoginScreen(),
+            withoutShellRoute: true,
             fullPath: KRoute.login.path,
             mockGoRouter: mockGoRouter,
           );

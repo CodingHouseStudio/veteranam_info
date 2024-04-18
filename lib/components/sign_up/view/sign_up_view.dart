@@ -7,9 +7,23 @@ class SignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SignUpBlocprovider(
-      key: KWidgetkeys.screen.signUp.screen,
-      childWidget: const SignUpBodyWidget(),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final isDesk =
+            constraints.maxWidth > KPlatformConstants.minWidthThresholdTablet;
+        return Scaffold(
+          appBar: NawbarWidget(
+            isDesk: isDesk,
+          ),
+          body: SignUpBlocprovider(
+            key: KWidgetkeys.screen.signUp.screen,
+            childWidget: SignUpBodyWidget(
+              isDesk: isDesk,
+            ),
+          ),
+          backgroundColor: AppColors.blackWhite,
+        );
+      },
     );
   }
 }

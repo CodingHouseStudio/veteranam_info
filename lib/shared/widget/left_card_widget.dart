@@ -30,6 +30,7 @@ class LeftCardWidget extends StatelessWidget {
                     child: Container(
                       decoration: KWidetTheme.boxDecorationWhite,
                       child: SingleChildScrollView(
+                        key: KWidgetkeys.widget.shellRoute.scroll,
                         child: Center(
                           child: ConstrainedBox(
                             constraints: const BoxConstraints(
@@ -57,8 +58,9 @@ class LeftCardWidget extends StatelessWidget {
             ),
           )
         : SingleChildScrollView(
-            key: KWidgetkeys.widget.leftCard.mob,
+            key: KWidgetkeys.widget.shellRoute.scroll,
             child: Padding(
+              key: KWidgetkeys.widget.leftCard.mob,
               padding: const EdgeInsets.only(
                 top: KPadding.kPaddingSize56,
                 right: KPadding.kPaddingSize16,

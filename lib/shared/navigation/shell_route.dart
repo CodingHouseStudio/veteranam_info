@@ -23,17 +23,6 @@ class ScaffoldWithNavBar extends StatelessWidget {
             constraints.maxWidth < KPlatformConstants.minWidthThresholdDesktop;
         final isDesk =
             constraints.maxWidth > KPlatformConstants.minWidthThresholdDesktop;
-        if (goRouterState.fullPath == KRoute.login.path ||
-            goRouterState.fullPath == KRoute.signUp.path) {
-          return Scaffold(
-            extendBodyBehindAppBar: true,
-            appBar: NawbarWidget(
-              isDesk: isDesk,
-            ),
-            body: navigationShell,
-            backgroundColor: AppColors.blackWhite,
-          );
-        }
         return Scaffold(
           extendBodyBehindAppBar: true,
           appBar: NawbarWidget(
