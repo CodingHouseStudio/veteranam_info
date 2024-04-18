@@ -17,18 +17,31 @@ void main() {
 
   tearDown(GetIt.I.reset);
   group('${KScreenBlocName.investors} ', () {
+    late IInvestorsRepository mockInvestorsRepository;
+    late InvestorsWatcherBloc investorsBloc;
     late IFeedbackRepository mockFeedbackRepository;
     late FeedbackBloc feedbackBloc;
     setUp(() {
-      {
-        ExtendedDateTime.customTime = KTestText.feedbackModel.timestamp;
-        mockFeedbackRepository = MockIFeedbackRepository();
-        when(mockFeedbackRepository.sendFeedback(KTestText.feedbackModel))
-            .thenAnswer(
-          (invocation) async => const Right(true),
-        );
-      }
+      ExtendedDateTime.customTime = KTestText.feedbackModel.timestamp;
+      mockInvestorsRepository = MockIInvestorsRepository();
+      when(mockInvestorsRepository.getFunds()).thenAnswer(
+        (invocation) async => const Right(KTestText.fundItems),
+      );
+
+      mockFeedbackRepository = MockIFeedbackRepository();
+      when(mockFeedbackRepository.sendFeedback(KTestText.feedbackModel))
+          .thenAnswer(
+        (invocation) async => const Right(true),
+      );
     });
+    void registerInvestorsBloc() {
+      investorsBloc =
+          InvestorsWatcherBloc(investorsRepository: mockInvestorsRepository);
+      if (GetIt.I.isRegistered<InvestorsWatcherBloc>()) {
+        GetIt.I.unregister<InvestorsWatcherBloc>();
+      }
+      GetIt.I.registerSingleton<InvestorsWatcherBloc>(investorsBloc);
+    }
 
     void registerFeedbackBloc() {
       feedbackBloc = FeedbackBloc(feedbackRepository: mockFeedbackRepository);
@@ -39,6 +52,7 @@ void main() {
     }
 
     testWidgets('${KGroupText.intial} ', (tester) async {
+      registerInvestorsBloc();
       await tester.pumpApp(const InvestorsScreen());
 
       expect(
@@ -54,6 +68,7 @@ void main() {
     });
 
     testWidgets('Feedback enter correct text and save it', (tester) async {
+      registerInvestorsBloc();
       registerFeedbackBloc();
       await tester.pumpApp(const InvestorsScreen());
 
@@ -74,6 +89,7 @@ void main() {
     });
 
     testWidgets('Feedback enter incorrect text and save it', (tester) async {
+      registerInvestorsBloc();
       await tester.pumpApp(const InvestorsScreen());
 
       expect(
@@ -93,6 +109,7 @@ void main() {
     });
 
     testWidgets('Feedback enter text and clear it', (tester) async {
+      registerInvestorsBloc();
       registerFeedbackBloc();
       await tester.pumpApp(const InvestorsScreen());
 
@@ -114,6 +131,7 @@ void main() {
       late MockGoRouter mockGoRouter;
       setUp(() => mockGoRouter = MockGoRouter());
       testWidgets('${KGroupText.intial} ', (tester) async {
+        registerInvestorsBloc();
         await tester.pumpApp(
           const InvestorsScreen(),
           mockGoRouter: mockGoRouter,
@@ -131,6 +149,7 @@ void main() {
         await donatesCardHelper(tester);
       });
       group('${KGroupText.goTo} ', () {
+        registerInvestorsBloc();
         testWidgets('All footer widget navigation', (tester) async {
           registerFeedbackBloc();
           await tester.pumpApp(

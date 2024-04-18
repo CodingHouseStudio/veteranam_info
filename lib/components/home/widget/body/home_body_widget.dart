@@ -27,14 +27,13 @@ class HomeBodyWidget extends StatelessWidget {
             else
               KSizedBox.kHeightSizedBox40,
             BlocBuilder<HomeWatcherBloc, HomeWatcherState>(
-              builder: (context, state) {
-                switch (state) {
+              builder: (context, _) {
+                switch (_) {
                   case HomeWatcherStateInitial():
                     return const CircularProgressIndicator.adaptive();
                   case HomeWatcherStateLoading():
                     return const CircularProgressIndicator.adaptive();
                   case HomeWatcherStateSuccess():
-                    final questionModelItems = state.questionModelItems;
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -49,13 +48,13 @@ class HomeBodyWidget extends StatelessWidget {
                                 : AppTextStyle.text48,
                           ),
                         ),
-                        if (questionModelItems.isNotEmpty)
+                        if (_.questionModelItems.isNotEmpty)
                           ListView.builder(
                             primary: false,
                             shrinkWrap: true,
-                            itemCount: questionModelItems.length,
+                            itemCount: _.questionModelItems.length,
                             itemBuilder: (context, index) => ListQuestionWidget(
-                              questionModelItem: questionModelItems[index],
+                              questionModelItem: _.questionModelItems[index],
                               isDesk: isDesk,
                             ),
                           )
