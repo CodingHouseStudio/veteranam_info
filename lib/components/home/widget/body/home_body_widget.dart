@@ -27,9 +27,8 @@ class HomeBodyWidget extends StatelessWidget {
                 return const CircularProgressIndicator.adaptive();
               case HomeWatcherStateSuccess():
                 final questionModelItems = state.questionModelItems;
-                return ListView.builder(
+                return ListView.custom(
                   key: KWidgetkeys.widget.shellRoute.scroll,
-                  itemCount: 1,
                   padding: EdgeInsets.only(
                     left: KPadding.kPaddingSize75 *
                         (isMobile
@@ -48,70 +47,81 @@ class HomeBodyWidget extends StatelessWidget {
                     top: KPadding.kPaddingSize10,
                   ),
                   primary: true,
-                  itemBuilder: (context, index) => Column(
-                    children: [
-                      if (isDesk)
-                        KSizedBox.kHeightSizedBox24
-                      else
-                        KSizedBox.kHeightSizedBox16,
-                      BoxesWidget(
-                        isDesk: isDesk,
-                      ),
-                      if (isDesk)
-                        KSizedBox.kHeightSizedBox160
-                      else
-                        KSizedBox.kHeightSizedBox40,
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                  childrenDelegate: SliverChildBuilderDelegate(
+                    (context, state) {
+                      return Column(
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.all(
-                              KPadding.kPaddingSize16,
-                            ),
-                            child: Text(
-                              context.l10n.faq,
-                              key: KWidgetkeys.screen.home.questionListTitle,
-                              style: isDesk
-                                  ? AppTextStyle.text96
-                                  : AppTextStyle.text48,
-                            ),
-                          ),
-                          if (questionModelItems.isNotEmpty)
-                            ListQuestionWidget(
-                              questionModelItem: questionModelItems[index],
-                              isDesk: isDesk,
-                            )
+                          if (isDesk)
+                            KSizedBox.kHeightSizedBox24
                           else
-                            TextButton(
-                              key: KWidgetkeys.screen.home.buttonMock,
-                              onPressed: () {
-                                GetIt.I
-                                    .get<IHomeRepository>()
-                                    .addMockQuestions();
-                                context
-                                    .read<HomeWatcherBloc>()
-                                    .add(const HomeWatcherEvent.started());
-                              },
-                              child: Text(
-                                context.l10n.getMockData,
-                                style: AppTextStyle.text32,
+                            KSizedBox.kHeightSizedBox16,
+                          BoxesWidget(
+                            isDesk: isDesk,
+                          ),
+                          if (isDesk)
+                            KSizedBox.kHeightSizedBox160
+                          else
+                            KSizedBox.kHeightSizedBox40,
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(
+                                  KPadding.kPaddingSize16,
+                                ),
+                                child: Text(
+                                  context.l10n.faq,
+                                  key:
+                                      KWidgetkeys.screen.home.questionListTitle,
+                                  style: isDesk
+                                      ? AppTextStyle.text96
+                                      : AppTextStyle.text48,
+                                ),
                               ),
-                            ),
+                              if (questionModelItems.isNotEmpty)
+                                Column(
+                                  children: List.generate(
+                                    questionModelItems.length,
+                                    (index) => ListQuestionWidget(
+                                      questionModelItem:
+                                          questionModelItems[index],
+                                      isDesk: isDesk,
+                                    ),
+                                  ),
+                                )
+                              else
+                                TextButton(
+                                  key: KWidgetkeys.screen.home.buttonMock,
+                                  onPressed: () {
+                                    GetIt.I
+                                        .get<IHomeRepository>()
+                                        .addMockQuestions();
+                                    context
+                                        .read<HomeWatcherBloc>()
+                                        .add(const HomeWatcherEvent.started());
+                                  },
+                                  child: Text(
+                                    context.l10n.getMockData,
+                                    style: AppTextStyle.text32,
+                                  ),
+                                ),
+                            ],
+                          ),
+                          if (isDesk)
+                            KSizedBox.kHeightSizedBox160
+                          else
+                            KSizedBox.kHeightSizedBox40,
+                          FeedbackWidget(
+                            isDesk: isDesk,
+                          ),
+                          if (isDesk)
+                            KSizedBox.kHeightSizedBox160
+                          else
+                            KSizedBox.kHeightSizedBox10,
+                          FooterWidget(isDesktop: isDesk),
                         ],
-                      ),
-                      if (isDesk)
-                        KSizedBox.kHeightSizedBox160
-                      else
-                        KSizedBox.kHeightSizedBox40,
-                      FeedbackWidget(
-                        isDesk: isDesk,
-                      ),
-                      if (isDesk)
-                        KSizedBox.kHeightSizedBox160
-                      else
-                        KSizedBox.kHeightSizedBox10,
-                      FooterWidget(isDesktop: isDesk),
-                    ],
+                      );
+                    },
                   ),
                 );
 
