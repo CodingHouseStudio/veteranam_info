@@ -91,6 +91,15 @@ abstract class KTestText {
     message: KTestText.field,
   );
 
+  static const fundItems = <FundModel>[
+    FundModel(
+      id: '1',
+      title: 'Test_title',
+      subtitle: 'Test_subtitle',
+      link: 'Test_limk',
+    ),
+  ];
+
   static final feedbackModelIncorect = FeedbackModel(
     id: DateTime(2024, 4, 12, 0, 0, 0, 1).microsecondsSinceEpoch.toString(),
     guestId:
@@ -157,4 +166,5 @@ abstract class KScreenBlocName {
   static const homeBloc = 'Home Bloc';
   static const feedbackBloc = 'Feedback Bloc';
   static const informationBloc = 'Information Bloc';
+  static const investorsBloc = 'Investors Bloc';
 }
