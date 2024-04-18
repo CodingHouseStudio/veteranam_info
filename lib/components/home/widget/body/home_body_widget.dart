@@ -9,24 +9,25 @@ class HomeBodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(builder: (context, constraints) {
-      final isMobile =
-          constraints.maxWidth < KPlatformConstants.minWidthThresholdMobile;
-      final isTablet = constraints.maxWidth >=
-              KPlatformConstants.minWidthThresholdMobile &&
-          constraints.maxWidth < KPlatformConstants.minWidthThresholdDesktop;
-      final isDesk =
-          KPlatformConstants.changeToDescWidget(constraints.maxWidth);
-      return BlocBuilder<HomeWatcherBloc, HomeWatcherState>(
-        builder: (context, state) {
-          switch (state) {
-            case HomeWatcherStateInitial():
-              return const CircularProgressIndicator.adaptive();
-            case HomeWatcherStateLoading():
-              return const CircularProgressIndicator.adaptive();
-            case HomeWatcherStateSuccess():
-              final questionModelItems = state.questionModelItems;
-              return ListView.builder(
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final isMobile =
+            constraints.maxWidth < KPlatformConstants.minWidthThresholdMobile;
+        final isTablet = constraints.maxWidth >=
+                KPlatformConstants.minWidthThresholdMobile &&
+            constraints.maxWidth < KPlatformConstants.minWidthThresholdDesktop;
+        final isDesk =
+            KPlatformConstants.changeToDescWidget(constraints.maxWidth);
+        return BlocBuilder<HomeWatcherBloc, HomeWatcherState>(
+          builder: (context, state) {
+            switch (state) {
+              case HomeWatcherStateInitial():
+                return const CircularProgressIndicator.adaptive();
+              case HomeWatcherStateLoading():
+                return const CircularProgressIndicator.adaptive();
+              case HomeWatcherStateSuccess():
+                final questionModelItems = state.questionModelItems;
+                return ListView.builder(
                   key: KWidgetkeys.widget.shellRoute.scroll,
                   itemCount: 1,
                   padding: EdgeInsets.only(
@@ -48,77 +49,79 @@ class HomeBodyWidget extends StatelessWidget {
                   ),
                   primary: true,
                   itemBuilder: (context, index) => Column(
+                    children: [
+                      if (isDesk)
+                        KSizedBox.kHeightSizedBox24
+                      else
+                        KSizedBox.kHeightSizedBox16,
+                      BoxesWidget(
+                        isDesk: isDesk,
+                      ),
+                      if (isDesk)
+                        KSizedBox.kHeightSizedBox160
+                      else
+                        KSizedBox.kHeightSizedBox40,
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          if (isDesk)
-                            KSizedBox.kHeightSizedBox24
-                          else
-                            KSizedBox.kHeightSizedBox16,
-                          BoxesWidget(
-                            isDesk: isDesk,
+                          Padding(
+                            padding: const EdgeInsets.all(
+                              KPadding.kPaddingSize16,
+                            ),
+                            child: Text(
+                              context.l10n.faq,
+                              key: KWidgetkeys.screen.home.questionListTitle,
+                              style: isDesk
+                                  ? AppTextStyle.text96
+                                  : AppTextStyle.text48,
+                            ),
                           ),
-                          if (isDesk)
-                            KSizedBox.kHeightSizedBox160
+                          if (questionModelItems.isNotEmpty)
+                            ListQuestionWidget(
+                              questionModelItem: questionModelItems[index],
+                              isDesk: isDesk,
+                            )
                           else
-                            KSizedBox.kHeightSizedBox40,
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(
-                                    KPadding.kPaddingSize16),
-                                child: Text(
-                                  context.l10n.faq,
-                                  key:
-                                      KWidgetkeys.screen.home.questionListTitle,
-                                  style: isDesk
-                                      ? AppTextStyle.text96
-                                      : AppTextStyle.text48,
-                                ),
+                            TextButton(
+                              key: KWidgetkeys.screen.home.buttonMock,
+                              onPressed: () {
+                                GetIt.I
+                                    .get<IHomeRepository>()
+                                    .addMockQuestions();
+                                context
+                                    .read<HomeWatcherBloc>()
+                                    .add(const HomeWatcherEvent.started());
+                              },
+                              child: Text(
+                                context.l10n.getMockData,
+                                style: AppTextStyle.text32,
                               ),
-                              if (questionModelItems.isNotEmpty)
-                                ListQuestionWidget(
-                                  questionModelItem: questionModelItems[index],
-                                  isDesk: isDesk,
-                                )
-                              else
-                                TextButton(
-                                  key: KWidgetkeys.screen.home.buttonMock,
-                                  onPressed: () {
-                                    GetIt.I
-                                        .get<IHomeRepository>()
-                                        .addMockQuestions();
-                                    context
-                                        .read<HomeWatcherBloc>()
-                                        .add(const HomeWatcherEvent.started());
-                                  },
-                                  child: Text(
-                                    context.l10n.getMockData,
-                                    style: AppTextStyle.text32,
-                                  ),
-                                ),
-                            ],
-                          ),
-                          if (isDesk)
-                            KSizedBox.kHeightSizedBox160
-                          else
-                            KSizedBox.kHeightSizedBox40,
-                          FeedbackWidget(
-                            isDesk: isDesk,
-                          ),
-                          if (isDesk)
-                            KSizedBox.kHeightSizedBox160
-                          else
-                            KSizedBox.kHeightSizedBox10,
-                          FooterWidget(isDesktop: isDesk),
+                            ),
                         ],
-                      ));
+                      ),
+                      if (isDesk)
+                        KSizedBox.kHeightSizedBox160
+                      else
+                        KSizedBox.kHeightSizedBox40,
+                      FeedbackWidget(
+                        isDesk: isDesk,
+                      ),
+                      if (isDesk)
+                        KSizedBox.kHeightSizedBox160
+                      else
+                        KSizedBox.kHeightSizedBox10,
+                      FooterWidget(isDesktop: isDesk),
+                    ],
+                  ),
+                );
 
-            case HomeWatcherStateFailure():
-            default:
-              return const CircularProgressIndicator.adaptive();
-          }
-        },
-      );
-    });
+              case HomeWatcherStateFailure():
+              default:
+                return const CircularProgressIndicator.adaptive();
+            }
+          },
+        );
+      },
+    );
   }
 }

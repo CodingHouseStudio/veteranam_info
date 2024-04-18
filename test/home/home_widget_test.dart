@@ -119,8 +119,11 @@ void main() {
       setUp(() => mockGoRouter = MockGoRouter());
       testWidgets('${KGroupText.intial} ', (tester) async {
         registerHomeBloc();
-        await tester.pumpApp(const HomeScreen(),
-            isHome: true, mockGoRouter: mockGoRouter);
+        await tester.pumpApp(
+          const HomeScreen(),
+          isHome: true,
+          mockGoRouter: mockGoRouter,
+        );
 
         expect(find.byKey(KWidgetkeys.screen.home.screen), findsOneWidget);
 
@@ -132,8 +135,11 @@ void main() {
       group('${KGroupText.goTo} ', () {
         testWidgets('nawbar widget navigation', (tester) async {
           registerHomeBloc();
-          await tester.pumpApp(const HomeScreen(),
-              isHome: true, mockGoRouter: mockGoRouter);
+          await tester.pumpApp(
+            const HomeScreen(),
+            isHome: true,
+            mockGoRouter: mockGoRouter,
+          );
 
           expect(
             find.byKey(KWidgetkeys.screen.home.screen),
@@ -150,8 +156,11 @@ void main() {
 
         testWidgets('box widget navigation', (tester) async {
           registerHomeBloc();
-          await tester.pumpApp(const HomeScreen(),
-              isHome: true, mockGoRouter: mockGoRouter);
+          await tester.pumpApp(
+            const HomeScreen(),
+            isHome: true,
+            mockGoRouter: mockGoRouter,
+          );
 
           expect(find.byKey(KWidgetkeys.screen.home.screen), findsOneWidget);
 
