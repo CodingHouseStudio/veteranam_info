@@ -43,9 +43,10 @@ class _NawbarWidgetState extends State<NawbarWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        borderRadius: KBorderRadius.kBorderRadius32,
-        color: AppColors.widgetBackground,
+      decoration: KWidetTheme.boxDecorationCard,
+      margin: const EdgeInsets.symmetric(
+        vertical: KPadding.kPaddingSize24,
+        horizontal: KPadding.kPaddingSize80,
       ),
       child: Padding(
         padding: const EdgeInsets.all(KPadding.kPaddingSize8),

@@ -51,6 +51,7 @@ class HomeBodyWidget extends StatelessWidget {
                         ),
                         if (questionModelItems.isNotEmpty)
                           ListView.builder(
+                            primary: false,
                             shrinkWrap: true,
                             itemCount: questionModelItems.length,
                             itemBuilder: (context, index) => ListQuestionWidget(
