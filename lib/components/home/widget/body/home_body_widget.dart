@@ -82,9 +82,8 @@ class HomeBodyWidget extends StatelessWidget {
                                 Column(
                                   children: List.generate(
                                     questionModelItems.length,
-                                    (index) => ListQuestionWidget(
-                                      questionModelItem:
-                                          questionModelItems[index],
+                                    (index) => QuestionWidget(
+                                      questionModel: questionModelItems[index],
                                       isDesk: isDesk,
                                     ),
                                   ),
@@ -122,6 +121,7 @@ class HomeBodyWidget extends StatelessWidget {
                         ],
                       );
                     },
+                    childCount: 1,
                   ),
                 );
 

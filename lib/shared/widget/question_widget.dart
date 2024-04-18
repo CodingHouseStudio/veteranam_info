@@ -4,13 +4,11 @@ import 'package:kozak/shared/shared.dart';
 
 class QuestionWidget extends StatefulWidget {
   const QuestionWidget({
-    required this.title,
-    required this.subtitle,
+    required this.questionModel,
     required this.isDesk,
     super.key,
   });
-  final String title;
-  final String subtitle;
+  final QuestionModel questionModel;
   final bool isDesk;
 
   @override
@@ -48,7 +46,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
                 children: [
                   Expanded(
                     child: Text(
-                      widget.title,
+                      widget.questionModel.title,
                       key: KWidgetkeys.widget.question.title,
                       style: widget.isDesk
                           ? AppTextStyle.text40
@@ -80,7 +78,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
               ),
               child: Markdown(
                 key: KWidgetkeys.widget.question.subtitle,
-                data: widget.subtitle,
+                data: widget.questionModel.subtitle,
                 styleSheet: MarkdownStyleSheet(
                   p: widget.isDesk ? AppTextStyle.text24 : AppTextStyle.text14,
                 ),

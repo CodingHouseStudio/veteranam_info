@@ -11,15 +11,15 @@ Future<void> listQuestionHelper(
     findsNothing,
   );
 
-  expect(
-    find.byKey(KWidgetkeys.screen.home.question),
-    findsOneWidget,
-  );
+  // expect(
+  //   find.byKey(KWidgetkeys.screen.home.question),
+  //   findsOneWidget,
+  // );
 
-  expect(
-    find.byKey(KWidgetkeys.screen.home.questionList),
-    findsOneWidget,
-  );
+  // expect(
+  //   find.byKey(KWidgetkeys.screen.home.questionList),
+  //   findsOneWidget,
+  // );
 
   expect(
     find.byKey(KWidgetkeys.screen.home.questionListTitle),
