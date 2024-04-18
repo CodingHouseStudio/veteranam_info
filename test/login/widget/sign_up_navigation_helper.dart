@@ -13,6 +13,11 @@ Future<void> singUpNavigationHelper({
     findsOneWidget,
   );
 
+  await scrollingHelper(
+    tester: tester,
+    itemKey: KWidgetkeys.screen.login.signUpButton,
+  );
+
   await tester.tap(find.byKey(KWidgetkeys.screen.login.signUpButton));
 
   verify(() => mockGoRouter.go(KRoute.signUp.path)).called(1);
