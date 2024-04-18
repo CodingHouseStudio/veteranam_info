@@ -55,7 +55,7 @@ void main() {
       await tester.pumpApp(
         const HomeScreen(),
         fullPath: KRoute.home.path,
-        isHome: true,
+        withoutShellRoute: true,
       );
 
       expect(find.byKey(KWidgetkeys.screen.home.screen), findsOneWidget);
@@ -78,7 +78,7 @@ void main() {
     testWidgets('Feedback enter correct text and save it', (tester) async {
       registerHomeBloc();
       registerFeedbackBloc();
-      await tester.pumpApp(const HomeScreen(), isHome: true);
+      await tester.pumpApp(const HomeScreen(), withoutShellRoute: true);
 
       expect(find.byKey(KWidgetkeys.screen.home.screen), findsOneWidget);
 
@@ -95,7 +95,7 @@ void main() {
 
     testWidgets('Feedback enter incorrect text and save it', (tester) async {
       registerHomeBloc();
-      await tester.pumpApp(const HomeScreen(), isHome: true);
+      await tester.pumpApp(const HomeScreen(), withoutShellRoute: true);
 
       expect(find.byKey(KWidgetkeys.screen.home.screen), findsOneWidget);
 
@@ -113,7 +113,7 @@ void main() {
     testWidgets('Feedback enter text and clear it', (tester) async {
       registerHomeBloc();
       registerFeedbackBloc();
-      await tester.pumpApp(const HomeScreen(), isHome: true);
+      await tester.pumpApp(const HomeScreen(), withoutShellRoute: true);
 
       expect(find.byKey(KWidgetkeys.screen.home.screen), findsOneWidget);
 
@@ -134,7 +134,7 @@ void main() {
         await tester.pumpApp(
           const HomeScreen(),
           fullPath: KRoute.home.path,
-          isHome: true,
+          withoutShellRoute: true,
         );
 
         expect(find.byKey(KWidgetkeys.screen.home.screen), findsOneWidget);
@@ -160,7 +160,8 @@ void main() {
           await tester.pumpApp(
             const HomeScreen(),
             fullPath: KRoute.home.path,
-            isHome: true,
+            mockGoRouter: mockGoRouter,
+            withoutShellRoute: true,
           );
 
           expect(
@@ -185,7 +186,7 @@ void main() {
           registerHomeBloc();
           await tester.pumpApp(
             const HomeScreen(),
-            isHome: true,
+            withoutShellRoute: true,
             mockGoRouter: mockGoRouter,
           );
 

@@ -15,9 +15,9 @@ extension PumpApp on WidgetTester {
     Widget widget, {
     MockGoRouter? mockGoRouter,
     String? fullPath,
-    bool? isHome,
+    bool? withoutShellRoute,
   }) {
-    if (isHome ?? false) {
+    if (withoutShellRoute ?? false) {
       return pumpWidget(
         MultiBlocProvider(
           providers: [

@@ -46,7 +46,11 @@ void main() {
     }
 
     testWidgets('${KGroupText.intial} ', (tester) async {
-      await tester.pumpApp(const SignUpScreen(), fullPath: KRoute.signUp.path);
+      await tester.pumpApp(
+        const SignUpScreen(),
+        withoutShellRoute: true,
+        fullPath: KRoute.signUp.path,
+      );
 
       expect(
         find.byKey(KWidgetkeys.screen.signUp.screen),
@@ -98,7 +102,11 @@ void main() {
     });
     testWidgets('Write incorrect email', (tester) async {
       registerSignUpkBloc();
-      await tester.pumpApp(const SignUpScreen(), fullPath: KRoute.signUp.path);
+      await tester.pumpApp(
+        const SignUpScreen(),
+        withoutShellRoute: true,
+        fullPath: KRoute.signUp.path,
+      );
 
       expect(
         find.byKey(KWidgetkeys.screen.signUp.screen),
@@ -131,6 +139,7 @@ void main() {
       registerSignUpkBloc();
       await tester.pumpApp(
         const SignUpScreen(),
+        withoutShellRoute: true,
         fullPath: KRoute.signUp.path,
       );
 
@@ -162,6 +171,7 @@ void main() {
       testWidgets('${KGroupText.intial} ', (tester) async {
         await tester.pumpApp(
           const SignUpScreen(),
+          withoutShellRoute: true,
           mockGoRouter: mockGoRouter,
           fullPath: KRoute.signUp.path,
         );
@@ -218,6 +228,7 @@ void main() {
         testWidgets('Navigate to ${KScreenBlocName.signUp}', (tester) async {
           await tester.pumpApp(
             const SignUpScreen(),
+            withoutShellRoute: true,
             mockGoRouter: mockGoRouter,
             fullPath: KRoute.login.path,
           );
@@ -239,6 +250,7 @@ void main() {
           registerSignUpkBloc();
           await tester.pumpApp(
             const SignUpScreen(),
+            withoutShellRoute: true,
             fullPath: KRoute.signUp.path,
             mockGoRouter: mockGoRouter,
           );
@@ -265,6 +277,7 @@ void main() {
           registerSignUpkBloc();
           await tester.pumpApp(
             const SignUpScreen(),
+            withoutShellRoute: true,
             fullPath: KRoute.signUp.path,
             mockGoRouter: mockGoRouter,
           );
