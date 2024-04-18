@@ -15,7 +15,45 @@ extension PumpApp on WidgetTester {
     Widget widget, {
     MockGoRouter? mockGoRouter,
     String? fullPath,
+    bool? isHome,
   }) {
+    if (isHome ?? false) {
+      return pumpWidget(
+        MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (context) => GetIt.I.get<LanguageCubit>()..initLanguage(),
+            ),
+            BlocProvider(
+              create: (context) => GetIt.I.get<AuthenticationBloc>()
+                ..add(
+                  AuthenticationInitialized(),
+                ),
+            ),
+          ],
+          child: BlocBuilder<LanguageCubit, Language?>(
+            builder: (context, state) => mockGoRouter == null
+                ? MaterialApp(
+                    localizationsDelegates:
+                        AppLocalizations.localizationsDelegates,
+                    locale: state?.value,
+                    supportedLocales: AppLocalizations.supportedLocales,
+                    home: widget,
+                  )
+                : MockGoRouterProvider(
+                    goRouter: mockGoRouter,
+                    child: MaterialApp(
+                      localizationsDelegates:
+                          AppLocalizations.localizationsDelegates,
+                      locale: state?.value,
+                      supportedLocales: AppLocalizations.supportedLocales,
+                      home: widget,
+                    ),
+                  ),
+          ),
+        ),
+      );
+    }
     return pumpWidget(
       MultiBlocProvider(
         providers: [

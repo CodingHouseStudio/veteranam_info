@@ -26,6 +26,7 @@ class ScaffoldWithNavBar extends StatelessWidget {
         if (goRouterState.fullPath == KRoute.login.path ||
             goRouterState.fullPath == KRoute.signUp.path) {
           return Scaffold(
+            extendBodyBehindAppBar: true,
             appBar: NawbarWidget(
               isDesk: isDesk,
             ),
@@ -34,6 +35,7 @@ class ScaffoldWithNavBar extends StatelessWidget {
           );
         }
         return Scaffold(
+          extendBodyBehindAppBar: true,
           appBar: NawbarWidget(
             isDesk: isDesk,
             hasMicrophone: goRouterState.fullPath != KRoute.home.path,
@@ -57,7 +59,7 @@ class ScaffoldWithNavBar extends StatelessWidget {
               top: KPadding.kPaddingSize10,
             ),
             children: [
-              navigationShell,
+              SafeArea(child: navigationShell),
               FooterWidget(
                 isDesk: isDesk,
               ),
