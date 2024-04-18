@@ -38,7 +38,7 @@ class FeedbackBloc extends Bloc<FeedbackEvent, FeedbackState> {
     emit(
       state.copyWith(
         name: nameFieldModel,
-        fieldsState: FieldEnum.inProgress,
+        fieldsState: FieldEnum.initial,
       ),
     );
   }
@@ -51,7 +51,7 @@ class FeedbackBloc extends Bloc<FeedbackEvent, FeedbackState> {
     emit(
       state.copyWith(
         email: emailFieldModel,
-        fieldsState: FieldEnum.inProgress,
+        fieldsState: FieldEnum.initial,
       ),
     );
   }
@@ -64,7 +64,7 @@ class FeedbackBloc extends Bloc<FeedbackEvent, FeedbackState> {
     emit(
       state.copyWith(
         message: messageFieldModel,
-        fieldsState: FieldEnum.inProgress,
+        fieldsState: FieldEnum.initial,
       ),
     );
   }
@@ -121,7 +121,7 @@ class FeedbackBloc extends Bloc<FeedbackEvent, FeedbackState> {
         email: EmailFieldModel.pure(),
         message: MessageFieldModel.pure(),
         name: NameFieldModel.pure(),
-        fieldsState: FieldEnum.initial,
+        fieldsState: FieldEnum.clear,
         failure: FeedbackFailure.initial,
       ),
     );

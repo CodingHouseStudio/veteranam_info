@@ -22,3 +22,10 @@ class FeedbackState with _$FeedbackState {
     required FeedbackFailure failure,
   }) = _FeedbackState;
 }
+
+enum FieldEnum {
+  initial,
+  clear,
+  success,
+  invalidData,
+}

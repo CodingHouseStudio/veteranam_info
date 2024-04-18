@@ -34,22 +34,22 @@ class SignUpBodyWidget extends StatelessWidget {
                   EmailPasswordFieldsWidget(
                     key: KWidgetkeys.screen.signUp.fields,
                     isDesk: isDesk,
-                    showPassword: _.showPassword,
+                    showPassword: _.showPasswordField,
                     onChangedEmail: (value) => context
                         .read<SignUpBloc>()
                         .add(SignUpEvent.emailUpdated(value)),
                     onChangedPassword: (value) => context
                         .read<SignUpBloc>()
                         .add(SignUpEvent.passwordUpdated(value)),
-                    errorTextEmail: _.fieldsState == FieldEnum.invalidData
-                        ? _.email.error.value(context)
-                        : null,
-                    errorTextPassword: _.fieldsState == FieldEnum.invalidData
-                        ? _.password.error.value(context)
-                        : null,
+                    errorTextEmail: _.fieldsIsCorrect ?? true
+                        ? null
+                        : _.email.error.value(context),
+                    errorTextPassword: _.fieldsIsCorrect ?? true
+                        ? null
+                        : _.password.error.value(context),
                     email: context.read<SignUpBloc>().state.email.value,
                     backPassword: () => context.read<SignUpBloc>().add(
-                          const SignUpEvent.passwordHide(),
+                          const SignUpEvent.passwordFieldHide(),
                         ),
                   ),
                   if (isDesk)

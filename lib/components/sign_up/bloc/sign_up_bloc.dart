@@ -21,14 +21,14 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
             email: EmailFieldModel.pure(),
             password: PasswordFieldModel.pure(),
             failure: SignUpError.initial,
-            fieldsState: FieldEnum.initial,
-            showPassword: false,
+            fieldsIsCorrect: null,
+            showPasswordField: false,
           ),
         ) {
     on<_EmailUpdated>(_onEmailUpdated);
     on<_PasswordUpdated>(_onPasswordUpdated);
     on<_SignUpSubmitted>(_onSignUpSubmitted);
-    on<_PasswordHide>(_onPasswordHide);
+    on<_PasswordFieldHide>(_onPasswordFieldHide);
   }
 
   final IAppAuthenticationRepository _iAppAuthenticationRepository;
@@ -37,11 +37,9 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     _EmailUpdated event,
     Emitter<SignUpState> emit,
   ) async {
-    final emailFieldModel = EmailFieldModel.dirty(event.email);
     emit(
       state.copyWith(
-        email: emailFieldModel,
-        fieldsState: FieldEnum.inProgress,
+        email: EmailFieldModel.dirty(event.email),
       ),
     );
   }
@@ -50,11 +48,9 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     _PasswordUpdated event,
     Emitter<SignUpState> emit,
   ) async {
-    final passwordFieldModel = PasswordFieldModel.dirty(event.password);
     emit(
       state.copyWith(
-        password: passwordFieldModel,
-        fieldsState: FieldEnum.inProgress,
+        password: PasswordFieldModel.dirty(event.password),
       ),
     );
   }
@@ -63,11 +59,11 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     _SignUpSubmitted event,
     Emitter<SignUpState> emit,
   ) async {
-    if (Formz.validate([state.email]) && !state.showPassword) {
+    if (state.email.isValid && !state.showPasswordField) {
       emit(
         state.copyWith(
-          showPassword: true,
-          fieldsState: FieldEnum.initial,
+          showPasswordField: true,
+          fieldsIsCorrect: null,
         ),
       );
       return;
@@ -76,7 +72,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
       state.password,
       state.email,
     ])) {
-      emit(state.copyWith(fieldsState: FieldEnum.success));
+      emit(state.copyWith(fieldsIsCorrect: true));
       final result = await _iAppAuthenticationRepository.signUp(
         email: state.email.value,
         password: state.password.value,
@@ -85,26 +81,22 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
         result.fold(
           (l) => state.copyWith(
             failure: l.toSignUpError(),
-            fieldsState: FieldEnum.invalidData,
-            showPassword: false,
+            showPasswordField: false,
           ),
-          (r) => state.copyWith(
-            failure: SignUpError.none,
-            fieldsState: FieldEnum.success,
-          ),
+          (r) => state.copyWith(failure: SignUpError.none),
         ),
       );
     } else {
-      emit(state.copyWith(fieldsState: FieldEnum.invalidData));
+      emit(state.copyWith(fieldsIsCorrect: false));
     }
   }
 
-  Future<void> _onPasswordHide(
-    _PasswordHide event,
+  Future<void> _onPasswordFieldHide(
+    _PasswordFieldHide event,
     Emitter<SignUpState> emit,
   ) async {
     emit(
-      state.copyWith(showPassword: false, fieldsState: FieldEnum.inProgress),
+      state.copyWith(showPasswordField: false),
     );
   }
 }
