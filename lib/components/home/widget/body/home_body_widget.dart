@@ -18,6 +18,42 @@ class HomeBodyWidget extends StatelessWidget {
             constraints.maxWidth < KPlatformConstants.minWidthThresholdDesktop;
         final isDesk =
             KPlatformConstants.changeToDescWidget(constraints.maxWidth);
+        final widgetList = [
+          Padding(
+            padding: EdgeInsets.only(
+              top: isDesk ? KPadding.kPaddingSize24 : KPadding.kPaddingSize16,
+            ),
+            child: BoxesWidget(
+              isDesk: isDesk,
+            ),
+          ),
+          if (isDesk)
+            KSizedBox.kHeightSizedBox160
+          else
+            KSizedBox.kHeightSizedBox40,
+          Text(
+            context.l10n.faq,
+            key: KWidgetkeys.screen.home.questionListTitle,
+            style: isDesk ? AppTextStyle.text96 : AppTextStyle.text48,
+          ),
+          if (isDesk)
+            KSizedBox.kHeightSizedBox48
+          else
+            KSizedBox.kHeightSizedBox24,
+          //here questions
+          if (isDesk)
+            KSizedBox.kHeightSizedBox160
+          else
+            KSizedBox.kHeightSizedBox40,
+          FeedbackWidget(
+            isDesk: isDesk,
+          ),
+          if (isDesk)
+            KSizedBox.kHeightSizedBox160
+          else
+            KSizedBox.kHeightSizedBox10,
+          FooterWidget(isDesktop: isDesk),
+        ];
         return BlocBuilder<HomeWatcherBloc, HomeWatcherState>(
           builder: (context, state) {
             switch (state) {
@@ -29,7 +65,10 @@ class HomeBodyWidget extends StatelessWidget {
                 final questionModelItems = state.questionModelItems;
                 return ListView.builder(
                   key: KWidgetkeys.widget.shellRoute.scroll,
-                  itemCount: 1,
+                  itemCount: widgetList.length +
+                      (questionModelItems.isNotEmpty
+                          ? questionModelItems.length
+                          : 1),
                   padding: EdgeInsets.only(
                     left: KPadding.kPaddingSize75 *
                         (isMobile
@@ -48,71 +87,112 @@ class HomeBodyWidget extends StatelessWidget {
                     top: KPadding.kPaddingSize10,
                   ),
                   primary: true,
-                  itemBuilder: (context, index) => Column(
-                    children: [
-                      if (isDesk)
-                        KSizedBox.kHeightSizedBox24
-                      else
-                        KSizedBox.kHeightSizedBox16,
-                      BoxesWidget(
-                        isDesk: isDesk,
-                      ),
-                      if (isDesk)
-                        KSizedBox.kHeightSizedBox160
-                      else
-                        KSizedBox.kHeightSizedBox40,
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(
-                              KPadding.kPaddingSize16,
-                            ),
-                            child: Text(
-                              context.l10n.faq,
-                              key: KWidgetkeys.screen.home.questionListTitle,
-                              style: isDesk
-                                  ? AppTextStyle.text96
-                                  : AppTextStyle.text48,
-                            ),
+                  itemBuilder: (context, index) {
+                    if (index > 3 &&
+                        (questionModelItems.isEmpty && index < 5 ||
+                            index < questionModelItems.length + 4)) {
+                      if (questionModelItems.isNotEmpty) {
+                        return Padding(
+                          padding: EdgeInsets.only(
+                            bottom: index < questionModelItems.length + 3
+                                ? KPadding.kPaddingSize24
+                                : 0,
                           ),
-                          if (questionModelItems.isNotEmpty)
-                            ListQuestionWidget(
-                              questionModelItem: questionModelItems[index],
-                              isDesk: isDesk,
-                            )
-                          else
-                            TextButton(
-                              key: KWidgetkeys.screen.home.buttonMock,
-                              onPressed: () {
-                                GetIt.I
-                                    .get<IHomeRepository>()
-                                    .addMockQuestions();
-                                context
-                                    .read<HomeWatcherBloc>()
-                                    .add(const HomeWatcherEvent.started());
-                              },
-                              child: Text(
-                                context.l10n.getMockData,
-                                style: AppTextStyle.text32,
-                              ),
-                            ),
-                        ],
-                      ),
-                      if (isDesk)
-                        KSizedBox.kHeightSizedBox160
-                      else
-                        KSizedBox.kHeightSizedBox40,
-                      FeedbackWidget(
-                        isDesk: isDesk,
-                      ),
-                      if (isDesk)
-                        KSizedBox.kHeightSizedBox160
-                      else
-                        KSizedBox.kHeightSizedBox10,
-                      FooterWidget(isDesktop: isDesk),
-                    ],
-                  ),
+                          child: QuestionWidget(
+                            questionModel: questionModelItems[index - 4],
+                            isDesk: isDesk,
+                          ),
+                        );
+                      } else {
+                        return TextButton(
+                          key: KWidgetkeys.screen.home.buttonMock,
+                          onPressed: () {
+                            GetIt.I.get<IHomeRepository>().addMockQuestions();
+                            context
+                                .read<HomeWatcherBloc>()
+                                .add(const HomeWatcherEvent.started());
+                          },
+                          child: Text(
+                            context.l10n.getMockData,
+                            style: AppTextStyle.text32,
+                          ),
+                        );
+                      }
+                    } else {
+                      return widgetList[index > 3
+                          ? index -
+                              (questionModelItems.isEmpty
+                                  ? 1
+                                  : questionModelItems.length)
+                          : index];
+                    }
+                  },
+                  // Column(
+                  //   children: [
+                  //     if (isDesk)
+                  //       KSizedBox.kHeightSizedBox24
+                  //     else
+                  //       KSizedBox.kHeightSizedBox16,
+                  //     BoxesWidget(
+                  //       isDesk: isDesk,
+                  //     ),
+                  //     if (isDesk)
+                  //       KSizedBox.kHeightSizedBox160
+                  //     else
+                  //       KSizedBox.kHeightSizedBox40,
+                  //     Column(
+                  //       crossAxisAlignment: CrossAxisAlignment.start,
+                  //       children: [
+                  //         Padding(
+                  //           padding: const EdgeInsets.all(
+                  //             KPadding.kPaddingSize16,
+                  //           ),
+                  //           child: Text(
+                  //             context.l10n.faq,
+                  //             key: KWidgetkeys.screen.home
+                  // .questionListTitle,
+                  //             style: isDesk
+                  //                 ? AppTextStyle.text96
+                  //                 : AppTextStyle.text48,
+                  //           ),
+                  //         ),
+                  //         if (questionModelItems.isNotEmpty)
+                  //           ListQuestionWidget(
+                  //             questionModelItem: questionModelItems[index],
+                  //             isDesk: isDesk,
+                  //           )
+                  //         else
+                  //           TextButton(
+                  //             key: KWidgetkeys.screen.home.buttonMock,
+                  //             onPressed: () {
+                  //               GetIt.I
+                  //                   .get<IHomeRepository>()
+                  //                   .addMockQuestions();
+                  //               context
+                  //                   .read<HomeWatcherBloc>()
+                  //                   .add(const HomeWatcherEvent.started());
+                  //             },
+                  //             child: Text(
+                  //               context.l10n.getMockData,
+                  //               style: AppTextStyle.text32,
+                  //             ),
+                  //           ),
+                  //       ],
+                  //     ),
+                  //     if (isDesk)
+                  //       KSizedBox.kHeightSizedBox160
+                  //     else
+                  //       KSizedBox.kHeightSizedBox40,
+                  //     FeedbackWidget(
+                  //       isDesk: isDesk,
+                  //     ),
+                  //     if (isDesk)
+                  //       KSizedBox.kHeightSizedBox160
+                  //     else
+                  //       KSizedBox.kHeightSizedBox10,
+                  //     FooterWidget(isDesktop: isDesk),
+                  //   ],
+                  // ),
                 );
 
               case HomeWatcherStateFailure():
