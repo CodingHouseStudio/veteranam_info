@@ -28,40 +28,49 @@ final GoRouter router = GoRouter(
   //   return null;
   // },
   routes: [
-    ShellRoute(
-      navigatorKey: _shellNavigatorKey,
-      builder: (context, state, child) {
-        return ScaffoldWithNavBar(
-          goRouterState: state,
-          navigationShell: child,
-        );
-      },
+    GoRoute(
+      name: KRoute.login.name,
+      path: KRoute.login.path,
+      pageBuilder: (context, state) => NoTransitionPage(
+        key: state.pageKey,
+        child: const LoginScreen(),
+      ),
+    ),
+    GoRoute(
+      name: KRoute.signUp.name,
+      path: KRoute.signUp.path,
+      pageBuilder: (context, state) => NoTransitionPage(
+        key: state.pageKey,
+        child: const SignUpScreen(),
+      ),
+    ),
+    GoRoute(
+      name: KRoute.home.name,
+      path: KRoute.home.path,
+      redirect: redirect,
+      pageBuilder: (context, state) => NoTransitionPage(
+        key: state.pageKey,
+        child: const HomeScreen(),
+      ),
       routes: [
-        GoRoute(
-          name: KRoute.login.name,
-          path: KRoute.login.path,
-          pageBuilder: (context, state) => NoTransitionPage(
-            key: state.pageKey,
-            child: const LoginScreen(),
-          ),
-        ),
-        GoRoute(
-          name: KRoute.signUp.name,
-          path: KRoute.signUp.path,
-          pageBuilder: (context, state) => NoTransitionPage(
-            key: state.pageKey,
-            child: const SignUpScreen(),
-          ),
-        ),
-        GoRoute(
-          name: KRoute.home.name,
-          path: KRoute.home.path,
-          redirect: redirect,
-          pageBuilder: (context, state) => NoTransitionPage(
-            key: state.pageKey,
-            child: const HomeScreen(),
-          ),
+        ShellRoute(
+          navigatorKey: _shellNavigatorKey,
+          builder: (context, state, child) {
+            return ScaffoldWithNavBar(
+              goRouterState: state,
+              navigationShell: child,
+            );
+          },
           routes: [
+            // GoRoute(
+            //   name: KRoute.home.name,
+            //   path: KRoute.home.path,
+            //   redirect: redirect,
+            //   pageBuilder: (context, state) => NoTransitionPage(
+            //     key: state.pageKey,
+            //     child: const HomeScreen(),
+            //   ),
+            //   routes: [
             GoRoute(
               name: KRoute.information.name,
               path: KRoute.information.path,
