@@ -120,7 +120,7 @@ class FeedbackBloc extends Bloc<FeedbackEvent, FeedbackState> {
         email: EmailFieldModel.pure(),
         message: MessageFieldModel.pure(),
         name: NameFieldModel.pure(),
-        fieldsState: FeedbackEnum.initial,
+        fieldsState: FeedbackEnum.clear,
         failure: FeedbackFailure.initial,
       ),
     );

@@ -2,6 +2,7 @@ part of 'feedback_bloc.dart';
 
 enum FeedbackEnum {
   initial,
+  clear,
   inProgress,
   success,
   invalidData,
