@@ -9,7 +9,6 @@ class _FeedbackKeys {
   final fieldName = const Key('feedback_field_name');
   final fieldEmail = const Key('feedback_field_email');
   final fieldMessage = const Key('feedback_field_message');
-  final saveMessage = const Key('feedback_save_message');
   final buttonSave = const Key('feedback_button_save');
   final buttonClear = const Key('feedback_button_clear');
 }
