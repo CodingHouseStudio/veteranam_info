@@ -13,6 +13,7 @@ Future<void> donatesCardHelper(
   await scrollingHelper(
     tester: tester,
     itemKey: KWidgetkeys.screen.investors.donateCards,
+    offset: KTestConstants.scrollingDown,
   );
 
   expect(find.byKey(KWidgetkeys.screen.investors.donateCards), findsWidgets);

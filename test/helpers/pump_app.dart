@@ -14,59 +14,10 @@ extension PumpApp on WidgetTester {
   Future<void> pumpApp(
     Widget widget, {
     MockGoRouter? mockGoRouter,
-    String? fullPath,
-    bool? withoutShellRoute,
   }) {
-    if (withoutShellRoute ?? false) {
-      return pumpWidget(
-        MultiBlocProvider(
-          providers: [
-            BlocProvider(
-              create: (context) => GetIt.I.get<LanguageCubit>()..initLanguage(),
-            ),
-            BlocProvider(
-              create: (context) => GetIt.I.get<AuthenticationBloc>()
-                ..add(
-                  AuthenticationInitialized(),
-                ),
-            ),
-          ],
-          child: BlocBuilder<LanguageCubit, Language?>(
-            builder: (context, state) => mockGoRouter == null
-                ? MaterialApp(
-                    localizationsDelegates:
-                        AppLocalizations.localizationsDelegates,
-                    locale: state?.value,
-                    supportedLocales: AppLocalizations.supportedLocales,
-                    home: widget,
-                  )
-                : MockGoRouterProvider(
-                    goRouter: mockGoRouter,
-                    child: MaterialApp(
-                      localizationsDelegates:
-                          AppLocalizations.localizationsDelegates,
-                      locale: state?.value,
-                      supportedLocales: AppLocalizations.supportedLocales,
-                      home: widget,
-                    ),
-                  ),
-          ),
-        ),
-      );
-    }
     return pumpWidget(
-      MultiBlocProvider(
-        providers: [
-          BlocProvider(
-            create: (context) => GetIt.I.get<LanguageCubit>()..initLanguage(),
-          ),
-          BlocProvider(
-            create: (context) => GetIt.I.get<AuthenticationBloc>()
-              ..add(
-                AuthenticationInitialized(),
-              ),
-          ),
-        ],
+      BlocProvider(
+        create: (context) => GetIt.I.get<LanguageCubit>()..initLanguage(),
         child: BlocBuilder<LanguageCubit, Language?>(
           builder: (context, state) => mockGoRouter == null
               ? MaterialApp(
@@ -74,10 +25,7 @@ extension PumpApp on WidgetTester {
                       AppLocalizations.localizationsDelegates,
                   locale: state?.value,
                   supportedLocales: AppLocalizations.supportedLocales,
-                  home: ScaffoldWithNavBar(
-                    navigationShell: widget,
-                    goRouterState: MockGoRouterState(fullPath: fullPath),
-                  ),
+                  home: widget,
                 )
               : MockGoRouterProvider(
                   goRouter: mockGoRouter,
@@ -86,10 +34,7 @@ extension PumpApp on WidgetTester {
                         AppLocalizations.localizationsDelegates,
                     locale: state?.value,
                     supportedLocales: AppLocalizations.supportedLocales,
-                    home: ScaffoldWithNavBar(
-                      navigationShell: widget,
-                      goRouterState: MockGoRouterState(fullPath: fullPath),
-                    ),
+                    home: widget,
                   ),
                 ),
         ),

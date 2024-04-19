@@ -6,59 +6,53 @@ import 'package:kozak/shared/shared.dart';
 class LeftCardWidget extends StatelessWidget {
   const LeftCardWidget({
     required this.isDesk,
-    required this.childWidget,
+    required this.widgetList,
     super.key,
     this.image,
   });
 
   final bool isDesk;
-  final Widget childWidget;
+  final List<Widget> widgetList;
   final String? image;
   @override
   Widget build(BuildContext context) {
     return isDesk
-        ? ColoredBox(
-            key: KWidgetkeys.widget.leftCard.desk,
-            color: AppColors.blackWhite,
-            child: Row(
-              children: [
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: KPadding.kPaddingSize40,
-                    ),
-                    child: Container(
-                      decoration: KWidetTheme.boxDecorationWhite,
-                      child: SingleChildScrollView(
-                        key: KWidgetkeys.widget.shellRoute.scroll,
+        ? SafeArea(
+            child: ColoredBox(
+              key: KWidgetkeys.widget.leftCard.desk,
+              color: AppColors.blackWhite,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: KPadding.kPaddingSize40,
+                      ),
+                      child: Container(
+                        decoration: KWidetTheme.boxDecorationWhite,
                         child: Center(
-                          child: ConstrainedBox(
-                            constraints: const BoxConstraints(
-                              maxWidth: KMinMaxSize.maxWidth800,
-                            ),
-                            child: buildChildWidget(),
-                          ),
+                          child: buildChildWidget(),
                         ),
                       ),
                     ),
                   ),
-                ),
-                Expanded(
-                  child: image != null
-                      ? CachedNetworkImage(
-                          key: KWidgetkeys.widget.leftCard.image,
-                          imageUrl: KMockText.image,
-                          placeholder: (context, url) => Image.asset(''),
-                          errorWidget: (context, url, error) => KIcon.error,
-                          fit: BoxFit.fill,
-                        )
-                      : const SizedBox.shrink(),
-                ),
-              ],
+                  Expanded(
+                    child: image != null
+                        ? CachedNetworkImage(
+                            key: KWidgetkeys.widget.leftCard.image,
+                            imageUrl: KMockText.image,
+                            placeholder: (context, url) => Image.asset(''),
+                            errorWidget: (context, url, error) => KIcon.error,
+                            fit: BoxFit.fill,
+                          )
+                        : const SizedBox.shrink(),
+                  ),
+                ],
+              ),
             ),
           )
-        : SingleChildScrollView(
-            key: KWidgetkeys.widget.shellRoute.scroll,
+        : ColoredBox(
+            color: AppColors.white,
             child: Padding(
               key: KWidgetkeys.widget.leftCard.mob,
               padding: const EdgeInsets.only(
@@ -72,19 +66,21 @@ class LeftCardWidget extends StatelessWidget {
   }
 
   Widget buildChildWidget() {
-    return Padding(
-      key: KWidgetkeys.widget.leftCard.childWidget,
+    return ListView.builder(
+      key: KWidgetkeys.widget.shellRoute.scroll,
+      itemCount: widgetList.length,
       padding: isDesk
           ? const EdgeInsets.only(
               top: KPadding.kPaddingSize24,
               bottom: KPadding.kPaddingSize92,
+              left: KPadding.kPaddingSize96,
+              right: KPadding.kPaddingSize80,
             )
-          : const EdgeInsets.only(
-              top: KPadding.kPaddingSize56,
-              right: KPadding.kPaddingSize16,
-              left: KPadding.kPaddingSize16,
-            ),
-      child: childWidget,
+          : null,
+      itemBuilder: (context, index) => Align(
+        alignment: isDesk ? Alignment.centerLeft : Alignment.center,
+        child: widgetList.elementAt(index),
+      ),
     );
   }
 }

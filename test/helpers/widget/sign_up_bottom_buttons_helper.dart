@@ -1,11 +1,17 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:kozak/shared/shared.dart';
 
-import '../change_window_size_helper.dart';
+import '../../text_dependency.dart';
 
 Future<void> signUpBottomButtonsHelper(
   WidgetTester tester,
 ) async {
+  await scrollingHelper(
+    tester: tester,
+    itemKey: null,
+    offset: KTestConstants.scrollingDown,
+  );
+
   expect(find.byKey(KWidgetkeys.widget.signUpBottomButtons.or), findsWidgets);
 
   expect(

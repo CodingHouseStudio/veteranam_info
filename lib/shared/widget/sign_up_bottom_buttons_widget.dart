@@ -41,30 +41,36 @@ class SignUpBottomButtonsWidget extends StatelessWidget {
           KSizedBox.kHeightSizedBox16,
           Row(
             children: [
-              buildBottomButton(
-                key: KWidgetkeys.widget.signUpBottomButtons.google,
-                isDesk: true,
-                text: context.l10n.google,
-                onPressed: () => context
-                    .read<AuthenticationServicesCubit>()
-                    .authenticationUseGoogle(),
-                icon: KIcon.google,
+              Expanded(
+                child: buildBottomButton(
+                  key: KWidgetkeys.widget.signUpBottomButtons.google,
+                  isDesk: true,
+                  text: context.l10n.google,
+                  onPressed: () => context
+                      .read<AuthenticationServicesCubit>()
+                      .authenticationUseGoogle(),
+                  icon: KIcon.google,
+                ),
               ),
               KSizedBox.kWidthSizedBox16,
-              buildBottomButton(
-                key: KWidgetkeys.widget.signUpBottomButtons.facebook,
-                isDesk: true,
-                text: context.l10n.facebook,
-                onPressed: () => {},
-                icon: KIcon.facebook,
+              Expanded(
+                child: buildBottomButton(
+                  key: KWidgetkeys.widget.signUpBottomButtons.facebook,
+                  isDesk: true,
+                  text: context.l10n.facebook,
+                  onPressed: () => {},
+                  icon: KIcon.facebook,
+                ),
               ),
               KSizedBox.kWidthSizedBox16,
-              buildBottomButton(
-                key: KWidgetkeys.widget.signUpBottomButtons.apple,
-                isDesk: true,
-                text: context.l10n.apple,
-                onPressed: () {},
-                icon: KIcon.apple,
+              Expanded(
+                child: buildBottomButton(
+                  key: KWidgetkeys.widget.signUpBottomButtons.apple,
+                  isDesk: true,
+                  text: context.l10n.apple,
+                  onPressed: () {},
+                  icon: KIcon.apple,
+                ),
               ),
             ],
           ),
