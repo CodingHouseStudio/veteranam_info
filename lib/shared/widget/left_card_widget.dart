@@ -66,9 +66,8 @@ class LeftCardWidget extends StatelessWidget {
   }
 
   Widget buildChildWidget() {
-    return ListView.builder(
+    return ListView.custom(
       key: KWidgetkeys.widget.shellRoute.scroll,
-      itemCount: widgetList.length,
       padding: isDesk
           ? const EdgeInsets.only(
               top: KPadding.kPaddingSize24,
@@ -77,9 +76,15 @@ class LeftCardWidget extends StatelessWidget {
               right: KPadding.kPaddingSize80,
             )
           : null,
-      itemBuilder: (context, index) => Align(
-        alignment: isDesk ? Alignment.centerLeft : Alignment.center,
-        child: widgetList.elementAt(index),
+      childrenDelegate: SliverChildListDelegate(
+        widgetList
+            .map(
+              (widget) => Align(
+                alignment: isDesk ? Alignment.centerLeft : Alignment.center,
+                child: widget,
+              ),
+            )
+            .toList(),
       ),
     );
   }
