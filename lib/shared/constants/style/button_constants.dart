@@ -73,4 +73,27 @@ abstract class KButtonStyles {
       borderRadius: KBorderRadius.kBorderRadius8,
     ),
   );
+  static final ButtonStyle widgetBackgroundButtonStyleWInf =
+      TextButton.styleFrom(
+    backgroundColor: AppColors.widgetBackground,
+    minimumSize: const Size(double.infinity, KMinMaxSize.minHeight50),
+    padding: const EdgeInsets.all(KPadding.kPaddingSize24),
+  );
+
+  static final ButtonStyle widgetBackgroundSquareButtonStyleWInf =
+      TextButton.styleFrom(
+    backgroundColor: AppColors.widgetBackground,
+    minimumSize: const Size(200, 50),
+    padding: const EdgeInsets.all(KPadding.kPaddingSize24),
+    shape: RoundedRectangleBorder(
+      borderRadius: KBorderRadius.kBorderRadius40,
+    ),
+  );
+
+  static final ButtonStyle widgetLightGreyButtonStyleWInf =
+      TextButton.styleFrom(
+    backgroundColor: AppColors.background,
+    minimumSize: const Size(double.infinity, KMinMaxSize.minHeight50),
+    padding: const EdgeInsets.all(KPadding.kPaddingSize24),
+  );
 }
