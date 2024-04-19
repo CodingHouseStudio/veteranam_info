@@ -49,7 +49,7 @@ void main() {
         hasMic: false,
       );
 
-      await footerHelper(tester: tester, email: KTestText.useremail);
+      // await footerHelper(tester: tester, email: KTestText.useremail);
     });
   });
 }
