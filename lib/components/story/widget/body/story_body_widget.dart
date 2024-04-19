@@ -6,8 +6,8 @@ class StoryBodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
+    return ScaffoldWithNavBar(
+      childWidgetsFunction: ({required isDesk}) => [
         KSizedBox.kHeightSizedBox30,
         StoryCardWidget(
           storyDate: KMockText.date,

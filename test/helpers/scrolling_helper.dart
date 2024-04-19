@@ -28,6 +28,6 @@ Future<void> scrollingHelper({
       find.byKey(KWidgetkeys.widget.shellRoute.scroll),
       KTestConstants.scrollingAppBar,
     );
+    await tester.pumpAndSettle();
   }
-  await tester.pumpAndSettle();
 }

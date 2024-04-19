@@ -16,6 +16,10 @@ void main() {
   testWidgets('Navigation test', (tester) async {
     await appHelper(tester);
 
+    await scrollingHelper(tester: tester, offset: KTestConstants.scrolling);
+
+    await tester.pumpAndSettle(const Duration(seconds: 2));
+
     await footerHelper(
       tester: tester,
       email: KTestText.useremail,
