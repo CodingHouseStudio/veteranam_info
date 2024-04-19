@@ -103,12 +103,14 @@ class _FeedbackWidgetImplementationState
 
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      Scrollable.ensureVisible(widget.feedbackKey.currentContext!);
-    });
+    if (context.read<FeedbackBloc>().state.fieldsState == FeedbackEnum.clear) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Scrollable.ensureVisible(widget.feedbackKey.currentContext!);
+      });
+    }
     return BlocListener<FeedbackBloc, FeedbackState>(
       listenWhen: (previous, current) =>
-          current.fieldsState == FeedbackEnum.initial,
+          current.fieldsState == FeedbackEnum.clear,
       listener: (context, state) {
         nameController.clear();
         emailController.clear();
