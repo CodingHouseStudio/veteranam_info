@@ -11,6 +11,7 @@ export 'donate_button_widget.dart';
 export 'donate_card_widget.dart';
 export 'drop_chip_widget.dart';
 export 'drop_list_field_widget.dart';
+export 'feedback_box_widget.dart';
 export 'feedback_widget.dart';
 export 'filter_box_widget.dart';
 export 'filter_popup_menu_widget.dart';
