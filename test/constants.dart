@@ -134,6 +134,7 @@ abstract class KTestConstants {
   static const scrollingAppBar = Offset(0, KSize.kPreferredSize);
 
   static const windowTabletSize = Size(1700, 1700);
+  static const windowMobileSize = Size(700, 700);
 
   static const englishIndex = 1;
   static const ukrainIndex = 0;

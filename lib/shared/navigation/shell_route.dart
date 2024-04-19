@@ -36,7 +36,6 @@ class ScaffoldWithNavBar extends StatelessWidget {
           ),
           body: ListView.builder(
             key: KWidgetkeys.widget.shellRoute.scroll,
-            // primary: true,
             padding: EdgeInsets.only(
               left: KPadding.kPaddingSize75 *
                   (isMobile
