@@ -4,7 +4,6 @@ class _InformationKeys {
   final screen = const Key('information_screen');
   final title = const Key('information_screen_title');
   final subtitle = const Key('information_screen_subtitle');
-  final list = const Key('information_screen_list');
   final filter = const Key('information_screen_filter');
   final card = const Key('information_screen_card');
   final buttonMock = const Key('information_screen_button_mock');
