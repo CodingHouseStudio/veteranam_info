@@ -119,10 +119,10 @@ void main() {
     // testWidgets('Feedback enter text and clear it', (tester) async {
     //   registerHomeBloc();
     //   registerFeedbackBloc();
+    //   await tester.pumpApp(const HomeScreen(), isHome: true);
     //   await tester.pumpApp(
     //     const HomeScreen(),
     //   );
-
     //   expect(find.byKey(KWidgetkeys.screen.home.screen), findsOneWidget);
 
     //   await tester.pumpAndSettle();
@@ -138,7 +138,6 @@ void main() {
     //     itemKey: null,
     //     offset: KTestConstants.scrollingUp500,
     //   );
-
     //   await feedbackClearTextHelper(
     //     tester: tester,
     //     email: KTestText.useremail,
