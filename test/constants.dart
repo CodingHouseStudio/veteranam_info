@@ -129,10 +129,12 @@ abstract class KTestText {
 
 abstract class KTestConstants {
   static const scrollingDown = Offset(0, -10000);
+  static const scrollingDown500 = Offset(0, -500);
   static const scrollingUp = Offset(0, 10000);
   static const scrollingAppBar = Offset(0, KSize.kPreferredSize);
 
   static const windowTabletSize = Size(1700, 1700);
+  static const windowMobileSize = Size(700, 700);
 
   static const englishIndex = 1;
   static const ukrainIndex = 0;

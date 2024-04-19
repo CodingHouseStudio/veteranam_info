@@ -52,7 +52,9 @@ void main() {
 
     testWidgets('${KGroupText.intial} ', (tester) async {
       registerHomeBloc();
-      await tester.pumpApp(const HomeScreen(), isHome: true);
+      await tester.pumpApp(
+        const HomeScreen(),
+      );
 
       expect(find.byKey(KWidgetkeys.screen.home.screen), findsOneWidget);
 
@@ -66,11 +68,19 @@ void main() {
     testWidgets('Feedback enter correct text and save it', (tester) async {
       registerHomeBloc();
       registerFeedbackBloc();
-      await tester.pumpApp(const HomeScreen(), isHome: true);
+      await tester.pumpApp(
+        const HomeScreen(),
+      );
 
       expect(find.byKey(KWidgetkeys.screen.home.screen), findsOneWidget);
 
       await tester.pumpAndSettle();
+
+      await scrollingHelper(
+        tester: tester,
+        itemKey: null,
+        offset: KTestConstants.scrollingDown,
+      );
 
       await feedbackEnterTextHelper(
         tester: tester,
@@ -83,11 +93,19 @@ void main() {
 
     testWidgets('Feedback enter incorrect text and save it', (tester) async {
       registerHomeBloc();
-      await tester.pumpApp(const HomeScreen(), isHome: true);
+      await tester.pumpApp(
+        const HomeScreen(),
+      );
 
       expect(find.byKey(KWidgetkeys.screen.home.screen), findsOneWidget);
 
       await tester.pumpAndSettle();
+
+      await scrollingHelper(
+        tester: tester,
+        itemKey: null,
+        offset: KTestConstants.scrollingDown,
+      );
 
       await feedbackEnterTextHelper(
         tester: tester,
@@ -102,11 +120,24 @@ void main() {
     //   registerHomeBloc();
     //   registerFeedbackBloc();
     //   await tester.pumpApp(const HomeScreen(), isHome: true);
-
+    //   await tester.pumpApp(
+    //     const HomeScreen(),
+    //   );
     //   expect(find.byKey(KWidgetkeys.screen.home.screen), findsOneWidget);
 
     //   await tester.pumpAndSettle();
 
+    //   await scrollingHelper(
+    //     tester: tester,
+    //     itemKey: null,
+    //     offset: KTestConstants.scrollingDown,
+    //   );
+
+    //   await scrollingHelper(
+    //     tester: tester,
+    //     itemKey: null,
+    //     offset: KTestConstants.scrollingUp500,
+    //   );
     //   await feedbackClearTextHelper(
     //     tester: tester,
     //     email: KTestText.useremail,
@@ -121,7 +152,6 @@ void main() {
         registerHomeBloc();
         await tester.pumpApp(
           const HomeScreen(),
-          isHome: true,
           mockGoRouter: mockGoRouter,
         );
 
@@ -137,7 +167,6 @@ void main() {
           registerHomeBloc();
           await tester.pumpApp(
             const HomeScreen(),
-            isHome: true,
             mockGoRouter: mockGoRouter,
           );
 
@@ -158,7 +187,6 @@ void main() {
           registerHomeBloc();
           await tester.pumpApp(
             const HomeScreen(),
-            isHome: true,
             mockGoRouter: mockGoRouter,
           );
 
