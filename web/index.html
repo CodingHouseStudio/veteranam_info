@@ -18,6 +18,7 @@
   <base href="$FLUTTER_BASE_HREF">
 
   <meta charset="UTF-8">
+  <title>Kozak</title>
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
   <meta name="description" content="Veteran UA">
 
@@ -26,11 +27,14 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="apple-mobile-web-app-title" content="Kozak">
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
+  <script src="devtools/devtools_theme_handler.js"></script>
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="favicon.png" />
 
-  <title>Kozak</title>
+  <!-- Preload main Dart script -->
+  <link rel="preload" href="main.dart.js" as="script">
+
   <link rel="manifest" href="manifest.json">
 </head>
 
