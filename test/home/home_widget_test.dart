@@ -82,12 +82,6 @@ void main() {
         offset: KTestConstants.scrollingDown,
       );
 
-      await scrollingHelper(
-        tester: tester,
-        itemKey: null,
-        offset: KTestConstants.scrollingUp500,
-      );
-
       await feedbackEnterTextHelper(
         tester: tester,
         email: KTestText.useremail,
@@ -111,12 +105,6 @@ void main() {
         tester: tester,
         itemKey: null,
         offset: KTestConstants.scrollingDown,
-      );
-
-      await scrollingHelper(
-        tester: tester,
-        itemKey: null,
-        offset: KTestConstants.scrollingUp500,
       );
 
       await feedbackEnterTextHelper(
