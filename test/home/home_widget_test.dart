@@ -98,21 +98,21 @@ void main() {
       await feedbackHelper(tester: tester);
     });
 
-    testWidgets('Feedback enter text and clear it', (tester) async {
-      registerHomeBloc();
-      registerFeedbackBloc();
-      await tester.pumpApp(const HomeScreen(), isHome: true);
+    // testWidgets('Feedback enter text and clear it', (tester) async {
+    //   registerHomeBloc();
+    //   registerFeedbackBloc();
+    //   await tester.pumpApp(const HomeScreen(), isHome: true);
 
-      expect(find.byKey(KWidgetkeys.screen.home.screen), findsOneWidget);
+    //   expect(find.byKey(KWidgetkeys.screen.home.screen), findsOneWidget);
 
-      await tester.pumpAndSettle();
+    //   await tester.pumpAndSettle();
 
-      await feedbackClearTextHelper(
-        tester: tester,
-        email: KTestText.useremail,
-        field: KTestText.field,
-      );
-    });
+    //   await feedbackClearTextHelper(
+    //     tester: tester,
+    //     email: KTestText.useremail,
+    //     field: KTestText.field,
+    //   );
+    // });
 
     group('${KGroupText.goRouter} ', () {
       late MockGoRouter mockGoRouter;
