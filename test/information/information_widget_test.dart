@@ -45,6 +45,12 @@ void main() {
 
       await tester.pumpAndSettle();
 
+      await scrollingHelper(
+        tester: tester,
+        itemKey: null,
+        offset: KTestConstants.scrollingDown,
+      );
+
       expect(
         find.byKey(KWidgetkeys.screen.information.button),
         findsOneWidget,
@@ -74,9 +80,10 @@ void main() {
         findsOneWidget,
       );
 
-      expect(
-        find.byKey(KWidgetkeys.screen.information.list),
-        findsOneWidget,
+      await scrollingHelper(
+        tester: tester,
+        itemKey: null,
+        offset: KTestConstants.scrollingUp,
       );
 
       expect(
@@ -105,16 +112,15 @@ void main() {
 
       await tester.pumpAndSettle();
 
-      expect(find.byKey(KWidgetkeys.screen.information.list), findsOneWidget);
-
       expect(find.byKey(KWidgetkeys.widget.newsCard.title), findsOneWidget);
-
-      expect(find.byKey(KWidgetkeys.screen.information.button), findsOneWidget);
 
       await scrollingHelper(
         tester: tester,
         itemKey: KWidgetkeys.screen.information.button,
+        offset: KTestConstants.scrollingDown,
       );
+
+      expect(find.byKey(KWidgetkeys.screen.information.button), findsOneWidget);
 
       await tester.tap(find.byKey(KWidgetkeys.screen.information.button));
 
@@ -124,6 +130,12 @@ void main() {
       expect(widgets, findsWidgets);
       expect(widgets.evaluate().length, greaterThan(1));
 
+      await scrollingHelper(
+        tester: tester,
+        itemKey: null,
+        offset: KTestConstants.scrollingUp,
+      );
+
       await informationFilterHelper(tester);
 
       expect(find.byKey(KWidgetkeys.widget.newsCard.title), findsOneWidget);
@@ -131,6 +143,7 @@ void main() {
       await scrollingHelper(
         tester: tester,
         itemKey: KWidgetkeys.screen.information.button,
+        offset: KTestConstants.scrollingDown,
       );
 
       await tester.tap(find.byKey(KWidgetkeys.screen.information.button));
@@ -138,15 +151,6 @@ void main() {
       await tester.pumpAndSettle();
 
       final widgetsTwoTap = find.byKey(KWidgetkeys.widget.newsCard.title);
-
-      await scrollingHelper(
-        tester: tester,
-        itemKey: KWidgetkeys.screen.information.button,
-      );
-
-      await tester.tap(find.byKey(KWidgetkeys.screen.information.button));
-
-      await tester.pumpAndSettle();
 
       expect(widgets.evaluate().length, widgetsTwoTap.evaluate().length);
     });
@@ -167,6 +171,12 @@ void main() {
         );
 
         await tester.pumpAndSettle();
+
+        await scrollingHelper(
+          tester: tester,
+          itemKey: KWidgetkeys.screen.information.button,
+          offset: KTestConstants.scrollingDown,
+        );
 
         expect(
           find.byKey(KWidgetkeys.screen.information.button),
@@ -197,9 +207,10 @@ void main() {
           findsOneWidget,
         );
 
-        expect(
-          find.byKey(KWidgetkeys.screen.information.list),
-          findsOneWidget,
+        await scrollingHelper(
+          tester: tester,
+          itemKey: KWidgetkeys.screen.information.subtitle,
+          offset: KTestConstants.scrollingUp,
         );
 
         expect(

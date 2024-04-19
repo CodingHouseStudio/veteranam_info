@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:kozak/shared/shared.dart';
 
 /// COMMENT: Сlass adds common elements to all screens
 class ScaffoldWithNavBar extends StatelessWidget {
   const ScaffoldWithNavBar({
-    required this.navigationShell,
-    required this.goRouterState,
+    required this.childWidgetsFunction,
     super.key,
+    this.hasMic = true,
   });
-  final Widget navigationShell;
-  final GoRouterState goRouterState;
+  final List<Widget> Function({required bool isDesk}) childWidgetsFunction;
+  final bool hasMic;
 
   @override
   Widget build(BuildContext context) {
@@ -23,15 +22,20 @@ class ScaffoldWithNavBar extends StatelessWidget {
             constraints.maxWidth < KPlatformConstants.minWidthThresholdDesktop;
         final isDesk =
             constraints.maxWidth > KPlatformConstants.minWidthThresholdDesktop;
+        final childWidgets = childWidgetsFunction(isDesk: isDesk)
+          ..add(
+            FooterWidget(
+              isDesktop: isDesk,
+            ),
+          );
         return Scaffold(
-          extendBodyBehindAppBar: true,
+          // extendBodyBehindAppBar: true,
           appBar: NawbarWidget(
             isDesk: isDesk,
-            hasMicrophone: goRouterState.fullPath != KRoute.home.path,
+            hasMicrophone: hasMic,
           ),
-          body: ListView(
+          body: ListView.builder(
             key: KWidgetkeys.widget.shellRoute.scroll,
-            primary: true,
             padding: EdgeInsets.only(
               left: KPadding.kPaddingSize75 *
                   (isMobile
@@ -47,12 +51,8 @@ class ScaffoldWithNavBar extends StatelessWidget {
                           : KPlatformConstants.desktopPaddingKoefficient)),
               top: KPadding.kPaddingSize10,
             ),
-            children: [
-              SafeArea(child: navigationShell),
-              FooterWidget(
-                isDesktop: isDesk,
-              ),
-            ],
+            itemCount: childWidgets.length,
+            itemBuilder: (context, index) => childWidgets.elementAt(index),
           ),
         );
       },
