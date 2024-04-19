@@ -28,9 +28,6 @@ class HomeBodyWidget extends StatelessWidget {
                   KSizedBox.kHeightSizedBox24
                 else
                   KSizedBox.kHeightSizedBox16,
-                // BoxesWidget(
-                //   isDesk: isDesk,
-                // ),
                 if (isDesk)
                   Row(
                     children: [
@@ -88,9 +85,11 @@ class HomeBodyWidget extends StatelessWidget {
                         context.go('${KRoute.home.path}${KRoute.work.path}'),
                     isDesk: isDesk,
                   ),
-                  KSizedBox.kHeightSizedBox16,
                 ],
-                if (isDesk) KSizedBox.kHeightSizedBox24,
+                if (isDesk)
+                  KSizedBox.kHeightSizedBox24
+                else
+                  KSizedBox.kHeightSizedBox16,
                 if (isDesk)
                   Row(
                     children: [
@@ -125,7 +124,6 @@ class HomeBodyWidget extends StatelessWidget {
                     ],
                   )
                 else ...[
-                  KSizedBox.kHeightSizedBox16,
                   BoxWidget(
                     text: context.l10n.information,
                     onTap: () => context.go(
@@ -148,7 +146,6 @@ class HomeBodyWidget extends StatelessWidget {
                     isDesk: isDesk,
                   ),
                 ],
-
                 if (isDesk)
                   KSizedBox.kHeightSizedBox160
                 else
