@@ -12,6 +12,7 @@ class LoginScreen extends StatelessWidget {
         final isDesk =
             constraints.maxWidth > KPlatformConstants.minWidthThresholdTablet;
         return Scaffold(
+          extendBodyBehindAppBar: true,
           appBar: NawbarWidget(
             isDesk: isDesk,
           ),

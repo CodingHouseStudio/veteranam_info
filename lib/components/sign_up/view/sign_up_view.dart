@@ -12,6 +12,7 @@ class SignUpScreen extends StatelessWidget {
         final isDesk =
             constraints.maxWidth > KPlatformConstants.minWidthThresholdTablet;
         return Scaffold(
+          extendBodyBehindAppBar: true,
           appBar: NawbarWidget(
             isDesk: isDesk,
           ),

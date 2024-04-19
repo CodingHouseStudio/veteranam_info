@@ -6,8 +6,8 @@ class AboutUsBodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
+    return ScaffoldWithNavBar(
+      childWidgetsFunction: ({required isDesk}) => [
         CheckPointWidget(
           onChanged: ({required isCheck}) {},
         ),

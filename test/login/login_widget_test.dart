@@ -47,8 +47,6 @@ void main() {
     testWidgets('${KGroupText.intial} ', (tester) async {
       await tester.pumpApp(
         const LoginScreen(),
-        withoutShellRoute: true,
-        fullPath: KRoute.login.path,
       );
 
       expect(
@@ -57,6 +55,12 @@ void main() {
       );
 
       await tester.pumpAndSettle();
+
+      await scrollingHelper(
+        tester: tester,
+        itemKey: null,
+        offset: KTestConstants.scrollingDown,
+      );
 
       expect(
         find.byKey(KWidgetkeys.screen.login.bottomButtons),
@@ -71,6 +75,12 @@ void main() {
       expect(
         find.byKey(KWidgetkeys.screen.login.card),
         findsOneWidget,
+      );
+
+      await scrollingHelper(
+        tester: tester,
+        itemKey: null,
+        offset: KTestConstants.scrollingUp,
       );
 
       expect(
@@ -103,8 +113,6 @@ void main() {
       registerLoginBloc();
       await tester.pumpApp(
         const LoginScreen(),
-        withoutShellRoute: true,
-        fullPath: KRoute.login.path,
       );
 
       expect(
@@ -138,8 +146,6 @@ void main() {
       registerLoginBloc();
       await tester.pumpApp(
         const LoginScreen(),
-        withoutShellRoute: true,
-        fullPath: KRoute.login.path,
       );
 
       expect(
@@ -170,9 +176,7 @@ void main() {
       testWidgets('${KGroupText.intial} ', (tester) async {
         await tester.pumpApp(
           const LoginScreen(),
-          withoutShellRoute: true,
           mockGoRouter: mockGoRouter,
-          fullPath: KRoute.login.path,
         );
 
         expect(
@@ -181,6 +185,12 @@ void main() {
         );
 
         await tester.pumpAndSettle();
+
+        await scrollingHelper(
+          tester: tester,
+          itemKey: null,
+          offset: KTestConstants.scrollingDown,
+        );
 
         expect(
           find.byKey(KWidgetkeys.screen.login.bottomButtons),
@@ -195,6 +205,12 @@ void main() {
         expect(
           find.byKey(KWidgetkeys.screen.login.card),
           findsOneWidget,
+        );
+
+        await scrollingHelper(
+          tester: tester,
+          itemKey: null,
+          offset: KTestConstants.scrollingUp,
         );
 
         expect(
@@ -227,9 +243,7 @@ void main() {
         testWidgets('Navigate to ${KScreenBlocName.signUp}', (tester) async {
           await tester.pumpApp(
             const LoginScreen(),
-            withoutShellRoute: true,
             mockGoRouter: mockGoRouter,
-            fullPath: KRoute.login.path,
           );
 
           expect(
@@ -250,9 +264,7 @@ void main() {
           registerLoginBloc();
           await tester.pumpApp(
             const LoginScreen(),
-            fullPath: KRoute.login.path,
             mockGoRouter: mockGoRouter,
-            withoutShellRoute: true,
           );
 
           expect(
@@ -277,8 +289,6 @@ void main() {
           registerLoginBloc();
           await tester.pumpApp(
             const LoginScreen(),
-            withoutShellRoute: true,
-            fullPath: KRoute.login.path,
             mockGoRouter: mockGoRouter,
           );
 

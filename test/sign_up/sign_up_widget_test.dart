@@ -48,8 +48,6 @@ void main() {
     testWidgets('${KGroupText.intial} ', (tester) async {
       await tester.pumpApp(
         const SignUpScreen(),
-        withoutShellRoute: true,
-        fullPath: KRoute.signUp.path,
       );
 
       expect(
@@ -104,8 +102,6 @@ void main() {
       registerSignUpkBloc();
       await tester.pumpApp(
         const SignUpScreen(),
-        withoutShellRoute: true,
-        fullPath: KRoute.signUp.path,
       );
 
       expect(
@@ -139,8 +135,6 @@ void main() {
       registerSignUpkBloc();
       await tester.pumpApp(
         const SignUpScreen(),
-        withoutShellRoute: true,
-        fullPath: KRoute.signUp.path,
       );
 
       expect(
@@ -171,9 +165,7 @@ void main() {
       testWidgets('${KGroupText.intial} ', (tester) async {
         await tester.pumpApp(
           const SignUpScreen(),
-          withoutShellRoute: true,
           mockGoRouter: mockGoRouter,
-          fullPath: KRoute.signUp.path,
         );
 
         expect(
@@ -228,9 +220,7 @@ void main() {
         testWidgets('Navigate to ${KScreenBlocName.signUp}', (tester) async {
           await tester.pumpApp(
             const SignUpScreen(),
-            withoutShellRoute: true,
             mockGoRouter: mockGoRouter,
-            fullPath: KRoute.login.path,
           );
 
           expect(
@@ -250,8 +240,6 @@ void main() {
           registerSignUpkBloc();
           await tester.pumpApp(
             const SignUpScreen(),
-            withoutShellRoute: true,
-            fullPath: KRoute.signUp.path,
             mockGoRouter: mockGoRouter,
           );
 
@@ -277,8 +265,6 @@ void main() {
           registerSignUpkBloc();
           await tester.pumpApp(
             const SignUpScreen(),
-            withoutShellRoute: true,
-            fullPath: KRoute.signUp.path,
             mockGoRouter: mockGoRouter,
           );
 

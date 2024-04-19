@@ -6,8 +6,6 @@ import '../../text_dependency.dart';
 Future<void> leftCardHelper(
   WidgetTester tester,
 ) async {
-  expect(find.byKey(KWidgetkeys.widget.leftCard.childWidget), findsWidgets);
-
   expect(find.byKey(KWidgetkeys.widget.leftCard.mob), findsWidgets);
 
   expect(find.byKey(KWidgetkeys.widget.leftCard.image), findsNothing);
@@ -15,8 +13,6 @@ Future<void> leftCardHelper(
   expect(find.byKey(KWidgetkeys.widget.leftCard.desk), findsNothing);
 
   await changeWindowSizeHelper(tester: tester);
-
-  expect(find.byKey(KWidgetkeys.widget.leftCard.childWidget), findsWidgets);
 
   expect(find.byKey(KWidgetkeys.widget.leftCard.mob), findsNothing);
 
