@@ -16,7 +16,7 @@ void main() {
   testWidgets('Navigation test', (tester) async {
     await appHelper(tester);
 
-    await scrollingHelper(tester: tester, offset: KTestConstants.scrolling);
+    await scrollingHelperInt(tester: tester, offset: KTestConstants.scrolling);
 
     await tester.pumpAndSettle(const Duration(seconds: 2));
 
@@ -33,7 +33,7 @@ void main() {
             KWidgetkeys.widget.footer.buttonsKey.elementAt(i).elementAt(j);
         final screenKey = KTestConstants.screens.elementAt(i).elementAt(j);
 
-        await scrollingHelper(
+        await scrollingHelperInt(
           tester: tester,
           offset: KTestConstants.scrolling,
           itemKey: buttonKey,

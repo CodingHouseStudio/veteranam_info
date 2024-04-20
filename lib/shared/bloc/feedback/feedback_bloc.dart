@@ -17,7 +17,7 @@ class FeedbackBloc extends Bloc<FeedbackEvent, FeedbackState> {
             email: EmailFieldModel.pure(),
             message: MessageFieldModel.pure(),
             name: NameFieldModel.pure(),
-            fieldsState: FeedbackEnum.initial,
+            fieldsState: FieldEnum.initial,
             failure: FeedbackFailure.initial,
           ),
         ) {
@@ -38,7 +38,7 @@ class FeedbackBloc extends Bloc<FeedbackEvent, FeedbackState> {
     emit(
       state.copyWith(
         name: nameFieldModel,
-        fieldsState: FeedbackEnum.inProgress,
+        fieldsState: FieldEnum.initial,
       ),
     );
   }
@@ -51,7 +51,7 @@ class FeedbackBloc extends Bloc<FeedbackEvent, FeedbackState> {
     emit(
       state.copyWith(
         email: emailFieldModel,
-        fieldsState: FeedbackEnum.inProgress,
+        fieldsState: FieldEnum.initial,
       ),
     );
   }
@@ -64,7 +64,7 @@ class FeedbackBloc extends Bloc<FeedbackEvent, FeedbackState> {
     emit(
       state.copyWith(
         message: messageFieldModel,
-        fieldsState: FeedbackEnum.inProgress,
+        fieldsState: FieldEnum.initial,
       ),
     );
   }
@@ -85,7 +85,7 @@ class FeedbackBloc extends Bloc<FeedbackEvent, FeedbackState> {
           id: ExtendedDateTime.current.microsecondsSinceEpoch.toString(),
           guestId: ExtendedDateTime.current.microsecondsSinceEpoch.toString(),
           guestName: state.name.value!,
-          email: state.email.value!,
+          email: state.email.value,
           timestamp: ExtendedDateTime.current,
           message: state.message.value!,
         ),
@@ -94,6 +94,7 @@ class FeedbackBloc extends Bloc<FeedbackEvent, FeedbackState> {
         (l) => emit(
           state.copyWith(
             failure: l.toFeedback(),
+            fieldsState: FieldEnum.invalidData,
           ),
         ),
         (r) => emit(
@@ -101,13 +102,13 @@ class FeedbackBloc extends Bloc<FeedbackEvent, FeedbackState> {
             email: EmailFieldModel.pure(),
             message: MessageFieldModel.pure(),
             name: NameFieldModel.pure(),
-            fieldsState: FeedbackEnum.success,
+            fieldsState: FieldEnum.success,
             failure: FeedbackFailure.none,
           ),
         ),
       );
     } else {
-      emit(state.copyWith(fieldsState: FeedbackEnum.invalidData));
+      emit(state.copyWith(fieldsState: FieldEnum.invalidData));
     }
   }
 
@@ -120,7 +121,7 @@ class FeedbackBloc extends Bloc<FeedbackEvent, FeedbackState> {
         email: EmailFieldModel.pure(),
         message: MessageFieldModel.pure(),
         name: NameFieldModel.pure(),
-        fieldsState: FeedbackEnum.initial,
+        fieldsState: FieldEnum.clear,
         failure: FeedbackFailure.initial,
       ),
     );

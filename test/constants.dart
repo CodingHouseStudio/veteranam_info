@@ -46,11 +46,13 @@ abstract class KTestText {
   static const filter = 'filter_test';
 
   static const usernameCorrect = 'test_username';
-  static const passwordCorrect = 'test_password';
+  static const passwordCorrect = 'test_Password1';
   static const usernameEmpty = '';
   static const passwordEmpty = '';
   static const usernameIncorrect = 'test_';
-  static const passwordIncorrect = 'test_';
+  static const passwordIncorrect = 'test_password';
+  static const passwordIncorrectNumber = 'test_Password';
+  static const shortPassword = 'Pas1';
 
   static const useremail = 'example@gmail.com';
   static const useremailIncorrect = 'examplegmail.com';
@@ -80,6 +82,14 @@ abstract class KTestText {
           'вакансії, які відповідають вашим критеріям.',
     ),
   ];
+
+  static const user = User(
+    id: '1',
+    email: useremail,
+    name: usernameCorrect,
+    phoneNumber: 'test_phone_number',
+    photo: 'test_phot',
+  );
 
   static final feedbackModel = FeedbackModel(
     id: DateTime(2024, 4, 12, 0, 0, 0, 1).microsecondsSinceEpoch.toString(),
@@ -153,11 +163,21 @@ abstract class KScreenBlocName {
   static const aboutUs = 'About Us Screen';
   static const contact = 'Contact Screen';
   static const consultation = 'Consultation Screen';
+  static const login = 'Login Screen';
+  static const signUp = 'Sign Up Screen';
+
   static const feedback = 'Feedback Widget';
 
   static const filterCubit = 'Filter Cubit';
   static const languageCubit = 'Language Cubit';
   static const homeBloc = 'Home Bloc';
   static const feedbackBloc = 'Feedback Bloc';
+  static const authenticationServicesCubit = 'Authentication Services Cubit';
+  static const authenticationBloc = 'Authentication Bloc';
+  static const loginBloc = 'Login Bloc';
+  static const signUpBloc = 'Sign Up Bloc';
+
+  static const iAppAuthenticationRepository = 'App Authentication';
+  static const authentication = ' Authentication';
   static const informationBloc = 'Information Bloc';
 }

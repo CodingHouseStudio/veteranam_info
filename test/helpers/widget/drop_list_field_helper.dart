@@ -46,7 +46,7 @@ Future<void> dropListFieldBoxHelper({
     findsNothing,
   );
 
-  await scrollingHelper(
+  await scrollingHelperInt(
     tester: tester,
     itemKey: KWidgetkeys.widget.dropListField.field,
   );

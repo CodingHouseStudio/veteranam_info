@@ -9,7 +9,7 @@ import '../test_dependency.dart';
 /// offset sets the length of the scroll plus a value up and minus a value down
 ///
 /// itemKey sets which widget will be scrolled to by its Key
-Future<void> scrollingHelper({
+Future<void> scrollingHelperInt({
   required WidgetTester tester,
   Offset? offset,
   Key? itemKey,
