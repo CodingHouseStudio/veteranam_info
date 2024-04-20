@@ -51,6 +51,7 @@ class ScaffoldWithNavBar extends StatelessWidget {
                           : KPlatformConstants.desktopPaddingKoefficient)),
               top: KPadding.kPaddingSize10,
             ),
+            semanticChildCount: childWidgets.length,
             childrenDelegate: SliverChildListDelegate(childWidgets),
           ),
         );
