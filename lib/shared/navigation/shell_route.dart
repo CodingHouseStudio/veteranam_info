@@ -25,7 +25,7 @@ class ScaffoldWithNavBar extends StatelessWidget {
         final childWidgets = childWidgetsFunction(isDesk: isDesk)
           ..add(
             FooterWidget(
-              isDesktop: isDesk,
+              isDesk: isDesk,
             ),
           );
         return Scaffold(
@@ -34,7 +34,7 @@ class ScaffoldWithNavBar extends StatelessWidget {
             isDesk: isDesk,
             hasMicrophone: hasMic,
           ),
-          body: ListView.builder(
+          body: ListView.custom(
             key: KWidgetkeys.widget.shellRoute.scroll,
             padding: EdgeInsets.only(
               left: KPadding.kPaddingSize75 *
@@ -51,8 +51,7 @@ class ScaffoldWithNavBar extends StatelessWidget {
                           : KPlatformConstants.desktopPaddingKoefficient)),
               top: KPadding.kPaddingSize10,
             ),
-            itemCount: childWidgets.length,
-            itemBuilder: (context, index) => childWidgets.elementAt(index),
+            childrenDelegate: SliverChildListDelegate(childWidgets),
           ),
         );
       },

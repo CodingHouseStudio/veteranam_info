@@ -1,0 +1,252 @@
+import 'dart:async';
+
+import 'package:dartz/dartz.dart';
+import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
+import 'package:flutter/foundation.dart'
+    show debugPrint, kIsWeb, visibleForTesting;
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:injectable/injectable.dart';
+import 'package:kozak/shared/shared.dart';
+
+@Singleton(as: IAppAuthenticationRepository)
+class AppAuthenticationRepository implements IAppAuthenticationRepository {
+  AppAuthenticationRepository(
+    // super.dioClient,
+    this._secureStorageRepository,
+    this._firebaseAuth,
+    this._googleSignIn,
+    this._cache,
+  ) {
+    _updateAuthStatusBasedOnCache();
+  }
+
+  final IStorage _secureStorageRepository;
+  final firebase_auth.FirebaseAuth _firebaseAuth;
+  final GoogleSignIn _googleSignIn;
+  final CacheClient _cache;
+
+  /// Whether or not the current environment is web
+  /// Should only be overridden for testing purposes. Otherwise,
+  /// defaults to [kIsWeb]
+  @visibleForTesting
+  bool isWeb = kIsWeb;
+
+  /// User cache key.
+  /// Should only be used for testing purposes.
+  @visibleForTesting
+  static const userCacheKey = '__user_cache_key__';
+
+  // /// Stream of [User] which will emit the current user when
+  // /// the authentication state changes.
+  // ///
+  // /// Emits [User.empty] if the user is not authenticated.
+  @override
+  Stream<User> get user => _firebaseAuth.authStateChanges().map(
+        (firebaseUser) {
+          debugPrint('================================================');
+          if (firebaseUser != null) {
+            debugPrint('Firebase Auth State Changed: User is authenticated');
+            debugPrint('Firebase User Details: $firebaseUser');
+            final user = firebaseUser.toUser;
+            _cache.write(key: userCacheKey, value: user);
+            return user;
+          } else {
+            debugPrint('Firebase Auth State Changed: '
+                'User is unauthenticated (User.empty)');
+            return User.empty;
+          }
+        },
+      );
+
+  //
+  // /// Returns the current cached user.
+  // /// Defaults to [User.empty] if there is no cached user.
+  @override
+  User get currentUser => _cache.read<User>(key: userCacheKey) ?? User.empty;
+
+  // /// Returns the current auth status.
+  // /// Defaults to [AuthStatus.unknown] if there is no cached auth status.
+
+  static const String tokenKey = KAppText.authTokenKey;
+  static const String url = KAppText.backendString;
+
+  /// Starts the Sign In with Google Flow.
+  ///
+  /// Throws a [LogInWithGoogleFailure] if an exception occurs.
+
+  @override
+  Future<Either<SomeFailure, bool>> signUpWithGoogle() async {
+    try {
+      await _firebaseAuth
+          .signInWithCredential(await _getGoogleAuthCredential());
+      return const Right(true);
+    } on firebase_auth.FirebaseAuthException catch (e) {
+      return Left(SignUpWithGoogleFailure.fromCode(e).status);
+    } catch (_) {
+      return const Left(SomeFailure.serverError());
+    } finally {
+      _updateAuthStatusBasedOnCache();
+    }
+  }
+
+  Future<firebase_auth.AuthCredential> _getGoogleAuthCredential() async {
+    if (isWeb) {
+      return _getGoogleAuthCredentialWeb();
+    } else {
+      return _getGoogleAuthCredentialMobile();
+    }
+  }
+
+  Future<firebase_auth.AuthCredential> _getGoogleAuthCredentialWeb() async {
+    final userCredential =
+        await _firebaseAuth.signInWithPopup(firebase_auth.GoogleAuthProvider());
+    return userCredential.credential!;
+  }
+
+  Future<firebase_auth.AuthCredential> _getGoogleAuthCredentialMobile() async {
+    final googleUser = await _googleSignIn.signIn();
+    final googleAuth = await googleUser!.authentication;
+    return firebase_auth.GoogleAuthProvider.credential(
+      accessToken: googleAuth.accessToken,
+      idToken: googleAuth.idToken,
+    );
+  }
+
+  /// Signs in with the provided [email] and [password].
+  ///
+  /// Throws a [LogInWithEmailAndPasswordFailure] if an exception occurs.
+  @override
+  Future<Either<SomeFailure, bool>> logInWithEmailAndPassword({
+    required String email,
+    required String password,
+  }) async =>
+      _handleAuthOperation(
+        () => _firebaseAuth.signInWithEmailAndPassword(
+          email: email,
+          password: password,
+        ),
+        (e) => LogInWithEmailAndPasswordFailure.fromCode(e).status,
+      );
+
+  /// Creates a new user with the provided [email] and [password].
+  ///
+  /// Throws a [SignUpWithEmailAndPasswordFailure] if an exception occurs.
+  @override
+  Future<Either<SomeFailure, bool>> signUp({
+    required String email,
+    required String password,
+  }) async {
+    return _handleAuthOperation(
+      () => _firebaseAuth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      ),
+      (e) => SignUpWithEmailAndPasswordFailure.fromCode(e).status,
+    );
+  }
+
+  @override
+  Future<bool> isLoggedIn() async => currentUser != User.empty;
+
+  /// Signs out the current user which will emit
+  /// [User.empty] from the [user] Stream.
+  ///
+  /// Throws a [LogOutFailure] if an exception occurs.
+  @override
+  Future<Either<SomeFailure, bool>> logOut() async {
+    try {
+      _cache.clear();
+      await Future.wait([
+        _firebaseAuth.signOut(),
+        _googleSignIn.signOut(),
+        _secureStorageRepository.deleteAll(),
+      ]);
+      return const Right(true);
+    } on firebase_auth.FirebaseAuthException catch (e) {
+      debugPrint('Firebase Auth Error: ${e.message}');
+      return Left(const LogOutFailure().status);
+    } catch (e) {
+      debugPrint('Logout error: $e');
+      return const Left(SomeFailure.serverError());
+    } finally {
+      _updateAuthStatusBasedOnCache();
+    }
+  }
+
+  @override
+  Future<String?> getUser() async {
+    final token = await _secureStorageRepository.readOne(
+      keyItem: KAppText.usernameToken,
+    );
+    return token;
+  }
+
+  Future<Either<SomeFailure, bool>> _handleAuthOperation(
+    Future<void> Function() operation,
+    SomeFailure Function(firebase_auth.FirebaseAuthException error) exception,
+  ) async {
+    try {
+      await operation();
+      return const Right(true);
+    } on firebase_auth.FirebaseAuthException catch (e) {
+      debugPrint('Firebase Auth Error: ${e.message}');
+      return Left(exception(e));
+    } catch (e) {
+      debugPrint('General Auth Error: $e');
+      return const Left(SomeFailure.serverError());
+    } finally {
+      _updateAuthStatusBasedOnCache();
+    }
+  }
+
+  void _updateAuthStatusBasedOnCache() {
+    debugPrint('Updating auth status based on cache');
+    final user = currentUser != User.empty;
+    debugPrint('Current user inside '
+        '_updateAuthStatusBasedOnCache : $currentUser');
+    debugPrint('user is $user');
+  }
+
+  @override
+  Future<Either<SomeFailure, bool>> sendVerificationCode({
+    required String email,
+  }) async {
+    try {
+      await _firebaseAuth.sendPasswordResetEmail(email: email);
+      return const Right(true);
+    } on firebase_auth.FirebaseAuthException catch (e) {
+      debugPrint('Sendig error: ${e.message}');
+      return const Left(SomeFailure.emailSendingFailed());
+    } catch (e) {
+      debugPrint('Unknown error: $e');
+      return const Left(SomeFailure.serverError());
+    }
+  }
+
+  @override
+  Future<Either<SomeFailure, bool>> deleteUser() async {
+    try {
+      await _firebaseAuth.currentUser?.delete();
+      _cache.clear(); // Clear the cache after user deletion
+      return const Right(true);
+    } on firebase_auth.FirebaseAuthException catch (e) {
+      debugPrint('Firebase Auth Error: ${e.message}');
+      return const Left(SomeFailure.serverError());
+    } catch (e) {
+      debugPrint('General Auth Error: $e');
+      return const Left(SomeFailure.serverError());
+    } finally {
+      _updateAuthStatusBasedOnCache();
+    }
+  }
+}
+
+extension on firebase_auth.User {
+  User get toUser => User(
+        id: uid,
+        email: email,
+        name: displayName,
+        photo: photoURL,
+        phoneNumber: phoneNumber,
+      );
+}

@@ -7,7 +7,7 @@ import '../test_dependency.dart';
 ///
 /// setDefaultSize if true sets screen size to initial screen size if false
 /// mobile size
-Future<void> changeWindowSizeHelper({
+Future<void> changeWindowSizeHelperInt({
   required WidgetTester tester,
   bool setDefaultSize = false,
 }) async {

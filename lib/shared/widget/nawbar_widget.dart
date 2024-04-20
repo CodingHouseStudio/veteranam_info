@@ -99,6 +99,9 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                 focusedBorder: KBorder.outlineInputTransparent,
                 disposeFocusNode: false,
                 isDesk: widget.isDesk,
+                contentPadding: widget.isDesk
+                    ? EdgeInsets.zero
+                    : const EdgeInsets.all(KPadding.kPaddingSize16),
               ),
             ),
             if (widget.isDesk && widget.hasMicrophone)
@@ -119,16 +122,19 @@ class _NawbarWidgetState extends State<NawbarWidget> {
               TextButton(
                 key: KWidgetkeys.widget.nawbar.button,
                 style: KButtonStyles.whiteButtonStyle,
-                onPressed: null,
+                onPressed: () => context.go(KRoute.login.path),
                 child: Text(
                   context.l10n.login,
                   style: AppTextStyle.text24,
                 ),
               )
             else if (!isFocused)
-              IconWidget(
-                key: KWidgetkeys.widget.nawbar.iconPerson,
-                icon: KIcon.person,
+              InkWell(
+                onTap: () => context.go(KRoute.login.path),
+                child: IconWidget(
+                  key: KWidgetkeys.widget.nawbar.iconPerson,
+                  icon: KIcon.person,
+                ),
               ),
           ],
         ),

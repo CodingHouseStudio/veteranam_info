@@ -54,9 +54,6 @@ class MessageFieldWidget extends StatelessWidget {
             KSizedBox.kHeightSizedBox8,
           ],
         ),
-        contentPadding: const EdgeInsets.all(
-          KPadding.kPaddingSize32,
-        ),
         hintStyle: hintStyle,
         isDesk: isDesk,
       ),

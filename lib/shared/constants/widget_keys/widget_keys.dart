@@ -28,6 +28,8 @@ part 'screen/consultation.dart';
 part 'screen/contact.dart';
 
 part 'screen/about_us.dart';
+part 'screen/sign_up.dart';
+part 'screen/login.dart';
 
 part 'widget/widget.dart';
 
@@ -78,6 +80,9 @@ part 'widget/shell_route.dart';
 part 'widget/pagination.dart';
 
 part 'widget/feedback.dart';
+part 'widget/email_password_fields.dart';
+part 'widget/left_card.dart';
+part 'widget/sign_up_bottom_buttons.dart';
 part 'widget/donate_card.dart';
 
 part 'widget/profile_card_widget.dart';

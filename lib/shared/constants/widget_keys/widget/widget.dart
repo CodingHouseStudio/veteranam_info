@@ -29,4 +29,7 @@ class _WidgetKeys {
   final feedback = _FeedbackKeys();
   final profileCardWidget = _ProfileCardWidgetKeys();
   final donateCard = _DoanteCardKeys();
+  final emailPasswordFields = _EmailPasswordFieldsKeys();
+  final leftCard = _LeftCardKeys();
+  final signUpBottomButtons = _SignUpBottomButtonsKeys();
 }

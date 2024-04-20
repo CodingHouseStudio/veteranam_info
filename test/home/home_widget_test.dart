@@ -60,9 +60,17 @@ void main() {
 
       await tester.pumpAndSettle();
 
+      await nawbarHelper(
+        tester: tester,
+        searchText: KTestText.field,
+        hasMic: false,
+      );
+
       await homeBoxHelper(tester);
 
       await listQuestionHelper(tester);
+
+      await footerHelper(tester: tester, email: KTestText.useremail);
     });
 
     testWidgets('Feedback enter correct text and save it', (tester) async {
@@ -159,7 +167,17 @@ void main() {
 
         await tester.pumpAndSettle();
 
+        await nawbarHelper(
+          tester: tester,
+          searchText: KTestText.field,
+          hasMic: false,
+        );
+
+        await homeBoxHelper(tester);
+
         await listQuestionHelper(tester);
+
+        await footerHelper(tester: tester, email: KTestText.useremail);
       });
 
       group('${KGroupText.goTo} ', () {
@@ -178,6 +196,11 @@ void main() {
           await tester.pumpAndSettle();
 
           await nawbarTitleHelper(
+            tester: tester,
+            mockGoRouter: mockGoRouter,
+          );
+
+          await nawbarLoginNavigationHelper(
             tester: tester,
             mockGoRouter: mockGoRouter,
           );
