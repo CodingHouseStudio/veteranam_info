@@ -44,10 +44,11 @@ class _NawbarWidgetState extends State<NawbarWidget> {
   Widget build(BuildContext context) {
     return Container(
       decoration: KWidetTheme.boxDecorationCard,
-      margin: const EdgeInsets.only(
+      margin: EdgeInsets.only(
+        left: widget.isDesk ? KPadding.kPaddingSize90 : KPadding.kPaddingSize16,
+        right:
+            widget.isDesk ? KPadding.kPaddingSize90 : KPadding.kPaddingSize16,
         top: KPadding.kPaddingSize24,
-        right: KPadding.kPaddingSize80,
-        left: KPadding.kPaddingSize80,
       ),
       child: Padding(
         padding: const EdgeInsets.all(KPadding.kPaddingSize8),

@@ -6,15 +6,16 @@ class WorkBodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScaffoldWithNavBar(
+    return ScaffoldWidget(
       childWidgetsFunction: ({required isDesk}) => [
         KSizedBox.kHeightSizedBox30,
-        const WorkCardWidget(
+        WorkCardWidget(
           title: KMockText.workTitle,
           city: KMockText.workCity,
           price: KMockText.workPrice,
           description: KMockText.workDescription,
           employer: KMockText.workEmployer,
+          isDesk: isDesk,
         ),
         KSizedBox.kHeightSizedBox30,
       ],

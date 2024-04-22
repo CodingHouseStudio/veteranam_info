@@ -9,7 +9,7 @@ class InvestorsBodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScaffoldWithNavBar(
+    return ScaffoldWidget(
       childWidgetsFunction: ({required isDesk}) => [
         FeedbackWidget(
           title: context.l10n.investors,
