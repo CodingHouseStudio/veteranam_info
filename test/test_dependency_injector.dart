@@ -15,7 +15,6 @@ void configureDependenciesTest() {
   GetIt.I.registerFactory<FirestoreService>(
     FirestoreService.new,
   );
-
   // Repositories
   GetIt.I.registerLazySingleton<IStorage>(SecureStorageRepository.new);
   GetIt.I.registerSingleton<IFeedbackRepository>(FeedbackRepository());
@@ -34,6 +33,7 @@ void configureDependenciesTest() {
     ),
   );
   GetIt.I.registerSingleton<IInformationRepository>(InformationRepository());
+  GetIt.I.registerSingleton<IInvestorsRepository>(InvestorsRepository());
   // Blocs
   GetIt.I.registerFactory<FilterCubit>(FilterCubit.new);
   GetIt.I.registerFactory<LanguageCubit>(LanguageCubit.new);
@@ -61,6 +61,11 @@ void configureDependenciesTest() {
   GetIt.I.registerSingleton<InformationWatcherBloc>(
     InformationWatcherBloc(
       informationRepository: GetIt.I.get<IInformationRepository>(),
+    ),
+  );
+  GetIt.I.registerSingleton<InvestorsWatcherBloc>(
+    InvestorsWatcherBloc(
+      investorsRepository: GetIt.I.get<IInvestorsRepository>(),
     ),
   );
 }

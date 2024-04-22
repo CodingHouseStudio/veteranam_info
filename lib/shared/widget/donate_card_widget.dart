@@ -4,18 +4,16 @@ import 'package:kozak/shared/shared.dart';
 
 class DonateCardWidget extends StatelessWidget {
   const DonateCardWidget({
-    required this.image,
-    required this.title,
-    required this.subtitle,
     required this.hasSubtitle,
+    required this.fundModel,
+    required this.isDesk,
     super.key,
     this.titleStyle,
   });
-  final String image;
-  final String title;
-  final String subtitle;
+  final FundModel fundModel;
   final bool hasSubtitle;
   final TextStyle? titleStyle;
+  final bool isDesk;
 
   @override
   Widget build(BuildContext context) {
@@ -28,10 +26,10 @@ class DonateCardWidget extends StatelessWidget {
       child: Stack(
         alignment: Alignment.bottomCenter,
         children: [
-          if (image.isNotEmpty)
+          if (fundModel.image != null)
             CachedNetworkImage(
               key: KWidgetkeys.widget.donateCard.image,
-              imageUrl: image,
+              imageUrl: fundModel.image!,
               placeholder: (context, url) => Image.asset(''),
               errorWidget: (context, url, error) => KIcon.error,
               fit: BoxFit.fill,
@@ -45,9 +43,10 @@ class DonateCardWidget extends StatelessWidget {
                     horizontal: KPadding.kPaddingSize16,
                   ),
                   child: Text(
-                    title,
+                    fundModel.title,
                     key: KWidgetkeys.widget.donateCard.title,
-                    style: titleStyle ?? AppTextStyle.text32,
+                    style: titleStyle ??
+                        (isDesk ? AppTextStyle.text32 : AppTextStyle.text24),
                   ),
                 ),
                 if (hasSubtitle)
@@ -57,9 +56,9 @@ class DonateCardWidget extends StatelessWidget {
                       vertical: KPadding.kPaddingSize16,
                     ),
                     child: Text(
-                      subtitle,
+                      fundModel.subtitle,
                       key: KWidgetkeys.widget.donateCard.subtitle,
-                      style: AppTextStyle.text18,
+                      style: isDesk ? AppTextStyle.text18 : AppTextStyle.text16,
                     ),
                   ),
                 KSizedBox.kHeightSizedBox16,
@@ -67,6 +66,7 @@ class DonateCardWidget extends StatelessWidget {
                   key: KWidgetkeys.widget.donateCard.button,
                   text: context.l10n.support,
                   onPressed: () {},
+                  isDesk: isDesk,
                 ),
               ],
             ),
