@@ -6,8 +6,6 @@ import 'package:kozak/shared/shared.dart';
 class SecureStorageRepository implements IStorage {
   SecureStorageRepository();
 
-  // ignore: invalid_annotation_target
-  @preResolve
   FlutterSecureStorage get secureStorage => const FlutterSecureStorage();
   @override
   Future<String?> readOne({required String keyItem}) async {

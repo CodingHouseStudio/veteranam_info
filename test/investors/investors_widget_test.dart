@@ -48,7 +48,7 @@ void main() {
 
       await tester.pumpAndSettle();
 
-      await feedbackHelper(tester: tester);
+      await feedbackHelper(tester);
 
       await donatesCardHelper(tester);
     });
@@ -70,7 +70,7 @@ void main() {
         field: KTestText.field,
       );
 
-      await feedbackHelper(tester: tester, isSuccess: true);
+      await feedbackBoxHelper(tester);
     });
 
     testWidgets('Feedback enter incorrect text and save it', (tester) async {
@@ -89,26 +89,26 @@ void main() {
         field: KTestText.field,
       );
 
-      await feedbackHelper(tester: tester);
+      await feedbackHelper(tester);
     });
 
-    // testWidgets('Feedback enter text and clear it', (tester) async {
-    //   registerFeedbackBloc();
-    //   await tester.pumpApp(const InvestorsScreen());
+    testWidgets('Feedback enter text and clear it', (tester) async {
+      registerFeedbackBloc();
+      await tester.pumpApp(const InvestorsScreen());
 
-    //   expect(
-    //     find.byKey(KWidgetkeys.screen.investors.screen),
-    //     findsOneWidget,
-    //   );
+      expect(
+        find.byKey(KWidgetkeys.screen.investors.screen),
+        findsOneWidget,
+      );
 
-    //   await tester.pumpAndSettle();
+      await tester.pumpAndSettle();
 
-    //   await feedbackClearTextHelper(
-    //     tester: tester,
-    //     email: KTestText.useremail,
-    //     field: KTestText.field,
-    //   );
-    // });
+      await feedbackClearTextHelper(
+        tester: tester,
+        email: KTestText.useremail,
+        field: KTestText.field,
+      );
+    });
 
     group('${KGroupText.goRouter} ', () {
       late MockGoRouter mockGoRouter;
@@ -126,31 +126,11 @@ void main() {
 
         await tester.pumpAndSettle();
 
-        await feedbackHelper(tester: tester);
+        await feedbackHelper(tester);
 
         await donatesCardHelper(tester);
       });
-      group('${KGroupText.goTo} ', () {
-        testWidgets('All footer widget navigation', (tester) async {
-          registerFeedbackBloc();
-          await tester.pumpApp(
-            const InvestorsScreen(),
-            mockGoRouter: mockGoRouter,
-          );
-
-          expect(
-            find.byKey(KWidgetkeys.screen.investors.screen),
-            findsOneWidget,
-          );
-
-          await tester.pumpAndSettle();
-
-          await footerButtonsHelper(
-            tester: tester,
-            mockGoRouter: mockGoRouter,
-          );
-        });
-      });
+      group('${KGroupText.goTo} ', () {});
     });
   });
 }

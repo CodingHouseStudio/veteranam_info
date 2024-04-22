@@ -7,4 +7,5 @@ class FeedbackEvent with _$FeedbackEvent {
   const factory FeedbackEvent.messageUpdated(String message) = _MessageUpdated;
   const factory FeedbackEvent.save() = _Save;
   const factory FeedbackEvent.clear() = _Clear;
+  const factory FeedbackEvent.sendignMessageAgain() = _SendignMessageAgain;
 }
