@@ -65,7 +65,7 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                   onTap: () => EasyDebounce.debounce(
                     context.l10n.logo,
                     const Duration(milliseconds: 500),
-                    () => context.go(KRoute.home.path),
+                    () => context.goNamed(KRoute.home.name),
                   ),
                   child: Text(
                     context.l10n.logo,
@@ -123,7 +123,7 @@ class _NawbarWidgetState extends State<NawbarWidget> {
               TextButton(
                 key: KWidgetkeys.widget.nawbar.button,
                 style: KButtonStyles.whiteButtonStyle,
-                onPressed: () => context.go(KRoute.login.path),
+                onPressed: () => context.goNamed(KRoute.login.name),
                 child: Text(
                   context.l10n.login,
                   style: AppTextStyle.text24,
@@ -131,7 +131,7 @@ class _NawbarWidgetState extends State<NawbarWidget> {
               )
             else if (!isFocused)
               InkWell(
-                onTap: () => context.go(KRoute.login.path),
+                onTap: () => context.goNamed(KRoute.login.name),
                 child: IconWidget(
                   key: KWidgetkeys.widget.nawbar.iconPerson,
                   icon: KIcon.person,

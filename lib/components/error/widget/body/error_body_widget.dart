@@ -10,7 +10,7 @@ class ErrorBodyWidget extends StatelessWidget {
     return Center(
       child: ElevatedButton(
         key: KWidgetkeys.screen.error.button,
-        onPressed: () => context.go(KRoute.home.path),
+        onPressed: () => context.goNamed(KRoute.home.name),
         child: Text(context.l10n.errorMessage),
       ),
     );

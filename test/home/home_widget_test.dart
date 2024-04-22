@@ -96,7 +96,7 @@ void main() {
         field: KTestText.field,
       );
 
-      await feedbackHelper(tester: tester, isSuccess: true);
+      await feedbackBoxHelper(tester);
     });
 
     testWidgets('Feedback enter incorrect text and save it', (tester) async {
@@ -121,37 +121,32 @@ void main() {
         field: KTestText.field,
       );
 
-      await feedbackHelper(tester: tester);
+      await feedbackHelper(tester);
     });
 
-    // testWidgets('Feedback enter text and clear it', (tester) async {
-    //   registerHomeBloc();
-    //   registerFeedbackBloc();
-    //   await tester.pumpApp(const HomeScreen(), isHome: true);
-    //   await tester.pumpApp(
-    //     const HomeScreen(),
-    //   );
-    //   expect(find.byKey(KWidgetkeys.screen.home.screen), findsOneWidget);
+    testWidgets('Feedback enter text and clear it', (tester) async {
+      registerHomeBloc();
+      registerFeedbackBloc();
+      await tester.pumpApp(const HomeScreen());
+      await tester.pumpApp(
+        const HomeScreen(),
+      );
+      expect(find.byKey(KWidgetkeys.screen.home.screen), findsOneWidget);
 
-    //   await tester.pumpAndSettle();
+      await tester.pumpAndSettle();
 
-    //   await scrollingHelper(
-    //     tester: tester,
-    //     itemKey: null,
-    //     offset: KTestConstants.scrollingDown,
-    //   );
+      await scrollingHelper(
+        tester: tester,
+        itemKey: null,
+        offset: KTestConstants.scrollingDown,
+      );
 
-    //   await scrollingHelper(
-    //     tester: tester,
-    //     itemKey: null,
-    //     offset: KTestConstants.scrollingUp500,
-    //   );
-    //   await feedbackClearTextHelper(
-    //     tester: tester,
-    //     email: KTestText.useremail,
-    //     field: KTestText.field,
-    //   );
-    // });
+      await feedbackClearTextHelper(
+        tester: tester,
+        email: KTestText.useremail,
+        field: KTestText.field,
+      );
+    });
 
     group('${KGroupText.goRouter} ', () {
       late MockGoRouter mockGoRouter;

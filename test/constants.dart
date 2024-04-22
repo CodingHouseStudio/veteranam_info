@@ -64,11 +64,11 @@ abstract class KTestText {
   static const fieldEmpty = '';
 
   static final boxRoutes = [
-    '${KRoute.home.path}${KRoute.discounts.path}',
-    '${KRoute.home.path}${KRoute.work.path}',
-    '${KRoute.home.path}${KRoute.information.path}',
-    '${KRoute.home.path}${KRoute.story.path}',
-    '${KRoute.home.path}${KRoute.investors.path}',
+    KRoute.discounts.name,
+    KRoute.work.name,
+    KRoute.information.name,
+    KRoute.story.name,
+    KRoute.investors.name,
   ];
 
   static const questionModelItems = <QuestionModel>[
@@ -141,6 +141,7 @@ abstract class KTestConstants {
   static const scrollingDown = Offset(0, -10000);
   static const scrollingDown500 = Offset(0, -500);
   static const scrollingUp = Offset(0, 10000);
+  static const scrollingUp500 = Offset(0, 500);
   static const scrollingAppBar = Offset(0, KSize.kPreferredSize);
 
   static const windowTabletSize = Size(1700, 1700);

@@ -50,8 +50,8 @@ Future<void> loginFieldsHelper({
   await tester.pumpAndSettle();
 
   if (dataIsCorrect) {
-    verify(() => mockGoRouter.go(KRoute.home.path)).called(1);
+    verify(() => mockGoRouter.goNamed(KRoute.home.name)).called(1);
   } else {
-    verifyNever(() => mockGoRouter.go(KRoute.home.path));
+    verifyNever(() => mockGoRouter.goNamed(KRoute.home.name));
   }
 }
