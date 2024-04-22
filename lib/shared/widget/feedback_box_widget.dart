@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kozak/shared/shared.dart';
 
-class FeedbackBoxWidget extends StatelessWidget {
+class FeedbackBoxWidget extends StatefulWidget {
   const FeedbackBoxWidget({
     required this.isDesk,
     required this.sendAgain,
@@ -14,11 +15,24 @@ class FeedbackBoxWidget extends StatelessWidget {
   final GlobalKey feedbackBoxKey;
 
   @override
+  State<FeedbackBoxWidget> createState() => _FeedbackBoxWidgetState();
+}
+
+class _FeedbackBoxWidgetState extends State<FeedbackBoxWidget> {
+  @override
+  void initState() {
+    if (context.read<FeedbackBloc>().state.formState ==
+        FeedbackEnum.sendingMessage) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Scrollable.ensureVisible(widget.feedbackBoxKey.currentContext!);
+      });
+    }
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      Scrollable.ensureVisible(feedbackBoxKey.currentContext!);
-    });
-    return isDesk
+    return widget.isDesk
         ? IntrinsicHeight(
             key: KWidgetkeys.widget.feedbackBox.widget,
             child: Row(
@@ -49,7 +63,7 @@ class FeedbackBoxWidget extends StatelessWidget {
                         ButtonWidget(
                           key: KWidgetkeys.widget.feedbackBox.button,
                           text: context.l10n.sendMore,
-                          onPressed: sendAgain,
+                          onPressed: widget.sendAgain,
                           isDesk: true,
                         ),
                       ],
@@ -104,7 +118,7 @@ class FeedbackBoxWidget extends StatelessWidget {
               ButtonWidget(
                 key: KWidgetkeys.widget.feedbackBox.button,
                 text: context.l10n.sendMore,
-                onPressed: sendAgain,
+                onPressed: widget.sendAgain,
                 isDesk: false,
               ),
               KSizedBox.kHeightSizedBox24,

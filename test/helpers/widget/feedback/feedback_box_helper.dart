@@ -6,6 +6,12 @@ import '../../../text_dependency.dart';
 Future<void> feedbackBoxHelper(
   WidgetTester tester,
 ) async {
+  await scrollingHelper(
+    tester: tester,
+    itemKey: null,
+    offset: KTestConstants.scrollingUp500,
+  );
+
   expect(
     find.byKey(KWidgetkeys.widget.feedbackBox.button),
     findsOneWidget,

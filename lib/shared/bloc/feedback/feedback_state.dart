@@ -18,7 +18,7 @@ class FeedbackState with _$FeedbackState {
     required NameFieldModel name,
     required EmailFieldModel email,
     required MessageFieldModel message,
-    required FeedbackEnum fieldsState,
+    required FeedbackEnum formState,
     required FeedbackFailure failure,
   }) = _FeedbackState;
 }
@@ -26,6 +26,8 @@ class FeedbackState with _$FeedbackState {
 enum FeedbackEnum {
   initial,
   clear,
+  sendingMessage,
+  sendignMessageAgain,
   success,
   invalidData,
 }
