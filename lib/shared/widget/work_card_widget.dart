@@ -8,6 +8,7 @@ class WorkCardWidget extends StatelessWidget {
     required this.price,
     required this.description,
     required this.employer,
+    required this.isDesk,
     super.key,
   });
   final String title;
@@ -15,6 +16,7 @@ class WorkCardWidget extends StatelessWidget {
   final String city;
   final String description;
   final String employer;
+  final bool isDesk;
 
   @override
   Widget build(BuildContext context) {
@@ -69,6 +71,7 @@ class WorkCardWidget extends StatelessWidget {
               key: KWidgetkeys.widget.workCard.button,
               onPressed: () {},
               text: context.l10n.respond,
+              isDesk: isDesk,
             ),
           ],
         ),
