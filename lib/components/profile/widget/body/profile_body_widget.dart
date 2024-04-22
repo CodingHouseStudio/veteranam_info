@@ -43,7 +43,7 @@ class ProfileBodyWidget extends StatelessWidget {
           flex: 2,
           child: Padding(
             padding:
-                const EdgeInsets.symmetric(horizontal: KPadding.kPaddingSize16),
+                const EdgeInsets.symmetric(horizontal: KPadding.kPaddingSize4),
             child: ProfileCardWidget(
               key: KWidgetkeys.widget.profileCard.profileCard,
               isDesk: isDesk,
