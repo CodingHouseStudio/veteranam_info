@@ -6,13 +6,11 @@ import 'package:go_router/go_router.dart';
 /// COMMENT: Function for checking user registration
 FutureOr<String?> Function(BuildContext, GoRouterState)? redirect =
     (BuildContext context, GoRouterState state) {
-  return null;
-
   // if (context.read<AuthenticationBloc>().state.status ==
   //         AuthenticationStatus.unknown ||
   //     context.read<AuthenticationBloc>().state.status ==
   //         AuthenticationStatus.unauthenticated) {
-  //   return KRouteStatic.login.path;
+  //   return KRoute.login.path;
   // }
-  // return null;
+  return null;
 };

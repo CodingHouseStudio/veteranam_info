@@ -6,7 +6,7 @@ import '../../test_dependency.dart';
 Future<void> footerProfileRoutHelper(
   WidgetTester tester,
 ) async {
-  await scrollingHelper(
+  await scrollingHelperInt(
     tester: tester,
     offset: KTestConstants.scrolling,
     itemKey: KWidgetkeys.widget.footer.profileButton,

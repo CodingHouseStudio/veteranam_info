@@ -62,23 +62,21 @@ class FeedbackBoxWidget extends StatelessWidget {
                     children: [
                       BoxWidget(
                         text: context.l10n.information,
-                        onTap: () => context.go(
-                          '${KRoute.home.path}${KRoute.information.path}',
+                        onTap: () => context.goNamed(
+                          KRoute.information.name,
                         ),
                         isDesk: true,
                       ),
                       KSizedBox.kHeightSizedBox24,
                       BoxWidget(
                         text: context.l10n.investors,
-                        onTap: () => context
-                            .go('${KRoute.home.path}${KRoute.investors.path}'),
+                        onTap: () => context.goNamed(KRoute.investors.name),
                         isDesk: true,
                       ),
                       KSizedBox.kHeightSizedBox24,
                       BoxWidget(
                         text: context.l10n.stories,
-                        onTap: () => context
-                            .go('${KRoute.home.path}${KRoute.story.path}'),
+                        onTap: () => context.goNamed(KRoute.story.name),
                         isDesk: true,
                       ),
                     ],
@@ -112,22 +110,19 @@ class FeedbackBoxWidget extends StatelessWidget {
               KSizedBox.kHeightSizedBox24,
               BoxWidget(
                 text: context.l10n.information,
-                onTap: () =>
-                    context.go('${KRoute.home.path}${KRoute.information.path}'),
+                onTap: () => context.goNamed(KRoute.information.name),
                 isDesk: false,
               ),
               KSizedBox.kHeightSizedBox24,
               BoxWidget(
                 text: context.l10n.investors,
-                onTap: () =>
-                    context.go('${KRoute.home.path}${KRoute.investors.path}'),
+                onTap: () => context.goNamed(KRoute.investors.name),
                 isDesk: false,
               ),
               KSizedBox.kHeightSizedBox24,
               BoxWidget(
                 text: context.l10n.stories,
-                onTap: () =>
-                    context.go('${KRoute.home.path}${KRoute.story.path}'),
+                onTap: () => context.goNamed(KRoute.story.name),
                 isDesk: false,
               ),
             ],

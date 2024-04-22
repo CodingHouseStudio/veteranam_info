@@ -12,6 +12,7 @@ abstract class KMockText {
     'Трускавець',
     'Стебник',
   ];
+  static const facebook = 'Facebook';
   static const donateCardTitle = 'Благодійний фонд '
       '«ПОВЕРНИСЬ ЖИВИМ»';
   static const donateCardSubtitle =
@@ -108,21 +109,25 @@ abstract class KMockText {
 
 /// README: Variables with specific text
 abstract class KAppText {
+  static const String authTokenKey = 'AUTH_TOKEN';
+  static const String authChange = 'AuthenticationStatusChanged:';
+  static const String backendString = '';
+  static const String usernameToken = 'USERNAME_TOKEN';
   static final routes = [
     [
-      '${KRoute.home.path}${KRoute.aboutUs.path}',
-      '${KRoute.home.path}${KRoute.investors.path}',
-      '${KRoute.home.path}${KRoute.contact.path}',
+      KRoute.aboutUs.name,
+      KRoute.investors.name,
+      KRoute.contact.name,
     ],
     [
-      '${KRoute.home.path}${KRoute.story.path}',
-      '${KRoute.home.path}${KRoute.discounts.path}',
-      '${KRoute.home.path}${KRoute.profile.path}',
+      KRoute.story.name,
+      KRoute.discounts.name,
+      KRoute.profile.name,
     ],
     [
-      '${KRoute.home.path}${KRoute.work.path}',
-      '${KRoute.home.path}${KRoute.information.path}',
-      '${KRoute.home.path}${KRoute.consultation.path}',
+      KRoute.work.name,
+      KRoute.information.name,
+      KRoute.consultation.name,
     ],
   ];
 }
