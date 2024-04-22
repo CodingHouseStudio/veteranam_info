@@ -44,8 +44,8 @@ class _FeedbackWidgetState extends State<FeedbackWidget> {
       listenWhen: (previous, current) =>
           current.fieldsState != previous.fieldsState,
       listener: (context, state) {
-        if (state.fieldsState == FeedbackEnum.success ||
-            state.fieldsState == FeedbackEnum.initial) {
+        if (state.fieldsState == FieldEnum.success ||
+            state.fieldsState == FieldEnum.clear) {
           nameController.clear();
           emailController.clear();
           messageController.clear();
@@ -56,7 +56,7 @@ class _FeedbackWidgetState extends State<FeedbackWidget> {
       builder: (context, _) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (_.fieldsState == FeedbackEnum.success)
+          if (_.fieldsState == FieldEnum.success)
             Text(
               widget.saveMessage ?? context.l10n.feedbackSaveMessage,
               key: KWidgetkeys.widget.feedback.saveMessage,
@@ -98,7 +98,7 @@ class _FeedbackWidgetState extends State<FeedbackWidget> {
             KSizedBox.kHeightSizedBox8,
           TextFieldWidget(
             widgetKey: KWidgetkeys.widget.feedback.fieldName,
-            errorText: _.fieldsState == FeedbackEnum.invalidData
+            errorText: _.fieldsState == FieldEnum.invalidData
                 ? _.name.error.value(context)
                 : null,
             controller: nameController,
@@ -106,7 +106,6 @@ class _FeedbackWidgetState extends State<FeedbackWidget> {
                   FeedbackEvent.nameUpdated(value),
                 ),
             hintText: context.l10n.text,
-            contentPadding: const EdgeInsets.all(KPadding.kPaddingSize32),
             hintStyle:
                 widget.isDesk ? AppTextStyle.hint24 : AppTextStyle.hint16,
             isDesk: widget.isDesk,
@@ -116,7 +115,7 @@ class _FeedbackWidgetState extends State<FeedbackWidget> {
           else
             KSizedBox.kHeightSizedBox16,
           Text(
-            '${context.l10n.email}*',
+            '${context.l10n.fullEmail}*',
             key: KWidgetkeys.widget.feedback.email,
             style: widget.isDesk ? AppTextStyle.text40 : AppTextStyle.text32,
           ),
@@ -126,7 +125,7 @@ class _FeedbackWidgetState extends State<FeedbackWidget> {
             KSizedBox.kHeightSizedBox8,
           TextFieldWidget(
             widgetKey: KWidgetkeys.widget.feedback.fieldEmail,
-            errorText: _.fieldsState == FeedbackEnum.invalidData
+            errorText: _.fieldsState == FieldEnum.invalidData
                 ? _.email.error.value(context)
                 : null,
             controller: emailController,
@@ -134,7 +133,6 @@ class _FeedbackWidgetState extends State<FeedbackWidget> {
                   FeedbackEvent.emailUpdated(value),
                 ),
             hintText: context.l10n.writeYourEmail,
-            contentPadding: const EdgeInsets.all(KPadding.kPaddingSize32),
             hintStyle:
                 widget.isDesk ? AppTextStyle.hint24 : AppTextStyle.hint16,
             isDesk: widget.isDesk,
@@ -154,7 +152,7 @@ class _FeedbackWidgetState extends State<FeedbackWidget> {
             KSizedBox.kHeightSizedBox8,
           MessageFieldWidget(
             key: KWidgetkeys.widget.feedback.fieldMessage,
-            errorText: _.fieldsState == FeedbackEnum.invalidData
+            errorText: _.fieldsState == FieldEnum.invalidData
                 ? _.message.error.value(context)
                 : null,
             controller: messageController,

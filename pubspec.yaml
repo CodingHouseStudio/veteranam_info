@@ -21,12 +21,14 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   flutter_markdown: ^0.6.22+1
+  flutter_secure_storage: ^9.0.0
   font_awesome_flutter: ^10.7.0
   formz: ^0.7.0
   freezed: ^2.5.1
   freezed_annotation: ^2.4.1
   get_it: ^7.6.0 # Used for dependency injection
   go_router: ^13.2.0 # Decoupled routing package which is a must for any app
+  google_sign_in: ^6.2.1
   injectable: ^2.3.4 # Used for dependency injection
   intl: ^0.18.1
   json_serializable: ^6.7.1

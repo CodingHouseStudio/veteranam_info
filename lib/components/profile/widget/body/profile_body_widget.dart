@@ -6,41 +6,32 @@ class ProfileBodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final isDesk =
-            KPlatformConstants.changeToDescWidget(constraints.maxWidth);
-        return SingleChildScrollView(
+    return ScaffoldWithNavBar(
+      childWidgetsFunction: ({required isDesk}) => [
+        Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: KPadding.kPaddingSize16,
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: KPadding.kPaddingSize16,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      context.l10n.myProfile,
-                      style: AppTextStyle.text40,
-                    ),
-                    Text(
-                      context.l10n.profileDetails,
-                      style: AppTextStyle.text16,
-                    ),
-                    KSizedBox.kHeightSizedBox30,
-                  ],
-                ),
+              Text(
+                context.l10n.myProfile,
+                style: AppTextStyle.text40,
               ),
-              if (isDesk)
-                _buildDesktopLayout(context, isDesk)
-              else
-                _buildMobileLayout(context, isDesk),
+              Text(
+                context.l10n.profileDetails,
+                style: AppTextStyle.text16,
+              ),
+              KSizedBox.kHeightSizedBox30,
             ],
           ),
-        );
-      },
+        ),
+        if (isDesk)
+          _buildDesktopLayout(context, isDesk)
+        else
+          _buildMobileLayout(context, isDesk),
+      ],
     );
   }
 
@@ -55,6 +46,7 @@ class ProfileBodyWidget extends StatelessWidget {
                 const EdgeInsets.symmetric(horizontal: KPadding.kPaddingSize16),
             child: ProfileCardWidget(
               key: KWidgetkeys.widget.profileCard.profileCard,
+              isDesk: isDesk,
             ),
           ),
         ),
@@ -79,6 +71,7 @@ class ProfileBodyWidget extends StatelessWidget {
               const EdgeInsets.symmetric(horizontal: KPadding.kPaddingSize16),
           child: ProfileCardWidget(
             key: KWidgetkeys.widget.profileCard.profileCard,
+            isDesk: isDesk,
           ),
         ),
         KSizedBox.kHeightSizedBox24,

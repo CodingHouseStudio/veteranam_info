@@ -9,118 +9,85 @@ class InvestorsBodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final isDesk =
-            KPlatformConstants.changeToDescWidget(constraints.maxWidth);
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            FeedbackWidget(
-              title: context.l10n.investors,
-              subtitle: context.l10n.investorsSubtitle,
-              messageHint: context.l10n.writeYourSuggenstions,
-              isDesk: isDesk,
-            ),
-            BlocBuilder<InvestorsWatcherBloc, InvestorsWatcherState>(
-              builder: (context, _) {
-                switch (_) {
-                  case InvestorsWatcherStateIntital():
-                    return const CircularProgressIndicator.adaptive();
-                  case InvestorsWatcherStateLoading():
-                    return const CircularProgressIndicator.adaptive();
-                  case InvestorsWatcherStateSuccess():
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: KPadding.kPaddingSize56,
-                      ),
-                      child: Column(
-                        children: [
-                          Text(
-                            context.l10n.funds,
-                            style: isDesk
-                                ? AppTextStyle.text96
-                                : AppTextStyle.text32,
+    return BlocBuilder<InvestorsWatcherBloc, InvestorsWatcherState>(
+      builder: (context, _) {
+        switch (_) {
+          case InvestorsWatcherStateIntital():
+            return const CircularProgressIndicator.adaptive();
+          case InvestorsWatcherStateLoading():
+            return const CircularProgressIndicator.adaptive();
+          case InvestorsWatcherStateSuccess():
+            return ScaffoldWithNavBar(
+              childWidgetsFunction: ({required isDesk}) => [
+                FeedbackWidget(isDesk: isDesk),
+                Text(
+                  context.l10n.funds,
+                  style: isDesk ? AppTextStyle.text96 : AppTextStyle.text32,
+                ),
+                KSizedBox.kHeightSizedBox8,
+                Text(
+                  context.l10n.fundsSubtitle,
+                  style: isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
+                ),
+                KSizedBox.kHeightSizedBox56,
+                if (_.fundItems.isNotEmpty)
+                  if (isDesk)
+                    ...List.generate(
+                      (_.fundItems.length / 3).ceil(),
+                      (index) => Padding(
+                        padding: EdgeInsets.only(
+                          top: index == 0 ? 0 : KPadding.kPaddingSize24,
+                        ),
+                        child: DonatesCardsWidget(
+                          key: KWidgetkeys.screen.investors.donateCards,
+                          fundItems: _.fundItems.sublist(
+                            index * 3,
+                            (_.fundItems.length > index * 3 + 3)
+                                ? index * 3 + 3
+                                : _.fundItems.length,
                           ),
-                          KSizedBox.kHeightSizedBox8,
-                          Text(
-                            context.l10n.fundsSubtitle,
-                            style: isDesk
-                                ? AppTextStyle.text24
-                                : AppTextStyle.text16,
-                          ),
-                          KSizedBox.kHeightSizedBox56,
-                          if (_.fundItems.isNotEmpty)
-                            if (isDesk)
-                              ListView.builder(
-                                primary: false,
-                                shrinkWrap: true,
-                                itemCount: (_.fundItems.length / 3).ceil(),
-                                itemBuilder: (context, index) => Padding(
-                                  padding: EdgeInsets.only(
-                                    top: index == 0
-                                        ? 0
-                                        : KPadding.kPaddingSize24,
-                                  ),
-                                  child: DonatesCardsWidget(
-                                    key: KWidgetkeys
-                                        .screen.investors.donateCards,
-                                    fundItems: _.fundItems.sublist(
-                                      index * 3,
-                                      (_.fundItems.length > index * 3 + 3)
-                                          ? index * 3 + 3
-                                          : _.fundItems.length,
-                                    ),
-                                  ),
-                                ),
-                              )
-                            else
-                              ListView.builder(
-                                primary: false,
-                                shrinkWrap: true,
-                                itemCount: _.fundItems.length,
-                                itemBuilder: (context, index) => Padding(
-                                  padding: EdgeInsets.only(
-                                    top: index == 0
-                                        ? 0
-                                        : KPadding.kPaddingSize24,
-                                  ),
-                                  child: DonateCardWidget(
-                                    key: KWidgetkeys
-                                        .screen.investors.donateCards,
-                                    fundModel: _.fundItems.elementAt(index),
-                                    isDesk: false,
-                                    hasSubtitle: true,
-                                  ),
-                                ),
-                              )
-                          else
-                            TextButton(
-                              key: KWidgetkeys.screen.home.buttonMock,
-                              onPressed: () {
-                                GetIt.I
-                                    .get<IInvestorsRepository>()
-                                    .addMockFunds();
-                                context
-                                    .read<InvestorsWatcherBloc>()
-                                    .add(const InvestorsWatcherEvent.started());
-                              },
-                              child: Text(
-                                context.l10n.getMockData,
-                                style: AppTextStyle.text32,
-                              ),
-                            ),
-                        ],
+                        ),
                       ),
-                    );
-                  case InvestorsWatcherStateFailure():
-                  default:
-                    return const CircularProgressIndicator.adaptive();
-                }
-              },
-            ),
-          ],
-        );
+                    )
+                  else
+                    ...List.generate(
+                      _.fundItems.length,
+                      (index) => Padding(
+                        padding: EdgeInsets.only(
+                          top: index == 0 ? 0 : KPadding.kPaddingSize24,
+                        ),
+                        child: DonateCardWidget(
+                          key: KWidgetkeys.screen.investors.donateCards,
+                          fundModel: _.fundItems.elementAt(index),
+                          isDesk: false,
+                          hasSubtitle: true,
+                        ),
+                      ),
+                    )
+                else
+                  TextButton(
+                    key: KWidgetkeys.screen.home.buttonMock,
+                    onPressed: () {
+                      GetIt.I.get<IInvestorsRepository>().addMockFunds();
+                      context
+                          .read<InvestorsWatcherBloc>()
+                          .add(const InvestorsWatcherEvent.started());
+                    },
+                    child: Text(
+                      context.l10n.getMockData,
+                      style: AppTextStyle.text32,
+                    ),
+                  ),
+                if (isDesk)
+                  KSizedBox.kHeightSizedBox56
+                else
+                  KSizedBox.kHeightSizedBox40,
+              ],
+            );
+          case InvestorsWatcherStateFailure():
+          default:
+            return const CircularProgressIndicator.adaptive();
+        }
       },
     );
   }

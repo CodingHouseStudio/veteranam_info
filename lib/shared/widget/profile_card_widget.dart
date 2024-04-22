@@ -2,10 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:kozak/shared/shared.dart';
 
 class ProfileCardWidget extends StatefulWidget {
-  const ProfileCardWidget({super.key});
+  const ProfileCardWidget({
+    required this.isDesk,
+    super.key,
+  });
 
   @override
   ProfileCardWidgetState createState() => ProfileCardWidgetState();
+  final bool isDesk;
 }
 
 class ProfileCardWidgetState extends State<ProfileCardWidget> {
@@ -63,6 +67,8 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
                 _buildProfileInfo(),
                 KSizedBox.kHeightSizedBox8,
                 _buildProfileFooter(),
+                KSizedBox.kHeightSizedBox8,
+                _buildLinkedAccounts(),
               ],
             ),
           ),
@@ -80,7 +86,10 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
           onChanged: (value) {},
           widgetKey: KWidgetkeys.widget.profileCardWidget.textFiled,
           hintText: hint,
+          hintStyle: widget.isDesk ? AppTextStyle.hint24 : AppTextStyle.hint16,
           fillColor: AppColors.transparent,
+          contentPadding: const EdgeInsets.all(KPadding.kPaddingSize16),
+          isDesk: widget.isDesk,
         ),
       ],
     );
@@ -96,10 +105,11 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
           child: Text(
             KMockText.userName,
             style: AppTextStyle.text40,
-            softWrap: true,
+            maxLines: 2,
             overflow: TextOverflow.ellipsis,
           ),
         ),
+        const Spacer(),
         GestureDetector(
           onTap: () => setState(() => isEditing = !isEditing),
           child: KIcon.edit,
@@ -130,8 +140,11 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
             Expanded(child: Text(context.l10n.beAnonymous)),
           ],
         ),
-        Text(context.l10n.beAnonymousDetails, style: AppTextStyle.hint14),
-        KSizedBox.kHeightSizedBox24,
+        Text(
+          context.l10n.beAnonymousDetails,
+          style: widget.isDesk ? AppTextStyle.hint16 : AppTextStyle.text16,
+        ),
+        KSizedBox.kHeightSizedBox8,
         if (isEditing)
           Padding(
             padding: const EdgeInsets.only(
@@ -139,12 +152,74 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
             ),
             child: Center(
               child: ElevatedButton(
-                style: KButtonStyles.lightGrayButtonStyle,
+                style: KButtonStyles.widgetBackgroundButtonStyleWInf,
                 onPressed: () => setState(() => isEditing = !isEditing),
                 child:
                     Text(context.l10n.saveChanges, style: AppTextStyle.text24),
               ),
             ),
+          ),
+      ],
+    );
+  }
+
+  Widget _buildLinkedAccounts() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          context.l10n.linkedAccounts,
+          style: AppTextStyle.text24,
+        ),
+        KSizedBox.kHeightSizedBox8,
+        const Row(
+          children: [
+            KIcon.facebook,
+            KSizedBox.kWidthSizedBox8,
+            Expanded(
+              child: Text(
+                KMockText.facebook,
+                style: AppTextStyle.text16,
+              ),
+            ),
+          ],
+        ),
+        KSizedBox.kHeightSizedBox8,
+        Row(
+          children: [
+            Expanded(
+              child: TextFieldWidget(
+                onChanged: (value) {},
+                widgetKey: KWidgetkeys.widget.profileCardWidget.textFiled,
+                hintText: KMockText.email,
+                hintStyle:
+                    widget.isDesk ? AppTextStyle.hint24 : AppTextStyle.hint16,
+                fillColor: AppColors.transparent,
+                contentPadding: const EdgeInsets.all(KPadding.kPaddingSize16),
+                isDesk: widget.isDesk,
+              ),
+            ),
+            KSizedBox.kWidthSizedBox8,
+            if (widget.isDesk)
+              ElevatedButton(
+                style: KButtonStyles.widgetBackgroundSquareButtonStyleWInf,
+                onPressed: () {},
+                child:
+                    Text(context.l10n.disconnect, style: AppTextStyle.text24),
+              ),
+          ],
+        ),
+        KSizedBox.kHeightSizedBox8,
+        Text(
+          context.l10n.linkedAccountsDetails,
+          style: AppTextStyle.hint16,
+        ),
+        KSizedBox.kHeightSizedBox8,
+        if (widget.isDesk == false)
+          ElevatedButton(
+            style: KButtonStyles.widgetLightGreyButtonStyleWInf,
+            onPressed: () {},
+            child: Text(context.l10n.disconnect, style: AppTextStyle.text24),
           ),
       ],
     );

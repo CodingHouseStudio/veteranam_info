@@ -16,7 +16,11 @@ class MockGoRouter extends Mock implements GoRouter {
   // );
 }
 
-class MockGoRouterState extends Mock implements GoRouterState {}
+class MockGoRouterState extends Mock implements GoRouterState {
+  MockGoRouterState({required this.fullPath});
+  @override
+  final String? fullPath;
+}
 
 class MockGoRouterProvider extends StatelessWidget {
   const MockGoRouterProvider({

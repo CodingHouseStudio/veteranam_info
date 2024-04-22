@@ -23,6 +23,8 @@ void main() {
       );
 
       await tester.pumpAndSettle();
+
+      await chekPointHelper(tester);
     });
     group('${KGroupText.goRouter} ', () {
       late MockGoRouter mockGoRouter;
@@ -39,6 +41,8 @@ void main() {
         );
 
         await tester.pumpAndSettle();
+
+        await chekPointHelper(tester);
       });
       // group('${KGroupText.goTo} ', () {
       // });
