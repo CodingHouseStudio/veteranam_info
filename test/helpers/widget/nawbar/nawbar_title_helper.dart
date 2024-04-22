@@ -22,8 +22,8 @@ Future<void> nawbarTitleHelper({
   await tester.pumpAndSettle(const Duration(milliseconds: 500));
 
   verify(
-    () => mockGoRouter.go(
-      KRoute.home.path,
+    () => mockGoRouter.goNamed(
+      KRoute.home.name,
     ),
   ).called(1);
 }

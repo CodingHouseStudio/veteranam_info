@@ -15,5 +15,5 @@ Future<void> loginNavigationHelper({
 
   await tester.tap(find.byKey(KWidgetkeys.screen.signUp.loginButton));
 
-  verify(() => mockGoRouter.go(KRoute.login.path)).called(1);
+  verify(() => mockGoRouter.goNamed(KRoute.login.name)).called(1);
 }

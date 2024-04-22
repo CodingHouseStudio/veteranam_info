@@ -21,7 +21,7 @@ class HomeBodyWidget extends StatelessWidget {
             return const CircularProgressIndicator.adaptive();
           case HomeWatcherStateSuccess():
             final questionModelItems = state.questionModelItems;
-            return ScaffoldWithNavBar(
+            return ScaffoldWidget(
               hasMic: false,
               childWidgetsFunction: ({required isDesk}) => [
                 if (isDesk)
@@ -43,8 +43,8 @@ class HomeBodyWidget extends StatelessWidget {
                           children: [
                             BoxWidget(
                               text: context.l10n.discountsCoupons,
-                              onTap: () => context.go(
-                                '${KRoute.home.path}${KRoute.discounts.path}',
+                              onTap: () => context.goNamed(
+                                KRoute.discounts.name,
                               ),
                               isDesk: isDesk,
                             ),
@@ -54,8 +54,7 @@ class HomeBodyWidget extends StatelessWidget {
                               KSizedBox.kHeightSizedBox16,
                             BoxWidget(
                               text: context.l10n.work,
-                              onTap: () => context
-                                  .go('${KRoute.home.path}${KRoute.work.path}'),
+                              onTap: () => context.goNamed(KRoute.work.name),
                               isDesk: isDesk,
                             ),
                           ],
@@ -70,8 +69,8 @@ class HomeBodyWidget extends StatelessWidget {
                   KSizedBox.kHeightSizedBox16,
                   BoxWidget(
                     text: context.l10n.discountsCoupons,
-                    onTap: () => context.go(
-                      '${KRoute.home.path}${KRoute.discounts.path}',
+                    onTap: () => context.goNamed(
+                      KRoute.discounts.name,
                     ),
                     isDesk: isDesk,
                   ),
@@ -81,8 +80,7 @@ class HomeBodyWidget extends StatelessWidget {
                     KSizedBox.kHeightSizedBox16,
                   BoxWidget(
                     text: context.l10n.work,
-                    onTap: () =>
-                        context.go('${KRoute.home.path}${KRoute.work.path}'),
+                    onTap: () => context.goNamed(KRoute.work.name),
                     isDesk: isDesk,
                   ),
                 ],
@@ -96,8 +94,8 @@ class HomeBodyWidget extends StatelessWidget {
                       Expanded(
                         child: BoxWidget(
                           text: context.l10n.information,
-                          onTap: () => context.go(
-                            '${KRoute.home.path}${KRoute.information.path}',
+                          onTap: () => context.goNamed(
+                            KRoute.information.name,
                           ),
                           isDesk: isDesk,
                         ),
@@ -106,8 +104,7 @@ class HomeBodyWidget extends StatelessWidget {
                       Expanded(
                         child: BoxWidget(
                           text: context.l10n.stories,
-                          onTap: () => context
-                              .go('${KRoute.home.path}${KRoute.story.path}'),
+                          onTap: () => context.goNamed(KRoute.story.name),
                           isDesk: isDesk,
                         ),
                       ),
@@ -115,8 +112,8 @@ class HomeBodyWidget extends StatelessWidget {
                       Expanded(
                         child: BoxWidget(
                           text: context.l10n.investors,
-                          onTap: () => context.go(
-                            '${KRoute.home.path}${KRoute.investors.path}',
+                          onTap: () => context.goNamed(
+                            KRoute.investors.name,
                           ),
                           isDesk: isDesk,
                         ),
@@ -126,23 +123,21 @@ class HomeBodyWidget extends StatelessWidget {
                 else ...[
                   BoxWidget(
                     text: context.l10n.information,
-                    onTap: () => context.go(
-                      '${KRoute.home.path}${KRoute.information.path}',
+                    onTap: () => context.goNamed(
+                      KRoute.information.name,
                     ),
                     isDesk: isDesk,
                   ),
                   KSizedBox.kHeightSizedBox16,
                   BoxWidget(
                     text: context.l10n.stories,
-                    onTap: () =>
-                        context.go('${KRoute.home.path}${KRoute.story.path}'),
+                    onTap: () => context.goNamed(KRoute.story.name),
                     isDesk: isDesk,
                   ),
                   KSizedBox.kHeightSizedBox16,
                   BoxWidget(
                     text: context.l10n.investors,
-                    onTap: () => context
-                        .go('${KRoute.home.path}${KRoute.investors.path}'),
+                    onTap: () => context.goNamed(KRoute.investors.name),
                     isDesk: isDesk,
                   ),
                 ],

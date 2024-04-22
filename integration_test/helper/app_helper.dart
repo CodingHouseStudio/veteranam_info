@@ -11,7 +11,7 @@ Future<void> appHelper(WidgetTester tester) async {
     findsOneWidget,
   );
 
-  await tester.pumpAndSettle(const Duration(seconds: 2));
+  await tester.pumpAndSettle();
 }
 
 /// FOLDER FILES COMMENT: Files for widgets test or helper for test

@@ -17,7 +17,7 @@ class FeedbackBloc extends Bloc<FeedbackEvent, FeedbackState> {
             email: EmailFieldModel.pure(),
             message: MessageFieldModel.pure(),
             name: NameFieldModel.pure(),
-            fieldsState: FieldEnum.initial,
+            formState: FeedbackEnum.initial,
             failure: FeedbackFailure.initial,
           ),
         ) {
@@ -26,45 +26,46 @@ class FeedbackBloc extends Bloc<FeedbackEvent, FeedbackState> {
     on<_MessageUpdated>(_onMessageUpdated);
     on<_Save>(_onSave);
     on<_Clear>(_onClear);
+    on<_SendignMessageAgain>(_onSendignMessageAgain);
   }
 
   final IFeedbackRepository _feedbackRepository;
 
-  Future<void> _onNameUpdated(
+  void _onNameUpdated(
     _NameUpdated event,
     Emitter<FeedbackState> emit,
-  ) async {
+  ) {
     final nameFieldModel = NameFieldModel.dirty(event.name);
     emit(
       state.copyWith(
         name: nameFieldModel,
-        fieldsState: FieldEnum.initial,
+        formState: FeedbackEnum.initial,
       ),
     );
   }
 
-  Future<void> _onEmailUpdated(
+  void _onEmailUpdated(
     _EmailUpdated event,
     Emitter<FeedbackState> emit,
-  ) async {
+  ) {
     final emailFieldModel = EmailFieldModel.dirty(event.email);
     emit(
       state.copyWith(
         email: emailFieldModel,
-        fieldsState: FieldEnum.initial,
+        formState: FeedbackEnum.initial,
       ),
     );
   }
 
-  Future<void> _onMessageUpdated(
+  void _onMessageUpdated(
     _MessageUpdated event,
     Emitter<FeedbackState> emit,
-  ) async {
+  ) {
     final messageFieldModel = MessageFieldModel.dirty(event.message);
     emit(
       state.copyWith(
         message: messageFieldModel,
-        fieldsState: FieldEnum.initial,
+        formState: FeedbackEnum.initial,
       ),
     );
   }
@@ -80,6 +81,7 @@ class FeedbackBloc extends Bloc<FeedbackEvent, FeedbackState> {
         state.name,
       ],
     )) {
+      emit(state.copyWith(formState: FeedbackEnum.sendingMessage));
       final result = await _feedbackRepository.sendFeedback(
         FeedbackModel(
           id: ExtendedDateTime.current.microsecondsSinceEpoch.toString(),
@@ -94,7 +96,7 @@ class FeedbackBloc extends Bloc<FeedbackEvent, FeedbackState> {
         (l) => emit(
           state.copyWith(
             failure: l.toFeedback(),
-            fieldsState: FieldEnum.invalidData,
+            formState: FeedbackEnum.invalidData,
           ),
         ),
         (r) => emit(
@@ -102,27 +104,38 @@ class FeedbackBloc extends Bloc<FeedbackEvent, FeedbackState> {
             email: EmailFieldModel.pure(),
             message: MessageFieldModel.pure(),
             name: NameFieldModel.pure(),
-            fieldsState: FieldEnum.success,
+            formState: FeedbackEnum.success,
             failure: FeedbackFailure.none,
           ),
         ),
       );
     } else {
-      emit(state.copyWith(fieldsState: FieldEnum.invalidData));
+      emit(state.copyWith(formState: FeedbackEnum.invalidData));
     }
   }
 
-  Future<void> _onClear(
+  void _onClear(
     _Clear event,
     Emitter<FeedbackState> emit,
-  ) async {
+  ) {
     emit(
       const FeedbackState(
         email: EmailFieldModel.pure(),
         message: MessageFieldModel.pure(),
         name: NameFieldModel.pure(),
-        fieldsState: FieldEnum.clear,
+        formState: FeedbackEnum.clear,
         failure: FeedbackFailure.initial,
+      ),
+    );
+  }
+
+  void _onSendignMessageAgain(
+    _SendignMessageAgain event,
+    Emitter<FeedbackState> emit,
+  ) {
+    emit(
+      state.copyWith(
+        formState: FeedbackEnum.sendignMessageAgain,
       ),
     );
   }

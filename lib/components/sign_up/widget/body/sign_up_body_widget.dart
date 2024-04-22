@@ -12,7 +12,7 @@ class SignUpBodyWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<SignUpBloc, SignUpState>(
       listener: (context, state) => state.failure == SignUpError.none
-          ? context.go(KRoute.home.path)
+          ? context.goNamed(KRoute.home.name)
           : null,
       builder: (context, _) {
         return LeftCardWidget(
@@ -68,7 +68,7 @@ class SignUpBodyWidget extends StatelessWidget {
                 ),
                 TextButton(
                   key: KWidgetkeys.screen.signUp.loginButton,
-                  onPressed: () => context.go(KRoute.login.path),
+                  onPressed: () => context.goNamed(KRoute.login.name),
                   style: KButtonStyles.transparentButtonStyleBottomBorder,
                   child: Text(
                     context.l10n.login,

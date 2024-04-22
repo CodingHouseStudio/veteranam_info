@@ -21,7 +21,7 @@ Future<void> boxexHelper({
     await tester.tap(find.byWidget(boxWidgetsIcon.elementAt(i)));
 
     verify(
-      () => mockGoRouter.go(
+      () => mockGoRouter.goNamed(
         routes.elementAt(i),
       ),
     ).called(1);

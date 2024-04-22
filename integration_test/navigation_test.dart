@@ -18,7 +18,7 @@ void main() {
 
     await scrollingHelperInt(tester: tester, offset: KTestConstants.scrolling);
 
-    await tester.pumpAndSettle(const Duration(seconds: 2));
+    // await tester.pumpAndSettle(const Duration(seconds: 2));
 
     await footerHelper(
       tester: tester,

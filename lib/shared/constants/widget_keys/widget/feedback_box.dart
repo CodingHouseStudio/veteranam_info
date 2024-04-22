@@ -1,0 +1,8 @@
+part of '../widget_keys.dart';
+
+class _FeedbackBoxKeys {
+  final widget = const Key('feedback_box');
+  final title = const Key('feedback_box_title');
+  final subtitle = const Key('feedback_box_subtitle');
+  final button = const Key('feedback_box_button');
+}

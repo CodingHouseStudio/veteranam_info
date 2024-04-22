@@ -6,7 +6,7 @@ class ConsultationBodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScaffoldWithNavBar(
+    return ScaffoldWidget(
       childWidgetsFunction: ({required isDesk}) => [
         KSizedBox.kHeightSizedBox30,
       ],
