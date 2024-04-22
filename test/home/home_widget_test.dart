@@ -6,7 +6,6 @@ import 'package:kozak/shared/shared.dart';
 import 'package:mockito/mockito.dart';
 
 import '../text_dependency.dart';
-import 'home_widget/boxes_helper.dart';
 import 'home_widget/home_widget.dart';
 
 void main() {

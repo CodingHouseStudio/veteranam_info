@@ -40,16 +40,17 @@ void main() {
 
       test('${KGroupText.shouldNotBe} ${KGroupText.modelJson}', () {
         final json = {
-          'id': KTestText.feedbackModel.id,
+          // id is missing
           'guestId': KTestText.feedbackModel.guestId,
           'guestName': KTestText.feedbackModel.guestName,
           'email': KTestText.feedbackModel.email,
           'timestamp': KTestText.feedbackModel.timestamp.toIso8601String(),
           'message': KTestText.feedbackModel.message,
+          'status': _$FeedbackStatusEnumMap[KTestText.feedbackModel.status],
         };
 
         expect(
-          () => QuestionModel.fromJson(json),
+          () => FeedbackModel.fromJson(json),
           throwsA(isA<TypeError>()),
         );
       });

@@ -239,6 +239,69 @@ class MockFirestoreService extends _i1.Mock implements _i3.FirestoreService {
         returnValueForMissingStub:
             _i6.Future<List<_i3.QuestionModel>>.value(<_i3.QuestionModel>[]),
       ) as _i6.Future<List<_i3.QuestionModel>>);
+
+  @override
+  _i6.Future<List<_i3.FundModel>> getFunds() => (super.noSuchMethod(
+        Invocation.method(
+          #getFunds,
+          [],
+        ),
+        returnValue: _i6.Future<List<_i3.FundModel>>.value(<_i3.FundModel>[]),
+        returnValueForMissingStub:
+            _i6.Future<List<_i3.FundModel>>.value(<_i3.FundModel>[]),
+      ) as _i6.Future<List<_i3.FundModel>>);
+
+  @override
+  _i6.Future<void> addFund(_i3.FundModel? fund) => (super.noSuchMethod(
+        Invocation.method(
+          #addFund,
+          [fund],
+        ),
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
+}
+
+/// A class which mocks [IInvestorsRepository].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockIInvestorsRepository extends _i1.Mock
+    implements _i3.IInvestorsRepository {
+  @override
+  _i6.Future<_i2.Either<_i3.SomeFailure, List<_i3.FundModel>>> getFunds() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getFunds,
+          [],
+        ),
+        returnValue:
+            _i6.Future<_i2.Either<_i3.SomeFailure, List<_i3.FundModel>>>.value(
+                _FakeEither_0<_i3.SomeFailure, List<_i3.FundModel>>(
+          this,
+          Invocation.method(
+            #getFunds,
+            [],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i6.Future<_i2.Either<_i3.SomeFailure, List<_i3.FundModel>>>.value(
+                _FakeEither_0<_i3.SomeFailure, List<_i3.FundModel>>(
+          this,
+          Invocation.method(
+            #getFunds,
+            [],
+          ),
+        )),
+      ) as _i6.Future<_i2.Either<_i3.SomeFailure, List<_i3.FundModel>>>);
+
+  @override
+  void addMockFunds() => super.noSuchMethod(
+        Invocation.method(
+          #addMockFunds,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
 }
 
 /// A class which mocks [IAppAuthenticationRepository].

@@ -5,16 +5,16 @@ class DonateButtonWidget extends StatelessWidget {
   const DonateButtonWidget({
     required this.text,
     required this.onPressed,
+    required this.isDesk,
     super.key,
     this.icon,
-    this.textStyle,
     this.backgroundColor,
   });
   final Icon? icon;
-  final TextStyle? textStyle;
   final String text;
   final void Function() onPressed;
   final Color? backgroundColor;
+  final bool isDesk;
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +37,7 @@ class DonateButtonWidget extends StatelessWidget {
             Expanded(
               child: Text(
                 text,
-                style: textStyle ?? AppTextStyle.text32,
+                style: isDesk ? AppTextStyle.text32 : AppTextStyle.text24,
               ),
             ),
             IconWidget(

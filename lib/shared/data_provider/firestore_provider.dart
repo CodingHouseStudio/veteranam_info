@@ -54,4 +54,20 @@ class FirestoreService {
     //       .toList();
     // });
   }
+
+  Future<List<FundModel>> getFunds() async {
+    final docSnapshot =
+        await _db.collection(FirebaseCollectionName.funds).get();
+
+    return docSnapshot.docs
+        .map((doc) => FundModel.fromJson(doc.data()))
+        .toList();
+  }
+
+  Future<void> addFund(FundModel fund) {
+    return _db
+        .collection(FirebaseCollectionName.funds)
+        .doc(fund.id)
+        .set(fund.toJson());
+  }
 }

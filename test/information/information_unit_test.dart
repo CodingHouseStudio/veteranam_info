@@ -104,7 +104,7 @@ void main() {
         };
 
         expect(
-          () => QuestionModel.fromJson(json),
+          () => InformationModel.fromJson(json),
           throwsA(isA<TypeError>()),
         );
       });
