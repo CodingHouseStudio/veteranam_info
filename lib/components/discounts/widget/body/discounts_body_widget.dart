@@ -27,7 +27,7 @@ class DiscountsBodyWidget extends StatelessWidget {
         decoration: KWidetTheme.boxDecorPrimary,
         child: Padding(
           padding: const EdgeInsets.all(KPadding.kPaddingSize10),
-          child: ScaffoldWithNavBar(
+          child: ScaffoldWidget(
             childWidgetsFunction: ({required isDesk}) => [
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
