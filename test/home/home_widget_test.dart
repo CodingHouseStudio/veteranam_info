@@ -52,25 +52,43 @@ void main() {
 
     testWidgets('${KGroupText.intial} ', (tester) async {
       registerHomeBloc();
-      await tester.pumpApp(const HomeScreen(), isHome: true);
+      await tester.pumpApp(
+        const HomeScreen(),
+      );
 
       expect(find.byKey(KWidgetkeys.screen.home.screen), findsOneWidget);
 
       await tester.pumpAndSettle();
 
+      await nawbarHelper(
+        tester: tester,
+        searchText: KTestText.field,
+        hasMic: false,
+      );
+
       await homeBoxHelper(tester);
 
       await listQuestionHelper(tester);
+
+      await footerHelper(tester: tester, email: KTestText.useremail);
     });
 
     testWidgets('Feedback enter correct text and save it', (tester) async {
       registerHomeBloc();
       registerFeedbackBloc();
-      await tester.pumpApp(const HomeScreen(), isHome: true);
+      await tester.pumpApp(
+        const HomeScreen(),
+      );
 
       expect(find.byKey(KWidgetkeys.screen.home.screen), findsOneWidget);
 
       await tester.pumpAndSettle();
+
+      await scrollingHelper(
+        tester: tester,
+        itemKey: null,
+        offset: KTestConstants.scrollingDown,
+      );
 
       await feedbackEnterTextHelper(
         tester: tester,
@@ -78,22 +96,24 @@ void main() {
         field: KTestText.field,
       );
 
-      await scrollingHelper(
-        tester: tester,
-        itemKey: null,
-        offset: KTestConstants.scrollingUp,
-      );
-
       await feedbackBoxHelper(tester);
     });
 
     testWidgets('Feedback enter incorrect text and save it', (tester) async {
       registerHomeBloc();
-      await tester.pumpApp(const HomeScreen(), isHome: true);
+      await tester.pumpApp(
+        const HomeScreen(),
+      );
 
       expect(find.byKey(KWidgetkeys.screen.home.screen), findsOneWidget);
 
       await tester.pumpAndSettle();
+
+      await scrollingHelper(
+        tester: tester,
+        itemKey: null,
+        offset: KTestConstants.scrollingDown,
+      );
 
       await feedbackEnterTextHelper(
         tester: tester,
@@ -104,21 +124,29 @@ void main() {
       await feedbackHelper(tester);
     });
 
-    // testWidgets('Feedback enter text and clear it', (tester) async {
-    //   registerHomeBloc();
-    //   registerFeedbackBloc();
-    //   await tester.pumpApp(const HomeScreen(), isHome: true);
+    testWidgets('Feedback enter text and clear it', (tester) async {
+      registerHomeBloc();
+      registerFeedbackBloc();
+      await tester.pumpApp(const HomeScreen());
+      await tester.pumpApp(
+        const HomeScreen(),
+      );
+      expect(find.byKey(KWidgetkeys.screen.home.screen), findsOneWidget);
 
-    //   expect(find.byKey(KWidgetkeys.screen.home.screen), findsOneWidget);
+      await tester.pumpAndSettle();
 
-    //   await tester.pumpAndSettle();
+      await scrollingHelper(
+        tester: tester,
+        itemKey: null,
+        offset: KTestConstants.scrollingDown,
+      );
 
-    //   await feedbackClearTextHelper(
-    //     tester: tester,
-    //     email: KTestText.useremail,
-    //     field: KTestText.field,
-    //   );
-    // });
+      await feedbackClearTextHelper(
+        tester: tester,
+        email: KTestText.useremail,
+        field: KTestText.field,
+      );
+    });
 
     group('${KGroupText.goRouter} ', () {
       late MockGoRouter mockGoRouter;
@@ -127,7 +155,6 @@ void main() {
         registerHomeBloc();
         await tester.pumpApp(
           const HomeScreen(),
-          isHome: true,
           mockGoRouter: mockGoRouter,
         );
 
@@ -135,7 +162,17 @@ void main() {
 
         await tester.pumpAndSettle();
 
+        await nawbarHelper(
+          tester: tester,
+          searchText: KTestText.field,
+          hasMic: false,
+        );
+
+        await homeBoxHelper(tester);
+
         await listQuestionHelper(tester);
+
+        await footerHelper(tester: tester, email: KTestText.useremail);
       });
 
       group('${KGroupText.goTo} ', () {
@@ -143,7 +180,6 @@ void main() {
           registerHomeBloc();
           await tester.pumpApp(
             const HomeScreen(),
-            isHome: true,
             mockGoRouter: mockGoRouter,
           );
 
@@ -158,13 +194,17 @@ void main() {
             tester: tester,
             mockGoRouter: mockGoRouter,
           );
+
+          await nawbarLoginNavigationHelper(
+            tester: tester,
+            mockGoRouter: mockGoRouter,
+          );
         });
 
         testWidgets('box widget navigation', (tester) async {
           registerHomeBloc();
           await tester.pumpApp(
             const HomeScreen(),
-            isHome: true,
             mockGoRouter: mockGoRouter,
           );
 

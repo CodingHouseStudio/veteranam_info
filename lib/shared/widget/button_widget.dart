@@ -5,11 +5,13 @@ class ButtonWidget extends StatelessWidget {
   const ButtonWidget({
     required this.text,
     required this.onPressed,
+    this.iconRightMerge,
     super.key,
     this.icon,
     this.textStyle,
     this.isDesk,
     this.backgroundColor,
+    this.padding,
   });
   final Widget? icon;
   final TextStyle? textStyle;
@@ -17,6 +19,8 @@ class ButtonWidget extends StatelessWidget {
   final void Function()? onPressed;
   final bool? isDesk;
   final Color? backgroundColor;
+  final EdgeInsets? padding;
+  final Widget? iconRightMerge;
 
   @override
   Widget build(BuildContext context) {
@@ -46,19 +50,20 @@ class ButtonWidget extends StatelessWidget {
               ),
             ),
       child: Padding(
-        padding: isDesk
-            ? const EdgeInsets.symmetric(
-                horizontal: KPadding.kPaddingSize80,
-                vertical: KPadding.kPaddingSize32,
-              )
-            : const EdgeInsets.symmetric(
-                vertical: KPadding.kPaddingSize16,
-              ),
+        padding: padding ??
+            (isDesk
+                ? const EdgeInsets.symmetric(
+                    horizontal: KPadding.kPaddingSize80,
+                    vertical: KPadding.kPaddingSize32,
+                  )
+                : const EdgeInsets.symmetric(
+                    vertical: KPadding.kPaddingSize16,
+                  )),
         child: Wrap(
           crossAxisAlignment: WrapCrossAlignment.center,
           children: [
             if (icon != null) icon!,
-            KSizedBox.kWidthSizedBox16,
+            if (iconRightMerge != null) iconRightMerge!,
             Text(
               text,
               style: textStyle ??

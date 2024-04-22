@@ -64,7 +64,7 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                   onTap: () => EasyDebounce.debounce(
                     context.l10n.logo,
                     const Duration(milliseconds: 500),
-                    () => context.go(KRoute.home.path),
+                    () => context.goNamed(KRoute.home.name),
                   ),
                   child: Text(
                     context.l10n.logo,
@@ -99,6 +99,9 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                 focusedBorder: KBorder.outlineInputTransparent,
                 disposeFocusNode: false,
                 isDesk: widget.isDesk,
+                contentPadding: widget.isDesk
+                    ? EdgeInsets.zero
+                    : const EdgeInsets.all(KPadding.kPaddingSize16),
               ),
             ),
             if (widget.isDesk && widget.hasMicrophone)
@@ -119,16 +122,19 @@ class _NawbarWidgetState extends State<NawbarWidget> {
               TextButton(
                 key: KWidgetkeys.widget.nawbar.button,
                 style: KButtonStyles.whiteButtonStyle,
-                onPressed: null,
+                onPressed: () => context.goNamed(KRoute.login.name),
                 child: Text(
                   context.l10n.login,
                   style: AppTextStyle.text24,
                 ),
               )
             else if (!isFocused)
-              IconWidget(
-                key: KWidgetkeys.widget.nawbar.iconPerson,
-                icon: KIcon.person,
+              InkWell(
+                onTap: () => context.goNamed(KRoute.login.name),
+                child: IconWidget(
+                  key: KWidgetkeys.widget.nawbar.iconPerson,
+                  icon: KIcon.person,
+                ),
               ),
           ],
         ),

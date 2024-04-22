@@ -46,11 +46,13 @@ abstract class KTestText {
   static const filter = 'filter_test';
 
   static const usernameCorrect = 'test_username';
-  static const passwordCorrect = 'test_password';
+  static const passwordCorrect = 'test_Password1';
   static const usernameEmpty = '';
   static const passwordEmpty = '';
   static const usernameIncorrect = 'test_';
-  static const passwordIncorrect = 'test_';
+  static const passwordIncorrect = 'test_password';
+  static const passwordIncorrectNumber = 'test_Password';
+  static const shortPassword = 'Pas1';
 
   static const useremail = 'example@gmail.com';
   static const useremailIncorrect = 'examplegmail.com';
@@ -62,11 +64,11 @@ abstract class KTestText {
   static const fieldEmpty = '';
 
   static final boxRoutes = [
-    '${KRoute.home.path}${KRoute.discounts.path}',
-    '${KRoute.home.path}${KRoute.work.path}',
-    '${KRoute.home.path}${KRoute.information.path}',
-    '${KRoute.home.path}${KRoute.story.path}',
-    '${KRoute.home.path}${KRoute.investors.path}',
+    KRoute.discounts.name,
+    KRoute.work.name,
+    KRoute.information.name,
+    KRoute.story.name,
+    KRoute.investors.name,
   ];
 
   static const questionModelItems = <QuestionModel>[
@@ -80,6 +82,14 @@ abstract class KTestText {
           'вакансії, які відповідають вашим критеріям.',
     ),
   ];
+
+  static const user = User(
+    id: '1',
+    email: useremail,
+    name: usernameCorrect,
+    phoneNumber: 'test_phone_number',
+    photo: 'test_phot',
+  );
 
   static final feedbackModel = FeedbackModel(
     id: DateTime(2024, 4, 12, 0, 0, 0, 1).microsecondsSinceEpoch.toString(),
@@ -129,10 +139,12 @@ abstract class KTestText {
 
 abstract class KTestConstants {
   static const scrollingDown = Offset(0, -10000);
+  static const scrollingDown500 = Offset(0, -500);
   static const scrollingUp = Offset(0, 10000);
   static const scrollingAppBar = Offset(0, KSize.kPreferredSize);
 
   static const windowTabletSize = Size(1700, 1700);
+  static const windowMobileSize = Size(700, 700);
 
   static const englishIndex = 1;
   static const ukrainIndex = 0;
@@ -151,11 +163,21 @@ abstract class KScreenBlocName {
   static const aboutUs = 'About Us Screen';
   static const contact = 'Contact Screen';
   static const consultation = 'Consultation Screen';
+  static const login = 'Login Screen';
+  static const signUp = 'Sign Up Screen';
+
   static const feedback = 'Feedback Widget';
 
   static const filterCubit = 'Filter Cubit';
   static const languageCubit = 'Language Cubit';
   static const homeBloc = 'Home Bloc';
   static const feedbackBloc = 'Feedback Bloc';
+  static const authenticationServicesCubit = 'Authentication Services Cubit';
+  static const authenticationBloc = 'Authentication Bloc';
+  static const loginBloc = 'Login Bloc';
+  static const signUpBloc = 'Sign Up Bloc';
+
+  static const iAppAuthenticationRepository = 'App Authentication';
+  static const authentication = ' Authentication';
   static const informationBloc = 'Information Bloc';
 }

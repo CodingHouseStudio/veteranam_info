@@ -14,35 +14,7 @@ extension PumpApp on WidgetTester {
   Future<void> pumpApp(
     Widget widget, {
     MockGoRouter? mockGoRouter,
-    bool? isHome,
   }) {
-    if (isHome ?? false) {
-      return pumpWidget(
-        BlocProvider(
-          create: (context) => GetIt.I.get<LanguageCubit>()..initLanguage(),
-          child: BlocBuilder<LanguageCubit, Language?>(
-            builder: (context, state) => mockGoRouter == null
-                ? MaterialApp(
-                    localizationsDelegates:
-                        AppLocalizations.localizationsDelegates,
-                    locale: state?.value,
-                    supportedLocales: AppLocalizations.supportedLocales,
-                    home: widget,
-                  )
-                : MockGoRouterProvider(
-                    goRouter: mockGoRouter,
-                    child: MaterialApp(
-                      localizationsDelegates:
-                          AppLocalizations.localizationsDelegates,
-                      locale: state?.value,
-                      supportedLocales: AppLocalizations.supportedLocales,
-                      home: widget,
-                    ),
-                  ),
-          ),
-        ),
-      );
-    }
     return pumpWidget(
       BlocProvider(
         create: (context) => GetIt.I.get<LanguageCubit>()..initLanguage(),
@@ -53,10 +25,7 @@ extension PumpApp on WidgetTester {
                       AppLocalizations.localizationsDelegates,
                   locale: state?.value,
                   supportedLocales: AppLocalizations.supportedLocales,
-                  home: ScaffoldWithNavBar(
-                    navigationShell: widget,
-                    goRouterState: MockGoRouterState(),
-                  ),
+                  home: widget,
                 )
               : MockGoRouterProvider(
                   goRouter: mockGoRouter,
@@ -65,10 +34,7 @@ extension PumpApp on WidgetTester {
                         AppLocalizations.localizationsDelegates,
                     locale: state?.value,
                     supportedLocales: AppLocalizations.supportedLocales,
-                    home: ScaffoldWithNavBar(
-                      navigationShell: widget,
-                      goRouterState: MockGoRouterState(),
-                    ),
+                    home: widget,
                   ),
                 ),
         ),

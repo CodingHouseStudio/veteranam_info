@@ -2,18 +2,12 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:kozak/shared/shared.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../../text_dependency.dart';
+import '../../../text_dependency.dart';
 
 Future<void> nawbarTitleHelper({
   required WidgetTester tester,
   required MockGoRouter mockGoRouter,
 }) async {
-  await scrollingHelper(
-    tester: tester,
-    offset: KTestConstants.scrollingUp,
-    itemKey: null,
-  );
-
   expect(
     find.byKey(KWidgetkeys.widget.nawbar.title),
     findsOneWidget,
@@ -28,8 +22,8 @@ Future<void> nawbarTitleHelper({
   await tester.pumpAndSettle(const Duration(milliseconds: 500));
 
   verify(
-    () => mockGoRouter.go(
-      KRoute.home.path,
+    () => mockGoRouter.goNamed(
+      KRoute.home.name,
     ),
   ).called(1);
 }

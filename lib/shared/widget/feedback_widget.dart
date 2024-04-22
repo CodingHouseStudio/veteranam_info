@@ -99,15 +99,15 @@ class _FeedbackWidgetImplementationState
     emailController = TextEditingController();
     messageController = TextEditingController();
     completeWidget = null;
-  }
-
-  @override
-  Widget build(BuildContext context) {
     if (context.read<FeedbackBloc>().state.fieldsState == FeedbackEnum.clear) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         Scrollable.ensureVisible(widget.feedbackKey.currentContext!);
       });
     }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return BlocListener<FeedbackBloc, FeedbackState>(
       listenWhen: (previous, current) =>
           current.fieldsState == FeedbackEnum.clear,
@@ -160,7 +160,6 @@ class _FeedbackWidgetImplementationState
                   FeedbackEvent.nameUpdated(value),
                 ),
             hintText: context.l10n.text,
-            contentPadding: const EdgeInsets.all(KPadding.kPaddingSize32),
             hintStyle:
                 widget.isDesk ? AppTextStyle.hint24 : AppTextStyle.hint16,
             isDesk: widget.isDesk,
@@ -170,7 +169,7 @@ class _FeedbackWidgetImplementationState
           else
             KSizedBox.kHeightSizedBox16,
           Text(
-            '${context.l10n.email}*',
+            '${context.l10n.fullEmail}*',
             key: KWidgetkeys.widget.feedback.email,
             style: widget.isDesk ? AppTextStyle.text40 : AppTextStyle.text32,
           ),
@@ -186,7 +185,6 @@ class _FeedbackWidgetImplementationState
                   FeedbackEvent.emailUpdated(value),
                 ),
             hintText: context.l10n.writeYourEmail,
-            contentPadding: const EdgeInsets.all(KPadding.kPaddingSize32),
             hintStyle:
                 widget.isDesk ? AppTextStyle.hint24 : AppTextStyle.hint16,
             isDesk: widget.isDesk,

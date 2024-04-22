@@ -7,10 +7,10 @@ Future<void> footerHelper({
   required WidgetTester tester,
   required String email,
 }) async {
-  await changeWindowSizeHelper(
+  await changeWindowSizeHelperInt(
     tester: tester,
   );
-  await scrollingHelper(
+  await scrollingHelperInt(
     tester: tester,
     offset: KTestConstants.scrolling,
   );
@@ -46,7 +46,7 @@ Future<void> footerHelper({
     }
   }
 
-  await changeWindowSizeHelper(tester: tester, setDefaultSize: true);
+  await changeWindowSizeHelperInt(tester: tester, setDefaultSize: true);
 
   expect(find.byKey(KWidgetkeys.widget.footer.logo), findsNothing);
 

@@ -2,52 +2,54 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:kozak/shared/shared.dart';
 
+import '../../../text_dependency.dart';
+
 Future<void> nawbarHelper({
   required WidgetTester tester,
   required String searchText,
   bool hasMic = true,
 }) async {
-  // await changeWindowSizeHelper(
-  //   tester: tester,
-  // );
+  await changeWindowSizeHelper(
+    tester: tester,
+  );
 
-  // await languageSwitcherHelper(tester);
+  await languageSwitcherHelper(tester);
 
-  // expect(find.byKey(KWidgetkeys.widget.nawbar.title), findsOneWidget);
+  expect(find.byKey(KWidgetkeys.widget.nawbar.title), findsOneWidget);
 
-  // expect(find.byKey(KWidgetkeys.widget.nawbar.field), findsOneWidget);
+  expect(find.byKey(KWidgetkeys.widget.nawbar.field), findsOneWidget);
 
-  // expect(
-  //   find.byKey(KWidgetkeys.widget.nawbar.iconMic),
-  //   hasMic ? findsOneWidget : findsNothing,
-  // );
+  expect(
+    find.byKey(KWidgetkeys.widget.nawbar.iconMic),
+    hasMic ? findsOneWidget : findsNothing,
+  );
 
-  // expect(
-  //   find.byKey(KWidgetkeys.widget.nawbar.button),
-  //   findsOneWidget,
-  // );
+  expect(
+    find.byKey(KWidgetkeys.widget.nawbar.button),
+    findsOneWidget,
+  );
 
-  // expect(
-  //   find.byKey(KWidgetkeys.widget.nawbar.iconPerson),
-  //   findsNothing,
-  // );
+  expect(
+    find.byKey(KWidgetkeys.widget.nawbar.iconPerson),
+    findsNothing,
+  );
 
-  // await tester.enterText(
-  //   find.byKey(KWidgetkeys.widget.nawbar.field),
-  //   searchText,
-  // );
+  await tester.enterText(
+    find.byKey(KWidgetkeys.widget.nawbar.field),
+    searchText,
+  );
 
-  // await tester.pumpAndSettle();
+  await tester.pumpAndSettle();
 
-  // expect(
-  //   find.descendant(
-  //     of: find.byKey(KWidgetkeys.widget.nawbar.field),
-  //     matching: find.text(searchText),
-  //   ),
-  //   findsOneWidget,
-  // );
+  expect(
+    find.descendant(
+      of: find.byKey(KWidgetkeys.widget.nawbar.field),
+      matching: find.text(searchText),
+    ),
+    findsOneWidget,
+  );
 
-  // await changeWindowSizeHelper(tester: tester, setDefaultSize: true);
+  await changeWindowSizeHelper(tester: tester, setDefaultSize: true);
 
   final textField = tester.widget<TextField>(
     find.byKey(
@@ -85,6 +87,7 @@ Future<void> nawbarHelper({
   await tester.pumpAndSettle();
 
   expect(find.byKey(KWidgetkeys.widget.nawbar.title), findsNothing);
+
   expect(
     find.byKey(KWidgetkeys.widget.nawbar.iconPerson),
     findsNothing,

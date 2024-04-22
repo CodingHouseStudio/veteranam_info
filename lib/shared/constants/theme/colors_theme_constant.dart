@@ -15,6 +15,10 @@ abstract class AppColors {
   /// opacity: 1
   static const Color lightGray = Color(0xff959595);
 
+  /// hex: #959595
+  /// opacity: 1
+  static const Color blackWhite = Color(0xffE6E6E6);
+
   /// c52707 figma properties
   /// hex: #c52707
   /// opacity: 1

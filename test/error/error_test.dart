@@ -117,8 +117,8 @@ void main() {
           await tester.tap(find.byKey(KWidgetkeys.screen.error.button));
 
           verify(
-            () => mockGoRouter.go(
-              KRoute.home.path,
+            () => mockGoRouter.goNamed(
+              KRoute.home.name,
             ),
           ).called(1);
         });
