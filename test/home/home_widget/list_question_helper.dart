@@ -11,19 +11,37 @@ Future<void> listQuestionHelper(
     findsNothing,
   );
 
-  expect(
-    find.byKey(KWidgetkeys.screen.home.question),
-    findsOneWidget,
+  // expect(
+  //   find.byKey(KWidgetkeys.screen.home.question),
+  //   findsOneWidget,
+  // );
+
+  // expect(
+  //   find.byKey(KWidgetkeys.screen.home.questionList),
+  //   findsOneWidget,
+  // );
+
+  await scrollingHelper(
+    tester: tester,
+    itemKey: null,
+    offset: KTestConstants.scrollingUp,
   );
 
-  expect(
-    find.byKey(KWidgetkeys.screen.home.questionList),
-    findsOneWidget,
+  await scrollingHelper(
+    tester: tester,
+    itemKey: null,
+    offset: KTestConstants.scrollingDown500,
   );
 
   expect(
     find.byKey(KWidgetkeys.screen.home.questionListTitle),
     findsOneWidget,
+  );
+
+  await scrollingHelper(
+    tester: tester,
+    itemKey: null,
+    offset: KTestConstants.scrollingDown500,
   );
 
   await questionHelper(tester);

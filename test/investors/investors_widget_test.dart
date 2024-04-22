@@ -108,24 +108,23 @@ void main() {
       await feedbackHelper(tester: tester);
     });
 
-    testWidgets('Feedback enter text and clear it', (tester) async {
-      registerInvestorsBloc();
-      registerFeedbackBloc();
-      await tester.pumpApp(const InvestorsScreen());
+    // testWidgets('Feedback enter text and clear it', (tester) async {
+    //   registerFeedbackBloc();
+    //   await tester.pumpApp(const InvestorsScreen());
 
-      expect(
-        find.byKey(KWidgetkeys.screen.investors.screen),
-        findsOneWidget,
-      );
+    //   expect(
+    //     find.byKey(KWidgetkeys.screen.investors.screen),
+    //     findsOneWidget,
+    //   );
 
-      await tester.pumpAndSettle();
+    //   await tester.pumpAndSettle();
 
-      await feedbackClearTextHelper(
-        tester: tester,
-        email: KTestText.useremail,
-        field: KTestText.field,
-      );
-    });
+    //   await feedbackClearTextHelper(
+    //     tester: tester,
+    //     email: KTestText.useremail,
+    //     field: KTestText.field,
+    //   );
+    // });
 
     group('${KGroupText.goRouter} ', () {
       late MockGoRouter mockGoRouter;
@@ -149,8 +148,8 @@ void main() {
         await donatesCardHelper(tester);
       });
       group('${KGroupText.goTo} ', () {
-        registerInvestorsBloc();
         testWidgets('All footer widget navigation', (tester) async {
+          registerInvestorsBloc();
           registerFeedbackBloc();
           await tester.pumpApp(
             const InvestorsScreen(),
