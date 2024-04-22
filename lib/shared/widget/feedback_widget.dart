@@ -24,14 +24,15 @@ class FeedbackWidget extends StatelessWidget {
     final feedbackBoxKey = GlobalKey();
     final feedbackKey = GlobalKey();
     return BlocBuilder<FeedbackBloc, FeedbackState>(
-      buildWhen: (previous, current) =>
-          current.fieldsState != previous.fieldsState,
-      builder: (context, _) => _.fieldsState == FeedbackEnum.success
+      buildWhen: (previous, current) => current.formState != previous.formState,
+      builder: (context, _) => _.formState == FeedbackEnum.success ||
+              _.formState == FeedbackEnum.sendingMessage
           ? FeedbackBoxWidget(
               key: feedbackBoxKey,
               isDesk: isDesk,
-              sendAgain: () =>
-                  context.read<FeedbackBloc>().add(const FeedbackEvent.clear()),
+              sendAgain: () => context
+                  .read<FeedbackBloc>()
+                  .add(const FeedbackEvent.sendignMessageAgain()),
               feedbackBoxKey: feedbackBoxKey,
             )
           : _FeedbackWidgetImplementation(
@@ -42,13 +43,13 @@ class FeedbackWidget extends StatelessWidget {
               subtitle: subtitle,
               title: title,
               feedbackKey: feedbackKey,
-              emailFailure: _.fieldsState == FeedbackEnum.invalidData
+              emailFailure: _.formState == FeedbackEnum.invalidData
                   ? _.email.error.value(context)
                   : null,
-              messageFailure: _.fieldsState == FeedbackEnum.invalidData
+              messageFailure: _.formState == FeedbackEnum.invalidData
                   ? _.message.error.value(context)
                   : null,
-              nameFailure: _.fieldsState == FeedbackEnum.invalidData
+              nameFailure: _.formState == FeedbackEnum.invalidData
                   ? _.name.error.value(context)
                   : null,
             ),
@@ -99,10 +100,12 @@ class _FeedbackWidgetImplementationState
     emailController = TextEditingController();
     messageController = TextEditingController();
     completeWidget = null;
-    if (context.read<FeedbackBloc>().state.fieldsState == FeedbackEnum.clear) {
+    if (context.read<FeedbackBloc>().state.formState ==
+        FeedbackEnum.sendignMessageAgain) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         Scrollable.ensureVisible(widget.feedbackKey.currentContext!);
       });
+      context.read<FeedbackBloc>().add(const FeedbackEvent.clear());
     }
   }
 
@@ -110,7 +113,7 @@ class _FeedbackWidgetImplementationState
   Widget build(BuildContext context) {
     return BlocListener<FeedbackBloc, FeedbackState>(
       listenWhen: (previous, current) =>
-          current.fieldsState == FeedbackEnum.clear,
+          current.formState == FeedbackEnum.clear,
       listener: (context, state) {
         nameController.clear();
         emailController.clear();
