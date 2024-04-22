@@ -17,7 +17,7 @@ class InformationBodyWidget extends StatelessWidget {
           case LoadingStatus.loading:
             return const CircularProgressIndicator.adaptive();
           case LoadingStatus.loaded:
-            return ScaffoldWithNavBar(
+            return ScaffoldWidget(
               childWidgetsFunction: ({required isDesk}) => [
                 if (isDesk)
                   KSizedBox.kHeightSizedBox40

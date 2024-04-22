@@ -32,4 +32,5 @@ class _WidgetKeys {
   final emailPasswordFields = _EmailPasswordFieldsKeys();
   final leftCard = _LeftCardKeys();
   final signUpBottomButtons = _SignUpBottomButtonsKeys();
+  final feedbackBox = _FeedbackBoxKeys();
 }

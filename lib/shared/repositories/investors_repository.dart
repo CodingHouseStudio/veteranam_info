@@ -26,7 +26,6 @@ class InvestorsRepository implements IInvestorsRepository {
           id: DateTime.now().millisecond.toString(),
           title: KMockText.donateCardTitle,
           subtitle: KMockText.donateCardSubtitle,
-          image: i > KMockText.tags.length - 2 ? KMockText.image : null,
           link: '',
         ),
       );

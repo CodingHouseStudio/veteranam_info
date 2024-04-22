@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kozak/shared/shared.dart';
 
-class FeedbackWidget extends StatefulWidget {
+class FeedbackWidget extends StatelessWidget {
   const FeedbackWidget({
     required this.isDesk,
     super.key,
@@ -20,10 +20,74 @@ class FeedbackWidget extends StatefulWidget {
   final bool isDesk;
 
   @override
-  State<FeedbackWidget> createState() => _FeedbackWidgetState();
+  Widget build(BuildContext context) {
+    final feedbackBoxKey = GlobalKey();
+    final feedbackKey = GlobalKey();
+    return BlocBuilder<FeedbackBloc, FeedbackState>(
+      buildWhen: (previous, current) => current.formState != previous.formState,
+      builder: (context, _) => _.formState == FeedbackEnum.success ||
+              _.formState == FeedbackEnum.sendingMessage
+          ? FeedbackBoxWidget(
+              key: feedbackBoxKey,
+              isDesk: isDesk,
+              sendAgain: () => context
+                  .read<FeedbackBloc>()
+                  .add(const FeedbackEvent.sendignMessageAgain()),
+              feedbackBoxKey: feedbackBoxKey,
+            )
+          : _FeedbackWidgetImplementation(
+              key: feedbackKey,
+              isDesk: isDesk,
+              messageHint: messageHint,
+              saveMessage: saveMessage,
+              subtitle: subtitle,
+              title: title,
+              feedbackKey: feedbackKey,
+              emailFailure: _.formState == FeedbackEnum.invalidData
+                  ? _.email.error.value(context)
+                  : null,
+              messageFailure: _.formState == FeedbackEnum.invalidData
+                  ? _.message.error.value(context)
+                  : null,
+              nameFailure: _.formState == FeedbackEnum.invalidData
+                  ? _.name.error.value(context)
+                  : null,
+            ),
+    );
+  }
 }
 
-class _FeedbackWidgetState extends State<FeedbackWidget> {
+class _FeedbackWidgetImplementation extends StatefulWidget {
+  const _FeedbackWidgetImplementation({
+    required this.isDesk,
+    required this.feedbackKey,
+    super.key,
+    this.title,
+    this.subtitle,
+    this.messageHint,
+    this.saveMessage,
+    this.emailFailure,
+    this.nameFailure,
+    this.messageFailure,
+  });
+
+  final String? title;
+  final String? subtitle;
+  final String? messageHint;
+  final String? saveMessage;
+  final bool isDesk;
+  final GlobalKey feedbackKey;
+  final String? emailFailure;
+  final String? nameFailure;
+  final String? messageFailure;
+
+  @override
+  State<_FeedbackWidgetImplementation> createState() =>
+      _FeedbackWidgetImplementationState();
+}
+
+class _FeedbackWidgetImplementationState
+    extends State<_FeedbackWidgetImplementation> {
   late TextEditingController nameController;
   late TextEditingController emailController;
   late TextEditingController messageController;
@@ -36,53 +100,48 @@ class _FeedbackWidgetState extends State<FeedbackWidget> {
     emailController = TextEditingController();
     messageController = TextEditingController();
     completeWidget = null;
+    if (context.read<FeedbackBloc>().state.formState ==
+        FeedbackEnum.sendignMessageAgain) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Scrollable.ensureVisible(widget.feedbackKey.currentContext!);
+      });
+      context.read<FeedbackBloc>().add(const FeedbackEvent.clear());
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<FeedbackBloc, FeedbackState>(
+    return BlocListener<FeedbackBloc, FeedbackState>(
       listenWhen: (previous, current) =>
-          current.fieldsState != previous.fieldsState,
+          current.formState == FeedbackEnum.clear,
       listener: (context, state) {
-        if (state.fieldsState == FieldEnum.success ||
-            state.fieldsState == FieldEnum.clear) {
-          nameController.clear();
-          emailController.clear();
-          messageController.clear();
-        }
+        nameController.clear();
+        emailController.clear();
+        messageController.clear();
       },
-      buildWhen: (previous, current) =>
-          current.fieldsState != previous.fieldsState,
-      builder: (context, _) => Column(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (_.fieldsState == FieldEnum.success)
-            Text(
-              widget.saveMessage ?? context.l10n.feedbackSaveMessage,
-              key: KWidgetkeys.widget.feedback.saveMessage,
-              style: AppTextStyle.text40,
-            )
-          else
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  widget.title ?? context.l10n.feedback,
-                  key: KWidgetkeys.widget.feedback.title,
-                  style:
-                      widget.isDesk ? AppTextStyle.text96 : AppTextStyle.text48,
-                ),
-                if (widget.isDesk)
-                  KSizedBox.kHeightSizedBox32
-                else
-                  KSizedBox.kHeightSizedBox16,
-                Text(
-                  widget.subtitle ?? context.l10n.feedbackSubtitle,
-                  key: KWidgetkeys.widget.feedback.subtitle,
-                  style: AppTextStyle.text24,
-                ),
-              ],
-            ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                widget.title ?? context.l10n.feedback,
+                key: KWidgetkeys.widget.feedback.title,
+                style:
+                    widget.isDesk ? AppTextStyle.text96 : AppTextStyle.text48,
+              ),
+              if (widget.isDesk)
+                KSizedBox.kHeightSizedBox32
+              else
+                KSizedBox.kHeightSizedBox16,
+              Text(
+                widget.subtitle ?? context.l10n.feedbackSubtitle,
+                key: KWidgetkeys.widget.feedback.subtitle,
+                style: AppTextStyle.text24,
+              ),
+            ],
+          ),
           if (widget.isDesk)
             KSizedBox.kHeightSizedBox56
           else
@@ -98,9 +157,7 @@ class _FeedbackWidgetState extends State<FeedbackWidget> {
             KSizedBox.kHeightSizedBox8,
           TextFieldWidget(
             widgetKey: KWidgetkeys.widget.feedback.fieldName,
-            errorText: _.fieldsState == FieldEnum.invalidData
-                ? _.name.error.value(context)
-                : null,
+            errorText: widget.nameFailure,
             controller: nameController,
             onChanged: (value) => context.read<FeedbackBloc>().add(
                   FeedbackEvent.nameUpdated(value),
@@ -125,9 +182,7 @@ class _FeedbackWidgetState extends State<FeedbackWidget> {
             KSizedBox.kHeightSizedBox8,
           TextFieldWidget(
             widgetKey: KWidgetkeys.widget.feedback.fieldEmail,
-            errorText: _.fieldsState == FieldEnum.invalidData
-                ? _.email.error.value(context)
-                : null,
+            errorText: widget.emailFailure,
             controller: emailController,
             onChanged: (value) => context.read<FeedbackBloc>().add(
                   FeedbackEvent.emailUpdated(value),
@@ -152,9 +207,7 @@ class _FeedbackWidgetState extends State<FeedbackWidget> {
             KSizedBox.kHeightSizedBox8,
           MessageFieldWidget(
             key: KWidgetkeys.widget.feedback.fieldMessage,
-            errorText: _.fieldsState == FieldEnum.invalidData
-                ? _.message.error.value(context)
-                : null,
+            errorText: widget.messageFailure,
             controller: messageController,
             changeMessage: (value) => context.read<FeedbackBloc>().add(
                   FeedbackEvent.messageUpdated(value),

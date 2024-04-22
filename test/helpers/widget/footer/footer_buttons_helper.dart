@@ -14,16 +14,18 @@ Future<void> footerButtonsHelper({
     itemKey: null,
   );
 
+  await changeWindowSizeHelper(tester: tester);
+
   for (var i = 0; i < KWidgetkeys.widget.footer.buttonsKey.length; i++) {
     for (var j = 0;
         j < KWidgetkeys.widget.footer.buttonsKey.elementAt(i).length;
         j++) {
       final buttonKey =
           KWidgetkeys.widget.footer.buttonsKey.elementAt(i).elementAt(j);
-      await scrollingHelper(
-        tester: tester,
-        itemKey: buttonKey,
-      );
+      // await scrollingHelper(
+      //   tester: tester,
+      //   itemKey: buttonKey,
+      // );
 
       expect(
         find.byKey(buttonKey),
@@ -33,10 +35,12 @@ Future<void> footerButtonsHelper({
       await tester.tap(find.byKey(buttonKey));
 
       verify(
-        () => mockGoRouter.go(
+        () => mockGoRouter.goNamed(
           KAppText.routes.elementAt(i).elementAt(j),
         ),
       ).called(1);
     }
   }
+
+  await changeWindowSizeHelper(tester: tester, setDefaultSize: true);
 }

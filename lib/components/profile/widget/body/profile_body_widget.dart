@@ -6,7 +6,7 @@ class ProfileBodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScaffoldWithNavBar(
+    return ScaffoldWidget(
       childWidgetsFunction: ({required isDesk}) => [
         Padding(
           padding: const EdgeInsets.symmetric(
@@ -43,7 +43,7 @@ class ProfileBodyWidget extends StatelessWidget {
           flex: 2,
           child: Padding(
             padding:
-                const EdgeInsets.symmetric(horizontal: KPadding.kPaddingSize16),
+                const EdgeInsets.symmetric(horizontal: KPadding.kPaddingSize4),
             child: ProfileCardWidget(
               key: KWidgetkeys.widget.profileCard.profileCard,
               isDesk: isDesk,

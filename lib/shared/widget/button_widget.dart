@@ -5,11 +5,11 @@ class ButtonWidget extends StatelessWidget {
   const ButtonWidget({
     required this.text,
     required this.onPressed,
+    required this.isDesk,
     this.iconRightMerge,
     super.key,
     this.icon,
     this.textStyle,
-    this.isDesk,
     this.backgroundColor,
     this.padding,
   });
@@ -17,25 +17,13 @@ class ButtonWidget extends StatelessWidget {
   final TextStyle? textStyle;
   final String text;
   final void Function()? onPressed;
-  final bool? isDesk;
+  final bool isDesk;
   final Color? backgroundColor;
   final EdgeInsets? padding;
   final Widget? iconRightMerge;
 
   @override
   Widget build(BuildContext context) {
-    return isDesk == null
-        ? LayoutBuilder(
-            builder: (context, constraints) {
-              final isDesk =
-                  KPlatformConstants.changeToDescWidget(constraints.maxWidth);
-              return builButton(isDesk: isDesk);
-            },
-          )
-        : builButton(isDesk: isDesk!);
-  }
-
-  Widget builButton({required bool isDesk}) {
     return TextButton(
       onPressed: onPressed,
       style: isDesk

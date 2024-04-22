@@ -80,9 +80,4 @@ Future<void> feedbackClearTextHelper({
     ),
     findsNothing,
   );
-
-  expect(
-    find.byKey(KWidgetkeys.widget.feedback.saveMessage),
-    findsNothing,
-  );
 }

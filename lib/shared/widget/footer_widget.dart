@@ -150,7 +150,7 @@ class _FooterImplementationWidget extends StatelessWidget {
                         : AppTextStyle.text14,
               ),
             ),
-            onPressed: () => context.go(routes.elementAt(index)),
+            onPressed: () => context.goNamed(routes.elementAt(index)),
           ),
         );
       }),
