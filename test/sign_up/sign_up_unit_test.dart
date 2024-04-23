@@ -126,7 +126,7 @@ void main() {
           password: PasswordFieldModel.dirty(KTestText.passwordCorrect),
           failure: SignUpError.none,
           fieldsIsCorrect: true,
-          showPasswordField: true,
+          showPasswordField: false,
         ),
       ],
     );
