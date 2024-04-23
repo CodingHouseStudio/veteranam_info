@@ -46,4 +46,5 @@ abstract class KIcon {
   static const _KIcon eyeOff = _KIcon(Icons.visibility_off_outlined);
   static const _KIcon refresh = _KIcon(FontAwesomeIcons.rotate);
   static const _KIcon apple = _KIcon(FontAwesomeIcons.apple);
+  static const _KIcon star = _KIcon(FontAwesomeIcons.star);
 }
