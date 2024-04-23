@@ -186,6 +186,7 @@ abstract class KScreenBlocName {
   static const authenticationBloc = 'Authentication Bloc';
   static const loginBloc = 'Login Bloc';
   static const signUpBloc = 'Sign Up Bloc';
+  static const scrollCubit = 'Scroll Cubit';
 
   static const iAppAuthenticationRepository = 'App Authentication';
   static const authentication = ' Authentication';
