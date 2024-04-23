@@ -5,8 +5,7 @@ import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
 
 class SignUpBodyWidget extends StatelessWidget {
-  const SignUpBodyWidget({required this.isDesk, super.key});
-  final bool isDesk;
+  const SignUpBodyWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,8 +16,7 @@ class SignUpBodyWidget extends StatelessWidget {
       builder: (context, _) {
         return LeftCardWidget(
           key: KWidgetkeys.screen.signUp.card,
-          isDesk: isDesk,
-          widgetList: [
+          widgetList: ({required isDesk}) => [
             Text(
               context.l10n.signUp,
               key: KWidgetkeys.screen.signUp.title,
@@ -45,6 +43,13 @@ class SignUpBodyWidget extends StatelessWidget {
                     const SignUpEvent.passwordFieldHide(),
                   ),
             ),
+            if (_.failure.getString(context) != null)
+              Center(
+                child: Text(
+                  _.failure.getString(context)!,
+                  style: AppTextStyle.error14,
+                ),
+              ),
             if (isDesk)
               KSizedBox.kHeightSizedBox24
             else
@@ -78,9 +83,10 @@ class SignUpBodyWidget extends StatelessWidget {
               ],
             ),
             KSizedBox.kHeightSizedBox40,
-            SignUpBottomButtonsWidget(
+            SignUpLoginBottomButtonsWidget(
               key: KWidgetkeys.screen.signUp.bottomButtons,
               isDesk: isDesk,
+              title: context.l10n.signUpWith,
             ),
           ],
         );

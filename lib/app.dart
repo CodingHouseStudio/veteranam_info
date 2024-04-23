@@ -15,6 +15,9 @@ class App extends StatelessWidget {
           create: (context) => GetIt.I.get<LanguageCubit>()..initLanguage(),
         ),
         BlocProvider(
+          create: (context) => GetIt.I.get<ScrollCubit>()..initial(),
+        ),
+        BlocProvider(
           create: (context) => GetIt.I.get<AuthenticationBloc>()
             ..add(
               AuthenticationInitialized(),

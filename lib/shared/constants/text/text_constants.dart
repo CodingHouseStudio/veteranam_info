@@ -19,13 +19,12 @@ abstract class KMockText {
       '«Повернись живим» — це благодійний фонд компетентної допомоги армії, а також громадська організація, яка займається аналітикою у секторі безпеки та оборони, реалізує проєкти з реабілітації ветеранів через спорт.';
   static const userName = 'Володимир Левандовський';
   static const nickname = '@veteran';
-  static const email = 'example@gmail.com';
   static const description =
       'Якщо ви робите свій профіль анонімним, на вашій сторінці не\n'
       'буде відображатися персональна інформація, тільки\nnickname.';
   static final date = DateTime(2024, 03, 12);
   static const userNameAnonim = 'Anonim23456';
-  static const emial = 'example@gmail.com';
+  static const email = 'example@gmail.com';
   static const tags = <List<String>?>[
     ['Пільги', 'Гарячі лінії'],
     ['Житло'],

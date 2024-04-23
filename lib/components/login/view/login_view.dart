@@ -7,24 +7,9 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final isDesk =
-            constraints.maxWidth > KPlatformConstants.minWidthThresholdTablet;
-        return Scaffold(
-          extendBodyBehindAppBar: true,
-          appBar: NawbarWidget(
-            isDesk: isDesk,
-          ),
-          body: LoginBlocprovider(
-            key: KWidgetkeys.screen.login.screen,
-            childWidget: LoginBodyWidget(
-              isDesk: isDesk,
-            ),
-          ),
-          backgroundColor: AppColors.blackWhite,
-        );
-      },
+    return LoginBlocprovider(
+      key: KWidgetkeys.screen.login.screen,
+      childWidget: const LoginBodyWidget(),
     );
   }
 }
