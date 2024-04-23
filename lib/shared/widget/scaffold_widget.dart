@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kozak/shared/shared.dart';
 
 /// COMMENT: Сlass adds common elements to screens
@@ -29,16 +30,26 @@ class ScaffoldWidget extends StatelessWidget {
             isDesk: isDesk,
             hasMicrophone: hasMic,
           ),
-          body: ListView.custom(
-            key: KWidgetkeys.widget.shellRoute.scroll,
-            padding: EdgeInsets.only(
-              left: isDesk ? KPadding.kPaddingSize90 : KPadding.kPaddingSize16,
-              right: isDesk ? KPadding.kPaddingSize90 : KPadding.kPaddingSize16,
-              bottom:
-                  isDesk ? KPadding.kPaddingSize40 : KPadding.kPaddingSize24,
-            ),
-            semanticChildCount: childWidgets.length,
-            childrenDelegate: SliverChildListDelegate(childWidgets),
+          body: BlocBuilder<ScrollCubit, ScrollController>(
+            builder: (context, _) {
+              return ListView.custom(
+                key: KWidgetkeys.widget.shellRoute.scroll,
+                controller: _,
+                padding: EdgeInsets.only(
+                  left: isDesk
+                      ? KPadding.kPaddingSize90
+                      : KPadding.kPaddingSize16,
+                  right: isDesk
+                      ? KPadding.kPaddingSize90
+                      : KPadding.kPaddingSize16,
+                  bottom: isDesk
+                      ? KPadding.kPaddingSize40
+                      : KPadding.kPaddingSize24,
+                ),
+                semanticChildCount: childWidgets.length,
+                childrenDelegate: SliverChildListDelegate(childWidgets),
+              );
+            },
           ),
         );
       },
