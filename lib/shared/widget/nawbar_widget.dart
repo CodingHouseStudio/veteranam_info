@@ -122,52 +122,54 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                 child: LanguagesSwitcherWidget(),
               ),
             if (context.read<AuthenticationBloc>().state.user == null)
-              widget.isDesk
-                  ? TextButton(
-                      key: KWidgetkeys.widget.nawbar.button,
-                      style: KButtonStyles.whiteButtonStyle,
-                      onPressed: () => context.goNamed(KRoute.login.name),
-                      child: Text(
-                        context.l10n.login,
-                        style: AppTextStyle.text24,
-                      ),
-                    )
-                  : !isFocused
-                      ? InkWell(
-                          onTap: () => context.goNamed(KRoute.login.name),
-                          child: IconWidget(
-                            key: KWidgetkeys.widget.nawbar.iconPerson,
-                            icon: KIcon.person,
-                          ),
-                        )
-                      : const SizedBox.shrink()
-            else
-              context.read<AuthenticationBloc>().state.user!.photo == null
-                  ? InkWell(
+              if (widget.isDesk)
+                TextButton(
+                  key: KWidgetkeys.widget.nawbar.button,
+                  style: KButtonStyles.whiteButtonStyle,
+                  onPressed: () => context.goNamed(KRoute.login.name),
+                  child: Text(
+                    context.l10n.login,
+                    style: AppTextStyle.text24,
+                  ),
+                )
+              else if (!isFocused)
+                InkWell(
+                  onTap: () => context.goNamed(KRoute.login.name),
+                  child: IconWidget(
+                    key: KWidgetkeys.widget.nawbar.iconPerson,
+                    icon: KIcon.person,
+                  ),
+                ),
+            if (context.read<AuthenticationBloc>().state.user != null)
+              if (!isFocused || widget.isDesk)
+                if (context.read<AuthenticationBloc>().state.user!.photo ==
+                    null)
+                  InkWell(
+                    onTap: () => context.goNamed(KRoute.profile.name),
+                    child: IconWidget(
+                      key: KWidgetkeys.widget.nawbar.iconPerson,
+                      icon: KIcon.person,
+                    ),
+                  )
+                else
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(KSize.kUserPhoto),
+                    child: InkWell(
                       onTap: () => context.goNamed(KRoute.profile.name),
-                      child: IconWidget(
-                        key: KWidgetkeys.widget.nawbar.iconPerson,
-                        icon: KIcon.person,
-                      ),
-                    )
-                  : ClipRRect(
-                      borderRadius: BorderRadius.circular(KSize.kUserPhoto),
-                      child: InkWell(
-                        onTap: () => context.goNamed(KRoute.profile.name),
-                        child: CachedNetworkImage(
-                          imageUrl: context
-                              .read<AuthenticationBloc>()
-                              .state
-                              .user!
-                              .photo!,
-                          placeholder: (context, url) => Image.asset(''),
-                          errorWidget: (context, url, error) => KIcon.error,
-                          fit: BoxFit.contain,
-                          width: KSize.kUserPhoto,
-                          height: KSize.kUserPhoto,
-                        ),
+                      child: CachedNetworkImage(
+                        imageUrl: context
+                            .read<AuthenticationBloc>()
+                            .state
+                            .user!
+                            .photo!,
+                        placeholder: (context, url) => Image.asset(''),
+                        errorWidget: (context, url, error) => KIcon.error,
+                        fit: BoxFit.contain,
+                        width: KSize.kUserPhoto,
+                        height: KSize.kUserPhoto,
                       ),
                     ),
+                  ),
           ],
         ),
       ),
