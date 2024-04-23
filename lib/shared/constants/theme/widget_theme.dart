@@ -52,6 +52,11 @@ abstract class KWidetTheme {
     ),
     borderRadius: KBorderRadius.kBorderRadius32,
   );
+  static BoxDecoration boxDecorChatMessage = BoxDecoration(
+    color: AppColors.widgetBackground,
+    borderRadius: KBorderRadius.kBorderRadius32
+        .copyWith(bottomLeft: const Radius.circular(KSize.kRadius8)),
+  );
 
   static InputDecoration inputDecoration = InputDecoration(
     hintStyle: AppTextStyle.hint24,

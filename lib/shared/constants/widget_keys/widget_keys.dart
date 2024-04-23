@@ -87,6 +87,7 @@ part 'widget/donate_card.dart';
 part 'widget/profile_card_widget.dart';
 part 'widget/feedback_box.dart';
 part 'widget/rate.dart';
+part 'widget/chat_input.dart';
 
 abstract class KWidgetkeys {
   static _ScreenKeys get screen => _ScreenKeys();

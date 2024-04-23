@@ -5,6 +5,8 @@ export 'button_widget.dart';
 export 'card_add_image_widget.dart';
 export 'card_text_detail_evaluate_widget.dart';
 export 'card_text_detail_widget.dart';
+export 'chat_bot_button.dart';
+export 'chat_input_widget.dart';
 export 'check_point_widget.dart';
 export 'chip_widget.dart';
 export 'donate_button_widget.dart';
