@@ -17,6 +17,11 @@ Future<void> cardTextDetailEvaluateHelper(
   );
 
   expect(
+    find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconActiveSmile),
+    findsNothing,
+  );
+
+  expect(
     find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconLike),
     findsOneWidget,
   );
@@ -98,6 +103,40 @@ Future<void> cardTextDetailEvaluateHelper(
 
   expect(
     find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconActiveDislike),
+    findsNothing,
+  );
+
+  await tester.tap(
+    find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconSmile),
+  );
+
+  await tester.pumpAndSettle();
+
+  expect(
+    find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconSmile),
+    findsNothing,
+  );
+
+  expect(
+    find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconActiveSmile),
+    findsOneWidget,
+  );
+
+  await tester.tap(
+    find.byKey(
+      KWidgetkeys.widget.cardTextDetailEvaluate.iconActiveSmile,
+    ),
+  );
+
+  await tester.pumpAndSettle();
+
+  expect(
+    find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconSmile),
+    findsOneWidget,
+  );
+
+  expect(
+    find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconActiveSmile),
     findsNothing,
   );
 }

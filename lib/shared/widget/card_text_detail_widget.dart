@@ -22,17 +22,19 @@ class CardTextDetailWidget extends StatefulWidget {
 
 class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
   late int? maxLines;
+  late GlobalKey cardDetailKey;
 
   @override
   void initState() {
     super.initState();
+    cardDetailKey = GlobalKey();
     maxLines = widget.maxLines;
   }
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      key: KWidgetkeys.widget.cardTextDetail.widget,
+      key: cardDetailKey,
       children: [
         Text(
           widget.text,
@@ -50,9 +52,14 @@ class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
                 key: KWidgetkeys.widget.cardTextDetail.button,
                 onPressed: () {
                   setState(() {
-                    maxLines == null
-                        ? maxLines = widget.maxLines
-                        : maxLines = null;
+                    if (maxLines == null) {
+                      maxLines = widget.maxLines;
+                      WidgetsBinding.instance.addPostFrameCallback((_) {
+                        Scrollable.ensureVisible(cardDetailKey.currentContext!);
+                      });
+                    } else {
+                      maxLines = null;
+                    }
                   });
                 },
                 style:
