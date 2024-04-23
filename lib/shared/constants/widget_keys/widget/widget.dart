@@ -33,5 +33,6 @@ class _WidgetKeys {
   final leftCard = _LeftCardKeys();
   final signUpBottomButtons = _SignUpBottomButtonsKeys();
   final feedbackBox = _FeedbackBoxKeys();
+  final rate = _RateKeys();
   final chatInput = _ChatInputKeys();
 }

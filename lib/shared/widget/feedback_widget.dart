@@ -122,34 +122,35 @@ class _FeedbackWidgetImplementationState
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                widget.title ?? context.l10n.feedback,
-                key: KWidgetkeys.widget.feedback.title,
-                style:
-                    widget.isDesk ? AppTextStyle.text96 : AppTextStyle.text48,
-              ),
-              if (widget.isDesk)
-                KSizedBox.kHeightSizedBox32
-              else
-                KSizedBox.kHeightSizedBox16,
-              Text(
-                widget.subtitle ?? context.l10n.feedbackSubtitle,
-                key: KWidgetkeys.widget.feedback.subtitle,
-                style: AppTextStyle.text24,
-              ),
-            ],
+          Text(
+            widget.title ?? context.l10n.feedback,
+            key: KWidgetkeys.widget.feedback.title,
+            style: widget.isDesk ? AppTextStyle.text96 : AppTextStyle.text48,
+          ),
+          if (widget.isDesk)
+            KSizedBox.kHeightSizedBox32
+          else
+            KSizedBox.kHeightSizedBox16,
+          Text(
+            widget.subtitle ?? context.l10n.feedbackSubtitle,
+            key: KWidgetkeys.widget.feedback.subtitle,
+            style: AppTextStyle.text24,
           ),
           if (widget.isDesk)
             KSizedBox.kHeightSizedBox56
           else
             KSizedBox.kHeightSizedBox24,
-          Text(
-            context.l10n.name,
-            key: KWidgetkeys.widget.feedback.name,
-            style: widget.isDesk ? AppTextStyle.text40 : AppTextStyle.text32,
+          Padding(
+            padding: EdgeInsets.only(
+              left: widget.isDesk
+                  ? KPadding.kPaddingSize32
+                  : KPadding.kPaddingSize16,
+            ),
+            child: Text(
+              context.l10n.name,
+              key: KWidgetkeys.widget.feedback.name,
+              style: widget.isDesk ? AppTextStyle.text40 : AppTextStyle.text32,
+            ),
           ),
           if (widget.isDesk)
             KSizedBox.kHeightSizedBox24
@@ -171,10 +172,17 @@ class _FeedbackWidgetImplementationState
             KSizedBox.kHeightSizedBox32
           else
             KSizedBox.kHeightSizedBox16,
-          Text(
-            '${context.l10n.fullEmail}*',
-            key: KWidgetkeys.widget.feedback.email,
-            style: widget.isDesk ? AppTextStyle.text40 : AppTextStyle.text32,
+          Padding(
+            padding: EdgeInsets.only(
+              left: widget.isDesk
+                  ? KPadding.kPaddingSize32
+                  : KPadding.kPaddingSize16,
+            ),
+            child: Text(
+              '${context.l10n.fullEmail}*',
+              key: KWidgetkeys.widget.feedback.email,
+              style: widget.isDesk ? AppTextStyle.text40 : AppTextStyle.text32,
+            ),
           ),
           if (widget.isDesk)
             KSizedBox.kHeightSizedBox24
@@ -196,10 +204,17 @@ class _FeedbackWidgetImplementationState
             KSizedBox.kHeightSizedBox32
           else
             KSizedBox.kHeightSizedBox16,
-          Text(
-            context.l10n.message,
-            key: KWidgetkeys.widget.feedback.message,
-            style: widget.isDesk ? AppTextStyle.text40 : AppTextStyle.text32,
+          Padding(
+            padding: EdgeInsets.only(
+              left: widget.isDesk
+                  ? KPadding.kPaddingSize32
+                  : KPadding.kPaddingSize16,
+            ),
+            child: Text(
+              context.l10n.message,
+              key: KWidgetkeys.widget.feedback.message,
+              style: widget.isDesk ? AppTextStyle.text40 : AppTextStyle.text32,
+            ),
           ),
           if (widget.isDesk)
             KSizedBox.kHeightSizedBox24

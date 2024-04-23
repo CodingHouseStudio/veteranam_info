@@ -37,6 +37,7 @@ void configureDependenciesTest() {
   // Blocs
   GetIt.I.registerFactory<FilterCubit>(FilterCubit.new);
   GetIt.I.registerFactory<LanguageCubit>(LanguageCubit.new);
+  GetIt.I.registerFactory<ScrollCubit>(ScrollCubit.new);
   GetIt.I.registerSingleton<FeedbackBloc>(
     FeedbackBloc(feedbackRepository: GetIt.I.get<IFeedbackRepository>()),
   );

@@ -31,10 +31,11 @@ class _DonatesCardsWidgetState extends State<DonatesCardsWidget> {
                   ? hasSubtitles.indexOf(true) + 1 == index
                   : hasSubtitles.indexOf(true) - 1 == index;
           return Expanded(
-            flex: hasSubtitles.elementAt(index) ||
-                    hasSubtitles.contains(true) && !changeSize
+            flex: hasSubtitles.elementAt(index)
                 ? KDimensions.donateCardBigExpanded
-                : KDimensions.donateCardSmallExpanded,
+                : hasSubtitles.contains(true) && !changeSize
+                    ? KDimensions.donateCardStandartExpanded
+                    : KDimensions.donateCardSmallExpanded,
             child: widget.fundItems.length > index
                 ? MouseRegion(
                     onEnter: (event) => setState(() {
