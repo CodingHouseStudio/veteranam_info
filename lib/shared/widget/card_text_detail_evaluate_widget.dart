@@ -31,13 +31,13 @@ class CardTextDetailEvaluateWidget extends StatefulWidget {
 
 class _CardTextDetailEvaluateWidgetState
     extends State<CardTextDetailEvaluateWidget> {
-  late bool? like;
+  late EvaluationEnum evaluation;
   late int? maxLines;
 
   @override
   void initState() {
     super.initState();
-    like = null;
+    evaluation = EvaluationEnum.none;
     maxLines = 10;
   }
 
@@ -81,40 +81,71 @@ class _CardTextDetailEvaluateWidgetState
                     children: [
                       InkWell(
                         onTap: () => setState(() {
-                          like == null || like == false
-                              ? like = true
-                              : like = null;
+                          if (evaluation != EvaluationEnum.like) {
+                            evaluation = EvaluationEnum.like;
+                          } else {
+                            evaluation = EvaluationEnum.none;
+                          }
                         }),
-                        child: like == null || !like!
-                            ? KIcon.like.setIconKey(
-                                KWidgetkeys
-                                    .widget.cardTextDetailEvaluate.iconLike,
-                              )
-                            : KIcon.activeLike.setIconKey(
-                                KWidgetkeys.widget.cardTextDetailEvaluate
-                                    .iconActiveLike,
-                              ),
-                      ),
-                      KSizedBox.kWidthSizedBox8,
-                      KIcon.smile.setIconKey(
-                        KWidgetkeys.widget.cardTextDetailEvaluate.iconSmile,
+                        borderRadius: BorderRadius.circular(KSize.kRadius32),
+                        child: Padding(
+                          padding: const EdgeInsets.all(KPadding.kPaddingSize4),
+                          child: evaluation == EvaluationEnum.like
+                              ? KIcon.activeLike.setIconKey(
+                                  KWidgetkeys.widget.cardTextDetailEvaluate
+                                      .iconActiveLike,
+                                )
+                              : KIcon.like.setIconKey(
+                                  KWidgetkeys
+                                      .widget.cardTextDetailEvaluate.iconLike,
+                                ),
+                        ),
                       ),
                       KSizedBox.kWidthSizedBox8,
                       InkWell(
                         onTap: () => setState(() {
-                          like == null || like! == true
-                              ? like = false
-                              : like = null;
+                          if (evaluation != EvaluationEnum.smile) {
+                            evaluation = EvaluationEnum.smile;
+                          } else {
+                            evaluation = EvaluationEnum.none;
+                          }
                         }),
-                        child: like == null || like!
-                            ? KIcon.dislike.setIconKey(
-                                KWidgetkeys
-                                    .widget.cardTextDetailEvaluate.iconDislike,
-                              )
-                            : KIcon.activeDislike.setIconKey(
-                                KWidgetkeys.widget.cardTextDetailEvaluate
-                                    .iconActiveDislike,
-                              ),
+                        borderRadius: BorderRadius.circular(KSize.kRadius32),
+                        child: Padding(
+                          padding: const EdgeInsets.all(KPadding.kPaddingSize4),
+                          child: evaluation == EvaluationEnum.smile
+                              ? KIcon.happySmile.setIconKey(
+                                  KWidgetkeys.widget.cardTextDetailEvaluate
+                                      .iconActiveSmile,
+                                )
+                              : KIcon.smile.setIconKey(
+                                  KWidgetkeys
+                                      .widget.cardTextDetailEvaluate.iconSmile,
+                                ),
+                        ),
+                      ),
+                      KSizedBox.kWidthSizedBox8,
+                      InkWell(
+                        onTap: () => setState(() {
+                          if (evaluation != EvaluationEnum.dislike) {
+                            evaluation = EvaluationEnum.dislike;
+                          } else {
+                            evaluation = EvaluationEnum.none;
+                          }
+                        }),
+                        borderRadius: BorderRadius.circular(KSize.kRadius32),
+                        child: Padding(
+                          padding: const EdgeInsets.all(KPadding.kPaddingSize4),
+                          child: evaluation == EvaluationEnum.dislike
+                              ? KIcon.activeDislike.setIconKey(
+                                  KWidgetkeys.widget.cardTextDetailEvaluate
+                                      .iconActiveDislike,
+                                )
+                              : KIcon.dislike.setIconKey(
+                                  KWidgetkeys.widget.cardTextDetailEvaluate
+                                      .iconDislike,
+                                ),
+                        ),
                       ),
                     ],
                   ),
