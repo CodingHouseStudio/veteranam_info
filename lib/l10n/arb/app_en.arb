@@ -82,5 +82,6 @@
   "sendMore": "Send more",
   "linkedAccounts": "Linked accounts",
   "linkedAccountsDetails": "Your Veteran account is currently linked to a Facebook account.",
-  "disconnect": "Disconnect"
+  "disconnect": "Disconnect",
+  "logInWith": "Log in with"
 }
