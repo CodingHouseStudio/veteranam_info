@@ -97,36 +97,6 @@ class LogInWithEmailAndPasswordFailure implements Exception {
   final SomeFailure status;
 }
 
-class LogInWithGoogleFailure implements Exception {
-  /// {@macro log_in_with_google_failure}
-  const LogInWithGoogleFailure([
-    this.status = const SomeFailure.initial(),
-  ]);
-
-  factory LogInWithGoogleFailure.fromCode(FirebaseAuthException code) {
-    switch (code.code) {
-      case 'account-exists-with-different-credential':
-      case 'user-not-found':
-      case 'wrong-password':
-      case 'invalid-credential':
-      case 'user-disabled':
-      case 'invalid-verification-code':
-      case 'invalid-verification-id':
-        return const LogInWithGoogleFailure(
-          SomeFailure.notFound(),
-        );
-      case 'operation-not-allowed':
-        return const LogInWithGoogleFailure(
-          SomeFailure.serverError(),
-        );
-      default:
-        return const LogInWithGoogleFailure();
-    }
-  }
-
-  final SomeFailure status;
-}
-
 /// Thrown during the logout process if a failure occurs.
 // class LogOutFailure implements Exception {}
 class LogOutFailure implements Exception {
