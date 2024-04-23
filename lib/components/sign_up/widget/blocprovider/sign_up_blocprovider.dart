@@ -14,7 +14,7 @@ class SignUpBlocprovider extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => GetIt.I.get<SignUpBloc>()),
         BlocProvider(
-          create: (context) => GetIt.I.get<AuthenticationBloc>(),
+          create: (context) => GetIt.I.get<AuthenticationServicesCubit>(),
         ),
       ],
       child: childWidget,

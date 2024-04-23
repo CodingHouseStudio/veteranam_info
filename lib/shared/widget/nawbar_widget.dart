@@ -1,5 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kozak/shared/shared.dart';
 
@@ -132,10 +134,27 @@ class _NawbarWidgetState extends State<NawbarWidget> {
             else if (!isFocused)
               InkWell(
                 onTap: () => context.goNamed(KRoute.login.name),
-                child: IconWidget(
-                  key: KWidgetkeys.widget.nawbar.iconPerson,
-                  icon: KIcon.person,
-                ),
+                child: context.read<AuthenticationBloc>().state.user?.photo ==
+                        null
+                    ? IconWidget(
+                        key: KWidgetkeys.widget.nawbar.iconPerson,
+                        icon: KIcon.person,
+                      )
+                    : ClipRRect(
+                        borderRadius: BorderRadius.circular(KSize.kUserPhoto),
+                        child: CachedNetworkImage(
+                          imageUrl: context
+                              .read<AuthenticationBloc>()
+                              .state
+                              .user!
+                              .photo!,
+                          placeholder: (context, url) => Image.asset(''),
+                          errorWidget: (context, url, error) => KIcon.error,
+                          fit: BoxFit.contain,
+                          width: KSize.kUserPhoto,
+                          height: KSize.kUserPhoto,
+                        ),
+                      ),
               ),
           ],
         ),

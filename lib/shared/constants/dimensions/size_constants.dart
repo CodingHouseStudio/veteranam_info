@@ -33,6 +33,8 @@ abstract class KSize {
 
   static const kPreferredSize = 160.0;
 
+  static const kUserPhoto = 48.0;
+
   static const kWrapSpacing8 = 8.0;
   static const kWrapRunSpacing4 = 4.0;
 
