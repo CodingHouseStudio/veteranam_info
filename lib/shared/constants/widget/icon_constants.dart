@@ -10,6 +10,15 @@ class _KIcon extends Icon {
     return Icon(
       icon,
       key: key,
+      size: size,
+    );
+  }
+
+  Icon setIconSize(double iconSize) {
+    return Icon(
+      icon,
+      key: key,
+      size: iconSize,
     );
   }
 }
@@ -46,4 +55,5 @@ abstract class KIcon {
   static const _KIcon eyeOff = _KIcon(Icons.visibility_off_outlined);
   static const _KIcon refresh = _KIcon(FontAwesomeIcons.rotate);
   static const _KIcon apple = _KIcon(FontAwesomeIcons.apple);
+  static const _KIcon message = _KIcon(FontAwesomeIcons.message);
 }

@@ -25,6 +25,8 @@ void main() {
       await tester.pumpAndSettle();
 
       await chekPointHelper(tester);
+
+      await chatInputHelper(tester);
     });
     group('${KGroupText.goRouter} ', () {
       late MockGoRouter mockGoRouter;
@@ -43,6 +45,8 @@ void main() {
         await tester.pumpAndSettle();
 
         await chekPointHelper(tester);
+
+        await chatInputHelper(tester);
       });
       // group('${KGroupText.goTo} ', () {
       // });
