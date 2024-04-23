@@ -9,6 +9,7 @@ class AuditInspectionInProgresFilters extends StatelessWidget {
     required this.isDesk,
     super.key,
   });
+
   final List<String> filtersItem;
   final bool isDesk;
 
@@ -38,12 +39,16 @@ class AuditInspectionInProgresFilters extends StatelessWidget {
                     onSelected: ({required isSelected}) =>
                         context.read<InformationWatcherBloc>().add(
                               InformationWatcherEvent.filter(
-                                isSelected ? filter : null,
+                                filter: filter,
+                                isSelected: isSelected,
                               ),
                             ),
-                    isSelected:
-                        context.read<InformationWatcherBloc>().state.filter ==
-                            filter,
+                    isSelected: context
+                            .read<InformationWatcherBloc>()
+                            .state
+                            .filters
+                            ?.contains(filter) ??
+                        false,
                     isDesk: isDesk,
                   ),
                 );

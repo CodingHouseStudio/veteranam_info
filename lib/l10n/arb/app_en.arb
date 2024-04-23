@@ -82,5 +82,7 @@
   "sendMore": "Send more",
   "linkedAccounts": "Linked accounts",
   "linkedAccountsDetails": "Your Veteran account is currently linked to a Facebook account.",
-  "disconnect": "Disconnect"
+  "disconnect": "Disconnect",
+  "thankYou" : "Thank you!",
+  "receivedYourMessage" : "We have received your message and will respond to you as soon as possible."
 }
