@@ -2,9 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kozak/shared/shared.dart';
 
-class SignUpBottomButtonsWidget extends StatelessWidget {
-  const SignUpBottomButtonsWidget({required this.isDesk, super.key});
+class SignUpLoginBottomButtonsWidget extends StatelessWidget {
+  const SignUpLoginBottomButtonsWidget({
+    required this.isDesk,
+    required this.title,
+    super.key,
+  });
   final bool isDesk;
+  final String title;
   @override
   Widget build(BuildContext context) {
     if (isDesk) {
@@ -34,7 +39,7 @@ class SignUpBottomButtonsWidget extends StatelessWidget {
           ),
           KSizedBox.kHeightSizedBox40,
           Text(
-            context.l10n.signUpWith,
+            title,
             key: KWidgetkeys.widget.signUpBottomButtons.title,
             style: isDesk ? AppTextStyle.text40 : AppTextStyle.text24,
           ),
