@@ -72,8 +72,7 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
 
   /// Starts the Sign In with Google Flow.
   ///
-  /// Throws a [LogInWithGoogleFailure] if an exception occurs.
-
+  /// Throws a [signUpWithGoogle] if an exception occurs.
   @override
   Future<Either<SomeFailure, bool>> signUpWithGoogle() async {
     try {

@@ -3,12 +3,32 @@ part of 'login_bloc.dart';
 enum LoginError {
   none,
   error,
+  notFound,
   initial,
 }
 
 extension AuthFailureToLoginError on SomeFailure {
   LoginError toLogInError() {
-    return LoginError.error;
+    switch (this) {
+      case FailureNotFound():
+        return LoginError.notFound;
+      default:
+        return LoginError.error;
+    }
+  }
+}
+
+extension LoginErrorExtention on LoginError {
+  String? getString(BuildContext context) {
+    switch (this) {
+      case LoginError.error:
+        return context.l10n.serverError;
+      case LoginError.notFound:
+        return context.l10n.notFound;
+      case LoginError.none:
+      case LoginError.initial:
+        return null;
+    }
   }
 }
 
