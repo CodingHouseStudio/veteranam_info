@@ -7,7 +7,9 @@ import 'package:injectable/injectable.dart';
 import 'package:kozak/shared/shared.dart';
 
 part 'information_watcher_event.dart';
+
 part 'information_watcher_state.dart';
+
 part 'information_watcher_bloc.freezed.dart';
 
 @Injectable()
@@ -21,7 +23,7 @@ class InformationWatcherBloc
             informationModelItems: [],
             loadingStatus: LoadingStatus.initial,
             filteredInformationModelItems: [],
-            filter: null,
+            filters: null,
             itemsLoaded: 0,
             failure: null,
           ),
@@ -33,6 +35,7 @@ class InformationWatcherBloc
     on<_Filter>(_onFilter);
     on<_FilterReset>(_onFilterReset);
   }
+
   final IInformationRepository _informationRepository;
   StreamSubscription<List<InformationModel>>? _informationItemsSubscription;
 
@@ -66,11 +69,11 @@ class InformationWatcherBloc
         informationModelItems: event.informationItemsModel,
         loadingStatus: LoadingStatus.loaded,
         filteredInformationModelItems: _filter(
-          filter: state.filter,
+          filters: state.filters,
           itemsLoaded: state.itemsLoaded + 1,
           informationModelItems: event.informationItemsModel,
         ),
-        filter: null,
+        filters: null,
         itemsLoaded: event.informationItemsModel.isNotEmpty ? 1 : 0,
         failure: null,
       ),
@@ -83,7 +86,7 @@ class InformationWatcherBloc
   ) {
     if (state.itemsLoaded + 1 > state.informationModelItems.length) return;
     final filterItems = _filter(
-      filter: state.filter,
+      filters: state.filters,
       itemsLoaded: state.itemsLoaded + 1,
       informationModelItems: state.informationModelItems,
     );
@@ -104,11 +107,11 @@ class InformationWatcherBloc
     emit(
       state.copyWith(
         filteredInformationModelItems: _filter(
-          filter: null,
+          filters: null,
           itemsLoaded: state.itemsLoaded,
           informationModelItems: state.informationModelItems,
         ),
-        filter: null,
+        filters: null,
       ),
     );
   }
@@ -117,15 +120,25 @@ class InformationWatcherBloc
     _Filter event,
     Emitter<InformationWatcherState> emit,
   ) {
+    emit(state.copyWith(loadingStatus: LoadingStatus.loading));
+
+    final selectedFilters = List<String>.from(state.filters ?? []);
+
+    event.isSelected ?? false
+        ? selectedFilters.add(event.filter!)
+        : selectedFilters.remove(event.filter);
+
     final filterItems = _filter(
-      filter: event.filter,
+      filters: selectedFilters,
       informationModelItems: state.informationModelItems,
       itemsLoaded: state.itemsLoaded,
     );
+
     emit(
       state.copyWith(
+        loadingStatus: LoadingStatus.loaded,
         filteredInformationModelItems: filterItems,
-        filter: event.filter,
+        filters: selectedFilters,
         itemsLoaded: filterItems.length >= state.itemsLoaded
             ? state.itemsLoaded
             : filterItems.length,
@@ -134,17 +147,21 @@ class InformationWatcherBloc
   }
 
   List<InformationModel> _filter({
-    required String? filter,
+    required List<String>? filters,
     required int itemsLoaded,
     required List<InformationModel> informationModelItems,
   }) {
     if (itemsLoaded > informationModelItems.length) {
       itemsLoaded = informationModelItems.length;
     }
-    if (filter != null) {
+    if (filters != null && filters.isNotEmpty) {
       final filterItems = informationModelItems
           .where(
-            (element) => element.tags == null || element.tags!.contains(filter),
+            (element) =>
+                element.tags == null ||
+                filters.any(
+                  (filter) => element.tags!.contains(filter),
+                ),
           )
           .toList();
       return filterItems.sublist(
