@@ -25,6 +25,9 @@ extension PumpApp on WidgetTester {
             create: (context) => GetIt.I.get<AuthenticationBloc>()
               ..add(AuthenticationInitialized()),
           ),
+          BlocProvider(
+            create: (context) => GetIt.I.get<ScrollCubit>()..initial(),
+          ),
         ],
         child: BlocBuilder<AuthenticationBloc, AuthenticationState>(
           builder: (context, state) {
