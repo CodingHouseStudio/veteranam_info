@@ -28,7 +28,7 @@ void main() {
 
       await workCardHelper(tester);
 
-      await footerHelper(tester: tester, email: KTestText.useremail);
+      await footerHelper(tester);
     });
     group('${KGroupText.goRouter} ', () {
       late MockGoRouter mockGoRouter;

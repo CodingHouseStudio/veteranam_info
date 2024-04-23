@@ -69,7 +69,7 @@ void main() {
 
       await listQuestionHelper(tester);
 
-      await footerHelper(tester: tester, email: KTestText.useremail);
+      await footerHelper(tester);
     });
 
     testWidgets('Feedback enter correct text and save it', (tester) async {
@@ -171,7 +171,7 @@ void main() {
 
         await listQuestionHelper(tester);
 
-        await footerHelper(tester: tester, email: KTestText.useremail);
+        await footerHelper(tester);
       });
 
       group('${KGroupText.goTo} ', () {
