@@ -83,6 +83,8 @@
   "linkedAccounts": "Linked accounts",
   "linkedAccountsDetails": "Your Veteran account is currently linked to a Facebook account.",
   "disconnect": "Disconnect",
+  "thankYou" : "Thank you!",
+  "receivedYourMessage" : "We have received your message and will respond to you as soon as possible.",
   "logInWith": "Log in with",
   "notFound": "The user with this password or address does not exist",
   "dublicate": "The user with this password or address exist",

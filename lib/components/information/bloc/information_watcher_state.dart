@@ -15,7 +15,7 @@ class InformationWatcherState with _$InformationWatcherState {
   const factory InformationWatcherState({
     required List<InformationModel> informationModelItems,
     required List<InformationModel> filteredInformationModelItems,
-    required String? filter,
+    required List<String>? filters,
     required LoadingStatus loadingStatus,
     required int itemsLoaded,
     required InformationFailure? failure,
