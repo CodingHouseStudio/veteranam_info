@@ -27,6 +27,8 @@ void main() {
       await chekPointHelper(tester);
 
       await chatInputHelper(tester);
+
+      await rateHelper(tester);
     });
     group('${KGroupText.goRouter} ', () {
       late MockGoRouter mockGoRouter;
@@ -45,6 +47,8 @@ void main() {
         await tester.pumpAndSettle();
 
         await chekPointHelper(tester);
+
+        await rateHelper(tester);
 
         await chatInputHelper(tester);
       });

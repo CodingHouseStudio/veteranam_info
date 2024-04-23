@@ -11,3 +11,5 @@ extension ExtendedDateTime on DateTime {
 }
 
 enum LoadingStatus { initial, loading, loaded, error }
+
+enum EvaluationEnum { like, dislike, smile, none }

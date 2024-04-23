@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kozak/components/components.dart';
@@ -60,6 +61,7 @@ final GoRouter router = GoRouter(
             key: state.pageKey,
             child: const InformationScreen(),
           ),
+          onExit: (context) => context.read<ScrollCubit>().scrollUp(),
         ),
         GoRoute(
           name: KRoute.discounts.name,
@@ -69,6 +71,7 @@ final GoRouter router = GoRouter(
             key: state.pageKey,
             child: const DiscountsScreen(),
           ),
+          onExit: (context) => context.read<ScrollCubit>().scrollUp(),
         ),
         GoRoute(
           name: KRoute.story.name,
@@ -78,6 +81,7 @@ final GoRouter router = GoRouter(
             key: state.pageKey,
             child: const StoryScreen(),
           ),
+          onExit: (context) => context.read<ScrollCubit>().scrollUp(),
         ),
         GoRoute(
           name: KRoute.work.name,
@@ -87,6 +91,7 @@ final GoRouter router = GoRouter(
             key: state.pageKey,
             child: const WorkScreen(),
           ),
+          onExit: (context) => context.read<ScrollCubit>().scrollUp(),
         ),
         GoRoute(
           name: KRoute.profile.name,
@@ -96,6 +101,7 @@ final GoRouter router = GoRouter(
             key: state.pageKey,
             child: const ProfileScreen(),
           ),
+          onExit: (context) => context.read<ScrollCubit>().scrollUp(),
         ),
         GoRoute(
           name: KRoute.investors.name,
@@ -105,6 +111,7 @@ final GoRouter router = GoRouter(
             key: state.pageKey,
             child: const InvestorsScreen(),
           ),
+          onExit: (context) => context.read<ScrollCubit>().scrollUp(),
         ),
         GoRoute(
           name: KRoute.aboutUs.name,
@@ -114,6 +121,7 @@ final GoRouter router = GoRouter(
             key: state.pageKey,
             child: const AboutUsScreen(),
           ),
+          onExit: (context) => context.read<ScrollCubit>().scrollUp(),
         ),
         GoRoute(
           name: KRoute.consultation.name,
@@ -123,6 +131,7 @@ final GoRouter router = GoRouter(
             key: state.pageKey,
             child: const ConsultationScreen(),
           ),
+          onExit: (context) => context.read<ScrollCubit>().scrollUp(),
         ),
         GoRoute(
           name: KRoute.contact.name,
@@ -132,6 +141,7 @@ final GoRouter router = GoRouter(
             key: state.pageKey,
             child: const ContactScreen(),
           ),
+          onExit: (context) => context.read<ScrollCubit>().scrollUp(),
         ),
       ],
     ),
