@@ -27,6 +27,7 @@ export 'page_indicator_control.dart';
 export 'pagination_widget.dart';
 export 'profile_card_widget.dart';
 export 'question_widget.dart';
+export 'rate_widget.dart';
 export 'scaffold_widget.dart';
 export 'sign_up_bottom_buttons_widget.dart';
 export 'story_card_widget.dart';
