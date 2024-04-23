@@ -5,8 +5,7 @@ import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
 
 class LoginBodyWidget extends StatelessWidget {
-  const LoginBodyWidget({required this.isDesk, super.key});
-  final bool isDesk;
+  const LoginBodyWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,8 +16,7 @@ class LoginBodyWidget extends StatelessWidget {
       builder: (context, _) {
         return LeftCardWidget(
           key: KWidgetkeys.screen.login.card,
-          isDesk: isDesk,
-          widgetList: [
+          widgetList: ({required isDesk}) => [
             Text(
               context.l10n.login,
               key: KWidgetkeys.screen.login.title,
