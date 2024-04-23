@@ -33,7 +33,8 @@ abstract class KIcon {
   static const _KIcon arrowUpRight = _KIcon(Icons.arrow_outward);
   static const _KIcon like = _KIcon(Icons.thumb_up_outlined);
   static const _KIcon activeLike = _KIcon(Icons.thumb_up);
-  static const _KIcon smile = _KIcon(Icons.sentiment_very_satisfied);
+  static const _KIcon smile = _KIcon(Icons.sentiment_dissatisfied);
+  static const _KIcon happySmile = _KIcon(Icons.sentiment_very_satisfied);
   static const _KIcon dislike = _KIcon(Icons.thumb_down_outlined);
   static const _KIcon activeDislike = _KIcon(Icons.thumb_down);
   static const _KIcon share = _KIcon(Icons.file_upload_outlined);
@@ -46,4 +47,5 @@ abstract class KIcon {
   static const _KIcon eyeOff = _KIcon(Icons.visibility_off_outlined);
   static const _KIcon refresh = _KIcon(FontAwesomeIcons.rotate);
   static const _KIcon apple = _KIcon(FontAwesomeIcons.apple);
+  static const _KIcon star = _KIcon(FontAwesomeIcons.star);
 }
