@@ -14,6 +14,7 @@ export 'nawbar/nawbar.dart';
 export 'news_card_helper.dart';
 export 'pagination_helper.dart';
 export 'question_helper.dart';
+export 'rate_helper.dart';
 export 'sign_up_bottom_buttons_helper.dart';
 export 'story_card_helper.dart';
 export 'switch_helper.dart';
