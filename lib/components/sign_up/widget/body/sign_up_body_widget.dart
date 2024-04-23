@@ -83,9 +83,10 @@ class SignUpBodyWidget extends StatelessWidget {
               ],
             ),
             KSizedBox.kHeightSizedBox40,
-            SignUpBottomButtonsWidget(
+            SignUpLoginBottomButtonsWidget(
               key: KWidgetkeys.screen.signUp.bottomButtons,
               isDesk: isDesk,
+              title: context.l10n.signUpWith,
             ),
           ],
         );
