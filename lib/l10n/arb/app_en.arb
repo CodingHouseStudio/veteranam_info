@@ -83,5 +83,8 @@
   "linkedAccounts": "Linked accounts",
   "linkedAccountsDetails": "Your Veteran account is currently linked to a Facebook account.",
   "disconnect": "Disconnect",
+  "notFound": "The user with this password or address does not exist",
+  "dublicate": "The user with this password or address exist",
+  "serverError": "An error occurred while transferring data to the server",
   "rateOurSite": "Rate our site"
 }

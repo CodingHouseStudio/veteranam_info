@@ -43,6 +43,13 @@ class SignUpBodyWidget extends StatelessWidget {
                     const SignUpEvent.passwordFieldHide(),
                   ),
             ),
+            if (_.failure.getString(context) != null)
+              Center(
+                child: Text(
+                  _.failure.getString(context)!,
+                  style: AppTextStyle.error14,
+                ),
+              ),
             if (isDesk)
               KSizedBox.kHeightSizedBox24
             else

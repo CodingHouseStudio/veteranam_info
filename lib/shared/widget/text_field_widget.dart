@@ -117,7 +117,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
           focusedErrorBorder: kIsWeb ? null : widget.border,
           fillColor: widget.fillColor,
           hintText: widget.hintText,
-          errorText: widget.errorText,
+          errorText: widget.errorText, errorStyle: AppTextStyle.error14,
           suffixIcon: widget.suffixIcon,
           prefixIcon: widget.prefixIcon,
           errorMaxLines: widget.errorMaxLines,
