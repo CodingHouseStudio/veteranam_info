@@ -136,13 +136,14 @@ class _FooterImplementationWidget extends StatelessWidget {
             child: Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                buttonsText.elementAt(index) +
-                    (!isDesktop &&
-                            buttonsText
-                                .elementAt(index)
-                                .contains(context.l10n.contact)
-                        ? '\n${KMockText.emial}'
-                        : ''),
+                buttonsText.elementAt(index),
+                // +
+                //     (!isDesktop &&
+                //             buttonsText
+                //                 .elementAt(index)
+                //                 .contains(context.l10n.contact)
+                //         ? '\n${KMockText.email}'
+                //         : ''),
                 style: isDesktop
                     ? AppTextStyle.text32
                     : columnIndex == 0
