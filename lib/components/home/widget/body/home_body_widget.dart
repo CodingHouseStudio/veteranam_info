@@ -43,9 +43,11 @@ class HomeBodyWidget extends StatelessWidget {
                           children: [
                             BoxWidget(
                               text: context.l10n.discountsCoupons,
-                              onTap: () => context.goNamed(
-                                KRoute.discounts.name,
-                              ),
+                              onTap: () {
+                                context.goNamed(
+                                  KRoute.discounts.name,
+                                );
+                              },
                               isDesk: isDesk,
                             ),
                             if (isDesk)
