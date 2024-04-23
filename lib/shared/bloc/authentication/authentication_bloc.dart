@@ -10,8 +10,6 @@ import 'package:kozak/shared/shared.dart';
 part 'authentication_event.dart';
 part 'authentication_state.dart';
 
-// ignore: flutter_style_todos
-/// TODO: need to fix user state. now is getting null value
 @Singleton()
 class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {

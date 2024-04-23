@@ -1,5 +1,6 @@
 export 'box_helper.dart';
 export 'card/card.dart';
+export 'chat/chat.dart';
 export 'check_point_helper.dart';
 export 'donate_card_helper.dart';
 export 'drop_list_field_helper.dart';
@@ -14,6 +15,7 @@ export 'nawbar/nawbar.dart';
 export 'news_card_helper.dart';
 export 'pagination_helper.dart';
 export 'question_helper.dart';
+export 'rate_helper.dart';
 export 'sign_up_bottom_buttons_helper.dart';
 export 'story_card_helper.dart';
 export 'switch_helper.dart';

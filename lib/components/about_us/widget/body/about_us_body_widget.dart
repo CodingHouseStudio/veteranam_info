@@ -12,6 +12,23 @@ class AboutUsBodyWidget extends StatelessWidget {
           onChanged: ({required isCheck}) {},
         ),
         KSizedBox.kHeightSizedBox30,
+        RateWidget(
+          isDesk: isDesk,
+          onRatingUpdate: (double rating) {},
+        ),
+        Row(
+          children: [
+            const ChatInputWidget(
+              messageIcon: KIcon.message,
+              message: KMockText.nickname,
+            ),
+            KSizedBox.kWidthSizedBox24,
+            ChatBotButton(
+              onTap: () {},
+            ),
+          ],
+        ),
+        KSizedBox.kHeightSizedBox30,
       ],
     );
   }

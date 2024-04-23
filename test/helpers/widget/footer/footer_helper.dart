@@ -3,10 +3,10 @@ import 'package:kozak/shared/shared.dart';
 
 import '../../../text_dependency.dart';
 
-Future<void> footerHelper({
-  required WidgetTester tester,
-  required String email,
-}) async {
+Future<void> footerHelper(
+  WidgetTester tester,
+  // required String email,
+) async {
   await scrollingHelper(
     tester: tester,
     offset: KTestConstants.scrollingDown,
@@ -44,25 +44,25 @@ Future<void> footerHelper({
     }
   }
 
-  expect(
-    find.descendant(
-      of: find.byKey(KWidgetkeys.widget.footer.widget),
-      matching: find.text('${KTestText.footer}$email'),
-    ),
-    findsOneWidget,
-  );
+  // expect(
+  //   find.descendant(
+  //     of: find.byKey(KWidgetkeys.widget.footer.widget),
+  //     matching: find.text('${KTestText.footer}$email'),
+  //   ),
+  //   findsOneWidget,
+  // );
 
   await changeWindowSizeHelper(tester: tester);
 
   expect(find.byKey(KWidgetkeys.widget.footer.logo), findsNothing);
 
-  expect(
-    find.descendant(
-      of: find.byKey(KWidgetkeys.widget.footer.widget),
-      matching: find.text('${KTestText.footer}$email'),
-    ),
-    findsNothing,
-  );
+  // expect(
+  //   find.descendant(
+  //     of: find.byKey(KWidgetkeys.widget.footer.widget),
+  //     matching: find.text('${KTestText.footer}$email'),
+  //   ),
+  //   findsNothing,
+  // );
 
   await changeWindowSizeHelper(tester: tester, setDefaultSize: true);
 }

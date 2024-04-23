@@ -16,6 +16,7 @@ abstract class KSize {
   static const kPixel90 = 90.0;
   static const kPixel160 = 160.0;
 
+  static const kRadius8 = 8.0;
   static const kRadius32 = 32.0;
   static const kRadius40 = 40.0;
 
@@ -32,6 +33,8 @@ abstract class KSize {
   static const kFont128 = 128.0;
 
   static const kPreferredSize = 160.0;
+
+  static const kUserPhoto = 48.0;
 
   static const kWrapSpacing8 = 8.0;
   static const kWrapRunSpacing4 = 4.0;

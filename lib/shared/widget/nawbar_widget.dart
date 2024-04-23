@@ -1,5 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kozak/shared/shared.dart';
 
@@ -119,22 +121,40 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                     EdgeInsets.symmetric(horizontal: KPadding.kPaddingSize8),
                 child: LanguagesSwitcherWidget(),
               ),
-            if (widget.isDesk)
-              TextButton(
-                key: KWidgetkeys.widget.nawbar.button,
-                style: KButtonStyles.whiteButtonStyle,
-                onPressed: () => context.goNamed(KRoute.login.name),
-                child: Text(
-                  context.l10n.login,
-                  style: AppTextStyle.text24,
-                ),
-              )
-            else if (!isFocused)
-              InkWell(
-                onTap: () => context.goNamed(KRoute.login.name),
-                child: IconWidget(
-                  key: KWidgetkeys.widget.nawbar.iconPerson,
-                  icon: KIcon.person,
+            if (context.read<AuthenticationBloc>().state.user?.photo == null)
+              widget.isDesk
+                  ? TextButton(
+                      key: KWidgetkeys.widget.nawbar.button,
+                      style: KButtonStyles.whiteButtonStyle,
+                      onPressed: () => context.goNamed(KRoute.login.name),
+                      child: Text(
+                        context.l10n.login,
+                        style: AppTextStyle.text24,
+                      ),
+                    )
+                  : !isFocused
+                      ? InkWell(
+                          onTap: () => context.goNamed(KRoute.login.name),
+                          child: IconWidget(
+                            key: KWidgetkeys.widget.nawbar.iconPerson,
+                            icon: KIcon.person,
+                          ),
+                        )
+                      : const SizedBox.shrink()
+            else
+              ClipRRect(
+                borderRadius: BorderRadius.circular(KSize.kUserPhoto),
+                child: InkWell(
+                  onTap: () => context.goNamed(KRoute.profile.name),
+                  child: CachedNetworkImage(
+                    imageUrl:
+                        context.read<AuthenticationBloc>().state.user!.photo!,
+                    placeholder: (context, url) => Image.asset(''),
+                    errorWidget: (context, url, error) => KIcon.error,
+                    fit: BoxFit.contain,
+                    width: KSize.kUserPhoto,
+                    height: KSize.kUserPhoto,
+                  ),
                 ),
               ),
           ],
