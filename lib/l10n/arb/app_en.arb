@@ -83,5 +83,6 @@
   "linkedAccounts": "Linked accounts",
   "linkedAccountsDetails": "Your Veteran account is currently linked to a Facebook account.",
   "disconnect": "Disconnect",
-  "logInWith": "Log in with"
+  "logInWith": "Log in with",
+  "rateOurSite": "Rate our site"
 }
