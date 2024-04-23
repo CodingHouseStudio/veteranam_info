@@ -26,6 +26,8 @@ void main() {
 
       await chekPointHelper(tester);
 
+      await chatInputHelper(tester);
+
       await rateHelper(tester);
     });
     group('${KGroupText.goRouter} ', () {
@@ -47,6 +49,8 @@ void main() {
         await chekPointHelper(tester);
 
         await rateHelper(tester);
+
+        await chatInputHelper(tester);
       });
       // group('${KGroupText.goTo} ', () {
       // });
