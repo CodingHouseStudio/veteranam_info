@@ -4,19 +4,35 @@ enum SignUpError {
   duplicate,
   error,
   initial,
-  toomany,
+  notFound,
   none,
 }
 
 extension AuthFailureToSignUpError on SomeFailure {
   SignUpError toSignUpError() {
     switch (this) {
-      case SomeFailure.duplicate:
+      case FailureDuplicate():
         return SignUpError.duplicate;
-      case SomeFailure.tooManyRequests:
-        return SignUpError.toomany;
+      case FailureNotFound():
+        return SignUpError.notFound;
       default:
         return SignUpError.error;
+    }
+  }
+}
+
+extension SignUpErrorExtention on SignUpError {
+  String? getString(BuildContext context) {
+    switch (this) {
+      case SignUpError.error:
+        return context.l10n.serverError;
+      case SignUpError.notFound:
+        return context.l10n.notFound;
+      case SignUpError.duplicate:
+        return context.l10n.dublicate;
+      case SignUpError.none:
+      case SignUpError.initial:
+        return null;
     }
   }
 }
