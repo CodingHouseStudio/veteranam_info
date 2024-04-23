@@ -9,10 +9,7 @@ class LoginBodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<LoginBloc, LoginState>(
-      listener: (context, state) => state.failure == LoginError.none
-          ? context.goNamed(KRoute.home.name)
-          : null,
+    return BlocBuilder<LoginBloc, LoginState>(
       builder: (context, _) {
         return LeftCardWidget(
           key: KWidgetkeys.screen.login.card,
@@ -46,6 +43,7 @@ class LoginBodyWidget extends StatelessWidget {
               Center(
                 child: Text(
                   _.failure.getString(context)!,
+                  key: KWidgetkeys.screen.login.failureMessage,
                   style: AppTextStyle.error14,
                 ),
               ),

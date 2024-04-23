@@ -17,16 +17,16 @@ final GoRouter router = GoRouter(
   refreshListenable:
       GoRouterRefreshStream(GetIt.instance<AuthenticationBloc>().stream),
   initialLocation: KRoute.home.path,
-  // redirect: (BuildContext context, GoRouterState state) async {
-  //   if (context.read<AuthenticationBloc>().state.status ==
-  //       AuthenticationStatus.authenticated) {
-  //     return state.uri.toString().contains(KRoute.login.path) ||
-  //             state.uri.toString().contains(KRoute.signUp.path)
-  //         ? KRoute.home.path
-  //         : null;
-  //   }
-  //   return null;
-  // },
+  redirect: (BuildContext context, GoRouterState state) async {
+    if (context.read<AuthenticationBloc>().state.status ==
+        AuthenticationStatus.authenticated) {
+      return state.uri.toString().contains(KRoute.login.path) ||
+              state.uri.toString().contains(KRoute.signUp.path)
+          ? KRoute.home.path
+          : null;
+    }
+    return null;
+  },
   routes: [
     GoRoute(
       name: KRoute.login.name,

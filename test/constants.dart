@@ -47,6 +47,7 @@ abstract class KTestText {
 
   static const usernameCorrect = 'test_username';
   static const passwordCorrect = 'test_Password1';
+  static const passwordWrong = 'test_Password1_wrong';
   static const usernameEmpty = '';
   static const passwordEmpty = '';
   static const usernameIncorrect = 'test_';
@@ -55,6 +56,7 @@ abstract class KTestText {
   static const shortPassword = 'Pas1';
 
   static const useremail = 'example@gmail.com';
+  static const useremailWrong = 'example_wrong@gmail.com';
   static const useremailIncorrect = 'examplegmail.com';
   static const shortUserEmail = '@.com';
 
