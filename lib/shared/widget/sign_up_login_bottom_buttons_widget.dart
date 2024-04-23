@@ -14,6 +14,8 @@ class SignUpLoginBottomButtonsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     if (isDesk) {
       return Column(
+        crossAxisAlignment:
+            isDesk ? CrossAxisAlignment.start : CrossAxisAlignment.center,
         key: KWidgetkeys.widget.signUpBottomButtons.desk,
         children: [
           Row(
