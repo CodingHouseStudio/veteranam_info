@@ -2,6 +2,7 @@
 abstract class KDimensions {
   static const storyCardMaxLines = 10;
   static const donateCardsLine = 3;
-  static const donateCardSmallExpanded = 3;
+  static const donateCardSmallExpanded = 2;
   static const donateCardBigExpanded = 4;
+  static const donateCardStandartExpanded = 3;
 }
