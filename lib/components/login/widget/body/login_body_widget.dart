@@ -55,7 +55,8 @@ class LoginBodyWidget extends StatelessWidget {
               KSizedBox.kHeightSizedBox16,
             ButtonWidget(
               key: KWidgetkeys.screen.login.button,
-              text: context.l10n.login,
+              text:
+                  _.showPasswordField ? context.l10n.login : context.l10n.next,
               onPressed: () => context.read<LoginBloc>().add(
                     const LoginEvent.loginSubmitted(),
                   ),
