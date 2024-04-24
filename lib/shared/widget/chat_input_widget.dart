@@ -38,21 +38,21 @@ class ChatInputWidget extends StatelessWidget {
             child: Row(
               children: [
                 Container(
-                  height: 8,
-                  width: 8,
+                  height: KSize.kPixel8,
+                  width: KSize.kPixel8,
                   decoration: KWidetTheme.boxDecorationCircular,
                 ),
                 KSizedBox.kWidthSizedBox8,
                 Container(
-                  height: 8,
-                  width: 8,
+                  height: KSize.kPixel8,
+                  width: KSize.kPixel8,
                   decoration: KWidetTheme.boxDecorationCircular
                       .copyWith(color: AppColors.blackWhite),
                 ),
                 KSizedBox.kWidthSizedBox8,
                 Container(
-                  height: 8,
-                  width: 8,
+                  height: KSize.kPixel8,
+                  width: KSize.kPixel8,
                   decoration: KWidetTheme.boxDecorationCircular
                       .copyWith(color: AppColors.grey),
                 ),
