@@ -23,13 +23,11 @@ Future<void> listQuestionHelper(
 
   await scrollingHelper(
     tester: tester,
-    itemKey: null,
     offset: KTestConstants.scrollingUp,
   );
 
   await scrollingHelper(
     tester: tester,
-    itemKey: null,
     offset: KTestConstants.scrollingDown500,
   );
 
@@ -40,7 +38,6 @@ Future<void> listQuestionHelper(
 
   await scrollingHelper(
     tester: tester,
-    itemKey: null,
     offset: KTestConstants.scrollingDown500,
   );
 

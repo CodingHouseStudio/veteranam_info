@@ -14,7 +14,6 @@ Future<void> boxexHelper({
   for (var i = 0; i < boxWidgetsIcon.length; i++) {
     await scrollingHelper(
       tester: tester,
-      itemKey: null,
       itemFinder: find.byWidget(boxWidgetsIcon.elementAt(i)),
     );
 

@@ -47,7 +47,6 @@ void main() {
 
       await scrollingHelper(
         tester: tester,
-        itemKey: null,
         offset: KTestConstants.scrollingDown,
       );
 
@@ -82,7 +81,6 @@ void main() {
 
       await scrollingHelper(
         tester: tester,
-        itemKey: null,
         offset: KTestConstants.scrollingUp,
       );
 
@@ -132,7 +130,6 @@ void main() {
 
       await scrollingHelper(
         tester: tester,
-        itemKey: null,
         offset: KTestConstants.scrollingUp,
       );
 

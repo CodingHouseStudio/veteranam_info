@@ -8,7 +8,6 @@ Future<void> signUpBottomButtonsHelper(
 ) async {
   await scrollingHelper(
     tester: tester,
-    itemKey: null,
     offset: KTestConstants.scrollingDown,
   );
 

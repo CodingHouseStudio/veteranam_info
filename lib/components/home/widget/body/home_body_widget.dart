@@ -21,8 +21,7 @@ class HomeBodyWidget extends StatelessWidget {
             return const CircularProgressIndicator.adaptive();
           case HomeWatcherStateSuccess():
             final questionModelItems = state.questionModelItems;
-            return ScaffoldWidget(
-              hasMic: false,
+            return HomeScaffoldWidget(
               childWidgetsFunction: ({required isDesk}) => [
                 if (isDesk)
                   KSizedBox.kHeightSizedBox24
