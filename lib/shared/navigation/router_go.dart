@@ -22,7 +22,7 @@ final GoRouter router = GoRouter(
         AuthenticationStatus.authenticated) {
       return state.uri.toString().contains(KRoute.login.path) ||
               state.uri.toString().contains(KRoute.signUp.path)
-          ? KRoute.home.path
+          ? KRoute.questionsForm.path
           : null;
     }
     return null;
@@ -42,6 +42,14 @@ final GoRouter router = GoRouter(
       pageBuilder: (context, state) => NoTransitionPage(
         key: state.pageKey,
         child: const SignUpScreen(),
+      ),
+    ),
+    GoRoute(
+      name: KRoute.questionsForm.name,
+      path: KRoute.questionsForm.path,
+      pageBuilder: (context, state) => NoTransitionPage(
+        key: state.pageKey,
+        child: const QuestionsFormScreen(),
       ),
     ),
     GoRoute(
