@@ -13,6 +13,7 @@ class EmailPasswordFieldsWidget extends StatefulWidget {
     this.errorTextEmail,
     this.errorTextPassword,
   });
+
   final bool showPassword;
   final bool isDesk;
   final void Function(String) onChangedEmail;
@@ -30,6 +31,8 @@ class EmailPasswordFieldsWidget extends StatefulWidget {
 class _EmailPasswordFieldsWidgetState extends State<EmailPasswordFieldsWidget> {
   late TextEditingController emailController;
   late TextEditingController passwordController;
+  bool obscurePassword = true;
+
   @override
   void initState() {
     emailController = TextEditingController();
@@ -86,6 +89,18 @@ class _EmailPasswordFieldsWidgetState extends State<EmailPasswordFieldsWidget> {
             hintText: context.l10n.createSecurePassword,
             isDesk: widget.isDesk,
             controller: passwordController,
+            suffixIcon: Padding(
+              padding: const EdgeInsets.only(right: KPadding.kPaddingSize12),
+              child: IconButton(
+                icon: obscurePassword ? KIcon.eyeOff : KIcon.eye,
+                onPressed: () {
+                  setState(() {
+                    obscurePassword = !obscurePassword;
+                  });
+                },
+              ),
+            ),
+            obscureText: obscurePassword,
           )
         else
           TextFieldWidget(
