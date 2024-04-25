@@ -11,7 +11,6 @@ Future<void> footerButtonsHelper({
   await scrollingHelper(
     tester: tester,
     offset: KTestConstants.scrollingDown,
-    itemKey: null,
   );
 
   await changeWindowSizeHelper(tester: tester);

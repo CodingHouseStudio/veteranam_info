@@ -13,7 +13,7 @@ import '../text_dependency.dart';
 /// itemFinder sets which widget will be scrolled to by its Finder
 Future<void> scrollingHelper({
   required WidgetTester tester,
-  required Key? itemKey,
+  Key? itemKey,
   Finder? itemFinder,
   Offset? offset,
 }) async {

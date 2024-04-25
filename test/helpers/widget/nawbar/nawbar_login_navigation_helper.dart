@@ -11,7 +11,6 @@ Future<void> nawbarLoginNavigationHelper({
   await scrollingHelper(
     tester: tester,
     offset: KTestConstants.scrollingUp,
-    itemKey: null,
   );
 
   expect(
