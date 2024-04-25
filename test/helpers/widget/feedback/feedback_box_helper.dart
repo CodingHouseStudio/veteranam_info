@@ -8,7 +8,6 @@ Future<void> feedbackBoxHelper(
 ) async {
   await scrollingHelper(
     tester: tester,
-    itemKey: null,
     offset: KTestConstants.scrollingUp500,
   );
 
