@@ -12,9 +12,6 @@ class App extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => GetIt.I.get<LanguageCubit>()..initLanguage(),
-        ),
-        BlocProvider(
           create: (context) => GetIt.I.get<ScrollCubit>()..initial(),
         ),
         BlocProvider(
@@ -36,19 +33,15 @@ class AppWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<LanguageCubit, Language?>(
-      builder: (context, state) {
-        return BlocBuilder<AuthenticationBloc, AuthenticationState>(
-          builder: (context, _) {
-            return MaterialApp.router(
-              key: KWidgetkeys.screen.app.screen,
-              theme: themeData,
-              localizationsDelegates: AppLocalizations.localizationsDelegates,
-              locale: state?.value,
-              supportedLocales: AppLocalizations.supportedLocales,
-              routerConfig: router,
-            );
-          },
+    return BlocBuilder<AuthenticationBloc, AuthenticationState>(
+      builder: (context, _) {
+        return MaterialApp.router(
+          key: KWidgetkeys.screen.app.screen,
+          theme: themeData,
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          locale: _.userSetting.locale.value,
+          supportedLocales: AppLocalizations.supportedLocales,
+          routerConfig: router,
         );
       },
     );
