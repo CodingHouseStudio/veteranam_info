@@ -283,6 +283,24 @@ class MockFirestoreService extends _i1.Mock implements _i3.FirestoreService {
       ) as _i6.Future<void>);
 
   @override
+  _i6.Future<void> setUserSetting({
+    required _i3.UserSetting? userSetting,
+    required String? userId,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #setUserSetting,
+          [],
+          {
+            #userSetting: userSetting,
+            #userId: userId,
+          },
+        ),
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
+
+  @override
   _i6.Future<_i3.UserSetting> getUserSetting(String? userId) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -362,6 +380,13 @@ class MockIAppAuthenticationRepository extends _i1.Mock
       ) as _i6.Stream<_i3.User>);
 
   @override
+  _i6.Stream<_i3.UserSetting> get userSetting => (super.noSuchMethod(
+        Invocation.getter(#userSetting),
+        returnValue: _i6.Stream<_i3.UserSetting>.empty(),
+        returnValueForMissingStub: _i6.Stream<_i3.UserSetting>.empty(),
+      ) as _i6.Stream<_i3.UserSetting>);
+
+  @override
   _i3.User get currentUser => (super.noSuchMethod(
         Invocation.getter(#currentUser),
         returnValue: _FakeUser_2(
@@ -373,6 +398,19 @@ class MockIAppAuthenticationRepository extends _i1.Mock
           Invocation.getter(#currentUser),
         ),
       ) as _i3.User);
+
+  @override
+  _i3.UserSetting get currentUserSetting => (super.noSuchMethod(
+        Invocation.getter(#currentUserSetting),
+        returnValue: _FakeUserSetting_1(
+          this,
+          Invocation.getter(#currentUserSetting),
+        ),
+        returnValueForMissingStub: _FakeUserSetting_1(
+          this,
+          Invocation.getter(#currentUserSetting),
+        ),
+      ) as _i3.UserSetting);
 
   @override
   _i6.Future<_i2.Either<_i3.SomeFailure, bool>> signUpWithGoogle() =>
@@ -528,6 +566,29 @@ class MockIAppAuthenticationRepository extends _i1.Mock
       ) as _i6.Future<String?>);
 
   @override
+  _i6.Future<_i3.UserSetting> getUserSetting() => (super.noSuchMethod(
+        Invocation.method(
+          #getUserSetting,
+          [],
+        ),
+        returnValue: _i6.Future<_i3.UserSetting>.value(_FakeUserSetting_1(
+          this,
+          Invocation.method(
+            #getUserSetting,
+            [],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i6.Future<_i3.UserSetting>.value(_FakeUserSetting_1(
+          this,
+          Invocation.method(
+            #getUserSetting,
+            [],
+          ),
+        )),
+      ) as _i6.Future<_i3.UserSetting>);
+
+  @override
   _i6.Future<_i2.Either<_i3.SomeFailure, bool>> sendVerificationCode(
           {required String? email}) =>
       (super.noSuchMethod(
@@ -579,6 +640,33 @@ class MockIAppAuthenticationRepository extends _i1.Mock
           Invocation.method(
             #deleteUser,
             [],
+          ),
+        )),
+      ) as _i6.Future<_i2.Either<_i3.SomeFailure, bool>>);
+
+  @override
+  _i6.Future<_i2.Either<_i3.SomeFailure, bool>> updateUserSetting(
+          _i3.UserSetting? userSetting) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateUserSetting,
+          [userSetting],
+        ),
+        returnValue: _i6.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
+            _FakeEither_0<_i3.SomeFailure, bool>(
+          this,
+          Invocation.method(
+            #updateUserSetting,
+            [userSetting],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i6.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
+                _FakeEither_0<_i3.SomeFailure, bool>(
+          this,
+          Invocation.method(
+            #updateUserSetting,
+            [userSetting],
           ),
         )),
       ) as _i6.Future<_i2.Either<_i3.SomeFailure, bool>>);
@@ -613,6 +701,13 @@ class MockAppAuthenticationRepository extends _i1.Mock
       ) as _i6.Stream<_i3.User>);
 
   @override
+  _i6.Stream<_i3.UserSetting> get userSetting => (super.noSuchMethod(
+        Invocation.getter(#userSetting),
+        returnValue: _i6.Stream<_i3.UserSetting>.empty(),
+        returnValueForMissingStub: _i6.Stream<_i3.UserSetting>.empty(),
+      ) as _i6.Stream<_i3.UserSetting>);
+
+  @override
   _i3.User get currentUser => (super.noSuchMethod(
         Invocation.getter(#currentUser),
         returnValue: _FakeUser_2(
@@ -624,6 +719,19 @@ class MockAppAuthenticationRepository extends _i1.Mock
           Invocation.getter(#currentUser),
         ),
       ) as _i3.User);
+
+  @override
+  _i3.UserSetting get currentUserSetting => (super.noSuchMethod(
+        Invocation.getter(#currentUserSetting),
+        returnValue: _FakeUserSetting_1(
+          this,
+          Invocation.getter(#currentUserSetting),
+        ),
+        returnValueForMissingStub: _FakeUserSetting_1(
+          this,
+          Invocation.getter(#currentUserSetting),
+        ),
+      ) as _i3.UserSetting);
 
   @override
   _i6.Future<_i2.Either<_i3.SomeFailure, bool>> signUpWithGoogle() =>
@@ -779,6 +887,29 @@ class MockAppAuthenticationRepository extends _i1.Mock
       ) as _i6.Future<String?>);
 
   @override
+  _i6.Future<_i3.UserSetting> getUserSetting() => (super.noSuchMethod(
+        Invocation.method(
+          #getUserSetting,
+          [],
+        ),
+        returnValue: _i6.Future<_i3.UserSetting>.value(_FakeUserSetting_1(
+          this,
+          Invocation.method(
+            #getUserSetting,
+            [],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i6.Future<_i3.UserSetting>.value(_FakeUserSetting_1(
+          this,
+          Invocation.method(
+            #getUserSetting,
+            [],
+          ),
+        )),
+      ) as _i6.Future<_i3.UserSetting>);
+
+  @override
   _i6.Future<_i2.Either<_i3.SomeFailure, bool>> sendVerificationCode(
           {required String? email}) =>
       (super.noSuchMethod(
@@ -833,6 +964,33 @@ class MockAppAuthenticationRepository extends _i1.Mock
           ),
         )),
       ) as _i6.Future<_i2.Either<_i3.SomeFailure, bool>>);
+
+  @override
+  _i6.Future<_i2.Either<_i3.SomeFailure, bool>> updateUserSetting(
+          _i3.UserSetting? userSetting) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateUserSetting,
+          [userSetting],
+        ),
+        returnValue: _i6.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
+            _FakeEither_0<_i3.SomeFailure, bool>(
+          this,
+          Invocation.method(
+            #updateUserSetting,
+            [userSetting],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i6.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
+                _FakeEither_0<_i3.SomeFailure, bool>(
+          this,
+          Invocation.method(
+            #updateUserSetting,
+            [userSetting],
+          ),
+        )),
+      ) as _i6.Future<_i2.Either<_i3.SomeFailure, bool>>);
 }
 
 /// A class which mocks [AuthenticationRepository].
@@ -862,6 +1020,13 @@ class MockAuthenticationRepository extends _i1.Mock
       ) as _i6.Stream<_i3.AuthenticationStatus>);
 
   @override
+  _i6.Stream<_i3.UserSetting> get userSettingStream => (super.noSuchMethod(
+        Invocation.getter(#userSettingStream),
+        returnValue: _i6.Stream<_i3.UserSetting>.empty(),
+        returnValueForMissingStub: _i6.Stream<_i3.UserSetting>.empty(),
+      ) as _i6.Stream<_i3.UserSetting>);
+
+  @override
   _i3.User get currentUser => (super.noSuchMethod(
         Invocation.getter(#currentUser),
         returnValue: _FakeUser_2(
@@ -873,6 +1038,19 @@ class MockAuthenticationRepository extends _i1.Mock
           Invocation.getter(#currentUser),
         ),
       ) as _i3.User);
+
+  @override
+  _i3.UserSetting get currentUserSetting => (super.noSuchMethod(
+        Invocation.getter(#currentUserSetting),
+        returnValue: _FakeUserSetting_1(
+          this,
+          Invocation.getter(#currentUserSetting),
+        ),
+        returnValueForMissingStub: _FakeUserSetting_1(
+          this,
+          Invocation.getter(#currentUserSetting),
+        ),
+      ) as _i3.UserSetting);
 
   @override
   _i6.Future<_i2.Either<_i3.SomeFailure, bool>> logIn({
@@ -958,6 +1136,18 @@ class MockAuthenticationRepository extends _i1.Mock
           #sendVerificationCodeToEmail,
           [],
           {#email: email},
+        ),
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
+
+  @override
+  _i6.Future<void> updateUserSetting({required _i3.UserSetting? userSetting}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateUserSetting,
+          [],
+          {#userSetting: userSetting},
         ),
         returnValue: _i6.Future<void>.value(),
         returnValueForMissingStub: _i6.Future<void>.value(),

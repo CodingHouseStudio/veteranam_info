@@ -4,7 +4,6 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
-
 import 'package:kozak/shared/shared.dart';
 
 part 'authentication_event.dart';
@@ -19,7 +18,9 @@ class AuthenticationBloc
         super(
           authenticationRepository.currentUser.isNotEmpty
               ? AuthenticationState.authenticated(
-                  authenticationRepository.currentUser,
+                  currentUser: authenticationRepository.currentUser,
+                  currentUserSetting:
+                      authenticationRepository.currentUserSetting,
                 )
               : const AuthenticationState.unknown(),
         ) {
@@ -27,16 +28,21 @@ class AuthenticationBloc
     on<AuthenticationLogoutRequested>(_onAuthenticationLogoutRequested);
     on<AuthenticationInitialized>(_onAuthenticationInitialized);
     on<_AppUserChanged>(_onUserChanged);
+    on<_AppUserSettingChanged>(_onUserSettingChanged);
+    on<AppLanguageChanged>(_onAppLanguageChanged);
+    on<AppUserRoleChanged>(_onAppUserRoleChanged);
   }
 
   final AuthenticationRepository _authenticationRepository;
   late StreamSubscription<AuthenticationStatus>
       authenticationStatusSubscription;
+  late StreamSubscription<UserSetting> userSettingSubscription;
   static const String tokenKey = KAppText.authTokenKey;
 
   @override
   Future<void> close() {
     authenticationStatusSubscription.cancel();
+    userSettingSubscription.cancel();
     _authenticationRepository.dispose();
     return super.close();
   }
@@ -52,7 +58,8 @@ class AuthenticationBloc
       case AuthenticationStatus.authenticated:
         return emit(
           AuthenticationState.authenticated(
-            _authenticationRepository.currentUser,
+            currentUser: _authenticationRepository.currentUser,
+            currentUserSetting: _authenticationRepository.currentUserSetting,
           ),
         );
       case AuthenticationStatus.unknown:
@@ -74,6 +81,10 @@ class AuthenticationBloc
     authenticationStatusSubscription = _authenticationRepository.status.listen(
       (status) => add(AuthenticationStatusChanged(status)),
     );
+    userSettingSubscription =
+        _authenticationRepository.userSettingStream.listen(
+      (userSetting) => add(_AppUserSettingChanged(userSetting)),
+    );
   }
 
   void _onUserChanged(
@@ -81,7 +92,63 @@ class AuthenticationBloc
     Emitter<AuthenticationState> emit,
   ) {
     emit(
-      AuthenticationState.authenticated(_authenticationRepository.currentUser),
+      AuthenticationState.authenticated(
+        currentUser: event.user,
+        currentUserSetting: state.userSetting,
+      ),
     );
+  }
+
+  void _onUserSettingChanged(
+    _AppUserSettingChanged event,
+    Emitter<AuthenticationState> emit,
+  ) {
+    emit(
+      state.copyWith(
+        userSetting: event.userSetting,
+      ),
+    );
+  }
+
+  Future<void> _onAppLanguageChanged(
+    AppLanguageChanged event,
+    Emitter<AuthenticationState> emit,
+  ) async {
+    late var userSetting = state.userSetting.copyWith(
+      locale: event.language,
+    );
+    if (state.user != null) {
+      userSetting = userSetting.copyWith(
+        id: state.user!.id,
+      );
+      await _authenticationRepository.updateUserSetting(
+        userSetting: userSetting,
+      );
+    }
+    emit(
+      state.copyWith(
+        userSetting: userSetting,
+      ),
+    );
+  }
+
+  Future<void> _onAppUserRoleChanged(
+    AppUserRoleChanged event,
+    Emitter<AuthenticationState> emit,
+  ) async {
+    if (state.user != null) {
+      final userSetting = state.userSetting.copyWith(
+        id: state.user!.id,
+        userRole: event.userRole,
+      );
+      await _authenticationRepository.updateUserSetting(
+        userSetting: userSetting,
+      );
+      emit(
+        state.copyWith(
+          userSetting: userSetting,
+        ),
+      );
+    }
   }
 }

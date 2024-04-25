@@ -13,25 +13,44 @@ class AuthenticationRepository {
     this.iAppAuthenticationRepository,
   ) {
     // Listen to currentUser changes and emit auth status
-    _controller = StreamController<AuthenticationStatus>.broadcast(
+    _authenticationStatuscontroller =
+        StreamController<AuthenticationStatus>.broadcast(
       onListen: _onStatusStreamListen,
       onCancel: _onStatusStreamCancel,
+    );
+    _userSettingcontroller = StreamController<UserSetting>.broadcast(
+      onListen: _onUserSettingStreamListen,
+      onCancel: _onUserSettingStreamCancel,
     );
   }
 
   final IAppAuthenticationRepository iAppAuthenticationRepository;
-  late final StreamController<AuthenticationStatus> _controller;
+  late final StreamController<AuthenticationStatus>
+      _authenticationStatuscontroller;
   StreamSubscription<User>? _userSubscription;
+  late final StreamController<UserSetting> _userSettingcontroller;
+  StreamSubscription<UserSetting>? _userSettingSubscription;
 
   void _onStatusStreamListen() {
     _userSubscription ??= iAppAuthenticationRepository.user.listen(
       (currentUser) {
         if (currentUser != User.empty) {
-          _controller.add(AuthenticationStatus.authenticated);
+          _authenticationStatuscontroller.add(
+            AuthenticationStatus.authenticated,
+          );
         } else {
-          _controller.add(AuthenticationStatus.unauthenticated);
+          _authenticationStatuscontroller.add(
+            AuthenticationStatus.unauthenticated,
+          );
         }
       },
+    );
+  }
+
+  void _onUserSettingStreamListen() {
+    _userSettingSubscription ??=
+        iAppAuthenticationRepository.userSetting.listen(
+      (currentUserSetting) => _userSettingcontroller.add(currentUserSetting),
     );
   }
 
@@ -40,7 +59,15 @@ class AuthenticationRepository {
     _userSubscription = null;
   }
 
-  Stream<AuthenticationStatus> get status => _controller.stream;
+  void _onUserSettingStreamCancel() {
+    _userSettingSubscription?.cancel();
+    _userSettingSubscription = null;
+  }
+
+  Stream<AuthenticationStatus> get status =>
+      _authenticationStatuscontroller.stream;
+
+  Stream<UserSetting> get userSettingStream => _userSettingcontroller.stream;
 
   // /// Stream of [User] which will emit the current user when
   // /// the authentication state changes.
@@ -56,6 +83,10 @@ class AuthenticationRepository {
 
   User get currentUser {
     return iAppAuthenticationRepository.currentUser;
+  }
+
+  UserSetting get currentUserSetting {
+    return iAppAuthenticationRepository.currentUserSetting;
   }
 
   // Stream<AuthenticationStatus> get status async* {
@@ -87,12 +118,14 @@ class AuthenticationRepository {
     return result.fold(
       (l) {
         debugPrint('error: $l');
-        _controller.add(AuthenticationStatus.unauthenticated);
+        _authenticationStatuscontroller.add(
+          AuthenticationStatus.unauthenticated,
+        );
         return Left(l);
       },
       (r) {
         debugPrint('authenticated');
-        _controller.add(AuthenticationStatus.authenticated);
+        _authenticationStatuscontroller.add(AuthenticationStatus.authenticated);
         return Right(r);
       },
     );
@@ -103,12 +136,14 @@ class AuthenticationRepository {
     return result.fold(
       (l) {
         debugPrint('error: $l');
-        _controller.add(AuthenticationStatus.unauthenticated);
+        _authenticationStatuscontroller.add(
+          AuthenticationStatus.unauthenticated,
+        );
         return Left(l);
       },
       (r) {
         debugPrint('authenticated');
-        _controller.add(AuthenticationStatus.authenticated);
+        _authenticationStatuscontroller.add(AuthenticationStatus.authenticated);
         return Right(r);
       },
     );
@@ -134,7 +169,7 @@ class AuthenticationRepository {
       debugPrint(e.toString());
     } finally {
       debugPrint('ever reached here?');
-      _controller.add(AuthenticationStatus.unauthenticated);
+      _authenticationStatuscontroller.add(AuthenticationStatus.unauthenticated);
     }
   }
 
@@ -151,8 +186,21 @@ class AuthenticationRepository {
     );
   }
 
+  Future<void> updateUserSetting({required UserSetting userSetting}) async {
+    final result =
+        await iAppAuthenticationRepository.updateUserSetting(userSetting);
+    result.fold(
+      (failure) {
+        debugPrint('Sending error: $failure');
+      },
+      (success) {
+        debugPrint('Sending succeses $userSetting');
+      },
+    );
+  }
+
   void dispose() {
-    _controller.close();
+    _authenticationStatuscontroller.close();
     _userSubscription?.cancel();
   }
 }

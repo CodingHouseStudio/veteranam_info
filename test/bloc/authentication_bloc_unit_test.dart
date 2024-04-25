@@ -16,6 +16,9 @@ class MockAuthenticationRepositoryUnitTest extends Mock
   @override
   Stream<AuthenticationStatus> get status =>
       Stream.value(AuthenticationStatus.unknown);
+
+  @override
+  Stream<UserSetting> get userSettingStream => Stream.value(UserSetting.empty);
 }
 
 void main() {
@@ -226,7 +229,10 @@ void main() {
         },
         expect: () async => [
           const AuthenticationState.unknown(),
-          const AuthenticationState.authenticated(User.empty),
+          const AuthenticationState.authenticated(
+            currentUser: User.empty,
+            currentUserSetting: UserSetting.empty,
+          ),
         ],
       );
       blocTest<AuthenticationBloc, AuthenticationState>(

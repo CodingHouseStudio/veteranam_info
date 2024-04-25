@@ -1,21 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:kozak/shared/shared.dart';
 
-class CheckPointWidget extends StatefulWidget {
-  const CheckPointWidget({required this.onChanged, super.key});
-  final void Function({required bool isCheck}) onChanged;
-
-  @override
-  State<CheckPointWidget> createState() => _CheckPointWidgetState();
-}
-
-class _CheckPointWidgetState extends State<CheckPointWidget> {
-  late bool isCheck;
-  @override
-  void initState() {
-    isCheck = false;
-    super.initState();
-  }
+class CheckPointWidget extends StatelessWidget {
+  const CheckPointWidget({
+    required this.onChanged,
+    required this.isCheck,
+    super.key,
+  });
+  final void Function() onChanged;
+  final bool isCheck;
 
   @override
   Widget build(BuildContext context) {
@@ -32,12 +25,7 @@ class _CheckPointWidgetState extends State<CheckPointWidget> {
         borderRadius: KBorderRadius.kBorderRadius8,
       ),
       child: InkWell(
-        onTap: () {
-          setState(() {
-            isCheck = !isCheck;
-          });
-          widget.onChanged(isCheck: isCheck);
-        },
+        onTap: onChanged,
         child: isCheck
             ? KIcon.check.setIconKey(
                 KWidgetkeys.widget.checkPoint.icon,
