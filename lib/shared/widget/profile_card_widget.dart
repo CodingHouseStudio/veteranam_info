@@ -81,7 +81,10 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: AppTextStyle.text24),
+        Padding(
+          padding: const EdgeInsets.only(bottom: KPadding.kPaddingSize4),
+          child: Text(label, style: AppTextStyle.text24),
+        ),
         TextFieldWidget(
           onChanged: (value) {},
           widgetKey: KWidgetkeys.widget.profileCardWidget.textFiled,
