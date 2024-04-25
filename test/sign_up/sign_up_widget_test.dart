@@ -21,18 +21,24 @@ void main() {
     late IAppAuthenticationRepository mockAppAuthenticationRepository;
     late SignUpBloc signUpBloc;
     setUp(() {
-      {
-        ExtendedDateTime.customTime = KTestText.feedbackModel.timestamp;
-        mockAppAuthenticationRepository = MockIAppAuthenticationRepository();
-        when(
-          mockAppAuthenticationRepository.signUp(
-            email: KTestText.useremail,
-            password: KTestText.passwordCorrect,
-          ),
-        ).thenAnswer(
-          (invocation) async => const Right(true),
-        );
-      }
+      ExtendedDateTime.customTime = KTestText.feedbackModel.timestamp;
+      mockAppAuthenticationRepository = MockIAppAuthenticationRepository();
+      when(
+        mockAppAuthenticationRepository.signUp(
+          email: KTestText.useremail,
+          password: KTestText.passwordCorrect,
+        ),
+      ).thenAnswer(
+        (invocation) async => const Right(true),
+      );
+      when(
+        mockAppAuthenticationRepository.signUp(
+          email: KTestText.useremailWrong,
+          password: KTestText.passwordWrong,
+        ),
+      ).thenAnswer(
+        (invocation) async => const Left(SomeFailure.serverError()),
+      );
     });
 
     void registerSignUpkBloc() {
@@ -92,6 +98,11 @@ void main() {
         findsOneWidget,
       );
 
+      expect(
+        find.byKey(KWidgetkeys.screen.signUp.failureMessage),
+        findsNothing,
+      );
+
       await leftCardHelper(tester);
 
       await emailPasswordFieldsHelper(tester: tester, showPassword: false);
@@ -129,6 +140,11 @@ void main() {
         tester: tester,
         showPassword: false,
       );
+
+      expect(
+        find.byKey(KWidgetkeys.screen.signUp.failureMessage),
+        findsNothing,
+      );
     });
 
     testWidgets('Write correct email and hide password', (tester) async {
@@ -158,6 +174,89 @@ void main() {
       await emailPasswordFieldsHidePasHelper(tester);
 
       await emailPasswordFieldsHelper(tester: tester, showPassword: false);
+    });
+    testWidgets(
+        'Write correct email and incorect password and'
+        ' tap submited', (tester) async {
+      registerSignUpkBloc();
+      await tester.pumpApp(
+        const SignUpScreen(),
+      );
+
+      expect(
+        find.byKey(KWidgetkeys.screen.signUp.screen),
+        findsOneWidget,
+      );
+
+      await tester.pumpAndSettle();
+
+      await signUpFieldsHelper(
+        tester: tester,
+        password: KTestText.passwordIncorrect,
+        email: KTestText.useremail,
+        dataIsCorrect: false,
+      );
+
+      expect(
+        find.byKey(KWidgetkeys.screen.signUp.failureMessage),
+        findsNothing,
+      );
+    });
+
+    testWidgets(
+        'Write correct email and password and'
+        ' tap submited', (tester) async {
+      registerSignUpkBloc();
+      await tester.pumpApp(
+        const SignUpScreen(),
+      );
+
+      expect(
+        find.byKey(KWidgetkeys.screen.signUp.screen),
+        findsOneWidget,
+      );
+
+      await tester.pumpAndSettle();
+
+      await signUpFieldsHelper(
+        tester: tester,
+        password: KTestText.passwordCorrect,
+        email: KTestText.useremail,
+        dataIsCorrect: true,
+      );
+
+      expect(
+        find.byKey(KWidgetkeys.screen.signUp.failureMessage),
+        findsNothing,
+      );
+    });
+
+    testWidgets(
+        'Write wrong email and password and'
+        ' tap submited', (tester) async {
+      registerSignUpkBloc();
+      await tester.pumpApp(
+        const SignUpScreen(),
+      );
+
+      expect(
+        find.byKey(KWidgetkeys.screen.signUp.screen),
+        findsOneWidget,
+      );
+
+      await tester.pumpAndSettle();
+
+      await signUpFieldsHelper(
+        tester: tester,
+        password: KTestText.passwordWrong,
+        email: KTestText.useremailWrong,
+        dataIsCorrect: true,
+      );
+
+      expect(
+        find.byKey(KWidgetkeys.screen.signUp.failureMessage),
+        findsOneWidget,
+      );
     });
     group('${KGroupText.goRouter} ', () {
       late MockGoRouter mockGoRouter;
@@ -210,6 +309,11 @@ void main() {
           findsOneWidget,
         );
 
+        expect(
+          find.byKey(KWidgetkeys.screen.signUp.failureMessage),
+          findsNothing,
+        );
+
         await leftCardHelper(tester);
 
         await emailPasswordFieldsHelper(tester: tester, showPassword: false);
@@ -232,54 +336,6 @@ void main() {
 
           await loginNavigationHelper(
             tester: tester,
-            mockGoRouter: mockGoRouter,
-          );
-        });
-        testWidgets('Write correct email and incorect password',
-            (tester) async {
-          registerSignUpkBloc();
-          await tester.pumpApp(
-            const SignUpScreen(),
-            mockGoRouter: mockGoRouter,
-          );
-
-          expect(
-            find.byKey(KWidgetkeys.screen.signUp.screen),
-            findsOneWidget,
-          );
-
-          await tester.pumpAndSettle();
-
-          await signUpFieldsHelper(
-            tester: tester,
-            password: KTestText.passwordIncorrect,
-            email: KTestText.useremail,
-            dataIsCorrect: false,
-            mockGoRouter: mockGoRouter,
-          );
-        });
-
-        testWidgets(
-            'Write correct email and password and Navigate'
-            ' to ${KScreenBlocName.home}', (tester) async {
-          registerSignUpkBloc();
-          await tester.pumpApp(
-            const SignUpScreen(),
-            mockGoRouter: mockGoRouter,
-          );
-
-          expect(
-            find.byKey(KWidgetkeys.screen.signUp.screen),
-            findsOneWidget,
-          );
-
-          await tester.pumpAndSettle();
-
-          await signUpFieldsHelper(
-            tester: tester,
-            password: KTestText.passwordCorrect,
-            email: KTestText.useremail,
-            dataIsCorrect: true,
             mockGoRouter: mockGoRouter,
           );
         });

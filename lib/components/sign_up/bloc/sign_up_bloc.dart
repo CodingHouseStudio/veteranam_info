@@ -85,7 +85,10 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
             failure: l.toSignUpError(),
             showPasswordField: false,
           ),
-          (r) => state.copyWith(failure: SignUpError.none),
+          (r) => state.copyWith(
+            failure: SignUpError.none,
+            showPasswordField: false,
+          ),
         ),
       );
     } else {
