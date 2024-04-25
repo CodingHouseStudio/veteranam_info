@@ -8,16 +8,61 @@ class WorkBodyWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScaffoldWidget(
       childWidgetsFunction: ({required isDesk}) => [
-        KSizedBox.kHeightSizedBox30,
-        WorkCardWidget(
-          title: KMockText.workTitle,
-          city: KMockText.workCity,
-          price: KMockText.workPrice,
-          description: KMockText.workDescription,
-          employer: KMockText.workEmployer,
-          isDesk: isDesk,
+        if (isDesk)
+          KSizedBox.kHeightSizedBox40
+        else
+          KSizedBox.kHeightSizedBox24,
+        Text(
+          context.l10n.work,
+          style: isDesk ? AppTextStyle.text96 : AppTextStyle.text32,
         ),
-        KSizedBox.kHeightSizedBox30,
+        KSizedBox.kHeightSizedBox8,
+        Text(
+          context.l10n.workSubtitle,
+          style: isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
+        ),
+        if (isDesk)
+          KSizedBox.kHeightSizedBox120
+        else
+          KSizedBox.kHeightSizedBox64,
+        if (isDesk)
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              BoxWidget(
+                text: context.l10n.lookingForJob,
+                onTap: () {},
+                isDesk: true,
+                textRightPadding: KPadding.kPaddingSize100,
+              ),
+              KSizedBox.kWidthSizedBox56,
+              BoxWidget(
+                text: context.l10n.givingJob,
+                onTap: () {},
+                isDesk: true,
+                textRightPadding: KPadding.kPaddingSize100,
+              ),
+            ],
+          )
+        else ...[
+          BoxWidget(
+            text: context.l10n.lookingForJob,
+            onTap: () {},
+            isDesk: false,
+            textRightPadding: KPadding.kPaddingSize100,
+          ),
+          KSizedBox.kHeightSizedBox40,
+          BoxWidget(
+            text: context.l10n.givingJob,
+            onTap: () {},
+            isDesk: false,
+            textRightPadding: KPadding.kPaddingSize100,
+          ),
+        ],
+        if (isDesk)
+          KSizedBox.kHeightSizedBox120
+        else
+          KSizedBox.kHeightSizedBox64,
       ],
     );
   }

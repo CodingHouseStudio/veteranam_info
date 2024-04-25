@@ -6,3 +6,4 @@ export 'funds_model.dart';
 export 'information_model.dart';
 export 'question_model.dart';
 export 'user_model.dart';
+export 'work_model.dart';

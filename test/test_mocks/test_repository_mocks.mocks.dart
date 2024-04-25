@@ -260,6 +260,27 @@ class MockFirestoreService extends _i1.Mock implements _i3.FirestoreService {
         returnValue: _i6.Future<void>.value(),
         returnValueForMissingStub: _i6.Future<void>.value(),
       ) as _i6.Future<void>);
+
+  @override
+  _i6.Future<List<_i3.WorkModel>> getWorks() => (super.noSuchMethod(
+        Invocation.method(
+          #getWorks,
+          [],
+        ),
+        returnValue: _i6.Future<List<_i3.WorkModel>>.value(<_i3.WorkModel>[]),
+        returnValueForMissingStub:
+            _i6.Future<List<_i3.WorkModel>>.value(<_i3.WorkModel>[]),
+      ) as _i6.Future<List<_i3.WorkModel>>);
+
+  @override
+  _i6.Future<void> addWork(_i3.WorkModel? work) => (super.noSuchMethod(
+        Invocation.method(
+          #addWork,
+          [work],
+        ),
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
 }
 
 /// A class which mocks [IInvestorsRepository].

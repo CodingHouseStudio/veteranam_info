@@ -43,7 +43,8 @@ abstract class KMockText {
     'Які документи мені потрібно показати, щоб отримати допомогу від партнерів?',
   ];
   static const previousPage = 'Попередня';
-  static const nextPage = 'Наступна';
+  static const nextPage = 'Комлектувальник';
+  static const workCategory = 'Наступна';
   static const questionSubtitle =
       'Використовуйте веб-сайти спеціалізованих сервісів для пошуку роботи, '
       'таких як Indeed, LinkedIn, Glassdoor, Monster, або регіональні '

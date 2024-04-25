@@ -70,4 +70,19 @@ class FirestoreService {
         .doc(fund.id)
         .set(fund.toJson());
   }
+
+  Future<List<WorkModel>> getWorks() async {
+    final docSnapshot = await _db.collection(FirebaseCollectionName.work).get();
+
+    return docSnapshot.docs
+        .map((doc) => WorkModel.fromJson(doc.data()))
+        .toList();
+  }
+
+  Future<void> addWork(WorkModel work) {
+    return _db
+        .collection(FirebaseCollectionName.work)
+        .doc(work.id)
+        .set(work.toJson());
+  }
 }
