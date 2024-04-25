@@ -1,6 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:kozak/shared/shared.dart';
-import 'package:mocktail/mocktail.dart';
 
 import '../../text_dependency.dart';
 
@@ -9,7 +8,6 @@ Future<void> signUpFieldsHelper({
   required String password,
   required String email,
   required bool dataIsCorrect,
-  required MockGoRouter mockGoRouter,
 }) async {
   expect(
     find.byKey(KWidgetkeys.screen.signUp.fields),
@@ -49,9 +47,12 @@ Future<void> signUpFieldsHelper({
 
   await tester.pumpAndSettle();
 
-  if (dataIsCorrect) {
-    verify(() => mockGoRouter.goNamed(KRoute.home.name)).called(1);
-  } else {
-    verifyNever(() => mockGoRouter.goNamed(KRoute.home.name));
-  }
+  expect(
+    find.byKey(KWidgetkeys.widget.emailPasswordFields.fieldEmail),
+    dataIsCorrect ? findsOneWidget : findsNothing,
+  );
+  expect(
+    find.byKey(KWidgetkeys.widget.emailPasswordFields.fieldPassword),
+    dataIsCorrect ? findsNothing : findsOneWidget,
+  );
 }
