@@ -7,7 +7,7 @@ class WorkEmployeeBlocprovider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) {},
+      create: (context) => GetIt.I.get<WorkEmployeeWatcherBloc>(),
       child: childWidget,
     );
   }

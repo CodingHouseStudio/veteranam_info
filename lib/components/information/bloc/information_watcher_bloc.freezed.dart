@@ -1059,12 +1059,12 @@ class _$InformationWatcherStateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$InformationWatcherStateSuccessImplCopyWith<$Res>
+abstract class _$$InformationWatcherStateImplCopyWith<$Res>
     implements $InformationWatcherStateCopyWith<$Res> {
-  factory _$$InformationWatcherStateSuccessImplCopyWith(
-          _$InformationWatcherStateSuccessImpl value,
-          $Res Function(_$InformationWatcherStateSuccessImpl) then) =
-      __$$InformationWatcherStateSuccessImplCopyWithImpl<$Res>;
+  factory _$$InformationWatcherStateImplCopyWith(
+          _$InformationWatcherStateImpl value,
+          $Res Function(_$InformationWatcherStateImpl) then) =
+      __$$InformationWatcherStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1077,13 +1077,13 @@ abstract class _$$InformationWatcherStateSuccessImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$InformationWatcherStateSuccessImplCopyWithImpl<$Res>
+class __$$InformationWatcherStateImplCopyWithImpl<$Res>
     extends _$InformationWatcherStateCopyWithImpl<$Res,
-        _$InformationWatcherStateSuccessImpl>
-    implements _$$InformationWatcherStateSuccessImplCopyWith<$Res> {
-  __$$InformationWatcherStateSuccessImplCopyWithImpl(
-      _$InformationWatcherStateSuccessImpl _value,
-      $Res Function(_$InformationWatcherStateSuccessImpl) _then)
+        _$InformationWatcherStateImpl>
+    implements _$$InformationWatcherStateImplCopyWith<$Res> {
+  __$$InformationWatcherStateImplCopyWithImpl(
+      _$InformationWatcherStateImpl _value,
+      $Res Function(_$InformationWatcherStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1096,7 +1096,7 @@ class __$$InformationWatcherStateSuccessImplCopyWithImpl<$Res>
     Object? itemsLoaded = null,
     Object? failure = freezed,
   }) {
-    return _then(_$InformationWatcherStateSuccessImpl(
+    return _then(_$InformationWatcherStateImpl(
       informationModelItems: null == informationModelItems
           ? _value._informationModelItems
           : informationModelItems // ignore: cast_nullable_to_non_nullable
@@ -1127,9 +1127,8 @@ class __$$InformationWatcherStateSuccessImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$InformationWatcherStateSuccessImpl
-    implements InformationWatcherStateSuccess {
-  const _$InformationWatcherStateSuccessImpl(
+class _$InformationWatcherStateImpl implements InformationWatcherState {
+  const _$InformationWatcherStateImpl(
       {required final List<InformationModel> informationModelItems,
       required final List<InformationModel> filteredInformationModelItems,
       required final List<String>? filters,
@@ -1184,7 +1183,7 @@ class _$InformationWatcherStateSuccessImpl
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$InformationWatcherStateSuccessImpl &&
+            other is _$InformationWatcherStateImpl &&
             const DeepCollectionEquality()
                 .equals(other._informationModelItems, _informationModelItems) &&
             const DeepCollectionEquality().equals(
@@ -1211,22 +1210,20 @@ class _$InformationWatcherStateSuccessImpl
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$InformationWatcherStateSuccessImplCopyWith<
-          _$InformationWatcherStateSuccessImpl>
-      get copyWith => __$$InformationWatcherStateSuccessImplCopyWithImpl<
-          _$InformationWatcherStateSuccessImpl>(this, _$identity);
+  _$$InformationWatcherStateImplCopyWith<_$InformationWatcherStateImpl>
+      get copyWith => __$$InformationWatcherStateImplCopyWithImpl<
+          _$InformationWatcherStateImpl>(this, _$identity);
 }
 
-abstract class InformationWatcherStateSuccess
-    implements InformationWatcherState {
-  const factory InformationWatcherStateSuccess(
+abstract class InformationWatcherState implements InformationWatcherState {
+  const factory InformationWatcherState(
           {required final List<InformationModel> informationModelItems,
           required final List<InformationModel> filteredInformationModelItems,
           required final List<String>? filters,
           required final LoadingStatus loadingStatus,
           required final int itemsLoaded,
           required final InformationFailure? failure}) =
-      _$InformationWatcherStateSuccessImpl;
+      _$InformationWatcherStateImpl;
 
   @override
   List<InformationModel> get informationModelItems;
@@ -1242,7 +1239,6 @@ abstract class InformationWatcherStateSuccess
   InformationFailure? get failure;
   @override
   @JsonKey(ignore: true)
-  _$$InformationWatcherStateSuccessImplCopyWith<
-          _$InformationWatcherStateSuccessImpl>
+  _$$InformationWatcherStateImplCopyWith<_$InformationWatcherStateImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
