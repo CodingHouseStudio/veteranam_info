@@ -56,7 +56,9 @@ class SignUpBodyWidget extends StatelessWidget {
               KSizedBox.kHeightSizedBox16,
             ButtonWidget(
               key: KWidgetkeys.screen.signUp.button,
-              text: context.l10n.register,
+              text: _.showPasswordField
+                  ? context.l10n.register
+                  : context.l10n.next,
               onPressed: () => context.read<SignUpBloc>().add(
                     const SignUpEvent.signUpSubmitted(),
                   ),

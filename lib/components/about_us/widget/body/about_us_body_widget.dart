@@ -16,17 +16,17 @@ class AboutUsBodyWidget extends StatelessWidget {
           isDesk: isDesk,
           onRatingUpdate: (double rating) {},
         ),
-        Row(
-          children: [
-            const ChatInputWidget(
-              messageIcon: KIcon.message,
-              message: KMockText.nickname,
-            ),
-            KSizedBox.kWidthSizedBox24,
-            ChatBotButton(
-              onTap: () {},
-            ),
-          ],
+        const ChatInputWidget(
+          messageIcon: KIcon.message,
+          message: KMockText.nickname,
+        ),
+        KSizedBox.kHeightSizedBox30,
+        ChatBotButton(
+          onTap: () {},
+        ),
+        KSizedBox.kHeightSizedBox30,
+        const ChatInputWidget(
+          messageIcon: KIcon.person,
         ),
         KSizedBox.kHeightSizedBox30,
       ],
