@@ -37,7 +37,6 @@ class AppWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<LanguageCubit, Language?>(
-      buildWhen: (previous, current) => current != previous,
       builder: (context, state) {
         return BlocBuilder<AuthenticationBloc, AuthenticationState>(
           builder: (context, _) {

@@ -36,8 +36,8 @@ class _FakeEither_0<L, R> extends _i1.SmartFake implements _i2.Either<L, R> {
         );
 }
 
-class _FakeUser_1 extends _i1.SmartFake implements _i3.User {
-  _FakeUser_1(
+class _FakeUserSetting_1 extends _i1.SmartFake implements _i3.UserSetting {
+  _FakeUserSetting_1(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -46,9 +46,19 @@ class _FakeUser_1 extends _i1.SmartFake implements _i3.User {
         );
 }
 
-class _FakeIAppAuthenticationRepository_2 extends _i1.SmartFake
+class _FakeUser_2 extends _i1.SmartFake implements _i3.User {
+  _FakeUser_2(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeIAppAuthenticationRepository_3 extends _i1.SmartFake
     implements _i3.IAppAuthenticationRepository {
-  _FakeIAppAuthenticationRepository_2(
+  _FakeIAppAuthenticationRepository_3(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -57,8 +67,8 @@ class _FakeIAppAuthenticationRepository_2 extends _i1.SmartFake
         );
 }
 
-class _FakeFirebaseApp_3 extends _i1.SmartFake implements _i4.FirebaseApp {
-  _FakeFirebaseApp_3(
+class _FakeFirebaseApp_4 extends _i1.SmartFake implements _i4.FirebaseApp {
+  _FakeFirebaseApp_4(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -67,9 +77,9 @@ class _FakeFirebaseApp_3 extends _i1.SmartFake implements _i4.FirebaseApp {
         );
 }
 
-class _FakeActionCodeInfo_4 extends _i1.SmartFake
+class _FakeActionCodeInfo_5 extends _i1.SmartFake
     implements _i5.ActionCodeInfo {
-  _FakeActionCodeInfo_4(
+  _FakeActionCodeInfo_5(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -78,9 +88,9 @@ class _FakeActionCodeInfo_4 extends _i1.SmartFake
         );
 }
 
-class _FakeUserCredential_5 extends _i1.SmartFake
+class _FakeUserCredential_6 extends _i1.SmartFake
     implements _i5.UserCredential {
-  _FakeUserCredential_5(
+  _FakeUserCredential_6(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -89,9 +99,9 @@ class _FakeUserCredential_5 extends _i1.SmartFake
         );
 }
 
-class _FakeConfirmationResult_6 extends _i1.SmartFake
+class _FakeConfirmationResult_7 extends _i1.SmartFake
     implements _i5.ConfirmationResult {
-  _FakeConfirmationResult_6(
+  _FakeConfirmationResult_7(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -260,6 +270,41 @@ class MockFirestoreService extends _i1.Mock implements _i3.FirestoreService {
         returnValue: _i6.Future<void>.value(),
         returnValueForMissingStub: _i6.Future<void>.value(),
       ) as _i6.Future<void>);
+
+  @override
+  _i6.Future<void> updateUserSetting(_i3.UserSetting? userSetting) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateUserSetting,
+          [userSetting],
+        ),
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
+
+  @override
+  _i6.Future<_i3.UserSetting> getUserSetting(String? userId) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getUserSetting,
+          [userId],
+        ),
+        returnValue: _i6.Future<_i3.UserSetting>.value(_FakeUserSetting_1(
+          this,
+          Invocation.method(
+            #getUserSetting,
+            [userId],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i6.Future<_i3.UserSetting>.value(_FakeUserSetting_1(
+          this,
+          Invocation.method(
+            #getUserSetting,
+            [userId],
+          ),
+        )),
+      ) as _i6.Future<_i3.UserSetting>);
 }
 
 /// A class which mocks [IInvestorsRepository].
@@ -319,11 +364,11 @@ class MockIAppAuthenticationRepository extends _i1.Mock
   @override
   _i3.User get currentUser => (super.noSuchMethod(
         Invocation.getter(#currentUser),
-        returnValue: _FakeUser_1(
+        returnValue: _FakeUser_2(
           this,
           Invocation.getter(#currentUser),
         ),
-        returnValueForMissingStub: _FakeUser_1(
+        returnValueForMissingStub: _FakeUser_2(
           this,
           Invocation.getter(#currentUser),
         ),
@@ -570,11 +615,11 @@ class MockAppAuthenticationRepository extends _i1.Mock
   @override
   _i3.User get currentUser => (super.noSuchMethod(
         Invocation.getter(#currentUser),
-        returnValue: _FakeUser_1(
+        returnValue: _FakeUser_2(
           this,
           Invocation.getter(#currentUser),
         ),
-        returnValueForMissingStub: _FakeUser_1(
+        returnValueForMissingStub: _FakeUser_2(
           this,
           Invocation.getter(#currentUser),
         ),
@@ -799,11 +844,11 @@ class MockAuthenticationRepository extends _i1.Mock
   _i3.IAppAuthenticationRepository get iAppAuthenticationRepository =>
       (super.noSuchMethod(
         Invocation.getter(#iAppAuthenticationRepository),
-        returnValue: _FakeIAppAuthenticationRepository_2(
+        returnValue: _FakeIAppAuthenticationRepository_3(
           this,
           Invocation.getter(#iAppAuthenticationRepository),
         ),
-        returnValueForMissingStub: _FakeIAppAuthenticationRepository_2(
+        returnValueForMissingStub: _FakeIAppAuthenticationRepository_3(
           this,
           Invocation.getter(#iAppAuthenticationRepository),
         ),
@@ -819,11 +864,11 @@ class MockAuthenticationRepository extends _i1.Mock
   @override
   _i3.User get currentUser => (super.noSuchMethod(
         Invocation.getter(#currentUser),
-        returnValue: _FakeUser_1(
+        returnValue: _FakeUser_2(
           this,
           Invocation.getter(#currentUser),
         ),
-        returnValueForMissingStub: _FakeUser_1(
+        returnValueForMissingStub: _FakeUser_2(
           this,
           Invocation.getter(#currentUser),
         ),
@@ -1097,11 +1142,11 @@ class MockFirebaseAuth extends _i1.Mock implements _i5.FirebaseAuth {
   @override
   _i4.FirebaseApp get app => (super.noSuchMethod(
         Invocation.getter(#app),
-        returnValue: _FakeFirebaseApp_3(
+        returnValue: _FakeFirebaseApp_4(
           this,
           Invocation.getter(#app),
         ),
-        returnValueForMissingStub: _FakeFirebaseApp_3(
+        returnValueForMissingStub: _FakeFirebaseApp_4(
           this,
           Invocation.getter(#app),
         ),
@@ -1187,7 +1232,7 @@ class MockFirebaseAuth extends _i1.Mock implements _i5.FirebaseAuth {
           #checkActionCode,
           [code],
         ),
-        returnValue: _i6.Future<_i5.ActionCodeInfo>.value(_FakeActionCodeInfo_4(
+        returnValue: _i6.Future<_i5.ActionCodeInfo>.value(_FakeActionCodeInfo_5(
           this,
           Invocation.method(
             #checkActionCode,
@@ -1195,7 +1240,7 @@ class MockFirebaseAuth extends _i1.Mock implements _i5.FirebaseAuth {
           ),
         )),
         returnValueForMissingStub:
-            _i6.Future<_i5.ActionCodeInfo>.value(_FakeActionCodeInfo_4(
+            _i6.Future<_i5.ActionCodeInfo>.value(_FakeActionCodeInfo_5(
           this,
           Invocation.method(
             #checkActionCode,
@@ -1236,7 +1281,7 @@ class MockFirebaseAuth extends _i1.Mock implements _i5.FirebaseAuth {
             #password: password,
           },
         ),
-        returnValue: _i6.Future<_i5.UserCredential>.value(_FakeUserCredential_5(
+        returnValue: _i6.Future<_i5.UserCredential>.value(_FakeUserCredential_6(
           this,
           Invocation.method(
             #createUserWithEmailAndPassword,
@@ -1248,7 +1293,7 @@ class MockFirebaseAuth extends _i1.Mock implements _i5.FirebaseAuth {
           ),
         )),
         returnValueForMissingStub:
-            _i6.Future<_i5.UserCredential>.value(_FakeUserCredential_5(
+            _i6.Future<_i5.UserCredential>.value(_FakeUserCredential_6(
           this,
           Invocation.method(
             #createUserWithEmailAndPassword,
@@ -1278,7 +1323,7 @@ class MockFirebaseAuth extends _i1.Mock implements _i5.FirebaseAuth {
           #getRedirectResult,
           [],
         ),
-        returnValue: _i6.Future<_i5.UserCredential>.value(_FakeUserCredential_5(
+        returnValue: _i6.Future<_i5.UserCredential>.value(_FakeUserCredential_6(
           this,
           Invocation.method(
             #getRedirectResult,
@@ -1286,7 +1331,7 @@ class MockFirebaseAuth extends _i1.Mock implements _i5.FirebaseAuth {
           ),
         )),
         returnValueForMissingStub:
-            _i6.Future<_i5.UserCredential>.value(_FakeUserCredential_5(
+            _i6.Future<_i5.UserCredential>.value(_FakeUserCredential_6(
           this,
           Invocation.method(
             #getRedirectResult,
@@ -1423,7 +1468,7 @@ class MockFirebaseAuth extends _i1.Mock implements _i5.FirebaseAuth {
           #signInAnonymously,
           [],
         ),
-        returnValue: _i6.Future<_i5.UserCredential>.value(_FakeUserCredential_5(
+        returnValue: _i6.Future<_i5.UserCredential>.value(_FakeUserCredential_6(
           this,
           Invocation.method(
             #signInAnonymously,
@@ -1431,7 +1476,7 @@ class MockFirebaseAuth extends _i1.Mock implements _i5.FirebaseAuth {
           ),
         )),
         returnValueForMissingStub:
-            _i6.Future<_i5.UserCredential>.value(_FakeUserCredential_5(
+            _i6.Future<_i5.UserCredential>.value(_FakeUserCredential_6(
           this,
           Invocation.method(
             #signInAnonymously,
@@ -1448,7 +1493,7 @@ class MockFirebaseAuth extends _i1.Mock implements _i5.FirebaseAuth {
           #signInWithCredential,
           [credential],
         ),
-        returnValue: _i6.Future<_i5.UserCredential>.value(_FakeUserCredential_5(
+        returnValue: _i6.Future<_i5.UserCredential>.value(_FakeUserCredential_6(
           this,
           Invocation.method(
             #signInWithCredential,
@@ -1456,7 +1501,7 @@ class MockFirebaseAuth extends _i1.Mock implements _i5.FirebaseAuth {
           ),
         )),
         returnValueForMissingStub:
-            _i6.Future<_i5.UserCredential>.value(_FakeUserCredential_5(
+            _i6.Future<_i5.UserCredential>.value(_FakeUserCredential_6(
           this,
           Invocation.method(
             #signInWithCredential,
@@ -1472,7 +1517,7 @@ class MockFirebaseAuth extends _i1.Mock implements _i5.FirebaseAuth {
           #signInWithCustomToken,
           [token],
         ),
-        returnValue: _i6.Future<_i5.UserCredential>.value(_FakeUserCredential_5(
+        returnValue: _i6.Future<_i5.UserCredential>.value(_FakeUserCredential_6(
           this,
           Invocation.method(
             #signInWithCustomToken,
@@ -1480,7 +1525,7 @@ class MockFirebaseAuth extends _i1.Mock implements _i5.FirebaseAuth {
           ),
         )),
         returnValueForMissingStub:
-            _i6.Future<_i5.UserCredential>.value(_FakeUserCredential_5(
+            _i6.Future<_i5.UserCredential>.value(_FakeUserCredential_6(
           this,
           Invocation.method(
             #signInWithCustomToken,
@@ -1503,7 +1548,7 @@ class MockFirebaseAuth extends _i1.Mock implements _i5.FirebaseAuth {
             #password: password,
           },
         ),
-        returnValue: _i6.Future<_i5.UserCredential>.value(_FakeUserCredential_5(
+        returnValue: _i6.Future<_i5.UserCredential>.value(_FakeUserCredential_6(
           this,
           Invocation.method(
             #signInWithEmailAndPassword,
@@ -1515,7 +1560,7 @@ class MockFirebaseAuth extends _i1.Mock implements _i5.FirebaseAuth {
           ),
         )),
         returnValueForMissingStub:
-            _i6.Future<_i5.UserCredential>.value(_FakeUserCredential_5(
+            _i6.Future<_i5.UserCredential>.value(_FakeUserCredential_6(
           this,
           Invocation.method(
             #signInWithEmailAndPassword,
@@ -1542,7 +1587,7 @@ class MockFirebaseAuth extends _i1.Mock implements _i5.FirebaseAuth {
             #emailLink: emailLink,
           },
         ),
-        returnValue: _i6.Future<_i5.UserCredential>.value(_FakeUserCredential_5(
+        returnValue: _i6.Future<_i5.UserCredential>.value(_FakeUserCredential_6(
           this,
           Invocation.method(
             #signInWithEmailLink,
@@ -1554,7 +1599,7 @@ class MockFirebaseAuth extends _i1.Mock implements _i5.FirebaseAuth {
           ),
         )),
         returnValueForMissingStub:
-            _i6.Future<_i5.UserCredential>.value(_FakeUserCredential_5(
+            _i6.Future<_i5.UserCredential>.value(_FakeUserCredential_6(
           this,
           Invocation.method(
             #signInWithEmailLink,
@@ -1575,7 +1620,7 @@ class MockFirebaseAuth extends _i1.Mock implements _i5.FirebaseAuth {
           #signInWithAuthProvider,
           [provider],
         ),
-        returnValue: _i6.Future<_i5.UserCredential>.value(_FakeUserCredential_5(
+        returnValue: _i6.Future<_i5.UserCredential>.value(_FakeUserCredential_6(
           this,
           Invocation.method(
             #signInWithAuthProvider,
@@ -1583,7 +1628,7 @@ class MockFirebaseAuth extends _i1.Mock implements _i5.FirebaseAuth {
           ),
         )),
         returnValueForMissingStub:
-            _i6.Future<_i5.UserCredential>.value(_FakeUserCredential_5(
+            _i6.Future<_i5.UserCredential>.value(_FakeUserCredential_6(
           this,
           Invocation.method(
             #signInWithAuthProvider,
@@ -1600,7 +1645,7 @@ class MockFirebaseAuth extends _i1.Mock implements _i5.FirebaseAuth {
           #signInWithProvider,
           [provider],
         ),
-        returnValue: _i6.Future<_i5.UserCredential>.value(_FakeUserCredential_5(
+        returnValue: _i6.Future<_i5.UserCredential>.value(_FakeUserCredential_6(
           this,
           Invocation.method(
             #signInWithProvider,
@@ -1608,7 +1653,7 @@ class MockFirebaseAuth extends _i1.Mock implements _i5.FirebaseAuth {
           ),
         )),
         returnValueForMissingStub:
-            _i6.Future<_i5.UserCredential>.value(_FakeUserCredential_5(
+            _i6.Future<_i5.UserCredential>.value(_FakeUserCredential_6(
           this,
           Invocation.method(
             #signInWithProvider,
@@ -1631,7 +1676,7 @@ class MockFirebaseAuth extends _i1.Mock implements _i5.FirebaseAuth {
           ],
         ),
         returnValue:
-            _i6.Future<_i5.ConfirmationResult>.value(_FakeConfirmationResult_6(
+            _i6.Future<_i5.ConfirmationResult>.value(_FakeConfirmationResult_7(
           this,
           Invocation.method(
             #signInWithPhoneNumber,
@@ -1642,7 +1687,7 @@ class MockFirebaseAuth extends _i1.Mock implements _i5.FirebaseAuth {
           ),
         )),
         returnValueForMissingStub:
-            _i6.Future<_i5.ConfirmationResult>.value(_FakeConfirmationResult_6(
+            _i6.Future<_i5.ConfirmationResult>.value(_FakeConfirmationResult_7(
           this,
           Invocation.method(
             #signInWithPhoneNumber,
@@ -1661,7 +1706,7 @@ class MockFirebaseAuth extends _i1.Mock implements _i5.FirebaseAuth {
           #signInWithPopup,
           [provider],
         ),
-        returnValue: _i6.Future<_i5.UserCredential>.value(_FakeUserCredential_5(
+        returnValue: _i6.Future<_i5.UserCredential>.value(_FakeUserCredential_6(
           this,
           Invocation.method(
             #signInWithPopup,
@@ -1669,7 +1714,7 @@ class MockFirebaseAuth extends _i1.Mock implements _i5.FirebaseAuth {
           ),
         )),
         returnValueForMissingStub:
-            _i6.Future<_i5.UserCredential>.value(_FakeUserCredential_5(
+            _i6.Future<_i5.UserCredential>.value(_FakeUserCredential_6(
           this,
           Invocation.method(
             #signInWithPopup,
