@@ -18,18 +18,12 @@ class AuthenticationRepository {
       onListen: _onStatusStreamListen,
       onCancel: _onStatusStreamCancel,
     );
-    _userSettingcontroller = StreamController<UserSetting>.broadcast(
-      onListen: _onUserSettingStreamListen,
-      onCancel: _onUserSettingStreamCancel,
-    );
   }
 
   final IAppAuthenticationRepository iAppAuthenticationRepository;
   late final StreamController<AuthenticationStatus>
       _authenticationStatuscontroller;
   StreamSubscription<User>? _userSubscription;
-  late final StreamController<UserSetting> _userSettingcontroller;
-  StreamSubscription<UserSetting>? _userSettingSubscription;
 
   void _onStatusStreamListen() {
     _userSubscription ??= iAppAuthenticationRepository.user.listen(
@@ -47,27 +41,13 @@ class AuthenticationRepository {
     );
   }
 
-  void _onUserSettingStreamListen() {
-    _userSettingSubscription ??=
-        iAppAuthenticationRepository.userSetting.listen(
-      (currentUserSetting) => _userSettingcontroller.add(currentUserSetting),
-    );
-  }
-
   void _onStatusStreamCancel() {
     _userSubscription?.cancel();
     _userSubscription = null;
   }
 
-  void _onUserSettingStreamCancel() {
-    _userSettingSubscription?.cancel();
-    _userSettingSubscription = null;
-  }
-
   Stream<AuthenticationStatus> get status =>
       _authenticationStatuscontroller.stream;
-
-  Stream<UserSetting> get userSettingStream => _userSettingcontroller.stream;
 
   // /// Stream of [User] which will emit the current user when
   // /// the authentication state changes.
@@ -85,8 +65,8 @@ class AuthenticationRepository {
     return iAppAuthenticationRepository.currentUser;
   }
 
-  UserSetting get currentUserSetting {
-    return iAppAuthenticationRepository.currentUserSetting;
+  Future<UserSetting> getUserSetting() async {
+    return iAppAuthenticationRepository.getUserSetting();
   }
 
   // Stream<AuthenticationStatus> get status async* {

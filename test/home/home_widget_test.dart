@@ -5,6 +5,7 @@ import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
 import 'package:mockito/mockito.dart';
 
+import '../bloc/authentication_bloc_unit_test.dart';
 import '../text_dependency.dart';
 import 'home_widget/home_widget.dart';
 
@@ -17,12 +18,15 @@ void main() {
 
   tearDown(GetIt.I.reset);
   group('${KScreenBlocName.home} ', () {
+    late AuthenticationRepository mockAuthenticationRepository;
     late IHomeRepository mockHomeRepository;
     late HomeWatcherBloc homeBloc;
+    late AuthenticationBloc authenticationBloc;
     late IFeedbackRepository mockFeedbackRepository;
     late FeedbackBloc feedbackBloc;
     setUp(() {
       ExtendedDateTime.customTime = KTestText.feedbackModel.timestamp;
+      mockAuthenticationRepository = MockAuthenticationRepositoryUnitTest();
       mockHomeRepository = MockIHomeRepository();
       when(mockHomeRepository.getQuestions()).thenAnswer(
         (invocation) async => const Right(KTestText.questionModelItems),
@@ -33,6 +37,16 @@ void main() {
         (invocation) async => const Right(true),
       );
     });
+    void registerAuthenticationBloc() {
+      authenticationBloc = AuthenticationBloc(
+        authenticationRepository: mockAuthenticationRepository,
+      );
+      if (GetIt.I.isRegistered<AuthenticationBloc>()) {
+        GetIt.I.unregister<AuthenticationBloc>();
+      }
+      GetIt.I.registerSingleton<AuthenticationBloc>(authenticationBloc);
+    }
+
     void registerHomeBloc() {
       homeBloc = HomeWatcherBloc(homeRepository: mockHomeRepository);
       if (GetIt.I.isRegistered<HomeWatcherBloc>()) {
@@ -50,6 +64,7 @@ void main() {
     }
 
     testWidgets('${KGroupText.intial} ', (tester) async {
+      registerAuthenticationBloc();
       registerHomeBloc();
       await tester.pumpApp(
         const HomeScreen(),
@@ -151,6 +166,7 @@ void main() {
       late MockGoRouter mockGoRouter;
       setUp(() => mockGoRouter = MockGoRouter());
       testWidgets('${KGroupText.intial} ', (tester) async {
+        registerAuthenticationBloc();
         registerHomeBloc();
         await tester.pumpApp(
           const HomeScreen(),
