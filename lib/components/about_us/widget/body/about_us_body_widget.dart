@@ -8,9 +8,6 @@ class AboutUsBodyWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScaffoldWidget(
       childWidgetsFunction: ({required isDesk}) => [
-        CheckPointWidget(
-          onChanged: ({required isCheck}) {},
-        ),
         KSizedBox.kHeightSizedBox30,
         RateWidget(
           isDesk: isDesk,
