@@ -53,7 +53,7 @@ Future<void> feedbackClearTextHelper({
   await scrollingHelper(
     tester: tester,
     itemKey: KWidgetkeys.widget.feedback.buttonClear,
-    offset: KTestConstants.scrollingUp500,
+    offset: KTestConstants.scrollingUp200,
   );
 
   await tester.tap(find.byKey(KWidgetkeys.widget.feedback.buttonClear));

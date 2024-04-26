@@ -9,70 +9,60 @@ class ThanksBodyWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScaffoldWidget(
       childWidgetsFunction: ({required isDesk}) => [
-        Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: KPadding.kPaddingSize16,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              KSizedBox.kHeightSizedBox30,
-              Text(
-                context.l10n.thankYou,
-                style: isDesk ? AppTextStyle.text96 : AppTextStyle.text32,
-              ),
-              KSizedBox.kHeightSizedBox8,
-              Text(
-                context.l10n.thankYouDescription,
-                style: isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
-              ),
-              if (isDesk)
-                KSizedBox.kHeightSizedBox90
-              else
-                KSizedBox.kHeightSizedBox56,
-              if (isDesk)
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      flex: 2,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: KPadding.kPaddingSize56,
-                        ),
-                        child: BoxWidget(
-                          text: context.l10n.myProfile,
-                          isDesk: isDesk,
-                          onTap: () => context.goNamed(KRoute.profile.name),
-                        ),
-                      ),
-                    ),
-                    KSizedBox.kWidthSizedBox24,
-                    Expanded(
-                      flex: 2,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: KPadding.kPaddingSize56,
-                        ),
-                        child: BoxWidget(
-                          text: context.l10n.mainScreen,
-                          isDesk: isDesk,
-                          onTap: () => context.goNamed(KRoute.home.name),
-                        ),
-                      ),
-                    ),
-                  ],
-                )
-              else ...[
-                _buildBoxWidgets(context, isDesk),
-              ],
-              if (isDesk)
-                KSizedBox.kHeightSizedBox90
-              else
-                KSizedBox.kHeightSizedBox56,
-            ],
-          ),
+        KSizedBox.kHeightSizedBox30,
+        Text(
+          context.l10n.thankYou,
+          style: isDesk ? AppTextStyle.text96 : AppTextStyle.text32,
         ),
+        KSizedBox.kHeightSizedBox8,
+        Text(
+          context.l10n.thankYouDescription,
+          style: isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
+        ),
+        if (isDesk)
+          KSizedBox.kHeightSizedBox90
+        else
+          KSizedBox.kHeightSizedBox56,
+        if (isDesk)
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Expanded(
+                flex: 2,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: KPadding.kPaddingSize56,
+                  ),
+                  child: BoxWidget(
+                    text: context.l10n.myProfile,
+                    isDesk: isDesk,
+                    onTap: () => context.goNamed(KRoute.profile.name),
+                  ),
+                ),
+              ),
+              KSizedBox.kWidthSizedBox24,
+              Expanded(
+                flex: 2,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: KPadding.kPaddingSize56,
+                  ),
+                  child: BoxWidget(
+                    text: context.l10n.mainScreen,
+                    isDesk: isDesk,
+                    onTap: () => context.goNamed(KRoute.home.name),
+                  ),
+                ),
+              ),
+            ],
+          )
+        else ...[
+          _buildBoxWidgets(context, isDesk),
+        ],
+        if (isDesk)
+          KSizedBox.kHeightSizedBox90
+        else
+          KSizedBox.kHeightSizedBox56,
       ],
     );
   }

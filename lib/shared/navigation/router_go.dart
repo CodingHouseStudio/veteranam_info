@@ -53,11 +53,20 @@ final GoRouter router = GoRouter(
       redirect: (context, state) =>
           context.read<AuthenticationBloc>().state.userSetting.userRole == null
               ? null
-              : KRoute.home.path,
+              : KRoute.thanks.path,
       pageBuilder: (context, state) => NoTransitionPage(
         key: state.pageKey,
         child: const QuestionsFormScreen(),
       ),
+    ),
+    GoRoute(
+      name: KRoute.thanks.name,
+      path: KRoute.thanks.path,
+      pageBuilder: (context, state) => NoTransitionPage(
+        key: state.pageKey,
+        child: const ThanksScreen(),
+      ),
+      onExit: (context) => context.read<ScrollCubit>().scrollUp(),
     ),
     GoRoute(
       name: KRoute.home.name,
@@ -145,15 +154,6 @@ final GoRouter router = GoRouter(
           pageBuilder: (context, state) => NoTransitionPage(
             key: state.pageKey,
             child: const ContactScreen(),
-          ),
-          onExit: (context) => context.read<ScrollCubit>().scrollUp(),
-        ),
-        GoRoute(
-          name: KRoute.thanks.name,
-          path: KRoute.thanks.path,
-          pageBuilder: (context, state) => NoTransitionPage(
-            key: state.pageKey,
-            child: const ThanksScreen(),
           ),
           onExit: (context) => context.read<ScrollCubit>().scrollUp(),
         ),
