@@ -11,6 +11,7 @@ class ContactBodyWidget extends StatelessWidget {
       childWidgetsFunction: ({required isDesk}) => [
         KSizedBox.kHeightSizedBox30,
         FilterBoxWidget(
+          key: KWidgetkeys.widget.chip.widget,
           filters: KMockText.tags.elementAt(0)!,
         ),
         KSizedBox.kHeightSizedBox30,
