@@ -380,13 +380,6 @@ class MockIAppAuthenticationRepository extends _i1.Mock
       ) as _i6.Stream<_i3.User>);
 
   @override
-  _i6.Stream<_i3.UserSetting> get userSetting => (super.noSuchMethod(
-        Invocation.getter(#userSetting),
-        returnValue: _i6.Stream<_i3.UserSetting>.empty(),
-        returnValueForMissingStub: _i6.Stream<_i3.UserSetting>.empty(),
-      ) as _i6.Stream<_i3.UserSetting>);
-
-  @override
   _i3.User get currentUser => (super.noSuchMethod(
         Invocation.getter(#currentUser),
         returnValue: _FakeUser_2(
@@ -398,19 +391,6 @@ class MockIAppAuthenticationRepository extends _i1.Mock
           Invocation.getter(#currentUser),
         ),
       ) as _i3.User);
-
-  @override
-  _i3.UserSetting get currentUserSetting => (super.noSuchMethod(
-        Invocation.getter(#currentUserSetting),
-        returnValue: _FakeUserSetting_1(
-          this,
-          Invocation.getter(#currentUserSetting),
-        ),
-        returnValueForMissingStub: _FakeUserSetting_1(
-          this,
-          Invocation.getter(#currentUserSetting),
-        ),
-      ) as _i3.UserSetting);
 
   @override
   _i6.Future<_i2.Either<_i3.SomeFailure, bool>> signUpWithGoogle() =>
@@ -701,13 +681,6 @@ class MockAppAuthenticationRepository extends _i1.Mock
       ) as _i6.Stream<_i3.User>);
 
   @override
-  _i6.Stream<_i3.UserSetting> get userSetting => (super.noSuchMethod(
-        Invocation.getter(#userSetting),
-        returnValue: _i6.Stream<_i3.UserSetting>.empty(),
-        returnValueForMissingStub: _i6.Stream<_i3.UserSetting>.empty(),
-      ) as _i6.Stream<_i3.UserSetting>);
-
-  @override
   _i3.User get currentUser => (super.noSuchMethod(
         Invocation.getter(#currentUser),
         returnValue: _FakeUser_2(
@@ -719,19 +692,6 @@ class MockAppAuthenticationRepository extends _i1.Mock
           Invocation.getter(#currentUser),
         ),
       ) as _i3.User);
-
-  @override
-  _i3.UserSetting get currentUserSetting => (super.noSuchMethod(
-        Invocation.getter(#currentUserSetting),
-        returnValue: _FakeUserSetting_1(
-          this,
-          Invocation.getter(#currentUserSetting),
-        ),
-        returnValueForMissingStub: _FakeUserSetting_1(
-          this,
-          Invocation.getter(#currentUserSetting),
-        ),
-      ) as _i3.UserSetting);
 
   @override
   _i6.Future<_i2.Either<_i3.SomeFailure, bool>> signUpWithGoogle() =>
@@ -1020,13 +980,6 @@ class MockAuthenticationRepository extends _i1.Mock
       ) as _i6.Stream<_i3.AuthenticationStatus>);
 
   @override
-  _i6.Stream<_i3.UserSetting> get userSettingStream => (super.noSuchMethod(
-        Invocation.getter(#userSettingStream),
-        returnValue: _i6.Stream<_i3.UserSetting>.empty(),
-        returnValueForMissingStub: _i6.Stream<_i3.UserSetting>.empty(),
-      ) as _i6.Stream<_i3.UserSetting>);
-
-  @override
   _i3.User get currentUser => (super.noSuchMethod(
         Invocation.getter(#currentUser),
         returnValue: _FakeUser_2(
@@ -1040,17 +993,27 @@ class MockAuthenticationRepository extends _i1.Mock
       ) as _i3.User);
 
   @override
-  _i3.UserSetting get currentUserSetting => (super.noSuchMethod(
-        Invocation.getter(#currentUserSetting),
-        returnValue: _FakeUserSetting_1(
-          this,
-          Invocation.getter(#currentUserSetting),
+  _i6.Future<_i3.UserSetting> getUserSetting() => (super.noSuchMethod(
+        Invocation.method(
+          #getUserSetting,
+          [],
         ),
-        returnValueForMissingStub: _FakeUserSetting_1(
+        returnValue: _i6.Future<_i3.UserSetting>.value(_FakeUserSetting_1(
           this,
-          Invocation.getter(#currentUserSetting),
-        ),
-      ) as _i3.UserSetting);
+          Invocation.method(
+            #getUserSetting,
+            [],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i6.Future<_i3.UserSetting>.value(_FakeUserSetting_1(
+          this,
+          Invocation.method(
+            #getUserSetting,
+            [],
+          ),
+        )),
+      ) as _i6.Future<_i3.UserSetting>);
 
   @override
   _i6.Future<_i2.Either<_i3.SomeFailure, bool>> logIn({

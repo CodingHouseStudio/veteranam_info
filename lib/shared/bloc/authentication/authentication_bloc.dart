@@ -19,8 +19,7 @@ class AuthenticationBloc
           authenticationRepository.currentUser.isNotEmpty
               ? AuthenticationState.authenticated(
                   currentUser: authenticationRepository.currentUser,
-                  currentUserSetting:
-                      authenticationRepository.currentUserSetting,
+                  currentUserSetting: UserSetting.empty,
                 )
               : const AuthenticationState.unknown(),
         ) {
@@ -36,13 +35,11 @@ class AuthenticationBloc
   final AuthenticationRepository _authenticationRepository;
   late StreamSubscription<AuthenticationStatus>
       authenticationStatusSubscription;
-  late StreamSubscription<UserSetting> userSettingSubscription;
   static const String tokenKey = KAppText.authTokenKey;
 
   @override
   Future<void> close() {
     authenticationStatusSubscription.cancel();
-    userSettingSubscription.cancel();
     _authenticationRepository.dispose();
     return super.close();
   }
@@ -59,7 +56,8 @@ class AuthenticationBloc
         return emit(
           AuthenticationState.authenticated(
             currentUser: _authenticationRepository.currentUser,
-            currentUserSetting: _authenticationRepository.currentUserSetting,
+            currentUserSetting:
+                await _authenticationRepository.getUserSetting(),
           ),
         );
       case AuthenticationStatus.unknown:
@@ -81,10 +79,10 @@ class AuthenticationBloc
     authenticationStatusSubscription = _authenticationRepository.status.listen(
       (status) => add(AuthenticationStatusChanged(status)),
     );
-    userSettingSubscription =
-        _authenticationRepository.userSettingStream.listen(
-      (userSetting) => add(_AppUserSettingChanged(userSetting)),
-    );
+    // userSettingSubscription =
+    //     _authenticationRepository.userSettingStream.listen(
+    //   (userSetting) => add(_AppUserSettingChanged(userSetting)),
+    // );
   }
 
   void _onUserChanged(
@@ -114,13 +112,10 @@ class AuthenticationBloc
     AppLanguageChanged event,
     Emitter<AuthenticationState> emit,
   ) async {
-    late var userSetting = state.userSetting.copyWith(
+    final userSetting = state.userSetting.copyWith(
       locale: event.language,
     );
     if (state.user != null) {
-      userSetting = userSetting.copyWith(
-        id: state.user!.id,
-      );
       await _authenticationRepository.updateUserSetting(
         userSetting: userSetting,
       );
@@ -138,8 +133,8 @@ class AuthenticationBloc
   ) async {
     if (state.user != null) {
       final userSetting = state.userSetting.copyWith(
-        id: state.user!.id,
         userRole: event.userRole,
+        roleIsConfirmed: false,
       );
       await _authenticationRepository.updateUserSetting(
         userSetting: userSetting,

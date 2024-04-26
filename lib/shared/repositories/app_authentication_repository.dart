@@ -38,8 +38,6 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   /// Should only be used for testing purposes.
   @visibleForTesting
   static const userCacheKey = '__user_cache_key__';
-  @visibleForTesting
-  static const userSettingCacheKey = '__user_setting_cache_key__';
 
   /// Stream of [User] which will emit the current user when
   /// the authentication state changes.
@@ -63,40 +61,11 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
         },
       );
 
-  @override
-  Stream<UserSetting> get userSetting =>
-      _firebaseAuth.authStateChanges().asyncMap(
-        (firebaseUser) async {
-          debugPrint('================================================');
-          if (firebaseUser != null) {
-            debugPrint('Firebase Auth State Changed: User is authenticated');
-            debugPrint('Firebase User Details: $firebaseUser');
-            try {
-              final user =
-                  await _firestoreService.getUserSetting(firebaseUser.uid);
-              _cache.write(key: userCacheKey, value: user);
-              return user;
-            } catch (error) {
-              debugPrint('Error fetching user settings: $error');
-              return UserSetting.empty;
-            }
-          } else {
-            debugPrint('Firebase Auth State Changed: User is unauthenticated'
-                ' (User.empty)');
-            return UserSetting.empty;
-          }
-        },
-      );
-
   //
   // /// Returns the current cached user.
   // /// Defaults to [User.empty] if there is no cached user.
   @override
   User get currentUser => _cache.read<User>(key: userCacheKey) ?? User.empty;
-
-  @override
-  UserSetting get currentUserSetting =>
-      _cache.read<UserSetting>(key: userCacheKey) ?? UserSetting.empty;
 
   // /// Returns the current auth status.
   // /// Defaults to [AuthStatus.unknown] if there is no cached auth status.

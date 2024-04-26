@@ -21,7 +21,10 @@ final GoRouter router = GoRouter(
         AuthenticationStatus.authenticated) {
       return state.uri.toString().contains(KRoute.login.path) ||
               state.uri.toString().contains(KRoute.signUp.path)
-          ? KRoute.questionsForm.path
+          ? context.read<AuthenticationBloc>().state.userSetting.userRole ==
+                  null
+              ? KRoute.questionsForm.path
+              : KRoute.home.path
           : null;
     }
     return null;
@@ -46,6 +49,10 @@ final GoRouter router = GoRouter(
     GoRoute(
       name: KRoute.questionsForm.name,
       path: KRoute.questionsForm.path,
+      redirect: (context, state) =>
+          context.read<AuthenticationBloc>().state.userSetting.userRole == null
+              ? null
+              : KRoute.home.path,
       pageBuilder: (context, state) => NoTransitionPage(
         key: state.pageKey,
         child: const QuestionsFormScreen(),
@@ -54,7 +61,6 @@ final GoRouter router = GoRouter(
     GoRoute(
       name: KRoute.home.name,
       path: KRoute.home.path,
-      redirect: redirect,
       pageBuilder: (context, state) => NoTransitionPage(
         key: state.pageKey,
         child: const HomeScreen(),
@@ -63,7 +69,6 @@ final GoRouter router = GoRouter(
         GoRoute(
           name: KRoute.information.name,
           path: KRoute.information.path,
-          redirect: redirect,
           pageBuilder: (context, state) => NoTransitionPage(
             key: state.pageKey,
             child: const InformationScreen(),
@@ -73,7 +78,6 @@ final GoRouter router = GoRouter(
         GoRoute(
           name: KRoute.discounts.name,
           path: KRoute.discounts.path,
-          redirect: redirect,
           pageBuilder: (context, state) => NoTransitionPage(
             key: state.pageKey,
             child: const DiscountsScreen(),
@@ -83,7 +87,6 @@ final GoRouter router = GoRouter(
         GoRoute(
           name: KRoute.story.name,
           path: KRoute.story.path,
-          redirect: redirect,
           pageBuilder: (context, state) => NoTransitionPage(
             key: state.pageKey,
             child: const StoryScreen(),
@@ -93,7 +96,6 @@ final GoRouter router = GoRouter(
         GoRoute(
           name: KRoute.work.name,
           path: KRoute.work.path,
-          redirect: redirect,
           pageBuilder: (context, state) => NoTransitionPage(
             key: state.pageKey,
             child: const WorkScreen(),
@@ -103,7 +105,6 @@ final GoRouter router = GoRouter(
         GoRoute(
           name: KRoute.profile.name,
           path: KRoute.profile.path,
-          redirect: redirect,
           pageBuilder: (context, state) => NoTransitionPage(
             key: state.pageKey,
             child: const ProfileScreen(),
@@ -113,7 +114,6 @@ final GoRouter router = GoRouter(
         GoRoute(
           name: KRoute.investors.name,
           path: KRoute.investors.path,
-          redirect: redirect,
           pageBuilder: (context, state) => NoTransitionPage(
             key: state.pageKey,
             child: const InvestorsScreen(),
@@ -123,7 +123,6 @@ final GoRouter router = GoRouter(
         GoRoute(
           name: KRoute.aboutUs.name,
           path: KRoute.aboutUs.path,
-          redirect: redirect,
           pageBuilder: (context, state) => NoTransitionPage(
             key: state.pageKey,
             child: const AboutUsScreen(),
@@ -133,7 +132,6 @@ final GoRouter router = GoRouter(
         GoRoute(
           name: KRoute.consultation.name,
           path: KRoute.consultation.path,
-          redirect: redirect,
           pageBuilder: (context, state) => NoTransitionPage(
             key: state.pageKey,
             child: const ConsultationScreen(),
@@ -143,7 +141,6 @@ final GoRouter router = GoRouter(
         GoRoute(
           name: KRoute.contact.name,
           path: KRoute.contact.path,
-          redirect: redirect,
           pageBuilder: (context, state) => NoTransitionPage(
             key: state.pageKey,
             child: const ContactScreen(),

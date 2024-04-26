@@ -3,10 +3,8 @@ import 'package:kozak/shared/shared.dart';
 
 abstract class IAppAuthenticationRepository {
   Stream<User> get user;
-  Stream<UserSetting> get userSetting;
 
   User get currentUser;
-  UserSetting get currentUserSetting;
 
   Future<Either<SomeFailure, bool>> signUpWithGoogle();
 
