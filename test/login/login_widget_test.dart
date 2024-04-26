@@ -19,35 +19,35 @@ void main() {
   group('${KScreenBlocName.login} ', () {
     late AuthenticationRepository mockAuthenticationRepository;
     late LoginBloc loginBloc;
+    late MockGoRouter mockGoRouter;
     setUp(() {
-      {
-        ExtendedDateTime.customTime = KTestText.feedbackModel.timestamp;
-        mockAuthenticationRepository = MockAuthenticationRepository();
-        when(
-          mockAuthenticationRepository.logIn(
-            email: KTestText.useremail,
-            password: KTestText.passwordCorrect,
-          ),
-        ).thenAnswer(
-          (invocation) async => const Right(true),
-        );
-        when(
-          mockAuthenticationRepository.logIn(
-            email: KTestText.useremail,
-            password: KTestText.passwordCorrect,
-          ),
-        ).thenAnswer(
-          (invocation) async => const Right(true),
-        );
-        when(
-          mockAuthenticationRepository.logIn(
-            email: KTestText.useremailWrong,
-            password: KTestText.passwordWrong,
-          ),
-        ).thenAnswer(
-          (invocation) async => const Left(SomeFailure.serverError()),
-        );
-      }
+      mockGoRouter = MockGoRouter();
+      ExtendedDateTime.customTime = KTestText.feedbackModel.timestamp;
+      mockAuthenticationRepository = MockAuthenticationRepository();
+      when(
+        mockAuthenticationRepository.logIn(
+          email: KTestText.useremail,
+          password: KTestText.passwordCorrect,
+        ),
+      ).thenAnswer(
+        (invocation) async => const Right(true),
+      );
+      when(
+        mockAuthenticationRepository.logIn(
+          email: KTestText.useremail,
+          password: KTestText.passwordCorrect,
+        ),
+      ).thenAnswer(
+        (invocation) async => const Right(true),
+      );
+      when(
+        mockAuthenticationRepository.logIn(
+          email: KTestText.useremailWrong,
+          password: KTestText.passwordWrong,
+        ),
+      ).thenAnswer(
+        (invocation) async => const Left(SomeFailure.serverError()),
+      );
     });
 
     void registerLoginBloc() {
@@ -220,6 +220,7 @@ void main() {
       registerLoginBloc();
       await tester.pumpApp(
         const LoginScreen(),
+        mockGoRouter: mockGoRouter,
       );
 
       expect(
