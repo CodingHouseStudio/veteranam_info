@@ -35,6 +35,7 @@ class InformationFilters extends StatelessWidget {
                         : KPadding.kPaddingSize8,
                   ),
                   child: ChipWidget(
+                    key: KWidgetkeys.widget.dropChip.widget,
                     filter: filter,
                     onSelected: ({required isSelected}) =>
                         context.read<InformationWatcherBloc>().add(

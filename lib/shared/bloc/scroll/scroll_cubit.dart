@@ -13,4 +13,9 @@ class ScrollCubit extends Cubit<ScrollController> {
     emit(state..jumpTo(0));
     return true;
   }
+
+  bool scrollTo(double jumpTo) {
+    emit(state..jumpTo(jumpTo));
+    return true;
+  }
 }

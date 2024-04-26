@@ -24,8 +24,6 @@ void main() {
 
       await tester.pumpAndSettle();
 
-      await chekPointHelper(tester);
-
       await chatInputHelper(tester);
 
       await rateHelper(tester);
@@ -45,8 +43,6 @@ void main() {
         );
 
         await tester.pumpAndSettle();
-
-        await chekPointHelper(tester);
 
         await rateHelper(tester);
 

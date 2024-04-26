@@ -35,20 +35,20 @@ class PaginationWidget extends StatelessWidget {
             )
               ..add(const Text('...'))
               ..add(_buildPageButton(pages))
-          else if (currentPage >= 6 && pages - currentPage > 8) ...[
+          else if (currentPage >= 6 && pages - currentPage > 3) ...[
             _buildPageButton(1),
             const Text('...'),
             ...List.generate(
               7,
-              (index) => _buildPageButton(currentPage - 1 + index),
+              (index) => _buildPageButton(currentPage - 4 + index),
             ),
             const Text('...'),
             _buildPageButton(pages),
-          ] else if (pages - currentPage <= 8) ...[
+          ] else if (pages - currentPage <= 3) ...[
             _buildPageButton(1),
             const Text('...'),
             ...List.generate(
-              7,
+              8,
               (index) => _buildPageButton(pages - 7 + index),
             ),
           ] else

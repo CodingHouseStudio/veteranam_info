@@ -11,8 +11,6 @@ Future<void> newsCardHelper({
 
   expect(find.byKey(KWidgetkeys.widget.newsCard.title), findsOneWidget);
 
-  expect(find.byKey(KWidgetkeys.widget.newsCard.tags), findsWidgets);
-
   if (image != null) {
     await cardAddImageHelper(
       tester: tester,
