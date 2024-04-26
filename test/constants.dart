@@ -56,7 +56,7 @@ abstract class KTestText {
   static const shortPassword = 'Pas1';
 
   static const useremail = 'example@gmail.com';
-  static const useremailWrong = 'example_wrong@gmail.com';
+  static const useremailWrong = 'examplewrong@gmail.com';
   static const useremailIncorrect = 'examplegmail.com';
   static const shortUserEmail = '@.com';
 
