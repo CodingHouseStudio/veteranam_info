@@ -24,9 +24,13 @@ abstract class IAppAuthenticationRepository {
 
   Future<String?> getUser();
 
+  Future<UserSetting> getUserSetting();
+
   Future<Either<SomeFailure, bool>> sendVerificationCode({
     required String email,
   });
 
   Future<Either<SomeFailure, bool>> deleteUser();
+
+  Future<Either<SomeFailure, bool>> updateUserSetting(UserSetting userSetting);
 }

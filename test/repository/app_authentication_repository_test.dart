@@ -104,6 +104,11 @@ void main() {
           ).thenAnswer(
             (_) async => const Right(true),
           );
+          when(
+            mockAppAuthenticationRepository.getUserSetting(),
+          ).thenAnswer(
+            (_) async => const UserSetting(id: KTestText.field),
+          );
         });
         test('Sign up with google', () async {
           expect(
@@ -160,6 +165,12 @@ void main() {
                 .having((e) => e.value, 'value', isTrue),
           );
         });
+        test('Get user setting', () async {
+          expect(
+            await mockAppAuthenticationRepository.getUserSetting(),
+            const UserSetting(id: KTestText.field),
+          );
+        });
       });
       group('${KGroupText.failureSet} ', () {
         setUp(() {
@@ -209,6 +220,11 @@ void main() {
             mockAppAuthenticationRepository.deleteUser(),
           ).thenAnswer(
             (_) async => const Left(SomeFailure.serverError()),
+          );
+          when(
+            mockAppAuthenticationRepository.getUserSetting(),
+          ).thenAnswer(
+            (_) async => UserSetting.empty,
           );
         });
         test('Sign up with google', () async {
@@ -279,6 +295,12 @@ void main() {
               'value',
               const SomeFailure.serverError(),
             ),
+          );
+        });
+        test('Get user setting', () async {
+          expect(
+            await mockAppAuthenticationRepository.getUserSetting(),
+            UserSetting.empty,
           );
         });
       });

@@ -177,6 +177,7 @@ abstract class KScreenBlocName {
   static const consultation = 'Consultation Screen';
   static const login = 'Login Screen';
   static const signUp = 'Sign Up Screen';
+  static const questionsForm = 'Questions Form Screen';
 
   static const feedback = 'Feedback Widget';
 
