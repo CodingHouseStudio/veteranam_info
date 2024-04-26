@@ -26,7 +26,25 @@ void main() {
 
       await nawbarHelper(tester: tester, searchText: KTestText.field);
 
-      await workCardHelper(tester);
+      expect(
+        find.byKey(KWidgetkeys.screen.work.boxEmployer),
+        findsOneWidget,
+      );
+
+      expect(
+        find.byKey(KWidgetkeys.screen.work.boxEmployee),
+        findsOneWidget,
+      );
+
+      expect(
+        find.byKey(KWidgetkeys.screen.work.subtitle),
+        findsOneWidget,
+      );
+
+      expect(
+        find.byKey(KWidgetkeys.screen.work.title),
+        findsOneWidget,
+      );
 
       await footerHelper(tester);
     });
@@ -45,7 +63,27 @@ void main() {
 
         await nawbarHelper(tester: tester, searchText: KTestText.field);
 
-        await workCardHelper(tester);
+        expect(
+          find.byKey(KWidgetkeys.screen.work.boxEmployer),
+          findsOneWidget,
+        );
+
+        expect(
+          find.byKey(KWidgetkeys.screen.work.boxEmployee),
+          findsOneWidget,
+        );
+
+        expect(
+          find.byKey(KWidgetkeys.screen.work.subtitle),
+          findsOneWidget,
+        );
+
+        expect(
+          find.byKey(KWidgetkeys.screen.work.title),
+          findsOneWidget,
+        );
+
+        await footerHelper(tester);
       });
       // group('${KGroupText.goTo} ', () {
       // });
