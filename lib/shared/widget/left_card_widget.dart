@@ -32,7 +32,7 @@ class LeftCardWidget extends StatelessWidget {
                       children: [
                         Expanded(
                           child: Container(
-                            decoration: KWidetTheme.boxDecorationWhite,
+                            decoration: KWidgetTheme.boxDecorationWhite,
                             child: Padding(
                               padding: const EdgeInsets.only(
                                 right: KPadding.kPaddingSize80,

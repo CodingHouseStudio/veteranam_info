@@ -6,11 +6,12 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class _KIcon extends Icon {
   const _KIcon(super.icon);
 
-  Icon setIconKey(Key key) {
+  Icon setIconKey(Key key, {Color? changeColor}) {
     return Icon(
       icon,
       key: key,
       size: size,
+      color: changeColor ?? color,
     );
   }
 
@@ -19,6 +20,7 @@ class _KIcon extends Icon {
       icon,
       key: key,
       size: iconSize,
+      color: color,
     );
   }
 }

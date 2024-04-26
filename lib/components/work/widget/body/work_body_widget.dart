@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:kozak/shared/shared.dart';
 
 class WorkBodyWidget extends StatelessWidget {
@@ -35,7 +36,7 @@ class WorkBodyWidget extends StatelessWidget {
               BoxWidget(
                 key: KWidgetkeys.screen.work.boxEmployee,
                 text: context.l10n.lookingForJob,
-                onTap: () {},
+                onTap: () => context.goNamed(KRoute.workEmployee.name),
                 isDesk: true,
                 textRightPadding: KPadding.kPaddingSize100,
               ),
@@ -53,7 +54,7 @@ class WorkBodyWidget extends StatelessWidget {
           BoxWidget(
             key: KWidgetkeys.screen.work.boxEmployee,
             text: context.l10n.lookingForJob,
-            onTap: () {},
+            onTap: () => context.goNamed(KRoute.workEmployee.name),
             isDesk: false,
             textRightPadding: KPadding.kPaddingSize100,
           ),

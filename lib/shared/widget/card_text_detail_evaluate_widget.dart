@@ -117,8 +117,9 @@ class _CardTextDetailEvaluateWidgetState
                               ? KIcon.happySmile.setIconKey(
                                   KWidgetkeys.widget.cardTextDetailEvaluate
                                       .iconActiveSmile,
+                                  changeColor: AppColors.grey,
                                 )
-                              : KIcon.smile.setIconKey(
+                              : KIcon.happySmile.setIconKey(
                                   KWidgetkeys
                                       .widget.cardTextDetailEvaluate.iconSmile,
                                 ),

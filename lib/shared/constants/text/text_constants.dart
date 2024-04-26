@@ -12,6 +12,7 @@ abstract class KMockText {
     'Трускавець',
     'Стебник',
   ];
+  static const workCategory = 'Комплектувальник';
   static const facebook = 'Facebook';
   static const donateCardTitle = 'Благодійний фонд '
       '«ПОВЕРНИСЬ ЖИВИМ»';

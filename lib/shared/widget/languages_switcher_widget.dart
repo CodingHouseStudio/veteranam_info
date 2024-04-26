@@ -13,7 +13,7 @@ class LanguagesSwitcherWidget extends StatelessWidget {
       child: BlocBuilder<LanguageCubit, Language?>(
         builder: (context, state) {
           return Container(
-            decoration: KWidetTheme.boxDecorationCircular,
+            decoration: KWidgetTheme.boxDecorationCircular,
             padding: const EdgeInsets.symmetric(
               horizontal: KPadding.kPaddingSize8,
               vertical: KPadding.kPaddingSize10,

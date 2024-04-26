@@ -45,7 +45,7 @@ class _NawbarWidgetState extends State<NawbarWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: KWidetTheme.boxDecorationCard,
+      decoration: KWidgetTheme.boxDecorationCard,
       margin: EdgeInsets.only(
         left: widget.isDesk ? KPadding.kPaddingSize90 : KPadding.kPaddingSize16,
         right:

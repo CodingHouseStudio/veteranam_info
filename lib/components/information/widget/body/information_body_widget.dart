@@ -38,7 +38,7 @@ class InformationBodyWidget extends StatelessWidget {
                   KSizedBox.kHeightSizedBox56
                 else
                   KSizedBox.kHeightSizedBox24,
-                AuditInspectionInProgresFilters(
+                InformationFilters(
                   key: KWidgetkeys.screen.information.filter,
                   filtersItem: _.informationModelItems.overallTags,
                   isDesk: isDesk,
@@ -48,7 +48,7 @@ class InformationBodyWidget extends StatelessWidget {
                 else
                   KSizedBox.kHeightSizedBox24,
                 ...List.generate(
-                    _.filteredInformationModelItems.isNotEmpty
+                    _.informationModelItems.isNotEmpty
                         ? _.filteredInformationModelItems.length
                         : 1, (index) {
                   if (_.informationModelItems.isNotEmpty) {

@@ -27,7 +27,7 @@ class FooterWidget extends StatelessWidget {
     ];
     return Container(
       key: KWidgetkeys.widget.footer.widget,
-      decoration: KWidetTheme.boxDecorationCard,
+      decoration: KWidgetTheme.boxDecorationCard,
       child: Padding(
         padding: isDesk
             ? const EdgeInsets.all(KPadding.kPaddingSize48)
