@@ -2,15 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kozak/shared/shared.dart';
 
-/// COMMENT: Сlass adds common elements to screens
 class ScaffoldWidget extends StatelessWidget {
   const ScaffoldWidget({
     required this.childWidgetsFunction,
     super.key,
-    this.hasMic = true,
+    this.hasMicrophone = true,
   });
   final List<Widget> Function({required bool isDesk}) childWidgetsFunction;
-  final bool hasMic;
+  final bool hasMicrophone;
 
   @override
   Widget build(BuildContext context) {
@@ -23,31 +22,50 @@ class ScaffoldWidget extends StatelessWidget {
             FooterWidget(
               isDesk: isDesk,
             ),
+          )
+          ..add(
+            isDesk ? KSizedBox.kHeightSizedBox40 : KSizedBox.kHeightSizedBox24,
           );
         return Scaffold(
-          // extendBodyBehindAppBar: true,
-          appBar: NawbarWidget(
-            isDesk: isDesk,
-            hasMicrophone: hasMic,
-          ),
           body: BlocBuilder<ScrollCubit, ScrollController>(
             builder: (context, _) {
-              return ListView.custom(
+              return CustomScrollView(
                 key: KWidgetkeys.widget.shellRoute.scroll,
+                slivers: [
+                  SliverPadding(
+                    padding: EdgeInsets.only(
+                      left: isDesk
+                          ? KPadding.kPaddingSize90
+                          : KPadding.kPaddingSize16,
+                      right: isDesk
+                          ? KPadding.kPaddingSize90
+                          : KPadding.kPaddingSize16,
+                    ),
+                    sliver: SliverPersistentHeader(
+                      delegate: NawbarWidget(
+                        isDesk: isDesk,
+                        hasMicrophone: hasMicrophone,
+                      ),
+                    ),
+                  ),
+                  SliverPadding(
+                    padding: EdgeInsets.only(
+                      left: isDesk
+                          ? KPadding.kPaddingSize90
+                          : KPadding.kPaddingSize16,
+                      right: isDesk
+                          ? KPadding.kPaddingSize90
+                          : KPadding.kPaddingSize16,
+                    ),
+                    sliver: SliverList(
+                      delegate: SliverChildListDelegate(
+                        childWidgets,
+                      ),
+                    ),
+                  ),
+                ],
                 controller: _,
-                padding: EdgeInsets.only(
-                  left: isDesk
-                      ? KPadding.kPaddingSize90
-                      : KPadding.kPaddingSize16,
-                  right: isDesk
-                      ? KPadding.kPaddingSize90
-                      : KPadding.kPaddingSize16,
-                  bottom: isDesk
-                      ? KPadding.kPaddingSize40
-                      : KPadding.kPaddingSize24,
-                ),
                 semanticChildCount: childWidgets.length,
-                childrenDelegate: SliverChildListDelegate(childWidgets),
               );
             },
           ),

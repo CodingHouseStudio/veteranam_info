@@ -19,6 +19,11 @@ Future<void> chekPointHelper(
     findsNothing,
   );
 
+  await scrollingHelper(
+    tester: tester,
+    itemKey: KWidgetkeys.widget.checkPoint.widget,
+  );
+
   await tester.tap(find.byKey(KWidgetkeys.widget.checkPoint.widget).first);
 
   await tester.pumpAndSettle();
