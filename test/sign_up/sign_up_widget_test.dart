@@ -20,9 +20,11 @@ void main() {
   group('${KScreenBlocName.signUp} ', () {
     late IAppAuthenticationRepository mockAppAuthenticationRepository;
     late SignUpBloc signUpBloc;
+    late MockGoRouter mockGoRouter;
     setUp(() {
       ExtendedDateTime.customTime = KTestText.feedbackModel.timestamp;
       mockAppAuthenticationRepository = MockIAppAuthenticationRepository();
+      mockGoRouter = MockGoRouter();
       when(
         mockAppAuthenticationRepository.signUp(
           email: KTestText.useremail,
@@ -209,6 +211,7 @@ void main() {
       registerSignUpkBloc();
       await tester.pumpApp(
         const SignUpScreen(),
+        mockGoRouter: mockGoRouter,
       );
 
       expect(
