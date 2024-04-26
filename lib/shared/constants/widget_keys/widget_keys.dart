@@ -34,6 +34,7 @@ part 'screen/about_us.dart';
 part 'screen/sign_up.dart';
 
 part 'screen/login.dart';
+part 'screen/questions_form.dart';
 
 part 'widget/widget.dart';
 

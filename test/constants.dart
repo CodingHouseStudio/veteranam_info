@@ -56,7 +56,7 @@ abstract class KTestText {
   static const shortPassword = 'Pas1';
 
   static const useremail = 'example@gmail.com';
-  static const useremailWrong = 'example_wrong@gmail.com';
+  static const useremailWrong = 'examplewrong@gmail.com';
   static const useremailIncorrect = 'examplegmail.com';
   static const shortUserEmail = '@.com';
 
@@ -177,6 +177,7 @@ abstract class KScreenBlocName {
   static const consultation = 'Consultation Screen';
   static const login = 'Login Screen';
   static const signUp = 'Sign Up Screen';
+  static const questionsForm = 'Questions Form Screen';
 
   static const feedback = 'Feedback Widget';
 

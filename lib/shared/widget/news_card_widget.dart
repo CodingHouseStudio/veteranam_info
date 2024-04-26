@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kozak/components/information/bloc/information_watcher_bloc.dart';
 import 'package:kozak/shared/shared.dart';
 
 class NewsCardWidget extends StatelessWidget {
@@ -8,11 +9,15 @@ class NewsCardWidget extends StatelessWidget {
     required this.isDesk,
     super.key,
   });
+
   final InformationModel informationItem;
   final bool isDesk;
 
   @override
   Widget build(BuildContext context) {
+    final selectedFilters =
+        context.select((InformationWatcherBloc bloc) => bloc.state.filters);
+
     return CardTextDetailEvaluateWidget(
       image: informationItem.image,
       text: informationItem.news,
@@ -36,7 +41,7 @@ class NewsCardWidget extends StatelessWidget {
           ),
         ],
       ),
-      bottom: informationItem.tags != null
+      bottom: selectedFilters != null && selectedFilters.isNotEmpty
           ? Padding(
               padding: const EdgeInsets.only(
                 bottom: KPadding.kPaddingSize16,
@@ -46,7 +51,7 @@ class NewsCardWidget extends StatelessWidget {
                 key: KWidgetkeys.widget.newsCard.tags,
                 spacing: KSize.kWrapSpacing8,
                 runSpacing: KSize.kWrapRunSpacing4,
-                children: informationItem.tags!.map((tag) {
+                children: selectedFilters.map((tag) {
                   return Container(
                     decoration: KWidetTheme.boxDecorationCard,
                     child: Padding(
