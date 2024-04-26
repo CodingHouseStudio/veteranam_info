@@ -63,6 +63,27 @@ class _FilterBoxWidgetState extends State<FilterBoxWidget> {
         child: widget.filters.first == filter
             ? DropChipWidget(
                 filters: widget.filters,
+                selectFilter: context.read<FilterCubit>().state.isNotEmpty &&
+                        context.read<FilterCubit>().state.length - 1 >=
+                            1 //(index + initialIndex)
+                        &&
+                        context
+                            .read<FilterCubit>()
+                            .state
+                            .elementAt(1) //(index + initialIndex)
+                            .toString()
+                            .isNotEmpty
+                    ? context
+                        .read<FilterCubit>()
+                        .state
+                        .elementAt(1) //(index + initialIndex)
+                        .toString()
+                    : null,
+                isDesk: true,
+                onSelected: (newValue) => context.read<FilterCubit>().change(
+                      filterValue: newValue,
+                      index: 1, //index + initialIndex,
+                    ),
               )
             : ChipWidget(
                 filter: filter,

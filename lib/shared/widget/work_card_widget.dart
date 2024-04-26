@@ -3,52 +3,45 @@ import 'package:kozak/shared/shared.dart';
 
 class WorkCardWidget extends StatelessWidget {
   const WorkCardWidget({
-    required this.title,
-    required this.city,
-    required this.price,
-    required this.description,
-    required this.employer,
+    required this.workModel,
     required this.isDesk,
     super.key,
   });
-  final String title;
-  final String price;
-  final String city;
-  final String description;
-  final String employer;
+  final WorkModel workModel;
   final bool isDesk;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: KWidetTheme.boxDecorationWidget,
+      decoration: KWidgetTheme.boxDecorationWidget,
       child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: KPadding.kPaddingSize48,
+        padding: EdgeInsets.symmetric(
+          horizontal:
+              isDesk ? KPadding.kPaddingSize48 : KPadding.kPaddingSize16,
           vertical: KPadding.kPaddingSize16,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              title,
+              workModel.title,
               key: KWidgetkeys.widget.workCard.title,
               style: AppTextStyle.text40,
             ),
             Text(
-              price,
+              workModel.price,
               key: KWidgetkeys.widget.workCard.price,
               style: AppTextStyle.text40,
             ),
             Text(
-              city,
+              workModel.city ?? '',
               key: KWidgetkeys.widget.workCard.city,
               style: AppTextStyle.text20.copyWith(
                 color: AppColors.lightGray,
               ),
             ),
             Text(
-              employer,
+              workModel.companyName,
               key: KWidgetkeys.widget.workCard.employer,
               style: AppTextStyle.text20.copyWith(
                 color: AppColors.lightGray,
@@ -56,7 +49,7 @@ class WorkCardWidget extends StatelessWidget {
             ),
             KSizedBox.kHeightSizedBox16,
             CardTextDetailWidget(
-              text: description,
+              text: workModel.description,
               maxLines: 3,
               icon: Row(
                 children: [

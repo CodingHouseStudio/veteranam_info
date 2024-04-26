@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
 
-class AuditInspectionInProgresFilters extends StatelessWidget {
-  const AuditInspectionInProgresFilters({
+class InformationFilters extends StatelessWidget {
+  const InformationFilters({
     required this.filtersItem,
     required this.isDesk,
     super.key,

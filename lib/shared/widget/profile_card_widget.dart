@@ -23,7 +23,7 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
             const EdgeInsets.symmetric(horizontal: KPadding.kPaddingSize16),
         key: KWidgetkeys.widget.profileCard.profileCard,
         child: Container(
-          decoration: KWidetTheme.boxDecorPrimary,
+          decoration: KWidgetTheme.boxDecorPrimary,
           child: Padding(
             padding: const EdgeInsets.all(KPadding.kPaddingSize20),
             child: Column(

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kozak/shared/shared.dart';
 
 /// COMMENT: Variables with widget theme that don't have a specific group
-abstract class KWidetTheme {
+abstract class KWidgetTheme {
   static OutlineInputBorder outlineInputBorder = OutlineInputBorder(
     borderSide: const BorderSide(color: AppColors.lightGray),
     borderRadius: KBorderRadius.kBorderRadius32,
@@ -15,6 +15,10 @@ abstract class KWidetTheme {
   static BoxDecoration boxDecorationWidget = BoxDecoration(
     borderRadius: KBorderRadius.kBorderRadius32,
     border: Border.all(color: AppColors.lightGray),
+  );
+  static const BoxDecoration boxDecorationCircular = BoxDecoration(
+    shape: BoxShape.circle,
+    color: AppColors.white,
   );
   static BoxDecoration boxDecorationCard = BoxDecoration(
     borderRadius: KBorderRadius.kBorderRadius32,
@@ -31,10 +35,6 @@ abstract class KWidetTheme {
   static BoxDecoration boxDecorationImageMob = BoxDecoration(
     borderRadius: KBorderRadius.kBorderRadiusTop32,
     color: AppColors.lightGray,
-  );
-  static BoxDecoration boxDecorationCircular = const BoxDecoration(
-    shape: BoxShape.circle,
-    color: AppColors.white,
   );
   static BoxDecoration boxDecorationWhite = BoxDecoration(
     borderRadius: KBorderRadius.kBorderRadiusRight32,
@@ -64,11 +64,11 @@ abstract class KWidetTheme {
       horizontal: KPadding.kPaddingSize20,
     ),
     floatingLabelBehavior: FloatingLabelBehavior.auto,
-    border: KWidetTheme.outlineInputBorder,
-    enabledBorder: KWidetTheme.outlineInputBorder,
-    disabledBorder: KWidetTheme.outlineInputBorder,
-    focusedBorder: KWidetTheme.outlineInputBorder,
-    focusedErrorBorder: KWidetTheme.outlineInputBorderError,
+    border: KWidgetTheme.outlineInputBorder,
+    enabledBorder: KWidgetTheme.outlineInputBorder,
+    disabledBorder: KWidgetTheme.outlineInputBorder,
+    focusedBorder: KWidgetTheme.outlineInputBorder,
+    focusedErrorBorder: KWidgetTheme.outlineInputBorderError,
     filled: true,
     fillColor: AppColors.white,
   );
