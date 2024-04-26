@@ -7,11 +7,13 @@ class BoxWidget extends StatelessWidget {
     required this.onTap,
     required this.isDesk,
     super.key,
+    this.textRightPadding,
   });
 
   final String text;
   final void Function() onTap;
   final bool isDesk;
+  final double? textRightPadding;
 
   @override
   Widget build(BuildContext context) {
@@ -37,11 +39,14 @@ class BoxWidget extends StatelessWidget {
                   KSizedBox.kHeightSizedBox90,
                   Align(
                     alignment: Alignment.bottomLeft,
-                    child: Text(
-                      text,
-                      key: KWidgetkeys.widget.box.text,
-                      style: AppTextStyle.text40,
-                      maxLines: 1,
+                    child: Padding(
+                      padding: EdgeInsets.only(right: textRightPadding ?? 0),
+                      child: Text(
+                        text,
+                        key: KWidgetkeys.widget.box.text,
+                        style: AppTextStyle.text40,
+                        maxLines: 1,
+                      ),
                     ),
                   ),
                 ],
