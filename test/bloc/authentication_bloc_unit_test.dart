@@ -16,6 +16,10 @@ class MockAuthenticationRepositoryUnitTest extends Mock
   @override
   Stream<AuthenticationStatus> get status =>
       Stream.value(AuthenticationStatus.unknown);
+  @override
+  Future<UserSetting> getUserSetting() async {
+    return UserSetting.empty;
+  }
 }
 
 void main() {
@@ -114,25 +118,28 @@ void main() {
       });
     });
     group('${KGroupText.repository} ', () {
-      late AuthenticationRepository mockFeedbackRepository;
+      late AuthenticationRepository mockAuthenticationRepository;
       group('${KGroupText.successfulSet} ', () {
         setUp(() {
-          mockFeedbackRepository = MockAuthenticationRepository();
+          mockAuthenticationRepository = MockAuthenticationRepository();
           when(
-            mockFeedbackRepository.logIn(
+            mockAuthenticationRepository.logIn(
               email: KTestText.useremail,
               password: KTestText.passwordCorrect,
             ),
           ).thenAnswer(
             (_) async => const Right(true),
           );
-          when(mockFeedbackRepository.signUpWithGoogle()).thenAnswer(
+          when(mockAuthenticationRepository.signUpWithGoogle()).thenAnswer(
             (_) async => const Right(true),
+          );
+          when(mockAuthenticationRepository.getUserSetting()).thenAnswer(
+            (_) async => const UserSetting(id: KTestText.field),
           );
         });
         test('Log in', () async {
           expect(
-            await mockFeedbackRepository.logIn(
+            await mockAuthenticationRepository.logIn(
               email: KTestText.useremail,
               password: KTestText.passwordCorrect,
             ),
@@ -142,30 +149,39 @@ void main() {
         });
         test('Sign up with google', () async {
           expect(
-            await mockFeedbackRepository.signUpWithGoogle(),
+            await mockAuthenticationRepository.signUpWithGoogle(),
             isA<Right<SomeFailure, bool>>()
                 .having((e) => e.value, 'value', isTrue),
+          );
+        });
+        test('get user setting', () async {
+          expect(
+            await mockAuthenticationRepository.getUserSetting(),
+            const UserSetting(id: KTestText.field),
           );
         });
       });
       group('${KGroupText.failureSet} ', () {
         setUp(() {
-          mockFeedbackRepository = MockAuthenticationRepository();
+          mockAuthenticationRepository = MockAuthenticationRepository();
           when(
-            mockFeedbackRepository.logIn(
+            mockAuthenticationRepository.logIn(
               email: KTestText.useremail,
               password: KTestText.passwordCorrect,
             ),
           ).thenAnswer(
             (_) async => const Left(SomeFailure.serverError()),
           );
-          when(mockFeedbackRepository.signUpWithGoogle()).thenAnswer(
+          when(mockAuthenticationRepository.signUpWithGoogle()).thenAnswer(
             (_) async => const Left(SomeFailure.serverError()),
+          );
+          when(mockAuthenticationRepository.getUserSetting()).thenAnswer(
+            (_) async => UserSetting.empty,
           );
         });
         test('Log in', () async {
           expect(
-            await mockFeedbackRepository.logIn(
+            await mockAuthenticationRepository.logIn(
               email: KTestText.useremail,
               password: KTestText.passwordCorrect,
             ),
@@ -178,12 +194,18 @@ void main() {
         });
         test('Sign up with google', () async {
           expect(
-            await mockFeedbackRepository.signUpWithGoogle(),
+            await mockAuthenticationRepository.signUpWithGoogle(),
             isA<Left<SomeFailure, bool>>().having(
               (e) => e.value,
               'value',
               const SomeFailure.serverError(),
             ),
+          );
+        });
+        test('get user setting', () async {
+          expect(
+            await mockAuthenticationRepository.getUserSetting(),
+            UserSetting.empty,
           );
         });
       });
@@ -226,7 +248,10 @@ void main() {
         },
         expect: () async => [
           const AuthenticationState.unknown(),
-          const AuthenticationState.authenticated(User.empty),
+          const AuthenticationState.authenticated(
+            currentUser: User.empty,
+            currentUserSetting: UserSetting.empty,
+          ),
         ],
       );
       blocTest<AuthenticationBloc, AuthenticationState>(
@@ -242,6 +267,39 @@ void main() {
         },
         expect: () async => [
           const AuthenticationState.unknown(),
+        ],
+      );
+      blocTest<AuthenticationBloc, AuthenticationState>(
+        'emits [AuthenticationState] when'
+        ' AuthenticationStatusChanged',
+        build: () => authenticationBloc,
+        act: (bloc) async {
+          bloc.add(
+            const AuthenticationStatusChanged(
+              AuthenticationStatus.unknown,
+            ),
+          );
+        },
+        expect: () async => [
+          const AuthenticationState.unknown(),
+        ],
+      );
+      blocTest<AuthenticationBloc, AuthenticationState>(
+        'emits [AuthenticationState] when'
+        ' AppLanguageChanged',
+        build: () => authenticationBloc,
+        act: (bloc) async {
+          bloc.add(
+            const AppLanguageChanged(
+              Language.english,
+            ),
+          );
+        },
+        expect: () async => [
+          const AuthenticationState.unknown(),
+          const AuthenticationState.unknown().copyWith(
+            userSetting: UserSetting.empty.copyWith(locale: Language.english),
+          ),
         ],
       );
     });

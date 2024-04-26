@@ -54,7 +54,7 @@
   "tooshort": "за коротке",
   "tooShortEmail": "Закоротка",
   "isWrong": "не вірне",
-  "isWrongEmail": "не вірна",
+  "isWrongEmail": "не вірний",
   "logOut": "Вийти",
   "deleteAccount": "Видалити акаунт",
   "signUp": "Реєстрація",
@@ -91,5 +91,12 @@
   "rateOurSite": "Оцініть наш сайт",
   "next": "Далі",
   "thankYouDescription" : "Зверніть увагу! Для доступу до деяких послуг Вам потрібно буде підтвердити Ваш статус показавши відповідне посвідчення.",
-  "mainScreen" : "Головна"
+  "mainScreen" : "Головна",
+  "fillInForm": "Заповніть форму",
+  "questionsFormSubtitle": "Для того щоб ми могли надати Вам найкорисніші послуги, будь ласка, дайте відповідь на наступне питання:",
+  "selectAppropriateOne": "Виберіть відповідне:",
+  "iAmVeteran": "Я ветеран/-ка;",
+  "iAmRelativeOfVeteran": "Я родич ветерана/-ки;",
+  "iAmCivilian": "Я цивільна особа;",
+  "iAmBusinessOwnerRepresentative": "Я власник/представник бізнесу, хочу надавати пільги."
 }

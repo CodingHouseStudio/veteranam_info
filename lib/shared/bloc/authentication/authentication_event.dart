@@ -25,3 +25,21 @@ final class _AppUserChanged extends AuthenticationEvent {
 }
 
 class AuthenticationLogoutRequested extends AuthenticationEvent {}
+
+final class _AppUserSettingChanged extends AuthenticationEvent {
+  const _AppUserSettingChanged(this.userSetting);
+
+  final UserSetting userSetting;
+}
+
+final class AppLanguageChanged extends AuthenticationEvent {
+  const AppLanguageChanged(this.language);
+
+  final Language language;
+}
+
+final class AppUserRoleChanged extends AuthenticationEvent {
+  const AppUserRoleChanged(this.userRole);
+
+  final UserRole userRole;
+}
