@@ -105,7 +105,7 @@ void main() {
 
       await scrollingHelper(
         tester: tester,
-        offset: KTestConstants.scrollingUp500,
+        offset: KTestConstants.scrollingUp200,
       );
 
       await feedbackEnterTextHelper(
@@ -134,7 +134,7 @@ void main() {
 
       await scrollingHelper(
         tester: tester,
-        offset: KTestConstants.scrollingUp500,
+        offset: KTestConstants.scrollingUp200,
       );
 
       await feedbackEnterTextHelper(
@@ -164,7 +164,7 @@ void main() {
 
       await scrollingHelper(
         tester: tester,
-        offset: KTestConstants.scrollingUp500,
+        offset: KTestConstants.scrollingUp200,
       );
 
       await feedbackClearTextHelper(
