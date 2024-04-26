@@ -2,8 +2,10 @@ import 'dart:async';
 
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
+import 'package:firebase_core/firebase_core.dart' as firebase_core;
 import 'package:flutter/foundation.dart'
     show debugPrint, kIsWeb, visibleForTesting;
+import 'package:get_it/get_it.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kozak/shared/shared.dart';
@@ -24,6 +26,7 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   final firebase_auth.FirebaseAuth _firebaseAuth;
   final GoogleSignIn _googleSignIn;
   final CacheClient _cache;
+  final FirestoreService _firestoreService = GetIt.I.get<FirestoreService>();
 
   /// Whether or not the current environment is web
   /// Should only be overridden for testing purposes. Otherwise,
@@ -36,10 +39,10 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   @visibleForTesting
   static const userCacheKey = '__user_cache_key__';
 
-  // /// Stream of [User] which will emit the current user when
-  // /// the authentication state changes.
-  // ///
-  // /// Emits [User.empty] if the user is not authenticated.
+  /// Stream of [User] which will emit the current user when
+  /// the authentication state changes.
+  ///
+  /// Emits [User.empty] if the user is not authenticated.
   @override
   Stream<User> get user => _firebaseAuth.authStateChanges().map(
         (firebaseUser) {
@@ -180,6 +183,14 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
     return token;
   }
 
+  @override
+  Future<UserSetting> getUserSetting() async {
+    final userSetting = await _firestoreService.getUserSetting(
+      currentUser.id,
+    );
+    return userSetting;
+  }
+
   Future<Either<SomeFailure, bool>> _handleAuthOperation(
     Future<void> Function() operation,
     SomeFailure Function(firebase_auth.FirebaseAuthException error) exception,
@@ -236,6 +247,29 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
       return const Left(SomeFailure.serverError());
     } finally {
       _updateAuthStatusBasedOnCache();
+    }
+  }
+
+  @override
+  Future<Either<SomeFailure, bool>> updateUserSetting(
+    UserSetting userSetting,
+  ) async {
+    try {
+      if (userSetting.id.isEmpty) {
+        await _firestoreService.setUserSetting(
+          userSetting: userSetting,
+          userId: currentUser.id,
+        );
+      } else {
+        await _firestoreService.updateUserSetting(
+          userSetting,
+        );
+      }
+      return const Right(true);
+    } on firebase_core.FirebaseException catch (e) {
+      return Left(SendFailure.fromCode(e).status);
+    } catch (e) {
+      return const Left(SomeFailure.serverError());
     }
   }
 }

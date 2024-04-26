@@ -11,7 +11,7 @@ Future<void> chekPointHelper(
     itemKey: KWidgetkeys.widget.checkPoint.widget,
   );
   expect(
-    find.byKey(KWidgetkeys.widget.checkPoint.widget),
+    find.byKey(KWidgetkeys.widget.checkPoint.widget).first,
     findsOneWidget,
   );
   expect(
@@ -19,7 +19,7 @@ Future<void> chekPointHelper(
     findsNothing,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.widget.checkPoint.widget));
+  await tester.tap(find.byKey(KWidgetkeys.widget.checkPoint.widget).first);
 
   await tester.pumpAndSettle();
 

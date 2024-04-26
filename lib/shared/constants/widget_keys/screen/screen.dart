@@ -16,4 +16,5 @@ class _ScreenKeys {
   final contact = _ContactKeys();
   final login = _LoginKeys();
   final signUp = _SignUpKeys();
+  final questionsForm = _QuestionsFormKeys();
 }

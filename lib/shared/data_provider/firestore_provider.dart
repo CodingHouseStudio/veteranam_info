@@ -70,4 +70,33 @@ class FirestoreService {
         .doc(fund.id)
         .set(fund.toJson());
   }
+
+  Future<void> updateUserSetting(UserSetting userSetting) {
+    return _db
+        .collection(FirebaseCollectionName.userSettings)
+        .doc(userSetting.id)
+        .update(userSetting.toJson());
+  }
+
+  Future<void> setUserSetting({
+    required UserSetting userSetting,
+    required String userId,
+  }) {
+    return _db
+        .collection(FirebaseCollectionName.userSettings)
+        .doc(userId)
+        .set(userSetting.toJson());
+  }
+
+  Future<UserSetting> getUserSetting(String userId) async {
+    final docSnapshot = await _db
+        .collection(FirebaseCollectionName.userSettings)
+        .doc(userId)
+        .get();
+    if (docSnapshot.exists) {
+      return UserSetting.fromJson(docSnapshot.data()!);
+    } else {
+      return UserSetting.empty;
+    }
+  }
 }
