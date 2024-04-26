@@ -19,9 +19,6 @@ extension PumpApp on WidgetTester {
       MultiBlocProvider(
         providers: [
           BlocProvider(
-            create: (context) => GetIt.I.get<LanguageCubit>()..initLanguage(),
-          ),
-          BlocProvider(
             create: (context) => GetIt.I.get<AuthenticationBloc>()
               ..add(AuthenticationInitialized()),
           ),
@@ -30,28 +27,24 @@ extension PumpApp on WidgetTester {
           ),
         ],
         child: BlocBuilder<AuthenticationBloc, AuthenticationState>(
-          builder: (context, state) {
-            return BlocBuilder<LanguageCubit, Language?>(
-              builder: (context, state) => mockGoRouter == null
-                  ? MaterialApp(
-                      localizationsDelegates:
-                          AppLocalizations.localizationsDelegates,
-                      locale: state?.value,
-                      supportedLocales: AppLocalizations.supportedLocales,
-                      home: widget,
-                    )
-                  : MockGoRouterProvider(
-                      goRouter: mockGoRouter,
-                      child: MaterialApp(
-                        localizationsDelegates:
-                            AppLocalizations.localizationsDelegates,
-                        locale: state?.value,
-                        supportedLocales: AppLocalizations.supportedLocales,
-                        home: widget,
-                      ),
-                    ),
-            );
-          },
+          builder: (context, state) => mockGoRouter == null
+              ? MaterialApp(
+                  localizationsDelegates:
+                      AppLocalizations.localizationsDelegates,
+                  locale: state.userSetting.locale.value,
+                  supportedLocales: AppLocalizations.supportedLocales,
+                  home: widget,
+                )
+              : MockGoRouterProvider(
+                  goRouter: mockGoRouter,
+                  child: MaterialApp(
+                    localizationsDelegates:
+                        AppLocalizations.localizationsDelegates,
+                    locale: state.userSetting.locale.value,
+                    supportedLocales: AppLocalizations.supportedLocales,
+                    home: widget,
+                  ),
+                ),
         ),
       ),
     );

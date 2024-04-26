@@ -90,6 +90,13 @@
   "serverError": "An error occurred while transferring data to the server",
   "rateOurSite": "Rate our site",
   "next": "Next",
+  "fillInForm": "Fill in the form",
+  "questionsFormSubtitle": "In order for us to provide you with the most useful services, please answer the following question:",
+  "selectAppropriateOne": "Select the appropriate one:",
+  "iAmVeteran": "I am a veteran;",
+  "iAmRelativeOfVeteran": "I am a relative of a veteran;",
+  "iAmCivilian": "I am a civilian;",
+  "iAmBusinessOwnerRepresentative": "I am a business owner/representative, I want to provide benefits.",
   "workSubtitle": "In this section, you will find current vacancies, and you can also leave a request to help us with your search. For your convenience, you can use filters.",
   "lookingForJob": "Looking for a job",
   "givingJob": "Giving a job"

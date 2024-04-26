@@ -219,8 +219,8 @@ class WorkEmployeeWatcherBloc
           i -= KDimensions.pagetItems) {
         if (i <= workModelItems.length + KDimensions.pagetItems) {
           return workModelItems.sublist(
-            ((i / KDimensions.pagetItems) - 1).ceil(),
-            (i / KDimensions.pagetItems).ceil(),
+            i - KDimensions.pagetItems,
+            i,
           );
         }
       }

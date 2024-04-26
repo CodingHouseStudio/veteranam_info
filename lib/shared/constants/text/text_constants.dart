@@ -27,10 +27,10 @@ abstract class KMockText {
   static const userNameAnonim = 'Anonim23456';
   static const email = 'example@gmail.com';
   static const tags = <List<String>?>[
-    ['Пільги', 'Гарячі лінії'],
+    ['Пільги'],
+    ['Гарячі лінії'],
     ['Житло'],
     [],
-    ['Житло', 'Гарячі лінії'],
   ];
   static const workTitle = 'Комплектувальник товару в магазин';
   static const workPrice = '12000 грн +%';

@@ -9,7 +9,6 @@ class WorkEmployeeBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final scrollableKey = GlobalKey();
     return BlocBuilder<WorkEmployeeWatcherBloc, WorkEmployeeWatcherState>(
       builder: (context, _) {
         switch (_.loadingStatus) {
@@ -18,93 +17,84 @@ class WorkEmployeeBody extends StatelessWidget {
           case LoadingStatus.loading:
             return const CircularProgressIndicator.adaptive();
           case LoadingStatus.loaded:
-            return BlocListener<WorkEmployeeWatcherBloc,
-                WorkEmployeeWatcherState>(
-              listenWhen: (previous, current) => previous.page != current.page,
-              listener: (context, state) =>
-                  WidgetsBinding.instance.addPostFrameCallback((_) {
-                Scrollable.ensureVisible(scrollableKey.currentContext!);
-              }),
-              child: ScaffoldWidget(
-                childWidgetsFunction: ({required isDesk}) => [
-                  if (isDesk)
-                    KSizedBox.kHeightSizedBox40
-                  else
-                    KSizedBox.kHeightSizedBox24,
-                  Text(
-                    context.l10n.work,
-                    style: isDesk ? AppTextStyle.text96 : AppTextStyle.text32,
-                  ),
-                  KSizedBox.kHeightSizedBox8,
-                  Text(
-                    context.l10n.workSubtitle,
-                    style: isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
-                  ),
-                  if (isDesk)
-                    KSizedBox.kHeightSizedBox56
-                  else
-                    KSizedBox.kHeightSizedBox24,
-                  WorkEmployeeFilters(
-                    cities: _.workModelItems.overallCities,
-                    categories: _.workModelItems.overallCategories,
-                    isDesk: isDesk,
-                  ),
-                  if (isDesk)
-                    KSizedBox.kHeightSizedBox40
-                  else
-                    KSizedBox.kHeightSizedBox24,
-                  ...List.generate(
-                      _.workModelItems.isNotEmpty
-                          ? _.filteredWorkModelItems.length
-                          : 1, (index) {
-                    if (_.workModelItems.isNotEmpty) {
-                      return Padding(
-                        key: index == 0 ? scrollableKey : null,
-                        padding: EdgeInsets.only(
-                          top: index != 0 ? KPadding.kPaddingSize40 : 0,
-                        ),
-                        child: WorkCardWidget(
-                          workModel: _.filteredWorkModelItems.elementAt(index),
-                          isDesk: isDesk,
-                        ),
-                      );
-                    } else {
-                      return TextButton(
-                        onPressed: () {
-                          GetIt.I.get<IWorkRepository>().addMockWorks();
-                          context
-                              .read<WorkEmployeeWatcherBloc>()
-                              .add(const WorkEmployeeWatcherEvent.started());
-                        },
-                        child: Text(
-                          context.l10n.getMockData,
-                          style: AppTextStyle.text32,
-                        ),
-                      );
-                    }
-                  }),
-                  if (isDesk)
-                    KSizedBox.kHeightSizedBox56
-                  else
-                    KSizedBox.kHeightSizedBox24,
-                  Center(
-                    child: PaginationWidget(
-                      currentPage: _.page,
-                      pages: _.maxPage,
-                      changePage: (int page) =>
-                          context.read<WorkEmployeeWatcherBloc>().add(
-                                WorkEmployeeWatcherEvent.loadPage(
-                                  page,
-                                ),
+            return ScaffoldWidget(
+              childWidgetsFunction: ({required isDesk}) => [
+                if (isDesk)
+                  KSizedBox.kHeightSizedBox40
+                else
+                  KSizedBox.kHeightSizedBox24,
+                Text(
+                  context.l10n.work,
+                  style: isDesk ? AppTextStyle.text96 : AppTextStyle.text32,
+                ),
+                KSizedBox.kHeightSizedBox8,
+                Text(
+                  context.l10n.workSubtitle,
+                  style: isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
+                ),
+                if (isDesk)
+                  KSizedBox.kHeightSizedBox56
+                else
+                  KSizedBox.kHeightSizedBox24,
+                WorkEmployeeFilters(
+                  cities: _.workModelItems.overallCities,
+                  categories: _.workModelItems.overallCategories,
+                  isDesk: isDesk,
+                ),
+                if (isDesk)
+                  KSizedBox.kHeightSizedBox40
+                else
+                  KSizedBox.kHeightSizedBox24,
+                ...List.generate(
+                    _.workModelItems.isNotEmpty
+                        ? _.filteredWorkModelItems.length
+                        : 1, (index) {
+                  if (_.workModelItems.isNotEmpty) {
+                    return Padding(
+                      padding: EdgeInsets.only(
+                        top: index != 0 ? KPadding.kPaddingSize40 : 0,
+                      ),
+                      child: WorkCardWidget(
+                        workModel: _.filteredWorkModelItems.elementAt(index),
+                        isDesk: isDesk,
+                      ),
+                    );
+                  } else {
+                    return TextButton(
+                      onPressed: () {
+                        GetIt.I.get<IWorkRepository>().addMockWorks();
+                        context
+                            .read<WorkEmployeeWatcherBloc>()
+                            .add(const WorkEmployeeWatcherEvent.started());
+                      },
+                      child: Text(
+                        context.l10n.getMockData,
+                        style: AppTextStyle.text32,
+                      ),
+                    );
+                  }
+                }),
+                if (isDesk)
+                  KSizedBox.kHeightSizedBox56
+                else
+                  KSizedBox.kHeightSizedBox24,
+                Center(
+                  child: PaginationWidget(
+                    currentPage: _.page,
+                    pages: _.maxPage,
+                    changePage: (int page) =>
+                        context.read<WorkEmployeeWatcherBloc>().add(
+                              WorkEmployeeWatcherEvent.loadPage(
+                                page,
                               ),
-                    ),
+                            ),
                   ),
-                  if (isDesk)
-                    KSizedBox.kHeightSizedBox56
-                  else
-                    KSizedBox.kHeightSizedBox24,
-                ],
-              ),
+                ),
+                if (isDesk)
+                  KSizedBox.kHeightSizedBox56
+                else
+                  KSizedBox.kHeightSizedBox24,
+              ],
             );
           case LoadingStatus.error:
             return const CircularProgressIndicator.adaptive();

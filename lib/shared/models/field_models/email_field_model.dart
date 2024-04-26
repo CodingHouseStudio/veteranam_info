@@ -42,7 +42,7 @@ class EmailFieldModel
     }
 
     // Additional checks for invalid characters
-    if (value.contains(' ') || value.contains(',') || value.contains(';')) {
+    if (!RegExp(r'^[A-Za-z0-9@.]+$').hasMatch(value)) {
       return EmailFieldModelValidationError.wrong;
     }
 
