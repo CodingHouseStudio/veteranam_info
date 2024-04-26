@@ -82,8 +82,14 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.only(bottom: KPadding.kPaddingSize4),
-          child: Text(label, style: AppTextStyle.text24),
+          padding: const EdgeInsets.symmetric(
+            horizontal: KPadding.kPaddingSize16,
+            vertical: KPadding.kPaddingSize4,
+          ),
+          child: Text(
+            label,
+            style: widget.isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
+          ),
         ),
         TextFieldWidget(
           onChanged: (value) {},
@@ -172,20 +178,26 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
       children: [
         Text(
           context.l10n.linkedAccounts,
-          style: AppTextStyle.text24,
+          style: widget.isDesk ? AppTextStyle.text40 : AppTextStyle.text24,
         ),
         KSizedBox.kHeightSizedBox8,
-        const Row(
-          children: [
-            KIcon.facebook,
-            KSizedBox.kWidthSizedBox8,
-            Expanded(
-              child: Text(
-                KMockText.facebook,
-                style: AppTextStyle.text16,
+        Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: KPadding.kPaddingSize16,
+          ),
+          child: Row(
+            children: [
+              KIcon.facebook,
+              KSizedBox.kWidthSizedBox8,
+              Expanded(
+                child: Text(
+                  KMockText.facebook,
+                  style:
+                      widget.isDesk ? AppTextStyle.text32 : AppTextStyle.text16,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
         KSizedBox.kHeightSizedBox8,
         Row(
