@@ -41,7 +41,6 @@ class HomeScaffoldWidget extends StatelessWidget {
                   key: KWidgetkeys.widget.shellRoute.scroll,
                   slivers: [
                     SliverPersistentHeader(
-                      pinned: true,
                       delegate: HomeNawbarWidget(isDesk: isDesk),
                     ),
                     SliverList(
