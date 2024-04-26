@@ -35,6 +35,7 @@ class AuditInspectionInProgresFilters extends StatelessWidget {
                         : KPadding.kPaddingSize8,
                   ),
                   child: ChipWidget(
+                    key: KWidgetkeys.widget.chip.widget,
                     filter: filter,
                     onSelected: ({required isSelected}) =>
                         context.read<InformationWatcherBloc>().add(

@@ -24,10 +24,6 @@ void main() {
 
       await tester.pumpAndSettle();
 
-      await filterBoxHelper(
-        tester,
-      );
-
       await dropListFieldBoxHelper(
         tester: tester,
         text: KMockText.dropDownList.elementAt(0),
@@ -48,10 +44,6 @@ void main() {
         );
 
         await tester.pumpAndSettle();
-
-        await filterBoxHelper(
-          tester,
-        );
 
         await dropListFieldBoxHelper(
           tester: tester,
