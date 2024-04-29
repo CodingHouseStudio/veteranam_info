@@ -28,28 +28,27 @@ class EmailPasswordFieldsWidget extends StatefulWidget {
       _EmailPasswordFieldsWidgetState();
 }
 
-class _EmailPasswordFieldsWidgetState extends State<EmailPasswordFieldsWidget> {
+class _EmailPasswordFieldsWidgetState extends State<EmailPasswordFieldsWidget>
+    with AutomaticKeepAliveClientMixin {
   late TextEditingController emailController;
   late TextEditingController passwordController;
   bool obscurePassword = true;
-  late FocusNode emailFocusNode;
-  late FocusNode passwordFocusNode;
+  FocusNode? focusNode;
 
   @override
   void initState() {
     emailController = TextEditingController();
     passwordController = TextEditingController();
-    emailFocusNode = FocusNode();
-    passwordFocusNode = FocusNode();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
+    focusNode ??= FocusNode();
     return GestureDetector(
       onTap: () {
-        emailFocusNode.unfocus();
-        passwordFocusNode.unfocus();
+        FocusScope.of(context).unfocus();
       },
       child: Column(
         crossAxisAlignment: widget.isDesk
@@ -112,7 +111,7 @@ class _EmailPasswordFieldsWidgetState extends State<EmailPasswordFieldsWidget> {
                   },
                 ),
               ),
-              focusNode: passwordFocusNode,
+              focusNode: focusNode,
               obscureText: obscurePassword,
             )
           else
@@ -123,7 +122,6 @@ class _EmailPasswordFieldsWidgetState extends State<EmailPasswordFieldsWidget> {
               hintText: context.l10n.writeYourEmail,
               isDesk: widget.isDesk,
               controller: emailController,
-              focusNode: emailFocusNode,
             ),
         ],
       ),
@@ -134,8 +132,9 @@ class _EmailPasswordFieldsWidgetState extends State<EmailPasswordFieldsWidget> {
   void dispose() {
     emailController.dispose();
     passwordController.dispose();
-    emailFocusNode.dispose();
-    passwordFocusNode.dispose();
     super.dispose();
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
