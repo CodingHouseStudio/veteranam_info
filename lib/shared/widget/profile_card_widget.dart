@@ -19,13 +19,14 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Padding(
-        padding:
-            const EdgeInsets.symmetric(horizontal: KPadding.kPaddingSize16),
+        padding: EdgeInsets.all(
+          widget.isDesk ? KPadding.kPaddingSize4 : KPadding.kPaddingSize8,
+        ),
         key: KWidgetkeys.widget.profileCard.profileCard,
         child: Container(
           decoration: KWidetTheme.boxDecorPrimary,
           child: Padding(
-            padding: const EdgeInsets.all(KPadding.kPaddingSize20),
+            padding: const EdgeInsets.all(KPadding.kPaddingSize16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
