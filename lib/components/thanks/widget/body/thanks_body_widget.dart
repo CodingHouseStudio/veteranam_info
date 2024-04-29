@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kozak/shared/shared.dart';
 
@@ -34,11 +34,10 @@ class ThanksBodyWidget extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Expanded(
-                      flex: 2,
+                    Flexible(
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: KPadding.kPaddingSize56,
+                        padding: const EdgeInsets.only(
+                          left: KPadding.kPaddingSize128,
                         ),
                         child: BoxWidget(
                           text: context.l10n.myProfile,
@@ -47,12 +46,11 @@ class ThanksBodyWidget extends StatelessWidget {
                         ),
                       ),
                     ),
-                    KSizedBox.kWidthSizedBox24,
-                    Expanded(
-                      flex: 2,
+                    KSizedBox.kWidthSizedBox48,
+                    Flexible(
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: KPadding.kPaddingSize56,
+                        padding: const EdgeInsets.only(
+                          right: KPadding.kPaddingSize128,
                         ),
                         child: BoxWidget(
                           text: context.l10n.mainScreen,
