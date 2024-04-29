@@ -54,9 +54,7 @@ class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
                   setState(() {
                     if (maxLines == null) {
                       maxLines = widget.maxLines;
-                      WidgetsBinding.instance.addPostFrameCallback((_) {
-                        Scrollable.ensureVisible(cardDetailKey.currentContext!);
-                      });
+                      Scrollable.ensureVisible(cardDetailKey.currentContext!);
                     } else {
                       maxLines = null;
                     }

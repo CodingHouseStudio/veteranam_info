@@ -28,7 +28,7 @@ class CardAddImageWidget extends StatelessWidget {
               Expanded(
                 child: Container(
                   decoration:
-                      image == null ? KWidetTheme.boxDecorationWidget : null,
+                      image == null ? KWidgetTheme.boxDecorationWidget : null,
                   child: Padding(
                     padding: EdgeInsets.symmetric(
                       horizontal: KPadding.kPaddingSize32,
@@ -41,7 +41,7 @@ class CardAddImageWidget extends StatelessWidget {
             ],
           )
         : Container(
-            decoration: KWidetTheme.boxDecorationWidget,
+            decoration: KWidgetTheme.boxDecorationWidget,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
@@ -66,8 +66,8 @@ class CardAddImageWidget extends StatelessWidget {
   Widget buildImage() {
     return Container(
       decoration: isDesk
-          ? KWidetTheme.boxDecorationImageDesk
-          : KWidetTheme.boxDecorationImageMob,
+          ? KWidgetTheme.boxDecorationImageDesk
+          : KWidgetTheme.boxDecorationImageMob,
       child: CachedNetworkImage(
         key: KWidgetkeys.widget.cardAddImage.widget,
         imageUrl: image!,

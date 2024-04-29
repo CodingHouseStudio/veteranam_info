@@ -2,6 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
+import 'package:mocktail/mocktail.dart';
 
 import '../bloc/authentication_bloc_unit_test.dart';
 import '../text_dependency.dart';
@@ -103,8 +104,29 @@ void main() {
 
         await footerHelper(tester);
       });
-      // group('${KGroupText.goTo} ', () {
-      // });
+      group('${KGroupText.goTo} ', () {
+        testWidgets('${KGroupText.intial} ', (tester) async {
+          await tester.pumpApp(const WorkScreen(), mockGoRouter: mockGoRouter);
+
+          expect(
+            find.byKey(KWidgetkeys.screen.work.screen),
+            findsOneWidget,
+          );
+
+          await tester.pumpAndSettle();
+
+          expect(
+            find.byKey(KWidgetkeys.screen.work.boxEmployee),
+            findsOneWidget,
+          );
+
+          await tester.tap(find.byKey(KWidgetkeys.screen.work.boxEmployee));
+
+          verify.call(
+            () => mockGoRouter.goNamed(KRoute.workEmployee.name),
+          );
+        });
+      });
     });
   });
 }

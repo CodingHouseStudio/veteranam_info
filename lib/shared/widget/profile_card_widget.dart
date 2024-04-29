@@ -24,7 +24,7 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
         ),
         key: KWidgetkeys.widget.profileCard.profileCard,
         child: Container(
-          decoration: KWidetTheme.boxDecorPrimary,
+          decoration: KWidgetTheme.boxDecorPrimary,
           child: Padding(
             padding: const EdgeInsets.all(KPadding.kPaddingSize16),
             child: Column(
