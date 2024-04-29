@@ -152,7 +152,7 @@ abstract class KTestConstants {
   static const scrollingDown = Offset(0, -10000);
   static const scrollingDown500 = Offset(0, -500);
   static const scrollingUp = Offset(0, 10000);
-  static const scrollingUp500 = Offset(0, 500);
+  static const scrollingUp200 = Offset(0, 200);
   static const scrollingAppBar = Offset(0, KSize.kPreferredSize);
 
   static const windowTabletSize = Size(1700, 1700);

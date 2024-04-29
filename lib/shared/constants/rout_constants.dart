@@ -55,7 +55,7 @@ abstract class KRoute {
     name: 'SignUp',
   );
   static const _RouteItem thanks = _RouteItem(
-    path: 'thanks',
+    path: '/thanks',
     name: 'Thanks',
   );
   static const _RouteItem questionsForm = _RouteItem(
