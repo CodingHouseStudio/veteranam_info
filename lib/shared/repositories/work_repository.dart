@@ -10,7 +10,7 @@ class WorkRepository implements IWorkRepository {
 
   @override
   void addMockWorks() {
-    for (var i = 0; i < 50; i++) {
+    for (var i = 0; i < 5; i++) {
       _firestoreService.addWork(
         WorkModel(
           id: DateTime.now().millisecond.toString(),

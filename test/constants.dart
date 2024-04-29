@@ -85,6 +85,20 @@ abstract class KTestText {
     ),
   ];
 
+  static final workModelItems = <WorkModel>[
+    for (var i = 0; i < 50; i++)
+      const WorkModel(
+        id: '1',
+        title: KMockText.workTitle,
+        description: KMockText.workDescription,
+        employerContact: KMockText.email,
+        price: KMockText.workPrice,
+        city: KMockText.workCity,
+        companyName: KMockText.workEmployer,
+        category: KMockText.workCategory,
+      ),
+  ];
+
   static const user = User(
     id: '1',
     email: useremail,
@@ -152,8 +166,8 @@ abstract class KTestConstants {
   static const scrollingDown = Offset(0, -10000);
   static const scrollingDown500 = Offset(0, -500);
   static const scrollingUp = Offset(0, 10000);
+  static const scrollingUp200 = Offset(0, 200);
   static const scrollingUp500 = Offset(0, 500);
-  static const scrollingAppBar = Offset(0, KSize.kPreferredSize);
 
   static const windowTabletSize = Size(1700, 1700);
   static const windowMobileSize = Size(700, 700);
@@ -178,6 +192,7 @@ abstract class KScreenBlocName {
   static const login = 'Login Screen';
   static const signUp = 'Sign Up Screen';
   static const questionsForm = 'Questions Form Screen';
+  static const workEmployee = 'Work Employee Screen';
 
   static const feedback = 'Feedback Widget';
 
@@ -190,9 +205,10 @@ abstract class KScreenBlocName {
   static const loginBloc = 'Login Bloc';
   static const signUpBloc = 'Sign Up Bloc';
   static const scrollCubit = 'Scroll Cubit';
+  static const informationBloc = 'Information Bloc';
+  static const investorsBloc = 'Investors Bloc';
+  static const workEmployeeBloc = 'Work Bloc';
 
   static const iAppAuthenticationRepository = 'App Authentication';
   static const authentication = ' Authentication';
-  static const informationBloc = 'Information Bloc';
-  static const investorsBloc = 'Investors Bloc';
 }

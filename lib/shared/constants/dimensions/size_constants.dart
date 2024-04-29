@@ -35,8 +35,6 @@ abstract class KSize {
   static const kFont96 = 96.0;
   static const kFont128 = 128.0;
 
-  static const kPreferredSize = 160.0;
-
   static const kUserPhoto = 48.0;
 
   static const kWrapSpacing8 = 8.0;

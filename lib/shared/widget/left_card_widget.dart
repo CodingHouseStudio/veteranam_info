@@ -19,78 +19,93 @@ class LeftCardWidget extends StatelessWidget {
         final isDesk =
             constraints.maxWidth > KPlatformConstants.minWidthThresholdTablet;
         return Scaffold(
-          appBar: NawbarWidget(
-            isDesk: isDesk,
-          ),
           backgroundColor: isDesk ? AppColors.blackWhite : AppColors.white,
           body: buildChildWidget(
-            isDesk
-                ? ColoredBox(
-                    key: KWidgetkeys.widget.leftCard.desk,
-                    color: AppColors.blackWhite,
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Container(
-                            decoration: KWidgetTheme.boxDecorationWhite,
-                            child: Padding(
-                              padding: const EdgeInsets.only(
-                                right: KPadding.kPaddingSize80,
-                                left: KPadding.kPaddingSize96,
-                                top: KPadding.kPaddingSize24,
-                                bottom: KPadding.kPaddingSize92,
-                              ),
-                              child: Column(
-                                crossAxisAlignment: isDesk
-                                    ? CrossAxisAlignment.start
-                                    : CrossAxisAlignment.center,
-                                children: widgetList(isDesk: isDesk),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: image != null
-                              ? CachedNetworkImage(
-                                  key: KWidgetkeys.widget.leftCard.image,
-                                  imageUrl: KMockText.image,
-                                  placeholder: (context, url) =>
-                                      Image.asset(''),
-                                  errorWidget: (context, url, error) =>
-                                      KIcon.error,
-                                  fit: BoxFit.fill,
-                                )
-                              : const SizedBox.shrink(),
-                        ),
-                      ],
-                    ),
-                  )
-                : ColoredBox(
-                    color: AppColors.white,
-                    child: Padding(
-                      key: KWidgetkeys.widget.leftCard.mob,
-                      padding: const EdgeInsets.only(
+            isDesk: isDesk,
+            childWidgets: [
+              Padding(
+                padding: isDesk
+                    ? const EdgeInsets.symmetric(
+                        vertical: KPadding.kPaddingSize40,
+                      )
+                    : const EdgeInsets.only(
                         top: KPadding.kPaddingSize56,
+                        bottom: KPadding.kPaddingSize24,
                         right: KPadding.kPaddingSize16,
                         left: KPadding.kPaddingSize16,
-                        bottom: KPadding.kPaddingSize24,
                       ),
-                      child: Column(
-                        children: widgetList(isDesk: isDesk),
+                child: isDesk
+                    ? ColoredBox(
+                        key: KWidgetkeys.widget.leftCard.desk,
+                        color: AppColors.blackWhite,
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Container(
+                                decoration: KWidgetTheme.boxDecorationWhite,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                    right: KPadding.kPaddingSize80,
+                                    left: KPadding.kPaddingSize96,
+                                    top: KPadding.kPaddingSize24,
+                                    bottom: KPadding.kPaddingSize92,
+                                  ),
+                                  child: Column(
+                                    crossAxisAlignment: isDesk
+                                        ? CrossAxisAlignment.start
+                                        : CrossAxisAlignment.center,
+                                    children: widgetList(isDesk: isDesk),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: image != null
+                                  ? CachedNetworkImage(
+                                      key: KWidgetkeys.widget.leftCard.image,
+                                      imageUrl: KMockText.image,
+                                      placeholder: (context, url) =>
+                                          Image.asset(''),
+                                      errorWidget: (context, url, error) =>
+                                          KIcon.error,
+                                      fit: BoxFit.fill,
+                                    )
+                                  : const SizedBox.shrink(),
+                            ),
+                          ],
+                        ),
+                      )
+                    : ColoredBox(
+                        key: KWidgetkeys.widget.leftCard.mob,
+                        color: AppColors.white,
+                        child: Column(
+                          children: widgetList(isDesk: isDesk),
+                        ),
                       ),
-                    ),
-                  ),
+              ),
+            ],
           ),
         );
       },
     );
   }
 
-  Widget buildChildWidget(Widget childWidget) {
-    return ListView(
+  Widget buildChildWidget({
+    required List<Widget> childWidgets,
+    required bool isDesk,
+  }) {
+    return CustomScrollView(
       key: KWidgetkeys.widget.shellRoute.scroll,
-      padding: const EdgeInsets.only(top: KPadding.kPaddingSize40),
-      children: [childWidget],
+      slivers: [
+        SliverPersistentHeader(
+          delegate: NawbarWidget(isDesk: isDesk),
+        ),
+        SliverList(
+          delegate: SliverChildListDelegate(
+            childWidgets,
+          ),
+        ),
+      ],
     );
   }
 }

@@ -19,8 +19,6 @@ export 'feedback_widget.dart';
 export 'filter_box_widget.dart';
 export 'filter_popup_menu_widget.dart';
 export 'footer_widget.dart';
-export 'home_nawbar_widget.dart';
-export 'home_scaffold_widget.dart';
 export 'icon_widget.dart';
 export 'languages_switcher_widget.dart';
 export 'left_card_widget.dart';

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kozak/components/components.dart';
+import 'package:kozak/components/thanks/thanks.dart';
 import 'package:kozak/shared/shared.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -52,11 +53,20 @@ final GoRouter router = GoRouter(
       redirect: (context, state) =>
           context.read<AuthenticationBloc>().state.userSetting.userRole == null
               ? null
-              : KRoute.home.path,
+              : KRoute.thanks.path,
       pageBuilder: (context, state) => NoTransitionPage(
         key: state.pageKey,
         child: const QuestionsFormScreen(),
       ),
+    ),
+    GoRoute(
+      name: KRoute.thanks.name,
+      path: KRoute.thanks.path,
+      pageBuilder: (context, state) => NoTransitionPage(
+        key: state.pageKey,
+        child: const ThanksScreen(),
+      ),
+      onExit: (context) => context.read<ScrollCubit>().scrollUp(),
     ),
     GoRoute(
       name: KRoute.home.name,

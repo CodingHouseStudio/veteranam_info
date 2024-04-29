@@ -47,11 +47,9 @@ class InformationBodyWidget extends StatelessWidget {
                   KSizedBox.kHeightSizedBox40
                 else
                   KSizedBox.kHeightSizedBox24,
-                ...List.generate(
-                    _.informationModelItems.isNotEmpty
-                        ? _.filteredInformationModelItems.length
-                        : 1, (index) {
-                  if (_.informationModelItems.isNotEmpty) {
+                if (_.informationModelItems.isNotEmpty)
+                  ...List.generate(_.filteredInformationModelItems.length,
+                      (index) {
                     return Padding(
                       padding: EdgeInsets.only(
                         top: index != 0 ? KPadding.kPaddingSize40 : 0,
@@ -63,24 +61,23 @@ class InformationBodyWidget extends StatelessWidget {
                         isDesk: isDesk,
                       ),
                     );
-                  } else {
-                    return TextButton(
-                      key: KWidgetkeys.screen.information.buttonMock,
-                      onPressed: () {
-                        GetIt.I
-                            .get<IInformationRepository>()
-                            .addMockInformationItems();
-                        context
-                            .read<InformationWatcherBloc>()
-                            .add(const InformationWatcherEvent.started());
-                      },
-                      child: Text(
-                        context.l10n.getMockData,
-                        style: AppTextStyle.text32,
-                      ),
-                    );
-                  }
-                }),
+                  })
+                else
+                  TextButton(
+                    key: KWidgetkeys.screen.information.buttonMock,
+                    onPressed: () {
+                      GetIt.I
+                          .get<IInformationRepository>()
+                          .addMockInformationItems();
+                      context
+                          .read<InformationWatcherBloc>()
+                          .add(const InformationWatcherEvent.started());
+                    },
+                    child: Text(
+                      context.l10n.getMockData,
+                      style: AppTextStyle.text32,
+                    ),
+                  ),
                 if (isDesk)
                   KSizedBox.kHeightSizedBox56
                 else
