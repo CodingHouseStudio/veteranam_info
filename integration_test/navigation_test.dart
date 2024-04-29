@@ -26,30 +26,25 @@ void main() {
     );
 
     for (var i = 0; i < KWidgetkeys.widget.footer.buttonsKey.length; i++) {
-      for (var j = 0;
-          j < KWidgetkeys.widget.footer.buttonsKey.elementAt(i).length;
-          j++) {
-        final buttonKey =
-            KWidgetkeys.widget.footer.buttonsKey.elementAt(i).elementAt(j);
-        final screenKey = KTestConstants.screens.elementAt(i).elementAt(j);
+      final buttonKey = KWidgetkeys.widget.footer.buttonsKey.elementAt(i);
+      final screenKey = KTestConstants.screens.elementAt(i);
 
-        await scrollingHelperInt(
-          tester: tester,
-          offset: KTestConstants.scrolling,
-          itemKey: buttonKey,
-        );
+      await scrollingHelperInt(
+        tester: tester,
+        offset: KTestConstants.scrolling,
+        itemKey: buttonKey,
+      );
 
-        expect(
-          find.byKey(buttonKey),
-          findsOneWidget,
-        );
+      expect(
+        find.byKey(buttonKey),
+        findsOneWidget,
+      );
 
-        await tester.tap(find.byKey(buttonKey));
+      await tester.tap(find.byKey(buttonKey));
 
-        await tester.pumpAndSettle();
+      await tester.pumpAndSettle();
 
-        expect(find.byKey(screenKey), findsOneWidget);
-      }
+      expect(find.byKey(screenKey), findsOneWidget);
     }
   });
 }
