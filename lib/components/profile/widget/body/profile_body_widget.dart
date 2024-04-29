@@ -71,32 +71,33 @@ class ProfileBodyWidget extends StatelessWidget {
             key: KWidgetkeys.widget.profileCard.profileCard,
             isDesk: isDesk,
           ),
-        ),
-        KSizedBox.kHeightSizedBox24,
-        ButtonWidget(
-          text: context.l10n.logOut,
-          onPressed: () => context
-              .read<AuthenticationBloc>()
-              .add(AuthenticationLogoutRequested()),
-          isDesk: isDesk,
-        ),
-        if (isDesk) KSizedBox.kWidthSizedBox24 else KSizedBox.kHeightSizedBox24,
-        ButtonWidget(
-          text: context.l10n.deleteAccount,
-          onPressed: () {},
-          isDesk: isDesk,
-          backgroundColor: AppColors.transparent,
-        ),
-        KSizedBox.kHeightSizedBox24,
-      ],
+          KSizedBox.kHeightSizedBox24,
+          ButtonWidget(
+            text: context.l10n.logOut,
+            onPressed: () => context
+                .read<AuthenticationBloc>()
+                .add(AuthenticationLogoutRequested()),
+            isDesk: isDesk,
+          ),
+          if (isDesk)
+            KSizedBox.kWidthSizedBox24
+          else
+            KSizedBox.kHeightSizedBox24,
+          ButtonWidget(
+            text: context.l10n.deleteAccount,
+            onPressed: () {},
+            isDesk: isDesk,
+            backgroundColor: AppColors.transparent,
+          ),
+          KSizedBox.kHeightSizedBox24,
           KSizedBox.kHeightSizedBox24,
           Padding(
             padding: const EdgeInsets.all(KPadding.kPaddingSize4),
             child: ButtonWidget(
               text: context.l10n.logOut,
-          onPressed: () => context
-              .read<AuthenticationBloc>()
-              .add(AuthenticationLogoutRequested()),
+              onPressed: () => context
+                  .read<AuthenticationBloc>()
+                  .add(AuthenticationLogoutRequested()),
               isDesk: isDesk,
             ),
           ),
