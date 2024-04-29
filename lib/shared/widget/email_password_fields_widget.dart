@@ -32,13 +32,15 @@ class _EmailPasswordFieldsWidgetState extends State<EmailPasswordFieldsWidget> {
   late TextEditingController emailController;
   late TextEditingController passwordController;
   bool obscurePassword = true;
-  late FocusNode focusNode;
+  late FocusNode emailFocusNode;
+  late FocusNode passwordFocusNode;
 
   @override
   void initState() {
     emailController = TextEditingController();
     passwordController = TextEditingController();
-    focusNode = FocusNode();
+    emailFocusNode = FocusNode();
+    passwordFocusNode = FocusNode();
     super.initState();
   }
 
@@ -46,7 +48,8 @@ class _EmailPasswordFieldsWidgetState extends State<EmailPasswordFieldsWidget> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        FocusScope.of(context).unfocus();
+        emailFocusNode.unfocus();
+        passwordFocusNode.unfocus();
       },
       child: Column(
         crossAxisAlignment: widget.isDesk
@@ -109,7 +112,7 @@ class _EmailPasswordFieldsWidgetState extends State<EmailPasswordFieldsWidget> {
                   },
                 ),
               ),
-              focusNode: focusNode,
+              focusNode: passwordFocusNode,
               obscureText: obscurePassword,
             )
           else
@@ -120,6 +123,7 @@ class _EmailPasswordFieldsWidgetState extends State<EmailPasswordFieldsWidget> {
               hintText: context.l10n.writeYourEmail,
               isDesk: widget.isDesk,
               controller: emailController,
+              focusNode: emailFocusNode,
             ),
         ],
       ),
@@ -130,6 +134,8 @@ class _EmailPasswordFieldsWidgetState extends State<EmailPasswordFieldsWidget> {
   void dispose() {
     emailController.dispose();
     passwordController.dispose();
+    emailFocusNode.dispose();
+    passwordFocusNode.dispose();
     super.dispose();
   }
 }
