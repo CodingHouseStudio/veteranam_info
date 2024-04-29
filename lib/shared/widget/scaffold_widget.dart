@@ -17,15 +17,6 @@ class ScaffoldWidget extends StatelessWidget {
       builder: (BuildContext context, BoxConstraints constraints) {
         final isDesk =
             constraints.maxWidth > KPlatformConstants.minWidthThresholdTablet;
-        final childWidgets = childWidgetsFunction(isDesk: isDesk)
-          ..add(
-            FooterWidget(
-              isDesk: isDesk,
-            ),
-          )
-          ..add(
-            isDesk ? KSizedBox.kHeightSizedBox40 : KSizedBox.kHeightSizedBox24,
-          );
         return Scaffold(
           body: BlocBuilder<ScrollCubit, ScrollController>(
             builder: (context, _) {
@@ -59,13 +50,49 @@ class ScaffoldWidget extends StatelessWidget {
                     ),
                     sliver: SliverList(
                       delegate: SliverChildListDelegate(
-                        childWidgets,
+                        childWidgetsFunction(isDesk: isDesk),
+                      ),
+                    ),
+                  ),
+                  SliverPadding(
+                    padding: EdgeInsets.only(
+                      left: isDesk
+                          ? KPadding.kPaddingSize90
+                          : KPadding.kPaddingSize16,
+                      right: isDesk
+                          ? KPadding.kPaddingSize90
+                          : KPadding.kPaddingSize16,
+                      bottom: KPadding.kPaddingSize40,
+                    ),
+                    sliver: DecoratedSliver(
+                      decoration: KWidetTheme.boxDecorationCard,
+                      sliver: SliverPadding(
+                        padding: isDesk
+                            ? const EdgeInsets.all(KPadding.kPaddingSize48)
+                            : const EdgeInsets.symmetric(
+                                vertical: KPadding.kPaddingSize32,
+                                horizontal: KPadding.kPaddingSize16,
+                              ),
+                        sliver: FooterWidget(
+                          key: KWidgetkeys.widget.footer.widget,
+                          isDesk: isDesk,
+                          gridDelegate: isDesk
+                              ? const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 3,
+                                  mainAxisExtent: KMinMaxSize.maxHeight50,
+                                  mainAxisSpacing: KPadding.kPaddingSize32,
+                                )
+                              : const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 1,
+                                  mainAxisExtent: KMinMaxSize.maxHeight50,
+                                ),
+                        ),
                       ),
                     ),
                   ),
                 ],
                 controller: _,
-                semanticChildCount: childWidgets.length,
+                semanticChildCount: childWidgetsFunction(isDesk: isDesk).length,
               );
             },
           ),
