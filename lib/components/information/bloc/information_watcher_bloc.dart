@@ -68,13 +68,19 @@ class InformationWatcherBloc
       InformationWatcherState(
         informationModelItems: event.informationItemsModel,
         loadingStatus: LoadingStatus.loaded,
-        filteredInformationModelItems: _filter(
-          filters: state.filters,
-          itemsLoaded: state.itemsLoaded + 1,
-          informationModelItems: event.informationItemsModel,
-        ),
+        filteredInformationModelItems: event.informationItemsModel.isNotEmpty
+            ? _filter(
+                filters: state.filters,
+                itemsLoaded: state.itemsLoaded != 0 ? state.itemsLoaded : 1,
+                informationModelItems: event.informationItemsModel,
+              )
+            : [],
         filters: null,
-        itemsLoaded: event.informationItemsModel.isNotEmpty ? 1 : 0,
+        itemsLoaded: event.informationItemsModel.isNotEmpty
+            ? state.itemsLoaded != 0
+                ? state.itemsLoaded
+                : 1
+            : 0,
         failure: null,
       ),
     );
