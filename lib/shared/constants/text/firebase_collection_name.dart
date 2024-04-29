@@ -3,4 +3,5 @@ class FirebaseCollectionName {
   static const questions = 'questions';
   static const funds = 'funds';
   static const userSettings = 'user_settings';
+  static const information = 'information';
 }
