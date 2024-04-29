@@ -1,20 +1,21 @@
 import 'dart:async';
 
+import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kozak/shared/shared.dart';
 
 @Singleton(as: IInformationRepository)
 class InformationRepository implements IInformationRepository {
-  final _controller = StreamController<List<InformationModel>>()..add([]);
+  final FirestoreService _firestoreService = GetIt.I.get<FirestoreService>();
 
   @override
-  Stream<List<InformationModel>> getInformationItems() => _controller.stream;
+  Stream<List<InformationModel>> getInformationItems() =>
+      _firestoreService.getInformations();
 
   @override
   void addMockInformationItems() {
-    final informationModelItems = <InformationModel>[];
     for (var i = 0; i < KMockText.tags.length; i++) {
-      informationModelItems.add(
+      _firestoreService.addInformation(
         InformationModel(
           id: DateTime.now().millisecond.toString(),
           title: KMockText.title,
@@ -25,6 +26,5 @@ class InformationRepository implements IInformationRepository {
         ),
       );
     }
-    _controller.add(informationModelItems);
   }
 }
