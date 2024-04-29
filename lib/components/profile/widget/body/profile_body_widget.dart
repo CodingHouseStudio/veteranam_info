@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:kozak/shared/shared.dart';
 
 class ProfileBodyWidget extends StatelessWidget {
@@ -77,7 +79,9 @@ class ProfileBodyWidget extends StatelessWidget {
         KSizedBox.kHeightSizedBox24,
         ButtonWidget(
           text: context.l10n.logOut,
-          onPressed: () {},
+          onPressed: () => context
+              .read<AuthenticationBloc>()
+              .add(AuthenticationLogoutRequested()),
           isDesk: isDesk,
         ),
         if (isDesk) KSizedBox.kWidthSizedBox24 else KSizedBox.kHeightSizedBox24,
