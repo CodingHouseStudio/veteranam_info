@@ -1987,3 +1987,27 @@ class MockFirebaseAuth extends _i1.Mock implements _i5.FirebaseAuth {
         returnValueForMissingStub: _i6.Future<void>.value(),
       ) as _i6.Future<void>);
 }
+
+/// A class which mocks [IWorkRepository].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockIWorkRepository extends _i1.Mock implements _i3.IWorkRepository {
+  @override
+  _i6.Stream<List<_i3.WorkModel>> getWorks() => (super.noSuchMethod(
+        Invocation.method(
+          #getWorks,
+          [],
+        ),
+        returnValue: _i6.Stream<List<_i3.WorkModel>>.empty(),
+        returnValueForMissingStub: _i6.Stream<List<_i3.WorkModel>>.empty(),
+      ) as _i6.Stream<List<_i3.WorkModel>>);
+
+  @override
+  void addMockWorks() => super.noSuchMethod(
+        Invocation.method(
+          #addMockWorks,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+}

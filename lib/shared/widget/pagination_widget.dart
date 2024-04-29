@@ -28,34 +28,36 @@ class PaginationWidget extends StatelessWidget {
             icon: KIcon.arrowLeft,
           ),
           KSizedBox.kWidthSizedBox16,
-          if (pages >= 10 && currentPage < 6)
-            ...List.generate(
-              9,
-              (index) => _buildPageButton(index + 1),
-            )
-              ..add(const Text('...'))
-              ..add(_buildPageButton(pages))
-          else if (currentPage >= 6 && pages - currentPage > 3) ...[
-            _buildPageButton(1),
-            const Text('...'),
+          if (pages > 1) ...[
+            _buildPageButton(1, KWidgetkeys.widget.pagination.firstNumber),
+            if (pages > 10 && currentPage >= 6)
+              Text(
+                '...',
+                key: KWidgetkeys.widget.pagination.firstThreePoint,
+              ),
             ...List.generate(
               7,
-              (index) => _buildPageButton(currentPage - 4 + index),
+              (index) {
+                final number = pages >= 10 && currentPage < 6
+                    ? index + 2
+                    : currentPage >= 6 && pages - currentPage > 3
+                        ? currentPage - 4 + index
+                        : pages - 7 + index;
+                return _buildPageButton(
+                  number,
+                  number == 6
+                      ? KWidgetkeys.widget.pagination.sixthNumber
+                      : KWidgetkeys.widget.pagination.numbers,
+                );
+              },
             ),
-            const Text('...'),
-            _buildPageButton(pages),
-          ] else if (pages - currentPage <= 3) ...[
-            _buildPageButton(1),
-            const Text('...'),
-            ...List.generate(
-              8,
-              (index) => _buildPageButton(pages - 7 + index),
+          ],
+          if (pages - currentPage > 3)
+            Text(
+              '...',
+              key: KWidgetkeys.widget.pagination.lastThreePoint,
             ),
-          ] else
-            ...List.generate(
-              pages,
-              (index) => _buildPageButton(index + 1),
-            ),
+          _buildPageButton(pages, KWidgetkeys.widget.pagination.lastNumber),
           KSizedBox.kWidthSizedBox8,
           TextButton(
             key: KWidgetkeys.widget.pagination.buttonNext,
@@ -75,10 +77,11 @@ class PaginationWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildPageButton(int pageNumber) {
+  Widget _buildPageButton(int pageNumber, Key? key) {
     return Padding(
       padding: const EdgeInsets.only(right: KPadding.kPaddingSize8),
       child: InkWell(
+        key: key,
         borderRadius: BorderRadius.circular(50),
         onTap: () => changePage(pageNumber),
         child: Container(

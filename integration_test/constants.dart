@@ -40,7 +40,6 @@ Future<void> setUpGlobalIntegration() async {
 
 abstract class KTestConstants {
   static const scrolling = Offset(0, -10000);
-  static const scrollingAppBar = Offset(0, KSize.kPreferredSize);
 
   static const windowMobileSize = Size(800, 800);
 

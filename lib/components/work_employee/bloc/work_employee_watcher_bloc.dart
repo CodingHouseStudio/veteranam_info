@@ -66,7 +66,7 @@ class WorkEmployeeWatcherBloc
       categories: state.categories,
       workModelItems: event.workItemsModel,
     );
-    final workItems = _changPage(
+    final workItems = _changePage(
       page: event.workItemsModel.isEmpty || state.page != 0 ? state.page : 1,
       workModelItems: filterItems,
     );
@@ -98,7 +98,8 @@ class WorkEmployeeWatcherBloc
       categories: state.categories,
       workModelItems: state.workModelItems,
     );
-    final workItems = _changPage(page: event.page, workModelItems: filterItems);
+    final workItems =
+        _changePage(page: event.page, workModelItems: filterItems);
     emit(
       state.copyWith(
         filteredWorkModelItems: workItems,
@@ -113,7 +114,7 @@ class WorkEmployeeWatcherBloc
   ) {
     emit(
       state.copyWith(
-        filteredWorkModelItems: _changPage(
+        filteredWorkModelItems: _changePage(
           page:
               state.workModelItems.isEmpty || state.page != 0 ? state.page : 1,
           workModelItems: state.workModelItems,
@@ -135,8 +136,9 @@ class WorkEmployeeWatcherBloc
       categories: state.categories,
       workModelItems: state.workModelItems,
     );
-    final workItems = _changPage(page: state.page, workModelItems: filterItems);
-    final maxPage = (workItems.length / KDimensions.pagetItems).ceil();
+    final maxPage = (filterItems.length / KDimensions.pagetItems).ceil();
+    final workItems =
+        _changePage(page: state.page, workModelItems: filterItems);
     emit(
       state.copyWith(
         loadingStatus: LoadingStatus.loaded,
@@ -161,8 +163,11 @@ class WorkEmployeeWatcherBloc
       categories: event.categories,
       workModelItems: state.workModelItems,
     );
-    final workItems = _changPage(page: state.page, workModelItems: filterItems);
-    final maxPage = (workItems.length / KDimensions.pagetItems).ceil();
+    final maxPage = (filterItems.length / KDimensions.pagetItems).ceil();
+    final workItems = _changePage(
+      page: state.page == 0 && filterItems.isNotEmpty ? 1 : state.page,
+      workModelItems: filterItems,
+    );
     emit(
       state.copyWith(
         loadingStatus: LoadingStatus.loaded,
@@ -170,7 +175,9 @@ class WorkEmployeeWatcherBloc
         categories: event.categories,
         page: workItems.isNotEmpty
             ? maxPage >= state.page
-                ? state.page
+                ? state.page == 0
+                    ? 1
+                    : state.page
                 : maxPage
             : 0,
         maxPage: maxPage,
@@ -201,7 +208,7 @@ class WorkEmployeeWatcherBloc
     }
   }
 
-  List<WorkModel> _changPage({
+  List<WorkModel> _changePage({
     required int page,
     required List<WorkModel> workModelItems,
   }) {
@@ -220,7 +227,7 @@ class WorkEmployeeWatcherBloc
         if (i <= workModelItems.length + KDimensions.pagetItems) {
           return workModelItems.sublist(
             i - KDimensions.pagetItems,
-            i,
+            i <= workModelItems.length ? i : workModelItems.length,
           );
         }
       }

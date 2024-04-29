@@ -17,6 +17,7 @@ import 'package:mockito/annotations.dart';
     MockSpec<IStorage>(),
     MockSpec<GoogleSignIn>(),
     MockSpec<FirebaseAuth>(),
+    MockSpec<IWorkRepository>(),
   ],
 )
 void load() => debugPrint('loaded');
