@@ -2,8 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:kozak/shared/shared.dart';
 
-import '../test_dependency.dart';
-
 /// COMMENT: Helpers for scroll screen in integration tests
 ///
 /// offset sets the length of the scroll plus a value up and minus a value down
@@ -21,10 +19,6 @@ Future<void> scrollingHelperInt({
   if (itemKey != null) {
     await tester.ensureVisible(find.byKey(itemKey).first);
     await tester.pumpAndSettle();
-    await tester.drag(
-      find.byKey(KWidgetkeys.widget.shellRoute.scroll),
-      KTestConstants.scrollingAppBar,
-    );
   }
   await tester.pumpAndSettle();
 }

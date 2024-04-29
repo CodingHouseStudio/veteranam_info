@@ -5,4 +5,5 @@ abstract class KDimensions {
   static const donateCardSmallExpanded = 2;
   static const donateCardBigExpanded = 4;
   static const donateCardStandartExpanded = 3;
+  static const pagetItems = 3;
 }

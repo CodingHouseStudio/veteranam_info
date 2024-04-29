@@ -53,7 +53,7 @@ class NewsCardWidget extends StatelessWidget {
                 runSpacing: KSize.kWrapRunSpacing4,
                 children: selectedFilters.map((tag) {
                   return Container(
-                    decoration: KWidetTheme.boxDecorationCard,
+                    decoration: KWidgetTheme.boxDecorationCard,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
                         vertical: KPadding.kPaddingSize4,
