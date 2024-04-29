@@ -5,28 +5,57 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kozak/shared/shared.dart';
 
-class NawbarWidget extends StatefulWidget implements PreferredSizeWidget {
+class NawbarWidget extends SliverPersistentHeaderDelegate {
   const NawbarWidget({
     required this.isDesk,
+    this.widgetKey,
     this.hasMicrophone = true,
+  });
+  final bool isDesk;
+  final bool hasMicrophone;
+  final Key? widgetKey;
+
+  @override
+  double get maxExtent => KMinMaxSize.minmaxHeight94;
+
+  @override
+  double get minExtent => KMinMaxSize.minmaxHeight94;
+
+  //Rebuild screen only when isDesk value change
+  @override
+  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) =>
+      oldDelegate is NawbarWidget && isDesk != oldDelegate.isDesk;
+
+  @override
+  Widget build(
+    BuildContext context,
+    double shrinkOffset,
+    bool overlapsContent,
+  ) {
+    return _NawbarWidgetImplematation(
+      key: widgetKey,
+      isDesk: isDesk,
+      hasMicrophone: hasMicrophone,
+    );
+  }
+}
+
+class _NawbarWidgetImplematation extends StatefulWidget {
+  const _NawbarWidgetImplematation({
+    required this.isDesk,
+    required this.hasMicrophone,
     super.key,
   });
   final bool isDesk;
   final bool hasMicrophone;
 
   @override
-  Size get preferredSize => const Size.fromHeight(KSize.kPreferredSize);
-
-  @override
-  State<NawbarWidget> createState() => _NawbarWidgetState();
-
-  @override
-  StatefulElement createElement() {
-    return StatefulElement(this);
-  }
+  State<_NawbarWidgetImplematation> createState() =>
+      _NawbarWidgetImplematationState();
 }
 
-class _NawbarWidgetState extends State<NawbarWidget> {
+class _NawbarWidgetImplematationState
+    extends State<_NawbarWidgetImplematation> {
   late FocusNode focusNode;
   late bool isFocused = false;
   final _formKey = GlobalKey<FormState>();
@@ -46,10 +75,7 @@ class _NawbarWidgetState extends State<NawbarWidget> {
   Widget build(BuildContext context) {
     return Container(
       decoration: KWidetTheme.boxDecorationCard,
-      margin: EdgeInsets.only(
-        left: widget.isDesk ? KPadding.kPaddingSize90 : KPadding.kPaddingSize16,
-        right:
-            widget.isDesk ? KPadding.kPaddingSize90 : KPadding.kPaddingSize16,
+      margin: const EdgeInsets.only(
         top: KPadding.kPaddingSize24,
       ),
       child: Padding(
