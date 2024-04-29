@@ -28,22 +28,24 @@ class EmailPasswordFieldsWidget extends StatefulWidget {
       _EmailPasswordFieldsWidgetState();
 }
 
-class _EmailPasswordFieldsWidgetState extends State<EmailPasswordFieldsWidget> {
+class _EmailPasswordFieldsWidgetState extends State<EmailPasswordFieldsWidget>
+    with AutomaticKeepAliveClientMixin {
   late TextEditingController emailController;
   late TextEditingController passwordController;
   bool obscurePassword = true;
-  late FocusNode focusNode;
+  FocusNode? focusNode;
 
   @override
   void initState() {
     emailController = TextEditingController();
     passwordController = TextEditingController();
-    focusNode = FocusNode();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
+    focusNode ??= FocusNode();
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -132,4 +134,7 @@ class _EmailPasswordFieldsWidgetState extends State<EmailPasswordFieldsWidget> {
     passwordController.dispose();
     super.dispose();
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
