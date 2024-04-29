@@ -99,60 +99,71 @@ void main() {
       await newsCardHelper(tester: tester);
     });
 
-    // testWidgets('News list load and filter', (tester) async {
-    //   registerInformationBloc();
-    //   await tester.pumpApp(const InformationScreen());
+    testWidgets('News list load and filter', (tester) async {
+      registerInformationBloc();
+      await tester.pumpApp(const InformationScreen());
 
-    //   expect(
-    //     find.byKey(KWidgetkeys.screen.information.screen),
-    //     findsOneWidget,
-    //   );
+      expect(
+        find.byKey(KWidgetkeys.screen.information.screen),
+        findsOneWidget,
+      );
 
-    //   await tester.pumpAndSettle();
+      await tester.pumpAndSettle();
 
-    //   expect(find.byKey(KWidgetkeys.widget.newsCard.title), findsOneWidget);
+      expect(find.byKey(KWidgetkeys.widget.newsCard.title), findsOneWidget);
 
-    //   await scrollingHelper(
-    //     tester: tester,
-    //     itemKey: KWidgetkeys.screen.information.button,
-    //     offset: KTestConstants.scrollingDown,
-    //   );
+      await scrollingHelper(
+        tester: tester,
+        itemKey: KWidgetkeys.screen.information.button,
+        offset: KTestConstants.scrollingDown,
+      );
 
-    //   expect(find.byKey(KWidgetkeys.screen.information.button), findsOneWidget);
+      expect(find.byKey(KWidgetkeys.screen.information.button), findsOneWidget);
 
-    //   await tester.tap(find.byKey(KWidgetkeys.screen.information.button));
+      await tester.tap(find.byKey(KWidgetkeys.screen.information.button));
 
-    //   await tester.pumpAndSettle();
+      await tester.pumpAndSettle();
 
-    //   final widgets = find.byKey(KWidgetkeys.widget.newsCard.title);
+      await scrollingHelper(
+        tester: tester,
+        itemKey: KWidgetkeys.widget.newsCard.title,
+        offset: KTestConstants.scrollingUp,
+      );
 
-    //   expect(widgets, findsWidgets);
+      final widgets = find.byKey(KWidgetkeys.widget.newsCard.title);
 
-    //   expect(widgets.evaluate().length, greaterThan(1));
+      expect(widgets, findsWidgets);
 
-    //   await scrollingHelper(
-    //     tester: tester,
-    //     offset: KTestConstants.scrollingUp,
-    //   );
+      expect(widgets.evaluate().length, greaterThan(1));
 
-    //   await informationFilterHelper(tester);
+      await scrollingHelper(
+        tester: tester,
+        offset: KTestConstants.scrollingUp,
+      );
 
-    //   expect(find.byKey(KWidgetkeys.widget.newsCard.title), findsOneWidget);
+      await informationFilterHelper(tester);
 
-    //   await scrollingHelper(
-    //     tester: tester,
-    //     itemKey: KWidgetkeys.screen.information.button,
-    //     offset: KTestConstants.scrollingDown,
-    //   );
+      expect(find.byKey(KWidgetkeys.widget.newsCard.title), findsOneWidget);
 
-    //   await tester.tap(find.byKey(KWidgetkeys.screen.information.button));
+      await scrollingHelper(
+        tester: tester,
+        offset: KTestConstants.scrollingDown,
+      );
 
-    //   await tester.pumpAndSettle();
+      await scrollingHelper(
+        tester: tester,
+        itemKey: KWidgetkeys.screen.information.button,
+        offset: KTestConstants.scrollingUp500,
+      );
 
-    //   final widgetsTwoTap = find.byKey(KWidgetkeys.widget.newsCard.title);
+      await tester.tap(find.byKey(KWidgetkeys.screen.information.button));
 
-    //   expect(widgets.evaluate().length, widgetsTwoTap.evaluate().length);
-    // });
+      await tester.pumpAndSettle();
+
+      final widgetsTwoTap = find.byKey(KWidgetkeys.widget.newsCard.title);
+
+      expect(widgets.evaluate().length, widgetsTwoTap.evaluate().length);
+    });
 
     group('${KGroupText.goRouter} ', () {
       late MockGoRouter mockGoRouter;
@@ -208,23 +219,17 @@ void main() {
 
         await scrollingHelper(
           tester: tester,
-          itemKey: KWidgetkeys.screen.information.subtitle,
-          offset: KTestConstants.scrollingUp,
-        );
-
-        expect(
-          find.byKey(KWidgetkeys.screen.information.subtitle),
-          findsOneWidget,
-        );
-
-        await scrollingHelper(
-          tester: tester,
           itemKey: KWidgetkeys.screen.information.title,
           offset: KTestConstants.scrollingUp,
         );
 
         expect(
           find.byKey(KWidgetkeys.screen.information.title),
+          findsOneWidget,
+        );
+
+        expect(
+          find.byKey(KWidgetkeys.screen.information.subtitle),
           findsOneWidget,
         );
 
