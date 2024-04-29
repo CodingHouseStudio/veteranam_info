@@ -1,5 +1,6 @@
 // ignore_for_file: lines_longer_than_80_chars, inference_failure_on_collection_literal
 
+import 'package:flutter/material.dart';
 import 'package:kozak/shared/shared.dart';
 
 /// COMMENT: Variables with mock text. It's temporary data we change it when add firebase for this elements
@@ -114,20 +115,27 @@ abstract class KAppText {
   static const String backendString = '';
   static const String usernameToken = 'USERNAME_TOKEN';
   static final routes = [
-    [
-      KRoute.aboutUs.name,
-      KRoute.investors.name,
-      KRoute.contact.name,
-    ],
-    [
-      KRoute.story.name,
-      KRoute.discounts.name,
-      KRoute.profile.name,
-    ],
-    [
-      KRoute.work.name,
-      KRoute.information.name,
-      KRoute.consultation.name,
-    ],
+    KRoute.aboutUs.name,
+    KRoute.investors.name,
+    KRoute.contact.name,
+    KRoute.story.name,
+    KRoute.discounts.name,
+    KRoute.profile.name,
+    KRoute.work.name,
+    KRoute.information.name,
+    KRoute.consultation.name,
   ];
+  static List<String> footerButtonText(BuildContext context) {
+    return [
+      context.l10n.aboutUs,
+      context.l10n.forInvestors,
+      context.l10n.contact,
+      context.l10n.stories,
+      context.l10n.discountsCoupons,
+      context.l10n.myProfile,
+      context.l10n.work,
+      context.l10n.information,
+      context.l10n.consultationOnline,
+    ];
+  }
 }
