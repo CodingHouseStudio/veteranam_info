@@ -15,8 +15,14 @@ class NewsCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final selectedFilters =
-        context.select((InformationWatcherBloc bloc) => bloc.state.filters);
+    final selectedFilters = context.select(
+      (InformationWatcherBloc bloc) => bloc.state.filters,
+    );
+
+    final hasMatchingTags = selectedFilters != null &&
+        selectedFilters.isNotEmpty &&
+        informationItem.tags != null &&
+        informationItem.tags!.any(selectedFilters.contains);
 
     return CardTextDetailEvaluateWidget(
       image: informationItem.image,
@@ -41,7 +47,7 @@ class NewsCardWidget extends StatelessWidget {
           ),
         ],
       ),
-      bottom: selectedFilters != null && selectedFilters.isNotEmpty
+      bottom: hasMatchingTags
           ? Padding(
               padding: const EdgeInsets.only(
                 bottom: KPadding.kPaddingSize16,
