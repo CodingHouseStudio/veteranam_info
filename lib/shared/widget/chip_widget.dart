@@ -28,8 +28,8 @@ class ChipWidget extends StatelessWidget {
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
       selected: isSelected,
       onSelected: (value) => onSelected(isSelected: value),
-      checkmarkColor: AppColors.black,
-      selectedColor: AppColors.widgetBackground,
+      // checkmarkColor: AppColors.black,
+      // selectedColor: AppColors.widgetBackground,
     );
   }
 }

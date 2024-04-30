@@ -99,7 +99,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
         // Theme.of(context).textTheme.headlineSmall,
         key: widget.widgetKey,
         onChanged: widget.onChanged,
-        decoration: KWidetTheme.inputDecoration.copyWith(
+        decoration: KWidgetTheme.inputDecoration.copyWith(
           hintStyle: widget.hintStyle,
           contentPadding: widget.contentPadding ??
               (widget.isDesk ?? true

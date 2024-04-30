@@ -21,13 +21,13 @@ class _SwitchWidgetState extends State<SwitchWidget> {
   Widget build(BuildContext context) {
     return Switch(
       key: KWidgetkeys.widget.switchKeys.widget,
-      thumbColor: MaterialStatePropertyAll(
-        isSelected ? AppColors.black : AppColors.white,
-      ),
-      trackColor: const MaterialStatePropertyAll(AppColors.widgetBackground),
+      // thumbColor: MaterialStatePropertyAll(
+      // isSelected ? AppColors.black : AppColors.white,
+      // ),
+      // trackColor: const MaterialStatePropertyAll(AppColors.widgetBackground),
       value: isSelected,
-      trackOutlineColor:
-          const MaterialStatePropertyAll(AppColors.widgetBackground),
+      // trackOutlineColor:
+      //     const MaterialStatePropertyAll(AppColors.widgetBackground),
       onChanged: (value) {
         setState(() {
           isSelected = value;

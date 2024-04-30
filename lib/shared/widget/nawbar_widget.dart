@@ -74,7 +74,7 @@ class _NawbarWidgetImplematationState
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: KWidetTheme.boxDecorationCard,
+      decoration: KWidgetTheme.boxDecorationCard,
       margin: const EdgeInsets.only(
         top: KPadding.kPaddingSize24,
       ),
