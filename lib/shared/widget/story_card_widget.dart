@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:kozak/shared/shared.dart';
 
 class StoryCardWidget extends StatelessWidget {
@@ -30,7 +29,7 @@ class StoryCardWidget extends StatelessWidget {
           IconWidget(
             key: KWidgetkeys.widget.storyCard.userIcon,
             icon: KIcon.person,
-            background: AppColors.widgetBackground,
+            // background: AppColors.widgetBackground,
           ),
           KSizedBox.kWidthSizedBox3,
           Text(
@@ -43,7 +42,9 @@ class StoryCardWidget extends StatelessWidget {
       titleDate: Text(
         storyDate.toLocal().toString().split(' ')[0],
         key: KWidgetkeys.widget.storyCard.date,
-        style: AppTextStyle.text16.copyWith(color: AppColors.lightGray),
+        style: AppTextStyle.text16.copyWith(
+            // color: AppColors.lightGray,
+            ),
       ),
       isDesk: false,
     );

@@ -24,7 +24,7 @@ class DiscountsBodyWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Container(
-        decoration: KWidetTheme.boxDecorPrimary,
+        decoration: KWidgetTheme.boxDecorPrimary,
         child: Padding(
           padding: const EdgeInsets.all(KPadding.kPaddingSize10),
           child: Column(
@@ -56,15 +56,15 @@ class DiscountsBodyWidget extends StatelessWidget {
                 city,
                 key: KWidgetkeys.widget.discountCard.city,
                 style: AppTextStyle.text20.copyWith(
-                  color: AppColors.lightGray,
-                ),
+                    // color: AppColors.lightGray,
+                    ),
               ),
               Text(
                 date,
                 key: KWidgetkeys.widget.discountCard.date,
                 style: AppTextStyle.text20.copyWith(
-                  color: AppColors.lightGray,
-                ),
+                    // color: AppColors.lightGray,
+                    ),
               ),
               Text(
                 description,

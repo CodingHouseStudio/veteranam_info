@@ -35,6 +35,7 @@ part 'screen/sign_up.dart';
 
 part 'screen/login.dart';
 part 'screen/questions_form.dart';
+part 'screen/work_employee.dart';
 
 part 'widget/widget.dart';
 

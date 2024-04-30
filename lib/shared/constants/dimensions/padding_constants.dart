@@ -1,5 +1,6 @@
 abstract class KPadding {
   static const kPaddingSize4 = 4.0;
+  static const kPaddingSize6_5 = 6.5;
   static const kPaddingSize8 = 8.0;
   static const kPaddingSize10 = 10.0;
   static const kPaddingSize12 = 12.0;

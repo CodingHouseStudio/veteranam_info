@@ -153,7 +153,7 @@ class SignUpLoginBottomButtonsWidget extends StatelessWidget {
           : const EdgeInsets.symmetric(
               vertical: KPadding.kPaddingSize16,
             ),
-      backgroundColor: AppColors.white,
+      // backgroundColor: AppColors.white,
       textStyle: AppTextStyle.text20,
       text: text,
       isDesk: isDesk,

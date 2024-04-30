@@ -21,9 +21,7 @@ class DonateButtonWidget extends StatelessWidget {
     return TextButton(
       onPressed: onPressed,
       style: KButtonStyles.whiteButtonStyleWInf.copyWith(
-        backgroundColor: MaterialStatePropertyAll(
-          backgroundColor ?? AppColors.white,
-        ),
+        backgroundColor: MaterialStatePropertyAll(backgroundColor),
       ),
       child: Padding(
         padding: const EdgeInsets.only(
@@ -43,7 +41,7 @@ class DonateButtonWidget extends StatelessWidget {
             ),
             IconWidget(
               icon: icon ?? KIcon.arrowUpRight,
-              background: AppColors.lightGray,
+              // background: AppColors.lightGray,
             ),
           ],
         ),

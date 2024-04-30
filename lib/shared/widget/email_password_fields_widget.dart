@@ -71,7 +71,7 @@ class _EmailPasswordFieldsWidgetState extends State<EmailPasswordFieldsWidget>
                         KPadding.kPaddingSize16,
                       ),
                 isDesk: widget.isDesk,
-                backgroundColor: AppColors.white,
+                // backgroundColor: AppColors.white,
                 icon: KIcon.trailing,
                 iconRightMerge: KSizedBox.kWidthSizedBox8,
                 textStyle:
