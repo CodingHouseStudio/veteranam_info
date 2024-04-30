@@ -1,6 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:get_it/get_it.dart';
 import 'package:kozak/shared/shared.dart';
 import 'package:mockito/mockito.dart';
 
@@ -123,17 +124,21 @@ void main() {
     });
     group('${KGroupText.repository} ', () {
       late IFeedbackRepository mockFeedbackRepository;
+      late FirestoreService mockFirestoreService;
       setUp(() {
-        mockFeedbackRepository = MockIFeedbackRepository();
-        when(mockFeedbackRepository.sendFeedback(KTestText.feedbackModel))
+        mockFirestoreService = MockFirestoreService();
+        when(mockFirestoreService.addFeedback(KTestText.feedbackModel))
             .thenAnswer(
-          (_) async => const Right(true),
+          (_) async {},
         );
         when(
-          mockFeedbackRepository.sendFeedback(KTestText.feedbackModelIncorect),
-        ).thenAnswer(
-          (_) async => const Left(SomeFailure.serverError()),
-        );
+          mockFirestoreService.addFeedback(KTestText.feedbackModelIncorect),
+        ).thenThrow(KGroupText.failureSet);
+        if (GetIt.I.isRegistered<FirestoreService>()) {
+          GetIt.I.unregister<FirestoreService>();
+        }
+        GetIt.I.registerSingleton(mockFirestoreService);
+        mockFeedbackRepository = FeedbackRepository();
       });
       test('${KGroupText.successfulSet} feedback', () async {
         expect(
