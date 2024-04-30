@@ -25,7 +25,7 @@ class NewsCardWidget extends StatelessWidget {
         context.l10n.readMore,
         context.l10n.readLess,
       ],
-      buttonStyle: KButtonStyles.transparentButtonStyleBottomBorder,
+      buttonStyle: KButtonStyles.transparentButtonStyleBottomBorder(context),
       titleWidget: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -53,7 +53,7 @@ class NewsCardWidget extends StatelessWidget {
                 runSpacing: KSize.kWrapRunSpacing4,
                 children: selectedFilters.map((tag) {
                   return Container(
-                    decoration: KWidgetTheme.boxDecorationCard,
+                    decoration: KWidgetTheme.boxDecorationWidget(context),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
                         vertical: KPadding.kPaddingSize4,

@@ -74,7 +74,7 @@ class _NawbarWidgetImplematationState
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: KWidgetTheme.boxDecorationCard,
+      decoration: KWidgetTheme.boxDecorationCard(context),
       margin: const EdgeInsets.only(
         top: KPadding.kPaddingSize24,
       ),
@@ -123,9 +123,6 @@ class _NawbarWidgetImplematationState
                     : KIcon.mic.setIconKey(
                         KWidgetkeys.widget.nawbar.iconMic,
                       ),
-                border: KBorder.outlineInputTransparent,
-                enabledBorder: KBorder.outlineInputTransparent,
-                focusedBorder: KBorder.outlineInputTransparent,
                 disposeFocusNode: false,
                 isDesk: widget.isDesk,
                 contentPadding: widget.isDesk
@@ -151,7 +148,7 @@ class _NawbarWidgetImplematationState
               if (widget.isDesk)
                 TextButton(
                   key: KWidgetkeys.widget.nawbar.button,
-                  style: KButtonStyles.whiteButtonStyle,
+                  style: KButtonStyles.whiteButtonStyle(context),
                   onPressed: () => context.goNamed(KRoute.login.name),
                   child: Text(
                     context.l10n.login,
