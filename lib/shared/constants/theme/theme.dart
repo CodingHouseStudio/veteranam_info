@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kozak/shared/shared.dart';
 
 class MaterialTheme {
   const MaterialTheme(this.textTheme);
@@ -7,14 +8,14 @@ class MaterialTheme {
   static MaterialScheme lightScheme() {
     return const MaterialScheme(
       brightness: Brightness.light,
-      primary: Color(0xff4f6629),
+      primary: Color(0xff000000),
       surfaceTint: Color(0xff4f6629),
-      onPrimary: Color(0xffffffff),
-      primaryContainer: Color(0xffd1eca0),
+      onPrimary: Color(0xffD9D9D9),
+      primaryContainer: Color(0xffE6E6E6),
       onPrimaryContainer: Color(0xff121f00),
       secondary: Color(0xff596248),
       onSecondary: Color(0xffffffff),
-      secondaryContainer: Color(0xffdde6c6),
+      secondaryContainer: Color(0xffFFF623),
       onSecondaryContainer: Color(0xff171e0a),
       tertiary: Color(0xff396661),
       onTertiary: Color(0xffffffff),
@@ -24,13 +25,13 @@ class MaterialTheme {
       onError: Color(0xffffffff),
       errorContainer: Color(0xffffdad6),
       onErrorContainer: Color(0xff410002),
-      background: Color(0xfffafaee),
+      background: Color(0xffffffff),
       onBackground: Color(0xff1a1c15),
       surface: Color(0xfffafaee),
-      onSurface: Color(0xff1a1c15),
+      onSurface: Color(0xff000000),
       surfaceVariant: Color(0xffe2e4d4),
       onSurfaceVariant: Color(0xff45483d),
-      outline: Color(0xff75786c),
+      outline: Color(0xffD9D9D9),
       outlineVariant: Color(0xffc5c8b9),
       shadow: Color(0xff000000),
       scrim: Color(0xff000000),
@@ -365,6 +366,20 @@ class MaterialTheme {
         textTheme: textTheme.apply(
           bodyColor: colorScheme.onSurface,
           displayColor: colorScheme.onSurface,
+        ),
+        textButtonTheme: TextButtonThemeData(
+          style: TextButton.styleFrom(
+            backgroundColor: colorScheme.onPrimary,
+            minimumSize:
+                const Size(KMinMaxSize.minWidth100, KMinMaxSize.minHeight50),
+            padding: const EdgeInsets.all(KPadding.kPaddingSize8),
+            shape: RoundedRectangleBorder(
+              borderRadius: KBorderRadius.kBorderRadius32,
+              side: BorderSide(
+                color: colorScheme.onPrimary,
+              ),
+            ),
+          ),
         ),
         scaffoldBackgroundColor: colorScheme.background,
         canvasColor: colorScheme.surface,

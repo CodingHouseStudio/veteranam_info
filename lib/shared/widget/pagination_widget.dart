@@ -29,7 +29,11 @@ class PaginationWidget extends StatelessWidget {
           ),
           KSizedBox.kWidthSizedBox16,
           if (pages > 1) ...[
-            _buildPageButton(1, KWidgetkeys.widget.pagination.firstNumber),
+            _buildPageButton(
+              context: context,
+              pageNumber: 1,
+              key: KWidgetkeys.widget.pagination.firstNumber,
+            ),
             if (pages > 10 && currentPage >= 6)
               Text(
                 '...',
@@ -44,10 +48,11 @@ class PaginationWidget extends StatelessWidget {
                         ? currentPage - 4 + index
                         : pages - 7 + index;
                 return _buildPageButton(
-                  number,
-                  number == 6
+                  pageNumber: number,
+                  key: number == 6
                       ? KWidgetkeys.widget.pagination.sixthNumber
                       : KWidgetkeys.widget.pagination.numbers,
+                  context: context,
                 );
               },
             ),
@@ -57,7 +62,11 @@ class PaginationWidget extends StatelessWidget {
               '...',
               key: KWidgetkeys.widget.pagination.lastThreePoint,
             ),
-          _buildPageButton(pages, KWidgetkeys.widget.pagination.lastNumber),
+          _buildPageButton(
+            context: context,
+            pageNumber: pages,
+            key: KWidgetkeys.widget.pagination.lastNumber,
+          ),
           KSizedBox.kWidthSizedBox8,
           TextButton(
             key: KWidgetkeys.widget.pagination.buttonNext,
@@ -77,7 +86,11 @@ class PaginationWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildPageButton(int pageNumber, Key? key) {
+  Widget _buildPageButton({
+    required int pageNumber,
+    required BuildContext context,
+    Key? key,
+  }) {
     return Padding(
       padding: const EdgeInsets.only(right: KPadding.kPaddingSize8),
       child: InkWell(
@@ -89,7 +102,7 @@ class PaginationWidget extends StatelessWidget {
             horizontal: KPadding.kPaddingSize16,
             vertical: KPadding.kPaddingSize6_5,
           ),
-          decoration: KWidgetTheme.boxDecorationCircular.copyWith(
+          decoration: KWidgetTheme.boxDecorationCircular(context).copyWith(
               // color: currentPage == pageNumber
               //     ? AppColors.widgetBackground
               //     : AppColors.transparent,
