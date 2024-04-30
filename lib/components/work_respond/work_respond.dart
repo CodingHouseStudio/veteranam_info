@@ -1,2 +1,2 @@
-export 'view/work_respond_view.dart';
+export 'view/view.dart';
 export 'widget/widget.dart';
