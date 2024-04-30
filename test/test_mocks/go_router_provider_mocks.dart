@@ -3,18 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mocktail/mocktail.dart';
 
-class MockGoRouter extends Mock implements GoRouter {
-  // MockGoRouter({
-  //   required this.initialLocation,
-  // });
-  // final String initialLocation;
-  // @override
-  // late final GoRouteInformationProvider routeInformationProvider =
-  //     GoRouteInformationProvider(
-  //   initialLocation: initialLocation,
-  //   initialExtra: null,
-  // );
-}
+class MockGoRouter extends Mock implements GoRouter {}
 
 class MockGoRouterState extends Mock implements GoRouterState {
   MockGoRouterState({required this.fullPath});
