@@ -52,7 +52,7 @@ class _AppWidgetState extends State<AppWidget> {
       builder: (context, _) {
         return MaterialApp.router(
           key: KWidgetkeys.screen.app.screen,
-          theme: themeDataNew.dark(),
+          theme: themeDataNew.darkHighContrast(),
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           locale: _.userSetting.locale.value,
           supportedLocales: AppLocalizations.supportedLocales,
