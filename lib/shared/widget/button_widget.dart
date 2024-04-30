@@ -28,15 +28,15 @@ class ButtonWidget extends StatelessWidget {
       onPressed: onPressed,
       style: isDesk
           ? KButtonStyles.lightGrayButtonStyle.copyWith(
-              backgroundColor: MaterialStatePropertyAll(
-                backgroundColor ?? AppColors.lightGray,
-              ),
-            )
+              // backgroundColor: MaterialStatePropertyAll(
+              //   // backgroundColor ?? AppColors.lightGray,
+              // ),
+              )
           : KButtonStyles.lightGrayButtonStyleWInf.copyWith(
-              backgroundColor: MaterialStatePropertyAll(
-                backgroundColor ?? AppColors.lightGray,
+              // backgroundColor: MaterialStatePropertyAll(
+              //   // backgroundColor ?? AppColors.lightGray,
+              // ),
               ),
-            ),
       child: Padding(
         padding: padding ??
             (isDesk

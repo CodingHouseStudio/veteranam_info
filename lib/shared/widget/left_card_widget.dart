@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-
 import 'package:kozak/shared/shared.dart';
 
 class LeftCardWidget extends StatelessWidget {
@@ -19,7 +18,7 @@ class LeftCardWidget extends StatelessWidget {
         final isDesk =
             constraints.maxWidth > KPlatformConstants.minWidthThresholdTablet;
         return Scaffold(
-          backgroundColor: isDesk ? AppColors.blackWhite : AppColors.white,
+          // backgroundColor: isDesk ? AppColors.blackWhite : AppColors.white,
           body: buildChildWidget(
             isDesk: isDesk,
             childWidgets: [
@@ -37,7 +36,7 @@ class LeftCardWidget extends StatelessWidget {
                 child: isDesk
                     ? ColoredBox(
                         key: KWidgetkeys.widget.leftCard.desk,
-                        color: AppColors.blackWhite,
+                        color: Colors.white,
                         child: Row(
                           children: [
                             Expanded(
@@ -77,7 +76,7 @@ class LeftCardWidget extends StatelessWidget {
                       )
                     : ColoredBox(
                         key: KWidgetkeys.widget.leftCard.mob,
-                        color: AppColors.white,
+                        color: Colors.white,
                         child: Column(
                           children: widgetList(isDesk: isDesk),
                         ),

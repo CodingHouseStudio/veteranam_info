@@ -18,7 +18,7 @@ class ChatInputWidget extends StatelessWidget {
         IconWidget(
           key: KWidgetkeys.widget.chatInput.icon,
           icon: messageIcon,
-          background: AppColors.yellow,
+          // background: AppColors.yellow,
         ),
         KSizedBox.kWidthSizedBox8,
         if (message != null)
@@ -46,15 +46,16 @@ class ChatInputWidget extends StatelessWidget {
                 Container(
                   height: KSize.kPixel8,
                   width: KSize.kPixel8,
-                  decoration: KWidgetTheme.boxDecorationCircular
-                      .copyWith(color: AppColors.blackWhite),
+                  decoration: KWidgetTheme.boxDecorationCircular.copyWith(
+                      // color: AppColors.blackWhite,
+                      ),
                 ),
                 KSizedBox.kWidthSizedBox8,
                 Container(
                   height: KSize.kPixel8,
                   width: KSize.kPixel8,
-                  decoration: KWidgetTheme.boxDecorationCircular
-                      .copyWith(color: AppColors.grey),
+                  decoration: KWidgetTheme.boxDecorationCircular,
+                  // .copyWith(color: AppColors.grey,),
                 ),
               ],
             ),

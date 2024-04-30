@@ -38,7 +38,7 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
                       height: 60,
                       decoration: BoxDecoration(
                         borderRadius: KBorderRadius.kBorderRadiusL,
-                        color: AppColors.widgetBackground,
+                        // color: AppColors.widgetBackground,
                       ),
                       child: const Center(
                         child: KIcon.person,
@@ -97,7 +97,7 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
           widgetKey: KWidgetkeys.widget.profileCardWidget.textFiled,
           hintText: hint,
           hintStyle: widget.isDesk ? AppTextStyle.hint24 : AppTextStyle.hint16,
-          fillColor: AppColors.transparent,
+          // fillColor: AppColors.transparent,
           contentPadding: const EdgeInsets.all(KPadding.kPaddingSize16),
           isDesk: widget.isDesk,
         ),
@@ -210,7 +210,7 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
                 hintText: KMockText.email,
                 hintStyle:
                     widget.isDesk ? AppTextStyle.hint24 : AppTextStyle.hint16,
-                fillColor: AppColors.transparent,
+                // fillColor: AppColors.transparent,
                 contentPadding: const EdgeInsets.all(KPadding.kPaddingSize16),
                 isDesk: widget.isDesk,
               ),
