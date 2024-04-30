@@ -7,4 +7,5 @@ class _DiscountCardKeys {
   final description = const Key('discount_description_key');
   final date = const Key('discount_date_key');
   final instruction = const Key('discount_instruction_key');
+  final preInstructionDiscount = const Key('pre_instruction_discount_key');
 }

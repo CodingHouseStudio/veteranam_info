@@ -15,13 +15,15 @@ class CheckPointWidget extends StatelessWidget {
     return Container(
       key: KWidgetkeys.widget.checkPoint.widget,
       decoration: BoxDecoration(
-        color: isCheck
-            ? AppColors.transparent
-            : AppColors.widgetBackground.withOpacity(
-                KSize.kOpacityHalf,
-              ),
-        border:
-            Border.all(color: AppColors.widgetBackground, width: KSize.kPixel3),
+        // color: isCheck
+        //     ? AppColors.transparent
+        //     : AppColors.widgetBackground.withOpacity(
+        //         KSize.kOpacityHalf,
+        //       ),
+        border: Border.all(
+          // color: AppColors.widgetBackground,
+          width: KSize.kPixel3,
+        ),
         borderRadius: KBorderRadius.kBorderRadius8,
       ),
       child: InkWell(

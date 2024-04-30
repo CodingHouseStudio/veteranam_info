@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:kozak/shared/shared.dart';
 
 class ViewpagerIndicatorWidget extends CustomPainter {
   ViewpagerIndicatorWidget({
@@ -8,8 +7,8 @@ class ViewpagerIndicatorWidget extends CustomPainter {
     this.unselectedCircleRadius = 10.0,
     this.lineWidth = 3.0,
     this.lineHeight = 7.0,
-    this.selectedColor = AppColors.white,
-    this.unselectedColor = AppColors.grey,
+    this.selectedColor = Colors.green,
+    this.unselectedColor = Colors.grey,
     this.selectedPage = 0,
   });
 

@@ -18,6 +18,7 @@ class ChipWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return FilterChip(
       key: KWidgetkeys.widget.chip.widget,
+      backgroundColor: Theme.of(context).colorScheme.background,
       label: Text(
         filter,
         style: isDesk ? AppTextStyle.text20 : AppTextStyle.text16,
@@ -28,8 +29,8 @@ class ChipWidget extends StatelessWidget {
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
       selected: isSelected,
       onSelected: (value) => onSelected(isSelected: value),
-      checkmarkColor: AppColors.black,
-      selectedColor: AppColors.widgetBackground,
+      // checkmarkColor: AppColors.black,
+      selectedColor: Theme.of(context).colorScheme.onPrimary,
     );
   }
 }

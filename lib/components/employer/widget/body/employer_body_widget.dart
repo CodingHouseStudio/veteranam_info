@@ -41,9 +41,12 @@ class EmployerBodyWidget extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              context.l10n.position,
-              style: isDesk ? AppTextStyle.text40 : AppTextStyle.text24,
+            Padding(
+              padding: const EdgeInsets.only(left: 32, right: 32),
+              child: Text(
+                context.l10n.position,
+                style: isDesk ? AppTextStyle.text40 : AppTextStyle.text24,
+              ),
             ),
             KSizedBox.kHeightSizedBox24,
             TextFieldWidget(
@@ -52,9 +55,12 @@ class EmployerBodyWidget extends StatelessWidget {
               hintText: context.l10n.writeProposedPosition,
             ),
             KSizedBox.kHeightSizedBox32,
-            Text(
-              context.l10n.wage,
-              style: isDesk ? AppTextStyle.text40 : AppTextStyle.text24,
+            Padding(
+              padding: const EdgeInsets.only(left: 32, right: 32),
+              child: Text(
+                context.l10n.wage,
+                style: isDesk ? AppTextStyle.text40 : AppTextStyle.text24,
+              ),
             ),
             KSizedBox.kHeightSizedBox24,
             TextFieldWidget(
@@ -63,9 +69,12 @@ class EmployerBodyWidget extends StatelessWidget {
               hintText: context.l10n.writeTheWage,
             ),
             KSizedBox.kHeightSizedBox32,
-            Text(
-              context.l10n.selectCityOfWork,
-              style: isDesk ? AppTextStyle.text40 : AppTextStyle.text24,
+            Padding(
+              padding: const EdgeInsets.only(left: 32, right: 32),
+              child: Text(
+                context.l10n.selectCityOfWork,
+                style: isDesk ? AppTextStyle.text40 : AppTextStyle.text24,
+              ),
             ),
             KSizedBox.kHeightSizedBox24,
             DropListFieldWidget(
@@ -76,9 +85,12 @@ class EmployerBodyWidget extends StatelessWidget {
             KSizedBox.kHeightSizedBox24,
             const SwitchWidget(),
             KSizedBox.kHeightSizedBox32,
-            Text(
-              context.l10n.contact,
-              style: isDesk ? AppTextStyle.text40 : AppTextStyle.text24,
+            Padding(
+              padding: const EdgeInsets.only(left: 32, right: 32),
+              child: Text(
+                context.l10n.contacts,
+                style: isDesk ? AppTextStyle.text40 : AppTextStyle.text24,
+              ),
             ),
             KSizedBox.kHeightSizedBox24,
             TextFieldWidget(
