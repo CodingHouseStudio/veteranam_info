@@ -24,7 +24,7 @@ class HomeRepository implements IHomeRepository {
     for (var i = 0; i < KMockText.questionTitle.length; i++) {
       _firestoreService.addQuestion(
         QuestionModel(
-          id: '${ExtendedDateTime.current.microsecondsSinceEpoch}$i',
+          id: '${ExtendedDateTime.id}$i',
           title: KMockText.questionTitle[i],
           subtitle: KMockText.questionSubtitle,
         ),
