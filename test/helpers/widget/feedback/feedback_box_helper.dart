@@ -26,6 +26,42 @@ Future<void> feedbackBoxHelper(
     findsOneWidget,
   );
 
+  expect(
+    find.byKey(KWidgetkeys.widget.feedbackBox.informationBox),
+    findsOneWidget,
+  );
+
+  expect(
+    find.byKey(KWidgetkeys.widget.feedbackBox.investorsBox),
+    findsOneWidget,
+  );
+
+  expect(
+    find.byKey(KWidgetkeys.widget.feedbackBox.storyBox),
+    findsOneWidget,
+  );
+
+  await boxHelper(tester);
+
+  await changeWindowSizeHelper(tester: tester);
+
+  expect(
+    find.byKey(KWidgetkeys.widget.feedbackBox.button),
+    findsOneWidget,
+  );
+
+  expect(
+    find.byKey(KWidgetkeys.widget.feedbackBox.subtitle),
+    findsOneWidget,
+  );
+
+  expect(
+    find.byKey(KWidgetkeys.widget.feedbackBox.title),
+    findsOneWidget,
+  );
+
+  await changeWindowSizeHelper(tester: tester, setDefaultSize: true);
+
   await boxHelper(tester);
 
   await scrollingHelper(
