@@ -57,15 +57,15 @@ class _WorkCardWidgetState extends State<WorkCardWidget> {
               widget.workModel.city ?? '',
               key: KWidgetkeys.widget.workCard.city,
               style: AppTextStyle.text20.copyWith(
-                color: AppColors.lightGray,
-              ),
+                  // color: AppColors.lightGray,
+                  ),
             ),
             Text(
               widget.workModel.companyName,
               key: KWidgetkeys.widget.workCard.employer,
               style: AppTextStyle.text20.copyWith(
-                color: AppColors.lightGray,
-              ),
+                  // color: AppColors.lightGray,
+                  ),
             ),
             KSizedBox.kHeightSizedBox16,
             CardTextDetailWidget(

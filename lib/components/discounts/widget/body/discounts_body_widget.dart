@@ -56,15 +56,15 @@ class DiscountsBodyWidget extends StatelessWidget {
                 city,
                 key: KWidgetkeys.widget.discountCard.city,
                 style: AppTextStyle.text20.copyWith(
-                  color: AppColors.lightGray,
-                ),
+                    // color: AppColors.lightGray,
+                    ),
               ),
               Text(
                 date,
                 key: KWidgetkeys.widget.discountCard.date,
                 style: AppTextStyle.text20.copyWith(
-                  color: AppColors.lightGray,
-                ),
+                    // color: AppColors.lightGray,
+                    ),
               ),
               Text(
                 description,

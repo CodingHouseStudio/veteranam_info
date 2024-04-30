@@ -46,7 +46,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
               : KIcon.plus.setIconKey(
                   KWidgetkeys.widget.question.iconPlus,
                 ),
-          background: AppColors.widgetBackground,
+          // background: AppColors.widgetBackground,
         ),
         tilePadding: const EdgeInsets.symmetric(
           horizontal: KPadding.kPaddingSize32,

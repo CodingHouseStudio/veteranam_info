@@ -20,7 +20,7 @@ class DropChipWidget extends StatelessWidget {
       decoration: KWidgetTheme.boxDecorationWidget,
       child: DropdownButton<String?>(
         key: KWidgetkeys.widget.dropChip.widget,
-        focusColor: AppColors.transparent,
+        // focusColor: AppColors.transparent,
         isDense: true,
         padding: const EdgeInsetsDirectional.symmetric(
           horizontal: KPadding.kPaddingSize24,
