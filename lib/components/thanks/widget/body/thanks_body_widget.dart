@@ -10,14 +10,24 @@ class ThanksBodyWidget extends StatelessWidget {
     return ScaffoldWidget(
       childWidgetsFunction: ({required isDesk}) => [
         KSizedBox.kHeightSizedBox30,
-        Text(
-          context.l10n.thankYou,
-          style: isDesk ? AppTextStyle.text96 : AppTextStyle.text32,
+        Padding(
+          padding: const EdgeInsets.only(
+            left: KPadding.kPaddingSize4,
+          ),
+          child: Text(
+            context.l10n.thankYou,
+            style: isDesk ? AppTextStyle.text96 : AppTextStyle.text32,
+          ),
         ),
         KSizedBox.kHeightSizedBox8,
-        Text(
-          context.l10n.thankYouDescription,
-          style: isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
+        Padding(
+          padding: const EdgeInsets.only(
+            left: KPadding.kPaddingSize4,
+          ),
+          child: Text(
+            context.l10n.thankYouDescription,
+            style: isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
+          ),
         ),
         if (isDesk)
           KSizedBox.kHeightSizedBox90
@@ -27,30 +37,18 @@ class ThanksBodyWidget extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Flexible(
-                child: Padding(
-                  padding: const EdgeInsets.only(
-                    left: KPadding.kPaddingSize128,
-                  ),
-                  child: BoxWidget(
-                    text: context.l10n.myProfile,
-                    isDesk: isDesk,
-                    onTap: () => context.goNamed(KRoute.profile.name),
-                  ),
-                ),
+              BoxWidget(
+                text: context.l10n.myProfile,
+                isDesk: true,
+                onTap: () => context.goNamed(KRoute.profile.name),
+                textRightPadding: KPadding.kPaddingSize90,
               ),
-              KSizedBox.kWidthSizedBox48,
-              Flexible(
-                child: Padding(
-                  padding: const EdgeInsets.only(
-                    right: KPadding.kPaddingSize128,
-                  ),
-                  child: BoxWidget(
-                    text: context.l10n.mainScreen,
-                    isDesk: isDesk,
-                    onTap: () => context.goNamed(KRoute.home.name),
-                  ),
-                ),
+              KSizedBox.kWidthSizedBox56,
+              BoxWidget(
+                text: context.l10n.mainScreen,
+                isDesk: true,
+                onTap: () => context.goNamed(KRoute.home.name),
+                textRightPadding: KPadding.kPaddingSize128,
               ),
             ],
           )
@@ -70,14 +68,16 @@ class ThanksBodyWidget extends StatelessWidget {
       children: [
         BoxWidget(
           text: context.l10n.myProfile,
-          isDesk: isDesk,
+          isDesk: false,
           onTap: () => context.goNamed(KRoute.profile.name),
+          textRightPadding: KPadding.kPaddingSize100,
         ),
         KSizedBox.kHeightSizedBox40,
         BoxWidget(
           text: context.l10n.mainScreen,
-          isDesk: isDesk,
+          isDesk: false,
           onTap: () => context.goNamed(KRoute.home.name),
+          textRightPadding: KPadding.kPaddingSize100,
         ),
       ],
     );

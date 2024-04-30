@@ -14,11 +14,8 @@ class IconWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: KWidetTheme.boxDecorationCircular.copyWith(color: background),
-      //  BoxDecoration(
-      //   shape: BoxShape.circle,
-      //   color: background ?? KColorTheme.white,
-      // ),
+      decoration: KWidgetTheme.boxDecorationCircular(context)
+          .copyWith(color: background),
       child: Padding(
         padding: EdgeInsets.all(padding ?? KPadding.kPaddingSize12),
         child: icon,

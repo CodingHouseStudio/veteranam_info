@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-
 import 'package:kozak/shared/shared.dart';
 
 class LeftCardWidget extends StatelessWidget {
@@ -19,7 +18,8 @@ class LeftCardWidget extends StatelessWidget {
         final isDesk =
             constraints.maxWidth > KPlatformConstants.minWidthThresholdTablet;
         return Scaffold(
-          backgroundColor: isDesk ? AppColors.blackWhite : AppColors.white,
+          backgroundColor:
+              isDesk ? Theme.of(context).colorScheme.primaryContainer : null,
           body: buildChildWidget(
             isDesk: isDesk,
             childWidgets: [
@@ -35,52 +35,47 @@ class LeftCardWidget extends StatelessWidget {
                         left: KPadding.kPaddingSize16,
                       ),
                 child: isDesk
-                    ? ColoredBox(
+                    ? Row(
                         key: KWidgetkeys.widget.leftCard.desk,
-                        color: AppColors.blackWhite,
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Container(
-                                decoration: KWidetTheme.boxDecorationWhite,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                    right: KPadding.kPaddingSize80,
-                                    left: KPadding.kPaddingSize96,
-                                    top: KPadding.kPaddingSize24,
-                                    bottom: KPadding.kPaddingSize92,
-                                  ),
-                                  child: Column(
-                                    crossAxisAlignment: isDesk
-                                        ? CrossAxisAlignment.start
-                                        : CrossAxisAlignment.center,
-                                    children: widgetList(isDesk: isDesk),
-                                  ),
+                        children: [
+                          Expanded(
+                            child: Container(
+                              decoration:
+                                  KWidgetTheme.boxDecorationWhite(context),
+                              child: Padding(
+                                padding: const EdgeInsets.only(
+                                  right: KPadding.kPaddingSize80,
+                                  left: KPadding.kPaddingSize96,
+                                  top: KPadding.kPaddingSize24,
+                                  bottom: KPadding.kPaddingSize92,
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: isDesk
+                                      ? CrossAxisAlignment.start
+                                      : CrossAxisAlignment.center,
+                                  children: widgetList(isDesk: isDesk),
                                 ),
                               ),
                             ),
-                            Expanded(
-                              child: image != null
-                                  ? CachedNetworkImage(
-                                      key: KWidgetkeys.widget.leftCard.image,
-                                      imageUrl: KMockText.image,
-                                      placeholder: (context, url) =>
-                                          Image.asset(''),
-                                      errorWidget: (context, url, error) =>
-                                          KIcon.error,
-                                      fit: BoxFit.fill,
-                                    )
-                                  : const SizedBox.shrink(),
-                            ),
-                          ],
-                        ),
+                          ),
+                          Expanded(
+                            child: image != null
+                                ? CachedNetworkImage(
+                                    key: KWidgetkeys.widget.leftCard.image,
+                                    imageUrl: KMockText.image,
+                                    placeholder: (context, url) =>
+                                        Image.asset(''),
+                                    errorWidget: (context, url, error) =>
+                                        KIcon.error,
+                                    fit: BoxFit.fill,
+                                  )
+                                : const SizedBox.shrink(),
+                          ),
+                        ],
                       )
-                    : ColoredBox(
+                    : Column(
                         key: KWidgetkeys.widget.leftCard.mob,
-                        color: AppColors.white,
-                        child: Column(
-                          children: widgetList(isDesk: isDesk),
-                        ),
+                        children: widgetList(isDesk: isDesk),
                       ),
               ),
             ],

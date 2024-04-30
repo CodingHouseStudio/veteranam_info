@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kozak/shared/shared.dart';
 
@@ -124,5 +125,30 @@ class FirestoreService {
         .collection(FirebaseCollectionName.information)
         .doc(information.id)
         .set(information.toJson());
+  }
+
+  Stream<List<WorkModel>> getWorks() => _db
+          .collection(FirebaseCollectionName.work)
+          .snapshots(includeMetadataChanges: true) // Enable caching
+          .map(
+        (snapshot) {
+          for (final change in snapshot.docChanges) {
+            if (change.type == DocumentChangeType.added) {
+              final source =
+                  (snapshot.metadata.isFromCache) ? 'local cache' : 'server';
+              debugPrint('Data fetched from $source}');
+            }
+          }
+          return snapshot.docs
+              .map((doc) => WorkModel.fromJson(doc.data()))
+              .toList();
+        },
+      );
+
+  Future<void> addWork(WorkModel work) {
+    return _db
+        .collection(FirebaseCollectionName.work)
+        .doc(work.id)
+        .set(work.toJson());
   }
 }

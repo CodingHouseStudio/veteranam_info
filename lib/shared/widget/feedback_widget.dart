@@ -265,7 +265,7 @@ class _FeedbackWidgetImplementationState
               const FeedbackEvent.clear(),
             ),
         isDesk: isDesk,
-        backgroundColor: AppColors.transparent,
+        // backgroundColor: AppColors.transparent,
       ),
     ];
   }
