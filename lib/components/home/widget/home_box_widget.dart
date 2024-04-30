@@ -15,7 +15,7 @@ class HomeBoxWidget extends StatelessWidget {
         bottom: isDesk ? KPadding.kPaddingSize48 : KPadding.kPaddingSize16,
         left: isDesk ? KPadding.kPaddingSize48 : KPadding.kPaddingSize16,
       ),
-      decoration: KWidgetTheme.boxDecorationCard,
+      decoration: KWidgetTheme.boxDecorationCard(context),
       child: Stack(
         children: [
           Align(

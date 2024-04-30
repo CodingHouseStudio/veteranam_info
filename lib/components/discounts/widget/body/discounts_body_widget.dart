@@ -7,12 +7,12 @@ class DiscountBodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScaffoldWidget(
-      childWidgetsFunction: ({required isDesk}) => [
-        Padding(
-          padding: EdgeInsets.all(
-            isDesk ? KPadding.kPaddingSize16 : KPadding.kPaddingSize8,
-          ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Container(
+        decoration: KWidgetTheme.boxDecorationWidget(context),
+        child: Padding(
+          padding: const EdgeInsets.all(KPadding.kPaddingSize10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

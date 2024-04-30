@@ -24,7 +24,7 @@ class BoxWidget extends StatelessWidget {
         bottom: isDesk ? KPadding.kPaddingSize24 : KPadding.kPaddingSize8,
         left: isDesk ? KPadding.kPaddingSize24 : KPadding.kPaddingSize16,
       ),
-      decoration: KWidgetTheme.boxDecorationCard,
+      decoration: KWidgetTheme.boxDecorationCard(context),
       child: isDesk
           ? InkWell(
               onTap: onTap,

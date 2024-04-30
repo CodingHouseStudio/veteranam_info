@@ -23,12 +23,13 @@ class CardAddImageWidget extends StatelessWidget {
             children: [
               if (image != null)
                 Expanded(
-                  child: buildImage(),
+                  child: buildImage(context),
                 ),
               Expanded(
                 child: Container(
-                  decoration:
-                      image == null ? KWidgetTheme.boxDecorationWidget : null,
+                  decoration: image == null
+                      ? KWidgetTheme.boxDecorationWidget(context)
+                      : null,
                   child: Padding(
                     padding: EdgeInsets.symmetric(
                       horizontal: KPadding.kPaddingSize32,
@@ -41,7 +42,7 @@ class CardAddImageWidget extends StatelessWidget {
             ],
           )
         : Container(
-            decoration: KWidgetTheme.boxDecorationWidget,
+            decoration: KWidgetTheme.boxDecorationWidget(context),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
@@ -50,7 +51,7 @@ class CardAddImageWidget extends StatelessWidget {
                     padding: const EdgeInsets.all(KPadding.kPaddingSize8),
                     child: titleWidget,
                   ),
-                if (image != null) buildImage(),
+                if (image != null) buildImage(context),
                 Padding(
                   padding: const EdgeInsets.symmetric(
                     horizontal: KPadding.kPaddingSize16,
@@ -63,11 +64,11 @@ class CardAddImageWidget extends StatelessWidget {
           );
   }
 
-  Widget buildImage() {
+  Widget buildImage(BuildContext context) {
     return Container(
       decoration: isDesk
-          ? KWidgetTheme.boxDecorationImageDesk
-          : KWidgetTheme.boxDecorationImageMob,
+          ? KWidgetTheme.boxDecorationImageDesk(context)
+          : KWidgetTheme.boxDecorationImageMob(context),
       child: CachedNetworkImage(
         key: KWidgetkeys.widget.cardAddImage.widget,
         imageUrl: image!,
