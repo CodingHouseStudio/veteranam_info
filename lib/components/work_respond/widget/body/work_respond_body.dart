@@ -17,17 +17,65 @@ class WorkRespondBodyWidget extends StatelessWidget {
           key: const Key(''),
           style: isDesk ? AppTextStyle.text96 : AppTextStyle.text32,
         ),
-        KSizedBox.kHeightSizedBox30,
         KSizedBox.kHeightSizedBox8,
         Text(
-          'test text',
-          key: const Key(''),
+          KMockText.workTitle,
+          
           style: isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
         ),
         if (isDesk)
-          KSizedBox.kHeightSizedBox120
+          KSizedBox.kHeightSizedBox56
         else
-          KSizedBox.kHeightSizedBox64,
+          KSizedBox.kHeightSizedBox24,
+
+         Container(
+          padding: const EdgeInsets.all(KPadding.kPaddingSize32),
+          margin: const EdgeInsets.symmetric(
+            horizontal: KPadding.kPaddingSize240,
+          ),
+          
+          constraints: const BoxConstraints(
+            maxWidth: KMinMaxSize.maxWidth768,
+          ),
+          decoration: KWidgetTheme.boxDecorationWidget,
+           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                KMockText.userName,
+                style: isDesk ? AppTextStyle.text40 : AppTextStyle.text32,
+              ),
+              if(isDesk)
+                KSizedBox.kHeightSizedBox32
+              else
+                KSizedBox.kHeightSizedBox16,
+           
+              Text(
+                context.l10n.email, 
+                style: isDesk ? AppTextStyle.text32 : AppTextStyle.text24,
+              ),
+              TextFieldWidget(
+                widgetKey: const Key(''), 
+                onChanged: (value) {}, 
+                hintText: context.l10n.emailHint,
+              ),
+              if(isDesk)
+                KSizedBox.kHeightSizedBox32
+              else
+                KSizedBox.kHeightSizedBox16,
+              
+              Text(
+                context.l10n.phoneNumber, 
+                style: isDesk ? AppTextStyle.text32 : AppTextStyle.text24,
+              ),
+              TextFieldWidget(
+                widgetKey: const Key(''), 
+                onChanged: (value) {}, 
+                hintText: context.l10n.emailHint,
+              ),
+            ],
+            ),
+         ),
       ],
     );
   }
