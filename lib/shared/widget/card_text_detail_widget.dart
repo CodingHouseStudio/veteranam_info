@@ -60,8 +60,8 @@ class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
                     }
                   });
                 },
-                style:
-                    widget.buttonStyle ?? KButtonStyles.whiteButtonStyleBorder,
+                style: widget.buttonStyle ??
+                    KButtonStyles.whiteButtonStyleBorder(context),
                 child: Text(
                   maxLines == null
                       ? widget.buttonText?.elementAt(1) ?? context.l10n.hide

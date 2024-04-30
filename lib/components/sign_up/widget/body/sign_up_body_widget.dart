@@ -74,7 +74,8 @@ class SignUpBodyWidget extends StatelessWidget {
                 TextButton(
                   key: KWidgetkeys.screen.signUp.loginButton,
                   onPressed: () => context.goNamed(KRoute.login.name),
-                  style: KButtonStyles.transparentButtonStyleBottomBorder,
+                  style:
+                      KButtonStyles.transparentButtonStyleBottomBorder(context),
                   child: Text(
                     context.l10n.login,
                     style: isDesk ? AppTextStyle.text40 : AppTextStyle.text24,
