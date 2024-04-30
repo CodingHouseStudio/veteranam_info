@@ -9,6 +9,7 @@ export 'chat_bot_button.dart';
 export 'chat_input_widget.dart';
 export 'check_point_widget.dart';
 export 'chip_widget.dart';
+export 'discount_card_widget.dart';
 export 'donate_button_widget.dart';
 export 'donate_card_widget.dart';
 export 'drop_chip_widget.dart';
