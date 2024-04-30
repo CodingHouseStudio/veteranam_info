@@ -26,7 +26,9 @@ class ButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: onPressed,
-      style: isDesk ? null : KButtonStyles.lightGrayButtonStyleWInf,
+      style: isDesk
+          ? KButtonStyles.lightGrayButtonStyle(context)
+          : KButtonStyles.lightGrayButtonStyleWInf(context),
       child: Padding(
         padding: padding ??
             (isDesk
