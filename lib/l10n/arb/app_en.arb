@@ -90,8 +90,8 @@
   "serverError": "An error occurred while transferring data to the server",
   "rateOurSite": "Rate our site",
   "next": "Next",
-  "thankYouDescription" : "Please note! To access some services, you will need to confirm your status by showing the appropriate ID.",
-  "mainScreen" : "Головна",
+  "thankYouDescription": "Please note! To access some services, you will need to confirm your status by showing the appropriate ID.",
+  "mainScreen": "Головна",
   "fillInForm": "Fill in the form",
   "questionsFormSubtitle": "In order for us to provide you with the most useful services, please answer the following question:",
   "selectAppropriateOne": "Select the appropriate one:",
@@ -101,5 +101,14 @@
   "iAmBusinessOwnerRepresentative": "I am a business owner/representative, I want to provide benefits.",
   "workSubtitle": "In this section, you will find current vacancies, and you can also leave a request to help us with your search. For your convenience, you can use filters.",
   "lookingForJob": "Looking for a job",
-  "givingJob": "Giving a job"
+  "givingJob": "Giving a job",
+  "employerSubtitle": "In this section you can employ a veteran. If you have an open vacancy in your company, you can place an ad here.",
+  "mainInformation": "Main information",
+  "position": "Position",
+  "writeProposedPosition": "Write the proposed position",
+  "wage": "Salary",
+  "writeTheWage": "Write the salary",
+  "selectCityOfWork": "Select the city of work",
+  "selectCity": "Select a city",
+  "howToContactYou": "Write how to contact you"
 }

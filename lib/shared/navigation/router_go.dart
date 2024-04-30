@@ -111,6 +111,17 @@ final GoRouter router = GoRouter(
             child: const WorkScreen(),
           ),
           onExit: (context) => context.read<ScrollCubit>().scrollUp(),
+          routes: [
+            GoRoute(
+              name: KRoute.employer.name,
+              path: KRoute.employer.path,
+              pageBuilder: (context, state) => NoTransitionPage(
+                key: state.pageKey,
+                child: const EmployerScreen(),
+              ),
+              onExit: (context) => context.read<ScrollCubit>().scrollUp(),
+            ),
+          ],
         ),
         GoRoute(
           name: KRoute.profile.name,
