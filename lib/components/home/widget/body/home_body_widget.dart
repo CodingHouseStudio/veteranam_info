@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:go_router/go_router.dart';
 import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
 
@@ -47,11 +46,9 @@ class HomeBodyWidget extends StatelessWidget {
                             BoxWidget(
                               key: KWidgetkeys.screen.home.discountsBox,
                               text: context.l10n.discountsCoupons,
-                              onTap: () {
-                                context.goNamed(
-                                  KRoute.discounts.name,
-                                );
-                              },
+                              onTap: () => context.goNamedWithScroll(
+                                KRoute.discounts.name,
+                              ),
                               isDesk: isDesk,
                             ),
                             if (isDesk)
@@ -61,7 +58,8 @@ class HomeBodyWidget extends StatelessWidget {
                             BoxWidget(
                               key: KWidgetkeys.screen.home.workBox,
                               text: context.l10n.work,
-                              onTap: () => context.goNamed(KRoute.work.name),
+                              onTap: () =>
+                                  context.goNamedWithScroll(KRoute.work.name),
                               isDesk: isDesk,
                             ),
                           ],
@@ -77,7 +75,7 @@ class HomeBodyWidget extends StatelessWidget {
                   BoxWidget(
                     key: KWidgetkeys.screen.home.discountsBox,
                     text: context.l10n.discountsCoupons,
-                    onTap: () => context.goNamed(
+                    onTap: () => context.goNamedWithScroll(
                       KRoute.discounts.name,
                     ),
                     isDesk: isDesk,
@@ -89,7 +87,7 @@ class HomeBodyWidget extends StatelessWidget {
                   BoxWidget(
                     key: KWidgetkeys.screen.home.workBox,
                     text: context.l10n.work,
-                    onTap: () => context.goNamed(KRoute.work.name),
+                    onTap: () => context.goNamedWithScroll(KRoute.work.name),
                     isDesk: isDesk,
                   ),
                 ],
@@ -104,7 +102,7 @@ class HomeBodyWidget extends StatelessWidget {
                         child: BoxWidget(
                           key: KWidgetkeys.screen.home.informationBox,
                           text: context.l10n.information,
-                          onTap: () => context.goNamed(
+                          onTap: () => context.goNamedWithScroll(
                             KRoute.information.name,
                           ),
                           isDesk: isDesk,
@@ -115,7 +113,8 @@ class HomeBodyWidget extends StatelessWidget {
                         child: BoxWidget(
                           key: KWidgetkeys.screen.home.storyBox,
                           text: context.l10n.stories,
-                          onTap: () => context.goNamed(KRoute.story.name),
+                          onTap: () =>
+                              context.goNamedWithScroll(KRoute.story.name),
                           isDesk: isDesk,
                         ),
                       ),
@@ -124,7 +123,7 @@ class HomeBodyWidget extends StatelessWidget {
                         child: BoxWidget(
                           key: KWidgetkeys.screen.home.investorsBox,
                           text: context.l10n.investors,
-                          onTap: () => context.goNamed(
+                          onTap: () => context.goNamedWithScroll(
                             KRoute.investors.name,
                           ),
                           isDesk: isDesk,
@@ -136,7 +135,7 @@ class HomeBodyWidget extends StatelessWidget {
                   BoxWidget(
                     key: KWidgetkeys.screen.home.informationBox,
                     text: context.l10n.information,
-                    onTap: () => context.goNamed(
+                    onTap: () => context.goNamedWithScroll(
                       KRoute.information.name,
                     ),
                     isDesk: isDesk,
@@ -145,14 +144,15 @@ class HomeBodyWidget extends StatelessWidget {
                   BoxWidget(
                     key: KWidgetkeys.screen.home.storyBox,
                     text: context.l10n.stories,
-                    onTap: () => context.goNamed(KRoute.story.name),
+                    onTap: () => context.goNamedWithScroll(KRoute.story.name),
                     isDesk: isDesk,
                   ),
                   KSizedBox.kHeightSizedBox16,
                   BoxWidget(
                     key: KWidgetkeys.screen.home.investorsBox,
                     text: context.l10n.investors,
-                    onTap: () => context.goNamed(KRoute.investors.name),
+                    onTap: () =>
+                        context.goNamedWithScroll(KRoute.investors.name),
                     isDesk: isDesk,
                   ),
                 ],

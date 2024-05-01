@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:kozak/shared/shared.dart';
 
 class FooterWidget extends SliverChildBuilderDelegate {
@@ -28,7 +27,7 @@ class FooterWidget extends SliverChildBuilderDelegate {
                                 ? AppTextStyle.text24
                                 : AppTextStyle.text14,
                       ),
-                      onPressed: () => context.goNamed(
+                      onPressed: () => context.goNamedWithScroll(
                         KAppText.routes.elementAt(index - (isDesk ? 0 : 1)),
                       ),
                     )
