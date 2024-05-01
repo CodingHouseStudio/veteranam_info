@@ -35,68 +35,75 @@ class _FeedbackBoxWidgetState extends State<FeedbackBoxWidget> {
     return widget.isDesk
         ? IntrinsicHeight(
             key: KWidgetkeys.widget.feedbackBox.widget,
-            child: Row(
-              children: [
-                Expanded(
-                  flex: 2,
-                  child: Container(
-                    decoration: KWidgetTheme.boxDecorationWidget(context),
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: KPadding.kPaddingSize32,
+            child: Padding(
+              padding: const EdgeInsets.only(top: KPadding.kPaddingSize32),
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 2,
+                    child: Container(
+                      decoration: KWidgetTheme.boxDecorationWidget(context),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: KPadding.kPaddingSize32,
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            context.l10n.thankYou,
+                            key: KWidgetkeys.widget.feedbackBox.title,
+                            style: AppTextStyle.text96,
+                          ),
+                          KSizedBox.kHeightSizedBox32,
+                          Text(
+                            context.l10n.feedbackBoxSubtitle,
+                            key: KWidgetkeys.widget.feedbackBox.subtitle,
+                            style: AppTextStyle.text40,
+                          ),
+                          KSizedBox.kHeightSizedBox48,
+                          ButtonWidget(
+                            key: KWidgetkeys.widget.feedbackBox.button,
+                            text: context.l10n.sendMore,
+                            onPressed: widget.sendAgain,
+                            isDesk: true,
+                          ),
+                        ],
+                      ),
                     ),
+                  ),
+                  KSizedBox.kWidthSizedBox24,
+                  Expanded(
+                    key: KWidgetkeys.widget.feedbackBox.widget,
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          context.l10n.thankYou,
-                          key: KWidgetkeys.widget.feedbackBox.title,
-                          style: AppTextStyle.text96,
+                        BoxWidget(
+                          key: KWidgetkeys.widget.feedbackBox.informationBox,
+                          text: context.l10n.information,
+                          onTap: () => context.goNamed(
+                            KRoute.information.name,
+                          ),
+                          isDesk: true,
                         ),
-                        KSizedBox.kHeightSizedBox32,
-                        Text(
-                          context.l10n.feedbackBoxSubtitle,
-                          key: KWidgetkeys.widget.feedbackBox.subtitle,
-                          style: AppTextStyle.text40,
+                        KSizedBox.kHeightSizedBox24,
+                        BoxWidget(
+                          key: KWidgetkeys.widget.feedbackBox.investorsBox,
+                          text: context.l10n.investors,
+                          onTap: () => context.goNamed(KRoute.investors.name),
+                          isDesk: true,
                         ),
-                        KSizedBox.kHeightSizedBox48,
-                        ButtonWidget(
-                          key: KWidgetkeys.widget.feedbackBox.button,
-                          text: context.l10n.sendMore,
-                          onPressed: widget.sendAgain,
+                        KSizedBox.kHeightSizedBox24,
+                        BoxWidget(
+                          key: KWidgetkeys.widget.feedbackBox.storyBox,
+                          text: context.l10n.stories,
+                          onTap: () => context.goNamed(KRoute.story.name),
                           isDesk: true,
                         ),
                       ],
                     ),
                   ),
-                ),
-                KSizedBox.kWidthSizedBox24,
-                Expanded(
-                  child: Column(
-                    children: [
-                      BoxWidget(
-                        text: context.l10n.information,
-                        onTap: () => context.goNamed(
-                          KRoute.information.name,
-                        ),
-                        isDesk: true,
-                      ),
-                      KSizedBox.kHeightSizedBox24,
-                      BoxWidget(
-                        text: context.l10n.investors,
-                        onTap: () => context.goNamed(KRoute.investors.name),
-                        isDesk: true,
-                      ),
-                      KSizedBox.kHeightSizedBox24,
-                      BoxWidget(
-                        text: context.l10n.stories,
-                        onTap: () => context.goNamed(KRoute.story.name),
-                        isDesk: true,
-                      ),
-                    ],
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
           )
         : Column(
@@ -123,18 +130,21 @@ class _FeedbackBoxWidgetState extends State<FeedbackBoxWidget> {
               ),
               KSizedBox.kHeightSizedBox24,
               BoxWidget(
+                key: KWidgetkeys.widget.feedbackBox.informationBox,
                 text: context.l10n.information,
                 onTap: () => context.goNamed(KRoute.information.name),
                 isDesk: false,
               ),
               KSizedBox.kHeightSizedBox24,
               BoxWidget(
+                key: KWidgetkeys.widget.feedbackBox.investorsBox,
                 text: context.l10n.investors,
                 onTap: () => context.goNamed(KRoute.investors.name),
                 isDesk: false,
               ),
               KSizedBox.kHeightSizedBox24,
               BoxWidget(
+                key: KWidgetkeys.widget.feedbackBox.storyBox,
                 text: context.l10n.stories,
                 onTap: () => context.goNamed(KRoute.story.name),
                 isDesk: false,
