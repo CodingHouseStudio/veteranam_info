@@ -50,9 +50,9 @@ class ScaffoldWidget extends StatelessWidget {
                       addAutomaticKeepAlives: false,
                       addRepaintBoundaries: false,
                       itemBuilder: (context, index) {
-                        return childWidgetsFunction(isDesk: isDesk)[index];
+                        return childWidget.elementAt(index);
                       },
-                      itemCount: childWidgetsFunction(isDesk: isDesk).length,
+                      itemCount: childWidget.length,
                     ),
                   ),
                   SliverPadding(
