@@ -42,4 +42,6 @@ abstract class KSize {
 
   static const kOpacityHalf = 0.5;
   static const kIconSize = 24.0;
+
+  static const kTopScroll = 1000.0;
 }

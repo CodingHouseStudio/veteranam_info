@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:kozak/shared/shared.dart';
 
 class FeedbackBoxWidget extends StatefulWidget {
@@ -77,7 +76,7 @@ class _FeedbackBoxWidgetState extends State<FeedbackBoxWidget> {
                         BoxWidget(
                           key: KWidgetkeys.widget.feedbackBox.informationBox,
                           text: context.l10n.information,
-                          onTap: () => context.goNamed(
+                          onTap: () => context.goNamedWithScroll(
                             KRoute.information.name,
                           ),
                           isDesk: true,
@@ -86,14 +85,16 @@ class _FeedbackBoxWidgetState extends State<FeedbackBoxWidget> {
                         BoxWidget(
                           key: KWidgetkeys.widget.feedbackBox.investorsBox,
                           text: context.l10n.investors,
-                          onTap: () => context.goNamed(KRoute.investors.name),
+                          onTap: () =>
+                              context.goNamedWithScroll(KRoute.investors.name),
                           isDesk: true,
                         ),
                         KSizedBox.kHeightSizedBox24,
                         BoxWidget(
                           key: KWidgetkeys.widget.feedbackBox.storyBox,
                           text: context.l10n.stories,
-                          onTap: () => context.goNamed(KRoute.story.name),
+                          onTap: () =>
+                              context.goNamedWithScroll(KRoute.story.name),
                           isDesk: true,
                         ),
                       ],
@@ -129,21 +130,21 @@ class _FeedbackBoxWidgetState extends State<FeedbackBoxWidget> {
               BoxWidget(
                 key: KWidgetkeys.widget.feedbackBox.informationBox,
                 text: context.l10n.information,
-                onTap: () => context.goNamed(KRoute.information.name),
+                onTap: () => context.goNamedWithScroll(KRoute.information.name),
                 isDesk: false,
               ),
               KSizedBox.kHeightSizedBox24,
               BoxWidget(
                 key: KWidgetkeys.widget.feedbackBox.investorsBox,
                 text: context.l10n.investors,
-                onTap: () => context.goNamed(KRoute.investors.name),
+                onTap: () => context.goNamedWithScroll(KRoute.investors.name),
                 isDesk: false,
               ),
               KSizedBox.kHeightSizedBox24,
               BoxWidget(
                 key: KWidgetkeys.widget.feedbackBox.storyBox,
                 text: context.l10n.stories,
-                onTap: () => context.goNamed(KRoute.story.name),
+                onTap: () => context.goNamedWithScroll(KRoute.story.name),
                 isDesk: false,
               ),
             ],

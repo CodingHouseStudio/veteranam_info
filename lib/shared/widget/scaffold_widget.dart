@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kozak/shared/shared.dart';
 
 class ScaffoldWidget extends StatelessWidget {
@@ -27,76 +26,71 @@ class ScaffoldWidget extends StatelessWidget {
               isDesk ? KPadding.kPaddingSize90 : KPadding.kPaddingSize16,
         );
         return Scaffold(
-          body: BlocBuilder<ScrollCubit, ScrollController>(
-            builder: (context, _) {
-              return CustomScrollView(
-                key: KWidgetkeys.widget.shellRoute.scroll,
-                slivers: [
-                  SliverPadding(
-                    padding: padding,
-                    sliver: SliverPersistentHeader(
-                      delegate: NawbarWidget(
-                        isDesk: isDesk,
-                        hasMicrophone: hasMicrophone,
-                      ),
-                    ),
+          body: CustomScrollView(
+            key: KWidgetkeys.widget.shellRoute.scroll,
+            slivers: [
+              SliverPadding(
+                padding: padding,
+                sliver: SliverPersistentHeader(
+                  delegate: NawbarWidget(
+                    isDesk: isDesk,
+                    hasMicrophone: hasMicrophone,
                   ),
-                  if (childSliverFirst != null)
-                    SliverPadding(
-                      padding: padding,
-                      sliver: childSliverFirst!(isDesk: isDesk),
-                    ),
-                  SliverPadding(
-                    padding: padding,
-                    sliver: SliverList(
-                      delegate: SliverChildBuilderDelegate(
-                        (context, index) => childWidget.elementAt(index),
-                        childCount: childWidget.length,
-                      ),
-                    ),
+                ),
+              ),
+              // if (childSliverFirst != null)
+              //   SliverPadding(
+              //     padding: padding,
+              //     sliver: childSliverFirst!(isDesk: isDesk),
+              //   ),
+              SliverPadding(
+                padding: padding,
+                sliver: SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                    (context, index) => childWidget.elementAt(index),
+                    childCount: childWidget.length,
                   ),
-                  if (childSliverLast != null)
-                    SliverPadding(
-                      padding: padding,
-                      sliver: childSliverLast!(isDesk: isDesk),
-                    ),
-                  SliverPadding(
-                    padding: padding.copyWith(
-                      bottom: KPadding.kPaddingSize40,
-                    ),
-                    sliver: DecoratedSliver(
-                      decoration: KWidgetTheme.boxDecorationCard(context),
-                      sliver: SliverPadding(
-                        padding: isDesk
-                            ? const EdgeInsets.all(KPadding.kPaddingSize48)
-                            : const EdgeInsets.symmetric(
-                                vertical: KPadding.kPaddingSize32,
-                                horizontal: KPadding.kPaddingSize16,
-                              ),
-                        sliver: SliverGrid(
-                          key: KWidgetkeys.widget.footer.widget,
-                          delegate: FooterWidget(
-                            isDesk: isDesk,
+                ),
+              ),
+              if (childSliverLast != null)
+                SliverPadding(
+                  padding: padding,
+                  sliver: childSliverLast!(isDesk: isDesk),
+                ),
+              SliverPadding(
+                padding: padding.copyWith(
+                  bottom: KPadding.kPaddingSize40,
+                ),
+                sliver: DecoratedSliver(
+                  decoration: KWidgetTheme.boxDecorationCard(context),
+                  sliver: SliverPadding(
+                    padding: isDesk
+                        ? const EdgeInsets.all(KPadding.kPaddingSize48)
+                        : const EdgeInsets.symmetric(
+                            vertical: KPadding.kPaddingSize32,
+                            horizontal: KPadding.kPaddingSize16,
                           ),
-                          gridDelegate: isDesk
-                              ? const SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 3,
-                                  mainAxisExtent: KMinMaxSize.maxHeight50,
-                                  mainAxisSpacing: KPadding.kPaddingSize32,
-                                )
-                              : const SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 1,
-                                  mainAxisExtent: KMinMaxSize.maxHeight50,
-                                ),
-                        ),
+                    sliver: SliverGrid(
+                      key: KWidgetkeys.widget.footer.widget,
+                      delegate: FooterWidget(
+                        isDesk: isDesk,
                       ),
+                      gridDelegate: isDesk
+                          ? const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 3,
+                              mainAxisExtent: KMinMaxSize.maxHeight50,
+                              mainAxisSpacing: KPadding.kPaddingSize32,
+                            )
+                          : const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 1,
+                              mainAxisExtent: KMinMaxSize.maxHeight50,
+                            ),
                     ),
                   ),
-                ],
-                controller: _,
-                semanticChildCount: childWidget.length,
-              );
-            },
+                ),
+              ),
+            ],
+            semanticChildCount: childWidget.length,
           ),
         );
       },
