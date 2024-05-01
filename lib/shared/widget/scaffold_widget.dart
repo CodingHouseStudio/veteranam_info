@@ -44,7 +44,6 @@ class ScaffoldWidget extends StatelessWidget {
                   sliver: childSliverFirst!(isDesk: isDesk),
                 ),
               SliverPadding(
-                key: KWidgetkeys.widget.scaffold.list,
                 padding: EdgeInsets.only(
                   left: isDesk
                       ? KPadding.kPaddingSize90
