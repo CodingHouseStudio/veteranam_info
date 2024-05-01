@@ -15,7 +15,7 @@ Future<void> scrollingHelper({
   Offset? offset,
 }) async {
   if (offset != null) {
-    await tester.drag(find.byKey(KWidgetkeys.widget.shellRoute.scroll), offset);
+    await tester.drag(find.byKey(KWidgetkeys.widget.scaffold.scroll), offset);
     await tester.pumpAndSettle();
   }
   if (itemKey != null) {
