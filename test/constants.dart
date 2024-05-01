@@ -65,7 +65,7 @@ abstract class KTestText {
   static const field = 'field_test';
   static const fieldEmpty = '';
 
-  static const questionModelItems = <QuestionModel>[
+  static final questionModelItems = <QuestionModel>[
     QuestionModel(
       id: '0',
       title: KMockText.questionTitle.first,
