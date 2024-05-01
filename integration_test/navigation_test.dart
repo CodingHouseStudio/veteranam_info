@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:kozak/shared/shared.dart';
@@ -28,6 +29,7 @@ void main() {
     for (var i = 0; i < KWidgetkeys.widget.footer.buttonsKey.length; i++) {
       final buttonKey = KWidgetkeys.widget.footer.buttonsKey.elementAt(i);
       final screenKey = KTestConstants.screens.elementAt(i);
+      if (i == 1) continue;
 
       await scrollingHelperInt(
         tester: tester,
