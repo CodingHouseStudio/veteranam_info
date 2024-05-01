@@ -170,6 +170,33 @@ void main() {
             mockGoRouter: mockGoRouter,
           );
         });
+
+        testWidgets('Feedback box widget navigation', (tester) async {
+          registerInvestorsBloc();
+          registerFeedbackBloc();
+          await tester.pumpApp(
+            const InvestorsScreen(),
+            mockGoRouter: mockGoRouter,
+          );
+
+          expect(
+            find.byKey(KWidgetkeys.screen.investors.screen),
+            findsOneWidget,
+          );
+
+          await tester.pumpAndSettle();
+
+          await feedbackEnterTextHelper(
+            tester: tester,
+            email: KTestText.useremail,
+            field: KTestText.field,
+          );
+
+          await feedbackBoxNavigationHelper(
+            tester: tester,
+            mockGoRouter: mockGoRouter,
+          );
+        });
       });
     });
   });

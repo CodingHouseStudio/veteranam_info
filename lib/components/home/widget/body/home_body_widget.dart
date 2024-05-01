@@ -42,6 +42,7 @@ class HomeBodyWidget extends StatelessWidget {
                         child: Column(
                           children: [
                             BoxWidget(
+                              key: KWidgetkeys.screen.home.discountsBox,
                               text: context.l10n.discountsCoupons,
                               onTap: () {
                                 context.goNamed(
@@ -55,6 +56,7 @@ class HomeBodyWidget extends StatelessWidget {
                             else
                               KSizedBox.kHeightSizedBox16,
                             BoxWidget(
+                              key: KWidgetkeys.screen.home.workBox,
                               text: context.l10n.work,
                               onTap: () => context.goNamed(KRoute.work.name),
                               isDesk: isDesk,
@@ -70,6 +72,7 @@ class HomeBodyWidget extends StatelessWidget {
                   ),
                   KSizedBox.kHeightSizedBox16,
                   BoxWidget(
+                    key: KWidgetkeys.screen.home.discountsBox,
                     text: context.l10n.discountsCoupons,
                     onTap: () => context.goNamed(
                       KRoute.discounts.name,
@@ -81,6 +84,7 @@ class HomeBodyWidget extends StatelessWidget {
                   else
                     KSizedBox.kHeightSizedBox16,
                   BoxWidget(
+                    key: KWidgetkeys.screen.home.workBox,
                     text: context.l10n.work,
                     onTap: () => context.goNamed(KRoute.work.name),
                     isDesk: isDesk,
@@ -95,6 +99,7 @@ class HomeBodyWidget extends StatelessWidget {
                     children: [
                       Expanded(
                         child: BoxWidget(
+                          key: KWidgetkeys.screen.home.informationBox,
                           text: context.l10n.information,
                           onTap: () => context.goNamed(
                             KRoute.information.name,
@@ -105,6 +110,7 @@ class HomeBodyWidget extends StatelessWidget {
                       KSizedBox.kWidthSizedBox24,
                       Expanded(
                         child: BoxWidget(
+                          key: KWidgetkeys.screen.home.storyBox,
                           text: context.l10n.stories,
                           onTap: () => context.goNamed(KRoute.story.name),
                           isDesk: isDesk,
@@ -113,6 +119,7 @@ class HomeBodyWidget extends StatelessWidget {
                       KSizedBox.kWidthSizedBox24,
                       Expanded(
                         child: BoxWidget(
+                          key: KWidgetkeys.screen.home.investorsBox,
                           text: context.l10n.investors,
                           onTap: () => context.goNamed(
                             KRoute.investors.name,
@@ -124,6 +131,7 @@ class HomeBodyWidget extends StatelessWidget {
                   )
                 else ...[
                   BoxWidget(
+                    key: KWidgetkeys.screen.home.informationBox,
                     text: context.l10n.information,
                     onTap: () => context.goNamed(
                       KRoute.information.name,
@@ -132,12 +140,14 @@ class HomeBodyWidget extends StatelessWidget {
                   ),
                   KSizedBox.kHeightSizedBox16,
                   BoxWidget(
+                    key: KWidgetkeys.screen.home.storyBox,
                     text: context.l10n.stories,
                     onTap: () => context.goNamed(KRoute.story.name),
                     isDesk: isDesk,
                   ),
                   KSizedBox.kHeightSizedBox16,
                   BoxWidget(
+                    key: KWidgetkeys.screen.home.investorsBox,
                     text: context.l10n.investors,
                     onTap: () => context.goNamed(KRoute.investors.name),
                     isDesk: isDesk,
