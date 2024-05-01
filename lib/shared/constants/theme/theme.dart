@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// COMMENT:
 class MaterialTheme {
   const MaterialTheme(this.textTheme);
   final TextTheme textTheme;
