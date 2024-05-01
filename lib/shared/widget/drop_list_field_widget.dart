@@ -46,6 +46,7 @@ class _DropListFieldWidgetState extends State<DropListFieldWidget> {
       optionsViewBuilder: (context, onSelected, options) {
         return ListView.builder(
           key: KWidgetkeys.widget.dropListField.list,
+          controller: ScrollController(),
           padding: EdgeInsets.zero,
           itemBuilder: (context, index) => TextButton(
             key: KWidgetkeys.widget.dropListField.item,
