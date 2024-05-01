@@ -29,7 +29,7 @@ void main() {
       mockAuthenticationRepository = MockAuthenticationRepositoryUnitTest();
       mockHomeRepository = MockIHomeRepository();
       when(mockHomeRepository.getQuestions()).thenAnswer(
-        (invocation) async => const Right(KTestText.questionModelItems),
+        (invocation) async => Right(KTestText.questionModelItems),
       );
       mockFeedbackRepository = MockIFeedbackRepository();
       when(mockFeedbackRepository.sendFeedback(KTestText.feedbackModel))
