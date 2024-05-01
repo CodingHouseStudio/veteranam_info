@@ -44,12 +44,21 @@ class ScaffoldWidget extends StatelessWidget {
               //     sliver: childSliverFirst!(isDesk: isDesk),
               //   ),
               SliverPadding(
-                padding: padding,
-                sliver: SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                    (context, index) => childWidget.elementAt(index),
-                    childCount: childWidget.length,
-                  ),
+                padding: EdgeInsets.only(
+                  left: isDesk
+                      ? KPadding.kPaddingSize90
+                      : KPadding.kPaddingSize16,
+                  right: isDesk
+                      ? KPadding.kPaddingSize90
+                      : KPadding.kPaddingSize16,
+                ),
+                sliver: SliverList.builder(
+                  addAutomaticKeepAlives: false,
+                  addRepaintBoundaries: false,
+                  itemBuilder: (context, index) {
+                    return childWidget.elementAt(index);
+                  },
+                  itemCount: childWidget.length,
                 ),
               ),
               if (childSliverLast != null)

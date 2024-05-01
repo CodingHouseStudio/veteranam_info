@@ -6,7 +6,6 @@ class ContactBodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final items = List<int>.generate(100, (index) => index);
     return ScaffoldWidget(
       childWidgetsFunction: ({required isDesk}) => [
         // KSizedBox.kHeightSizedBox30,
