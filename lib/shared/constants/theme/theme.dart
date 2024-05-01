@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+/// COMMENT: light Schema - primary(black), onPrimary(gray),
+/// primaryContainer(light gray), secondaryContainer(yellow)
 class MaterialTheme {
   const MaterialTheme(this.textTheme);
   final TextTheme textTheme;
