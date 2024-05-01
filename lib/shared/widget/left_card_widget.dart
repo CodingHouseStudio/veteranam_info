@@ -96,8 +96,9 @@ class LeftCardWidget extends StatelessWidget {
           delegate: NawbarWidget(isDesk: isDesk),
         ),
         SliverList(
-          delegate: SliverChildListDelegate(
-            childWidgets,
+          delegate: SliverChildBuilderDelegate(
+            (context, index) => childWidgets.elementAt(index),
+            childCount: childWidgets.length,
           ),
         ),
       ],

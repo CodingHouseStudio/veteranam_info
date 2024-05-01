@@ -17,6 +17,11 @@ class ScaffoldWidget extends StatelessWidget {
       builder: (BuildContext context, BoxConstraints constraints) {
         final isDesk =
             constraints.maxWidth > KPlatformConstants.minWidthThresholdTablet;
+        final childWidget = childWidgetsFunction(isDesk: isDesk);
+        final padding = EdgeInsets.symmetric(
+          horizontal:
+              isDesk ? KPadding.kPaddingSize90 : KPadding.kPaddingSize16,
+        );
         return Scaffold(
           body: BlocBuilder<ScrollCubit, ScrollController>(
             builder: (context, _) {
@@ -24,14 +29,7 @@ class ScaffoldWidget extends StatelessWidget {
                 key: KWidgetkeys.widget.shellRoute.scroll,
                 slivers: [
                   SliverPadding(
-                    padding: EdgeInsets.only(
-                      left: isDesk
-                          ? KPadding.kPaddingSize90
-                          : KPadding.kPaddingSize16,
-                      right: isDesk
-                          ? KPadding.kPaddingSize90
-                          : KPadding.kPaddingSize16,
-                    ),
+                    padding: padding,
                     sliver: SliverPersistentHeader(
                       delegate: NawbarWidget(
                         isDesk: isDesk,
@@ -40,28 +38,16 @@ class ScaffoldWidget extends StatelessWidget {
                     ),
                   ),
                   SliverPadding(
-                    padding: EdgeInsets.only(
-                      left: isDesk
-                          ? KPadding.kPaddingSize90
-                          : KPadding.kPaddingSize16,
-                      right: isDesk
-                          ? KPadding.kPaddingSize90
-                          : KPadding.kPaddingSize16,
-                    ),
+                    padding: padding,
                     sliver: SliverList(
-                      delegate: SliverChildListDelegate(
-                        childWidgetsFunction(isDesk: isDesk),
+                      delegate: SliverChildBuilderDelegate(
+                        (context, index) => childWidget.elementAt(index),
+                        childCount: childWidget.length,
                       ),
                     ),
                   ),
                   SliverPadding(
-                    padding: EdgeInsets.only(
-                      left: isDesk
-                          ? KPadding.kPaddingSize90
-                          : KPadding.kPaddingSize16,
-                      right: isDesk
-                          ? KPadding.kPaddingSize90
-                          : KPadding.kPaddingSize16,
+                    padding: padding.copyWith(
                       bottom: KPadding.kPaddingSize40,
                     ),
                     sliver: DecoratedSliver(
@@ -92,7 +78,7 @@ class ScaffoldWidget extends StatelessWidget {
                   ),
                 ],
                 controller: _,
-                semanticChildCount: childWidgetsFunction(isDesk: isDesk).length,
+                semanticChildCount: childWidget.length,
               );
             },
           ),
