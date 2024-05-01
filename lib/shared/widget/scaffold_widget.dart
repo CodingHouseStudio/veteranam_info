@@ -48,10 +48,13 @@ class ScaffoldWidget extends StatelessWidget {
                           ? KPadding.kPaddingSize90
                           : KPadding.kPaddingSize16,
                     ),
-                    sliver: SliverList(
-                      delegate: SliverChildListDelegate(
-                        childWidgetsFunction(isDesk: isDesk),
-                      ),
+                    sliver: SliverList.builder(
+                      addAutomaticKeepAlives: false,
+                      addRepaintBoundaries: false,
+                      itemBuilder: (context, index) {
+                        return childWidgetsFunction(isDesk: isDesk)[index];
+                      },
+                      itemCount: childWidgetsFunction(isDesk: isDesk).length,
                     ),
                   ),
                   SliverPadding(
