@@ -18,13 +18,10 @@ class InvestorsBodyWidget extends StatelessWidget {
             return const CircularProgressIndicator.adaptive();
           case InvestorsWatcherStateSuccess():
             return ScaffoldWidget(
+              childSliverFirst: ({required isDesk}) => FeedbackWidget(
+                isDesk: isDesk,
+              ),
               childWidgetsFunction: ({required isDesk}) => [
-                FeedbackWidget(
-                  title: context.l10n.investors,
-                  subtitle: context.l10n.investorsSubtitle,
-                  messageHint: context.l10n.writeYourSuggenstions,
-                  isDesk: isDesk,
-                ),
                 Text(
                   context.l10n.funds,
                   style: isDesk ? AppTextStyle.text96 : AppTextStyle.text32,

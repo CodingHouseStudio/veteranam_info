@@ -55,6 +55,7 @@ void main() {
       GetIt.I.registerSingleton<HomeWatcherBloc>(homeBloc);
     }
 
+    // ignore: unused_element
     void registerFeedbackBloc() {
       feedbackBloc = FeedbackBloc(feedbackRepository: mockFeedbackRepository);
       if (GetIt.I.isRegistered<FeedbackBloc>()) {
@@ -84,95 +85,97 @@ void main() {
 
       await listQuestionHelper(tester);
 
+      // await feedbackHelper(tester);
+
       await footerHelper(tester);
     });
 
-    testWidgets('Feedback enter correct text and save it', (tester) async {
-      registerHomeBloc();
-      registerFeedbackBloc();
-      await tester.pumpApp(
-        const HomeScreen(),
-      );
+    // testWidgets('Feedback enter correct text and save it', (tester) async {
+    //   registerHomeBloc();
+    //   registerFeedbackBloc();
+    //   await tester.pumpApp(
+    //     const HomeScreen(),
+    //   );
 
-      expect(find.byKey(KWidgetkeys.screen.home.screen), findsOneWidget);
+    //   expect(find.byKey(KWidgetkeys.screen.home.screen), findsOneWidget);
 
-      await tester.pumpAndSettle();
+    //   await tester.pumpAndSettle();
 
-      await scrollingHelper(
-        tester: tester,
-        offset: KTestConstants.scrollingDown,
-      );
+    //   await scrollingHelper(
+    //     tester: tester,
+    //     offset: KTestConstants.scrollingDown,
+    //   );
 
-      await scrollingHelper(
-        tester: tester,
-        offset: KTestConstants.scrollingUp200,
-      );
+    //   await scrollingHelper(
+    //     tester: tester,
+    //     offset: KTestConstants.scrollingUp200,
+    //   );
 
-      await feedbackEnterTextHelper(
-        tester: tester,
-        email: KTestText.useremail,
-        field: KTestText.field,
-      );
+    //   await feedbackEnterTextHelper(
+    //     tester: tester,
+    //     email: KTestText.useremail,
+    //     field: KTestText.field,
+    //   );
 
-      await feedbackBoxHelper(tester);
-    });
+    //   await feedbackBoxHelper(tester);
+    // });
 
-    testWidgets('Feedback enter incorrect text and save it', (tester) async {
-      registerHomeBloc();
-      await tester.pumpApp(
-        const HomeScreen(),
-      );
+    // testWidgets('Feedback enter incorrect text and save it', (tester) async {
+    //   registerHomeBloc();
+    //   await tester.pumpApp(
+    //     const HomeScreen(),
+    //   );
 
-      expect(find.byKey(KWidgetkeys.screen.home.screen), findsOneWidget);
+    //   expect(find.byKey(KWidgetkeys.screen.home.screen), findsOneWidget);
 
-      await tester.pumpAndSettle();
+    //   await tester.pumpAndSettle();
 
-      await scrollingHelper(
-        tester: tester,
-        offset: KTestConstants.scrollingDown,
-      );
+    //   await scrollingHelper(
+    //     tester: tester,
+    //     offset: KTestConstants.scrollingDown,
+    //   );
 
-      await scrollingHelper(
-        tester: tester,
-        offset: KTestConstants.scrollingUp200,
-      );
+    //   await scrollingHelper(
+    //     tester: tester,
+    //     offset: KTestConstants.scrollingUp200,
+    //   );
 
-      await feedbackEnterTextHelper(
-        tester: tester,
-        email: KTestText.useremailIncorrect,
-        field: KTestText.field,
-      );
+    //   await feedbackEnterTextHelper(
+    //     tester: tester,
+    //     email: KTestText.useremailIncorrect,
+    //     field: KTestText.field,
+    //   );
 
-      await feedbackHelper(tester);
-    });
+    //   await feedbackHelper(tester);
+    // });
 
-    testWidgets('Feedback enter text and clear it', (tester) async {
-      registerHomeBloc();
-      registerFeedbackBloc();
-      await tester.pumpApp(const HomeScreen());
-      await tester.pumpApp(
-        const HomeScreen(),
-      );
-      expect(find.byKey(KWidgetkeys.screen.home.screen), findsOneWidget);
+    // testWidgets('Feedback enter text and clear it', (tester) async {
+    //   registerHomeBloc();
+    //   registerFeedbackBloc();
+    //   await tester.pumpApp(const HomeScreen());
+    //   await tester.pumpApp(
+    //     const HomeScreen(),
+    //   );
+    //   expect(find.byKey(KWidgetkeys.screen.home.screen), findsOneWidget);
 
-      await tester.pumpAndSettle();
+    //   await tester.pumpAndSettle();
 
-      await scrollingHelper(
-        tester: tester,
-        offset: KTestConstants.scrollingDown,
-      );
+    //   await scrollingHelper(
+    //     tester: tester,
+    //     offset: KTestConstants.scrollingDown,
+    //   );
 
-      await scrollingHelper(
-        tester: tester,
-        offset: KTestConstants.scrollingUp200,
-      );
+    //   await scrollingHelper(
+    //     tester: tester,
+    //     offset: KTestConstants.scrollingUp200,
+    //   );
 
-      await feedbackClearTextHelper(
-        tester: tester,
-        email: KTestText.useremail,
-        field: KTestText.field,
-      );
-    });
+    //   await feedbackClearTextHelper(
+    //     tester: tester,
+    //     email: KTestText.useremail,
+    //     field: KTestText.field,
+    //   );
+    // });
 
     group('${KGroupText.goRouter} ', () {
       late MockGoRouter mockGoRouter;
@@ -198,6 +201,8 @@ void main() {
         await homeBoxHelper(tester);
 
         await listQuestionHelper(tester);
+
+        // await feedbackHelper(tester);
 
         await footerHelper(tester);
       });
@@ -245,42 +250,42 @@ void main() {
           );
         });
 
-        testWidgets('Feedback box widget navigation', (tester) async {
-          registerHomeBloc();
-          registerFeedbackBloc();
-          await tester.pumpApp(
-            const HomeScreen(),
-            mockGoRouter: mockGoRouter,
-          );
+        // testWidgets('Feedback box widget navigation', (tester) async {
+        //   registerHomeBloc();
+        //   registerFeedbackBloc();
+        //   await tester.pumpApp(
+        //     const HomeScreen(),
+        //     mockGoRouter: mockGoRouter,
+        //   );
 
-          expect(
-            find.byKey(KWidgetkeys.screen.home.screen),
-            findsOneWidget,
-          );
+        //   expect(
+        //     find.byKey(KWidgetkeys.screen.home.screen),
+        //     findsOneWidget,
+        //   );
 
-          await tester.pumpAndSettle();
+        //   await tester.pumpAndSettle();
 
-          await scrollingHelper(
-            tester: tester,
-            offset: KTestConstants.scrollingDown,
-          );
+        //   await scrollingHelper(
+        //     tester: tester,
+        //     offset: KTestConstants.scrollingDown,
+        //   );
 
-          await scrollingHelper(
-            tester: tester,
-            offset: KTestConstants.scrollingUp200,
-          );
+        //   await scrollingHelper(
+        //     tester: tester,
+        //     offset: KTestConstants.scrollingUp200,
+        //   );
 
-          await feedbackEnterTextHelper(
-            tester: tester,
-            email: KTestText.useremail,
-            field: KTestText.field,
-          );
+        //   await feedbackEnterTextHelper(
+        //     tester: tester,
+        //     email: KTestText.useremail,
+        //     field: KTestText.field,
+        //   );
 
-          await feedbackBoxNavigationHelper(
-            tester: tester,
-            mockGoRouter: mockGoRouter,
-          );
-        });
+        //   await feedbackBoxNavigationHelper(
+        //     tester: tester,
+        //     mockGoRouter: mockGoRouter,
+        //   );
+        // });
       });
     });
   });

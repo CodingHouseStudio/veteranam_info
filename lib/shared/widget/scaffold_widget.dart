@@ -7,9 +7,13 @@ class ScaffoldWidget extends StatelessWidget {
     required this.childWidgetsFunction,
     super.key,
     this.hasMicrophone = true,
+    this.childSliverLast,
+    this.childSliverFirst,
   });
   final List<Widget> Function({required bool isDesk}) childWidgetsFunction;
   final bool hasMicrophone;
+  final Widget Function({required bool isDesk})? childSliverLast;
+  final Widget Function({required bool isDesk})? childSliverFirst;
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +41,11 @@ class ScaffoldWidget extends StatelessWidget {
                       ),
                     ),
                   ),
+                  if (childSliverFirst != null)
+                    SliverPadding(
+                      padding: padding,
+                      sliver: childSliverFirst!(isDesk: isDesk),
+                    ),
                   SliverPadding(
                     padding: padding,
                     sliver: SliverList(
@@ -46,6 +55,11 @@ class ScaffoldWidget extends StatelessWidget {
                       ),
                     ),
                   ),
+                  if (childSliverLast != null)
+                    SliverPadding(
+                      padding: padding,
+                      sliver: childSliverLast!(isDesk: isDesk),
+                    ),
                   SliverPadding(
                     padding: padding.copyWith(
                       bottom: KPadding.kPaddingSize40,
@@ -59,9 +73,11 @@ class ScaffoldWidget extends StatelessWidget {
                                 vertical: KPadding.kPaddingSize32,
                                 horizontal: KPadding.kPaddingSize16,
                               ),
-                        sliver: FooterWidget(
+                        sliver: SliverGrid(
                           key: KWidgetkeys.widget.footer.widget,
-                          isDesk: isDesk,
+                          delegate: FooterWidget(
+                            isDesk: isDesk,
+                          ),
                           gridDelegate: isDesk
                               ? const SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 3,

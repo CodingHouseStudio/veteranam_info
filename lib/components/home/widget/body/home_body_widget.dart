@@ -23,6 +23,9 @@ class HomeBodyWidget extends StatelessWidget {
             final questionModelItems = state.questionModelItems;
             return ScaffoldWidget(
               hasMicrophone: false,
+              childSliverLast: ({required isDesk}) => FeedbackWidget(
+                isDesk: isDesk,
+              ),
               childWidgetsFunction: ({required isDesk}) => [
                 if (isDesk)
                   KSizedBox.kHeightSizedBox24
@@ -201,13 +204,13 @@ class HomeBodyWidget extends StatelessWidget {
                   KSizedBox.kHeightSizedBox160
                 else
                   KSizedBox.kHeightSizedBox40,
-                FeedbackWidget(
-                  isDesk: isDesk,
-                ),
-                if (isDesk)
-                  KSizedBox.kHeightSizedBox160
-                else
-                  KSizedBox.kHeightSizedBox10,
+                // FeedbackWidget(
+                //   isDesk: isDesk,
+                // ),
+                // if (isDesk)
+                //   KSizedBox.kHeightSizedBox160
+                // else
+                //   KSizedBox.kHeightSizedBox10,
               ],
             );
 

@@ -36,6 +36,8 @@ class TextFieldWidget extends StatefulWidget {
     this.minLines,
     this.hintStyle,
     this.isDesk = true,
+    this.hasController = false,
+    this.clearText = false,
   });
   final Key widgetKey;
   final double? width;
@@ -68,12 +70,27 @@ class TextFieldWidget extends StatefulWidget {
   final String? labelText;
   final TextStyle? hintStyle;
   final bool? isDesk;
+  final bool hasController;
+  final bool clearText;
 
   @override
   State<TextFieldWidget> createState() => _TextFieldWidgetState();
 }
 
 class _TextFieldWidgetState extends State<TextFieldWidget> {
+  late TextEditingController? controller;
+  @override
+  void initState() {
+    if (widget.hasController) {
+      controller = TextEditingController(
+        text: widget.labelText,
+      );
+    } else {
+      controller = null;
+    }
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -89,7 +106,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
         onEditingComplete: widget.onEditingCompleted,
         obscureText: widget.obscureText,
         autocorrect: !widget.obscureText,
-        controller: widget.controller,
+        controller: widget.hasController ? controller : widget.controller,
         maxLines: widget.expands == null ? widget.maxLines ?? 1 : null,
         maxLength: widget.maxLength,
         keyboardType: widget.keyboardType ?? TextInputType.text,
@@ -105,7 +122,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
               (widget.isDesk ?? true
                   ? const EdgeInsets.all(KPadding.kPaddingSize32)
                   : const EdgeInsets.all(KPadding.kPaddingSize16)),
-          labelText: widget.labelText,
+          labelText: widget.hasController ? null : widget.labelText,
           border: widget.border,
           enabledBorder: widget.enabledBorder,
           disabledBorder: widget.border,
@@ -127,6 +144,9 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
   void dispose() {
     if (widget.disposeFocusNode ?? false) {
       widget.focusNode?.dispose();
+    }
+    if (controller != null) {
+      controller!.dispose();
     }
     super.dispose();
   }

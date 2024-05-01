@@ -12,6 +12,8 @@ class MessageFieldWidget extends StatelessWidget {
     this.focusNode,
     this.disposeFocusNode,
     this.isDesk,
+    this.clearText = false,
+    this.hasController = false,
   });
   final void Function(String text) changeMessage;
   final String hintText;
@@ -21,12 +23,16 @@ class MessageFieldWidget extends StatelessWidget {
   final bool? disposeFocusNode;
   final TextStyle hintStyle;
   final bool? isDesk;
+  final bool clearText;
+  final bool hasController;
 
   @override
   Widget build(BuildContext context) {
     return IntrinsicHeight(
       child: TextFieldWidget(
         widgetKey: KWidgetkeys.widget.input.field,
+        hasController: hasController,
+        clearText: clearText,
         focusNode: focusNode,
         disposeFocusNode: disposeFocusNode,
         errorText: errorText,

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kozak/shared/shared.dart';
 
@@ -7,12 +6,10 @@ class FeedbackBoxWidget extends StatefulWidget {
   const FeedbackBoxWidget({
     required this.isDesk,
     required this.sendAgain,
-    required this.feedbackBoxKey,
     super.key,
   });
   final bool isDesk;
   final void Function() sendAgain;
-  final GlobalKey feedbackBoxKey;
 
   @override
   State<FeedbackBoxWidget> createState() => _FeedbackBoxWidgetState();
@@ -21,12 +18,12 @@ class FeedbackBoxWidget extends StatefulWidget {
 class _FeedbackBoxWidgetState extends State<FeedbackBoxWidget> {
   @override
   void initState() {
-    if (context.read<FeedbackBloc>().state.formState ==
-        FeedbackEnum.sendingMessage) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        Scrollable.ensureVisible(widget.feedbackBoxKey.currentContext!);
-      });
-    }
+    // if (context.read<FeedbackBloc>().state.formState ==
+    //     FeedbackEnum.sendingMessage) {
+    //   WidgetsBinding.instance.addPostFrameCallback((_) {
+    //     Scrollable.ensureVisible(widget.feedbackBoxKey.currentContext!);
+    //   });
+    // }
     super.initState();
   }
 
