@@ -26,13 +26,33 @@ void main() {
     for (var i = 0; i < KWidgetkeys.widget.footer.buttonsKey.length; i++) {
       final buttonKey = KWidgetkeys.widget.footer.buttonsKey.elementAt(i);
       final screenKey = KTestConstants.screens.elementAt(i);
-      if (i == 1) continue;
 
-      await scrollingHelperInt(
-        tester: tester,
-        offset: KTestConstants.scrolling,
-        itemKey: buttonKey,
-      );
+      if (screenKey != KWidgetkeys.screen.contact.screen) {
+        await scrollingHelperInt(
+          tester: tester,
+          offset: KTestConstants.scrolling,
+          itemKey: buttonKey,
+        );
+      } else {
+        await scrollingHelperInt(
+          tester: tester,
+          offset: KTestConstants.scrolling,
+        );
+
+        await tester.ensureVisible(
+          find.byKey(KWidgetkeys.screen.investors.donateCards).last,
+        );
+        await tester.pumpAndSettle();
+
+        await scrollingHelperInt(
+          tester: tester,
+          itemKey: KWidgetkeys.widget.footer.widget,
+        );
+        await scrollingHelperInt(
+          tester: tester,
+          itemKey: buttonKey,
+        );
+      }
 
       expect(
         find.byKey(buttonKey),
