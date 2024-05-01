@@ -241,7 +241,43 @@ void main() {
 
           await boxexHelper(
             tester: tester,
-            routes: KTestText.boxRoutes,
+            mockGoRouter: mockGoRouter,
+          );
+        });
+
+        testWidgets('Feedback box widget navigation', (tester) async {
+          registerHomeBloc();
+          registerFeedbackBloc();
+          await tester.pumpApp(
+            const HomeScreen(),
+            mockGoRouter: mockGoRouter,
+          );
+
+          expect(
+            find.byKey(KWidgetkeys.screen.home.screen),
+            findsOneWidget,
+          );
+
+          await tester.pumpAndSettle();
+
+          await scrollingHelper(
+            tester: tester,
+            offset: KTestConstants.scrollingDown,
+          );
+
+          await scrollingHelper(
+            tester: tester,
+            offset: KTestConstants.scrollingUp200,
+          );
+
+          await feedbackEnterTextHelper(
+            tester: tester,
+            email: KTestText.useremail,
+            field: KTestText.field,
+          );
+
+          await feedbackBoxNavigationHelper(
+            tester: tester,
             mockGoRouter: mockGoRouter,
           );
         });

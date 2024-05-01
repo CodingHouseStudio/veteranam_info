@@ -65,15 +65,7 @@ abstract class KTestText {
   static const field = 'field_test';
   static const fieldEmpty = '';
 
-  static final boxRoutes = [
-    KRoute.discounts.name,
-    KRoute.work.name,
-    KRoute.information.name,
-    KRoute.story.name,
-    KRoute.investors.name,
-  ];
-
-  static final questionModelItems = <QuestionModel>[
+  static const questionModelItems = <QuestionModel>[
     QuestionModel(
       id: '0',
       title: KMockText.questionTitle.first,
@@ -164,6 +156,7 @@ abstract class KTestConstants {
   static const scrollingUp = Offset(0, 10000);
   static const scrollingUp200 = Offset(0, 200);
   static const scrollingUp500 = Offset(0, 500);
+  static const scrollingUp1000 = Offset(0, 500);
 
   static const windowTabletSize = Size(1700, 1700);
   static const windowMobileSize = Size(700, 700);
