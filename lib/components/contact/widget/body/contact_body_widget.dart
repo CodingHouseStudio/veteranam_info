@@ -9,12 +9,12 @@ class ContactBodyWidget extends StatelessWidget {
     // final items = List<int>.generate(100, (index) => index);
     return ScaffoldWidget(
       childWidgetsFunction: ({required isDesk}) => [
-        KSizedBox.kHeightSizedBox30,
-        DropListFieldWidget(
-          onChanged: (_) {},
-          hintText: '',
-          dropDownList: KMockText.dropDownList,
-        ),
+        // KSizedBox.kHeightSizedBox30,
+        // DropListFieldWidget(
+        //   onChanged: (_) {},
+        //   hintText: '',
+        //   dropDownList: KMockText.dropDownList,
+        // ),
         KSizedBox.kHeightSizedBox30,
         const ButtonMobWidget(
           showGoogleIcon: true,
