@@ -65,15 +65,11 @@ abstract class KTestText {
   static const field = 'field_test';
   static const fieldEmpty = '';
 
-  static const questionModelItems = <QuestionModel>[
+  static final questionModelItems = <QuestionModel>[
     QuestionModel(
-      id: '1',
-      title: 'Як мені знайти роботу за допомогою цього сайту?',
-      subtitle:
-          'Використовуйте веб-сайти спеціалізованих сервісів для пошуку роботи,'
-          ' таких як Indeed, LinkedIn, Glassdoor, Monster, або регіональні '
-          'ресурси. Виберіть свою область інтересів та регіон, і шукайте '
-          'вакансії, які відповідають вашим критеріям.',
+      id: '0',
+      title: KMockText.questionTitle.first,
+      subtitle: KMockText.questionSubtitle,
     ),
   ];
 
@@ -100,14 +96,15 @@ abstract class KTestText {
   );
 
   static final feedbackModel = FeedbackModel(
-    id: DateTime(2024, 4, 12, 0, 0, 0, 1).microsecondsSinceEpoch.toString(),
-    guestId:
-        DateTime(2024, 4, 12, 0, 0, 0, 1).microsecondsSinceEpoch.toString(),
+    id: dateTime.microsecondsSinceEpoch.toString(),
+    guestId: dateTime.microsecondsSinceEpoch.toString(),
     guestName: KTestText.field,
     email: KTestText.useremail,
-    timestamp: DateTime(2024, 4, 12, 0, 0, 0, 1),
+    timestamp: dateTime,
     message: KTestText.field,
   );
+  static final dateTime = DateTime(2024, 4, 12);
+  static final dateTimeId = DateTime(0, 0, 0, 0, 1, 1, 1, 1);
 
   static const fundItems = <FundModel>[
     FundModel(
@@ -119,12 +116,11 @@ abstract class KTestText {
   ];
 
   static final feedbackModelIncorect = FeedbackModel(
-    id: DateTime(2024, 4, 12, 0, 0, 0, 1).microsecondsSinceEpoch.toString(),
-    guestId:
-        DateTime(2024, 4, 12, 0, 0, 0, 1).microsecondsSinceEpoch.toString(),
+    id: dateTime.microsecondsSinceEpoch.toString(),
+    guestId: dateTime.microsecondsSinceEpoch.toString(),
     guestName: KTestText.field,
     email: KTestText.useremailIncorrect,
-    timestamp: DateTime(2024, 4, 12, 0, 0, 0, 1),
+    timestamp: dateTime,
     message: KTestText.field,
   );
 
