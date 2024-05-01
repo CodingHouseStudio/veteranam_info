@@ -95,11 +95,13 @@ class LeftCardWidget extends StatelessWidget {
         SliverPersistentHeader(
           delegate: NawbarWidget(isDesk: isDesk),
         ),
-        SliverList(
-          delegate: SliverChildBuilderDelegate(
-            (context, index) => childWidgets.elementAt(index),
-            childCount: childWidgets.length,
-          ),
+        SliverList.builder(
+          addAutomaticKeepAlives: false,
+          addRepaintBoundaries: false,
+          itemCount: childWidgets.length,
+          itemBuilder: (BuildContext context, int index) {
+            return childWidgets[index];
+          },
         ),
       ],
     );

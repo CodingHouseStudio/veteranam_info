@@ -1,6 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:get_it/get_it.dart';
 import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
 import 'package:mockito/mockito.dart';
@@ -111,32 +112,56 @@ void main() {
       });
     });
     group('${KGroupText.repository} ', () {
-      late IHomeRepository mockHomeRepository;
+      late IHomeRepository homeRepository;
+      late FirestoreService mockFirestoreService;
       group('${KGroupText.successfulGet} ', () {
         setUp(() {
-          mockHomeRepository = MockIHomeRepository();
-          when(mockHomeRepository.getQuestions()).thenAnswer(
-            (_) async => const Right(KTestText.questionModelItems),
+          ExtendedDateTime.id = '';
+          mockFirestoreService = MockFirestoreService();
+          when(mockFirestoreService.getQuestions()).thenAnswer(
+            (_) async => KTestText.questionModelItems,
           );
+          when(
+            mockFirestoreService
+                .addQuestion(KTestText.questionModelItems.first),
+          ).thenAnswer(
+            (realInvocation) async {},
+          );
+          if (GetIt.I.isRegistered<FirestoreService>()) {
+            GetIt.I.unregister<FirestoreService>();
+          }
+          GetIt.I.registerSingleton(mockFirestoreService);
+          homeRepository = HomeRepository();
         });
         test('questions', () async {
           expect(
-            await mockHomeRepository.getQuestions(),
+            await homeRepository.getQuestions(),
             isA<Right<SomeFailure, List<QuestionModel>>>()
                 .having((e) => e.value, 'value', KTestText.questionModelItems),
           );
         });
+        test('mock', () async {
+          homeRepository.addMockQuestions();
+          verify(
+            mockFirestoreService
+                .addQuestion(KTestText.questionModelItems.first),
+          ).called(1);
+        });
       });
       group('${KGroupText.failureGet} ', () {
         setUp(() {
-          mockHomeRepository = MockIHomeRepository();
-          when(mockHomeRepository.getQuestions()).thenAnswer(
-            (_) async => const Left(SomeFailure.serverError()),
-          );
+          mockFirestoreService = MockFirestoreService();
+          when(mockFirestoreService.getQuestions())
+              .thenThrow(KGroupText.failureGet);
+          if (GetIt.I.isRegistered<FirestoreService>()) {
+            GetIt.I.unregister<FirestoreService>();
+          }
+          GetIt.I.registerSingleton(mockFirestoreService);
+          homeRepository = HomeRepository();
         });
         test('questions', () async {
           expect(
-            await mockHomeRepository.getQuestions(),
+            await homeRepository.getQuestions(),
             isA<Left<SomeFailure, List<QuestionModel>>>().having(
               (e) => e.value,
               'value',
@@ -163,7 +188,7 @@ void main() {
         build: () => homeWatcherBloc,
         act: (bloc) async {
           when(mockHomeRepository.getQuestions()).thenAnswer(
-            (_) async => const Right(KTestText.questionModelItems),
+            (_) async => Right(KTestText.questionModelItems),
           );
           bloc.add(const HomeWatcherEvent.started());
         },
