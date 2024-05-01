@@ -48,8 +48,6 @@ Future<void> feedbackClearTextHelper({
     field,
   );
 
-  await scrollingHelper(tester: tester, offset: KTestConstants.scrollingDown);
-
   await scrollingHelper(
     tester: tester,
     itemKey: KWidgetkeys.widget.feedback.buttonClear,
