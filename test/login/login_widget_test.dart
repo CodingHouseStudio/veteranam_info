@@ -19,9 +19,7 @@ void main() {
   group('${KScreenBlocName.login} ', () {
     late AuthenticationRepository mockAuthenticationRepository;
     late LoginBloc loginBloc;
-    late MockGoRouter mockGoRouter;
     setUp(() {
-      mockGoRouter = MockGoRouter();
       ExtendedDateTime.customTime = KTestText.feedbackModel.timestamp;
       mockAuthenticationRepository = MockAuthenticationRepository();
       when(
@@ -220,7 +218,6 @@ void main() {
       registerLoginBloc();
       await tester.pumpApp(
         const LoginScreen(),
-        mockGoRouter: mockGoRouter,
       );
 
       expect(

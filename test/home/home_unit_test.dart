@@ -8,6 +8,7 @@ import 'package:mockito/mockito.dart';
 
 import '../text_dependency.dart';
 
+/// COMMENT: exmaple for either repository
 void main() {
   setupFirebaseAuthMocks();
 
