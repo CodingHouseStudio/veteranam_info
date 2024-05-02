@@ -83,7 +83,7 @@ part 'widget/discount_card.dart';
 
 part 'widget/check_point.dart';
 
-part 'widget/shell_route.dart';
+part 'widget/scaffold.dart';
 
 part 'widget/pagination.dart';
 

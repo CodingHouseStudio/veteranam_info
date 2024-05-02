@@ -29,7 +29,7 @@ void main() {
       mockAuthenticationRepository = MockAuthenticationRepositoryUnitTest();
       mockHomeRepository = MockIHomeRepository();
       when(mockHomeRepository.getQuestions()).thenAnswer(
-        (invocation) async => const Right(KTestText.questionModelItems),
+        (invocation) async => Right(KTestText.questionModelItems),
       );
       mockFeedbackRepository = MockIFeedbackRepository();
       when(mockFeedbackRepository.sendFeedback(KTestText.feedbackModel))
@@ -84,6 +84,13 @@ void main() {
 
       await listQuestionHelper(tester);
 
+      await feedbackHelper(tester);
+
+      await scrollingHelper(
+        tester: tester,
+        offset: KTestConstants.scrollingDown1000,
+      );
+
       await footerHelper(tester);
     });
 
@@ -105,13 +112,18 @@ void main() {
 
       await scrollingHelper(
         tester: tester,
-        offset: KTestConstants.scrollingUp200,
+        offset: KTestConstants.scrollingUp1000,
       );
 
       await feedbackEnterTextHelper(
         tester: tester,
         email: KTestText.useremail,
         field: KTestText.field,
+      );
+
+      await scrollingHelper(
+        tester: tester,
+        offset: KTestConstants.scrollingUp500,
       );
 
       await feedbackBoxHelper(tester);
@@ -134,13 +146,18 @@ void main() {
 
       await scrollingHelper(
         tester: tester,
-        offset: KTestConstants.scrollingUp200,
+        offset: KTestConstants.scrollingUp1000,
       );
 
       await feedbackEnterTextHelper(
         tester: tester,
         email: KTestText.useremailIncorrect,
         field: KTestText.field,
+      );
+
+      await scrollingHelper(
+        tester: tester,
+        offset: KTestConstants.scrollingUp500,
       );
 
       await feedbackHelper(tester);
@@ -164,7 +181,7 @@ void main() {
 
       await scrollingHelper(
         tester: tester,
-        offset: KTestConstants.scrollingUp200,
+        offset: KTestConstants.scrollingUp1000,
       );
 
       await feedbackClearTextHelper(
@@ -198,6 +215,13 @@ void main() {
         await homeBoxHelper(tester);
 
         await listQuestionHelper(tester);
+
+        await feedbackHelper(tester);
+
+        await scrollingHelper(
+          tester: tester,
+          offset: KTestConstants.scrollingDown1000,
+        );
 
         await footerHelper(tester);
       });
@@ -241,7 +265,43 @@ void main() {
 
           await boxexHelper(
             tester: tester,
-            routes: KTestText.boxRoutes,
+            mockGoRouter: mockGoRouter,
+          );
+        });
+
+        testWidgets('Feedback box widget navigation', (tester) async {
+          registerHomeBloc();
+          registerFeedbackBloc();
+          await tester.pumpApp(
+            const HomeScreen(),
+            mockGoRouter: mockGoRouter,
+          );
+
+          expect(
+            find.byKey(KWidgetkeys.screen.home.screen),
+            findsOneWidget,
+          );
+
+          await tester.pumpAndSettle();
+
+          await scrollingHelper(
+            tester: tester,
+            offset: KTestConstants.scrollingDown,
+          );
+
+          await scrollingHelper(
+            tester: tester,
+            offset: KTestConstants.scrollingUp1000,
+          );
+
+          await feedbackEnterTextHelper(
+            tester: tester,
+            email: KTestText.useremail,
+            field: KTestText.field,
+          );
+
+          await feedbackBoxNavigationHelper(
+            tester: tester,
             mockGoRouter: mockGoRouter,
           );
         });

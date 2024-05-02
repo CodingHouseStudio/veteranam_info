@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:go_router/go_router.dart';
 import 'package:kozak/shared/shared.dart';
 
 class ThanksBodyWidget extends StatelessWidget {
@@ -40,14 +39,14 @@ class ThanksBodyWidget extends StatelessWidget {
               BoxWidget(
                 text: context.l10n.myProfile,
                 isDesk: true,
-                onTap: () => context.goNamed(KRoute.profile.name),
+                onTap: () => context.goNamedWithScroll(KRoute.profile.name),
                 textRightPadding: KPadding.kPaddingSize90,
               ),
               KSizedBox.kWidthSizedBox56,
               BoxWidget(
                 text: context.l10n.mainScreen,
                 isDesk: true,
-                onTap: () => context.goNamed(KRoute.home.name),
+                onTap: () => context.goNamedWithScroll(KRoute.home.name),
                 textRightPadding: KPadding.kPaddingSize128,
               ),
             ],
@@ -69,14 +68,14 @@ class ThanksBodyWidget extends StatelessWidget {
         BoxWidget(
           text: context.l10n.myProfile,
           isDesk: false,
-          onTap: () => context.goNamed(KRoute.profile.name),
+          onTap: () => context.goNamedWithScroll(KRoute.profile.name),
           textRightPadding: KPadding.kPaddingSize100,
         ),
         KSizedBox.kHeightSizedBox40,
         BoxWidget(
           text: context.l10n.mainScreen,
           isDesk: false,
-          onTap: () => context.goNamed(KRoute.home.name),
+          onTap: () => context.goNamedWithScroll(KRoute.home.name),
           textRightPadding: KPadding.kPaddingSize100,
         ),
       ],

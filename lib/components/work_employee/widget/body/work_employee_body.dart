@@ -102,7 +102,7 @@ class _WorkEmployeeBodyState extends State<WorkEmployeeBody> {
                     currentPage: _.page,
                     pages: _.maxPage,
                     changePage: (int page) {
-                      context.read<ScrollCubit>().scrollUp();
+                      Scrollable.ensureVisible(context);
                       context.read<WorkEmployeeWatcherBloc>().add(
                             WorkEmployeeWatcherEvent.loadPage(
                               page,

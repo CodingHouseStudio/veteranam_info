@@ -13,7 +13,7 @@ class WorkRepository implements IWorkRepository {
     for (var i = 0; i < 5; i++) {
       _firestoreService.addWork(
         WorkModel(
-          id: DateTime.now().millisecond.toString(),
+          id: '${ExtendedDateTime.id}$i',
           title: KMockText.workTitle,
           description: KMockText.workDescription,
           employerContact: KMockText.email,

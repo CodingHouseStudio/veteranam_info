@@ -17,7 +17,7 @@ class InformationRepository implements IInformationRepository {
     for (var i = 0; i < KMockText.tags.length; i++) {
       _firestoreService.addInformation(
         InformationModel(
-          id: DateTime.now().millisecond.toString(),
+          id: '${ExtendedDateTime.id}$i',
           title: KMockText.title,
           news: KMockText.cardData,
           date: DateTime.now(),

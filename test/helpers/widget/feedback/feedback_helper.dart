@@ -7,7 +7,22 @@ Future<void> feedbackHelper(
   WidgetTester tester,
 ) async {
   expect(
-    find.byKey(KWidgetkeys.widget.feedback.buttonSave),
+    find.byKey(KWidgetkeys.widget.feedback.title),
+    findsOneWidget,
+  );
+
+  expect(
+    find.byKey(KWidgetkeys.widget.feedback.subtitle),
+    findsOneWidget,
+  );
+
+  expect(
+    find.byKey(KWidgetkeys.widget.feedback.name),
+    findsOneWidget,
+  );
+
+  expect(
+    find.byKey(KWidgetkeys.widget.feedback.fieldName),
     findsOneWidget,
   );
 
@@ -16,13 +31,13 @@ Future<void> feedbackHelper(
     findsOneWidget,
   );
 
-  expect(
-    find.byKey(KWidgetkeys.widget.feedback.fieldEmail),
-    findsOneWidget,
+  await scrollingHelper(
+    tester: tester,
+    itemKey: KWidgetkeys.widget.feedback.email,
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.feedback.fieldName),
+    find.byKey(KWidgetkeys.widget.feedback.fieldEmail),
     findsOneWidget,
   );
 
@@ -37,17 +52,7 @@ Future<void> feedbackHelper(
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.feedback.name),
-    findsOneWidget,
-  );
-
-  expect(
-    find.byKey(KWidgetkeys.widget.feedback.subtitle),
-    findsOneWidget,
-  );
-
-  expect(
-    find.byKey(KWidgetkeys.widget.feedback.title),
+    find.byKey(KWidgetkeys.widget.feedback.buttonSave),
     findsOneWidget,
   );
 

@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:kozak/shared/shared.dart';
 
 class NawbarWidget extends SliverPersistentHeaderDelegate {
@@ -93,7 +92,7 @@ class _NawbarWidgetImplematationState
                   onTap: () => EasyDebounce.debounce(
                     context.l10n.logo,
                     const Duration(milliseconds: 500),
-                    () => context.goNamed(KRoute.home.name),
+                    () => context.goNamedWithScroll(KRoute.home.name),
                   ),
                   child: Text(
                     context.l10n.logo,
@@ -149,7 +148,7 @@ class _NawbarWidgetImplematationState
                 TextButton(
                   key: KWidgetkeys.widget.nawbar.button,
                   style: KButtonStyles.whiteButtonStyle(context),
-                  onPressed: () => context.goNamed(KRoute.login.name),
+                  onPressed: () => context.goNamedWithScroll(KRoute.login.name),
                   child: Text(
                     context.l10n.login,
                     style: AppTextStyle.text24,
@@ -157,7 +156,7 @@ class _NawbarWidgetImplematationState
                 )
               else if (!isFocused)
                 InkWell(
-                  onTap: () => context.goNamed(KRoute.login.name),
+                  onTap: () => context.goNamedWithScroll(KRoute.login.name),
                   child: IconWidget(
                     key: KWidgetkeys.widget.nawbar.iconPerson,
                     icon: KIcon.person,
@@ -168,7 +167,7 @@ class _NawbarWidgetImplematationState
                 if (context.read<AuthenticationBloc>().state.user!.photo ==
                     null)
                   InkWell(
-                    onTap: () => context.goNamed(KRoute.profile.name),
+                    onTap: () => context.goNamedWithScroll(KRoute.profile.name),
                     child: IconWidget(
                       key: KWidgetkeys.widget.nawbar.iconPerson,
                       icon: KIcon.person,
@@ -178,7 +177,8 @@ class _NawbarWidgetImplematationState
                   ClipRRect(
                     borderRadius: BorderRadius.circular(KSize.kUserPhoto),
                     child: InkWell(
-                      onTap: () => context.goNamed(KRoute.profile.name),
+                      onTap: () =>
+                          context.goNamedWithScroll(KRoute.profile.name),
                       child: CachedNetworkImage(
                         imageUrl: context
                             .read<AuthenticationBloc>()

@@ -66,7 +66,6 @@ final GoRouter router = GoRouter(
         key: state.pageKey,
         child: const ThanksScreen(),
       ),
-      onExit: (context) => context.read<ScrollCubit>().scrollUp(),
     ),
     GoRoute(
       name: KRoute.home.name,
@@ -83,7 +82,10 @@ final GoRouter router = GoRouter(
             key: state.pageKey,
             child: const InformationScreen(),
           ),
-          onExit: (context) => context.read<ScrollCubit>().scrollUp(),
+          onExit: (context) {
+            Scrollable.ensureVisible(context);
+            return true;
+          },
         ),
         GoRoute(
           name: KRoute.discounts.name,
@@ -92,7 +94,6 @@ final GoRouter router = GoRouter(
             key: state.pageKey,
             child: const DiscountsScreen(),
           ),
-          onExit: (context) => context.read<ScrollCubit>().scrollUp(),
         ),
         GoRoute(
           name: KRoute.story.name,
@@ -101,7 +102,6 @@ final GoRouter router = GoRouter(
             key: state.pageKey,
             child: const StoryScreen(),
           ),
-          onExit: (context) => context.read<ScrollCubit>().scrollUp(),
         ),
         GoRoute(
           name: KRoute.work.name,
@@ -110,7 +110,6 @@ final GoRouter router = GoRouter(
             key: state.pageKey,
             child: const WorkScreen(),
           ),
-          onExit: (context) => context.read<ScrollCubit>().scrollUp(),
           routes: [
             GoRoute(
               name: KRoute.employer.name,
@@ -128,7 +127,6 @@ final GoRouter router = GoRouter(
                 key: state.pageKey,
                 child: const WorkEmployeeScreen(),
               ),
-              onExit: (context) => context.read<ScrollCubit>().scrollUp(),
             ),
           ],
         ),
@@ -139,7 +137,6 @@ final GoRouter router = GoRouter(
             key: state.pageKey,
             child: const ProfileScreen(),
           ),
-          onExit: (context) => context.read<ScrollCubit>().scrollUp(),
         ),
         GoRoute(
           name: KRoute.investors.name,
@@ -148,7 +145,6 @@ final GoRouter router = GoRouter(
             key: state.pageKey,
             child: const InvestorsScreen(),
           ),
-          onExit: (context) => context.read<ScrollCubit>().scrollUp(),
         ),
         GoRoute(
           name: KRoute.aboutUs.name,
@@ -157,7 +153,6 @@ final GoRouter router = GoRouter(
             key: state.pageKey,
             child: const AboutUsScreen(),
           ),
-          onExit: (context) => context.read<ScrollCubit>().scrollUp(),
         ),
         GoRoute(
           name: KRoute.consultation.name,
@@ -166,7 +161,6 @@ final GoRouter router = GoRouter(
             key: state.pageKey,
             child: const ConsultationScreen(),
           ),
-          onExit: (context) => context.read<ScrollCubit>().scrollUp(),
         ),
         GoRoute(
           name: KRoute.contact.name,
@@ -175,9 +169,25 @@ final GoRouter router = GoRouter(
             key: state.pageKey,
             child: const ContactScreen(),
           ),
-          onExit: (context) => context.read<ScrollCubit>().scrollUp(),
         ),
       ],
     ),
   ],
 );
+
+extension NavigatorExtention on BuildContext {
+  void goNamedWithScroll(
+    String name, {
+    Map<String, String> pathParameters = const <String, String>{},
+    Map<String, dynamic> queryParameters = const <String, dynamic>{},
+    Object? extra,
+  }) {
+    Scrollable.ensureVisible(this, alignment: KSize.kTopScroll);
+    GoRouter.of(this).goNamed(
+      name,
+      pathParameters: pathParameters,
+      queryParameters: queryParameters,
+      extra: extra,
+    );
+  }
+}
