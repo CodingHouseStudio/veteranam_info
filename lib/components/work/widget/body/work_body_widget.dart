@@ -17,8 +17,7 @@ class WorkBodyWidget extends StatelessWidget {
           key: KWidgetkeys.screen.work.title,
           style: isDesk ? AppTextStyle.text96 : AppTextStyle.text32,
         ),
-        KSizedBox.kHeightSizedBox30,
-        KSizedBox.kHeightSizedBox8,
+        if (isDesk) KSizedBox.kHeightSizedBox30 else KSizedBox.kHeightSizedBox8,
         Text(
           context.l10n.workSubtitle,
           key: KWidgetkeys.screen.work.subtitle,
