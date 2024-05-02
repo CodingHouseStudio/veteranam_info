@@ -92,3 +92,7 @@ abstract class AppTextStyle {
     fontWeight: FontWeight.w400,
   );
 }
+
+extension TextStyleExtension on TextStyle {
+  TextStyle get underline => copyWith(decoration: TextDecoration.underline);
+}

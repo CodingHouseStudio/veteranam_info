@@ -13,7 +13,7 @@ class ChatBotButton extends StatelessWidget {
       child: IconWidget(
         icon: KIcon.message.setIconSize(KSize.kPixel32),
         padding: KPadding.kPaddingSize20,
-        // background: AppColors.yellow,
+        background: Theme.of(context).colorScheme.secondaryContainer,
       ),
     );
   }

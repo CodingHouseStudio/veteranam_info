@@ -1,97 +1,63 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:kozak/shared/shared.dart';
 
-class DiscountsBodyWidget extends StatelessWidget {
-  const DiscountsBodyWidget({
-    required this.discount,
-    required this.city,
-    required this.service,
-    required this.description,
-    required this.date,
-    required this.instruction,
-    super.key,
-  });
-
-  final String discount;
-  final String city;
-  final String service;
-  final String description;
-  final String date;
-  final String instruction;
+class DiscountBodyWidget extends StatelessWidget {
+  const DiscountBodyWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: Container(
-        decoration: KWidgetTheme.boxDecorPrimary,
-        child: Padding(
-          padding: const EdgeInsets.all(KPadding.kPaddingSize10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
+    return ScaffoldWidget(
+      hasMicrophone: false,
+      childWidgetsFunction: ({required isDesk}) => [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Container(
+            decoration: KWidgetTheme.boxDecorationWidget(context),
+            child: Padding(
+              padding: const EdgeInsets.all(KPadding.kPaddingSize10),
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Expanded(
-                    child: Text(
-                      discount,
-                      key: KWidgetkeys.widget.discountCard.discount,
-                      style: AppTextStyle.text32,
-                      overflow: TextOverflow.clip,
-                    ),
+                  Text(
+                    context.l10n.discountsAndCoupons,
+                    style: isDesk ? AppTextStyle.text96 : AppTextStyle.text32,
                   ),
-                  const Spacer(),
-                  Expanded(
-                    child: Text(
-                      service,
-                      key: KWidgetkeys.widget.discountCard.service,
-                      style: AppTextStyle.text32,
-                      overflow: TextOverflow.clip,
+                  Text(
+                    context.l10n.discountsAndCouponsDescription,
+                    style: isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
+                  ),
+                  if (isDesk)
+                    KSizedBox.kHeightSizedBox56
+                  else
+                    KSizedBox.kHeightSizedBox24,
+                  Padding(
+                    padding: EdgeInsets.all(
+                      isDesk ? KPadding.kPaddingSize30 : 0,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        DiscountsCardWidget(
+                          discount: KMockText.discount,
+                          city: KMockText.cityDiscount,
+                          service: KMockText.serviceDiscount,
+                          description: KMockText.descriptionDiscount,
+                          date: KMockText.dateDiscount,
+                          instruction: KMockText.instructionDiscount,
+                          preInstructionDiscount:
+                              KMockText.preInstructionDiscount,
+                          isDesk: isDesk,
+                        ),
+                      ],
                     ),
                   ),
                 ],
               ),
-              Text(
-                city,
-                key: KWidgetkeys.widget.discountCard.city,
-                style: AppTextStyle.text20.copyWith(
-                    // color: AppColors.lightGray,
-                    ),
-              ),
-              Text(
-                date,
-                key: KWidgetkeys.widget.discountCard.date,
-                style: AppTextStyle.text20.copyWith(
-                    // color: AppColors.lightGray,
-                    ),
-              ),
-              Text(
-                description,
-                key: KWidgetkeys.widget.discountCard.description,
-                style: AppTextStyle.text16,
-              ),
-              KSizedBox.kHeightSizedBox16,
-              CardTextDetailWidget(
-                text: instruction,
-                maxLines: 1,
-                icon: Row(
-                  children: [
-                    Container(
-                      child: KIcon.share,
-                    ),
-                    KSizedBox.kWidthSizedBox16,
-                    Container(
-                      child: KIcon.safe,
-                    ),
-                  ],
-                ),
-              ),
-              KSizedBox.kHeightSizedBox16,
-            ],
+            ),
           ),
         ),
-      ),
+      ],
     );
   }
 }

@@ -19,4 +19,5 @@ class _ScreenKeys {
   final thanks = _ThanksKeys();
   final questionsForm = _QuestionsFormKeys();
   final workEmployee = _WorkEmployeeKeys();
+  final workRespond = _WorkRespondKeys();
 }

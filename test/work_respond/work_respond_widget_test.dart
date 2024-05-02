@@ -1,0 +1,182 @@
+import 'package:flutter_test/flutter_test.dart';
+import 'package:get_it/get_it.dart';
+import 'package:kozak/components/components.dart';
+import 'package:kozak/shared/shared.dart';
+
+import '../text_dependency.dart';
+
+void main() {
+  setUp(configureDependenciesTest);
+
+  setUpAll(setUpGlobal);
+
+  setupFirebaseAuthMocks();
+
+  tearDown(GetIt.I.reset);
+  group('${KScreenBlocName.workRespond} ', () {
+    testWidgets('${KGroupText.intial} ', (tester) async {
+      await tester.pumpApp(const WorkRespondScreen());
+
+      expect(
+        find.byKey(KWidgetkeys.screen.workRespond.screen),
+        findsOneWidget,
+      );
+
+      await tester.pumpAndSettle();
+    });
+    group('${KGroupText.goRouter} ', () {
+      late MockGoRouter mockGoRouter;
+      setUp(() => mockGoRouter = MockGoRouter());
+      testWidgets('${KGroupText.intial} ', (tester) async {
+        await tester.pumpApp(
+          const WorkRespondScreen(),
+          mockGoRouter: mockGoRouter,
+        );
+
+        expect(
+          find.byKey(KWidgetkeys.screen.workRespond.screen),
+          findsOneWidget,
+        );
+
+        expect(
+          find.byKey(KWidgetkeys.screen.workRespond.title),
+          findsOneWidget,
+        );
+
+        expect(
+          find.byKey(KWidgetkeys.screen.workRespond.subtitle),
+          findsOneWidget,
+        );
+
+        expect(
+          find.byKey(KWidgetkeys.screen.workRespond.username),
+          findsOneWidget,
+        );
+
+        expect(
+          find.byKey(KWidgetkeys.screen.workRespond.email),
+          findsOneWidget,
+        );
+
+        expect(
+          find.byKey(KWidgetkeys.screen.workRespond.emailHint),
+          findsOneWidget,
+        );
+
+        expect(
+          find.byKey(KWidgetkeys.screen.workRespond.phoneNumber),
+          findsOneWidget,
+        );
+
+        expect(
+          find.byKey(KWidgetkeys.screen.workRespond.phoneNumberHint),
+          findsOneWidget,
+        );
+
+        expect(
+          find.byKey(KWidgetkeys.screen.workRespond.resume),
+          findsOneWidget,
+        );
+
+        expect(
+          find.byKey(KWidgetkeys.screen.workRespond.upload),
+          findsOneWidget,
+        );
+
+        expect(
+          find.byKey(KWidgetkeys.screen.workRespond.checkbox),
+          findsOneWidget,
+        );
+
+        expect(
+          find.byKey(KWidgetkeys.screen.workRespond.noResume),
+          findsOneWidget,
+        );
+
+        expect(
+          find.byKey(KWidgetkeys.screen.workRespond.send),
+          findsOneWidget,
+        );
+
+        expect(
+          find.byKey(KWidgetkeys.screen.workRespond.cancel),
+          findsOneWidget,
+        );
+
+        await tester.pumpAndSettle();
+
+        expect(
+          find.byKey(KWidgetkeys.screen.workRespond.screen),
+          findsOneWidget,
+        );
+
+        expect(
+          find.byKey(KWidgetkeys.screen.workRespond.title),
+          findsOneWidget,
+        );
+
+        expect(
+          find.byKey(KWidgetkeys.screen.workRespond.subtitle),
+          findsOneWidget,
+        );
+
+        expect(
+          find.byKey(KWidgetkeys.screen.workRespond.username),
+          findsOneWidget,
+        );
+
+        expect(
+          find.byKey(KWidgetkeys.screen.workRespond.email),
+          findsOneWidget,
+        );
+
+        expect(
+          find.byKey(KWidgetkeys.screen.workRespond.emailHint),
+          findsOneWidget,
+        );
+
+        expect(
+          find.byKey(KWidgetkeys.screen.workRespond.phoneNumber),
+          findsOneWidget,
+        );
+
+        expect(
+          find.byKey(KWidgetkeys.screen.workRespond.phoneNumberHint),
+          findsOneWidget,
+        );
+
+        expect(
+          find.byKey(KWidgetkeys.screen.workRespond.resume),
+          findsOneWidget,
+        );
+
+        expect(
+          find.byKey(KWidgetkeys.screen.workRespond.upload),
+          findsOneWidget,
+        );
+
+        expect(
+          find.byKey(KWidgetkeys.screen.workRespond.checkbox),
+          findsOneWidget,
+        );
+
+        expect(
+          find.byKey(KWidgetkeys.screen.workRespond.noResume),
+          findsOneWidget,
+        );
+
+        expect(
+          find.byKey(KWidgetkeys.screen.workRespond.send),
+          findsOneWidget,
+        );
+
+        expect(
+          find.byKey(KWidgetkeys.screen.workRespond.cancel),
+          findsOneWidget,
+        );
+      });
+      // group('${KGroupText.goTo} ', () {
+      // });
+    });
+  });
+}
