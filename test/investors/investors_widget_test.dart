@@ -85,6 +85,8 @@ void main() {
         field: KTestText.field,
       );
 
+      await scrollingHelper(tester: tester, offset: KTestConstants.scrollingUp);
+
       await feedbackBoxHelper(tester);
     });
 
@@ -104,6 +106,8 @@ void main() {
         email: KTestText.useremailIncorrect,
         field: KTestText.field,
       );
+
+      await scrollingHelper(tester: tester, offset: KTestConstants.scrollingUp);
 
       await feedbackHelper(tester);
     });

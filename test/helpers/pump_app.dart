@@ -16,16 +16,9 @@ extension PumpApp on WidgetTester {
     MockGoRouter? mockGoRouter,
   }) {
     return pumpWidget(
-      MultiBlocProvider(
-        providers: [
-          BlocProvider(
-            create: (context) => GetIt.I.get<AuthenticationBloc>()
-              ..add(AuthenticationInitialized()),
-          ),
-          BlocProvider(
-            create: (context) => GetIt.I.get<ScrollCubit>()..initial(),
-          ),
-        ],
+      BlocProvider(
+        create: (context) =>
+            GetIt.I.get<AuthenticationBloc>()..add(AuthenticationInitialized()),
         child: BlocBuilder<AuthenticationBloc, AuthenticationState>(
           builder: (context, state) => mockGoRouter == null
               ? MaterialApp(

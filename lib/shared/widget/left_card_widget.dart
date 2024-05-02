@@ -90,7 +90,7 @@ class LeftCardWidget extends StatelessWidget {
     required bool isDesk,
   }) {
     return CustomScrollView(
-      key: KWidgetkeys.widget.shellRoute.scroll,
+      key: KWidgetkeys.widget.scaffold.scroll,
       slivers: [
         SliverPersistentHeader(
           delegate: NawbarWidget(isDesk: isDesk),
