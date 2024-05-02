@@ -14,26 +14,25 @@ class EmployerBodyWidget extends StatelessWidget {
           KSizedBox.kHeightSizedBox24,
         Text(
           context.l10n.work,
-          //key
+          key: KWidgetkeys.screen.employer.title,
           style: isDesk ? AppTextStyle.text96 : AppTextStyle.text32,
         ),
         KSizedBox.kHeightSizedBox30,
         KSizedBox.kHeightSizedBox8,
         Text(
           context.l10n.employerSubtitle,
-          //key
+          key: KWidgetkeys.screen.employer.subtitle,
           style: isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
         ),
         if (isDesk)
           KSizedBox.kHeightSizedBox56
         else
           KSizedBox.kHeightSizedBox24,
-        if (isDesk)
-          Text(
-            context.l10n.mainInformation,
-            //key
-            style: isDesk ? AppTextStyle.text64 : AppTextStyle.text32,
-          ),
+        Text(
+          context.l10n.mainInformation,
+          key: KWidgetkeys.screen.employer.mainInformation,
+          style: isDesk ? AppTextStyle.text64 : AppTextStyle.text32,
+        ),
         if (isDesk)
           KSizedBox.kHeightSizedBox64
         else
@@ -42,64 +41,80 @@ class EmployerBodyWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.only(left: 32, right: 32),
+              padding: const EdgeInsets.symmetric(
+                horizontal: KPadding.kPaddingSize32,
+              ),
               child: Text(
+                key: KWidgetkeys.screen.employer.textPosition,
                 context.l10n.position,
                 style: isDesk ? AppTextStyle.text40 : AppTextStyle.text24,
               ),
             ),
             KSizedBox.kHeightSizedBox24,
             TextFieldWidget(
-              widgetKey: const Key('1'),
+              widgetKey: KWidgetkeys.screen.employer.fieldPosition,
               onChanged: (value) {},
               hintText: context.l10n.writeProposedPosition,
             ),
             KSizedBox.kHeightSizedBox32,
             Padding(
-              padding: const EdgeInsets.only(left: 32, right: 32),
+              padding: const EdgeInsets.symmetric(
+                horizontal: KPadding.kPaddingSize32,
+              ),
               child: Text(
+                key: KWidgetkeys.screen.employer.textWage,
                 context.l10n.wage,
                 style: isDesk ? AppTextStyle.text40 : AppTextStyle.text24,
               ),
             ),
             KSizedBox.kHeightSizedBox24,
             TextFieldWidget(
-              widgetKey: const Key('2'),
+              widgetKey: KWidgetkeys.screen.employer.fieldWage,
               onChanged: (value) {},
               hintText: context.l10n.writeTheWage,
             ),
             KSizedBox.kHeightSizedBox32,
             Padding(
-              padding: const EdgeInsets.only(left: 32, right: 32),
+              padding: const EdgeInsets.symmetric(
+                horizontal: KPadding.kPaddingSize32,
+              ),
               child: Text(
+                key: KWidgetkeys.screen.employer.textCity,
                 context.l10n.selectCityOfWork,
                 style: isDesk ? AppTextStyle.text40 : AppTextStyle.text24,
               ),
             ),
             KSizedBox.kHeightSizedBox24,
             DropListFieldWidget(
+              key: KWidgetkeys.screen.employer.fieldCity,
               onChanged: (text) {},
               hintText: context.l10n.selectCity,
               dropDownList: const [],
             ),
             KSizedBox.kHeightSizedBox24,
-            const SwitchWidget(),
+            SwitchWidget(
+              key: KWidgetkeys.screen.employer.switchWidget,
+            ),
             KSizedBox.kHeightSizedBox32,
             Padding(
-              padding: const EdgeInsets.only(left: 32, right: 32),
+              padding: const EdgeInsets.symmetric(
+                horizontal: KPadding.kPaddingSize32,
+              ),
               child: Text(
+                key: KWidgetkeys.screen.employer.textContact,
                 context.l10n.contacts,
                 style: isDesk ? AppTextStyle.text40 : AppTextStyle.text24,
               ),
             ),
             KSizedBox.kHeightSizedBox24,
             TextFieldWidget(
-              widgetKey: const Key('4'),
+              widgetKey: KWidgetkeys.screen.employer.fieldContact,
               onChanged: (value) {},
               hintText: context.l10n.howToContactYou,
             ),
             KSizedBox.kHeightSizedBox32,
             ButtonWidget(
+              key: KWidgetkeys.screen.employer.button,
               text: context.l10n.next,
               onPressed: () {},
               isDesk: true,

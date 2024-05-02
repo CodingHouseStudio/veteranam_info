@@ -57,7 +57,7 @@ class DiscountBodyWidget extends StatelessWidget {
             ),
           ),
         ),
-      ),
+      ],
     );
   }
 }
