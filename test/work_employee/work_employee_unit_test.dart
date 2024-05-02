@@ -1,11 +1,13 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:get_it/get_it.dart';
 import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
 import 'package:mockito/mockito.dart';
 
 import '../text_dependency.dart';
 
+/// COMMENT: exmaple for stream repository
 void main() {
   setupFirebaseAuthMocks();
 
@@ -132,12 +134,25 @@ void main() {
     });
     group('${KGroupText.repository} ', () {
       late IWorkRepository mockWorkRepository;
+      late FirestoreService mockFirestoreService;
       group('${KGroupText.successfulGet} ', () {
         setUp(() {
-          mockWorkRepository = MockIWorkRepository();
-          when(mockWorkRepository.getWorks()).thenAnswer(
+          ExtendedDateTime.id = '';
+          mockFirestoreService = MockFirestoreService();
+          when(mockFirestoreService.getWorks()).thenAnswer(
             (_) => Stream.value(KTestText.workModelItems),
           );
+          when(
+            mockFirestoreService.addWork(KTestText.workModelItems.first),
+          ).thenAnswer(
+            (realInvocation) async {},
+          );
+          if (GetIt.I.isRegistered<FirestoreService>()) {
+            GetIt.I.unregister<FirestoreService>();
+          }
+          GetIt.I.registerSingleton(mockFirestoreService);
+
+          mockWorkRepository = WorkRepository();
         });
         test('Work', () async {
           expect(
@@ -145,13 +160,29 @@ void main() {
             emits(KTestText.workModelItems),
           );
         });
+        test('mock', () async {
+          mockWorkRepository.addMockWorks();
+          verify(
+            mockFirestoreService.addWork(KTestText.workModelItems.first),
+          ).called(1);
+        });
       });
       group('${KGroupText.failureGet} ', () {
         setUp(() {
-          mockWorkRepository = MockIWorkRepository();
-          when(mockWorkRepository.getWorks()).thenAnswer(
-            (_) => Stream.error(KGroupText.failureGet),
+          ExtendedDateTime.id = '';
+          mockFirestoreService = MockFirestoreService();
+          when(mockFirestoreService.getWorks()).thenAnswer(
+            (realInvocation) => Stream.error(
+              KGroupText.failureGet,
+            ),
           );
+
+          if (GetIt.I.isRegistered<FirestoreService>()) {
+            GetIt.I.unregister<FirestoreService>();
+          }
+          GetIt.I.registerSingleton(mockFirestoreService);
+
+          mockWorkRepository = WorkRepository();
         });
         test('information', () async {
           expect(

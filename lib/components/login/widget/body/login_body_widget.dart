@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
 
@@ -71,7 +70,8 @@ class LoginBodyWidget extends StatelessWidget {
                 ),
                 TextButton(
                   key: KWidgetkeys.screen.login.signUpButton,
-                  onPressed: () => context.goNamed(KRoute.signUp.name),
+                  onPressed: () =>
+                      context.goNamedWithScroll(KRoute.signUp.name),
                   style:
                       KButtonStyles.transparentButtonStyleBottomBorder(context),
                   child: Text(
