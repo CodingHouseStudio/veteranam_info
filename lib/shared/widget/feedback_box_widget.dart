@@ -24,7 +24,9 @@ class _FeedbackBoxWidgetState extends State<FeedbackBoxWidget> {
     if (context.read<FeedbackBloc>().state.formState ==
         FeedbackEnum.sendingMessage) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        Scrollable.ensureVisible(widget.feedbackBoxKey.currentContext!);
+        Scrollable.ensureVisible(
+          widget.feedbackBoxKey.currentContext!,
+        );
       });
     }
     super.initState();

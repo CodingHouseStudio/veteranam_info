@@ -84,6 +84,13 @@ void main() {
 
       await listQuestionHelper(tester);
 
+      await feedbackHelper(tester);
+
+      await scrollingHelper(
+        tester: tester,
+        offset: KTestConstants.scrollingDown1000,
+      );
+
       await footerHelper(tester);
     });
 
@@ -105,13 +112,18 @@ void main() {
 
       await scrollingHelper(
         tester: tester,
-        offset: KTestConstants.scrollingUp200,
+        offset: KTestConstants.scrollingUp1000,
       );
 
       await feedbackEnterTextHelper(
         tester: tester,
         email: KTestText.useremail,
         field: KTestText.field,
+      );
+
+      await scrollingHelper(
+        tester: tester,
+        offset: KTestConstants.scrollingUp500,
       );
 
       await feedbackBoxHelper(tester);
@@ -134,13 +146,18 @@ void main() {
 
       await scrollingHelper(
         tester: tester,
-        offset: KTestConstants.scrollingUp200,
+        offset: KTestConstants.scrollingUp1000,
       );
 
       await feedbackEnterTextHelper(
         tester: tester,
         email: KTestText.useremailIncorrect,
         field: KTestText.field,
+      );
+
+      await scrollingHelper(
+        tester: tester,
+        offset: KTestConstants.scrollingUp500,
       );
 
       await feedbackHelper(tester);
@@ -164,7 +181,7 @@ void main() {
 
       await scrollingHelper(
         tester: tester,
-        offset: KTestConstants.scrollingUp200,
+        offset: KTestConstants.scrollingUp1000,
       );
 
       await feedbackClearTextHelper(
@@ -198,6 +215,13 @@ void main() {
         await homeBoxHelper(tester);
 
         await listQuestionHelper(tester);
+
+        await feedbackHelper(tester);
+
+        await scrollingHelper(
+          tester: tester,
+          offset: KTestConstants.scrollingDown1000,
+        );
 
         await footerHelper(tester);
       });
@@ -267,7 +291,7 @@ void main() {
 
           await scrollingHelper(
             tester: tester,
-            offset: KTestConstants.scrollingUp200,
+            offset: KTestConstants.scrollingUp1000,
           );
 
           await feedbackEnterTextHelper(

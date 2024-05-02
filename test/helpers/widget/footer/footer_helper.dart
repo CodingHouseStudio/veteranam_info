@@ -12,7 +12,29 @@ Future<void> footerHelper(
     offset: KTestConstants.scrollingDown,
   );
 
+  await scrollingHelper(
+    tester: tester,
+    offset: KTestConstants.scrollingUp500,
+  );
+
   expect(find.byKey(KWidgetkeys.widget.footer.logo), findsOneWidget);
+
+  for (final buttonKey in KWidgetkeys.widget.footer.buttonsKey) {
+    await scrollingHelper(tester: tester, itemKey: buttonKey);
+
+    expect(
+      find.byKey(buttonKey),
+      findsOneWidget,
+    );
+  }
+
+  // expect(
+  //   find.descendant(
+  //     of: find.byKey(KWidgetkeys.widget.footer.widget),
+  //     matching: find.text('${KTestText.footer}$email'),
+  //   ),
+  //   findsOneWidget,
+  // );
 
   expect(
     find.byKey(KWidgetkeys.widget.footer.facebookIcon),
@@ -28,21 +50,6 @@ Future<void> footerHelper(
     find.byKey(KWidgetkeys.widget.footer.likedInIcon),
     findsOneWidget,
   );
-
-  for (final buttonKey in KWidgetkeys.widget.footer.buttonsKey) {
-    expect(
-      find.byKey(buttonKey),
-      findsOneWidget,
-    );
-  }
-
-  // expect(
-  //   find.descendant(
-  //     of: find.byKey(KWidgetkeys.widget.footer.widget),
-  //     matching: find.text('${KTestText.footer}$email'),
-  //   ),
-  //   findsOneWidget,
-  // );
 
   await changeWindowSizeHelper(tester: tester);
 

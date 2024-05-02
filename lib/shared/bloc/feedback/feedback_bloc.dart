@@ -118,6 +118,8 @@ class FeedbackBloc extends Bloc<FeedbackEvent, FeedbackState> {
     _Clear event,
     Emitter<FeedbackState> emit,
   ) {
+    if (state.formState != FeedbackEnum.initial &&
+        state.formState != FeedbackEnum.invalidData) return;
     emit(
       const FeedbackState(
         email: EmailFieldModel.pure(),

@@ -8,12 +8,12 @@ class ContactBodyWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScaffoldWidget(
       childWidgetsFunction: ({required isDesk}) => [
-        KSizedBox.kHeightSizedBox30,
-        DropListFieldWidget(
-          onChanged: (_) {},
-          hintText: '',
-          dropDownList: KMockText.dropDownList,
-        ),
+        // KSizedBox.kHeightSizedBox30,
+        // DropListFieldWidget(
+        //   onChanged: (_) {},
+        //   hintText: '',
+        //   dropDownList: KMockText.dropDownList,
+        // ),
         KSizedBox.kHeightSizedBox30,
         const ButtonMobWidget(
           showGoogleIcon: true,
