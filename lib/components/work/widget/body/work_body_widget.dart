@@ -43,7 +43,7 @@ class WorkBodyWidget extends StatelessWidget {
               BoxWidget(
                 key: KWidgetkeys.screen.work.boxEmployer,
                 text: context.l10n.givingJob,
-                onTap: () => context.goNamed(KRoute.employer.name),
+                onTap: () => context.goNamedWithScroll(KRoute.employer.name),
                 isDesk: true,
                 textRightPadding: KPadding.kPaddingSize100,
               ),
@@ -61,7 +61,7 @@ class WorkBodyWidget extends StatelessWidget {
           BoxWidget(
             key: KWidgetkeys.screen.work.boxEmployer,
             text: context.l10n.givingJob,
-            onTap: () => context.goNamed(KRoute.employer.name),
+            onTap: () => context.goNamedWithScroll(KRoute.employer.name),
             isDesk: false,
             textRightPadding: KPadding.kPaddingSize100,
           ),
