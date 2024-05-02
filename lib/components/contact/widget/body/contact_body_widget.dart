@@ -6,35 +6,13 @@ class ContactBodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final items = List<int>.generate(100, (index) => index);
     return ScaffoldWidget(
       childWidgetsFunction: ({required isDesk}) => [
-        KSizedBox.kHeightSizedBox30,
-        FilterBoxWidget(
-          key: KWidgetkeys.widget.chip.widget,
-          filters: KMockText.tags.elementAt(0)!,
-        ),
-        KSizedBox.kHeightSizedBox30,
-        DropListFieldWidget(
-          onChanged: (_) {},
-          hintText: '',
-          dropDownList: KMockText.dropDownList,
-        ),
-        KSizedBox.kHeightSizedBox30,
-        // PaginationWidget(
-        //   items: items,
-        //   itemBuilder: (context, items) {
-        //     return ListView.builder(
-        //       physics: const NeverScrollableScrollPhysics(),
-        //       shrinkWrap: true,
-        //       itemCount: items.length,
-        //       itemBuilder: (context, index) {
-        //         return ListTile(
-        //           title: Text('Item ${items[index]}'),
-        //         );
-        //       },
-        //     );
-        //   },
+        // KSizedBox.kHeightSizedBox30,
+        // DropListFieldWidget(
+        //   onChanged: (_) {},
+        //   hintText: '',
+        //   dropDownList: KMockText.dropDownList,
         // ),
         KSizedBox.kHeightSizedBox30,
         const ButtonMobWidget(

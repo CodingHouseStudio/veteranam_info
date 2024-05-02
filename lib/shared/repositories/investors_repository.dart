@@ -23,7 +23,7 @@ class InvestorsRepository implements IInvestorsRepository {
     for (var i = 0; i < 5; i++) {
       _firestoreService.addFund(
         FundModel(
-          id: DateTime.now().millisecond.toString(),
+          id: '${ExtendedDateTime.id}$i',
           title: KMockText.donateCardTitle,
           subtitle: KMockText.donateCardSubtitle,
           link: '',
