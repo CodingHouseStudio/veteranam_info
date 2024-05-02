@@ -65,22 +65,24 @@ class ScaffoldWidget extends StatelessWidget {
                             vertical: KPadding.kPaddingSize32,
                             horizontal: KPadding.kPaddingSize16,
                           ),
-                    sliver: SliverGrid(
-                      key: KWidgetkeys.widget.footer.widget,
-                      delegate: FooterWidget(
-                        isDesk: isDesk,
-                      ),
-                      gridDelegate: isDesk
-                          ? const SliverGridDelegateWithFixedCrossAxisCount(
+                    sliver: isDesk
+                        ? SliverGrid(
+                            key: KWidgetkeys.widget.footer.widget,
+                            delegate: FooterWidget(
+                              isDesk: true,
+                            ),
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 3,
                               mainAxisExtent: KMinMaxSize.maxHeight50,
                               mainAxisSpacing: KPadding.kPaddingSize32,
-                            )
-                          : const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 1,
-                              mainAxisExtent: KMinMaxSize.maxHeight50,
                             ),
-                    ),
+                          )
+                        : SliverList(
+                            delegate: FooterWidget(
+                              isDesk: false,
+                            ),
+                          ),
                   ),
                 ),
               ),
