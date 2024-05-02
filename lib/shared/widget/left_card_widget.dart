@@ -100,7 +100,7 @@ class LeftCardWidget extends StatelessWidget {
           addRepaintBoundaries: false,
           itemCount: childWidgets.length,
           itemBuilder: (BuildContext context, int index) {
-            return childWidgets[index];
+            return childWidgets.elementAt(index);
           },
         ),
       ],
