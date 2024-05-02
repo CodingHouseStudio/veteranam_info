@@ -8,7 +8,6 @@ class EmployerScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // змінити ключ
-    return EmployerBodyWidget(key: KWidgetkeys.screen.work.screen);
+    return EmployerBodyWidget(key: KWidgetkeys.screen.employer.screen);
   }
 }
