@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:kozak/shared/shared.dart';
 
+/// COMMENT: light Schema - primary(black), onPrimary(gray),
+/// primaryContainer(light gray), secondaryContainer(yellow)
 class MaterialTheme {
   const MaterialTheme(this.textTheme);
   final TextTheme textTheme;
@@ -366,20 +367,6 @@ class MaterialTheme {
         textTheme: textTheme.apply(
           bodyColor: colorScheme.onSurface,
           displayColor: colorScheme.onSurface,
-        ),
-        textButtonTheme: TextButtonThemeData(
-          style: TextButton.styleFrom(
-            backgroundColor: colorScheme.onPrimary,
-            minimumSize:
-                const Size(KMinMaxSize.minWidth100, KMinMaxSize.minHeight50),
-            padding: const EdgeInsets.all(KPadding.kPaddingSize8),
-            shape: RoundedRectangleBorder(
-              borderRadius: KBorderRadius.kBorderRadius32,
-              side: BorderSide(
-                color: colorScheme.onPrimary,
-              ),
-            ),
-          ),
         ),
         scaffoldBackgroundColor: colorScheme.background,
         canvasColor: colorScheme.surface,
