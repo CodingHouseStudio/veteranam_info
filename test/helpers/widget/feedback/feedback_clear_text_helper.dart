@@ -9,13 +9,13 @@ Future<void> feedbackClearTextHelper({
   required String email,
 }) async {
   expect(
-    find.byKey(KWidgetkeys.widget.feedback.buttonSave),
+    find.byKey(KWidgetkeys.widget.feedback.fieldName),
     findsOneWidget,
   );
 
-  expect(
-    find.byKey(KWidgetkeys.widget.feedback.fieldName),
-    findsOneWidget,
+  await scrollingHelper(
+    tester: tester,
+    itemKey: KWidgetkeys.widget.feedback.fieldName,
   );
 
   await tester.enterText(
@@ -26,6 +26,11 @@ Future<void> feedbackClearTextHelper({
   expect(
     find.byKey(KWidgetkeys.widget.feedback.fieldEmail),
     findsOneWidget,
+  );
+
+  await scrollingHelper(
+    tester: tester,
+    itemKey: KWidgetkeys.widget.feedback.fieldEmail,
   );
 
   await tester.enterText(
@@ -48,10 +53,14 @@ Future<void> feedbackClearTextHelper({
     field,
   );
 
+  expect(
+    find.byKey(KWidgetkeys.widget.feedback.buttonClear),
+    findsOneWidget,
+  );
+
   await scrollingHelper(
     tester: tester,
     itemKey: KWidgetkeys.widget.feedback.buttonClear,
-    offset: KTestConstants.scrollingUp200,
   );
 
   await tester.tap(find.byKey(KWidgetkeys.widget.feedback.buttonClear));

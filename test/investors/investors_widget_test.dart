@@ -62,70 +62,74 @@ void main() {
 
       await tester.pumpAndSettle();
 
-      // await feedbackHelper(tester);
+      await feedbackHelper(tester);
 
       await donatesCardHelper(tester);
     });
 
-    // testWidgets('Feedback enter correct text and save it', (tester) async {
-    //   registerInvestorsBloc();
-    //   registerFeedbackBloc();
-    //   await tester.pumpApp(const InvestorsScreen());
+    testWidgets('Feedback enter correct text and save it', (tester) async {
+      registerInvestorsBloc();
+      registerFeedbackBloc();
+      await tester.pumpApp(const InvestorsScreen());
 
-    //   expect(
-    //     find.byKey(KWidgetkeys.screen.investors.screen),
-    //     findsOneWidget,
-    //   );
+      expect(
+        find.byKey(KWidgetkeys.screen.investors.screen),
+        findsOneWidget,
+      );
 
-    //   await tester.pumpAndSettle();
+      await tester.pumpAndSettle();
 
-    //   await feedbackEnterTextHelper(
-    //     tester: tester,
-    //     email: KTestText.useremail,
-    //     field: KTestText.field,
-    //   );
+      await feedbackEnterTextHelper(
+        tester: tester,
+        email: KTestText.useremail,
+        field: KTestText.field,
+      );
 
-    //   await feedbackBoxHelper(tester);
-    // });
+      await scrollingHelper(tester: tester, offset: KTestConstants.scrollingUp);
 
-    // testWidgets('Feedback enter incorrect text and save it', (tester) async {
-    //   registerInvestorsBloc();
-    //   await tester.pumpApp(const InvestorsScreen());
+      await feedbackBoxHelper(tester);
+    });
 
-    //   expect(
-    //     find.byKey(KWidgetkeys.screen.investors.screen),
-    //     findsOneWidget,
-    //   );
+    testWidgets('Feedback enter incorrect text and save it', (tester) async {
+      registerInvestorsBloc();
+      await tester.pumpApp(const InvestorsScreen());
 
-    //   await tester.pumpAndSettle();
+      expect(
+        find.byKey(KWidgetkeys.screen.investors.screen),
+        findsOneWidget,
+      );
 
-    //   await feedbackEnterTextHelper(
-    //     tester: tester,
-    //     email: KTestText.useremailIncorrect,
-    //     field: KTestText.field,
-    //   );
+      await tester.pumpAndSettle();
 
-    //   await feedbackHelper(tester);
-    // });
+      await feedbackEnterTextHelper(
+        tester: tester,
+        email: KTestText.useremailIncorrect,
+        field: KTestText.field,
+      );
 
-    // testWidgets('Feedback enter text and clear it', (tester) async {
-    //   registerInvestorsBloc();
-    //   registerFeedbackBloc();
-    //   await tester.pumpApp(const InvestorsScreen());
+      await scrollingHelper(tester: tester, offset: KTestConstants.scrollingUp);
 
-    //   expect(
-    //     find.byKey(KWidgetkeys.screen.investors.screen),
-    //     findsOneWidget,
-    //   );
+      await feedbackHelper(tester);
+    });
 
-    //   await tester.pumpAndSettle();
+    testWidgets('Feedback enter text and clear it', (tester) async {
+      registerInvestorsBloc();
+      registerFeedbackBloc();
+      await tester.pumpApp(const InvestorsScreen());
 
-    //   await feedbackClearTextHelper(
-    //     tester: tester,
-    //     email: KTestText.useremail,
-    //     field: KTestText.field,
-    //   );
-    // });
+      expect(
+        find.byKey(KWidgetkeys.screen.investors.screen),
+        findsOneWidget,
+      );
+
+      await tester.pumpAndSettle();
+
+      await feedbackClearTextHelper(
+        tester: tester,
+        email: KTestText.useremail,
+        field: KTestText.field,
+      );
+    });
 
     group('${KGroupText.goRouter} ', () {
       late MockGoRouter mockGoRouter;
@@ -145,7 +149,7 @@ void main() {
 
         await tester.pumpAndSettle();
 
-        // await feedbackHelper(tester);
+        await feedbackHelper(tester);
 
         await donatesCardHelper(tester);
       });
@@ -171,32 +175,32 @@ void main() {
           );
         });
 
-        // testWidgets('Feedback box widget navigation', (tester) async {
-        //   registerInvestorsBloc();
-        //   registerFeedbackBloc();
-        //   await tester.pumpApp(
-        //     const InvestorsScreen(),
-        //     mockGoRouter: mockGoRouter,
-        //   );
+        testWidgets('Feedback box widget navigation', (tester) async {
+          registerInvestorsBloc();
+          registerFeedbackBloc();
+          await tester.pumpApp(
+            const InvestorsScreen(),
+            mockGoRouter: mockGoRouter,
+          );
 
-        //   expect(
-        //     find.byKey(KWidgetkeys.screen.investors.screen),
-        //     findsOneWidget,
-        //   );
+          expect(
+            find.byKey(KWidgetkeys.screen.investors.screen),
+            findsOneWidget,
+          );
 
-        //   await tester.pumpAndSettle();
+          await tester.pumpAndSettle();
 
-        //   await feedbackEnterTextHelper(
-        //     tester: tester,
-        //     email: KTestText.useremail,
-        //     field: KTestText.field,
-        //   );
+          await feedbackEnterTextHelper(
+            tester: tester,
+            email: KTestText.useremail,
+            field: KTestText.field,
+          );
 
-        //   await feedbackBoxNavigationHelper(
-        //     tester: tester,
-        //     mockGoRouter: mockGoRouter,
-        //   );
-        // });
+          await feedbackBoxNavigationHelper(
+            tester: tester,
+            mockGoRouter: mockGoRouter,
+          );
+        });
       });
     });
   });

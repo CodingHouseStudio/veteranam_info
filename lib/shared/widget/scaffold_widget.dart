@@ -6,13 +6,9 @@ class ScaffoldWidget extends StatelessWidget {
     required this.childWidgetsFunction,
     super.key,
     this.hasMicrophone = true,
-    this.childSliverLast,
-    this.childSliverFirst,
   });
   final List<Widget> Function({required bool isDesk}) childWidgetsFunction;
   final bool hasMicrophone;
-  final Widget Function({required bool isDesk})? childSliverLast;
-  final Widget Function({required bool isDesk})? childSliverFirst;
 
   @override
   Widget build(BuildContext context) {
@@ -38,11 +34,6 @@ class ScaffoldWidget extends StatelessWidget {
                   ),
                 ),
               ),
-              if (childSliverFirst != null)
-                SliverPadding(
-                  padding: padding,
-                  sliver: childSliverFirst!(isDesk: isDesk),
-                ),
               SliverPadding(
                 padding: EdgeInsets.only(
                   left: isDesk
@@ -61,11 +52,6 @@ class ScaffoldWidget extends StatelessWidget {
                   itemCount: childWidget.length,
                 ),
               ),
-              if (childSliverLast != null)
-                SliverPadding(
-                  padding: padding,
-                  sliver: childSliverLast!(isDesk: isDesk),
-                ),
               SliverPadding(
                 padding: padding.copyWith(
                   bottom: KPadding.kPaddingSize40,

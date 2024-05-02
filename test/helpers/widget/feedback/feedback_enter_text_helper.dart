@@ -9,11 +9,6 @@ Future<void> feedbackEnterTextHelper({
   required String email,
 }) async {
   expect(
-    find.byKey(KWidgetkeys.widget.feedback.buttonSave),
-    findsOneWidget,
-  );
-
-  expect(
     find.byKey(KWidgetkeys.widget.feedback.fieldName),
     findsOneWidget,
   );
@@ -56,6 +51,11 @@ Future<void> feedbackEnterTextHelper({
   await tester.enterText(
     find.byKey(KWidgetkeys.widget.feedback.fieldMessage),
     field,
+  );
+
+  expect(
+    find.byKey(KWidgetkeys.widget.feedback.buttonSave),
+    findsOneWidget,
   );
 
   await scrollingHelper(

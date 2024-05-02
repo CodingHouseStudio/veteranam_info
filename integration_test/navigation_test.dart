@@ -37,6 +37,7 @@ void main() {
         await scrollingHelperInt(
           tester: tester,
           offset: KTestConstants.scrolling,
+          itemKey: KWidgetkeys.screen.investors.donateCards,
         );
 
         await tester.ensureVisible(
