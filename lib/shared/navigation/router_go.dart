@@ -121,19 +121,18 @@ final GoRouter router = GoRouter(
               ),
               onExit: (context) => context.read<ScrollCubit>().scrollUp(),
               routes: [
-            GoRoute(
-              name: KRoute.workRespond.name,
-              path: KRoute.workRespond.path,
-              pageBuilder: (context, state) => NoTransitionPage(
-                key: state.pageKey,
-                child: const WorkRespondScreen(),
-              ),
-              onExit: (context) => context.read<ScrollCubit>().scrollUp(),
-              ),
+                GoRoute(
+                  name: KRoute.workRespond.name,
+                  path: KRoute.workRespond.path,
+                  pageBuilder: (context, state) => NoTransitionPage(
+                    key: state.pageKey,
+                    child: const WorkRespondScreen(),
+                  ),
+                  onExit: (context) => context.read<ScrollCubit>().scrollUp(),
+                ),
               ],
             ),
           ],
-
         ),
         GoRoute(
           name: KRoute.profile.name,

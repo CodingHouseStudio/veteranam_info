@@ -10,6 +10,7 @@ class CardTextDetailWidget extends StatefulWidget {
     this.buttonText,
     this.buttonStyle,
   });
+
   final String text;
   final int maxLines;
   final Widget? icon;
@@ -35,6 +36,7 @@ class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
   Widget build(BuildContext context) {
     return Column(
       key: cardDetailKey,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           widget.text,
@@ -54,14 +56,19 @@ class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
                   setState(() {
                     if (maxLines == null) {
                       maxLines = widget.maxLines;
-                      Scrollable.ensureVisible(cardDetailKey.currentContext!);
+                      WidgetsBinding.instance.addPostFrameCallback((_) {
+                        Scrollable.ensureVisible(
+                          cardDetailKey.currentContext!,
+                          alignment: 0.5,
+                        );
+                      });
                     } else {
                       maxLines = null;
                     }
                   });
                 },
-                style:
-                    widget.buttonStyle ?? KButtonStyles.whiteButtonStyleBorder,
+                style: widget.buttonStyle ??
+                    KButtonStyles.whiteButtonStyleBorder(context),
                 child: Text(
                   maxLines == null
                       ? widget.buttonText?.elementAt(1) ?? context.l10n.hide

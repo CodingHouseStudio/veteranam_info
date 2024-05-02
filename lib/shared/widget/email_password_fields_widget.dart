@@ -60,7 +60,10 @@ class _EmailPasswordFieldsWidgetState extends State<EmailPasswordFieldsWidget>
               padding: const EdgeInsets.only(top: KPadding.kPaddingSize16),
               child: ButtonWidget(
                 key: KWidgetkeys.widget.emailPasswordFields.buttonHidePassword,
-                onPressed: widget.backPassword,
+                onPressed: () {
+                  widget.backPassword();
+                  focusNode?.requestFocus();
+                },
                 text: widget.email,
                 padding: widget.isDesk
                     ? const EdgeInsets.symmetric(
