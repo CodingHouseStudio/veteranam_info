@@ -74,12 +74,22 @@ void main() {
         findsOneWidget,
       );
 
+      await scrollingHelper(
+        tester: tester,
+        itemKey: KWidgetkeys.screen.employer.fieldCity,
+      );
+
       expect(
         find.byKey(KWidgetkeys.screen.employer.switchWidget),
         findsOneWidget,
       );
 
       await switchHelper(tester);
+
+      expect(
+        find.byKey(KWidgetkeys.screen.employer.textSwitchWidget),
+        findsOneWidget,
+      );
 
       expect(
         find.byKey(KWidgetkeys.screen.employer.textContact),
@@ -162,12 +172,22 @@ void main() {
           findsOneWidget,
         );
 
+        await scrollingHelper(
+          tester: tester,
+          itemKey: KWidgetkeys.screen.employer.fieldCity,
+        );
+
         expect(
           find.byKey(KWidgetkeys.screen.employer.switchWidget),
           findsOneWidget,
         );
 
         await switchHelper(tester);
+
+        expect(
+          find.byKey(KWidgetkeys.screen.employer.textSwitchWidget),
+          findsOneWidget,
+        );
 
         expect(
           find.byKey(KWidgetkeys.screen.employer.textContact),

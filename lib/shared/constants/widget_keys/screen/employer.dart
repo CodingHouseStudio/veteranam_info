@@ -12,6 +12,7 @@ class _EmployerKeys {
   final textCity = const Key('employer_screen_text_city');
   final fieldCity = const Key('employer_screen_field_city');
   final switchWidget = const Key('employer_screen_switch');
+  final textSwitchWidget = const Key('employer_screen_text_switch');
   final textContact = const Key('employer_screen_text_contact');
   final fieldContact = const Key('employer_screen_field_contact');
   final button = const Key('employer_screen_button');

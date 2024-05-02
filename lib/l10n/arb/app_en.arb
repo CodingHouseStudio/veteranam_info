@@ -113,5 +113,6 @@
   "selectCityOfWork": "Select the city of work*",
   "selectCity": "Select a city",
   "contacts": "Contacts*",
-  "howToContactYou": "Write how to contact you"
+  "howToContactYou": "Write how to contact you",
+  "remotely": "Remotely"
 }
