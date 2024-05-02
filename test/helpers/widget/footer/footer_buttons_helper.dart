@@ -13,8 +13,6 @@ Future<void> footerButtonsHelper({
     offset: KTestConstants.scrollingDown,
   );
 
-  await changeWindowSizeHelper(tester: tester);
-
   for (var i = 0; i < KWidgetkeys.widget.footer.buttonsKey.length; i++) {
     final buttonKey = KWidgetkeys.widget.footer.buttonsKey.elementAt(i);
 
@@ -22,6 +20,8 @@ Future<void> footerButtonsHelper({
       find.byKey(buttonKey),
       findsOneWidget,
     );
+
+    await scrollingHelper(tester: tester, itemKey: buttonKey);
 
     await tester.tap(find.byKey(buttonKey));
 
@@ -31,6 +31,4 @@ Future<void> footerButtonsHelper({
       ),
     ).called(1);
   }
-
-  await changeWindowSizeHelper(tester: tester, setDefaultSize: true);
 }
