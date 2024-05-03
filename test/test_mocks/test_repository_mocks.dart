@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:kozak/shared/shared.dart';
 import 'package:mockito/annotations.dart';
@@ -18,6 +19,7 @@ import 'package:mockito/annotations.dart';
     MockSpec<GoogleSignIn>(),
     MockSpec<firebase_auth.FirebaseAuth>(),
     MockSpec<IWorkRepository>(),
+    MockSpec<FlutterSecureStorage>(),
     MockSpec<CacheClient>(),
     MockSpec<firebase_auth.GoogleAuthProvider>(),
     MockSpec<firebase_auth.UserCredential>(),

@@ -1,3 +1,5 @@
+import 'package:flutter/widgets.dart';
+
 extension ExtendedDateTime on DateTime {
   static DateTime? _customTime;
   static String? _id;
@@ -10,10 +12,12 @@ extension ExtendedDateTime on DateTime {
     return _id ?? DateTime.now().microsecondsSinceEpoch.toString();
   }
 
+  @visibleForTesting
   static set customTime(DateTime customTime) {
     _customTime = customTime;
   }
 
+  @visibleForTesting
   static set id(String customId) {
     _id = customId;
   }
