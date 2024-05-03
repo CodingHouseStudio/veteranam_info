@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
+import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:kozak/bootstrap.dart';
@@ -29,8 +30,11 @@ abstract class KGroupText {
   static const model = 'Model';
   static const fiedlModel = 'Field model';
   static const successfulGet = 'Successful get';
+  static const successful = 'Successful';
   static const successfulSet = 'Successful set';
   static const failureGet = 'Failure get';
+  static const failure = 'Failure';
+  static const firebaseFailure = 'Firebase Failure';
   static const failureSet = 'Failure set';
   static const intial = 'renders initial';
   static const goRouter = 'Mock Go Router';
@@ -54,8 +58,9 @@ abstract class KTestText {
   static const passwordIncorrect = 'test_password';
   static const passwordIncorrectNumber = 'test_Password';
   static const shortPassword = 'Pas1';
+  static const token = 'test_token';
 
-  static const useremail = 'example@gmail.com';
+  static const userEmail = 'example@gmail.com';
   static const useremailWrong = 'examplewrong@gmail.com';
   static const useremailIncorrect = 'examplegmail.com';
   static const shortUserEmail = '@.com';
@@ -87,19 +92,41 @@ abstract class KTestText {
       ),
   ];
 
+  static const authCredential = firebase_auth.AuthCredential(
+    providerId: '1',
+    signInMethod: 'test_method',
+    accessToken: 'test_access_token',
+    token: 1,
+  );
+
+  static const oAuthCredential = firebase_auth.OAuthCredential(
+    providerId: '1',
+    signInMethod: 'test_method',
+    accessToken: 'test_access_token',
+    idToken: '1',
+    rawNonce: 'row_test',
+    secret: 'secret_test',
+    serverAuthCode: 'server_code_test',
+  );
+
   static const user = User(
     id: '1',
-    email: useremail,
+    email: userEmail,
     name: usernameCorrect,
     phoneNumber: 'test_phone_number',
     photo: 'test_phot',
+  );
+
+  static const userSetting = UserSetting(
+    id: '1',
+    userRole: UserRole.civilian,
   );
 
   static final feedbackModel = FeedbackModel(
     id: dateTime.microsecondsSinceEpoch.toString(),
     guestId: dateTime.microsecondsSinceEpoch.toString(),
     guestName: KTestText.field,
-    email: KTestText.useremail,
+    email: KTestText.userEmail,
     timestamp: dateTime,
     message: KTestText.field,
   );

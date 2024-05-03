@@ -1,4 +1,4 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:flutter/cupertino.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:kozak/shared/shared.dart';
@@ -16,8 +16,14 @@ import 'package:mockito/annotations.dart';
     MockSpec<AuthenticationRepository>(),
     MockSpec<IStorage>(),
     MockSpec<GoogleSignIn>(),
-    MockSpec<FirebaseAuth>(),
+    MockSpec<firebase_auth.FirebaseAuth>(),
     MockSpec<IWorkRepository>(),
+    MockSpec<CacheClient>(),
+    MockSpec<firebase_auth.GoogleAuthProvider>(),
+    MockSpec<firebase_auth.UserCredential>(),
+    MockSpec<firebase_auth.User>(),
+    MockSpec<GoogleSignInAccount>(),
+    MockSpec<GoogleSignInAuthentication>(),
   ],
 )
 void load() => debugPrint('loaded');

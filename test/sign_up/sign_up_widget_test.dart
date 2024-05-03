@@ -27,7 +27,7 @@ void main() {
       mockGoRouter = MockGoRouter();
       when(
         mockAppAuthenticationRepository.signUp(
-          email: KTestText.useremail,
+          email: KTestText.userEmail,
           password: KTestText.passwordCorrect,
         ),
       ).thenAnswer(
@@ -164,7 +164,7 @@ void main() {
 
       await emailPasswordFieldsEmHelper(
         tester: tester,
-        email: KTestText.useremail,
+        email: KTestText.userEmail,
       );
 
       await tester.tap(find.byKey(KWidgetkeys.screen.signUp.button));
@@ -195,7 +195,7 @@ void main() {
       await signUpFieldsHelper(
         tester: tester,
         password: KTestText.passwordIncorrect,
-        email: KTestText.useremail,
+        email: KTestText.userEmail,
         dataIsCorrect: false,
       );
 
@@ -224,7 +224,7 @@ void main() {
       await signUpFieldsHelper(
         tester: tester,
         password: KTestText.passwordCorrect,
-        email: KTestText.useremail,
+        email: KTestText.userEmail,
         dataIsCorrect: true,
       );
 
