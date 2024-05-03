@@ -26,6 +26,7 @@ Future<void> setUpGlobal({bool? kIsWeb}) async {
 
 abstract class KGroupText {
   static const repository = 'Repository';
+  static const provider = 'Provider';
   static const model = 'Model';
   static const fiedlModel = 'Field model';
   static const successfulGet = 'Successful get';
@@ -201,4 +202,6 @@ abstract class KScreenBlocName {
 
   static const iAppAuthenticationRepository = 'App Authentication';
   static const authentication = ' Authentication';
+
+  static const firestoreService = 'Firestore Service';
 }
