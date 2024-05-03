@@ -95,7 +95,7 @@ void main() {
           expect(result.error, EmailFieldModelValidationError.wrong);
         });
         test('${KGroupText.shouldNotBe} invalidLength', () {
-          const result = EmailFieldModel.dirty(KTestText.useremail);
+          const result = EmailFieldModel.dirty(KTestText.userEmail);
           expect(
             result.error,
             null,
@@ -124,7 +124,7 @@ void main() {
           mockAuthenticationRepository = MockAuthenticationRepository();
           when(
             mockAuthenticationRepository.logIn(
-              email: KTestText.useremail,
+              email: KTestText.userEmail,
               password: KTestText.passwordCorrect,
             ),
           ).thenAnswer(
@@ -140,7 +140,7 @@ void main() {
         test('Log in', () async {
           expect(
             await mockAuthenticationRepository.logIn(
-              email: KTestText.useremail,
+              email: KTestText.userEmail,
               password: KTestText.passwordCorrect,
             ),
             isA<Right<SomeFailure, bool>>()
@@ -166,7 +166,7 @@ void main() {
           mockAuthenticationRepository = MockAuthenticationRepository();
           when(
             mockAuthenticationRepository.logIn(
-              email: KTestText.useremail,
+              email: KTestText.userEmail,
               password: KTestText.passwordCorrect,
             ),
           ).thenAnswer(
@@ -182,7 +182,7 @@ void main() {
         test('Log in', () async {
           expect(
             await mockAuthenticationRepository.logIn(
-              email: KTestText.useremail,
+              email: KTestText.userEmail,
               password: KTestText.passwordCorrect,
             ),
             isA<Left<SomeFailure, bool>>().having(

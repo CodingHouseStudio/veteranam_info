@@ -117,7 +117,7 @@ void main() {
 
       await feedbackEnterTextHelper(
         tester: tester,
-        email: KTestText.useremail,
+        email: KTestText.userEmail,
         field: KTestText.field,
       );
 
@@ -186,7 +186,7 @@ void main() {
 
       await feedbackClearTextHelper(
         tester: tester,
-        email: KTestText.useremail,
+        email: KTestText.userEmail,
         field: KTestText.field,
       );
     });
@@ -296,7 +296,7 @@ void main() {
 
           await feedbackEnterTextHelper(
             tester: tester,
-            email: KTestText.useremail,
+            email: KTestText.userEmail,
             field: KTestText.field,
           );
 
