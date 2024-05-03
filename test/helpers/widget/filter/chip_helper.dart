@@ -1,25 +1,31 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:kozak/shared/shared.dart';
 
 import '../../../text_dependency.dart';
 
 Future<void> chipHelper(WidgetTester tester) async {
-  await tester.pump();
+  expect(find.byKey(KWidgetkeys.widget.chip.widget), findsWidgets);
 
-  expect(find.byKey(KWidgetkeys.widget.dropChip.widget), findsWidgets);
+  late var filterChip = tester
+      .widget<FilterChip>(find.byKey(KWidgetkeys.widget.chip.widget).first);
+
+  expect(filterChip.selected, isFalse);
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.widget.dropChip.widget,
+    itemKey: KWidgetkeys.widget.chip.widget,
   );
 
   await tester.tap(
-    find.byKey(KWidgetkeys.widget.dropChip.widget).first,
+    find.byKey(KWidgetkeys.widget.chip.widget).first,
     warnIfMissed: false,
   );
 
-  await tester.pump(const Duration(milliseconds: 500));
   await tester.pumpAndSettle();
 
-  expect(find.text('Пільги'), findsNothing);
+  filterChip = tester
+      .widget<FilterChip>(find.byKey(KWidgetkeys.widget.chip.widget).first);
+
+  expect(filterChip.selected, isTrue);
 }

@@ -82,10 +82,6 @@ final GoRouter router = GoRouter(
             key: state.pageKey,
             child: const InformationScreen(),
           ),
-          onExit: (context) {
-            Scrollable.ensureVisible(context);
-            return true;
-          },
         ),
         GoRoute(
           name: KRoute.discounts.name,
@@ -111,6 +107,14 @@ final GoRouter router = GoRouter(
             child: const WorkScreen(),
           ),
           routes: [
+            GoRoute(
+              name: KRoute.employer.name,
+              path: KRoute.employer.path,
+              pageBuilder: (context, state) => NoTransitionPage(
+                key: state.pageKey,
+                child: const EmployerScreen(),
+              ),
+            ),
             GoRoute(
               name: KRoute.workEmployee.name,
               path: KRoute.workEmployee.path,
@@ -138,6 +142,11 @@ final GoRouter router = GoRouter(
             key: state.pageKey,
             child: const ProfileScreen(),
           ),
+          redirect: (context, state) =>
+              context.read<AuthenticationBloc>().state.status !=
+                      AuthenticationStatus.authenticated
+                  ? KRoute.home.path
+                  : null,
         ),
         GoRoute(
           name: KRoute.investors.name,

@@ -15,7 +15,7 @@ Future<void> nawbarHelper({
 
   await languageSwitcherHelper(tester);
 
-  expect(find.byKey(KWidgetkeys.widget.nawbar.title), findsOneWidget);
+  expect(find.byKey(KWidgetkeys.widget.nawbar.logo), findsOneWidget);
 
   expect(find.byKey(KWidgetkeys.widget.nawbar.field), findsOneWidget);
 
@@ -60,7 +60,7 @@ Future<void> nawbarHelper({
 
   await tester.pumpAndSettle();
 
-  expect(find.byKey(KWidgetkeys.widget.nawbar.title), findsOneWidget);
+  expect(find.byKey(KWidgetkeys.widget.nawbar.logo), findsOneWidget);
 
   expect(find.byKey(KWidgetkeys.widget.nawbar.field), findsOneWidget);
 
@@ -86,7 +86,7 @@ Future<void> nawbarHelper({
 
   await tester.pumpAndSettle();
 
-  expect(find.byKey(KWidgetkeys.widget.nawbar.title), findsNothing);
+  expect(find.byKey(KWidgetkeys.widget.nawbar.logo), findsNothing);
 
   expect(
     find.byKey(KWidgetkeys.widget.nawbar.iconPerson),
