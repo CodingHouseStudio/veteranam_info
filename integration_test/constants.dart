@@ -49,7 +49,7 @@ abstract class KTestConstants {
     KWidgetkeys.screen.contact.screen,
     KWidgetkeys.screen.story.screen,
     KWidgetkeys.screen.discounts.screen,
-    KWidgetkeys.screen.profile.screen,
+    KWidgetkeys.screen.login.screen,
     KWidgetkeys.screen.work.screen,
     KWidgetkeys.screen.information.screen,
     KWidgetkeys.screen.consultation.screen,
