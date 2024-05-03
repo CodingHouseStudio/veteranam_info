@@ -23,6 +23,73 @@ void main() {
       );
 
       await tester.pumpAndSettle();
+
+      expect(
+        find.byKey(KWidgetkeys.screen.workRespond.title),
+        findsOneWidget,
+      );
+
+      expect(
+        find.byKey(KWidgetkeys.screen.workRespond.subtitle),
+        findsOneWidget,
+      );
+
+      expect(
+        find.byKey(KWidgetkeys.screen.workRespond.username),
+        findsOneWidget,
+      );
+
+      expect(
+        find.byKey(KWidgetkeys.screen.workRespond.emailField),
+        findsOneWidget,
+      );
+
+      expect(
+        find.byKey(KWidgetkeys.screen.workRespond.emailHint),
+        findsOneWidget,
+      );
+
+      expect(
+        find.byKey(KWidgetkeys.screen.workRespond.phoneNumberField),
+        findsOneWidget,
+      );
+
+      expect(
+        find.byKey(KWidgetkeys.screen.workRespond.phoneNumberHint),
+        findsOneWidget,
+      );
+
+      expect(
+        find.byKey(KWidgetkeys.screen.workRespond.resume),
+        findsOneWidget,
+      );
+
+      expect(
+        find.byKey(KWidgetkeys.screen.workRespond.upload),
+        findsOneWidget,
+      );
+
+      expect(
+        find.byKey(KWidgetkeys.screen.workRespond.checkPoint),
+        findsOneWidget,
+      );
+
+      await chekPointSingleHelper(tester);
+
+      expect(
+        find.byKey(KWidgetkeys.screen.workRespond.noResume),
+        findsOneWidget,
+      );
+
+      expect(
+        find.byKey(KWidgetkeys.screen.workRespond.send),
+        findsOneWidget,
+      );
+
+      expect(
+        find.byKey(KWidgetkeys.screen.workRespond.cancel),
+        findsOneWidget,
+      );
     });
     group('${KGroupText.goRouter} ', () {
       late MockGoRouter mockGoRouter;
@@ -37,80 +104,9 @@ void main() {
           find.byKey(KWidgetkeys.screen.workRespond.screen),
           findsOneWidget,
         );
-
-        expect(
-          find.byKey(KWidgetkeys.screen.workRespond.title),
-          findsOneWidget,
-        );
-
-        expect(
-          find.byKey(KWidgetkeys.screen.workRespond.subtitle),
-          findsOneWidget,
-        );
-
-        expect(
-          find.byKey(KWidgetkeys.screen.workRespond.username),
-          findsOneWidget,
-        );
-
-        expect(
-          find.byKey(KWidgetkeys.screen.workRespond.email),
-          findsOneWidget,
-        );
-
-        expect(
-          find.byKey(KWidgetkeys.screen.workRespond.emailHint),
-          findsOneWidget,
-        );
-
-        expect(
-          find.byKey(KWidgetkeys.screen.workRespond.phoneNumber),
-          findsOneWidget,
-        );
-
-        expect(
-          find.byKey(KWidgetkeys.screen.workRespond.phoneNumberHint),
-          findsOneWidget,
-        );
-
-        expect(
-          find.byKey(KWidgetkeys.screen.workRespond.resume),
-          findsOneWidget,
-        );
-
-        expect(
-          find.byKey(KWidgetkeys.screen.workRespond.upload),
-          findsOneWidget,
-        );
-
-        expect(
-          find.byKey(KWidgetkeys.screen.workRespond.checkbox),
-          findsOneWidget,
-        );
-
-        expect(
-          find.byKey(KWidgetkeys.screen.workRespond.noResume),
-          findsOneWidget,
-        );
-
-        expect(
-          find.byKey(KWidgetkeys.screen.workRespond.send),
-          findsOneWidget,
-        );
-
-        expect(
-          find.byKey(KWidgetkeys.screen.workRespond.cancel),
-          findsOneWidget,
-        );
-
         await tester.pumpAndSettle();
 
         expect(
-          find.byKey(KWidgetkeys.screen.workRespond.screen),
-          findsOneWidget,
-        );
-
-        expect(
           find.byKey(KWidgetkeys.screen.workRespond.title),
           findsOneWidget,
         );
@@ -126,7 +122,7 @@ void main() {
         );
 
         expect(
-          find.byKey(KWidgetkeys.screen.workRespond.email),
+          find.byKey(KWidgetkeys.screen.workRespond.emailField),
           findsOneWidget,
         );
 
@@ -136,7 +132,7 @@ void main() {
         );
 
         expect(
-          find.byKey(KWidgetkeys.screen.workRespond.phoneNumber),
+          find.byKey(KWidgetkeys.screen.workRespond.phoneNumberField),
           findsOneWidget,
         );
 
@@ -156,9 +152,11 @@ void main() {
         );
 
         expect(
-          find.byKey(KWidgetkeys.screen.workRespond.checkbox),
+          find.byKey(KWidgetkeys.screen.workRespond.checkPoint),
           findsOneWidget,
         );
+
+        await chekPointSingleHelper(tester);
 
         expect(
           find.byKey(KWidgetkeys.screen.workRespond.noResume),
