@@ -88,7 +88,7 @@ class WorkRespondBodyWidget extends StatelessWidget {
               else
                 KSizedBox.kHeightSizedBox16,
               Padding(
-                padding: const EdgeInsets.only(left: 16),
+                padding: const EdgeInsets.only(left: KPadding.kPaddingSize16),
                 child: Text(
                   key: KWidgetkeys.screen.workRespond.resume,
                   context.l10n.resume,
@@ -105,7 +105,7 @@ class WorkRespondBodyWidget extends StatelessWidget {
                 alignment: Alignment.centerLeft,
                 child: Row(
                   children: [
-                    KIcon.share,
+                    KIcon.attachFile,
                     KSizedBox.kWidthSizedBox8,
                     GestureDetector(
                       child: Text(
@@ -123,7 +123,9 @@ class WorkRespondBodyWidget extends StatelessWidget {
               Row(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 32),
+                    padding: const EdgeInsets.only(
+                      left: KPadding.kPaddingSize32,
+                    ),
                     child: CheckPointWidget(
                       key: KWidgetkeys.screen.workRespond.checkbox,
                       onChanged: () {},
@@ -131,7 +133,9 @@ class WorkRespondBodyWidget extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 16),
+                    padding: const EdgeInsets.only(
+                      left: KPadding.kPaddingSize16,
+                    ),
                     child: Text(
                       key: KWidgetkeys.screen.workRespond.noResume,
                       context.l10n.noResume,
