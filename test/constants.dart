@@ -130,7 +130,7 @@ abstract class KTestText {
         id: i.toString(),
         title: KMockText.title,
         news: KMockText.cardData,
-        date: DateTime.now(),
+        date: dateTime,
         image: i > KMockText.tags.length - 2 ? KMockText.image : null,
         tags: KMockText.tags.elementAt(i),
       ),

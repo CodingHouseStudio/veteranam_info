@@ -116,6 +116,7 @@ void main() {
       group('${KGroupText.successfulGet} ', () {
         setUp(() {
           ExtendedDateTime.id = '';
+          ExtendedDateTime.customTime = KTestText.dateTime;
           mockFirestoreService = MockFirestoreService();
           mockInformationRepository = MockIInformationRepository();
           when(mockFirestoreService.getInformations()).thenAnswer(
