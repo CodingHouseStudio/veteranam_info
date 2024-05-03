@@ -375,19 +375,19 @@ void main() {
           ).thenThrow(Exception(KGroupText.failure));
           when(
             mockFirebaseAuth.signInWithEmailAndPassword(
-              email: KTestText.useremailIncorrect,
+              email: KTestText.userEmailIncorrect,
               password: KTestText.passwordIncorrect,
             ),
           ).thenThrow(Exception(KGroupText.failure));
           when(
             mockFirebaseAuth.createUserWithEmailAndPassword(
-              email: KTestText.useremailIncorrect,
+              email: KTestText.userEmailIncorrect,
               password: KTestText.passwordIncorrect,
             ),
           ).thenThrow(Exception(KGroupText.failure));
           when(
             mockFirebaseAuth.sendPasswordResetEmail(
-              email: KTestText.useremailIncorrect,
+              email: KTestText.userEmailIncorrect,
             ),
           ).thenThrow(Exception(KGroupText.failure));
           when(
@@ -446,7 +446,7 @@ void main() {
         test('LogIn with email and password', () async {
           expect(
             await appAuthenticationRepository.logInWithEmailAndPassword(
-              email: KTestText.useremailIncorrect,
+              email: KTestText.userEmailIncorrect,
               password: KTestText.passwordIncorrect,
             ),
             isA<Left<SomeFailure, bool>>().having(
@@ -459,7 +459,7 @@ void main() {
         test('Sign up', () async {
           expect(
             await appAuthenticationRepository.signUp(
-              email: KTestText.useremailIncorrect,
+              email: KTestText.userEmailIncorrect,
               password: KTestText.passwordIncorrect,
             ),
             isA<Left<SomeFailure, bool>>().having(
@@ -472,7 +472,7 @@ void main() {
         test('Send verification code', () async {
           expect(
             await appAuthenticationRepository.sendVerificationCode(
-              email: KTestText.useremailIncorrect,
+              email: KTestText.userEmailIncorrect,
             ),
             isA<Left<SomeFailure, bool>>().having(
               (e) => e.value,
@@ -565,7 +565,7 @@ void main() {
           );
           when(
             mockFirebaseAuth.signInWithEmailAndPassword(
-              email: KTestText.useremailIncorrect,
+              email: KTestText.userEmailIncorrect,
               password: KTestText.passwordIncorrect,
             ),
           ).thenThrow(
@@ -575,7 +575,7 @@ void main() {
           );
           when(
             mockFirebaseAuth.createUserWithEmailAndPassword(
-              email: KTestText.useremailIncorrect,
+              email: KTestText.userEmailIncorrect,
               password: KTestText.passwordIncorrect,
             ),
           ).thenThrow(
@@ -585,7 +585,7 @@ void main() {
           );
           when(
             mockFirebaseAuth.sendPasswordResetEmail(
-              email: KTestText.useremailIncorrect,
+              email: KTestText.userEmailIncorrect,
             ),
           ).thenThrow(
             firebase_auth.FirebaseAuthException(
@@ -647,7 +647,7 @@ void main() {
         test('LogIn with email and password', () async {
           expect(
             await appAuthenticationRepository.logInWithEmailAndPassword(
-              email: KTestText.useremailIncorrect,
+              email: KTestText.userEmailIncorrect,
               password: KTestText.passwordIncorrect,
             ),
             isA<Left<SomeFailure, bool>>().having(
@@ -660,7 +660,7 @@ void main() {
         test('Sign up', () async {
           expect(
             await appAuthenticationRepository.signUp(
-              email: KTestText.useremailIncorrect,
+              email: KTestText.userEmailIncorrect,
               password: KTestText.passwordIncorrect,
             ),
             isA<Left<SomeFailure, bool>>().having(
@@ -673,7 +673,7 @@ void main() {
         test('Send verification code', () async {
           expect(
             await appAuthenticationRepository.sendVerificationCode(
-              email: KTestText.useremailIncorrect,
+              email: KTestText.userEmailIncorrect,
             ),
             isA<Left<SomeFailure, bool>>().having(
               (e) => e.value,

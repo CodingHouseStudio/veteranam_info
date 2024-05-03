@@ -1272,38 +1272,89 @@ class MockAuthenticationRepository extends _i1.Mock
       ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
 
   @override
-  _i8.Future<void> logOut() => (super.noSuchMethod(
+  _i8.Future<_i2.Either<_i3.SomeFailure, bool>> logOut() => (super.noSuchMethod(
         Invocation.method(
           #logOut,
           [],
         ),
-        returnValue: _i8.Future<void>.value(),
-        returnValueForMissingStub: _i8.Future<void>.value(),
-      ) as _i8.Future<void>);
+        returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
+            _FakeEither_0<_i3.SomeFailure, bool>(
+          this,
+          Invocation.method(
+            #logOut,
+            [],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
+                _FakeEither_0<_i3.SomeFailure, bool>(
+          this,
+          Invocation.method(
+            #logOut,
+            [],
+          ),
+        )),
+      ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
 
   @override
-  _i8.Future<void> sendVerificationCodeToEmail({required String? email}) =>
+  _i8.Future<_i2.Either<_i3.SomeFailure, bool>> sendVerificationCodeToEmail(
+          {required String? email}) =>
       (super.noSuchMethod(
         Invocation.method(
           #sendVerificationCodeToEmail,
           [],
           {#email: email},
         ),
-        returnValue: _i8.Future<void>.value(),
-        returnValueForMissingStub: _i8.Future<void>.value(),
-      ) as _i8.Future<void>);
+        returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
+            _FakeEither_0<_i3.SomeFailure, bool>(
+          this,
+          Invocation.method(
+            #sendVerificationCodeToEmail,
+            [],
+            {#email: email},
+          ),
+        )),
+        returnValueForMissingStub:
+            _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
+                _FakeEither_0<_i3.SomeFailure, bool>(
+          this,
+          Invocation.method(
+            #sendVerificationCodeToEmail,
+            [],
+            {#email: email},
+          ),
+        )),
+      ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
 
   @override
-  _i8.Future<void> updateUserSetting({required _i3.UserSetting? userSetting}) =>
+  _i8.Future<_i2.Either<_i3.SomeFailure, bool>> updateUserSetting(
+          {required _i3.UserSetting? userSetting}) =>
       (super.noSuchMethod(
         Invocation.method(
           #updateUserSetting,
           [],
           {#userSetting: userSetting},
         ),
-        returnValue: _i8.Future<void>.value(),
-        returnValueForMissingStub: _i8.Future<void>.value(),
-      ) as _i8.Future<void>);
+        returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
+            _FakeEither_0<_i3.SomeFailure, bool>(
+          this,
+          Invocation.method(
+            #updateUserSetting,
+            [],
+            {#userSetting: userSetting},
+          ),
+        )),
+        returnValueForMissingStub:
+            _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
+                _FakeEither_0<_i3.SomeFailure, bool>(
+          this,
+          Invocation.method(
+            #updateUserSetting,
+            [],
+            {#userSetting: userSetting},
+          ),
+        )),
+      ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
 
   @override
   void dispose() => super.noSuchMethod(
