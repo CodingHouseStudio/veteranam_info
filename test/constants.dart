@@ -63,7 +63,7 @@ abstract class KTestText {
 
   static const userEmail = 'example@gmail.com';
   static const useremailWrong = 'examplewrong@gmail.com';
-  static const useremailIncorrect = 'examplegmail.com';
+  static const userEmailIncorrect = 'examplegmail.com';
   static const shortUserEmail = '@.com';
 
   static const footer = 'Контакти\n';
@@ -147,7 +147,7 @@ abstract class KTestText {
     id: dateTime.microsecondsSinceEpoch.toString(),
     guestId: dateTime.microsecondsSinceEpoch.toString(),
     guestName: KTestText.field,
-    email: KTestText.useremailIncorrect,
+    email: KTestText.userEmailIncorrect,
     timestamp: dateTime,
     message: KTestText.field,
   );

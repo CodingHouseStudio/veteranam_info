@@ -131,7 +131,7 @@ void main() {
 
       await emailPasswordFieldsEmHelper(
         tester: tester,
-        email: KTestText.useremailIncorrect,
+        email: KTestText.userEmailIncorrect,
       );
 
       await tester.tap(find.byKey(KWidgetkeys.screen.signUp.button));

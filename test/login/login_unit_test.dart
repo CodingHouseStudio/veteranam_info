@@ -62,18 +62,18 @@ void main() {
       'emits [LoginState] when password invalid are changed, submited',
       build: () => loginBloc,
       act: (bloc) => bloc
-        ..add(const LoginEvent.emailUpdated(KTestText.useremailIncorrect))
+        ..add(const LoginEvent.emailUpdated(KTestText.userEmailIncorrect))
         ..add(const LoginEvent.loginSubmitted()),
       expect: () => [
         const LoginState(
-          email: EmailFieldModel.dirty(KTestText.useremailIncorrect),
+          email: EmailFieldModel.dirty(KTestText.userEmailIncorrect),
           password: PasswordFieldModel.pure(),
           failure: LoginError.initial,
           fieldsIsCorrect: null,
           showPasswordField: false,
         ),
         const LoginState(
-          email: EmailFieldModel.dirty(KTestText.useremailIncorrect),
+          email: EmailFieldModel.dirty(KTestText.userEmailIncorrect),
           password: PasswordFieldModel.pure(),
           failure: LoginError.initial,
           showPasswordField: false,

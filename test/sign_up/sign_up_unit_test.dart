@@ -63,18 +63,18 @@ void main() {
       'emits [SignUpState] when password invalid are changed, submited',
       build: () => signUpBloc,
       act: (bloc) => bloc
-        ..add(const SignUpEvent.emailUpdated(KTestText.useremailIncorrect))
+        ..add(const SignUpEvent.emailUpdated(KTestText.userEmailIncorrect))
         ..add(const SignUpEvent.signUpSubmitted()),
       expect: () => [
         const SignUpState(
-          email: EmailFieldModel.dirty(KTestText.useremailIncorrect),
+          email: EmailFieldModel.dirty(KTestText.userEmailIncorrect),
           password: PasswordFieldModel.pure(),
           failure: SignUpError.initial,
           fieldsIsCorrect: null,
           showPasswordField: false,
         ),
         const SignUpState(
-          email: EmailFieldModel.dirty(KTestText.useremailIncorrect),
+          email: EmailFieldModel.dirty(KTestText.userEmailIncorrect),
           password: PasswordFieldModel.pure(),
           failure: SignUpError.initial,
           fieldsIsCorrect: false,

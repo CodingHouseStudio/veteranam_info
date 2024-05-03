@@ -142,18 +142,18 @@ class AuthenticationRepository {
   //   },
   // );
 
-  Future<void> logOut() async {
-    try {
-      await iAppAuthenticationRepository.logOut();
-    } catch (e) {
-      debugPrint(e.toString());
-    } finally {
+  Future<Either<SomeFailure, bool>> logOut() async {
+    final resault = await iAppAuthenticationRepository.logOut();
+    resault.fold((l) => debugPrint(l.toString()), (r) {
       debugPrint('ever reached here?');
       _authenticationStatuscontroller.add(AuthenticationStatus.unauthenticated);
-    }
+    });
+    return resault;
   }
 
-  Future<void> sendVerificationCodeToEmail({required String email}) async {
+  Future<Either<SomeFailure, bool>> sendVerificationCodeToEmail({
+    required String email,
+  }) async {
     final result =
         await iAppAuthenticationRepository.sendVerificationCode(email: email);
     result.fold(
@@ -164,9 +164,12 @@ class AuthenticationRepository {
         debugPrint('Sending succeses $email');
       },
     );
+    return result;
   }
 
-  Future<void> updateUserSetting({required UserSetting userSetting}) async {
+  Future<Either<SomeFailure, bool>> updateUserSetting({
+    required UserSetting userSetting,
+  }) async {
     final result =
         await iAppAuthenticationRepository.updateUserSetting(userSetting);
     result.fold(
@@ -177,6 +180,7 @@ class AuthenticationRepository {
         debugPrint('Sending succeses $userSetting');
       },
     );
+    return result;
   }
 
   void dispose() {

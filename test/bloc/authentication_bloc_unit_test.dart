@@ -6,22 +6,6 @@ import 'package:mockito/mockito.dart';
 
 import '../text_dependency.dart';
 
-class MockAuthenticationRepositoryUnitTest extends Mock
-    implements AuthenticationRepository {
-  @override
-  User get currentUser {
-    return User.empty;
-  }
-
-  @override
-  Stream<AuthenticationStatus> get status =>
-      Stream.value(AuthenticationStatus.unknown);
-  @override
-  Future<UserSetting> getUserSetting() async {
-    return UserSetting.empty;
-  }
-}
-
 void main() {
   setupFirebaseAuthMocks();
 
@@ -84,14 +68,14 @@ void main() {
           expect(result.error, EmailFieldModelValidationError.invalidLength);
         });
         test('${KGroupText.shouldNotBe} invalidLength', () {
-          const result = EmailFieldModel.dirty(KTestText.useremailIncorrect);
+          const result = EmailFieldModel.dirty(KTestText.userEmailIncorrect);
           expect(
             result.error,
             isNot(EmailFieldModelValidationError.invalidLength),
           );
         });
         test('${KGroupText.shouldBe} wrong', () {
-          const result = EmailFieldModel.dirty(KTestText.useremailIncorrect);
+          const result = EmailFieldModel.dirty(KTestText.userEmailIncorrect);
           expect(result.error, EmailFieldModelValidationError.wrong);
         });
         test('${KGroupText.shouldNotBe} invalidLength', () {
@@ -118,28 +102,51 @@ void main() {
       });
     });
     group('${KGroupText.repository} ', () {
-      late AuthenticationRepository mockAuthenticationRepository;
-      group('${KGroupText.successfulSet} ', () {
+      late AuthenticationRepository authenticationRepository;
+      late IAppAuthenticationRepository mockAppAuthenticationRepository;
+      group('${KGroupText.successful} ', () {
         setUp(() {
-          mockAuthenticationRepository = MockAuthenticationRepository();
+          mockAppAuthenticationRepository = MockIAppAuthenticationRepository();
+          authenticationRepository =
+              AuthenticationRepository(mockAppAuthenticationRepository);
           when(
-            mockAuthenticationRepository.logIn(
+            mockAppAuthenticationRepository.logInWithEmailAndPassword(
               email: KTestText.userEmail,
               password: KTestText.passwordCorrect,
             ),
           ).thenAnswer(
             (_) async => const Right(true),
           );
-          when(mockAuthenticationRepository.signUpWithGoogle()).thenAnswer(
+          when(mockAppAuthenticationRepository.signUpWithGoogle()).thenAnswer(
             (_) async => const Right(true),
           );
-          when(mockAuthenticationRepository.getUserSetting()).thenAnswer(
+          when(mockAppAuthenticationRepository.getUserSetting()).thenAnswer(
             (_) async => const UserSetting(id: KTestText.field),
+          );
+          when(mockAppAuthenticationRepository.user).thenAnswer(
+            (_) => Stream.value(KTestText.user),
+          );
+          when(mockAppAuthenticationRepository.logOut()).thenAnswer(
+            (_) async => const Right(true),
+          );
+          when(
+            mockAppAuthenticationRepository.sendVerificationCode(
+              email: KTestText.userEmail,
+            ),
+          ).thenAnswer(
+            (_) async => const Right(true),
+          );
+          when(
+            mockAppAuthenticationRepository.updateUserSetting(
+              KTestText.userSetting,
+            ),
+          ).thenAnswer(
+            (_) async => const Right(true),
           );
         });
         test('Log in', () async {
           expect(
-            await mockAuthenticationRepository.logIn(
+            await authenticationRepository.logIn(
               email: KTestText.userEmail,
               password: KTestText.passwordCorrect,
             ),
@@ -149,39 +156,80 @@ void main() {
         });
         test('Sign up with google', () async {
           expect(
-            await mockAuthenticationRepository.signUpWithGoogle(),
+            await authenticationRepository.signUpWithGoogle(),
             isA<Right<SomeFailure, bool>>()
                 .having((e) => e.value, 'value', isTrue),
           );
         });
         test('get user setting', () async {
           expect(
-            await mockAuthenticationRepository.getUserSetting(),
+            await authenticationRepository.getUserSetting(),
             const UserSetting(id: KTestText.field),
           );
         });
+        test('Log Out', () async {
+          expect(
+            await authenticationRepository.logOut(),
+            isA<Right<SomeFailure, bool>>()
+                .having((e) => e.value, 'value', isTrue),
+          );
+        });
+        test('Send Verification Code To Email', () async {
+          expect(
+            await authenticationRepository.sendVerificationCodeToEmail(
+              email: KTestText.userEmail,
+            ),
+            isA<Right<SomeFailure, bool>>()
+                .having((e) => e.value, 'value', isTrue),
+          );
+        });
+        test('Update User Setting', () async {
+          expect(
+            await authenticationRepository.updateUserSetting(
+              userSetting: KTestText.userSetting,
+            ),
+            isA<Right<SomeFailure, bool>>()
+                .having((e) => e.value, 'value', isTrue),
+          );
+        });
       });
-      group('${KGroupText.failureSet} ', () {
+      group('${KGroupText.failure} ', () {
         setUp(() {
-          mockAuthenticationRepository = MockAuthenticationRepository();
+          mockAppAuthenticationRepository = MockIAppAuthenticationRepository();
+          authenticationRepository =
+              AuthenticationRepository(mockAppAuthenticationRepository);
           when(
-            mockAuthenticationRepository.logIn(
+            mockAppAuthenticationRepository.logInWithEmailAndPassword(
               email: KTestText.userEmail,
               password: KTestText.passwordCorrect,
             ),
           ).thenAnswer(
             (_) async => const Left(SomeFailure.serverError()),
           );
-          when(mockAuthenticationRepository.signUpWithGoogle()).thenAnswer(
+          when(mockAppAuthenticationRepository.signUpWithGoogle()).thenAnswer(
             (_) async => const Left(SomeFailure.serverError()),
           );
-          when(mockAuthenticationRepository.getUserSetting()).thenAnswer(
-            (_) async => UserSetting.empty,
+          when(mockAppAuthenticationRepository.logOut()).thenAnswer(
+            (_) async => const Left(SomeFailure.serverError()),
+          );
+          when(
+            mockAppAuthenticationRepository.sendVerificationCode(
+              email: KTestText.userEmailIncorrect,
+            ),
+          ).thenAnswer(
+            (_) async => const Left(SomeFailure.serverError()),
+          );
+          when(
+            mockAppAuthenticationRepository.updateUserSetting(
+              KTestText.userSetting,
+            ),
+          ).thenAnswer(
+            (_) async => const Left(SomeFailure.serverError()),
           );
         });
         test('Log in', () async {
           expect(
-            await mockAuthenticationRepository.logIn(
+            await authenticationRepository.logIn(
               email: KTestText.userEmail,
               password: KTestText.passwordCorrect,
             ),
@@ -194,7 +242,7 @@ void main() {
         });
         test('Sign up with google', () async {
           expect(
-            await mockAuthenticationRepository.signUpWithGoogle(),
+            await authenticationRepository.signUpWithGoogle(),
             isA<Left<SomeFailure, bool>>().having(
               (e) => e.value,
               'value',
@@ -202,19 +250,61 @@ void main() {
             ),
           );
         });
-        test('get user setting', () async {
+        test('Log Out', () async {
           expect(
-            await mockAuthenticationRepository.getUserSetting(),
-            UserSetting.empty,
+            await authenticationRepository.logOut(),
+            isA<Left<SomeFailure, bool>>().having(
+              (e) => e.value,
+              'value',
+              const SomeFailure.serverError(),
+            ),
+          );
+        });
+        test('Send Verification Code To Email', () async {
+          expect(
+            await authenticationRepository.sendVerificationCodeToEmail(
+              email: KTestText.userEmailIncorrect,
+            ),
+            isA<Left<SomeFailure, bool>>().having(
+              (e) => e.value,
+              'value',
+              const SomeFailure.serverError(),
+            ),
+          );
+        });
+        test('Update User Setting', () async {
+          expect(
+            await authenticationRepository.updateUserSetting(
+              userSetting: KTestText.userSetting,
+            ),
+            isA<Left<SomeFailure, bool>>().having(
+              (e) => e.value,
+              'value',
+              const SomeFailure.serverError(),
+            ),
           );
         });
       });
     });
+
     group('${KScreenBlocName.authenticationBloc} ', () {
       late AuthenticationRepository mockAuthenticationRepository;
       late AuthenticationBloc authenticationBloc;
       setUp(() {
-        mockAuthenticationRepository = MockAuthenticationRepositoryUnitTest();
+        mockAuthenticationRepository = MockAuthenticationRepository();
+        when(mockAuthenticationRepository.currentUser).thenAnswer(
+          (realInvocation) => KTestText.user,
+        );
+        when(mockAuthenticationRepository.getUserSetting()).thenAnswer(
+          (realInvocation) async => KTestText.userSetting,
+        );
+        when(
+          mockAuthenticationRepository.updateUserSetting(
+            userSetting: UserSetting.empty.copyWith(locale: Language.english),
+          ),
+        ).thenAnswer(
+          (realInvocation) async => const Right(true),
+        );
         authenticationBloc = AuthenticationBloc(
           authenticationRepository: mockAuthenticationRepository,
         )..add(AuthenticationInitialized());
@@ -231,7 +321,6 @@ void main() {
           );
         },
         expect: () async => [
-          const AuthenticationState.unknown(),
           const AuthenticationState.unauthenticated(),
         ],
       );
@@ -247,26 +336,10 @@ void main() {
           );
         },
         expect: () async => [
-          const AuthenticationState.unknown(),
           const AuthenticationState.authenticated(
-            currentUser: User.empty,
-            currentUserSetting: UserSetting.empty,
+            currentUser: KTestText.user,
+            currentUserSetting: KTestText.userSetting,
           ),
-        ],
-      );
-      blocTest<AuthenticationBloc, AuthenticationState>(
-        'emits [AuthenticationState.unknown] when'
-        ' AuthenticationStatusChanged',
-        build: () => authenticationBloc,
-        act: (bloc) async {
-          bloc.add(
-            const AuthenticationStatusChanged(
-              AuthenticationStatus.unknown,
-            ),
-          );
-        },
-        expect: () async => [
-          const AuthenticationState.unknown(),
         ],
       );
       blocTest<AuthenticationBloc, AuthenticationState>(
@@ -296,9 +369,10 @@ void main() {
           );
         },
         expect: () async => [
-          const AuthenticationState.unknown(),
-          const AuthenticationState.unknown().copyWith(
-            userSetting: UserSetting.empty.copyWith(locale: Language.english),
+          AuthenticationState.authenticated(
+            currentUser: KTestText.user,
+            currentUserSetting:
+                KTestText.userSetting.copyWith(locale: Language.english),
           ),
         ],
       );
