@@ -44,6 +44,7 @@ abstract class KGroupText {
 
 abstract class KTestText {
   static const filter = 'filter_test';
+  static const key = 'key_test';
 
   static const usernameCorrect = 'test_username';
   static const passwordCorrect = 'test_Password1';
@@ -200,5 +201,6 @@ abstract class KScreenBlocName {
   static const workEmployeeBloc = 'Work Bloc';
 
   static const iAppAuthenticationRepository = 'App Authentication';
-  static const authentication = ' Authentication';
+  static const authentication = 'Authentication';
+  static const secureStorage = 'Secure Storage';
 }
