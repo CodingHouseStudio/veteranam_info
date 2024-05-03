@@ -128,6 +128,11 @@ final GoRouter router = GoRouter(
             key: state.pageKey,
             child: const ProfileScreen(),
           ),
+          redirect: (context, state) =>
+              context.read<AuthenticationBloc>().state.status !=
+                      AuthenticationStatus.authenticated
+                  ? KRoute.home.path
+                  : null,
         ),
         GoRoute(
           name: KRoute.investors.name,

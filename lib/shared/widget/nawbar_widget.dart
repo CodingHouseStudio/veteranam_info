@@ -96,7 +96,7 @@ class _NawbarWidgetImplematationState
                   ),
                   child: Text(
                     context.l10n.logo,
-                    key: KWidgetkeys.widget.nawbar.title,
+                    key: KWidgetkeys.widget.nawbar.logo,
                     style: widget.isDesk
                         ? AppTextStyle.text32
                         : AppTextStyle.text24,
