@@ -82,10 +82,6 @@ final GoRouter router = GoRouter(
             key: state.pageKey,
             child: const InformationScreen(),
           ),
-          onExit: (context) {
-            Scrollable.ensureVisible(context);
-            return true;
-          },
         ),
         GoRoute(
           name: KRoute.discounts.name,
