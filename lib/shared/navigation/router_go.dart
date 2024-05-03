@@ -108,6 +108,14 @@ final GoRouter router = GoRouter(
           ),
           routes: [
             GoRoute(
+              name: KRoute.employer.name,
+              path: KRoute.employer.path,
+              pageBuilder: (context, state) => NoTransitionPage(
+                key: state.pageKey,
+                child: const EmployerScreen(),
+              ),
+            ),
+            GoRoute(
               name: KRoute.workEmployee.name,
               path: KRoute.workEmployee.path,
               pageBuilder: (context, state) => NoTransitionPage(
