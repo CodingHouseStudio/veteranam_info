@@ -9,19 +9,24 @@ class WorkRespondBodyWidget extends StatelessWidget {
     return ScaffoldWidget(
       childWidgetsFunction: ({required isDesk}) => [
         if (isDesk)
-          KSizedBox.kHeightSizedBox40
+          KSizedBox.kHeightSizedBox68
         else
-          KSizedBox.kHeightSizedBox24,
+          KSizedBox.kHeightSizedBox78,
         Text(
           key: KWidgetkeys.screen.workRespond.title,
           context.l10n.respond,
           style: isDesk ? AppTextStyle.text96 : AppTextStyle.text32,
         ),
         KSizedBox.kHeightSizedBox8,
-        Text(
-          key: KWidgetkeys.screen.workRespond.subtitle,
-          KMockText.workTitle,
-          style: isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
+        Row(
+          children: [
+            KIcon.chevronLeft,
+            Text(
+              key: KWidgetkeys.screen.workRespond.subtitle,
+              KMockText.workTitle,
+              style: isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
+            ),
+          ],
         ),
         if (isDesk)
           KSizedBox.kHeightSizedBox56
@@ -36,9 +41,6 @@ class WorkRespondBodyWidget extends StatelessWidget {
                 isDesk ? KPadding.kPaddingSize336 : KPadding.kPaddingSize16,
             vertical:
                 isDesk ? KPadding.kPaddingSize56 : KPadding.kPaddingSize24,
-          ),
-          constraints: const BoxConstraints(
-            maxWidth: KMinMaxSize.maxWidth768,
           ),
           decoration: KWidgetTheme.boxDecorationWidget(context),
           child: Column(
@@ -56,11 +58,12 @@ class WorkRespondBodyWidget extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(left: KPadding.kPaddingSize16),
                 child: Text(
-                  key: KWidgetkeys.screen.workRespond.email,
+                  key: KWidgetkeys.screen.workRespond.emailField,
                   context.l10n.email,
                   style: isDesk ? AppTextStyle.text32 : AppTextStyle.text24,
                 ),
               ),
+              KSizedBox.kHeightSizedBox8,
               TextFieldWidget(
                 widgetKey: KWidgetkeys.screen.workRespond.emailHint,
                 onChanged: (value) {},
@@ -73,11 +76,12 @@ class WorkRespondBodyWidget extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(left: KPadding.kPaddingSize16),
                 child: Text(
-                  key: KWidgetkeys.screen.workRespond.phoneNumber,
+                  key: KWidgetkeys.screen.workRespond.phoneNumberField,
                   context.l10n.phoneNumber,
                   style: isDesk ? AppTextStyle.text32 : AppTextStyle.text24,
                 ),
               ),
+              KSizedBox.kHeightSizedBox8,
               TextFieldWidget(
                 widgetKey: KWidgetkeys.screen.workRespond.phoneNumberHint,
                 onChanged: (value) {},
@@ -95,6 +99,7 @@ class WorkRespondBodyWidget extends StatelessWidget {
                   style: isDesk ? AppTextStyle.text32 : AppTextStyle.text24,
                 ),
               ),
+              KSizedBox.kHeightSizedBox8,
               Container(
                 padding: EdgeInsets.all(
                   isDesk ? KPadding.kPaddingSize32 : KPadding.kPaddingSize16,
@@ -112,8 +117,12 @@ class WorkRespondBodyWidget extends StatelessWidget {
                         key: KWidgetkeys.screen.workRespond.upload,
                         context.l10n.upload,
                         style: isDesk
-                            ? AppTextStyle.text24.underline
-                            : AppTextStyle.text16.underline,
+                            ? AppTextStyle.text24.copyWith(
+                                decoration: TextDecoration.underline,
+                              )
+                            : AppTextStyle.text16.copyWith(
+                                decoration: TextDecoration.underline,
+                              ),
                       ),
                     ),
                   ],
@@ -125,22 +134,17 @@ class WorkRespondBodyWidget extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(
                       left: KPadding.kPaddingSize32,
+                      right: KPadding.kPaddingSize16,
                     ),
-                    child: CheckPointWidget(
-                      key: KWidgetkeys.screen.workRespond.checkbox,
+                    child: CheckPointSingleWidget(
+                      key: KWidgetkeys.screen.workRespond.checkPoint,
                       onChanged: () {},
-                      isCheck: false,
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      left: KPadding.kPaddingSize16,
-                    ),
-                    child: Text(
-                      key: KWidgetkeys.screen.workRespond.noResume,
-                      context.l10n.noResume,
-                      style: isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
-                    ),
+                  Text(
+                    key: KWidgetkeys.screen.workRespond.noResume,
+                    context.l10n.noResume,
+                    style: isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
                   ),
                 ],
               ),
@@ -187,6 +191,10 @@ class WorkRespondBodyWidget extends StatelessWidget {
                   backgroundColor: Colors.white,
                 ),
               ],
+              if (isDesk)
+                KSizedBox.kHeightSizedBox32
+              else
+                KSizedBox.kHeightSizedBox16,
             ],
           ),
         ),
