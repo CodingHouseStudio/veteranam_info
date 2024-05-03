@@ -48,6 +48,7 @@ abstract class KGroupText {
 
 abstract class KTestText {
   static const filter = 'filter_test';
+  static const key = 'key_test';
 
   static const usernameCorrect = 'test_username';
   static const passwordCorrect = 'test_Password1';
@@ -152,28 +153,15 @@ abstract class KTestText {
   );
 
   static final informationModelItems = <InformationModel>[
-    InformationModel(
-      id: '1',
-      title: 'Як мені знайти роботу за допомогою цього сайту?',
-      news: 'Використовуйте веб-сайти спеціалізованих сервісів для'
-          ' пошуку роботи,'
-          ' таких як Indeed, LinkedIn, Glassdoor, Monster, або регіональні '
-          'ресурси. Виберіть свою область інтересів та регіон, і шукайте '
-          'вакансії, які відповідають вашим критеріям.',
-      date: DateTime.now(),
-      tags: ['test_tags_1'],
-    ),
-    InformationModel(
-      id: '2',
-      title: 'Як мені знайти роботу за допомогою цього сайту?',
-      news:
-          'Використовуйте веб-сайти спеціалізованих сервісів для пошуку роботи,'
-          ' таких як Indeed, LinkedIn, Glassdoor, Monster, або регіональні '
-          'ресурси. Виберіть свою область інтересів та регіон, і шукайте '
-          'вакансії, які відповідають вашим критеріям.',
-      date: DateTime.now(),
-      tags: ['test_tags_2'],
-    ),
+    for (var i = 0; i < KMockText.tags.length; i++)
+      InformationModel(
+        id: i.toString(),
+        title: KMockText.title,
+        news: KMockText.cardData,
+        date: dateTime,
+        image: i > KMockText.tags.length - 2 ? KMockText.image : null,
+        tags: KMockText.tags.elementAt(i),
+      ),
   ];
 }
 
@@ -210,6 +198,7 @@ abstract class KScreenBlocName {
   static const signUp = 'Sign Up Screen';
   static const questionsForm = 'Questions Form Screen';
   static const workEmployee = 'Work Employee Screen';
+  static const employer = 'Employer Screen';
 
   static const feedback = 'Feedback Widget';
 
@@ -227,5 +216,6 @@ abstract class KScreenBlocName {
   static const workEmployeeBloc = 'Work Bloc';
 
   static const iAppAuthenticationRepository = 'App Authentication';
-  static const authentication = ' Authentication';
+  static const authentication = 'Authentication';
+  static const secureStorage = 'Secure Storage';
 }
