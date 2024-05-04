@@ -24,7 +24,7 @@ void main() {
       mockAuthenticationRepository = MockAuthenticationRepository();
       when(
         mockAuthenticationRepository.logIn(
-          email: KTestText.useremail,
+          email: KTestText.userEmail,
           password: KTestText.passwordCorrect,
         ),
       ).thenAnswer(
@@ -32,7 +32,7 @@ void main() {
       );
       when(
         mockAuthenticationRepository.logIn(
-          email: KTestText.useremail,
+          email: KTestText.userEmail,
           password: KTestText.passwordCorrect,
         ),
       ).thenAnswer(
@@ -143,7 +143,7 @@ void main() {
 
       await emailPasswordFieldsEmHelper(
         tester: tester,
-        email: KTestText.useremailIncorrect,
+        email: KTestText.userEmailIncorrect,
       );
 
       await tester.tap(find.byKey(KWidgetkeys.screen.login.button));
@@ -173,7 +173,7 @@ void main() {
 
       await emailPasswordFieldsEmHelper(
         tester: tester,
-        email: KTestText.useremail,
+        email: KTestText.userEmail,
       );
 
       await tester.tap(find.byKey(KWidgetkeys.screen.login.button));
@@ -205,7 +205,7 @@ void main() {
       await loginFieldsHelper(
         tester: tester,
         password: KTestText.passwordIncorrect,
-        email: KTestText.useremail,
+        email: KTestText.userEmail,
         dataIsCorrect: false,
       );
 
@@ -230,7 +230,7 @@ void main() {
       await loginFieldsHelper(
         tester: tester,
         password: KTestText.passwordCorrect,
-        email: KTestText.useremail,
+        email: KTestText.userEmail,
         dataIsCorrect: true,
       );
 

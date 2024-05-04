@@ -1,5 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:kozak/shared/shared.dart';
@@ -89,18 +90,18 @@ void main() {
           expect(result.error, EmailFieldModelValidationError.invalidLength);
         });
         test('${KGroupText.shouldNotBe} invalidLength', () {
-          const result = EmailFieldModel.dirty(KTestText.useremailIncorrect);
+          const result = EmailFieldModel.dirty(KTestText.userEmailIncorrect);
           expect(
             result.error,
             isNot(EmailFieldModelValidationError.invalidLength),
           );
         });
         test('${KGroupText.shouldBe} wrong', () {
-          const result = EmailFieldModel.dirty(KTestText.useremailIncorrect);
+          const result = EmailFieldModel.dirty(KTestText.userEmailIncorrect);
           expect(result.error, EmailFieldModelValidationError.wrong);
         });
         test('${KGroupText.shouldNotBe} invalidLength', () {
-          const result = EmailFieldModel.dirty(KTestText.useremail);
+          const result = EmailFieldModel.dirty(KTestText.userEmail);
           expect(
             result.error,
             null,
@@ -133,7 +134,13 @@ void main() {
         );
         when(
           mockFirestoreService.addFeedback(KTestText.feedbackModelIncorect),
-        ).thenThrow(KGroupText.failureSet);
+        ).thenThrow(Exception(KGroupText.failureSet));
+        when(
+          mockFirestoreService.addFeedback(
+            KTestText.feedbackModelIncorect
+                .copyWith(message: KTestText.fieldEmpty),
+          ),
+        ).thenThrow(FirebaseException(plugin: KGroupText.failureSet));
         if (GetIt.I.isRegistered<FirestoreService>()) {
           GetIt.I.unregister<FirestoreService>();
         }
@@ -151,6 +158,19 @@ void main() {
         expect(
           await mockFeedbackRepository
               .sendFeedback(KTestText.feedbackModelIncorect),
+          isA<Left<SomeFailure, bool>>().having(
+            (e) => e.value,
+            'value',
+            const SomeFailure.serverError(),
+          ),
+        );
+      });
+      test('${KGroupText.failureSet} firebase feedback', () async {
+        expect(
+          await mockFeedbackRepository.sendFeedback(
+            KTestText.feedbackModelIncorect
+                .copyWith(message: KTestText.fieldEmpty),
+          ),
           isA<Left<SomeFailure, bool>>().having(
             (e) => e.value,
             'value',
@@ -178,7 +198,7 @@ void main() {
         build: () => feedbackBloc,
         act: (bloc) => bloc
           ..add(const FeedbackEvent.nameUpdated(KTestText.field))
-          ..add(const FeedbackEvent.emailUpdated(KTestText.useremail))
+          ..add(const FeedbackEvent.emailUpdated(KTestText.userEmail))
           ..add(const FeedbackEvent.messageUpdated(KTestText.field)),
         expect: () => [
           const FeedbackState(
@@ -191,14 +211,14 @@ void main() {
           const FeedbackState(
             formState: FeedbackEnum.initial,
             name: NameFieldModel.dirty(KTestText.field),
-            email: EmailFieldModel.dirty(KTestText.useremail),
+            email: EmailFieldModel.dirty(KTestText.userEmail),
             message: MessageFieldModel.pure(),
             failure: FeedbackFailure.initial,
           ),
           const FeedbackState(
             formState: FeedbackEnum.initial,
             name: NameFieldModel.dirty(KTestText.field),
-            email: EmailFieldModel.dirty(KTestText.useremail),
+            email: EmailFieldModel.dirty(KTestText.userEmail),
             message: MessageFieldModel.dirty(KTestText.field),
             failure: FeedbackFailure.initial,
           ),
@@ -211,7 +231,7 @@ void main() {
         act: (bloc) => bloc
           ..add(const FeedbackEvent.nameUpdated(KTestText.fieldEmpty))
           ..add(
-            const FeedbackEvent.emailUpdated(KTestText.useremailIncorrect),
+            const FeedbackEvent.emailUpdated(KTestText.userEmailIncorrect),
           )
           ..add(const FeedbackEvent.messageUpdated(KTestText.fieldEmpty)),
         expect: () => [
@@ -225,14 +245,14 @@ void main() {
           const FeedbackState(
             formState: FeedbackEnum.initial,
             name: NameFieldModel.dirty(),
-            email: EmailFieldModel.dirty(KTestText.useremailIncorrect),
+            email: EmailFieldModel.dirty(KTestText.userEmailIncorrect),
             message: MessageFieldModel.pure(),
             failure: FeedbackFailure.initial,
           ),
           const FeedbackState(
             formState: FeedbackEnum.initial,
             name: NameFieldModel.dirty(),
-            email: EmailFieldModel.dirty(KTestText.useremailIncorrect),
+            email: EmailFieldModel.dirty(KTestText.userEmailIncorrect),
             message: MessageFieldModel.dirty(),
             failure: FeedbackFailure.initial,
           ),
@@ -244,7 +264,7 @@ void main() {
         build: () => feedbackBloc,
         act: (bloc) async => bloc
           ..add(const FeedbackEvent.nameUpdated(KTestText.field))
-          ..add(const FeedbackEvent.emailUpdated(KTestText.useremail))
+          ..add(const FeedbackEvent.emailUpdated(KTestText.userEmail))
           ..add(const FeedbackEvent.messageUpdated(KTestText.field))
           ..add(const FeedbackEvent.save()),
         expect: () => [
@@ -258,21 +278,21 @@ void main() {
           const FeedbackState(
             formState: FeedbackEnum.initial,
             name: NameFieldModel.dirty(KTestText.field),
-            email: EmailFieldModel.dirty(KTestText.useremail),
+            email: EmailFieldModel.dirty(KTestText.userEmail),
             message: MessageFieldModel.pure(),
             failure: FeedbackFailure.initial,
           ),
           const FeedbackState(
             formState: FeedbackEnum.initial,
             name: NameFieldModel.dirty(KTestText.field),
-            email: EmailFieldModel.dirty(KTestText.useremail),
+            email: EmailFieldModel.dirty(KTestText.userEmail),
             message: MessageFieldModel.dirty(KTestText.field),
             failure: FeedbackFailure.initial,
           ),
           const FeedbackState(
             formState: FeedbackEnum.sendingMessage,
             name: NameFieldModel.dirty(KTestText.field),
-            email: EmailFieldModel.dirty(KTestText.useremail),
+            email: EmailFieldModel.dirty(KTestText.userEmail),
             message: MessageFieldModel.dirty(KTestText.field),
             failure: FeedbackFailure.initial,
           ),
@@ -291,7 +311,7 @@ void main() {
         build: () => feedbackBloc,
         act: (bloc) async => bloc
           ..add(const FeedbackEvent.nameUpdated(KTestText.field))
-          ..add(const FeedbackEvent.emailUpdated(KTestText.useremail))
+          ..add(const FeedbackEvent.emailUpdated(KTestText.userEmail))
           ..add(const FeedbackEvent.messageUpdated(KTestText.field))
           ..add(const FeedbackEvent.save())
           ..add(const FeedbackEvent.sendignMessageAgain()),
@@ -306,21 +326,21 @@ void main() {
           const FeedbackState(
             formState: FeedbackEnum.initial,
             name: NameFieldModel.dirty(KTestText.field),
-            email: EmailFieldModel.dirty(KTestText.useremail),
+            email: EmailFieldModel.dirty(KTestText.userEmail),
             message: MessageFieldModel.pure(),
             failure: FeedbackFailure.initial,
           ),
           const FeedbackState(
             formState: FeedbackEnum.initial,
             name: NameFieldModel.dirty(KTestText.field),
-            email: EmailFieldModel.dirty(KTestText.useremail),
+            email: EmailFieldModel.dirty(KTestText.userEmail),
             message: MessageFieldModel.dirty(KTestText.field),
             failure: FeedbackFailure.initial,
           ),
           const FeedbackState(
             formState: FeedbackEnum.sendingMessage,
             name: NameFieldModel.dirty(KTestText.field),
-            email: EmailFieldModel.dirty(KTestText.useremail),
+            email: EmailFieldModel.dirty(KTestText.userEmail),
             message: MessageFieldModel.dirty(KTestText.field),
             failure: FeedbackFailure.initial,
           ),
@@ -346,7 +366,7 @@ void main() {
         build: () => feedbackBloc,
         act: (bloc) => bloc
           ..add(const FeedbackEvent.nameUpdated(KTestText.fieldEmpty))
-          ..add(const FeedbackEvent.emailUpdated(KTestText.useremailIncorrect))
+          ..add(const FeedbackEvent.emailUpdated(KTestText.userEmailIncorrect))
           ..add(const FeedbackEvent.messageUpdated(KTestText.fieldEmpty))
           ..add(const FeedbackEvent.save()),
         expect: () => [
@@ -360,21 +380,21 @@ void main() {
           const FeedbackState(
             formState: FeedbackEnum.initial,
             name: NameFieldModel.dirty(),
-            email: EmailFieldModel.dirty(KTestText.useremailIncorrect),
+            email: EmailFieldModel.dirty(KTestText.userEmailIncorrect),
             message: MessageFieldModel.pure(),
             failure: FeedbackFailure.initial,
           ),
           const FeedbackState(
             formState: FeedbackEnum.initial,
             name: NameFieldModel.dirty(),
-            email: EmailFieldModel.dirty(KTestText.useremailIncorrect),
+            email: EmailFieldModel.dirty(KTestText.userEmailIncorrect),
             message: MessageFieldModel.dirty(),
             failure: FeedbackFailure.initial,
           ),
           const FeedbackState(
             formState: FeedbackEnum.invalidData,
             name: NameFieldModel.dirty(),
-            email: EmailFieldModel.dirty(KTestText.useremailIncorrect),
+            email: EmailFieldModel.dirty(KTestText.userEmailIncorrect),
             message: MessageFieldModel.dirty(),
             failure: FeedbackFailure.initial,
           ),
@@ -392,7 +412,7 @@ void main() {
           );
           bloc
             ..add(const FeedbackEvent.nameUpdated(KTestText.field))
-            ..add(const FeedbackEvent.emailUpdated(KTestText.useremail))
+            ..add(const FeedbackEvent.emailUpdated(KTestText.userEmail))
             ..add(const FeedbackEvent.messageUpdated(KTestText.field))
             ..add(const FeedbackEvent.save());
         },
@@ -407,28 +427,28 @@ void main() {
           const FeedbackState(
             formState: FeedbackEnum.initial,
             name: NameFieldModel.dirty(KTestText.field),
-            email: EmailFieldModel.dirty(KTestText.useremail),
+            email: EmailFieldModel.dirty(KTestText.userEmail),
             message: MessageFieldModel.pure(),
             failure: FeedbackFailure.initial,
           ),
           const FeedbackState(
             formState: FeedbackEnum.initial,
             name: NameFieldModel.dirty(KTestText.field),
-            email: EmailFieldModel.dirty(KTestText.useremail),
+            email: EmailFieldModel.dirty(KTestText.userEmail),
             message: MessageFieldModel.dirty(KTestText.field),
             failure: FeedbackFailure.initial,
           ),
           const FeedbackState(
             formState: FeedbackEnum.sendingMessage,
             name: NameFieldModel.dirty(KTestText.field),
-            email: EmailFieldModel.dirty(KTestText.useremail),
+            email: EmailFieldModel.dirty(KTestText.userEmail),
             message: MessageFieldModel.dirty(KTestText.field),
             failure: FeedbackFailure.initial,
           ),
           const FeedbackState(
             formState: FeedbackEnum.invalidData,
             name: NameFieldModel.dirty(KTestText.field),
-            email: EmailFieldModel.dirty(KTestText.useremail),
+            email: EmailFieldModel.dirty(KTestText.userEmail),
             message: MessageFieldModel.dirty(KTestText.field),
             failure: FeedbackFailure.error,
           ),
@@ -446,7 +466,7 @@ void main() {
           );
           bloc
             ..add(const FeedbackEvent.nameUpdated(KTestText.field))
-            ..add(const FeedbackEvent.emailUpdated(KTestText.useremail))
+            ..add(const FeedbackEvent.emailUpdated(KTestText.userEmail))
             ..add(const FeedbackEvent.messageUpdated(KTestText.field))
             ..add(const FeedbackEvent.clear())
             ..add(const FeedbackEvent.save());
@@ -462,14 +482,14 @@ void main() {
           const FeedbackState(
             formState: FeedbackEnum.initial,
             name: NameFieldModel.dirty(KTestText.field),
-            email: EmailFieldModel.dirty(KTestText.useremail),
+            email: EmailFieldModel.dirty(KTestText.userEmail),
             message: MessageFieldModel.pure(),
             failure: FeedbackFailure.initial,
           ),
           const FeedbackState(
             formState: FeedbackEnum.initial,
             name: NameFieldModel.dirty(KTestText.field),
-            email: EmailFieldModel.dirty(KTestText.useremail),
+            email: EmailFieldModel.dirty(KTestText.userEmail),
             message: MessageFieldModel.dirty(KTestText.field),
             failure: FeedbackFailure.initial,
           ),
