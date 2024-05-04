@@ -5,7 +5,6 @@ import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
 import 'package:mockito/mockito.dart';
 
-import '../bloc/authentication_bloc_unit_test.dart';
 import '../text_dependency.dart';
 import 'home_widget/home_widget.dart';
 
@@ -26,10 +25,16 @@ void main() {
     late FeedbackBloc feedbackBloc;
     setUp(() {
       ExtendedDateTime.customTime = KTestText.feedbackModel.timestamp;
-      mockAuthenticationRepository = MockAuthenticationRepositoryUnitTest();
+      mockAuthenticationRepository = MockAuthenticationRepository();
+      when(mockAuthenticationRepository.currentUser).thenAnswer(
+        (realInvocation) => User.empty,
+      );
+      when(mockAuthenticationRepository.getUserSetting()).thenAnswer(
+        (realInvocation) async => UserSetting.empty,
+      );
       mockHomeRepository = MockIHomeRepository();
       when(mockHomeRepository.getQuestions()).thenAnswer(
-        (invocation) async => const Right(KTestText.questionModelItems),
+        (invocation) async => Right(KTestText.questionModelItems),
       );
       mockFeedbackRepository = MockIFeedbackRepository();
       when(mockFeedbackRepository.sendFeedback(KTestText.feedbackModel))
@@ -84,6 +89,13 @@ void main() {
 
       await listQuestionHelper(tester);
 
+      await feedbackHelper(tester);
+
+      await scrollingHelper(
+        tester: tester,
+        offset: KTestConstants.scrollingDown1000,
+      );
+
       await footerHelper(tester);
     });
 
@@ -105,13 +117,18 @@ void main() {
 
       await scrollingHelper(
         tester: tester,
-        offset: KTestConstants.scrollingUp500,
+        offset: KTestConstants.scrollingUp1000,
       );
 
       await feedbackEnterTextHelper(
         tester: tester,
-        email: KTestText.useremail,
+        email: KTestText.userEmail,
         field: KTestText.field,
+      );
+
+      await scrollingHelper(
+        tester: tester,
+        offset: KTestConstants.scrollingUp500,
       );
 
       await feedbackBoxHelper(tester);
@@ -134,13 +151,18 @@ void main() {
 
       await scrollingHelper(
         tester: tester,
-        offset: KTestConstants.scrollingUp500,
+        offset: KTestConstants.scrollingUp1000,
       );
 
       await feedbackEnterTextHelper(
         tester: tester,
-        email: KTestText.useremailIncorrect,
+        email: KTestText.userEmailIncorrect,
         field: KTestText.field,
+      );
+
+      await scrollingHelper(
+        tester: tester,
+        offset: KTestConstants.scrollingUp500,
       );
 
       await feedbackHelper(tester);
@@ -164,12 +186,12 @@ void main() {
 
       await scrollingHelper(
         tester: tester,
-        offset: KTestConstants.scrollingUp500,
+        offset: KTestConstants.scrollingUp1000,
       );
 
       await feedbackClearTextHelper(
         tester: tester,
-        email: KTestText.useremail,
+        email: KTestText.userEmail,
         field: KTestText.field,
       );
     });
@@ -198,6 +220,13 @@ void main() {
         await homeBoxHelper(tester);
 
         await listQuestionHelper(tester);
+
+        await feedbackHelper(tester);
+
+        await scrollingHelper(
+          tester: tester,
+          offset: KTestConstants.scrollingDown1000,
+        );
 
         await footerHelper(tester);
       });
@@ -241,7 +270,43 @@ void main() {
 
           await boxexHelper(
             tester: tester,
-            routes: KTestText.boxRoutes,
+            mockGoRouter: mockGoRouter,
+          );
+        });
+
+        testWidgets('Feedback box widget navigation', (tester) async {
+          registerHomeBloc();
+          registerFeedbackBloc();
+          await tester.pumpApp(
+            const HomeScreen(),
+            mockGoRouter: mockGoRouter,
+          );
+
+          expect(
+            find.byKey(KWidgetkeys.screen.home.screen),
+            findsOneWidget,
+          );
+
+          await tester.pumpAndSettle();
+
+          await scrollingHelper(
+            tester: tester,
+            offset: KTestConstants.scrollingDown,
+          );
+
+          await scrollingHelper(
+            tester: tester,
+            offset: KTestConstants.scrollingUp1000,
+          );
+
+          await feedbackEnterTextHelper(
+            tester: tester,
+            email: KTestText.userEmail,
+            field: KTestText.field,
+          );
+
+          await feedbackBoxNavigationHelper(
+            tester: tester,
             mockGoRouter: mockGoRouter,
           );
         });

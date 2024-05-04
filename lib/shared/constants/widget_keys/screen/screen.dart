@@ -18,4 +18,6 @@ class _ScreenKeys {
   final signUp = _SignUpKeys();
   final thanks = _ThanksKeys();
   final questionsForm = _QuestionsFormKeys();
+  final workEmployee = _WorkEmployeeKeys();
+  final employer = _EmployerKeys();
 }

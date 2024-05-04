@@ -33,6 +33,8 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   /// defaults to [kIsWeb]
   @visibleForTesting
   bool isWeb = kIsWeb;
+  @visibleForTesting
+  firebase_auth.GoogleAuthProvider? googleAuthProvider;
 
   /// User cache key.
   /// Should only be used for testing purposes.
@@ -100,8 +102,9 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   }
 
   Future<firebase_auth.AuthCredential> _getGoogleAuthCredentialWeb() async {
-    final userCredential =
-        await _firebaseAuth.signInWithPopup(firebase_auth.GoogleAuthProvider());
+    final userCredential = await _firebaseAuth.signInWithPopup(
+      googleAuthProvider ?? firebase_auth.GoogleAuthProvider(),
+    );
     return userCredential.credential!;
   }
 

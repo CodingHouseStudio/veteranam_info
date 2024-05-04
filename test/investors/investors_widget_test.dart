@@ -81,9 +81,11 @@ void main() {
 
       await feedbackEnterTextHelper(
         tester: tester,
-        email: KTestText.useremail,
+        email: KTestText.userEmail,
         field: KTestText.field,
       );
+
+      await scrollingHelper(tester: tester, offset: KTestConstants.scrollingUp);
 
       await feedbackBoxHelper(tester);
     });
@@ -101,9 +103,11 @@ void main() {
 
       await feedbackEnterTextHelper(
         tester: tester,
-        email: KTestText.useremailIncorrect,
+        email: KTestText.userEmailIncorrect,
         field: KTestText.field,
       );
+
+      await scrollingHelper(tester: tester, offset: KTestConstants.scrollingUp);
 
       await feedbackHelper(tester);
     });
@@ -122,7 +126,7 @@ void main() {
 
       await feedbackClearTextHelper(
         tester: tester,
-        email: KTestText.useremail,
+        email: KTestText.userEmail,
         field: KTestText.field,
       );
     });
@@ -166,6 +170,33 @@ void main() {
           await tester.pumpAndSettle();
 
           await footerButtonsHelper(
+            tester: tester,
+            mockGoRouter: mockGoRouter,
+          );
+        });
+
+        testWidgets('Feedback box widget navigation', (tester) async {
+          registerInvestorsBloc();
+          registerFeedbackBloc();
+          await tester.pumpApp(
+            const InvestorsScreen(),
+            mockGoRouter: mockGoRouter,
+          );
+
+          expect(
+            find.byKey(KWidgetkeys.screen.investors.screen),
+            findsOneWidget,
+          );
+
+          await tester.pumpAndSettle();
+
+          await feedbackEnterTextHelper(
+            tester: tester,
+            email: KTestText.userEmail,
+            field: KTestText.field,
+          );
+
+          await feedbackBoxNavigationHelper(
             tester: tester,
             mockGoRouter: mockGoRouter,
           );

@@ -39,27 +39,20 @@ Future<void> setUpGlobalIntegration() async {
 // }
 
 abstract class KTestConstants {
-  static const scrolling = Offset(0, -10000);
-  static const scrollingAppBar = Offset(0, KSize.kPreferredSize);
+  static const scrolling = Offset(0, -40000);
 
   static const windowMobileSize = Size(800, 800);
 
   static final screens = [
-    [
-      KWidgetkeys.screen.aboutUs.screen,
-      KWidgetkeys.screen.investors.screen,
-      KWidgetkeys.screen.contact.screen,
-    ],
-    [
-      KWidgetkeys.screen.story.screen,
-      KWidgetkeys.screen.discounts.screen,
-      KWidgetkeys.screen.profile.screen,
-    ],
-    [
-      KWidgetkeys.screen.work.screen,
-      KWidgetkeys.screen.information.screen,
-      KWidgetkeys.screen.consultation.screen,
-    ],
+    KWidgetkeys.screen.aboutUs.screen,
+    KWidgetkeys.screen.investors.screen,
+    KWidgetkeys.screen.contact.screen,
+    KWidgetkeys.screen.story.screen,
+    KWidgetkeys.screen.discounts.screen,
+    KWidgetkeys.screen.login.screen,
+    KWidgetkeys.screen.work.screen,
+    KWidgetkeys.screen.information.screen,
+    KWidgetkeys.screen.consultation.screen,
   ];
 }
 

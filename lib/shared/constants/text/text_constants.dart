@@ -1,5 +1,6 @@
 // ignore_for_file: lines_longer_than_80_chars, inference_failure_on_collection_literal
 
+import 'package:flutter/material.dart';
 import 'package:kozak/shared/shared.dart';
 
 /// COMMENT: Variables with mock text. It's temporary data we change it when add firebase for this elements
@@ -12,6 +13,7 @@ abstract class KMockText {
     'Трускавець',
     'Стебник',
   ];
+  static const workCategory = 'Комплектувальник';
   static const facebook = 'Facebook';
   static const donateCardTitle = 'Благодійний фонд '
       '«ПОВЕРНИСЬ ЖИВИМ»';
@@ -99,8 +101,9 @@ abstract class KMockText {
       'Клініка Happy dentist надає знижки 10% на '
       'всі види послуг для військових і ветеранів.';
   static const dateDiscount = 'Діє з 12.03.2024 по 12.10.2024';
-  static const instructionDiscount = 'Щоб отримати потрібно: \nЗаписатися на'
-      ' прийом;\nПоказати документи, що підтверджують участь у бойових діях.';
+  static const instructionDiscount = 'Записатися на прийом;'
+      '\nПоказати документи, що підтверджують участь у бойових діях.';
+  static const preInstructionDiscount = 'Щоб отримати потрібно:';
 
   static const image =
       'https://static.vecteezy.com/system/resources/thumbnails/008/492/251/small/back-to-school-illustration-cartoon-character-children-kid-png.png';
@@ -112,21 +115,29 @@ abstract class KAppText {
   static const String authChange = 'AuthenticationStatusChanged:';
   static const String backendString = '';
   static const String usernameToken = 'USERNAME_TOKEN';
-  static final routes = [
-    [
-      KRoute.aboutUs.name,
-      KRoute.investors.name,
-      KRoute.contact.name,
-    ],
-    [
-      KRoute.story.name,
-      KRoute.discounts.name,
-      KRoute.profile.name,
-    ],
-    [
-      KRoute.work.name,
-      KRoute.information.name,
-      KRoute.consultation.name,
-    ],
-  ];
+  static List<String> routes({required bool hasAccount}) => [
+        KRoute.aboutUs.name,
+        KRoute.investors.name,
+        KRoute.contact.name,
+        KRoute.story.name,
+        KRoute.discounts.name,
+        if (hasAccount) KRoute.profile.name else KRoute.login.name,
+        KRoute.work.name,
+        KRoute.information.name,
+        KRoute.consultation.name,
+      ];
+
+  static List<String> footerButtonText(BuildContext context) {
+    return [
+      context.l10n.aboutUs,
+      context.l10n.forInvestors,
+      context.l10n.contact,
+      context.l10n.stories,
+      context.l10n.discountsCoupons,
+      context.l10n.myProfile,
+      context.l10n.work,
+      context.l10n.information,
+      context.l10n.consultationOnline,
+    ];
+  }
 }

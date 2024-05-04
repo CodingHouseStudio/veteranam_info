@@ -50,6 +50,11 @@ void main() {
         offset: KTestConstants.scrollingDown,
       );
 
+      await scrollingHelper(
+        tester: tester,
+        offset: KTestConstants.scrollingUp200,
+      );
+
       expect(
         find.byKey(KWidgetkeys.screen.information.button),
         findsOneWidget,
@@ -114,8 +119,13 @@ void main() {
 
       await scrollingHelper(
         tester: tester,
-        itemKey: KWidgetkeys.screen.information.button,
         offset: KTestConstants.scrollingDown,
+      );
+
+      await scrollingHelper(
+        tester: tester,
+        itemKey: KWidgetkeys.screen.information.button,
+        offset: KTestConstants.scrollingUp200,
       );
 
       expect(find.byKey(KWidgetkeys.screen.information.button), findsOneWidget);
@@ -124,8 +134,16 @@ void main() {
 
       await tester.pumpAndSettle();
 
+      await scrollingHelper(
+        tester: tester,
+        itemKey: KWidgetkeys.widget.newsCard.title,
+        offset: KTestConstants.scrollingUp,
+      );
+
       final widgets = find.byKey(KWidgetkeys.widget.newsCard.title);
+
       expect(widgets, findsWidgets);
+
       expect(widgets.evaluate().length, greaterThan(1));
 
       await scrollingHelper(
@@ -139,8 +157,13 @@ void main() {
 
       await scrollingHelper(
         tester: tester,
-        itemKey: KWidgetkeys.screen.information.button,
         offset: KTestConstants.scrollingDown,
+      );
+
+      await scrollingHelper(
+        tester: tester,
+        itemKey: KWidgetkeys.screen.information.button,
+        offset: KTestConstants.scrollingUp500,
       );
 
       await tester.tap(find.byKey(KWidgetkeys.screen.information.button));
@@ -171,8 +194,13 @@ void main() {
 
         await scrollingHelper(
           tester: tester,
-          itemKey: KWidgetkeys.screen.information.button,
           offset: KTestConstants.scrollingDown,
+        );
+
+        await scrollingHelper(
+          tester: tester,
+          itemKey: KWidgetkeys.screen.information.button,
+          offset: KTestConstants.scrollingUp200,
         );
 
         expect(
@@ -206,17 +234,17 @@ void main() {
 
         await scrollingHelper(
           tester: tester,
-          itemKey: KWidgetkeys.screen.information.subtitle,
+          itemKey: KWidgetkeys.screen.information.title,
           offset: KTestConstants.scrollingUp,
         );
 
         expect(
-          find.byKey(KWidgetkeys.screen.information.subtitle),
+          find.byKey(KWidgetkeys.screen.information.title),
           findsOneWidget,
         );
 
         expect(
-          find.byKey(KWidgetkeys.screen.information.title),
+          find.byKey(KWidgetkeys.screen.information.subtitle),
           findsOneWidget,
         );
 

@@ -19,7 +19,7 @@ class InformationWatcherState with _$InformationWatcherState {
     required LoadingStatus loadingStatus,
     required int itemsLoaded,
     required InformationFailure? failure,
-  }) = InformationWatcherStateSuccess;
+  }) = _Initial;
 }
 
 extension InformationModelExtensions on List<InformationModel> {

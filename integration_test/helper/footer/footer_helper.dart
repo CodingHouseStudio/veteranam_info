@@ -32,18 +32,11 @@ Future<void> footerHelper({
     findsOneWidget,
   );
 
-  for (var i = 0; i > KWidgetkeys.widget.footer.buttonsKey.length; i++) {
-    for (var j = 0;
-        j < KWidgetkeys.widget.footer.buttonsKey.elementAt(i).length;
-        j++) {
-      final buttonKey =
-          KWidgetkeys.widget.footer.buttonsKey.elementAt(i).elementAt(j);
-
-      expect(
-        find.byKey(buttonKey),
-        findsOneWidget,
-      );
-    }
+  for (final buttonKey in KWidgetkeys.widget.footer.buttonsKey) {
+    expect(
+      find.byKey(buttonKey),
+      findsOneWidget,
+    );
   }
 
   await changeWindowSizeHelperInt(tester: tester, setDefaultSize: true);

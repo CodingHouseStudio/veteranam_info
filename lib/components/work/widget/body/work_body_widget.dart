@@ -17,8 +17,7 @@ class WorkBodyWidget extends StatelessWidget {
           key: KWidgetkeys.screen.work.title,
           style: isDesk ? AppTextStyle.text96 : AppTextStyle.text32,
         ),
-        KSizedBox.kHeightSizedBox30,
-        KSizedBox.kHeightSizedBox8,
+        if (isDesk) KSizedBox.kHeightSizedBox30 else KSizedBox.kHeightSizedBox8,
         Text(
           context.l10n.workSubtitle,
           key: KWidgetkeys.screen.work.subtitle,
@@ -35,7 +34,8 @@ class WorkBodyWidget extends StatelessWidget {
               BoxWidget(
                 key: KWidgetkeys.screen.work.boxEmployee,
                 text: context.l10n.lookingForJob,
-                onTap: () {},
+                onTap: () =>
+                    context.goNamedWithScroll(KRoute.workEmployee.name),
                 isDesk: true,
                 textRightPadding: KPadding.kPaddingSize100,
               ),
@@ -43,7 +43,7 @@ class WorkBodyWidget extends StatelessWidget {
               BoxWidget(
                 key: KWidgetkeys.screen.work.boxEmployer,
                 text: context.l10n.givingJob,
-                onTap: () {},
+                onTap: () => context.goNamedWithScroll(KRoute.employer.name),
                 isDesk: true,
                 textRightPadding: KPadding.kPaddingSize100,
               ),
@@ -53,7 +53,7 @@ class WorkBodyWidget extends StatelessWidget {
           BoxWidget(
             key: KWidgetkeys.screen.work.boxEmployee,
             text: context.l10n.lookingForJob,
-            onTap: () {},
+            onTap: () => context.goNamedWithScroll(KRoute.workEmployee.name),
             isDesk: false,
             textRightPadding: KPadding.kPaddingSize100,
           ),
@@ -61,7 +61,7 @@ class WorkBodyWidget extends StatelessWidget {
           BoxWidget(
             key: KWidgetkeys.screen.work.boxEmployer,
             text: context.l10n.givingJob,
-            onTap: () {},
+            onTap: () => context.goNamedWithScroll(KRoute.employer.name),
             isDesk: false,
             textRightPadding: KPadding.kPaddingSize100,
           ),

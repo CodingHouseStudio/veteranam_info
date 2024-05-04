@@ -28,22 +28,24 @@ class EmailPasswordFieldsWidget extends StatefulWidget {
       _EmailPasswordFieldsWidgetState();
 }
 
-class _EmailPasswordFieldsWidgetState extends State<EmailPasswordFieldsWidget> {
+class _EmailPasswordFieldsWidgetState extends State<EmailPasswordFieldsWidget>
+    with AutomaticKeepAliveClientMixin {
   late TextEditingController emailController;
   late TextEditingController passwordController;
   bool obscurePassword = true;
-  late FocusNode focusNode;
+  FocusNode? focusNode;
 
   @override
   void initState() {
     emailController = TextEditingController();
     passwordController = TextEditingController();
-    focusNode = FocusNode();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
+    focusNode ??= FocusNode();
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -58,7 +60,10 @@ class _EmailPasswordFieldsWidgetState extends State<EmailPasswordFieldsWidget> {
               padding: const EdgeInsets.only(top: KPadding.kPaddingSize16),
               child: ButtonWidget(
                 key: KWidgetkeys.widget.emailPasswordFields.buttonHidePassword,
-                onPressed: widget.backPassword,
+                onPressed: () {
+                  widget.backPassword();
+                  focusNode?.requestFocus();
+                },
                 text: widget.email,
                 padding: widget.isDesk
                     ? const EdgeInsets.symmetric(
@@ -69,7 +74,7 @@ class _EmailPasswordFieldsWidgetState extends State<EmailPasswordFieldsWidget> {
                         KPadding.kPaddingSize16,
                       ),
                 isDesk: widget.isDesk,
-                backgroundColor: AppColors.white,
+                // backgroundColor: AppColors.white,
                 icon: KIcon.trailing,
                 iconRightMerge: KSizedBox.kWidthSizedBox8,
                 textStyle:
@@ -132,4 +137,7 @@ class _EmailPasswordFieldsWidgetState extends State<EmailPasswordFieldsWidget> {
     passwordController.dispose();
     super.dispose();
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

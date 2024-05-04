@@ -2,8 +2,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
+import 'package:mockito/mockito.dart';
+import 'package:mocktail/mocktail.dart' as mocktail;
 
-import '../bloc/authentication_bloc_unit_test.dart';
 import '../text_dependency.dart';
 
 void main() {
@@ -18,7 +19,13 @@ void main() {
     late AuthenticationRepository mockAuthenticationRepository;
     late AuthenticationBloc authenticationBloc;
     setUp(() {
-      mockAuthenticationRepository = MockAuthenticationRepositoryUnitTest();
+      mockAuthenticationRepository = MockAuthenticationRepository();
+      when(mockAuthenticationRepository.currentUser).thenAnswer(
+        (realInvocation) => User.empty,
+      );
+      when(mockAuthenticationRepository.getUserSetting()).thenAnswer(
+        (realInvocation) async => UserSetting.empty,
+      );
     });
     void registerAuthenticationBloc() {
       authenticationBloc = AuthenticationBloc(
@@ -103,8 +110,31 @@ void main() {
 
         await footerHelper(tester);
       });
-      // group('${KGroupText.goTo} ', () {
-      // });
+      group('${KGroupText.goTo} ', () {
+        testWidgets('${KRoute.home.name} ', (tester) async {
+          await tester.pumpApp(const WorkScreen(), mockGoRouter: mockGoRouter);
+
+          expect(
+            find.byKey(KWidgetkeys.screen.work.screen),
+            findsOneWidget,
+          );
+
+          await tester.pumpAndSettle();
+
+          expect(
+            find.byKey(KWidgetkeys.screen.work.boxEmployee),
+            findsOneWidget,
+          );
+
+          await tester.tap(find.byKey(KWidgetkeys.screen.work.boxEmployee));
+
+          mocktail
+              .verify(
+                () => mockGoRouter.goNamed(KRoute.workEmployee.name),
+              )
+              .called(1);
+        });
+      });
     });
   });
 }

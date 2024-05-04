@@ -80,6 +80,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
       width: widget.width,
       height: widget.height,
       child: TextField(
+        key: widget.widgetKey,
         expands: widget.expands ?? false,
         focusNode: widget.focusNode,
         enabled: widget.enabled,
@@ -97,27 +98,23 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
         style:
             widget.isDesk ?? true ? AppTextStyle.text24 : AppTextStyle.text16,
         // Theme.of(context).textTheme.headlineSmall,
-        key: widget.widgetKey,
         onChanged: widget.onChanged,
-        decoration: KWidetTheme.inputDecoration.copyWith(
+        decoration: KWidgetTheme.inputDecoration(context).copyWith(
           hintStyle: widget.hintStyle,
           contentPadding: widget.contentPadding ??
               (widget.isDesk ?? true
                   ? const EdgeInsets.all(KPadding.kPaddingSize32)
                   : const EdgeInsets.all(KPadding.kPaddingSize16)),
           labelText: widget.labelText,
-          border: kIsWeb ? widget.border : widget.border,
-          enabledBorder: kIsWeb ? widget.enabledBorder : widget.enabledBorder,
-          //??
-          // Theme.of(context).inputDecorationTheme.enabledBorder,
-          disabledBorder: kIsWeb ? widget.border : widget.border,
-          focusedBorder: kIsWeb ? widget.focusedBorder : widget.focusedBorder,
-          //??
-          //Theme.of(context).inputDecorationTheme.focusedBorder,
+          border: widget.border,
+          enabledBorder: widget.enabledBorder,
+          disabledBorder: widget.border,
+          focusedBorder: widget.focusedBorder,
           focusedErrorBorder: kIsWeb ? null : widget.border,
           fillColor: widget.fillColor,
           hintText: widget.hintText,
-          errorText: widget.errorText, errorStyle: AppTextStyle.error14,
+          errorText: widget.errorText,
+          errorStyle: AppTextStyle.error14,
           suffixIcon: widget.suffixIcon,
           prefixIcon: widget.prefixIcon,
           errorMaxLines: widget.errorMaxLines,

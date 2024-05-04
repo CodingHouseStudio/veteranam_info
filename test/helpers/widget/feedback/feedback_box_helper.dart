@@ -6,10 +6,39 @@ import '../../../text_dependency.dart';
 Future<void> feedbackBoxHelper(
   WidgetTester tester,
 ) async {
-  await scrollingHelper(
-    tester: tester,
-    offset: KTestConstants.scrollingUp500,
+  expect(
+    find.byKey(KWidgetkeys.widget.feedbackBox.button),
+    findsOneWidget,
   );
+
+  expect(
+    find.byKey(KWidgetkeys.widget.feedbackBox.subtitle),
+    findsOneWidget,
+  );
+
+  expect(
+    find.byKey(KWidgetkeys.widget.feedbackBox.title),
+    findsOneWidget,
+  );
+
+  expect(
+    find.byKey(KWidgetkeys.widget.feedbackBox.informationBox),
+    findsOneWidget,
+  );
+
+  expect(
+    find.byKey(KWidgetkeys.widget.feedbackBox.investorsBox),
+    findsOneWidget,
+  );
+
+  expect(
+    find.byKey(KWidgetkeys.widget.feedbackBox.storyBox),
+    findsOneWidget,
+  );
+
+  await boxHelper(tester);
+
+  await changeWindowSizeHelper(tester: tester);
 
   expect(
     find.byKey(KWidgetkeys.widget.feedbackBox.button),
@@ -25,6 +54,8 @@ Future<void> feedbackBoxHelper(
     find.byKey(KWidgetkeys.widget.feedbackBox.title),
     findsOneWidget,
   );
+
+  await changeWindowSizeHelper(tester: tester, setDefaultSize: true);
 
   await boxHelper(tester);
 

@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kozak/shared/shared.dart';
 
-/// COMMENT: Сlass adds common elements to screens
 class ScaffoldWidget extends StatelessWidget {
   const ScaffoldWidget({
     required this.childWidgetsFunction,
     super.key,
-    this.hasMic = true,
+    this.hasMicrophone = true,
   });
   final List<Widget> Function({required bool isDesk}) childWidgetsFunction;
-  final bool hasMic;
+  final bool hasMicrophone;
 
   @override
   Widget build(BuildContext context) {
@@ -18,23 +16,25 @@ class ScaffoldWidget extends StatelessWidget {
       builder: (BuildContext context, BoxConstraints constraints) {
         final isDesk =
             constraints.maxWidth > KPlatformConstants.minWidthThresholdTablet;
-        final childWidgets = childWidgetsFunction(isDesk: isDesk)
-          ..add(
-            FooterWidget(
-              isDesk: isDesk,
-            ),
-          );
+        final childWidget = childWidgetsFunction(isDesk: isDesk);
+        final padding = EdgeInsets.symmetric(
+          horizontal:
+              isDesk ? KPadding.kPaddingSize90 : KPadding.kPaddingSize16,
+        );
         return Scaffold(
-          // extendBodyBehindAppBar: true,
-          appBar: NawbarWidget(
-            isDesk: isDesk,
-            hasMicrophone: hasMic,
-          ),
-          body: BlocBuilder<ScrollCubit, ScrollController>(
-            builder: (context, _) {
-              return ListView.custom(
-                key: KWidgetkeys.widget.shellRoute.scroll,
-                controller: _,
+          body: CustomScrollView(
+            key: KWidgetkeys.widget.scaffold.scroll,
+            slivers: [
+              SliverPadding(
+                padding: padding,
+                sliver: SliverPersistentHeader(
+                  delegate: NawbarWidget(
+                    isDesk: isDesk,
+                    hasMicrophone: hasMicrophone,
+                  ),
+                ),
+              ),
+              SliverPadding(
                 padding: EdgeInsets.only(
                   left: isDesk
                       ? KPadding.kPaddingSize90
@@ -42,14 +42,52 @@ class ScaffoldWidget extends StatelessWidget {
                   right: isDesk
                       ? KPadding.kPaddingSize90
                       : KPadding.kPaddingSize16,
-                  bottom: isDesk
-                      ? KPadding.kPaddingSize40
-                      : KPadding.kPaddingSize24,
                 ),
-                semanticChildCount: childWidgets.length,
-                childrenDelegate: SliverChildListDelegate(childWidgets),
-              );
-            },
+                sliver: SliverList.builder(
+                  addAutomaticKeepAlives: false,
+                  addRepaintBoundaries: false,
+                  itemBuilder: (context, index) {
+                    return childWidget.elementAt(index);
+                  },
+                  itemCount: childWidget.length,
+                ),
+              ),
+              SliverPadding(
+                padding: padding.copyWith(
+                  bottom: KPadding.kPaddingSize40,
+                ),
+                sliver: DecoratedSliver(
+                  decoration: KWidgetTheme.boxDecorationCard(context),
+                  sliver: SliverPadding(
+                    padding: isDesk
+                        ? const EdgeInsets.all(KPadding.kPaddingSize48)
+                        : const EdgeInsets.symmetric(
+                            vertical: KPadding.kPaddingSize32,
+                            horizontal: KPadding.kPaddingSize16,
+                          ),
+                    sliver: isDesk
+                        ? SliverGrid(
+                            key: KWidgetkeys.widget.footer.widget,
+                            delegate: FooterWidget(
+                              isDesk: true,
+                            ),
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 3,
+                              mainAxisExtent: KMinMaxSize.maxHeight50,
+                              mainAxisSpacing: KPadding.kPaddingSize32,
+                            ),
+                          )
+                        : SliverList(
+                            delegate: FooterWidget(
+                              isDesk: false,
+                            ),
+                          ),
+                  ),
+                ),
+              ),
+            ],
+            semanticChildCount: childWidget.length,
           ),
         );
       },

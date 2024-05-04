@@ -18,12 +18,12 @@ class ChatInputWidget extends StatelessWidget {
         IconWidget(
           key: KWidgetkeys.widget.chatInput.icon,
           icon: messageIcon,
-          background: AppColors.yellow,
+          background: Theme.of(context).colorScheme.secondaryContainer,
         ),
         KSizedBox.kWidthSizedBox8,
         if (message != null)
           Container(
-            decoration: KWidetTheme.boxDecorChatMessage,
+            decoration: KWidgetTheme.boxDecorChatMessage(context),
             padding: const EdgeInsets.all(KPadding.kPaddingSize16),
             child: Text(
               message!,
@@ -33,28 +33,26 @@ class ChatInputWidget extends StatelessWidget {
           )
         else
           Container(
-            decoration: KWidetTheme.boxDecorChatMessage,
+            decoration: KWidgetTheme.boxDecorChatMessage(context),
             padding: const EdgeInsets.all(KPadding.kPaddingSize16),
             child: Row(
               children: [
                 Container(
                   height: KSize.kPixel8,
                   width: KSize.kPixel8,
-                  decoration: KWidetTheme.boxDecorationCircular,
+                  decoration: KWidgetTheme.boxDecorationGrayCircular(context),
                 ),
                 KSizedBox.kWidthSizedBox8,
                 Container(
                   height: KSize.kPixel8,
                   width: KSize.kPixel8,
-                  decoration: KWidetTheme.boxDecorationCircular
-                      .copyWith(color: AppColors.blackWhite),
+                  decoration: KWidgetTheme.boxDecorationGrayCircular(context),
                 ),
                 KSizedBox.kWidthSizedBox8,
                 Container(
                   height: KSize.kPixel8,
                   width: KSize.kPixel8,
-                  decoration: KWidetTheme.boxDecorationCircular
-                      .copyWith(color: AppColors.grey),
+                  decoration: KWidgetTheme.boxDecorationGrayCircular(context),
                 ),
               ],
             ),

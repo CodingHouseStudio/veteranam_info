@@ -112,9 +112,17 @@ class AuthenticationBloc
     AppLanguageChanged event,
     Emitter<AuthenticationState> emit,
   ) async {
-    final userSetting = state.userSetting.copyWith(
-      locale: event.language,
-    );
+    late UserSetting userSetting;
+    if (state.userSetting != UserSetting.empty || state.user == User.empty) {
+      userSetting = state.userSetting.copyWith(
+        locale: event.language,
+      );
+    } else {
+      userSetting = await _authenticationRepository.getUserSetting();
+      userSetting = userSetting.copyWith(
+        locale: event.language,
+      );
+    }
     if (state.user != null) {
       await _authenticationRepository.updateUserSetting(
         userSetting: userSetting,

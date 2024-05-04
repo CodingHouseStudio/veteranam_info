@@ -8,23 +8,17 @@ class DonateButtonWidget extends StatelessWidget {
     required this.isDesk,
     super.key,
     this.icon,
-    this.backgroundColor,
   });
   final Icon? icon;
   final String text;
   final void Function() onPressed;
-  final Color? backgroundColor;
   final bool isDesk;
 
   @override
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: onPressed,
-      style: KButtonStyles.whiteButtonStyleWInf.copyWith(
-        backgroundColor: MaterialStatePropertyAll(
-          backgroundColor ?? AppColors.white,
-        ),
-      ),
+      style: KButtonStyles.whiteButtonStyleWInf(context),
       child: Padding(
         padding: const EdgeInsets.only(
           left: KPadding.kPaddingSize32,
@@ -43,7 +37,7 @@ class DonateButtonWidget extends StatelessWidget {
             ),
             IconWidget(
               icon: icon ?? KIcon.arrowUpRight,
-              background: AppColors.lightGray,
+              background: Theme.of(context).colorScheme.onPrimary,
             ),
           ],
         ),

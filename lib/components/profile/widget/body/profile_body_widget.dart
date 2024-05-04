@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kozak/shared/shared.dart';
 
 class ProfileBodyWidget extends StatelessWidget {
@@ -9,8 +10,9 @@ class ProfileBodyWidget extends StatelessWidget {
     return ScaffoldWidget(
       childWidgetsFunction: ({required isDesk}) => [
         Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: KPadding.kPaddingSize16,
+          padding: EdgeInsets.symmetric(
+            horizontal:
+                isDesk ? KPadding.kPaddingSize4 : KPadding.kPaddingSize16,
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -41,19 +43,16 @@ class ProfileBodyWidget extends StatelessWidget {
       children: [
         Expanded(
           flex: 2,
-          child: Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: KPadding.kPaddingSize4),
-            child: ProfileCardWidget(
-              key: KWidgetkeys.widget.profileCard.profileCard,
-              isDesk: isDesk,
-            ),
+          child: ProfileCardWidget(
+            key: KWidgetkeys.widget.profileCard.profileCard,
+            isDesk: isDesk,
           ),
         ),
         Expanded(
           child: Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: KPadding.kPaddingSize16),
+            padding: const EdgeInsets.symmetric(
+              horizontal: KPadding.kPaddingSize16,
+            ),
             child: _buildBoxWidgets(context, isDesk),
           ),
         ),
@@ -62,52 +61,84 @@ class ProfileBodyWidget extends StatelessWidget {
   }
 
   Widget _buildMobileLayout(BuildContext context, bool isDesk) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _buildBoxWidgets(context, isDesk),
-        Padding(
-          padding:
-              const EdgeInsets.symmetric(horizontal: KPadding.kPaddingSize16),
-          child: ProfileCardWidget(
+    return Padding(
+      padding: const EdgeInsets.all(KPadding.kPaddingSize4),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _buildBoxWidgets(context, isDesk),
+          ProfileCardWidget(
             key: KWidgetkeys.widget.profileCard.profileCard,
             isDesk: isDesk,
           ),
-        ),
-        KSizedBox.kHeightSizedBox24,
-        ButtonWidget(
-          text: context.l10n.logOut,
-          onPressed: () {},
-          isDesk: isDesk,
-        ),
-        if (isDesk) KSizedBox.kWidthSizedBox24 else KSizedBox.kHeightSizedBox24,
-        ButtonWidget(
-          text: context.l10n.deleteAccount,
-          onPressed: () {},
-          isDesk: isDesk,
-          backgroundColor: AppColors.transparent,
-        ),
-        KSizedBox.kHeightSizedBox24,
-      ],
+          KSizedBox.kHeightSizedBox24,
+          ButtonWidget(
+            text: context.l10n.logOut,
+            onPressed: () => context
+                .read<AuthenticationBloc>()
+                .add(AuthenticationLogoutRequested()),
+            isDesk: isDesk,
+          ),
+          if (isDesk)
+            KSizedBox.kWidthSizedBox24
+          else
+            KSizedBox.kHeightSizedBox24,
+          ButtonWidget(
+            text: context.l10n.deleteAccount,
+            onPressed: () {},
+            isDesk: isDesk,
+            // backgroundColor: AppColors.transparent,
+          ),
+          KSizedBox.kHeightSizedBox24,
+          KSizedBox.kHeightSizedBox24,
+          Padding(
+            padding: const EdgeInsets.all(KPadding.kPaddingSize4),
+            child: ButtonWidget(
+              text: context.l10n.logOut,
+              onPressed: () => context
+                  .read<AuthenticationBloc>()
+                  .add(AuthenticationLogoutRequested()),
+              isDesk: isDesk,
+            ),
+          ),
+          if (isDesk)
+            KSizedBox.kWidthSizedBox24
+          else
+            KSizedBox.kHeightSizedBox24,
+          Padding(
+            padding: const EdgeInsets.all(KPadding.kPaddingSize4),
+            child: ButtonWidget(
+              text: context.l10n.deleteAccount,
+              onPressed: () {},
+              isDesk: isDesk,
+              // backgroundColor: AppColors.transparent,
+            ),
+          ),
+          KSizedBox.kHeightSizedBox24,
+        ],
+      ),
     );
   }
 
   Widget _buildBoxWidgets(BuildContext context, bool isDesk) {
-    return Column(
-      children: [
-        BoxWidget(
-          text: context.l10n.saved,
-          isDesk: isDesk,
-          onTap: () {},
-        ),
-        KSizedBox.kHeightSizedBox30,
-        BoxWidget(
-          text: context.l10n.myStory,
-          isDesk: isDesk,
-          onTap: () {},
-        ),
-        KSizedBox.kHeightSizedBox30,
-      ],
+    return Padding(
+      padding: const EdgeInsets.all(KPadding.kPaddingSize8),
+      child: Column(
+        children: [
+          BoxWidget(
+            text: context.l10n.saved,
+            isDesk: isDesk,
+            onTap: () {},
+          ),
+          KSizedBox.kHeightSizedBox30,
+          BoxWidget(
+            text: context.l10n.myStory,
+            isDesk: isDesk,
+            onTap: () {},
+          ),
+          KSizedBox.kHeightSizedBox30,
+        ],
+      ),
     );
   }
 }
