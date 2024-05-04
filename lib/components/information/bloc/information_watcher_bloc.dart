@@ -19,7 +19,7 @@ class InformationWatcherBloc
     required IInformationRepository informationRepository,
   })  : _informationRepository = informationRepository,
         super(
-          const InformationWatcherState(
+          const _Initial(
             informationModelItems: [],
             loadingStatus: LoadingStatus.initial,
             filteredInformationModelItems: [],
@@ -60,6 +60,8 @@ class InformationWatcherBloc
     );
   }
 
+  // ignore: flutter_style_todos
+  /// TODO: Need to change filters value on state.filters
   void _onUpdated(
     _Updated event,
     Emitter<InformationWatcherState> emit,
@@ -68,13 +70,19 @@ class InformationWatcherBloc
       InformationWatcherState(
         informationModelItems: event.informationItemsModel,
         loadingStatus: LoadingStatus.loaded,
-        filteredInformationModelItems: _filter(
-          filters: state.filters,
-          itemsLoaded: state.itemsLoaded + 1,
-          informationModelItems: event.informationItemsModel,
-        ),
+        filteredInformationModelItems: event.informationItemsModel.isNotEmpty
+            ? _filter(
+                filters: state.filters,
+                itemsLoaded: state.itemsLoaded != 0 ? state.itemsLoaded : 1,
+                informationModelItems: event.informationItemsModel,
+              )
+            : [],
         filters: null,
-        itemsLoaded: event.informationItemsModel.isNotEmpty ? 1 : 0,
+        itemsLoaded: event.informationItemsModel.isNotEmpty
+            ? state.itemsLoaded != 0
+                ? state.itemsLoaded
+                : 1
+            : 0,
         failure: null,
       ),
     );

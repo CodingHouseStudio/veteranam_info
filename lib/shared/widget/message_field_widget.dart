@@ -36,9 +36,6 @@ class MessageFieldWidget extends StatelessWidget {
         minLines: KMinMaxSize.messageMinLines,
         maxLines: KMinMaxSize.messageMaxLines,
         maxLength: KMinMaxSize.messageMaxLength,
-        fillColor: AppColors.white,
-        enabledBorder: KBorder.outlineInputLightGray,
-        focusedBorder: KBorder.outlineInputLightGray,
         suffixIcon: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
@@ -47,7 +44,7 @@ class MessageFieldWidget extends StatelessWidget {
               child: IconWidget(
                 key: KWidgetkeys.widget.input.icon,
                 icon: KIcon.mic,
-                background: AppColors.widgetBackground,
+                // background: AppColors.widgetBackground,
                 padding: KPadding.kPaddingSize20,
               ),
             ),

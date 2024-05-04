@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:kozak/shared/shared.dart';
 
 class ThanksBodyWidget extends StatelessWidget {
@@ -9,70 +8,56 @@ class ThanksBodyWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScaffoldWidget(
       childWidgetsFunction: ({required isDesk}) => [
+        KSizedBox.kHeightSizedBox30,
         Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: KPadding.kPaddingSize16,
+          padding: const EdgeInsets.only(
+            left: KPadding.kPaddingSize4,
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              KSizedBox.kHeightSizedBox30,
-              Text(
-                context.l10n.thankYou,
-                style: isDesk ? AppTextStyle.text96 : AppTextStyle.text32,
-              ),
-              KSizedBox.kHeightSizedBox8,
-              Text(
-                context.l10n.thankYouDescription,
-                style: isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
-              ),
-              if (isDesk)
-                KSizedBox.kHeightSizedBox90
-              else
-                KSizedBox.kHeightSizedBox56,
-              if (isDesk)
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      flex: 2,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: KPadding.kPaddingSize56,
-                        ),
-                        child: BoxWidget(
-                          text: context.l10n.myProfile,
-                          isDesk: isDesk,
-                          onTap: () => context.goNamed(KRoute.profile.name),
-                        ),
-                      ),
-                    ),
-                    KSizedBox.kWidthSizedBox24,
-                    Expanded(
-                      flex: 2,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: KPadding.kPaddingSize56,
-                        ),
-                        child: BoxWidget(
-                          text: context.l10n.mainScreen,
-                          isDesk: isDesk,
-                          onTap: () => context.goNamed(KRoute.home.name),
-                        ),
-                      ),
-                    ),
-                  ],
-                )
-              else ...[
-                _buildBoxWidgets(context, isDesk),
-              ],
-              if (isDesk)
-                KSizedBox.kHeightSizedBox90
-              else
-                KSizedBox.kHeightSizedBox56,
-            ],
+          child: Text(
+            context.l10n.thankYou,
+            style: isDesk ? AppTextStyle.text96 : AppTextStyle.text32,
           ),
         ),
+        KSizedBox.kHeightSizedBox8,
+        Padding(
+          padding: const EdgeInsets.only(
+            left: KPadding.kPaddingSize4,
+          ),
+          child: Text(
+            context.l10n.thankYouDescription,
+            style: isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
+          ),
+        ),
+        if (isDesk)
+          KSizedBox.kHeightSizedBox90
+        else
+          KSizedBox.kHeightSizedBox56,
+        if (isDesk)
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              BoxWidget(
+                text: context.l10n.myProfile,
+                isDesk: true,
+                onTap: () => context.goNamedWithScroll(KRoute.profile.name),
+                textRightPadding: KPadding.kPaddingSize90,
+              ),
+              KSizedBox.kWidthSizedBox56,
+              BoxWidget(
+                text: context.l10n.mainScreen,
+                isDesk: true,
+                onTap: () => context.goNamedWithScroll(KRoute.home.name),
+                textRightPadding: KPadding.kPaddingSize128,
+              ),
+            ],
+          )
+        else ...[
+          _buildBoxWidgets(context, isDesk),
+        ],
+        if (isDesk)
+          KSizedBox.kHeightSizedBox90
+        else
+          KSizedBox.kHeightSizedBox56,
       ],
     );
   }
@@ -82,14 +67,16 @@ class ThanksBodyWidget extends StatelessWidget {
       children: [
         BoxWidget(
           text: context.l10n.myProfile,
-          isDesk: isDesk,
-          onTap: () => context.goNamed(KRoute.profile.name),
+          isDesk: false,
+          onTap: () => context.goNamedWithScroll(KRoute.profile.name),
+          textRightPadding: KPadding.kPaddingSize100,
         ),
         KSizedBox.kHeightSizedBox40,
         BoxWidget(
           text: context.l10n.mainScreen,
-          isDesk: isDesk,
-          onTap: () => context.goNamed(KRoute.home.name),
+          isDesk: false,
+          onTap: () => context.goNamedWithScroll(KRoute.home.name),
+          textRightPadding: KPadding.kPaddingSize100,
         ),
       ],
     );

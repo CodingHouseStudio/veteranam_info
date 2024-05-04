@@ -35,6 +35,9 @@ part 'screen/sign_up.dart';
 
 part 'screen/login.dart';
 part 'screen/questions_form.dart';
+part 'screen/work_employee.dart';
+
+part 'screen/employer.dart';
 
 part 'widget/widget.dart';
 
@@ -80,7 +83,7 @@ part 'widget/discount_card.dart';
 
 part 'widget/check_point.dart';
 
-part 'widget/shell_route.dart';
+part 'widget/scaffold.dart';
 
 part 'widget/pagination.dart';
 

@@ -55,11 +55,19 @@ abstract class KRoute {
     name: 'SignUp',
   );
   static const _RouteItem thanks = _RouteItem(
-    path: 'thanks',
+    path: '/thanks',
     name: 'Thanks',
   );
   static const _RouteItem questionsForm = _RouteItem(
     path: '/questionsForm',
     name: 'QuestionsForm',
+  );
+  static const _RouteItem workEmployee = _RouteItem(
+    path: 'workEmployee',
+    name: 'WorkEmployee',
+  );
+  static const _RouteItem employer = _RouteItem(
+    path: 'employer',
+    name: 'Employer',
   );
 }

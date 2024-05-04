@@ -18,38 +18,62 @@ void main() {
 
     await scrollingHelperInt(tester: tester, offset: KTestConstants.scrolling);
 
-    // await tester.pumpAndSettle(const Duration(seconds: 2));
-
     await footerHelper(
       tester: tester,
       email: KTestText.useremail,
     );
 
     for (var i = 0; i < KWidgetkeys.widget.footer.buttonsKey.length; i++) {
-      for (var j = 0;
-          j < KWidgetkeys.widget.footer.buttonsKey.elementAt(i).length;
-          j++) {
-        final buttonKey =
-            KWidgetkeys.widget.footer.buttonsKey.elementAt(i).elementAt(j);
-        final screenKey = KTestConstants.screens.elementAt(i).elementAt(j);
+      final buttonKey = KWidgetkeys.widget.footer.buttonsKey.elementAt(i);
+      final screenKey = KTestConstants.screens.elementAt(i);
 
+      if (i == 6) {
+        await tester.tap(find.byKey(KWidgetkeys.widget.nawbar.logo));
+
+        // ignore: inference_failure_on_instance_creation
+        await Future.delayed(const Duration(milliseconds: 500));
+
+        await tester.pumpAndSettle();
+      }
+
+      if (screenKey != KWidgetkeys.screen.contact.screen) {
         await scrollingHelperInt(
           tester: tester,
           offset: KTestConstants.scrolling,
           itemKey: buttonKey,
         );
-
-        expect(
-          find.byKey(buttonKey),
-          findsOneWidget,
+      } else {
+        await scrollingHelperInt(
+          tester: tester,
+          offset: KTestConstants.scrolling,
+          itemKey: KWidgetkeys.screen.investors.donateCards,
         );
 
-        await tester.tap(find.byKey(buttonKey));
-
+        await tester.ensureVisible(
+          find.byKey(KWidgetkeys.screen.investors.donateCards).last,
+        );
         await tester.pumpAndSettle();
 
-        expect(find.byKey(screenKey), findsOneWidget);
+        await scrollingHelperInt(
+          tester: tester,
+          itemKey: KWidgetkeys.widget.footer.widget,
+        );
+        await scrollingHelperInt(
+          tester: tester,
+          itemKey: buttonKey,
+        );
       }
+
+      expect(
+        find.byKey(buttonKey),
+        findsOneWidget,
+      );
+
+      await tester.tap(find.byKey(buttonKey));
+
+      await tester.pumpAndSettle();
+
+      expect(find.byKey(screenKey), findsOneWidget);
     }
   });
 }

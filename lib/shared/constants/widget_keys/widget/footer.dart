@@ -17,21 +17,15 @@ class _FooterKeys {
   final facebookIcon = const Key('footer_facebook_icon');
   final logo = const Key('footer_logo');
 
-  List<List<Key>> get buttonsKey => [
-        [
-          aboutUsButton,
-          investorsButton,
-          contactButton,
-        ],
-        [
-          storyButton,
-          discountsButton,
-          profileButton,
-        ],
-        [
-          workButton,
-          informationButton,
-          consultationOnlineButton,
-        ],
+  List<Key> get buttonsKey => [
+        aboutUsButton,
+        investorsButton,
+        contactButton,
+        storyButton,
+        discountsButton,
+        profileButton,
+        workButton,
+        informationButton,
+        consultationOnlineButton,
       ];
 }
