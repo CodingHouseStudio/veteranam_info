@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'user_setting_model.freezed.dart';
@@ -13,6 +12,9 @@ class UserSetting with _$UserSetting {
     UserRole? userRole,
     @Default(false) bool roleIsConfirmed,
   }) = _UserSetting;
+
+  // Add this private constructor
+  const UserSetting._();
 
   factory UserSetting.fromJson(Map<String, dynamic> json) =>
       _$UserSettingFromJson(json);
