@@ -113,7 +113,9 @@ class AuthenticationBloc
     Emitter<AuthenticationState> emit,
   ) async {
     late UserSetting userSetting;
-    if (state.userSetting != UserSetting.empty || state.user == User.empty) {
+    if (state.userSetting.isNotEmpty ||
+        state.user == null ||
+        state.user!.isEmpty) {
       userSetting = state.userSetting.copyWith(
         locale: event.language,
       );
