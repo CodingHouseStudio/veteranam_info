@@ -19,6 +19,12 @@ class UserSetting with _$UserSetting {
 
   /// Empty userSetting which represents an unauthenticated user.
   static const empty = UserSetting(id: '');
+
+  /// Convenience getter to determine whether the current user is empty.
+  bool get isEmpty => this == UserSetting.empty;
+
+  /// Convenience getter to determine whether the current user is not empty.
+  bool get isNotEmpty => this != UserSetting.empty;
 }
 
 enum UserRole {
