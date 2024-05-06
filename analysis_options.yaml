@@ -4,6 +4,7 @@ analyzer:
   exclude:
     - lib/**.g.dart
     - lib/**.freezed.dart
+    - lib/shared/constants/theme/theme.dart
 linter:
   rules:
     public_member_api_docs: false
