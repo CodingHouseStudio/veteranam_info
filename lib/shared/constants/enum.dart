@@ -5,7 +5,7 @@ extension ExtendedDateTime on DateTime {
   static String? _id;
 
   static DateTime get current {
-    return _customTime ?? DateTime.now().toLocal();
+    return _customTime ?? DateTime.now();
   }
 
   static String get id {
