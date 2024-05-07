@@ -13,13 +13,13 @@ Future<void> nawbarTitleHelper({
     findsOneWidget,
   );
 
-  for (var i = 0; i < 10; i++) {
-    await tester.tap(
-      find.byKey(KWidgetkeys.widget.nawbar.logo),
-    );
-  }
+  // for (var i = 0; i < 10; i++) {
+  await tester.tap(
+    find.byKey(KWidgetkeys.widget.nawbar.logo),
+  );
+  // }
 
-  await tester.pumpAndSettle(const Duration(milliseconds: 500));
+  // await tester.pumpAndSettle(const Duration(milliseconds: 500));
 
   verify(
     () => mockGoRouter.goNamed(

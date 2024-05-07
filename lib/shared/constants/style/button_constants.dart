@@ -30,7 +30,7 @@ abstract class KButtonStyles {
             const Size(KMinMaxSize.minWidth100, KMinMaxSize.minHeight50),
         padding: const EdgeInsets.all(KPadding.kPaddingSize8),
         side: BorderSide(
-          color: Theme.of(context).colorScheme.onPrimary,
+          color: Theme.of(context).colorScheme.primary,
         ),
         shape: RoundedRectangleBorder(
           borderRadius: KBorderRadius.kBorderRadius32,
