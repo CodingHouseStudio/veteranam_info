@@ -19,7 +19,7 @@ Future<void> nawbarTitleHelper({
   );
   // }
 
-  // await tester.pumpAndSettle(const Duration(milliseconds: 500));
+  await tester.pumpAndSettle();
 
   verify(
     () => mockGoRouter.goNamed(

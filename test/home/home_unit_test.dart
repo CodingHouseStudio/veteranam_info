@@ -81,14 +81,14 @@ void main() {
         final json = {
           'id': KTestText.questionModelItems.elementAt(0).id,
           'title': List.generate(
-            100,
+            KMinMaxSize.questionsTitleMaxLength,
             (_) => KTestText.questionModelItems
                 .elementAt(0)
                 .title
                 .split(KTestText.questionModelItems.elementAt(0).title),
           ).join(),
           'subtitle': List.generate(
-            100,
+            KMinMaxSize.questionsTitleMaxLength,
             (_) => KTestText.questionModelItems
                 .elementAt(0)
                 .subtitle

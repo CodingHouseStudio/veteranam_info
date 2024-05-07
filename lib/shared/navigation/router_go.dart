@@ -24,6 +24,9 @@ GoRouter router = GoRouter(
       onError: (_) => debugPrint('FirebaseAnalyticsObserver error $_'),
       nameExtractor: (_) => _.toString(),
     ),
+    KNavigatorObserver(
+      didPushFunction: () => GetIt.I<ScrollCubit>().initial(),
+    ),
   ],
   redirect: (BuildContext context, GoRouterState state) async {
     if (context.read<AuthenticationBloc>().state.status ==
