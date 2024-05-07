@@ -19,7 +19,7 @@ class DiscountsCardWidget extends StatelessWidget {
           horizontal: isDesk ? KPadding.kPaddingSize75 : 0,
         ),
         child: Container(
-          decoration: context.widgetTheme.boxDecorationWidget,
+          decoration: KWidgetTheme.boxDecorationWhite(context),
           child: Padding(
             padding: const EdgeInsets.all(KPadding.kPaddingSize16),
             child: Column(
@@ -53,15 +53,15 @@ class DiscountsCardWidget extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        discountItem.date.toLocalDateString(),
+                        discountItem.date.toLocal().toString().split(' ')[0],
                         key: KWidgetkeys.widget.discountCard.date,
-                        style: context.textStyle.hint24,
+                        style: AppTextStyle.hint24,
                       ),
                       const Spacer(),
                       Text(
                         discountItem.city,
                         key: KWidgetkeys.widget.discountCard.city,
-                        style: context.textStyle.hint24,
+                        style: AppTextStyle.hint24,
                       ),
                     ],
                   ),
@@ -70,14 +70,14 @@ class DiscountsCardWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        discountItem.date.toLocalDateString(),
+                        discountItem.date.toLocal().toString().split(' ')[0],
                         key: KWidgetkeys.widget.discountCard.date,
-                        style: context.textStyle.hint14,
+                        style: AppTextStyle.hint14,
                       ),
                       Text(
                         discountItem.city,
                         key: KWidgetkeys.widget.discountCard.city,
-                        style: context.textStyle.hint14,
+                        style: AppTextStyle.hint14,
                       ),
                     ],
                   ),
@@ -89,9 +89,7 @@ class DiscountsCardWidget extends StatelessWidget {
                 Text(
                   discountItem.preInstructionDiscount,
                   key: KWidgetkeys.widget.discountCard.preInstructionDiscount,
-                  style: isDesk
-                      ? context.textStyle.hint24
-                      : context.textStyle.hint14,
+                  style: isDesk ? AppTextStyle.hint24 : AppTextStyle.hint14,
                 ),
                 KSizedBox.kHeightSizedBox16,
                 CardTextDetailWidget(
@@ -109,7 +107,6 @@ class DiscountsCardWidget extends StatelessWidget {
                       ),
                     ],
                   ),
-                  isDesk: isDesk,
                 ),
                 KSizedBox.kHeightSizedBox16,
               ],

@@ -157,17 +157,31 @@ class DiscountWatcherBloc
     required int itemsLoaded,
     required List<DiscountModel> discountModelItems,
   }) {
-    final filteredItems = discountModelItems.where((element) {
-      if (filters != null && filters.isNotEmpty) {
-        return filters.any(element.tags.contains);
-      }
-      return true;
-    }).toList();
-
-    final itemsToLoad =
-        itemsLoaded > filteredItems.length ? filteredItems.length : itemsLoaded;
-
-    return filteredItems.sublist(0, itemsToLoad);
+    if (itemsLoaded > discountModelItems.length) {
+      itemsLoaded = discountModelItems.length;
+    }
+    if (filters != null && filters.isNotEmpty) {
+      final filterItems = discountModelItems
+          .where(
+            (element) =>
+                element.tags == null ||
+                filters.any(
+                  (filter) => element.tags!.contains(filter),
+                ),
+          )
+          .toList();
+      return filterItems.sublist(
+        0,
+        itemsLoaded > filterItems.length ? filterItems.length : itemsLoaded,
+      );
+    } else {
+      return discountModelItems.sublist(
+        0,
+        itemsLoaded > discountModelItems.length
+            ? discountModelItems.length
+            : itemsLoaded,
+      );
+    }
   }
 
   void _onFailure(
