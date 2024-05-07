@@ -82,9 +82,9 @@ class _WorkCardWidgetState extends State<WorkCardWidget> {
             KSizedBox.kHeightSizedBox16,
             ButtonWidget(
               key: KWidgetkeys.widget.workCard.button,
-              onPressed: () {},
               text: context.l10n.respond,
               isDesk: widget.isDesk,
+              onPressed: null,
             ),
           ],
         ),
