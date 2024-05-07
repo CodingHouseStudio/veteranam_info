@@ -1,6 +1,10 @@
-// class MockHomeWatcherBloc extends MockBloc<HomeWatcherEvent,
-// HomeWatcherState>
-//     implements HomeWatcherBloc {}
+import 'package:flutter/material.dart';
+import 'package:kozak/shared/bloc/bloc.dart';
+import 'package:mockito/annotations.dart';
 
-// class MockFeedbackBloc extends MockBloc<FeedbackEvent, FeedbackState>
-//     implements FeedbackBloc {}
+@GenerateNiceMocks(
+  [
+    MockSpec<FilterCubit>(),
+  ],
+)
+void loadBlocs() => debugPrint('loaded');
