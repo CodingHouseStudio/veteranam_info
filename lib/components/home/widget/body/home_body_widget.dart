@@ -45,6 +45,7 @@ class _HomeBodyWidgetState extends State<HomeBodyWidget> {
       builder: (context, state) =>
           BlocBuilder<HomeWatcherBloc, HomeWatcherState>(
         builder: (context, _) => ScaffoldWidget(
+          hasMicrophone: false,
           childWidgetsFunction: ({required isDesk}) {
             final childWidgets = <Widget>[
               if (isDesk)
