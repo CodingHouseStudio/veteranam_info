@@ -8,10 +8,9 @@ import 'package:kozak/components/thanks/thanks.dart';
 import 'package:kozak/shared/shared.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
-FirebaseAnalytics analytics = FirebaseAnalytics.instance;
 
 /// COMMENT: Variable for navigation in App
-final GoRouter router = GoRouter(
+GoRouter router = GoRouter(
   routerNeglect: true,
   navigatorKey: _rootNavigatorKey,
   debugLogDiagnostics: true,
@@ -21,8 +20,9 @@ final GoRouter router = GoRouter(
   initialLocation: KRoute.home.path,
   observers: [
     FirebaseAnalyticsObserver(
-      analytics: analytics,
+      analytics: FirebaseAnalytics.instance,
       onError: (_) => debugPrint('FirebaseAnalyticsObserver error $_'),
+      nameExtractor: (_) => _.toString(),
     ),
   ],
   redirect: (BuildContext context, GoRouterState state) async {

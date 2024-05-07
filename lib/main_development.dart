@@ -5,8 +5,8 @@ import 'package:kozak/firebase_options_development.dart';
 
 /// COMMENT: Our main file
 void main() async {
-  await Firebase.initializeApp(
+  final app = await Firebase.initializeApp(
     options: DefaultFirebaseOptions.web,
   );
-  await bootstrap(() => const App());
+  await bootstrap(App.new);
 }
