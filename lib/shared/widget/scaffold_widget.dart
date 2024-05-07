@@ -76,6 +76,7 @@ class ScaffoldWidget extends StatelessWidget {
                                   isDesk: true,
                                 ),
                                 gridDelegate:
+                                    // ignore: lines_longer_than_80_chars
                                     const SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 3,
                                   mainAxisExtent: KMinMaxSize.maxHeight50,

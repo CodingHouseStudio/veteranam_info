@@ -17,6 +17,7 @@ void configureDependenciesTest() {
   );
   // Repositories
   GetIt.I.registerLazySingleton<IStorage>(SecureStorageRepository.new);
+  GetIt.I.registerFactory<ScrollCubit>(ScrollCubit.new);
   GetIt.I.registerSingleton<IFeedbackRepository>(FeedbackRepository());
   GetIt.I.registerSingleton<IHomeRepository>(HomeRepository());
   GetIt.I.registerSingleton<IAppAuthenticationRepository>(

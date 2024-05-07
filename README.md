@@ -66,7 +66,8 @@ git push --set-upstream origin branch_name
 3. git rebase dev
 4. git add .
 5. git rebase --continue
-6. git push
+6. fvm flutter clean && fvm flutter pub get && fvm flutter pub run build_runner build --delete-conflicting-outputs
+7. git push
 
 # Merge
 
@@ -74,7 +75,8 @@ git push --set-upstream origin branch_name
 2. git pull origin dev
 3. git merge dev
 4. resolve conflicts if any in your IDE
-5. git push
+5. fvm flutter clean && fvm flutter pub get && fvm flutter pub run build_runner build --delete-conflicting-outputs
+6. git push
 
 ## Getting Started 🚀
 

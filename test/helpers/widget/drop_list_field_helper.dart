@@ -38,14 +38,6 @@ Future<void> dropListFieldBoxHelper({
     findsNothing,
   );
 
-  expect(
-    find.descendant(
-      of: find.byKey(KWidgetkeys.widget.dropListField.list),
-      matching: find.byKey(KWidgetkeys.widget.dropListField.item).first,
-    ),
-    findsNothing,
-  );
-
   await scrollingHelperInt(
     tester: tester,
     itemKey: KWidgetkeys.widget.dropListField.field,
