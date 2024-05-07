@@ -14,6 +14,9 @@ class UserSetting with _$UserSetting {
     @Default(false) bool roleIsConfirmed,
   }) = _UserSetting;
 
+  // Add this private constructor
+  const UserSetting._();
+
   factory UserSetting.fromJson(Map<String, dynamic> json) =>
       _$UserSettingFromJson(json);
 
