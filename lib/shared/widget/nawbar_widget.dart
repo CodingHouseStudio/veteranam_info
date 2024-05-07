@@ -91,12 +91,12 @@ class _NawbarWidgetImplematationState
                 child: InkWell(
                   onTap: () => EasyDebounce.debounce(
                     context.l10n.logo,
-                    const Duration(milliseconds: 500),
+                    Duration.zero,
                     () => context.goNamedWithScroll(KRoute.home.name),
                   ),
                   child: Text(
                     context.l10n.logo,
-                    key: KWidgetkeys.widget.nawbar.title,
+                    key: KWidgetkeys.widget.nawbar.logo,
                     style: widget.isDesk
                         ? AppTextStyle.text32
                         : AppTextStyle.text24,

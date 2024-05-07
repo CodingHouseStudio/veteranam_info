@@ -13,8 +13,11 @@ dependencies:
   dartz: ^0.10.1
   easy_debounce: ^2.0.3
   equatable: ^2.0.5
+  firebase_analytics: ^10.10.4
   firebase_auth: ^4.19.1
+
   firebase_core: ^2.29.0
+
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.4
@@ -28,7 +31,7 @@ dependencies:
   freezed: ^2.5.1
   freezed_annotation: ^2.4.1
   get_it: ^7.6.0 # Used for dependency injection
-  go_router: ^13.2.0 # Decoupled routing package which is a must for any app
+  go_router: ^14.0.2 # Decoupled routing package which is a must for any app
   google_sign_in: ^6.2.1
   injectable: ^2.3.4 # Used for dependency injection
   intl: ^0.18.1

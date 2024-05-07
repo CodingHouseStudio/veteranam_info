@@ -31,7 +31,7 @@ class DiscountsCardWidget extends StatelessWidget {
           horizontal: isDesk ? KPadding.kPaddingSize75 : 0,
         ),
         child: Container(
-          decoration: KWidgetTheme.boxDecorationWidget(context),
+          decoration: KWidgetTheme.boxDecorationWhite(context),
           child: Padding(
             padding: const EdgeInsets.all(KPadding.kPaddingSize16),
             child: Column(

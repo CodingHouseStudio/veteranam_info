@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
+import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:kozak/bootstrap.dart';
@@ -30,8 +31,11 @@ abstract class KGroupText {
   static const model = 'Model';
   static const fiedlModel = 'Field model';
   static const successfulGet = 'Successful get';
+  static const successful = 'Successful';
   static const successfulSet = 'Successful set';
   static const failureGet = 'Failure get';
+  static const failure = 'Failure';
+  static const firebaseFailure = 'Firebase Failure';
   static const failureSet = 'Failure set';
   static const intial = 'renders initial';
   static const goRouter = 'Mock Go Router';
@@ -45,6 +49,7 @@ abstract class KGroupText {
 
 abstract class KTestText {
   static const filter = 'filter_test';
+  static const key = 'key_test';
 
   static const usernameCorrect = 'test_username';
   static const passwordCorrect = 'test_Password1';
@@ -55,10 +60,11 @@ abstract class KTestText {
   static const passwordIncorrect = 'test_password';
   static const passwordIncorrectNumber = 'test_Password';
   static const shortPassword = 'Pas1';
+  static const token = 'test_token';
 
-  static const useremail = 'example@gmail.com';
+  static const userEmail = 'example@gmail.com';
   static const useremailWrong = 'examplewrong@gmail.com';
-  static const useremailIncorrect = 'examplegmail.com';
+  static const userEmailIncorrect = 'examplegmail.com';
   static const shortUserEmail = '@.com';
 
   static const footer = 'Контакти\n';
@@ -88,19 +94,41 @@ abstract class KTestText {
       ),
   ];
 
+  static const authCredential = firebase_auth.AuthCredential(
+    providerId: '1',
+    signInMethod: 'test_method',
+    accessToken: 'test_access_token',
+    token: 1,
+  );
+
+  static const oAuthCredential = firebase_auth.OAuthCredential(
+    providerId: '1',
+    signInMethod: 'test_method',
+    accessToken: 'test_access_token',
+    idToken: '1',
+    rawNonce: 'row_test',
+    secret: 'secret_test',
+    serverAuthCode: 'server_code_test',
+  );
+
   static const user = User(
     id: '1',
-    email: useremail,
+    email: userEmail,
     name: usernameCorrect,
     phoneNumber: 'test_phone_number',
     photo: 'test_phot',
+  );
+
+  static const userSetting = UserSetting(
+    id: '1',
+    userRole: UserRole.civilian,
   );
 
   static final feedbackModel = FeedbackModel(
     id: dateTime.microsecondsSinceEpoch.toString(),
     guestId: dateTime.microsecondsSinceEpoch.toString(),
     guestName: KTestText.field,
-    email: KTestText.useremail,
+    email: KTestText.userEmail,
     timestamp: dateTime,
     message: KTestText.field,
   );
@@ -120,34 +148,21 @@ abstract class KTestText {
     id: dateTime.microsecondsSinceEpoch.toString(),
     guestId: dateTime.microsecondsSinceEpoch.toString(),
     guestName: KTestText.field,
-    email: KTestText.useremailIncorrect,
+    email: KTestText.userEmailIncorrect,
     timestamp: dateTime,
     message: KTestText.field,
   );
 
   static final informationModelItems = <InformationModel>[
-    InformationModel(
-      id: '1',
-      title: 'Як мені знайти роботу за допомогою цього сайту?',
-      news: 'Використовуйте веб-сайти спеціалізованих сервісів для'
-          ' пошуку роботи,'
-          ' таких як Indeed, LinkedIn, Glassdoor, Monster, або регіональні '
-          'ресурси. Виберіть свою область інтересів та регіон, і шукайте '
-          'вакансії, які відповідають вашим критеріям.',
-      date: DateTime.now(),
-      tags: ['test_tags_1'],
-    ),
-    InformationModel(
-      id: '2',
-      title: 'Як мені знайти роботу за допомогою цього сайту?',
-      news:
-          'Використовуйте веб-сайти спеціалізованих сервісів для пошуку роботи,'
-          ' таких як Indeed, LinkedIn, Glassdoor, Monster, або регіональні '
-          'ресурси. Виберіть свою область інтересів та регіон, і шукайте '
-          'вакансії, які відповідають вашим критеріям.',
-      date: DateTime.now(),
-      tags: ['test_tags_2'],
-    ),
+    for (var i = 0; i < KMockText.tags.length; i++)
+      InformationModel(
+        id: i.toString(),
+        title: KMockText.title,
+        news: KMockText.cardData,
+        date: dateTime,
+        image: i > KMockText.tags.length - 2 ? KMockText.image : null,
+        tags: KMockText.tags.elementAt(i),
+      ),
   ];
 }
 
@@ -184,6 +199,7 @@ abstract class KScreenBlocName {
   static const signUp = 'Sign Up Screen';
   static const questionsForm = 'Questions Form Screen';
   static const workEmployee = 'Work Employee Screen';
+  static const employer = 'Employer Screen';
 
   static const feedback = 'Feedback Widget';
 
@@ -204,4 +220,5 @@ abstract class KScreenBlocName {
   static const authentication = ' Authentication';
 
   static const firestoreService = 'Firestore Service';
+  static const secureStorage = 'Secure Storage';
 }
