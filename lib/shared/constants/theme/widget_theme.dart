@@ -5,7 +5,7 @@ import 'package:kozak/shared/shared.dart';
 abstract class KWidgetTheme {
   static OutlineInputBorder outlineInputBorder(BuildContext context) =>
       OutlineInputBorder(
-        borderSide: BorderSide(color: Theme.of(context).colorScheme.onPrimary),
+        borderSide: BorderSide(color: Theme.of(context).colorScheme.secondary),
         borderRadius: KBorderRadius.kBorderRadius32,
       );
   static OutlineInputBorder outlineInputBorderError(BuildContext context) =>
@@ -17,7 +17,7 @@ abstract class KWidgetTheme {
   static BoxDecoration boxDecorationWidget(BuildContext context) =>
       BoxDecoration(
         borderRadius: KBorderRadius.kBorderRadius32,
-        border: Border.all(color: Theme.of(context).colorScheme.onPrimary),
+        border: Border.all(color: Theme.of(context).colorScheme.secondary),
       );
   static BoxDecoration boxDecorationCircular(BuildContext context) =>
       BoxDecoration(
@@ -33,7 +33,7 @@ abstract class KWidgetTheme {
 
   static BoxDecoration boxDecorationCard(BuildContext context) => BoxDecoration(
         borderRadius: KBorderRadius.kBorderRadius32,
-        color: Theme.of(context).colorScheme.onPrimary,
+        color: Theme.of(context).colorScheme.secondary,
       );
   static BoxDecoration boxDecorationImageDesk(BuildContext context) =>
       BoxDecoration(
