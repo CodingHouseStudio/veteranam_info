@@ -30,7 +30,7 @@ class ChipWidget extends StatelessWidget {
       selected: isSelected,
       onSelected: (value) => onSelected(isSelected: value),
       // checkmarkColor: AppColors.black,
-      selectedColor: Theme.of(context).colorScheme.onPrimary,
+      selectedColor: Theme.of(context).colorScheme.secondary,
     );
   }
 }
