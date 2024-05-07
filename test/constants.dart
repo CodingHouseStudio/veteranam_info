@@ -106,13 +106,14 @@ abstract class KTestText {
   static final dateTime = DateTime(2024, 4, 12);
   static final dateTimeId = DateTime(0, 0, 0, 0, 1, 1, 1, 1);
 
-  static const fundItems = <FundModel>[
-    FundModel(
-      id: '1',
-      title: 'Test_title',
-      subtitle: 'Test_subtitle',
-      link: 'Test_limk',
-    ),
+  static final fundItems = <FundModel>[
+    for (var i = 0; i < 5; i++)
+      FundModel(
+        id: i.toString(),
+        title: KMockText.donateCardTitle,
+        subtitle: KMockText.donateCardSubtitle,
+        link: '',
+      ),
   ];
 
   static final feedbackModelIncorect = FeedbackModel(

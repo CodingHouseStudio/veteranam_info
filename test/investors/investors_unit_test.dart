@@ -1,6 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:get_it/get_it.dart';
 import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
 import 'package:mockito/mockito.dart';
@@ -88,32 +89,58 @@ void main() {
       });
     });
     group('${KGroupText.repository} ', () {
-      late IInvestorsRepository mockInvestorsRepository;
+      late IInvestorsRepository investorsRepository;
+      late FirestoreService mockFirestoreService;
+
       group('${KGroupText.successfulGet} ', () {
         setUp(() {
-          mockInvestorsRepository = MockIInvestorsRepository();
-          when(mockInvestorsRepository.getFunds()).thenAnswer(
-            (_) async => const Right(KTestText.fundItems),
+          ExtendedDateTime.id = '';
+          mockFirestoreService = MockFirestoreService();
+
+          when(mockFirestoreService.getFunds()).thenAnswer(
+            (_) async => KTestText.fundItems,
           );
+          when(
+            mockFirestoreService.addFund(KTestText.fundItems.first),
+          ).thenAnswer(
+            (realInvocation) async {},
+          );
+          if (GetIt.I.isRegistered<FirestoreService>()) {
+            GetIt.I.unregister<FirestoreService>();
+          }
+          GetIt.I.registerSingleton(mockFirestoreService);
+          investorsRepository = InvestorsRepository();
         });
         test('questions', () async {
           expect(
-            await mockInvestorsRepository.getFunds(),
+            await investorsRepository.getFunds(),
             isA<Right<SomeFailure, List<FundModel>>>()
                 .having((e) => e.value, 'value', KTestText.fundItems),
           );
         });
+        test('mock', () async {
+          investorsRepository.addMockFunds();
+          verify(
+            mockFirestoreService.addFund(KTestText.fundItems.first),
+          ).called(1);
+        });
       });
+
       group('${KGroupText.failureGet} ', () {
         setUp(() {
-          mockInvestorsRepository = MockIInvestorsRepository();
-          when(mockInvestorsRepository.getFunds()).thenAnswer(
-            (_) async => const Left(SomeFailure.serverError()),
+          investorsRepository = InvestorsRepository();
+          when(investorsRepository.getFunds()).thenThrow(
+            KGroupText.failureGet,
           );
+          if (GetIt.I.isRegistered<FirestoreService>()) {
+            GetIt.I.unregister<FirestoreService>();
+          }
+          GetIt.I.registerSingleton(mockFirestoreService);
+          investorsRepository = InvestorsRepository();
         });
         test('questions', () async {
           expect(
-            await mockInvestorsRepository.getFunds(),
+            await investorsRepository.getFunds(),
             isA<Left<SomeFailure, List<FundModel>>>().having(
               (e) => e.value,
               'value',
@@ -140,7 +167,7 @@ void main() {
         build: () => investorsWatcherBloc,
         act: (bloc) async {
           when(mockInvestorsRepository.getFunds()).thenAnswer(
-            (_) async => const Right(KTestText.fundItems),
+            (_) async => Right(KTestText.fundItems),
           );
           bloc.add(const InvestorsWatcherEvent.started());
         },
