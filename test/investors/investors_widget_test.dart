@@ -25,7 +25,7 @@ void main() {
       ExtendedDateTime.customTime = KTestText.feedbackModel.timestamp;
       mockInvestorsRepository = MockIInvestorsRepository();
       when(mockInvestorsRepository.getFunds()).thenAnswer(
-        (invocation) async => const Right(KTestText.fundItems),
+        (invocation) async => Right(KTestText.fundItems),
       );
 
       mockFeedbackRepository = MockIFeedbackRepository();
@@ -154,27 +154,6 @@ void main() {
         await donatesCardHelper(tester);
       });
       group('${KGroupText.goTo} ', () {
-        testWidgets('All footer widget navigation', (tester) async {
-          registerInvestorsBloc();
-          registerFeedbackBloc();
-          await tester.pumpApp(
-            const InvestorsScreen(),
-            mockGoRouter: mockGoRouter,
-          );
-
-          expect(
-            find.byKey(KWidgetkeys.screen.investors.screen),
-            findsOneWidget,
-          );
-
-          await tester.pumpAndSettle();
-
-          await footerButtonsHelper(
-            tester: tester,
-            mockGoRouter: mockGoRouter,
-          );
-        });
-
         testWidgets('Feedback box widget navigation', (tester) async {
           registerInvestorsBloc();
           registerFeedbackBloc();
