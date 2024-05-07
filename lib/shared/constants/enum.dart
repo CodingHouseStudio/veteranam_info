@@ -5,11 +5,11 @@ extension ExtendedDateTime on DateTime {
   static String? _id;
 
   static DateTime get current {
-    return _customTime ?? DateTime.now();
+    return _customTime ?? DateTime.now().toLocal();
   }
 
   static String get id {
-    return _id ?? DateTime.now().microsecondsSinceEpoch.toString();
+    return _id ?? DateTime.now().toLocal().microsecondsSinceEpoch.toString();
   }
 
   @visibleForTesting
