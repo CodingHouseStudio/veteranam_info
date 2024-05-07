@@ -5,8 +5,8 @@ import 'package:kozak/shared/shared.dart';
 class TextFieldWidget extends StatefulWidget {
   const TextFieldWidget({
     required this.widgetKey,
-    required this.onChanged,
     required this.hintText,
+    required this.onChanged,
     this.textAlign,
     super.key,
     this.width,
@@ -41,7 +41,7 @@ class TextFieldWidget extends StatefulWidget {
   final double? width;
   final double? height;
   final TextAlign? textAlign;
-  final ValueChanged<String> onChanged;
+  final ValueChanged<String>? onChanged;
   final String hintText;
   final String? errorText;
   final TextInputType? keyboardType;
