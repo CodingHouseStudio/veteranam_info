@@ -20,8 +20,7 @@ class DiscountBodyWidget extends StatelessWidget {
             return const CircularProgressIndicator.adaptive();
           case LoadingStatus.loaded:
             return ScaffoldWidget(
-              mainChildWidgetsFunction: ({required isDesk}) =>
-              [
+              mainChildWidgetsFunction: ({required isDesk}) => [
                 if (isDesk)
                   KSizedBox.kHeightSizedBox40
                 else
@@ -50,26 +49,24 @@ class DiscountBodyWidget extends StatelessWidget {
                   KSizedBox.kHeightSizedBox24,
                 if (state.discountModelItems.isNotEmpty)
                   ...List.generate(state.filteredDiscountModelItems.length,
-                          (index) {
-                        return Padding(
-                          padding: EdgeInsets.only(
-                            top: index != 0 ? KPadding.kPaddingSize40 : 0,
-                          ),
-                          child: DiscountsCardWidget(
-                            key: KWidgetkeys.screen.discounts.card,
-                            discountItem:
+                      (index) {
+                    return Padding(
+                      padding: EdgeInsets.only(
+                        top: index != 0 ? KPadding.kPaddingSize40 : 0,
+                      ),
+                      child: DiscountsCardWidget(
+                        key: KWidgetkeys.screen.discounts.card,
+                        discountItem:
                             state.filteredDiscountModelItems.elementAt(index),
-                            isDesk: isDesk,
-                          ),
-                        );
-                      })
+                        isDesk: isDesk,
+                      ),
+                    );
+                  })
                 else
                   TextButton(
                     key: KWidgetkeys.screen.discounts.buttonMock,
                     onPressed: () {
-                      GetIt.I
-                          .get<IDiscountRepository>()
-                          .addMockDiscountItems();
+                      GetIt.I.get<IDiscountRepository>().addMockDiscountItems();
                       context
                           .read<DiscountWatcherBloc>()
                           .add(const DiscountWatcherEvent.started());
@@ -87,14 +84,13 @@ class DiscountBodyWidget extends StatelessWidget {
                   child: ButtonWidget(
                     key: KWidgetkeys.screen.discounts.button,
                     text: context.l10n.moreDiscounts,
-                    onPressed: () =>
-                        context
-                            .read<DiscountWatcherBloc>()
-                            .add(const DiscountWatcherEvent.loadNextItems()),
+                    onPressed: () => context
+                        .read<DiscountWatcherBloc>()
+                        .add(const DiscountWatcherEvent.loadNextItems()),
                     icon: isDesk
                         ? KIcon.refresh.setIconKey(
-                      KWidgetkeys.screen.discounts.buttonIcon,
-                    )
+                            KWidgetkeys.screen.discounts.buttonIcon,
+                          )
                         : null,
                     isDesk: isDesk,
                   ),
@@ -109,3 +105,4 @@ class DiscountBodyWidget extends StatelessWidget {
       },
     );
   }
+}
