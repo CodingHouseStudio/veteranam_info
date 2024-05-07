@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:kozak/shared/shared.dart';
 
+import '../../text_dependency.dart';
+
 Future<void> switchHelper(
   WidgetTester tester,
 ) async {
@@ -15,6 +17,11 @@ Future<void> switchHelper(
 
   expect(switchWidget.value, isFalse);
 
+  await scrollingHelper(
+    tester: tester,
+    itemKey: KWidgetkeys.widget.switchKeys.widget,
+  );
+
   await tester.tap(find.byKey(KWidgetkeys.widget.switchKeys.widget));
 
   await tester.pumpAndSettle();
@@ -23,6 +30,11 @@ Future<void> switchHelper(
       tester.widget<Switch>(find.byKey(KWidgetkeys.widget.switchKeys.widget));
 
   expect(switchWidget.value, isTrue);
+
+  await scrollingHelper(
+    tester: tester,
+    itemKey: KWidgetkeys.widget.switchKeys.widget,
+  );
 
   await tester.tap(find.byKey(KWidgetkeys.widget.switchKeys.widget));
 

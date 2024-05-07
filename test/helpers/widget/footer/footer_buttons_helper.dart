@@ -27,7 +27,7 @@ Future<void> footerButtonsHelper({
 
     verify(
       () => mockGoRouter.goNamed(
-        KAppText.routes.elementAt(i),
+        KAppText.routes(hasAccount: false).elementAt(i),
       ),
     ).called(1);
   }

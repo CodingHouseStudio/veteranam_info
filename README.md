@@ -43,6 +43,20 @@ fvm dart format --line-length 80 --set-exit-if-changed lib test integration_test
 fvm flutter analyze lib test integration_test
 fvm flutter test --coverage
 
+# CREATE NEW BRANCH
+
+git checkout dev
+git pull
+fvm flutter clean && fvm flutter pub get && fvm flutter pub run build_runner build --delete-conflicting-outputs
+git checkout -b "branch_name"
+
+# PUSH
+
+git add .
+git commit -m "commit name"
+git push
+git push --set-upstream origin branch_name
+
 # How to merge or rebase from DEV
 
 # Rebase

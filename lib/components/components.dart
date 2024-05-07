@@ -2,6 +2,7 @@ export 'about_us/about_us.dart';
 export 'consultation/consultation.dart';
 export 'contact/contact.dart';
 export 'discounts/discounts.dart';
+export 'employer/employer.dart';
 export 'error/error.dart';
 export 'home/home.dart';
 export 'information/information.dart';
