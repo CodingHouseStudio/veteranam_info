@@ -1,9 +1,11 @@
 export 'app_authentication_repository.dart';
 export 'authentication_repository.dart';
+export 'discount_repository.dart';
 export 'feedback_repository.dart';
 export 'firebase_module.dart';
 export 'home_repository.dart';
 export 'i_app_authentication_repository.dart';
+export 'i_discount_repository.dart';
 export 'i_feedback_repository.dart';
 export 'i_home_repository.dart';
 export 'i_information_repository.dart';

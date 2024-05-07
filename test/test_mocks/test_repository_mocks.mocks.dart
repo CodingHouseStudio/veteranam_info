@@ -21,7 +21,7 @@ import 'package:google_sign_in/google_sign_in.dart' as _i9;
 import 'package:image_picker/image_picker.dart' as _i11;
 import 'package:kozak/shared/shared.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i13;
+import 'package:mockito/src/dummies.dart' as _i10;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -715,6 +715,27 @@ class MockFirestoreService extends _i1.Mock implements _i3.FirestoreService {
         Invocation.method(
           #deleteUserSetting,
           [userId],
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Stream<List<_i3.DiscountModel>> getDiscounts() => (super.noSuchMethod(
+        Invocation.method(
+          #getDiscounts,
+          [],
+        ),
+        returnValue: _i8.Stream<List<_i3.DiscountModel>>.empty(),
+        returnValueForMissingStub: _i8.Stream<List<_i3.DiscountModel>>.empty(),
+      ) as _i8.Stream<List<_i3.DiscountModel>>);
+
+  @override
+  _i8.Future<void> addDiscount(_i3.DiscountModel? discount) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #addDiscount,
+          [discount],
         ),
         returnValue: _i8.Future<void>.value(),
         returnValueForMissingStub: _i8.Future<void>.value(),
@@ -5117,6 +5138,31 @@ class MockSnapshotMetadata extends _i1.Mock implements _i7.SnapshotMetadata {
         returnValue: false,
         returnValueForMissingStub: false,
       ) as bool);
+}
+
+/// A class which mocks [IDiscountRepository].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockIDiscountRepository extends _i1.Mock
+    implements _i3.IDiscountRepository {
+  @override
+  _i8.Stream<List<_i3.DiscountModel>> getDiscountItems() => (super.noSuchMethod(
+        Invocation.method(
+          #getDiscountItems,
+          [],
+        ),
+        returnValue: _i8.Stream<List<_i3.DiscountModel>>.empty(),
+        returnValueForMissingStub: _i8.Stream<List<_i3.DiscountModel>>.empty(),
+      ) as _i8.Stream<List<_i3.DiscountModel>>);
+
+  @override
+  void addMockDiscountItems() => super.noSuchMethod(
+        Invocation.method(
+          #addMockDiscountItems,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
 }
 
 /// A class which mocks [IStoryRepository].

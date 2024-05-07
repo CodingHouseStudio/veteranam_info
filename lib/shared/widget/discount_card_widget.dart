@@ -3,24 +3,12 @@ import 'package:kozak/shared/shared.dart';
 
 class DiscountsCardWidget extends StatelessWidget {
   const DiscountsCardWidget({
-    required this.discount,
-    required this.city,
-    required this.service,
-    required this.description,
-    required this.date,
+    required this.discountItem,
     required this.isDesk,
-    required this.instruction,
-    required this.preInstructionDiscount,
     super.key,
   });
 
-  final String discount;
-  final String city;
-  final String service;
-  final String description;
-  final String date;
-  final String instruction;
-  final String preInstructionDiscount;
+  final DiscountModel discountItem;
   final bool isDesk;
 
   @override
@@ -42,7 +30,7 @@ class DiscountsCardWidget extends StatelessWidget {
                   children: [
                     Expanded(
                       child: Text(
-                        discount,
+                        discountItem.discount,
                         key: KWidgetkeys.widget.discountCard.discount,
                         style:
                             isDesk ? AppTextStyle.text40 : AppTextStyle.text18,
@@ -52,7 +40,7 @@ class DiscountsCardWidget extends StatelessWidget {
                     const Spacer(),
                     Expanded(
                       child: Text(
-                        service,
+                        discountItem.service,
                         key: KWidgetkeys.widget.discountCard.service,
                         style:
                             isDesk ? AppTextStyle.text40 : AppTextStyle.text18,
@@ -65,13 +53,13 @@ class DiscountsCardWidget extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        date,
+                        discountItem.date.toLocal().toString().split(' ')[0],
                         key: KWidgetkeys.widget.discountCard.date,
                         style: context.textStyle.hint24,
                       ),
                       const Spacer(),
                       Text(
-                        city,
+                        discountItem.city,
                         key: KWidgetkeys.widget.discountCard.city,
                         style: context.textStyle.hint24,
                       ),
@@ -82,24 +70,24 @@ class DiscountsCardWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        date,
+                        discountItem.date.toLocal().toString().split(' ')[0],
                         key: KWidgetkeys.widget.discountCard.date,
                         style: context.textStyle.hint14,
                       ),
                       Text(
-                        city,
+                        discountItem.city,
                         key: KWidgetkeys.widget.discountCard.city,
                         style: context.textStyle.hint14,
                       ),
                     ],
                   ),
                 Text(
-                  description,
+                  discountItem.discountDescription,
                   key: KWidgetkeys.widget.discountCard.description,
                   style: isDesk ? AppTextStyle.text24 : AppTextStyle.text14,
                 ),
                 Text(
-                  preInstructionDiscount,
+                  discountItem.preInstructionDiscount,
                   key: KWidgetkeys.widget.discountCard.preInstructionDiscount,
                   style: isDesk
                       ? context.textStyle.hint24
@@ -107,7 +95,7 @@ class DiscountsCardWidget extends StatelessWidget {
                 ),
                 KSizedBox.kHeightSizedBox16,
                 CardTextDetailWidget(
-                  text: instruction,
+                  text: discountItem.instruction,
                   maxLines: 1,
                   icon: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,

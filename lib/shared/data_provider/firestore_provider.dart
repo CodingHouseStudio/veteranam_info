@@ -69,6 +69,28 @@ class FirestoreService {
         .update(userSetting.toJson());
   }
 
+  Future<void> setUserSetting({
+    required UserSetting userSetting,
+    required String userId,
+  }) {
+    return _db
+        .collection(FirebaseCollectionName.userSettings)
+        .doc(userId)
+        .set(userSetting.toJson());
+  }
+
+  Future<UserSetting> getUserSetting(String userId) async {
+    final docSnapshot = await _db
+        .collection(FirebaseCollectionName.userSettings)
+        .doc(userId)
+        .get();
+    if (docSnapshot.exists) {
+      return UserSetting.fromJson(docSnapshot.data()!);
+    } else {
+      return UserSetting.empty;
+    }
+  }
+
   Stream<List<InformationModel>> getInformations() => _db
           .collection(FirebaseCollectionName.information)
           .snapshots(includeMetadataChanges: true) // Enable caching
@@ -92,6 +114,31 @@ class FirestoreService {
         .collection(FirebaseCollectionName.information)
         .doc(information.id)
         .set(information.toJson());
+  }
+
+  Stream<List<DiscountModel>> getDiscounts() => _db
+          .collection(FirebaseCollectionName.discount)
+          .snapshots(includeMetadataChanges: true) // Enable caching
+          .map(
+        (snapshot) {
+          for (final change in snapshot.docChanges) {
+            if (change.type == DocumentChangeType.added) {
+              final source =
+                  (snapshot.metadata.isFromCache) ? 'local cache' : 'server';
+              debugPrint('Data fetched from $source}');
+            }
+          }
+          return snapshot.docs
+              .map((doc) => DiscountModel.fromJson(doc.data()))
+              .toList();
+        },
+      );
+
+  Future<void> addDiscount(DiscountModel discount) {
+    return _db
+        .collection(FirebaseCollectionName.discount)
+        .doc(discount.id)
+        .set(discount.toJson());
   }
 
   Future<void> setUserSetting({
