@@ -44,7 +44,7 @@ class DiscountBodyWidget extends StatelessWidget {
                   isDesk: isDesk,
                 ),
                 if (isDesk)
-                  KSizedBox.kHeightSizedBox56
+                  KSizedBox.kHeightSizedBox40
                 else
                   KSizedBox.kHeightSizedBox24,
                 if (state.discountModelItems.isNotEmpty)
