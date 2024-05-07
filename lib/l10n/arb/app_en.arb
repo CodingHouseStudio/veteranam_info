@@ -110,5 +110,16 @@
   "resume": "Resume",
   "noResume": "I don't have a resume",
   "cancel": "Cancel",
-  "upload": "Upload"
+  "upload": "Upload",
+  "employerSubtitle": "In this section you can employ a veteran. If you have an open vacancy in your company, you can place an ad here.",
+  "mainInformation": "Main information",
+  "position": "Position*",
+  "writeProposedPosition": "Write the proposed position",
+  "wage": "Salary*",
+  "writeTheWage": "Write the salary",
+  "selectCityOfWork": "Select the city of work*",
+  "selectCity": "Select a city",
+  "contacts": "Contacts*",
+  "howToContactYou": "Write how to contact you",
+  "remotely": "Remotely"
 }
