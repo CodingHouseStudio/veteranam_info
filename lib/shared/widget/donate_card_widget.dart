@@ -65,7 +65,6 @@ class DonateCardWidget extends StatelessWidget {
                 DonateButtonWidget(
                   key: KWidgetkeys.widget.donateCard.button,
                   text: context.l10n.support,
-                  onPressed: () {},
                   isDesk: isDesk,
                 ),
               ],

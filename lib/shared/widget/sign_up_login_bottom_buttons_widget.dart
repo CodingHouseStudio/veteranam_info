@@ -65,7 +65,6 @@ class SignUpLoginBottomButtonsWidget extends StatelessWidget {
                   key: KWidgetkeys.widget.signUpBottomButtons.facebook,
                   isDesk: true,
                   text: context.l10n.facebook,
-                  onPressed: () => {},
                   icon: KIcon.facebook,
                 ),
               ),
@@ -75,7 +74,6 @@ class SignUpLoginBottomButtonsWidget extends StatelessWidget {
                   key: KWidgetkeys.widget.signUpBottomButtons.apple,
                   isDesk: true,
                   text: context.l10n.apple,
-                  onPressed: () {},
                   icon: KIcon.apple,
                 ),
               ),
@@ -113,7 +111,6 @@ class SignUpLoginBottomButtonsWidget extends StatelessWidget {
             key: KWidgetkeys.widget.signUpBottomButtons.facebook,
             isDesk: false,
             text: context.l10n.facebook,
-            onPressed: () {},
             icon: KIcon.facebook,
           ),
           KSizedBox.kHeightSizedBox16,
@@ -121,7 +118,6 @@ class SignUpLoginBottomButtonsWidget extends StatelessWidget {
             key: KWidgetkeys.widget.signUpBottomButtons.apple,
             isDesk: false,
             text: context.l10n.apple,
-            onPressed: () {},
             icon: KIcon.apple,
           ),
         ],
@@ -132,9 +128,9 @@ class SignUpLoginBottomButtonsWidget extends StatelessWidget {
   Widget buildBottomButton({
     required bool isDesk,
     required String text,
-    required void Function() onPressed,
     required Icon icon,
     required Key key,
+    void Function()? onPressed,
   }) {
     return ButtonWidget(
       key: key,
