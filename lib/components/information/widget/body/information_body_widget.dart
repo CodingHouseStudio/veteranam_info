@@ -10,43 +10,46 @@ class InformationBodyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<InformationWatcherBloc, InformationWatcherState>(
-      builder: (context, _) {
-        switch (_.loadingStatus) {
-          case LoadingStatus.initial:
-            return const CircularProgressIndicator.adaptive();
-          case LoadingStatus.loading:
-            return const CircularProgressIndicator.adaptive();
-          case LoadingStatus.loaded:
-            return ScaffoldWidget(
-              childWidgetsFunction: ({required isDesk}) => [
-                if (isDesk)
-                  KSizedBox.kHeightSizedBox40
-                else
-                  KSizedBox.kHeightSizedBox16,
-                Text(
-                  context.l10n.information,
-                  key: KWidgetkeys.screen.information.title,
-                  style: isDesk ? AppTextStyle.text96 : AppTextStyle.text32,
-                ),
-                KSizedBox.kHeightSizedBox8,
-                Text(
-                  context.l10n.informationSubtitle,
-                  key: KWidgetkeys.screen.information.subtitle,
-                  style: isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
-                ),
-                if (isDesk)
-                  KSizedBox.kHeightSizedBox56
-                else
-                  KSizedBox.kHeightSizedBox24,
-                InformationFilters(
-                  key: KWidgetkeys.screen.information.filter,
-                  filtersItem: _.informationModelItems.overallTags,
-                  isDesk: isDesk,
-                ),
-                if (isDesk)
-                  KSizedBox.kHeightSizedBox40
-                else
-                  KSizedBox.kHeightSizedBox24,
+      builder: (context, _) => ScaffoldWidget(
+        childWidgetsFunction: ({required isDesk}) {
+          final childWidgets = [
+            if (isDesk)
+              KSizedBox.kHeightSizedBox40
+            else
+              KSizedBox.kHeightSizedBox16,
+            Text(
+              context.l10n.information,
+              key: KWidgetkeys.screen.information.title,
+              style: isDesk ? AppTextStyle.text96 : AppTextStyle.text32,
+            ),
+            KSizedBox.kHeightSizedBox8,
+            Text(
+              context.l10n.informationSubtitle,
+              key: KWidgetkeys.screen.information.subtitle,
+              style: isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
+            ),
+            if (isDesk)
+              KSizedBox.kHeightSizedBox56
+            else
+              KSizedBox.kHeightSizedBox24,
+            InformationFilters(
+              key: KWidgetkeys.screen.information.filter,
+              filtersItem: _.informationModelItems.overallTags,
+              isDesk: isDesk,
+            ),
+            if (isDesk)
+              KSizedBox.kHeightSizedBox40
+            else
+              KSizedBox.kHeightSizedBox24,
+          ];
+
+          switch (_.loadingStatus) {
+            case LoadingStatus.initial:
+              childWidgets.add(const CircularProgressIndicator.adaptive());
+            case LoadingStatus.loading:
+              childWidgets.add(const CircularProgressIndicator.adaptive());
+            case LoadingStatus.loaded:
+              childWidgets.addAll([
                 if (_.informationModelItems.isNotEmpty)
                   ...List.generate(_.filteredInformationModelItems.length,
                       (index) {
@@ -78,35 +81,39 @@ class InformationBodyWidget extends StatelessWidget {
                       style: AppTextStyle.text32,
                     ),
                   ),
-                if (isDesk)
-                  KSizedBox.kHeightSizedBox56
-                else
-                  KSizedBox.kHeightSizedBox24,
-                Center(
-                  child: ButtonWidget(
-                    key: KWidgetkeys.screen.information.button,
-                    text: context.l10n.moreNews,
-                    onPressed: () => context.read<InformationWatcherBloc>().add(
-                          const InformationWatcherEvent.loadNextItems(),
-                        ),
-                    icon: isDesk
-                        ? KIcon.refresh.setIconKey(
-                            KWidgetkeys.screen.information.buttonIcon,
-                          )
-                        : null,
-                    isDesk: isDesk,
-                  ),
+              ]);
+
+            case LoadingStatus.error:
+              childWidgets.add(const CircularProgressIndicator.adaptive());
+          }
+          return childWidgets
+            ..addAll([
+              if (isDesk)
+                KSizedBox.kHeightSizedBox56
+              else
+                KSizedBox.kHeightSizedBox24,
+              Center(
+                child: ButtonWidget(
+                  key: KWidgetkeys.screen.information.button,
+                  text: context.l10n.moreNews,
+                  onPressed: () => context.read<InformationWatcherBloc>().add(
+                        const InformationWatcherEvent.loadNextItems(),
+                      ),
+                  icon: isDesk
+                      ? KIcon.refresh.setIconKey(
+                          KWidgetkeys.screen.information.buttonIcon,
+                        )
+                      : null,
+                  isDesk: isDesk,
                 ),
-                if (isDesk)
-                  KSizedBox.kHeightSizedBox56
-                else
-                  KSizedBox.kHeightSizedBox24,
-              ],
-            );
-          case LoadingStatus.error:
-            return const CircularProgressIndicator.adaptive();
-        }
-      },
+              ),
+              if (isDesk)
+                KSizedBox.kHeightSizedBox56
+              else
+                KSizedBox.kHeightSizedBox24,
+            ]);
+        },
+      ),
     );
   }
 }
