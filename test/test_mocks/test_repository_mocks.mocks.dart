@@ -4892,3 +4892,22 @@ class MockDocumentChange<T extends Object?> extends _i1.Mock
         ),
       ) as _i7.DocumentSnapshot<T>);
 }
+
+/// A class which mocks [SnapshotMetadata].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockSnapshotMetadata extends _i1.Mock implements _i7.SnapshotMetadata {
+  @override
+  bool get hasPendingWrites => (super.noSuchMethod(
+        Invocation.getter(#hasPendingWrites),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
+
+  @override
+  bool get isFromCache => (super.noSuchMethod(
+        Invocation.getter(#isFromCache),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
+}
