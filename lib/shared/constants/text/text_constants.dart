@@ -34,6 +34,12 @@ abstract class KMockText {
     story: cardData,
     userId: '2',
   );
+  static const tagsDiscount = <List<String>?>[
+    ['Медицина'],
+    ['Послуги'],
+    ['Житло'],
+    [],
+  ];
   static const workTitle = 'Комплектувальник товару в магазин';
   static const workPrice = '12000 грн +%';
   static const workCity = 'м.Одеса';

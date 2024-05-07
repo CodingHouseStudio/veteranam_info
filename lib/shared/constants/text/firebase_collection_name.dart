@@ -5,5 +5,6 @@ abstract class FirebaseCollectionName {
   static const work = 'work';
   static const userSettings = 'user_settings';
   static const information = 'information';
+  static const discount = 'discount';
   static const stroies = 'stories';
 }

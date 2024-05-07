@@ -169,6 +169,20 @@ abstract class KTestText {
   static final dateTimeId = DateTime(0, 0, 0, 0, 1, 1, 1, 1);
   static const downloadURL = 'test_URL';
 
+  static final discountModelItems = <DiscountModel>[
+    for (var i = 0; i < 50; i++)
+      DiscountModel(
+        id: dateTime.microsecondsSinceEpoch.toString(),
+        discount: KMockText.discount,
+        city: KMockText.cityDiscount,
+        service: KMockText.serviceDiscount,
+        discountDescription: KMockText.descriptionDiscount,
+        date: DateTime.now(),
+        instruction: KMockText.instructionDiscount,
+        preInstructionDiscount: KMockText.preInstructionDiscount,
+      ),
+  ];
+
   static final fundItems = <FundModel>[
     for (var i = 0; i < 5; i++)
       FundModel(
