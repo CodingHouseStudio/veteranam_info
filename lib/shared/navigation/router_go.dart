@@ -1,3 +1,4 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -7,6 +8,7 @@ import 'package:kozak/components/thanks/thanks.dart';
 import 'package:kozak/shared/shared.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
+FirebaseAnalytics analytics = FirebaseAnalytics.instance;
 
 /// COMMENT: Variable for navigation in App
 final GoRouter router = GoRouter(
@@ -17,6 +19,12 @@ final GoRouter router = GoRouter(
   refreshListenable:
       GoRouterRefreshStream(GetIt.instance<AuthenticationBloc>().stream),
   initialLocation: KRoute.home.path,
+  observers: [
+    FirebaseAnalyticsObserver(
+      analytics: analytics,
+      onError: (_) => debugPrint('FirebaseAnalyticsObserver error $_'),
+    ),
+  ],
   redirect: (BuildContext context, GoRouterState state) async {
     if (context.read<AuthenticationBloc>().state.status ==
         AuthenticationStatus.authenticated) {
