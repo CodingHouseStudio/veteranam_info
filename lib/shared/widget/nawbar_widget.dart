@@ -91,7 +91,7 @@ class _NawbarWidgetImplematationState
                 child: InkWell(
                   onTap: () => EasyDebounce.debounce(
                     context.l10n.logo,
-                    const Duration(milliseconds: 500),
+                    const Duration(milliseconds: 0),
                     () => context.goNamedWithScroll(KRoute.home.name),
                   ),
                   child: Text(
