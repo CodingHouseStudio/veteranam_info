@@ -6,7 +6,9 @@ import 'package:kozak/shared/constants/theme/theme.dart';
 import 'package:kozak/shared/shared.dart';
 
 class App extends StatelessWidget {
-  const App({super.key});
+  const App({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

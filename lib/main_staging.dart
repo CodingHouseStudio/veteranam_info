@@ -1,6 +1,6 @@
 import 'package:kozak/app.dart';
 import 'package:kozak/bootstrap.dart';
 
-void main() {
-  bootstrap(() => const App());
+void main() async {
+  await bootstrap(App.new);
 }

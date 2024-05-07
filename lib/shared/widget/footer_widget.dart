@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kozak/shared/shared.dart';
 
 class FooterWidget extends SliverChildBuilderDelegate {
   FooterWidget({
     required this.isDesk,
   }) : super(
-          (context, index) => index - (isDesk ? 0 : 1) != KAppText.routes.length
+          (context, index) => index - (isDesk ? 0 : 1) !=
+                  KWidgetkeys.widget.footer.buttonsKey.length
               ? index != 0 || isDesk
                   ? Padding(
                       padding: isDesk
@@ -31,14 +33,23 @@ class FooterWidget extends SliverChildBuilderDelegate {
                           //                 .contains(context.l10n.contact)
                           //         ? '\n${KMockText.email}'
                           //         : ''),
-                          style: isDesk
-                              ? AppTextStyle.text32
-                              : index <= 3
-                                  ? AppTextStyle.text24
-                                  : AppTextStyle.text14,
+                          style: AppTextStyle.text32.copyWith(
+                            color: Theme.of(context).colorScheme.onSurface,
+                            fontSize: isDesk
+                                ? null
+                                : index <= 3
+                                    ? KSize.kFont24
+                                    : KSize.kFont14,
+                          ),
                         ),
                         onPressed: () => context.goNamedWithScroll(
-                          KAppText.routes.elementAt(index - (isDesk ? 0 : 1)),
+                          KAppText.routes(
+                            hasAccount: context
+                                    .read<AuthenticationBloc>()
+                                    .state
+                                    .status ==
+                                AuthenticationStatus.authenticated,
+                          ).elementAt(index - (isDesk ? 0 : 1)),
                         ),
                       ),
                     )
@@ -76,7 +87,8 @@ class FooterWidget extends SliverChildBuilderDelegate {
                     ],
                   ),
                 ),
-          childCount: KAppText.routes.length + (isDesk ? 1 : 2),
+          childCount:
+              KWidgetkeys.widget.footer.buttonsKey.length + (isDesk ? 1 : 2),
         );
   final bool isDesk;
 }

@@ -20,7 +20,7 @@ class InformationRepository implements IInformationRepository {
           id: '${ExtendedDateTime.id}$i',
           title: KMockText.title,
           news: KMockText.cardData,
-          date: DateTime.now(),
+          date: ExtendedDateTime.current,
           image: i > KMockText.tags.length - 2 ? KMockText.image : null,
           tags: KMockText.tags.elementAt(i),
         ),

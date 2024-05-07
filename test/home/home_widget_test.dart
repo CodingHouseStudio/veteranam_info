@@ -5,7 +5,6 @@ import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
 import 'package:mockito/mockito.dart';
 
-import '../bloc/authentication_bloc_unit_test.dart';
 import '../text_dependency.dart';
 import 'home_widget/home_widget.dart';
 
@@ -26,7 +25,13 @@ void main() {
     late FeedbackBloc feedbackBloc;
     setUp(() {
       ExtendedDateTime.customTime = KTestText.feedbackModel.timestamp;
-      mockAuthenticationRepository = MockAuthenticationRepositoryUnitTest();
+      mockAuthenticationRepository = MockAuthenticationRepository();
+      when(mockAuthenticationRepository.currentUser).thenAnswer(
+        (realInvocation) => User.empty,
+      );
+      when(mockAuthenticationRepository.getUserSetting()).thenAnswer(
+        (realInvocation) async => UserSetting.empty,
+      );
       mockHomeRepository = MockIHomeRepository();
       when(mockHomeRepository.getQuestions()).thenAnswer(
         (invocation) async => Right(KTestText.questionModelItems),
@@ -117,7 +122,7 @@ void main() {
 
       await feedbackEnterTextHelper(
         tester: tester,
-        email: KTestText.useremail,
+        email: KTestText.userEmail,
         field: KTestText.field,
       );
 
@@ -151,7 +156,7 @@ void main() {
 
       await feedbackEnterTextHelper(
         tester: tester,
-        email: KTestText.useremailIncorrect,
+        email: KTestText.userEmailIncorrect,
         field: KTestText.field,
       );
 
@@ -186,7 +191,7 @@ void main() {
 
       await feedbackClearTextHelper(
         tester: tester,
-        email: KTestText.useremail,
+        email: KTestText.userEmail,
         field: KTestText.field,
       );
     });
@@ -296,7 +301,7 @@ void main() {
 
           await feedbackEnterTextHelper(
             tester: tester,
-            email: KTestText.useremail,
+            email: KTestText.userEmail,
             field: KTestText.field,
           );
 
