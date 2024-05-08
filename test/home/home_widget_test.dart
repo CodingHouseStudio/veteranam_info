@@ -24,7 +24,8 @@ void main() {
     late IFeedbackRepository mockFeedbackRepository;
     late FeedbackBloc feedbackBloc;
     setUp(() {
-      ExtendedDateTime.customTime = KTestText.feedbackModel.timestamp;
+      ExtendedDateTime.customTime = KTestText.dateTime;
+      ExtendedDateTime.id = KTestText.feedbackModel.id;
       mockAuthenticationRepository = MockAuthenticationRepository();
       when(mockAuthenticationRepository.currentUser).thenAnswer(
         (realInvocation) => User.empty,
