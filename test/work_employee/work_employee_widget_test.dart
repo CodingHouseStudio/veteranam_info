@@ -89,6 +89,13 @@ void main() {
       );
 
       expect(
+        find.byKey(KWidgetkeys.screen.workEmployee.requestCard),
+        findsOneWidget,
+      );
+
+      await workRequestCardHelper(tester);
+
+      expect(
         find.byKey(KWidgetkeys.screen.workEmployee.pagination),
         findsOneWidget,
       );
@@ -153,6 +160,13 @@ void main() {
           tester: tester,
           offset: KTestConstants.scrollingUp500,
         );
+
+        expect(
+          find.byKey(KWidgetkeys.screen.workEmployee.requestCard),
+          findsOneWidget,
+        );
+
+        await workRequestCardHelper(tester);
 
         expect(
           find.byKey(KWidgetkeys.screen.workEmployee.pagination),

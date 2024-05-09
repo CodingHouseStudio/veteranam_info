@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:kozak/shared/shared.dart';
 
-class WorkRequestCard extends StatelessWidget {
-  const WorkRequestCard({required this.isDesk, super.key});
+class WorkRequestCardWidget extends StatelessWidget {
+  const WorkRequestCardWidget({required this.isDesk, super.key});
   final bool isDesk;
 
   @override
@@ -18,15 +18,18 @@ class WorkRequestCard extends StatelessWidget {
         children: [
           Text(
             context.l10n.didNotFindYourVacancy,
+            key: KWidgetkeys.widget.workRequestCard.title,
             style: isDesk ? AppTextStyle.text40 : AppTextStyle.text32,
           ),
           KSizedBox.kHeightSizedBox16,
           Text(
             context.l10n.workRequestSubtitle,
+            key: KWidgetkeys.widget.workRequestCard.subtitle,
             style: isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
           ),
           KSizedBox.kHeightSizedBox16,
           ButtonWidget(
+            key: KWidgetkeys.widget.workRequestCard.button,
             isDesk: isDesk,
             text: context.l10n.leaveRequest,
             onPressed: null,
