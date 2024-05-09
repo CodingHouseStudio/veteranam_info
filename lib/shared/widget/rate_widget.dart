@@ -9,7 +9,7 @@ class RateWidget extends StatelessWidget {
     super.key,
   });
   final bool isDesk;
-  final void Function(double rating) onRatingUpdate;
+  final void Function(double rating)? onRatingUpdate;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,7 @@ class RateWidget extends StatelessWidget {
             itemPadding: const EdgeInsets.only(right: KPadding.kPaddingSize8),
             itemBuilder: (context, index) =>
                 KIcon.star.setIconKey(KWidgetkeys.widget.rate.ratingBarIcons),
-            onRatingUpdate: onRatingUpdate,
+            onRatingUpdate: onRatingUpdate ?? (double rating) {},
           ),
         ],
       ),

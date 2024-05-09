@@ -15,16 +15,6 @@ class ContactBodyWidget extends StatelessWidget {
         //   dropDownList: KMockText.dropDownList,
         // ),
         KSizedBox.kHeightSizedBox30,
-        const ButtonMobWidget(
-          showGoogleIcon: true,
-        ),
-        KSizedBox.kHeightSizedBox30,
-        ButtonSecondaryWidget(
-          onPressed: () {},
-          text: KMockText.title,
-          icon: KIcon.plus,
-        ),
-        KSizedBox.kHeightSizedBox30,
         const PageIndicatorControl(
           pageCount: 3,
         ),

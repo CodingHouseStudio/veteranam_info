@@ -50,8 +50,8 @@ class EmployerBodyWidget extends StatelessWidget {
         if (isDesk) KSizedBox.kHeightSizedBox24 else KSizedBox.kHeightSizedBox8,
         TextFieldWidget(
           widgetKey: KWidgetkeys.screen.employer.fieldPosition,
-          onChanged: (value) {},
           hintText: context.l10n.writeProposedPosition,
+          onChanged: null,
         ),
         if (isDesk)
           KSizedBox.kHeightSizedBox32
@@ -71,8 +71,8 @@ class EmployerBodyWidget extends StatelessWidget {
         if (isDesk) KSizedBox.kHeightSizedBox24 else KSizedBox.kHeightSizedBox8,
         TextFieldWidget(
           widgetKey: KWidgetkeys.screen.employer.fieldWage,
-          onChanged: (value) {},
           hintText: context.l10n.writeTheWage,
+          onChanged: null,
         ),
         if (isDesk)
           KSizedBox.kHeightSizedBox32
@@ -92,7 +92,7 @@ class EmployerBodyWidget extends StatelessWidget {
         if (isDesk) KSizedBox.kHeightSizedBox24 else KSizedBox.kHeightSizedBox8,
         DropListFieldWidget(
           key: KWidgetkeys.screen.employer.fieldCity,
-          onChanged: (text) {},
+          onChanged: null,
           hintText: context.l10n.selectCity,
           dropDownList: const [],
         ),
@@ -138,8 +138,8 @@ class EmployerBodyWidget extends StatelessWidget {
         if (isDesk) KSizedBox.kHeightSizedBox24 else KSizedBox.kHeightSizedBox8,
         TextFieldWidget(
           widgetKey: KWidgetkeys.screen.employer.fieldContact,
-          onChanged: (value) {},
           hintText: context.l10n.howToContactYou,
+          onChanged: null,
         ),
         if (isDesk)
           KSizedBox.kHeightSizedBox32
@@ -148,8 +148,8 @@ class EmployerBodyWidget extends StatelessWidget {
         ButtonWidget(
           key: KWidgetkeys.screen.employer.button,
           text: context.l10n.next,
-          onPressed: () {},
           isDesk: true,
+          onPressed: null,
         ),
         if (isDesk)
           KSizedBox.kHeightSizedBox56
