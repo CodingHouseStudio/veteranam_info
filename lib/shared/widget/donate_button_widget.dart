@@ -4,14 +4,14 @@ import 'package:kozak/shared/shared.dart';
 class DonateButtonWidget extends StatelessWidget {
   const DonateButtonWidget({
     required this.text,
-    required this.onPressed,
     required this.isDesk,
+    this.onPressed,
     super.key,
     this.icon,
   });
   final Icon? icon;
   final String text;
-  final void Function() onPressed;
+  final void Function()? onPressed;
   final bool isDesk;
 
   @override
