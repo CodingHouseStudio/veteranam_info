@@ -114,5 +114,9 @@
   "selectCity": "Виберіть місто",
   "contacts": "Контакти*",
   "howToContactYou": "Напишіть як з Вами звʼязатися",
-  "remotely": "Віддалено"
+  "remotely": "Віддалено",
+  "logOutQuestion": "Ви впевнені, що бажаєте вийти?",
+  "deleteAccountQuestion": "Ви впевнені, що хочете видалити?",
+  "yes": "Так",
+  "no": "Ні"
 }

@@ -12,6 +12,7 @@ class ButtonWidget extends StatelessWidget {
     this.textStyle,
     this.backgroundColor,
     this.padding,
+    this.textMaxLines,
   });
   final Widget? icon;
   final TextStyle? textStyle;
@@ -21,6 +22,7 @@ class ButtonWidget extends StatelessWidget {
   final Color? backgroundColor;
   final EdgeInsets? padding;
   final Widget? iconRightMerge;
+  final int? textMaxLines;
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +48,7 @@ class ButtonWidget extends StatelessWidget {
             if (iconRightMerge != null) iconRightMerge!,
             Text(
               text,
+              maxLines: textMaxLines,
               style: textStyle ??
                   (isDesk ? AppTextStyle.text32 : AppTextStyle.text24),
             ),
