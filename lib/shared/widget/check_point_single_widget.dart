@@ -41,7 +41,7 @@ class _CheckPointSingleWidgetState extends State<CheckPointSingleWidget> {
             isCheck = !isCheck;
           });
           if (widget.onChanged != null) {
-            widget.onChanged;
+            widget.onChanged!;
           }
         },
         child: isCheck
