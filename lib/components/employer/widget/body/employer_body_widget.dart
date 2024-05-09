@@ -152,7 +152,6 @@ class EmployerBodyWidget extends StatelessWidget {
           child: ButtonWidget(
             key: KWidgetkeys.screen.employer.button,
             text: context.l10n.next,
-            
             onPressed: null,
             isDesk: isDesk,
           ),
