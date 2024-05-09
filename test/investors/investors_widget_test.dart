@@ -22,7 +22,8 @@ void main() {
     late IFeedbackRepository mockFeedbackRepository;
     late FeedbackBloc feedbackBloc;
     setUp(() {
-      ExtendedDateTime.customTime = KTestText.feedbackModel.timestamp;
+      ExtendedDateTime.customTime = KTestText.dateTime;
+      ExtendedDateTime.id = KTestText.feedbackModel.id;
       mockInvestorsRepository = MockIInvestorsRepository();
       when(mockInvestorsRepository.getFunds()).thenAnswer(
         (invocation) async => const Right(KTestText.fundItems),
