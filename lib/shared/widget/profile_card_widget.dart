@@ -224,10 +224,11 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
         Expanded(
           child: Row(
             children: [
-              const Expanded(
+              Expanded(
                 child: Text(
                   KMockText.userName,
-                  style: AppTextStyle.text40,
+                  style:
+                      widget.isDesk ? AppTextStyle.text40 : AppTextStyle.text24,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
