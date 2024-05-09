@@ -3,10 +3,10 @@ import 'package:kozak/shared/shared.dart';
 
 class CheckPointSingleWidget extends StatefulWidget {
   const CheckPointSingleWidget({
-    required this.onChanged,
+    this.onChanged,
     super.key,
   });
-  final void Function() onChanged;
+  final void Function()? onChanged;
 
   @override
   State<CheckPointSingleWidget> createState() => _CheckPointSingleWidgetState();
@@ -40,7 +40,7 @@ class _CheckPointSingleWidgetState extends State<CheckPointSingleWidget> {
           setState(() {
             isCheck = !isCheck;
           });
-          widget.onChanged();
+          widget.onChanged?.call();
         },
         child: isCheck
             ? KIcon.check.setIconKey(
