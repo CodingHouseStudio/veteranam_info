@@ -135,6 +135,7 @@ GoRouter router = GoRouter(
                   name: KRoute.workRespond.name,
                   path: KRoute.workRespond.path,
                   pageBuilder: (context, state) => NoTransitionPage(
+                    name: KRoute.workRespond.name,
                     key: state.pageKey,
                     child: const WorkRespondScreen(),
                   ),
