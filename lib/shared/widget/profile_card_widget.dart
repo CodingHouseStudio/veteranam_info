@@ -159,15 +159,37 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
         ],
         if (widget.isDesk) KSizedBox.kHeightSizedBox56,
       ],
+                              context.l10n.editData,
+                              style: AppTextStyle.text40,
+                            )
+                          : _displayProfileName(),
+                    ),
+                  ],
+                ),
+                if (isEditing) ...[
+                  KSizedBox.kHeightSizedBox8,
+                  _textField(context.l10n.name, context.l10n.writeYouName),
+                  KSizedBox.kHeightSizedBox8,
+                  _textField(
+                    context.l10n.lastName,
+                    context.l10n.writeYouLastName,
+                  ),
+                ],
+                KSizedBox.kHeightSizedBox8,
+                _buildProfileInfo(),
+                KSizedBox.kHeightSizedBox8,
+                _buildProfileFooter(),
+                KSizedBox.kHeightSizedBox8,
+                _buildLinkedAccounts(),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 
-  Widget _textField({
-    required String label,
-    required String hint,
-    required String? labelText,
-    bool readOnly = false,
-  }) {
+  Widget _textField(String label, String hint) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -182,13 +204,9 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
           ),
         ),
         TextFieldWidget(
-          readOnly: readOnly,
-          controller: TextEditingController(text: labelText),
           widgetKey: KWidgetkeys.widget.profileCardWidget.textFiled,
           hintText: hint,
-          hintStyle: widget.isDesk
-              ? context.textStyle.hint24
-              : context.textStyle.hint16,
+          hintStyle: widget.isDesk ? AppTextStyle.hint24 : AppTextStyle.hint16,
           // fillColor: AppColors.transparent,
           contentPadding: const EdgeInsets.all(KPadding.kPaddingSize16),
           isDesk: widget.isDesk,
@@ -203,11 +221,10 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         KSizedBox.kWidthSizedBox24,
-        Flexible(
+        const Flexible(
           flex: 2,
           child: Text(
-            context.read<AuthenticationBloc>().state.user?.name ??
-                KMockText.userName,
+            KMockText.userName,
             style: AppTextStyle.text40,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
@@ -226,19 +243,9 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _textField(
-          label: context.l10n.email,
-          labelText: context.read<AuthenticationBloc>().state.user?.email,
-          hint: KMockText.email,
-          readOnly: true,
-        ),
+        _textField(context.l10n.email, KMockText.email),
         KSizedBox.kHeightSizedBox8,
-        _textField(
-          label: context.l10n.nickname,
-          labelText: null,
-          hint: KMockText.nickname,
-          readOnly: !isEditing,
-        ),
+        _textField(context.l10n.nickname, KMockText.nickname),
       ],
     );
   }
@@ -249,14 +256,14 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
       children: [
         Row(
           children: [
-            const SwitchWidgetWithoutBloc(),
+            const SwitchWidget(),
             KSizedBox.kHeightSizedBox8,
             Expanded(child: Text(context.l10n.beAnonymous)),
           ],
         ),
         Text(
           context.l10n.beAnonymousDetails,
-          style: widget.isDesk ? context.textStyle.hint16 : AppTextStyle.text16,
+          style: widget.isDesk ? AppTextStyle.hint16 : AppTextStyle.text16,
         ),
         KSizedBox.kHeightSizedBox8,
         if (isEditing)
@@ -309,12 +316,10 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
           children: [
             Expanded(
               child: TextFieldWidget(
-                enabled: false,
                 widgetKey: KWidgetkeys.widget.profileCardWidget.textFiled,
                 hintText: KMockText.email,
-                hintStyle: widget.isDesk
-                    ? context.textStyle.hint24
-                    : context.textStyle.hint16,
+                hintStyle:
+                    widget.isDesk ? AppTextStyle.hint24 : AppTextStyle.hint16,
                 // fillColor: AppColors.transparent,
                 contentPadding: const EdgeInsets.all(KPadding.kPaddingSize16),
                 isDesk: widget.isDesk,
@@ -328,6 +333,49 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
                 onPressed: null,
                 child:
                     Text(context.l10n.disconnect, style: AppTextStyle.text24),
+  Widget _textField({
+    required String label,
+    required String hint,
+    required String? labelText,
+    bool readOnly = false,
+  }) {
+          readOnly: readOnly,
+          controller: TextEditingController(text: labelText),
+          hintStyle: widget.isDesk
+              ? context.textStyle.hint24
+              : context.textStyle.hint16,
+        Flexible(
+          flex: 2,
+          child: Text(
+            context.read<AuthenticationBloc>().state.user?.name ??
+                KMockText.userName,
+            style: AppTextStyle.text40,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+          ),
+        ),
+        const Spacer(),
+        GestureDetector(
+          onTap: () => setState(() => isEditing = !isEditing),
+          child: KIcon.edit,
+        _textField(
+          label: context.l10n.email,
+          labelText: context.read<AuthenticationBloc>().state.user?.email,
+          hint: KMockText.email,
+          readOnly: true,
+        ),
+        _textField(
+          label: context.l10n.nickname,
+          labelText: null,
+          hint: KMockText.nickname,
+          readOnly: !isEditing,
+        ),
+            const SwitchWidgetWithoutBloc(),
+          style: widget.isDesk ? context.textStyle.hint16 : AppTextStyle.text16,
+                enabled: false,
+                hintStyle: widget.isDesk
+                    ? context.textStyle.hint24
+                    : context.textStyle.hint16,
               ),
           ],
         ),
