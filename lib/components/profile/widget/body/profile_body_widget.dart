@@ -85,8 +85,8 @@ class ProfileBodyWidget extends StatelessWidget {
             KSizedBox.kHeightSizedBox24,
           ButtonWidget(
             text: context.l10n.deleteAccount,
-            onPressed: () {},
             isDesk: isDesk,
+            onPressed: null,
             // backgroundColor: AppColors.transparent,
           ),
           KSizedBox.kHeightSizedBox24,
@@ -109,8 +109,8 @@ class ProfileBodyWidget extends StatelessWidget {
             padding: const EdgeInsets.all(KPadding.kPaddingSize4),
             child: ButtonWidget(
               text: context.l10n.deleteAccount,
-              onPressed: () {},
               isDesk: isDesk,
+              onPressed: null,
               // backgroundColor: AppColors.transparent,
             ),
           ),
@@ -128,13 +128,13 @@ class ProfileBodyWidget extends StatelessWidget {
           BoxWidget(
             text: context.l10n.saved,
             isDesk: isDesk,
-            onTap: () {},
+            onTap: null,
           ),
           KSizedBox.kHeightSizedBox30,
           BoxWidget(
             text: context.l10n.myStory,
             isDesk: isDesk,
-            onTap: () {},
+            onTap: null,
           ),
           KSizedBox.kHeightSizedBox30,
         ],
