@@ -30,69 +30,71 @@ class _InvestorsBodyWidgetState extends State<InvestorsBodyWidget> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<InvestorsWatcherBloc, InvestorsWatcherState>(
-      builder: (context, _) {
-        switch (_) {
-          case InvestorsWatcherStateIntital():
-            return const CircularProgressIndicator.adaptive();
-          case InvestorsWatcherStateLoading():
-            return const CircularProgressIndicator.adaptive();
-          case InvestorsWatcherStateSuccess():
-            return BlocConsumer<FeedbackBloc, FeedbackState>(
-              listener: (context, state) {
-                if (state.formState == FeedbackEnum.clear) {
-                  nameController.clear();
-                  emailController.clear();
-                  messageController.clear();
-                }
-              },
-              builder: (context, state) {
-                return ScaffoldWidget(
-                  childWidgetsFunction: ({required isDesk}) => [
-                    if (isDesk)
-                      KSizedBox.kHeightSizedBox40
-                    else
-                      KSizedBox.kHeightSizedBox24,
-                    SizedBox.shrink(
-                      key: feedbackKey,
-                    ),
-                    if (context.read<FeedbackBloc>().state.formState ==
-                            FeedbackEnum.success ||
-                        context.read<FeedbackBloc>().state.formState ==
-                            FeedbackEnum.sendingMessage)
-                      FeedbackBoxWidget(
-                        key: feedbackBoxKey,
-                        isDesk: isDesk,
-                        sendAgain: () => context
-                            .read<FeedbackBloc>()
-                            .add(const FeedbackEvent.sendignMessageAgain()),
-                        feedbackBoxKey: feedbackBoxKey,
-                      )
-                    else
-                      ...FeedbackWidget.feedbackWidgetList(
-                        context: context,
-                        isDesk: isDesk,
-                        title: context.l10n.investors,
-                        subtitle: context.l10n.investorsSubtitle,
-                        messageHint: context.l10n.writeYourSuggenstions,
-                        nameController: nameController,
-                        emailController: emailController,
-                        messageController: messageController,
-                        feedbackKey: feedbackKey,
-                      ),
-                    if (isDesk)
-                      KSizedBox.kHeightSizedBox56
-                    else
-                      KSizedBox.kHeightSizedBox40,
-                    Text(
-                      context.l10n.funds,
-                      style: isDesk ? AppTextStyle.text96 : AppTextStyle.text32,
-                    ),
-                    KSizedBox.kHeightSizedBox8,
-                    Text(
-                      context.l10n.fundsSubtitle,
-                      style: isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
-                    ),
-                    KSizedBox.kHeightSizedBox56,
+      builder: (context, _) => BlocConsumer<FeedbackBloc, FeedbackState>(
+        listener: (context, state) {
+          if (state.formState == FeedbackEnum.clear) {
+            nameController.clear();
+            emailController.clear();
+            messageController.clear();
+          }
+        },
+        builder: (context, state) {
+          return ScaffoldWidget(
+            childWidgetsFunction: ({required isDesk}) {
+              final childWidgets = [
+                if (isDesk)
+                  KSizedBox.kHeightSizedBox40
+                else
+                  KSizedBox.kHeightSizedBox24,
+                SizedBox.shrink(
+                  key: feedbackKey,
+                ),
+                if (context.read<FeedbackBloc>().state.formState ==
+                        FeedbackEnum.success ||
+                    context.read<FeedbackBloc>().state.formState ==
+                        FeedbackEnum.sendingMessage)
+                  FeedbackBoxWidget(
+                    key: feedbackBoxKey,
+                    isDesk: isDesk,
+                    sendAgain: () => context
+                        .read<FeedbackBloc>()
+                        .add(const FeedbackEvent.sendignMessageAgain()),
+                    feedbackBoxKey: feedbackBoxKey,
+                  )
+                else
+                  ...FeedbackWidget.feedbackWidgetList(
+                    context: context,
+                    isDesk: isDesk,
+                    title: context.l10n.investors,
+                    subtitle: context.l10n.investorsSubtitle,
+                    messageHint: context.l10n.writeYourSuggenstions,
+                    nameController: nameController,
+                    emailController: emailController,
+                    messageController: messageController,
+                    feedbackKey: feedbackKey,
+                  ),
+                if (isDesk)
+                  KSizedBox.kHeightSizedBox56
+                else
+                  KSizedBox.kHeightSizedBox40,
+                Text(
+                  context.l10n.funds,
+                  style: isDesk ? AppTextStyle.text96 : AppTextStyle.text32,
+                ),
+                KSizedBox.kHeightSizedBox8,
+                Text(
+                  context.l10n.fundsSubtitle,
+                  style: isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
+                ),
+                KSizedBox.kHeightSizedBox56,
+              ];
+              switch (_) {
+                case InvestorsWatcherStateIntital():
+                  childWidgets.add(const CircularProgressIndicator.adaptive());
+                case InvestorsWatcherStateLoading():
+                  childWidgets.add(const CircularProgressIndicator.adaptive());
+                case InvestorsWatcherStateSuccess():
+                  childWidgets.addAll([
                     if (_.fundItems.isNotEmpty)
                       if (isDesk)
                         ...List.generate(
@@ -141,19 +143,20 @@ class _InvestorsBodyWidgetState extends State<InvestorsBodyWidget> {
                           style: AppTextStyle.text32,
                         ),
                       ),
-                    if (isDesk)
-                      KSizedBox.kHeightSizedBox56
-                    else
-                      KSizedBox.kHeightSizedBox40,
-                  ],
+                  ]);
+                case InvestorsWatcherStateFailure():
+                  childWidgets.add(const CircularProgressIndicator.adaptive());
+              }
+              return childWidgets
+                ..add(
+                  isDesk
+                      ? KSizedBox.kHeightSizedBox56
+                      : KSizedBox.kHeightSizedBox40,
                 );
-              },
-            );
-          case InvestorsWatcherStateFailure():
-          default:
-            return const CircularProgressIndicator.adaptive();
-        }
-      },
+            },
+          );
+        },
+      ),
     );
   }
 

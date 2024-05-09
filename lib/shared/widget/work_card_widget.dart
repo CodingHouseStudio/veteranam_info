@@ -21,11 +21,11 @@ class _WorkCardWidgetState extends State<WorkCardWidget> {
   @override
   void initState() {
     scrollKey = GlobalKey();
-    if (widget.firstItemIsFirst) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        Scrollable.ensureVisible(scrollKey.currentContext!);
-      });
-    }
+    // if (widget.firstItemIsFirst) {
+    //   WidgetsBinding.instance.addPostFrameCallback((_) {
+    //     Scrollable.ensureVisible(scrollKey.currentContext!);
+    //   });
+    // }
     super.initState();
   }
 
@@ -82,9 +82,9 @@ class _WorkCardWidgetState extends State<WorkCardWidget> {
             KSizedBox.kHeightSizedBox16,
             ButtonWidget(
               key: KWidgetkeys.widget.workCard.button,
-              onPressed: () {},
               text: context.l10n.respond,
               isDesk: widget.isDesk,
+              onPressed: null,
             ),
           ],
         ),

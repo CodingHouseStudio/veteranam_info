@@ -160,13 +160,13 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
           ),
         ),
         TextFieldWidget(
-          onChanged: (value) {},
           widgetKey: KWidgetkeys.widget.profileCardWidget.textFiled,
           hintText: hint,
           hintStyle: widget.isDesk ? AppTextStyle.hint24 : AppTextStyle.hint16,
           // fillColor: AppColors.transparent,
           contentPadding: const EdgeInsets.all(KPadding.kPaddingSize16),
           isDesk: widget.isDesk,
+          onChanged: null,
         ),
       ],
     );
@@ -272,7 +272,6 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
           children: [
             Expanded(
               child: TextFieldWidget(
-                onChanged: (value) {},
                 widgetKey: KWidgetkeys.widget.profileCardWidget.textFiled,
                 hintText: KMockText.email,
                 hintStyle:
@@ -280,13 +279,14 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
                 // fillColor: AppColors.transparent,
                 contentPadding: const EdgeInsets.all(KPadding.kPaddingSize16),
                 isDesk: widget.isDesk,
+                onChanged: null,
               ),
             ),
             KSizedBox.kWidthSizedBox8,
             if (widget.isDesk)
               ElevatedButton(
                 style: KButtonStyles.widgetBackgroundSquareButtonStyleWInf,
-                onPressed: () {},
+                onPressed: null,
                 child:
                     Text(context.l10n.disconnect, style: AppTextStyle.text24),
               ),
@@ -301,7 +301,7 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
         if (widget.isDesk == false)
           ElevatedButton(
             style: KButtonStyles.widgetLightGreyButtonStyleWInf,
-            onPressed: () {},
+            onPressed: null,
             child: Text(context.l10n.disconnect, style: AppTextStyle.text24),
           ),
       ],

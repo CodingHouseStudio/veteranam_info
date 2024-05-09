@@ -41,8 +41,26 @@ void main() {
 
         await storyCardHelper(tester: tester);
       });
-      // group('${KGroupText.goTo} ', () {
-      // });
+      group('${KGroupText.goTo} ', () {
+        testWidgets('All footer widget navigation', (tester) async {
+          await tester.pumpApp(
+            const StoryScreen(),
+            mockGoRouter: mockGoRouter,
+          );
+
+          expect(
+            find.byKey(KWidgetkeys.screen.story.screen),
+            findsOneWidget,
+          );
+
+          await tester.pumpAndSettle();
+
+          await footerButtonsHelper(
+            tester: tester,
+            mockGoRouter: mockGoRouter,
+          );
+        });
+      });
     });
   });
 }
