@@ -58,14 +58,14 @@ class WorkRespondBodyWidget extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(left: KPadding.kPaddingSize16),
                 child: Text(
-                  key: KWidgetkeys.screen.workRespond.emailField,
+                  key: KWidgetkeys.screen.workRespond.emailText,
                   context.l10n.email,
                   style: isDesk ? AppTextStyle.text32 : AppTextStyle.text24,
                 ),
               ),
               KSizedBox.kHeightSizedBox8,
               TextFieldWidget(
-                widgetKey: KWidgetkeys.screen.workRespond.emailHint,
+                widgetKey: KWidgetkeys.screen.workRespond.emailField,
                 onChanged: (value) {},
                 hintText: context.l10n.emailHint,
               ),
@@ -76,14 +76,14 @@ class WorkRespondBodyWidget extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(left: KPadding.kPaddingSize16),
                 child: Text(
-                  key: KWidgetkeys.screen.workRespond.phoneNumberField,
+                  key: KWidgetkeys.screen.workRespond.phoneNumberText,
                   context.l10n.phoneNumber,
                   style: isDesk ? AppTextStyle.text32 : AppTextStyle.text24,
                 ),
               ),
               KSizedBox.kHeightSizedBox8,
               TextFieldWidget(
-                widgetKey: KWidgetkeys.screen.workRespond.phoneNumberHint,
+                widgetKey: KWidgetkeys.screen.workRespond.phoneNumberField,
                 onChanged: (value) {},
                 hintText: context.l10n.phoneNumberHint,
               ),
@@ -188,7 +188,7 @@ class WorkRespondBodyWidget extends StatelessWidget {
                   text: context.l10n.cancel,
                   onPressed: () {},
                   isDesk: isDesk,
-                  backgroundColor: Colors.white,
+                  backgroundColor: Theme.of(context).primaryColor,
                 ),
               ],
               if (isDesk)

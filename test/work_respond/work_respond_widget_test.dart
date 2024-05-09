@@ -40,22 +40,22 @@ void main() {
       );
 
       expect(
+        find.byKey(KWidgetkeys.screen.workRespond.emailText),
+        findsOneWidget,
+      );
+
+      expect(
         find.byKey(KWidgetkeys.screen.workRespond.emailField),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.workRespond.emailHint),
+        find.byKey(KWidgetkeys.screen.workRespond.phoneNumberText),
         findsOneWidget,
       );
 
       expect(
         find.byKey(KWidgetkeys.screen.workRespond.phoneNumberField),
-        findsOneWidget,
-      );
-
-      expect(
-        find.byKey(KWidgetkeys.screen.workRespond.phoneNumberHint),
         findsOneWidget,
       );
 
@@ -122,22 +122,22 @@ void main() {
         );
 
         expect(
+          find.byKey(KWidgetkeys.screen.workRespond.emailText),
+          findsOneWidget,
+        );
+
+        expect(
           find.byKey(KWidgetkeys.screen.workRespond.emailField),
           findsOneWidget,
         );
 
         expect(
-          find.byKey(KWidgetkeys.screen.workRespond.emailHint),
+          find.byKey(KWidgetkeys.screen.workRespond.phoneNumberText),
           findsOneWidget,
         );
 
         expect(
           find.byKey(KWidgetkeys.screen.workRespond.phoneNumberField),
-          findsOneWidget,
-        );
-
-        expect(
-          find.byKey(KWidgetkeys.screen.workRespond.phoneNumberHint),
           findsOneWidget,
         );
 
