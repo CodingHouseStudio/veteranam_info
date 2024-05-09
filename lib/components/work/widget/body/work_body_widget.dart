@@ -7,7 +7,7 @@ class WorkBodyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScaffoldWidget(
-      childWidgetsFunction: ({required isDesk}) => [
+      mainChildWidgetsFunction: ({required isDesk}) => [
         if (isDesk)
           KSizedBox.kHeightSizedBox40
         else
