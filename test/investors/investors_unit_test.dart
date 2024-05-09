@@ -128,8 +128,9 @@ void main() {
 
       group('${KGroupText.failureGet} ', () {
         setUp(() {
-          investorsRepository = InvestorsRepository();
-          when(investorsRepository.getFunds()).thenThrow(
+          mockFirestoreService = MockFirestoreService();
+
+          when(mockFirestoreService.getFunds()).thenThrow(
             KGroupText.failureGet,
           );
           if (GetIt.I.isRegistered<FirestoreService>()) {
