@@ -46,7 +46,7 @@ class _HomeBodyWidgetState extends State<HomeBodyWidget> {
           BlocBuilder<HomeWatcherBloc, HomeWatcherState>(
         builder: (context, _) => ScaffoldWidget(
           hasMicrophone: false,
-          childWidgetsFunction: ({required isDesk}) {
+          mainChildWidgetsFunction: ({required isDesk}) {
             final childWidgets = <Widget>[
               if (isDesk)
                 KSizedBox.kHeightSizedBox24
