@@ -111,7 +111,7 @@ void main() {
         await footerHelper(tester);
       });
       group('${KGroupText.goTo} ', () {
-        testWidgets('${KRoute.home.name} ', (tester) async {
+        testWidgets('${KRoute.workEmployee.name} ', (tester) async {
           await tester.pumpApp(const WorkScreen(), mockGoRouter: mockGoRouter);
 
           expect(
@@ -131,6 +131,29 @@ void main() {
           mocktail
               .verify(
                 () => mockGoRouter.goNamed(KRoute.workEmployee.name),
+              )
+              .called(1);
+        });
+        testWidgets('${KRoute.employer.name} ', (tester) async {
+          await tester.pumpApp(const WorkScreen(), mockGoRouter: mockGoRouter);
+
+          expect(
+            find.byKey(KWidgetkeys.screen.work.screen),
+            findsOneWidget,
+          );
+
+          await tester.pumpAndSettle();
+
+          expect(
+            find.byKey(KWidgetkeys.screen.work.boxEmployer),
+            findsOneWidget,
+          );
+
+          await tester.tap(find.byKey(KWidgetkeys.screen.work.boxEmployer));
+
+          mocktail
+              .verify(
+                () => mockGoRouter.goNamed(KRoute.employer.name),
               )
               .called(1);
         });

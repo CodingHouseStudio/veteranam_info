@@ -9,7 +9,7 @@ extension ExtendedDateTime on DateTime {
   }
 
   static String get id {
-    return _id ?? DateTime.now().microsecondsSinceEpoch.toString();
+    return _id ?? DateTime.now().toLocal().microsecondsSinceEpoch.toString();
   }
 
   @visibleForTesting

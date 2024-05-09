@@ -11,7 +11,7 @@ class BoxWidget extends StatelessWidget {
   });
 
   final String text;
-  final void Function() onTap;
+  final void Function()? onTap;
   final bool isDesk;
   final double? textRightPadding;
 
