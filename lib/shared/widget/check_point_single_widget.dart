@@ -3,7 +3,7 @@ import 'package:kozak/shared/shared.dart';
 
 class CheckPointSingleWidget extends StatefulWidget {
   const CheckPointSingleWidget({
-    this.onChanged,
+    required this.onChanged,
     super.key,
   });
   final void Function()? onChanged;
@@ -40,7 +40,9 @@ class _CheckPointSingleWidgetState extends State<CheckPointSingleWidget> {
           setState(() {
             isCheck = !isCheck;
           });
-          widget.onChanged?.call();
+          if (widget.onChanged != null) {
+            widget.onChanged;
+          }
         },
         child: isCheck
             ? KIcon.check.setIconKey(

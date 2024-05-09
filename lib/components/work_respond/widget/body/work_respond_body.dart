@@ -66,7 +66,7 @@ class WorkRespondBodyWidget extends StatelessWidget {
               KSizedBox.kHeightSizedBox8,
               TextFieldWidget(
                 widgetKey: KWidgetkeys.screen.workRespond.emailField,
-                onChanged: (value) {},
+                onChanged: null,
                 hintText: context.l10n.emailHint,
               ),
               if (isDesk)
@@ -84,7 +84,7 @@ class WorkRespondBodyWidget extends StatelessWidget {
               KSizedBox.kHeightSizedBox8,
               TextFieldWidget(
                 widgetKey: KWidgetkeys.screen.workRespond.phoneNumberField,
-                onChanged: (value) {},
+                onChanged: null,
                 hintText: context.l10n.phoneNumberHint,
               ),
               if (isDesk)
@@ -138,7 +138,7 @@ class WorkRespondBodyWidget extends StatelessWidget {
                     ),
                     child: CheckPointSingleWidget(
                       key: KWidgetkeys.screen.workRespond.checkPoint,
-                      onChanged: () {},
+                      onChanged: null,
                     ),
                   ),
                   Text(
@@ -159,7 +159,7 @@ class WorkRespondBodyWidget extends StatelessWidget {
                       child: ButtonWidget(
                         key: KWidgetkeys.screen.workRespond.send,
                         text: context.l10n.send,
-                        onPressed: () {},
+                        onPressed: null,
                         isDesk: isDesk,
                       ),
                     ),
@@ -168,7 +168,7 @@ class WorkRespondBodyWidget extends StatelessWidget {
                       child: ButtonWidget(
                         key: KWidgetkeys.screen.workRespond.cancel,
                         text: context.l10n.cancel,
-                        onPressed: () {},
+                        onPressed: null,
                         isDesk: isDesk,
                         backgroundColor: Colors.white,
                       ),
@@ -179,14 +179,14 @@ class WorkRespondBodyWidget extends StatelessWidget {
                 ButtonWidget(
                   key: KWidgetkeys.screen.workRespond.send,
                   text: context.l10n.send,
-                  onPressed: () {},
+                  onPressed: null,
                   isDesk: isDesk,
                 ),
                 KSizedBox.kHeightSizedBox16,
                 ButtonWidget(
                   key: KWidgetkeys.screen.workRespond.cancel,
                   text: context.l10n.cancel,
-                  onPressed: () {},
+                  onPressed: null,
                   isDesk: isDesk,
                   backgroundColor: Theme.of(context).primaryColor,
                 ),
