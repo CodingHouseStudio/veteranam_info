@@ -13,7 +13,7 @@ class MessageFieldWidget extends StatelessWidget {
     this.disposeFocusNode,
     this.isDesk,
   });
-  final void Function(String text) changeMessage;
+  final void Function(String text)? changeMessage;
   final String hintText;
   final TextEditingController? controller;
   final String? errorText;

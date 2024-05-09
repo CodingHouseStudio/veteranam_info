@@ -27,6 +27,7 @@ Future<void> setUpGlobal({bool? kIsWeb}) async {
 
 abstract class KGroupText {
   static const repository = 'Repository';
+  static const provider = 'Provider';
   static const model = 'Model';
   static const fiedlModel = 'Field model';
   static const successfulGet = 'Successful get';
@@ -134,13 +135,14 @@ abstract class KTestText {
   static final dateTime = DateTime(2024, 4, 12);
   static final dateTimeId = DateTime(0, 0, 0, 0, 1, 1, 1, 1);
 
-  static const fundItems = <FundModel>[
-    FundModel(
-      id: '1',
-      title: 'Test_title',
-      subtitle: 'Test_subtitle',
-      link: 'Test_limk',
-    ),
+  static final fundItems = <FundModel>[
+    for (var i = 0; i < 5; i++)
+      FundModel(
+        id: i.toString(),
+        title: KMockText.donateCardTitle,
+        subtitle: KMockText.donateCardSubtitle,
+        link: '',
+      ),
   ];
 
   static final feedbackModelIncorect = FeedbackModel(
@@ -216,6 +218,8 @@ abstract class KScreenBlocName {
   static const workEmployeeBloc = 'Work Bloc';
 
   static const iAppAuthenticationRepository = 'App Authentication';
-  static const authentication = 'Authentication';
+  static const authentication = ' Authentication';
+
+  static const firestoreService = 'Firestore Service';
   static const secureStorage = 'Secure Storage';
 }

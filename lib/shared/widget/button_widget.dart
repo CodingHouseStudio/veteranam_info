@@ -4,8 +4,8 @@ import 'package:kozak/shared/shared.dart';
 class ButtonWidget extends StatelessWidget {
   const ButtonWidget({
     required this.text,
-    required this.onPressed,
     required this.isDesk,
+    required this.onPressed,
     this.iconRightMerge,
     super.key,
     this.icon,
