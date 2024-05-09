@@ -1,5 +1,9 @@
+//import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+//import 'package:flutter/widgets.dart';
+//import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kozak/shared/shared.dart';
+import 'package:kozak/shared/widget/dialogs_widget.dart';
 
 class ProfileCardWidget extends StatefulWidget {
   const ProfileCardWidget({
@@ -70,6 +74,69 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
                 _buildProfileFooter(),
                 KSizedBox.kHeightSizedBox8,
                 _buildLinkedAccounts(),
+                KSizedBox.kHeightSizedBox56,
+                if (widget.isDesk)
+                  Row(
+                    children: [
+                      Expanded(
+                        child: ButtonWidget(
+                          key:
+                              KWidgetkeys.widget.profileCardWidget.logOutButton,
+                          text: context.l10n.logOut,
+                          textMaxLines: KMinMaxSize.textMaxLineOne,
+                          textStyle: AppTextStyle.text32,
+                          onPressed: () =>
+                              DialogsWidget.showLogoutConfirmationDialog(
+                            context: context,
+                            isDesk: widget.isDesk,
+                          ),
+                          isDesk: true,
+                        ),
+                      ),
+                      KSizedBox.kWidthSizedBox24,
+                      Expanded(
+                        child: ButtonWidget(
+                          key:
+                              KWidgetkeys.widget.profileCardWidget.deleteButton,
+                          text: context.l10n.deleteAccount,
+                          textMaxLines: KMinMaxSize.textMaxLineOne,
+                          textStyle: AppTextStyle.text32,
+                          onPressed: () =>
+                              DialogsWidget.showDeleteConfirmationDialog(
+                            context: context,
+                            isDesk: widget.isDesk,
+                          ),
+                          isDesk: true,
+                          // backgroundColor: AppColors.transparent,
+                        ),
+                      ),
+                    ],
+                  )
+                else ...[
+                  ButtonWidget(
+                    key: KWidgetkeys.widget.profileCardWidget.logOutButton,
+                    text: context.l10n.logOut,
+                    textStyle: AppTextStyle.text32,
+                    onPressed: () => DialogsWidget.showLogoutConfirmationDialog(
+                      context: context,
+                      isDesk: widget.isDesk,
+                    ),
+                    isDesk: false,
+                  ),
+                  KSizedBox.kHeightSizedBox24,
+                  ButtonWidget(
+                    key: KWidgetkeys.widget.profileCardWidget.deleteButton,
+                    text: context.l10n.deleteAccount,
+                    textStyle: AppTextStyle.text32,
+                    onPressed: () => DialogsWidget.showDeleteConfirmationDialog(
+                      context: context,
+                      isDesk: widget.isDesk,
+                    ),
+                    isDesk: false,
+                    // backgroundColor: AppColors.transparent,
+                  ),
+                ],
+                KSizedBox.kHeightSizedBox56,
               ],
             ),
           ),

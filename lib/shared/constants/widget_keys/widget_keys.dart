@@ -105,6 +105,8 @@ part 'widget/rate.dart';
 
 part 'widget/chat_input.dart';
 
+part 'widget/dialogs.dart';
+
 abstract class KWidgetkeys {
   static _ScreenKeys get screen => _ScreenKeys();
 

@@ -32,7 +32,7 @@ class DonateButtonWidget extends StatelessWidget {
               child: Text(
                 text,
                 style: isDesk ? AppTextStyle.text32 : AppTextStyle.text24,
-                maxLines: KMinMaxSize.donateCardButtonTextMaxLine,
+                maxLines: KMinMaxSize.textMaxLineOne,
               ),
             ),
             IconWidget(

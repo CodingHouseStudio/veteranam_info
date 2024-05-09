@@ -24,6 +24,33 @@ void main() {
 
       await tester.pumpAndSettle();
     });
+
+    testWidgets('Show log out dialog', (tester) async {
+      await tester.pumpApp(const ProfileScreen());
+
+      expect(
+        find.byKey(KWidgetkeys.screen.profile.screen),
+        findsOneWidget,
+      );
+
+      await tester.pumpAndSettle();
+
+      await profileCardLogOutHelper(tester);
+    });
+
+    testWidgets('Show delete account dialog', (tester) async {
+      await tester.pumpApp(const ProfileScreen());
+
+      expect(
+        find.byKey(KWidgetkeys.screen.profile.screen),
+        findsOneWidget,
+      );
+
+      await tester.pumpAndSettle();
+
+      await profileCardDeleteAccountHelper(tester);
+    });
+
     group('${KGroupText.goRouter} ', () {
       late MockGoRouter mockGoRouter;
       setUp(() => mockGoRouter = MockGoRouter());
@@ -37,8 +64,93 @@ void main() {
 
         await tester.pumpAndSettle();
       });
-      // group('${KGroupText.goTo} ', () {
-      // });
+
+      group('${KGroupText.goTo} ', () {
+        testWidgets('Log out dialog unconfirm button pop', (tester) async {
+          await tester.pumpApp(
+            const ProfileScreen(),
+            mockGoRouter: mockGoRouter,
+          );
+
+          expect(
+            find.byKey(KWidgetkeys.screen.profile.screen),
+            findsOneWidget,
+          );
+
+          await tester.pumpAndSettle();
+
+          await profileCardLogOutHelper(tester);
+
+          await dialogLogOutUnconfirmHelper(
+            tester: tester,
+            mockGoRouter: mockGoRouter,
+          );
+        });
+
+        testWidgets('Log out dialog confirm button pop', (tester) async {
+          await tester.pumpApp(
+            const ProfileScreen(),
+            mockGoRouter: mockGoRouter,
+          );
+
+          expect(
+            find.byKey(KWidgetkeys.screen.profile.screen),
+            findsOneWidget,
+          );
+
+          await tester.pumpAndSettle();
+
+          await profileCardLogOutHelper(tester);
+
+          await dialogLogOutConfirmHelper(
+            tester: tester,
+            mockGoRouter: mockGoRouter,
+          );
+        });
+
+        testWidgets('Delete account dialog unconfirm button pop',
+            (tester) async {
+          await tester.pumpApp(
+            const ProfileScreen(),
+            mockGoRouter: mockGoRouter,
+          );
+
+          expect(
+            find.byKey(KWidgetkeys.screen.profile.screen),
+            findsOneWidget,
+          );
+
+          await tester.pumpAndSettle();
+
+          await profileCardDeleteAccountHelper(tester);
+
+          await dialogDeleteAccountUnconfirmHelper(
+            tester: tester,
+            mockGoRouter: mockGoRouter,
+          );
+        });
+
+        testWidgets('Delete account dialog confirm button pop', (tester) async {
+          await tester.pumpApp(
+            const ProfileScreen(),
+            mockGoRouter: mockGoRouter,
+          );
+
+          expect(
+            find.byKey(KWidgetkeys.screen.profile.screen),
+            findsOneWidget,
+          );
+
+          await tester.pumpAndSettle();
+
+          await profileCardDeleteAccountHelper(tester);
+
+          await dialogDeleteAccountUnconfirmHelper(
+            tester: tester,
+            mockGoRouter: mockGoRouter,
+          );
+        });
+      });
     });
   });
 }
