@@ -74,6 +74,11 @@ void main() {
         findsOneWidget,
       );
 
+      await dropListFieldBoxHelper(
+        tester: tester,
+        text: KMockText.dropDownList.first,
+      );
+
       await scrollingHelper(
         tester: tester,
         itemKey: KWidgetkeys.screen.employer.fieldCity,
@@ -170,6 +175,11 @@ void main() {
         expect(
           find.byKey(KWidgetkeys.screen.employer.fieldCity),
           findsOneWidget,
+        );
+
+        await dropListFieldBoxHelper(
+          tester: tester,
+          text: KMockText.dropDownList.first,
         );
 
         await scrollingHelper(

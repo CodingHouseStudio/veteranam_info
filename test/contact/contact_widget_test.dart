@@ -23,11 +23,6 @@ void main() {
       );
 
       await tester.pumpAndSettle();
-
-      // await dropListFieldBoxHelper(
-      //   tester: tester,
-      //   text: KMockText.dropDownList.elementAt(0),
-      // );
     });
     group('${KGroupText.goRouter} ', () {
       late MockGoRouter mockGoRouter;
@@ -44,11 +39,6 @@ void main() {
         );
 
         await tester.pumpAndSettle();
-
-        // await dropListFieldBoxHelper(
-        //   tester: tester,
-        //   text: KMockText.dropDownList.elementAt(0),
-        // );
       });
       // group('${KGroupText.goTo} ', () {
       // });
