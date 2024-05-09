@@ -153,7 +153,7 @@ class EmployerBodyWidget extends StatelessWidget {
             key: KWidgetkeys.screen.employer.button,
             text: context.l10n.next,
             textStyle: isDesk ? AppTextStyle.text32 : AppTextStyle.text24,
-            onPressed: () {},
+            onPressed: null,
             isDesk: isDesk,
           ),
         ),
