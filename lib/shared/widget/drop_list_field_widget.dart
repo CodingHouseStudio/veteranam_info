@@ -9,7 +9,7 @@ class DropListFieldWidget extends StatefulWidget {
     super.key,
   });
 
-  final void Function(String? text) onChanged;
+  final void Function(String? text)? onChanged;
   final String hintText;
   final List<String> dropDownList;
 

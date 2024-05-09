@@ -22,11 +22,11 @@ class _WorkCardWidgetState extends State<WorkCardWidget> {
   @override
   void initState() {
     scrollKey = GlobalKey();
-    if (widget.firstItemIsFirst) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        Scrollable.ensureVisible(scrollKey.currentContext!);
-      });
-    }
+    // if (widget.firstItemIsFirst) {
+    //   WidgetsBinding.instance.addPostFrameCallback((_) {
+    //     Scrollable.ensureVisible(scrollKey.currentContext!);
+    //   });
+    // }
     super.initState();
   }
 

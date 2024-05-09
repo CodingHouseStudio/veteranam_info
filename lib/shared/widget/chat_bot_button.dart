@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:kozak/shared/shared.dart';
 
 class ChatBotButton extends StatelessWidget {
-  const ChatBotButton({required this.onTap, super.key});
-  final void Function() onTap;
+  const ChatBotButton({this.onTap, super.key});
+  final void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
