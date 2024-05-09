@@ -221,19 +221,23 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         KSizedBox.kWidthSizedBox24,
-        const Flexible(
-          flex: 2,
-          child: Text(
-            KMockText.userName,
-            style: AppTextStyle.text40,
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
+        Expanded(
+          child: Row(
+            children: [
+              const Expanded(
+                child: Text(
+                  KMockText.userName,
+                  style: AppTextStyle.text40,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+              GestureDetector(
+                onTap: () => setState(() => isEditing = !isEditing),
+                child: KIcon.edit,
+              ),
+            ],
           ),
-        ),
-        const Spacer(),
-        GestureDetector(
-          onTap: () => setState(() => isEditing = !isEditing),
-          child: KIcon.edit,
         ),
       ],
     );
@@ -333,6 +337,24 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
                 onPressed: null,
                 child:
                     Text(context.l10n.disconnect, style: AppTextStyle.text24),
+        Expanded(
+          child: Row(
+            children: [
+              Expanded(
+                child: Text(
+                  KMockText.userName,
+                  style:
+                      widget.isDesk ? AppTextStyle.text40 : AppTextStyle.text24,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+              GestureDetector(
+                onTap: () => setState(() => isEditing = !isEditing),
+                child: KIcon.edit,
+              ),
+            ],
+          ),
   Widget _textField({
     required String label,
     required String hint,
