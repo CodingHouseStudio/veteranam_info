@@ -1,7 +1,4 @@
-//import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-//import 'package:flutter/widgets.dart';
-//import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kozak/shared/shared.dart';
 import 'package:kozak/shared/widget/dialogs_widget.dart';
 
@@ -21,127 +18,131 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: EdgeInsets.all(
-          widget.isDesk ? KPadding.kPaddingSize4 : KPadding.kPaddingSize8,
-        ),
-        key: KWidgetkeys.widget.profileCard.profileCard,
-        child: Container(
-          decoration: KWidgetTheme.boxDecorationWidget(context),
+    return Column(
+      children: [
+        SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(KPadding.kPaddingSize16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
+            padding: EdgeInsets.all(
+              widget.isDesk ? KPadding.kPaddingSize4 : KPadding.kPaddingSize8,
+            ),
+            key: KWidgetkeys.widget.profileCard.profileCard,
+            child: Container(
+              decoration: KWidgetTheme.boxDecorationWidget(context),
+              child: Padding(
+                padding: const EdgeInsets.all(KPadding.kPaddingSize16),
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(
-                      width: 60,
-                      height: 60,
-                      decoration: BoxDecoration(
-                        borderRadius: KBorderRadius.kBorderRadiusL,
-                        // color: AppColors.widgetBackground,
-                      ),
-                      child: const Center(
-                        child: KIcon.person,
-                      ),
-                    ),
-                    KSizedBox.kWidthSizedBox16,
-                    Expanded(
-                      child: isEditing
-                          ? Text(
-                              context.l10n.editData,
-                              style: AppTextStyle.text40,
-                            )
-                          : _displayProfileName(),
-                    ),
-                  ],
-                ),
-                if (isEditing) ...[
-                  KSizedBox.kHeightSizedBox8,
-                  _textField(context.l10n.name, context.l10n.writeYouName),
-                  KSizedBox.kHeightSizedBox8,
-                  _textField(
-                    context.l10n.lastName,
-                    context.l10n.writeYouLastName,
-                  ),
-                ],
-                KSizedBox.kHeightSizedBox8,
-                _buildProfileInfo(),
-                KSizedBox.kHeightSizedBox8,
-                _buildProfileFooter(),
-                KSizedBox.kHeightSizedBox8,
-                _buildLinkedAccounts(),
-                KSizedBox.kHeightSizedBox56,
-                if (widget.isDesk)
-                  Row(
-                    children: [
-                      Expanded(
-                        child: ButtonWidget(
-                          key:
-                              KWidgetkeys.widget.profileCardWidget.logOutButton,
-                          text: context.l10n.logOut,
-                          textMaxLines: KMinMaxSize.textMaxLineOne,
-                          textStyle: AppTextStyle.text32,
-                          onPressed: () =>
-                              DialogsWidget.showLogoutConfirmationDialog(
-                            context: context,
-                            isDesk: widget.isDesk,
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          width: 60,
+                          height: 60,
+                          decoration: BoxDecoration(
+                            borderRadius: KBorderRadius.kBorderRadiusL,
+                            // color: AppColors.widgetBackground,
                           ),
-                          isDesk: true,
-                        ),
-                      ),
-                      KSizedBox.kWidthSizedBox24,
-                      Expanded(
-                        child: ButtonWidget(
-                          key:
-                              KWidgetkeys.widget.profileCardWidget.deleteButton,
-                          text: context.l10n.deleteAccount,
-                          textMaxLines: KMinMaxSize.textMaxLineOne,
-                          textStyle: AppTextStyle.text32,
-                          onPressed: () =>
-                              DialogsWidget.showDeleteConfirmationDialog(
-                            context: context,
-                            isDesk: widget.isDesk,
+                          child: const Center(
+                            child: KIcon.person,
                           ),
-                          isDesk: true,
-                          // backgroundColor: AppColors.transparent,
                         ),
+                        KSizedBox.kWidthSizedBox16,
+                        Expanded(
+                          child: isEditing
+                              ? Text(
+                                  context.l10n.editData,
+                                  style: AppTextStyle.text40,
+                                )
+                              : _displayProfileName(),
+                        ),
+                      ],
+                    ),
+                    if (isEditing) ...[
+                      KSizedBox.kHeightSizedBox8,
+                      _textField(context.l10n.name, context.l10n.writeYouName),
+                      KSizedBox.kHeightSizedBox8,
+                      _textField(
+                        context.l10n.lastName,
+                        context.l10n.writeYouLastName,
                       ),
                     ],
-                  )
-                else ...[
-                  ButtonWidget(
-                    key: KWidgetkeys.widget.profileCardWidget.logOutButton,
-                    text: context.l10n.logOut,
-                    textStyle: AppTextStyle.text32,
-                    onPressed: () => DialogsWidget.showLogoutConfirmationDialog(
-                      context: context,
-                      isDesk: widget.isDesk,
-                    ),
-                    isDesk: false,
-                  ),
-                  KSizedBox.kHeightSizedBox24,
-                  ButtonWidget(
-                    key: KWidgetkeys.widget.profileCardWidget.deleteButton,
-                    text: context.l10n.deleteAccount,
-                    textStyle: AppTextStyle.text32,
-                    onPressed: () => DialogsWidget.showDeleteConfirmationDialog(
-                      context: context,
-                      isDesk: widget.isDesk,
-                    ),
-                    isDesk: false,
-                    // backgroundColor: AppColors.transparent,
-                  ),
-                ],
-                KSizedBox.kHeightSizedBox56,
-              ],
+                    KSizedBox.kHeightSizedBox8,
+                    _buildProfileInfo(),
+                    KSizedBox.kHeightSizedBox8,
+                    _buildProfileFooter(),
+                    KSizedBox.kHeightSizedBox8,
+                    _buildLinkedAccounts(),
+                    KSizedBox.kHeightSizedBox56,
+                  ],
+                ),
+              ),
             ),
           ),
         ),
-      ),
+        if (widget.isDesk)
+          KSizedBox.kHeightSizedBox56
+        else
+          KSizedBox.kHeightSizedBox24,
+        if (widget.isDesk)
+          Row(
+            children: [
+              Expanded(
+                child: ButtonWidget(
+                  key: KWidgetkeys.widget.profileCardWidget.logOutButton,
+                  text: context.l10n.logOut,
+                  textMaxLines: KMinMaxSize.textMaxLineOne,
+                  textStyle: AppTextStyle.text32,
+                  onPressed: () => DialogsWidget.showLogoutConfirmationDialog(
+                    context: context,
+                    isDesk: widget.isDesk,
+                  ),
+                  isDesk: true,
+                ),
+              ),
+              KSizedBox.kWidthSizedBox56,
+              Expanded(
+                child: ButtonWidget(
+                  key: KWidgetkeys.widget.profileCardWidget.deleteButton,
+                  text: context.l10n.deleteAccount,
+                  textMaxLines: KMinMaxSize.textMaxLineOne,
+                  textStyle: AppTextStyle.text32,
+                  onPressed: () => DialogsWidget.showDeleteConfirmationDialog(
+                    context: context,
+                    isDesk: widget.isDesk,
+                  ),
+                  isDesk: true,
+                  // backgroundColor: AppColors.transparent,
+                ),
+              ),
+            ],
+          )
+        else ...[
+          ButtonWidget(
+            key: KWidgetkeys.widget.profileCardWidget.logOutButton,
+            text: context.l10n.logOut,
+            textStyle: AppTextStyle.text32,
+            onPressed: () => DialogsWidget.showLogoutConfirmationDialog(
+              context: context,
+              isDesk: widget.isDesk,
+            ),
+            isDesk: false,
+          ),
+          KSizedBox.kHeightSizedBox24,
+          ButtonWidget(
+            key: KWidgetkeys.widget.profileCardWidget.deleteButton,
+            text: context.l10n.deleteAccount,
+            textStyle: AppTextStyle.text32,
+            onPressed: () => DialogsWidget.showDeleteConfirmationDialog(
+              context: context,
+              isDesk: widget.isDesk,
+            ),
+            isDesk: false,
+            // backgroundColor: AppColors.transparent,
+          ),
+        ],
+        if (widget.isDesk) KSizedBox.kHeightSizedBox56,
+      ],
     );
   }
 
