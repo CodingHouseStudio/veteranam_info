@@ -114,5 +114,6 @@
   "selectCity": "Select a city",
   "contacts": "Contacts*",
   "howToContactYou": "Write how to contact you",
-  "remotely": "Remotely"
+  "remotely": "Remotely",
+  "myFeedback" : "My feedback"
 }
