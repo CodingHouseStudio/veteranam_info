@@ -32,6 +32,11 @@ Future<void> emailPasswordFieldsHelper({
     );
   } else {
     expect(
+      find.byKey(KWidgetkeys.widget.emailPasswordFields.fieldEmail),
+      findsWidgets,
+    );
+
+    expect(
       find.byKey(KWidgetkeys.widget.emailPasswordFields.textEmail),
       findsWidgets,
     );
@@ -43,6 +48,16 @@ Future<void> emailPasswordFieldsHelper({
 
     expect(
       find.byKey(KWidgetkeys.widget.emailPasswordFields.textPassword),
+      findsNothing,
+    );
+
+    expect(
+      find.byKey(KWidgetkeys.widget.emailPasswordFields.buttonHidePassword),
+      findsNothing,
+    );
+
+    expect(
+      find.byKey(KWidgetkeys.widget.emailPasswordFields.iconHidePassword),
       findsNothing,
     );
   }

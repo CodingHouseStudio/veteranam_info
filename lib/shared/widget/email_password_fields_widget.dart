@@ -3,16 +3,16 @@ import 'package:kozak/shared/shared.dart';
 
 class EmailPasswordFieldsWidget extends StatefulWidget {
   const EmailPasswordFieldsWidget({
-    required Key key,
     required this.showPassword,
     required this.isDesk,
     required this.onChangedEmail,
     required this.onChangedPassword,
     required this.email,
     required this.backPassword,
+    super.key,
     this.errorTextEmail,
     this.errorTextPassword,
-  }) : super(key: key);
+  });
 
   final bool showPassword;
   final bool isDesk;
@@ -34,9 +34,6 @@ class _EmailPasswordFieldsWidgetState extends State<EmailPasswordFieldsWidget>
   late TextEditingController passwordController;
   bool obscurePassword = true;
   FocusNode? focusNode;
-
-  final GlobalKey<_EmailPasswordFieldsWidgetState> _widgetKey =
-      GlobalKey<_EmailPasswordFieldsWidgetState>();
 
   @override
   void initState() {
@@ -84,29 +81,6 @@ class _EmailPasswordFieldsWidgetState extends State<EmailPasswordFieldsWidget>
                     widget.isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
               ),
             ),
-          Padding(
-            padding: const EdgeInsets.only(top: KPadding.kPaddingSize16),
-            child: ButtonWidget(
-              onPressed: () {
-                _widgetKey.currentState?.togglePasswordVisibility();
-                focusNode?.requestFocus();
-              },
-              text: widget.email,
-              padding: widget.isDesk
-                  ? const EdgeInsets.symmetric(
-                      vertical: KPadding.kPaddingSize16,
-                      horizontal: KPadding.kPaddingSize32,
-                    )
-                  : const EdgeInsets.all(
-                      KPadding.kPaddingSize16,
-                    ),
-              isDesk: widget.isDesk,
-              icon: KIcon.trailing,
-              iconRightMerge: KSizedBox.kWidthSizedBox8,
-              textStyle:
-                  widget.isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
-            ),
-          ),
           KSizedBox.kHeightSizedBox40,
           Text(
             widget.showPassword
@@ -132,6 +106,7 @@ class _EmailPasswordFieldsWidgetState extends State<EmailPasswordFieldsWidget>
               suffixIcon: Padding(
                 padding: const EdgeInsets.only(right: KPadding.kPaddingSize12),
                 child: IconButton(
+                  key: KWidgetkeys.widget.emailPasswordFields.iconHidePassword,
                   icon: obscurePassword ? KIcon.eyeOff : KIcon.eye,
                   onPressed: () {
                     setState(() {
@@ -155,12 +130,6 @@ class _EmailPasswordFieldsWidgetState extends State<EmailPasswordFieldsWidget>
         ],
       ),
     );
-  }
-
-  void togglePasswordVisibility() {
-    setState(() {
-      obscurePassword = !obscurePassword;
-    });
   }
 
   @override
