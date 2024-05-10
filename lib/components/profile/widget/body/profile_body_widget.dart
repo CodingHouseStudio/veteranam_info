@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -79,10 +80,9 @@ class ProfileBodyWidget extends StatelessWidget {
                 padding: const EdgeInsets.all(KPadding.kPaddingSize4),
                 child: ButtonWidget(
                   text: context.l10n.logOut,
-                  onPressed: () =>
-                      context
-                          .read<AuthenticationBloc>()
-                          .add(AuthenticationLogoutRequested()),
+                  onPressed: () => context
+                      .read<AuthenticationBloc>()
+                      .add(AuthenticationLogoutRequested()),
                   isDesk: isDesk,
                 ),
               ),
