@@ -57,7 +57,7 @@ List<Widget> _textFieldWidgetList({
         key: KWidgetkeys.screen.employer.fieldCity,
         onChanged: null,
         hintText: context.l10n.selectCity,
-        dropDownList: const [],
+        dropDownList: KMockText.dropDownList,
       ),
       if (isDesk) KSizedBox.kHeightSizedBox24 else KSizedBox.kHeightSizedBox8,
       Padding(

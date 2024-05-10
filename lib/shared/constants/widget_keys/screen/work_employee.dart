@@ -11,4 +11,5 @@ class _WorkEmployeeKeys {
   final cards = const Key('work_employee_screen_cards');
   final mockDataButton = const Key('work_employee_screen_mock_data_button');
   final pagination = const Key('work_employee_screen_pagination');
+  final requestCard = const Key('work_employee_screen_request_card');
 }

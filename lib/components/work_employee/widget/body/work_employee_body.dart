@@ -86,7 +86,8 @@ class WorkEmployeeBody extends StatelessWidget {
                   KSizedBox.kHeightSizedBox56
                 else
                   KSizedBox.kHeightSizedBox24,
-                WorkRequestCard(
+                WorkRequestCardWidget(
+                  key: KWidgetkeys.screen.workEmployee.requestCard,
                   isDesk: isDesk,
                 ),
                 if (isDesk)
