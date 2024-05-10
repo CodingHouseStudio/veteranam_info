@@ -122,9 +122,9 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
-              GestureDetector(
-                onTap: () => setState(() => isEditing = !isEditing),
-                child: KIcon.edit,
+              IconButton(
+                onPressed: () => setState(() => isEditing = !isEditing),
+                icon: KIcon.edit,
               ),
             ],
           ),
