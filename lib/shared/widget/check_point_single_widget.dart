@@ -28,15 +28,15 @@ class _CheckPointSingleWidgetState extends State<CheckPointSingleWidget> {
       decoration: BoxDecoration(
         color: isCheck
             ? Theme.of(context).colorScheme.onSecondary
-            : Colors.transparent,
+            : Theme.of(context).colorScheme.background,
         border: Border.all(
-          color: Theme.of(context).colorScheme.onPrimary,
+          color: Theme.of(context).colorScheme.secondary,
           width: KSize.kPixel3,
         ),
         borderRadius: KBorderRadius.kBorderRadius8,
       ),
-      child: InkWell(
-        onTap: () {
+      child: IconButton(
+        onPressed: () {
           setState(() {
             isCheck = !isCheck;
           });
@@ -44,7 +44,7 @@ class _CheckPointSingleWidgetState extends State<CheckPointSingleWidget> {
             widget.onChanged!;
           }
         },
-        child: isCheck
+        icon: isCheck
             ? KIcon.check.setIconKey(
                 KWidgetkeys.widget.checkPointSingle.icon,
               )
