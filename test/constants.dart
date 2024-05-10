@@ -26,6 +26,8 @@ Future<void> setUpGlobal({bool? kIsWeb}) async {
 }
 
 abstract class KGroupText {
+  static const bloc = 'Bloc';
+  static const cubit = 'Cubit';
   static const repository = 'Repository';
   static const provider = 'Provider';
   static const model = 'Model';
@@ -203,23 +205,10 @@ abstract class KScreenBlocName {
   static const employer = 'Employer Screen';
 
   static const feedback = 'Feedback Widget';
-
-  static const filterCubit = 'Filter Cubit';
-  static const languageCubit = 'Language Cubit';
-  static const homeBloc = 'Home Bloc';
-  static const feedbackBloc = 'Feedback Bloc';
-  static const authenticationServicesCubit = 'Authentication Services Cubit';
-  static const authenticationBloc = 'Authentication Bloc';
-  static const loginBloc = 'Login Bloc';
-  static const signUpBloc = 'Sign Up Bloc';
-  static const scrollCubit = 'Scroll Cubit';
-  static const informationBloc = 'Information Bloc';
-  static const investorsBloc = 'Investors Bloc';
-  static const workEmployeeBloc = 'Work Bloc';
-
-  static const iAppAuthenticationRepository = 'App Authentication';
+  static const authenticationServices = 'Authentication Services';
+  static const appAuthentication = 'App Authentication';
   static const authentication = ' Authentication';
-
   static const firestoreService = 'Firestore Service';
   static const secureStorage = 'Secure Storage';
+  static const filter = 'Filter';
 }
