@@ -1,6 +1,6 @@
 part of 'body/investors_body_widget.dart';
 
-List<Widget> feedbackWidgetList({
+List<Widget> _feedbackWidgetList({
   required BuildContext context,
   required bool isDesk,
   required TextEditingController nameController,
