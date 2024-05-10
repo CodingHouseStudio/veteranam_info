@@ -1,9 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
-import 'package:kozak/components/components.dart';
-import 'package:kozak/shared/shared.dart';
 
 import '../text_dependency.dart';
+import 'helper/helper.dart';
 
 void main() {
   setUp(configureDependenciesTest);
@@ -15,30 +14,16 @@ void main() {
   tearDown(GetIt.I.reset);
   group('${KScreenBlocName.discounts} ', () {
     testWidgets('${KGroupText.intial} ', (tester) async {
-      await tester.pumpApp(const DiscountsScreen());
-
-      expect(
-        find.byKey(KWidgetkeys.screen.discounts.screen),
-        findsOneWidget,
-      );
-
-      await tester.pumpAndSettle();
+      await discountsPumpAppHelper(tester: tester);
     });
     group('${KGroupText.goRouter} ', () {
       late MockGoRouter mockGoRouter;
       setUp(() => mockGoRouter = MockGoRouter());
       testWidgets('${KGroupText.intial} ', (tester) async {
-        await tester.pumpApp(
-          const DiscountsScreen(),
+        await discountsPumpAppHelper(
+          tester: tester,
           mockGoRouter: mockGoRouter,
         );
-
-        expect(
-          find.byKey(KWidgetkeys.screen.discounts.screen),
-          findsOneWidget,
-        );
-
-        await tester.pumpAndSettle();
       });
       // group('${KGroupText.goTo} ', () {
       // });
