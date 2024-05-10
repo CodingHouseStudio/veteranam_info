@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kozak/shared/shared.dart';
 
@@ -9,6 +11,10 @@ class ProfileBodyWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScaffoldWidget(
       childWidgetsFunction: ({required isDesk}) => [
+        if (isDesk)
+          KSizedBox.kHeightSizedBox32
+        else
+          KSizedBox.kHeightSizedBox24,
         Padding(
           padding: EdgeInsets.symmetric(
             horizontal:
@@ -38,24 +44,64 @@ class ProfileBodyWidget extends StatelessWidget {
   }
 
   Widget _buildDesktopLayout(BuildContext context, bool isDesk) {
-    return Row(
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Expanded(
-          flex: 2,
-          child: ProfileCardWidget(
-            key: KWidgetkeys.widget.profileCard.profileCard,
-            isDesk: isDesk,
-          ),
-        ),
-        Expanded(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: KPadding.kPaddingSize16,
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              flex: 2,
+              child: ProfileCardWidget(
+                key: KWidgetkeys.widget.profileCard.profileCard,
+                isDesk: isDesk,
+              ),
             ),
-            child: _buildBoxWidgets(context, isDesk),
-          ),
+            KSizedBox.kWidthSizedBox90,
+            Expanded(
+              child: IntrinsicHeight(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: KPadding.kPaddingSize8,
+                  ),
+                  child: _buildBoxWidgets(context, isDesk),
+                ),
+              ),
+            ),
+          ],
         ),
+        KSizedBox.kHeightSizedBox56,
+        Row(
+          children: [
+            Expanded(
+              flex: -3,
+              child: Padding(
+                padding: const EdgeInsets.all(KPadding.kPaddingSize4),
+                child: ButtonWidget(
+                  text: context.l10n.logOut,
+                  onPressed: () => context
+                      .read<AuthenticationBloc>()
+                      .add(AuthenticationLogoutRequested()),
+                  isDesk: isDesk,
+                ),
+              ),
+            ),
+            KSizedBox.kWidthSizedBox56,
+            Expanded(
+              flex: -2,
+              child: Padding(
+                padding: const EdgeInsets.all(KPadding.kPaddingSize4),
+                child: ButtonWidget(
+                  text: context.l10n.deleteAccount,
+                  isDesk: isDesk,
+                  onPressed: null,
+                  // backgroundColor: AppColors.transparent,
+                ),
+              ),
+            ),
+          ],
+        ),
+        KSizedBox.kHeightSizedBox56,
       ],
     );
   }
@@ -103,21 +149,33 @@ class ProfileBodyWidget extends StatelessWidget {
 
   Widget _buildBoxWidgets(BuildContext context, bool isDesk) {
     return Padding(
-      padding: const EdgeInsets.all(KPadding.kPaddingSize8),
+      padding: const EdgeInsets.all(KPadding.kPaddingSize4),
       child: Column(
         children: [
           BoxWidget(
             text: context.l10n.saved,
             isDesk: isDesk,
             onTap: null,
+            textRightPadding: KPadding.kPaddingSize56,
+            textIconPaddingWidget: KSizedBox.kHeightSizedBox56,
           ),
           KSizedBox.kHeightSizedBox30,
           BoxWidget(
             text: context.l10n.myStory,
             isDesk: isDesk,
             onTap: null,
+            textRightPadding: KPadding.kPaddingSize56,
+            textIconPaddingWidget: KSizedBox.kHeightSizedBox56,
           ),
           KSizedBox.kHeightSizedBox30,
+          if (isDesk)
+            BoxWidget(
+              text: context.l10n.myFeedback,
+              isDesk: isDesk,
+              onTap: null,
+              textRightPadding: KPadding.kPaddingSize56,
+              textIconPaddingWidget: KSizedBox.kHeightSizedBox56,
+            ),
         ],
       ),
     );
