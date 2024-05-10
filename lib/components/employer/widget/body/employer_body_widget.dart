@@ -16,16 +16,12 @@ class EmployerBodyWidget extends StatelessWidget {
           KSizedBox.kHeightSizedBox40
         else
           KSizedBox.kHeightSizedBox24,
-        Text(
-          context.l10n.work,
-          key: KWidgetkeys.screen.employer.title,
-          style: isDesk ? AppTextStyle.text96 : AppTextStyle.text32,
-        ),
-        KSizedBox.kHeightSizedBox8,
-        Text(
-          context.l10n.employerSubtitle,
-          key: KWidgetkeys.screen.employer.subtitle,
-          style: isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
+        ...titleWidgetList(
+          title: context.l10n.work,
+          titleKey: KWidgetkeys.screen.employer.title,
+          subtitle: context.l10n.employerSubtitle,
+          subtitleKey: KWidgetkeys.screen.employer.subtitle,
+          isDesk: isDesk,
         ),
         if (isDesk)
           KSizedBox.kHeightSizedBox56
