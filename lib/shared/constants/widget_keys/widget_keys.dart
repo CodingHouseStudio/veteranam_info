@@ -105,6 +105,7 @@ part 'widget/feedback_box.dart';
 part 'widget/rate.dart';
 
 part 'widget/chat_input.dart';
+part 'widget/work_request_card.dart';
 
 part 'widget/check_point_single.dart';
 

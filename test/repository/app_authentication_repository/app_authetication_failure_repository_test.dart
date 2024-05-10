@@ -9,7 +9,7 @@ import 'package:mockito/mockito.dart';
 import '../../text_dependency.dart';
 
 void main() {
-  group('${KScreenBlocName.iAppAuthenticationRepository} ', () {
+  group('${KScreenBlocName.appAuthentication} ', () {
     group(' ${KGroupText.repository} ', () {
       late AppAuthenticationRepository appAuthenticationRepository;
       late IStorage mockSecureStorageRepository;
