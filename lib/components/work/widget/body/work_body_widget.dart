@@ -12,7 +12,7 @@ class WorkBodyWidget extends StatelessWidget {
           KSizedBox.kHeightSizedBox40
         else
           KSizedBox.kHeightSizedBox24,
-        ...titleWidgetList(
+        ...TitleWidget.titleWidgetList(
           title: context.l10n.work,
           titleKey: KWidgetkeys.screen.work.title,
           subtitle: context.l10n.workSubtitle,
