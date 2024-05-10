@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kozak/components/work_respond/widget/work_respond_buttons_widget.dart';
 
 import 'package:kozak/shared/shared.dart';
 
@@ -127,45 +128,7 @@ class WorkRespondContainerWidget extends StatelessWidget {
             KSizedBox.kHeightSizedBox32
           else
             KSizedBox.kHeightSizedBox16,
-          if (isDesk)
-            Row(
-              children: [
-                Expanded(
-                  child: ButtonWidget(
-                    key: KWidgetkeys.screen.workRespond.send,
-                    text: context.l10n.send,
-                    onPressed: null,
-                    isDesk: isDesk,
-                  ),
-                ),
-                KSizedBox.kWidthSizedBox73,
-                Expanded(
-                  child: ButtonWidget(
-                    key: KWidgetkeys.screen.workRespond.cancel,
-                    text: context.l10n.cancel,
-                    onPressed: null,
-                    isDesk: isDesk,
-                    backgroundColor: Colors.white,
-                  ),
-                ),
-              ],
-            )
-          else ...[
-            ButtonWidget(
-              key: KWidgetkeys.screen.workRespond.send,
-              text: context.l10n.send,
-              onPressed: null,
-              isDesk: isDesk,
-            ),
-            KSizedBox.kHeightSizedBox16,
-            ButtonWidget(
-              key: KWidgetkeys.screen.workRespond.cancel,
-              text: context.l10n.cancel,
-              onPressed: null,
-              isDesk: isDesk,
-              backgroundColor: Theme.of(context).primaryColor,
-            ),
-          ],
+          WorkRespondButtonsWidget(isDesk: isDesk),
           if (isDesk)
             KSizedBox.kHeightSizedBox32
           else
