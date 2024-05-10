@@ -4,6 +4,7 @@ import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
 
 import '../text_dependency.dart';
+import 'helper/helper.dart';
 
 void main() {
   setUp(configureDependenciesTest);
@@ -15,14 +16,7 @@ void main() {
   tearDown(GetIt.I.reset);
   group('${KScreenBlocName.profile} ', () {
     testWidgets('${KGroupText.intial} ', (tester) async {
-      await tester.pumpApp(const ProfileScreen());
-
-      expect(
-        find.byKey(KWidgetkeys.screen.profile.screen),
-        findsOneWidget,
-      );
-
-      await tester.pumpAndSettle();
+      await profilePumpAppHelper(tester: tester);
     });
 
     testWidgets('Show log out dialog', (tester) async {
@@ -55,14 +49,10 @@ void main() {
       late MockGoRouter mockGoRouter;
       setUp(() => mockGoRouter = MockGoRouter());
       testWidgets('${KGroupText.intial} ', (tester) async {
-        await tester.pumpApp(const ProfileScreen(), mockGoRouter: mockGoRouter);
-
-        expect(
-          find.byKey(KWidgetkeys.screen.profile.screen),
-          findsOneWidget,
+        await profilePumpAppHelper(
+          tester: tester,
+          mockGoRouter: mockGoRouter,
         );
-
-        await tester.pumpAndSettle();
       });
 
       group('${KGroupText.goTo} ', () {
