@@ -115,8 +115,8 @@
   "contacts": "Contacts*",
   "howToContactYou": "Write how to contact you",
   "remotely": "Remotely",
-  "logOutQuestion": "Are you sure you want to log out?",
-  "deleteAccountQuestion": "Are you sure you want to delete?",
+  "logOutQuestion": "Are you sure you want to log out of your account?",
+  "deleteAccountQuestion": "Are you sure you want to delete your account?",
   "yes": "Yes",
   "no": "No"
 }

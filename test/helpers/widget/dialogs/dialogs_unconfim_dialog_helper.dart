@@ -4,16 +4,16 @@ import 'package:mocktail/mocktail.dart';
 
 import '../../../text_dependency.dart';
 
-Future<void> dialogLogOutConfirmHelper({
+Future<void> dialogUnconfirmHelper({
   required WidgetTester tester,
   required MockGoRouter mockGoRouter,
 }) async {
   expect(
-    find.byKey(KWidgetkeys.widget.dialogs.confirmButton),
+    find.byKey(KWidgetkeys.widget.dialogs.unconfirmButton),
     findsOneWidget,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.widget.dialogs.confirmButton));
+  await tester.tap(find.byKey(KWidgetkeys.widget.dialogs.unconfirmButton));
 
   await tester.pumpAndSettle();
 

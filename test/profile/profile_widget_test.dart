@@ -81,7 +81,7 @@ void main() {
 
           await profileCardLogOutHelper(tester);
 
-          await dialogLogOutUnconfirmHelper(
+          await dialogUnconfirmHelper(
             tester: tester,
             mockGoRouter: mockGoRouter,
           );
@@ -102,7 +102,7 @@ void main() {
 
           await profileCardLogOutHelper(tester);
 
-          await dialogLogOutConfirmHelper(
+          await dialogConfirmHelper(
             tester: tester,
             mockGoRouter: mockGoRouter,
           );
@@ -124,7 +124,7 @@ void main() {
 
           await profileCardDeleteAccountHelper(tester);
 
-          await dialogDeleteAccountUnconfirmHelper(
+          await dialogUnconfirmHelper(
             tester: tester,
             mockGoRouter: mockGoRouter,
           );
@@ -145,7 +145,7 @@ void main() {
 
           await profileCardDeleteAccountHelper(tester);
 
-          await dialogDeleteAccountUnconfirmHelper(
+          await dialogConfirmHelper(
             tester: tester,
             mockGoRouter: mockGoRouter,
           );
