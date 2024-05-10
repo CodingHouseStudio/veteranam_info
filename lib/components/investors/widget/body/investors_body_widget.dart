@@ -43,7 +43,7 @@ class _InvestorsBodyWidgetState extends State<InvestorsBodyWidget> {
         builder: (context, state) {
           return ScaffoldWidget(
             mainChildWidgetsFunction: ({required isDesk}) {
-              final childWidgets = feedbackWidgetList(
+              final childWidgets = _feedbackWidgetList(
                 context: context,
                 isDesk: isDesk,
                 nameController: nameController,
