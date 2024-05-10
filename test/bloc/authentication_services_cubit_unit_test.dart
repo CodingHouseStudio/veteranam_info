@@ -6,10 +6,11 @@ import 'package:mockito/mockito.dart';
 
 import '../text_dependency.dart';
 
+/// FOLDER FILES COMMENT: Tests blocks that are used on several pages
 void main() {
   setupFirebaseAuthMocks();
 
-  group('${KScreenBlocName.authenticationServicesCubit} ', () {
+  group('${KScreenBlocName.authenticationServices} ${KGroupText.cubit}', () {
     late AuthenticationRepository mockAuthenticationRepository;
     late AuthenticationServicesCubit authenticationServicesCubit;
     setUp(() {
