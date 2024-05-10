@@ -37,3 +37,4 @@ export 'switch_widget.dart';
 export 'text_field_widget.dart';
 export 'viewpager_indicator_widget.dart';
 export 'work_card_widget.dart';
+export 'work_request_card.dart';

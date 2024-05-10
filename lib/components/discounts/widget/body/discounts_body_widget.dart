@@ -9,7 +9,7 @@ class DiscountBodyWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScaffoldWidget(
       hasMicrophone: false,
-      childWidgetsFunction: ({required isDesk}) => [
+      mainChildWidgetsFunction: ({required isDesk}) => [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Container(

@@ -1,9 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
-import 'package:kozak/components/components.dart';
-import 'package:kozak/shared/shared.dart';
 
 import '../text_dependency.dart';
+import 'helper/helper.dart';
 
 void main() {
   setUp(configureDependenciesTest);
@@ -15,38 +14,17 @@ void main() {
   tearDown(GetIt.I.reset);
   group('${KScreenBlocName.aboutUs} ', () {
     testWidgets('${KGroupText.intial} ', (tester) async {
-      await tester.pumpApp(const AboutUsScreen());
+      await aboutUsPumpAppHelper(tester: tester);
 
-      expect(
-        find.byKey(KWidgetkeys.screen.aboutUs.screen),
-        findsOneWidget,
-      );
-
-      await tester.pumpAndSettle();
-
-      await chatInputHelper(tester);
-
-      await rateHelper(tester);
+      await aboutUsInitialHelper(tester);
     });
     group('${KGroupText.goRouter} ', () {
       late MockGoRouter mockGoRouter;
       setUp(() => mockGoRouter = MockGoRouter());
       testWidgets('${KGroupText.intial} ', (tester) async {
-        await tester.pumpApp(
-          const AboutUsScreen(),
-          mockGoRouter: mockGoRouter,
-        );
+        await aboutUsPumpAppHelper(tester: tester, mockGoRouter: mockGoRouter);
 
-        expect(
-          find.byKey(KWidgetkeys.screen.aboutUs.screen),
-          findsOneWidget,
-        );
-
-        await tester.pumpAndSettle();
-
-        await rateHelper(tester);
-
-        await chatInputHelper(tester);
+        await aboutUsInitialHelper(tester);
       });
       // group('${KGroupText.goTo} ', () {
       // });
