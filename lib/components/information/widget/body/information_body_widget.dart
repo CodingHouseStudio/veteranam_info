@@ -11,7 +11,7 @@ class InformationBodyWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<InformationWatcherBloc, InformationWatcherState>(
       builder: (context, _) => ScaffoldWidget(
-        childWidgetsFunction: ({required isDesk}) {
+        mainChildWidgetsFunction: ({required isDesk}) {
           final childWidgets = [
             if (isDesk)
               KSizedBox.kHeightSizedBox40
