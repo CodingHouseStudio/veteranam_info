@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:kozak/shared/shared.dart';
 
 class EmployerBodyWidget extends StatelessWidget {
@@ -145,11 +147,14 @@ class EmployerBodyWidget extends StatelessWidget {
           KSizedBox.kHeightSizedBox32
         else
           KSizedBox.kHeightSizedBox16,
-        ButtonWidget(
-          key: KWidgetkeys.screen.employer.button,
-          text: context.l10n.next,
-          isDesk: true,
-          onPressed: null,
+        Align(
+          alignment: Alignment.centerLeft,
+          child: ButtonWidget(
+            key: KWidgetkeys.screen.employer.button,
+            text: context.l10n.next,
+            onPressed: null,
+            isDesk: isDesk,
+          ),
         ),
         if (isDesk)
           KSizedBox.kHeightSizedBox56

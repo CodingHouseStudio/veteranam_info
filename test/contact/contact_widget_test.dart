@@ -1,9 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
-import 'package:kozak/components/components.dart';
-import 'package:kozak/shared/shared.dart';
 
 import '../text_dependency.dart';
+import 'helper/helper.dart';
 
 void main() {
   setUp(configureDependenciesTest);
@@ -15,30 +14,13 @@ void main() {
   tearDown(GetIt.I.reset);
   group('${KScreenBlocName.contact} ', () {
     testWidgets('${KGroupText.intial} ', (tester) async {
-      await tester.pumpApp(const ContactScreen());
-
-      expect(
-        find.byKey(KWidgetkeys.screen.contact.screen),
-        findsOneWidget,
-      );
-
-      await tester.pumpAndSettle();
+      await contactPumpAppHelper(tester: tester);
     });
     group('${KGroupText.goRouter} ', () {
       late MockGoRouter mockGoRouter;
       setUp(() => mockGoRouter = MockGoRouter());
       testWidgets('${KGroupText.intial} ', (tester) async {
-        await tester.pumpApp(
-          const ContactScreen(),
-          mockGoRouter: mockGoRouter,
-        );
-
-        expect(
-          find.byKey(KWidgetkeys.screen.contact.screen),
-          findsOneWidget,
-        );
-
-        await tester.pumpAndSettle();
+        await contactPumpAppHelper(tester: tester, mockGoRouter: mockGoRouter);
       });
       // group('${KGroupText.goTo} ', () {
       // });

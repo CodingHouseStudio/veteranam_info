@@ -1,12 +1,11 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
-import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
 import 'package:mockito/mockito.dart';
 
 import '../text_dependency.dart';
-import 'investors_widget/investors_widget.dart';
+import 'helper/helper.dart';
 
 void main() {
   setUp(configureDependenciesTest);
@@ -18,15 +17,13 @@ void main() {
   tearDown(GetIt.I.reset);
   group('${KScreenBlocName.investors} ', () {
     late IInvestorsRepository mockInvestorsRepository;
-    late InvestorsWatcherBloc investorsBloc;
     late IFeedbackRepository mockFeedbackRepository;
-    late FeedbackBloc feedbackBloc;
     setUp(() {
       ExtendedDateTime.customTime = KTestText.dateTime;
       ExtendedDateTime.id = KTestText.feedbackModel.id;
       mockInvestorsRepository = MockIInvestorsRepository();
       when(mockInvestorsRepository.getFunds()).thenAnswer(
-        (invocation) async => const Right(KTestText.fundItems),
+        (invocation) async => Right(KTestText.fundItems),
       );
 
       mockFeedbackRepository = MockIFeedbackRepository();
@@ -35,95 +32,43 @@ void main() {
         (invocation) async => const Right(true),
       );
     });
-    void registerInvestorsBloc() {
-      investorsBloc =
-          InvestorsWatcherBloc(investorsRepository: mockInvestorsRepository);
-      if (GetIt.I.isRegistered<InvestorsWatcherBloc>()) {
-        GetIt.I.unregister<InvestorsWatcherBloc>();
-      }
-      GetIt.I.registerSingleton<InvestorsWatcherBloc>(investorsBloc);
-    }
-
-    void registerFeedbackBloc() {
-      feedbackBloc = FeedbackBloc(feedbackRepository: mockFeedbackRepository);
-      if (GetIt.I.isRegistered<FeedbackBloc>()) {
-        GetIt.I.unregister<FeedbackBloc>();
-      }
-      GetIt.I.registerSingleton<FeedbackBloc>(feedbackBloc);
-    }
 
     testWidgets('${KGroupText.intial} ', (tester) async {
-      registerInvestorsBloc();
-      await tester.pumpApp(const InvestorsScreen());
-
-      expect(
-        find.byKey(KWidgetkeys.screen.investors.screen),
-        findsOneWidget,
+      await investorsPumpAppHelper(
+        mockFeedbackRepository: mockFeedbackRepository,
+        mockInvestorsRepository: mockInvestorsRepository,
+        tester: tester,
       );
 
-      await tester.pumpAndSettle();
-
-      await feedbackHelper(tester);
-
-      await donatesCardHelper(tester);
+      await investorsInitialHelper(tester);
     });
 
     testWidgets('Feedback enter correct text and save it', (tester) async {
-      registerInvestorsBloc();
-      registerFeedbackBloc();
-      await tester.pumpApp(const InvestorsScreen());
-
-      expect(
-        find.byKey(KWidgetkeys.screen.investors.screen),
-        findsOneWidget,
-      );
-
-      await tester.pumpAndSettle();
-
-      await feedbackEnterTextHelper(
+      await investorsPumpAppHelper(
+        mockFeedbackRepository: mockFeedbackRepository,
+        mockInvestorsRepository: mockInvestorsRepository,
         tester: tester,
-        email: KTestText.userEmail,
-        field: KTestText.field,
       );
 
-      await scrollingHelper(tester: tester, offset: KTestConstants.scrollingUp);
-
-      await feedbackBoxHelper(tester);
+      await correctSaveHelper(tester);
     });
 
     testWidgets('Feedback enter incorrect text and save it', (tester) async {
-      registerInvestorsBloc();
-      await tester.pumpApp(const InvestorsScreen());
-
-      expect(
-        find.byKey(KWidgetkeys.screen.investors.screen),
-        findsOneWidget,
-      );
-
-      await tester.pumpAndSettle();
-
-      await feedbackEnterTextHelper(
+      await investorsPumpAppHelper(
+        mockFeedbackRepository: mockFeedbackRepository,
+        mockInvestorsRepository: mockInvestorsRepository,
         tester: tester,
-        email: KTestText.userEmailIncorrect,
-        field: KTestText.field,
       );
 
-      await scrollingHelper(tester: tester, offset: KTestConstants.scrollingUp);
-
-      await feedbackHelper(tester);
+      await incorrectSaveHelper(tester);
     });
 
     testWidgets('Feedback enter text and clear it', (tester) async {
-      registerInvestorsBloc();
-      registerFeedbackBloc();
-      await tester.pumpApp(const InvestorsScreen());
-
-      expect(
-        find.byKey(KWidgetkeys.screen.investors.screen),
-        findsOneWidget,
+      await investorsPumpAppHelper(
+        mockFeedbackRepository: mockFeedbackRepository,
+        mockInvestorsRepository: mockInvestorsRepository,
+        tester: tester,
       );
-
-      await tester.pumpAndSettle();
 
       await feedbackClearTextHelper(
         tester: tester,
@@ -136,68 +81,25 @@ void main() {
       late MockGoRouter mockGoRouter;
       setUp(() => mockGoRouter = MockGoRouter());
       testWidgets('${KGroupText.intial} ', (tester) async {
-        registerInvestorsBloc();
-        registerInvestorsBloc();
-        await tester.pumpApp(
-          const InvestorsScreen(),
+        await investorsPumpAppHelper(
+          mockFeedbackRepository: mockFeedbackRepository,
+          mockInvestorsRepository: mockInvestorsRepository,
+          tester: tester,
           mockGoRouter: mockGoRouter,
         );
 
-        expect(
-          find.byKey(KWidgetkeys.screen.investors.screen),
-          findsOneWidget,
-        );
-
-        await tester.pumpAndSettle();
-
-        await feedbackHelper(tester);
-
-        await donatesCardHelper(tester);
+        await investorsInitialHelper(tester);
       });
       group('${KGroupText.goTo} ', () {
-        testWidgets('All footer widget navigation', (tester) async {
-          registerInvestorsBloc();
-          registerFeedbackBloc();
-          await tester.pumpApp(
-            const InvestorsScreen(),
-            mockGoRouter: mockGoRouter,
-          );
-
-          expect(
-            find.byKey(KWidgetkeys.screen.investors.screen),
-            findsOneWidget,
-          );
-
-          await tester.pumpAndSettle();
-
-          await footerButtonsHelper(
-            tester: tester,
-            mockGoRouter: mockGoRouter,
-          );
-        });
-
         testWidgets('Feedback box widget navigation', (tester) async {
-          registerInvestorsBloc();
-          registerFeedbackBloc();
-          await tester.pumpApp(
-            const InvestorsScreen(),
+          await investorsPumpAppHelper(
+            mockFeedbackRepository: mockFeedbackRepository,
+            mockInvestorsRepository: mockInvestorsRepository,
+            tester: tester,
             mockGoRouter: mockGoRouter,
           );
 
-          expect(
-            find.byKey(KWidgetkeys.screen.investors.screen),
-            findsOneWidget,
-          );
-
-          await tester.pumpAndSettle();
-
-          await feedbackEnterTextHelper(
-            tester: tester,
-            email: KTestText.userEmail,
-            field: KTestText.field,
-          );
-
-          await feedbackBoxNavigationHelper(
+          await feedbackNavigationHelper(
             tester: tester,
             mockGoRouter: mockGoRouter,
           );
