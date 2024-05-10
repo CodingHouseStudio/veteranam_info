@@ -8,7 +8,7 @@ import 'package:mockito/mockito.dart';
 import '../text_dependency.dart';
 
 void main() {
-  group('${KScreenBlocName.loginBloc} ', () {
+  group('${KScreenBlocName.login} ${KGroupText.bloc}', () {
     late LoginBloc loginBloc;
     late AuthenticationRepository mockAuthenticationRepository;
     setUp(() {
