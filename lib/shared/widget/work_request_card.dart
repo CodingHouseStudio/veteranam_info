@@ -1,0 +1,38 @@
+import 'package:flutter/material.dart';
+import 'package:kozak/shared/shared.dart';
+
+class WorkRequestCard extends StatelessWidget {
+  const WorkRequestCard({required this.isDesk, super.key});
+  final bool isDesk;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: KWidgetTheme.boxDecorationWidget(context),
+      padding: EdgeInsets.symmetric(
+        vertical: KPadding.kPaddingSize16,
+        horizontal: isDesk ? KPadding.kPaddingSize48 : KPadding.kPaddingSize16,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            context.l10n.didNotFindYourVacancy,
+            style: isDesk ? AppTextStyle.text40 : AppTextStyle.text32,
+          ),
+          KSizedBox.kHeightSizedBox16,
+          Text(
+            context.l10n.workRequestSubtitle,
+            style: isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
+          ),
+          KSizedBox.kHeightSizedBox16,
+          ButtonWidget(
+            isDesk: isDesk,
+            text: context.l10n.leaveRequest,
+            onPressed: null,
+          ),
+        ],
+      ),
+    );
+  }
+}

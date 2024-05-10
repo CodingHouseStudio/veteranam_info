@@ -3,12 +3,19 @@ import 'package:kozak/shared/shared.dart';
 
 class ScaffoldWidget extends StatelessWidget {
   const ScaffoldWidget({
-    required this.childWidgetsFunction,
+    required this.mainChildWidgetsFunction,
+    this.mainDecoration,
+    this.titleChildWidgetsFunction,
     super.key,
     this.hasMicrophone = true,
+    this.mainDeskPadding,
   });
-  final List<Widget> Function({required bool isDesk}) childWidgetsFunction;
+  final List<Widget> Function({required bool isDesk})?
+      titleChildWidgetsFunction;
+  final List<Widget> Function({required bool isDesk}) mainChildWidgetsFunction;
   final bool hasMicrophone;
+  final EdgeInsetsGeometry? mainDeskPadding;
+  final BoxDecoration? mainDecoration;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +23,7 @@ class ScaffoldWidget extends StatelessWidget {
       builder: (BuildContext context, BoxConstraints constraints) {
         final isDesk =
             constraints.maxWidth > KPlatformConstants.minWidthThresholdTablet;
-        final childWidget = childWidgetsFunction(isDesk: isDesk);
+        final mainChildWidget = mainChildWidgetsFunction(isDesk: isDesk);
         final padding = EdgeInsets.symmetric(
           horizontal:
               isDesk ? KPadding.kPaddingSize90 : KPadding.kPaddingSize16,
@@ -34,22 +41,34 @@ class ScaffoldWidget extends StatelessWidget {
                   ),
                 ),
               ),
-              SliverPadding(
-                padding: EdgeInsets.only(
-                  left: isDesk
-                      ? KPadding.kPaddingSize90
-                      : KPadding.kPaddingSize16,
-                  right: isDesk
-                      ? KPadding.kPaddingSize90
-                      : KPadding.kPaddingSize16,
+              if (titleChildWidgetsFunction != null)
+                SliverPadding(
+                  padding: padding,
+                  sliver: SliverList.builder(
+                    addAutomaticKeepAlives: false,
+                    addRepaintBoundaries: false,
+                    itemBuilder: (context, index) {
+                      return titleChildWidgetsFunction!(isDesk: isDesk)
+                          .elementAt(index);
+                    },
+                    itemCount:
+                        titleChildWidgetsFunction!(isDesk: isDesk).length,
+                  ),
                 ),
-                sliver: SliverList.builder(
-                  addAutomaticKeepAlives: false,
-                  addRepaintBoundaries: false,
-                  itemBuilder: (context, index) {
-                    return childWidget.elementAt(index);
-                  },
-                  itemCount: childWidget.length,
+              DecoratedSliver(
+                decoration: mainDecoration ?? const BoxDecoration(),
+                sliver: SliverPadding(
+                  padding: isDesk
+                      ? mainDeskPadding?.add(padding) ?? padding
+                      : padding,
+                  sliver: SliverList.builder(
+                    addAutomaticKeepAlives: false,
+                    addRepaintBoundaries: false,
+                    itemBuilder: (context, index) {
+                      return mainChildWidget.elementAt(index);
+                    },
+                    itemCount: mainChildWidget.length,
+                  ),
                 ),
               ),
               SliverPadding(
@@ -87,7 +106,7 @@ class ScaffoldWidget extends StatelessWidget {
                 ),
               ),
             ],
-            semanticChildCount: childWidget.length,
+            semanticChildCount: mainChildWidget.length,
           ),
         );
       },

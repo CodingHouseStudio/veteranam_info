@@ -40,7 +40,7 @@ class _InvestorsBodyWidgetState extends State<InvestorsBodyWidget> {
         },
         builder: (context, state) {
           return ScaffoldWidget(
-            childWidgetsFunction: ({required isDesk}) {
+            mainChildWidgetsFunction: ({required isDesk}) {
               final childWidgets = [
                 if (isDesk)
                   KSizedBox.kHeightSizedBox40
