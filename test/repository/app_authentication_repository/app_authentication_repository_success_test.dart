@@ -9,7 +9,7 @@ import 'package:mockito/mockito.dart';
 import '../../text_dependency.dart';
 
 void main() {
-  group('${KScreenBlocName.iAppAuthenticationRepository} ', () {
+  group('${KScreenBlocName.appAuthentication} ', () {
     group('${KGroupText.model} ', () {
       test('${KGroupText.shouldBe} ${KGroupText.modelJson}', () {
         final json = {
