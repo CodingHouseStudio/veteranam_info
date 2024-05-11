@@ -17,7 +17,7 @@ class InformationBodyWidget extends StatelessWidget {
               KSizedBox.kHeightSizedBox40
             else
               KSizedBox.kHeightSizedBox16,
-            ...titleWidgetList(
+            ...TitleWidget.titleWidgetList(
               title: context.l10n.information,
               titleKey: KWidgetkeys.screen.information.title,
               subtitle: context.l10n.informationSubtitle,

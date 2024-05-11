@@ -19,7 +19,7 @@ class DiscountBodyWidget extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ...titleWidgetList(
+                  ...TitleWidget.titleWidgetList(
                     title: context.l10n.discountsAndCoupons,
                     titleKey: null,
                     subtitle: context.l10n.discountsAndCouponsDescription,
