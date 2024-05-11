@@ -46,11 +46,11 @@ void main() {
         await scrollingHelperInt(
           tester: tester,
           offset: KTestConstants.scrolling,
-          itemKey: KWidgetkeys.screen.investors.donateCards,
+          itemKey: KWidgetkeys.screen.investors.donateCard,
         );
 
         await tester.ensureVisible(
-          find.byKey(KWidgetkeys.screen.investors.donateCards).last,
+          find.byKey(KWidgetkeys.screen.investors.donateCard).last,
         );
         await tester.pumpAndSettle();
 

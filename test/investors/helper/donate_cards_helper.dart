@@ -12,13 +12,15 @@ Future<void> donatesCardHelper(
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.investors.donateCards,
+    itemKey: KWidgetkeys.screen.investors.donateCard,
     offset: KTestConstants.scrollingDown,
   );
 
   expect(find.byKey(KWidgetkeys.screen.investors.donateCards), findsWidgets);
 
-  await donateCardHelper(tester);
+  expect(find.byKey(KWidgetkeys.screen.investors.donateCard), findsWidgets);
+
+  await donateCardHelper(tester: tester, isDesk: true);
 
   final widgetLocation =
       tester.getCenter(find.byKey(KWidgetkeys.widget.donateCard.widget).first);
