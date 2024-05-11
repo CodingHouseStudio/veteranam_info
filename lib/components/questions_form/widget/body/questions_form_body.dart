@@ -99,15 +99,18 @@ class _QuestionsFormBodyState extends State<QuestionsFormBody> {
           KSizedBox.kHeightSizedBox40
         else
           KSizedBox.kHeightSizedBox32,
-        ButtonWidget(
-          key: KWidgetkeys.screen.questionsForm.button,
-          isDesk: isDesk,
-          onPressed: userRole != null
-              ? () => context
-                  .read<AuthenticationBloc>()
-                  .add(AppUserRoleChanged(userRole!))
-              : null,
-          text: context.l10n.next,
+        Align(
+          alignment: Alignment.centerLeft,
+          child: ButtonWidget(
+            key: KWidgetkeys.screen.questionsForm.button,
+            isDesk: isDesk,
+            onPressed: userRole != null
+                ? () => context
+                    .read<AuthenticationBloc>()
+                    .add(AppUserRoleChanged(userRole!))
+                : null,
+            text: context.l10n.next,
+          ),
         ),
       ],
     );
