@@ -200,6 +200,7 @@ abstract class KScreenBlocName {
   static const signUp = 'Sign Up Screen';
   static const questionsForm = 'Questions Form Screen';
   static const workEmployee = 'Work Employee Screen';
+  static const workRespond = 'Work Respond Screen';
   static const employer = 'Employer Screen';
 
   static const feedback = 'Feedback Widget';
