@@ -86,7 +86,7 @@ class _InvestorsBodyWidgetState extends State<InvestorsBodyWidget> {
                               top: index == 0 ? 0 : KPadding.kPaddingSize24,
                             ),
                             child: DonateCardWidget(
-                              key: KWidgetkeys.screen.investors.donateCards,
+                              key: KWidgetkeys.screen.investors.donateCard,
                               fundModel: _.fundItems.elementAt(index),
                               isDesk: false,
                               hasSubtitle: true,
@@ -95,7 +95,7 @@ class _InvestorsBodyWidgetState extends State<InvestorsBodyWidget> {
                         )
                     else
                       TextButton(
-                        key: KWidgetkeys.screen.home.buttonMock,
+                        key: KWidgetkeys.screen.investors.buttonMock,
                         onPressed: () {
                           GetIt.I.get<IInvestorsRepository>().addMockFunds();
                           context
