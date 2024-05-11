@@ -6,12 +6,14 @@ class DropListFieldWidget extends StatefulWidget {
     required this.onChanged,
     required this.hintText,
     required this.dropDownList,
+    required this.isDesk,
     super.key,
   });
 
   final void Function(String? text)? onChanged;
   final String hintText;
   final List<String> dropDownList;
+  final bool isDesk;
 
   @override
   State<DropListFieldWidget> createState() => _DropListFieldWidgetState();
@@ -89,6 +91,7 @@ class _DropListFieldWidgetState extends State<DropListFieldWidget> {
           onChanged: widget.onChanged,
           hintText: widget.hintText,
           disposeFocusNode: false,
+          isDesk: widget.isDesk,
         );
       },
     );

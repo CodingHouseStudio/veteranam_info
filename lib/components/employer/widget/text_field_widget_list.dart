@@ -21,6 +21,7 @@ List<Widget> _textFieldWidgetList({
         widgetKey: KWidgetkeys.screen.employer.fieldPosition,
         hintText: context.l10n.writeProposedPosition,
         onChanged: null,
+        isDesk: isDesk,
       ),
       if (isDesk) KSizedBox.kHeightSizedBox32 else KSizedBox.kHeightSizedBox16,
       Padding(
@@ -39,6 +40,7 @@ List<Widget> _textFieldWidgetList({
         widgetKey: KWidgetkeys.screen.employer.fieldWage,
         hintText: context.l10n.writeTheWage,
         onChanged: null,
+        isDesk: isDesk,
       ),
       if (isDesk) KSizedBox.kHeightSizedBox32 else KSizedBox.kHeightSizedBox16,
       Padding(
@@ -58,6 +60,7 @@ List<Widget> _textFieldWidgetList({
         onChanged: null,
         hintText: context.l10n.selectCity,
         dropDownList: KMockText.dropDownList,
+        isDesk: isDesk,
       ),
       if (isDesk) KSizedBox.kHeightSizedBox24 else KSizedBox.kHeightSizedBox8,
       Padding(
@@ -99,6 +102,7 @@ List<Widget> _textFieldWidgetList({
         widgetKey: KWidgetkeys.screen.employer.fieldContact,
         hintText: context.l10n.howToContactYou,
         onChanged: null,
+        isDesk: isDesk,
       ),
       if (isDesk) KSizedBox.kHeightSizedBox32 else KSizedBox.kHeightSizedBox16,
     ];
