@@ -44,6 +44,7 @@ class WorkRespondContainerWidget extends StatelessWidget {
             widgetKey: KWidgetkeys.screen.workRespond.emailField,
             onChanged: null,
             hintText: context.l10n.emailHint,
+            isDesk: isDesk,
           ),
           if (isDesk)
             KSizedBox.kHeightSizedBox32
@@ -62,6 +63,7 @@ class WorkRespondContainerWidget extends StatelessWidget {
             widgetKey: KWidgetkeys.screen.workRespond.phoneNumberField,
             onChanged: null,
             hintText: context.l10n.phoneNumberHint,
+            isDesk: isDesk,
           ),
           if (isDesk)
             KSizedBox.kHeightSizedBox32
