@@ -19,13 +19,12 @@ class DiscountBodyWidget extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    context.l10n.discountsAndCoupons,
-                    style: isDesk ? AppTextStyle.text96 : AppTextStyle.text32,
-                  ),
-                  Text(
-                    context.l10n.discountsAndCouponsDescription,
-                    style: isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
+                  ...TitleWidget.titleWidgetList(
+                    title: context.l10n.discountsAndCoupons,
+                    titleKey: null,
+                    subtitle: context.l10n.discountsAndCouponsDescription,
+                    subtitleKey: null,
+                    isDesk: isDesk,
                   ),
                   if (isDesk)
                     KSizedBox.kHeightSizedBox56
