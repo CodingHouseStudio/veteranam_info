@@ -40,6 +40,13 @@ Future<void> workEmployeeInitialHelper(
   );
 
   expect(
+    find.byKey(KWidgetkeys.screen.workEmployee.requestCard),
+    findsOneWidget,
+  );
+
+  await workRequestCardHelper(tester);
+
+  expect(
     find.byKey(KWidgetkeys.screen.workEmployee.pagination),
     findsOneWidget,
   );

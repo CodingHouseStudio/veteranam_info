@@ -9,24 +9,12 @@ class ThanksBodyWidget extends StatelessWidget {
     return ScaffoldWidget(
       mainChildWidgetsFunction: ({required isDesk}) => [
         KSizedBox.kHeightSizedBox30,
-        Padding(
-          padding: const EdgeInsets.only(
-            left: KPadding.kPaddingSize4,
-          ),
-          child: Text(
-            context.l10n.thankYou,
-            style: isDesk ? AppTextStyle.text96 : AppTextStyle.text32,
-          ),
-        ),
-        KSizedBox.kHeightSizedBox8,
-        Padding(
-          padding: const EdgeInsets.only(
-            left: KPadding.kPaddingSize4,
-          ),
-          child: Text(
-            context.l10n.thankYouDescription,
-            style: isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
-          ),
+        ...TitleWidget.titleWidgetList(
+          title: context.l10n.thankYou,
+          titleKey: null,
+          subtitle: context.l10n.thankYouDescription,
+          subtitleKey: null,
+          isDesk: isDesk,
         ),
         if (isDesk)
           KSizedBox.kHeightSizedBox90

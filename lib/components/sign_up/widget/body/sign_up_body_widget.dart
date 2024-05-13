@@ -12,11 +12,14 @@ class SignUpBodyWidget extends StatelessWidget {
       builder: (context, _) {
         return LeftCardWidget(
           key: KWidgetkeys.screen.signUp.card,
-          widgetList: ({required isDesk}) => [
-            Text(
-              context.l10n.signUp,
-              key: KWidgetkeys.screen.signUp.title,
-              style: isDesk ? AppTextStyle.text96 : AppTextStyle.text32,
+          widgetListFunction: ({required isDesk}) => [
+            Align(
+              alignment: isDesk ? Alignment.centerLeft : Alignment.center,
+              child: Text(
+                context.l10n.signUp,
+                key: KWidgetkeys.screen.signUp.title,
+                style: isDesk ? AppTextStyle.text96 : AppTextStyle.text32,
+              ),
             ),
             EmailPasswordFieldsWidget(
               key: KWidgetkeys.screen.signUp.fields,
@@ -51,15 +54,18 @@ class SignUpBodyWidget extends StatelessWidget {
               KSizedBox.kHeightSizedBox24
             else
               KSizedBox.kHeightSizedBox16,
-            ButtonWidget(
-              key: KWidgetkeys.screen.signUp.button,
-              text: _.showPasswordField
-                  ? context.l10n.register
-                  : context.l10n.next,
-              onPressed: () => context.read<SignUpBloc>().add(
-                    const SignUpEvent.signUpSubmitted(),
-                  ),
-              isDesk: isDesk,
+            Align(
+              alignment: Alignment.centerLeft,
+              child: ButtonWidget(
+                key: KWidgetkeys.screen.signUp.button,
+                text: _.showPasswordField
+                    ? context.l10n.register
+                    : context.l10n.next,
+                onPressed: () => context.read<SignUpBloc>().add(
+                      const SignUpEvent.signUpSubmitted(),
+                    ),
+                isDesk: isDesk,
+              ),
             ),
             KSizedBox.kHeightSizedBox40,
             Wrap(
