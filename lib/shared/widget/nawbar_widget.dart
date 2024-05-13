@@ -15,10 +15,10 @@ class NawbarWidget extends SliverPersistentHeaderDelegate {
   final Key? widgetKey;
 
   @override
-  double get maxExtent => KMinMaxSize.minmaxHeight94;
+  double get maxExtent => KMinMaxSize.minmaxHeight92;
 
   @override
-  double get minExtent => KMinMaxSize.minmaxHeight94;
+  double get minExtent => KMinMaxSize.minmaxHeight92;
 
   //Rebuild screen only when isDesk value change
   @override

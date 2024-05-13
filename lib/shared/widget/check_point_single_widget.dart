@@ -35,8 +35,8 @@ class _CheckPointSingleWidgetState extends State<CheckPointSingleWidget> {
         ),
         borderRadius: KBorderRadius.kBorderRadius8,
       ),
-      child: IconButton(
-        onPressed: () {
+      child: InkWell(
+        onTap: () {
           setState(() {
             isCheck = !isCheck;
           });
@@ -44,7 +44,7 @@ class _CheckPointSingleWidgetState extends State<CheckPointSingleWidget> {
             widget.onChanged!;
           }
         },
-        icon: isCheck
+        child: isCheck
             ? KIcon.check.setIconKey(
                 KWidgetkeys.widget.checkPointSingle.icon,
               )
