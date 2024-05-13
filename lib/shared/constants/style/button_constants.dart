@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_redundant_argument_values
+
 import 'package:flutter/material.dart';
 import 'package:kozak/shared/shared.dart';
 
@@ -105,4 +107,16 @@ abstract class KButtonStyles {
     minimumSize: const Size(double.infinity, KMinMaxSize.minHeight50),
     padding: const EdgeInsets.all(KPadding.kPaddingSize24),
   );
+
+  static ButtonStyle dropListButtonStyle(BuildContext context) =>
+      TextButton.styleFrom(
+        minimumSize:
+            const Size(KMinMaxSize.minWidth100, KMinMaxSize.minHeight50),
+        padding:
+            const EdgeInsets.symmetric(horizontal: KPadding.kPaddingSize20),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.zero,
+        ),
+        backgroundColor: Theme.of(context).colorScheme.onPrimary,
+      );
 }
