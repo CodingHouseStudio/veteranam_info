@@ -216,8 +216,11 @@ extension NavigatorExtention on BuildContext {
     Map<String, dynamic> queryParameters = const <String, dynamic>{},
     Object? extra,
   }) {
-    Scrollable.ensureVisible(this, alignment: KSize.kTopScroll);
-    GoRouter.of(this).goNamed(
+    if (read<ScrollCubit>().state.positions.isNotEmpty) {
+      read<ScrollCubit>().scrollUp();
+    }
+    read<ScrollCubit>().initial();
+    goNamed(
       name,
       pathParameters: pathParameters,
       queryParameters: queryParameters,
