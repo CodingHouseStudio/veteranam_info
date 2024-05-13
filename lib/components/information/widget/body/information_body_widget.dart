@@ -17,16 +17,12 @@ class InformationBodyWidget extends StatelessWidget {
               KSizedBox.kHeightSizedBox40
             else
               KSizedBox.kHeightSizedBox16,
-            Text(
-              context.l10n.information,
-              key: KWidgetkeys.screen.information.title,
-              style: isDesk ? AppTextStyle.text96 : AppTextStyle.text32,
-            ),
-            KSizedBox.kHeightSizedBox8,
-            Text(
-              context.l10n.informationSubtitle,
-              key: KWidgetkeys.screen.information.subtitle,
-              style: isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
+            ...TitleWidget.titleWidgetList(
+              title: context.l10n.information,
+              titleKey: KWidgetkeys.screen.information.title,
+              subtitle: context.l10n.informationSubtitle,
+              subtitleKey: KWidgetkeys.screen.information.subtitle,
+              isDesk: isDesk,
             ),
             if (isDesk)
               KSizedBox.kHeightSizedBox56

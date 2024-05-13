@@ -1,17 +1,33 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:kozak/shared/shared.dart';
 
 import '../../text_dependency.dart';
+import 'helper.dart';
 
 Future<void> investorsInitialHelper(
   WidgetTester tester,
 ) async {
-  await feedbackEnterTextHelper(
+  await feedbackHelper(tester);
+
+  await scrollingHelper(
     tester: tester,
-    email: KTestText.userEmail,
-    field: KTestText.field,
+    itemKey: KWidgetkeys.widget.feedback.buttonClear,
   );
 
-  await scrollingHelper(tester: tester, offset: KTestConstants.scrollingUp);
+  expect(find.byKey(KWidgetkeys.screen.investors.fundTitle), findsOneWidget);
 
-  await feedbackBoxHelper(tester);
+  expect(find.byKey(KWidgetkeys.screen.investors.fundSubtitle), findsOneWidget);
+
+  expect(find.byKey(KWidgetkeys.screen.investors.buttonMock), findsNothing);
+
+  await scrollingHelper(
+    tester: tester,
+    itemKey: KWidgetkeys.screen.investors.fundSubtitle,
+  );
+
+  expect(find.byKey(KWidgetkeys.screen.investors.donateCard), findsOneWidget);
+
+  await donateCardHelper(tester: tester, isDesk: false);
+
+  await donatesCardHelper(tester);
 }

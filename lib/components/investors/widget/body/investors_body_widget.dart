@@ -4,6 +4,8 @@ import 'package:get_it/get_it.dart';
 import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
 
+part '../feedback_widget_list.dart';
+
 class InvestorsBodyWidget extends StatefulWidget {
   const InvestorsBodyWidget({super.key});
 
@@ -41,53 +43,15 @@ class _InvestorsBodyWidgetState extends State<InvestorsBodyWidget> {
         builder: (context, state) {
           return ScaffoldWidget(
             mainChildWidgetsFunction: ({required isDesk}) {
-              final childWidgets = [
-                if (isDesk)
-                  KSizedBox.kHeightSizedBox40
-                else
-                  KSizedBox.kHeightSizedBox24,
-                SizedBox.shrink(
-                  key: feedbackKey,
-                ),
-                if (context.read<FeedbackBloc>().state.formState ==
-                        FeedbackEnum.success ||
-                    context.read<FeedbackBloc>().state.formState ==
-                        FeedbackEnum.sendingMessage)
-                  FeedbackBoxWidget(
-                    key: feedbackBoxKey,
-                    isDesk: isDesk,
-                    sendAgain: () => context
-                        .read<FeedbackBloc>()
-                        .add(const FeedbackEvent.sendignMessageAgain()),
-                    feedbackBoxKey: feedbackBoxKey,
-                  )
-                else
-                  ...FeedbackWidget.feedbackWidgetList(
-                    context: context,
-                    isDesk: isDesk,
-                    title: context.l10n.investors,
-                    subtitle: context.l10n.investorsSubtitle,
-                    messageHint: context.l10n.writeYourSuggenstions,
-                    nameController: nameController,
-                    emailController: emailController,
-                    messageController: messageController,
-                    feedbackKey: feedbackKey,
-                  ),
-                if (isDesk)
-                  KSizedBox.kHeightSizedBox56
-                else
-                  KSizedBox.kHeightSizedBox40,
-                Text(
-                  context.l10n.funds,
-                  style: isDesk ? AppTextStyle.text96 : AppTextStyle.text32,
-                ),
-                KSizedBox.kHeightSizedBox8,
-                Text(
-                  context.l10n.fundsSubtitle,
-                  style: isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
-                ),
-                KSizedBox.kHeightSizedBox56,
-              ];
+              final childWidgets = _feedbackWidgetList(
+                context: context,
+                isDesk: isDesk,
+                nameController: nameController,
+                emailController: emailController,
+                messageController: messageController,
+                feedbackKey: feedbackKey,
+                feedbackBoxKey: feedbackBoxKey,
+              );
               switch (_) {
                 case InvestorsWatcherStateIntital():
                   childWidgets.add(const CircularProgressIndicator.adaptive());
@@ -122,7 +86,7 @@ class _InvestorsBodyWidgetState extends State<InvestorsBodyWidget> {
                               top: index == 0 ? 0 : KPadding.kPaddingSize24,
                             ),
                             child: DonateCardWidget(
-                              key: KWidgetkeys.screen.investors.donateCards,
+                              key: KWidgetkeys.screen.investors.donateCard,
                               fundModel: _.fundItems.elementAt(index),
                               isDesk: false,
                               hasSubtitle: true,
@@ -131,7 +95,7 @@ class _InvestorsBodyWidgetState extends State<InvestorsBodyWidget> {
                         )
                     else
                       TextButton(
-                        key: KWidgetkeys.screen.home.buttonMock,
+                        key: KWidgetkeys.screen.investors.buttonMock,
                         onPressed: () {
                           GetIt.I.get<IInvestorsRepository>().addMockFunds();
                           context

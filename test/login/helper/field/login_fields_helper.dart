@@ -47,6 +47,8 @@ Future<void> loginFieldsHelper({
 
   await tester.pumpAndSettle();
 
+  await scrollingHelper(tester: tester, offset: KTestConstants.scrollingUp1000);
+
   expect(
     find.byKey(KWidgetkeys.widget.emailPasswordFields.fieldEmail),
     dataIsCorrect ? findsOneWidget : findsNothing,
