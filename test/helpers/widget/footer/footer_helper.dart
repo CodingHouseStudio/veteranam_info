@@ -14,19 +14,23 @@ Future<void> footerHelper(
 
   await scrollingHelper(
     tester: tester,
-    offset: KTestConstants.scrollingUp500,
+    offset: KTestConstants.scrollingDown,
   );
 
-  expect(find.byKey(KWidgetkeys.widget.footer.logo), findsOneWidget);
-
-  for (final buttonKey in KWidgetkeys.widget.footer.buttonsKey) {
-    await scrollingHelper(tester: tester, itemKey: buttonKey);
-
+  for (final buttonKey in KWidgetkeys.widget.footer.buttonsKey.reversed) {
+    if (KWidgetkeys.widget.footer.buttonsKey.indexOf(buttonKey) == 0) {
+      await scrollingHelper(
+        tester: tester,
+        offset: KTestConstants.scrollingUp500,
+      );
+    }
     expect(
       find.byKey(buttonKey),
       findsOneWidget,
     );
   }
+
+  expect(find.byKey(KWidgetkeys.widget.footer.logo), findsOneWidget);
 
   // expect(
   //   find.descendant(
@@ -35,6 +39,11 @@ Future<void> footerHelper(
   //   ),
   //   findsOneWidget,
   // );
+
+  await scrollingHelper(
+    tester: tester,
+    offset: KTestConstants.scrollingDown,
+  );
 
   expect(
     find.byKey(KWidgetkeys.widget.footer.facebookIcon),
@@ -54,6 +63,13 @@ Future<void> footerHelper(
   await changeWindowSizeHelper(tester: tester);
 
   expect(find.byKey(KWidgetkeys.widget.footer.logo), findsNothing);
+
+  for (final buttonKey in KWidgetkeys.widget.footer.buttonsKey.reversed) {
+    expect(
+      find.byKey(buttonKey),
+      findsOneWidget,
+    );
+  }
 
   // expect(
   //   find.descendant(

@@ -3,9 +3,10 @@ import 'package:kozak/shared/shared.dart';
 
 import '../../text_dependency.dart';
 
-Future<void> donateCardHelper(
-  WidgetTester tester,
-) async {
+Future<void> donateCardHelper({
+  required WidgetTester tester,
+  required bool isDesk,
+}) async {
   await scrollingHelper(
     tester: tester,
     itemKey: KWidgetkeys.widget.donateCard.widget,
@@ -17,7 +18,10 @@ Future<void> donateCardHelper(
 
   // expect(find.byKey(KWidgetkeys.widget.donateCard.image), findsWidgets);
 
-  expect(find.byKey(KWidgetkeys.widget.donateCard.subtitle), findsNothing);
+  expect(
+    find.byKey(KWidgetkeys.widget.donateCard.subtitle),
+    isDesk ? findsNothing : findsWidgets,
+  );
 
   expect(find.byKey(KWidgetkeys.widget.donateCard.title), findsWidgets);
 }

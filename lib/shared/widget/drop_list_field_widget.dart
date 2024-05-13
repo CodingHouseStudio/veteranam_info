@@ -100,6 +100,7 @@ class _DropListFieldWidgetState extends State<DropListFieldWidget> {
           onChanged: widget.onChanged,
           hintText: widget.hintText,
           disposeFocusNode: false,
+          isDesk: widget.isDesk,
         );
       },
     );
