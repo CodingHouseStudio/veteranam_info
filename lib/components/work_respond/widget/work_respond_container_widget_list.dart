@@ -55,33 +55,28 @@ abstract class WorkRespondContainer {
         ),
       ),
       KSizedBox.kHeightSizedBox8,
-      Container(
-        padding: EdgeInsets.symmetric(
-          horizontal:
-              isDesk ? KPadding.kPaddingSize32 : KPadding.kPaddingSize16,
+      TextButton.icon(
+        onPressed: null,
+        style: KButtonStyles.borderButtonStyle(context).copyWith(),
+        icon: Padding(
+          padding: EdgeInsets.all(
+            isDesk ? KPadding.kPaddingSize32 : KPadding.kPaddingSize16,
+          ).copyWith(right: KPadding.kPaddingSize8),
+          child: KIcon.attachFile,
         ),
-        decoration: KWidgetTheme.boxDecorationWidget(context),
-        width: double.infinity,
-        height: isDesk ? KMinMaxSize.minmaxHeight94 : KMinMaxSize.maxHeight51,
-        alignment: Alignment.centerLeft,
-        child: Row(
-          children: [
-            KIcon.attachFile,
-            KSizedBox.kWidthSizedBox8,
-            GestureDetector(
-              child: Text(
-                key: KWidgetkeys.screen.workRespond.upload,
-                context.l10n.upload,
-                style: isDesk
-                    ? AppTextStyle.text24.copyWith(
-                        decoration: TextDecoration.underline,
-                      )
-                    : AppTextStyle.text16.copyWith(
-                        decoration: TextDecoration.underline,
-                      ),
-              ),
-            ),
-          ],
+        label: Align(
+          alignment: Alignment.centerLeft,
+          child: Text(
+            key: KWidgetkeys.screen.workRespond.upload,
+            context.l10n.upload,
+            style: isDesk
+                ? AppTextStyle.text24.copyWith(
+                    decoration: TextDecoration.underline,
+                  )
+                : AppTextStyle.text16.copyWith(
+                    decoration: TextDecoration.underline,
+                  ),
+          ),
         ),
       ),
       if (isDesk) KSizedBox.kHeightSizedBox10 else KSizedBox.kHeightSizedBox8,
