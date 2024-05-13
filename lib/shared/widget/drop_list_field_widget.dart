@@ -46,38 +46,35 @@ class _DropListFieldWidgetState extends State<DropListFieldWidget> {
             .toList();
       },
       optionsViewBuilder: (context, onSelected, options) {
-        return Padding(
+        return ListView.builder(
+          shrinkWrap: true,
+          key: KWidgetkeys.widget.dropListField.list,
           padding: EdgeInsets.only(
             right: (widget.isDesk
                     ? KPadding.kPaddingSize90
                     : KPadding.kPaddingSize16) *
                 2,
           ),
-          child: ListView.builder(
-            shrinkWrap: true,
-            key: KWidgetkeys.widget.dropListField.list,
-            padding: EdgeInsets.zero,
-            itemBuilder: (context, index) => TextButton(
-              key: KWidgetkeys.widget.dropListField.item,
-              onPressed: () => onSelected(options.elementAt(index)),
-              style: KButtonStyles.dropListButtonStyle(context),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: KPadding.kPaddingSize32,
-                ),
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    options.elementAt(index),
-                    key: KWidgetkeys.widget.dropListField.itemText,
-                    style: AppTextStyle.text24,
-                  ),
+          itemBuilder: (context, index) => TextButton(
+            key: KWidgetkeys.widget.dropListField.item,
+            onPressed: () => onSelected(options.elementAt(index)),
+            style: KButtonStyles.dropListButtonStyle(context),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: KPadding.kPaddingSize32,
+              ),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  options.elementAt(index),
+                  key: KWidgetkeys.widget.dropListField.itemText,
+                  style: AppTextStyle.text24,
                 ),
               ),
             ),
-            // separatorBuilder: (context, index) => const Divider(),
-            itemCount: options.length,
           ),
+          // separatorBuilder: (context, index) => const Divider(),
+          itemCount: options.length,
         );
       },
       fieldViewBuilder:
