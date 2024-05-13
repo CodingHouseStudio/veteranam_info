@@ -19,9 +19,7 @@ abstract class FeedbackWidget {
     if (context.read<FeedbackBloc>().state.formState ==
             FeedbackEnum.sendignMessageAgain &&
         feedbackKey.currentContext != null) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        Scrollable.ensureVisible(feedbackKey.currentContext!);
-      });
+      Scrollable.ensureVisible(feedbackKey.currentContext!);
       context.read<FeedbackBloc>().add(const FeedbackEvent.clear());
     }
     return [
