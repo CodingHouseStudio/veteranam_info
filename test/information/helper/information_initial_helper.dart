@@ -7,19 +7,48 @@ import 'helper.dart';
 Future<void> informationInitialHelper(
   WidgetTester tester,
 ) async {
-  await scrollingHelper(
-    tester: tester,
-    offset: KTestConstants.scrollingDown,
+  expect(
+    find.byKey(KWidgetkeys.screen.information.title),
+    findsOneWidget,
+  );
+
+  expect(
+    find.byKey(KWidgetkeys.screen.information.subtitle),
+    findsOneWidget,
+  );
+
+  expect(
+    find.byKey(KWidgetkeys.screen.information.filter),
+    findsOneWidget,
+  );
+
+  await informationFilterHelper(tester);
+
+  expect(
+    find.byKey(KWidgetkeys.screen.information.card),
+    findsWidgets,
+  );
+
+  await newsCardHelper(tester: tester);
+
+  expect(
+    find.byKey(KWidgetkeys.screen.information.buttonMock),
+    findsNothing,
   );
 
   await scrollingHelper(
     tester: tester,
-    offset: KTestConstants.scrollingUp200,
+    itemKey: KWidgetkeys.screen.information.card,
   );
 
   expect(
     find.byKey(KWidgetkeys.screen.information.button),
     findsOneWidget,
+  );
+
+  expect(
+    find.byKey(KWidgetkeys.screen.information.buttonIcon),
+    findsNothing,
   );
 
   await changeWindowSizeHelper(tester: tester);
@@ -30,38 +59,4 @@ Future<void> informationInitialHelper(
   );
 
   await changeWindowSizeHelper(tester: tester, setDefaultSize: true);
-
-  expect(
-    find.byKey(KWidgetkeys.screen.information.buttonIcon),
-    findsNothing,
-  );
-
-  expect(
-    find.byKey(KWidgetkeys.screen.information.buttonMock),
-    findsNothing,
-  );
-
-  expect(
-    find.byKey(KWidgetkeys.screen.information.card),
-    findsOneWidget,
-  );
-
-  await scrollingHelper(
-    tester: tester,
-    offset: KTestConstants.scrollingUp,
-  );
-
-  expect(
-    find.byKey(KWidgetkeys.screen.information.subtitle),
-    findsOneWidget,
-  );
-
-  expect(
-    find.byKey(KWidgetkeys.screen.information.title),
-    findsOneWidget,
-  );
-
-  await informationFilterHelper(tester);
-
-  await newsCardHelper(tester: tester);
 }

@@ -72,6 +72,7 @@ class _CardTextDetailEvaluateWidgetState
                 maxLines: KDimensions.storyCardMaxLines,
                 buttonText: widget.buttonText,
                 buttonStyle: widget.buttonStyle,
+                isDesk: widget.isDesk,
               ),
               KSizedBox.kHeightSizedBox24,
               Row(
