@@ -11,27 +11,27 @@ class WorkEmployeeBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<WorkEmployeeWatcherBloc, WorkEmployeeWatcherState>(
       builder: (context, _) => ScaffoldWidget(
-        childWidgetsFunction: ({required isDesk}) {
+        titleChildWidgetsFunction: ({required isDesk}) => [
+          if (isDesk)
+            KSizedBox.kHeightSizedBox40
+          else
+            KSizedBox.kHeightSizedBox24,
+          ...TitleWidget.titleWidgetList(
+            title: context.l10n.work,
+            titleKey: KWidgetkeys.screen.workEmployee.title,
+            subtitle: context.l10n.workSubtitle,
+            subtitleKey: KWidgetkeys.screen.workEmployee.subtitle,
+            isDesk: isDesk,
+          ),
+          if (isDesk)
+            KSizedBox.kHeightSizedBox56
+          else
+            KSizedBox.kHeightSizedBox24,
+        ],
+        mainDeskPadding:
+            const EdgeInsets.symmetric(horizontal: KPadding.kPaddingSize220),
+        mainChildWidgetsFunction: ({required isDesk}) {
           final childWidgets = [
-            if (isDesk)
-              KSizedBox.kHeightSizedBox40
-            else
-              KSizedBox.kHeightSizedBox24,
-            Text(
-              context.l10n.work,
-              key: KWidgetkeys.screen.workEmployee.title,
-              style: isDesk ? AppTextStyle.text96 : AppTextStyle.text32,
-            ),
-            KSizedBox.kHeightSizedBox8,
-            Text(
-              context.l10n.workSubtitle,
-              key: KWidgetkeys.screen.workEmployee.subtitle,
-              style: isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
-            ),
-            if (isDesk)
-              KSizedBox.kHeightSizedBox56
-            else
-              KSizedBox.kHeightSizedBox24,
             WorkEmployeeFilters(
               key: KWidgetkeys.screen.workEmployee.filter,
               cities: _.workModelItems.overallCities,
@@ -78,6 +78,14 @@ class WorkEmployeeBody extends StatelessWidget {
                       style: AppTextStyle.text32,
                     ),
                   ),
+                if (isDesk)
+                  KSizedBox.kHeightSizedBox56
+                else
+                  KSizedBox.kHeightSizedBox24,
+                WorkRequestCardWidget(
+                  key: KWidgetkeys.screen.workEmployee.requestCard,
+                  isDesk: isDesk,
+                ),
                 if (isDesk)
                   KSizedBox.kHeightSizedBox56
                 else

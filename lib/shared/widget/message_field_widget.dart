@@ -6,12 +6,12 @@ class MessageFieldWidget extends StatelessWidget {
     required this.changeMessage,
     required this.hintText,
     required this.hintStyle,
+    required this.isDesk,
     super.key,
     this.controller,
     this.errorText,
     this.focusNode,
     this.disposeFocusNode,
-    this.isDesk,
   });
   final void Function(String text)? changeMessage;
   final String hintText;
@@ -20,7 +20,7 @@ class MessageFieldWidget extends StatelessWidget {
   final FocusNode? focusNode;
   final bool? disposeFocusNode;
   final TextStyle hintStyle;
-  final bool? isDesk;
+  final bool isDesk;
 
   @override
   Widget build(BuildContext context) {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:kozak/shared/shared.dart';
 
 class WorkCardWidget extends StatefulWidget {
@@ -82,9 +83,9 @@ class _WorkCardWidgetState extends State<WorkCardWidget> {
             KSizedBox.kHeightSizedBox16,
             ButtonWidget(
               key: KWidgetkeys.widget.workCard.button,
+              onPressed: () => context.goNamed(KRoute.workRespond.name),
               text: context.l10n.respond,
               isDesk: widget.isDesk,
-              onPressed: null,
             ),
           ],
         ),

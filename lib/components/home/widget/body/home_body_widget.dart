@@ -4,6 +4,9 @@ import 'package:get_it/get_it.dart';
 import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
 
+part '../box_widget_list.dart';
+part '../feedback_widget_list.dart';
+
 class HomeBodyWidget extends StatefulWidget {
   const HomeBodyWidget({
     super.key,
@@ -46,152 +49,9 @@ class _HomeBodyWidgetState extends State<HomeBodyWidget> {
           BlocBuilder<HomeWatcherBloc, HomeWatcherState>(
         builder: (context, _) => ScaffoldWidget(
           hasMicrophone: false,
-          childWidgetsFunction: ({required isDesk}) {
-            final childWidgets = <Widget>[
-              if (isDesk)
-                KSizedBox.kHeightSizedBox24
-              else
-                KSizedBox.kHeightSizedBox16,
-              if (isDesk)
-                Row(
-                  children: [
-                    Expanded(
-                      flex: 2,
-                      child: HomeBoxWidget(
-                        isDesk: isDesk,
-                      ),
-                    ),
-                    KSizedBox.kWidthSizedBox24,
-                    Expanded(
-                      child: Column(
-                        children: [
-                          BoxWidget(
-                            key: KWidgetkeys.screen.home.discountsBox,
-                            text: context.l10n.discountsCoupons,
-                            onTap: () => context.goNamedWithScroll(
-                              KRoute.discounts.name,
-                            ),
-                            isDesk: isDesk,
-                          ),
-                          if (isDesk)
-                            KSizedBox.kHeightSizedBox24
-                          else
-                            KSizedBox.kHeightSizedBox16,
-                          BoxWidget(
-                            key: KWidgetkeys.screen.home.workBox,
-                            text: context.l10n.work,
-                            onTap: () =>
-                                context.goNamedWithScroll(KRoute.work.name),
-                            isDesk: isDesk,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                )
-              else ...[
-                HomeBoxWidget(
-                  isDesk: isDesk,
-                ),
-                KSizedBox.kHeightSizedBox16,
-                BoxWidget(
-                  key: KWidgetkeys.screen.home.discountsBox,
-                  text: context.l10n.discountsCoupons,
-                  onTap: () => context.goNamedWithScroll(
-                    KRoute.discounts.name,
-                  ),
-                  isDesk: isDesk,
-                ),
-                if (isDesk)
-                  KSizedBox.kHeightSizedBox24
-                else
-                  KSizedBox.kHeightSizedBox16,
-                BoxWidget(
-                  key: KWidgetkeys.screen.home.workBox,
-                  text: context.l10n.work,
-                  onTap: () => context.goNamedWithScroll(KRoute.work.name),
-                  isDesk: isDesk,
-                ),
-              ],
-              if (isDesk)
-                KSizedBox.kHeightSizedBox24
-              else
-                KSizedBox.kHeightSizedBox16,
-              if (isDesk)
-                Row(
-                  children: [
-                    Expanded(
-                      child: BoxWidget(
-                        key: KWidgetkeys.screen.home.informationBox,
-                        text: context.l10n.information,
-                        onTap: () => context.goNamedWithScroll(
-                          KRoute.information.name,
-                        ),
-                        isDesk: isDesk,
-                      ),
-                    ),
-                    KSizedBox.kWidthSizedBox24,
-                    Expanded(
-                      child: BoxWidget(
-                        key: KWidgetkeys.screen.home.storyBox,
-                        text: context.l10n.stories,
-                        onTap: () =>
-                            context.goNamedWithScroll(KRoute.story.name),
-                        isDesk: isDesk,
-                      ),
-                    ),
-                    KSizedBox.kWidthSizedBox24,
-                    Expanded(
-                      child: BoxWidget(
-                        key: KWidgetkeys.screen.home.investorsBox,
-                        text: context.l10n.investors,
-                        onTap: () => context.goNamedWithScroll(
-                          KRoute.investors.name,
-                        ),
-                        isDesk: isDesk,
-                      ),
-                    ),
-                  ],
-                )
-              else ...[
-                BoxWidget(
-                  key: KWidgetkeys.screen.home.informationBox,
-                  text: context.l10n.information,
-                  onTap: () => context.goNamedWithScroll(
-                    KRoute.information.name,
-                  ),
-                  isDesk: isDesk,
-                ),
-                KSizedBox.kHeightSizedBox16,
-                BoxWidget(
-                  key: KWidgetkeys.screen.home.storyBox,
-                  text: context.l10n.stories,
-                  onTap: () => context.goNamedWithScroll(KRoute.story.name),
-                  isDesk: isDesk,
-                ),
-                KSizedBox.kHeightSizedBox16,
-                BoxWidget(
-                  key: KWidgetkeys.screen.home.investorsBox,
-                  text: context.l10n.investors,
-                  onTap: () => context.goNamedWithScroll(KRoute.investors.name),
-                  isDesk: isDesk,
-                ),
-              ],
-              if (isDesk)
-                KSizedBox.kHeightSizedBox160
-              else
-                KSizedBox.kHeightSizedBox40,
-              Padding(
-                padding: const EdgeInsets.all(
-                  KPadding.kPaddingSize16,
-                ),
-                child: Text(
-                  context.l10n.faq,
-                  key: KWidgetkeys.screen.home.questionListTitle,
-                  style: isDesk ? AppTextStyle.text96 : AppTextStyle.text48,
-                ),
-              ),
-            ];
+          mainChildWidgetsFunction: ({required isDesk}) {
+            final childWidgets =
+                _boxWidgetList(context: context, isDesk: isDesk);
 
             switch (_) {
               case HomeWatcherStateInitial():
@@ -212,6 +72,7 @@ class _HomeBodyWidgetState extends State<HomeBodyWidget> {
                           top: index != 0 ? KPadding.kPaddingSize24 : 0,
                         ),
                         child: QuestionWidget(
+                          key: KWidgetkeys.screen.home.questions,
                           questionModel: questionModelItems.elementAt(index),
                           isDesk: isDesk,
                         ),
@@ -238,40 +99,17 @@ class _HomeBodyWidgetState extends State<HomeBodyWidget> {
             }
 
             return childWidgets
-              ..addAll([
-                if (isDesk)
-                  KSizedBox.kHeightSizedBox160
-                else
-                  KSizedBox.kHeightSizedBox40,
-                SizedBox.shrink(
-                  key: feedbackKey,
+              ..addAll(
+                _feedbackWidgetList(
+                  context: context,
+                  isDesk: isDesk,
+                  nameController: nameController,
+                  emailController: emailController,
+                  messageController: messageController,
+                  feedbackKey: feedbackKey,
+                  feedbackBoxKey: feedbackBoxKey,
                 ),
-                if (context.read<FeedbackBloc>().state.formState ==
-                        FeedbackEnum.success ||
-                    context.read<FeedbackBloc>().state.formState ==
-                        FeedbackEnum.sendingMessage)
-                  FeedbackBoxWidget(
-                    key: feedbackBoxKey,
-                    isDesk: isDesk,
-                    sendAgain: () => context
-                        .read<FeedbackBloc>()
-                        .add(const FeedbackEvent.sendignMessageAgain()),
-                    feedbackBoxKey: feedbackBoxKey,
-                  )
-                else
-                  ...FeedbackWidget.feedbackWidgetList(
-                    isDesk: isDesk,
-                    context: context,
-                    nameController: nameController,
-                    emailController: emailController,
-                    messageController: messageController,
-                    feedbackKey: feedbackKey,
-                  ),
-                if (isDesk)
-                  KSizedBox.kHeightSizedBox160
-                else
-                  KSizedBox.kHeightSizedBox10,
-              ]);
+              );
           },
         ),
       ),

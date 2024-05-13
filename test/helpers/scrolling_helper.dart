@@ -13,13 +13,16 @@ Future<void> scrollingHelper({
   required WidgetTester tester,
   Key? itemKey,
   Offset? offset,
+  bool first = true,
 }) async {
   if (offset != null) {
     await tester.drag(find.byKey(KWidgetkeys.widget.scaffold.scroll), offset);
     await tester.pumpAndSettle();
   }
   if (itemKey != null) {
-    await tester.ensureVisible(find.byKey(itemKey).first);
+    await tester.ensureVisible(
+      first ? find.byKey(itemKey).first : find.byKey(itemKey).last,
+    );
     await tester.pumpAndSettle();
   }
 }

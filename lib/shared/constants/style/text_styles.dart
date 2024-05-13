@@ -46,13 +46,6 @@ abstract class AppTextStyle {
     fontWeight: FontWeight.w400,
   );
 
-  static const text24Background = TextStyle(
-    // color: AppColors.black,
-    fontSize: KSize.kFont24,
-    fontWeight: FontWeight.w400,
-    backgroundColor: Color.fromARGB(255, 166, 186, 220),
-  );
-
   static const text20 = TextStyle(
     // color: AppColors.black,
     fontSize: KSize.kFont20,

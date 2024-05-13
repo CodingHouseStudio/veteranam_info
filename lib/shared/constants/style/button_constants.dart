@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_redundant_argument_values
+
 import 'package:flutter/material.dart';
 import 'package:kozak/shared/shared.dart';
 
@@ -112,8 +114,8 @@ abstract class KButtonStyles {
             const Size(KMinMaxSize.minWidth100, KMinMaxSize.minHeight50),
         padding:
             const EdgeInsets.symmetric(horizontal: KPadding.kPaddingSize20),
-        shape: RoundedRectangleBorder(
-          borderRadius: KBorderRadius.kBorderRadius0,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.zero,
         ),
         backgroundColor: Theme.of(context).colorScheme.onPrimary,
       );

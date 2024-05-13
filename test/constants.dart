@@ -26,6 +26,8 @@ Future<void> setUpGlobal({bool? kIsWeb}) async {
 }
 
 abstract class KGroupText {
+  static const bloc = 'Bloc';
+  static const cubit = 'Cubit';
   static const repository = 'Repository';
   static const provider = 'Provider';
   static const model = 'Model';
@@ -169,8 +171,6 @@ abstract class KTestText {
 
 abstract class KTestConstants {
   static const scrollingDown = Offset(0, -10000);
-  static const scrollingDown500 = Offset(0, -500);
-  static const scrollingDown1000 = Offset(0, -1000);
   static const scrollingUp = Offset(0, 10000);
   static const scrollingUp200 = Offset(0, 200);
   static const scrollingUp500 = Offset(0, 500);
@@ -200,26 +200,14 @@ abstract class KScreenBlocName {
   static const signUp = 'Sign Up Screen';
   static const questionsForm = 'Questions Form Screen';
   static const workEmployee = 'Work Employee Screen';
-  static const employer = 'Employer Screen';
+  static const workRespond = 'Work Respond Screen';
+  static const workEmployer = 'Employer Screen';
 
   static const feedback = 'Feedback Widget';
-
-  static const filterCubit = 'Filter Cubit';
-  static const languageCubit = 'Language Cubit';
-  static const homeBloc = 'Home Bloc';
-  static const feedbackBloc = 'Feedback Bloc';
-  static const authenticationServicesCubit = 'Authentication Services Cubit';
-  static const authenticationBloc = 'Authentication Bloc';
-  static const loginBloc = 'Login Bloc';
-  static const signUpBloc = 'Sign Up Bloc';
-  static const scrollCubit = 'Scroll Cubit';
-  static const informationBloc = 'Information Bloc';
-  static const investorsBloc = 'Investors Bloc';
-  static const workEmployeeBloc = 'Work Bloc';
-
-  static const iAppAuthenticationRepository = 'App Authentication';
+  static const authenticationServices = 'Authentication Services';
+  static const appAuthentication = 'App Authentication';
   static const authentication = ' Authentication';
-
   static const firestoreService = 'Firestore Service';
   static const secureStorage = 'Secure Storage';
+  static const filter = 'Filter';
 }
