@@ -15,6 +15,15 @@ abstract class KButtonStyles {
           borderRadius: KBorderRadius.kBorderRadius32,
         ),
       );
+  static ButtonStyle borderButtonStyle(BuildContext context) =>
+      TextButton.styleFrom(
+        minimumSize:
+            const Size(KMinMaxSize.minWidth100, KMinMaxSize.minHeight50),
+        shape: RoundedRectangleBorder(
+          borderRadius: KBorderRadius.kBorderRadius32,
+          side: BorderSide(color: Theme.of(context).colorScheme.secondary),
+        ),
+      );
   static ButtonStyle whiteButtonStyleWInf(BuildContext context) =>
       TextButton.styleFrom(
         backgroundColor: Theme.of(context).colorScheme.background,

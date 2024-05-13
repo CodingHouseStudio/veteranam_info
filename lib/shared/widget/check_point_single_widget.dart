@@ -24,19 +24,10 @@ class _CheckPointSingleWidgetState extends State<CheckPointSingleWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      key: KWidgetkeys.widget.checkPointSingle.widget,
-      decoration: BoxDecoration(
-        color: isCheck
-            ? Theme.of(context).colorScheme.onSecondary
-            : Theme.of(context).colorScheme.background,
-        border: Border.all(
-          color: Theme.of(context).colorScheme.secondary,
-          width: KSize.kPixel3,
-        ),
-        borderRadius: KBorderRadius.kBorderRadius8,
-      ),
-      child: InkWell(
-        onTap: () {
+      child: IconButton(
+        padding: EdgeInsets.zero,
+        isSelected: isCheck,
+        onPressed: () {
           setState(() {
             isCheck = !isCheck;
           });
@@ -44,14 +35,20 @@ class _CheckPointSingleWidgetState extends State<CheckPointSingleWidget> {
             widget.onChanged!;
           }
         },
-        child: isCheck
-            ? KIcon.check.setIconKey(
-                KWidgetkeys.widget.checkPointSingle.icon,
-              )
-            : const SizedBox(
-                width: KSize.kIconSize,
-                height: KSize.kIconSize,
-              ),
+        icon: Container(
+          key: KWidgetkeys.widget.checkPointSingle.widget,
+          decoration: KWidgetTheme.boxCheckPoint(context).copyWith(
+            color: isCheck ? null : Theme.of(context).colorScheme.background,
+          ),
+          child: isCheck
+              ? KIcon.check.setIconKey(
+                  KWidgetkeys.widget.checkPointSingle.icon,
+                )
+              : const SizedBox(
+                  width: KSize.kIconSize,
+                  height: KSize.kIconSize,
+                ),
+        ),
       ),
     );
   }
