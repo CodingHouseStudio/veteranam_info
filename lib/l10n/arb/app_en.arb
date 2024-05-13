@@ -124,5 +124,10 @@
   "remotely": "Remotely",
   "didNotFindYourVacancy": "Didn't find your vacancy?",
   "workRequestSubtitle": "We can help. Fill in your details and job preferences in the following form and we will send your CV to relevant companies.",
-  "leaveRequest": "Leave a request"
+  "leaveRequest": "Leave a request",
+  "story": "Story",
+  "storySubtitle": "In this section, you can share your life and service stories anonymously or openly. You can also support other participants.",
+  "writeYourStory": "Write your story",
+  "moreStories": "More stories",
+  "addYourStory": "Add your story"
 }

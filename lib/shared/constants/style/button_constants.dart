@@ -78,21 +78,22 @@ abstract class KButtonStyles {
       );
   static ButtonStyle transparentButtonStyleBottomBorder(BuildContext context) =>
       TextButton.styleFrom(
-        minimumSize:
-            const Size(KMinMaxSize.minWidth100, KMinMaxSize.minHeight50),
         padding: const EdgeInsets.symmetric(horizontal: KPadding.kPaddingSize8),
         shape: LinearBorder.bottom(side: const BorderSide()),
         backgroundColor: Theme.of(context).colorScheme.background,
       );
 
-  static final ButtonStyle secondaryButtonStyle = TextButton.styleFrom(
-    minimumSize: const Size(328, 60),
-    // backgroundColor: AppColors.widgetBackground,
-    padding: const EdgeInsets.all(KPadding.kPaddingSize4),
-    shape: RoundedRectangleBorder(
-      borderRadius: KBorderRadius.kBorderRadius8,
-    ),
-  );
+  static ButtonStyle secondaryButtonStyle(BuildContext context) =>
+      TextButton.styleFrom(
+        padding: const EdgeInsets.symmetric(
+          horizontal: KPadding.kPaddingSize24,
+          vertical: KPadding.kPaddingSize8,
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: KBorderRadius.kBorderRadius32,
+          side: BorderSide(color: Theme.of(context).colorScheme.secondary),
+        ),
+      );
   static final ButtonStyle widgetBackgroundButtonStyleWInf =
       TextButton.styleFrom(
     // backgroundColor: AppColors.widgetBackground,
