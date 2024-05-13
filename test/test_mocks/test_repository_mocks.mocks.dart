@@ -633,6 +633,26 @@ class MockFirestoreService extends _i1.Mock implements _i3.FirestoreService {
         returnValue: _i8.Future<void>.value(),
         returnValueForMissingStub: _i8.Future<void>.value(),
       ) as _i8.Future<void>);
+
+  @override
+  _i8.Stream<List<_i3.StoryModel>> getStories() => (super.noSuchMethod(
+        Invocation.method(
+          #getStories,
+          [],
+        ),
+        returnValue: _i8.Stream<List<_i3.StoryModel>>.empty(),
+        returnValueForMissingStub: _i8.Stream<List<_i3.StoryModel>>.empty(),
+      ) as _i8.Stream<List<_i3.StoryModel>>);
+
+  @override
+  _i8.Future<void> addStory(_i3.StoryModel? information) => (super.noSuchMethod(
+        Invocation.method(
+          #addStory,
+          [information],
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
 }
 
 /// A class which mocks [IInvestorsRepository].
@@ -4910,4 +4930,28 @@ class MockSnapshotMetadata extends _i1.Mock implements _i7.SnapshotMetadata {
         returnValue: false,
         returnValueForMissingStub: false,
       ) as bool);
+}
+
+/// A class which mocks [IStoryRepository].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockIStoryRepository extends _i1.Mock implements _i3.IStoryRepository {
+  @override
+  _i8.Stream<List<_i3.StoryModel>> getStoryItems() => (super.noSuchMethod(
+        Invocation.method(
+          #getStoryItems,
+          [],
+        ),
+        returnValue: _i8.Stream<List<_i3.StoryModel>>.empty(),
+        returnValueForMissingStub: _i8.Stream<List<_i3.StoryModel>>.empty(),
+      ) as _i8.Stream<List<_i3.StoryModel>>);
+
+  @override
+  void addMockStoryItems() => super.noSuchMethod(
+        Invocation.method(
+          #addMockStoryItems,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
 }

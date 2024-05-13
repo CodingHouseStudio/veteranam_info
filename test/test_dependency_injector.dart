@@ -35,6 +35,7 @@ void configureDependenciesTest() {
   GetIt.I.registerSingleton<IInformationRepository>(InformationRepository());
   GetIt.I.registerSingleton<IInvestorsRepository>(InvestorsRepository());
   GetIt.I.registerSingleton<IWorkRepository>(WorkRepository());
+  GetIt.I.registerSingleton<IStoryRepository>(StoryRepository());
   // Blocs
   GetIt.I.registerFactory<FilterCubit>(FilterCubit.new);
   GetIt.I.registerFactory<ScrollCubit>(ScrollCubit.new);
@@ -72,6 +73,11 @@ void configureDependenciesTest() {
   GetIt.I.registerSingleton<WorkEmployeeWatcherBloc>(
     WorkEmployeeWatcherBloc(
       workRepository: GetIt.I.get<IWorkRepository>(),
+    ),
+  );
+  GetIt.I.registerSingleton<StoryWatcherBloc>(
+    StoryWatcherBloc(
+      storyRepository: GetIt.I.get<IStoryRepository>(),
     ),
   );
 }
