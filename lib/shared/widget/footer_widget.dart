@@ -5,6 +5,8 @@ import 'package:kozak/shared/shared.dart';
 class FooterWidget extends SliverChildBuilderDelegate {
   FooterWidget({
     required this.isDesk,
+    super.addAutomaticKeepAlives = false,
+    super.addRepaintBoundaries = false,
   }) : super(
           (context, index) => index - (isDesk ? 0 : 1) !=
                   KWidgetkeys.widget.footer.buttonsKey.length

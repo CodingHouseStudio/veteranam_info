@@ -35,5 +35,7 @@ class _WidgetKeys {
   final feedbackBox = _FeedbackBoxKeys();
   final rate = _RateKeys();
   final chatInput = _ChatInputKeys();
+  final checkPointSingle = _CheckPointSingleKeys();
+  final workRequestCard = _WorkRequestCardKeys();
   final dialogs = _DialogsKeys();
 }

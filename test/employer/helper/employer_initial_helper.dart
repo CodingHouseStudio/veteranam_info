@@ -56,6 +56,11 @@ Future<void> employerInitialHelper(
     findsOneWidget,
   );
 
+  await dropListFieldBoxHelper(
+    tester: tester,
+    text: KMockText.dropDownList.first,
+  );
+
   await scrollingHelper(
     tester: tester,
     itemKey: KWidgetkeys.screen.employer.fieldCity,
