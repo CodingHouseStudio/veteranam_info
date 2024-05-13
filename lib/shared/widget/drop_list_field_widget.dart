@@ -6,12 +6,14 @@ class DropListFieldWidget extends StatefulWidget {
     required this.onChanged,
     required this.hintText,
     required this.dropDownList,
+    required this.isDesk,
     super.key,
   });
 
   final void Function(String? text)? onChanged;
   final String hintText;
   final List<String> dropDownList;
+  final bool isDesk;
 
   @override
   State<DropListFieldWidget> createState() => _DropListFieldWidgetState();
@@ -44,29 +46,38 @@ class _DropListFieldWidgetState extends State<DropListFieldWidget> {
             .toList();
       },
       optionsViewBuilder: (context, onSelected, options) {
-        return ListView.builder(
-          key: KWidgetkeys.widget.dropListField.list,
-          padding: EdgeInsets.zero,
-          itemBuilder: (context, index) => TextButton(
-            key: KWidgetkeys.widget.dropListField.item,
-            onPressed: () => onSelected(options.elementAt(index)),
-            style: KButtonStyles.whiteButtonStyle(context),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: KPadding.kPaddingSize32,
-              ),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  options.elementAt(index),
-                  key: KWidgetkeys.widget.dropListField.itemText,
-                  style: AppTextStyle.text24,
+        return Padding(
+          padding: EdgeInsets.only(
+            right: (widget.isDesk
+                    ? KPadding.kPaddingSize90
+                    : KPadding.kPaddingSize16) *
+                2,
+          ),
+          child: ListView.builder(
+            shrinkWrap: true,
+            key: KWidgetkeys.widget.dropListField.list,
+            padding: EdgeInsets.zero,
+            itemBuilder: (context, index) => TextButton(
+              key: KWidgetkeys.widget.dropListField.item,
+              onPressed: () => onSelected(options.elementAt(index)),
+              style: KButtonStyles.dropListButtonStyle(context),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: KPadding.kPaddingSize32,
+                ),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    options.elementAt(index),
+                    key: KWidgetkeys.widget.dropListField.itemText,
+                    style: AppTextStyle.text24,
+                  ),
                 ),
               ),
             ),
+            // separatorBuilder: (context, index) => const Divider(),
+            itemCount: options.length,
           ),
-          // separatorBuilder: (context, index) => const Divider(),
-          itemCount: options.length,
         );
       },
       fieldViewBuilder:

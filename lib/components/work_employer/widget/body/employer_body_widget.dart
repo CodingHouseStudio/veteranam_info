@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:kozak/shared/shared.dart';
 
-class EmployerBodyWidget extends StatelessWidget {
-  const EmployerBodyWidget({super.key});
+class WorkEmployerBodyWidget extends StatelessWidget {
+  const WorkEmployerBodyWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -96,7 +96,8 @@ class EmployerBodyWidget extends StatelessWidget {
           key: KWidgetkeys.screen.employer.fieldCity,
           onChanged: null,
           hintText: context.l10n.selectCity,
-          dropDownList: const [],
+          dropDownList: KMockText.dropDownList,
+          isDesk: isDesk,
         ),
         if (isDesk) KSizedBox.kHeightSizedBox24 else KSizedBox.kHeightSizedBox8,
         Padding(

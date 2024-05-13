@@ -105,4 +105,16 @@ abstract class KButtonStyles {
     minimumSize: const Size(double.infinity, KMinMaxSize.minHeight50),
     padding: const EdgeInsets.all(KPadding.kPaddingSize24),
   );
+
+  static ButtonStyle dropListButtonStyle(BuildContext context) =>
+      TextButton.styleFrom(
+        minimumSize:
+            const Size(KMinMaxSize.minWidth100, KMinMaxSize.minHeight50),
+        padding:
+            const EdgeInsets.symmetric(horizontal: KPadding.kPaddingSize20),
+        shape: RoundedRectangleBorder(
+          borderRadius: KBorderRadius.kBorderRadius0,
+        ),
+        backgroundColor: Theme.of(context).colorScheme.onPrimary,
+      );
 }
