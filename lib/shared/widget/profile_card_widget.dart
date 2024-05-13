@@ -242,6 +242,7 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
           children: [
             Expanded(
               child: TextFieldWidget(
+                enabled: false,
                 widgetKey: KWidgetkeys.widget.profileCardWidget.textFiled,
                 hintText: KMockText.email,
                 hintStyle: widget.isDesk
