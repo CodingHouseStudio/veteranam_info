@@ -26,11 +26,11 @@ class ProfileBodyWidget extends StatelessWidget {
             children: [
               Text(
                 context.l10n.myProfile,
-                style: AppTextStyle.text40,
+                style: isDesk ? AppTextStyle.text96 : AppTextStyle.text32,
               ),
               Text(
                 context.l10n.profileDetails,
-                style: AppTextStyle.text16,
+                style: isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
               ),
               KSizedBox.kHeightSizedBox30,
             ],
@@ -123,10 +123,9 @@ class ProfileBodyWidget extends StatelessWidget {
             padding: const EdgeInsets.all(KPadding.kPaddingSize4),
             child: ButtonWidget(
               text: context.l10n.logOut,
-              onPressed: () =>
-                  context
-                      .read<AuthenticationBloc>()
-                      .add(AuthenticationLogoutRequested()),
+              onPressed: () => context
+                  .read<AuthenticationBloc>()
+                  .add(AuthenticationLogoutRequested()),
               isDesk: isDesk,
             ),
           ),
