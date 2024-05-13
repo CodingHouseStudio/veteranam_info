@@ -4945,13 +4945,4 @@ class MockIStoryRepository extends _i1.Mock implements _i3.IStoryRepository {
         returnValue: _i8.Stream<List<_i3.StoryModel>>.empty(),
         returnValueForMissingStub: _i8.Stream<List<_i3.StoryModel>>.empty(),
       ) as _i8.Stream<List<_i3.StoryModel>>);
-
-  @override
-  void addMockStoryItems() => super.noSuchMethod(
-        Invocation.method(
-          #addMockStoryItems,
-          [],
-        ),
-        returnValueForMissingStub: null,
-      );
 }

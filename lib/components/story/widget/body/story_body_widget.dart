@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
 import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
 
@@ -53,8 +52,8 @@ class StoryBodyWidget extends StatelessWidget {
               case LoadingStatus.loading:
                 childWidgets.add(const CircularProgressIndicator.adaptive());
               case LoadingStatus.loaded:
-                childWidgets.addAll([
-                  if (_.storyModelItems.isNotEmpty)
+                childWidgets.addAll(
+                  [
                     ...List.generate(_.loadingStoryModelItems.length, (index) {
                       return Padding(
                         padding: EdgeInsets.only(
@@ -66,22 +65,9 @@ class StoryBodyWidget extends StatelessWidget {
                           isDesk: isDesk,
                         ),
                       );
-                    })
-                  else
-                    TextButton(
-                      key: KWidgetkeys.screen.story.buttonMock,
-                      onPressed: () {
-                        GetIt.I.get<IStoryRepository>().addMockStoryItems();
-                        context
-                            .read<StoryWatcherBloc>()
-                            .add(const StoryWatcherEvent.started());
-                      },
-                      child: Text(
-                        context.l10n.getMockData,
-                        style: AppTextStyle.text32,
-                      ),
-                    ),
-                ]);
+                    }),
+                  ],
+                );
 
               case LoadingStatus.error:
                 childWidgets.add(const CircularProgressIndicator.adaptive());

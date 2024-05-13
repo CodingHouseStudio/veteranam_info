@@ -10,19 +10,4 @@ class StoryRepository implements IStoryRepository {
 
   @override
   Stream<List<StoryModel>> getStoryItems() => _firestoreService.getStories();
-
-  @override
-  void addMockStoryItems() {
-    for (var i = 0; i < KMockText.tags.length; i++) {
-      _firestoreService.addStory(
-        StoryModel(
-          id: '${ExtendedDateTime.id}$i',
-          date: ExtendedDateTime.current,
-          image: i > KMockText.tags.length - 2 ? KMockText.image : null,
-          story: KMockText.cardData,
-          userName: KMockText.userNameAnonim,
-        ),
-      );
-    }
-  }
 }

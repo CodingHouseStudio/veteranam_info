@@ -41,14 +41,6 @@ void main() {
           emits(KTestText.storyModelItems),
         );
       });
-      test('mock', () async {
-        mockStoryRepository.addMockStoryItems();
-        verify(
-          mockFirestoreService.addStory(
-            KTestText.storyModelItems.first,
-          ),
-        ).called(1);
-      });
     });
     group('${KGroupText.failureGet} ', () {
       setUp(() {
