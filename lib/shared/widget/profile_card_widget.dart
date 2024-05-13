@@ -115,10 +115,11 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         KSizedBox.kWidthSizedBox24,
-        const Flexible(
+        Flexible(
           flex: 2,
           child: Text(
-            KMockText.userName,
+            context.read<AuthenticationBloc>().state.user?.name ??
+                KMockText.userName,
             style: AppTextStyle.text40,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
