@@ -7,4 +7,5 @@ abstract class KDimensions {
   static const donateCardStandartExpanded = 3;
   static const pagetItems = 3;
   static const leftCardPaddingMultiply = 0.5;
+  static const respondPaddingMultiply = 0.2;
 }
