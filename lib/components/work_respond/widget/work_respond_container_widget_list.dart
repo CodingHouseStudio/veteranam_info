@@ -17,7 +17,7 @@ abstract class WorkRespondContainer {
         child: Text(
           key: KWidgetkeys.screen.workRespond.emailText,
           context.l10n.email,
-          style: isDesk ? AppTextStyle.text32 : AppTextStyle.text24,
+          style: isDesk ? AppTextStyle.text32 : AppTextStyle.text16,
         ),
       ),
       KSizedBox.kHeightSizedBox8,
@@ -26,6 +26,7 @@ abstract class WorkRespondContainer {
         onChanged: null,
         hintText: context.l10n.emailHint,
         isDesk: isDesk,
+        height: isDesk ? KMinMaxSize.minmaxHeight92 : KMinMaxSize.maxHeight51,
       ),
       if (isDesk) KSizedBox.kHeightSizedBox32 else KSizedBox.kHeightSizedBox16,
       Padding(
@@ -33,7 +34,7 @@ abstract class WorkRespondContainer {
         child: Text(
           key: KWidgetkeys.screen.workRespond.phoneNumberText,
           context.l10n.phoneNumber,
-          style: isDesk ? AppTextStyle.text32 : AppTextStyle.text24,
+          style: isDesk ? AppTextStyle.text32 : AppTextStyle.text16,
         ),
       ),
       KSizedBox.kHeightSizedBox8,
@@ -42,6 +43,7 @@ abstract class WorkRespondContainer {
         onChanged: null,
         hintText: context.l10n.phoneNumberHint,
         isDesk: isDesk,
+        height: isDesk ? KMinMaxSize.minmaxHeight92 : KMinMaxSize.maxHeight51,
       ),
       if (isDesk) KSizedBox.kHeightSizedBox32 else KSizedBox.kHeightSizedBox16,
       Padding(
@@ -54,12 +56,13 @@ abstract class WorkRespondContainer {
       ),
       KSizedBox.kHeightSizedBox8,
       Container(
-        padding: EdgeInsets.all(
-          isDesk ? KPadding.kPaddingSize32 : KPadding.kPaddingSize16,
+        padding: EdgeInsets.symmetric(
+          horizontal:
+              isDesk ? KPadding.kPaddingSize32 : KPadding.kPaddingSize16,
         ),
         decoration: KWidgetTheme.boxDecorationWidget(context),
         width: double.infinity,
-        height: KMinMaxSize.minmaxHeight94,
+        height: isDesk ? KMinMaxSize.minmaxHeight92 : KMinMaxSize.maxHeight51,
         alignment: Alignment.centerLeft,
         child: Row(
           children: [
@@ -81,7 +84,7 @@ abstract class WorkRespondContainer {
           ],
         ),
       ),
-      KSizedBox.kHeightSizedBox8,
+      if (isDesk) KSizedBox.kHeightSizedBox10 else KSizedBox.kHeightSizedBox8,
       Row(
         children: [
           Padding(

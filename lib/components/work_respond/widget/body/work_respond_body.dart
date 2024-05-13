@@ -13,7 +13,7 @@ class WorkRespondBodyWidget extends StatelessWidget {
         if (isDesk)
           KSizedBox.kHeightSizedBox68
         else
-          KSizedBox.kHeightSizedBox78,
+          KSizedBox.kHeightSizedBox32,
         Text(
           key: KWidgetkeys.screen.workRespond.title,
           context.l10n.respond,
