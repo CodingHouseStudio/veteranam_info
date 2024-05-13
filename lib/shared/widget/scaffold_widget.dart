@@ -9,12 +9,18 @@ class ScaffoldWidget extends StatelessWidget {
     super.key,
     this.hasMicrophone = true,
     this.mainDeskPadding,
+    this.mainDecorationPadding,
   });
   final List<Widget> Function({required bool isDesk})?
       titleChildWidgetsFunction;
   final List<Widget> Function({required bool isDesk}) mainChildWidgetsFunction;
   final bool hasMicrophone;
-  final EdgeInsetsGeometry? mainDeskPadding;
+  final EdgeInsetsGeometry Function({
+    required bool isDesk,
+    required double maxWidth,
+  })? mainDeskPadding;
+  final EdgeInsetsGeometry Function({required bool isDesk})?
+      mainDecorationPadding;
   final BoxDecoration? mainDecoration;
 
   @override
@@ -55,19 +61,27 @@ class ScaffoldWidget extends StatelessWidget {
                         titleChildWidgetsFunction!(isDesk: isDesk).length,
                   ),
                 ),
-              DecoratedSliver(
-                decoration: mainDecoration ?? const BoxDecoration(),
-                sliver: SliverPadding(
-                  padding: isDesk
-                      ? mainDeskPadding?.add(padding) ?? padding
-                      : padding,
-                  sliver: SliverList.builder(
-                    addAutomaticKeepAlives: false,
-                    addRepaintBoundaries: false,
-                    itemBuilder: (context, index) {
-                      return mainChildWidget.elementAt(index);
-                    },
-                    itemCount: mainChildWidget.length,
+              SliverPadding(
+                padding: mainDeskPadding != null
+                    ? mainDeskPadding!(
+                        isDesk: isDesk,
+                        maxWidth: constraints.maxWidth,
+                      ).add(padding)
+                    : padding,
+                sliver: DecoratedSliver(
+                  decoration: mainDecoration ?? const BoxDecoration(),
+                  sliver: SliverPadding(
+                    padding: mainDecorationPadding != null
+                        ? mainDecorationPadding!(isDesk: isDesk)
+                        : EdgeInsets.zero,
+                    sliver: SliverList.builder(
+                      addAutomaticKeepAlives: false,
+                      addRepaintBoundaries: false,
+                      itemBuilder: (context, index) {
+                        return mainChildWidget.elementAt(index);
+                      },
+                      itemCount: mainChildWidget.length,
+                    ),
                   ),
                 ),
               ),
