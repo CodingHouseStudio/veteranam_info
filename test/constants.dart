@@ -167,6 +167,17 @@ abstract class KTestText {
         tags: KMockText.tags.elementAt(i),
       ),
   ];
+
+  static final storyModelItems = <StoryModel>[
+    for (var i = 0; i < KMockText.tags.length; i++)
+      StoryModel(
+        id: i.toString(),
+        date: dateTime,
+        image: i > KMockText.tags.length - 2 ? KMockText.image : null,
+        story: KMockText.cardData,
+        userName: KMockText.userNameAnonim,
+      ),
+  ];
 }
 
 abstract class KTestConstants {

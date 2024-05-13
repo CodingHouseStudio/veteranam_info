@@ -158,6 +158,20 @@ void main() {
             mockGoRouter: mockGoRouter,
           );
         });
+        testWidgets('All footer widget navigation', (tester) async {
+          await homePumpAppHelper(
+            tester: tester,
+            mockGoRouter: mockGoRouter,
+            mockAuthenticationRepository: mockAuthenticationRepository,
+            mockFeedbackRepository: mockFeedbackRepository,
+            mockHomeRepository: mockHomeRepository,
+          );
+
+          await footerButtonsHelper(
+            tester: tester,
+            mockGoRouter: mockGoRouter,
+          );
+        });
       });
     });
   });
