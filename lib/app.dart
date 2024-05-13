@@ -12,11 +12,18 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => GetIt.I.get<AuthenticationBloc>()
-        ..add(
-          AuthenticationInitialized(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => GetIt.I.get<ScrollCubit>()..initial(),
         ),
+        BlocProvider(
+          create: (context) => GetIt.I.get<AuthenticationBloc>()
+            ..add(
+              AuthenticationInitialized(),
+            ),
+        ),
+      ],
       child: const AppWidget(),
     );
   }

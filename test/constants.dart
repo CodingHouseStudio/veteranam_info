@@ -210,4 +210,5 @@ abstract class KScreenBlocName {
   static const firestoreService = 'Firestore Service';
   static const secureStorage = 'Secure Storage';
   static const filter = 'Filter';
+  static const scroll = 'scroll';
 }
