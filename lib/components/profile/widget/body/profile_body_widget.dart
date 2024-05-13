@@ -79,6 +79,61 @@ class ProfileBodyWidget extends StatelessWidget {
                 padding: const EdgeInsets.all(KPadding.kPaddingSize4),
                 child: ButtonWidget(
                   text: context.l10n.logOut,
+                  onPressed: () => context
+                      .read<AuthenticationBloc>()
+                      .add(AuthenticationLogoutRequested()),
+                  isDesk: isDesk,
+                ),
+              ),
+            ),
+            KSizedBox.kWidthSizedBox56,
+            Expanded(
+              flex: -2,
+              child: Padding(
+                padding: const EdgeInsets.all(KPadding.kPaddingSize4),
+                child: ButtonWidget(
+                  text: context.l10n.deleteAccount,
+                  isDesk: isDesk,
+                  onPressed: null,
+                  // backgroundColor: AppColors.transparent,
+                ),
+              ),
+            ),
+          ],
+        ),
+        KSizedBox.kHeightSizedBox56,
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              flex: 2,
+              child: ProfileCardWidget(
+                key: KWidgetkeys.widget.profileCard.profileCard,
+                isDesk: isDesk,
+              ),
+            ),
+            KSizedBox.kWidthSizedBox90,
+            Expanded(
+              child: IntrinsicHeight(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: KPadding.kPaddingSize8,
+                  ),
+                  child: _buildBoxWidgets(context, isDesk),
+                ),
+              ),
+            ),
+          ],
+        ),
+        KSizedBox.kHeightSizedBox56,
+        Row(
+          children: [
+            Expanded(
+              flex: -3,
+              child: Padding(
+                padding: const EdgeInsets.all(KPadding.kPaddingSize4),
+                child: ButtonWidget(
+                  text: context.l10n.logOut,
                   onPressed: () =>
                       context
                           .read<AuthenticationBloc>()
