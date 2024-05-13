@@ -6,7 +6,7 @@ abstract class KMinMaxSize {
   static const maxHeight51 = 51.0;
   static const minHeight50 = 50.0;
   static const minHeight640 = 640.0;
-  static const minmaxHeight92 = 92.0;
+  static const minmaxHeight94 = 94.0;
 
   static const messageMaxLines = 5;
   static const messageMinLines = 3;

@@ -26,7 +26,7 @@ abstract class WorkRespondContainer {
         onChanged: null,
         hintText: context.l10n.emailHint,
         isDesk: isDesk,
-        height: isDesk ? KMinMaxSize.minmaxHeight92 : KMinMaxSize.maxHeight51,
+        height: isDesk ? KMinMaxSize.minmaxHeight94 : KMinMaxSize.maxHeight51,
       ),
       if (isDesk) KSizedBox.kHeightSizedBox32 else KSizedBox.kHeightSizedBox16,
       Padding(
@@ -43,7 +43,7 @@ abstract class WorkRespondContainer {
         onChanged: null,
         hintText: context.l10n.phoneNumberHint,
         isDesk: isDesk,
-        height: isDesk ? KMinMaxSize.minmaxHeight92 : KMinMaxSize.maxHeight51,
+        height: isDesk ? KMinMaxSize.minmaxHeight94 : KMinMaxSize.maxHeight51,
       ),
       if (isDesk) KSizedBox.kHeightSizedBox32 else KSizedBox.kHeightSizedBox16,
       Padding(
@@ -62,7 +62,7 @@ abstract class WorkRespondContainer {
         ),
         decoration: KWidgetTheme.boxDecorationWidget(context),
         width: double.infinity,
-        height: isDesk ? KMinMaxSize.minmaxHeight92 : KMinMaxSize.maxHeight51,
+        height: isDesk ? KMinMaxSize.minmaxHeight94 : KMinMaxSize.maxHeight51,
         alignment: Alignment.centerLeft,
         child: Row(
           children: [
