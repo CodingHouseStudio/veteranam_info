@@ -10,8 +10,7 @@ class ProfileBodyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScaffoldWidget(
-      mainChildWidgetsFunction: ({required isDesk}) =>
-      [
+      mainChildWidgetsFunction: ({required isDesk}) => [
         if (isDesk)
           KSizedBox.kHeightSizedBox32
         else
@@ -19,7 +18,7 @@ class ProfileBodyWidget extends StatelessWidget {
         Padding(
           padding: EdgeInsets.symmetric(
             horizontal:
-            isDesk ? KPadding.kPaddingSize4 : KPadding.kPaddingSize16,
+                isDesk ? KPadding.kPaddingSize4 : KPadding.kPaddingSize16,
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
