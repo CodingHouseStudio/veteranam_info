@@ -44,20 +44,6 @@ class FirestoreService {
     return docSnapshot.docs
         .map((doc) => QuestionModel.fromJson(doc.data()))
         .toList();
-
-    //     .snapshots(includeMetadataChanges: true)
-    //     .map((snapshot) {
-    //   for (final change in snapshot.docChanges) {
-    //     if (change.type == DocumentChangeType.added) {
-    //       final source =
-    //           (snapshot.metadata.isFromCache) ? 'local cache' : 'server';
-    //       debugPrint('Data fetched from $source}');
-    //     }
-    //   }
-    //   return snapshot.docs
-    //       .map((doc) => QuestionModel.fromJson(doc.data()))
-    //       .toList();
-    // });
   }
 
   Future<List<FundModel>> getFunds() async {
@@ -153,5 +139,30 @@ class FirestoreService {
         .collection(FirebaseCollectionName.work)
         .doc(work.id)
         .set(work.toJson());
+  }
+
+  Stream<List<StoryModel>> getStories() => _db
+          .collection(FirebaseCollectionName.stroies)
+          .snapshots(includeMetadataChanges: true) // Enable caching
+          .map(
+        (snapshot) {
+          for (final change in snapshot.docChanges) {
+            if (change.type == DocumentChangeType.added) {
+              final source =
+                  (snapshot.metadata.isFromCache) ? 'local cache' : 'server';
+              debugPrint('Data fetched from $source}');
+            }
+          }
+          return snapshot.docs
+              .map((doc) => StoryModel.fromJson(doc.data()))
+              .toList();
+        },
+      );
+
+  Future<void> addStory(StoryModel information) {
+    return _db
+        .collection(FirebaseCollectionName.stroies)
+        .doc(information.id)
+        .set(information.toJson());
   }
 }

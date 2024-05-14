@@ -79,6 +79,7 @@ class _WorkCardWidgetState extends State<WorkCardWidget> {
                   KIcon.safe.setIconKey(KWidgetkeys.widget.workCard.iconSafe),
                 ],
               ),
+              isDesk: widget.isDesk,
             ),
             KSizedBox.kHeightSizedBox16,
             ButtonWidget(

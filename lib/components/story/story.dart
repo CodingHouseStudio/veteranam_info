@@ -1,2 +1,3 @@
-export 'view/story_view.dart';
+export 'bloc/bloc.dart';
+export 'view/view.dart';
 export 'widget/widget.dart';
