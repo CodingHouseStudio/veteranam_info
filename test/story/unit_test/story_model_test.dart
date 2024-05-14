@@ -105,7 +105,7 @@ void main() {
           'story': KTestText.storyModelItems.last.story,
           'date': KTestText.storyModelItems.last.date.toIso8601String(),
           'userPhoto': KTestText.storyModelItems.last.userPhoto,
-          'image': KTestText.storyModelItems.last.image,
+          'image': [KTestText.storyModelItems.last.image!.first.toJson()],
         };
 
         final imageModelJson = KTestText.storyModelItems.last.toJson();
