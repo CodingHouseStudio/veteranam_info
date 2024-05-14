@@ -20,7 +20,7 @@ class StorageService {
     if (imageModel.ref == null) return '';
     final snapshot = await storage
         .ref(
-          StoragePath.getPath(
+          StoragePath.getImagePath(
             collenction: FirebaseCollectionName.stroies,
             modelId: storyId,
             imageName: imageModel.name,
