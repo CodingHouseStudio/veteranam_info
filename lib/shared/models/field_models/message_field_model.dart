@@ -17,8 +17,8 @@ extension MessageFieldModelValidationErrorEmpl
 }
 
 class MessageFieldModel
-    extends FormzInput<String?, MessageFieldModelValidationError> {
-  const MessageFieldModel.pure() : super.pure(null);
+    extends FormzInput<String, MessageFieldModelValidationError> {
+  const MessageFieldModel.pure() : super.pure('');
 
   const MessageFieldModel.dirty([super.value = '']) : super.dirty();
 

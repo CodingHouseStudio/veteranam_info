@@ -74,6 +74,12 @@ abstract class AppTextStyle {
     fontWeight: FontWeight.w400,
   );
 
+  static const hint20 = TextStyle(
+    // color: AppColors.lightGray,
+    fontSize: KSize.kFont20,
+    fontWeight: FontWeight.w400,
+  );
+
   static const hint16 = TextStyle(
     // color: AppColors.lightGray,
     fontSize: KSize.kFont16,

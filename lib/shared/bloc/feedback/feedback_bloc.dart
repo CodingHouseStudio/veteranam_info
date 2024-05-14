@@ -89,7 +89,7 @@ class FeedbackBloc extends Bloc<FeedbackEvent, FeedbackState> {
           guestName: state.name.value!,
           email: state.email.value,
           timestamp: ExtendedDateTime.current,
-          message: state.message.value!,
+          message: state.message.value,
         ),
       );
       result.fold(

@@ -22,7 +22,6 @@ class StoryCardWidget extends StatelessWidget {
         text: storyModel.story,
         titleTopMob: true,
         titleWidget: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             IconWidget(
               key: KWidgetkeys.widget.storyCard.userIcon,
