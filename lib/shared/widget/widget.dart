@@ -36,6 +36,7 @@ export 'secondart_button_widget.dart';
 export 'sign_up_login_bottom_buttons_widget.dart';
 export 'story_card_widget.dart';
 export 'switch_widget.dart';
+export 'switch_widget_withoud_bloc.dart';
 export 'text_field_widget.dart';
 export 'title_widget_list.dart';
 export 'viewpager_indicator_widget.dart';

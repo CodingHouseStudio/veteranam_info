@@ -20,7 +20,8 @@ extension ExtendedDateTime on DateTime {
 }
 
 extension ExtendedImage on List<ImageModel>? {
-  String? get firstImage => this?.first.downloadURL;
+  String? get firstImage =>
+      this?.isNotEmpty ?? false ? this!.first.downloadURL : null;
 }
 
 enum LoadingStatus { initial, loading, loaded, error }
