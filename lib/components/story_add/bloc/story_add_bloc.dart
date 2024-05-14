@@ -102,6 +102,7 @@ class StoryAddBloc extends Bloc<StoryAddEvent, StoryAddState> {
                   ),
                 ]
               : null,
+          userId: _authenticationRepository.currentUser.id,
         ),
       );
       result.fold(

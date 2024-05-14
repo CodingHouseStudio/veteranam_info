@@ -13,6 +13,7 @@ void main() {
         final json = {
           'id': KTestText.storyModelItems.last.id,
           'userName': KTestText.storyModelItems.last.userName,
+          'userId': KTestText.storyModelItems.last.userId,
           'story': KTestText.storyModelItems.last.story,
           'date': KTestText.storyModelItems.last.date.toIso8601String(),
           'userPhoto': KTestText.storyModelItems.last.userPhoto,
@@ -51,6 +52,7 @@ void main() {
         final json = {
           'id': KTestText.storyModelItems.last.id,
           'userName': KTestText.storyModelItems.last.userName,
+          'userId': KTestText.storyModelItems.last.userId,
           'story': KTestText.storyModelItems.last.story,
           'date': KTestText.storyModelItems.last.date.toIso8601String(),
         };
@@ -87,6 +89,7 @@ void main() {
         final json = {
           'id': KTestText.storyModelItems.last.id,
           // userName is missing
+          'userId': KTestText.storyModelItems.last.userId,
           'story': KTestText.storyModelItems.last.story,
           'date': KTestText.storyModelItems.last.date.toIso8601String(),
         };
@@ -102,6 +105,7 @@ void main() {
         final json = {
           'id': KTestText.storyModelItems.last.id,
           'userName': KTestText.storyModelItems.last.userName,
+          'userId': KTestText.storyModelItems.last.userId,
           'story': KTestText.storyModelItems.last.story,
           'date': KTestText.storyModelItems.last.date.toIso8601String(),
           'userPhoto': KTestText.storyModelItems.last.userPhoto,
@@ -117,6 +121,7 @@ void main() {
         final json = {
           'id': KTestText.storyModelItems.last.id,
           'userName': KTestText.storyModelItems.last.userName,
+          'userId': KTestText.storyModelItems.last.userId,
           'story': KTestText.storyModelItems.last.story,
           'date': KTestText.storyModelItems.last.date.toIso8601String(),
           'userPhoto': null,

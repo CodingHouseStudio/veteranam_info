@@ -193,6 +193,7 @@ abstract class KTestText {
             : null,
         story: KMockText.cardData,
         userName: KMockText.userNameAnonim,
+        userId: i.toString(),
       ),
   ];
 }
