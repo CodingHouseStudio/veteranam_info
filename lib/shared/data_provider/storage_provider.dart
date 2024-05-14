@@ -20,7 +20,11 @@ class StorageService {
     if (imageModel.ref == null) return '';
     final snapshot = await storage
         .ref(
-          'stories/$storyId/image/${imageModel.name ?? '${ExtendedDateTime.id}.png'}',
+          StoragePath.getPath(
+            collenction: FirebaseCollectionName.stroies,
+            modelId: storyId,
+            imageName: imageModel.name,
+          ),
         )
         .putBlob(await XFile(imageModel.ref!).readAsBytes());
 
