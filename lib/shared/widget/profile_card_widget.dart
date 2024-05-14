@@ -59,14 +59,27 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
                 if (isEditing) ...[
                   KSizedBox.kHeightSizedBox8,
                   _textField(
-                    context.l10n.name,
-                    context.read<AuthenticationBloc>().state.user?.name ??
-                        context.l10n.writeYouName,
+                    label: context.l10n.name,
+                    labelText: context
+                        .read<AuthenticationBloc>()
+                        .state
+                        .user
+                        ?.name
+                        ?.split(' ')
+                        .first,
+                    hint: context.l10n.writeYouName,
                   ),
                   KSizedBox.kHeightSizedBox8,
                   _textField(
-                    context.l10n.lastName,
-                    context.l10n.writeYouLastName,
+                    label: context.l10n.lastName,
+                    labelText: context
+                        .read<AuthenticationBloc>()
+                        .state
+                        .user
+                        ?.name
+                        ?.split(' ')
+                        .last,
+                    hint: context.l10n.writeYouLastName,
                   ),
                 ],
                 KSizedBox.kHeightSizedBox8,
@@ -83,7 +96,12 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
     );
   }
 
-  Widget _textField(String label, String hint) {
+  Widget _textField({
+    required String label,
+    required String hint,
+    required String? labelText,
+    bool readOnly = false,
+  }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -98,6 +116,8 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
           ),
         ),
         TextFieldWidget(
+          readOnly: readOnly,
+          controller: TextEditingController(text: labelText),
           widgetKey: KWidgetkeys.widget.profileCardWidget.textFiled,
           hintText: hint,
           hintStyle: widget.isDesk ? AppTextStyle.hint24 : AppTextStyle.hint16,
@@ -139,14 +159,17 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _textField(
-          context.l10n.email,
-          context.read<AuthenticationBloc>().state.user?.email ??
-              KMockText.email,
+          label: context.l10n.email,
+          labelText: context.read<AuthenticationBloc>().state.user?.email,
+          hint: KMockText.email,
+          readOnly: true,
         ),
         KSizedBox.kHeightSizedBox8,
         _textField(
-          context.l10n.nickname,
-          KMockText.nickname,
+          label: context.l10n.nickname,
+          labelText: null,
+          hint: KMockText.nickname,
+          readOnly: !isEditing,
         ),
       ],
     );
