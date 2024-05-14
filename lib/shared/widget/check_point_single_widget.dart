@@ -23,27 +23,22 @@ class _CheckPointSingleWidgetState extends State<CheckPointSingleWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      key: KWidgetkeys.widget.checkPointSingle.widget,
-      decoration: BoxDecoration(
-        color: isCheck
-            ? Theme.of(context).colorScheme.onSecondary
-            : Theme.of(context).colorScheme.background,
-        border: Border.all(
-          color: Theme.of(context).colorScheme.secondary,
-          width: KSize.kPixel3,
+    return IconButton(
+      padding: EdgeInsets.zero,
+      isSelected: isCheck,
+      onPressed: () {
+        setState(() {
+          isCheck = !isCheck;
+        });
+        if (widget.onChanged != null) {
+          widget.onChanged!;
+        }
+      },
+      icon: Container(
+        key: KWidgetkeys.widget.checkPointSingle.widget,
+        decoration: KWidgetTheme.boxCheckPoint(context).copyWith(
+          color: isCheck ? null : Theme.of(context).colorScheme.background,
         ),
-        borderRadius: KBorderRadius.kBorderRadius8,
-      ),
-      child: InkWell(
-        onTap: () {
-          setState(() {
-            isCheck = !isCheck;
-          });
-          if (widget.onChanged != null) {
-            widget.onChanged!;
-          }
-        },
         child: isCheck
             ? KIcon.check.setIconKey(
                 KWidgetkeys.widget.checkPointSingle.icon,

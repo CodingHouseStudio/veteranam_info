@@ -8,101 +8,155 @@ void main() {
 
   setUpAll(setUpGlobal);
   group('${KScreenBlocName.home} ${KGroupText.model} ', () {
-    test('${KGroupText.shouldBe} ${KGroupText.modelJson}', () {
-      final json = {
-        'id': KTestText.questionModelItems.elementAt(0).id,
-        'title': KTestText.questionModelItems.elementAt(0).title,
-        'subtitle': KTestText.questionModelItems.elementAt(0).subtitle,
-        'navigationLink':
-            KTestText.questionModelItems.elementAt(0).navigationLink,
-      };
+    group('${KGroupText.modelJson} ', () {
+      test('${KGroupText.shouldBe} ', () {
+        final json = {
+          'id': KTestText.questionModelItems.first.id,
+          'title': KTestText.questionModelItems.first.title,
+          'subtitle': KTestText.questionModelItems.first.subtitle,
+          'navigationLink': KTestText.questionModelItems.first.navigationLink,
+        };
 
-      final questionModel = QuestionModel.fromJson(json);
+        final questionModel = QuestionModel.fromJson(json);
 
-      expect(questionModel.id, KTestText.questionModelItems.elementAt(0).id);
-      expect(
-        questionModel.title,
-        KTestText.questionModelItems.elementAt(0).title,
-      );
-      expect(
-        questionModel.subtitle,
-        KTestText.questionModelItems.elementAt(0).subtitle,
-      );
-      expect(
-        questionModel.navigationLink,
-        KTestText.questionModelItems.elementAt(0).navigationLink,
-      );
+        expect(questionModel.id, KTestText.questionModelItems.first.id);
+        expect(
+          questionModel.title,
+          KTestText.questionModelItems.first.title,
+        );
+        expect(
+          questionModel.subtitle,
+          KTestText.questionModelItems.first.subtitle,
+        );
+        expect(
+          questionModel.navigationLink,
+          KTestText.questionModelItems.first.navigationLink,
+        );
+      });
+
+      test('${KGroupText.shouldBe} ', () {
+        final json = {
+          'id': KTestText.questionModelItems.first.id,
+          'title': KTestText.questionModelItems.first.title,
+          'subtitle': KTestText.questionModelItems.first.subtitle,
+        };
+
+        final questionModel = QuestionModel.fromJson(json);
+
+        expect(questionModel.id, KTestText.questionModelItems.first.id);
+        expect(
+          questionModel.title,
+          KTestText.questionModelItems.first.title,
+        );
+        expect(
+          questionModel.subtitle,
+          KTestText.questionModelItems.first.subtitle,
+        );
+        expect(questionModel.navigationLink, null);
+      });
+
+      test('${KGroupText.shouldNotBe} ', () {
+        final json = {
+          'id': KTestText.questionModelItems.first.id,
+          // title is missing
+          'subtitle': KTestText.questionModelItems.first.subtitle,
+          'navigationLink': KTestText.questionModelItems.first.navigationLink,
+        };
+
+        expect(
+          () => QuestionModel.fromJson(json),
+          throwsA(isA<TypeError>()),
+        );
+      });
+
+      test('${KGroupText.shouldBe} ', () {
+        final json = {
+          'id': KTestText.questionModelItems.first.id,
+          'title': List.generate(
+            100,
+            (_) => KTestText.questionModelItems.first.title
+                .split(KTestText.questionModelItems.first.title),
+          ).join(),
+          'subtitle': List.generate(
+            100,
+            (_) => KTestText.questionModelItems.first.subtitle
+                .split(KTestText.questionModelItems.first.subtitle),
+          ).join(),
+          'navigationLink': KTestText.questionModelItems.first.navigationLink,
+        };
+
+        final questionModel = QuestionModel.fromJson(json);
+
+        expect(questionModel.id, KTestText.questionModelItems.first.id);
+        expect(
+          questionModel.title.length,
+          KMinMaxSize.questionsTitleMaxLength,
+        );
+        expect(
+          questionModel.subtitle.length,
+          KMinMaxSize.questionsSubtitleMaxLength,
+        );
+        expect(
+          questionModel.navigationLink,
+          KTestText.questionModelItems.first.navigationLink,
+        );
+      });
     });
+    group('${KGroupText.jsonModel} ', () {
+      test('${KGroupText.shouldBe} ', () {
+        final json = {
+          'id': KTestText.questionModelItems.first.id,
+          'title': KTestText.questionModelItems.first.title,
+          'subtitle': KTestText.questionModelItems.first.subtitle,
+          'navigationLink': KTestText.questionModelItems.first.navigationLink,
+        };
 
-    test('${KGroupText.shouldBe} ${KGroupText.modelJson}', () {
-      final json = {
-        'id': KTestText.questionModelItems.elementAt(0).id,
-        'title': KTestText.questionModelItems.elementAt(0).title,
-        'subtitle': KTestText.questionModelItems.elementAt(0).subtitle,
-      };
+        final questionModel = KTestText.questionModelItems.first.toJson();
 
-      final questionModel = QuestionModel.fromJson(json);
+        expect(questionModel, json);
+      });
 
-      expect(questionModel.id, KTestText.questionModelItems.elementAt(0).id);
-      expect(
-        questionModel.title,
-        KTestText.questionModelItems.elementAt(0).title,
-      );
-      expect(
-        questionModel.subtitle,
-        KTestText.questionModelItems.elementAt(0).subtitle,
-      );
-      expect(questionModel.navigationLink, null);
-    });
+      test('${KGroupText.shouldBe} ', () {
+        final json = {
+          'id': KTestText.questionModelItems.first.id,
+          'title': KTestText.questionModelItems.first.title,
+          'subtitle': KTestText.questionModelItems.first.subtitle,
+          'navigationLink': null,
+        };
 
-    test('${KGroupText.shouldNotBe} ${KGroupText.modelJson}', () {
-      final json = {
-        'id': KTestText.questionModelItems.elementAt(0).id,
-        // title is missing
-        'subtitle': KTestText.questionModelItems.elementAt(0).subtitle,
-        'navigationLink':
-            KTestText.questionModelItems.elementAt(0).navigationLink,
-      };
+        final questionModelJson = KTestText.questionModelItems.first
+            .copyWith(navigationLink: null)
+            .toJson();
 
-      expect(
-        () => QuestionModel.fromJson(json),
-        throwsA(isA<TypeError>()),
-      );
-    });
+        expect(questionModelJson, json);
+      });
 
-    test('${KGroupText.shouldBe} ${KGroupText.modelJson}', () {
-      final json = {
-        'id': KTestText.questionModelItems.elementAt(0).id,
-        'title': List.generate(
-          100,
-          (_) => KTestText.questionModelItems
-              .elementAt(0)
-              .title
-              .split(KTestText.questionModelItems.elementAt(0).title),
-        ).join(),
-        'subtitle': List.generate(
-          100,
-          (_) => KTestText.questionModelItems
-              .elementAt(0)
-              .subtitle
-              .split(KTestText.questionModelItems.elementAt(0).subtitle),
-        ).join(),
-        'navigationLink':
-            KTestText.questionModelItems.elementAt(0).navigationLink,
-      };
+      test('${KGroupText.shouldBe} ', () {
+        final questionModel = QuestionModel(
+          id: KTestText.questionModelItems.first.id,
+          title: List.generate(
+            100,
+            (_) => KTestText.questionModelItems.first.title
+                .split(KTestText.questionModelItems.first.title),
+          ).join(),
+          subtitle: List.generate(
+            100,
+            (_) => KTestText.questionModelItems.first.subtitle
+                .split(KTestText.questionModelItems.first.subtitle),
+          ).join(),
+          navigationLink: KTestText.questionModelItems.first.navigationLink,
+        );
+        final json = {
+          'id': questionModel.id,
+          'title': questionModel.title,
+          'subtitle': questionModel.subtitle,
+          'navigationLink': questionModel.navigationLink,
+        };
 
-      final questionModel = QuestionModel.fromJson(json);
+        final questionModelJson = questionModel.toJson();
 
-      expect(questionModel.id, KTestText.questionModelItems.elementAt(0).id);
-      expect(
-        questionModel.title.length,
-        KMinMaxSize.questionsTitleMaxLength,
-      );
-      expect(
-        questionModel.subtitle.length,
-        KMinMaxSize.questionsSubtitleMaxLength,
-      );
-      expect(questionModel.navigationLink, null);
+        expect(questionModelJson, json);
+      });
     });
   });
 }

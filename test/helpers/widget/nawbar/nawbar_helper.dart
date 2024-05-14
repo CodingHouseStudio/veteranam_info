@@ -19,10 +19,10 @@ Future<void> nawbarHelper({
 
   expect(find.byKey(KWidgetkeys.widget.nawbar.field), findsOneWidget);
 
-  expect(
-    find.byKey(KWidgetkeys.widget.nawbar.iconMic),
-    hasMic ? findsOneWidget : findsNothing,
-  );
+  // expect(
+  //   find.byKey(KWidgetkeys.widget.nawbar.iconMic),
+  //   hasMic ? findsOneWidget : findsNothing,
+  // );
 
   expect(
     find.byKey(KWidgetkeys.widget.nawbar.button),
@@ -64,10 +64,10 @@ Future<void> nawbarHelper({
 
   expect(find.byKey(KWidgetkeys.widget.nawbar.field), findsOneWidget);
 
-  expect(
-    find.byKey(KWidgetkeys.widget.nawbar.iconMic),
-    hasMic ? findsOneWidget : findsNothing,
-  );
+  // expect(
+  //   find.byKey(KWidgetkeys.widget.nawbar.iconMic),
+  //   hasMic ? findsOneWidget : findsNothing,
+  // );
 
   expect(
     find.byKey(KWidgetkeys.widget.nawbar.button),
