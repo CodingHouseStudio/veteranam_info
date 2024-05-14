@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kozak/shared/shared.dart';
 
 class ScaffoldWidget extends StatelessWidget {
@@ -7,14 +8,12 @@ class ScaffoldWidget extends StatelessWidget {
     this.mainDecoration,
     this.titleChildWidgetsFunction,
     super.key,
-    this.hasMicrophone = true,
     this.mainDeskPadding,
     this.mainDecorationPadding,
   });
   final List<Widget> Function({required bool isDesk})?
       titleChildWidgetsFunction;
   final List<Widget> Function({required bool isDesk}) mainChildWidgetsFunction;
-  final bool hasMicrophone;
   final EdgeInsetsGeometry Function({
     required bool isDesk,
     required double maxWidth,
@@ -43,7 +42,6 @@ class ScaffoldWidget extends StatelessWidget {
                 sliver: SliverPersistentHeader(
                   delegate: NawbarWidget(
                     isDesk: isDesk,
-                    hasMicrophone: hasMicrophone,
                   ),
                 ),
               ),
@@ -121,6 +119,7 @@ class ScaffoldWidget extends StatelessWidget {
               ),
             ],
             semanticChildCount: mainChildWidget.length,
+            controller: context.read<ScrollCubit>().state,
           ),
         );
       },

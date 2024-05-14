@@ -12,7 +12,7 @@ void main() {
   setupFirebaseAuthMocks();
 
   tearDown(GetIt.I.reset);
-  group('${KScreenBlocName.employer} ', () {
+  group('${KScreenBlocName.workEmployer} ', () {
     testWidgets('${KGroupText.intial} ', (tester) async {
       await employerPumpAppHelper(tester: tester);
 

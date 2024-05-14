@@ -79,7 +79,7 @@ class WorkEmployeeWatcherBloc
         categories: state.categories,
         page: event.workItemsModel.isEmpty || state.page != 0 ? state.page : 1,
         maxPage: event.workItemsModel.isNotEmpty
-            ? (event.workItemsModel.length / KDimensions.pagetItems).ceil()
+            ? (event.workItemsModel.length / KDimensions.pageItems).ceil()
             : 0,
         failure: null,
       ),
@@ -122,7 +122,7 @@ class WorkEmployeeWatcherBloc
         page: state.workModelItems.isEmpty || state.page != 0 ? state.page : 1,
         categories: null,
         cities: null,
-        maxPage: (state.workModelItems.length / KDimensions.pagetItems).ceil(),
+        maxPage: (state.workModelItems.length / KDimensions.pageItems).ceil(),
       ),
     );
   }
@@ -136,7 +136,7 @@ class WorkEmployeeWatcherBloc
       categories: state.categories,
       workModelItems: state.workModelItems,
     );
-    final maxPage = (filterItems.length / KDimensions.pagetItems).ceil();
+    final maxPage = (filterItems.length / KDimensions.pageItems).ceil();
     final workItems =
         _changePage(page: state.page, workModelItems: filterItems);
     emit(
@@ -163,7 +163,7 @@ class WorkEmployeeWatcherBloc
       categories: event.categories,
       workModelItems: state.workModelItems,
     );
-    final maxPage = (filterItems.length / KDimensions.pagetItems).ceil();
+    final maxPage = (filterItems.length / KDimensions.pageItems).ceil();
     final workItems = _changePage(
       page: state.page == 0 && filterItems.isNotEmpty ? 1 : state.page,
       workModelItems: filterItems,
@@ -216,17 +216,17 @@ class WorkEmployeeWatcherBloc
       if (page == 1) {
         return workModelItems.sublist(
           0,
-          workModelItems.length > KDimensions.pagetItems
-              ? KDimensions.pagetItems
+          workModelItems.length > KDimensions.pageItems
+              ? KDimensions.pageItems
               : workModelItems.length,
         );
       }
-      for (var i = page * KDimensions.pagetItems;
+      for (var i = page * KDimensions.pageItems;
           i > 0;
-          i -= KDimensions.pagetItems) {
-        if (i <= workModelItems.length + KDimensions.pagetItems) {
+          i -= KDimensions.pageItems) {
+        if (i <= workModelItems.length + KDimensions.pageItems) {
           return workModelItems.sublist(
-            i - KDimensions.pagetItems,
+            i - KDimensions.pageItems,
             i <= workModelItems.length ? i : workModelItems.length,
           );
         }
