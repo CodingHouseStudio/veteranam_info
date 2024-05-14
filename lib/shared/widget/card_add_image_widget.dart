@@ -65,6 +65,7 @@ class CardAddImageWidget extends StatelessWidget {
   }
 
   Widget buildImage(BuildContext context) {
+    debugPrint('Image: $image');
     return Container(
       decoration: isDesk
           ? KWidgetTheme.boxDecorationImageDesk(context)
@@ -72,8 +73,12 @@ class CardAddImageWidget extends StatelessWidget {
       child: CachedNetworkImage(
         key: KWidgetkeys.widget.cardAddImage.widget,
         imageUrl: image!,
-        placeholder: (context, url) => Image.asset(''),
-        errorWidget: (context, url, error) => KIcon.error,
+        placeholder: (context, url) =>
+            const CircularProgressIndicator.adaptive(), //Image.asset(''),
+        errorWidget: (context, url, error) {
+          debugPrint('image error: $error');
+          return KIcon.error;
+        },
         fit: BoxFit.fill,
       ),
     );
