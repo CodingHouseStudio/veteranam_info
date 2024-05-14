@@ -8,14 +8,12 @@ class ScaffoldWidget extends StatelessWidget {
     this.mainDecoration,
     this.titleChildWidgetsFunction,
     super.key,
-    this.hasMicrophone = true,
     this.mainDeskPadding,
     this.mainDecorationPadding,
   });
   final List<Widget> Function({required bool isDesk})?
       titleChildWidgetsFunction;
   final List<Widget> Function({required bool isDesk}) mainChildWidgetsFunction;
-  final bool hasMicrophone;
   final EdgeInsetsGeometry Function({
     required bool isDesk,
     required double maxWidth,
@@ -44,7 +42,6 @@ class ScaffoldWidget extends StatelessWidget {
                 sliver: SliverPersistentHeader(
                   delegate: NawbarWidget(
                     isDesk: isDesk,
-                    hasMicrophone: hasMicrophone,
                   ),
                 ),
               ),
