@@ -93,19 +93,25 @@ class StoryAddBody extends StatelessWidget {
                 Expanded(
                   flex: 2,
                   child: _.image.value != null
-                      ? Container(
-                          decoration: KWidgetTheme.boxDecorationImage(context),
-                          child: CachedNetworkImage(
-                            key: KWidgetkeys.widget.cardAddImage.widget,
-                            imageUrl: _.image.value!.path,
-                            placeholder: (context, url) =>
-                                const CircularProgressIndicator
-                                    .adaptive(), //Image.asset(''),
-                            errorWidget: (context, url, error) {
-                              debugPrint('image error: $error');
-                              return KIcon.error;
-                            },
-                            fit: BoxFit.cover,
+                      ? InkWell(
+                          onTap: () => context
+                              .read<StoryAddBloc>()
+                              .add(const StoryAddEvent.imageUpdated()),
+                          child: Container(
+                            decoration:
+                                KWidgetTheme.boxDecorationImage(context),
+                            child: CachedNetworkImage(
+                              key: KWidgetkeys.widget.cardAddImage.widget,
+                              imageUrl: _.image.value!.path,
+                              placeholder: (context, url) =>
+                                  const CircularProgressIndicator
+                                      .adaptive(), //Image.asset(''),
+                              errorWidget: (context, url, error) {
+                                debugPrint('image error: $error');
+                                return KIcon.error;
+                              },
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         )
                       : IconButton(
