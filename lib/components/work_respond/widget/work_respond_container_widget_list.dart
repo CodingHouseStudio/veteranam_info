@@ -58,9 +58,11 @@ List<Widget> _workRespondContainerWidgetList({
       onPressed: null,
       style: KButtonStyles.borderButtonStyle(context).copyWith(),
       icon: Padding(
-        padding: EdgeInsets.all(
-          isDesk ? KPadding.kPaddingSize32 : KPadding.kPaddingSize16,
-        ).copyWith(right: KPadding.kPaddingSize8),
+        padding: EdgeInsets.symmetric(
+          vertical: isDesk ? KPadding.kPaddingSize32 : KPadding.kPaddingSize16,
+        ).copyWith(
+          left: isDesk ? KPadding.kPaddingSize32 : KPadding.kPaddingSize16,
+        ),
         child: KIcon.attachFile,
       ),
       label: Align(
