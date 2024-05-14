@@ -11,8 +11,8 @@ class StoryModel with _$StoryModel {
     required DateTime date,
     required String story,
     required String userName,
-    List<ImageModel>? userPhoto,
-    List<ImageModel>? image,
+    @ImageConverter() List<ImageModel>? userPhoto,
+    @ImageConverter() List<ImageModel>? image,
   }) = _StoryModel;
 
   factory StoryModel.fromJson(Map<String, dynamic> json) =>

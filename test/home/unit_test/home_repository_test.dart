@@ -42,7 +42,9 @@ void main() {
       test('mock', () async {
         homeRepository.addMockQuestions();
         verify(
-          mockFirestoreService.addQuestion(KTestText.questionModelItems.first),
+          mockFirestoreService.addQuestion(
+            KTestText.questionModelItems.first.copyWith(navigationLink: null),
+          ),
         ).called(1);
       });
     });

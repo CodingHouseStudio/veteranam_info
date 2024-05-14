@@ -12,7 +12,7 @@ class InformationModel with _$InformationModel {
     required String news,
     required DateTime date,
     @Default(<String>[]) List<String>? tags,
-    List<ImageModel>? image,
+    @ImageConverter() List<ImageModel>? image,
   }) = _InformationModel;
 
   factory InformationModel.fromJson(Map<String, dynamic> json) =>

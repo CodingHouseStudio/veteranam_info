@@ -47,6 +47,7 @@ abstract class KGroupText {
   static const shouldNotBe = 'should not be';
   static const empty = 'empty';
   static const modelJson = 'instance from valid JSON';
+  static const jsonModel = 'json from valid model';
 }
 
 abstract class KTestText {
@@ -79,6 +80,7 @@ abstract class KTestText {
       id: '0',
       title: KMockText.questionTitle.first,
       subtitle: KMockText.questionSubtitle,
+      navigationLink: 'test_link',
     ),
   ];
 
