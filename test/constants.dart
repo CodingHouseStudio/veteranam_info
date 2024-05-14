@@ -167,6 +167,17 @@ abstract class KTestText {
         tags: KMockText.tags.elementAt(i),
       ),
   ];
+
+  static final storyModelItems = <StoryModel>[
+    for (var i = 0; i < KMockText.tags.length; i++)
+      StoryModel(
+        id: i.toString(),
+        date: dateTime,
+        image: i > KMockText.tags.length - 2 ? KMockText.image : null,
+        story: KMockText.cardData,
+        userName: KMockText.userNameAnonim,
+      ),
+  ];
 }
 
 abstract class KTestConstants {
@@ -201,7 +212,7 @@ abstract class KScreenBlocName {
   static const questionsForm = 'Questions Form Screen';
   static const workEmployee = 'Work Employee Screen';
   static const workRespond = 'Work Respond Screen';
-  static const employer = 'Employer Screen';
+  static const workEmployer = 'Employer Screen';
 
   static const feedback = 'Feedback Widget';
   static const authenticationServices = 'Authentication Services';
@@ -210,4 +221,5 @@ abstract class KScreenBlocName {
   static const firestoreService = 'Firestore Service';
   static const secureStorage = 'Secure Storage';
   static const filter = 'Filter';
+  static const scroll = 'scroll';
 }

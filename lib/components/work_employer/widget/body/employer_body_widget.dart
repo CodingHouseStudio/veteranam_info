@@ -5,8 +5,8 @@ import 'package:kozak/shared/shared.dart';
 
 part '../text_field_widget_list.dart';
 
-class EmployerBodyWidget extends StatelessWidget {
-  const EmployerBodyWidget({super.key});
+class WorkEmployerBodyWidget extends StatelessWidget {
+  const WorkEmployerBodyWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

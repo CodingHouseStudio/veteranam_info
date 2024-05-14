@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kozak/shared/shared.dart';
 import 'package:kozak/shared/widget/dialogs_widget.dart';
 
@@ -178,10 +179,11 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         KSizedBox.kWidthSizedBox24,
-        const Flexible(
+        Flexible(
           flex: 2,
           child: Text(
-            KMockText.userName,
+            context.read<AuthenticationBloc>().state.user?.name ??
+                KMockText.userName,
             style: AppTextStyle.text40,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
@@ -200,9 +202,16 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _textField(context.l10n.email, KMockText.email),
+        _textField(
+          context.l10n.email,
+          context.read<AuthenticationBloc>().state.user?.email ??
+              KMockText.email,
+        ),
         KSizedBox.kHeightSizedBox8,
-        _textField(context.l10n.nickname, KMockText.nickname),
+        _textField(
+          context.l10n.nickname,
+          KMockText.nickname,
+        ),
       ],
     );
   }

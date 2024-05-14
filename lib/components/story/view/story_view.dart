@@ -7,6 +7,8 @@ class StoryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StoryBodyWidget(key: KWidgetkeys.screen.story.screen);
+    return StoryBlocprovider(
+      childWidget: StoryBodyWidget(key: KWidgetkeys.screen.story.screen),
+    );
   }
 }

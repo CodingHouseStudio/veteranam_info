@@ -35,6 +35,7 @@ import 'package:mockito/annotations.dart';
     MockSpec<DocumentSnapshot>(),
     MockSpec<DocumentChange>(),
     MockSpec<SnapshotMetadata>(),
+    MockSpec<IStoryRepository>(),
   ],
 )
 void load() => debugPrint('loaded');
