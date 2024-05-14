@@ -8,7 +8,6 @@ class DiscountBodyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScaffoldWidget(
-      hasMicrophone: false,
       mainChildWidgetsFunction: ({required isDesk}) => [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),

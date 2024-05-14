@@ -8,10 +8,8 @@ class NawbarWidget extends SliverPersistentHeaderDelegate {
   const NawbarWidget({
     required this.isDesk,
     this.widgetKey,
-    this.hasMicrophone = true,
   });
   final bool isDesk;
-  final bool hasMicrophone;
   final Key? widgetKey;
 
   @override
@@ -34,7 +32,6 @@ class NawbarWidget extends SliverPersistentHeaderDelegate {
     return _NawbarWidgetImplematation(
       key: widgetKey,
       isDesk: isDesk,
-      hasMicrophone: hasMicrophone,
     );
   }
 }
@@ -42,11 +39,9 @@ class NawbarWidget extends SliverPersistentHeaderDelegate {
 class _NawbarWidgetImplematation extends StatefulWidget {
   const _NawbarWidgetImplematation({
     required this.isDesk,
-    required this.hasMicrophone,
     super.key,
   });
   final bool isDesk;
-  final bool hasMicrophone;
 
   @override
   State<_NawbarWidgetImplematation> createState() =>
@@ -117,11 +112,11 @@ class _NawbarWidgetImplematationState
                 prefixIcon: KIcon.search,
                 onChanged: (text) {},
                 hintText: context.l10n.search,
-                suffixIcon: widget.isDesk || !widget.hasMicrophone
-                    ? null
-                    : KIcon.mic.setIconKey(
-                        KWidgetkeys.widget.nawbar.iconMic,
-                      ),
+                // suffixIcon: widget.isDesk || !widget.hasMicrophone
+                //     ? null
+                //     : KIcon.mic.setIconKey(
+                //         KWidgetkeys.widget.nawbar.iconMic,
+                //       ),
                 disposeFocusNode: false,
                 isDesk: widget.isDesk,
                 contentPadding: widget.isDesk
@@ -129,14 +124,15 @@ class _NawbarWidgetImplematationState
                     : const EdgeInsets.all(KPadding.kPaddingSize16),
               ),
             ),
-            if (widget.isDesk && widget.hasMicrophone)
-              Padding(
-                padding: const EdgeInsets.only(right: KPadding.kPaddingSize32),
-                child: IconWidget(
-                  key: KWidgetkeys.widget.nawbar.iconMic,
-                  icon: KIcon.mic,
-                ),
-              ),
+            // if (widget.isDesk && widget.hasMicrophone)
+            //   Padding(
+            //     padding: const EdgeInsets.only(right:
+            // KPadding.kPaddingSize32),
+            //     child: IconWidget(
+            //       key: KWidgetkeys.widget.nawbar.iconMic,
+            //       icon: KIcon.mic,
+            //     ),
+            //   ),
             if (widget.isDesk || !isFocused)
               const Padding(
                 padding:
