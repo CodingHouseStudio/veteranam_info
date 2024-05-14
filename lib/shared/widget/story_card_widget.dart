@@ -18,7 +18,7 @@ class StoryCardWidget extends StatelessWidget {
           ? const EdgeInsets.symmetric(horizontal: KPadding.kPaddingSize48)
           : EdgeInsets.zero,
       child: CardTextDetailEvaluateWidget(
-        image: storyModel.image,
+        image: storyModel.image.firstImage,
         text: storyModel.story,
         titleTopMob: true,
         titleWidget: Row(

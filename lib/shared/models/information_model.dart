@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:kozak/shared/shared.dart';
 
 part 'information_model.freezed.dart';
 part 'information_model.g.dart';
@@ -11,7 +12,7 @@ class InformationModel with _$InformationModel {
     required String news,
     required DateTime date,
     @Default(<String>[]) List<String>? tags,
-    String? image,
+    List<ImageModel>? image,
   }) = _InformationModel;
 
   factory InformationModel.fromJson(Map<String, dynamic> json) =>

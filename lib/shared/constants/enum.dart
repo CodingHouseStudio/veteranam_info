@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:kozak/shared/shared.dart';
 
 extension ExtendedDateTime on DateTime {
   static DateTime? _customTime;
@@ -16,6 +17,10 @@ extension ExtendedDateTime on DateTime {
   static set id(String customId) => _id = customId;
 
   String get localeTime => toLocal().toString().split(' ')[0];
+}
+
+extension ExtendedImage on List<ImageModel>? {
+  String? get firstImage => this?.first.downloadURL;
 }
 
 enum LoadingStatus { initial, loading, loaded, error }

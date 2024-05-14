@@ -1,2 +1,2 @@
-export 'subtitle_convertors.dart';
-export 'title_convertors.dart';
+export 'subtitle_convertor.dart';
+export 'title_convertor.dart';
