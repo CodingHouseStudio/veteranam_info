@@ -47,6 +47,7 @@ abstract class KGroupText {
   static const shouldNotBe = 'should not be';
   static const empty = 'empty';
   static const modelJson = 'instance from valid JSON';
+  static const jsonModel = 'json from valid model';
 }
 
 abstract class KTestText {
@@ -79,6 +80,7 @@ abstract class KTestText {
       id: '0',
       title: KMockText.questionTitle.first,
       subtitle: KMockText.questionSubtitle,
+      navigationLink: 'test_link',
     ),
   ];
 
@@ -125,6 +127,13 @@ abstract class KTestText {
     id: '1',
     userRole: UserRole.civilian,
   );
+  static const imageModel = ImageModel(
+    downloadURL: 'test_URL',
+    lastModifiedTS: 1,
+    name: 'test_name',
+    ref: 'test_name',
+    type: 'test_type',
+  );
 
   static final feedbackModel = FeedbackModel(
     id: dateTime.microsecondsSinceEpoch.toString(),
@@ -163,7 +172,9 @@ abstract class KTestText {
         title: KMockText.title,
         news: KMockText.cardData,
         date: dateTime,
-        image: i > KMockText.tags.length - 2 ? KMockText.image : null,
+        image: i > KMockText.tags.length - 2
+            ? [const ImageModel(downloadURL: KMockText.image)]
+            : null,
         tags: KMockText.tags.elementAt(i),
       ),
   ];
@@ -173,7 +184,13 @@ abstract class KTestText {
       StoryModel(
         id: i.toString(),
         date: dateTime,
-        image: i > KMockText.tags.length - 2 ? KMockText.image : null,
+        image: i > KMockText.tags.length - 2
+            ? const [
+                ImageModel(
+                  downloadURL: KMockText.image,
+                ),
+              ]
+            : null,
         story: KMockText.cardData,
         userName: KMockText.userNameAnonim,
       ),
@@ -222,4 +239,5 @@ abstract class KScreenBlocName {
   static const secureStorage = 'Secure Storage';
   static const filter = 'Filter';
   static const scroll = 'scroll';
+  static const image = 'image';
 }
