@@ -65,6 +65,7 @@ class StoryAddBloc extends Bloc<StoryAddEvent, StoryAddState> {
     final imageFieldModel = ImageFieldModel.dirty(
       await ImagePicker().pickImage(source: ImageSource.gallery),
     );
+    if (imageFieldModel.value == null) return;
 
     emit(
       state.copyWith(
