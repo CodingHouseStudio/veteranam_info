@@ -67,7 +67,6 @@ abstract class WorkRespondContainer {
         child: Row(
           children: [
             KIcon.attachFile,
-            KSizedBox.kWidthSizedBox8,
             GestureDetector(
               child: Text(
                 key: KWidgetkeys.screen.workRespond.upload,
@@ -114,6 +113,7 @@ abstract class WorkRespondContainer {
                 text: context.l10n.send,
                 onPressed: null,
                 isDesk: isDesk,
+                backgroundColor: Theme.of(context).colorScheme.secondary,
               ),
             ),
             KSizedBox.kWidthSizedBox73,
@@ -123,7 +123,6 @@ abstract class WorkRespondContainer {
                 text: context.l10n.cancel,
                 onPressed: null,
                 isDesk: isDesk,
-                backgroundColor: Theme.of(context).colorScheme.primary,
               ),
             ),
           ],
@@ -134,6 +133,7 @@ abstract class WorkRespondContainer {
           text: context.l10n.send,
           onPressed: null,
           isDesk: isDesk,
+          backgroundColor: Theme.of(context).colorScheme.secondary,
         ),
         KSizedBox.kHeightSizedBox16,
         ButtonWidget(
@@ -141,7 +141,6 @@ abstract class WorkRespondContainer {
           text: context.l10n.cancel,
           onPressed: null,
           isDesk: isDesk,
-          backgroundColor: Theme.of(context).primaryColor,
         ),
       ],
       if (isDesk) KSizedBox.kHeightSizedBox32 else KSizedBox.kHeightSizedBox16,
