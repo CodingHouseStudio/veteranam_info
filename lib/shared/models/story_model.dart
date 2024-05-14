@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:kozak/shared/shared.dart';
 
 part 'story_model.freezed.dart';
 part 'story_model.g.dart';
@@ -10,8 +11,8 @@ class StoryModel with _$StoryModel {
     required DateTime date,
     required String story,
     required String userName,
-    String? userPhoto,
-    String? image,
+    @ImageConverter() List<ImageModel>? userPhoto,
+    @ImageConverter() List<ImageModel>? image,
   }) = _StoryModel;
 
   factory StoryModel.fromJson(Map<String, dynamic> json) =>
