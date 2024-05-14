@@ -11,7 +11,7 @@ class FundModel with _$FundModel {
     required String title,
     required String subtitle,
     required String link,
-    List<ImageModel>? image,
+    @ImageConverter() List<ImageModel>? image,
   }) = _FundsModel;
 
   factory FundModel.fromJson(Map<String, dynamic> json) =>

@@ -25,6 +25,7 @@ mixin _$InformationModel {
   String get news => throw _privateConstructorUsedError;
   DateTime get date => throw _privateConstructorUsedError;
   List<String>? get tags => throw _privateConstructorUsedError;
+  @ImageConverter()
   List<ImageModel>? get image => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -45,7 +46,7 @@ abstract class $InformationModelCopyWith<$Res> {
       String news,
       DateTime date,
       List<String>? tags,
-      List<ImageModel>? image});
+      @ImageConverter() List<ImageModel>? image});
 }
 
 /// @nodoc
@@ -111,7 +112,7 @@ abstract class _$$InformationModelImplCopyWith<$Res>
       String news,
       DateTime date,
       List<String>? tags,
-      List<ImageModel>? image});
+      @ImageConverter() List<ImageModel>? image});
 }
 
 /// @nodoc
@@ -170,7 +171,7 @@ class _$InformationModelImpl implements _InformationModel {
       required this.news,
       required this.date,
       final List<String>? tags = const <String>[],
-      final List<ImageModel>? image})
+      @ImageConverter() final List<ImageModel>? image})
       : _tags = tags,
         _image = image;
 
@@ -198,6 +199,7 @@ class _$InformationModelImpl implements _InformationModel {
 
   final List<ImageModel>? _image;
   @override
+  @ImageConverter()
   List<ImageModel>? get image {
     final value = _image;
     if (value == null) return null;
@@ -252,12 +254,13 @@ class _$InformationModelImpl implements _InformationModel {
 
 abstract class _InformationModel implements InformationModel {
   const factory _InformationModel(
-      {required final String id,
-      required final String title,
-      required final String news,
-      required final DateTime date,
-      final List<String>? tags,
-      final List<ImageModel>? image}) = _$InformationModelImpl;
+          {required final String id,
+          required final String title,
+          required final String news,
+          required final DateTime date,
+          final List<String>? tags,
+          @ImageConverter() final List<ImageModel>? image}) =
+      _$InformationModelImpl;
 
   factory _InformationModel.fromJson(Map<String, dynamic> json) =
       _$InformationModelImpl.fromJson;
@@ -273,6 +276,7 @@ abstract class _InformationModel implements InformationModel {
   @override
   List<String>? get tags;
   @override
+  @ImageConverter()
   List<ImageModel>? get image;
   @override
   @JsonKey(ignore: true)
