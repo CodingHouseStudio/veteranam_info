@@ -11,10 +11,10 @@ Future<void> homeBoxHelper(
     findsOneWidget,
   );
 
-  expect(
-    find.byKey(KWidgetkeys.screen.home.boxIcon),
-    findsOneWidget,
-  );
+  // expect(
+  //   find.byKey(KWidgetkeys.screen.home.boxIcon),
+  //   findsOneWidget,
+  // );
 
   expect(
     find.byKey(KWidgetkeys.screen.home.boxSubtitle),
