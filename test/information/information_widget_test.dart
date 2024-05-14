@@ -1,7 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
-// ignore: unused_import
-import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
 import 'package:mockito/mockito.dart';
 

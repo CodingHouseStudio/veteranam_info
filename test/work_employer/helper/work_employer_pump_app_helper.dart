@@ -8,7 +8,7 @@ Future<void> employerPumpAppHelper({
   required WidgetTester tester,
   MockGoRouter? mockGoRouter,
 }) async {
-  await tester.pumpApp(const EmployerScreen(), mockGoRouter: mockGoRouter);
+  await tester.pumpApp(const WorkEmployerScreen(), mockGoRouter: mockGoRouter);
 
   expect(
     find.byKey(KWidgetkeys.screen.employer.screen),
