@@ -17,7 +17,8 @@ class StoryAddBody extends StatelessWidget {
           context.goNamedWithScroll(KRoute.story.name),
       buildWhen: (previous, current) =>
           previous.formStatus != current.formStatus ||
-          previous.isAnonymously != current.isAnonymously,
+          previous.isAnonymously != current.isAnonymously ||
+          previous.image != current.image,
       builder: (context, _) {
         return ScaffoldWidget(
           mainChildWidgetsFunction: ({required isDesk}) => [
