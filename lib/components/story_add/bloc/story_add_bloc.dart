@@ -91,8 +91,8 @@ class StoryAddBloc extends Bloc<StoryAddEvent, StoryAddState> {
           date: DateTime.now(),
           story: state.story.value,
           userName: state.isAnonymously
-              ? KMockText.userNameAnonim
-              : _authenticationRepository.currentUser.name!,
+              ? null
+              : _authenticationRepository.currentUser.name,
           image: state.image.value != null
               ? [
                   ImageModel(
