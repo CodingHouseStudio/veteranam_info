@@ -10,8 +10,8 @@ class StoryModel with _$StoryModel {
     required String id,
     required DateTime date,
     required String story,
-    required String userName,
     required String userId,
+    String? userName,
     @ImageConverter() List<ImageModel>? userPhoto,
     @ImageConverter() List<ImageModel>? image,
   }) = _StoryModel;

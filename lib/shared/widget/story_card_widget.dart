@@ -44,7 +44,7 @@ class StoryCardWidget extends StatelessWidget {
               ),
             KSizedBox.kWidthSizedBox8,
             Text(
-              storyModel.userName,
+              storyModel.userName ?? context.l10n.anonymous,
               key: KWidgetkeys.widget.storyCard.userName,
               style: AppTextStyle.text14,
             ),

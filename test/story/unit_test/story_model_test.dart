@@ -51,7 +51,6 @@ void main() {
       test('${KGroupText.shouldBe} ', () {
         final json = {
           'id': KTestText.storyModelItems.last.id,
-          'userName': KTestText.storyModelItems.last.userName,
           'userId': KTestText.storyModelItems.last.userId,
           'story': KTestText.storyModelItems.last.story,
           'date': KTestText.storyModelItems.last.date.toIso8601String(),
@@ -65,7 +64,7 @@ void main() {
         );
         expect(
           storyModel.userName,
-          KTestText.storyModelItems.last.userName,
+          null,
         );
         expect(
           storyModel.story,
@@ -87,8 +86,8 @@ void main() {
 
       test('${KGroupText.shouldNotBe} ', () {
         final json = {
-          'id': KTestText.storyModelItems.last.id,
-          // userName is missing
+          // id is missing
+          'userName': KTestText.storyModelItems.last.userName,
           'userId': KTestText.storyModelItems.last.userId,
           'story': KTestText.storyModelItems.last.story,
           'date': KTestText.storyModelItems.last.date.toIso8601String(),
@@ -120,7 +119,7 @@ void main() {
       test('${KGroupText.shouldBe} ', () {
         final json = {
           'id': KTestText.storyModelItems.last.id,
-          'userName': KTestText.storyModelItems.last.userName,
+          'userName': null,
           'userId': KTestText.storyModelItems.last.userId,
           'story': KTestText.storyModelItems.last.story,
           'date': KTestText.storyModelItems.last.date.toIso8601String(),
@@ -129,7 +128,7 @@ void main() {
         };
 
         final imageModelJson = KTestText.storyModelItems.last
-            .copyWith(image: null, userPhoto: null)
+            .copyWith(image: null, userPhoto: null, userName: null)
             .toJson();
 
         expect(imageModelJson, json);
