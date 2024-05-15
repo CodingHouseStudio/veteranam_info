@@ -88,7 +88,7 @@ class StoryAddBloc extends Bloc<StoryAddEvent, StoryAddState> {
       final result = await _storyRepository.addStory(
         StoryModel(
           id: ExtendedDateTime.id,
-          date: DateTime.now(),
+          date: ExtendedDateTime.current,
           story: state.story.value,
           userName: state.isAnonymously
               ? null
