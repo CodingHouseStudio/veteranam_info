@@ -102,6 +102,14 @@ class StoryAddBloc extends Bloc<StoryAddEvent, StoryAddState> {
                   ),
                 ]
               : null,
+          userPhoto: _authenticationRepository.currentUser.photo != null &&
+                  !state.isAnonymously
+              ? [
+                  ImageModel(
+                    downloadURL: _authenticationRepository.currentUser.photo!,
+                  ),
+                ]
+              : null,
           userId: _authenticationRepository.currentUser.id,
         ),
       );
