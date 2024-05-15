@@ -113,6 +113,17 @@ GoRouter router = GoRouter(
             name: state.name,
             child: const StoryScreen(),
           ),
+          routes: [
+            GoRoute(
+              name: KRoute.storyAdd.name,
+              path: KRoute.storyAdd.path,
+              pageBuilder: (context, state) => NoTransitionPage(
+                key: state.pageKey,
+                name: state.name,
+                child: const StoryAddScreen(),
+              ),
+            ),
+          ],
         ),
         GoRoute(
           name: KRoute.work.name,

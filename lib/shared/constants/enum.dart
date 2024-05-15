@@ -5,7 +5,7 @@ extension ExtendedDateTime on DateTime {
   static DateTime? _customTime;
   static String? _id;
 
-  static DateTime get current => _customTime ?? DateTime.now();
+  static DateTime get current => _customTime ?? DateTime.now().toUtc();
 
   static String get id =>
       _id ?? DateTime.now().toLocal().microsecondsSinceEpoch.toString();
@@ -20,7 +20,8 @@ extension ExtendedDateTime on DateTime {
 }
 
 extension ExtendedImage on List<ImageModel>? {
-  String? get firstImage => this?.first.downloadURL;
+  String? get firstImage =>
+      this?.isNotEmpty ?? false ? this!.first.downloadURL : null;
 }
 
 enum LoadingStatus { initial, loading, loaded, error }
