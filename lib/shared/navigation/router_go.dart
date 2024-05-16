@@ -134,7 +134,7 @@ final GoRouter router = GoRouter(
               path: KRoute.profileMyStory.path,
               pageBuilder: (context, state) => NoTransitionPage(
                 key: state.pageKey,
-                child: const ProfileMyStoryBodyWidget(),
+                child: const ProfileMyStoryScreen(),
               ),
             ),
           ],
