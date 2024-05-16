@@ -89,7 +89,7 @@ class StoryAddBody extends StatelessWidget {
                         Text(
                           context.l10n.notNecessarily,
                           key: KWidgetkeys.screen.storyAdd.photoDesciption,
-                          style: AppTextStyle.hint20(context),
+                          style: context.textStyle.hint20,
                         ),
                       ],
                     ),
@@ -104,8 +104,7 @@ class StoryAddBody extends StatelessWidget {
                               .read<StoryAddBloc>()
                               .add(const StoryAddEvent.imageUpdated()),
                           child: Container(
-                            decoration:
-                                KWidgetTheme.boxDecorationImage(context),
+                            decoration: context.widgetTheme.boxDecorationImage,
                             child: CachedNetworkImage(
                               key: KWidgetkeys.widget.cardAddImage.widget,
                               imageUrl: _.image.value!.path,
@@ -122,7 +121,7 @@ class StoryAddBody extends StatelessWidget {
                         )
                       : IconButton(
                           key: KWidgetkeys.screen.storyAdd.photoButton,
-                          style: KButtonStyles.imageButton(context),
+                          style: context.buttonStyle.imageButton,
                           icon: KIcon.addImage,
                           onPressed: () => context
                               .read<StoryAddBloc>()
@@ -166,7 +165,7 @@ class StoryAddBody extends StatelessWidget {
                       Text(
                         context.l10n.publishAnonymouslyStorySubtitle,
                         key: KWidgetkeys.screen.storyAdd.switchDescription,
-                        style: AppTextStyle.hint24(context),
+                        style: context.textStyle.hint24,
                       ),
                       KSizedBox.kHeightSizedBox40,
                       ButtonWidget(

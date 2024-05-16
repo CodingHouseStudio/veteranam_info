@@ -1,89 +1,84 @@
 import 'package:flutter/material.dart';
 import 'package:kozak/shared/shared.dart';
 
+extension WidgetThemeExtenntion on BuildContext {
+  KWidgetTheme get widgetTheme => KWidgetTheme.of(this);
+}
+
 /// COMMENT: Variables with widget theme that don't have a specific group
-abstract class KWidgetTheme {
-  static OutlineInputBorder outlineInputBorder(BuildContext context) =>
-      OutlineInputBorder(
-        borderSide: BorderSide(color: Theme.of(context).colorScheme.secondary),
+class KWidgetTheme {
+  KWidgetTheme.of(this.context);
+  final BuildContext context;
+  OutlineInputBorder get outlineInputBorder => OutlineInputBorder(
+        borderSide: BorderSide(color: context.color.secondary),
         borderRadius: KBorderRadius.kBorderRadius32,
       );
-  static OutlineInputBorder outlineInputBorderError(BuildContext context) =>
-      OutlineInputBorder(
-        borderSide: BorderSide(color: Theme.of(context).colorScheme.error),
+  OutlineInputBorder get outlineInputBorderError => OutlineInputBorder(
+        borderSide: BorderSide(color: context.color.error),
         borderRadius: KBorderRadius.kBorderRadius32,
       );
 
-  static BoxDecoration boxDecorationWidget(BuildContext context) =>
-      BoxDecoration(
+  BoxDecoration get boxDecorationWidget => BoxDecoration(
         borderRadius: KBorderRadius.kBorderRadius32,
-        border: Border.all(color: Theme.of(context).colorScheme.secondary),
+        border: Border.all(color: context.color.secondary),
       );
-  static BoxDecoration boxDecorationCircular(BuildContext context) =>
-      BoxDecoration(
+  BoxDecoration get boxDecorationCircular => BoxDecoration(
         shape: BoxShape.circle,
-        color: Theme.of(context).colorScheme.background,
+        color: context.color.background,
       );
 
-  static BoxDecoration boxDecorationGrayCircular(BuildContext context) =>
-      BoxDecoration(
+  BoxDecoration get boxDecorationGrayCircular => BoxDecoration(
         shape: BoxShape.circle,
-        color: Theme.of(context).colorScheme.background,
+        color: context.color.background,
       );
 
-  static BoxDecoration boxDecorationCard(BuildContext context) => BoxDecoration(
+  BoxDecoration get boxDecorationCard => BoxDecoration(
         borderRadius: KBorderRadius.kBorderRadius32,
-        color: Theme.of(context).colorScheme.secondary,
+        color: context.color.secondary,
       );
-  static BoxDecoration boxDecorationImageDesk(BuildContext context) =>
-      BoxDecoration(
+  BoxDecoration get boxDecorationImageDesk => BoxDecoration(
         borderRadius: KBorderRadius.kBorderRadiusLeft32,
-        color: Theme.of(context).colorScheme.onPrimary,
+        color: context.color.onPrimary,
       );
-  static BoxDecoration boxDecorationImageMob(BuildContext context) =>
-      BoxDecoration(
+  BoxDecoration get boxDecorationImageMob => BoxDecoration(
         borderRadius: KBorderRadius.kBorderRadiusTop32,
-        color: Theme.of(context).colorScheme.onPrimary,
+        color: context.color.onPrimary,
       );
-  static BoxDecoration boxDecorationImage(BuildContext context) =>
-      BoxDecoration(
+  BoxDecoration get boxDecorationImage => BoxDecoration(
         borderRadius: KBorderRadius.kBorderRadius32,
-        color: Theme.of(context).colorScheme.onPrimary,
+        color: context.color.onPrimary,
       );
-  static BoxDecoration boxDecorationWhite(BuildContext context) =>
-      BoxDecoration(
+  BoxDecoration get boxDecorationWhite => BoxDecoration(
         borderRadius: KBorderRadius.kBorderRadiusRight32,
-        color: Theme.of(context).colorScheme.background,
+        color: context.color.background,
       );
 
-  static BoxDecoration boxDecorChatMessage(BuildContext context) =>
-      BoxDecoration(
-        color: Theme.of(context).colorScheme.onPrimary,
+  BoxDecoration get boxDecorChatMessage => BoxDecoration(
+        color: context.color.onPrimary,
         borderRadius: KBorderRadius.kBorderRadius32
             .copyWith(bottomLeft: const Radius.circular(KSize.kRadius8)),
       );
-  static BoxDecoration boxCheckPoint(BuildContext context) => BoxDecoration(
-        color: Theme.of(context).colorScheme.onSecondary,
+  BoxDecoration get boxCheckPoint => BoxDecoration(
+        color: context.color.onSecondary,
         border: Border.all(
-          color: Theme.of(context).colorScheme.secondary,
+          color: context.color.secondary,
           width: KSize.kPixel3,
         ),
         borderRadius: KBorderRadius.kBorderRadius8,
       );
 
-  static InputDecoration inputDecoration(BuildContext context) =>
-      InputDecoration(
-        hintStyle: AppTextStyle.hint24(context),
+  InputDecoration get inputDecoration => InputDecoration(
+        hintStyle: context.textStyle.hint24,
         contentPadding: const EdgeInsets.symmetric(
           horizontal: KPadding.kPaddingSize20,
         ),
         floatingLabelBehavior: FloatingLabelBehavior.auto,
-        border: KWidgetTheme.outlineInputBorder(context),
-        enabledBorder: KWidgetTheme.outlineInputBorder(context),
-        disabledBorder: KWidgetTheme.outlineInputBorder(context),
-        focusedBorder: KWidgetTheme.outlineInputBorder(context),
-        focusedErrorBorder: KWidgetTheme.outlineInputBorderError(context),
+        border: context.widgetTheme.outlineInputBorder,
+        enabledBorder: context.widgetTheme.outlineInputBorder,
+        disabledBorder: context.widgetTheme.outlineInputBorder,
+        focusedBorder: context.widgetTheme.outlineInputBorder,
+        focusedErrorBorder: context.widgetTheme.outlineInputBorderError,
         filled: true,
-        fillColor: Theme.of(context).colorScheme.background,
+        fillColor: context.color.background,
       );
 }

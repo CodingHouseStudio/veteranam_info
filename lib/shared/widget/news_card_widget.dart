@@ -29,7 +29,7 @@ class NewsCardWidget extends StatelessWidget {
           context.l10n.readMore,
           context.l10n.readLess,
         ],
-        buttonStyle: KButtonStyles.transparentButtonStyleBottomBorder(context),
+        buttonStyle: context.buttonStyle.transparentButtonStyleBottomBorder,
         titleWidget: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -41,7 +41,7 @@ class NewsCardWidget extends StatelessWidget {
             Text(
               informationItem.date.toLocal().toString().split(' ')[0],
               key: KWidgetkeys.widget.newsCard.date,
-              style: AppTextStyle.hint16(context),
+              style: context.textStyle.hint16,
             ),
           ],
         ),
@@ -57,7 +57,7 @@ class NewsCardWidget extends StatelessWidget {
                   runSpacing: KSize.kWrapRunSpacing4,
                   children: selectedFilters.map((tag) {
                     return Container(
-                      decoration: KWidgetTheme.boxDecorationWidget(context),
+                      decoration: context.widgetTheme.boxDecorationWidget,
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
                           vertical: KPadding.kPaddingSize4,

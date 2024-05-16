@@ -31,7 +31,7 @@ class DiscountsCardWidget extends StatelessWidget {
           horizontal: isDesk ? KPadding.kPaddingSize75 : 0,
         ),
         child: Container(
-          decoration: KWidgetTheme.boxDecorationWhite(context),
+          decoration: context.widgetTheme.boxDecorationWhite,
           child: Padding(
             padding: const EdgeInsets.all(KPadding.kPaddingSize16),
             child: Column(
@@ -67,13 +67,13 @@ class DiscountsCardWidget extends StatelessWidget {
                       Text(
                         date,
                         key: KWidgetkeys.widget.discountCard.date,
-                        style: AppTextStyle.hint24(context),
+                        style: context.textStyle.hint24,
                       ),
                       const Spacer(),
                       Text(
                         city,
                         key: KWidgetkeys.widget.discountCard.city,
-                        style: AppTextStyle.hint24(context),
+                        style: context.textStyle.hint24,
                       ),
                     ],
                   ),
@@ -84,12 +84,12 @@ class DiscountsCardWidget extends StatelessWidget {
                       Text(
                         date,
                         key: KWidgetkeys.widget.discountCard.date,
-                        style: AppTextStyle.hint14(context),
+                        style: context.textStyle.hint14,
                       ),
                       Text(
                         city,
                         key: KWidgetkeys.widget.discountCard.city,
-                        style: AppTextStyle.hint14(context),
+                        style: context.textStyle.hint14,
                       ),
                     ],
                   ),
@@ -102,8 +102,8 @@ class DiscountsCardWidget extends StatelessWidget {
                   preInstructionDiscount,
                   key: KWidgetkeys.widget.discountCard.preInstructionDiscount,
                   style: isDesk
-                      ? AppTextStyle.hint24(context)
-                      : AppTextStyle.hint14(context),
+                      ? context.textStyle.hint24
+                      : context.textStyle.hint14,
                 ),
                 KSizedBox.kHeightSizedBox16,
                 CardTextDetailWidget(
