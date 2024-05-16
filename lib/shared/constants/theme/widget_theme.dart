@@ -45,6 +45,11 @@ abstract class KWidgetTheme {
         borderRadius: KBorderRadius.kBorderRadiusTop32,
         color: Theme.of(context).colorScheme.onPrimary,
       );
+  static BoxDecoration boxDecorationImage(BuildContext context) =>
+      BoxDecoration(
+        borderRadius: KBorderRadius.kBorderRadius32,
+        color: Theme.of(context).colorScheme.onPrimary,
+      );
   static BoxDecoration boxDecorationWhite(BuildContext context) =>
       BoxDecoration(
         borderRadius: KBorderRadius.kBorderRadiusRight32,
@@ -56,6 +61,14 @@ abstract class KWidgetTheme {
         color: Theme.of(context).colorScheme.onPrimary,
         borderRadius: KBorderRadius.kBorderRadius32
             .copyWith(bottomLeft: const Radius.circular(KSize.kRadius8)),
+      );
+  static BoxDecoration boxCheckPoint(BuildContext context) => BoxDecoration(
+        color: Theme.of(context).colorScheme.onSecondary,
+        border: Border.all(
+          color: Theme.of(context).colorScheme.secondary,
+          width: KSize.kPixel3,
+        ),
+        borderRadius: KBorderRadius.kBorderRadius8,
       );
 
   static InputDecoration inputDecoration(BuildContext context) =>

@@ -102,7 +102,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
           hintStyle: widget.hintStyle,
           contentPadding: widget.contentPadding ??
               (widget.isDesk
-                  ? const EdgeInsets.all(KPadding.kPaddingSize32)
+                  ? const EdgeInsets.all(KPadding.kPaddingSize24)
                   : const EdgeInsets.all(KPadding.kPaddingSize16)),
           labelText: widget.labelText,
           border: widget.border,

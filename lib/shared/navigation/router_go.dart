@@ -114,6 +114,17 @@ GoRouter router = GoRouter(
             name: state.name,
             child: const StoryScreen(),
           ),
+          routes: [
+            GoRoute(
+              name: KRoute.storyAdd.name,
+              path: KRoute.storyAdd.path,
+              pageBuilder: (context, state) => NoTransitionPage(
+                key: state.pageKey,
+                name: state.name,
+                child: const StoryAddScreen(),
+              ),
+            ),
+          ],
         ),
         GoRoute(
           name: KRoute.work.name,
@@ -130,7 +141,7 @@ GoRouter router = GoRouter(
               pageBuilder: (context, state) => NoTransitionPage(
                 key: state.pageKey,
                 name: state.name,
-                child: const EmployerScreen(),
+                child: const WorkEmployerScreen(),
               ),
             ),
             GoRoute(
@@ -226,8 +237,11 @@ extension NavigatorExtention on BuildContext {
     Map<String, dynamic> queryParameters = const <String, dynamic>{},
     Object? extra,
   }) {
-    Scrollable.ensureVisible(this, alignment: KSize.kTopScroll);
-    GoRouter.of(this).goNamed(
+    if (read<ScrollCubit>().state.positions.isNotEmpty) {
+      read<ScrollCubit>().scrollUp();
+    }
+    read<ScrollCubit>().initial();
+    goNamed(
       name,
       pathParameters: pathParameters,
       queryParameters: queryParameters,

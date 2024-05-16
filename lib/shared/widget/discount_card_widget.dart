@@ -119,6 +119,7 @@ class DiscountsCardWidget extends StatelessWidget {
                       ),
                     ],
                   ),
+                  isDesk: isDesk,
                 ),
                 KSizedBox.kHeightSizedBox16,
               ],

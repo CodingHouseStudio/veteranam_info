@@ -1,13 +1,16 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:get_it/get_it.dart';
 import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
 
 import '../../text_dependency.dart';
 
 Future<void> storyPumpAppHelper({
+  required IStoryRepository mockStoryRepository,
   required WidgetTester tester,
   MockGoRouter? mockGoRouter,
 }) async {
+  _registerStoryBloc(mockStoryRepository: mockStoryRepository);
   await tester.pumpApp(const StoryScreen(), mockGoRouter: mockGoRouter);
 
   expect(
@@ -16,4 +19,16 @@ Future<void> storyPumpAppHelper({
   );
 
   await tester.pumpAndSettle();
+}
+
+void _registerStoryBloc({
+  required IStoryRepository mockStoryRepository,
+}) {
+  final storyBloc = StoryWatcherBloc(
+    storyRepository: mockStoryRepository,
+  );
+  if (GetIt.I.isRegistered<StoryWatcherBloc>()) {
+    GetIt.I.unregister<StoryWatcherBloc>();
+  }
+  GetIt.I.registerSingleton<StoryWatcherBloc>(storyBloc);
 }
