@@ -21,4 +21,5 @@ class _ScreenKeys {
   final workEmployee = _WorkEmployeeKeys();
   final workRespond = _WorkRespondKeys();
   final employer = _EmployerKeys();
+  final profileSaves = _ProfileSavesKeys();
 }

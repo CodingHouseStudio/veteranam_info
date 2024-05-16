@@ -33,6 +33,8 @@ part 'screen/about_us.dart';
 
 part 'screen/sign_up.dart';
 
+part 'screen/profile_saves.dart';
+
 part 'screen/login.dart';
 part 'screen/questions_form.dart';
 part 'screen/work_employee.dart';

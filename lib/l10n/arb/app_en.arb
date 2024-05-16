@@ -124,5 +124,7 @@
   "remotely": "Remotely",
   "didNotFindYourVacancy": "Didn't find your vacancy?",
   "workRequestSubtitle": "We can help. Fill in your details and job preferences in the following form and we will send your CV to relevant companies.",
-  "leaveRequest": "Leave a request"
+  "leaveRequest": "Leave a request",
+  "savesSubtitle": "In this section, you can see all your saved materials"
+
 }

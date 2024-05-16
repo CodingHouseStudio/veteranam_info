@@ -33,6 +33,15 @@ abstract class KMockText {
     ['Житло'],
     [],
   ];
+  static const workModel = WorkModel(
+    id: '1',
+    title: title,
+    price: '1200',
+    employerContact: 'contact',
+    companyName: 'companyName',
+    description: description,
+  );
+
   static const workTitle = 'Комплектувальник товару в магазин';
   static const workPrice = '12000 грн +%';
   static const workCity = 'м.Одеса';
