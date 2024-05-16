@@ -67,13 +67,13 @@ class DiscountsCardWidget extends StatelessWidget {
                       Text(
                         date,
                         key: KWidgetkeys.widget.discountCard.date,
-                        style: AppTextStyle.hint24,
+                        style: AppTextStyle.hint24(context),
                       ),
                       const Spacer(),
                       Text(
                         city,
                         key: KWidgetkeys.widget.discountCard.city,
-                        style: AppTextStyle.hint24,
+                        style: AppTextStyle.hint24(context),
                       ),
                     ],
                   ),
@@ -84,12 +84,12 @@ class DiscountsCardWidget extends StatelessWidget {
                       Text(
                         date,
                         key: KWidgetkeys.widget.discountCard.date,
-                        style: AppTextStyle.hint14,
+                        style: AppTextStyle.hint14(context),
                       ),
                       Text(
                         city,
                         key: KWidgetkeys.widget.discountCard.city,
-                        style: AppTextStyle.hint14,
+                        style: AppTextStyle.hint14(context),
                       ),
                     ],
                   ),
@@ -101,7 +101,9 @@ class DiscountsCardWidget extends StatelessWidget {
                 Text(
                   preInstructionDiscount,
                   key: KWidgetkeys.widget.discountCard.preInstructionDiscount,
-                  style: isDesk ? AppTextStyle.hint24 : AppTextStyle.hint14,
+                  style: isDesk
+                      ? AppTextStyle.hint24(context)
+                      : AppTextStyle.hint14(context),
                 ),
                 KSizedBox.kHeightSizedBox16,
                 CardTextDetailWidget(

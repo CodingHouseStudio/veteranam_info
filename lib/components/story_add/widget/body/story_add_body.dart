@@ -25,9 +25,9 @@ class StoryAddBody extends StatelessWidget {
             KSizedBox.kHeightSizedBox40,
             ...TitleWidget.titleWidgetList(
               title: context.l10n.stories,
-              titleKey: KWidgetkeys.screen.story.title,
+              titleKey: KWidgetkeys.screen.storyAdd.title,
               subtitle: context.l10n.storyAddSubtitle,
-              subtitleKey: KWidgetkeys.screen.story.subtitle,
+              subtitleKey: KWidgetkeys.screen.storyAdd.subtitle,
               isDesk: isDesk,
             ),
             KSizedBox.kHeightSizedBox56,
@@ -41,6 +41,7 @@ class StoryAddBody extends StatelessWidget {
                     ),
                     child: Text(
                       context.l10n.yourStory,
+                      key: KWidgetkeys.screen.storyAdd.storyText,
                       style: AppTextStyle.text40,
                     ),
                   ),
@@ -48,6 +49,7 @@ class StoryAddBody extends StatelessWidget {
                 Expanded(
                   flex: 2,
                   child: MessageFieldWidget(
+                    key: KWidgetkeys.screen.storyAdd.storyField,
                     changeMessage: (text) => context.read<StoryAddBloc>().add(
                           StoryAddEvent.storyUpdated(text),
                         ),
@@ -81,11 +83,13 @@ class StoryAddBody extends StatelessWidget {
                       children: [
                         Text(
                           context.l10n.addPhoto,
+                          key: KWidgetkeys.screen.storyAdd.photoText,
                           style: AppTextStyle.text40,
                         ),
                         Text(
                           context.l10n.notNecessarily,
-                          style: AppTextStyle.hint20,
+                          key: KWidgetkeys.screen.storyAdd.photoDesciption,
+                          style: AppTextStyle.hint20(context),
                         ),
                       ],
                     ),
@@ -95,6 +99,7 @@ class StoryAddBody extends StatelessWidget {
                   flex: 2,
                   child: _.image.value != null
                       ? InkWell(
+                          key: KWidgetkeys.screen.storyAdd.photoButton,
                           onTap: () => context
                               .read<StoryAddBloc>()
                               .add(const StoryAddEvent.imageUpdated()),
@@ -116,6 +121,7 @@ class StoryAddBody extends StatelessWidget {
                           ),
                         )
                       : IconButton(
+                          key: KWidgetkeys.screen.storyAdd.photoButton,
                           style: KButtonStyles.imageButton(context),
                           icon: KIcon.addImage,
                           onPressed: () => context
@@ -140,6 +146,7 @@ class StoryAddBody extends StatelessWidget {
                       Row(
                         children: [
                           SwitchWidget(
+                            key: KWidgetkeys.screen.storyAdd.switchAnonymously,
                             isSelected: _.isAnonymously,
                             onChanged: (p0) => context
                                 .read<StoryAddBloc>()
@@ -149,6 +156,7 @@ class StoryAddBody extends StatelessWidget {
                           Expanded(
                             child: Text(
                               context.l10n.publishAnonymously,
+                              key: KWidgetkeys.screen.storyAdd.switchText,
                               style: AppTextStyle.text24,
                             ),
                           ),
@@ -157,10 +165,12 @@ class StoryAddBody extends StatelessWidget {
                       KSizedBox.kHeightSizedBox16,
                       Text(
                         context.l10n.publishAnonymouslyStorySubtitle,
-                        style: AppTextStyle.hint24,
+                        key: KWidgetkeys.screen.storyAdd.switchDescription,
+                        style: AppTextStyle.hint24(context),
                       ),
                       KSizedBox.kHeightSizedBox40,
                       ButtonWidget(
+                        key: KWidgetkeys.screen.storyAdd.button,
                         text: context.l10n.publish,
                         isDesk: isDesk,
                         onPressed: () => context

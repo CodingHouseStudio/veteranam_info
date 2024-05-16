@@ -113,7 +113,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
           fillColor: widget.fillColor,
           hintText: widget.hintText,
           errorText: widget.errorText,
-          errorStyle: AppTextStyle.error14,
+          errorStyle: AppTextStyle.error14(context),
           suffixIcon: widget.suffixIcon,
           prefixIcon: widget.prefixIcon,
           errorMaxLines: widget.errorMaxLines,
