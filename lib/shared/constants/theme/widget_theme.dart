@@ -73,7 +73,7 @@ abstract class KWidgetTheme {
 
   static InputDecoration inputDecoration(BuildContext context) =>
       InputDecoration(
-        hintStyle: AppTextStyle.hint24,
+        hintStyle: AppTextStyle.hint24(context),
         contentPadding: const EdgeInsets.symmetric(
           horizontal: KPadding.kPaddingSize20,
         ),

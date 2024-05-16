@@ -41,7 +41,7 @@ class NewsCardWidget extends StatelessWidget {
             Text(
               informationItem.date.toLocal().toString().split(' ')[0],
               key: KWidgetkeys.widget.newsCard.date,
-              style: AppTextStyle.hint16,
+              style: AppTextStyle.hint16(context),
             ),
           ],
         ),

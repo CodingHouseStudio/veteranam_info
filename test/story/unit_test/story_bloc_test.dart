@@ -16,6 +16,9 @@ void main() {
 
     setUp(() {
       mockStoryRepository = MockIStoryRepository();
+      when(mockStoryRepository.getStoryItems()).thenAnswer(
+        (_) => Stream.value(KTestText.storyModelItems),
+      );
       storyWatcherBloc = StoryWatcherBloc(
         storyRepository: mockStoryRepository,
       );
@@ -26,9 +29,6 @@ void main() {
       ' when load StoryModel list',
       build: () => storyWatcherBloc,
       act: (bloc) async {
-        when(mockStoryRepository.getStoryItems()).thenAnswer(
-          (_) => Stream.value(KTestText.storyModelItems),
-        );
         bloc.add(const StoryWatcherEvent.started());
       },
       expect: () async => [
@@ -66,9 +66,6 @@ void main() {
       ' when load StoryModel list and loadNextItems it',
       build: () => storyWatcherBloc,
       act: (bloc) async {
-        when(mockStoryRepository.getStoryItems()).thenAnswer(
-          (_) => Stream.value(KTestText.storyModelItems),
-        );
         bloc.add(const StoryWatcherEvent.started());
         await expectLater(
           bloc.stream,
@@ -111,9 +108,6 @@ void main() {
       ' when load StoryModel list, load all items it and update',
       build: () => storyWatcherBloc,
       act: (bloc) async {
-        when(mockStoryRepository.getStoryItems()).thenAnswer(
-          (_) => Stream.value(KTestText.storyModelItems),
-        );
         bloc.add(const StoryWatcherEvent.started());
         await expectLater(
           bloc.stream,
@@ -168,9 +162,6 @@ void main() {
       ' when load StoryModel list and update',
       build: () => storyWatcherBloc,
       act: (bloc) async {
-        when(mockStoryRepository.getStoryItems()).thenAnswer(
-          (_) => Stream.value(KTestText.storyModelItems),
-        );
         bloc.add(const StoryWatcherEvent.started());
         await expectLater(
           bloc.stream,

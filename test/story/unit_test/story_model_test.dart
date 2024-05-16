@@ -16,7 +16,9 @@ void main() {
           'userId': KTestText.storyModelItems.last.userId,
           'story': KTestText.storyModelItems.last.story,
           'date': KTestText.storyModelItems.last.date.toIso8601String(),
-          'userPhoto': KTestText.storyModelItems.last.userPhoto,
+          'userPhoto': [
+            KTestText.storyModelItems.last.userPhoto!.first.toJson(),
+          ],
           'image': [KTestText.storyModelItems.last.image!.first.toJson()],
         };
 
@@ -33,6 +35,57 @@ void main() {
         expect(
           storyModel.story,
           KTestText.storyModelItems.last.story,
+        );
+        expect(
+          storyModel.date,
+          KTestText.storyModelItems.last.date,
+        );
+        expect(
+          storyModel.image,
+          KTestText.storyModelItems.last.image,
+        );
+        expect(
+          storyModel.userPhoto,
+          KTestText.storyModelItems.last.userPhoto,
+        );
+      });
+      test('${KGroupText.shouldBe} ', () {
+        final json = {
+          'id': KTestText.storyModelItems.last.id,
+          'userName': KTestText.storyModelItems.last.userName,
+          'userId': KTestText.storyModelItems.last.userId,
+          'story': List.generate(
+            KMinMaxSize.subtitleMaxLength,
+            (_) => KTestText.storyModelItems.last.story
+                .split(KTestText.storyModelItems.last.story),
+          ).join(),
+          'date': KTestText.storyModelItems.last.date.toIso8601String(),
+          'userPhoto': [
+            KTestText.storyModelItems.last.userPhoto!.first.toJson(),
+          ],
+          'image': [KTestText.storyModelItems.last.image!.first.toJson()],
+        };
+
+        final storyModel = StoryModel.fromJson(json);
+
+        expect(
+          storyModel.id,
+          KTestText.storyModelItems.last.id,
+        );
+        expect(
+          storyModel.userName,
+          KTestText.storyModelItems.last.userName,
+        );
+        expect(
+          storyModel.story,
+          List.generate(
+            KMinMaxSize.subtitleMaxLength,
+            (_) => KTestText.storyModelItems.last.story
+                .split(KTestText.storyModelItems.last.story),
+          ).join().substring(
+                0,
+                KMinMaxSize.subtitleMaxLength,
+              ),
         );
         expect(
           storyModel.date,
@@ -107,13 +160,15 @@ void main() {
           'userId': KTestText.storyModelItems.last.userId,
           'story': KTestText.storyModelItems.last.story,
           'date': KTestText.storyModelItems.last.date.toIso8601String(),
-          'userPhoto': KTestText.storyModelItems.last.userPhoto,
+          'userPhoto': [
+            KTestText.storyModelItems.last.userPhoto!.first.toJson(),
+          ],
           'image': [KTestText.storyModelItems.last.image!.first.toJson()],
         };
 
-        final imageModelJson = KTestText.storyModelItems.last.toJson();
+        final storyModelJson = KTestText.storyModelItems.last.toJson();
 
-        expect(imageModelJson, json);
+        expect(storyModelJson, json);
       });
 
       test('${KGroupText.shouldBe} ', () {
@@ -127,11 +182,40 @@ void main() {
           'image': null,
         };
 
-        final imageModelJson = KTestText.storyModelItems.last
+        final storyModelJson = KTestText.storyModelItems.last
             .copyWith(image: null, userPhoto: null, userName: null)
             .toJson();
 
-        expect(imageModelJson, json);
+        expect(storyModelJson, json);
+      });
+      test('${KGroupText.shouldBe} ', () {
+        final json = {
+          'id': KTestText.storyModelItems.last.id,
+          'userName': KTestText.storyModelItems.last.userName,
+          'userId': KTestText.storyModelItems.last.userId,
+          'story': List.generate(
+            KMinMaxSize.subtitleMaxLength,
+            (_) => KTestText.storyModelItems.last.story
+                .split(KTestText.storyModelItems.last.story),
+          ).join().substring(0, KMinMaxSize.subtitleMaxLength),
+          'date': KTestText.storyModelItems.last.date.toIso8601String(),
+          'userPhoto': [
+            KTestText.storyModelItems.last.userPhoto!.first.toJson(),
+          ],
+          'image': [KTestText.storyModelItems.last.image!.first.toJson()],
+        };
+
+        final storyModelJson = KTestText.storyModelItems.last
+            .copyWith(
+              story: List.generate(
+                KMinMaxSize.subtitleMaxLength,
+                (_) => KTestText.storyModelItems.last.story
+                    .split(KTestText.storyModelItems.last.story),
+              ).join(),
+            )
+            .toJson();
+
+        expect(storyModelJson, json);
       });
     });
   });

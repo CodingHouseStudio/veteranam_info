@@ -68,33 +68,33 @@ abstract class AppTextStyle {
     fontSize: KSize.kFont14,
   );
 
-  static const hint24 = TextStyle(
-    // color: AppColors.lightGray,
-    fontSize: KSize.kFont24,
-    fontWeight: FontWeight.w400,
-  );
+  static TextStyle hint24(BuildContext context) => TextStyle(
+        color: Theme.of(context).colorScheme.secondary,
+        fontSize: KSize.kFont24,
+        fontWeight: FontWeight.w400,
+      );
 
-  static const hint20 = TextStyle(
-    // color: AppColors.lightGray,
-    fontSize: KSize.kFont20,
-    fontWeight: FontWeight.w400,
-  );
+  static TextStyle hint20(BuildContext context) => TextStyle(
+        color: Theme.of(context).colorScheme.secondary,
+        fontSize: KSize.kFont20,
+        fontWeight: FontWeight.w400,
+      );
 
-  static const hint16 = TextStyle(
-    // color: AppColors.lightGray,
-    fontSize: KSize.kFont16,
-    fontWeight: FontWeight.w400,
-  );
+  static TextStyle hint16(BuildContext context) => TextStyle(
+        color: Theme.of(context).colorScheme.secondary,
+        fontSize: KSize.kFont16,
+        fontWeight: FontWeight.w400,
+      );
 
-  static const hint14 = TextStyle(
-    // color: AppColors.grey,
-    fontSize: KSize.kFont14,
-    fontWeight: FontWeight.w400,
-  );
+  static TextStyle hint14(BuildContext context) => TextStyle(
+        color: Theme.of(context).colorScheme.secondary,
+        fontSize: KSize.kFont14,
+        fontWeight: FontWeight.w400,
+      );
 
-  static const error14 = TextStyle(
-    // color: AppColors.error,
-    fontSize: KSize.kFont14,
-    fontWeight: FontWeight.w400,
-  );
+  static TextStyle error14(BuildContext context) => TextStyle(
+        color: Theme.of(context).colorScheme.error,
+        fontSize: KSize.kFont14,
+        fontWeight: FontWeight.w400,
+      );
 }

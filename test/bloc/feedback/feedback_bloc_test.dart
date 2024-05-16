@@ -11,7 +11,7 @@ void main() {
     late FeedbackBloc feedbackBloc;
     late IFeedbackRepository mockFeedbackRepository;
     setUp(() {
-      ExtendedDateTime.customTime = KTestText.dateTime;
+      ExtendedDateTime.current = KTestText.dateTime;
       ExtendedDateTime.id = KTestText.feedbackModel.id;
       mockFeedbackRepository = MockIFeedbackRepository();
       when(mockFeedbackRepository.sendFeedback(KTestText.feedbackModel))

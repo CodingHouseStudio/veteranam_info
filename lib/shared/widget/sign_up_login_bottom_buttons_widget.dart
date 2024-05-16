@@ -29,7 +29,7 @@ class SignUpLoginBottomButtonsWidget extends StatelessWidget {
               Text(
                 context.l10n.or,
                 key: KWidgetkeys.widget.signUpBottomButtons.or,
-                style: AppTextStyle.hint24,
+                style: AppTextStyle.hint24(context),
               ),
               KSizedBox.kWidthSizedBox32,
               Expanded(
@@ -88,7 +88,9 @@ class SignUpLoginBottomButtonsWidget extends StatelessWidget {
           Text(
             context.l10n.or,
             key: KWidgetkeys.widget.signUpBottomButtons.or,
-            style: isDesk ? AppTextStyle.hint24 : AppTextStyle.hint16,
+            style: isDesk
+                ? AppTextStyle.hint24(context)
+                : AppTextStyle.hint16(context),
           ),
           KSizedBox.kHeightSizedBox16,
           Text(

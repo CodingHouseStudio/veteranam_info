@@ -46,7 +46,7 @@ class LoginBodyWidget extends StatelessWidget {
                 child: Text(
                   _.failure.getString(context)!,
                   key: KWidgetkeys.screen.login.failureMessage,
-                  style: AppTextStyle.error14,
+                  style: AppTextStyle.error14(context),
                 ),
               ),
             if (isDesk)

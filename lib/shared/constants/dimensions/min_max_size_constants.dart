@@ -14,5 +14,5 @@ abstract class KMinMaxSize {
   static const messageMaxLength = 256;
 
   static const questionsTitleMaxLength = 100;
-  static const questionsSubtitleMaxLength = 255;
+  static const subtitleMaxLength = 255;
 }
