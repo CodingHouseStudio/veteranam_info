@@ -45,6 +45,11 @@ abstract class KWidgetTheme {
         borderRadius: KBorderRadius.kBorderRadiusTop32,
         color: Theme.of(context).colorScheme.onPrimary,
       );
+  static BoxDecoration boxDecorationImage(BuildContext context) =>
+      BoxDecoration(
+        borderRadius: KBorderRadius.kBorderRadius32,
+        color: Theme.of(context).colorScheme.onPrimary,
+      );
   static BoxDecoration boxDecorationWhite(BuildContext context) =>
       BoxDecoration(
         borderRadius: KBorderRadius.kBorderRadiusRight32,

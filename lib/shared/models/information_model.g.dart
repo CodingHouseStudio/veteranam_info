@@ -16,7 +16,7 @@ _$InformationModelImpl _$$InformationModelImplFromJson(
       tags:
           (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               const <String>[],
-      image: json['image'] as String?,
+      image: const ImageConverter().fromJson(json['image'] as List?),
     );
 
 Map<String, dynamic> _$$InformationModelImplToJson(
@@ -27,5 +27,5 @@ Map<String, dynamic> _$$InformationModelImplToJson(
       'news': instance.news,
       'date': instance.date.toIso8601String(),
       'tags': instance.tags,
-      'image': instance.image,
+      'image': const ImageConverter().toJson(instance.image),
     };

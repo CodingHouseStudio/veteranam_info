@@ -12,12 +12,13 @@ void main() {
   group('${KScreenBlocName.story} ${KGroupText.repository} ', () {
     late IStoryRepository mockStoryRepository;
     late FirestoreService mockFirestoreService;
+    late StorageService mockStorageService;
     group('${KGroupText.successfulGet} ', () {
       setUp(() {
         ExtendedDateTime.id = '';
         ExtendedDateTime.customTime = KTestText.dateTime;
         mockFirestoreService = MockFirestoreService();
-        mockStoryRepository = MockIStoryRepository();
+        mockStorageService = MockStorageService();
         when(mockFirestoreService.getStories()).thenAnswer(
           (_) => Stream.value(KTestText.storyModelItems),
         );
@@ -32,6 +33,10 @@ void main() {
           GetIt.I.unregister<FirestoreService>();
         }
         GetIt.I.registerSingleton(mockFirestoreService);
+        if (GetIt.I.isRegistered<StorageService>()) {
+          GetIt.I.unregister<StorageService>();
+        }
+        GetIt.I.registerSingleton(mockStorageService);
 
         mockStoryRepository = StoryRepository();
       });
@@ -51,11 +56,16 @@ void main() {
             KGroupText.failureGet,
           ),
         );
+        mockStorageService = MockStorageService();
 
         if (GetIt.I.isRegistered<FirestoreService>()) {
           GetIt.I.unregister<FirestoreService>();
         }
         GetIt.I.registerSingleton(mockFirestoreService);
+        if (GetIt.I.isRegistered<StorageService>()) {
+          GetIt.I.unregister<StorageService>();
+        }
+        GetIt.I.registerSingleton(mockStorageService);
 
         mockStoryRepository = StoryRepository();
       });

@@ -1,6 +1,7 @@
+import 'package:dartz/dartz.dart';
 import 'package:kozak/shared/shared.dart';
 
-// ignore: one_member_abstracts
 abstract class IStoryRepository {
   Stream<List<StoryModel>> getStoryItems();
+  Future<Either<SomeFailure, bool>> addStory(StoryModel storyModel);
 }

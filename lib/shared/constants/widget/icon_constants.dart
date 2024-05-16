@@ -62,4 +62,5 @@ abstract class KIcon {
   static const _KIcon star = _KIcon(FontAwesomeIcons.star);
   static const _KIcon attachFile = _KIcon(Icons.attach_file);
   static const _KIcon chevronLeft = _KIcon(Icons.chevron_left);
+  static const _KIcon addImage = _KIcon(Icons.add_photo_alternate_sharp);
 }
