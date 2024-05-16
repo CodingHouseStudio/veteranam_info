@@ -107,39 +107,51 @@ class ButtonStylesContext {
 }
 
 class KButtonStyles {
-  static final ButtonStyle widgetBackgroundButtonStyleWInf =
-      TextButton.styleFrom(
+  static const ButtonStyle widgetBackgroundButtonStyleWInf = ButtonStyle(
     // backgroundColor: AppColors.widgetBackground,
-    minimumSize: const Size(double.infinity, KMinMaxSize.minHeight50),
-
-    padding: const EdgeInsets.all(KPadding.kPaddingSize24),
-  );
-
-  static final ButtonStyle widgetBackgroundSquareButtonStyleWInf =
-      TextButton.styleFrom(
-    // backgroundColor: AppColors.widgetBackground,
-    minimumSize: const Size(200, 50),
-    padding: const EdgeInsets.all(KPadding.kPaddingSize24),
-
-    shape: const RoundedRectangleBorder(
-      borderRadius: KBorderRadius.kBorderRadius40,
+    minimumSize: MaterialStatePropertyAll(
+      Size(double.infinity, KMinMaxSize.minHeight50),
+    ),
+    padding: MaterialStatePropertyAll(
+      EdgeInsets.all(KPadding.kPaddingSize24),
     ),
   );
 
-  static final ButtonStyle widgetLightGreyButtonStyleWInf =
-      TextButton.styleFrom(
-    // backgroundColor: AppColors.background,
-    minimumSize: const Size(double.infinity, KMinMaxSize.minHeight50),
-
-    padding: const EdgeInsets.all(KPadding.kPaddingSize24),
+  static const ButtonStyle widgetBackgroundSquareButtonStyleWInf = ButtonStyle(
+    // backgroundColor: AppColors.widgetBackground,
+    minimumSize: MaterialStatePropertyAll(Size(200, 50)),
+    padding: MaterialStatePropertyAll(
+      EdgeInsets.all(KPadding.kPaddingSize24),
+    ),
+    shape: MaterialStatePropertyAll(
+      RoundedRectangleBorder(
+        borderRadius: KBorderRadius.kBorderRadius40,
+      ),
+    ),
   );
 
-  static final ButtonStyle transparentButtonStyle = TextButton.styleFrom(
-    minimumSize: const Size(KMinMaxSize.minWidth100, KMinMaxSize.minHeight50),
-    padding: const EdgeInsets.all(KPadding.kPaddingSize8),
+  static const ButtonStyle widgetLightGreyButtonStyleWInf = ButtonStyle(
+    // backgroundColor: AppColors.background,
+    minimumSize: MaterialStatePropertyAll(
+      Size(double.infinity, KMinMaxSize.minHeight50),
+    ),
+    padding: MaterialStatePropertyAll(
+      EdgeInsets.all(KPadding.kPaddingSize24),
+    ),
+  );
+
+  static const ButtonStyle transparentButtonStyle = ButtonStyle(
+    minimumSize: MaterialStatePropertyAll(
+      Size(KMinMaxSize.minWidth100, KMinMaxSize.minHeight50),
+    ),
+    padding: MaterialStatePropertyAll(
+      EdgeInsets.all(KPadding.kPaddingSize8),
+    ),
     alignment: Alignment.centerLeft,
-    shape: const RoundedRectangleBorder(
-      borderRadius: KBorderRadius.kBorderRadius32,
+    shape: MaterialStatePropertyAll(
+      RoundedRectangleBorder(
+        borderRadius: KBorderRadius.kBorderRadius32,
+      ),
     ),
   );
 }
