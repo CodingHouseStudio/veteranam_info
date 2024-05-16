@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get_it/get_it.dart';
-import 'package:kozak/shared/constants/theme/theme.dart';
 import 'package:kozak/shared/shared.dart';
 
 class App extends StatelessWidget {
@@ -45,7 +44,8 @@ class _AppWidgetState extends State<AppWidget> {
   void initState() {
     super.initState();
 
-    themeDataNew = const MaterialTheme(TextTheme());
+    final textTheme = createTextTheme(context, 'Montserrat', 'Montserrat');
+    themeDataNew = MaterialTheme(textTheme);
   }
 
   @override
