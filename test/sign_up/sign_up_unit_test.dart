@@ -12,7 +12,7 @@ void main() {
     late SignUpBloc signUpBloc;
     late IAppAuthenticationRepository mockAppAuthenticationRepository;
     setUp(() {
-      ExtendedDateTime.customTime = KTestText.feedbackModel.timestamp;
+      ExtendedDateTime.current = KTestText.feedbackModel.timestamp;
       mockAppAuthenticationRepository = MockIAppAuthenticationRepository();
       when(
         mockAppAuthenticationRepository.signUp(

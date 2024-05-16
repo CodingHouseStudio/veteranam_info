@@ -52,7 +52,7 @@ void main() {
       setUp(() {
         mockFirestoreService = MockFirestoreService();
         when(mockFirestoreService.getQuestions())
-            .thenThrow(KGroupText.failureGet);
+            .thenThrow(Exception(KGroupText.failureGet));
         if (GetIt.I.isRegistered<FirestoreService>()) {
           GetIt.I.unregister<FirestoreService>();
         }

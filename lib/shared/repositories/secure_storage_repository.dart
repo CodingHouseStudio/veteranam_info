@@ -6,11 +6,10 @@ import 'package:kozak/shared/shared.dart';
 @LazySingleton(as: IStorage)
 class SecureStorageRepository implements IStorage {
   SecureStorageRepository();
-  late FlutterSecureStorage? _secureStorage;
+  late FlutterSecureStorage _secureStorage = const FlutterSecureStorage();
 
   @override
-  FlutterSecureStorage get secureStorage =>
-      _secureStorage ?? const FlutterSecureStorage();
+  FlutterSecureStorage get secureStorage => _secureStorage;
 
   @visibleForTesting
   @override
