@@ -27,7 +27,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
   Widget build(BuildContext context) {
     return Container(
       key: KWidgetkeys.widget.question.widget,
-      decoration: KWidgetTheme.boxDecorationWidget(context),
+      decoration: context.widgetTheme.boxDecorationWidget,
       child: ExpansionTile(
         title: Text(
           widget.questionModel.title,

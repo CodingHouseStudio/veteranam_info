@@ -56,7 +56,7 @@ List<Widget> _workRespondContainerWidgetList({
     KSizedBox.kHeightSizedBox8,
     TextButton.icon(
       onPressed: null,
-      style: KButtonStyles.borderButtonStyle(context).copyWith(),
+      style: context.buttonStyle.borderButtonStyle,
       icon: Padding(
         padding: EdgeInsets.symmetric(
           vertical: isDesk ? KPadding.kPaddingSize32 : KPadding.kPaddingSize16,
@@ -110,7 +110,7 @@ List<Widget> _workRespondContainerWidgetList({
               text: context.l10n.send,
               onPressed: null,
               isDesk: isDesk,
-              backgroundColor: Theme.of(context).colorScheme.secondary,
+              backgroundColor: context.color.secondary,
             ),
           ),
           KSizedBox.kWidthSizedBox73,
@@ -130,7 +130,7 @@ List<Widget> _workRespondContainerWidgetList({
         text: context.l10n.send,
         onPressed: null,
         isDesk: isDesk,
-        backgroundColor: Theme.of(context).colorScheme.secondary,
+        backgroundColor: context.color.secondary,
       ),
       KSizedBox.kHeightSizedBox16,
       ButtonWidget(

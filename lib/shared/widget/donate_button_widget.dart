@@ -18,7 +18,7 @@ class DonateButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: onPressed,
-      style: KButtonStyles.whiteButtonStyleWInf(context),
+      style: context.buttonStyle.whiteButtonStyleWInf,
       child: Padding(
         padding: const EdgeInsets.only(
           left: KPadding.kPaddingSize32,
@@ -37,7 +37,7 @@ class DonateButtonWidget extends StatelessWidget {
             ),
             IconWidget(
               icon: icon ?? KIcon.arrowUpRight,
-              background: Theme.of(context).colorScheme.onPrimary,
+              background: context.color.onPrimary,
             ),
           ],
         ),

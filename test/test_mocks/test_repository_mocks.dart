@@ -4,6 +4,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:kozak/shared/shared.dart';
 import 'package:mockito/annotations.dart';
 
@@ -39,6 +40,11 @@ import 'package:mockito/annotations.dart';
     MockSpec<IStoryRepository>(),
     MockSpec<FirebaseStorage>(),
     MockSpec<StorageService>(),
+    MockSpec<ImagePicker>(),
+    MockSpec<Reference>(),
+    MockSpec<UploadTask>(),
+    MockSpec<TaskSnapshot>(),
+    MockSpec<XFile>(),
   ],
 )
 void load() => debugPrint('loaded');

@@ -96,9 +96,9 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
         textInputAction: TextInputAction.done,
         textAlign: widget.textAlign ?? TextAlign.start,
         style: widget.isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
-        // Theme.of(context).textTheme.headlineSmall,
+        // context.theme.textTheme.headlineSmall,
         onChanged: widget.onChanged,
-        decoration: KWidgetTheme.inputDecoration(context).copyWith(
+        decoration: context.widgetTheme.inputDecoration.copyWith(
           hintStyle: widget.hintStyle,
           contentPadding: widget.contentPadding ??
               (widget.isDesk
@@ -113,7 +113,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
           fillColor: widget.fillColor,
           hintText: widget.hintText,
           errorText: widget.errorText,
-          errorStyle: AppTextStyle.error14,
+          errorStyle: context.textStyle.error14,
           suffixIcon: widget.suffixIcon,
           prefixIcon: widget.prefixIcon,
           errorMaxLines: widget.errorMaxLines,

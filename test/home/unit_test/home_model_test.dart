@@ -94,7 +94,7 @@ void main() {
         );
         expect(
           questionModel.subtitle.length,
-          KMinMaxSize.questionsSubtitleMaxLength,
+          KMinMaxSize.subtitleMaxLength,
         );
         expect(
           questionModel.navigationLink,
@@ -135,15 +135,15 @@ void main() {
         final questionModel = QuestionModel(
           id: KTestText.questionModelItems.first.id,
           title: List.generate(
-            100,
+            KMinMaxSize.questionsTitleMaxLength,
             (_) => KTestText.questionModelItems.first.title
                 .split(KTestText.questionModelItems.first.title),
-          ).join(),
+          ).join().substring(0, KMinMaxSize.questionsTitleMaxLength),
           subtitle: List.generate(
-            100,
+            KMinMaxSize.subtitleMaxLength,
             (_) => KTestText.questionModelItems.first.subtitle
                 .split(KTestText.questionModelItems.first.subtitle),
-          ).join(),
+          ).join().substring(0, KMinMaxSize.subtitleMaxLength),
           navigationLink: KTestText.questionModelItems.first.navigationLink,
         );
         final json = {
@@ -153,7 +153,20 @@ void main() {
           'navigationLink': questionModel.navigationLink,
         };
 
-        final questionModelJson = questionModel.toJson();
+        final questionModelJson = questionModel
+            .copyWith(
+              title: List.generate(
+                KMinMaxSize.questionsTitleMaxLength,
+                (_) => KTestText.questionModelItems.first.title
+                    .split(KTestText.questionModelItems.first.title),
+              ).join(),
+              subtitle: List.generate(
+                KMinMaxSize.subtitleMaxLength,
+                (_) => KTestText.questionModelItems.first.subtitle
+                    .split(KTestText.questionModelItems.first.subtitle),
+              ).join(),
+            )
+            .toJson();
 
         expect(questionModelJson, json);
       });

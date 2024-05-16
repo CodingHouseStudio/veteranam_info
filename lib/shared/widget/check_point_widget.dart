@@ -15,11 +15,9 @@ class CheckPointWidget extends StatelessWidget {
     return Container(
       key: KWidgetkeys.widget.checkPoint.widget,
       decoration: BoxDecoration(
-        color: isCheck
-            ? Theme.of(context).colorScheme.onSecondary
-            : Colors.transparent,
+        color: isCheck ? context.color.onSecondary : Colors.transparent,
         border: Border.all(
-          color: Theme.of(context).colorScheme.onPrimary,
+          color: context.color.onPrimary,
           width: KSize.kPixel3,
         ),
         borderRadius: KBorderRadius.kBorderRadius8,

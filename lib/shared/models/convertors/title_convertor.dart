@@ -13,6 +13,8 @@ class TitleConverter implements JsonConverter<String, String> {
 
   @override
   String toJson(String object) {
-    return object;
+    return object.length > KMinMaxSize.questionsTitleMaxLength
+        ? object.substring(0, KMinMaxSize.questionsTitleMaxLength)
+        : object;
   }
 }

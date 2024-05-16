@@ -36,7 +36,7 @@ class FooterWidget extends SliverChildBuilderDelegate {
                           //         ? '\n${KMockText.email}'
                           //         : ''),
                           style: AppTextStyle.text32.copyWith(
-                            color: Theme.of(context).colorScheme.onSurface,
+                            color: context.color.onSurface,
                             fontSize: isDesk
                                 ? null
                                 : index <= 3

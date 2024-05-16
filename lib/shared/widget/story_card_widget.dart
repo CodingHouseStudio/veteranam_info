@@ -28,7 +28,7 @@ class StoryCardWidget extends StatelessWidget {
               IconWidget(
                 key: KWidgetkeys.widget.storyCard.userIcon,
                 icon: KIcon.person,
-                background: Theme.of(context).colorScheme.onPrimary,
+                background: context.color.onPrimary,
               )
             else
               ClipRRect(

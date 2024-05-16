@@ -12,7 +12,7 @@ class DiscountBodyWidget extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Container(
-            decoration: KWidgetTheme.boxDecorationWidget(context),
+            decoration: context.widgetTheme.boxDecorationWidget,
             child: Padding(
               padding: const EdgeInsets.all(KPadding.kPaddingSize10),
               child: Column(
