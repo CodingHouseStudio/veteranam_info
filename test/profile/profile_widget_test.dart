@@ -47,39 +47,19 @@ void main() {
 
       group('${KGroupText.goTo} ', () {
         testWidgets('Log out dialog unconfirm button pop', (tester) async {
-          await tester.pumpApp(
-            const ProfileScreen(),
-            mockGoRouter: mockGoRouter,
-          );
-
           await logOutUnconfirmButtonlHelper(tester, mockGoRouter);
         });
 
         testWidgets('Log out dialog confirm button pop', (tester) async {
-          await tester.pumpApp(
-            const ProfileScreen(),
-            mockGoRouter: mockGoRouter,
-          );
-
           await logOutConfirmButtonlHelper(tester, mockGoRouter);
         });
 
         testWidgets('Delete account dialog unconfirm button pop',
             (tester) async {
-          await tester.pumpApp(
-            const ProfileScreen(),
-            mockGoRouter: mockGoRouter,
-          );
-
           await deleteAccountUnconfirmButtonlHelper(tester, mockGoRouter);
         });
 
         testWidgets('Delete account dialog confirm button pop', (tester) async {
-          await tester.pumpApp(
-            const ProfileScreen(),
-            mockGoRouter: mockGoRouter,
-          );
-
           await deleteAccountConfirmButtonlHelper(tester, mockGoRouter);
         });
       });

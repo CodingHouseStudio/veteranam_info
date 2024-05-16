@@ -1,9 +1,9 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:kozak/shared/constants/constants.dart';
 
-import '../../text_dependency.dart';
+import '../../../text_dependency.dart';
 
-Future<void> logOutDialoglHelper(
+Future<void> deleteAccountDialoglHelper(
   WidgetTester tester,
 ) async {
   expect(
@@ -13,5 +13,5 @@ Future<void> logOutDialoglHelper(
 
   await tester.pumpAndSettle();
 
-  await profileCardLogOutHelper(tester);
+  await profileCardDeleteAccountHelper(tester);
 }
