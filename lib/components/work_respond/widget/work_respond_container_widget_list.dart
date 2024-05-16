@@ -61,7 +61,7 @@ List<Widget> _workRespondContainerWidgetList({
         padding: EdgeInsets.symmetric(
           vertical: isDesk ? KPadding.kPaddingSize32 : KPadding.kPaddingSize16,
         ).copyWith(
-          left: isDesk ? KPadding.kPaddingSize32 : KPadding.kPaddingSize16,
+          left: isDesk ? KPadding.kPaddingSize16 : KPadding.kPaddingSize8,
         ),
         child: KIcon.attachFile,
       ),
