@@ -67,7 +67,7 @@ class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
                   });
                 },
                 style: widget.buttonStyle ??
-                    KButtonStyles.whiteButtonStyleBorder(context),
+                    context.buttonStyle.whiteButtonStyleBorder,
                 child: Text(
                   maxLines == null
                       ? widget.buttonText?.elementAt(1) ?? context.l10n.hide
@@ -75,7 +75,7 @@ class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
                   key: KWidgetkeys.widget.cardTextDetail.buttonText,
                   style: widget.isDesk
                       ? AppTextStyle.text20
-                      : AppTextStyle.hint16(context),
+                      : context.textStyle.hint16,
                 ),
               ),
             ),

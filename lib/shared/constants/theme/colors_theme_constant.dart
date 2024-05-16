@@ -1,3 +1,9 @@
+import 'package:flutter/material.dart';
+
+extension ColorExtention on BuildContext {
+  ColorScheme get color => Theme.of(this).colorScheme;
+}
+
 abstract class AppColors {
   // /// background figma properties
   // /// hex: #f5f7fa

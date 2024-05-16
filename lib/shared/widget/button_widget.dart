@@ -27,8 +27,8 @@ class ButtonWidget extends StatelessWidget {
     return TextButton(
       onPressed: onPressed,
       style: (isDesk
-              ? KButtonStyles.lightGrayButtonStyle(context)
-              : KButtonStyles.lightGrayButtonStyleWInf(context))
+              ? context.buttonStyle.lightGrayButtonStyle
+              : context.buttonStyle.lightGrayButtonStyleWInf)
           .copyWith(
         backgroundColor: MaterialStatePropertyAll<Color?>(backgroundColor),
       ),

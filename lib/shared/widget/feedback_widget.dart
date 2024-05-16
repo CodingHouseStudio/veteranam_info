@@ -57,9 +57,7 @@ abstract class FeedbackWidget {
               FeedbackEvent.nameUpdated(value),
             ),
         hintText: context.l10n.text,
-        hintStyle: isDesk
-            ? AppTextStyle.hint24(context)
-            : AppTextStyle.hint16(context),
+        hintStyle: isDesk ? context.textStyle.hint24 : context.textStyle.hint16,
         isDesk: isDesk,
       ),
       if (isDesk) KSizedBox.kHeightSizedBox32 else KSizedBox.kHeightSizedBox16,
@@ -85,9 +83,7 @@ abstract class FeedbackWidget {
               FeedbackEvent.emailUpdated(value),
             ),
         hintText: context.l10n.writeYourEmail,
-        hintStyle: isDesk
-            ? AppTextStyle.hint24(context)
-            : AppTextStyle.hint16(context),
+        hintStyle: isDesk ? context.textStyle.hint24 : context.textStyle.hint16,
         isDesk: isDesk,
       ),
       if (isDesk) KSizedBox.kHeightSizedBox32 else KSizedBox.kHeightSizedBox16,

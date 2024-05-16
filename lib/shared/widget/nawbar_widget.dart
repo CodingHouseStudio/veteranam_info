@@ -68,7 +68,7 @@ class _NawbarWidgetImplematationState
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: KWidgetTheme.boxDecorationCard(context),
+      decoration: context.widgetTheme.boxDecorationCard,
       margin: const EdgeInsets.only(
         top: KPadding.kPaddingSize24,
       ),
@@ -143,7 +143,7 @@ class _NawbarWidgetImplematationState
               if (widget.isDesk)
                 TextButton(
                   key: KWidgetkeys.widget.nawbar.button,
-                  style: KButtonStyles.whiteButtonStyle(context),
+                  style: context.buttonStyle.whiteButtonStyle,
                   onPressed: () => context.goNamedWithScroll(KRoute.login.name),
                   child: Text(
                     context.l10n.login,
