@@ -15,6 +15,9 @@ void configureDependenciesTest() {
   GetIt.I.registerFactory<FirestoreService>(
     FirestoreService.new,
   );
+  GetIt.I.registerSingleton<StorageService>(
+    MockStorageService(),
+  );
   // Repositories
   GetIt.I.registerLazySingleton<IStorage>(SecureStorageRepository.new);
   GetIt.I.registerSingleton<IFeedbackRepository>(FeedbackRepository());

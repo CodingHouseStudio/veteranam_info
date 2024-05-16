@@ -181,7 +181,7 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
       children: [
         Row(
           children: [
-            const SwitchWidget(),
+            const SwitchWidgetWithoutBloc(),
             KSizedBox.kHeightSizedBox8,
             Expanded(child: Text(context.l10n.beAnonymous)),
           ],

@@ -109,7 +109,6 @@ abstract class FeedbackWidget {
             ),
         controller: messageController,
         hintText: messageHint ?? context.l10n.writeYourMessage,
-        hintStyle: isDesk ? AppTextStyle.hint24 : AppTextStyle.hint16,
         isDesk: isDesk,
       ),
       KSizedBox.kHeightSizedBox24,

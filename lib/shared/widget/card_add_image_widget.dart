@@ -70,6 +70,10 @@ class CardAddImageWidget extends StatelessWidget {
       decoration: isDesk
           ? KWidgetTheme.boxDecorationImageDesk(context)
           : KWidgetTheme.boxDecorationImageMob(context),
+      constraints: const BoxConstraints(
+        maxHeight: KMinMaxSize.minHeight640,
+        maxWidth: KMinMaxSize.maxWidth640,
+      ),
       child: CachedNetworkImage(
         key: KWidgetkeys.widget.cardAddImage.widget,
         imageUrl: image!,
@@ -79,7 +83,7 @@ class CardAddImageWidget extends StatelessWidget {
           debugPrint('image error: $error');
           return KIcon.error;
         },
-        fit: BoxFit.fill,
+        fit: BoxFit.contain,
       ),
     );
   }

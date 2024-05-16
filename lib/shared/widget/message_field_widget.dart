@@ -5,8 +5,8 @@ class MessageFieldWidget extends StatelessWidget {
   const MessageFieldWidget({
     required this.changeMessage,
     required this.hintText,
-    required this.hintStyle,
     required this.isDesk,
+    this.hintStyle,
     super.key,
     this.controller,
     this.errorText,
@@ -19,7 +19,7 @@ class MessageFieldWidget extends StatelessWidget {
   final String? errorText;
   final FocusNode? focusNode;
   final bool? disposeFocusNode;
-  final TextStyle hintStyle;
+  final TextStyle? hintStyle;
   final bool isDesk;
 
   @override

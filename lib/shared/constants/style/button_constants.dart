@@ -129,4 +129,15 @@ abstract class KButtonStyles {
         ),
         backgroundColor: Theme.of(context).colorScheme.onPrimary,
       );
+
+  static ButtonStyle imageButton(BuildContext context) => IconButton.styleFrom(
+        padding: const EdgeInsets.symmetric(
+          vertical: KPadding.kPaddingSize90,
+        ),
+        iconSize: KSize.kPixel70,
+        backgroundColor: Theme.of(context).colorScheme.onPrimary,
+        shape: RoundedRectangleBorder(
+          borderRadius: KBorderRadius.kBorderRadius32,
+        ),
+      );
 }
