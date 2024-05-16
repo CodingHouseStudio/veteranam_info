@@ -11,11 +11,11 @@ class WorkEmployeeWatcherEvent with _$WorkEmployeeWatcherEvent {
   const factory WorkEmployeeWatcherEvent.loadPage(int page) = _LoadPage;
 
   const factory WorkEmployeeWatcherEvent.filterCategories({
-    String? categories,
+    String? category,
   }) = _FilterCategories;
 
   const factory WorkEmployeeWatcherEvent.filterCities({
-    String? cities,
+    String? city,
   }) = _FilterCities;
 
   const factory WorkEmployeeWatcherEvent.filterReset() = _FilterReset;
