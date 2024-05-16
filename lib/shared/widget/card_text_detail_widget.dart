@@ -5,6 +5,7 @@ class CardTextDetailWidget extends StatefulWidget {
   const CardTextDetailWidget({
     required this.text,
     required this.maxLines,
+    required this.isDesk,
     this.icon,
     super.key,
     this.buttonText,
@@ -16,6 +17,7 @@ class CardTextDetailWidget extends StatefulWidget {
   final Widget? icon;
   final List<String>? buttonText;
   final ButtonStyle? buttonStyle;
+  final bool isDesk;
 
   @override
   State<CardTextDetailWidget> createState() => _CardTextDetailWidgetState();
@@ -42,7 +44,7 @@ class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
           widget.text,
           key: KWidgetkeys.widget.cardTextDetail.text,
           maxLines: maxLines,
-          style: AppTextStyle.text16,
+          style: widget.isDesk ? AppTextStyle.text18 : AppTextStyle.text16,
           overflow: TextOverflow.clip,
         ),
         KSizedBox.kHeightSizedBox24,
@@ -71,7 +73,8 @@ class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
                       ? widget.buttonText?.elementAt(1) ?? context.l10n.hide
                       : widget.buttonText?.elementAt(0) ?? context.l10n.detail,
                   key: KWidgetkeys.widget.cardTextDetail.buttonText,
-                  style: AppTextStyle.text18,
+                  style:
+                      widget.isDesk ? AppTextStyle.text20 : AppTextStyle.hint16,
                 ),
               ),
             ),

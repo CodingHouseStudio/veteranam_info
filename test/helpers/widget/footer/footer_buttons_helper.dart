@@ -13,15 +13,20 @@ Future<void> footerButtonsHelper({
     offset: KTestConstants.scrollingDown,
   );
 
-  for (var i = 0; i < KWidgetkeys.widget.footer.buttonsKey.length; i++) {
+  await scrollingHelper(
+    tester: tester,
+    offset: KTestConstants.scrollingDown,
+  );
+
+  await changeWindowSizeHelper(tester: tester);
+
+  for (var i = KWidgetkeys.widget.footer.buttonsKey.length - 1; i >= 0; i--) {
     final buttonKey = KWidgetkeys.widget.footer.buttonsKey.elementAt(i);
 
     expect(
       find.byKey(buttonKey),
       findsOneWidget,
     );
-
-    await scrollingHelper(tester: tester, itemKey: buttonKey);
 
     await tester.tap(find.byKey(buttonKey));
 
@@ -31,4 +36,6 @@ Future<void> footerButtonsHelper({
       ),
     ).called(1);
   }
+
+  await changeWindowSizeHelper(tester: tester, setDefaultSize: true);
 }

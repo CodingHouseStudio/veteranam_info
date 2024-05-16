@@ -28,8 +28,9 @@ class WorkEmployeeBody extends StatelessWidget {
           else
             KSizedBox.kHeightSizedBox24,
         ],
-        mainDeskPadding:
-            const EdgeInsets.symmetric(horizontal: KPadding.kPaddingSize220),
+        mainDeskPadding: ({required isDesk, required maxWidth}) => isDesk
+            ? const EdgeInsets.symmetric(horizontal: KPadding.kPaddingSize220)
+            : EdgeInsets.zero,
         mainChildWidgetsFunction: ({required isDesk}) {
           final childWidgets = [
             WorkEmployeeFilters(
@@ -96,7 +97,7 @@ class WorkEmployeeBody extends StatelessWidget {
                     currentPage: _.page,
                     pages: _.maxPage,
                     changePage: (int page) {
-                      Scrollable.ensureVisible(context);
+                      context.read<ScrollCubit>().scrollUp();
                       context.read<WorkEmployeeWatcherBloc>().add(
                             WorkEmployeeWatcherEvent.loadPage(
                               page,
