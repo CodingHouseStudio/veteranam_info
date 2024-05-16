@@ -134,7 +134,6 @@ abstract class FeedbackWidget {
                     const FeedbackEvent.clear(),
                   ),
               isDesk: isDesk,
-              // backgroundColor: AppColors.transparent,
             ),
           ],
         )

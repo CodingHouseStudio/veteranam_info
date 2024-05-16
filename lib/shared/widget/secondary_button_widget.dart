@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:kozak/shared/shared.dart';
 
-class SecondartButtonWidget extends StatelessWidget {
-  const SecondartButtonWidget({
+class SecondaryButtonWidget extends StatelessWidget {
+  const SecondaryButtonWidget({
     required this.isDesk,
     required this.text,
     required this.onPressed,

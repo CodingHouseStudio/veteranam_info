@@ -2,14 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:kozak/shared/shared.dart';
 
 abstract class KBorderRadius {
-  static BorderRadius kBorderRadius32 = BorderRadius.circular(KSize.kRadius32);
-  static BorderRadius kBorderRadius40 = BorderRadius.circular(KSize.kRadius40);
-  static BorderRadius kBorderRadius8 = BorderRadius.circular(KSize.kPixel8);
-  static BorderRadius kBorderRadiusL = BorderRadius.circular(KSize.kPixel48);
-  static BorderRadius kBorderRadiusLeft32 =
-      const BorderRadius.horizontal(left: Radius.circular(KSize.kRadius32));
-  static BorderRadius kBorderRadiusRight32 =
-      const BorderRadius.horizontal(right: Radius.circular(KSize.kRadius32));
-  static BorderRadius kBorderRadiusTop32 =
-      const BorderRadius.vertical(top: Radius.circular(KSize.kRadius32));
+  static const kBorderRadius10 =
+      BorderRadius.all(Radius.circular(KSize.kRadius10));
+  static const kBorderRadius32 =
+      BorderRadius.all(Radius.circular(KSize.kRadius32));
+  static const kBorderRadius40 =
+      BorderRadius.all(Radius.circular(KSize.kRadius40));
+  static const kBorderRadius8 =
+      BorderRadius.all(Radius.circular(KSize.kPixel8));
+  static const kBorderRadiusL =
+      BorderRadius.all(Radius.circular(KSize.kPixel48));
+  static const kBorderRadiusLeft32 =
+      BorderRadius.horizontal(left: Radius.circular(KSize.kRadius32));
+  static const kBorderRadiusRight32 =
+      BorderRadius.horizontal(right: Radius.circular(KSize.kRadius32));
+  static const kBorderRadiusTop32 =
+      BorderRadius.vertical(top: Radius.circular(KSize.kRadius32));
 }
