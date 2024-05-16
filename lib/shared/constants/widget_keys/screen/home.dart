@@ -8,7 +8,7 @@ class _HomeKeys {
   final box = const Key('home_screen_box');
   final boxTitle = const Key('home_screen_box_title');
   final boxSubtitle = const Key('home_screen_box_subtitle');
-  final boxIcon = const Key('home_screen_box_icon');
+  // final boxIcon = const Key('home_screen_box_icon');
   final discountsBox = const Key('home_screen_discounts_box');
   final workBox = const Key('home_screen_work_box');
   final investorsBox = const Key('home_screen_investors_box');
