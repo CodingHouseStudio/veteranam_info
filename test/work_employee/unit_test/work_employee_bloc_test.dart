@@ -84,7 +84,7 @@ void main() {
         );
         bloc.add(
           WorkEmployeeWatcherEvent.filterCities(
-            cities: KTestText.workModelItems.first.city,
+            city: KTestText.workModelItems.first.city,
           ),
         );
       },
@@ -96,8 +96,8 @@ void main() {
           (state) =>
               state.loadingStatus == LoadingStatus.loaded &&
               state.filteredWorkModelItems.isNotEmpty &&
-              state.categories == null &&
-              state.cities == null,
+              state.category == null &&
+              state.city == null,
         ),
         predicate<WorkEmployeeWatcherState>(
           (state) =>
@@ -106,7 +106,7 @@ void main() {
               state.filteredWorkModelItems.first.city!.contains(
                 KTestText.workModelItems.first.city!,
               ) &&
-              state.categories == null,
+              state.category == null,
         ),
       ],
     );
@@ -247,7 +247,7 @@ void main() {
         );
         bloc.add(
           WorkEmployeeWatcherEvent.filterCategories(
-            categories: KTestText.workModelItems.first.category,
+            category: KTestText.workModelItems.first.category,
           ),
         );
       },
@@ -259,8 +259,8 @@ void main() {
           (state) =>
               state.loadingStatus == LoadingStatus.loaded &&
               state.filteredWorkModelItems.isNotEmpty &&
-              state.categories == null &&
-              state.cities == null,
+              state.category == null &&
+              state.city == null,
         ),
         predicate<WorkEmployeeWatcherState>(
           (state) =>
@@ -269,7 +269,7 @@ void main() {
               state.filteredWorkModelItems.first.category!.contains(
                 KTestText.workModelItems.first.category!,
               ) &&
-              state.cities == null,
+              state.city == null,
         ),
       ],
     );
@@ -298,12 +298,12 @@ void main() {
         bloc
           ..add(
             WorkEmployeeWatcherEvent.filterCategories(
-              categories: KTestText.workModelItems.first.category,
+              category: KTestText.workModelItems.first.category,
             ),
           )
           ..add(
             WorkEmployeeWatcherEvent.filterCities(
-              cities: KTestText.workModelItems.first.city,
+              city: KTestText.workModelItems.first.city,
             ),
           )
           ..add(
@@ -318,8 +318,8 @@ void main() {
           (state) =>
               state.loadingStatus == LoadingStatus.loaded &&
               state.filteredWorkModelItems.isNotEmpty &&
-              state.categories == null &&
-              state.cities == null,
+              state.category == null &&
+              state.city == null,
         ),
         predicate<WorkEmployeeWatcherState>(
           (state) =>
@@ -328,7 +328,7 @@ void main() {
               state.filteredWorkModelItems.first.category!.contains(
                 KTestText.workModelItems.first.category!,
               ) &&
-              state.cities == null,
+              state.city == null,
         ),
         predicate<WorkEmployeeWatcherState>(
           (state) =>
@@ -345,8 +345,8 @@ void main() {
           (state) =>
               state.loadingStatus == LoadingStatus.loaded &&
               state.filteredWorkModelItems.isNotEmpty &&
-              state.categories == null &&
-              state.cities == null,
+              state.category == null &&
+              state.city == null,
         ),
       ],
     );

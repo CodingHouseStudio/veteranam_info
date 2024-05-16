@@ -134,6 +134,8 @@
   "notNecessarily": "(not necessarily)",
   "publishAnonymously": "Publish anonymously",
   "anonymous": "Anonymous",
+  "city": "City",
+  "category": "Category",
   "publishAnonymouslyStorySubtitle": "If you post a story anonymously, readers will only be able to see your nickname in your profile.",
   "publish": "Publish",
   "storyAddSubtitle": "Share your story and we will publish it on our website. All stories are moderated and will be published after review."

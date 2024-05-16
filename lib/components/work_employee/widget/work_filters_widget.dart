@@ -33,15 +33,16 @@ class WorkEmployeeFilters extends StatelessWidget {
               children: [
                 DropChipWidget(
                   key: KWidgetkeys.screen.workEmployee.citiesFilter,
-                  filters: cities,
+                  filters: cities..add(context.l10n.city),
                   onSelected: (newValue) =>
                       context.read<WorkEmployeeWatcherBloc>().add(
                             WorkEmployeeWatcherEvent.filterCities(
-                              cities: newValue,
+                              city: newValue,
                             ),
                           ),
                   selectFilter:
-                      context.read<WorkEmployeeWatcherBloc>().state.cities,
+                      context.read<WorkEmployeeWatcherBloc>().state.city ??
+                          context.l10n.city,
                   isDesk: isDesk,
                 ),
                 if (isDesk)
@@ -50,15 +51,16 @@ class WorkEmployeeFilters extends StatelessWidget {
                   KSizedBox.kWidthSizedBox8,
                 DropChipWidget(
                   key: KWidgetkeys.screen.workEmployee.categoriesFilter,
-                  filters: categories,
+                  filters: categories..add(context.l10n.category),
                   onSelected: (newValue) =>
                       context.read<WorkEmployeeWatcherBloc>().add(
                             WorkEmployeeWatcherEvent.filterCategories(
-                              categories: newValue,
+                              category: newValue,
                             ),
                           ),
                   selectFilter:
-                      context.read<WorkEmployeeWatcherBloc>().state.categories,
+                      context.read<WorkEmployeeWatcherBloc>().state.category ??
+                          context.l10n.category,
                   isDesk: isDesk,
                 ),
               ],
