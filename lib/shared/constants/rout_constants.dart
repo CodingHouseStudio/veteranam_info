@@ -77,6 +77,7 @@ abstract class KRoute {
   static const _RouteItem profileSaves = _RouteItem(
     path: 'saves',
     name: 'Saves',
+  );
   static const _RouteItem storyAdd = _RouteItem(
     path: 'add',
     name: 'Add',
