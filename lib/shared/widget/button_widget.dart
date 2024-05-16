@@ -31,7 +31,7 @@ class ButtonWidget extends StatelessWidget {
               : context.buttonStyle.lightGrayButtonStyleWInf)
           .copyWith(
         backgroundColor: backgroundColor != null
-            ? MaterialStatePropertyAll<Color?>(backgroundColor)
+            ? MaterialStatePropertyAll(backgroundColor)
             : null,
       ),
       child: Padding(
