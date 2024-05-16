@@ -7,7 +7,51 @@ class ProfileMyStoryBodyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScaffoldWidget(
-      childWidgetsFunction: ({required isDesk}) => [],
+      childWidgetsFunction: ({required isDesk}) => [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (isDesk)
+              KSizedBox.kHeightSizedBox40
+            else
+              KSizedBox.kHeightSizedBox24,
+            Text(
+              context.l10n.myStory,
+              key: KWidgetkeys.screen.myStory.title,
+              style: isDesk ? AppTextStyle.text96 : AppTextStyle.text32,
+            ),
+            KSizedBox.kHeightSizedBox8,
+            Text(
+              context.l10n.myStoryDetails,
+              key: KWidgetkeys.screen.myStory.subtitle,
+              style: isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
+            ),
+            if (isDesk)
+              KSizedBox.kHeightSizedBox56
+            else
+              KSizedBox.kHeightSizedBox24,
+            StoryCardWidget(
+              storyDate: KMockText.date,
+              userName: KMockText.userNameAnonim,
+              story: KMockText.cardData,
+            ),
+            if (isDesk)
+              KSizedBox.kHeightSizedBox56
+            else
+              KSizedBox.kHeightSizedBox24,
+            StoryCardWidget(
+              storyDate: KMockText.date,
+              userName: KMockText.userNameAnonim,
+              story: KMockText.cardData,
+              userPhoto: KMockText.image,
+            ),
+            if (isDesk)
+              KSizedBox.kHeightSizedBox56
+            else
+              KSizedBox.kHeightSizedBox24,
+          ],
+        ),
+      ],
     );
   }
 }
