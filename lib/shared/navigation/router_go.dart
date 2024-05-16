@@ -128,6 +128,16 @@ final GoRouter router = GoRouter(
             key: state.pageKey,
             child: const ProfileScreen(),
           ),
+          routes: [
+            GoRoute(
+              name: KRoute.profileMyStory.name,
+              path: KRoute.profileMyStory.path,
+              pageBuilder: (context, state) => NoTransitionPage(
+                key: state.pageKey,
+                child: const ProfileMyStoryBodyWidget(),
+              ),
+            ),
+          ],
         ),
         GoRoute(
           name: KRoute.investors.name,
