@@ -23,7 +23,7 @@ class ChipWidget extends StatelessWidget {
         filter,
         style: isDesk ? AppTextStyle.text20 : AppTextStyle.text16,
       ),
-      shape: RoundedRectangleBorder(
+      shape: const RoundedRectangleBorder(
         borderRadius: KBorderRadius.kBorderRadius32,
       ),
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,

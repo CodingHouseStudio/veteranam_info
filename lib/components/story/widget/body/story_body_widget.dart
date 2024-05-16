@@ -34,7 +34,7 @@ class StoryBodyWidget extends StatelessWidget {
                         horizontal: KPadding.kPaddingSize48,
                       )
                     : EdgeInsets.zero,
-                child: SecondartButtonWidget(
+                child: SecondaryButtonWidget(
                   key: KWidgetkeys.screen.story.seccondaryButton,
                   isDesk: isDesk,
                   text: context.l10n.addYourStory,
