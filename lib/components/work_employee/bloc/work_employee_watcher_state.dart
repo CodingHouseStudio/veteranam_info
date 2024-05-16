@@ -15,8 +15,8 @@ class WorkEmployeeWatcherState with _$WorkEmployeeWatcherState {
   const factory WorkEmployeeWatcherState({
     required List<WorkModel> workModelItems,
     required List<WorkModel> filteredWorkModelItems,
-    required String? categories,
-    required String? cities,
+    required String? category,
+    required String? city,
     required LoadingStatus loadingStatus,
     required int page,
     required int maxPage,

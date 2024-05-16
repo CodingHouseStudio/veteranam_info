@@ -20,8 +20,8 @@ class WorkEmployeeWatcherBloc
             workModelItems: [],
             loadingStatus: LoadingStatus.initial,
             filteredWorkModelItems: [],
-            categories: null,
-            cities: null,
+            category: null,
+            city: null,
             page: 0,
             failure: null,
             maxPage: 0,
@@ -62,8 +62,8 @@ class WorkEmployeeWatcherBloc
     Emitter<WorkEmployeeWatcherState> emit,
   ) {
     final filterItems = _filter(
-      cities: state.cities,
-      categories: state.categories,
+      city: state.city,
+      category: state.category,
       workModelItems: event.workItemsModel,
     );
     final workItems = _changePage(
@@ -75,8 +75,8 @@ class WorkEmployeeWatcherBloc
         workModelItems: event.workItemsModel,
         loadingStatus: LoadingStatus.loaded,
         filteredWorkModelItems: workItems,
-        cities: state.cities,
-        categories: state.categories,
+        city: state.city,
+        category: state.category,
         page: event.workItemsModel.isEmpty || state.page != 0 ? state.page : 1,
         maxPage: event.workItemsModel.isNotEmpty
             ? (event.workItemsModel.length / KDimensions.pageItems).ceil()
@@ -94,8 +94,8 @@ class WorkEmployeeWatcherBloc
         state.page == event.page ||
         event.page <= 0) return;
     final filterItems = _filter(
-      cities: state.cities,
-      categories: state.categories,
+      city: state.city,
+      category: state.category,
       workModelItems: state.workModelItems,
     );
     final workItems =
@@ -120,8 +120,8 @@ class WorkEmployeeWatcherBloc
           workModelItems: state.workModelItems,
         ),
         page: state.workModelItems.isEmpty || state.page != 0 ? state.page : 1,
-        categories: null,
-        cities: null,
+        category: null,
+        city: null,
         maxPage: (state.workModelItems.length / KDimensions.pageItems).ceil(),
       ),
     );
@@ -132,8 +132,8 @@ class WorkEmployeeWatcherBloc
     Emitter<WorkEmployeeWatcherState> emit,
   ) {
     final filterItems = _filter(
-      cities: event.cities,
-      categories: state.categories,
+      city: event.city,
+      category: state.category,
       workModelItems: state.workModelItems,
     );
     final maxPage = (filterItems.length / KDimensions.pageItems).ceil();
@@ -143,7 +143,7 @@ class WorkEmployeeWatcherBloc
       state.copyWith(
         loadingStatus: LoadingStatus.loaded,
         filteredWorkModelItems: workItems,
-        cities: event.cities,
+        city: event.city,
         page: workItems.isNotEmpty
             ? maxPage >= state.page
                 ? state.page
@@ -159,8 +159,8 @@ class WorkEmployeeWatcherBloc
     Emitter<WorkEmployeeWatcherState> emit,
   ) {
     final filterItems = _filter(
-      cities: state.cities,
-      categories: event.categories,
+      city: state.city,
+      category: event.category,
       workModelItems: state.workModelItems,
     );
     final maxPage = (filterItems.length / KDimensions.pageItems).ceil();
@@ -172,7 +172,7 @@ class WorkEmployeeWatcherBloc
       state.copyWith(
         loadingStatus: LoadingStatus.loaded,
         filteredWorkModelItems: workItems,
-        categories: event.categories,
+        category: event.category,
         page: workItems.isNotEmpty
             ? maxPage >= state.page
                 ? state.page == 0
@@ -186,20 +186,20 @@ class WorkEmployeeWatcherBloc
   }
 
   List<WorkModel> _filter({
-    required String? cities,
-    required String? categories,
+    required String? city,
+    required String? category,
     required List<WorkModel> workModelItems,
   }) {
-    if (cities != null || categories != null) {
+    if (city != null || category != null) {
       final filterItems = workModelItems
           .where(
             (element) =>
-                (categories == null ||
+                (category == null ||
                     element.category == null ||
-                    element.category!.contains(categories)) &&
-                (cities == null ||
+                    element.category!.contains(category)) &&
+                (city == null ||
                     element.city == null ||
-                    element.city!.contains(cities)),
+                    element.city!.contains(city)),
           )
           .toList();
       return filterItems;
