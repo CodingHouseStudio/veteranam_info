@@ -18,7 +18,7 @@ class StoryBodyWidget extends StatelessWidget {
               else
                 KSizedBox.kHeightSizedBox16,
               ...TitleWidget.titleWidgetList(
-                title: context.l10n.story,
+                title: context.l10n.stories,
                 titleKey: KWidgetkeys.screen.story.title,
                 subtitle: context.l10n.storySubtitle,
                 subtitleKey: KWidgetkeys.screen.story.subtitle,
@@ -38,6 +38,10 @@ class StoryBodyWidget extends StatelessWidget {
                   key: KWidgetkeys.screen.story.seccondaryButton,
                   isDesk: isDesk,
                   text: context.l10n.addYourStory,
+                  onPressed: context.read<AuthenticationBloc>().state.status ==
+                          AuthenticationStatus.authenticated
+                      ? () => context.goNamedWithScroll(KRoute.storyAdd.name)
+                      : null,
                 ),
               ),
               if (isDesk)
@@ -52,22 +56,26 @@ class StoryBodyWidget extends StatelessWidget {
               case LoadingStatus.loading:
                 childWidgets.add(const CircularProgressIndicator.adaptive());
               case LoadingStatus.loaded:
-                childWidgets.addAll(
-                  [
-                    ...List.generate(_.loadingStoryModelItems.length, (index) {
-                      return Padding(
-                        padding: EdgeInsets.only(
-                          top: index != 0 ? KPadding.kPaddingSize80 : 0,
-                        ),
-                        child: StoryCardWidget(
-                          key: KWidgetkeys.screen.story.card,
-                          storyModel: _.loadingStoryModelItems.elementAt(index),
-                          isDesk: isDesk,
-                        ),
-                      );
-                    }),
-                  ],
-                );
+                if (childWidgets.isNotEmpty) {
+                  childWidgets.addAll(
+                    [
+                      ...List.generate(_.loadingStoryModelItems.length,
+                          (index) {
+                        return Padding(
+                          padding: EdgeInsets.only(
+                            top: index != 0 ? KPadding.kPaddingSize80 : 0,
+                          ),
+                          child: StoryCardWidget(
+                            key: KWidgetkeys.screen.story.card,
+                            storyModel:
+                                _.loadingStoryModelItems.elementAt(index),
+                            isDesk: isDesk,
+                          ),
+                        );
+                      }),
+                    ],
+                  );
+                }
 
               case LoadingStatus.error:
                 childWidgets.add(const CircularProgressIndicator.adaptive());

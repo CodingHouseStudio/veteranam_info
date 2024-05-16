@@ -23,7 +23,7 @@ class NewsCardWidget extends StatelessWidget {
           ? const EdgeInsets.symmetric(horizontal: KPadding.kPaddingSize48)
           : EdgeInsets.zero,
       child: CardTextDetailEvaluateWidget(
-        image: informationItem.image,
+        image: informationItem.image.firstImage,
         text: informationItem.news,
         buttonText: [
           context.l10n.readMore,

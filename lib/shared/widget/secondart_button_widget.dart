@@ -5,8 +5,8 @@ class SecondartButtonWidget extends StatelessWidget {
   const SecondartButtonWidget({
     required this.isDesk,
     required this.text,
+    required this.onPressed,
     super.key,
-    this.onPressed,
   });
   final bool isDesk;
   final String text;
