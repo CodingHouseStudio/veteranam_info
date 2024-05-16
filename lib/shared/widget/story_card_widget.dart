@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:kozak/shared/shared.dart';
 
@@ -22,16 +23,28 @@ class StoryCardWidget extends StatelessWidget {
         text: storyModel.story,
         titleTopMob: true,
         titleWidget: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            IconWidget(
-              key: KWidgetkeys.widget.storyCard.userIcon,
-              icon: KIcon.person,
-              // background: AppColors.widgetBackground,
-            ),
-            KSizedBox.kWidthSizedBox3,
+            if (storyModel.userPhoto == null)
+              IconWidget(
+                key: KWidgetkeys.widget.storyCard.userIcon,
+                icon: KIcon.person,
+                background: Theme.of(context).colorScheme.onPrimary,
+              )
+            else
+              ClipRRect(
+                borderRadius: BorderRadius.circular(KSize.kUserPhoto),
+                child: CachedNetworkImage(
+                  imageUrl: storyModel.userPhoto.firstImage!,
+                  placeholder: (context, url) => Image.asset(''),
+                  errorWidget: (context, url, error) => KIcon.error,
+                  fit: BoxFit.contain,
+                  width: KSize.kUserPhoto,
+                  height: KSize.kUserPhoto,
+                ),
+              ),
+            KSizedBox.kWidthSizedBox8,
             Text(
-              storyModel.userName,
+              storyModel.userName ?? context.l10n.anonymous,
               key: KWidgetkeys.widget.storyCard.userName,
               style: AppTextStyle.text14,
             ),

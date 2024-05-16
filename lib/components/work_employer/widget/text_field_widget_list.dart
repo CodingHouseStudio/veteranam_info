@@ -68,7 +68,7 @@ List<Widget> _textFieldWidgetList({
             const EdgeInsets.symmetric(horizontal: KPadding.kPaddingSize16),
         child: Row(
           children: [
-            SwitchWidget(
+            SwitchWidgetWithoutBloc(
               key: KWidgetkeys.screen.employer.switchWidget,
             ),
             Padding(
