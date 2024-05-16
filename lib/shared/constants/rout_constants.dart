@@ -74,4 +74,8 @@ abstract class KRoute {
     path: 'employer',
     name: 'Employer',
   );
+  static const _RouteItem profileSaves = _RouteItem(
+    path: 'saves',
+    name: 'Saves',
+  );
 }

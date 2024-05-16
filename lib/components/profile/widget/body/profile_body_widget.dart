@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:kozak/shared/shared.dart';
 
 class ProfileBodyWidget extends StatelessWidget {
@@ -128,7 +129,9 @@ class ProfileBodyWidget extends StatelessWidget {
           BoxWidget(
             text: context.l10n.saved,
             isDesk: isDesk,
-            onTap: null,
+            onTap: () => context.goNamed(
+              KRoute.profileSaves.name,
+            ),
           ),
           KSizedBox.kHeightSizedBox30,
           BoxWidget(
