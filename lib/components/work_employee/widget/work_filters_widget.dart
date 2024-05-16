@@ -34,12 +34,13 @@ class WorkEmployeeFilters extends StatelessWidget {
                 DropChipWidget(
                   key: KWidgetkeys.screen.workEmployee.citiesFilter,
                   filters: cities..add(context.l10n.city),
-                  onSelected: (newValue) =>
-                      context.read<WorkEmployeeWatcherBloc>().add(
-                            WorkEmployeeWatcherEvent.filterCities(
-                              city: newValue,
-                            ),
-                          ),
+                  onSelected: (newValue) => context
+                      .read<WorkEmployeeWatcherBloc>()
+                      .add(
+                        WorkEmployeeWatcherEvent.filterCities(
+                          city: newValue != context.l10n.city ? newValue : null,
+                        ),
+                      ),
                   selectFilter:
                       context.read<WorkEmployeeWatcherBloc>().state.city ??
                           context.l10n.city,
@@ -55,7 +56,9 @@ class WorkEmployeeFilters extends StatelessWidget {
                   onSelected: (newValue) =>
                       context.read<WorkEmployeeWatcherBloc>().add(
                             WorkEmployeeWatcherEvent.filterCategories(
-                              category: newValue,
+                              category: newValue != context.l10n.category
+                                  ? newValue
+                                  : null,
                             ),
                           ),
                   selectFilter:
