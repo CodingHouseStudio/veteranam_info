@@ -58,9 +58,11 @@ List<Widget> _workRespondContainerWidgetList({
       onPressed: null,
       style: KButtonStyles.borderButtonStyle(context).copyWith(),
       icon: Padding(
-        padding: EdgeInsets.all(
-          isDesk ? KPadding.kPaddingSize32 : KPadding.kPaddingSize16,
-        ).copyWith(right: KPadding.kPaddingSize8),
+        padding: EdgeInsets.symmetric(
+          vertical: isDesk ? KPadding.kPaddingSize32 : KPadding.kPaddingSize16,
+        ).copyWith(
+          left: isDesk ? KPadding.kPaddingSize16 : KPadding.kPaddingSize8,
+        ),
         child: KIcon.attachFile,
       ),
       label: Align(
@@ -108,6 +110,7 @@ List<Widget> _workRespondContainerWidgetList({
               text: context.l10n.send,
               onPressed: null,
               isDesk: isDesk,
+              backgroundColor: Theme.of(context).colorScheme.secondary,
             ),
           ),
           KSizedBox.kWidthSizedBox73,
@@ -117,7 +120,6 @@ List<Widget> _workRespondContainerWidgetList({
               text: context.l10n.cancel,
               onPressed: null,
               isDesk: isDesk,
-              backgroundColor: Theme.of(context).colorScheme.primary,
             ),
           ),
         ],
@@ -128,6 +130,7 @@ List<Widget> _workRespondContainerWidgetList({
         text: context.l10n.send,
         onPressed: null,
         isDesk: isDesk,
+        backgroundColor: Theme.of(context).colorScheme.secondary,
       ),
       KSizedBox.kHeightSizedBox16,
       ButtonWidget(
@@ -135,7 +138,6 @@ List<Widget> _workRespondContainerWidgetList({
         text: context.l10n.cancel,
         onPressed: null,
         isDesk: isDesk,
-        backgroundColor: Theme.of(context).primaryColor,
       ),
     ],
     if (isDesk) KSizedBox.kHeightSizedBox32 else KSizedBox.kHeightSizedBox16,
