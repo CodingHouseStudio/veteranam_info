@@ -24,6 +24,7 @@ class WorkEmployeeFilters extends StatelessWidget {
           onResetValue: () => context.read<WorkEmployeeWatcherBloc>().add(
                 const WorkEmployeeWatcherEvent.filterReset(),
               ),
+          isDesk: isDesk,
         ),
         KSizedBox.kWidthSizedBox24,
         Expanded(
