@@ -15,7 +15,7 @@ class DiscountModel with _$DiscountModel {
     required DateTime date,
     required String instruction,
     required String preInstructionDiscount,
-    @Default(<String>[]) List<String>? tags,
+    required List<String> tags,
   }) = _DiscountModel;
 
   factory DiscountModel.fromJson(Map<String, dynamic> json) =>

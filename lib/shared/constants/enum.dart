@@ -30,6 +30,12 @@ extension LocalizedDateTime on DateTime {
   }
 }
 
+extension LocalizedDateTime on DateTime {
+  String toLocalDateString() {
+    return toLocal().toString().split(' ')[0];
+  }
+}
+
 enum LoadingStatus { initial, loading, loaded, error }
 
 enum EvaluationEnum { like, dislike, smile, none }
