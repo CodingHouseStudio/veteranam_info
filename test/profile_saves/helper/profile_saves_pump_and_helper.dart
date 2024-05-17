@@ -4,7 +4,7 @@ import 'package:kozak/shared/shared.dart';
 
 import '../../text_dependency.dart';
 
-Future<void> profileSvaesPumpAppHelper({
+Future<void> profileSavesPumpAppHelper({
   required WidgetTester tester,
   MockGoRouter? mockGoRouter,
 }) async {

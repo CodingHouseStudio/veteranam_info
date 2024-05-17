@@ -245,7 +245,7 @@ abstract class KScreenBlocName {
   static const signUp = 'Sign Up Screen';
   static const questionsForm = 'Questions Form Screen';
   static const workEmployee = 'Work Employee Screen';
-  static const workRespond = 'Work Respond Screen';
+  static const employeeRespond = 'Employee Respond Screen';
   static const workEmployer = 'Employer Screen';
   static const profileSaves = 'Profile Saves Screen';
   static const storyAdd = 'Story Add Screen';
