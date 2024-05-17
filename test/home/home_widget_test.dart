@@ -81,16 +81,6 @@ void main() {
         tester: tester,
       );
 
-      await scrollingHelper(
-        tester: tester,
-        offset: KTestConstants.scrollingDown,
-      );
-
-      await scrollingHelper(
-        tester: tester,
-        offset: KTestConstants.scrollingUp1000,
-      );
-
       await feedbackClearTextHelper(
         tester: tester,
         email: KTestText.userEmail,

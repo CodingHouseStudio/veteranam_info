@@ -10,12 +10,6 @@ Future<void> donatesCardHelper(
 ) async {
   await changeWindowSizeHelper(tester: tester);
 
-  await scrollingHelper(
-    tester: tester,
-    itemKey: KWidgetkeys.screen.investors.donateCard,
-    offset: KTestConstants.scrollingDown,
-  );
-
   expect(find.byKey(KWidgetkeys.screen.investors.donateCards), findsWidgets);
 
   expect(find.byKey(KWidgetkeys.screen.investors.donateCard), findsWidgets);
