@@ -7,7 +7,7 @@ class ProfileSavesBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScaffoldWidget(
-      mainChildWidgetsFunction: ({required isDesk}) => [
+      titleChildWidgetsFunction: ({required isDesk}) => [
         if (isDesk)
           KSizedBox.kHeightSizedBox40
         else
@@ -23,37 +23,30 @@ class ProfileSavesBody extends StatelessWidget {
           KSizedBox.kHeightSizedBox56
         else
           KSizedBox.kHeightSizedBox24,
-        Container(
-          margin: EdgeInsetsDirectional.symmetric(
-            horizontal:
-                isDesk ? KPadding.kPaddingSize220 : KPadding.kPaddingSize16,
-          ),
-          child: DiscountsCardWidget(
-            key: KWidgetkeys.screen.profileSaves.discountCard,
-            discount: KMockText.discount,
-            city: KMockText.cityDiscount,
-            service: KMockText.serviceDiscount,
-            description: KMockText.descriptionDiscount,
-            date: KMockText.dateDiscount,
-            instruction: KMockText.instructionDiscount,
-            preInstructionDiscount: KMockText.preInstructionDiscount,
-            isDesk: isDesk,
-          ),
+      ],
+      mainDeskPadding: ({required isDesk, required maxWidth}) => isDesk
+          ? const EdgeInsets.symmetric(horizontal: KPadding.kPaddingSize220)
+          : EdgeInsets.zero,
+      mainChildWidgetsFunction: ({required isDesk}) => [
+        DiscountsCardWidget(
+          key: KWidgetkeys.screen.profileSaves.discountCard,
+          discount: KMockText.discount,
+          city: KMockText.cityDiscount,
+          service: KMockText.serviceDiscount,
+          description: KMockText.descriptionDiscount,
+          date: KMockText.dateDiscount,
+          instruction: KMockText.instructionDiscount,
+          preInstructionDiscount: KMockText.preInstructionDiscount,
+          isDesk: isDesk,
         ),
         if (isDesk)
           KSizedBox.kHeightSizedBox56
         else
           KSizedBox.kHeightSizedBox24,
-        Container(
-          margin: EdgeInsetsDirectional.symmetric(
-            horizontal:
-                isDesk ? KPadding.kPaddingSize220 : KPadding.kPaddingSize16,
-          ),
-          child: WorkCardWidget(
-            key: KWidgetkeys.screen.profileSaves.workCard,
-            workModel: KMockText.workModel,
-            isDesk: isDesk,
-          ),
+        WorkCardWidget(
+          key: KWidgetkeys.screen.profileSaves.workCard,
+          workModel: KMockText.workModel,
+          isDesk: isDesk,
         ),
         if (isDesk)
           KSizedBox.kHeightSizedBox56

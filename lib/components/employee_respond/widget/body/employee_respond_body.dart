@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:kozak/shared/shared.dart';
 
-part '../work_respond_container_widget_list.dart';
+part '../employee_respond_container_widget.dart';
 
-class WorkRespondBodyWidget extends StatelessWidget {
-  const WorkRespondBodyWidget({super.key});
+class EmployeeRespondBody extends StatelessWidget {
+  const EmployeeRespondBody({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class WorkRespondBodyWidget extends StatelessWidget {
         else
           KSizedBox.kHeightSizedBox32,
         Text(
-          key: KWidgetkeys.screen.workRespond.title,
+          key: KWidgetkeys.screen.employeeRespond.title,
           context.l10n.respond,
           style: isDesk ? AppTextStyle.text96 : AppTextStyle.text32,
         ),
@@ -24,7 +24,7 @@ class WorkRespondBodyWidget extends StatelessWidget {
           children: [
             KIcon.chevronLeft,
             Text(
-              key: KWidgetkeys.screen.workRespond.subtitle,
+              key: KWidgetkeys.screen.employeeRespond.subtitle,
               KMockText.workTitle,
               style: isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
             ),
