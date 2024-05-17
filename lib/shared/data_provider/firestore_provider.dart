@@ -141,6 +141,31 @@ class FirestoreService {
         .set(discount.toJson());
   }
 
+  Stream<List<TagModel>> getTags() => _db
+          .collection(FirebaseCollectionName.tags)
+          .snapshots(includeMetadataChanges: true) // Enable caching
+          .map(
+        (snapshot) {
+          for (final change in snapshot.docChanges) {
+            if (change.type == DocumentChangeType.added) {
+              final source =
+                  (snapshot.metadata.isFromCache) ? 'local cache' : 'server';
+              debugPrint('Data fetched from $source}');
+            }
+          }
+          return snapshot.docs
+              .map((doc) => TagModel.fromJson(doc.data()))
+              .toList();
+        },
+      );
+
+  Future<void> addTags(TagModel tags) {
+    return _db
+        .collection(FirebaseCollectionName.tags)
+        .doc(tags.id)
+        .set(tags.toJson());
+  }
+
   Future<void> setUserSetting({
     required UserSetting userSetting,
     required String userId,
