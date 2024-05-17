@@ -28,13 +28,11 @@ class _KIcon extends Icon {
 class _KImage extends Image {
   const _KImage({required super.image});
 
-  Widget setIconKey(Key key, {Color? changeColor}) {
-    return SizedBox(
-      child: Image.asset(
-        named.name!,
-        key: key,
-        color: changeColor ?? color,
-      ),
+  Image setIconKey(Key key, {Color? changeColor}) {
+    return Image(
+      image: AssetImage(named.name!),
+      key: key,
+      color: changeColor ?? color,
     );
   }
 }
