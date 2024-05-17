@@ -21,7 +21,7 @@ class PaginationWidget extends StatelessWidget {
         children: [
           TextButton.icon(
             key: KWidgetkeys.widget.pagination.buttonPrevious,
-            label: const Text(KMockText.previousPage),
+            label: Text(context.l10n.previous),
             onPressed:
                 currentPage > 1 ? () => changePage(currentPage - 1) : null,
             style: KButtonStyles.transparentButtonStyle,
@@ -73,10 +73,10 @@ class PaginationWidget extends StatelessWidget {
             onPressed:
                 pages > currentPage ? () => changePage(currentPage + 1) : null,
             style: KButtonStyles.transparentButtonStyle,
-            child: const Row(
+            child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(KMockText.nextPage),
+                Text(context.l10n.next),
                 KIcon.arrowRight,
               ],
             ),
