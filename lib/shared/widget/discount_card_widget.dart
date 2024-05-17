@@ -99,16 +99,12 @@ class DiscountsCardWidget extends StatelessWidget {
           CardTextDetailWidget(
             text: instruction,
             maxLines: 1,
-            icon: Row(
+            icon: const Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                  child: KIcon.share,
-                ),
+                KIcon.share,
                 KSizedBox.kWidthSizedBox16,
-                Container(
-                  child: KIcon.safe,
-                ),
+                KIcon.safe,
               ],
             ),
             isDesk: isDesk,
