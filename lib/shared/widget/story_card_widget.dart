@@ -56,7 +56,9 @@ class StoryCardWidget extends StatelessWidget {
           style: context.textStyle.hint16,
         ),
         isDesk: isDesk,
-        titleIcon: KIcon.trash,
+        titleIcon: KIcon.trash.setIconKey(
+          KWidgetkeys.widget.storyCard.trashIcon,
+        ),
       ),
     );
   }
