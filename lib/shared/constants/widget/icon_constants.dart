@@ -1,7 +1,6 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
-import 'package:injectable/injectable.dart';
 
 class _KIcon extends Icon {
   const _KIcon(super.icon);
@@ -25,30 +24,18 @@ class _KIcon extends Icon {
   }
 }
 
-class _KImage extends Image {
-  const _KImage({required super.image});
-
-  Image setIconKey(Key key, {Color? changeColor}) {
-    return Image(
-      image: AssetImage(named.name!),
-      key: key,
-      color: changeColor ?? color,
-    );
-  }
-}
-
 abstract class KIcon {
-  static const _KImage linkedIn =
-      _KImage(image: AssetImage('assets/icons/instagram.png'));
-  static const _KImage instagram =
-      _KImage(image: AssetImage('assets/icons/linkedin.png'));
-  static const _KImage facebook = _KImage(
+  static const Image linkedIn =
+      Image(image: AssetImage('assets/icons/instagram.png'));
+  static const Image instagram =
+      Image(image: AssetImage('assets/icons/linkedin.png'));
+  static const Image facebook = Image(
     image: AssetImage('assets/icons/social_icons_f.png'),
   );
-  static const _KImage apple =
-      _KImage(image: AssetImage('assets/icons/social_icons.png'));
-  static const _KImage google =
-      _KImage(image: AssetImage('assets/icons/social_icons_g.png'));
+  static const Image apple =
+      Image(image: AssetImage('assets/icons/social_icons.png'));
+  static const Image google =
+      Image(image: AssetImage('assets/icons/social_icons_g.png'));
   static const _KIcon arrowLeft = _KIcon(Icons.arrow_left);
   static const _KIcon arrowRight = _KIcon(Icons.arrow_right);
   static const _KIcon mic = _KIcon(Icons.mic_none_outlined);
