@@ -25,7 +25,6 @@ List<Widget> _employeeRespondContainerWidgetList({
       onChanged: null,
       hintText: context.l10n.emailHint,
       isDesk: isDesk,
-      height: isDesk ? KMinMaxSize.minmaxHeight94 : KMinMaxSize.maxHeight51,
     ),
     if (isDesk) KSizedBox.kHeightSizedBox32 else KSizedBox.kHeightSizedBox16,
     Padding(
@@ -42,7 +41,6 @@ List<Widget> _employeeRespondContainerWidgetList({
       onChanged: null,
       hintText: context.l10n.phoneNumberHint,
       isDesk: isDesk,
-      height: isDesk ? KMinMaxSize.minmaxHeight94 : KMinMaxSize.maxHeight51,
     ),
     if (isDesk) KSizedBox.kHeightSizedBox32 else KSizedBox.kHeightSizedBox16,
     Padding(
