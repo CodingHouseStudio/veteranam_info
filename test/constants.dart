@@ -231,6 +231,7 @@ abstract class KScreenBlocName {
   static const workEmployee = 'Work Employee Screen';
   static const workRespond = 'Work Respond Screen';
   static const workEmployer = 'Employer Screen';
+  static const profileSaves = 'Profile Saves Screen';
 
   static const feedback = 'Feedback Widget';
   static const authenticationServices = 'Authentication Services';

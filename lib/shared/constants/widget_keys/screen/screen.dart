@@ -19,7 +19,7 @@ class _ScreenKeys {
   final thanks = _ThanksKeys();
   final questionsForm = _QuestionsFormKeys();
   final workEmployee = _WorkEmployeeKeys();
-  final workRespond = _WorkRespondKeys();
+  final employeeRespond = _EmployeeRespondKeys();
   final employer = _EmployerKeys();
   final profileSaves = _ProfileSavesKeys();
 }

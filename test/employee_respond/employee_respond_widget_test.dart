@@ -14,20 +14,20 @@ void main() {
   tearDown(GetIt.I.reset);
   group('${KScreenBlocName.workRespond} ', () {
     testWidgets('${KGroupText.intial} ', (tester) async {
-      await workRespondPumpAppHelper(tester: tester);
+      await employeeRespondPumpAppHelper(tester: tester);
 
-      await workRespondInitialHelper(tester);
+      await employeeRespondInitialHelper(tester);
     });
     group('${KGroupText.goRouter} ', () {
       late MockGoRouter mockGoRouter;
       setUp(() => mockGoRouter = MockGoRouter());
       testWidgets('${KGroupText.intial} ', (tester) async {
-        await workRespondPumpAppHelper(
+        await employeeRespondPumpAppHelper(
           tester: tester,
           mockGoRouter: mockGoRouter,
         );
 
-        await workRespondInitialHelper(tester);
+        await employeeRespondInitialHelper(tester);
       });
     });
   });
