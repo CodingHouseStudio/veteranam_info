@@ -55,7 +55,10 @@ class _InvestorsBodyWidgetState extends State<InvestorsBodyWidget> {
                   subtitleKey: KWidgetkeys.screen.investors.fundSubtitle,
                   isDesk: isDesk,
                 ),
-                KSizedBox.kHeightSizedBox56,
+                if (isDesk)
+                  KSizedBox.kHeightSizedBox56
+                else
+                  KSizedBox.kHeightSizedBox24,
               ];
               switch (_) {
                 case InvestorsWatcherStateIntital():
