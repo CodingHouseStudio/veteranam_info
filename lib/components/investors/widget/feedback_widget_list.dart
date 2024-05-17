@@ -39,12 +39,4 @@ List<Widget> _feedbackWidgetList({
           feedbackKey: feedbackKey,
         ),
       if (isDesk) KSizedBox.kHeightSizedBox56 else KSizedBox.kHeightSizedBox40,
-      ...TitleWidget.titleWidgetList(
-        title: context.l10n.funds,
-        titleKey: KWidgetkeys.screen.investors.fundTitle,
-        subtitle: context.l10n.fundsSubtitle,
-        subtitleKey: KWidgetkeys.screen.investors.fundSubtitle,
-        isDesk: isDesk,
-      ),
-      KSizedBox.kHeightSizedBox56,
     ];
