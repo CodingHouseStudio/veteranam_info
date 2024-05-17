@@ -12,7 +12,7 @@ void main() {
     late LoginBloc loginBloc;
     late AuthenticationRepository mockAuthenticationRepository;
     setUp(() {
-      ExtendedDateTime.customTime = KTestText.feedbackModel.timestamp;
+      ExtendedDateTime.current = KTestText.feedbackModel.timestamp;
       mockAuthenticationRepository = MockAuthenticationRepository();
       when(
         mockAuthenticationRepository.logIn(

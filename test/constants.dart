@@ -48,6 +48,8 @@ abstract class KGroupText {
   static const empty = 'empty';
   static const modelJson = 'instance from valid JSON';
   static const jsonModel = 'json from valid model';
+  static const correct = 'Correct';
+  static const uncorrect = 'Uncorrect';
 }
 
 abstract class KTestText {
@@ -123,6 +125,19 @@ abstract class KTestText {
     photo: 'test_phot',
   );
 
+  static const userWithoutPhoto = User(
+    id: '1',
+    email: userEmail,
+    name: usernameCorrect,
+    phoneNumber: 'test_phone_number',
+  );
+
+  static final userPhotoModel = [
+    ImageModel(
+      downloadURL: user.photo!,
+    ),
+  ];
+
   static const userSetting = UserSetting(
     id: '1',
     userRole: UserRole.civilian,
@@ -134,6 +149,13 @@ abstract class KTestText {
     ref: 'test_name',
     type: 'test_type',
   );
+  static const imageModels = [
+    ImageModel(
+      downloadURL: 'test_image',
+      name: 'test_image',
+      ref: 'test_image',
+    ),
+  ];
 
   static final feedbackModel = FeedbackModel(
     id: dateTime.microsecondsSinceEpoch.toString(),
@@ -145,6 +167,7 @@ abstract class KTestText {
   );
   static final dateTime = DateTime(2024, 4, 12);
   static final dateTimeId = DateTime(0, 0, 0, 0, 1, 1, 1, 1);
+  static const downloadURL = 'test_URL';
 
   static final fundItems = <FundModel>[
     for (var i = 0; i < 5; i++)
@@ -172,9 +195,7 @@ abstract class KTestText {
         title: KMockText.title,
         news: KMockText.cardData,
         date: dateTime,
-        image: i > KMockText.tags.length - 2
-            ? [const ImageModel(downloadURL: KMockText.image)]
-            : null,
+        image: i > KMockText.tags.length - 2 ? imageModels : null,
         tags: KMockText.tags.elementAt(i),
       ),
   ];
@@ -184,16 +205,11 @@ abstract class KTestText {
       StoryModel(
         id: i.toString(),
         date: dateTime,
-        image: i > KMockText.tags.length - 2
-            ? const [
-                ImageModel(
-                  downloadURL: KMockText.image,
-                ),
-              ]
-            : null,
-        story: KMockText.cardData,
-        userName: KMockText.userNameAnonim,
-        userId: i.toString(),
+        image: i > KMockText.tags.length - 2 ? imageModels : null,
+        story: KMockText.cardData.substring(0, 200),
+        userName: user.name,
+        userId: user.id,
+        userPhoto: i > KMockText.tags.length - 2 ? userPhotoModel : null,
       ),
   ];
 }
@@ -232,7 +248,7 @@ abstract class KScreenBlocName {
   static const workRespond = 'Work Respond Screen';
   static const workEmployer = 'Employer Screen';
   static const profileSaves = 'Profile Saves Screen';
-
+  static const storyAdd = 'Story Add Screen';
   static const feedback = 'Feedback Widget';
   static const authenticationServices = 'Authentication Services';
   static const appAuthentication = 'App Authentication';

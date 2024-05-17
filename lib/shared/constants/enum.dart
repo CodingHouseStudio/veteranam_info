@@ -11,7 +11,7 @@ extension ExtendedDateTime on DateTime {
       _id ?? DateTime.now().toLocal().microsecondsSinceEpoch.toString();
 
   @visibleForTesting
-  static set customTime(DateTime customTime) => _customTime = customTime;
+  static set current(DateTime customTime) => _customTime = customTime;
 
   @visibleForTesting
   static set id(String customId) => _id = customId;

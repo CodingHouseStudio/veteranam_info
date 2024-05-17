@@ -34,7 +34,7 @@ class _WorkCardWidgetState extends State<WorkCardWidget> {
   Widget build(BuildContext context) {
     return Container(
       key: scrollKey,
-      decoration: KWidgetTheme.boxDecorationWidget(context),
+      decoration: context.widgetTheme.boxDecorationWidget,
       child: Padding(
         padding: EdgeInsets.symmetric(
           horizontal:

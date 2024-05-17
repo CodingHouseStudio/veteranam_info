@@ -44,7 +44,7 @@ class _FeedbackBoxWidgetState extends State<FeedbackBoxWidget> {
                   Expanded(
                     flex: 2,
                     child: Container(
-                      decoration: KWidgetTheme.boxDecorationWidget(context),
+                      decoration: context.widgetTheme.boxDecorationWidget,
                       padding: const EdgeInsets.symmetric(
                         horizontal: KPadding.kPaddingSize32,
                       ),

@@ -19,7 +19,7 @@ void main() {
     late IInvestorsRepository mockInvestorsRepository;
     late IFeedbackRepository mockFeedbackRepository;
     setUp(() {
-      ExtendedDateTime.customTime = KTestText.dateTime;
+      ExtendedDateTime.current = KTestText.dateTime;
       ExtendedDateTime.id = KTestText.feedbackModel.id;
       mockInvestorsRepository = MockIInvestorsRepository();
       when(mockInvestorsRepository.getFunds()).thenAnswer(

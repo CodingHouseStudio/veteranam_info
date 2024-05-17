@@ -58,7 +58,7 @@ class _DropListFieldWidgetState extends State<DropListFieldWidget> {
           itemBuilder: (context, index) => TextButton(
             key: KWidgetkeys.widget.dropListField.item,
             onPressed: () => onSelected(options.elementAt(index)),
-            style: KButtonStyles.dropListButtonStyle(context),
+            style: context.buttonStyle.dropListButtonStyle,
             child: Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: KPadding.kPaddingSize32,
