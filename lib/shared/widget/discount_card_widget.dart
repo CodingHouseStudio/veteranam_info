@@ -19,7 +19,7 @@ class DiscountsCardWidget extends StatelessWidget {
           horizontal: isDesk ? KPadding.kPaddingSize75 : 0,
         ),
         child: Container(
-          decoration: KWidgetTheme.boxDecorationWhite(context),
+          decoration: KWidgetTheme.boxDecorationWidget(context),
           child: Padding(
             padding: const EdgeInsets.all(KPadding.kPaddingSize16),
             child: Column(
@@ -53,7 +53,7 @@ class DiscountsCardWidget extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        discountItem.date.toLocal().toString().split(' ')[0],
+                        discountItem.date.toLocalDateString(),
                         key: KWidgetkeys.widget.discountCard.date,
                         style: AppTextStyle.hint24,
                       ),
@@ -70,7 +70,7 @@ class DiscountsCardWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        discountItem.date.toLocal().toString().split(' ')[0],
+                        discountItem.date.toLocalDateString(),
                         key: KWidgetkeys.widget.discountCard.date,
                         style: AppTextStyle.hint14,
                       ),
