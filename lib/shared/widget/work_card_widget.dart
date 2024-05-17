@@ -47,26 +47,29 @@ class _WorkCardWidgetState extends State<WorkCardWidget> {
             Text(
               widget.workModel.title,
               key: KWidgetkeys.widget.workCard.title,
-              style: AppTextStyle.text40,
+              style: widget.isDesk ? AppTextStyle.text40 : AppTextStyle.text24,
             ),
+            KSizedBox.kHeightSizedBox4,
             Text(
               widget.workModel.price,
               key: KWidgetkeys.widget.workCard.price,
-              style: AppTextStyle.text40,
+              style: widget.isDesk ? AppTextStyle.text40 : AppTextStyle.text24,
             ),
+            KSizedBox.kHeightSizedBox4,
             Text(
               widget.workModel.city ?? '',
               key: KWidgetkeys.widget.workCard.city,
-              style: AppTextStyle.text20.copyWith(
-                  // color: AppColors.lightGray,
-                  ),
+              style: widget.isDesk
+                  ? context.textStyle.hint20
+                  : context.textStyle.hint16,
             ),
+            KSizedBox.kHeightSizedBox4,
             Text(
               widget.workModel.companyName,
               key: KWidgetkeys.widget.workCard.employer,
-              style: AppTextStyle.text20.copyWith(
-                  // color: AppColors.lightGray,
-                  ),
+              style: widget.isDesk
+                  ? context.textStyle.hint20
+                  : context.textStyle.hint16,
             ),
             KSizedBox.kHeightSizedBox16,
             CardTextDetailWidget(
