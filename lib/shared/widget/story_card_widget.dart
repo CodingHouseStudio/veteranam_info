@@ -53,11 +53,10 @@ class StoryCardWidget extends StatelessWidget {
         titleDate: Text(
           storyModel.date.localeTime,
           key: KWidgetkeys.widget.storyCard.date,
-          style: AppTextStyle.text16.copyWith(
-              // color: AppColors.lightGray,
-              ),
+          style: context.textStyle.hint16,
         ),
         isDesk: isDesk,
+        titleIcon: KIcon.trash,
       ),
     );
   }
