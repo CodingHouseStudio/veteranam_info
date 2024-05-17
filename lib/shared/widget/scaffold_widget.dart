@@ -88,7 +88,7 @@ class ScaffoldWidget extends StatelessWidget {
                   bottom: KPadding.kPaddingSize40,
                 ),
                 sliver: DecoratedSliver(
-                  decoration: KWidgetTheme.boxDecorationCard(context),
+                  decoration: context.widgetTheme.boxDecorationCard,
                   sliver: SliverPadding(
                     padding: isDesk
                         ? const EdgeInsets.all(KPadding.kPaddingSize48)

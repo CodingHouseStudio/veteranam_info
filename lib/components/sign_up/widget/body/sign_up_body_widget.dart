@@ -47,7 +47,7 @@ class SignUpBodyWidget extends StatelessWidget {
                 child: Text(
                   _.failure.getString(context)!,
                   key: KWidgetkeys.screen.signUp.failureMessage,
-                  style: AppTextStyle.error14,
+                  style: context.textStyle.error14,
                 ),
               ),
             if (isDesk)
@@ -79,8 +79,7 @@ class SignUpBodyWidget extends StatelessWidget {
                 TextButton(
                   key: KWidgetkeys.screen.signUp.loginButton,
                   onPressed: () => context.goNamedWithScroll(KRoute.login.name),
-                  style:
-                      KButtonStyles.transparentButtonStyleBottomBorder(context),
+                  style: context.buttonStyle.transparentButtonStyleBottomBorder,
                   child: Text(
                     context.l10n.login,
                     style: isDesk ? AppTextStyle.text40 : AppTextStyle.text24,

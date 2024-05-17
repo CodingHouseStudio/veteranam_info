@@ -18,19 +18,19 @@ class ChipWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return FilterChip(
       key: KWidgetkeys.widget.chip.widget,
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: context.color.background,
       label: Text(
         filter,
         style: isDesk ? AppTextStyle.text20 : AppTextStyle.text16,
       ),
-      shape: RoundedRectangleBorder(
+      shape: const RoundedRectangleBorder(
         borderRadius: KBorderRadius.kBorderRadius32,
       ),
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
       selected: isSelected,
       onSelected: (value) => onSelected(isSelected: value),
       // checkmarkColor: AppColors.black,
-      selectedColor: Theme.of(context).colorScheme.secondary,
+      selectedColor: context.color.secondary,
     );
   }
 }

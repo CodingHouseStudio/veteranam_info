@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:kozak/shared/shared.dart';
 import 'package:mockito/mockito.dart';
 
-import '../text_dependency.dart';
+import '../../text_dependency.dart';
 
 void main() {
   group('${KScreenBlocName.firestoreService} ', () {
@@ -27,18 +27,17 @@ void main() {
         mockSnapshotMetadata = MockSnapshotMetadata();
 
         when(
-          mockFirebaseFirestore.collection(FirebaseCollectionName.information),
+          mockFirebaseFirestore.collection(FirebaseCollectionName.stroies),
         ).thenAnswer((realInvocation) => mockCollectionReference);
 
         when(
-          mockCollectionReference.doc(KTestText.informationModelItems.first.id),
+          mockCollectionReference.doc(KTestText.storyModelItems.first.id),
         ).thenAnswer(
           (_) => mockDocumentReference,
         );
 
         when(
-          mockDocumentReference
-              .set(KTestText.informationModelItems.first.toJson()),
+          mockDocumentReference.set(KTestText.storyModelItems.first.toJson()),
         ).thenAnswer(
           (_) async {},
         );
@@ -60,10 +59,8 @@ void main() {
         when(
           mockQueryDocumentSnapshot.first.data(),
         ).thenAnswer(
-          (_) => KTestText.informationModelItems
-              .map((e) => e.toJson())
-              .toList()
-              .first,
+          (_) =>
+              KTestText.storyModelItems.map((e) => e.toJson()).toList().first,
         );
 
         when(
@@ -93,32 +90,30 @@ void main() {
         FirestoreService.firebaseFirestore = mockFirebaseFirestore;
         firestoreService = FirestoreService();
       });
-      test('add information', () async {
-        await firestoreService
-            .addInformation(KTestText.informationModelItems.first);
+      test('add story', () async {
+        await firestoreService.addStory(KTestText.storyModelItems.first);
 
         verify(
-          mockFirebaseFirestore.collection(FirebaseCollectionName.information),
+          mockFirebaseFirestore.collection(FirebaseCollectionName.stroies),
         ).called(1);
         verify(
-          mockCollectionReference.doc(KTestText.informationModelItems.first.id),
+          mockCollectionReference.doc(KTestText.storyModelItems.first.id),
         ).called(1);
         verify(
-          mockDocumentReference
-              .set(KTestText.informationModelItems.first.toJson()),
+          mockDocumentReference.set(KTestText.storyModelItems.first.toJson()),
         ).called(1);
       });
-      test('get information', () async {
+      test('get stories', () async {
         await expectLater(
-          firestoreService.getInformations(),
+          firestoreService.getStories(),
           emitsInOrder([
-            [KTestText.informationModelItems.first],
+            [KTestText.storyModelItems.first],
           ]),
           reason: 'Wait for getting information',
         );
 
         verify(
-          mockFirebaseFirestore.collection(FirebaseCollectionName.information),
+          mockFirebaseFirestore.collection(FirebaseCollectionName.stroies),
         ).called(1);
         verify(
           mockCollectionReference.snapshots(
@@ -139,8 +134,8 @@ void main() {
         ).called(1);
 
         expect(
-          firestoreService.getInformations(),
-          emits([KTestText.informationModelItems.first]),
+          firestoreService.getStories(),
+          emits([KTestText.storyModelItems.first]),
         );
       });
     });

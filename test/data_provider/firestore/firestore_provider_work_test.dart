@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:kozak/shared/shared.dart';
 import 'package:mockito/mockito.dart';
 
-import '../text_dependency.dart';
+import '../../text_dependency.dart';
 
 void main() {
   group('${KScreenBlocName.firestoreService} ', () {

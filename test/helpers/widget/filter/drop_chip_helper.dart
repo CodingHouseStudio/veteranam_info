@@ -7,9 +7,9 @@ import '../../../text_dependency.dart';
 Future<void> dropChipHelper(
   WidgetTester tester,
 ) async {
-  expect(find.byKey(KWidgetkeys.widget.dropChip.widget).first, findsWidgets);
+  expect(find.byKey(KWidgetkeys.widget.dropChip.widget).first, findsOneWidget);
 
-  expect(find.byKey(KWidgetkeys.widget.dropChip.button), findsNothing);
+  expect(find.byKey(KWidgetkeys.widget.dropChip.button), findsWidgets);
 
   await scrollingHelper(
     tester: tester,
@@ -52,7 +52,7 @@ Future<void> dropChipHelper(
   expect(
     find.descendant(
       of: find.byKey(KWidgetkeys.widget.dropChip.widget).first,
-      matching: find.text(dropChip.items!.last.value.toString()),
+      matching: find.text(dropChip.items!.first.value.toString()),
     ),
     findsOneWidget,
   );
