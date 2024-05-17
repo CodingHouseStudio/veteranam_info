@@ -17,8 +17,8 @@ void main() {
       when(mockAuthenticationRepository.currentUser).thenAnswer(
         (realInvocation) => KTestText.user,
       );
-      when(mockAuthenticationRepository.getUserSetting()).thenAnswer(
-        (realInvocation) async => KTestText.userSetting,
+      when(mockAuthenticationRepository.currentUserSetting).thenAnswer(
+        (realInvocation) => KTestText.userSetting,
       );
       when(
         mockAuthenticationRepository.updateUserSetting(

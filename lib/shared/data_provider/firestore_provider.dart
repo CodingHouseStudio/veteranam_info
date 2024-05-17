@@ -69,28 +69,6 @@ class FirestoreService {
         .update(userSetting.toJson());
   }
 
-  Future<void> setUserSetting({
-    required UserSetting userSetting,
-    required String userId,
-  }) {
-    return _db
-        .collection(FirebaseCollectionName.userSettings)
-        .doc(userId)
-        .set(userSetting.toJson());
-  }
-
-  Future<UserSetting> getUserSetting(String userId) async {
-    final docSnapshot = await _db
-        .collection(FirebaseCollectionName.userSettings)
-        .doc(userId)
-        .get();
-    if (docSnapshot.exists) {
-      return UserSetting.fromJson(docSnapshot.data()!);
-    } else {
-      return UserSetting.empty;
-    }
-  }
-
   Stream<List<InformationModel>> getInformations() => _db
           .collection(FirebaseCollectionName.information)
           .snapshots(includeMetadataChanges: true) // Enable caching
@@ -115,6 +93,33 @@ class FirestoreService {
         .doc(information.id)
         .set(information.toJson());
   }
+
+  Future<void> setUserSetting({
+    required UserSetting userSetting,
+    required String userId,
+  }) {
+    return _db
+        .collection(FirebaseCollectionName.userSettings)
+        .doc(userId)
+        .set(userSetting.toJson());
+  }
+
+  Stream<UserSetting> getUserSetting(String userId) => _db
+          .collection(FirebaseCollectionName.userSettings)
+          .doc(userId)
+          .snapshots(includeMetadataChanges: true) // Enable caching
+          .map(
+        (snapshot) {
+          if (snapshot.exists) {
+            final source =
+                (snapshot.metadata.isFromCache) ? 'local cache' : 'server';
+            debugPrint('Data fetched from $source}');
+            return UserSetting.fromJson(snapshot.data()!);
+          } else {
+            return UserSetting.empty;
+          }
+        },
+      );
 
   Stream<List<WorkModel>> getWorks() => _db
           .collection(FirebaseCollectionName.work)

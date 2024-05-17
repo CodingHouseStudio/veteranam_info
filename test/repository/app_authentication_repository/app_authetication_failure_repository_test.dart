@@ -234,6 +234,12 @@ void main() {
         ).thenAnswer(
           (_) => null,
         );
+        when(
+          mockFirestoreService.getUserSetting(KTestText.fieldEmpty),
+        ).thenAnswer(
+          (_) => Stream.value(UserSetting.empty),
+        );
+
         if (GetIt.I.isRegistered<FirestoreService>()) {
           GetIt.I.unregister<FirestoreService>();
         }
@@ -247,10 +253,28 @@ void main() {
           ..isWeb = true
           ..googleAuthProvider = mockGoogleAuthProvider;
       });
-      test('user', () async {
-        final result = appAuthenticationRepository.user;
+      test('User Setting', () async {
         await expectLater(
-          result,
+          appAuthenticationRepository.userSetting,
+          emitsInOrder([
+            UserSetting.empty,
+          ]),
+          reason: 'Wait for getting user setting',
+        );
+        verifyNever(
+          mockCache.write(
+            key: AppAuthenticationRepository.userSettingCacheKey,
+            value: KTestText.userSetting,
+          ),
+        );
+        expect(
+          appAuthenticationRepository.userSetting,
+          emits(UserSetting.empty),
+        );
+      });
+      test('user', () async {
+        await expectLater(
+          appAuthenticationRepository.user,
           emitsInOrder([
             User.empty,
           ]),

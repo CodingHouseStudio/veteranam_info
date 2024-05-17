@@ -40,6 +40,8 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   /// Should only be used for testing purposes.
   @visibleForTesting
   static const userCacheKey = '__user_cache_key__';
+  @visibleForTesting
+  static const userSettingCacheKey = '__user_setting_cache_key__';
 
   /// Stream of [User] which will emit the current user when
   /// the authentication state changes.
@@ -62,12 +64,36 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
           }
         },
       );
+  @override
+  Stream<UserSetting> get userSetting {
+    return _firestoreService
+        .getUserSetting(
+      _firebaseAuth.currentUser?.uid ?? currentUser.id,
+    )
+        .map(
+      (firebaseUserSetting) {
+        if (firebaseUserSetting.isNotEmpty) {
+          debugPrint('================================================');
+          debugPrint('Firebase Auth State Changed: User is authenticated');
+          debugPrint('Firebase User Details: $firebaseUserSetting');
+          _cache.write(key: userSettingCacheKey, value: firebaseUserSetting);
+        } else {
+          debugPrint('Firebase Auth State Changed: '
+              'User is unauthenticated (User.empty)');
+        }
+        return firebaseUserSetting;
+      },
+    );
+  }
 
   //
   // /// Returns the current cached user.
   // /// Defaults to [User.empty] if there is no cached user.
   @override
   User get currentUser => _cache.read<User>(key: userCacheKey) ?? User.empty;
+  @override
+  UserSetting get currentUserSetting =>
+      _cache.read<UserSetting>(key: userSettingCacheKey) ?? UserSetting.empty;
 
   // /// Returns the current auth status.
   // /// Defaults to [AuthStatus.unknown] if there is no cached auth status.
@@ -186,13 +212,13 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
     return token;
   }
 
-  @override
-  Future<UserSetting> getUserSetting() async {
-    final userSetting = await _firestoreService.getUserSetting(
-      currentUser.id,
-    );
-    return userSetting;
-  }
+  // @override
+  // Future<String> getUserSetting() async {
+  //   final userSetting = await _firestoreService.getUserSetting(
+  //     currentUser.id,
+  //   );
+  //   return userSetting;
+  // }
 
   Future<Either<SomeFailure, bool>> _handleAuthOperation(
     Future<void> Function() operation,

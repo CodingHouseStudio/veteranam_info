@@ -26,8 +26,8 @@ void main() {
       when(mockAuthenticationRepository.currentUser).thenAnswer(
         (realInvocation) => User.empty,
       );
-      when(mockAuthenticationRepository.getUserSetting()).thenAnswer(
-        (realInvocation) async => UserSetting.empty,
+      when(mockAuthenticationRepository.currentUserSetting).thenAnswer(
+        (realInvocation) => UserSetting.empty,
       );
       mockHomeRepository = MockIHomeRepository();
       when(mockHomeRepository.getQuestions()).thenAnswer(
