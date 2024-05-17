@@ -50,26 +50,13 @@ class AuthenticationRepository {
     _userSettingSubscription ??=
         iAppAuthenticationRepository.userSetting.listen(
       (currentUserSetting) {
-        if (currentUserSetting.isNotEmpty) {
+        if (currentUser.isNotEmpty) {
           _userSettingController.add(
             currentUserSetting,
           );
         } else {
           _userSettingController.add(
-            UserSetting.empty,
-          );
-        }
-      },
-    );
-    _userSubscription ??= iAppAuthenticationRepository.user.listen(
-      (currentUser) {
-        if (currentUser.isNotEmpty) {
-          _authenticationStatuscontroller.add(
-            AuthenticationStatus.authenticated,
-          );
-        } else {
-          _authenticationStatuscontroller.add(
-            AuthenticationStatus.unauthenticated,
+            currentUserSetting,
           );
         }
       },
