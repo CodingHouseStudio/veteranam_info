@@ -36,33 +36,11 @@ void main() {
         await tester.pumpAndSettle();
       }
 
-      if (screenKey != KWidgetkeys.screen.contact.screen) {
-        await scrollingHelperInt(
-          tester: tester,
-          offset: KTestConstants.scrolling,
-          itemKey: buttonKey,
-        );
-      } else {
-        await scrollingHelperInt(
-          tester: tester,
-          offset: KTestConstants.scrolling,
-          itemKey: KWidgetkeys.screen.investors.donateCard,
-        );
-
-        await tester.ensureVisible(
-          find.byKey(KWidgetkeys.screen.investors.donateCard).last,
-        );
-        await tester.pumpAndSettle();
-
-        await scrollingHelperInt(
-          tester: tester,
-          itemKey: KWidgetkeys.widget.footer.widget,
-        );
-        await scrollingHelperInt(
-          tester: tester,
-          itemKey: buttonKey,
-        );
-      }
+      await scrollingHelperInt(
+        tester: tester,
+        offset: KTestConstants.scrolling,
+        itemKey: buttonKey,
+      );
 
       expect(
         find.byKey(buttonKey),
