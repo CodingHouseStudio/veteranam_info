@@ -13,9 +13,9 @@ part 'story_add_bloc.freezed.dart';
 class StoryAddBloc extends Bloc<StoryAddEvent, StoryAddState> {
   StoryAddBloc({
     required IStoryRepository storyRepository,
-    required AuthenticationRepository authenticationRepository,
+    required IAppAuthenticationRepository iAppAuthenticationRepository,
   })  : _storyRepository = storyRepository,
-        _authenticationRepository = authenticationRepository,
+        _iAppAuthenticationRepository = iAppAuthenticationRepository,
         super(
           const _Initial(
             story: MessageFieldModel.pure(),
@@ -31,8 +31,10 @@ class StoryAddBloc extends Bloc<StoryAddEvent, StoryAddState> {
     on<_Save>(_onSave);
   }
   final IStoryRepository _storyRepository;
-  final AuthenticationRepository _authenticationRepository;
-
+  final IAppAuthenticationRepository _iAppAuthenticationRepository;
+  final imagePicker = imagePickerValue;
+  @visibleForTesting
+  static ImagePicker imagePickerValue = ImagePicker();
   void _onStoryUpdated(
     _StoryUpdated event,
     Emitter<StoryAddState> emit,
@@ -63,7 +65,7 @@ class StoryAddBloc extends Bloc<StoryAddEvent, StoryAddState> {
     Emitter<StoryAddState> emit,
   ) async {
     final imageFieldModel = ImageFieldModel.dirty(
-      await ImagePicker().pickImage(source: ImageSource.gallery),
+      await imagePicker.pickImage(source: ImageSource.gallery),
     );
     if (imageFieldModel.value == null) return;
 
@@ -80,48 +82,47 @@ class StoryAddBloc extends Bloc<StoryAddEvent, StoryAddState> {
     Emitter<StoryAddState> emit,
   ) async {
     if (!Formz.validate([state.story, state.image]) ||
-        _authenticationRepository.currentUser.name == null) {
+        _iAppAuthenticationRepository.currentUser.name == null ||
+        _iAppAuthenticationRepository.currentUser.isEmpty) {
       emit(state.copyWith(formStatus: FormzSubmissionStatus.failure));
       return;
     }
-    if (_authenticationRepository.currentUser.isNotEmpty) {
-      final result = await _storyRepository.addStory(
-        StoryModel(
-          id: ExtendedDateTime.id,
-          date: ExtendedDateTime.current,
-          story: state.story.value,
-          userName: state.isAnonymously
-              ? null
-              : _authenticationRepository.currentUser.name,
-          image: state.image.value != null
-              ? [
-                  ImageModel(
-                    downloadURL: '',
-                    name: state.image.value!.name,
-                    ref: state.image.value!.path,
-                  ),
-                ]
-              : null,
-          userPhoto: _authenticationRepository.currentUser.photo != null &&
-                  !state.isAnonymously
-              ? [
-                  ImageModel(
-                    downloadURL: _authenticationRepository.currentUser.photo!,
-                  ),
-                ]
-              : null,
-          userId: _authenticationRepository.currentUser.id,
+    final result = await _storyRepository.addStory(
+      StoryModel(
+        id: ExtendedDateTime.id,
+        date: ExtendedDateTime.current,
+        story: state.story.value,
+        userName: state.isAnonymously
+            ? null
+            : _iAppAuthenticationRepository.currentUser.name,
+        image: state.image.value != null
+            ? [
+                ImageModel(
+                  downloadURL: state.image.value!.path,
+                  name: state.image.value!.name,
+                  ref: state.image.value!.path,
+                ),
+              ]
+            : null,
+        userPhoto: _iAppAuthenticationRepository.currentUser.photo != null &&
+                !state.isAnonymously
+            ? [
+                ImageModel(
+                  downloadURL: _iAppAuthenticationRepository.currentUser.photo!,
+                ),
+              ]
+            : null,
+        userId: _iAppAuthenticationRepository.currentUser.id,
+      ),
+    );
+    result.fold(
+      (l) => emit(state.copyWith(failure: l.toStoryAdd())),
+      (r) => emit(
+        state.copyWith(
+          formStatus: FormzSubmissionStatus.success,
+          failure: null,
         ),
-      );
-      result.fold(
-        (l) => emit(state.copyWith(failure: l.toStoryAdd())),
-        (r) => emit(
-          state.copyWith(
-            formStatus: FormzSubmissionStatus.success,
-            failure: null,
-          ),
-        ),
-      );
-    }
+      ),
+    );
   }
 }

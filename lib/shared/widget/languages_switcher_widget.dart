@@ -11,7 +11,7 @@ class LanguagesSwitcherWidget extends StatelessWidget {
     return PopupMenuButton<String>(
       key: KWidgetkeys.widget.languageSwitcher.widget,
       child: Container(
-        decoration: KWidgetTheme.boxDecorationCircular(context),
+        decoration: context.widgetTheme.boxDecorationCircular,
         padding: const EdgeInsets.symmetric(
           horizontal: KPadding.kPaddingSize8,
           vertical: KPadding.kPaddingSize10,

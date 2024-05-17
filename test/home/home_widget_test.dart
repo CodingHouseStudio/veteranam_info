@@ -20,7 +20,7 @@ void main() {
     late IHomeRepository mockHomeRepository;
     late IFeedbackRepository mockFeedbackRepository;
     setUp(() {
-      ExtendedDateTime.customTime = KTestText.dateTime;
+      ExtendedDateTime.current = KTestText.dateTime;
       ExtendedDateTime.id = KTestText.feedbackModel.id;
       mockAuthenticationRepository = MockAuthenticationRepository();
       when(mockAuthenticationRepository.currentUser).thenAnswer(

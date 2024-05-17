@@ -11,10 +11,10 @@ class FirestoreService {
     // Initialization logic can't use await directly in constructor
     _initFirestoreSettings();
   }
-  final FirebaseFirestore _db = firebaseFirestore ?? FirebaseFirestore.instance;
+  final FirebaseFirestore _db = firebaseFirestore;
 
   @visibleForTesting
-  static FirebaseFirestore? firebaseFirestore;
+  static FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
 
   Future<void> _initFirestoreSettings() async {
     // Set settings for persistence based on platform

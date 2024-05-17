@@ -9,7 +9,7 @@ class StoryModel with _$StoryModel {
   const factory StoryModel({
     required String id,
     required DateTime date,
-    required String story,
+    @SubtitleConverter() required String story,
     required String userId,
     String? userName,
     @ImageConverter() List<ImageModel>? userPhoto,

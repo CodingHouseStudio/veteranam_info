@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:kozak/shared/shared.dart';
 
-class SecondartButtonWidget extends StatelessWidget {
-  const SecondartButtonWidget({
+class SecondaryButtonWidget extends StatelessWidget {
+  const SecondaryButtonWidget({
     required this.isDesk,
     required this.text,
     required this.onPressed,
@@ -17,7 +17,7 @@ class SecondartButtonWidget extends StatelessWidget {
     return Align(
       alignment: Alignment.centerLeft,
       child: TextButton.icon(
-        style: KButtonStyles.secondaryButtonStyle(context),
+        style: context.buttonStyle.secondaryButtonStyle,
         icon: KIcon.plus,
         onPressed: onPressed,
         label: Text(
