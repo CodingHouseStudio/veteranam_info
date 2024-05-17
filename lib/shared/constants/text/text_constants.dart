@@ -120,6 +120,7 @@ abstract class KAppText {
   static const String authChange = 'AuthenticationStatusChanged:';
   static const String backendString = '';
   static const String usernameToken = 'USERNAME_TOKEN';
+
   static List<String> routes({required bool hasAccount}) => [
         KRoute.aboutUs.name,
         KRoute.investors.name,

@@ -27,7 +27,7 @@ void main() {
       build: () => investorsWatcherBloc,
       act: (bloc) async {
         when(mockInvestorsRepository.getFunds()).thenAnswer(
-          (_) async => Right(KTestText.fundItems),
+          (_) async => const Right(KTestText.fundItems),
         );
         bloc.add(const InvestorsWatcherEvent.started());
       },

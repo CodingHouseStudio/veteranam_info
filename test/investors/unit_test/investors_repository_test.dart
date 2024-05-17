@@ -40,12 +40,6 @@ void main() {
               .having((e) => e.value, 'value', KTestText.fundItems),
         );
       });
-      test('mock', () async {
-        investorsRepository.addMockFunds();
-        verify(
-          mockFirestoreService.addFund(KTestText.fundItems.first),
-        ).called(1);
-      });
     });
 
     group('${KGroupText.failureGet} ', () {

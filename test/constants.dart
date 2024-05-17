@@ -172,7 +172,7 @@ abstract class KTestText {
   static final discountModelItems = <DiscountModel>[
     for (var i = 0; i < 50; i++)
       DiscountModel(
-        id: dateTime.microsecondsSinceEpoch.toString(),
+        id: DateTime.now().toLocal().microsecondsSinceEpoch.toString(),
         discount: KMockText.discount,
         city: KMockText.cityDiscount,
         service: KMockText.serviceDiscount,
@@ -180,6 +180,7 @@ abstract class KTestText {
         date: DateTime.now(),
         instruction: KMockText.instructionDiscount,
         preInstructionDiscount: KMockText.preInstructionDiscount,
+        tags: [],
       ),
   ];
 

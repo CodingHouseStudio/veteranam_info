@@ -26,9 +26,7 @@ extension DiscountModelExtensions on List<DiscountModel> {
   List<String> get overallTags {
     final allTags = <String>[];
     for (final item in this) {
-      if (item.tags != null) {
-        allTags.addAll(item.tags!);
-      }
+      allTags.addAll(item.tags);
     }
     return allTags.toSet().toList();
   }
