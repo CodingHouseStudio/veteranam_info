@@ -27,8 +27,8 @@ void main() {
         when(mockAppAuthenticationRepository.signUpWithGoogle()).thenAnswer(
           (_) async => const Right(true),
         );
-        when(mockAppAuthenticationRepository.getUserSetting()).thenAnswer(
-          (_) async => const UserSetting(id: KTestText.field),
+        when(mockAppAuthenticationRepository.currentUserSetting).thenAnswer(
+          (_) => const UserSetting(id: KTestText.field),
         );
         when(mockAppAuthenticationRepository.user).thenAnswer(
           (_) => Stream.value(KTestText.user),
@@ -70,7 +70,7 @@ void main() {
       });
       test('get user setting', () async {
         expect(
-          await authenticationRepository.getUserSetting(),
+          authenticationRepository.currentUserSetting,
           const UserSetting(id: KTestText.field),
         );
       });

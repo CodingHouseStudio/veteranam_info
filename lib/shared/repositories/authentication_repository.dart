@@ -18,17 +18,52 @@ class AuthenticationRepository {
       onListen: _onStatusStreamListen,
       onCancel: _onStatusStreamCancel,
     );
+    _userSettingController = StreamController<UserSetting>.broadcast(
+      onListen: _onUserSettingStreamListen,
+      onCancel: _onUserSettingStreamCancel,
+    );
   }
 
   final IAppAuthenticationRepository iAppAuthenticationRepository;
-  late final StreamController<AuthenticationStatus>
-      _authenticationStatuscontroller;
+  late StreamController<AuthenticationStatus> _authenticationStatuscontroller;
+  late StreamController<UserSetting> _userSettingController;
   StreamSubscription<User>? _userSubscription;
+  StreamSubscription<UserSetting>? _userSettingSubscription;
 
   void _onStatusStreamListen() {
     _userSubscription ??= iAppAuthenticationRepository.user.listen(
       (currentUser) {
-        if (currentUser != User.empty) {
+        if (currentUser.isNotEmpty) {
+          _authenticationStatuscontroller.add(
+            AuthenticationStatus.authenticated,
+          );
+        } else {
+          _authenticationStatuscontroller.add(
+            AuthenticationStatus.unauthenticated,
+          );
+        }
+      },
+    );
+  }
+
+  void _onUserSettingStreamListen() {
+    _userSettingSubscription ??=
+        iAppAuthenticationRepository.userSetting.listen(
+      (currentUserSetting) {
+        if (currentUserSetting.isNotEmpty) {
+          _userSettingController.add(
+            currentUserSetting,
+          );
+        } else {
+          _userSettingController.add(
+            UserSetting.empty,
+          );
+        }
+      },
+    );
+    _userSubscription ??= iAppAuthenticationRepository.user.listen(
+      (currentUser) {
+        if (currentUser.isNotEmpty) {
           _authenticationStatuscontroller.add(
             AuthenticationStatus.authenticated,
           );
@@ -46,8 +81,14 @@ class AuthenticationRepository {
     _userSubscription = null;
   }
 
+  void _onUserSettingStreamCancel() {
+    _userSettingSubscription?.cancel();
+    _userSettingSubscription = null;
+  }
+
   Stream<AuthenticationStatus> get status =>
       _authenticationStatuscontroller.stream;
+  Stream<UserSetting> get userSetting => _userSettingController.stream;
 
   // /// Stream of [User] which will emit the current user when
   // /// the authentication state changes.
@@ -65,27 +106,9 @@ class AuthenticationRepository {
     return iAppAuthenticationRepository.currentUser;
   }
 
-  Future<UserSetting> getUserSetting() async {
-    return iAppAuthenticationRepository.getUserSetting();
+  UserSetting get currentUserSetting {
+    return iAppAuthenticationRepository.currentUserSetting;
   }
-
-  // Stream<AuthenticationStatus> get status async* {
-  //   debugPrint('entering kingdom');
-  //   try {
-  //     final result = await iAppAuthenticationRepository.isLoggedIn();
-  //     debugPrint('result: $result');
-  //     if (result) {
-  //       yield AuthenticationStatus.authenticated;
-  //     } else {
-  //       yield AuthenticationStatus.unauthenticated;
-  //     }
-  //   } catch (e) {
-  //     debugPrint(e.toString());
-  //     yield AuthenticationStatus.unknown;
-  //   }
-  //
-  //   yield* _controller.stream;
-  // }
 
   Future<Either<SomeFailure, bool>> logIn({
     required String email,
@@ -128,19 +151,6 @@ class AuthenticationRepository {
       },
     );
   }
-
-  // return result.fold(
-  //   (l) {
-  //     debugPrint('error: $l');
-  //     _controller.add(AuthenticationStatus.unauthenticated);
-  //     return false;
-  //   },
-  //   (r) {
-  //     debugPrint('authenticated');
-  //     _controller.add(AuthenticationStatus.authenticated);
-  //     return true;
-  //   },
-  // );
 
   Future<Either<SomeFailure, bool>> logOut() async {
     final resault = await iAppAuthenticationRepository.logOut();
@@ -186,5 +196,8 @@ class AuthenticationRepository {
   void dispose() {
     _authenticationStatuscontroller.close();
     _userSubscription?.cancel();
+
+    _userSettingController.close();
+    _userSettingSubscription?.cancel();
   }
 }

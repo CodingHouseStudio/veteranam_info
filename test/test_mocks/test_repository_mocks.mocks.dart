@@ -45,8 +45,8 @@ class _FakeEither_0<L, R> extends _i1.SmartFake implements _i2.Either<L, R> {
         );
 }
 
-class _FakeUserSetting_1 extends _i1.SmartFake implements _i3.UserSetting {
-  _FakeUserSetting_1(
+class _FakeUser_1 extends _i1.SmartFake implements _i3.User {
+  _FakeUser_1(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -55,8 +55,8 @@ class _FakeUserSetting_1 extends _i1.SmartFake implements _i3.UserSetting {
         );
 }
 
-class _FakeUser_2 extends _i1.SmartFake implements _i3.User {
-  _FakeUser_2(
+class _FakeUserSetting_2 extends _i1.SmartFake implements _i3.UserSetting {
+  _FakeUserSetting_2(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -658,48 +658,6 @@ class MockFirestoreService extends _i1.Mock implements _i3.FirestoreService {
       ) as _i8.Future<void>);
 
   @override
-  _i8.Future<void> setUserSetting({
-    required _i3.UserSetting? userSetting,
-    required String? userId,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #setUserSetting,
-          [],
-          {
-            #userSetting: userSetting,
-            #userId: userId,
-          },
-        ),
-        returnValue: _i8.Future<void>.value(),
-        returnValueForMissingStub: _i8.Future<void>.value(),
-      ) as _i8.Future<void>);
-
-  @override
-  _i8.Future<_i3.UserSetting> getUserSetting(String? userId) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #getUserSetting,
-          [userId],
-        ),
-        returnValue: _i8.Future<_i3.UserSetting>.value(_FakeUserSetting_1(
-          this,
-          Invocation.method(
-            #getUserSetting,
-            [userId],
-          ),
-        )),
-        returnValueForMissingStub:
-            _i8.Future<_i3.UserSetting>.value(_FakeUserSetting_1(
-          this,
-          Invocation.method(
-            #getUserSetting,
-            [userId],
-          ),
-        )),
-      ) as _i8.Future<_i3.UserSetting>);
-
-  @override
   _i8.Stream<List<_i3.InformationModel>> getInformations() =>
       (super.noSuchMethod(
         Invocation.method(
@@ -721,6 +679,35 @@ class MockFirestoreService extends _i1.Mock implements _i3.FirestoreService {
         returnValue: _i8.Future<void>.value(),
         returnValueForMissingStub: _i8.Future<void>.value(),
       ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<void> setUserSetting({
+    required _i3.UserSetting? userSetting,
+    required String? userId,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #setUserSetting,
+          [],
+          {
+            #userSetting: userSetting,
+            #userId: userId,
+          },
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Stream<_i3.UserSetting> getUserSetting(String? userId) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getUserSetting,
+          [userId],
+        ),
+        returnValue: _i8.Stream<_i3.UserSetting>.empty(),
+        returnValueForMissingStub: _i8.Stream<_i3.UserSetting>.empty(),
+      ) as _i8.Stream<_i3.UserSetting>);
 
   @override
   _i8.Stream<List<_i3.WorkModel>> getWorks() => (super.noSuchMethod(
@@ -818,17 +805,37 @@ class MockIAppAuthenticationRepository extends _i1.Mock
       ) as _i8.Stream<_i3.User>);
 
   @override
+  _i8.Stream<_i3.UserSetting> get userSetting => (super.noSuchMethod(
+        Invocation.getter(#userSetting),
+        returnValue: _i8.Stream<_i3.UserSetting>.empty(),
+        returnValueForMissingStub: _i8.Stream<_i3.UserSetting>.empty(),
+      ) as _i8.Stream<_i3.UserSetting>);
+
+  @override
   _i3.User get currentUser => (super.noSuchMethod(
         Invocation.getter(#currentUser),
-        returnValue: _FakeUser_2(
+        returnValue: _FakeUser_1(
           this,
           Invocation.getter(#currentUser),
         ),
-        returnValueForMissingStub: _FakeUser_2(
+        returnValueForMissingStub: _FakeUser_1(
           this,
           Invocation.getter(#currentUser),
         ),
       ) as _i3.User);
+
+  @override
+  _i3.UserSetting get currentUserSetting => (super.noSuchMethod(
+        Invocation.getter(#currentUserSetting),
+        returnValue: _FakeUserSetting_2(
+          this,
+          Invocation.getter(#currentUserSetting),
+        ),
+        returnValueForMissingStub: _FakeUserSetting_2(
+          this,
+          Invocation.getter(#currentUserSetting),
+        ),
+      ) as _i3.UserSetting);
 
   @override
   _i8.Future<_i2.Either<_i3.SomeFailure, bool>> signUpWithGoogle() =>
@@ -982,29 +989,6 @@ class MockIAppAuthenticationRepository extends _i1.Mock
         returnValue: _i8.Future<String?>.value(),
         returnValueForMissingStub: _i8.Future<String?>.value(),
       ) as _i8.Future<String?>);
-
-  @override
-  _i8.Future<_i3.UserSetting> getUserSetting() => (super.noSuchMethod(
-        Invocation.method(
-          #getUserSetting,
-          [],
-        ),
-        returnValue: _i8.Future<_i3.UserSetting>.value(_FakeUserSetting_1(
-          this,
-          Invocation.method(
-            #getUserSetting,
-            [],
-          ),
-        )),
-        returnValueForMissingStub:
-            _i8.Future<_i3.UserSetting>.value(_FakeUserSetting_1(
-          this,
-          Invocation.method(
-            #getUserSetting,
-            [],
-          ),
-        )),
-      ) as _i8.Future<_i3.UserSetting>);
 
   @override
   _i8.Future<_i2.Either<_i3.SomeFailure, bool>> sendVerificationCode(
@@ -1129,17 +1113,37 @@ class MockAppAuthenticationRepository extends _i1.Mock
       ) as _i8.Stream<_i3.User>);
 
   @override
+  _i8.Stream<_i3.UserSetting> get userSetting => (super.noSuchMethod(
+        Invocation.getter(#userSetting),
+        returnValue: _i8.Stream<_i3.UserSetting>.empty(),
+        returnValueForMissingStub: _i8.Stream<_i3.UserSetting>.empty(),
+      ) as _i8.Stream<_i3.UserSetting>);
+
+  @override
   _i3.User get currentUser => (super.noSuchMethod(
         Invocation.getter(#currentUser),
-        returnValue: _FakeUser_2(
+        returnValue: _FakeUser_1(
           this,
           Invocation.getter(#currentUser),
         ),
-        returnValueForMissingStub: _FakeUser_2(
+        returnValueForMissingStub: _FakeUser_1(
           this,
           Invocation.getter(#currentUser),
         ),
       ) as _i3.User);
+
+  @override
+  _i3.UserSetting get currentUserSetting => (super.noSuchMethod(
+        Invocation.getter(#currentUserSetting),
+        returnValue: _FakeUserSetting_2(
+          this,
+          Invocation.getter(#currentUserSetting),
+        ),
+        returnValueForMissingStub: _FakeUserSetting_2(
+          this,
+          Invocation.getter(#currentUserSetting),
+        ),
+      ) as _i3.UserSetting);
 
   @override
   _i8.Future<_i2.Either<_i3.SomeFailure, bool>> signUpWithGoogle() =>
@@ -1295,29 +1299,6 @@ class MockAppAuthenticationRepository extends _i1.Mock
       ) as _i8.Future<String?>);
 
   @override
-  _i8.Future<_i3.UserSetting> getUserSetting() => (super.noSuchMethod(
-        Invocation.method(
-          #getUserSetting,
-          [],
-        ),
-        returnValue: _i8.Future<_i3.UserSetting>.value(_FakeUserSetting_1(
-          this,
-          Invocation.method(
-            #getUserSetting,
-            [],
-          ),
-        )),
-        returnValueForMissingStub:
-            _i8.Future<_i3.UserSetting>.value(_FakeUserSetting_1(
-          this,
-          Invocation.method(
-            #getUserSetting,
-            [],
-          ),
-        )),
-      ) as _i8.Future<_i3.UserSetting>);
-
-  @override
   _i8.Future<_i2.Either<_i3.SomeFailure, bool>> sendVerificationCode(
           {required String? email}) =>
       (super.noSuchMethod(
@@ -1428,40 +1409,37 @@ class MockAuthenticationRepository extends _i1.Mock
       ) as _i8.Stream<_i3.AuthenticationStatus>);
 
   @override
+  _i8.Stream<_i3.UserSetting> get userSetting => (super.noSuchMethod(
+        Invocation.getter(#userSetting),
+        returnValue: _i8.Stream<_i3.UserSetting>.empty(),
+        returnValueForMissingStub: _i8.Stream<_i3.UserSetting>.empty(),
+      ) as _i8.Stream<_i3.UserSetting>);
+
+  @override
   _i3.User get currentUser => (super.noSuchMethod(
         Invocation.getter(#currentUser),
-        returnValue: _FakeUser_2(
+        returnValue: _FakeUser_1(
           this,
           Invocation.getter(#currentUser),
         ),
-        returnValueForMissingStub: _FakeUser_2(
+        returnValueForMissingStub: _FakeUser_1(
           this,
           Invocation.getter(#currentUser),
         ),
       ) as _i3.User);
 
   @override
-  _i8.Future<_i3.UserSetting> getUserSetting() => (super.noSuchMethod(
-        Invocation.method(
-          #getUserSetting,
-          [],
+  _i3.UserSetting get currentUserSetting => (super.noSuchMethod(
+        Invocation.getter(#currentUserSetting),
+        returnValue: _FakeUserSetting_2(
+          this,
+          Invocation.getter(#currentUserSetting),
         ),
-        returnValue: _i8.Future<_i3.UserSetting>.value(_FakeUserSetting_1(
+        returnValueForMissingStub: _FakeUserSetting_2(
           this,
-          Invocation.method(
-            #getUserSetting,
-            [],
-          ),
-        )),
-        returnValueForMissingStub:
-            _i8.Future<_i3.UserSetting>.value(_FakeUserSetting_1(
-          this,
-          Invocation.method(
-            #getUserSetting,
-            [],
-          ),
-        )),
-      ) as _i8.Future<_i3.UserSetting>);
+          Invocation.getter(#currentUserSetting),
+        ),
+      ) as _i3.UserSetting);
 
   @override
   _i8.Future<_i2.Either<_i3.SomeFailure, bool>> logIn({

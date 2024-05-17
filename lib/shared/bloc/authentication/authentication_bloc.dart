@@ -19,7 +19,8 @@ class AuthenticationBloc
           authenticationRepository.currentUser.isNotEmpty
               ? AuthenticationState.authenticated(
                   currentUser: authenticationRepository.currentUser,
-                  currentUserSetting: UserSetting.empty,
+                  currentUserSetting:
+                      authenticationRepository.currentUserSetting,
                 )
               : const AuthenticationState.unknown(),
         ) {
@@ -35,19 +36,21 @@ class AuthenticationBloc
   final AuthenticationRepository _authenticationRepository;
   late StreamSubscription<AuthenticationStatus>
       authenticationStatusSubscription;
+  late StreamSubscription<UserSetting> userSettingSubscription;
   static const String tokenKey = KAppText.authTokenKey;
 
   @override
   Future<void> close() {
     authenticationStatusSubscription.cancel();
+    userSettingSubscription.cancel();
     _authenticationRepository.dispose();
     return super.close();
   }
 
-  Future<void> _onAuthenticationStatusChanged(
+  void _onAuthenticationStatusChanged(
     AuthenticationStatusChanged event,
     Emitter<AuthenticationState> emit,
-  ) async {
+  ) {
     log('${KAppText.authChange} ${event.status}');
     switch (event.status) {
       case AuthenticationStatus.unauthenticated:
@@ -56,8 +59,7 @@ class AuthenticationBloc
         return emit(
           AuthenticationState.authenticated(
             currentUser: _authenticationRepository.currentUser,
-            currentUserSetting:
-                await _authenticationRepository.getUserSetting(),
+            currentUserSetting: _authenticationRepository.currentUserSetting,
           ),
         );
       case AuthenticationStatus.unknown:
@@ -76,13 +78,11 @@ class AuthenticationBloc
     AuthenticationInitialized event,
     Emitter<AuthenticationState> emit,
   ) async {
+    userSettingSubscription = _authenticationRepository.userSetting
+        .listen((userSetting) => add(_AppUserSettingChanged(userSetting)));
     authenticationStatusSubscription = _authenticationRepository.status.listen(
       (status) => add(AuthenticationStatusChanged(status)),
     );
-    // userSettingSubscription =
-    //     _authenticationRepository.userSettingStream.listen(
-    //   (userSetting) => add(_AppUserSettingChanged(userSetting)),
-    // );
   }
 
   void _onUserChanged(
@@ -120,14 +120,9 @@ class AuthenticationBloc
         locale: event.language,
       );
     } else {
-      userSetting = await _authenticationRepository.getUserSetting();
+      userSetting = _authenticationRepository.currentUserSetting;
       userSetting = userSetting.copyWith(
         locale: event.language,
-      );
-    }
-    if (state.user != null) {
-      await _authenticationRepository.updateUserSetting(
-        userSetting: userSetting,
       );
     }
     emit(
@@ -135,6 +130,11 @@ class AuthenticationBloc
         userSetting: userSetting,
       ),
     );
+    if (state.user != null) {
+      await _authenticationRepository.updateUserSetting(
+        userSetting: userSetting,
+      );
+    }
   }
 
   Future<void> _onAppUserRoleChanged(
