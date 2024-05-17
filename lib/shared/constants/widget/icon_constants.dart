@@ -1,7 +1,7 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:injectable/injectable.dart';
 
 class _KIcon extends Icon {
   const _KIcon(super.icon);
@@ -25,7 +25,32 @@ class _KIcon extends Icon {
   }
 }
 
+class _KImage extends Image {
+  const _KImage({required super.image});
+
+  Widget setIconKey(Key key, {Color? changeColor}) {
+    return SizedBox(
+      child: Image.asset(
+        named.name!,
+        key: key,
+        color: changeColor ?? color,
+      ),
+    );
+  }
+}
+
 abstract class KIcon {
+  static const _KImage linkedIn =
+      _KImage(image: AssetImage('assets/icons/instagram.png'));
+  static const _KImage instagram =
+      _KImage(image: AssetImage('assets/icons/linkedin.png'));
+  static const _KImage facebook = _KImage(
+    image: AssetImage('assets/icons/social_icons_f.png'),
+  );
+  static const _KImage apple =
+      _KImage(image: AssetImage('assets/icons/social_icons.png'));
+  static const _KImage google =
+      _KImage(image: AssetImage('assets/icons/social_icons_g.png'));
   static const _KIcon arrowLeft = _KIcon(Icons.arrow_left);
   static const _KIcon arrowRight = _KIcon(Icons.arrow_right);
   static const _KIcon mic = _KIcon(Icons.mic_none_outlined);
@@ -38,9 +63,6 @@ abstract class KIcon {
   static const _KIcon button = _KIcon(Icons.smart_button);
   static const _KIcon trailing = _KIcon(Icons.arrow_drop_down);
   static const _KIcon trailingUp = _KIcon(Icons.arrow_drop_up);
-  static const _KIcon linkedIn = _KIcon(FontAwesomeIcons.linkedinIn);
-  static const _KIcon instagram = _KIcon(FontAwesomeIcons.instagram);
-  static const _KIcon facebook = _KIcon(FontAwesomeIcons.facebookF);
   static const _KIcon arrowUpRight = _KIcon(Icons.arrow_outward);
   static const _KIcon like = _KIcon(Icons.thumb_up_outlined);
   static const _KIcon activeLike = _KIcon(Icons.thumb_up);
@@ -52,14 +74,12 @@ abstract class KIcon {
   static const _KIcon error = _KIcon(Icons.error);
   static const _KIcon safe = _KIcon(Icons.bookmark_border_sharp);
   static const _KIcon check = _KIcon(Icons.check);
-  static const _KIcon google = _KIcon(FontAwesomeIcons.google);
-  static const _KIcon volum = _KIcon(FontAwesomeIcons.volumeHigh);
+  static const _KIcon volum = _KIcon(Icons.volume_up);
   static const _KIcon eye = _KIcon(Icons.visibility_outlined);
   static const _KIcon eyeOff = _KIcon(Icons.visibility_off_outlined);
-  static const _KIcon refresh = _KIcon(FontAwesomeIcons.rotate);
-  static const _KIcon apple = _KIcon(FontAwesomeIcons.apple);
-  static const _KIcon message = _KIcon(FontAwesomeIcons.message);
-  static const _KIcon star = _KIcon(FontAwesomeIcons.star);
+  static const _KIcon refresh = _KIcon(Icons.refresh);
+  static const _KIcon message = _KIcon(Icons.message);
+  static const _KIcon star = _KIcon(Icons.star);
   static const _KIcon attachFile = _KIcon(Icons.attach_file);
   static const _KIcon chevronLeft = _KIcon(Icons.chevron_left);
   static const _KIcon addImage = _KIcon(Icons.add_photo_alternate_sharp);
