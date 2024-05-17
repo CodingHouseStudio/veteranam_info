@@ -10,8 +10,6 @@ class TextFieldWidget extends StatefulWidget {
     required this.isDesk,
     this.textAlign,
     super.key,
-    this.width,
-    this.height,
     this.errorText,
     this.keyboardType,
     this.maxLines,
@@ -38,8 +36,6 @@ class TextFieldWidget extends StatefulWidget {
     this.hintStyle,
   });
   final Key widgetKey;
-  final double? width;
-  final double? height;
   final TextAlign? textAlign;
   final ValueChanged<String>? onChanged;
   final String hintText;
@@ -76,48 +72,44 @@ class TextFieldWidget extends StatefulWidget {
 class _TextFieldWidgetState extends State<TextFieldWidget> {
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: widget.width,
-      height: widget.height,
-      child: TextField(
-        key: widget.widgetKey,
-        expands: widget.expands ?? false,
-        focusNode: widget.focusNode,
-        enabled: widget.enabled,
-        readOnly: widget.readOnly ?? false,
-        onSubmitted: widget.onSubmitted,
-        onEditingComplete: widget.onEditingCompleted,
-        obscureText: widget.obscureText,
-        autocorrect: !widget.obscureText,
-        controller: widget.controller,
-        maxLines: widget.expands == null ? widget.maxLines ?? 1 : null,
-        maxLength: widget.maxLength,
-        keyboardType: widget.keyboardType ?? TextInputType.text,
-        textInputAction: TextInputAction.done,
-        textAlign: widget.textAlign ?? TextAlign.start,
-        style: widget.isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
-        // context.theme.textTheme.headlineSmall,
-        onChanged: widget.onChanged,
-        decoration: context.widgetTheme.inputDecoration.copyWith(
-          hintStyle: widget.hintStyle,
-          contentPadding: widget.contentPadding ??
-              (widget.isDesk
-                  ? const EdgeInsets.all(KPadding.kPaddingSize24)
-                  : const EdgeInsets.all(KPadding.kPaddingSize16)),
-          labelText: widget.labelText,
-          border: widget.border,
-          enabledBorder: widget.enabledBorder,
-          disabledBorder: widget.border,
-          focusedBorder: widget.focusedBorder,
-          focusedErrorBorder: kIsWeb ? null : widget.border,
-          fillColor: widget.fillColor,
-          hintText: widget.hintText,
-          errorText: widget.errorText,
-          errorStyle: context.textStyle.error14,
-          suffixIcon: widget.suffixIcon,
-          prefixIcon: widget.prefixIcon,
-          errorMaxLines: widget.errorMaxLines,
-        ),
+    return TextField(
+      key: widget.widgetKey,
+      expands: widget.expands ?? false,
+      focusNode: widget.focusNode,
+      enabled: widget.enabled,
+      readOnly: widget.readOnly ?? false,
+      onSubmitted: widget.onSubmitted,
+      onEditingComplete: widget.onEditingCompleted,
+      obscureText: widget.obscureText,
+      autocorrect: !widget.obscureText,
+      controller: widget.controller,
+      maxLines: widget.expands == null ? widget.maxLines ?? 1 : null,
+      maxLength: widget.maxLength,
+      keyboardType: widget.keyboardType ?? TextInputType.text,
+      textInputAction: TextInputAction.done,
+      textAlign: widget.textAlign ?? TextAlign.start,
+      style: widget.isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
+      // context.theme.textTheme.headlineSmall,
+      onChanged: widget.onChanged,
+      decoration: context.widgetTheme.inputDecoration.copyWith(
+        hintStyle: widget.hintStyle,
+        contentPadding: widget.contentPadding ??
+            (widget.isDesk
+                ? const EdgeInsets.all(KPadding.kPaddingSize24)
+                : const EdgeInsets.all(KPadding.kPaddingSize16)),
+        labelText: widget.labelText,
+        border: widget.border,
+        enabledBorder: widget.enabledBorder,
+        disabledBorder: widget.border,
+        focusedBorder: widget.focusedBorder,
+        focusedErrorBorder: kIsWeb ? null : widget.border,
+        fillColor: widget.fillColor,
+        hintText: widget.hintText,
+        errorText: widget.errorText,
+        errorStyle: context.textStyle.error14,
+        suffixIcon: widget.suffixIcon,
+        prefixIcon: widget.prefixIcon,
+        errorMaxLines: widget.errorMaxLines,
       ),
     );
   }
