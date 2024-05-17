@@ -1,5 +1,4 @@
 export 'boxes_helper.dart';
-export 'feedback/feedback.dart';
 export 'home_box_helper.dart';
 export 'home_initial_helper.dart';
 export 'home_pump_app_helper.dart';

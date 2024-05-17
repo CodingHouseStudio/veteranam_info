@@ -43,15 +43,23 @@ class _InvestorsBodyWidgetState extends State<InvestorsBodyWidget> {
         builder: (context, state) {
           return ScaffoldWidget(
             mainChildWidgetsFunction: ({required isDesk}) {
-              final childWidgets = _feedbackWidgetList(
-                context: context,
-                isDesk: isDesk,
-                nameController: nameController,
-                emailController: emailController,
-                messageController: messageController,
-                feedbackKey: feedbackKey,
-                feedbackBoxKey: feedbackBoxKey,
-              );
+              final childWidgets = [
+                if (isDesk)
+                  KSizedBox.kHeightSizedBox56
+                else
+                  KSizedBox.kHeightSizedBox40,
+                ...TitleWidget.titleWidgetList(
+                  title: context.l10n.funds,
+                  titleKey: KWidgetkeys.screen.investors.fundTitle,
+                  subtitle: context.l10n.fundsSubtitle,
+                  subtitleKey: KWidgetkeys.screen.investors.fundSubtitle,
+                  isDesk: isDesk,
+                ),
+                if (isDesk)
+                  KSizedBox.kHeightSizedBox56
+                else
+                  KSizedBox.kHeightSizedBox24,
+              ];
               switch (_) {
                 case InvestorsWatcherStateIntital():
                   childWidgets.add(const CircularProgressIndicator.adaptive());
@@ -112,10 +120,16 @@ class _InvestorsBodyWidgetState extends State<InvestorsBodyWidget> {
                   childWidgets.add(const CircularProgressIndicator.adaptive());
               }
               return childWidgets
-                ..add(
-                  isDesk
-                      ? KSizedBox.kHeightSizedBox56
-                      : KSizedBox.kHeightSizedBox40,
+                ..addAll(
+                  _feedbackWidgetList(
+                    context: context,
+                    isDesk: isDesk,
+                    nameController: nameController,
+                    emailController: emailController,
+                    messageController: messageController,
+                    feedbackKey: feedbackKey,
+                    feedbackBoxKey: feedbackBoxKey,
+                  ),
                 );
             },
           );
