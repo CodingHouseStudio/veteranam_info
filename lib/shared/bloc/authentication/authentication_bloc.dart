@@ -27,7 +27,7 @@ class AuthenticationBloc
     on<AuthenticationStatusChanged>(_onAuthenticationStatusChanged);
     on<AuthenticationLogoutRequested>(_onAuthenticationLogoutRequested);
     on<AuthenticationInitialized>(_onAuthenticationInitialized);
-    on<_AppUserChanged>(_onUserChanged);
+    // on<_AppUserChanged>(_onUserChanged);
     on<_AppUserSettingChanged>(_onUserSettingChanged);
     on<AppLanguageChanged>(_onAppLanguageChanged);
     on<AppUserRoleChanged>(_onAppUserRoleChanged);
@@ -85,17 +85,17 @@ class AuthenticationBloc
     );
   }
 
-  void _onUserChanged(
-    _AppUserChanged event,
-    Emitter<AuthenticationState> emit,
-  ) {
-    emit(
-      AuthenticationState.authenticated(
-        currentUser: event.user,
-        currentUserSetting: state.userSetting,
-      ),
-    );
-  }
+  // void _onUserChanged(
+  //   _AppUserChanged event,
+  //   Emitter<AuthenticationState> emit,
+  // ) {
+  //   emit(
+  //     AuthenticationState.authenticated(
+  //       currentUser: event.user,
+  //       currentUserSetting: state.userSetting,
+  //     ),
+  //   );
+  // }
 
   void _onUserSettingChanged(
     _AppUserSettingChanged event,
@@ -112,25 +112,11 @@ class AuthenticationBloc
     AppLanguageChanged event,
     Emitter<AuthenticationState> emit,
   ) async {
-    late UserSetting userSetting;
-    if (state.userSetting.isNotEmpty ||
-        state.user == null ||
-        state.user!.isEmpty) {
-      userSetting = state.userSetting.copyWith(
-        locale: event.language,
-      );
-    } else {
-      userSetting = _authenticationRepository.currentUserSetting;
-      userSetting = userSetting.copyWith(
-        locale: event.language,
-      );
-    }
-    emit(
-      state.copyWith(
-        userSetting: userSetting,
-      ),
+    final userSetting = state.userSetting.copyWith(
+      locale: event.language,
     );
-    if (state.user != null) {
+    add(_AppUserSettingChanged(userSetting));
+    if (state.userSetting.isNotEmpty) {
       await _authenticationRepository.updateUserSetting(
         userSetting: userSetting,
       );
@@ -141,18 +127,14 @@ class AuthenticationBloc
     AppUserRoleChanged event,
     Emitter<AuthenticationState> emit,
   ) async {
-    if (state.user != null) {
+    if (state.userSetting.isNotEmpty) {
       final userSetting = state.userSetting.copyWith(
         userRole: event.userRole,
         roleIsConfirmed: false,
       );
+      add(_AppUserSettingChanged(userSetting));
       await _authenticationRepository.updateUserSetting(
         userSetting: userSetting,
-      );
-      emit(
-        state.copyWith(
-          userSetting: userSetting,
-        ),
       );
     }
   }

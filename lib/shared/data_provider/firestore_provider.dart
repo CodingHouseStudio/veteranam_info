@@ -101,7 +101,7 @@ class FirestoreService {
     return _db
         .collection(FirebaseCollectionName.userSettings)
         .doc(userId)
-        .set(userSetting.toJson());
+        .set(userSetting.copyWith(id: userId).toJson());
   }
 
   Stream<UserSetting> getUserSetting(String userId) => _db
