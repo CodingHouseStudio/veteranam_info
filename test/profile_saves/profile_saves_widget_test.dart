@@ -1,9 +1,9 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 
-import '../profile/helper/helper.dart';
 import '../text_dependency.dart';
 import 'helper/profile_saves_initial_helper.dart';
+import 'helper/profile_saves_pump_and_helper.dart';
 
 void main() {
   setUp(configureDependenciesTest);
@@ -15,7 +15,7 @@ void main() {
   tearDown(GetIt.I.reset);
   group('${KScreenBlocName.profileSaves} ', () {
     testWidgets('${KGroupText.intial} ', (tester) async {
-      await profilePumpAppHelper(tester: tester);
+      await profileSavesPumpAppHelper(tester: tester);
 
       await profileSavesInitialHelper(tester);
     });
@@ -24,7 +24,7 @@ void main() {
     late MockGoRouter mockGoRouter;
     setUp(() => mockGoRouter = MockGoRouter());
     testWidgets('${KGroupText.intial} ', (tester) async {
-      await profilePumpAppHelper(
+      await profileSavesPumpAppHelper(
         tester: tester,
         mockGoRouter: mockGoRouter,
       );

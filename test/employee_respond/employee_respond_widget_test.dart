@@ -12,7 +12,7 @@ void main() {
   setupFirebaseAuthMocks();
 
   tearDown(GetIt.I.reset);
-  group('${KScreenBlocName.workRespond} ', () {
+  group('${KScreenBlocName.employeeRespond} ', () {
     testWidgets('${KGroupText.intial} ', (tester) async {
       await employeeRespondPumpAppHelper(tester: tester);
 
