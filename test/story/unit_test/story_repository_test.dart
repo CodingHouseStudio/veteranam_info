@@ -15,19 +15,10 @@ void main() {
     late StorageService mockStorageService;
     group('${KGroupText.successfulGet} ', () {
       setUp(() {
-        ExtendedDateTime.id = '';
-        ExtendedDateTime.customTime = KTestText.dateTime;
         mockFirestoreService = MockFirestoreService();
         mockStorageService = MockStorageService();
         when(mockFirestoreService.getStories()).thenAnswer(
           (_) => Stream.value(KTestText.storyModelItems),
-        );
-        when(
-          mockFirestoreService.addStory(
-            KTestText.storyModelItems.first,
-          ),
-        ).thenAnswer(
-          (realInvocation) async {},
         );
         if (GetIt.I.isRegistered<FirestoreService>()) {
           GetIt.I.unregister<FirestoreService>();
@@ -40,7 +31,7 @@ void main() {
 
         mockStoryRepository = StoryRepository();
       });
-      test('Story', () async {
+      test('Get Story', () async {
         expect(
           mockStoryRepository.getStoryItems(),
           emits(KTestText.storyModelItems),
@@ -69,7 +60,7 @@ void main() {
 
         mockStoryRepository = StoryRepository();
       });
-      test('Story', () async {
+      test('Get Story', () async {
         expect(
           mockStoryRepository.getStoryItems(),
           emitsError(KGroupText.failureGet),

@@ -24,6 +24,7 @@ abstract class KSize {
   static const kPixel160 = 160.0;
 
   static const kRadius8 = 8.0;
+  static const kRadius10 = 10.0;
   static const kRadius32 = 32.0;
   static const kRadius40 = 40.0;
 

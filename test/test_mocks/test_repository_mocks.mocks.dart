@@ -4,18 +4,23 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i8;
-import 'dart:typed_data' as _i12;
+import 'dart:convert' as _i16;
+import 'dart:io' as _i15;
+import 'dart:typed_data' as _i14;
 
 import 'package:cloud_firestore/cloud_firestore.dart' as _i7;
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:firebase_auth/firebase_auth.dart' as _i6;
 import 'package:firebase_core/firebase_core.dart' as _i5;
 import 'package:firebase_storage/firebase_storage.dart' as _i10;
+import 'package:firebase_storage_platform_interface/firebase_storage_platform_interface.dart'
+    as _i12;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i4;
 import 'package:google_sign_in/google_sign_in.dart' as _i9;
+import 'package:image_picker/image_picker.dart' as _i11;
 import 'package:kozak/shared/shared.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i11;
+import 'package:mockito/src/dummies.dart' as _i13;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -401,6 +406,77 @@ class _FakeReference_34 extends _i1.SmartFake implements _i10.Reference {
 class _FakeFirebaseStorage_35 extends _i1.SmartFake
     implements _i10.FirebaseStorage {
   _FakeFirebaseStorage_35(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeLostDataResponse_36 extends _i1.SmartFake
+    implements _i11.LostDataResponse {
+  _FakeLostDataResponse_36(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeFullMetadata_37 extends _i1.SmartFake implements _i12.FullMetadata {
+  _FakeFullMetadata_37(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeListResult_38 extends _i1.SmartFake implements _i10.ListResult {
+  _FakeListResult_38(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeUploadTask_39 extends _i1.SmartFake implements _i10.UploadTask {
+  _FakeUploadTask_39(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeDownloadTask_40 extends _i1.SmartFake implements _i10.DownloadTask {
+  _FakeDownloadTask_40(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeTaskSnapshot_41 extends _i1.SmartFake implements _i10.TaskSnapshot {
+  _FakeTaskSnapshot_41(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeDateTime_42 extends _i1.SmartFake implements DateTime {
+  _FakeDateTime_42(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -2376,7 +2452,7 @@ class MockFirebaseAuth extends _i1.Mock implements _i6.FirebaseAuth {
           #verifyPasswordResetCode,
           [code],
         ),
-        returnValue: _i8.Future<String>.value(_i11.dummyValue<String>(
+        returnValue: _i8.Future<String>.value(_i13.dummyValue<String>(
           this,
           Invocation.method(
             #verifyPasswordResetCode,
@@ -2384,7 +2460,7 @@ class MockFirebaseAuth extends _i1.Mock implements _i6.FirebaseAuth {
           ),
         )),
         returnValueForMissingStub:
-            _i8.Future<String>.value(_i11.dummyValue<String>(
+            _i8.Future<String>.value(_i13.dummyValue<String>(
           this,
           Invocation.method(
             #verifyPasswordResetCode,
@@ -2493,11 +2569,11 @@ class MockFirebaseFirestore extends _i1.Mock implements _i7.FirebaseFirestore {
   @override
   String get databaseURL => (super.noSuchMethod(
         Invocation.getter(#databaseURL),
-        returnValue: _i11.dummyValue<String>(
+        returnValue: _i13.dummyValue<String>(
           this,
           Invocation.getter(#databaseURL),
         ),
-        returnValueForMissingStub: _i11.dummyValue<String>(
+        returnValueForMissingStub: _i13.dummyValue<String>(
           this,
           Invocation.getter(#databaseURL),
         ),
@@ -2515,11 +2591,11 @@ class MockFirebaseFirestore extends _i1.Mock implements _i7.FirebaseFirestore {
   @override
   String get databaseId => (super.noSuchMethod(
         Invocation.getter(#databaseId),
-        returnValue: _i11.dummyValue<String>(
+        returnValue: _i13.dummyValue<String>(
           this,
           Invocation.getter(#databaseId),
         ),
-        returnValueForMissingStub: _i11.dummyValue<String>(
+        returnValueForMissingStub: _i13.dummyValue<String>(
           this,
           Invocation.getter(#databaseId),
         ),
@@ -2633,7 +2709,7 @@ class MockFirebaseFirestore extends _i1.Mock implements _i7.FirebaseFirestore {
       ) as _i8.Future<void>);
 
   @override
-  _i7.LoadBundleTask loadBundle(_i12.Uint8List? bundle) => (super.noSuchMethod(
+  _i7.LoadBundleTask loadBundle(_i14.Uint8List? bundle) => (super.noSuchMethod(
         Invocation.method(
           #loadBundle,
           [bundle],
@@ -2845,8 +2921,8 @@ class MockFirebaseFirestore extends _i1.Mock implements _i7.FirebaseFirestore {
             #maxAttempts: maxAttempts,
           },
         ),
-        returnValue: _i11.ifNotNull(
-              _i11.dummyValueOrNull<T>(
+        returnValue: _i13.ifNotNull(
+              _i13.dummyValueOrNull<T>(
                 this,
                 Invocation.method(
                   #runTransaction,
@@ -2870,8 +2946,8 @@ class MockFirebaseFirestore extends _i1.Mock implements _i7.FirebaseFirestore {
                 },
               ),
             ),
-        returnValueForMissingStub: _i11.ifNotNull(
-              _i11.dummyValueOrNull<T>(
+        returnValueForMissingStub: _i13.ifNotNull(
+              _i13.dummyValueOrNull<T>(
                 this,
                 Invocation.method(
                   #runTransaction,
@@ -3261,11 +3337,11 @@ class MockGoogleAuthProvider extends _i1.Mock
   @override
   String get providerId => (super.noSuchMethod(
         Invocation.getter(#providerId),
-        returnValue: _i11.dummyValue<String>(
+        returnValue: _i13.dummyValue<String>(
           this,
           Invocation.getter(#providerId),
         ),
-        returnValueForMissingStub: _i11.dummyValue<String>(
+        returnValueForMissingStub: _i13.dummyValue<String>(
           this,
           Invocation.getter(#providerId),
         ),
@@ -3364,11 +3440,11 @@ class MockUser extends _i1.Mock implements _i6.User {
   @override
   String get uid => (super.noSuchMethod(
         Invocation.getter(#uid),
-        returnValue: _i11.dummyValue<String>(
+        returnValue: _i13.dummyValue<String>(
           this,
           Invocation.getter(#uid),
         ),
-        returnValueForMissingStub: _i11.dummyValue<String>(
+        returnValueForMissingStub: _i13.dummyValue<String>(
           this,
           Invocation.getter(#uid),
         ),
@@ -3782,11 +3858,11 @@ class MockGoogleSignInAccount extends _i1.Mock
   @override
   String get email => (super.noSuchMethod(
         Invocation.getter(#email),
-        returnValue: _i11.dummyValue<String>(
+        returnValue: _i13.dummyValue<String>(
           this,
           Invocation.getter(#email),
         ),
-        returnValueForMissingStub: _i11.dummyValue<String>(
+        returnValueForMissingStub: _i13.dummyValue<String>(
           this,
           Invocation.getter(#email),
         ),
@@ -3795,11 +3871,11 @@ class MockGoogleSignInAccount extends _i1.Mock
   @override
   String get id => (super.noSuchMethod(
         Invocation.getter(#id),
-        returnValue: _i11.dummyValue<String>(
+        returnValue: _i13.dummyValue<String>(
           this,
           Invocation.getter(#id),
         ),
-        returnValueForMissingStub: _i11.dummyValue<String>(
+        returnValueForMissingStub: _i13.dummyValue<String>(
           this,
           Invocation.getter(#id),
         ),
@@ -3856,11 +3932,11 @@ class MockCollectionReference<T extends Object?> extends _i1.Mock
   @override
   String get id => (super.noSuchMethod(
         Invocation.getter(#id),
-        returnValue: _i11.dummyValue<String>(
+        returnValue: _i13.dummyValue<String>(
           this,
           Invocation.getter(#id),
         ),
-        returnValueForMissingStub: _i11.dummyValue<String>(
+        returnValueForMissingStub: _i13.dummyValue<String>(
           this,
           Invocation.getter(#id),
         ),
@@ -3869,11 +3945,11 @@ class MockCollectionReference<T extends Object?> extends _i1.Mock
   @override
   String get path => (super.noSuchMethod(
         Invocation.getter(#path),
-        returnValue: _i11.dummyValue<String>(
+        returnValue: _i13.dummyValue<String>(
           this,
           Invocation.getter(#path),
         ),
-        returnValueForMissingStub: _i11.dummyValue<String>(
+        returnValueForMissingStub: _i13.dummyValue<String>(
           this,
           Invocation.getter(#path),
         ),
@@ -4549,11 +4625,11 @@ class MockDocumentReference<T extends Object?> extends _i1.Mock
   @override
   String get id => (super.noSuchMethod(
         Invocation.getter(#id),
-        returnValue: _i11.dummyValue<String>(
+        returnValue: _i13.dummyValue<String>(
           this,
           Invocation.getter(#id),
         ),
-        returnValueForMissingStub: _i11.dummyValue<String>(
+        returnValueForMissingStub: _i13.dummyValue<String>(
           this,
           Invocation.getter(#id),
         ),
@@ -4575,11 +4651,11 @@ class MockDocumentReference<T extends Object?> extends _i1.Mock
   @override
   String get path => (super.noSuchMethod(
         Invocation.getter(#path),
-        returnValue: _i11.dummyValue<String>(
+        returnValue: _i13.dummyValue<String>(
           this,
           Invocation.getter(#path),
         ),
-        returnValueForMissingStub: _i11.dummyValue<String>(
+        returnValueForMissingStub: _i13.dummyValue<String>(
           this,
           Invocation.getter(#path),
         ),
@@ -4777,11 +4853,11 @@ class MockQueryDocumentSnapshot<T extends Object?> extends _i1.Mock
   @override
   String get id => (super.noSuchMethod(
         Invocation.getter(#id),
-        returnValue: _i11.dummyValue<String>(
+        returnValue: _i13.dummyValue<String>(
           this,
           Invocation.getter(#id),
         ),
-        returnValueForMissingStub: _i11.dummyValue<String>(
+        returnValueForMissingStub: _i13.dummyValue<String>(
           this,
           Invocation.getter(#id),
         ),
@@ -4826,14 +4902,14 @@ class MockQueryDocumentSnapshot<T extends Object?> extends _i1.Mock
           #data,
           [],
         ),
-        returnValue: _i11.dummyValue<T>(
+        returnValue: _i13.dummyValue<T>(
           this,
           Invocation.method(
             #data,
             [],
           ),
         ),
-        returnValueForMissingStub: _i11.dummyValue<T>(
+        returnValueForMissingStub: _i13.dummyValue<T>(
           this,
           Invocation.method(
             #data,
@@ -4869,11 +4945,11 @@ class MockDocumentSnapshot<T extends Object?> extends _i1.Mock
   @override
   String get id => (super.noSuchMethod(
         Invocation.getter(#id),
-        returnValue: _i11.dummyValue<String>(
+        returnValue: _i13.dummyValue<String>(
           this,
           Invocation.getter(#id),
         ),
-        returnValueForMissingStub: _i11.dummyValue<String>(
+        returnValueForMissingStub: _i13.dummyValue<String>(
           this,
           Invocation.getter(#id),
         ),
@@ -5061,11 +5137,11 @@ class MockFirebaseStorage extends _i1.Mock implements _i10.FirebaseStorage {
   @override
   String get bucket => (super.noSuchMethod(
         Invocation.getter(#bucket),
-        returnValue: _i11.dummyValue<String>(
+        returnValue: _i13.dummyValue<String>(
           this,
           Invocation.getter(#bucket),
         ),
-        returnValueForMissingStub: _i11.dummyValue<String>(
+        returnValueForMissingStub: _i13.dummyValue<String>(
           this,
           Invocation.getter(#bucket),
         ),
@@ -5266,7 +5342,7 @@ class MockStorageService extends _i1.Mock implements _i3.StorageService {
             #storyId: storyId,
           },
         ),
-        returnValue: _i8.Future<String>.value(_i11.dummyValue<String>(
+        returnValue: _i8.Future<String>.value(_i13.dummyValue<String>(
           this,
           Invocation.method(
             #saveStoryImage,
@@ -5278,7 +5354,7 @@ class MockStorageService extends _i1.Mock implements _i3.StorageService {
           ),
         )),
         returnValueForMissingStub:
-            _i8.Future<String>.value(_i11.dummyValue<String>(
+            _i8.Future<String>.value(_i13.dummyValue<String>(
           this,
           Invocation.method(
             #saveStoryImage,
@@ -5290,4 +5366,953 @@ class MockStorageService extends _i1.Mock implements _i3.StorageService {
           ),
         )),
       ) as _i8.Future<String>);
+}
+
+/// A class which mocks [ImagePicker].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockImagePicker extends _i1.Mock implements _i11.ImagePicker {
+  @override
+  _i8.Future<_i11.XFile?> pickImage({
+    required _i11.ImageSource? source,
+    double? maxWidth,
+    double? maxHeight,
+    int? imageQuality,
+    _i11.CameraDevice? preferredCameraDevice = _i11.CameraDevice.rear,
+    bool? requestFullMetadata = true,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #pickImage,
+          [],
+          {
+            #source: source,
+            #maxWidth: maxWidth,
+            #maxHeight: maxHeight,
+            #imageQuality: imageQuality,
+            #preferredCameraDevice: preferredCameraDevice,
+            #requestFullMetadata: requestFullMetadata,
+          },
+        ),
+        returnValue: _i8.Future<_i11.XFile?>.value(),
+        returnValueForMissingStub: _i8.Future<_i11.XFile?>.value(),
+      ) as _i8.Future<_i11.XFile?>);
+
+  @override
+  _i8.Future<List<_i11.XFile>> pickMultiImage({
+    double? maxWidth,
+    double? maxHeight,
+    int? imageQuality,
+    int? limit,
+    bool? requestFullMetadata = true,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #pickMultiImage,
+          [],
+          {
+            #maxWidth: maxWidth,
+            #maxHeight: maxHeight,
+            #imageQuality: imageQuality,
+            #limit: limit,
+            #requestFullMetadata: requestFullMetadata,
+          },
+        ),
+        returnValue: _i8.Future<List<_i11.XFile>>.value(<_i11.XFile>[]),
+        returnValueForMissingStub:
+            _i8.Future<List<_i11.XFile>>.value(<_i11.XFile>[]),
+      ) as _i8.Future<List<_i11.XFile>>);
+
+  @override
+  _i8.Future<_i11.XFile?> pickMedia({
+    double? maxWidth,
+    double? maxHeight,
+    int? imageQuality,
+    bool? requestFullMetadata = true,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #pickMedia,
+          [],
+          {
+            #maxWidth: maxWidth,
+            #maxHeight: maxHeight,
+            #imageQuality: imageQuality,
+            #requestFullMetadata: requestFullMetadata,
+          },
+        ),
+        returnValue: _i8.Future<_i11.XFile?>.value(),
+        returnValueForMissingStub: _i8.Future<_i11.XFile?>.value(),
+      ) as _i8.Future<_i11.XFile?>);
+
+  @override
+  _i8.Future<List<_i11.XFile>> pickMultipleMedia({
+    double? maxWidth,
+    double? maxHeight,
+    int? imageQuality,
+    int? limit,
+    bool? requestFullMetadata = true,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #pickMultipleMedia,
+          [],
+          {
+            #maxWidth: maxWidth,
+            #maxHeight: maxHeight,
+            #imageQuality: imageQuality,
+            #limit: limit,
+            #requestFullMetadata: requestFullMetadata,
+          },
+        ),
+        returnValue: _i8.Future<List<_i11.XFile>>.value(<_i11.XFile>[]),
+        returnValueForMissingStub:
+            _i8.Future<List<_i11.XFile>>.value(<_i11.XFile>[]),
+      ) as _i8.Future<List<_i11.XFile>>);
+
+  @override
+  _i8.Future<_i11.XFile?> pickVideo({
+    required _i11.ImageSource? source,
+    _i11.CameraDevice? preferredCameraDevice = _i11.CameraDevice.rear,
+    Duration? maxDuration,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #pickVideo,
+          [],
+          {
+            #source: source,
+            #preferredCameraDevice: preferredCameraDevice,
+            #maxDuration: maxDuration,
+          },
+        ),
+        returnValue: _i8.Future<_i11.XFile?>.value(),
+        returnValueForMissingStub: _i8.Future<_i11.XFile?>.value(),
+      ) as _i8.Future<_i11.XFile?>);
+
+  @override
+  _i8.Future<_i11.LostDataResponse> retrieveLostData() => (super.noSuchMethod(
+        Invocation.method(
+          #retrieveLostData,
+          [],
+        ),
+        returnValue:
+            _i8.Future<_i11.LostDataResponse>.value(_FakeLostDataResponse_36(
+          this,
+          Invocation.method(
+            #retrieveLostData,
+            [],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i8.Future<_i11.LostDataResponse>.value(_FakeLostDataResponse_36(
+          this,
+          Invocation.method(
+            #retrieveLostData,
+            [],
+          ),
+        )),
+      ) as _i8.Future<_i11.LostDataResponse>);
+
+  @override
+  bool supportsImageSource(_i11.ImageSource? source) => (super.noSuchMethod(
+        Invocation.method(
+          #supportsImageSource,
+          [source],
+        ),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
+}
+
+/// A class which mocks [Reference].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockReference extends _i1.Mock implements _i10.Reference {
+  @override
+  _i10.FirebaseStorage get storage => (super.noSuchMethod(
+        Invocation.getter(#storage),
+        returnValue: _FakeFirebaseStorage_35(
+          this,
+          Invocation.getter(#storage),
+        ),
+        returnValueForMissingStub: _FakeFirebaseStorage_35(
+          this,
+          Invocation.getter(#storage),
+        ),
+      ) as _i10.FirebaseStorage);
+
+  @override
+  String get bucket => (super.noSuchMethod(
+        Invocation.getter(#bucket),
+        returnValue: _i13.dummyValue<String>(
+          this,
+          Invocation.getter(#bucket),
+        ),
+        returnValueForMissingStub: _i13.dummyValue<String>(
+          this,
+          Invocation.getter(#bucket),
+        ),
+      ) as String);
+
+  @override
+  String get fullPath => (super.noSuchMethod(
+        Invocation.getter(#fullPath),
+        returnValue: _i13.dummyValue<String>(
+          this,
+          Invocation.getter(#fullPath),
+        ),
+        returnValueForMissingStub: _i13.dummyValue<String>(
+          this,
+          Invocation.getter(#fullPath),
+        ),
+      ) as String);
+
+  @override
+  String get name => (super.noSuchMethod(
+        Invocation.getter(#name),
+        returnValue: _i13.dummyValue<String>(
+          this,
+          Invocation.getter(#name),
+        ),
+        returnValueForMissingStub: _i13.dummyValue<String>(
+          this,
+          Invocation.getter(#name),
+        ),
+      ) as String);
+
+  @override
+  _i10.Reference get root => (super.noSuchMethod(
+        Invocation.getter(#root),
+        returnValue: _FakeReference_34(
+          this,
+          Invocation.getter(#root),
+        ),
+        returnValueForMissingStub: _FakeReference_34(
+          this,
+          Invocation.getter(#root),
+        ),
+      ) as _i10.Reference);
+
+  @override
+  _i10.Reference child(String? path) => (super.noSuchMethod(
+        Invocation.method(
+          #child,
+          [path],
+        ),
+        returnValue: _FakeReference_34(
+          this,
+          Invocation.method(
+            #child,
+            [path],
+          ),
+        ),
+        returnValueForMissingStub: _FakeReference_34(
+          this,
+          Invocation.method(
+            #child,
+            [path],
+          ),
+        ),
+      ) as _i10.Reference);
+
+  @override
+  _i8.Future<void> delete() => (super.noSuchMethod(
+        Invocation.method(
+          #delete,
+          [],
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<String> getDownloadURL() => (super.noSuchMethod(
+        Invocation.method(
+          #getDownloadURL,
+          [],
+        ),
+        returnValue: _i8.Future<String>.value(_i13.dummyValue<String>(
+          this,
+          Invocation.method(
+            #getDownloadURL,
+            [],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i8.Future<String>.value(_i13.dummyValue<String>(
+          this,
+          Invocation.method(
+            #getDownloadURL,
+            [],
+          ),
+        )),
+      ) as _i8.Future<String>);
+
+  @override
+  _i8.Future<_i12.FullMetadata> getMetadata() => (super.noSuchMethod(
+        Invocation.method(
+          #getMetadata,
+          [],
+        ),
+        returnValue: _i8.Future<_i12.FullMetadata>.value(_FakeFullMetadata_37(
+          this,
+          Invocation.method(
+            #getMetadata,
+            [],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i8.Future<_i12.FullMetadata>.value(_FakeFullMetadata_37(
+          this,
+          Invocation.method(
+            #getMetadata,
+            [],
+          ),
+        )),
+      ) as _i8.Future<_i12.FullMetadata>);
+
+  @override
+  _i8.Future<_i10.ListResult> list([_i12.ListOptions? options]) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #list,
+          [options],
+        ),
+        returnValue: _i8.Future<_i10.ListResult>.value(_FakeListResult_38(
+          this,
+          Invocation.method(
+            #list,
+            [options],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i8.Future<_i10.ListResult>.value(_FakeListResult_38(
+          this,
+          Invocation.method(
+            #list,
+            [options],
+          ),
+        )),
+      ) as _i8.Future<_i10.ListResult>);
+
+  @override
+  _i8.Future<_i10.ListResult> listAll() => (super.noSuchMethod(
+        Invocation.method(
+          #listAll,
+          [],
+        ),
+        returnValue: _i8.Future<_i10.ListResult>.value(_FakeListResult_38(
+          this,
+          Invocation.method(
+            #listAll,
+            [],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i8.Future<_i10.ListResult>.value(_FakeListResult_38(
+          this,
+          Invocation.method(
+            #listAll,
+            [],
+          ),
+        )),
+      ) as _i8.Future<_i10.ListResult>);
+
+  @override
+  _i8.Future<_i14.Uint8List?> getData([int? maxSize = 10485760]) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getData,
+          [maxSize],
+        ),
+        returnValue: _i8.Future<_i14.Uint8List?>.value(),
+        returnValueForMissingStub: _i8.Future<_i14.Uint8List?>.value(),
+      ) as _i8.Future<_i14.Uint8List?>);
+
+  @override
+  _i10.UploadTask putData(
+    _i14.Uint8List? data, [
+    _i12.SettableMetadata? metadata,
+  ]) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #putData,
+          [
+            data,
+            metadata,
+          ],
+        ),
+        returnValue: _FakeUploadTask_39(
+          this,
+          Invocation.method(
+            #putData,
+            [
+              data,
+              metadata,
+            ],
+          ),
+        ),
+        returnValueForMissingStub: _FakeUploadTask_39(
+          this,
+          Invocation.method(
+            #putData,
+            [
+              data,
+              metadata,
+            ],
+          ),
+        ),
+      ) as _i10.UploadTask);
+
+  @override
+  _i10.UploadTask putBlob(
+    dynamic blob, [
+    _i12.SettableMetadata? metadata,
+  ]) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #putBlob,
+          [
+            blob,
+            metadata,
+          ],
+        ),
+        returnValue: _FakeUploadTask_39(
+          this,
+          Invocation.method(
+            #putBlob,
+            [
+              blob,
+              metadata,
+            ],
+          ),
+        ),
+        returnValueForMissingStub: _FakeUploadTask_39(
+          this,
+          Invocation.method(
+            #putBlob,
+            [
+              blob,
+              metadata,
+            ],
+          ),
+        ),
+      ) as _i10.UploadTask);
+
+  @override
+  _i10.UploadTask putFile(
+    _i15.File? file, [
+    _i12.SettableMetadata? metadata,
+  ]) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #putFile,
+          [
+            file,
+            metadata,
+          ],
+        ),
+        returnValue: _FakeUploadTask_39(
+          this,
+          Invocation.method(
+            #putFile,
+            [
+              file,
+              metadata,
+            ],
+          ),
+        ),
+        returnValueForMissingStub: _FakeUploadTask_39(
+          this,
+          Invocation.method(
+            #putFile,
+            [
+              file,
+              metadata,
+            ],
+          ),
+        ),
+      ) as _i10.UploadTask);
+
+  @override
+  _i10.UploadTask putString(
+    String? data, {
+    _i12.PutStringFormat? format = _i12.PutStringFormat.raw,
+    _i12.SettableMetadata? metadata,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #putString,
+          [data],
+          {
+            #format: format,
+            #metadata: metadata,
+          },
+        ),
+        returnValue: _FakeUploadTask_39(
+          this,
+          Invocation.method(
+            #putString,
+            [data],
+            {
+              #format: format,
+              #metadata: metadata,
+            },
+          ),
+        ),
+        returnValueForMissingStub: _FakeUploadTask_39(
+          this,
+          Invocation.method(
+            #putString,
+            [data],
+            {
+              #format: format,
+              #metadata: metadata,
+            },
+          ),
+        ),
+      ) as _i10.UploadTask);
+
+  @override
+  _i8.Future<_i12.FullMetadata> updateMetadata(
+          _i12.SettableMetadata? metadata) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateMetadata,
+          [metadata],
+        ),
+        returnValue: _i8.Future<_i12.FullMetadata>.value(_FakeFullMetadata_37(
+          this,
+          Invocation.method(
+            #updateMetadata,
+            [metadata],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i8.Future<_i12.FullMetadata>.value(_FakeFullMetadata_37(
+          this,
+          Invocation.method(
+            #updateMetadata,
+            [metadata],
+          ),
+        )),
+      ) as _i8.Future<_i12.FullMetadata>);
+
+  @override
+  _i10.DownloadTask writeToFile(_i15.File? file) => (super.noSuchMethod(
+        Invocation.method(
+          #writeToFile,
+          [file],
+        ),
+        returnValue: _FakeDownloadTask_40(
+          this,
+          Invocation.method(
+            #writeToFile,
+            [file],
+          ),
+        ),
+        returnValueForMissingStub: _FakeDownloadTask_40(
+          this,
+          Invocation.method(
+            #writeToFile,
+            [file],
+          ),
+        ),
+      ) as _i10.DownloadTask);
+}
+
+/// A class which mocks [UploadTask].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockUploadTask extends _i1.Mock implements _i10.UploadTask {
+  @override
+  _i10.FirebaseStorage get storage => (super.noSuchMethod(
+        Invocation.getter(#storage),
+        returnValue: _FakeFirebaseStorage_35(
+          this,
+          Invocation.getter(#storage),
+        ),
+        returnValueForMissingStub: _FakeFirebaseStorage_35(
+          this,
+          Invocation.getter(#storage),
+        ),
+      ) as _i10.FirebaseStorage);
+
+  @override
+  _i8.Stream<_i10.TaskSnapshot> get snapshotEvents => (super.noSuchMethod(
+        Invocation.getter(#snapshotEvents),
+        returnValue: _i8.Stream<_i10.TaskSnapshot>.empty(),
+        returnValueForMissingStub: _i8.Stream<_i10.TaskSnapshot>.empty(),
+      ) as _i8.Stream<_i10.TaskSnapshot>);
+
+  @override
+  _i10.TaskSnapshot get snapshot => (super.noSuchMethod(
+        Invocation.getter(#snapshot),
+        returnValue: _FakeTaskSnapshot_41(
+          this,
+          Invocation.getter(#snapshot),
+        ),
+        returnValueForMissingStub: _FakeTaskSnapshot_41(
+          this,
+          Invocation.getter(#snapshot),
+        ),
+      ) as _i10.TaskSnapshot);
+
+  @override
+  _i8.Future<bool> pause() => (super.noSuchMethod(
+        Invocation.method(
+          #pause,
+          [],
+        ),
+        returnValue: _i8.Future<bool>.value(false),
+        returnValueForMissingStub: _i8.Future<bool>.value(false),
+      ) as _i8.Future<bool>);
+
+  @override
+  _i8.Future<bool> resume() => (super.noSuchMethod(
+        Invocation.method(
+          #resume,
+          [],
+        ),
+        returnValue: _i8.Future<bool>.value(false),
+        returnValueForMissingStub: _i8.Future<bool>.value(false),
+      ) as _i8.Future<bool>);
+
+  @override
+  _i8.Future<bool> cancel() => (super.noSuchMethod(
+        Invocation.method(
+          #cancel,
+          [],
+        ),
+        returnValue: _i8.Future<bool>.value(false),
+        returnValueForMissingStub: _i8.Future<bool>.value(false),
+      ) as _i8.Future<bool>);
+
+  @override
+  _i8.Stream<_i10.TaskSnapshot> asStream() => (super.noSuchMethod(
+        Invocation.method(
+          #asStream,
+          [],
+        ),
+        returnValue: _i8.Stream<_i10.TaskSnapshot>.empty(),
+        returnValueForMissingStub: _i8.Stream<_i10.TaskSnapshot>.empty(),
+      ) as _i8.Stream<_i10.TaskSnapshot>);
+
+  @override
+  _i8.Future<_i10.TaskSnapshot> catchError(
+    Function? onError, {
+    bool Function(Object)? test,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #catchError,
+          [onError],
+          {#test: test},
+        ),
+        returnValue: _i8.Future<_i10.TaskSnapshot>.value(_FakeTaskSnapshot_41(
+          this,
+          Invocation.method(
+            #catchError,
+            [onError],
+            {#test: test},
+          ),
+        )),
+        returnValueForMissingStub:
+            _i8.Future<_i10.TaskSnapshot>.value(_FakeTaskSnapshot_41(
+          this,
+          Invocation.method(
+            #catchError,
+            [onError],
+            {#test: test},
+          ),
+        )),
+      ) as _i8.Future<_i10.TaskSnapshot>);
+
+  @override
+  _i8.Future<S> then<S>(
+    _i8.FutureOr<S> Function(_i10.TaskSnapshot)? onValue, {
+    Function? onError,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #then,
+          [onValue],
+          {#onError: onError},
+        ),
+        returnValue: _i13.ifNotNull(
+              _i13.dummyValueOrNull<S>(
+                this,
+                Invocation.method(
+                  #then,
+                  [onValue],
+                  {#onError: onError},
+                ),
+              ),
+              (S v) => _i8.Future<S>.value(v),
+            ) ??
+            _FakeFuture_16<S>(
+              this,
+              Invocation.method(
+                #then,
+                [onValue],
+                {#onError: onError},
+              ),
+            ),
+        returnValueForMissingStub: _i13.ifNotNull(
+              _i13.dummyValueOrNull<S>(
+                this,
+                Invocation.method(
+                  #then,
+                  [onValue],
+                  {#onError: onError},
+                ),
+              ),
+              (S v) => _i8.Future<S>.value(v),
+            ) ??
+            _FakeFuture_16<S>(
+              this,
+              Invocation.method(
+                #then,
+                [onValue],
+                {#onError: onError},
+              ),
+            ),
+      ) as _i8.Future<S>);
+
+  @override
+  _i8.Future<_i10.TaskSnapshot> whenComplete(
+          _i8.FutureOr<dynamic> Function()? action) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #whenComplete,
+          [action],
+        ),
+        returnValue: _i8.Future<_i10.TaskSnapshot>.value(_FakeTaskSnapshot_41(
+          this,
+          Invocation.method(
+            #whenComplete,
+            [action],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i8.Future<_i10.TaskSnapshot>.value(_FakeTaskSnapshot_41(
+          this,
+          Invocation.method(
+            #whenComplete,
+            [action],
+          ),
+        )),
+      ) as _i8.Future<_i10.TaskSnapshot>);
+
+  @override
+  _i8.Future<_i10.TaskSnapshot> timeout(
+    Duration? timeLimit, {
+    _i8.FutureOr<_i10.TaskSnapshot> Function()? onTimeout,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #timeout,
+          [timeLimit],
+          {#onTimeout: onTimeout},
+        ),
+        returnValue: _i8.Future<_i10.TaskSnapshot>.value(_FakeTaskSnapshot_41(
+          this,
+          Invocation.method(
+            #timeout,
+            [timeLimit],
+            {#onTimeout: onTimeout},
+          ),
+        )),
+        returnValueForMissingStub:
+            _i8.Future<_i10.TaskSnapshot>.value(_FakeTaskSnapshot_41(
+          this,
+          Invocation.method(
+            #timeout,
+            [timeLimit],
+            {#onTimeout: onTimeout},
+          ),
+        )),
+      ) as _i8.Future<_i10.TaskSnapshot>);
+}
+
+/// A class which mocks [TaskSnapshot].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockTaskSnapshot extends _i1.Mock implements _i10.TaskSnapshot {
+  @override
+  _i10.FirebaseStorage get storage => (super.noSuchMethod(
+        Invocation.getter(#storage),
+        returnValue: _FakeFirebaseStorage_35(
+          this,
+          Invocation.getter(#storage),
+        ),
+        returnValueForMissingStub: _FakeFirebaseStorage_35(
+          this,
+          Invocation.getter(#storage),
+        ),
+      ) as _i10.FirebaseStorage);
+
+  @override
+  int get bytesTransferred => (super.noSuchMethod(
+        Invocation.getter(#bytesTransferred),
+        returnValue: 0,
+        returnValueForMissingStub: 0,
+      ) as int);
+
+  @override
+  _i10.Reference get ref => (super.noSuchMethod(
+        Invocation.getter(#ref),
+        returnValue: _FakeReference_34(
+          this,
+          Invocation.getter(#ref),
+        ),
+        returnValueForMissingStub: _FakeReference_34(
+          this,
+          Invocation.getter(#ref),
+        ),
+      ) as _i10.Reference);
+
+  @override
+  _i12.TaskState get state => (super.noSuchMethod(
+        Invocation.getter(#state),
+        returnValue: _i12.TaskState.paused,
+        returnValueForMissingStub: _i12.TaskState.paused,
+      ) as _i12.TaskState);
+
+  @override
+  int get totalBytes => (super.noSuchMethod(
+        Invocation.getter(#totalBytes),
+        returnValue: 0,
+        returnValueForMissingStub: 0,
+      ) as int);
+}
+
+/// A class which mocks [XFile].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockXFile extends _i1.Mock implements _i11.XFile {
+  @override
+  String get path => (super.noSuchMethod(
+        Invocation.getter(#path),
+        returnValue: _i13.dummyValue<String>(
+          this,
+          Invocation.getter(#path),
+        ),
+        returnValueForMissingStub: _i13.dummyValue<String>(
+          this,
+          Invocation.getter(#path),
+        ),
+      ) as String);
+
+  @override
+  String get name => (super.noSuchMethod(
+        Invocation.getter(#name),
+        returnValue: _i13.dummyValue<String>(
+          this,
+          Invocation.getter(#name),
+        ),
+        returnValueForMissingStub: _i13.dummyValue<String>(
+          this,
+          Invocation.getter(#name),
+        ),
+      ) as String);
+
+  @override
+  _i8.Future<void> saveTo(String? path) => (super.noSuchMethod(
+        Invocation.method(
+          #saveTo,
+          [path],
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<int> length() => (super.noSuchMethod(
+        Invocation.method(
+          #length,
+          [],
+        ),
+        returnValue: _i8.Future<int>.value(0),
+        returnValueForMissingStub: _i8.Future<int>.value(0),
+      ) as _i8.Future<int>);
+
+  @override
+  _i8.Future<String> readAsString(
+          {_i16.Encoding? encoding = const _i16.Utf8Codec()}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #readAsString,
+          [],
+          {#encoding: encoding},
+        ),
+        returnValue: _i8.Future<String>.value(_i13.dummyValue<String>(
+          this,
+          Invocation.method(
+            #readAsString,
+            [],
+            {#encoding: encoding},
+          ),
+        )),
+        returnValueForMissingStub:
+            _i8.Future<String>.value(_i13.dummyValue<String>(
+          this,
+          Invocation.method(
+            #readAsString,
+            [],
+            {#encoding: encoding},
+          ),
+        )),
+      ) as _i8.Future<String>);
+
+  @override
+  _i8.Future<_i14.Uint8List> readAsBytes() => (super.noSuchMethod(
+        Invocation.method(
+          #readAsBytes,
+          [],
+        ),
+        returnValue: _i8.Future<_i14.Uint8List>.value(_i14.Uint8List(0)),
+        returnValueForMissingStub:
+            _i8.Future<_i14.Uint8List>.value(_i14.Uint8List(0)),
+      ) as _i8.Future<_i14.Uint8List>);
+
+  @override
+  _i8.Stream<_i14.Uint8List> openRead([
+    int? start,
+    int? end,
+  ]) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #openRead,
+          [
+            start,
+            end,
+          ],
+        ),
+        returnValue: _i8.Stream<_i14.Uint8List>.empty(),
+        returnValueForMissingStub: _i8.Stream<_i14.Uint8List>.empty(),
+      ) as _i8.Stream<_i14.Uint8List>);
+
+  @override
+  _i8.Future<DateTime> lastModified() => (super.noSuchMethod(
+        Invocation.method(
+          #lastModified,
+          [],
+        ),
+        returnValue: _i8.Future<DateTime>.value(_FakeDateTime_42(
+          this,
+          Invocation.method(
+            #lastModified,
+            [],
+          ),
+        )),
+        returnValueForMissingStub: _i8.Future<DateTime>.value(_FakeDateTime_42(
+          this,
+          Invocation.method(
+            #lastModified,
+            [],
+          ),
+        )),
+      ) as _i8.Future<DateTime>);
 }
