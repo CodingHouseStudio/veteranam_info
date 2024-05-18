@@ -33,6 +33,8 @@ class AuthenticationRepository {
   void _onStatusStreamListen() {
     _userSubscription ??= iAppAuthenticationRepository.user.listen(
       (currentUser) {
+        _onUserSettingStreamCancel();
+        _onUserSettingStreamListen();
         if (currentUser.isNotEmpty) {
           _authenticationStatuscontroller.add(
             AuthenticationStatus.authenticated,
@@ -50,15 +52,9 @@ class AuthenticationRepository {
     _userSettingSubscription ??=
         iAppAuthenticationRepository.userSetting.listen(
       (currentUserSetting) {
-        if (currentUser.isNotEmpty) {
-          _userSettingController.add(
-            currentUserSetting,
-          );
-        } else {
-          _userSettingController.add(
-            currentUserSetting,
-          );
-        }
+        _userSettingController.add(
+          currentUserSetting,
+        );
       },
     );
   }
