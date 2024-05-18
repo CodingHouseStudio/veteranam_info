@@ -128,7 +128,7 @@ class SignUpLoginBottomButtonsWidget extends StatelessWidget {
   Widget buildBottomButton({
     required bool isDesk,
     required String text,
-    required Icon icon,
+    required Widget icon,
     required Key key,
     void Function()? onPressed,
   }) {
