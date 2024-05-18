@@ -134,8 +134,8 @@ class InformationWatcherBloc
 
     final selectedFilters = List<String>.from(state.filters ?? []);
 
-    event.isSelected ?? false
-        ? selectedFilters.add(event.filter!)
+    event.isSelected
+        ? selectedFilters.add(event.filter)
         : selectedFilters.remove(event.filter);
 
     final filterItems = _filter(
