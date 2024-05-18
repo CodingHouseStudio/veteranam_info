@@ -19,6 +19,7 @@ void main() {
     late firebase_auth.UserCredential mockUserCredential;
     late FirestoreService mockFirestoreService;
     late GoogleSignInAccount mockGoogleSignInAccount;
+    late firebase_auth.User mockUser;
     group('${KGroupText.failure} ', () {
       setUp(() {
         mockSecureStorageRepository = MockIStorage();
@@ -29,6 +30,7 @@ void main() {
         mockGoogleAuthProvider = MockGoogleAuthProvider();
         mockUserCredential = MockUserCredential();
         mockFirestoreService = MockFirestoreService();
+        mockUser = MockUser();
 
         when(mockUserCredential.credential).thenAnswer(
           (_) => KTestText.authCredential,
@@ -84,6 +86,17 @@ void main() {
         );
         when(
           mockFirestoreService.updateUserSetting(KTestText.userSetting),
+        ).thenThrow(
+          Exception(KGroupText.failure),
+        );
+
+        when(
+          mockFirebaseAuth.currentUser,
+        ).thenAnswer(
+          (_) => mockUser,
+        );
+        when(
+          mockUser.delete(),
         ).thenThrow(
           Exception(KGroupText.failure),
         );

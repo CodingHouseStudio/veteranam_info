@@ -18,69 +18,64 @@ class NewsCardWidget extends StatelessWidget {
     final selectedFilters =
         context.select((InformationWatcherBloc bloc) => bloc.state.filters);
 
-    return Padding(
-      padding: isDesk
-          ? const EdgeInsets.symmetric(horizontal: KPadding.kPaddingSize48)
-          : EdgeInsets.zero,
-      child: CardTextDetailEvaluateWidget(
-        image: informationItem.image.firstImage,
-        text: informationItem.news,
-        buttonText: [
-          context.l10n.readMore,
-          context.l10n.readLess,
+    return CardTextDetailEvaluateWidget(
+      image: informationItem.image.firstImage,
+      text: informationItem.news,
+      buttonText: [
+        context.l10n.readMore,
+        context.l10n.readLess,
+      ],
+      buttonStyle: context.buttonStyle.transparentButtonStyleBottomBorder,
+      titleWidget: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Text(
+            informationItem.title,
+            key: KWidgetkeys.widget.newsCard.title,
+            style: isDesk ? AppTextStyle.text40 : AppTextStyle.text24,
+          ),
+          Text(
+            informationItem.date.toLocal().toString().split(' ')[0],
+            key: KWidgetkeys.widget.newsCard.date,
+            style: context.textStyle.hint16,
+          ),
         ],
-        buttonStyle: context.buttonStyle.transparentButtonStyleBottomBorder,
-        titleWidget: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Text(
-              informationItem.title,
-              key: KWidgetkeys.widget.newsCard.title,
-              style: isDesk ? AppTextStyle.text40 : AppTextStyle.text24,
-            ),
-            Text(
-              informationItem.date.toLocal().toString().split(' ')[0],
-              key: KWidgetkeys.widget.newsCard.date,
-              style: context.textStyle.hint16,
-            ),
-          ],
-        ),
-        bottom: selectedFilters != null && selectedFilters.isNotEmpty
-            ? Padding(
-                padding: const EdgeInsets.only(
-                  bottom: KPadding.kPaddingSize16,
-                  top: KPadding.kPaddingSize24,
-                ),
-                child: Wrap(
-                  key: KWidgetkeys.widget.newsCard.tags,
-                  spacing: KSize.kWrapSpacing8,
-                  runSpacing: KSize.kWrapRunSpacing4,
-                  children: selectedFilters.map((tag) {
-                    return Container(
-                      decoration: context.widgetTheme.boxDecorationWidget,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: KPadding.kPaddingSize4,
-                          horizontal: KPadding.kPaddingSize8,
-                        ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(
-                              tag,
-                              style: AppTextStyle.text14,
-                            ),
-                            KIcon.check,
-                          ],
-                        ),
-                      ),
-                    );
-                  }).toList(),
-                ),
-              )
-            : null,
-        isDesk: isDesk,
       ),
+      bottom: selectedFilters != null && selectedFilters.isNotEmpty
+          ? Padding(
+              padding: const EdgeInsets.only(
+                bottom: KPadding.kPaddingSize16,
+                top: KPadding.kPaddingSize24,
+              ),
+              child: Wrap(
+                key: KWidgetkeys.widget.newsCard.tags,
+                spacing: KSize.kWrapSpacing8,
+                runSpacing: KSize.kWrapRunSpacing4,
+                children: selectedFilters.map((tag) {
+                  return Container(
+                    decoration: context.widgetTheme.boxDecorationWidget,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: KPadding.kPaddingSize4,
+                        horizontal: KPadding.kPaddingSize8,
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            tag,
+                            style: AppTextStyle.text14,
+                          ),
+                          KIcon.check,
+                        ],
+                      ),
+                    ),
+                  );
+                }).toList(),
+              ),
+            )
+          : null,
+      isDesk: isDesk,
     );
   }
 }

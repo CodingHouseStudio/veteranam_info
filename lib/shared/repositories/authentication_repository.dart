@@ -93,6 +93,10 @@ class AuthenticationRepository {
     return iAppAuthenticationRepository.currentUser;
   }
 
+  Future<Either<SomeFailure, bool>> deleteUser() async {
+    return iAppAuthenticationRepository.deleteUser();
+  }
+
   UserSetting get currentUserSetting {
     return iAppAuthenticationRepository.currentUserSetting;
   }

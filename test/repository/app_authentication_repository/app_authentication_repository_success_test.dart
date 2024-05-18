@@ -154,6 +154,17 @@ void main() {
         ).thenAnswer(
           (_) async {},
         );
+
+        when(
+          mockFirebaseAuth.currentUser,
+        ).thenAnswer(
+          (_) => mockUser,
+        );
+        when(
+          mockUser.delete(),
+        ).thenAnswer(
+          (_) async {},
+        );
         if (GetIt.I.isRegistered<FirestoreService>()) {
           GetIt.I.unregister<FirestoreService>();
         }

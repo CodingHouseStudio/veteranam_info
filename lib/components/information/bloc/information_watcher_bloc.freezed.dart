@@ -22,7 +22,7 @@ mixin _$InformationWatcherEvent {
     required TResult Function(List<InformationModel> informationItemsModel)
         updated,
     required TResult Function() loadNextItems,
-    required TResult Function(String? filter, bool? isSelected) filter,
+    required TResult Function(String filter, bool isSelected) filter,
     required TResult Function() filterReset,
     required TResult Function(dynamic failure) failure,
   }) =>
@@ -32,7 +32,7 @@ mixin _$InformationWatcherEvent {
     TResult? Function()? started,
     TResult? Function(List<InformationModel> informationItemsModel)? updated,
     TResult? Function()? loadNextItems,
-    TResult? Function(String? filter, bool? isSelected)? filter,
+    TResult? Function(String filter, bool isSelected)? filter,
     TResult? Function()? filterReset,
     TResult? Function(dynamic failure)? failure,
   }) =>
@@ -42,7 +42,7 @@ mixin _$InformationWatcherEvent {
     TResult Function()? started,
     TResult Function(List<InformationModel> informationItemsModel)? updated,
     TResult Function()? loadNextItems,
-    TResult Function(String? filter, bool? isSelected)? filter,
+    TResult Function(String filter, bool isSelected)? filter,
     TResult Function()? filterReset,
     TResult Function(dynamic failure)? failure,
     required TResult orElse(),
@@ -142,7 +142,7 @@ class _$StartedImpl implements _Started {
     required TResult Function(List<InformationModel> informationItemsModel)
         updated,
     required TResult Function() loadNextItems,
-    required TResult Function(String? filter, bool? isSelected) filter,
+    required TResult Function(String filter, bool isSelected) filter,
     required TResult Function() filterReset,
     required TResult Function(dynamic failure) failure,
   }) {
@@ -155,7 +155,7 @@ class _$StartedImpl implements _Started {
     TResult? Function()? started,
     TResult? Function(List<InformationModel> informationItemsModel)? updated,
     TResult? Function()? loadNextItems,
-    TResult? Function(String? filter, bool? isSelected)? filter,
+    TResult? Function(String filter, bool isSelected)? filter,
     TResult? Function()? filterReset,
     TResult? Function(dynamic failure)? failure,
   }) {
@@ -168,7 +168,7 @@ class _$StartedImpl implements _Started {
     TResult Function()? started,
     TResult Function(List<InformationModel> informationItemsModel)? updated,
     TResult Function()? loadNextItems,
-    TResult Function(String? filter, bool? isSelected)? filter,
+    TResult Function(String filter, bool isSelected)? filter,
     TResult Function()? filterReset,
     TResult Function(dynamic failure)? failure,
     required TResult orElse(),
@@ -304,7 +304,7 @@ class _$UpdatedImpl implements _Updated {
     required TResult Function(List<InformationModel> informationItemsModel)
         updated,
     required TResult Function() loadNextItems,
-    required TResult Function(String? filter, bool? isSelected) filter,
+    required TResult Function(String filter, bool isSelected) filter,
     required TResult Function() filterReset,
     required TResult Function(dynamic failure) failure,
   }) {
@@ -317,7 +317,7 @@ class _$UpdatedImpl implements _Updated {
     TResult? Function()? started,
     TResult? Function(List<InformationModel> informationItemsModel)? updated,
     TResult? Function()? loadNextItems,
-    TResult? Function(String? filter, bool? isSelected)? filter,
+    TResult? Function(String filter, bool isSelected)? filter,
     TResult? Function()? filterReset,
     TResult? Function(dynamic failure)? failure,
   }) {
@@ -330,7 +330,7 @@ class _$UpdatedImpl implements _Updated {
     TResult Function()? started,
     TResult Function(List<InformationModel> informationItemsModel)? updated,
     TResult Function()? loadNextItems,
-    TResult Function(String? filter, bool? isSelected)? filter,
+    TResult Function(String filter, bool isSelected)? filter,
     TResult Function()? filterReset,
     TResult Function(dynamic failure)? failure,
     required TResult orElse(),
@@ -437,7 +437,7 @@ class _$LoadNextItemsImpl implements _LoadNextItems {
     required TResult Function(List<InformationModel> informationItemsModel)
         updated,
     required TResult Function() loadNextItems,
-    required TResult Function(String? filter, bool? isSelected) filter,
+    required TResult Function(String filter, bool isSelected) filter,
     required TResult Function() filterReset,
     required TResult Function(dynamic failure) failure,
   }) {
@@ -450,7 +450,7 @@ class _$LoadNextItemsImpl implements _LoadNextItems {
     TResult? Function()? started,
     TResult? Function(List<InformationModel> informationItemsModel)? updated,
     TResult? Function()? loadNextItems,
-    TResult? Function(String? filter, bool? isSelected)? filter,
+    TResult? Function(String filter, bool isSelected)? filter,
     TResult? Function()? filterReset,
     TResult? Function(dynamic failure)? failure,
   }) {
@@ -463,7 +463,7 @@ class _$LoadNextItemsImpl implements _LoadNextItems {
     TResult Function()? started,
     TResult Function(List<InformationModel> informationItemsModel)? updated,
     TResult Function()? loadNextItems,
-    TResult Function(String? filter, bool? isSelected)? filter,
+    TResult Function(String filter, bool isSelected)? filter,
     TResult Function()? filterReset,
     TResult Function(dynamic failure)? failure,
     required TResult orElse(),
@@ -528,7 +528,7 @@ abstract class _$$FilterImplCopyWith<$Res> {
           _$FilterImpl value, $Res Function(_$FilterImpl) then) =
       __$$FilterImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String? filter, bool? isSelected});
+  $Res call({String filter, bool isSelected});
 }
 
 /// @nodoc
@@ -542,18 +542,18 @@ class __$$FilterImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? filter = freezed,
-    Object? isSelected = freezed,
+    Object? filter = null,
+    Object? isSelected = null,
   }) {
     return _then(_$FilterImpl(
-      filter: freezed == filter
+      filter: null == filter
           ? _value.filter
           : filter // ignore: cast_nullable_to_non_nullable
-              as String?,
-      isSelected: freezed == isSelected
+              as String,
+      isSelected: null == isSelected
           ? _value.isSelected
           : isSelected // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as bool,
     ));
   }
 }
@@ -561,12 +561,12 @@ class __$$FilterImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$FilterImpl implements _Filter {
-  const _$FilterImpl({this.filter, this.isSelected});
+  const _$FilterImpl({required this.filter, required this.isSelected});
 
   @override
-  final String? filter;
+  final String filter;
   @override
-  final bool? isSelected;
+  final bool isSelected;
 
   @override
   String toString() {
@@ -599,7 +599,7 @@ class _$FilterImpl implements _Filter {
     required TResult Function(List<InformationModel> informationItemsModel)
         updated,
     required TResult Function() loadNextItems,
-    required TResult Function(String? filter, bool? isSelected) filter,
+    required TResult Function(String filter, bool isSelected) filter,
     required TResult Function() filterReset,
     required TResult Function(dynamic failure) failure,
   }) {
@@ -612,7 +612,7 @@ class _$FilterImpl implements _Filter {
     TResult? Function()? started,
     TResult? Function(List<InformationModel> informationItemsModel)? updated,
     TResult? Function()? loadNextItems,
-    TResult? Function(String? filter, bool? isSelected)? filter,
+    TResult? Function(String filter, bool isSelected)? filter,
     TResult? Function()? filterReset,
     TResult? Function(dynamic failure)? failure,
   }) {
@@ -625,7 +625,7 @@ class _$FilterImpl implements _Filter {
     TResult Function()? started,
     TResult Function(List<InformationModel> informationItemsModel)? updated,
     TResult Function()? loadNextItems,
-    TResult Function(String? filter, bool? isSelected)? filter,
+    TResult Function(String filter, bool isSelected)? filter,
     TResult Function()? filterReset,
     TResult Function(dynamic failure)? failure,
     required TResult orElse(),
@@ -681,11 +681,12 @@ class _$FilterImpl implements _Filter {
 }
 
 abstract class _Filter implements InformationWatcherEvent {
-  const factory _Filter({final String? filter, final bool? isSelected}) =
-      _$FilterImpl;
+  const factory _Filter(
+      {required final String filter,
+      required final bool isSelected}) = _$FilterImpl;
 
-  String? get filter;
-  bool? get isSelected;
+  String get filter;
+  bool get isSelected;
   @JsonKey(ignore: true)
   _$$FilterImplCopyWith<_$FilterImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -733,7 +734,7 @@ class _$FilterResetImpl implements _FilterReset {
     required TResult Function(List<InformationModel> informationItemsModel)
         updated,
     required TResult Function() loadNextItems,
-    required TResult Function(String? filter, bool? isSelected) filter,
+    required TResult Function(String filter, bool isSelected) filter,
     required TResult Function() filterReset,
     required TResult Function(dynamic failure) failure,
   }) {
@@ -746,7 +747,7 @@ class _$FilterResetImpl implements _FilterReset {
     TResult? Function()? started,
     TResult? Function(List<InformationModel> informationItemsModel)? updated,
     TResult? Function()? loadNextItems,
-    TResult? Function(String? filter, bool? isSelected)? filter,
+    TResult? Function(String filter, bool isSelected)? filter,
     TResult? Function()? filterReset,
     TResult? Function(dynamic failure)? failure,
   }) {
@@ -759,7 +760,7 @@ class _$FilterResetImpl implements _FilterReset {
     TResult Function()? started,
     TResult Function(List<InformationModel> informationItemsModel)? updated,
     TResult Function()? loadNextItems,
-    TResult Function(String? filter, bool? isSelected)? filter,
+    TResult Function(String filter, bool isSelected)? filter,
     TResult Function()? filterReset,
     TResult Function(dynamic failure)? failure,
     required TResult orElse(),
@@ -887,7 +888,7 @@ class _$FailureImpl implements _Failure {
     required TResult Function(List<InformationModel> informationItemsModel)
         updated,
     required TResult Function() loadNextItems,
-    required TResult Function(String? filter, bool? isSelected) filter,
+    required TResult Function(String filter, bool isSelected) filter,
     required TResult Function() filterReset,
     required TResult Function(dynamic failure) failure,
   }) {
@@ -900,7 +901,7 @@ class _$FailureImpl implements _Failure {
     TResult? Function()? started,
     TResult? Function(List<InformationModel> informationItemsModel)? updated,
     TResult? Function()? loadNextItems,
-    TResult? Function(String? filter, bool? isSelected)? filter,
+    TResult? Function(String filter, bool isSelected)? filter,
     TResult? Function()? filterReset,
     TResult? Function(dynamic failure)? failure,
   }) {
@@ -913,7 +914,7 @@ class _$FailureImpl implements _Failure {
     TResult Function()? started,
     TResult Function(List<InformationModel> informationItemsModel)? updated,
     TResult Function()? loadNextItems,
-    TResult Function(String? filter, bool? isSelected)? filter,
+    TResult Function(String filter, bool isSelected)? filter,
     TResult Function()? filterReset,
     TResult Function(dynamic failure)? failure,
     required TResult orElse(),
