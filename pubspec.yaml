@@ -101,10 +101,10 @@ flutter:
         - asset: assets/fonts/Gilroy-LightItalic.woff
           weight: 300
           style: italic
-        - asset: assets/fonts/Gilroy-RegularItalic.woff
+        - asset: assets/fonts/Gilroy-MediumItalic.woff
           weight: 400
           style: italic
-        - asset: assets/fonts/Gilroy-MediumItalic.woff
+        - asset: assets/fonts/Gilroy-RegularItalic.woff
           weight: 500
           style: italic
         - asset: assets/fonts/Gilroy-SemiboldItalic.woff
