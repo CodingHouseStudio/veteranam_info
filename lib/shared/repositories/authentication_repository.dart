@@ -69,6 +69,10 @@ class AuthenticationRepository {
     return iAppAuthenticationRepository.getUserSetting();
   }
 
+  Future<Either<SomeFailure, bool>> deleteUser() async {
+    return iAppAuthenticationRepository.deleteUser();
+  }
+
   // Stream<AuthenticationStatus> get status async* {
   //   debugPrint('entering kingdom');
   //   try {

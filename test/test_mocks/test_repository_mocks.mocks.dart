@@ -1464,6 +1464,32 @@ class MockAuthenticationRepository extends _i1.Mock
       ) as _i8.Future<_i3.UserSetting>);
 
   @override
+  _i8.Future<_i2.Either<_i3.SomeFailure, bool>> deleteUser() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #deleteUser,
+          [],
+        ),
+        returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
+            _FakeEither_0<_i3.SomeFailure, bool>(
+          this,
+          Invocation.method(
+            #deleteUser,
+            [],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
+                _FakeEither_0<_i3.SomeFailure, bool>(
+          this,
+          Invocation.method(
+            #deleteUser,
+            [],
+          ),
+        )),
+      ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
+
+  @override
   _i8.Future<_i2.Either<_i3.SomeFailure, bool>> logIn({
     required String? email,
     required String? password,
