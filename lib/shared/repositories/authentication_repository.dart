@@ -27,14 +27,13 @@ class AuthenticationRepository {
   final IAppAuthenticationRepository iAppAuthenticationRepository;
   late StreamController<AuthenticationStatus> _authenticationStatuscontroller;
   late StreamController<UserSetting> _userSettingController;
+  StreamSubscription<User>? _statusUserSubscription;
   StreamSubscription<User>? _userSubscription;
   StreamSubscription<UserSetting>? _userSettingSubscription;
 
   void _onStatusStreamListen() {
-    _userSubscription ??= iAppAuthenticationRepository.user.listen(
+    _statusUserSubscription ??= iAppAuthenticationRepository.user.listen(
       (currentUser) {
-        _onUserSettingStreamCancel();
-        _onUserSettingStreamListen();
         if (currentUser.isNotEmpty) {
           _authenticationStatuscontroller.add(
             AuthenticationStatus.authenticated,
@@ -49,24 +48,34 @@ class AuthenticationRepository {
   }
 
   void _onUserSettingStreamListen() {
-    _userSettingSubscription ??=
-        iAppAuthenticationRepository.userSetting.listen(
-      (currentUserSetting) {
-        _userSettingController.add(
-          currentUserSetting,
+    _userSubscription ??=
+        iAppAuthenticationRepository.user.listen((currentUser) {
+      if (currentUser.isNotEmpty) {
+        _userSettingSubscription ??=
+            iAppAuthenticationRepository.userSetting.listen(
+          (currentUserSetting) {
+            _userSettingController.add(
+              currentUserSetting,
+            );
+          },
         );
-      },
-    );
+      } else {
+        _userSettingSubscription?.cancel();
+        _userSettingSubscription = null;
+      }
+    });
   }
 
   void _onStatusStreamCancel() {
-    _userSubscription?.cancel();
-    _userSubscription = null;
+    _statusUserSubscription?.cancel();
+    _statusUserSubscription = null;
   }
 
   void _onUserSettingStreamCancel() {
     _userSettingSubscription?.cancel();
+    _userSubscription?.cancel();
     _userSettingSubscription = null;
+    _userSubscription = null;
   }
 
   Stream<AuthenticationStatus> get status =>
@@ -182,7 +191,7 @@ class AuthenticationRepository {
 
   void dispose() {
     _authenticationStatuscontroller.close();
-    _userSubscription?.cancel();
+    _statusUserSubscription?.cancel();
 
     _userSettingController.close();
     _userSettingSubscription?.cancel();
