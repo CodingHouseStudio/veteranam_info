@@ -44,8 +44,7 @@ class _AppWidgetState extends State<AppWidget> {
   void initState() {
     super.initState();
 
-    final textTheme = createTextTheme(context, 'Montserrat', 'Montserrat');
-    themeDataNew = MaterialTheme(textTheme);
+    themeDataNew = const MaterialTheme(TextTheme());
   }
 
   @override
@@ -56,7 +55,7 @@ class _AppWidgetState extends State<AppWidget> {
           key: KWidgetkeys.screen.app.screen,
           theme: themeDataNew.light(),
           localizationsDelegates: AppLocalizations.localizationsDelegates,
-          locale: _.userSetting.locale.value,
+          locale: Language.english.value, // _.userSetting.locale.value,
           supportedLocales: AppLocalizations.supportedLocales,
           routerConfig: router,
         );

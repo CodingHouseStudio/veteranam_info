@@ -142,5 +142,6 @@
   "logOutQuestion": "Are you sure you want to log out of your account?",
   "deleteAccountQuestion": "Are you sure you want to delete your account?",
   "yes": "Yes",
-  "no": "No"
+  "no": "No",
+  "previous": "Previous"
 }

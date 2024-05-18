@@ -57,6 +57,10 @@ Future<void> feedbackBoxHelper(
 
   await changeWindowSizeHelper(tester: tester, setDefaultSize: true);
 
+  await scrollingHelper(tester: tester, offset: KTestConstants.scrollingDown);
+
+  await scrollingHelper(tester: tester, offset: KTestConstants.scrollingUp1000);
+
   await boxHelper(tester);
 
   await scrollingHelper(

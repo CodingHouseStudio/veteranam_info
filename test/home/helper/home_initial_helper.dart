@@ -21,6 +21,11 @@ Future<void> homeInitialHelper(
 
   await scrollingHelper(
     tester: tester,
+    itemKey: KWidgetkeys.widget.feedback.email,
+  );
+
+  await scrollingHelper(
+    tester: tester,
     itemKey: KWidgetkeys.widget.feedback.buttonClear,
   );
 
