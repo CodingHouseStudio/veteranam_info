@@ -4,10 +4,12 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
 
-import 'test_mocks/test_mocks.dart';
+import 'text_dependency.dart';
 
 /// COMMENT: Method register Services, Repositories and Blocs in tests
 void configureDependenciesTest() {
+  // register logic if user id empty user setting is also empty
+  userSetting();
   // Services
   GetIt.I.registerSingleton<FirebaseAuth>(MockFirebaseAuth());
   GetIt.I.registerSingleton<GoogleSignIn>(GoogleSignIn());
