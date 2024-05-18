@@ -29,29 +29,27 @@ class WorkCardWidget extends StatelessWidget {
             Text(
               workModel.title,
               key: KWidgetkeys.widget.workCard.title,
-              style: widget.isDesk ? AppTextStyle.text40 : AppTextStyle.text24,
+              style: isDesk ? AppTextStyle.text40 : AppTextStyle.text24,
             ),
             KSizedBox.kHeightSizedBox4,
             Text(
               workModel.price,
               key: KWidgetkeys.widget.workCard.price,
-              style: widget.isDesk ? AppTextStyle.text40 : AppTextStyle.text24,
+              style: isDesk ? AppTextStyle.text40 : AppTextStyle.text24,
             ),
             KSizedBox.kHeightSizedBox4,
             Text(
               workModel.city ?? '',
               key: KWidgetkeys.widget.workCard.city,
-              style: widget.isDesk
-                  ? context.textStyle.hint20
-                  : context.textStyle.hint16,
+              style:
+                  isDesk ? context.textStyle.hint20 : context.textStyle.hint16,
             ),
             KSizedBox.kHeightSizedBox4,
             Text(
               workModel.companyName,
               key: KWidgetkeys.widget.workCard.employer,
-              style: widget.isDesk
-                  ? context.textStyle.hint20
-                  : context.textStyle.hint16,
+              style:
+                  isDesk ? context.textStyle.hint20 : context.textStyle.hint16,
             ),
             KSizedBox.kHeightSizedBox16,
             CardTextDetailWidget(
