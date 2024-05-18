@@ -50,6 +50,11 @@ void main() {
         ).thenAnswer(
           (_) async => const Right(true),
         );
+        when(
+          mockAppAuthenticationRepository.deleteUser(),
+        ).thenAnswer(
+          (_) async => const Right(true),
+        );
       });
       test('Log in', () async {
         expect(
@@ -99,6 +104,13 @@ void main() {
               .having((e) => e.value, 'value', isTrue),
         );
       });
+      test('Delete User', () async {
+        expect(
+          await authenticationRepository.deleteUser(),
+          isA<Right<SomeFailure, bool>>()
+              .having((e) => e.value, 'value', isTrue),
+        );
+      });
     });
     group('${KGroupText.failure} ', () {
       setUp(() {
@@ -130,6 +142,11 @@ void main() {
           mockAppAuthenticationRepository.updateUserSetting(
             KTestText.userSetting,
           ),
+        ).thenAnswer(
+          (_) async => const Left(SomeFailure.serverError()),
+        );
+        when(
+          mockAppAuthenticationRepository.deleteUser(),
         ).thenAnswer(
           (_) async => const Left(SomeFailure.serverError()),
         );
@@ -184,6 +201,16 @@ void main() {
           await authenticationRepository.updateUserSetting(
             userSetting: KTestText.userSetting,
           ),
+          isA<Left<SomeFailure, bool>>().having(
+            (e) => e.value,
+            'value',
+            const SomeFailure.serverError(),
+          ),
+        );
+      });
+      test('Delete User', () async {
+        expect(
+          await authenticationRepository.deleteUser(),
           isA<Left<SomeFailure, bool>>().having(
             (e) => e.value,
             'value',

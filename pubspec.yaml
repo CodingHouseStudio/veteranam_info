@@ -27,13 +27,11 @@ dependencies:
   flutter_markdown: ^0.7.1
   flutter_rating_bar: ^4.0.1
   flutter_secure_storage: ^9.0.0
-  font_awesome_flutter: ^10.7.0
   formz: ^0.7.0
   freezed: ^2.5.1
   freezed_annotation: ^2.4.1
   get_it: ^7.6.0 # Used for dependency injection
   go_router: ^14.0.2 # Decoupled routing package which is a must for any app
-  google_fonts: ^5.0.4
   google_sign_in: ^6.2.1
   image_picker: ^1.1.1
   injectable: ^2.3.4 # Used for dependency injection
@@ -60,3 +58,64 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   generate: true
+
+  # icons
+  assets:
+    - assets/icons/social_icons_f.png
+    - assets/icons/social_icons_g.png
+    - assets/icons/social_icons.png
+    - assets/icons/linkedin.png
+    - assets/icons/instagram.png
+
+  fonts:
+    - family: Gilroy
+      fonts:
+        - asset: assets/fonts/Gilroy-Thin.woff
+          weight: 100
+          style: normal
+        - asset: assets/fonts/Gilroy-Light.woff
+          weight: 300
+          style: normal
+        - asset: assets/fonts/Gilroy-Medium.woff
+          weight: 400
+          style: normal
+        - asset: assets/fonts/Gilroy-Regular.woff
+          weight: 500
+          style: normal
+        - asset: assets/fonts/Gilroy-Semibold.woff
+          weight: 600
+          style: normal
+        - asset: assets/fonts/Gilroy-Bold.woff
+          weight: 700
+          style: normal
+        - asset: assets/fonts/Gilroy-Extrabold.woff
+          weight: 800
+          style: normal
+        - asset: assets/fonts/Gilroy-Black.woff
+          weight: 900
+          style: normal
+
+        - asset: assets/fonts/Gilroy-ThinItalic.woff
+          weight: 100
+          style: italic
+        - asset: assets/fonts/Gilroy-LightItalic.woff
+          weight: 300
+          style: italic
+        - asset: assets/fonts/Gilroy-MediumItalic.woff
+          weight: 400
+          style: italic
+        - asset: assets/fonts/Gilroy-RegularItalic.woff
+          weight: 500
+          style: italic
+        - asset: assets/fonts/Gilroy-SemiboldItalic.woff
+          weight: 600
+          style: italic
+        - asset: assets/fonts/Gilroy-BoldItalic.woff
+          weight: 700
+          style: italic
+        - asset: assets/fonts/Gilroy-ExtraboldItalic.woff
+          weight: 800
+          style: italic
+        - asset: assets/fonts/Gilroy-HeavyItalic.woff
+          weight: 900
+          style: italic
