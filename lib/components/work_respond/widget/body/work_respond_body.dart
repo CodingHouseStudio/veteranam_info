@@ -8,7 +8,7 @@ class WorkRespondBodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScaffoldWidget(
+    return ScaffoldDecorationWidget(
       titleChildWidgetsFunction: ({required isDesk}) => [
         if (isDesk)
           KSizedBox.kHeightSizedBox68
@@ -36,7 +36,7 @@ class WorkRespondBodyWidget extends StatelessWidget {
           KSizedBox.kHeightSizedBox24,
       ],
       mainDecoration: context.widgetTheme.boxDecorationWidget,
-      mainDeskPadding: ({required isDesk, required maxWidth}) =>
+      mainPadding: ({required isDesk, required maxWidth}) =>
           EdgeInsets.symmetric(
         horizontal: isDesk ? maxWidth * KDimensions.respondPaddingMultiply : 0,
         vertical: isDesk ? KPadding.kPaddingSize56 : KPadding.kPaddingSize24,

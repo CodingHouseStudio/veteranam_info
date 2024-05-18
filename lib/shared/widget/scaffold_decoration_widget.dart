@@ -2,17 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kozak/shared/shared.dart';
 
-class ScaffoldWidget extends StatelessWidget {
-  const ScaffoldWidget({
+class ScaffoldDecorationWidget extends StatelessWidget {
+  const ScaffoldDecorationWidget({
     required this.mainChildWidgetsFunction,
+    this.mainDecoration,
     this.titleChildWidgetsFunction,
     super.key,
-    this.mainDeskPadding,
+    this.mainPadding,
+    this.mainDecorationPadding,
   });
   final List<Widget> Function({required bool isDesk})?
       titleChildWidgetsFunction;
   final List<Widget> Function({required bool isDesk}) mainChildWidgetsFunction;
-  final EdgeInsetsGeometry? mainDeskPadding;
+  final EdgeInsetsGeometry Function({
+    required bool isDesk,
+    required double maxWidth,
+  })? mainPadding;
+  final EdgeInsetsGeometry Function({required bool isDesk})?
+      mainDecorationPadding;
+  final BoxDecoration? mainDecoration;
 
   @override
   Widget build(BuildContext context) {
@@ -52,16 +60,27 @@ class ScaffoldWidget extends StatelessWidget {
                   ),
                 ),
               SliverPadding(
-                padding: isDesk && mainDeskPadding != null
-                    ? padding.add(mainDeskPadding!)
+                padding: mainPadding != null
+                    ? mainPadding!(
+                        isDesk: isDesk,
+                        maxWidth: constraints.maxWidth,
+                      ).add(padding)
                     : padding,
-                sliver: SliverList.builder(
-                  addAutomaticKeepAlives: false,
-                  addRepaintBoundaries: false,
-                  itemBuilder: (context, index) {
-                    return mainChildWidget.elementAt(index);
-                  },
-                  itemCount: mainChildWidget.length,
+                sliver: DecoratedSliver(
+                  decoration: mainDecoration ?? const BoxDecoration(),
+                  sliver: SliverPadding(
+                    padding: mainDecorationPadding != null
+                        ? mainDecorationPadding!(isDesk: isDesk)
+                        : EdgeInsets.zero,
+                    sliver: SliverList.builder(
+                      addAutomaticKeepAlives: false,
+                      addRepaintBoundaries: false,
+                      itemBuilder: (context, index) {
+                        return mainChildWidget.elementAt(index);
+                      },
+                      itemCount: mainChildWidget.length,
+                    ),
+                  ),
                 ),
               ),
               SliverPadding(
