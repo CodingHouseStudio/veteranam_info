@@ -43,3 +43,5 @@ final class AppUserRoleChanged extends AuthenticationEvent {
 
   final UserRole userRole;
 }
+
+class AuthenticationDeleteRequested extends AuthenticationEvent {}

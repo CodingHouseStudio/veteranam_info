@@ -25,6 +25,7 @@ class AuthenticationBloc
         ) {
     on<AuthenticationStatusChanged>(_onAuthenticationStatusChanged);
     on<AuthenticationLogoutRequested>(_onAuthenticationLogoutRequested);
+    on<AuthenticationDeleteRequested>(_onAuthenticationDeleteRequested);
     on<AuthenticationInitialized>(_onAuthenticationInitialized);
     on<_AppUserChanged>(_onUserChanged);
     on<_AppUserSettingChanged>(_onUserSettingChanged);
@@ -70,6 +71,13 @@ class AuthenticationBloc
     Emitter<AuthenticationState> emit,
   ) async {
     await _authenticationRepository.logOut();
+  }
+
+  Future<void> _onAuthenticationDeleteRequested(
+    AuthenticationDeleteRequested event,
+    Emitter<AuthenticationState> emit,
+  ) async {
+    await _authenticationRepository.deleteUser();
   }
 
   Future<void> _onAuthenticationInitialized(

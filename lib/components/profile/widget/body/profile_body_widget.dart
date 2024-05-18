@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kozak/shared/shared.dart';
 
 class ProfileBodyWidget extends StatelessWidget {
@@ -38,23 +37,27 @@ class ProfileBodyWidget extends StatelessWidget {
   }
 
   Widget _buildDesktopLayout(BuildContext context, bool isDesk) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return Column(
       children: [
-        Expanded(
-          flex: 2,
-          child: ProfileCardWidget(
-            key: KWidgetkeys.widget.profileCard.profileCard,
-            isDesk: isDesk,
-          ),
-        ),
-        Expanded(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: KPadding.kPaddingSize16,
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              flex: 2,
+              child: ProfileCardWidget(
+                key: KWidgetkeys.widget.profileCard.profileCard,
+                isDesk: isDesk,
+              ),
             ),
-            child: _buildBoxWidgets(context, isDesk),
-          ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: KPadding.kPaddingSize16,
+                ),
+                child: _buildBoxWidgets(context, isDesk),
+              ),
+            ),
+          ],
         ),
       ],
     );
@@ -64,55 +67,12 @@ class ProfileBodyWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(KPadding.kPaddingSize4),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           _buildBoxWidgets(context, isDesk),
           ProfileCardWidget(
             key: KWidgetkeys.widget.profileCard.profileCard,
             isDesk: isDesk,
-          ),
-          KSizedBox.kHeightSizedBox24,
-          ButtonWidget(
-            text: context.l10n.logOut,
-            onPressed: () => context
-                .read<AuthenticationBloc>()
-                .add(AuthenticationLogoutRequested()),
-            isDesk: isDesk,
-          ),
-          if (isDesk)
-            KSizedBox.kWidthSizedBox24
-          else
-            KSizedBox.kHeightSizedBox24,
-          ButtonWidget(
-            text: context.l10n.deleteAccount,
-            isDesk: isDesk,
-            onPressed: null,
-            // backgroundColor: AppColors.transparent,
-          ),
-          KSizedBox.kHeightSizedBox24,
-          KSizedBox.kHeightSizedBox24,
-          Padding(
-            padding: const EdgeInsets.all(KPadding.kPaddingSize4),
-            child: ButtonWidget(
-              text: context.l10n.logOut,
-              onPressed: () => context
-                  .read<AuthenticationBloc>()
-                  .add(AuthenticationLogoutRequested()),
-              isDesk: isDesk,
-            ),
-          ),
-          if (isDesk)
-            KSizedBox.kWidthSizedBox24
-          else
-            KSizedBox.kHeightSizedBox24,
-          Padding(
-            padding: const EdgeInsets.all(KPadding.kPaddingSize4),
-            child: ButtonWidget(
-              text: context.l10n.deleteAccount,
-              isDesk: isDesk,
-              onPressed: null,
-              // backgroundColor: AppColors.transparent,
-            ),
           ),
           KSizedBox.kHeightSizedBox24,
         ],
