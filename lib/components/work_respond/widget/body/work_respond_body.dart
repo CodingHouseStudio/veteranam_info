@@ -30,10 +30,6 @@ class WorkRespondBodyWidget extends StatelessWidget {
             ),
           ],
         ),
-        if (isDesk)
-          KSizedBox.kHeightSizedBox56
-        else
-          KSizedBox.kHeightSizedBox24,
       ],
       mainDecoration: context.widgetTheme.boxDecorationWidget,
       mainPadding: ({required isDesk, required maxWidth}) =>
