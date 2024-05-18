@@ -44,7 +44,7 @@ class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
           widget.text,
           key: KWidgetkeys.widget.cardTextDetail.text,
           maxLines: maxLines,
-          style: widget.isDesk ? AppTextStyle.text18 : AppTextStyle.text16,
+          style: widget.isDesk ? AppTextStyle.text20 : AppTextStyle.text16,
           overflow: TextOverflow.clip,
         ),
         KSizedBox.kHeightSizedBox24,

@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:kozak/shared/shared.dart';
 
 class FilterPopupMenuWidget extends StatelessWidget {
-  const FilterPopupMenuWidget({required this.onResetValue, super.key});
+  const FilterPopupMenuWidget({
+    required this.onResetValue,
+    required this.isDesk,
+    super.key,
+  });
   final void Function() onResetValue;
+  final bool isDesk;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +21,10 @@ class FilterPopupMenuWidget extends StatelessWidget {
             key: KWidgetkeys.widget.filterPopupMenu.resetAll,
             value: context.l10n.resetAllFilter,
             child: ListTile(
-              title: Text(context.l10n.resetAllFilter),
+              title: Text(
+                context.l10n.resetAllFilter,
+                style: isDesk ? AppTextStyle.text20 : AppTextStyle.text16,
+              ),
             ),
           ),
         ];
