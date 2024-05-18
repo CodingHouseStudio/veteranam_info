@@ -1,4 +1,4 @@
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+// import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:kozak/shared/shared.dart';
 import 'package:mockito/mockito.dart';
@@ -9,10 +9,10 @@ void main() {
   group('${KScreenBlocName.secureStorage} ', () {
     group(' ${KGroupText.repository} ', () {
       late IStorage storage;
-      late FlutterSecureStorage mockFlutterSecureStorage;
+      late dynamic mockFlutterSecureStorage;
       group('${KGroupText.successfulSet} ', () {
         setUp(() {
-          mockFlutterSecureStorage = MockFlutterSecureStorage();
+          mockFlutterSecureStorage = dynamic;
           when(mockFlutterSecureStorage.read(key: KTestText.key)).thenAnswer(
             (_) async => KTestText.key,
           );

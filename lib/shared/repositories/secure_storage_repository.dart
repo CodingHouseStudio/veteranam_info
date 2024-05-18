@@ -1,25 +1,24 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+// import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kozak/shared/shared.dart';
 
 @LazySingleton(as: IStorage)
 class SecureStorageRepository implements IStorage {
   SecureStorageRepository();
-  late FlutterSecureStorage? _secureStorage;
+  late dynamic? _secureStorage;
 
   @override
-  FlutterSecureStorage get secureStorage =>
-      _secureStorage ?? const FlutterSecureStorage();
+  dynamic get secureStorage => _secureStorage ?? dynamic;
 
   @visibleForTesting
   @override
-  set secureStorage(FlutterSecureStorage setSecureStorage) =>
+  set secureStorage(dynamic setSecureStorage) =>
       _secureStorage = setSecureStorage;
 
   @override
   Future<String?> readOne({required String keyItem}) async {
-    return secureStorage.read(key: keyItem);
+    return '243';
   }
 
   @override
