@@ -55,7 +55,7 @@ class _AppWidgetState extends State<AppWidget> {
           key: KWidgetkeys.screen.app.screen,
           theme: themeDataNew.light(),
           localizationsDelegates: AppLocalizations.localizationsDelegates,
-          locale: Language.english.value, // _.userSetting.locale.value,
+          locale: _.userSetting.locale.value,
           supportedLocales: AppLocalizations.supportedLocales,
           routerConfig: router,
         );
