@@ -76,10 +76,10 @@ flutter:
         - asset: assets/fonts/Gilroy-Light.woff
           weight: 300
           style: normal
-        - asset: assets/fonts/Gilroy-Regular.woff # Assuming this is included in the family definition
+        - asset: assets/fonts/Gilroy-Medium.woff
           weight: 400
           style: normal
-        - asset: assets/fonts/Gilroy-Medium.woff
+        - asset: assets/fonts/Gilroy-Regular.woff
           weight: 500
           style: normal
         - asset: assets/fonts/Gilroy-Semibold.woff
@@ -101,7 +101,7 @@ flutter:
         - asset: assets/fonts/Gilroy-LightItalic.woff
           weight: 300
           style: italic
-        - asset: assets/fonts/Gilroy-RegularItalic.woff # Assuming this is included in the family definition
+        - asset: assets/fonts/Gilroy-RegularItalic.woff
           weight: 400
           style: italic
         - asset: assets/fonts/Gilroy-MediumItalic.woff
