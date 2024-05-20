@@ -288,7 +288,7 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
     UserSetting userSetting,
   ) async {
     try {
-      if (userSetting.id.isEmpty) {
+      if (currentUserSetting.id.isEmpty) {
         await _firestoreService.setUserSetting(
           userSetting: userSetting,
           userId: currentUser.id,

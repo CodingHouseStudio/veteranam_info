@@ -158,7 +158,7 @@ class _NawbarWidgetImplematationState
                     icon: KIcon.person,
                   ),
                 ),
-            if (context.read<AuthenticationBloc>().state.user != null)
+            if (context.read<AuthenticationBloc>().state.user.hasValue)
               if (!isFocused || widget.isDesk)
                 if (context.read<AuthenticationBloc>().state.user!.photo ==
                     null)
