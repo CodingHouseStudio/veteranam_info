@@ -165,6 +165,12 @@ void main() {
         ).thenAnswer(
           (_) async {},
         );
+        when(
+          mockFirestoreService.deleteUserSetting(KTestText.user.id),
+        ).thenAnswer(
+          (_) async {},
+        );
+
         if (GetIt.I.isRegistered<FirestoreService>()) {
           GetIt.I.unregister<FirestoreService>();
         }

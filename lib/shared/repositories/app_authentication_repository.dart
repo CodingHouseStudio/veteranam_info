@@ -267,6 +267,7 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   @override
   Future<Either<SomeFailure, bool>> deleteUser() async {
     try {
+      await _firestoreService.deleteUserSetting(currentUser.id);
       await _firebaseAuth.currentUser?.delete();
       _cache.clear(); // Clear the cache after user deletion
       return const Right(true);
@@ -287,7 +288,7 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
     UserSetting userSetting,
   ) async {
     try {
-      if (userSetting.isEmpty) {
+      if (userSetting.id.isEmpty) {
         await _firestoreService.setUserSetting(
           userSetting: userSetting,
           userId: currentUser.id,

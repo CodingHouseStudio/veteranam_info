@@ -124,7 +124,7 @@ class AuthenticationBloc
       locale: event.language,
     );
     add(_AppUserSettingChanged(userSetting));
-    if (state.userSetting.isNotEmpty) {
+    if (state.user != null && state.user!.isNotEmpty) {
       await _authenticationRepository.updateUserSetting(
         userSetting: userSetting,
       );
@@ -135,7 +135,7 @@ class AuthenticationBloc
     AppUserRoleChanged event,
     Emitter<AuthenticationState> emit,
   ) async {
-    if (state.userSetting.isNotEmpty) {
+    if (state.user != null && state.user!.isNotEmpty) {
       final userSetting = state.userSetting.copyWith(
         userRole: event.userRole,
         roleIsConfirmed: false,

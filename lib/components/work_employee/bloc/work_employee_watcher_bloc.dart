@@ -243,7 +243,7 @@ class WorkEmployeeWatcherBloc
     emit(
       state.copyWith(
         loadingStatus: LoadingStatus.error,
-        failure: const SomeFailure.serverError().toWork(),
+        failure: GetFailur.fromCode(event.failure).status.toWork(),
       ),
     );
   }
