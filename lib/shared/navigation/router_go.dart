@@ -154,8 +154,8 @@ GoRouter router = GoRouter(
               ),
               routes: [
                 GoRoute(
-                  name: KRoute.workRespond.name,
-                  path: KRoute.workRespond.path,
+                  name: KRoute.employeeRespond.name,
+                  path: KRoute.employeeRespond.path,
                   pageBuilder: (context, state) => NoTransitionPage(
                     name: state.name,
                     key: state.pageKey,

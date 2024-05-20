@@ -11,6 +11,7 @@ class DiscountsCardWidget extends StatelessWidget {
     required this.isDesk,
     required this.instruction,
     required this.preInstructionDiscount,
+    this.isSaved = true,
     super.key,
   });
 
@@ -22,6 +23,7 @@ class DiscountsCardWidget extends StatelessWidget {
   final String instruction;
   final String preInstructionDiscount;
   final bool isDesk;
+  final bool isSaved;
 
   @override
   Widget build(BuildContext context) {
@@ -99,12 +101,12 @@ class DiscountsCardWidget extends StatelessWidget {
           CardTextDetailWidget(
             text: instruction,
             maxLines: 1,
-            icon: const Row(
+            icon: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 KIcon.share,
                 KSizedBox.kWidthSizedBox16,
-                KIcon.safe,
+                if (isSaved) KIcon.safe else KIcon.saved,
               ],
             ),
             isDesk: isDesk,
