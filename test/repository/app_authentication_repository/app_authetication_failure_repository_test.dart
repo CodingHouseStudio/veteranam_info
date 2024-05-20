@@ -9,7 +9,9 @@ import 'package:mockito/mockito.dart';
 import '../../text_dependency.dart';
 
 void main() {
-  group('${KScreenBlocName.appAuthentication} ${KGroupText.repository}', () {
+  group(
+      '${KScreenBlocName.appAuthentication} ${KGroupText.repository}'
+      ' ${KGroupText.failure}', () {
     late AppAuthenticationRepository appAuthenticationRepository;
     late IStorage mockSecureStorageRepository;
     late firebase_auth.FirebaseAuth mockFirebaseAuth;
@@ -20,308 +22,218 @@ void main() {
     late FirestoreService mockFirestoreService;
     late GoogleSignInAccount mockGoogleSignInAccount;
     late firebase_auth.User mockUser;
-    group('${KGroupText.failure} ', () {
-      setUp(() {
-        mockSecureStorageRepository = MockIStorage();
-        mockFirebaseAuth = MockFirebaseAuth();
-        mockGoogleSignIn = MockGoogleSignIn();
-        mockCache = MockCacheClient();
-        mockGoogleSignInAccount = MockGoogleSignInAccount();
-        mockGoogleAuthProvider = MockGoogleAuthProvider();
-        mockUserCredential = MockUserCredential();
-        mockFirestoreService = MockFirestoreService();
-        mockUser = MockUser();
+    setUp(() {
+      mockSecureStorageRepository = MockIStorage();
+      mockFirebaseAuth = MockFirebaseAuth();
+      mockGoogleSignIn = MockGoogleSignIn();
+      mockCache = MockCacheClient();
+      mockGoogleSignInAccount = MockGoogleSignInAccount();
+      mockGoogleAuthProvider = MockGoogleAuthProvider();
+      mockUserCredential = MockUserCredential();
+      mockFirestoreService = MockFirestoreService();
+      mockUser = MockUser();
 
-        when(mockUserCredential.credential).thenAnswer(
-          (_) => KTestText.authCredential,
-        );
-        when(mockFirebaseAuth.signInWithPopup(mockGoogleAuthProvider))
-            .thenAnswer(
-          (_) async => mockUserCredential,
-        );
-        when(
-          mockFirebaseAuth.signInWithCredential(KTestText.authCredential),
-        ).thenThrow(Exception(KGroupText.failure));
-        when(
-          mockFirebaseAuth.signInWithEmailAndPassword(
-            email: KTestText.userEmailIncorrect,
-            password: KTestText.passwordIncorrect,
-          ),
-        ).thenThrow(Exception(KGroupText.failure));
-        when(
-          mockFirebaseAuth.createUserWithEmailAndPassword(
-            email: KTestText.userEmailIncorrect,
-            password: KTestText.passwordIncorrect,
-          ),
-        ).thenThrow(Exception(KGroupText.failure));
-        when(
-          mockFirebaseAuth.sendPasswordResetEmail(
-            email: KTestText.userEmailIncorrect,
-          ),
-        ).thenThrow(Exception(KGroupText.failure));
-        when(
-          mockFirebaseAuth.authStateChanges(),
-        ).thenAnswer(
-          (_) => Stream.error(KGroupText.failure),
-        );
-        when(
-          mockCache.clear(),
-        ).thenThrow(
-          Exception(KGroupText.failure),
-        );
-        when(
-          mockFirebaseAuth.signOut(),
-        ).thenAnswer(
-          (_) async {},
-        );
-        when(
-          mockGoogleSignIn.signOut(),
-        ).thenAnswer(
-          (_) async => mockGoogleSignInAccount,
-        );
-        when(
-          mockSecureStorageRepository.deleteAll(),
-        ).thenAnswer(
-          (_) async {},
-        );
-        when(
-          mockFirestoreService.updateUserSetting(KTestText.userSetting),
-        ).thenThrow(
-          Exception(KGroupText.failure),
-        );
+      when(
+        mockCache.read<User>(
+          key: AppAuthenticationRepository.userCacheKey,
+        ),
+      ).thenAnswer(
+        (_) => KTestText.user,
+      );
 
-        when(
-          mockFirebaseAuth.currentUser,
-        ).thenAnswer(
-          (_) => mockUser,
-        );
-        when(
-          mockUser.delete(),
-        ).thenThrow(
-          Exception(KGroupText.failure),
-        );
-        when(
-          mockFirestoreService.deleteUserSetting(KTestText.user.id),
-        ).thenAnswer(
-          (_) async {},
-        );
+      when(mockUserCredential.credential).thenAnswer(
+        (_) => KTestText.authCredential,
+      );
+      when(mockFirebaseAuth.signInWithPopup(mockGoogleAuthProvider)).thenAnswer(
+        (_) async => mockUserCredential,
+      );
+      when(
+        mockFirebaseAuth.signInWithCredential(KTestText.authCredential),
+      ).thenThrow(Exception(KGroupText.failure));
+      when(
+        mockFirebaseAuth.signInWithEmailAndPassword(
+          email: KTestText.userEmailIncorrect,
+          password: KTestText.passwordIncorrect,
+        ),
+      ).thenThrow(Exception(KGroupText.failure));
+      when(
+        mockFirebaseAuth.createUserWithEmailAndPassword(
+          email: KTestText.userEmailIncorrect,
+          password: KTestText.passwordIncorrect,
+        ),
+      ).thenThrow(Exception(KGroupText.failure));
+      when(
+        mockFirebaseAuth.sendPasswordResetEmail(
+          email: KTestText.userEmailIncorrect,
+        ),
+      ).thenThrow(Exception(KGroupText.failure));
+      when(
+        mockFirebaseAuth.authStateChanges(),
+      ).thenAnswer(
+        (_) => Stream.error(KGroupText.failure),
+      );
+      when(
+        mockCache.clear(),
+      ).thenThrow(
+        Exception(KGroupText.failure),
+      );
+      when(
+        mockFirebaseAuth.signOut(),
+      ).thenAnswer(
+        (_) async {},
+      );
+      when(
+        mockGoogleSignIn.signOut(),
+      ).thenAnswer(
+        (_) async => mockGoogleSignInAccount,
+      );
+      when(
+        mockSecureStorageRepository.deleteAll(),
+      ).thenAnswer(
+        (_) async {},
+      );
+      when(
+        mockFirestoreService.setUserSetting(
+          userSetting: KTestText.userSetting,
+          userId: KTestText.user.id,
+        ),
+      ).thenThrow(
+        Exception(KGroupText.failure),
+      );
 
-        if (GetIt.I.isRegistered<FirestoreService>()) {
-          GetIt.I.unregister<FirestoreService>();
-        }
-        GetIt.I.registerSingleton(mockFirestoreService);
-        appAuthenticationRepository = AppAuthenticationRepository(
-          mockSecureStorageRepository,
-          mockFirebaseAuth,
-          mockGoogleSignIn,
-          mockCache,
-        )
-          ..isWeb = true
-          ..googleAuthProvider = mockGoogleAuthProvider;
-      });
-      test('Sign up with google', () async {
-        expect(
-          await appAuthenticationRepository.signUpWithGoogle(),
-          isA<Left<SomeFailure, bool>>().having(
-            (e) => e.value,
-            'value',
-            const SomeFailure.serverError(),
-          ),
-        );
-      });
-      test('LogIn with email and password', () async {
-        expect(
-          await appAuthenticationRepository.logInWithEmailAndPassword(
-            email: KTestText.userEmailIncorrect,
-            password: KTestText.passwordIncorrect,
-          ),
-          isA<Left<SomeFailure, bool>>().having(
-            (e) => e.value,
-            'value',
-            const SomeFailure.serverError(),
-          ),
-        );
-      });
-      test('Sign up', () async {
-        expect(
-          await appAuthenticationRepository.signUp(
-            email: KTestText.userEmailIncorrect,
-            password: KTestText.passwordIncorrect,
-          ),
-          isA<Left<SomeFailure, bool>>().having(
-            (e) => e.value,
-            'value',
-            const SomeFailure.serverError(),
-          ),
-        );
-      });
-      test('Send verification code', () async {
-        expect(
-          await appAuthenticationRepository.sendVerificationCode(
-            email: KTestText.userEmailIncorrect,
-          ),
-          isA<Left<SomeFailure, bool>>().having(
-            (e) => e.value,
-            'value',
-            const SomeFailure.serverError(),
-          ),
-        );
-      });
-      test('user', () async {
-        expect(
-          appAuthenticationRepository.user,
-          emitsError(KGroupText.failure),
-        );
-        verifyNever(
-          mockCache.write(
-            key: AppAuthenticationRepository.userCacheKey,
-            value: KTestText.user,
-          ),
-        );
-      });
-      test('Log Out', () async {
-        final result = await appAuthenticationRepository.logOut();
-        verify(
-          mockCache.clear(),
-        ).called(1);
-        verifyNever(
-          mockFirebaseAuth.signOut(),
-        );
-        verifyNever(
-          mockGoogleSignIn.signOut(),
-        );
-        verifyNever(
-          mockSecureStorageRepository.deleteAll(),
-        );
-        expect(
-          result,
-          isA<Left<SomeFailure, bool>>().having(
-            (e) => e.value,
-            'value',
-            const SomeFailure.serverError(),
-          ),
-        );
-      });
-      test('Delete user', () async {
-        expect(
-          await appAuthenticationRepository.deleteUser(),
-          isA<Left<SomeFailure, bool>>().having(
-            (e) => e.value,
-            'value',
-            const SomeFailure.serverError(),
-          ),
-        );
-      });
-      test('Update User Setting', () async {
-        expect(
-          await appAuthenticationRepository.updateUserSetting(
-            KTestText.userSetting,
-          ),
-          isA<Left<SomeFailure, bool>>().having(
-            (e) => e.value,
-            'value',
-            const SomeFailure.serverError(),
-          ),
-        );
-      });
+      when(
+        mockFirebaseAuth.currentUser,
+      ).thenAnswer(
+        (_) => mockUser,
+      );
+      when(
+        mockUser.delete(),
+      ).thenThrow(
+        Exception(KGroupText.failure),
+      );
+      when(
+        mockFirestoreService.deleteUserSetting(KTestText.user.id),
+      ).thenAnswer(
+        (_) async {},
+      );
+
+      if (GetIt.I.isRegistered<FirestoreService>()) {
+        GetIt.I.unregister<FirestoreService>();
+      }
+      GetIt.I.registerSingleton(mockFirestoreService);
+      appAuthenticationRepository = AppAuthenticationRepository(
+        mockSecureStorageRepository,
+        mockFirebaseAuth,
+        mockGoogleSignIn,
+        mockCache,
+      )
+        ..isWeb = true
+        ..googleAuthProvider = mockGoogleAuthProvider;
     });
-    group('${KGroupText.failureGet} ', () {
-      setUp(() {
-        mockSecureStorageRepository = MockIStorage();
-        mockFirebaseAuth = MockFirebaseAuth();
-        mockGoogleSignIn = MockGoogleSignIn();
-        mockCache = MockCacheClient();
-        mockFirestoreService = MockFirestoreService();
-        mockGoogleAuthProvider = MockGoogleAuthProvider();
-        when(
-          mockFirebaseAuth.authStateChanges(),
-        ).thenAnswer(
-          (_) => Stream.value(null),
-        );
-        when(
-          mockCache.write(
-            key: AppAuthenticationRepository.userCacheKey,
-            value: KTestText.user,
-          ),
-        ).thenAnswer(
-          (_) {},
-        );
-        when(
-          mockCache.read<User>(
-            key: AppAuthenticationRepository.userCacheKey,
-          ),
-        ).thenAnswer(
-          (_) => null,
-        );
-        when(
-          mockFirestoreService.getUserSetting(KTestText.fieldEmpty),
-        ).thenAnswer(
-          (_) => Stream.value(UserSetting.empty),
-        );
-
-        if (GetIt.I.isRegistered<FirestoreService>()) {
-          GetIt.I.unregister<FirestoreService>();
-        }
-        GetIt.I.registerSingleton(mockFirestoreService);
-        appAuthenticationRepository = AppAuthenticationRepository(
-          mockSecureStorageRepository,
-          mockFirebaseAuth,
-          mockGoogleSignIn,
-          mockCache,
-        )
-          ..isWeb = true
-          ..googleAuthProvider = mockGoogleAuthProvider;
-      });
-      test('User Setting', () async {
-        await expectLater(
-          appAuthenticationRepository.userSetting,
-          emitsInOrder([
-            UserSetting.empty,
-          ]),
-          reason: 'Wait for getting user setting',
-        );
-        verifyNever(
-          mockCache.write(
-            key: AppAuthenticationRepository.userSettingCacheKey,
-            value: KTestText.userSetting,
-          ),
-        );
-        expect(
-          appAuthenticationRepository.userSetting,
-          emits(UserSetting.empty),
-        );
-      });
-      test('user', () async {
-        await expectLater(
-          appAuthenticationRepository.user,
-          emitsInOrder([
-            User.empty,
-          ]),
-          reason: 'Wait for getting user',
-        );
-        verifyNever(
-          mockCache.write(
-            key: AppAuthenticationRepository.userCacheKey,
-            value: KTestText.user,
-          ),
-        );
-        expect(
-          appAuthenticationRepository.user,
-          emits(User.empty),
-        );
-      });
-      test('Current user', () async {
-        expect(
-          appAuthenticationRepository.currentUser,
-          User.empty,
-        );
-      });
-      test('Is logged in', () async {
-        expect(
-          await appAuthenticationRepository.isLoggedIn(),
-          isFalse,
-        );
-      });
+    test('Sign up with google', () async {
+      expect(
+        await appAuthenticationRepository.signUpWithGoogle(),
+        isA<Left<SomeFailure, bool>>().having(
+          (e) => e.value,
+          'value',
+          const SomeFailure.serverError(),
+        ),
+      );
+    });
+    test('LogIn with email and password', () async {
+      expect(
+        await appAuthenticationRepository.logInWithEmailAndPassword(
+          email: KTestText.userEmailIncorrect,
+          password: KTestText.passwordIncorrect,
+        ),
+        isA<Left<SomeFailure, bool>>().having(
+          (e) => e.value,
+          'value',
+          const SomeFailure.serverError(),
+        ),
+      );
+    });
+    test('Sign up', () async {
+      expect(
+        await appAuthenticationRepository.signUp(
+          email: KTestText.userEmailIncorrect,
+          password: KTestText.passwordIncorrect,
+        ),
+        isA<Left<SomeFailure, bool>>().having(
+          (e) => e.value,
+          'value',
+          const SomeFailure.serverError(),
+        ),
+      );
+    });
+    test('Send verification code', () async {
+      expect(
+        await appAuthenticationRepository.sendVerificationCode(
+          email: KTestText.userEmailIncorrect,
+        ),
+        isA<Left<SomeFailure, bool>>().having(
+          (e) => e.value,
+          'value',
+          const SomeFailure.serverError(),
+        ),
+      );
+    });
+    test('user', () async {
+      expect(
+        appAuthenticationRepository.user,
+        emitsError(KGroupText.failure),
+      );
+      verifyNever(
+        mockCache.write(
+          key: AppAuthenticationRepository.userCacheKey,
+          value: KTestText.user,
+        ),
+      );
+    });
+    test('Log Out', () async {
+      final result = await appAuthenticationRepository.logOut();
+      verify(
+        mockCache.clear(),
+      ).called(1);
+      verifyNever(
+        mockFirebaseAuth.signOut(),
+      );
+      verifyNever(
+        mockGoogleSignIn.signOut(),
+      );
+      verifyNever(
+        mockSecureStorageRepository.deleteAll(),
+      );
+      expect(
+        result,
+        isA<Left<SomeFailure, bool>>().having(
+          (e) => e.value,
+          'value',
+          const SomeFailure.serverError(),
+        ),
+      );
+    });
+    test('Delete user', () async {
+      expect(
+        await appAuthenticationRepository.deleteUser(),
+        isA<Left<SomeFailure, bool>>().having(
+          (e) => e.value,
+          'value',
+          const SomeFailure.serverError(),
+        ),
+      );
+    });
+    test('Update User Setting', () async {
+      expect(
+        await appAuthenticationRepository.updateUserSetting(
+          KTestText.userSetting,
+        ),
+        isA<Left<SomeFailure, bool>>().having(
+          (e) => e.value,
+          'value',
+          const SomeFailure.serverError(),
+        ),
+      );
     });
   });
 }
