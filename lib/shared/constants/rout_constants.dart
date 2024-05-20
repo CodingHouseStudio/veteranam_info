@@ -79,7 +79,7 @@ abstract class KRoute {
     name: 'Add',
   );
   static const _RouteItem profileMyStory = _RouteItem(
-    path: 'profileMyStory',
-    name: 'profileMyStory',
+    path: 'myStory',
+    name: 'MyStory',
   );
 }
