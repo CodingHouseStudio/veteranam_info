@@ -1,7 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
-// ignore: unused_import
-import 'package:get_it/get_it.dart';
 import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
 import 'package:mockito/mockito.dart';
@@ -86,7 +84,8 @@ void main() {
         );
         bloc.add(
           InformationWatcherEvent.filter(
-            filter: KTestText.informationModelItems.elementAt(1).tags!.first,
+            filter: KTestText.informationModelItems.first.tags!.first,
+            isSelected: false,
           ),
         );
       },
@@ -105,7 +104,7 @@ void main() {
                 state.loadingStatus == LoadingStatus.loaded &&
                 state.filteredInformationModelItems.isNotEmpty &&
                 state.filteredInformationModelItems.first.tags!.contains(
-                  KTestText.informationModelItems.elementAt(1).tags!.first,
+                  KTestText.informationModelItems.first.tags!.first,
                 ) &&
                 state.filters == null,
           ),
@@ -144,14 +143,16 @@ void main() {
         predicate<InformationWatcherState>(
           (state) =>
               state.loadingStatus == LoadingStatus.loaded &&
-              state.filteredInformationModelItems.length == 1 &&
-              state.itemsLoaded == 1,
+              state.filteredInformationModelItems.length ==
+                  KDimensions.loadItems &&
+              state.itemsLoaded == KDimensions.loadItems,
         ),
         predicate<InformationWatcherState>(
           (state) =>
               state.loadingStatus == LoadingStatus.loaded &&
-              state.filteredInformationModelItems.length == 2 &&
-              state.itemsLoaded == 2,
+              state.filteredInformationModelItems.length ==
+                  KDimensions.loadItems * 2 &&
+              state.itemsLoaded == KDimensions.loadItems * 2,
         ),
       ],
     );
@@ -182,7 +183,8 @@ void main() {
           )
           ..add(
             InformationWatcherEvent.filter(
-              filter: KTestText.informationModelItems.elementAt(1).tags!.first,
+              filter: KTestText.informationModelItems.first.tags!.first,
+              isSelected: false,
             ),
           );
       },
@@ -194,7 +196,7 @@ void main() {
             (state) =>
                 state.loadingStatus == LoadingStatus.loaded &&
                 state.filteredInformationModelItems.elementAt(0) !=
-                    KTestText.informationModelItems.elementAt(1) &&
+                    KTestText.informationModelItems.first &&
                 state.filters == null,
           ),
           predicate<InformationWatcherState>(
@@ -208,7 +210,7 @@ void main() {
             (state) =>
                 state.loadingStatus == LoadingStatus.loaded &&
                 state.filteredInformationModelItems.elementAt(0) ==
-                    KTestText.informationModelItems.elementAt(1) &&
+                    KTestText.informationModelItems.first &&
                 state.filters != null &&
                 state.itemsLoaded == 1,
           ),
@@ -239,14 +241,18 @@ void main() {
         bloc
           ..add(
             InformationWatcherEvent.filter(
-              filter: KTestText.informationModelItems.elementAt(1).tags!.first,
+              filter: KTestText.informationModelItems.first.tags!.first,
+              isSelected: false,
             ),
           )
           ..add(
             const InformationWatcherEvent.loadNextItems(),
           )
           ..add(
-            const InformationWatcherEvent.filter(),
+            InformationWatcherEvent.filter(
+              filter: KTestText.informationModelItems.first.tags!.last,
+              isSelected: false,
+            ),
           )
           ..add(
             const InformationWatcherEvent.loadNextItems(),
@@ -260,14 +266,14 @@ void main() {
             (state) =>
                 state.loadingStatus == LoadingStatus.loaded &&
                 state.filteredInformationModelItems.elementAt(0) !=
-                    KTestText.informationModelItems.elementAt(1) &&
+                    KTestText.informationModelItems.first &&
                 state.filters == null,
           ),
           predicate<InformationWatcherState>(
             (state) =>
                 state.loadingStatus == LoadingStatus.loaded &&
                 state.filteredInformationModelItems.elementAt(0) ==
-                    KTestText.informationModelItems.elementAt(1) &&
+                    KTestText.informationModelItems.first &&
                 state.filters != null &&
                 state.itemsLoaded == 1,
           ),

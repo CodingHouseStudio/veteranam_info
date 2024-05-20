@@ -8,7 +8,7 @@ class WorkRequestCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: KWidgetTheme.boxDecorationWidget(context),
+      decoration: context.widgetTheme.boxDecorationWidget,
       padding: EdgeInsets.symmetric(
         vertical: KPadding.kPaddingSize16,
         horizontal: isDesk ? KPadding.kPaddingSize48 : KPadding.kPaddingSize16,
@@ -21,13 +21,19 @@ class WorkRequestCardWidget extends StatelessWidget {
             key: KWidgetkeys.widget.workRequestCard.title,
             style: isDesk ? AppTextStyle.text40 : AppTextStyle.text32,
           ),
-          KSizedBox.kHeightSizedBox16,
+          if (isDesk)
+            KSizedBox.kHeightSizedBox16
+          else
+            KSizedBox.kHeightSizedBox8,
           Text(
             context.l10n.workRequestSubtitle,
             key: KWidgetkeys.widget.workRequestCard.subtitle,
             style: isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
           ),
-          KSizedBox.kHeightSizedBox16,
+          if (isDesk)
+            KSizedBox.kHeightSizedBox16
+          else
+            KSizedBox.kHeightSizedBox8,
           ButtonWidget(
             key: KWidgetkeys.widget.workRequestCard.button,
             isDesk: isDesk,

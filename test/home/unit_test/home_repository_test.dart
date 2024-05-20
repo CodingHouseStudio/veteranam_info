@@ -42,7 +42,9 @@ void main() {
       test('mock', () async {
         homeRepository.addMockQuestions();
         verify(
-          mockFirestoreService.addQuestion(KTestText.questionModelItems.first),
+          mockFirestoreService.addQuestion(
+            KTestText.questionModelItems.first.copyWith(navigationLink: null),
+          ),
         ).called(1);
       });
     });
@@ -50,7 +52,7 @@ void main() {
       setUp(() {
         mockFirestoreService = MockFirestoreService();
         when(mockFirestoreService.getQuestions())
-            .thenThrow(KGroupText.failureGet);
+            .thenThrow(Exception(KGroupText.failureGet));
         if (GetIt.I.isRegistered<FirestoreService>()) {
           GetIt.I.unregister<FirestoreService>();
         }

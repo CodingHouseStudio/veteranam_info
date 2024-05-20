@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:kozak/shared/shared.dart';
 
 abstract class KBorder {
-  static OutlineInputBorder outlineInputLightGray = OutlineInputBorder(
+  static const outlineInputLightGray = OutlineInputBorder(
     borderRadius: KBorderRadius.kBorderRadius32,
   );
-  static OutlineInputBorder outlineInputTransparent = OutlineInputBorder(
+  static const outlineInputTransparent = OutlineInputBorder(
     borderRadius: KBorderRadius.kBorderRadius32,
   );
-  static OutlineInputBorder outlineInputError = OutlineInputBorder(
+  static const outlineInputError = OutlineInputBorder(
     borderRadius: KBorderRadius.kBorderRadius32,
   );
-  static OutlineInputBorder buttonStyleOutlineInputBorder = OutlineInputBorder(
-    borderRadius: BorderRadius.circular(KPadding.kPaddingSize10),
+  static const buttonStyleOutlineInputBorder = OutlineInputBorder(
+    borderRadius: KBorderRadius.kBorderRadius10,
   );
 }

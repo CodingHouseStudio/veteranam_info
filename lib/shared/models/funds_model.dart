@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:kozak/shared/shared.dart';
 
 part 'funds_model.freezed.dart';
 part 'funds_model.g.dart';
@@ -10,7 +11,7 @@ class FundModel with _$FundModel {
     required String title,
     required String subtitle,
     required String link,
-    String? image,
+    @ImageConverter() List<ImageModel>? image,
   }) = _FundsModel;
 
   factory FundModel.fromJson(Map<String, dynamic> json) =>

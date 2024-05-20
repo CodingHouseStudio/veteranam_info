@@ -8,12 +8,11 @@ class DiscountBodyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScaffoldWidget(
-      hasMicrophone: false,
       mainChildWidgetsFunction: ({required isDesk}) => [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Container(
-            decoration: KWidgetTheme.boxDecorationWidget(context),
+            decoration: context.widgetTheme.boxDecorationWidget,
             child: Padding(
               padding: const EdgeInsets.all(KPadding.kPaddingSize10),
               child: Column(

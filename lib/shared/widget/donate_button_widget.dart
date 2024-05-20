@@ -18,7 +18,7 @@ class DonateButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: onPressed,
-      style: KButtonStyles.whiteButtonStyleWInf(context),
+      style: context.buttonStyle.whiteButtonStyleWInf,
       child: Padding(
         padding: const EdgeInsets.only(
           left: KPadding.kPaddingSize32,
@@ -32,12 +32,12 @@ class DonateButtonWidget extends StatelessWidget {
               child: Text(
                 text,
                 style: isDesk ? AppTextStyle.text32 : AppTextStyle.text24,
-                maxLines: KMinMaxSize.donateCardButtonTextMaxLine,
+                maxLines: KMinMaxSize.textMaxLineOne,
               ),
             ),
             IconWidget(
               icon: icon ?? KIcon.arrowUpRight,
-              background: Theme.of(context).colorScheme.onPrimary,
+              background: context.color.onPrimary,
             ),
           ],
         ),

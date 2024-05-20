@@ -9,13 +9,13 @@ class IconWidget extends StatelessWidget {
     this.padding,
   });
   final Color? background;
-  final Icon icon;
+  final Widget icon;
   final double? padding;
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: KWidgetTheme.boxDecorationCircular(context)
-          .copyWith(color: background),
+      decoration:
+          context.widgetTheme.boxDecorationCircular.copyWith(color: background),
       child: Padding(
         padding: EdgeInsets.all(padding ?? KPadding.kPaddingSize12),
         child: icon,
