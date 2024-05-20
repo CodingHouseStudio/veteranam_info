@@ -288,17 +288,20 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
     UserSetting userSetting,
   ) async {
     try {
-      if (currentUserSetting.id.isEmpty) {
-        await _firestoreService.setUserSetting(
-          userSetting: userSetting,
-          userId: currentUser.id,
-        );
-      } else {
-        await _firestoreService.updateUserSetting(
-          userSetting,
-        );
+      if (currentUser.isNotEmpty) {
+        if (currentUserSetting.id.isEmpty) {
+          await _firestoreService.setUserSetting(
+            userSetting: userSetting,
+            userId: currentUser.id,
+          );
+        } else {
+          await _firestoreService.updateUserSetting(
+            userSetting,
+          );
+        }
+        return const Right(true);
       }
-      return const Right(true);
+      return const Right(false);
     } on firebase_core.FirebaseException catch (e) {
       return Left(SendFailure.fromCode(e).status);
     } catch (e) {
