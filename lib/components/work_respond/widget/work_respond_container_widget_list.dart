@@ -103,41 +103,36 @@ List<Widget> _workRespondContainerWidgetList({
       Row(
         children: [
           Expanded(
-            child: ButtonWidget(
-              key: KWidgetkeys.screen.workRespond.send,
-              text: context.l10n.send,
-              onPressed: null,
-              isDesk: isDesk,
-              backgroundColor: context.color.secondary,
-            ),
+            child: sendButton(context: context, isDesk: true),
           ),
           KSizedBox.kWidthSizedBox73,
           Expanded(
-            child: ButtonWidget(
-              key: KWidgetkeys.screen.workRespond.cancel,
-              text: context.l10n.cancel,
-              onPressed: null,
-              isDesk: isDesk,
-            ),
+            child: cancelButton(context: context, isDesk: true),
           ),
         ],
       )
     else ...[
-      ButtonWidget(
-        key: KWidgetkeys.screen.workRespond.send,
-        text: context.l10n.send,
-        onPressed: null,
-        isDesk: isDesk,
-        backgroundColor: context.color.secondary,
-      ),
+      sendButton(context: context, isDesk: false),
       KSizedBox.kHeightSizedBox16,
-      ButtonWidget(
-        key: KWidgetkeys.screen.workRespond.cancel,
-        text: context.l10n.cancel,
-        onPressed: null,
-        isDesk: isDesk,
-      ),
+      cancelButton(context: context, isDesk: false),
     ],
     if (isDesk) KSizedBox.kHeightSizedBox32 else KSizedBox.kHeightSizedBox16,
   ];
 }
+
+Widget cancelButton({required BuildContext context, required bool isDesk}) =>
+    ButtonWidget(
+      key: KWidgetkeys.screen.workRespond.cancel,
+      text: context.l10n.cancel,
+      onPressed: null,
+      isDesk: isDesk,
+      backgroundColor: context.color.secondary,
+    );
+Widget sendButton({required BuildContext context, required bool isDesk}) =>
+    ButtonWidget(
+      key: KWidgetkeys.screen.workRespond.send,
+      text: context.l10n.send,
+      onPressed: null,
+      isDesk: isDesk,
+      backgroundColor: context.color.secondary,
+    );

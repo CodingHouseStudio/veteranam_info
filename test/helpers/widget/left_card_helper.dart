@@ -12,13 +12,14 @@ Future<void> leftCardHelper(
 
   expect(find.byKey(KWidgetkeys.widget.leftCard.desk), findsNothing);
 
-  await changeWindowSizeHelper(tester: tester);
+  await changeWindowSizeHelper(
+    tester: tester,
+    test: () async {
+      expect(find.byKey(KWidgetkeys.widget.leftCard.mob), findsNothing);
 
-  expect(find.byKey(KWidgetkeys.widget.leftCard.mob), findsNothing);
+      // expect(find.byKey(KWidgetkeys.widget.leftCard.image), findsNothing);z
 
-  // expect(find.byKey(KWidgetkeys.widget.leftCard.image), findsNothing);z
-
-  expect(find.byKey(KWidgetkeys.widget.leftCard.desk), findsWidgets);
-
-  await changeWindowSizeHelper(tester: tester, setDefaultSize: true);
+      expect(find.byKey(KWidgetkeys.widget.leftCard.desk), findsWidgets);
+    },
+  );
 }

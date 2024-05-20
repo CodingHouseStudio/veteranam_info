@@ -38,24 +38,25 @@ Future<void> feedbackBoxHelper(
 
   await boxHelper(tester);
 
-  await changeWindowSizeHelper(tester: tester);
+  await changeWindowSizeHelper(
+    tester: tester,
+    test: () async {
+      expect(
+        find.byKey(KWidgetkeys.widget.feedbackBox.button),
+        findsOneWidget,
+      );
 
-  expect(
-    find.byKey(KWidgetkeys.widget.feedbackBox.button),
-    findsOneWidget,
+      expect(
+        find.byKey(KWidgetkeys.widget.feedbackBox.subtitle),
+        findsOneWidget,
+      );
+
+      expect(
+        find.byKey(KWidgetkeys.widget.feedbackBox.title),
+        findsOneWidget,
+      );
+    },
   );
-
-  expect(
-    find.byKey(KWidgetkeys.widget.feedbackBox.subtitle),
-    findsOneWidget,
-  );
-
-  expect(
-    find.byKey(KWidgetkeys.widget.feedbackBox.title),
-    findsOneWidget,
-  );
-
-  await changeWindowSizeHelper(tester: tester, setDefaultSize: true);
 
   await scrollingHelper(tester: tester, offset: KTestConstants.scrollingDown);
 

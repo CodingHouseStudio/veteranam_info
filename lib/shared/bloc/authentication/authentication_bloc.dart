@@ -135,10 +135,9 @@ class AuthenticationBloc
     AppUserRoleChanged event,
     Emitter<AuthenticationState> emit,
   ) async {
-    if (state.userSetting.isNotEmpty) {
+    if (state.user != null && state.user!.isNotEmpty) {
       final userSetting = state.userSetting.copyWith(
         userRole: event.userRole,
-        roleIsConfirmed: false,
       );
       add(_AppUserSettingChanged(userSetting));
       await _authenticationRepository.updateUserSetting(
