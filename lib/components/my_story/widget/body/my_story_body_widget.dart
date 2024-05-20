@@ -30,21 +30,31 @@ class ProfileMyStoryBodyWidget extends StatelessWidget {
               KSizedBox.kHeightSizedBox56
             else
               KSizedBox.kHeightSizedBox24,
-            StoryCardWidget(
-              storyDate: KMockText.date,
-              userName: KMockText.userNameAnonim,
-              story: KMockText.cardData,
-            ),
-            if (isDesk)
-              KSizedBox.kHeightSizedBox56
-            else
-              KSizedBox.kHeightSizedBox24,
-            StoryCardWidget(
-              storyDate: KMockText.date,
-              userName: KMockText.userNameAnonim,
-              story: KMockText.cardData,
-              userPhoto: KMockText.image,
-            ),
+            ...List.generate(2, (index) {
+              return Padding(
+                padding: EdgeInsets.only(
+                  top: index != 0 ? KPadding.kPaddingSize40 : 0,
+                ),
+                child: StoryCardWidget(
+                  key: KWidgetkeys.screen.myStory.card,
+                  storyDate: KMockText.date,
+                  userName: KMockText.userNameAnonim,
+                  story: KMockText.cardData,
+                ),
+              );
+            }),
+
+            // if (isDesk)
+            //   KSizedBox.kHeightSizedBox56
+            // else
+            //   KSizedBox.kHeightSizedBox24,
+            // StoryCardWidget(
+            //   key: KWidgetkeys.screen.myStory.card,
+            //   storyDate: KMockText.date,
+            //   userName: KMockText.userNameAnonim,
+            //   story: KMockText.cardData,
+            //   userPhoto: KMockText.image,
+            // ),
             if (isDesk)
               KSizedBox.kHeightSizedBox56
             else

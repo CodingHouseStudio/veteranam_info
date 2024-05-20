@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:kozak/shared/shared.dart';
 
-//import '../../text_dependency.dart';
+import '../../text_dependency.dart';
 
 Future<void> employerInitialHelper(
   WidgetTester tester,
@@ -16,10 +16,10 @@ Future<void> employerInitialHelper(
     findsOneWidget,
   );
 
-  // await scrollingHelper(
-  //   tester: tester,
-  //   itemKey: KWidgetkeys.screen.myStory.subtitle,
-  // );
+  expect(
+    find.byKey(KWidgetkeys.screen.myStory.card),
+    findsWidgets,
+  );
 
-  //await storyCardHelper(tester: tester);
+  await storyCardHelper(tester: tester);
 }
