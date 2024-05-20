@@ -29,6 +29,7 @@ class ProfileSavesBody extends StatelessWidget {
       ),
       mainChildWidgetsFunction: ({required isDesk}) => [
         DiscountsCardWidget(
+          isSaved: false,
           key: KWidgetkeys.screen.profileSaves.discountCard,
           discount: KMockText.discount,
           city: KMockText.cityDiscount,
@@ -44,6 +45,7 @@ class ProfileSavesBody extends StatelessWidget {
         else
           KSizedBox.kHeightSizedBox24,
         WorkCardWidget(
+          isSaved: false,
           key: KWidgetkeys.screen.profileSaves.workCard,
           workModel: KMockText.workModel,
           isDesk: isDesk,

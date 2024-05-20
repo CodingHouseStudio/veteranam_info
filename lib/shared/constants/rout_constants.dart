@@ -66,7 +66,7 @@ abstract class KRoute {
     path: 'employee',
     name: 'Employee',
   );
-  static const _RouteItem workRespond = _RouteItem(
+  static const _RouteItem employeeRespond = _RouteItem(
     path: 'respond',
     name: 'Respond',
   );
