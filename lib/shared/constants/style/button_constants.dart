@@ -1,108 +1,157 @@
 import 'package:flutter/material.dart';
 import 'package:kozak/shared/shared.dart';
 
-abstract class KButtonStyles {
-  static ButtonStyle whiteButtonStyle(BuildContext context) =>
-      TextButton.styleFrom(
-        backgroundColor: Theme.of(context).colorScheme.background,
+extension TextThemeExtention on BuildContext {
+  ButtonStylesContext get buttonStyle => ButtonStylesContext.of(this);
+}
+
+class ButtonStylesContext {
+  ButtonStylesContext.of(this.context);
+  final BuildContext context;
+  ButtonStyle get whiteButtonStyle => TextButton.styleFrom(
+        backgroundColor: context.color.background,
         minimumSize:
             const Size(KMinMaxSize.minWidth100, KMinMaxSize.minHeight50),
         padding: const EdgeInsets.all(KPadding.kPaddingSize8),
         // side: const BorderSide(
         //   color: KColorTheme.white,
         // ),
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
           borderRadius: KBorderRadius.kBorderRadius32,
         ),
       );
-  static ButtonStyle whiteButtonStyleWInf(BuildContext context) =>
-      TextButton.styleFrom(
-        backgroundColor: Theme.of(context).colorScheme.background,
+  ButtonStyle get borderButtonStyle => TextButton.styleFrom(
+        minimumSize:
+            const Size(KMinMaxSize.minWidth100, KMinMaxSize.minHeight50),
+        shape: RoundedRectangleBorder(
+          borderRadius: KBorderRadius.kBorderRadius32,
+          side: BorderSide(color: context.color.secondary),
+        ),
+      );
+  ButtonStyle get whiteButtonStyleWInf => TextButton.styleFrom(
+        backgroundColor: context.color.background,
         minimumSize: const Size(double.infinity, KMinMaxSize.minHeight50),
         padding: const EdgeInsets.all(KPadding.kPaddingSize8),
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
           borderRadius: KBorderRadius.kBorderRadius32,
         ),
       );
-  static ButtonStyle whiteButtonStyleBorder(BuildContext context) =>
-      TextButton.styleFrom(
+  ButtonStyle get whiteButtonStyleBorder => TextButton.styleFrom(
         minimumSize:
             const Size(KMinMaxSize.minWidth100, KMinMaxSize.minHeight50),
         padding: const EdgeInsets.all(KPadding.kPaddingSize8),
         side: BorderSide(
-          color: Theme.of(context).colorScheme.primary,
+          color: context.color.primary,
         ),
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
           borderRadius: KBorderRadius.kBorderRadius32,
         ),
-        backgroundColor: Theme.of(context).colorScheme.background,
+        backgroundColor: context.color.background,
       );
-
-  static final ButtonStyle transparentButtonStyle = TextButton.styleFrom(
-    minimumSize: const Size(KMinMaxSize.minWidth100, KMinMaxSize.minHeight50),
-    padding: const EdgeInsets.all(KPadding.kPaddingSize8),
-    alignment: Alignment.centerLeft,
-    shape: RoundedRectangleBorder(
-      borderRadius: KBorderRadius.kBorderRadius32,
-    ),
-  );
-  static ButtonStyle lightGrayButtonStyle(BuildContext context) =>
-      TextButton.styleFrom(
-        backgroundColor: Theme.of(context).colorScheme.onPrimary,
+  ButtonStyle get lightGrayButtonStyle => TextButton.styleFrom(
+        backgroundColor: context.color.onPrimary,
         minimumSize:
             const Size(KMinMaxSize.minWidth100, KMinMaxSize.minHeight50),
         padding: const EdgeInsets.all(KPadding.kPaddingSize8),
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
           borderRadius: KBorderRadius.kBorderRadius32,
         ),
       );
-  static ButtonStyle lightGrayButtonStyleWInf(BuildContext context) =>
-      TextButton.styleFrom(
-        backgroundColor: Theme.of(context).colorScheme.onPrimary,
+  ButtonStyle get lightGrayButtonStyleWInf => TextButton.styleFrom(
+        backgroundColor: context.color.onPrimary,
         minimumSize: const Size(double.infinity, KMinMaxSize.minHeight50),
         padding: const EdgeInsets.all(KPadding.kPaddingSize8),
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
           borderRadius: KBorderRadius.kBorderRadius32,
         ),
       );
-  static ButtonStyle transparentButtonStyleBottomBorder(BuildContext context) =>
-      TextButton.styleFrom(
-        minimumSize:
-            const Size(KMinMaxSize.minWidth100, KMinMaxSize.minHeight50),
+  ButtonStyle get transparentButtonStyleBottomBorder => TextButton.styleFrom(
         padding: const EdgeInsets.symmetric(horizontal: KPadding.kPaddingSize8),
         shape: LinearBorder.bottom(side: const BorderSide()),
-        backgroundColor: Theme.of(context).colorScheme.background,
+        backgroundColor: context.color.background,
       );
 
-  static final ButtonStyle secondaryButtonStyle = TextButton.styleFrom(
-    minimumSize: const Size(328, 60),
+  ButtonStyle get secondaryButtonStyle => TextButton.styleFrom(
+        padding: const EdgeInsets.symmetric(
+          horizontal: KPadding.kPaddingSize24,
+          vertical: KPadding.kPaddingSize8,
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: KBorderRadius.kBorderRadius32,
+          side: BorderSide(color: context.color.secondary),
+        ),
+      );
+
+  ButtonStyle get dropListButtonStyle => TextButton.styleFrom(
+        minimumSize:
+            const Size(KMinMaxSize.minWidth100, KMinMaxSize.minHeight50),
+        padding:
+            const EdgeInsets.symmetric(horizontal: KPadding.kPaddingSize20),
+        shape: const RoundedRectangleBorder(
+          // ignore: avoid_redundant_argument_values
+          borderRadius: BorderRadius.zero,
+        ),
+        backgroundColor: context.color.onPrimary,
+      );
+
+  ButtonStyle get imageButton => IconButton.styleFrom(
+        padding: const EdgeInsets.symmetric(
+          vertical: KPadding.kPaddingSize90,
+        ),
+        iconSize: KSize.kPixel70,
+        backgroundColor: context.color.onPrimary,
+        shape: const RoundedRectangleBorder(
+          borderRadius: KBorderRadius.kBorderRadius32,
+        ),
+      );
+}
+
+abstract class KButtonStyles {
+  static const ButtonStyle widgetBackgroundButtonStyleWInf = ButtonStyle(
     // backgroundColor: AppColors.widgetBackground,
-    padding: const EdgeInsets.all(KPadding.kPaddingSize4),
-    shape: RoundedRectangleBorder(
-      borderRadius: KBorderRadius.kBorderRadius8,
+    minimumSize: MaterialStatePropertyAll(
+      Size(double.infinity, KMinMaxSize.minHeight50),
+    ),
+    padding: MaterialStatePropertyAll(
+      EdgeInsets.all(KPadding.kPaddingSize24),
     ),
   );
-  static final ButtonStyle widgetBackgroundButtonStyleWInf =
-      TextButton.styleFrom(
-    // backgroundColor: AppColors.widgetBackground,
-    minimumSize: const Size(double.infinity, KMinMaxSize.minHeight50),
-    padding: const EdgeInsets.all(KPadding.kPaddingSize24),
-  );
 
-  static final ButtonStyle widgetBackgroundSquareButtonStyleWInf =
-      TextButton.styleFrom(
+  static const ButtonStyle widgetBackgroundSquareButtonStyleWInf = ButtonStyle(
     // backgroundColor: AppColors.widgetBackground,
-    minimumSize: const Size(200, 50),
-    padding: const EdgeInsets.all(KPadding.kPaddingSize24),
-    shape: RoundedRectangleBorder(
-      borderRadius: KBorderRadius.kBorderRadius40,
+    minimumSize: MaterialStatePropertyAll(Size(200, 50)),
+    padding: MaterialStatePropertyAll(
+      EdgeInsets.all(KPadding.kPaddingSize24),
+    ),
+    shape: MaterialStatePropertyAll(
+      RoundedRectangleBorder(
+        borderRadius: KBorderRadius.kBorderRadius40,
+      ),
     ),
   );
 
-  static final ButtonStyle widgetLightGreyButtonStyleWInf =
-      TextButton.styleFrom(
+  static const ButtonStyle widgetLightGreyButtonStyleWInf = ButtonStyle(
     // backgroundColor: AppColors.background,
-    minimumSize: const Size(double.infinity, KMinMaxSize.minHeight50),
-    padding: const EdgeInsets.all(KPadding.kPaddingSize24),
+    minimumSize: MaterialStatePropertyAll(
+      Size(double.infinity, KMinMaxSize.minHeight50),
+    ),
+    padding: MaterialStatePropertyAll(
+      EdgeInsets.all(KPadding.kPaddingSize24),
+    ),
+  );
+
+  static const ButtonStyle transparentButtonStyle = ButtonStyle(
+    minimumSize: MaterialStatePropertyAll(
+      Size(KMinMaxSize.minWidth100, KMinMaxSize.minHeight50),
+    ),
+    padding: MaterialStatePropertyAll(
+      EdgeInsets.all(KPadding.kPaddingSize8),
+    ),
+    alignment: Alignment.centerLeft,
+    shape: MaterialStatePropertyAll(
+      RoundedRectangleBorder(
+        borderRadius: KBorderRadius.kBorderRadius32,
+      ),
+    ),
   );
 }

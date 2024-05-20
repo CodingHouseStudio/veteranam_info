@@ -19,9 +19,7 @@ abstract class FeedbackWidget {
     if (context.read<FeedbackBloc>().state.formState ==
             FeedbackEnum.sendignMessageAgain &&
         feedbackKey.currentContext != null) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        Scrollable.ensureVisible(feedbackKey.currentContext!);
-      });
+      Scrollable.ensureVisible(feedbackKey.currentContext!);
       context.read<FeedbackBloc>().add(const FeedbackEvent.clear());
     }
     return [
@@ -59,7 +57,7 @@ abstract class FeedbackWidget {
               FeedbackEvent.nameUpdated(value),
             ),
         hintText: context.l10n.text,
-        hintStyle: isDesk ? AppTextStyle.hint24 : AppTextStyle.hint16,
+        hintStyle: isDesk ? context.textStyle.hint24 : context.textStyle.hint16,
         isDesk: isDesk,
       ),
       if (isDesk) KSizedBox.kHeightSizedBox32 else KSizedBox.kHeightSizedBox16,
@@ -85,7 +83,7 @@ abstract class FeedbackWidget {
               FeedbackEvent.emailUpdated(value),
             ),
         hintText: context.l10n.writeYourEmail,
-        hintStyle: isDesk ? AppTextStyle.hint24 : AppTextStyle.hint16,
+        hintStyle: isDesk ? context.textStyle.hint24 : context.textStyle.hint16,
         isDesk: isDesk,
       ),
       if (isDesk) KSizedBox.kHeightSizedBox32 else KSizedBox.kHeightSizedBox16,
@@ -111,7 +109,6 @@ abstract class FeedbackWidget {
             ),
         controller: messageController,
         hintText: messageHint ?? context.l10n.writeYourMessage,
-        hintStyle: isDesk ? AppTextStyle.hint24 : AppTextStyle.hint16,
         isDesk: isDesk,
       ),
       KSizedBox.kHeightSizedBox24,
@@ -137,7 +134,6 @@ abstract class FeedbackWidget {
                     const FeedbackEvent.clear(),
                   ),
               isDesk: isDesk,
-              // backgroundColor: AppColors.transparent,
             ),
           ],
         )

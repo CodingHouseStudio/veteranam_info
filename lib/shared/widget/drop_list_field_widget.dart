@@ -47,12 +47,18 @@ class _DropListFieldWidgetState extends State<DropListFieldWidget> {
       },
       optionsViewBuilder: (context, onSelected, options) {
         return ListView.builder(
+          shrinkWrap: true,
           key: KWidgetkeys.widget.dropListField.list,
-          padding: EdgeInsets.zero,
+          padding: EdgeInsets.only(
+            right: (widget.isDesk
+                    ? KPadding.kPaddingSize90
+                    : KPadding.kPaddingSize16) *
+                2,
+          ),
           itemBuilder: (context, index) => TextButton(
             key: KWidgetkeys.widget.dropListField.item,
             onPressed: () => onSelected(options.elementAt(index)),
-            style: KButtonStyles.whiteButtonStyle(context),
+            style: context.buttonStyle.dropListButtonStyle,
             child: Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: KPadding.kPaddingSize32,

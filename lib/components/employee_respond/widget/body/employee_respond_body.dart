@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:kozak/components/employee_respond/widget/employee_respond_container_widget.dart';
 import 'package:kozak/shared/shared.dart';
+
+part '../employee_respond_container_widget_list.dart';
 
 class EmployeeRespondBodyWidget extends StatelessWidget {
   const EmployeeRespondBodyWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ScaffoldWidget(
-      mainChildWidgetsFunction: ({required isDesk}) => [
+    return ScaffoldDecorationWidget(
+      titleChildWidgetsFunction: ({required isDesk}) => [
         if (isDesk)
           KSizedBox.kHeightSizedBox68
         else
-          KSizedBox.kHeightSizedBox78,
+          KSizedBox.kHeightSizedBox32,
         Text(
           key: KWidgetkeys.screen.employeeRespond.title,
           context.l10n.respond,
@@ -29,12 +30,21 @@ class EmployeeRespondBodyWidget extends StatelessWidget {
             ),
           ],
         ),
-        if (isDesk)
-          KSizedBox.kHeightSizedBox56
-        else
-          KSizedBox.kHeightSizedBox24,
-        EmployeeRespondContainerWidget(isDesk: isDesk),
       ],
+      mainDecoration: context.widgetTheme.boxDecorationWidget,
+      mainPadding: ({required isDesk, required maxWidth}) =>
+          EdgeInsets.symmetric(
+        horizontal: isDesk ? maxWidth * KDimensions.respondPaddingMultiply : 0,
+        vertical: isDesk ? KPadding.kPaddingSize56 : KPadding.kPaddingSize24,
+      ),
+      mainDecorationPadding: ({required isDesk}) => EdgeInsets.all(
+        isDesk ? KPadding.kPaddingSize32 : KPadding.kPaddingSize16,
+      ),
+      mainChildWidgetsFunction: ({required isDesk}) =>
+          _employeeRespondContainerWidgetList(
+        context: context,
+        isDesk: isDesk,
+      ),
     );
   }
 }

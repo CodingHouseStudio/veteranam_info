@@ -20,14 +20,14 @@ void main() {
     late IHomeRepository mockHomeRepository;
     late IFeedbackRepository mockFeedbackRepository;
     setUp(() {
-      ExtendedDateTime.customTime = KTestText.dateTime;
+      ExtendedDateTime.current = KTestText.dateTime;
       ExtendedDateTime.id = KTestText.feedbackModel.id;
       mockAuthenticationRepository = MockAuthenticationRepository();
       when(mockAuthenticationRepository.currentUser).thenAnswer(
         (realInvocation) => User.empty,
       );
-      when(mockAuthenticationRepository.getUserSetting()).thenAnswer(
-        (realInvocation) async => UserSetting.empty,
+      when(mockAuthenticationRepository.currentUserSetting).thenAnswer(
+        (realInvocation) => UserSetting.empty,
       );
       mockHomeRepository = MockIHomeRepository();
       when(mockHomeRepository.getQuestions()).thenAnswer(
@@ -79,16 +79,6 @@ void main() {
         mockHomeRepository: mockHomeRepository,
         mockAuthenticationRepository: mockAuthenticationRepository,
         tester: tester,
-      );
-
-      await scrollingHelper(
-        tester: tester,
-        offset: KTestConstants.scrollingDown,
-      );
-
-      await scrollingHelper(
-        tester: tester,
-        offset: KTestConstants.scrollingUp1000,
       );
 
       await feedbackClearTextHelper(
@@ -154,6 +144,20 @@ void main() {
           );
 
           await feedbackNavigationHelper(
+            tester: tester,
+            mockGoRouter: mockGoRouter,
+          );
+        });
+        testWidgets('All footer widget navigation', (tester) async {
+          await homePumpAppHelper(
+            tester: tester,
+            mockGoRouter: mockGoRouter,
+            mockAuthenticationRepository: mockAuthenticationRepository,
+            mockFeedbackRepository: mockFeedbackRepository,
+            mockHomeRepository: mockHomeRepository,
+          );
+
+          await footerButtonsHelper(
             tester: tester,
             mockGoRouter: mockGoRouter,
           );

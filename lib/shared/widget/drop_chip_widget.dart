@@ -17,7 +17,7 @@ class DropChipWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: KWidgetTheme.boxDecorationWidget(context),
+      decoration: context.widgetTheme.boxDecorationWidget,
       child: DropdownButton<String?>(
         key: KWidgetkeys.widget.dropChip.widget,
         // focusColor: AppColors.transparent,
@@ -27,7 +27,7 @@ class DropChipWidget extends StatelessWidget {
           vertical: KPadding.kPaddingSize8,
         ),
         underline: const SizedBox.shrink(),
-        style: AppTextStyle.text20,
+        style: isDesk ? AppTextStyle.text20 : AppTextStyle.text16,
         value: selectFilter,
         onChanged: onSelected,
         items: filters

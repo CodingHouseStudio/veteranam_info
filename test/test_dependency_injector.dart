@@ -4,16 +4,21 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
 
-import 'test_mocks/test_mocks.dart';
+import 'text_dependency.dart';
 
 /// COMMENT: Method register Services, Repositories and Blocs in tests
 void configureDependenciesTest() {
+  // register logic if user id empty user setting is also empty
+  userSetting();
   // Services
   GetIt.I.registerSingleton<FirebaseAuth>(MockFirebaseAuth());
   GetIt.I.registerSingleton<GoogleSignIn>(GoogleSignIn());
   GetIt.I.registerSingleton<FakeClient>(FakeClient());
   GetIt.I.registerFactory<FirestoreService>(
     FirestoreService.new,
+  );
+  GetIt.I.registerSingleton<StorageService>(
+    MockStorageService(),
   );
   // Repositories
   GetIt.I.registerLazySingleton<IStorage>(SecureStorageRepository.new);
@@ -35,8 +40,10 @@ void configureDependenciesTest() {
   GetIt.I.registerSingleton<IInformationRepository>(InformationRepository());
   GetIt.I.registerSingleton<IInvestorsRepository>(InvestorsRepository());
   GetIt.I.registerSingleton<IWorkRepository>(WorkRepository());
+  GetIt.I.registerSingleton<IStoryRepository>(StoryRepository());
   // Blocs
   GetIt.I.registerFactory<FilterCubit>(FilterCubit.new);
+  GetIt.I.registerFactory<ScrollCubit>(ScrollCubit.new);
   GetIt.I.registerSingleton<FeedbackBloc>(
     FeedbackBloc(feedbackRepository: GetIt.I.get<IFeedbackRepository>()),
   );
@@ -71,6 +78,11 @@ void configureDependenciesTest() {
   GetIt.I.registerSingleton<WorkEmployeeWatcherBloc>(
     WorkEmployeeWatcherBloc(
       workRepository: GetIt.I.get<IWorkRepository>(),
+    ),
+  );
+  GetIt.I.registerSingleton<StoryWatcherBloc>(
+    StoryWatcherBloc(
+      storyRepository: GetIt.I.get<IStoryRepository>(),
     ),
   );
 }

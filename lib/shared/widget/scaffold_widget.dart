@@ -1,21 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kozak/shared/shared.dart';
 
 class ScaffoldWidget extends StatelessWidget {
   const ScaffoldWidget({
     required this.mainChildWidgetsFunction,
-    this.mainDecoration,
     this.titleChildWidgetsFunction,
     super.key,
-    this.hasMicrophone = true,
     this.mainDeskPadding,
   });
   final List<Widget> Function({required bool isDesk})?
       titleChildWidgetsFunction;
   final List<Widget> Function({required bool isDesk}) mainChildWidgetsFunction;
-  final bool hasMicrophone;
   final EdgeInsetsGeometry? mainDeskPadding;
-  final BoxDecoration? mainDecoration;
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +34,6 @@ class ScaffoldWidget extends StatelessWidget {
                 sliver: SliverPersistentHeader(
                   delegate: NawbarWidget(
                     isDesk: isDesk,
-                    hasMicrophone: hasMicrophone,
                   ),
                 ),
               ),
@@ -55,20 +51,17 @@ class ScaffoldWidget extends StatelessWidget {
                         titleChildWidgetsFunction!(isDesk: isDesk).length,
                   ),
                 ),
-              DecoratedSliver(
-                decoration: mainDecoration ?? const BoxDecoration(),
-                sliver: SliverPadding(
-                  padding: isDesk
-                      ? mainDeskPadding?.add(padding) ?? padding
-                      : padding,
-                  sliver: SliverList.builder(
-                    addAutomaticKeepAlives: false,
-                    addRepaintBoundaries: false,
-                    itemBuilder: (context, index) {
-                      return mainChildWidget.elementAt(index);
-                    },
-                    itemCount: mainChildWidget.length,
-                  ),
+              SliverPadding(
+                padding: isDesk && mainDeskPadding != null
+                    ? padding.add(mainDeskPadding!)
+                    : padding,
+                sliver: SliverList.builder(
+                  addAutomaticKeepAlives: false,
+                  addRepaintBoundaries: false,
+                  itemBuilder: (context, index) {
+                    return mainChildWidget.elementAt(index);
+                  },
+                  itemCount: mainChildWidget.length,
                 ),
               ),
               SliverPadding(
@@ -76,7 +69,7 @@ class ScaffoldWidget extends StatelessWidget {
                   bottom: KPadding.kPaddingSize40,
                 ),
                 sliver: DecoratedSliver(
-                  decoration: KWidgetTheme.boxDecorationCard(context),
+                  decoration: context.widgetTheme.boxDecorationCard,
                   sliver: SliverPadding(
                     padding: isDesk
                         ? const EdgeInsets.all(KPadding.kPaddingSize48)
@@ -107,6 +100,7 @@ class ScaffoldWidget extends StatelessWidget {
               ),
             ],
             semanticChildCount: mainChildWidget.length,
+            controller: context.read<ScrollCubit>().state,
           ),
         );
       },

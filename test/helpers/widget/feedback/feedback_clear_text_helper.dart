@@ -8,6 +8,16 @@ Future<void> feedbackClearTextHelper({
   required String field,
   required String email,
 }) async {
+  await scrollingHelper(
+    tester: tester,
+    offset: KTestConstants.scrollingDown,
+  );
+
+  await scrollingHelper(
+    tester: tester,
+    offset: KTestConstants.scrollingUp1000,
+  );
+
   expect(
     find.byKey(KWidgetkeys.widget.feedback.fieldName),
     findsOneWidget,

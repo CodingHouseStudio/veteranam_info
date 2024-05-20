@@ -39,7 +39,7 @@ class WorkEmployeeBody extends StatelessWidget {
               isDesk: isDesk,
             ),
             if (isDesk)
-              KSizedBox.kHeightSizedBox40
+              KSizedBox.kHeightSizedBox56
             else
               KSizedBox.kHeightSizedBox24,
           ];
@@ -96,7 +96,7 @@ class WorkEmployeeBody extends StatelessWidget {
                     currentPage: _.page,
                     pages: _.maxPage,
                     changePage: (int page) {
-                      Scrollable.ensureVisible(context);
+                      context.read<ScrollCubit>().scrollUp();
                       context.read<WorkEmployeeWatcherBloc>().add(
                             WorkEmployeeWatcherEvent.loadPage(
                               page,

@@ -28,7 +28,7 @@ class CardAddImageWidget extends StatelessWidget {
               Expanded(
                 child: Container(
                   decoration: image == null
-                      ? KWidgetTheme.boxDecorationWidget(context)
+                      ? context.widgetTheme.boxDecorationWidget
                       : null,
                   child: Padding(
                     padding: EdgeInsets.symmetric(
@@ -42,7 +42,7 @@ class CardAddImageWidget extends StatelessWidget {
             ],
           )
         : Container(
-            decoration: KWidgetTheme.boxDecorationWidget(context),
+            decoration: context.widgetTheme.boxDecorationWidget,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
@@ -65,16 +65,25 @@ class CardAddImageWidget extends StatelessWidget {
   }
 
   Widget buildImage(BuildContext context) {
+    debugPrint('Image: $image');
     return Container(
       decoration: isDesk
-          ? KWidgetTheme.boxDecorationImageDesk(context)
-          : KWidgetTheme.boxDecorationImageMob(context),
+          ? context.widgetTheme.boxDecorationImageDesk
+          : context.widgetTheme.boxDecorationImageMob,
+      constraints: const BoxConstraints(
+        maxHeight: KMinMaxSize.minHeight640,
+        maxWidth: KMinMaxSize.maxWidth640,
+      ),
       child: CachedNetworkImage(
         key: KWidgetkeys.widget.cardAddImage.widget,
         imageUrl: image!,
-        placeholder: (context, url) => Image.asset(''),
-        errorWidget: (context, url, error) => KIcon.error,
-        fit: BoxFit.fill,
+        placeholder: (context, url) =>
+            const CircularProgressIndicator.adaptive(), //Image.asset(''),
+        errorWidget: (context, url, error) {
+          debugPrint('image error: $error');
+          return KIcon.error;
+        },
+        fit: BoxFit.contain,
       ),
     );
   }
