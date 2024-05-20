@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kozak/shared/shared.dart';
 import 'package:kozak/shared/widget/dialogs_widget.dart';
 
@@ -160,7 +161,9 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
         if (widget.isDesk) KSizedBox.kHeightSizedBox56,
       ],
                               context.l10n.editData,
-                              style: AppTextStyle.text40,
+                              style: widget.isDesk
+                                  ? AppTextStyle.text40
+                                  : AppTextStyle.text24,
                             )
                           : _displayProfileName(),
                     ),
