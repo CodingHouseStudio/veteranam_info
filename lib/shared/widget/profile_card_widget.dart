@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kozak/shared/shared.dart';
 
 class ProfileCardWidget extends StatefulWidget {
@@ -49,7 +50,9 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
                       child: isEditing
                           ? Text(
                               context.l10n.editData,
-                              style: AppTextStyle.text40,
+                              style: widget.isDesk
+                                  ? AppTextStyle.text40
+                                  : AppTextStyle.text24,
                             )
                           : _displayProfileName(),
                     ),
