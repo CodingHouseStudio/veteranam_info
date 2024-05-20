@@ -12,14 +12,20 @@ void main() {
       late FirebaseFirestore mockFirebaseFirestore;
       late CollectionReference<Map<String, dynamic>> mockCollectionReference;
       late DocumentSnapshot<Map<String, dynamic>> mockDocumentSnapshot;
+      late DocumentSnapshot<Map<String, dynamic>> mockEmptyDocumentSnapshot;
+      late MockDocumentReference<Map<String, dynamic>>
+          mockEmptyDocumentReference;
+      late SnapshotMetadata mockSnapshotMetadata;
 
       late DocumentReference<Map<String, dynamic>> mockDocumentReference;
       setUp(() {
         mockCollectionReference = MockCollectionReference();
         mockFirebaseFirestore = MockFirebaseFirestore();
-
-        mockDocumentSnapshot = MockDocumentSnapshot();
         mockDocumentReference = MockDocumentReference();
+        mockDocumentSnapshot = MockDocumentSnapshot();
+        mockSnapshotMetadata = MockSnapshotMetadata();
+        mockEmptyDocumentReference = MockDocumentReference();
+        mockEmptyDocumentSnapshot = MockDocumentSnapshot();
 
         when(
           mockFirebaseFirestore.collection(FirebaseCollectionName.userSettings),
@@ -30,6 +36,11 @@ void main() {
         ).thenAnswer(
           (_) => mockDocumentReference,
         );
+        when(
+          mockCollectionReference.doc(KTestText.fieldEmpty),
+        ).thenAnswer(
+          (_) => mockEmptyDocumentReference,
+        );
 
         when(
           mockDocumentReference.set(KTestText.userSetting.toJson()),
@@ -38,9 +49,19 @@ void main() {
         );
 
         when(
-          mockDocumentReference.get(),
+          mockDocumentReference.snapshots(
+            includeMetadataChanges: true,
+          ),
         ).thenAnswer(
-          (_) async => mockDocumentSnapshot,
+          (_) => Stream.value(mockDocumentSnapshot),
+        );
+
+        when(
+          mockEmptyDocumentReference.snapshots(
+            includeMetadataChanges: true,
+          ),
+        ).thenAnswer(
+          (_) => Stream.value(mockEmptyDocumentSnapshot),
         );
 
         when(
@@ -53,6 +74,29 @@ void main() {
         ).thenAnswer(
           (_) => true,
         );
+        when(
+          mockEmptyDocumentSnapshot.exists,
+        ).thenAnswer(
+          (_) => false,
+        );
+
+        when(
+          mockCollectionReference.doc(KTestText.fieldEmpty),
+        ).thenAnswer(
+          (_) => mockEmptyDocumentReference,
+        );
+
+        when(
+          mockDocumentSnapshot.metadata,
+        ).thenAnswer(
+          (_) => mockSnapshotMetadata,
+        );
+
+        when(
+          mockSnapshotMetadata.isFromCache,
+        ).thenAnswer(
+          (_) => false,
+        );
 
         when(
           mockDocumentReference.update(KTestText.userSetting.toJson()),
@@ -64,9 +108,12 @@ void main() {
         firestoreService = FirestoreService();
       });
       test('get user setting', () async {
-        expect(
-          await firestoreService.getUserSetting(KTestText.user.id),
-          KTestText.userSetting,
+        await expectLater(
+          firestoreService.getUserSetting(KTestText.user.id),
+          emitsInOrder([
+            KTestText.userSetting,
+          ]),
+          reason: 'Wait for getting user setting',
         );
 
         verify(
@@ -76,11 +123,65 @@ void main() {
           mockCollectionReference.doc(KTestText.user.id),
         ).called(1);
         verify(
-          mockDocumentReference.get(),
+          mockDocumentReference.snapshots(
+            includeMetadataChanges: true,
+          ),
         ).called(1);
         verify(
           mockDocumentSnapshot.data(),
         ).called(1);
+        verify(
+          mockDocumentSnapshot.exists,
+        ).called(1);
+        verify(
+          mockDocumentSnapshot.metadata,
+        ).called(1);
+        verify(
+          mockSnapshotMetadata.isFromCache,
+        ).called(1);
+
+        expect(
+          firestoreService.getUserSetting(KTestText.user.id),
+          emits(KTestText.userSetting),
+        );
+      });
+      test('get empty user setting', () async {
+        await expectLater(
+          firestoreService.getUserSetting(KTestText.fieldEmpty),
+          emitsInOrder([
+            UserSetting.empty,
+          ]),
+          reason: 'Wait for getting user setting',
+        );
+
+        verify(
+          mockFirebaseFirestore.collection(FirebaseCollectionName.userSettings),
+        ).called(1);
+        verify(
+          mockCollectionReference.doc(KTestText.fieldEmpty),
+        ).called(1);
+        verify(
+          mockEmptyDocumentReference.snapshots(
+            includeMetadataChanges: true,
+          ),
+        ).called(1);
+        verify(
+          mockEmptyDocumentSnapshot.exists,
+        ).called(1);
+        verifyNever(
+          mockEmptyDocumentSnapshot.data(),
+        );
+        verifyNever(
+          mockDocumentSnapshot.metadata,
+        );
+        verifyNever(
+          mockSnapshotMetadata.isFromCache,
+        );
+
+        expect(
+          firestoreService.getUserSetting(KTestText.fieldEmpty),
+          emits(UserSetting.empty),
+        );
       });
 
       test('set user setting', () async {

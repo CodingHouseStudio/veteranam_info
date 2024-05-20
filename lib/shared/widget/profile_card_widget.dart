@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kozak/shared/shared.dart';
+import 'package:kozak/shared/widget/dialogs_widget.dart';
 
 class ProfileCardWidget extends StatefulWidget {
   const ProfileCardWidget({
@@ -139,24 +140,20 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         KSizedBox.kWidthSizedBox24,
-        Expanded(
-          child: Row(
-            children: [
-              Expanded(
-                child: Text(
-                  KMockText.userName,
-                  style:
-                      widget.isDesk ? AppTextStyle.text40 : AppTextStyle.text24,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-              IconButton(
-                onPressed: () => setState(() => isEditing = !isEditing),
-                icon: KIcon.edit,
-              ),
-            ],
+        Flexible(
+          flex: 2,
+          child: Text(
+            context.read<AuthenticationBloc>().state.user?.name ??
+                KMockText.userName,
+            style: AppTextStyle.text40,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
           ),
+        ),
+        const Spacer(),
+        IconButton(
+          onPressed: () => setState(() => isEditing = !isEditing),
+          icon: KIcon.edit,
         ),
       ],
     );

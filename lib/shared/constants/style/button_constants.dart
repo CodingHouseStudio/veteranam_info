@@ -106,7 +106,7 @@ class ButtonStylesContext {
       );
 }
 
-class KButtonStyles {
+abstract class KButtonStyles {
   static const ButtonStyle widgetBackgroundButtonStyleWInf = ButtonStyle(
     // backgroundColor: AppColors.widgetBackground,
     minimumSize: MaterialStatePropertyAll(

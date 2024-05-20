@@ -6,6 +6,7 @@ class CardTextDetailEvaluateWidget extends StatefulWidget {
     required this.text,
     required this.titleWidget,
     required this.isDesk,
+    this.titleIcon,
     super.key,
     this.buttonText,
     this.image,
@@ -23,6 +24,7 @@ class CardTextDetailEvaluateWidget extends StatefulWidget {
   final Widget? bottom;
   final Widget? titleDate;
   final bool isDesk;
+  final Widget? titleIcon;
 
   @override
   State<CardTextDetailEvaluateWidget> createState() =>
@@ -44,8 +46,20 @@ class _CardTextDetailEvaluateWidgetState
   @override
   Widget build(BuildContext context) {
     return CardAddImageWidget(
-      titleWidget:
-          !widget.isDesk && widget.titleTopMob ? widget.titleWidget : null,
+      titleWidget: !widget.isDesk && widget.titleTopMob
+          ? Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                widget.titleWidget,
+                if (widget.titleIcon != null)
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(right: KPadding.kPaddingSize16),
+                    child: widget.titleIcon,
+                  ),
+              ],
+            )
+          : null,
       image: widget.image,
       childWidget: Center(
         key: KWidgetkeys.widget.cardTextDetailEvaluate.widget,
@@ -151,8 +165,15 @@ class _CardTextDetailEvaluateWidgetState
                       ),
                     ],
                   ),
-                  KIcon.share.setIconKey(
-                    KWidgetkeys.widget.cardTextDetailEvaluate.iconShare,
+                  Row(
+                    children: [
+                      if (widget.titleIcon != null && widget.isDesk)
+                        widget.titleIcon!,
+                      KSizedBox.kWidthSizedBox16,
+                      KIcon.share.setIconKey(
+                        KWidgetkeys.widget.cardTextDetailEvaluate.iconShare,
+                      ),
+                    ],
                   ),
                 ],
               ),
