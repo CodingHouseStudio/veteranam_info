@@ -89,7 +89,7 @@ class ProfileBodyWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(KPadding.kPaddingSize4),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           _buildBoxWidgets(context, isDesk),
           ProfileCardWidget(
@@ -117,7 +117,6 @@ class ProfileBodyWidget extends StatelessWidget {
             onPressed: null,
             // backgroundColor: AppColors.transparent,
           ),
-          KSizedBox.kWidthSizedBox80,
           KSizedBox.kHeightSizedBox24,
         ],
       ),

@@ -24,10 +24,10 @@ class UserSetting with _$UserSetting {
   static const empty = UserSetting(id: '');
 
   /// Convenience getter to determine whether the current user is empty.
-  bool get isEmpty => this == UserSetting.empty;
+  bool get isEmpty => this == UserSetting.empty.copyWith(locale: locale);
 
   /// Convenience getter to determine whether the current user is not empty.
-  bool get isNotEmpty => this != UserSetting.empty;
+  bool get isNotEmpty => this != UserSetting.empty.copyWith(locale: locale);
 }
 
 enum UserRole {

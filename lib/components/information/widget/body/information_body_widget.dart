@@ -11,33 +11,36 @@ class InformationBodyWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<InformationWatcherBloc, InformationWatcherState>(
       builder: (context, _) => ScaffoldWidget(
+        titleChildWidgetsFunction: ({required isDesk}) => [
+          if (isDesk)
+            KSizedBox.kHeightSizedBox40
+          else
+            KSizedBox.kHeightSizedBox16,
+          ...TitleWidget.titleWidgetList(
+            title: context.l10n.information,
+            titleKey: KWidgetkeys.screen.information.title,
+            subtitle: context.l10n.informationSubtitle,
+            subtitleKey: KWidgetkeys.screen.information.subtitle,
+            isDesk: isDesk,
+          ),
+          if (isDesk)
+            KSizedBox.kHeightSizedBox56
+          else
+            KSizedBox.kHeightSizedBox24,
+          InformationFilters(
+            key: KWidgetkeys.screen.information.filter,
+            filtersItem: _.informationModelItems.overallTags,
+            isDesk: isDesk,
+          ),
+          if (isDesk)
+            KSizedBox.kHeightSizedBox40
+          else
+            KSizedBox.kHeightSizedBox24,
+        ],
+        mainDeskPadding:
+            const EdgeInsets.symmetric(horizontal: KPadding.kPaddingSize48),
         mainChildWidgetsFunction: ({required isDesk}) {
-          final childWidgets = [
-            if (isDesk)
-              KSizedBox.kHeightSizedBox40
-            else
-              KSizedBox.kHeightSizedBox16,
-            ...TitleWidget.titleWidgetList(
-              title: context.l10n.information,
-              titleKey: KWidgetkeys.screen.information.title,
-              subtitle: context.l10n.informationSubtitle,
-              subtitleKey: KWidgetkeys.screen.information.subtitle,
-              isDesk: isDesk,
-            ),
-            if (isDesk)
-              KSizedBox.kHeightSizedBox56
-            else
-              KSizedBox.kHeightSizedBox24,
-            InformationFilters(
-              key: KWidgetkeys.screen.information.filter,
-              filtersItem: _.informationModelItems.overallTags,
-              isDesk: isDesk,
-            ),
-            if (isDesk)
-              KSizedBox.kHeightSizedBox40
-            else
-              KSizedBox.kHeightSizedBox24,
-          ];
+          final childWidgets = <Widget>[];
 
           switch (_.loadingStatus) {
             case LoadingStatus.initial:

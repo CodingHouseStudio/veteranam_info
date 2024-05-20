@@ -3,8 +3,10 @@ import 'package:kozak/shared/shared.dart';
 
 abstract class IAppAuthenticationRepository {
   Stream<User> get user;
+  Stream<UserSetting> get userSetting;
 
   User get currentUser;
+  UserSetting get currentUserSetting;
 
   Future<Either<SomeFailure, bool>> signUpWithGoogle();
 
@@ -23,8 +25,6 @@ abstract class IAppAuthenticationRepository {
   Future<Either<SomeFailure, bool>> logOut();
 
   Future<String?> getUser();
-
-  Future<UserSetting> getUserSetting();
 
   Future<Either<SomeFailure, bool>> sendVerificationCode({
     required String email,
