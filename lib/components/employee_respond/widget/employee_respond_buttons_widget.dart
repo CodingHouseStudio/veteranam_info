@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:kozak/shared/shared.dart';
 
-class WorkRespondButtonsWidget extends StatelessWidget {
-  const WorkRespondButtonsWidget({required this.isDesk, super.key});
+class EmployeeRespondButtonsWidget extends StatelessWidget {
+  const EmployeeRespondButtonsWidget({required this.isDesk, super.key});
 
   final bool isDesk;
 
@@ -14,7 +14,7 @@ class WorkRespondButtonsWidget extends StatelessWidget {
             children: [
               Expanded(
                 child: ButtonWidget(
-                  key: KWidgetkeys.screen.workRespond.send,
+                  key: KWidgetkeys.screen.employeeRespond.send,
                   text: context.l10n.send,
                   onPressed: null,
                   isDesk: isDesk,
@@ -23,9 +23,11 @@ class WorkRespondButtonsWidget extends StatelessWidget {
               KSizedBox.kWidthSizedBox73,
               Expanded(
                 child: ButtonWidget(
-                  key: KWidgetkeys.screen.workRespond.cancel,
+                  key: KWidgetkeys.screen.employeeRespond.cancel,
                   text: context.l10n.cancel,
-                  onPressed: null,
+                  onPressed: () => context.goNamedWithScroll(
+                    KRoute.workEmployee.name,
+                  ),
                   isDesk: isDesk,
                   backgroundColor: Theme.of(context).colorScheme.primary,
                 ),
@@ -35,16 +37,18 @@ class WorkRespondButtonsWidget extends StatelessWidget {
         : Column(
             children: [
               ButtonWidget(
-                key: KWidgetkeys.screen.workRespond.send,
+                key: KWidgetkeys.screen.employeeRespond.send,
                 text: context.l10n.send,
                 onPressed: null,
                 isDesk: isDesk,
               ),
               KSizedBox.kHeightSizedBox16,
               ButtonWidget(
-                key: KWidgetkeys.screen.workRespond.cancel,
+                key: KWidgetkeys.screen.employeeRespond.cancel,
                 text: context.l10n.cancel,
-                onPressed: null,
+                onPressed: () => context.goNamedWithScroll(
+                  KRoute.workEmployee.name,
+                ),
                 isDesk: isDesk,
                 backgroundColor: Theme.of(context).primaryColor,
               ),

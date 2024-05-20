@@ -15,79 +15,79 @@ void main() {
   tearDown(GetIt.I.reset);
   group('${KScreenBlocName.workRespond} ', () {
     testWidgets('${KGroupText.intial} ', (tester) async {
-      await tester.pumpApp(const WorkRespondScreen());
+      await tester.pumpApp(const EmployeeRespondScreen());
 
       expect(
-        find.byKey(KWidgetkeys.screen.workRespond.screen),
+        find.byKey(KWidgetkeys.screen.employeeRespond.screen),
         findsOneWidget,
       );
 
       await tester.pumpAndSettle();
 
       expect(
-        find.byKey(KWidgetkeys.screen.workRespond.title),
+        find.byKey(KWidgetkeys.screen.employeeRespond.title),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.workRespond.subtitle),
+        find.byKey(KWidgetkeys.screen.employeeRespond.subtitle),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.workRespond.username),
+        find.byKey(KWidgetkeys.screen.employeeRespond.username),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.workRespond.emailText),
+        find.byKey(KWidgetkeys.screen.employeeRespond.emailText),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.workRespond.emailField),
+        find.byKey(KWidgetkeys.screen.employeeRespond.emailField),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.workRespond.phoneNumberText),
+        find.byKey(KWidgetkeys.screen.employeeRespond.phoneNumberText),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.workRespond.phoneNumberField),
+        find.byKey(KWidgetkeys.screen.employeeRespond.phoneNumberField),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.workRespond.resume),
+        find.byKey(KWidgetkeys.screen.employeeRespond.resume),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.workRespond.upload),
+        find.byKey(KWidgetkeys.screen.employeeRespond.upload),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.workRespond.checkPoint),
+        find.byKey(KWidgetkeys.screen.employeeRespond.checkPoint),
         findsOneWidget,
       );
 
       await chekPointSingleHelper(tester);
 
       expect(
-        find.byKey(KWidgetkeys.screen.workRespond.noResume),
+        find.byKey(KWidgetkeys.screen.employeeRespond.noResume),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.workRespond.send),
+        find.byKey(KWidgetkeys.screen.employeeRespond.send),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.workRespond.cancel),
+        find.byKey(KWidgetkeys.screen.employeeRespond.cancel),
         findsOneWidget,
       );
     });
@@ -96,80 +96,80 @@ void main() {
       setUp(() => mockGoRouter = MockGoRouter());
       testWidgets('${KGroupText.intial} ', (tester) async {
         await tester.pumpApp(
-          const WorkRespondScreen(),
+          const EmployeeRespondScreen(),
           mockGoRouter: mockGoRouter,
         );
 
         expect(
-          find.byKey(KWidgetkeys.screen.workRespond.screen),
+          find.byKey(KWidgetkeys.screen.employeeRespond.screen),
           findsOneWidget,
         );
         await tester.pumpAndSettle();
 
         expect(
-          find.byKey(KWidgetkeys.screen.workRespond.title),
+          find.byKey(KWidgetkeys.screen.employeeRespond.title),
           findsOneWidget,
         );
 
         expect(
-          find.byKey(KWidgetkeys.screen.workRespond.subtitle),
+          find.byKey(KWidgetkeys.screen.employeeRespond.subtitle),
           findsOneWidget,
         );
 
         expect(
-          find.byKey(KWidgetkeys.screen.workRespond.username),
+          find.byKey(KWidgetkeys.screen.employeeRespond.username),
           findsOneWidget,
         );
 
         expect(
-          find.byKey(KWidgetkeys.screen.workRespond.emailText),
+          find.byKey(KWidgetkeys.screen.employeeRespond.emailText),
           findsOneWidget,
         );
 
         expect(
-          find.byKey(KWidgetkeys.screen.workRespond.emailField),
+          find.byKey(KWidgetkeys.screen.employeeRespond.emailField),
           findsOneWidget,
         );
 
         expect(
-          find.byKey(KWidgetkeys.screen.workRespond.phoneNumberText),
+          find.byKey(KWidgetkeys.screen.employeeRespond.phoneNumberText),
           findsOneWidget,
         );
 
         expect(
-          find.byKey(KWidgetkeys.screen.workRespond.phoneNumberField),
+          find.byKey(KWidgetkeys.screen.employeeRespond.phoneNumberField),
           findsOneWidget,
         );
 
         expect(
-          find.byKey(KWidgetkeys.screen.workRespond.resume),
+          find.byKey(KWidgetkeys.screen.employeeRespond.resume),
           findsOneWidget,
         );
 
         expect(
-          find.byKey(KWidgetkeys.screen.workRespond.upload),
+          find.byKey(KWidgetkeys.screen.employeeRespond.upload),
           findsOneWidget,
         );
 
         expect(
-          find.byKey(KWidgetkeys.screen.workRespond.checkPoint),
+          find.byKey(KWidgetkeys.screen.employeeRespond.checkPoint),
           findsOneWidget,
         );
 
         await chekPointSingleHelper(tester);
 
         expect(
-          find.byKey(KWidgetkeys.screen.workRespond.noResume),
+          find.byKey(KWidgetkeys.screen.employeeRespond.noResume),
           findsOneWidget,
         );
 
         expect(
-          find.byKey(KWidgetkeys.screen.workRespond.send),
+          find.byKey(KWidgetkeys.screen.employeeRespond.send),
           findsOneWidget,
         );
 
         expect(
-          find.byKey(KWidgetkeys.screen.workRespond.cancel),
+          find.byKey(KWidgetkeys.screen.employeeRespond.cancel),
           findsOneWidget,
         );
       });
