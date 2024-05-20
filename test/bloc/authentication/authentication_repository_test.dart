@@ -27,8 +27,8 @@ void main() {
         when(mockAppAuthenticationRepository.signUpWithGoogle()).thenAnswer(
           (_) async => const Right(true),
         );
-        when(mockAppAuthenticationRepository.getUserSetting()).thenAnswer(
-          (_) async => const UserSetting(id: KTestText.field),
+        when(mockAppAuthenticationRepository.currentUserSetting).thenAnswer(
+          (_) => const UserSetting(id: KTestText.field),
         );
         when(mockAppAuthenticationRepository.user).thenAnswer(
           (_) => Stream.value(KTestText.user),
@@ -47,6 +47,11 @@ void main() {
           mockAppAuthenticationRepository.updateUserSetting(
             KTestText.userSetting,
           ),
+        ).thenAnswer(
+          (_) async => const Right(true),
+        );
+        when(
+          mockAppAuthenticationRepository.deleteUser(),
         ).thenAnswer(
           (_) async => const Right(true),
         );
@@ -70,7 +75,7 @@ void main() {
       });
       test('get user setting', () async {
         expect(
-          await authenticationRepository.getUserSetting(),
+          authenticationRepository.currentUserSetting,
           const UserSetting(id: KTestText.field),
         );
       });
@@ -95,6 +100,13 @@ void main() {
           await authenticationRepository.updateUserSetting(
             userSetting: KTestText.userSetting,
           ),
+          isA<Right<SomeFailure, bool>>()
+              .having((e) => e.value, 'value', isTrue),
+        );
+      });
+      test('Delete User', () async {
+        expect(
+          await authenticationRepository.deleteUser(),
           isA<Right<SomeFailure, bool>>()
               .having((e) => e.value, 'value', isTrue),
         );
@@ -133,6 +145,11 @@ void main() {
         ).thenAnswer(
           (_) async => const Left(SomeFailure.serverError()),
         );
+        when(
+          mockAppAuthenticationRepository.deleteUser(),
+        ).thenAnswer(
+          (_) async => const Left(SomeFailure.serverError()),
+        );
       });
       test('Log in', () async {
         expect(
@@ -184,6 +201,16 @@ void main() {
           await authenticationRepository.updateUserSetting(
             userSetting: KTestText.userSetting,
           ),
+          isA<Left<SomeFailure, bool>>().having(
+            (e) => e.value,
+            'value',
+            const SomeFailure.serverError(),
+          ),
+        );
+      });
+      test('Delete User', () async {
+        expect(
+          await authenticationRepository.deleteUser(),
           isA<Left<SomeFailure, bool>>().having(
             (e) => e.value,
             'value',
