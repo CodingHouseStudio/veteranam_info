@@ -44,8 +44,7 @@ class _AppWidgetState extends State<AppWidget> {
   void initState() {
     super.initState();
 
-    final textTheme = createTextTheme(context, 'Montserrat', 'Montserrat');
-    themeDataNew = MaterialTheme(textTheme);
+    themeDataNew = const MaterialTheme(TextTheme());
   }
 
   @override

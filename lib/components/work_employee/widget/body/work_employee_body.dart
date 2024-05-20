@@ -28,9 +28,8 @@ class WorkEmployeeBody extends StatelessWidget {
           else
             KSizedBox.kHeightSizedBox24,
         ],
-        mainDeskPadding: ({required isDesk, required maxWidth}) => isDesk
-            ? const EdgeInsets.symmetric(horizontal: KPadding.kPaddingSize220)
-            : EdgeInsets.zero,
+        mainDeskPadding:
+            const EdgeInsets.symmetric(horizontal: KPadding.kPaddingSize220),
         mainChildWidgetsFunction: ({required isDesk}) {
           final childWidgets = [
             WorkEmployeeFilters(

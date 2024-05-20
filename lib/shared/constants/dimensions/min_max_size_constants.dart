@@ -10,7 +10,7 @@ abstract class KMinMaxSize {
 
   static const messageMaxLines = 5;
   static const messageMinLines = 3;
-  static const donateCardButtonTextMaxLine = 1;
+  static const textMaxLineOne = 1;
   static const messageMaxLength = 256;
 
   static const questionsTitleMaxLength = 100;

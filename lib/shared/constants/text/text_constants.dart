@@ -21,11 +21,6 @@ abstract class KMockText {
       '«Повернись живим» — це благодійний фонд компетентної допомоги армії, а також громадська організація, яка займається аналітикою у секторі безпеки та оборони, реалізує проєкти з реабілітації ветеранів через спорт.';
   static const userName = 'Володимир Левандовський';
   static const nickname = '@veteran';
-  static const description =
-      'Якщо ви робите свій профіль анонімним, на вашій сторінці не\n'
-      'буде відображатися персональна інформація, тільки\nnickname.';
-  static final date = DateTime(2024, 03, 12);
-  static const userNameAnonim = 'Anonim23456';
   static const email = 'example@gmail.com';
   static const tags = <List<String>?>[
     ['Пільги'],
@@ -53,8 +48,6 @@ abstract class KMockText {
     'Як інформація потрапляє на ваш веб-сайт?',
     'Які документи мені потрібно показати, щоб отримати допомогу від партнерів?',
   ];
-  static const previousPage = 'Попередня';
-  static const nextPage = 'Наступна';
   static const questionSubtitle =
       'Використовуйте веб-сайти спеціалізованих сервісів для пошуку роботи, '
       'таких як Indeed, LinkedIn, Glassdoor, Monster, або регіональні '
