@@ -31,10 +31,11 @@ abstract class KMockText {
   static const workModel = WorkModel(
     id: '1',
     title: title,
-    price: '1200',
-    employerContact: 'contact',
-    companyName: 'companyName',
-    description: 'description',
+    price: workPrice,
+    city: workCity,
+    employerContact: workCity,
+    companyName: workEmployer,
+    description: workDescription,
   );
 
   static const workTitle = 'Комплектувальник товару в магазин';
