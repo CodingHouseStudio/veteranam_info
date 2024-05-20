@@ -34,7 +34,7 @@ abstract class KMockText {
     price: '1200',
     employerContact: 'contact',
     companyName: 'companyName',
-    description: description,
+    description: 'description',
   );
 
   static const workTitle = 'Комплектувальник товару в магазин';
