@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kozak/shared/shared.dart';
 
-class ScaffoldWidget extends StatelessWidget {
+class ScaffoldWidget extends StatefulWidget {
   const ScaffoldWidget({
     required this.mainChildWidgetsFunction,
     this.titleChildWidgetsFunction,
@@ -15,12 +14,24 @@ class ScaffoldWidget extends StatelessWidget {
   final EdgeInsetsGeometry? mainDeskPadding;
 
   @override
+  State<ScaffoldWidget> createState() => _ScaffoldWidgetState();
+}
+
+class _ScaffoldWidgetState extends State<ScaffoldWidget> {
+  late ScrollController controller;
+  @override
+  void initState() {
+    controller = ScrollController();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
         final isDesk =
             constraints.maxWidth > KPlatformConstants.minWidthThresholdTablet;
-        final mainChildWidget = mainChildWidgetsFunction(isDesk: isDesk);
+        final mainChildWidget = widget.mainChildWidgetsFunction(isDesk: isDesk);
         final padding = EdgeInsets.symmetric(
           horizontal:
               isDesk ? KPadding.kPaddingSize90 : KPadding.kPaddingSize16,
@@ -37,23 +48,23 @@ class ScaffoldWidget extends StatelessWidget {
                   ),
                 ),
               ),
-              if (titleChildWidgetsFunction != null)
+              if (widget.titleChildWidgetsFunction != null)
                 SliverPadding(
                   padding: padding,
                   sliver: SliverList.builder(
                     addAutomaticKeepAlives: false,
                     addRepaintBoundaries: false,
                     itemBuilder: (context, index) {
-                      return titleChildWidgetsFunction!(isDesk: isDesk)
+                      return widget.titleChildWidgetsFunction!(isDesk: isDesk)
                           .elementAt(index);
                     },
-                    itemCount:
-                        titleChildWidgetsFunction!(isDesk: isDesk).length,
+                    itemCount: widget
+                        .titleChildWidgetsFunction!(isDesk: isDesk).length,
                   ),
                 ),
               SliverPadding(
-                padding: isDesk && mainDeskPadding != null
-                    ? padding.add(mainDeskPadding!)
+                padding: isDesk && widget.mainDeskPadding != null
+                    ? padding.add(widget.mainDeskPadding!)
                     : padding,
                 sliver: SliverList.builder(
                   addAutomaticKeepAlives: false,
@@ -100,10 +111,16 @@ class ScaffoldWidget extends StatelessWidget {
               ),
             ],
             semanticChildCount: mainChildWidget.length,
-            controller: context.read<ScrollCubit>().state,
+            controller: controller,
           ),
         );
       },
     );
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
   }
 }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kozak/shared/shared.dart';
 
 class ScaffoldDecorationWidget extends StatelessWidget {
@@ -119,7 +118,7 @@ class ScaffoldDecorationWidget extends StatelessWidget {
               ),
             ],
             semanticChildCount: mainChildWidget.length,
-            controller: context.read<ScrollCubit>().state,
+            controller: ScrollController(),
           ),
         );
       },

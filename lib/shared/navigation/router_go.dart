@@ -226,11 +226,17 @@ extension NavigatorExtention on BuildContext {
     Map<String, String> pathParameters = const <String, String>{},
     Map<String, dynamic> queryParameters = const <String, dynamic>{},
     Object? extra,
+    bool scrollUp = true,
   }) {
-    if (read<ScrollCubit>().state.positions.isNotEmpty) {
-      read<ScrollCubit>().scrollUp();
+    if (scrollUp) {
+      // WidgetsBinding.instance.addPostFrameCallback((_) {
+      try {
+        Scrollable.of(this).widget.controller?.jumpTo(0);
+      } catch (e) {
+        debugPrint(e.toString());
+      }
+      // });
     }
-    read<ScrollCubit>().initial();
     goNamed(
       name,
       pathParameters: pathParameters,

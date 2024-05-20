@@ -87,7 +87,10 @@ class _NawbarWidgetImplematationState
                   onTap: () => EasyDebounce.debounce(
                     context.l10n.logo,
                     Duration.zero,
-                    () => context.goNamedWithScroll(KRoute.home.name),
+                    () => context.goNamedWithScroll(
+                      KRoute.home.name,
+                      scrollUp: true,
+                    ),
                   ),
                   child: Text(
                     context.l10n.logo,
