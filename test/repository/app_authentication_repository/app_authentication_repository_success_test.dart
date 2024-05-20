@@ -110,6 +110,13 @@ void main() {
           (_) => KTestText.user,
         );
         when(
+          mockCache.read<UserSetting>(
+            key: AppAuthenticationRepository.userSettingCacheKey,
+          ),
+        ).thenAnswer(
+          (_) => KTestText.userSetting,
+        );
+        when(
           mockCache.clear(),
         ).thenAnswer(
           (_) {},
@@ -132,7 +139,7 @@ void main() {
         when(
           mockFirestoreService.getUserSetting(KTestText.user.id),
         ).thenAnswer(
-          (_) async => KTestText.userSetting,
+          (_) => Stream.value(KTestText.userSetting),
         );
         when(
           mockFirestoreService.updateUserSetting(KTestText.userSetting),
@@ -144,6 +151,17 @@ void main() {
             userSetting: UserSetting.empty,
             userId: KTestText.user.id,
           ),
+        ).thenAnswer(
+          (_) async {},
+        );
+
+        when(
+          mockFirebaseAuth.currentUser,
+        ).thenAnswer(
+          (_) => mockUser,
+        );
+        when(
+          mockUser.delete(),
         ).thenAnswer(
           (_) async {},
         );
@@ -209,10 +227,29 @@ void main() {
               .having((e) => e.value, 'value', isTrue),
         );
       });
-      test('Get user setting', () async {
+      test('Current User Setting', () async {
         expect(
-          await appAuthenticationRepository.getUserSetting(),
+          appAuthenticationRepository.currentUserSetting,
           KTestText.userSetting,
+        );
+      });
+      test('User Setting', () async {
+        await expectLater(
+          appAuthenticationRepository.userSetting,
+          emitsInOrder([
+            KTestText.userSetting,
+          ]),
+          reason: 'Wait for getting user setting',
+        );
+        verify(
+          mockCache.write(
+            key: AppAuthenticationRepository.userSettingCacheKey,
+            value: KTestText.userSetting,
+          ),
+        ).called(1);
+        expect(
+          appAuthenticationRepository.userSetting,
+          emits(KTestText.userSetting),
         );
       });
       test('Get User', () async {
@@ -222,9 +259,8 @@ void main() {
         );
       });
       test('user', () async {
-        final result = appAuthenticationRepository.user;
         await expectLater(
-          result,
+          appAuthenticationRepository.user,
           emitsInOrder([
             KTestText.user,
           ]),

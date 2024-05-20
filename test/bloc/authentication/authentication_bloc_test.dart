@@ -17,13 +17,18 @@ void main() {
       when(mockAuthenticationRepository.currentUser).thenAnswer(
         (realInvocation) => KTestText.user,
       );
-      when(mockAuthenticationRepository.getUserSetting()).thenAnswer(
-        (realInvocation) async => KTestText.userSetting,
+      when(mockAuthenticationRepository.currentUserSetting).thenAnswer(
+        (realInvocation) => KTestText.userSetting,
       );
       when(
         mockAuthenticationRepository.updateUserSetting(
           userSetting: UserSetting.empty.copyWith(locale: Language.english),
         ),
+      ).thenAnswer(
+        (realInvocation) async => const Right(true),
+      );
+      when(
+        mockAuthenticationRepository.logOut(),
       ).thenAnswer(
         (realInvocation) async => const Right(true),
       );
@@ -95,6 +100,34 @@ void main() {
           currentUser: KTestText.user,
           currentUserSetting:
               KTestText.userSetting.copyWith(locale: Language.english),
+        ),
+      ],
+    );
+    blocTest<AuthenticationBloc, AuthenticationState>(
+      'emits [AuthenticationState] when'
+      ' AuthenticationLogoutRequested',
+      build: () => authenticationBloc,
+      act: (bloc) async {
+        bloc.add(
+          AuthenticationLogoutRequested(),
+        );
+      },
+      expect: () => <dynamic>[],
+    );
+    blocTest<AuthenticationBloc, AuthenticationState>(
+      'emits [AuthenticationState] when'
+      ' AppUserRoleChanged',
+      build: () => authenticationBloc,
+      act: (bloc) async {
+        bloc.add(
+          const AppUserRoleChanged(UserRole.civilian),
+        );
+      },
+      expect: () => [
+        AuthenticationState.authenticated(
+          currentUser: KTestText.user,
+          currentUserSetting:
+              KTestText.userSetting.copyWith(userRole: UserRole.civilian),
         ),
       ],
     );
