@@ -36,6 +36,9 @@ part 'screen/sign_up.dart';
 part 'screen/login.dart';
 part 'screen/questions_form.dart';
 part 'screen/work_employee.dart';
+part 'screen/work_respond.dart';
+part 'screen/employer.dart';
+part 'screen/story_add.dart';
 
 part 'screen/my_story.dart';
 
@@ -104,6 +107,11 @@ part 'widget/feedback_box.dart';
 part 'widget/rate.dart';
 
 part 'widget/chat_input.dart';
+part 'widget/work_request_card.dart';
+
+part 'widget/check_point_single.dart';
+
+part 'widget/dialogs.dart';
 
 abstract class KWidgetkeys {
   static _ScreenKeys get screen => _ScreenKeys();

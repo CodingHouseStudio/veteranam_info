@@ -1,13 +1,11 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
-import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
 import 'package:mockito/mockito.dart';
 
-import '../bloc/authentication_bloc_unit_test.dart';
 import '../text_dependency.dart';
-import 'home_widget/home_widget.dart';
+import 'helper/helper.dart';
 
 void main() {
   setUp(configureDependenciesTest);
@@ -20,13 +18,17 @@ void main() {
   group('${KScreenBlocName.home} ', () {
     late AuthenticationRepository mockAuthenticationRepository;
     late IHomeRepository mockHomeRepository;
-    late HomeWatcherBloc homeBloc;
-    late AuthenticationBloc authenticationBloc;
     late IFeedbackRepository mockFeedbackRepository;
-    late FeedbackBloc feedbackBloc;
     setUp(() {
-      ExtendedDateTime.customTime = KTestText.feedbackModel.timestamp;
-      mockAuthenticationRepository = MockAuthenticationRepositoryUnitTest();
+      ExtendedDateTime.current = KTestText.dateTime;
+      ExtendedDateTime.id = KTestText.feedbackModel.id;
+      mockAuthenticationRepository = MockAuthenticationRepository();
+      when(mockAuthenticationRepository.currentUser).thenAnswer(
+        (realInvocation) => User.empty,
+      );
+      when(mockAuthenticationRepository.currentUserSetting).thenAnswer(
+        (realInvocation) => UserSetting.empty,
+      );
       mockHomeRepository = MockIHomeRepository();
       when(mockHomeRepository.getQuestions()).thenAnswer(
         (invocation) async => Right(KTestText.questionModelItems),
@@ -37,156 +39,51 @@ void main() {
         (invocation) async => const Right(true),
       );
     });
-    void registerAuthenticationBloc() {
-      authenticationBloc = AuthenticationBloc(
-        authenticationRepository: mockAuthenticationRepository,
-      );
-      if (GetIt.I.isRegistered<AuthenticationBloc>()) {
-        GetIt.I.unregister<AuthenticationBloc>();
-      }
-      GetIt.I.registerSingleton<AuthenticationBloc>(authenticationBloc);
-    }
-
-    void registerHomeBloc() {
-      homeBloc = HomeWatcherBloc(homeRepository: mockHomeRepository);
-      if (GetIt.I.isRegistered<HomeWatcherBloc>()) {
-        GetIt.I.unregister<HomeWatcherBloc>();
-      }
-      GetIt.I.registerSingleton<HomeWatcherBloc>(homeBloc);
-    }
-
-    void registerFeedbackBloc() {
-      feedbackBloc = FeedbackBloc(feedbackRepository: mockFeedbackRepository);
-      if (GetIt.I.isRegistered<FeedbackBloc>()) {
-        GetIt.I.unregister<FeedbackBloc>();
-      }
-      GetIt.I.registerSingleton<FeedbackBloc>(feedbackBloc);
-    }
 
     testWidgets('${KGroupText.intial} ', (tester) async {
-      registerAuthenticationBloc();
-      registerHomeBloc();
-      await tester.pumpApp(
-        const HomeScreen(),
-      );
-
-      expect(find.byKey(KWidgetkeys.screen.home.screen), findsOneWidget);
-
-      await tester.pumpAndSettle();
-
-      await nawbarHelper(
+      await homePumpAppHelper(
+        mockFeedbackRepository: mockFeedbackRepository,
+        mockHomeRepository: mockHomeRepository,
+        mockAuthenticationRepository: mockAuthenticationRepository,
         tester: tester,
-        searchText: KTestText.field,
-        hasMic: false,
       );
 
-      await homeBoxHelper(tester);
-
-      await listQuestionHelper(tester);
-
-      await feedbackHelper(tester);
-
-      await scrollingHelper(
-        tester: tester,
-        offset: KTestConstants.scrollingDown1000,
-      );
-
-      await footerHelper(tester);
+      await homeInitialHelper(tester);
     });
 
     testWidgets('Feedback enter correct text and save it', (tester) async {
-      registerHomeBloc();
-      registerFeedbackBloc();
-      await tester.pumpApp(
-        const HomeScreen(),
-      );
-
-      expect(find.byKey(KWidgetkeys.screen.home.screen), findsOneWidget);
-
-      await tester.pumpAndSettle();
-
-      await scrollingHelper(
+      await homePumpAppHelper(
+        mockFeedbackRepository: mockFeedbackRepository,
+        mockHomeRepository: mockHomeRepository,
+        mockAuthenticationRepository: mockAuthenticationRepository,
         tester: tester,
-        offset: KTestConstants.scrollingDown,
       );
 
-      await scrollingHelper(
-        tester: tester,
-        offset: KTestConstants.scrollingUp1000,
-      );
-
-      await feedbackEnterTextHelper(
-        tester: tester,
-        email: KTestText.useremail,
-        field: KTestText.field,
-      );
-
-      await scrollingHelper(
-        tester: tester,
-        offset: KTestConstants.scrollingUp500,
-      );
-
-      await feedbackBoxHelper(tester);
+      await correctSaveHelper(tester);
     });
 
     testWidgets('Feedback enter incorrect text and save it', (tester) async {
-      registerHomeBloc();
-      await tester.pumpApp(
-        const HomeScreen(),
-      );
-
-      expect(find.byKey(KWidgetkeys.screen.home.screen), findsOneWidget);
-
-      await tester.pumpAndSettle();
-
-      await scrollingHelper(
+      await homePumpAppHelper(
+        mockFeedbackRepository: mockFeedbackRepository,
+        mockHomeRepository: mockHomeRepository,
+        mockAuthenticationRepository: mockAuthenticationRepository,
         tester: tester,
-        offset: KTestConstants.scrollingDown,
       );
 
-      await scrollingHelper(
-        tester: tester,
-        offset: KTestConstants.scrollingUp1000,
-      );
-
-      await feedbackEnterTextHelper(
-        tester: tester,
-        email: KTestText.useremailIncorrect,
-        field: KTestText.field,
-      );
-
-      await scrollingHelper(
-        tester: tester,
-        offset: KTestConstants.scrollingUp500,
-      );
-
-      await feedbackHelper(tester);
+      await incorrectSaveHelper(tester);
     });
 
     testWidgets('Feedback enter text and clear it', (tester) async {
-      registerHomeBloc();
-      registerFeedbackBloc();
-      await tester.pumpApp(const HomeScreen());
-      await tester.pumpApp(
-        const HomeScreen(),
-      );
-      expect(find.byKey(KWidgetkeys.screen.home.screen), findsOneWidget);
-
-      await tester.pumpAndSettle();
-
-      await scrollingHelper(
+      await homePumpAppHelper(
+        mockFeedbackRepository: mockFeedbackRepository,
+        mockHomeRepository: mockHomeRepository,
+        mockAuthenticationRepository: mockAuthenticationRepository,
         tester: tester,
-        offset: KTestConstants.scrollingDown,
-      );
-
-      await scrollingHelper(
-        tester: tester,
-        offset: KTestConstants.scrollingUp1000,
       );
 
       await feedbackClearTextHelper(
         tester: tester,
-        email: KTestText.useremail,
+        email: KTestText.userEmail,
         field: KTestText.field,
       );
     });
@@ -195,73 +92,41 @@ void main() {
       late MockGoRouter mockGoRouter;
       setUp(() => mockGoRouter = MockGoRouter());
       testWidgets('${KGroupText.intial} ', (tester) async {
-        registerAuthenticationBloc();
-        registerHomeBloc();
-        await tester.pumpApp(
-          const HomeScreen(),
+        await homePumpAppHelper(
+          mockFeedbackRepository: mockFeedbackRepository,
+          mockHomeRepository: mockHomeRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
+          tester: tester,
           mockGoRouter: mockGoRouter,
         );
 
-        expect(find.byKey(KWidgetkeys.screen.home.screen), findsOneWidget);
-
-        await tester.pumpAndSettle();
-
-        await nawbarHelper(
-          tester: tester,
-          searchText: KTestText.field,
-          hasMic: false,
-        );
-
-        await homeBoxHelper(tester);
-
-        await listQuestionHelper(tester);
-
-        await feedbackHelper(tester);
-
-        await scrollingHelper(
-          tester: tester,
-          offset: KTestConstants.scrollingDown1000,
-        );
-
-        await footerHelper(tester);
+        await homeInitialHelper(tester);
       });
 
       group('${KGroupText.goTo} ', () {
         testWidgets('nawbar widget navigation', (tester) async {
-          registerHomeBloc();
-          await tester.pumpApp(
-            const HomeScreen(),
-            mockGoRouter: mockGoRouter,
-          );
-
-          expect(
-            find.byKey(KWidgetkeys.screen.home.screen),
-            findsOneWidget,
-          );
-
-          await tester.pumpAndSettle();
-
-          await nawbarTitleHelper(
+          await homePumpAppHelper(
+            mockFeedbackRepository: mockFeedbackRepository,
+            mockHomeRepository: mockHomeRepository,
+            mockAuthenticationRepository: mockAuthenticationRepository,
             tester: tester,
             mockGoRouter: mockGoRouter,
           );
 
-          await nawbarLoginNavigationHelper(
+          await navbarNavigationHelper(
             tester: tester,
             mockGoRouter: mockGoRouter,
           );
         });
 
         testWidgets('box widget navigation', (tester) async {
-          registerHomeBloc();
-          await tester.pumpApp(
-            const HomeScreen(),
+          await homePumpAppHelper(
+            mockFeedbackRepository: mockFeedbackRepository,
+            mockHomeRepository: mockHomeRepository,
+            mockAuthenticationRepository: mockAuthenticationRepository,
+            tester: tester,
             mockGoRouter: mockGoRouter,
           );
-
-          expect(find.byKey(KWidgetkeys.screen.home.screen), findsOneWidget);
-
-          await tester.pumpAndSettle();
 
           await boxexHelper(
             tester: tester,
@@ -270,37 +135,29 @@ void main() {
         });
 
         testWidgets('Feedback box widget navigation', (tester) async {
-          registerHomeBloc();
-          registerFeedbackBloc();
-          await tester.pumpApp(
-            const HomeScreen(),
+          await homePumpAppHelper(
+            mockFeedbackRepository: mockFeedbackRepository,
+            mockHomeRepository: mockHomeRepository,
+            mockAuthenticationRepository: mockAuthenticationRepository,
+            tester: tester,
             mockGoRouter: mockGoRouter,
           );
 
-          expect(
-            find.byKey(KWidgetkeys.screen.home.screen),
-            findsOneWidget,
-          );
-
-          await tester.pumpAndSettle();
-
-          await scrollingHelper(
+          await feedbackNavigationHelper(
             tester: tester,
-            offset: KTestConstants.scrollingDown,
+            mockGoRouter: mockGoRouter,
           );
-
-          await scrollingHelper(
+        });
+        testWidgets('All footer widget navigation', (tester) async {
+          await homePumpAppHelper(
             tester: tester,
-            offset: KTestConstants.scrollingUp1000,
+            mockGoRouter: mockGoRouter,
+            mockAuthenticationRepository: mockAuthenticationRepository,
+            mockFeedbackRepository: mockFeedbackRepository,
+            mockHomeRepository: mockHomeRepository,
           );
 
-          await feedbackEnterTextHelper(
-            tester: tester,
-            email: KTestText.useremail,
-            field: KTestText.field,
-          );
-
-          await feedbackBoxNavigationHelper(
+          await footerButtonsHelper(
             tester: tester,
             mockGoRouter: mockGoRouter,
           );

@@ -9,17 +9,17 @@ Future<void> nawbarTitleHelper({
   required MockGoRouter mockGoRouter,
 }) async {
   expect(
-    find.byKey(KWidgetkeys.widget.nawbar.title),
+    find.byKey(KWidgetkeys.widget.nawbar.logo),
     findsOneWidget,
   );
 
-  for (var i = 0; i < 10; i++) {
-    await tester.tap(
-      find.byKey(KWidgetkeys.widget.nawbar.title),
-    );
-  }
+  // for (var i = 0; i < 10; i++) {
+  await tester.tap(
+    find.byKey(KWidgetkeys.widget.nawbar.logo),
+  );
+  // }
 
-  await tester.pumpAndSettle(const Duration(milliseconds: 500));
+  // await tester.pumpAndSettle(const Duration(milliseconds: 500));
 
   verify(
     () => mockGoRouter.goNamed(

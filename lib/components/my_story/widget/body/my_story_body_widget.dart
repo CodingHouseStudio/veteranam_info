@@ -7,7 +7,7 @@ class ProfileMyStoryBodyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScaffoldWidget(
-      childWidgetsFunction: ({required isDesk}) => [
+      mainChildWidgetsFunction: ({required isDesk}) => [
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -37,9 +37,8 @@ class ProfileMyStoryBodyWidget extends StatelessWidget {
                 ),
                 child: StoryCardWidget(
                   key: KWidgetkeys.screen.myStory.card,
-                  storyDate: KMockText.date,
-                  userName: KMockText.userNameAnonim,
-                  story: KMockText.cardData,
+                  storyModel: KMockText.storyModel,
+                  isDesk: isDesk,
                 ),
               );
             }),

@@ -7,21 +7,17 @@ class WorkBodyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScaffoldWidget(
-      childWidgetsFunction: ({required isDesk}) => [
+      mainChildWidgetsFunction: ({required isDesk}) => [
         if (isDesk)
           KSizedBox.kHeightSizedBox40
         else
           KSizedBox.kHeightSizedBox24,
-        Text(
-          context.l10n.work,
-          key: KWidgetkeys.screen.work.title,
-          style: isDesk ? AppTextStyle.text96 : AppTextStyle.text32,
-        ),
-        if (isDesk) KSizedBox.kHeightSizedBox30 else KSizedBox.kHeightSizedBox8,
-        Text(
-          context.l10n.workSubtitle,
-          key: KWidgetkeys.screen.work.subtitle,
-          style: isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
+        ...TitleWidget.titleWidgetList(
+          title: context.l10n.work,
+          titleKey: KWidgetkeys.screen.work.title,
+          subtitle: context.l10n.workSubtitle,
+          subtitleKey: KWidgetkeys.screen.work.subtitle,
+          isDesk: isDesk,
         ),
         if (isDesk)
           KSizedBox.kHeightSizedBox120
@@ -43,7 +39,7 @@ class WorkBodyWidget extends StatelessWidget {
               BoxWidget(
                 key: KWidgetkeys.screen.work.boxEmployer,
                 text: context.l10n.givingJob,
-                onTap: () {},
+                onTap: () => context.goNamedWithScroll(KRoute.employer.name),
                 isDesk: true,
                 textRightPadding: KPadding.kPaddingSize100,
               ),
@@ -61,7 +57,7 @@ class WorkBodyWidget extends StatelessWidget {
           BoxWidget(
             key: KWidgetkeys.screen.work.boxEmployer,
             text: context.l10n.givingJob,
-            onTap: () {},
+            onTap: () => context.goNamedWithScroll(KRoute.employer.name),
             isDesk: false,
             textRightPadding: KPadding.kPaddingSize100,
           ),

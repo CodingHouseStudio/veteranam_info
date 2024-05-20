@@ -27,33 +27,20 @@ void main() {
       final buttonKey = KWidgetkeys.widget.footer.buttonsKey.elementAt(i);
       final screenKey = KTestConstants.screens.elementAt(i);
 
-      if (screenKey != KWidgetkeys.screen.contact.screen) {
-        await scrollingHelperInt(
-          tester: tester,
-          offset: KTestConstants.scrolling,
-          itemKey: buttonKey,
-        );
-      } else {
-        await scrollingHelperInt(
-          tester: tester,
-          offset: KTestConstants.scrolling,
-          itemKey: KWidgetkeys.screen.investors.donateCards,
-        );
+      if (i == 6) {
+        await tester.tap(find.byKey(KWidgetkeys.widget.nawbar.logo));
 
-        await tester.ensureVisible(
-          find.byKey(KWidgetkeys.screen.investors.donateCards).last,
-        );
+        // ignore: inference_failure_on_instance_creation
+        await Future.delayed(const Duration(milliseconds: 500));
+
         await tester.pumpAndSettle();
-
-        await scrollingHelperInt(
-          tester: tester,
-          itemKey: KWidgetkeys.widget.footer.widget,
-        );
-        await scrollingHelperInt(
-          tester: tester,
-          itemKey: buttonKey,
-        );
       }
+
+      await scrollingHelperInt(
+        tester: tester,
+        offset: KTestConstants.scrolling,
+        itemKey: buttonKey,
+      );
 
       expect(
         find.byKey(buttonKey),

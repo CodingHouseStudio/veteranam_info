@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kozak/shared/shared.dart';
+import 'package:kozak/shared/widget/dialogs_widget.dart';
 
 class ProfileCardWidget extends StatefulWidget {
   const ProfileCardWidget({
@@ -17,68 +19,156 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: EdgeInsets.all(
-          widget.isDesk ? KPadding.kPaddingSize4 : KPadding.kPaddingSize8,
-        ),
-        key: KWidgetkeys.widget.profileCard.profileCard,
-        child: Container(
-          decoration: KWidgetTheme.boxDecorationWidget(context),
+    return Column(
+      children: [
+        SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(KPadding.kPaddingSize16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
+            padding: EdgeInsets.all(
+              widget.isDesk ? KPadding.kPaddingSize4 : KPadding.kPaddingSize8,
+            ),
+            key: KWidgetkeys.widget.profileCard.profileCard,
+            child: Container(
+              decoration: context.widgetTheme.boxDecorationWidget,
+              child: Padding(
+                padding: const EdgeInsets.all(KPadding.kPaddingSize16),
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(
-                      width: 60,
-                      height: 60,
-                      decoration: BoxDecoration(
-                        borderRadius: KBorderRadius.kBorderRadiusL,
-                        // color: AppColors.widgetBackground,
-                      ),
-                      child: const Center(
-                        child: KIcon.person,
-                      ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          width: 60,
+                          height: 60,
+                          decoration: const BoxDecoration(
+                            borderRadius: KBorderRadius.kBorderRadiusL,
+                            // color: AppColors.widgetBackground,
+                          ),
+                          child: const Center(
+                            child: KIcon.person,
+                          ),
+                        ),
+                        KSizedBox.kWidthSizedBox16,
+                        Expanded(
+                          child: isEditing
+                              ? Text(
+                                  context.l10n.editData,
+                                  style: AppTextStyle.text40,
+                                )
+                              : _displayProfileName(),
+                        ),
+                      ],
                     ),
-                    KSizedBox.kWidthSizedBox16,
-                    Expanded(
-                      child: isEditing
-                          ? Text(
-                              context.l10n.editData,
-                              style: AppTextStyle.text40,
-                            )
-                          : _displayProfileName(),
-                    ),
+                    if (isEditing) ...[
+                      KSizedBox.kHeightSizedBox8,
+                      _textField(
+                        label: context.l10n.name,
+                        labelText: context
+                            .read<AuthenticationBloc>()
+                            .state
+                            .user
+                            ?.name
+                            ?.split(' ')
+                            .first,
+                        hint: context.l10n.writeYouName,
+                      ),
+                      KSizedBox.kHeightSizedBox8,
+                      _textField(
+                        label: context.l10n.lastName,
+                        labelText: context
+                            .read<AuthenticationBloc>()
+                            .state
+                            .user
+                            ?.name
+                            ?.split(' ')
+                            .last,
+                        hint: context.l10n.writeYouLastName,
+                      ),
+                    ],
+                    KSizedBox.kHeightSizedBox8,
+                    _buildProfileInfo(),
+                    KSizedBox.kHeightSizedBox8,
+                    _buildProfileFooter(),
+                    KSizedBox.kHeightSizedBox8,
+                    _buildLinkedAccounts(),
                   ],
                 ),
-                if (isEditing) ...[
-                  KSizedBox.kHeightSizedBox8,
-                  _textField(context.l10n.name, context.l10n.writeYouName),
-                  KSizedBox.kHeightSizedBox8,
-                  _textField(
-                    context.l10n.lastName,
-                    context.l10n.writeYouLastName,
-                  ),
-                ],
-                KSizedBox.kHeightSizedBox8,
-                _buildProfileInfo(),
-                KSizedBox.kHeightSizedBox8,
-                _buildProfileFooter(),
-                KSizedBox.kHeightSizedBox8,
-                _buildLinkedAccounts(),
-              ],
+              ),
             ),
           ),
         ),
-      ),
+        if (widget.isDesk)
+          KSizedBox.kHeightSizedBox56
+        else
+          KSizedBox.kHeightSizedBox24,
+        if (widget.isDesk)
+          Row(
+            children: [
+              Expanded(
+                child: ButtonWidget(
+                  key: KWidgetkeys.widget.profileCardWidget.logOutButton,
+                  text: context.l10n.logOut,
+                  textMaxLines: KMinMaxSize.textMaxLineOne,
+                  textStyle: AppTextStyle.text32,
+                  onPressed: () => DialogsWidget.showLogoutConfirmationDialog(
+                    context: context,
+                    isDesk: widget.isDesk,
+                  ),
+                  isDesk: true,
+                ),
+              ),
+              KSizedBox.kWidthSizedBox56,
+              Expanded(
+                child: ButtonWidget(
+                  key: KWidgetkeys.widget.profileCardWidget.deleteButton,
+                  text: context.l10n.deleteAccount,
+                  textMaxLines: KMinMaxSize.textMaxLineOne,
+                  textStyle: AppTextStyle.text32,
+                  onPressed: () => DialogsWidget.showDeleteConfirmationDialog(
+                    context: context,
+                    isDesk: widget.isDesk,
+                  ),
+                  isDesk: true,
+                  // backgroundColor: AppColors.transparent,
+                ),
+              ),
+            ],
+          )
+        else ...[
+          ButtonWidget(
+            key: KWidgetkeys.widget.profileCardWidget.logOutButton,
+            text: context.l10n.logOut,
+            textStyle: AppTextStyle.text32,
+            onPressed: () => DialogsWidget.showLogoutConfirmationDialog(
+              context: context,
+              isDesk: widget.isDesk,
+            ),
+            isDesk: false,
+          ),
+          KSizedBox.kHeightSizedBox24,
+          ButtonWidget(
+            key: KWidgetkeys.widget.profileCardWidget.deleteButton,
+            text: context.l10n.deleteAccount,
+            textStyle: AppTextStyle.text32,
+            onPressed: () => DialogsWidget.showDeleteConfirmationDialog(
+              context: context,
+              isDesk: widget.isDesk,
+            ),
+            isDesk: false,
+            // backgroundColor: AppColors.transparent,
+          ),
+        ],
+        if (widget.isDesk) KSizedBox.kHeightSizedBox56,
+      ],
     );
   }
 
-  Widget _textField(String label, String hint) {
+  Widget _textField({
+    required String label,
+    required String hint,
+    required String? labelText,
+    bool readOnly = false,
+  }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -93,13 +183,17 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
           ),
         ),
         TextFieldWidget(
-          onChanged: (value) {},
+          readOnly: readOnly,
+          controller: TextEditingController(text: labelText),
           widgetKey: KWidgetkeys.widget.profileCardWidget.textFiled,
           hintText: hint,
-          hintStyle: widget.isDesk ? AppTextStyle.hint24 : AppTextStyle.hint16,
+          hintStyle: widget.isDesk
+              ? context.textStyle.hint24
+              : context.textStyle.hint16,
           // fillColor: AppColors.transparent,
           contentPadding: const EdgeInsets.all(KPadding.kPaddingSize16),
           isDesk: widget.isDesk,
+          onChanged: null,
         ),
       ],
     );
@@ -110,10 +204,11 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         KSizedBox.kWidthSizedBox24,
-        const Flexible(
+        Flexible(
           flex: 2,
           child: Text(
-            KMockText.userName,
+            context.read<AuthenticationBloc>().state.user?.name ??
+                KMockText.userName,
             style: AppTextStyle.text40,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
@@ -132,9 +227,19 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _textField(context.l10n.email, KMockText.email),
+        _textField(
+          label: context.l10n.email,
+          labelText: context.read<AuthenticationBloc>().state.user?.email,
+          hint: KMockText.email,
+          readOnly: true,
+        ),
         KSizedBox.kHeightSizedBox8,
-        _textField(context.l10n.nickname, KMockText.nickname),
+        _textField(
+          label: context.l10n.nickname,
+          labelText: null,
+          hint: KMockText.nickname,
+          readOnly: !isEditing,
+        ),
       ],
     );
   }
@@ -145,14 +250,14 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
       children: [
         Row(
           children: [
-            const SwitchWidget(),
+            const SwitchWidgetWithoutBloc(),
             KSizedBox.kHeightSizedBox8,
             Expanded(child: Text(context.l10n.beAnonymous)),
           ],
         ),
         Text(
           context.l10n.beAnonymousDetails,
-          style: widget.isDesk ? AppTextStyle.hint16 : AppTextStyle.text16,
+          style: widget.isDesk ? context.textStyle.hint16 : AppTextStyle.text16,
         ),
         KSizedBox.kHeightSizedBox8,
         if (isEditing)
@@ -205,21 +310,22 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
           children: [
             Expanded(
               child: TextFieldWidget(
-                onChanged: (value) {},
                 widgetKey: KWidgetkeys.widget.profileCardWidget.textFiled,
                 hintText: KMockText.email,
-                hintStyle:
-                    widget.isDesk ? AppTextStyle.hint24 : AppTextStyle.hint16,
+                hintStyle: widget.isDesk
+                    ? context.textStyle.hint24
+                    : context.textStyle.hint16,
                 // fillColor: AppColors.transparent,
                 contentPadding: const EdgeInsets.all(KPadding.kPaddingSize16),
                 isDesk: widget.isDesk,
+                onChanged: null,
               ),
             ),
             KSizedBox.kWidthSizedBox8,
             if (widget.isDesk)
               ElevatedButton(
                 style: KButtonStyles.widgetBackgroundSquareButtonStyleWInf,
-                onPressed: () {},
+                onPressed: null,
                 child:
                     Text(context.l10n.disconnect, style: AppTextStyle.text24),
               ),
@@ -228,13 +334,13 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
         KSizedBox.kHeightSizedBox8,
         Text(
           context.l10n.linkedAccountsDetails,
-          style: AppTextStyle.hint16,
+          style: context.textStyle.hint16,
         ),
         KSizedBox.kHeightSizedBox8,
         if (widget.isDesk == false)
           ElevatedButton(
             style: KButtonStyles.widgetLightGreyButtonStyleWInf,
-            onPressed: () {},
+            onPressed: null,
             child: Text(context.l10n.disconnect, style: AppTextStyle.text24),
           ),
       ],

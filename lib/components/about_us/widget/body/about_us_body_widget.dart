@@ -7,20 +7,18 @@ class AboutUsBodyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScaffoldWidget(
-      childWidgetsFunction: ({required isDesk}) => [
+      mainChildWidgetsFunction: ({required isDesk}) => [
         KSizedBox.kHeightSizedBox30,
         RateWidget(
           isDesk: isDesk,
-          onRatingUpdate: (double rating) {},
+          onRatingUpdate: null,
         ),
         const ChatInputWidget(
           messageIcon: KIcon.message,
           message: KMockText.nickname,
         ),
         KSizedBox.kHeightSizedBox30,
-        ChatBotButton(
-          onTap: () {},
-        ),
+        const ChatBotButton(),
         KSizedBox.kHeightSizedBox30,
         const ChatInputWidget(
           messageIcon: KIcon.person,

@@ -14,11 +14,20 @@ class UserSetting with _$UserSetting {
     @Default(false) bool roleIsConfirmed,
   }) = _UserSetting;
 
+  // Add this private constructor
+  const UserSetting._();
+
   factory UserSetting.fromJson(Map<String, dynamic> json) =>
       _$UserSettingFromJson(json);
 
   /// Empty userSetting which represents an unauthenticated user.
   static const empty = UserSetting(id: '');
+
+  /// Convenience getter to determine whether the current user is empty.
+  bool get isEmpty => this == UserSetting.empty.copyWith(locale: locale);
+
+  /// Convenience getter to determine whether the current user is not empty.
+  bool get isNotEmpty => this != UserSetting.empty.copyWith(locale: locale);
 }
 
 enum UserRole {

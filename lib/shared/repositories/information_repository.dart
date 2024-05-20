@@ -20,8 +20,10 @@ class InformationRepository implements IInformationRepository {
           id: '${ExtendedDateTime.id}$i',
           title: KMockText.title,
           news: KMockText.cardData,
-          date: DateTime.now(),
-          image: i > KMockText.tags.length - 2 ? KMockText.image : null,
+          date: ExtendedDateTime.current,
+          image: i > KMockText.tags.length - 2
+              ? [const ImageModel(downloadURL: KMockText.image)]
+              : null,
           tags: KMockText.tags.elementAt(i),
         ),
       );

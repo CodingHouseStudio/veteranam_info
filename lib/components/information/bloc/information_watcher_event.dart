@@ -11,8 +11,8 @@ class InformationWatcherEvent with _$InformationWatcherEvent {
   const factory InformationWatcherEvent.loadNextItems() = _LoadNextItems;
 
   const factory InformationWatcherEvent.filter({
-    String? filter,
-    bool? isSelected,
+    required String filter,
+    required bool isSelected,
   }) = _Filter;
 
   const factory InformationWatcherEvent.filterReset() = _FilterReset;

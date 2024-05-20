@@ -1,15 +1,14 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:kozak/shared/shared.dart';
 
 class LeftCardWidget extends StatelessWidget {
   const LeftCardWidget({
-    required this.widgetList,
+    required this.widgetListFunction,
     super.key,
     this.image,
   });
 
-  final List<Widget> Function({required bool isDesk}) widgetList;
+  final List<Widget> Function({required bool isDesk}) widgetListFunction;
   final String? image;
   @override
   Widget build(BuildContext context) {
@@ -17,13 +16,17 @@ class LeftCardWidget extends StatelessWidget {
       builder: (context, constraints) {
         final isDesk =
             constraints.maxWidth > KPlatformConstants.minWidthThresholdTablet;
+        final widgetList = widgetListFunction(isDesk: isDesk);
         return Scaffold(
-          backgroundColor:
-              isDesk ? Theme.of(context).colorScheme.primaryContainer : null,
-          body: buildChildWidget(
-            isDesk: isDesk,
-            childWidgets: [
-              Padding(
+          backgroundColor: isDesk ? context.color.primaryContainer : null,
+          body: CustomScrollView(
+            key: KWidgetkeys.widget.scaffold.scroll,
+            slivers: [
+              SliverPersistentHeader(
+                delegate: NawbarWidget(isDesk: isDesk),
+              ),
+
+              SliverPadding(
                 padding: isDesk
                     ? const EdgeInsets.symmetric(
                         vertical: KPadding.kPaddingSize40,
@@ -34,76 +37,56 @@ class LeftCardWidget extends StatelessWidget {
                         right: KPadding.kPaddingSize16,
                         left: KPadding.kPaddingSize16,
                       ),
-                child: isDesk
-                    ? Row(
-                        key: KWidgetkeys.widget.leftCard.desk,
-                        children: [
-                          Expanded(
-                            child: Container(
-                              decoration:
-                                  KWidgetTheme.boxDecorationWhite(context),
-                              child: Padding(
-                                padding: const EdgeInsets.only(
-                                  right: KPadding.kPaddingSize80,
-                                  left: KPadding.kPaddingSize96,
-                                  top: KPadding.kPaddingSize24,
-                                  bottom: KPadding.kPaddingSize92,
-                                ),
-                                child: Column(
-                                  crossAxisAlignment: isDesk
-                                      ? CrossAxisAlignment.start
-                                      : CrossAxisAlignment.center,
-                                  children: widgetList(isDesk: isDesk),
-                                ),
-                              ),
+                sliver: isDesk
+                    ? SliverPadding(
+                        padding: EdgeInsets.only(
+                          right: constraints.maxWidth *
+                              KDimensions.leftCardPaddingMultiply,
+                        ),
+                        sliver: DecoratedSliver(
+                          decoration: context.widgetTheme.boxDecorationWhite,
+                          sliver: SliverPadding(
+                            padding: const EdgeInsets.only(
+                              right: KPadding.kPaddingSize80,
+                              left: KPadding.kPaddingSize96,
+                              top: KPadding.kPaddingSize24,
+                              bottom: KPadding.kPaddingSize92,
+                            ),
+                            sliver: SliverList.builder(
+                              key: KWidgetkeys.widget.leftCard.desk,
+                              addAutomaticKeepAlives: false,
+                              addRepaintBoundaries: false,
+                              itemCount: widgetList.length,
+                              itemBuilder: (BuildContext context, int index) =>
+                                  widgetList.elementAt(index),
                             ),
                           ),
-                          Expanded(
-                            child: image != null
-                                ? CachedNetworkImage(
-                                    key: KWidgetkeys.widget.leftCard.image,
-                                    imageUrl: KMockText.image,
-                                    placeholder: (context, url) =>
-                                        Image.asset(''),
-                                    errorWidget: (context, url, error) =>
-                                        KIcon.error,
-                                    fit: BoxFit.fill,
-                                  )
-                                : const SizedBox.shrink(),
-                          ),
-                        ],
+                        ),
                       )
-                    : Column(
+                    : SliverList.builder(
                         key: KWidgetkeys.widget.leftCard.mob,
-                        children: widgetList(isDesk: isDesk),
+                        addAutomaticKeepAlives: false,
+                        addRepaintBoundaries: false,
+                        itemCount: widgetList.length,
+                        itemBuilder: (BuildContext context, int index) =>
+                            widgetList.elementAt(index),
                       ),
               ),
+              // Expanded(
+              //   child: image != null
+              //       ? CachedNetworkImage(
+              //           key: KWidgetkeys.widget.leftCard.image,
+              //           imageUrl: KMockText.image,
+              //           placeholder: (context, url) => Image.asset(''),
+              //           errorWidget: (context, url, error) => KIcon.error,
+              //           fit: BoxFit.fill,
+              //         )
+              //       : const SizedBox.shrink(),
+              // ),
             ],
           ),
         );
       },
-    );
-  }
-
-  Widget buildChildWidget({
-    required List<Widget> childWidgets,
-    required bool isDesk,
-  }) {
-    return CustomScrollView(
-      key: KWidgetkeys.widget.scaffold.scroll,
-      slivers: [
-        SliverPersistentHeader(
-          delegate: NawbarWidget(isDesk: isDesk),
-        ),
-        SliverList.builder(
-          addAutomaticKeepAlives: false,
-          addRepaintBoundaries: false,
-          itemCount: childWidgets.length,
-          itemBuilder: (BuildContext context, int index) {
-            return childWidgets.elementAt(index);
-          },
-        ),
-      ],
     );
   }
 }

@@ -12,11 +12,14 @@ class LoginBodyWidget extends StatelessWidget {
       builder: (context, _) {
         return LeftCardWidget(
           key: KWidgetkeys.screen.login.card,
-          widgetList: ({required isDesk}) => [
-            Text(
-              context.l10n.login,
-              key: KWidgetkeys.screen.login.title,
-              style: isDesk ? AppTextStyle.text96 : AppTextStyle.text32,
+          widgetListFunction: ({required isDesk}) => [
+            Align(
+              alignment: isDesk ? Alignment.centerLeft : Alignment.center,
+              child: Text(
+                context.l10n.login,
+                key: KWidgetkeys.screen.login.title,
+                style: isDesk ? AppTextStyle.text96 : AppTextStyle.text32,
+              ),
             ),
             EmailPasswordFieldsWidget(
               key: KWidgetkeys.screen.login.fields,
@@ -43,21 +46,25 @@ class LoginBodyWidget extends StatelessWidget {
                 child: Text(
                   _.failure.getString(context)!,
                   key: KWidgetkeys.screen.login.failureMessage,
-                  style: AppTextStyle.error14,
+                  style: context.textStyle.error14,
                 ),
               ),
             if (isDesk)
               KSizedBox.kHeightSizedBox24
             else
               KSizedBox.kHeightSizedBox16,
-            ButtonWidget(
-              key: KWidgetkeys.screen.login.button,
-              text:
-                  _.showPasswordField ? context.l10n.login : context.l10n.next,
-              onPressed: () => context.read<LoginBloc>().add(
-                    const LoginEvent.loginSubmitted(),
-                  ),
-              isDesk: isDesk,
+            Align(
+              alignment: Alignment.centerLeft,
+              child: ButtonWidget(
+                key: KWidgetkeys.screen.login.button,
+                text: _.showPasswordField
+                    ? context.l10n.login
+                    : context.l10n.next,
+                onPressed: () => context.read<LoginBloc>().add(
+                      const LoginEvent.loginSubmitted(),
+                    ),
+                isDesk: isDesk,
+              ),
             ),
             KSizedBox.kHeightSizedBox40,
             Wrap(
@@ -72,8 +79,7 @@ class LoginBodyWidget extends StatelessWidget {
                   key: KWidgetkeys.screen.login.signUpButton,
                   onPressed: () =>
                       context.goNamedWithScroll(KRoute.signUp.name),
-                  style:
-                      KButtonStyles.transparentButtonStyleBottomBorder(context),
+                  style: context.buttonStyle.transparentButtonStyleBottomBorder,
                   child: Text(
                     context.l10n.register,
                     style: isDesk ? AppTextStyle.text40 : AppTextStyle.text24,

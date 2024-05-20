@@ -25,8 +25,6 @@ void main() {
 
         await employerInitialHelper(tester);
       });
-      // group('${KGroupText.goTo} ', () {
-      // });
     });
   });
 }

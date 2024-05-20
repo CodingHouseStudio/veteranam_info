@@ -11,7 +11,7 @@ class BoxWidget extends StatelessWidget {
   });
 
   final String text;
-  final void Function() onTap;
+  final void Function()? onTap;
   final bool isDesk;
   final double? textRightPadding;
 
@@ -24,7 +24,7 @@ class BoxWidget extends StatelessWidget {
         bottom: isDesk ? KPadding.kPaddingSize24 : KPadding.kPaddingSize8,
         left: isDesk ? KPadding.kPaddingSize24 : KPadding.kPaddingSize16,
       ),
-      decoration: KWidgetTheme.boxDecorationCard(context),
+      decoration: context.widgetTheme.boxDecorationCard,
       child: isDesk
           ? InkWell(
               onTap: onTap,

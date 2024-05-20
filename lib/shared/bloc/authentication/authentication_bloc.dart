@@ -19,14 +19,16 @@ class AuthenticationBloc
           authenticationRepository.currentUser.isNotEmpty
               ? AuthenticationState.authenticated(
                   currentUser: authenticationRepository.currentUser,
-                  currentUserSetting: UserSetting.empty,
+                  currentUserSetting:
+                      authenticationRepository.currentUserSetting,
                 )
               : const AuthenticationState.unknown(),
         ) {
     on<AuthenticationStatusChanged>(_onAuthenticationStatusChanged);
     on<AuthenticationLogoutRequested>(_onAuthenticationLogoutRequested);
+    on<AuthenticationDeleteRequested>(_onAuthenticationDeleteRequested);
     on<AuthenticationInitialized>(_onAuthenticationInitialized);
-    on<_AppUserChanged>(_onUserChanged);
+    // on<_AppUserChanged>(_onUserChanged);
     on<_AppUserSettingChanged>(_onUserSettingChanged);
     on<AppLanguageChanged>(_onAppLanguageChanged);
     on<AppUserRoleChanged>(_onAppUserRoleChanged);
@@ -35,19 +37,21 @@ class AuthenticationBloc
   final AuthenticationRepository _authenticationRepository;
   late StreamSubscription<AuthenticationStatus>
       authenticationStatusSubscription;
+  late StreamSubscription<UserSetting> userSettingSubscription;
   static const String tokenKey = KAppText.authTokenKey;
 
   @override
   Future<void> close() {
     authenticationStatusSubscription.cancel();
+    userSettingSubscription.cancel();
     _authenticationRepository.dispose();
     return super.close();
   }
 
-  Future<void> _onAuthenticationStatusChanged(
+  void _onAuthenticationStatusChanged(
     AuthenticationStatusChanged event,
     Emitter<AuthenticationState> emit,
-  ) async {
+  ) {
     log('${KAppText.authChange} ${event.status}');
     switch (event.status) {
       case AuthenticationStatus.unauthenticated:
@@ -56,8 +60,7 @@ class AuthenticationBloc
         return emit(
           AuthenticationState.authenticated(
             currentUser: _authenticationRepository.currentUser,
-            currentUserSetting:
-                await _authenticationRepository.getUserSetting(),
+            currentUserSetting: _authenticationRepository.currentUserSetting,
           ),
         );
       case AuthenticationStatus.unknown:
@@ -72,30 +75,35 @@ class AuthenticationBloc
     await _authenticationRepository.logOut();
   }
 
+  Future<void> _onAuthenticationDeleteRequested(
+    AuthenticationDeleteRequested event,
+    Emitter<AuthenticationState> emit,
+  ) async {
+    await _authenticationRepository.deleteUser();
+  }
+
   Future<void> _onAuthenticationInitialized(
     AuthenticationInitialized event,
     Emitter<AuthenticationState> emit,
   ) async {
+    userSettingSubscription = _authenticationRepository.userSetting
+        .listen((userSetting) => add(_AppUserSettingChanged(userSetting)));
     authenticationStatusSubscription = _authenticationRepository.status.listen(
       (status) => add(AuthenticationStatusChanged(status)),
     );
-    // userSettingSubscription =
-    //     _authenticationRepository.userSettingStream.listen(
-    //   (userSetting) => add(_AppUserSettingChanged(userSetting)),
-    // );
   }
 
-  void _onUserChanged(
-    _AppUserChanged event,
-    Emitter<AuthenticationState> emit,
-  ) {
-    emit(
-      AuthenticationState.authenticated(
-        currentUser: event.user,
-        currentUserSetting: state.userSetting,
-      ),
-    );
-  }
+  // void _onUserChanged(
+  //   _AppUserChanged event,
+  //   Emitter<AuthenticationState> emit,
+  // ) {
+  //   emit(
+  //     AuthenticationState.authenticated(
+  //       currentUser: event.user,
+  //       currentUserSetting: state.userSetting,
+  //     ),
+  //   );
+  // }
 
   void _onUserSettingChanged(
     _AppUserSettingChanged event,
@@ -115,34 +123,26 @@ class AuthenticationBloc
     final userSetting = state.userSetting.copyWith(
       locale: event.language,
     );
-    if (state.user != null) {
+    add(_AppUserSettingChanged(userSetting));
+    if (state.userSetting.isNotEmpty) {
       await _authenticationRepository.updateUserSetting(
         userSetting: userSetting,
       );
     }
-    emit(
-      state.copyWith(
-        userSetting: userSetting,
-      ),
-    );
   }
 
   Future<void> _onAppUserRoleChanged(
     AppUserRoleChanged event,
     Emitter<AuthenticationState> emit,
   ) async {
-    if (state.user != null) {
+    if (state.userSetting.isNotEmpty) {
       final userSetting = state.userSetting.copyWith(
         userRole: event.userRole,
         roleIsConfirmed: false,
       );
+      add(_AppUserSettingChanged(userSetting));
       await _authenticationRepository.updateUserSetting(
         userSetting: userSetting,
-      );
-      emit(
-        state.copyWith(
-          userSetting: userSetting,
-        ),
       );
     }
   }
