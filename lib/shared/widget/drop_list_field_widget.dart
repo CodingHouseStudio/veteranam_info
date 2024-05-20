@@ -6,12 +6,14 @@ class DropListFieldWidget extends StatefulWidget {
     required this.onChanged,
     required this.hintText,
     required this.dropDownList,
+    required this.isDesk,
     super.key,
   });
 
-  final void Function(String? text) onChanged;
+  final void Function(String? text)? onChanged;
   final String hintText;
   final List<String> dropDownList;
+  final bool isDesk;
 
   @override
   State<DropListFieldWidget> createState() => _DropListFieldWidgetState();
@@ -45,12 +47,18 @@ class _DropListFieldWidgetState extends State<DropListFieldWidget> {
       },
       optionsViewBuilder: (context, onSelected, options) {
         return ListView.builder(
+          shrinkWrap: true,
           key: KWidgetkeys.widget.dropListField.list,
-          padding: EdgeInsets.zero,
+          padding: EdgeInsets.only(
+            right: (widget.isDesk
+                    ? KPadding.kPaddingSize90
+                    : KPadding.kPaddingSize16) *
+                2,
+          ),
           itemBuilder: (context, index) => TextButton(
             key: KWidgetkeys.widget.dropListField.item,
             onPressed: () => onSelected(options.elementAt(index)),
-            style: KButtonStyles.whiteButtonStyle(context),
+            style: context.buttonStyle.dropListButtonStyle,
             child: Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: KPadding.kPaddingSize32,
@@ -89,6 +97,7 @@ class _DropListFieldWidgetState extends State<DropListFieldWidget> {
           onChanged: widget.onChanged,
           hintText: widget.hintText,
           disposeFocusNode: false,
+          isDesk: widget.isDesk,
         );
       },
     );

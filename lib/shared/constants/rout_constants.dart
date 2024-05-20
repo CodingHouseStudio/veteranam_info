@@ -63,8 +63,20 @@ abstract class KRoute {
     name: 'QuestionsForm',
   );
   static const _RouteItem workEmployee = _RouteItem(
-    path: 'workEmployee',
-    name: 'WorkEmployee',
+    path: 'employee',
+    name: 'Employee',
+  );
+  static const _RouteItem workRespond = _RouteItem(
+    path: 'respond',
+    name: 'Respond',
+  );
+  static const _RouteItem employer = _RouteItem(
+    path: 'employer',
+    name: 'Employer',
+  );
+  static const _RouteItem storyAdd = _RouteItem(
+    path: 'add',
+    name: 'Add',
   );
   static const _RouteItem profileMyStory = _RouteItem(
     path: 'profileMyStory',

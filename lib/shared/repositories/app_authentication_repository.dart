@@ -20,6 +20,7 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
     this._cache,
   ) {
     _updateAuthStatusBasedOnCache();
+    _updateUserSettingBasedOnCache();
   }
 
   final IStorage _secureStorageRepository;
@@ -33,11 +34,15 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   /// defaults to [kIsWeb]
   @visibleForTesting
   bool isWeb = kIsWeb;
+  @visibleForTesting
+  firebase_auth.GoogleAuthProvider? googleAuthProvider;
 
   /// User cache key.
   /// Should only be used for testing purposes.
   @visibleForTesting
   static const userCacheKey = '__user_cache_key__';
+  @visibleForTesting
+  static const userSettingCacheKey = '__user_setting_cache_key__';
 
   /// Stream of [User] which will emit the current user when
   /// the authentication state changes.
@@ -60,12 +65,34 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
           }
         },
       );
+  @override
+  Stream<UserSetting> get userSetting => _firestoreService
+          .getUserSetting(
+        _firebaseAuth.currentUser?.uid ?? currentUser.id,
+      )
+          .map(
+        (firebaseUserSetting) {
+          if (firebaseUserSetting.isNotEmpty) {
+            debugPrint('================================================');
+            debugPrint('Firebase Auth State Changed: User is authenticated');
+            debugPrint('Firebase User Details: $firebaseUserSetting');
+            _cache.write(key: userSettingCacheKey, value: firebaseUserSetting);
+          } else {
+            debugPrint('Firebase Auth State Changed: '
+                'User is unauthenticated (User.empty)');
+          }
+          return firebaseUserSetting;
+        },
+      );
 
   //
   // /// Returns the current cached user.
   // /// Defaults to [User.empty] if there is no cached user.
   @override
   User get currentUser => _cache.read<User>(key: userCacheKey) ?? User.empty;
+  @override
+  UserSetting get currentUserSetting =>
+      _cache.read<UserSetting>(key: userSettingCacheKey) ?? UserSetting.empty;
 
   // /// Returns the current auth status.
   // /// Defaults to [AuthStatus.unknown] if there is no cached auth status.
@@ -88,6 +115,7 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
       return const Left(SomeFailure.serverError());
     } finally {
       _updateAuthStatusBasedOnCache();
+      _updateUserSettingBasedOnCache();
     }
   }
 
@@ -100,8 +128,9 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   }
 
   Future<firebase_auth.AuthCredential> _getGoogleAuthCredentialWeb() async {
-    final userCredential =
-        await _firebaseAuth.signInWithPopup(firebase_auth.GoogleAuthProvider());
+    final userCredential = await _firebaseAuth.signInWithPopup(
+      googleAuthProvider ?? firebase_auth.GoogleAuthProvider(),
+    );
     return userCredential.credential!;
   }
 
@@ -172,6 +201,7 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
       return const Left(SomeFailure.serverError());
     } finally {
       _updateAuthStatusBasedOnCache();
+      _updateUserSettingBasedOnCache();
     }
   }
 
@@ -181,14 +211,6 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
       keyItem: KAppText.usernameToken,
     );
     return token;
-  }
-
-  @override
-  Future<UserSetting> getUserSetting() async {
-    final userSetting = await _firestoreService.getUserSetting(
-      currentUser.id,
-    );
-    return userSetting;
   }
 
   Future<Either<SomeFailure, bool>> _handleAuthOperation(
@@ -206,15 +228,24 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
       return const Left(SomeFailure.serverError());
     } finally {
       _updateAuthStatusBasedOnCache();
+      _updateUserSettingBasedOnCache();
     }
   }
 
   void _updateAuthStatusBasedOnCache() {
     debugPrint('Updating auth status based on cache');
-    final user = currentUser != User.empty;
+    final user = currentUser.isEmpty;
     debugPrint('Current user inside '
         '_updateAuthStatusBasedOnCache : $currentUser');
     debugPrint('user is $user');
+  }
+
+  void _updateUserSettingBasedOnCache() {
+    debugPrint('Updating user setting based on cache');
+    final userSetting = currentUserSetting.isEmpty;
+    debugPrint('Current user setting inside '
+        '_updateAuthStatusBasedOnCache : $currentUserSetting');
+    debugPrint('userSertting is $userSetting');
   }
 
   @override
@@ -247,6 +278,7 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
       return const Left(SomeFailure.serverError());
     } finally {
       _updateAuthStatusBasedOnCache();
+      _updateUserSettingBasedOnCache();
     }
   }
 
@@ -255,7 +287,7 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
     UserSetting userSetting,
   ) async {
     try {
-      if (userSetting.id.isEmpty) {
+      if (userSetting.isEmpty) {
         await _firestoreService.setUserSetting(
           userSetting: userSetting,
           userId: currentUser.id,

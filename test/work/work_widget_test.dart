@@ -1,11 +1,10 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
-import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
-import 'package:mocktail/mocktail.dart';
+import 'package:mockito/mockito.dart';
 
-import '../bloc/authentication_bloc_unit_test.dart';
 import '../text_dependency.dart';
+import 'helper/helper.dart';
 
 void main() {
   setUp(configureDependenciesTest);
@@ -17,113 +16,59 @@ void main() {
   tearDown(GetIt.I.reset);
   group('${KScreenBlocName.work} ', () {
     late AuthenticationRepository mockAuthenticationRepository;
-    late AuthenticationBloc authenticationBloc;
     setUp(() {
-      mockAuthenticationRepository = MockAuthenticationRepositoryUnitTest();
-    });
-    void registerAuthenticationBloc() {
-      authenticationBloc = AuthenticationBloc(
-        authenticationRepository: mockAuthenticationRepository,
+      mockAuthenticationRepository = MockAuthenticationRepository();
+      when(mockAuthenticationRepository.currentUser).thenAnswer(
+        (realInvocation) => User.empty,
       );
-      if (GetIt.I.isRegistered<AuthenticationBloc>()) {
-        GetIt.I.unregister<AuthenticationBloc>();
-      }
-      GetIt.I.registerSingleton<AuthenticationBloc>(authenticationBloc);
-    }
+      when(mockAuthenticationRepository.currentUserSetting).thenAnswer(
+        (realInvocation) => UserSetting.empty,
+      );
+    });
 
     testWidgets('${KGroupText.intial} ', (tester) async {
-      registerAuthenticationBloc();
-      await tester.pumpApp(const WorkScreen());
-
-      expect(
-        find.byKey(KWidgetkeys.screen.work.screen),
-        findsOneWidget,
+      await workPumpAppHelper(
+        mockAuthenticationRepository: mockAuthenticationRepository,
+        tester: tester,
       );
 
-      await tester.pumpAndSettle();
-
-      await nawbarHelper(tester: tester, searchText: KTestText.field);
-
-      expect(
-        find.byKey(KWidgetkeys.screen.work.boxEmployer),
-        findsOneWidget,
-      );
-
-      expect(
-        find.byKey(KWidgetkeys.screen.work.boxEmployee),
-        findsOneWidget,
-      );
-
-      expect(
-        find.byKey(KWidgetkeys.screen.work.subtitle),
-        findsOneWidget,
-      );
-
-      expect(
-        find.byKey(KWidgetkeys.screen.work.title),
-        findsOneWidget,
-      );
-
-      await footerHelper(tester);
+      await workInitialHelper(tester);
     });
     group('${KGroupText.goRouter} ', () {
       late MockGoRouter mockGoRouter;
       setUp(() => mockGoRouter = MockGoRouter());
       testWidgets('${KGroupText.intial} ', (tester) async {
-        registerAuthenticationBloc();
-        await tester.pumpApp(const WorkScreen(), mockGoRouter: mockGoRouter);
-
-        expect(
-          find.byKey(KWidgetkeys.screen.work.screen),
-          findsOneWidget,
+        await workPumpAppHelper(
+          mockAuthenticationRepository: mockAuthenticationRepository,
+          tester: tester,
+          mockGoRouter: mockGoRouter,
         );
 
-        await tester.pumpAndSettle();
-
-        await nawbarHelper(tester: tester, searchText: KTestText.field);
-
-        expect(
-          find.byKey(KWidgetkeys.screen.work.boxEmployer),
-          findsOneWidget,
-        );
-
-        expect(
-          find.byKey(KWidgetkeys.screen.work.boxEmployee),
-          findsOneWidget,
-        );
-
-        expect(
-          find.byKey(KWidgetkeys.screen.work.subtitle),
-          findsOneWidget,
-        );
-
-        expect(
-          find.byKey(KWidgetkeys.screen.work.title),
-          findsOneWidget,
-        );
-
-        await footerHelper(tester);
+        await workInitialHelper(tester);
       });
       group('${KGroupText.goTo} ', () {
-        testWidgets('${KGroupText.intial} ', (tester) async {
-          await tester.pumpApp(const WorkScreen(), mockGoRouter: mockGoRouter);
-
-          expect(
-            find.byKey(KWidgetkeys.screen.work.screen),
-            findsOneWidget,
+        testWidgets('${KRoute.workEmployee.name} ', (tester) async {
+          await workPumpAppHelper(
+            mockAuthenticationRepository: mockAuthenticationRepository,
+            tester: tester,
+            mockGoRouter: mockGoRouter,
           );
 
-          await tester.pumpAndSettle();
-
-          expect(
-            find.byKey(KWidgetkeys.screen.work.boxEmployee),
-            findsOneWidget,
+          await boxEmployeeNavigationHelper(
+            tester: tester,
+            mockGoRouter: mockGoRouter,
+          );
+        });
+        testWidgets('${KRoute.employer.name} ', (tester) async {
+          await workPumpAppHelper(
+            mockAuthenticationRepository: mockAuthenticationRepository,
+            tester: tester,
+            mockGoRouter: mockGoRouter,
           );
 
-          await tester.tap(find.byKey(KWidgetkeys.screen.work.boxEmployee));
-
-          verify.call(
-            () => mockGoRouter.goNamed(KRoute.workEmployee.name),
+          await boxEmployerNavigationHelper(
+            tester: tester,
+            mockGoRouter: mockGoRouter,
           );
         });
       });

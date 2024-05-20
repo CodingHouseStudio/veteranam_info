@@ -11,7 +11,10 @@ class FirestoreService {
     // Initialization logic can't use await directly in constructor
     _initFirestoreSettings();
   }
-  final FirebaseFirestore _db = FirebaseFirestore.instance;
+  final FirebaseFirestore _db = firebaseFirestore;
+
+  @visibleForTesting
+  static FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
 
   Future<void> _initFirestoreSettings() async {
     // Set settings for persistence based on platform
@@ -41,20 +44,6 @@ class FirestoreService {
     return docSnapshot.docs
         .map((doc) => QuestionModel.fromJson(doc.data()))
         .toList();
-
-    //     .snapshots(includeMetadataChanges: true)
-    //     .map((snapshot) {
-    //   for (final change in snapshot.docChanges) {
-    //     if (change.type == DocumentChangeType.added) {
-    //       final source =
-    //           (snapshot.metadata.isFromCache) ? 'local cache' : 'server';
-    //       debugPrint('Data fetched from $source}');
-    //     }
-    //   }
-    //   return snapshot.docs
-    //       .map((doc) => QuestionModel.fromJson(doc.data()))
-    //       .toList();
-    // });
   }
 
   Future<List<FundModel>> getFunds() async {
@@ -78,28 +67,6 @@ class FirestoreService {
         .collection(FirebaseCollectionName.userSettings)
         .doc(userSetting.id)
         .update(userSetting.toJson());
-  }
-
-  Future<void> setUserSetting({
-    required UserSetting userSetting,
-    required String userId,
-  }) {
-    return _db
-        .collection(FirebaseCollectionName.userSettings)
-        .doc(userId)
-        .set(userSetting.toJson());
-  }
-
-  Future<UserSetting> getUserSetting(String userId) async {
-    final docSnapshot = await _db
-        .collection(FirebaseCollectionName.userSettings)
-        .doc(userId)
-        .get();
-    if (docSnapshot.exists) {
-      return UserSetting.fromJson(docSnapshot.data()!);
-    } else {
-      return UserSetting.empty;
-    }
   }
 
   Stream<List<InformationModel>> getInformations() => _db
@@ -127,6 +94,33 @@ class FirestoreService {
         .set(information.toJson());
   }
 
+  Future<void> setUserSetting({
+    required UserSetting userSetting,
+    required String userId,
+  }) {
+    return _db
+        .collection(FirebaseCollectionName.userSettings)
+        .doc(userId)
+        .set(userSetting.copyWith(id: userId).toJson());
+  }
+
+  Stream<UserSetting> getUserSetting(String userId) => _db
+          .collection(FirebaseCollectionName.userSettings)
+          .doc(userId)
+          .snapshots(includeMetadataChanges: true) // Enable caching
+          .map(
+        (snapshot) {
+          if (snapshot.exists) {
+            final source =
+                (snapshot.metadata.isFromCache) ? 'local cache' : 'server';
+            debugPrint('Data fetched from $source}');
+            return UserSetting.fromJson(snapshot.data()!);
+          } else {
+            return UserSetting.empty;
+          }
+        },
+      );
+
   Stream<List<WorkModel>> getWorks() => _db
           .collection(FirebaseCollectionName.work)
           .snapshots(includeMetadataChanges: true) // Enable caching
@@ -150,5 +144,30 @@ class FirestoreService {
         .collection(FirebaseCollectionName.work)
         .doc(work.id)
         .set(work.toJson());
+  }
+
+  Stream<List<StoryModel>> getStories() => _db
+          .collection(FirebaseCollectionName.stroies)
+          .snapshots(includeMetadataChanges: true) // Enable caching
+          .map(
+        (snapshot) {
+          for (final change in snapshot.docChanges) {
+            if (change.type == DocumentChangeType.added) {
+              final source =
+                  (snapshot.metadata.isFromCache) ? 'local cache' : 'server';
+              debugPrint('Data fetched from $source}');
+            }
+          }
+          return snapshot.docs
+              .map((doc) => StoryModel.fromJson(doc.data()))
+              .toList();
+        },
+      );
+
+  Future<void> addStory(StoryModel information) {
+    return _db
+        .collection(FirebaseCollectionName.stroies)
+        .doc(information.id)
+        .set(information.toJson());
   }
 }

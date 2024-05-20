@@ -1,4 +1,5 @@
 abstract class KPadding {
+  static const kPaddingSize2 = 2.0;
   static const kPaddingSize4 = 4.0;
   static const kPaddingSize6_5 = 6.5;
   static const kPaddingSize8 = 8.0;
@@ -14,9 +15,11 @@ abstract class KPadding {
   static const kPaddingSize56 = 56.0;
   static const kPaddingSize75 = 75.0;
   static const kPaddingSize80 = 80.0;
+  static const kPaddingSize90 = 90.0;
   static const kPaddingSize92 = 92.0;
   static const kPaddingSize96 = 96.0;
   static const kPaddingSize100 = 100.0;
   static const kPaddingSize128 = 128.0;
-  static const kPaddingSize90 = 90.0;
+  static const kPaddingSize336 = 336.0;
+  static const kPaddingSize220 = 220.0;
 }

@@ -12,11 +12,14 @@ class SignUpBodyWidget extends StatelessWidget {
       builder: (context, _) {
         return LeftCardWidget(
           key: KWidgetkeys.screen.signUp.card,
-          widgetList: ({required isDesk}) => [
-            Text(
-              context.l10n.signUp,
-              key: KWidgetkeys.screen.signUp.title,
-              style: isDesk ? AppTextStyle.text96 : AppTextStyle.text32,
+          widgetListFunction: ({required isDesk}) => [
+            Align(
+              alignment: isDesk ? Alignment.centerLeft : Alignment.center,
+              child: Text(
+                context.l10n.signUp,
+                key: KWidgetkeys.screen.signUp.title,
+                style: isDesk ? AppTextStyle.text96 : AppTextStyle.text32,
+              ),
             ),
             EmailPasswordFieldsWidget(
               key: KWidgetkeys.screen.signUp.fields,
@@ -44,22 +47,25 @@ class SignUpBodyWidget extends StatelessWidget {
                 child: Text(
                   _.failure.getString(context)!,
                   key: KWidgetkeys.screen.signUp.failureMessage,
-                  style: AppTextStyle.error14,
+                  style: context.textStyle.error14,
                 ),
               ),
             if (isDesk)
               KSizedBox.kHeightSizedBox24
             else
               KSizedBox.kHeightSizedBox16,
-            ButtonWidget(
-              key: KWidgetkeys.screen.signUp.button,
-              text: _.showPasswordField
-                  ? context.l10n.register
-                  : context.l10n.next,
-              onPressed: () => context.read<SignUpBloc>().add(
-                    const SignUpEvent.signUpSubmitted(),
-                  ),
-              isDesk: isDesk,
+            Align(
+              alignment: Alignment.centerLeft,
+              child: ButtonWidget(
+                key: KWidgetkeys.screen.signUp.button,
+                text: _.showPasswordField
+                    ? context.l10n.register
+                    : context.l10n.next,
+                onPressed: () => context.read<SignUpBloc>().add(
+                      const SignUpEvent.signUpSubmitted(),
+                    ),
+                isDesk: isDesk,
+              ),
             ),
             KSizedBox.kHeightSizedBox40,
             Wrap(
@@ -73,8 +79,7 @@ class SignUpBodyWidget extends StatelessWidget {
                 TextButton(
                   key: KWidgetkeys.screen.signUp.loginButton,
                   onPressed: () => context.goNamedWithScroll(KRoute.login.name),
-                  style:
-                      KButtonStyles.transparentButtonStyleBottomBorder(context),
+                  style: context.buttonStyle.transparentButtonStyleBottomBorder,
                   child: Text(
                     context.l10n.login,
                     style: isDesk ? AppTextStyle.text40 : AppTextStyle.text24,

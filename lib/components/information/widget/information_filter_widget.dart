@@ -21,6 +21,7 @@ class InformationFilters extends StatelessWidget {
           onResetValue: () => context.read<InformationWatcherBloc>().add(
                 const InformationWatcherEvent.filterReset(),
               ),
+          isDesk: isDesk,
         ),
         KSizedBox.kWidthSizedBox24,
         Expanded(

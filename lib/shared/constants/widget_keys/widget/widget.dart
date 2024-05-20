@@ -5,7 +5,7 @@ class _WidgetKeys {
   final nawbar = _NawbarKeys();
   final question = _QuestionKeys();
   final filter = _FilterKeys();
-  final input = _MessageFieldKeys();
+  final messageField = _MessageFieldKeys();
   final footer = _FooterKeys();
   final dropListField = _DropListFieldKeys();
   final storyCard = _StoryCardKeys();
@@ -35,4 +35,7 @@ class _WidgetKeys {
   final feedbackBox = _FeedbackBoxKeys();
   final rate = _RateKeys();
   final chatInput = _ChatInputKeys();
+  final checkPointSingle = _CheckPointSingleKeys();
+  final workRequestCard = _WorkRequestCardKeys();
+  final dialogs = _DialogsKeys();
 }

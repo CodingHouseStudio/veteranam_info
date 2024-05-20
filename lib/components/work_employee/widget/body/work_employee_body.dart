@@ -4,75 +4,61 @@ import 'package:get_it/get_it.dart';
 import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
 
-class WorkEmployeeBody extends StatefulWidget {
+class WorkEmployeeBody extends StatelessWidget {
   const WorkEmployeeBody({super.key});
-
-  @override
-  State<WorkEmployeeBody> createState() => _WorkEmployeeBodyState();
-}
-
-class _WorkEmployeeBodyState extends State<WorkEmployeeBody> {
-  late bool loadedState;
-  @override
-  void initState() {
-    loadedState = false;
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<WorkEmployeeWatcherBloc, WorkEmployeeWatcherState>(
-      builder: (context, _) {
-        switch (_.loadingStatus) {
-          case LoadingStatus.initial:
-            return const CircularProgressIndicator.adaptive();
-          case LoadingStatus.loading:
-            loadedState = true;
-            return const CircularProgressIndicator.adaptive();
-          case LoadingStatus.loaded:
-            return ScaffoldWidget(
-              childWidgetsFunction: ({required isDesk}) => [
-                if (isDesk)
-                  KSizedBox.kHeightSizedBox40
-                else
-                  KSizedBox.kHeightSizedBox24,
-                Text(
-                  context.l10n.work,
-                  key: KWidgetkeys.screen.workEmployee.title,
-                  style: isDesk ? AppTextStyle.text96 : AppTextStyle.text32,
-                ),
-                KSizedBox.kHeightSizedBox8,
-                Text(
-                  context.l10n.workSubtitle,
-                  key: KWidgetkeys.screen.workEmployee.subtitle,
-                  style: isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
-                ),
-                if (isDesk)
-                  KSizedBox.kHeightSizedBox56
-                else
-                  KSizedBox.kHeightSizedBox24,
-                WorkEmployeeFilters(
-                  key: KWidgetkeys.screen.workEmployee.filter,
-                  cities: _.workModelItems.overallCities,
-                  categories: _.workModelItems.overallCategories,
-                  isDesk: isDesk,
-                ),
-                if (isDesk)
-                  KSizedBox.kHeightSizedBox40
-                else
-                  KSizedBox.kHeightSizedBox24,
+      builder: (context, _) => ScaffoldWidget(
+        titleChildWidgetsFunction: ({required isDesk}) => [
+          if (isDesk)
+            KSizedBox.kHeightSizedBox40
+          else
+            KSizedBox.kHeightSizedBox24,
+          ...TitleWidget.titleWidgetList(
+            title: context.l10n.work,
+            titleKey: KWidgetkeys.screen.workEmployee.title,
+            subtitle: context.l10n.workSubtitle,
+            subtitleKey: KWidgetkeys.screen.workEmployee.subtitle,
+            isDesk: isDesk,
+          ),
+          if (isDesk)
+            KSizedBox.kHeightSizedBox56
+          else
+            KSizedBox.kHeightSizedBox24,
+        ],
+        mainDeskPadding:
+            const EdgeInsets.symmetric(horizontal: KPadding.kPaddingSize220),
+        mainChildWidgetsFunction: ({required isDesk}) {
+          final childWidgets = [
+            WorkEmployeeFilters(
+              key: KWidgetkeys.screen.workEmployee.filter,
+              cities: _.workModelItems.overallCities,
+              categories: _.workModelItems.overallCategories,
+              isDesk: isDesk,
+            ),
+            if (isDesk)
+              KSizedBox.kHeightSizedBox56
+            else
+              KSizedBox.kHeightSizedBox24,
+          ];
+          switch (_.loadingStatus) {
+            case LoadingStatus.initial:
+              childWidgets.add(const CircularProgressIndicator.adaptive());
+            case LoadingStatus.loading:
+              childWidgets.add(const CircularProgressIndicator.adaptive());
+            case LoadingStatus.loaded:
+              childWidgets.addAll([
                 if (_.workModelItems.isNotEmpty)
                   ...List.generate(_.filteredWorkModelItems.length, (index) {
-                    if (index != 0) {
-                      loadedState = false;
-                    }
                     return Padding(
                       padding: EdgeInsets.only(
                         top: index != 0 ? KPadding.kPaddingSize40 : 0,
                       ),
                       child: WorkCardWidget(
                         key: KWidgetkeys.screen.workEmployee.cards,
-                        firstItemIsFirst: !loadedState && index == 0,
+                        firstItemIsFirst: index == 0,
                         workModel: _.filteredWorkModelItems.elementAt(index),
                         isDesk: isDesk,
                       ),
@@ -96,13 +82,21 @@ class _WorkEmployeeBodyState extends State<WorkEmployeeBody> {
                   KSizedBox.kHeightSizedBox56
                 else
                   KSizedBox.kHeightSizedBox24,
+                WorkRequestCardWidget(
+                  key: KWidgetkeys.screen.workEmployee.requestCard,
+                  isDesk: isDesk,
+                ),
+                if (isDesk)
+                  KSizedBox.kHeightSizedBox56
+                else
+                  KSizedBox.kHeightSizedBox24,
                 Center(
                   child: PaginationWidget(
                     key: KWidgetkeys.screen.workEmployee.pagination,
                     currentPage: _.page,
                     pages: _.maxPage,
                     changePage: (int page) {
-                      Scrollable.ensureVisible(context);
+                      context.read<ScrollCubit>().scrollUp();
                       context.read<WorkEmployeeWatcherBloc>().add(
                             WorkEmployeeWatcherEvent.loadPage(
                               page,
@@ -111,16 +105,18 @@ class _WorkEmployeeBodyState extends State<WorkEmployeeBody> {
                     },
                   ),
                 ),
-                if (isDesk)
-                  KSizedBox.kHeightSizedBox56
-                else
-                  KSizedBox.kHeightSizedBox24,
-              ],
+              ]);
+            case LoadingStatus.error:
+              childWidgets.add(const CircularProgressIndicator.adaptive());
+          }
+          return childWidgets
+            ..add(
+              isDesk
+                  ? KSizedBox.kHeightSizedBox56
+                  : KSizedBox.kHeightSizedBox24,
             );
-          case LoadingStatus.error:
-            return const CircularProgressIndicator.adaptive();
-        }
-      },
+        },
+      ),
     );
   }
 }

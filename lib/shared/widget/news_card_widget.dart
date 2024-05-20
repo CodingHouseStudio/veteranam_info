@@ -19,13 +19,13 @@ class NewsCardWidget extends StatelessWidget {
         context.select((InformationWatcherBloc bloc) => bloc.state.filters);
 
     return CardTextDetailEvaluateWidget(
-      image: informationItem.image,
+      image: informationItem.image.firstImage,
       text: informationItem.news,
       buttonText: [
         context.l10n.readMore,
         context.l10n.readLess,
       ],
-      buttonStyle: KButtonStyles.transparentButtonStyleBottomBorder(context),
+      buttonStyle: context.buttonStyle.transparentButtonStyleBottomBorder,
       titleWidget: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -37,7 +37,7 @@ class NewsCardWidget extends StatelessWidget {
           Text(
             informationItem.date.toLocal().toString().split(' ')[0],
             key: KWidgetkeys.widget.newsCard.date,
-            style: AppTextStyle.hint16,
+            style: context.textStyle.hint16,
           ),
         ],
       ),
@@ -53,7 +53,7 @@ class NewsCardWidget extends StatelessWidget {
                 runSpacing: KSize.kWrapRunSpacing4,
                 children: selectedFilters.map((tag) {
                   return Container(
-                    decoration: KWidgetTheme.boxDecorationWidget(context),
+                    decoration: context.widgetTheme.boxDecorationWidget,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
                         vertical: KPadding.kPaddingSize4,

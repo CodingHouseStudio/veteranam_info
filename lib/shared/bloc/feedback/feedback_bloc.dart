@@ -84,12 +84,12 @@ class FeedbackBloc extends Bloc<FeedbackEvent, FeedbackState> {
       emit(state.copyWith(formState: FeedbackEnum.sendingMessage));
       final result = await _feedbackRepository.sendFeedback(
         FeedbackModel(
-          id: ExtendedDateTime.current.microsecondsSinceEpoch.toString(),
-          guestId: ExtendedDateTime.current.microsecondsSinceEpoch.toString(),
+          id: ExtendedDateTime.id,
+          guestId: ExtendedDateTime.id,
           guestName: state.name.value!,
           email: state.email.value,
           timestamp: ExtendedDateTime.current,
-          message: state.message.value!,
+          message: state.message.value,
         ),
       );
       result.fold(

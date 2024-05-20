@@ -1,3 +1,4 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -9,7 +10,7 @@ import 'package:kozak/shared/shared.dart';
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 
 /// COMMENT: Variable for navigation in App
-final GoRouter router = GoRouter(
+GoRouter router = GoRouter(
   routerNeglect: true,
   navigatorKey: _rootNavigatorKey,
   debugLogDiagnostics: true,
@@ -17,6 +18,12 @@ final GoRouter router = GoRouter(
   refreshListenable:
       GoRouterRefreshStream(GetIt.instance<AuthenticationBloc>().stream),
   initialLocation: KRoute.home.path,
+  observers: [
+    FirebaseAnalyticsObserver(
+      analytics: FirebaseAnalytics.instance,
+      onError: (_) => debugPrint('FirebaseAnalyticsObserver error $_'),
+    ),
+  ],
   redirect: (BuildContext context, GoRouterState state) async {
     if (context.read<AuthenticationBloc>().state.status ==
         AuthenticationStatus.authenticated) {
@@ -36,6 +43,7 @@ final GoRouter router = GoRouter(
       path: KRoute.login.path,
       pageBuilder: (context, state) => NoTransitionPage(
         key: state.pageKey,
+        name: state.name,
         child: const LoginScreen(),
       ),
     ),
@@ -44,6 +52,7 @@ final GoRouter router = GoRouter(
       path: KRoute.signUp.path,
       pageBuilder: (context, state) => NoTransitionPage(
         key: state.pageKey,
+        name: state.name,
         child: const SignUpScreen(),
       ),
     ),
@@ -56,6 +65,7 @@ final GoRouter router = GoRouter(
               : KRoute.thanks.path,
       pageBuilder: (context, state) => NoTransitionPage(
         key: state.pageKey,
+        name: state.name,
         child: const QuestionsFormScreen(),
       ),
     ),
@@ -64,6 +74,7 @@ final GoRouter router = GoRouter(
       path: KRoute.thanks.path,
       pageBuilder: (context, state) => NoTransitionPage(
         key: state.pageKey,
+        name: state.name,
         child: const ThanksScreen(),
       ),
     ),
@@ -72,6 +83,7 @@ final GoRouter router = GoRouter(
       path: KRoute.home.path,
       pageBuilder: (context, state) => NoTransitionPage(
         key: state.pageKey,
+        name: state.name,
         child: const HomeScreen(),
       ),
       routes: [
@@ -80,18 +92,16 @@ final GoRouter router = GoRouter(
           path: KRoute.information.path,
           pageBuilder: (context, state) => NoTransitionPage(
             key: state.pageKey,
+            name: state.name,
             child: const InformationScreen(),
           ),
-          onExit: (context) {
-            Scrollable.ensureVisible(context);
-            return true;
-          },
         ),
         GoRoute(
           name: KRoute.discounts.name,
           path: KRoute.discounts.path,
           pageBuilder: (context, state) => NoTransitionPage(
             key: state.pageKey,
+            name: state.name,
             child: const DiscountsScreen(),
           ),
         ),
@@ -100,24 +110,58 @@ final GoRouter router = GoRouter(
           path: KRoute.story.path,
           pageBuilder: (context, state) => NoTransitionPage(
             key: state.pageKey,
+            name: state.name,
             child: const StoryScreen(),
           ),
+          routes: [
+            GoRoute(
+              name: KRoute.storyAdd.name,
+              path: KRoute.storyAdd.path,
+              pageBuilder: (context, state) => NoTransitionPage(
+                key: state.pageKey,
+                name: state.name,
+                child: const StoryAddScreen(),
+              ),
+            ),
+          ],
         ),
         GoRoute(
           name: KRoute.work.name,
           path: KRoute.work.path,
           pageBuilder: (context, state) => NoTransitionPage(
             key: state.pageKey,
+            name: state.name,
             child: const WorkScreen(),
           ),
           routes: [
+            GoRoute(
+              name: KRoute.employer.name,
+              path: KRoute.employer.path,
+              pageBuilder: (context, state) => NoTransitionPage(
+                key: state.pageKey,
+                name: state.name,
+                child: const WorkEmployerScreen(),
+              ),
+            ),
             GoRoute(
               name: KRoute.workEmployee.name,
               path: KRoute.workEmployee.path,
               pageBuilder: (context, state) => NoTransitionPage(
                 key: state.pageKey,
+                name: state.name,
                 child: const WorkEmployeeScreen(),
               ),
+              routes: [
+                GoRoute(
+                  name: KRoute.workRespond.name,
+                  path: KRoute.workRespond.path,
+                  pageBuilder: (context, state) => NoTransitionPage(
+                    name: state.name,
+                    key: state.pageKey,
+                    child: const WorkRespondScreen(),
+                  ),
+                ),
+              ],
             ),
           ],
         ),
@@ -126,6 +170,7 @@ final GoRouter router = GoRouter(
           path: KRoute.profile.path,
           pageBuilder: (context, state) => NoTransitionPage(
             key: state.pageKey,
+            name: state.name,
             child: const ProfileScreen(),
           ),
           routes: [
@@ -138,12 +183,18 @@ final GoRouter router = GoRouter(
               ),
             ),
           ],
+          redirect: (context, state) =>
+              context.read<AuthenticationBloc>().state.status !=
+                      AuthenticationStatus.authenticated
+                  ? KRoute.home.path
+                  : null,
         ),
         GoRoute(
           name: KRoute.investors.name,
           path: KRoute.investors.path,
           pageBuilder: (context, state) => NoTransitionPage(
             key: state.pageKey,
+            name: state.name,
             child: const InvestorsScreen(),
           ),
         ),
@@ -152,6 +203,7 @@ final GoRouter router = GoRouter(
           path: KRoute.aboutUs.path,
           pageBuilder: (context, state) => NoTransitionPage(
             key: state.pageKey,
+            name: state.name,
             child: const AboutUsScreen(),
           ),
         ),
@@ -160,6 +212,7 @@ final GoRouter router = GoRouter(
           path: KRoute.consultation.path,
           pageBuilder: (context, state) => NoTransitionPage(
             key: state.pageKey,
+            name: state.name,
             child: const ConsultationScreen(),
           ),
         ),
@@ -168,6 +221,7 @@ final GoRouter router = GoRouter(
           path: KRoute.contact.path,
           pageBuilder: (context, state) => NoTransitionPage(
             key: state.pageKey,
+            name: state.name,
             child: const ContactScreen(),
           ),
         ),
@@ -183,8 +237,11 @@ extension NavigatorExtention on BuildContext {
     Map<String, dynamic> queryParameters = const <String, dynamic>{},
     Object? extra,
   }) {
-    Scrollable.ensureVisible(this, alignment: KSize.kTopScroll);
-    GoRouter.of(this).goNamed(
+    if (read<ScrollCubit>().state.positions.isNotEmpty) {
+      read<ScrollCubit>().scrollUp();
+    }
+    read<ScrollCubit>().initial();
+    goNamed(
       name,
       pathParameters: pathParameters,
       queryParameters: queryParameters,

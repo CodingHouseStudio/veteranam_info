@@ -1,6 +1,7 @@
 /// COMMENT: Variables with widget and font size
 abstract class KSize {
   static const kPixel3 = 3.0;
+  static const kPixel4 = 4.0;
   static const kPixel8 = 8.0;
   static const kPixel12 = 12.0;
   static const kPixel16 = 16.0;
@@ -15,11 +16,16 @@ abstract class KSize {
   static const kPixel48 = 48.0;
   static const kPixel56 = 56.0;
   static const kPixel64 = 64.0;
+  static const kPixel68 = 68.0;
+  static const kPixel70 = 70.0;
+  static const kPixel73 = 73.0;
+  static const kPixel78 = 78.0;
   static const kPixel90 = 90.0;
   static const kPixel120 = 120.0;
   static const kPixel160 = 160.0;
 
   static const kRadius8 = 8.0;
+  static const kRadius10 = 10.0;
   static const kRadius32 = 32.0;
   static const kRadius40 = 40.0;
 

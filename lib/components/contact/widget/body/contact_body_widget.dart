@@ -7,23 +7,13 @@ class ContactBodyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScaffoldWidget(
-      childWidgetsFunction: ({required isDesk}) => [
+      mainChildWidgetsFunction: ({required isDesk}) => [
         // KSizedBox.kHeightSizedBox30,
         // DropListFieldWidget(
         //   onChanged: (_) {},
         //   hintText: '',
         //   dropDownList: KMockText.dropDownList,
         // ),
-        KSizedBox.kHeightSizedBox30,
-        const ButtonMobWidget(
-          showGoogleIcon: true,
-        ),
-        KSizedBox.kHeightSizedBox30,
-        ButtonSecondaryWidget(
-          onPressed: () {},
-          text: KMockText.title,
-          icon: KIcon.plus,
-        ),
         KSizedBox.kHeightSizedBox30,
         const PageIndicatorControl(
           pageCount: 3,
