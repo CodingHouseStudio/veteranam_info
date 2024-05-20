@@ -117,7 +117,6 @@ class ProfileBodyWidget extends StatelessWidget {
             onPressed: null,
             // backgroundColor: AppColors.transparent,
           ),
-          KSizedBox.kWidthSizedBox80,
           KSizedBox.kHeightSizedBox24,
         ],
       ),
