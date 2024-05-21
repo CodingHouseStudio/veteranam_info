@@ -63,6 +63,7 @@ class AuthenticationBloc
             currentUserSetting: _authenticationRepository.currentUserSetting,
           ),
         );
+
       case AuthenticationStatus.unknown:
         return emit(const AuthenticationState.unknown());
     }
@@ -111,7 +112,9 @@ class AuthenticationBloc
   ) {
     emit(
       state.copyWith(
-        userSetting: event.userSetting,
+        userSetting: event.userSetting.copyWith(
+          id: _authenticationRepository.currentUser.id,
+        ),
       ),
     );
   }
@@ -124,7 +127,7 @@ class AuthenticationBloc
       locale: event.language,
     );
     add(_AppUserSettingChanged(userSetting));
-    if (state.userSetting.isNotEmpty) {
+    if (state.user.hasValue) {
       await _authenticationRepository.updateUserSetting(
         userSetting: userSetting,
       );
@@ -135,7 +138,7 @@ class AuthenticationBloc
     AppUserRoleChanged event,
     Emitter<AuthenticationState> emit,
   ) async {
-    if (state.user != null && state.user!.isNotEmpty) {
+    if (state.user.hasValue) {
       final userSetting = state.userSetting.copyWith(
         userRole: event.userRole,
       );
@@ -145,4 +148,8 @@ class AuthenticationBloc
       );
     }
   }
+}
+
+extension UserChecker on User? {
+  bool get hasValue => this != null && this!.isNotEmpty;
 }

@@ -32,6 +32,14 @@ void main() {
         mockFirestoreService = MockFirestoreService();
         mockUser = MockUser();
 
+        when(
+          mockCache.read<User>(
+            key: AppAuthenticationRepository.userCacheKey,
+          ),
+        ).thenAnswer(
+          (_) => KTestText.user,
+        );
+
         when(mockUserCredential.credential).thenAnswer(
           (_) => KTestText.authCredential,
         );
@@ -98,7 +106,10 @@ void main() {
           (_) async {},
         );
         when(
-          mockFirestoreService.updateUserSetting(KTestText.userSetting),
+          mockFirestoreService.setUserSetting(
+            userSetting: KTestText.userSetting,
+            userId: KTestText.user.id,
+          ),
         ).thenThrow(
           firebase_auth.FirebaseAuthException(
             code: KGroupText.firebaseFailure,
@@ -117,6 +128,12 @@ void main() {
             code: KGroupText.firebaseFailure,
           ),
         );
+        when(
+          mockFirestoreService.deleteUserSetting(KTestText.user.id),
+        ).thenAnswer(
+          (_) async {},
+        );
+
         if (GetIt.I.isRegistered<FirestoreService>()) {
           GetIt.I.unregister<FirestoreService>();
         }

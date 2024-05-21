@@ -121,6 +121,15 @@ class FirestoreService {
         },
       );
 
+  Future<void> deleteUserSetting(
+    String userId,
+  ) {
+    return _db
+        .collection(FirebaseCollectionName.userSettings)
+        .doc(userId)
+        .delete();
+  }
+
   Stream<List<WorkModel>> getWorks() => _db
           .collection(FirebaseCollectionName.work)
           .snapshots(includeMetadataChanges: true) // Enable caching
