@@ -8,18 +8,22 @@ class DropChipWidget extends StatelessWidget {
     required this.onSelected,
     required this.isDesk,
     super.key,
+    this.widgetKey,
+    this.buttonKey,
   });
   final List<String> filters;
   final String? selectFilter;
   final void Function(String? newValue) onSelected;
   final bool isDesk;
+  final Key? widgetKey;
+  final Key? buttonKey;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: context.widgetTheme.boxDecorationWidget,
       child: DropdownButton<String?>(
-        key: KWidgetkeys.widget.dropChip.widget,
+        key: widgetKey ?? KWidgetkeys.widget.dropChip.widget,
         // focusColor: AppColors.transparent,
         isDense: true,
         padding: const EdgeInsetsDirectional.symmetric(
@@ -33,7 +37,7 @@ class DropChipWidget extends StatelessWidget {
         items: filters
             .map<DropdownMenuItem<String?>>(
               (String? value) => DropdownMenuItem<String?>(
-                key: KWidgetkeys.widget.dropChip.button,
+                key: buttonKey ?? KWidgetkeys.widget.dropChip.buttons,
                 value: value,
                 child: Text(value.toString()),
               ),

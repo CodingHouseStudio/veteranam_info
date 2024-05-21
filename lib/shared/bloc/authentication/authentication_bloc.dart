@@ -141,7 +141,6 @@ class AuthenticationBloc
     if (state.user.hasValue) {
       final userSetting = state.userSetting.copyWith(
         userRole: event.userRole,
-        roleIsConfirmed: false,
       );
       add(_AppUserSettingChanged(userSetting));
       await _authenticationRepository.updateUserSetting(

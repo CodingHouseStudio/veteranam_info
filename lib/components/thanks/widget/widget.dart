@@ -1,1 +1,1 @@
-export 'body/thanks_body_widget.dart';
+export 'body/body.dart';
