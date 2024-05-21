@@ -711,6 +711,16 @@ class MockFirestoreService extends _i1.Mock implements _i3.FirestoreService {
       ) as _i8.Stream<_i3.UserSetting>);
 
   @override
+  _i8.Future<void> deleteUserSetting(String? userId) => (super.noSuchMethod(
+        Invocation.method(
+          #deleteUserSetting,
+          [userId],
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
   _i8.Stream<List<_i3.WorkModel>> getWorks() => (super.noSuchMethod(
         Invocation.method(
           #getWorks,
