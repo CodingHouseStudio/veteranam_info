@@ -138,6 +138,5 @@ List<Widget> _workRespondContainerWidgetList({
         isDesk: isDesk,
       ),
     ],
-    if (isDesk) KSizedBox.kHeightSizedBox32 else KSizedBox.kHeightSizedBox16,
   ];
 }
