@@ -9,12 +9,12 @@ Future<void> workRespondPumpAppHelper({
   MockGoRouter? mockGoRouter,
 }) async {
   await tester.pumpApp(
-    const WorkRespondScreen(),
+    const EmployeeRespondScreen(),
     mockGoRouter: mockGoRouter,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.workRespond.screen),
+    find.byKey(KWidgetkeys.screen.employeeRespond.screen),
     findsOneWidget,
   );
 
