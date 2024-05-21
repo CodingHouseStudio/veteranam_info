@@ -75,6 +75,9 @@ void main() {
           (_) async {},
         );
         when(
+          mockFirebaseAuth.signInAnonymously(),
+        ).thenThrow(Exception(KGroupText.failure));
+        when(
           mockGoogleSignIn.signOut(),
         ).thenAnswer(
           (_) async => mockGoogleSignInAccount,
@@ -187,6 +190,20 @@ void main() {
         verifyNever(
           mockSecureStorageRepository.deleteAll(),
         );
+        expect(
+          result,
+          isA<Left<SomeFailure, bool>>().having(
+            (e) => e.value,
+            'value',
+            const SomeFailure.serverError(),
+          ),
+        );
+      });
+      test('Log In Anonymously', () async {
+        final result = await appAuthenticationRepository.logInAnonymously();
+        verify(
+          mockFirebaseAuth.signInAnonymously(),
+        ).called(1);
         expect(
           result,
           isA<Left<SomeFailure, bool>>().having(

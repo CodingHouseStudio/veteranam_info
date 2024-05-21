@@ -68,6 +68,11 @@ void main() {
           (_) async {},
         );
         when(
+          mockFirebaseAuth.signInAnonymously(),
+        ).thenAnswer(
+          (_) async => mockUserCredential,
+        );
+        when(
           mockSecureStorageRepository.readOne(
             keyItem: KAppText.usernameToken,
           ),
@@ -334,6 +339,17 @@ void main() {
             userSetting: UserSetting.empty,
             userId: KTestText.user.id,
           ),
+        ).called(1);
+        expect(
+          result,
+          isA<Right<SomeFailure, bool>>()
+              .having((e) => e.value, 'value', isTrue),
+        );
+      });
+      test('Log In Anonymously', () async {
+        final result = await appAuthenticationRepository.logInAnonymously();
+        verify(
+          mockFirebaseAuth.signInAnonymously(),
         ).called(1);
         expect(
           result,

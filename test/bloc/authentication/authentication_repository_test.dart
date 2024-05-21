@@ -55,6 +55,11 @@ void main() {
         ).thenAnswer(
           (_) async => const Right(true),
         );
+        when(
+          mockAppAuthenticationRepository.logInAnonymously(),
+        ).thenAnswer(
+          (_) async => const Right(true),
+        );
       });
       test('Log in', () async {
         expect(
@@ -111,6 +116,13 @@ void main() {
               .having((e) => e.value, 'value', isTrue),
         );
       });
+      test('Log In Anonymously User', () async {
+        expect(
+          await authenticationRepository.logInAnonymously(),
+          isA<Right<SomeFailure, bool>>()
+              .having((e) => e.value, 'value', isTrue),
+        );
+      });
     });
     group('${KGroupText.failure} ', () {
       setUp(() {
@@ -147,6 +159,11 @@ void main() {
         );
         when(
           mockAppAuthenticationRepository.deleteUser(),
+        ).thenAnswer(
+          (_) async => const Left(SomeFailure.serverError()),
+        );
+        when(
+          mockAppAuthenticationRepository.logInAnonymously(),
         ).thenAnswer(
           (_) async => const Left(SomeFailure.serverError()),
         );
@@ -211,6 +228,16 @@ void main() {
       test('Delete User', () async {
         expect(
           await authenticationRepository.deleteUser(),
+          isA<Left<SomeFailure, bool>>().having(
+            (e) => e.value,
+            'value',
+            const SomeFailure.serverError(),
+          ),
+        );
+      });
+      test('Log In Anonymously User', () async {
+        expect(
+          await authenticationRepository.logInAnonymously(),
           isA<Left<SomeFailure, bool>>().having(
             (e) => e.value,
             'value',

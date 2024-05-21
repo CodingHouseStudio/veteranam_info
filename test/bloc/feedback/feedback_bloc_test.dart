@@ -10,15 +10,34 @@ void main() {
   group('${KScreenBlocName.feedback} ${KGroupText.bloc} ', () {
     late FeedbackBloc feedbackBloc;
     late IFeedbackRepository mockFeedbackRepository;
+    late IAppAuthenticationRepository mockAppAuthenticationRepository;
     setUp(() {
       ExtendedDateTime.current = KTestText.dateTime;
       ExtendedDateTime.id = KTestText.feedbackModel.id;
       mockFeedbackRepository = MockIFeedbackRepository();
+      mockAppAuthenticationRepository = MockAppAuthenticationRepository();
       when(mockFeedbackRepository.sendFeedback(KTestText.feedbackModel))
           .thenAnswer(
         (realInvocation) async => const Right(true),
       );
-      feedbackBloc = FeedbackBloc(feedbackRepository: mockFeedbackRepository);
+      when(mockAppAuthenticationRepository.currentUser).thenAnswer(
+        (realInvocation) => KTestText.user,
+      );
+      when(mockAppAuthenticationRepository.currentUserSetting).thenAnswer(
+        (realInvocation) => KTestText.userSetting,
+      );
+      when(
+        mockAppAuthenticationRepository.updateUserSetting(
+          KTestText.userSetting
+              .copyWith(timeSendingFeedback: ExtendedDateTime.current),
+        ),
+      ).thenAnswer(
+        (realInvocation) async => const Right(true),
+      );
+      feedbackBloc = FeedbackBloc(
+        feedbackRepository: mockFeedbackRepository,
+        appAuthenticationRepository: mockAppAuthenticationRepository,
+      );
     });
 
     blocTest<FeedbackBloc, FeedbackState>(

@@ -10,8 +10,11 @@ part 'feedback_bloc.freezed.dart';
 
 @Injectable()
 class FeedbackBloc extends Bloc<FeedbackEvent, FeedbackState> {
-  FeedbackBloc({required IFeedbackRepository feedbackRepository})
-      : _feedbackRepository = feedbackRepository,
+  FeedbackBloc({
+    required IFeedbackRepository feedbackRepository,
+    required IAppAuthenticationRepository appAuthenticationRepository,
+  })  : _feedbackRepository = feedbackRepository,
+        _appAuthenticationRepository = appAuthenticationRepository,
         super(
           const _FeedbackState(
             email: EmailFieldModel.pure(),
@@ -30,6 +33,8 @@ class FeedbackBloc extends Bloc<FeedbackEvent, FeedbackState> {
   }
 
   final IFeedbackRepository _feedbackRepository;
+
+  final IAppAuthenticationRepository _appAuthenticationRepository;
 
   void _onNameUpdated(
     _NameUpdated event,
@@ -74,6 +79,9 @@ class FeedbackBloc extends Bloc<FeedbackEvent, FeedbackState> {
     _Save event,
     Emitter<FeedbackState> emit,
   ) async {
+    if (_appAuthenticationRepository.currentUser.isEmpty) {
+      return;
+    }
     if (Formz.validate(
       [
         state.message,
@@ -85,7 +93,7 @@ class FeedbackBloc extends Bloc<FeedbackEvent, FeedbackState> {
       final result = await _feedbackRepository.sendFeedback(
         FeedbackModel(
           id: ExtendedDateTime.id,
-          guestId: ExtendedDateTime.id,
+          guestId: _appAuthenticationRepository.currentUser.id,
           guestName: state.name.value!,
           email: state.email.value,
           timestamp: ExtendedDateTime.current,
@@ -107,6 +115,12 @@ class FeedbackBloc extends Bloc<FeedbackEvent, FeedbackState> {
             formState: FeedbackEnum.success,
             failure: FeedbackFailure.none,
           ),
+        ),
+      );
+
+      await _appAuthenticationRepository.updateUserSetting(
+        _appAuthenticationRepository.currentUserSetting.copyWith(
+          timeSendingFeedback: ExtendedDateTime.current,
         ),
       );
     } else {

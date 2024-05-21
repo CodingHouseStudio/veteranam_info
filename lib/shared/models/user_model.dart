@@ -22,7 +22,7 @@ class User with _$User {
   static const empty = User(id: '');
 
   /// Convenience getter to determine whether the current user is anonymously.
-  bool get isAnonymously => this == User.empty && email != null;
+  bool get isAnonymously => this != User.empty && email == null;
 
   /// Convenience getter to determine whether the current user is not
   /// anonymously.
