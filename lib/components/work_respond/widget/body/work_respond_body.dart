@@ -19,19 +19,20 @@ class WorkRespondBodyWidget extends StatelessWidget {
           context.l10n.respond,
           style: isDesk ? AppTextStyle.text96 : AppTextStyle.text32,
         ),
-        KSizedBox.kHeightSizedBox8,
-        GestureDetector(
-          onTap: () => context.goNamedWithScroll(KRoute.workEmployee.name),
-          child: Row(
-            children: [
-              KIcon.chevronLeft,
-              Text(
-                key: KWidgetkeys.screen.workRespond.subtitle,
+        Row(
+          children: [
+            TextButton.icon(
+              icon: KIcon.chevronLeft,
+              onPressed: () => context.goNamedWithScroll(
+                KRoute.workEmployee.name,
+              ),
+              key: KWidgetkeys.screen.workRespond.subtitle,
+              label: Text(
                 KMockText.workTitle,
                 style: isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ],
       mainDecoration: context.widgetTheme.boxDecorationWidget,
