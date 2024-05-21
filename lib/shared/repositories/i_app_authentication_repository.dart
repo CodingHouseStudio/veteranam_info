@@ -15,6 +15,8 @@ abstract class IAppAuthenticationRepository {
     required String password,
   });
 
+  Future<Either<SomeFailure, bool>> logInAnonymously();
+
   Future<Either<SomeFailure, bool>> signUp({
     required String email,
     required String password,

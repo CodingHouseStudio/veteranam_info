@@ -159,6 +159,16 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
         (e) => LogInWithEmailAndPasswordFailure.fromCode(e).status,
       );
 
+  /// Signs in with the anonymously.
+  ///
+  /// Throws a [SendFailure] if an exception occurs.
+  @override
+  Future<Either<SomeFailure, bool>> logInAnonymously() async =>
+      _handleAuthOperation(
+        _firebaseAuth.signInAnonymously,
+        (e) => SendFailure.fromCode(e).status,
+      );
+
   /// Creates a new user with the provided [email] and [password].
   ///
   /// Throws a [SignUpWithEmailAndPasswordFailure] if an exception occurs.
@@ -234,7 +244,7 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
 
   void _updateAuthStatusBasedOnCache() {
     debugPrint('Updating auth status based on cache');
-    final user = currentUser.isEmpty;
+    final user = currentUser.isAnonymously;
     debugPrint('Current user inside '
         '_updateAuthStatusBasedOnCache : $currentUser');
     debugPrint('user is $user');
