@@ -248,6 +248,7 @@ abstract class KScreenBlocName {
   static const workRespond = 'Work Respond Screen';
   static const workEmployer = 'Employer Screen';
   static const storyAdd = 'Story Add Screen';
+  static const profileMyStory = 'My Story Screen';
 
   static const feedback = 'Feedback Widget';
   static const authenticationServices = 'Authentication Services';

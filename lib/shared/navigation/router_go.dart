@@ -173,6 +173,17 @@ GoRouter router = GoRouter(
             name: state.name,
             child: const ProfileScreen(),
           ),
+          routes: [
+            GoRoute(
+              name: KRoute.profileMyStory.name,
+              path: KRoute.profileMyStory.path,
+              pageBuilder: (context, state) => NoTransitionPage(
+                key: state.pageKey,
+                name: state.name,
+                child: const ProfileMyStoryScreen(),
+              ),
+            ),
+          ],
           redirect: (context, state) =>
               context.read<AuthenticationBloc>().state.status !=
                       AuthenticationStatus.authenticated

@@ -22,4 +22,5 @@ class _ScreenKeys {
   final workRespond = _WorkRespondKeys();
   final employer = _EmployerKeys();
   final storyAdd = _StoryAddKeys();
+  final myStory = _MyStoryKeys();
 }
