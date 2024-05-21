@@ -1,8 +1,9 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
+import 'package:kozak/components/employee_respond/view/employee_respond_view.dart';
+import 'package:kozak/shared/constants/widget_keys/widget_keys.dart';
 
 import '../text_dependency.dart';
-import 'helper/helper.dart';
 
 void main() {
   setUp(configureDependenciesTest);
@@ -12,7 +13,7 @@ void main() {
   setupFirebaseAuthMocks();
 
   tearDown(GetIt.I.reset);
-  group('${KScreenBlocName.workRespond} ', () {
+  group('${KScreenBlocName.employeeRespond} ', () {
     testWidgets('${KGroupText.intial} ', (tester) async {
       await tester.pumpApp(const EmployeeRespondScreen());
 
