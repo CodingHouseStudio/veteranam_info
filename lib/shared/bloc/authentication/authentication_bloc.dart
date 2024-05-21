@@ -16,7 +16,7 @@ class AuthenticationBloc
     required AuthenticationRepository authenticationRepository,
   })  : _authenticationRepository = authenticationRepository,
         super(
-          authenticationRepository.currentUser.isNotEmpty
+          authenticationRepository.currentUser.isNotAnonymously
               ? AuthenticationState.authenticated(
                   currentUser: authenticationRepository.currentUser,
                   currentUserSetting:
@@ -48,13 +48,16 @@ class AuthenticationBloc
     return super.close();
   }
 
-  void _onAuthenticationStatusChanged(
+  Future<void> _onAuthenticationStatusChanged(
     AuthenticationStatusChanged event,
     Emitter<AuthenticationState> emit,
-  ) {
+  ) async {
     log('${KAppText.authChange} ${event.status}');
     switch (event.status) {
       case AuthenticationStatus.unauthenticated:
+        if (_authenticationRepository.currentUser.id.isEmpty) {
+          await _authenticationRepository.logInAnonymously();
+        }
         return emit(const AuthenticationState.unauthenticated());
       case AuthenticationStatus.authenticated:
         return emit(
@@ -124,7 +127,7 @@ class AuthenticationBloc
       locale: event.language,
     );
     add(_AppUserSettingChanged(userSetting));
-    if (state.userSetting.isNotEmpty) {
+    if (_authenticationRepository.currentUser.isNotEmpty) {
       await _authenticationRepository.updateUserSetting(
         userSetting: userSetting,
       );

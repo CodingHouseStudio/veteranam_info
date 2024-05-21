@@ -7,23 +7,23 @@ void main() {
   group('${KScreenBlocName.appAuthentication} ${KGroupText.model} User', () {
     test('check is Empty ', () {
       expect(
-        KTestText.user.isEmpty,
+        KTestText.user.isAnonymously,
         isFalse,
       );
 
       expect(
-        User.empty.isEmpty,
+        User.empty.isAnonymously,
         isTrue,
       );
     });
     test('check is not Empty ', () {
       expect(
-        KTestText.user.isNotEmpty,
+        KTestText.user.isNotAnonymously,
         isTrue,
       );
 
       expect(
-        User.empty.isNotEmpty,
+        User.empty.isNotAnonymously,
         isFalse,
       );
     });

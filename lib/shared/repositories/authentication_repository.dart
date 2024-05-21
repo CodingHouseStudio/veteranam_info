@@ -34,7 +34,7 @@ class AuthenticationRepository {
   void _onStatusStreamListen() {
     _statusUserSubscription ??= iAppAuthenticationRepository.user.listen(
       (currentUser) {
-        if (currentUser.isNotEmpty) {
+        if (currentUser.isNotAnonymously) {
           _authenticationStatuscontroller.add(
             AuthenticationStatus.authenticated,
           );
@@ -50,7 +50,7 @@ class AuthenticationRepository {
   void _onUserSettingStreamListen() {
     _userSubscription ??=
         iAppAuthenticationRepository.user.listen((currentUser) {
-      if (currentUser.isNotEmpty) {
+      if (currentUser.isNotAnonymously) {
         _userSettingSubscription ??=
             iAppAuthenticationRepository.userSetting.listen(
           (currentUserSetting) {
@@ -125,6 +125,20 @@ class AuthenticationRepository {
       (r) {
         debugPrint('authenticated');
         _authenticationStatuscontroller.add(AuthenticationStatus.authenticated);
+        return Right(r);
+      },
+    );
+  }
+
+  Future<Either<SomeFailure, bool>> logInAnonymously() async {
+    final result = await iAppAuthenticationRepository.logInAnonymously();
+    return result.fold(
+      (l) {
+        debugPrint('error: $l');
+        return Left(l);
+      },
+      (r) {
+        debugPrint('authenticated');
         return Right(r);
       },
     );
