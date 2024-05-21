@@ -14,51 +14,46 @@ class StoryCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: isDesk
-          ? const EdgeInsets.symmetric(horizontal: KPadding.kPaddingSize48)
-          : EdgeInsets.zero,
-      child: CardTextDetailEvaluateWidget(
-        image: storyModel.image.firstImage,
-        text: storyModel.story,
-        titleTopMob: true,
-        titleWidget: Row(
-          children: [
-            if (storyModel.userPhoto == null)
-              IconWidget(
-                key: KWidgetkeys.widget.storyCard.userIcon,
-                icon: KIcon.person,
-                background: context.color.onPrimary,
-              )
-            else
-              ClipRRect(
-                borderRadius: BorderRadius.circular(KSize.kUserPhoto),
-                child: CachedNetworkImage(
-                  imageUrl: storyModel.userPhoto.firstImage!,
-                  placeholder: (context, url) => Image.asset(''),
-                  errorWidget: (context, url, error) => KIcon.error,
-                  fit: BoxFit.contain,
-                  width: KSize.kUserPhoto,
-                  height: KSize.kUserPhoto,
-                ),
+    return CardTextDetailEvaluateWidget(
+      image: storyModel.image.firstImage,
+      text: storyModel.story,
+      titleTopMob: true,
+      titleWidget: Row(
+        children: [
+          if (storyModel.userPhoto == null)
+            IconWidget(
+              key: KWidgetkeys.widget.storyCard.userIcon,
+              icon: KIcon.person,
+              background: context.color.onPrimary,
+            )
+          else
+            ClipRRect(
+              borderRadius: BorderRadius.circular(KSize.kUserPhoto),
+              child: CachedNetworkImage(
+                imageUrl: storyModel.userPhoto.firstImage!,
+                placeholder: (context, url) => Image.asset(''),
+                errorWidget: (context, url, error) => KIcon.error,
+                fit: BoxFit.contain,
+                width: KSize.kUserPhoto,
+                height: KSize.kUserPhoto,
               ),
-            KSizedBox.kWidthSizedBox8,
-            Text(
-              storyModel.userName ?? context.l10n.anonymous,
-              key: KWidgetkeys.widget.storyCard.userName,
-              style: AppTextStyle.text14,
             ),
-          ],
-        ),
-        titleDate: Text(
-          storyModel.date.localeTime,
-          key: KWidgetkeys.widget.storyCard.date,
-          style: context.textStyle.hint16,
-        ),
-        isDesk: isDesk,
-        titleIcon: KIcon.trash.setIconKey(
-          KWidgetkeys.widget.storyCard.trashIcon,
-        ),
+          KSizedBox.kWidthSizedBox8,
+          Text(
+            storyModel.userName ?? context.l10n.anonymous,
+            key: KWidgetkeys.widget.storyCard.userName,
+            style: AppTextStyle.text14,
+          ),
+        ],
+      ),
+      titleDate: Text(
+        storyModel.date.localeTime,
+        key: KWidgetkeys.widget.storyCard.date,
+        style: context.textStyle.hint16,
+      ),
+      isDesk: isDesk,
+      titleIcon: KIcon.trash.setIconKey(
+        KWidgetkeys.widget.storyCard.trashIcon,
       ),
     );
   }
