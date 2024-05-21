@@ -50,7 +50,7 @@ class AuthenticationRepository {
   void _onUserSettingStreamListen() {
     _userSubscription ??=
         iAppAuthenticationRepository.user.listen((currentUser) {
-      if (currentUser.isNotAnonymously) {
+      if (currentUser.isNotEmpty) {
         _userSettingSubscription ??=
             iAppAuthenticationRepository.userSetting.listen(
           (currentUserSetting) {

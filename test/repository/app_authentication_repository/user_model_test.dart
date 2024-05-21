@@ -7,16 +7,38 @@ void main() {
   group('${KScreenBlocName.appAuthentication} ${KGroupText.model} User', () {
     test('check is Empty ', () {
       expect(
+        KTestText.user.isEmpty,
+        isFalse,
+      );
+
+      expect(
+        User.empty.isEmpty,
+        isTrue,
+      );
+    });
+    test('check is not Empty ', () {
+      expect(
+        KTestText.user.isNotEmpty,
+        isTrue,
+      );
+
+      expect(
+        User.empty.isNotEmpty,
+        isFalse,
+      );
+    });
+    test('check is Anonymously ', () {
+      expect(
         KTestText.user.isAnonymously,
         isFalse,
       );
 
       expect(
-        User.empty.isAnonymously,
+        User.empty.copyWith(id: KTestText.user.id).isAnonymously,
         isTrue,
       );
     });
-    test('check is not Empty ', () {
+    test('check is not Anonymously ', () {
       expect(
         KTestText.user.isNotAnonymously,
         isTrue,

@@ -18,6 +18,7 @@ void main() {
   group('${KScreenBlocName.investors} ', () {
     late IInvestorsRepository mockInvestorsRepository;
     late IFeedbackRepository mockFeedbackRepository;
+    late IAppAuthenticationRepository mockAppAuthenticationRepository;
     setUp(() {
       ExtendedDateTime.current = KTestText.dateTime;
       ExtendedDateTime.id = KTestText.feedbackModel.id;
@@ -31,6 +32,20 @@ void main() {
           .thenAnswer(
         (invocation) async => const Right(true),
       );
+      mockAppAuthenticationRepository = MockAppAuthenticationRepository();
+      when(mockAppAuthenticationRepository.currentUserSetting).thenAnswer(
+        (realInvocation) => UserSetting.empty,
+      );
+      when(mockAppAuthenticationRepository.currentUser).thenAnswer(
+        (realInvocation) => KTestText.user,
+      );
+      when(
+        mockAppAuthenticationRepository.updateUserSetting(
+          UserSetting.empty.copyWith(timeSendingFeedback: KTestText.dateTime),
+        ),
+      ).thenAnswer(
+        (invocation) async => const Right(true),
+      );
     });
 
     testWidgets('${KGroupText.intial} ', (tester) async {
@@ -38,6 +53,7 @@ void main() {
         mockFeedbackRepository: mockFeedbackRepository,
         mockInvestorsRepository: mockInvestorsRepository,
         tester: tester,
+        mockAppAuthenticationRepository: mockAppAuthenticationRepository,
       );
 
       await investorsInitialHelper(tester);
@@ -48,6 +64,7 @@ void main() {
         mockFeedbackRepository: mockFeedbackRepository,
         mockInvestorsRepository: mockInvestorsRepository,
         tester: tester,
+        mockAppAuthenticationRepository: mockAppAuthenticationRepository,
       );
 
       await correctSaveHelper(tester);
@@ -58,6 +75,7 @@ void main() {
         mockFeedbackRepository: mockFeedbackRepository,
         mockInvestorsRepository: mockInvestorsRepository,
         tester: tester,
+        mockAppAuthenticationRepository: mockAppAuthenticationRepository,
       );
 
       await incorrectSaveHelper(tester);
@@ -68,6 +86,7 @@ void main() {
         mockFeedbackRepository: mockFeedbackRepository,
         mockInvestorsRepository: mockInvestorsRepository,
         tester: tester,
+        mockAppAuthenticationRepository: mockAppAuthenticationRepository,
       );
 
       await feedbackClearTextHelper(
@@ -86,6 +105,7 @@ void main() {
           mockInvestorsRepository: mockInvestorsRepository,
           tester: tester,
           mockGoRouter: mockGoRouter,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
         );
 
         await investorsInitialHelper(tester);
@@ -97,6 +117,7 @@ void main() {
             mockInvestorsRepository: mockInvestorsRepository,
             tester: tester,
             mockGoRouter: mockGoRouter,
+            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
           );
 
           await feedbackNavigationHelper(

@@ -4,8 +4,6 @@ import 'package:get_it/get_it.dart';
 import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
 
-part '../feedback_widget_list.dart';
-
 class InvestorsBodyWidget extends StatefulWidget {
   const InvestorsBodyWidget({super.key});
 
@@ -121,15 +119,24 @@ class _InvestorsBodyWidgetState extends State<InvestorsBodyWidget> {
               }
               return childWidgets
                 ..addAll(
-                  _feedbackWidgetList(
-                    context: context,
-                    isDesk: isDesk,
-                    nameController: nameController,
-                    emailController: emailController,
-                    messageController: messageController,
-                    feedbackKey: feedbackKey,
-                    feedbackBoxKey: feedbackBoxKey,
-                  ),
+                  [
+                    ...FeedbackWidget.feedbackWidgetList(
+                      context: context,
+                      isDesk: isDesk,
+                      nameController: nameController,
+                      emailController: emailController,
+                      messageController: messageController,
+                      feedbackKey: feedbackKey,
+                      feedbackBoxKey: feedbackBoxKey,
+                      topPadding: isDesk
+                          ? KSizedBox.kHeightSizedBox56
+                          : KSizedBox.kHeightSizedBox40,
+                    ),
+                    if (isDesk)
+                      KSizedBox.kHeightSizedBox56
+                    else
+                      KSizedBox.kHeightSizedBox40,
+                  ],
                 );
             },
           );

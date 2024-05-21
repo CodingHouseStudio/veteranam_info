@@ -906,6 +906,32 @@ class MockIAppAuthenticationRepository extends _i1.Mock
       ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
 
   @override
+  _i8.Future<_i2.Either<_i3.SomeFailure, bool>> logInAnonymously() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #logInAnonymously,
+          [],
+        ),
+        returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
+            _FakeEither_0<_i3.SomeFailure, bool>(
+          this,
+          Invocation.method(
+            #logInAnonymously,
+            [],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
+                _FakeEither_0<_i3.SomeFailure, bool>(
+          this,
+          Invocation.method(
+            #logInAnonymously,
+            [],
+          ),
+        )),
+      ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
+
+  @override
   _i8.Future<_i2.Either<_i3.SomeFailure, bool>> signUp({
     required String? email,
     required String? password,
@@ -1214,6 +1240,32 @@ class MockAppAuthenticationRepository extends _i1.Mock
       ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
 
   @override
+  _i8.Future<_i2.Either<_i3.SomeFailure, bool>> logInAnonymously() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #logInAnonymously,
+          [],
+        ),
+        returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
+            _FakeEither_0<_i3.SomeFailure, bool>(
+          this,
+          Invocation.method(
+            #logInAnonymously,
+            [],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
+                _FakeEither_0<_i3.SomeFailure, bool>(
+          this,
+          Invocation.method(
+            #logInAnonymously,
+            [],
+          ),
+        )),
+      ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
+
+  @override
   _i8.Future<_i2.Either<_i3.SomeFailure, bool>> signUp({
     required String? email,
     required String? password,
@@ -1505,6 +1557,32 @@ class MockAuthenticationRepository extends _i1.Mock
               #email: email,
               #password: password,
             },
+          ),
+        )),
+      ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
+
+  @override
+  _i8.Future<_i2.Either<_i3.SomeFailure, bool>> logInAnonymously() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #logInAnonymously,
+          [],
+        ),
+        returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
+            _FakeEither_0<_i3.SomeFailure, bool>(
+          this,
+          Invocation.method(
+            #logInAnonymously,
+            [],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
+                _FakeEither_0<_i3.SomeFailure, bool>(
+          this,
+          Invocation.method(
+            #logInAnonymously,
+            [],
           ),
         )),
       ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);

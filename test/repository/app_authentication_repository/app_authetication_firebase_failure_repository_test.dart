@@ -88,6 +88,13 @@ void main() {
           (_) async {},
         );
         when(
+          mockFirebaseAuth.signInAnonymously(),
+        ).thenThrow(
+          firebase_auth.FirebaseAuthException(
+            code: KGroupText.firebaseFailure,
+          ),
+        );
+        when(
           mockGoogleSignIn.signOut(),
         ).thenAnswer(
           (_) async => mockGoogleSignInAccount,
@@ -198,6 +205,20 @@ void main() {
             (e) => e.value,
             'value',
             const SomeFailure.initial(),
+          ),
+        );
+      });
+      test('Log In Anonymously', () async {
+        final result = await appAuthenticationRepository.logInAnonymously();
+        verify(
+          mockFirebaseAuth.signInAnonymously(),
+        ).called(1);
+        expect(
+          result,
+          isA<Left<SomeFailure, bool>>().having(
+            (e) => e.value,
+            'value',
+            const SomeFailure.serverError(),
           ),
         );
       });
