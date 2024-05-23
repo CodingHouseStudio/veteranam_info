@@ -19,83 +19,145 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: EdgeInsets.all(
-          widget.isDesk ? KPadding.kPaddingSize4 : KPadding.kPaddingSize8,
-        ),
-        key: KWidgetkeys.widget.profileCard.profileCard,
-        child: Container(
-          decoration: context.widgetTheme.boxDecorationWidget,
+    return Column(
+      children: [
+        SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(KPadding.kPaddingSize16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
+            padding: EdgeInsets.all(
+              widget.isDesk ? KPadding.kPaddingSize4 : KPadding.kPaddingSize8,
+            ),
+            key: KWidgetkeys.widget.profileCard.profileCard,
+            child: Container(
+              decoration: context.widgetTheme.boxDecorationWidget,
+              child: Padding(
+                padding: const EdgeInsets.all(KPadding.kPaddingSize16),
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(
-                      width: 60,
-                      height: 60,
-                      decoration: const BoxDecoration(
-                        borderRadius: KBorderRadius.kBorderRadiusL,
-                        // color: AppColors.widgetBackground,
-                      ),
-                      child: const Center(
-                        child: KIcon.person,
-                      ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          width: 60,
+                          height: 60,
+                          decoration: const BoxDecoration(
+                            borderRadius: KBorderRadius.kBorderRadiusL,
+                          ),
+                          child: const Center(
+                            child: KIcon.person,
+                          ),
+                        ),
+                        KSizedBox.kWidthSizedBox16,
+                        if (isEditing)
+                          Text(
+                            context.l10n.editData,
+                            style: widget.isDesk
+                                ? AppTextStyle.text40
+                                : AppTextStyle.text24,
+                          )
+                        else
+                          _displayProfileName(),
+                      ],
                     ),
-                    KSizedBox.kWidthSizedBox16,
-                    Expanded(
-                      child: isEditing
-                          ? Text(
-                              context.l10n.editData,
-                              style: widget.isDesk
-                                  ? AppTextStyle.text40
-                                  : AppTextStyle.text24,
-                            )
-                          : _displayProfileName(),
-                    ),
+                    if (isEditing) ...[
+                      KSizedBox.kHeightSizedBox8,
+                      _textField(
+                        label: context.l10n.name,
+                        labelText: context
+                            .read<AuthenticationBloc>()
+                            .state
+                            .user
+                            ?.name
+                            ?.split(' ')
+                            .first,
+                        hint: context.l10n.writeYouName,
+                      ),
+                      KSizedBox.kHeightSizedBox8,
+                      _textField(
+                        label: context.l10n.lastName,
+                        labelText: context
+                            .read<AuthenticationBloc>()
+                            .state
+                            .user
+                            ?.name
+                            ?.split(' ')
+                            .last,
+                        hint: context.l10n.writeYouLastName,
+                      ),
+                    ],
+                    KSizedBox.kHeightSizedBox8,
+                    _buildProfileInfo(),
+                    KSizedBox.kHeightSizedBox8,
+                    _buildProfileFooter(),
+                    KSizedBox.kHeightSizedBox8,
+                    _buildLinkedAccounts(),
                   ],
                 ),
-                if (isEditing) ...[
-                  KSizedBox.kHeightSizedBox8,
-                  _textField(
-                    label: context.l10n.name,
-                    labelText: context
-                        .read<AuthenticationBloc>()
-                        .state
-                        .user
-                        ?.name
-                        ?.split(' ')
-                        .first,
-                    hint: context.l10n.writeYouName,
-                  ),
-                  KSizedBox.kHeightSizedBox8,
-                  _textField(
-                    label: context.l10n.lastName,
-                    labelText: context
-                        .read<AuthenticationBloc>()
-                        .state
-                        .user
-                        ?.name
-                        ?.split(' ')
-                        .last,
-                    hint: context.l10n.writeYouLastName,
-                  ),
-                ],
-                KSizedBox.kHeightSizedBox8,
-                _buildProfileInfo(),
-                KSizedBox.kHeightSizedBox8,
-                _buildProfileFooter(),
-                KSizedBox.kHeightSizedBox8,
-                _buildLinkedAccounts(),
-              ],
+              ),
             ),
           ),
         ),
-      ),
+        if (widget.isDesk)
+          KSizedBox.kHeightSizedBox56
+        else
+          KSizedBox.kHeightSizedBox24,
+        if (widget.isDesk)
+          Row(
+            children: [
+              Expanded(
+                child: ButtonWidget(
+                  key: KWidgetkeys.widget.profileCardWidget.logOutButton,
+                  text: context.l10n.logOut,
+                  textMaxLines: KMinMaxSize.textMaxLineOne,
+                  textStyle: AppTextStyle.text32,
+                  onPressed: () => DialogsWidget.showLogoutConfirmationDialog(
+                    context: context,
+                    isDesk: widget.isDesk,
+                  ),
+                  isDesk: true,
+                ),
+              ),
+              KSizedBox.kWidthSizedBox56,
+              Expanded(
+                child: ButtonWidget(
+                  key: KWidgetkeys.widget.profileCardWidget.deleteButton,
+                  text: context.l10n.deleteAccount,
+                  textMaxLines: KMinMaxSize.textMaxLineOne,
+                  textStyle: AppTextStyle.text32,
+                  onPressed: () => DialogsWidget.showDeleteConfirmationDialog(
+                    context: context,
+                    isDesk: widget.isDesk,
+                  ),
+                  isDesk: true,
+                ),
+              ),
+            ],
+          )
+        else ...[
+          ButtonWidget(
+            key: KWidgetkeys.widget.profileCardWidget.logOutButton,
+            text: context.l10n.logOut,
+            textStyle: AppTextStyle.text24,
+            onPressed: () => DialogsWidget.showLogoutConfirmationDialog(
+              context: context,
+              isDesk: widget.isDesk,
+            ),
+            isDesk: false,
+          ),
+          KSizedBox.kHeightSizedBox24,
+          ButtonWidget(
+            key: KWidgetkeys.widget.profileCardWidget.deleteButton,
+            text: context.l10n.deleteAccount,
+            textStyle: AppTextStyle.text24,
+            onPressed: () => DialogsWidget.showDeleteConfirmationDialog(
+              context: context,
+              isDesk: widget.isDesk,
+            ),
+            isDesk: false,
+          ),
+        ],
+        if (widget.isDesk) KSizedBox.kHeightSizedBox56,
+      ],
     );
   }
 
@@ -136,26 +198,24 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
   }
 
   Widget _displayProfileName() {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        KSizedBox.kWidthSizedBox24,
-        Flexible(
-          flex: 2,
-          child: Text(
-            context.read<AuthenticationBloc>().state.user?.name ??
-                KMockText.userName,
-            style: AppTextStyle.text40,
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
+    return Expanded(
+      child: Row(
+        children: [
+          Expanded(
+            child: Text(
+              context.read<AuthenticationBloc>().state.user?.name ??
+                  KMockText.userName,
+              style: AppTextStyle.text40,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+            ),
           ),
-        ),
-        const Spacer(),
-        IconButton(
-          onPressed: () => setState(() => isEditing = !isEditing),
-          icon: KIcon.edit,
-        ),
-      ],
+          IconButton(
+            onPressed: () => setState(() => isEditing = !isEditing),
+            icon: KIcon.edit,
+          ),
+        ],
+      ),
     );
   }
 

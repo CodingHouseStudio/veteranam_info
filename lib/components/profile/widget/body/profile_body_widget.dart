@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kozak/shared/shared.dart';
 
 class ProfileBodyWidget extends StatelessWidget {
@@ -53,34 +52,6 @@ class ProfileBodyWidget extends StatelessWidget {
           ],
         ),
         KSizedBox.kHeightSizedBox56,
-        Row(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(KPadding.kPaddingSize4),
-              child: ButtonWidget(
-                text: context.l10n.logOut,
-                onPressed: () => context
-                    .read<AuthenticationBloc>()
-                    .add(AuthenticationLogoutRequested()),
-                isDesk: isDesk,
-              ),
-            ),
-            KSizedBox.kWidthSizedBox56,
-            Expanded(
-              flex: -2,
-              child: Padding(
-                padding: const EdgeInsets.all(KPadding.kPaddingSize4),
-                child: ButtonWidget(
-                  text: context.l10n.deleteAccount,
-                  isDesk: isDesk,
-                  onPressed: null,
-                  // backgroundColor: AppColors.transparent,
-                ),
-              ),
-            ),
-          ],
-        ),
-        KSizedBox.kHeightSizedBox56,
       ],
     );
   }
@@ -95,27 +66,6 @@ class ProfileBodyWidget extends StatelessWidget {
           ProfileCardWidget(
             key: KWidgetkeys.widget.profileCard.profileCard,
             isDesk: isDesk,
-          ),
-          KSizedBox.kHeightSizedBox24,
-          Padding(
-            padding: const EdgeInsets.all(KPadding.kPaddingSize4),
-            child: ButtonWidget(
-              text: context.l10n.logOut,
-              onPressed: () => context
-                  .read<AuthenticationBloc>()
-                  .add(AuthenticationLogoutRequested()),
-              isDesk: isDesk,
-            ),
-          ),
-          if (isDesk)
-            KSizedBox.kWidthSizedBox24
-          else
-            KSizedBox.kHeightSizedBox24,
-          ButtonWidget(
-            text: context.l10n.deleteAccount,
-            isDesk: isDesk,
-            onPressed: null,
-            // backgroundColor: AppColors.transparent,
           ),
           KSizedBox.kHeightSizedBox24,
         ],
