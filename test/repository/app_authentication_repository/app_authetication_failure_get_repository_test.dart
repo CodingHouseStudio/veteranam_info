@@ -19,6 +19,7 @@ void main() {
     late CacheClient mockCache;
     late firebase_auth.GoogleAuthProvider mockGoogleAuthProvider;
     late FirestoreService mockFirestoreService;
+    late firebase_auth.UserCredential mockUserCredential;
     setUp(() {
       mockSecureStorageRepository = MockIStorage();
       mockFirebaseAuth = MockFirebaseAuth();
@@ -26,6 +27,7 @@ void main() {
       mockCache = MockCacheClient();
       mockFirestoreService = MockFirestoreService();
       mockGoogleAuthProvider = MockGoogleAuthProvider();
+      mockUserCredential = MockUserCredential();
       when(
         mockFirebaseAuth.currentUser,
       ).thenAnswer(
@@ -55,6 +57,14 @@ void main() {
         mockFirestoreService.getUserSetting(KTestText.fieldEmpty),
       ).thenAnswer(
         (_) => Stream.value(UserSetting.empty),
+      );
+      when(
+        mockFirebaseAuth.createUserWithEmailAndPassword(
+          email: KTestText.userEmail,
+          password: KTestText.passwordCorrect,
+        ),
+      ).thenAnswer(
+        (_) async => mockUserCredential,
       );
 
       if (GetIt.I.isRegistered<FirestoreService>()) {
@@ -143,6 +153,15 @@ void main() {
       expect(
         appAuthenticationRepository.isAnonymously(),
         false,
+      );
+    });
+    test('Sign up', () async {
+      expect(
+        await appAuthenticationRepository.signUp(
+          email: KTestText.userEmail,
+          password: KTestText.passwordCorrect,
+        ),
+        isA<Right<SomeFailure, bool>>().having((e) => e.value, 'value', isTrue),
       );
     });
   });
