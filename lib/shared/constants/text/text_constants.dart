@@ -28,6 +28,12 @@ abstract class KMockText {
     ['Житло'],
     [],
   ];
+  static final storyModel = StoryModel(
+    id: '1',
+    date: DateTime(2024, 05, 20),
+    story: cardData,
+    userId: '2',
+  );
   static const workModel = WorkModel(
     id: '1',
     title: title,

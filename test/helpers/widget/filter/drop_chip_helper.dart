@@ -1,57 +1,58 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:kozak/shared/shared.dart';
 
 import '../../../text_dependency.dart';
 
-Future<void> dropChipHelper(
-  WidgetTester tester,
-) async {
-  expect(find.byKey(KWidgetkeys.widget.dropChip.widget).first, findsOneWidget);
+Future<void> dropChipHelper({
+  required WidgetTester tester,
+  required Key dropChipKey,
+  required Key buttonKey,
+}) async {
+  expect(find.byKey(dropChipKey), findsWidgets);
 
-  expect(find.byKey(KWidgetkeys.widget.dropChip.button), findsWidgets);
+  expect(find.byKey(buttonKey), findsWidgets);
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.widget.dropChip.widget,
+    itemKey: dropChipKey,
   );
 
   await tester.tap(
-    find.byKey(KWidgetkeys.widget.dropChip.widget).first,
+    find.byKey(dropChipKey),
   );
   await tester.pumpAndSettle();
 
   final dropChip = tester.widget<DropdownButton<dynamic>>(
-    find.byKey(KWidgetkeys.widget.dropChip.widget).first,
+    find.byKey(dropChipKey).first,
   );
 
   if (dropChip.items == null || dropChip.items!.isEmpty) return;
 
   expect(
-    find.byKey(KWidgetkeys.widget.dropChip.button).first,
+    find.byKey(buttonKey),
     findsWidgets,
   );
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.widget.dropChip.button,
+    itemKey: buttonKey,
   );
 
   await tester.tap(
-    find.byKey(KWidgetkeys.widget.dropChip.button).first,
+    find.byKey(buttonKey).first,
     warnIfMissed: false,
   );
 
   await tester.pumpAndSettle();
 
   expect(
-    find.byKey(KWidgetkeys.widget.dropChip.button).first,
+    find.byKey(buttonKey).first,
     findsOneWidget,
   );
 
   expect(
     find.descendant(
-      of: find.byKey(KWidgetkeys.widget.dropChip.widget).first,
+      of: find.byKey(dropChipKey).first,
       matching: find.text(dropChip.items!.first.value.toString()),
     ),
     findsOneWidget,
@@ -61,7 +62,7 @@ Future<void> dropChipHelper(
 
   expect(
     find.descendant(
-      of: find.byKey(KWidgetkeys.widget.dropChip.widget).first,
+      of: find.byKey(dropChipKey).first,
       matching: find.text(dropChip.items!.first.value.toString()),
     ),
     findsNothing,

@@ -144,5 +144,6 @@
   "deleteAccountQuestion": "Are you sure you want to delete your account?",
   "yes": "Yes",
   "no": "No",
-  "previous": "Previous"
+  "previous": "Previous",
+  "myStoryDetails": "In this section you can manage your stories."
 }

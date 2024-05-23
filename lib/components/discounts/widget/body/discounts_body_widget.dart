@@ -20,9 +20,9 @@ class DiscountBodyWidget extends StatelessWidget {
                 children: [
                   ...TitleWidget.titleWidgetList(
                     title: context.l10n.discountsAndCoupons,
-                    titleKey: null,
+                    titleKey: const Key('title'),
                     subtitle: context.l10n.discountsAndCouponsDescription,
-                    subtitleKey: null,
+                    subtitleKey: const Key('subtitle'),
                     isDesk: isDesk,
                   ),
                   if (isDesk)

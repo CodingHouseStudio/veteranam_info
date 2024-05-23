@@ -23,4 +23,5 @@ class _ScreenKeys {
   final employer = _EmployerKeys();
   final profileSaves = _ProfileSavesKeys();
   final storyAdd = _StoryAddKeys();
+  final myStory = _MyStoryKeys();
 }
