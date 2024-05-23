@@ -32,19 +32,16 @@ void main() {
           .thenAnswer(
         (invocation) async => const Right(true),
       );
+      when(mockFeedbackRepository.checkUserNeedShowFeedback(KTestText.user.id))
+          .thenAnswer(
+        (invocation) async => const Right(true),
+      );
       mockAppAuthenticationRepository = MockAppAuthenticationRepository();
       when(mockAppAuthenticationRepository.currentUserSetting).thenAnswer(
         (realInvocation) => UserSetting.empty,
       );
       when(mockAppAuthenticationRepository.currentUser).thenAnswer(
         (realInvocation) => KTestText.user,
-      );
-      when(
-        mockAppAuthenticationRepository.updateUserSetting(
-          UserSetting.empty.copyWith(timeSendingFeedback: KTestText.dateTime),
-        ),
-      ).thenAnswer(
-        (invocation) async => const Right(true),
       );
     });
 

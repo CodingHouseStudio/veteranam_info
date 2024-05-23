@@ -20,19 +20,15 @@ void main() {
           .thenAnswer(
         (realInvocation) async => const Right(true),
       );
+      when(mockFeedbackRepository.checkUserNeedShowFeedback(KTestText.user.id))
+          .thenAnswer(
+        (realInvocation) async => const Right(true),
+      );
       when(mockAppAuthenticationRepository.currentUser).thenAnswer(
         (realInvocation) => KTestText.user,
       );
       when(mockAppAuthenticationRepository.currentUserSetting).thenAnswer(
         (realInvocation) => KTestText.userSetting,
-      );
-      when(
-        mockAppAuthenticationRepository.updateUserSetting(
-          KTestText.userSetting
-              .copyWith(timeSendingFeedback: ExtendedDateTime.current),
-        ),
-      ).thenAnswer(
-        (realInvocation) async => const Right(true),
       );
       feedbackBloc = FeedbackBloc(
         feedbackRepository: mockFeedbackRepository,
@@ -41,30 +37,38 @@ void main() {
     });
 
     blocTest<FeedbackBloc, FeedbackState>(
-      'emits [FeedbackState] when name, email and message'
+      'emits [FeedbackState] when started, name, email and message'
       ' are changed and valid',
       build: () => feedbackBloc,
       act: (bloc) => bloc
+        ..add(const FeedbackEvent.started())
         ..add(const FeedbackEvent.nameUpdated(KTestText.field))
         ..add(const FeedbackEvent.emailUpdated(KTestText.userEmail))
         ..add(const FeedbackEvent.messageUpdated(KTestText.field)),
       expect: () => [
         const FeedbackState(
           formState: FeedbackEnum.initial,
+          name: NameFieldModel.pure(),
+          email: EmailFieldModel.pure(),
+          message: MessageFieldModel.pure(),
+          failure: FeedbackFailure.initial,
+        ),
+        const FeedbackState(
+          formState: FeedbackEnum.inProgress,
           name: NameFieldModel.dirty(KTestText.field),
           email: EmailFieldModel.pure(),
           message: MessageFieldModel.pure(),
           failure: FeedbackFailure.initial,
         ),
         const FeedbackState(
-          formState: FeedbackEnum.initial,
+          formState: FeedbackEnum.inProgress,
           name: NameFieldModel.dirty(KTestText.field),
           email: EmailFieldModel.dirty(KTestText.userEmail),
           message: MessageFieldModel.pure(),
           failure: FeedbackFailure.initial,
         ),
         const FeedbackState(
-          formState: FeedbackEnum.initial,
+          formState: FeedbackEnum.inProgress,
           name: NameFieldModel.dirty(KTestText.field),
           email: EmailFieldModel.dirty(KTestText.userEmail),
           message: MessageFieldModel.dirty(KTestText.field),
@@ -73,32 +77,47 @@ void main() {
       ],
     );
     blocTest<FeedbackBloc, FeedbackState>(
-      'emits [FeedbackState] when name, email and'
+      'emits [FeedbackState] when started show notShowFeedback, name, email and'
       ' message are changed and not valid',
       build: () => feedbackBloc,
-      act: (bloc) => bloc
-        ..add(const FeedbackEvent.nameUpdated(KTestText.fieldEmpty))
-        ..add(
-          const FeedbackEvent.emailUpdated(KTestText.userEmailIncorrect),
-        )
-        ..add(const FeedbackEvent.messageUpdated(KTestText.fieldEmpty)),
+      act: (bloc) {
+        when(
+          mockFeedbackRepository.checkUserNeedShowFeedback(KTestText.user.id),
+        ).thenAnswer(
+          (realInvocation) async => const Right(false),
+        );
+        bloc
+          ..add(const FeedbackEvent.started())
+          ..add(const FeedbackEvent.nameUpdated(KTestText.fieldEmpty))
+          ..add(
+            const FeedbackEvent.emailUpdated(KTestText.userEmailIncorrect),
+          )
+          ..add(const FeedbackEvent.messageUpdated(KTestText.fieldEmpty));
+      },
       expect: () => [
         const FeedbackState(
-          formState: FeedbackEnum.initial,
+          formState: FeedbackEnum.notShowFeedback,
+          name: NameFieldModel.pure(),
+          email: EmailFieldModel.pure(),
+          message: MessageFieldModel.pure(),
+          failure: FeedbackFailure.initial,
+        ),
+        const FeedbackState(
+          formState: FeedbackEnum.inProgress,
           name: NameFieldModel.dirty(),
           email: EmailFieldModel.pure(),
           message: MessageFieldModel.pure(),
           failure: FeedbackFailure.initial,
         ),
         const FeedbackState(
-          formState: FeedbackEnum.initial,
+          formState: FeedbackEnum.inProgress,
           name: NameFieldModel.dirty(),
           email: EmailFieldModel.dirty(KTestText.userEmailIncorrect),
           message: MessageFieldModel.pure(),
           failure: FeedbackFailure.initial,
         ),
         const FeedbackState(
-          formState: FeedbackEnum.initial,
+          formState: FeedbackEnum.inProgress,
           name: NameFieldModel.dirty(),
           email: EmailFieldModel.dirty(KTestText.userEmailIncorrect),
           message: MessageFieldModel.dirty(),
@@ -110,39 +129,54 @@ void main() {
       'emits [FeedbackBloc] when valid data is submitted'
       ' with correct credentials',
       build: () => feedbackBloc,
-      act: (bloc) async => bloc
-        ..add(const FeedbackEvent.nameUpdated(KTestText.field))
-        ..add(const FeedbackEvent.emailUpdated(KTestText.userEmail))
-        ..add(const FeedbackEvent.messageUpdated(KTestText.field))
-        ..add(const FeedbackEvent.save()),
+      act: (bloc) async {
+        when(
+          mockFeedbackRepository.checkUserNeedShowFeedback(KTestText.user.id),
+        ).thenAnswer(
+          (realInvocation) async => const Left(SomeFailure.serverError()),
+        );
+        bloc
+          ..add(const FeedbackEvent.started())
+          ..add(const FeedbackEvent.nameUpdated(KTestText.field))
+          ..add(const FeedbackEvent.emailUpdated(KTestText.userEmail))
+          ..add(const FeedbackEvent.messageUpdated(KTestText.field))
+          ..add(const FeedbackEvent.save());
+      },
       expect: () => [
         const FeedbackState(
           formState: FeedbackEnum.initial,
+          name: NameFieldModel.pure(),
+          email: EmailFieldModel.pure(),
+          message: MessageFieldModel.pure(),
+          failure: FeedbackFailure.error,
+        ),
+        const FeedbackState(
+          formState: FeedbackEnum.inProgress,
           name: NameFieldModel.dirty(KTestText.field),
           email: EmailFieldModel.pure(),
           message: MessageFieldModel.pure(),
-          failure: FeedbackFailure.initial,
+          failure: FeedbackFailure.error,
         ),
         const FeedbackState(
-          formState: FeedbackEnum.initial,
+          formState: FeedbackEnum.inProgress,
           name: NameFieldModel.dirty(KTestText.field),
           email: EmailFieldModel.dirty(KTestText.userEmail),
           message: MessageFieldModel.pure(),
-          failure: FeedbackFailure.initial,
+          failure: FeedbackFailure.error,
         ),
         const FeedbackState(
-          formState: FeedbackEnum.initial,
+          formState: FeedbackEnum.inProgress,
           name: NameFieldModel.dirty(KTestText.field),
           email: EmailFieldModel.dirty(KTestText.userEmail),
           message: MessageFieldModel.dirty(KTestText.field),
-          failure: FeedbackFailure.initial,
+          failure: FeedbackFailure.error,
         ),
         const FeedbackState(
           formState: FeedbackEnum.sendingMessage,
           name: NameFieldModel.dirty(KTestText.field),
           email: EmailFieldModel.dirty(KTestText.userEmail),
           message: MessageFieldModel.dirty(KTestText.field),
-          failure: FeedbackFailure.initial,
+          failure: FeedbackFailure.error,
         ),
         const FeedbackState(
           email: EmailFieldModel.pure(),
@@ -165,21 +199,21 @@ void main() {
         ..add(const FeedbackEvent.sendignMessageAgain()),
       expect: () => [
         const FeedbackState(
-          formState: FeedbackEnum.initial,
+          formState: FeedbackEnum.inProgress,
           name: NameFieldModel.dirty(KTestText.field),
           email: EmailFieldModel.pure(),
           message: MessageFieldModel.pure(),
           failure: FeedbackFailure.initial,
         ),
         const FeedbackState(
-          formState: FeedbackEnum.initial,
+          formState: FeedbackEnum.inProgress,
           name: NameFieldModel.dirty(KTestText.field),
           email: EmailFieldModel.dirty(KTestText.userEmail),
           message: MessageFieldModel.pure(),
           failure: FeedbackFailure.initial,
         ),
         const FeedbackState(
-          formState: FeedbackEnum.initial,
+          formState: FeedbackEnum.inProgress,
           name: NameFieldModel.dirty(KTestText.field),
           email: EmailFieldModel.dirty(KTestText.userEmail),
           message: MessageFieldModel.dirty(KTestText.field),
@@ -219,21 +253,21 @@ void main() {
         ..add(const FeedbackEvent.save()),
       expect: () => [
         const FeedbackState(
-          formState: FeedbackEnum.initial,
+          formState: FeedbackEnum.inProgress,
           name: NameFieldModel.dirty(),
           email: EmailFieldModel.pure(),
           message: MessageFieldModel.pure(),
           failure: FeedbackFailure.initial,
         ),
         const FeedbackState(
-          formState: FeedbackEnum.initial,
+          formState: FeedbackEnum.inProgress,
           name: NameFieldModel.dirty(),
           email: EmailFieldModel.dirty(KTestText.userEmailIncorrect),
           message: MessageFieldModel.pure(),
           failure: FeedbackFailure.initial,
         ),
         const FeedbackState(
-          formState: FeedbackEnum.initial,
+          formState: FeedbackEnum.inProgress,
           name: NameFieldModel.dirty(),
           email: EmailFieldModel.dirty(KTestText.userEmailIncorrect),
           message: MessageFieldModel.dirty(),
@@ -266,21 +300,21 @@ void main() {
       },
       expect: () => [
         const FeedbackState(
-          formState: FeedbackEnum.initial,
+          formState: FeedbackEnum.inProgress,
           name: NameFieldModel.dirty(KTestText.field),
           email: EmailFieldModel.pure(),
           message: MessageFieldModel.pure(),
           failure: FeedbackFailure.initial,
         ),
         const FeedbackState(
-          formState: FeedbackEnum.initial,
+          formState: FeedbackEnum.inProgress,
           name: NameFieldModel.dirty(KTestText.field),
           email: EmailFieldModel.dirty(KTestText.userEmail),
           message: MessageFieldModel.pure(),
           failure: FeedbackFailure.initial,
         ),
         const FeedbackState(
-          formState: FeedbackEnum.initial,
+          formState: FeedbackEnum.inProgress,
           name: NameFieldModel.dirty(KTestText.field),
           email: EmailFieldModel.dirty(KTestText.userEmail),
           message: MessageFieldModel.dirty(KTestText.field),
@@ -321,21 +355,21 @@ void main() {
       },
       expect: () => [
         const FeedbackState(
-          formState: FeedbackEnum.initial,
+          formState: FeedbackEnum.inProgress,
           name: NameFieldModel.dirty(KTestText.field),
           email: EmailFieldModel.pure(),
           message: MessageFieldModel.pure(),
           failure: FeedbackFailure.initial,
         ),
         const FeedbackState(
-          formState: FeedbackEnum.initial,
+          formState: FeedbackEnum.inProgress,
           name: NameFieldModel.dirty(KTestText.field),
           email: EmailFieldModel.dirty(KTestText.userEmail),
           message: MessageFieldModel.pure(),
           failure: FeedbackFailure.initial,
         ),
         const FeedbackState(
-          formState: FeedbackEnum.initial,
+          formState: FeedbackEnum.inProgress,
           name: NameFieldModel.dirty(KTestText.field),
           email: EmailFieldModel.dirty(KTestText.userEmail),
           message: MessageFieldModel.dirty(KTestText.field),

@@ -24,6 +24,7 @@ class FeedbackBloc extends Bloc<FeedbackEvent, FeedbackState> {
             failure: FeedbackFailure.initial,
           ),
         ) {
+    on<_Started>(_onStarted);
     on<_NameUpdated>(_onNameUpdated);
     on<_EmailUpdated>(_onEmailUpdated);
     on<_MessageUpdated>(_onMessageUpdated);
@@ -33,8 +34,39 @@ class FeedbackBloc extends Bloc<FeedbackEvent, FeedbackState> {
   }
 
   final IFeedbackRepository _feedbackRepository;
-
   final IAppAuthenticationRepository _appAuthenticationRepository;
+
+  Future<void> _onStarted(
+    _Started event,
+    Emitter<FeedbackState> emit,
+  ) async {
+    if (_appAuthenticationRepository.currentUser.isEmpty) {
+      return;
+    }
+    final result = await _feedbackRepository
+        .checkUserNeedShowFeedback(_appAuthenticationRepository.currentUser.id);
+    result.fold(
+        (l) => emit(
+              state.copyWith(
+                failure: l.toFeedback(),
+                formState: FeedbackEnum.initial,
+              ),
+            ), (r) {
+      if (r) {
+        emit(
+          state.copyWith(
+            formState: FeedbackEnum.initial,
+          ),
+        );
+      } else {
+        emit(
+          state.copyWith(
+            formState: FeedbackEnum.notShowFeedback,
+          ),
+        );
+      }
+    });
+  }
 
   void _onNameUpdated(
     _NameUpdated event,
@@ -44,7 +76,7 @@ class FeedbackBloc extends Bloc<FeedbackEvent, FeedbackState> {
     emit(
       state.copyWith(
         name: nameFieldModel,
-        formState: FeedbackEnum.initial,
+        formState: FeedbackEnum.inProgress,
       ),
     );
   }
@@ -57,7 +89,7 @@ class FeedbackBloc extends Bloc<FeedbackEvent, FeedbackState> {
     emit(
       state.copyWith(
         email: emailFieldModel,
-        formState: FeedbackEnum.initial,
+        formState: FeedbackEnum.inProgress,
       ),
     );
   }
@@ -70,7 +102,7 @@ class FeedbackBloc extends Bloc<FeedbackEvent, FeedbackState> {
     emit(
       state.copyWith(
         message: messageFieldModel,
-        formState: FeedbackEnum.initial,
+        formState: FeedbackEnum.inProgress,
       ),
     );
   }
@@ -117,12 +149,6 @@ class FeedbackBloc extends Bloc<FeedbackEvent, FeedbackState> {
           ),
         ),
       );
-
-      await _appAuthenticationRepository.updateUserSetting(
-        _appAuthenticationRepository.currentUserSetting.copyWith(
-          timeSendingFeedback: ExtendedDateTime.current,
-        ),
-      );
     } else {
       emit(state.copyWith(formState: FeedbackEnum.invalidData));
     }
@@ -132,8 +158,9 @@ class FeedbackBloc extends Bloc<FeedbackEvent, FeedbackState> {
     _Clear event,
     Emitter<FeedbackState> emit,
   ) {
-    if (state.formState != FeedbackEnum.initial &&
-        state.formState != FeedbackEnum.invalidData) return;
+    if (state.formState == FeedbackEnum.initial ||
+        state.formState == FeedbackEnum.invalidData ||
+        state.formState == FeedbackEnum.clear) return;
     emit(
       const FeedbackState(
         email: EmailFieldModel.pure(),

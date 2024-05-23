@@ -14,6 +14,7 @@ Future<void> chekPointSingleHelper(
     find.byKey(KWidgetkeys.widget.checkPointSingle.widget).first,
     findsOneWidget,
   );
+
   expect(
     find.byKey(KWidgetkeys.widget.checkPointSingle.icon),
     findsNothing,
@@ -32,5 +33,15 @@ Future<void> chekPointSingleHelper(
   expect(
     find.byKey(KWidgetkeys.widget.checkPointSingle.icon),
     findsOneWidget,
+  );
+
+  await tester
+      .tap(find.byKey(KWidgetkeys.widget.checkPointSingle.widget).first);
+
+  await tester.pumpAndSettle();
+
+  expect(
+    find.byKey(KWidgetkeys.widget.checkPointSingle.icon),
+    findsNothing,
   );
 }

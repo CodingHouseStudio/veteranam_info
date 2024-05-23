@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:kozak/shared/shared.dart';
 
 part 'user_setting_model.freezed.dart';
 part 'user_setting_model.g.dart';
@@ -13,7 +12,6 @@ class UserSetting with _$UserSetting {
     @Default(Language.ukrain) Language locale,
     UserRole? userRole,
     @Default(false) bool roleIsConfirmed,
-    DateTime? timeSendingFeedback,
   }) = _UserSetting;
 
   // Add this private constructor
@@ -30,12 +28,6 @@ class UserSetting with _$UserSetting {
 
   /// Convenience getter to determine whether the current user is not empty.
   bool get isNotEmpty => this != UserSetting.empty.copyWith(locale: locale);
-
-  /// Convenience getter to determine whether the time sending feedback is more
-  /// than 7 days.
-  bool get isTimeSendingFeedback =>
-      timeSendingFeedback == null ||
-      ExtendedDateTime.current.difference(timeSendingFeedback!).inDays >= 7;
 }
 
 enum UserRole {
@@ -84,4 +76,11 @@ extension GetLanguage on String {
         return Language.ukrain;
     }
   }
+}
+
+abstract class UserSettingModelJsonField {
+  static const id = 'id';
+  static const locale = 'locale';
+  static const userRole = 'userRole';
+  static const roleIsConfirmed = 'roleIsConfirmed';
 }

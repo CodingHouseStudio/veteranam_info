@@ -16,7 +16,8 @@ class InvestorsBlocprovider extends StatelessWidget {
             ..add(const InvestorsWatcherEvent.started()),
         ),
         BlocProvider(
-          create: (context) => GetIt.I.get<FeedbackBloc>(),
+          create: (context) =>
+              GetIt.I.get<FeedbackBloc>()..add(const FeedbackEvent.started()),
         ),
       ],
       child: childWidget,
