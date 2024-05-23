@@ -17,6 +17,7 @@ class AuthenticationRepository {
   AuthenticationRepository(
     this.iAppAuthenticationRepository,
   ) {
+    _logInAnonymously();
     // Listen to currentUser changes and emit auth status
     _authenticationStatuscontroller =
         StreamController<AuthenticationStatus>.broadcast(
@@ -40,6 +41,11 @@ class AuthenticationRepository {
     _userSubscription ??=
         iAppAuthenticationRepository.user.listen((currentUser) {
       if (currentUser.isNotEmpty) {
+        if (currentUserSetting.id != currentUser.id &&
+            _userSettingSubscription != null) {
+          _userSettingSubscription?.cancel();
+          _userSettingSubscription = null;
+        }
         _userSettingSubscription ??=
             iAppAuthenticationRepository.userSetting.listen(
           (currentUserSetting) {
@@ -126,7 +132,7 @@ class AuthenticationRepository {
     );
   }
 
-  Future<Either<SomeFailure, bool>> logInAnonymously() async {
+  Future<Either<SomeFailure, bool>> _logInAnonymously() async {
     final result = await iAppAuthenticationRepository.logInAnonymously();
     return result.fold(
       (l) {
