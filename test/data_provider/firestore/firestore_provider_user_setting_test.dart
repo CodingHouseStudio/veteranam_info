@@ -99,6 +99,12 @@ void main() {
         );
 
         when(
+          mockDocumentReference.delete(),
+        ).thenAnswer(
+          (_) async {},
+        );
+
+        when(
           mockDocumentReference.update(KTestText.userSetting.toJson()),
         ).thenAnswer(
           (_) async {},
@@ -213,6 +219,22 @@ void main() {
         ).called(1);
         verify(
           mockDocumentReference.update(KTestText.userSetting.toJson()),
+        ).called(1);
+      });
+
+      test('delete user setting', () async {
+        await firestoreService.deleteUserSetting(
+          KTestText.user.id,
+        );
+
+        verify(
+          mockFirebaseFirestore.collection(FirebaseCollectionName.userSettings),
+        ).called(1);
+        verify(
+          mockCollectionReference.doc(KTestText.user.id),
+        ).called(1);
+        verify(
+          mockDocumentReference.delete(),
         ).called(1);
       });
     });

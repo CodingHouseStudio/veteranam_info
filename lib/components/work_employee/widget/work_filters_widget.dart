@@ -33,7 +33,9 @@ class WorkEmployeeFilters extends StatelessWidget {
             child: Row(
               children: [
                 DropChipWidget(
-                  key: KWidgetkeys.screen.workEmployee.citiesFilter,
+                  widgetKey: KWidgetkeys.screen.workEmployee.citiesFilter,
+                  buttonKey:
+                      KWidgetkeys.screen.workEmployee.citiesFilterbuttons,
                   filters: [...cities, context.l10n.city],
                   onSelected: (newValue) => context
                       .read<WorkEmployeeWatcherBloc>()
@@ -52,7 +54,9 @@ class WorkEmployeeFilters extends StatelessWidget {
                 else
                   KSizedBox.kWidthSizedBox8,
                 DropChipWidget(
-                  key: KWidgetkeys.screen.workEmployee.categoriesFilter,
+                  widgetKey: KWidgetkeys.screen.workEmployee.categoriesFilter,
+                  buttonKey:
+                      KWidgetkeys.screen.workEmployee.categoriesFilterButtons,
                   filters: [...categories, context.l10n.category],
                   onSelected: (newValue) =>
                       context.read<WorkEmployeeWatcherBloc>().add(

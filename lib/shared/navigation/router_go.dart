@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kozak/components/components.dart';
-import 'package:kozak/components/thanks/thanks.dart';
+import 'package:kozak/components/profile_saves/view/profile_saves_view.dart';
 import 'package:kozak/shared/shared.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -153,12 +153,21 @@ GoRouter router = GoRouter(
               ),
               routes: [
                 GoRoute(
-                  name: KRoute.workRespond.name,
-                  path: KRoute.workRespond.path,
+                  name: KRoute.employeeRespond.name,
+                  path: KRoute.employeeRespond.path,
                   pageBuilder: (context, state) => NoTransitionPage(
                     name: state.name,
                     key: state.pageKey,
-                    child: const WorkRespondScreen(),
+                    child: const EmployeeRespondScreen(),
+                  ),
+                ),
+                GoRoute(
+                  name: KRoute.profileSaves.name,
+                  path: KRoute.profileSaves.path,
+                  pageBuilder: (context, state) => NoTransitionPage(
+                    key: state.pageKey,
+                    name: state.name,
+                    child: const ProfileSavesScreen(),
                   ),
                 ),
               ],
@@ -173,6 +182,17 @@ GoRouter router = GoRouter(
             name: state.name,
             child: const ProfileScreen(),
           ),
+          routes: [
+            GoRoute(
+              name: KRoute.profileMyStory.name,
+              path: KRoute.profileMyStory.path,
+              pageBuilder: (context, state) => NoTransitionPage(
+                key: state.pageKey,
+                name: state.name,
+                child: const ProfileMyStoryScreen(),
+              ),
+            ),
+          ],
           redirect: (context, state) =>
               context.read<AuthenticationBloc>().state.status !=
                       AuthenticationStatus.authenticated
