@@ -50,20 +50,20 @@ class AuthenticationRepository {
               _authenticationStatuscontroller.add(
                 AuthenticationStatus.authenticated,
               );
-            } else {
-              _authenticationStatuscontroller.add(
-                AuthenticationStatus.authenticatedAnonymously,
-              );
+              return;
             }
+            _authenticationStatuscontroller.add(
+              AuthenticationStatus.authenticatedAnonymously,
+            );
           },
         );
-      } else {
-        _authenticationStatuscontroller.add(
-          AuthenticationStatus.unauthenticated,
-        );
-        _userSettingSubscription?.cancel();
-        _userSettingSubscription = null;
+        return;
       }
+      _authenticationStatuscontroller.add(
+        AuthenticationStatus.unauthenticated,
+      );
+      _userSettingSubscription?.cancel();
+      _userSettingSubscription = null;
     });
   }
 

@@ -107,13 +107,13 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   Future<Either<SomeFailure, bool>> signUpWithGoogle() async {
     try {
       final credential = await _getGoogleAuthCredential();
-      if (currentUser.isEmpty) {
-        await _firebaseAuth.signInWithCredential(credential);
-      } else {
-        await _firebaseAuth.currentUser?.linkWithCredential(
-          credential,
-        );
-      }
+      // if (currentUser.isEmpty) {
+      await _firebaseAuth.signInWithCredential(credential);
+      // } else {
+      //   await _firebaseAuth.currentUser?.linkWithCredential(
+      //     credential,
+      //   );
+      // }
       return const Right(true);
     } on firebase_auth.FirebaseAuthException catch (e) {
       return Left(SignUpWithGoogleFailure.fromCode(e).status);
@@ -185,23 +185,23 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   }) async {
     return _handleAuthOperation(
       () async {
-        if (currentUser.isEmpty) {
-          await _firebaseAuth.createUserWithEmailAndPassword(
-            email: email,
-            password: password,
-          );
-        } else {
-          await _firebaseAuth.currentUser?.linkWithCredential(
-            firebase_auth.EmailAuthProvider.credential(
-              email: email,
-              password: password,
-            ),
-          );
-          await _firebaseAuth.signInWithEmailAndPassword(
-            email: email,
-            password: password,
-          );
-        }
+        // if (currentUser.isEmpty) {
+        await _firebaseAuth.createUserWithEmailAndPassword(
+          email: email,
+          password: password,
+        );
+        // } else {
+        //   await _firebaseAuth.currentUser?.linkWithCredential(
+        //     firebase_auth.EmailAuthProvider.credential(
+        //       email: email,
+        //       password: password,
+        //     ),
+        //   );
+        //   await _firebaseAuth.signInWithEmailAndPassword(
+        //     email: email,
+        //     password: password,
+        //   );
+        // }
       },
       (e) => SignUpWithEmailAndPasswordFailure.fromCode(e).status,
     );
