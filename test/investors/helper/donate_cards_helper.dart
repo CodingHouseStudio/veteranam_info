@@ -8,24 +8,31 @@ import '../../text_dependency.dart';
 Future<void> donatesCardHelper(
   WidgetTester tester,
 ) async {
-  await changeWindowSizeHelper(tester: tester);
+  await changeWindowSizeHelper(
+    tester: tester,
+    test: () async {
+      expect(
+        find.byKey(KWidgetkeys.screen.investors.donateCards),
+        findsWidgets,
+      );
 
-  expect(find.byKey(KWidgetkeys.screen.investors.donateCards), findsWidgets);
+      expect(find.byKey(KWidgetkeys.screen.investors.donateCard), findsWidgets);
 
-  expect(find.byKey(KWidgetkeys.screen.investors.donateCard), findsWidgets);
+      await donateCardHelper(tester: tester, isDesk: true);
 
-  await donateCardHelper(tester: tester, isDesk: true);
+      final widgetLocation = tester
+          .getCenter(find.byKey(KWidgetkeys.widget.donateCard.widget).first);
 
-  final widgetLocation =
-      tester.getCenter(find.byKey(KWidgetkeys.widget.donateCard.widget).first);
+      final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
 
-  final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
+      await gesture.addPointer(location: widgetLocation);
 
-  await gesture.addPointer(location: widgetLocation);
+      await tester.pumpAndSettle();
 
-  await tester.pumpAndSettle();
-
-  expect(find.byKey(KWidgetkeys.widget.donateCard.subtitle), findsOneWidget);
-
-  await changeWindowSizeHelper(tester: tester, setDefaultSize: true);
+      expect(
+        find.byKey(KWidgetkeys.widget.donateCard.subtitle),
+        findsOneWidget,
+      );
+    },
+  );
 }

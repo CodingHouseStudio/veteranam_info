@@ -55,7 +55,7 @@ class AuthenticationBloc
     log('${KAppText.authChange} ${event.status}');
     switch (event.status) {
       case AuthenticationStatus.unauthenticated:
-        if (_authenticationRepository.currentUser.id.isEmpty) {
+        if (_authenticationRepository.currentUser.isEmpty) {
           await _authenticationRepository.logInAnonymously();
         }
         return emit(const AuthenticationState.unauthenticated());
@@ -66,6 +66,15 @@ class AuthenticationBloc
             currentUserSetting: _authenticationRepository.currentUserSetting,
           ),
         );
+      case AuthenticationStatus.authenticatedAnonymously:
+        return emit(
+          AuthenticationState.authenticatedAnonymously(
+            anonymouslyUser: _authenticationRepository.currentUser,
+            anonymouslyUserSetting:
+                _authenticationRepository.currentUserSetting,
+          ),
+        );
+
       case AuthenticationStatus.unknown:
         return emit(const AuthenticationState.unknown());
     }
@@ -114,7 +123,9 @@ class AuthenticationBloc
   ) {
     emit(
       state.copyWith(
-        userSetting: event.userSetting,
+        userSetting: event.userSetting.copyWith(
+          id: _authenticationRepository.currentUser.id,
+        ),
       ),
     );
   }
@@ -127,7 +138,7 @@ class AuthenticationBloc
       locale: event.language,
     );
     add(_AppUserSettingChanged(userSetting));
-    if (_authenticationRepository.currentUser.isNotEmpty) {
+    if (state.user.hasValue) {
       await _authenticationRepository.updateUserSetting(
         userSetting: userSetting,
       );
@@ -138,10 +149,9 @@ class AuthenticationBloc
     AppUserRoleChanged event,
     Emitter<AuthenticationState> emit,
   ) async {
-    if (state.userSetting.isNotEmpty) {
+    if (state.user != null && state.user!.isNotAnonymously) {
       final userSetting = state.userSetting.copyWith(
         userRole: event.userRole,
-        roleIsConfirmed: false,
       );
       add(_AppUserSettingChanged(userSetting));
       await _authenticationRepository.updateUserSetting(
@@ -149,4 +159,8 @@ class AuthenticationBloc
       );
     }
   }
+}
+
+extension UserChecker on User? {
+  bool get hasValue => this != null && this!.isNotEmpty;
 }

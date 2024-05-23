@@ -277,6 +277,7 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   @override
   Future<Either<SomeFailure, bool>> deleteUser() async {
     try {
+      await _firestoreService.deleteUserSetting(currentUser.id);
       await _firebaseAuth.currentUser?.delete();
       _cache.clear(); // Clear the cache after user deletion
       return const Right(true);
@@ -297,21 +298,26 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
     UserSetting userSetting,
   ) async {
     try {
-      if (userSetting.isEmpty) {
-        await _firestoreService.setUserSetting(
-          userSetting: userSetting,
-          userId: currentUser.id,
-        );
-      } else {
-        await _firestoreService.updateUserSetting(
-          userSetting,
-        );
+      if (currentUser.isNotEmpty) {
+        if (currentUserSetting.id.isEmpty) {
+          await _firestoreService.setUserSetting(
+            userSetting: userSetting,
+            userId: currentUser.id,
+          );
+        } else {
+          await _firestoreService.updateUserSetting(
+            userSetting,
+          );
+        }
+        return const Right(true);
       }
-      return const Right(true);
+      return const Right(false);
     } on firebase_core.FirebaseException catch (e) {
       return Left(SendFailure.fromCode(e).status);
     } catch (e) {
       return const Left(SomeFailure.serverError());
+    } finally {
+      _updateUserSettingBasedOnCache();
     }
   }
 }

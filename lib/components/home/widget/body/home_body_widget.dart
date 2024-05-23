@@ -67,9 +67,13 @@ class _HomeBodyWidgetState extends State<HomeBodyWidget> {
                             ? questionModelItems.length
                             : 1, (index) {
                       return Padding(
-                        padding: EdgeInsets.only(
-                          top: index != 0 ? KPadding.kPaddingSize24 : 0,
-                        ),
+                        padding: index != 0
+                            ? EdgeInsets.only(
+                                top: isDesk
+                                    ? KPadding.kPaddingSize24
+                                    : KPadding.kPaddingSize16,
+                              )
+                            : EdgeInsets.zero,
                         child: QuestionWidget(
                           key: KWidgetkeys.screen.home.questions,
                           questionModel: questionModelItems.elementAt(index),

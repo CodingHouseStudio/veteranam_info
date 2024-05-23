@@ -5,7 +5,12 @@ import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kozak/shared/shared.dart';
 
-enum AuthenticationStatus { unknown, authenticated, unauthenticated }
+enum AuthenticationStatus {
+  unknown,
+  authenticatedAnonymously,
+  authenticated,
+  unauthenticated
+}
 
 @Singleton()
 class AuthenticationRepository {
@@ -15,12 +20,12 @@ class AuthenticationRepository {
     // Listen to currentUser changes and emit auth status
     _authenticationStatuscontroller =
         StreamController<AuthenticationStatus>.broadcast(
-      onListen: _onStatusStreamListen,
-      onCancel: _onStatusStreamCancel,
+      onListen: _onUserStreamListen,
+      onCancel: _onUserStreamCancel,
     );
     _userSettingController = StreamController<UserSetting>.broadcast(
-      onListen: _onUserSettingStreamListen,
-      onCancel: _onUserSettingStreamCancel,
+      onListen: _onUserStreamListen,
+      onCancel: _onUserStreamCancel,
     );
   }
 
@@ -31,23 +36,7 @@ class AuthenticationRepository {
   StreamSubscription<User>? _userSubscription;
   StreamSubscription<UserSetting>? _userSettingSubscription;
 
-  void _onStatusStreamListen() {
-    _statusUserSubscription ??= iAppAuthenticationRepository.user.listen(
-      (currentUser) {
-        if (currentUser.isNotAnonymously) {
-          _authenticationStatuscontroller.add(
-            AuthenticationStatus.authenticated,
-          );
-        } else {
-          _authenticationStatuscontroller.add(
-            AuthenticationStatus.unauthenticated,
-          );
-        }
-      },
-    );
-  }
-
-  void _onUserSettingStreamListen() {
+  void _onUserStreamListen() {
     _userSubscription ??=
         iAppAuthenticationRepository.user.listen((currentUser) {
       if (currentUser.isNotEmpty) {
@@ -57,21 +46,28 @@ class AuthenticationRepository {
             _userSettingController.add(
               currentUserSetting,
             );
+            if (currentUser.isNotAnonymously) {
+              _authenticationStatuscontroller.add(
+                AuthenticationStatus.authenticated,
+              );
+            } else {
+              _authenticationStatuscontroller.add(
+                AuthenticationStatus.authenticatedAnonymously,
+              );
+            }
           },
         );
       } else {
+        _authenticationStatuscontroller.add(
+          AuthenticationStatus.unauthenticated,
+        );
         _userSettingSubscription?.cancel();
         _userSettingSubscription = null;
       }
     });
   }
 
-  void _onStatusStreamCancel() {
-    _statusUserSubscription?.cancel();
-    _statusUserSubscription = null;
-  }
-
-  void _onUserSettingStreamCancel() {
+  void _onUserStreamCancel() {
     _userSettingSubscription?.cancel();
     _userSubscription?.cancel();
     _userSettingSubscription = null;

@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:kozak/shared/models/models.dart';
 import 'package:kozak/shared/shared.dart';
 
 import '../../text_dependency.dart';
@@ -52,11 +53,11 @@ void main() {
     group('${KGroupText.modelJson} ', () {
       test('${KGroupText.shouldBe} ', () {
         final json = {
-          'id': KTestText.user.id,
-          'email': KTestText.user.email,
-          'name': KTestText.user.name,
-          'photo': KTestText.user.photo,
-          'phoneNumber': KTestText.user.phoneNumber,
+          UserModelJsonField.id: KTestText.user.id,
+          UserModelJsonField.email: KTestText.user.email,
+          UserModelJsonField.name: KTestText.user.name,
+          UserModelJsonField.photo: KTestText.user.photo,
+          UserModelJsonField.phoneNumber: KTestText.user.phoneNumber,
         };
 
         final user = User.fromJson(json);
@@ -69,7 +70,7 @@ void main() {
       });
       test('${KGroupText.shouldBe} ', () {
         final json = {
-          'id': KTestText.user.id,
+          UserModelJsonField.id: KTestText.user.id,
         };
 
         final user = User.fromJson(json);
@@ -84,10 +85,10 @@ void main() {
       test('${KGroupText.shouldNotBe} ', () {
         final json = {
           // id is missing
-          'email': KTestText.user.email,
-          'name': KTestText.user.name,
-          'photo': KTestText.user.photo,
-          'phoneNumber': KTestText.user.phoneNumber,
+          UserModelJsonField.email: KTestText.user.email,
+          UserModelJsonField.name: KTestText.user.name,
+          UserModelJsonField.photo: KTestText.user.photo,
+          UserModelJsonField.phoneNumber: KTestText.user.phoneNumber,
         };
 
         expect(
@@ -99,11 +100,11 @@ void main() {
     group('${KGroupText.jsonModel} ', () {
       test('${KGroupText.shouldBe} ', () {
         final json = {
-          'id': KTestText.user.id,
-          'email': KTestText.user.email,
-          'name': KTestText.user.name,
-          'photo': KTestText.user.photo,
-          'phoneNumber': KTestText.user.phoneNumber,
+          UserModelJsonField.id: KTestText.user.id,
+          UserModelJsonField.email: KTestText.user.email,
+          UserModelJsonField.name: KTestText.user.name,
+          UserModelJsonField.photo: KTestText.user.photo,
+          UserModelJsonField.phoneNumber: KTestText.user.phoneNumber,
         };
 
         final userModelJson = KTestText.user.toJson();
@@ -113,11 +114,11 @@ void main() {
 
       test('${KGroupText.shouldBe} ', () {
         final json = {
-          'id': KTestText.user.id,
-          'email': null,
-          'name': null,
-          'photo': null,
-          'phoneNumber': null,
+          UserModelJsonField.id: KTestText.user.id,
+          UserModelJsonField.email: null,
+          UserModelJsonField.name: null,
+          UserModelJsonField.photo: null,
+          UserModelJsonField.phoneNumber: null,
         };
 
         final userModelJson = User(id: KTestText.user.id).toJson();

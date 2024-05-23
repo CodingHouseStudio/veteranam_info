@@ -20,3 +20,15 @@ class WorkModel with _$WorkModel {
   factory WorkModel.fromJson(Map<String, dynamic> json) =>
       _$WorkModelFromJson(json);
 }
+
+abstract class WorkModelJsonField {
+  static const id = 'id';
+  static const title = 'title';
+  static const price = 'price';
+  static const employerContact = 'employerContact';
+  static const companyName = 'companyName';
+  static const description = 'description';
+  static const category = 'category';
+  static const city = 'city';
+  static const remote = 'remote';
+}

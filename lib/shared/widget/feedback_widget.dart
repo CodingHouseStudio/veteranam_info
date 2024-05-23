@@ -18,7 +18,8 @@ abstract class FeedbackWidget {
     String? subtitle,
     String? messageHint,
   }) =>
-      context.read<AuthenticationBloc>().state.userSetting.isTimeSendingFeedback
+      context.read<FeedbackBloc>().state.formState !=
+              FeedbackEnum.notShowFeedback
           ? [
               topPadding,
               SizedBox.shrink(

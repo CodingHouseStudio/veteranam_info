@@ -97,7 +97,7 @@ class StoryWatcherBloc extends Bloc<StoryWatcherEvent, StoryWatcherState> {
     emit(
       state.copyWith(
         loadingStatus: LoadingStatus.error,
-        failure: const SomeFailure.serverError().toStory(),
+        failure: GetFailur.fromCode(event.failure).status.toStory(),
       ),
     );
   }

@@ -18,10 +18,20 @@ Future<void> workEmployeeFilterHelper(
     findsOneWidget,
   );
 
+  await dropChipHelper(
+    tester: tester,
+    dropChipKey: KWidgetkeys.screen.workEmployee.citiesFilter,
+    buttonKey: KWidgetkeys.screen.workEmployee.citiesFilterbuttons,
+  );
+
   expect(
     find.byKey(KWidgetkeys.screen.workEmployee.categoriesFilter),
     findsOneWidget,
   );
 
-  await dropChipHelper(tester);
+  await dropChipHelper(
+    tester: tester,
+    dropChipKey: KWidgetkeys.screen.workEmployee.categoriesFilter,
+    buttonKey: KWidgetkeys.screen.workEmployee.categoriesFilterButtons,
+  );
 }

@@ -34,3 +34,11 @@ class User with _$User {
   /// Convenience getter to determine whether the current user is not empty.
   bool get isNotEmpty => this != User.empty;
 }
+
+abstract class UserModelJsonField {
+  static const id = 'id';
+  static const email = 'email';
+  static const name = 'name';
+  static const photo = 'photo';
+  static const phoneNumber = 'phoneNumber';
+}
