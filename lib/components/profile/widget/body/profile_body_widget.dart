@@ -12,9 +12,9 @@ class ProfileBodyWidget extends StatelessWidget {
         KSizedBox.kHeightSizedBox30,
         ...TitleWidget.titleWidgetList(
           title: context.l10n.myProfile,
-          titleKey: null,
+          titleKey: KWidgetkeys.screen.profile.title,
           subtitle: context.l10n.profileDetails,
-          subtitleKey: null,
+          subtitleKey: KWidgetkeys.screen.profile.subtitle,
           isDesk: isDesk,
         ),
         if (isDesk)
