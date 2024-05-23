@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:kozak/shared/shared.dart';
 
 part 'employee_respond_event.dart';
 part 'employee_respond_state.dart';
