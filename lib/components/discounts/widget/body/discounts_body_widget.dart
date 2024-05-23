@@ -27,9 +27,9 @@ class DiscountBodyWidget extends StatelessWidget {
                   KSizedBox.kHeightSizedBox16,
                 ...TitleWidget.titleWidgetList(
                   title: context.l10n.discountsAndCoupons,
-                  titleKey: null,
+                  titleKey: KWidgetkeys.screen.discounts.title,
                   subtitle: context.l10n.discountsAndCouponsDescription,
-                  subtitleKey: null,
+                  subtitleKey: KWidgetkeys.screen.discounts.title,
                   isDesk: isDesk,
                 ),
                 if (isDesk)
