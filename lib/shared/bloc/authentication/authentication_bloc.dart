@@ -16,13 +16,13 @@ class AuthenticationBloc
     required AuthenticationRepository authenticationRepository,
   })  : _authenticationRepository = authenticationRepository,
         super(
-          authenticationRepository.currentUser.isNotEmpty
-              ? AuthenticationState.authenticated(
+          authenticationRepository.isAnonymouslyOrEmty()
+              ? const AuthenticationState.unknown()
+              : AuthenticationState.authenticated(
                   currentUser: authenticationRepository.currentUser,
                   currentUserSetting:
                       authenticationRepository.currentUserSetting,
-                )
-              : const AuthenticationState.unknown(),
+                ),
         ) {
     on<AuthenticationStatusChanged>(_onAuthenticationStatusChanged);
     on<AuthenticationLogoutRequested>(_onAuthenticationLogoutRequested);
@@ -53,6 +53,7 @@ class AuthenticationBloc
     Emitter<AuthenticationState> emit,
   ) {
     log('${KAppText.authChange} ${event.status}');
+    log('user:_____________ ${_authenticationRepository.currentUser}');
     switch (event.status) {
       case AuthenticationStatus.unauthenticated:
         return emit(const AuthenticationState.unauthenticated());
@@ -61,6 +62,14 @@ class AuthenticationBloc
           AuthenticationState.authenticated(
             currentUser: _authenticationRepository.currentUser,
             currentUserSetting: _authenticationRepository.currentUserSetting,
+          ),
+        );
+      case AuthenticationStatus.anonymous:
+        return emit(
+          AuthenticationState.authenticatedAnonymously(
+            anonymouslyUser: _authenticationRepository.currentUser,
+            anonymouslyUserSetting:
+                _authenticationRepository.currentUserSetting,
           ),
         );
 
@@ -138,7 +147,8 @@ class AuthenticationBloc
     AppUserRoleChanged event,
     Emitter<AuthenticationState> emit,
   ) async {
-    if (state.user.hasValue) {
+    if (state.user != null &&
+        !_authenticationRepository.isAnonymouslyOrEmty()) {
       final userSetting = state.userSetting.copyWith(
         userRole: event.userRole,
       );

@@ -11,11 +11,11 @@ void main() {
     group('${KGroupText.modelJson} ', () {
       test('${KGroupText.shouldBe} ', () {
         final json = {
-          'id': KTestText.fundItems.last.id,
-          'title': KTestText.fundItems.last.title,
-          'subtitle': KTestText.fundItems.last.subtitle,
-          'link': KTestText.fundItems.last.link,
-          'image': KTestText.fundItems.last.image,
+          FundModelJsonField.id: KTestText.fundItems.last.id,
+          FundModelJsonField.title: KTestText.fundItems.last.title,
+          FundModelJsonField.subtitle: KTestText.fundItems.last.subtitle,
+          FundModelJsonField.link: KTestText.fundItems.last.link,
+          FundModelJsonField.image: KTestText.fundItems.last.image,
         };
 
         final fundModel = FundModel.fromJson(json);
@@ -41,10 +41,10 @@ void main() {
 
       test('${KGroupText.shouldBe} ', () {
         final json = {
-          'id': KTestText.fundItems.last.id,
-          'title': KTestText.fundItems.last.title,
-          'subtitle': KTestText.fundItems.last.subtitle,
-          'link': KTestText.fundItems.last.link,
+          FundModelJsonField.id: KTestText.fundItems.last.id,
+          FundModelJsonField.title: KTestText.fundItems.last.title,
+          FundModelJsonField.subtitle: KTestText.fundItems.last.subtitle,
+          FundModelJsonField.link: KTestText.fundItems.last.link,
         };
 
         final fundModel = FundModel.fromJson(json);
@@ -70,11 +70,11 @@ void main() {
 
       test('${KGroupText.shouldNotBe} ', () {
         final json = {
-          'id': KTestText.fundItems.last.id,
+          FundModelJsonField.id: KTestText.fundItems.last.id,
           // title is missing
-          'subtitle': KTestText.fundItems.last.subtitle,
-          'link': KTestText.fundItems.last.link,
-          'image': KTestText.fundItems.last.image,
+          FundModelJsonField.subtitle: KTestText.fundItems.last.subtitle,
+          FundModelJsonField.link: KTestText.fundItems.last.link,
+          FundModelJsonField.image: KTestText.fundItems.last.image,
         };
 
         expect(
@@ -86,11 +86,11 @@ void main() {
     group('${KGroupText.jsonModel} ', () {
       test('${KGroupText.shouldBe} ', () {
         final json = {
-          'id': KTestText.fundItems.last.id,
-          'title': KTestText.fundItems.last.title,
-          'subtitle': KTestText.fundItems.last.subtitle,
-          'link': KTestText.fundItems.last.link,
-          'image': KTestText.fundItems.last.image,
+          FundModelJsonField.id: KTestText.fundItems.last.id,
+          FundModelJsonField.title: KTestText.fundItems.last.title,
+          FundModelJsonField.subtitle: KTestText.fundItems.last.subtitle,
+          FundModelJsonField.link: KTestText.fundItems.last.link,
+          FundModelJsonField.image: KTestText.fundItems.last.image,
         };
 
         final fundModelJson = KTestText.fundItems.last.toJson();
@@ -100,11 +100,11 @@ void main() {
 
       test('${KGroupText.shouldBe} ', () {
         final json = {
-          'id': KTestText.fundItems.last.id,
-          'title': KTestText.fundItems.last.title,
-          'subtitle': KTestText.fundItems.last.subtitle,
-          'link': KTestText.fundItems.last.link,
-          'image': null,
+          FundModelJsonField.id: KTestText.fundItems.last.id,
+          FundModelJsonField.title: KTestText.fundItems.last.title,
+          FundModelJsonField.subtitle: KTestText.fundItems.last.subtitle,
+          FundModelJsonField.link: KTestText.fundItems.last.link,
+          FundModelJsonField.image: null,
         };
 
         final fundModelJson =

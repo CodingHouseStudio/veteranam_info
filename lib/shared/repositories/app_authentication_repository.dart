@@ -35,7 +35,8 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   @visibleForTesting
   bool isWeb = kIsWeb;
   @visibleForTesting
-  firebase_auth.GoogleAuthProvider? googleAuthProvider;
+  firebase_auth.GoogleAuthProvider googleAuthProvider =
+      firebase_auth.GoogleAuthProvider();
 
   /// User cache key.
   /// Should only be used for testing purposes.
@@ -106,9 +107,13 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   @override
   Future<Either<SomeFailure, bool>> signUpWithGoogle() async {
     try {
-      await _firebaseAuth
-          .signInWithCredential(await _getGoogleAuthCredential());
-      return const Right(true);
+      final credential = await _getGoogleAuthCredential();
+      if (credential != null) {
+        await _firebaseAuth.signInWithCredential(credential);
+
+        return const Right(true);
+      }
+      return const Right(false);
     } on firebase_auth.FirebaseAuthException catch (e) {
       return Left(SignUpWithGoogleFailure.fromCode(e).status);
     } catch (_) {
@@ -119,7 +124,7 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
     }
   }
 
-  Future<firebase_auth.AuthCredential> _getGoogleAuthCredential() async {
+  Future<firebase_auth.AuthCredential?> _getGoogleAuthCredential() async {
     if (isWeb) {
       return _getGoogleAuthCredentialWeb();
     } else {
@@ -127,11 +132,11 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
     }
   }
 
-  Future<firebase_auth.AuthCredential> _getGoogleAuthCredentialWeb() async {
+  Future<firebase_auth.AuthCredential?> _getGoogleAuthCredentialWeb() async {
     final userCredential = await _firebaseAuth.signInWithPopup(
-      googleAuthProvider ?? firebase_auth.GoogleAuthProvider(),
+      googleAuthProvider,
     );
-    return userCredential.credential!;
+    return userCredential.credential;
   }
 
   Future<firebase_auth.AuthCredential> _getGoogleAuthCredentialMobile() async {
@@ -159,6 +164,16 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
         (e) => LogInWithEmailAndPasswordFailure.fromCode(e).status,
       );
 
+  /// Signs in with the anonymously.
+  ///
+  /// Throws a [SendFailure] if an exception occurs.
+  @override
+  Future<Either<SomeFailure, bool>> logInAnonymously() async =>
+      _handleAuthOperation(
+        _firebaseAuth.signInAnonymously,
+        (e) => SendFailure.fromCode(e).status,
+      );
+
   /// Creates a new user with the provided [email] and [password].
   ///
   /// Throws a [SignUpWithEmailAndPasswordFailure] if an exception occurs.
@@ -168,16 +183,36 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
     required String password,
   }) async {
     return _handleAuthOperation(
-      () => _firebaseAuth.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
-      ),
+      () async {
+        if (currentUser.isEmpty) {
+          await _firebaseAuth.createUserWithEmailAndPassword(
+            email: email,
+            password: password,
+          );
+        } else {
+          await _firebaseAuth.currentUser?.linkWithCredential(
+            firebase_auth.EmailAuthProvider.credential(
+              email: email,
+              password: password,
+            ),
+          );
+          await _firebaseAuth.signInWithEmailAndPassword(
+            email: email,
+            password: password,
+          );
+        }
+      },
       (e) => SignUpWithEmailAndPasswordFailure.fromCode(e).status,
     );
   }
 
   @override
-  Future<bool> isLoggedIn() async => currentUser != User.empty;
+  bool isLoggedIn() => currentUser != User.empty;
+
+  @override
+  bool isAnonymously() =>
+      _firebaseAuth.currentUser != null &&
+      _firebaseAuth.currentUser!.isAnonymous;
 
   /// Signs out the current user which will emit
   /// [User.empty] from the [user] Stream.
@@ -192,17 +227,18 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
         _googleSignIn.signOut(),
         _secureStorageRepository.deleteAll(),
       ]);
-      return const Right(true);
+      return logInAnonymously();
     } on firebase_auth.FirebaseAuthException catch (e) {
       debugPrint('Firebase Auth Error: ${e.message}');
       return Left(const LogOutFailure().status);
     } catch (e) {
       debugPrint('Logout error: $e');
       return const Left(SomeFailure.serverError());
-    } finally {
-      _updateAuthStatusBasedOnCache();
-      _updateUserSettingBasedOnCache();
     }
+    // finally {
+    //   _updateAuthStatusBasedOnCache();
+    //   _updateUserSettingBasedOnCache();
+    // }
   }
 
   @override
@@ -270,17 +306,18 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
       await _firestoreService.deleteUserSetting(currentUser.id);
       await _firebaseAuth.currentUser?.delete();
       _cache.clear(); // Clear the cache after user deletion
-      return const Right(true);
+      return logInAnonymously();
     } on firebase_auth.FirebaseAuthException catch (e) {
       debugPrint('Firebase Auth Error: ${e.message}');
       return const Left(SomeFailure.serverError());
     } catch (e) {
       debugPrint('General Auth Error: $e');
       return const Left(SomeFailure.serverError());
-    } finally {
-      _updateAuthStatusBasedOnCache();
-      _updateUserSettingBasedOnCache();
     }
+    // finally {
+    //   _updateAuthStatusBasedOnCache();
+    //   _updateUserSettingBasedOnCache();
+    // }
   }
 
   @override
@@ -289,7 +326,8 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   ) async {
     try {
       if (currentUser.isNotEmpty) {
-        if (currentUserSetting.id.isEmpty) {
+        if (currentUserSetting.id.isEmpty ||
+            currentUserSetting.id != currentUser.id) {
           await _firestoreService.setUserSetting(
             userSetting: userSetting,
             userId: currentUser.id,
@@ -306,6 +344,8 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
       return Left(SendFailure.fromCode(e).status);
     } catch (e) {
       return const Left(SomeFailure.serverError());
+    } finally {
+      _updateUserSettingBasedOnCache();
     }
   }
 }
