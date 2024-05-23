@@ -55,7 +55,8 @@ class AuthenticationBloc
     log('${KAppText.authChange} ${event.status}');
     switch (event.status) {
       case AuthenticationStatus.unauthenticated:
-        if (_authenticationRepository.currentUser.isEmpty) {
+        if (_authenticationRepository.currentUser.isEmpty ||
+            state.status == AuthenticationStatus.authenticated) {
           await _authenticationRepository.logInAnonymously();
         }
         return emit(const AuthenticationState.unauthenticated());

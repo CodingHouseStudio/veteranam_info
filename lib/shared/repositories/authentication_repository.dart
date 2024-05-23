@@ -46,7 +46,7 @@ class AuthenticationRepository {
             _userSettingController.add(
               currentUserSetting,
             );
-            if (currentUser.isNotAnonymously) {
+            if (iAppAuthenticationRepository.currentUser.isNotAnonymously) {
               _authenticationStatuscontroller.add(
                 AuthenticationStatus.authenticated,
               );
