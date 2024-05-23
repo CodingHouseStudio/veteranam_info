@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:go_router/go_router.dart';
 import 'package:kozak/shared/shared.dart';
 
 class ProfileBodyWidget extends StatelessWidget {
@@ -74,23 +75,18 @@ class ProfileBodyWidget extends StatelessWidget {
   }
 
   Widget _buildBoxWidgets(BuildContext context, bool isDesk) {
-    return Column(
-      children: [
-        BoxWidget(
-          text: context.l10n.saved,
-          isDesk: isDesk,
-          onTap: null,
-          textIconPaddingWidget: KSizedBox.kHeightSizedBox56,
-        ),
-        KSizedBox.kHeightSizedBox30,
-        BoxWidget(
-          text: context.l10n.myStory,
-          isDesk: isDesk,
-          onTap: null,
-          textIconPaddingWidget: KSizedBox.kHeightSizedBox56,
-        ),
-        KSizedBox.kHeightSizedBox30,
-        if (isDesk)
+    return Padding(
+      padding: const EdgeInsets.all(KPadding.kPaddingSize8),
+      child: Column(
+        children: [
+          BoxWidget(
+            text: context.l10n.saved,
+            isDesk: isDesk,
+            onTap: () => context.goNamed(
+              KRoute.profileSaves.name,
+            ),
+          ),
+          KSizedBox.kHeightSizedBox30,
           BoxWidget(
             text: context.l10n.myFeedback,
             isDesk: isDesk,
