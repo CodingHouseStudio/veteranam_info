@@ -58,6 +58,7 @@ abstract class KIcon {
   static const _KIcon share = _KIcon(Icons.file_upload_outlined);
   static const _KIcon error = _KIcon(Icons.error);
   static const _KIcon safe = _KIcon(Icons.bookmark_border_sharp);
+  static const _KIcon saved = _KIcon(Icons.bookmark_added_sharp);
   static const _KIcon check = _KIcon(Icons.check);
   static const _KIcon volum = _KIcon(Icons.volume_up);
   static const _KIcon eye = _KIcon(Icons.visibility_outlined);

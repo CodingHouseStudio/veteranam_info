@@ -7,11 +7,14 @@ class WorkCardWidget extends StatelessWidget {
     required this.workModel,
     required this.isDesk,
     this.firstItemIsFirst = false,
+    this.isSaved = true,
     super.key,
   });
+
   final WorkModel workModel;
   final bool isDesk;
   final bool firstItemIsFirst;
+  final bool isSaved;
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +62,12 @@ class WorkCardWidget extends StatelessWidget {
                 children: [
                   KIcon.share.setIconKey(KWidgetkeys.widget.workCard.iconShare),
                   KSizedBox.kWidthSizedBox16,
-                  KIcon.safe.setIconKey(KWidgetkeys.widget.workCard.iconSafe),
+                  if (isSaved)
+                    KIcon.safe.setIconKey(KWidgetkeys.widget.workCard.iconSafe)
+                  else
+                    KIcon.saved.setIconKey(
+                      KWidgetkeys.widget.workCard.iconSafe,
+                    ),
                 ],
               ),
               isDesk: isDesk,
@@ -67,7 +75,7 @@ class WorkCardWidget extends StatelessWidget {
             KSizedBox.kHeightSizedBox16,
             ButtonWidget(
               key: KWidgetkeys.widget.workCard.button,
-              onPressed: () => context.goNamed(KRoute.workRespond.name),
+              onPressed: () => context.goNamed(KRoute.employeeRespond.name),
               text: context.l10n.respond,
               isDesk: isDesk,
             ),
