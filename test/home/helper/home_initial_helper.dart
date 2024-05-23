@@ -13,7 +13,10 @@ Future<void> homeInitialHelper(
     hasMic: false,
   );
 
-  await homeBoxHelper(tester);
+  await changeWindowSizeHelper(
+    tester: tester,
+    test: () async => homeBoxHelper(tester),
+  );
 
   await listQuestionHelper(tester);
 

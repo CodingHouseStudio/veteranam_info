@@ -40,6 +40,8 @@ part 'screen/work_respond.dart';
 part 'screen/employer.dart';
 part 'screen/story_add.dart';
 
+part 'screen/my_story.dart';
+
 part 'widget/widget.dart';
 
 part 'widget/question.dart';

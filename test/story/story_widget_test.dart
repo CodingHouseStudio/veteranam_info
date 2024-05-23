@@ -16,16 +16,25 @@ void main() {
   tearDown(GetIt.I.reset);
   group('${KScreenBlocName.story} ', () {
     late IStoryRepository mockStoryRepository;
+    late AuthenticationRepository mockAuthenticationRepository;
     setUp(() {
       mockStoryRepository = MockIStoryRepository();
+      mockAuthenticationRepository = MockAuthenticationRepository();
       when(mockStoryRepository.getStoryItems()).thenAnswer(
         (invocation) => Stream.value(KTestText.storyModelItems),
+      );
+      when(mockAuthenticationRepository.currentUser).thenAnswer(
+        (realInvocation) => KTestText.userWithoutPhoto,
+      );
+      when(mockAuthenticationRepository.currentUserSetting).thenAnswer(
+        (realInvocation) => UserSetting.empty,
       );
     });
     testWidgets('${KGroupText.intial} ', (tester) async {
       await storyPumpAppHelper(
         tester: tester,
         mockStoryRepository: mockStoryRepository,
+        mockAuthenticationRepository: mockAuthenticationRepository,
       );
 
       await storyInitialHelper(tester);
@@ -34,6 +43,7 @@ void main() {
       await storyPumpAppHelper(
         mockStoryRepository: mockStoryRepository,
         tester: tester,
+        mockAuthenticationRepository: mockAuthenticationRepository,
       );
 
       await listLoadHelper(tester);
@@ -46,9 +56,25 @@ void main() {
           tester: tester,
           mockGoRouter: mockGoRouter,
           mockStoryRepository: mockStoryRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
         );
 
         await storyInitialHelper(tester);
+      });
+      group('${KGroupText.goTo} ', () {
+        testWidgets('${KRoute.storyAdd.name} ', (tester) async {
+          await storyPumpAppHelper(
+            tester: tester,
+            mockGoRouter: mockGoRouter,
+            mockStoryRepository: mockStoryRepository,
+            mockAuthenticationRepository: mockAuthenticationRepository,
+          );
+
+          await storyAddNavigationHelper(
+            tester: tester,
+            mockGoRouter: mockGoRouter,
+          );
+        });
       });
     });
   });

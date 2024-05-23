@@ -94,8 +94,8 @@ class ProfileBodyWidget extends StatelessWidget {
           BoxWidget(
             text: context.l10n.myFeedback,
             isDesk: isDesk,
-            onTap: null,
             textIconPaddingWidget: KSizedBox.kHeightSizedBox56,
+            onTap: () => context.goNamedWithScroll(KRoute.profileMyStory.name),
           ),
       ],
     );

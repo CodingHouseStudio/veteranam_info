@@ -6,12 +6,12 @@ import 'package:kozak/shared/shared.dart';
 Future<void> appHelper(WidgetTester tester) async {
   await tester.pumpWidget(const App());
 
+  await tester.pumpAndSettle();
+
   expect(
     find.byKey(KWidgetkeys.screen.app.screen),
     findsOneWidget,
   );
-
-  await tester.pumpAndSettle();
 }
 
 /// FOLDER FILES COMMENT: Files for widgets test or helper for test
