@@ -4,9 +4,9 @@ import 'package:kozak/shared/shared.dart';
 abstract class TitleWidget {
   static List<Widget> titleWidgetList({
     required String title,
-    required Key? titleKey,
+    required Key titleKey,
     required String subtitle,
-    required Key? subtitleKey,
+    required Key subtitleKey,
     required bool isDesk,
   }) =>
       [

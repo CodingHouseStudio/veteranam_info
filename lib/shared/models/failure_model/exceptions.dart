@@ -8,7 +8,7 @@ class SendFailure implements Exception {
   ]);
 
   factory SendFailure.fromCode(
-    Exception e,
+    dynamic e,
   ) {
     switch (e) {
       default:
@@ -25,7 +25,7 @@ class GetFailur implements Exception {
   ]);
 
   factory GetFailur.fromCode(
-    Exception e,
+    dynamic e,
   ) {
     switch (e) {
       default:

@@ -22,9 +22,8 @@ Future<void> cardTextDetailHelper(
     findsWidgets,
   );
 
-  late var text = tester.widget<Text>(
-    find.byKey(KWidgetkeys.widget.cardTextDetail.text).first,
-  );
+  late var text = tester
+      .widget<Text>(find.byKey(KWidgetkeys.widget.cardTextDetail.text).first);
 
   expect(text.maxLines, isNotNull);
 
@@ -85,9 +84,8 @@ Future<void> cardTextDetailHelper(
     buttonText.data,
   );
 
-  text = tester.widget<Text>(
-    find.byKey(KWidgetkeys.widget.cardTextDetail.text).first,
-  );
+  text = tester
+      .widget<Text>(find.byKey(KWidgetkeys.widget.cardTextDetail.text).first);
 
   expect(text.maxLines, isNotNull);
 }

@@ -42,41 +42,48 @@ Future<void> signUpBottomButtonsHelper(
 
   expect(find.byKey(KWidgetkeys.widget.signUpBottomButtons.desk), findsNothing);
 
-  await changeWindowSizeHelper(tester: tester);
+  await changeWindowSizeHelper(
+    tester: tester,
+    test: () async {
+      expect(
+        find.byKey(KWidgetkeys.widget.signUpBottomButtons.or),
+        findsWidgets,
+      );
 
-  expect(find.byKey(KWidgetkeys.widget.signUpBottomButtons.or), findsWidgets);
+      expect(
+        find.byKey(KWidgetkeys.widget.signUpBottomButtons.title),
+        findsWidgets,
+      );
 
-  expect(
-    find.byKey(KWidgetkeys.widget.signUpBottomButtons.title),
-    findsWidgets,
+      expect(
+        find.byKey(KWidgetkeys.widget.signUpBottomButtons.mob),
+        findsNothing,
+      );
+
+      expect(
+        find.byKey(KWidgetkeys.widget.signUpBottomButtons.google),
+        findsWidgets,
+      );
+
+      expect(
+        find.byKey(KWidgetkeys.widget.signUpBottomButtons.facebook),
+        findsWidgets,
+      );
+
+      expect(
+        find.byKey(KWidgetkeys.widget.signUpBottomButtons.apple),
+        findsWidgets,
+      );
+
+      expect(
+        find.byKey(KWidgetkeys.widget.signUpBottomButtons.divider),
+        findsWidgets,
+      );
+
+      expect(
+        find.byKey(KWidgetkeys.widget.signUpBottomButtons.desk),
+        findsOneWidget,
+      );
+    },
   );
-
-  expect(find.byKey(KWidgetkeys.widget.signUpBottomButtons.mob), findsNothing);
-
-  expect(
-    find.byKey(KWidgetkeys.widget.signUpBottomButtons.google),
-    findsWidgets,
-  );
-
-  expect(
-    find.byKey(KWidgetkeys.widget.signUpBottomButtons.facebook),
-    findsWidgets,
-  );
-
-  expect(
-    find.byKey(KWidgetkeys.widget.signUpBottomButtons.apple),
-    findsWidgets,
-  );
-
-  expect(
-    find.byKey(KWidgetkeys.widget.signUpBottomButtons.divider),
-    findsWidgets,
-  );
-
-  expect(
-    find.byKey(KWidgetkeys.widget.signUpBottomButtons.desk),
-    findsOneWidget,
-  );
-
-  await changeWindowSizeHelper(tester: tester, setDefaultSize: true);
 }

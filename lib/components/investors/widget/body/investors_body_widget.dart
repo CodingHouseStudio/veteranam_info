@@ -72,9 +72,11 @@ class _InvestorsBodyWidgetState extends State<InvestorsBodyWidget> {
                         ...List.generate(
                           (_.fundItems.length / 3).ceil(),
                           (index) => Padding(
-                            padding: EdgeInsets.only(
-                              top: index == 0 ? 0 : KPadding.kPaddingSize24,
-                            ),
+                            padding: index != 0
+                                ? const EdgeInsets.only(
+                                    top: KPadding.kPaddingSize24,
+                                  )
+                                : EdgeInsets.zero,
                             child: DonatesCardsWidget(
                               key: KWidgetkeys.screen.investors.donateCards,
                               fundItems: _.fundItems.sublist(
@@ -90,9 +92,11 @@ class _InvestorsBodyWidgetState extends State<InvestorsBodyWidget> {
                         ...List.generate(
                           _.fundItems.length,
                           (index) => Padding(
-                            padding: EdgeInsets.only(
-                              top: index == 0 ? 0 : KPadding.kPaddingSize24,
-                            ),
+                            padding: index != 0
+                                ? const EdgeInsets.only(
+                                    top: KPadding.kPaddingSize24,
+                                  )
+                                : EdgeInsets.zero,
                             child: DonateCardWidget(
                               key: KWidgetkeys.screen.investors.donateCard,
                               fundModel: _.fundItems.elementAt(index),

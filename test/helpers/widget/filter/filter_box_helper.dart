@@ -10,5 +10,9 @@ Future<void> filterBoxHelper(
 
   await chipHelper(tester);
 
-  await dropChipHelper(tester);
+  await dropChipHelper(
+    tester: tester,
+    dropChipKey: KWidgetkeys.widget.dropChip.widget,
+    buttonKey: KWidgetkeys.widget.dropChip.buttons,
+  );
 }

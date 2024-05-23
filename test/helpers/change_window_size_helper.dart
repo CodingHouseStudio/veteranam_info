@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter_test/flutter_test.dart';
 
 import '../text_dependency.dart';
@@ -11,17 +9,24 @@ import '../text_dependency.dart';
 /// tablet size
 Future<void> changeWindowSizeHelper({
   required WidgetTester tester,
-  bool setDefaultSize = false,
-  Size? windowSize,
+  required Future<void> Function() test,
+  bool windowsTest = false,
 }) async {
-  if (setDefaultSize) {
-    await tester.binding.setSurfaceSize(null);
-  } else {
-    await tester.binding
-        .setSurfaceSize(windowSize ?? KTestConstants.windowTabletSize);
-  }
+  await tester.binding.setSurfaceSize(KTestConstants.windowTabletSize);
 
-  await tester.pump();
+  await tester.pumpAndSettle();
+
+  await test();
+
+  await tester.binding.setSurfaceSize(null);
+
+  await tester.pumpAndSettle();
+
+  if (windowsTest) {
+    await scrollingHelper(tester: tester, offset: KTestConstants.scrollingUp);
+
+    await test();
+  }
 }
 
 /// FOLDER FILES COMMENT: Files for widgets test or helper for test
