@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kozak/shared/shared.dart';
 
 class ProfileBodyWidget extends StatelessWidget {
@@ -49,34 +48,6 @@ class ProfileBodyWidget extends StatelessWidget {
             Expanded(
               child: IntrinsicHeight(
                 child: _buildBoxWidgets(context, isDesk),
-              ),
-            ),
-          ],
-        ),
-        KSizedBox.kHeightSizedBox56,
-        Row(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(KPadding.kPaddingSize4),
-              child: ButtonWidget(
-                text: context.l10n.logOut,
-                onPressed: () => context
-                    .read<AuthenticationBloc>()
-                    .add(AuthenticationLogoutRequested()),
-                isDesk: isDesk,
-              ),
-            ),
-            KSizedBox.kWidthSizedBox56,
-            Expanded(
-              flex: -2,
-              child: Padding(
-                padding: const EdgeInsets.all(KPadding.kPaddingSize4),
-                child: ButtonWidget(
-                  text: context.l10n.deleteAccount,
-                  isDesk: isDesk,
-                  onPressed: null,
-                  // backgroundColor: AppColors.transparent,
-                ),
               ),
             ),
           ],

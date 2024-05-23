@@ -220,30 +220,24 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
   }
 
   Widget _displayProfileName() {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        KSizedBox.kWidthSizedBox24,
-        Expanded(
-          child: Row(
-            children: [
-              Expanded(
-                child: Text(
+    return Expanded(
+      child: Row(
+        children: [
+          Expanded(
+            child: Text(
+              context.read<AuthenticationBloc>().state.user?.name ??
                   KMockText.userName,
-                  style:
-                      widget.isDesk ? AppTextStyle.text40 : AppTextStyle.text24,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-              IconButton(
-                onPressed: () => setState(() => isEditing = !isEditing),
-                icon: KIcon.edit,
-              ),
-            ],
+              style: AppTextStyle.text40,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+            ),
           ),
-        ),
-      ],
+          IconButton(
+            onPressed: () => setState(() => isEditing = !isEditing),
+            icon: KIcon.edit,
+          ),
+        ],
+      ),
     );
   }
 
