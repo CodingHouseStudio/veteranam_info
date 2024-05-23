@@ -1,12 +1,12 @@
-part of 'body/work_respond_body.dart';
+part of 'body/employee_respond_body.dart';
 
-List<Widget> _workRespondContainerWidgetList({
+List<Widget> _employeeRespondContainerWidgetList({
   required BuildContext context,
   required bool isDesk,
 }) {
   return [
     Text(
-      key: KWidgetkeys.screen.workRespond.username,
+      key: KWidgetkeys.screen.employeeRespond.username,
       KMockText.userName,
       style: isDesk ? AppTextStyle.text40 : AppTextStyle.text32,
     ),
@@ -14,14 +14,14 @@ List<Widget> _workRespondContainerWidgetList({
     Padding(
       padding: const EdgeInsets.only(left: KPadding.kPaddingSize16),
       child: Text(
-        key: KWidgetkeys.screen.workRespond.emailText,
+        key: KWidgetkeys.screen.employeeRespond.emailText,
         context.l10n.email,
         style: isDesk ? AppTextStyle.text32 : AppTextStyle.text16,
       ),
     ),
     KSizedBox.kHeightSizedBox8,
     TextFieldWidget(
-      widgetKey: KWidgetkeys.screen.workRespond.emailField,
+      widgetKey: KWidgetkeys.screen.employeeRespond.emailField,
       onChanged: null,
       hintText: context.l10n.emailHint,
       isDesk: isDesk,
@@ -30,14 +30,14 @@ List<Widget> _workRespondContainerWidgetList({
     Padding(
       padding: const EdgeInsets.only(left: KPadding.kPaddingSize16),
       child: Text(
-        key: KWidgetkeys.screen.workRespond.phoneNumberText,
+        key: KWidgetkeys.screen.employeeRespond.phoneNumberText,
         context.l10n.phoneNumber,
         style: isDesk ? AppTextStyle.text32 : AppTextStyle.text16,
       ),
     ),
     KSizedBox.kHeightSizedBox8,
     TextFieldWidget(
-      widgetKey: KWidgetkeys.screen.workRespond.phoneNumberField,
+      widgetKey: KWidgetkeys.screen.employeeRespond.phoneNumberField,
       onChanged: null,
       hintText: context.l10n.phoneNumberHint,
       isDesk: isDesk,
@@ -46,7 +46,7 @@ List<Widget> _workRespondContainerWidgetList({
     Padding(
       padding: const EdgeInsets.only(left: KPadding.kPaddingSize16),
       child: Text(
-        key: KWidgetkeys.screen.workRespond.resume,
+        key: KWidgetkeys.screen.employeeRespond.resume,
         context.l10n.resume,
         style: isDesk ? AppTextStyle.text32 : AppTextStyle.text24,
       ),
@@ -66,7 +66,7 @@ List<Widget> _workRespondContainerWidgetList({
       label: Align(
         alignment: Alignment.centerLeft,
         child: Text(
-          key: KWidgetkeys.screen.workRespond.upload,
+          key: KWidgetkeys.screen.employeeRespond.upload,
           context.l10n.upload,
           style: isDesk
               ? AppTextStyle.text24.copyWith(
@@ -87,12 +87,12 @@ List<Widget> _workRespondContainerWidgetList({
             right: KPadding.kPaddingSize16,
           ),
           child: CheckPointSingleWidget(
-            key: KWidgetkeys.screen.workRespond.checkPoint,
+            key: KWidgetkeys.screen.employeeRespond.checkPoint,
             onChanged: null,
           ),
         ),
         Text(
-          key: KWidgetkeys.screen.workRespond.noResume,
+          key: KWidgetkeys.screen.employeeRespond.noResume,
           context.l10n.noResume,
           style: isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
         ),
@@ -122,7 +122,7 @@ List<Widget> _workRespondContainerWidgetList({
 
 Widget cancelButton({required BuildContext context, required bool isDesk}) =>
     ButtonWidget(
-      key: KWidgetkeys.screen.workRespond.cancel,
+      key: KWidgetkeys.screen.employeeRespond.cancel,
       text: context.l10n.cancel,
       onPressed: null,
       isDesk: isDesk,
@@ -130,7 +130,7 @@ Widget cancelButton({required BuildContext context, required bool isDesk}) =>
     );
 Widget sendButton({required BuildContext context, required bool isDesk}) =>
     ButtonWidget(
-      key: KWidgetkeys.screen.workRespond.send,
+      key: KWidgetkeys.screen.employeeRespond.send,
       text: context.l10n.send,
       onPressed: null,
       isDesk: isDesk,

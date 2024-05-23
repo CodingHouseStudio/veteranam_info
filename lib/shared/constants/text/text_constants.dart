@@ -34,6 +34,16 @@ abstract class KMockText {
     story: cardData,
     userId: '2',
   );
+  static const workModel = WorkModel(
+    id: '1',
+    title: title,
+    price: workPrice,
+    city: workCity,
+    employerContact: workCity,
+    companyName: workEmployer,
+    description: workDescription,
+  );
+
   static const workTitle = 'Комплектувальник товару в магазин';
   static const workPrice = '12000 грн +%';
   static const workCity = 'м.Одеса';

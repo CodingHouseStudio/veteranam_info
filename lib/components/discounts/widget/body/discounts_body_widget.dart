@@ -36,16 +36,23 @@ class DiscountBodyWidget extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        DiscountsCardWidget(
-                          discount: KMockText.discount,
-                          city: KMockText.cityDiscount,
-                          service: KMockText.serviceDiscount,
-                          description: KMockText.descriptionDiscount,
-                          date: KMockText.dateDiscount,
-                          instruction: KMockText.instructionDiscount,
-                          preInstructionDiscount:
-                              KMockText.preInstructionDiscount,
-                          isDesk: isDesk,
+                        Padding(
+                          padding: (isDesk
+                              ? const EdgeInsets.symmetric(
+                                  horizontal: KPadding.kPaddingSize220,
+                                )
+                              : EdgeInsets.zero),
+                          child: DiscountsCardWidget(
+                            discount: KMockText.discount,
+                            city: KMockText.cityDiscount,
+                            service: KMockText.serviceDiscount,
+                            description: KMockText.descriptionDiscount,
+                            date: KMockText.dateDiscount,
+                            instruction: KMockText.instructionDiscount,
+                            preInstructionDiscount:
+                                KMockText.preInstructionDiscount,
+                            isDesk: isDesk,
+                          ),
                         ),
                       ],
                     ),

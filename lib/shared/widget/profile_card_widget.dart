@@ -42,21 +42,21 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
                           height: 60,
                           decoration: const BoxDecoration(
                             borderRadius: KBorderRadius.kBorderRadiusL,
-                            // color: AppColors.widgetBackground,
                           ),
                           child: const Center(
                             child: KIcon.person,
                           ),
                         ),
                         KSizedBox.kWidthSizedBox16,
-                        Expanded(
-                          child: isEditing
-                              ? Text(
-                                  context.l10n.editData,
-                                  style: AppTextStyle.text40,
-                                )
-                              : _displayProfileName(),
-                        ),
+                        if (isEditing)
+                          Text(
+                            context.l10n.editData,
+                            style: widget.isDesk
+                                ? AppTextStyle.text40
+                                : AppTextStyle.text24,
+                          )
+                        else
+                          _displayProfileName(),
                       ],
                     ),
                     if (isEditing) ...[
@@ -129,7 +129,6 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
                     isDesk: widget.isDesk,
                   ),
                   isDesk: true,
-                  // backgroundColor: AppColors.transparent,
                 ),
               ),
             ],
@@ -138,7 +137,7 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
           ButtonWidget(
             key: KWidgetkeys.widget.profileCardWidget.logOutButton,
             text: context.l10n.logOut,
-            textStyle: AppTextStyle.text32,
+            textStyle: AppTextStyle.text24,
             onPressed: () => DialogsWidget.showLogoutConfirmationDialog(
               context: context,
               isDesk: widget.isDesk,
@@ -149,13 +148,12 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
           ButtonWidget(
             key: KWidgetkeys.widget.profileCardWidget.deleteButton,
             text: context.l10n.deleteAccount,
-            textStyle: AppTextStyle.text32,
+            textStyle: AppTextStyle.text24,
             onPressed: () => DialogsWidget.showDeleteConfirmationDialog(
               context: context,
               isDesk: widget.isDesk,
             ),
             isDesk: false,
-            // backgroundColor: AppColors.transparent,
           ),
         ],
         if (widget.isDesk) KSizedBox.kHeightSizedBox56,
