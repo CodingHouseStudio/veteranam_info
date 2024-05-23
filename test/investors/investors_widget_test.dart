@@ -23,7 +23,7 @@ void main() {
       ExtendedDateTime.id = KTestText.feedbackModel.id;
       mockInvestorsRepository = MockIInvestorsRepository();
       when(mockInvestorsRepository.getFunds()).thenAnswer(
-        (invocation) async => const Right(KTestText.fundItems),
+        (invocation) async => Right(KTestText.fundItems),
       );
 
       mockFeedbackRepository = MockIFeedbackRepository();

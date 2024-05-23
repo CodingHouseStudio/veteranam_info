@@ -21,6 +21,7 @@ class DiscountFilters extends StatelessWidget {
           onResetValue: () => context.read<DiscountWatcherBloc>().add(
                 const DiscountWatcherEvent.filterReset(),
               ),
+          isDesk: isDesk,
         ),
         KSizedBox.kWidthSizedBox24,
         Expanded(
