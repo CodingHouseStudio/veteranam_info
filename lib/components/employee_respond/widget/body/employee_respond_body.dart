@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:kozak/shared/shared.dart';
 
-part '../employee_respond_container_widget_list.dart';
+part '../employee_respond_container_widget.dart';
 
-class WorkRespondBodyWidget extends StatelessWidget {
-  const WorkRespondBodyWidget({super.key});
+class EmployeeRespondBodyWidget extends StatelessWidget {
+  const EmployeeRespondBodyWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
