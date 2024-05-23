@@ -60,24 +60,25 @@ Future<void> footerHelper(
     findsOneWidget,
   );
 
-  await changeWindowSizeHelper(tester: tester);
+  await changeWindowSizeHelper(
+    tester: tester,
+    test: () async {
+      expect(find.byKey(KWidgetkeys.widget.footer.logo), findsNothing);
 
-  expect(find.byKey(KWidgetkeys.widget.footer.logo), findsNothing);
+      for (final buttonKey in KWidgetkeys.widget.footer.buttonsKey.reversed) {
+        expect(
+          find.byKey(buttonKey),
+          findsOneWidget,
+        );
+      }
 
-  for (final buttonKey in KWidgetkeys.widget.footer.buttonsKey.reversed) {
-    expect(
-      find.byKey(buttonKey),
-      findsOneWidget,
-    );
-  }
-
-  // expect(
-  //   find.descendant(
-  //     of: find.byKey(KWidgetkeys.widget.footer.widget),
-  //     matching: find.text('${KTestText.footer}$email'),
-  //   ),
-  //   findsNothing,
-  // );
-
-  await changeWindowSizeHelper(tester: tester, setDefaultSize: true);
+      // expect(
+      //   find.descendant(
+      //     of: find.byKey(KWidgetkeys.widget.footer.widget),
+      //     matching: find.text('${KTestText.footer}$email'),
+      //   ),
+      //   findsNothing,
+      // );
+    },
+  );
 }

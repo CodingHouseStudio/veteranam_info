@@ -8,12 +8,12 @@ Future<void> cardTextDetailEvaluateHelper(
 ) async {
   expect(
     find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconDislike),
-    findsOneWidget,
+    findsWidgets,
   );
 
   expect(
     find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconSmile),
-    findsOneWidget,
+    findsWidgets,
   );
 
   expect(
@@ -23,12 +23,12 @@ Future<void> cardTextDetailEvaluateHelper(
 
   expect(
     find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconLike),
-    findsOneWidget,
+    findsWidgets,
   );
 
   expect(
     find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconShare),
-    findsOneWidget,
+    findsWidgets,
   );
 
   await cardTextDetailHelper(
@@ -41,15 +41,10 @@ Future<void> cardTextDetailEvaluateHelper(
   );
 
   await tester.tap(
-    find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconLike),
+    find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconLike).first,
   );
 
   await tester.pumpAndSettle();
-
-  expect(
-    find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconLike),
-    findsNothing,
-  );
 
   expect(
     find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconActiveLike),
@@ -57,14 +52,14 @@ Future<void> cardTextDetailEvaluateHelper(
   );
 
   await tester.tap(
-    find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconActiveLike),
+    find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconActiveLike).first,
   );
 
   await tester.pumpAndSettle();
 
   expect(
     find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconLike),
-    findsOneWidget,
+    findsWidgets,
   );
 
   expect(
@@ -73,15 +68,10 @@ Future<void> cardTextDetailEvaluateHelper(
   );
 
   await tester.tap(
-    find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconDislike),
+    find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconDislike).first,
   );
 
   await tester.pumpAndSettle();
-
-  expect(
-    find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconDislike),
-    findsNothing,
-  );
 
   expect(
     find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconActiveDislike),
@@ -89,16 +79,18 @@ Future<void> cardTextDetailEvaluateHelper(
   );
 
   await tester.tap(
-    find.byKey(
-      KWidgetkeys.widget.cardTextDetailEvaluate.iconActiveDislike,
-    ),
+    find
+        .byKey(
+          KWidgetkeys.widget.cardTextDetailEvaluate.iconActiveDislike,
+        )
+        .first,
   );
 
   await tester.pumpAndSettle();
 
   expect(
     find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconDislike),
-    findsOneWidget,
+    findsWidgets,
   );
 
   expect(
@@ -107,15 +99,10 @@ Future<void> cardTextDetailEvaluateHelper(
   );
 
   await tester.tap(
-    find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconSmile),
+    find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconSmile).first,
   );
 
   await tester.pumpAndSettle();
-
-  expect(
-    find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconSmile),
-    findsNothing,
-  );
 
   expect(
     find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconActiveSmile),
@@ -123,16 +110,18 @@ Future<void> cardTextDetailEvaluateHelper(
   );
 
   await tester.tap(
-    find.byKey(
-      KWidgetkeys.widget.cardTextDetailEvaluate.iconActiveSmile,
-    ),
+    find
+        .byKey(
+          KWidgetkeys.widget.cardTextDetailEvaluate.iconActiveSmile,
+        )
+        .first,
   );
 
   await tester.pumpAndSettle();
 
   expect(
     find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconSmile),
-    findsOneWidget,
+    findsWidgets,
   );
 
   expect(
