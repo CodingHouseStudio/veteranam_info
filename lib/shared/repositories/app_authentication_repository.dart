@@ -35,7 +35,8 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   @visibleForTesting
   bool isWeb = kIsWeb;
   @visibleForTesting
-  firebase_auth.GoogleAuthProvider? googleAuthProvider;
+  firebase_auth.GoogleAuthProvider googleAuthProvider =
+      firebase_auth.GoogleAuthProvider();
 
   /// User cache key.
   /// Should only be used for testing purposes.
@@ -107,14 +108,12 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   Future<Either<SomeFailure, bool>> signUpWithGoogle() async {
     try {
       final credential = await _getGoogleAuthCredential();
-      // if (currentUser.isEmpty) {
-      await _firebaseAuth.signInWithCredential(credential);
-      // } else {
-      //   await _firebaseAuth.currentUser?.linkWithCredential(
-      //     credential,
-      //   );
-      // }
-      return const Right(true);
+      if (credential != null) {
+        await _firebaseAuth.signInWithCredential(credential);
+
+        return const Right(true);
+      }
+      return const Right(false);
     } on firebase_auth.FirebaseAuthException catch (e) {
       return Left(SignUpWithGoogleFailure.fromCode(e).status);
     } catch (_) {
@@ -125,7 +124,7 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
     }
   }
 
-  Future<firebase_auth.AuthCredential> _getGoogleAuthCredential() async {
+  Future<firebase_auth.AuthCredential?> _getGoogleAuthCredential() async {
     if (isWeb) {
       return _getGoogleAuthCredentialWeb();
     } else {
@@ -133,11 +132,11 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
     }
   }
 
-  Future<firebase_auth.AuthCredential> _getGoogleAuthCredentialWeb() async {
+  Future<firebase_auth.AuthCredential?> _getGoogleAuthCredentialWeb() async {
     final userCredential = await _firebaseAuth.signInWithPopup(
-      googleAuthProvider ?? firebase_auth.GoogleAuthProvider(),
+      googleAuthProvider,
     );
-    return userCredential.credential!;
+    return userCredential.credential;
   }
 
   Future<firebase_auth.AuthCredential> _getGoogleAuthCredentialMobile() async {
@@ -185,30 +184,35 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   }) async {
     return _handleAuthOperation(
       () async {
-        // if (currentUser.isEmpty) {
-        await _firebaseAuth.createUserWithEmailAndPassword(
-          email: email,
-          password: password,
-        );
-        // } else {
-        //   await _firebaseAuth.currentUser?.linkWithCredential(
-        //     firebase_auth.EmailAuthProvider.credential(
-        //       email: email,
-        //       password: password,
-        //     ),
-        //   );
-        //   await _firebaseAuth.signInWithEmailAndPassword(
-        //     email: email,
-        //     password: password,
-        //   );
-        // }
+        if (currentUser.isEmpty) {
+          await _firebaseAuth.createUserWithEmailAndPassword(
+            email: email,
+            password: password,
+          );
+        } else {
+          await _firebaseAuth.currentUser?.linkWithCredential(
+            firebase_auth.EmailAuthProvider.credential(
+              email: email,
+              password: password,
+            ),
+          );
+          await _firebaseAuth.signInWithEmailAndPassword(
+            email: email,
+            password: password,
+          );
+        }
       },
       (e) => SignUpWithEmailAndPasswordFailure.fromCode(e).status,
     );
   }
 
   @override
-  Future<bool> isLoggedIn() async => currentUser != User.empty;
+  bool isLoggedIn() => currentUser != User.empty;
+
+  @override
+  bool isAnonymously() =>
+      _firebaseAuth.currentUser != null &&
+      _firebaseAuth.currentUser!.isAnonymous;
 
   /// Signs out the current user which will emit
   /// [User.empty] from the [user] Stream.
@@ -266,7 +270,7 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
 
   void _updateAuthStatusBasedOnCache() {
     debugPrint('Updating auth status based on cache');
-    final user = currentUser.isAnonymously;
+    final user = currentUser.isEmpty;
     debugPrint('Current user inside '
         '_updateAuthStatusBasedOnCache : $currentUser');
     debugPrint('user is $user');

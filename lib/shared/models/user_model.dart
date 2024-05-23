@@ -21,13 +21,6 @@ class User with _$User {
   /// Empty user which represents an unauthenticated user.
   static const empty = User(id: '');
 
-  /// Convenience getter to determine whether the current user is anonymously.
-  bool get isAnonymously => this != User.empty && email == null;
-
-  /// Convenience getter to determine whether the current user is not
-  /// anonymously.
-  bool get isNotAnonymously => this != User.empty && email != null;
-
   /// Convenience getter to determine whether the current user is empty.
   bool get isEmpty => this == User.empty;
 
