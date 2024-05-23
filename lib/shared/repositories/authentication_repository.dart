@@ -5,12 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kozak/shared/shared.dart';
 
-enum AuthenticationStatus {
-  unknown,
-  authenticatedAnonymously,
-  authenticated,
-  unauthenticated
-}
+enum AuthenticationStatus { unknown, anonymous, authenticated, unauthenticated }
 
 @Singleton()
 class AuthenticationRepository {
@@ -52,14 +47,14 @@ class AuthenticationRepository {
             _userSettingController.add(
               currentUserSetting,
             );
-            if (iAppAuthenticationRepository.currentUser.isNotAnonymously) {
+            if (isAnonymously()) {
               _authenticationStatuscontroller.add(
-                AuthenticationStatus.authenticated,
+                AuthenticationStatus.anonymous,
               );
               return;
             }
             _authenticationStatuscontroller.add(
-              AuthenticationStatus.authenticatedAnonymously,
+              AuthenticationStatus.authenticated,
             );
           },
         );
@@ -204,6 +199,11 @@ class AuthenticationRepository {
     );
     return result;
   }
+
+  bool isAnonymously() => iAppAuthenticationRepository.isAnonymously();
+
+  bool isAnonymouslyOrEmty() =>
+      iAppAuthenticationRepository.isAnonymously() || currentUser.isEmpty;
 
   void dispose() {
     _authenticationStatuscontroller.close();

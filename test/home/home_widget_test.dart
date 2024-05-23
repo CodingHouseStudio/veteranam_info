@@ -37,6 +37,9 @@ void main() {
       when(mockAuthenticationRepository.currentUserSetting).thenAnswer(
         (realInvocation) => UserSetting.empty,
       );
+      when(mockAuthenticationRepository.isAnonymouslyOrEmty()).thenAnswer(
+        (realInvocation) => true,
+      );
       mockHomeRepository = MockIHomeRepository();
       when(mockHomeRepository.getQuestions()).thenAnswer(
         (invocation) async => Right(KTestText.questionModelItems),

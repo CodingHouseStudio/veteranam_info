@@ -22,7 +22,8 @@ abstract class IAppAuthenticationRepository {
     required String password,
   });
 
-  Future<bool> isLoggedIn();
+  bool isLoggedIn();
+  bool isAnonymously();
 
   Future<Either<SomeFailure, bool>> logOut();
 

@@ -16,13 +16,13 @@ class AuthenticationBloc
     required AuthenticationRepository authenticationRepository,
   })  : _authenticationRepository = authenticationRepository,
         super(
-          authenticationRepository.currentUser.isNotAnonymously
-              ? AuthenticationState.authenticated(
+          authenticationRepository.isAnonymouslyOrEmty()
+              ? const AuthenticationState.unknown()
+              : AuthenticationState.authenticated(
                   currentUser: authenticationRepository.currentUser,
                   currentUserSetting:
                       authenticationRepository.currentUserSetting,
-                )
-              : const AuthenticationState.unknown(),
+                ),
         ) {
     on<AuthenticationStatusChanged>(_onAuthenticationStatusChanged);
     on<AuthenticationLogoutRequested>(_onAuthenticationLogoutRequested);
@@ -48,17 +48,14 @@ class AuthenticationBloc
     return super.close();
   }
 
-  Future<void> _onAuthenticationStatusChanged(
+  void _onAuthenticationStatusChanged(
     AuthenticationStatusChanged event,
     Emitter<AuthenticationState> emit,
-  ) async {
+  ) {
     log('${KAppText.authChange} ${event.status}');
+    log('user:_____________ ${_authenticationRepository.currentUser}');
     switch (event.status) {
       case AuthenticationStatus.unauthenticated:
-        // if (_authenticationRepository.currentUser.id.isEmpty ||
-        //     state.status == AuthenticationStatus.authenticated) {
-        //   await _authenticationRepository.logInAnonymously();
-        // }
         return emit(const AuthenticationState.unauthenticated());
       case AuthenticationStatus.authenticated:
         return emit(
@@ -67,7 +64,7 @@ class AuthenticationBloc
             currentUserSetting: _authenticationRepository.currentUserSetting,
           ),
         );
-      case AuthenticationStatus.authenticatedAnonymously:
+      case AuthenticationStatus.anonymous:
         return emit(
           AuthenticationState.authenticatedAnonymously(
             anonymouslyUser: _authenticationRepository.currentUser,
@@ -150,7 +147,8 @@ class AuthenticationBloc
     AppUserRoleChanged event,
     Emitter<AuthenticationState> emit,
   ) async {
-    if (state.user != null && state.user!.isNotAnonymously) {
+    if (state.user != null &&
+        !_authenticationRepository.isAnonymouslyOrEmty()) {
       final userSetting = state.userSetting.copyWith(
         userRole: event.userRole,
       );

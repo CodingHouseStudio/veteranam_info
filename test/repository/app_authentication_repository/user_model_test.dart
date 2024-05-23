@@ -28,28 +28,6 @@ void main() {
         isFalse,
       );
     });
-    test('check is Anonymously ', () {
-      expect(
-        KTestText.user.isAnonymously,
-        isFalse,
-      );
-
-      expect(
-        User.empty.copyWith(id: KTestText.user.id).isAnonymously,
-        isTrue,
-      );
-    });
-    test('check is not Anonymously ', () {
-      expect(
-        KTestText.user.isNotAnonymously,
-        isTrue,
-      );
-
-      expect(
-        User.empty.isNotAnonymously,
-        isFalse,
-      );
-    });
     group('${KGroupText.modelJson} ', () {
       test('${KGroupText.shouldBe} ', () {
         final json = {

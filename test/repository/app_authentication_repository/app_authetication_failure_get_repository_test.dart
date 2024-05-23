@@ -27,6 +27,11 @@ void main() {
       mockFirestoreService = MockFirestoreService();
       mockGoogleAuthProvider = MockGoogleAuthProvider();
       when(
+        mockFirebaseAuth.currentUser,
+      ).thenAnswer(
+        (_) => null,
+      );
+      when(
         mockFirebaseAuth.authStateChanges(),
       ).thenAnswer(
         (_) => Stream.value(null),
@@ -111,7 +116,7 @@ void main() {
     });
     test('Is logged in', () async {
       expect(
-        await appAuthenticationRepository.isLoggedIn(),
+        appAuthenticationRepository.isLoggedIn(),
         isFalse,
       );
     });
@@ -132,6 +137,12 @@ void main() {
         result,
         isA<Right<SomeFailure, bool>>()
             .having((e) => e.value, 'value', isFalse),
+      );
+    });
+    test('Is Anonymously', () async {
+      expect(
+        appAuthenticationRepository.isAnonymously(),
+        false,
       );
     });
   });

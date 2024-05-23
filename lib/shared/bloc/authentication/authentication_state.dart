@@ -25,7 +25,7 @@ class AuthenticationState extends Equatable {
     required User anonymouslyUser,
     required UserSetting anonymouslyUserSetting,
   }) : this._(
-          status: AuthenticationStatus.unauthenticated,
+          status: AuthenticationStatus.anonymous,
           user: anonymouslyUser,
           userSetting: anonymouslyUserSetting,
         );
