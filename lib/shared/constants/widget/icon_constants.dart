@@ -25,9 +25,9 @@ class _KIcon extends Icon {
 }
 
 abstract class KIcon {
-  static const Image linkedIn =
-      Image(image: AssetImage('assets/icons/instagram.png'));
   static const Image instagram =
+      Image(image: AssetImage('assets/icons/instagram.png'));
+  static const Image linkedIn =
       Image(image: AssetImage('assets/icons/linkedin.png'));
   static const Image facebook = Image(
     image: AssetImage('assets/icons/social_icons_f.png'),
