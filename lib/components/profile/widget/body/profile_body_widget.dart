@@ -88,12 +88,21 @@ class ProfileBodyWidget extends StatelessWidget {
           ),
           KSizedBox.kHeightSizedBox30,
           BoxWidget(
-            text: context.l10n.myFeedback,
+            text: context.l10n.myStory,
             isDesk: isDesk,
             textIconPaddingWidget: KSizedBox.kHeightSizedBox56,
             onTap: () => context.goNamedWithScroll(KRoute.profileMyStory.name),
           ),
-      ],
+          KSizedBox.kHeightSizedBox30,
+          if (isDesk)
+            BoxWidget(
+              text: context.l10n.myFeedback,
+              isDesk: isDesk,
+              textIconPaddingWidget: KSizedBox.kHeightSizedBox56,
+              onTap: null,
+            ),
+        ],
+      ),
     );
   }
 }
