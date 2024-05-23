@@ -223,17 +223,18 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
         _googleSignIn.signOut(),
         _secureStorageRepository.deleteAll(),
       ]);
-      return const Right(true);
+      return logInAnonymously();
     } on firebase_auth.FirebaseAuthException catch (e) {
       debugPrint('Firebase Auth Error: ${e.message}');
       return Left(const LogOutFailure().status);
     } catch (e) {
       debugPrint('Logout error: $e');
       return const Left(SomeFailure.serverError());
-    } finally {
-      _updateAuthStatusBasedOnCache();
-      _updateUserSettingBasedOnCache();
     }
+    // finally {
+    //   _updateAuthStatusBasedOnCache();
+    //   _updateUserSettingBasedOnCache();
+    // }
   }
 
   @override
@@ -301,17 +302,18 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
       await _firestoreService.deleteUserSetting(currentUser.id);
       await _firebaseAuth.currentUser?.delete();
       _cache.clear(); // Clear the cache after user deletion
-      return const Right(true);
+      return logInAnonymously();
     } on firebase_auth.FirebaseAuthException catch (e) {
       debugPrint('Firebase Auth Error: ${e.message}');
       return const Left(SomeFailure.serverError());
     } catch (e) {
       debugPrint('General Auth Error: $e');
       return const Left(SomeFailure.serverError());
-    } finally {
-      _updateAuthStatusBasedOnCache();
-      _updateUserSettingBasedOnCache();
     }
+    // finally {
+    //   _updateAuthStatusBasedOnCache();
+    //   _updateUserSettingBasedOnCache();
+    // }
   }
 
   @override
@@ -320,7 +322,8 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   ) async {
     try {
       if (currentUser.isNotEmpty) {
-        if (currentUserSetting.id.isEmpty) {
+        if (currentUserSetting.id.isEmpty ||
+            currentUserSetting.id != currentUser.id) {
           await _firestoreService.setUserSetting(
             userSetting: userSetting,
             userId: currentUser.id,

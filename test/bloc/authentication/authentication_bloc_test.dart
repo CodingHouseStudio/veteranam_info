@@ -28,11 +28,6 @@ void main() {
         (realInvocation) async => const Right(true),
       );
       when(
-        mockAuthenticationRepository.logInAnonymously(),
-      ).thenAnswer(
-        (realInvocation) async => const Right(true),
-      );
-      when(
         mockAuthenticationRepository.logOut(),
       ).thenAnswer(
         (realInvocation) async => const Right(true),
