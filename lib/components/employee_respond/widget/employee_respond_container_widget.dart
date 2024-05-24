@@ -125,7 +125,7 @@ Widget cancelButton({required BuildContext context, required bool isDesk}) =>
       text: context.l10n.cancel,
       onPressed: null,
       isDesk: isDesk,
-      backgroundColor: context.color.secondary,
+      backgroundColor: context.color.surface,
     );
 Widget sendButton({required BuildContext context, required bool isDesk}) =>
     ButtonWidget(
