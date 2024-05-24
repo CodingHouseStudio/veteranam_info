@@ -67,6 +67,11 @@ void main() {
         (_) async {},
       );
       when(
+        mockFirebaseAuth.signInAnonymously(),
+      ).thenAnswer(
+        (_) async => mockUserCredential,
+      );
+      when(
         mockSecureStorageRepository.readOne(
           keyItem: KAppText.usernameToken,
         ),
@@ -165,6 +170,11 @@ void main() {
         (_) async {},
       );
       when(
+        mockUser.isAnonymous,
+      ).thenAnswer(
+        (_) => true,
+      );
+      when(
         mockFirestoreService.deleteUserSetting(KTestText.user.id),
       ).thenAnswer(
         (_) async {},
@@ -207,9 +217,9 @@ void main() {
         isA<Right<SomeFailure, bool>>().having((e) => e.value, 'value', isTrue),
       );
     });
-    test('Is logged in', () async {
+    test('Is logged in', () {
       expect(
-        await appAuthenticationRepository.isLoggedIn(),
+        appAuthenticationRepository.isLoggedIn(),
         isTrue,
       );
     });
@@ -318,6 +328,22 @@ void main() {
       expect(
         result,
         isA<Right<SomeFailure, bool>>().having((e) => e.value, 'value', isTrue),
+      );
+    });
+    test('Log In Anonymously', () async {
+      final result = await appAuthenticationRepository.logInAnonymously();
+      verify(
+        mockFirebaseAuth.signInAnonymously(),
+      ).called(1);
+      expect(
+        result,
+        isA<Right<SomeFailure, bool>>().having((e) => e.value, 'value', isTrue),
+      );
+    });
+    test('Is Anonymously', () async {
+      expect(
+        appAuthenticationRepository.isAnonymously(),
+        true,
       );
     });
   });
