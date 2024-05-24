@@ -58,19 +58,16 @@ class ProfileBodyWidget extends StatelessWidget {
   }
 
   Widget _buildMobileLayout(BuildContext context, bool isDesk) {
-    return Padding(
-      padding: const EdgeInsets.all(KPadding.kPaddingSize4),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _buildBoxWidgets(context, isDesk),
-          ProfileCardWidget(
-            key: KWidgetkeys.widget.profileCard.profileCard,
-            isDesk: isDesk,
-          ),
-          KSizedBox.kHeightSizedBox24,
-        ],
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _buildBoxWidgets(context, isDesk),
+        ProfileCardWidget(
+          key: KWidgetkeys.widget.profileCard.profileCard,
+          isDesk: isDesk,
+        ),
+        KSizedBox.kHeightSizedBox24,
+      ],
     );
   }
 

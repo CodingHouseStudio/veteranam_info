@@ -57,7 +57,11 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
                                 : AppTextStyle.text24,
                           )
                         else
-                          _displayProfileName(),
+                          Expanded(
+                            child: Row(
+                              children: _displayProfileName(),
+                            ),
+                          ),
                       ],
                     ),
                     ...[
@@ -200,26 +204,22 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
     );
   }
 
-  Widget _displayProfileName() {
-    return Expanded(
-      child: Row(
-        children: [
-          Expanded(
-            child: Text(
-              context.read<AuthenticationBloc>().state.user?.name ??
-                  KMockText.userName,
-              style: widget.isDesk ? AppTextStyle.text40 : AppTextStyle.text24,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-            ),
-          ),
-          IconButton(
-            onPressed: () => setState(() => isEditing = !isEditing),
-            icon: KIcon.edit,
-          ),
-        ],
+  List<Widget> _displayProfileName() {
+    return [
+      Expanded(
+        child: Text(
+          context.read<AuthenticationBloc>().state.user?.name ??
+              KMockText.userName,
+          style: widget.isDesk ? AppTextStyle.text40 : AppTextStyle.text24,
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+        ),
       ),
-    );
+      IconButton(
+        onPressed: () => setState(() => isEditing = !isEditing),
+        icon: KIcon.edit,
+      ),
+    ];
   }
 
   Widget _buildProfileInfo() {
