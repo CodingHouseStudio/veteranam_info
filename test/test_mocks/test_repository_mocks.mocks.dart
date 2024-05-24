@@ -4,8 +4,8 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i8;
-import 'dart:convert' as _i16;
-import 'dart:io' as _i15;
+import 'dart:convert' as _i17;
+import 'dart:io' as _i16;
 import 'dart:typed_data' as _i14;
 
 import 'package:cloud_firestore/cloud_firestore.dart' as _i7;
@@ -15,16 +15,13 @@ import 'package:firebase_core/firebase_core.dart' as _i6;
 import 'package:firebase_storage/firebase_storage.dart' as _i10;
 import 'package:firebase_storage_platform_interface/firebase_storage_platform_interface.dart'
     as _i12;
-
-import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i4;
 import 'package:flutter/foundation.dart' as _i15;
-
 import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i5;
 import 'package:google_sign_in/google_sign_in.dart' as _i9;
 import 'package:image_picker/image_picker.dart' as _i11;
 import 'package:kozak/shared/shared.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i10;
+import 'package:mockito/src/dummies.dart' as _i13;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -764,27 +761,6 @@ class MockFirestoreService extends _i1.Mock implements _i3.FirestoreService {
       ) as _i8.Future<void>);
 
   @override
-  _i8.Stream<List<_i3.DiscountModel>> getDiscounts() => (super.noSuchMethod(
-        Invocation.method(
-          #getDiscounts,
-          [],
-        ),
-        returnValue: _i8.Stream<List<_i3.DiscountModel>>.empty(),
-        returnValueForMissingStub: _i8.Stream<List<_i3.DiscountModel>>.empty(),
-      ) as _i8.Stream<List<_i3.DiscountModel>>);
-
-  @override
-  _i8.Future<void> addDiscount(_i3.DiscountModel? discount) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #addDiscount,
-          [discount],
-        ),
-        returnValue: _i8.Future<void>.value(),
-        returnValueForMissingStub: _i8.Future<void>.value(),
-      ) as _i8.Future<void>);
-
-  @override
   _i8.Stream<List<_i3.WorkModel>> getWorks() => (super.noSuchMethod(
         Invocation.method(
           #getWorks,
@@ -819,6 +795,47 @@ class MockFirestoreService extends _i1.Mock implements _i3.FirestoreService {
         Invocation.method(
           #addStory,
           [information],
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Stream<List<_i3.DiscountModel>> getDiscounts() => (super.noSuchMethod(
+        Invocation.method(
+          #getDiscounts,
+          [],
+        ),
+        returnValue: _i8.Stream<List<_i3.DiscountModel>>.empty(),
+        returnValueForMissingStub: _i8.Stream<List<_i3.DiscountModel>>.empty(),
+      ) as _i8.Stream<List<_i3.DiscountModel>>);
+
+  @override
+  _i8.Future<void> addDiscount(_i3.DiscountModel? discount) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #addDiscount,
+          [discount],
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Stream<List<_i3.TagModel>> getTags() => (super.noSuchMethod(
+        Invocation.method(
+          #getTags,
+          [],
+        ),
+        returnValue: _i8.Stream<List<_i3.TagModel>>.empty(),
+        returnValueForMissingStub: _i8.Stream<List<_i3.TagModel>>.empty(),
+      ) as _i8.Stream<List<_i3.TagModel>>);
+
+  @override
+  _i8.Future<void> addTags(_i3.TagModel? tags) => (super.noSuchMethod(
+        Invocation.method(
+          #addTags,
+          [tags],
         ),
         returnValue: _i8.Future<void>.value(),
         returnValueForMissingStub: _i8.Future<void>.value(),
@@ -3265,6 +3282,60 @@ class MockFlutterSecureStorage extends _i1.Mock
       ) as _i5.MacOsOptions);
 
   @override
+  void registerListener({
+    required String? key,
+    required _i15.ValueChanged<String?>? listener,
+  }) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #registerListener,
+          [],
+          {
+            #key: key,
+            #listener: listener,
+          },
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void unregisterListener({
+    required String? key,
+    required _i15.ValueChanged<String?>? listener,
+  }) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #unregisterListener,
+          [],
+          {
+            #key: key,
+            #listener: listener,
+          },
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void unregisterAllListenersForKey({required String? key}) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #unregisterAllListenersForKey,
+          [],
+          {#key: key},
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void unregisterAllListeners() => super.noSuchMethod(
+        Invocation.method(
+          #unregisterAllListeners,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
   _i8.Future<void> write({
     required String? key,
     required String? value,
@@ -3430,6 +3501,16 @@ class MockFlutterSecureStorage extends _i1.Mock
         returnValue: _i8.Future<void>.value(),
         returnValueForMissingStub: _i8.Future<void>.value(),
       ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<bool?> isCupertinoProtectedDataAvailable() => (super.noSuchMethod(
+        Invocation.method(
+          #isCupertinoProtectedDataAvailable,
+          [],
+        ),
+        returnValue: _i8.Future<bool?>.value(),
+        returnValueForMissingStub: _i8.Future<bool?>.value(),
+      ) as _i8.Future<bool?>);
 }
 
 /// A class which mocks [CacheClient].
@@ -5224,31 +5305,6 @@ class MockSnapshotMetadata extends _i1.Mock implements _i7.SnapshotMetadata {
       ) as bool);
 }
 
-/// A class which mocks [IDiscountRepository].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockIDiscountRepository extends _i1.Mock
-    implements _i3.IDiscountRepository {
-  @override
-  _i8.Stream<List<_i3.DiscountModel>> getDiscountItems() => (super.noSuchMethod(
-        Invocation.method(
-          #getDiscountItems,
-          [],
-        ),
-        returnValue: _i8.Stream<List<_i3.DiscountModel>>.empty(),
-        returnValueForMissingStub: _i8.Stream<List<_i3.DiscountModel>>.empty(),
-      ) as _i8.Stream<List<_i3.DiscountModel>>);
-
-  @override
-  void addMockDiscountItems() => super.noSuchMethod(
-        Invocation.method(
-          #addMockDiscountItems,
-          [],
-        ),
-        returnValueForMissingStub: null,
-      );
-}
-
 /// A class which mocks [IStoryRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
@@ -5985,7 +6041,7 @@ class MockReference extends _i1.Mock implements _i10.Reference {
 
   @override
   _i10.UploadTask putFile(
-    _i15.File? file, [
+    _i16.File? file, [
     _i12.SettableMetadata? metadata,
   ]) =>
       (super.noSuchMethod(
@@ -6083,7 +6139,7 @@ class MockReference extends _i1.Mock implements _i10.Reference {
       ) as _i8.Future<_i12.FullMetadata>);
 
   @override
-  _i10.DownloadTask writeToFile(_i15.File? file) => (super.noSuchMethod(
+  _i10.DownloadTask writeToFile(_i16.File? file) => (super.noSuchMethod(
         Invocation.method(
           #writeToFile,
           [file],
@@ -6423,7 +6479,7 @@ class MockXFile extends _i1.Mock implements _i11.XFile {
 
   @override
   _i8.Future<String> readAsString(
-          {_i16.Encoding? encoding = const _i16.Utf8Codec()}) =>
+          {_i17.Encoding? encoding = const _i17.Utf8Codec()}) =>
       (super.noSuchMethod(
         Invocation.method(
           #readAsString,
@@ -6498,6 +6554,31 @@ class MockXFile extends _i1.Mock implements _i11.XFile {
           ),
         )),
       ) as _i8.Future<DateTime>);
+}
+
+/// A class which mocks [IDiscountRepository].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockIDiscountRepository extends _i1.Mock
+    implements _i3.IDiscountRepository {
+  @override
+  _i8.Stream<List<_i3.DiscountModel>> getDiscountItems() => (super.noSuchMethod(
+        Invocation.method(
+          #getDiscountItems,
+          [],
+        ),
+        returnValue: _i8.Stream<List<_i3.DiscountModel>>.empty(),
+        returnValueForMissingStub: _i8.Stream<List<_i3.DiscountModel>>.empty(),
+      ) as _i8.Stream<List<_i3.DiscountModel>>);
+
+  @override
+  void addMockDiscountItems() => super.noSuchMethod(
+        Invocation.method(
+          #addMockDiscountItems,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
 }
 
 /// A class which mocks [Query].

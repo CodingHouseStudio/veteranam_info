@@ -1,12 +1,13 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:kozak/components/components.dart';
-import 'package:kozak/components/story_add/widget/story_add_image_widget.dart';
 import 'package:kozak/shared/shared.dart';
 
 part '../form_widget_list.dart';
 part '../buttons_widget_list.dart';
+part '../field_widget.dart';
 
 class StoryAddBody extends StatelessWidget {
   const StoryAddBody({super.key});
