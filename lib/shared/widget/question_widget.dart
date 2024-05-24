@@ -28,46 +28,51 @@ class _QuestionWidgetState extends State<QuestionWidget> {
     return Container(
       key: KWidgetkeys.widget.question.widget,
       decoration: context.widgetTheme.boxDecorationWidget,
-      child: ExpansionTile(
-        title: Text(
-          widget.questionModel.title,
-          key: KWidgetkeys.widget.question.title,
-          style: widget.isDesk ? AppTextStyle.text40 : AppTextStyle.text18,
-          maxLines: 2,
-        ),
-        onExpansionChanged: (value) => setState(() {
-          openQuestion = value;
-        }),
-        trailing: IconWidget(
-          icon: openQuestion
-              ? KIcon.minus.setIconKey(
-                  KWidgetkeys.widget.question.iconMinus,
-                )
-              : KIcon.plus.setIconKey(
-                  KWidgetkeys.widget.question.iconPlus,
-                ),
-          // background: AppColors.widgetBackground,
-        ),
-        tilePadding: const EdgeInsets.symmetric(
-          horizontal: KPadding.kPaddingSize32,
-          vertical: KPadding.kPaddingSize16,
-        ),
-        childrenPadding: EdgeInsets.only(
-          left:
-              widget.isDesk ? KPadding.kPaddingSize32 : KPadding.kPaddingSize16,
-          bottom: KPadding.kPaddingSize16,
-          top: widget.isDesk ? KPadding.kPaddingSize8 : 0,
-        ),
-        children: [
-          Markdown(
-            key: KWidgetkeys.widget.question.subtitle,
-            data: widget.questionModel.subtitle,
-            styleSheet: MarkdownStyleSheet(
-              p: widget.isDesk ? AppTextStyle.text24 : AppTextStyle.text14,
-            ),
-            shrinkWrap: true,
+      clipBehavior: Clip.hardEdge,
+      child: Material(
+        type: MaterialType.transparency,
+        child: ExpansionTile(
+          title: Text(
+            widget.questionModel.title,
+            key: KWidgetkeys.widget.question.title,
+            style: widget.isDesk ? AppTextStyle.text40 : AppTextStyle.text18,
+            maxLines: 2,
           ),
-        ],
+          onExpansionChanged: (value) => setState(() {
+            openQuestion = value;
+          }),
+          trailing: IconWidget(
+            icon: openQuestion
+                ? KIcon.minus.setIconKey(
+                    KWidgetkeys.widget.question.iconMinus,
+                  )
+                : KIcon.plus.setIconKey(
+                    KWidgetkeys.widget.question.iconPlus,
+                  ),
+            // background: AppColors.widgetBackground,
+          ),
+          tilePadding: const EdgeInsets.symmetric(
+            horizontal: KPadding.kPaddingSize32,
+            vertical: KPadding.kPaddingSize16,
+          ),
+          childrenPadding: EdgeInsets.only(
+            left: widget.isDesk
+                ? KPadding.kPaddingSize32
+                : KPadding.kPaddingSize16,
+            bottom: KPadding.kPaddingSize16,
+            top: widget.isDesk ? KPadding.kPaddingSize8 : 0,
+          ),
+          children: [
+            Markdown(
+              key: KWidgetkeys.widget.question.subtitle,
+              data: widget.questionModel.subtitle,
+              styleSheet: MarkdownStyleSheet(
+                p: widget.isDesk ? AppTextStyle.text24 : AppTextStyle.text14,
+              ),
+              shrinkWrap: true,
+            ),
+          ],
+        ),
       ),
     );
   }
