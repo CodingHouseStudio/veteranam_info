@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:go_router/go_router.dart';
 import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
 
 part '../box_widget_list.dart';
-part '../feedback_widget_list.dart';
 
 class HomeBodyWidget extends StatefulWidget {
   const HomeBodyWidget({
@@ -36,7 +36,8 @@ class _HomeBodyWidgetState extends State<HomeBodyWidget> {
   Widget build(BuildContext context) {
     return BlocConsumer<FeedbackBloc, FeedbackState>(
       listener: (context, state) {
-        if (state.formState == FeedbackEnum.clear) {
+        if (state.formState == FeedbackEnum.clear ||
+            state.formState == FeedbackEnum.sendignMessageAgain) {
           nameController.clear();
           emailController.clear();
           messageController.clear();
@@ -67,9 +68,13 @@ class _HomeBodyWidgetState extends State<HomeBodyWidget> {
                             ? questionModelItems.length
                             : 1, (index) {
                       return Padding(
-                        padding: EdgeInsets.only(
-                          top: index != 0 ? KPadding.kPaddingSize24 : 0,
-                        ),
+                        padding: index != 0
+                            ? EdgeInsets.only(
+                                top: isDesk
+                                    ? KPadding.kPaddingSize24
+                                    : KPadding.kPaddingSize16,
+                              )
+                            : EdgeInsets.zero,
                         child: QuestionWidget(
                           key: KWidgetkeys.screen.home.questions,
                           questionModel: questionModelItems.elementAt(index),
@@ -98,8 +103,8 @@ class _HomeBodyWidgetState extends State<HomeBodyWidget> {
             }
 
             return childWidgets
-              ..addAll(
-                _feedbackWidgetList(
+              ..addAll([
+                ...FeedbackWidget.feedbackWidgetList(
                   context: context,
                   isDesk: isDesk,
                   nameController: nameController,
@@ -107,8 +112,15 @@ class _HomeBodyWidgetState extends State<HomeBodyWidget> {
                   messageController: messageController,
                   feedbackKey: feedbackKey,
                   feedbackBoxKey: feedbackBoxKey,
+                  topPadding: isDesk
+                      ? KSizedBox.kHeightSizedBox160
+                      : KSizedBox.kHeightSizedBox10,
                 ),
-              );
+                if (isDesk)
+                  KSizedBox.kHeightSizedBox160
+                else
+                  KSizedBox.kHeightSizedBox10,
+              ]);
           },
         ),
       ),

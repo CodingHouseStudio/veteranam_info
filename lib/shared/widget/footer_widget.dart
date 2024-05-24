@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:kozak/shared/shared.dart';
 
 class FooterWidget extends SliverChildBuilderDelegate {
@@ -44,7 +45,7 @@ class FooterWidget extends SliverChildBuilderDelegate {
                                     : KSize.kFont14,
                           ),
                         ),
-                        onPressed: () => context.goNamedWithScroll(
+                        onPressed: () => context.goNamed(
                           KAppText.routes(
                             hasAccount: context
                                     .read<AuthenticationBloc>()

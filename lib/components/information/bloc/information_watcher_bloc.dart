@@ -196,7 +196,7 @@ class InformationWatcherBloc
     emit(
       state.copyWith(
         loadingStatus: LoadingStatus.error,
-        failure: const SomeFailure.serverError().toInformation(),
+        failure: GetFailur.fromCode(event.failure).status.toInformation(),
       ),
     );
   }

@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kozak/components/components.dart';
-import 'package:kozak/components/thanks/thanks.dart';
+import 'package:kozak/components/profile_saves/view/profile_saves_view.dart';
 import 'package:kozak/shared/shared.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -19,6 +19,7 @@ GoRouter router = GoRouter(
       GoRouterRefreshStream(GetIt.instance<AuthenticationBloc>().stream),
   initialLocation: KRoute.home.path,
   observers: [
+    ScrollNavigatorObserver(),
     FirebaseAnalyticsObserver(
       analytics: FirebaseAnalytics.instance,
       onError: (_) => debugPrint('FirebaseAnalyticsObserver error $_'),
@@ -153,12 +154,21 @@ GoRouter router = GoRouter(
               ),
               routes: [
                 GoRoute(
-                  name: KRoute.workRespond.name,
-                  path: KRoute.workRespond.path,
+                  name: KRoute.employeeRespond.name,
+                  path: KRoute.employeeRespond.path,
                   pageBuilder: (context, state) => NoTransitionPage(
                     name: state.name,
                     key: state.pageKey,
-                    child: const WorkRespondScreen(),
+                    child: const EmployeeRespondScreen(),
+                  ),
+                ),
+                GoRoute(
+                  name: KRoute.profileSaves.name,
+                  path: KRoute.profileSaves.path,
+                  pageBuilder: (context, state) => NoTransitionPage(
+                    key: state.pageKey,
+                    name: state.name,
+                    child: const ProfileSavesScreen(),
                   ),
                 ),
               ],
@@ -173,6 +183,17 @@ GoRouter router = GoRouter(
             name: state.name,
             child: const ProfileScreen(),
           ),
+          routes: [
+            GoRoute(
+              name: KRoute.profileMyStory.name,
+              path: KRoute.profileMyStory.path,
+              pageBuilder: (context, state) => NoTransitionPage(
+                key: state.pageKey,
+                name: state.name,
+                child: const ProfileMyStoryScreen(),
+              ),
+            ),
+          ],
           redirect: (context, state) =>
               context.read<AuthenticationBloc>().state.status !=
                       AuthenticationStatus.authenticated
@@ -226,22 +247,36 @@ extension NavigatorExtention on BuildContext {
     Map<String, String> pathParameters = const <String, String>{},
     Map<String, dynamic> queryParameters = const <String, dynamic>{},
     Object? extra,
-    bool scrollUp = true,
   }) {
-    if (scrollUp) {
-      // WidgetsBinding.instance.addPostFrameCallback((_) {
-      try {
-        Scrollable.of(this).widget.controller?.jumpTo(0);
-      } catch (e) {
-        debugPrint(e.toString());
-      }
-      // });
-    }
     goNamed(
       name,
       pathParameters: pathParameters,
       queryParameters: queryParameters,
       extra: extra,
     );
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      try {
+        Scrollable.of(this).widget.controller?.jumpTo(0);
+      } catch (e) {
+        debugPrint(e.toString());
+      }
+    });
+  }
+}
+
+class ScrollNavigatorObserver extends NavigatorObserver {
+  @override
+  void didPop(Route route, Route? previousRoute) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      // Виконуємо прокрутку догори, якщо є Scrollable widget
+      try {
+        final value2 = navigator!.context;
+        final value = navigator!.context.read<HomeWatcherBloc>().state;
+        Scrollable.of(route.navigator!.context).position.jumpTo(0);
+      } catch (e) {
+        debugPrint(e.toString());
+      }
+    });
+    super.didPop(route, previousRoute);
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
 
@@ -11,38 +12,36 @@ class StoryBodyWidget extends StatelessWidget {
     return BlocBuilder<StoryWatcherBloc, StoryWatcherState>(
       builder: (context, _) {
         return ScaffoldWidget(
+          titleChildWidgetsFunction: ({required isDesk}) => [
+            if (isDesk)
+              KSizedBox.kHeightSizedBox40
+            else
+              KSizedBox.kHeightSizedBox16,
+            ...TitleWidget.titleWidgetList(
+              title: context.l10n.stories,
+              titleKey: KWidgetkeys.screen.story.title,
+              subtitle: context.l10n.storySubtitle,
+              subtitleKey: KWidgetkeys.screen.story.subtitle,
+              isDesk: isDesk,
+            ),
+            if (isDesk)
+              KSizedBox.kHeightSizedBox56
+            else
+              KSizedBox.kHeightSizedBox24,
+          ],
+          mainDeskPadding: const EdgeInsets.symmetric(
+            horizontal: KPadding.kPaddingSize48,
+          ),
           mainChildWidgetsFunction: ({required isDesk}) {
             final childWidgets = [
-              if (isDesk)
-                KSizedBox.kHeightSizedBox40
-              else
-                KSizedBox.kHeightSizedBox16,
-              ...TitleWidget.titleWidgetList(
-                title: context.l10n.stories,
-                titleKey: KWidgetkeys.screen.story.title,
-                subtitle: context.l10n.storySubtitle,
-                subtitleKey: KWidgetkeys.screen.story.subtitle,
+              SecondaryButtonWidget(
+                key: KWidgetkeys.screen.story.seccondaryButton,
                 isDesk: isDesk,
-              ),
-              if (isDesk)
-                KSizedBox.kHeightSizedBox56
-              else
-                KSizedBox.kHeightSizedBox24,
-              Padding(
-                padding: isDesk
-                    ? const EdgeInsets.symmetric(
-                        horizontal: KPadding.kPaddingSize48,
-                      )
-                    : EdgeInsets.zero,
-                child: SecondaryButtonWidget(
-                  key: KWidgetkeys.screen.story.seccondaryButton,
-                  isDesk: isDesk,
-                  text: context.l10n.addYourStory,
-                  onPressed: context.read<AuthenticationBloc>().state.status ==
-                          AuthenticationStatus.authenticated
-                      ? () => context.goNamedWithScroll(KRoute.storyAdd.name)
-                      : null,
-                ),
+                text: context.l10n.addYourStory,
+                onPressed: context.read<AuthenticationBloc>().state.status ==
+                        AuthenticationStatus.authenticated
+                    ? () => context.goNamed(KRoute.storyAdd.name)
+                    : null,
               ),
               if (isDesk)
                 KSizedBox.kHeightSizedBox40
@@ -62,9 +61,13 @@ class StoryBodyWidget extends StatelessWidget {
                       ...List.generate(_.loadingStoryModelItems.length,
                           (index) {
                         return Padding(
-                          padding: EdgeInsets.only(
-                            top: index != 0 ? KPadding.kPaddingSize80 : 0,
-                          ),
+                          padding: index != 0
+                              ? EdgeInsets.only(
+                                  top: isDesk
+                                      ? KPadding.kPaddingSize80
+                                      : KPadding.kPaddingSize24,
+                                )
+                              : EdgeInsets.zero,
                           child: StoryCardWidget(
                             key: KWidgetkeys.screen.story.card,
                             storyModel:

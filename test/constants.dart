@@ -142,6 +142,13 @@ abstract class KTestText {
     id: '1',
     userRole: UserRole.civilian,
   );
+
+  static const userSettingModel = UserSetting(
+    id: '1',
+    userRole: UserRole.civilian,
+    locale: Language.english,
+    roleIsConfirmed: true,
+  );
   static const imageModel = ImageModel(
     downloadURL: 'test_URL',
     lastModifiedTS: 1,
@@ -159,7 +166,7 @@ abstract class KTestText {
 
   static final feedbackModel = FeedbackModel(
     id: dateTime.microsecondsSinceEpoch.toString(),
-    guestId: dateTime.microsecondsSinceEpoch.toString(),
+    guestId: KTestText.user.id,
     guestName: KTestText.field,
     email: KTestText.userEmail,
     timestamp: dateTime,
@@ -245,9 +252,12 @@ abstract class KScreenBlocName {
   static const signUp = 'Sign Up Screen';
   static const questionsForm = 'Questions Form Screen';
   static const workEmployee = 'Work Employee Screen';
-  static const workRespond = 'Work Respond Screen';
+  static const employeeRespond = 'Employee Respond Screen';
   static const workEmployer = 'Employer Screen';
+  static const profileSaves = 'Profile Saves Screen';
   static const storyAdd = 'Story Add Screen';
+  static const thank = 'Thank Screen';
+  static const profileMyStory = 'My Story Screen';
 
   static const feedback = 'Feedback Widget';
   static const authenticationServices = 'Authentication Services';

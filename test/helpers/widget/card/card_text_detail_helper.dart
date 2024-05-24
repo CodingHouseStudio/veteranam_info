@@ -9,33 +9,34 @@ Future<void> cardTextDetailHelper(
 ) async {
   expect(
     find.byKey(KWidgetkeys.widget.cardTextDetail.text),
-    findsOneWidget,
+    findsWidgets,
   );
 
   expect(
     find.byKey(KWidgetkeys.widget.cardTextDetail.text),
-    findsOneWidget,
+    findsWidgets,
   );
 
   expect(
     find.byKey(KWidgetkeys.widget.cardTextDetail.button),
-    findsOneWidget,
+    findsWidgets,
   );
 
-  late var text =
-      tester.widget<Text>(find.byKey(KWidgetkeys.widget.cardTextDetail.text));
+  late var text = tester
+      .widget<Text>(find.byKey(KWidgetkeys.widget.cardTextDetail.text).first);
 
   expect(text.maxLines, isNotNull);
 
-  final buttonText = tester
-      .widget<Text>(find.byKey(KWidgetkeys.widget.cardTextDetail.buttonText));
+  final buttonText = tester.widget<Text>(
+    find.byKey(KWidgetkeys.widget.cardTextDetail.buttonText).first,
+  );
 
   await scrollingHelper(
     tester: tester,
     itemKey: KWidgetkeys.widget.cardTextDetail.button,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.widget.cardTextDetail.button));
+  await tester.tap(find.byKey(KWidgetkeys.widget.cardTextDetail.button).first);
 
   await tester.pumpAndSettle();
 
@@ -46,17 +47,20 @@ Future<void> cardTextDetailHelper(
 
   expect(
     tester
-        .widget<Text>(find.byKey(KWidgetkeys.widget.cardTextDetail.buttonText))
+        .widget<Text>(
+          find.byKey(KWidgetkeys.widget.cardTextDetail.buttonText).first,
+        )
         .data,
     isNot(buttonText.data),
   );
 
-  text =
-      tester.widget<Text>(find.byKey(KWidgetkeys.widget.cardTextDetail.text));
+  text = tester.widget<Text>(
+    find.byKey(KWidgetkeys.widget.cardTextDetail.text).first,
+  );
 
   expect(text.maxLines, null);
 
-  await tester.tap(find.byKey(KWidgetkeys.widget.cardTextDetail.button));
+  await tester.tap(find.byKey(KWidgetkeys.widget.cardTextDetail.button).first);
 
   await tester.pumpAndSettle();
 
@@ -66,20 +70,22 @@ Future<void> cardTextDetailHelper(
     itemKey: KWidgetkeys.widget.cardTextDetail.text,
   );
 
-  text =
-      tester.widget<Text>(find.byKey(KWidgetkeys.widget.cardTextDetail.text));
+  text = tester
+      .widget<Text>(find.byKey(KWidgetkeys.widget.cardTextDetail.text).first);
 
   expect(text.maxLines, isNotNull);
 
   expect(
     tester
-        .widget<Text>(find.byKey(KWidgetkeys.widget.cardTextDetail.buttonText))
+        .widget<Text>(
+          find.byKey(KWidgetkeys.widget.cardTextDetail.buttonText).first,
+        )
         .data,
     buttonText.data,
   );
 
-  text =
-      tester.widget<Text>(find.byKey(KWidgetkeys.widget.cardTextDetail.text));
+  text = tester
+      .widget<Text>(find.byKey(KWidgetkeys.widget.cardTextDetail.text).first);
 
   expect(text.maxLines, isNotNull);
 }

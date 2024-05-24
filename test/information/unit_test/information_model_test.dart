@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:kozak/shared/models/models.dart';
 import 'package:kozak/shared/shared.dart';
 
 import '../../text_dependency.dart';
@@ -11,12 +12,18 @@ void main() {
     group('${KGroupText.modelJson} ', () {
       test('${KGroupText.shouldBe} ', () {
         final json = {
-          'id': KTestText.informationModelItems.last.id,
-          'title': KTestText.informationModelItems.last.title,
-          'news': KTestText.informationModelItems.last.news,
-          'date': KTestText.informationModelItems.last.date.toIso8601String(),
-          'tags': KTestText.informationModelItems.last.tags,
-          'image': [KTestText.informationModelItems.last.image!.first.toJson()],
+          InformationModelJsonField.id: KTestText.informationModelItems.last.id,
+          InformationModelJsonField.title:
+              KTestText.informationModelItems.last.title,
+          InformationModelJsonField.news:
+              KTestText.informationModelItems.last.news,
+          InformationModelJsonField.date:
+              KTestText.informationModelItems.last.date.toIso8601String(),
+          InformationModelJsonField.tags:
+              KTestText.informationModelItems.last.tags,
+          InformationModelJsonField.image: [
+            KTestText.informationModelItems.last.image!.first.toJson(),
+          ],
         };
 
         final informationModel = InformationModel.fromJson(json);
@@ -49,10 +56,13 @@ void main() {
 
       test('${KGroupText.shouldBe} ', () {
         final json = {
-          'id': KTestText.informationModelItems.last.id,
-          'title': KTestText.informationModelItems.last.title,
-          'news': KTestText.informationModelItems.last.news,
-          'date': KTestText.informationModelItems.last.date.toIso8601String(),
+          InformationModelJsonField.id: KTestText.informationModelItems.last.id,
+          InformationModelJsonField.title:
+              KTestText.informationModelItems.last.title,
+          InformationModelJsonField.news:
+              KTestText.informationModelItems.last.news,
+          InformationModelJsonField.date:
+              KTestText.informationModelItems.last.date.toIso8601String(),
         };
 
         final informationModel = InformationModel.fromJson(json);
@@ -85,10 +95,12 @@ void main() {
 
       test('${KGroupText.shouldNotBe} ', () {
         final json = {
-          'id': KTestText.informationModelItems.last.id,
+          InformationModelJsonField.id: KTestText.informationModelItems.last.id,
           // title is missing
-          'news': KTestText.informationModelItems.last.news,
-          'date': KTestText.informationModelItems.last.date.toIso8601String(),
+          InformationModelJsonField.news:
+              KTestText.informationModelItems.last.news,
+          InformationModelJsonField.date:
+              KTestText.informationModelItems.last.date.toIso8601String(),
         };
 
         expect(
@@ -100,12 +112,18 @@ void main() {
     group('${KGroupText.jsonModel} ', () {
       test('${KGroupText.shouldBe} ', () {
         final json = {
-          'id': KTestText.informationModelItems.last.id,
-          'title': KTestText.informationModelItems.last.title,
-          'news': KTestText.informationModelItems.last.news,
-          'date': KTestText.informationModelItems.last.date.toIso8601String(),
-          'tags': KTestText.informationModelItems.last.tags,
-          'image': [KTestText.informationModelItems.last.image!.first.toJson()],
+          InformationModelJsonField.id: KTestText.informationModelItems.last.id,
+          InformationModelJsonField.title:
+              KTestText.informationModelItems.last.title,
+          InformationModelJsonField.news:
+              KTestText.informationModelItems.last.news,
+          InformationModelJsonField.date:
+              KTestText.informationModelItems.last.date.toIso8601String(),
+          InformationModelJsonField.tags:
+              KTestText.informationModelItems.last.tags,
+          InformationModelJsonField.image: [
+            KTestText.informationModelItems.last.image!.first.toJson(),
+          ],
         };
 
         final informationModelJson =
@@ -116,12 +134,15 @@ void main() {
 
       test('${KGroupText.shouldBe} ', () {
         final json = {
-          'id': KTestText.informationModelItems.last.id,
-          'title': KTestText.informationModelItems.last.title,
-          'news': KTestText.informationModelItems.last.news,
-          'date': KTestText.informationModelItems.last.date.toIso8601String(),
-          'tags': null,
-          'image': null,
+          InformationModelJsonField.id: KTestText.informationModelItems.last.id,
+          InformationModelJsonField.title:
+              KTestText.informationModelItems.last.title,
+          InformationModelJsonField.news:
+              KTestText.informationModelItems.last.news,
+          InformationModelJsonField.date:
+              KTestText.informationModelItems.last.date.toIso8601String(),
+          InformationModelJsonField.tags: null,
+          InformationModelJsonField.image: null,
         };
 
         final informationModelJson = KTestText.informationModelItems.last

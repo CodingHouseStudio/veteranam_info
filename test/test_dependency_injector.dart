@@ -42,9 +42,11 @@ void configureDependenciesTest() {
   GetIt.I.registerSingleton<IWorkRepository>(WorkRepository());
   GetIt.I.registerSingleton<IStoryRepository>(StoryRepository());
   // Blocs
-  GetIt.I.registerFactory<FilterCubit>(FilterCubit.new);
   GetIt.I.registerSingleton<FeedbackBloc>(
-    FeedbackBloc(feedbackRepository: GetIt.I.get<IFeedbackRepository>()),
+    FeedbackBloc(
+      feedbackRepository: GetIt.I.get<IFeedbackRepository>(),
+      appAuthenticationRepository: GetIt.I.get<IAppAuthenticationRepository>(),
+    ),
   );
   GetIt.I.registerSingleton<HomeWatcherBloc>(
     HomeWatcherBloc(homeRepository: GetIt.I.get<IHomeRepository>()),

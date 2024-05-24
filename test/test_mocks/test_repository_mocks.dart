@@ -45,6 +45,7 @@ import 'package:mockito/annotations.dart';
     MockSpec<UploadTask>(),
     MockSpec<TaskSnapshot>(),
     MockSpec<XFile>(),
+    MockSpec<Query>(),
   ],
 )
 void load() => debugPrint('loaded');

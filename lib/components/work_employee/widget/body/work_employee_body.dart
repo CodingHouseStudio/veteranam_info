@@ -53,9 +53,13 @@ class WorkEmployeeBody extends StatelessWidget {
                 if (_.workModelItems.isNotEmpty)
                   ...List.generate(_.filteredWorkModelItems.length, (index) {
                     return Padding(
-                      padding: EdgeInsets.only(
-                        top: index != 0 ? KPadding.kPaddingSize40 : 0,
-                      ),
+                      padding: index != 0
+                          ? EdgeInsets.only(
+                              top: isDesk
+                                  ? KPadding.kPaddingSize56
+                                  : KPadding.kPaddingSize24,
+                            )
+                          : EdgeInsets.zero,
                       child: WorkCardWidget(
                         key: KWidgetkeys.screen.workEmployee.cards,
                         firstItemIsFirst: index == 0,

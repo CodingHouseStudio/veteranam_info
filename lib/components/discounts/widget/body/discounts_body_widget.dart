@@ -20,9 +20,9 @@ class DiscountBodyWidget extends StatelessWidget {
                 children: [
                   ...TitleWidget.titleWidgetList(
                     title: context.l10n.discountsAndCoupons,
-                    titleKey: null,
+                    titleKey: const Key('title'),
                     subtitle: context.l10n.discountsAndCouponsDescription,
-                    subtitleKey: null,
+                    subtitleKey: const Key('subtitle'),
                     isDesk: isDesk,
                   ),
                   if (isDesk)
@@ -36,16 +36,23 @@ class DiscountBodyWidget extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        DiscountsCardWidget(
-                          discount: KMockText.discount,
-                          city: KMockText.cityDiscount,
-                          service: KMockText.serviceDiscount,
-                          description: KMockText.descriptionDiscount,
-                          date: KMockText.dateDiscount,
-                          instruction: KMockText.instructionDiscount,
-                          preInstructionDiscount:
-                              KMockText.preInstructionDiscount,
-                          isDesk: isDesk,
+                        Padding(
+                          padding: (isDesk
+                              ? const EdgeInsets.symmetric(
+                                  horizontal: KPadding.kPaddingSize220,
+                                )
+                              : EdgeInsets.zero),
+                          child: DiscountsCardWidget(
+                            discount: KMockText.discount,
+                            city: KMockText.cityDiscount,
+                            service: KMockText.serviceDiscount,
+                            description: KMockText.descriptionDiscount,
+                            date: KMockText.dateDiscount,
+                            instruction: KMockText.instructionDiscount,
+                            preInstructionDiscount:
+                                KMockText.preInstructionDiscount,
+                            isDesk: isDesk,
+                          ),
                         ),
                       ],
                     ),
