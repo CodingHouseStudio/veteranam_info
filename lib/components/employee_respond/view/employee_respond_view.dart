@@ -7,7 +7,7 @@ class EmployeeRespondScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return EmployeeRespondBody(
+    return EmployeeRespondBodyWidget(
       key: KWidgetkeys.screen.employeeRespond.screen,
     );
   }

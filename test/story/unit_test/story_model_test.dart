@@ -11,15 +11,18 @@ void main() {
     group('${KGroupText.modelJson} ', () {
       test('${KGroupText.shouldBe} ', () {
         final json = {
-          'id': KTestText.storyModelItems.last.id,
-          'userName': KTestText.storyModelItems.last.userName,
-          'userId': KTestText.storyModelItems.last.userId,
-          'story': KTestText.storyModelItems.last.story,
-          'date': KTestText.storyModelItems.last.date.toIso8601String(),
-          'userPhoto': [
+          StoryModelJsonField.id: KTestText.storyModelItems.last.id,
+          StoryModelJsonField.userName: KTestText.storyModelItems.last.userName,
+          StoryModelJsonField.userId: KTestText.storyModelItems.last.userId,
+          StoryModelJsonField.story: KTestText.storyModelItems.last.story,
+          StoryModelJsonField.date:
+              KTestText.storyModelItems.last.date.toIso8601String(),
+          StoryModelJsonField.userPhoto: [
             KTestText.storyModelItems.last.userPhoto!.first.toJson(),
           ],
-          'image': [KTestText.storyModelItems.last.image!.first.toJson()],
+          StoryModelJsonField.image: [
+            KTestText.storyModelItems.last.image!.first.toJson(),
+          ],
         };
 
         final storyModel = StoryModel.fromJson(json);
@@ -51,19 +54,22 @@ void main() {
       });
       test('${KGroupText.shouldBe} ', () {
         final json = {
-          'id': KTestText.storyModelItems.last.id,
-          'userName': KTestText.storyModelItems.last.userName,
-          'userId': KTestText.storyModelItems.last.userId,
-          'story': List.generate(
+          StoryModelJsonField.id: KTestText.storyModelItems.last.id,
+          StoryModelJsonField.userName: KTestText.storyModelItems.last.userName,
+          StoryModelJsonField.userId: KTestText.storyModelItems.last.userId,
+          StoryModelJsonField.story: List.generate(
             KMinMaxSize.subtitleMaxLength,
             (_) => KTestText.storyModelItems.last.story
                 .split(KTestText.storyModelItems.last.story),
           ).join(),
-          'date': KTestText.storyModelItems.last.date.toIso8601String(),
-          'userPhoto': [
+          StoryModelJsonField.date:
+              KTestText.storyModelItems.last.date.toIso8601String(),
+          StoryModelJsonField.userPhoto: [
             KTestText.storyModelItems.last.userPhoto!.first.toJson(),
           ],
-          'image': [KTestText.storyModelItems.last.image!.first.toJson()],
+          StoryModelJsonField.image: [
+            KTestText.storyModelItems.last.image!.first.toJson(),
+          ],
         };
 
         final storyModel = StoryModel.fromJson(json);
@@ -103,10 +109,11 @@ void main() {
 
       test('${KGroupText.shouldBe} ', () {
         final json = {
-          'id': KTestText.storyModelItems.last.id,
-          'userId': KTestText.storyModelItems.last.userId,
-          'story': KTestText.storyModelItems.last.story,
-          'date': KTestText.storyModelItems.last.date.toIso8601String(),
+          StoryModelJsonField.id: KTestText.storyModelItems.last.id,
+          StoryModelJsonField.userId: KTestText.storyModelItems.last.userId,
+          StoryModelJsonField.story: KTestText.storyModelItems.last.story,
+          StoryModelJsonField.date:
+              KTestText.storyModelItems.last.date.toIso8601String(),
         };
 
         final storyModel = StoryModel.fromJson(json);
@@ -140,10 +147,11 @@ void main() {
       test('${KGroupText.shouldNotBe} ', () {
         final json = {
           // id is missing
-          'userName': KTestText.storyModelItems.last.userName,
-          'userId': KTestText.storyModelItems.last.userId,
-          'story': KTestText.storyModelItems.last.story,
-          'date': KTestText.storyModelItems.last.date.toIso8601String(),
+          StoryModelJsonField.userName: KTestText.storyModelItems.last.userName,
+          StoryModelJsonField.userId: KTestText.storyModelItems.last.userId,
+          StoryModelJsonField.story: KTestText.storyModelItems.last.story,
+          StoryModelJsonField.date:
+              KTestText.storyModelItems.last.date.toIso8601String(),
         };
 
         expect(
@@ -155,15 +163,18 @@ void main() {
     group('${KGroupText.jsonModel} ', () {
       test('${KGroupText.shouldBe} ', () {
         final json = {
-          'id': KTestText.storyModelItems.last.id,
-          'userName': KTestText.storyModelItems.last.userName,
-          'userId': KTestText.storyModelItems.last.userId,
-          'story': KTestText.storyModelItems.last.story,
-          'date': KTestText.storyModelItems.last.date.toIso8601String(),
-          'userPhoto': [
+          StoryModelJsonField.id: KTestText.storyModelItems.last.id,
+          StoryModelJsonField.userName: KTestText.storyModelItems.last.userName,
+          StoryModelJsonField.userId: KTestText.storyModelItems.last.userId,
+          StoryModelJsonField.story: KTestText.storyModelItems.last.story,
+          StoryModelJsonField.date:
+              KTestText.storyModelItems.last.date.toIso8601String(),
+          StoryModelJsonField.userPhoto: [
             KTestText.storyModelItems.last.userPhoto!.first.toJson(),
           ],
-          'image': [KTestText.storyModelItems.last.image!.first.toJson()],
+          StoryModelJsonField.image: [
+            KTestText.storyModelItems.last.image!.first.toJson(),
+          ],
         };
 
         final storyModelJson = KTestText.storyModelItems.last.toJson();
@@ -173,13 +184,14 @@ void main() {
 
       test('${KGroupText.shouldBe} ', () {
         final json = {
-          'id': KTestText.storyModelItems.last.id,
-          'userName': null,
-          'userId': KTestText.storyModelItems.last.userId,
-          'story': KTestText.storyModelItems.last.story,
-          'date': KTestText.storyModelItems.last.date.toIso8601String(),
-          'userPhoto': null,
-          'image': null,
+          StoryModelJsonField.id: KTestText.storyModelItems.last.id,
+          StoryModelJsonField.userName: null,
+          StoryModelJsonField.userId: KTestText.storyModelItems.last.userId,
+          StoryModelJsonField.story: KTestText.storyModelItems.last.story,
+          StoryModelJsonField.date:
+              KTestText.storyModelItems.last.date.toIso8601String(),
+          StoryModelJsonField.userPhoto: null,
+          StoryModelJsonField.image: null,
         };
 
         final storyModelJson = KTestText.storyModelItems.last
@@ -190,19 +202,22 @@ void main() {
       });
       test('${KGroupText.shouldBe} ', () {
         final json = {
-          'id': KTestText.storyModelItems.last.id,
-          'userName': KTestText.storyModelItems.last.userName,
-          'userId': KTestText.storyModelItems.last.userId,
-          'story': List.generate(
+          StoryModelJsonField.id: KTestText.storyModelItems.last.id,
+          StoryModelJsonField.userName: KTestText.storyModelItems.last.userName,
+          StoryModelJsonField.userId: KTestText.storyModelItems.last.userId,
+          StoryModelJsonField.story: List.generate(
             KMinMaxSize.subtitleMaxLength,
             (_) => KTestText.storyModelItems.last.story
                 .split(KTestText.storyModelItems.last.story),
           ).join().substring(0, KMinMaxSize.subtitleMaxLength),
-          'date': KTestText.storyModelItems.last.date.toIso8601String(),
-          'userPhoto': [
+          StoryModelJsonField.date:
+              KTestText.storyModelItems.last.date.toIso8601String(),
+          StoryModelJsonField.userPhoto: [
             KTestText.storyModelItems.last.userPhoto!.first.toJson(),
           ],
-          'image': [KTestText.storyModelItems.last.image!.first.toJson()],
+          StoryModelJsonField.image: [
+            KTestText.storyModelItems.last.image!.first.toJson(),
+          ],
         };
 
         final storyModelJson = KTestText.storyModelItems.last
