@@ -98,10 +98,10 @@ class AuthenticationRepository {
 
   Future<Either<SomeFailure, bool>> deleteUser() async {
     final resault = await iAppAuthenticationRepository.deleteUser();
-    resault.fold((l) => debugPrint(l.toString()), (r) {
-      debugPrint('ever reached here?');
-      _logInAnonymously();
-    });
+    resault.fold(
+      (l) => debugPrint(l.toString()),
+      (r) => debugPrint('ever reached here?'),
+    );
     return resault;
   }
 
@@ -167,10 +167,10 @@ class AuthenticationRepository {
 
   Future<Either<SomeFailure, bool>> logOut() async {
     final resault = await iAppAuthenticationRepository.logOut();
-    resault.fold((l) => debugPrint(l.toString()), (r) {
-      debugPrint('ever reached here?');
-      _logInAnonymously();
-    });
+    resault.fold(
+      (l) => debugPrint(l.toString()),
+      (r) => debugPrint('ever reached here?'),
+    );
     return resault;
   }
 
