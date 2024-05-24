@@ -1,27 +1,28 @@
-// import 'package:bloc/bloc.dart';
-// import 'package:injectable/injectable.dart';
+import 'package:bloc/bloc.dart';
+import 'package:injectable/injectable.dart';
 
-// @injectable
-// class FilterCubit extends Cubit<List<dynamic>> {
-//   FilterCubit() : super([]);
-//   void change({
-//     required int index,
-//     required dynamic filterValue,
-//   }) {
-//     final filters = List<dynamic>.from(state);
+@injectable
+class FilterCubit extends Cubit<List<dynamic>> {
+  FilterCubit() : super([]);
 
-//     if (filters.length <= index) {
-//       filters.addAll(
-//         List.filled(index + 1 - filters.length, ''),
-//       );
-//     }
+  void change({
+    required int index,
+    required dynamic filterValue,
+  }) {
+    final filters = List<dynamic>.from(state);
 
-//     filters.replaceRange(index, index + 1, [filterValue]);
+    if (filters.length <= index) {
+      filters.addAll(
+        List.filled(index + 1 - filters.length, ''),
+      );
+    }
 
-//     emit(filters);
-//   }
+    filters.replaceRange(index, index + 1, [filterValue]);
 
-//   void resetAllValues() {
-//     emit([]);
-//   }
-// }
+    emit(filters);
+  }
+
+  void resetAllValues() {
+    emit([]);
+  }
+}

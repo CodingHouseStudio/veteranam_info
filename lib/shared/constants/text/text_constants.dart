@@ -34,6 +34,14 @@ abstract class KMockText {
     story: cardData,
     userId: '2',
   );
+
+  static const tagsDiscount = <List<String>?>[
+    ['Медицина'],
+    ['Послуги'],
+    ['Житло'],
+    [],
+  ];
+
   static const workModel = WorkModel(
     id: '1',
     title: title,
@@ -124,6 +132,7 @@ abstract class KAppText {
   static const String authChange = 'AuthenticationStatusChanged:';
   static const String backendString = '';
   static const String usernameToken = 'USERNAME_TOKEN';
+
   static List<String> routes({required bool hasAccount}) => [
         KRoute.aboutUs.name,
         KRoute.investors.name,
