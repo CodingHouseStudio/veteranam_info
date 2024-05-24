@@ -22,53 +22,62 @@ class ProfileBodyWidget extends StatelessWidget {
           KSizedBox.kHeightSizedBox56
         else
           KSizedBox.kHeightSizedBox24,
-        if (isDesk)
-          _buildDesktopLayout(context, isDesk)
-        else
-          _buildMobileLayout(context, isDesk),
-      ],
-    );
-  }
-
-  Widget _buildDesktopLayout(BuildContext context, bool isDesk) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
+        Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Expanded(
-              flex: 2,
-              child: ProfileCardWidget(
-                key: KWidgetkeys.widget.profileCard.profileCard,
-                isDesk: isDesk,
-              ),
-            ),
-            KSizedBox.kWidthSizedBox80,
-            Expanded(
-              child: IntrinsicHeight(
-                child: _buildBoxWidgets(context, isDesk),
-              ),
-            ),
+            if (isDesk)
+              ..._buildDesktopLayout(context, isDesk)
+            else
+              ..._buildMobileLayout(context, isDesk),
           ],
         ),
-        KSizedBox.kHeightSizedBox56,
       ],
     );
   }
 
-  Widget _buildMobileLayout(BuildContext context, bool isDesk) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _buildBoxWidgets(context, isDesk),
-        ProfileCardWidget(
-          key: KWidgetkeys.widget.profileCard.profileCard,
-          isDesk: isDesk,
-        ),
-        KSizedBox.kHeightSizedBox24,
-      ],
-    );
+  List<Widget> _buildDesktopLayout(BuildContext context, bool isDesk) {
+    return [
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                flex: 2,
+                child: ProfileCardWidget(
+                  key: KWidgetkeys.widget.profileCard.profileCard,
+                  isDesk: isDesk,
+                ),
+              ),
+              KSizedBox.kWidthSizedBox80,
+              Expanded(
+                child: IntrinsicHeight(
+                  child: _buildBoxWidgets(context, isDesk),
+                ),
+              ),
+            ],
+          ),
+          KSizedBox.kHeightSizedBox56,
+        ],
+      ),
+    ];
+  }
+
+  List<Widget> _buildMobileLayout(BuildContext context, bool isDesk) {
+    return [
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _buildBoxWidgets(context, isDesk),
+          ProfileCardWidget(
+            key: KWidgetkeys.widget.profileCard.profileCard,
+            isDesk: isDesk,
+          ),
+          KSizedBox.kHeightSizedBox24,
+        ],
+      ),
+    ];
   }
 
   Widget _buildBoxWidgets(BuildContext context, bool isDesk) {

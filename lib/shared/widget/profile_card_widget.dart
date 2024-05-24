@@ -91,7 +91,10 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
                       ),
                     ],
                     KSizedBox.kHeightSizedBox8,
-                    _buildProfileInfo(),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: _buildProfileInfo(),
+                    ),
                     KSizedBox.kHeightSizedBox8,
                     _buildProfileFooter(),
                     KSizedBox.kHeightSizedBox8,
@@ -222,25 +225,22 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
     ];
   }
 
-  Widget _buildProfileInfo() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _textField(
-          label: context.l10n.email,
-          labelText: context.read<AuthenticationBloc>().state.user?.email,
-          hint: KMockText.email,
-          readOnly: true,
-        ),
-        KSizedBox.kHeightSizedBox8,
-        _textField(
-          label: context.l10n.nickname,
-          labelText: null,
-          hint: KMockText.nickname,
-          readOnly: !isEditing,
-        ),
-      ],
-    );
+  List<Widget> _buildProfileInfo() {
+    return [
+      _textField(
+        label: context.l10n.email,
+        labelText: context.read<AuthenticationBloc>().state.user?.email,
+        hint: KMockText.email,
+        readOnly: true,
+      ),
+      KSizedBox.kHeightSizedBox8,
+      _textField(
+        label: context.l10n.nickname,
+        labelText: null,
+        hint: KMockText.nickname,
+        readOnly: !isEditing,
+      ),
+    ];
   }
 
   Widget _buildProfileFooter() {
