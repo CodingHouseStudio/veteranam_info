@@ -28,6 +28,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
     return Container(
       key: KWidgetkeys.widget.question.widget,
       decoration: context.widgetTheme.boxDecorationWidget,
+      clipBehavior: Clip.hardEdge,
       child: ExpansionTile(
         title: Text(
           widget.questionModel.title,
