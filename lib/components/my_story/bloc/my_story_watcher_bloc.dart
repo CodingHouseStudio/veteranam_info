@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
 
 part 'my_story_watcher_event.dart';
@@ -30,14 +29,14 @@ class MyStoryWatcherBloc
   ) async {
     emit(const MyStoryWatcherState.loading());
 
-    // final result = await _storyRepository.getStoriesById(
-    //   _iAppAuthenticationRepository.currentUser.id,
-    // );
-    // result.fold(
-    //   (l) => emit(
-    //     MyStoryWatcherState.failure(l.toMyStory()),
-    //   ),
-    //   (r) => emit(MyStoryWatcherState.success(storyModelItems: r)),
-    // );
+    final result = await _storyRepository.getStoriesById(
+      _iAppAuthenticationRepository.currentUser.id,
+    );
+    result.fold(
+      (l) => emit(
+        MyStoryWatcherState.failure(l.toMyStory()),
+      ),
+      (r) => emit(MyStoryWatcherState.success(storyModelItems: r)),
+    );
   }
 }

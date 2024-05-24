@@ -19,10 +19,10 @@ import 'package:kozak/components/investors/bloc/investors_watcher_bloc.dart'
     as _i16;
 import 'package:kozak/components/login/bloc/login_bloc.dart' as _i30;
 import 'package:kozak/components/my_story/bloc/my_story_watcher_bloc.dart'
-    as _i27;
+    as _i26;
 import 'package:kozak/components/sign_up/bloc/sign_up_bloc.dart' as _i28;
 import 'package:kozak/components/story/bloc/story_watcher_bloc.dart' as _i19;
-import 'package:kozak/components/story_add/bloc/story_add_bloc.dart' as _i26;
+import 'package:kozak/components/story_add/bloc/story_add_bloc.dart' as _i27;
 import 'package:kozak/components/work_employee/bloc/work_employee_watcher_bloc.dart'
     as _i21;
 import 'package:kozak/shared/bloc/authentication/authentication_bloc.dart'
@@ -98,11 +98,11 @@ extension GetItInjectableX on _i1.GetIt {
               gh<_i10.GoogleSignIn>(),
               gh<_i11.CacheClient>(),
             ));
-    gh.factory<_i26.StoryAddBloc>(() => _i26.StoryAddBloc(
+    gh.factory<_i26.MyStoryWatcherBloc>(() => _i26.MyStoryWatcherBloc(
           storyRepository: gh<_i11.IStoryRepository>(),
           iAppAuthenticationRepository: gh<_i11.IAppAuthenticationRepository>(),
         ));
-    gh.factory<_i27.MyStoryWatcherBloc>(() => _i27.MyStoryWatcherBloc(
+    gh.factory<_i27.StoryAddBloc>(() => _i27.StoryAddBloc(
           storyRepository: gh<_i11.IStoryRepository>(),
           iAppAuthenticationRepository: gh<_i11.IAppAuthenticationRepository>(),
         ));
