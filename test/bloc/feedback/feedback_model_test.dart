@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:kozak/shared/models/models.dart';
 import 'package:kozak/shared/shared.dart';
 
 import '../../text_dependency.dart';
@@ -8,13 +9,15 @@ void main() {
     group('${KGroupText.modelJson} ', () {
       test('${KGroupText.shouldBe} ', () {
         final json = {
-          'id': KTestText.feedbackModel.id,
-          'guestId': KTestText.feedbackModel.guestId,
-          'guestName': KTestText.feedbackModel.guestName,
-          'email': KTestText.feedbackModel.email,
-          'timestamp': KTestText.feedbackModel.timestamp.toIso8601String(),
-          'message': KTestText.feedbackModel.message,
-          'status': _$FeedbackStatusEnumMap[KTestText.feedbackModel.status],
+          FeedbackModelJsonField.id: KTestText.feedbackModel.id,
+          FeedbackModelJsonField.guestId: KTestText.feedbackModel.guestId,
+          FeedbackModelJsonField.guestName: KTestText.feedbackModel.guestName,
+          FeedbackModelJsonField.email: KTestText.feedbackModel.email,
+          FeedbackModelJsonField.timestamp:
+              KTestText.feedbackModel.timestamp.toIso8601String(),
+          FeedbackModelJsonField.message: KTestText.feedbackModel.message,
+          FeedbackModelJsonField.status:
+              _$FeedbackStatusEnumMap[KTestText.feedbackModel.status],
         };
 
         final feedbackModel = FeedbackModel.fromJson(json);
@@ -37,12 +40,15 @@ void main() {
       test('${KGroupText.shouldNotBe} ', () {
         final json = {
           // id is missing
-          'guestId': KTestText.feedbackModel.guestId,
-          'guestName': KTestText.feedbackModel.guestName,
-          'email': KTestText.feedbackModel.email,
-          'timestamp': KTestText.feedbackModel.timestamp.toIso8601String(),
-          'message': KTestText.feedbackModel.message,
-          'status': _$FeedbackStatusEnumMap[KTestText.feedbackModel.status],
+
+          FeedbackModelJsonField.guestId: KTestText.feedbackModel.guestId,
+          FeedbackModelJsonField.guestName: KTestText.feedbackModel.guestName,
+          FeedbackModelJsonField.email: KTestText.feedbackModel.email,
+          FeedbackModelJsonField.timestamp:
+              KTestText.feedbackModel.timestamp.toIso8601String(),
+          FeedbackModelJsonField.message: KTestText.feedbackModel.message,
+          FeedbackModelJsonField.status:
+              _$FeedbackStatusEnumMap[KTestText.feedbackModel.status],
         };
 
         expect(
@@ -54,13 +60,15 @@ void main() {
     group('${KGroupText.jsonModel} ', () {
       test('${KGroupText.shouldBe} ', () {
         final json = {
-          'id': KTestText.feedbackModel.id,
-          'guestId': KTestText.feedbackModel.guestId,
-          'guestName': KTestText.feedbackModel.guestName,
-          'email': KTestText.feedbackModel.email,
-          'timestamp': KTestText.feedbackModel.timestamp.toIso8601String(),
-          'message': KTestText.feedbackModel.message,
-          'status': _$FeedbackStatusEnumMap[KTestText.feedbackModel.status],
+          FeedbackModelJsonField.id: KTestText.feedbackModel.id,
+          FeedbackModelJsonField.guestId: KTestText.feedbackModel.guestId,
+          FeedbackModelJsonField.guestName: KTestText.feedbackModel.guestName,
+          FeedbackModelJsonField.email: KTestText.feedbackModel.email,
+          FeedbackModelJsonField.timestamp:
+              KTestText.feedbackModel.timestamp.toIso8601String(),
+          FeedbackModelJsonField.message: KTestText.feedbackModel.message,
+          FeedbackModelJsonField.status:
+              _$FeedbackStatusEnumMap[KTestText.feedbackModel.status],
         };
 
         final feedbackModelJson = KTestText.feedbackModel.toJson();

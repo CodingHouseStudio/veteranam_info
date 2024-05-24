@@ -11,10 +11,13 @@ void main() {
     group('${KGroupText.modelJson} ', () {
       test('${KGroupText.shouldBe} ', () {
         final json = {
-          'id': KTestText.questionModelItems.first.id,
-          'title': KTestText.questionModelItems.first.title,
-          'subtitle': KTestText.questionModelItems.first.subtitle,
-          'navigationLink': KTestText.questionModelItems.first.navigationLink,
+          QuestionModelJsonField.id: KTestText.questionModelItems.first.id,
+          QuestionModelJsonField.title:
+              KTestText.questionModelItems.first.title,
+          QuestionModelJsonField.subtitle:
+              KTestText.questionModelItems.first.subtitle,
+          QuestionModelJsonField.navigationLink:
+              KTestText.questionModelItems.first.navigationLink,
         };
 
         final questionModel = QuestionModel.fromJson(json);
@@ -36,9 +39,11 @@ void main() {
 
       test('${KGroupText.shouldBe} ', () {
         final json = {
-          'id': KTestText.questionModelItems.first.id,
-          'title': KTestText.questionModelItems.first.title,
-          'subtitle': KTestText.questionModelItems.first.subtitle,
+          QuestionModelJsonField.id: KTestText.questionModelItems.first.id,
+          QuestionModelJsonField.title:
+              KTestText.questionModelItems.first.title,
+          QuestionModelJsonField.subtitle:
+              KTestText.questionModelItems.first.subtitle,
         };
 
         final questionModel = QuestionModel.fromJson(json);
@@ -57,10 +62,12 @@ void main() {
 
       test('${KGroupText.shouldNotBe} ', () {
         final json = {
-          'id': KTestText.questionModelItems.first.id,
+          QuestionModelJsonField.id: KTestText.questionModelItems.first.id,
           // title is missing
-          'subtitle': KTestText.questionModelItems.first.subtitle,
-          'navigationLink': KTestText.questionModelItems.first.navigationLink,
+          QuestionModelJsonField.subtitle:
+              KTestText.questionModelItems.first.subtitle,
+          QuestionModelJsonField.navigationLink:
+              KTestText.questionModelItems.first.navigationLink,
         };
 
         expect(
@@ -71,18 +78,19 @@ void main() {
 
       test('${KGroupText.shouldBe} ', () {
         final json = {
-          'id': KTestText.questionModelItems.first.id,
-          'title': List.generate(
+          QuestionModelJsonField.id: KTestText.questionModelItems.first.id,
+          QuestionModelJsonField.title: List.generate(
             100,
             (_) => KTestText.questionModelItems.first.title
                 .split(KTestText.questionModelItems.first.title),
           ).join(),
-          'subtitle': List.generate(
+          QuestionModelJsonField.subtitle: List.generate(
             100,
             (_) => KTestText.questionModelItems.first.subtitle
                 .split(KTestText.questionModelItems.first.subtitle),
           ).join(),
-          'navigationLink': KTestText.questionModelItems.first.navigationLink,
+          QuestionModelJsonField.navigationLink:
+              KTestText.questionModelItems.first.navigationLink,
         };
 
         final questionModel = QuestionModel.fromJson(json);
@@ -105,10 +113,13 @@ void main() {
     group('${KGroupText.jsonModel} ', () {
       test('${KGroupText.shouldBe} ', () {
         final json = {
-          'id': KTestText.questionModelItems.first.id,
-          'title': KTestText.questionModelItems.first.title,
-          'subtitle': KTestText.questionModelItems.first.subtitle,
-          'navigationLink': KTestText.questionModelItems.first.navigationLink,
+          QuestionModelJsonField.id: KTestText.questionModelItems.first.id,
+          QuestionModelJsonField.title:
+              KTestText.questionModelItems.first.title,
+          QuestionModelJsonField.subtitle:
+              KTestText.questionModelItems.first.subtitle,
+          QuestionModelJsonField.navigationLink:
+              KTestText.questionModelItems.first.navigationLink,
         };
 
         final questionModel = KTestText.questionModelItems.first.toJson();
@@ -118,10 +129,12 @@ void main() {
 
       test('${KGroupText.shouldBe} ', () {
         final json = {
-          'id': KTestText.questionModelItems.first.id,
-          'title': KTestText.questionModelItems.first.title,
-          'subtitle': KTestText.questionModelItems.first.subtitle,
-          'navigationLink': null,
+          QuestionModelJsonField.id: KTestText.questionModelItems.first.id,
+          QuestionModelJsonField.title:
+              KTestText.questionModelItems.first.title,
+          QuestionModelJsonField.subtitle:
+              KTestText.questionModelItems.first.subtitle,
+          QuestionModelJsonField.navigationLink: null,
         };
 
         final questionModelJson = KTestText.questionModelItems.first
@@ -147,10 +160,10 @@ void main() {
           navigationLink: KTestText.questionModelItems.first.navigationLink,
         );
         final json = {
-          'id': questionModel.id,
-          'title': questionModel.title,
-          'subtitle': questionModel.subtitle,
-          'navigationLink': questionModel.navigationLink,
+          QuestionModelJsonField.id: questionModel.id,
+          QuestionModelJsonField.title: questionModel.title,
+          QuestionModelJsonField.subtitle: questionModel.subtitle,
+          QuestionModelJsonField.navigationLink: questionModel.navigationLink,
         };
 
         final questionModelJson = questionModel

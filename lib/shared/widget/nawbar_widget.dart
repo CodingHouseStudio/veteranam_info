@@ -139,7 +139,8 @@ class _NawbarWidgetImplematationState
                     EdgeInsets.symmetric(horizontal: KPadding.kPaddingSize8),
                 child: LanguagesSwitcherWidget(),
               ),
-            if (context.read<AuthenticationBloc>().state.user == null)
+            if (context.read<AuthenticationBloc>().state.status !=
+                AuthenticationStatus.authenticated)
               if (widget.isDesk)
                 TextButton(
                   key: KWidgetkeys.widget.nawbar.button,
@@ -158,7 +159,8 @@ class _NawbarWidgetImplematationState
                     icon: KIcon.person,
                   ),
                 ),
-            if (context.read<AuthenticationBloc>().state.user.hasValue)
+            if (context.read<AuthenticationBloc>().state.status ==
+                AuthenticationStatus.authenticated)
               if (!isFocused || widget.isDesk)
                 if (context.read<AuthenticationBloc>().state.user!.photo ==
                     null)
