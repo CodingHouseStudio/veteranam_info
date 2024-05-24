@@ -23,23 +23,7 @@ List<Widget> _formWidgetList({
             ),
             Expanded(
               flex: 2,
-              child: MessageFieldWidget(
-                key: KWidgetkeys.screen.storyAdd.storyField,
-                changeMessage: (text) => context.read<StoryAddBloc>().add(
-                      StoryAddEvent.storyUpdated(text),
-                    ),
-                hintText: context.l10n.writeYourStory,
-                isDesk: true,
-                errorText: context.read<StoryAddBloc>().state.formStatus ==
-                        FormzSubmissionStatus.failure
-                    ? context
-                        .read<StoryAddBloc>()
-                        .state
-                        .story
-                        .error
-                        .value(context)
-                    : null,
-              ),
+              child: _message(context: context, isDesk: true),
             ),
           ],
         )
@@ -53,18 +37,7 @@ List<Widget> _formWidgetList({
           ),
         ),
         KSizedBox.kHeightSizedBox8,
-        MessageFieldWidget(
-          key: KWidgetkeys.screen.storyAdd.storyField,
-          changeMessage: (text) => context.read<StoryAddBloc>().add(
-                StoryAddEvent.storyUpdated(text),
-              ),
-          hintText: context.l10n.writeYourStory,
-          isDesk: false,
-          errorText: context.read<StoryAddBloc>().state.formStatus ==
-                  FormzSubmissionStatus.failure
-              ? context.read<StoryAddBloc>().state.story.error.value(context)
-              : null,
-        ),
+        _message(context: context, isDesk: false),
       ],
       if (isDesk) KSizedBox.kHeightSizedBox40 else KSizedBox.kHeightSizedBox24,
       if (isDesk)
@@ -94,9 +67,9 @@ List<Widget> _formWidgetList({
                 ),
               ),
             ),
-            const Expanded(
+            Expanded(
               flex: 2,
-              child: StoryAddImageWidget(),
+              child: _imageWidget(context),
             ),
             const Spacer(
               flex: 2,
@@ -127,6 +100,6 @@ List<Widget> _formWidgetList({
           ),
         ),
         KSizedBox.kHeightSizedBox16,
-        const StoryAddImageWidget(),
+        _imageWidget(context),
       ],
     ];
