@@ -23,6 +23,10 @@ class ProfileMyStoryBodyWidget extends StatelessWidget {
           key: KWidgetkeys.screen.myStory.subtitle,
           style: isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
         ),
+        if (isDesk)
+          KSizedBox.kHeightSizedBox56
+        else
+          KSizedBox.kHeightSizedBox24,
         ...List.generate(2, (index) {
           return Padding(
             padding: index != 0
