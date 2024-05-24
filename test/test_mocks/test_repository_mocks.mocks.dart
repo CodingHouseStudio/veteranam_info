@@ -748,6 +748,18 @@ class MockFirestoreService extends _i1.Mock implements _i3.FirestoreService {
         returnValue: _i8.Future<void>.value(),
         returnValueForMissingStub: _i8.Future<void>.value(),
       ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<List<_i3.StoryModel>> getStoriesByUserId(String? userId) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getStoriesByUserId,
+          [userId],
+        ),
+        returnValue: _i8.Future<List<_i3.StoryModel>>.value(<_i3.StoryModel>[]),
+        returnValueForMissingStub:
+            _i8.Future<List<_i3.StoryModel>>.value(<_i3.StoryModel>[]),
+      ) as _i8.Future<List<_i3.StoryModel>>);
 }
 
 /// A class which mocks [IInvestorsRepository].
@@ -5084,6 +5096,34 @@ class MockIStoryRepository extends _i1.Mock implements _i3.IStoryRepository {
           ),
         )),
       ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
+
+  @override
+  _i8.Future<_i2.Either<_i3.SomeFailure, List<_i3.StoryModel>>> getStoriesById(
+          String? userId) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getStoriesById,
+          [userId],
+        ),
+        returnValue:
+            _i8.Future<_i2.Either<_i3.SomeFailure, List<_i3.StoryModel>>>.value(
+                _FakeEither_0<_i3.SomeFailure, List<_i3.StoryModel>>(
+          this,
+          Invocation.method(
+            #getStoriesById,
+            [userId],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i8.Future<_i2.Either<_i3.SomeFailure, List<_i3.StoryModel>>>.value(
+                _FakeEither_0<_i3.SomeFailure, List<_i3.StoryModel>>(
+          this,
+          Invocation.method(
+            #getStoriesById,
+            [userId],
+          ),
+        )),
+      ) as _i8.Future<_i2.Either<_i3.SomeFailure, List<_i3.StoryModel>>>);
 }
 
 /// A class which mocks [FirebaseStorage].
