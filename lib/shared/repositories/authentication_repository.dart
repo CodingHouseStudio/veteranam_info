@@ -5,14 +5,14 @@ import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kozak/shared/shared.dart';
 
-enum AuthenticationStatus { unknown, anonymous, authenticated, unauthenticated }
+enum AuthenticationStatus { unknown, anonymous, authenticated }
+// unauthenticated,
 
 @Singleton()
 class AuthenticationRepository {
   AuthenticationRepository(
     this.iAppAuthenticationRepository,
   ) {
-    _logInAnonymously();
     // Listen to currentUser changes and emit auth status
     _authenticationStatuscontroller =
         StreamController<AuthenticationStatus>.broadcast(
@@ -60,9 +60,10 @@ class AuthenticationRepository {
         );
         return;
       }
-      _authenticationStatuscontroller.add(
-        AuthenticationStatus.unauthenticated,
-      );
+      _logInAnonymously();
+      // _authenticationStatuscontroller.add(
+      //   AuthenticationStatus.unauthenticated,
+      // );
       _userSettingSubscription?.cancel();
       _userSettingSubscription = null;
     });
@@ -114,8 +115,9 @@ class AuthenticationRepository {
     return result.fold(
       (l) {
         debugPrint('error: $l');
+        _logInAnonymously();
         _authenticationStatuscontroller.add(
-          AuthenticationStatus.unauthenticated,
+          AuthenticationStatus.anonymous,
         );
         return Left(l);
       },
@@ -129,16 +131,16 @@ class AuthenticationRepository {
 
   Future<Either<SomeFailure, bool>> _logInAnonymously() async {
     final result = await iAppAuthenticationRepository.logInAnonymously();
-    return result.fold(
-      (l) {
-        debugPrint('error: $l');
-        return Left(l);
-      },
+    result.fold(
+      (l) => debugPrint('error: $l'),
       (r) {
-        debugPrint('authenticated');
-        return Right(r);
+        debugPrint('anonymous');
+        _authenticationStatuscontroller.add(
+          AuthenticationStatus.anonymous,
+        );
       },
     );
+    return result;
   }
 
   Future<Either<SomeFailure, bool>> signUpWithGoogle() async {
@@ -146,8 +148,9 @@ class AuthenticationRepository {
     return result.fold(
       (l) {
         debugPrint('error: $l');
+        _logInAnonymously();
         _authenticationStatuscontroller.add(
-          AuthenticationStatus.unauthenticated,
+          AuthenticationStatus.anonymous,
         );
         return Left(l);
       },
@@ -163,7 +166,7 @@ class AuthenticationRepository {
     final resault = await iAppAuthenticationRepository.logOut();
     resault.fold((l) => debugPrint(l.toString()), (r) {
       debugPrint('ever reached here?');
-      _authenticationStatuscontroller.add(AuthenticationStatus.unauthenticated);
+      _authenticationStatuscontroller.add(AuthenticationStatus.anonymous);
     });
     return resault;
   }

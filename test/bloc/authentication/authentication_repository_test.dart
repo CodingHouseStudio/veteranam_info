@@ -180,6 +180,11 @@ void main() {
         ).thenAnswer(
           (_) async => const Left(SomeFailure.serverError()),
         );
+        when(
+          mockAppAuthenticationRepository.logInAnonymously(),
+        ).thenAnswer(
+          (_) async => const Left(SomeFailure.serverError()),
+        );
       });
       test('Log in', () async {
         expect(
