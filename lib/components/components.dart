@@ -15,6 +15,7 @@ export 'sign_up/sign_up.dart';
 export 'story/story.dart';
 export 'story_add/story_add.dart';
 export 'thanks/thanks.dart';
+export 'under_construction/under_construction.dart';
 export 'work/work.dart';
 export 'work_employee/work_employee.dart';
 export 'work_employer/employer.dart';

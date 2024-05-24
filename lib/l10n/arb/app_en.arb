@@ -145,5 +145,6 @@
   "yes": "Yes",
   "no": "No",
   "previous": "Previous",
-  "myStoryDetails": "In this section you can manage your stories."
+  "myStoryDetails": "In this section you can manage your stories.",
+  "underConstruction": "This page is under construction."
 }
