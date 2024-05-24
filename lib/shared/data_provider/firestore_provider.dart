@@ -31,6 +31,16 @@ class FirestoreService {
         .set(feedback.toJson());
   }
 
+  Future<List<FeedbackModel>> getUserFeedback(String userId) async {
+    final snapshot = await _db
+        .collection(FirebaseCollectionName.feedback)
+        .where(FeedbackModelJsonField.guestId, isEqualTo: userId)
+        .get();
+    return snapshot.docs
+        .map((doc) => FeedbackModel.fromJson(doc.data()))
+        .toList();
+  }
+
   Future<void> addQuestion(QuestionModel question) {
     return _db
         .collection(FirebaseCollectionName.questions)

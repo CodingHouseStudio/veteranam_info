@@ -116,7 +116,6 @@ List<Widget> _employeeRespondContainerWidgetList({
       KSizedBox.kHeightSizedBox16,
       cancelButton(context: context, isDesk: false),
     ],
-    if (isDesk) KSizedBox.kHeightSizedBox32 else KSizedBox.kHeightSizedBox16,
   ];
 }
 

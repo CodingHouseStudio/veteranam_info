@@ -12,10 +12,17 @@ void main() {
       late FirebaseFirestore mockFirebaseFirestore;
       late CollectionReference<Map<String, dynamic>> mockCollectionReference;
       late DocumentReference<Map<String, dynamic>> mockDocumentReference;
+      late Query<Map<String, dynamic>> mockQuery;
+      late QuerySnapshot<Map<String, dynamic>> mockQuerySnapshot;
+      late List<QueryDocumentSnapshot<Map<String, dynamic>>>
+          mockQueryDocumentSnapshot;
       setUp(() {
         mockCollectionReference = MockCollectionReference();
         mockFirebaseFirestore = MockFirebaseFirestore();
         mockDocumentReference = MockDocumentReference();
+        mockQuery = MockQuery();
+        mockQuerySnapshot = MockQuerySnapshot();
+        mockQueryDocumentSnapshot = [MockQueryDocumentSnapshot()];
 
         when(
           mockFirebaseFirestore.collection(FirebaseCollectionName.feedback),
@@ -28,15 +35,43 @@ void main() {
         );
 
         when(
+          mockCollectionReference.where(
+            FeedbackModelJsonField.guestId,
+            isEqualTo: KTestText.user.id,
+          ),
+        ).thenAnswer(
+          (_) => mockQuery,
+        );
+
+        when(
           mockDocumentReference.set(KTestText.feedbackModel.toJson()),
         ).thenAnswer(
           (_) async {},
         );
 
+        when(
+          mockQuery.get(),
+        ).thenAnswer(
+          (_) async => mockQuerySnapshot,
+        );
+
+        when(
+          mockQuerySnapshot.docs,
+        ).thenAnswer(
+          (_) => mockQueryDocumentSnapshot,
+        );
+
+        when(
+          mockQueryDocumentSnapshot.first.data(),
+        ).thenAnswer(
+          (_) =>
+              [KTestText.feedbackModel].map((e) => e.toJson()).toList().first,
+        );
+
         FirestoreService.firebaseFirestore = mockFirebaseFirestore;
         firestoreService = FirestoreService();
       });
-      test('add feedback', () async {
+      test('Add Feedback', () async {
         await firestoreService.addFeedback(KTestText.feedbackModel);
 
         verify(
@@ -47,6 +82,31 @@ void main() {
         ).called(1);
         verify(
           mockDocumentReference.set(KTestText.feedbackModel.toJson()),
+        ).called(1);
+      });
+      test('Get User Feedback', () async {
+        expect(
+          await firestoreService.getUserFeedback(KTestText.user.id),
+          [KTestText.feedbackModel],
+        );
+
+        verify(
+          mockFirebaseFirestore.collection(FirebaseCollectionName.feedback),
+        ).called(1);
+        verify(
+          mockCollectionReference.where(
+            FeedbackModelJsonField.guestId,
+            isEqualTo: KTestText.user.id,
+          ),
+        ).called(1);
+        verify(
+          mockQuery.get(),
+        ).called(1);
+        verify(
+          mockQuerySnapshot.docs,
+        ).called(1);
+        verify(
+          mockQueryDocumentSnapshot.first.data(),
         ).called(1);
       });
     });
