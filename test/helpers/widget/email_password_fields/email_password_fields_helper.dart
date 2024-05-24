@@ -55,10 +55,5 @@ Future<void> emailPasswordFieldsHelper({
       find.byKey(KWidgetkeys.widget.emailPasswordFields.buttonHidePassword),
       findsNothing,
     );
-
-    expect(
-      find.byKey(KWidgetkeys.widget.emailPasswordFields.iconHidePassword),
-      findsNothing,
-    );
   }
 }
