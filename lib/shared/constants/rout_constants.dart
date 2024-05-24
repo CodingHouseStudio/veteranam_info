@@ -86,4 +86,8 @@ abstract class KRoute {
     path: 'myStory',
     name: 'MyStory',
   );
+  static const _RouteItem underConstruction = _RouteItem(
+    path: '/underConstruction',
+    name: 'UnderConstruction',
+  );
 }

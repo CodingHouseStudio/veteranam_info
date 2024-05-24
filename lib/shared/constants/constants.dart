@@ -1,3 +1,4 @@
+export 'config.dart';
 export 'dimensions/dimensions.dart';
 export 'enum.dart';
 export 'platform_constants.dart';
