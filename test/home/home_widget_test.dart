@@ -19,15 +19,26 @@ void main() {
     late AuthenticationRepository mockAuthenticationRepository;
     late IHomeRepository mockHomeRepository;
     late IFeedbackRepository mockFeedbackRepository;
+    late IAppAuthenticationRepository mockAppAuthenticationRepository;
     setUp(() {
       ExtendedDateTime.current = KTestText.dateTime;
       ExtendedDateTime.id = KTestText.feedbackModel.id;
       mockAuthenticationRepository = MockAuthenticationRepository();
+      mockAppAuthenticationRepository = MockAppAuthenticationRepository();
       when(mockAuthenticationRepository.currentUser).thenAnswer(
         (realInvocation) => User.empty,
       );
+      when(mockAppAuthenticationRepository.currentUserSetting).thenAnswer(
+        (realInvocation) => UserSetting.empty,
+      );
+      when(mockAppAuthenticationRepository.currentUser).thenAnswer(
+        (realInvocation) => KTestText.user,
+      );
       when(mockAuthenticationRepository.currentUserSetting).thenAnswer(
         (realInvocation) => UserSetting.empty,
+      );
+      when(mockAuthenticationRepository.isAnonymouslyOrEmty()).thenAnswer(
+        (realInvocation) => true,
       );
       mockHomeRepository = MockIHomeRepository();
       when(mockHomeRepository.getQuestions()).thenAnswer(
@@ -35,6 +46,10 @@ void main() {
       );
       mockFeedbackRepository = MockIFeedbackRepository();
       when(mockFeedbackRepository.sendFeedback(KTestText.feedbackModel))
+          .thenAnswer(
+        (invocation) async => const Right(true),
+      );
+      when(mockFeedbackRepository.checkUserNeedShowFeedback(KTestText.user.id))
           .thenAnswer(
         (invocation) async => const Right(true),
       );
@@ -46,6 +61,7 @@ void main() {
         mockHomeRepository: mockHomeRepository,
         mockAuthenticationRepository: mockAuthenticationRepository,
         tester: tester,
+        mockAppAuthenticationRepository: mockAppAuthenticationRepository,
       );
 
       await homeInitialHelper(tester);
@@ -57,6 +73,7 @@ void main() {
         mockHomeRepository: mockHomeRepository,
         mockAuthenticationRepository: mockAuthenticationRepository,
         tester: tester,
+        mockAppAuthenticationRepository: mockAppAuthenticationRepository,
       );
 
       await correctSaveHelper(tester);
@@ -68,6 +85,7 @@ void main() {
         mockHomeRepository: mockHomeRepository,
         mockAuthenticationRepository: mockAuthenticationRepository,
         tester: tester,
+        mockAppAuthenticationRepository: mockAppAuthenticationRepository,
       );
 
       await incorrectSaveHelper(tester);
@@ -79,6 +97,7 @@ void main() {
         mockHomeRepository: mockHomeRepository,
         mockAuthenticationRepository: mockAuthenticationRepository,
         tester: tester,
+        mockAppAuthenticationRepository: mockAppAuthenticationRepository,
       );
 
       await feedbackClearTextHelper(
@@ -98,6 +117,7 @@ void main() {
           mockAuthenticationRepository: mockAuthenticationRepository,
           tester: tester,
           mockGoRouter: mockGoRouter,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
         );
 
         await homeInitialHelper(tester);
@@ -111,6 +131,7 @@ void main() {
             mockAuthenticationRepository: mockAuthenticationRepository,
             tester: tester,
             mockGoRouter: mockGoRouter,
+            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
           );
 
           await navbarNavigationHelper(
@@ -126,6 +147,7 @@ void main() {
             mockAuthenticationRepository: mockAuthenticationRepository,
             tester: tester,
             mockGoRouter: mockGoRouter,
+            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
           );
 
           await boxexHelper(
@@ -141,6 +163,7 @@ void main() {
             mockAuthenticationRepository: mockAuthenticationRepository,
             tester: tester,
             mockGoRouter: mockGoRouter,
+            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
           );
 
           await feedbackNavigationHelper(
@@ -155,6 +178,7 @@ void main() {
             mockAuthenticationRepository: mockAuthenticationRepository,
             mockFeedbackRepository: mockFeedbackRepository,
             mockHomeRepository: mockHomeRepository,
+            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
           );
 
           await footerButtonsHelper(

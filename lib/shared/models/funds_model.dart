@@ -17,3 +17,11 @@ class FundModel with _$FundModel {
   factory FundModel.fromJson(Map<String, dynamic> json) =>
       _$FundModelFromJson(json);
 }
+
+abstract class FundModelJsonField {
+  static const id = 'id';
+  static const title = 'title';
+  static const subtitle = 'subtitle';
+  static const link = 'link';
+  static const image = 'image';
+}

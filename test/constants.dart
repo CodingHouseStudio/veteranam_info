@@ -142,6 +142,13 @@ abstract class KTestText {
     id: '1',
     userRole: UserRole.civilian,
   );
+
+  static const userSettingModel = UserSetting(
+    id: '1',
+    userRole: UserRole.civilian,
+    locale: Language.english,
+    roleIsConfirmed: true,
+  );
   static const imageModel = ImageModel(
     downloadURL: 'test_URL',
     lastModifiedTS: 1,
@@ -159,7 +166,7 @@ abstract class KTestText {
 
   static final feedbackModel = FeedbackModel(
     id: dateTime.microsecondsSinceEpoch.toString(),
-    guestId: dateTime.microsecondsSinceEpoch.toString(),
+    guestId: KTestText.user.id,
     guestName: KTestText.field,
     email: KTestText.userEmail,
     timestamp: dateTime,
