@@ -5,14 +5,17 @@ import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kozak/shared/shared.dart';
 
-enum AuthenticationStatus { unknown, anonymous, authenticated, unauthenticated }
+enum AuthenticationStatus {
+  unknown,
+  anonymous,
+  authenticated,
+} //unauthenticated
 
 @Singleton()
 class AuthenticationRepository {
   AuthenticationRepository(
     this.iAppAuthenticationRepository,
   ) {
-    _logInAnonymously();
     // Listen to currentUser changes and emit auth status
     _authenticationStatuscontroller =
         StreamController<AuthenticationStatus>.broadcast(
@@ -60,9 +63,7 @@ class AuthenticationRepository {
         );
         return;
       }
-      _authenticationStatuscontroller.add(
-        AuthenticationStatus.unauthenticated,
-      );
+      _logInAnonymously();
       _userSettingSubscription?.cancel();
       _userSettingSubscription = null;
     });
@@ -96,7 +97,12 @@ class AuthenticationRepository {
   }
 
   Future<Either<SomeFailure, bool>> deleteUser() async {
-    return iAppAuthenticationRepository.deleteUser();
+    final resault = await iAppAuthenticationRepository.deleteUser();
+    resault.fold((l) => debugPrint(l.toString()), (r) {
+      debugPrint('ever reached here?');
+      _logInAnonymously();
+    });
+    return resault;
   }
 
   UserSetting get currentUserSetting {
@@ -115,7 +121,7 @@ class AuthenticationRepository {
       (l) {
         debugPrint('error: $l');
         _authenticationStatuscontroller.add(
-          AuthenticationStatus.unauthenticated,
+          AuthenticationStatus.anonymous,
         );
         return Left(l);
       },
@@ -147,7 +153,7 @@ class AuthenticationRepository {
       (l) {
         debugPrint('error: $l');
         _authenticationStatuscontroller.add(
-          AuthenticationStatus.unauthenticated,
+          AuthenticationStatus.anonymous,
         );
         return Left(l);
       },
@@ -163,7 +169,7 @@ class AuthenticationRepository {
     final resault = await iAppAuthenticationRepository.logOut();
     resault.fold((l) => debugPrint(l.toString()), (r) {
       debugPrint('ever reached here?');
-      _authenticationStatuscontroller.add(AuthenticationStatus.unauthenticated);
+      _logInAnonymously();
     });
     return resault;
   }

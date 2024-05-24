@@ -22,7 +22,7 @@ void main() {
         (realInvocation) => Stream.value(UserSetting.empty),
       );
       when(mockAuthenticationRepository.status).thenAnswer(
-        (realInvocation) => Stream.value(AuthenticationStatus.unauthenticated),
+        (realInvocation) => Stream.value(AuthenticationStatus.anonymous),
       );
       when(mockAuthenticationRepository.currentUser).thenAnswer(
         (realInvocation) => User.empty,

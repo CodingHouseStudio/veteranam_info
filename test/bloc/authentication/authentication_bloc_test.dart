@@ -43,12 +43,15 @@ void main() {
       act: (bloc) async {
         bloc.add(
           const AuthenticationStatusChanged(
-            AuthenticationStatus.unauthenticated,
+            AuthenticationStatus.anonymous,
           ),
         );
       },
       expect: () async => [
-        const AuthenticationState.unauthenticated(),
+        const AuthenticationState.anonymous(
+          anonymouslyUser: KTestText.user,
+          anonymouslyUserSetting: KTestText.userSetting,
+        ),
       ],
     );
     blocTest<AuthenticationBloc, AuthenticationState>(
