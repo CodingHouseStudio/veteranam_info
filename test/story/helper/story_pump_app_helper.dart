@@ -6,10 +6,14 @@ import 'package:kozak/shared/shared.dart';
 import '../../text_dependency.dart';
 
 Future<void> storyPumpAppHelper({
+  required AuthenticationRepository mockAuthenticationRepository,
   required IStoryRepository mockStoryRepository,
   required WidgetTester tester,
   MockGoRouter? mockGoRouter,
 }) async {
+  _registerAuthenticationBloc(
+    mockAuthenticationRepository: mockAuthenticationRepository,
+  );
   _registerStoryBloc(mockStoryRepository: mockStoryRepository);
   await tester.pumpApp(const StoryScreen(), mockGoRouter: mockGoRouter);
 
@@ -31,4 +35,16 @@ void _registerStoryBloc({
     GetIt.I.unregister<StoryWatcherBloc>();
   }
   GetIt.I.registerSingleton<StoryWatcherBloc>(storyBloc);
+}
+
+void _registerAuthenticationBloc({
+  required AuthenticationRepository mockAuthenticationRepository,
+}) {
+  final authenticationBloc = AuthenticationBloc(
+    authenticationRepository: mockAuthenticationRepository,
+  );
+  if (GetIt.I.isRegistered<AuthenticationBloc>()) {
+    GetIt.I.unregister<AuthenticationBloc>();
+  }
+  GetIt.I.registerSingleton<AuthenticationBloc>(authenticationBloc);
 }

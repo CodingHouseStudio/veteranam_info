@@ -3,6 +3,7 @@ import 'package:kozak/shared/shared.dart';
 
 class WorkRequestCardWidget extends StatelessWidget {
   const WorkRequestCardWidget({required this.isDesk, super.key});
+
   final bool isDesk;
 
   @override

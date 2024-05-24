@@ -51,12 +51,11 @@ Future<void> informationInitialHelper(
     findsNothing,
   );
 
-  await changeWindowSizeHelper(tester: tester);
-
-  expect(
-    find.byKey(KWidgetkeys.screen.information.buttonIcon),
-    findsOneWidget,
+  await changeWindowSizeHelper(
+    tester: tester,
+    test: () async => expect(
+      find.byKey(KWidgetkeys.screen.information.buttonIcon),
+      findsOneWidget,
+    ),
   );
-
-  await changeWindowSizeHelper(tester: tester, setDefaultSize: true);
 }

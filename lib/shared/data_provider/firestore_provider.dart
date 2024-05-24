@@ -11,6 +11,7 @@ class FirestoreService {
     // Initialization logic can't use await directly in constructor
     _initFirestoreSettings();
   }
+
   final FirebaseFirestore _db = firebaseFirestore;
 
   @visibleForTesting
@@ -28,6 +29,16 @@ class FirestoreService {
         .collection(FirebaseCollectionName.feedback)
         .doc(feedback.id)
         .set(feedback.toJson());
+  }
+
+  Future<List<FeedbackModel>> getUserFeedback(String userId) async {
+    final snapshot = await _db
+        .collection(FirebaseCollectionName.feedback)
+        .where(FeedbackModelJsonField.guestId, isEqualTo: userId)
+        .get();
+    return snapshot.docs
+        .map((doc) => FeedbackModel.fromJson(doc.data()))
+        .toList();
   }
 
   Future<void> addQuestion(QuestionModel question) {
@@ -121,6 +132,15 @@ class FirestoreService {
         },
       );
 
+  Future<void> deleteUserSetting(
+    String userId,
+  ) {
+    return _db
+        .collection(FirebaseCollectionName.userSettings)
+        .doc(userId)
+        .delete();
+  }
+
   Stream<List<WorkModel>> getWorks() => _db
           .collection(FirebaseCollectionName.work)
           .snapshots(includeMetadataChanges: true) // Enable caching
@@ -180,5 +200,55 @@ class FirestoreService {
     return querySnapshot.docs
         .map((doc) => StoryModel.fromJson(doc.data()))
         .toList();
+  }
+
+  Stream<List<DiscountModel>> getDiscounts() => _db
+          .collection(FirebaseCollectionName.discount)
+          .snapshots(includeMetadataChanges: true) // Enable caching
+          .map(
+        (snapshot) {
+          for (final change in snapshot.docChanges) {
+            if (change.type == DocumentChangeType.added) {
+              final source =
+                  (snapshot.metadata.isFromCache) ? 'local cache' : 'server';
+              debugPrint('Data fetched from $source}');
+            }
+          }
+          return snapshot.docs
+              .map((doc) => DiscountModel.fromJson(doc.data()))
+              .toList();
+        },
+      );
+
+  Future<void> addDiscount(DiscountModel discount) {
+    return _db
+        .collection(FirebaseCollectionName.discount)
+        .doc(discount.id)
+        .set(discount.toJson());
+  }
+
+  Stream<List<TagModel>> getTags() => _db
+          .collection(FirebaseCollectionName.tags)
+          .snapshots(includeMetadataChanges: true) // Enable caching
+          .map(
+        (snapshot) {
+          for (final change in snapshot.docChanges) {
+            if (change.type == DocumentChangeType.added) {
+              final source =
+                  (snapshot.metadata.isFromCache) ? 'local cache' : 'server';
+              debugPrint('Data fetched from $source}');
+            }
+          }
+          return snapshot.docs
+              .map((doc) => TagModel.fromJson(doc.data()))
+              .toList();
+        },
+      );
+
+  Future<void> addTags(TagModel tags) {
+    return _db
+        .collection(FirebaseCollectionName.tags)
+        .doc(tags.id)
+        .set(tags.toJson());
   }
 }

@@ -11,7 +11,7 @@ void main() {
   setupFirebaseAuthMocks();
 
   tearDown(GetIt.I.reset);
-  group('${KScreenBlocName.myStory} ', () {
+  group('${KScreenBlocName.profileMyStory} ', () {
     testWidgets('${KGroupText.intial} ', (tester) async {
       await myStoryPumpAppHelper(tester: tester);
 
