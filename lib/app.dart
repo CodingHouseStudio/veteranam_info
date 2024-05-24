@@ -51,6 +51,9 @@ class _AppWidgetState extends State<AppWidget> {
   Widget build(BuildContext context) {
     return BlocBuilder<AuthenticationBloc, AuthenticationState>(
       builder: (context, _) {
+        if (_.status == AuthenticationStatus.unknown) {
+          return const CircularProgressIndicator.adaptive();
+        }
         return MaterialApp.router(
           key: KWidgetkeys.screen.app.screen,
           theme: themeDataNew.light(),

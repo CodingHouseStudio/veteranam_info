@@ -3,78 +3,84 @@ import 'package:kozak/shared/shared.dart';
 
 import '../../text_dependency.dart';
 
-Future<void> workRespondInitialHelper(
+Future<void> employeeRespondInitialHelper(
   WidgetTester tester,
 ) async {
-  expect(
-    find.byKey(KWidgetkeys.screen.workRespond.title),
-    findsOneWidget,
-  );
-
-  expect(
-    find.byKey(KWidgetkeys.screen.workRespond.subtitle),
-    findsOneWidget,
-  );
-
-  expect(
-    find.byKey(KWidgetkeys.screen.workRespond.username),
-    findsOneWidget,
-  );
-
-  expect(
-    find.byKey(KWidgetkeys.screen.workRespond.emailText),
-    findsOneWidget,
-  );
-
-  expect(
-    find.byKey(KWidgetkeys.screen.workRespond.emailField),
-    findsOneWidget,
-  );
-
-  expect(
-    find.byKey(KWidgetkeys.screen.workRespond.phoneNumberText),
-    findsOneWidget,
-  );
-
-  expect(
-    find.byKey(KWidgetkeys.screen.workRespond.phoneNumberField),
-    findsOneWidget,
-  );
-
-  await scrollingHelper(
+  await changeWindowSizeHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.workRespond.phoneNumberField,
-  );
+    windowsTest: true,
+    test: () async {
+      expect(
+        find.byKey(KWidgetkeys.screen.employeeRespond.title),
+        findsOneWidget,
+      );
 
-  expect(
-    find.byKey(KWidgetkeys.screen.workRespond.resume),
-    findsOneWidget,
-  );
+      expect(
+        find.byKey(KWidgetkeys.screen.employeeRespond.subtitle),
+        findsOneWidget,
+      );
 
-  expect(
-    find.byKey(KWidgetkeys.screen.workRespond.upload),
-    findsOneWidget,
-  );
+      expect(
+        find.byKey(KWidgetkeys.screen.employeeRespond.username),
+        findsOneWidget,
+      );
 
-  expect(
-    find.byKey(KWidgetkeys.screen.workRespond.checkPoint),
-    findsOneWidget,
-  );
+      expect(
+        find.byKey(KWidgetkeys.screen.employeeRespond.emailText),
+        findsOneWidget,
+      );
 
-  await chekPointSingleHelper(tester);
+      expect(
+        find.byKey(KWidgetkeys.screen.employeeRespond.emailField),
+        findsOneWidget,
+      );
 
-  expect(
-    find.byKey(KWidgetkeys.screen.workRespond.noResume),
-    findsOneWidget,
-  );
+      expect(
+        find.byKey(KWidgetkeys.screen.employeeRespond.phoneNumberText),
+        findsOneWidget,
+      );
 
-  expect(
-    find.byKey(KWidgetkeys.screen.workRespond.send),
-    findsOneWidget,
-  );
+      expect(
+        find.byKey(KWidgetkeys.screen.employeeRespond.phoneNumberField),
+        findsOneWidget,
+      );
 
-  expect(
-    find.byKey(KWidgetkeys.screen.workRespond.cancel),
-    findsOneWidget,
+      await scrollingHelper(
+        tester: tester,
+        itemKey: KWidgetkeys.screen.employeeRespond.phoneNumberField,
+      );
+
+      expect(
+        find.byKey(KWidgetkeys.screen.employeeRespond.resume),
+        findsOneWidget,
+      );
+
+      expect(
+        find.byKey(KWidgetkeys.screen.employeeRespond.upload),
+        findsOneWidget,
+      );
+
+      expect(
+        find.byKey(KWidgetkeys.screen.employeeRespond.checkPoint),
+        findsOneWidget,
+      );
+
+      await chekPointSingleHelper(tester);
+
+      expect(
+        find.byKey(KWidgetkeys.screen.employeeRespond.noResume),
+        findsOneWidget,
+      );
+
+      expect(
+        find.byKey(KWidgetkeys.screen.employeeRespond.send),
+        findsOneWidget,
+      );
+
+      expect(
+        find.byKey(KWidgetkeys.screen.employeeRespond.cancel),
+        findsOneWidget,
+      );
+    },
   );
 }

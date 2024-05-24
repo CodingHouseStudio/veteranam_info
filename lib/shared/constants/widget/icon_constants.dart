@@ -25,9 +25,9 @@ class _KIcon extends Icon {
 }
 
 abstract class KIcon {
-  static const Image linkedIn =
-      Image(image: AssetImage('assets/icons/instagram.png'));
   static const Image instagram =
+      Image(image: AssetImage('assets/icons/instagram.png'));
+  static const Image linkedIn =
       Image(image: AssetImage('assets/icons/linkedin.png'));
   static const Image facebook = Image(
     image: AssetImage('assets/icons/social_icons_f.png'),
@@ -58,6 +58,7 @@ abstract class KIcon {
   static const _KIcon share = _KIcon(Icons.file_upload_outlined);
   static const _KIcon error = _KIcon(Icons.error);
   static const _KIcon safe = _KIcon(Icons.bookmark_border_sharp);
+  static const _KIcon saved = _KIcon(Icons.bookmark_added_sharp);
   static const _KIcon check = _KIcon(Icons.check);
   static const _KIcon volum = _KIcon(Icons.volume_up);
   static const _KIcon eye = _KIcon(Icons.visibility_outlined);

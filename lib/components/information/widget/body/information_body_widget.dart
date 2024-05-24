@@ -53,9 +53,13 @@ class InformationBodyWidget extends StatelessWidget {
                   ...List.generate(_.filteredInformationModelItems.length,
                       (index) {
                     return Padding(
-                      padding: EdgeInsets.only(
-                        top: index != 0 ? KPadding.kPaddingSize40 : 0,
-                      ),
+                      padding: index != 0
+                          ? EdgeInsets.only(
+                              top: isDesk
+                                  ? KPadding.kPaddingSize40
+                                  : KPadding.kPaddingSize24,
+                            )
+                          : EdgeInsets.zero,
                       child: NewsCardWidget(
                         key: KWidgetkeys.screen.information.card,
                         informationItem:

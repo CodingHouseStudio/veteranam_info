@@ -14,6 +14,11 @@ void main() {
     group('${KGroupText.successful} ', () {
       setUp(() {
         mockAppAuthenticationRepository = MockIAppAuthenticationRepository();
+        when(
+          mockAppAuthenticationRepository.logInAnonymously(),
+        ).thenAnswer(
+          (_) async => const Right(true),
+        );
         authenticationRepository =
             AuthenticationRepository(mockAppAuthenticationRepository);
         when(
@@ -29,6 +34,9 @@ void main() {
         );
         when(mockAppAuthenticationRepository.currentUserSetting).thenAnswer(
           (_) => const UserSetting(id: KTestText.field),
+        );
+        when(mockAppAuthenticationRepository.currentUser).thenAnswer(
+          (_) => User.empty,
         );
         when(mockAppAuthenticationRepository.user).thenAnswer(
           (_) => Stream.value(KTestText.user),
@@ -54,6 +62,11 @@ void main() {
           mockAppAuthenticationRepository.deleteUser(),
         ).thenAnswer(
           (_) async => const Right(true),
+        );
+        when(
+          mockAppAuthenticationRepository.isAnonymously(),
+        ).thenAnswer(
+          (_) => false,
         );
       });
       test('Log in', () async {
@@ -111,10 +124,27 @@ void main() {
               .having((e) => e.value, 'value', isTrue),
         );
       });
+      test('Is Anonymously', () async {
+        expect(
+          authenticationRepository.isAnonymously(),
+          false,
+        );
+      });
+      test('Is Anonymously Or Emty', () async {
+        expect(
+          authenticationRepository.isAnonymouslyOrEmty(),
+          true,
+        );
+      });
     });
     group('${KGroupText.failure} ', () {
       setUp(() {
         mockAppAuthenticationRepository = MockIAppAuthenticationRepository();
+        when(
+          mockAppAuthenticationRepository.logInAnonymously(),
+        ).thenAnswer(
+          (_) async => const Left(SomeFailure.serverError()),
+        );
         authenticationRepository =
             AuthenticationRepository(mockAppAuthenticationRepository);
         when(

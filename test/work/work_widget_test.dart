@@ -1,7 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:kozak/shared/shared.dart';
-import 'package:mockito/mockito.dart';
 
 import '../text_dependency.dart';
 import 'helper/helper.dart';
@@ -15,20 +14,8 @@ void main() {
 
   tearDown(GetIt.I.reset);
   group('${KScreenBlocName.work} ', () {
-    late AuthenticationRepository mockAuthenticationRepository;
-    setUp(() {
-      mockAuthenticationRepository = MockAuthenticationRepository();
-      when(mockAuthenticationRepository.currentUser).thenAnswer(
-        (realInvocation) => User.empty,
-      );
-      when(mockAuthenticationRepository.currentUserSetting).thenAnswer(
-        (realInvocation) => UserSetting.empty,
-      );
-    });
-
     testWidgets('${KGroupText.intial} ', (tester) async {
       await workPumpAppHelper(
-        mockAuthenticationRepository: mockAuthenticationRepository,
         tester: tester,
       );
 
@@ -39,7 +26,6 @@ void main() {
       setUp(() => mockGoRouter = MockGoRouter());
       testWidgets('${KGroupText.intial} ', (tester) async {
         await workPumpAppHelper(
-          mockAuthenticationRepository: mockAuthenticationRepository,
           tester: tester,
           mockGoRouter: mockGoRouter,
         );
@@ -49,7 +35,6 @@ void main() {
       group('${KGroupText.goTo} ', () {
         testWidgets('${KRoute.workEmployee.name} ', (tester) async {
           await workPumpAppHelper(
-            mockAuthenticationRepository: mockAuthenticationRepository,
             tester: tester,
             mockGoRouter: mockGoRouter,
           );
@@ -61,7 +46,6 @@ void main() {
         });
         testWidgets('${KRoute.employer.name} ', (tester) async {
           await workPumpAppHelper(
-            mockAuthenticationRepository: mockAuthenticationRepository,
             tester: tester,
             mockGoRouter: mockGoRouter,
           );

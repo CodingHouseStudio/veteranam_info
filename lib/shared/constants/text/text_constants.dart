@@ -34,6 +34,24 @@ abstract class KMockText {
     story: cardData,
     userId: '2',
   );
+
+  static const tagsDiscount = <List<String>?>[
+    ['Медицина'],
+    ['Послуги'],
+    ['Житло'],
+    [],
+  ];
+
+  static const workModel = WorkModel(
+    id: '1',
+    title: title,
+    price: workPrice,
+    city: workCity,
+    employerContact: workCity,
+    companyName: workEmployer,
+    description: workDescription,
+  );
+
   static const workTitle = 'Комплектувальник товару в магазин';
   static const workPrice = '12000 грн +%';
   static const workCity = 'м.Одеса';
@@ -114,6 +132,7 @@ abstract class KAppText {
   static const String authChange = 'AuthenticationStatusChanged:';
   static const String backendString = '';
   static const String usernameToken = 'USERNAME_TOKEN';
+
   static List<String> routes({required bool hasAccount}) => [
         KRoute.aboutUs.name,
         KRoute.investors.name,

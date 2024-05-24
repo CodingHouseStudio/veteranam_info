@@ -19,3 +19,13 @@ class StoryModel with _$StoryModel {
   factory StoryModel.fromJson(Map<String, dynamic> json) =>
       _$StoryModelFromJson(json);
 }
+
+abstract class StoryModelJsonField {
+  static const id = 'id';
+  static const date = 'date';
+  static const story = 'story';
+  static const userId = 'userId';
+  static const userName = 'userName';
+  static const userPhoto = 'userPhoto';
+  static const image = 'image';
+}
