@@ -43,7 +43,7 @@ List<Widget> _buttonsWidgetList({
                         style: context.textStyle.hint24,
                       ),
                       KSizedBox.kHeightSizedBox40,
-                      _button(context),
+                      _button(context: context, isDesk: true),
                     ],
                   ),
                 ),
@@ -77,13 +77,17 @@ List<Widget> _buttonsWidgetList({
               style: context.textStyle.hint16,
             ),
             KSizedBox.kHeightSizedBox24,
-            _button(context),
+            _button(context: context, isDesk: false),
           ];
 
-Widget _button(BuildContext context) => ButtonWidget(
+Widget _button({
+  required BuildContext context,
+  required bool isDesk,
+}) =>
+    ButtonWidget(
       key: KWidgetkeys.screen.storyAdd.button,
       text: context.l10n.publish,
-      isDesk: false,
+      isDesk: isDesk,
       onPressed: () =>
           context.read<StoryAddBloc>().add(const StoryAddEvent.save()),
     );

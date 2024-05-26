@@ -55,8 +55,8 @@ class AuthenticationBloc
     log('${KAppText.authChange} ${event.status}');
     log('user:_____________ ${_authenticationRepository.currentUser}');
     switch (event.status) {
-      case AuthenticationStatus.unauthenticated:
-        return emit(const AuthenticationState.unauthenticated());
+      // case AuthenticationStatus.unauthenticated:
+      //   return emit(const AuthenticationState.unauthenticated());
       case AuthenticationStatus.authenticated:
         return emit(
           AuthenticationState.authenticated(
@@ -66,7 +66,7 @@ class AuthenticationBloc
         );
       case AuthenticationStatus.anonymous:
         return emit(
-          AuthenticationState.authenticatedAnonymously(
+          AuthenticationState.anonymous(
             anonymouslyUser: _authenticationRepository.currentUser,
             anonymouslyUserSetting:
                 _authenticationRepository.currentUserSetting,
