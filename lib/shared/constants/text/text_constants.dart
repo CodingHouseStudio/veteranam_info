@@ -12,6 +12,12 @@ abstract class KMockText {
     'Жовква',
     'Трускавець',
     'Стебник',
+    'Дніпро',
+    'Луцьк',
+    'Миколаїв',
+    'Суми',
+    'Ужгород',
+    'Чернігів',
   ];
   static const workCategory = 'Комплектувальник';
   static const facebook = 'Facebook';
