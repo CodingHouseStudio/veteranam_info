@@ -46,6 +46,10 @@ class EmailFieldModel
     if (!EmailValidator.validate(value)) {
       return EmailFieldModelValidationError.wrong;
     }
+    final invalidCharacters = ['&', '=', '_', "'", '-', '+'];
+    if (invalidCharacters.any((char) => value.contains(char))) {
+      return EmailFieldModelValidationError.wrong;
+    }
 
     return null;
   }
