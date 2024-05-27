@@ -191,6 +191,17 @@ class FirestoreService {
         .set(information.toJson());
   }
 
+  Future<List<StoryModel>> getStoriesByUserId(String userId) async {
+    final querySnapshot = await _db
+        .collection(FirebaseCollectionName.stroies)
+        .where('userId', isEqualTo: userId)
+        .get();
+
+    return querySnapshot.docs
+        .map((doc) => StoryModel.fromJson(doc.data()))
+        .toList();
+  }
+
   Stream<List<DiscountModel>> getDiscounts() => _db
           .collection(FirebaseCollectionName.discount)
           .snapshots(includeMetadataChanges: true) // Enable caching
