@@ -33,6 +33,12 @@ abstract class KMockText {
     date: DateTime(2024, 05, 20),
     story: cardData,
     userId: '2',
+    // image: [
+    //   const ImageModel(
+    //     downloadURL:
+    //         'https://static.vecteezy.com/system/resources/thumbnails/008/492/251/small/back-to-school-illustration-cartoon-character-children-kid-png.png',
+    //   ),
+    // ],
   );
 
   static const tagsDiscount = <List<String>?>[
