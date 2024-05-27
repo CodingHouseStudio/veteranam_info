@@ -55,9 +55,15 @@ void main() {
 
         for (final filter in filters) {
           if (filters.first == filter) {
-            expect(find.byType(DropChipWidget), findsAtLeast(1));
+            expect(
+              find.byKey(KWidgetkeys.widget.dropChip.widget),
+              findsAtLeast(1),
+            );
           } else {
-            expect(find.byType(ChipWidget), findsAtLeast(1));
+            expect(
+              find.byKey(KWidgetkeys.widget.chip.widget),
+              findsAtLeast(1),
+            );
           }
         }
       });

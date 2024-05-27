@@ -2,22 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kozak/shared/shared.dart';
 
-class FilterBoxWidget extends StatefulWidget {
+class FilterBoxWidget extends StatelessWidget {
   const FilterBoxWidget({
     required this.filters,
-    // required this.index,
     super.key,
   });
 
   final List<String> filters;
 
-  // final int index;
-
-  @override
-  State<FilterBoxWidget> createState() => _FilterBoxWidgetState();
-}
-
-class _FilterBoxWidgetState extends State<FilterBoxWidget> {
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -32,7 +24,7 @@ class _FilterBoxWidgetState extends State<FilterBoxWidget> {
           BlocBuilder<FilterCubit, List<dynamic>>(
             builder: (context, state) {
               return Wrap(
-                children: _buildChips(),
+                children: _buildChips(context),
               );
             },
           ),
@@ -42,7 +34,7 @@ class _FilterBoxWidgetState extends State<FilterBoxWidget> {
             child: BlocBuilder<FilterCubit, List<dynamic>>(
               builder: (context, state) {
                 return Row(
-                  children: _buildChips(),
+                  children: _buildChips(context),
                 );
               },
             ),
@@ -51,36 +43,30 @@ class _FilterBoxWidgetState extends State<FilterBoxWidget> {
     );
   }
 
-  List<Widget> _buildChips() {
-    return widget.filters.map((filter) {
+  List<Widget> _buildChips(BuildContext context) {
+    return filters.map((filter) {
       return Padding(
         padding: const EdgeInsets.only(
           right: KPadding.kPaddingSize20,
           bottom: KPadding.kPaddingSize10,
         ),
-        child: widget.filters.first == filter
+        child: filters.first == filter
             ? DropChipWidget(
-                filters: widget.filters,
+                filters: filters,
                 selectFilter: context.read<FilterCubit>().state.isNotEmpty &&
-                        context.read<FilterCubit>().state.length - 1 >=
-                            1 //(index + initialIndex)
-                        &&
+                        context.read<FilterCubit>().state.length - 1 >= 1 &&
                         context
                             .read<FilterCubit>()
                             .state
-                            .elementAt(1) //(index + initialIndex)
+                            .elementAt(1)
                             .toString()
                             .isNotEmpty
-                    ? context
-                        .read<FilterCubit>()
-                        .state
-                        .elementAt(1) //(index + initialIndex)
-                        .toString()
+                    ? context.read<FilterCubit>().state.elementAt(1).toString()
                     : null,
                 isDesk: true,
                 onSelected: (newValue) => context.read<FilterCubit>().change(
                       filterValue: newValue,
-                      index: 1, //index + initialIndex,
+                      index: 1,
                     ),
               )
             : ChipWidget(
