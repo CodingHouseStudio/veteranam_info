@@ -41,7 +41,10 @@ void main() {
         await tester.pumpApp(
           const Material(
             child: FilterCubitBlocprovider(
-              childWidget: FilterBoxWidget(filters: filters),
+              childWidget: FilterBoxWidget(
+                filters: filters,
+                isDesk: true,
+              ),
             ),
           ),
         );
@@ -78,7 +81,10 @@ void main() {
         await tester.pumpApp(
           const Material(
             child: FilterCubitBlocprovider(
-              childWidget: FilterBoxWidget(filters: filters),
+              childWidget: FilterBoxWidget(
+                filters: filters,
+                isDesk: true,
+              ),
             ),
           ),
         );

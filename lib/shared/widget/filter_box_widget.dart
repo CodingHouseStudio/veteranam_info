@@ -5,9 +5,11 @@ import 'package:kozak/shared/shared.dart';
 class FilterBoxWidget extends StatelessWidget {
   const FilterBoxWidget({
     required this.filters,
+    required this.isDesk,
     super.key,
   });
 
+  final bool isDesk;
   final List<String> filters;
 
   @override
@@ -18,9 +20,10 @@ class FilterBoxWidget extends StatelessWidget {
       children: [
         FilterPopupMenuWidget(
           onResetValue: () => context.read<FilterCubit>().resetAllValues(),
+          isDesk: isDesk,
         ),
         KSizedBox.kWidthSizedBox10,
-        if (!KPlatformConstants.isWebMobile)
+        if (isDesk)
           BlocBuilder<FilterCubit, List<dynamic>>(
             builder: (context, state) {
               return Wrap(
@@ -28,7 +31,7 @@ class FilterBoxWidget extends StatelessWidget {
               );
             },
           ),
-        if (KPlatformConstants.isWebMobile)
+        if (isDesk == false)
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: BlocBuilder<FilterCubit, List<dynamic>>(
