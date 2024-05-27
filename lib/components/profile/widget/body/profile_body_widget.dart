@@ -63,9 +63,7 @@ class ProfileBodyWidget extends StatelessWidget {
 
   List<Widget> _buildMobileLayout(BuildContext context, bool isDesk) {
     return [
-      Column(
-        children: _buildBoxWidgets(context, isDesk),
-      ),
+      ..._buildBoxWidgets(context, isDesk),
       ProfileCardWidget(
         key: KWidgetkeys.widget.profileCard.profileCard,
         isDesk: isDesk,
