@@ -91,10 +91,7 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
                       ),
                       KSizedBox.kHeightSizedBox8,
                     ],
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: _buildProfileInfo(),
-                    ),
+                    ..._buildProfileInfo(),
                     KSizedBox.kHeightSizedBox8,
                     _buildProfileFooter(),
                     KSizedBox.kHeightSizedBox8,
