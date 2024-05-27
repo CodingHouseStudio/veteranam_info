@@ -64,7 +64,7 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
                           ),
                       ],
                     ),
-                    ...[
+                    if (isEditing) ...[
                       KSizedBox.kHeightSizedBox8,
                       _textField(
                         label: context.l10n.name,
@@ -89,8 +89,8 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
                             .last,
                         hint: context.l10n.writeYouLastName,
                       ),
+                      KSizedBox.kHeightSizedBox8,
                     ],
-                    KSizedBox.kHeightSizedBox8,
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: _buildProfileInfo(),
