@@ -37,78 +37,75 @@ class ProfileBodyWidget extends StatelessWidget {
 
   List<Widget> _buildDesktopLayout(BuildContext context, bool isDesk) {
     return [
-      Column(
+      Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                flex: 2,
-                child: ProfileCardWidget(
-                  key: KWidgetkeys.widget.profileCard.profileCard,
-                  isDesk: isDesk,
-                ),
-              ),
-              KSizedBox.kWidthSizedBox80,
-              Expanded(
-                child: IntrinsicHeight(
-                  child: _buildBoxWidgets(context, isDesk),
-                ),
-              ),
-            ],
+          Expanded(
+            flex: 2,
+            child: ProfileCardWidget(
+              key: KWidgetkeys.widget.profileCard.profileCard,
+              isDesk: isDesk,
+            ),
           ),
-          KSizedBox.kHeightSizedBox56,
+          KSizedBox.kWidthSizedBox80,
+          Expanded(
+            child: IntrinsicHeight(
+              child: Column(
+                children: _buildBoxWidgets(context, isDesk),
+              ),
+            ),
+          ),
         ],
       ),
+      KSizedBox.kHeightSizedBox56,
     ];
   }
 
   List<Widget> _buildMobileLayout(BuildContext context, bool isDesk) {
     return [
       Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _buildBoxWidgets(context, isDesk),
-          ProfileCardWidget(
-            key: KWidgetkeys.widget.profileCard.profileCard,
-            isDesk: isDesk,
-          ),
-          KSizedBox.kHeightSizedBox24,
-        ],
+        children: _buildBoxWidgets(context, isDesk),
       ),
+      ProfileCardWidget(
+        key: KWidgetkeys.widget.profileCard.profileCard,
+        isDesk: isDesk,
+      ),
+      KSizedBox.kHeightSizedBox24,
     ];
   }
 
-  Widget _buildBoxWidgets(BuildContext context, bool isDesk) {
-    return Padding(
-      padding: const EdgeInsets.all(KPadding.kPaddingSize8),
-      child: Column(
-        children: [
-          BoxWidget(
-            text: context.l10n.saved,
-            isDesk: isDesk,
-            onTap: () => context.goNamed(
-              KRoute.profileSaves.name,
-            ),
-          ),
-          KSizedBox.kHeightSizedBox30,
-          BoxWidget(
-            text: context.l10n.myStory,
-            isDesk: isDesk,
-            textIconPaddingWidget: KSizedBox.kHeightSizedBox56,
-            onTap: () => context.goNamedWithScroll(KRoute.profileMyStory.name),
-          ),
-          KSizedBox.kHeightSizedBox30,
-          if (isDesk)
+  List<Widget> _buildBoxWidgets(BuildContext context, bool isDesk) {
+    return [
+      Padding(
+        padding: const EdgeInsets.all(KPadding.kPaddingSize8),
+        child: Column(
+          children: [
             BoxWidget(
-              text: context.l10n.myFeedback,
+              text: context.l10n.saved,
+              isDesk: isDesk,
+              onTap: () => context.goNamed(
+                KRoute.profileSaves.name,
+              ),
+            ),
+            KSizedBox.kHeightSizedBox30,
+            BoxWidget(
+              text: context.l10n.myStory,
               isDesk: isDesk,
               textIconPaddingWidget: KSizedBox.kHeightSizedBox56,
-              onTap: null,
+              onTap: () =>
+                  context.goNamedWithScroll(KRoute.profileMyStory.name),
             ),
-        ],
+            KSizedBox.kHeightSizedBox30,
+            if (isDesk)
+              BoxWidget(
+                text: context.l10n.myFeedback,
+                isDesk: isDesk,
+                textIconPaddingWidget: KSizedBox.kHeightSizedBox56,
+                onTap: null,
+              ),
+          ],
+        ),
       ),
-    );
+    ];
   }
 }
