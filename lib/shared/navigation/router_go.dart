@@ -1,4 +1,4 @@
-import 'package:firebase_analytics/firebase_analytics.dart';
+// import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -18,13 +18,13 @@ GoRouter router = GoRouter(
   refreshListenable:
       GoRouterRefreshStream(GetIt.instance<AuthenticationBloc>().stream),
   initialLocation: KRoute.home.path,
-  observers: [
-    FirebaseAnalyticsObserver(
-      analytics: FirebaseAnalytics.instance,
-      onError: (_) => debugPrint('FirebaseAnalyticsObserver error $_'),
-      nameExtractor: (_) => _.toString(),
-    ),
-  ],
+  // observers: [
+  //   FirebaseAnalyticsObserver(
+  //     analytics: FirebaseAnalytics.instance,
+  //     onError: (_) => debugPrint('FirebaseAnalyticsObserver error $_'),
+  //     nameExtractor: (_) => _.toString(),
+  //   ),
+  // ],
   redirect: (BuildContext context, GoRouterState state) async {
     if (context.read<AuthenticationBloc>().state.status ==
         AuthenticationStatus.authenticated) {

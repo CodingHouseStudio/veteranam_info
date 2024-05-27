@@ -17,7 +17,7 @@ class LanguagesSwitcherWidget extends StatelessWidget {
           vertical: KPadding.kPaddingSize10,
         ),
         child: Text(
-          context.l10n.localeName.getLocale.text,
+          context.read<AuthenticationBloc>().state.userSetting.locale.text,
           key: KWidgetkeys.widget.languageSwitcher.text,
           style: AppTextStyle.text24,
         ),
@@ -30,8 +30,8 @@ class LanguagesSwitcherWidget extends StatelessWidget {
           return PopupMenuItem<String>(
             key: KWidgetkeys.widget.languageSwitcher.item,
             value: languages.elementAt(index).text,
-            enabled: languages.elementAt(index).value.languageCode !=
-                context.l10n.localeName,
+            enabled: languages.elementAt(index) !=
+                context.read<AuthenticationBloc>().state.userSetting.locale,
             child: Text(languages.elementAt(index).text),
           );
         }).toList();

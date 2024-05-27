@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get_it/get_it.dart';
+import 'package:kozak/generated/l10n.dart';
 import 'package:kozak/shared/constants/theme/theme.dart';
 import 'package:kozak/shared/shared.dart';
 
@@ -48,9 +49,14 @@ class _AppWidgetState extends State<AppWidget> {
         return MaterialApp.router(
           key: KWidgetkeys.screen.app.screen,
           theme: themeDataNew.light(),
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          localizationsDelegates: const [
+            AppLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+          ],
           locale: _.userSetting.locale.value,
-          supportedLocales: AppLocalizations.supportedLocales,
+          supportedLocales: AppLocalizations.delegate.supportedLocales,
           routerConfig: router,
         );
       },

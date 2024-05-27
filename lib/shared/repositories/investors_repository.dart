@@ -11,8 +11,6 @@ class InvestorsRepository implements IInvestorsRepository {
     try {
       final fundItems = await _firestoreService.getFunds();
       return Right(fundItems);
-    } on Exception catch (e) {
-      return Left(GetFailur.fromCode(e).status);
     } catch (e) {
       return const Left(SomeFailure.serverError());
     }

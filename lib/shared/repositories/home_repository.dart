@@ -12,8 +12,6 @@ class HomeRepository implements IHomeRepository {
     try {
       final questionItems = await _firestoreService.getQuestions();
       return Right(questionItems);
-    } on Exception catch (e) {
-      return Left(GetFailur.fromCode(e).status);
     } catch (e) {
       return const Left(SomeFailure.serverError());
     }
