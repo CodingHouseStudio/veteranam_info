@@ -53,6 +53,9 @@ class ProfileMyStoryBodyWidget extends StatelessWidget {
                         key: KWidgetkeys.screen.myStory.card,
                         storyModel: _.storyModelItems.elementAt(index),
                         isDesk: isDesk,
+                        storyPadding: const EdgeInsets.symmetric(
+                          horizontal: KPadding.kPaddingSize48,
+                        ),
                       ),
                     );
                   }),
