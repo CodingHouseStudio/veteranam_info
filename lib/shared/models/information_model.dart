@@ -18,3 +18,12 @@ class InformationModel with _$InformationModel {
   factory InformationModel.fromJson(Map<String, dynamic> json) =>
       _$InformationModelFromJson(json);
 }
+
+abstract class InformationModelJsonField {
+  static const id = 'id';
+  static const title = 'title';
+  static const news = 'news';
+  static const date = 'date';
+  static const tags = 'tags';
+  static const image = 'image';
+}

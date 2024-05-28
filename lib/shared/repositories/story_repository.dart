@@ -37,4 +37,20 @@ class StoryRepository implements IStoryRepository {
       return const Left(SomeFailure.serverError());
     }
   }
+
+  @override
+  Future<Either<SomeFailure, List<StoryModel>>> getStoriesById(
+    String userId,
+  ) async {
+    try {
+      final userStoriesItems =
+          await _firestoreService.getStoriesByUserId(userId);
+
+      return Right(userStoriesItems);
+    } on Exception catch (e) {
+      return Left(GetFailur.fromCode(e).status);
+    } catch (e) {
+      return const Left(SomeFailure.serverError());
+    }
+  }
 }

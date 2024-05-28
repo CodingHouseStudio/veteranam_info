@@ -32,4 +32,8 @@ Future<void> chekPointHelper(
     find.byKey(KWidgetkeys.widget.checkPoint.icon),
     findsOneWidget,
   );
+
+  await tester.tap(find.byKey(KWidgetkeys.widget.checkPoint.widget).first);
+
+  await tester.pumpAndSettle();
 }

@@ -5,7 +5,11 @@ import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kozak/shared/shared.dart';
 
-enum AuthenticationStatus { unknown, authenticated, unauthenticated }
+enum AuthenticationStatus {
+  unknown,
+  anonymous,
+  authenticated,
+} //unauthenticated
 
 @Singleton()
 class AuthenticationRepository {
@@ -15,12 +19,12 @@ class AuthenticationRepository {
     // Listen to currentUser changes and emit auth status
     _authenticationStatuscontroller =
         StreamController<AuthenticationStatus>.broadcast(
-      onListen: _onStatusStreamListen,
-      onCancel: _onStatusStreamCancel,
+      onListen: _onUserStreamListen,
+      onCancel: _onUserStreamCancel,
     );
     _userSettingController = StreamController<UserSetting>.broadcast(
-      onListen: _onUserSettingStreamListen,
-      onCancel: _onUserSettingStreamCancel,
+      onListen: _onUserStreamListen,
+      onCancel: _onUserStreamCancel,
     );
   }
 
@@ -31,47 +35,41 @@ class AuthenticationRepository {
   StreamSubscription<User>? _userSubscription;
   StreamSubscription<UserSetting>? _userSettingSubscription;
 
-  void _onStatusStreamListen() {
-    _statusUserSubscription ??= iAppAuthenticationRepository.user.listen(
-      (currentUser) {
-        if (currentUser.isNotEmpty) {
-          _authenticationStatuscontroller.add(
-            AuthenticationStatus.authenticated,
-          );
-        } else {
-          _authenticationStatuscontroller.add(
-            AuthenticationStatus.unauthenticated,
-          );
-        }
-      },
-    );
-  }
-
-  void _onUserSettingStreamListen() {
+  void _onUserStreamListen() {
     _userSubscription ??=
         iAppAuthenticationRepository.user.listen((currentUser) {
       if (currentUser.isNotEmpty) {
+        if (currentUserSetting.id != currentUser.id &&
+            _userSettingSubscription != null) {
+          _userSettingSubscription?.cancel();
+          _userSettingSubscription = null;
+        }
         _userSettingSubscription ??=
             iAppAuthenticationRepository.userSetting.listen(
           (currentUserSetting) {
             _userSettingController.add(
               currentUserSetting,
             );
+            if (isAnonymously()) {
+              _authenticationStatuscontroller.add(
+                AuthenticationStatus.anonymous,
+              );
+              return;
+            }
+            _authenticationStatuscontroller.add(
+              AuthenticationStatus.authenticated,
+            );
           },
         );
-      } else {
-        _userSettingSubscription?.cancel();
-        _userSettingSubscription = null;
+        return;
       }
+      _logInAnonymously();
+      _userSettingSubscription?.cancel();
+      _userSettingSubscription = null;
     });
   }
 
-  void _onStatusStreamCancel() {
-    _statusUserSubscription?.cancel();
-    _statusUserSubscription = null;
-  }
-
-  void _onUserSettingStreamCancel() {
+  void _onUserStreamCancel() {
     _userSettingSubscription?.cancel();
     _userSubscription?.cancel();
     _userSettingSubscription = null;
@@ -99,7 +97,12 @@ class AuthenticationRepository {
   }
 
   Future<Either<SomeFailure, bool>> deleteUser() async {
-    return iAppAuthenticationRepository.deleteUser();
+    final resault = await iAppAuthenticationRepository.deleteUser();
+    resault.fold(
+      (l) => debugPrint(l.toString()),
+      (r) => debugPrint('ever reached here?'),
+    );
+    return resault;
   }
 
   UserSetting get currentUserSetting {
@@ -118,7 +121,7 @@ class AuthenticationRepository {
       (l) {
         debugPrint('error: $l');
         _authenticationStatuscontroller.add(
-          AuthenticationStatus.unauthenticated,
+          AuthenticationStatus.anonymous,
         );
         return Left(l);
       },
@@ -130,13 +133,27 @@ class AuthenticationRepository {
     );
   }
 
+  Future<Either<SomeFailure, bool>> _logInAnonymously() async {
+    final result = await iAppAuthenticationRepository.logInAnonymously();
+    return result.fold(
+      (l) {
+        debugPrint('error: $l');
+        return Left(l);
+      },
+      (r) {
+        debugPrint('authenticated');
+        return Right(r);
+      },
+    );
+  }
+
   Future<Either<SomeFailure, bool>> signUpWithGoogle() async {
     final result = await iAppAuthenticationRepository.signUpWithGoogle();
     return result.fold(
       (l) {
         debugPrint('error: $l');
         _authenticationStatuscontroller.add(
-          AuthenticationStatus.unauthenticated,
+          AuthenticationStatus.anonymous,
         );
         return Left(l);
       },
@@ -150,10 +167,10 @@ class AuthenticationRepository {
 
   Future<Either<SomeFailure, bool>> logOut() async {
     final resault = await iAppAuthenticationRepository.logOut();
-    resault.fold((l) => debugPrint(l.toString()), (r) {
-      debugPrint('ever reached here?');
-      _authenticationStatuscontroller.add(AuthenticationStatus.unauthenticated);
-    });
+    resault.fold(
+      (l) => debugPrint(l.toString()),
+      (r) => debugPrint('ever reached here?'),
+    );
     return resault;
   }
 
@@ -188,6 +205,11 @@ class AuthenticationRepository {
     );
     return result;
   }
+
+  bool isAnonymously() => iAppAuthenticationRepository.isAnonymously();
+
+  bool isAnonymouslyOrEmty() =>
+      iAppAuthenticationRepository.isAnonymously() || currentUser.isEmpty;
 
   void dispose() {
     _authenticationStatuscontroller.close();

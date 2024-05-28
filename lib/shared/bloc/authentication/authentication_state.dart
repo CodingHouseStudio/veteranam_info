@@ -18,8 +18,17 @@ class AuthenticationState extends Equatable {
           userSetting: currentUserSetting,
         );
 
-  const AuthenticationState.unauthenticated()
-      : this._(status: AuthenticationStatus.unauthenticated);
+  // const AuthenticationState.unauthenticated()
+  //     : this._(status: AuthenticationStatus.unauthenticated);
+
+  const AuthenticationState.anonymous({
+    required User anonymouslyUser,
+    required UserSetting anonymouslyUserSetting,
+  }) : this._(
+          status: AuthenticationStatus.anonymous,
+          user: anonymouslyUser,
+          userSetting: anonymouslyUserSetting,
+        );
 
   AuthenticationState copyWith({
     AuthenticationStatus? status,

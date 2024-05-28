@@ -12,6 +12,12 @@ abstract class KMockText {
     'Жовква',
     'Трускавець',
     'Стебник',
+    'Дніпро',
+    'Луцьк',
+    'Миколаїв',
+    'Суми',
+    'Ужгород',
+    'Чернігів',
   ];
   static const workCategory = 'Комплектувальник';
   static const facebook = 'Facebook';
@@ -28,6 +34,36 @@ abstract class KMockText {
     ['Житло'],
     [],
   ];
+  static final storyModel = StoryModel(
+    id: '1',
+    date: DateTime(2024, 05, 20),
+    story: cardData,
+    userId: '2',
+    // image: [
+    //   const ImageModel(
+    //     downloadURL:
+    //         'https://static.vecteezy.com/system/resources/thumbnails/008/492/251/small/back-to-school-illustration-cartoon-character-children-kid-png.png',
+    //   ),
+    // ],
+  );
+
+  static const tagsDiscount = <List<String>?>[
+    ['Медицина'],
+    ['Послуги'],
+    ['Житло'],
+    [],
+  ];
+
+  static const workModel = WorkModel(
+    id: '1',
+    title: title,
+    price: workPrice,
+    city: workCity,
+    employerContact: workCity,
+    companyName: workEmployer,
+    description: workDescription,
+  );
+
   static const workTitle = 'Комплектувальник товару в магазин';
   static const workPrice = '12000 грн +%';
   static const workCity = 'м.Одеса';
@@ -108,6 +144,7 @@ abstract class KAppText {
   static const String authChange = 'AuthenticationStatusChanged:';
   static const String backendString = '';
   static const String usernameToken = 'USERNAME_TOKEN';
+
   static List<String> routes({required bool hasAccount}) => [
         KRoute.aboutUs.name,
         KRoute.investors.name,

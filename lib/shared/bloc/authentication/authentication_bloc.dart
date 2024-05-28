@@ -16,13 +16,13 @@ class AuthenticationBloc
     required AuthenticationRepository authenticationRepository,
   })  : _authenticationRepository = authenticationRepository,
         super(
-          authenticationRepository.currentUser.isNotEmpty
-              ? AuthenticationState.authenticated(
+          authenticationRepository.isAnonymouslyOrEmty()
+              ? const AuthenticationState.unknown()
+              : AuthenticationState.authenticated(
                   currentUser: authenticationRepository.currentUser,
                   currentUserSetting:
                       authenticationRepository.currentUserSetting,
-                )
-              : const AuthenticationState.unknown(),
+                ),
         ) {
     on<AuthenticationStatusChanged>(_onAuthenticationStatusChanged);
     on<AuthenticationLogoutRequested>(_onAuthenticationLogoutRequested);
@@ -53,9 +53,10 @@ class AuthenticationBloc
     Emitter<AuthenticationState> emit,
   ) {
     log('${KAppText.authChange} ${event.status}');
+    log('user:_____________ ${_authenticationRepository.currentUser}');
     switch (event.status) {
-      case AuthenticationStatus.unauthenticated:
-        return emit(const AuthenticationState.unauthenticated());
+      // case AuthenticationStatus.unauthenticated:
+      //   return emit(const AuthenticationState.unauthenticated());
       case AuthenticationStatus.authenticated:
         return emit(
           AuthenticationState.authenticated(
@@ -63,6 +64,15 @@ class AuthenticationBloc
             currentUserSetting: _authenticationRepository.currentUserSetting,
           ),
         );
+      case AuthenticationStatus.anonymous:
+        return emit(
+          AuthenticationState.anonymous(
+            anonymouslyUser: _authenticationRepository.currentUser,
+            anonymouslyUserSetting:
+                _authenticationRepository.currentUserSetting,
+          ),
+        );
+
       case AuthenticationStatus.unknown:
         return emit(const AuthenticationState.unknown());
     }
@@ -111,7 +121,9 @@ class AuthenticationBloc
   ) {
     emit(
       state.copyWith(
-        userSetting: event.userSetting,
+        userSetting: event.userSetting.copyWith(
+          id: _authenticationRepository.currentUser.id,
+        ),
       ),
     );
   }
@@ -124,7 +136,7 @@ class AuthenticationBloc
       locale: event.language,
     );
     add(_AppUserSettingChanged(userSetting));
-    if (state.userSetting.isNotEmpty) {
+    if (state.user.hasValue) {
       await _authenticationRepository.updateUserSetting(
         userSetting: userSetting,
       );
@@ -135,10 +147,10 @@ class AuthenticationBloc
     AppUserRoleChanged event,
     Emitter<AuthenticationState> emit,
   ) async {
-    if (state.userSetting.isNotEmpty) {
+    if (state.user != null &&
+        !_authenticationRepository.isAnonymouslyOrEmty()) {
       final userSetting = state.userSetting.copyWith(
         userRole: event.userRole,
-        roleIsConfirmed: false,
       );
       add(_AppUserSettingChanged(userSetting));
       await _authenticationRepository.updateUserSetting(
@@ -146,4 +158,8 @@ class AuthenticationBloc
       );
     }
   }
+}
+
+extension UserChecker on User? {
+  bool get hasValue => this != null && this!.isNotEmpty;
 }

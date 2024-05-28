@@ -8,10 +8,14 @@ import '../../text_dependency.dart';
 Future<void> investorsPumpAppHelper({
   required IFeedbackRepository mockFeedbackRepository,
   required IInvestorsRepository mockInvestorsRepository,
+  required IAppAuthenticationRepository mockAppAuthenticationRepository,
   required WidgetTester tester,
   MockGoRouter? mockGoRouter,
 }) async {
-  _registerFeedbackBloc(mockFeedbackRepository: mockFeedbackRepository);
+  _registerFeedbackBloc(
+    mockFeedbackRepository: mockFeedbackRepository,
+    mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+  );
   _registerInvestorsBloc(mockInvestorsRepository: mockInvestorsRepository);
   await tester.pumpApp(const InvestorsScreen(), mockGoRouter: mockGoRouter);
 
@@ -25,8 +29,12 @@ Future<void> investorsPumpAppHelper({
 
 void _registerFeedbackBloc({
   required IFeedbackRepository mockFeedbackRepository,
+  required IAppAuthenticationRepository mockAppAuthenticationRepository,
 }) {
-  final feedbackBloc = FeedbackBloc(feedbackRepository: mockFeedbackRepository);
+  final feedbackBloc = FeedbackBloc(
+    feedbackRepository: mockFeedbackRepository,
+    appAuthenticationRepository: mockAppAuthenticationRepository,
+  );
   if (GetIt.I.isRegistered<FeedbackBloc>()) {
     GetIt.I.unregister<FeedbackBloc>();
   }

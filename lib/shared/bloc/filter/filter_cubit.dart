@@ -4,6 +4,7 @@ import 'package:injectable/injectable.dart';
 @injectable
 class FilterCubit extends Cubit<List<dynamic>> {
   FilterCubit() : super([]);
+
   void change({
     required int index,
     required dynamic filterValue,
