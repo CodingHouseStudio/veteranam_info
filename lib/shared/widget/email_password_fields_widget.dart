@@ -106,7 +106,14 @@ class _EmailPasswordFieldsWidgetState extends State<EmailPasswordFieldsWidget>
               suffixIcon: Padding(
                 padding: const EdgeInsets.only(right: KPadding.kPaddingSize12),
                 child: IconButton(
-                  icon: obscurePassword ? KIcon.eyeOff : KIcon.eye,
+                  key: KWidgetkeys.widget.emailPasswordFields.iconHidePassword,
+                  icon: obscurePassword
+                      ? KIcon.eyeOff.setIconKey(
+                          KWidgetkeys.widget.emailPasswordFields.iconEyeOff,
+                        )
+                      : KIcon.eye.setIconKey(
+                          KWidgetkeys.widget.emailPasswordFields.iconEye,
+                        ),
                   onPressed: () {
                     setState(() {
                       obscurePassword = !obscurePassword;
