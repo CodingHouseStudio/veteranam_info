@@ -10,28 +10,31 @@ class ProfileMyStoryBodyWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<MyStoryWatcherBloc, MyStoryWatcherState>(
       builder: (context, _) => ScaffoldWidget(
+        titleChildWidgetsFunction: ({required isDesk}) => [
+          if (isDesk)
+            KSizedBox.kHeightSizedBox40
+          else
+            KSizedBox.kHeightSizedBox24,
+          Text(
+            context.l10n.myStory,
+            key: KWidgetkeys.screen.myStory.title,
+            style: isDesk ? AppTextStyle.text96 : AppTextStyle.text32,
+          ),
+          KSizedBox.kHeightSizedBox8,
+          Text(
+            context.l10n.myStoryDetails,
+            key: KWidgetkeys.screen.myStory.subtitle,
+            style: isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
+          ),
+          if (isDesk)
+            KSizedBox.kHeightSizedBox56
+          else
+            KSizedBox.kHeightSizedBox24,
+        ],
+        mainDeskPadding:
+            const EdgeInsets.symmetric(horizontal: KPadding.kPaddingSize48),
         mainChildWidgetsFunction: ({required isDesk}) {
-          final childWidgets = [
-            if (isDesk)
-              KSizedBox.kHeightSizedBox40
-            else
-              KSizedBox.kHeightSizedBox24,
-            Text(
-              context.l10n.myStory,
-              key: KWidgetkeys.screen.myStory.title,
-              style: isDesk ? AppTextStyle.text96 : AppTextStyle.text32,
-            ),
-            KSizedBox.kHeightSizedBox8,
-            Text(
-              context.l10n.myStoryDetails,
-              key: KWidgetkeys.screen.myStory.subtitle,
-              style: isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
-            ),
-            if (isDesk)
-              KSizedBox.kHeightSizedBox56
-            else
-              KSizedBox.kHeightSizedBox24,
-          ];
+          final childWidgets = <Widget>[];
           switch (_) {
             case MyStoryWatcherStateInitial():
               childWidgets.add(const CircularProgressIndicator.adaptive());
@@ -53,9 +56,6 @@ class ProfileMyStoryBodyWidget extends StatelessWidget {
                         key: KWidgetkeys.screen.myStory.card,
                         storyModel: _.storyModelItems.elementAt(index),
                         isDesk: isDesk,
-                        storyPadding: const EdgeInsets.symmetric(
-                          horizontal: KPadding.kPaddingSize48,
-                        ),
                       ),
                     );
                   }),
