@@ -57,11 +57,7 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
                                 : AppTextStyle.text24,
                           )
                         else
-                          Expanded(
-                            child: Row(
-                              children: _displayProfileName(),
-                            ),
-                          ),
+                          ..._displayProfileName(),
                       ],
                     ),
                     if (isEditing) ...[
@@ -143,7 +139,6 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
           ButtonWidget(
             key: KWidgetkeys.widget.profileCardWidget.logOutButton,
             text: context.l10n.logOut,
-            textStyle: AppTextStyle.text24,
             onPressed: () => DialogsWidget.showLogoutConfirmationDialog(
               context: context,
               isDesk: widget.isDesk,
@@ -154,7 +149,6 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
           ButtonWidget(
             key: KWidgetkeys.widget.profileCardWidget.deleteButton,
             text: context.l10n.deleteAccount,
-            textStyle: AppTextStyle.text24,
             onPressed: () => DialogsWidget.showDeleteConfirmationDialog(
               context: context,
               isDesk: widget.isDesk,
