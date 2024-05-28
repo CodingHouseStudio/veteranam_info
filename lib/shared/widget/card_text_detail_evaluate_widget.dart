@@ -129,12 +129,12 @@ class _CardTextDetailEvaluateWidgetState
                         child: Padding(
                           padding: const EdgeInsets.all(KPadding.kPaddingSize4),
                           child: evaluation == EvaluationEnum.smile
-                              ? KIcon.happySmile.setIconKey(
+                              ? KIcon.activeSmile.setIconKey(
                                   KWidgetkeys.widget.cardTextDetailEvaluate
                                       .iconActiveSmile,
                                   // changeColor: AppColors.grey,
                                 )
-                              : KIcon.happySmile.setIconKey(
+                              : KIcon.smile.setIconKey(
                                   KWidgetkeys
                                       .widget.cardTextDetailEvaluate.iconSmile,
                                 ),

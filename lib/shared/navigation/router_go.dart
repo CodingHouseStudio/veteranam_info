@@ -97,7 +97,6 @@ GoRouter router = GoRouter(
           ),
         ),
         GoRoute(
-          redirect: redirect,
           name: KRoute.discounts.name,
           path: KRoute.discounts.path,
           pageBuilder: (context, state) => NoTransitionPage(
@@ -163,7 +162,6 @@ GoRouter router = GoRouter(
                   ),
                 ),
                 GoRoute(
-                  redirect: redirect,
                   name: KRoute.profileSaves.name,
                   path: KRoute.profileSaves.path,
                   pageBuilder: (context, state) => NoTransitionPage(
@@ -186,7 +184,6 @@ GoRouter router = GoRouter(
           ),
           routes: [
             GoRoute(
-              redirect: redirect,
               name: KRoute.profileMyStory.name,
               path: KRoute.profileMyStory.path,
               pageBuilder: (context, state) => NoTransitionPage(
@@ -212,7 +209,6 @@ GoRouter router = GoRouter(
           ),
         ),
         GoRoute(
-          redirect: redirect,
           name: KRoute.aboutUs.name,
           path: KRoute.aboutUs.path,
           pageBuilder: (context, state) => NoTransitionPage(
@@ -222,7 +218,6 @@ GoRouter router = GoRouter(
           ),
         ),
         GoRoute(
-          redirect: redirect,
           name: KRoute.consultation.name,
           path: KRoute.consultation.path,
           pageBuilder: (context, state) => NoTransitionPage(
@@ -232,7 +227,6 @@ GoRouter router = GoRouter(
           ),
         ),
         GoRoute(
-          redirect: redirect,
           name: KRoute.contact.name,
           path: KRoute.contact.path,
           pageBuilder: (context, state) => NoTransitionPage(
@@ -242,16 +236,6 @@ GoRouter router = GoRouter(
           ),
         ),
       ],
-    ),
-    GoRoute(
-      redirect: redirect,
-      name: KRoute.underConstruction.name,
-      path: KRoute.underConstruction.path,
-      pageBuilder: (context, state) => NoTransitionPage(
-        key: state.pageKey,
-        name: state.name,
-        child: const UnderConstructionScreen(),
-      ),
     ),
   ],
 );

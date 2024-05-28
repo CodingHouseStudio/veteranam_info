@@ -28,6 +28,7 @@ dependencies:
   flutter_markdown: ^0.7.1
   flutter_rating_bar: ^4.0.1
   flutter_secure_storage: ^9.0.0
+  flutter_svg: ^2.0.10+1
   formz: ^0.7.0
   freezed: ^2.5.1
   freezed_annotation: ^2.4.1
@@ -38,6 +39,7 @@ dependencies:
   injectable: ^2.3.4 # Used for dependency injection
   intl: ^0.18.1
   json_serializable: ^6.7.1
+  material_symbols_icons: ^4.2744.0
   url_launcher: ^6.2.5
   web: 0.5.1
 dev_dependencies:
@@ -62,11 +64,7 @@ flutter:
 
   # icons
   assets:
-    - assets/icons/social_icons_f.png
-    - assets/icons/social_icons_g.png
-    - assets/icons/social_icons.png
-    - assets/icons/linkedin.png
-    - assets/icons/instagram.png
+    - assets/icons/
 
   fonts:
     - family: Gilroy

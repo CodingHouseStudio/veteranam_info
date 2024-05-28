@@ -36,6 +36,10 @@ class KWidgetTheme {
         borderRadius: KBorderRadius.kBorderRadius32,
         color: context.color.secondary,
       );
+  BoxDecoration get boxDecorationNawbar => BoxDecoration(
+        borderRadius: KBorderRadius.kBorderRadius32,
+        // color: context.color.neutural,
+      );
   BoxDecoration get boxDecorationImageDesk => BoxDecoration(
         borderRadius: KBorderRadius.kBorderRadiusLeft32,
         color: context.color.onPrimary,
