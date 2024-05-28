@@ -1,5 +1,7 @@
+import 'package:dartz/dartz.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
+import 'package:kozak/shared/models/employee_respond_model.dart';
 import 'package:kozak/shared/shared.dart';
 
 @Singleton(as: IWorkRepository)
@@ -24,5 +26,10 @@ class WorkRepository implements IWorkRepository {
         ),
       );
     }
+  }
+
+  @override
+  Future<Either<SomeFailure, bool>> sendRespond(EmployeeRespondModel respond) {
+    throw UnimplementedError();
   }
 }

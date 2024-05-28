@@ -4,9 +4,9 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i8;
-import 'dart:convert' as _i16;
-import 'dart:io' as _i15;
-import 'dart:typed_data' as _i14;
+import 'dart:convert' as _i17;
+import 'dart:io' as _i16;
+import 'dart:typed_data' as _i15;
 
 import 'package:cloud_firestore/cloud_firestore.dart' as _i7;
 import 'package:dartz/dartz.dart' as _i2;
@@ -18,6 +18,7 @@ import 'package:firebase_storage_platform_interface/firebase_storage_platform_in
 import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i4;
 import 'package:google_sign_in/google_sign_in.dart' as _i9;
 import 'package:image_picker/image_picker.dart' as _i11;
+import 'package:kozak/shared/models/employee_respond_model.dart' as _i14;
 import 'package:kozak/shared/shared.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i13;
@@ -2516,6 +2517,33 @@ class MockIWorkRepository extends _i1.Mock implements _i3.IWorkRepository {
         ),
         returnValueForMissingStub: null,
       );
+
+  @override
+  _i8.Future<_i2.Either<_i3.SomeFailure, bool>> sendRespond(
+          _i14.EmployeeRespondModel? respond) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #sendRespond,
+          [respond],
+        ),
+        returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
+            _FakeEither_0<_i3.SomeFailure, bool>(
+          this,
+          Invocation.method(
+            #sendRespond,
+            [respond],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
+                _FakeEither_0<_i3.SomeFailure, bool>(
+          this,
+          Invocation.method(
+            #sendRespond,
+            [respond],
+          ),
+        )),
+      ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
 }
 
 /// A class which mocks [FirebaseFirestore].
@@ -2687,7 +2715,7 @@ class MockFirebaseFirestore extends _i1.Mock implements _i7.FirebaseFirestore {
       ) as _i8.Future<void>);
 
   @override
-  _i7.LoadBundleTask loadBundle(_i14.Uint8List? bundle) => (super.noSuchMethod(
+  _i7.LoadBundleTask loadBundle(_i15.Uint8List? bundle) => (super.noSuchMethod(
         Invocation.method(
           #loadBundle,
           [bundle],
@@ -5698,19 +5726,19 @@ class MockReference extends _i1.Mock implements _i10.Reference {
       ) as _i8.Future<_i10.ListResult>);
 
   @override
-  _i8.Future<_i14.Uint8List?> getData([int? maxSize = 10485760]) =>
+  _i8.Future<_i15.Uint8List?> getData([int? maxSize = 10485760]) =>
       (super.noSuchMethod(
         Invocation.method(
           #getData,
           [maxSize],
         ),
-        returnValue: _i8.Future<_i14.Uint8List?>.value(),
-        returnValueForMissingStub: _i8.Future<_i14.Uint8List?>.value(),
-      ) as _i8.Future<_i14.Uint8List?>);
+        returnValue: _i8.Future<_i15.Uint8List?>.value(),
+        returnValueForMissingStub: _i8.Future<_i15.Uint8List?>.value(),
+      ) as _i8.Future<_i15.Uint8List?>);
 
   @override
   _i10.UploadTask putData(
-    _i14.Uint8List? data, [
+    _i15.Uint8List? data, [
     _i12.SettableMetadata? metadata,
   ]) =>
       (super.noSuchMethod(
@@ -5780,7 +5808,7 @@ class MockReference extends _i1.Mock implements _i10.Reference {
 
   @override
   _i10.UploadTask putFile(
-    _i15.File? file, [
+    _i16.File? file, [
     _i12.SettableMetadata? metadata,
   ]) =>
       (super.noSuchMethod(
@@ -5878,7 +5906,7 @@ class MockReference extends _i1.Mock implements _i10.Reference {
       ) as _i8.Future<_i12.FullMetadata>);
 
   @override
-  _i10.DownloadTask writeToFile(_i15.File? file) => (super.noSuchMethod(
+  _i10.DownloadTask writeToFile(_i16.File? file) => (super.noSuchMethod(
         Invocation.method(
           #writeToFile,
           [file],
@@ -6218,7 +6246,7 @@ class MockXFile extends _i1.Mock implements _i11.XFile {
 
   @override
   _i8.Future<String> readAsString(
-          {_i16.Encoding? encoding = const _i16.Utf8Codec()}) =>
+          {_i17.Encoding? encoding = const _i17.Utf8Codec()}) =>
       (super.noSuchMethod(
         Invocation.method(
           #readAsString,
@@ -6245,18 +6273,18 @@ class MockXFile extends _i1.Mock implements _i11.XFile {
       ) as _i8.Future<String>);
 
   @override
-  _i8.Future<_i14.Uint8List> readAsBytes() => (super.noSuchMethod(
+  _i8.Future<_i15.Uint8List> readAsBytes() => (super.noSuchMethod(
         Invocation.method(
           #readAsBytes,
           [],
         ),
-        returnValue: _i8.Future<_i14.Uint8List>.value(_i14.Uint8List(0)),
+        returnValue: _i8.Future<_i15.Uint8List>.value(_i15.Uint8List(0)),
         returnValueForMissingStub:
-            _i8.Future<_i14.Uint8List>.value(_i14.Uint8List(0)),
-      ) as _i8.Future<_i14.Uint8List>);
+            _i8.Future<_i15.Uint8List>.value(_i15.Uint8List(0)),
+      ) as _i8.Future<_i15.Uint8List>);
 
   @override
-  _i8.Stream<_i14.Uint8List> openRead([
+  _i8.Stream<_i15.Uint8List> openRead([
     int? start,
     int? end,
   ]) =>
@@ -6268,9 +6296,9 @@ class MockXFile extends _i1.Mock implements _i11.XFile {
             end,
           ],
         ),
-        returnValue: _i8.Stream<_i14.Uint8List>.empty(),
-        returnValueForMissingStub: _i8.Stream<_i14.Uint8List>.empty(),
-      ) as _i8.Stream<_i14.Uint8List>);
+        returnValue: _i8.Stream<_i15.Uint8List>.empty(),
+        returnValueForMissingStub: _i8.Stream<_i15.Uint8List>.empty(),
+      ) as _i8.Stream<_i15.Uint8List>);
 
   @override
   _i8.Future<DateTime> lastModified() => (super.noSuchMethod(

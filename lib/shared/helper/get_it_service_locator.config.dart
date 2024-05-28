@@ -12,22 +12,24 @@ import 'package:firebase_auth/firebase_auth.dart' as _i9;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:google_sign_in/google_sign_in.dart' as _i10;
 import 'package:injectable/injectable.dart' as _i2;
+import 'package:kozak/components/employee_respond/bloc/employee_respond_bloc.dart'
+    as _i23;
 import 'package:kozak/components/home/bloc/home_watcher_bloc.dart' as _i22;
 import 'package:kozak/components/information/bloc/information_watcher_bloc.dart'
-    as _i23;
+    as _i24;
 import 'package:kozak/components/investors/bloc/investors_watcher_bloc.dart'
     as _i16;
-import 'package:kozak/components/login/bloc/login_bloc.dart' as _i29;
-import 'package:kozak/components/sign_up/bloc/sign_up_bloc.dart' as _i27;
+import 'package:kozak/components/login/bloc/login_bloc.dart' as _i30;
+import 'package:kozak/components/sign_up/bloc/sign_up_bloc.dart' as _i28;
 import 'package:kozak/components/story/bloc/story_watcher_bloc.dart' as _i19;
-import 'package:kozak/components/story_add/bloc/story_add_bloc.dart' as _i26;
+import 'package:kozak/components/story_add/bloc/story_add_bloc.dart' as _i27;
 import 'package:kozak/components/work_employee/bloc/work_employee_watcher_bloc.dart'
     as _i21;
 import 'package:kozak/shared/bloc/authentication/authentication_bloc.dart'
-    as _i31;
+    as _i32;
 import 'package:kozak/shared/bloc/authentication_services/authentication_services_cubit.dart'
-    as _i30;
-import 'package:kozak/shared/bloc/feedback/feedback_bloc.dart' as _i24;
+    as _i31;
+import 'package:kozak/shared/bloc/feedback/feedback_bloc.dart' as _i25;
 import 'package:kozak/shared/bloc/filter/filter_cubit.dart' as _i3;
 import 'package:kozak/shared/bloc/scroll/scroll_cubit.dart' as _i4;
 import 'package:kozak/shared/data_provider/cache_provider.dart' as _i5;
@@ -35,11 +37,11 @@ import 'package:kozak/shared/data_provider/fake_provider.dart' as _i6;
 import 'package:kozak/shared/data_provider/firestore_provider.dart' as _i7;
 import 'package:kozak/shared/data_provider/storage_provider.dart' as _i8;
 import 'package:kozak/shared/repositories/app_authentication_repository.dart'
-    as _i25;
+    as _i26;
 import 'package:kozak/shared/repositories/authentication_repository.dart'
-    as _i28;
+    as _i29;
 import 'package:kozak/shared/repositories/feedback_repository.dart' as _i20;
-import 'package:kozak/shared/repositories/firebase_module.dart' as _i32;
+import 'package:kozak/shared/repositories/firebase_module.dart' as _i33;
 import 'package:kozak/shared/repositories/home_repository.dart' as _i15;
 import 'package:kozak/shared/repositories/information_repository.dart' as _i17;
 import 'package:kozak/shared/repositories/investors_repository.dart' as _i14;
@@ -85,34 +87,36 @@ extension GetItInjectableX on _i1.GetIt {
         workRepository: gh<_i11.IWorkRepository>()));
     gh.factory<_i22.HomeWatcherBloc>(
         () => _i22.HomeWatcherBloc(homeRepository: gh<_i11.IHomeRepository>()));
-    gh.factory<_i23.InformationWatcherBloc>(() => _i23.InformationWatcherBloc(
+    gh.factory<_i23.EmployeeRespondBloc>(() => _i23.EmployeeRespondBloc(
+        employeeRespondRepository: gh<_i11.IWorkRepository>()));
+    gh.factory<_i24.InformationWatcherBloc>(() => _i24.InformationWatcherBloc(
         informationRepository: gh<_i11.IInformationRepository>()));
-    gh.factory<_i24.FeedbackBloc>(() =>
-        _i24.FeedbackBloc(feedbackRepository: gh<_i11.IFeedbackRepository>()));
+    gh.factory<_i25.FeedbackBloc>(() =>
+        _i25.FeedbackBloc(feedbackRepository: gh<_i11.IFeedbackRepository>()));
     gh.singleton<_i11.IAppAuthenticationRepository>(
-        () => _i25.AppAuthenticationRepository(
+        () => _i26.AppAuthenticationRepository(
               gh<_i11.IStorage>(),
               gh<_i9.FirebaseAuth>(),
               gh<_i10.GoogleSignIn>(),
               gh<_i11.CacheClient>(),
             ));
-    gh.factory<_i26.StoryAddBloc>(() => _i26.StoryAddBloc(
+    gh.factory<_i27.StoryAddBloc>(() => _i27.StoryAddBloc(
           storyRepository: gh<_i11.IStoryRepository>(),
           iAppAuthenticationRepository: gh<_i11.IAppAuthenticationRepository>(),
         ));
-    gh.factory<_i27.SignUpBloc>(() => _i27.SignUpBloc(
+    gh.factory<_i28.SignUpBloc>(() => _i28.SignUpBloc(
         iAppAuthenticationRepository: gh<_i11.IAppAuthenticationRepository>()));
-    gh.singleton<_i28.AuthenticationRepository>(() =>
-        _i28.AuthenticationRepository(gh<_i11.IAppAuthenticationRepository>()));
-    gh.factory<_i29.LoginBloc>(() => _i29.LoginBloc(
+    gh.singleton<_i29.AuthenticationRepository>(() =>
+        _i29.AuthenticationRepository(gh<_i11.IAppAuthenticationRepository>()));
+    gh.factory<_i30.LoginBloc>(() => _i30.LoginBloc(
         authenticationRepository: gh<_i11.AuthenticationRepository>()));
-    gh.factory<_i30.AuthenticationServicesCubit>(() =>
-        _i30.AuthenticationServicesCubit(
+    gh.factory<_i31.AuthenticationServicesCubit>(() =>
+        _i31.AuthenticationServicesCubit(
             authenticationRepository: gh<_i11.AuthenticationRepository>()));
-    gh.singleton<_i31.AuthenticationBloc>(() => _i31.AuthenticationBloc(
+    gh.singleton<_i32.AuthenticationBloc>(() => _i32.AuthenticationBloc(
         authenticationRepository: gh<_i11.AuthenticationRepository>()));
     return this;
   }
 }
 
-class _$FirebaseModule extends _i32.FirebaseModule {}
+class _$FirebaseModule extends _i33.FirebaseModule {}

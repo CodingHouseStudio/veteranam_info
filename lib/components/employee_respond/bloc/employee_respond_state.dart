@@ -10,7 +10,13 @@ extension EmployeeRespondFailureExtension on SomeFailure {
 
 @freezed
 class EmployeeRespondState with _$EmployeeRespondState {
-  const factory EmployeeRespondState.initial() = _Initial;
+  const factory EmployeeRespondState({
+    required EmailFieldModel email,
+    required PhoneNumberFieldModel phoneNumber,
+    required String? resume,
+    required EmployeeRespondEnum formState,
+    required EmployeeRespondFailure failure,
+  }) = _EmployeeRespondState;
 }
 
 enum EmployeeRespondEnum {
