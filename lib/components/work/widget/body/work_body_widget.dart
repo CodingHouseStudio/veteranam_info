@@ -26,42 +26,10 @@ class WorkBodyWidget extends StatelessWidget {
         if (isDesk)
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              BoxWidget(
-                key: KWidgetkeys.screen.work.boxEmployee,
-                text: context.l10n.lookingForJob,
-                onTap: () =>
-                    context.goNamedWithScroll(KRoute.workEmployee.name),
-                isDesk: true,
-                textRightPadding: KPadding.kPaddingSize100,
-              ),
-              KSizedBox.kWidthSizedBox56,
-              BoxWidget(
-                key: KWidgetkeys.screen.work.boxEmployer,
-                text: context.l10n.givingJob,
-                onTap: () => context.goNamedWithScroll(KRoute.employer.name),
-                isDesk: true,
-                textRightPadding: KPadding.kPaddingSize100,
-              ),
-            ],
+            children: boxWidgets(context: context, isDesk: isDesk),
           )
-        else ...[
-          BoxWidget(
-            key: KWidgetkeys.screen.work.boxEmployee,
-            text: context.l10n.lookingForJob,
-            onTap: () => context.goNamedWithScroll(KRoute.workEmployee.name),
-            isDesk: false,
-            textRightPadding: KPadding.kPaddingSize100,
-          ),
-          KSizedBox.kHeightSizedBox40,
-          BoxWidget(
-            key: KWidgetkeys.screen.work.boxEmployer,
-            text: context.l10n.givingJob,
-            onTap: () => context.goNamedWithScroll(KRoute.employer.name),
-            isDesk: false,
-            textRightPadding: KPadding.kPaddingSize100,
-          ),
-        ],
+        else
+          ...boxWidgets(context: context, isDesk: isDesk),
         if (isDesk)
           KSizedBox.kHeightSizedBox120
         else
@@ -69,4 +37,26 @@ class WorkBodyWidget extends StatelessWidget {
       ],
     );
   }
+
+  List<Widget> boxWidgets({
+    required BuildContext context,
+    required bool isDesk,
+  }) =>
+      [
+        BoxWidget(
+          key: KWidgetkeys.screen.work.boxEmployee,
+          text: context.l10n.lookingForJob,
+          onTap: () => context.goNamedWithScroll(KRoute.workEmployee.name),
+          isDesk: isDesk,
+          textRightPadding: KPadding.kPaddingSize100,
+        ),
+        if (isDesk) KSizedBox.kWidthSizedBox56 else KSizedBox.kHeightSizedBox40,
+        BoxWidget(
+          key: KWidgetkeys.screen.work.boxEmployer,
+          text: context.l10n.givingJob,
+          onTap: () => context.goNamedWithScroll(KRoute.employer.name),
+          isDesk: isDesk,
+          textRightPadding: KPadding.kPaddingSize100,
+        ),
+      ];
 }

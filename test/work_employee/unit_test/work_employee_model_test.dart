@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:kozak/shared/models/models.dart';
 import 'package:kozak/shared/shared.dart';
 
 import '../../text_dependency.dart';
@@ -11,15 +12,18 @@ void main() {
     group('${KGroupText.modelJson} ', () {
       test('${KGroupText.shouldBe} ', () {
         final json = {
-          'id': KTestText.workModelItems.first.id,
-          'title': KTestText.workModelItems.first.title,
-          'price': KTestText.workModelItems.first.price,
-          'employerContact': KTestText.workModelItems.first.employerContact,
-          'companyName': KTestText.workModelItems.first.companyName,
-          'description': KTestText.workModelItems.first.description,
-          'category': KTestText.workModelItems.first.category,
-          'city': KTestText.workModelItems.first.city,
-          'remote': KTestText.workModelItems.first.remote,
+          WorkModelJsonField.id: KTestText.workModelItems.first.id,
+          WorkModelJsonField.title: KTestText.workModelItems.first.title,
+          WorkModelJsonField.price: KTestText.workModelItems.first.price,
+          WorkModelJsonField.employerContact:
+              KTestText.workModelItems.first.employerContact,
+          WorkModelJsonField.companyName:
+              KTestText.workModelItems.first.companyName,
+          WorkModelJsonField.description:
+              KTestText.workModelItems.first.description,
+          WorkModelJsonField.category: KTestText.workModelItems.first.category,
+          WorkModelJsonField.city: KTestText.workModelItems.first.city,
+          WorkModelJsonField.remote: KTestText.workModelItems.first.remote,
         };
 
         final workModel = WorkModel.fromJson(json);
@@ -64,12 +68,15 @@ void main() {
 
       test('${KGroupText.shouldBe} ', () {
         final json = {
-          'id': KTestText.workModelItems.first.id,
-          'title': KTestText.workModelItems.first.title,
-          'price': KTestText.workModelItems.first.price,
-          'employerContact': KTestText.workModelItems.first.employerContact,
-          'companyName': KTestText.workModelItems.first.companyName,
-          'description': KTestText.workModelItems.first.description,
+          WorkModelJsonField.id: KTestText.workModelItems.first.id,
+          WorkModelJsonField.title: KTestText.workModelItems.first.title,
+          WorkModelJsonField.price: KTestText.workModelItems.first.price,
+          WorkModelJsonField.employerContact:
+              KTestText.workModelItems.first.employerContact,
+          WorkModelJsonField.companyName:
+              KTestText.workModelItems.first.companyName,
+          WorkModelJsonField.description:
+              KTestText.workModelItems.first.description,
         };
 
         final workModel = WorkModel.fromJson(json);
@@ -114,11 +121,14 @@ void main() {
 
       test('${KGroupText.shouldNotBe} ', () {
         final json = {
-          'title': KTestText.workModelItems.first.title,
-          'price': KTestText.workModelItems.first.price,
-          'employerContact': KTestText.workModelItems.first.employerContact,
-          'companyName': KTestText.workModelItems.first.companyName,
-          'description': KTestText.workModelItems.first.description,
+          WorkModelJsonField.title: KTestText.workModelItems.first.title,
+          WorkModelJsonField.price: KTestText.workModelItems.first.price,
+          WorkModelJsonField.employerContact:
+              KTestText.workModelItems.first.employerContact,
+          WorkModelJsonField.companyName:
+              KTestText.workModelItems.first.companyName,
+          WorkModelJsonField.description:
+              KTestText.workModelItems.first.description,
         };
 
         expect(
@@ -130,15 +140,18 @@ void main() {
     group('${KGroupText.jsonModel} ', () {
       test('${KGroupText.shouldBe} ', () {
         final json = {
-          'id': KTestText.workModelItems.first.id,
-          'title': KTestText.workModelItems.first.title,
-          'price': KTestText.workModelItems.first.price,
-          'employerContact': KTestText.workModelItems.first.employerContact,
-          'companyName': KTestText.workModelItems.first.companyName,
-          'description': KTestText.workModelItems.first.description,
-          'category': KTestText.workModelItems.first.category,
-          'city': KTestText.workModelItems.first.city,
-          'remote': KTestText.workModelItems.first.remote,
+          WorkModelJsonField.id: KTestText.workModelItems.first.id,
+          WorkModelJsonField.title: KTestText.workModelItems.first.title,
+          WorkModelJsonField.price: KTestText.workModelItems.first.price,
+          WorkModelJsonField.employerContact:
+              KTestText.workModelItems.first.employerContact,
+          WorkModelJsonField.companyName:
+              KTestText.workModelItems.first.companyName,
+          WorkModelJsonField.description:
+              KTestText.workModelItems.first.description,
+          WorkModelJsonField.category: KTestText.workModelItems.first.category,
+          WorkModelJsonField.city: KTestText.workModelItems.first.city,
+          WorkModelJsonField.remote: KTestText.workModelItems.first.remote,
         };
 
         final workModelJson = KTestText.workModelItems.first.toJson();
@@ -148,15 +161,18 @@ void main() {
 
       test('${KGroupText.shouldBe} ', () {
         final json = {
-          'id': KTestText.workModelItems.first.id,
-          'title': KTestText.workModelItems.first.title,
-          'price': KTestText.workModelItems.first.price,
-          'employerContact': KTestText.workModelItems.first.employerContact,
-          'companyName': KTestText.workModelItems.first.companyName,
-          'description': KTestText.workModelItems.first.description,
-          'category': null,
-          'city': null,
-          'remote': KTestText.workModelItems.first.remote,
+          WorkModelJsonField.id: KTestText.workModelItems.first.id,
+          WorkModelJsonField.title: KTestText.workModelItems.first.title,
+          WorkModelJsonField.price: KTestText.workModelItems.first.price,
+          WorkModelJsonField.employerContact:
+              KTestText.workModelItems.first.employerContact,
+          WorkModelJsonField.companyName:
+              KTestText.workModelItems.first.companyName,
+          WorkModelJsonField.description:
+              KTestText.workModelItems.first.description,
+          WorkModelJsonField.category: null,
+          WorkModelJsonField.city: null,
+          WorkModelJsonField.remote: KTestText.workModelItems.first.remote,
         };
 
         final workModelJson = KTestText.workModelItems.first

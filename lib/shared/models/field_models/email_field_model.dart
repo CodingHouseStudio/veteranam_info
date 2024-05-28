@@ -1,3 +1,4 @@
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/widgets.dart';
 import 'package:formz/formz.dart';
 import 'package:kozak/shared/shared.dart';
@@ -42,13 +43,11 @@ class EmailFieldModel
     }
 
     // Additional checks for invalid characters
-    if (!RegExp(r'^[A-Za-z0-9@.]+$').hasMatch(value)) {
+    if (!EmailValidator.validate(value)) {
       return EmailFieldModelValidationError.wrong;
     }
-
-    if (!(value.contains('@') &&
-        value.contains('.') &&
-        value.lastIndexOf('.') > value.indexOf('@'))) {
+    final invalidCharacters = ['&', '=', '_', "'", '-', '+'];
+    if (invalidCharacters.any((char) => value.contains(char))) {
       return EmailFieldModelValidationError.wrong;
     }
 

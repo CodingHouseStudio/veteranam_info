@@ -77,3 +77,10 @@ extension GetLanguage on String {
     }
   }
 }
+
+abstract class UserSettingModelJsonField {
+  static const id = 'id';
+  static const locale = 'locale';
+  static const userRole = 'userRole';
+  static const roleIsConfirmed = 'roleIsConfirmed';
+}

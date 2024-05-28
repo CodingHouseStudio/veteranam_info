@@ -33,12 +33,17 @@ part 'screen/about_us.dart';
 
 part 'screen/sign_up.dart';
 
+part 'screen/profile_saves.dart';
+
 part 'screen/login.dart';
 part 'screen/questions_form.dart';
 part 'screen/work_employee.dart';
-part 'screen/work_respond.dart';
+
+part 'screen/employee_respond.dart';
 part 'screen/employer.dart';
 part 'screen/story_add.dart';
+
+part 'screen/my_story.dart';
 
 part 'widget/widget.dart';
 

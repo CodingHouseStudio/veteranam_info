@@ -6,8 +6,6 @@ import '../../text_dependency.dart';
 Future<void> workInitialHelper(
   WidgetTester tester,
 ) async {
-  await nawbarHelper(tester: tester, searchText: KTestText.field);
-
   expect(
     find.byKey(KWidgetkeys.screen.work.boxEmployer),
     findsOneWidget,

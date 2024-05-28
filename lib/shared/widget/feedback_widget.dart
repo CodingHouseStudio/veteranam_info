@@ -12,6 +12,50 @@ abstract class FeedbackWidget {
     required TextEditingController emailController,
     required TextEditingController messageController,
     required GlobalKey feedbackKey,
+    required GlobalKey feedbackBoxKey,
+    required Widget topPadding,
+    String? title,
+    String? subtitle,
+    String? messageHint,
+  }) =>
+      context.read<FeedbackBloc>().state.formState !=
+              FeedbackEnum.notShowFeedback
+          ? [
+              topPadding,
+              SizedBox.shrink(
+                key: feedbackKey,
+              ),
+              if (context.read<FeedbackBloc>().state.formState ==
+                      FeedbackEnum.success ||
+                  context.read<FeedbackBloc>().state.formState ==
+                      FeedbackEnum.sendingMessage)
+                FeedbackBoxWidget(
+                  key: feedbackBoxKey,
+                  isDesk: isDesk,
+                  sendAgain: () => context
+                      .read<FeedbackBloc>()
+                      .add(const FeedbackEvent.sendignMessageAgain()),
+                  feedbackBoxKey: feedbackBoxKey,
+                )
+              else
+                ...FeedbackWidget._feedbackWidgetList(
+                  isDesk: isDesk,
+                  context: context,
+                  nameController: nameController,
+                  emailController: emailController,
+                  messageController: messageController,
+                  feedbackKey: feedbackKey,
+                ),
+            ]
+          : [];
+
+  static List<Widget> _feedbackWidgetList({
+    required BuildContext context,
+    required bool isDesk,
+    required TextEditingController nameController,
+    required TextEditingController emailController,
+    required TextEditingController messageController,
+    required GlobalKey feedbackKey,
     String? title,
     String? subtitle,
     String? messageHint,

@@ -19,6 +19,11 @@ Future<void> fieldUncorrectHelper({
 
   await scrollingHelper(
     tester: tester,
+    itemKey: KWidgetkeys.screen.storyAdd.switchText,
+  );
+
+  await scrollingHelper(
+    tester: tester,
     itemKey: KWidgetkeys.screen.storyAdd.button,
   );
 
@@ -26,5 +31,11 @@ Future<void> fieldUncorrectHelper({
 
   verifyNever(
     () => mockGoRouter.goNamed(KRoute.story.name),
+  );
+
+  await changeWindowSizeHelper(
+    tester: tester,
+    test: () async =>
+        messageFieldHelper(tester: tester, message: KTestText.fieldEmpty),
   );
 }

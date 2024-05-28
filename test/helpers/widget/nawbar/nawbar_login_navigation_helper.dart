@@ -30,24 +30,25 @@ Future<void> nawbarLoginNavigationHelper({
     ),
   ).called(1);
 
-  await changeWindowSizeHelper(tester: tester);
+  await changeWindowSizeHelper(
+    tester: tester,
+    test: () async {
+      expect(
+        find.byKey(KWidgetkeys.widget.nawbar.button),
+        findsOneWidget,
+      );
 
-  expect(
-    find.byKey(KWidgetkeys.widget.nawbar.button),
-    findsOneWidget,
+      await tester.tap(
+        find.byKey(KWidgetkeys.widget.nawbar.button),
+      );
+
+      await tester.pumpAndSettle();
+
+      verify(
+        () => mockGoRouter.goNamed(
+          KRoute.login.name,
+        ),
+      ).called(1);
+    },
   );
-
-  await tester.tap(
-    find.byKey(KWidgetkeys.widget.nawbar.button),
-  );
-
-  await tester.pumpAndSettle();
-
-  verify(
-    () => mockGoRouter.goNamed(
-      KRoute.login.name,
-    ),
-  ).called(1);
-
-  await changeWindowSizeHelper(tester: tester, setDefaultSize: true);
 }
