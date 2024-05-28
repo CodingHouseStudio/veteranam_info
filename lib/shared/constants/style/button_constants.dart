@@ -86,7 +86,8 @@ class ButtonStylesContext {
         minimumSize:
             const Size(KMinMaxSize.minWidth100, KMinMaxSize.minHeight50),
         padding:
-            const EdgeInsets.symmetric(horizontal: KPadding.kPaddingSize20),
+            const EdgeInsets.symmetric(horizontal: KPadding.kPaddingSize32),
+        alignment: Alignment.centerLeft,
         shape: const RoundedRectangleBorder(
           // ignore: avoid_redundant_argument_values
           borderRadius: BorderRadius.zero,
