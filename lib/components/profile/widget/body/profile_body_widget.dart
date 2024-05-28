@@ -102,23 +102,21 @@ class ProfileBodyWidget extends StatelessWidget {
       ];
     } else {
       return [
-        ...[
-          BoxWidget(
-            text: context.l10n.saved,
-            isDesk: isDesk,
-            onTap: () => context.goNamed(
-              KRoute.profileSaves.name,
-            ),
+        BoxWidget(
+          text: context.l10n.saved,
+          isDesk: isDesk,
+          onTap: () => context.goNamed(
+            KRoute.profileSaves.name,
           ),
-          KSizedBox.kHeightSizedBox30,
-          BoxWidget(
-            text: context.l10n.myStory,
-            isDesk: isDesk,
-            textIconPaddingWidget: KSizedBox.kHeightSizedBox56,
-            onTap: () => context.goNamedWithScroll(KRoute.profileMyStory.name),
-          ),
-          KSizedBox.kHeightSizedBox30,
-        ],
+        ),
+        KSizedBox.kHeightSizedBox30,
+        BoxWidget(
+          text: context.l10n.myStory,
+          isDesk: isDesk,
+          textIconPaddingWidget: KSizedBox.kHeightSizedBox56,
+          onTap: () => context.goNamedWithScroll(KRoute.profileMyStory.name),
+        ),
+        KSizedBox.kHeightSizedBox30,
       ];
     }
   }
