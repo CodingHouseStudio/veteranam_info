@@ -24,6 +24,12 @@ extension ExtendedImage on List<ImageModel>? {
       this?.isNotEmpty ?? false ? this!.first.downloadURL : null;
 }
 
+extension LocalizedDateTime on DateTime {
+  String toLocalDateString() {
+    return toLocal().toString().split(' ')[0];
+  }
+}
+
 enum LoadingStatus { initial, loading, loaded, error }
 
 enum EvaluationEnum { like, dislike, smile, none }

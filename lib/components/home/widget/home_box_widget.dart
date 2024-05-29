@@ -7,54 +7,44 @@ class HomeBoxWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return IntrinsicHeight(
       key: KWidgetkeys.screen.home.box,
-      padding: EdgeInsets.only(
-        top: KPadding.kPaddingSize8,
-        right: KPadding.kPaddingSize8,
-        bottom: isDesk ? KPadding.kPaddingSize48 : KPadding.kPaddingSize16,
-        left: isDesk ? KPadding.kPaddingSize48 : KPadding.kPaddingSize16,
-      ),
-      decoration: context.widgetTheme.boxDecorationCard,
-      child: Align(
-        alignment: Alignment.bottomLeft,
-        child: Padding(
-          padding: const EdgeInsets.only(right: KPadding.kPaddingSize80),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              if (isDesk)
-                KSizedBox.kHeightSizedBox40
-              else
-                KSizedBox.kHeightSizedBox32,
-              Text(
-                context.l10n.helloVeteran,
-                key: KWidgetkeys.screen.home.boxTitle,
-                style: isDesk ? AppTextStyle.text128 : AppTextStyle.text40,
-                maxLines: 2,
-              ),
-              if (isDesk)
-                KSizedBox.kHeightSizedBox20
-              else
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                KSizedBox.kHeightSizedBox45,
+                Text(
+                  context.l10n.hello,
+                  style: AppTextStyle.materialThemeTitleMedium,
+                ),
                 KSizedBox.kHeightSizedBox16,
-              Text(
-                context.l10n.homeSubtitle,
-                key: KWidgetkeys.screen.home.boxSubtitle,
-                style: isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
-                maxLines: isDesk ? 2 : null,
-              ),
-            ],
+                Text(
+                  context.l10n.thisServiceForVeterans,
+                  style: AppTextStyle.text64,
+                ),
+                KSizedBox.kHeightSizedBox24,
+                Text(
+                  context.l10n.thisServiceForVeteransSubtitle,
+                  style: AppTextStyle.materialThemeBodyLarge,
+                ),
+                KSizedBox.kHeightSizedBox16,
+                DoubleButtonWidget(
+                  text: context.l10n.detail,
+                  textColor: AppColors.materialThemeWhite,
+                  color: AppColors.materialThemeBlack,
+                  onPressed: null,
+                ),
+                KSizedBox.kHeightSizedBox45,
+              ],
+            ),
           ),
-        ),
+          const Expanded(child: KImage.homeImage),
+        ],
       ),
-      // Align(
-      //   alignment: Alignment.topRight,
-      //   child: IconWidget(
-      //     key: KWidgetkeys.screen.home.boxIcon,
-      //     icon: KIcon.volum,
-      //     padding: KPadding.kPaddingSize20,
-      //   ),
-      // ),
     );
   }
 }

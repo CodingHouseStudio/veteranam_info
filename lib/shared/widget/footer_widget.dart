@@ -35,14 +35,11 @@ class FooterWidget extends SliverChildBuilderDelegate {
                           //                 .contains(context.l10n.contact)
                           //         ? '\n${KMockText.email}'
                           //         : ''),
-                          style: AppTextStyle.text32.copyWith(
-                            color: context.color.onSurface,
-                            fontSize: isDesk
-                                ? null
-                                : index <= 3
-                                    ? KSize.kFont24
-                                    : KSize.kFont14,
-                          ),
+                          style: isDesk
+                              ? AppTextStyle.text32
+                              : index <= 3
+                                  ? AppTextStyle.text24
+                                  : AppTextStyle.text14,
                         ),
                         onPressed: () => context.goNamedWithScroll(
                           KAppText.routes(
@@ -74,17 +71,17 @@ class FooterWidget extends SliverChildBuilderDelegate {
                     children: [
                       IconWidget(
                         key: KWidgetkeys.widget.footer.likedInIcon,
-                        icon: KIcon.linkedIn,
+                        icon: KImage.linkedIn,
                       ),
                       KSizedBox.kWidthSizedBox24,
                       IconWidget(
                         key: KWidgetkeys.widget.footer.instagramIcon,
-                        icon: KIcon.instagram,
+                        icon: KImage.instagram,
                       ),
                       KSizedBox.kWidthSizedBox24,
                       IconWidget(
                         key: KWidgetkeys.widget.footer.facebookIcon,
-                        icon: KIcon.facebook,
+                        icon: KImage.facebook,
                       ),
                     ],
                   ),

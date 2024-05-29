@@ -15,56 +15,60 @@ List<Widget> _boxWidgetList({
                 isDesk: isDesk,
               ),
             ),
-            KSizedBox.kWidthSizedBox24,
-            Expanded(
-              child: Column(
-                children: [
-                  BoxWidget(
-                    key: KWidgetkeys.screen.home.discountsBox,
-                    text: context.l10n.discountsCoupons,
-                    onTap: () => context.goNamedWithScroll(
-                      KRoute.discounts.name,
+            if (Config.isDevelopment) ...[
+              KSizedBox.kWidthSizedBox24,
+              Expanded(
+                child: Column(
+                  children: [
+                    BoxWidget(
+                      key: KWidgetkeys.screen.home.storyBox,
+                      text: context.l10n.stories,
+                      onTap: () => context.goNamedWithScroll(KRoute.story.name),
+                      isDesk: isDesk,
+                      icon: KIcon.messageSquare,
                     ),
-                    isDesk: isDesk,
-                  ),
-                  if (isDesk)
-                    KSizedBox.kHeightSizedBox24
-                  else
-                    KSizedBox.kHeightSizedBox16,
-                  BoxWidget(
-                    key: KWidgetkeys.screen.home.workBox,
-                    text: context.l10n.work,
-                    onTap: () => context.goNamedWithScroll(KRoute.work.name),
-                    isDesk: isDesk,
-                  ),
-                ],
+                    if (isDesk)
+                      KSizedBox.kHeightSizedBox24
+                    else
+                      KSizedBox.kHeightSizedBox16,
+                    BoxWidget(
+                      key: KWidgetkeys.screen.home.workBox,
+                      text: context.l10n.work,
+                      onTap: () => context.goNamedWithScroll(KRoute.work.name),
+                      isDesk: isDesk,
+                      icon: KIcon.briefcase,
+                    ),
+                  ],
+                ),
               ),
-            ),
+            ],
           ],
         )
       else ...[
         HomeBoxWidget(
           isDesk: isDesk,
         ),
-        KSizedBox.kHeightSizedBox16,
-        BoxWidget(
-          key: KWidgetkeys.screen.home.discountsBox,
-          text: context.l10n.discountsCoupons,
-          onTap: () => context.goNamedWithScroll(
-            KRoute.discounts.name,
-          ),
-          isDesk: isDesk,
-        ),
-        if (isDesk)
-          KSizedBox.kHeightSizedBox24
-        else
+        if (Config.isDevelopment) ...[
           KSizedBox.kHeightSizedBox16,
-        BoxWidget(
-          key: KWidgetkeys.screen.home.workBox,
-          text: context.l10n.work,
-          onTap: () => context.goNamedWithScroll(KRoute.work.name),
-          isDesk: isDesk,
-        ),
+          BoxWidget(
+            key: KWidgetkeys.screen.home.storyBox,
+            text: context.l10n.stories,
+            onTap: () => context.goNamedWithScroll(KRoute.story.name),
+            isDesk: isDesk,
+            icon: KIcon.messageSquare,
+          ),
+          if (isDesk)
+            KSizedBox.kHeightSizedBox24
+          else
+            KSizedBox.kHeightSizedBox16,
+          BoxWidget(
+            key: KWidgetkeys.screen.home.workBox,
+            text: context.l10n.work,
+            onTap: () => context.goNamedWithScroll(KRoute.work.name),
+            isDesk: isDesk,
+            icon: KIcon.briefcase,
+          ),
+        ],
       ],
       if (isDesk) KSizedBox.kHeightSizedBox24 else KSizedBox.kHeightSizedBox16,
       if (isDesk)
@@ -78,15 +82,19 @@ List<Widget> _boxWidgetList({
                   KRoute.information.name,
                 ),
                 isDesk: isDesk,
+                icon: KIcon.globe,
               ),
             ),
             KSizedBox.kWidthSizedBox24,
             Expanded(
               child: BoxWidget(
-                key: KWidgetkeys.screen.home.storyBox,
-                text: context.l10n.stories,
-                onTap: () => context.goNamedWithScroll(KRoute.story.name),
+                key: KWidgetkeys.screen.home.discountsBox,
+                text: context.l10n.discounts,
+                onTap: () => context.goNamedWithScroll(
+                  KRoute.discounts.name,
+                ),
                 isDesk: isDesk,
+                icon: KIcon.tag,
               ),
             ),
             KSizedBox.kWidthSizedBox24,
@@ -98,6 +106,7 @@ List<Widget> _boxWidgetList({
                   KRoute.investors.name,
                 ),
                 isDesk: isDesk,
+                icon: KIcon.fileText,
               ),
             ),
           ],
@@ -110,13 +119,17 @@ List<Widget> _boxWidgetList({
             KRoute.information.name,
           ),
           isDesk: isDesk,
+          icon: KIcon.globe,
         ),
         KSizedBox.kHeightSizedBox16,
         BoxWidget(
-          key: KWidgetkeys.screen.home.storyBox,
-          text: context.l10n.stories,
-          onTap: () => context.goNamedWithScroll(KRoute.story.name),
+          key: KWidgetkeys.screen.home.discountsBox,
+          text: context.l10n.discounts,
+          onTap: () => context.goNamedWithScroll(
+            KRoute.discounts.name,
+          ),
           isDesk: isDesk,
+          icon: KIcon.tag,
         ),
         KSizedBox.kHeightSizedBox16,
         BoxWidget(
@@ -124,17 +137,7 @@ List<Widget> _boxWidgetList({
           text: context.l10n.investors,
           onTap: () => context.goNamedWithScroll(KRoute.investors.name),
           isDesk: isDesk,
+          icon: KIcon.fileText,
         ),
       ],
-      if (isDesk) KSizedBox.kHeightSizedBox160 else KSizedBox.kHeightSizedBox40,
-      Padding(
-        padding: const EdgeInsets.all(
-          KPadding.kPaddingSize16,
-        ),
-        child: Text(
-          context.l10n.faq,
-          key: KWidgetkeys.screen.home.questionListTitle,
-          style: isDesk ? AppTextStyle.text96 : AppTextStyle.text48,
-        ),
-      ),
     ];

@@ -28,7 +28,7 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
             ),
             key: KWidgetkeys.widget.profileCard.profileCard,
             child: Container(
-              decoration: context.widgetTheme.boxDecorationWidget,
+              decoration: KWidgetTheme.boxDecorationWidget,
               child: Padding(
                 padding: const EdgeInsets.all(KPadding.kPaddingSize16),
                 child: Column(
@@ -187,9 +187,7 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
           controller: TextEditingController(text: labelText),
           widgetKey: KWidgetkeys.widget.profileCardWidget.textFiled,
           hintText: hint,
-          hintStyle: widget.isDesk
-              ? context.textStyle.hint24
-              : context.textStyle.hint16,
+          hintStyle: widget.isDesk ? AppTextStyle.hint24 : AppTextStyle.hint16,
           // fillColor: AppColors.transparent,
           contentPadding: const EdgeInsets.all(KPadding.kPaddingSize16),
           isDesk: widget.isDesk,
@@ -257,7 +255,7 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
         ),
         Text(
           context.l10n.beAnonymousDetails,
-          style: widget.isDesk ? context.textStyle.hint16 : AppTextStyle.text16,
+          style: widget.isDesk ? AppTextStyle.hint16 : AppTextStyle.text16,
         ),
         KSizedBox.kHeightSizedBox8,
         if (isEditing)
@@ -293,7 +291,7 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
           ),
           child: Row(
             children: [
-              KIcon.facebook,
+              KImage.facebook,
               KSizedBox.kWidthSizedBox8,
               Expanded(
                 child: Text(
@@ -312,9 +310,8 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
               child: TextFieldWidget(
                 widgetKey: KWidgetkeys.widget.profileCardWidget.textFiled,
                 hintText: KMockText.email,
-                hintStyle: widget.isDesk
-                    ? context.textStyle.hint24
-                    : context.textStyle.hint16,
+                hintStyle:
+                    widget.isDesk ? AppTextStyle.hint24 : AppTextStyle.hint16,
                 // fillColor: AppColors.transparent,
                 contentPadding: const EdgeInsets.all(KPadding.kPaddingSize16),
                 isDesk: widget.isDesk,
@@ -334,7 +331,7 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
         KSizedBox.kHeightSizedBox8,
         Text(
           context.l10n.linkedAccountsDetails,
-          style: context.textStyle.hint16,
+          style: AppTextStyle.hint16,
         ),
         KSizedBox.kHeightSizedBox8,
         if (widget.isDesk == false)

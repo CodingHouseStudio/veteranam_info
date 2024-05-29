@@ -36,12 +36,12 @@ class _CheckPointSingleWidgetState extends State<CheckPointSingleWidget> {
       },
       icon: Container(
         key: KWidgetkeys.widget.checkPointSingle.widget,
-        decoration: context.widgetTheme.boxCheckPoint.copyWith(
-          color: isCheck ? null : context.color.background,
+        decoration: KWidgetTheme.boxCheckPoint.copyWith(
+          color: isCheck ? null : AppColors.materialThemeWhite,
         ),
         child: isCheck
-            ? KIcon.check.setIconKey(
-                KWidgetkeys.widget.checkPointSingle.icon,
+            ? KIcon.check.copyWith(
+                key: KWidgetkeys.widget.checkPointSingle.icon,
               )
             : const SizedBox(
                 width: KSize.kIconSize,

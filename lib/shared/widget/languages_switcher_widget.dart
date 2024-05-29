@@ -7,25 +7,24 @@ class LanguagesSwitcherWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final languages = LanguageExtension.getAllLanguage;
     return PopupMenuButton<String>(
       key: KWidgetkeys.widget.languageSwitcher.widget,
       child: Container(
-        decoration: context.widgetTheme.boxDecorationCircular,
-        padding: const EdgeInsets.symmetric(
-          horizontal: KPadding.kPaddingSize8,
-          vertical: KPadding.kPaddingSize10,
+        decoration: KWidgetTheme.boxDecorationCircular,
+        padding: const EdgeInsets.all(
+          KPadding.kPaddingSize12,
         ),
         child: Text(
           context.l10n.localeName.getLocale.text,
           key: KWidgetkeys.widget.languageSwitcher.text,
-          style: AppTextStyle.text24,
+          style: AppTextStyle.materialThemeTitleMedium,
         ),
       ),
       onSelected: (value) => context
           .read<AuthenticationBloc>()
           .add(AppLanguageChanged(value.getLocale)),
       itemBuilder: (BuildContext context) {
+        final languages = LanguageExtension.getAllLanguage;
         return List.generate(languages.length, (index) {
           return PopupMenuItem<String>(
             key: KWidgetkeys.widget.languageSwitcher.item,

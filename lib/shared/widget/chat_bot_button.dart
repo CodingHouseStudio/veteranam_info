@@ -11,9 +11,9 @@ class ChatBotButton extends StatelessWidget {
       onTap: onTap,
       borderRadius: KBorderRadius.kBorderRadius32,
       child: IconWidget(
-        icon: KIcon.message.setIconSize(KSize.kPixel32),
+        icon: KIcon.message.copyWith(size: KSize.kPixel32),
         padding: KPadding.kPaddingSize20,
-        background: context.color.secondaryContainer,
+        background: AppColors.materialThemeKeyColorsNeutral,
       ),
     );
   }
