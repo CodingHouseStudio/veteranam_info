@@ -11,6 +11,7 @@ class FirestoreService {
     // Initialization logic can't use await directly in constructor
     _initFirestoreSettings();
   }
+
   final FirebaseFirestore _db = firebaseFirestore;
 
   @visibleForTesting
@@ -188,5 +189,66 @@ class FirestoreService {
         .collection(FirebaseCollectionName.stroies)
         .doc(information.id)
         .set(information.toJson());
+  }
+
+  Future<List<StoryModel>> getStoriesByUserId(String userId) async {
+    final querySnapshot = await _db
+        .collection(FirebaseCollectionName.stroies)
+        .where('userId', isEqualTo: userId)
+        .get();
+
+    return querySnapshot.docs
+        .map((doc) => StoryModel.fromJson(doc.data()))
+        .toList();
+  }
+
+  Stream<List<DiscountModel>> getDiscounts() => _db
+          .collection(FirebaseCollectionName.discount)
+          .snapshots(includeMetadataChanges: true) // Enable caching
+          .map(
+        (snapshot) {
+          for (final change in snapshot.docChanges) {
+            if (change.type == DocumentChangeType.added) {
+              final source =
+                  (snapshot.metadata.isFromCache) ? 'local cache' : 'server';
+              debugPrint('Data fetched from $source}');
+            }
+          }
+          return snapshot.docs
+              .map((doc) => DiscountModel.fromJson(doc.data()))
+              .toList();
+        },
+      );
+
+  Future<void> addDiscount(DiscountModel discount) {
+    return _db
+        .collection(FirebaseCollectionName.discount)
+        .doc(discount.id)
+        .set(discount.toJson());
+  }
+
+  Stream<List<TagModel>> getTags() => _db
+          .collection(FirebaseCollectionName.tags)
+          .snapshots(includeMetadataChanges: true) // Enable caching
+          .map(
+        (snapshot) {
+          for (final change in snapshot.docChanges) {
+            if (change.type == DocumentChangeType.added) {
+              final source =
+                  (snapshot.metadata.isFromCache) ? 'local cache' : 'server';
+              debugPrint('Data fetched from $source}');
+            }
+          }
+          return snapshot.docs
+              .map((doc) => TagModel.fromJson(doc.data()))
+              .toList();
+        },
+      );
+
+  Future<void> addTags(TagModel tags) {
+    return _db
+        .collection(FirebaseCollectionName.tags)
+        .doc(tags.id)
+        .set(tags.toJson());
   }
 }

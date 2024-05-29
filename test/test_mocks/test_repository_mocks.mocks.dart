@@ -799,6 +799,59 @@ class MockFirestoreService extends _i1.Mock implements _i3.FirestoreService {
         returnValue: _i8.Future<void>.value(),
         returnValueForMissingStub: _i8.Future<void>.value(),
       ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<List<_i3.StoryModel>> getStoriesByUserId(String? userId) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getStoriesByUserId,
+          [userId],
+        ),
+        returnValue: _i8.Future<List<_i3.StoryModel>>.value(<_i3.StoryModel>[]),
+        returnValueForMissingStub:
+            _i8.Future<List<_i3.StoryModel>>.value(<_i3.StoryModel>[]),
+      ) as _i8.Future<List<_i3.StoryModel>>);
+
+  @override
+  _i8.Stream<List<_i3.DiscountModel>> getDiscounts() => (super.noSuchMethod(
+        Invocation.method(
+          #getDiscounts,
+          [],
+        ),
+        returnValue: _i8.Stream<List<_i3.DiscountModel>>.empty(),
+        returnValueForMissingStub: _i8.Stream<List<_i3.DiscountModel>>.empty(),
+      ) as _i8.Stream<List<_i3.DiscountModel>>);
+
+  @override
+  _i8.Future<void> addDiscount(_i3.DiscountModel? discount) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #addDiscount,
+          [discount],
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Stream<List<_i3.TagModel>> getTags() => (super.noSuchMethod(
+        Invocation.method(
+          #getTags,
+          [],
+        ),
+        returnValue: _i8.Stream<List<_i3.TagModel>>.empty(),
+        returnValueForMissingStub: _i8.Stream<List<_i3.TagModel>>.empty(),
+      ) as _i8.Stream<List<_i3.TagModel>>);
+
+  @override
+  _i8.Future<void> addTags(_i3.TagModel? tags) => (super.noSuchMethod(
+        Invocation.method(
+          #addTags,
+          [tags],
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
 }
 
 /// A class which mocks [IInvestorsRepository].
@@ -5304,6 +5357,34 @@ class MockIStoryRepository extends _i1.Mock implements _i3.IStoryRepository {
           ),
         )),
       ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
+
+  @override
+  _i8.Future<_i2.Either<_i3.SomeFailure, List<_i3.StoryModel>>> getStoriesById(
+          String? userId) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getStoriesById,
+          [userId],
+        ),
+        returnValue:
+            _i8.Future<_i2.Either<_i3.SomeFailure, List<_i3.StoryModel>>>.value(
+                _FakeEither_0<_i3.SomeFailure, List<_i3.StoryModel>>(
+          this,
+          Invocation.method(
+            #getStoriesById,
+            [userId],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i8.Future<_i2.Either<_i3.SomeFailure, List<_i3.StoryModel>>>.value(
+                _FakeEither_0<_i3.SomeFailure, List<_i3.StoryModel>>(
+          this,
+          Invocation.method(
+            #getStoriesById,
+            [userId],
+          ),
+        )),
+      ) as _i8.Future<_i2.Either<_i3.SomeFailure, List<_i3.StoryModel>>>);
 }
 
 /// A class which mocks [FirebaseStorage].
@@ -6513,6 +6594,31 @@ class MockXFile extends _i1.Mock implements _i11.XFile {
           ),
         )),
       ) as _i8.Future<DateTime>);
+}
+
+/// A class which mocks [IDiscountRepository].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockIDiscountRepository extends _i1.Mock
+    implements _i3.IDiscountRepository {
+  @override
+  _i8.Stream<List<_i3.DiscountModel>> getDiscountItems() => (super.noSuchMethod(
+        Invocation.method(
+          #getDiscountItems,
+          [],
+        ),
+        returnValue: _i8.Stream<List<_i3.DiscountModel>>.empty(),
+        returnValueForMissingStub: _i8.Stream<List<_i3.DiscountModel>>.empty(),
+      ) as _i8.Stream<List<_i3.DiscountModel>>);
+
+  @override
+  void addMockDiscountItems() => super.noSuchMethod(
+        Invocation.method(
+          #addMockDiscountItems,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
 }
 
 /// A class which mocks [Query].

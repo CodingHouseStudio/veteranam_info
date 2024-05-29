@@ -28,24 +28,10 @@ class App extends StatelessWidget {
   }
 }
 
-class AppWidget extends StatefulWidget {
+class AppWidget extends StatelessWidget {
   const AppWidget({
     super.key,
   });
-
-  @override
-  State<AppWidget> createState() => _AppWidgetState();
-}
-
-class _AppWidgetState extends State<AppWidget> {
-  late final MaterialTheme themeDataNew;
-
-  @override
-  void initState() {
-    super.initState();
-
-    themeDataNew = const MaterialTheme(TextTheme());
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +42,7 @@ class _AppWidgetState extends State<AppWidget> {
         }
         return MaterialApp.router(
           key: KWidgetkeys.screen.app.screen,
-          theme: themeDataNew.light(),
+          theme: themeData,
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           locale: _.userSetting.locale.value,
           supportedLocales: AppLocalizations.supportedLocales,

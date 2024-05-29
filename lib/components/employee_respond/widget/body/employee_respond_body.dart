@@ -3,8 +3,8 @@ import 'package:kozak/shared/shared.dart';
 
 part '../employee_respond_container_widget.dart';
 
-class EmployeeRespondBody extends StatelessWidget {
-  const EmployeeRespondBody({super.key});
+class EmployeeRespondBodyWidget extends StatelessWidget {
+  const EmployeeRespondBodyWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class EmployeeRespondBody extends StatelessWidget {
           ],
         ),
       ],
-      mainDecoration: context.widgetTheme.boxDecorationWidget,
+      mainDecoration: KWidgetTheme.boxDecorationWidget,
       mainPadding: ({required isDesk, required maxWidth}) =>
           EdgeInsets.symmetric(
         horizontal: isDesk ? maxWidth * KDimensions.respondPaddingMultiply : 0,

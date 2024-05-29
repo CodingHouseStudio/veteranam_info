@@ -27,9 +27,8 @@ class CardAddImageWidget extends StatelessWidget {
                 ),
               Expanded(
                 child: Container(
-                  decoration: image == null
-                      ? context.widgetTheme.boxDecorationWidget
-                      : null,
+                  decoration:
+                      image == null ? KWidgetTheme.boxDecorationWidget : null,
                   child: Padding(
                     padding: EdgeInsets.symmetric(
                       horizontal: KPadding.kPaddingSize32,
@@ -42,7 +41,7 @@ class CardAddImageWidget extends StatelessWidget {
             ],
           )
         : Container(
-            decoration: context.widgetTheme.boxDecorationWidget,
+            decoration: KWidgetTheme.boxDecorationWidget,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
@@ -68,8 +67,8 @@ class CardAddImageWidget extends StatelessWidget {
     debugPrint('Image: $image');
     return Container(
       decoration: isDesk
-          ? context.widgetTheme.boxDecorationImageDesk
-          : context.widgetTheme.boxDecorationImageMob,
+          ? KWidgetTheme.boxDecorationImageDesk
+          : KWidgetTheme.boxDecorationImageMob,
       constraints: const BoxConstraints(
         maxHeight: KMinMaxSize.minHeight640,
         maxWidth: KMinMaxSize.maxWidth640,

@@ -3,12 +3,13 @@ import 'package:kozak/shared/shared.dart';
 
 class WorkRequestCardWidget extends StatelessWidget {
   const WorkRequestCardWidget({required this.isDesk, super.key});
+
   final bool isDesk;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: context.widgetTheme.boxDecorationWidget,
+      decoration: KWidgetTheme.boxDecorationWidget,
       padding: EdgeInsets.symmetric(
         vertical: KPadding.kPaddingSize16,
         horizontal: isDesk ? KPadding.kPaddingSize48 : KPadding.kPaddingSize16,

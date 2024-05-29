@@ -29,7 +29,7 @@ class SignUpLoginBottomButtonsWidget extends StatelessWidget {
               Text(
                 context.l10n.or,
                 key: KWidgetkeys.widget.signUpBottomButtons.or,
-                style: context.textStyle.hint14,
+                style: AppTextStyle.hint14,
               ),
               KSizedBox.kWidthSizedBox32,
               Expanded(
@@ -56,7 +56,7 @@ class SignUpLoginBottomButtonsWidget extends StatelessWidget {
                   onPressed: () => context
                       .read<AuthenticationServicesCubit>()
                       .authenticationUseGoogle(),
-                  icon: KIcon.google,
+                  icon: KImage.google,
                 ),
               ),
               KSizedBox.kWidthSizedBox16,
@@ -65,7 +65,7 @@ class SignUpLoginBottomButtonsWidget extends StatelessWidget {
                   key: KWidgetkeys.widget.signUpBottomButtons.facebook,
                   isDesk: true,
                   text: context.l10n.facebook,
-                  icon: KIcon.facebook,
+                  icon: KImage.facebook,
                 ),
               ),
               KSizedBox.kWidthSizedBox16,
@@ -74,7 +74,7 @@ class SignUpLoginBottomButtonsWidget extends StatelessWidget {
                   key: KWidgetkeys.widget.signUpBottomButtons.apple,
                   isDesk: true,
                   text: context.l10n.apple,
-                  icon: KIcon.apple,
+                  icon: KImage.apple,
                 ),
               ),
             ],
@@ -88,7 +88,7 @@ class SignUpLoginBottomButtonsWidget extends StatelessWidget {
           Text(
             context.l10n.or,
             key: KWidgetkeys.widget.signUpBottomButtons.or,
-            style: isDesk ? context.textStyle.hint24 : context.textStyle.hint16,
+            style: isDesk ? AppTextStyle.hint24 : AppTextStyle.hint16,
           ),
           KSizedBox.kHeightSizedBox16,
           Text(
@@ -104,21 +104,21 @@ class SignUpLoginBottomButtonsWidget extends StatelessWidget {
             onPressed: () => context
                 .read<AuthenticationServicesCubit>()
                 .authenticationUseGoogle(),
-            icon: KIcon.google,
+            icon: KImage.google,
           ),
           KSizedBox.kHeightSizedBox16,
           buildBottomButton(
             key: KWidgetkeys.widget.signUpBottomButtons.facebook,
             isDesk: false,
             text: context.l10n.facebook,
-            icon: KIcon.facebook,
+            icon: KImage.facebook,
           ),
           KSizedBox.kHeightSizedBox16,
           buildBottomButton(
             key: KWidgetkeys.widget.signUpBottomButtons.apple,
             isDesk: false,
             text: context.l10n.apple,
-            icon: KIcon.apple,
+            icon: KImage.apple,
           ),
         ],
       );

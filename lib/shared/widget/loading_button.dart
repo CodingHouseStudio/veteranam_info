@@ -19,8 +19,8 @@ class LoadingButton extends StatelessWidget {
         text: context.l10n.moreStories,
         onPressed: onPressed,
         icon: isDesk
-            ? KIcon.refresh.setIconKey(
-                iconKey,
+            ? KIcon.refresh.copyWith(
+                key: iconKey,
               )
             : null,
         isDesk: isDesk,

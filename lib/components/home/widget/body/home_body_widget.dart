@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:go_router/go_router.dart';
 import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
 
@@ -49,8 +50,75 @@ class _HomeBodyWidgetState extends State<HomeBodyWidget> {
           BlocBuilder<HomeWatcherBloc, HomeWatcherState>(
         builder: (context, _) => ScaffoldWidget(
           mainChildWidgetsFunction: ({required isDesk}) {
-            final childWidgets =
-                _boxWidgetList(context: context, isDesk: isDesk);
+            final childWidgets = [
+              ..._boxWidgetList(context: context, isDesk: isDesk),
+              KSizedBox.kHeightSizedBox48,
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: TextPointWidget(
+                      context.l10n.whatKindOfProject,
+                    ),
+                  ),
+                  Expanded(
+                    flex: 3,
+                    child: Text(
+                      context.l10n.aboutProject,
+                      style: AppTextStyle.materialThemeDisplayMedium,
+                    ),
+                  ),
+                ],
+              ),
+              KSizedBox.kHeightSizedBox160,
+              HomeScrenCard(
+                rightWidget: HomeScreenCardContent(
+                  isDesk: isDesk,
+                  textPoint: context.l10n.saveMoney,
+                  title: context.l10n.discountsServices,
+                  subtitle: context.l10n.discountsServicesSubtitle,
+                  textButton: context.l10n.toDiscount,
+                  padding: const EdgeInsets.only(
+                    left: KPadding.kPaddingSize48,
+                  ),
+                  route: () => context.goNamed(KRoute.discounts.name),
+                  bottomWidget: KSizedBox.kHeightSizedBox90,
+                ),
+                leftWidget: KImage.discountImage,
+                rightPadding: KPadding.kPaddingSize84,
+              ),
+              KSizedBox.kHeightSizedBox160,
+              HomeScrenCard(
+                leftWidget: HomeScreenCardContent(
+                  isDesk: isDesk,
+                  textPoint: context.l10n.findOut,
+                  title: context.l10n.informationNews,
+                  subtitle: context.l10n.informationNewsSubtitle,
+                  textButton: context.l10n.toInfomation,
+                  padding: const EdgeInsets.only(
+                    right: KPadding.kPaddingSize48,
+                  ),
+                  route: () => context.goNamed(KRoute.information.name),
+                  bottomWidget: KSizedBox.kHeightSizedBox48,
+                ),
+                rightWidget: KImage.inforamationImage,
+                rightPadding: KPadding.kPaddingSize32,
+              ),
+              if (isDesk)
+                KSizedBox.kHeightSizedBox160
+              else
+                KSizedBox.kHeightSizedBox40,
+              Padding(
+                padding: const EdgeInsets.all(
+                  KPadding.kPaddingSize16,
+                ),
+                child: Text(
+                  context.l10n.faq,
+                  key: KWidgetkeys.screen.home.questionListTitle,
+                  style: isDesk ? AppTextStyle.text96 : AppTextStyle.text48,
+                ),
+              ),
+            ];
 
             switch (_) {
               case HomeWatcherStateInitial():

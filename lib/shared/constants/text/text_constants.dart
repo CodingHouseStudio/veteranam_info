@@ -12,6 +12,12 @@ abstract class KMockText {
     'Жовква',
     'Трускавець',
     'Стебник',
+    'Дніпро',
+    'Луцьк',
+    'Миколаїв',
+    'Суми',
+    'Ужгород',
+    'Чернігів',
   ];
   static const workCategory = 'Комплектувальник';
   static const facebook = 'Facebook';
@@ -33,7 +39,21 @@ abstract class KMockText {
     date: DateTime(2024, 05, 20),
     story: cardData,
     userId: '2',
+    // image: [
+    //   const ImageModel(
+    //     downloadURL:
+    //         'https://static.vecteezy.com/system/resources/thumbnails/008/492/251/small/back-to-school-illustration-cartoon-character-children-kid-png.png',
+    //   ),
+    // ],
   );
+
+  static const tagsDiscount = <List<String>?>[
+    ['Медицина'],
+    ['Послуги'],
+    ['Житло'],
+    [],
+  ];
+
   static const workModel = WorkModel(
     id: '1',
     title: title,
@@ -124,6 +144,7 @@ abstract class KAppText {
   static const String authChange = 'AuthenticationStatusChanged:';
   static const String backendString = '';
   static const String usernameToken = 'USERNAME_TOKEN';
+
   static List<String> routes({required bool hasAccount}) => [
         KRoute.aboutUs.name,
         KRoute.investors.name,
@@ -142,7 +163,7 @@ abstract class KAppText {
       context.l10n.forInvestors,
       context.l10n.contact,
       context.l10n.stories,
-      context.l10n.discountsCoupons,
+      context.l10n.discounts,
       context.l10n.myProfile,
       context.l10n.work,
       context.l10n.information,
