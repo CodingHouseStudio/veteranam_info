@@ -93,7 +93,7 @@ List<Widget> _textFieldWidgetList({
         ),
         child: Text(
           key: KWidgetkeys.screen.employer.textContact,
-          context.l10n.contacts,
+          '${context.l10n.contacts}*',
           style: isDesk ? AppTextStyle.text40 : AppTextStyle.text24,
         ),
       ),

@@ -38,6 +38,13 @@ extension SvgPictureExtension on SvgPicture {
   }
 }
 
+extension ImageExension on Image {
+  Image setKey(Key key) => Image(
+        image: image,
+        key: key,
+      );
+}
+
 abstract class KImage {
   static const SvgPicture instagram =
       SvgPicture(SvgAssetLoader('assets/icons/instagram.svg'));
@@ -51,10 +58,14 @@ abstract class KImage {
       SvgPicture(SvgAssetLoader('assets/icons/social_icons_g.svg'));
   static const SvgPicture logo = SvgPicture(
     SvgAssetLoader('assets/images/logo.svg'),
+    fit: BoxFit.fitHeight,
   );
   static const Image homeImage = Image(
     image: AssetImage('assets/images/home_image.png'),
     fit: BoxFit.fill,
+  );
+  static const Image homeImageMob = Image(
+    image: AssetImage('assets/images/home_image_mob.png'),
   );
   static const Image discountImage = Image(
     image: AssetImage('assets/images/discount_image.png'),
@@ -64,4 +75,8 @@ abstract class KImage {
     image: AssetImage('assets/images/information_image.png'),
     fit: BoxFit.fill,
   );
+  // static const Image workImage = Image(
+  //   image: AssetImage('assets/images/work_image.png'),
+  //   fit: BoxFit.fill,
+  // );
 }

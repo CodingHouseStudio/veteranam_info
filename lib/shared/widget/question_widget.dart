@@ -35,7 +35,9 @@ class _QuestionWidgetState extends State<QuestionWidget> {
           title: Text(
             widget.questionModel.title,
             key: KWidgetkeys.widget.question.title,
-            style: widget.isDesk ? AppTextStyle.text40 : AppTextStyle.text18,
+            style: widget.isDesk
+                ? AppTextStyle.materialThemeHeadlineSmall
+                : AppTextStyle.materialThemeTitleLarge,
             maxLines: 2,
           ),
           onExpansionChanged: (value) => setState(() {
@@ -49,25 +51,29 @@ class _QuestionWidgetState extends State<QuestionWidget> {
                 : KIcon.plus.copyWith(
                     key: KWidgetkeys.widget.question.iconPlus,
                   ),
-            // background: AppColors.widgetBackground,
           ),
           tilePadding: const EdgeInsets.symmetric(
             horizontal: KPadding.kPaddingSize32,
             vertical: KPadding.kPaddingSize16,
+          ).copyWith(
+            bottom: widget.isDesk
+                ? KPadding.kPaddingSize16
+                : KPadding.kPaddingSize8,
           ),
-          childrenPadding: EdgeInsets.only(
-            left: widget.isDesk
+          childrenPadding: EdgeInsets.symmetric(
+            horizontal: widget.isDesk
                 ? KPadding.kPaddingSize32
                 : KPadding.kPaddingSize16,
-            bottom: KPadding.kPaddingSize16,
-            top: widget.isDesk ? KPadding.kPaddingSize8 : 0,
-          ),
+            vertical: KPadding.kPaddingSize16,
+          ).copyWith(top: 0),
           children: [
             Markdown(
               key: KWidgetkeys.widget.question.subtitle,
               data: widget.questionModel.subtitle,
               styleSheet: MarkdownStyleSheet(
-                p: widget.isDesk ? AppTextStyle.text24 : AppTextStyle.text14,
+                p: widget.isDesk
+                    ? AppTextStyle.materialThemeBodyLarge
+                    : AppTextStyle.materialThemeBodyMedium,
               ),
               shrinkWrap: true,
             ),

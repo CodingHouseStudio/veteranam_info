@@ -234,6 +234,18 @@ abstract class KTestText {
         userPhoto: i > KMockText.tags.length - 2 ? userPhotoModel : null,
       ),
   ];
+
+  static List<String> routes({required bool hasAccount}) => [
+        KRoute.aboutUs.name,
+        KRoute.investors.name,
+        KRoute.contact.name,
+        KRoute.stories.name,
+        KRoute.discounts.name,
+        if (hasAccount) KRoute.profile.name else KRoute.login.name,
+        KRoute.work.name,
+        KRoute.information.name,
+        KRoute.consultation.name,
+      ];
 }
 
 abstract class KTestConstants {

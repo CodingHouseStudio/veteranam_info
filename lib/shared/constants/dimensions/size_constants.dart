@@ -2,6 +2,7 @@
 abstract class KSize {
   static const kPixel3 = 3.0;
   static const kPixel4 = 4.0;
+  static const kPixel6 = 6.0;
   static const kPixel8 = 8.0;
   static const kPixel12 = 12.0;
   static const kPixel16 = 16.0;
@@ -16,13 +17,16 @@ abstract class KSize {
   static const kPixel45 = 45.0;
   static const kPixel48 = 48.0;
   static const kPixel56 = 56.0;
+  static const kPixel60 = 60.0;
   static const kPixel64 = 64.0;
   static const kPixel68 = 68.0;
   static const kPixel70 = 70.0;
   static const kPixel73 = 73.0;
   static const kPixel78 = 78.0;
+  static const kPixel80 = 80.0;
   static const kPixel90 = 90.0;
   static const kPixel120 = 120.0;
+  static const kPixel140 = 140.0;
   static const kPixel160 = 160.0;
 
   static const kRadius8 = 8.0;
@@ -36,6 +40,7 @@ abstract class KSize {
   static const kFont20 = 20.0;
   static const kFont24 = 24.0;
   static const kFont32 = 32.0;
+  static const kFont36 = 36.0;
   static const kFont40 = 40.0;
   static const kFont48 = 48.0;
   static const kFont64 = 64.0;
@@ -48,7 +53,7 @@ abstract class KSize {
   static const kWrapRunSpacing4 = 4.0;
 
   static const kOpacityHalf = 0.5;
-  static const kIconSize = 24.0;
+  static const kcheckPointIconSize = 18.0;
 
   static const kTopScroll = 1000.0;
 

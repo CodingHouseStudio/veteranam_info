@@ -13,17 +13,11 @@ Future<void> footerButtonsHelper({
     offset: KTestConstants.scrollingDown,
   );
 
-  await scrollingHelper(
-    tester: tester,
-    offset: KTestConstants.scrollingDown,
-  );
-
   await changeWindowSizeHelper(
     tester: tester,
+    windowsTest: true,
     test: () async {
-      for (var i = KWidgetkeys.widget.footer.buttonsKey.length - 1;
-          i >= 0;
-          i--) {
+      for (var i = 0; i >= KWidgetkeys.widget.footer.buttonsKey.length; i--) {
         final buttonKey = KWidgetkeys.widget.footer.buttonsKey.elementAt(i);
 
         expect(
@@ -35,7 +29,7 @@ Future<void> footerButtonsHelper({
 
         verify(
           () => mockGoRouter.goNamed(
-            KAppText.routes(hasAccount: false).elementAt(i),
+            KTestText.routes(hasAccount: false).elementAt(i),
           ),
         ).called(1);
       }

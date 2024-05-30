@@ -46,7 +46,7 @@ class BoxWidget extends StatelessWidget {
                       child: Text(
                         text,
                         key: KWidgetkeys.widget.box.text,
-                        style: AppTextStyle.text40,
+                        style: AppTextStyle.materialThemeHeadlineSmall,
                         maxLines: 1,
                       ),
                     ),
@@ -63,13 +63,13 @@ class BoxWidget extends StatelessWidget {
                     child: Text(
                       text,
                       key: KWidgetkeys.widget.box.text,
-                      style: AppTextStyle.text24,
+                      style: AppTextStyle.materialThemeTitleLarge,
                       maxLines: 1,
                     ),
                   ),
                   IconWidget(
                     key: KWidgetkeys.widget.box.icon,
-                    icon: KIcon.arrowUpRight,
+                    icon: icon ?? KIcon.arrowUpRight,
                     padding: KPadding.kPaddingSize20,
                   ),
                 ],

@@ -65,6 +65,10 @@ abstract class KButtonStyles {
       ),
     ),
   );
+  static const zeroPaddingButtonStyle = ButtonStyle(
+    alignment: Alignment.centerLeft,
+    padding: MaterialStatePropertyAll(EdgeInsets.zero),
+  );
   static const borderButtonStyle = ButtonStyle(
     minimumSize: MaterialStatePropertyAll(
       Size(KMinMaxSize.minWidth100, KMinMaxSize.minHeight50),

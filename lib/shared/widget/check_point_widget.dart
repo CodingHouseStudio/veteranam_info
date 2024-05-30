@@ -14,9 +14,9 @@ class CheckPointWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       key: KWidgetkeys.widget.checkPoint.widget,
-      decoration: KWidgetTheme.boxCheckPoint.copyWith(
-        color: isCheck ? null : AppColors.materialThemeWhite,
-      ),
+      decoration: isCheck
+          ? KWidgetTheme.boxDecorCheckPointFalse
+          : KWidgetTheme.boxDecorCheckPointTrue,
       child: InkWell(
         onTap: onChanged,
         child: isCheck
@@ -24,8 +24,8 @@ class CheckPointWidget extends StatelessWidget {
                 key: KWidgetkeys.widget.checkPoint.icon,
               )
             : const SizedBox(
-                width: KSize.kIconSize,
-                height: KSize.kIconSize,
+                width: KSize.kcheckPointIconSize,
+                height: KSize.kcheckPointIconSize,
               ),
       ),
     );

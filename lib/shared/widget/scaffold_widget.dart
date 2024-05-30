@@ -36,6 +36,10 @@ class ScaffoldWidget extends StatelessWidget {
                       : 0)
               : KPadding.kPaddingSize16),
         );
+        final footerList = FooterWidget.get(
+          context: context,
+          isDesk: isDesk,
+        );
         return Scaffold(
           body: CustomScrollView(
             key: KWidgetkeys.widget.scaffold.scroll,
@@ -80,32 +84,23 @@ class ScaffoldWidget extends StatelessWidget {
                   bottom: KPadding.kPaddingSize40,
                 ),
                 sliver: DecoratedSliver(
-                  decoration: KWidgetTheme.boxDecorationCard,
+                  decoration: KWidgetTheme.boxDecorationFooter,
                   sliver: SliverPadding(
                     padding: isDesk
-                        ? const EdgeInsets.all(KPadding.kPaddingSize48)
+                        ? const EdgeInsets.all(KPadding.kPaddingSize32)
+                            .copyWith(left: KPadding.kPaddingSize46)
                         : const EdgeInsets.symmetric(
                             vertical: KPadding.kPaddingSize32,
                             horizontal: KPadding.kPaddingSize16,
                           ),
-                    sliver: isDesk
-                        ? SliverGrid(
-                            key: KWidgetkeys.widget.footer.widget,
-                            delegate: FooterWidget(
-                              isDesk: true,
-                            ),
-                            gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 3,
-                              mainAxisExtent: KMinMaxSize.maxHeight50,
-                              mainAxisSpacing: KPadding.kPaddingSize32,
-                            ),
-                          )
-                        : SliverList(
-                            delegate: FooterWidget(
-                              isDesk: false,
-                            ),
-                          ),
+                    sliver: SliverList.builder(
+                      key: KWidgetkeys.widget.footer.widget,
+                      addAutomaticKeepAlives: false,
+                      addRepaintBoundaries: false,
+                      itemBuilder: (context, index) =>
+                          footerList.elementAt(index),
+                      itemCount: footerList.length,
+                    ),
                   ),
                 ),
               ),

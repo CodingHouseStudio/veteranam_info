@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kozak/shared/shared.dart';
-import 'package:kozak/shared/widget/dialogs_widget.dart';
 
 class ProfileCardWidget extends StatefulWidget {
   const ProfileCardWidget({
