@@ -242,6 +242,7 @@ abstract class KTestText {
     email: KTestText.userEmail,
     phoneNumber: KTestText.phoneNumber,
     resume: null,
+    noResume: false,
   );
 }
 
