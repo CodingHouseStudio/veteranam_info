@@ -14,6 +14,7 @@ class EmployeeRespondState with _$EmployeeRespondState {
     required EmailFieldModel email,
     required PhoneNumberFieldModel phoneNumber,
     required String? resume,
+    required bool noResume,
     required EmployeeRespondEnum formState,
     required EmployeeRespondFailure failure,
   }) = _EmployeeRespondState;

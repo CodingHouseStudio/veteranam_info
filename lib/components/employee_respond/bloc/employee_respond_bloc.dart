@@ -21,6 +21,7 @@ class EmployeeRespondBloc
             email: EmailFieldModel.pure(),
             phoneNumber: PhoneNumberFieldModel.pure(),
             resume: null,
+            noResume: false,
             formState: EmployeeRespondEnum.initial,
             failure: EmployeeRespondFailure.initial,
           ),
@@ -74,6 +75,7 @@ class EmployeeRespondBloc
           id: ExtendedDateTime.id,
           email: state.email.value,
           resume: null,
+          noResume: false,
           phoneNumber: state.phoneNumber.value!,
         ),
       );
@@ -89,6 +91,7 @@ class EmployeeRespondBloc
             email: EmailFieldModel.pure(),
             phoneNumber: PhoneNumberFieldModel.pure(),
             resume: null,
+            noResume: false,
             formState: EmployeeRespondEnum.success,
             failure: EmployeeRespondFailure.none,
           ),

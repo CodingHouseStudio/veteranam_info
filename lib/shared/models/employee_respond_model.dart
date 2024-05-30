@@ -10,6 +10,7 @@ class EmployeeRespondModel with _$EmployeeRespondModel {
     required String email,
     required String phoneNumber,
     required String? resume,
+    required bool noResume,
   }) = _EmployeeRespondModel;
 
   factory EmployeeRespondModel.fromJson(Map<String, dynamic> json) =>
