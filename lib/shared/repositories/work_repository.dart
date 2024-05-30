@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
@@ -29,7 +30,16 @@ class WorkRepository implements IWorkRepository {
   }
 
   @override
-  Future<Either<SomeFailure, bool>> sendRespond(EmployeeRespondModel respond) {
-    throw UnimplementedError();
+  Future<Either<SomeFailure, bool>> sendRespond(
+    EmployeeRespondModel respond,
+  ) async {
+    try {
+      await _firestoreService.sendRespond(respond);
+      return const Right(true);
+    } on FirebaseException catch (e) {
+      return Left(SendFailure.fromCode(e).status);
+    } catch (e) {
+      return const Left(SomeFailure.serverError());
+    }
   }
 }

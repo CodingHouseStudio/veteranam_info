@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:injectable/injectable.dart';
+import 'package:kozak/shared/models/employee_respond_model.dart';
 import 'package:kozak/shared/shared.dart';
 
 /// COMMENT: Class to get, update, delete or set values in firebase
@@ -251,4 +252,9 @@ class FirestoreService {
         .doc(tags.id)
         .set(tags.toJson());
   }
+
+  Future<void> sendRespond(EmployeeRespondModel respondModel) => _db
+      .collection(FirebaseCollectionName.respond)
+      .doc(respondModel.id)
+      .set(respondModel.toJson());
 }

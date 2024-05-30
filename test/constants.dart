@@ -6,6 +6,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:kozak/bootstrap.dart';
 import 'package:kozak/firebase_options_development.dart';
+import 'package:kozak/shared/models/employee_respond_model.dart';
 import 'package:kozak/shared/shared.dart';
 
 Future<void> setUpGlobal({bool? kIsWeb}) async {
@@ -76,6 +77,8 @@ abstract class KTestText {
 
   static const field = 'field_test';
   static const fieldEmpty = '';
+
+  static const phoneNumber = '+380990000000';
 
   static final questionModelItems = <QuestionModel>[
     QuestionModel(
@@ -234,6 +237,12 @@ abstract class KTestText {
         userPhoto: i > KMockText.tags.length - 2 ? userPhotoModel : null,
       ),
   ];
+  static final employeeRespondModel = EmployeeRespondModel(
+    id: dateTime.microsecondsSinceEpoch.toString(),
+    email: KTestText.userEmail,
+    phoneNumber: KTestText.phoneNumber,
+    resume: null,
+  );
 }
 
 abstract class KTestConstants {

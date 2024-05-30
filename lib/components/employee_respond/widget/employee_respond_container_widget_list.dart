@@ -99,45 +99,7 @@ List<Widget> _employeeRespondContainerWidgetList({
       ],
     ),
     if (isDesk) KSizedBox.kHeightSizedBox32 else KSizedBox.kHeightSizedBox16,
-    if (isDesk)
-      Row(
-        children: [
-          Expanded(
-            child: ButtonWidget(
-              key: KWidgetkeys.screen.employeeRespond.send,
-              text: context.l10n.send,
-              onPressed: null,
-              isDesk: isDesk,
-              backgroundColor: context.color.secondary,
-            ),
-          ),
-          KSizedBox.kWidthSizedBox73,
-          Expanded(
-            child: ButtonWidget(
-              key: KWidgetkeys.screen.employeeRespond.cancel,
-              text: context.l10n.cancel,
-              onPressed: null,
-              isDesk: isDesk,
-            ),
-          ),
-        ],
-      )
-    else ...[
-      ButtonWidget(
-        key: KWidgetkeys.screen.employeeRespond.send,
-        text: context.l10n.send,
-        onPressed: null,
-        isDesk: isDesk,
-        backgroundColor: context.color.secondary,
-      ),
-      KSizedBox.kHeightSizedBox16,
-      ButtonWidget(
-        key: KWidgetkeys.screen.employeeRespond.cancel,
-        text: context.l10n.cancel,
-        onPressed: null,
-        isDesk: isDesk,
-      ),
-    ],
+    EmployeeRespondButtonsWidget(isDesk: isDesk),
     if (isDesk) KSizedBox.kHeightSizedBox32 else KSizedBox.kHeightSizedBox16,
   ];
 }
