@@ -247,10 +247,10 @@ extension NavigatorExtention on BuildContext {
     Map<String, dynamic> queryParameters = const <String, dynamic>{},
     Object? extra,
   }) {
-    if (read<ScrollCubit>().state.positions.isNotEmpty) {
-      read<ScrollCubit>().scrollUp();
-    }
-    read<ScrollCubit>().initial();
+    // if (read<ScrollCubit>().state.positions.isNotEmpty) {
+    //   read<ScrollCubit>().scrollUp();
+    // }
+    // read<ScrollCubit>().initial();
     goNamed(
       name,
       pathParameters: pathParameters,
