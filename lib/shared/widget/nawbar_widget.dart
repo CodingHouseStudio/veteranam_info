@@ -115,7 +115,6 @@ class _NawbarWidgetImplematationState
                 //     : KIcon.mic.setIconKey(
                 //         KWidgetkeys.widget.nawbar.iconMic,
                 //       ),
-                disposeFocusNode: false,
                 isDesk: widget.isDesk,
                 contentPadding: widget.isDesk
                     ? EdgeInsets.zero
@@ -212,11 +211,5 @@ class _NawbarWidgetImplematationState
         ],
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    focusNode.dispose();
-    super.dispose();
   }
 }

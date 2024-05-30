@@ -106,8 +106,8 @@ GoRouter router = GoRouter(
           ),
         ),
         GoRoute(
-          name: KRoute.story.name,
-          path: KRoute.story.path,
+          name: KRoute.stories.name,
+          path: KRoute.stories.path,
           pageBuilder: (context, state) => NoTransitionPage(
             key: state.pageKey,
             name: state.name,

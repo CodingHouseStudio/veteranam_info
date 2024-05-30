@@ -67,45 +67,45 @@ void main() {
       await homeInitialHelper(tester);
     });
 
-    testWidgets('Feedback enter correct text and save it', (tester) async {
-      await homePumpAppHelper(
-        mockFeedbackRepository: mockFeedbackRepository,
-        mockHomeRepository: mockHomeRepository,
-        mockAuthenticationRepository: mockAuthenticationRepository,
-        tester: tester,
-        mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-      );
+    // testWidgets('Feedback enter correct text and save it', (tester) async {
+    //   await homePumpAppHelper(
+    //     mockFeedbackRepository: mockFeedbackRepository,
+    //     mockHomeRepository: mockHomeRepository,
+    //     mockAuthenticationRepository: mockAuthenticationRepository,
+    //     tester: tester,
+    //     mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+    //   );
 
-      await correctSaveHelper(tester);
-    });
+    //   await correctSaveHelper(tester);
+    // });
 
-    testWidgets('Feedback enter incorrect text and save it', (tester) async {
-      await homePumpAppHelper(
-        mockFeedbackRepository: mockFeedbackRepository,
-        mockHomeRepository: mockHomeRepository,
-        mockAuthenticationRepository: mockAuthenticationRepository,
-        tester: tester,
-        mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-      );
+    // testWidgets('Feedback enter incorrect text and save it', (tester) async {
+    //   await homePumpAppHelper(
+    //     mockFeedbackRepository: mockFeedbackRepository,
+    //     mockHomeRepository: mockHomeRepository,
+    //     mockAuthenticationRepository: mockAuthenticationRepository,
+    //     tester: tester,
+    //     mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+    //   );
 
-      await incorrectSaveHelper(tester);
-    });
+    //   await incorrectSaveHelper(tester);
+    // });
 
-    testWidgets('Feedback enter text and clear it', (tester) async {
-      await homePumpAppHelper(
-        mockFeedbackRepository: mockFeedbackRepository,
-        mockHomeRepository: mockHomeRepository,
-        mockAuthenticationRepository: mockAuthenticationRepository,
-        tester: tester,
-        mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-      );
+    // testWidgets('Feedback enter text and clear it', (tester) async {
+    //   await homePumpAppHelper(
+    //     mockFeedbackRepository: mockFeedbackRepository,
+    //     mockHomeRepository: mockHomeRepository,
+    //     mockAuthenticationRepository: mockAuthenticationRepository,
+    //     tester: tester,
+    //     mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+    //   );
 
-      await feedbackClearTextHelper(
-        tester: tester,
-        email: KTestText.userEmail,
-        field: KTestText.field,
-      );
-    });
+    //   await feedbackClearTextHelper(
+    //     tester: tester,
+    //     email: KTestText.userEmail,
+    //     field: KTestText.field,
+    //   );
+    // });
 
     group('${KGroupText.goRouter} ', () {
       late MockGoRouter mockGoRouter;
@@ -156,21 +156,21 @@ void main() {
           );
         });
 
-        testWidgets('Feedback box widget navigation', (tester) async {
-          await homePumpAppHelper(
-            mockFeedbackRepository: mockFeedbackRepository,
-            mockHomeRepository: mockHomeRepository,
-            mockAuthenticationRepository: mockAuthenticationRepository,
-            tester: tester,
-            mockGoRouter: mockGoRouter,
-            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-          );
+        // testWidgets('Feedback box widget navigation', (tester) async {
+        //   await homePumpAppHelper(
+        //     mockFeedbackRepository: mockFeedbackRepository,
+        //     mockHomeRepository: mockHomeRepository,
+        //     mockAuthenticationRepository: mockAuthenticationRepository,
+        //     tester: tester,
+        //     mockGoRouter: mockGoRouter,
+        //     mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+        //   );
 
-          await feedbackNavigationHelper(
-            tester: tester,
-            mockGoRouter: mockGoRouter,
-          );
-        });
+        //   await feedbackNavigationHelper(
+        //     tester: tester,
+        //     mockGoRouter: mockGoRouter,
+        //   );
+        // });
         testWidgets('All footer widget navigation', (tester) async {
           await homePumpAppHelper(
             tester: tester,

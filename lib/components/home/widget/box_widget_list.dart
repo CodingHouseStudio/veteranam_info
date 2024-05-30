@@ -5,14 +5,14 @@ List<Widget> _boxWidgetList({
   required bool isDesk,
 }) =>
     [
-      if (isDesk) KSizedBox.kHeightSizedBox24 else KSizedBox.kHeightSizedBox16,
+      if (isDesk) KSizedBox.kHeightSizedBox6 else KSizedBox.kHeightSizedBox24,
       if (isDesk)
         Row(
           children: [
-            Expanded(
+            const Expanded(
               flex: 2,
               child: HomeBoxWidget(
-                isDesk: isDesk,
+                isDesk: true,
               ),
             ),
             if (Config.isDevelopment) ...[
@@ -23,19 +23,17 @@ List<Widget> _boxWidgetList({
                     BoxWidget(
                       key: KWidgetkeys.screen.home.storyBox,
                       text: context.l10n.stories,
-                      onTap: () => context.goNamedWithScroll(KRoute.story.name),
-                      isDesk: isDesk,
+                      onTap: () =>
+                          context.goNamedWithScroll(KRoute.stories.name),
+                      isDesk: true,
                       icon: KIcon.messageSquare,
                     ),
-                    if (isDesk)
-                      KSizedBox.kHeightSizedBox24
-                    else
-                      KSizedBox.kHeightSizedBox16,
+                    KSizedBox.kHeightSizedBox24,
                     BoxWidget(
                       key: KWidgetkeys.screen.home.workBox,
                       text: context.l10n.work,
                       onTap: () => context.goNamedWithScroll(KRoute.work.name),
-                      isDesk: isDesk,
+                      isDesk: true,
                       icon: KIcon.briefcase,
                     ),
                   ],
@@ -45,32 +43,29 @@ List<Widget> _boxWidgetList({
           ],
         )
       else ...[
-        HomeBoxWidget(
-          isDesk: isDesk,
+        const HomeBoxWidget(
+          isDesk: false,
         ),
         if (Config.isDevelopment) ...[
           KSizedBox.kHeightSizedBox16,
           BoxWidget(
             key: KWidgetkeys.screen.home.storyBox,
             text: context.l10n.stories,
-            onTap: () => context.goNamedWithScroll(KRoute.story.name),
-            isDesk: isDesk,
+            onTap: () => context.goNamedWithScroll(KRoute.stories.name),
+            isDesk: false,
             icon: KIcon.messageSquare,
           ),
-          if (isDesk)
-            KSizedBox.kHeightSizedBox24
-          else
-            KSizedBox.kHeightSizedBox16,
+          KSizedBox.kHeightSizedBox16,
           BoxWidget(
             key: KWidgetkeys.screen.home.workBox,
             text: context.l10n.work,
             onTap: () => context.goNamedWithScroll(KRoute.work.name),
-            isDesk: isDesk,
+            isDesk: false,
             icon: KIcon.briefcase,
           ),
         ],
       ],
-      if (isDesk) KSizedBox.kHeightSizedBox24 else KSizedBox.kHeightSizedBox16,
+      KSizedBox.kHeightSizedBox16,
       if (isDesk)
         Row(
           children: [

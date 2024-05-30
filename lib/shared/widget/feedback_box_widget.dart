@@ -98,7 +98,7 @@ class _FeedbackBoxWidgetState extends State<FeedbackBoxWidget> {
                         BoxWidget(
                           key: KWidgetkeys.widget.feedbackBox.storyBox,
                           text: context.l10n.stories,
-                          onTap: () => context.goNamed(KRoute.story.name),
+                          onTap: () => context.goNamed(KRoute.stories.name),
                           isDesk: true,
                         ),
                       ],
@@ -148,7 +148,7 @@ class _FeedbackBoxWidgetState extends State<FeedbackBoxWidget> {
               BoxWidget(
                 key: KWidgetkeys.widget.feedbackBox.storyBox,
                 text: context.l10n.stories,
-                onTap: () => context.goNamed(KRoute.story.name),
+                onTap: () => context.goNamed(KRoute.stories.name),
                 isDesk: false,
               ),
             ],

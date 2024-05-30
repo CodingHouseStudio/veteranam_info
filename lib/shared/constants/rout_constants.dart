@@ -18,9 +18,9 @@ abstract class KRoute {
     path: 'discounts',
     name: 'Discounts',
   );
-  static const _RouteItem story = _RouteItem(
-    path: 'story',
-    name: 'Story',
+  static const _RouteItem stories = _RouteItem(
+    path: 'stories',
+    name: 'Stories',
   );
   static const _RouteItem work = _RouteItem(
     path: 'work',

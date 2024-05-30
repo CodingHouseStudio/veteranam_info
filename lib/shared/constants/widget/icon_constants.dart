@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:kozak/shared/shared.dart';
 import 'package:material_symbols_icons/symbols.dart';
 
 extension IconExtension on Icon {
@@ -67,7 +66,9 @@ abstract class KIcon {
   static const Icon error = Icon(Symbols.error);
   static const Icon safe = Icon(Symbols.bookmark_border_sharp);
   static const Icon saved = Icon(Symbols.bookmark_added_sharp);
-  static const Icon check = Icon(Symbols.check);
+  static const Icon check = Icon(
+    Symbols.check,
+  );
   static const Icon volum = Icon(Symbols.volume_up);
   static const Icon eye = Icon(Symbols.remove_red_eye);
   static const Icon eyeOff = Icon(Symbols.remove_red_eye_sharp);
@@ -84,4 +85,5 @@ abstract class KIcon {
   static const Icon messageSquare = Icon(Symbols.chat_bubble);
   static const Icon briefcase = Icon(Symbols.trip);
   static const Icon fileText = Icon(Symbols.text_snippet);
+  static const Icon meil = Icon(Symbols.mail);
 }

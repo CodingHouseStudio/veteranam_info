@@ -34,7 +34,7 @@ Future<void> feedbackBoxNavigationHelper({
 
   verify(
     () => mockGoRouter.goNamed(
-      KRoute.story.name,
+      KRoute.stories.name,
     ),
   ).called(1);
 
@@ -67,7 +67,7 @@ Future<void> feedbackBoxNavigationHelper({
 
       verify(
         () => mockGoRouter.goNamed(
-          KRoute.story.name,
+          KRoute.stories.name,
         ),
       ).called(1);
     },

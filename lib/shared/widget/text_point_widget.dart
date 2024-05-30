@@ -18,9 +18,11 @@ class TextPointWidget extends StatelessWidget {
           width: KSize.kPixel8,
         ),
         KSizedBox.kWidthSizedBox8,
-        Text(
-          text,
-          style: AppTextStyle.materialThemeTitleSmall,
+        Expanded(
+          child: Text(
+            text,
+            style: AppTextStyle.materialThemeTitleSmall,
+          ),
         ),
       ],
     );

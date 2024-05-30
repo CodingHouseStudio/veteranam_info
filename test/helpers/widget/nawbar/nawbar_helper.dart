@@ -7,7 +7,6 @@ import '../../../text_dependency.dart';
 Future<void> nawbarHelper({
   required WidgetTester tester,
   required String searchText,
-  bool hasMic = true,
 }) async {
   await changeWindowSizeHelper(
     tester: tester,

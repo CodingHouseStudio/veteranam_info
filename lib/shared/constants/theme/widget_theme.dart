@@ -16,6 +16,7 @@ abstract class KWidgetTheme {
 
   static const boxDecorationWidget = BoxDecoration(
     borderRadius: KBorderRadius.kBorderRadius32,
+    color: AppColors.materialThemeKeyColorsNeutral,
     border: Border.fromBorderSide(
       BorderSide(color: AppColors.materialThemeKeyColorsNeutral),
     ),
@@ -33,6 +34,11 @@ abstract class KWidgetTheme {
   static const boxDecorationCard = BoxDecoration(
     borderRadius: KBorderRadius.kBorderRadius32,
     color: AppColors.materialThemeKeyColorsNeutral,
+  );
+
+  static const boxDecorationFooter = BoxDecoration(
+    borderRadius: KBorderRadius.kBorderRadius32,
+    color: AppColors.materialThemeKeyColorsNeutralVariant,
   );
   static const boxDecorationNawbar = BoxDecoration(
     borderRadius: KBorderRadius.kBorderRadius32,
@@ -59,8 +65,16 @@ abstract class KWidgetTheme {
     color: AppColors.materialThemeKeyColorsNeutralVariant,
     borderRadius: KBorderRadius.kBorderRadiusChat,
   );
-  static const boxCheckPoint = BoxDecoration(
+  static const boxDecorNeutralVariant = BoxDecoration(
     color: AppColors.materialThemeKeyColorsNeutralVariant,
+    borderRadius: KBorderRadius.kBorderRadius32,
+  );
+  static const boxDecorCheckPointFalse = BoxDecoration(
+    color: AppColors.materialThemeKeyColorsNeutralVariant,
+    borderRadius: KBorderRadius.kBorderRadius8,
+  );
+  static const boxDecorCheckPointTrue = BoxDecoration(
+    color: AppColors.materialThemeWhite,
     border: Border.fromBorderSide(
       BorderSide(
         color: AppColors.materialThemeKeyColorsNeutralVariant,

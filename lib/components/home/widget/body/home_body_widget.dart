@@ -7,198 +7,345 @@ import 'package:kozak/shared/shared.dart';
 
 part '../box_widget_list.dart';
 
-class HomeBodyWidget extends StatefulWidget {
+class HomeBodyWidget extends StatelessWidget {
   const HomeBodyWidget({
     super.key,
   });
 
   @override
-  State<HomeBodyWidget> createState() => _HomeBodyWidgetState();
-}
-
-class _HomeBodyWidgetState extends State<HomeBodyWidget> {
-  late TextEditingController nameController;
-  late TextEditingController emailController;
-  late TextEditingController messageController;
-  late GlobalKey feedbackKey;
-  late GlobalKey feedbackBoxKey;
-  @override
-  void initState() {
-    feedbackKey = GlobalKey();
-    feedbackBoxKey = GlobalKey();
-    nameController = TextEditingController();
-    emailController = TextEditingController();
-    messageController = TextEditingController();
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return BlocConsumer<FeedbackBloc, FeedbackState>(
-      listener: (context, state) {
-        if (state.formState == FeedbackEnum.clear ||
-            state.formState == FeedbackEnum.sendignMessageAgain) {
-          nameController.clear();
-          emailController.clear();
-          messageController.clear();
-        }
-      },
-      buildWhen: (previous, current) =>
-          previous.formState != current.formState ||
-          previous.failure != current.failure,
-      builder: (context, state) =>
-          BlocBuilder<HomeWatcherBloc, HomeWatcherState>(
-        builder: (context, _) => ScaffoldWidget(
-          mainChildWidgetsFunction: ({required isDesk}) {
-            final childWidgets = [
-              ..._boxWidgetList(context: context, isDesk: isDesk),
-              KSizedBox.kHeightSizedBox48,
+    return BlocBuilder<HomeWatcherBloc, HomeWatcherState>(
+      builder: (context, _) => ScaffoldWidget(
+        mainChildWidgetsFunction: ({required isDesk}) {
+          final childWidgets = [
+            ..._boxWidgetList(context: context, isDesk: isDesk),
+            KSizedBox.kHeightSizedBox48,
+            if (isDesk)
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Expanded(
                     child: TextPointWidget(
                       context.l10n.whatKindOfProject,
+                      key: KWidgetkeys.screen.home.aboutProjecPrefix,
                     ),
                   ),
                   Expanded(
                     flex: 3,
                     child: Text(
                       context.l10n.aboutProject,
+                      key: KWidgetkeys.screen.home.aboutProjecSubtitle,
                       style: AppTextStyle.materialThemeDisplayMedium,
                     ),
                   ),
                 ],
+              )
+            else ...[
+              TextPointWidget(
+                context.l10n.whatKindOfProject,
+                key: KWidgetkeys.screen.home.aboutProjecPrefix,
               ),
-              KSizedBox.kHeightSizedBox160,
+              KSizedBox.kHeightSizedBox8,
+              Text(
+                context.l10n.aboutProject,
+                key: KWidgetkeys.screen.home.aboutProjecSubtitle,
+                style: AppTextStyle.materialThemeDisplayMedium,
+              ),
+            ],
+            if (isDesk)
+              KSizedBox.kHeightSizedBox160
+            else
+              KSizedBox.kHeightSizedBox48,
+            if (isDesk)
               HomeScrenCard(
-                rightWidget: HomeScreenCardContent(
-                  isDesk: isDesk,
-                  textPoint: context.l10n.saveMoney,
-                  title: context.l10n.discountsServices,
-                  subtitle: context.l10n.discountsServicesSubtitle,
-                  textButton: context.l10n.toDiscount,
+                rightWidget: Padding(
                   padding: const EdgeInsets.only(
                     left: KPadding.kPaddingSize48,
                   ),
-                  route: () => context.goNamed(KRoute.discounts.name),
-                  bottomWidget: KSizedBox.kHeightSizedBox90,
+                  child: Column(
+                    children: HomeScreenCardContent.get(
+                      buttonKey: KWidgetkeys.screen.home.discountButton,
+                      prefixKey: KWidgetkeys.screen.home.discountPrefix,
+                      titleKey: KWidgetkeys.screen.home.discountTitle,
+                      subtitleKey: KWidgetkeys.screen.home.discountSubtitle,
+                      textPoint: context.l10n.saveMoney,
+                      title: context.l10n.discountsServices,
+                      subtitle: context.l10n.discountsServicesSubtitle,
+                      textButton: context.l10n.toDiscount,
+                      route: () => context.goNamed(KRoute.discounts.name),
+                      bottomWidget: KSizedBox.kHeightSizedBox90,
+                      isDesk: true,
+                    ),
+                  ),
                 ),
-                leftWidget: KImage.discountImage,
+                leftWidget: KImage.discountImage
+                    .setKey(KWidgetkeys.screen.home.discountImage),
                 rightPadding: KPadding.kPaddingSize84,
+              )
+            else ...[
+              KImage.discountImage
+                  .setKey(KWidgetkeys.screen.home.discountImage),
+              KSizedBox.kWidthSizedBox16,
+              ...HomeScreenCardContent.get(
+                buttonKey: KWidgetkeys.screen.home.discountButton,
+                prefixKey: KWidgetkeys.screen.home.discountPrefix,
+                titleKey: KWidgetkeys.screen.home.discountTitle,
+                subtitleKey: KWidgetkeys.screen.home.discountSubtitle,
+                textPoint: context.l10n.saveMoney,
+                title: context.l10n.discountsServices,
+                subtitle: context.l10n.discountsServicesSubtitle,
+                textButton: context.l10n.toDiscount,
+                route: () => context.goNamed(KRoute.discounts.name),
+                isDesk: false,
               ),
-              KSizedBox.kHeightSizedBox160,
+            ],
+            if (isDesk)
+              KSizedBox.kHeightSizedBox160
+            else
+              KSizedBox.kHeightSizedBox40,
+            if (isDesk)
               HomeScrenCard(
-                leftWidget: HomeScreenCardContent(
-                  isDesk: isDesk,
-                  textPoint: context.l10n.findOut,
-                  title: context.l10n.informationNews,
-                  subtitle: context.l10n.informationNewsSubtitle,
-                  textButton: context.l10n.toInfomation,
+                leftWidget: Padding(
                   padding: const EdgeInsets.only(
                     right: KPadding.kPaddingSize48,
                   ),
-                  route: () => context.goNamed(KRoute.information.name),
-                  bottomWidget: KSizedBox.kHeightSizedBox48,
+                  child: Column(
+                    children: HomeScreenCardContent.get(
+                      buttonKey: KWidgetkeys.screen.home.informationButton,
+                      prefixKey: KWidgetkeys.screen.home.informationPrefix,
+                      subtitleKey: KWidgetkeys.screen.home.informationSubtitle,
+                      titleKey: KWidgetkeys.screen.home.informationTitle,
+                      textPoint: context.l10n.findOut,
+                      title: context.l10n.informationNews,
+                      subtitle: context.l10n.informationNewsSubtitle,
+                      textButton: context.l10n.toInfomation,
+                      route: () => context.goNamed(KRoute.information.name),
+                      bottomWidget: KSizedBox.kHeightSizedBox48,
+                      isDesk: true,
+                    ),
+                  ),
                 ),
-                rightWidget: KImage.inforamationImage,
+                rightWidget: KImage.inforamationImage
+                    .setKey(KWidgetkeys.screen.home.informationImage),
                 rightPadding: KPadding.kPaddingSize32,
+              )
+            else ...[
+              KImage.inforamationImage
+                  .setKey(KWidgetkeys.screen.home.informationImage),
+              KSizedBox.kWidthSizedBox16,
+              ...HomeScreenCardContent.get(
+                buttonKey: KWidgetkeys.screen.home.informationButton,
+                prefixKey: KWidgetkeys.screen.home.informationPrefix,
+                subtitleKey: KWidgetkeys.screen.home.informationSubtitle,
+                titleKey: KWidgetkeys.screen.home.informationTitle,
+                textPoint: context.l10n.findOut,
+                title: context.l10n.informationNews,
+                subtitle: context.l10n.informationNewsSubtitle,
+                textButton: context.l10n.toInfomation,
+                route: () => context.goNamed(KRoute.information.name),
+                isDesk: false,
               ),
-              if (isDesk)
-                KSizedBox.kHeightSizedBox160
-              else
-                KSizedBox.kHeightSizedBox40,
-              Padding(
-                padding: const EdgeInsets.all(
-                  KPadding.kPaddingSize16,
-                ),
-                child: Text(
-                  context.l10n.faq,
-                  key: KWidgetkeys.screen.home.questionListTitle,
-                  style: isDesk ? AppTextStyle.text96 : AppTextStyle.text48,
-                ),
-              ),
-            ];
+            ],
+            if (isDesk)
+              KSizedBox.kHeightSizedBox160
+            else
+              KSizedBox.kHeightSizedBox40,
+            // if (Config.isDevelopment) ...[
+            //   Stack(
+            //     children: [
+            //       KImage.workImage,
+            //       Center(
+            //         child: Column(
+            //           children: [
+            //             Text(
+            //               context.l10n.jobsVacancies,
+            //               style: AppTextStyle.materialThemeDisplayLarge,
+            //             ),
+            //             KSizedBox.kHeightSizedBox16,
+            //             Text(
+            //               context.l10n.jobsVacanciesSubtitle,
+            //               style: AppTextStyle.materialThemeBodyLarge,
+            //             ),
+            //             KSizedBox.kHeightSizedBox16,
+            //             DoubleButtonWidget(
+            //               text: context.l10n.toVacancy,
+            //               onPressed: () =>
+            //                   context.goNamed(KRoute.workEmployee.name),
+            //             ),
+            //           ],
+            //         ),
+            //       ),
+            //     ],
+            //   ),
+            //   if (isDesk)
+            //     KSizedBox.kHeightSizedBox160
+            //   else
+            //     KSizedBox.kHeightSizedBox40,
+            // ],
+          ];
 
-            switch (_) {
-              case HomeWatcherStateInitial():
-                childWidgets.add(const CircularProgressIndicator.adaptive());
-              case HomeWatcherStateLoading():
-                childWidgets.add(const CircularProgressIndicator.adaptive());
-              case HomeWatcherStateSuccess():
-                final questionModelItems = _.questionModelItems;
-
-                childWidgets.addAll([
-                  if (questionModelItems.isNotEmpty)
-                    ...List.generate(
-                        questionModelItems.isNotEmpty
-                            ? questionModelItems.length
-                            : 1, (index) {
-                      return Padding(
-                        padding: index != 0
-                            ? EdgeInsets.only(
-                                top: isDesk
-                                    ? KPadding.kPaddingSize24
-                                    : KPadding.kPaddingSize16,
-                              )
-                            : EdgeInsets.zero,
-                        child: QuestionWidget(
-                          key: KWidgetkeys.screen.home.questions,
-                          questionModel: questionModelItems.elementAt(index),
-                          isDesk: isDesk,
+          switch (_) {
+            case HomeWatcherStateInitial():
+              childWidgets.add(const CircularProgressIndicator.adaptive());
+            case HomeWatcherStateLoading():
+              childWidgets.add(const CircularProgressIndicator.adaptive());
+            case HomeWatcherStateSuccess():
+              if (isDesk) {
+                childWidgets.add(
+                  Row(
+                    children: [
+                      Expanded(
+                        flex: 2,
+                        child: Column(
+                          children: [
+                            TextPointWidget(
+                              context.l10n.whatYouMostInterestedIn,
+                              key: KWidgetkeys.screen.home.faqPrefix,
+                            ),
+                            KSizedBox.kHeightSizedBox16,
+                            Text(
+                              context.l10n.answersYourQuestions,
+                              key: KWidgetkeys.screen.home.faqTitle,
+                              style: AppTextStyle.materialThemeDisplayLarge,
+                            ),
+                            KSizedBox.kHeightSizedBox16,
+                            Text(
+                              context.l10n.questionSubtitle,
+                              key: KWidgetkeys.screen.home.faqSubtitle,
+                              style: AppTextStyle.materialThemeBodyLarge,
+                            ),
+                            KSizedBox.kHeightSizedBox16,
+                            DoubleButtonWidget(
+                              key: KWidgetkeys.screen.home.faqButton,
+                              text: context.l10n.writeMessage,
+                              onPressed: null,
+                            ),
+                          ],
                         ),
-                      );
-                    })
-                  else
-                    TextButton(
-                      key: KWidgetkeys.screen.home.buttonMock,
-                      onPressed: () {
-                        GetIt.I.get<IHomeRepository>().addMockQuestions();
-                        context
-                            .read<HomeWatcherBloc>()
-                            .add(const HomeWatcherEvent.started());
-                      },
-                      child: Text(
-                        context.l10n.getMockData,
-                        style: AppTextStyle.text32,
+                      ),
+                      Expanded(
+                        flex: 3,
+                        child: Column(
+                          children: _.questionModelItems.isNotEmpty
+                              ? List.generate(
+                                  _.questionModelItems.isNotEmpty
+                                      ? _.questionModelItems.length
+                                      : 1, (index) {
+                                  return Padding(
+                                    padding: index != 0
+                                        ? const EdgeInsets.only(
+                                            top: KPadding.kPaddingSize24,
+                                          )
+                                        : EdgeInsets.zero,
+                                    child: QuestionWidget(
+                                      key: KWidgetkeys.screen.home.faq,
+                                      questionModel:
+                                          _.questionModelItems.elementAt(index),
+                                      isDesk: true,
+                                    ),
+                                  );
+                                })
+                              : [
+                                  TextButton(
+                                    key: KWidgetkeys.screen.home.buttonMock,
+                                    onPressed: () {
+                                      GetIt.I
+                                          .get<IHomeRepository>()
+                                          .addMockQuestions();
+                                      context.read<HomeWatcherBloc>().add(
+                                            const HomeWatcherEvent.started(),
+                                          );
+                                    },
+                                    child: Text(
+                                      context.l10n.getMockData,
+                                      style: AppTextStyle.text32,
+                                    ),
+                                  ),
+                                ],
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              } else {
+                childWidgets.addAll(
+                  [
+                    TextPointWidget(
+                      context.l10n.whatYouMostInterestedIn,
+                      key: KWidgetkeys.screen.home.faqPrefix,
+                    ),
+                    KSizedBox.kHeightSizedBox8,
+                    Text(
+                      context.l10n.answersYourQuestions,
+                      key: KWidgetkeys.screen.home.faqTitle,
+                      style: AppTextStyle.materialThemeDisplayLarge,
+                    ),
+                    KSizedBox.kHeightSizedBox8,
+                    Text(
+                      context.l10n.questionSubtitle,
+                      key: KWidgetkeys.screen.home.faqSubtitle,
+                      style: AppTextStyle.materialThemeBodyLarge,
+                    ),
+                    KSizedBox.kHeightSizedBox8,
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: DoubleButtonWidget(
+                        text: context.l10n.writeMessage,
+                        key: KWidgetkeys.screen.home.faqButton,
+                        onPressed: null,
                       ),
                     ),
-                ]);
+                    KSizedBox.kHeightSizedBox24,
+                    if (_.questionModelItems.isNotEmpty)
+                      ...List.generate(
+                          _.questionModelItems.isNotEmpty
+                              ? _.questionModelItems.length
+                              : 1, (index) {
+                        return Padding(
+                          padding: index != 0
+                              ? const EdgeInsets.only(
+                                  top: KPadding.kPaddingSize24,
+                                )
+                              : EdgeInsets.zero,
+                          child: QuestionWidget(
+                            key: KWidgetkeys.screen.home.faq,
+                            questionModel:
+                                _.questionModelItems.elementAt(index),
+                            isDesk: false,
+                          ),
+                        );
+                      })
+                    else ...[
+                      TextButton(
+                        key: KWidgetkeys.screen.home.buttonMock,
+                        onPressed: () {
+                          GetIt.I.get<IHomeRepository>().addMockQuestions();
+                          context.read<HomeWatcherBloc>().add(
+                                const HomeWatcherEvent.started(),
+                              );
+                        },
+                        child: Text(
+                          context.l10n.getMockData,
+                          style: AppTextStyle.text32,
+                        ),
+                      ),
+                    ],
+                  ],
+                );
+              }
 
-              case HomeWatcherStateFailure():
-                childWidgets.add(const CircularProgressIndicator.adaptive());
-            }
+            case HomeWatcherStateFailure():
+              childWidgets.add(const CircularProgressIndicator.adaptive());
+          }
 
-            return childWidgets
-              ..addAll([
-                ...FeedbackWidget.feedbackWidgetList(
-                  context: context,
-                  isDesk: isDesk,
-                  nameController: nameController,
-                  emailController: emailController,
-                  messageController: messageController,
-                  feedbackKey: feedbackKey,
-                  feedbackBoxKey: feedbackBoxKey,
-                  topPadding: isDesk
-                      ? KSizedBox.kHeightSizedBox160
-                      : KSizedBox.kHeightSizedBox10,
-                ),
-                if (isDesk)
-                  KSizedBox.kHeightSizedBox160
-                else
-                  KSizedBox.kHeightSizedBox10,
-              ]);
-          },
-        ),
+          return childWidgets
+            ..add(
+              isDesk
+                  ? KSizedBox.kHeightSizedBox160
+                  : KSizedBox.kHeightSizedBox48,
+            );
+        },
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    nameController.dispose();
-    emailController.dispose();
-    messageController.dispose();
-    super.dispose();
   }
 }
