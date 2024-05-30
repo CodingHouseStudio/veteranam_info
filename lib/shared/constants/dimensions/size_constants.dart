@@ -25,6 +25,7 @@ abstract class KSize {
   static const kPixel78 = 78.0;
   static const kPixel80 = 80.0;
   static const kPixel90 = 90.0;
+  static const kPixel102 = 102.0;
   static const kPixel120 = 120.0;
   static const kPixel140 = 140.0;
   static const kPixel160 = 160.0;
@@ -56,7 +57,4 @@ abstract class KSize {
   static const kcheckPointIconSize = 18.0;
 
   static const kTopScroll = 1000.0;
-
-  static const kScroll200 = 200.0;
-  static const kScroll400 = 400.0;
 }

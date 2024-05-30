@@ -48,14 +48,15 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
                           ),
                         ),
                         KSizedBox.kWidthSizedBox16,
-                        Expanded(
-                          child: isEditing
-                              ? Text(
-                                  context.l10n.editData,
-                                  style: AppTextStyle.text40,
-                                )
-                              : _displayProfileName(),
-                        ),
+                        if (isEditing)
+                          Text(
+                            context.l10n.editData,
+                            style: widget.isDesk
+                                ? AppTextStyle.text40
+                                : AppTextStyle.text24,
+                          )
+                        else
+                          ..._displayProfileName(),
                       ],
                     ),
                     if (isEditing) ...[
@@ -83,9 +84,9 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
                             .last,
                         hint: context.l10n.writeYouLastName,
                       ),
+                      KSizedBox.kHeightSizedBox8,
                     ],
-                    KSizedBox.kHeightSizedBox8,
-                    _buildProfileInfo(),
+                    ..._buildProfileInfo(),
                     KSizedBox.kHeightSizedBox8,
                     _buildProfileFooter(),
                     KSizedBox.kHeightSizedBox8,
@@ -137,7 +138,6 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
           ButtonWidget(
             key: KWidgetkeys.widget.profileCardWidget.logOutButton,
             text: context.l10n.logOut,
-            textStyle: AppTextStyle.text32,
             onPressed: () => DialogsWidget.showLogoutConfirmationDialog(
               context: context,
               isDesk: widget.isDesk,
@@ -148,7 +148,6 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
           ButtonWidget(
             key: KWidgetkeys.widget.profileCardWidget.deleteButton,
             text: context.l10n.deleteAccount,
-            textStyle: AppTextStyle.text32,
             onPressed: () => DialogsWidget.showDeleteConfirmationDialog(
               context: context,
               isDesk: widget.isDesk,
@@ -196,49 +195,40 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
     );
   }
 
-  Widget _displayProfileName() {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        KSizedBox.kWidthSizedBox24,
-        Flexible(
-          flex: 2,
-          child: Text(
-            context.read<AuthenticationBloc>().state.user?.name ??
-                KMockText.userName,
-            style: AppTextStyle.text40,
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-          ),
+  List<Widget> _displayProfileName() {
+    return [
+      Expanded(
+        child: Text(
+          context.read<AuthenticationBloc>().state.user?.name ??
+              KMockText.userName,
+          style: widget.isDesk ? AppTextStyle.text40 : AppTextStyle.text24,
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
         ),
-        const Spacer(),
-        GestureDetector(
-          onTap: () => setState(() => isEditing = !isEditing),
-          child: KIcon.edit,
-        ),
-      ],
-    );
+      ),
+      IconButton(
+        onPressed: () => setState(() => isEditing = !isEditing),
+        icon: KIcon.edit,
+      ),
+    ];
   }
 
-  Widget _buildProfileInfo() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _textField(
-          label: context.l10n.email,
-          labelText: context.read<AuthenticationBloc>().state.user?.email,
-          hint: KMockText.email,
-          readOnly: true,
-        ),
-        KSizedBox.kHeightSizedBox8,
-        _textField(
-          label: context.l10n.nickname,
-          labelText: null,
-          hint: KMockText.nickname,
-          readOnly: !isEditing,
-        ),
-      ],
-    );
+  List<Widget> _buildProfileInfo() {
+    return [
+      _textField(
+        label: context.l10n.email,
+        labelText: context.read<AuthenticationBloc>().state.user?.email,
+        hint: KMockText.email,
+        readOnly: true,
+      ),
+      KSizedBox.kHeightSizedBox8,
+      _textField(
+        label: context.l10n.nickname,
+        labelText: null,
+        hint: KMockText.nickname,
+        readOnly: !isEditing,
+      ),
+    ];
   }
 
   Widget _buildProfileFooter() {
@@ -307,6 +297,7 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
           children: [
             Expanded(
               child: TextFieldWidget(
+                enabled: false,
                 widgetKey: KWidgetkeys.widget.profileCardWidget.textFiled,
                 hintText: KMockText.email,
                 hintStyle:

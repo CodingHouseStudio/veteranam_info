@@ -50,7 +50,9 @@ class _DropListFieldWidgetState extends State<DropListFieldWidget> {
           alignment: Alignment.topLeft,
           child: Container(
             constraints: BoxConstraints(
-              maxHeight: widget.isDesk ? KSize.kScroll400 : KSize.kScroll200,
+              maxHeight: widget.isDesk
+                  ? KMinMaxSize.kScroll400
+                  : KMinMaxSize.kScroll200,
             ),
             child: ListView.builder(
               shrinkWrap: true,
@@ -65,18 +67,10 @@ class _DropListFieldWidgetState extends State<DropListFieldWidget> {
                 key: KWidgetkeys.widget.dropListField.item,
                 onPressed: () => onSelected(options.elementAt(index)),
                 style: KButtonStyles.dropListButtonStyle,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: KPadding.kPaddingSize32,
-                  ),
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      options.elementAt(index),
-                      key: KWidgetkeys.widget.dropListField.itemText,
-                      style: AppTextStyle.text24,
-                    ),
-                  ),
+                child: Text(
+                  options.elementAt(index),
+                  key: KWidgetkeys.widget.dropListField.itemText,
+                  style: AppTextStyle.text24,
                 ),
               ),
               // separatorBuilder: (context, index) => const Divider(),

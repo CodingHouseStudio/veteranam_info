@@ -8,6 +8,7 @@ class BoxWidget extends StatelessWidget {
     required this.isDesk,
     super.key,
     this.textRightPadding,
+    this.textIconPaddingWidget = KSizedBox.kHeightSizedBox90,
     this.icon,
   });
 
@@ -16,6 +17,7 @@ class BoxWidget extends StatelessWidget {
   final bool isDesk;
   final double? textRightPadding;
   final Icon? icon;
+  final Widget textIconPaddingWidget;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +40,7 @@ class BoxWidget extends StatelessWidget {
                     icon: icon ?? KIcon.arrowUpRight,
                     padding: KPadding.kPaddingSize20,
                   ),
-                  KSizedBox.kHeightSizedBox90,
+                  textIconPaddingWidget,
                   Align(
                     alignment: Alignment.bottomLeft,
                     child: Padding(

@@ -57,7 +57,7 @@ class HomeBodyWidget extends StatelessWidget {
             else
               KSizedBox.kHeightSizedBox48,
             if (isDesk)
-              HomeScrenCard(
+              HomeScreenCard(
                 rightWidget: Padding(
                   padding: const EdgeInsets.only(
                     left: KPadding.kPaddingSize48,
@@ -104,7 +104,7 @@ class HomeBodyWidget extends StatelessWidget {
             else
               KSizedBox.kHeightSizedBox40,
             if (isDesk)
-              HomeScrenCard(
+              HomeScreenCard(
                 leftWidget: Padding(
                   padding: const EdgeInsets.only(
                     right: KPadding.kPaddingSize48,
@@ -246,21 +246,7 @@ class HomeBodyWidget extends StatelessWidget {
                                   );
                                 })
                               : [
-                                  TextButton(
-                                    key: KWidgetkeys.screen.home.buttonMock,
-                                    onPressed: () {
-                                      GetIt.I
-                                          .get<IHomeRepository>()
-                                          .addMockQuestions();
-                                      context.read<HomeWatcherBloc>().add(
-                                            const HomeWatcherEvent.started(),
-                                          );
-                                    },
-                                    child: Text(
-                                      context.l10n.getMockData,
-                                      style: AppTextStyle.text32,
-                                    ),
-                                  ),
+                                  mockButton(context),
                                 ],
                         ),
                       ),
@@ -316,19 +302,7 @@ class HomeBodyWidget extends StatelessWidget {
                         );
                       })
                     else ...[
-                      TextButton(
-                        key: KWidgetkeys.screen.home.buttonMock,
-                        onPressed: () {
-                          GetIt.I.get<IHomeRepository>().addMockQuestions();
-                          context.read<HomeWatcherBloc>().add(
-                                const HomeWatcherEvent.started(),
-                              );
-                        },
-                        child: Text(
-                          context.l10n.getMockData,
-                          style: AppTextStyle.text32,
-                        ),
-                      ),
+                      mockButton(context),
                     ],
                   ],
                 );
@@ -348,4 +322,18 @@ class HomeBodyWidget extends StatelessWidget {
       ),
     );
   }
+
+  Widget mockButton(BuildContext context) => TextButton(
+        key: KWidgetkeys.screen.home.buttonMock,
+        onPressed: () {
+          GetIt.I.get<IHomeRepository>().addMockQuestions();
+          context.read<HomeWatcherBloc>().add(
+                const HomeWatcherEvent.started(),
+              );
+        },
+        child: Text(
+          context.l10n.getMockData,
+          style: AppTextStyle.text32,
+        ),
+      );
 }
