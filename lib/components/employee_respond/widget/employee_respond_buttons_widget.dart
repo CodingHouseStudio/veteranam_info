@@ -18,6 +18,7 @@ class EmployeeRespondButtonsWidget extends StatelessWidget {
                   text: context.l10n.send,
                   onPressed: null,
                   isDesk: isDesk,
+                  backgroundColor: context.color.secondary,
                 ),
               ),
               KSizedBox.kWidthSizedBox73,
@@ -29,7 +30,6 @@ class EmployeeRespondButtonsWidget extends StatelessWidget {
                     KRoute.workEmployee.name,
                   ),
                   isDesk: isDesk,
-                  backgroundColor: Theme.of(context).colorScheme.primary,
                 ),
               ),
             ],
@@ -41,6 +41,7 @@ class EmployeeRespondButtonsWidget extends StatelessWidget {
                 text: context.l10n.send,
                 onPressed: null,
                 isDesk: isDesk,
+                backgroundColor: context.color.secondary,
               ),
               KSizedBox.kHeightSizedBox16,
               ButtonWidget(
@@ -50,7 +51,6 @@ class EmployeeRespondButtonsWidget extends StatelessWidget {
                   KRoute.workEmployee.name,
                 ),
                 isDesk: isDesk,
-                backgroundColor: Theme.of(context).primaryColor,
               ),
             ],
           );
