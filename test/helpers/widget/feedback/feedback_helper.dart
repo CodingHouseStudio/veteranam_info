@@ -10,7 +10,7 @@ Future<void> feedbackHelper(
 
   await scrollingHelper(
     tester: tester,
-    offset: KTestConstants.scrollingUp1000,
+    offset: KTestConstants.scrollingUp1500,
     itemKey: KWidgetkeys.widget.feedback.email,
   );
 

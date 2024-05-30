@@ -95,6 +95,7 @@ class StoryBodyWidget extends StatelessWidget {
                         const StoryWatcherEvent.loadNextItems(),
                       ),
                   iconKey: KWidgetkeys.screen.story.buttonIcon,
+                  text: context.l10n.moreStories,
                 ),
                 if (isDesk)
                   KSizedBox.kHeightSizedBox56

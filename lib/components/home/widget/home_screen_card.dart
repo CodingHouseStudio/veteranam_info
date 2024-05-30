@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class HomeScrenCard extends StatelessWidget {
-  const HomeScrenCard({
+class HomeScreenCard extends StatelessWidget {
+  const HomeScreenCard({
     required this.rightWidget,
     required this.leftWidget,
     required this.rightPadding,

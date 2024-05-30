@@ -165,8 +165,9 @@ abstract class KButtonStyles {
       Size(KMinMaxSize.minWidth100, KMinMaxSize.minHeight50),
     ),
     padding: MaterialStatePropertyAll(
-      EdgeInsets.symmetric(horizontal: KPadding.kPaddingSize20),
+      EdgeInsets.symmetric(horizontal: KPadding.kPaddingSize32),
     ),
+    alignment: Alignment.centerLeft,
     shape: MaterialStatePropertyAll(
       RoundedRectangleBorder(
         // ignore: avoid_redundant_argument_values
