@@ -50,7 +50,9 @@ class _DropListFieldWidgetState extends State<DropListFieldWidget> {
           alignment: Alignment.topLeft,
           child: Container(
             constraints: BoxConstraints(
-              maxHeight: widget.isDesk ? KSize.kScroll400 : KSize.kScroll200,
+              maxHeight: widget.isDesk
+                  ? KMinMaxSize.kScroll400
+                  : KMinMaxSize.kScroll200,
             ),
             child: ListView.builder(
               shrinkWrap: true,
@@ -64,19 +66,11 @@ class _DropListFieldWidgetState extends State<DropListFieldWidget> {
               itemBuilder: (context, index) => TextButton(
                 key: KWidgetkeys.widget.dropListField.item,
                 onPressed: () => onSelected(options.elementAt(index)),
-                style: context.buttonStyle.dropListButtonStyle,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: KPadding.kPaddingSize32,
-                  ),
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      options.elementAt(index),
-                      key: KWidgetkeys.widget.dropListField.itemText,
-                      style: AppTextStyle.text24,
-                    ),
-                  ),
+                style: KButtonStyles.dropListButtonStyle,
+                child: Text(
+                  options.elementAt(index),
+                  key: KWidgetkeys.widget.dropListField.itemText,
+                  style: AppTextStyle.text24,
                 ),
               ),
               // separatorBuilder: (context, index) => const Divider(),
@@ -98,9 +92,9 @@ class _DropListFieldWidgetState extends State<DropListFieldWidget> {
           focusNode: focusNode,
           prefixIcon: isFocused
               ? KIcon.trailingUp
-                  .setIconKey(KWidgetkeys.widget.dropListField.trailingUp)
-              : KIcon.trailing.setIconKey(
-                  KWidgetkeys.widget.dropListField.trailing,
+                  .copyWith(key: KWidgetkeys.widget.dropListField.trailingUp)
+              : KIcon.trailing.copyWith(
+                  key: KWidgetkeys.widget.dropListField.trailing,
                 ),
           onChanged: widget.onChanged,
           hintText: widget.hintText,

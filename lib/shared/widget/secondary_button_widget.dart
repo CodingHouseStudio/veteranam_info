@@ -17,7 +17,7 @@ class SecondaryButtonWidget extends StatelessWidget {
     return Align(
       alignment: Alignment.centerLeft,
       child: TextButton.icon(
-        style: context.buttonStyle.secondaryButtonStyle,
+        style: KButtonStyles.secondaryButtonStyle,
         icon: KIcon.plus,
         onPressed: onPressed,
         label: Text(
