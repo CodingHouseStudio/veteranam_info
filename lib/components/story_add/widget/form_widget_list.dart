@@ -61,7 +61,7 @@ List<Widget> _formWidgetList({
                     Text(
                       context.l10n.notNecessarily,
                       key: KWidgetkeys.screen.storyAdd.photoDesciption,
-                      style: context.textStyle.hint20,
+                      style: AppTextStyle.hint20,
                     ),
                   ],
                 ),
@@ -93,7 +93,7 @@ List<Widget> _formWidgetList({
                 child: Text(
                   context.l10n.notNecessarily,
                   key: KWidgetkeys.screen.storyAdd.photoDesciption,
-                  style: context.textStyle.hint16,
+                  style: AppTextStyle.hint16,
                 ),
               ),
             ],

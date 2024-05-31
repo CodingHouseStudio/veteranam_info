@@ -7,7 +7,7 @@ Widget _imageWidget(BuildContext context) {
       onTap: () =>
           context.read<StoryAddBloc>().add(const StoryAddEvent.imageUpdated()),
       child: Container(
-        decoration: context.widgetTheme.boxDecorationImage,
+        decoration: KWidgetTheme.boxDecorationImage,
         child: CachedNetworkImage(
           key: KWidgetkeys.widget.cardAddImage.widget,
           imageUrl: context.read<StoryAddBloc>().state.image.value!.path,
@@ -24,7 +24,7 @@ Widget _imageWidget(BuildContext context) {
   } else {
     return IconButton(
       key: KWidgetkeys.screen.storyAdd.photoButton,
-      style: context.buttonStyle.imageButton,
+      style: KButtonStyles.imageButton,
       icon: KIcon.addImage,
       onPressed: () =>
           context.read<StoryAddBloc>().add(const StoryAddEvent.imageUpdated()),

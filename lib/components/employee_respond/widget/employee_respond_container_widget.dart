@@ -54,7 +54,7 @@ List<Widget> _employeeRespondContainerWidgetList({
     KSizedBox.kHeightSizedBox8,
     TextButton.icon(
       onPressed: null,
-      style: context.buttonStyle.borderButtonStyle,
+      style: KButtonStyles.borderButtonStyle,
       icon: Padding(
         padding: EdgeInsets.symmetric(
           vertical: isDesk ? KPadding.kPaddingSize32 : KPadding.kPaddingSize16,
@@ -125,7 +125,7 @@ Widget cancelButton({required BuildContext context, required bool isDesk}) =>
       text: context.l10n.cancel,
       onPressed: null,
       isDesk: isDesk,
-      backgroundColor: context.color.surface,
+      backgroundColor: AppColors.materialThemeKeyColorsNeutral,
     );
 Widget sendButton({required BuildContext context, required bool isDesk}) =>
     ButtonWidget(
@@ -133,5 +133,5 @@ Widget sendButton({required BuildContext context, required bool isDesk}) =>
       text: context.l10n.send,
       onPressed: null,
       isDesk: isDesk,
-      backgroundColor: context.color.secondary,
+      backgroundColor: AppColors.materialThemeKeyColorsNeutralVariant,
     );
