@@ -7,4 +7,5 @@ class EmployeeRespondEvent with _$EmployeeRespondEvent {
   const factory EmployeeRespondEvent.save() = _Save;
   const factory EmployeeRespondEvent.noResumeChanged({required bool noResume}) =
       _NoResumeChanged;
+  const factory EmployeeRespondEvent.loadResumeClicked() = _LoadResumeClicked;
 }

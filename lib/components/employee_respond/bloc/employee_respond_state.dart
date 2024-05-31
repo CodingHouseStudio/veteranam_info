@@ -13,7 +13,7 @@ class EmployeeRespondState with _$EmployeeRespondState {
   const factory EmployeeRespondState({
     required EmailFieldModel email,
     required PhoneNumberFieldModel phoneNumber,
-    required String? resume,
+    required ResumeFieldModel resume,
     required bool noResume,
     required EmployeeRespondEnum formState,
     required EmployeeRespondFailure failure,

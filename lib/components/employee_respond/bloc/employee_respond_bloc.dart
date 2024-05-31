@@ -3,7 +3,7 @@ import 'package:formz/formz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kozak/shared/models/employee_respond_model.dart';
-import 'package:kozak/shared/models/field_models/phone_field_model.dart';
+
 import 'package:kozak/shared/shared.dart';
 
 part 'employee_respond_bloc.freezed.dart';
@@ -20,7 +20,7 @@ class EmployeeRespondBloc
           const EmployeeRespondState(
             email: EmailFieldModel.pure(),
             phoneNumber: PhoneNumberFieldModel.pure(),
-            resume: null,
+            resume: ResumeFieldModel.pure(),
             noResume: false,
             formState: EmployeeRespondEnum.initial,
             failure: EmployeeRespondFailure.initial,
@@ -30,6 +30,7 @@ class EmployeeRespondBloc
     on<_PhoneUpdated>(_onPhoneUpdated);
     on<_Save>(_onSave);
     on<_NoResumeChanged>(_onNoResumeChanged);
+    on<_LoadResumeClicked>(_onLoadResumeClicked);
   }
 
   final IWorkRepository _employeeRespondRepository;
@@ -68,6 +69,7 @@ class EmployeeRespondBloc
       [
         state.email,
         state.phoneNumber,
+        if (state.noResume) state.resume,
       ],
     )) {
       emit(state.copyWith(formState: EmployeeRespondEnum.sendingData));
@@ -75,7 +77,7 @@ class EmployeeRespondBloc
         EmployeeRespondModel(
           id: ExtendedDateTime.id,
           email: state.email.value,
-          resume: state.noResume ? null : state.resume,
+          resume: state.resume.value,
           noResume: state.noResume,
           phoneNumber: state.phoneNumber.value!,
         ),
@@ -91,13 +93,15 @@ class EmployeeRespondBloc
           const EmployeeRespondState(
             email: EmailFieldModel.pure(),
             phoneNumber: PhoneNumberFieldModel.pure(),
-            resume: null,
+            resume: ResumeFieldModel.pure(),
             noResume: false,
             formState: EmployeeRespondEnum.success,
             failure: EmployeeRespondFailure.none,
           ),
         ),
       );
+    } else {
+      emit(state.copyWith(formState: EmployeeRespondEnum.invalidData));
     }
   }
 
@@ -108,7 +112,18 @@ class EmployeeRespondBloc
     emit(
       state.copyWith(
         noResume: event.noResume,
-        resume: event.noResume ? null : state.resume,
+        formState: EmployeeRespondEnum.initial,
+      ),
+    );
+  }
+
+  void _onLoadResumeClicked(
+    _LoadResumeClicked event,
+    Emitter<EmployeeRespondState> emit,
+  ) {
+    emit(
+      state.copyWith(
+        resume: state.resume,
         formState: EmployeeRespondEnum.initial,
       ),
     );
