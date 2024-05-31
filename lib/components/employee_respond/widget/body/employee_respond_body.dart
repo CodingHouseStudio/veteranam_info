@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kozak/components/employee_respond/bloc/employee_respond_bloc.dart';
-import 'package:kozak/components/employee_respond/widget/widget.dart';
 import 'package:kozak/shared/shared.dart';
 
 part '../employee_respond_container_widget_list.dart';
@@ -39,7 +38,7 @@ class EmployeeRespondBodyWidget extends StatelessWidget {
               ],
             ),
           ],
-          mainDecoration: context.widgetTheme.boxDecorationWidget,
+          mainDecoration: KWidgetTheme.boxDecorationWidget,
           mainPadding: ({required isDesk, required maxWidth}) =>
               EdgeInsets.symmetric(
             horizontal:
