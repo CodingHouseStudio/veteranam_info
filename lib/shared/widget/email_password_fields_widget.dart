@@ -108,11 +108,12 @@ class _EmailPasswordFieldsWidgetState extends State<EmailPasswordFieldsWidget>
                 child: IconButton(
                   key: KWidgetkeys.widget.emailPasswordFields.iconHidePassword,
                   icon: obscurePassword
-                      ? KIcon.eyeOff.setIconKey(
-                          KWidgetkeys.widget.emailPasswordFields.iconEyeOff,
+                      ? KIcon.eyeOff.copyWith(
+                          key:
+                              KWidgetkeys.widget.emailPasswordFields.iconEyeOff,
                         )
-                      : KIcon.eye.setIconKey(
-                          KWidgetkeys.widget.emailPasswordFields.iconEye,
+                      : KIcon.eye.copyWith(
+                          key: KWidgetkeys.widget.emailPasswordFields.iconEye,
                         ),
                   onPressed: () {
                     setState(() {

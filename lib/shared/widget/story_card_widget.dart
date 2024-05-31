@@ -24,7 +24,7 @@ class StoryCardWidget extends StatelessWidget {
             IconWidget(
               key: KWidgetkeys.widget.storyCard.userIcon,
               icon: KIcon.person,
-              background: context.color.onPrimary,
+              background: AppColors.materialThemeKeyColorsNeutralVariant,
             )
           else
             ClipRRect(
@@ -49,11 +49,11 @@ class StoryCardWidget extends StatelessWidget {
       titleDate: Text(
         storyModel.date.localeTime,
         key: KWidgetkeys.widget.storyCard.date,
-        style: context.textStyle.hint16,
+        style: AppTextStyle.hint16,
       ),
       isDesk: isDesk,
-      titleIcon: KIcon.trash.setIconKey(
-        KWidgetkeys.widget.storyCard.trashIcon,
+      titleIcon: KIcon.trash.copyWith(
+        key: KWidgetkeys.widget.storyCard.trashIcon,
       ),
     );
   }

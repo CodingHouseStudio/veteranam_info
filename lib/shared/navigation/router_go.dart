@@ -106,8 +106,8 @@ GoRouter router = GoRouter(
           ),
         ),
         GoRoute(
-          name: KRoute.story.name,
-          path: KRoute.story.path,
+          name: KRoute.stories.name,
+          path: KRoute.stories.path,
           pageBuilder: (context, state) => NoTransitionPage(
             key: state.pageKey,
             name: state.name,
@@ -247,10 +247,10 @@ extension NavigatorExtention on BuildContext {
     Map<String, dynamic> queryParameters = const <String, dynamic>{},
     Object? extra,
   }) {
-    if (read<ScrollCubit>().state.positions.isNotEmpty) {
-      read<ScrollCubit>().scrollUp();
-    }
-    read<ScrollCubit>().initial();
+    // if (read<ScrollCubit>().state.positions.isNotEmpty) {
+    //   read<ScrollCubit>().scrollUp();
+    // }
+    // read<ScrollCubit>().initial();
     goNamed(
       name,
       pathParameters: pathParameters,

@@ -21,7 +21,7 @@ class DropChipWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: context.widgetTheme.boxDecorationWidget,
+      decoration: KWidgetTheme.boxDecorationWidget,
       child: DropdownButton<String?>(
         key: widgetKey ?? KWidgetkeys.widget.dropChip.widget,
         // focusColor: AppColors.transparent,

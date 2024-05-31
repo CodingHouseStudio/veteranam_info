@@ -18,7 +18,7 @@ class StoryAddBody extends StatelessWidget {
       listenWhen: (previous, current) =>
           current.formStatus == FormzSubmissionStatus.success,
       listener: (context, state) =>
-          context.goNamedWithScroll(KRoute.story.name),
+          context.goNamedWithScroll(KRoute.stories.name),
       buildWhen: (previous, current) =>
           previous.formStatus != current.formStatus ||
           previous.isAnonymously != current.isAnonymously ||

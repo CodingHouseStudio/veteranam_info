@@ -30,6 +30,6 @@ Future<void> fieldCorrectHelper({
   await tester.pumpAndSettle();
 
   verify(
-    () => mockGoRouter.goNamed(KRoute.story.name),
+    () => mockGoRouter.goNamed(KRoute.stories.name),
   ).called(1);
 }

@@ -18,12 +18,12 @@ class ChatInputWidget extends StatelessWidget {
         IconWidget(
           key: KWidgetkeys.widget.chatInput.icon,
           icon: messageIcon,
-          background: context.color.secondaryContainer,
+          background: AppColors.materialThemeKeyColorsNeutral,
         ),
         KSizedBox.kWidthSizedBox8,
         if (message != null)
           Container(
-            decoration: context.widgetTheme.boxDecorChatMessage,
+            decoration: KWidgetTheme.boxDecorChatMessage,
             padding: const EdgeInsets.all(KPadding.kPaddingSize16),
             child: Text(
               message!,
@@ -33,26 +33,26 @@ class ChatInputWidget extends StatelessWidget {
           )
         else
           Container(
-            decoration: context.widgetTheme.boxDecorChatMessage,
+            decoration: KWidgetTheme.boxDecorChatMessage,
             padding: const EdgeInsets.all(KPadding.kPaddingSize16),
             child: Row(
               children: [
                 Container(
                   height: KSize.kPixel8,
                   width: KSize.kPixel8,
-                  decoration: context.widgetTheme.boxDecorationGrayCircular,
+                  decoration: KWidgetTheme.boxDecorationGrayCircular,
                 ),
                 KSizedBox.kWidthSizedBox8,
                 Container(
                   height: KSize.kPixel8,
                   width: KSize.kPixel8,
-                  decoration: context.widgetTheme.boxDecorationGrayCircular,
+                  decoration: KWidgetTheme.boxDecorationGrayCircular,
                 ),
                 KSizedBox.kWidthSizedBox8,
                 Container(
                   height: KSize.kPixel8,
                   width: KSize.kPixel8,
-                  decoration: context.widgetTheme.boxDecorationGrayCircular,
+                  decoration: KWidgetTheme.boxDecorationGrayCircular,
                 ),
               ],
             ),

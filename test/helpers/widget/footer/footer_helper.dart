@@ -14,71 +14,52 @@ Future<void> footerHelper(
 
   await scrollingHelper(
     tester: tester,
-    offset: KTestConstants.scrollingDown,
+    itemKey: KWidgetkeys.widget.footer.title,
+    offset: KTestConstants.scrollingUp500,
+  );
+
+  expect(find.byKey(KWidgetkeys.widget.footer.title), findsOneWidget);
+
+  expect(find.byKey(KWidgetkeys.widget.footer.button), findsOneWidget);
+
+  expect(find.byKey(KWidgetkeys.widget.footer.sections), findsOneWidget);
+
+  expect(find.byKey(KWidgetkeys.widget.footer.information), findsOneWidget);
+
+  await scrollingHelper(
+    tester: tester,
+    itemKey: KWidgetkeys.widget.footer.information,
   );
 
   for (final buttonKey in KWidgetkeys.widget.footer.buttonsKey.reversed) {
-    if (KWidgetkeys.widget.footer.buttonsKey.indexOf(buttonKey) == 0) {
-      await scrollingHelper(
-        tester: tester,
-        offset: KTestConstants.scrollingUp500,
-      );
-    }
     expect(
       find.byKey(buttonKey),
       findsOneWidget,
     );
   }
 
-  expect(find.byKey(KWidgetkeys.widget.footer.logo), findsOneWidget);
+  expect(find.byKey(KWidgetkeys.widget.footer.contact), findsOneWidget);
 
-  // expect(
-  //   find.descendant(
-  //     of: find.byKey(KWidgetkeys.widget.footer.widget),
-  //     matching: find.text('${KTestText.footer}$email'),
-  //   ),
-  //   findsOneWidget,
-  // );
+  expect(find.byKey(KWidgetkeys.widget.footer.emailButton), findsOneWidget);
+
+  expect(find.byKey(KWidgetkeys.widget.footer.emailIcon), findsOneWidget);
+
+  expect(find.byKey(KWidgetkeys.widget.footer.likedInIcon), findsOneWidget);
+
+  expect(find.byKey(KWidgetkeys.widget.footer.instagramIcon), findsOneWidget);
+
+  expect(find.byKey(KWidgetkeys.widget.footer.facebookIcon), findsOneWidget);
+
+  expect(find.byKey(KWidgetkeys.widget.footer.logo), findsOneWidget);
 
   await scrollingHelper(
     tester: tester,
-    offset: KTestConstants.scrollingDown,
+    itemKey: KWidgetkeys.widget.footer.logo,
   );
 
-  expect(
-    find.byKey(KWidgetkeys.widget.footer.facebookIcon),
-    findsOneWidget,
-  );
+  expect(find.byKey(KWidgetkeys.widget.footer.madeBy), findsOneWidget);
 
-  expect(
-    find.byKey(KWidgetkeys.widget.footer.instagramIcon),
-    findsOneWidget,
-  );
+  expect(find.byKey(KWidgetkeys.widget.footer.rightReserved), findsOneWidget);
 
-  expect(
-    find.byKey(KWidgetkeys.widget.footer.likedInIcon),
-    findsOneWidget,
-  );
-
-  await changeWindowSizeHelper(
-    tester: tester,
-    test: () async {
-      expect(find.byKey(KWidgetkeys.widget.footer.logo), findsNothing);
-
-      for (final buttonKey in KWidgetkeys.widget.footer.buttonsKey.reversed) {
-        expect(
-          find.byKey(buttonKey),
-          findsOneWidget,
-        );
-      }
-
-      // expect(
-      //   find.descendant(
-      //     of: find.byKey(KWidgetkeys.widget.footer.widget),
-      //     matching: find.text('${KTestText.footer}$email'),
-      //   ),
-      //   findsNothing,
-      // );
-    },
-  );
+  expect(find.byKey(KWidgetkeys.widget.footer.privacyPolicy), findsOneWidget);
 }

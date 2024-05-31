@@ -66,7 +66,7 @@ class _DropListFieldWidgetState extends State<DropListFieldWidget> {
               itemBuilder: (context, index) => TextButton(
                 key: KWidgetkeys.widget.dropListField.item,
                 onPressed: () => onSelected(options.elementAt(index)),
-                style: context.buttonStyle.dropListButtonStyle,
+                style: KButtonStyles.dropListButtonStyle,
                 child: Text(
                   options.elementAt(index),
                   key: KWidgetkeys.widget.dropListField.itemText,
@@ -92,9 +92,9 @@ class _DropListFieldWidgetState extends State<DropListFieldWidget> {
           focusNode: focusNode,
           prefixIcon: isFocused
               ? KIcon.trailingUp
-                  .setIconKey(KWidgetkeys.widget.dropListField.trailingUp)
-              : KIcon.trailing.setIconKey(
-                  KWidgetkeys.widget.dropListField.trailing,
+                  .copyWith(key: KWidgetkeys.widget.dropListField.trailingUp)
+              : KIcon.trailing.copyWith(
+                  key: KWidgetkeys.widget.dropListField.trailing,
                 ),
           onChanged: widget.onChanged,
           hintText: widget.hintText,
