@@ -56,26 +56,22 @@ class StoryBodyWidget extends StatelessWidget {
               case LoadingStatus.loaded:
                 if (childWidgets.isNotEmpty) {
                   childWidgets.addAll(
-                    [
-                      ...List.generate(_.loadingStoryModelItems.length,
-                          (index) {
-                        return Padding(
-                          padding: index != 0
-                              ? EdgeInsets.only(
-                                  top: isDesk
-                                      ? KPadding.kPaddingSize80
-                                      : KPadding.kPaddingSize24,
-                                )
-                              : EdgeInsets.zero,
-                          child: StoryCardWidget(
-                            key: KWidgetkeys.screen.story.card,
-                            storyModel:
-                                _.loadingStoryModelItems.elementAt(index),
-                            isDesk: isDesk,
-                          ),
-                        );
-                      }),
-                    ],
+                    List.generate(_.loadingStoryModelItems.length, (index) {
+                      return Padding(
+                        padding: index != 0
+                            ? EdgeInsets.only(
+                                top: isDesk
+                                    ? KPadding.kPaddingSize80
+                                    : KPadding.kPaddingSize24,
+                              )
+                            : EdgeInsets.zero,
+                        child: StoryCardWidget(
+                          key: KWidgetkeys.screen.story.card,
+                          storyModel: _.loadingStoryModelItems.elementAt(index),
+                          isDesk: isDesk,
+                        ),
+                      );
+                    }),
                   );
                 }
 
