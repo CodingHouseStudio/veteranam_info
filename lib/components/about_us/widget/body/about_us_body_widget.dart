@@ -24,6 +24,10 @@ class AboutUsBodyWidget extends StatelessWidget {
           messageIcon: KIcon.person,
         ),
         KSizedBox.kHeightSizedBox30,
+        const PageIndicatorControl(
+          pageCount: 3,
+        ),
+        KSizedBox.kHeightSizedBox30,
       ],
     );
   }

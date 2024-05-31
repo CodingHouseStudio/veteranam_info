@@ -20,21 +20,21 @@ class DoubleButtonWidget extends StatelessWidget {
       child: TextButton(
         onPressed: onPressed,
         style: KButtonStyles.zeroPaddingButtonStyle,
-        child: Row(
+        child: Stack(
+          alignment: Alignment.centerRight,
           children: [
-            Expanded(
-              child: Container(
-                decoration:
-                    KWidgetTheme.boxDecorationBlack.copyWith(color: color),
-                padding: const EdgeInsets.symmetric(
-                  horizontal: KPadding.kPaddingSize30,
-                  vertical: KPadding.kPaddingSize12,
-                ),
-                child: Text(
-                  text,
-                  style: AppTextStyle.materialThemeTitleMedium.copyWith(
-                    color: textColor ?? AppColors.materialThemeBlack,
-                  ),
+            Container(
+              margin: const EdgeInsets.only(right: KPadding.kPaddingSize40),
+              decoration:
+                  KWidgetTheme.boxDecorationBlack.copyWith(color: color),
+              padding: const EdgeInsets.symmetric(
+                horizontal: KPadding.kPaddingSize30,
+                vertical: KPadding.kPaddingSize12,
+              ),
+              child: Text(
+                text,
+                style: AppTextStyle.materialThemeTitleMedium.copyWith(
+                  color: textColor ?? AppColors.materialThemeBlack,
                 ),
               ),
             ),
