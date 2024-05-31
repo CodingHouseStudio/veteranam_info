@@ -238,7 +238,6 @@ abstract class KTestText {
   static List<String> routes({required bool hasAccount}) => [
         KRoute.aboutUs.name,
         KRoute.investors.name,
-        KRoute.contact.name,
         KRoute.stories.name,
         KRoute.discounts.name,
         if (hasAccount) KRoute.profile.name else KRoute.login.name,
@@ -274,7 +273,6 @@ abstract class KScreenBlocName {
   static const story = 'Story Screen';
   static const work = 'Work Screen';
   static const aboutUs = 'About Us Screen';
-  static const contact = 'Contact Screen';
   static const consultation = 'Consultation Screen';
   static const login = 'Login Screen';
   static const signUp = 'Sign Up Screen';
