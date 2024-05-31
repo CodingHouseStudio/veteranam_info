@@ -44,7 +44,7 @@ class _FeedbackBoxWidgetState extends State<FeedbackBoxWidget> {
                   Expanded(
                     flex: 2,
                     child: Container(
-                      decoration: context.widgetTheme.boxDecorationWidget,
+                      decoration: KWidgetTheme.boxDecorationWidget,
                       padding: const EdgeInsets.symmetric(
                         horizontal: KPadding.kPaddingSize32,
                       ),
@@ -98,7 +98,7 @@ class _FeedbackBoxWidgetState extends State<FeedbackBoxWidget> {
                         BoxWidget(
                           key: KWidgetkeys.widget.feedbackBox.storyBox,
                           text: context.l10n.stories,
-                          onTap: () => context.goNamed(KRoute.story.name),
+                          onTap: () => context.goNamed(KRoute.stories.name),
                           isDesk: true,
                         ),
                       ],
@@ -148,7 +148,7 @@ class _FeedbackBoxWidgetState extends State<FeedbackBoxWidget> {
               BoxWidget(
                 key: KWidgetkeys.widget.feedbackBox.storyBox,
                 text: context.l10n.stories,
-                onTap: () => context.goNamed(KRoute.story.name),
+                onTap: () => context.goNamed(KRoute.stories.name),
                 isDesk: false,
               ),
             ],

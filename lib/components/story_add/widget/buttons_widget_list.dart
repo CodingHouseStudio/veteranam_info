@@ -40,7 +40,7 @@ List<Widget> _buttonsWidgetList({
                       Text(
                         context.l10n.publishAnonymouslyStorySubtitle,
                         key: KWidgetkeys.screen.storyAdd.switchDescription,
-                        style: context.textStyle.hint24,
+                        style: AppTextStyle.hint24,
                       ),
                       KSizedBox.kHeightSizedBox40,
                       _button(context: context, isDesk: true),
@@ -74,7 +74,7 @@ List<Widget> _buttonsWidgetList({
             Text(
               context.l10n.publishAnonymouslyStorySubtitle,
               key: KWidgetkeys.screen.storyAdd.switchDescription,
-              style: context.textStyle.hint16,
+              style: AppTextStyle.hint16,
             ),
             KSizedBox.kHeightSizedBox24,
             _button(context: context, isDesk: false),

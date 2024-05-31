@@ -36,7 +36,7 @@ Future<void> workEmployeeInitialHelper(
 
   await scrollingHelper(
     tester: tester,
-    offset: KTestConstants.scrollingUp500,
+    offset: KTestConstants.scrollingUp1000,
   );
 
   expect(

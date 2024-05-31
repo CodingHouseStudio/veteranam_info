@@ -19,7 +19,7 @@ class DonateCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       key: KWidgetkeys.widget.donateCard.widget,
-      decoration: context.widgetTheme.boxDecorationCard,
+      decoration: KWidgetTheme.boxDecorationCard,
       constraints: const BoxConstraints(
         minHeight: KMinMaxSize.minHeight640,
       ),

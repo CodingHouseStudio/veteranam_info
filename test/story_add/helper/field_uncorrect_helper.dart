@@ -30,7 +30,7 @@ Future<void> fieldUncorrectHelper({
   await tester.tap(find.byKey(KWidgetkeys.screen.storyAdd.button));
 
   verifyNever(
-    () => mockGoRouter.goNamed(KRoute.story.name),
+    () => mockGoRouter.goNamed(KRoute.stories.name),
   );
 
   await changeWindowSizeHelper(

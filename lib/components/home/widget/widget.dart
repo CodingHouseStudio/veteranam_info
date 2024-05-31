@@ -1,3 +1,5 @@
-export 'blocprovider/home_blocprovider.dart';
-export 'body/home_body_widget.dart';
+export 'blocprovider/blocprovider.dart';
+export 'body/body.dart';
 export 'home_box_widget.dart';
+export 'home_screen_card.dart';
+export 'home_screen_card_content.dart';

@@ -66,16 +66,15 @@ class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
                     }
                   });
                 },
-                style: widget.buttonStyle ??
-                    context.buttonStyle.whiteButtonStyleBorder,
+                style:
+                    widget.buttonStyle ?? KButtonStyles.whiteButtonStyleBorder,
                 child: Text(
                   maxLines == null
                       ? widget.buttonText?.elementAt(1) ?? context.l10n.hide
                       : widget.buttonText?.elementAt(0) ?? context.l10n.detail,
                   key: KWidgetkeys.widget.cardTextDetail.buttonText,
-                  style: widget.isDesk
-                      ? AppTextStyle.text20
-                      : context.textStyle.hint16,
+                  style:
+                      widget.isDesk ? AppTextStyle.text20 : AppTextStyle.hint16,
                 ),
               ),
             ),

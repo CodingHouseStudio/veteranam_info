@@ -79,18 +79,14 @@ class DiscountBodyWidget extends StatelessWidget {
                 else
                   KSizedBox.kHeightSizedBox24,
                 Center(
-                  child: ButtonWidget(
+                  child: LoadingButton(
                     key: KWidgetkeys.screen.discounts.button,
                     text: context.l10n.moreDiscounts,
                     onPressed: () => context
                         .read<DiscountWatcherBloc>()
                         .add(const DiscountWatcherEvent.loadNextItems()),
-                    icon: isDesk
-                        ? KIcon.refresh.setIconKey(
-                            KWidgetkeys.screen.discounts.buttonIcon,
-                          )
-                        : null,
                     isDesk: isDesk,
+                    iconKey: KWidgetkeys.screen.discounts.buttonIcon,
                   ),
                 ),
                 if (isDesk)
