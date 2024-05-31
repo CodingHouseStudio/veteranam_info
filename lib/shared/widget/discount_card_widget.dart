@@ -15,7 +15,7 @@ class DiscountsCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: context.widgetTheme.boxDecorationWidget,
+      decoration: KWidgetTheme.boxDecorationWidget,
       child: Padding(
         padding: EdgeInsets.symmetric(
           horizontal:
@@ -51,13 +51,13 @@ class DiscountsCardWidget extends StatelessWidget {
                   Text(
                     discountItem.date.toLocalDateString(),
                     key: KWidgetkeys.widget.discountCard.date,
-                    style: context.textStyle.hint24,
+                    style: AppTextStyle.hint24,
                   ),
                   const Spacer(),
                   Text(
                     discountItem.city,
                     key: KWidgetkeys.widget.discountCard.city,
-                    style: context.textStyle.hint24,
+                    style: AppTextStyle.hint24,
                   ),
                 ],
               )
@@ -68,12 +68,12 @@ class DiscountsCardWidget extends StatelessWidget {
                   Text(
                     discountItem.date.toLocalDateString(),
                     key: KWidgetkeys.widget.discountCard.date,
-                    style: context.textStyle.hint24,
+                    style: AppTextStyle.hint24,
                   ),
                   Text(
                     discountItem.city,
                     key: KWidgetkeys.widget.discountCard.city,
-                    style: context.textStyle.hint24,
+                    style: AppTextStyle.hint24,
                   ),
                 ],
               ),
@@ -87,8 +87,7 @@ class DiscountsCardWidget extends StatelessWidget {
             Text(
               discountItem.preInstructionDiscount,
               key: KWidgetkeys.widget.discountCard.preInstructionDiscount,
-              style:
-                  isDesk ? context.textStyle.hint24 : context.textStyle.hint14,
+              style: isDesk ? AppTextStyle.hint24 : AppTextStyle.hint14,
             ),
             KSizedBox.kHeightSizedBox16,
             CardTextDetailWidget(

@@ -69,8 +69,12 @@ void main() {
 
         await scrollingHelper(
           tester: tester,
+        );
+
+        await scrollingHelper(
+          tester: tester,
           itemKey: KWidgetkeys.screen.discounts.button,
-          offset: KTestConstants.scrollingUp200,
+          offset: KTestConstants.scrollingUp500,
         );
 
         expect(

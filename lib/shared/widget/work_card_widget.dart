@@ -19,7 +19,7 @@ class WorkCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: context.widgetTheme.boxDecorationWidget,
+      decoration: KWidgetTheme.boxDecorationWidget,
       child: Padding(
         padding: EdgeInsets.symmetric(
           horizontal:
@@ -44,15 +44,13 @@ class WorkCardWidget extends StatelessWidget {
             Text(
               workModel.city ?? '',
               key: KWidgetkeys.widget.workCard.city,
-              style:
-                  isDesk ? context.textStyle.hint20 : context.textStyle.hint16,
+              style: isDesk ? AppTextStyle.hint20 : AppTextStyle.hint16,
             ),
             KSizedBox.kHeightSizedBox4,
             Text(
               workModel.companyName,
               key: KWidgetkeys.widget.workCard.employer,
-              style:
-                  isDesk ? context.textStyle.hint20 : context.textStyle.hint16,
+              style: isDesk ? AppTextStyle.hint20 : AppTextStyle.hint16,
             ),
             KSizedBox.kHeightSizedBox16,
             CardTextDetailWidget(
@@ -60,13 +58,15 @@ class WorkCardWidget extends StatelessWidget {
               maxLines: 3,
               icon: Row(
                 children: [
-                  KIcon.share.setIconKey(KWidgetkeys.widget.workCard.iconShare),
+                  KIcon.share
+                      .copyWith(key: KWidgetkeys.widget.workCard.iconShare),
                   KSizedBox.kWidthSizedBox16,
                   if (isSaved)
-                    KIcon.safe.setIconKey(KWidgetkeys.widget.workCard.iconSafe)
+                    KIcon.safe
+                        .copyWith(key: KWidgetkeys.widget.workCard.iconSafe)
                   else
-                    KIcon.saved.setIconKey(
-                      KWidgetkeys.widget.workCard.iconSafe,
+                    KIcon.saved.copyWith(
+                      key: KWidgetkeys.widget.workCard.iconSafe,
                     ),
                 ],
               ),

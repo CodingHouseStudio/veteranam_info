@@ -1,0 +1,36 @@
+import 'package:flutter/material.dart';
+import 'package:kozak/shared/shared.dart';
+
+ThemeData themeData = ThemeData(
+  colorScheme: const ColorScheme(
+    primary: AppColors.materialThemeBlack,
+    secondary: AppColors.materialThemeWhite,
+    surface: AppColors.materialThemeWhite,
+    background: AppColors.materialThemeWhite,
+    error: AppColors.materialThemeRefErrorError50,
+    onPrimary: AppColors.materialThemeWhite,
+    onSecondary: AppColors.materialThemeWhite,
+    onSurface: AppColors.materialThemeBlack,
+    onBackground: AppColors.materialThemeBlack,
+    onError: AppColors.materialThemeWhite,
+    brightness: Brightness.light,
+  ),
+  appBarTheme: const AppBarTheme(
+    centerTitle: true,
+    backgroundColor: AppColors.materialThemeKeyColorsNeutralVariant,
+    elevation: 0,
+  ),
+  iconButtonTheme: IconButtonThemeData(
+    style: ButtonStyle(
+      backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent),
+      foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
+      overlayColor: MaterialStateProperty.all<Color>(Colors.transparent),
+    ),
+  ),
+  useMaterial3: true,
+  buttonTheme: ButtonThemeData(
+    colorScheme: ColorScheme.fromSwatch(
+      backgroundColor: AppColors.materialThemeWhite,
+    ),
+  ),
+);

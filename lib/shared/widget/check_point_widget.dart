@@ -14,23 +14,18 @@ class CheckPointWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       key: KWidgetkeys.widget.checkPoint.widget,
-      decoration: BoxDecoration(
-        color: isCheck ? context.color.onSecondary : Colors.transparent,
-        border: Border.all(
-          color: context.color.onPrimary,
-          width: KSize.kPixel3,
-        ),
-        borderRadius: KBorderRadius.kBorderRadius8,
-      ),
+      decoration: isCheck
+          ? KWidgetTheme.boxDecorCheckPointFalse
+          : KWidgetTheme.boxDecorCheckPointTrue,
       child: InkWell(
         onTap: onChanged,
         child: isCheck
-            ? KIcon.check.setIconKey(
-                KWidgetkeys.widget.checkPoint.icon,
+            ? KIcon.check.copyWith(
+                key: KWidgetkeys.widget.checkPoint.icon,
               )
             : const SizedBox(
-                width: KSize.kIconSize,
-                height: KSize.kIconSize,
+                width: KSize.kcheckPointIconSize,
+                height: KSize.kcheckPointIconSize,
               ),
       ),
     );

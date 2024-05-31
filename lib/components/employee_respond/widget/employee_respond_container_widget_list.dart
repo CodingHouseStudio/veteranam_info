@@ -54,7 +54,7 @@ List<Widget> _employeeRespondContainerWidgetList({
     KSizedBox.kHeightSizedBox8,
     TextButton.icon(
       onPressed: null,
-      style: context.buttonStyle.borderButtonStyle,
+      style: KButtonStyles.borderButtonStyle,
       icon: Padding(
         padding: EdgeInsets.symmetric(
           vertical: isDesk ? KPadding.kPaddingSize32 : KPadding.kPaddingSize16,
@@ -99,7 +99,39 @@ List<Widget> _employeeRespondContainerWidgetList({
       ],
     ),
     if (isDesk) KSizedBox.kHeightSizedBox32 else KSizedBox.kHeightSizedBox16,
-    EmployeeRespondButtonsWidget(isDesk: isDesk),
-    if (isDesk) KSizedBox.kHeightSizedBox32 else KSizedBox.kHeightSizedBox16,
+    if (isDesk)
+      Row(
+        children: [
+          Expanded(
+            child: sendButton(context: context, isDesk: true),
+          ),
+          KSizedBox.kWidthSizedBox73,
+          Expanded(
+            child: cancelButton(context: context, isDesk: true),
+          ),
+        ],
+      )
+    else ...[
+      sendButton(context: context, isDesk: false),
+      KSizedBox.kHeightSizedBox16,
+      cancelButton(context: context, isDesk: false),
+    ],
   ];
 }
+
+Widget cancelButton({required BuildContext context, required bool isDesk}) =>
+    ButtonWidget(
+      key: KWidgetkeys.screen.employeeRespond.cancel,
+      text: context.l10n.cancel,
+      onPressed: null,
+      isDesk: isDesk,
+      backgroundColor: AppColors.materialThemeKeyColorsNeutral,
+    );
+Widget sendButton({required BuildContext context, required bool isDesk}) =>
+    ButtonWidget(
+      key: KWidgetkeys.screen.employeeRespond.send,
+      text: context.l10n.send,
+      onPressed: null,
+      isDesk: isDesk,
+      backgroundColor: AppColors.materialThemeKeyColorsNeutralVariant,
+    );

@@ -237,6 +237,18 @@ abstract class KTestText {
         userPhoto: i > KMockText.tags.length - 2 ? userPhotoModel : null,
       ),
   ];
+
+  static List<String> routes({required bool hasAccount}) => [
+        KRoute.aboutUs.name,
+        KRoute.investors.name,
+        KRoute.contact.name,
+        KRoute.stories.name,
+        KRoute.discounts.name,
+        if (hasAccount) KRoute.profile.name else KRoute.login.name,
+        KRoute.work.name,
+        KRoute.information.name,
+        KRoute.consultation.name,
+      ];
   static final employeeRespondModel = EmployeeRespondModel(
     id: dateTime.microsecondsSinceEpoch.toString(),
     email: KTestText.userEmail,
@@ -252,6 +264,7 @@ abstract class KTestConstants {
   static const scrollingUp200 = Offset(0, 200);
   static const scrollingUp500 = Offset(0, 500);
   static const scrollingUp1000 = Offset(0, 1000);
+  static const scrollingUp1500 = Offset(0, 1500);
 
   static const windowTabletSize = Size(1700, 1700);
   static const windowMobileSize = Size(700, 700);
@@ -283,6 +296,7 @@ abstract class KScreenBlocName {
   static const storyAdd = 'Story Add Screen';
   static const thank = 'Thank Screen';
   static const profileMyStory = 'My Story Screen';
+  static const underConstruction = 'Under Construction Screen';
 
   static const feedback = 'Feedback Widget';
   static const authenticationServices = 'Authentication Services';

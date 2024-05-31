@@ -100,7 +100,6 @@ class WorkEmployeeBody extends StatelessWidget {
                     currentPage: _.page,
                     pages: _.maxPage,
                     changePage: (int page) {
-                      context.read<ScrollCubit>().scrollUp();
                       context.read<WorkEmployeeWatcherBloc>().add(
                             WorkEmployeeWatcherEvent.loadPage(
                               page,

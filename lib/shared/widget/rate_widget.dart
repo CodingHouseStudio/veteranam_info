@@ -26,10 +26,10 @@ class RateWidget extends StatelessWidget {
           KSizedBox.kHeightSizedBox8,
           RatingBar.builder(
             allowHalfRating: true,
-            itemSize: KSize.kIconSize,
+            itemSize: KSize.kcheckPointIconSize,
             itemPadding: const EdgeInsets.only(right: KPadding.kPaddingSize8),
-            itemBuilder: (context, index) =>
-                KIcon.star.setIconKey(KWidgetkeys.widget.rate.ratingBarIcons),
+            itemBuilder: (context, index) => KIcon.star
+                .copyWith(key: KWidgetkeys.widget.rate.ratingBarIcons),
             onRatingUpdate: onRatingUpdate ?? (double rating) {},
           ),
         ],

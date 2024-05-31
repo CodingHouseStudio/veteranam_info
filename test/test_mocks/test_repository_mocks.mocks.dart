@@ -7,6 +7,9 @@ import 'dart:async' as _i8;
 import 'dart:convert' as _i17;
 import 'dart:io' as _i16;
 import 'dart:typed_data' as _i15;
+import 'dart:convert' as _i17;
+import 'dart:io' as _i16;
+import 'dart:typed_data' as _i14;
 
 import 'package:cloud_firestore/cloud_firestore.dart' as _i7;
 import 'package:dartz/dartz.dart' as _i2;
@@ -15,6 +18,7 @@ import 'package:firebase_core/firebase_core.dart' as _i6;
 import 'package:firebase_storage/firebase_storage.dart' as _i10;
 import 'package:firebase_storage_platform_interface/firebase_storage_platform_interface.dart'
     as _i12;
+import 'package:flutter/foundation.dart' as _i15;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i5;
 import 'package:google_sign_in/google_sign_in.dart' as _i9;
 import 'package:image_picker/image_picker.dart' as _i11;
@@ -3332,6 +3336,60 @@ class MockFlutterSecureStorage extends _i1.Mock
       ) as _i5.MacOsOptions);
 
   @override
+  void registerListener({
+    required String? key,
+    required _i15.ValueChanged<String?>? listener,
+  }) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #registerListener,
+          [],
+          {
+            #key: key,
+            #listener: listener,
+          },
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void unregisterListener({
+    required String? key,
+    required _i15.ValueChanged<String?>? listener,
+  }) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #unregisterListener,
+          [],
+          {
+            #key: key,
+            #listener: listener,
+          },
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void unregisterAllListenersForKey({required String? key}) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #unregisterAllListenersForKey,
+          [],
+          {#key: key},
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void unregisterAllListeners() => super.noSuchMethod(
+        Invocation.method(
+          #unregisterAllListeners,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
   _i8.Future<void> write({
     required String? key,
     required String? value,
@@ -3497,6 +3555,16 @@ class MockFlutterSecureStorage extends _i1.Mock
         returnValue: _i8.Future<void>.value(),
         returnValueForMissingStub: _i8.Future<void>.value(),
       ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<bool?> isCupertinoProtectedDataAvailable() => (super.noSuchMethod(
+        Invocation.method(
+          #isCupertinoProtectedDataAvailable,
+          [],
+        ),
+        returnValue: _i8.Future<bool?>.value(),
+        returnValueForMissingStub: _i8.Future<bool?>.value(),
+      ) as _i8.Future<bool?>);
 }
 
 /// A class which mocks [CacheClient].
