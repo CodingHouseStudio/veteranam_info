@@ -42,7 +42,7 @@ abstract class KWidgetTheme {
   );
   static const boxDecorationNawbar = BoxDecoration(
     borderRadius: KBorderRadius.kBorderRadius32,
-    color: AppColors.materialThemeKeyColorsNeutralVariant,
+    color: AppColors.materialThemeKeyColorsNeutral,
   );
   static const boxDecorationImageDesk = BoxDecoration(
     borderRadius: KBorderRadius.kBorderRadiusLeft32,

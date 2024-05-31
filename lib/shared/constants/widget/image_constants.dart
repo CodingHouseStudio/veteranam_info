@@ -75,6 +75,9 @@ abstract class KImage {
     image: AssetImage('assets/images/information_image.png'),
     fit: BoxFit.fill,
   );
+  static const Image wavingHand = Image(
+    image: AssetImage('assets/icons/waving_hand.png'),
+  );
   // static const Image workImage = Image(
   //   image: AssetImage('assets/images/work_image.png'),
   //   fit: BoxFit.fill,

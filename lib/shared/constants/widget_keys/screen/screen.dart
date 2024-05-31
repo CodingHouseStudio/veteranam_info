@@ -13,7 +13,6 @@ class _ScreenKeys {
   final error = _ErrorKeys();
   final aboutUs = _AboutUsKeys();
   final consultation = _ConsultationKeys();
-  final contact = _ContactKeys();
   final login = _LoginKeys();
   final signUp = _SignUpKeys();
   final thanks = _ThanksKeys();
@@ -24,5 +23,6 @@ class _ScreenKeys {
   final profileSaves = _ProfileSavesKeys();
   final storyAdd = _StoryAddKeys();
   final myStory = _MyStoryKeys();
+  // final contact = _ContactKeys();
   final underConstruction = _UnderConstructionKeys();
 }
