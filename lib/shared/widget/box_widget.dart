@@ -9,12 +9,14 @@ class BoxWidget extends StatelessWidget {
     super.key,
     this.textRightPadding,
     this.textIconPaddingWidget = KSizedBox.kHeightSizedBox90,
+    this.icon,
   });
 
   final String text;
   final void Function()? onTap;
   final bool isDesk;
   final double? textRightPadding;
+  final Icon? icon;
   final Widget textIconPaddingWidget;
 
   @override
@@ -26,7 +28,7 @@ class BoxWidget extends StatelessWidget {
         bottom: isDesk ? KPadding.kPaddingSize24 : KPadding.kPaddingSize8,
         left: isDesk ? KPadding.kPaddingSize24 : KPadding.kPaddingSize16,
       ),
-      decoration: context.widgetTheme.boxDecorationCard,
+      decoration: KWidgetTheme.boxDecorationCard,
       child: isDesk
           ? InkWell(
               onTap: onTap,
@@ -35,7 +37,7 @@ class BoxWidget extends StatelessWidget {
                 children: [
                   IconWidget(
                     key: KWidgetkeys.widget.box.icon,
-                    icon: KIcon.arrowUpRight,
+                    icon: icon ?? KIcon.arrowUpRight,
                     padding: KPadding.kPaddingSize20,
                   ),
                   textIconPaddingWidget,
@@ -46,7 +48,7 @@ class BoxWidget extends StatelessWidget {
                       child: Text(
                         text,
                         key: KWidgetkeys.widget.box.text,
-                        style: AppTextStyle.text40,
+                        style: AppTextStyle.materialThemeHeadlineSmall,
                         maxLines: 1,
                       ),
                     ),
@@ -63,13 +65,13 @@ class BoxWidget extends StatelessWidget {
                     child: Text(
                       text,
                       key: KWidgetkeys.widget.box.text,
-                      style: AppTextStyle.text24,
+                      style: AppTextStyle.materialThemeTitleLarge,
                       maxLines: 1,
                     ),
                   ),
                   IconWidget(
                     key: KWidgetkeys.widget.box.icon,
-                    icon: KIcon.arrowUpRight,
+                    icon: icon ?? KIcon.arrowUpRight,
                     padding: KPadding.kPaddingSize20,
                   ),
                 ],

@@ -31,7 +31,7 @@ class EmployeeRespondBodyWidget extends StatelessWidget {
           ],
         ),
       ],
-      mainDecoration: context.widgetTheme.boxDecorationWidget,
+      mainDecoration: KWidgetTheme.boxDecorationWidget,
       mainPadding: ({required isDesk, required maxWidth}) =>
           EdgeInsets.symmetric(
         horizontal: isDesk ? maxWidth * KDimensions.respondPaddingMultiply : 0,

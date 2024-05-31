@@ -15,7 +15,7 @@ Future<void> feedbackClearTextHelper({
 
   await scrollingHelper(
     tester: tester,
-    offset: KTestConstants.scrollingUp1000,
+    offset: KTestConstants.scrollingUp1500,
   );
 
   expect(

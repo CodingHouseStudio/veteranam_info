@@ -18,7 +18,8 @@ class LeftCardWidget extends StatelessWidget {
             constraints.maxWidth > KPlatformConstants.minWidthThresholdTablet;
         final widgetList = widgetListFunction(isDesk: isDesk);
         return Scaffold(
-          backgroundColor: isDesk ? context.color.primaryContainer : null,
+          backgroundColor:
+              isDesk ? AppColors.materialThemeKeyColorsNeutral : null,
           body: CustomScrollView(
             key: KWidgetkeys.widget.scaffold.scroll,
             slivers: [
@@ -44,7 +45,7 @@ class LeftCardWidget extends StatelessWidget {
                               KDimensions.leftCardPaddingMultiply,
                         ),
                         sliver: DecoratedSliver(
-                          decoration: context.widgetTheme.boxDecorationWhite,
+                          decoration: KWidgetTheme.boxDecorationWhite,
                           sliver: SliverPadding(
                             padding: const EdgeInsets.only(
                               right: KPadding.kPaddingSize80,

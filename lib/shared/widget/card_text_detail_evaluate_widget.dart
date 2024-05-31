@@ -106,12 +106,12 @@ class _CardTextDetailEvaluateWidgetState
                         child: Padding(
                           padding: const EdgeInsets.all(KPadding.kPaddingSize4),
                           child: evaluation == EvaluationEnum.like
-                              ? KIcon.activeLike.setIconKey(
-                                  KWidgetkeys.widget.cardTextDetailEvaluate
+                              ? KIcon.activeLike.copyWith(
+                                  key: KWidgetkeys.widget.cardTextDetailEvaluate
                                       .iconActiveLike,
                                 )
-                              : KIcon.like.setIconKey(
-                                  KWidgetkeys
+                              : KIcon.like.copyWith(
+                                  key: KWidgetkeys
                                       .widget.cardTextDetailEvaluate.iconLike,
                                 ),
                         ),
@@ -129,13 +129,13 @@ class _CardTextDetailEvaluateWidgetState
                         child: Padding(
                           padding: const EdgeInsets.all(KPadding.kPaddingSize4),
                           child: evaluation == EvaluationEnum.smile
-                              ? KIcon.happySmile.setIconKey(
-                                  KWidgetkeys.widget.cardTextDetailEvaluate
+                              ? KIcon.activeSmile.copyWith(
+                                  key: KWidgetkeys.widget.cardTextDetailEvaluate
                                       .iconActiveSmile,
                                   // changeColor: AppColors.grey,
                                 )
-                              : KIcon.happySmile.setIconKey(
-                                  KWidgetkeys
+                              : KIcon.smile.copyWith(
+                                  key: KWidgetkeys
                                       .widget.cardTextDetailEvaluate.iconSmile,
                                 ),
                         ),
@@ -153,12 +153,12 @@ class _CardTextDetailEvaluateWidgetState
                         child: Padding(
                           padding: const EdgeInsets.all(KPadding.kPaddingSize4),
                           child: evaluation == EvaluationEnum.dislike
-                              ? KIcon.activeDislike.setIconKey(
-                                  KWidgetkeys.widget.cardTextDetailEvaluate
+                              ? KIcon.activeDislike.copyWith(
+                                  key: KWidgetkeys.widget.cardTextDetailEvaluate
                                       .iconActiveDislike,
                                 )
-                              : KIcon.dislike.setIconKey(
-                                  KWidgetkeys.widget.cardTextDetailEvaluate
+                              : KIcon.dislike.copyWith(
+                                  key: KWidgetkeys.widget.cardTextDetailEvaluate
                                       .iconDislike,
                                 ),
                         ),
@@ -170,8 +170,9 @@ class _CardTextDetailEvaluateWidgetState
                       if (widget.titleIcon != null && widget.isDesk)
                         widget.titleIcon!,
                       KSizedBox.kWidthSizedBox16,
-                      KIcon.share.setIconKey(
-                        KWidgetkeys.widget.cardTextDetailEvaluate.iconShare,
+                      KIcon.share.copyWith(
+                        key:
+                            KWidgetkeys.widget.cardTextDetailEvaluate.iconShare,
                       ),
                     ],
                   ),

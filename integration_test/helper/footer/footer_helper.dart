@@ -7,47 +7,53 @@ Future<void> footerHelper({
   required WidgetTester tester,
   required String email,
 }) async {
-  await changeWindowSizeHelperInt(
-    tester: tester,
-  );
   await scrollingHelperInt(
     tester: tester,
     offset: KTestConstants.scrolling,
   );
 
-  expect(find.byKey(KWidgetkeys.widget.footer.logo), findsOneWidget);
+  expect(find.byKey(KWidgetkeys.widget.footer.title), findsOneWidget);
 
-  expect(
-    find.byKey(KWidgetkeys.widget.footer.facebookIcon),
-    findsOneWidget,
+  expect(find.byKey(KWidgetkeys.widget.footer.button), findsOneWidget);
+
+  expect(find.byKey(KWidgetkeys.widget.footer.sections), findsOneWidget);
+
+  expect(find.byKey(KWidgetkeys.widget.footer.information), findsOneWidget);
+
+  await scrollingHelperInt(
+    tester: tester,
+    itemKey: KWidgetkeys.widget.footer.information,
   );
 
-  expect(
-    find.byKey(KWidgetkeys.widget.footer.instagramIcon),
-    findsOneWidget,
-  );
-
-  expect(
-    find.byKey(KWidgetkeys.widget.footer.likedInIcon),
-    findsOneWidget,
-  );
-
-  for (final buttonKey in KWidgetkeys.widget.footer.buttonsKey) {
+  for (final buttonKey in KWidgetkeys.widget.footer.buttonsKey.reversed) {
     expect(
       find.byKey(buttonKey),
       findsOneWidget,
     );
   }
 
-  await changeWindowSizeHelperInt(tester: tester, setDefaultSize: true);
+  expect(find.byKey(KWidgetkeys.widget.footer.contact), findsOneWidget);
 
-  expect(find.byKey(KWidgetkeys.widget.footer.logo), findsNothing);
+  expect(find.byKey(KWidgetkeys.widget.footer.emailButton), findsOneWidget);
 
-  expect(
-    find.descendant(
-      of: find.byKey(KWidgetkeys.widget.footer.widget),
-      matching: find.text('${KTestText.footer}$email'),
-    ),
-    findsNothing,
+  expect(find.byKey(KWidgetkeys.widget.footer.emailIcon), findsOneWidget);
+
+  expect(find.byKey(KWidgetkeys.widget.footer.likedInIcon), findsOneWidget);
+
+  expect(find.byKey(KWidgetkeys.widget.footer.instagramIcon), findsOneWidget);
+
+  expect(find.byKey(KWidgetkeys.widget.footer.facebookIcon), findsOneWidget);
+
+  expect(find.byKey(KWidgetkeys.widget.footer.logo), findsOneWidget);
+
+  await scrollingHelperInt(
+    tester: tester,
+    itemKey: KWidgetkeys.widget.footer.logo,
   );
+
+  expect(find.byKey(KWidgetkeys.widget.footer.madeBy), findsOneWidget);
+
+  expect(find.byKey(KWidgetkeys.widget.footer.rightReserved), findsOneWidget);
+
+  expect(find.byKey(KWidgetkeys.widget.footer.privacyPolicy), findsOneWidget);
 }

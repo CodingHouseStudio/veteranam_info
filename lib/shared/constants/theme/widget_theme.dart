@@ -1,84 +1,104 @@
 import 'package:flutter/material.dart';
 import 'package:kozak/shared/shared.dart';
 
-extension WidgetThemeExtenntion on BuildContext {
-  KWidgetTheme get widgetTheme => KWidgetTheme.of(this);
-}
-
 /// COMMENT: Variables with widget theme that don't have a specific group
-class KWidgetTheme {
+abstract class KWidgetTheme {
   KWidgetTheme.of(this.context);
   final BuildContext context;
-  OutlineInputBorder get outlineInputBorder => OutlineInputBorder(
-        borderSide: BorderSide(color: context.color.secondary),
-        borderRadius: KBorderRadius.kBorderRadius32,
-      );
-  OutlineInputBorder get outlineInputBorderError => OutlineInputBorder(
-        borderSide: BorderSide(color: context.color.error),
-        borderRadius: KBorderRadius.kBorderRadius32,
-      );
+  static const outlineInputBorder = OutlineInputBorder(
+    borderSide: BorderSide(color: AppColors.materialThemeKeyColorsNeutral),
+    borderRadius: KBorderRadius.kBorderRadius32,
+  );
+  static const outlineInputBorderError = OutlineInputBorder(
+    borderSide: BorderSide(color: AppColors.materialThemeRefErrorError50),
+    borderRadius: KBorderRadius.kBorderRadius32,
+  );
 
-  BoxDecoration get boxDecorationWidget => BoxDecoration(
-        borderRadius: KBorderRadius.kBorderRadius32,
-        border: Border.all(color: context.color.secondary),
-      );
-  BoxDecoration get boxDecorationCircular => BoxDecoration(
-        shape: BoxShape.circle,
-        color: context.color.background,
-      );
+  static const boxDecorationWidget = BoxDecoration(
+    borderRadius: KBorderRadius.kBorderRadius32,
+    color: AppColors.materialThemeKeyColorsNeutral,
+    border: Border.fromBorderSide(
+      BorderSide(color: AppColors.materialThemeKeyColorsNeutral),
+    ),
+  );
+  static const boxDecorationCircular = BoxDecoration(
+    shape: BoxShape.circle,
+    color: AppColors.materialThemeWhite,
+  );
 
-  BoxDecoration get boxDecorationGrayCircular => BoxDecoration(
-        shape: BoxShape.circle,
-        color: context.color.background,
-      );
+  static const boxDecorationGrayCircular = BoxDecoration(
+    shape: BoxShape.circle,
+    color: AppColors.materialThemeWhite,
+  );
 
-  BoxDecoration get boxDecorationCard => BoxDecoration(
-        borderRadius: KBorderRadius.kBorderRadius32,
-        color: context.color.secondary,
-      );
-  BoxDecoration get boxDecorationImageDesk => BoxDecoration(
-        borderRadius: KBorderRadius.kBorderRadiusLeft32,
-        color: context.color.onPrimary,
-      );
-  BoxDecoration get boxDecorationImageMob => BoxDecoration(
-        borderRadius: KBorderRadius.kBorderRadiusTop32,
-        color: context.color.onPrimary,
-      );
-  BoxDecoration get boxDecorationImage => BoxDecoration(
-        borderRadius: KBorderRadius.kBorderRadius32,
-        color: context.color.onPrimary,
-      );
-  BoxDecoration get boxDecorationWhite => BoxDecoration(
-        borderRadius: KBorderRadius.kBorderRadiusRight32,
-        color: context.color.background,
-      );
+  static const boxDecorationCard = BoxDecoration(
+    borderRadius: KBorderRadius.kBorderRadius32,
+    color: AppColors.materialThemeKeyColorsNeutral,
+  );
 
-  BoxDecoration get boxDecorChatMessage => BoxDecoration(
-        color: context.color.onPrimary,
-        borderRadius: KBorderRadius.kBorderRadius32
-            .copyWith(bottomLeft: const Radius.circular(KSize.kRadius8)),
-      );
-  BoxDecoration get boxCheckPoint => BoxDecoration(
-        color: context.color.onSecondary,
-        border: Border.all(
-          color: context.color.secondary,
-          width: KSize.kPixel3,
-        ),
-        borderRadius: KBorderRadius.kBorderRadius8,
-      );
+  static const boxDecorationFooter = BoxDecoration(
+    borderRadius: KBorderRadius.kBorderRadius32,
+    color: AppColors.materialThemeKeyColorsNeutralVariant,
+  );
+  static const boxDecorationNawbar = BoxDecoration(
+    borderRadius: KBorderRadius.kBorderRadius32,
+    color: AppColors.materialThemeKeyColorsNeutralVariant,
+  );
+  static const boxDecorationImageDesk = BoxDecoration(
+    borderRadius: KBorderRadius.kBorderRadiusLeft32,
+    color: AppColors.materialThemeKeyColorsNeutralVariant,
+  );
+  static const boxDecorationImageMob = BoxDecoration(
+    borderRadius: KBorderRadius.kBorderRadiusTop32,
+    color: AppColors.materialThemeKeyColorsNeutralVariant,
+  );
+  static const boxDecorationImage = BoxDecoration(
+    borderRadius: KBorderRadius.kBorderRadius32,
+    color: AppColors.materialThemeKeyColorsNeutralVariant,
+  );
+  static const boxDecorationWhite = BoxDecoration(
+    borderRadius: KBorderRadius.kBorderRadiusRight32,
+    color: AppColors.materialThemeWhite,
+  );
 
-  InputDecoration get inputDecoration => InputDecoration(
-        hintStyle: context.textStyle.hint24,
-        contentPadding: const EdgeInsets.symmetric(
-          horizontal: KPadding.kPaddingSize20,
-        ),
-        floatingLabelBehavior: FloatingLabelBehavior.auto,
-        border: context.widgetTheme.outlineInputBorder,
-        enabledBorder: context.widgetTheme.outlineInputBorder,
-        disabledBorder: context.widgetTheme.outlineInputBorder,
-        focusedBorder: context.widgetTheme.outlineInputBorder,
-        focusedErrorBorder: context.widgetTheme.outlineInputBorderError,
-        filled: true,
-        fillColor: context.color.background,
-      );
+  static const boxDecorChatMessage = BoxDecoration(
+    color: AppColors.materialThemeKeyColorsNeutralVariant,
+    borderRadius: KBorderRadius.kBorderRadiusChat,
+  );
+  static const boxDecorNeutralVariant = BoxDecoration(
+    color: AppColors.materialThemeKeyColorsNeutralVariant,
+    borderRadius: KBorderRadius.kBorderRadius32,
+  );
+  static const boxDecorCheckPointFalse = BoxDecoration(
+    color: AppColors.materialThemeKeyColorsNeutralVariant,
+    borderRadius: KBorderRadius.kBorderRadius8,
+  );
+  static const boxDecorCheckPointTrue = BoxDecoration(
+    color: AppColors.materialThemeWhite,
+    border: Border.fromBorderSide(
+      BorderSide(
+        color: AppColors.materialThemeKeyColorsNeutralVariant,
+        width: KSize.kPixel3,
+      ),
+    ),
+    borderRadius: KBorderRadius.kBorderRadius8,
+  );
+  static const boxDecorationBlack = BoxDecoration(
+    color: AppColors.materialThemeSourceSeed,
+    borderRadius: KBorderRadius.kBorderRadius32,
+  );
+  static const inputDecoration = InputDecoration(
+    hintStyle: AppTextStyle.hint24,
+    contentPadding: EdgeInsets.symmetric(
+      horizontal: KPadding.kPaddingSize20,
+    ),
+    floatingLabelBehavior: FloatingLabelBehavior.auto,
+    border: outlineInputBorder,
+    enabledBorder: outlineInputBorder,
+    disabledBorder: outlineInputBorder,
+    focusedBorder: outlineInputBorder,
+    focusedErrorBorder: outlineInputBorderError,
+    filled: true,
+    fillColor: AppColors.materialThemeWhite,
+  );
 }
