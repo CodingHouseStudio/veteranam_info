@@ -193,10 +193,12 @@ class HomeBodyWidget extends StatelessWidget {
               if (isDesk) {
                 childWidgets.add(
                   Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Expanded(
                         flex: 2,
                         child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             TextPointWidget(
                               context.l10n.whatYouMostInterestedIn,

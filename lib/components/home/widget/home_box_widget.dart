@@ -18,10 +18,16 @@ class HomeBoxWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   KSizedBox.kHeightSizedBox45,
-                  Text(
-                    context.l10n.hello,
-                    key: KWidgetkeys.screen.home.boxHi,
-                    style: AppTextStyle.materialThemeTitleMedium,
+                  Row(
+                    children: [
+                      Text(
+                        context.l10n.hello,
+                        key: KWidgetkeys.screen.home.boxHi,
+                        style: AppTextStyle.materialThemeTitleMedium,
+                      ),
+                      KSizedBox.kWidthSizedBox8,
+                      KImage.wavingHand,
+                    ],
                   ),
                   KSizedBox.kHeightSizedBox16,
                   Text(

@@ -18,6 +18,7 @@ class HomeScreenCard extends StatelessWidget {
       child: Column(
         children: [
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(child: leftWidget),
               Expanded(

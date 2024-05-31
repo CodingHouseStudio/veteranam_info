@@ -26,15 +26,14 @@
   <!-- iOS meta tags & icons -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="Kozak">
-  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+  <meta name="apple-mobile-web-app-title" content="Veteranam">
+  <link rel="apple-touch-icon" href="icons/logo-192.svg">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="icon" type="image/svg" href="logo.svg" />
 
-  <title>Kozak</title>
+  <title>Veteranam</title>
   <link rel="manifest" href="manifest.json">
-
 
 
   <!-- fonts -->
@@ -69,10 +68,68 @@
   <!-- images -->
   <link rel="preload" href="assets/assets/images/logo.svg" as="fetch" crossorigin>
   <link rel="preload" href="assets/assets/images/home_image.png" as="fetch" crossorigin>
+  <link rel="preload" href="assets/assets/images/discount_image.png" as="fetch" crossorigin>
+  <link rel="preload" href="assets/assets/images/information_image.png" as="fetch" crossorigin>
+
+  <style>
+    body {
+      inset: 0;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+      position: fixed;
+    }
+
+    #splash {
+      align-items: center;
+      display: flex;
+      /* Center both horizontally and vertically */
+      height: 100vh;
+      /* Using vh for viewport height ensures full-screen coverage */
+      justify-content: center;
+      width: 100vw;
+      /* Using vw for viewport width ensures full-screen coverage */
+    }
+
+    #splash img {
+      animation: appear 1s ease-in-out forwards;
+      /* New animation for disappearing */
+      opacity: 1;
+      /* Initial opacity set to 1 */
+      width: 25vw;
+      /* Increase image size to 25% of viewport width */
+      height: 25vh;
+      /* Increase image size to 25% of viewport height */
+    }
+
+    @keyframes appear {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+        /* Optional: Remove scaling for no size change */
+      }
+    }
+  </style>
 
 </head>
 
 <body style="font-family: Tahoma, Verdana, sans-serif">
+  <div id="splash">
+    <img src="icons/logo_image.svg" alt="Loading indicator..." />
+  </div>
+
+  <script id="splash-screen-script">
+    function removeSplashFromWeb() {
+      document.getElementById("splash")?.remove();
+      document.getElementById("splash-branding")?.remove();
+      document.body.style.background = "transparent";
+    }
+  </script>
+
   <script>
     var serviceWorkerVersion = null;
     var scriptLoaded = false;
