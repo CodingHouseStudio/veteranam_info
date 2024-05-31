@@ -42,8 +42,8 @@ class ProfileMyStoryBodyWidget extends StatelessWidget {
               childWidgets.add(const CircularProgressIndicator.adaptive());
             case MyStoryWatcherStateSuccess():
               if (_.storyModelItems.isNotEmpty) {
-                childWidgets.addAll([
-                  ...List.generate(_.storyModelItems.length, (index) {
+                childWidgets.addAll(
+                  List.generate(_.storyModelItems.length, (index) {
                     return Padding(
                       padding: index != 0
                           ? EdgeInsets.only(
@@ -59,7 +59,7 @@ class ProfileMyStoryBodyWidget extends StatelessWidget {
                       ),
                     );
                   }),
-                ]);
+                );
               }
 
             case MyStoryWatcherStateFailure():

@@ -225,12 +225,12 @@ class HomeBodyWidget extends StatelessWidget {
                       ),
                       Expanded(
                         flex: 3,
-                        child: Column(
-                          children: _.questionModelItems.isNotEmpty
-                              ? List.generate(
-                                  _.questionModelItems.isNotEmpty
-                                      ? _.questionModelItems.length
-                                      : 1, (index) {
+                        child: _.questionModelItems.isNotEmpty
+                            ? Column(
+                                children: List.generate(
+                                    _.questionModelItems.isNotEmpty
+                                        ? _.questionModelItems.length
+                                        : 1, (index) {
                                   return Padding(
                                     padding: index != 0
                                         ? const EdgeInsets.only(
@@ -244,11 +244,9 @@ class HomeBodyWidget extends StatelessWidget {
                                       isDesk: true,
                                     ),
                                   );
-                                })
-                              : [
-                                  mockButton(context),
-                                ],
-                        ),
+                                }),
+                              )
+                            : mockButton(context),
                       ),
                     ],
                   ),
@@ -301,9 +299,8 @@ class HomeBodyWidget extends StatelessWidget {
                           ),
                         );
                       })
-                    else ...[
+                    else
                       mockButton(context),
-                    ],
                   ],
                 );
               }
