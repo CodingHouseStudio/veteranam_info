@@ -29,6 +29,7 @@ class EmployeeRespondBloc
     on<_EmailUpdated>(_onEmailUpdated);
     on<_PhoneUpdated>(_onPhoneUpdated);
     on<_Save>(_onSave);
+    on<_NoResumeChanged>(_onNoResumeChanged);
   }
 
   final IWorkRepository _employeeRespondRepository;
@@ -74,8 +75,8 @@ class EmployeeRespondBloc
         EmployeeRespondModel(
           id: ExtendedDateTime.id,
           email: state.email.value,
-          resume: null,
-          noResume: false,
+          resume: state.noResume ? null : state.resume,
+          noResume: state.noResume,
           phoneNumber: state.phoneNumber.value!,
         ),
       );
@@ -98,5 +99,18 @@ class EmployeeRespondBloc
         ),
       );
     }
+  }
+
+  void _onNoResumeChanged(
+    _NoResumeChanged event,
+    Emitter<EmployeeRespondState> emit,
+  ) {
+    emit(
+      state.copyWith(
+        noResume: event.noResume,
+        resume: event.noResume ? null : state.resume,
+        formState: EmployeeRespondEnum.initial,
+      ),
+    );
   }
 }
