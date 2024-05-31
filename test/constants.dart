@@ -272,6 +272,7 @@ abstract class KScreenBlocName {
   static const profile = 'Profile Screen';
   static const story = 'Story Screen';
   static const work = 'Work Screen';
+  //  static const contact = 'Contact Screen';
   static const aboutUs = 'About Us Screen';
   static const consultation = 'Consultation Screen';
   static const login = 'Login Screen';

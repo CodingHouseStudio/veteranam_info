@@ -226,6 +226,15 @@ GoRouter router = GoRouter(
             child: const ConsultationScreen(),
           ),
         ),
+        //         GoRoute(
+        //   name: KRoute.contact.name,
+        //   path: KRoute.contact.path,
+        //   pageBuilder: (context, state) => NoTransitionPage(
+        //     key: state.pageKey,
+        //     name: state.name,
+        //     child: const ContactScreen(),
+        //   ),
+        // ),
       ],
     ),
   ],

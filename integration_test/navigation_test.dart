@@ -27,7 +27,7 @@ void main() {
       final buttonKey = KWidgetkeys.widget.footer.buttonsKey.elementAt(i);
       final screenKey = KTestConstants.screens.elementAt(i);
 
-      if (i == 6) {
+      if (i == 5) {
         await tester.tap(find.byKey(KWidgetkeys.widget.nawbar.logo));
 
         // ignore: inference_failure_on_instance_creation

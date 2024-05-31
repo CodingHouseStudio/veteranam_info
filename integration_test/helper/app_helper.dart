@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:kozak/app.dart';
 import 'package:kozak/shared/shared.dart';
@@ -6,7 +8,15 @@ import 'package:kozak/shared/shared.dart';
 Future<void> appHelper(WidgetTester tester) async {
   await tester.pumpWidget(const App());
 
-  await tester.pumpAndSettle();
+  final finder = find.byKey(KWidgetkeys.screen.app.screen);
+
+  log('Loading App...');
+
+  while (tester.widgetList<App>(finder).isEmpty) {
+    await tester.pumpAndSettle();
+  }
+
+  log('App Loaded');
 
   expect(
     find.byKey(KWidgetkeys.screen.app.screen),
