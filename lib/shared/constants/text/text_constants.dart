@@ -143,6 +143,6 @@ abstract class KAppText {
   static const String authChange = 'AuthenticationStatusChanged:';
   static const String backendString = '';
   static const String usernameToken = 'USERNAME_TOKEN';
-  static const String email = 'veteranam@gmail.com';
-  static const String madeBy = '© MadeByCodingHouseLtd 2024';
+  static const String madeBy = '© MadeByCodingHouseLLC 2024';
+  static const String email = 'hello@veteranam.info';
 }

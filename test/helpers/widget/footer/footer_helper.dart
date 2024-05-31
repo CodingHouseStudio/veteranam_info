@@ -40,7 +40,7 @@ Future<void> footerHelper(
 
   expect(find.byKey(KWidgetkeys.widget.footer.contact), findsOneWidget);
 
-  expect(find.byKey(KWidgetkeys.widget.footer.emailButton), findsOneWidget);
+  expect(find.byKey(KWidgetkeys.widget.footer.emailText), findsOneWidget);
 
   expect(find.byKey(KWidgetkeys.widget.footer.emailIcon), findsOneWidget);
 
