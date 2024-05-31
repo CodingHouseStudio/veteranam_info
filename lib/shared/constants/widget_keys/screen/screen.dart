@@ -23,5 +23,6 @@ class _ScreenKeys {
   final profileSaves = _ProfileSavesKeys();
   final storyAdd = _StoryAddKeys();
   final myStory = _MyStoryKeys();
+  // final contact = _ContactKeys();
   final underConstruction = _UnderConstructionKeys();
 }

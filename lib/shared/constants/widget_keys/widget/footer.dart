@@ -29,7 +29,7 @@ class _FooterKeys {
   List<Key> get buttonsKey => [
         aboutUsButton,
         investorsButton,
-        emailText,
+        // emailText,
         storyButton,
         discountsButton,
         profileButton,
