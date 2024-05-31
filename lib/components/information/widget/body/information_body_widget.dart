@@ -48,9 +48,9 @@ class InformationBodyWidget extends StatelessWidget {
             case LoadingStatus.loading:
               childWidgets.add(const CircularProgressIndicator.adaptive());
             case LoadingStatus.loaded:
-              childWidgets.addAll([
-                if (_.informationModelItems.isNotEmpty)
-                  ...List.generate(_.filteredInformationModelItems.length,
+              if (_.informationModelItems.isNotEmpty) {
+                childWidgets.addAll(
+                  List.generate(_.filteredInformationModelItems.length,
                       (index) {
                     return Padding(
                       padding: index != 0
@@ -67,8 +67,10 @@ class InformationBodyWidget extends StatelessWidget {
                         isDesk: isDesk,
                       ),
                     );
-                  })
-                else
+                  }),
+                );
+              } else {
+                childWidgets.add(
                   TextButton(
                     key: KWidgetkeys.screen.information.buttonMock,
                     onPressed: () {
@@ -84,7 +86,8 @@ class InformationBodyWidget extends StatelessWidget {
                       style: AppTextStyle.text32,
                     ),
                   ),
-              ]);
+                );
+              }
 
             case LoadingStatus.error:
               childWidgets.add(const CircularProgressIndicator.adaptive());

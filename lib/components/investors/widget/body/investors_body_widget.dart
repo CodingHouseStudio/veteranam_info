@@ -64,46 +64,47 @@ class _InvestorsBodyWidgetState extends State<InvestorsBodyWidget> {
                 case InvestorsWatcherStateLoading():
                   childWidgets.add(const CircularProgressIndicator.adaptive());
                 case InvestorsWatcherStateSuccess():
-                  childWidgets.addAll([
-                    if (_.fundItems.isNotEmpty)
-                      if (isDesk)
-                        ...List.generate(
-                          (_.fundItems.length / 3).ceil(),
-                          (index) => Padding(
-                            padding: index != 0
-                                ? const EdgeInsets.only(
-                                    top: KPadding.kPaddingSize24,
-                                  )
-                                : EdgeInsets.zero,
-                            child: DonatesCardsWidget(
-                              key: KWidgetkeys.screen.investors.donateCards,
-                              fundItems: _.fundItems.sublist(
-                                index * 3,
-                                (_.fundItems.length > index * 3 + 3)
-                                    ? index * 3 + 3
-                                    : _.fundItems.length,
+                  if (_.fundItems.isNotEmpty) {
+                    childWidgets.addAll(
+                      isDesk
+                          ? List.generate(
+                              (_.fundItems.length / 3).ceil(),
+                              (index) => Padding(
+                                padding: index != 0
+                                    ? const EdgeInsets.only(
+                                        top: KPadding.kPaddingSize24,
+                                      )
+                                    : EdgeInsets.zero,
+                                child: DonatesCardsWidget(
+                                  key: KWidgetkeys.screen.investors.donateCards,
+                                  fundItems: _.fundItems.sublist(
+                                    index * 3,
+                                    (_.fundItems.length > index * 3 + 3)
+                                        ? index * 3 + 3
+                                        : _.fundItems.length,
+                                  ),
+                                ),
+                              ),
+                            )
+                          : List.generate(
+                              _.fundItems.length,
+                              (index) => Padding(
+                                padding: index != 0
+                                    ? const EdgeInsets.only(
+                                        top: KPadding.kPaddingSize24,
+                                      )
+                                    : EdgeInsets.zero,
+                                child: DonateCardWidget(
+                                  key: KWidgetkeys.screen.investors.donateCard,
+                                  fundModel: _.fundItems.elementAt(index),
+                                  isDesk: false,
+                                  hasSubtitle: true,
+                                ),
                               ),
                             ),
-                          ),
-                        )
-                      else
-                        ...List.generate(
-                          _.fundItems.length,
-                          (index) => Padding(
-                            padding: index != 0
-                                ? const EdgeInsets.only(
-                                    top: KPadding.kPaddingSize24,
-                                  )
-                                : EdgeInsets.zero,
-                            child: DonateCardWidget(
-                              key: KWidgetkeys.screen.investors.donateCard,
-                              fundModel: _.fundItems.elementAt(index),
-                              isDesk: false,
-                              hasSubtitle: true,
-                            ),
-                          ),
-                        )
-                    else
+                    );
+                  } else {
+                    childWidgets.add(
                       TextButton(
                         key: KWidgetkeys.screen.investors.buttonMock,
                         onPressed: () {
@@ -117,7 +118,9 @@ class _InvestorsBodyWidgetState extends State<InvestorsBodyWidget> {
                           style: AppTextStyle.text32,
                         ),
                       ),
-                  ]);
+                    );
+                  }
+
                 case InvestorsWatcherStateFailure():
                   childWidgets.add(const CircularProgressIndicator.adaptive());
               }
