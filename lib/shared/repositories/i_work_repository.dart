@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:kozak/shared/models/employee_respond_model.dart';
 import 'package:kozak/shared/shared.dart';
 
 abstract class IWorkRepository {

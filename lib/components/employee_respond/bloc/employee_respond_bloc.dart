@@ -2,7 +2,6 @@ import 'package:bloc/bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:kozak/shared/models/employee_respond_model.dart';
 
 import 'package:kozak/shared/shared.dart';
 

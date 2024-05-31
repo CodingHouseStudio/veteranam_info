@@ -6,7 +6,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:kozak/bootstrap.dart';
 import 'package:kozak/firebase_options_development.dart';
-import 'package:kozak/shared/models/employee_respond_model.dart';
 import 'package:kozak/shared/shared.dart';
 
 Future<void> setUpGlobal({bool? kIsWeb}) async {
