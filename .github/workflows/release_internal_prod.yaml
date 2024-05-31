@@ -7,7 +7,7 @@ on:
   #   workflow_dispatch:
   #   # Triggers the workflow on push or pull request events but only for the dev-release
   push:
-    branches: [dev]
+    branches: [prod]
 
 
 permissions:
@@ -63,7 +63,7 @@ jobs:
   web_build:
     runs-on: ubuntu-latest # We are using ubuntu to deploy flutter web
     timeout-minutes: 20
-    environment: development # We specify development since Web Production and Web Development are using the same environment variable names
+    environment: production # We specify development since Web Production and Web Development are using the same environment variable names
     permissions: # set permissions for AWS creentials specifically
       id-token: write
       contents: read
@@ -82,7 +82,7 @@ jobs:
       - name: Build the Web static pages # generate deployment files
         run: |
           buildNumber=$(date +%s)
-          flutter build web --release -t lib/main_development.dart --web-renderer auto --build-name=1.0.2 --build-number=$buildNumber --dart-define=FLAVOUR=production
+          flutter build web --release -t lib/main_production.dart --web-renderer auto --build-name=1.0.2 --build-number=$buildNumber --dart-define=FLAVOUR=production
           dt="$(date "+%s000")"
           mv build/web/main.dart.js build/web/$dt.main.dart.js
           sed "s/main.dart.js/$dt.main.dart.js/g" build/web/index.html >build/web/newindex.html
