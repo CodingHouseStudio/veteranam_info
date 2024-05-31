@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:kozak/app.dart';
 import 'package:kozak/bootstrap.dart';
-import 'package:kozak/firebase_options_production.dart';
+import 'package:kozak/firebase_options_development.dart';
 
 Future<void> main() async {
   await Firebase.initializeApp(
