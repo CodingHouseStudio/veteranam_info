@@ -124,28 +124,31 @@ class _NawbarWidgetImplematationState
           else if (widget.isDesk)
             Row(
               children: [
-                TextButton(
+                TextButton.icon(
                   onPressed: () => context.goNamed(KRoute.discounts.name),
-                  child: Text(
+                  label: Text(
                     context.l10n.discounts,
                     style: AppTextStyle.materialThemeTitleMedium,
                   ),
+                  icon: KIcon.tag,
                 ),
                 KSizedBox.kWidthSizedBox64,
-                TextButton(
+                TextButton.icon(
                   onPressed: () => context.goNamed(KRoute.information.name),
-                  child: Text(
+                  label: Text(
                     context.l10n.information,
                     style: AppTextStyle.materialThemeTitleMedium,
                   ),
+                  icon: KIcon.globe,
                 ),
                 KSizedBox.kWidthSizedBox64,
-                TextButton(
+                TextButton.icon(
                   onPressed: () => context.goNamed(KRoute.investors.name),
-                  child: Text(
+                  label: Text(
                     context.l10n.forInvestors,
                     style: AppTextStyle.materialThemeTitleMedium,
                   ),
+                  icon: KIcon.fileText,
                 ),
               ],
             ),
