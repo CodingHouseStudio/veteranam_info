@@ -97,7 +97,11 @@ $ flutter run --flavor staging --target lib/main_staging.dart
 $ flutter run --flavor production --target lib/main_production.dart
 ```
 
-_\*Kozak works on iOS, Android, Web, and Windows._
+### Hide element
+
+When you write code and want to hide an element in the production or development version, you need to call the Config class and select one of its parameters that returns a bool value, for example, if you write Config.isDevelopment, this variable will return true if you start using the development version or false if production.
+
+_\*Kozak works Web._
 
 ---
 
