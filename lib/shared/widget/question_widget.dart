@@ -32,6 +32,12 @@ class _QuestionWidgetState extends State<QuestionWidget> {
       child: Material(
         type: MaterialType.transparency,
         child: ExpansionTile(
+          shape: const Border.fromBorderSide(
+            BorderSide(
+              color: AppColors.materialThemeKeyColorsNeutral,
+              width: 0,
+            ),
+          ),
           title: Text(
             widget.questionModel.title,
             key: KWidgetkeys.widget.question.title,

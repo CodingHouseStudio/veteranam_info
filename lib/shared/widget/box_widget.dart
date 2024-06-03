@@ -8,7 +8,7 @@ class BoxWidget extends StatelessWidget {
     required this.isDesk,
     super.key,
     this.textRightPadding,
-    this.textIconPaddingWidget = KSizedBox.kHeightSizedBox90,
+    this.textIconPaddingWidget = KSizedBox.kHeightSizedBox24,
     this.icon,
   });
 

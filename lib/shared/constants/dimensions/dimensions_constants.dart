@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 /// COMMENT: Variables with dimensions that don't have a specific group
 abstract class KDimensions {
   static const storyCardMaxLines = 10;
@@ -10,4 +12,11 @@ abstract class KDimensions {
   static const leftCardPaddingMultiply = 0.5;
   static const respondPaddingMultiply = 0.2;
   static const daysBetweenFeedback = 7;
+
+  static var _doubleButtonAnimationDuration = 200;
+  static int get doubleButtonAnimationDuration =>
+      _doubleButtonAnimationDuration;
+  @visibleForTesting
+  static set doubleButtonAnimationDuration(int duration) =>
+      _doubleButtonAnimationDuration = duration;
 }

@@ -131,6 +131,7 @@ void main() {
           });
 
           testWidgets('screen cards rout', (tester) async {
+            KDimensions.doubleButtonAnimationDuration = 0;
             await homePumpAppHelper(
               mockFeedbackRepository: mockFeedbackRepository,
               mockHomeRepository: mockHomeRepository,
