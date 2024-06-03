@@ -13,7 +13,7 @@ class _WorkEmployeeKeys {
       const Key('work_employee_screen_categories_filter_buttons');
   final resetFilter = const Key('work_employee_screen_reset_filter');
   final cards = const Key('work_employee_screen_cards');
-  final mockDataButton = const Key('work_employee_screen_mock_data_button');
+  final buttonMock = const Key('work_employee_screen_button_mock');
   final pagination = const Key('work_employee_screen_pagination');
   final requestCard = const Key('work_employee_screen_request_card');
 }
