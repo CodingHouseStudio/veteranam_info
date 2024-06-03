@@ -23,8 +23,10 @@ void main() {
     setUp(() {
       ExtendedDateTime.current = KTestText.dateTime;
       ExtendedDateTime.id = KTestText.feedbackModel.id;
+      mockHomeRepository = MockIHomeRepository();
       mockAuthenticationRepository = MockAuthenticationRepository();
       mockAppAuthenticationRepository = MockAppAuthenticationRepository();
+
       when(mockAuthenticationRepository.currentUser).thenAnswer(
         (realInvocation) => User.empty,
       );
@@ -40,51 +42,65 @@ void main() {
       when(mockAuthenticationRepository.isAnonymouslyOrEmty()).thenAnswer(
         (realInvocation) => true,
       );
-      mockHomeRepository = MockIHomeRepository();
-      when(mockHomeRepository.getQuestions()).thenAnswer(
-        (invocation) async => Right(KTestText.questionModelItems),
-      );
       mockFeedbackRepository = MockIFeedbackRepository();
       when(mockFeedbackRepository.sendFeedback(KTestText.feedbackModel))
           .thenAnswer(
         (invocation) async => const Right(true),
       );
-      when(mockFeedbackRepository.checkUserNeedShowFeedback(KTestText.user.id))
-          .thenAnswer(
+      when(
+        mockFeedbackRepository.checkUserNeedShowFeedback(KTestText.user.id),
+      ).thenAnswer(
         (invocation) async => const Right(true),
       );
     });
+    group('${KGroupText.getEmptyList} ', () {
+      setUp(() {
+        when(mockHomeRepository.getQuestions()).thenAnswer(
+          (invocation) async => const Right([]),
+        );
+        when(mockHomeRepository.addMockQuestions()).thenAnswer(
+          (invocation) {},
+        );
+        if (GetIt.I.isRegistered<IHomeRepository>()) {
+          GetIt.I.unregister<IHomeRepository>();
+        }
+        GetIt.I.registerSingleton<IHomeRepository>(mockHomeRepository);
+      });
+      testWidgets('${KGroupText.mockButton} ', (tester) async {
+        await homePumpAppHelper(
+          mockFeedbackRepository: mockFeedbackRepository,
+          mockHomeRepository: mockHomeRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
+          tester: tester,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+        );
 
-    testWidgets('${KGroupText.intial} ', (tester) async {
-      await homePumpAppHelper(
-        mockFeedbackRepository: mockFeedbackRepository,
-        mockHomeRepository: mockHomeRepository,
-        mockAuthenticationRepository: mockAuthenticationRepository,
-        tester: tester,
-        mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-      );
-
-      await homeInitialHelper(tester);
+        await mockButtonHelper(tester);
+      });
     });
+    group(KGroupText.getList, () {
+      setUp(() {
+        when(mockHomeRepository.getQuestions()).thenAnswer(
+          (invocation) async => Right(KTestText.questionModelItems),
+        );
+      });
 
-    group('${KGroupText.goRouter} ', () {
-      late MockGoRouter mockGoRouter;
-      setUp(() => mockGoRouter = MockGoRouter());
       testWidgets('${KGroupText.intial} ', (tester) async {
         await homePumpAppHelper(
           mockFeedbackRepository: mockFeedbackRepository,
           mockHomeRepository: mockHomeRepository,
           mockAuthenticationRepository: mockAuthenticationRepository,
           tester: tester,
-          mockGoRouter: mockGoRouter,
           mockAppAuthenticationRepository: mockAppAuthenticationRepository,
         );
 
         await homeInitialHelper(tester);
       });
 
-      group('${KGroupText.goTo} ', () {
-        testWidgets('nawbar widget navigation', (tester) async {
+      group('${KGroupText.goRouter} ', () {
+        late MockGoRouter mockGoRouter;
+        setUp(() => mockGoRouter = MockGoRouter());
+        testWidgets('${KGroupText.intial} ', (tester) async {
           await homePumpAppHelper(
             mockFeedbackRepository: mockFeedbackRepository,
             mockHomeRepository: mockHomeRepository,
@@ -94,59 +110,74 @@ void main() {
             mockAppAuthenticationRepository: mockAppAuthenticationRepository,
           );
 
-          await navbarNavigationHelper(
-            tester: tester,
-            mockGoRouter: mockGoRouter,
-          );
+          await homeInitialHelper(tester);
         });
 
-        testWidgets('screen cards rout', (tester) async {
-          KDimensions.doubleButtonAnimationDuration = 0;
-          await homePumpAppHelper(
-            mockFeedbackRepository: mockFeedbackRepository,
-            mockHomeRepository: mockHomeRepository,
-            mockAuthenticationRepository: mockAuthenticationRepository,
-            tester: tester,
-            mockGoRouter: mockGoRouter,
-            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-          );
+        group('${KGroupText.goTo} ', () {
+          testWidgets('nawbar widget navigation', (tester) async {
+            await homePumpAppHelper(
+              mockFeedbackRepository: mockFeedbackRepository,
+              mockHomeRepository: mockHomeRepository,
+              mockAuthenticationRepository: mockAuthenticationRepository,
+              tester: tester,
+              mockGoRouter: mockGoRouter,
+              mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+            );
 
-          await cardsScreenHelper(
-            tester: tester,
-            mockGoRouter: mockGoRouter,
-          );
-        });
+            await navbarNavigationHelper(
+              tester: tester,
+              mockGoRouter: mockGoRouter,
+            );
+          });
 
-        testWidgets('box widget navigation', (tester) async {
-          await homePumpAppHelper(
-            mockFeedbackRepository: mockFeedbackRepository,
-            mockHomeRepository: mockHomeRepository,
-            mockAuthenticationRepository: mockAuthenticationRepository,
-            tester: tester,
-            mockGoRouter: mockGoRouter,
-            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-          );
+          testWidgets('screen cards rout', (tester) async {
+            KDimensions.doubleButtonAnimationDuration = 0;
+            await homePumpAppHelper(
+              mockFeedbackRepository: mockFeedbackRepository,
+              mockHomeRepository: mockHomeRepository,
+              mockAuthenticationRepository: mockAuthenticationRepository,
+              tester: tester,
+              mockGoRouter: mockGoRouter,
+              mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+            );
 
-          await boxexHelper(
-            tester: tester,
-            mockGoRouter: mockGoRouter,
-          );
-        });
+            await cardsScreenHelper(
+              tester: tester,
+              mockGoRouter: mockGoRouter,
+            );
+          });
 
-        testWidgets('All footer widget navigation', (tester) async {
-          await homePumpAppHelper(
-            tester: tester,
-            mockGoRouter: mockGoRouter,
-            mockAuthenticationRepository: mockAuthenticationRepository,
-            mockFeedbackRepository: mockFeedbackRepository,
-            mockHomeRepository: mockHomeRepository,
-            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-          );
+          testWidgets('box widget navigation', (tester) async {
+            await homePumpAppHelper(
+              mockFeedbackRepository: mockFeedbackRepository,
+              mockHomeRepository: mockHomeRepository,
+              mockAuthenticationRepository: mockAuthenticationRepository,
+              tester: tester,
+              mockGoRouter: mockGoRouter,
+              mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+            );
 
-          await footerButtonsHelper(
-            tester: tester,
-            mockGoRouter: mockGoRouter,
-          );
+            await boxexHelper(
+              tester: tester,
+              mockGoRouter: mockGoRouter,
+            );
+          });
+
+          testWidgets('All footer widget navigation', (tester) async {
+            await homePumpAppHelper(
+              tester: tester,
+              mockGoRouter: mockGoRouter,
+              mockAuthenticationRepository: mockAuthenticationRepository,
+              mockFeedbackRepository: mockFeedbackRepository,
+              mockHomeRepository: mockHomeRepository,
+              mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+            );
+
+            await footerButtonsHelper(
+              tester: tester,
+              mockGoRouter: mockGoRouter,
+            );
+          });
         });
       });
     });

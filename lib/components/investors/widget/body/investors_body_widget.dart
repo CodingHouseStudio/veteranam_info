@@ -104,21 +104,19 @@ class _InvestorsBodyWidgetState extends State<InvestorsBodyWidget> {
                             ),
                     );
                   } else {
-                    childWidgets.add(
-                      TextButton(
-                        key: KWidgetkeys.screen.investors.buttonMock,
-                        onPressed: () {
-                          GetIt.I.get<IInvestorsRepository>().addMockFunds();
-                          context
-                              .read<InvestorsWatcherBloc>()
-                              .add(const InvestorsWatcherEvent.started());
-                        },
-                        child: Text(
-                          context.l10n.getMockData,
-                          style: AppTextStyle.text32,
+                    if (Config.isDevelopment) {
+                      childWidgets.add(
+                        MockButtonWidget(
+                          key: KWidgetkeys.screen.investors.buttonMock,
+                          onPressed: () {
+                            GetIt.I.get<IInvestorsRepository>().addMockFunds();
+                            context
+                                .read<InvestorsWatcherBloc>()
+                                .add(const InvestorsWatcherEvent.started());
+                          },
                         ),
-                      ),
-                    );
+                      );
+                    }
                   }
 
                 case InvestorsWatcherStateFailure():
