@@ -183,13 +183,13 @@ abstract class KTestText {
     for (var i = 0; i < 50; i++)
       DiscountModel(
         id: DateTime.now().toLocal().microsecondsSinceEpoch.toString(),
-        discount: KMockText.discount,
+        userId: DateTime.now().toLocal().microsecondsSinceEpoch.toString(),
+        percent: KMockText.discount,
         city: KMockText.cityDiscount,
         service: KMockText.serviceDiscount,
-        discountDescription: KMockText.descriptionDiscount,
+        comment: KMockText.descriptionDiscount,
         date: DateTime.now(),
         instruction: KMockText.instructionDiscount,
-        preInstructionDiscount: KMockText.preInstructionDiscount,
         tags: [],
       ),
   ];
