@@ -17,9 +17,9 @@ abstract class KWidgetTheme {
   static const boxDecorationWidget = BoxDecoration(
     borderRadius: KBorderRadius.kBorderRadius32,
     color: AppColors.materialThemeKeyColorsNeutral,
-    border: Border.fromBorderSide(
-      BorderSide(color: AppColors.materialThemeKeyColorsNeutral),
-    ),
+    // border: Border.fromBorderSide(
+    //   BorderSide(color: AppColors.materialThemeKeyColorsNeutral,),
+    // ),
   );
   static const boxDecorationCircular = BoxDecoration(
     shape: BoxShape.circle,
