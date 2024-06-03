@@ -50,6 +50,9 @@ abstract class KGroupText {
   static const jsonModel = 'json from valid model';
   static const correct = 'Correct';
   static const uncorrect = 'Uncorrect';
+  static const getList = 'Get list';
+  static const getEmptyList = 'Get empty list';
+  static const mockButton = 'Tap on the mock button';
 }
 
 abstract class KTestText {

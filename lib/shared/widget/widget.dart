@@ -26,6 +26,7 @@ export 'languages_switcher_widget.dart';
 export 'left_card_widget.dart';
 export 'loading_button.dart';
 export 'message_field_widget.dart';
+export 'mock_button_widget.dart';
 export 'nawbar_widget.dart';
 export 'news_card_widget.dart';
 export 'page_indicator_control.dart';
