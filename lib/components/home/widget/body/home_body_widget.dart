@@ -218,9 +218,10 @@ class HomeBodyWidget extends StatelessWidget {
                             ),
                             KSizedBox.kHeightSizedBox16,
                             DoubleButtonWidget(
-                              key: KWidgetkeys.screen.home.faqButton,
+                              widgetKey: KWidgetkeys.screen.home.faqButton,
                               text: context.l10n.writeMessage,
                               onPressed: null,
+                              isDesk: isDesk,
                             ),
                           ],
                         ),
@@ -273,13 +274,11 @@ class HomeBodyWidget extends StatelessWidget {
                       style: AppTextStyle.materialThemeBodyLarge,
                     ),
                     KSizedBox.kHeightSizedBox8,
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: DoubleButtonWidget(
-                        text: context.l10n.writeMessage,
-                        key: KWidgetkeys.screen.home.faqButton,
-                        onPressed: null,
-                      ),
+                    DoubleButtonWidget(
+                      widgetKey: KWidgetkeys.screen.home.faqButton,
+                      text: context.l10n.writeMessage,
+                      onPressed: null,
+                      isDesk: isDesk,
                     ),
                     KSizedBox.kHeightSizedBox24,
                     if (_.questionModelItems.isNotEmpty)
