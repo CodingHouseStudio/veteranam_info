@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kozak/shared/shared.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 abstract class FooterWidget {
   static List<Widget> get({
@@ -332,14 +334,31 @@ abstract class FooterWidget {
             KIcon.meil.copyWith(
               key: KWidgetkeys.widget.footer.emailIcon,
             ),
-            KSizedBox.kWidthSizedBox8,
             Expanded(
-              child: Text(
-                KAppText.email,
+              child: Markdown(
                 key: KWidgetkeys.widget.footer.emailText,
-                style: isDesk
-                    ? AppTextStyle.materialThemeTitleMedium
-                    : AppTextStyle.materialThemeTitleSmall,
+                padding: const EdgeInsets.only(
+                  left: KPadding.kPaddingSize8,
+                ),
+                data: KAppText.email,
+                styleSheet: MarkdownStyleSheet(
+                  a: isDesk
+                      ? AppTextStyle.materialThemeTitleMedium
+                          .copyWith(color: AppColors.materialThemeBlack)
+                      : AppTextStyle.materialThemeTitleSmall
+                          .copyWith(color: AppColors.materialThemeBlack),
+                ),
+                shrinkWrap: true,
+                onTapLink: (text, href, title) async {
+                  final emailUri = Uri(
+                    scheme: 'mailto',
+                    path: KAppText.email,
+                  );
+
+                  if (await canLaunchUrl(emailUri)) {
+                    await launchUrl(emailUri);
+                  }
+                },
               ),
             ),
           ],
@@ -361,9 +380,10 @@ abstract class FooterWidget {
         Align(
           alignment: Alignment.centerLeft,
           child: DoubleButtonWidget(
-            key: KWidgetkeys.widget.footer.button,
+            widgetKey: KWidgetkeys.widget.footer.button,
             text: context.l10n.contact,
             onPressed: null,
+            isDesk: isDesk,
           ),
         ),
       ];

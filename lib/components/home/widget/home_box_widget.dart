@@ -49,15 +49,19 @@ class HomeBoxWidget extends StatelessWidget {
                   ),
                   KSizedBox.kHeightSizedBox16,
                   DoubleButtonWidget(
-                    key: KWidgetkeys.screen.home.boxButton,
+                    widgetKey: KWidgetkeys.screen.home.boxButton,
                     text: context.l10n.detail,
                     textColor: AppColors.materialThemeWhite,
                     color: AppColors.materialThemeBlack,
+
                     onPressed: () => Scrollable.ensureVisible(
                       aboutProjectKey.currentContext!,
                       duration: const Duration(microseconds: 1000),
                       curve: Curves.easeInOut,
                     ),
+                    onPressed: null,
+                    isDesk: isDesk,
+
                   ),
                   KSizedBox.kHeightSizedBox45,
                 ],
@@ -121,11 +125,12 @@ class HomeBoxWidget extends StatelessWidget {
                       ),
                       alignment: Alignment.bottomLeft,
                       child: DoubleButtonWidget(
-                        key: KWidgetkeys.screen.home.boxButton,
+                        widgetKey: KWidgetkeys.screen.home.boxButton,
                         text: context.l10n.detail,
                         textColor: AppColors.materialThemeWhite,
                         color: AppColors.materialThemeBlack,
                         onPressed: null,
+                        isDesk: isDesk,
                       ),
                     ),
                     KSizedBox.kHeightSizedBox8,
