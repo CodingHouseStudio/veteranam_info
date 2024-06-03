@@ -361,9 +361,10 @@ abstract class FooterWidget {
         Align(
           alignment: Alignment.centerLeft,
           child: DoubleButtonWidget(
-            key: KWidgetkeys.widget.footer.button,
+            widgetKey: KWidgetkeys.widget.footer.button,
             text: context.l10n.contact,
             onPressed: null,
+            isDesk: isDesk,
           ),
         ),
       ];
