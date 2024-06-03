@@ -63,23 +63,21 @@ class DiscountBodyWidget extends StatelessWidget {
                     }),
                   );
                 } else {
-                  childWidget.add(
-                    TextButton(
-                      key: KWidgetkeys.screen.discounts.buttonMock,
-                      onPressed: () {
-                        GetIt.I
-                            .get<IDiscountRepository>()
-                            .addMockDiscountItems();
-                        context
-                            .read<DiscountWatcherBloc>()
-                            .add(const DiscountWatcherEvent.started());
-                      },
-                      child: Text(
-                        context.l10n.getMockData,
-                        style: AppTextStyle.text32,
+                  if (Config.isDevelopment) {
+                    childWidget.add(
+                      MockButtonWidget(
+                        key: KWidgetkeys.screen.discounts.buttonMock,
+                        onPressed: () {
+                          GetIt.I
+                              .get<IDiscountRepository>()
+                              .addMockDiscountItems();
+                          context
+                              .read<DiscountWatcherBloc>()
+                              .add(const DiscountWatcherEvent.started());
+                        },
                       ),
-                    ),
-                  );
+                    );
+                  }
                 }
               case LoadingStatus.error:
                 childWidget.add(const CircularProgressIndicator.adaptive());

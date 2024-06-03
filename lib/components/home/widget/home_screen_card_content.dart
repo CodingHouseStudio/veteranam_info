@@ -33,13 +33,11 @@ abstract class HomeScreenCardContent {
           style: AppTextStyle.materialThemeBodyLarge,
         ),
         if (isDesk) KSizedBox.kHeightSizedBox16 else KSizedBox.kHeightSizedBox8,
-        Align(
-          alignment: Alignment.centerLeft,
-          child: DoubleButtonWidget(
-            key: buttonKey,
-            text: textButton,
-            onPressed: route,
-          ),
+        DoubleButtonWidget(
+          widgetKey: buttonKey,
+          text: textButton,
+          onPressed: route,
+          isDesk: isDesk,
         ),
         if (bottomWidget != null) bottomWidget,
       ];

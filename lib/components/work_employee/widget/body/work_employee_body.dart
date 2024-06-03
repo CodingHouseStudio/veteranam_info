@@ -70,7 +70,7 @@ class WorkEmployeeBody extends StatelessWidget {
                   })
                 else
                   TextButton(
-                    key: KWidgetkeys.screen.workEmployee.mockDataButton,
+                    key: KWidgetkeys.screen.workEmployee.buttonMock,
                     onPressed: () {
                       GetIt.I.get<IWorkRepository>().addMockWorks();
                       context

@@ -18,44 +18,73 @@ void main() {
     late IInformationRepository mockInformationRepository;
     setUp(() {
       mockInformationRepository = MockIInformationRepository();
-      when(mockInformationRepository.getInformationItems()).thenAnswer(
-        (invocation) => Stream.value(KTestText.informationModelItems),
-      );
     });
+    group('${KGroupText.getEmptyList} ', () {
+      setUp(() {
+        when(mockInformationRepository.getInformationItems()).thenAnswer(
+          (invocation) => Stream.value([]),
+        );
 
-    testWidgets('${KGroupText.intial} ', (tester) async {
-      await informationPumpAppHelper(
-        mockInformationRepository: mockInformationRepository,
-        tester: tester,
-      );
+        when(mockInformationRepository.addMockInformationItems()).thenAnswer(
+          (invocation) {},
+        );
+        if (GetIt.I.isRegistered<IInformationRepository>()) {
+          GetIt.I.unregister<IInformationRepository>();
+        }
+        GetIt.I.registerSingleton<IInformationRepository>(
+          mockInformationRepository,
+        );
+      });
+      testWidgets('${KGroupText.mockButton} ', (tester) async {
+        await informationPumpAppHelper(
+          mockInformationRepository: mockInformationRepository,
+          tester: tester,
+        );
 
-      await informationInitialHelper(tester);
+        await mockButtonHelper(tester);
+      });
     });
+    group(KGroupText.getList, () {
+      setUp(() {
+        when(mockInformationRepository.getInformationItems()).thenAnswer(
+          (invocation) => Stream.value(KTestText.informationModelItems),
+        );
+      });
 
-    testWidgets('News list load and filter', (tester) async {
-      await informationPumpAppHelper(
-        mockInformationRepository: mockInformationRepository,
-        tester: tester,
-      );
-
-      await listLoadFilterHelper(tester);
-    });
-
-    group('${KGroupText.goRouter} ', () {
-      late MockGoRouter mockGoRouter;
-      setUp(() => mockGoRouter = MockGoRouter());
       testWidgets('${KGroupText.intial} ', (tester) async {
         await informationPumpAppHelper(
           mockInformationRepository: mockInformationRepository,
           tester: tester,
-          mockGoRouter: mockGoRouter,
         );
 
         await informationInitialHelper(tester);
       });
 
-      // group('${KGroupText.goTo} ', () {
-      // });
+      testWidgets('News list load and filter', (tester) async {
+        await informationPumpAppHelper(
+          mockInformationRepository: mockInformationRepository,
+          tester: tester,
+        );
+
+        await listLoadFilterHelper(tester);
+      });
+
+      group('${KGroupText.goRouter} ', () {
+        late MockGoRouter mockGoRouter;
+        setUp(() => mockGoRouter = MockGoRouter());
+        testWidgets('${KGroupText.intial} ', (tester) async {
+          await informationPumpAppHelper(
+            mockInformationRepository: mockInformationRepository,
+            tester: tester,
+            mockGoRouter: mockGoRouter,
+          );
+
+          await informationInitialHelper(tester);
+        });
+
+        // group('${KGroupText.goTo} ', () {
+        // });
+      });
     });
   });
 }
