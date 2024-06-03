@@ -70,23 +70,21 @@ class InformationBodyWidget extends StatelessWidget {
                   }),
                 );
               } else {
-                childWidgets.add(
-                  TextButton(
-                    key: KWidgetkeys.screen.information.buttonMock,
-                    onPressed: () {
-                      GetIt.I
-                          .get<IInformationRepository>()
-                          .addMockInformationItems();
-                      context
-                          .read<InformationWatcherBloc>()
-                          .add(const InformationWatcherEvent.started());
-                    },
-                    child: Text(
-                      context.l10n.getMockData,
-                      style: AppTextStyle.text32,
+                if (Config.isDevelopment) {
+                  childWidgets.add(
+                    MockButtonWidget(
+                      key: KWidgetkeys.screen.information.buttonMock,
+                      onPressed: () {
+                        GetIt.I
+                            .get<IInformationRepository>()
+                            .addMockInformationItems();
+                        context
+                            .read<InformationWatcherBloc>()
+                            .add(const InformationWatcherEvent.started());
+                      },
                     ),
-                  ),
-                );
+                  );
+                }
               }
 
             case LoadingStatus.error:

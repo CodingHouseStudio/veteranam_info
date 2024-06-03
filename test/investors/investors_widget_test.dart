@@ -23,9 +23,6 @@ void main() {
       ExtendedDateTime.current = KTestText.dateTime;
       ExtendedDateTime.id = KTestText.feedbackModel.id;
       mockInvestorsRepository = MockIInvestorsRepository();
-      when(mockInvestorsRepository.getFunds()).thenAnswer(
-        (invocation) async => Right(KTestText.fundItems),
-      );
 
       mockFeedbackRepository = MockIFeedbackRepository();
       when(mockFeedbackRepository.sendFeedback(KTestText.feedbackModel))
@@ -44,71 +41,92 @@ void main() {
         (realInvocation) => KTestText.user,
       );
     });
+    group('${KGroupText.getEmptyList} ', () {
+      setUp(() {
+        when(mockInvestorsRepository.getFunds()).thenAnswer(
+          (invocation) async => const Right([]),
+        );
 
-    testWidgets('${KGroupText.intial} ', (tester) async {
-      await investorsPumpAppHelper(
-        mockFeedbackRepository: mockFeedbackRepository,
-        mockInvestorsRepository: mockInvestorsRepository,
-        tester: tester,
-        mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-      );
+        when(mockInvestorsRepository.addMockFunds()).thenAnswer(
+          (invocation) {},
+        );
+        if (GetIt.I.isRegistered<IInvestorsRepository>()) {
+          GetIt.I.unregister<IInvestorsRepository>();
+        }
+        GetIt.I.registerSingleton<IInvestorsRepository>(
+          mockInvestorsRepository,
+        );
+      });
+      testWidgets('${KGroupText.mockButton} ', (tester) async {
+        await investorsPumpAppHelper(
+          mockFeedbackRepository: mockFeedbackRepository,
+          mockInvestorsRepository: mockInvestorsRepository,
+          tester: tester,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+        );
 
-      await investorsInitialHelper(tester);
+        await mockButtonHelper(tester);
+      });
     });
+    group(KGroupText.getList, () {
+      setUp(() {
+        when(mockInvestorsRepository.getFunds()).thenAnswer(
+          (invocation) async => Right(KTestText.fundItems),
+        );
+      });
 
-    testWidgets('Feedback enter correct text and save it', (tester) async {
-      await investorsPumpAppHelper(
-        mockFeedbackRepository: mockFeedbackRepository,
-        mockInvestorsRepository: mockInvestorsRepository,
-        tester: tester,
-        mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-      );
-
-      await correctSaveHelper(tester);
-    });
-
-    testWidgets('Feedback enter incorrect text and save it', (tester) async {
-      await investorsPumpAppHelper(
-        mockFeedbackRepository: mockFeedbackRepository,
-        mockInvestorsRepository: mockInvestorsRepository,
-        tester: tester,
-        mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-      );
-
-      await incorrectSaveHelper(tester);
-    });
-
-    testWidgets('Feedback enter text and clear it', (tester) async {
-      await investorsPumpAppHelper(
-        mockFeedbackRepository: mockFeedbackRepository,
-        mockInvestorsRepository: mockInvestorsRepository,
-        tester: tester,
-        mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-      );
-
-      await feedbackClearTextHelper(
-        tester: tester,
-        email: KTestText.userEmail,
-        field: KTestText.field,
-      );
-    });
-
-    group('${KGroupText.goRouter} ', () {
-      late MockGoRouter mockGoRouter;
-      setUp(() => mockGoRouter = MockGoRouter());
       testWidgets('${KGroupText.intial} ', (tester) async {
         await investorsPumpAppHelper(
           mockFeedbackRepository: mockFeedbackRepository,
           mockInvestorsRepository: mockInvestorsRepository,
           tester: tester,
-          mockGoRouter: mockGoRouter,
           mockAppAuthenticationRepository: mockAppAuthenticationRepository,
         );
 
         await investorsInitialHelper(tester);
       });
-      group('${KGroupText.goTo} ', () {
-        testWidgets('Feedback box widget navigation', (tester) async {
+
+      testWidgets('Feedback enter correct text and save it', (tester) async {
+        await investorsPumpAppHelper(
+          mockFeedbackRepository: mockFeedbackRepository,
+          mockInvestorsRepository: mockInvestorsRepository,
+          tester: tester,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+        );
+
+        await correctSaveHelper(tester);
+      });
+
+      testWidgets('Feedback enter incorrect text and save it', (tester) async {
+        await investorsPumpAppHelper(
+          mockFeedbackRepository: mockFeedbackRepository,
+          mockInvestorsRepository: mockInvestorsRepository,
+          tester: tester,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+        );
+
+        await incorrectSaveHelper(tester);
+      });
+
+      testWidgets('Feedback enter text and clear it', (tester) async {
+        await investorsPumpAppHelper(
+          mockFeedbackRepository: mockFeedbackRepository,
+          mockInvestorsRepository: mockInvestorsRepository,
+          tester: tester,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+        );
+
+        await feedbackClearTextHelper(
+          tester: tester,
+          email: KTestText.userEmail,
+          field: KTestText.field,
+        );
+      });
+
+      group('${KGroupText.goRouter} ', () {
+        late MockGoRouter mockGoRouter;
+        setUp(() => mockGoRouter = MockGoRouter());
+        testWidgets('${KGroupText.intial} ', (tester) async {
           await investorsPumpAppHelper(
             mockFeedbackRepository: mockFeedbackRepository,
             mockInvestorsRepository: mockInvestorsRepository,
@@ -117,10 +135,23 @@ void main() {
             mockAppAuthenticationRepository: mockAppAuthenticationRepository,
           );
 
-          await feedbackNavigationHelper(
-            tester: tester,
-            mockGoRouter: mockGoRouter,
-          );
+          await investorsInitialHelper(tester);
+        });
+        group('${KGroupText.goTo} ', () {
+          testWidgets('Feedback box widget navigation', (tester) async {
+            await investorsPumpAppHelper(
+              mockFeedbackRepository: mockFeedbackRepository,
+              mockInvestorsRepository: mockInvestorsRepository,
+              tester: tester,
+              mockGoRouter: mockGoRouter,
+              mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+            );
+
+            await feedbackNavigationHelper(
+              tester: tester,
+              mockGoRouter: mockGoRouter,
+            );
+          });
         });
       });
     });
