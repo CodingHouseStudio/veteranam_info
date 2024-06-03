@@ -53,15 +53,12 @@ class HomeBoxWidget extends StatelessWidget {
                     text: context.l10n.detail,
                     textColor: AppColors.materialThemeWhite,
                     color: AppColors.materialThemeBlack,
-
                     onPressed: () => Scrollable.ensureVisible(
                       aboutProjectKey.currentContext!,
                       duration: const Duration(microseconds: 1000),
                       curve: Curves.easeInOut,
                     ),
-                    onPressed: null,
                     isDesk: isDesk,
-
                   ),
                   KSizedBox.kHeightSizedBox45,
                 ],
