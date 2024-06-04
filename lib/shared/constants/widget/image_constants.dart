@@ -58,7 +58,9 @@ abstract class KImage {
       SvgPicture(SvgAssetLoader('assets/icons/social_icons_g.svg'));
   static const SvgPicture logo = SvgPicture(
     SvgAssetLoader('assets/images/logo.svg'),
-    fit: BoxFit.fitHeight,
+  );
+  static const SvgPicture logoHome = SvgPicture(
+    SvgAssetLoader('assets/images/logo_home.svg'),
   );
   static const Image homeImage = Image(
     image: AssetImage('assets/images/home_image.png'),
