@@ -91,6 +91,6 @@ abstract class KIcon {
   static const _KIcon tag = _KIcon(Symbols.local_offer);
   static const _KIcon messageSquare = _KIcon(Symbols.chat_bubble);
   static const _KIcon briefcase = _KIcon(Symbols.trip);
-  static const _KIcon fileText = _KIcon(Symbols.text_snippet);
+  static const _KIcon fileText = _KIcon(Symbols.description);
   static const _KIcon meil = _KIcon(Symbols.mail);
 }
