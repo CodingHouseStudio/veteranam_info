@@ -3,15 +3,17 @@ part of 'body/home_body_widget.dart';
 List<Widget> _boxWidgetList({
   required BuildContext context,
   required bool isDesk,
+  required GlobalKey aboutProjectKey,
 }) =>
     [
       if (isDesk) KSizedBox.kHeightSizedBox6 else KSizedBox.kHeightSizedBox24,
       if (isDesk)
         Row(
           children: [
-            const Expanded(
+            Expanded(
               flex: 2,
               child: HomeBoxWidget(
+                aboutProjectKey: aboutProjectKey,
                 isDesk: true,
               ),
             ),
@@ -43,7 +45,8 @@ List<Widget> _boxWidgetList({
           ],
         )
       else ...[
-        const HomeBoxWidget(
+        HomeBoxWidget(
+          aboutProjectKey: aboutProjectKey,
           isDesk: false,
         ),
         if (Config.isDevelopment) ...[
