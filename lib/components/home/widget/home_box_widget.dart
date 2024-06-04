@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:kozak/shared/shared.dart';
 
 class HomeBoxWidget extends StatelessWidget {
-  const HomeBoxWidget({required this.isDesk, super.key});
+  const HomeBoxWidget({
+    required this.isDesk,
+    required this.aboutProjectKey,
+    super.key,
+  });
   final bool isDesk;
+  final GlobalKey aboutProjectKey;
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +53,11 @@ class HomeBoxWidget extends StatelessWidget {
                     text: context.l10n.detail,
                     textColor: AppColors.materialThemeWhite,
                     color: AppColors.materialThemeBlack,
-                    onPressed: null,
+                    onPressed: () => Scrollable.ensureVisible(
+                      aboutProjectKey.currentContext!,
+                      duration: const Duration(microseconds: 1000),
+                      curve: Curves.easeInOut,
+                    ),
                     isDesk: isDesk,
                   ),
                   KSizedBox.kHeightSizedBox45,

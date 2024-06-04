@@ -14,12 +14,20 @@ class HomeBodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final aboutProjectKey = GlobalKey();
     return BlocBuilder<HomeWatcherBloc, HomeWatcherState>(
       builder: (context, _) => ScaffoldWidget(
         mainChildWidgetsFunction: ({required isDesk}) {
           final childWidgets = [
-            ..._boxWidgetList(context: context, isDesk: isDesk),
-            KSizedBox.kHeightSizedBox48,
+            ..._boxWidgetList(
+              context: context,
+              isDesk: isDesk,
+              aboutProjectKey: aboutProjectKey,
+            ),
+            SizedBox(
+              key: aboutProjectKey,
+              height: KSize.kPixel48,
+            ),
             if (isDesk)
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
