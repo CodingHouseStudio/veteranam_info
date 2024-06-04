@@ -28,71 +28,69 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
             key: KWidgetkeys.widget.profileCard.profileCard,
             child: Container(
               decoration: KWidgetTheme.boxDecorationWidget,
-              child: Padding(
-                padding: const EdgeInsets.all(KPadding.kPaddingSize16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          width: 60,
-                          height: 60,
-                          decoration: const BoxDecoration(
-                            borderRadius: KBorderRadius.kBorderRadiusL,
-                            // color: AppColors.widgetBackground,
-                          ),
-                          child: const Center(
-                            child: KIcon.person,
-                          ),
+              padding: const EdgeInsets.all(KPadding.kPaddingSize16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        width: 60,
+                        height: 60,
+                        decoration: const BoxDecoration(
+                          borderRadius: KBorderRadius.kBorderRadiusL,
+                          // color: AppColors.widgetBackground,
                         ),
-                        KSizedBox.kWidthSizedBox16,
-                        if (isEditing)
-                          Text(
-                            context.l10n.editData,
-                            style: widget.isDesk
-                                ? AppTextStyle.text40
-                                : AppTextStyle.text24,
-                          )
-                        else
-                          ..._displayProfileName(),
-                      ],
-                    ),
-                    if (isEditing) ...[
-                      KSizedBox.kHeightSizedBox8,
-                      _textField(
-                        label: context.l10n.name,
-                        labelText: context
-                            .read<AuthenticationBloc>()
-                            .state
-                            .user
-                            ?.name
-                            ?.split(' ')
-                            .first,
-                        hint: context.l10n.writeYouName,
+                        child: const Center(
+                          child: KIcon.person,
+                        ),
                       ),
-                      KSizedBox.kHeightSizedBox8,
-                      _textField(
-                        label: context.l10n.lastName,
-                        labelText: context
-                            .read<AuthenticationBloc>()
-                            .state
-                            .user
-                            ?.name
-                            ?.split(' ')
-                            .last,
-                        hint: context.l10n.writeYouLastName,
-                      ),
-                      KSizedBox.kHeightSizedBox8,
+                      KSizedBox.kWidthSizedBox16,
+                      if (isEditing)
+                        Text(
+                          context.l10n.editData,
+                          style: widget.isDesk
+                              ? AppTextStyle.text40
+                              : AppTextStyle.text24,
+                        )
+                      else
+                        ..._displayProfileName(),
                     ],
-                    ..._buildProfileInfo(),
+                  ),
+                  if (isEditing) ...[
                     KSizedBox.kHeightSizedBox8,
-                    _buildProfileFooter(),
+                    _textField(
+                      label: context.l10n.name,
+                      labelText: context
+                          .read<AuthenticationBloc>()
+                          .state
+                          .user
+                          ?.name
+                          ?.split(' ')
+                          .first,
+                      hint: context.l10n.writeYouName,
+                    ),
                     KSizedBox.kHeightSizedBox8,
-                    _buildLinkedAccounts(),
+                    _textField(
+                      label: context.l10n.lastName,
+                      labelText: context
+                          .read<AuthenticationBloc>()
+                          .state
+                          .user
+                          ?.name
+                          ?.split(' ')
+                          .last,
+                      hint: context.l10n.writeYouLastName,
+                    ),
+                    KSizedBox.kHeightSizedBox8,
                   ],
-                ),
+                  ..._buildProfileInfo(),
+                  KSizedBox.kHeightSizedBox8,
+                  _buildProfileFooter(),
+                  KSizedBox.kHeightSizedBox8,
+                  _buildLinkedAccounts(),
+                ],
               ),
             ),
           ),

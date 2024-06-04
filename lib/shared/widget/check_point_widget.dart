@@ -12,7 +12,7 @@ class CheckPointWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return DecoratedBox(
       key: KWidgetkeys.widget.checkPoint.widget,
       decoration: isCheck
           ? KWidgetTheme.boxDecorCheckPointFalse
