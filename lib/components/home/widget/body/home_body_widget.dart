@@ -257,7 +257,9 @@ class HomeBodyWidget extends StatelessWidget {
                                   );
                                 }),
                               )
-                            : mockButton(context),
+                            : Config.isDevelopment
+                                ? mockButton(context)
+                                : const SizedBox.shrink(),
                       ),
                     ],
                   ),
@@ -308,7 +310,7 @@ class HomeBodyWidget extends StatelessWidget {
                           ),
                         );
                       })
-                    else
+                    else if (Config.isDevelopment)
                       mockButton(context),
                   ],
                 );
@@ -329,7 +331,7 @@ class HomeBodyWidget extends StatelessWidget {
     );
   }
 
-  Widget mockButton(BuildContext context) => TextButton(
+  Widget mockButton(BuildContext context) => MockButtonWidget(
         key: KWidgetkeys.screen.home.buttonMock,
         onPressed: () {
           GetIt.I.get<IHomeRepository>().addMockQuestions();
@@ -337,9 +339,5 @@ class HomeBodyWidget extends StatelessWidget {
                 const HomeWatcherEvent.started(),
               );
         },
-        child: Text(
-          context.l10n.getMockData,
-          style: AppTextStyle.text32,
-        ),
       );
 }

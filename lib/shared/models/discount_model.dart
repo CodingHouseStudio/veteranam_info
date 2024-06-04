@@ -8,13 +8,13 @@ part 'discount_model.g.dart';
 class DiscountModel with _$DiscountModel {
   const factory DiscountModel({
     required String id,
+    required String userId,
     required String service,
-    required String discount,
+    required String percent,
     required String city,
-    required String discountDescription,
+    required String comment,
     required DateTime date,
     required String instruction,
-    required String preInstructionDiscount,
     required List<String> tags,
   }) = _DiscountModel;
 
