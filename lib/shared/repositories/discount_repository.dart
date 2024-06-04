@@ -24,13 +24,13 @@ class DiscountRepository implements IDiscountRepository {
       await _firestoreService.addDiscount(
         DiscountModel(
           id: '${ExtendedDateTime.id}$i',
+          userId: '${ExtendedDateTime.id}$i',
           service: KMockText.serviceDiscount,
-          discount: KMockText.discount,
+          percent: KMockText.discount,
           city: KMockText.cityDiscount,
-          discountDescription: KMockText.descriptionDiscount,
+          comment: KMockText.descriptionDiscount,
           date: DateTime.now(),
           instruction: KMockText.instructionDiscount,
-          preInstructionDiscount: KMockText.preInstructionDiscount,
           tags: tagMap.values.map((tag) => tag.title).toList(),
         ),
       );
