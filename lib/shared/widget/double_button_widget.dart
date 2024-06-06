@@ -128,7 +128,7 @@ class _DoubleButtonWidgetDeskState extends State<_DoubleButtonWidgetDesk> {
               icon: KIcon.arrowUpRight.copyWith(
                 color: widget.textColor ?? AppColors.materialThemeBlack,
               ),
-              background: widget.color ?? AppColors.materialThemeSourceSeed,
+              background: widget.color,
             ),
           ),
         ],
@@ -178,7 +178,7 @@ class _DoubleButtonWidgetMob extends StatelessWidget {
             icon: KIcon.arrowUpRight.copyWith(
               color: textColor ?? AppColors.materialThemeBlack,
             ),
-            background: color ?? AppColors.materialThemeSourceSeed,
+            background: color,
           ),
         ],
       ),

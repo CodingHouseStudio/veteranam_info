@@ -70,6 +70,12 @@ abstract class KButtonStyles {
     padding: MaterialStatePropertyAll(EdgeInsets.zero),
     overlayColor: MaterialStatePropertyAll(Colors.transparent),
   );
+  static const boxButtonStyle = ButtonStyle(
+    alignment: Alignment.centerLeft,
+    padding:
+        MaterialStatePropertyAll(EdgeInsets.only(left: KPadding.kPaddingSize8)),
+    overlayColor: MaterialStatePropertyAll(Colors.transparent),
+  );
   static const borderButtonStyle = ButtonStyle(
     minimumSize: MaterialStatePropertyAll(
       Size(KMinMaxSize.minWidth100, KMinMaxSize.minHeight50),

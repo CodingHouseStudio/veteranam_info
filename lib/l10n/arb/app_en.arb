@@ -42,7 +42,7 @@
   "text": "text",
   "writeYourSuggenstions": "Write your suggestions",
   "feedback": "Feedback",
-  "feedbackSubtitle": "If you want to contact us, or have any questions or requests. We are happy to talk to you! Please fill out the form.",
+  "feedbackSubtitle": "Didn't find what you were looking for, want to get in touch, or have questions or requests? We are happy to talk to you! Please fill out the form below.",
   "writeYourMessage": "Write your message",
   "helloVeteran": "Hello, Veteran!",
   "homeSubtitle": "Here you will find useful information, benefits, discounts and you can also share your story!",
@@ -172,5 +172,10 @@
   "jobsVacancies": "Jobs and vacancies",
   "jobsVacanciesSubtitle": "Information on current vacancies specifically targeted at veterans, as well as resources for job search and career development.",
   "toVacancy": "To vacancies",
-  "toGetItYouNeed": "To get it you need:"
+  "toGetItYouNeed": "To get it you need:",
+  "writeUsMessage": "Write use a message",
+  "preferEmail": "Prefer e-mail?",
+  "ourSocialNetworks": "Our social networks",
+  "feedbackFormSubtitle": "By submitting this form, I accept the Privacy Policy of this site",
+  "sendMessage": "Send message"
 }

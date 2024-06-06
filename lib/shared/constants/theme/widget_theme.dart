@@ -23,7 +23,7 @@ abstract class KWidgetTheme {
   );
   static const boxDecorationCircular = BoxDecoration(
     shape: BoxShape.circle,
-    color: AppColors.materialThemeWhite,
+    color: AppColors.materialThemeSourceSeed,
   );
 
   static const boxDecorationGrayCircular = BoxDecoration(
