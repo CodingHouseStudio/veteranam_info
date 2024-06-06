@@ -159,7 +159,7 @@ class DiscountWatcherBloc
   }) {
     final filteredItems = discountModelItems.where((element) {
       if (filters != null && filters.isNotEmpty) {
-        return filters.any(element.tags.contains);
+        return filters.any(element.category.contains);
       }
       return true;
     }).toList();
