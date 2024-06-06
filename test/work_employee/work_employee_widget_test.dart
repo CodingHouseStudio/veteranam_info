@@ -18,32 +18,60 @@ void main() {
     late IWorkRepository mockWorkRepository;
     setUp(() {
       mockWorkRepository = MockIWorkRepository();
-      when(mockWorkRepository.getWorks())
-          .thenAnswer((invocation) => Stream.value(KTestText.workModelItems));
     });
+    group('${KGroupText.getEmptyList} ', () {
+      setUp(() {
+        when(mockWorkRepository.getWorks())
+            .thenAnswer((invocation) => Stream.value([]));
 
-    testWidgets('${KGroupText.intial} ', (tester) async {
-      await workEmployeePumpAppHelper(
-        mockWorkRepository: mockWorkRepository,
-        tester: tester,
-      );
+        when(mockWorkRepository.addMockWorks()).thenAnswer(
+          (invocation) {},
+        );
+        if (GetIt.I.isRegistered<IWorkRepository>()) {
+          GetIt.I.unregister<IWorkRepository>();
+        }
+        GetIt.I.registerSingleton<IWorkRepository>(
+          mockWorkRepository,
+        );
+      });
+      testWidgets('${KGroupText.mockButton} ', (tester) async {
+        await workEmployeePumpAppHelper(
+          mockWorkRepository: mockWorkRepository,
+          tester: tester,
+        );
 
-      await workEmployeeInitialHelper(tester);
+        await mockButtonHelper(tester);
+      });
     });
-    group('${KGroupText.goRouter} ', () {
-      late MockGoRouter mockGoRouter;
-      setUp(() => mockGoRouter = MockGoRouter());
+    group(KGroupText.getList, () {
+      setUp(() {
+        when(mockWorkRepository.getWorks())
+            .thenAnswer((invocation) => Stream.value(KTestText.workModelItems));
+      });
+
       testWidgets('${KGroupText.intial} ', (tester) async {
         await workEmployeePumpAppHelper(
           mockWorkRepository: mockWorkRepository,
           tester: tester,
-          mockGoRouter: mockGoRouter,
         );
 
         await workEmployeeInitialHelper(tester);
       });
-      // group('${KGroupText.goTo} ', () {
-      // });
+      group('${KGroupText.goRouter} ', () {
+        late MockGoRouter mockGoRouter;
+        setUp(() => mockGoRouter = MockGoRouter());
+        testWidgets('${KGroupText.intial} ', (tester) async {
+          await workEmployeePumpAppHelper(
+            mockWorkRepository: mockWorkRepository,
+            tester: tester,
+            mockGoRouter: mockGoRouter,
+          );
+
+          await workEmployeeInitialHelper(tester);
+        });
+        // group('${KGroupText.goTo} ', () {
+        // });
+      });
     });
   });
 }

@@ -6,7 +6,7 @@ Widget _imageWidget(BuildContext context) {
       key: KWidgetkeys.screen.storyAdd.photoButton,
       onTap: () =>
           context.read<StoryAddBloc>().add(const StoryAddEvent.imageUpdated()),
-      child: Container(
+      child: DecoratedBox(
         decoration: KWidgetTheme.boxDecorationImage,
         child: CachedNetworkImage(
           key: KWidgetkeys.widget.cardAddImage.widget,

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class DonatesCardsWidget extends StatefulWidget {
   const DonatesCardsWidget({
@@ -50,14 +53,21 @@ class _DonatesCardsWidgetState extends State<DonatesCardsWidget> {
                             ? KPadding.kPaddingSize24
                             : 0,
                       ),
-                      child: DonateCardWidget(
-                        key: KWidgetkeys.screen.investors.donateCard,
-                        fundModel: widget.fundItems.elementAt(index),
-                        hasSubtitle: hasSubtitles.elementAt(index),
-                        titleStyle: hasSubtitles.contains(true) && changeSize
-                            ? AppTextStyle.text24
-                            : null,
-                        isDesk: true,
+                      child: Skeletonizer(
+                        enabled: context
+                                .read<InvestorsWatcherBloc>()
+                                .state
+                                .loadingStatus !=
+                            LoadingStatus.loaded,
+                        child: DonateCardWidget(
+                          key: KWidgetkeys.screen.investors.donateCard,
+                          fundModel: widget.fundItems.elementAt(index),
+                          hasSubtitle: hasSubtitles.elementAt(index),
+                          titleStyle: hasSubtitles.contains(true) && changeSize
+                              ? AppTextStyle.text24
+                              : null,
+                          isDesk: true,
+                        ),
                       ),
                     ),
                   )

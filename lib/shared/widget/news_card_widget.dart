@@ -35,7 +35,7 @@ class NewsCardWidget extends StatelessWidget {
             style: isDesk ? AppTextStyle.text40 : AppTextStyle.text24,
           ),
           Text(
-            informationItem.date.toLocal().toString().split(' ')[0],
+            informationItem.date.localeTime,
             key: KWidgetkeys.widget.newsCard.date,
             style: AppTextStyle.hint16,
           ),
@@ -54,21 +54,19 @@ class NewsCardWidget extends StatelessWidget {
                 children: selectedFilters.map((tag) {
                   return Container(
                     decoration: KWidgetTheme.boxDecorationWidget,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: KPadding.kPaddingSize4,
-                        horizontal: KPadding.kPaddingSize8,
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            tag,
-                            style: AppTextStyle.text14,
-                          ),
-                          KIcon.check,
-                        ],
-                      ),
+                    padding: const EdgeInsets.symmetric(
+                      vertical: KPadding.kPaddingSize4,
+                      horizontal: KPadding.kPaddingSize8,
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          tag,
+                          style: AppTextStyle.text14,
+                        ),
+                        KIcon.check,
+                      ],
                     ),
                   );
                 }).toList(),

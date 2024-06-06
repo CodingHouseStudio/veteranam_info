@@ -20,7 +20,7 @@ class DropChipWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return DecoratedBox(
       decoration: KWidgetTheme.boxDecorationWidget,
       child: DropdownButton<String?>(
         key: widgetKey ?? KWidgetkeys.widget.dropChip.widget,
