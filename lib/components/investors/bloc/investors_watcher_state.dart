@@ -12,11 +12,9 @@ extension InvestorsFailureExtension on SomeFailure {
 
 @freezed
 class InvestorsWatcherState with _$InvestorsWatcherState {
-  const factory InvestorsWatcherState.initial() = InvestorsWatcherStateIntital;
-  const factory InvestorsWatcherState.loading() = InvestorsWatcherStateLoading;
-  const factory InvestorsWatcherState.success({
+  const factory InvestorsWatcherState({
     required List<FundModel> fundItems,
-  }) = InvestorsWatcherStateSuccess;
-  const factory InvestorsWatcherState.failure(InvestorsFailure failure) =
-      InvestorsWatcherStateFailure;
+    required LoadingStatus loadingStatus,
+    InvestorsFailure? failure,
+  }) = _Initial;
 }

@@ -210,12 +210,15 @@ abstract class FooterWidget {
     required BuildContext context,
   }) =>
       [
-        Text(
-          context.l10n.sections,
-          key: KWidgetkeys.widget.footer.sections,
-          style: isDesk
-              ? AppTextStyle.materialThemeBodyLargeHint
-              : AppTextStyle.materialThemeBodyMediumHint,
+        Padding(
+          padding: const EdgeInsets.only(left: KPadding.kPaddingSize10),
+          child: Text(
+            context.l10n.sections,
+            key: KWidgetkeys.widget.footer.sections,
+            style: isDesk
+                ? AppTextStyle.materialThemeBodyLargeHint
+                : AppTextStyle.materialThemeBodyMediumHint,
+          ),
         ),
         if (isDesk)
           KSizedBox.kHeightSizedBox24
@@ -275,12 +278,15 @@ abstract class FooterWidget {
     required BuildContext context,
   }) =>
       [
-        Text(
-          context.l10n.information,
-          key: KWidgetkeys.widget.footer.information,
-          style: isDesk
-              ? AppTextStyle.materialThemeBodyLargeHint
-              : AppTextStyle.materialThemeBodyMediumHint,
+        Padding(
+          padding: const EdgeInsets.only(left: KPadding.kPaddingSize10),
+          child: Text(
+            context.l10n.information,
+            key: KWidgetkeys.widget.footer.information,
+            style: isDesk
+                ? AppTextStyle.materialThemeBodyLargeHint
+                : AppTextStyle.materialThemeBodyMediumHint,
+          ),
         ),
         if (isDesk)
           KSizedBox.kHeightSizedBox24
@@ -321,12 +327,15 @@ abstract class FooterWidget {
     required BuildContext context,
   }) =>
       [
-        Text(
-          context.l10n.contacts,
-          key: KWidgetkeys.widget.footer.contact,
-          style: isDesk
-              ? AppTextStyle.materialThemeBodyLargeHint
-              : AppTextStyle.materialThemeBodyMediumHint,
+        Padding(
+          padding: const EdgeInsets.only(left: KPadding.kPaddingSize4),
+          child: Text(
+            context.l10n.contacts,
+            key: KWidgetkeys.widget.footer.contact,
+            style: isDesk
+                ? AppTextStyle.materialThemeBodyLargeHint
+                : AppTextStyle.materialThemeBodyMediumHint,
+          ),
         ),
         KSizedBox.kHeightSizedBox16,
         Row(
@@ -377,14 +386,11 @@ abstract class FooterWidget {
               : AppTextStyle.materialThemeHeadlineMedium,
         ),
         KSizedBox.kHeightSizedBox16,
-        Align(
-          alignment: Alignment.centerLeft,
-          child: DoubleButtonWidget(
-            widgetKey: KWidgetkeys.widget.footer.button,
-            text: context.l10n.contact,
-            onPressed: null,
-            isDesk: isDesk,
-          ),
+        DoubleButtonWidget(
+          widgetKey: KWidgetkeys.widget.footer.button,
+          text: context.l10n.contact,
+          onPressed: null,
+          isDesk: isDesk,
         ),
       ];
   static Widget _button({
@@ -395,7 +401,6 @@ abstract class FooterWidget {
   }) =>
       TextButton(
         key: key,
-        // style: KButtonStyles.zeroPaddingButtonStyle,
         onPressed: onPressed,
         child: Text(text),
       );

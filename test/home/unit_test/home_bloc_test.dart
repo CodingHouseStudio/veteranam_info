@@ -32,8 +32,12 @@ void main() {
         bloc.add(const HomeWatcherEvent.started());
       },
       expect: () async => [
-        isA<HomeWatcherStateLoading>(),
-        isA<HomeWatcherStateSuccess>(),
+        predicate<HomeWatcherState>(
+          (state) => state.loadingStatus == LoadingStatus.loading,
+        ),
+        predicate<HomeWatcherState>(
+          (state) => state.loadingStatus == LoadingStatus.loaded,
+        ),
       ],
     );
     blocTest<HomeWatcherBloc, HomeWatcherState>(
@@ -46,8 +50,12 @@ void main() {
         bloc.add(const HomeWatcherEvent.started());
       },
       expect: () async => [
-        isA<HomeWatcherStateLoading>(),
-        isA<HomeWatcherStateFailure>(),
+        predicate<HomeWatcherState>(
+          (state) => state.loadingStatus == LoadingStatus.loading,
+        ),
+        predicate<HomeWatcherState>(
+          (state) => state.loadingStatus == LoadingStatus.error,
+        ),
       ],
     );
   });
