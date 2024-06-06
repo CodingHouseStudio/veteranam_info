@@ -9,16 +9,9 @@ List<Widget> discountsWidgetList({
           ? context.read<DiscountWatcherBloc>().state.filteredDiscountModelItems
           : List.generate(
               KDimensions.shimmerDiscountsItems,
-              (index) => DiscountModel(
+              (index) => KMockText.discountModel.copyWith(
                 id: index.toString(),
                 userId: index.toString(),
-                service: KMockText.serviceDiscount,
-                percent: KMockText.discount,
-                city: KMockText.cityDiscount,
-                comment: KMockText.preInstructionDiscount,
-                date: ExtendedDateTime.current,
-                instruction: KMockText.instructionDiscount,
-                tags: KMockText.tag,
               ),
             );
   return List.generate(discountsWidgetList.length, (index) {
