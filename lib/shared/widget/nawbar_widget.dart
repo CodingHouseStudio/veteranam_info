@@ -180,7 +180,9 @@ class _NawbarWidgetImplematationState
                 onTap: () => context.goNamedWithScroll(KRoute.login.name),
                 child: IconWidget(
                   key: KWidgetkeys.widget.nawbar.iconPerson,
-                  icon: KIcon.person,
+                  icon: KIcon.person
+                      .copyWith(color: AppColors.materialThemeWhite),
+                  background: AppColors.materialThemeBlack,
                 ),
               ),
           if (context.read<AuthenticationBloc>().state.status ==

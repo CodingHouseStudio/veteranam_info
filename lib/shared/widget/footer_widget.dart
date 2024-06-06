@@ -47,19 +47,16 @@ abstract class FooterWidget {
                       IconWidget(
                         key: KWidgetkeys.widget.footer.likedInIcon,
                         icon: KImage.linkedIn,
-                        background: AppColors.materialThemeSourceSeed,
                       ),
                       KSizedBox.kHeightSizedBox24,
                       IconWidget(
                         key: KWidgetkeys.widget.footer.instagramIcon,
                         icon: KImage.instagram,
-                        background: AppColors.materialThemeSourceSeed,
                       ),
                       KSizedBox.kHeightSizedBox24,
                       IconWidget(
                         key: KWidgetkeys.widget.footer.facebookIcon,
                         icon: KImage.facebook,
-                        background: AppColors.materialThemeSourceSeed,
                       ),
                     ],
                   ),
@@ -149,19 +146,16 @@ abstract class FooterWidget {
                   IconWidget(
                     key: KWidgetkeys.widget.footer.likedInIcon,
                     icon: KImage.linkedIn,
-                    background: AppColors.materialThemeSourceSeed,
                   ),
                   KSizedBox.kWidthSizedBox16,
                   IconWidget(
                     key: KWidgetkeys.widget.footer.instagramIcon,
                     icon: KImage.instagram,
-                    background: AppColors.materialThemeSourceSeed,
                   ),
                   KSizedBox.kWidthSizedBox16,
                   IconWidget(
                     key: KWidgetkeys.widget.footer.facebookIcon,
                     icon: KImage.facebook,
-                    background: AppColors.materialThemeSourceSeed,
                   ),
                 ],
               ),
