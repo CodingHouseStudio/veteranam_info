@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:kozak/components/components.dart';
@@ -29,11 +30,25 @@ class DiscountBodyWidget extends StatelessWidget {
                 KSizedBox.kHeightSizedBox56
               else
                 KSizedBox.kHeightSizedBox24,
-              DiscountFilters(
-                key: KWidgetkeys.screen.discounts.filter,
-                filtersItem: state.discountModelItems.overallTags,
-                isDesk: isDesk,
+              Row(
+                children: [
+                  Expanded(
+                    child: DiscountFilters(
+                      key: KWidgetkeys.screen.discounts.filter,
+                      filtersItem: state.discountModelItems.overallTags,
+                      isDesk: isDesk,
+                    ),
+                  ),
+                  TextButton(
+                    // key: KWidgetkeys.screen.login.signUpButton,
+                    onPressed: () =>
+                        context.goNamedWithScroll(KRoute.myDiscounts.name),
+                    style: KButtonStyles.whiteButtonStyle,
+                    child: Text(context.l10n.offerDiscount),
+                  ),
+                ],
               ),
+              //
               if (isDesk)
                 KSizedBox.kHeightSizedBox56
               else

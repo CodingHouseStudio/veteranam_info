@@ -90,4 +90,8 @@ abstract class KRoute {
     path: '/underConstruction',
     name: 'UnderConstruction',
   );
+  static const _RouteItem myDiscounts = _RouteItem(
+    path: 'myDiscounts',
+    name: 'MyDiscounts',
+  );
 }

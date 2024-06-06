@@ -251,4 +251,15 @@ class FirestoreService {
         .doc(tags.id)
         .set(tags.toJson());
   }
+
+  Future<List<DiscountModel>> getDiscountsByUserId(String userId) async {
+    final querySnapshot = await _db
+        .collection(FirebaseCollectionName.discount)
+        .where('userId', isEqualTo: userId)
+        .get();
+
+    return querySnapshot.docs
+        .map((doc) => DiscountModel.fromJson(doc.data()))
+        .toList();
+  }
 }

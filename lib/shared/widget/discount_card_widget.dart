@@ -28,7 +28,7 @@ class DiscountsCardWidget extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  discountItem.discount,
+                  discountItem.percent,
                   key: KWidgetkeys.widget.discountCard.discount,
                   style: isDesk ? AppTextStyle.text40 : AppTextStyle.text18,
                   overflow: TextOverflow.clip,
@@ -79,13 +79,13 @@ class DiscountsCardWidget extends StatelessWidget {
               ),
             KSizedBox.kHeightSizedBox4,
             Text(
-              discountItem.discountDescription,
+              discountItem.comment,
               key: KWidgetkeys.widget.discountCard.description,
               style: isDesk ? AppTextStyle.text24 : AppTextStyle.text14,
             ),
             KSizedBox.kHeightSizedBox4,
             Text(
-              discountItem.preInstructionDiscount,
+              context.l10n.toGetItYouNeed,
               key: KWidgetkeys.widget.discountCard.preInstructionDiscount,
               style: isDesk ? AppTextStyle.hint24 : AppTextStyle.hint14,
             ),

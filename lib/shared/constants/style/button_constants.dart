@@ -191,4 +191,20 @@ abstract class KButtonStyles {
       ),
     ),
   );
+
+  static const roundButtonStyle = ButtonStyle(
+    minimumSize: MaterialStatePropertyAll(
+      Size(64, 64),
+    ),
+    padding: MaterialStatePropertyAll(
+      EdgeInsets.all(KPadding.kPaddingSize8),
+    ),
+    shape: MaterialStatePropertyAll(
+      CircleBorder(
+        side: BorderSide(color: AppColors.materialThemeKeyColorsNeutral),
+      ),
+    ),
+    backgroundColor:
+        MaterialStatePropertyAll(AppColors.materialThemeKeyColorsNeutral),
+  );
 }

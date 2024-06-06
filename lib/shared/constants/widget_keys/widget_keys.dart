@@ -26,6 +26,7 @@ part 'screen/employer.dart';
 part 'screen/story_add.dart';
 part 'screen/under_construction.dart';
 part 'screen/my_story.dart';
+part 'screen/my_discounts.dart';
 // part 'screen/contact.dart';
 
 part 'widget/widget.dart';

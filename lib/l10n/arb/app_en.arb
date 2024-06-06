@@ -171,5 +171,11 @@
   "contact": "Contact",
   "jobsVacancies": "Jobs and vacancies",
   "jobsVacanciesSubtitle": "Information on current vacancies specifically targeted at veterans, as well as resources for job search and career development.",
-  "toVacancy": "To vacancies"
+  "toVacancy": "To vacancies",
+  "offerDiscount": "Offer a discount",
+  "myDiscountsAndCoupons": "In this section, you can publish a discount, as well as manage your publications. If your company provides personalized offers for veterans, you can advertise here.",
+  "myPublications": "My publications",
+  "toGetItYouNeed": "To get it you need:",
+  "deactivate": "Deactivate",
+  "statistics": "Statistics"
 }

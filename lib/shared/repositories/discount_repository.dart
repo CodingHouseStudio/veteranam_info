@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:dartz/dartz.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kozak/shared/shared.dart';
@@ -25,15 +26,31 @@ class DiscountRepository implements IDiscountRepository {
         DiscountModel(
           id: '${ExtendedDateTime.id}$i',
           service: KMockText.serviceDiscount,
-          discount: KMockText.discount,
+          percent: KMockText.discount,
           city: KMockText.cityDiscount,
-          discountDescription: KMockText.descriptionDiscount,
+          comment: KMockText.descriptionDiscount,
           date: DateTime.now(),
           instruction: KMockText.instructionDiscount,
-          preInstructionDiscount: KMockText.preInstructionDiscount,
           tags: tagMap.values.map((tag) => tag.title).toList(),
+          userId: '${ExtendedDateTime.id}$i',
         ),
       );
+    }
+  }
+
+  @override
+  Future<Either<SomeFailure, List<DiscountModel>>> getDiscountsById(
+    String userId,
+  ) async {
+    try {
+      final userDiscountsItems =
+          await _firestoreService.getDiscountsByUserId(userId);
+
+      return Right(userDiscountsItems);
+    } on Exception catch (e) {
+      return Left(GetFailur.fromCode(e).status);
+    } catch (e) {
+      return const Left(SomeFailure.serverError());
     }
   }
 }
