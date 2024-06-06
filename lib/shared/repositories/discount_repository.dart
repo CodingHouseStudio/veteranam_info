@@ -25,6 +25,7 @@ class DiscountRepository implements IDiscountRepository {
       await _firestoreService.addDiscount(
         DiscountModel(
           id: '${ExtendedDateTime.id}$i',
+          userId: '${ExtendedDateTime.id}$i',
           service: KMockText.serviceDiscount,
           percent: KMockText.discount,
           city: KMockText.cityDiscount,
@@ -32,7 +33,6 @@ class DiscountRepository implements IDiscountRepository {
           date: DateTime.now(),
           instruction: KMockText.instructionDiscount,
           tags: tagMap.values.map((tag) => tag.title).toList(),
-          userId: '${ExtendedDateTime.id}$i',
         ),
       );
     }

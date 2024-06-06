@@ -13,7 +13,12 @@ part 'home_watcher_bloc.freezed.dart';
 class HomeWatcherBloc extends Bloc<HomeWatcherEvent, HomeWatcherState> {
   HomeWatcherBloc({required IHomeRepository homeRepository})
       : _homeRepository = homeRepository,
-        super(const HomeWatcherState.initial()) {
+        super(
+          const HomeWatcherState(
+            questionModelItems: [],
+            loadingStatus: LoadingStatus.initial,
+          ),
+        ) {
     on<_Started>(_onStarted);
   }
   final IHomeRepository _homeRepository;
@@ -22,14 +27,19 @@ class HomeWatcherBloc extends Bloc<HomeWatcherEvent, HomeWatcherState> {
     _Started event,
     Emitter<HomeWatcherState> emit,
   ) async {
-    emit(const HomeWatcherState.loading());
+    emit(state.copyWith(loadingStatus: LoadingStatus.loading));
 
     final result = await _homeRepository.getQuestions();
     result.fold(
       (l) => emit(
-        HomeWatcherState.failure(l.toHome()),
+        state.copyWith(failure: l.toHome(), loadingStatus: LoadingStatus.error),
       ),
-      (r) => emit(HomeWatcherState.success(questionModelItems: r)),
+      (r) => emit(
+        HomeWatcherState(
+          questionModelItems: r,
+          loadingStatus: LoadingStatus.loaded,
+        ),
+      ),
     );
   }
 }

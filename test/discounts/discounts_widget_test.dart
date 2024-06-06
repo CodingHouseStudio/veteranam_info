@@ -1,11 +1,10 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
-import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
 import 'package:mockito/mockito.dart';
 
 import '../text_dependency.dart';
-import 'discount_widget/discount_filter_helper.dart';
+import 'helper/helper.dart';
 
 void main() {
   setUp(configureDependenciesTest);
@@ -17,97 +16,57 @@ void main() {
   tearDown(GetIt.I.reset);
   group('${KScreenBlocName.discounts} ', () {
     late IDiscountRepository mockDiscountRepository;
-    late DiscountWatcherBloc discountBloc;
     setUp(() {
       mockDiscountRepository = MockIDiscountRepository();
-      when(mockDiscountRepository.getDiscountItems()).thenAnswer(
-        (invocation) => Stream.value(KTestText.discountModelItems),
-      );
     });
-    void registerDiscountBloc() {
-      discountBloc = DiscountWatcherBloc(
-        discountRepository: mockDiscountRepository,
-      );
-      if (GetIt.I.isRegistered<DiscountWatcherBloc>()) {
-        GetIt.I.unregister<DiscountWatcherBloc>();
-      }
-      GetIt.I.registerSingleton<DiscountWatcherBloc>(discountBloc);
-    }
+    group('${KGroupText.getEmptyList} ', () {
+      setUp(() {
+        when(mockDiscountRepository.getDiscountItems()).thenAnswer(
+          (invocation) => Stream.value([]),
+        );
+        when(mockDiscountRepository.addMockDiscountItems()).thenAnswer(
+          (invocation) {},
+        );
+        if (GetIt.I.isRegistered<IDiscountRepository>()) {
+          GetIt.I.unregister<IDiscountRepository>();
+        }
+        GetIt.I.registerSingleton<IDiscountRepository>(mockDiscountRepository);
+      });
+      testWidgets('${KGroupText.mockButton} ', (tester) async {
+        await discountsPumpAppHelper(
+          tester: tester,
+          mockDiscountRepository: mockDiscountRepository,
+        );
 
-    testWidgets('${KGroupText.intial} ', (tester) async {
-      registerDiscountBloc();
-      await tester.pumpApp(const DiscountsScreen());
-
-      expect(
-        find.byKey(KWidgetkeys.screen.discounts.screen),
-        findsOneWidget,
-      );
-
-      await tester.pumpAndSettle();
+        await mockButtonHelper(tester);
+      });
     });
-    group('${KGroupText.goRouter} ', () {
-      late MockGoRouter mockGoRouter;
-      setUp(() => mockGoRouter = MockGoRouter());
+    group(KGroupText.getList, () {
+      setUp(() {
+        when(mockDiscountRepository.getDiscountItems()).thenAnswer(
+          (invocation) => Stream.value(KTestText.discountModelItems),
+        );
+      });
       testWidgets('${KGroupText.intial} ', (tester) async {
-        registerDiscountBloc();
-        await tester.pumpApp(
-          const DiscountsScreen(),
-          mockGoRouter: mockGoRouter,
-        );
-
-        expect(
-          find.byKey(KWidgetkeys.screen.discounts.screen),
-          findsOneWidget,
-        );
-
-        await tester.pumpAndSettle();
-
-        await scrollingHelper(
+        await discountsPumpAppHelper(
           tester: tester,
-          offset: KTestConstants.scrollingDown,
+          mockDiscountRepository: mockDiscountRepository,
         );
 
-        await scrollingHelper(
-          tester: tester,
-        );
+        await discountInitialHelper(tester);
+      });
+      group('${KGroupText.goRouter} ', () {
+        late MockGoRouter mockGoRouter;
+        setUp(() => mockGoRouter = MockGoRouter());
+        testWidgets('${KGroupText.intial} ', (tester) async {
+          await discountsPumpAppHelper(
+            tester: tester,
+            mockDiscountRepository: mockDiscountRepository,
+            mockGoRouter: mockGoRouter,
+          );
 
-        await scrollingHelper(
-          tester: tester,
-          itemKey: KWidgetkeys.screen.discounts.button,
-          offset: KTestConstants.scrollingUp500,
-        );
-
-        expect(
-          find.byKey(KWidgetkeys.screen.discounts.button),
-          findsOneWidget,
-        );
-
-        await changeWindowSizeHelper(
-          tester: tester,
-          test: () async {
-            expect(
-              find.byKey(KWidgetkeys.screen.discounts.buttonIcon),
-              findsOneWidget,
-            );
-
-            await changeWindowSizeHelper(
-              tester: tester,
-              test: () async {
-                expect(
-                  find.byKey(KWidgetkeys.screen.discounts.buttonMock),
-                  findsNothing,
-                );
-
-                expect(
-                  find.byKey(KWidgetkeys.screen.discounts.card),
-                  findsOneWidget,
-                );
-
-                await discountFilterHelper(tester);
-              },
-            );
-          },
-        );
+          await discountInitialHelper(tester);
+        });
       });
     });
   });

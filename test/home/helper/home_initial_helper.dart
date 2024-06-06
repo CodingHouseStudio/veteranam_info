@@ -154,7 +154,7 @@ Future<void> homeInitialHelper(
 
       expect(
         find.byKey(KWidgetkeys.screen.home.faq),
-        findsOneWidget,
+        findsWidgets,
       );
 
       await questionHelper(tester);

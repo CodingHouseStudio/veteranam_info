@@ -29,18 +29,16 @@ class CardAddImageWidget extends StatelessWidget {
                 child: Container(
                   decoration:
                       image == null ? KWidgetTheme.boxDecorationWidget : null,
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: KPadding.kPaddingSize32,
-                      vertical: image == null ? KPadding.kPaddingSize48 : 0,
-                    ),
-                    child: childWidget,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: KPadding.kPaddingSize32,
+                    vertical: image == null ? KPadding.kPaddingSize48 : 0,
                   ),
+                  child: childWidget,
                 ),
               ),
             ],
           )
-        : Container(
+        : DecoratedBox(
             decoration: KWidgetTheme.boxDecorationWidget,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
