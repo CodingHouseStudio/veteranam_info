@@ -58,7 +58,9 @@ abstract class KImage {
       SvgPicture(SvgAssetLoader('assets/icons/social_icons_g.svg'));
   static const SvgPicture logo = SvgPicture(
     SvgAssetLoader('assets/images/logo.svg'),
-    fit: BoxFit.fitHeight,
+  );
+  static const SvgPicture logoHome = SvgPicture(
+    SvgAssetLoader('assets/images/logo_home.svg'),
   );
   static const Image homeImage = Image(
     image: AssetImage('assets/images/home_image.png'),
@@ -74,6 +76,9 @@ abstract class KImage {
   static const Image inforamationImage = Image(
     image: AssetImage('assets/images/information_image.png'),
     fit: BoxFit.fill,
+  );
+  static const Image wavingHand = Image(
+    image: AssetImage('assets/icons/waving_hand.png'),
   );
   // static const Image workImage = Image(
   //   image: AssetImage('assets/images/work_image.png'),

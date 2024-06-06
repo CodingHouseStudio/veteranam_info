@@ -46,7 +46,7 @@ abstract class KTestConstants {
   static final screens = [
     KWidgetkeys.screen.aboutUs.screen,
     KWidgetkeys.screen.investors.screen,
-    KWidgetkeys.screen.contact.screen,
+    // KWidgetkeys.screen.contact.screen,
     KWidgetkeys.screen.story.screen,
     KWidgetkeys.screen.discounts.screen,
     KWidgetkeys.screen.login.screen,

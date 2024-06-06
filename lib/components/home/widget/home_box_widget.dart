@@ -1,55 +1,98 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:kozak/shared/shared.dart';
 
 class HomeBoxWidget extends StatelessWidget {
-  const HomeBoxWidget({required this.isDesk, super.key});
+  const HomeBoxWidget({
+    required this.isDesk,
+    required this.aboutProjectKey,
+    super.key,
+  });
   final bool isDesk;
+  final GlobalKey aboutProjectKey;
 
   @override
   Widget build(BuildContext context) {
     if (isDesk) {
-      return IntrinsicHeight(
-        key: KWidgetkeys.screen.home.box,
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+      return Row(
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                KSizedBox.kHeightSizedBox45,
+                Row(
+                  children: [
+                    Text(
+                      context.l10n.hello,
+                      key: KWidgetkeys.screen.home.boxHi,
+                      style: AppTextStyle.materialThemeTitleMedium,
+                    ),
+                    KSizedBox.kWidthSizedBox8,
+                    KImage.wavingHand,
+                  ],
+                ),
+                KSizedBox.kHeightSizedBox16,
+                Text(
+                  context.l10n.thisServiceForVeterans,
+                  key: KWidgetkeys.screen.home.boxTitle,
+                  style: AppTextStyle.text64,
+                ),
+                KSizedBox.kHeightSizedBox24,
+                Text(
+                  context.l10n.thisServiceForVeteransSubtitle,
+                  key: KWidgetkeys.screen.home.boxSubtitle,
+                  style: AppTextStyle.materialThemeBodyLarge,
+                ),
+                KSizedBox.kHeightSizedBox16,
+                DoubleButtonWidget(
+                  widgetKey: KWidgetkeys.screen.home.boxButton,
+                  text: context.l10n.detail,
+                  textColor: AppColors.materialThemeWhite,
+                  color: AppColors.materialThemeBlack,
+                  onPressed: () => Scrollable.ensureVisible(
+                    aboutProjectKey.currentContext!,
+                    duration: const Duration(microseconds: 1000),
+                    curve: Curves.easeInOut,
+                  ),
+                  isDesk: isDesk,
+                ),
+                KSizedBox.kHeightSizedBox45,
+              ],
+            ),
+          ),
+          Expanded(
+            child: ConstrainedBox(
+              constraints:
+                  const BoxConstraints(maxHeight: KMinMaxSize.maxHeight400),
+              child: Stack(
+                alignment: Alignment.bottomRight,
                 children: [
-                  KSizedBox.kHeightSizedBox45,
-                  Text(
-                    context.l10n.hello,
-                    key: KWidgetkeys.screen.home.boxHi,
-                    style: AppTextStyle.materialThemeTitleMedium,
+                  const Positioned.fill(
+                    child: Padding(
+                      padding: EdgeInsets.only(top: KPadding.kPaddingSize40),
+                      child: DecoratedBox(
+                        decoration: KWidgetTheme.boxDecorNeutralVariant,
+                      ),
+                    ),
                   ),
-                  KSizedBox.kHeightSizedBox16,
-                  Text(
-                    context.l10n.thisServiceForVeterans,
-                    key: KWidgetkeys.screen.home.boxTitle,
-                    style: AppTextStyle.text64,
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(left: KPadding.kPaddingSize24),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: KImage.logoHome.copyWith(
+                        height: KMinMaxSize.kScroll400,
+                      ),
+                    ),
                   ),
-                  KSizedBox.kHeightSizedBox24,
-                  Text(
-                    context.l10n.thisServiceForVeteransSubtitle,
-                    key: KWidgetkeys.screen.home.boxSubtitle,
-                    style: AppTextStyle.materialThemeBodyLarge,
-                  ),
-                  KSizedBox.kHeightSizedBox16,
-                  DoubleButtonWidget(
-                    key: KWidgetkeys.screen.home.boxButton,
-                    text: context.l10n.detail,
-                    textColor: AppColors.materialThemeWhite,
-                    color: AppColors.materialThemeBlack,
-                    onPressed: null,
-                  ),
-                  KSizedBox.kHeightSizedBox45,
+                  KImage.homeImage,
                 ],
               ),
             ),
-            const Expanded(child: KImage.homeImage),
-          ],
-        ),
+          ),
+        ],
       );
     } else {
       return Stack(
@@ -80,8 +123,8 @@ class HomeBoxWidget extends StatelessWidget {
                   style: AppTextStyle.text36,
                 ),
               ),
-              KSizedBox.kHeightSizedBox8,
-              Container(
+              KSizedBox.kHeightSizedBox10,
+              DecoratedBox(
                 decoration: KWidgetTheme.boxDecorNeutralVariant,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -105,11 +148,16 @@ class HomeBoxWidget extends StatelessWidget {
                       ),
                       alignment: Alignment.bottomLeft,
                       child: DoubleButtonWidget(
-                        key: KWidgetkeys.screen.home.boxButton,
+                        widgetKey: KWidgetkeys.screen.home.boxButton,
                         text: context.l10n.detail,
                         textColor: AppColors.materialThemeWhite,
                         color: AppColors.materialThemeBlack,
-                        onPressed: null,
+                        onPressed: () => Scrollable.ensureVisible(
+                          aboutProjectKey.currentContext!,
+                          duration: const Duration(microseconds: 1000),
+                          curve: Curves.easeInOut,
+                        ),
+                        isDesk: isDesk,
                       ),
                     ),
                     KSizedBox.kHeightSizedBox8,
@@ -118,7 +166,12 @@ class HomeBoxWidget extends StatelessWidget {
               ),
             ],
           ),
-          KImage.homeImageMob,
+          KImage.logoHome,
+          ConstrainedBox(
+            constraints:
+                const BoxConstraints(maxHeight: KMinMaxSize.maxHeight220),
+            child: KImage.homeImageMob,
+          ),
         ],
       );
     }

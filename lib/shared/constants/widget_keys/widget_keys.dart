@@ -14,7 +14,6 @@ part 'screen/story.dart';
 part 'screen/work.dart';
 part 'screen/error.dart';
 part 'screen/consultation.dart';
-part 'screen/contact.dart';
 part 'screen/thanks.dart';
 part 'screen/about_us.dart';
 part 'screen/sign_up.dart';
@@ -27,6 +26,7 @@ part 'screen/employer.dart';
 part 'screen/story_add.dart';
 part 'screen/under_construction.dart';
 part 'screen/my_story.dart';
+// part 'screen/contact.dart';
 
 part 'widget/widget.dart';
 part 'widget/question.dart';

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kozak/shared/shared.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 abstract class FooterWidget {
   static List<Widget> get({
@@ -21,7 +23,7 @@ abstract class FooterWidget {
                   ),
                   Expanded(
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: _sections(isDesk: isDesk, context: context),
                     ),
                   ),
@@ -35,7 +37,7 @@ abstract class FooterWidget {
                     ),
                   Expanded(
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: _contact(isDesk: isDesk, context: context),
                     ),
                   ),
@@ -117,7 +119,7 @@ abstract class FooterWidget {
                 children: [
                   Expanded(
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: _sections(isDesk: isDesk, context: context),
                     ),
                   ),
@@ -208,12 +210,15 @@ abstract class FooterWidget {
     required BuildContext context,
   }) =>
       [
-        Text(
-          context.l10n.sections,
-          key: KWidgetkeys.widget.footer.sections,
-          style: isDesk
-              ? AppTextStyle.materialThemeBodyLargeHint
-              : AppTextStyle.materialThemeBodyMediumHint,
+        Padding(
+          padding: const EdgeInsets.only(left: KPadding.kPaddingSize10),
+          child: Text(
+            context.l10n.sections,
+            key: KWidgetkeys.widget.footer.sections,
+            style: isDesk
+                ? AppTextStyle.materialThemeBodyLargeHint
+                : AppTextStyle.materialThemeBodyMediumHint,
+          ),
         ),
         if (isDesk)
           KSizedBox.kHeightSizedBox24
@@ -273,12 +278,15 @@ abstract class FooterWidget {
     required BuildContext context,
   }) =>
       [
-        Text(
-          context.l10n.information,
-          key: KWidgetkeys.widget.footer.information,
-          style: isDesk
-              ? AppTextStyle.materialThemeBodyLargeHint
-              : AppTextStyle.materialThemeBodyMediumHint,
+        Padding(
+          padding: const EdgeInsets.only(left: KPadding.kPaddingSize10),
+          child: Text(
+            context.l10n.information,
+            key: KWidgetkeys.widget.footer.information,
+            style: isDesk
+                ? AppTextStyle.materialThemeBodyLargeHint
+                : AppTextStyle.materialThemeBodyMediumHint,
+          ),
         ),
         if (isDesk)
           KSizedBox.kHeightSizedBox24
@@ -319,34 +327,50 @@ abstract class FooterWidget {
     required BuildContext context,
   }) =>
       [
-        Text(
-          context.l10n.contacts,
-          key: KWidgetkeys.widget.footer.contact,
-          style: isDesk
-              ? AppTextStyle.materialThemeBodyLargeHint
-              : AppTextStyle.materialThemeBodyMediumHint,
+        Padding(
+          padding: const EdgeInsets.only(left: KPadding.kPaddingSize4),
+          child: Text(
+            context.l10n.contacts,
+            key: KWidgetkeys.widget.footer.contact,
+            style: isDesk
+                ? AppTextStyle.materialThemeBodyLargeHint
+                : AppTextStyle.materialThemeBodyMediumHint,
+          ),
         ),
         KSizedBox.kHeightSizedBox16,
-        TextButton(
-          key: KWidgetkeys.widget.footer.emailButton,
-          style: KButtonStyles.zeroPaddingButtonStyle,
-          onPressed: () => context.goNamed(KRoute.contact.name),
-          child: Row(
-            children: [
-              KIcon.meil.copyWith(
-                key: KWidgetkeys.widget.footer.emailIcon,
-              ),
-              KSizedBox.kWidthSizedBox8,
-              Expanded(
-                child: Text(
-                  KAppText.email,
-                  style: isDesk
-                      ? AppTextStyle.materialThemeTitleMedium
-                      : AppTextStyle.materialThemeTitleSmall,
+        Row(
+          children: [
+            KIcon.meil.copyWith(
+              key: KWidgetkeys.widget.footer.emailIcon,
+            ),
+            Expanded(
+              child: Markdown(
+                key: KWidgetkeys.widget.footer.emailText,
+                padding: const EdgeInsets.only(
+                  left: KPadding.kPaddingSize8,
                 ),
+                data: KAppText.email,
+                styleSheet: MarkdownStyleSheet(
+                  a: isDesk
+                      ? AppTextStyle.materialThemeTitleMedium
+                          .copyWith(color: AppColors.materialThemeBlack)
+                      : AppTextStyle.materialThemeTitleSmall
+                          .copyWith(color: AppColors.materialThemeBlack),
+                ),
+                shrinkWrap: true,
+                onTapLink: (text, href, title) async {
+                  final emailUri = Uri(
+                    scheme: 'mailto',
+                    path: KAppText.email,
+                  );
+
+                  if (await canLaunchUrl(emailUri)) {
+                    await launchUrl(emailUri);
+                  }
+                },
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ];
   static List<Widget> _support({
@@ -362,13 +386,11 @@ abstract class FooterWidget {
               : AppTextStyle.materialThemeHeadlineMedium,
         ),
         KSizedBox.kHeightSizedBox16,
-        Align(
-          alignment: Alignment.centerLeft,
-          child: DoubleButtonWidget(
-            key: KWidgetkeys.widget.footer.button,
-            text: context.l10n.contact,
-            onPressed: null,
-          ),
+        DoubleButtonWidget(
+          widgetKey: KWidgetkeys.widget.footer.button,
+          text: context.l10n.contact,
+          onPressed: null,
+          isDesk: isDesk,
         ),
       ];
   static Widget _button({
@@ -379,7 +401,6 @@ abstract class FooterWidget {
   }) =>
       TextButton(
         key: key,
-        style: KButtonStyles.zeroPaddingButtonStyle,
         onPressed: onPressed,
         child: Text(text),
       );

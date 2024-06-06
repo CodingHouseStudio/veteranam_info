@@ -6,25 +6,31 @@ import '../../text_dependency.dart';
 Future<void> workInitialHelper(
   WidgetTester tester,
 ) async {
-  expect(
-    find.byKey(KWidgetkeys.screen.work.boxEmployer),
-    findsOneWidget,
-  );
+  await changeWindowSizeHelper(
+    tester: tester,
+    windowsTest: true,
+    test: () async {
+      expect(
+        find.byKey(KWidgetkeys.screen.work.boxEmployer),
+        findsOneWidget,
+      );
 
-  expect(
-    find.byKey(KWidgetkeys.screen.work.boxEmployee),
-    findsOneWidget,
-  );
+      expect(
+        find.byKey(KWidgetkeys.screen.work.boxEmployee),
+        findsOneWidget,
+      );
 
-  expect(
-    find.byKey(KWidgetkeys.screen.work.subtitle),
-    findsOneWidget,
-  );
+      expect(
+        find.byKey(KWidgetkeys.screen.work.subtitle),
+        findsOneWidget,
+      );
 
-  expect(
-    find.byKey(KWidgetkeys.screen.work.title),
-    findsOneWidget,
-  );
+      expect(
+        find.byKey(KWidgetkeys.screen.work.title),
+        findsOneWidget,
+      );
 
-  await footerHelper(tester);
+      await footerHelper(tester);
+    },
+  );
 }

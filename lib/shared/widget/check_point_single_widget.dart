@@ -34,7 +34,7 @@ class _CheckPointSingleWidgetState extends State<CheckPointSingleWidget> {
           widget.onChanged!;
         }
       },
-      icon: Container(
+      icon: DecoratedBox(
         key: KWidgetkeys.widget.checkPointSingle.widget,
         decoration: isCheck
             ? KWidgetTheme.boxDecorCheckPointFalse

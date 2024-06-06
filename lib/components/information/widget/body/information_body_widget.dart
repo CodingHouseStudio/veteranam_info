@@ -3,6 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
+import 'package:skeletonizer/skeletonizer.dart';
+
+part '../news_widget_list.dart';
 
 class InformationBodyWidget extends StatelessWidget {
   const InformationBodyWidget({super.key});
@@ -39,37 +42,11 @@ class InformationBodyWidget extends StatelessWidget {
         ],
         mainDeskPadding:
             const EdgeInsets.symmetric(horizontal: KPadding.kPaddingSize48),
-        mainChildWidgetsFunction: ({required isDesk}) {
-          final childWidgets = <Widget>[];
-
-          switch (_.loadingStatus) {
-            case LoadingStatus.initial:
-              childWidgets.add(const CircularProgressIndicator.adaptive());
-            case LoadingStatus.loading:
-              childWidgets.add(const CircularProgressIndicator.adaptive());
-            case LoadingStatus.loaded:
-              childWidgets.addAll([
-                if (_.informationModelItems.isNotEmpty)
-                  ...List.generate(_.filteredInformationModelItems.length,
-                      (index) {
-                    return Padding(
-                      padding: index != 0
-                          ? EdgeInsets.only(
-                              top: isDesk
-                                  ? KPadding.kPaddingSize40
-                                  : KPadding.kPaddingSize24,
-                            )
-                          : EdgeInsets.zero,
-                      child: NewsCardWidget(
-                        key: KWidgetkeys.screen.information.card,
-                        informationItem:
-                            _.filteredInformationModelItems.elementAt(index),
-                        isDesk: isDesk,
-                      ),
-                    );
-                  })
-                else
-                  TextButton(
+        mainChildWidgetsFunction: ({required isDesk}) => [
+          if (_.informationModelItems.isEmpty &&
+              _.loadingStatus == LoadingStatus.loaded)
+            Config.isDevelopment
+                ? MockButtonWidget(
                     key: KWidgetkeys.screen.information.buttonMock,
                     onPressed: () {
                       GetIt.I
@@ -79,37 +56,28 @@ class InformationBodyWidget extends StatelessWidget {
                           .read<InformationWatcherBloc>()
                           .add(const InformationWatcherEvent.started());
                     },
-                    child: Text(
-                      context.l10n.getMockData,
-                      style: AppTextStyle.text32,
-                    ),
-                  ),
-              ]);
-
-            case LoadingStatus.error:
-              childWidgets.add(const CircularProgressIndicator.adaptive());
-          }
-          return childWidgets
-            ..addAll([
-              if (isDesk)
-                KSizedBox.kHeightSizedBox56
-              else
-                KSizedBox.kHeightSizedBox24,
-              LoadingButton(
-                key: KWidgetkeys.screen.information.button,
-                isDesk: isDesk,
-                onPressed: () => context.read<InformationWatcherBloc>().add(
-                      const InformationWatcherEvent.loadNextItems(),
-                    ),
-                iconKey: KWidgetkeys.screen.information.buttonIcon,
-                text: context.l10n.moreNews,
-              ),
-              if (isDesk)
-                KSizedBox.kHeightSizedBox56
-              else
-                KSizedBox.kHeightSizedBox24,
-            ]);
-        },
+                  )
+                : const SizedBox.shrink()
+          else
+            ..._newsWidgetList(context: context, isDesk: isDesk),
+          if (isDesk)
+            KSizedBox.kHeightSizedBox56
+          else
+            KSizedBox.kHeightSizedBox24,
+          LoadingButton(
+            key: KWidgetkeys.screen.information.button,
+            isDesk: isDesk,
+            onPressed: () => context.read<InformationWatcherBloc>().add(
+                  const InformationWatcherEvent.loadNextItems(),
+                ),
+            iconKey: KWidgetkeys.screen.information.buttonIcon,
+            text: context.l10n.moreNews,
+          ),
+          if (isDesk)
+            KSizedBox.kHeightSizedBox56
+          else
+            KSizedBox.kHeightSizedBox24,
+        ],
       ),
     );
   }

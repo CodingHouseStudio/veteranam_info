@@ -50,6 +50,9 @@ abstract class KGroupText {
   static const jsonModel = 'json from valid model';
   static const correct = 'Correct';
   static const uncorrect = 'Uncorrect';
+  static const getList = 'Get list';
+  static const getEmptyList = 'Get empty list';
+  static const mockButton = 'Tap on the mock button';
 }
 
 abstract class KTestText {
@@ -196,13 +199,13 @@ abstract class KTestText {
     for (var i = 0; i < 50; i++)
       DiscountModel(
         id: DateTime.now().toLocal().microsecondsSinceEpoch.toString(),
-        discount: KMockText.discount,
+        userId: DateTime.now().toLocal().microsecondsSinceEpoch.toString(),
+        percent: KMockText.discount,
         city: KMockText.cityDiscount,
         service: KMockText.serviceDiscount,
-        discountDescription: KMockText.descriptionDiscount,
+        comment: KMockText.descriptionDiscount,
         date: DateTime.now(),
         instruction: KMockText.instructionDiscount,
-        preInstructionDiscount: KMockText.preInstructionDiscount,
         tags: [],
       ),
   ];
@@ -254,7 +257,6 @@ abstract class KTestText {
   static List<String> routes({required bool hasAccount}) => [
         KRoute.aboutUs.name,
         KRoute.investors.name,
-        KRoute.contact.name,
         KRoute.stories.name,
         KRoute.discounts.name,
         if (hasAccount) KRoute.profile.name else KRoute.login.name,
@@ -296,8 +298,8 @@ abstract class KScreenBlocName {
   static const profile = 'Profile Screen';
   static const story = 'Story Screen';
   static const work = 'Work Screen';
+  //  static const contact = 'Contact Screen';
   static const aboutUs = 'About Us Screen';
-  static const contact = 'Contact Screen';
   static const consultation = 'Consultation Screen';
   static const login = 'Login Screen';
   static const signUp = 'Sign Up Screen';
