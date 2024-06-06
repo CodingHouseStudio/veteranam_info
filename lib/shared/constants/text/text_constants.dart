@@ -1,5 +1,7 @@
 // ignore_for_file: lines_longer_than_80_chars, inference_failure_on_collection_literal
 
+import 'package:kozak/shared/shared.dart';
+
 /// COMMENT: Variables with mock text. It's temporary data we change it when add firebase for this elements
 abstract class KMockText {
   static const dropDownList = [
@@ -112,6 +114,43 @@ abstract class KMockText {
 
   static const image =
       'https://static.vecteezy.com/system/resources/thumbnails/008/492/251/small/back-to-school-illustration-cartoon-character-children-kid-png.png';
+
+  static final discountModel = DiscountModel(
+    id: '',
+    userId: '',
+    company: 'Ескулаб',
+    link: 'https://esculab.com/',
+    discount: 10,
+    title:
+        '20% знижки на аналізи для військових та людей, які внутрішньо переміщені.',
+    category: ['Medical'],
+    categoryUA: ['Медицина'],
+    subcategory: ['Analyses'],
+    subcategoryUA: ['Аналізи'],
+    eligibility: 'Військовослужбовці та ВПО',
+    description: 'Пропозиція діє у всіх відділеннях лабораторії.',
+    requirements: 'Військовим - наявність документу, що підтверджує  професійну'
+        ' приналежність до ЗСУ (військовий квиток з відміткою про несення служби '
+        '“призваний за мобілізацією” від 24 лютого або пізніше, тимчасове посвідчення офіцера з відміткою). '
+        ' Людям, які вимушено переміщені - довідка внутрішньо переміщеної особи або документ'
+        ' із зазначеною пропискою, у населених пунктах на яких ведуться (велися) бойові дії'
+        ' (Житомирська, Вінницька, Миколаївська, Київська, Черкаська, Чернігівська, Полтавська, Сумська,'
+        ' Одеська, Херсонська, Запорізька, Харківська, Дніпропетровська, Кіровоградська, Донецька та Луганська області).'
+        ' *Знижка надається персонально лише військовому (не надається членам сімей). ',
+    territory: 'Всі відділення лабораторії.',
+    location: 'Вся Україна',
+    expiration: 'Діє постійно',
+    exclusions:
+        '- при замовленні досліджень та оплаті їх онлайн на сайті Ескулаб;'
+        ' - до алергологічних, генетичних, бактеріологічних та інших досліджень затверджених переліком;'
+        ' - при замовленні послуги «Виклик медсестри додому» та придбанні Сертифікатів;'
+        ' - не додається до інших знижок, що діють в лабораторії Ескулаб (акцій, соціальні ініціативи, партнерські програми).'
+        ' - взяття біоматеріалу сплачується окремо. Грошовий еквівалент знижки не надається. ',
+    phoneNumber: '+380 800 503 680',
+    directLink:
+        'https://esculab.com/20-vidsotkiv-na-analizy-dlya-viyskovyh-ta-lyudey-yaki-vnutrishno-peremishcheni',
+    dateVerified: DateTime(2024, 6, 3),
+  );
 }
 
 /// README: Variables with specific text
