@@ -43,25 +43,8 @@ abstract class FooterWidget {
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      IconWidget(
-                        key: KWidgetkeys.widget.footer.likedInIcon,
-                        icon: KImage.linkedIn,
-                        background: AppColors.materialThemeSourceSeed,
-                      ),
-                      KSizedBox.kHeightSizedBox24,
-                      IconWidget(
-                        key: KWidgetkeys.widget.footer.instagramIcon,
-                        icon: KImage.instagram,
-                        background: AppColors.materialThemeSourceSeed,
-                      ),
-                      KSizedBox.kHeightSizedBox24,
-                      IconWidget(
-                        key: KWidgetkeys.widget.footer.facebookIcon,
-                        icon: KImage.facebook,
-                        background: AppColors.materialThemeSourceSeed,
-                      ),
-                    ],
+                    children:
+                        _socialMediaLinks(isDesk: isDesk, context: context),
                   ),
                 ],
               ),
@@ -145,25 +128,7 @@ abstract class FooterWidget {
               ],
               KSizedBox.kHeightSizedBox40,
               Wrap(
-                children: [
-                  IconWidget(
-                    key: KWidgetkeys.widget.footer.likedInIcon,
-                    icon: KImage.linkedIn,
-                    background: AppColors.materialThemeSourceSeed,
-                  ),
-                  KSizedBox.kWidthSizedBox16,
-                  IconWidget(
-                    key: KWidgetkeys.widget.footer.instagramIcon,
-                    icon: KImage.instagram,
-                    background: AppColors.materialThemeSourceSeed,
-                  ),
-                  KSizedBox.kWidthSizedBox16,
-                  IconWidget(
-                    key: KWidgetkeys.widget.footer.facebookIcon,
-                    icon: KImage.facebook,
-                    background: AppColors.materialThemeSourceSeed,
-                  ),
-                ],
+                children: _socialMediaLinks(isDesk: isDesk, context: context),
               ),
               KSizedBox.kHeightSizedBox40,
               Container(
@@ -404,4 +369,52 @@ abstract class FooterWidget {
         onPressed: onPressed,
         child: Text(text),
       );
+
+  static List<Widget> _socialMediaLinks({
+    required bool isDesk,
+    required BuildContext context,
+  }) =>
+      [
+        IconButtonWidget(
+          onPressed: () async {
+            if (await canLaunchUrl(Uri.parse(KAppText.linkedIn))) {
+              await launchUrl(
+                Uri.parse(KAppText.linkedIn),
+                mode: LaunchMode.externalApplication,
+              );
+            }
+          },
+          key: KWidgetkeys.widget.footer.likedInIcon,
+          icon: KImage.linkedIn,
+          background: AppColors.materialThemeSourceSeed,
+        ),
+        if (isDesk) KSizedBox.kHeightSizedBox24 else KSizedBox.kWidthSizedBox16,
+        IconButtonWidget(
+          onPressed: () async {
+            if (await canLaunchUrl(Uri.parse(KAppText.instagram))) {
+              await launchUrl(
+                Uri.parse(KAppText.instagram),
+                mode: LaunchMode.externalApplication,
+              );
+            }
+          },
+          key: KWidgetkeys.widget.footer.instagramIcon,
+          icon: KImage.instagram,
+          background: AppColors.materialThemeSourceSeed,
+        ),
+        if (isDesk) KSizedBox.kHeightSizedBox24 else KSizedBox.kWidthSizedBox16,
+        IconButtonWidget(
+          onPressed: () async {
+            if (await canLaunchUrl(Uri.parse(KAppText.facebook))) {
+              await launchUrl(
+                Uri.parse(KAppText.facebook),
+                mode: LaunchMode.externalApplication,
+              );
+            }
+          },
+          key: KWidgetkeys.widget.footer.facebookIcon,
+          icon: KImage.facebook,
+          background: AppColors.materialThemeSourceSeed,
+        ),
+      ];
 }
