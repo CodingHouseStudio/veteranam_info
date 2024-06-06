@@ -12,11 +12,9 @@ extension HomeFailureExtension on SomeFailure {
 
 @freezed
 class HomeWatcherState with _$HomeWatcherState {
-  const factory HomeWatcherState.initial() = HomeWatcherStateInitial;
-  const factory HomeWatcherState.loading() = HomeWatcherStateLoading;
-  const factory HomeWatcherState.success({
+  const factory HomeWatcherState({
     required List<QuestionModel> questionModelItems,
-  }) = HomeWatcherStateSuccess;
-  const factory HomeWatcherState.failure(HomeFailure failure) =
-      HomeWatcherStateFailure;
+    required LoadingStatus loadingStatus,
+    HomeFailure? failure,
+  }) = _Initial;
 }
