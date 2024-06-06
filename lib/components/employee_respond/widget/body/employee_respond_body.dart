@@ -39,7 +39,6 @@ class EmployeeRespondBodyWidget extends StatelessWidget {
               ],
             ),
           ],
-
           mainDecoration: KWidgetTheme.boxDecorationWidget,
           mainPadding: ({required isDesk, required maxWidth}) =>
               EdgeInsets.symmetric(
@@ -58,10 +57,6 @@ class EmployeeRespondBodyWidget extends StatelessWidget {
           ),
         );
       },
-
-        ),
-      ],
-
     );
   }
 }
