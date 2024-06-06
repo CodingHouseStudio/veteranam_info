@@ -22,7 +22,9 @@ List<Widget> _employeeRespondContainerWidgetList({
     KSizedBox.kHeightSizedBox8,
     TextFieldWidget(
       widgetKey: KWidgetkeys.screen.employeeRespond.emailField,
-      onChanged: null,
+      onChanged: (value) => context.read<EmployeeRespondBloc>().add(
+            EmployeeRespondEvent.emailUpdated(value),
+          ),
       hintText: context.l10n.emailHint,
       isDesk: isDesk,
       errorText: context.read<EmployeeRespondBloc>().state.formState ==
@@ -42,7 +44,9 @@ List<Widget> _employeeRespondContainerWidgetList({
     KSizedBox.kHeightSizedBox8,
     TextFieldWidget(
       widgetKey: KWidgetkeys.screen.employeeRespond.phoneNumberField,
-      onChanged: null,
+      onChanged: (value) => context.read<EmployeeRespondBloc>().add(
+            EmployeeRespondEvent.phoneUpdated(value),
+          ),
       hintText: context.l10n.phoneNumberHint,
       isDesk: isDesk,
       errorText: context.read<EmployeeRespondBloc>().state.formState ==
@@ -68,11 +72,9 @@ List<Widget> _employeeRespondContainerWidgetList({
     TextButton.icon(
       onPressed: context.read<EmployeeRespondBloc>().state.noResume
           ? null
-          : () {
-              context.read<EmployeeRespondBloc>().add(
-                    const EmployeeRespondEvent.loadResumeClicked(),
-                  );
-            },
+          : () => context.read<EmployeeRespondBloc>().add(
+                const EmployeeRespondEvent.loadResumeClicked(),
+              ),
       style: KButtonStyles.borderButtonStyle,
       icon: Padding(
         padding: EdgeInsets.symmetric(
@@ -105,9 +107,12 @@ List<Widget> _employeeRespondContainerWidgetList({
             left: KPadding.kPaddingSize32,
             right: KPadding.kPaddingSize16,
           ),
-          child: CheckPointSingleWidget(
+          child: CheckPointWidget(
             key: KWidgetkeys.screen.employeeRespond.checkPoint,
-            onChanged: null,
+            isCheck: context.read<EmployeeRespondBloc>().state.noResume,
+            onChanged: () => context.read<EmployeeRespondBloc>().add(
+                  const EmployeeRespondEvent.noResumeChanged(),
+                ),
           ),
         ),
         Text(

@@ -13,10 +13,12 @@ void main() {
   group('${KScreenBlocName.workEmployee}  ${KGroupText.repository} ', () {
     late IWorkRepository mockWorkRepository;
     late FirestoreService mockFirestoreService;
+    late StorageService mockStorageService;
     group('${KGroupText.successfulGet} ', () {
       setUp(() {
         ExtendedDateTime.id = '';
         mockFirestoreService = MockFirestoreService();
+        mockStorageService = MockStorageService();
         when(mockFirestoreService.getWorks()).thenAnswer(
           (_) => Stream.value(KTestText.workModelItems),
         );
@@ -25,10 +27,17 @@ void main() {
         ).thenAnswer(
           (realInvocation) async {},
         );
+
         if (GetIt.I.isRegistered<FirestoreService>()) {
           GetIt.I.unregister<FirestoreService>();
         }
+
+        if (GetIt.I.isRegistered<StorageService>()) {
+          GetIt.I.unregister<StorageService>();
+        }
+
         GetIt.I.registerSingleton(mockFirestoreService);
+        GetIt.I.registerSingleton(mockStorageService);
 
         mockWorkRepository = WorkRepository();
       });
@@ -54,12 +63,15 @@ void main() {
             KGroupText.failureGet,
           ),
         );
-
         if (GetIt.I.isRegistered<FirestoreService>()) {
           GetIt.I.unregister<FirestoreService>();
         }
-        GetIt.I.registerSingleton(mockFirestoreService);
 
+        if (GetIt.I.isRegistered<StorageService>()) {
+          GetIt.I.unregister<StorageService>();
+        }
+        GetIt.I.registerSingleton(mockFirestoreService);
+        GetIt.I.registerSingleton(mockStorageService);
         mockWorkRepository = WorkRepository();
       });
       test('information', () async {

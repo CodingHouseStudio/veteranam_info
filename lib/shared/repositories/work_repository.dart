@@ -7,6 +7,7 @@ import 'package:kozak/shared/shared.dart';
 @Singleton(as: IWorkRepository)
 class WorkRepository implements IWorkRepository {
   final FirestoreService _firestoreService = GetIt.I.get<FirestoreService>();
+  final StorageService _storageService = GetIt.I.get<StorageService>();
   @override
   Stream<List<WorkModel>> getWorks() => _firestoreService.getWorks();
 
@@ -33,7 +34,14 @@ class WorkRepository implements IWorkRepository {
     EmployeeRespondModel respond,
   ) async {
     try {
+      if (respond.resume != null) {
+        await _storageService.saveRespond(
+          resumeModel: respond.resume!.first,
+          respondId: respond.id,
+        );
+      }
       await _firestoreService.sendRespond(respond);
+
       return const Right(true);
     } on FirebaseException catch (e) {
       return Left(SendFailure.fromCode(e).status);

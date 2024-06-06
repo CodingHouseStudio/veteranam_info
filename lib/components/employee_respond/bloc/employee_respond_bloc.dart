@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
 
 import 'package:kozak/shared/shared.dart';
@@ -33,6 +34,8 @@ class EmployeeRespondBloc
   }
 
   final IWorkRepository _employeeRespondRepository;
+  final filePicker = filePickerValue;
+  static ImagePicker filePickerValue = ImagePicker();
 
   void _onEmailUpdated(
     _EmailUpdated event,
@@ -51,7 +54,7 @@ class EmployeeRespondBloc
     _PhoneUpdated event,
     Emitter<EmployeeRespondState> emit,
   ) {
-    final phoneFieldModel = PhoneNumberFieldModel.dirty(event.phone.toString());
+    final phoneFieldModel = PhoneNumberFieldModel.dirty(event.phone);
     emit(
       state.copyWith(
         phoneNumber: phoneFieldModel,
@@ -68,7 +71,6 @@ class EmployeeRespondBloc
       [
         state.email,
         state.phoneNumber,
-        if (state.noResume) state.resume,
       ],
     )) {
       emit(state.copyWith(formState: EmployeeRespondEnum.sendingData));
@@ -76,7 +78,15 @@ class EmployeeRespondBloc
         EmployeeRespondModel(
           id: ExtendedDateTime.id,
           email: state.email.value,
-          resume: state.resume.value,
+          resume: state.resume.value != null
+              ? [
+                  ResumeModel(
+                    downloadURL: state.resume.value!.path,
+                    name: state.resume.value!.name,
+                    ref: state.resume.value!.path,
+                  ),
+                ]
+              : null,
           noResume: state.noResume,
           phoneNumber: state.phoneNumber.value!,
         ),
@@ -89,11 +99,7 @@ class EmployeeRespondBloc
           ),
         ),
         (r) => emit(
-          const EmployeeRespondState(
-            email: EmailFieldModel.pure(),
-            phoneNumber: PhoneNumberFieldModel.pure(),
-            resume: ResumeFieldModel.pure(),
-            noResume: false,
+          state.copyWith(
             formState: EmployeeRespondEnum.success,
             failure: EmployeeRespondFailure.none,
           ),
@@ -110,19 +116,23 @@ class EmployeeRespondBloc
   ) {
     emit(
       state.copyWith(
-        noResume: event.noResume,
+        noResume: !state.noResume,
         formState: EmployeeRespondEnum.initial,
       ),
     );
   }
 
-  void _onLoadResumeClicked(
+  Future<void> _onLoadResumeClicked(
     _LoadResumeClicked event,
     Emitter<EmployeeRespondState> emit,
-  ) {
+  ) async {
+    final resumeFieldModel = ResumeFieldModel.dirty(
+      await filePicker.pickMedia(),
+    );
+    if (resumeFieldModel.value == null) return;
     emit(
       state.copyWith(
-        resume: state.resume,
+        resume: resumeFieldModel,
         formState: EmployeeRespondEnum.initial,
       ),
     );

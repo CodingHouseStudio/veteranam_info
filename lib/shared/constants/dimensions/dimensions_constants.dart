@@ -8,6 +8,6 @@ abstract class KDimensions {
   static const pageItems = 3;
   static const loadItems = 1;
   static const leftCardPaddingMultiply = 0.5;
-  static const respondPaddingMultiply = 0.2;
+  static const respondPaddingMultiply = 0.1;
   static const daysBetweenFeedback = 7;
 }

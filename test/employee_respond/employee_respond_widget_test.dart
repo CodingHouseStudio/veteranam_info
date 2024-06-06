@@ -41,7 +41,6 @@ void main() {
           mockGoRouter: mockGoRouter,
           mockWorkRepository: mockWorkRepository,
         );
-
         await employeeRespondInitialHelper(tester);
       });
     });

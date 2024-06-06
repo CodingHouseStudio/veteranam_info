@@ -1,38 +1,19 @@
-import 'package:flutter/material.dart';
 import 'package:formz/formz.dart';
-import 'package:kozak/shared/shared.dart';
+import 'package:image_picker/image_picker.dart';
 
-enum ResumeFieldModelValidationError { empty }
-
-extension ResumeFieldModelValidationErrorEmpl
-    on ResumeFieldModelValidationError? {
-  String? value(BuildContext context) {
-    switch (this) {
-      case ResumeFieldModelValidationError.empty:
-        return context.l10n.fieldCannotBeEmpty;
-      case null:
-        return null;
-    }
-  }
+enum ResumeFieldModelValidationError {
+  empty,
 }
 
 class ResumeFieldModel
-    extends FormzInput<String?, ResumeFieldModelValidationError> {
-  const ResumeFieldModel.dirty(
-    super.value, {
-    this.isCheckboxChecked = false,
-  }) : super.dirty();
+    extends FormzInput<XFile?, ResumeFieldModelValidationError> {
+  const ResumeFieldModel.pure() : super.pure(null);
 
-  const ResumeFieldModel.pure({this.isCheckboxChecked = false})
-      : super.pure(null);
-  final bool isCheckboxChecked;
+  const ResumeFieldModel.dirty([super.value]) : super.dirty();
 
   @override
-  ResumeFieldModelValidationError? validator(String? value) {
-    if (isCheckboxChecked) {
-      return null;
-    }
-    if (value == null || value.isEmpty) {
+  ResumeFieldModelValidationError? validator(XFile? value) {
+    if (value == null || value.path.isEmpty) {
       return ResumeFieldModelValidationError.empty;
     }
     return null;

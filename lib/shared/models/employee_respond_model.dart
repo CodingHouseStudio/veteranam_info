@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:kozak/shared/shared.dart';
 
 part 'employee_respond_model.freezed.dart';
 part 'employee_respond_model.g.dart';
@@ -9,8 +10,8 @@ class EmployeeRespondModel with _$EmployeeRespondModel {
     required String id,
     required String email,
     required String phoneNumber,
-    required String? resume,
     required bool noResume,
+    @ResumeConverter() List<ResumeModel>? resume,
   }) = _EmployeeRespondModel;
 
   factory EmployeeRespondModel.fromJson(Map<String, dynamic> json) =>
