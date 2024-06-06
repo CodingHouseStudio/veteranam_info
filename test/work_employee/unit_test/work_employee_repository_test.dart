@@ -58,6 +58,7 @@ void main() {
       setUp(() {
         ExtendedDateTime.id = '';
         mockFirestoreService = MockFirestoreService();
+        mockStorageService = MockStorageService();
         when(mockFirestoreService.getWorks()).thenAnswer(
           (realInvocation) => Stream.error(
             KGroupText.failureGet,
