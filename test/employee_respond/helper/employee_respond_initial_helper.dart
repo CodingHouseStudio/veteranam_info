@@ -61,7 +61,7 @@ Future<void> employeeRespondInitialHelper(
     findsOneWidget,
   );
 
-  await chekPointSingleHelper(tester);
+  await chekPointHelper(tester);
 
   expect(
     find.byKey(KWidgetkeys.screen.employeeRespond.noResume),

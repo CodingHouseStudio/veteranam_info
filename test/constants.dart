@@ -77,7 +77,7 @@ abstract class KTestText {
   static const field = 'field_test';
   static const fieldEmpty = '';
 
-  static const phoneNumber = '+380990000000';
+  static const phoneNumber = '+3809900000';
 
   static final questionModelItems = <QuestionModel>[
     QuestionModel(
@@ -160,6 +160,20 @@ abstract class KTestText {
   );
   static const imageModels = [
     ImageModel(
+      downloadURL: 'test_image',
+      name: 'test_image',
+      ref: 'test_image',
+    ),
+  ];
+  static const resumeModel = ResumeModel(
+    downloadURL: 'test_URL',
+    lastModifiedTS: 1,
+    name: 'test_name',
+    ref: 'test_name',
+    type: 'test_type',
+  );
+  static const resumeModels = [
+    ResumeModel(
       downloadURL: 'test_image',
       name: 'test_image',
       ref: 'test_image',
@@ -252,7 +266,7 @@ abstract class KTestText {
     id: dateTime.microsecondsSinceEpoch.toString(),
     email: KTestText.userEmail,
     phoneNumber: KTestText.phoneNumber,
-    resume: null,
+    resume: resumeModels,
     noResume: false,
   );
 }
