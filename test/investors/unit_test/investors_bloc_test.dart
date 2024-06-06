@@ -32,8 +32,12 @@ void main() {
         bloc.add(const InvestorsWatcherEvent.started());
       },
       expect: () async => [
-        isA<InvestorsWatcherStateLoading>(),
-        isA<InvestorsWatcherStateSuccess>(),
+        predicate<InvestorsWatcherState>(
+          (state) => state.loadingStatus == LoadingStatus.loading,
+        ),
+        predicate<InvestorsWatcherState>(
+          (state) => state.loadingStatus == LoadingStatus.loaded,
+        ),
       ],
     );
     blocTest<InvestorsWatcherBloc, InvestorsWatcherState>(
@@ -46,8 +50,12 @@ void main() {
         bloc.add(const InvestorsWatcherEvent.started());
       },
       expect: () async => [
-        isA<InvestorsWatcherStateLoading>(),
-        isA<InvestorsWatcherStateFailure>(),
+        predicate<InvestorsWatcherState>(
+          (state) => state.loadingStatus == LoadingStatus.loading,
+        ),
+        predicate<InvestorsWatcherState>(
+          (state) => state.loadingStatus == LoadingStatus.error,
+        ),
       ],
     );
   });

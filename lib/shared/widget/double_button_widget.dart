@@ -88,7 +88,7 @@ class _DoubleButtonWidgetDeskState extends State<_DoubleButtonWidgetDesk> {
         alignment: Alignment.centerRight,
         children: [
           AnimatedPadding(
-            duration: Duration(
+            duration: const Duration(
               milliseconds: KDimensions.doubleButtonAnimationDuration,
             ),
             padding: isHovering
@@ -115,7 +115,7 @@ class _DoubleButtonWidgetDeskState extends State<_DoubleButtonWidgetDesk> {
               begin: 0,
               end: isHovering ? pi / 4 : 0,
             ),
-            duration: Duration(
+            duration: const Duration(
               milliseconds: KDimensions.doubleButtonAnimationDuration,
             ),
             builder: (BuildContext context, double angle, Widget? child) {
