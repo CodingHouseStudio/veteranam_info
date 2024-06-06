@@ -14,14 +14,17 @@ Future<void> cardsScreenHelper({
     test: () async {
       await scrollingHelper(
         tester: tester,
-        itemKey: KWidgetkeys.screen.home.storyBox,
+        itemKey: KWidgetkeys.screen.home.boxButton,
       );
 
-      await scrollingHelper(
-        tester: tester,
-        itemKey: KWidgetkeys.widget.box.text,
-        first: false,
+      expect(
+        find.byKey(KWidgetkeys.screen.home.boxButton),
+        findsOneWidget,
       );
+
+      await tester.tap(find.byKey(KWidgetkeys.screen.home.boxButton));
+
+      await tester.pumpAndSettle();
 
       await scrollingHelper(
         tester: tester,
@@ -41,6 +44,11 @@ Future<void> cardsScreenHelper({
       await scrollingHelper(
         tester: tester,
         itemKey: KWidgetkeys.screen.home.discountButton,
+      );
+
+      expect(
+        find.byKey(KWidgetkeys.screen.home.discountButton),
+        findsOneWidget,
       );
 
       await tester.tap(find.byKey(KWidgetkeys.screen.home.discountButton));
