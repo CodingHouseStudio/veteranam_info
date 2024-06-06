@@ -15,24 +15,17 @@ class DiscountRepository implements IDiscountRepository {
 
   @override
   Future<void> addMockDiscountItems() async {
-    final tagsSnapshot = await _firestoreService.getTags().first;
+    // final tagsSnapshot = await _firestoreService.getTags().first;
 
-    final tagMap = {
-      for (final tag in tagsSnapshot) tag.id: tag,
-    };
+    // final tagMap = {
+    //   for (final tag in tagsSnapshot) tag.id: tag,
+    // };
 
-    for (var i = 0; i < tagMap.length; i++) {
+    for (var i = 0; i < 5; i++) {
       await _firestoreService.addDiscount(
-        DiscountModel(
+        KMockText.discountModel.copyWith(
           id: '${ExtendedDateTime.id}$i',
           userId: '${ExtendedDateTime.id}$i',
-          service: KMockText.serviceDiscount,
-          percent: KMockText.discount,
-          city: KMockText.cityDiscount,
-          comment: KMockText.descriptionDiscount,
-          date: DateTime.now(),
-          instruction: KMockText.instructionDiscount,
-          tags: tagMap.values.map((tag) => tag.title).toList(),
         ),
       );
     }
