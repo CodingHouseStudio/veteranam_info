@@ -39,7 +39,7 @@ class WorkRequestCardWidget extends StatelessWidget {
             key: KWidgetkeys.widget.workRequestCard.button,
             isDesk: isDesk,
             text: context.l10n.leaveRequest,
-            onPressed: null,
+            onPressed: () => context.goNamedWithScroll(KRoute.helpFindJob.name),
           ),
         ],
       ),

@@ -251,4 +251,28 @@ class FirestoreService {
         .doc(tags.id)
         .set(tags.toJson());
   }
+
+  Stream<List<RequestModel>> getRequests() => _db
+          .collection('work')
+          .snapshots(includeMetadataChanges: true)
+          .map((snapshot) {
+        for (final change in snapshot.docChanges) {
+          if (change.type == DocumentChangeType.added) {
+            final source =
+                (snapshot.metadata.isFromCache) ? 'local cache' : 'server';
+            debugPrint('Data fetched from $source');
+          }
+        }
+        return snapshot.docs
+            .map((doc) => RequestModel.fromJson(doc.data()))
+            .toList();
+      });
+
+  Future<void> addRequest(RequestModel request) {
+    return _db.collection('work').doc(request.id).set(request.toJson());
+  }
+
+  Future<void> sendEmployeeRequest(RequestModel request) {
+    return _db.collection('work').doc(request.id).set(request.toJson());
+  }
 }

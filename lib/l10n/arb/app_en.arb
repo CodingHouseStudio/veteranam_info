@@ -172,5 +172,18 @@
   "jobsVacancies": "Jobs and vacancies",
   "jobsVacanciesSubtitle": "Information on current vacancies specifically targeted at veterans, as well as resources for job search and career development.",
   "toVacancy": "To vacancies",
-  "toGetItYouNeed": "To get it you need:"
+  "toGetItYouNeed": "To get it you need:",
+  "helpFindJobTitle" : "Leave a request",
+  "helpFindJobSubtitle" : "Didn't find the desired vacancy? We will help you! Fill out the form below and we will find a suitable job for you.",
+  "back" : "Back",
+  "writeWishesTitle" : "Write your wishes",
+  "writeWishesSubtitle" : "Please indicate your preferred city of work, field of activity, and describe your skills and knowledge so that we can offer you the most relevant vacancies.",
+  "desiredPosition" : "Write the desired position",
+  "positionMain": "Position",
+  "selectCategory" : "Choose a field of activity",
+  "desiredWishes" : "Tell us a little bit about yourself, your special skills or abilities, and describe your wishes for future work.",
+  "writeWishes"  : "Write wishes",
+  "sendARequest" : "Send a request",
+  "details" : "Details",
+  "skills" : "Skills"
 }

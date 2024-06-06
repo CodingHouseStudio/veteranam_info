@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:kozak/shared/shared.dart';
 
 class PageIndicatorControl extends StatefulWidget {
-  const PageIndicatorControl({required this.pageCount, super.key});
+  const PageIndicatorControl({
+    required this.pageCount,
+    required this.isDesk,
+    super.key,
+  });
 
+  final bool isDesk;
   final int pageCount;
 
   @override
@@ -44,6 +49,8 @@ class PageIndicatorControlState extends State<PageIndicatorControl> {
                   painter: ViewpagerIndicatorWidget(
                     pageCount: widget.pageCount,
                     selectedPage: currentPage,
+                    pageTitles: [],
+                    isDesk: widget.isDesk,
                   ),
                 ),
               ),

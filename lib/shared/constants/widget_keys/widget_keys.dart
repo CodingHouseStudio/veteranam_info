@@ -13,16 +13,23 @@ part 'screen/profile.dart';
 part 'screen/story.dart';
 part 'screen/work.dart';
 part 'screen/error.dart';
+
+part 'screen/help_find_job.dart';
+
 part 'screen/consultation.dart';
 part 'screen/thanks.dart';
 part 'screen/about_us.dart';
 part 'screen/sign_up.dart';
 part 'screen/profile_saves.dart';
 part 'screen/login.dart';
+
 part 'screen/questions_form.dart';
+
 part 'screen/work_employee.dart';
 part 'screen/employee_respond.dart';
+
 part 'screen/employer.dart';
+
 part 'screen/story_add.dart';
 part 'screen/under_construction.dart';
 part 'screen/my_story.dart';
@@ -31,6 +38,9 @@ part 'screen/my_story.dart';
 part 'widget/widget.dart';
 part 'widget/question.dart';
 part 'widget/nawbar.dart';
+
+part 'widget/help_find_job_widget.dart';
+
 part 'widget/filter.dart';
 part 'widget/drop_list_field.dart';
 part 'widget/footer.dart';
@@ -61,6 +71,7 @@ part 'widget/profile_card_widget.dart';
 part 'widget/feedback_box.dart';
 part 'widget/rate.dart';
 part 'widget/chat_input.dart';
+
 part 'widget/work_request_card.dart';
 part 'widget/check_point_single.dart';
 part 'widget/dialogs.dart';

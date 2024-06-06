@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dartz/dartz.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kozak/shared/shared.dart';
@@ -5,6 +7,7 @@ import 'package:kozak/shared/shared.dart';
 @Singleton(as: IWorkRepository)
 class WorkRepository implements IWorkRepository {
   final FirestoreService _firestoreService = GetIt.I.get<FirestoreService>();
+
   @override
   Stream<List<WorkModel>> getWorks() => _firestoreService.getWorks();
 
@@ -23,6 +26,20 @@ class WorkRepository implements IWorkRepository {
           category: KMockText.workCategory,
         ),
       );
+    }
+  }
+
+  @override
+  Future<Either<SomeFailure, bool>> sendEmployeeRequest(
+    RequestModel request,
+  ) async {
+    try {
+      await _firestoreService.addRequest(request);
+      return const Right(true);
+    } on FirebaseException catch (e) {
+      return Left(SendFailure.fromCode(e).status);
+    } catch (e) {
+      return const Left(SomeFailure.serverError());
     }
   }
 }

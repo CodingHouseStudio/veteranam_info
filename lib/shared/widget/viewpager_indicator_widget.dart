@@ -3,16 +3,20 @@ import 'package:flutter/material.dart';
 class ViewpagerIndicatorWidget extends CustomPainter {
   ViewpagerIndicatorWidget({
     required this.pageCount,
+    required this.pageTitles,
+    required this.isDesk,
     this.selectedCircleRadius = 13.0,
     this.unselectedCircleRadius = 10.0,
     this.lineWidth = 3.0,
     this.lineHeight = 7.0,
-    this.selectedColor = Colors.green,
+    this.selectedColor = Colors.white,
     this.unselectedColor = Colors.grey,
     this.selectedPage = 0,
   });
 
+  final bool isDesk;
   final int pageCount;
+  final List<String> pageTitles;
   final double selectedCircleRadius;
   final double unselectedCircleRadius;
   final double lineWidth;
@@ -35,16 +39,16 @@ class ViewpagerIndicatorWidget extends CustomPainter {
     );
 
     const edgeMargin = 20.0;
+    final step = (size.width - 2 * edgeMargin) / (pageCount - 1);
 
-    final positions = <double>[
-      edgeMargin,
-      size.width / 2,
-      size.width - edgeMargin,
-    ];
+    final textPainter = TextPainter(
+      textAlign: TextAlign.center,
+      textDirection: TextDirection.ltr,
+    );
 
     for (var i = 0; i < pageCount; i++) {
+      final circleX = edgeMargin + i * step;
       final circleY = size.height / 2;
-      final circleX = positions[i];
 
       paint
         ..color = unselectedColor
@@ -63,13 +67,30 @@ class ViewpagerIndicatorWidget extends CustomPainter {
           paint,
         );
       }
+
+      final textSpan = TextSpan(
+        text: pageTitles[i],
+        style: isDesk
+            ? const TextStyle(fontSize: 24)
+            : const TextStyle(fontSize: 16),
+      );
+      textPainter
+        ..text = textSpan
+        ..layout()
+        ..paint(
+          canvas,
+          Offset(
+            circleX - textPainter.width / 2,
+            circleY - selectedCircleRadius - textPainter.height - 5,
+          ),
+        );
     }
 
     double lineEndX;
     if (selectedPage == pageCount - 1) {
       lineEndX = size.width;
     } else {
-      lineEndX = positions[selectedPage] + unselectedCircleRadius;
+      lineEndX = edgeMargin + selectedPage * step + unselectedCircleRadius;
     }
 
     paint
@@ -87,6 +108,7 @@ class ViewpagerIndicatorWidget extends CustomPainter {
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) {
     return oldDelegate is ViewpagerIndicatorWidget &&
-        selectedPage != oldDelegate.selectedPage;
+        (selectedPage != oldDelegate.selectedPage ||
+            pageTitles != oldDelegate.pageTitles);
   }
 }

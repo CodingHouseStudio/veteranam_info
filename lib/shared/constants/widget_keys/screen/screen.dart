@@ -25,4 +25,5 @@ class _ScreenKeys {
   final myStory = _MyStoryKeys();
   // final contact = _ContactKeys();
   final underConstruction = _UnderConstructionKeys();
+  final helpFindJob = _HelpFindJob();
 }
