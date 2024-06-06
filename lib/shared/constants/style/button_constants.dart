@@ -192,4 +192,12 @@ abstract class KButtonStyles {
       ),
     ),
   );
+  static const iconButtonStyle = ButtonStyle(
+    shape: MaterialStatePropertyAll(
+      RoundedRectangleBorder(
+        borderRadius: KBorderRadius.kBorderRadiusL,
+      ),
+    ),
+    backgroundColor: MaterialStatePropertyAll(AppColors.materialThemeWhite),
+  );
 }
