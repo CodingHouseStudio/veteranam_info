@@ -12,7 +12,12 @@ class InvestorsWatcherBloc
     extends Bloc<InvestorsWatcherEvent, InvestorsWatcherState> {
   InvestorsWatcherBloc({required IInvestorsRepository investorsRepository})
       : _investorsRepository = investorsRepository,
-        super(const InvestorsWatcherState.initial()) {
+        super(
+          const InvestorsWatcherState(
+            fundItems: [],
+            loadingStatus: LoadingStatus.initial,
+          ),
+        ) {
     on<_Started>(_onStarted);
   }
   final IInvestorsRepository _investorsRepository;
@@ -20,14 +25,22 @@ class InvestorsWatcherBloc
     _Started event,
     Emitter<InvestorsWatcherState> emit,
   ) async {
-    emit(const InvestorsWatcherState.loading());
+    emit(state.copyWith(loadingStatus: LoadingStatus.loading));
 
     final result = await _investorsRepository.getFunds();
     result.fold(
       (l) => emit(
-        InvestorsWatcherState.failure(l.toInvestors()),
+        state.copyWith(
+          failure: l.toInvestors(),
+          loadingStatus: LoadingStatus.error,
+        ),
       ),
-      (r) => emit(InvestorsWatcherState.success(fundItems: r)),
+      (r) => emit(
+        InvestorsWatcherState(
+          fundItems: r,
+          loadingStatus: LoadingStatus.loaded,
+        ),
+      ),
     );
   }
 }

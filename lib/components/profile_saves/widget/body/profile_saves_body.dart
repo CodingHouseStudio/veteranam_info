@@ -52,7 +52,14 @@ class ProfileSavesBody extends StatelessWidget {
                 WorkCardWidget(
                   isSaved: false,
                   key: KWidgetkeys.screen.profileSaves.workCard,
-                  workModel: KMockText.workModel,
+                  workModel: const WorkModel(
+                    id: '',
+                    title: KMockText.workTitle,
+                    price: KMockText.workPrice,
+                    employerContact: KMockText.workCity,
+                    companyName: KMockText.workEmployer,
+                    description: KMockText.workDescription,
+                  ),
                   isDesk: isDesk,
                 ),
                 if (isDesk)
