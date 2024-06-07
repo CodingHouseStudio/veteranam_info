@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kozak/shared/shared.dart';
+import 'package:share_plus/share_plus.dart';
 
 class DiscountsCardWidget extends StatelessWidget {
   const DiscountsCardWidget({
@@ -94,8 +94,12 @@ class DiscountsCardWidget extends StatelessWidget {
             icon: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                  child: KIcon.share,
+                IconButton(
+                  onPressed: () async {
+                    final linkedInUri = Uri.parse(KAppText.linkedIn);
+                    await Share.shareUri(linkedInUri);
+                  },
+                  icon: KIcon.share,
                 ),
                 KSizedBox.kWidthSizedBox16,
                 Container(
