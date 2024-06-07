@@ -176,14 +176,12 @@ class _NawbarWidgetImplematationState
                 ),
               )
             else if (!isFocused)
-              InkWell(
-                onTap: () => context.goNamedWithScroll(KRoute.login.name),
-                child: IconWidget(
-                  key: KWidgetkeys.widget.nawbar.iconPerson,
-                  icon: KIcon.person
-                      .copyWith(color: AppColors.materialThemeWhite),
-                  background: AppColors.materialThemeBlack,
-                ),
+              IconButtonWidget(
+                key: KWidgetkeys.widget.nawbar.iconPerson,
+                onPressed: () => context.goNamedWithScroll(KRoute.login.name),
+                icon:
+                    KIcon.person.copyWith(color: AppColors.materialThemeWhite),
+                background: AppColors.materialThemeBlack,
               ),
           if (context.read<AuthenticationBloc>().state.status ==
                   AuthenticationStatus.authenticated &&

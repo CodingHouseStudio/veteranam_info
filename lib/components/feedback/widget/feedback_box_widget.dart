@@ -6,7 +6,7 @@ part of 'body/feedback_body_widget.dart';
 //       FeedbackEnum.sendingMessage) {
 //     WidgetsBinding.instance.addPostFrameCallback((_) {
 //       Scrollable.ensureVisible(
-//         widget.feedbackBoxKey.currentContext!,
+//         screen.feedbackKboxey.currentContext!,
 //       );
 //     });
 //   }
@@ -37,18 +37,18 @@ List<Widget> _feedbackBoxWidgetList({
                           children: [
                             Text(
                               context.l10n.thankYou,
-                              key: KWidgetkeys.widget.feedbackBox.title,
+                              key: KWidgetkeys.screen.feedback.boxTitle,
                               style: AppTextStyle.text96,
                             ),
                             KSizedBox.kHeightSizedBox32,
                             Text(
                               context.l10n.feedbackBoxSubtitle,
-                              key: KWidgetkeys.widget.feedbackBox.subtitle,
+                              key: KWidgetkeys.screen.feedback.boxSubtitle,
                               style: AppTextStyle.text40,
                             ),
                             KSizedBox.kHeightSizedBox48,
                             ButtonWidget(
-                              key: KWidgetkeys.widget.feedbackBox.button,
+                              key: KWidgetkeys.screen.feedback.boxButton,
                               text: context.l10n.sendMore,
                               onPressed: sendAgain,
                               isDesk: true,
@@ -62,7 +62,7 @@ List<Widget> _feedbackBoxWidgetList({
                       child: Column(
                         children: [
                           BoxWidget(
-                            key: KWidgetkeys.widget.feedbackBox.informationBox,
+                            key: KWidgetkeys.screen.feedback.boxInformationBox,
                             text: context.l10n.information,
                             onTap: () => context.goNamed(
                               KRoute.information.name,
@@ -71,14 +71,14 @@ List<Widget> _feedbackBoxWidgetList({
                           ),
                           KSizedBox.kHeightSizedBox24,
                           BoxWidget(
-                            key: KWidgetkeys.widget.feedbackBox.investorsBox,
+                            key: KWidgetkeys.screen.feedback.boxInvestorsBox,
                             text: context.l10n.investors,
                             onTap: () => context.goNamed(KRoute.investors.name),
                             isDesk: true,
                           ),
                           KSizedBox.kHeightSizedBox24,
                           BoxWidget(
-                            key: KWidgetkeys.widget.feedbackBox.storyBox,
+                            key: KWidgetkeys.screen.feedback.boxStoryBox,
                             text: context.l10n.stories,
                             onTap: () => context.goNamed(KRoute.stories.name),
                             isDesk: true,
@@ -94,39 +94,39 @@ List<Widget> _feedbackBoxWidgetList({
         : [
             Text(
               context.l10n.thankYou,
-              key: KWidgetkeys.widget.feedbackBox.title,
+              key: KWidgetkeys.screen.feedback.boxTitle,
               style: AppTextStyle.text48,
             ),
             KSizedBox.kHeightSizedBox16,
             Text(
               context.l10n.feedbackBoxSubtitle,
-              key: KWidgetkeys.widget.feedbackBox.subtitle,
+              key: KWidgetkeys.screen.feedback.boxSubtitle,
               style: AppTextStyle.text24,
             ),
             KSizedBox.kHeightSizedBox24,
             ButtonWidget(
-              key: KWidgetkeys.widget.feedbackBox.button,
+              key: KWidgetkeys.screen.feedback.boxButton,
               text: context.l10n.sendMore,
               onPressed: sendAgain,
               isDesk: false,
             ),
             KSizedBox.kHeightSizedBox24,
             BoxWidget(
-              key: KWidgetkeys.widget.feedbackBox.informationBox,
+              key: KWidgetkeys.screen.feedback.boxInformationBox,
               text: context.l10n.information,
               onTap: () => context.goNamed(KRoute.information.name),
               isDesk: false,
             ),
             KSizedBox.kHeightSizedBox24,
             BoxWidget(
-              key: KWidgetkeys.widget.feedbackBox.investorsBox,
+              key: KWidgetkeys.screen.feedback.boxInvestorsBox,
               text: context.l10n.investors,
               onTap: () => context.goNamed(KRoute.investors.name),
               isDesk: false,
             ),
             KSizedBox.kHeightSizedBox24,
             BoxWidget(
-              key: KWidgetkeys.widget.feedbackBox.storyBox,
+              key: KWidgetkeys.screen.feedback.boxStoryBox,
               text: context.l10n.stories,
               onTap: () => context.goNamed(KRoute.stories.name),
               isDesk: false,

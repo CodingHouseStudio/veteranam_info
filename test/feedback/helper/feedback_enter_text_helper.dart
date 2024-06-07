@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:kozak/shared/shared.dart';
 
-import '../../../text_dependency.dart';
+import '../../text_dependency.dart';
 
 Future<void> feedbackEnterTextHelper({
   required WidgetTester tester,
@@ -9,61 +9,61 @@ Future<void> feedbackEnterTextHelper({
   required String email,
 }) async {
   expect(
-    find.byKey(KWidgetkeys.widget.feedback.fieldName),
+    find.byKey(KWidgetkeys.screen.feedback.nameField),
     findsOneWidget,
   );
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.widget.feedback.fieldName,
+    itemKey: KWidgetkeys.screen.feedback.nameField,
   );
 
   await tester.enterText(
-    find.byKey(KWidgetkeys.widget.feedback.fieldName),
+    find.byKey(KWidgetkeys.screen.feedback.nameField),
     field,
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.feedback.fieldEmail),
+    find.byKey(KWidgetkeys.screen.feedback.emailField),
     findsOneWidget,
   );
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.widget.feedback.fieldEmail,
+    itemKey: KWidgetkeys.screen.feedback.emailField,
   );
 
   await tester.enterText(
-    find.byKey(KWidgetkeys.widget.feedback.fieldEmail),
+    find.byKey(KWidgetkeys.screen.feedback.emailField),
     email,
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.feedback.fieldMessage),
+    find.byKey(KWidgetkeys.screen.feedback.messageField),
     findsOneWidget,
   );
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.widget.feedback.fieldMessage,
+    itemKey: KWidgetkeys.screen.feedback.messageField,
   );
 
   await tester.enterText(
-    find.byKey(KWidgetkeys.widget.feedback.fieldMessage),
+    find.byKey(KWidgetkeys.screen.feedback.messageField),
     field,
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.feedback.buttonSave),
+    find.byKey(KWidgetkeys.screen.feedback.button),
     findsOneWidget,
   );
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.widget.feedback.buttonSave,
+    itemKey: KWidgetkeys.screen.feedback.button,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.widget.feedback.buttonSave));
+  await tester.tap(find.byKey(KWidgetkeys.screen.feedback.button));
 
   await tester.pumpAndSettle();
 }
