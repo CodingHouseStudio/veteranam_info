@@ -7,7 +7,6 @@ export 'dialogs/dialogs.dart';
 export 'donate_card_helper.dart';
 export 'drop_list_field_helper.dart';
 export 'email_password_fields/email_password_fields.dart';
-export 'feedback/feedback.dart';
 export 'filter/filter.dart';
 export 'footer/footer.dart';
 export 'laguage_switcher_helper.dart';
