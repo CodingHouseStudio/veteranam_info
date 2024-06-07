@@ -1,4 +1,4 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:go_router/go_router.dart';
@@ -54,16 +54,25 @@ class _FeedbackBodyWidgetState extends State<FeedbackBodyWidget> {
                 ),
                 Expanded(
                   flex: 4,
-                  child: Text(
-                    context.l10n.writeUsMessage,
-                    style: AppTextStyle.materialThemeDisplayLarge,
-                  ),
-                ),
-                const Expanded(
-                  flex: 4,
-                  child: Align(
-                    alignment: Alignment.bottomLeft,
-                    child: IconWidget(icon: KIcon.arrowDownRight),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Text(
+                        context.l10n.write,
+                        style: AppTextStyle.materialThemeDisplayLarge,
+                      ),
+                      Wrap(
+                        crossAxisAlignment: WrapCrossAlignment.end,
+                        children: [
+                          Text(
+                            context.l10n.usMessage,
+                            style: AppTextStyle.materialThemeDisplayLarge,
+                          ),
+                          KSizedBox.kWidthSizedBox24,
+                          const IconWidget(icon: KIcon.arrowDownRight),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
               ],
@@ -92,60 +101,54 @@ class _FeedbackBodyWidgetState extends State<FeedbackBodyWidget> {
                           style: AppTextStyle.materialThemeBodyLarge,
                         ),
                         KSizedBox.kHeightSizedBox32,
-                        Row(
+                        Wrap(
+                          crossAxisAlignment: WrapCrossAlignment.center,
                           children: [
-                            Expanded(
-                              child: Text(
-                                context.l10n.preferEmail,
-                                style: AppTextStyle.materialThemeBodyLargeHint,
-                              ),
+                            Text(
+                              context.l10n.preferEmail,
+                              style: AppTextStyle.materialThemeBodyLargeHint,
                             ),
-                            Expanded(
-                              child: Markdown(
-                                data: KAppText.email,
-                                styleSheet: MarkdownStyleSheet(
-                                  a: isDesk
-                                      ? AppTextStyle.materialThemeTitleMedium
-                                          .copyWith(
-                                          color: AppColors.materialThemeBlack,
-                                        )
-                                      : AppTextStyle.materialThemeTitleSmall
-                                          .copyWith(
-                                          color: AppColors.materialThemeBlack,
-                                        ),
-                                ),
-                                shrinkWrap: true,
-                                onTapLink: (text, href, title) async {
-                                  final emailUri = Uri(
-                                    scheme: 'mailto',
-                                    path: KAppText.email,
-                                  );
-
-                                  if (await canLaunchUrl(emailUri)) {
-                                    await launchUrl(emailUri);
-                                  }
-                                },
+                            TextButton(
+                              child: Text(
+                                KAppText.email,
+                                style: isDesk
+                                    ? AppTextStyle.materialThemeTitleMedium
+                                    : AppTextStyle.materialThemeTitleSmall,
                               ),
+                              onPressed: () async {
+                                final emailUri = Uri(
+                                  scheme: 'mailto',
+                                  path: KAppText.email,
+                                );
+
+                                if (await canLaunchUrl(emailUri)) {
+                                  await launchUrl(emailUri);
+                                }
+                              },
                             ),
                           ],
                         ),
                         KSizedBox.kHeightSizedBox32,
                         Text(context.l10n.ourSocialNetworks),
+                        KSizedBox.kHeightSizedBox8,
                         Wrap(
                           children: [
                             IconWidget(
                               key: KWidgetkeys.widget.footer.likedInIcon,
                               icon: KImage.linkedIn,
+                              padding: KPadding.kPaddingSize12,
                             ),
                             KSizedBox.kWidthSizedBox24,
                             IconWidget(
                               key: KWidgetkeys.widget.footer.instagramIcon,
                               icon: KImage.instagram,
+                              padding: KPadding.kPaddingSize12,
                             ),
                             KSizedBox.kWidthSizedBox24,
                             IconWidget(
                               key: KWidgetkeys.widget.footer.facebookIcon,
                               icon: KImage.facebook,
+                              padding: KPadding.kPaddingSize12,
                             ),
                           ],
                         ),
@@ -153,6 +156,7 @@ class _FeedbackBodyWidgetState extends State<FeedbackBodyWidget> {
                     ),
                   ),
                   Expanded(
+                    flex: 2,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: _fieldWidgetList(
