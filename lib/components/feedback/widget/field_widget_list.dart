@@ -22,7 +22,6 @@ List<Widget> _fieldWidgetList({
                     FeedbackEvent.nameUpdated(value),
                   ),
               hintText: context.l10n.name,
-              hintStyle: isDesk ? AppTextStyle.hint24 : AppTextStyle.hint16,
               isDesk: isDesk,
             ),
           ),
@@ -44,7 +43,6 @@ List<Widget> _fieldWidgetList({
                     FeedbackEvent.emailUpdated(value),
                   ),
               hintText: context.l10n.email,
-              hintStyle: isDesk ? AppTextStyle.hint24 : AppTextStyle.hint16,
               isDesk: isDesk,
             ),
           ),
@@ -71,10 +69,12 @@ List<Widget> _fieldWidgetList({
       ),
       KSizedBox.kHeightSizedBox16,
       DoubleButtonWidget(
+        widgetKey: const Key(''),
         text: context.l10n.sendMessage,
         isDesk: isDesk,
         onPressed: () =>
             context.read<FeedbackBloc>().add(const FeedbackEvent.save()),
-        widgetKey: const Key(''),
+        color: AppColors.materialThemeBlack,
+        textColor: AppColors.materialThemeWhite,
       ),
     ];
