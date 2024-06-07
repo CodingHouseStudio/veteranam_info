@@ -96,8 +96,12 @@ class DiscountsCardWidget extends StatelessWidget {
               children: [
                 IconButton(
                   onPressed: () async {
-                    final linkedInUri = Uri.parse(KAppText.linkedIn);
-                    await Share.shareUri(linkedInUri);
+                    final linkedInUri = Uri.parse(
+                      KMockText.discountModel.directLink,
+                    );
+                    await Share.shareUri(
+                      linkedInUri,
+                    );
                   },
                   icon: KIcon.share,
                 ),
