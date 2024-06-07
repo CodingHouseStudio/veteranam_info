@@ -16,15 +16,12 @@ class InformationRepository implements IInformationRepository {
   void addMockInformationItems() {
     for (var i = 0; i < KMockText.tags.length; i++) {
       _firestoreService.addInformation(
-        InformationModel(
+        KMockText.informationModel.copyWith(
           id: '${ExtendedDateTime.id}$i',
-          title: KMockText.title,
-          news: KMockText.cardData,
-          date: ExtendedDateTime.current,
+          fetchDate: ExtendedDateTime.current,
           image: i > KMockText.tags.length - 2
               ? [const ImageModel(downloadURL: KMockText.image)]
               : null,
-          tags: KMockText.tags.elementAt(i),
         ),
       );
     }

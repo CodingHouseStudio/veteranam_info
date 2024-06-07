@@ -84,7 +84,7 @@ void main() {
         );
         bloc.add(
           InformationWatcherEvent.filter(
-            filter: KTestText.informationModelItems.first.tags!.first,
+            filter: KTestText.informationModelItems.first.category.first,
             isSelected: false,
           ),
         );
@@ -103,8 +103,8 @@ void main() {
             (state) =>
                 state.loadingStatus == LoadingStatus.loaded &&
                 state.filteredInformationModelItems.isNotEmpty &&
-                state.filteredInformationModelItems.first.tags!.contains(
-                  KTestText.informationModelItems.first.tags!.first,
+                state.filteredInformationModelItems.first.category.contains(
+                  KTestText.informationModelItems.first.category.first,
                 ) &&
                 state.filters == null,
           ),
@@ -183,7 +183,7 @@ void main() {
           )
           ..add(
             InformationWatcherEvent.filter(
-              filter: KTestText.informationModelItems.first.tags!.first,
+              filter: KTestText.informationModelItems.first.category.first,
               isSelected: false,
             ),
           );
@@ -241,7 +241,7 @@ void main() {
         bloc
           ..add(
             InformationWatcherEvent.filter(
-              filter: KTestText.informationModelItems.first.tags!.first,
+              filter: KTestText.informationModelItems.first.category.first,
               isSelected: false,
             ),
           )
@@ -250,7 +250,7 @@ void main() {
           )
           ..add(
             InformationWatcherEvent.filter(
-              filter: KTestText.informationModelItems.first.tags!.last,
+              filter: KTestText.informationModelItems.first.category.last,
               isSelected: false,
             ),
           )
