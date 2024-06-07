@@ -1,6 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
 import 'package:mockito/mockito.dart';
 
@@ -239,6 +240,13 @@ void main() {
           name: NameFieldModel.pure(),
           formState: FeedbackEnum.sendignMessageAgain,
           failure: FeedbackFailure.none,
+        ),
+        const FeedbackState(
+          formState: FeedbackEnum.clear,
+          name: NameFieldModel.pure(),
+          email: EmailFieldModel.pure(),
+          message: MessageFieldModel.pure(),
+          failure: FeedbackFailure.initial,
         ),
       ],
     );

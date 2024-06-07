@@ -8,49 +8,84 @@ List<Widget> _fieldWidgetList({
   required TextEditingController messageController,
 }) =>
     [
-      Row(
-        children: [
-          Expanded(
-            child: TextFieldWidget(
-              widgetKey: KWidgetkeys.widget.feedback.fieldName,
-              errorText: context.read<FeedbackBloc>().state.formState ==
-                      FeedbackEnum.invalidData
-                  ? context.read<FeedbackBloc>().state.name.error.value(context)
-                  : null,
-              controller: nameController,
-              onChanged: (value) => context.read<FeedbackBloc>().add(
-                    FeedbackEvent.nameUpdated(value),
-                  ),
-              hintText: context.l10n.name,
-              isDesk: isDesk,
+      if (isDesk)
+        Row(
+          children: [
+            Expanded(
+              child: TextFieldWidget(
+                widgetKey: KWidgetkeys.screen.feedback.nameField,
+                errorText: context.read<FeedbackBloc>().state.formState ==
+                        FeedbackEnum.invalidData
+                    ? context
+                        .read<FeedbackBloc>()
+                        .state
+                        .name
+                        .error
+                        .value(context)
+                    : null,
+                controller: nameController,
+                onChanged: (value) => context.read<FeedbackBloc>().add(
+                      FeedbackEvent.nameUpdated(value),
+                    ),
+                hintText: context.l10n.name,
+                isDesk: isDesk,
+              ),
             ),
-          ),
-          KSizedBox.kWidthSizedBox24,
-          Expanded(
-            child: TextFieldWidget(
-              widgetKey: KWidgetkeys.widget.feedback.fieldEmail,
-              errorText: context.read<FeedbackBloc>().state.formState ==
-                      FeedbackEnum.invalidData
-                  ? context
-                      .read<FeedbackBloc>()
-                      .state
-                      .email
-                      .error
-                      .value(context)
-                  : null,
-              controller: emailController,
-              onChanged: (value) => context.read<FeedbackBloc>().add(
-                    FeedbackEvent.emailUpdated(value),
-                  ),
-              hintText: context.l10n.email,
-              isDesk: isDesk,
+            KSizedBox.kWidthSizedBox24,
+            Expanded(
+              child: TextFieldWidget(
+                widgetKey: KWidgetkeys.screen.feedback.emailField,
+                errorText: context.read<FeedbackBloc>().state.formState ==
+                        FeedbackEnum.invalidData
+                    ? context
+                        .read<FeedbackBloc>()
+                        .state
+                        .email
+                        .error
+                        .value(context)
+                    : null,
+                controller: emailController,
+                onChanged: (value) => context.read<FeedbackBloc>().add(
+                      FeedbackEvent.emailUpdated(value),
+                    ),
+                hintText: context.l10n.email,
+                isDesk: isDesk,
+              ),
             ),
-          ),
-        ],
-      ),
+          ],
+        )
+      else ...[
+        TextFieldWidget(
+          widgetKey: KWidgetkeys.screen.feedback.nameField,
+          errorText: context.read<FeedbackBloc>().state.formState ==
+                  FeedbackEnum.invalidData
+              ? context.read<FeedbackBloc>().state.name.error.value(context)
+              : null,
+          controller: nameController,
+          onChanged: (value) => context.read<FeedbackBloc>().add(
+                FeedbackEvent.nameUpdated(value),
+              ),
+          hintText: context.l10n.name,
+          isDesk: isDesk,
+        ),
+        KSizedBox.kHeightSizedBox16,
+        TextFieldWidget(
+          widgetKey: KWidgetkeys.screen.feedback.emailField,
+          errorText: context.read<FeedbackBloc>().state.formState ==
+                  FeedbackEnum.invalidData
+              ? context.read<FeedbackBloc>().state.email.error.value(context)
+              : null,
+          controller: emailController,
+          onChanged: (value) => context.read<FeedbackBloc>().add(
+                FeedbackEvent.emailUpdated(value),
+              ),
+          hintText: context.l10n.email,
+          isDesk: isDesk,
+        ),
+      ],
       KSizedBox.kHeightSizedBox16,
       MessageFieldWidget(
-        key: KWidgetkeys.widget.feedback.fieldMessage,
+        key: KWidgetkeys.screen.feedback.messageField,
         errorText: context.read<FeedbackBloc>().state.formState ==
                 FeedbackEnum.invalidData
             ? context.read<FeedbackBloc>().state.message.error.value(context)
@@ -62,14 +97,15 @@ List<Widget> _fieldWidgetList({
         hintText: context.l10n.writeYourMessage,
         isDesk: isDesk,
       ),
-      KSizedBox.kHeightSizedBox16,
+      if (isDesk) KSizedBox.kHeightSizedBox16 else KSizedBox.kHeightSizedBox8,
       Text(
         context.l10n.feedbackFormSubtitle,
+        key: KWidgetkeys.screen.feedback.buttonText,
         style: AppTextStyle.materialThemeBodySmall,
       ),
       KSizedBox.kHeightSizedBox16,
       DoubleButtonWidget(
-        widgetKey: const Key(''),
+        widgetKey: KWidgetkeys.screen.feedback.button,
         text: context.l10n.sendMessage,
         isDesk: isDesk,
         onPressed: () =>

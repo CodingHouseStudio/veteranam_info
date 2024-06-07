@@ -43,22 +43,16 @@ abstract class FooterWidget {
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      IconWidget(
-                        key: KWidgetkeys.widget.footer.likedInIcon,
-                        icon: KImage.linkedIn,
-                      ),
-                      KSizedBox.kHeightSizedBox24,
-                      IconWidget(
-                        key: KWidgetkeys.widget.footer.instagramIcon,
-                        icon: KImage.instagram,
-                      ),
-                      KSizedBox.kHeightSizedBox24,
-                      IconWidget(
-                        key: KWidgetkeys.widget.footer.facebookIcon,
-                        icon: KImage.facebook,
-                      ),
-                    ],
+                    children: socialMediaLinks(
+                      isDesk: isDesk,
+                      context: context,
+                      padding: isDesk
+                          ? KSizedBox.kHeightSizedBox24
+                          : KSizedBox.kWidthSizedBox16,
+                      instagramKey: KWidgetkeys.widget.footer.instagramIcon,
+                      linkedInKey: KWidgetkeys.widget.footer.likedInIcon,
+                      facebookKey: KWidgetkeys.widget.footer.facebookIcon,
+                    ),
                   ),
                 ],
               ),
@@ -142,22 +136,16 @@ abstract class FooterWidget {
               ],
               KSizedBox.kHeightSizedBox40,
               Wrap(
-                children: [
-                  IconWidget(
-                    key: KWidgetkeys.widget.footer.likedInIcon,
-                    icon: KImage.linkedIn,
-                  ),
-                  KSizedBox.kWidthSizedBox16,
-                  IconWidget(
-                    key: KWidgetkeys.widget.footer.instagramIcon,
-                    icon: KImage.instagram,
-                  ),
-                  KSizedBox.kWidthSizedBox16,
-                  IconWidget(
-                    key: KWidgetkeys.widget.footer.facebookIcon,
-                    icon: KImage.facebook,
-                  ),
-                ],
+                children: socialMediaLinks(
+                  isDesk: isDesk,
+                  context: context,
+                  padding: isDesk
+                      ? KSizedBox.kHeightSizedBox24
+                      : KSizedBox.kWidthSizedBox16,
+                  instagramKey: KWidgetkeys.widget.footer.instagramIcon,
+                  linkedInKey: KWidgetkeys.widget.footer.likedInIcon,
+                  facebookKey: KWidgetkeys.widget.footer.facebookIcon,
+                ),
               ),
               KSizedBox.kHeightSizedBox40,
               Container(
@@ -383,7 +371,7 @@ abstract class FooterWidget {
         DoubleButtonWidget(
           widgetKey: KWidgetkeys.widget.footer.button,
           text: context.l10n.contact,
-          onPressed: null,
+          onPressed: () => context.goNamed(KRoute.feedback.name),
           isDesk: isDesk,
         ),
       ];
@@ -398,4 +386,56 @@ abstract class FooterWidget {
         onPressed: onPressed,
         child: Text(text),
       );
+
+  static List<Widget> socialMediaLinks({
+    required bool isDesk,
+    required BuildContext context,
+    required Widget padding,
+    required Key instagramKey,
+    required Key linkedInKey,
+    required Key facebookKey,
+  }) =>
+      [
+        IconButtonWidget(
+          key: linkedInKey,
+          onPressed: () async {
+            if (await canLaunchUrl(Uri.parse(KAppText.linkedIn))) {
+              await launchUrl(
+                Uri.parse(KAppText.linkedIn),
+                mode: LaunchMode.externalApplication,
+              );
+            }
+          },
+          icon: KImage.linkedIn,
+          background: AppColors.materialThemeSourceSeed,
+        ),
+        padding,
+        IconButtonWidget(
+          key: instagramKey,
+          onPressed: () async {
+            if (await canLaunchUrl(Uri.parse(KAppText.instagram))) {
+              await launchUrl(
+                Uri.parse(KAppText.instagram),
+                mode: LaunchMode.externalApplication,
+              );
+            }
+          },
+          icon: KImage.instagram,
+          background: AppColors.materialThemeSourceSeed,
+        ),
+        padding,
+        IconButtonWidget(
+          key: facebookKey,
+          onPressed: () async {
+            if (await canLaunchUrl(Uri.parse(KAppText.facebook))) {
+              await launchUrl(
+                Uri.parse(KAppText.facebook),
+                mode: LaunchMode.externalApplication,
+              );
+            }
+          },
+          icon: KImage.facebook,
+          background: AppColors.materialThemeSourceSeed,
+        ),
+      ];
 }
