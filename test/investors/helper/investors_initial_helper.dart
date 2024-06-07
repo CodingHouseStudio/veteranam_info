@@ -23,6 +23,4 @@ Future<void> investorsInitialHelper(
   await donateCardHelper(tester: tester, isDesk: false);
 
   await donatesCardHelper(tester);
-
-  await feedbackHelper(tester);
 }

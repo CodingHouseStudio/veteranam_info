@@ -43,8 +43,16 @@ abstract class FooterWidget {
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
-                    children:
-                        _socialMediaLinks(isDesk: isDesk, context: context),
+                    children: socialMediaLinks(
+                      isDesk: isDesk,
+                      context: context,
+                      padding: isDesk
+                          ? KSizedBox.kHeightSizedBox24
+                          : KSizedBox.kWidthSizedBox16,
+                      instagramKey: KWidgetkeys.widget.footer.instagramIcon,
+                      linkedInKey: KWidgetkeys.widget.footer.likedInIcon,
+                      facebookKey: KWidgetkeys.widget.footer.facebookIcon,
+                    ),
                   ),
                 ],
               ),
@@ -128,7 +136,16 @@ abstract class FooterWidget {
               ],
               KSizedBox.kHeightSizedBox40,
               Wrap(
-                children: _socialMediaLinks(isDesk: isDesk, context: context),
+                children: socialMediaLinks(
+                  isDesk: isDesk,
+                  context: context,
+                  padding: isDesk
+                      ? KSizedBox.kHeightSizedBox24
+                      : KSizedBox.kWidthSizedBox16,
+                  instagramKey: KWidgetkeys.widget.footer.instagramIcon,
+                  linkedInKey: KWidgetkeys.widget.footer.likedInIcon,
+                  facebookKey: KWidgetkeys.widget.footer.facebookIcon,
+                ),
               ),
               KSizedBox.kHeightSizedBox40,
               Container(
@@ -354,7 +371,7 @@ abstract class FooterWidget {
         DoubleButtonWidget(
           widgetKey: KWidgetkeys.widget.footer.button,
           text: context.l10n.contact,
-          onPressed: null,
+          onPressed: () => context.goNamed(KRoute.feedback.name),
           isDesk: isDesk,
         ),
       ];
@@ -370,12 +387,17 @@ abstract class FooterWidget {
         child: Text(text),
       );
 
-  static List<Widget> _socialMediaLinks({
+  static List<Widget> socialMediaLinks({
     required bool isDesk,
     required BuildContext context,
+    required Widget padding,
+    required Key instagramKey,
+    required Key linkedInKey,
+    required Key facebookKey,
   }) =>
       [
         IconButtonWidget(
+          key: linkedInKey,
           onPressed: () async {
             if (await canLaunchUrl(Uri.parse(KAppText.linkedIn))) {
               await launchUrl(
@@ -384,12 +406,12 @@ abstract class FooterWidget {
               );
             }
           },
-          key: KWidgetkeys.widget.footer.likedInIcon,
           icon: KImage.linkedIn,
           background: AppColors.materialThemeSourceSeed,
         ),
-        if (isDesk) KSizedBox.kHeightSizedBox24 else KSizedBox.kWidthSizedBox16,
+        padding,
         IconButtonWidget(
+          key: instagramKey,
           onPressed: () async {
             if (await canLaunchUrl(Uri.parse(KAppText.instagram))) {
               await launchUrl(
@@ -398,12 +420,12 @@ abstract class FooterWidget {
               );
             }
           },
-          key: KWidgetkeys.widget.footer.instagramIcon,
           icon: KImage.instagram,
           background: AppColors.materialThemeSourceSeed,
         ),
-        if (isDesk) KSizedBox.kHeightSizedBox24 else KSizedBox.kWidthSizedBox16,
+        padding,
         IconButtonWidget(
+          key: facebookKey,
           onPressed: () async {
             if (await canLaunchUrl(Uri.parse(KAppText.facebook))) {
               await launchUrl(
@@ -412,7 +434,6 @@ abstract class FooterWidget {
               );
             }
           },
-          key: KWidgetkeys.widget.footer.facebookIcon,
           icon: KImage.facebook,
           background: AppColors.materialThemeSourceSeed,
         ),

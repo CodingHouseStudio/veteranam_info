@@ -279,7 +279,7 @@ class HomeBodyWidget extends StatelessWidget {
         DoubleButtonWidget(
           widgetKey: KWidgetkeys.screen.home.faqButton,
           text: context.l10n.writeMessage,
-          onPressed: null,
+          onPressed: () => context.goNamed(KRoute.feedback.name),
           isDesk: isDesk,
         ),
       ];

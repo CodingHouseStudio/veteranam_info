@@ -1,11 +1,11 @@
 import 'package:flutter_test/flutter_test.dart';
 
-import '../../../text_dependency.dart';
+import '../../text_dependency.dart';
+import 'helper.dart';
 
-Future<void> feedbackNavigationHelper({
-  required WidgetTester tester,
-  required MockGoRouter mockGoRouter,
-}) async {
+Future<void> correctSaveHelper(
+  WidgetTester tester,
+) async {
   await scrollingHelper(
     tester: tester,
     offset: KTestConstants.scrollingDown,
@@ -22,8 +22,10 @@ Future<void> feedbackNavigationHelper({
     field: KTestText.field,
   );
 
-  await feedbackBoxNavigationHelper(
+  await scrollingHelper(
     tester: tester,
-    mockGoRouter: mockGoRouter,
+    offset: KTestConstants.scrollingUp500,
   );
+
+  await feedbackBoxHelper(tester: tester, exist: true);
 }
