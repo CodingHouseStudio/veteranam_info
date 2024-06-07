@@ -15,11 +15,8 @@ List<Widget> _newsWidgetList({
           .filteredInformationModelItems
       : List.generate(
           KDimensions.shimmerInformationItems,
-          (index) => InformationModel(
+          (index) => KMockText.informationModel.copyWith(
             id: index.toString(),
-            title: KMockText.title,
-            news: KMockText.cardData,
-            date: ExtendedDateTime.current,
           ),
         );
   return List.generate(informationModelItems.length, (index) {
