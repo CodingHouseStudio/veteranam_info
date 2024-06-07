@@ -5,6 +5,7 @@ class _FeedbackKeys {
   final pointText = const Key('feedback_screen_point_text');
   final title = const Key('feedback_screen_title');
   final titleIcon = const Key('feedback_screen_title_icon');
+  final divider = const Key('feedback_screen_divider');
   final subtitle = const Key('feedback_screen_subtitle');
   final emailText = const Key('feedback_screen_email_text');
   final emailButton = const Key('feedback_screen_email_button');

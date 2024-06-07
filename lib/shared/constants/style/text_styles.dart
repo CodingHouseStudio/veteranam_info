@@ -367,6 +367,14 @@ abstract class AppTextStyle {
     fontWeight: FontWeight.w500,
     letterSpacing: 0.15,
   );
+  static const TextStyle materialThemeTitleMediumHint = TextStyle(
+    fontFamily: 'Gilroy',
+    fontSize: 16,
+    height: 1.5,
+    fontWeight: FontWeight.w500,
+    letterSpacing: 0.15,
+    color: AppColors.materialThemeRefNeutralVariantNeutralVariant35,
+  );
 
   /// materialThemeTitleSmall figma properties
   /// fontFamily: Gilroy
