@@ -167,11 +167,9 @@ class InformationWatcherBloc
     if (filters != null && filters.isNotEmpty) {
       final filterItems = informationModelItems
           .where(
-            (element) =>
-                element.tags == null ||
-                filters.any(
-                  (filter) => element.tags!.contains(filter),
-                ),
+            (element) => filters.any(
+              (filter) => element.category.contains(filter),
+            ),
           )
           .toList();
       return filterItems.sublist(

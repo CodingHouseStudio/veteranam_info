@@ -35,7 +35,7 @@ class NewsCardWidget extends StatelessWidget {
             style: isDesk ? AppTextStyle.text40 : AppTextStyle.text24,
           ),
           Text(
-            informationItem.date.localeTime,
+            informationItem.fetchDate.localeTime,
             key: KWidgetkeys.widget.newsCard.date,
             style: AppTextStyle.hint16,
           ),

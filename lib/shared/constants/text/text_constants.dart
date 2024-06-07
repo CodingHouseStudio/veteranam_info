@@ -151,6 +151,17 @@ abstract class KMockText {
         'https://esculab.com/20-vidsotkiv-na-analizy-dlya-viyskovyh-ta-lyudey-yaki-vnutrishno-peremishcheni',
     dateVerified: DateTime(2024, 6, 3),
   );
+  static final informationModel = InformationModel(
+    id: '',
+    title: title,
+    news: cardData,
+    category: ['Medical'],
+    categoryUA: ['Медицина'],
+    topic: 'MEDICAL BENEFITS',
+    topicUA: 'МЕДИЧНІ ПІЛЬГИ',
+    status: 'Healthy',
+    fetchDate: DateTime(2024, 06, 07),
+  );
 }
 
 /// README: Variables with specific text
