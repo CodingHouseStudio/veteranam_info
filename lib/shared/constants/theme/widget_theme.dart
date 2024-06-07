@@ -9,6 +9,22 @@ abstract class KWidgetTheme {
     borderSide: BorderSide(color: AppColors.materialThemeKeyColorsNeutral),
     borderRadius: KBorderRadius.kBorderRadius32,
   );
+  static const outlineInputBorderEnabled = OutlineInputBorder(
+    borderSide: BorderSide(color: AppColors.materialThemeRefNeutralNeutral80),
+    borderRadius: KBorderRadius.kBorderRadius32,
+  );
+  static const outlineInputBorderHovered = OutlineInputBorder(
+    borderSide: BorderSide(color: AppColors.materialThemeRefNeutralNeutral40),
+    borderRadius: KBorderRadius.kBorderRadius32,
+  );
+  static const outlineInputBorderFocused = OutlineInputBorder(
+    borderSide: BorderSide(color: AppColors.materialThemeRefNeutralNeutral70),
+    borderRadius: KBorderRadius.kBorderRadius32,
+  );
+  static const outlineInputBorderDisabled = OutlineInputBorder(
+    borderSide: BorderSide(color: AppColors.materialThemeRefNeutralNeutral90),
+    borderRadius: KBorderRadius.kBorderRadius32,
+  );
   static const outlineInputBorderError = OutlineInputBorder(
     borderSide: BorderSide(color: AppColors.materialThemeRefErrorError50),
     borderRadius: KBorderRadius.kBorderRadius32,
@@ -88,17 +104,19 @@ abstract class KWidgetTheme {
     borderRadius: KBorderRadius.kBorderRadius32,
   );
   static const inputDecoration = InputDecoration(
-    hintStyle: AppTextStyle.materialThemeTitleMedium,
+    hintStyle: AppTextStyle.materialThemeTitleMediumHint,
     contentPadding: EdgeInsets.symmetric(
       horizontal: KPadding.kPaddingSize20,
     ),
     floatingLabelBehavior: FloatingLabelBehavior.auto,
     border: outlineInputBorder,
-    enabledBorder: outlineInputBorder,
-    disabledBorder: outlineInputBorder,
-    focusedBorder: outlineInputBorder,
+    enabledBorder: outlineInputBorderEnabled,
+    disabledBorder: outlineInputBorderDisabled,
+    focusedBorder: outlineInputBorderFocused,
     focusedErrorBorder: outlineInputBorderError,
     filled: true,
     fillColor: AppColors.materialThemeWhite,
+    labelStyle: AppTextStyle.materialThemeTitleMedium,
+    alignLabelWithHint: true,
   );
 }
