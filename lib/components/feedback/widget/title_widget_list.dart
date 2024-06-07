@@ -30,7 +30,7 @@ List<Widget> _titleWidgetList({
                         crossAxisAlignment: WrapCrossAlignment.end,
                         children: [
                           Text(
-                            '${context.l10n.us} ${context.l10n.message}',
+                            '${context.l10n.us} ${context.l10n.aMessage}',
                             style: AppTextStyle.materialThemeDisplayLarge,
                           ),
                           KSizedBox.kWidthSizedBox24,
@@ -46,7 +46,12 @@ List<Widget> _titleWidgetList({
                 ),
               ],
             ),
-            KSizedBox.kHeightSizedBox132,
+            KSizedBox.kHeightSizedBox32,
+            Divider(
+              key: KWidgetkeys.screen.feedback.divider,
+              color: AppColors.materialThemeKeyColorsNeutral,
+            ),
+            KSizedBox.kHeightSizedBox100,
           ]
         : [
             KSizedBox.kHeightSizedBox24,
@@ -71,10 +76,15 @@ List<Widget> _titleWidgetList({
                 ),
                 KSizedBox.kWidthSizedBox16,
                 Text(
-                  context.l10n.message,
+                  context.l10n.aMessage,
                   style: AppTextStyle.materialThemeDisplaySmall,
                 ),
               ],
             ),
-            KSizedBox.kHeightSizedBox56,
+            KSizedBox.kHeightSizedBox32,
+            Divider(
+              key: KWidgetkeys.screen.feedback.divider,
+              color: AppColors.materialThemeKeyColorsNeutral,
+            ),
+            KSizedBox.kHeightSizedBox24,
           ];
