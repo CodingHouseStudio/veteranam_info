@@ -16,39 +16,40 @@ void main() {
 
   tearDown(GetIt.I.reset);
   group('${KScreenBlocName.profileMyStory} ', () {
-    late IStoryRepository mockStoryRepository;
+    late IDiscountRepository mockDiscountRepository;
     late IAppAuthenticationRepository mockAppAuthenticationRepository;
     setUp(() {
-      mockStoryRepository = MockIStoryRepository();
+      mockDiscountRepository = MockIDiscountRepository();
       mockAppAuthenticationRepository = MockIAppAuthenticationRepository();
 
       when(mockAppAuthenticationRepository.currentUser)
           .thenAnswer((invocation) => KTestText.userWithoutPhoto);
-      when(mockStoryRepository.getStoriesById(KTestText.userWithoutPhoto.id))
-          .thenAnswer((invocation) async => Right(KTestText.storyModelItems));
+      when(
+        mockDiscountRepository.getDiscountsById(KTestText.userWithoutPhoto.id),
+      ).thenAnswer((invocation) async => Right(KTestText.discountModelItems));
     });
 
     testWidgets('${KGroupText.intial} ', (tester) async {
-      await myStoryPumpAppHelper(
-        mockStoryRepository: mockStoryRepository,
+      await myDiscountsPumpAppHelper(
+        mockDiscountRepository: mockDiscountRepository,
         mockAppAuthenticationRepository: mockAppAuthenticationRepository,
         tester: tester,
       );
 
-      await myStoryInitialHelper(tester);
+      await myDiscountsInitialHelper(tester);
     });
     group('${KGroupText.goRouter} ', () {
       late MockGoRouter mockGoRouter;
       setUp(() => mockGoRouter = MockGoRouter());
       testWidgets('${KGroupText.intial} ', (tester) async {
-        await myStoryPumpAppHelper(
-          mockStoryRepository: mockStoryRepository,
+        await myDiscountsPumpAppHelper(
+          mockDiscountRepository: mockDiscountRepository,
           mockAppAuthenticationRepository: mockAppAuthenticationRepository,
           tester: tester,
           mockGoRouter: mockGoRouter,
         );
 
-        await myStoryInitialHelper(tester);
+        await myDiscountsInitialHelper(tester);
       });
     });
   });

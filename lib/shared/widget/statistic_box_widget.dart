@@ -33,63 +33,59 @@ class StatisticBoxWidget extends StatelessWidget {
           ? InkWell(
               onTap: onTap,
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  IconWidget(
-                    key: KWidgetkeys.widget.box.icon,
-                    icon: icon ?? KIcon.arrowUpRight,
-                    padding: KPadding.kPaddingSize20,
+                  Text(
+                    title,
+                    key: KWidgetkeys.widget.statisticBox.title,
+                    style: AppTextStyle.text40,
+                    maxLines: 1,
                   ),
-                  Align(
-                    alignment: Alignment.bottomLeft,
-                    child: Padding(
-                      padding: EdgeInsets.only(right: textRightPadding ?? 0),
-                      child: Column(
-                        children: [
-                          Text(
-                            title,
-                            key: KWidgetkeys.widget.box.text,
-                            style: AppTextStyle.materialThemeHeadlineSmall,
-                            maxLines: 1,
-                          ),
-                          Text(
-                            subtitle,
-                            key: KWidgetkeys.widget.box.text,
-                            style: AppTextStyle.materialThemeHeadlineSmall,
-                            maxLines: 1,
-                          ),
-                        ],
+                  Row(
+                    children: [
+                      IconWidget(
+                        padding: 0,
+                        key: KWidgetkeys.widget.statisticBox.icon,
+                        icon: KIcon.safe,
+                        background: AppColors.materialThemeKeyColorsNeutral,
                       ),
-                    ),
+                      Text(
+                        subtitle,
+                        key: KWidgetkeys.widget.statisticBox.subtitle,
+                        style: AppTextStyle.text16,
+                        maxLines: 1,
+                      ),
+                    ],
                   ),
                 ],
               ),
             )
           : InkWell(
               onTap: onTap,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Column(
+                  Text(
+                    title,
+                    key: KWidgetkeys.widget.statisticBox.title,
+                    style: AppTextStyle.text24,
+                    maxLines: 1,
+                  ),
+                  Row(
                     children: [
-                      Text(
-                        title,
-                        key: KWidgetkeys.widget.box.text,
-                        style: AppTextStyle.materialThemeTitleLarge,
-                        maxLines: 1,
+                      IconWidget(
+                        padding: 0,
+                        key: KWidgetkeys.widget.statisticBox.icon,
+                        icon: KIcon.safe,
+                        background: AppColors.materialThemeKeyColorsNeutral,
                       ),
                       Text(
                         subtitle,
-                        key: KWidgetkeys.widget.box.text,
-                        style: AppTextStyle.materialThemeTitleLarge,
+                        key: KWidgetkeys.widget.statisticBox.subtitle,
+                        style: AppTextStyle.text14,
                         maxLines: 1,
                       ),
                     ],
-                  ),
-                  IconWidget(
-                    key: KWidgetkeys.widget.box.icon,
-                    icon: icon ?? KIcon.arrowUpRight,
-                    padding: KPadding.kPaddingSize20,
                   ),
                 ],
               ),

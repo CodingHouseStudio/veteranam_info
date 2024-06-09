@@ -5,4 +5,8 @@ class _MyDiscountsKeys {
   final title = const Key('my_discounts_screen_title');
   final subtitle = const Key('my_discounts_screen_subtitle');
   final card = const Key('my_discounts_screen_card');
+  final iconTrash = const Key('my_discounts_screen_icon_trash');
+  final iconEdit = const Key('my_discounts_screen_icon_edit');
+  final iconShare = const Key('my_discounts_screen_icon_share');
+  final diactivate = const Key('my_discounts_screen_diactivate');
 }

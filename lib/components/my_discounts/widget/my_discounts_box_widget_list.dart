@@ -46,9 +46,10 @@ List<Widget> _discountsboxWidgetList({
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Row(
+                        Row(
                           children: [
                             IconWidget(
+                              key: KWidgetkeys.screen.myDiscounts.iconTrash,
                               padding: KPadding.kPaddingSize12,
                               icon: KIcon.trash,
                               background: AppColors
@@ -56,6 +57,7 @@ List<Widget> _discountsboxWidgetList({
                             ),
                             KSizedBox.kWidthSizedBox8,
                             IconWidget(
+                              key: KWidgetkeys.screen.myDiscounts.iconEdit,
                               padding: KPadding.kPaddingSize12,
                               icon: KIcon.edit,
                               background: AppColors
@@ -63,6 +65,7 @@ List<Widget> _discountsboxWidgetList({
                             ),
                             KSizedBox.kWidthSizedBox8,
                             IconWidget(
+                              key: KWidgetkeys.screen.myDiscounts.iconShare,
                               padding: KPadding.kPaddingSize12,
                               icon: KIcon.share,
                               background: AppColors
@@ -89,7 +92,7 @@ List<Widget> _discountsboxWidgetList({
                                 right: KPadding.kPaddingSize16,
                               ),
                               child: Text(
-                                key: KWidgetkeys.screen.employeeRespond.upload,
+                                key: KWidgetkeys.screen.myDiscounts.diactivate,
                                 context.l10n.deactivate,
                                 style: AppTextStyle.text24,
                               ),
@@ -112,7 +115,7 @@ List<Widget> _discountsboxWidgetList({
                 )
               : EdgeInsets.zero,
           child: Stack(
-            key: KWidgetkeys.screen.home.box,
+            //key: KWidgetkeys.screen.myDiscounts.box,
             alignment: Alignment.bottomRight,
             children: [
               Column(
@@ -150,7 +153,7 @@ List<Widget> _discountsboxWidgetList({
                               right: KPadding.kPaddingSize24,
                             ),
                             child: Text(
-                              key: KWidgetkeys.screen.employeeRespond.upload,
+                              key: KWidgetkeys.screen.myDiscounts.diactivate,
                               context.l10n.deactivate,
                               style: AppTextStyle.text16,
                             ),
@@ -158,14 +161,16 @@ List<Widget> _discountsboxWidgetList({
                         ),
                       ),
                       KSizedBox.kWidthSizedBox40,
-                      const IconWidget(
+                      IconWidget(
+                        key: KWidgetkeys.screen.myDiscounts.iconTrash,
                         padding: KPadding.kPaddingSize12,
                         icon: KIcon.trash,
                         background:
                             AppColors.materialThemeKeyColorsNeutralVariant,
                       ),
                       KSizedBox.kWidthSizedBox10,
-                      const IconWidget(
+                      IconWidget(
+                        key: KWidgetkeys.screen.myDiscounts.iconShare,
                         padding: KPadding.kPaddingSize12,
                         icon: KIcon.share,
                         background:

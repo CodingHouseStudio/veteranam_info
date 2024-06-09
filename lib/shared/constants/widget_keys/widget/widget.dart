@@ -38,4 +38,5 @@ class _WidgetKeys {
   final checkPointSingle = _CheckPointSingleKeys();
   final workRequestCard = _WorkRequestCardKeys();
   final dialogs = _DialogsKeys();
+  final statisticBox = _StatisticBoxKeys();
 }
