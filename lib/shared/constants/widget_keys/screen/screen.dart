@@ -26,4 +26,5 @@ class _ScreenKeys {
   final myDiscounts = _MyDiscountsKeys();
   // final contact = _ContactKeys();
   final underConstruction = _UnderConstructionKeys();
+  final feedback = _FeedbackKeys();
 }

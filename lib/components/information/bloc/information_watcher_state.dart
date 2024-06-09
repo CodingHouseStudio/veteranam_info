@@ -26,9 +26,7 @@ extension InformationModelExtensions on List<InformationModel> {
   List<String> get overallTags {
     final allTags = <String>[];
     for (final item in this) {
-      if (item.tags != null) {
-        allTags.addAll(item.tags!);
-      }
+      allTags.addAll(item.category);
     }
     return allTags.toSet().toList();
   }

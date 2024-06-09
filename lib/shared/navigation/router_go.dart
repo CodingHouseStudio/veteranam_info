@@ -248,6 +248,15 @@ GoRouter router = GoRouter(
         // ),
       ],
     ),
+    GoRoute(
+      name: KRoute.feedback.name,
+      path: KRoute.feedback.path,
+      pageBuilder: (context, state) => NoTransitionPage(
+        key: state.pageKey,
+        name: state.name,
+        child: const FeedbackScreen(),
+      ),
+    ),
   ],
 );
 

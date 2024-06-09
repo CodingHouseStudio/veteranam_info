@@ -54,6 +54,7 @@ abstract class KIcon {
   static const _KIcon trailing = _KIcon(Symbols.arrow_drop_down);
   static const _KIcon trailingUp = _KIcon(Symbols.arrow_drop_up);
   static const _KIcon arrowUpRight = _KIcon(Symbols.arrow_outward);
+  static const _KIcon arrowDownRight = _KIcon(Symbols.south_east);
   static const _KIcon like = _KIcon(Symbols.thumb_up);
   static const _KIcon activeLike = _KIcon(
     Symbols.thumb_up,

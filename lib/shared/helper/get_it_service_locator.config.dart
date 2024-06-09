@@ -14,6 +14,7 @@ import 'package:google_sign_in/google_sign_in.dart' as _i8;
 import 'package:injectable/injectable.dart' as _i2;
 import 'package:kozak/components/discounts/bloc/discount_watcher_bloc.dart'
     as _i27;
+import 'package:kozak/components/feedback/bloc/feedback_bloc.dart' as _i28;
 import 'package:kozak/components/home/bloc/home_watcher_bloc.dart' as _i22;
 import 'package:kozak/components/information/bloc/information_watcher_bloc.dart'
     as _i23;
@@ -33,7 +34,6 @@ import 'package:kozak/shared/bloc/authentication/authentication_bloc.dart'
     as _i34;
 import 'package:kozak/shared/bloc/authentication_services/authentication_services_cubit.dart'
     as _i33;
-import 'package:kozak/shared/bloc/feedback/feedback_bloc.dart' as _i28;
 import 'package:kozak/shared/data_provider/cache_provider.dart' as _i3;
 import 'package:kozak/shared/data_provider/fake_provider.dart' as _i4;
 import 'package:kozak/shared/data_provider/firestore_provider.dart' as _i5;

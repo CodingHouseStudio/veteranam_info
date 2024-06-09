@@ -26,6 +26,7 @@ class DiscountRepository implements IDiscountRepository {
         KMockText.discountModel.copyWith(
           id: '${ExtendedDateTime.id}$i',
           userId: '${ExtendedDateTime.id}$i',
+          dateVerified: ExtendedDateTime.current,
         ),
       );
     }

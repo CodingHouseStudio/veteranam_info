@@ -151,6 +151,17 @@ abstract class KMockText {
         'https://esculab.com/20-vidsotkiv-na-analizy-dlya-viyskovyh-ta-lyudey-yaki-vnutrishno-peremishcheni',
     dateVerified: DateTime(2024, 6, 3),
   );
+  static final informationModel = InformationModel(
+    id: '',
+    title: title,
+    news: cardData,
+    category: ['Medical'],
+    categoryUA: ['Медицина'],
+    topic: 'MEDICAL BENEFITS',
+    topicUA: 'МЕДИЧНІ ПІЛЬГИ',
+    status: 'Healthy',
+    fetchDate: DateTime(2024, 06, 07),
+  );
 }
 
 /// README: Variables with specific text
@@ -161,4 +172,8 @@ abstract class KAppText {
   static const String usernameToken = 'USERNAME_TOKEN';
   static const String madeBy = '© MadeByCodingHouseLLC 2024';
   static const String email = 'hello@veteranam.info';
+  static const String linkedIn = 'https://www.linkedin.com/company/veteranam/';
+  static const String instagram = 'https://www.instagram.com/veteranam_info';
+  static const String facebook =
+      'https://www.facebook.com/profile.php?id=61560499465895';
 }

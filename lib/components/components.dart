@@ -4,6 +4,7 @@ export 'contact/contact.dart';
 export 'discounts/discounts.dart';
 export 'employee_respond/employee_respond.dart';
 export 'error/error.dart';
+export 'feedback/feedback.dart';
 export 'home/home.dart';
 export 'information/information.dart';
 export 'investors/investors.dart';
