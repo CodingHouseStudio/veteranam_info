@@ -4,18 +4,18 @@ List<Widget> _fundsWidgetList({
   required BuildContext context,
   required bool isDesk,
 }) {
-  final fundItems =
-      context.read<InvestorsWatcherBloc>().state.fundItems.isNotEmpty
-          ? context.read<InvestorsWatcherBloc>().state.fundItems
-          : List<FundModel>.generate(
-              KDimensions.shimmerFundsItems,
-              (index) => FundModel(
-                id: index.toString(),
-                title: KMockText.donateCardTitle,
-                subtitle: KMockText.donateCardSubtitle,
-                link: '',
-              ),
-            );
+  final fundItems = context.read<InvestorsWatcherBloc>().state.loadingStatus ==
+          LoadingStatus.loaded
+      ? context.read<InvestorsWatcherBloc>().state.fundItems
+      : List<FundModel>.generate(
+          KDimensions.shimmerFundsItems,
+          (index) => FundModel(
+            id: index.toString(),
+            title: KMockText.donateCardTitle,
+            subtitle: KMockText.donateCardSubtitle,
+            link: '',
+          ),
+        );
   return List.generate(
     isDesk
         ? (fundItems.length / KDimensions.donateCardsLine).ceil()
