@@ -16,9 +16,17 @@ class StoryAddBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<StoryAddBloc, StoryAddState>(
       listenWhen: (previous, current) =>
-          current.formStatus == FormzSubmissionStatus.success,
-      listener: (context, state) =>
-          context.goNamedWithScroll(KRoute.stories.name),
+          current.formStatus == FormzSubmissionStatus.success ||
+          current.failure != null,
+      listener: (context, state) {
+        if (state.formStatus == FormzSubmissionStatus.success) {
+          context.goNamedWithScroll(KRoute.stories.name);
+        } else if (state.failure != null) {
+          context.dialog.showSendErrorDialog(
+            state.failure!.value(context),
+          );
+        }
+      },
       buildWhen: (previous, current) =>
           previous.formStatus != current.formStatus ||
           previous.isAnonymously != current.isAnonymously ||

@@ -17,9 +17,11 @@ List<Widget> _fundsWidgetList({
               ),
             );
   return List.generate(
-    isDesk
-        ? (fundItems.length / KDimensions.donateCardsLine).ceil()
-        : fundItems.length,
+    context.read<InvestorsWatcherBloc>().state.failure == null
+        ? (isDesk
+            ? (fundItems.length / KDimensions.donateCardsLine).ceil()
+            : fundItems.length)
+        : 0,
     (index) {
       return Padding(
         padding: index != 0

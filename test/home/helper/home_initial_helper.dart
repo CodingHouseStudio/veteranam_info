@@ -159,7 +159,7 @@ Future<void> homeInitialHelper(
 
       await questionHelper(tester);
 
-      // await feedbackHelper(tester);
+      await dialogFailureGetHelper(tester: tester, isFailure: false);
 
       await scrollingHelper(
         tester: tester,

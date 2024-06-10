@@ -15,7 +15,10 @@ List<Widget> _questionWidgetList({
                 subtitle: KMockText.questionSubtitle,
               ),
             );
-  return List.generate(questionModelItems.length, (index) {
+  return List.generate(
+      context.read<HomeWatcherBloc>().state.failure == null
+          ? questionModelItems.length
+          : 0, (index) {
     return Padding(
       padding: index != 0
           ? const EdgeInsets.only(

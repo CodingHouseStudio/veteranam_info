@@ -1,7 +1,9 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:kozak/shared/shared.dart';
 
-Future<void> mockButtonHelper(
+import '../../text_dependency.dart';
+
+Future<void> discountFailureHelper(
   WidgetTester tester,
 ) async {
   expect(
@@ -11,8 +13,8 @@ Future<void> mockButtonHelper(
 
   expect(
     find.byKey(KWidgetkeys.screen.discounts.buttonMock),
-    findsOneWidget,
+    findsNothing,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.screen.discounts.buttonMock));
+  await dialogFailureGetHelper(tester: tester);
 }

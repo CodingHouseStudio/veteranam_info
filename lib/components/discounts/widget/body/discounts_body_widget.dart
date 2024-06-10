@@ -12,7 +12,14 @@ class DiscountBodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<DiscountWatcherBloc, DiscountWatcherState>(
+    return BlocConsumer<DiscountWatcherBloc, DiscountWatcherState>(
+      listener: (context, state) => context.dialog.showGetErrorDialog(
+        error: state.failure!.value(context),
+        onPressed: () => context
+            .read<DiscountWatcherBloc>()
+            .add(const DiscountWatcherEvent.started()),
+      ),
+      listenWhen: (previous, current) => current.failure != null,
       builder: (context, _) {
         return ScaffoldWidget(
           mainChildWidgetsFunction: ({required isDesk}) => [
@@ -31,10 +38,24 @@ class DiscountBodyWidget extends StatelessWidget {
               KSizedBox.kHeightSizedBox56
             else
               KSizedBox.kHeightSizedBox24,
-            DiscountFilters(
+            FiltersChipWidget(
               key: KWidgetkeys.screen.discounts.filter,
-              filtersItem: _.discountModelItems.overallTags,
+              filtersItems: _.discountModelItems.overallTags(context),
               isDesk: isDesk,
+              onResetValue: () => context.read<DiscountWatcherBloc>().add(
+                    const DiscountWatcherEvent.filterReset(),
+                  ),
+              isSelected: ({required filter, required filtersItems}) =>
+                  context.read<DiscountWatcherBloc>().state.filtersIndex?.any(
+                        (category) =>
+                            filter == filtersItems.elementAt(category),
+                      ) ??
+                  false,
+              onSelected: (index) => context.read<DiscountWatcherBloc>().add(
+                    DiscountWatcherEvent.filter(
+                      index,
+                    ),
+                  ),
             ),
             if (isDesk)
               KSizedBox.kHeightSizedBox56

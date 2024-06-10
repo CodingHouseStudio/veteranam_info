@@ -20,7 +20,10 @@ List<Widget> worksWidgetList({
                 category: KMockText.workCategory,
               ),
             );
-  return List.generate(workModelItems.length, (index) {
+  return List.generate(
+      context.read<WorkEmployeeWatcherBloc>().state.failure == null
+          ? workModelItems.length
+          : 0, (index) {
     return Padding(
       padding: index != 0
           ? EdgeInsets.only(

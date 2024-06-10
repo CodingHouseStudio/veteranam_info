@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:bloc/bloc.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kozak/shared/shared.dart';
@@ -23,7 +23,7 @@ class InformationWatcherBloc
             informationModelItems: [],
             loadingStatus: LoadingStatus.initial,
             filteredInformationModelItems: [],
-            filters: null,
+            filtersIndex: null,
             itemsLoaded: 0,
             failure: null,
           ),
@@ -60,8 +60,6 @@ class InformationWatcherBloc
     );
   }
 
-  // ignore: flutter_style_todos
-  /// TODO: Need to change filters value on state.filters
   void _onUpdated(
     _Updated event,
     Emitter<InformationWatcherState> emit,
@@ -70,20 +68,14 @@ class InformationWatcherBloc
       InformationWatcherState(
         informationModelItems: event.informationItemsModel,
         loadingStatus: LoadingStatus.loaded,
-        filteredInformationModelItems: event.informationItemsModel.isNotEmpty
-            ? _filter(
-                filters: state.filters,
-                itemsLoaded: state.itemsLoaded != 0
-                    ? state.itemsLoaded
-                    : KDimensions.loadItems,
-                informationModelItems: event.informationItemsModel,
-              )
-            : [],
-        filters: null,
+        filteredInformationModelItems: _filter(
+          filtersIndex: state.filtersIndex,
+          itemsLoaded: state.itemsLoaded.getLoaded,
+          informationModelItems: event.informationItemsModel,
+        ),
+        filtersIndex: state.filtersIndex,
         itemsLoaded: event.informationItemsModel.isNotEmpty
-            ? state.itemsLoaded != 0
-                ? state.itemsLoaded
-                : KDimensions.loadItems
+            ? state.itemsLoaded.getLoaded
             : 0,
         failure: null,
       ),
@@ -96,7 +88,7 @@ class InformationWatcherBloc
   ) {
     if (state.itemsLoaded + 1 > state.informationModelItems.length) return;
     final filterItems = _filter(
-      filters: state.filters,
+      filtersIndex: state.filtersIndex,
       itemsLoaded: state.itemsLoaded + KDimensions.loadItems,
       informationModelItems: state.informationModelItems,
     );
@@ -117,11 +109,11 @@ class InformationWatcherBloc
     emit(
       state.copyWith(
         filteredInformationModelItems: _filter(
-          filters: null,
-          itemsLoaded: state.itemsLoaded,
+          filtersIndex: null,
+          itemsLoaded: state.itemsLoaded.getLoaded,
           informationModelItems: state.informationModelItems,
         ),
-        filters: null,
+        filtersIndex: null,
       ),
     );
   }
@@ -130,60 +122,50 @@ class InformationWatcherBloc
     _Filter event,
     Emitter<InformationWatcherState> emit,
   ) {
-    emit(state.copyWith(loadingStatus: LoadingStatus.loading));
+    final selectedFilters = List<int>.from(state.filtersIndex ?? []);
 
-    final selectedFilters = List<String>.from(state.filters ?? []);
-
-    event.isSelected
-        ? selectedFilters.add(event.filter)
-        : selectedFilters.remove(event.filter);
+    state.filtersIndex?.contains(event.filterIndex) ?? false
+        ? selectedFilters.remove(event.filterIndex)
+        : selectedFilters.add(event.filterIndex);
 
     final filterItems = _filter(
-      filters: selectedFilters,
+      filtersIndex: selectedFilters,
       informationModelItems: state.informationModelItems,
-      itemsLoaded: state.itemsLoaded,
+      itemsLoaded: state.itemsLoaded.getLoaded,
     );
 
     emit(
       state.copyWith(
         loadingStatus: LoadingStatus.loaded,
         filteredInformationModelItems: filterItems,
-        filters: selectedFilters,
-        itemsLoaded: filterItems.length >= state.itemsLoaded
-            ? state.itemsLoaded
+        filtersIndex: selectedFilters,
+        itemsLoaded: filterItems.length > state.itemsLoaded
+            ? state.itemsLoaded.getLoaded
             : filterItems.length,
       ),
     );
   }
 
   List<InformationModel> _filter({
-    required List<String>? filters,
+    required List<int>? filtersIndex,
     required int itemsLoaded,
     required List<InformationModel> informationModelItems,
   }) {
-    if (itemsLoaded > informationModelItems.length) {
-      itemsLoaded = informationModelItems.length;
+    if (informationModelItems.isEmpty) return [];
+    final loadedItemsCount = itemsLoaded.clamp(0, informationModelItems.length);
+
+    if (filtersIndex == null || filtersIndex.isEmpty) {
+      return informationModelItems.take(loadedItemsCount).toList();
     }
-    if (filters != null && filters.isNotEmpty) {
-      final filterItems = informationModelItems
-          .where(
-            (element) => filters.any(
-              (filter) => element.category.contains(filter),
-            ),
-          )
-          .toList();
-      return filterItems.sublist(
-        0,
-        itemsLoaded > filterItems.length ? filterItems.length : itemsLoaded,
-      );
-    } else {
-      return informationModelItems.sublist(
-        0,
-        itemsLoaded > informationModelItems.length
-            ? informationModelItems.length
-            : itemsLoaded,
-      );
-    }
+
+    final filtersText = filtersIndex
+        .map((index) => informationModelItems.overallTagsBloc.elementAt(index))
+        .toList();
+
+    return informationModelItems
+        .where((item) => filtersText.every(item.category.contains))
+        .take(loadedItemsCount)
+        .toList();
   }
 
   void _onFailure(
@@ -194,7 +176,7 @@ class InformationWatcherBloc
     emit(
       state.copyWith(
         loadingStatus: LoadingStatus.error,
-        failure: GetFailur.fromCode(event.failure).status.toInformation(),
+        failure: InformationFailure.error,
       ),
     );
   }

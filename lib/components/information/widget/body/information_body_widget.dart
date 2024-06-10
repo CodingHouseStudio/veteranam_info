@@ -12,7 +12,14 @@ class InformationBodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<InformationWatcherBloc, InformationWatcherState>(
+    return BlocConsumer<InformationWatcherBloc, InformationWatcherState>(
+      listener: (context, state) => context.dialog.showGetErrorDialog(
+        error: state.failure!.value(context),
+        onPressed: () => context
+            .read<InformationWatcherBloc>()
+            .add(const InformationWatcherEvent.started()),
+      ),
+      listenWhen: (previous, current) => current.failure != null,
       builder: (context, _) => ScaffoldWidget(
         titleChildWidgetsFunction: ({required isDesk}) => [
           if (isDesk)
@@ -30,10 +37,23 @@ class InformationBodyWidget extends StatelessWidget {
             KSizedBox.kHeightSizedBox56
           else
             KSizedBox.kHeightSizedBox24,
-          InformationFilters(
+          FiltersChipWidget(
             key: KWidgetkeys.screen.information.filter,
-            filtersItem: _.informationModelItems.overallTags,
+            filtersItems: _.informationModelItems.overallTags(context),
             isDesk: isDesk,
+            onResetValue: () => context.read<InformationWatcherBloc>().add(
+                  const InformationWatcherEvent.filterReset(),
+                ),
+            isSelected: ({required filter, required filtersItems}) =>
+                context.read<InformationWatcherBloc>().state.filtersIndex?.any(
+                      (category) => filter == filtersItems.elementAt(category),
+                    ) ??
+                false,
+            onSelected: (index) => context.read<InformationWatcherBloc>().add(
+                  InformationWatcherEvent.filter(
+                    index,
+                  ),
+                ),
           ),
           if (isDesk)
             KSizedBox.kHeightSizedBox40

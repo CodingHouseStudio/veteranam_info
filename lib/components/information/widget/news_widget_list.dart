@@ -19,7 +19,10 @@ List<Widget> _newsWidgetList({
             id: index.toString(),
           ),
         );
-  return List.generate(informationModelItems.length, (index) {
+  return List.generate(
+      context.read<InformationWatcherBloc>().state.failure == null
+          ? informationModelItems.length
+          : 0, (index) {
     return Padding(
       padding: index != 0
           ? EdgeInsets.only(
