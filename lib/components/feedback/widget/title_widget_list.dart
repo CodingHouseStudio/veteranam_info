@@ -7,49 +7,13 @@ List<Widget> _titleWidgetList({
     isDesk
         ? [
             KSizedBox.kHeightSizedBox48,
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  child: TextPointWidget(
-                    context.l10n.feedback,
-                    key: KWidgetkeys.screen.feedback.pointText,
-                  ),
-                ),
-                Expanded(
-                  flex: 4,
-                  child: Column(
-                    key: KWidgetkeys.screen.feedback.title,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Text(
-                        context.l10n.write,
-                        style: AppTextStyle.materialThemeDisplayLarge,
-                      ),
-                      Wrap(
-                        crossAxisAlignment: WrapCrossAlignment.end,
-                        children: [
-                          Text(
-                            '${context.l10n.us} ${context.l10n.aMessage}',
-                            style: AppTextStyle.materialThemeDisplayLarge,
-                          ),
-                          KSizedBox.kWidthSizedBox24,
-                          IconWidget(
-                            icon: KIcon.arrowDownRight.copyWith(
-                              key: KWidgetkeys.screen.feedback.titleIcon,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            KSizedBox.kHeightSizedBox32,
-            Divider(
-              key: KWidgetkeys.screen.feedback.divider,
-              color: AppColors.materialThemeKeyColorsNeutral,
+            ...TitleWidget.pointTitleWidgetList(
+              isDesk: isDesk,
+              pointText: context.l10n.feedback,
+              pointKey: KWidgetkeys.screen.feedback.pointText,
+              title: context.l10n.write,
+              titleSecondPart: '${context.l10n.us} ${context.l10n.aMessage}',
+              titleKey: KWidgetkeys.screen.feedback.title,
             ),
             KSizedBox.kHeightSizedBox100,
           ]
