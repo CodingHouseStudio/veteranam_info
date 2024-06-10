@@ -391,4 +391,51 @@ abstract class AppTextStyle {
     fontWeight: FontWeight.w500,
     letterSpacing: 0.1,
   );
+
+  /// h1 figma properties
+  /// fontFamily: Gilroy
+  /// fontSize: 64px
+  /// height: 64px
+  /// fontWeight: 500
+  /// letterSpacing: -0.25px
+  /// fontStyle: none
+  /// decoration: none
+  static const TextStyle h1 = TextStyle(
+    fontFamily: 'Gilroy',
+    fontSize: 64,
+    height: 1,
+    fontWeight: FontWeight.w500,
+    letterSpacing: -0.25,
+  );
+
+  /// h1Mob figma properties
+  /// fontFamily: Gilroy
+  /// fontSize: 36px
+  /// height: 44px
+  /// fontWeight: 500
+  /// letterSpacing: none
+  /// fontStyle: none
+  /// decoration: none
+  static const TextStyle h1Mob = TextStyle(
+    fontFamily: 'Gilroy',
+    fontSize: 36,
+    height: 1.22,
+    fontWeight: FontWeight.w500,
+  );
+
+  /// h1Tablet figma properties
+  /// fontFamily: Gilroy
+  /// fontSize: 48px
+  /// height: 56px
+  /// fontWeight: 500
+  /// letterSpacing: -0.25px
+  /// fontStyle: none
+  /// decoration: none
+  static const TextStyle h1Tablet = TextStyle(
+    fontFamily: 'Gilroy',
+    fontSize: 48,
+    height: 1.17,
+    fontWeight: FontWeight.w500,
+    letterSpacing: -0.25,
+  );
 }
