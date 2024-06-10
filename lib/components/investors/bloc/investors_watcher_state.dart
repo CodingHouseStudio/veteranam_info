@@ -6,19 +6,6 @@ enum InvestorsFailure {
   network,
 }
 
-extension InvestorsFailureValue on InvestorsFailure {
-  String value(BuildContext context) {
-    switch (this) {
-      case InvestorsFailure.error:
-        return context.l10n.error;
-      case InvestorsFailure.get:
-        return context.l10n.getFailure;
-      case InvestorsFailure.network:
-        return context.l10n.networkFailure;
-    }
-  }
-}
-
 extension InvestorsFailureExtension on SomeFailure {
   InvestorsFailure toInvestors() {
     switch (this) {

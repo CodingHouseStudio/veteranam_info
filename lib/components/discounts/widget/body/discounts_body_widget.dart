@@ -45,11 +45,12 @@ class DiscountBodyWidget extends StatelessWidget {
               onResetValue: () => context.read<DiscountWatcherBloc>().add(
                     const DiscountWatcherEvent.filterReset(),
                   ),
-              isSelected: ({required filter, required filtersItems}) =>
-                  context.read<DiscountWatcherBloc>().state.filtersIndex?.any(
-                        (category) =>
-                            filter == filtersItems.elementAt(category),
-                      ) ??
+              isSelected: (index) =>
+                  context
+                      .read<DiscountWatcherBloc>()
+                      .state
+                      .filtersIndex
+                      ?.contains(index) ??
                   false,
               onSelected: (index) => context.read<DiscountWatcherBloc>().add(
                     DiscountWatcherEvent.filter(

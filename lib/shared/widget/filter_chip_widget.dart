@@ -15,12 +15,11 @@ class FiltersChipWidget extends StatelessWidget {
   final bool isDesk;
   final void Function() onResetValue;
   final void Function(
-    int inde,
+    int index,
   ) onSelected;
-  final bool Function({
-    required String filter,
-    required List<String> filtersItems,
-  }) isSelected;
+  final bool Function(
+    int index,
+  ) isSelected;
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +36,7 @@ class FiltersChipWidget extends StatelessWidget {
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(
-              children: filtersItems.map((filter) {
+              children: List.generate(filtersItems.length, (index) {
                 return Padding(
                   padding: EdgeInsets.only(
                     right: isDesk
@@ -46,15 +45,17 @@ class FiltersChipWidget extends StatelessWidget {
                   ),
                   child: ChipWidget(
                     key: KWidgetkeys.widget.filterChip.chips,
-                    filter: filter,
-                    onSelected: ({required isSelected}) =>
-                        onSelected(filtersItems.indexOf(filter)),
-                    isSelected:
-                        isSelected(filter: filter, filtersItems: filtersItems),
+                    filter: filtersItems.elementAt(index),
+                    onSelected: ({required isSelected}) => onSelected(
+                      index,
+                    ),
+                    isSelected: isSelected(
+                      index,
+                    ),
                     isDesk: isDesk,
                   ),
                 );
-              }).toList(),
+              }),
             ),
           ),
         ),

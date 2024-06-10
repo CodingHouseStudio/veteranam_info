@@ -7,21 +7,6 @@ enum LoginError {
   send,
 }
 
-extension LoginFailureValue on LoginError {
-  String value(BuildContext context) {
-    switch (this) {
-      case LoginError.error:
-        return context.l10n.error;
-      case LoginError.send:
-        return context.l10n.sendFailure;
-      case LoginError.network:
-        return context.l10n.networkFailure;
-      case LoginError.notFound:
-        return context.l10n.notFoundFailure;
-    }
-  }
-}
-
 extension AuthFailureToLoginError on SomeFailure {
   LoginError toLogInError() {
     switch (this) {

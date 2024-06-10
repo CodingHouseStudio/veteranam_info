@@ -6,19 +6,6 @@ enum StoryAddFailure {
   send,
 }
 
-extension StoryAddFailureValue on StoryAddFailure {
-  String value(BuildContext context) {
-    switch (this) {
-      case StoryAddFailure.error:
-        return context.l10n.error;
-      case StoryAddFailure.send:
-        return context.l10n.sendFailure;
-      case StoryAddFailure.network:
-        return context.l10n.networkFailure;
-    }
-  }
-}
-
 extension StoryAddFailureExtension on SomeFailure {
   StoryAddFailure toStoryAdd() {
     switch (this) {

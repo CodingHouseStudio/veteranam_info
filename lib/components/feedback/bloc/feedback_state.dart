@@ -6,19 +6,6 @@ enum FeedbackFailure {
   send,
 }
 
-extension FeedbackFailureValue on FeedbackFailure {
-  String value(BuildContext context) {
-    switch (this) {
-      case FeedbackFailure.error:
-        return context.l10n.error;
-      case FeedbackFailure.send:
-        return context.l10n.sendFailure;
-      case FeedbackFailure.network:
-        return context.l10n.networkFailure;
-    }
-  }
-}
-
 extension FeedbackFailureExtension on SomeFailure {
   FeedbackFailure toFeedback() {
     switch (this) {

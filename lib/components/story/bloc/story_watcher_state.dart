@@ -4,15 +4,6 @@ enum StoryFailure {
   error,
 }
 
-extension StoryFailureValue on StoryFailure {
-  String value(BuildContext context) {
-    switch (this) {
-      case StoryFailure.error:
-        return context.l10n.error;
-    }
-  }
-}
-
 @freezed
 class StoryWatcherState with _$StoryWatcherState {
   const factory StoryWatcherState({

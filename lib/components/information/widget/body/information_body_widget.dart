@@ -44,10 +44,12 @@ class InformationBodyWidget extends StatelessWidget {
             onResetValue: () => context.read<InformationWatcherBloc>().add(
                   const InformationWatcherEvent.filterReset(),
                 ),
-            isSelected: ({required filter, required filtersItems}) =>
-                context.read<InformationWatcherBloc>().state.filtersIndex?.any(
-                      (category) => filter == filtersItems.elementAt(category),
-                    ) ??
+            isSelected: (index) =>
+                context
+                    .read<InformationWatcherBloc>()
+                    .state
+                    .filtersIndex
+                    ?.contains(index) ??
                 false,
             onSelected: (index) => context.read<InformationWatcherBloc>().add(
                   InformationWatcherEvent.filter(

@@ -7,21 +7,6 @@ enum SignUpError {
   send,
 }
 
-extension SignUpFailureValue on SignUpError {
-  String value(BuildContext context) {
-    switch (this) {
-      case SignUpError.error:
-        return context.l10n.error;
-      case SignUpError.send:
-        return context.l10n.sendFailure;
-      case SignUpError.network:
-        return context.l10n.networkFailure;
-      case SignUpError.duplicate:
-        return context.l10n.dublicateFailure;
-    }
-  }
-}
-
 extension AuthFailureToSignUpError on SomeFailure {
   SignUpError toSignUpError() {
     switch (this) {
