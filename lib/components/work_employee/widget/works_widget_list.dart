@@ -5,7 +5,8 @@ List<Widget> worksWidgetList({
   required bool isDesk,
 }) {
   final workModelItems =
-      context.read<WorkEmployeeWatcherBloc>().state.workModelItems.isNotEmpty
+      context.read<WorkEmployeeWatcherBloc>().state.loadingStatus ==
+              LoadingStatus.loaded
           ? context.read<WorkEmployeeWatcherBloc>().state.filteredWorkModelItems
           : List.generate(
               KDimensions.shimmerWorksItems,

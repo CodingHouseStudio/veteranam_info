@@ -5,7 +5,8 @@ List<Widget> discountsWidgetList({
   required bool isDesk,
 }) {
   final discountsWidgetList =
-      context.read<DiscountWatcherBloc>().state.discountModelItems.isNotEmpty
+      context.read<DiscountWatcherBloc>().state.loadingStatus ==
+              LoadingStatus.loaded
           ? context.read<DiscountWatcherBloc>().state.filteredDiscountModelItems
           : List.generate(
               KDimensions.shimmerDiscountsItems,
