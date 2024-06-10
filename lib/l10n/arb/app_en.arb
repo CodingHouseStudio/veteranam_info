@@ -177,6 +177,7 @@
   "ourSocialNetworks": "Our social networks",
   "feedbackFormSubtitle": "By submitting this form, I accept the Privacy Policy of this site",
   "sendMessage": "Send message",
+  "tryItAgain": "Try it again",
   "error": "We're sorry, there was an unforeseen error.",
   "@error": {
     "description": "message of an unforeseen error that was not foreseen."

@@ -113,32 +113,50 @@ class _DialogsWidget {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         key: KWidgetkeys.widget.dialogs.failure,
+        backgroundColor: AppColors.materialThemeKeyColorsSecondary,
         content: Row(
           children: [
             Expanded(
               child: Text(
                 error,
                 key: KWidgetkeys.widget.dialogs.failureText,
-                style: AppTextStyle.materialThemeBodyLarge,
+                style: AppTextStyle.materialThemeTitleMedium,
               ),
             ),
             Expanded(
-              child: Align(
-                alignment: Alignment.centerRight,
-                child: TextButton(
-                  key: KWidgetkeys.widget.dialogs.failureButton,
-                  style: KButtonStyles.whiteButtonStyle,
-                  onPressed: onPressed,
-                  child: const Text(
-                    'Try it again',
-                    style: AppTextStyle.materialThemeBodyLarge,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: TextButton(
+                        key: KWidgetkeys.widget.dialogs.failureButton,
+                        style: KButtonStyles.whiteSnackBarButtonStyle,
+                        onPressed: () {
+                          onPressed();
+                          ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                        },
+                        child: Text(
+                          context.l10n.tryItAgain,
+                          style: AppTextStyle.materialThemeTitleMedium,
+                        ),
+                      ),
+                    ),
                   ),
-                ),
+                  KSizedBox.kWidthSizedBox12,
+                  IconButtonWidget(
+                    icon: KIcon.close.copyWith(weight: 300),
+                    onPressed: () =>
+                        ScaffoldMessenger.of(context).hideCurrentSnackBar(),
+                    background: AppColors.materialThemeWhite,
+                    padding: KPadding.kPaddingSize10,
+                  ),
+                ],
               ),
             ),
           ],
         ),
-        // duration: const Duration(seconds: 9999999), // do not auto-close
+        duration: const Duration(minutes: 1),
       ),
     );
   }
@@ -154,7 +172,7 @@ class _DialogsWidget {
           key: KWidgetkeys.widget.dialogs.failureText,
           style: AppTextStyle.materialThemeBodyLarge,
         ),
-        // duration: const Duration(seconds: 9999999), // do not auto-close
+        duration: const Duration(minutes: 1),
       ),
     );
   }
