@@ -10,6 +10,7 @@ class DonateCardWidget extends StatelessWidget {
     super.key,
     this.titleStyle,
   });
+
   final FundModel fundModel;
   final bool hasSubtitle;
   final TextStyle? titleStyle;
@@ -23,8 +24,8 @@ class DonateCardWidget extends StatelessWidget {
       constraints: const BoxConstraints(
         minHeight: KMinMaxSize.minHeight640,
       ),
-      child: Stack(
-        alignment: Alignment.bottomCenter,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
         children: [
           if (fundModel.image != null)
             CachedNetworkImage(
