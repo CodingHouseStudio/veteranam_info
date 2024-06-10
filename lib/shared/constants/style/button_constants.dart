@@ -206,4 +206,22 @@ abstract class KButtonStyles {
     ),
     backgroundColor: MaterialStatePropertyAll(AppColors.materialThemeWhite),
   );
+  static ButtonStyle additionalButtonStyle({
+    required bool isHovered,
+  }) =>
+      ButtonStyle(
+        alignment: Alignment.centerLeft,
+        padding: const MaterialStatePropertyAll(EdgeInsets.zero),
+        overlayColor: const MaterialStatePropertyAll(Colors.transparent),
+        shape: MaterialStatePropertyAll(
+          RoundedRectangleBorder(
+            borderRadius: KBorderRadius.kBorderRadius32,
+            side: BorderSide(
+              color: isHovered
+                  ? AppColors.materialThemeBlack
+                  : AppColors.materialThemeRefSecondarySecondary70,
+            ),
+          ),
+        ),
+      );
 }
