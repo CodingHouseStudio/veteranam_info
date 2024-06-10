@@ -8,7 +8,7 @@ List<Widget> _titleWidgetList({
         ? [
             KSizedBox.kHeightSizedBox48,
             ...TitleWidget.pointTitleWidgetList(
-              isDesk: isDesk,
+              isDesk: true,
               pointText: context.l10n.feedback,
               pointKey: KWidgetkeys.screen.feedback.pointText,
               title: context.l10n.write,
@@ -46,8 +46,7 @@ List<Widget> _titleWidgetList({
               ],
             ),
             KSizedBox.kHeightSizedBox32,
-            Divider(
-              key: KWidgetkeys.screen.feedback.divider,
+            const Divider(
               color: AppColors.materialThemeKeyColorsNeutral,
             ),
             KSizedBox.kHeightSizedBox24,

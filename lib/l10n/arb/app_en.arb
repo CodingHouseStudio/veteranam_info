@@ -7,7 +7,6 @@
   "detail": "Detail",
   "resetAllFilter": "Reset filters",
   "aboutUs": "About project",
-  "forInvestors": "Investors",
   "stories": "Stories",
   "discounts": "Discounts",
   "myProfile": "Profile",
@@ -179,5 +178,10 @@
   "preferEmail": "Prefer e-mail?",
   "ourSocialNetworks": "Our social networks",
   "feedbackFormSubtitle": "By submitting this form, I accept the Privacy Policy of this site",
-  "sendMessage": "Send message"
+  "sendMessage": "Send message",
+  "provideSuggestionsFromBusinesses": "Provide suggestions from businesses,",
+  "orDonateHere": "or donate here",
+  "supportOurVeterans": "Support our veterans",
+  "donateHere": "Donate here",
+  "provenFunds": "Proven funds"
 }

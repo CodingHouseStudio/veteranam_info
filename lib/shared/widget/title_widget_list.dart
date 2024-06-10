@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:kozak/shared/shared.dart';
 
 abstract class TitleWidget {
@@ -30,52 +29,84 @@ abstract class TitleWidget {
     required String pointText,
     required Key pointKey,
     required bool isDesk,
-    CrossAxisAlignment titleCrossAxisAlignmentm = CrossAxisAlignment.stretch,
+    bool isRightArrow = true,
+    MainAxisAlignment titleMainAxisAlignment = MainAxisAlignment.start,
+    CrossAxisAlignment iconCrossAxisAlignment = CrossAxisAlignment.start,
   }) =>
-      isDesk
-          ? [
-              Row(
-                children: [
-                  Expanded(
-                    child: TextPointWidget(
-                      pointText,
-                      key: pointKey,
+      [
+        if (isDesk)
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: TextPointWidget(
+                  pointText,
+                  key: pointKey,
+                ),
+              ),
+              Expanded(
+                flex: 4,
+                child: Column(
+                  key: titleKey,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Text(
+                      title,
+                      textAlign: TextAlign.end,
+                      style: AppTextStyle.materialThemeDisplayLarge,
                     ),
-                  ),
-                  Expanded(
-                    flex: 4,
-                    child: Column(
-                      key: titleKey,
-                      crossAxisAlignment: titleCrossAxisAlignmentm,
+                    Row(
+                      mainAxisAlignment: titleMainAxisAlignment,
                       children: [
-                        Text(
-                          title,
-                          style: AppTextStyle.materialThemeDisplayLarge,
+                        Expanded(
+                          child: Text(
+                            titleSecondPart,
+                            style: AppTextStyle.materialThemeDisplayLarge,
+                            textAlign: TextAlign.end,
+                          ),
                         ),
-                        Row(
-                          children: [
-                            Text(
-                              titleSecondPart,
-                              style: AppTextStyle.materialThemeDisplayLarge,
-                            ),
-                            KSizedBox.kWidthSizedBox24,
-                            IconWidget(
-                              icon: KIcon.arrowDownRight.copyWith(
-                                key: KWidgetkeys.screen.feedback.titleIcon,
-                              ),
-                            ),
-                          ],
+                        KSizedBox.kWidthSizedBox24,
+                        IconWidget(
+                          key: KWidgetkeys.screen.feedback.titleIcon,
+                          icon: isRightArrow
+                              ? KIcon.arrowDownRight
+                              : KIcon.arrowDownLeft,
                         ),
                       ],
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-              KSizedBox.kHeightSizedBox32,
-              Divider(
-                key: KWidgetkeys.screen.feedback.divider,
-                color: AppColors.materialThemeKeyColorsNeutral,
+            ],
+          )
+        else ...[
+          TextPointWidget(
+            pointText,
+            key: pointKey,
+          ),
+          KSizedBox.kHeightSizedBox16,
+          Row(
+            key: titleKey,
+            crossAxisAlignment: iconCrossAxisAlignment,
+            children: [
+              Expanded(
+                flex: 4,
+                child: Text(
+                  '$title $titleSecondPart',
+                  style: AppTextStyle.materialThemeDisplaySmall,
+                ),
               ),
-            ]
-          : [];
+              IconWidget(
+                key: KWidgetkeys.screen.feedback.titleIcon,
+                icon: isRightArrow ? KIcon.arrowDownRight : KIcon.arrowDownLeft,
+                padding: KPadding.kPaddingSize12,
+              ),
+            ],
+          ),
+        ],
+        KSizedBox.kHeightSizedBox32,
+        const Divider(
+          color: AppColors.materialThemeKeyColorsNeutral,
+        ),
+      ];
 }
