@@ -30,7 +30,8 @@ class DonateCardWidget extends StatelessWidget {
             CachedNetworkImage(
               key: KWidgetkeys.widget.donateCard.image,
               imageUrl: fundModel.image.firstImage!,
-              placeholder: (context, url) => Image.asset(''),
+              placeholder: (context, url) =>
+                  const CircularProgressIndicator.adaptive(), //Image.asset(''),
               errorWidget: (context, url, error) => KIcon.error,
               fit: BoxFit.fill,
             ),
