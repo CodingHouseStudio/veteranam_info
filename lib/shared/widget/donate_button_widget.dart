@@ -36,8 +36,11 @@ class DonateButtonWidget extends StatelessWidget {
               ),
             ),
             IconWidget(
-              icon: icon ?? KIcon.arrowUpRight,
-              background: AppColors.materialThemeKeyColorsNeutral,
+              icon: icon ??
+                  KIcon.arrowUpRight.copyWith(
+                    color: AppColors.materialThemeKeyColorsNeutral,
+                  ),
+              background: AppColors.materialThemeKeyColorsSecondary,
             ),
           ],
         ),
