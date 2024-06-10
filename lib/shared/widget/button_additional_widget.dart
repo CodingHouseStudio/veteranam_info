@@ -28,6 +28,7 @@ class _ButtonAdditionalWidgetState extends State<ButtonAdditionalWidget> {
   @override
   Widget build(BuildContext context) {
     return TextButton(
+      key: KWidgetkeys.widget.buttonAdditional.button,
       style:
           KButtonStyles.additionalButtonStyle(isHovered: _isHovered).copyWith(
         backgroundColor: widget.backgroundColor != null
@@ -41,7 +42,8 @@ class _ButtonAdditionalWidgetState extends State<ButtonAdditionalWidget> {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const CircleAvatar(
+          CircleAvatar(
+            key: KWidgetkeys.widget.buttonAdditional.buttonIcon,
             child: KImage.google,
           ),
           Padding(
@@ -50,6 +52,7 @@ class _ButtonAdditionalWidgetState extends State<ButtonAdditionalWidget> {
               right: KPadding.kPaddingSize16,
             ),
             child: Text(
+              key: KWidgetkeys.widget.buttonAdditional.buttonText,
               context.l10n.google,
               style: AppTextStyle.text14,
             ),
