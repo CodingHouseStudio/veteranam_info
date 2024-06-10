@@ -1,14 +1,34 @@
 part of 'feedback_bloc.dart';
 
 enum FeedbackFailure {
-  none,
   error,
-  initial,
+  network,
+  send,
+}
+
+extension FeedbackFailureValue on FeedbackFailure {
+  String value(BuildContext context) {
+    switch (this) {
+      case FeedbackFailure.error:
+        return context.l10n.error;
+      case FeedbackFailure.send:
+        return context.l10n.sendFailure;
+      case FeedbackFailure.network:
+        return context.l10n.networkFailure;
+    }
+  }
 }
 
 extension FeedbackFailureExtension on SomeFailure {
   FeedbackFailure toFeedback() {
-    return FeedbackFailure.error;
+    switch (this) {
+      case FailureSend():
+        return FeedbackFailure.send;
+      case FailureNetwork():
+        return FeedbackFailure.network;
+      default:
+        return FeedbackFailure.error;
+    }
   }
 }
 
@@ -19,7 +39,7 @@ class FeedbackState with _$FeedbackState {
     required EmailFieldModel email,
     required MessageFieldModel message,
     required FeedbackEnum formState,
-    required FeedbackFailure failure,
+    required FeedbackFailure? failure,
   }) = _FeedbackState;
 }
 

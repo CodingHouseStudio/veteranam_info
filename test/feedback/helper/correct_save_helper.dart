@@ -22,6 +22,8 @@ Future<void> correctSaveHelper(
     field: KTestText.field,
   );
 
+  await dialogFailureSetHelper(tester: tester, isFailure: false);
+
   await scrollingHelper(
     tester: tester,
     offset: KTestConstants.scrollingUp500,

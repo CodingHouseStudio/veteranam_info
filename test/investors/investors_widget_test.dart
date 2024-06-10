@@ -20,6 +20,41 @@ void main() {
     setUp(
       () => mockInvestorsRepository = MockIInvestorsRepository(),
     );
+    group('${KGroupText.failure} ', () {
+      testWidgets('${KGroupText.error} ', (tester) async {
+        when(mockInvestorsRepository.getFunds()).thenAnswer(
+          (invocation) async => const Left(SomeFailure.serverError()),
+        );
+        await investorsPumpAppHelper(
+          mockInvestorsRepository: mockInvestorsRepository,
+          tester: tester,
+        );
+
+        await investorsFailureHelper(tester);
+      });
+      testWidgets('${KGroupText.failureNetwork} ', (tester) async {
+        when(mockInvestorsRepository.getFunds()).thenAnswer(
+          (invocation) async => const Left(SomeFailure.network()),
+        );
+        await investorsPumpAppHelper(
+          mockInvestorsRepository: mockInvestorsRepository,
+          tester: tester,
+        );
+
+        await investorsFailureHelper(tester);
+      });
+      testWidgets('${KGroupText.failureGet} ', (tester) async {
+        when(mockInvestorsRepository.getFunds()).thenAnswer(
+          (invocation) async => const Left(SomeFailure.get()),
+        );
+        await investorsPumpAppHelper(
+          mockInvestorsRepository: mockInvestorsRepository,
+          tester: tester,
+        );
+
+        await investorsFailureHelper(tester);
+      });
+    });
     group('${KGroupText.getEmptyList} ', () {
       setUp(() {
         when(mockInvestorsRepository.getFunds()).thenAnswer(
@@ -42,7 +77,7 @@ void main() {
           tester: tester,
         );
 
-        await mockButtonHelper(tester);
+        await investorsMockButtonHelper(tester);
       });
     });
     group(KGroupText.getList, () {

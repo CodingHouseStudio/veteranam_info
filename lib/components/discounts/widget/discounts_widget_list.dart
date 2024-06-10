@@ -14,7 +14,10 @@ List<Widget> discountsWidgetList({
                 userId: index.toString(),
               ),
             );
-  return List.generate(discountsWidgetList.length, (index) {
+  return List.generate(
+      context.read<DiscountWatcherBloc>().state.failure == null
+          ? discountsWidgetList.length
+          : 0, (index) {
     return Padding(
       padding: EdgeInsets.only(
         top: index != 0 ? KPadding.kPaddingSize40 : 0,

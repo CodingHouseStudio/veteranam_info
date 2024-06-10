@@ -4,9 +4,12 @@ enum WorkFailure {
   error,
 }
 
-extension WorkFailureExtension on SomeFailure {
-  WorkFailure toWork() {
-    return WorkFailure.error;
+extension WorkFailureValue on WorkFailure {
+  String value(BuildContext context) {
+    switch (this) {
+      case WorkFailure.error:
+        return context.l10n.error;
+    }
   }
 }
 

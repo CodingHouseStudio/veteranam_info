@@ -20,7 +20,7 @@ import 'package:kozak/components/information/bloc/information_watcher_bloc.dart'
     as _i23;
 import 'package:kozak/components/investors/bloc/investors_watcher_bloc.dart'
     as _i15;
-import 'package:kozak/components/login/bloc/login_bloc.dart' as _i31;
+import 'package:kozak/components/login/bloc/login_bloc.dart' as _i30;
 import 'package:kozak/components/my_story/bloc/my_story_watcher_bloc.dart'
     as _i25;
 import 'package:kozak/components/sign_up/bloc/sign_up_bloc.dart' as _i29;
@@ -39,7 +39,7 @@ import 'package:kozak/shared/data_provider/storage_provider.dart' as _i6;
 import 'package:kozak/shared/repositories/app_authentication_repository.dart'
     as _i24;
 import 'package:kozak/shared/repositories/authentication_repository.dart'
-    as _i30;
+    as _i31;
 import 'package:kozak/shared/repositories/discount_repository.dart' as _i12;
 import 'package:kozak/shared/repositories/feedback_repository.dart' as _i20;
 import 'package:kozak/shared/repositories/firebase_module.dart' as _i34;
@@ -114,10 +114,10 @@ extension GetItInjectableX on _i1.GetIt {
         ));
     gh.factory<_i29.SignUpBloc>(() => _i29.SignUpBloc(
         iAppAuthenticationRepository: gh<_i9.IAppAuthenticationRepository>()));
-    gh.singleton<_i30.AuthenticationRepository>(() =>
-        _i30.AuthenticationRepository(gh<_i9.IAppAuthenticationRepository>()));
-    gh.factory<_i31.LoginBloc>(() => _i31.LoginBloc(
-        authenticationRepository: gh<_i9.AuthenticationRepository>()));
+    gh.factory<_i30.LoginBloc>(() => _i30.LoginBloc(
+        appAuthenticationRepository: gh<_i9.IAppAuthenticationRepository>()));
+    gh.singleton<_i31.AuthenticationRepository>(() =>
+        _i31.AuthenticationRepository(gh<_i9.IAppAuthenticationRepository>()));
     gh.factory<_i32.AuthenticationServicesCubit>(() =>
         _i32.AuthenticationServicesCubit(
             authenticationRepository: gh<_i9.AuthenticationRepository>()));

@@ -70,8 +70,11 @@ class _NawbarWidgetImplematationState
   Widget build(BuildContext context) {
     return Container(
       decoration: KWidgetTheme.boxDecorationNawbar,
-      margin: const EdgeInsets.only(
+      margin: EdgeInsets.only(
         top: KPadding.kPaddingSize24,
+        left: widget.isDesk ? KPadding.kPaddingSize90 : KPadding.kPaddingSize16,
+        right:
+            widget.isDesk ? KPadding.kPaddingSize90 : KPadding.kPaddingSize16,
       ),
       padding: const EdgeInsets.only(
         left: KPadding.kPaddingSize32,

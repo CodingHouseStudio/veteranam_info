@@ -4,9 +4,12 @@ enum StoryFailure {
   error,
 }
 
-extension StoryFailureExtension on SomeFailure {
-  StoryFailure toStory() {
-    return StoryFailure.error;
+extension StoryFailureValue on StoryFailure {
+  String value(BuildContext context) {
+    switch (this) {
+      case StoryFailure.error:
+        return context.l10n.error;
+    }
   }
 }
 

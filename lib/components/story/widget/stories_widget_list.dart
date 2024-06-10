@@ -16,7 +16,10 @@ List<Widget> _storiesWidgetList({
                 userId: index.toString(),
               ),
             );
-  return List.generate(storyModelItems.length, (index) {
+  return List.generate(
+      context.read<StoryWatcherBloc>().state.failure == null
+          ? storyModelItems.length
+          : 0, (index) {
     return Padding(
       padding: index != 0
           ? EdgeInsets.only(

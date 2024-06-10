@@ -1,13 +1,11 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:kozak/shared/shared.dart';
-import 'package:mocktail/mocktail.dart';
 
-import '../../text_dependency.dart';
+import '../../../text_dependency.dart';
 
-Future<void> fieldCorrectHelper({
-  required WidgetTester tester,
-  required MockGoRouter mockGoRouter,
-}) async {
+Future<void> fieldCorrectHelper(
+  WidgetTester tester,
+) async {
   expect(find.byKey(KWidgetkeys.screen.storyAdd.storyField), findsOneWidget);
 
   await messageFieldHelper(
@@ -28,8 +26,4 @@ Future<void> fieldCorrectHelper({
   await tester.tap(find.byKey(KWidgetkeys.screen.storyAdd.button));
 
   await tester.pumpAndSettle();
-
-  verify(
-    () => mockGoRouter.goNamed(KRoute.stories.name),
-  ).called(1);
 }

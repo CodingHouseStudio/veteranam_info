@@ -4,9 +4,12 @@ enum InformationFailure {
   error,
 }
 
-extension InformationFailureExtension on SomeFailure {
-  InformationFailure toInformation() {
-    return InformationFailure.error;
+extension InformationFailureValue on InformationFailure {
+  String value(BuildContext context) {
+    switch (this) {
+      case InformationFailure.error:
+        return context.l10n.error;
+    }
   }
 }
 
@@ -15,7 +18,7 @@ class InformationWatcherState with _$InformationWatcherState {
   const factory InformationWatcherState({
     required List<InformationModel> informationModelItems,
     required List<InformationModel> filteredInformationModelItems,
-    required List<String>? filters,
+    required List<int>? filtersIndex,
     required LoadingStatus loadingStatus,
     required int itemsLoaded,
     required InformationFailure? failure,
@@ -23,10 +26,25 @@ class InformationWatcherState with _$InformationWatcherState {
 }
 
 extension InformationModelExtensions on List<InformationModel> {
-  List<String> get overallTags {
+  List<String> overallTags(BuildContext context) {
     final allTags = <String>[];
     for (final item in this) {
-      allTags.addAll(item.category);
+      allTags.addAll(
+        context.read<AuthenticationBloc>().state.userSetting.locale ==
+                Language.english
+            ? item.category
+            : item.categoryUA,
+      );
+    }
+    return allTags.toSet().toList();
+  }
+
+  List<String> get overallTagsBloc {
+    final allTags = <String>[];
+    for (final item in this) {
+      allTags.addAll(
+        item.category,
+      );
     }
     return allTags.toSet().toList();
   }
