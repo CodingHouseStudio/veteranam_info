@@ -37,7 +37,7 @@ class HomeBoxWidget extends StatelessWidget {
                 Text(
                   context.l10n.thisServiceForVeterans,
                   key: KWidgetkeys.screen.home.boxTitle,
-                  style: AppTextStyle.text64,
+                  style: AppTextStyle.h1,
                 ),
                 KSizedBox.kHeightSizedBox24,
                 Text(
@@ -120,7 +120,7 @@ class HomeBoxWidget extends StatelessWidget {
                 child: Text(
                   context.l10n.thisServiceForVeterans,
                   key: KWidgetkeys.screen.home.boxTitle,
-                  style: AppTextStyle.text36,
+                  style: AppTextStyle.h1Mob,
                 ),
               ),
               KSizedBox.kHeightSizedBox10,
