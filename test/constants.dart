@@ -208,13 +208,10 @@ abstract class KTestText {
 
   static final informationModelItems = <InformationModel>[
     for (var i = 0; i < KMockText.tags.length; i++)
-      InformationModel(
+      KMockText.informationModel.copyWith(
         id: i.toString(),
-        title: KMockText.title,
-        news: KMockText.cardData,
-        date: dateTime,
+        fetchDate: dateTime,
         image: i > KMockText.tags.length - 2 ? imageModels : null,
-        tags: KMockText.tags.elementAt(i),
       ),
   ];
 

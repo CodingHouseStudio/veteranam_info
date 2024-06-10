@@ -10,6 +10,7 @@ List<Widget> _formWidgegList({
     isDesk
         ? [
             Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(
                   child: Column(
@@ -36,6 +37,7 @@ List<Widget> _formWidgegList({
                       Text(
                         context.l10n.ourSocialNetworks,
                         key: KWidgetkeys.screen.feedback.socialText,
+                        style: AppTextStyle.materialThemeTitleMediumHint,
                       ),
                       KSizedBox.kHeightSizedBox8,
                       Wrap(
@@ -92,13 +94,13 @@ List<Widget> _formWidgegList({
                   style: AppTextStyle.materialThemeBodyMediumHint,
                 ),
                 emailButton(isDesk: isDesk),
-                KSizedBox.kHeightSizedBox32,
               ],
             ),
             KSizedBox.kHeightSizedBox32,
             Text(
               context.l10n.ourSocialNetworks,
               key: KWidgetkeys.screen.feedback.socialText,
+              style: AppTextStyle.materialThemeTitleMediumHint,
             ),
             KSizedBox.kHeightSizedBox8,
             Wrap(
