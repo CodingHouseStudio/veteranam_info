@@ -16,6 +16,7 @@ abstract class HomeScreenCardContent {
     Widget? bottomWidget,
   }) =>
       [
+        if (!isDesk) KSizedBox.kHeightSizedBox16,
         TextPointWidget(
           textPoint,
           key: prefixKey,
