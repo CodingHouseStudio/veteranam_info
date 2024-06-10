@@ -4,15 +4,6 @@ enum WorkFailure {
   error,
 }
 
-extension WorkFailureValue on WorkFailure {
-  String value(BuildContext context) {
-    switch (this) {
-      case WorkFailure.error:
-        return context.l10n.error;
-    }
-  }
-}
-
 @freezed
 class WorkEmployeeWatcherState with _$WorkEmployeeWatcherState {
   const factory WorkEmployeeWatcherState({

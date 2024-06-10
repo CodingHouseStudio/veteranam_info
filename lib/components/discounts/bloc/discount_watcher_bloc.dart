@@ -59,7 +59,6 @@ class DiscountWatcherBloc
     );
   }
 
-  // ignore: flutter_style_todos
   void _onUpdated(
     _Updated event,
     Emitter<DiscountWatcherState> emit,

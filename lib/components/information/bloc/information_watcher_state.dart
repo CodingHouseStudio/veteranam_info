@@ -4,15 +4,6 @@ enum InformationFailure {
   error,
 }
 
-extension InformationFailureValue on InformationFailure {
-  String value(BuildContext context) {
-    switch (this) {
-      case InformationFailure.error:
-        return context.l10n.error;
-    }
-  }
-}
-
 @freezed
 class InformationWatcherState with _$InformationWatcherState {
   const factory InformationWatcherState({
@@ -26,19 +17,6 @@ class InformationWatcherState with _$InformationWatcherState {
 }
 
 extension InformationModelExtensions on List<InformationModel> {
-  List<String> overallTags(BuildContext context) {
-    final allTags = <String>[];
-    for (final item in this) {
-      allTags.addAll(
-        context.read<AuthenticationBloc>().state.userSetting.locale ==
-                Language.english
-            ? item.category
-            : item.categoryUA,
-      );
-    }
-    return allTags.toSet().toList();
-  }
-
   List<String> get overallTagsBloc {
     final allTags = <String>[];
     for (final item in this) {

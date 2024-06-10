@@ -4,15 +4,6 @@ enum DiscountFailure {
   error,
 }
 
-extension DiscountFailureValue on DiscountFailure {
-  String value(BuildContext context) {
-    switch (this) {
-      case DiscountFailure.error:
-        return context.l10n.error;
-    }
-  }
-}
-
 @freezed
 class DiscountWatcherState with _$DiscountWatcherState {
   const factory DiscountWatcherState({
@@ -26,19 +17,6 @@ class DiscountWatcherState with _$DiscountWatcherState {
 }
 
 extension DiscountModelExtensions on List<DiscountModel> {
-  List<String> overallTags(BuildContext context) {
-    final allTags = <String>[];
-    for (final item in this) {
-      allTags.addAll(
-        context.read<AuthenticationBloc>().state.userSetting.locale ==
-                Language.english
-            ? item.category
-            : item.categoryUA,
-      );
-    }
-    return allTags.toSet().toList();
-  }
-
   List<String> get overallTagsBloc {
     final allTags = <String>[];
     for (final item in this) {
