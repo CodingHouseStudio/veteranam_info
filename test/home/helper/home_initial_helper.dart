@@ -6,14 +6,14 @@ import '../../text_dependency.dart';
 Future<void> homeInitialHelper(
   WidgetTester tester,
 ) async {
+  await nawbarHelper(
+    tester: tester,
+    searchText: KTestText.field,
+  );
+
   await changeWindowSizeHelper(
     tester: tester,
     test: () async {
-      await nawbarHelper(
-        tester: tester,
-        searchText: KTestText.field,
-      );
-
       expect(
         find.byKey(KWidgetkeys.screen.home.box),
         findsOneWidget,

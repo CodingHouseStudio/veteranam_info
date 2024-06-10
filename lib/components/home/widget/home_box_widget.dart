@@ -16,6 +16,7 @@ class HomeBoxWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     if (isDesk) {
       return Row(
+        key: KWidgetkeys.screen.home.box,
         children: [
           Expanded(
             child: Column(

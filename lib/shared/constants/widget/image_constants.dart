@@ -80,6 +80,21 @@ abstract class KImage {
   static const Image wavingHand = Image(
     image: AssetImage('assets/icons/waving_hand.png'),
   );
+  static const Image veteran1 = Image(
+    image: AssetImage('assets/images/veteran1.png'),
+  );
+  static const Image veteran2 = Image(
+    image: AssetImage('assets/images/veteran2.png'),
+  );
+  static const Image veteran3 = Image(
+    image: AssetImage('assets/images/veteran3.png'),
+  );
+  static const Image veteran4 = Image(
+    image: AssetImage('assets/images/veteran4.png'),
+  );
+  static const Image veteran5 = Image(
+    image: AssetImage('assets/images/veteran5.png'),
+  );
   // static const Image workImage = Image(
   //   image: AssetImage('assets/images/work_image.png'),
   //   fit: BoxFit.fill,

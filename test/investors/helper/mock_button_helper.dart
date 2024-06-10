@@ -6,6 +6,21 @@ import '../../text_dependency.dart';
 Future<void> mockButtonHelper(
   WidgetTester tester,
 ) async {
+  await scrollingHelper(
+    tester: tester,
+    itemKey: KWidgetkeys.screen.investors.feedbackTitle,
+  );
+
+  await scrollingHelper(
+    tester: tester,
+    itemKey: KWidgetkeys.screen.investors.leftImages,
+  );
+
+  await scrollingHelper(
+    tester: tester,
+    itemKey: KWidgetkeys.screen.investors.fundsPoint,
+  );
+
   expect(
     find.byKey(KWidgetkeys.screen.information.card),
     findsNothing,

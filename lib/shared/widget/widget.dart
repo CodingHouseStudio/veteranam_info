@@ -36,6 +36,7 @@ export 'rate_widget.dart';
 export 'scaffold_decoration_widget.dart';
 export 'scaffold_widget.dart';
 export 'secondary_button_widget.dart';
+export 'section_widget.dart';
 export 'sign_up_login_bottom_buttons_widget.dart';
 export 'story_card_widget.dart';
 export 'switch_widget.dart';

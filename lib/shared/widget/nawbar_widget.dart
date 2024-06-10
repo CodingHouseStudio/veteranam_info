@@ -145,7 +145,7 @@ class _NawbarWidgetImplematationState
                 TextButton.icon(
                   onPressed: () => context.goNamed(KRoute.investors.name),
                   label: Text(
-                    context.l10n.forInvestors,
+                    context.l10n.investors,
                     style: AppTextStyle.materialThemeTitleMedium,
                   ),
                   icon: KIcon.fileText,
