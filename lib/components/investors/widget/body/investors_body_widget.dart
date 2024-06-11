@@ -14,7 +14,14 @@ class InvestorsBodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<InvestorsWatcherBloc, InvestorsWatcherState>(
+    return BlocConsumer<InvestorsWatcherBloc, InvestorsWatcherState>(
+      listener: (context, state) => context.dialog.showGetErrorDialog(
+        error: state.failure!.value(context),
+        onPressed: () => context
+            .read<InvestorsWatcherBloc>()
+            .add(const InvestorsWatcherEvent.started()),
+      ),
+      listenWhen: (previous, current) => current.failure != null,
       builder: (context, _) => ScaffoldWidget(
         mainChildWidgetsFunction: ({required isDesk}) => [
           KSizedBox.kHeightSizedBox24,

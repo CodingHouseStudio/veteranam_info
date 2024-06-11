@@ -10,10 +10,9 @@ class DiscountWatcherEvent with _$DiscountWatcherEvent {
 
   const factory DiscountWatcherEvent.loadNextItems() = _LoadNextItems;
 
-  const factory DiscountWatcherEvent.filter({
-    String? filter,
-    bool? isSelected,
-  }) = _Filter;
+  const factory DiscountWatcherEvent.filter(
+    int filterIndex,
+  ) = _Filter;
 
   const factory DiscountWatcherEvent.filterReset() = _FilterReset;
 

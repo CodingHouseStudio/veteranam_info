@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:dartz/dartz.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kozak/shared/shared.dart';
@@ -47,7 +48,7 @@ class StoryRepository implements IStoryRepository {
           await _firestoreService.getStoriesByUserId(userId);
 
       return Right(userStoriesItems);
-    } on Exception catch (e) {
+    } on FirebaseException catch (e) {
       return Left(GetFailur.fromCode(e).status);
     } catch (e) {
       return const Left(SomeFailure.serverError());

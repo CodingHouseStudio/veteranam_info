@@ -17,7 +17,14 @@ class HomeBodyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final aboutProjectKey = GlobalKey();
-    return BlocBuilder<HomeWatcherBloc, HomeWatcherState>(
+    return BlocConsumer<HomeWatcherBloc, HomeWatcherState>(
+      listener: (context, state) => context.dialog.showGetErrorDialog(
+        error: state.failure!.value(context),
+        onPressed: () => context
+            .read<HomeWatcherBloc>()
+            .add(const HomeWatcherEvent.started()),
+      ),
+      listenWhen: (previous, current) => current.failure != null,
       builder: (context, _) => ScaffoldWidget(
         mainChildWidgetsFunction: ({required isDesk}) => [
           ..._boxWidgetList(

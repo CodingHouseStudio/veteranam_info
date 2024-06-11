@@ -63,6 +63,7 @@ part 'widget/chat_input.dart';
 part 'widget/work_request_card.dart';
 part 'widget/check_point_single.dart';
 part 'widget/dialogs.dart';
+part 'widget/filter_chip.dart';
 
 abstract class KWidgetkeys {
   static _ScreenKeys get screen => _ScreenKeys();
