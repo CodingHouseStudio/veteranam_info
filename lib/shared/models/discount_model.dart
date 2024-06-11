@@ -8,7 +8,7 @@ part 'discount_model.g.dart';
 class DiscountModel with _$DiscountModel {
   const factory DiscountModel({
     required String id,
-    required String userId,
+    required String? userId,
     required String company,
     required int discount,
     required String title,
