@@ -336,6 +336,14 @@ abstract class AppTextStyle {
     fontWeight: FontWeight.w500,
     letterSpacing: 0.5,
   );
+  static const TextStyle materialThemeLabelSmallHint = TextStyle(
+    fontFamily: 'Gilroy',
+    fontSize: 11,
+    height: 1.45,
+    fontWeight: FontWeight.w500,
+    letterSpacing: 0.5,
+    color: AppColors.materialThemeRefNeutralVariantNeutralVariant35,
+  );
 
   /// materialThemeTitleLarge figma properties
   /// fontFamily: Gilroy
