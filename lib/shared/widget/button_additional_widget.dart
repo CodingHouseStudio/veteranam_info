@@ -56,15 +56,10 @@ class _ButtonAdditionalWidgetState extends State<ButtonAdditionalWidget> {
           const SizedBox(
             width: KPadding.kPaddingSize8,
           ),
-          Padding(
-            padding: const EdgeInsets.only(
-              left: KPadding.kPaddingSize8,
-            ),
-            child: Text(
-              widget.text,
-              key: KWidgetkeys.widget.buttonAdditional.buttonText,
-              style: AppTextStyle.text14,
-            ),
+          Text(
+            widget.text,
+            key: KWidgetkeys.widget.buttonAdditional.buttonText,
+            style: AppTextStyle.text14,
           ),
         ],
       ),
