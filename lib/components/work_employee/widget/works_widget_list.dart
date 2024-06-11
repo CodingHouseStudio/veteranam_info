@@ -4,22 +4,24 @@ List<Widget> worksWidgetList({
   required BuildContext context,
   required bool isDesk,
 }) {
-  final workModelItems =
-      context.read<WorkEmployeeWatcherBloc>().state.workModelItems.isNotEmpty
-          ? context.read<WorkEmployeeWatcherBloc>().state.filteredWorkModelItems
-          : List.generate(
-              KDimensions.shimmerWorksItems,
-              (index) => WorkModel(
-                id: index.toString(),
-                title: KMockText.workTitle,
-                description: KMockText.workDescription,
-                employerContact: KMockText.email,
-                price: KMockText.workPrice,
-                city: KMockText.workCity,
-                companyName: KMockText.workEmployer,
-                category: KMockText.workCategory,
-              ),
-            );
+  final isLoading =
+      context.read<WorkEmployeeWatcherBloc>().state.loadingStatus !=
+          LoadingStatus.loaded;
+  final workModelItems = isLoading
+      ? List.generate(
+          KDimensions.shimmerWorksItems,
+          (index) => WorkModel(
+            id: index.toString(),
+            title: KMockText.workTitle,
+            description: KMockText.workDescription,
+            employerContact: KMockText.email,
+            price: KMockText.workPrice,
+            city: KMockText.workCity,
+            companyName: KMockText.workEmployer,
+            category: KMockText.workCategory,
+          ),
+        )
+      : context.read<WorkEmployeeWatcherBloc>().state.filteredWorkModelItems;
   return List.generate(
       context.read<WorkEmployeeWatcherBloc>().state.failure == null
           ? workModelItems.length
