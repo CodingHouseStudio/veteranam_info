@@ -38,10 +38,14 @@ class _FeedbackBodyWidgetState extends State<FeedbackBodyWidget> {
           emailController.clear();
           messageController.clear();
         }
+        if (state.failure != null) {
+          context.dialog.showSendErrorDialog(
+            state.failure!.value(context),
+          );
+        }
       },
       buildWhen: (previous, current) =>
-          previous.failure != current.failure ||
-          previous.formState != current.formState,
+          current.failure != null || previous.formState != current.formState,
       builder: (context, state) {
         return ScaffoldWidget(
           mainChildWidgetsFunction: ({required isDesk}) => [

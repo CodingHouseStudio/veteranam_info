@@ -41,10 +41,7 @@ Future<void> signUpInitialHelper(
     findsOneWidget,
   );
 
-  expect(
-    find.byKey(KWidgetkeys.screen.signUp.failureMessage),
-    findsNothing,
-  );
+  await dialogFailureSetHelper(tester: tester, isFailure: false);
 
   await leftCardHelper(tester);
 

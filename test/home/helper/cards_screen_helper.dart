@@ -76,6 +76,19 @@ Future<void> cardsScreenHelper({
           KRoute.information.name,
         ),
       ).called(1);
+
+      await scrollingHelper(
+        tester: tester,
+        itemKey: KWidgetkeys.screen.home.faqButton,
+      );
+
+      await tester.tap(find.byKey(KWidgetkeys.screen.home.faqButton));
+
+      verify(
+        () => mockGoRouter.goNamed(
+          KRoute.feedback.name,
+        ),
+      ).called(1);
     },
   );
 }

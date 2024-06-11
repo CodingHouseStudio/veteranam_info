@@ -2,11 +2,33 @@ part of 'home_watcher_bloc.dart';
 
 enum HomeFailure {
   error,
+  get,
+  network,
+}
+
+extension HomeFailureValue on HomeFailure {
+  String value(BuildContext context) {
+    switch (this) {
+      case HomeFailure.error:
+        return context.l10n.error;
+      case HomeFailure.get:
+        return context.l10n.getFailure;
+      case HomeFailure.network:
+        return context.l10n.networkFailure;
+    }
+  }
 }
 
 extension HomeFailureExtension on SomeFailure {
   HomeFailure toHome() {
-    return HomeFailure.error;
+    switch (this) {
+      case FailureGet():
+        return HomeFailure.get;
+      case FailureNetwork():
+        return HomeFailure.network;
+      default:
+        return HomeFailure.error;
+    }
   }
 }
 

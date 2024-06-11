@@ -75,11 +75,9 @@ class LeftCardWidget extends StatelessWidget {
               ),
               // Expanded(
               //   child: image != null
-              //       ? CachedNetworkImage(
+              //       ? ImageWidget(
               //           key: KWidgetkeys.widget.leftCard.image,
               //           imageUrl: KMockText.image,
-              //           placeholder: (context, url) => Image.asset(''),
-              //           errorWidget: (context, url, error) => KIcon.error,
               //           fit: BoxFit.fill,
               //         )
               //       : const SizedBox.shrink(),

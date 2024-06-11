@@ -2,11 +2,20 @@ part of 'investors_watcher_bloc.dart';
 
 enum InvestorsFailure {
   error,
+  get,
+  network,
 }
 
 extension InvestorsFailureExtension on SomeFailure {
   InvestorsFailure toInvestors() {
-    return InvestorsFailure.error;
+    switch (this) {
+      case FailureGet():
+        return InvestorsFailure.get;
+      case FailureNetwork():
+        return InvestorsFailure.network;
+      default:
+        return InvestorsFailure.error;
+    }
   }
 }
 

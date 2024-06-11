@@ -2,7 +2,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:kozak/shared/shared.dart';
 
 import '../../text_dependency.dart';
-import 'helper.dart';
 
 Future<void> informationInitialHelper(
   WidgetTester tester,
@@ -22,7 +21,7 @@ Future<void> informationInitialHelper(
     findsOneWidget,
   );
 
-  await informationFilterHelper(tester);
+  await filterChipHelper(tester);
 
   expect(
     find.byKey(KWidgetkeys.screen.information.card),

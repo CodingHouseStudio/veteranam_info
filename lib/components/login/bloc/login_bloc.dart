@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:formz/formz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -14,13 +13,13 @@ part 'login_state.dart';
 
 @Injectable()
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  LoginBloc({required AuthenticationRepository authenticationRepository})
-      : _authenticationRepository = authenticationRepository,
+  LoginBloc({required IAppAuthenticationRepository appAuthenticationRepository})
+      : _appAuthenticationRepository = appAuthenticationRepository,
         super(
           const LoginState(
             email: EmailFieldModel.pure(),
             password: PasswordFieldModel.pure(),
-            failure: LoginError.initial,
+            failure: null,
             fieldsIsCorrect: null,
             showPasswordField: false,
           ),
@@ -31,7 +30,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     on<_PasswordFieldHide>(_onPasswordFieldHide);
   }
 
-  final AuthenticationRepository _authenticationRepository;
+  final IAppAuthenticationRepository _appAuthenticationRepository;
 
   Future<void> _onEmailUpdated(
     _EmailUpdated event,
@@ -40,6 +39,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     emit(
       state.copyWith(
         email: EmailFieldModel.dirty(event.email),
+        failure: null,
       ),
     );
   }
@@ -51,6 +51,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     emit(
       state.copyWith(
         password: PasswordFieldModel.dirty(event.password),
+        failure: null,
       ),
     );
   }
@@ -63,7 +64,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       emit(
         state.copyWith(
           showPasswordField: true,
-          failure: LoginError.initial,
+          failure: null,
           fieldsIsCorrect: null,
         ),
       );
@@ -74,7 +75,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       state.email,
     ])) {
       emit(state.copyWith(fieldsIsCorrect: true));
-      final result = await _authenticationRepository.logIn(
+      final result =
+          await _appAuthenticationRepository.logInWithEmailAndPassword(
         email: state.email.value,
         password: state.password.value,
       );
@@ -88,7 +90,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         ),
         (r) => emit(
           state.copyWith(
-            failure: LoginError.none,
+            failure: null,
             showPasswordField: false,
           ),
         ),
