@@ -162,6 +162,20 @@ abstract class KMockText {
     status: 'Healthy',
     fetchDate: DateTime(2024, 06, 07),
   );
+  static const fundModel = FundModel(
+    id: '',
+    title: 'PATRIOT UA',
+    description:
+        'Державна установа у сфері управління Міністерства у справах ветеранів. Державний провайдер сервісу реінтеграції ветеранів до продуктивного цивільного життя.',
+    link: 'https://veteranfund.com.ua/',
+    projectsLink: 'https://veteranfund.com.ua/projects/',
+    teamPartnersLink: 'https://veteranfund.com.ua/about/team/',
+    email: 'info@veteranfund.mva.gov.ua',
+    phoneNumber: '+380 (98) 009 48 72',
+    size: '48',
+    registered: 'Ukraine registered',
+    domain: 'Ветерани',
+  );
 }
 
 /// README: Variables with specific text
