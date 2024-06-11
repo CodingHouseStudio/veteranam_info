@@ -30,7 +30,7 @@ List<Widget> _titleWidgetList({
             ),
             Row(
               key: KWidgetkeys.screen.feedback.title,
-              crossAxisAlignment: CrossAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 IconWidget(
                   icon: KIcon.arrowDownRight.copyWith(
