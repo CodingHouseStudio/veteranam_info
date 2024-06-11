@@ -46,7 +46,9 @@ class DonateCardWidget extends StatelessWidget {
                       fundModel.title,
                       key: KWidgetkeys.widget.donateCard.title,
                       style: titleStyle ??
-                          (isDesk ? AppTextStyle.text32 : AppTextStyle.text24),
+                          (isDesk
+                              ? AppTextStyle.materialThemeHeadlineLarge
+                              : AppTextStyle.materialThemeHeadlineMedium),
                     ),
                   ),
                   if (hasSubtitle)
@@ -58,8 +60,9 @@ class DonateCardWidget extends StatelessWidget {
                       child: Text(
                         fundModel.subtitle,
                         key: KWidgetkeys.widget.donateCard.subtitle,
-                        style:
-                            isDesk ? AppTextStyle.text18 : AppTextStyle.text16,
+                        style: isDesk
+                            ? AppTextStyle.materialThemeBodyLarge
+                            : AppTextStyle.materialThemeBodyMedium,
                       ),
                     ),
                   KSizedBox.kHeightSizedBox16,
