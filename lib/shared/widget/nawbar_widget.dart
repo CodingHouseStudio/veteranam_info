@@ -9,6 +9,7 @@ class NawbarWidget extends SliverPersistentHeaderDelegate {
     required this.isDesk,
     this.widgetKey,
   });
+
   final bool isDesk;
   final Key? widgetKey;
 
@@ -41,6 +42,7 @@ class _NawbarWidgetImplematation extends StatefulWidget {
     required this.isDesk,
     super.key,
   });
+
   final bool isDesk;
 
   @override
@@ -163,7 +165,10 @@ class _NawbarWidgetImplematationState
           //       icon: KIcon.mic,
           //     ),
           //   ),
-          if (widget.isDesk || !isFocused) const LanguagesSwitcherWidget(),
+          if (widget.isDesk)
+            const LanguagesSwitcherWidgetDesk()
+          else
+            const LanguagesSwitcherWidgetMobile(),
           if (context.read<AuthenticationBloc>().state.status !=
                   AuthenticationStatus.authenticated &&
               Config.isDevelopment)
