@@ -7,7 +7,7 @@ part 'discount_model.g.dart';
 @freezed
 class DiscountModel with _$DiscountModel {
   const factory DiscountModel({
-    required String id,
+    required String? id,
     required String? userId,
     required String company,
     required int discount,
