@@ -28,9 +28,9 @@ List<Widget> _titleWidgetList({
               '${context.l10n.write} ${context.l10n.us}',
               style: AppTextStyle.materialThemeDisplaySmall,
             ),
-            Wrap(
+            Row(
               key: KWidgetkeys.screen.feedback.title,
-              crossAxisAlignment: WrapCrossAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 IconWidget(
                   icon: KIcon.arrowDownRight.copyWith(
@@ -39,9 +39,11 @@ List<Widget> _titleWidgetList({
                   padding: KPadding.kPaddingSize12,
                 ),
                 KSizedBox.kWidthSizedBox16,
-                Text(
-                  context.l10n.aMessage,
-                  style: AppTextStyle.materialThemeDisplaySmall,
+                Expanded(
+                  child: Text(
+                    context.l10n.aMessage,
+                    style: AppTextStyle.materialThemeDisplaySmall,
+                  ),
                 ),
               ],
             ),
