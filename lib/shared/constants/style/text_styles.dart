@@ -384,6 +384,15 @@ abstract class AppTextStyle {
     color: AppColors.materialThemeRefNeutralVariantNeutralVariant35,
   );
 
+  static const TextStyle materialThemeTitleMediumWhite = TextStyle(
+    fontFamily: 'Gilroy',
+    fontSize: 16,
+    height: 1.5,
+    fontWeight: FontWeight.w500,
+    letterSpacing: 0.15,
+    color: AppColors.materialThemeKeyColorsNeutral,
+  );
+
   /// materialThemeTitleSmall figma properties
   /// fontFamily: Gilroy
   /// fontSize: 14px

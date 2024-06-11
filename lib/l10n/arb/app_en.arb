@@ -175,7 +175,6 @@
   "preferEmail": "Prefer e-mail?",
   "ourSocialNetworks": "Our social networks",
   "feedbackFormSubtitle": "By submitting this form, I accept the Privacy Policy of this site",
-  "sendMessage": "Send message",
   "provideSuggestionsFromBusinesses": "Provide suggestions from businesses,",
   "orDonateHere": "or donate here",
   "supportOurVeterans": "Support our veterans",
@@ -205,5 +204,8 @@
   "dublicateFailure": "The user with E-mail exist.",
   "@dublicateFailure": {
     "description": "an error message when trying to register an account with the same email as an already registered account"
-  }
+  },
+  "sendMessage": "Send message",
+  "ua": "UA",
+  "en": "EN"
 }

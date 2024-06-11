@@ -5,58 +5,84 @@ import 'package:kozak/shared/shared.dart';
 Future<void> languageSwitcherHelper(
   WidgetTester tester,
 ) async {
-  expect(find.byKey(KWidgetkeys.widget.languageSwitcher.widget), findsWidgets);
+  expect(
+    find.byKey(KWidgetkeys.widget.languageSwitcher.widgetMobile),
+    findsWidgets,
+  );
 
-  expect(find.byKey(KWidgetkeys.widget.languageSwitcher.item), findsNothing);
+  expect(
+    find.byKey(KWidgetkeys.widget.languageSwitcher.itemMobile),
+    findsNothing,
+  );
 
-  expect(find.byKey(KWidgetkeys.widget.languageSwitcher.text), findsWidgets);
+  expect(
+    find.byKey(KWidgetkeys.widget.languageSwitcher.textMobile),
+    findsWidgets,
+  );
 
   await tester.tap(
-    find.byKey(KWidgetkeys.widget.languageSwitcher.widget),
+    find.byKey(KWidgetkeys.widget.languageSwitcher.widgetMobile),
   );
   await tester.pumpAndSettle();
 
-  expect(find.byKey(KWidgetkeys.widget.languageSwitcher.item), findsWidgets);
+  expect(
+    find.byKey(KWidgetkeys.widget.languageSwitcher.itemMobile),
+    findsWidgets,
+  );
 
-  expect(find.byKey(KWidgetkeys.widget.languageSwitcher.text), findsWidgets);
+  expect(
+    find.byKey(KWidgetkeys.widget.languageSwitcher.textMobile),
+    findsWidgets,
+  );
 
-  final textWidget =
-      tester.widget<Text>(find.byKey(KWidgetkeys.widget.languageSwitcher.text));
+  final textWidget = tester.widget<Text>(
+    find.byKey(KWidgetkeys.widget.languageSwitcher.textMobile),
+  );
 
   await tester.tap(
-    find.byKey(KWidgetkeys.widget.languageSwitcher.item).last,
+    find.byKey(KWidgetkeys.widget.languageSwitcher.itemMobile).last,
   );
   await tester.pumpAndSettle();
 
   expect(
     tester
-        .widget<Text>(find.byKey(KWidgetkeys.widget.languageSwitcher.text))
+        .widget<Text>(
+          find.byKey(KWidgetkeys.widget.languageSwitcher.textMobile),
+        )
         .data,
     isNot(textWidget.data),
   );
 
   await tester.tap(
-    find.byKey(KWidgetkeys.widget.languageSwitcher.widget),
+    find.byKey(KWidgetkeys.widget.languageSwitcher.widgetMobile),
   );
   await tester.pumpAndSettle();
 
   await tester.tap(
-    find.byKey(KWidgetkeys.widget.languageSwitcher.item).last,
+    find.byKey(KWidgetkeys.widget.languageSwitcher.itemMobile).last,
   );
   await tester.pumpAndSettle();
 
-  expect(find.byKey(KWidgetkeys.widget.languageSwitcher.item), findsWidgets);
+  expect(
+    find.byKey(KWidgetkeys.widget.languageSwitcher.itemMobile),
+    findsWidgets,
+  );
 
-  expect(find.byKey(KWidgetkeys.widget.languageSwitcher.text), findsWidgets);
+  expect(
+    find.byKey(KWidgetkeys.widget.languageSwitcher.textMobile),
+    findsWidgets,
+  );
 
   await tester.tap(
-    find.byKey(KWidgetkeys.widget.languageSwitcher.item).first,
+    find.byKey(KWidgetkeys.widget.languageSwitcher.itemMobile).first,
   );
   await tester.pumpAndSettle();
 
   expect(
     tester
-        .widget<Text>(find.byKey(KWidgetkeys.widget.languageSwitcher.text))
+        .widget<Text>(
+          find.byKey(KWidgetkeys.widget.languageSwitcher.textMobile),
+        )
         .data,
     textWidget.data,
   );

@@ -4,6 +4,7 @@ import 'package:kozak/shared/shared.dart';
 /// COMMENT: Variables with widget theme that don't have a specific group
 abstract class KWidgetTheme {
   KWidgetTheme.of(this.context);
+
   final BuildContext context;
   static const outlineInputBorder = OutlineInputBorder(
     borderSide: BorderSide(color: AppColors.materialThemeKeyColorsNeutral),
@@ -44,7 +45,12 @@ abstract class KWidgetTheme {
 
   static const boxDecorationGrayCircular = BoxDecoration(
     shape: BoxShape.circle,
-    color: AppColors.materialThemeWhite,
+    color: AppColors.materialThemeKeyColorsNeutral,
+  );
+
+  static const boxDecorationBlackCircular = BoxDecoration(
+    shape: BoxShape.circle,
+    color: AppColors.materialThemeBlack,
   );
 
   static const boxDecorationCard = BoxDecoration(
@@ -73,7 +79,7 @@ abstract class KWidgetTheme {
     color: AppColors.materialThemeKeyColorsNeutralVariant,
   );
   static const boxDecorationWhite = BoxDecoration(
-    borderRadius: KBorderRadius.kBorderRadiusRight32,
+    borderRadius: KBorderRadius.kBorderRadius32,
     color: AppColors.materialThemeWhite,
   );
 

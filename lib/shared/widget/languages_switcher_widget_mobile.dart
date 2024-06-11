@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kozak/shared/shared.dart';
 
-class LanguagesSwitcherWidget extends StatelessWidget {
-  const LanguagesSwitcherWidget({super.key});
+class LanguagesSwitcherWidgetMobile extends StatelessWidget {
+  const LanguagesSwitcherWidgetMobile({super.key});
 
   @override
   Widget build(BuildContext context) {
     return PopupMenuButton<String>(
-      key: KWidgetkeys.widget.languageSwitcher.widget,
+      key: KWidgetkeys.widget.languageSwitcher.widgetMobile,
       child: Container(
         decoration: KWidgetTheme.boxDecorationCircular,
         padding: const EdgeInsets.all(
@@ -16,7 +16,7 @@ class LanguagesSwitcherWidget extends StatelessWidget {
         ),
         child: Text(
           context.l10n.localeName.getLocale.text,
-          key: KWidgetkeys.widget.languageSwitcher.text,
+          key: KWidgetkeys.widget.languageSwitcher.textMobile,
           style: AppTextStyle.materialThemeTitleMedium,
         ),
       ),
@@ -27,7 +27,7 @@ class LanguagesSwitcherWidget extends StatelessWidget {
         final languages = LanguageExtension.getAllLanguage;
         return List.generate(languages.length, (index) {
           return PopupMenuItem<String>(
-            key: KWidgetkeys.widget.languageSwitcher.item,
+            key: KWidgetkeys.widget.languageSwitcher.itemMobile,
             value: languages.elementAt(index).text,
             enabled: languages.elementAt(index).value.languageCode !=
                 context.l10n.localeName,
