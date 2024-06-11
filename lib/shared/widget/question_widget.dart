@@ -44,7 +44,6 @@ class _QuestionWidgetState extends State<QuestionWidget> {
             style: widget.isDesk
                 ? AppTextStyle.materialThemeHeadlineSmall
                 : AppTextStyle.materialThemeTitleLarge,
-            maxLines: 2,
           ),
           onExpansionChanged: (value) => setState(() {
             openQuestion = value;

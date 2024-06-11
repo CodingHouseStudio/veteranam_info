@@ -158,7 +158,7 @@ abstract class FooterWidget {
               Text(
                 KAppText.madeBy,
                 key: KWidgetkeys.widget.footer.madeBy,
-                style: AppTextStyle.materialThemeBodyLargeHint,
+                style: AppTextStyle.materialThemeLabelSmall,
               ),
               KSizedBox.kHeightSizedBox4,
               Row(
@@ -167,7 +167,7 @@ abstract class FooterWidget {
                     child: Text(
                       context.l10n.allRightsReserved,
                       key: KWidgetkeys.widget.footer.rightReserved,
-                      style: AppTextStyle.materialThemeBodyLargeHint,
+                      style: AppTextStyle.materialThemeLabelSmall,
                     ),
                   ),
                   // KSizedBox.kWidthSizedBox8,
@@ -181,7 +181,7 @@ abstract class FooterWidget {
                     child: Text(
                       context.l10n.privacyPolicy,
                       key: KWidgetkeys.widget.footer.privacyPolicy,
-                      style: AppTextStyle.materialThemeBodyLargeHint,
+                      style: AppTextStyle.materialThemeLabelSmall,
                     ),
                   ),
                 ],
@@ -283,8 +283,8 @@ abstract class FooterWidget {
     required BuildContext context,
   }) =>
       [
-        Padding(
-          padding: const EdgeInsets.only(left: KPadding.kPaddingSize4),
+        Align(
+          alignment: Alignment.centerLeft,
           child: Text(
             context.l10n.contacts,
             key: KWidgetkeys.widget.footer.contact,

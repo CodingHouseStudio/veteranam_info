@@ -52,7 +52,7 @@ abstract class KImage {
   static const SvgPicture linkedIn =
       SvgPicture(SvgAssetLoader('assets/icons/linkedin.svg'));
   static const SvgPicture facebook =
-      SvgPicture(SvgAssetLoader('assets/icons/social_icons_f.svg'));
+      SvgPicture(SvgAssetLoader('assets/icons/facebook.svg'));
   static const SvgPicture apple =
       SvgPicture(SvgAssetLoader('assets/icons/social_icons.svg'));
   static const SvgPicture google =
