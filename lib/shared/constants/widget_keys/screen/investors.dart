@@ -3,8 +3,15 @@ part of '../widget_keys.dart';
 class _InvestorsKeys {
   final screen = const Key('investors_screen');
   final buttonMock = const Key('investors_screen_button_mock');
-  final fundTitle = const Key('investors_screen_fund_title');
-  final fundSubtitle = const Key('investors_screen_fund_subtitle');
+  final point = const Key('investors_screen_point');
+  final title = const Key('investors_screen_title');
+  final feedbackTitle = const Key('investors_screen_feedback_title');
+  final feedbackSubtitle = const Key('investors_screen_feedback_subtitle');
+  final feedbackButton = const Key('investors_screen_feedback_button');
+  final rightImages = const Key('investors_screen_right_images');
+  final leftImages = const Key('investors_screen_left_images');
+  final fundsPoint = const Key('investors_screen_funds_point');
+  final fundsTitle = const Key('investors_screen_funds_title');
   final donateCard = const Key('investors_screen_donate_card');
   final donateCards = const Key('investors_screen_donate_cards');
 }

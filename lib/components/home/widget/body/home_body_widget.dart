@@ -79,7 +79,7 @@ class HomeBodyWidget extends StatelessWidget {
                   left: KPadding.kPaddingSize48,
                 ),
                 child: Column(
-                  children: HomeScreenCardContent.get(
+                  children: SectionWidget.get(
                     buttonKey: KWidgetkeys.screen.home.discountButton,
                     prefixKey: KWidgetkeys.screen.home.discountPrefix,
                     titleKey: KWidgetkeys.screen.home.discountTitle,
@@ -101,7 +101,7 @@ class HomeBodyWidget extends StatelessWidget {
           else ...[
             KImage.discountImage.setKey(KWidgetkeys.screen.home.discountImage),
             KSizedBox.kWidthSizedBox16,
-            ...HomeScreenCardContent.get(
+            ...SectionWidget.get(
               buttonKey: KWidgetkeys.screen.home.discountButton,
               prefixKey: KWidgetkeys.screen.home.discountPrefix,
               titleKey: KWidgetkeys.screen.home.discountTitle,
@@ -125,7 +125,7 @@ class HomeBodyWidget extends StatelessWidget {
                   right: KPadding.kPaddingSize48,
                 ),
                 child: Column(
-                  children: HomeScreenCardContent.get(
+                  children: SectionWidget.get(
                     buttonKey: KWidgetkeys.screen.home.informationButton,
                     prefixKey: KWidgetkeys.screen.home.informationPrefix,
                     subtitleKey: KWidgetkeys.screen.home.informationSubtitle,
@@ -147,8 +147,8 @@ class HomeBodyWidget extends StatelessWidget {
           else ...[
             KImage.inforamationImage
                 .setKey(KWidgetkeys.screen.home.informationImage),
-            KSizedBox.kWidthSizedBox16,
-            ...HomeScreenCardContent.get(
+            KSizedBox.kHeightSizedBox16,
+            ...SectionWidget.get(
               buttonKey: KWidgetkeys.screen.home.informationButton,
               prefixKey: KWidgetkeys.screen.home.informationPrefix,
               subtitleKey: KWidgetkeys.screen.home.informationSubtitle,

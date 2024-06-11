@@ -108,6 +108,20 @@ void main() {
 
           await investorsInitialHelper(tester);
         });
+        group('${KGroupText.goTo} ', () {
+          testWidgets('nawbar widget navigation', (tester) async {
+            await investorsPumpAppHelper(
+              mockInvestorsRepository: mockInvestorsRepository,
+              tester: tester,
+              mockGoRouter: mockGoRouter,
+            );
+
+            await feedbackNavigationHelper(
+              tester: tester,
+              mockGoRouter: mockGoRouter,
+            );
+          });
+        });
       });
     });
   });

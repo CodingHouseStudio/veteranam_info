@@ -8,11 +8,11 @@ Future<void> nawbarHelper({
   required WidgetTester tester,
   required String searchText,
 }) async {
+  await languageSwitcherHelper(tester);
+
   await changeWindowSizeHelper(
     tester: tester,
     test: () async {
-      await languageSwitcherHelper(tester);
-
       expect(find.byKey(KWidgetkeys.widget.nawbar.logo), findsOneWidget);
 
       expect(find.byKey(KWidgetkeys.widget.nawbar.field), findsOneWidget);

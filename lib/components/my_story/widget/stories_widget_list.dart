@@ -4,18 +4,19 @@ List<Widget> _storiesWidgetList({
   required BuildContext context,
   required bool isDesk,
 }) {
-  final storyModelItems =
-      context.read<MyStoryWatcherBloc>().state.storyModelItems.isNotEmpty
-          ? context.read<MyStoryWatcherBloc>().state.storyModelItems
-          : List.generate(
-              KDimensions.shimmerStoriesItems,
-              (index) => StoryModel(
-                id: index.toString(),
-                date: ExtendedDateTime.current,
-                story: KMockText.cardData,
-                userId: index.toString(),
-              ),
-            );
+  final isLoading = context.read<MyStoryWatcherBloc>().state.loadingStatus !=
+      LoadingStatus.loaded;
+  final storyModelItems = isLoading
+      ? List.generate(
+          KDimensions.shimmerStoriesItems,
+          (index) => StoryModel(
+            id: index.toString(),
+            date: ExtendedDateTime.current,
+            story: KMockText.cardData,
+            userId: index.toString(),
+          ),
+        )
+      : context.read<MyStoryWatcherBloc>().state.storyModelItems;
   return List.generate(
       context.read<MyStoryWatcherBloc>().state.failure == null
           ? storyModelItems.length
@@ -27,8 +28,7 @@ List<Widget> _storiesWidgetList({
             )
           : EdgeInsets.zero,
       child: Skeletonizer(
-        enabled: context.read<MyStoryWatcherBloc>().state.loadingStatus !=
-            LoadingStatus.loaded,
+        enabled: isLoading,
         child: StoryCardWidget(
           key: KWidgetkeys.screen.myStory.card,
           storyModel: storyModelItems.elementAt(index),
