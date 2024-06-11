@@ -33,3 +33,7 @@ extension LocalizedDateTime on DateTime {
 enum LoadingStatus { initial, loading, loaded, error }
 
 enum EvaluationEnum { like, dislike, smile, none }
+
+extension ItemLoadedExtensions on int {
+  int get getLoaded => this != 0 ? this : KDimensions.loadItems;
+}

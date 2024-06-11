@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:kozak/shared/shared.dart';
 
@@ -71,15 +70,9 @@ class CardAddImageWidget extends StatelessWidget {
         maxHeight: KMinMaxSize.minHeight640,
         maxWidth: KMinMaxSize.maxWidth640,
       ),
-      child: CachedNetworkImage(
+      child: ImageWidget(
         key: KWidgetkeys.widget.cardAddImage.widget,
         imageUrl: image!,
-        placeholder: (context, url) =>
-            const CircularProgressIndicator.adaptive(), //Image.asset(''),
-        errorWidget: (context, url, error) {
-          debugPrint('image error: $error');
-          return KIcon.error;
-        },
         fit: BoxFit.contain,
       ),
     );

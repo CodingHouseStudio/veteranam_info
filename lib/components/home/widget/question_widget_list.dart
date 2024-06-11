@@ -11,12 +11,15 @@ List<Widget> _questionWidgetList({
           KDimensions.shimmerQuestionItems,
           (index) => QuestionModel(
             id: index.toString(),
-            title: KMockText.questionTitle.first,
+            title: KMockText.questionTitle.elementAt(0),
             subtitle: KMockText.questionSubtitle,
           ),
         )
       : context.read<HomeWatcherBloc>().state.questionModelItems;
-  return List.generate(questionModelItems.length, (index) {
+  return List.generate(
+      context.read<HomeWatcherBloc>().state.failure == null
+          ? questionModelItems.length
+          : 0, (index) {
     return Padding(
       padding: index != 0
           ? const EdgeInsets.only(

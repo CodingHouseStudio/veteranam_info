@@ -1,0 +1,79 @@
+import 'package:flutter_test/flutter_test.dart';
+import 'package:get_it/get_it.dart';
+import 'package:kozak/shared/shared.dart';
+import 'package:mockito/mockito.dart';
+
+import '../../text_dependency.dart';
+
+void main() {
+  setupFirebaseAuthMocks();
+
+  setUpAll(setUpGlobal);
+  group('${KScreenBlocName.discount} ${KGroupText.repository} ', () {
+    late IDiscountRepository mockDiscountRepository;
+    late FirestoreService mockFirestoreService;
+    group('${KGroupText.successfulGet} ', () {
+      setUp(() {
+        ExtendedDateTime.id = '';
+        ExtendedDateTime.current = KTestText.dateTime;
+        mockFirestoreService = MockFirestoreService();
+        mockDiscountRepository = MockIDiscountRepository();
+        when(mockFirestoreService.getDiscounts()).thenAnswer(
+          (_) => Stream.value(KTestText.discountModelItems),
+        );
+        when(
+          mockFirestoreService.addDiscount(
+            KTestText.discountModelItems.first,
+          ),
+        ).thenAnswer(
+          (realInvocation) async {},
+        );
+        if (GetIt.I.isRegistered<FirestoreService>()) {
+          GetIt.I.unregister<FirestoreService>();
+        }
+        GetIt.I.registerSingleton(mockFirestoreService);
+
+        mockDiscountRepository = DiscountRepository();
+      });
+      test('Discount', () async {
+        expect(
+          mockDiscountRepository.getDiscountItems(),
+          emits(KTestText.discountModelItems),
+        );
+      });
+      test('mock', () async {
+        mockDiscountRepository.addMockDiscountItems();
+        verify(
+          mockFirestoreService.addDiscount(
+            KTestText.discountModelItems.first,
+          ),
+        ).called(1);
+      });
+    });
+    group('${KGroupText.failureGet} ', () {
+      setUp(() {
+        ExtendedDateTime.id = '';
+        mockFirestoreService = MockFirestoreService();
+        //mockDiscountRepository = MockIDiscountRepository();
+        when(mockFirestoreService.getDiscounts()).thenAnswer(
+          (realInvocation) => Stream.error(
+            KGroupText.failureGet,
+          ),
+        );
+
+        if (GetIt.I.isRegistered<FirestoreService>()) {
+          GetIt.I.unregister<FirestoreService>();
+        }
+        GetIt.I.registerSingleton(mockFirestoreService);
+
+        mockDiscountRepository = DiscountRepository();
+      });
+      test('Discount', () async {
+        expect(
+          mockDiscountRepository.getDiscountItems(),
+          emitsError(KGroupText.failureGet),
+        );
+      });
+    });
+  });
+}

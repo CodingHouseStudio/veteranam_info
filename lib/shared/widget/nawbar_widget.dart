@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -70,8 +69,11 @@ class _NawbarWidgetImplematationState
   Widget build(BuildContext context) {
     return Container(
       decoration: KWidgetTheme.boxDecorationNawbar,
-      margin: const EdgeInsets.only(
+      margin: EdgeInsets.only(
         top: KPadding.kPaddingSize24,
+        left: widget.isDesk ? KPadding.kPaddingSize90 : KPadding.kPaddingSize16,
+        right:
+            widget.isDesk ? KPadding.kPaddingSize90 : KPadding.kPaddingSize16,
       ),
       padding: const EdgeInsets.only(
         left: KPadding.kPaddingSize32,
@@ -200,14 +202,11 @@ class _NawbarWidgetImplematationState
                   borderRadius: BorderRadius.circular(KSize.kUserPhoto),
                   child: InkWell(
                     onTap: () => context.goNamedWithScroll(KRoute.profile.name),
-                    child: CachedNetworkImage(
+                    child: ImageWidget(
                       imageUrl:
                           context.read<AuthenticationBloc>().state.user!.photo!,
-                      placeholder: (context, url) => Image.asset(''),
-                      errorWidget: (context, url, error) => KIcon.error,
                       fit: BoxFit.contain,
-                      width: KSize.kUserPhoto,
-                      height: KSize.kUserPhoto,
+                      size: KSize.kUserPhoto,
                     ),
                   ),
                 ),

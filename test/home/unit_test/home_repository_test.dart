@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:kozak/shared/shared.dart';
@@ -52,7 +53,7 @@ void main() {
       setUp(() {
         mockFirestoreService = MockFirestoreService();
         when(mockFirestoreService.getQuestions())
-            .thenThrow(Exception(KGroupText.failureGet));
+            .thenThrow(FirebaseException(plugin: KGroupText.failureGet));
         if (GetIt.I.isRegistered<FirestoreService>()) {
           GetIt.I.unregister<FirestoreService>();
         }

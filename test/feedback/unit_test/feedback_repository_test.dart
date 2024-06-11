@@ -24,16 +24,16 @@ void main() {
       );
       when(
         mockFirestoreService.addFeedback(KTestText.feedbackModelIncorect),
-      ).thenThrow(Exception(KGroupText.failureSet));
+      ).thenThrow(FirebaseException(plugin: KGroupText.failureSend));
       when(
         mockFirestoreService.getUserFeedback(KTestText.fieldEmpty),
-      ).thenThrow(Exception(KGroupText.failureGet));
+      ).thenThrow(FirebaseException(plugin: KGroupText.failureGet));
       when(
         mockFirestoreService.addFeedback(
           KTestText.feedbackModelIncorect
               .copyWith(message: KTestText.fieldEmpty),
         ),
-      ).thenThrow(FirebaseException(plugin: KGroupText.failureSet));
+      ).thenThrow(FirebaseException(plugin: KGroupText.failureSend));
       when(
         mockFirestoreService.getUserFeedback(KTestText.feedbackModel.id),
       ).thenThrow(FirebaseException(plugin: KGroupText.failureGet));
@@ -56,7 +56,7 @@ void main() {
         isA<Right<SomeFailure, bool>>().having((e) => e.value, 'value', isTrue),
       );
     });
-    test('${KGroupText.failureSet} feedback', () async {
+    test('${KGroupText.failureSend} feedback', () async {
       expect(
         await mockFeedbackRepository
             .sendFeedback(KTestText.feedbackModelIncorect),
@@ -78,7 +78,7 @@ void main() {
         ),
       );
     });
-    test('${KGroupText.failureSet} firebase feedback', () async {
+    test('${KGroupText.failureSend} firebase feedback', () async {
       expect(
         await mockFeedbackRepository.sendFeedback(
           KTestText.feedbackModelIncorect

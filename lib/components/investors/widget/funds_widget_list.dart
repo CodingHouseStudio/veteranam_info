@@ -4,10 +4,10 @@ List<Widget> _fundsWidgetList({
   required BuildContext context,
   required bool isDesk,
 }) {
-  final fundItems = context.read<InvestorsWatcherBloc>().state.loadingStatus ==
-          LoadingStatus.loaded
-      ? context.read<InvestorsWatcherBloc>().state.fundItems
-      : List<FundModel>.generate(
+  final isLoading = context.read<InvestorsWatcherBloc>().state.loadingStatus !=
+      LoadingStatus.loaded;
+  final fundItems = isLoading
+      ? List<FundModel>.generate(
           KDimensions.shimmerFundsItems,
           (index) => FundModel(
             id: index.toString(),
@@ -15,11 +15,14 @@ List<Widget> _fundsWidgetList({
             subtitle: KMockText.donateCardSubtitle,
             link: '',
           ),
-        );
+        )
+      : context.read<InvestorsWatcherBloc>().state.fundItems;
   return List.generate(
-    isDesk
-        ? (fundItems.length / KDimensions.donateCardsLine).ceil()
-        : fundItems.length,
+    context.read<InvestorsWatcherBloc>().state.failure == null
+        ? (isDesk
+            ? (fundItems.length / KDimensions.donateCardsLine).ceil()
+            : fundItems.length)
+        : 0,
     (index) {
       return Padding(
         padding: index != 0
@@ -38,9 +41,7 @@ List<Widget> _fundsWidgetList({
                 ),
               )
             : Skeletonizer(
-                enabled:
-                    context.read<InvestorsWatcherBloc>().state.loadingStatus !=
-                        LoadingStatus.loaded,
+                enabled: isLoading,
                 child: DonateCardWidget(
                   key: KWidgetkeys.screen.investors.donateCard,
                   fundModel: fundItems.elementAt(index),

@@ -3,7 +3,7 @@ import 'package:kozak/shared/shared.dart';
 
 import '../../text_dependency.dart';
 
-Future<void> mockButtonHelper(
+Future<void> investorsMockButtonHelper(
   WidgetTester tester,
 ) async {
   await scrollingHelper(

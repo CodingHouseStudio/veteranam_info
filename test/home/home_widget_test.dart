@@ -53,6 +53,50 @@ void main() {
         (invocation) async => const Right(true),
       );
     });
+    group('${KGroupText.failure} ', () {
+      testWidgets('${KGroupText.error} ', (tester) async {
+        when(mockHomeRepository.getQuestions()).thenAnswer(
+          (invocation) async => const Left(SomeFailure.serverError()),
+        );
+        await homePumpAppHelper(
+          mockFeedbackRepository: mockFeedbackRepository,
+          mockHomeRepository: mockHomeRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
+          tester: tester,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+        );
+
+        await homeFailureHelper(tester);
+      });
+      testWidgets('${KGroupText.failureNetwork} ', (tester) async {
+        when(mockHomeRepository.getQuestions()).thenAnswer(
+          (invocation) async => const Left(SomeFailure.network()),
+        );
+        await homePumpAppHelper(
+          mockFeedbackRepository: mockFeedbackRepository,
+          mockHomeRepository: mockHomeRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
+          tester: tester,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+        );
+
+        await homeFailureHelper(tester);
+      });
+      testWidgets('${KGroupText.failureGet} ', (tester) async {
+        when(mockHomeRepository.getQuestions()).thenAnswer(
+          (invocation) async => const Left(SomeFailure.get()),
+        );
+        await homePumpAppHelper(
+          mockFeedbackRepository: mockFeedbackRepository,
+          mockHomeRepository: mockHomeRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
+          tester: tester,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+        );
+
+        await homeFailureHelper(tester);
+      });
+    });
     group('${KGroupText.getEmptyList} ', () {
       setUp(() {
         when(mockHomeRepository.getQuestions()).thenAnswer(
@@ -75,7 +119,7 @@ void main() {
           mockAppAuthenticationRepository: mockAppAuthenticationRepository,
         );
 
-        await mockButtonHelper(tester);
+        await homeMockButtonHelper(tester);
       });
     });
     group(KGroupText.getList, () {

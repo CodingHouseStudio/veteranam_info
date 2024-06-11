@@ -25,5 +25,5 @@ Future<void> incorrectEmailHelper(
     showPassword: false,
   );
 
-  expect(find.byKey(KWidgetkeys.screen.login.failureMessage), findsNothing);
+  await dialogFailureSetHelper(tester: tester, isFailure: false);
 }

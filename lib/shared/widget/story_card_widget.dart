@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:kozak/shared/shared.dart';
 
@@ -29,13 +28,10 @@ class StoryCardWidget extends StatelessWidget {
           else
             ClipRRect(
               borderRadius: BorderRadius.circular(KSize.kUserPhoto),
-              child: CachedNetworkImage(
+              child: ImageWidget(
                 imageUrl: storyModel.userPhoto.firstImage!,
-                placeholder: (context, url) => Image.asset(''),
-                errorWidget: (context, url, error) => KIcon.error,
                 fit: BoxFit.contain,
-                width: KSize.kUserPhoto,
-                height: KSize.kUserPhoto,
+                size: KSize.kUserPhoto,
               ),
             ),
           KSizedBox.kWidthSizedBox8,

@@ -3,7 +3,7 @@ import 'package:kozak/shared/shared.dart';
 
 import '../../text_dependency.dart';
 
-Future<void> employerInitialHelper(
+Future<void> myStoryInitialHelper(
   WidgetTester tester,
 ) async {
   expect(

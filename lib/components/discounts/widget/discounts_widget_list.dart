@@ -4,25 +4,27 @@ List<Widget> discountsWidgetList({
   required BuildContext context,
   required bool isDesk,
 }) {
-  final discountsWidgetList =
-      context.read<DiscountWatcherBloc>().state.loadingStatus ==
-              LoadingStatus.loaded
-          ? context.read<DiscountWatcherBloc>().state.filteredDiscountModelItems
-          : List.generate(
-              KDimensions.shimmerDiscountsItems,
-              (index) => KMockText.discountModel.copyWith(
-                id: index.toString(),
-                userId: index.toString(),
-              ),
-            );
-  return List.generate(discountsWidgetList.length, (index) {
+  final isLoading = context.read<DiscountWatcherBloc>().state.loadingStatus !=
+      LoadingStatus.loaded;
+  final discountsWidgetList = isLoading
+      ? List.generate(
+          KDimensions.shimmerDiscountsItems,
+          (index) => KMockText.discountModel.copyWith(
+            id: index.toString(),
+            userId: index.toString(),
+          ),
+        )
+      : context.read<DiscountWatcherBloc>().state.filteredDiscountModelItems;
+  return List.generate(
+      context.read<DiscountWatcherBloc>().state.failure == null
+          ? discountsWidgetList.length
+          : 0, (index) {
     return Padding(
       padding: EdgeInsets.only(
         top: index != 0 ? KPadding.kPaddingSize40 : 0,
       ),
       child: Skeletonizer(
-        enabled: context.read<DiscountWatcherBloc>().state.loadingStatus !=
-            LoadingStatus.loaded,
+        enabled: isLoading,
         child: DiscountsCardWidget(
           key: KWidgetkeys.screen.discounts.card,
           discountItem: discountsWidgetList.elementAt(index),
