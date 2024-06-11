@@ -9,11 +9,8 @@ List<Widget> _fundsWidgetList({
   final fundItems = isLoading
       ? List<FundModel>.generate(
           KDimensions.shimmerFundsItems,
-          (index) => FundModel(
+          (index) => KMockText.fundModel.copyWith(
             id: index.toString(),
-            title: KMockText.donateCardTitle,
-            subtitle: KMockText.donateCardSubtitle,
-            link: '',
           ),
         )
       : context.read<InvestorsWatcherBloc>().state.fundItems;
