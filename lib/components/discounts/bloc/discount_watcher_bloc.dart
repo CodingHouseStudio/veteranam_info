@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:bloc/bloc.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kozak/shared/shared.dart';
@@ -23,7 +23,7 @@ class DiscountWatcherBloc
             discountModelItems: [],
             loadingStatus: LoadingStatus.initial,
             filteredDiscountModelItems: [],
-            filters: null,
+            filtersIndex: null,
             itemsLoaded: 0,
             failure: null,
           ),
@@ -59,7 +59,6 @@ class DiscountWatcherBloc
     );
   }
 
-  // ignore: flutter_style_todos
   void _onUpdated(
     _Updated event,
     Emitter<DiscountWatcherState> emit,
@@ -70,16 +69,14 @@ class DiscountWatcherBloc
         loadingStatus: LoadingStatus.loaded,
         filteredDiscountModelItems: event.discountItemsModel.isNotEmpty
             ? _filter(
-                filters: state.filters,
-                itemsLoaded: state.itemsLoaded != 0 ? state.itemsLoaded : 1,
+                filtersIndex: state.filtersIndex,
+                itemsLoaded: state.itemsLoaded.getLoaded,
                 discountModelItems: event.discountItemsModel,
               )
             : [],
-        filters: state.filters,
+        filtersIndex: state.filtersIndex,
         itemsLoaded: event.discountItemsModel.isNotEmpty
-            ? state.itemsLoaded != 0
-                ? state.itemsLoaded
-                : 1
+            ? state.itemsLoaded.getLoaded
             : 0,
         failure: null,
       ),
@@ -92,7 +89,7 @@ class DiscountWatcherBloc
   ) {
     if (state.itemsLoaded + 1 > state.discountModelItems.length) return;
     final filterItems = _filter(
-      filters: state.filters,
+      filtersIndex: state.filtersIndex,
       itemsLoaded: state.itemsLoaded + 1,
       discountModelItems: state.discountModelItems,
     );
@@ -113,11 +110,11 @@ class DiscountWatcherBloc
     emit(
       state.copyWith(
         filteredDiscountModelItems: _filter(
-          filters: null,
+          filtersIndex: null,
           itemsLoaded: state.itemsLoaded,
           discountModelItems: state.discountModelItems,
         ),
-        filters: null,
+        filtersIndex: null,
       ),
     );
   }
@@ -126,48 +123,50 @@ class DiscountWatcherBloc
     _Filter event,
     Emitter<DiscountWatcherState> emit,
   ) {
-    emit(state.copyWith(loadingStatus: LoadingStatus.loading));
+    final selectedFilters = List<int>.from(state.filtersIndex ?? []);
 
-    final selectedFilters = List<String>.from(state.filters ?? []);
-
-    event.isSelected ?? false
-        ? selectedFilters.add(event.filter!)
-        : selectedFilters.remove(event.filter);
+    state.filtersIndex?.contains(event.filterIndex) ?? false
+        ? selectedFilters.remove(event.filterIndex)
+        : selectedFilters.add(event.filterIndex);
 
     final filterItems = _filter(
-      filters: selectedFilters,
+      filtersIndex: selectedFilters,
       discountModelItems: state.discountModelItems,
-      itemsLoaded: state.itemsLoaded,
+      itemsLoaded: state.itemsLoaded.getLoaded,
     );
 
     emit(
       state.copyWith(
         loadingStatus: LoadingStatus.loaded,
         filteredDiscountModelItems: filterItems,
-        filters: selectedFilters,
-        itemsLoaded: filterItems.length >= state.itemsLoaded
-            ? state.itemsLoaded
+        filtersIndex: selectedFilters,
+        itemsLoaded: filterItems.length > state.itemsLoaded
+            ? state.itemsLoaded.getLoaded
             : filterItems.length,
       ),
     );
   }
 
   List<DiscountModel> _filter({
-    required List<String>? filters,
+    required List<int>? filtersIndex,
     required int itemsLoaded,
     required List<DiscountModel> discountModelItems,
   }) {
-    final filteredItems = discountModelItems.where((element) {
-      if (filters != null && filters.isNotEmpty) {
-        return filters.any(element.tags.contains);
-      }
-      return true;
-    }).toList();
+    if (discountModelItems.isEmpty) return [];
+    final loadedItemsCount = itemsLoaded.clamp(0, discountModelItems.length);
 
-    final itemsToLoad =
-        itemsLoaded > filteredItems.length ? filteredItems.length : itemsLoaded;
+    if (filtersIndex == null || filtersIndex.isEmpty) {
+      return discountModelItems.take(loadedItemsCount).toList();
+    }
 
-    return filteredItems.sublist(0, itemsToLoad);
+    final filtersText = filtersIndex
+        .map((index) => discountModelItems.overallTagsBloc.elementAt(index))
+        .toList();
+
+    return discountModelItems
+        .where((item) => filtersText.every(item.category.contains))
+        .take(loadedItemsCount)
+        .toList();
   }
 
   void _onFailure(
@@ -178,7 +177,7 @@ class DiscountWatcherBloc
     emit(
       state.copyWith(
         loadingStatus: LoadingStatus.error,
-        failure: const SomeFailure.serverError().toDiscount(),
+        failure: DiscountFailure.error,
       ),
     );
   }

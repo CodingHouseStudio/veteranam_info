@@ -16,7 +16,7 @@ class IconWidget extends StatelessWidget {
     return Container(
       decoration:
           KWidgetTheme.boxDecorationCircular.copyWith(color: background),
-      padding: EdgeInsets.all(padding ?? KPadding.kPaddingSize12),
+      padding: EdgeInsets.all(padding ?? KPadding.kPaddingSize20),
       child: icon,
     );
   }

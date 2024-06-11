@@ -22,4 +22,91 @@ abstract class TitleWidget {
           style: isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
         ),
       ];
+  static List<Widget> pointTitleWidgetList({
+    required String title,
+    required String titleSecondPart,
+    required Key titleKey,
+    required String pointText,
+    required Key pointKey,
+    required bool isDesk,
+    bool isRightArrow = true,
+    MainAxisAlignment titleMainAxisAlignment = MainAxisAlignment.start,
+    CrossAxisAlignment iconCrossAxisAlignment = CrossAxisAlignment.start,
+  }) =>
+      [
+        if (isDesk)
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: TextPointWidget(
+                  pointText,
+                  key: pointKey,
+                ),
+              ),
+              Expanded(
+                flex: 4,
+                child: Column(
+                  key: titleKey,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Text(
+                      title,
+                      textAlign: TextAlign.end,
+                      style: AppTextStyle.materialThemeDisplayLarge,
+                    ),
+                    Row(
+                      mainAxisAlignment: titleMainAxisAlignment,
+                      children: [
+                        Expanded(
+                          child: Text(
+                            titleSecondPart,
+                            style: AppTextStyle.materialThemeDisplayLarge,
+                            textAlign: TextAlign.end,
+                          ),
+                        ),
+                        KSizedBox.kWidthSizedBox24,
+                        IconWidget(
+                          key: KWidgetkeys.screen.feedback.titleIcon,
+                          icon: isRightArrow
+                              ? KIcon.arrowDownRight
+                              : KIcon.arrowDownLeft,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          )
+        else ...[
+          TextPointWidget(
+            pointText,
+            key: pointKey,
+          ),
+          KSizedBox.kHeightSizedBox16,
+          Row(
+            key: titleKey,
+            crossAxisAlignment: iconCrossAxisAlignment,
+            children: [
+              Expanded(
+                flex: 4,
+                child: Text(
+                  '$title $titleSecondPart',
+                  style: AppTextStyle.materialThemeDisplaySmall,
+                ),
+              ),
+              IconWidget(
+                key: KWidgetkeys.screen.feedback.titleIcon,
+                icon: isRightArrow ? KIcon.arrowDownRight : KIcon.arrowDownLeft,
+                padding: KPadding.kPaddingSize12,
+              ),
+            ],
+          ),
+        ],
+        KSizedBox.kHeightSizedBox32,
+        const Divider(
+          color: AppColors.materialThemeKeyColorsNeutral,
+        ),
+      ];
 }

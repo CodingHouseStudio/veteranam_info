@@ -31,6 +31,47 @@ void main() {
         (invocation) => KTestText.userWithoutPhoto,
       );
     });
+    group('${KGroupText.failure} ', () {
+      testWidgets('${KGroupText.error} ', (tester) async {
+        when(mockStoryRepository.addStory(KTestText.storyModelItems.first))
+            .thenAnswer(
+          (invocation) async => const Left(SomeFailure.serverError()),
+        );
+        await storyAddPumpAppHelper(
+          tester: tester,
+          mockStoryRepository: mockStoryRepository,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+        );
+
+        await storyAddFailureHelper(tester);
+      });
+      testWidgets('${KGroupText.failureNetwork} ', (tester) async {
+        when(mockStoryRepository.addStory(KTestText.storyModelItems.first))
+            .thenAnswer(
+          (invocation) async => const Left(SomeFailure.network()),
+        );
+        await storyAddPumpAppHelper(
+          tester: tester,
+          mockStoryRepository: mockStoryRepository,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+        );
+
+        await storyAddFailureHelper(tester);
+      });
+      testWidgets('${KGroupText.failureSend} ', (tester) async {
+        when(mockStoryRepository.addStory(KTestText.storyModelItems.first))
+            .thenAnswer(
+          (invocation) async => const Left(SomeFailure.send()),
+        );
+        await storyAddPumpAppHelper(
+          tester: tester,
+          mockStoryRepository: mockStoryRepository,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+        );
+
+        await storyAddFailureHelper(tester);
+      });
+    });
     testWidgets('${KGroupText.intial} ', (tester) async {
       await storyAddPumpAppHelper(
         tester: tester,
@@ -74,7 +115,7 @@ void main() {
           mockGoRouter: mockGoRouter,
         );
 
-        await fieldCorrectHelper(
+        await submitedHelper(
           tester: tester,
           mockGoRouter: mockGoRouter,
         );

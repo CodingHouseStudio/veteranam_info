@@ -14,10 +14,25 @@ void main() {
   setupFirebaseAuthMocks();
 
   tearDown(GetIt.I.reset);
-  group('${KScreenBlocName.discounts} ', () {
+  group('${KScreenBlocName.discount} ', () {
     late IDiscountRepository mockDiscountRepository;
     setUp(() {
       mockDiscountRepository = MockIDiscountRepository();
+    });
+    group('${KGroupText.failure} ', () {
+      setUp(() {
+        when(mockDiscountRepository.getDiscountItems()).thenAnswer(
+          (invocation) => Stream.error(Exception(KGroupText.failureGet)),
+        );
+      });
+      testWidgets('${KGroupText.failureGet} ', (tester) async {
+        await discountsPumpAppHelper(
+          tester: tester,
+          mockDiscountRepository: mockDiscountRepository,
+        );
+
+        await discountFailureHelper(tester);
+      });
     });
     group('${KGroupText.getEmptyList} ', () {
       setUp(() {
@@ -38,7 +53,7 @@ void main() {
           mockDiscountRepository: mockDiscountRepository,
         );
 
-        await mockButtonHelper(tester);
+        await discountMockButtonHelper(tester);
       });
     });
     group(KGroupText.getList, () {

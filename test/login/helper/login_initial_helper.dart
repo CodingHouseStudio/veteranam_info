@@ -3,7 +3,7 @@ import 'package:kozak/shared/shared.dart';
 
 import '../../text_dependency.dart';
 
-Future<void> loginEmployeeInitialHelper(
+Future<void> loginInitialHelper(
   WidgetTester tester,
 ) async {
   await scrollingHelper(
@@ -51,7 +51,7 @@ Future<void> loginEmployeeInitialHelper(
     findsOneWidget,
   );
 
-  expect(find.byKey(KWidgetkeys.screen.login.failureMessage), findsNothing);
+  await dialogFailureSetHelper(tester: tester, isFailure: false);
 
   await leftCardHelper(tester);
 

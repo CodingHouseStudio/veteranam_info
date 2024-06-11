@@ -28,14 +28,72 @@ void main() {
       ).thenAnswer(
         (invocation) async => const Right(true),
       );
-      when(
-        mockAppAuthenticationRepository.signUp(
-          email: KTestText.useremailWrong,
-          password: KTestText.passwordWrong,
-        ),
-      ).thenAnswer(
-        (invocation) async => const Left(SomeFailure.serverError()),
-      );
+    });
+    group('${KGroupText.failure} ', () {
+      testWidgets('${KGroupText.error} ', (tester) async {
+        when(
+          mockAppAuthenticationRepository.signUp(
+            email: KTestText.useremailWrong,
+            password: KTestText.passwordWrong,
+          ),
+        ).thenAnswer(
+          (invocation) async => const Left(SomeFailure.serverError()),
+        );
+        await signUpPumpAppHelper(
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          tester: tester,
+        );
+
+        await signUpFailureHelper(tester);
+      });
+      testWidgets('${KGroupText.failureNetwork} ', (tester) async {
+        when(
+          mockAppAuthenticationRepository.signUp(
+            email: KTestText.useremailWrong,
+            password: KTestText.passwordWrong,
+          ),
+        ).thenAnswer(
+          (invocation) async => const Left(SomeFailure.network()),
+        );
+        await signUpPumpAppHelper(
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          tester: tester,
+        );
+
+        await signUpFailureHelper(tester);
+      });
+      testWidgets('${KGroupText.failureSend} ', (tester) async {
+        when(
+          mockAppAuthenticationRepository.signUp(
+            email: KTestText.useremailWrong,
+            password: KTestText.passwordWrong,
+          ),
+        ).thenAnswer(
+          (invocation) async => const Left(SomeFailure.send()),
+        );
+        await signUpPumpAppHelper(
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          tester: tester,
+        );
+
+        await signUpFailureHelper(tester);
+      });
+      testWidgets('${KGroupText.failure} dublicate', (tester) async {
+        when(
+          mockAppAuthenticationRepository.signUp(
+            email: KTestText.useremailWrong,
+            password: KTestText.passwordWrong,
+          ),
+        ).thenAnswer(
+          (invocation) async => const Left(SomeFailure.duplicate()),
+        );
+        await signUpPumpAppHelper(
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          tester: tester,
+        );
+
+        await signUpFailureHelper(tester);
+      });
     });
 
     testWidgets('${KGroupText.intial} ', (tester) async {
@@ -85,16 +143,6 @@ void main() {
       await submitedHelper(tester);
     });
 
-    testWidgets(
-        'Write wrong email and password and'
-        ' tap submited', (tester) async {
-      await signUpPumpAppHelper(
-        mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-        tester: tester,
-      );
-
-      await worngSubmitedHelper(tester);
-    });
     group('${KGroupText.goRouter} ', () {
       late MockGoRouter mockGoRouter;
       setUp(() => mockGoRouter = MockGoRouter());
@@ -115,7 +163,7 @@ void main() {
             mockGoRouter: mockGoRouter,
           );
 
-          await loginNavigationHelper(
+          await signUpNavigationHelper(
             tester: tester,
             mockGoRouter: mockGoRouter,
           );

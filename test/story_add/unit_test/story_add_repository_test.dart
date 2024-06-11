@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:kozak/shared/shared.dart';
@@ -91,13 +92,13 @@ void main() {
           mockFirestoreService.addStory(
             KTestText.storyModelItems.first,
           ),
-        ).thenThrow(Exception(KGroupText.failure));
+        ).thenThrow(FirebaseException(plugin: KGroupText.failure));
         when(
           mockStorageService.saveStoryImage(
             imageModel: KTestText.storyModelItems.last.image!.first,
             storyId: KTestText.storyModelItems.last.id,
           ),
-        ).thenThrow(Exception(KGroupText.failure));
+        ).thenThrow(FirebaseException(plugin: KGroupText.failure));
         if (GetIt.I.isRegistered<FirestoreService>()) {
           GetIt.I.unregister<FirestoreService>();
         }

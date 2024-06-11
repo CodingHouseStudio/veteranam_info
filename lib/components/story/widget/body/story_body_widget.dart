@@ -11,7 +11,14 @@ class StoryBodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<StoryWatcherBloc, StoryWatcherState>(
+    return BlocConsumer<StoryWatcherBloc, StoryWatcherState>(
+      listener: (context, state) => context.dialog.showGetErrorDialog(
+        error: state.failure!.value(context),
+        onPressed: () => context
+            .read<StoryWatcherBloc>()
+            .add(const StoryWatcherEvent.started()),
+      ),
+      listenWhen: (previous, current) => current.failure != null,
       builder: (context, _) {
         return ScaffoldWidget(
           titleChildWidgetsFunction: ({required isDesk}) => [
