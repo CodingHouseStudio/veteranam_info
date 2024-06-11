@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:kozak/l10n/l10n.dart';
+import 'package:flutter_svg/svg.dart';
+
 import 'package:kozak/shared/constants/constants.dart';
 
 class ButtonAdditionalWidget extends StatefulWidget {
   const ButtonAdditionalWidget({
+    required this.picture,
+    required this.text,
+    required this.isDesk,
     super.key,
     this.onPressed,
     this.backgroundColor,
@@ -11,6 +15,9 @@ class ButtonAdditionalWidget extends StatefulWidget {
 
   final void Function()? onPressed;
   final Color? backgroundColor;
+  final SvgPicture picture;
+  final String text;
+  final bool isDesk;
 
   @override
   State<ButtonAdditionalWidget> createState() => _ButtonAdditionalWidgetState();
@@ -44,16 +51,18 @@ class _ButtonAdditionalWidgetState extends State<ButtonAdditionalWidget> {
         children: [
           CircleAvatar(
             key: KWidgetkeys.widget.buttonAdditional.buttonIcon,
-            child: KImage.google,
+            child: widget.picture,
+          ),
+          const SizedBox(
+            width: KPadding.kPaddingSize8,
           ),
           Padding(
             padding: const EdgeInsets.only(
               left: KPadding.kPaddingSize8,
-              right: KPadding.kPaddingSize16,
             ),
             child: Text(
+              widget.text,
               key: KWidgetkeys.widget.buttonAdditional.buttonText,
-              context.l10n.google,
               style: AppTextStyle.text14,
             ),
           ),
