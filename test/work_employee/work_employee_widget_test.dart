@@ -19,6 +19,21 @@ void main() {
     setUp(() {
       mockWorkRepository = MockIWorkRepository();
     });
+    group('${KGroupText.failure} ', () {
+      setUp(() {
+        when(mockWorkRepository.getWorks()).thenAnswer(
+          (invocation) => Stream.error(Exception(KGroupText.failureGet)),
+        );
+      });
+      testWidgets('${KGroupText.failureGet} ', (tester) async {
+        await workEmployeePumpAppHelper(
+          mockWorkRepository: mockWorkRepository,
+          tester: tester,
+        );
+
+        await workEmployeeFailureHelper(tester);
+      });
+    });
     group('${KGroupText.getEmptyList} ', () {
       setUp(() {
         when(mockWorkRepository.getWorks())
@@ -40,7 +55,7 @@ void main() {
           tester: tester,
         );
 
-        await mockButtonHelper(tester);
+        await workEmployeeMockButtonHelper(tester);
       });
     });
     group(KGroupText.getList, () {

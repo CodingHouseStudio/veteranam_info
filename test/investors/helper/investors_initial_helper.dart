@@ -7,17 +7,74 @@ import 'helper.dart';
 Future<void> investorsInitialHelper(
   WidgetTester tester,
 ) async {
-  expect(find.byKey(KWidgetkeys.screen.investors.fundTitle), findsOneWidget);
-
-  expect(find.byKey(KWidgetkeys.screen.investors.fundSubtitle), findsOneWidget);
-
-  expect(find.byKey(KWidgetkeys.screen.investors.buttonMock), findsNothing);
-
-  expect(find.byKey(KWidgetkeys.screen.investors.donateCard), findsOneWidget);
-
-  await scrollingHelper(
+  await changeWindowSizeHelper(
     tester: tester,
-    itemKey: KWidgetkeys.widget.donateCard.title,
+    windowsTest: true,
+    test: () async {
+      expect(find.byKey(KWidgetkeys.screen.investors.title), findsOneWidget);
+
+      expect(find.byKey(KWidgetkeys.screen.investors.point), findsOneWidget);
+
+      expect(
+        find.byKey(KWidgetkeys.screen.investors.feedbackTitle),
+        findsOneWidget,
+      );
+
+      await scrollingHelper(
+        tester: tester,
+        itemKey: KWidgetkeys.screen.investors.feedbackTitle,
+      );
+
+      expect(
+        find.byKey(KWidgetkeys.screen.investors.feedbackSubtitle),
+        findsOneWidget,
+      );
+
+      expect(
+        find.byKey(KWidgetkeys.screen.investors.feedbackButton),
+        findsOneWidget,
+      );
+
+      expect(
+        find.byKey(KWidgetkeys.screen.investors.rightImages),
+        findsOneWidget,
+      );
+
+      expect(
+        find.byKey(KWidgetkeys.screen.investors.leftImages),
+        findsOneWidget,
+      );
+
+      await scrollingHelper(
+        tester: tester,
+        itemKey: KWidgetkeys.screen.investors.leftImages,
+      );
+
+      expect(
+        find.byKey(KWidgetkeys.screen.investors.fundsPoint),
+        findsOneWidget,
+      );
+
+      await scrollingHelper(
+        tester: tester,
+        itemKey: KWidgetkeys.screen.investors.fundsPoint,
+      );
+
+      expect(
+        find.byKey(KWidgetkeys.screen.investors.fundsTitle),
+        findsOneWidget,
+      );
+
+      expect(
+        find.byKey(KWidgetkeys.screen.investors.buttonMock),
+        findsNothing,
+      );
+
+      expect(
+        find.byKey(KWidgetkeys.screen.investors.donateCard),
+        findsWidgets,
+      );
+    },
   );
 
   await donateCardHelper(tester: tester, isDesk: false);

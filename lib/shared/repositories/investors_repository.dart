@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kozak/shared/shared.dart';
@@ -11,7 +12,7 @@ class InvestorsRepository implements IInvestorsRepository {
     try {
       final fundItems = await _firestoreService.getFunds();
       return Right(fundItems);
-    } on Exception catch (e) {
+    } on FirebaseException catch (e) {
       return Left(GetFailur.fromCode(e).status);
     } catch (e) {
       return const Left(SomeFailure.serverError());

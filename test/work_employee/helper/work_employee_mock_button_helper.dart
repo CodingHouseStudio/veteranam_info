@@ -3,7 +3,7 @@ import 'package:kozak/shared/shared.dart';
 
 import '../../text_dependency.dart';
 
-Future<void> mockButtonHelper(
+Future<void> workEmployeeMockButtonHelper(
   WidgetTester tester,
 ) async {
   expect(
@@ -13,13 +13,13 @@ Future<void> mockButtonHelper(
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.information.buttonMock,
+    itemKey: KWidgetkeys.screen.workEmployee.buttonMock,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.information.buttonMock),
+    find.byKey(KWidgetkeys.screen.workEmployee.buttonMock),
     findsOneWidget,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.screen.information.buttonMock));
+  await tester.tap(find.byKey(KWidgetkeys.screen.workEmployee.buttonMock));
 }
