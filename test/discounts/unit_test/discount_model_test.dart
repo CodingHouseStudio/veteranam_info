@@ -154,7 +154,9 @@ void main() {
 
       test('${KGroupText.shouldBe} ', () {
         final json = {
-          DiscountModelJsonField.id: KTestText.discountModelItems.last.id,
+          // DiscountModelJsonField.id: KTestText.discountModelItems.last.id,
+          // DiscountModelJsonField.userId:
+          //     KTestText.discountModelItems.last.userId,
           DiscountModelJsonField.category:
               KTestText.discountModelItems.last.category,
           DiscountModelJsonField.categoryUA:
@@ -394,7 +396,7 @@ void main() {
 
       test('${KGroupText.shouldBe} ', () {
         final json = {
-          DiscountModelJsonField.id: KTestText.discountModelItems.last.id,
+          DiscountModelJsonField.id: null,
           DiscountModelJsonField.userId: null,
           DiscountModelJsonField.category:
               KTestText.discountModelItems.last.category,
@@ -438,11 +440,11 @@ void main() {
 
         final discountModelJson = KTestText.discountModelItems.last
             .copyWith(
-              link: null,
-              additionaldetails: null,
-              html: null,
-              userId: null,
-            )
+                link: null,
+                additionaldetails: null,
+                html: null,
+                userId: null,
+                id: null)
             .toJson();
 
         expect(discountModelJson, json);
