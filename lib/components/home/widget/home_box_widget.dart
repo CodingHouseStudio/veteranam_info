@@ -24,6 +24,7 @@ class HomeBoxWidget extends StatelessWidget {
               children: [
                 KSizedBox.kHeightSizedBox45,
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
                       context.l10n.hello,
@@ -51,7 +52,7 @@ class HomeBoxWidget extends StatelessWidget {
                   widgetKey: KWidgetkeys.screen.home.boxButton,
                   text: context.l10n.detail,
                   textColor: AppColors.materialThemeWhite,
-                  color: AppColors.materialThemeBlack,
+                  color: AppColors.materialThemeKeyColorsSecondary,
                   onPressed: () => Scrollable.ensureVisible(
                     aboutProjectKey.currentContext!,
                     duration: const Duration(microseconds: 1000),
@@ -152,7 +153,7 @@ class HomeBoxWidget extends StatelessWidget {
                         widgetKey: KWidgetkeys.screen.home.boxButton,
                         text: context.l10n.detail,
                         textColor: AppColors.materialThemeWhite,
-                        color: AppColors.materialThemeBlack,
+                        color: AppColors.materialThemeKeyColorsSecondary,
                         onPressed: () => Scrollable.ensureVisible(
                           aboutProjectKey.currentContext!,
                           duration: const Duration(microseconds: 1000),
