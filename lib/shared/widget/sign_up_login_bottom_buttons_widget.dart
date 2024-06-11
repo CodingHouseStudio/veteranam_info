@@ -16,14 +16,14 @@ class SignUpLoginBottomButtonsWidget extends StatelessWidget {
       return Column(
         crossAxisAlignment:
             isDesk ? CrossAxisAlignment.start : CrossAxisAlignment.center,
-        key: KWidgetkeys.widget.signUpBottomButtons.desk,
+        //key: KWidgetkeys.widget.signUpBottomButtons.desk,
         children: [
           Row(
             children: [
-              Expanded(
+              const Expanded(
                 child: Divider(
-                  key: KWidgetkeys.widget.signUpBottomButtons.divider,
-                ),
+                    //key: KWidgetkeys.widget.signUpBottomButtons.divider,
+                    ),
               ),
               KSizedBox.kWidthSizedBox32,
               Text(
@@ -32,10 +32,10 @@ class SignUpLoginBottomButtonsWidget extends StatelessWidget {
                 style: AppTextStyle.hint14,
               ),
               KSizedBox.kWidthSizedBox32,
-              Expanded(
+              const Expanded(
                 child: Divider(
-                  key: KWidgetkeys.widget.signUpBottomButtons.divider,
-                ),
+                    //key: KWidgetkeys.widget.signUpBottomButtons.divider,
+                    ),
               ),
             ],
           ),
@@ -92,7 +92,7 @@ class SignUpLoginBottomButtonsWidget extends StatelessWidget {
       );
     } else {
       return Column(
-        key: KWidgetkeys.widget.signUpBottomButtons.mob,
+        // key: KWidgetkeys.widget.signUpBottomButtons.mob,
         children: [
           Text(
             context.l10n.or,
@@ -106,14 +106,14 @@ class SignUpLoginBottomButtonsWidget extends StatelessWidget {
             style: isDesk ? AppTextStyle.text40 : AppTextStyle.text24,
           ),
           KSizedBox.kHeightSizedBox16,
-          buildBottomButton(
-            key: KWidgetkeys.widget.signUpBottomButtons.google,
+          ButtonAdditionalWidget(
             isDesk: false,
+            key: KWidgetkeys.widget.signUpBottomButtons.google,
             text: context.l10n.google,
+            picture: KImage.google,
             onPressed: () => context
                 .read<AuthenticationServicesCubit>()
                 .authenticationUseGoogle(),
-            icon: KImage.google,
           ),
           KSizedBox.kHeightSizedBox16,
           buildBottomButton(
