@@ -4,25 +4,24 @@ List<Widget> _newsWidgetList({
   required BuildContext context,
   required bool isDesk,
 }) {
-  final informationModelItems = context
-          .read<InformationWatcherBloc>()
-          .state
-          .informationModelItems
-          .isNotEmpty
-      ? context
-          .read<InformationWatcherBloc>()
-          .state
-          .filteredInformationModelItems
-      : List.generate(
+  final isLoading =
+      context.read<InformationWatcherBloc>().state.loadingStatus !=
+          LoadingStatus.loaded;
+  final informationModelItems = isLoading
+      ? List.generate(
           KDimensions.shimmerInformationItems,
-          (index) => InformationModel(
+          (index) => KMockText.informationModel.copyWith(
             id: index.toString(),
-            title: KMockText.title,
-            news: KMockText.cardData,
-            date: ExtendedDateTime.current,
           ),
-        );
-  return List.generate(informationModelItems.length, (index) {
+        )
+      : context
+          .read<InformationWatcherBloc>()
+          .state
+          .filteredInformationModelItems;
+  return List.generate(
+      context.read<InformationWatcherBloc>().state.failure == null
+          ? informationModelItems.length
+          : 0, (index) {
     return Padding(
       padding: index != 0
           ? EdgeInsets.only(
@@ -30,8 +29,7 @@ List<Widget> _newsWidgetList({
             )
           : EdgeInsets.zero,
       child: Skeletonizer(
-        enabled: context.read<InformationWatcherBloc>().state.loadingStatus !=
-            LoadingStatus.loaded,
+        enabled: isLoading,
         child: NewsCardWidget(
           key: KWidgetkeys.screen.information.card,
           informationItem: informationModelItems.elementAt(index),

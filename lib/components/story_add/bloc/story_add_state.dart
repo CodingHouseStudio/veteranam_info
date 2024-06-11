@@ -1,10 +1,21 @@
 part of 'story_add_bloc.dart';
 
-enum StoryAddFailure { error }
+enum StoryAddFailure {
+  error,
+  network,
+  send,
+}
 
 extension StoryAddFailureExtension on SomeFailure {
   StoryAddFailure toStoryAdd() {
-    return StoryAddFailure.error;
+    switch (this) {
+      case FailureSend():
+        return StoryAddFailure.send;
+      case FailureNetwork():
+        return StoryAddFailure.network;
+      default:
+        return StoryAddFailure.error;
+    }
   }
 }
 

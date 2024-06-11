@@ -108,8 +108,7 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
                   text: context.l10n.logOut,
                   textMaxLines: KMinMaxSize.textMaxLineOne,
                   textStyle: AppTextStyle.text32,
-                  onPressed: () => DialogsWidget.showLogoutConfirmationDialog(
-                    context: context,
+                  onPressed: () => context.dialog.showLogoutConfirmationDialog(
                     isDesk: widget.isDesk,
                   ),
                   isDesk: true,
@@ -122,8 +121,7 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
                   text: context.l10n.deleteAccount,
                   textMaxLines: KMinMaxSize.textMaxLineOne,
                   textStyle: AppTextStyle.text32,
-                  onPressed: () => DialogsWidget.showDeleteConfirmationDialog(
-                    context: context,
+                  onPressed: () => context.dialog.showDeleteConfirmationDialog(
                     isDesk: widget.isDesk,
                   ),
                   isDesk: true,
@@ -136,8 +134,7 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
           ButtonWidget(
             key: KWidgetkeys.widget.profileCardWidget.logOutButton,
             text: context.l10n.logOut,
-            onPressed: () => DialogsWidget.showLogoutConfirmationDialog(
-              context: context,
+            onPressed: () => context.dialog.showLogoutConfirmationDialog(
               isDesk: widget.isDesk,
             ),
             isDesk: false,
@@ -146,8 +143,7 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
           ButtonWidget(
             key: KWidgetkeys.widget.profileCardWidget.deleteButton,
             text: context.l10n.deleteAccount,
-            onPressed: () => DialogsWidget.showDeleteConfirmationDialog(
-              context: context,
+            onPressed: () => context.dialog.showDeleteConfirmationDialog(
               isDesk: widget.isDesk,
             ),
             isDesk: false,

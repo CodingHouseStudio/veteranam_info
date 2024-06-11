@@ -65,6 +65,22 @@ abstract class KButtonStyles {
       ),
     ),
   );
+
+  static const whiteSnackBarButtonStyle = ButtonStyle(
+    backgroundColor: MaterialStatePropertyAll(AppColors.materialThemeWhite),
+    minimumSize: MaterialStatePropertyAll(
+      Size(KMinMaxSize.minWidth100, KMinMaxSize.minHeight50),
+    ),
+    padding: MaterialStatePropertyAll(EdgeInsets.all(KPadding.kPaddingSize16)),
+    // side: MaterialStatePropertyAll( BorderSide(
+    //   color: KColorTheme.white,
+    // ),
+    shape: MaterialStatePropertyAll(
+      RoundedRectangleBorder(
+        borderRadius: KBorderRadius.kBorderRadius32,
+      ),
+    ),
+  );
   static const doubleButtonStyle = ButtonStyle(
     alignment: Alignment.centerLeft,
     padding: MaterialStatePropertyAll(EdgeInsets.zero),

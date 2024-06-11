@@ -57,6 +57,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
                 : KIcon.plus.copyWith(
                     key: KWidgetkeys.widget.question.iconPlus,
                   ),
+            padding: KPadding.kPaddingSize12,
           ),
           tilePadding: const EdgeInsets.symmetric(
             horizontal: KPadding.kPaddingSize32,

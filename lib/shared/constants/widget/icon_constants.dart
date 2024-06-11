@@ -55,6 +55,7 @@ abstract class KIcon {
   static const _KIcon trailingUp = _KIcon(Symbols.arrow_drop_up);
   static const _KIcon arrowUpRight = _KIcon(Symbols.arrow_outward);
   static const _KIcon arrowDownRight = _KIcon(Symbols.south_east);
+  static const _KIcon arrowDownLeft = _KIcon(Symbols.south_west);
   static const _KIcon like = _KIcon(Symbols.thumb_up);
   static const _KIcon activeLike = _KIcon(
     Symbols.thumb_up,
@@ -94,4 +95,5 @@ abstract class KIcon {
   static const _KIcon briefcase = _KIcon(Symbols.trip);
   static const _KIcon fileText = _KIcon(Symbols.description);
   static const _KIcon meil = _KIcon(Symbols.mail);
+  static const _KIcon close = _KIcon(Symbols.close);
 }
