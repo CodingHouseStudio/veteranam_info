@@ -32,6 +32,7 @@ abstract class TitleWidget {
     bool isRightArrow = true,
     MainAxisAlignment titleMainAxisAlignment = MainAxisAlignment.start,
     CrossAxisAlignment iconCrossAxisAlignment = CrossAxisAlignment.start,
+    TextAlign textAlign = TextAlign.start,
   }) =>
       [
         if (isDesk)
@@ -52,18 +53,16 @@ abstract class TitleWidget {
                   children: [
                     Text(
                       title,
-                      textAlign: TextAlign.end,
+                      textAlign: textAlign,
                       style: AppTextStyle.materialThemeDisplayLarge,
                     ),
                     Row(
                       mainAxisAlignment: titleMainAxisAlignment,
                       children: [
-                        Expanded(
-                          child: Text(
-                            titleSecondPart,
-                            style: AppTextStyle.materialThemeDisplayLarge,
-                            textAlign: TextAlign.end,
-                          ),
+                        Text(
+                          titleSecondPart,
+                          style: AppTextStyle.materialThemeDisplayLarge,
+                          textAlign: textAlign,
                         ),
                         KSizedBox.kWidthSizedBox24,
                         IconWidget(

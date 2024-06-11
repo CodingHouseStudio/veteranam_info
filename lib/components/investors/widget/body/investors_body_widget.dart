@@ -34,6 +34,7 @@ class InvestorsBodyWidget extends StatelessWidget {
             isDesk: isDesk,
             isRightArrow: false,
             titleMainAxisAlignment: MainAxisAlignment.end,
+            textAlign: TextAlign.end,
           ),
           if (isDesk)
             KSizedBox.kHeightSizedBox40
@@ -42,6 +43,7 @@ class InvestorsBodyWidget extends StatelessWidget {
           if (isDesk)
             Row(
               mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(
                   child: Column(
