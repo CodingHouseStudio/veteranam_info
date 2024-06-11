@@ -30,7 +30,7 @@ abstract class TitleWidget {
     required Key pointKey,
     required bool isDesk,
     bool isRightArrow = true,
-    MainAxisAlignment titleMainAxisAlignment = MainAxisAlignment.start,
+    WrapAlignment titleAlignment = WrapAlignment.start,
     CrossAxisAlignment iconCrossAxisAlignment = CrossAxisAlignment.start,
     TextAlign textAlign = TextAlign.start,
   }) =>
@@ -56,8 +56,8 @@ abstract class TitleWidget {
                       textAlign: textAlign,
                       style: AppTextStyle.materialThemeDisplayLarge,
                     ),
-                    Row(
-                      mainAxisAlignment: titleMainAxisAlignment,
+                    Wrap(
+                      alignment: titleAlignment,
                       children: [
                         Text(
                           titleSecondPart,

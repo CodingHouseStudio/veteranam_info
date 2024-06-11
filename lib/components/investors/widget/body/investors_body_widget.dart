@@ -33,7 +33,7 @@ class InvestorsBodyWidget extends StatelessWidget {
             pointKey: KWidgetkeys.screen.investors.point,
             isDesk: isDesk,
             isRightArrow: false,
-            titleMainAxisAlignment: MainAxisAlignment.end,
+            titleAlignment: WrapAlignment.end,
             textAlign: TextAlign.end,
           ),
           if (isDesk)
