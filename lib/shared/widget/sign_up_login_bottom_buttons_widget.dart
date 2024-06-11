@@ -49,15 +49,24 @@ class SignUpLoginBottomButtonsWidget extends StatelessWidget {
           Row(
             children: [
               Expanded(
-                child: buildBottomButton(
-                  key: KWidgetkeys.widget.signUpBottomButtons.google,
+                child: ButtonAdditionalWidget(
                   isDesk: true,
+                  key: KWidgetkeys.widget.signUpBottomButtons.google,
                   text: context.l10n.google,
+                  picture: KImage.google,
                   onPressed: () => context
                       .read<AuthenticationServicesCubit>()
                       .authenticationUseGoogle(),
-                  icon: KImage.google,
                 ),
+                // child: buildBottomButton(
+                //   key: KWidgetkeys.widget.signUpBottomButtons.google,
+                //   isDesk: true,
+                //   text: context.l10n.google,
+                //   onPressed: () => context
+                //       .read<AuthenticationServicesCubit>()
+                //       .authenticationUseGoogle(),
+                //   icon: KImage.google,
+                // ),
               ),
               KSizedBox.kWidthSizedBox16,
               Expanded(
