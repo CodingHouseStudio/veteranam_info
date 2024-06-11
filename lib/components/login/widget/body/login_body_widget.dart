@@ -8,7 +8,11 @@ class LoginBodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<LoginBloc, LoginState>(
+    return BlocConsumer<LoginBloc, LoginState>(
+      listener: (context, state) => context.dialog.showSendErrorDialog(
+        state.failure!.value(context),
+      ),
+      listenWhen: (previous, current) => current.failure != null,
       builder: (context, _) {
         return LeftCardWidget(
           key: KWidgetkeys.screen.login.card,
@@ -41,14 +45,6 @@ class LoginBodyWidget extends StatelessWidget {
                     const LoginEvent.passwordFieldHide(),
                   ),
             ),
-            if (_.failure.getString(context) != null)
-              Center(
-                child: Text(
-                  _.failure.getString(context)!,
-                  key: KWidgetkeys.screen.login.failureMessage,
-                  style: AppTextStyle.error14,
-                ),
-              ),
             if (isDesk)
               KSizedBox.kHeightSizedBox24
             else

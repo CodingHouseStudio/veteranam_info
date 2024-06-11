@@ -6,12 +6,12 @@ import 'package:kozak/shared/shared.dart';
 import '../../text_dependency.dart';
 
 Future<void> loginPumpAppHelper({
-  required AuthenticationRepository mockAuthenticationRepository,
+  required IAppAuthenticationRepository mockAppAuthenticationRepository,
   required WidgetTester tester,
   MockGoRouter? mockGoRouter,
 }) async {
   _registerLoginBloc(
-    mockAuthenticationRepository: mockAuthenticationRepository,
+    mockAppAuthenticationRepository: mockAppAuthenticationRepository,
   );
   await tester.pumpApp(const LoginScreen(), mockGoRouter: mockGoRouter);
 
@@ -24,10 +24,10 @@ Future<void> loginPumpAppHelper({
 }
 
 void _registerLoginBloc({
-  required AuthenticationRepository mockAuthenticationRepository,
+  required IAppAuthenticationRepository mockAppAuthenticationRepository,
 }) {
   final loginBloc = LoginBloc(
-    authenticationRepository: mockAuthenticationRepository,
+    appAuthenticationRepository: mockAppAuthenticationRepository,
   );
   if (GetIt.I.isRegistered<LoginBloc>()) {
     GetIt.I.unregister<LoginBloc>();

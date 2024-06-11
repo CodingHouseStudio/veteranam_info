@@ -12,7 +12,14 @@ class WorkEmployeeBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<WorkEmployeeWatcherBloc, WorkEmployeeWatcherState>(
+    return BlocConsumer<WorkEmployeeWatcherBloc, WorkEmployeeWatcherState>(
+      listener: (context, state) => context.dialog.showGetErrorDialog(
+        error: state.failure!.value(context),
+        onPressed: () => context
+            .read<WorkEmployeeWatcherBloc>()
+            .add(const WorkEmployeeWatcherEvent.started()),
+      ),
+      listenWhen: (previous, current) => current.failure != null,
       builder: (context, _) => ScaffoldDecorationWidget(
         titleChildWidgetsFunction: ({required isDesk}) => [
           if (isDesk)
@@ -39,7 +46,7 @@ class WorkEmployeeBody extends StatelessWidget {
             : EdgeInsets.zero,
         mainChildWidgetsFunction: ({required isDesk}) => [
           if (_.loadingStatus == LoadingStatus.loaded &&
-              _.filteredWorkModelItems.isNotEmpty)
+              _.workModelItems.isNotEmpty)
             WorkEmployeeFilters(
               key: KWidgetkeys.screen.workEmployee.filter,
               cities: _.workModelItems.overallCities,

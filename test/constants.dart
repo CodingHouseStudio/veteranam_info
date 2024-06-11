@@ -38,7 +38,7 @@ abstract class KGroupText {
   static const failureGet = 'Failure get';
   static const failure = 'Failure';
   static const firebaseFailure = 'Firebase Failure';
-  static const failureSet = 'Failure set';
+  static const failureSend = 'Failure set';
   static const intial = 'renders initial';
   static const goRouter = 'Mock Go Router';
   static const goTo = 'go to';
@@ -53,6 +53,8 @@ abstract class KGroupText {
   static const getList = 'Get list';
   static const getEmptyList = 'Get empty list';
   static const mockButton = 'Tap on the mock button';
+  static const error = 'Error';
+  static const failureNetwork = 'Failure Network';
 }
 
 abstract class KTestText {
@@ -181,16 +183,20 @@ abstract class KTestText {
 
   static final discountModelItems = <DiscountModel>[
     for (var i = 0; i < 50; i++)
-      DiscountModel(
-        id: DateTime.now().toLocal().microsecondsSinceEpoch.toString(),
-        userId: DateTime.now().toLocal().microsecondsSinceEpoch.toString(),
-        percent: KMockText.discount,
-        city: KMockText.cityDiscount,
-        service: KMockText.serviceDiscount,
-        comment: KMockText.descriptionDiscount,
-        date: DateTime.now(),
-        instruction: KMockText.instructionDiscount,
-        tags: [],
+      KMockText.discountModel.copyWith(
+        id: i.toString(),
+        userId: i.toString(),
+        dateVerified: dateTime,
+      ),
+  ];
+
+  static final discountModelItemsModify = <DiscountModel>[
+    for (var i = 0; i < 50; i++)
+      KMockText.discountModel.copyWith(
+        id: i.toString(),
+        userId: i.toString(),
+        category: i == 0 ? KMockText.tag : KMockText.discountModel.category,
+        dateVerified: dateTime,
       ),
   ];
 
@@ -213,15 +219,22 @@ abstract class KTestText {
     message: KTestText.field,
   );
 
+  static final informationModelItemsModify = <InformationModel>[
+    for (var i = 0; i < KMockText.tags.length; i++)
+      KMockText.informationModel.copyWith(
+        id: i.toString(),
+        fetchDate: dateTime,
+        image: i > KMockText.tags.length - 2 ? imageModels : null,
+        category: i == 0 ? KMockText.tag : KMockText.informationModel.category,
+      ),
+  ];
+
   static final informationModelItems = <InformationModel>[
     for (var i = 0; i < KMockText.tags.length; i++)
-      InformationModel(
+      KMockText.informationModel.copyWith(
         id: i.toString(),
-        title: KMockText.title,
-        news: KMockText.cardData,
-        date: dateTime,
+        fetchDate: dateTime,
         image: i > KMockText.tags.length - 2 ? imageModels : null,
-        tags: KMockText.tags.elementAt(i),
       ),
   ];
 
@@ -269,7 +282,7 @@ abstract class KScreenBlocName {
   static const app = 'App Screen';
   static const error = 'Error Screen';
   static const home = 'Home Screen';
-  static const discounts = 'Discounts Screen';
+  static const discount = 'Discounts Screen';
   static const information = 'Information Screen';
   static const investors = 'Investors Screen';
   static const profile = 'Profile Screen';

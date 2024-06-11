@@ -59,7 +59,7 @@ void configureDependenciesTest() {
   );
   GetIt.I.registerSingleton<LoginBloc>(
     LoginBloc(
-      authenticationRepository: GetIt.I.get<AuthenticationRepository>(),
+      appAuthenticationRepository: GetIt.I.get<IAppAuthenticationRepository>(),
     ),
   );
   GetIt.I.registerSingleton<SignUpBloc>(

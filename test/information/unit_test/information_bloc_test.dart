@@ -19,18 +19,16 @@ void main() {
       informationWatcherBloc = InformationWatcherBloc(
         informationRepository: mockInformationRepository,
       );
+      when(mockInformationRepository.getInformationItems()).thenAnswer(
+        (_) => Stream.value(KTestText.informationModelItemsModify),
+      );
     });
 
     blocTest<InformationWatcherBloc, InformationWatcherState>(
       'emits [InformationWatcherState()]'
       ' when load informationModel list',
       build: () => informationWatcherBloc,
-      act: (bloc) async {
-        when(mockInformationRepository.getInformationItems()).thenAnswer(
-          (_) => Stream.value(KTestText.informationModelItems),
-        );
-        bloc.add(const InformationWatcherEvent.started());
-      },
+      act: (bloc) async => bloc.add(const InformationWatcherEvent.started()),
       expect: () async => [
         predicate<InformationWatcherState>(
           (state) => state.loadingStatus == LoadingStatus.loading,
@@ -66,9 +64,6 @@ void main() {
       ' informationModel list and filtering it',
       build: () => informationWatcherBloc,
       act: (bloc) async {
-        when(mockInformationRepository.getInformationItems()).thenAnswer(
-          (_) => Stream.value(KTestText.informationModelItems),
-        );
         bloc.add(const InformationWatcherEvent.started());
         await expectLater(
           bloc.stream,
@@ -83,32 +78,31 @@ void main() {
           reason: 'Wait for loading data',
         );
         bloc.add(
-          InformationWatcherEvent.filter(
-            filter: KTestText.informationModelItems.first.tags!.first,
-            isSelected: false,
+          const InformationWatcherEvent.filter(
+            0,
           ),
         );
       },
-      /*expect: () => [
-          predicate<InformationWatcherState>(
-            (state) => state.loadingStatus == LoadingStatus.loading,
-          ),
-          predicate<InformationWatcherState>(
-            (state) =>
-                state.loadingStatus == LoadingStatus.loaded &&
-                state.filteredInformationModelItems.isEmpty &&
-                state.filters == null,
-          ),
-          predicate<InformationWatcherState>(
-            (state) =>
-                state.loadingStatus == LoadingStatus.loaded &&
-                state.filteredInformationModelItems.isNotEmpty &&
-                state.filteredInformationModelItems.first.tags!.contains(
-                  KTestText.informationModelItems.first.tags!.first,
-                ) &&
-                state.filters == null,
-          ),
-        ],*/
+      expect: () => [
+        predicate<InformationWatcherState>(
+          (state) => state.loadingStatus == LoadingStatus.loading,
+        ),
+        predicate<InformationWatcherState>(
+          (state) =>
+              state.loadingStatus == LoadingStatus.loaded &&
+              state.filtersIndex == null,
+        ),
+        predicate<InformationWatcherState>(
+          (state) =>
+              state.loadingStatus == LoadingStatus.loaded &&
+              state.filteredInformationModelItems.every(
+                (element) => element.category.contains(
+                  KTestText.informationModelItemsModify.first.category.first,
+                ),
+              ) &&
+              state.filtersIndex != null,
+        ),
+      ],
     );
 
     blocTest<InformationWatcherBloc, InformationWatcherState>(
@@ -116,9 +110,6 @@ void main() {
       ' when load informationModel list and loadNextItems it',
       build: () => informationWatcherBloc,
       act: (bloc) async {
-        when(mockInformationRepository.getInformationItems()).thenAnswer(
-          (_) => Stream.value(KTestText.informationModelItems),
-        );
         bloc.add(const InformationWatcherEvent.started());
         await expectLater(
           bloc.stream,
@@ -161,9 +152,6 @@ void main() {
       ' when load informationModel list, loadNextItems and filter it',
       build: () => informationWatcherBloc,
       act: (bloc) async {
-        when(mockInformationRepository.getInformationItems()).thenAnswer(
-          (_) => Stream.value(KTestText.informationModelItems),
-        );
         bloc.add(const InformationWatcherEvent.started());
         await expectLater(
           bloc.stream,
@@ -182,39 +170,37 @@ void main() {
             const InformationWatcherEvent.loadNextItems(),
           )
           ..add(
-            InformationWatcherEvent.filter(
-              filter: KTestText.informationModelItems.first.tags!.first,
-              isSelected: false,
+            const InformationWatcherEvent.filter(
+              0,
             ),
           );
       },
-      /*expect: () => [
-          predicate<InformationWatcherState>(
-            (state) => state.loadingStatus == LoadingStatus.loading,
-          ),
-          predicate<InformationWatcherState>(
-            (state) =>
-                state.loadingStatus == LoadingStatus.loaded &&
-                state.filteredInformationModelItems.elementAt(0) !=
-                    KTestText.informationModelItems.first &&
-                state.filters == null,
-          ),
-          predicate<InformationWatcherState>(
-            (state) =>
-                state.loadingStatus == LoadingStatus.loaded &&
-                state.filteredInformationModelItems.length == 2 &&
-                state.itemsLoaded == 2 &&
-                state.filters == null,
-          ),
-          predicate<InformationWatcherState>(
-            (state) =>
-                state.loadingStatus == LoadingStatus.loaded &&
-                state.filteredInformationModelItems.elementAt(0) ==
-                    KTestText.informationModelItems.first &&
-                state.filters != null &&
-                state.itemsLoaded == 1,
-          ),
-        ],*/
+      expect: () => [
+        predicate<InformationWatcherState>(
+          (state) => state.loadingStatus == LoadingStatus.loading,
+        ),
+        predicate<InformationWatcherState>(
+          (state) =>
+              state.loadingStatus == LoadingStatus.loaded &&
+              state.filtersIndex == null,
+        ),
+        predicate<InformationWatcherState>(
+          (state) =>
+              state.loadingStatus == LoadingStatus.loaded &&
+              state.filteredInformationModelItems.length ==
+                  KDimensions.loadItems * 2 &&
+              state.itemsLoaded == KDimensions.loadItems * 2 &&
+              state.filtersIndex == null,
+        ),
+        predicate<InformationWatcherState>(
+          (state) =>
+              state.loadingStatus == LoadingStatus.loaded &&
+              state.filteredInformationModelItems.length ==
+                  KDimensions.loadItems &&
+              state.filtersIndex != null &&
+              state.itemsLoaded == KDimensions.loadItems,
+        ),
+      ],
     );
     blocTest<InformationWatcherBloc, InformationWatcherState>(
       'emits [InformationWatcherState()]'
@@ -222,9 +208,6 @@ void main() {
       ' and loadNextItems it',
       build: () => informationWatcherBloc,
       act: (bloc) async {
-        when(mockInformationRepository.getInformationItems()).thenAnswer(
-          (_) => Stream.value(KTestText.informationModelItems),
-        );
         bloc.add(const InformationWatcherEvent.started());
         await expectLater(
           bloc.stream,
@@ -240,61 +223,58 @@ void main() {
         );
         bloc
           ..add(
-            InformationWatcherEvent.filter(
-              filter: KTestText.informationModelItems.first.tags!.first,
-              isSelected: false,
+            const InformationWatcherEvent.filter(
+              0,
             ),
           )
           ..add(
             const InformationWatcherEvent.loadNextItems(),
           )
           ..add(
-            InformationWatcherEvent.filter(
-              filter: KTestText.informationModelItems.first.tags!.last,
-              isSelected: false,
+            const InformationWatcherEvent.filter(
+              0,
             ),
           )
           ..add(
             const InformationWatcherEvent.loadNextItems(),
           );
       },
-      /* expect: () => [
-          predicate<InformationWatcherState>(
-            (state) => state.loadingStatus == LoadingStatus.loading,
-          ),
-          predicate<InformationWatcherState>(
-            (state) =>
-                state.loadingStatus == LoadingStatus.loaded &&
-                state.filteredInformationModelItems.elementAt(0) !=
-                    KTestText.informationModelItems.first &&
-                state.filters == null,
-          ),
-          predicate<InformationWatcherState>(
-            (state) =>
-                state.loadingStatus == LoadingStatus.loaded &&
-                state.filteredInformationModelItems.elementAt(0) ==
-                    KTestText.informationModelItems.first &&
-                state.filters != null &&
-                state.itemsLoaded == 1,
-          ),
-          predicate<InformationWatcherState>(
-            (state) =>
-                state.loadingStatus == LoadingStatus.loaded &&
-                state.filteredInformationModelItems.elementAt(0) ==
-                    KTestText.informationModelItems.elementAt(0) &&
-                state.filters == null &&
-                state.itemsLoaded == 1,
-          ),
-          predicate<InformationWatcherState>(
-            (state) =>
-                state.loadingStatus == LoadingStatus.loaded &&
-                // Ensure the filtered item is the first one
-                state.filteredInformationModelItems.length == 2 &&
-                // Ensure itemsLoaded is updated and filters are null
-                state.itemsLoaded == 2 &&
-                state.filters == null,
-          ),
-        ],*/
+      expect: () => [
+        predicate<InformationWatcherState>(
+          (state) => state.loadingStatus == LoadingStatus.loading,
+        ),
+        predicate<InformationWatcherState>(
+          (state) =>
+              state.loadingStatus == LoadingStatus.loaded &&
+              state.filtersIndex == null,
+        ),
+        predicate<InformationWatcherState>(
+          (state) =>
+              state.loadingStatus == LoadingStatus.loaded &&
+              state.filteredInformationModelItems.length ==
+                  KDimensions.loadItems &&
+              state.filtersIndex != null &&
+              state.itemsLoaded == KDimensions.loadItems,
+        ),
+        predicate<InformationWatcherState>(
+          (state) =>
+              state.loadingStatus == LoadingStatus.loaded &&
+              state.filteredInformationModelItems.length ==
+                  KDimensions.loadItems &&
+              state.filtersIndex != null &&
+              state.filtersIndex!.isEmpty &&
+              state.itemsLoaded == KDimensions.loadItems,
+        ),
+        predicate<InformationWatcherState>(
+          (state) =>
+              state.loadingStatus == LoadingStatus.loaded &&
+              state.filteredInformationModelItems.length ==
+                  KDimensions.loadItems * 2 &&
+              state.itemsLoaded == KDimensions.loadItems * 2 &&
+              state.filtersIndex != null &&
+              state.filtersIndex!.isEmpty,
+        ),
+      ],
     );
   });
 }

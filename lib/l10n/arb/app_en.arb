@@ -7,7 +7,6 @@
   "detail": "Detail",
   "resetAllFilter": "Reset filters",
   "aboutUs": "About project",
-  "forInvestors": "Investors",
   "stories": "Stories",
   "discounts": "Discounts",
   "myProfile": "Profile",
@@ -42,7 +41,7 @@
   "text": "text",
   "writeYourSuggenstions": "Write your suggestions",
   "feedback": "Feedback",
-  "feedbackSubtitle": "If you want to contact us, or have any questions or requests. We are happy to talk to you! Please fill out the form.",
+  "feedbackSubtitle": "Didn't find what you were looking for, want to get in touch, or have questions or requests? We are happy to talk to you! Please fill out the form below.",
   "writeYourMessage": "Write your message",
   "helloVeteran": "Hello, Veteran!",
   "homeSubtitle": "Here you will find useful information, benefits, discounts and you can also share your story!",
@@ -83,9 +82,6 @@
   "disconnect": "Disconnect",
   "receivedYourMessage": "We have received your message and will respond to you as soon as possible.",
   "logInWith": "Log in with",
-  "notFound": "The user with this password or address does not exist",
-  "dublicate": "The user with this password or address exist",
-  "serverError": "An error occurred while transferring data to the server",
   "rateOurSite": "Rate our site",
   "next": "Next",
   "thankYouDescription": "Please note! To access some services, you will need to confirm your status by showing the appropriate ID.",
@@ -172,5 +168,42 @@
   "jobsVacancies": "Jobs and vacancies",
   "jobsVacanciesSubtitle": "Information on current vacancies specifically targeted at veterans, as well as resources for job search and career development.",
   "toVacancy": "To vacancies",
-  "toGetItYouNeed": "To get it you need:"
+  "toGetItYouNeed": "To get it you need:",
+  "write": "Write",
+  "aMessage": "a message",
+  "us": "us",
+  "preferEmail": "Prefer e-mail?",
+  "ourSocialNetworks": "Our social networks",
+  "feedbackFormSubtitle": "By submitting this form, I accept the Privacy Policy of this site",
+  "sendMessage": "Send message",
+  "provideSuggestionsFromBusinesses": "Provide suggestions from businesses,",
+  "orDonateHere": "or donate here",
+  "supportOurVeterans": "Support our veterans",
+  "donateHere": "Donate here",
+  "provenFunds": "Proven funds",
+  "tryItAgain": "Try it again",
+  "error": "We're sorry, there was an unforeseen error.",
+  "@error": {
+    "description": "message of an unforeseen error that was not foreseen."
+  },
+  "networkFailure": "There is no internet connection. Please check your connection.",
+  "@networkFailure": {
+    "description": "error message when connecting to the Internet connection"
+  },
+  "getFailure": "An error occurred while loading some data.",
+  "@getFailure": {
+    "description": "error message when trying to download data from firebase"
+  },
+  "sendFailure": "We're sorry, there was an unforeseen error while sending the data. Please try again later.",
+  "@sendFailure": {
+    "description": "error message when trying to send data to firebase"
+  },
+  "notFoundFailure": "The user with this password or address does not exist.",
+  "@notFoundFailure": {
+    "description": "error message when you try to log in to your account using incorrect data"
+  },
+  "dublicateFailure": "The user with E-mail exist.",
+  "@dublicateFailure": {
+    "description": "an error message when trying to register an account with the same email as an already registered account"
+  }
 }

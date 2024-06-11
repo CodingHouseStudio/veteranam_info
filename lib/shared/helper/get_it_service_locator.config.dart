@@ -14,12 +14,13 @@ import 'package:google_sign_in/google_sign_in.dart' as _i8;
 import 'package:injectable/injectable.dart' as _i2;
 import 'package:kozak/components/discounts/bloc/discount_watcher_bloc.dart'
     as _i27;
+import 'package:kozak/components/feedback/bloc/feedback_bloc.dart' as _i28;
 import 'package:kozak/components/home/bloc/home_watcher_bloc.dart' as _i22;
 import 'package:kozak/components/information/bloc/information_watcher_bloc.dart'
     as _i23;
 import 'package:kozak/components/investors/bloc/investors_watcher_bloc.dart'
     as _i15;
-import 'package:kozak/components/login/bloc/login_bloc.dart' as _i31;
+import 'package:kozak/components/login/bloc/login_bloc.dart' as _i30;
 import 'package:kozak/components/my_story/bloc/my_story_watcher_bloc.dart'
     as _i25;
 import 'package:kozak/components/sign_up/bloc/sign_up_bloc.dart' as _i29;
@@ -31,7 +32,6 @@ import 'package:kozak/shared/bloc/authentication/authentication_bloc.dart'
     as _i33;
 import 'package:kozak/shared/bloc/authentication_services/authentication_services_cubit.dart'
     as _i32;
-import 'package:kozak/shared/bloc/feedback/feedback_bloc.dart' as _i28;
 import 'package:kozak/shared/data_provider/cache_provider.dart' as _i3;
 import 'package:kozak/shared/data_provider/fake_provider.dart' as _i4;
 import 'package:kozak/shared/data_provider/firestore_provider.dart' as _i5;
@@ -39,7 +39,7 @@ import 'package:kozak/shared/data_provider/storage_provider.dart' as _i6;
 import 'package:kozak/shared/repositories/app_authentication_repository.dart'
     as _i24;
 import 'package:kozak/shared/repositories/authentication_repository.dart'
-    as _i30;
+    as _i31;
 import 'package:kozak/shared/repositories/discount_repository.dart' as _i12;
 import 'package:kozak/shared/repositories/feedback_repository.dart' as _i20;
 import 'package:kozak/shared/repositories/firebase_module.dart' as _i34;
@@ -114,10 +114,10 @@ extension GetItInjectableX on _i1.GetIt {
         ));
     gh.factory<_i29.SignUpBloc>(() => _i29.SignUpBloc(
         iAppAuthenticationRepository: gh<_i9.IAppAuthenticationRepository>()));
-    gh.singleton<_i30.AuthenticationRepository>(() =>
-        _i30.AuthenticationRepository(gh<_i9.IAppAuthenticationRepository>()));
-    gh.factory<_i31.LoginBloc>(() => _i31.LoginBloc(
-        authenticationRepository: gh<_i9.AuthenticationRepository>()));
+    gh.factory<_i30.LoginBloc>(() => _i30.LoginBloc(
+        appAuthenticationRepository: gh<_i9.IAppAuthenticationRepository>()));
+    gh.singleton<_i31.AuthenticationRepository>(() =>
+        _i31.AuthenticationRepository(gh<_i9.IAppAuthenticationRepository>()));
     gh.factory<_i32.AuthenticationServicesCubit>(() =>
         _i32.AuthenticationServicesCubit(
             authenticationRepository: gh<_i9.AuthenticationRepository>()));

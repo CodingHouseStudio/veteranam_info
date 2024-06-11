@@ -9,15 +9,55 @@ class DiscountModel with _$DiscountModel {
   const factory DiscountModel({
     required String id,
     required String userId,
-    required String service,
-    required String percent,
-    required String city,
-    required String comment,
-    required DateTime date,
-    required String instruction,
-    required List<String> tags,
+    required String company,
+    required int discount,
+    required String title,
+    required List<String> category,
+    required List<String> categoryUA,
+    required List<String> subcategory,
+    required List<String> subcategoryUA,
+    required String eligibility,
+    required String description,
+    required String requirements,
+    required String territory,
+    required String location,
+    required String expiration,
+    required String exclusions,
+    required String phoneNumber,
+    required String directLink,
+    required DateTime dateVerified,
+    String? html,
+    String? additionaldetails,
+    String? link,
+    @Default(true) bool selectedLocationsOnly,
   }) = _DiscountModel;
 
   factory DiscountModel.fromJson(Map<String, dynamic> json) =>
       _$DiscountModelFromJson(json);
+}
+
+abstract class DiscountModelJsonField {
+  static const id = 'id';
+  static const userId = 'userId';
+  static const company = 'company';
+  static const discount = 'discount';
+  static const title = 'title';
+  static const category = 'category';
+  static const categoryUA = 'categoryUA';
+  static const subcategory = 'subcategory';
+  static const subcategoryUA = 'subcategoryUA';
+  static const eligibility = 'eligibility';
+  static const description = 'description';
+  static const requirements = 'requirements';
+  static const territory = 'territory';
+  static const location = 'location';
+  static const expiration = 'expiration';
+  static const exclusions = 'exclusions';
+  static const phoneNumber = 'phoneNumber';
+  static const directLink = 'directLink';
+  static const dateVerified = 'dateVerified';
+  static const html = 'html';
+  static const additionaldetails = 'additionaldetails';
+  static const link = 'link';
+  static const selectedLocationsOnly = 'selectedLocationsOnly';
 }

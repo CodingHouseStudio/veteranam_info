@@ -65,9 +65,31 @@ abstract class KButtonStyles {
       ),
     ),
   );
+
+  static const whiteSnackBarButtonStyle = ButtonStyle(
+    backgroundColor: MaterialStatePropertyAll(AppColors.materialThemeWhite),
+    minimumSize: MaterialStatePropertyAll(
+      Size(KMinMaxSize.minWidth100, KMinMaxSize.minHeight50),
+    ),
+    padding: MaterialStatePropertyAll(EdgeInsets.all(KPadding.kPaddingSize16)),
+    // side: MaterialStatePropertyAll( BorderSide(
+    //   color: KColorTheme.white,
+    // ),
+    shape: MaterialStatePropertyAll(
+      RoundedRectangleBorder(
+        borderRadius: KBorderRadius.kBorderRadius32,
+      ),
+    ),
+  );
   static const doubleButtonStyle = ButtonStyle(
     alignment: Alignment.centerLeft,
     padding: MaterialStatePropertyAll(EdgeInsets.zero),
+    overlayColor: MaterialStatePropertyAll(Colors.transparent),
+  );
+  static const boxButtonStyle = ButtonStyle(
+    alignment: Alignment.centerLeft,
+    padding:
+        MaterialStatePropertyAll(EdgeInsets.only(left: KPadding.kPaddingSize8)),
     overlayColor: MaterialStatePropertyAll(Colors.transparent),
   );
   static const borderButtonStyle = ButtonStyle(
@@ -191,5 +213,13 @@ abstract class KButtonStyles {
         borderRadius: KBorderRadius.kBorderRadius32,
       ),
     ),
+  );
+  static const iconButtonStyle = ButtonStyle(
+    shape: MaterialStatePropertyAll(
+      RoundedRectangleBorder(
+        borderRadius: KBorderRadius.kBorderRadiusL,
+      ),
+    ),
+    backgroundColor: MaterialStatePropertyAll(AppColors.materialThemeWhite),
   );
 }

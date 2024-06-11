@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:formz/formz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -21,7 +20,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
           const SignUpState(
             email: EmailFieldModel.pure(),
             password: PasswordFieldModel.pure(),
-            failure: SignUpError.initial,
+            failure: null,
             fieldsIsCorrect: null,
             showPasswordField: false,
           ),
@@ -41,6 +40,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     emit(
       state.copyWith(
         email: EmailFieldModel.dirty(event.email),
+        failure: null,
       ),
     );
   }
@@ -52,6 +52,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     emit(
       state.copyWith(
         password: PasswordFieldModel.dirty(event.password),
+        failure: null,
       ),
     );
   }
@@ -64,7 +65,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
       emit(
         state.copyWith(
           showPasswordField: true,
-          failure: SignUpError.initial,
+          failure: null,
           fieldsIsCorrect: null,
         ),
       );
@@ -86,7 +87,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
             showPasswordField: false,
           ),
           (r) => state.copyWith(
-            failure: SignUpError.none,
+            failure: null,
             showPasswordField: false,
           ),
         ),
