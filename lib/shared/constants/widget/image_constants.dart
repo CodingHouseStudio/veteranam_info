@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:kozak/shared/shared.dart';
 
 extension SvgPictureExtension on SvgPicture {
   SvgPicture copyWith({
@@ -79,6 +80,8 @@ abstract class KImage {
   );
   static const Image wavingHand = Image(
     image: AssetImage('assets/icons/waving_hand.png'),
+    width: KSize.kPixel16,
+    height: KSize.kPixel16,
   );
   static const Image veteran1 = Image(
     image: AssetImage('assets/images/veteran1.png'),

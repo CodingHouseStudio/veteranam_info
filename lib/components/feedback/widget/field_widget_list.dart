@@ -109,7 +109,7 @@ List<Widget> _fieldWidgetList({
         isDesk: isDesk,
         onPressed: () =>
             context.read<FeedbackBloc>().add(const FeedbackEvent.save()),
-        color: AppColors.materialThemeBlack,
+        color: AppColors.materialThemeKeyColorsSecondary,
         textColor: AppColors.materialThemeWhite,
       ),
     ];
