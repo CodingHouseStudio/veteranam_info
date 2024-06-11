@@ -19,6 +19,21 @@ void main() {
     setUp(() {
       mockInformationRepository = MockIInformationRepository();
     });
+    group('${KGroupText.failure} ', () {
+      setUp(() {
+        when(mockInformationRepository.getInformationItems()).thenAnswer(
+          (invocation) => Stream.error(Exception(KGroupText.failureGet)),
+        );
+      });
+      testWidgets('${KGroupText.failureGet} ', (tester) async {
+        await informationPumpAppHelper(
+          mockInformationRepository: mockInformationRepository,
+          tester: tester,
+        );
+
+        await informationFailureHelper(tester);
+      });
+    });
     group('${KGroupText.getEmptyList} ', () {
       setUp(() {
         when(mockInformationRepository.getInformationItems()).thenAnswer(
@@ -41,7 +56,7 @@ void main() {
           tester: tester,
         );
 
-        await mockButtonHelper(tester);
+        await informationMockButtonHelper(tester);
       });
     });
     group(KGroupText.getList, () {

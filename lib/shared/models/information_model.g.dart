@@ -12,10 +12,15 @@ _$InformationModelImpl _$$InformationModelImplFromJson(
       id: json['id'] as String,
       title: json['title'] as String,
       news: json['news'] as String,
-      date: DateTime.parse(json['date'] as String),
-      tags:
-          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
-              const <String>[],
+      category:
+          (json['category'] as List<dynamic>).map((e) => e as String).toList(),
+      categoryUA: (json['categoryUA'] as List<dynamic>)
+          .map((e) => e as String)
+          .toList(),
+      topic: json['topic'] as String,
+      topicUA: json['topicUA'] as String,
+      status: json['status'] as String,
+      fetchDate: DateTime.parse(json['fetchDate'] as String),
       image: const ImageConverter().fromJson(json['image'] as List?),
     );
 
@@ -25,7 +30,11 @@ Map<String, dynamic> _$$InformationModelImplToJson(
       'id': instance.id,
       'title': instance.title,
       'news': instance.news,
-      'date': instance.date.toIso8601String(),
-      'tags': instance.tags,
+      'category': instance.category,
+      'categoryUA': instance.categoryUA,
+      'topic': instance.topic,
+      'topicUA': instance.topicUA,
+      'status': instance.status,
+      'fetchDate': instance.fetchDate.toIso8601String(),
       'image': const ImageConverter().toJson(instance.image),
     };

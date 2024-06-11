@@ -40,6 +40,48 @@ void main() {
       );
     });
 
+    group('${KGroupText.failure} ', () {
+      testWidgets('${KGroupText.error} ', (tester) async {
+        when(mockFeedbackRepository.sendFeedback(KTestText.feedbackModel))
+            .thenAnswer(
+          (invocation) async => const Left(SomeFailure.serverError()),
+        );
+        await feedbackPumpAppHelper(
+          mockFeedbackRepository: mockFeedbackRepository,
+          tester: tester,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+        );
+
+        await feedbackFailureHelper(tester);
+      });
+      testWidgets('${KGroupText.failureNetwork} ', (tester) async {
+        when(mockFeedbackRepository.sendFeedback(KTestText.feedbackModel))
+            .thenAnswer(
+          (invocation) async => const Left(SomeFailure.network()),
+        );
+        await feedbackPumpAppHelper(
+          mockFeedbackRepository: mockFeedbackRepository,
+          tester: tester,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+        );
+
+        await feedbackFailureHelper(tester);
+      });
+      testWidgets('${KGroupText.failureSend} ', (tester) async {
+        when(mockFeedbackRepository.sendFeedback(KTestText.feedbackModel))
+            .thenAnswer(
+          (invocation) async => const Left(SomeFailure.send()),
+        );
+        await feedbackPumpAppHelper(
+          mockFeedbackRepository: mockFeedbackRepository,
+          tester: tester,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+        );
+
+        await feedbackFailureHelper(tester);
+      });
+    });
+
     testWidgets('${KGroupText.intial} ', (tester) async {
       await feedbackPumpAppHelper(
         mockFeedbackRepository: mockFeedbackRepository,

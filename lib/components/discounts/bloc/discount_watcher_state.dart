@@ -4,18 +4,12 @@ enum DiscountFailure {
   error,
 }
 
-extension DiscountFailureExtension on SomeFailure {
-  DiscountFailure toDiscount() {
-    return DiscountFailure.error;
-  }
-}
-
 @freezed
 class DiscountWatcherState with _$DiscountWatcherState {
   const factory DiscountWatcherState({
     required List<DiscountModel> discountModelItems,
     required List<DiscountModel> filteredDiscountModelItems,
-    required List<String>? filters,
+    required List<int>? filtersIndex,
     required LoadingStatus loadingStatus,
     required int itemsLoaded,
     required DiscountFailure? failure,
@@ -23,10 +17,12 @@ class DiscountWatcherState with _$DiscountWatcherState {
 }
 
 extension DiscountModelExtensions on List<DiscountModel> {
-  List<String> get overallTags {
+  List<String> get overallTagsBloc {
     final allTags = <String>[];
     for (final item in this) {
-      allTags.addAll(item.category);
+      allTags.addAll(
+        item.category,
+      );
     }
     return allTags.toSet().toList();
   }
