@@ -9,4 +9,8 @@ abstract class IDiscountRepository {
   Future<Either<SomeFailure, List<DiscountModel>>> getDiscountsById(
     String userId,
   );
+
+  Future<Either<SomeFailure, Unit>> deleteDiscountsById(
+    String discountId,
+  );
 }

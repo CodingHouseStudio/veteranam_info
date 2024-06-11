@@ -262,4 +262,11 @@ class FirestoreService {
         .map((doc) => DiscountModel.fromJson(doc.data()))
         .toList();
   }
+
+  Future<void> deleteDiscountById(String discountId) {
+    return _db
+        .collection(FirebaseCollectionName.discount)
+        .doc(discountId)
+        .delete();
+  }
 }

@@ -31,24 +31,25 @@ class DiscountBodyWidget extends StatelessWidget {
               KSizedBox.kHeightSizedBox56
             else
               KSizedBox.kHeightSizedBox24,
-            Row(
-              children: [
-                Expanded(
-                  child: DiscountFilters(
-                    key: KWidgetkeys.screen.discounts.filter,
-                    filtersItem: _.discountModelItems.overallTags,
-                    isDesk: isDesk,
+            if (isDesk)
+              Row(
+                children: [
+                  Expanded(
+                    child: DiscountFilters(
+                      key: KWidgetkeys.screen.discounts.filter,
+                      filtersItem: _.discountModelItems.overallTags,
+                      isDesk: isDesk,
+                    ),
                   ),
-                ),
-                TextButton(
-                  // key: KWidgetkeys.screen.login.signUpButton,
-                  onPressed: () =>
-                      context.goNamedWithScroll(KRoute.myDiscounts.name),
-                  style: KButtonStyles.whiteButtonStyle,
-                  child: Text(context.l10n.offerDiscount),
-                ),
-              ],
-            ),
+                  TextButton(
+                    // key: KWidgetkeys.screen.login.signUpButton,
+                    onPressed: () =>
+                        context.goNamedWithScroll(KRoute.myDiscounts.name),
+                    style: KButtonStyles.whiteButtonStyle,
+                    child: Text(context.l10n.offerDiscount),
+                  ),
+                ],
+              ),
             if (isDesk)
               KSizedBox.kHeightSizedBox56
             else

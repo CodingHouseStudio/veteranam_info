@@ -864,6 +864,17 @@ class MockFirestoreService extends _i1.Mock implements _i3.FirestoreService {
         returnValueForMissingStub:
             _i8.Future<List<_i3.DiscountModel>>.value(<_i3.DiscountModel>[]),
       ) as _i8.Future<List<_i3.DiscountModel>>);
+
+  @override
+  _i8.Future<void> deleteDiscountById(String? discountId) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #deleteDiscountById,
+          [discountId],
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
 }
 
 /// A class which mocks [IInvestorsRepository].
@@ -6596,6 +6607,33 @@ class MockIDiscountRepository extends _i1.Mock
           ),
         )),
       ) as _i8.Future<_i2.Either<_i3.SomeFailure, List<_i3.DiscountModel>>>);
+
+  @override
+  _i8.Future<_i2.Either<_i3.SomeFailure, _i2.Unit>> deleteDiscountsById(
+          String? discountId) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #deleteDiscountsById,
+          [discountId],
+        ),
+        returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, _i2.Unit>>.value(
+            _FakeEither_0<_i3.SomeFailure, _i2.Unit>(
+          this,
+          Invocation.method(
+            #deleteDiscountsById,
+            [discountId],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i8.Future<_i2.Either<_i3.SomeFailure, _i2.Unit>>.value(
+                _FakeEither_0<_i3.SomeFailure, _i2.Unit>(
+          this,
+          Invocation.method(
+            #deleteDiscountsById,
+            [discountId],
+          ),
+        )),
+      ) as _i8.Future<_i2.Either<_i3.SomeFailure, _i2.Unit>>);
 }
 
 /// A class which mocks [Query].

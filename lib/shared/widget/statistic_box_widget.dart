@@ -30,65 +30,53 @@ class StatisticBoxWidget extends StatelessWidget {
       ),
       decoration: KWidgetTheme.boxDecorationCard,
       child: isDesk
-          ? InkWell(
-              onTap: onTap,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    key: KWidgetkeys.widget.statisticBox.title,
-                    style: AppTextStyle.text40,
-                    maxLines: 1,
-                  ),
-                  Row(
-                    children: [
-                      IconWidget(
-                        padding: 0,
-                        key: KWidgetkeys.widget.statisticBox.icon,
-                        icon: KIcon.safe,
-                        background: AppColors.materialThemeKeyColorsNeutral,
-                      ),
-                      Text(
+          ? Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  key: KWidgetkeys.widget.statisticBox.title,
+                  style: AppTextStyle.text40,
+                  maxLines: 1,
+                ),
+                Row(
+                  children: [
+                    KIcon.safe,
+                    Expanded(
+                      child: Text(
                         subtitle,
                         key: KWidgetkeys.widget.statisticBox.subtitle,
                         style: AppTextStyle.text16,
                         maxLines: 1,
                       ),
-                    ],
-                  ),
-                ],
-              ),
+                    ),
+                  ],
+                ),
+              ],
             )
-          : InkWell(
-              onTap: onTap,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    key: KWidgetkeys.widget.statisticBox.title,
-                    style: AppTextStyle.text24,
-                    maxLines: 1,
-                  ),
-                  Row(
-                    children: [
-                      IconWidget(
-                        padding: 0,
-                        key: KWidgetkeys.widget.statisticBox.icon,
-                        icon: KIcon.safe,
-                        background: AppColors.materialThemeKeyColorsNeutral,
-                      ),
-                      Text(
+          : Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  key: KWidgetkeys.widget.statisticBox.title,
+                  style: AppTextStyle.text24,
+                  maxLines: 1,
+                ),
+                Row(
+                  children: [
+                    KIcon.safe,
+                    Expanded(
+                      child: Text(
                         subtitle,
                         key: KWidgetkeys.widget.statisticBox.subtitle,
                         style: AppTextStyle.text14,
                         maxLines: 1,
                       ),
-                    ],
-                  ),
-                ],
-              ),
+                    ),
+                  ],
+                ),
+              ],
             ),
     );
   }

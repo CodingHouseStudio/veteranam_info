@@ -47,4 +47,18 @@ class DiscountRepository implements IDiscountRepository {
       return const Left(SomeFailure.serverError());
     }
   }
+
+  @override
+  Future<Either<SomeFailure, Unit>> deleteDiscountsById(
+    String discountId,
+  ) async {
+    try {
+      await _firestoreService.deleteDiscountById(discountId);
+      return const Right(unit);
+    } on Exception catch (e) {
+      return Left(GetFailur.fromCode(e).status);
+    } catch (e) {
+      return const Left(SomeFailure.serverError());
+    }
+  }
 }

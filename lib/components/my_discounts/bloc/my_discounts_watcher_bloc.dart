@@ -19,6 +19,7 @@ class MyDiscountsWatcherBloc
         _iAppAuthenticationRepository = iAppAuthenticationRepository,
         super(const MyDiscountsWatcherState.initial()) {
     on<_Started>(_onStarted);
+    on<_DeleteDiscount>(_onDeleteDiscount);
   }
 
   final IDiscountRepository _discountRepository;
@@ -39,5 +40,36 @@ class MyDiscountsWatcherBloc
       ),
       (r) => emit(MyDiscountsWatcherState.success(discountsModelItems: r)),
     );
+  }
+
+  Future<void> _onDeleteDiscount(
+    _DeleteDiscount event,
+    Emitter<MyDiscountsWatcherState> emit,
+  ) async {
+    final currentState = state;
+    if (currentState is MyDiscountsWatcherStateSuccess) {
+      final deleteResult = await _discountRepository.deleteDiscountsById(
+        event.discountId,
+      );
+      deleteResult.fold(
+        (l) => emit(MyDiscountsWatcherState.failure(l.toMyDiscount())),
+        (r) async {
+          // emit list
+          //add(MyDiscountsWatcherEvent.started());
+
+          final fetchResult = await _discountRepository.getDiscountsById(
+            _iAppAuthenticationRepository.currentUser.id,
+          );
+          fetchResult.fold(
+            (l) => emit(MyDiscountsWatcherState.failure(l.toMyDiscount())),
+            (discounts) => emit(
+              MyDiscountsWatcherState.success(
+                discountsModelItems: discounts,
+              ),
+            ),
+          );
+        },
+      );
+    }
   }
 }
