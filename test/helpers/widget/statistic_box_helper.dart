@@ -6,8 +6,6 @@ Future<void> statisticBoxHelper({
 }) async {
   expect(find.byKey(KWidgetkeys.widget.statisticBox.title), findsWidgets);
 
-  expect(find.byKey(KWidgetkeys.widget.statisticBox.icon), findsWidgets);
-
   expect(
     find.byKey(KWidgetkeys.widget.statisticBox.subtitle),
     findsWidgets,

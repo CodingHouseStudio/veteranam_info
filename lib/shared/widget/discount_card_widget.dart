@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:kozak/shared/shared.dart';
 
 class DiscountsCardWidget extends StatelessWidget {
@@ -46,16 +47,20 @@ class DiscountsCardWidget extends StatelessWidget {
           if (isDesk)
             Row(
               children: [
-                Text(
-                  discountItem.dateVerified.toLocalDateString(),
-                  key: KWidgetkeys.widget.discountCard.date,
-                  style: AppTextStyle.hint24,
+                Expanded(
+                  child: Text(
+                    discountItem.dateVerified.toLocalDateString(),
+                    key: KWidgetkeys.widget.discountCard.date,
+                    style: AppTextStyle.hint24,
+                  ),
                 ),
-                const Spacer(),
-                Text(
-                  discountItem.location,
-                  key: KWidgetkeys.widget.discountCard.city,
-                  style: AppTextStyle.hint24,
+                Expanded(
+                  child: Text(
+                    discountItem.location,
+                    key: KWidgetkeys.widget.discountCard.city,
+                    style: AppTextStyle.hint24,
+                    textAlign: TextAlign.end,
+                  ),
                 ),
               ],
             )

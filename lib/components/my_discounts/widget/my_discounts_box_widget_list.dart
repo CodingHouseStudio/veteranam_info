@@ -100,21 +100,19 @@ List<Widget> _discountsboxWidgetList({
                     children: [
                       ..._buildDiactivateButtons(context, isDesk),
                       KSizedBox.kWidthSizedBox40,
-                      GestureDetector(
-                        onTap: () {
+                      IconButtonWidget(
+                        onPressed: () {
                           context.read<MyDiscountsWatcherBloc>().add(
                                 MyDiscountsWatcherEvent.deleteDiscount(
                                   discountsWidgetList.elementAt(index).id,
                                 ),
                               );
                         },
-                        child: IconWidget(
-                          key: KWidgetkeys.screen.myDiscounts.iconTrash,
-                          padding: KPadding.kPaddingSize12,
-                          icon: KIcon.trash,
-                          background:
-                              AppColors.materialThemeKeyColorsNeutralVariant,
-                        ),
+                        key: KWidgetkeys.screen.myDiscounts.iconTrash,
+                        padding: KPadding.kPaddingSize12,
+                        icon: KIcon.trash,
+                        background:
+                            AppColors.materialThemeKeyColorsNeutralVariant,
                       ),
                       KSizedBox.kWidthSizedBox10,
                       IconWidget(

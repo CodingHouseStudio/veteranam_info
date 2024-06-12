@@ -192,6 +192,15 @@ abstract class KTestText {
       ),
   ];
 
+  static final userDiscountModelItems = <DiscountModel>[
+    for (var i = 0; i < 5; i++)
+      KMockText.discountModel.copyWith(
+        id: i.toString(),
+        userId: userWithoutPhoto.id,
+        dateVerified: dateTime,
+      ),
+  ];
+
   static final discountModelItemsModify = <DiscountModel>[
     for (var i = 0; i < 50; i++)
       KMockText.discountModel.copyWith(

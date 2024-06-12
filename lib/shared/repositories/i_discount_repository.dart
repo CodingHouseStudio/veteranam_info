@@ -10,7 +10,7 @@ abstract class IDiscountRepository {
     String userId,
   );
 
-  Future<Either<SomeFailure, Unit>> deleteDiscountsById(
+  Future<Either<SomeFailure, bool>> deleteDiscountsById(
     String discountId,
   );
 }

@@ -50,12 +50,12 @@ class DiscountRepository implements IDiscountRepository {
   }
 
   @override
-  Future<Either<SomeFailure, Unit>> deleteDiscountsById(
+  Future<Either<SomeFailure, bool>> deleteDiscountsById(
     String discountId,
   ) async {
     try {
       await _firestoreService.deleteDiscountById(discountId);
-      return const Right(unit);
+      return const Right(true);
     } on FirebaseException catch (e) {
       return Left(GetFailur.fromCode(e).status);
     } catch (e) {

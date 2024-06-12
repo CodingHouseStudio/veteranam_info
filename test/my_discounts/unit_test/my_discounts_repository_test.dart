@@ -96,7 +96,7 @@ void main() {
           mockDiscountRepository
               .deleteDiscountsById(KTestText.discountModelItems.first.id),
         ).thenAnswer(
-          (_) async => const Right(unit),
+          (_) async => const Right(true),
         );
 
         if (GetIt.I.isRegistered<FirestoreService>()) {

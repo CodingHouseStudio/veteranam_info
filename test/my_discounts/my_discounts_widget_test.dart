@@ -26,7 +26,22 @@ void main() {
           .thenAnswer((invocation) => KTestText.userWithoutPhoto);
       when(
         mockDiscountRepository.getDiscountsById(KTestText.userWithoutPhoto.id),
-      ).thenAnswer((invocation) async => Right(KTestText.discountModelItems));
+      ).thenAnswer(
+        (invocation) async => Right(KTestText.userDiscountModelItems),
+      );
+      when(
+        mockDiscountRepository
+            .deleteDiscountsById(KTestText.userDiscountModelItems.first.id),
+      ).thenAnswer(
+        (invocation) async => const Right(true),
+      );
+      when(
+        mockDiscountRepository.deleteDiscountsById(
+          KTestText.userDiscountModelItems.elementAt(1).id,
+        ),
+      ).thenAnswer(
+        (invocation) async => const Right(true),
+      );
     });
 
     testWidgets('${KGroupText.intial} ', (tester) async {
@@ -37,6 +52,16 @@ void main() {
       );
 
       await myDiscountsInitialHelper(tester);
+    });
+
+    testWidgets('Delete discount', (tester) async {
+      await myDiscountsPumpAppHelper(
+        mockDiscountRepository: mockDiscountRepository,
+        mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+        tester: tester,
+      );
+
+      await deleteDiscountHelper(tester);
     });
     group('${KGroupText.goRouter} ', () {
       late MockGoRouter mockGoRouter;

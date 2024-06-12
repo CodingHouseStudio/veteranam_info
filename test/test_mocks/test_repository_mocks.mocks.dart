@@ -6609,15 +6609,15 @@ class MockIDiscountRepository extends _i1.Mock
       ) as _i8.Future<_i2.Either<_i3.SomeFailure, List<_i3.DiscountModel>>>);
 
   @override
-  _i8.Future<_i2.Either<_i3.SomeFailure, _i2.Unit>> deleteDiscountsById(
+  _i8.Future<_i2.Either<_i3.SomeFailure, bool>> deleteDiscountsById(
           String? discountId) =>
       (super.noSuchMethod(
         Invocation.method(
           #deleteDiscountsById,
           [discountId],
         ),
-        returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, _i2.Unit>>.value(
-            _FakeEither_0<_i3.SomeFailure, _i2.Unit>(
+        returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
+            _FakeEither_0<_i3.SomeFailure, bool>(
           this,
           Invocation.method(
             #deleteDiscountsById,
@@ -6625,15 +6625,15 @@ class MockIDiscountRepository extends _i1.Mock
           ),
         )),
         returnValueForMissingStub:
-            _i8.Future<_i2.Either<_i3.SomeFailure, _i2.Unit>>.value(
-                _FakeEither_0<_i3.SomeFailure, _i2.Unit>(
+            _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
+                _FakeEither_0<_i3.SomeFailure, bool>(
           this,
           Invocation.method(
             #deleteDiscountsById,
             [discountId],
           ),
         )),
-      ) as _i8.Future<_i2.Either<_i3.SomeFailure, _i2.Unit>>);
+      ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
 }
 
 /// A class which mocks [Query].

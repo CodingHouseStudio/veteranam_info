@@ -72,7 +72,6 @@ class MyDiscountsWatcherBloc
         ),
       ),
       (r) async {
-        // emit list
         final updatedDiscounts =
             List<DiscountModel>.from(currentState.discountsModelItems)
               ..removeWhere((discount) => discount.id == event.discountId);
@@ -84,18 +83,5 @@ class MyDiscountsWatcherBloc
         );
       },
     );
-  }//TODO: видалити
-  //add(MyDiscountsWatcherEvent.started());
-
-  // final fetchResult = await _discountRepository.getDiscountsById(
-  //   _iAppAuthenticationRepository.currentUser.id,
-  // );
-  // fetchResult.fold(
-  //   (l) => emit(MyDiscountsWatcherState.failure(l.toMyDiscount())),
-  //   (discounts) => emit(
-  //     MyDiscountsWatcherState.success(
-  //       discountsModelItems: discounts,
-  //     ),
-  //   ),
-  // );
+  }
 }

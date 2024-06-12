@@ -19,6 +19,7 @@ export 'profile_card/profile_card.dart';
 export 'question_helper.dart';
 export 'rate_helper.dart';
 export 'sign_up_bottom_buttons_helper.dart';
+export 'statistic_box_helper.dart';
 export 'story_card_helper.dart';
 export 'switch_helper.dart';
 export 'work_card_helper.dart';
