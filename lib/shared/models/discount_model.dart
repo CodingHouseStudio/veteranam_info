@@ -10,7 +10,7 @@ class DiscountModel with _$DiscountModel {
     required String id,
     required String? userId,
     required String company,
-    required int discount,
+    required List<int> discount,
     required String title,
     required List<String> category,
     required List<String> categoryUA,
