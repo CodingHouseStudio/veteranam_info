@@ -53,7 +53,7 @@ class DonateCardWidget extends StatelessWidget {
                       vertical: KPadding.kPaddingSize16,
                     ),
                     child: Text(
-                      fundModel.subtitle,
+                      fundModel.description,
                       key: KWidgetkeys.widget.donateCard.subtitle,
                       style: isDesk ? AppTextStyle.text18 : AppTextStyle.text16,
                     ),
