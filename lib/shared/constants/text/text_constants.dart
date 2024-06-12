@@ -172,7 +172,7 @@ abstract class KMockText {
     teamPartnersLink: 'https://veteranfund.com.ua/about/team/',
     email: 'info@veteranfund.mva.gov.ua',
     phoneNumber: '+380 (98) 009 48 72',
-    size: '48',
+    size: 48,
     registered: 'Ukraine registered',
     domain: 'Ветерани',
   );
