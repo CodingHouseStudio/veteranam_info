@@ -120,7 +120,7 @@ abstract class KMockText {
     userId: '',
     company: 'Ескулаб',
     link: 'https://esculab.com/',
-    discount: 10,
+    discount: [10],
     title:
         '20% знижки на аналізи для військових та людей, які внутрішньо переміщені.',
     category: ['Medical'],
@@ -172,7 +172,7 @@ abstract class KMockText {
     teamPartnersLink: 'https://veteranfund.com.ua/about/team/',
     email: 'info@veteranfund.mva.gov.ua',
     phoneNumber: '+380 (98) 009 48 72',
-    size: '48',
+    size: 48,
     registered: 'Ukraine registered',
     domain: 'Ветерани',
   );

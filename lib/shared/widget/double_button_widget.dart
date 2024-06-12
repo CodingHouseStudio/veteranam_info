@@ -105,7 +105,8 @@ class _DoubleButtonWidgetDeskState extends State<_DoubleButtonWidgetDesk> {
               child: Text(
                 widget.text,
                 style: AppTextStyle.materialThemeTitleMedium.copyWith(
-                  color: widget.textColor ?? AppColors.materialThemeBlack,
+                  color: widget.textColor ??
+                      AppColors.materialThemeKeyColorsSecondary,
                 ),
               ),
             ),
@@ -126,7 +127,8 @@ class _DoubleButtonWidgetDeskState extends State<_DoubleButtonWidgetDesk> {
             },
             child: IconWidget(
               icon: KIcon.arrowUpRight.copyWith(
-                color: widget.textColor ?? AppColors.materialThemeBlack,
+                color: widget.textColor ??
+                    AppColors.materialThemeKeyColorsSecondary,
               ),
               background: widget.color,
               padding: KPadding.kPaddingSize12,
@@ -171,13 +173,13 @@ class _DoubleButtonWidgetMob extends StatelessWidget {
             child: Text(
               text,
               style: AppTextStyle.materialThemeTitleMedium.copyWith(
-                color: textColor ?? AppColors.materialThemeBlack,
+                color: textColor ?? AppColors.materialThemeKeyColorsSecondary,
               ),
             ),
           ),
           IconWidget(
             icon: KIcon.arrowUpRight.copyWith(
-              color: textColor ?? AppColors.materialThemeBlack,
+              color: textColor ?? AppColors.materialThemeKeyColorsSecondary,
             ),
             background: color,
             padding: KPadding.kPaddingSize12,

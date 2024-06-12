@@ -158,7 +158,7 @@ abstract class FooterWidget {
               Text(
                 KAppText.madeBy,
                 key: KWidgetkeys.widget.footer.madeBy,
-                style: AppTextStyle.materialThemeBodyLargeHint,
+                style: AppTextStyle.materialThemeLabelSmall,
               ),
               KSizedBox.kHeightSizedBox4,
               Row(
@@ -167,7 +167,7 @@ abstract class FooterWidget {
                     child: Text(
                       context.l10n.allRightsReserved,
                       key: KWidgetkeys.widget.footer.rightReserved,
-                      style: AppTextStyle.materialThemeBodyLargeHint,
+                      style: AppTextStyle.materialThemeLabelSmall,
                     ),
                   ),
                   // KSizedBox.kWidthSizedBox8,
@@ -181,7 +181,7 @@ abstract class FooterWidget {
                     child: Text(
                       context.l10n.privacyPolicy,
                       key: KWidgetkeys.widget.footer.privacyPolicy,
-                      style: AppTextStyle.materialThemeBodyLargeHint,
+                      style: AppTextStyle.materialThemeLabelSmall,
                     ),
                   ),
                 ],
@@ -202,54 +202,40 @@ abstract class FooterWidget {
                 : AppTextStyle.materialThemeBodyMediumHint,
           ),
         ),
-        if (isDesk)
-          KSizedBox.kHeightSizedBox24
-        else
-          KSizedBox.kHeightSizedBox16,
+        if (isDesk) KSizedBox.kHeightSizedBox16 else KSizedBox.kHeightSizedBox8,
         _button(
           key: KWidgetkeys.widget.footer.discountsButton,
-          isDesk: true,
           text: context.l10n.discounts,
           onPressed: () => context.goNamed(KRoute.discounts.name),
         ),
-        if (isDesk)
-          KSizedBox.kHeightSizedBox16
-        else
-          KSizedBox.kHeightSizedBox12,
+        if (isDesk) KSizedBox.kHeightSizedBox8 else KSizedBox.kHeightSizedBox12,
         _button(
           key: KWidgetkeys.widget.footer.informationButton,
-          isDesk: true,
           text: context.l10n.information,
           onPressed: () => context.goNamed(KRoute.information.name),
         ),
-        if (isDesk)
-          KSizedBox.kHeightSizedBox16
-        else
-          KSizedBox.kHeightSizedBox12,
+        if (isDesk) KSizedBox.kHeightSizedBox8 else KSizedBox.kHeightSizedBox12,
         _button(
           key: KWidgetkeys.widget.footer.investorsButton,
-          isDesk: true,
           text: context.l10n.investors,
           onPressed: () => context.goNamed(KRoute.investors.name),
         ),
         if (Config.isDevelopment) ...[
           if (isDesk)
-            KSizedBox.kHeightSizedBox16
+            KSizedBox.kHeightSizedBox8
           else
             KSizedBox.kHeightSizedBox12,
           _button(
             key: KWidgetkeys.widget.footer.workButton,
-            isDesk: true,
             text: context.l10n.work,
             onPressed: () => context.goNamed(KRoute.work.name),
           ),
           if (isDesk)
-            KSizedBox.kHeightSizedBox16
+            KSizedBox.kHeightSizedBox8
           else
             KSizedBox.kHeightSizedBox12,
           _button(
             key: KWidgetkeys.widget.footer.storyButton,
-            isDesk: true,
             text: context.l10n.stories,
             onPressed: () => context.goNamed(KRoute.stories.name),
           ),
@@ -270,36 +256,24 @@ abstract class FooterWidget {
                 : AppTextStyle.materialThemeBodyMediumHint,
           ),
         ),
-        if (isDesk)
-          KSizedBox.kHeightSizedBox24
-        else
-          KSizedBox.kHeightSizedBox16,
+        if (isDesk) KSizedBox.kHeightSizedBox16 else KSizedBox.kHeightSizedBox8,
         _button(
           key: KWidgetkeys.widget.footer.aboutUsButton,
-          isDesk: true,
           text: context.l10n.aboutUs,
           onPressed: () => context.goNamed(KRoute.aboutUs.name),
         ),
-        if (isDesk)
-          KSizedBox.kHeightSizedBox16
-        else
-          KSizedBox.kHeightSizedBox12,
+        if (isDesk) KSizedBox.kHeightSizedBox8 else KSizedBox.kHeightSizedBox4,
         _button(
           key: KWidgetkeys.widget.footer.profileButton,
-          isDesk: true,
           text: context.l10n.myProfile,
           onPressed: () => context.read<AuthenticationBloc>().state.status ==
                   AuthenticationStatus.authenticated
               ? context.goNamed(KRoute.profile.name)
               : context.goNamed(KRoute.login.name),
         ),
-        if (isDesk)
-          KSizedBox.kHeightSizedBox16
-        else
-          KSizedBox.kHeightSizedBox12,
+        if (isDesk) KSizedBox.kHeightSizedBox8 else KSizedBox.kHeightSizedBox12,
         _button(
           key: KWidgetkeys.widget.footer.consultationOnlineButton,
-          isDesk: true,
           text: context.l10n.consultationOnline,
           onPressed: () => context.goNamed(KRoute.consultation.name),
         ),
@@ -309,8 +283,8 @@ abstract class FooterWidget {
     required BuildContext context,
   }) =>
       [
-        Padding(
-          padding: const EdgeInsets.only(left: KPadding.kPaddingSize4),
+        Align(
+          alignment: Alignment.centerLeft,
           child: Text(
             context.l10n.contacts,
             key: KWidgetkeys.widget.footer.contact,
@@ -334,10 +308,12 @@ abstract class FooterWidget {
                 data: KAppText.email,
                 styleSheet: MarkdownStyleSheet(
                   a: isDesk
-                      ? AppTextStyle.materialThemeTitleMedium
-                          .copyWith(color: AppColors.materialThemeBlack)
-                      : AppTextStyle.materialThemeTitleSmall
-                          .copyWith(color: AppColors.materialThemeBlack),
+                      ? AppTextStyle.materialThemeTitleMedium.copyWith(
+                          color: AppColors.materialThemeKeyColorsSecondary,
+                        )
+                      : AppTextStyle.materialThemeTitleSmall.copyWith(
+                          color: AppColors.materialThemeKeyColorsSecondary,
+                        ),
                 ),
                 shrinkWrap: true,
                 onTapLink: (text, href, title) async {
@@ -376,7 +352,6 @@ abstract class FooterWidget {
         ),
       ];
   static Widget _button({
-    required bool isDesk,
     required void Function() onPressed,
     required String text,
     required Key key,

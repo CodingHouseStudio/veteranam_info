@@ -17,7 +17,7 @@ class FundModel with _$FundModel {
     String? projectsLink,
     String? email,
     String? phoneNumber,
-    String? size,
+    int? size,
     String? comments,
     @ImageConverter() List<ImageModel>? image,
   }) = _FundsModel;
