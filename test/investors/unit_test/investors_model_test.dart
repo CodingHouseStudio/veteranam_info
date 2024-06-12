@@ -13,9 +13,19 @@ void main() {
         final json = {
           FundModelJsonField.id: KTestText.fundItems.last.id,
           FundModelJsonField.title: KTestText.fundItems.last.title,
-          FundModelJsonField.subtitle: KTestText.fundItems.last.subtitle,
+          FundModelJsonField.description: KTestText.fundItems.last.description,
           FundModelJsonField.link: KTestText.fundItems.last.link,
           FundModelJsonField.image: KTestText.fundItems.last.image,
+          FundModelJsonField.comments: KTestText.fundItems.last.comments,
+          FundModelJsonField.domain: KTestText.fundItems.last.domain,
+          FundModelJsonField.email: KTestText.fundItems.last.email,
+          FundModelJsonField.phoneNumber: KTestText.fundItems.last.phoneNumber,
+          FundModelJsonField.projectsLink:
+              KTestText.fundItems.last.projectsLink,
+          FundModelJsonField.registered: KTestText.fundItems.last.registered,
+          FundModelJsonField.size: KTestText.fundItems.last.size,
+          FundModelJsonField.teamPartnersLink:
+              KTestText.fundItems.last.teamPartnersLink,
         };
 
         final fundModel = FundModel.fromJson(json);
@@ -26,8 +36,8 @@ void main() {
           KTestText.fundItems.last.title,
         );
         expect(
-          fundModel.subtitle,
-          KTestText.fundItems.last.subtitle,
+          fundModel.description,
+          KTestText.fundItems.last.description,
         );
         expect(
           fundModel.link,
@@ -37,14 +47,47 @@ void main() {
           fundModel.image,
           KTestText.fundItems.last.image,
         );
+        expect(
+          fundModel.comments,
+          KTestText.fundItems.last.comments,
+        );
+        expect(
+          fundModel.domain,
+          KTestText.fundItems.last.domain,
+        );
+        expect(
+          fundModel.email,
+          KTestText.fundItems.last.email,
+        );
+        expect(
+          fundModel.phoneNumber,
+          KTestText.fundItems.last.phoneNumber,
+        );
+        expect(
+          fundModel.projectsLink,
+          KTestText.fundItems.last.projectsLink,
+        );
+        expect(
+          fundModel.registered,
+          KTestText.fundItems.last.registered,
+        );
+        expect(
+          fundModel.size,
+          KTestText.fundItems.last.size,
+        );
+        expect(
+          fundModel.teamPartnersLink,
+          KTestText.fundItems.last.teamPartnersLink,
+        );
       });
 
       test('${KGroupText.shouldBe} ', () {
         final json = {
           FundModelJsonField.id: KTestText.fundItems.last.id,
           FundModelJsonField.title: KTestText.fundItems.last.title,
-          FundModelJsonField.subtitle: KTestText.fundItems.last.subtitle,
+          FundModelJsonField.description: KTestText.fundItems.last.description,
           FundModelJsonField.link: KTestText.fundItems.last.link,
+          FundModelJsonField.domain: KTestText.fundItems.last.domain,
         };
 
         final fundModel = FundModel.fromJson(json);
@@ -55,8 +98,8 @@ void main() {
           KTestText.fundItems.last.title,
         );
         expect(
-          fundModel.subtitle,
-          KTestText.fundItems.last.subtitle,
+          fundModel.description,
+          KTestText.fundItems.last.description,
         );
         expect(
           fundModel.link,
@@ -66,15 +109,57 @@ void main() {
           fundModel.image,
           null,
         );
+        expect(
+          fundModel.comments,
+          null,
+        );
+        expect(
+          fundModel.domain,
+          KTestText.fundItems.last.domain,
+        );
+        expect(
+          fundModel.email,
+          null,
+        );
+        expect(
+          fundModel.phoneNumber,
+          null,
+        );
+        expect(
+          fundModel.projectsLink,
+          null,
+        );
+        expect(
+          fundModel.registered,
+          null,
+        );
+        expect(
+          fundModel.size,
+          null,
+        );
+        expect(
+          fundModel.teamPartnersLink,
+          null,
+        );
       });
 
       test('${KGroupText.shouldNotBe} ', () {
         final json = {
           FundModelJsonField.id: KTestText.fundItems.last.id,
           // title is missing
-          FundModelJsonField.subtitle: KTestText.fundItems.last.subtitle,
+          FundModelJsonField.description: KTestText.fundItems.last.description,
           FundModelJsonField.link: KTestText.fundItems.last.link,
           FundModelJsonField.image: KTestText.fundItems.last.image,
+          FundModelJsonField.comments: KTestText.fundItems.last.comments,
+          FundModelJsonField.domain: KTestText.fundItems.last.domain,
+          FundModelJsonField.email: KTestText.fundItems.last.email,
+          FundModelJsonField.phoneNumber: KTestText.fundItems.last.phoneNumber,
+          FundModelJsonField.projectsLink:
+              KTestText.fundItems.last.projectsLink,
+          FundModelJsonField.registered: KTestText.fundItems.last.registered,
+          FundModelJsonField.size: KTestText.fundItems.last.size,
+          FundModelJsonField.teamPartnersLink:
+              KTestText.fundItems.last.teamPartnersLink,
         };
 
         expect(
@@ -88,9 +173,19 @@ void main() {
         final json = {
           FundModelJsonField.id: KTestText.fundItems.last.id,
           FundModelJsonField.title: KTestText.fundItems.last.title,
-          FundModelJsonField.subtitle: KTestText.fundItems.last.subtitle,
+          FundModelJsonField.description: KTestText.fundItems.last.description,
           FundModelJsonField.link: KTestText.fundItems.last.link,
           FundModelJsonField.image: KTestText.fundItems.last.image,
+          FundModelJsonField.comments: KTestText.fundItems.last.comments,
+          FundModelJsonField.domain: KTestText.fundItems.last.domain,
+          FundModelJsonField.email: KTestText.fundItems.last.email,
+          FundModelJsonField.phoneNumber: KTestText.fundItems.last.phoneNumber,
+          FundModelJsonField.projectsLink:
+              KTestText.fundItems.last.projectsLink,
+          FundModelJsonField.registered: KTestText.fundItems.last.registered,
+          FundModelJsonField.size: KTestText.fundItems.last.size,
+          FundModelJsonField.teamPartnersLink:
+              KTestText.fundItems.last.teamPartnersLink,
         };
 
         final fundModelJson = KTestText.fundItems.last.toJson();
@@ -102,13 +197,26 @@ void main() {
         final json = {
           FundModelJsonField.id: KTestText.fundItems.last.id,
           FundModelJsonField.title: KTestText.fundItems.last.title,
-          FundModelJsonField.subtitle: KTestText.fundItems.last.subtitle,
+          FundModelJsonField.description: KTestText.fundItems.last.description,
           FundModelJsonField.link: KTestText.fundItems.last.link,
           FundModelJsonField.image: null,
+          FundModelJsonField.comments: null,
+          FundModelJsonField.domain: KTestText.fundItems.last.domain,
+          FundModelJsonField.email: null,
+          FundModelJsonField.phoneNumber: null,
+          FundModelJsonField.projectsLink: null,
+          FundModelJsonField.registered: null,
+          FundModelJsonField.size: null,
+          FundModelJsonField.teamPartnersLink: null,
         };
 
-        final fundModelJson =
-            KTestText.fundItems.last.copyWith(image: null).toJson();
+        final fundModelJson = FundModel(
+          id: KTestText.fundItems.last.id,
+          title: KTestText.fundItems.last.title,
+          description: KTestText.fundItems.last.description,
+          link: KTestText.fundItems.last.link,
+          domain: KTestText.fundItems.last.domain,
+        ).toJson();
 
         expect(fundModelJson, json);
       });

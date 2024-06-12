@@ -20,7 +20,7 @@ class TextPointWidget extends StatelessWidget {
         Container(
           decoration: const BoxDecoration(
             shape: BoxShape.circle,
-            color: AppColors.materialThemeBlack,
+            color: AppColors.materialThemeKeyColorsSecondary,
           ),
           height: KSize.kPixel8,
           width: KSize.kPixel8,

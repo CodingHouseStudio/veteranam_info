@@ -202,11 +202,8 @@ abstract class KTestText {
 
   static final fundItems = <FundModel>[
     for (var i = 0; i < 5; i++)
-      FundModel(
+      KMockText.fundModel.copyWith(
         id: i.toString(),
-        title: KMockText.donateCardTitle,
-        subtitle: KMockText.donateCardSubtitle,
-        link: '',
       ),
   ];
 
