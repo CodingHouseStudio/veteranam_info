@@ -112,7 +112,7 @@ void main() {
           await mockDiscountRepository.deleteDiscountsById(
             KTestText.discountModelItems.first.id,
           ),
-          isA<Right<SomeFailure, Unit>>().having((e) => e.value, 'value', unit),
+          isA<Right<SomeFailure, bool>>().having((e) => e.value, 'value', true),
         );
       });
     });
@@ -139,7 +139,7 @@ void main() {
           await mockDiscountRepository.deleteDiscountsById(
             KTestText.discountModelItems.first.id,
           ),
-          isA<Left<SomeFailure, Unit>>().having(
+          isA<Left<SomeFailure, bool>>().having(
             (e) => e.value,
             'value',
             equals(const SomeFailure.serverError()),
