@@ -120,7 +120,7 @@ abstract class KMockText {
     userId: '',
     company: 'Ескулаб',
     link: 'https://esculab.com/',
-    discount: 10,
+    discount: [10],
     title:
         '20% знижки на аналізи для військових та людей, які внутрішньо переміщені.',
     category: ['Medical'],
