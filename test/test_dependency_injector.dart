@@ -59,7 +59,7 @@ void configureDependenciesTest() {
   );
   GetIt.I.registerSingleton<LoginBloc>(
     LoginBloc(
-      authenticationRepository: GetIt.I.get<AuthenticationRepository>(),
+      appAuthenticationRepository: GetIt.I.get<IAppAuthenticationRepository>(),
     ),
   );
   GetIt.I.registerSingleton<SignUpBloc>(
@@ -90,6 +90,12 @@ void configureDependenciesTest() {
   GetIt.I.registerSingleton<DiscountWatcherBloc>(
     DiscountWatcherBloc(
       discountRepository: GetIt.I.get<IDiscountRepository>(),
+    ),
+  );
+  GetIt.I.registerSingleton<MyDiscountsWatcherBloc>(
+    MyDiscountsWatcherBloc(
+      discountRepository: GetIt.I.get<IDiscountRepository>(),
+      iAppAuthenticationRepository: GetIt.I.get<IAppAuthenticationRepository>(),
     ),
   );
 }

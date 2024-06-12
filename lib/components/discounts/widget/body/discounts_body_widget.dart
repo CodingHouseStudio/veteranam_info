@@ -12,7 +12,14 @@ class DiscountBodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<DiscountWatcherBloc, DiscountWatcherState>(
+    return BlocConsumer<DiscountWatcherBloc, DiscountWatcherState>(
+      listener: (context, state) => context.dialog.showGetErrorDialog(
+        error: state.failure!.value(context),
+        onPressed: () => context
+            .read<DiscountWatcherBloc>()
+            .add(const DiscountWatcherEvent.started()),
+      ),
+      listenWhen: (previous, current) => current.failure != null,
       builder: (context, _) {
         return ScaffoldWidget(
           mainChildWidgetsFunction: ({required isDesk}) => [
@@ -35,10 +42,27 @@ class DiscountBodyWidget extends StatelessWidget {
               Row(
                 children: [
                   Expanded(
-                    child: DiscountFilters(
+                    child: FiltersChipWidget(
                       key: KWidgetkeys.screen.discounts.filter,
-                      filtersItem: _.discountModelItems.overallTags,
+                      filtersItems: _.discountModelItems.overallTags(context),
                       isDesk: isDesk,
+                      onResetValue: () =>
+                          context.read<DiscountWatcherBloc>().add(
+                                const DiscountWatcherEvent.filterReset(),
+                              ),
+                      isSelected: (index) =>
+                          context
+                              .read<DiscountWatcherBloc>()
+                              .state
+                              .filtersIndex
+                              ?.contains(index) ??
+                          false,
+                      onSelected: (index) =>
+                          context.read<DiscountWatcherBloc>().add(
+                                DiscountWatcherEvent.filter(
+                                  index,
+                                ),
+                              ),
                     ),
                   ),
                   TextButton(

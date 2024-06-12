@@ -2,13 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
+import 'package:skeletonizer/skeletonizer.dart';
+
+part '../stories_widget_list.dart';
 
 class ProfileMyStoryBodyWidget extends StatelessWidget {
   const ProfileMyStoryBodyWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<MyStoryWatcherBloc, MyStoryWatcherState>(
+    return BlocConsumer<MyStoryWatcherBloc, MyStoryWatcherState>(
+      listener: (context, state) => context.dialog.showGetErrorDialog(
+        error: state.failure!.value(context),
+        onPressed: () => context
+            .read<MyStoryWatcherBloc>()
+            .add(const MyStoryWatcherEvent.started()),
+      ),
+      listenWhen: (previous, current) => current.failure != null,
       builder: (context, _) => ScaffoldWidget(
         titleChildWidgetsFunction: ({required isDesk}) => [
           if (isDesk)
@@ -33,45 +43,13 @@ class ProfileMyStoryBodyWidget extends StatelessWidget {
         ],
         mainDeskPadding:
             const EdgeInsets.symmetric(horizontal: KPadding.kPaddingSize48),
-        mainChildWidgetsFunction: ({required isDesk}) {
-          final childWidgets = <Widget>[];
-          switch (_) {
-            case MyStoryWatcherStateInitial():
-              childWidgets.add(const CircularProgressIndicator.adaptive());
-            case MyStoryWatcherStateLoading():
-              childWidgets.add(const CircularProgressIndicator.adaptive());
-            case MyStoryWatcherStateSuccess():
-              if (_.storyModelItems.isNotEmpty) {
-                childWidgets.addAll(
-                  List.generate(_.storyModelItems.length, (index) {
-                    return Padding(
-                      padding: index != 0
-                          ? EdgeInsets.only(
-                              top: isDesk
-                                  ? KPadding.kPaddingSize56
-                                  : KPadding.kPaddingSize24,
-                            )
-                          : EdgeInsets.zero,
-                      child: StoryCardWidget(
-                        key: KWidgetkeys.screen.myStory.card,
-                        storyModel: _.storyModelItems.elementAt(index),
-                        isDesk: isDesk,
-                      ),
-                    );
-                  }),
-                );
-              }
-
-            case MyStoryWatcherStateFailure():
-              childWidgets.add(const CircularProgressIndicator.adaptive());
-          }
-          return childWidgets
-            ..add(
-              isDesk
-                  ? KSizedBox.kHeightSizedBox56
-                  : KSizedBox.kHeightSizedBox24,
-            );
-        },
+        mainChildWidgetsFunction: ({required isDesk}) => [
+          ..._storiesWidgetList(context: context, isDesk: isDesk),
+          if (isDesk)
+            KSizedBox.kHeightSizedBox56
+          else
+            KSizedBox.kHeightSizedBox24,
+        ],
       ),
     );
   }

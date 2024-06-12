@@ -3,7 +3,7 @@ import 'package:kozak/shared/shared.dart';
 
 import '../../text_dependency.dart';
 
-Future<void> mockButtonHelper(
+Future<void> homeMockButtonHelper(
   WidgetTester tester,
 ) async {
   await changeWindowSizeHelper(
@@ -24,6 +24,8 @@ Future<void> mockButtonHelper(
         find.byKey(KWidgetkeys.screen.home.faq),
         findsNothing,
       );
+
+      await dialogFailureGetHelper(tester: tester, isFailure: false);
 
       expect(
         find.byKey(KWidgetkeys.screen.home.buttonMock),

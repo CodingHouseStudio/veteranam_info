@@ -194,7 +194,7 @@ class FirestoreService {
   Future<List<StoryModel>> getStoriesByUserId(String userId) async {
     final querySnapshot = await _db
         .collection(FirebaseCollectionName.stroies)
-        .where('userId', isEqualTo: userId)
+        .where(StoryModelJsonField.userId, isEqualTo: userId)
         .get();
 
     return querySnapshot.docs
@@ -255,7 +255,7 @@ class FirestoreService {
   Future<List<DiscountModel>> getDiscountsByUserId(String userId) async {
     final querySnapshot = await _db
         .collection(FirebaseCollectionName.discount)
-        .where('userId', isEqualTo: userId)
+        .where(DiscountModelJsonField.userId, isEqualTo: userId)
         .get();
 
     return querySnapshot.docs

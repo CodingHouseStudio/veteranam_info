@@ -24,31 +24,77 @@ void main() {
 
       when(mockAppAuthenticationRepository.currentUser)
           .thenAnswer((invocation) => KTestText.userWithoutPhoto);
-      when(mockStoryRepository.getStoriesById(KTestText.userWithoutPhoto.id))
-          .thenAnswer((invocation) async => Right(KTestText.storyModelItems));
     });
 
-    testWidgets('${KGroupText.intial} ', (tester) async {
-      await myStoryPumpAppHelper(
-        mockStoryRepository: mockStoryRepository,
-        mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-        tester: tester,
-      );
+    group('${KGroupText.failure} ', () {
+      testWidgets('${KGroupText.error} ', (tester) async {
+        when(mockStoryRepository.getStoriesById(KTestText.userWithoutPhoto.id))
+            .thenAnswer(
+          (invocation) async => const Left(SomeFailure.serverError()),
+        );
+        await myStoryPumpAppHelper(
+          mockStoryRepository: mockStoryRepository,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          tester: tester,
+        );
 
-      await myStoryInitialHelper(tester);
+        await myStoryFailureHelper(tester);
+      });
+      testWidgets('${KGroupText.failureNetwork} ', (tester) async {
+        when(mockStoryRepository.getStoriesById(KTestText.userWithoutPhoto.id))
+            .thenAnswer(
+          (invocation) async => const Left(SomeFailure.network()),
+        );
+        await myStoryPumpAppHelper(
+          mockStoryRepository: mockStoryRepository,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          tester: tester,
+        );
+
+        await myStoryFailureHelper(tester);
+      });
+      testWidgets('${KGroupText.failureGet} ', (tester) async {
+        when(mockStoryRepository.getStoriesById(KTestText.userWithoutPhoto.id))
+            .thenAnswer(
+          (invocation) async => const Left(SomeFailure.get()),
+        );
+        await myStoryPumpAppHelper(
+          mockStoryRepository: mockStoryRepository,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          tester: tester,
+        );
+
+        await myStoryFailureHelper(tester);
+      });
     });
-    group('${KGroupText.goRouter} ', () {
-      late MockGoRouter mockGoRouter;
-      setUp(() => mockGoRouter = MockGoRouter());
+
+    group('${KGroupText.getList} ', () {
+      setUp(() {
+        when(mockStoryRepository.getStoriesById(KTestText.userWithoutPhoto.id))
+            .thenAnswer((invocation) async => Right(KTestText.storyModelItems));
+      });
       testWidgets('${KGroupText.intial} ', (tester) async {
         await myStoryPumpAppHelper(
           mockStoryRepository: mockStoryRepository,
           mockAppAuthenticationRepository: mockAppAuthenticationRepository,
           tester: tester,
-          mockGoRouter: mockGoRouter,
         );
 
         await myStoryInitialHelper(tester);
+      });
+      group('${KGroupText.goRouter} ', () {
+        late MockGoRouter mockGoRouter;
+        setUp(() => mockGoRouter = MockGoRouter());
+        testWidgets('${KGroupText.intial} ', (tester) async {
+          await myStoryPumpAppHelper(
+            mockStoryRepository: mockStoryRepository,
+            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+            tester: tester,
+            mockGoRouter: mockGoRouter,
+          );
+
+          await myStoryInitialHelper(tester);
+        });
       });
     });
   });

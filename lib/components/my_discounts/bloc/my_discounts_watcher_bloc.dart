@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:flutter/widgets.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kozak/shared/shared.dart';
@@ -17,7 +18,12 @@ class MyDiscountsWatcherBloc
     required IAppAuthenticationRepository iAppAuthenticationRepository,
   })  : _discountRepository = discountRepository,
         _iAppAuthenticationRepository = iAppAuthenticationRepository,
-        super(const MyDiscountsWatcherState.initial()) {
+        super(
+          const MyDiscountsWatcherState(
+            discountsModelItems: [],
+            loadingStatus: LoadingStatus.initial,
+          ),
+        ) {
     on<_Started>(_onStarted);
     on<_DeleteDiscount>(_onDeleteDiscount);
   }
@@ -29,16 +35,24 @@ class MyDiscountsWatcherBloc
     _Started event,
     Emitter<MyDiscountsWatcherState> emit,
   ) async {
-    emit(const MyDiscountsWatcherState.loading());
+    emit(state.copyWith(loadingStatus: LoadingStatus.loading));
 
     final result = await _discountRepository.getDiscountsById(
       _iAppAuthenticationRepository.currentUser.id,
     );
     result.fold(
       (l) => emit(
-        MyDiscountsWatcherState.failure(l.toMyDiscount()),
+        state.copyWith(
+          failure: l.toMyDiscount(),
+          loadingStatus: LoadingStatus.error,
+        ),
       ),
-      (r) => emit(MyDiscountsWatcherState.success(discountsModelItems: r)),
+      (r) => emit(
+        MyDiscountsWatcherState(
+          discountsModelItems: r,
+          loadingStatus: LoadingStatus.loaded,
+        ),
+      ),
     );
   }
 
@@ -47,29 +61,41 @@ class MyDiscountsWatcherBloc
     Emitter<MyDiscountsWatcherState> emit,
   ) async {
     final currentState = state;
-    if (currentState is MyDiscountsWatcherStateSuccess) {
-      final deleteResult = await _discountRepository.deleteDiscountsById(
-        event.discountId,
-      );
-      deleteResult.fold(
-        (l) => emit(MyDiscountsWatcherState.failure(l.toMyDiscount())),
-        (r) async {
-          // emit list
-          //add(MyDiscountsWatcherEvent.started());
+    final deleteResult = await _discountRepository.deleteDiscountsById(
+      event.discountId,
+    );
+    deleteResult.fold(
+      (l) => emit(
+        state.copyWith(
+          failure: l.toMyDiscount(),
+          loadingStatus: LoadingStatus.error,
+        ),
+      ),
+      (r) async {
+        // emit list
+        final updatedDiscounts =
+            List<DiscountModel>.from(currentState.discountsModelItems)
+              ..removeWhere((discount) => discount.id == event.discountId);
 
-          final fetchResult = await _discountRepository.getDiscountsById(
-            _iAppAuthenticationRepository.currentUser.id,
-          );
-          fetchResult.fold(
-            (l) => emit(MyDiscountsWatcherState.failure(l.toMyDiscount())),
-            (discounts) => emit(
-              MyDiscountsWatcherState.success(
-                discountsModelItems: discounts,
-              ),
-            ),
-          );
-        },
-      );
-    }
-  }
+        emit(
+          state.copyWith(
+            discountsModelItems: updatedDiscounts,
+          ),
+        );
+      },
+    );
+  }//TODO: видалити
+  //add(MyDiscountsWatcherEvent.started());
+
+  // final fetchResult = await _discountRepository.getDiscountsById(
+  //   _iAppAuthenticationRepository.currentUser.id,
+  // );
+  // fetchResult.fold(
+  //   (l) => emit(MyDiscountsWatcherState.failure(l.toMyDiscount())),
+  //   (discounts) => emit(
+  //     MyDiscountsWatcherState.success(
+  //       discountsModelItems: discounts,
+  //     ),
+  //   ),
+  // );
 }

@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:kozak/shared/shared.dart';
 
@@ -27,11 +26,9 @@ class DonateCardWidget extends StatelessWidget {
         alignment: Alignment.bottomCenter,
         children: [
           if (fundModel.image != null)
-            CachedNetworkImage(
+            ImageWidget(
               key: KWidgetkeys.widget.donateCard.image,
               imageUrl: fundModel.image.firstImage!,
-              placeholder: (context, url) => Image.asset(''),
-              errorWidget: (context, url, error) => KIcon.error,
               fit: BoxFit.fill,
             ),
           Padding(
@@ -56,7 +53,7 @@ class DonateCardWidget extends StatelessWidget {
                       vertical: KPadding.kPaddingSize16,
                     ),
                     child: Text(
-                      fundModel.subtitle,
+                      fundModel.description,
                       key: KWidgetkeys.widget.donateCard.subtitle,
                       style: isDesk ? AppTextStyle.text18 : AppTextStyle.text16,
                     ),

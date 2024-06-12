@@ -1,16 +1,30 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/widgets.dart';
 import 'package:kozak/shared/shared.dart';
 
 /// COMMENT: Error handling classes
-class SendFailure implements Exception {
+class SendFailure {
   const SendFailure([
     this.status = const SomeFailure.initial(),
   ]);
 
   factory SendFailure.fromCode(
-    dynamic e,
+    FirebaseException error,
   ) {
-    switch (e) {
+    debugPrint('SomeFailure: ${error.code}');
+    switch (error.code) {
+      case 'invalid-argument':
+      case 'missing-argument':
+      case 'timeout':
+      case 'canceled':
+      case 'permission-denied':
+      case 'quota-exceeded':
+      case 'internal-error':
+      case 'invalid-file-type':
+      case 'file-too-large':
+        return const SendFailure(SomeFailure.send());
+      case 'network-error':
+        return const SendFailure(SomeFailure.network());
       default:
         return const SendFailure(SomeFailure.serverError());
     }
@@ -19,15 +33,28 @@ class SendFailure implements Exception {
   final SomeFailure status;
 }
 
-class GetFailur implements Exception {
+class GetFailur {
   const GetFailur([
     this.status = const SomeFailure.initial(),
   ]);
 
   factory GetFailur.fromCode(
-    dynamic e,
+    FirebaseException error,
   ) {
-    switch (e) {
+    debugPrint('SomeFailure: ${error.code}');
+    switch (error.code) {
+      case 'missing-argument':
+      case 'timeout':
+      case 'canceled':
+      case 'not-found':
+      case 'permission-denied':
+      case 'out-of-range':
+      case 'data-error':
+      case 'internal-error':
+      case 'invalid-argument':
+        return const GetFailur(SomeFailure.get());
+      case 'network-error':
+        return const GetFailur(SomeFailure.network());
       default:
         return const GetFailur(SomeFailure.serverError());
     }
@@ -39,48 +66,49 @@ class GetFailur implements Exception {
 /// {@template sign_up_with_email_and_password_failure}
 /// Thrown during the sign up process if a failure occurs.
 /// {@endtemplate}
-class SignUpWithEmailAndPasswordFailure implements Exception {
+class SignUpWithEmailAndPasswordFailure {
   /// {@macro sign_up_with_email_and_password_failure}
-  SignUpWithEmailAndPasswordFailure([
+  const SignUpWithEmailAndPasswordFailure([
     this.status = const SomeFailure.initial(),
   ]);
 
   factory SignUpWithEmailAndPasswordFailure.fromCode(
-    FirebaseAuthException code,
+    FirebaseAuthException error,
   ) {
-    switch (code.code) {
+    debugPrint('SomeFailure: ${error.code}');
+    switch (error.code) {
       case 'email-already-in-use':
-        return SignUpWithEmailAndPasswordFailure(
-          const SomeFailure.duplicate(),
+        return const SignUpWithEmailAndPasswordFailure(
+          SomeFailure.duplicate(),
         );
       case 'operation-not-allowed':
-        return SignUpWithEmailAndPasswordFailure(
-          const SomeFailure.serverError(),
-        );
       case 'invalid-email':
       case 'user-disabled':
       case 'weak-password':
-        return SignUpWithEmailAndPasswordFailure(
-          const SomeFailure.notFound(),
+        return const SignUpWithEmailAndPasswordFailure(
+          SomeFailure.serverError(),
         );
+      case 'network-error':
+        return const SignUpWithEmailAndPasswordFailure(SomeFailure.network());
       default:
-        return SignUpWithEmailAndPasswordFailure();
+        return const SignUpWithEmailAndPasswordFailure();
     }
   }
 
   final SomeFailure status;
 }
 
-class LogInWithEmailAndPasswordFailure implements Exception {
+class LogInWithEmailAndPasswordFailure {
   /// {@macro log_in_with_email_and_password_failure}
   const LogInWithEmailAndPasswordFailure([
     this.status = const SomeFailure.initial(),
   ]);
 
   factory LogInWithEmailAndPasswordFailure.fromCode(
-    FirebaseAuthException code,
+    FirebaseAuthException error,
   ) {
-    switch (code.code) {
+    debugPrint('SomeFailure: ${error.code}');
+    switch (error.code) {
       case 'user-disabled':
       case 'invalid-email':
       case 'user-not-found':
@@ -89,6 +117,8 @@ class LogInWithEmailAndPasswordFailure implements Exception {
         return const LogInWithEmailAndPasswordFailure(
           SomeFailure.notFound(),
         );
+      case 'network-error':
+        return const LogInWithEmailAndPasswordFailure(SomeFailure.network());
       default:
         return const LogInWithEmailAndPasswordFailure();
     }
@@ -98,22 +128,44 @@ class LogInWithEmailAndPasswordFailure implements Exception {
 }
 
 /// Thrown during the logout process if a failure occurs.
-// class LogOutFailure implements Exception {}
-class LogOutFailure implements Exception {
+// class LogOutFailure  {}
+class LogOutFailure {
   const LogOutFailure([
     this.status = const SomeFailure.initial(),
   ]);
 
+  factory LogOutFailure.fromCode(
+    FirebaseException error,
+  ) {
+    debugPrint('SomeFailure: ${error.code}');
+    switch (error.code) {
+      case 'missing-argument':
+      case 'timeout':
+      case 'canceled':
+      case 'unauthenticated':
+      case 'expired-token':
+      case 'invalid-token':
+      case 'user-not-found':
+      case 'internal-error':
+        return const LogOutFailure(SomeFailure.unauthorized());
+      case 'network-error':
+        return const LogOutFailure(SomeFailure.network());
+      default:
+        return const LogOutFailure(SomeFailure.serverError());
+    }
+  }
+
   final SomeFailure status;
 }
 
-class SignUpWithGoogleFailure implements Exception {
+class SignUpWithGoogleFailure {
   const SignUpWithGoogleFailure([
     this.status = const SomeFailure.initial(),
   ]);
 
-  factory SignUpWithGoogleFailure.fromCode(FirebaseAuthException code) {
-    switch (code.code) {
+  factory SignUpWithGoogleFailure.fromCode(FirebaseAuthException error) {
+    debugPrint('SomeFailure: ${error.code}');
+    switch (error.code) {
       case 'account-exists-with-different-credential':
       case 'user-not-found':
       case 'wrong-password':
@@ -128,6 +180,8 @@ class SignUpWithGoogleFailure implements Exception {
         return const SignUpWithGoogleFailure(
           SomeFailure.serverError(),
         );
+      case 'network-error':
+        return const SignUpWithGoogleFailure(SomeFailure.network());
       default:
         return const SignUpWithGoogleFailure();
     }
