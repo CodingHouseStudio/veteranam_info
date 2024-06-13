@@ -21,7 +21,6 @@ class ButtonAdditionalWidget extends StatelessWidget {
   final bool isDesk;
 
   @override
-  @override
   Widget build(BuildContext context) {
     return TextButton(
       key: KWidgetkeys.widget.buttonAdditional.button,
