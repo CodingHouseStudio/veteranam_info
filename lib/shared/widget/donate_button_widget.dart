@@ -107,7 +107,7 @@ class _DonateButtonWidgetState extends State<_DonateButtonWidgetDesk> {
               child: IconWidget(
                 icon: widget.icon ??
                     KIcon.arrowUpRight.copyWith(
-                      color: AppColors.materialThemeKeyColorsNeutral,
+                      color: AppColors.materialThemeWhite,
                     ),
                 background: AppColors.materialThemeKeyColorsSecondary,
               ),
@@ -148,9 +148,7 @@ class _DonateButtonWidgetMob extends StatelessWidget {
             Expanded(
               child: Text(
                 text,
-                style: isDesk
-                    ? AppTextStyle.materialThemeTitleLarge
-                    : AppTextStyle.materialThemeTitleMedium,
+                style: AppTextStyle.materialThemeTitleLarge,
                 maxLines: KMinMaxSize.textMaxLineOne,
               ),
             ),
