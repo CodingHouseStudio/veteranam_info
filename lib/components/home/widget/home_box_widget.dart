@@ -24,7 +24,6 @@ class HomeBoxWidget extends StatelessWidget {
               children: [
                 KSizedBox.kHeightSizedBox45,
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
                       context.l10n.hello,
@@ -108,10 +107,16 @@ class HomeBoxWidget extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(
                   horizontal: KPadding.kPaddingSize16,
                 ),
-                child: Text(
-                  context.l10n.hello,
-                  key: KWidgetkeys.screen.home.boxHi,
-                  style: AppTextStyle.materialThemeTitleSmall,
+                child: Row(
+                  children: [
+                    Text(
+                      context.l10n.hello,
+                      key: KWidgetkeys.screen.home.boxHi,
+                      style: AppTextStyle.materialThemeTitleSmall,
+                    ),
+                    KSizedBox.kWidthSizedBox8,
+                    KImage.wavingHand,
+                  ],
                 ),
               ),
               KSizedBox.kHeightSizedBox8,

@@ -87,17 +87,18 @@ class DiscountWatcherBloc
     _LoadNextItems event,
     Emitter<DiscountWatcherState> emit,
   ) {
-    if (state.itemsLoaded + 1 > state.discountModelItems.length) return;
+    if (state.itemsLoaded + KDimensions.loadItems >
+        state.discountModelItems.length) return;
     final filterItems = _filter(
       filtersIndex: state.filtersIndex,
-      itemsLoaded: state.itemsLoaded + 1,
+      itemsLoaded: state.itemsLoaded + KDimensions.loadItems,
       discountModelItems: state.discountModelItems,
     );
     emit(
       state.copyWith(
         filteredDiscountModelItems: filterItems,
         itemsLoaded: filterItems.length > state.itemsLoaded
-            ? state.itemsLoaded + 1
+            ? state.itemsLoaded + KDimensions.loadItems
             : filterItems.length,
       ),
     );

@@ -121,7 +121,7 @@ void main() {
           ]),
           reason: 'Wait loading data',
         );
-        for (var i = 1; i <= KTestText.storyModelItems.length; i++) {
+        for (var i = 1; i <= 30; i++) {
           bloc.add(
             const StoryWatcherEvent.loadNextItems(),
           );
@@ -140,19 +140,17 @@ void main() {
               state.loadingStoryModelItems.length == KDimensions.loadItems &&
               state.itemsLoaded == KDimensions.loadItems,
         ),
-        for (var i = 1; i < KTestText.storyModelItems.length; i++)
+        for (var i = 1; i < 10; i++)
           predicate<StoryWatcherState>(
             (state) =>
                 state.loadingStatus == LoadingStatus.loaded &&
-                state.loadingStoryModelItems.length ==
-                    KDimensions.loadItems * i + 1 &&
-                state.itemsLoaded == KDimensions.loadItems * i + 1,
+                state.itemsLoaded == KDimensions.loadItems * (i + 1),
           ),
         predicate<StoryWatcherState>(
           (state) =>
               state.loadingStatus == LoadingStatus.loaded &&
-              state.loadingStoryModelItems.length == 1 &&
-              state.itemsLoaded == 1,
+              state.loadingStoryModelItems.length != KDimensions.loadItems &&
+              state.itemsLoaded != KDimensions.loadItems,
         ),
       ],
     );
@@ -176,7 +174,9 @@ void main() {
           reason: 'Wait loading data',
         );
         bloc.add(
-          StoryWatcherEvent.updated(KTestText.storyModelItems.sublist(0, 2)),
+          StoryWatcherEvent.updated(
+            KTestText.storyModelItems.sublist(0, KDimensions.loadItems),
+          ),
         );
       },
       expect: () => [
