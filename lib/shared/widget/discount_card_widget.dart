@@ -116,8 +116,8 @@ class DiscountsCardWidget extends StatelessWidget {
     final discountsLink = Uri.parse(
       discountItem.directLink,
     );
-    await Share.shareUri(
-      discountsLink,
+    await Share.share(
+      discountItem.directLink,
     );
   }
 }
