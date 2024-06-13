@@ -35,42 +35,42 @@ class _ButtonAdditionalWidgetState extends State<ButtonAdditionalWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: KPadding.kPaddingSize56,
-      child: TextButton(
-        key: KWidgetkeys.widget.buttonAdditional.button,
-        style:
-            KButtonStyles.additionalButtonStyle(isHovered: _isHovered).copyWith(
-          backgroundColor: widget.backgroundColor != null
-              ? MaterialStatePropertyAll(widget.backgroundColor)
-              : null,
-        ),
-        onPressed: widget.onPressed,
-        onHover: (value) => setState(() {
-          _isHovered = value;
-        }),
-        child: Stack(
-          children: [
-            Positioned(
-              left: 0,
-              top: 0,
-              bottom: 0,
-              child: CircleAvatar(
-                key: KWidgetkeys.widget.buttonAdditional.buttonIcon,
-                child: widget.picture,
+    return TextButton(
+      key: KWidgetkeys.widget.buttonAdditional.button,
+      style:
+          KButtonStyles.additionalButtonStyle(isHovered: _isHovered).copyWith(
+        backgroundColor: widget.backgroundColor != null
+            ? MaterialStatePropertyAll(widget.backgroundColor)
+            : null,
+      ),
+      onPressed: widget.onPressed,
+      onHover: (value) => setState(() {
+        _isHovered = value;
+      }),
+      child: Row(
+        children: [
+          CircleAvatar(
+            key: KWidgetkeys.widget.buttonAdditional.buttonIcon,
+            child: widget.picture,
+          ),
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                vertical: widget.isDesk
+                    ? KPadding.kPaddingSize12
+                    : KPadding.kPaddingSize16,
               ),
-            ),
-            Center(
               child: Text(
                 widget.text,
                 key: KWidgetkeys.widget.buttonAdditional.buttonText,
                 style: widget.isDesk
                     ? AppTextStyle.materialThemeTitleLarge
                     : AppTextStyle.materialThemeTitleMedium,
+                textAlign: TextAlign.center,
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

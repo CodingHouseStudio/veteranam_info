@@ -226,7 +226,6 @@ abstract class KButtonStyles {
     required bool isHovered,
   }) =>
       ButtonStyle(
-        alignment: Alignment.centerLeft,
         padding: const MaterialStatePropertyAll(EdgeInsets.zero),
         overlayColor: const MaterialStatePropertyAll(Colors.transparent),
         shape: MaterialStatePropertyAll(
