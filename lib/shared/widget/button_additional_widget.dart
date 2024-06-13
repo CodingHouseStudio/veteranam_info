@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_svg/svg.dart';
 
 import 'package:kozak/shared/constants/constants.dart';
@@ -34,34 +35,42 @@ class _ButtonAdditionalWidgetState extends State<ButtonAdditionalWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(
-      key: KWidgetkeys.widget.buttonAdditional.button,
-      style:
-          KButtonStyles.additionalButtonStyle(isHovered: _isHovered).copyWith(
-        backgroundColor: widget.backgroundColor != null
-            ? MaterialStatePropertyAll(widget.backgroundColor)
-            : null,
-      ),
-      onPressed: widget.onPressed,
-      onHover: (value) => setState(() {
-        _isHovered = value;
-      }),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          CircleAvatar(
-            key: KWidgetkeys.widget.buttonAdditional.buttonIcon,
-            child: widget.picture,
-          ),
-          const SizedBox(
-            width: KPadding.kPaddingSize8,
-          ),
-          Text(
-            widget.text,
-            key: KWidgetkeys.widget.buttonAdditional.buttonText,
-            style: AppTextStyle.text14,
-          ),
-        ],
+    return SizedBox(
+      height: KPadding.kPaddingSize56,
+      child: TextButton(
+        key: KWidgetkeys.widget.buttonAdditional.button,
+        style:
+            KButtonStyles.additionalButtonStyle(isHovered: _isHovered).copyWith(
+          backgroundColor: widget.backgroundColor != null
+              ? MaterialStatePropertyAll(widget.backgroundColor)
+              : null,
+        ),
+        onPressed: widget.onPressed,
+        onHover: (value) => setState(() {
+          _isHovered = value;
+        }),
+        child: Stack(
+          children: [
+            Positioned(
+              left: 0,
+              top: 0,
+              bottom: 0,
+              child: CircleAvatar(
+                key: KWidgetkeys.widget.buttonAdditional.buttonIcon,
+                child: widget.picture,
+              ),
+            ),
+            Center(
+              child: Text(
+                widget.text,
+                key: KWidgetkeys.widget.buttonAdditional.buttonText,
+                style: widget.isDesk
+                    ? AppTextStyle.materialThemeTitleLarge
+                    : AppTextStyle.materialThemeTitleMedium,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
