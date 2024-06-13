@@ -4,7 +4,7 @@ import 'package:flutter_svg/svg.dart';
 
 import 'package:kozak/shared/constants/constants.dart';
 
-class ButtonAdditionalWidget extends StatelessWidget {
+class ButtonAdditionalWidget extends StatefulWidget {
   const ButtonAdditionalWidget({
     required this.picture,
     required this.text,
@@ -21,15 +21,37 @@ class ButtonAdditionalWidget extends StatelessWidget {
   final bool isDesk;
 
   @override
+  State<ButtonAdditionalWidget> createState() => _ButtonAdditionalWidgetState();
+}
+
+class _ButtonAdditionalWidgetState extends State<ButtonAdditionalWidget> {
+  late bool isHover;
+  @override
+  void initState() {
+    isHover = false;
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return TextButton(
       key: KWidgetkeys.widget.buttonAdditional.button,
+      onHover: (value) => setState(() {
+        isHover = value;
+      }),
       style: KButtonStyles.additionalButtonStyle.copyWith(
-        backgroundColor: backgroundColor != null
-            ? MaterialStatePropertyAll(backgroundColor)
+        backgroundColor: widget.backgroundColor != null
+            ? WidgetStatePropertyAll(widget.backgroundColor)
             : null,
+        side: isHover
+            ? const WidgetStatePropertyAll(BorderSide())
+            : const WidgetStatePropertyAll(
+                BorderSide(
+                  color: AppColors.materialThemeRefSecondarySecondary70,
+                ),
+              ),
       ),
-      onPressed: onPressed,
+      onPressed: widget.onPressed,
       child: IntrinsicHeight(
         child: Row(
           children: [
@@ -37,20 +59,20 @@ class ButtonAdditionalWidget extends StatelessWidget {
               aspectRatio: 1,
               child: CircleAvatar(
                 key: KWidgetkeys.widget.buttonAdditional.buttonIcon,
-                child: picture,
+                child: widget.picture,
               ),
             ),
             Expanded(
               child: Padding(
                 padding: EdgeInsets.symmetric(
-                  vertical: isDesk
+                  vertical: widget.isDesk
                       ? KPadding.kPaddingSize12
                       : KPadding.kPaddingSize16,
                 ),
                 child: Text(
-                  text,
+                  widget.text,
                   key: KWidgetkeys.widget.buttonAdditional.buttonText,
-                  style: isDesk
+                  style: widget.isDesk
                       ? AppTextStyle.materialThemeTitleLarge
                       : AppTextStyle.materialThemeTitleMedium,
                   textAlign: TextAlign.center,
