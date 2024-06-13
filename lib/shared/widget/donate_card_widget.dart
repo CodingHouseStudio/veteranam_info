@@ -23,7 +23,7 @@ class DonateCardWidget extends StatelessWidget {
         decoration: KWidgetTheme.boxDecorationCard,
         constraints: const BoxConstraints(
           minHeight: KMinMaxSize.minHeight640,
-          maxWidth: KMinMaxSize.maxWidth640,
+          maxWidth: KMinMaxSize.maxWidth328,
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
@@ -45,10 +45,8 @@ class DonateCardWidget extends StatelessWidget {
                     child: Text(
                       fundModel.title,
                       key: KWidgetkeys.widget.donateCard.title,
-                      style: titleStyle ??
-                          (isDesk
-                              ? AppTextStyle.materialThemeHeadlineLarge
-                              : AppTextStyle.materialThemeHeadlineMedium),
+                      style:
+                          titleStyle ?? AppTextStyle.materialThemeHeadlineLarge,
                     ),
                   ),
                   if (hasSubtitle)
