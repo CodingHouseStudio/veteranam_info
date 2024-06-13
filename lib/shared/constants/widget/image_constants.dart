@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:kozak/shared/shared.dart';
 
 extension SvgPictureExtension on SvgPicture {
   SvgPicture copyWith({
@@ -51,7 +52,7 @@ abstract class KImage {
   static const SvgPicture linkedIn =
       SvgPicture(SvgAssetLoader('assets/icons/linkedin.svg'));
   static const SvgPicture facebook =
-      SvgPicture(SvgAssetLoader('assets/icons/social_icons_f.svg'));
+      SvgPicture(SvgAssetLoader('assets/icons/facebook.svg'));
   static const SvgPicture apple =
       SvgPicture(SvgAssetLoader('assets/icons/social_icons.svg'));
   static const SvgPicture google =
@@ -79,6 +80,8 @@ abstract class KImage {
   );
   static const Image wavingHand = Image(
     image: AssetImage('assets/icons/waving_hand.png'),
+    width: KSize.kPixel16,
+    height: KSize.kPixel16,
   );
   static const Image veteran1 = Image(
     image: AssetImage('assets/images/veteran1.png'),

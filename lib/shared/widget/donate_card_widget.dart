@@ -9,6 +9,7 @@ class DonateCardWidget extends StatelessWidget {
     super.key,
     this.titleStyle,
   });
+
   final FundModel fundModel;
   final bool hasSubtitle;
   final TextStyle? titleStyle;
@@ -16,58 +17,65 @@ class DonateCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      key: KWidgetkeys.widget.donateCard.widget,
-      decoration: KWidgetTheme.boxDecorationCard,
-      constraints: const BoxConstraints(
-        minHeight: KMinMaxSize.minHeight640,
-      ),
-      child: Stack(
-        alignment: Alignment.bottomCenter,
-        children: [
-          if (fundModel.image != null)
-            ImageWidget(
-              key: KWidgetkeys.widget.donateCard.image,
-              imageUrl: fundModel.image.firstImage!,
-              fit: BoxFit.fill,
-            ),
-          Padding(
-            padding: const EdgeInsets.all(KPadding.kPaddingSize16),
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: KPadding.kPaddingSize16,
-                  ),
-                  child: Text(
-                    fundModel.title,
-                    key: KWidgetkeys.widget.donateCard.title,
-                    style: titleStyle ??
-                        (isDesk ? AppTextStyle.text32 : AppTextStyle.text24),
-                  ),
-                ),
-                if (hasSubtitle)
+    return Center(
+      child: Container(
+        key: KWidgetkeys.widget.donateCard.widget,
+        decoration: KWidgetTheme.boxDecorationCard,
+        constraints: const BoxConstraints(
+          minHeight: KMinMaxSize.minHeight640,
+          maxWidth: KMinMaxSize.maxWidth640,
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            if (fundModel.image != null)
+              ImageWidget(
+                key: KWidgetkeys.widget.donateCard.image,
+                imageUrl: fundModel.image.firstImage!,
+                fit: BoxFit.fill,
+              ),
+            Padding(
+              padding: const EdgeInsets.all(KPadding.kPaddingSize16),
+              child: Column(
+                children: [
                   Padding(
                     padding: const EdgeInsets.symmetric(
                       horizontal: KPadding.kPaddingSize16,
-                      vertical: KPadding.kPaddingSize16,
                     ),
                     child: Text(
-                      fundModel.subtitle,
-                      key: KWidgetkeys.widget.donateCard.subtitle,
-                      style: isDesk ? AppTextStyle.text18 : AppTextStyle.text16,
+                      fundModel.title,
+                      key: KWidgetkeys.widget.donateCard.title,
+                      style: titleStyle ??
+                          (isDesk
+                              ? AppTextStyle.materialThemeHeadlineLarge
+                              : AppTextStyle.materialThemeHeadlineMedium),
                     ),
                   ),
-                KSizedBox.kHeightSizedBox16,
-                DonateButtonWidget(
-                  key: KWidgetkeys.widget.donateCard.button,
-                  text: context.l10n.support,
-                  isDesk: isDesk,
-                ),
-              ],
+                  if (hasSubtitle)
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: KPadding.kPaddingSize16,
+                        vertical: KPadding.kPaddingSize16,
+                      ),
+                      child: Text(
+                        fundModel.description,
+                        key: KWidgetkeys.widget.donateCard.subtitle,
+                        style: isDesk
+                            ? AppTextStyle.materialThemeBodyLarge
+                            : AppTextStyle.materialThemeBodyMedium,
+                      ),
+                    ),
+                  KSizedBox.kHeightSizedBox16,
+                  DonateButtonWidget(
+                    key: KWidgetkeys.widget.donateCard.button,
+                    text: context.l10n.support,
+                    isDesk: isDesk,
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
