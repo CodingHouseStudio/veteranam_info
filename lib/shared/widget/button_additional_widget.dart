@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 import 'package:flutter_svg/svg.dart';
 
 import 'package:kozak/shared/constants/constants.dart';
 
-class ButtonAdditionalWidget extends StatefulWidget {
+class ButtonAdditionalWidget extends StatelessWidget {
   const ButtonAdditionalWidget({
     required this.picture,
     required this.text,
@@ -21,56 +22,45 @@ class ButtonAdditionalWidget extends StatefulWidget {
   final bool isDesk;
 
   @override
-  State<ButtonAdditionalWidget> createState() => _ButtonAdditionalWidgetState();
-}
-
-class _ButtonAdditionalWidgetState extends State<ButtonAdditionalWidget> {
-  late bool _isHovered;
-
-  @override
-  void initState() {
-    _isHovered = false;
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return TextButton(
       key: KWidgetkeys.widget.buttonAdditional.button,
-      style:
-          KButtonStyles.additionalButtonStyle(isHovered: _isHovered).copyWith(
-        backgroundColor: widget.backgroundColor != null
-            ? MaterialStatePropertyAll(widget.backgroundColor)
+      style: KButtonStyles.additionalButtonStyle.copyWith(
+        backgroundColor: backgroundColor != null
+            ? MaterialStatePropertyAll(backgroundColor)
             : null,
       ),
-      onPressed: widget.onPressed,
-      onHover: (value) => setState(() {
-        _isHovered = value;
-      }),
-      child: Row(
-        children: [
-          CircleAvatar(
-            key: KWidgetkeys.widget.buttonAdditional.buttonIcon,
-            child: widget.picture,
-          ),
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.symmetric(
-                vertical: widget.isDesk
-                    ? KPadding.kPaddingSize12
-                    : KPadding.kPaddingSize16,
-              ),
-              child: Text(
-                widget.text,
-                key: KWidgetkeys.widget.buttonAdditional.buttonText,
-                style: widget.isDesk
-                    ? AppTextStyle.materialThemeTitleLarge
-                    : AppTextStyle.materialThemeTitleMedium,
-                textAlign: TextAlign.center,
+      onPressed: onPressed,
+      child: IntrinsicHeight(
+        child: Row(
+          children: [
+            AspectRatio(
+              aspectRatio: 1,
+              child: CircleAvatar(
+                key: KWidgetkeys.widget.buttonAdditional.buttonIcon,
+                child: picture,
               ),
             ),
-          ),
-        ],
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                  vertical: isDesk
+                      ? KPadding.kPaddingSize12
+                      : KPadding.kPaddingSize16,
+                ),
+                child: Text(
+                  text,
+                  key: KWidgetkeys.widget.buttonAdditional.buttonText,
+                  style: isDesk
+                      ? AppTextStyle.materialThemeTitleLarge
+                      : AppTextStyle.materialThemeTitleMedium,
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

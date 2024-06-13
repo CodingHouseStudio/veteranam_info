@@ -222,21 +222,22 @@ abstract class KButtonStyles {
     ),
     backgroundColor: MaterialStatePropertyAll(AppColors.materialThemeWhite),
   );
-  static ButtonStyle additionalButtonStyle({
-    required bool isHovered,
-  }) =>
-      ButtonStyle(
-        padding: const MaterialStatePropertyAll(EdgeInsets.zero),
-        overlayColor: const MaterialStatePropertyAll(Colors.transparent),
-        shape: MaterialStatePropertyAll(
-          RoundedRectangleBorder(
-            borderRadius: KBorderRadius.kBorderRadius32,
-            side: BorderSide(
-              color: isHovered
-                  ? AppColors.materialThemeBlack
-                  : AppColors.materialThemeRefSecondarySecondary70,
-            ),
-          ),
-        ),
+
+  static ButtonStyle additionalButtonStyle = ButtonStyle(
+    padding: const MaterialStatePropertyAll(EdgeInsets.zero),
+    overlayColor: const MaterialStatePropertyAll(Colors.transparent),
+    shape: const MaterialStatePropertyAll(
+      RoundedRectangleBorder(
+        borderRadius: KBorderRadius.kBorderRadius32,
+      ),
+    ),
+    side: MaterialStateProperty.resolveWith<BorderSide>((states) {
+      if (states.contains(MaterialState.hovered)) {
+        return const BorderSide();
+      }
+      return const BorderSide(
+        color: AppColors.materialThemeRefSecondarySecondary70,
       );
+    }),
+  );
 }
