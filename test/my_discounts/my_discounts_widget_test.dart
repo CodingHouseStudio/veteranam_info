@@ -27,18 +27,12 @@ void main() {
       when(
         mockDiscountRepository.getDiscountsById(KTestText.userWithoutPhoto.id),
       ).thenAnswer(
-        (invocation) async => Right(KTestText.userDiscountModelItems),
+        (invocation) async =>
+            Right(KTestText.userDiscountModelItems.sublist(0, 1)),
       );
       when(
         mockDiscountRepository
             .deleteDiscountsById(KTestText.userDiscountModelItems.first.id),
-      ).thenAnswer(
-        (invocation) async => const Right(true),
-      );
-      when(
-        mockDiscountRepository.deleteDiscountsById(
-          KTestText.userDiscountModelItems.elementAt(1).id,
-        ),
       ).thenAnswer(
         (invocation) async => const Right(true),
       );

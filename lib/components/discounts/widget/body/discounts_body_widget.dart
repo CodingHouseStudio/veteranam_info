@@ -42,38 +42,22 @@ class DiscountBodyWidget extends StatelessWidget {
               Row(
                 children: [
                   Expanded(
-                    child: FiltersChipWidget(
-                      key: KWidgetkeys.screen.discounts.filter,
-                      filtersItems: _.discountModelItems.overallTags(context),
+                    child: _filter(
+                      context: context,
                       isDesk: isDesk,
-                      onResetValue: () =>
-                          context.read<DiscountWatcherBloc>().add(
-                                const DiscountWatcherEvent.filterReset(),
-                              ),
-                      isSelected: (index) =>
-                          context
-                              .read<DiscountWatcherBloc>()
-                              .state
-                              .filtersIndex
-                              ?.contains(index) ??
-                          false,
-                      onSelected: (index) =>
-                          context.read<DiscountWatcherBloc>().add(
-                                DiscountWatcherEvent.filter(
-                                  index,
-                                ),
-                              ),
                     ),
                   ),
-                  TextButton(
-                    // key: KWidgetkeys.screen.login.signUpButton,
-                    onPressed: () =>
-                        context.goNamedWithScroll(KRoute.myDiscounts.name),
-                    style: KButtonStyles.whiteButtonStyle,
-                    child: Text(context.l10n.offerDiscount),
-                  ),
+                  _myDiscountButton(context),
                 ],
+              )
+            else ...[
+              _filter(
+                context: context,
+                isDesk: isDesk,
               ),
+              KSizedBox.kHeightSizedBox8,
+              _myDiscountButton(context),
+            ],
             if (isDesk)
               KSizedBox.kHeightSizedBox56
             else
@@ -119,4 +103,43 @@ class DiscountBodyWidget extends StatelessWidget {
       },
     );
   }
+
+  Widget _filter({
+    required BuildContext context,
+    required bool isDesk,
+  }) =>
+      FiltersChipWidget(
+        key: KWidgetkeys.screen.discounts.filter,
+        filtersItems: context
+            .read<DiscountWatcherBloc>()
+            .state
+            .discountModelItems
+            .overallTags(context),
+        isDesk: isDesk,
+        onResetValue: () => context.read<DiscountWatcherBloc>().add(
+              const DiscountWatcherEvent.filterReset(),
+            ),
+        isSelected: (index) =>
+            context
+                .read<DiscountWatcherBloc>()
+                .state
+                .filtersIndex
+                ?.contains(index) ??
+            false,
+        onSelected: (index) => context.read<DiscountWatcherBloc>().add(
+              DiscountWatcherEvent.filter(
+                index,
+              ),
+            ),
+      );
+
+  Widget _myDiscountButton(
+    BuildContext context,
+  ) =>
+      TextButton(
+        key: KWidgetkeys.screen.discounts.addDiscountButton,
+        onPressed: () => context.goNamedWithScroll(KRoute.myDiscounts.name),
+        style: KButtonStyles.whiteButtonStyle,
+        child: Text(context.l10n.offerDiscount),
+      );
 }

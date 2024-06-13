@@ -8,7 +8,6 @@ Future<void> deleteDiscountHelper(
 ) async {
   await changeWindowSizeHelper(
     tester: tester,
-    windowsTest: true,
     test: () async {
       expect(
         find.byKey(KWidgetkeys.screen.myDiscounts.card),
@@ -24,10 +23,16 @@ Future<void> deleteDiscountHelper(
         find.byKey(KWidgetkeys.screen.myDiscounts.iconTrash),
         findsWidgets,
       );
+
       await tester
           .tap(find.byKey(KWidgetkeys.screen.myDiscounts.iconTrash).first);
 
       await tester.pumpAndSettle();
+
+      expect(
+        find.byKey(KWidgetkeys.screen.myDiscounts.card),
+        findsNothing,
+      );
     },
   );
 }
