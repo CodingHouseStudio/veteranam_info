@@ -94,7 +94,7 @@ class DiscountsCardWidget extends StatelessWidget {
             icon: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const IconButton(
+                IconButton(
                   onPressed: _discountsShareLink,
                   icon: KIcon.share,
                 ),
@@ -111,13 +111,13 @@ class DiscountsCardWidget extends StatelessWidget {
       ),
     );
   }
-}
 
-Future<void> _discountsShareLink() async {
-  final discountsLink = Uri.parse(
-    KMockText.discountModel.directLink,
-  );
-  await Share.shareUri(
-    discountsLink,
-  );
+  Future<void> _discountsShareLink() async {
+    final discountsLink = Uri.parse(
+      discountItem.directLink,
+    );
+    await Share.shareUri(
+      discountsLink,
+    );
+  }
 }
