@@ -4,17 +4,19 @@ import 'package:kozak/shared/shared.dart';
 class MessageFieldWidget extends StatelessWidget {
   const MessageFieldWidget({
     required this.changeMessage,
-    required this.hintText,
     required this.isDesk,
+    this.hintText,
     this.hintStyle,
     super.key,
     this.controller,
     this.errorText,
     this.focusNode,
     this.disposeFocusNode,
+    this.labelText,
   });
   final void Function(String text)? changeMessage;
-  final String hintText;
+  final String? hintText;
+  final String? labelText;
   final TextEditingController? controller;
   final String? errorText;
   final FocusNode? focusNode;
@@ -35,6 +37,7 @@ class MessageFieldWidget extends StatelessWidget {
       minLines: KMinMaxSize.messageMinLines,
       maxLines: KMinMaxSize.messageMaxLines,
       maxLength: KMinMaxSize.messageMaxLength,
+      labelText: labelText,
       // suffixIcon: Column(
       //   mainAxisAlignment: MainAxisAlignment.end,
       //   children: [

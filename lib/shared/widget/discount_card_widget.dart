@@ -26,7 +26,7 @@ class DiscountsCardWidget extends StatelessWidget {
           Row(
             children: [
               Text(
-                discountItem.discount.toString(),
+                discountItem.company,
                 key: KWidgetkeys.widget.discountCard.discount,
                 style: isDesk ? AppTextStyle.text40 : AppTextStyle.text18,
                 overflow: TextOverflow.clip,

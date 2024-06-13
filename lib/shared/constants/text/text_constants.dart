@@ -120,7 +120,7 @@ abstract class KMockText {
     userId: '',
     company: 'Ескулаб',
     link: 'https://esculab.com/',
-    discount: 10,
+    discount: [10],
     title:
         '20% знижки на аналізи для військових та людей, які внутрішньо переміщені.',
     category: ['Medical'],
@@ -150,6 +150,31 @@ abstract class KMockText {
     directLink:
         'https://esculab.com/20-vidsotkiv-na-analizy-dlya-viyskovyh-ta-lyudey-yaki-vnutrishno-peremishcheni',
     dateVerified: DateTime(2024, 6, 3),
+  );
+  static final informationModel = InformationModel(
+    id: '',
+    title: title,
+    news: cardData,
+    category: ['Medical'],
+    categoryUA: ['Медицина'],
+    topic: 'MEDICAL BENEFITS',
+    topicUA: 'МЕДИЧНІ ПІЛЬГИ',
+    status: 'Healthy',
+    fetchDate: DateTime(2024, 06, 07),
+  );
+  static const fundModel = FundModel(
+    id: '',
+    title: 'PATRIOT UA',
+    description:
+        'Державна установа у сфері управління Міністерства у справах ветеранів. Державний провайдер сервісу реінтеграції ветеранів до продуктивного цивільного життя.',
+    link: 'https://veteranfund.com.ua/',
+    projectsLink: 'https://veteranfund.com.ua/projects/',
+    teamPartnersLink: 'https://veteranfund.com.ua/about/team/',
+    email: 'info@veteranfund.mva.gov.ua',
+    phoneNumber: '+380 (98) 009 48 72',
+    size: 48,
+    registered: 'Ukraine registered',
+    domain: 'Ветерани',
   );
 }
 

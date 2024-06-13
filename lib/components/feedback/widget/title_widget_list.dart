@@ -7,46 +7,15 @@ List<Widget> _titleWidgetList({
     isDesk
         ? [
             KSizedBox.kHeightSizedBox48,
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  child: TextPointWidget(
-                    context.l10n.feedback,
-                    key: KWidgetkeys.screen.feedback.pointText,
-                  ),
-                ),
-                Expanded(
-                  flex: 4,
-                  child: Column(
-                    key: KWidgetkeys.screen.feedback.title,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Text(
-                        context.l10n.write,
-                        style: AppTextStyle.materialThemeDisplayLarge,
-                      ),
-                      Wrap(
-                        crossAxisAlignment: WrapCrossAlignment.end,
-                        children: [
-                          Text(
-                            '${context.l10n.us} ${context.l10n.message}',
-                            style: AppTextStyle.materialThemeDisplayLarge,
-                          ),
-                          KSizedBox.kWidthSizedBox24,
-                          IconWidget(
-                            icon: KIcon.arrowDownRight.copyWith(
-                              key: KWidgetkeys.screen.feedback.titleIcon,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ],
+            ...TitleWidget.pointTitleWidgetList(
+              isDesk: true,
+              pointText: context.l10n.feedback,
+              pointKey: KWidgetkeys.screen.feedback.pointText,
+              title: context.l10n.write,
+              titleSecondPart: '${context.l10n.us} ${context.l10n.aMessage}',
+              titleKey: KWidgetkeys.screen.feedback.title,
             ),
-            KSizedBox.kHeightSizedBox132,
+            KSizedBox.kHeightSizedBox100,
           ]
         : [
             KSizedBox.kHeightSizedBox24,
@@ -59,9 +28,9 @@ List<Widget> _titleWidgetList({
               '${context.l10n.write} ${context.l10n.us}',
               style: AppTextStyle.materialThemeDisplaySmall,
             ),
-            Wrap(
+            Row(
               key: KWidgetkeys.screen.feedback.title,
-              crossAxisAlignment: WrapCrossAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 IconWidget(
                   icon: KIcon.arrowDownRight.copyWith(
@@ -70,11 +39,17 @@ List<Widget> _titleWidgetList({
                   padding: KPadding.kPaddingSize12,
                 ),
                 KSizedBox.kWidthSizedBox16,
-                Text(
-                  context.l10n.message,
-                  style: AppTextStyle.materialThemeDisplaySmall,
+                Expanded(
+                  child: Text(
+                    context.l10n.aMessage,
+                    style: AppTextStyle.materialThemeDisplaySmall,
+                  ),
                 ),
               ],
             ),
-            KSizedBox.kHeightSizedBox56,
+            KSizedBox.kHeightSizedBox32,
+            const Divider(
+              color: AppColors.materialThemeKeyColorsNeutral,
+            ),
+            KSizedBox.kHeightSizedBox24,
           ];

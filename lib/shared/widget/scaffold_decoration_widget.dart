@@ -28,10 +28,6 @@ class ScaffoldDecorationWidget extends StatelessWidget {
         final isDesk =
             constraints.maxWidth > KPlatformConstants.minWidthThresholdTablet;
         final mainChildWidget = mainChildWidgetsFunction(isDesk: isDesk);
-        final nawbarPadding = EdgeInsets.symmetric(
-          horizontal:
-              isDesk ? KPadding.kPaddingSize90 : KPadding.kPaddingSize16,
-        );
         final padding = EdgeInsets.symmetric(
           horizontal: (isDesk
               ? KPadding.kPaddingSize90 +
@@ -51,12 +47,9 @@ class ScaffoldDecorationWidget extends StatelessWidget {
           body: CustomScrollView(
             key: KWidgetkeys.widget.scaffold.scroll,
             slivers: [
-              SliverPadding(
-                padding: nawbarPadding,
-                sliver: SliverPersistentHeader(
-                  delegate: NawbarWidget(
-                    isDesk: isDesk,
-                  ),
+              SliverPersistentHeader(
+                delegate: NawbarWidget(
+                  isDesk: isDesk,
                 ),
               ),
               if (titleChildWidgetsFunction != null)

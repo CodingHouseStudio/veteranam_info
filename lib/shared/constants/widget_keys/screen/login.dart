@@ -6,7 +6,6 @@ class _LoginKeys {
   final title = const Key('login_screen_title');
   final fields = const Key('login_screen_fields');
   final button = const Key('login_screen_button');
-  final failureMessage = const Key('login_screen_failure_message');
   final signUpText = const Key('login_screen_sign_up_text');
   final signUpButton = const Key('login_screen_sign_up_button');
   final bottomButtons = const Key('login_screen_bottom_buttons');

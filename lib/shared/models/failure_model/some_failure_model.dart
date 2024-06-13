@@ -9,13 +9,16 @@ class SomeFailure with _$SomeFailure {
 
   const factory SomeFailure.serverError() = FailureServerError;
 
+  const factory SomeFailure.get() = FailureGet;
+
+  const factory SomeFailure.send() = FailureSend;
+
+  const factory SomeFailure.network() = FailureNetwork;
+
+  // authentication
   const factory SomeFailure.unauthorized() = FailureUnauthorized;
-
   const factory SomeFailure.notFound() = FailureNotFound;
-
   const factory SomeFailure.duplicate() = FailureDuplicate;
-
   const factory SomeFailure.tooManyRequests() = FailureTooManyRequests;
-
   const factory SomeFailure.emailSendingFailed() = FailureEmailSendingFailed;
 }

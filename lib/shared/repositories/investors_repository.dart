@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kozak/shared/shared.dart';
@@ -11,7 +12,7 @@ class InvestorsRepository implements IInvestorsRepository {
     try {
       final fundItems = await _firestoreService.getFunds();
       return Right(fundItems);
-    } on Exception catch (e) {
+    } on FirebaseException catch (e) {
       return Left(GetFailur.fromCode(e).status);
     } catch (e) {
       return const Left(SomeFailure.serverError());
@@ -22,11 +23,8 @@ class InvestorsRepository implements IInvestorsRepository {
   void addMockFunds() {
     for (var i = 0; i < 5; i++) {
       _firestoreService.addFund(
-        FundModel(
+        KMockText.fundModel.copyWith(
           id: '${ExtendedDateTime.id}$i',
-          title: KMockText.donateCardTitle,
-          subtitle: KMockText.donateCardSubtitle,
-          link: '',
         ),
       );
     }
