@@ -17,15 +17,16 @@ class LLanguagesSwitcherWidgetDeskState
   void _toggleLanguage() {
     setState(() {
       isUkrainian = !isUkrainian;
-      final selectedLocale = isUkrainian ? 'ua' : 'en';
+      final selectedLanguage = isUkrainian ? Language.ukrain : Language.english;
       context
           .read<AuthenticationBloc>()
-          .add(AppLanguageChanged(selectedLocale.getLocale));
+          .add(AppLanguageChanged(selectedLanguage));
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    final languages = LanguageExtension.getAllLanguage;
     return GestureDetector(
       key: KWidgetkeys.widget.languageSwitcher.widget,
       onTap: _toggleLanguage,
@@ -35,11 +36,14 @@ class LLanguagesSwitcherWidgetDeskState
           key: KWidgetkeys.widget.languageSwitcher.item,
           children: [
             _buildLanguageOption(
-              context.l10n.ua,
+              languages.first.text,
               isUkrainian,
             ),
             KSizedBox.kWidthSizedBox8,
-            _buildLanguageOption(context.l10n.en, !isUkrainian),
+            _buildLanguageOption(
+              languages.last.text,
+              !isUkrainian,
+            ),
           ],
         ),
       ),
