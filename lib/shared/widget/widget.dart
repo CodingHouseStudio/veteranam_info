@@ -24,7 +24,6 @@ export 'icon_button_widget.dart';
 export 'icon_widget.dart';
 export 'image_widget.dart';
 export 'languages_switcher_widge_desk.dart';
-export 'languages_switcher_widget_mobile.dart';
 export 'left_card_widget.dart';
 export 'loading_button.dart';
 export 'message_field_widget.dart';

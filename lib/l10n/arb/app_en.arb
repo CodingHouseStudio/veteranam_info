@@ -205,7 +205,5 @@
   "@dublicateFailure": {
     "description": "an error message when trying to register an account with the same email as an already registered account"
   },
-  "sendMessage": "Send message",
-  "ua": "UA",
-  "en": "EN"
+  "sendMessage": "Send message"
 }
