@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+// import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
@@ -15,9 +15,9 @@ Future<void> errorPumpAppHelper({
       MaterialApp(
         localizationsDelegates: const [
           AppLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
+          // GlobalCupertinoLocalizations.delegate,
+          // GlobalMaterialLocalizations.delegate,
+          // GlobalWidgetsLocalizations.delegate,
         ],
         supportedLocales: AppLocalizations.delegate.supportedLocales,
         home: const ErrorScreen(),
@@ -30,9 +30,9 @@ Future<void> errorPumpAppHelper({
         child: MaterialApp(
           localizationsDelegates: const [
             AppLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
+            // GlobalCupertinoLocalizations.delegate,
+            // GlobalMaterialLocalizations.delegate,
+            // GlobalWidgetsLocalizations.delegate,
           ],
           supportedLocales: AppLocalizations.delegate.supportedLocales,
           home: const ErrorScreen(),
