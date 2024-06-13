@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:flutter/widgets.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kozak/shared/shared.dart';
@@ -60,7 +59,6 @@ class MyDiscountsWatcherBloc
     _DeleteDiscount event,
     Emitter<MyDiscountsWatcherState> emit,
   ) async {
-    final currentState = state;
     final deleteResult = await _discountRepository.deleteDiscountsById(
       event.discountId,
     );
@@ -73,7 +71,7 @@ class MyDiscountsWatcherBloc
       ),
       (r) async {
         final updatedDiscounts =
-            List<DiscountModel>.from(currentState.discountsModelItems)
+            List<DiscountModel>.from(state.discountsModelItems)
               ..removeWhere((discount) => discount.id == event.discountId);
 
         emit(
