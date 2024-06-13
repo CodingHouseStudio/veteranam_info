@@ -70,7 +70,8 @@ abstract class FooterWidget {
                     child: Text(
                       KAppText.madeBy,
                       key: KWidgetkeys.widget.footer.madeBy,
-                      style: AppTextStyle.materialThemeBodyLargeHint,
+                      style:
+                          AppTextStyle.materialThemeBodyLargeNeutralVariant35,
                       textAlign: TextAlign.end,
                     ),
                   ),
@@ -84,7 +85,7 @@ abstract class FooterWidget {
                   Text(
                     context.l10n.allRightsReserved,
                     key: KWidgetkeys.widget.footer.rightReserved,
-                    style: AppTextStyle.materialThemeBodyLargeHint,
+                    style: AppTextStyle.materialThemeBodyLargeNeutralVariant35,
                   ),
                   // KSizedBox.kWidthSizedBox16,
                   // const VerticalDivider(
@@ -96,7 +97,7 @@ abstract class FooterWidget {
                   Text(
                     context.l10n.privacyPolicy,
                     key: KWidgetkeys.widget.footer.privacyPolicy,
-                    style: AppTextStyle.materialThemeBodyLargeHint,
+                    style: AppTextStyle.materialThemeBodyLargeNeutralVariant35,
                   ),
                   KSizedBox.kHeightSizedBox90,
                 ],
@@ -198,8 +199,8 @@ abstract class FooterWidget {
             context.l10n.sections,
             key: KWidgetkeys.widget.footer.sections,
             style: isDesk
-                ? AppTextStyle.materialThemeBodyLargeHint
-                : AppTextStyle.materialThemeBodyMediumHint,
+                ? AppTextStyle.materialThemeBodyLargeNeutralVariant35
+                : AppTextStyle.materialThemeBodyMediumNeutralVariant35,
           ),
         ),
         if (isDesk) KSizedBox.kHeightSizedBox16 else KSizedBox.kHeightSizedBox8,
@@ -252,8 +253,8 @@ abstract class FooterWidget {
             context.l10n.information,
             key: KWidgetkeys.widget.footer.information,
             style: isDesk
-                ? AppTextStyle.materialThemeBodyLargeHint
-                : AppTextStyle.materialThemeBodyMediumHint,
+                ? AppTextStyle.materialThemeBodyLargeNeutralVariant35
+                : AppTextStyle.materialThemeBodyMediumNeutralVariant35,
           ),
         ),
         if (isDesk) KSizedBox.kHeightSizedBox16 else KSizedBox.kHeightSizedBox8,
@@ -289,8 +290,8 @@ abstract class FooterWidget {
             context.l10n.contacts,
             key: KWidgetkeys.widget.footer.contact,
             style: isDesk
-                ? AppTextStyle.materialThemeBodyLargeHint
-                : AppTextStyle.materialThemeBodyMediumHint,
+                ? AppTextStyle.materialThemeBodyLargeNeutralVariant35
+                : AppTextStyle.materialThemeBodyMediumNeutralVariant35,
           ),
         ),
         KSizedBox.kHeightSizedBox16,
