@@ -64,6 +64,7 @@ part 'widget/chat_input.dart';
 part 'widget/work_request_card.dart';
 part 'widget/check_point_single.dart';
 part 'widget/dialogs.dart';
+part 'widget/button_additional.dart';
 part 'widget/filter_chip.dart';
 part 'widget/statistic_box.dart';
 

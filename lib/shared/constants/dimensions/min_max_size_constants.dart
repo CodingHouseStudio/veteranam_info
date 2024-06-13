@@ -1,6 +1,7 @@
 abstract class KMinMaxSize {
   static const minWidth100 = 100.0;
   static const maxWidth640 = 640.0;
+  static const maxWidth328 = 328.0;
   static const maxWidth768 = 768.0;
   static const maxHeight50 = 50.0;
   static const maxHeight51 = 51.0;

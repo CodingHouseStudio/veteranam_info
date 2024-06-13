@@ -37,5 +37,6 @@ class _WidgetKeys {
   final workRequestCard = _WorkRequestCardKeys();
   final dialogs = _DialogsKeys();
   final filterChip = _FilterChipKeys();
+  final buttonAdditional = _ButtonAdditional();
   final statisticBox = _StatisticBoxKeys();
 }
