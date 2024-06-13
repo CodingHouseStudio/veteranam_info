@@ -26,13 +26,11 @@ class _WidgetKeys {
   final checkPoint = _CheckPointKeys();
   final scaffold = _ScaffoldKeys();
   final profileCard = _ProfileKeys();
-  final feedback = _FeedbackKeys();
   final profileCardWidget = _ProfileCardWidgetKeys();
   final donateCard = _DoanteCardKeys();
   final emailPasswordFields = _EmailPasswordFieldsKeys();
   final leftCard = _LeftCardKeys();
   final signUpBottomButtons = _SignUpBottomButtonsKeys();
-  final feedbackBox = _FeedbackBoxKeys();
   final rate = _RateKeys();
   final chatInput = _ChatInputKeys();
   final checkPointSingle = _CheckPointSingleKeys();

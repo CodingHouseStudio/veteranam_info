@@ -1,7 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:kozak/shared/shared.dart';
 
-import '../../../text_dependency.dart';
+import '../../text_dependency.dart';
+import 'helper.dart';
 
 Future<void> incorrectSaveHelper(
   WidgetTester tester,
@@ -25,8 +26,8 @@ Future<void> incorrectSaveHelper(
   await scrollingHelper(
     tester: tester,
     offset: KTestConstants.scrollingUp1000,
-    itemKey: KWidgetkeys.widget.feedback.title,
+    itemKey: KWidgetkeys.screen.feedback.title,
   );
 
-  await feedbackHelper(tester);
+  await feedbackInitialHelper(tester);
 }
