@@ -18,7 +18,7 @@ class IconButtonWidget extends StatelessWidget {
     return IconButton(
       onPressed: onPressed,
       style: KButtonStyles.iconButtonStyle.copyWith(
-        backgroundColor: MaterialStatePropertyAll(background),
+        backgroundColor: WidgetStatePropertyAll(background),
       ),
       padding: EdgeInsets.all(padding ?? KPadding.kPaddingSize12),
       icon: icon,

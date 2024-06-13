@@ -33,7 +33,7 @@ class ButtonWidget extends StatelessWidget {
               : KButtonStyles.lightGrayButtonStyleWInf)
           .copyWith(
         backgroundColor: backgroundColor != null
-            ? MaterialStatePropertyAll(backgroundColor)
+            ? WidgetStatePropertyAll(backgroundColor)
             : null,
       ),
       child: Padding(
