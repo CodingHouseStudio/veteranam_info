@@ -10,20 +10,21 @@ import '../text_dependency.dart';
 void main() {
   group('${KScreenBlocName.login} ${KGroupText.bloc}', () {
     late LoginBloc loginBloc;
-    late AuthenticationRepository mockAuthenticationRepository;
+    late IAppAuthenticationRepository mockAppAuthenticationRepository;
     setUp(() {
       ExtendedDateTime.current = KTestText.feedbackModel.timestamp;
-      mockAuthenticationRepository = MockAuthenticationRepository();
+      mockAppAuthenticationRepository = MockIAppAuthenticationRepository();
       when(
-        mockAuthenticationRepository.logIn(
+        mockAppAuthenticationRepository.logInWithEmailAndPassword(
           email: KTestText.userEmail,
           password: KTestText.passwordCorrect,
         ),
       ).thenAnswer(
         (realInvocation) async => const Right(true),
       );
-      loginBloc =
-          LoginBloc(authenticationRepository: mockAuthenticationRepository);
+      loginBloc = LoginBloc(
+        appAuthenticationRepository: mockAppAuthenticationRepository,
+      );
     });
 
     blocTest<LoginBloc, LoginState>(
@@ -38,21 +39,21 @@ void main() {
         const LoginState(
           email: EmailFieldModel.dirty(KTestText.userEmail),
           password: PasswordFieldModel.pure(),
-          failure: LoginError.initial,
+          failure: null,
           fieldsIsCorrect: null,
           showPasswordField: false,
         ),
         const LoginState(
           email: EmailFieldModel.dirty(KTestText.userEmail),
           password: PasswordFieldModel.pure(),
-          failure: LoginError.initial,
+          failure: null,
           fieldsIsCorrect: null,
           showPasswordField: true,
         ),
         const LoginState(
           email: EmailFieldModel.dirty(KTestText.userEmail),
           password: PasswordFieldModel.dirty(KTestText.passwordCorrect),
-          failure: LoginError.initial,
+          failure: null,
           fieldsIsCorrect: null,
           showPasswordField: true,
         ),
@@ -68,14 +69,14 @@ void main() {
         const LoginState(
           email: EmailFieldModel.dirty(KTestText.userEmailIncorrect),
           password: PasswordFieldModel.pure(),
-          failure: LoginError.initial,
+          failure: null,
           fieldsIsCorrect: null,
           showPasswordField: false,
         ),
         const LoginState(
           email: EmailFieldModel.dirty(KTestText.userEmailIncorrect),
           password: PasswordFieldModel.pure(),
-          failure: LoginError.initial,
+          failure: null,
           showPasswordField: false,
           fieldsIsCorrect: false,
         ),
@@ -95,35 +96,35 @@ void main() {
         const LoginState(
           email: EmailFieldModel.dirty(KTestText.userEmail),
           password: PasswordFieldModel.pure(),
-          failure: LoginError.initial,
+          failure: null,
           fieldsIsCorrect: null,
           showPasswordField: false,
         ),
         const LoginState(
           email: EmailFieldModel.dirty(KTestText.userEmail),
           password: PasswordFieldModel.pure(),
-          failure: LoginError.initial,
+          failure: null,
           fieldsIsCorrect: null,
           showPasswordField: true,
         ),
         const LoginState(
           email: EmailFieldModel.dirty(KTestText.userEmail),
           password: PasswordFieldModel.dirty(KTestText.passwordCorrect),
-          failure: LoginError.initial,
+          failure: null,
           fieldsIsCorrect: null,
           showPasswordField: true,
         ),
         const LoginState(
           email: EmailFieldModel.dirty(KTestText.userEmail),
           password: PasswordFieldModel.dirty(KTestText.passwordCorrect),
-          failure: LoginError.initial,
+          failure: null,
           fieldsIsCorrect: true,
           showPasswordField: true,
         ),
         const LoginState(
           email: EmailFieldModel.dirty(KTestText.userEmail),
           password: PasswordFieldModel.dirty(KTestText.passwordCorrect),
-          failure: LoginError.none,
+          failure: null,
           fieldsIsCorrect: true,
           showPasswordField: false,
         ),
@@ -136,7 +137,7 @@ void main() {
       build: () => loginBloc,
       act: (bloc) {
         when(
-          mockAuthenticationRepository.logIn(
+          mockAppAuthenticationRepository.logInWithEmailAndPassword(
             email: KTestText.userEmail,
             password: KTestText.passwordCorrect,
           ),
@@ -153,28 +154,28 @@ void main() {
         const LoginState(
           email: EmailFieldModel.dirty(KTestText.userEmail),
           password: PasswordFieldModel.pure(),
-          failure: LoginError.initial,
+          failure: null,
           fieldsIsCorrect: null,
           showPasswordField: false,
         ),
         const LoginState(
           email: EmailFieldModel.dirty(KTestText.userEmail),
           password: PasswordFieldModel.pure(),
-          failure: LoginError.initial,
+          failure: null,
           fieldsIsCorrect: null,
           showPasswordField: true,
         ),
         const LoginState(
           email: EmailFieldModel.dirty(KTestText.userEmail),
           password: PasswordFieldModel.dirty(KTestText.passwordCorrect),
-          failure: LoginError.initial,
+          failure: null,
           fieldsIsCorrect: null,
           showPasswordField: true,
         ),
         const LoginState(
           email: EmailFieldModel.dirty(KTestText.userEmail),
           password: PasswordFieldModel.dirty(KTestText.passwordCorrect),
-          failure: LoginError.initial,
+          failure: null,
           fieldsIsCorrect: true,
           showPasswordField: true,
         ),
@@ -200,21 +201,21 @@ void main() {
         const LoginState(
           email: EmailFieldModel.dirty(KTestText.userEmail),
           password: PasswordFieldModel.pure(),
-          failure: LoginError.initial,
+          failure: null,
           fieldsIsCorrect: null,
           showPasswordField: false,
         ),
         const LoginState(
           email: EmailFieldModel.dirty(KTestText.userEmail),
           password: PasswordFieldModel.pure(),
-          failure: LoginError.initial,
+          failure: null,
           fieldsIsCorrect: null,
           showPasswordField: true,
         ),
         const LoginState(
           email: EmailFieldModel.dirty(KTestText.userEmail),
           password: PasswordFieldModel.pure(),
-          failure: LoginError.initial,
+          failure: null,
           fieldsIsCorrect: null,
           showPasswordField: false,
         ),

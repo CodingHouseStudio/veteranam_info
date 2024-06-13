@@ -27,7 +27,7 @@ List<Widget> _fieldWidgetList({
                 onChanged: (value) => context.read<FeedbackBloc>().add(
                       FeedbackEvent.nameUpdated(value),
                     ),
-                hintText: context.l10n.name,
+                labelText: context.l10n.name,
                 isDesk: isDesk,
               ),
             ),
@@ -48,7 +48,7 @@ List<Widget> _fieldWidgetList({
                 onChanged: (value) => context.read<FeedbackBloc>().add(
                       FeedbackEvent.emailUpdated(value),
                     ),
-                hintText: context.l10n.email,
+                labelText: context.l10n.email,
                 isDesk: isDesk,
               ),
             ),
@@ -65,7 +65,7 @@ List<Widget> _fieldWidgetList({
           onChanged: (value) => context.read<FeedbackBloc>().add(
                 FeedbackEvent.nameUpdated(value),
               ),
-          hintText: context.l10n.name,
+          labelText: context.l10n.name,
           isDesk: isDesk,
         ),
         KSizedBox.kHeightSizedBox16,
@@ -79,7 +79,7 @@ List<Widget> _fieldWidgetList({
           onChanged: (value) => context.read<FeedbackBloc>().add(
                 FeedbackEvent.emailUpdated(value),
               ),
-          hintText: context.l10n.email,
+          labelText: context.l10n.email,
           isDesk: isDesk,
         ),
       ],
@@ -94,10 +94,9 @@ List<Widget> _fieldWidgetList({
               FeedbackEvent.messageUpdated(value),
             ),
         controller: messageController,
-        hintText: context.l10n.writeYourMessage,
+        labelText: context.l10n.writeYourMessage,
         isDesk: isDesk,
       ),
-      if (isDesk) KSizedBox.kHeightSizedBox16 else KSizedBox.kHeightSizedBox8,
       Text(
         context.l10n.feedbackFormSubtitle,
         key: KWidgetkeys.screen.feedback.buttonText,
@@ -110,7 +109,7 @@ List<Widget> _fieldWidgetList({
         isDesk: isDesk,
         onPressed: () =>
             context.read<FeedbackBloc>().add(const FeedbackEvent.save()),
-        color: AppColors.materialThemeBlack,
+        color: AppColors.materialThemeKeyColorsSecondary,
         textColor: AppColors.materialThemeWhite,
       ),
     ];
