@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 // import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
@@ -24,9 +25,9 @@ extension PumpApp on WidgetTester {
               ? MaterialApp(
                   localizationsDelegates: const [
                     AppLocalizations.delegate,
-                    // GlobalCupertinoLocalizations.delegate,
-                    // GlobalMaterialLocalizations.delegate,
-                    // GlobalWidgetsLocalizations.delegate,
+                    GlobalCupertinoLocalizations.delegate,
+                    GlobalMaterialLocalizations.delegate,
+                    GlobalWidgetsLocalizations.delegate,
                   ],
                   locale: state.userSetting.locale.value,
                   supportedLocales: AppLocalizations.delegate.supportedLocales,
@@ -37,9 +38,9 @@ extension PumpApp on WidgetTester {
                   child: MaterialApp(
                     localizationsDelegates: const [
                       AppLocalizations.delegate,
-                      // GlobalCupertinoLocalizations.delegate,
-                      // GlobalMaterialLocalizations.delegate,
-                      // GlobalWidgetsLocalizations.delegate,
+                      GlobalCupertinoLocalizations.delegate,
+                      GlobalMaterialLocalizations.delegate,
+                      GlobalWidgetsLocalizations.delegate,
                     ],
                     locale: state.userSetting.locale.value,
                     supportedLocales:
