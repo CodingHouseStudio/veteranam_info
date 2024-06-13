@@ -43,6 +43,7 @@ class DonateCardWidget extends StatelessWidget {
                       horizontal: KPadding.kPaddingSize16,
                     ),
                     child: Text(
+
                       fundModel.title,
                       key: KWidgetkeys.widget.donateCard.title,
                       style: titleStyle ??
@@ -64,6 +65,11 @@ class DonateCardWidget extends StatelessWidget {
                             ? AppTextStyle.materialThemeBodyLarge
                             : AppTextStyle.materialThemeBodyMedium,
                       ),
+
+                      fundModel.description,
+                      key: KWidgetkeys.widget.donateCard.subtitle,
+                      style: isDesk ? AppTextStyle.text18 : AppTextStyle.text16,
+
                     ),
                   KSizedBox.kHeightSizedBox16,
                   DonateButtonWidget(

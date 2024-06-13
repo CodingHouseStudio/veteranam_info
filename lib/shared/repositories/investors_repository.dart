@@ -23,11 +23,8 @@ class InvestorsRepository implements IInvestorsRepository {
   void addMockFunds() {
     for (var i = 0; i < 5; i++) {
       _firestoreService.addFund(
-        FundModel(
+        KMockText.fundModel.copyWith(
           id: '${ExtendedDateTime.id}$i',
-          title: KMockText.donateCardTitle,
-          subtitle: KMockText.donateCardSubtitle,
-          link: '',
         ),
       );
     }
