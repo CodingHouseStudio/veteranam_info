@@ -1,3 +1,4 @@
+export '../generated/l10n.dart';
 export '../l10n/l10n.dart';
 export 'bloc/bloc.dart';
 export 'constants/constants.dart';

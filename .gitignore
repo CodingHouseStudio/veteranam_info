@@ -145,3 +145,6 @@ doc/api/
 
 # generated mockito files
 *.mocks.dart
+
+# generated intl files
+generated
