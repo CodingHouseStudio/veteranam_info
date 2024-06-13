@@ -119,6 +119,8 @@ void main() {
 
     group('${KGroupText.failureDelete} ', () {
       setUp(() {
+        mockFirestoreService = MockFirestoreService();
+
         when(
           mockFirestoreService.deleteDiscountById(
             KTestText.discountModelItems.first.id,
