@@ -113,9 +113,9 @@ class DiscountsCardWidget extends StatelessWidget {
   }
 
   Future<void> _discountsShareLink() async {
-    final discountsLink = Uri.parse(
-      discountItem.directLink,
-    );
+    // final discountsLink = Uri.parse(
+    //   discountItem.directLink,
+    // );
     await Share.share(
       discountItem.directLink,
     );
