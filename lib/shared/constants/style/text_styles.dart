@@ -384,7 +384,7 @@ abstract class AppTextStyle {
     color: AppColors.materialThemeRefNeutralVariantNeutralVariant35,
   );
 
-  static const TextStyle materialThemeTitleMediumWhite = TextStyle(
+  static const TextStyle materialThemeTitleMediumNeutral = TextStyle(
     fontFamily: 'Gilroy',
     fontSize: 16,
     height: 1.5,
