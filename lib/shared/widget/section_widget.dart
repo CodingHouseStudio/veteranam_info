@@ -31,14 +31,18 @@ abstract class SectionWidget {
           child: Text(
             title,
             key: titleKey,
-            style: AppTextStyle.materialThemeDisplayLarge,
+            style: isDesk
+                ? AppTextStyle.materialThemeDisplayLarge
+                : AppTextStyle.materialThemeDisplaySmall,
           ),
         ),
         if (isDesk) KSizedBox.kHeightSizedBox16 else KSizedBox.kHeightSizedBox8,
         Text(
           subtitle,
           key: subtitleKey,
-          style: AppTextStyle.materialThemeBodyLarge,
+          style: isDesk
+              ? AppTextStyle.materialThemeBodyLarge
+              : AppTextStyle.materialThemeBodyMedium,
         ),
         if (isDesk) KSizedBox.kHeightSizedBox16 else KSizedBox.kHeightSizedBox8,
         DoubleButtonWidget(

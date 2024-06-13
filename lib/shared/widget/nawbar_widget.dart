@@ -183,7 +183,7 @@ class _NawbarWidgetImplematationState
                 onPressed: () => context.goNamedWithScroll(KRoute.login.name),
                 icon:
                     KIcon.person.copyWith(color: AppColors.materialThemeWhite),
-                background: AppColors.materialThemeBlack,
+                background: AppColors.materialThemeKeyColorsSecondary,
               ),
           if (context.read<AuthenticationBloc>().state.status ==
                   AuthenticationStatus.authenticated &&
