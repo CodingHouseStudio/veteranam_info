@@ -181,6 +181,7 @@ class FeedbackBloc extends Bloc<FeedbackEvent, FeedbackState> {
         formState: FeedbackEnum.sendignMessageAgain,
       ),
     );
+    add(const FeedbackEvent.clear());
   }
 }
 

@@ -25,8 +25,10 @@ abstract class KSize {
   static const kPixel78 = 78.0;
   static const kPixel80 = 80.0;
   static const kPixel90 = 90.0;
+  static const kPixel100 = 100.0;
   static const kPixel102 = 102.0;
   static const kPixel120 = 120.0;
+  static const kPixel132 = 132.0;
   static const kPixel140 = 140.0;
   static const kPixel160 = 160.0;
 

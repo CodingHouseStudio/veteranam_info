@@ -23,7 +23,7 @@ abstract class KWidgetTheme {
   );
   static const boxDecorationCircular = BoxDecoration(
     shape: BoxShape.circle,
-    color: AppColors.materialThemeWhite,
+    color: AppColors.materialThemeSourceSeed,
   );
 
   static const boxDecorationGrayCircular = BoxDecoration(
@@ -88,7 +88,7 @@ abstract class KWidgetTheme {
     borderRadius: KBorderRadius.kBorderRadius32,
   );
   static const inputDecoration = InputDecoration(
-    hintStyle: AppTextStyle.hint24,
+    hintStyle: AppTextStyle.materialThemeTitleMedium,
     contentPadding: EdgeInsets.symmetric(
       horizontal: KPadding.kPaddingSize20,
     ),
