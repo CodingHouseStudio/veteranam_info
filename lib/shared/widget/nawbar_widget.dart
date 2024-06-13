@@ -165,7 +165,7 @@ class _NawbarWidgetImplematationState
           //       icon: KIcon.mic,
           //     ),
           //   ),
-          if (widget.isDesk || !isFocused) const LanguagesSwitcherWidgetDesk(),
+          if (widget.isDesk || !isFocused) const LanguagesSwitcherWidget(),
           if (context.read<AuthenticationBloc>().state.status !=
                   AuthenticationStatus.authenticated &&
               Config.isDevelopment)

@@ -79,10 +79,13 @@ abstract class KWidgetTheme {
     color: AppColors.materialThemeKeyColorsNeutralVariant,
   );
   static const boxDecorationWhite = BoxDecoration(
+    borderRadius: KBorderRadius.kBorderRadiusRight32,
+    color: AppColors.materialThemeWhite,
+  );
+  static const boxDecorationWhiteMain = BoxDecoration(
     borderRadius: KBorderRadius.kBorderRadius32,
     color: AppColors.materialThemeWhite,
   );
-
   static const boxDecorChatMessage = BoxDecoration(
     color: AppColors.materialThemeKeyColorsNeutralVariant,
     borderRadius: KBorderRadius.kBorderRadiusChat,
