@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:kozak/shared/shared.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -118,9 +117,9 @@ class DiscountsCardWidget extends StatelessWidget {
   }
 
   Future<void> _discountsShareLink() async {
-    final discountsLink = Uri.parse(
-      discountItem.directLink,
-    );
+    // final discountsLink = Uri.parse(
+    //   discountItem.directLink,
+    // );
     await Share.share(
       discountItem.directLink,
     );
