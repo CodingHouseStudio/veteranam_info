@@ -28,8 +28,8 @@ List<Widget> _newsWidgetList({
               top: isDesk ? KPadding.kPaddingSize40 : KPadding.kPaddingSize24,
             )
           : EdgeInsets.zero,
-      child: Skeletonizer(
-        enabled: isLoading,
+      child: SkeletonizerWidget(
+        isLoading: isLoading,
         child: NewsCardWidget(
           key: KWidgetkeys.screen.information.card,
           informationItem: informationModelItems.elementAt(index),

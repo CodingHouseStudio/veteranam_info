@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kozak/shared/shared.dart';
+import 'package:share_plus/share_plus.dart';
 
 class DiscountsCardWidget extends StatelessWidget {
   const DiscountsCardWidget({
@@ -94,8 +94,9 @@ class DiscountsCardWidget extends StatelessWidget {
             icon: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                  child: KIcon.share,
+                IconButton(
+                  onPressed: _discountsShareLink,
+                  icon: KIcon.share,
                 ),
                 KSizedBox.kWidthSizedBox16,
                 Container(
@@ -108,6 +109,15 @@ class DiscountsCardWidget extends StatelessWidget {
           KSizedBox.kHeightSizedBox16,
         ],
       ),
+    );
+  }
+
+  Future<void> _discountsShareLink() async {
+    // final discountsLink = Uri.parse(
+    //   discountItem.directLink,
+    // );
+    await Share.share(
+      discountItem.directLink,
     );
   }
 }

@@ -32,9 +32,8 @@ List<Widget> worksWidgetList({
               top: isDesk ? KPadding.kPaddingSize56 : KPadding.kPaddingSize24,
             )
           : EdgeInsets.zero,
-      child: Skeletonizer(
-        enabled: context.read<WorkEmployeeWatcherBloc>().state.loadingStatus !=
-            LoadingStatus.loaded,
+      child: SkeletonizerWidget(
+        isLoading: isLoading,
         child: WorkCardWidget(
           key: KWidgetkeys.screen.workEmployee.cards,
           firstItemIsFirst: index == 0,
