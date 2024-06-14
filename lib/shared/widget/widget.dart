@@ -1,6 +1,7 @@
 export 'box_widget.dart';
 export 'button_additional_widget.dart';
 export 'button_widget.dart';
+export 'buy_me_coffee_button.dart';
 export 'card_add_image_widget.dart';
 export 'card_text_detail_evaluate_widget.dart';
 export 'card_text_detail_widget.dart';

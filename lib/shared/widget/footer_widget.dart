@@ -345,11 +345,11 @@ abstract class FooterWidget {
               : AppTextStyle.materialThemeHeadlineMedium,
         ),
         KSizedBox.kHeightSizedBox16,
-        DoubleButtonWidget(
-          widgetKey: KWidgetkeys.widget.footer.button,
-          text: context.l10n.contact,
-          onPressed: () => context.goNamed(KRoute.feedback.name),
-          isDesk: isDesk,
+        BuyMeACoffeeWidget(
+          key: KWidgetkeys.widget.footer.button,
+          // text: context.l10n.contact,
+          // onPressed: () => context.goNamed(KRoute.feedback.name),
+          // isDesk: isDesk,
         ),
       ];
   static Widget _button({
