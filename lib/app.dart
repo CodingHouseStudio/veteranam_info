@@ -37,13 +37,13 @@ class AppWidget extends StatelessWidget {
           key: KWidgetkeys.screen.app.screen,
           theme: themeData,
           localizationsDelegates: const [
-            S.delegate,
+            AppLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
           ],
           locale: _.userSetting.locale.value,
-          supportedLocales: S.delegate.supportedLocales,
+          supportedLocales: AppLocalizations.delegate.supportedLocales,
           routerConfig: router,
         );
       },

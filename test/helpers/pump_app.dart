@@ -23,26 +23,27 @@ extension PumpApp on WidgetTester {
           builder: (context, state) => mockGoRouter == null
               ? MaterialApp(
                   localizationsDelegates: const [
-                    S.delegate,
+                    AppLocalizations.delegate,
                     GlobalCupertinoLocalizations.delegate,
                     GlobalMaterialLocalizations.delegate,
                     GlobalWidgetsLocalizations.delegate,
                   ],
                   locale: state.userSetting.locale.value,
-                  supportedLocales: S.delegate.supportedLocales,
+                  supportedLocales: AppLocalizations.delegate.supportedLocales,
                   home: widget,
                 )
               : MockGoRouterProvider(
                   goRouter: mockGoRouter,
                   child: MaterialApp(
                     localizationsDelegates: const [
-                      S.delegate,
+                      AppLocalizations.delegate,
                       GlobalCupertinoLocalizations.delegate,
                       GlobalMaterialLocalizations.delegate,
                       GlobalWidgetsLocalizations.delegate,
                     ],
                     locale: state.userSetting.locale.value,
-                    supportedLocales: S.delegate.supportedLocales,
+                    supportedLocales:
+                        AppLocalizations.delegate.supportedLocales,
                     home: widget,
                   ),
                 ),
