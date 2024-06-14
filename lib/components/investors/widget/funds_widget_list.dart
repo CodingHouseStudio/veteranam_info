@@ -37,8 +37,8 @@ List<Widget> _fundsWidgetList({
                       : fundItems.length,
                 ),
               )
-            : Skeletonizer(
-                enabled: isLoading,
+            : SkeletonizerWidget(
+                isLoading: isLoading,
                 child: DonateCardWidget(
                   key: KWidgetkeys.screen.investors.donateCard,
                   fundModel: fundItems.elementAt(index),

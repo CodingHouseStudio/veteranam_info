@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
-import 'package:skeletonizer/skeletonizer.dart';
 
 part '../works_widget_list.dart';
 

@@ -4,7 +4,6 @@ import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
-import 'package:skeletonizer/skeletonizer.dart';
 
 part '../funds_widget_list.dart';
 part '../investors_image_widget_list.dart';
