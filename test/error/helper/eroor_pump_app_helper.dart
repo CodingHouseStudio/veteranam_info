@@ -14,12 +14,12 @@ Future<void> errorPumpAppHelper({
     await tester.pumpWidget(
       MaterialApp(
         localizationsDelegates: const [
-          S.delegate,
+          AppLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
         ],
-        supportedLocales: S.delegate.supportedLocales,
+        supportedLocales: AppLocalizations.delegate.supportedLocales,
         home: const ErrorScreen(),
       ),
     );
@@ -29,12 +29,12 @@ Future<void> errorPumpAppHelper({
         goRouter: mockGoRouter,
         child: MaterialApp(
           localizationsDelegates: const [
-            S.delegate,
+            AppLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
           ],
-          supportedLocales: S.delegate.supportedLocales,
+          supportedLocales: AppLocalizations.delegate.supportedLocales,
           home: const ErrorScreen(),
         ),
       ),
