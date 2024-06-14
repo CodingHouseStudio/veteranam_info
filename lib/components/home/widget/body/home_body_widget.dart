@@ -64,7 +64,7 @@ class HomeBodyWidget extends StatelessWidget {
             Text(
               context.l10n.aboutProject,
               key: KWidgetkeys.screen.home.aboutProjecSubtitle,
-              style: AppTextStyle.materialThemeDisplayMedium,
+              style: AppTextStyle.materialThemeHeadlineSmall,
             ),
           ],
           if (isDesk)
