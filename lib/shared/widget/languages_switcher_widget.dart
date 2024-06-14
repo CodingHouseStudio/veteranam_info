@@ -7,33 +7,37 @@ class LanguagesSwitcherWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PopupMenuButton<String>(
-      key: KWidgetkeys.widget.languageSwitcher.widget,
-      child: Container(
-        decoration: KWidgetTheme.boxDecorationCircular,
-        padding: const EdgeInsets.all(
-          KPadding.kPaddingSize12,
-        ),
-        child: Text(
-          context.l10n.localeName.getLocale.text,
-          key: KWidgetkeys.widget.languageSwitcher.text,
-          style: AppTextStyle.materialThemeTitleMedium,
-        ),
-      ),
-      onSelected: (value) => context
-          .read<AuthenticationBloc>()
-          .add(AppLanguageChanged(value.getLocale)),
-      itemBuilder: (BuildContext context) {
-        final languages = LanguageExtension.getAllLanguage;
-        return List.generate(languages.length, (index) {
-          return PopupMenuItem<String>(
-            key: KWidgetkeys.widget.languageSwitcher.item,
-            value: languages.elementAt(index).text,
-            enabled: languages.elementAt(index).value.languageCode !=
-                context.l10n.localeName,
-            child: Text(languages.elementAt(index).text),
-          );
-        }).toList();
+    return BlocBuilder<AuthenticationBloc, AuthenticationState>(
+      builder: (context, state) {
+        return PopupMenuButton<String>(
+          key: KWidgetkeys.widget.languageSwitcher.widget,
+          child: Container(
+            decoration: KWidgetTheme.boxDecorationCircular,
+            padding: const EdgeInsets.all(
+              KPadding.kPaddingSize12,
+            ),
+            child: Text(
+              context.read<AuthenticationBloc>().state.userSetting.locale.text,
+              key: KWidgetkeys.widget.languageSwitcher.text,
+              style: AppTextStyle.materialThemeTitleMedium,
+            ),
+          ),
+          onSelected: (value) => context
+              .read<AuthenticationBloc>()
+              .add(AppLanguageChanged(value.getLocale)),
+          itemBuilder: (BuildContext context) {
+            final languages = LanguageExtension.getAllLanguage;
+            return List.generate(languages.length, (index) {
+              return PopupMenuItem<String>(
+                key: KWidgetkeys.widget.languageSwitcher.item,
+                value: languages.elementAt(index).text,
+                enabled: languages.elementAt(index) !=
+                    context.read<AuthenticationBloc>().state.userSetting.locale,
+                child: Text(languages.elementAt(index).text),
+              );
+            }).toList();
+          },
+        );
       },
     );
   }
