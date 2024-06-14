@@ -228,7 +228,7 @@ abstract class KTestText {
   );
 
   static final informationModelItemsModify = <InformationModel>[
-    for (var i = 0; i < KMockText.tags.length; i++)
+    for (var i = 0; i < 30; i++)
       KMockText.informationModel.copyWith(
         id: i.toString(),
         fetchDate: dateTime,
@@ -247,15 +247,15 @@ abstract class KTestText {
   ];
 
   static final storyModelItems = <StoryModel>[
-    for (var i = 0; i < KMockText.tags.length; i++)
+    for (var i = 0; i < 30; i++)
       StoryModel(
         id: i.toString(),
         date: dateTime,
-        image: i > KMockText.tags.length - 2 ? imageModels : null,
+        image: i > KMockText.tags.length ? imageModels : null,
         story: KMockText.cardData.substring(0, 200),
         userName: user.name,
         userId: user.id,
-        userPhoto: i > KMockText.tags.length - 2 ? userPhotoModel : null,
+        userPhoto: i > KMockText.tags.length ? userPhotoModel : null,
       ),
   ];
 

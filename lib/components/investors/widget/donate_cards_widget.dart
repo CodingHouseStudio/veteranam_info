@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
-import 'package:skeletonizer/skeletonizer.dart';
 
 class DonatesCardsWidget extends StatefulWidget {
   const DonatesCardsWidget({
@@ -53,8 +52,8 @@ class _DonatesCardsWidgetState extends State<DonatesCardsWidget> {
                             ? KPadding.kPaddingSize24
                             : 0,
                       ),
-                      child: Skeletonizer(
-                        enabled: context
+                      child: SkeletonizerWidget(
+                        isLoading: context
                                 .read<InvestorsWatcherBloc>()
                                 .state
                                 .loadingStatus !=

@@ -6,7 +6,7 @@ List<Widget> _buildDiactivateButtons(BuildContext context, bool isDesk) {
       TextButton.icon(
         onPressed: null,
         style: KButtonStyles.borderButtonStyle.copyWith(
-          padding: const MaterialStatePropertyAll(
+          padding: const WidgetStatePropertyAll(
             EdgeInsets.symmetric(
               vertical: KPadding.kPaddingSize12,
               horizontal: KPadding.kPaddingSize16,
@@ -27,7 +27,7 @@ List<Widget> _buildDiactivateButtons(BuildContext context, bool isDesk) {
       TextButton.icon(
         onPressed: null,
         style: KButtonStyles.borderButtonStyle.copyWith(
-          padding: const MaterialStatePropertyAll(
+          padding: const WidgetStatePropertyAll(
             EdgeInsets.only(
               top: KPadding.kPaddingSize12,
               bottom: KPadding.kPaddingSize12,

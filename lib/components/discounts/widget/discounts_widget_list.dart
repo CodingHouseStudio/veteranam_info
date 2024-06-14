@@ -23,8 +23,8 @@ List<Widget> discountsWidgetList({
       padding: EdgeInsets.only(
         top: index != 0 ? KPadding.kPaddingSize40 : 0,
       ),
-      child: Skeletonizer(
-        enabled: isLoading,
+      child: SkeletonizerWidget(
+        isLoading: isLoading,
         child: DiscountsCardWidget(
           key: KWidgetkeys.screen.discounts.card,
           discountItem: discountsWidgetList.elementAt(index),
