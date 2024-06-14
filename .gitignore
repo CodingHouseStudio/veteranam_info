@@ -146,5 +146,7 @@ doc/api/
 # Ignore test_repository_mocks.mocks.dart and get_it_service_locator.config.dart files anywhere in the project
 **/test_repository_mocks.mocks.dart
 **/get_it_service_locator.config.dart
+# Ignore generated folder
+**/generated/
 
 
