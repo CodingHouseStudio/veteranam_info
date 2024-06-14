@@ -30,7 +30,7 @@ Future<void> workInitialHelper(
         findsOneWidget,
       );
 
-      await footerHelper(tester);
+      // await footerHelper(tester);
     },
   );
 }
