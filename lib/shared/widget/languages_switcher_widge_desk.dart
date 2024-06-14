@@ -15,11 +15,11 @@ class LanguagesSwitcherWidget extends StatelessWidget {
           key: KWidgetkeys.widget.languageSwitcher.widget,
           style: KButtonStyles.boxButtonStyle,
           onPressed: () {
-            final selectedLanguage =
-                isUkrainian ? Language.english : Language.ukrain;
-            context
-                .read<AuthenticationBloc>()
-                .add(AppLanguageChanged(selectedLanguage));
+            context.read<AuthenticationBloc>().add(
+                  AppLanguageChanged(
+                    isUkrainian ? Language.english : Language.ukrain,
+                  ),
+                );
           },
           icon: Container(
             decoration: KWidgetTheme.boxDecorationWhiteMain,
