@@ -23,6 +23,38 @@ class DiscountsCardWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Container(
+            padding:
+                const EdgeInsets.symmetric(horizontal: KPadding.kPaddingSize24),
+            child: Row(
+              children: [
+                const CircleAvatar(
+                  child: KIcon.user,
+                ),
+                KSizedBox.kWidthSizedBox16,
+                Column(
+                  children: [
+                    Text(
+                      discountItem.company,
+                      style: AppTextStyle.materialThemeTitleMedium,
+                    ),
+                    const Text(
+                      KMockText.userName,
+                      style: AppTextStyle.materialThemeLabelSmall,
+                    ),
+                  ],
+                ),
+                const Spacer(),
+                ChipWidget(
+                  filter: discountItem.category.first,
+                  isSelected: false,
+                  onSelected: ({required isSelected}) => (),
+                  isDesk: isDesk,
+                ),
+              ],
+            ),
+          ),
+          KSizedBox.kHeightSizedBox16,
           Row(
             children: [
               Text(

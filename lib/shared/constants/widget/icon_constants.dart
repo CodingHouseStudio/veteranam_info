@@ -96,4 +96,5 @@ abstract class KIcon {
   static const _KIcon fileText = _KIcon(Symbols.description);
   static const _KIcon meil = _KIcon(Symbols.mail);
   static const _KIcon close = _KIcon(Symbols.close);
+  static const _KIcon user = _KIcon(Symbols.user_attributes);
 }
