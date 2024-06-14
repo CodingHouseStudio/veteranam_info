@@ -1,8 +1,8 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables
-
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:get_it/get_it.dart';
 import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
 
@@ -12,36 +12,37 @@ Future<void> errorPumpAppHelper({
   required WidgetTester tester,
   MockGoRouter? mockGoRouter,
 }) async {
-  if (mockGoRouter == null) {
-    await tester.pumpWidget(
-      MaterialApp(
-        localizationsDelegates: const [
-          locale,
-          GlobalCupertinoLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-        ],
-        supportedLocales: locale.supportedLocales,
-        home: const ErrorScreen(),
+  await tester.pumpWidget(
+    BlocProvider(
+      create: (context) =>
+          GetIt.I.get<AuthenticationBloc>()..add(AuthenticationInitialized()),
+      child: BlocBuilder<AuthenticationBloc, AuthenticationState>(
+        builder: (context, state) => mockGoRouter == null
+            ? MaterialApp(
+                localizationsDelegates: const [
+                  locale,
+                  GlobalCupertinoLocalizations.delegate,
+                  GlobalMaterialLocalizations.delegate,
+                  GlobalWidgetsLocalizations.delegate,
+                ],
+                locale: state.userSetting.locale.value,
+                supportedLocales: locale.supportedLocales,
+                home: const ErrorScreen(),
+              )
+            : MaterialApp(
+                localizationsDelegates: const [
+                  locale,
+                  GlobalCupertinoLocalizations.delegate,
+                  GlobalMaterialLocalizations.delegate,
+                  GlobalWidgetsLocalizations.delegate,
+                ],
+                locale: state.userSetting.locale.value,
+                supportedLocales: locale.supportedLocales,
+                home: const ErrorScreen(),
+              ),
       ),
-    );
-  } else {
-    await tester.pumpWidget(
-      MockGoRouterProvider(
-        goRouter: mockGoRouter,
-        child: MaterialApp(
-          localizationsDelegates: const [
-            locale,
-            GlobalCupertinoLocalizations.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-          ],
-          supportedLocales: locale.supportedLocales,
-          home: const ErrorScreen(),
-        ),
-      ),
-    );
-  }
+    ),
+  );
 
   expect(
     find.byKey(KWidgetkeys.screen.error.screen),
