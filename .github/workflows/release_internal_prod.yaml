@@ -75,6 +75,8 @@ jobs:
         with:
           flutter-version: ${{ secrets.FLUTTER_FRAMEWORK_VERSION }}
           channel: 'stable'
+      - run: flutter config --no-analytics
+      - run: flutter config --no-cli-animations
       - name: Flutter Pub Get # get flutter packages information
         run: flutter pub get
       - name: Flutter code generation # generate any missing code from source code
