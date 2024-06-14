@@ -35,7 +35,7 @@ class FiltersChipWidgetState extends State<FiltersChipWidget> {
       children: [
         TextButton.icon(
           icon: selectedFilterIndex == null ? KIcon.check : null,
-          key: KWidgetkeys.widget.filterPopupMenu.widget,
+          key: KWidgetkeys.widget.filterPopupMenu.resetAll,
           onPressed: () {
             selectedFilterIndex = null;
             widget.onResetValue();

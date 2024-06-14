@@ -29,7 +29,17 @@ Future<void> chipHelper(WidgetTester tester) async {
 
   expect(filterChip.selected, isTrue);
 
-  await filterPopupMenuHelper(tester);
+  //await filterPopupMenuHelper(tester);
+  expect(
+    find.byKey(KWidgetkeys.widget.filterPopupMenu.resetAll),
+    findsOneWidget,
+  );
+
+  await tester.tap(
+    find.byKey(KWidgetkeys.widget.filterPopupMenu.resetAll),
+  );
+
+  await tester.pumpAndSettle();
 
   filterChip = tester
       .widget<FilterChip>(find.byKey(KWidgetkeys.widget.chip.widget).first);
