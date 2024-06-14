@@ -24,8 +24,8 @@ jobs:
     uses: CodingHouseStudio/flutter_workflows/.github/workflows/flutter_package.yml@main
     with:
       flutter_channel: stable
-      flutter_version: 3.19.1
-      min_coverage: 50
+      flutter_version: 3.22.0
+      min_coverage: 90
       format_directories: "lib test"
       
   spell-check:
