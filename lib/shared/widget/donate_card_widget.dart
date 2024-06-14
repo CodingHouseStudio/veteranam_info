@@ -23,7 +23,7 @@ class DonateCardWidget extends StatelessWidget {
         decoration: KWidgetTheme.boxDecorationCard,
         constraints: const BoxConstraints(
           minHeight: KMinMaxSize.minHeight640,
-          maxWidth: KMinMaxSize.maxWidth328,
+          maxWidth: KMinMaxSize.maxWidth640,
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
