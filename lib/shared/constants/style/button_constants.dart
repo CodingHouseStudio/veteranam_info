@@ -4,21 +4,21 @@ import 'package:kozak/shared/shared.dart';
 abstract class KButtonStyles {
   static const ButtonStyle widgetBackgroundButtonStyleWInf = ButtonStyle(
     // backgroundColor: AppColors.widgetBackground,
-    minimumSize: MaterialStatePropertyAll(
+    minimumSize: WidgetStatePropertyAll(
       Size(double.infinity, KMinMaxSize.minHeight50),
     ),
-    padding: MaterialStatePropertyAll(
+    padding: WidgetStatePropertyAll(
       EdgeInsets.all(KPadding.kPaddingSize24),
     ),
   );
 
   static const ButtonStyle widgetBackgroundSquareButtonStyleWInf = ButtonStyle(
     // backgroundColor: AppColors.widgetBackground,
-    minimumSize: MaterialStatePropertyAll(Size(200, 50)),
-    padding: MaterialStatePropertyAll(
+    minimumSize: WidgetStatePropertyAll(Size(200, 50)),
+    padding: WidgetStatePropertyAll(
       EdgeInsets.all(KPadding.kPaddingSize24),
     ),
-    shape: MaterialStatePropertyAll(
+    shape: WidgetStatePropertyAll(
       RoundedRectangleBorder(
         borderRadius: KBorderRadius.kBorderRadius40,
       ),
@@ -27,23 +27,23 @@ abstract class KButtonStyles {
 
   static const ButtonStyle widgetLightGreyButtonStyleWInf = ButtonStyle(
     // backgroundColor: AppColors.background,
-    minimumSize: MaterialStatePropertyAll(
+    minimumSize: WidgetStatePropertyAll(
       Size(double.infinity, KMinMaxSize.minHeight50),
     ),
-    padding: MaterialStatePropertyAll(
+    padding: WidgetStatePropertyAll(
       EdgeInsets.all(KPadding.kPaddingSize24),
     ),
   );
 
   static const ButtonStyle transparentButtonStyle = ButtonStyle(
-    minimumSize: MaterialStatePropertyAll(
+    minimumSize: WidgetStatePropertyAll(
       Size(KMinMaxSize.minWidth100, KMinMaxSize.minHeight50),
     ),
-    padding: MaterialStatePropertyAll(
+    padding: WidgetStatePropertyAll(
       EdgeInsets.all(KPadding.kPaddingSize8),
     ),
     alignment: Alignment.centerLeft,
-    shape: MaterialStatePropertyAll(
+    shape: WidgetStatePropertyAll(
       RoundedRectangleBorder(
         borderRadius: KBorderRadius.kBorderRadius32,
       ),
@@ -51,15 +51,15 @@ abstract class KButtonStyles {
   );
 
   static const whiteButtonStyle = ButtonStyle(
-    backgroundColor: MaterialStatePropertyAll(AppColors.materialThemeWhite),
-    minimumSize: MaterialStatePropertyAll(
+    backgroundColor: WidgetStatePropertyAll(AppColors.materialThemeWhite),
+    minimumSize: WidgetStatePropertyAll(
       Size(KMinMaxSize.minWidth100, KMinMaxSize.minHeight50),
     ),
-    padding: MaterialStatePropertyAll(EdgeInsets.all(KPadding.kPaddingSize8)),
-    // side: MaterialStatePropertyAll( BorderSide(
+    padding: WidgetStatePropertyAll(EdgeInsets.all(KPadding.kPaddingSize8)),
+    // side: WidgetStatePropertyAll( BorderSide(
     //   color: KColorTheme.white,
     // ),
-    shape: MaterialStatePropertyAll(
+    shape: WidgetStatePropertyAll(
       RoundedRectangleBorder(
         borderRadius: KBorderRadius.kBorderRadius32,
       ),
@@ -67,15 +67,15 @@ abstract class KButtonStyles {
   );
 
   static const whiteSnackBarButtonStyle = ButtonStyle(
-    backgroundColor: MaterialStatePropertyAll(AppColors.materialThemeWhite),
-    minimumSize: MaterialStatePropertyAll(
+    backgroundColor: WidgetStatePropertyAll(AppColors.materialThemeWhite),
+    minimumSize: WidgetStatePropertyAll(
       Size(KMinMaxSize.minWidth100, KMinMaxSize.minHeight50),
     ),
-    padding: MaterialStatePropertyAll(EdgeInsets.all(KPadding.kPaddingSize16)),
-    // side: MaterialStatePropertyAll( BorderSide(
+    padding: WidgetStatePropertyAll(EdgeInsets.all(KPadding.kPaddingSize16)),
+    // side: WidgetStatePropertyAll( BorderSide(
     //   color: KColorTheme.white,
     // ),
-    shape: MaterialStatePropertyAll(
+    shape: WidgetStatePropertyAll(
       RoundedRectangleBorder(
         borderRadius: KBorderRadius.kBorderRadius32,
       ),
@@ -83,20 +83,20 @@ abstract class KButtonStyles {
   );
   static const doubleButtonStyle = ButtonStyle(
     alignment: Alignment.centerLeft,
-    padding: MaterialStatePropertyAll(EdgeInsets.zero),
-    overlayColor: MaterialStatePropertyAll(Colors.transparent),
+    padding: WidgetStatePropertyAll(EdgeInsets.zero),
+    overlayColor: WidgetStatePropertyAll(Colors.transparent),
   );
   static const boxButtonStyle = ButtonStyle(
     alignment: Alignment.centerLeft,
     padding:
-        MaterialStatePropertyAll(EdgeInsets.only(left: KPadding.kPaddingSize8)),
-    overlayColor: MaterialStatePropertyAll(Colors.transparent),
+        WidgetStatePropertyAll(EdgeInsets.only(left: KPadding.kPaddingSize8)),
+    overlayColor: WidgetStatePropertyAll(Colors.transparent),
   );
   static const borderButtonStyle = ButtonStyle(
-    minimumSize: MaterialStatePropertyAll(
+    minimumSize: WidgetStatePropertyAll(
       Size(KMinMaxSize.minWidth100, KMinMaxSize.minHeight50),
     ),
-    shape: MaterialStatePropertyAll(
+    shape: WidgetStatePropertyAll(
       RoundedRectangleBorder(
         borderRadius: KBorderRadius.kBorderRadius32,
         side: BorderSide(color: AppColors.materialThemeKeyColorsNeutral),
@@ -104,42 +104,42 @@ abstract class KButtonStyles {
     ),
   );
   static const whiteButtonStyleWInf = ButtonStyle(
-    backgroundColor: MaterialStatePropertyAll(AppColors.materialThemeWhite),
-    minimumSize: MaterialStatePropertyAll(
+    backgroundColor: WidgetStatePropertyAll(AppColors.materialThemeWhite),
+    minimumSize: WidgetStatePropertyAll(
       Size(double.infinity, KMinMaxSize.minHeight50),
     ),
-    padding: MaterialStatePropertyAll(EdgeInsets.all(KPadding.kPaddingSize8)),
-    shape: MaterialStatePropertyAll(
+    padding: WidgetStatePropertyAll(EdgeInsets.all(KPadding.kPaddingSize8)),
+    shape: WidgetStatePropertyAll(
       RoundedRectangleBorder(
         borderRadius: KBorderRadius.kBorderRadius32,
       ),
     ),
   );
   static const whiteButtonStyleBorder = ButtonStyle(
-    minimumSize: MaterialStatePropertyAll(
+    minimumSize: WidgetStatePropertyAll(
       Size(KMinMaxSize.minWidth100, KMinMaxSize.minHeight50),
     ),
-    padding: MaterialStatePropertyAll(EdgeInsets.all(KPadding.kPaddingSize8)),
-    side: MaterialStatePropertyAll(
+    padding: WidgetStatePropertyAll(EdgeInsets.all(KPadding.kPaddingSize8)),
+    side: WidgetStatePropertyAll(
       BorderSide(
         color: AppColors.materialThemeWhite,
       ),
     ),
-    shape: MaterialStatePropertyAll(
+    shape: WidgetStatePropertyAll(
       RoundedRectangleBorder(
         borderRadius: KBorderRadius.kBorderRadius32,
       ),
     ),
-    backgroundColor: MaterialStatePropertyAll(AppColors.materialThemeWhite),
+    backgroundColor: WidgetStatePropertyAll(AppColors.materialThemeWhite),
   );
   static const lightGrayButtonStyle = ButtonStyle(
     backgroundColor:
-        MaterialStatePropertyAll(AppColors.materialThemeKeyColorsNeutral),
-    minimumSize: MaterialStatePropertyAll(
+        WidgetStatePropertyAll(AppColors.materialThemeKeyColorsNeutral),
+    minimumSize: WidgetStatePropertyAll(
       Size(KMinMaxSize.minWidth100, KMinMaxSize.minHeight50),
     ),
-    padding: MaterialStatePropertyAll(EdgeInsets.all(KPadding.kPaddingSize8)),
-    shape: MaterialStatePropertyAll(
+    padding: WidgetStatePropertyAll(EdgeInsets.all(KPadding.kPaddingSize8)),
+    shape: WidgetStatePropertyAll(
       RoundedRectangleBorder(
         borderRadius: KBorderRadius.kBorderRadius32,
       ),
@@ -147,35 +147,35 @@ abstract class KButtonStyles {
   );
   static const lightGrayButtonStyleWInf = ButtonStyle(
     backgroundColor:
-        MaterialStatePropertyAll(AppColors.materialThemeKeyColorsNeutral),
-    minimumSize: MaterialStatePropertyAll(
+        WidgetStatePropertyAll(AppColors.materialThemeKeyColorsNeutral),
+    minimumSize: WidgetStatePropertyAll(
       Size(double.infinity, KMinMaxSize.minHeight50),
     ),
-    padding: MaterialStatePropertyAll(EdgeInsets.all(KPadding.kPaddingSize8)),
-    shape: MaterialStatePropertyAll(
+    padding: WidgetStatePropertyAll(EdgeInsets.all(KPadding.kPaddingSize8)),
+    shape: WidgetStatePropertyAll(
       RoundedRectangleBorder(
         borderRadius: KBorderRadius.kBorderRadius32,
       ),
     ),
   );
   static const transparentButtonStyleBottomBorder = ButtonStyle(
-    padding: MaterialStatePropertyAll(
+    padding: WidgetStatePropertyAll(
       EdgeInsets.symmetric(horizontal: KPadding.kPaddingSize8),
     ),
-    shape: MaterialStatePropertyAll(
+    shape: WidgetStatePropertyAll(
       LinearBorder(bottom: LinearBorderEdge()),
     ),
-    backgroundColor: MaterialStatePropertyAll(AppColors.materialThemeWhite),
+    backgroundColor: WidgetStatePropertyAll(AppColors.materialThemeWhite),
   );
 
   static const secondaryButtonStyle = ButtonStyle(
-    padding: MaterialStatePropertyAll(
+    padding: WidgetStatePropertyAll(
       EdgeInsets.symmetric(
         horizontal: KPadding.kPaddingSize24,
         vertical: KPadding.kPaddingSize8,
       ),
     ),
-    shape: MaterialStatePropertyAll(
+    shape: WidgetStatePropertyAll(
       RoundedRectangleBorder(
         borderRadius: KBorderRadius.kBorderRadius32,
         side: BorderSide(color: AppColors.materialThemeKeyColorsNeutralVariant),
@@ -184,60 +184,52 @@ abstract class KButtonStyles {
   );
 
   static const dropListButtonStyle = ButtonStyle(
-    minimumSize: MaterialStatePropertyAll(
+    minimumSize: WidgetStatePropertyAll(
       Size(KMinMaxSize.minWidth100, KMinMaxSize.minHeight50),
     ),
-    padding: MaterialStatePropertyAll(
+    padding: WidgetStatePropertyAll(
       EdgeInsets.symmetric(horizontal: KPadding.kPaddingSize32),
     ),
     alignment: Alignment.centerLeft,
-    shape: MaterialStatePropertyAll(
+    shape: WidgetStatePropertyAll(
       RoundedRectangleBorder(
         // ignore: avoid_redundant_argument_values
         borderRadius: BorderRadius.zero,
       ),
     ),
-    backgroundColor: MaterialStatePropertyAll(AppColors.materialThemeWhite),
+    backgroundColor: WidgetStatePropertyAll(AppColors.materialThemeWhite),
   );
 
   static const imageButton = ButtonStyle(
-    padding: MaterialStatePropertyAll(
+    padding: WidgetStatePropertyAll(
       EdgeInsets.symmetric(
         vertical: KPadding.kPaddingSize90,
       ),
     ),
-    iconSize: MaterialStatePropertyAll(KSize.kPixel70),
-    backgroundColor: MaterialStatePropertyAll(AppColors.materialThemeWhite),
-    shape: MaterialStatePropertyAll(
+    iconSize: WidgetStatePropertyAll(KSize.kPixel70),
+    backgroundColor: WidgetStatePropertyAll(AppColors.materialThemeWhite),
+    shape: WidgetStatePropertyAll(
       RoundedRectangleBorder(
         borderRadius: KBorderRadius.kBorderRadius32,
       ),
     ),
   );
   static const iconButtonStyle = ButtonStyle(
-    shape: MaterialStatePropertyAll(
+    shape: WidgetStatePropertyAll(
       RoundedRectangleBorder(
         borderRadius: KBorderRadius.kBorderRadiusL,
       ),
     ),
-    backgroundColor: MaterialStatePropertyAll(AppColors.materialThemeWhite),
+    backgroundColor: WidgetStatePropertyAll(AppColors.materialThemeWhite),
   );
 
-  static ButtonStyle additionalButtonStyle = ButtonStyle(
-    padding: const MaterialStatePropertyAll(EdgeInsets.zero),
-    overlayColor: const MaterialStatePropertyAll(Colors.transparent),
-    shape: const MaterialStatePropertyAll(
+  static const additionalButtonStyle = ButtonStyle(
+    padding: WidgetStatePropertyAll(EdgeInsets.zero),
+    overlayColor: WidgetStatePropertyAll(Colors.transparent),
+    shape: WidgetStatePropertyAll(
       RoundedRectangleBorder(
         borderRadius: KBorderRadius.kBorderRadius32,
       ),
     ),
-    side: MaterialStateProperty.resolveWith<BorderSide>((states) {
-      if (states.contains(MaterialState.hovered)) {
-        return const BorderSide();
-      }
-      return const BorderSide(
-        color: AppColors.materialThemeRefSecondarySecondary70,
-      );
-    }),
   );
 }
