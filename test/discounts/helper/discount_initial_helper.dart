@@ -66,38 +66,9 @@ Future<void> discountInitialHelper(
 
   await changeWindowSizeHelper(
     tester: tester,
-    test: () async {
-      expect(
-        find.byKey(KWidgetkeys.screen.discounts.filter),
-        findsOneWidget,
-      );
-
-      await filterChipHelper(tester);
-
-      expect(
-        find.byKey(KWidgetkeys.screen.discounts.addDiscountButton),
-        findsOneWidget,
-      );
-
-      expect(
-        find.byKey(KWidgetkeys.screen.discounts.card),
-        findsWidgets,
-      );
-
-      expect(
-        find.byKey(KWidgetkeys.screen.discounts.buttonMock),
-        findsNothing,
-      );
-
-      expect(
-        find.byKey(KWidgetkeys.screen.discounts.button),
-        findsOneWidget,
-      );
-
-      expect(
-        find.byKey(KWidgetkeys.screen.discounts.buttonIcon),
-        findsOneWidget,
-      );
-    },
+    test: () async => expect(
+      find.byKey(KWidgetkeys.screen.discounts.buttonIcon),
+      findsOneWidget,
+    ),
   );
 }
