@@ -18,7 +18,7 @@ Future<void> listLoadHelper(
       await scrollingHelper(
         tester: tester,
         itemKey: KWidgetkeys.screen.investors.button,
-        offset: KTestConstants.scrollingUp500,
+        // offset: KTestConstants.scrollingUp500,
       );
 
       expect(find.byKey(KWidgetkeys.screen.investors.button), findsOneWidget);
