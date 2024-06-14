@@ -33,9 +33,9 @@ import 'package:kozak/shared/bloc/authentication/authentication_bloc.dart'
 import 'package:kozak/shared/bloc/authentication_services/authentication_services_cubit.dart'
     as _i32;
 import 'package:kozak/shared/data_provider/cache_provider.dart' as _i3;
-import 'package:kozak/shared/data_provider/fake_provider.dart' as _i4;
-import 'package:kozak/shared/data_provider/firestore_provider.dart' as _i5;
-import 'package:kozak/shared/data_provider/storage_provider.dart' as _i6;
+import 'package:kozak/shared/data_provider/fake_provider.dart' as _i5;
+import 'package:kozak/shared/data_provider/firestore_provider.dart' as _i6;
+import 'package:kozak/shared/data_provider/storage_provider.dart' as _i4;
 import 'package:kozak/shared/repositories/app_authentication_repository.dart'
     as _i24;
 import 'package:kozak/shared/repositories/authentication_repository.dart'
@@ -66,9 +66,9 @@ extension GetItInjectableX on _i1.GetIt {
     );
     final firebaseModule = _$FirebaseModule();
     gh.factory<_i3.CacheClient>(() => _i3.CacheClient());
-    gh.singleton<_i4.FakeClient>(() => _i4.FakeClient());
-    gh.singleton<_i5.FirestoreService>(() => _i5.FirestoreService());
-    gh.singleton<_i6.StorageService>(() => _i6.StorageService());
+    gh.singleton<_i4.StorageService>(() => _i4.StorageService());
+    gh.singleton<_i5.FakeClient>(() => _i5.FakeClient());
+    gh.singleton<_i6.FirestoreService>(() => _i6.FirestoreService());
     gh.singleton<_i7.FirebaseAuth>(() => firebaseModule.firebaseAuth);
     gh.singleton<_i8.GoogleSignIn>(() => firebaseModule.googleSignIn);
     gh.singleton<_i9.IWorkRepository>(() => _i10.WorkRepository());
