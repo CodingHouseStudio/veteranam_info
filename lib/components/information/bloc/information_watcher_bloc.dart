@@ -86,7 +86,8 @@ class InformationWatcherBloc
     _LoadNextItems event,
     Emitter<InformationWatcherState> emit,
   ) {
-    if (state.itemsLoaded + 1 > state.informationModelItems.length) return;
+    if (state.itemsLoaded + KDimensions.loadItems >
+        state.informationModelItems.length) return;
     final filterItems = _filter(
       filtersIndex: state.filtersIndex,
       itemsLoaded: state.itemsLoaded + KDimensions.loadItems,

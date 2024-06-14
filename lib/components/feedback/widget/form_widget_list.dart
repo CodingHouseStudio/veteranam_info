@@ -28,7 +28,8 @@ List<Widget> _formWidgegList({
                           Text(
                             context.l10n.preferEmail,
                             key: KWidgetkeys.screen.feedback.emailText,
-                            style: AppTextStyle.materialThemeBodyLargeHint,
+                            style: AppTextStyle
+                                .materialThemeBodyLargeNeutralVariant60,
                           ),
                           emailButton(isDesk: isDesk),
                         ],
@@ -53,6 +54,7 @@ List<Widget> _formWidgegList({
                     ],
                   ),
                 ),
+                KSizedBox.kWidthSizedBox45,
                 Expanded(
                   flex: 2,
                   child: Column(
@@ -91,7 +93,7 @@ List<Widget> _formWidgegList({
                 Text(
                   context.l10n.preferEmail,
                   key: KWidgetkeys.screen.feedback.emailText,
-                  style: AppTextStyle.materialThemeBodyMediumHint,
+                  style: AppTextStyle.materialThemeBodyMediumNeutralVariant35,
                 ),
                 emailButton(isDesk: isDesk),
               ],
