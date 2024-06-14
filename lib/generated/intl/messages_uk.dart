@@ -44,6 +44,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "category": MessageLookupByLibrary.simpleMessage("Категорія"),
         "city": MessageLookupByLibrary.simpleMessage("Місто"),
         "clear": MessageLookupByLibrary.simpleMessage("Очистити"),
+        "companyIsHidden":
+            MessageLookupByLibrary.simpleMessage("Компанію приховано"),
         "consultationOnline":
             MessageLookupByLibrary.simpleMessage("Консультація онлайн"),
         "contact": MessageLookupByLibrary.simpleMessage("Зв\'язатись"),

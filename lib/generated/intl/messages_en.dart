@@ -43,6 +43,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "category": MessageLookupByLibrary.simpleMessage("Category"),
         "city": MessageLookupByLibrary.simpleMessage("City"),
         "clear": MessageLookupByLibrary.simpleMessage("Clear"),
+        "companyIsHidden":
+            MessageLookupByLibrary.simpleMessage("The company is hidden"),
         "consultationOnline":
             MessageLookupByLibrary.simpleMessage("Consultation"),
         "contact": MessageLookupByLibrary.simpleMessage("Contact"),
