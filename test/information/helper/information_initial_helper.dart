@@ -43,10 +43,10 @@ Future<void> informationInitialHelper(
         offset: KTestConstants.scrollingDown,
       );
 
-      await scrollingHelper(
-        tester: tester,
-        offset: KTestConstants.scrollingUp500,
-      );
+      // await scrollingHelper(
+      //   tester: tester,
+      //   offset: KTestConstants.scrollingUp500,
+      // );
 
       expect(
         find.byKey(KWidgetkeys.screen.information.button),

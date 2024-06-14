@@ -26,7 +26,12 @@ Future<void> correctSaveHelper(
 
   await scrollingHelper(
     tester: tester,
-    offset: KTestConstants.scrollingUp500,
+    offset: KTestConstants.scrollingDown,
+  );
+
+  await scrollingHelper(
+    tester: tester,
+    offset: KTestConstants.scrollingUp200,
   );
 
   await feedbackBoxHelper(tester: tester, exist: true);

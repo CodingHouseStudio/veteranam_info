@@ -82,9 +82,7 @@ Future<void> investorsInitialHelper(
 
       await scrollingHelper(
         tester: tester,
-        offset: KTestConstants.scrollingUp500,
-        itemKey: KWidgetkeys.widget.donateCard.button,
-        first: false,
+        offset: KTestConstants.scrollingDown,
       );
 
       expect(

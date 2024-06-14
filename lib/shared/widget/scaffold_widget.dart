@@ -7,11 +7,13 @@ class ScaffoldWidget extends StatelessWidget {
     this.titleChildWidgetsFunction,
     super.key,
     this.mainDeskPadding,
+    this.hasFooter = false,
   });
   final List<Widget> Function({required bool isDesk})?
       titleChildWidgetsFunction;
   final List<Widget> Function({required bool isDesk}) mainChildWidgetsFunction;
   final EdgeInsetsGeometry? mainDeskPadding;
+  final bool hasFooter;
 
   @override
   Widget build(BuildContext context) {
@@ -31,10 +33,15 @@ class ScaffoldWidget extends StatelessWidget {
                       : 0)
               : KPadding.kPaddingSize16),
         );
-        final footerList = FooterWidget.get(
-          context: context,
-          isDesk: isDesk,
-        );
+        final footerWidget = <Widget>[];
+        if (hasFooter) {
+          footerWidget.addAll(
+            FooterWidget.get(
+              context: context,
+              isDesk: isDesk,
+            ),
+          );
+        }
         return Scaffold(
           body: CustomScrollView(
             key: KWidgetkeys.widget.scaffold.scroll,
@@ -71,33 +78,35 @@ class ScaffoldWidget extends StatelessWidget {
                   itemCount: mainChildWidget.length,
                 ),
               ),
-              SliverPadding(
-                padding: padding.copyWith(
-                  bottom: KPadding.kPaddingSize40,
-                ),
-                sliver: DecoratedSliver(
-                  decoration: KWidgetTheme.boxDecorationFooter,
-                  sliver: SliverPadding(
-                    padding: isDesk
-                        ? const EdgeInsets.all(KPadding.kPaddingSize32)
-                            .copyWith(left: KPadding.kPaddingSize46)
-                        : const EdgeInsets.symmetric(
-                            vertical: KPadding.kPaddingSize32,
-                            horizontal: KPadding.kPaddingSize16,
-                          ),
-                    sliver: SliverList.builder(
-                      key: KWidgetkeys.widget.footer.widget,
-                      addAutomaticKeepAlives: false,
-                      addRepaintBoundaries: false,
-                      itemBuilder: (context, index) =>
-                          footerList.elementAt(index),
-                      itemCount: footerList.length,
+              if (hasFooter)
+                SliverPadding(
+                  padding: padding.copyWith(
+                    bottom: KPadding.kPaddingSize40,
+                  ),
+                  sliver: DecoratedSliver(
+                    decoration: KWidgetTheme.boxDecorationFooter,
+                    sliver: SliverPadding(
+                      padding: isDesk
+                          ? const EdgeInsets.all(KPadding.kPaddingSize32)
+                              .copyWith(left: KPadding.kPaddingSize46)
+                          : const EdgeInsets.symmetric(
+                              vertical: KPadding.kPaddingSize32,
+                              horizontal: KPadding.kPaddingSize16,
+                            ),
+                      sliver: SliverList.builder(
+                        key: KWidgetkeys.widget.footer.widget,
+                        addAutomaticKeepAlives: false,
+                        addRepaintBoundaries: false,
+                        itemBuilder: (context, index) =>
+                            footerWidget.elementAt(index),
+                        itemCount: footerWidget.length,
+                      ),
                     ),
                   ),
                 ),
-              ),
             ],
-            semanticChildCount: mainChildWidget.length,
+            semanticChildCount: mainChildWidget.length +
+                (hasFooter ? (footerWidget.length + 1) : 1),
           ),
         );
       },
