@@ -28,6 +28,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "aboutUs": MessageLookupByLibrary.simpleMessage("About project"),
         "addPhoto": MessageLookupByLibrary.simpleMessage("Add Photo"),
         "addYourStory": MessageLookupByLibrary.simpleMessage("Add your story"),
+        "all": MessageLookupByLibrary.simpleMessage("All"),
         "allRightsReserved":
             MessageLookupByLibrary.simpleMessage("All rights reserved"),
         "anonymous": MessageLookupByLibrary.simpleMessage("Anonymous"),

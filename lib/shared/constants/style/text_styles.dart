@@ -453,4 +453,18 @@ abstract class AppTextStyle {
     fontWeight: FontWeight.w500,
     letterSpacing: -0.25,
   );
+
+  static const filterText20 = TextStyle(
+    fontSize: KSize.kFont20,
+    fontWeight: FontWeight.w600,
+    fontFamily: 'Gilroy',
+    color: AppColors.materialThemeKeyColorsSecondary,
+  );
+  static const filterText16 = TextStyle(
+    fontSize: KSize.kFont16,
+    fontWeight: FontWeight.w600,
+    fontFamily: 'Gilroy',
+    fontStyle: FontStyle.normal,
+    color: AppColors.materialThemeKeyColorsSecondary,
+  );
 }
