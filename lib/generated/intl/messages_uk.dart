@@ -115,7 +115,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Привіт, Ветеран!"),
         "hide": MessageLookupByLibrary.simpleMessage("Сховати"),
         "homeSubtitle": MessageLookupByLibrary.simpleMessage(
-            "Тут ти знайдеш корисну інформацію, пільги, знижки а також можеш поділитися своєю історією! "),
+            "Тут ти знайдеш корисну інформацію, пільги, знижки, а також можеш поділитися своєю історією!"),
         "howToContactYou": MessageLookupByLibrary.simpleMessage(
             "Напишіть як з Вами звʼязатися"),
         "iAmBusinessOwnerRepresentative": MessageLookupByLibrary.simpleMessage(
@@ -257,7 +257,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "thisServiceForVeterans":
             MessageLookupByLibrary.simpleMessage("ЦЕЙ СЕРВІС ДЛЯ ВЕТЕРАНІВ"),
         "thisServiceForVeteransSubtitle": MessageLookupByLibrary.simpleMessage(
-            "Тут ти знайдеш корисну інформацію, пільги, знижки а також можеш поділитись своєю іторією"),
+            "Тут ти знайдеш корисну інформацію, пільги, знижки а також можеш поділитись своєю історією"),
         "toDiscount": MessageLookupByLibrary.simpleMessage("До знижок"),
         "toGetItYouNeed":
             MessageLookupByLibrary.simpleMessage("Щоб отримати потрібно:"),
