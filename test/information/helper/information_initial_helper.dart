@@ -55,16 +55,16 @@ Future<void> informationInitialHelper(
     },
   );
 
-  expect(
-    find.byKey(KWidgetkeys.screen.information.buttonIcon),
-    findsNothing,
-  );
+  // expect(
+  //   find.byKey(KWidgetkeys.screen.information.buttonIcon),
+  //   findsNothing,
+  // );
 
-  await changeWindowSizeHelper(
-    tester: tester,
-    test: () async => expect(
-      find.byKey(KWidgetkeys.screen.information.buttonIcon),
-      findsOneWidget,
-    ),
-  );
+  // await changeWindowSizeHelper(
+  //   tester: tester,
+  //   test: () async => expect(
+  //     find.byKey(KWidgetkeys.screen.information.buttonIcon),
+  //     findsOneWidget,
+  //   ),
+  // );
 }

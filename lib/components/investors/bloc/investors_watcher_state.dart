@@ -23,7 +23,9 @@ extension InvestorsFailureExtension on SomeFailure {
 class InvestorsWatcherState with _$InvestorsWatcherState {
   const factory InvestorsWatcherState({
     required List<FundModel> fundItems,
+    required List<FundModel> loadingFundItems,
     required LoadingStatus loadingStatus,
+    required int itemsLoaded,
     InvestorsFailure? failure,
   }) = _Initial;
 }

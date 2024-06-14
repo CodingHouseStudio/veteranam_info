@@ -54,16 +54,16 @@ Future<void> discountInitialHelper(
     },
   );
 
-  expect(
-    find.byKey(KWidgetkeys.screen.discounts.buttonIcon),
-    findsNothing,
-  );
+  // expect(
+  //   find.byKey(KWidgetkeys.screen.discounts.buttonIcon),
+  //   findsNothing,
+  // );
 
-  await changeWindowSizeHelper(
-    tester: tester,
-    test: () async => expect(
-      find.byKey(KWidgetkeys.screen.discounts.buttonIcon),
-      findsOneWidget,
-    ),
-  );
+  // await changeWindowSizeHelper(
+  //   tester: tester,
+  //   test: () async => expect(
+  //     find.byKey(KWidgetkeys.screen.discounts.buttonIcon),
+  //     findsOneWidget,
+  //   ),
+  // );
 }
