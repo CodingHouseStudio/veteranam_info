@@ -27,8 +27,8 @@ List<Widget> _storiesWidgetList({
               top: isDesk ? KPadding.kPaddingSize80 : KPadding.kPaddingSize24,
             )
           : EdgeInsets.zero,
-      child: Skeletonizer(
-        enabled: isLoading,
+      child: SkeletonizerWidget(
+        isLoading: isLoading,
         child: StoryCardWidget(
           key: KWidgetkeys.screen.story.card,
           storyModel: storyModelItems.elementAt(index),

@@ -26,8 +26,8 @@ List<Widget> _questionWidgetList({
               top: KPadding.kPaddingSize24,
             )
           : EdgeInsets.zero,
-      child: Skeletonizer(
-        enabled: isLoading,
+      child: SkeletonizerWidget(
+        isLoading: isLoading,
         child: QuestionWidget(
           key: KWidgetkeys.screen.home.faq,
           questionModel: questionModelItems.elementAt(index),
