@@ -147,6 +147,6 @@ doc/api/
 **/test_repository_mocks.mocks.dart
 **/get_it_service_locator.config.dart
 # Ignore generated folder
-**/generated/
+# **/generated/
 
 
