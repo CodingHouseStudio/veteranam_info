@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get_it/get_it.dart';
 import 'package:kozak/shared/shared.dart';
 
@@ -36,9 +36,14 @@ class AppWidget extends StatelessWidget {
         return MaterialApp.router(
           key: KWidgetkeys.screen.app.screen,
           theme: themeData,
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          localizationsDelegates: const [
+            S.delegate,
+            GlobalCupertinoLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+          ],
           locale: _.userSetting.locale.value,
-          supportedLocales: AppLocalizations.supportedLocales,
+          supportedLocales: S.delegate.supportedLocales,
           routerConfig: router,
         );
       },
