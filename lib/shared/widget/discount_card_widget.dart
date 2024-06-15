@@ -26,7 +26,7 @@ class DiscountsCardWidget extends StatelessWidget {
           Row(
             children: [
               Text(
-                discountItem.company,
+                discountItem.company ?? context.l10n.companyIsHidden,
                 key: KWidgetkeys.widget.discountCard.discount,
                 style: isDesk ? AppTextStyle.text40 : AppTextStyle.text18,
                 overflow: TextOverflow.clip,
@@ -117,7 +117,7 @@ class DiscountsCardWidget extends StatelessWidget {
     //   discountItem.directLink,
     // );
     await Share.share(
-      discountItem.directLink,
+      discountItem.directLink ?? discountItem.link,
     );
   }
 }

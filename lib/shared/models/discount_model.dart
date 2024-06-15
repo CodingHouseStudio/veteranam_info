@@ -9,7 +9,7 @@ class DiscountModel with _$DiscountModel {
   const factory DiscountModel({
     required String id,
     required String? userId,
-    required String company,
+    required DateTime date,
     required List<int> discount,
     required String title,
     required List<String> category,
@@ -24,11 +24,13 @@ class DiscountModel with _$DiscountModel {
     required String expiration,
     required String exclusions,
     required String phoneNumber,
-    required String directLink,
     required DateTime dateVerified,
+    required String link,
     String? html,
+    String? userName,
+    String? company,
+    String? directLink,
     String? additionaldetails,
-    String? link,
     @Default(true) bool selectedLocationsOnly,
   }) = _DiscountModel;
 
@@ -60,4 +62,6 @@ abstract class DiscountModelJsonField {
   static const additionaldetails = 'additionaldetails';
   static const link = 'link';
   static const selectedLocationsOnly = 'selectedLocationsOnly';
+  static const userName = 'userName';
+  static const date = 'date';
 }
