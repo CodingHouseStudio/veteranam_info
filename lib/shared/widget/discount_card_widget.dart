@@ -53,7 +53,7 @@ class DiscountsCardWidget extends StatelessWidget {
                 ),
                 const Spacer(),
                 Text(
-                  discountItem.location,
+                  discountItem.location?.first ?? context.l10n.online,
                   key: KWidgetkeys.widget.discountCard.city,
                   style: AppTextStyle.hint24,
                 ),
@@ -69,7 +69,7 @@ class DiscountsCardWidget extends StatelessWidget {
                   style: AppTextStyle.hint24,
                 ),
                 Text(
-                  discountItem.location,
+                  discountItem.location?.first ?? context.l10n.online,
                   key: KWidgetkeys.widget.discountCard.city,
                   style: AppTextStyle.hint24,
                 ),
