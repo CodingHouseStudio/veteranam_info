@@ -1880,6 +1880,16 @@ class AppLocalizations {
     );
   }
 
+  /// `online`
+  String get online {
+    return Intl.message(
+      'online',
+      name: 'online',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `More funds`
   String get moreFunds {
     return Intl.message(
