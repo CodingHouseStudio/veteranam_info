@@ -20,4 +20,5 @@ abstract class KMinMaxSize {
   static const subtitleMaxLength = 255;
 
   static const kImageMaxSize = 300;
+  static const kImageMaxSizeDouble = 300.0;
 }
