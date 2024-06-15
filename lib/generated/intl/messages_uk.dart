@@ -183,6 +183,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("(необовʼязково)"),
         "oneNumber": MessageLookupByLibrary.simpleMessage(
             "повинен містити одну чи більше цифр"),
+        "online": MessageLookupByLibrary.simpleMessage("онлайн"),
         "or": MessageLookupByLibrary.simpleMessage("або"),
         "orDonateHere":
             MessageLookupByLibrary.simpleMessage("або донатьте тут"),
