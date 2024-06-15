@@ -14,4 +14,5 @@ class _InvestorsKeys {
   final fundsTitle = const Key('investors_screen_funds_title');
   final donateCard = const Key('investors_screen_donate_card');
   final donateCards = const Key('investors_screen_donate_cards');
+  final button = const Key('investors_screen_button');
 }

@@ -74,6 +74,21 @@ Future<void> investorsInitialHelper(
         find.byKey(KWidgetkeys.screen.investors.donateCard),
         findsWidgets,
       );
+
+      await scrollingHelper(
+        tester: tester,
+        offset: KTestConstants.scrollingDown,
+      );
+
+      await scrollingHelper(
+        tester: tester,
+        offset: KTestConstants.scrollingDown,
+      );
+
+      expect(
+        find.byKey(KWidgetkeys.screen.investors.button),
+        findsWidgets,
+      );
     },
   );
 

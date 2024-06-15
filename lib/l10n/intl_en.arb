@@ -184,6 +184,7 @@
     "tryItAgain": "Try it again",
     "companyIsHidden": "The company is hidden",
     "online": "online",
+    "moreFunds": "More funds",
     "error": "We're sorry, there was an unforeseen error.",
     "@error": {
         "description": "message of an unforeseen error that was not foreseen."
