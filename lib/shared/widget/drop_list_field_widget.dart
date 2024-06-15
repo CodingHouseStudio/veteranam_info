@@ -50,9 +50,7 @@ class _DropListFieldWidgetState extends State<DropListFieldWidget> {
           alignment: Alignment.topLeft,
           child: Container(
             constraints: BoxConstraints(
-              maxHeight: widget.isDesk
-                  ? KMinMaxSize.kScroll400
-                  : KMinMaxSize.kScroll200,
+              maxHeight: widget.isDesk ? KSize.kPixel400 : KSize.kPixel200,
             ),
             child: ListView.builder(
               shrinkWrap: true,
