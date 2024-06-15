@@ -181,6 +181,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("(not necessarily)"),
         "oneNumber": MessageLookupByLibrary.simpleMessage(
             "must contain one or more number"),
+        "online": MessageLookupByLibrary.simpleMessage("online"),
         "or": MessageLookupByLibrary.simpleMessage("or"),
         "orDonateHere": MessageLookupByLibrary.simpleMessage("or donate here"),
         "ourSocialNetworks":

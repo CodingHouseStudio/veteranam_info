@@ -188,14 +188,14 @@ void main() {
               KTestText.discountModelItems.last.exclusions,
           DiscountModelJsonField.expiration:
               KTestText.discountModelItems.last.expiration,
-          DiscountModelJsonField.location:
-              KTestText.discountModelItems.last.location,
           DiscountModelJsonField.phoneNumber:
               KTestText.discountModelItems.last.phoneNumber,
           DiscountModelJsonField.requirements:
               KTestText.discountModelItems.last.requirements,
           DiscountModelJsonField.selectedLocationsOnly:
               KTestText.discountModelItems.last.selectedLocationsOnly,
+          DiscountModelJsonField.online:
+              KTestText.discountModelItems.last.online,
           DiscountModelJsonField.subcategory:
               KTestText.discountModelItems.last.subcategory,
           DiscountModelJsonField.subcategoryUA:
@@ -275,7 +275,7 @@ void main() {
         );
         expect(
           discountModel.location,
-          KTestText.discountModelItems.last.location,
+          null,
         );
         expect(
           discountModel.phoneNumber,
@@ -351,6 +351,8 @@ void main() {
               KTestText.discountModelItems.last.requirements,
           DiscountModelJsonField.selectedLocationsOnly:
               KTestText.discountModelItems.last.selectedLocationsOnly,
+          DiscountModelJsonField.online:
+              KTestText.discountModelItems.last.online,
           DiscountModelJsonField.subcategory:
               KTestText.discountModelItems.last.subcategory,
           DiscountModelJsonField.subcategoryUA:
@@ -414,6 +416,8 @@ void main() {
           DiscountModelJsonField.territory:
               KTestText.discountModelItems.last.territory,
           DiscountModelJsonField.title: KTestText.discountModelItems.last.title,
+          DiscountModelJsonField.online:
+              KTestText.discountModelItems.last.online,
           DiscountModelJsonField.date:
               KTestText.discountModelItems.last.date.toIso8601String(),
         };
@@ -445,8 +449,7 @@ void main() {
               KTestText.discountModelItems.last.exclusions,
           DiscountModelJsonField.expiration:
               KTestText.discountModelItems.last.expiration,
-          DiscountModelJsonField.location:
-              KTestText.discountModelItems.last.location,
+          DiscountModelJsonField.location: null,
           DiscountModelJsonField.phoneNumber:
               KTestText.discountModelItems.last.phoneNumber,
           DiscountModelJsonField.requirements:
@@ -460,6 +463,8 @@ void main() {
           DiscountModelJsonField.territory:
               KTestText.discountModelItems.last.territory,
           DiscountModelJsonField.title: KTestText.discountModelItems.last.title,
+          DiscountModelJsonField.online:
+              KTestText.discountModelItems.last.online,
           DiscountModelJsonField.date:
               KTestText.discountModelItems.last.date.toIso8601String(),
           DiscountModelJsonField.directLink: null,
@@ -476,6 +481,7 @@ void main() {
               userId: null,
               userName: null,
               company: null,
+              location: null,
             )
             .toJson();
 
