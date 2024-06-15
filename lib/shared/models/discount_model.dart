@@ -20,7 +20,7 @@ class DiscountModel with _$DiscountModel {
     required String description,
     required String requirements,
     required String territory,
-    required String location,
+    required List<String>? location,
     required String expiration,
     required String exclusions,
     required String phoneNumber,
@@ -32,6 +32,7 @@ class DiscountModel with _$DiscountModel {
     String? directLink,
     String? additionaldetails,
     @Default(true) bool selectedLocationsOnly,
+    @Default(false) bool online,
   }) = _DiscountModel;
 
   factory DiscountModel.fromJson(Map<String, dynamic> json) =>
@@ -64,4 +65,5 @@ abstract class DiscountModelJsonField {
   static const selectedLocationsOnly = 'selectedLocationsOnly';
   static const userName = 'userName';
   static const date = 'date';
+  static const online = 'online';
 }
