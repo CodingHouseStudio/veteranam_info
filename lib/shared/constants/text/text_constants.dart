@@ -150,6 +150,8 @@ abstract class KMockText {
     directLink:
         'https://esculab.com/20-vidsotkiv-na-analizy-dlya-viyskovyh-ta-lyudey-yaki-vnutrishno-peremishcheni',
     dateVerified: DateTime(2024, 6, 3),
+    date: ExtendedDateTime.current,
+    userName: 'Anonymous',
   );
   static final informationModel = InformationModel(
     id: '',
