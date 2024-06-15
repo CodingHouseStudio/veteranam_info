@@ -214,9 +214,13 @@ class FirestoreService {
               debugPrint('Data fetched from $source}');
             }
           }
-          return snapshot.docs
-              .map((doc) => DiscountModel.fromJson(doc.data()))
-              .toList();
+          try {
+            return snapshot.docs
+                .map((doc) => DiscountModel.fromJson(doc.data()))
+                .toList();
+          } catch (e) {
+            return [];
+          }
         },
       );
 
