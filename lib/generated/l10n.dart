@@ -1880,6 +1880,16 @@ class AppLocalizations {
     );
   }
 
+  /// `online`
+  String get online {
+    return Intl.message(
+      'online',
+      name: 'online',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `We're sorry, there was an unforeseen error.`
   String get error {
     return Intl.message(
