@@ -1870,6 +1870,16 @@ class AppLocalizations {
     );
   }
 
+  /// `The company is hidden`
+  String get companyIsHidden {
+    return Intl.message(
+      'The company is hidden',
+      name: 'companyIsHidden',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `More funds`
   String get moreFunds {
     return Intl.message(
