@@ -159,6 +159,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "mainScreen": MessageLookupByLibrary.simpleMessage("Home"),
         "message": MessageLookupByLibrary.simpleMessage("Message"),
         "moreDiscounts": MessageLookupByLibrary.simpleMessage("More discounts"),
+        "moreFunds": MessageLookupByLibrary.simpleMessage("More funds"),
         "moreNews": MessageLookupByLibrary.simpleMessage("More news"),
         "moreStories": MessageLookupByLibrary.simpleMessage("More stories"),
         "myFeedback": MessageLookupByLibrary.simpleMessage("My feedback"),
