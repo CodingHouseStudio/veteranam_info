@@ -8,5 +8,5 @@ class _InformationKeys {
   final card = const Key('information_screen_card');
   final buttonMock = const Key('information_screen_button_mock');
   final button = const Key('information_screen_button');
-  final buttonIcon = const Key('information_screen_button_icon');
+  // final buttonIcon = const Key('information_screen_button_icon');
 }

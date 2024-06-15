@@ -121,9 +121,21 @@ class InvestorsBodyWidget extends StatelessWidget {
           else
             ..._fundsWidgetList(context: context, isDesk: isDesk),
           if (isDesk)
-            KSizedBox.kHeightSizedBox56
+            KSizedBox.kHeightSizedBox40
           else
-            KSizedBox.kHeightSizedBox40,
+            KSizedBox.kHeightSizedBox24,
+          LoadingButton(
+            widgetKey: KWidgetkeys.screen.investors.button,
+            isDesk: isDesk,
+            onPressed: () => context
+                .read<InvestorsWatcherBloc>()
+                .add(const InvestorsWatcherEvent.loadeNextItems()),
+            text: context.l10n.moreFunds,
+          ),
+          if (isDesk)
+            KSizedBox.kHeightSizedBox50
+          else
+            KSizedBox.kHeightSizedBox24,
         ],
       ),
     );

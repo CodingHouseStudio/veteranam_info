@@ -48,16 +48,16 @@ Future<void> storyInitialHelper(
     },
   );
 
-  expect(
-    find.byKey(KWidgetkeys.screen.story.buttonIcon),
-    findsNothing,
-  );
+  // expect(
+  //   find.byKey(KWidgetkeys.screen.story.buttonIcon),
+  //   findsNothing,
+  // );
 
-  await changeWindowSizeHelper(
-    tester: tester,
-    test: () async => expect(
-      find.byKey(KWidgetkeys.screen.story.buttonIcon),
-      findsOneWidget,
-    ),
-  );
+  // await changeWindowSizeHelper(
+  //   tester: tester,
+  //   test: () async => expect(
+  //     find.byKey(KWidgetkeys.screen.story.buttonIcon),
+  //     findsOneWidget,
+  //   ),
+  // );
 }

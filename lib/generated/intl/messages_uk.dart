@@ -162,6 +162,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "mainScreen": MessageLookupByLibrary.simpleMessage("Головна"),
         "message": MessageLookupByLibrary.simpleMessage("Повідомлення"),
         "moreDiscounts": MessageLookupByLibrary.simpleMessage("Ще знижки"),
+        "moreFunds": MessageLookupByLibrary.simpleMessage("Більше фондів"),
         "moreNews": MessageLookupByLibrary.simpleMessage("Ще новини"),
         "moreStories": MessageLookupByLibrary.simpleMessage("Ще історії"),
         "myFeedback": MessageLookupByLibrary.simpleMessage("Мої відгуки"),
