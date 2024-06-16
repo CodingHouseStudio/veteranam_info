@@ -217,36 +217,38 @@ abstract class KTestText {
   );
 
   static final informationModelItemsModify = <InformationModel>[
-    for (var i = 0; i < 30; i++)
+    for (var i = 0; i < _items; i++)
       KMockText.informationModel.copyWith(
         id: i.toString(),
         fetchDate: dateTime,
-        image: i > KMockText.tags.length - 2 ? imageModels : null,
+        image: i > _itemsPhoto ? imageModels : null,
         category: i == 0 ? KMockText.tag : KMockText.informationModel.category,
       ),
   ];
 
   static final informationModelItems = <InformationModel>[
-    for (var i = 0; i < 20; i++)
+    for (var i = 0; i < _items; i++)
       KMockText.informationModel.copyWith(
         id: i.toString(),
         fetchDate: dateTime,
-        image: i > KMockText.tags.length ? imageModels : null,
+        image: i > _itemsPhoto ? imageModels : null,
       ),
   ];
 
   static final storyModelItems = <StoryModel>[
-    for (var i = 0; i < 30; i++)
+    for (var i = 0; i < _items; i++)
       StoryModel(
         id: i.toString(),
         date: dateTime,
-        image: i > KMockText.tags.length ? imageModels : null,
+        image: i > _itemsPhoto ? imageModels : null,
         story: KMockText.cardData.substring(0, 200),
         userName: user.name,
         userId: user.id,
-        userPhoto: i > KMockText.tags.length ? userPhotoModel : null,
+        userPhoto: i > _itemsPhoto ? userPhotoModel : null,
       ),
   ];
+  static const _items = 30;
+  static const _itemsPhoto = 20;
 
   static List<String> routes({required bool hasAccount}) => [
         KRoute.aboutUs.name,
