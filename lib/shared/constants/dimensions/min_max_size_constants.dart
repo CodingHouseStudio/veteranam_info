@@ -19,6 +19,6 @@ abstract class KMinMaxSize {
   static const questionsTitleMaxLength = 100;
   static const subtitleMaxLength = 255;
 
-  static const kImageMaxSize = 300;
-  static const kImageMaxSizeDouble = 300.0;
+  static const kImageMaxSize = 480;
+  static const kHomeImageMaxSize = 640;
 }
