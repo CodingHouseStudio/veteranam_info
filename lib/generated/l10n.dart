@@ -1900,6 +1900,56 @@ class AppLocalizations {
     );
   }
 
+  /// `Offer a discount`
+  String get offerDiscount {
+    return Intl.message(
+      'Offer a discount',
+      name: 'offerDiscount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `In this section, you can publish a discount, as well as manage your publications. If your company provides personalized offers for veterans, you can advertise here.`
+  String get myDiscountsAndCoupons {
+    return Intl.message(
+      'In this section, you can publish a discount, as well as manage your publications. If your company provides personalized offers for veterans, you can advertise here.',
+      name: 'myDiscountsAndCoupons',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `My publications`
+  String get myPublications {
+    return Intl.message(
+      'My publications',
+      name: 'myPublications',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Deactivate`
+  String get deactivate {
+    return Intl.message(
+      'Deactivate',
+      name: 'deactivate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Statistics`
+  String get statistics {
+    return Intl.message(
+      'Statistics',
+      name: 'statistics',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `We're sorry, there was an unforeseen error.`
   String get error {
     return Intl.message(
