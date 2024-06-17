@@ -31,7 +31,9 @@ List<Widget> _newsWidgetList({
       child: SkeletonizerWidget(
         isLoading: isLoading,
         child: NewsCardWidget(
-          key: KWidgetkeys.screen.information.card,
+          key: index != informationModelItems.length - 1
+              ? KWidgetkeys.screen.information.card
+              : KWidgetkeys.screen.information.cardLast,
           informationItem: informationModelItems.elementAt(index),
           isDesk: isDesk,
         ),

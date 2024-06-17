@@ -20,7 +20,7 @@ class DiscountBodyWidget extends StatelessWidget {
       ),
       listenWhen: (previous, current) => current.failure != null,
       builder: (context, _) {
-        return ScaffoldWidget(
+        return ScaffoldAutoLoadingWidget(
           mainChildWidgetsFunction: ({required isDesk}) => [
             if (isDesk)
               KSizedBox.kHeightSizedBox40
@@ -82,19 +82,22 @@ class DiscountBodyWidget extends StatelessWidget {
               KSizedBox.kHeightSizedBox56
             else
               KSizedBox.kHeightSizedBox24,
-            LoadingButton(
-              widgetKey: KWidgetkeys.screen.discounts.button,
-              text: context.l10n.moreDiscounts,
-              onPressed: () => context
-                  .read<DiscountWatcherBloc>()
-                  .add(const DiscountWatcherEvent.loadNextItems()),
-              isDesk: isDesk,
-            ),
+            // LoadingButton(
+            //   widgetKey: KWidgetkeys.screen.discounts.button,
+            //   text: context.l10n.moreDiscounts,
+            //   onPressed: () => context
+            //       .read<DiscountWatcherBloc>()
+            //       .add(const DiscountWatcherEvent.loadNextItems()),
+            //   isDesk: isDesk,
+            // ),
             if (isDesk)
               KSizedBox.kHeightSizedBox56
             else
               KSizedBox.kHeightSizedBox24,
           ],
+          scrollFunction: () => context
+              .read<DiscountWatcherBloc>()
+              .add(const DiscountWatcherEvent.loadNextItems()),
         );
       },
     );
