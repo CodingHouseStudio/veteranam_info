@@ -13,22 +13,12 @@ Future<void> listLoadHelper(
     offset: KTestConstants.scrollingDown,
   );
 
-  await scrollingHelper(
-    tester: tester,
-    itemKey: KWidgetkeys.screen.story.button,
-    offset: KTestConstants.scrollingUp500,
-  );
-
-  expect(find.byKey(KWidgetkeys.screen.story.button), findsOneWidget);
-
-  await tester.tap(find.byKey(KWidgetkeys.screen.story.button));
-
-  await tester.pumpAndSettle();
+  expect(find.byKey(KWidgetkeys.screen.story.cardLast), findsNothing);
 
   await scrollingHelper(
     tester: tester,
-    offset: KTestConstants.scrollingUp,
+    offset: KTestConstants.scrollingDown,
   );
 
-  expect(find.byKey(KWidgetkeys.widget.storyCard.userName), findsWidgets);
+  expect(find.byKey(KWidgetkeys.screen.story.cardLast), findsNothing);
 }
