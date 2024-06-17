@@ -13,7 +13,7 @@ List<Widget> _fundsWidgetList({
             id: index.toString(),
           ),
         )
-      : context.read<InvestorsWatcherBloc>().state.fundItems;
+      : context.read<InvestorsWatcherBloc>().state.loadingFundItems;
   return List.generate(
     context.read<InvestorsWatcherBloc>().state.failure == null
         ? (isDesk

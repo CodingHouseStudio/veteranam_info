@@ -58,7 +58,7 @@ class DiscountsCardWidget extends StatelessWidget {
           Row(
             children: [
               Text(
-                discountItem.company,
+                discountItem.company ?? context.l10n.companyIsHidden,
                 key: KWidgetkeys.widget.discountCard.discount,
                 style: isDesk ? AppTextStyle.text40 : AppTextStyle.text18,
                 overflow: TextOverflow.clip,
@@ -85,7 +85,7 @@ class DiscountsCardWidget extends StatelessWidget {
                 ),
                 const Spacer(),
                 Text(
-                  discountItem.location,
+                  discountItem.location?.first ?? context.l10n.online,
                   key: KWidgetkeys.widget.discountCard.city,
                   style: AppTextStyle.hint24,
                 ),
@@ -101,7 +101,7 @@ class DiscountsCardWidget extends StatelessWidget {
                   style: AppTextStyle.hint24,
                 ),
                 Text(
-                  discountItem.location,
+                  discountItem.location?.first ?? context.l10n.online,
                   key: KWidgetkeys.widget.discountCard.city,
                   style: AppTextStyle.hint24,
                 ),
@@ -149,7 +149,7 @@ class DiscountsCardWidget extends StatelessWidget {
     //   discountItem.directLink,
     // );
     await Share.share(
-      discountItem.directLink,
+      discountItem.directLink ?? discountItem.link,
     );
   }
 }

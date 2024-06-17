@@ -87,12 +87,11 @@ class InformationBodyWidget extends StatelessWidget {
           else
             KSizedBox.kHeightSizedBox24,
           LoadingButton(
-            key: KWidgetkeys.screen.information.button,
+            widgetKey: KWidgetkeys.screen.information.button,
             isDesk: isDesk,
             onPressed: () => context.read<InformationWatcherBloc>().add(
                   const InformationWatcherEvent.loadNextItems(),
                 ),
-            iconKey: KWidgetkeys.screen.information.buttonIcon,
             text: context.l10n.moreNews,
           ),
           if (isDesk)

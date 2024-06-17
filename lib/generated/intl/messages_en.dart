@@ -43,6 +43,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "category": MessageLookupByLibrary.simpleMessage("Category"),
         "city": MessageLookupByLibrary.simpleMessage("City"),
         "clear": MessageLookupByLibrary.simpleMessage("Clear"),
+        "companyIsHidden":
+            MessageLookupByLibrary.simpleMessage("The company is hidden"),
         "consultationOnline":
             MessageLookupByLibrary.simpleMessage("Consultation"),
         "contact": MessageLookupByLibrary.simpleMessage("Contact"),
@@ -157,6 +159,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "mainScreen": MessageLookupByLibrary.simpleMessage("Home"),
         "message": MessageLookupByLibrary.simpleMessage("Message"),
         "moreDiscounts": MessageLookupByLibrary.simpleMessage("More discounts"),
+        "moreFunds": MessageLookupByLibrary.simpleMessage("More funds"),
         "moreNews": MessageLookupByLibrary.simpleMessage("More news"),
         "moreStories": MessageLookupByLibrary.simpleMessage("More stories"),
         "myFeedback": MessageLookupByLibrary.simpleMessage("My feedback"),
@@ -178,6 +181,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("(not necessarily)"),
         "oneNumber": MessageLookupByLibrary.simpleMessage(
             "must contain one or more number"),
+        "online": MessageLookupByLibrary.simpleMessage("online"),
         "or": MessageLookupByLibrary.simpleMessage("or"),
         "orDonateHere": MessageLookupByLibrary.simpleMessage("or donate here"),
         "ourSocialNetworks":

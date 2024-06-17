@@ -81,7 +81,7 @@ abstract class KIcon {
   static const _KIcon volum = _KIcon(Symbols.volume_up);
   static const _KIcon eye = _KIcon(Symbols.remove_red_eye);
   static const _KIcon eyeOff = _KIcon(Symbols.remove_red_eye_sharp);
-  static const _KIcon refresh = _KIcon(Symbols.refresh);
+  static const _KIcon refresh = _KIcon(Symbols.cached);
   static const _KIcon message = _KIcon(Symbols.chat_bubble);
   static const _KIcon star = _KIcon(Symbols.star);
   static const _KIcon attachFile = _KIcon(Symbols.attach_file);
