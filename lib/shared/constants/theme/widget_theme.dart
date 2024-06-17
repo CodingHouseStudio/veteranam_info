@@ -99,8 +99,12 @@ abstract class KWidgetTheme {
     ),
     borderRadius: KBorderRadius.kBorderRadius8,
   );
-  static const boxDecorationBlack = BoxDecoration(
+  static const boxDecorationGreen = BoxDecoration(
     color: AppColors.materialThemeSourceSeed,
+    borderRadius: KBorderRadius.kBorderRadius32,
+  );
+  static const boxDecorationBlack = BoxDecoration(
+    color: AppColors.materialThemeKeyColorsSecondary,
     borderRadius: KBorderRadius.kBorderRadius32,
   );
   static const inputDecoration = InputDecoration(

@@ -26,7 +26,9 @@ List<Widget> discountsWidgetList({
       child: SkeletonizerWidget(
         isLoading: isLoading,
         child: DiscountsCardWidget(
-          key: KWidgetkeys.screen.discounts.card,
+          key: index != discountsWidgetList.length - 1
+              ? KWidgetkeys.screen.discounts.card
+              : KWidgetkeys.screen.discounts.cardLast,
           discountItem: discountsWidgetList.elementAt(index),
           isDesk: isDesk,
         ),
