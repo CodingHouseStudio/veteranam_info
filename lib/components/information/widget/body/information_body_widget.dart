@@ -41,9 +41,9 @@ class InformationBodyWidget extends StatelessWidget {
             key: KWidgetkeys.screen.information.filter,
             filtersItems: _.informationModelItems.overallTags(context),
             isDesk: isDesk,
-            onResetValue: () => context.read<InformationWatcherBloc>().add(
-                  const InformationWatcherEvent.filterReset(),
-                ),
+            // onResetValue: () => context.read<InformationWatcherBloc>().add(
+            //       const InformationWatcherEvent.filterReset(),
+            //     ),
             isSelected: (index) =>
                 context
                     .read<InformationWatcherBloc>()
@@ -66,20 +66,17 @@ class InformationBodyWidget extends StatelessWidget {
             const EdgeInsets.symmetric(horizontal: KPadding.kPaddingSize48),
         mainChildWidgetsFunction: ({required isDesk}) => [
           if (_.informationModelItems.isEmpty &&
-              _.loadingStatus == LoadingStatus.loaded)
-            Config.isDevelopment
-                ? MockButtonWidget(
-                    key: KWidgetkeys.screen.information.buttonMock,
-                    onPressed: () {
-                      GetIt.I
-                          .get<IInformationRepository>()
-                          .addMockInformationItems();
-                      context
-                          .read<InformationWatcherBloc>()
-                          .add(const InformationWatcherEvent.started());
-                    },
-                  )
-                : const SizedBox.shrink()
+              _.loadingStatus == LoadingStatus.loaded &&
+              Config.isDevelopment)
+            MockButtonWidget(
+              key: KWidgetkeys.screen.information.buttonMock,
+              onPressed: () {
+                GetIt.I.get<IInformationRepository>().addMockInformationItems();
+                context
+                    .read<InformationWatcherBloc>()
+                    .add(const InformationWatcherEvent.started());
+              },
+            )
           else
             ..._newsWidgetList(context: context, isDesk: isDesk),
           if (isDesk)

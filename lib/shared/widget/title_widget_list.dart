@@ -29,6 +29,7 @@ abstract class TitleWidget {
     required String pointText,
     required Key pointKey,
     required bool isDesk,
+    EdgeInsets titleSecondPartPadding = EdgeInsets.zero,
     bool isRightArrow = true,
     WrapAlignment titleAlignment = WrapAlignment.start,
     CrossAxisAlignment iconCrossAxisAlignment = CrossAxisAlignment.start,
@@ -56,22 +57,25 @@ abstract class TitleWidget {
                       textAlign: textAlign,
                       style: AppTextStyle.materialThemeDisplayLarge,
                     ),
-                    Wrap(
-                      alignment: titleAlignment,
-                      children: [
-                        Text(
-                          titleSecondPart,
-                          style: AppTextStyle.materialThemeDisplayLarge,
-                          textAlign: textAlign,
-                        ),
-                        KSizedBox.kWidthSizedBox24,
-                        IconWidget(
-                          key: KWidgetkeys.screen.feedback.titleIcon,
-                          icon: isRightArrow
-                              ? KIcon.arrowDownRight
-                              : KIcon.arrowDownLeft,
-                        ),
-                      ],
+                    Padding(
+                      padding: titleSecondPartPadding,
+                      child: Wrap(
+                        alignment: titleAlignment,
+                        children: [
+                          Text(
+                            titleSecondPart,
+                            style: AppTextStyle.materialThemeDisplayLarge,
+                            textAlign: textAlign,
+                          ),
+                          KSizedBox.kWidthSizedBox24,
+                          IconWidget(
+                            // key: KWidgetkeys.screen.feedback.titleIcon,
+                            icon: isRightArrow
+                                ? KIcon.arrowDownRight
+                                : KIcon.arrowDownLeft,
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
@@ -96,9 +100,10 @@ abstract class TitleWidget {
                 ),
               ),
               IconWidget(
-                key: KWidgetkeys.screen.feedback.titleIcon,
+                // key: KWidgetkeys.screen.feedback.titleIcon,
                 icon: isRightArrow ? KIcon.arrowDownRight : KIcon.arrowDownLeft,
-                padding: KPadding.kPaddingSize12,
+                padding:
+                    isDesk ? KPadding.kPaddingSize20 : KPadding.kPaddingSize12,
               ),
             ],
           ),

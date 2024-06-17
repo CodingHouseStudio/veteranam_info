@@ -1880,11 +1880,21 @@ class AppLocalizations {
     );
   }
 
-  /// `online`
-  String get online {
+  /// `Special offers`
+  String get specialOffers {
     return Intl.message(
-      'online',
-      name: 'online',
+      'Special offers',
+      name: 'specialOffers',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `for veterans and their families`
+  String get forVeteransAndTheirFamilies {
+    return Intl.message(
+      'for veterans and their families',
+      name: 'forVeteransAndTheirFamilies',
       desc: '',
       args: [],
     );
@@ -1895,6 +1905,66 @@ class AppLocalizations {
     return Intl.message(
       'More funds',
       name: 'moreFunds',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `online`
+  String get online {
+    return Intl.message(
+      'online',
+      name: 'online',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Advanced filter`
+  String get advancedFilter {
+    return Intl.message(
+      'Advanced filter',
+      name: 'advancedFilter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `discount`
+  String get discount {
+    return Intl.message(
+      'discount',
+      name: 'discount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Filter applied`
+  String get filterApplied {
+    return Intl.message(
+      'Filter applied',
+      name: 'filterApplied',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `From the largest to the smallest`
+  String get fromLargestToSmallest {
+    return Intl.message(
+      'From the largest to the smallest',
+      name: 'fromLargestToSmallest',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Free`
+  String get free {
+    return Intl.message(
+      'Free',
+      name: 'free',
       desc: '',
       args: [],
     );

@@ -1,11 +1,12 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
+import 'package:kozak/shared/shared.dart';
 import 'package:material_symbols_icons/symbols.dart';
 
 class _KIcon extends Icon {
   // ignore: unused_element
-  const _KIcon(super.icon, {super.weight = 200, super.fill});
+  const _KIcon(super.icon, {super.weight = 200, super.fill, super.size});
 }
 
 extension IconExtension on Icon {
@@ -77,6 +78,7 @@ abstract class KIcon {
   static const _KIcon saved = _KIcon(Symbols.bookmark_added_sharp);
   static const _KIcon check = _KIcon(
     Symbols.check,
+    size: KSize.kcheckPointIconSize,
   );
   static const _KIcon volum = _KIcon(Symbols.volume_up);
   static const _KIcon eye = _KIcon(Symbols.remove_red_eye);
@@ -96,4 +98,5 @@ abstract class KIcon {
   static const _KIcon fileText = _KIcon(Symbols.description);
   static const _KIcon meil = _KIcon(Symbols.mail);
   static const _KIcon close = _KIcon(Symbols.close);
+  static const _KIcon tune = _KIcon(Symbols.tune);
 }

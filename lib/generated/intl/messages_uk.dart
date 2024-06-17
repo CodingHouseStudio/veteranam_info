@@ -29,6 +29,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "addPhoto": MessageLookupByLibrary.simpleMessage("Добавте фото"),
         "addYourStory":
             MessageLookupByLibrary.simpleMessage("Написати свою історію"),
+        "advancedFilter":
+            MessageLookupByLibrary.simpleMessage("Розширений фільтр"),
         "allRightsReserved":
             MessageLookupByLibrary.simpleMessage("Всі права захищені"),
         "anonymous": MessageLookupByLibrary.simpleMessage("анонім"),
@@ -60,6 +62,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "didNotFindYourVacancy":
             MessageLookupByLibrary.simpleMessage("Не знайшли свою вакансію?"),
         "disconnect": MessageLookupByLibrary.simpleMessage("Відʼєднати"),
+        "discount": MessageLookupByLibrary.simpleMessage("знижка"),
         "discounts": MessageLookupByLibrary.simpleMessage("Знижки"),
         "discountsAndCoupons":
             MessageLookupByLibrary.simpleMessage("Знижки і купони"),
@@ -101,7 +104,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "fieldCannotBeEmpty":
             MessageLookupByLibrary.simpleMessage("Поле не може бути пустим"),
         "fillInForm": MessageLookupByLibrary.simpleMessage("Заповніть форму"),
+        "filterApplied":
+            MessageLookupByLibrary.simpleMessage("Застосований фільтр"),
         "findOut": MessageLookupByLibrary.simpleMessage("Щоб дізнатися"),
+        "forVeteransAndTheirFamilies":
+            MessageLookupByLibrary.simpleMessage("для ветеранів і їх родин"),
+        "free": MessageLookupByLibrary.simpleMessage("Безкоштовно"),
+        "fromLargestToSmallest":
+            MessageLookupByLibrary.simpleMessage("Від найбільшої до найменшої"),
         "fullEmail": MessageLookupByLibrary.simpleMessage("Електронна пошта"),
         "funds": MessageLookupByLibrary.simpleMessage("Фонди"),
         "fundsSubtitle": MessageLookupByLibrary.simpleMessage(
@@ -246,6 +256,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "signUp": MessageLookupByLibrary.simpleMessage("Реєстрація"),
         "signUpWith":
             MessageLookupByLibrary.simpleMessage("Зареєструйтесь через"),
+        "specialOffers":
+            MessageLookupByLibrary.simpleMessage("Спеціальні пропозиції"),
         "stories": MessageLookupByLibrary.simpleMessage("Історії"),
         "storyAddSubtitle": MessageLookupByLibrary.simpleMessage(
             "Поділіться своєю історією і ми опублікуємо її на нашому веб сайті. Всі історії проходять модерацію і будуть опубліковані після перевірки."),

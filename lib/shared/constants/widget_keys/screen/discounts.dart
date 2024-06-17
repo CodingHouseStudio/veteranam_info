@@ -7,6 +7,6 @@ class _DiscountsKeys {
   final button = const Key('discount_screen_button');
   final buttonMock = const Key('discounts_screen_button_mock');
   // final buttonIcon = const Key('discount_screen_button_icon');
-  final title = const Key('discount_title_key');
-  final subtitleKey = const Key('discount_subtitleKey_key');
+  final title = const Key('discount_title');
+  final titlePoint = const Key('discount_title_point');
 }

@@ -28,6 +28,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "aboutUs": MessageLookupByLibrary.simpleMessage("About project"),
         "addPhoto": MessageLookupByLibrary.simpleMessage("Add Photo"),
         "addYourStory": MessageLookupByLibrary.simpleMessage("Add your story"),
+        "advancedFilter":
+            MessageLookupByLibrary.simpleMessage("Advanced filter"),
         "allRightsReserved":
             MessageLookupByLibrary.simpleMessage("All rights reserved"),
         "anonymous": MessageLookupByLibrary.simpleMessage("Anonymous"),
@@ -58,6 +60,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "didNotFindYourVacancy":
             MessageLookupByLibrary.simpleMessage("Didn\'t find your vacancy?"),
         "disconnect": MessageLookupByLibrary.simpleMessage("Disconnect"),
+        "discount": MessageLookupByLibrary.simpleMessage("discount"),
         "discounts": MessageLookupByLibrary.simpleMessage("Discounts"),
         "discountsAndCoupons":
             MessageLookupByLibrary.simpleMessage("Discounts and coupons"),
@@ -99,7 +102,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "fieldCannotBeEmpty":
             MessageLookupByLibrary.simpleMessage("Field cann`t be empty"),
         "fillInForm": MessageLookupByLibrary.simpleMessage("Fill in the form"),
+        "filterApplied": MessageLookupByLibrary.simpleMessage("Filter applied"),
         "findOut": MessageLookupByLibrary.simpleMessage("To find out"),
+        "forVeteransAndTheirFamilies": MessageLookupByLibrary.simpleMessage(
+            "for veterans and their families"),
+        "free": MessageLookupByLibrary.simpleMessage("Free"),
+        "fromLargestToSmallest": MessageLookupByLibrary.simpleMessage(
+            "From the largest to the smallest"),
         "fullEmail": MessageLookupByLibrary.simpleMessage("Email"),
         "funds": MessageLookupByLibrary.simpleMessage("Funds"),
         "fundsSubtitle": MessageLookupByLibrary.simpleMessage(
@@ -238,6 +247,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sendMore": MessageLookupByLibrary.simpleMessage("Send more"),
         "signUp": MessageLookupByLibrary.simpleMessage("Sign up"),
         "signUpWith": MessageLookupByLibrary.simpleMessage("Sign up with"),
+        "specialOffers": MessageLookupByLibrary.simpleMessage("Special offers"),
         "stories": MessageLookupByLibrary.simpleMessage("Stories"),
         "storyAddSubtitle": MessageLookupByLibrary.simpleMessage(
             "Share your story and we will publish it on our website. All stories are moderated and will be published after review."),

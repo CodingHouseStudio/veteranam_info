@@ -5,7 +5,7 @@ class FiltersChipWidget extends StatelessWidget {
   const FiltersChipWidget({
     required this.filtersItems,
     required this.isDesk,
-    required this.onResetValue,
+    // required this.onResetValue,
     required this.onSelected,
     required this.isSelected,
     super.key,
@@ -13,7 +13,7 @@ class FiltersChipWidget extends StatelessWidget {
 
   final List<String> filtersItems;
   final bool isDesk;
-  final void Function() onResetValue;
+  // final void Function() onResetValue;
   final void Function(
     int index,
   ) onSelected;
@@ -23,43 +23,59 @@ class FiltersChipWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      key: KWidgetkeys.widget.filterChip.widget,
-      children: [
-        FilterPopupMenuWidget(
-          key: KWidgetkeys.widget.filterChip.popup,
-          onResetValue: onResetValue,
-          isDesk: isDesk,
-        ),
-        KSizedBox.kWidthSizedBox24,
-        Expanded(
-          child: SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: List.generate(filtersItems.length, (index) {
-                return Padding(
-                  padding: EdgeInsets.only(
-                    right: isDesk
-                        ? KPadding.kPaddingSize16
-                        : KPadding.kPaddingSize8,
-                  ),
-                  child: ChipWidget(
-                    key: KWidgetkeys.widget.filterChip.chips,
-                    filter: filtersItems.elementAt(index),
-                    onSelected: ({required isSelected}) => onSelected(
-                      index,
-                    ),
-                    isSelected: isSelected(
-                      index,
-                    ),
-                    isDesk: isDesk,
-                  ),
-                );
-              }),
-            ),
-          ),
-        ),
-      ],
-    );
+    // return Row(
+    //   key: KWidgetkeys.widget.filterChip.widget,
+    //   children: [
+    //     FilterPopupMenuWidget(
+    //       key: KWidgetkeys.widget.filterChip.popup,
+    //       onResetValue: onResetValue,
+    //       isDesk: isDesk,
+    //     ),
+    //     KSizedBox.kWidthSizedBox24,
+    //     Expanded(
+    //       child:
+    return isDesk
+        ? ShaderMask(
+            shaderCallback: (Rect bounds) {
+              return LinearGradient(
+                colors: [
+                  AppColors.materialThemeWhite,
+                  AppColors.materialThemeWhite.withOpacity(0.03),
+                ],
+                stops: const [0.1, 1],
+                tileMode: TileMode.mirror,
+              ).createShader(bounds);
+            },
+            child: _body,
+          )
+        : _body;
+    //     ),
+    //   ],
+    // );
   }
+
+  Widget get _body => SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          children: List.generate(filtersItems.length, (index) {
+            return Padding(
+              padding: EdgeInsets.only(
+                right:
+                    isDesk ? KPadding.kPaddingSize16 : KPadding.kPaddingSize8,
+              ),
+              child: ChipWidget(
+                key: KWidgetkeys.widget.filterChip.chips,
+                filter: filtersItems.elementAt(index),
+                onSelected: ({required isSelected}) => onSelected(
+                  index,
+                ),
+                isSelected: isSelected(
+                  index,
+                ),
+                isDesk: isDesk,
+              ),
+            );
+          }),
+        ),
+      );
 }

@@ -185,7 +185,14 @@
     "tryItAgain": "Спробувати ще раз",
     "companyIsHidden": "Компанію приховано",
     "online": "онлайн",
+    "advancedFilter": "Розширений фільтр",
     "moreFunds": "Більше фондів",
+    "specialOffers": "Спеціальні пропозиції",
+    "forVeteransAndTheirFamilies": "для ветеранів і їх родин",
+    "discount": "знижка",
+    "filterApplied": "Застосований фільтр",
+    "fromLargestToSmallest": "Від найбільшої до найменшої",
+    "free": "Безкоштовно",
     "error": "Вибачте, сталася непередбачена помилка.",
     "@error": {
         "description": "повідомлення про непередбачену помилку, яка не була передбачена."

@@ -23,16 +23,18 @@ class DiscountWatcherBloc
             discountModelItems: [],
             loadingStatus: LoadingStatus.initial,
             filteredDiscountModelItems: [],
-            filtersIndex: null,
+            filtersCategoriesIndex: null,
             itemsLoaded: 0,
             failure: null,
+            filtersCitiesIndex: null,
           ),
         ) {
     on<_Started>(_onStarted);
     on<_Updated>(_onUpdated);
     on<_Failure>(_onFailure);
     on<_LoadNextItems>(_onLoadNextItems);
-    on<_Filter>(_onFilter);
+    on<_FilterCategory>(_onFilterCategory);
+    on<_FilterCity>(_onFilterCity);
     on<_FilterReset>(_onFilterReset);
   }
 
@@ -69,15 +71,16 @@ class DiscountWatcherBloc
         loadingStatus: LoadingStatus.loaded,
         filteredDiscountModelItems: event.discountItemsModel.isNotEmpty
             ? _filter(
-                filtersIndex: state.filtersIndex,
+                filtersIndex: state.filtersCategoriesIndex,
                 itemsLoaded: state.itemsLoaded.getLoaded,
                 discountModelItems: event.discountItemsModel,
               )
             : [],
-        filtersIndex: state.filtersIndex,
+        filtersCategoriesIndex: state.filtersCategoriesIndex,
         itemsLoaded: event.discountItemsModel.isNotEmpty
             ? state.itemsLoaded.getLoaded
             : 0,
+        filtersCitiesIndex: state.filtersCategoriesIndex,
         failure: null,
       ),
     );
@@ -90,7 +93,7 @@ class DiscountWatcherBloc
     if (state.itemsLoaded + KDimensions.loadItems >
         state.discountModelItems.length) return;
     final filterItems = _filter(
-      filtersIndex: state.filtersIndex,
+      filtersIndex: state.filtersCategoriesIndex,
       itemsLoaded: state.itemsLoaded + KDimensions.loadItems,
       discountModelItems: state.discountModelItems,
     );
@@ -115,18 +118,19 @@ class DiscountWatcherBloc
           itemsLoaded: state.itemsLoaded,
           discountModelItems: state.discountModelItems,
         ),
-        filtersIndex: null,
+        filtersCategoriesIndex: null,
+        filtersCitiesIndex: null,
       ),
     );
   }
 
-  void _onFilter(
-    _Filter event,
+  void _onFilterCategory(
+    _FilterCategory event,
     Emitter<DiscountWatcherState> emit,
   ) {
-    final selectedFilters = List<int>.from(state.filtersIndex ?? []);
+    final selectedFilters = List<int>.from(state.filtersCategoriesIndex ?? []);
 
-    state.filtersIndex?.contains(event.filterIndex) ?? false
+    state.filtersCategoriesIndex?.contains(event.filterIndex) ?? false
         ? selectedFilters.remove(event.filterIndex)
         : selectedFilters.add(event.filterIndex);
 
@@ -140,7 +144,35 @@ class DiscountWatcherBloc
       state.copyWith(
         loadingStatus: LoadingStatus.loaded,
         filteredDiscountModelItems: filterItems,
-        filtersIndex: selectedFilters,
+        filtersCategoriesIndex: selectedFilters,
+        itemsLoaded: filterItems.length > state.itemsLoaded
+            ? state.itemsLoaded.getLoaded
+            : filterItems.length,
+      ),
+    );
+  }
+
+  void _onFilterCity(
+    _FilterCity event,
+    Emitter<DiscountWatcherState> emit,
+  ) {
+    final selectedFilters = List<int>.from(state.filtersCategoriesIndex ?? []);
+
+    state.filtersCategoriesIndex?.contains(event.filterIndex) ?? false
+        ? selectedFilters.remove(event.filterIndex)
+        : selectedFilters.add(event.filterIndex);
+
+    final filterItems = _filter(
+      filtersIndex: selectedFilters,
+      discountModelItems: state.discountModelItems,
+      itemsLoaded: state.itemsLoaded.getLoaded,
+    );
+
+    emit(
+      state.copyWith(
+        loadingStatus: LoadingStatus.loaded,
+        filteredDiscountModelItems: filterItems,
+        filtersCategoriesIndex: selectedFilters,
         itemsLoaded: filterItems.length > state.itemsLoaded
             ? state.itemsLoaded.getLoaded
             : filterItems.length,

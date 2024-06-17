@@ -78,7 +78,7 @@ void main() {
           reason: 'Wait for loading data',
         );
         bloc.add(
-          const DiscountWatcherEvent.filter(
+          const DiscountWatcherEvent.filterCategory(
             0,
           ),
         );
@@ -90,7 +90,7 @@ void main() {
         predicate<DiscountWatcherState>(
           (state) =>
               state.loadingStatus == LoadingStatus.loaded &&
-              state.filtersIndex == null,
+              state.filtersCategoriesIndex == null,
         ),
         predicate<DiscountWatcherState>(
           (state) =>
@@ -100,7 +100,7 @@ void main() {
                   KTestText.discountModelItemsModify.first.category.first,
                 ),
               ) &&
-              state.filtersIndex != null,
+              state.filtersCategoriesIndex != null,
         ),
       ],
     );
@@ -170,7 +170,7 @@ void main() {
             const DiscountWatcherEvent.loadNextItems(),
           )
           ..add(
-            const DiscountWatcherEvent.filter(
+            const DiscountWatcherEvent.filterCategory(
               0,
             ),
           );
@@ -182,7 +182,7 @@ void main() {
         predicate<DiscountWatcherState>(
           (state) =>
               state.loadingStatus == LoadingStatus.loaded &&
-              state.filtersIndex == null,
+              state.filtersCategoriesIndex == null,
         ),
         predicate<DiscountWatcherState>(
           (state) =>
@@ -190,13 +190,13 @@ void main() {
               state.filteredDiscountModelItems.length ==
                   KDimensions.loadItems * 2 &&
               state.itemsLoaded == KDimensions.loadItems * 2 &&
-              state.filtersIndex == null,
+              state.filtersCategoriesIndex == null,
         ),
         predicate<DiscountWatcherState>(
           (state) =>
               state.loadingStatus == LoadingStatus.loaded &&
               state.filteredDiscountModelItems.length == 1 &&
-              state.filtersIndex != null &&
+              state.filtersCategoriesIndex != null &&
               state.itemsLoaded == 1,
         ),
       ],
@@ -222,7 +222,7 @@ void main() {
         );
         bloc
           ..add(
-            const DiscountWatcherEvent.filter(
+            const DiscountWatcherEvent.filterCategory(
               0,
             ),
           )
@@ -230,7 +230,7 @@ void main() {
             const DiscountWatcherEvent.loadNextItems(),
           )
           ..add(
-            const DiscountWatcherEvent.filter(
+            const DiscountWatcherEvent.filterCategory(
               0,
             ),
           )
@@ -245,21 +245,21 @@ void main() {
         predicate<DiscountWatcherState>(
           (state) =>
               state.loadingStatus == LoadingStatus.loaded &&
-              state.filtersIndex == null,
+              state.filtersCategoriesIndex == null,
         ),
         predicate<DiscountWatcherState>(
           (state) =>
               state.loadingStatus == LoadingStatus.loaded &&
               state.filteredDiscountModelItems.length == 1 &&
-              state.filtersIndex != null &&
+              state.filtersCategoriesIndex != null &&
               state.itemsLoaded == 1,
         ),
         predicate<DiscountWatcherState>(
           (state) =>
               state.loadingStatus == LoadingStatus.loaded &&
               state.filteredDiscountModelItems.length == 1 &&
-              state.filtersIndex != null &&
-              state.filtersIndex!.isEmpty &&
+              state.filtersCategoriesIndex != null &&
+              state.filtersCategoriesIndex!.isEmpty &&
               state.itemsLoaded == 1,
         ),
         predicate<DiscountWatcherState>(
@@ -268,8 +268,8 @@ void main() {
               state.filteredDiscountModelItems.length ==
                   KDimensions.loadItems + 1 &&
               state.itemsLoaded == KDimensions.loadItems + 1 &&
-              state.filtersIndex != null &&
-              state.filtersIndex!.isEmpty,
+              state.filtersCategoriesIndex != null &&
+              state.filtersCategoriesIndex!.isEmpty,
         ),
       ],
     );

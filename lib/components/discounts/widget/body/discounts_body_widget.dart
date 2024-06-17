@@ -22,60 +22,71 @@ class DiscountBodyWidget extends StatelessWidget {
       builder: (context, _) {
         return ScaffoldWidget(
           mainChildWidgetsFunction: ({required isDesk}) => [
-            if (isDesk)
-              KSizedBox.kHeightSizedBox40
-            else
-              KSizedBox.kHeightSizedBox16,
-            ...TitleWidget.titleWidgetList(
-              title: context.l10n.discountsAndCoupons,
+            KSizedBox.kHeightSizedBox24,
+            ...TitleWidget.pointTitleWidgetList(
+              title: context.l10n.specialOffers,
               titleKey: KWidgetkeys.screen.discounts.title,
-              subtitle: context.l10n.discountsAndCouponsDescription,
-              subtitleKey: KWidgetkeys.screen.discounts.title,
+              titleSecondPart: context.l10n.forVeteransAndTheirFamilies,
+              pointText: context.l10n.discounts,
+              pointKey: KWidgetkeys.screen.discounts.titlePoint,
               isDesk: isDesk,
+              titleSecondPartPadding:
+                  const EdgeInsets.only(left: KPadding.kPaddingSize72),
+              iconCrossAxisAlignment: CrossAxisAlignment.end,
+              isRightArrow: false,
             ),
             if (isDesk)
-              KSizedBox.kHeightSizedBox56
+              KSizedBox.kHeightSizedBox40
             else
               KSizedBox.kHeightSizedBox24,
             FiltersChipWidget(
               key: KWidgetkeys.screen.discounts.filter,
               filtersItems: _.discountModelItems.overallTags(context),
               isDesk: isDesk,
-              onResetValue: () => context.read<DiscountWatcherBloc>().add(
-                    const DiscountWatcherEvent.filterReset(),
-                  ),
+              // onResetValue: () => context.read<DiscountWatcherBloc>().add(
+              //       const DiscountWatcherEvent.filterReset(),
+              //     ),
               isSelected: (index) =>
                   context
                       .read<DiscountWatcherBloc>()
                       .state
-                      .filtersIndex
+                      .filtersCategoriesIndex
                       ?.contains(index) ??
                   false,
               onSelected: (index) => context.read<DiscountWatcherBloc>().add(
-                    DiscountWatcherEvent.filter(
+                    DiscountWatcherEvent.filterCategory(
                       index,
                     ),
                   ),
             ),
+            if (!isDesk) ...[
+              KSizedBox.kHeightSizedBox24,
+              AdvancedFilter(
+                isDesk: isDesk,
+                citiesList: context
+                    .read<DiscountWatcherBloc>()
+                    .state
+                    .discountModelItems
+                    .overallCities,
+                filterCitiesIndex: const [],
+              ),
+            ],
             if (isDesk)
-              KSizedBox.kHeightSizedBox56
+              KSizedBox.kHeightSizedBox40
             else
               KSizedBox.kHeightSizedBox24,
             if (_.discountModelItems.isEmpty &&
-                _.loadingStatus == LoadingStatus.loaded)
-              Config.isDevelopment
-                  ? MockButtonWidget(
-                      key: KWidgetkeys.screen.discounts.buttonMock,
-                      onPressed: () {
-                        GetIt.I
-                            .get<IDiscountRepository>()
-                            .addMockDiscountItems();
-                        context
-                            .read<DiscountWatcherBloc>()
-                            .add(const DiscountWatcherEvent.started());
-                      },
-                    )
-                  : const SizedBox.shrink()
+                _.loadingStatus == LoadingStatus.loaded &&
+                Config.isDevelopment)
+              MockButtonWidget(
+                key: KWidgetkeys.screen.discounts.buttonMock,
+                onPressed: () {
+                  GetIt.I.get<IDiscountRepository>().addMockDiscountItems();
+                  context
+                      .read<DiscountWatcherBloc>()
+                      .add(const DiscountWatcherEvent.started());
+                },
+              )
             else
               ...discountsWidgetList(context: context, isDesk: isDesk),
             if (isDesk)
