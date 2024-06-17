@@ -6,8 +6,11 @@ List<Widget> _storiesWidgetList({
 }) {
   final isLoading = context.read<StoryWatcherBloc>().state.loadingStatus !=
       LoadingStatus.loaded;
-  final storyModelItems = isLoading
-      ? List.generate(
+  final storyModelItems = [
+    if (context.read<StoryWatcherBloc>().state.failure == null) ...[
+      ...context.read<StoryWatcherBloc>().state.loadingStoryModelItems,
+      if (isLoading)
+        ...List.generate(
           KDimensions.shimmerStoriesItems,
           (index) => StoryModel(
             id: index.toString(),
@@ -15,12 +18,10 @@ List<Widget> _storiesWidgetList({
             story: KMockText.cardData,
             userId: index.toString(),
           ),
-        )
-      : context.read<StoryWatcherBloc>().state.loadingStoryModelItems;
-  return List.generate(
-      context.read<StoryWatcherBloc>().state.failure == null
-          ? storyModelItems.length
-          : 0, (index) {
+        ),
+    ],
+  ];
+  return List.generate(storyModelItems.length, (index) {
     return Padding(
       padding: index != 0
           ? EdgeInsets.only(
@@ -28,7 +29,9 @@ List<Widget> _storiesWidgetList({
             )
           : EdgeInsets.zero,
       child: SkeletonizerWidget(
-        isLoading: isLoading,
+        isLoading:
+            storyModelItems.length - index <= KDimensions.shimmerStoriesItems &&
+                isLoading,
         child: StoryCardWidget(
           key: index != storyModelItems.length - 1
               ? KWidgetkeys.screen.story.card
