@@ -51,6 +51,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "contacts": MessageLookupByLibrary.simpleMessage("Contacts"),
         "createSecurePassword":
             MessageLookupByLibrary.simpleMessage("Create a secure password"),
+        "deactivate": MessageLookupByLibrary.simpleMessage("Deactivate"),
         "deleteAccount": MessageLookupByLibrary.simpleMessage("Delete account"),
         "deleteAccountQuestion": MessageLookupByLibrary.simpleMessage(
             "Are you sure you want to delete your account?"),
@@ -162,8 +163,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "moreFunds": MessageLookupByLibrary.simpleMessage("More funds"),
         "moreNews": MessageLookupByLibrary.simpleMessage("More news"),
         "moreStories": MessageLookupByLibrary.simpleMessage("More stories"),
+        "myDiscountsAndCoupons": MessageLookupByLibrary.simpleMessage(
+            "In this section, you can publish a discount, as well as manage your publications. If your company provides personalized offers for veterans, you can advertise here."),
         "myFeedback": MessageLookupByLibrary.simpleMessage("My feedback"),
         "myProfile": MessageLookupByLibrary.simpleMessage("Profile"),
+        "myPublications":
+            MessageLookupByLibrary.simpleMessage("My publications"),
         "myStory": MessageLookupByLibrary.simpleMessage("My story"),
         "myStoryDetails": MessageLookupByLibrary.simpleMessage(
             "In this section you can manage your stories."),
@@ -179,6 +184,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "The user with this password or address does not exist."),
         "notNecessarily":
             MessageLookupByLibrary.simpleMessage("(not necessarily)"),
+        "offerDiscount":
+            MessageLookupByLibrary.simpleMessage("Offer a discount"),
         "oneNumber": MessageLookupByLibrary.simpleMessage(
             "must contain one or more number"),
         "online": MessageLookupByLibrary.simpleMessage("online"),
@@ -238,6 +245,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sendMore": MessageLookupByLibrary.simpleMessage("Send more"),
         "signUp": MessageLookupByLibrary.simpleMessage("Sign up"),
         "signUpWith": MessageLookupByLibrary.simpleMessage("Sign up with"),
+        "statistics": MessageLookupByLibrary.simpleMessage("Statistics"),
         "stories": MessageLookupByLibrary.simpleMessage("Stories"),
         "storyAddSubtitle": MessageLookupByLibrary.simpleMessage(
             "Share your story and we will publish it on our website. All stories are moderated and will be published after review."),
