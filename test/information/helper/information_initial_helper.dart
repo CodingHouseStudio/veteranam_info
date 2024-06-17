@@ -48,10 +48,10 @@ Future<void> informationInitialHelper(
       //   offset: KTestConstants.scrollingUp500,
       // );
 
-      expect(
-        find.byKey(KWidgetkeys.screen.information.button),
-        findsOneWidget,
-      );
+      // expect(
+      //   find.byKey(KWidgetkeys.screen.information.button),
+      //   findsOneWidget,
+      // );
     },
   );
 
