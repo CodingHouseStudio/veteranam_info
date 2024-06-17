@@ -18,7 +18,7 @@ abstract class KDimensions {
 
   static const shimmerQuestionItems = 4;
   static const shimmerInformationItems = 1;
-  static const shimmerFundsItems = 4;
+  static const shimmerFundsItems = 3;
   static const shimmerStoriesItems = 1;
   static const shimmerWorksItems = 3;
   static const shimmerDiscountsItems = 1;
