@@ -29,7 +29,7 @@ List<Widget> _fundsWidgetList({
             : EdgeInsets.zero,
         child: isDesk
             ? DonatesCardsWidget(
-                key: KWidgetkeys.screen.investors.donateCards,
+                key: KWidgetkeys.screen.investors.cards,
                 fundItems: fundItems.sublist(
                   index * 3,
                   (fundItems.length > (index + 1) * KDimensions.donateCardsLine)
@@ -40,7 +40,9 @@ List<Widget> _fundsWidgetList({
             : SkeletonizerWidget(
                 isLoading: isLoading,
                 child: DonateCardWidget(
-                  key: KWidgetkeys.screen.investors.donateCard,
+                  key: index != fundItems.length - 1
+                      ? KWidgetkeys.screen.investors.card
+                      : KWidgetkeys.screen.investors.cardLast,
                   fundModel: fundItems.elementAt(index),
                   isDesk: false,
                   hasSubtitle: true,

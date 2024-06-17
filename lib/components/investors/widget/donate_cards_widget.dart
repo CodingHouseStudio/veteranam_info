@@ -59,7 +59,7 @@ class _DonatesCardsWidgetState extends State<DonatesCardsWidget> {
                                 .loadingStatus !=
                             LoadingStatus.loaded,
                         child: DonateCardWidget(
-                          key: KWidgetkeys.screen.investors.donateCard,
+                          key: KWidgetkeys.screen.investors.card,
                           fundModel: widget.fundItems.elementAt(index),
                           hasSubtitle: hasSubtitles.elementAt(index),
                           titleStyle: hasSubtitles.contains(true) && changeSize

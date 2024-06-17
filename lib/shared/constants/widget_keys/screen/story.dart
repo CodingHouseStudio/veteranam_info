@@ -7,6 +7,7 @@ class _StoryKeys {
   final seccondaryButton = const Key('story_screen_filter');
   final card = const Key('story_screen_card');
   final buttonMock = const Key('story_screen_button_mock');
-  final button = const Key('story_screen_button');
+  final cardLast = const Key('story_screen_card_last');
+  // final button = const Key('story_screen_button');
   // final buttonIcon = const Key('story_screen_button_icon');
 }
