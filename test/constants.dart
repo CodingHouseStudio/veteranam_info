@@ -212,7 +212,7 @@ abstract class KTestText {
   ];
 
   static final fundItems = <FundModel>[
-    for (var i = 0; i < 5; i++)
+    for (var i = 0; i < 40; i++)
       KMockText.fundModel.copyWith(
         id: i.toString(),
       ),
@@ -238,11 +238,11 @@ abstract class KTestText {
   ];
 
   static final informationModelItems = <InformationModel>[
-    for (var i = 0; i < KMockText.tags.length; i++)
+    for (var i = 0; i < 20; i++)
       KMockText.informationModel.copyWith(
         id: i.toString(),
         fetchDate: dateTime,
-        image: i > KMockText.tags.length - 2 ? imageModels : null,
+        image: i > KMockText.tags.length ? imageModels : null,
       ),
   ];
 

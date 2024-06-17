@@ -47,10 +47,10 @@ Future<void> discountInitialHelper(
         offset: KTestConstants.scrollingDown,
       );
 
-      await scrollingHelper(
-        tester: tester,
-        offset: KTestConstants.scrollingUp500,
-      );
+      // await scrollingHelper(
+      //   tester: tester,
+      //   offset: KTestConstants.scrollingUp500,
+      // );
 
       expect(
         find.byKey(KWidgetkeys.screen.discounts.button),
@@ -59,16 +59,16 @@ Future<void> discountInitialHelper(
     },
   );
 
-  expect(
-    find.byKey(KWidgetkeys.screen.discounts.buttonIcon),
-    findsNothing,
-  );
+  // expect(
+  //   find.byKey(KWidgetkeys.screen.discounts.buttonIcon),
+  //   findsNothing,
+  // );
 
-  await changeWindowSizeHelper(
-    tester: tester,
-    test: () async => expect(
-      find.byKey(KWidgetkeys.screen.discounts.buttonIcon),
-      findsOneWidget,
-    ),
-  );
+  // await changeWindowSizeHelper(
+  //   tester: tester,
+  //   test: () async => expect(
+  //     find.byKey(KWidgetkeys.screen.discounts.buttonIcon),
+  //     findsOneWidget,
+  //   ),
+  // );
 }

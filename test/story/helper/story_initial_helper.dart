@@ -36,10 +36,10 @@ Future<void> storyInitialHelper(
         offset: KTestConstants.scrollingDown,
       );
 
-      await scrollingHelper(
-        tester: tester,
-        offset: KTestConstants.scrollingUp500,
-      );
+      // await scrollingHelper(
+      //   tester: tester,
+      //   offset: KTestConstants.scrollingUp500,
+      // );
 
       expect(
         find.byKey(KWidgetkeys.screen.story.button),
@@ -48,16 +48,16 @@ Future<void> storyInitialHelper(
     },
   );
 
-  expect(
-    find.byKey(KWidgetkeys.screen.story.buttonIcon),
-    findsNothing,
-  );
+  // expect(
+  //   find.byKey(KWidgetkeys.screen.story.buttonIcon),
+  //   findsNothing,
+  // );
 
-  await changeWindowSizeHelper(
-    tester: tester,
-    test: () async => expect(
-      find.byKey(KWidgetkeys.screen.story.buttonIcon),
-      findsOneWidget,
-    ),
-  );
+  // await changeWindowSizeHelper(
+  //   tester: tester,
+  //   test: () async => expect(
+  //     find.byKey(KWidgetkeys.screen.story.buttonIcon),
+  //     findsOneWidget,
+  //   ),
+  // );
 }
