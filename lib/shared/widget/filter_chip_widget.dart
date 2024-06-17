@@ -26,21 +26,11 @@ class FiltersChipWidget extends StatelessWidget {
     return Row(
       key: KWidgetkeys.widget.filterChip.widget,
       children: [
-        TextButton.icon(
-          icon: KIcon.check,
-          key: KWidgetkeys.widget.filterPopupMenu.resetAll,
-          onPressed: onResetValue,
-          style: KButtonStyles.filterButtonStyleBorder,
-          label: Text(
-            context.l10n.all,
-            style: isDesk ? AppTextStyle.text20 : AppTextStyle.text16,
-          ),
+        FilterPopupMenuWidget(
+          key: KWidgetkeys.widget.filterChip.popup,
+          onResetValue: onResetValue,
+          isDesk: isDesk,
         ),
-        // FilterPopupMenuWidget(
-        //   key: KWidgetkeys.widget.filterChip.popup,
-        //   onResetValue: onResetValue,
-        //   isDesk: isDesk,
-        // ),
         KSizedBox.kWidthSizedBox24,
         Expanded(
           child: SingleChildScrollView(
@@ -56,7 +46,7 @@ class FiltersChipWidget extends StatelessWidget {
                   child: ChipWidget(
                     key: KWidgetkeys.widget.filterChip.chips,
                     filter: filtersItems.elementAt(index),
-                    onSelected: ({required isSelected}) {
+                    onSelected: (isSelected) {
                       onSelected(
                         index,
                       );
@@ -65,6 +55,7 @@ class FiltersChipWidget extends StatelessWidget {
                       index,
                     ),
                     isDesk: isDesk,
+                    itemCount: index,
                   ),
                 );
               }),
