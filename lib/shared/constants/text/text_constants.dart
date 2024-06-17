@@ -138,7 +138,7 @@ abstract class KMockText {
         ' Одеська, Херсонська, Запорізька, Харківська, Дніпропетровська, Кіровоградська, Донецька та Луганська області).'
         ' *Знижка надається персонально лише військовому (не надається членам сімей). ',
     territory: 'Всі відділення лабораторії.',
-    location: 'Вся Україна',
+    location: ['Вся Україна'],
     expiration: 'Діє постійно',
     exclusions:
         '- при замовленні досліджень та оплаті їх онлайн на сайті Ескулаб;'
@@ -150,6 +150,8 @@ abstract class KMockText {
     directLink:
         'https://esculab.com/20-vidsotkiv-na-analizy-dlya-viyskovyh-ta-lyudey-yaki-vnutrishno-peremishcheni',
     dateVerified: DateTime(2024, 6, 3),
+    date: ExtendedDateTime.current,
+    userName: 'Anonymous',
   );
   static final informationModel = InformationModel(
     id: '',

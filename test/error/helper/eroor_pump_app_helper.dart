@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
@@ -12,20 +12,30 @@ Future<void> errorPumpAppHelper({
 }) async {
   if (mockGoRouter == null) {
     await tester.pumpWidget(
-      const MaterialApp(
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
-        supportedLocales: AppLocalizations.supportedLocales,
-        home: ErrorScreen(),
+      MaterialApp(
+        localizationsDelegates: const [
+          locale,
+          GlobalCupertinoLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+        ],
+        supportedLocales: locale.supportedLocales,
+        home: const ErrorScreen(),
       ),
     );
   } else {
     await tester.pumpWidget(
       MockGoRouterProvider(
         goRouter: mockGoRouter,
-        child: const MaterialApp(
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
-          supportedLocales: AppLocalizations.supportedLocales,
-          home: ErrorScreen(),
+        child: MaterialApp(
+          localizationsDelegates: const [
+            locale,
+            GlobalCupertinoLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+          ],
+          supportedLocales: locale.supportedLocales,
+          home: const ErrorScreen(),
         ),
       ),
     );

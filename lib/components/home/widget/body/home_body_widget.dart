@@ -25,6 +25,7 @@ class HomeBodyWidget extends StatelessWidget {
       ),
       listenWhen: (previous, current) => current.failure != null,
       builder: (context, _) => ScaffoldWidget(
+        hasFooter: true,
         mainChildWidgetsFunction: ({required isDesk}) => [
           ..._boxWidgetList(
             context: context,
@@ -64,7 +65,7 @@ class HomeBodyWidget extends StatelessWidget {
             Text(
               context.l10n.aboutProject,
               key: KWidgetkeys.screen.home.aboutProjecSubtitle,
-              style: AppTextStyle.materialThemeDisplayMedium,
+              style: AppTextStyle.materialThemeHeadlineSmall,
             ),
           ],
           if (isDesk)
