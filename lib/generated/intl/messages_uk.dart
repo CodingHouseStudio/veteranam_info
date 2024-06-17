@@ -53,6 +53,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "contacts": MessageLookupByLibrary.simpleMessage("Контакти"),
         "createSecurePassword":
             MessageLookupByLibrary.simpleMessage("Придумайте безпечний пароль"),
+        "deactivate": MessageLookupByLibrary.simpleMessage("Деактивувати"),
         "deleteAccount":
             MessageLookupByLibrary.simpleMessage("Видалити акаунт"),
         "deleteAccountQuestion": MessageLookupByLibrary.simpleMessage(
@@ -166,8 +167,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "moreFunds": MessageLookupByLibrary.simpleMessage("Більше фондів"),
         "moreNews": MessageLookupByLibrary.simpleMessage("Ще новини"),
         "moreStories": MessageLookupByLibrary.simpleMessage("Ще історії"),
+        "myDiscountsAndCoupons": MessageLookupByLibrary.simpleMessage(
+            "У цьому розділі ти можеш опублікувати знижку, а також керувати своїми публікаціями. Якщо ваша компанія надає персональні пропозиції для ветеранів, ти можеш розмістити оголошення тут."),
         "myFeedback": MessageLookupByLibrary.simpleMessage("Мої відгуки"),
         "myProfile": MessageLookupByLibrary.simpleMessage("Профіль"),
+        "myPublications":
+            MessageLookupByLibrary.simpleMessage("Мої публікації"),
         "myStory": MessageLookupByLibrary.simpleMessage("Мої історії"),
         "myStoryDetails": MessageLookupByLibrary.simpleMessage(
             "У цьому розділі ти можеш керувати своїми історіями."),
@@ -182,6 +187,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Користувач з таким паролем або електронною поштою не існує"),
         "notNecessarily":
             MessageLookupByLibrary.simpleMessage("(необовʼязково)"),
+        "offerDiscount":
+            MessageLookupByLibrary.simpleMessage("Запропонувати знижку"),
         "oneNumber": MessageLookupByLibrary.simpleMessage(
             "повинен містити одну чи більше цифр"),
         "online": MessageLookupByLibrary.simpleMessage("онлайн"),
@@ -247,6 +254,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "signUp": MessageLookupByLibrary.simpleMessage("Реєстрація"),
         "signUpWith":
             MessageLookupByLibrary.simpleMessage("Зареєструйтесь через"),
+        "statistics": MessageLookupByLibrary.simpleMessage("Статистика"),
         "stories": MessageLookupByLibrary.simpleMessage("Історії"),
         "storyAddSubtitle": MessageLookupByLibrary.simpleMessage(
             "Поділіться своєю історією і ми опублікуємо її на нашому веб сайті. Всі історії проходять модерацію і будуть опубліковані після перевірки."),

@@ -80,7 +80,7 @@ void main() {
         await investorsMockButtonHelper(tester);
       });
     });
-    group(KGroupText.getList, () {
+    group('${KGroupText.getList} ', () {
       setUp(() {
         when(mockInvestorsRepository.getFunds()).thenAnswer(
           (invocation) async => Right(KTestText.fundItems),
@@ -101,7 +101,7 @@ void main() {
           tester: tester,
         );
 
-        await listLoadHelper(tester);
+        await investorsListLoadHelper(tester);
       });
 
       group('${KGroupText.goRouter} ', () {

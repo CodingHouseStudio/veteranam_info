@@ -185,6 +185,11 @@
   "companyIsHidden": "The company is hidden",
   "online": "online",
   "moreFunds": "More funds",
+  "offerDiscount": "Offer a discount",
+  "myDiscountsAndCoupons": "In this section, you can publish a discount, as well as manage your publications. If your company provides personalized offers for veterans, you can advertise here.",
+  "myPublications": "My publications",
+  "deactivate": "Deactivate",
+  "statistics": "Statistics",
   "all": "All",
   "error": "We're sorry, there was an unforeseen error.",
   "@error": {
