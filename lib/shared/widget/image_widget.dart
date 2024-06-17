@@ -17,6 +17,16 @@ class ImageWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Image.network(
       imageUrl,
+      loadingBuilder: (context, child, loadingProgress) {
+        if (loadingProgress == null) {
+          return child;
+        } else {
+          return SkeletonizerWidget(
+            isLoading: true,
+            child: child,
+          );
+        }
+      },
       // placeholder: (context, url) =>
       //     const CircularProgressIndicator.adaptive(), //Image.asset(''),
       // errorWidget: (context, url, error) {
