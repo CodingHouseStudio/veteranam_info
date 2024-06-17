@@ -45,6 +45,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "category": MessageLookupByLibrary.simpleMessage("Категорія"),
         "city": MessageLookupByLibrary.simpleMessage("Місто"),
         "clear": MessageLookupByLibrary.simpleMessage("Очистити"),
+        "companyIsHidden":
+            MessageLookupByLibrary.simpleMessage("Компанію приховано"),
         "consultationOnline":
             MessageLookupByLibrary.simpleMessage("Консультація онлайн"),
         "contact": MessageLookupByLibrary.simpleMessage("Зв\'язатись"),
@@ -116,7 +118,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Привіт, Ветеран!"),
         "hide": MessageLookupByLibrary.simpleMessage("Сховати"),
         "homeSubtitle": MessageLookupByLibrary.simpleMessage(
-            "Тут ти знайдеш корисну інформацію, пільги, знижки а також можеш поділитися своєю історією! "),
+            "Тут ти знайдеш корисну інформацію, пільги, знижки, а також можеш поділитися своєю історією!"),
         "howToContactYou": MessageLookupByLibrary.simpleMessage(
             "Напишіть як з Вами звʼязатися"),
         "iAmBusinessOwnerRepresentative": MessageLookupByLibrary.simpleMessage(
@@ -161,6 +163,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "mainScreen": MessageLookupByLibrary.simpleMessage("Головна"),
         "message": MessageLookupByLibrary.simpleMessage("Повідомлення"),
         "moreDiscounts": MessageLookupByLibrary.simpleMessage("Ще знижки"),
+        "moreFunds": MessageLookupByLibrary.simpleMessage("Більше фондів"),
         "moreNews": MessageLookupByLibrary.simpleMessage("Ще новини"),
         "moreStories": MessageLookupByLibrary.simpleMessage("Ще історії"),
         "myFeedback": MessageLookupByLibrary.simpleMessage("Мої відгуки"),
@@ -181,6 +184,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("(необовʼязково)"),
         "oneNumber": MessageLookupByLibrary.simpleMessage(
             "повинен містити одну чи більше цифр"),
+        "online": MessageLookupByLibrary.simpleMessage("онлайн"),
         "or": MessageLookupByLibrary.simpleMessage("або"),
         "orDonateHere":
             MessageLookupByLibrary.simpleMessage("або донатьте тут"),
@@ -258,7 +262,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "thisServiceForVeterans":
             MessageLookupByLibrary.simpleMessage("ЦЕЙ СЕРВІС ДЛЯ ВЕТЕРАНІВ"),
         "thisServiceForVeteransSubtitle": MessageLookupByLibrary.simpleMessage(
-            "Тут ти знайдеш корисну інформацію, пільги, знижки а також можеш поділитись своєю іторією"),
+            "Тут ти знайдеш корисну інформацію, пільги, знижки а також можеш поділитись своєю історією"),
         "toDiscount": MessageLookupByLibrary.simpleMessage("До знижок"),
         "toGetItYouNeed":
             MessageLookupByLibrary.simpleMessage("Щоб отримати потрібно:"),

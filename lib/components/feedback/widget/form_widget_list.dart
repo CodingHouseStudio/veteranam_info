@@ -38,7 +38,7 @@ List<Widget> _formWidgegList({
                       Text(
                         context.l10n.ourSocialNetworks,
                         key: KWidgetkeys.screen.feedback.socialText,
-                        style: AppTextStyle.materialThemeTitleMediumHint,
+                        style: AppTextStyle.materialThemeTitleMedium,
                       ),
                       KSizedBox.kHeightSizedBox8,
                       Wrap(
@@ -102,7 +102,7 @@ List<Widget> _formWidgegList({
             Text(
               context.l10n.ourSocialNetworks,
               key: KWidgetkeys.screen.feedback.socialText,
-              style: AppTextStyle.materialThemeTitleMediumHint,
+              style: AppTextStyle.materialThemeTitleMedium,
             ),
             KSizedBox.kHeightSizedBox8,
             Wrap(
@@ -121,15 +121,21 @@ List<Widget> _formWidgegList({
 Widget emailButton({
   required bool isDesk,
 }) =>
-    TextButton(
+    Markdown(
       key: KWidgetkeys.screen.feedback.emailButton,
-      child: Text(
-        KAppText.email,
-        style: isDesk
-            ? AppTextStyle.materialThemeBodyLarge
-            : AppTextStyle.materialThemeBodyMedium,
+      data: KAppText.email,
+      styleSheet: MarkdownStyleSheet(
+        a: isDesk
+            ? AppTextStyle.materialThemeBodyLarge.copyWith(
+                color: AppColors.materialThemeKeyColorsSecondary,
+              )
+            : AppTextStyle.materialThemeBodyMedium.copyWith(
+                color: AppColors.materialThemeKeyColorsSecondary,
+              ),
       ),
-      onPressed: () async {
+      padding: EdgeInsets.zero,
+      shrinkWrap: true,
+      onTapLink: (text, href, title) async {
         final emailUri = Uri(
           scheme: 'mailto',
           path: KAppText.email,

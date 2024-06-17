@@ -16,9 +16,12 @@ class InvestorsWatcherBloc
           const InvestorsWatcherState(
             fundItems: [],
             loadingStatus: LoadingStatus.initial,
+            loadingFundItems: [],
+            itemsLoaded: 0,
           ),
         ) {
     on<_Started>(_onStarted);
+    on<_LoadNextItems>(_onLoading);
   }
   final IInvestorsRepository _investorsRepository;
   Future<void> _onStarted(
@@ -39,8 +42,45 @@ class InvestorsWatcherBloc
         InvestorsWatcherState(
           fundItems: r,
           loadingStatus: LoadingStatus.loaded,
+          loadingFundItems: _loading(
+            itemsLoaded: KDimensions.investorsLoadItems,
+            fundModelItems: r,
+          ),
+          itemsLoaded: KDimensions.investorsLoadItems,
         ),
       ),
     );
+  }
+
+  Future<void> _onLoading(
+    _LoadNextItems event,
+    Emitter<InvestorsWatcherState> emit,
+  ) async {
+    if (state.itemsLoaded + KDimensions.investorsLoadItems >
+        state.fundItems.length) {
+      return;
+    }
+    final filterItems = _loading(
+      itemsLoaded: state.itemsLoaded + KDimensions.investorsLoadItems,
+      fundModelItems: state.fundItems,
+    );
+    emit(
+      state.copyWith(
+        loadingFundItems: filterItems,
+        itemsLoaded: filterItems.length > state.itemsLoaded
+            ? state.itemsLoaded + KDimensions.investorsLoadItems
+            : filterItems.length,
+      ),
+    );
+  }
+
+  List<FundModel> _loading({
+    required int itemsLoaded,
+    required List<FundModel> fundModelItems,
+  }) {
+    if (fundModelItems.isEmpty) return [];
+    final loadedItemsCount = itemsLoaded.clamp(0, fundModelItems.length);
+
+    return fundModelItems.take(loadedItemsCount).toList();
   }
 }

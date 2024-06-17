@@ -182,6 +182,9 @@
   "donateHere": "Donate here",
   "provenFunds": "Proven funds",
   "tryItAgain": "Try it again",
+  "companyIsHidden": "The company is hidden",
+  "online": "online",
+  "moreFunds": "More funds",
   "all": "All",
   "error": "We're sorry, there was an unforeseen error.",
   "@error": {

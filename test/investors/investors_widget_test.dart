@@ -95,6 +95,14 @@ void main() {
 
         await investorsInitialHelper(tester);
       });
+      testWidgets('Loading list', (tester) async {
+        await investorsPumpAppHelper(
+          mockInvestorsRepository: mockInvestorsRepository,
+          tester: tester,
+        );
+
+        await listLoadHelper(tester);
+      });
 
       group('${KGroupText.goRouter} ', () {
         late MockGoRouter mockGoRouter;
