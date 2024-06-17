@@ -24,8 +24,8 @@ List<Widget> _discountsboxWidgetList({
               top: KPadding.kPaddingSize24,
             )
           : EdgeInsets.zero,
-      child: Skeletonizer(
-        enabled: isLoading,
+      child: SkeletonizerWidget(
+        isLoading: isLoading,
         child: isDesk
             ? Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
