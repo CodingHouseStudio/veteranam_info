@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kozak/shared/shared.dart';
 
-class FiltersChipWidget extends StatefulWidget {
+class FiltersChipWidget extends StatelessWidget {
   const FiltersChipWidget({
     required this.filtersItems,
     required this.isDesk,
@@ -22,32 +22,18 @@ class FiltersChipWidget extends StatefulWidget {
   ) isSelected;
 
   @override
-  FiltersChipWidgetState createState() => FiltersChipWidgetState();
-}
-
-class FiltersChipWidgetState extends State<FiltersChipWidget> {
-  int? selectedFilterIndex;
-
-  @override
   Widget build(BuildContext context) {
     return Row(
       key: KWidgetkeys.widget.filterChip.widget,
       children: [
         TextButton.icon(
-          icon: selectedFilterIndex == null ? KIcon.check : null,
+          icon: KIcon.check,
           key: KWidgetkeys.widget.filterPopupMenu.resetAll,
-          onPressed: () {
-            selectedFilterIndex = null;
-            widget.onResetValue();
-          },
-          style: selectedFilterIndex == null
-              ? KButtonStyles.filterButtonStyleBorder
-              : KButtonStyles.filterButtonStyleBorderWhite,
+          onPressed: onResetValue,
+          style: KButtonStyles.filterButtonStyleBorder,
           label: Text(
             context.l10n.all,
-            style: widget.isDesk
-                ? AppTextStyle.filterText20
-                : AppTextStyle.filterText16,
+            style: isDesk ? AppTextStyle.text20 : AppTextStyle.text16,
           ),
         ),
         // FilterPopupMenuWidget(
@@ -60,26 +46,25 @@ class FiltersChipWidgetState extends State<FiltersChipWidget> {
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(
-              children: List.generate(widget.filtersItems.length, (index) {
+              children: List.generate(filtersItems.length, (index) {
                 return Padding(
                   padding: EdgeInsets.only(
-                    right: widget.isDesk
+                    right: isDesk
                         ? KPadding.kPaddingSize16
                         : KPadding.kPaddingSize8,
                   ),
                   child: ChipWidget(
                     key: KWidgetkeys.widget.filterChip.chips,
-                    filter: widget.filtersItems.elementAt(index),
+                    filter: filtersItems.elementAt(index),
                     onSelected: ({required isSelected}) {
-                      selectedFilterIndex = index;
-                      widget.onSelected(
+                      onSelected(
                         index,
                       );
                     },
-                    isSelected: widget.isSelected(
+                    isSelected: isSelected(
                       index,
                     ),
-                    isDesk: widget.isDesk,
+                    isDesk: isDesk,
                   ),
                 );
               }),
