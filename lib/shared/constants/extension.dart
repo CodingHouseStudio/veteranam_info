@@ -137,3 +137,16 @@ extension WorkFailureValue on WorkFailure {
     }
   }
 }
+
+extension MyDiscountFailureValue on MyDiscountFailure {
+  String value(BuildContext context) {
+    switch (this) {
+      case MyDiscountFailure.error:
+        return context.l10n.error;
+      case MyDiscountFailure.get:
+        return context.l10n.getFailure;
+      case MyDiscountFailure.network:
+        return context.l10n.networkFailure;
+    }
+  }
+}

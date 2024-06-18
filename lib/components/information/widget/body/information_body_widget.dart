@@ -20,7 +20,7 @@ class InformationBodyWidget extends StatelessWidget {
             .add(const InformationWatcherEvent.started()),
       ),
       listenWhen: (previous, current) => current.failure != null,
-      builder: (context, _) => ScaffoldWidget(
+      builder: (context, _) => ScaffoldAutoLoadingWidget(
         titleChildWidgetsFunction: ({required isDesk}) => [
           if (isDesk)
             KSizedBox.kHeightSizedBox40
@@ -62,8 +62,9 @@ class InformationBodyWidget extends StatelessWidget {
           else
             KSizedBox.kHeightSizedBox24,
         ],
-        mainDeskPadding:
-            const EdgeInsets.symmetric(horizontal: KPadding.kPaddingSize48),
+        mainDeskPadding: const EdgeInsets.symmetric(
+          horizontal: KPadding.kPaddingSize48,
+        ),
         mainChildWidgetsFunction: ({required isDesk}) => [
           if (_.informationModelItems.isEmpty &&
               _.loadingStatus == LoadingStatus.loaded &&
@@ -83,19 +84,22 @@ class InformationBodyWidget extends StatelessWidget {
             KSizedBox.kHeightSizedBox56
           else
             KSizedBox.kHeightSizedBox24,
-          LoadingButton(
-            widgetKey: KWidgetkeys.screen.information.button,
-            isDesk: isDesk,
-            onPressed: () => context.read<InformationWatcherBloc>().add(
-                  const InformationWatcherEvent.loadNextItems(),
-                ),
-            text: context.l10n.moreNews,
-          ),
+          // LoadingButton(
+          //   widgetKey: KWidgetkeys.screen.information.button,
+          //   isDesk: isDesk,
+          //   onPressed: () => context.read<InformationWatcherBloc>().add(
+          //         const InformationWatcherEvent.loadNextItems(),
+          //       ),
+          //   text: context.l10n.moreNews,
+          // ),
           if (isDesk)
             KSizedBox.kHeightSizedBox56
           else
             KSizedBox.kHeightSizedBox24,
         ],
+        scrollFunction: () => context.read<InformationWatcherBloc>().add(
+              const InformationWatcherEvent.loadNextItems(),
+            ),
       ),
     );
   }

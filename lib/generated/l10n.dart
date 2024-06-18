@@ -1880,21 +1880,11 @@ class AppLocalizations {
     );
   }
 
-  /// `Special offers`
-  String get specialOffers {
+  /// `online`
+  String get online {
     return Intl.message(
-      'Special offers',
-      name: 'specialOffers',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `for veterans and their families`
-  String get forVeteransAndTheirFamilies {
-    return Intl.message(
-      'for veterans and their families',
-      name: 'forVeteransAndTheirFamilies',
+      'online',
+      name: 'online',
       desc: '',
       args: [],
     );
@@ -1910,11 +1900,71 @@ class AppLocalizations {
     );
   }
 
-  /// `online`
-  String get online {
+  /// `Offer a discount`
+  String get offerDiscount {
     return Intl.message(
-      'online',
-      name: 'online',
+      'Offer a discount',
+      name: 'offerDiscount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `In this section, you can publish a discount, as well as manage your publications. If your company provides personalized offers for veterans, you can advertise here.`
+  String get myDiscountsAndCoupons {
+    return Intl.message(
+      'In this section, you can publish a discount, as well as manage your publications. If your company provides personalized offers for veterans, you can advertise here.',
+      name: 'myDiscountsAndCoupons',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `My publications`
+  String get myPublications {
+    return Intl.message(
+      'My publications',
+      name: 'myPublications',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Deactivate`
+  String get deactivate {
+    return Intl.message(
+      'Deactivate',
+      name: 'deactivate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Statistics`
+  String get statistics {
+    return Intl.message(
+      'Statistics',
+      name: 'statistics',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Special offers`
+  String get specialOffers {
+    return Intl.message(
+      'Special offers',
+      name: 'specialOffers',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `for veterans and their families`
+  String get forVeteransAndTheirFamilies {
+    return Intl.message(
+      'for veterans and their families',
+      name: 'forVeteransAndTheirFamilies',
       desc: '',
       args: [],
     );

@@ -23,6 +23,11 @@ Future<void> discountInitialHelper(
       await filterChipHelper(tester);
 
       expect(
+        find.byKey(KWidgetkeys.screen.discounts.addDiscountButton),
+        findsOneWidget,
+      );
+
+      expect(
         find.byKey(KWidgetkeys.screen.discounts.card),
         findsWidgets,
       );
@@ -47,10 +52,10 @@ Future<void> discountInitialHelper(
       //   offset: KTestConstants.scrollingUp500,
       // );
 
-      expect(
-        find.byKey(KWidgetkeys.screen.discounts.button),
-        findsOneWidget,
-      );
+      // expect(
+      //   find.byKey(KWidgetkeys.screen.discounts.button),
+      //   findsOneWidget,
+      // );
     },
   );
 

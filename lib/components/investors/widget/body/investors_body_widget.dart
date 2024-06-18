@@ -21,7 +21,7 @@ class InvestorsBodyWidget extends StatelessWidget {
             .add(const InvestorsWatcherEvent.started()),
       ),
       listenWhen: (previous, current) => current.failure != null,
-      builder: (context, _) => ScaffoldWidget(
+      builder: (context, _) => ScaffoldAutoLoadingWidget(
         mainChildWidgetsFunction: ({required isDesk}) => [
           KSizedBox.kHeightSizedBox24,
           ...TitleWidget.pointTitleWidgetList(
@@ -124,19 +124,22 @@ class InvestorsBodyWidget extends StatelessWidget {
             KSizedBox.kHeightSizedBox40
           else
             KSizedBox.kHeightSizedBox24,
-          LoadingButton(
-            widgetKey: KWidgetkeys.screen.investors.button,
-            isDesk: isDesk,
-            onPressed: () => context
-                .read<InvestorsWatcherBloc>()
-                .add(const InvestorsWatcherEvent.loadeNextItems()),
-            text: context.l10n.moreFunds,
-          ),
+          // LoadingButton(
+          //   widgetKey: KWidgetkeys.screen.investors.button,
+          //   isDesk: isDesk,
+          //   onPressed: () => context
+          //       .read<InvestorsWatcherBloc>()
+          //       .add(const InvestorsWatcherEvent.loadeNextItems()),
+          //   text: context.l10n.moreFunds,
+          // ),
           if (isDesk)
             KSizedBox.kHeightSizedBox50
           else
             KSizedBox.kHeightSizedBox24,
         ],
+        scrollFunction: () => context
+            .read<InvestorsWatcherBloc>()
+            .add(const InvestorsWatcherEvent.loadeNextItems()),
       ),
     );
   }

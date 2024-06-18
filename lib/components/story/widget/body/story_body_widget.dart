@@ -19,7 +19,7 @@ class StoryBodyWidget extends StatelessWidget {
       ),
       listenWhen: (previous, current) => current.failure != null,
       builder: (context, _) {
-        return ScaffoldWidget(
+        return ScaffoldAutoLoadingWidget(
           titleChildWidgetsFunction: ({required isDesk}) => [
             if (isDesk)
               KSizedBox.kHeightSizedBox40
@@ -61,19 +61,22 @@ class StoryBodyWidget extends StatelessWidget {
               KSizedBox.kHeightSizedBox56
             else
               KSizedBox.kHeightSizedBox24,
-            LoadingButton(
-              widgetKey: KWidgetkeys.screen.story.button,
-              isDesk: isDesk,
-              onPressed: () => context.read<StoryWatcherBloc>().add(
-                    const StoryWatcherEvent.loadNextItems(),
-                  ),
-              text: context.l10n.moreStories,
-            ),
+            // LoadingButton(
+            //   widgetKey: KWidgetkeys.screen.story.button,
+            //   isDesk: isDesk,
+            //   onPressed: () => context.read<StoryWatcherBloc>().add(
+            //         const StoryWatcherEvent.loadNextItems(),
+            //       ),
+            //   text: context.l10n.moreStories,
+            // ),
             if (isDesk)
               KSizedBox.kHeightSizedBox56
             else
               KSizedBox.kHeightSizedBox24,
           ],
+          scrollFunction: () => context.read<StoryWatcherBloc>().add(
+                const StoryWatcherEvent.loadNextItems(),
+              ),
         );
       },
     );

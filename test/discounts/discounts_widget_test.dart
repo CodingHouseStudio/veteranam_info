@@ -56,7 +56,7 @@ void main() {
         await discountMockButtonHelper(tester);
       });
     });
-    group(KGroupText.getList, () {
+    group('${KGroupText.getList} ', () {
       setUp(() {
         when(mockDiscountRepository.getDiscountItems()).thenAnswer(
           (invocation) => Stream.value(KTestText.discountModelItems),
