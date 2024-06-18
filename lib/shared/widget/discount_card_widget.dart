@@ -67,7 +67,6 @@ class _DiscountsCardWidgetDesk extends StatelessWidget {
             ),
             child: Row(
               children: [
-
                 const CircleAvatar(
                   child: KIcon.user,
                 ),
@@ -98,7 +97,7 @@ class _DiscountsCardWidgetDesk extends StatelessWidget {
                   isSelected: false,
                   onSelected: ({required isSelected}) => (),
                   isDesk: isDesk,
-
+                ),
                 Expanded(
                   child: Text(
                     discountItem.location?.first ?? context.l10n.online,
@@ -106,7 +105,6 @@ class _DiscountsCardWidgetDesk extends StatelessWidget {
                     style: AppTextStyle.hint24,
                     textAlign: TextAlign.end,
                   ),
-
                 ),
               ],
             ),
