@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dartz/dartz.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kozak/shared/shared.dart';
@@ -28,6 +30,36 @@ class DiscountRepository implements IDiscountRepository {
           dateVerified: ExtendedDateTime.current,
         ),
       );
+    }
+  }
+
+  @override
+  Future<Either<SomeFailure, List<DiscountModel>>> getDiscountsById(
+    String userId,
+  ) async {
+    try {
+      final userDiscountsItems =
+          await _firestoreService.getDiscountsByUserId(userId);
+
+      return Right(userDiscountsItems);
+    } on FirebaseException catch (e) {
+      return Left(GetFailur.fromCode(e).status);
+    } catch (e) {
+      return const Left(SomeFailure.serverError());
+    }
+  }
+
+  @override
+  Future<Either<SomeFailure, bool>> deleteDiscountsById(
+    String discountId,
+  ) async {
+    try {
+      await _firestoreService.deleteDiscountById(discountId);
+      return const Right(true);
+    } on FirebaseException catch (e) {
+      return Left(GetFailur.fromCode(e).status);
+    } catch (e) {
+      return const Left(SomeFailure.serverError());
     }
   }
 }

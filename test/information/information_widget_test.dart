@@ -59,7 +59,7 @@ void main() {
         await informationMockButtonHelper(tester);
       });
     });
-    group(KGroupText.getList, () {
+    group('${KGroupText.getList} ', () {
       setUp(() {
         when(mockInformationRepository.getInformationItems()).thenAnswer(
           (invocation) => Stream.value(KTestText.informationModelItems),

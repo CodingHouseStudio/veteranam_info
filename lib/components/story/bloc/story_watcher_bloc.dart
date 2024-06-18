@@ -55,19 +55,13 @@ class StoryWatcherBloc extends Bloc<StoryWatcherEvent, StoryWatcherState> {
     _Updated event,
     Emitter<StoryWatcherState> emit,
   ) {
-    final itemsLoaded = event.storyItemsModel.isNotEmpty
-        ? state.itemsLoaded != 0
-            ? event.storyItemsModel.length > state.itemsLoaded
-                ? state.itemsLoaded
-                : event.storyItemsModel.length
-            : KDimensions.loadItems
-        : 0;
     emit(
       StoryWatcherState(
         storyModelItems: event.storyItemsModel,
         loadingStatus: LoadingStatus.loaded,
-        loadingStoryModelItems: event.storyItemsModel.sublist(0, itemsLoaded),
-        itemsLoaded: itemsLoaded,
+        loadingStoryModelItems:
+            event.storyItemsModel.loading(itemsLoaded: state.itemsLoaded),
+        itemsLoaded: state.itemsLoaded.getLoaded(list: event.storyItemsModel),
         failure: null,
       ),
     );
@@ -77,14 +71,18 @@ class StoryWatcherBloc extends Bloc<StoryWatcherEvent, StoryWatcherState> {
     _LoadNextItems event,
     Emitter<StoryWatcherState> emit,
   ) {
-    if (state.itemsLoaded + KDimensions.loadItems >
-        state.storyModelItems.length) return;
+    if (state.itemsLoaded.checkLoadingPosible(state.storyModelItems)) return;
+    emit(state.copyWith(loadingStatus: LoadingStatus.loading));
+    final filterItems = state.storyModelItems.loading(
+      itemsLoaded: state.itemsLoaded + KDimensions.loadItems,
+    );
 
     emit(
       state.copyWith(
-        loadingStoryModelItems: state.storyModelItems
-            .sublist(0, state.itemsLoaded + KDimensions.loadItems),
-        itemsLoaded: state.itemsLoaded + KDimensions.loadItems,
+        loadingStoryModelItems: filterItems,
+        itemsLoaded: (state.itemsLoaded + KDimensions.loadItems)
+            .getLoaded(list: filterItems),
+        loadingStatus: LoadingStatus.loaded,
       ),
     );
   }
