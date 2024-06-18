@@ -232,4 +232,36 @@ abstract class KButtonStyles {
       ),
     ),
   );
+
+  static const filterButtonStyleBorder = ButtonStyle(
+    minimumSize: WidgetStatePropertyAll(
+      Size(KMinMaxSize.minWidth100, KMinMaxSize.minHeight50),
+    ),
+    padding: WidgetStatePropertyAll(EdgeInsets.all(KPadding.kPaddingSize8)),
+    side: WidgetStatePropertyAll(
+      BorderSide(),
+    ),
+    shape: WidgetStatePropertyAll(
+      RoundedRectangleBorder(
+        borderRadius: KBorderRadius.kBorderRadius32,
+      ),
+    ),
+    backgroundColor: WidgetStatePropertyAll(AppColors.materialThemeSourceSeed),
+  );
+
+  static const filterButtonStyleBorderWhite = ButtonStyle(
+    minimumSize: WidgetStatePropertyAll(
+      Size(KMinMaxSize.minWidth100, KMinMaxSize.minHeight50),
+    ),
+    padding: WidgetStatePropertyAll(EdgeInsets.all(KPadding.kPaddingSize8)),
+    side: WidgetStatePropertyAll(
+      BorderSide(),
+    ),
+    shape: WidgetStatePropertyAll(
+      RoundedRectangleBorder(
+        borderRadius: KBorderRadius.kBorderRadius32,
+      ),
+    ),
+    backgroundColor: WidgetStatePropertyAll(AppColors.materialThemeWhite),
+  );
 }
