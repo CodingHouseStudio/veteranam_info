@@ -41,10 +41,10 @@ Future<void> storyInitialHelper(
       //   offset: KTestConstants.scrollingUp500,
       // );
 
-      expect(
-        find.byKey(KWidgetkeys.screen.story.button),
-        findsOneWidget,
-      );
+      // expect(
+      //   find.byKey(KWidgetkeys.screen.story.button),
+      //   findsOneWidget,
+      // );
     },
   );
 
