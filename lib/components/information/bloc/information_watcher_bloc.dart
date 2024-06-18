@@ -68,11 +68,10 @@ class InformationWatcherBloc
       InformationWatcherState(
         informationModelItems: event.informationItemsModel,
         loadingStatus: LoadingStatus.loaded,
-        filteredInformationModelItems:
-            event.informationItemsModel.loadingFilter(
+        filteredInformationModelItems: _filter(
           filtersIndex: state.filtersIndex,
           itemsLoaded: state.itemsLoaded,
-          getFilter: (InformationModel item) => item.category,
+          list: event.informationItemsModel,
         ),
         filtersIndex: state.filtersIndex,
         itemsLoaded:
@@ -90,10 +89,9 @@ class InformationWatcherBloc
       return;
     }
     emit(state.copyWith(loadingStatus: LoadingStatus.loading));
-    final filterItems = state.informationModelItems.loadingFilter(
+    final filterItems = _filter(
       filtersIndex: state.filtersIndex,
       itemsLoaded: state.itemsLoaded + KDimensions.loadItems,
-      getFilter: (InformationModel item) => item.category,
     );
     emit(
       state.copyWith(
@@ -125,15 +123,13 @@ class InformationWatcherBloc
   ) {
     final selectedFilters = state.filtersIndex.filterIndex(event.filterIndex);
 
-    final filterItems = state.informationModelItems.loadingFilter(
+    final filterItems = _filter(
       filtersIndex: selectedFilters,
       itemsLoaded: state.itemsLoaded,
-      getFilter: (InformationModel item) => item.category,
     );
 
     emit(
       state.copyWith(
-        loadingStatus: LoadingStatus.loaded,
         filteredInformationModelItems: filterItems,
         filtersIndex: selectedFilters,
         itemsLoaded: state.itemsLoaded.getLoaded(list: filterItems),
@@ -141,30 +137,17 @@ class InformationWatcherBloc
     );
   }
 
-  // List<InformationModel> _filter({
-  //   required List<int>? filtersIndex,
-  //   required int itemsLoaded,
-  //   required List<InformationModel> informationModelItems,
-  // }) {
-  //   if (informationModelItems.isEmpty) return [];
-  //   final loadedItemsCount = itemsLoaded
-  //       .getLoaded(list: informationModelItems)
-  //       .clamp(0, informationModelItems.length);
-
-  //   if (filtersIndex == null || filtersIndex.isEmpty) {
-  //     return informationModelItems.take(loadedItemsCount).toList();
-  //   }
-
-  //   final filtersText = filtersIndex
-  //       .map((index) => informationModelItems.overallTagsBloc.
-  // elementAt(index))
-  //       .toList();
-
-  //   return informationModelItems
-  //       .where((item) => filtersText.every(item.category.contains))
-  //       .take(loadedItemsCount)
-  //       .toList();
-  // }
+  List<InformationModel> _filter({
+    required List<int>? filtersIndex,
+    required int itemsLoaded,
+    List<InformationModel>? list,
+  }) {
+    return (list ?? state.informationModelItems).loadingFilter(
+      filtersIndex: filtersIndex,
+      itemsLoaded: itemsLoaded,
+      getFilter: (InformationModel item) => item.category,
+    );
+  }
 
   void _onFailure(
     _Failure event,

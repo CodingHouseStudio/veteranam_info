@@ -55,7 +55,13 @@ class AdvancedFilter extends StatelessWidget {
         .read<DiscountWatcherBloc>()
         .state
         .discountModelItems
-        .overallItem(getFilter: (p0) => p0.location ?? [], context: context);
+        .overallItem(
+          getFilter: (item) => [
+            if (item.location != null) ...item.location!,
+            if (item.subLocation != null) item.subLocation.toString(),
+          ],
+          context: context,
+        );
     return [
       Row(
         children: [
@@ -83,11 +89,19 @@ class AdvancedFilter extends StatelessWidget {
           filterCitiesIndex.length,
           (index) => Padding(
             padding: const EdgeInsets.only(top: KPadding.kPaddingSize16),
-            child: TextButton.icon(
-              style: KButtonStyles.filterButtonStyle,
-              icon: KIcon.close,
-              label: Text(cities.elementAt(filterCitiesIndex.elementAt(index))),
-              onPressed: null,
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: TextButton.icon(
+                style: KButtonStyles.filterButtonStyle,
+                icon: KIcon.close,
+                label:
+                    Text(cities.elementAt(filterCitiesIndex.elementAt(index))),
+                onPressed: () => context.read<DiscountWatcherBloc>().add(
+                      DiscountWatcherEvent.filterCity(
+                        filterCitiesIndex.elementAt(index),
+                      ),
+                    ),
+              ),
             ),
           ),
         ),
@@ -98,16 +112,20 @@ class AdvancedFilter extends StatelessWidget {
       ),
       KSizedBox.kHeightSizedBox16,
       CheckPointWidget(
-        isCheck: true,
+        isCheck: context.read<DiscountWatcherBloc>().state.reverse,
         text: context.l10n.fromLargestToSmallest,
-        onChanged: null,
+        onChanged: () => context.read<DiscountWatcherBloc>().add(
+              const DiscountWatcherEvent.reverseFilter(),
+            ),
         isDesk: isDesk,
       ),
       KSizedBox.kHeightSizedBox16,
       CheckPointWidget(
-        isCheck: true,
+        isCheck: context.read<DiscountWatcherBloc>().state.freeFilter,
         text: context.l10n.free,
-        onChanged: null,
+        onChanged: () => context
+            .read<DiscountWatcherBloc>()
+            .add(const DiscountWatcherEvent.isFreeFilter()),
         isDesk: isDesk,
       ),
       KSizedBox.kHeightSizedBox24,

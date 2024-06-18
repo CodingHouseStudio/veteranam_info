@@ -12,6 +12,8 @@ class DiscountWatcherState with _$DiscountWatcherState {
     required List<int>? filtersCategoriesIndex,
     required List<int>? filtersCitiesIndex,
     required LoadingStatus loadingStatus,
+    required bool freeFilter,
+    required bool reverse,
     required int itemsLoaded,
     required DiscountFailure? failure,
   }) = _Initial;

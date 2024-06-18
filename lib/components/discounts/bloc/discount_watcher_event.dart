@@ -18,6 +18,10 @@ class DiscountWatcherEvent with _$DiscountWatcherEvent {
     int filterIndex,
   ) = _FilterCity;
 
+  const factory DiscountWatcherEvent.reverseFilter() = _ReverseFilter;
+
+  const factory DiscountWatcherEvent.isFreeFilter() = _isFreeFilter;
+
   const factory DiscountWatcherEvent.filterReset() = _FilterReset;
 
   const factory DiscountWatcherEvent.failure(dynamic failure) = _Failure;
