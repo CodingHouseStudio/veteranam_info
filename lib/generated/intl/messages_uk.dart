@@ -161,6 +161,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Основна інформація"),
         "mainScreen": MessageLookupByLibrary.simpleMessage("Головна"),
         "message": MessageLookupByLibrary.simpleMessage("Повідомлення"),
+        "more": MessageLookupByLibrary.simpleMessage("Більше"),
         "moreDiscounts": MessageLookupByLibrary.simpleMessage("Ще знижки"),
         "moreFunds": MessageLookupByLibrary.simpleMessage("Більше фондів"),
         "moreNews": MessageLookupByLibrary.simpleMessage("Ще новини"),
@@ -225,6 +226,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Скинути фільтри"),
         "respond": MessageLookupByLibrary.simpleMessage("Відгукнутися"),
         "resume": MessageLookupByLibrary.simpleMessage("Резюме"),
+        "save": MessageLookupByLibrary.simpleMessage("Зберегти"),
         "saveChanges": MessageLookupByLibrary.simpleMessage("Зберегти зміни"),
         "saveMoney": MessageLookupByLibrary.simpleMessage("Щоб зекономити"),
         "saved": MessageLookupByLibrary.simpleMessage("Збережене"),
@@ -243,6 +245,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sendMessage":
             MessageLookupByLibrary.simpleMessage("Надіслати повідомлення"),
         "sendMore": MessageLookupByLibrary.simpleMessage("Надіслати ще"),
+        "share": MessageLookupByLibrary.simpleMessage("Поділитися"),
         "signUp": MessageLookupByLibrary.simpleMessage("Реєстрація"),
         "signUpWith":
             MessageLookupByLibrary.simpleMessage("Зареєструйтесь через"),
@@ -275,7 +278,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ця сторінка знаходиться на стадії розробки."),
         "upload": MessageLookupByLibrary.simpleMessage("Завантажити"),
         "us": MessageLookupByLibrary.simpleMessage("нам"),
+        "useful": MessageLookupByLibrary.simpleMessage("Корисно"),
         "wage": MessageLookupByLibrary.simpleMessage("Заробітна плата*"),
+        "website": MessageLookupByLibrary.simpleMessage("Сайт"),
         "whatKindOfProject":
             MessageLookupByLibrary.simpleMessage("Що це за проект?"),
         "whatYouMostInterestedIn": MessageLookupByLibrary.simpleMessage(
