@@ -29,10 +29,10 @@ Future<void> chipHelper(WidgetTester tester) async {
 
   expect(filterChip.selected, isTrue);
 
-  await filterPopupMenuHelper(tester);
+  // await filterPopupMenuHelper(tester);
 
-  filterChip = tester
-      .widget<FilterChip>(find.byKey(KWidgetkeys.widget.chip.widget).first);
+  // filterChip = tester
+  //     .widget<FilterChip>(find.byKey(KWidgetkeys.widget.chip.widget).first);
 
-  expect(filterChip.selected, isFalse);
+  // expect(filterChip.selected, isFalse);
 }

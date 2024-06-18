@@ -39,7 +39,11 @@ class InformationBodyWidget extends StatelessWidget {
             KSizedBox.kHeightSizedBox24,
           FiltersChipWidget(
             key: KWidgetkeys.screen.information.filter,
-            filtersItems: _.informationModelItems.overallTags(context),
+            filtersItems: _.informationModelItems.overallItem(
+              context: context,
+              getFilter: (item) => item.category,
+              getUAFilter: (item) => item.categoryUA,
+            ),
             isDesk: isDesk,
             // onResetValue: () => context.read<InformationWatcherBloc>().add(
             //       const InformationWatcherEvent.filterReset(),

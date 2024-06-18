@@ -1,4 +1,7 @@
+import 'dart:math';
+
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kozak/shared/shared.dart';
 
 extension ExtendedDateTime on DateTime {
@@ -35,5 +38,104 @@ enum LoadingStatus { initial, loading, loaded, error }
 enum EvaluationEnum { like, dislike, smile, none }
 
 extension ItemLoadedExtensions on int {
-  int get getLoaded => this != 0 ? this : KDimensions.loadItems;
+  int getLoaded({required List<dynamic> list, int? loadItems}) => min(
+        list.length,
+        max(
+          this,
+          loadItems ?? KDimensions.loadItems,
+        ),
+      );
+  bool checkLoadingPosible(List<dynamic> list) =>
+      this + KDimensions.loadItems > list.length;
+}
+
+extension ListExtensions<T> on List<T> {
+  List<T> loading({required int itemsLoaded, int? loadItems}) {
+    if (isEmpty) return [];
+    final loadedItemsCount = itemsLoaded
+        .getLoaded(list: this, loadItems: loadItems)
+        .clamp(0, length);
+
+    return take(loadedItemsCount).toList();
+  }
+
+  List<T> loadingFilter({
+    required List<int>? filtersIndex,
+    required int itemsLoaded,
+    required List<dynamic> Function(T item) getFilter,
+    int? loadItems,
+  }) {
+    if (isEmpty) return [];
+    final loadedItemsCount = itemsLoaded
+        .getLoaded(list: this, loadItems: loadItems)
+        .clamp(0, length);
+
+    if (filtersIndex == null || filtersIndex.isEmpty) {
+      return take(loadedItemsCount).toList();
+    }
+
+    final filtersText = filtersIndex
+        .map((index) => _overallItemBloc(getFilter).elementAt(index))
+        .toList();
+
+    return where((item) => filtersText.every(getFilter(item).contains))
+        .take(loadedItemsCount)
+        .toList();
+  }
+
+  List<dynamic> _overallItemBloc(
+    List<dynamic> Function(T) getFilter,
+  ) {
+    final allTags = <dynamic>[];
+    for (final item in this) {
+      allTags.addAll(
+        getFilter(item),
+      );
+    }
+    return allTags.toSet().toList();
+  }
+
+  List<String> overallItem({
+    required List<String> Function(T) getFilter,
+    required BuildContext context,
+    List<String> Function(T)? getUAFilter,
+  }) {
+    final allTags = <String>[];
+    for (final item in this) {
+      allTags.addAll(
+        context.read<AuthenticationBloc>().state.userSetting.locale ==
+                    Language.english ||
+                getUAFilter == null
+            ? getFilter(item)
+            : getUAFilter(item),
+      );
+    }
+    return allTags.toSet().toList();
+  }
+
+  List<T> filterIndex(T eventFilterIndex) {
+    final selectedFilters = List<T>.from(this);
+
+    if (selectedFilters.contains(eventFilterIndex)) {
+      selectedFilters.remove(eventFilterIndex);
+    } else {
+      selectedFilters.add(eventFilterIndex);
+    }
+
+    return selectedFilters;
+  }
+}
+
+extension ListExtensionsNull<T> on List<T>? {
+  List<T> filterIndex(T eventFilterIndex) {
+    final selectedFilters = List<T>.from(this ?? []);
+
+    if (selectedFilters.contains(eventFilterIndex)) {
+      selectedFilters.remove(eventFilterIndex);
+    } else {
+      selectedFilters.add(eventFilterIndex);
+    }
+
+    return selectedFilters;
+  }
 }

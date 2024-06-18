@@ -48,7 +48,7 @@ class DiscountBodyWidget extends StatelessWidget {
                       isDesk: isDesk,
                     ),
                   ),
-                  _myDiscountButton(context),
+                  if (Config.isDevelopment) _myDiscountButton(context),
                 ],
               )
             else ...[
@@ -56,8 +56,14 @@ class DiscountBodyWidget extends StatelessWidget {
                 context: context,
                 isDesk: isDesk,
               ),
-              KSizedBox.kHeightSizedBox8,
-              _myDiscountButton(context),
+              if (Config.isDevelopment) ...[
+                KSizedBox.kHeightSizedBox8,
+                _myDiscountButton(context),
+              ],
+              KSizedBox.kHeightSizedBox24,
+              AdvancedFilter(
+                isDesk: isDesk,
+              ),
             ],
             if (isDesk)
               KSizedBox.kHeightSizedBox40
@@ -112,7 +118,11 @@ class DiscountBodyWidget extends StatelessWidget {
             .read<DiscountWatcherBloc>()
             .state
             .discountModelItems
-            .overallTags(context),
+            .overallItem(
+              context: context,
+              getFilter: (item) => item.category,
+              getUAFilter: (item) => item.categoryUA,
+            ),
         isDesk: isDesk,
         // onResetValue: () => context.read<DiscountWatcherBloc>().add(
         //       const DiscountWatcherEvent.filterReset(),

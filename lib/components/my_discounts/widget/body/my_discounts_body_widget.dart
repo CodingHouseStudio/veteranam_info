@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
-import 'package:kozak/shared/widget/statistic_box_widget.dart';
-import 'package:skeletonizer/skeletonizer.dart';
 
 part '../my_discounts_box_widget_list.dart';
 part '../my_discounts_box_widgets.dart';

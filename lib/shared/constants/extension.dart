@@ -1,37 +1,36 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
 
-extension DiscountModelExtensions on List<DiscountModel> {
-  List<String> overallTags(BuildContext context) {
-    final allTags = <String>[];
-    for (final item in this) {
-      allTags.addAll(
-        context.read<AuthenticationBloc>().state.userSetting.locale ==
-                Language.english
-            ? item.category
-            : item.categoryUA,
-      );
-    }
-    return allTags.toSet().toList();
-  }
-}
+// extension DiscountModelExtensions on List<DiscountModel> {
+//   List<String> overallCategory(BuildContext context) {
+//     final allTags = <String>[];
+//     for (final item in this) {
+//       allTags.addAll(
+//         context.read<AuthenticationBloc>().state.userSetting.locale ==
+//                 Language.english
+//             ? item.category
+//             : item.categoryUA,
+//       );
+//     }
+//     return allTags.toSet().toList();
+//   }
+// }
 
-extension InformationModelExtensions on List<InformationModel> {
-  List<String> overallTags(BuildContext context) {
-    final allTags = <String>[];
-    for (final item in this) {
-      allTags.addAll(
-        context.read<AuthenticationBloc>().state.userSetting.locale ==
-                Language.english
-            ? item.category
-            : item.categoryUA,
-      );
-    }
-    return allTags.toSet().toList();
-  }
-}
+// extension InformationModelExtensions on List<InformationModel> {
+//   List<String> overallTags(BuildContext context) {
+//     final allTags = <String>[];
+//     for (final item in this) {
+//       allTags.addAll(
+//         context.read<AuthenticationBloc>().state.userSetting.locale ==
+//                 Language.english
+//             ? item.category
+//             : item.categoryUA,
+//       );
+//     }
+//     return allTags.toSet().toList();
+//   }
+// }
 
 extension DiscountFailureValue on DiscountFailure {
   String value(BuildContext context) {

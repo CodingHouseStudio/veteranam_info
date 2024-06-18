@@ -16,27 +16,3 @@ class DiscountWatcherState with _$DiscountWatcherState {
     required DiscountFailure? failure,
   }) = _Initial;
 }
-
-extension DiscountModelExtensions on List<DiscountModel> {
-  List<String> get overallTagsBloc {
-    final allTags = <String>[];
-    for (final item in this) {
-      allTags.addAll(
-        item.category,
-      );
-    }
-    return allTags.toSet().toList();
-  }
-
-  List<String> get overallCities {
-    final allCities = <String>[];
-    for (final item in this) {
-      if (item.location != null) {
-        allCities.addAll(
-          item.location!,
-        );
-      }
-    }
-    return allCities.toSet().toList();
-  }
-}

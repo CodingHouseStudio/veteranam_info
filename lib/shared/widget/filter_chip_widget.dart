@@ -36,6 +36,7 @@ class FiltersChipWidget extends StatelessWidget {
     //       child:
     return isDesk
         ? ShaderMask(
+            key: KWidgetkeys.widget.filterChip.widget,
             shaderCallback: (Rect bounds) {
               return LinearGradient(
                 colors: [
