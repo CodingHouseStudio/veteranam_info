@@ -45,8 +45,8 @@ void main() {
               KTestText.discountModelItems.last.phoneNumber,
           DiscountModelJsonField.requirements:
               KTestText.discountModelItems.last.requirements,
-          DiscountModelJsonField.selectedLocationsOnly:
-              KTestText.discountModelItems.last.selectedLocationsOnly,
+          DiscountModelJsonField.subLocation:
+              KTestText.discountModelItems.last.subLocation,
           DiscountModelJsonField.subcategory:
               KTestText.discountModelItems.last.subcategory,
           DiscountModelJsonField.subcategoryUA:
@@ -139,8 +139,8 @@ void main() {
           KTestText.discountModelItems.last.requirements,
         );
         expect(
-          discountModel.selectedLocationsOnly,
-          KTestText.discountModelItems.last.selectedLocationsOnly,
+          discountModel.subLocation,
+          KTestText.discountModelItems.last.subLocation,
         );
         expect(
           discountModel.subcategory,
@@ -192,10 +192,6 @@ void main() {
               KTestText.discountModelItems.last.phoneNumber,
           DiscountModelJsonField.requirements:
               KTestText.discountModelItems.last.requirements,
-          DiscountModelJsonField.selectedLocationsOnly:
-              KTestText.discountModelItems.last.selectedLocationsOnly,
-          DiscountModelJsonField.online:
-              KTestText.discountModelItems.last.online,
           DiscountModelJsonField.subcategory:
               KTestText.discountModelItems.last.subcategory,
           DiscountModelJsonField.subcategoryUA:
@@ -286,8 +282,8 @@ void main() {
           KTestText.discountModelItems.last.requirements,
         );
         expect(
-          discountModel.selectedLocationsOnly,
-          KTestText.discountModelItems.last.selectedLocationsOnly,
+          discountModel.subLocation,
+          null,
         );
         expect(
           discountModel.subcategory,
@@ -349,10 +345,8 @@ void main() {
               KTestText.discountModelItems.last.phoneNumber,
           DiscountModelJsonField.requirements:
               KTestText.discountModelItems.last.requirements,
-          DiscountModelJsonField.selectedLocationsOnly:
-              KTestText.discountModelItems.last.selectedLocationsOnly,
-          DiscountModelJsonField.online:
-              KTestText.discountModelItems.last.online,
+          DiscountModelJsonField.subLocation:
+              KTestText.discountModelItems.last.subLocation,
           DiscountModelJsonField.subcategory:
               KTestText.discountModelItems.last.subcategory,
           DiscountModelJsonField.subcategoryUA:
@@ -407,8 +401,8 @@ void main() {
               KTestText.discountModelItems.last.phoneNumber,
           DiscountModelJsonField.requirements:
               KTestText.discountModelItems.last.requirements,
-          DiscountModelJsonField.selectedLocationsOnly:
-              KTestText.discountModelItems.last.selectedLocationsOnly,
+          DiscountModelJsonField.subLocation:
+              KTestText.discountModelItems.last.subLocation,
           DiscountModelJsonField.subcategory:
               KTestText.discountModelItems.last.subcategory,
           DiscountModelJsonField.subcategoryUA:
@@ -416,8 +410,6 @@ void main() {
           DiscountModelJsonField.territory:
               KTestText.discountModelItems.last.territory,
           DiscountModelJsonField.title: KTestText.discountModelItems.last.title,
-          DiscountModelJsonField.online:
-              KTestText.discountModelItems.last.online,
           DiscountModelJsonField.date:
               KTestText.discountModelItems.last.date.toIso8601String(),
         };
@@ -454,8 +446,7 @@ void main() {
               KTestText.discountModelItems.last.phoneNumber,
           DiscountModelJsonField.requirements:
               KTestText.discountModelItems.last.requirements,
-          DiscountModelJsonField.selectedLocationsOnly:
-              KTestText.discountModelItems.last.selectedLocationsOnly,
+          DiscountModelJsonField.subLocation: null,
           DiscountModelJsonField.subcategory:
               KTestText.discountModelItems.last.subcategory,
           DiscountModelJsonField.subcategoryUA:
@@ -463,8 +454,6 @@ void main() {
           DiscountModelJsonField.territory:
               KTestText.discountModelItems.last.territory,
           DiscountModelJsonField.title: KTestText.discountModelItems.last.title,
-          DiscountModelJsonField.online:
-              KTestText.discountModelItems.last.online,
           DiscountModelJsonField.date:
               KTestText.discountModelItems.last.date.toIso8601String(),
           DiscountModelJsonField.directLink: null,
@@ -482,6 +471,7 @@ void main() {
               userName: null,
               company: null,
               location: null,
+              subLocation: null,
             )
             .toJson();
 
