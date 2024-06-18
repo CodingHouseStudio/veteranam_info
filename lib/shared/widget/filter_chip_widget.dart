@@ -55,7 +55,7 @@ class FiltersChipWidget extends StatelessWidget {
                       index,
                     ),
                     isDesk: isDesk,
-                    itemCount: index,
+                    itemCount: filtersItems.length,
                   ),
                 );
               }),
