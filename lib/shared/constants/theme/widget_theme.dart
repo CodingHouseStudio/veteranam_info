@@ -123,4 +123,8 @@ abstract class KWidgetTheme {
     labelStyle: AppTextStyle.materialThemeTitleMedium,
     alignLabelWithHint: true,
   );
+  static const boxDecorationDiscount = BoxDecoration(
+    borderRadius: KBorderRadius.kBorderRadius32,
+    color: AppColors.materialThemeWhite,
+  );
 }
