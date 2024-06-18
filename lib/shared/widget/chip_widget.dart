@@ -55,29 +55,24 @@ class ChipWidgetState extends State<ChipWidget> {
             ),
             KSizedBox.kWidthSizedBox10,
             if (widget.itemCount > 0)
-              Stack(
-                clipBehavior: Clip.none,
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(KPadding.kPaddingSize8),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: widget.isSelected
-                          ? AppColors.materialThemeBlack
-                          : AppColors.materialThemeKeyColorsPrimary,
-                    ),
-                    child: Text(
-                      '${widget.itemCount}',
-                      style: AppTextStyle.materialThemeLabelSmall.copyWith(
-                        color: widget.isSelected
-                            ? AppColors.materialThemeWhite
-                            : (!widget.isSelected && _isHovered
-                                ? AppColors.materialThemeKeyColorsNeutralVariant
-                                : AppColors.materialThemeBlack),
-                      ),
-                    ),
+              Container(
+                padding: const EdgeInsets.all(KPadding.kPaddingSize8),
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: widget.isSelected
+                      ? AppColors.materialThemeBlack
+                      : AppColors.materialThemeKeyColorsPrimary,
+                ),
+                child: Text(
+                  '${widget.itemCount}',
+                  style: AppTextStyle.materialThemeLabelSmall.copyWith(
+                    color: widget.isSelected
+                        ? AppColors.materialThemeWhite
+                        : (!widget.isSelected && _isHovered
+                            ? AppColors.materialThemeKeyColorsNeutralVariant
+                            : AppColors.materialThemeBlack),
                   ),
-                ],
+                ),
               ),
           ],
         ),
