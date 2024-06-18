@@ -46,13 +46,16 @@ class FiltersChipWidget extends StatelessWidget {
                   child: ChipWidget(
                     key: KWidgetkeys.widget.filterChip.chips,
                     filter: filtersItems.elementAt(index),
-                    onSelected: ({required isSelected}) => onSelected(
-                      index,
-                    ),
+                    onSelected: (isSelected) {
+                      onSelected(
+                        index,
+                      );
+                    },
                     isSelected: isSelected(
                       index,
                     ),
                     isDesk: isDesk,
+                    itemCount: filtersItems.length,
                   ),
                 );
               }),
