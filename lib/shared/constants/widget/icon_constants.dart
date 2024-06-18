@@ -71,6 +71,7 @@ abstract class KIcon {
     Symbols.thumb_down,
     fill: 1,
   );
+  static const _KIcon website = _KIcon(Symbols.captive_portal);
   static const _KIcon share = _KIcon(Symbols.file_upload);
   static const _KIcon error = _KIcon(Symbols.error);
   static const _KIcon safe = _KIcon(Symbols.bookmark_border_sharp);
