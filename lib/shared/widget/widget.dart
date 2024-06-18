@@ -36,6 +36,7 @@ export 'pagination_widget.dart';
 export 'profile_card_widget.dart';
 export 'question_widget.dart';
 export 'rate_widget.dart';
+export 'scaffold_auto_loading_widget.dart';
 export 'scaffold_decoration_widget.dart';
 export 'scaffold_widget.dart';
 export 'secondary_button_widget.dart';

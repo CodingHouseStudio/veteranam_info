@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
 
 class DonatesCardsWidget extends StatefulWidget {
   const DonatesCardsWidget({
     required this.fundItems,
+    required this.isLoading,
     super.key,
   });
   final List<FundModel> fundItems;
+  final bool isLoading;
 
   @override
   State<DonatesCardsWidget> createState() => _DonatesCardsWidgetState();
@@ -53,13 +53,9 @@ class _DonatesCardsWidgetState extends State<DonatesCardsWidget> {
                             : 0,
                       ),
                       child: SkeletonizerWidget(
-                        isLoading: context
-                                .read<InvestorsWatcherBloc>()
-                                .state
-                                .loadingStatus !=
-                            LoadingStatus.loaded,
+                        isLoading: widget.isLoading,
                         child: DonateCardWidget(
-                          key: KWidgetkeys.screen.investors.donateCard,
+                          key: KWidgetkeys.screen.investors.card,
                           fundModel: widget.fundItems.elementAt(index),
                           hasSubtitle: hasSubtitles.elementAt(index),
                           titleStyle: hasSubtitles.contains(true) && changeSize

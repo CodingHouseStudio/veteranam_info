@@ -46,16 +46,20 @@ class DiscountsCardWidget extends StatelessWidget {
           if (isDesk)
             Row(
               children: [
-                Text(
-                  discountItem.dateVerified.toLocalDateString(),
-                  key: KWidgetkeys.widget.discountCard.date,
-                  style: AppTextStyle.hint24,
+                Expanded(
+                  child: Text(
+                    discountItem.dateVerified.toLocalDateString(),
+                    key: KWidgetkeys.widget.discountCard.date,
+                    style: AppTextStyle.hint24,
+                  ),
                 ),
-                const Spacer(),
-                Text(
-                  discountItem.location?.first ?? context.l10n.online,
-                  key: KWidgetkeys.widget.discountCard.city,
-                  style: AppTextStyle.hint24,
+                Expanded(
+                  child: Text(
+                    discountItem.location?.first ?? context.l10n.online,
+                    key: KWidgetkeys.widget.discountCard.city,
+                    style: AppTextStyle.hint24,
+                    textAlign: TextAlign.end,
+                  ),
                 ),
               ],
             )

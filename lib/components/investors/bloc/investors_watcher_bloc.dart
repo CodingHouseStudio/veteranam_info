@@ -21,7 +21,7 @@ class InvestorsWatcherBloc
           ),
         ) {
     on<_Started>(_onStarted);
-    on<_LoadNextItems>(_onLoading);
+    on<_LoadNextItems>(_loadNextItems);
   }
   final IInvestorsRepository _investorsRepository;
   Future<void> _onStarted(
@@ -42,9 +42,9 @@ class InvestorsWatcherBloc
         InvestorsWatcherState(
           fundItems: r,
           loadingStatus: LoadingStatus.loaded,
-          loadingFundItems: _loading(
+          loadingFundItems: r.loading(
             itemsLoaded: KDimensions.investorsLoadItems,
-            fundModelItems: r,
+            loadItems: KDimensions.investorsLoadItems,
           ),
           itemsLoaded: KDimensions.investorsLoadItems,
         ),
@@ -52,35 +52,27 @@ class InvestorsWatcherBloc
     );
   }
 
-  Future<void> _onLoading(
+  Future<void> _loadNextItems(
     _LoadNextItems event,
     Emitter<InvestorsWatcherState> emit,
   ) async {
-    if (state.itemsLoaded + KDimensions.investorsLoadItems >
-        state.fundItems.length) {
-      return;
-    }
-    final filterItems = _loading(
+    if (state.itemsLoaded.checkLoadingPosible(state.fundItems)) return;
+
+    emit(state.copyWith(loadingStatus: LoadingStatus.loading));
+    final filterItems = state.fundItems.loading(
       itemsLoaded: state.itemsLoaded + KDimensions.investorsLoadItems,
-      fundModelItems: state.fundItems,
+      loadItems: KDimensions.investorsLoadItems,
     );
     emit(
       state.copyWith(
         loadingFundItems: filterItems,
-        itemsLoaded: filterItems.length > state.itemsLoaded
-            ? state.itemsLoaded + KDimensions.investorsLoadItems
-            : filterItems.length,
+        itemsLoaded:
+            (state.itemsLoaded + KDimensions.investorsLoadItems).getLoaded(
+          list: filterItems,
+          loadItems: KDimensions.investorsLoadItems,
+        ),
+        loadingStatus: LoadingStatus.loaded,
       ),
     );
-  }
-
-  List<FundModel> _loading({
-    required int itemsLoaded,
-    required List<FundModel> fundModelItems,
-  }) {
-    if (fundModelItems.isEmpty) return [];
-    final loadedItemsCount = itemsLoaded.clamp(0, fundModelItems.length);
-
-    return fundModelItems.take(loadedItemsCount).toList();
   }
 }
