@@ -167,7 +167,6 @@ abstract class KButtonStyles {
     ),
     backgroundColor: WidgetStatePropertyAll(AppColors.materialThemeWhite),
   );
-
   static const secondaryButtonStyle = ButtonStyle(
     padding: WidgetStatePropertyAll(
       EdgeInsets.symmetric(
@@ -178,7 +177,7 @@ abstract class KButtonStyles {
     shape: WidgetStatePropertyAll(
       RoundedRectangleBorder(
         borderRadius: KBorderRadius.kBorderRadius32,
-        side: BorderSide(color: AppColors.materialThemeKeyColorsNeutralVariant),
+        side: BorderSide(),
       ),
     ),
   );
