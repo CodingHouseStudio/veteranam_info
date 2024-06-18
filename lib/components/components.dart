@@ -9,6 +9,7 @@ export 'home/home.dart';
 export 'information/information.dart';
 export 'investors/investors.dart';
 export 'login/login.dart';
+export 'my_discounts/my_discounts.dart';
 export 'my_story/my_story.dart';
 export 'profile/profile.dart';
 export 'questions_form/questions_form.dart';

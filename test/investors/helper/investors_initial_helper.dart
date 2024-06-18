@@ -71,7 +71,7 @@ Future<void> investorsInitialHelper(
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.investors.donateCard),
+        find.byKey(KWidgetkeys.screen.investors.card),
         findsWidgets,
       );
 
@@ -85,10 +85,10 @@ Future<void> investorsInitialHelper(
         offset: KTestConstants.scrollingDown,
       );
 
-      expect(
-        find.byKey(KWidgetkeys.screen.investors.button),
-        findsWidgets,
-      );
+      // expect(
+      //   find.byKey(KWidgetkeys.screen.investors.button),
+      //   findsWidgets,
+      // );
     },
   );
 

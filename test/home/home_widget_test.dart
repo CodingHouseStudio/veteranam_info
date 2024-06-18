@@ -122,7 +122,7 @@ void main() {
         await homeMockButtonHelper(tester);
       });
     });
-    group(KGroupText.getList, () {
+    group('${KGroupText.getList} ', () {
       setUp(() {
         when(mockHomeRepository.getQuestions()).thenAnswer(
           (invocation) async => Right(KTestText.questionModelItems),
