@@ -190,7 +190,6 @@
   "myPublications": "My publications",
   "deactivate": "Deactivate",
   "statistics": "Statistics",
-  "all": "All",
   "error": "We're sorry, there was an unforeseen error.",
   "@error": {
     "description": "message of an unforeseen error that was not foreseen."
