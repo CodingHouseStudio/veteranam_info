@@ -22,6 +22,9 @@ void main() {
       when(mockInvestorsRepository.getFunds()).thenAnswer(
         (_) async => Right(KTestText.fundItems),
       );
+      when(mockInvestorsRepository.getFunds()).thenAnswer(
+        (_) async => Right(KTestText.fundItems),
+      );
     });
 
     blocTest<InvestorsWatcherBloc, InvestorsWatcherState>(
