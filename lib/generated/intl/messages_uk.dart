@@ -29,7 +29,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "addPhoto": MessageLookupByLibrary.simpleMessage("Добавте фото"),
         "addYourStory":
             MessageLookupByLibrary.simpleMessage("Написати свою історію"),
-        "all": MessageLookupByLibrary.simpleMessage("Все"),
         "allRightsReserved":
             MessageLookupByLibrary.simpleMessage("Всі права захищені"),
         "anonymous": MessageLookupByLibrary.simpleMessage("анонім"),
