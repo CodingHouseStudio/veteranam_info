@@ -26,9 +26,7 @@ class DiscountWatcherBloc
             filtersCategoriesIndex: null,
             itemsLoaded: 0,
             failure: null,
-            filtersCitiesIndex: null,
-            freeFilter: false,
-            reverse: false,
+            filtersLocationIndex: null,
           ),
         ) {
     on<_Started>(_onStarted);
@@ -36,10 +34,8 @@ class DiscountWatcherBloc
     on<_Failure>(_onFailure);
     on<_LoadNextItems>(_onLoadNextItems);
     on<_FilterCategory>(_onFilterCategory);
-    on<_FilterCity>(_onFilterCity);
+    on<_FilterLocation>(_onFilterLocation);
     on<_FilterReset>(_onFilterReset);
-    on<_ReverseFilter>(_onReverseFilter);
-    on<_isFreeFilter>(_onIsFreeFilter);
   }
 
   final IDiscountRepository _discountRepository;
@@ -76,16 +72,14 @@ class DiscountWatcherBloc
         filteredDiscountModelItems: _filter(
           categoryIndex: state.filtersCategoriesIndex,
           itemsLoaded: state.itemsLoaded,
-          cityIndex: state.filtersCitiesIndex,
+          locationIndex: state.filtersLocationIndex,
           list: event.discountItemsModel,
         ),
         filtersCategoriesIndex: state.filtersCategoriesIndex,
         itemsLoaded:
             state.itemsLoaded.getLoaded(list: event.discountItemsModel),
         failure: null,
-        filtersCitiesIndex: state.filtersCitiesIndex,
-        freeFilter: state.freeFilter,
-        reverse: false,
+        filtersLocationIndex: state.filtersLocationIndex,
       ),
     );
   }
@@ -99,7 +93,7 @@ class DiscountWatcherBloc
     final filterItems = _filter(
       categoryIndex: state.filtersCategoriesIndex,
       itemsLoaded: state.itemsLoaded + KDimensions.loadItems,
-      cityIndex: state.filtersCitiesIndex,
+      locationIndex: state.filtersLocationIndex,
     );
     emit(
       state.copyWith(
@@ -121,7 +115,7 @@ class DiscountWatcherBloc
           itemsLoaded: state.itemsLoaded,
         ),
         filtersCategoriesIndex: null,
-        filtersCitiesIndex: null,
+        filtersLocationIndex: null,
       ),
     );
   }
@@ -136,7 +130,7 @@ class DiscountWatcherBloc
     final filterItems = _filter(
       categoryIndex: selectedFilters,
       itemsLoaded: state.itemsLoaded,
-      cityIndex: state.filtersCitiesIndex,
+      locationIndex: state.filtersLocationIndex,
     );
 
     emit(
@@ -148,15 +142,15 @@ class DiscountWatcherBloc
     );
   }
 
-  void _onFilterCity(
-    _FilterCity event,
+  void _onFilterLocation(
+    _FilterLocation event,
     Emitter<DiscountWatcherState> emit,
   ) {
     final selectedFilters =
-        state.filtersCitiesIndex.filterIndex(event.filterIndex);
+        state.filtersLocationIndex.filterIndex(event.filterIndex);
 
     final filterItems = _filter(
-      cityIndex: selectedFilters,
+      locationIndex: selectedFilters,
       itemsLoaded: state.itemsLoaded,
       categoryIndex: state.filtersCategoriesIndex,
     );
@@ -164,84 +158,45 @@ class DiscountWatcherBloc
     emit(
       state.copyWith(
         filteredDiscountModelItems: filterItems,
-        filtersCitiesIndex: selectedFilters,
+        filtersLocationIndex: selectedFilters,
         itemsLoaded: state.itemsLoaded.getLoaded(list: filterItems),
-      ),
-    );
-  }
-
-  void _onReverseFilter(
-    _ReverseFilter event,
-    Emitter<DiscountWatcherState> emit,
-  ) {
-    final discountModelItems = state.discountModelItems.reversed.toList();
-
-    final filterItems = _filter(
-      cityIndex: state.filtersCitiesIndex,
-      itemsLoaded: state.itemsLoaded,
-      categoryIndex: state.filtersCategoriesIndex,
-      list: discountModelItems,
-    );
-
-    emit(
-      state.copyWith(
-        discountModelItems: discountModelItems,
-        filteredDiscountModelItems: filterItems,
-        reverse: !state.reverse,
-      ),
-    );
-  }
-
-  void _onIsFreeFilter(
-    _isFreeFilter event,
-    Emitter<DiscountWatcherState> emit,
-  ) {
-    final filterItems = _filter(
-      cityIndex: state.filtersCitiesIndex,
-      itemsLoaded: state.itemsLoaded,
-      categoryIndex: state.filtersCategoriesIndex,
-      freeFilter: !state.freeFilter,
-    );
-
-    emit(
-      state.copyWith(
-        freeFilter: !state.freeFilter,
-        filteredDiscountModelItems: filterItems,
       ),
     );
   }
 
   List<DiscountModel> _filter({
     required List<int>? categoryIndex,
-    required List<int>? cityIndex,
+    required List<int>? locationIndex,
     required int itemsLoaded,
-    bool? freeFilter,
     List<DiscountModel>? list,
   }) {
-    final listValue = (list ?? state.discountModelItems)
+    final filteredList = (list ?? state.discountModelItems)
         .loadingFilter(
           filtersIndex: categoryIndex,
-          itemsLoaded: itemsLoaded,
+          itemsLoaded: null,
           getFilter: (item) => item.category,
         )
         .loadingFilter(
-          filtersIndex: cityIndex,
+          filtersIndex: locationIndex
+              ?.where((element) => element != 0 && element != 1)
+              .toList(),
           itemsLoaded: itemsLoaded,
           getFilter: (item) => [
             if (item.location != null) ...item.location!,
-            if (item.subLocation != null) item.subLocation.toString(),
+            if (item.subLocation != null) ...item.subLocation._getList,
           ],
-          fullList: state.discountModelItems,
+          overallFilter: (list ?? state.discountModelItems)._getLocationItems,
         );
-    if (freeFilter ?? state.freeFilter) {
-      return listValue
-          .where(
-            (element) => element.discount.contains(100),
-          )
-          .toList();
-    } else {
-      return listValue;
-    }
+
+    return (locationIndex != null
+            ? (locationIndex.contains(0) ? filteredList.reversed : filteredList)
+                .where(
+                (element) =>
+                    !locationIndex.contains(1) ||
+                    element.discount.contains(100),
+              )
+            : filteredList)
+        .toList();
   }
 
   void _onFailure(

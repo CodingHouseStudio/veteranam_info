@@ -39,7 +39,7 @@ class InformationBodyWidget extends StatelessWidget {
             KSizedBox.kHeightSizedBox24,
           FiltersChipWidget(
             key: KWidgetkeys.screen.information.filter,
-            filtersItems: _.informationModelItems.overallItem(
+            filtersItems: _.informationModelItems.overallItems(
               context: context,
               getFilter: (item) => item.category,
               getUAFilter: (item) => item.categoryUA,

@@ -1880,10 +1880,10 @@ class AppLocalizations {
     );
   }
 
-  /// `online`
+  /// `All of Ukraine (online)`
   String get online {
     return Intl.message(
-      'online',
+      'All of Ukraine (online)',
       name: 'online',
       desc: '',
       args: [],
@@ -2015,6 +2015,16 @@ class AppLocalizations {
     return Intl.message(
       'Free',
       name: 'free',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `All establishments of the chain`
+  String get allStoresOfChain {
+    return Intl.message(
+      'All establishments of the chain',
+      name: 'allStoresOfChain',
       desc: '',
       args: [],
     );

@@ -32,6 +32,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Advanced filter"),
         "allRightsReserved":
             MessageLookupByLibrary.simpleMessage("All rights reserved"),
+        "allStoresOfChain": MessageLookupByLibrary.simpleMessage(
+            "All establishments of the chain"),
         "anonymous": MessageLookupByLibrary.simpleMessage("Anonymous"),
         "answersYourQuestions":
             MessageLookupByLibrary.simpleMessage("Answers to your questions"),
@@ -197,7 +199,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Offer a discount"),
         "oneNumber": MessageLookupByLibrary.simpleMessage(
             "must contain one or more number"),
-        "online": MessageLookupByLibrary.simpleMessage("online"),
+        "online":
+            MessageLookupByLibrary.simpleMessage("All of Ukraine (online)"),
         "or": MessageLookupByLibrary.simpleMessage("or"),
         "orDonateHere": MessageLookupByLibrary.simpleMessage("or donate here"),
         "ourSocialNetworks":

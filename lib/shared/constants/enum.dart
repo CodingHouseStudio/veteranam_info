@@ -61,25 +61,27 @@ extension ListExtensions<T> on List<T> {
 
   List<T> loadingFilter({
     required List<int>? filtersIndex,
-    required int itemsLoaded,
+    required int? itemsLoaded,
     required List<dynamic> Function(T item) getFilter,
     int? loadItems,
     List<T>? fullList,
+    List<dynamic>? overallFilter,
   }) {
     if (isEmpty) return [];
+
     final loadedItemsCount =
-        itemsLoaded.getLoaded(list: this, loadItems: loadItems);
+        itemsLoaded?.getLoaded(list: this, loadItems: loadItems) ??
+            (fullList ?? this).length;
 
     if (filtersIndex == null || filtersIndex.isEmpty) {
       return take(loadedItemsCount).toList();
     }
-
-    final overallFilter =
-        _overallItemBloc(getFilter: getFilter, fullList: fullList);
+    final overallFilterValue = overallFilter ??
+        overallItemBloc(getFilter: getFilter, fullList: fullList);
 
     final filtersText = filtersIndex
         .map(
-          overallFilter.elementAt,
+          overallFilterValue.elementAt,
         )
         .toList();
 
@@ -88,7 +90,7 @@ extension ListExtensions<T> on List<T> {
         .toList();
   }
 
-  List<dynamic> _overallItemBloc({
+  List<dynamic> overallItemBloc({
     required List<dynamic> Function(T) getFilter,
     List<T>? fullList,
   }) {
@@ -101,14 +103,14 @@ extension ListExtensions<T> on List<T> {
     return allTags.toSet().toList();
   }
 
-  List<String> overallItem({
+  List<String> overallItems({
     required List<String> Function(T) getFilter,
     required BuildContext context,
     List<String> Function(T)? getUAFilter,
   }) {
-    final allTags = <String>[];
+    final allFilters = <String>[];
     for (final item in this) {
-      allTags.addAll(
+      allFilters.addAll(
         context.read<AuthenticationBloc>().state.userSetting.locale ==
                     Language.english ||
                 getUAFilter == null
@@ -116,7 +118,7 @@ extension ListExtensions<T> on List<T> {
             : getUAFilter(item),
       );
     }
-    return allTags.toSet().toList();
+    return allFilters.toSet().toList();
   }
 
   List<T> filterIndex(T eventFilterIndex) {

@@ -33,6 +33,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Розширений фільтр"),
         "allRightsReserved":
             MessageLookupByLibrary.simpleMessage("Всі права захищені"),
+        "allStoresOfChain":
+            MessageLookupByLibrary.simpleMessage("Всі заклади мережі"),
         "anonymous": MessageLookupByLibrary.simpleMessage("анонім"),
         "answersYourQuestions":
             MessageLookupByLibrary.simpleMessage("Відповіді на Ваші запитання"),
@@ -200,7 +202,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Запропонувати знижку"),
         "oneNumber": MessageLookupByLibrary.simpleMessage(
             "повинен містити одну чи більше цифр"),
-        "online": MessageLookupByLibrary.simpleMessage("онлайн"),
+        "online": MessageLookupByLibrary.simpleMessage("Вся Україна (онлайн)"),
         "or": MessageLookupByLibrary.simpleMessage("або"),
         "orDonateHere":
             MessageLookupByLibrary.simpleMessage("або донатьте тут"),

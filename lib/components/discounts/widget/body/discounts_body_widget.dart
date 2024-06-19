@@ -118,7 +118,7 @@ class DiscountBodyWidget extends StatelessWidget {
             .read<DiscountWatcherBloc>()
             .state
             .discountModelItems
-            .overallItem(
+            .overallItems(
               context: context,
               getFilter: (item) => item.category,
               getUAFilter: (item) => item.categoryUA,

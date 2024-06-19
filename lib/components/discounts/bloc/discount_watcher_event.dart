@@ -14,13 +14,9 @@ class DiscountWatcherEvent with _$DiscountWatcherEvent {
     int filterIndex,
   ) = _FilterCategory;
 
-  const factory DiscountWatcherEvent.filterCity(
+  const factory DiscountWatcherEvent.filterLocation(
     int filterIndex,
-  ) = _FilterCity;
-
-  const factory DiscountWatcherEvent.reverseFilter() = _ReverseFilter;
-
-  const factory DiscountWatcherEvent.isFreeFilter() = _isFreeFilter;
+  ) = _FilterLocation;
 
   const factory DiscountWatcherEvent.filterReset() = _FilterReset;
 

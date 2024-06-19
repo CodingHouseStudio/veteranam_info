@@ -183,7 +183,7 @@
   "provenFunds": "Proven funds",
   "tryItAgain": "Try it again",
   "companyIsHidden": "The company is hidden",
-  "online": "online",
+  "online": "All of Ukraine (online)",
   "moreFunds": "More funds",
   "offerDiscount": "Offer a discount",
   "myDiscountsAndCoupons": "In this section, you can publish a discount, as well as manage your publications. If your company provides personalized offers for veterans, you can advertise here.",
@@ -197,6 +197,7 @@
   "filterApplied": "Filter applied",
   "fromLargestToSmallest": "From the largest to the smallest",
   "free": "Free",
+  "allStoresOfChain": "All establishments of the chain",
   "error": "We're sorry, there was an unforeseen error.",
   "@error": {
     "description": "message of an unforeseen error that was not foreseen."

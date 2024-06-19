@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:kozak/components/discounts/bloc/discount_watcher_bloc.dart';
+import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
 
 class AdvancedFilter extends StatelessWidget {
@@ -28,15 +28,23 @@ class AdvancedFilter extends StatelessWidget {
           padding: isDesk ? KPadding.kPaddingSize20 : KPadding.kPaddingSize12,
         ),
         onPressed: () async {
-          final body = widgetList(
-            isDesk: isDesk,
+          final bloc = context.read<DiscountWatcherBloc>();
+          await showModalBottomSheet<BlocProvider>(
             context: context,
-          );
-          await showModalBottomSheet<ListView>(
-            context: context,
-            builder: (context) => ListView.builder(
-              itemBuilder: (context, index) => body.elementAt(index),
-              itemCount: body.length,
+            builder: (context) => BlocProvider.value(
+              value: bloc,
+              child: BlocBuilder<DiscountWatcherBloc, DiscountWatcherState>(
+                builder: (context, state) {
+                  final body = widgetList(
+                    isDesk: isDesk,
+                    context: context,
+                  );
+                  return ListView.builder(
+                    itemBuilder: (context, index) => body.elementAt(index),
+                    itemCount: body.length,
+                  );
+                },
+              ),
             ),
           );
         },
@@ -49,19 +57,13 @@ class AdvancedFilter extends StatelessWidget {
     required bool isDesk,
     required BuildContext context,
   }) {
-    final filterCitiesIndex =
-        context.read<DiscountWatcherBloc>().state.filtersCitiesIndex;
-    final cities = context
+    final filterLocationIndex =
+        context.read<DiscountWatcherBloc>().state.filtersLocationIndex;
+    final location = context
         .read<DiscountWatcherBloc>()
         .state
         .discountModelItems
-        .overallItem(
-          getFilter: (item) => [
-            if (item.location != null) ...item.location!,
-            if (item.subLocation != null) item.subLocation.toString(),
-          ],
-          context: context,
-        );
+        .getLocationFilter(context);
     return [
       Row(
         children: [
@@ -84,9 +86,9 @@ class AdvancedFilter extends StatelessWidget {
             ? AppTextStyle.materialThemeTitleLarge
             : AppTextStyle.materialThemeTitleMedium,
       ),
-      if (filterCitiesIndex != null)
+      if (filterLocationIndex != null)
         ...List.generate(
-          filterCitiesIndex.length,
+          filterLocationIndex.length,
           (index) => Padding(
             padding: const EdgeInsets.only(top: KPadding.kPaddingSize16),
             child: Align(
@@ -94,13 +96,13 @@ class AdvancedFilter extends StatelessWidget {
               child: TextButton.icon(
                 style: KButtonStyles.filterButtonStyle,
                 icon: KIcon.close,
-                label:
-                    Text(cities.elementAt(filterCitiesIndex.elementAt(index))),
-                onPressed: () => context.read<DiscountWatcherBloc>().add(
-                      DiscountWatcherEvent.filterCity(
-                        filterCitiesIndex.elementAt(index),
-                      ),
-                    ),
+                label: Text(
+                  location.elementAt(filterLocationIndex.elementAt(index)),
+                ),
+                onPressed: () => _onChange(
+                  context: context,
+                  index: filterLocationIndex.elementAt(index),
+                ),
               ),
             ),
           ),
@@ -110,23 +112,20 @@ class AdvancedFilter extends StatelessWidget {
         context.l10n.discount,
         style: AppTextStyle.materialThemeTitleMedium,
       ),
-      KSizedBox.kHeightSizedBox16,
-      CheckPointWidget(
-        isCheck: context.read<DiscountWatcherBloc>().state.reverse,
-        text: context.l10n.fromLargestToSmallest,
-        onChanged: () => context.read<DiscountWatcherBloc>().add(
-              const DiscountWatcherEvent.reverseFilter(),
+      ...List.generate(
+        2,
+        (index) => Padding(
+          padding: const EdgeInsets.only(top: KPadding.kPaddingSize16),
+          child: CheckPointWidget(
+            onChanged: () => _onChange(context: context, index: index),
+            isCheck: _isCheck(
+              index: index,
+              filterLocationIndex: filterLocationIndex,
             ),
-        isDesk: isDesk,
-      ),
-      KSizedBox.kHeightSizedBox16,
-      CheckPointWidget(
-        isCheck: context.read<DiscountWatcherBloc>().state.freeFilter,
-        text: context.l10n.free,
-        onChanged: () => context
-            .read<DiscountWatcherBloc>()
-            .add(const DiscountWatcherEvent.isFreeFilter()),
-        isDesk: isDesk,
+            text: location.elementAt(index),
+            isDesk: isDesk,
+          ),
+        ),
       ),
       KSizedBox.kHeightSizedBox24,
       Text(
@@ -134,20 +133,32 @@ class AdvancedFilter extends StatelessWidget {
         style: AppTextStyle.materialThemeTitleLarge,
       ),
       ...List.generate(
-        cities.length,
-        (index) => Padding(
-          padding: const EdgeInsets.only(top: KPadding.kPaddingSize16),
-          child: CheckPointWidget(
-            onChanged: () => context
-                .read<DiscountWatcherBloc>()
-                .add(DiscountWatcherEvent.filterCity(index)),
-            isCheck:
-                filterCitiesIndex != null && filterCitiesIndex.contains(index),
-            text: cities.elementAt(index),
-            isDesk: isDesk,
-          ),
-        ),
+        location.length - 2,
+        (index) {
+          final i = index + 2;
+          return Padding(
+            padding: const EdgeInsets.only(top: KPadding.kPaddingSize16),
+            child: CheckPointWidget(
+              onChanged: () => _onChange(context: context, index: i),
+              isCheck:
+                  _isCheck(index: i, filterLocationIndex: filterLocationIndex),
+              text: location.elementAt(i),
+              isDesk: isDesk,
+            ),
+          );
+        },
       ),
     ];
   }
+
+  static bool _isCheck({
+    required int index,
+    required List<int>? filterLocationIndex,
+  }) =>
+      filterLocationIndex != null && filterLocationIndex.contains(index);
+
+  static void _onChange({required int index, required BuildContext context}) =>
+      context
+          .read<DiscountWatcherBloc>()
+          .add(DiscountWatcherEvent.filterLocation(index));
 }

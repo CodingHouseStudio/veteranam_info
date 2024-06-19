@@ -1,4 +1,6 @@
+import 'package:flutter/widgets.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:kozak/shared/shared.dart';
 
 part 'discount_model.freezed.dart';
 
@@ -39,6 +41,12 @@ class DiscountModel with _$DiscountModel {
 }
 
 enum SubLocation { all, allStoresOfChain, online }
+
+extension SubLocationString on SubLocation {
+  List<String> getList(BuildContext context) {
+    return [context.l10n.allStoresOfChain, context.l10n.online];
+  }
+}
 
 abstract class DiscountModelJsonField {
   static const id = 'id';
