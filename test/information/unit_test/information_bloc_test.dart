@@ -303,8 +303,8 @@ void main() {
           (state) =>
               state.loadingStatus == LoadingStatus.loaded &&
               state.filteredInformationModelItems.length ==
-                  KDimensions.loadItems + 1 &&
-              state.itemsLoaded == KDimensions.loadItems + 1 &&
+                  KDimensions.loadItems * 2 &&
+              state.itemsLoaded == KDimensions.loadItems * 2 &&
               state.filtersIndex != null &&
               state.filtersIndex!.isEmpty,
         ),
