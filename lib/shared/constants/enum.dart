@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/widgets.dart';
 import 'package:kozak/shared/shared.dart';
 
@@ -35,5 +37,48 @@ enum LoadingStatus { initial, loading, loaded, error }
 enum EvaluationEnum { like, dislike, smile, none }
 
 extension ItemLoadedExtensions on int {
-  int get getLoaded => this != 0 ? this : KDimensions.loadItems;
+  int getLoaded({required List<dynamic> list, int? loadItems}) => min(
+        list.length,
+        max(
+          this,
+          loadItems ?? KDimensions.loadItems,
+        ),
+      );
+  bool checkLoadingPosible(List<dynamic> list) =>
+      this + KDimensions.loadItems > list.length;
+}
+
+extension ListExtensions<T> on List<T> {
+  List<T> loading({required int itemsLoaded, int? loadItems}) {
+    if (isEmpty) return [];
+    final loadedItemsCount = itemsLoaded.getLoaded(list: this).clamp(0, length);
+
+    return take(loadedItemsCount).toList();
+  }
+
+  List<T> filterIndex(T eventFilterIndex) {
+    final selectedFilters = List<T>.from(this);
+
+    if (selectedFilters.contains(eventFilterIndex)) {
+      selectedFilters.remove(eventFilterIndex);
+    } else {
+      selectedFilters.add(eventFilterIndex);
+    }
+
+    return selectedFilters;
+  }
+}
+
+extension ListExtensionsNull<T> on List<T>? {
+  List<T> filterIndex(T eventFilterIndex) {
+    final selectedFilters = List<T>.from(this ?? []);
+
+    if (selectedFilters.contains(eventFilterIndex)) {
+      selectedFilters.remove(eventFilterIndex);
+    } else {
+      selectedFilters.add(eventFilterIndex);
+    }
+
+    return selectedFilters;
+  }
 }
