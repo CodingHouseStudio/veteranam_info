@@ -10,8 +10,7 @@ part 'discount_model.g.dart';
 class DiscountModel with _$DiscountModel {
   const factory DiscountModel({
     required String id,
-    required String? userId,
-    required DateTime date,
+    // required DateTime date,
     required List<int> discount,
     required String title,
     required List<String> category,
@@ -28,6 +27,7 @@ class DiscountModel with _$DiscountModel {
     required String phoneNumber,
     required DateTime dateVerified,
     required String link,
+    String? userId,
     String? html,
     String? userName,
     String? company,
@@ -81,6 +81,6 @@ abstract class DiscountModelJsonField {
   static const additionaldetails = 'additionaldetails';
   static const link = 'link';
   static const userName = 'userName';
-  static const date = 'date';
+  // static const date = 'date';
   static const subLocation = 'subLocation';
 }

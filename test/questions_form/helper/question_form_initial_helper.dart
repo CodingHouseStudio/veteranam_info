@@ -61,6 +61,11 @@ Future<void> questionForminitialHelper(
       //   findsOneWidget,
       // );
 
+      await scrollingHelper(
+        tester: tester,
+        itemKey: KWidgetkeys.screen.questionsForm.roleCivilian,
+      );
+
       expect(
         find.byKey(KWidgetkeys.screen.questionsForm.roleBusinessmen),
         findsOneWidget,
@@ -78,5 +83,5 @@ Future<void> questionForminitialHelper(
     },
   );
 
-  await chekPointHelper(tester);
+  await chekPointHelper(tester: tester);
 }

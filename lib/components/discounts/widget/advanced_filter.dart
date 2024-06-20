@@ -30,6 +30,7 @@ class AdvancedFilterMob extends StatelessWidget {
                     Row(
                       children: [
                         IconButtonWidget(
+                          key: KWidgetkeys.screen.discounts.cancelIcon,
                           icon: KIcon.close,
                           background: AppColors.materialThemeWhite,
                           padding: KPadding.kPaddingSize12,
@@ -38,6 +39,7 @@ class AdvancedFilterMob extends StatelessWidget {
                         KSizedBox.kWidthSizedBox8,
                         Text(
                           context.l10n.advancedFilter,
+                          key: KWidgetkeys.screen.discounts.cancelText,
                           style: AppTextStyle.materialThemeTitleMedium,
                         ),
                       ],
@@ -83,11 +85,11 @@ class _AdvancedFilterDeskState extends State<AdvancedFilterDesk> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: KPadding.kPaddingSize32),
-      child: BlocBuilder<DiscountWatcherBloc, DiscountWatcherState>(
-        builder: (context, state) {
-          return Column(
+    return BlocBuilder<DiscountWatcherBloc, DiscountWatcherState>(
+      builder: (context, state) {
+        return Padding(
+          padding: const EdgeInsets.only(right: KPadding.kPaddingSize32),
+          child: Column(
             children: [
               _AdvanceFilter.button(
                 onPressed: () => setState(() {
@@ -95,7 +97,15 @@ class _AdvancedFilterDeskState extends State<AdvancedFilterDesk> {
                 }),
                 isDesk: true,
                 context: context,
-                icon: bodyHiden ? KIcon.trailing : KIcon.trailingUp,
+                icon: bodyHiden
+                    ? KIcon.trailing.copyWith(
+                        key: KWidgetkeys
+                            .screen.discounts.advancedFilterButtonIcon,
+                      )
+                    : KIcon.trailingUp.copyWith(
+                        key: KWidgetkeys
+                            .screen.discounts.advancedFilterButtonIconUp,
+                      ),
               ),
               if (!bodyHiden) ...[
                 Expanded(
@@ -105,9 +115,9 @@ class _AdvancedFilterDeskState extends State<AdvancedFilterDesk> {
                 ..._AdvanceFilter.resetButton(isDesk: true, context: context),
               ],
             ],
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 }
@@ -122,6 +132,7 @@ abstract class _AdvanceFilter {
       context: context,
     );
     return ListView.builder(
+      key: KWidgetkeys.screen.discounts.advancedFilterList,
       padding: isDesk
           ? EdgeInsets.zero
           : const EdgeInsets.all(KPadding.kPaddingSize16),
@@ -142,6 +153,7 @@ abstract class _AdvanceFilter {
         Align(
           alignment: Alignment.centerLeft,
           child: TextButton(
+            key: KWidgetkeys.screen.discounts.advancedFilterResetButton,
             style: KButtonStyles.borderBlackButtonStyle,
             onPressed: () => context
                 .read<DiscountWatcherBloc>()
@@ -172,6 +184,7 @@ abstract class _AdvanceFilter {
       if (isDesk) KSizedBox.kHeightSizedBox32 else KSizedBox.kHeightSizedBox24,
       Text(
         context.l10n.filterApplied,
+        key: KWidgetkeys.screen.discounts.appliedFilterText,
         style: isDesk
             ? AppTextStyle.materialThemeTitleLarge
             : AppTextStyle.materialThemeTitleMedium,
@@ -184,6 +197,7 @@ abstract class _AdvanceFilter {
             child: Align(
               alignment: Alignment.centerLeft,
               child: TextButton.icon(
+                key: KWidgetkeys.screen.discounts.appliedFilterItems,
                 style: KButtonStyles.advancedFilterButtonStyle,
                 icon: KIcon.close,
                 label: Text(
@@ -205,6 +219,7 @@ abstract class _AdvanceFilter {
       KSizedBox.kHeightSizedBox24,
       Text(
         context.l10n.discount,
+        key: KWidgetkeys.screen.discounts.discountText,
         style: isDesk
             ? AppTextStyle.materialThemeTitleLarge
             : AppTextStyle.materialThemeTitleMedium,
@@ -214,6 +229,7 @@ abstract class _AdvanceFilter {
         (index) => Padding(
           padding: const EdgeInsets.only(top: KPadding.kPaddingSize16),
           child: CheckPointWidget(
+            key: KWidgetkeys.screen.discounts.discountItems,
             onChanged: () => _onChange(context: context, index: index),
             isCheck: _isCheck(
               index: index,
@@ -227,6 +243,7 @@ abstract class _AdvanceFilter {
       KSizedBox.kHeightSizedBox24,
       Text(
         context.l10n.city,
+        key: KWidgetkeys.screen.discounts.cityText,
         style: isDesk
             ? AppTextStyle.materialThemeTitleLarge
             : AppTextStyle.materialThemeTitleMedium,
@@ -238,6 +255,7 @@ abstract class _AdvanceFilter {
           return Padding(
             padding: const EdgeInsets.only(top: KPadding.kPaddingSize16),
             child: CheckPointAmountWidget(
+              key: KWidgetkeys.screen.discounts.cityItems,
               onChanged: () => _onChange(context: context, index: i),
               isCheck:
                   _isCheck(index: i, filterLocationIndex: filterLocationIndex),
@@ -259,16 +277,27 @@ abstract class _AdvanceFilter {
       Align(
         alignment: Alignment.centerLeft,
         child: TextButton.icon(
+          key: KWidgetkeys.screen.discounts.advancedFilterButton,
           style: KButtonStyles.advancedButtonStyle,
           label: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(
-                context.l10n.advancedFilter,
-                style: isDesk
-                    ? AppTextStyle.materialThemeHeadlineSmall
-                    : AppTextStyle.materialThemeTitleMedium,
-              ),
+              if (isDesk)
+                Expanded(
+                  child: Text(
+                    context.l10n.advancedFilter,
+                    style: isDesk
+                        ? AppTextStyle.materialThemeHeadlineSmall
+                        : AppTextStyle.materialThemeTitleMedium,
+                  ),
+                )
+              else
+                Text(
+                  context.l10n.advancedFilter,
+                  style: isDesk
+                      ? AppTextStyle.materialThemeHeadlineSmall
+                      : AppTextStyle.materialThemeTitleMedium,
+                ),
               if (icon != null) ...[KSizedBox.kWidthSizedBox8, icon],
             ],
           ),

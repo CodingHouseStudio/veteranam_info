@@ -49,6 +49,7 @@ class CheckPointWidget extends StatelessWidget {
         ),
         label: Text(
           text,
+          key: KWidgetkeys.widget.checkPoint.text,
           style: textStyle ??
               (isDesk
                   ? AppTextStyle.materialThemeBodyLarge
@@ -76,14 +77,17 @@ class CheckPointAmountWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        CheckPointWidget(
-          onChanged: onChanged,
-          isCheck: isCheck,
-          text: filterItem.value,
-          isDesk: isDesk,
+        Expanded(
+          child: CheckPointWidget(
+            onChanged: onChanged,
+            isCheck: isCheck,
+            text: filterItem.value,
+            isDesk: isDesk,
+          ),
         ),
         KSizedBox.kWidthSizedBox12,
         AmountWidget(
+          key: KWidgetkeys.widget.checkPoint.ammount,
           background: isCheck
               ? AppColors.materialThemeKeyColorsSecondary
               : AppColors.materialThemeRefNeutralVariantNeutralVariant40,

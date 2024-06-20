@@ -176,6 +176,7 @@ class _NawbarWidgetImplematationState
               //     ),
               //   ),
               if (widget.isDesk || !isFocused) const LanguagesSwitcherWidget(),
+              KSizedBox.kWidthSizedBox16,
               if (context.read<AuthenticationBloc>().state.status !=
                       AuthenticationStatus.authenticated &&
                   Config.isDevelopment)

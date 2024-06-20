@@ -36,7 +36,6 @@ class FiltersChipWidget extends StatelessWidget {
     //       child:
     return isDesk
         ? ShaderMask(
-            key: KWidgetkeys.widget.filterChip.widget,
             shaderCallback: (Rect bounds) {
               return LinearGradient(
                 colors: [
@@ -56,6 +55,7 @@ class FiltersChipWidget extends StatelessWidget {
   }
 
   Widget get _body => SingleChildScrollView(
+        key: KWidgetkeys.widget.filterChip.widget,
         scrollDirection: Axis.horizontal,
         child: Row(
           children: List.generate(filtersItems.length, (index) {

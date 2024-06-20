@@ -83,8 +83,8 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
                     : padding,
                 sliver: widget.mainRightChildWidget != null && isDesk
                     ? RowSliver(
-                        left: mainBody(mainChildWidget),
-                        right: SliverPersistentHeader(
+                        right: mainBody(mainChildWidget),
+                        left: SliverPersistentHeader(
                           pinned: true,
                           delegate: NawbarWidget(
                             isDesk: isDesk,
@@ -92,6 +92,7 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
                             maxMinHeight: constraints.maxHeight,
                           ),
                         ),
+                        leftWidthPercent: 0.3,
                       )
                     : mainBody(mainChildWidget),
               ),

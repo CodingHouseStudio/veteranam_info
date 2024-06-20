@@ -9,15 +9,17 @@ class RowSliver extends MultiChildRenderObjectWidget {
   RowSliver({
     required this.left,
     required this.right,
+    required this.leftWidthPercent,
     super.key,
   }) : super(children: [left, right]);
 
   final Widget left;
   final Widget right;
+  final double leftWidthPercent;
 
   @override
   _RenderRowSliverSliver createRenderObject(BuildContext context) {
-    return _RenderRowSliverSliver();
+    return _RenderRowSliverSliver(leftWidthPercent: leftWidthPercent);
   }
 
   @override
@@ -37,6 +39,12 @@ class _RowSliverParentData extends SliverPhysicalParentData
 
 class _RenderRowSliverSliver extends RenderSliver
     with ContainerRenderObjectMixin<RenderSliver, _RowSliverParentData> {
+  _RenderRowSliverSliver({required double leftWidthPercent})
+      : _leftWidthPercent = leftWidthPercent;
+
+  double get leftWidthPercent => _leftWidthPercent;
+  final double _leftWidthPercent;
+
   RenderSliver get left => _children.first;
   RenderSliver get right => _children.last;
 
@@ -62,7 +70,7 @@ class _RenderRowSliverSliver extends RenderSliver
       return;
     }
 
-    final leftSize = (constraints.crossAxisExtent / 3) * 2;
+    final leftSize = constraints.crossAxisExtent * leftWidthPercent;
 
     // Layout the left child with its calculated size
     left.layout(
@@ -84,16 +92,19 @@ class _RenderRowSliverSliver extends RenderSliver
     // Calculate geometry based on children's layout extents
     final maxScrollExtent =
         max(left.geometry!.scrollExtent, right.geometry!.scrollExtent);
+
+    final paintExtent = constraints.remainingPaintExtent;
+    final layoutExtent = min(maxScrollExtent, paintExtent);
+
     geometry = SliverGeometry(
       scrollExtent: maxScrollExtent,
-      paintExtent: left.geometry!.paintExtent,
-      maxPaintExtent:
-          max(left.geometry!.maxPaintExtent, right.geometry!.maxPaintExtent),
+      paintExtent: paintExtent,
+      layoutExtent: layoutExtent,
+      maxPaintExtent: maxScrollExtent,
       maxScrollObstructionExtent: max(
         left.geometry!.maxScrollObstructionExtent,
         right.geometry!.maxScrollObstructionExtent,
       ),
-      layoutExtent: left.geometry!.layoutExtent + right.geometry!.layoutExtent,
     );
   }
 
@@ -105,7 +116,8 @@ class _RenderRowSliverSliver extends RenderSliver
     context.paintChild(left, offset);
 
     // Calculate the offset for painting the right child
-    final rightOffsetX = offset.dx + (constraints.crossAxisExtent / 3) * 2;
+    final rightOffsetX =
+        offset.dx + constraints.crossAxisExtent * leftWidthPercent;
     final rightOffset = Offset(rightOffsetX, offset.dy);
 
     // Paint the right child

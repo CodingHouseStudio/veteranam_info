@@ -208,6 +208,12 @@ abstract class KTestText {
         userId: i.toString(),
         category: i == 0 ? KMockText.tag : KMockText.discountModel.category,
         dateVerified: dateTime,
+        discount: i == 0 ? [12, 35, 100] : KMockText.discountModel.discount,
+        subLocation: i == 0
+            ? SubLocation.all
+            : i == 1
+                ? SubLocation.allStoresOfChain:
+                i == 2? SubLocation.online:null,
       ),
   ];
 

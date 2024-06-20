@@ -33,9 +33,7 @@ final class _AppUserSettingChanged extends AuthenticationEvent {
 }
 
 final class AppLanguageChanged extends AuthenticationEvent {
-  const AppLanguageChanged(this.language);
-
-  final Language language;
+  const AppLanguageChanged();
 }
 
 final class AppUserRoleChanged extends AuthenticationEvent {

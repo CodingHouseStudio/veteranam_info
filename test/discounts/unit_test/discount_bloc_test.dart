@@ -61,7 +61,7 @@ void main() {
 
     blocTest<DiscountWatcherBloc, DiscountWatcherState>(
       'emits [discountWatcherState()] when loading'
-      ' discountModel list and filtering it',
+      ' discountModel list and filtering category it',
       build: () => discountWatcherBloc,
       act: (bloc) async {
         bloc.add(const DiscountWatcherEvent.started());
@@ -101,6 +101,93 @@ void main() {
                 ),
               ) &&
               state.filtersCategoriesIndex != null,
+        ),
+      ],
+    );
+
+    blocTest<DiscountWatcherBloc, DiscountWatcherState>(
+      'emits [discountWatcherState()] when loading'
+      ' discountModel list and filtering location it',
+      build: () => discountWatcherBloc,
+      act: (bloc) async {
+        bloc.add(const DiscountWatcherEvent.started());
+        await expectLater(
+          bloc.stream,
+          emitsInOrder([
+            predicate<DiscountWatcherState>(
+              (state) => state.loadingStatus == LoadingStatus.loading,
+            ),
+            predicate<DiscountWatcherState>(
+              (state) => state.loadingStatus == LoadingStatus.loaded,
+            ),
+          ]),
+          reason: 'Wait for loading data',
+        );
+        bloc
+          ..add(const DiscountWatcherEvent.filterLocation(1))
+          ..add(const DiscountWatcherEvent.filterLocation(1))
+          ..add(const DiscountWatcherEvent.filterLocation(0))
+          ..add(const DiscountWatcherEvent.filterLocation(2))
+          ..add(const DiscountWatcherEvent.filterLocation(0))
+          ..add(const DiscountWatcherEvent.filterLocation(2));
+      },
+      expect: () => [
+        predicate<DiscountWatcherState>(
+          (state) => state.loadingStatus == LoadingStatus.loading,
+        ),
+        predicate<DiscountWatcherState>(
+          (state) =>
+              state.loadingStatus == LoadingStatus.loaded &&
+              state.filtersLocationIndex == null,
+        ),
+        predicate<DiscountWatcherState>(
+          (state) =>
+              state.loadingStatus == LoadingStatus.loaded &&
+              state.filteredDiscountModelItems.length == 1 &&
+              state.filtersLocationIndex != null,
+        ),
+        predicate<DiscountWatcherState>(
+          (state) =>
+              state.loadingStatus == LoadingStatus.loaded &&
+              state.filteredDiscountModelItems.length ==
+                  KDimensions.loadItems &&
+              state.filtersLocationIndex != null,
+        ),
+        predicate<DiscountWatcherState>(
+          (state) =>
+              state.loadingStatus == LoadingStatus.loaded &&
+              state.filteredDiscountModelItems.length ==
+                  KDimensions.loadItems &&
+              state.filtersLocationIndex != null,
+        ),
+        predicate<DiscountWatcherState>(
+          (state) =>
+              state.loadingStatus == LoadingStatus.loaded &&
+              state.filteredDiscountModelItems.every(
+                (element) => element.location!.contains(
+                  KTestText.discountModelItemsModify.first.location!.first,
+                ),
+              ) &&
+              state.filtersLocationIndex != null &&
+              state.filtersLocationIndex!.isNotEmpty,
+        ),
+        predicate<DiscountWatcherState>(
+          (state) =>
+              state.loadingStatus == LoadingStatus.loaded &&
+              state.filteredDiscountModelItems.every(
+                (element) => element.location!.contains(
+                  KTestText.discountModelItemsModify.first.location!.first,
+                ),
+              ) &&
+              state.filtersLocationIndex != null &&
+              state.filtersLocationIndex!.isNotEmpty,
+        ),
+        predicate<DiscountWatcherState>(
+          (state) =>
+              state.loadingStatus == LoadingStatus.loaded &&
+              state.filteredDiscountModelItems.length ==
+                  KDimensions.loadItems &&
+              state.filtersLocationIndex != null,
         ),
       ],
     );

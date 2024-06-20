@@ -80,6 +80,9 @@ abstract class KSizedBox {
   static const SizedBox kHeightSizedBox3 = SizedBox(
     height: KSize.kPixel3,
   );
+  static const SizedBox kHeightSizedBox2 = SizedBox(
+    height: KSize.kPixel2,
+  );
   static const SizedBox kHeightSizedBox78 = SizedBox(
     height: KSize.kPixel78,
   );

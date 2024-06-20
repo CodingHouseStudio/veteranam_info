@@ -173,52 +173,42 @@ class DiscountWatcherBloc
   }) {
     final items = list ?? state.discountModelItems;
 
-    final filterList = items
+    return items
+        .where(
+          (element) =>
+              locationIndex == null ||
+              !locationIndex.contains(1) ||
+              element.discount.contains(100),
+        )
+        .toList()
         .loadingFilter(
           filtersIndex: categoryIndex,
           itemsLoaded: null,
           getFilter: (item) => item.category,
+          fullList: items,
         )
         .loadingFilter(
-          filtersIndex:
-              locationIndex?.where((element) => element != 0).toList(),
+          filtersIndex: locationIndex?.where((element) => element > 1).toList(),
           itemsLoaded: itemsLoaded,
           getFilter: (item) => [
             if (item.location != null) ...item.location!,
             if (item.subLocation != null) ...item.subLocation._getList,
           ],
           overallFilter: items._getLocationItems,
-        );
+        )..sort((a, b) {
+        if (locationIndex != null && locationIndex.contains(0)) {
+          final maxDiscountA =
+              a.discount.isNotEmpty ? a.discount.reduce(max) : 0;
+          final maxDiscountB =
+              b.discount.isNotEmpty ? b.discount.reduce(max) : 0;
 
-    // If no location index is provided, return the filtered list
-    if (locationIndex == null || locationIndex.isEmpty) {
-      return filterList
-        ..sort(
-          (a, b) => b.date.compareTo(a.date),
-        );
-    }
-
-    // Sort based on locationIndex and discount/date
-    filterList.sort((a, b) {
-      if (locationIndex.contains(0)) {
-        final maxDiscountA = a.discount.isNotEmpty ? a.discount.reduce(max) : 0;
-        final maxDiscountB = b.discount.isNotEmpty ? b.discount.reduce(max) : 0;
-
-        if (maxDiscountA != maxDiscountB) {
-          return maxDiscountB.compareTo(maxDiscountA);
+          if (maxDiscountA != maxDiscountB) {
+            return maxDiscountB.compareTo(maxDiscountA);
+          }
         }
-      }
 
-      return b.date.compareTo(a.date);
-    });
-
-    // Filter out elements not matching the specific condition
-    return filterList
-        .where(
-          (element) =>
-              !locationIndex.contains(1) || element.discount.contains(100),
-        )
-        .toList();
+        return b.dateVerified.compareTo(a.dateVerified);
+      });
   }
 
   void _onFailure(
