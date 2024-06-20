@@ -144,6 +144,8 @@ class DiscountBodyWidget extends StatelessWidget {
                 index,
               ),
             ),
+        fullLenght:
+            context.read<DiscountWatcherBloc>().state.discountModelItems.length,
       );
 
   Widget _myDiscountButton(

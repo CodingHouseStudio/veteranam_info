@@ -42,7 +42,9 @@ extension ListExtensions<T> on List<T> {
         itemsLoaded?.getLoaded(list: this, loadItems: loadItems) ??
             (fullList ?? this).length;
 
-    if (filtersIndex == null || filtersIndex.isEmpty) {
+    if (filtersIndex == null ||
+        filtersIndex.isEmpty ||
+        filtersIndex.contains(-1)) {
       return take(loadedItemsCount).toList();
     }
     final overallFilterValue = overallFilter ??
@@ -113,7 +115,13 @@ extension ListExtensionsNull<T> on List<T>? {
     if (selectedFilters.contains(eventFilterIndex)) {
       selectedFilters.remove(eventFilterIndex);
     } else {
+      if (eventFilterIndex == -1) {
+        return [eventFilterIndex];
+      }
       selectedFilters.add(eventFilterIndex);
+      if (selectedFilters.contains(-1)) {
+        selectedFilters.remove(-1);
+      }
     }
 
     return selectedFilters;

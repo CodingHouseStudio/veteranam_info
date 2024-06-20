@@ -8,10 +8,12 @@ class FiltersChipWidget extends StatelessWidget {
     // required this.onResetValue,
     required this.onSelected,
     required this.isSelected,
+    required this.fullLenght,
     super.key,
   });
 
   final List<FilterItem> filtersItems;
+  final int fullLenght;
   final bool isDesk;
   // final void Function() onResetValue;
   final void Function(
@@ -46,19 +48,20 @@ class FiltersChipWidget extends StatelessWidget {
                 tileMode: TileMode.mirror,
               ).createShader(bounds);
             },
-            child: _body,
+            child: _body(context),
           )
-        : _body;
+        : _body(context);
     //     ),
     //   ],
     // );
   }
 
-  Widget get _body => SingleChildScrollView(
+  Widget _body(BuildContext context) => SingleChildScrollView(
         key: KWidgetkeys.widget.filterChip.widget,
         scrollDirection: Axis.horizontal,
         child: Row(
-          children: List.generate(filtersItems.length, (index) {
+          children: List.generate(filtersItems.length + 1, (index) {
+            final i = index - 1;
             return Padding(
               padding: EdgeInsets.only(
                 right:
@@ -66,12 +69,15 @@ class FiltersChipWidget extends StatelessWidget {
               ),
               child: ChipWidget(
                 key: KWidgetkeys.widget.filterChip.chips,
-                filter: filtersItems.elementAt(index),
+                filter: i != -1
+                    ? filtersItems.elementAt(i)
+                    : FilterItem(context.l10n.all)
+                  ..number = fullLenght,
                 onSelected: (isSelected) => onSelected(
-                  index,
+                  i,
                 ),
                 isSelected: isSelected(
-                  index,
+                  i,
                 ),
                 isDesk: isDesk,
               ),

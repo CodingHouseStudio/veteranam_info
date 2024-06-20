@@ -60,6 +60,11 @@ class InformationBodyWidget extends StatelessWidget {
                     index,
                   ),
                 ),
+            fullLenght: context
+                .read<InformationWatcherBloc>()
+                .state
+                .informationModelItems
+                .length,
           ),
           if (isDesk)
             KSizedBox.kHeightSizedBox40

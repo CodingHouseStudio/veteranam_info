@@ -198,6 +198,7 @@
   "fromLargestToSmallest": "From the largest to the smallest",
   "free": "Free",
   "allStoresOfChain": "All establishments of the chain",
+  "all": "All",
   "error": "We're sorry, there was an unforeseen error.",
   "@error": {
     "description": "message of an unforeseen error that was not foreseen."

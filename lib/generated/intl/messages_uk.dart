@@ -31,6 +31,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Написати свою історію"),
         "advancedFilter":
             MessageLookupByLibrary.simpleMessage("Розширений фільтр"),
+        "all": MessageLookupByLibrary.simpleMessage("Все"),
         "allRightsReserved":
             MessageLookupByLibrary.simpleMessage("Всі права захищені"),
         "allStoresOfChain":

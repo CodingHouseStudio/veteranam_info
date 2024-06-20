@@ -77,11 +77,22 @@ void main() {
           ]),
           reason: 'Wait for loading data',
         );
-        bloc.add(
-          const DiscountWatcherEvent.filterCategory(
-            0,
-          ),
-        );
+        bloc
+          ..add(
+            const DiscountWatcherEvent.filterCategory(
+              0,
+            ),
+          )
+          ..add(
+            const DiscountWatcherEvent.filterCategory(
+              1,
+            ),
+          )
+          ..add(
+            const DiscountWatcherEvent.filterCategory(
+              -1,
+            ),
+          );
       },
       expect: () => [
         predicate<DiscountWatcherState>(
@@ -100,7 +111,20 @@ void main() {
                   KTestText.discountModelItemsModify.first.category.first,
                 ),
               ) &&
-              state.filtersCategoriesIndex != null,
+              state.filtersCategoriesIndex != null &&
+              state.filtersCategoriesIndex!.length == 1,
+        ),
+        predicate<DiscountWatcherState>(
+          (state) =>
+              state.loadingStatus == LoadingStatus.loaded &&
+              state.filtersCategoriesIndex != null &&
+              state.filtersCategoriesIndex!.length == 2,
+        ),
+        predicate<DiscountWatcherState>(
+          (state) =>
+              state.loadingStatus == LoadingStatus.loaded &&
+              state.filtersCategoriesIndex != null &&
+              state.filtersCategoriesIndex!.length == 1,
         ),
       ],
     );

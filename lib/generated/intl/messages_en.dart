@@ -30,6 +30,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addYourStory": MessageLookupByLibrary.simpleMessage("Add your story"),
         "advancedFilter":
             MessageLookupByLibrary.simpleMessage("Advanced filter"),
+        "all": MessageLookupByLibrary.simpleMessage("All"),
         "allRightsReserved":
             MessageLookupByLibrary.simpleMessage("All rights reserved"),
         "allStoresOfChain": MessageLookupByLibrary.simpleMessage(
