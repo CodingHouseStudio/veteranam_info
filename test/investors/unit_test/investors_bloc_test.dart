@@ -92,6 +92,12 @@ void main() {
         ),
         predicate<InvestorsWatcherState>(
           (state) =>
+              state.loadingStatus == LoadingStatus.loading &&
+              state.loadingFundItems.length == KDimensions.investorsLoadItems &&
+              state.itemsLoaded == KDimensions.investorsLoadItems,
+        ),
+        predicate<InvestorsWatcherState>(
+          (state) =>
               state.loadingStatus == LoadingStatus.loaded &&
               state.loadingFundItems.length ==
                   KDimensions.investorsLoadItems * 2 &&

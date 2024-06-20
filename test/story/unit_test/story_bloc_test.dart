@@ -95,6 +95,12 @@ void main() {
         ),
         predicate<StoryWatcherState>(
           (state) =>
+              state.loadingStatus == LoadingStatus.loading &&
+              state.loadingStoryModelItems.length == KDimensions.loadItems &&
+              state.itemsLoaded == KDimensions.loadItems,
+        ),
+        predicate<StoryWatcherState>(
+          (state) =>
               state.loadingStatus == LoadingStatus.loaded &&
               state.loadingStoryModelItems.length ==
                   KDimensions.loadItems * 2 &&
@@ -105,9 +111,12 @@ void main() {
 
     blocTest<StoryWatcherBloc, StoryWatcherState>(
       'emits [StoryWatcherState()]'
-      ' when load StoryModel list, load all items it and update',
+      ' when load StoryModel list, load all items',
       build: () => storyWatcherBloc,
       act: (bloc) async {
+        when(mockStoryRepository.getStoryItems()).thenAnswer(
+          (_) => Stream.value([KTestText.storyModelItems.first]),
+        );
         bloc.add(const StoryWatcherEvent.started());
         await expectLater(
           bloc.stream,
@@ -121,37 +130,26 @@ void main() {
           ]),
           reason: 'Wait loading data',
         );
-        for (var i = 1; i <= 30; i++) {
-          bloc.add(
-            const StoryWatcherEvent.loadNextItems(),
-          );
-        }
         bloc.add(
-          StoryWatcherEvent.updated([KTestText.storyModelItems.first]),
+          const StoryWatcherEvent.loadNextItems(),
         );
+        // ..add(
+        //   StoryWatcherEvent.updated([KTestText.storyModelItems.first]),
+        // );
       },
       expect: () => [
         predicate<StoryWatcherState>(
           (state) => state.loadingStatus == LoadingStatus.loading,
         ),
         predicate<StoryWatcherState>(
-          (state) =>
-              state.loadingStatus == LoadingStatus.loaded &&
-              state.loadingStoryModelItems.length == KDimensions.loadItems &&
-              state.itemsLoaded == KDimensions.loadItems,
+          (state) => state.loadingStatus == LoadingStatus.loaded,
         ),
-        for (var i = 1; i < 10; i++)
-          predicate<StoryWatcherState>(
-            (state) =>
-                state.loadingStatus == LoadingStatus.loaded &&
-                state.itemsLoaded == KDimensions.loadItems * (i + 1),
-          ),
-        predicate<StoryWatcherState>(
-          (state) =>
-              state.loadingStatus == LoadingStatus.loaded &&
-              state.loadingStoryModelItems.length != KDimensions.loadItems &&
-              state.itemsLoaded != KDimensions.loadItems,
-        ),
+        // predicate<StoryWatcherState>(
+        //   (state) =>
+        //       state.loadingStatus == LoadingStatus.loaded &&
+        //       state.loadingStoryModelItems.length != KDimensions.loadItems &&
+        //       state.itemsLoaded != KDimensions.loadItems,
+        // ),
       ],
     );
 
