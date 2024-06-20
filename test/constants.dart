@@ -212,8 +212,10 @@ abstract class KTestText {
         subLocation: i == 0
             ? SubLocation.all
             : i == 1
-                ? SubLocation.allStoresOfChain:
-                i == 2? SubLocation.online:null,
+                ? SubLocation.allStoresOfChain
+                : i == 2
+                    ? SubLocation.online
+                    : null,
       ),
   ];
 
