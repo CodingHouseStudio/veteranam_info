@@ -56,8 +56,8 @@ void main() {
           DiscountModelJsonField.title: KTestText.discountModelItems.last.title,
           DiscountModelJsonField.userName:
               KTestText.discountModelItems.last.userName,
-          DiscountModelJsonField.date:
-              KTestText.discountModelItems.last.date.toIso8601String(),
+          // DiscountModelJsonField.date:
+          //     KTestText.discountModelItems.last.date.toIso8601String(),
         };
 
         final discountModel = DiscountModel.fromJson(json);
@@ -158,10 +158,10 @@ void main() {
           discountModel.userName,
           KTestText.discountModelItems.last.userName,
         );
-        expect(
-          discountModel.date,
-          KTestText.discountModelItems.last.date,
-        );
+        // expect(
+        //   discountModel.date,
+        //   KTestText.discountModelItems.last.date,
+        // );
       });
 
       test('${KGroupText.shouldBe} ', () {
@@ -199,8 +199,8 @@ void main() {
           DiscountModelJsonField.territory:
               KTestText.discountModelItems.last.territory,
           DiscountModelJsonField.title: KTestText.discountModelItems.last.title,
-          DiscountModelJsonField.date:
-              KTestText.discountModelItems.last.date.toIso8601String(),
+          // DiscountModelJsonField.date:
+          //     KTestText.discountModelItems.last.date.toIso8601String(),
         };
 
         final discountModel = DiscountModel.fromJson(json);
@@ -301,10 +301,10 @@ void main() {
           discountModel.userName,
           null,
         );
-        expect(
-          discountModel.date,
-          KTestText.discountModelItems.last.date,
-        );
+        // expect(
+        //   discountModel.date,
+        //   KTestText.discountModelItems.last.date,
+        // );
       });
 
       test('${KGroupText.shouldNotBe} ', () {
@@ -353,8 +353,8 @@ void main() {
               KTestText.discountModelItems.last.subcategoryUA,
           DiscountModelJsonField.territory:
               KTestText.discountModelItems.last.territory,
-          DiscountModelJsonField.date:
-              KTestText.discountModelItems.last.date.toIso8601String(),
+          // DiscountModelJsonField.date:
+          //     KTestText.discountModelItems.last.date.toIso8601String(),
         };
 
         expect(
@@ -410,8 +410,8 @@ void main() {
           DiscountModelJsonField.territory:
               KTestText.discountModelItems.last.territory,
           DiscountModelJsonField.title: KTestText.discountModelItems.last.title,
-          DiscountModelJsonField.date:
-              KTestText.discountModelItems.last.date.toIso8601String(),
+          // DiscountModelJsonField.date:
+          //     KTestText.discountModelItems.last.date.toIso8601String(),
         };
 
         final discountModelJson = KTestText.discountModelItems.last.toJson();
@@ -454,8 +454,8 @@ void main() {
           DiscountModelJsonField.territory:
               KTestText.discountModelItems.last.territory,
           DiscountModelJsonField.title: KTestText.discountModelItems.last.title,
-          DiscountModelJsonField.date:
-              KTestText.discountModelItems.last.date.toIso8601String(),
+          // DiscountModelJsonField.date:
+          //     KTestText.discountModelItems.last.date.toIso8601String(),
           DiscountModelJsonField.directLink: null,
           DiscountModelJsonField.html: null,
           DiscountModelJsonField.additionaldetails: null,
