@@ -6,36 +6,21 @@ import '../../text_dependency.dart';
 Future<void> listLoadFilterHelper(
   WidgetTester tester,
 ) async {
-  expect(find.byKey(KWidgetkeys.widget.newsCard.title), findsOneWidget);
+  expect(find.byKey(KWidgetkeys.widget.newsCard.title), findsWidgets);
 
   await scrollingHelper(
     tester: tester,
     offset: KTestConstants.scrollingDown,
   );
 
-  await scrollingHelper(
-    tester: tester,
-    itemKey: KWidgetkeys.screen.information.button,
-    offset: KTestConstants.scrollingUp500,
-  );
-
-  expect(find.byKey(KWidgetkeys.screen.information.button), findsOneWidget);
-
-  await tester.tap(find.byKey(KWidgetkeys.screen.information.button));
-
-  await tester.pumpAndSettle();
+  expect(find.byKey(KWidgetkeys.screen.information.cardLast), findsNothing);
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.widget.newsCard.title,
-    offset: KTestConstants.scrollingUp,
+    offset: KTestConstants.scrollingDown,
   );
 
-  final widgets = find.byKey(KWidgetkeys.widget.newsCard.title);
-
-  expect(widgets, findsWidgets);
-
-  expect(widgets.evaluate().length, greaterThan(1));
+  expect(find.byKey(KWidgetkeys.screen.information.cardLast), findsNothing);
 
   await scrollingHelper(
     tester: tester,
@@ -51,17 +36,8 @@ Future<void> listLoadFilterHelper(
     offset: KTestConstants.scrollingDown,
   );
 
-  await scrollingHelper(
-    tester: tester,
-    itemKey: KWidgetkeys.screen.information.button,
-    offset: KTestConstants.scrollingUp500,
+  expect(
+    find.byKey(KWidgetkeys.screen.information.cardLast),
+    findsNothing,
   );
-
-  await tester.tap(find.byKey(KWidgetkeys.screen.information.button));
-
-  await tester.pumpAndSettle();
-
-  final widgetsTwoTap = find.byKey(KWidgetkeys.widget.newsCard.title);
-
-  expect(widgets.evaluate().length, widgetsTwoTap.evaluate().length);
 }

@@ -58,7 +58,7 @@ void main() {
         await workEmployeeMockButtonHelper(tester);
       });
     });
-    group(KGroupText.getList, () {
+    group('${KGroupText.getList} ', () {
       setUp(() {
         when(mockWorkRepository.getWorks())
             .thenAnswer((invocation) => Stream.value(KTestText.workModelItems));

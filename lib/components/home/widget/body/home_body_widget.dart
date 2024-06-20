@@ -25,6 +25,7 @@ class HomeBodyWidget extends StatelessWidget {
       ),
       listenWhen: (previous, current) => current.failure != null,
       builder: (context, _) => ScaffoldWidget(
+        hasFooter: true,
         mainChildWidgetsFunction: ({required isDesk}) => [
           ..._boxWidgetList(
             context: context,

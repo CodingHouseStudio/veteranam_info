@@ -43,6 +43,7 @@ extension IconExtension on Icon {
 abstract class KIcon {
   static const _KIcon arrowLeft = _KIcon(Symbols.arrow_left);
   static const _KIcon arrowRight = _KIcon(Symbols.arrow_right);
+
   // static const Icon mic = Icon(Icons.mic_none_outlined);
   static const _KIcon person = _KIcon(Symbols.person_outline);
   static const _KIcon search = _KIcon(Symbols.search);
@@ -78,10 +79,11 @@ abstract class KIcon {
   static const _KIcon check = _KIcon(
     Symbols.check,
   );
+  static const _KIcon website = _KIcon(Symbols.captive_portal);
   static const _KIcon volum = _KIcon(Symbols.volume_up);
   static const _KIcon eye = _KIcon(Symbols.remove_red_eye);
   static const _KIcon eyeOff = _KIcon(Symbols.remove_red_eye_sharp);
-  static const _KIcon refresh = _KIcon(Symbols.refresh);
+  static const _KIcon refresh = _KIcon(Symbols.cached);
   static const _KIcon message = _KIcon(Symbols.chat_bubble);
   static const _KIcon star = _KIcon(Symbols.star);
   static const _KIcon attachFile = _KIcon(Symbols.attach_file);
