@@ -70,13 +70,12 @@ class InformationWatcherBloc
         loadingStatus: LoadingStatus.loaded,
         filteredInformationModelItems: _filter(
           filtersIndex: state.filtersIndex,
-          itemsLoaded: state.itemsLoaded.getLoaded,
+          itemsLoaded: state.itemsLoaded,
           informationModelItems: event.informationItemsModel,
         ),
         filtersIndex: state.filtersIndex,
-        itemsLoaded: event.informationItemsModel.isNotEmpty
-            ? state.itemsLoaded.getLoaded
-            : 0,
+        itemsLoaded:
+            state.itemsLoaded.getLoaded(list: event.informationItemsModel),
         failure: null,
       ),
     );
@@ -86,8 +85,10 @@ class InformationWatcherBloc
     _LoadNextItems event,
     Emitter<InformationWatcherState> emit,
   ) {
-    if (state.itemsLoaded + KDimensions.loadItems >
-        state.informationModelItems.length) return;
+    if (state.itemsLoaded.checkLoadingPosible(state.informationModelItems)) {
+      return;
+    }
+    emit(state.copyWith(loadingStatus: LoadingStatus.loading));
     final filterItems = _filter(
       filtersIndex: state.filtersIndex,
       itemsLoaded: state.itemsLoaded + KDimensions.loadItems,
@@ -96,9 +97,9 @@ class InformationWatcherBloc
     emit(
       state.copyWith(
         filteredInformationModelItems: filterItems,
-        itemsLoaded: filterItems.length > state.itemsLoaded
-            ? state.itemsLoaded + KDimensions.loadItems
-            : filterItems.length,
+        itemsLoaded: (state.itemsLoaded + KDimensions.loadItems)
+            .getLoaded(list: filterItems),
+        loadingStatus: LoadingStatus.loaded,
       ),
     );
   }
@@ -111,7 +112,7 @@ class InformationWatcherBloc
       state.copyWith(
         filteredInformationModelItems: _filter(
           filtersIndex: null,
-          itemsLoaded: state.itemsLoaded.getLoaded,
+          itemsLoaded: state.itemsLoaded,
           informationModelItems: state.informationModelItems,
         ),
         filtersIndex: null,
@@ -123,16 +124,12 @@ class InformationWatcherBloc
     _Filter event,
     Emitter<InformationWatcherState> emit,
   ) {
-    final selectedFilters = List<int>.from(state.filtersIndex ?? []);
-
-    state.filtersIndex?.contains(event.filterIndex) ?? false
-        ? selectedFilters.remove(event.filterIndex)
-        : selectedFilters.add(event.filterIndex);
+    final selectedFilters = state.filtersIndex.filterIndex(event.filterIndex);
 
     final filterItems = _filter(
       filtersIndex: selectedFilters,
+      itemsLoaded: state.itemsLoaded,
       informationModelItems: state.informationModelItems,
-      itemsLoaded: state.itemsLoaded.getLoaded,
     );
 
     emit(
@@ -140,9 +137,7 @@ class InformationWatcherBloc
         loadingStatus: LoadingStatus.loaded,
         filteredInformationModelItems: filterItems,
         filtersIndex: selectedFilters,
-        itemsLoaded: filterItems.length > state.itemsLoaded
-            ? state.itemsLoaded.getLoaded
-            : filterItems.length,
+        itemsLoaded: state.itemsLoaded.getLoaded(list: filterItems),
       ),
     );
   }
@@ -153,7 +148,9 @@ class InformationWatcherBloc
     required List<InformationModel> informationModelItems,
   }) {
     if (informationModelItems.isEmpty) return [];
-    final loadedItemsCount = itemsLoaded.clamp(0, informationModelItems.length);
+    final loadedItemsCount = itemsLoaded
+        .getLoaded(list: informationModelItems)
+        .clamp(0, informationModelItems.length);
 
     if (filtersIndex == null || filtersIndex.isEmpty) {
       return informationModelItems.take(loadedItemsCount).toList();

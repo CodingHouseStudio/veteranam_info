@@ -7,21 +7,22 @@ List<Widget> _newsWidgetList({
   final isLoading =
       context.read<InformationWatcherBloc>().state.loadingStatus !=
           LoadingStatus.loaded;
-  final informationModelItems = isLoading
-      ? List.generate(
+  final informationModelItems = [
+    if (context.read<InformationWatcherBloc>().state.failure == null) ...[
+      ...context
+          .read<InformationWatcherBloc>()
+          .state
+          .filteredInformationModelItems,
+      if (isLoading)
+        ...List.generate(
           KDimensions.shimmerInformationItems,
           (index) => KMockText.informationModel.copyWith(
             id: index.toString(),
           ),
-        )
-      : context
-          .read<InformationWatcherBloc>()
-          .state
-          .filteredInformationModelItems;
-  return List.generate(
-      context.read<InformationWatcherBloc>().state.failure == null
-          ? informationModelItems.length
-          : 0, (index) {
+        ),
+    ],
+  ];
+  return List.generate(informationModelItems.length, (index) {
     return Padding(
       padding: index != 0
           ? EdgeInsets.only(
@@ -29,7 +30,9 @@ List<Widget> _newsWidgetList({
             )
           : EdgeInsets.zero,
       child: SkeletonizerWidget(
-        isLoading: isLoading,
+        isLoading: informationModelItems.length - index <=
+                KDimensions.shimmerInformationItems &&
+            isLoading,
         child: NewsCardWidget(
           key: index != informationModelItems.length - 1
               ? KWidgetkeys.screen.information.card
