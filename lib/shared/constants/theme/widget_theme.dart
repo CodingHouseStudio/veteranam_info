@@ -45,7 +45,7 @@ abstract class KWidgetTheme {
 
   static const boxDecorationGrayCircular = BoxDecoration(
     shape: BoxShape.circle,
-    color: AppColors.materialThemeWhite,
+    color: AppColors.materialThemeKeyColorsNeutral,
   );
 
   static const boxDecorationCard = BoxDecoration(
@@ -85,7 +85,14 @@ abstract class KWidgetTheme {
     borderRadius: KBorderRadius.kBorderRadiusRight32,
     color: AppColors.materialThemeWhite,
   );
-
+  static const boxDecorationBlackCircular = BoxDecoration(
+    shape: BoxShape.circle,
+    color: AppColors.materialThemeBlack,
+  );
+  static const boxDecorationWhiteMain = BoxDecoration(
+    borderRadius: KBorderRadius.kBorderRadius32,
+    color: AppColors.materialThemeWhite,
+  );
   static const boxDecorChatMessage = BoxDecoration(
     color: AppColors.materialThemeKeyColorsNeutralVariant,
     borderRadius: KBorderRadius.kBorderRadiusChat,
