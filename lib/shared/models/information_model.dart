@@ -17,7 +17,9 @@ class InformationModel with _$InformationModel {
     required String topicUA,
     required String status,
     required DateTime fetchDate,
-    @ImageConverter() ImageModel? image,
+    String? link,
+    String? directLink,
+    @ImageConverter() List<ImageModel>? image,
   }) = _InformationModel;
 
   factory InformationModel.fromJson(Map<String, dynamic> json) =>
@@ -35,4 +37,6 @@ abstract class InformationModelJsonField {
   static const topicUA = 'topicUA';
   static const status = 'status';
   static const image = 'image';
+  static const link = 'link';
+  static const directLink = 'directLink';
 }
