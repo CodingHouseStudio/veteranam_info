@@ -63,7 +63,10 @@ class DonateCardWidget extends StatelessWidget {
                             : AppTextStyle.materialThemeBodyMedium,
                       ),
                     ),
-                  KSizedBox.kHeightSizedBox16,
+                  if (isDesk)
+                    KSizedBox.kHeightSizedBox16
+                  else
+                    KSizedBox.kHeightSizedBox8,
                   DonateButtonWidget(
                     key: KWidgetkeys.widget.donateCard.button,
                     text: context.l10n.support,
