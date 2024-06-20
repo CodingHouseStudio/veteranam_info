@@ -55,6 +55,8 @@ abstract class KGroupText {
   static const mockButton = 'Tap on the mock button';
   static const error = 'Error';
   static const failureNetwork = 'Failure Network';
+  static const successfulDelete = 'Successful delete';
+  static const failureDelete = 'Failure delete';
 }
 
 abstract class KTestText {
@@ -190,6 +192,15 @@ abstract class KTestText {
       ),
   ];
 
+  static final userDiscountModelItems = <DiscountModel>[
+    for (var i = 0; i < 5; i++)
+      KMockText.discountModel.copyWith(
+        id: i.toString(),
+        userId: userWithoutPhoto.id,
+        dateVerified: dateTime,
+      ),
+  ];
+
   static final discountModelItemsModify = <DiscountModel>[
     for (var i = 0; i < 50; i++)
       KMockText.discountModel.copyWith(
@@ -201,7 +212,7 @@ abstract class KTestText {
   ];
 
   static final fundItems = <FundModel>[
-    for (var i = 0; i < 5; i++)
+    for (var i = 0; i < 40; i++)
       KMockText.fundModel.copyWith(
         id: i.toString(),
       ),
@@ -217,36 +228,38 @@ abstract class KTestText {
   );
 
   static final informationModelItemsModify = <InformationModel>[
-    for (var i = 0; i < 30; i++)
+    for (var i = 0; i < _items; i++)
       KMockText.informationModel.copyWith(
         id: i.toString(),
         fetchDate: dateTime,
-        image: i > KMockText.tags.length - 2 ? imageModels : null,
+        image: i > _itemsPhoto ? imageModels : null,
         category: i == 0 ? KMockText.tag : KMockText.informationModel.category,
       ),
   ];
 
   static final informationModelItems = <InformationModel>[
-    for (var i = 0; i < KMockText.tags.length; i++)
+    for (var i = 0; i < _items; i++)
       KMockText.informationModel.copyWith(
         id: i.toString(),
         fetchDate: dateTime,
-        image: i > KMockText.tags.length - 2 ? imageModels : null,
+        image: i > _itemsPhoto ? imageModels : null,
       ),
   ];
 
   static final storyModelItems = <StoryModel>[
-    for (var i = 0; i < 30; i++)
+    for (var i = 0; i < _items; i++)
       StoryModel(
         id: i.toString(),
         date: dateTime,
-        image: i > KMockText.tags.length ? imageModels : null,
+        image: i > _itemsPhoto ? imageModels : null,
         story: KMockText.cardData.substring(0, 200),
         userName: user.name,
         userId: user.id,
-        userPhoto: i > KMockText.tags.length ? userPhotoModel : null,
+        userPhoto: i > _itemsPhoto ? userPhotoModel : null,
       ),
   ];
+  static const _items = 30;
+  static const _itemsPhoto = 20;
 
   static List<String> routes({required bool hasAccount}) => [
         KRoute.aboutUs.name,
@@ -299,6 +312,7 @@ abstract class KScreenBlocName {
   static const thank = 'Thank Screen';
   static const profileMyStory = 'My Story Screen';
   static const underConstruction = 'Under Construction Screen';
+  static const myDiscounts = 'My Discount Screen';
 
   static const feedback = 'Feedback Widget';
   static const authenticationServices = 'Authentication Services';

@@ -84,7 +84,7 @@ class HomeBoxWidget extends StatelessWidget {
                     child: Align(
                       alignment: Alignment.centerLeft,
                       child: KImage.logoHome.copyWith(
-                        height: KMinMaxSize.kScroll400,
+                        height: KSize.kPixel400,
                       ),
                     ),
                   ),

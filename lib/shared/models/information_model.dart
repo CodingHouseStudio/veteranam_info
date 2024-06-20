@@ -16,6 +16,8 @@ class InformationModel with _$InformationModel {
     required String topicUA,
     required String status,
     required DateTime fetchDate,
+    String? link,
+    String? directLink,
     @ImageConverter() List<ImageModel>? image,
   }) = _InformationModel;
 
@@ -34,4 +36,6 @@ abstract class InformationModelJsonField {
   static const topicUA = 'topicUA';
   static const status = 'status';
   static const image = 'image';
+  static const link = 'link';
+  static const directLink = 'directLink';
 }

@@ -43,12 +43,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "category": MessageLookupByLibrary.simpleMessage("Category"),
         "city": MessageLookupByLibrary.simpleMessage("City"),
         "clear": MessageLookupByLibrary.simpleMessage("Clear"),
+        "companyIsHidden":
+            MessageLookupByLibrary.simpleMessage("The company is hidden"),
         "consultationOnline":
             MessageLookupByLibrary.simpleMessage("Consultation"),
         "contact": MessageLookupByLibrary.simpleMessage("Contact"),
         "contacts": MessageLookupByLibrary.simpleMessage("Contacts"),
         "createSecurePassword":
             MessageLookupByLibrary.simpleMessage("Create a secure password"),
+        "deactivate": MessageLookupByLibrary.simpleMessage("Deactivate"),
         "deleteAccount": MessageLookupByLibrary.simpleMessage("Delete account"),
         "deleteAccountQuestion": MessageLookupByLibrary.simpleMessage(
             "Are you sure you want to delete your account?"),
@@ -156,11 +159,17 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Main information"),
         "mainScreen": MessageLookupByLibrary.simpleMessage("Home"),
         "message": MessageLookupByLibrary.simpleMessage("Message"),
+        "more": MessageLookupByLibrary.simpleMessage("More"),
         "moreDiscounts": MessageLookupByLibrary.simpleMessage("More discounts"),
+        "moreFunds": MessageLookupByLibrary.simpleMessage("More funds"),
         "moreNews": MessageLookupByLibrary.simpleMessage("More news"),
         "moreStories": MessageLookupByLibrary.simpleMessage("More stories"),
+        "myDiscountsAndCoupons": MessageLookupByLibrary.simpleMessage(
+            "In this section, you can publish a discount, as well as manage your publications. If your company provides personalized offers for veterans, you can advertise here."),
         "myFeedback": MessageLookupByLibrary.simpleMessage("My feedback"),
         "myProfile": MessageLookupByLibrary.simpleMessage("Profile"),
+        "myPublications":
+            MessageLookupByLibrary.simpleMessage("My publications"),
         "myStory": MessageLookupByLibrary.simpleMessage("My story"),
         "myStoryDetails": MessageLookupByLibrary.simpleMessage(
             "In this section you can manage your stories."),
@@ -176,8 +185,11 @@ class MessageLookup extends MessageLookupByLibrary {
             "The user with this password or address does not exist."),
         "notNecessarily":
             MessageLookupByLibrary.simpleMessage("(not necessarily)"),
+        "offerDiscount":
+            MessageLookupByLibrary.simpleMessage("Offer a discount"),
         "oneNumber": MessageLookupByLibrary.simpleMessage(
             "must contain one or more number"),
+        "online": MessageLookupByLibrary.simpleMessage("online"),
         "or": MessageLookupByLibrary.simpleMessage("or"),
         "orDonateHere": MessageLookupByLibrary.simpleMessage("or donate here"),
         "ourSocialNetworks":
@@ -215,6 +227,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "resetAllFilter": MessageLookupByLibrary.simpleMessage("Reset filters"),
         "respond": MessageLookupByLibrary.simpleMessage("Respond"),
         "resume": MessageLookupByLibrary.simpleMessage("Resume"),
+        "save": MessageLookupByLibrary.simpleMessage("Save"),
         "saveChanges": MessageLookupByLibrary.simpleMessage("Save changes"),
         "saveMoney": MessageLookupByLibrary.simpleMessage("To save money"),
         "saved": MessageLookupByLibrary.simpleMessage("Saved"),
@@ -232,8 +245,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "We\'re sorry, there was an unforeseen error while sending the data. Please try again later."),
         "sendMessage": MessageLookupByLibrary.simpleMessage("Send message"),
         "sendMore": MessageLookupByLibrary.simpleMessage("Send more"),
+        "share": MessageLookupByLibrary.simpleMessage("Share"),
         "signUp": MessageLookupByLibrary.simpleMessage("Sign up"),
         "signUpWith": MessageLookupByLibrary.simpleMessage("Sign up with"),
+        "statistics": MessageLookupByLibrary.simpleMessage("Statistics"),
         "stories": MessageLookupByLibrary.simpleMessage("Stories"),
         "storyAddSubtitle": MessageLookupByLibrary.simpleMessage(
             "Share your story and we will publish it on our website. All stories are moderated and will be published after review."),
@@ -264,7 +279,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "This page is under construction."),
         "upload": MessageLookupByLibrary.simpleMessage("Upload"),
         "us": MessageLookupByLibrary.simpleMessage("us"),
+        "useful": MessageLookupByLibrary.simpleMessage("Useful"),
         "wage": MessageLookupByLibrary.simpleMessage("Salary*"),
+        "website": MessageLookupByLibrary.simpleMessage("Website"),
         "whatKindOfProject":
             MessageLookupByLibrary.simpleMessage("What kind of project it is?"),
         "whatYouMostInterestedIn": MessageLookupByLibrary.simpleMessage(

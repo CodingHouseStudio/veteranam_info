@@ -39,10 +39,10 @@ class ScaffoldDecorationWidget extends StatelessWidget {
                       : 0)
               : KPadding.kPaddingSize16),
         );
-        final footerList = FooterWidget.get(
-          context: context,
-          isDesk: isDesk,
-        );
+        // final footerList = FooterWidget.get(
+        //   context: context,
+        //   isDesk: isDesk,
+        // );
         return Scaffold(
           body: CustomScrollView(
             key: KWidgetkeys.widget.scaffold.scroll,
@@ -90,33 +90,33 @@ class ScaffoldDecorationWidget extends StatelessWidget {
                   ),
                 ),
               ),
-              SliverPadding(
-                padding: padding.copyWith(
-                  bottom: KPadding.kPaddingSize40,
-                ),
-                sliver: DecoratedSliver(
-                  decoration: KWidgetTheme.boxDecorationFooter,
-                  sliver: SliverPadding(
-                    padding: isDesk
-                        ? const EdgeInsets.all(KPadding.kPaddingSize48)
-                            .copyWith(left: KPadding.kPaddingSize46)
-                        : const EdgeInsets.symmetric(
-                            vertical: KPadding.kPaddingSize32,
-                            horizontal: KPadding.kPaddingSize16,
-                          ),
-                    sliver: SliverList.builder(
-                      key: KWidgetkeys.widget.footer.widget,
-                      addAutomaticKeepAlives: false,
-                      addRepaintBoundaries: false,
-                      itemBuilder: (context, index) =>
-                          footerList.elementAt(index),
-                      itemCount: footerList.length,
-                    ),
-                  ),
-                ),
-              ),
+              // SliverPadding(
+              //   padding: padding.copyWith(
+              //     bottom: KPadding.kPaddingSize40,
+              //   ),
+              //   sliver: DecoratedSliver(
+              //     decoration: KWidgetTheme.boxDecorationFooter,
+              //     sliver: SliverPadding(
+              //       padding: isDesk
+              //           ? const EdgeInsets.all(KPadding.kPaddingSize48)
+              //               .copyWith(left: KPadding.kPaddingSize46)
+              //           : const EdgeInsets.symmetric(
+              //               vertical: KPadding.kPaddingSize32,
+              //               horizontal: KPadding.kPaddingSize16,
+              //             ),
+              //       sliver: SliverList.builder(
+              //         key: KWidgetkeys.widget.footer.widget,
+              //         addAutomaticKeepAlives: false,
+              //         addRepaintBoundaries: false,
+              //         itemBuilder: (context, index) =>
+              //             footerList.elementAt(index),
+              //         itemCount: footerList.length,
+              //       ),
+              //     ),
+              //   ),
+              // ),
             ],
-            semanticChildCount: mainChildWidget.length,
+            semanticChildCount: mainChildWidget.length + 1,
           ),
         );
       },

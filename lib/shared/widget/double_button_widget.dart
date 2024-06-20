@@ -22,29 +22,24 @@ class DoubleButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (isDesk) {
-      return Align(
-        alignment: Alignment.centerLeft,
-        child: _DoubleButtonWidgetDesk(
-          text: text,
-          onPressed: onPressed,
-          color: color,
-          textColor: textColor,
-          widgetKey: widgetKey,
-        ),
-      );
-    } else {
-      return Align(
-        alignment: Alignment.centerLeft,
-        child: _DoubleButtonWidgetMob(
-          text: text,
-          onPressed: onPressed,
-          color: color,
-          textColor: textColor,
-          widgetKey: widgetKey,
-        ),
-      );
-    }
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: isDesk
+          ? _DoubleButtonWidgetDesk(
+              text: text,
+              onPressed: onPressed,
+              color: color,
+              textColor: textColor,
+              widgetKey: widgetKey,
+            )
+          : _DoubleButtonWidgetMob(
+              text: text,
+              onPressed: onPressed,
+              color: color,
+              textColor: textColor,
+              widgetKey: widgetKey,
+            ),
+    );
   }
 }
 
@@ -97,7 +92,7 @@ class _DoubleButtonWidgetDeskState extends State<_DoubleButtonWidgetDesk> {
             child: Container(
               margin: const EdgeInsets.only(right: KPadding.kPaddingSize40),
               decoration:
-                  KWidgetTheme.boxDecorationBlack.copyWith(color: widget.color),
+                  KWidgetTheme.boxDecorationGreen.copyWith(color: widget.color),
               padding: const EdgeInsets.symmetric(
                 horizontal: KPadding.kPaddingSize30,
                 vertical: KPadding.kPaddingSize12,
@@ -165,7 +160,7 @@ class _DoubleButtonWidgetMob extends StatelessWidget {
         children: [
           Container(
             margin: const EdgeInsets.only(right: KPadding.kPaddingSize40),
-            decoration: KWidgetTheme.boxDecorationBlack.copyWith(color: color),
+            decoration: KWidgetTheme.boxDecorationGreen.copyWith(color: color),
             padding: const EdgeInsets.symmetric(
               horizontal: KPadding.kPaddingSize30,
               vertical: KPadding.kPaddingSize12,

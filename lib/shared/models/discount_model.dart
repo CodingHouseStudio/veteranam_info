@@ -9,7 +9,7 @@ class DiscountModel with _$DiscountModel {
   const factory DiscountModel({
     required String id,
     required String? userId,
-    required String company,
+    required DateTime date,
     required List<int> discount,
     required String title,
     required List<String> category,
@@ -20,21 +20,25 @@ class DiscountModel with _$DiscountModel {
     required String description,
     required String requirements,
     required String territory,
-    required String location,
+    required List<String>? location,
     required String expiration,
     required String exclusions,
     required String phoneNumber,
-    required String directLink,
     required DateTime dateVerified,
+    required String link,
     String? html,
+    String? userName,
+    String? company,
+    String? directLink,
     String? additionaldetails,
-    String? link,
-    @Default(true) bool selectedLocationsOnly,
+    SubLocation? subLocation,
   }) = _DiscountModel;
 
   factory DiscountModel.fromJson(Map<String, dynamic> json) =>
       _$DiscountModelFromJson(json);
 }
+
+enum SubLocation { all, allStoresOfChain, online }
 
 abstract class DiscountModelJsonField {
   static const id = 'id';
@@ -59,5 +63,7 @@ abstract class DiscountModelJsonField {
   static const html = 'html';
   static const additionaldetails = 'additionaldetails';
   static const link = 'link';
-  static const selectedLocationsOnly = 'selectedLocationsOnly';
+  static const userName = 'userName';
+  static const date = 'date';
+  static const subLocation = 'subLocation';
 }
