@@ -78,7 +78,7 @@ class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
                 ),
               ),
             ),
-            if (widget.icon != null) widget.icon!,
+            if (widget.icon != null) Flexible(child: widget.icon!),
           ],
         ),
       ],

@@ -21,7 +21,9 @@ class ChipWidget extends StatelessWidget {
       backgroundColor: AppColors.materialThemeWhite,
       label: Text(
         filter,
-        style: isDesk ? AppTextStyle.text20 : AppTextStyle.text16,
+        style: isDesk
+            ? AppTextStyle.materialThemeHeadlineSmall
+            : AppTextStyle.materialThemeLabelLarge,
       ),
       shape: const RoundedRectangleBorder(
         borderRadius: KBorderRadius.kBorderRadius32,

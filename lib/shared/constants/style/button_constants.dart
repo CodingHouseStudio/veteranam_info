@@ -116,9 +116,7 @@ abstract class KButtonStyles {
     ),
   );
   static const whiteButtonStyleBorder = ButtonStyle(
-    minimumSize: WidgetStatePropertyAll(
-      Size(KMinMaxSize.minWidth100, KMinMaxSize.minHeight50),
-    ),
+    alignment: Alignment.centerLeft,
     padding: WidgetStatePropertyAll(EdgeInsets.all(KPadding.kPaddingSize8)),
     side: WidgetStatePropertyAll(
       BorderSide(

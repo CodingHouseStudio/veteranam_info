@@ -126,5 +126,10 @@ abstract class KWidgetTheme {
   static const boxDecorationDiscount = BoxDecoration(
     borderRadius: KBorderRadius.kBorderRadius32,
     color: AppColors.materialThemeWhite,
+    border: Border.fromBorderSide(
+      BorderSide(
+        color: AppColors.materialThemeKeyColorsNeutral,
+      ),
+    ),
   );
 }
