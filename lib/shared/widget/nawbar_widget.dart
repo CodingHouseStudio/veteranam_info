@@ -159,51 +159,48 @@ class _NawbarWidgetImplematationState
                   ),
                 ),
                 KSizedBox.kWidthSizedBox64,
-                Expanded(
-                  child: TextButton.icon(
-                    style: const ButtonStyle(alignment: Alignment.centerLeft),
-                    onPressed: () => context.goNamed(KRoute.investors.name),
-                    label: Text(
-                      context.l10n.investors,
-                      style: AppTextStyle.materialThemeTitleMedium,
-                    ),
-                    icon: KIcon.fileText,
-                  ),
-                ),
-              ],
-
-              // if (widget.isDesk && widget.hasMicrophone)
-              //   Padding(
-              //     padding: const EdgeInsets.only(right:
-              // KPadding.kPaddingSize32),
-              //     child: IconWidget(
-              //       key: KWidgetkeys.widget.nawbar.iconMic,
-              //       icon: KIcon.mic,
-              //     ),
-              //   ),
-              if (widget.isDesk || !isFocused) const LanguagesSwitcherWidget(),
-              KSizedBox.kWidthSizedBox16,
-              if (context.read<AuthenticationBloc>().state.status !=
-                      AuthenticationStatus.authenticated &&
-                  Config.isDevelopment)
-                if (widget.isDesk)
-                  TextButton(
-                    key: KWidgetkeys.widget.nawbar.button,
-                    style: KButtonStyles.whiteButtonStyle,
-                    onPressed: () => context.goNamed(KRoute.login.name),
-                    child: Text(
-                      context.l10n.login,
-                      style: AppTextStyle.text24,
-                    ),
-                  )
-                else if (!isFocused)
-                  IconButtonWidget(
-                    key: KWidgetkeys.widget.nawbar.iconPerson,
-                    onPressed: () => context.goNamed(KRoute.login.name),
-                    icon: KIcon.person
-                        .copyWith(color: AppColors.materialThemeWhite),
-                    background: AppColors.materialThemeKeyColorsSecondary,
-                  ),
+    TextButton.icon(
+    onPressed: () => context.goNamed(KRoute.investors.name),
+    label: Text(
+    context.l10n.investors,
+    style: AppTextStyle.materialThemeTitleMedium,
+    ),
+    icon: KIcon.fileText,
+    ),
+    ],
+    ),
+    // if (widget.isDesk && widget.hasMicrophone)
+    //   Padding(
+    //     padding: const EdgeInsets.only(right:
+    // KPadding.kPaddingSize32),
+    //     child: IconWidget(
+    //       key: KWidgetkeys.widget.nawbar.iconMic,
+    //       icon: KIcon.mic,
+    //     ),
+    //   ),
+    if (widget.isDesk || !isFocused) const LanguagesSwitcherWidget(),
+    KSizedBox.kWidthSizedBox16,
+    if (context.read<AuthenticationBloc>().state.status !=
+    AuthenticationStatus.authenticated &&
+    Config.isDevelopment)
+    if (widget.isDesk)
+    TextButton(
+    key: KWidgetkeys.widget.nawbar.button,
+    style: KButtonStyles.whiteButtonStyle,
+    onPressed: () => context.goNamedWithScroll(KRoute.login.name),
+    child: Text(
+    context.l10n.login,
+    style: AppTextStyle.text24,
+    ),
+    )
+    else if (!isFocused)
+    IconButtonWidget(
+    key: KWidgetkeys.widget.nawbar.iconPerson,
+    onPressed: () => context.goNamedWithScroll(KRoute.login.name),
+    icon:
+    KIcon.person.copyWith(color: AppColors.materialThemeWhite),
+    background: AppColors.materialThemeKeyColorsSecondary,
+    ),
               if (context.read<AuthenticationBloc>().state.status ==
                       AuthenticationStatus.authenticated &&
                   Config.isDevelopment)
