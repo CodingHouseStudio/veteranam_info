@@ -12,11 +12,11 @@ Future<void> donatesCardHelper(
     tester: tester,
     test: () async {
       expect(
-        find.byKey(KWidgetkeys.screen.investors.donateCards),
+        find.byKey(KWidgetkeys.screen.investors.cards),
         findsWidgets,
       );
 
-      expect(find.byKey(KWidgetkeys.screen.investors.donateCard), findsWidgets);
+      expect(find.byKey(KWidgetkeys.screen.investors.card), findsWidgets);
 
       await donateCardHelper(tester: tester, isDesk: true);
 

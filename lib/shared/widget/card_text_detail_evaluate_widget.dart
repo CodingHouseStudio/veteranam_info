@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kozak/shared/shared.dart';
+import 'package:share_plus/share_plus.dart';
 
 class CardTextDetailEvaluateWidget extends StatefulWidget {
   const CardTextDetailEvaluateWidget({
@@ -12,9 +13,12 @@ class CardTextDetailEvaluateWidget extends StatefulWidget {
     this.image,
     this.buttonStyle,
     this.bottom,
+    this.informationItem,
     this.titleTopMob = false,
     this.titleDate,
   });
+
+  final InformationModel? informationItem;
   final String text;
   final List<String>? buttonText;
   final ButtonStyle? buttonStyle;
@@ -61,6 +65,7 @@ class _CardTextDetailEvaluateWidgetState
             )
           : null,
       image: widget.image,
+      filters: widget.bottom,
       childWidget: Center(
         key: KWidgetkeys.widget.cardTextDetailEvaluate.widget,
         child: ConstrainedBox(
@@ -70,17 +75,8 @@ class _CardTextDetailEvaluateWidgetState
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Padding(
-                padding: EdgeInsets.only(
-                  top: widget.isDesk
-                      ? KPadding.kPaddingSize8
-                      : KPadding.kPaddingSize16,
-                  bottom: widget.isDesk
-                      ? KPadding.kPaddingSize32
-                      : KPadding.kPaddingSize16,
-                ),
-                child: buildTitle(isDesk: widget.isDesk),
-              ),
+              if (widget.bottom != null && widget.image == null) widget.bottom!,
+              buildTitle(isDesk: widget.isDesk),
               CardTextDetailWidget(
                 text: widget.text,
                 maxLines: KDimensions.storyCardMaxLines,
@@ -92,93 +88,105 @@ class _CardTextDetailEvaluateWidgetState
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
+                  Column(
                     children: [
-                      InkWell(
-                        onTap: () => setState(() {
+                      IconButtonWidget(
+                        onPressed: () => setState(() {
                           if (evaluation != EvaluationEnum.like) {
                             evaluation = EvaluationEnum.like;
                           } else {
                             evaluation = EvaluationEnum.none;
                           }
                         }),
-                        borderRadius: BorderRadius.circular(KSize.kRadius32),
-                        child: Padding(
-                          padding: const EdgeInsets.all(KPadding.kPaddingSize4),
-                          child: evaluation == EvaluationEnum.like
-                              ? KIcon.activeLike.copyWith(
-                                  key: KWidgetkeys.widget.cardTextDetailEvaluate
-                                      .iconActiveLike,
-                                )
-                              : KIcon.like.copyWith(
-                                  key: KWidgetkeys
-                                      .widget.cardTextDetailEvaluate.iconLike,
-                                ),
-                        ),
+                        background: AppColors.materialThemeKeyColorsNeutral,
+                        padding: KPadding.kPaddingSize12,
+                        icon: evaluation == EvaluationEnum.like
+                            ? KIcon.activeLike.copyWith(
+                                key: KWidgetkeys.widget.cardTextDetailEvaluate
+                                    .iconActiveLike,
+                              )
+                            : KIcon.like.copyWith(
+                                key: KWidgetkeys
+                                    .widget.cardTextDetailEvaluate.iconLike,
+                              ),
                       ),
-                      KSizedBox.kWidthSizedBox8,
-                      InkWell(
-                        onTap: () => setState(() {
-                          if (evaluation != EvaluationEnum.smile) {
-                            evaluation = EvaluationEnum.smile;
-                          } else {
-                            evaluation = EvaluationEnum.none;
-                          }
-                        }),
-                        borderRadius: BorderRadius.circular(KSize.kRadius32),
-                        child: Padding(
-                          padding: const EdgeInsets.all(KPadding.kPaddingSize4),
-                          child: evaluation == EvaluationEnum.smile
-                              ? KIcon.activeSmile.copyWith(
-                                  key: KWidgetkeys.widget.cardTextDetailEvaluate
-                                      .iconActiveSmile,
-                                  // changeColor: AppColors.grey,
-                                )
-                              : KIcon.smile.copyWith(
-                                  key: KWidgetkeys
-                                      .widget.cardTextDetailEvaluate.iconSmile,
-                                ),
-                        ),
-                      ),
-                      KSizedBox.kWidthSizedBox8,
-                      InkWell(
-                        onTap: () => setState(() {
-                          if (evaluation != EvaluationEnum.dislike) {
-                            evaluation = EvaluationEnum.dislike;
-                          } else {
-                            evaluation = EvaluationEnum.none;
-                          }
-                        }),
-                        borderRadius: BorderRadius.circular(KSize.kRadius32),
-                        child: Padding(
-                          padding: const EdgeInsets.all(KPadding.kPaddingSize4),
-                          child: evaluation == EvaluationEnum.dislike
-                              ? KIcon.activeDislike.copyWith(
-                                  key: KWidgetkeys.widget.cardTextDetailEvaluate
-                                      .iconActiveDislike,
-                                )
-                              : KIcon.dislike.copyWith(
-                                  key: KWidgetkeys.widget.cardTextDetailEvaluate
-                                      .iconDislike,
-                                ),
-                        ),
+                      KSizedBox.kHeightSizedBox3,
+                      Text(
+                        context.l10n.useful,
+                        style: AppTextStyle.materialThemeLabelSmall,
                       ),
                     ],
                   ),
+                  KSizedBox.kWidthSizedBox8,
                   Row(
                     children: [
-                      if (widget.titleIcon != null && widget.isDesk)
-                        widget.titleIcon!,
-                      KSizedBox.kWidthSizedBox16,
-                      KIcon.share.copyWith(
-                        key:
-                            KWidgetkeys.widget.cardTextDetailEvaluate.iconShare,
+                      Column(
+                        children: [
+                          IconButtonWidget(
+                            background: AppColors.materialThemeKeyColorsNeutral,
+                            padding: KPadding.kPaddingSize12,
+                            icon: KIcon.website.copyWith(
+                              key: KWidgetkeys
+                                  .widget.cardTextDetailEvaluate.iconWebsite,
+                            ),
+                          ),
+                          KSizedBox.kHeightSizedBox3,
+                          Text(
+                            context.l10n.website,
+                            style: AppTextStyle.materialThemeLabelSmall,
+                          ),
+                        ],
+                      ),
+                      if (widget.isDesk)
+                        KSizedBox.kWidthSizedBox24
+                      else
+                        KSizedBox.kWidthSizedBox8,
+                      Column(
+                        children: [
+                          IconButtonWidget(
+                            padding: KPadding.kPaddingSize12,
+                            icon: KIcon.share,
+                            background: AppColors.materialThemeKeyColorsNeutral,
+                            key: KWidgetkeys
+                                .widget.cardTextDetailEvaluate.iconShare,
+                            onPressed: _informationShareLink,
+                          ),
+                          KSizedBox.kHeightSizedBox3,
+                          Text(
+                            context.l10n.share,
+                            style: AppTextStyle.materialThemeLabelSmall,
+                          ),
+                        ],
+                      ),
+                      if (widget.isDesk)
+                        KSizedBox.kWidthSizedBox24
+                      else
+                        KSizedBox.kWidthSizedBox8,
+                      Column(
+                        children: [
+                          IconButtonWidget(
+                            padding: KPadding.kPaddingSize12,
+                            icon: KIcon.safe.copyWith(
+                              key: KWidgetkeys
+                                  .widget.cardTextDetailEvaluate.iconSave,
+                            ),
+                            background: AppColors.materialThemeKeyColorsNeutral,
+                          ),
+                          KSizedBox.kHeightSizedBox3,
+                          Text(
+                            context.l10n.save,
+                            style: AppTextStyle.materialThemeLabelSmall,
+                          ),
+                        ],
                       ),
                     ],
                   ),
                 ],
               ),
-              if (widget.bottom != null) widget.bottom!,
+              if (widget.isDesk)
+                KSizedBox.kHeightSizedBox32
+              else
+                KSizedBox.kHeightSizedBox16,
             ],
           ),
         ),
@@ -199,5 +207,11 @@ class _CardTextDetailEvaluateWidgetState
     } else {
       return widget.titleWidget;
     }
+  }
+
+  Future<void> _informationShareLink() async {
+    await Share.share(
+      widget.informationItem?.directLink ?? widget.informationItem!.link!,
+    );
   }
 }

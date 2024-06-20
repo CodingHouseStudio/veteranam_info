@@ -1870,6 +1870,86 @@ class AppLocalizations {
     );
   }
 
+  /// `The company is hidden`
+  String get companyIsHidden {
+    return Intl.message(
+      'The company is hidden',
+      name: 'companyIsHidden',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `online`
+  String get online {
+    return Intl.message(
+      'online',
+      name: 'online',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `More funds`
+  String get moreFunds {
+    return Intl.message(
+      'More funds',
+      name: 'moreFunds',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Offer a discount`
+  String get offerDiscount {
+    return Intl.message(
+      'Offer a discount',
+      name: 'offerDiscount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `In this section, you can publish a discount, as well as manage your publications. If your company provides personalized offers for veterans, you can advertise here.`
+  String get myDiscountsAndCoupons {
+    return Intl.message(
+      'In this section, you can publish a discount, as well as manage your publications. If your company provides personalized offers for veterans, you can advertise here.',
+      name: 'myDiscountsAndCoupons',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `My publications`
+  String get myPublications {
+    return Intl.message(
+      'My publications',
+      name: 'myPublications',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Deactivate`
+  String get deactivate {
+    return Intl.message(
+      'Deactivate',
+      name: 'deactivate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Statistics`
+  String get statistics {
+    return Intl.message(
+      'Statistics',
+      name: 'statistics',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `We're sorry, there was an unforeseen error.`
   String get error {
     return Intl.message(
@@ -1928,6 +2008,56 @@ class AppLocalizations {
       name: 'dublicateFailure',
       desc:
           'an error message when trying to register an account with the same email as an already registered account',
+      args: [],
+    );
+  }
+
+  /// `More`
+  String get more {
+    return Intl.message(
+      'More',
+      name: 'more',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Useful`
+  String get useful {
+    return Intl.message(
+      'Useful',
+      name: 'useful',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Website`
+  String get website {
+    return Intl.message(
+      'Website',
+      name: 'website',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Share`
+  String get share {
+    return Intl.message(
+      'Share',
+      name: 'share',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save`
+  String get save {
+    return Intl.message(
+      'Save',
+      name: 'save',
+      desc: '',
       args: [],
     );
   }

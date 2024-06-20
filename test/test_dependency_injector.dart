@@ -92,4 +92,10 @@ void configureDependenciesTest() {
       discountRepository: GetIt.I.get<IDiscountRepository>(),
     ),
   );
+  GetIt.I.registerSingleton<MyDiscountsWatcherBloc>(
+    MyDiscountsWatcherBloc(
+      discountRepository: GetIt.I.get<IDiscountRepository>(),
+      iAppAuthenticationRepository: GetIt.I.get<IAppAuthenticationRepository>(),
+    ),
+  );
 }
