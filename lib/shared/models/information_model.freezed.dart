@@ -29,6 +29,8 @@ mixin _$InformationModel {
   String get topicUA => throw _privateConstructorUsedError;
   String get status => throw _privateConstructorUsedError;
   DateTime get fetchDate => throw _privateConstructorUsedError;
+  String? get link => throw _privateConstructorUsedError;
+  String? get directLink => throw _privateConstructorUsedError;
   @ImageConverter()
   List<ImageModel>? get image => throw _privateConstructorUsedError;
 
@@ -54,6 +56,8 @@ abstract class $InformationModelCopyWith<$Res> {
       String topicUA,
       String status,
       DateTime fetchDate,
+      String? link,
+      String? directLink,
       @ImageConverter() List<ImageModel>? image});
 }
 
@@ -79,6 +83,8 @@ class _$InformationModelCopyWithImpl<$Res, $Val extends InformationModel>
     Object? topicUA = null,
     Object? status = null,
     Object? fetchDate = null,
+    Object? link = freezed,
+    Object? directLink = freezed,
     Object? image = freezed,
   }) {
     return _then(_value.copyWith(
@@ -118,6 +124,14 @@ class _$InformationModelCopyWithImpl<$Res, $Val extends InformationModel>
           ? _value.fetchDate
           : fetchDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      link: freezed == link
+          ? _value.link
+          : link // ignore: cast_nullable_to_non_nullable
+              as String?,
+      directLink: freezed == directLink
+          ? _value.directLink
+          : directLink // ignore: cast_nullable_to_non_nullable
+              as String?,
       image: freezed == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
@@ -144,6 +158,8 @@ abstract class _$$InformationModelImplCopyWith<$Res>
       String topicUA,
       String status,
       DateTime fetchDate,
+      String? link,
+      String? directLink,
       @ImageConverter() List<ImageModel>? image});
 }
 
@@ -167,6 +183,8 @@ class __$$InformationModelImplCopyWithImpl<$Res>
     Object? topicUA = null,
     Object? status = null,
     Object? fetchDate = null,
+    Object? link = freezed,
+    Object? directLink = freezed,
     Object? image = freezed,
   }) {
     return _then(_$InformationModelImpl(
@@ -206,6 +224,14 @@ class __$$InformationModelImplCopyWithImpl<$Res>
           ? _value.fetchDate
           : fetchDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      link: freezed == link
+          ? _value.link
+          : link // ignore: cast_nullable_to_non_nullable
+              as String?,
+      directLink: freezed == directLink
+          ? _value.directLink
+          : directLink // ignore: cast_nullable_to_non_nullable
+              as String?,
       image: freezed == image
           ? _value._image
           : image // ignore: cast_nullable_to_non_nullable
@@ -227,6 +253,8 @@ class _$InformationModelImpl implements _InformationModel {
       required this.topicUA,
       required this.status,
       required this.fetchDate,
+      this.link,
+      this.directLink,
       @ImageConverter() final List<ImageModel>? image})
       : _category = category,
         _categoryUA = categoryUA,
@@ -265,6 +293,10 @@ class _$InformationModelImpl implements _InformationModel {
   final String status;
   @override
   final DateTime fetchDate;
+  @override
+  final String? link;
+  @override
+  final String? directLink;
   final List<ImageModel>? _image;
   @override
   @ImageConverter()
@@ -278,7 +310,7 @@ class _$InformationModelImpl implements _InformationModel {
 
   @override
   String toString() {
-    return 'InformationModel(id: $id, title: $title, news: $news, category: $category, categoryUA: $categoryUA, topic: $topic, topicUA: $topicUA, status: $status, fetchDate: $fetchDate, image: $image)';
+    return 'InformationModel(id: $id, title: $title, news: $news, category: $category, categoryUA: $categoryUA, topic: $topic, topicUA: $topicUA, status: $status, fetchDate: $fetchDate, link: $link, directLink: $directLink, image: $image)';
   }
 
   @override
@@ -297,6 +329,9 @@ class _$InformationModelImpl implements _InformationModel {
             (identical(other.status, status) || other.status == status) &&
             (identical(other.fetchDate, fetchDate) ||
                 other.fetchDate == fetchDate) &&
+            (identical(other.link, link) || other.link == link) &&
+            (identical(other.directLink, directLink) ||
+                other.directLink == directLink) &&
             const DeepCollectionEquality().equals(other._image, _image));
   }
 
@@ -313,6 +348,8 @@ class _$InformationModelImpl implements _InformationModel {
       topicUA,
       status,
       fetchDate,
+      link,
+      directLink,
       const DeepCollectionEquality().hash(_image));
 
   @JsonKey(ignore: true)
@@ -341,6 +378,8 @@ abstract class _InformationModel implements InformationModel {
           required final String topicUA,
           required final String status,
           required final DateTime fetchDate,
+          final String? link,
+          final String? directLink,
           @ImageConverter() final List<ImageModel>? image}) =
       _$InformationModelImpl;
 
@@ -365,6 +404,10 @@ abstract class _InformationModel implements InformationModel {
   String get status;
   @override
   DateTime get fetchDate;
+  @override
+  String? get link;
+  @override
+  String? get directLink;
   @override
   @ImageConverter()
   List<ImageModel>? get image;
