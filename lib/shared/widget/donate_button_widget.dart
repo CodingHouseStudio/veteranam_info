@@ -139,9 +139,9 @@ class _DonateButtonWidgetMob extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.only(
           left: KPadding.kPaddingSize32,
-          bottom: KPadding.kPaddingSize16,
-          right: KPadding.kPaddingSize16,
-          top: KPadding.kPaddingSize16,
+          bottom: KPadding.kPaddingSize8,
+          right: KPadding.kPaddingSize8,
+          top: KPadding.kPaddingSize8,
         ),
         child: Row(
           children: [
