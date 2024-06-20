@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kozak/shared/shared.dart';
+import 'package:share_plus/share_plus.dart';
 
 class CardTextDetailEvaluateWidget extends StatefulWidget {
   const CardTextDetailEvaluateWidget({
@@ -12,10 +13,12 @@ class CardTextDetailEvaluateWidget extends StatefulWidget {
     this.image,
     this.buttonStyle,
     this.bottom,
+    this.informationItem,
     this.titleTopMob = false,
     this.titleDate,
   });
 
+  final InformationModel? informationItem;
   final String text;
   final List<String>? buttonText;
   final ButtonStyle? buttonStyle;
@@ -73,10 +76,7 @@ class _CardTextDetailEvaluateWidgetState
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               if (widget.bottom != null && widget.image == null) widget.bottom!,
-              Padding(
-                padding: EdgeInsets.zero,
-                child: buildTitle(isDesk: widget.isDesk),
-              ),
+              buildTitle(isDesk: widget.isDesk),
               CardTextDetailWidget(
                 text: widget.text,
                 maxLines: KDimensions.storyCardMaxLines,
@@ -88,60 +88,46 @@ class _CardTextDetailEvaluateWidgetState
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
+                  Column(
                     children: [
-                      Column(
-                        children: [
-                          IconButtonWidget(
-                            onPressed: () => setState(() {
-                              if (evaluation != EvaluationEnum.like) {
-                                evaluation = EvaluationEnum.like;
-                              } else {
-                                evaluation = EvaluationEnum.none;
-                              }
-                            }),
-                            background: AppColors.materialThemeKeyColorsNeutral,
-                            icon: Padding(
-                              padding:
-                                  const EdgeInsets.all(KPadding.kPaddingSize4),
-                              child: evaluation == EvaluationEnum.like
-                                  ? KIcon.activeLike.copyWith(
-                                      key: KWidgetkeys
-                                          .widget
-                                          .cardTextDetailEvaluate
-                                          .iconActiveLike,
-                                    )
-                                  : KIcon.like.copyWith(
-                                      key: KWidgetkeys.widget
-                                          .cardTextDetailEvaluate.iconLike,
-                                    ),
-                            ),
-                          ),
-                          KSizedBox.kHeightSizedBox3,
-                          Text(
-                            context.l10n.useful,
-                            style: AppTextStyle.materialThemeLabelSmall,
-                          ),
-                        ],
+                      IconButtonWidget(
+                        onPressed: () => setState(() {
+                          if (evaluation != EvaluationEnum.like) {
+                            evaluation = EvaluationEnum.like;
+                          } else {
+                            evaluation = EvaluationEnum.none;
+                          }
+                        }),
+                        background: AppColors.materialThemeKeyColorsNeutral,
+                        padding: KPadding.kPaddingSize12,
+                        icon: evaluation == EvaluationEnum.like
+                            ? KIcon.activeLike.copyWith(
+                                key: KWidgetkeys.widget.cardTextDetailEvaluate
+                                    .iconActiveLike,
+                              )
+                            : KIcon.like.copyWith(
+                                key: KWidgetkeys
+                                    .widget.cardTextDetailEvaluate.iconLike,
+                              ),
                       ),
-                      KSizedBox.kWidthSizedBox8,
+                      KSizedBox.kHeightSizedBox3,
+                      Text(
+                        context.l10n.useful,
+                        style: AppTextStyle.materialThemeLabelSmall,
+                      ),
                     ],
                   ),
+                  KSizedBox.kWidthSizedBox8,
                   Row(
                     children: [
                       Column(
                         children: [
                           IconButtonWidget(
-                            onPressed: () {},
                             background: AppColors.materialThemeKeyColorsNeutral,
-                            icon: Padding(
-                              padding: const EdgeInsets.all(
-                                KPadding.kPaddingSize4,
-                              ),
-                              child: KIcon.website.copyWith(
-                                key: KWidgetkeys
-                                    .widget.cardTextDetailEvaluate.iconWebsite,
-                              ),
+                            padding: KPadding.kPaddingSize12,
+                            icon: KIcon.website.copyWith(
+                              key: KWidgetkeys
+                                  .widget.cardTextDetailEvaluate.iconWebsite,
                             ),
                           ),
                           KSizedBox.kHeightSizedBox3,
@@ -158,14 +144,12 @@ class _CardTextDetailEvaluateWidgetState
                       Column(
                         children: [
                           IconButtonWidget(
-                            icon: const Padding(
-                              padding: EdgeInsets.all(KPadding.kPaddingSize4),
-                              child: KIcon.share,
-                            ),
+                            padding: KPadding.kPaddingSize12,
+                            icon: KIcon.share,
                             background: AppColors.materialThemeKeyColorsNeutral,
                             key: KWidgetkeys
                                 .widget.cardTextDetailEvaluate.iconShare,
-                            onPressed: () {},
+                            onPressed: _informationShareLink,
                           ),
                           KSizedBox.kHeightSizedBox3,
                           Text(
@@ -181,17 +165,12 @@ class _CardTextDetailEvaluateWidgetState
                       Column(
                         children: [
                           IconButtonWidget(
-                            icon: Padding(
-                              padding: const EdgeInsets.all(
-                                KPadding.kPaddingSize4,
-                              ),
-                              child: KIcon.safe.copyWith(
-                                key: KWidgetkeys
-                                    .widget.cardTextDetailEvaluate.iconSave,
-                              ),
+                            padding: KPadding.kPaddingSize12,
+                            icon: KIcon.safe.copyWith(
+                              key: KWidgetkeys
+                                  .widget.cardTextDetailEvaluate.iconSave,
                             ),
                             background: AppColors.materialThemeKeyColorsNeutral,
-                            onPressed: () {},
                           ),
                           KSizedBox.kHeightSizedBox3,
                           Text(
@@ -228,5 +207,11 @@ class _CardTextDetailEvaluateWidgetState
     } else {
       return widget.titleWidget;
     }
+  }
+
+  Future<void> _informationShareLink() async {
+    await Share.share(
+      widget.informationItem?.directLink ?? widget.informationItem!.link!,
+    );
   }
 }
