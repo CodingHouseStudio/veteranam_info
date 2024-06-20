@@ -54,11 +54,9 @@ class NewsCardWidget extends StatelessWidget {
       text: informationItem.news,
       buttonText: [
         context.l10n.more,
-        context.l10n.more,
+        context.l10n.hide,
       ],
-      buttonStyle: isDesk
-          ? KButtonStyles.secondaryButtonStyle
-          : KButtonStyles.secondaryButtonStyle,
+      buttonStyle: KButtonStyles.secondaryButtonStyle,
       titleWidget: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -69,6 +67,10 @@ class NewsCardWidget extends StatelessWidget {
                 ? AppTextStyle.materialThemeDisplaySmall
                 : AppTextStyle.materialThemeHeadlineSmall,
           ),
+          if (isDesk)
+            KSizedBox.kHeightSizedBox8
+          else
+            KSizedBox.kHeightSizedBox4,
           Text(
             informationItem.fetchDate.localeTime,
             key: KWidgetkeys.widget.newsCard.date,
@@ -76,6 +78,10 @@ class NewsCardWidget extends StatelessWidget {
                 ? AppTextStyle.materialThemeLabelMedium
                 : AppTextStyle.materialThemeLabelSmall,
           ),
+          if (isDesk)
+            KSizedBox.kHeightSizedBox24
+          else
+            KSizedBox.kHeightSizedBox16,
         ],
       ),
       isDesk: isDesk,

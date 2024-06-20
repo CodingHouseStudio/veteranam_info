@@ -48,9 +48,7 @@ class CardAddImageWidget extends StatelessWidget {
       alignment: Alignment.topCenter,
       children: [
         Container(
-          decoration: isDesk
-              ? KWidgetTheme.boxDecorationImageMob
-              : KWidgetTheme.boxDecorationImageMob,
+          decoration: KWidgetTheme.boxDecorationImageMob,
           constraints: const BoxConstraints(
             maxHeight: KMinMaxSize.minHeight640,
             maxWidth: KMinMaxSize.maxWidth640,
@@ -61,10 +59,12 @@ class CardAddImageWidget extends StatelessWidget {
             fit: BoxFit.contain,
           ),
         ),
-        Positioned(
-          top: 0,
-          left: KPadding.kPaddingSize16,
-          child: filters != null ? filters! : Container(),
+        Align(
+          alignment: Alignment.topLeft,
+          child: Padding(
+            padding: const EdgeInsets.only(left: KPadding.kPaddingSize16),
+            child: filters != null ? filters! : Container(),
+          ),
         ),
       ],
     );
