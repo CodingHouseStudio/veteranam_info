@@ -4,7 +4,7 @@ import 'package:kozak/shared/shared.dart';
 class IconButtonWidget extends StatelessWidget {
   const IconButtonWidget({
     required this.icon,
-    required this.onPressed,
+    this.onPressed,
     this.background,
     super.key,
     this.padding,
@@ -13,7 +13,7 @@ class IconButtonWidget extends StatelessWidget {
   final Color? background;
   final Widget icon;
   final double? padding;
-  final void Function() onPressed;
+  final void Function()? onPressed;
 
   @override
   Widget build(BuildContext context) {
