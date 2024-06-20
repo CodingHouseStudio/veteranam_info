@@ -223,9 +223,23 @@ abstract class KButtonStyles {
     backgroundColor: WidgetStatePropertyAll(AppColors.materialThemeWhite),
   );
 
-  static const advancedFilterButtonStyle = ButtonStyle(
+  static const advancedButtonStyle = ButtonStyle(
     padding:
         WidgetStatePropertyAll(EdgeInsets.only(right: KPadding.kPaddingSize8)),
+    shape: WidgetStatePropertyAll(
+      RoundedRectangleBorder(
+        borderRadius: KBorderRadius.kBorderRadius32,
+      ),
+    ),
+  );
+  static const advancedFilterButtonStyle = ButtonStyle(
+    padding: WidgetStatePropertyAll(
+      EdgeInsets.symmetric(
+        horizontal: KPadding.kPaddingSize16,
+        vertical: KPadding.kPaddingSize8,
+      ),
+    ),
+    backgroundColor: WidgetStatePropertyAll(AppColors.materialThemeSourceSeed),
     shape: WidgetStatePropertyAll(
       RoundedRectangleBorder(
         borderRadius: KBorderRadius.kBorderRadius32,
@@ -243,17 +257,49 @@ abstract class KButtonStyles {
     ),
   );
 
-  static const filterButtonStyle = ButtonStyle(
-    padding: WidgetStatePropertyAll(
-      EdgeInsets.symmetric(
-        horizontal: KPadding.kPaddingSize16,
-        vertical: KPadding.kPaddingSize8,
-      ),
+  static const filterButtonStyleBorder = ButtonStyle(
+    minimumSize: WidgetStatePropertyAll(
+      Size(KMinMaxSize.minWidth100, KMinMaxSize.minHeight50),
     ),
-    backgroundColor: WidgetStatePropertyAll(AppColors.materialThemeSourceSeed),
+    padding: WidgetStatePropertyAll(EdgeInsets.all(KPadding.kPaddingSize8)),
+    side: WidgetStatePropertyAll(
+      BorderSide(),
+    ),
     shape: WidgetStatePropertyAll(
       RoundedRectangleBorder(
         borderRadius: KBorderRadius.kBorderRadius32,
+      ),
+    ),
+    backgroundColor: WidgetStatePropertyAll(AppColors.materialThemeSourceSeed),
+  );
+
+  static const filterButtonStyleBorderWhite = ButtonStyle(
+    minimumSize: WidgetStatePropertyAll(
+      Size(KMinMaxSize.minWidth100, KMinMaxSize.minHeight50),
+    ),
+    padding: WidgetStatePropertyAll(EdgeInsets.all(KPadding.kPaddingSize8)),
+    side: WidgetStatePropertyAll(
+      BorderSide(),
+    ),
+    shape: WidgetStatePropertyAll(
+      RoundedRectangleBorder(
+        borderRadius: KBorderRadius.kBorderRadius32,
+      ),
+    ),
+    backgroundColor: WidgetStatePropertyAll(AppColors.materialThemeWhite),
+  );
+
+  static const borderBlackButtonStyle = ButtonStyle(
+    padding: WidgetStatePropertyAll(
+      EdgeInsets.symmetric(
+        vertical: KPadding.kPaddingSize8,
+        horizontal: KPadding.kPaddingSize24,
+      ),
+    ),
+    shape: WidgetStatePropertyAll(
+      RoundedRectangleBorder(
+        borderRadius: KBorderRadius.kBorderRadius32,
+        side: BorderSide(color: AppColors.materialThemeKeyColorsSecondary),
       ),
     ),
   );

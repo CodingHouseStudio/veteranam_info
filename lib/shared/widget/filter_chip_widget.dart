@@ -11,7 +11,7 @@ class FiltersChipWidget extends StatelessWidget {
     super.key,
   });
 
-  final List<String> filtersItems;
+  final List<FilterItem> filtersItems;
   final bool isDesk;
   // final void Function() onResetValue;
   final void Function(
@@ -43,7 +43,7 @@ class FiltersChipWidget extends StatelessWidget {
                   AppColors.materialThemeWhite,
                   AppColors.materialThemeWhite.withOpacity(0.03),
                 ],
-                stops: const [0.1, 1],
+                stops: const [0.6, 1],
                 tileMode: TileMode.mirror,
               ).createShader(bounds);
             },
@@ -67,7 +67,7 @@ class FiltersChipWidget extends StatelessWidget {
               child: ChipWidget(
                 key: KWidgetkeys.widget.filterChip.chips,
                 filter: filtersItems.elementAt(index),
-                onSelected: ({required isSelected}) => onSelected(
+                onSelected: (isSelected) => onSelected(
                   index,
                 ),
                 isSelected: isSelected(

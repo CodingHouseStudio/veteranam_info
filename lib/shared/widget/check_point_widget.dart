@@ -42,8 +42,8 @@ class CheckPointWidget extends StatelessWidget {
                     key: KWidgetkeys.widget.checkPoint.icon,
                   )
                 : const SizedBox(
-                    width: KSize.kcheckPointIconSize,
-                    height: KSize.kcheckPointIconSize,
+                    width: KSize.kIconSize,
+                    height: KSize.kIconSize,
                   ),
           ),
         ),
@@ -55,6 +55,46 @@ class CheckPointWidget extends StatelessWidget {
                   : AppTextStyle.materialThemeBodyMedium),
         ),
       ),
+    );
+  }
+}
+
+class CheckPointAmountWidget extends StatelessWidget {
+  const CheckPointAmountWidget({
+    required this.isDesk,
+    required this.isCheck,
+    required this.filterItem,
+    super.key,
+    this.onChanged,
+  });
+  final bool isDesk;
+  final void Function()? onChanged;
+  final bool isCheck;
+  final FilterItem filterItem;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        CheckPointWidget(
+          onChanged: onChanged,
+          isCheck: isCheck,
+          text: filterItem.value,
+          isDesk: isDesk,
+        ),
+        KSizedBox.kWidthSizedBox12,
+        AmountWidget(
+          background: isCheck
+              ? AppColors.materialThemeKeyColorsSecondary
+              : AppColors.materialThemeRefNeutralVariantNeutralVariant40,
+          textColor: AppColors.materialThemeKeyColorsNeutral,
+          number: filterItem.number,
+          padding: const EdgeInsets.symmetric(
+            horizontal: KPadding.kPaddingSize8,
+            vertical: KPadding.kPaddingSize4,
+          ),
+        ),
+      ],
     );
   }
 }

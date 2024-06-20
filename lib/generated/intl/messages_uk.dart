@@ -65,7 +65,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "didNotFindYourVacancy":
             MessageLookupByLibrary.simpleMessage("Не знайшли свою вакансію?"),
         "disconnect": MessageLookupByLibrary.simpleMessage("Відʼєднати"),
-        "discount": MessageLookupByLibrary.simpleMessage("знижка"),
+        "discount": MessageLookupByLibrary.simpleMessage("Знижка"),
         "discounts": MessageLookupByLibrary.simpleMessage("Знижки"),
         "discountsAndCoupons":
             MessageLookupByLibrary.simpleMessage("Знижки і купони"),
@@ -240,8 +240,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ми отримали Ваше повідомлення і надамо Вам відповідь найближчим часом."),
         "register": MessageLookupByLibrary.simpleMessage("Зареєструватись"),
         "remotely": MessageLookupByLibrary.simpleMessage("Віддалено"),
-        "resetAllFilter":
-            MessageLookupByLibrary.simpleMessage("Скинути фільтри"),
+        "resetAll": MessageLookupByLibrary.simpleMessage("Скинути все"),
         "respond": MessageLookupByLibrary.simpleMessage("Відгукнутися"),
         "resume": MessageLookupByLibrary.simpleMessage("Резюме"),
         "saveChanges": MessageLookupByLibrary.simpleMessage("Зберегти зміни"),

@@ -63,7 +63,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "didNotFindYourVacancy":
             MessageLookupByLibrary.simpleMessage("Didn\'t find your vacancy?"),
         "disconnect": MessageLookupByLibrary.simpleMessage("Disconnect"),
-        "discount": MessageLookupByLibrary.simpleMessage("discount"),
+        "discount": MessageLookupByLibrary.simpleMessage("Discount"),
         "discounts": MessageLookupByLibrary.simpleMessage("Discounts"),
         "discountsAndCoupons":
             MessageLookupByLibrary.simpleMessage("Discounts and coupons"),
@@ -235,7 +235,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "We have received your message and will respond to you as soon as possible."),
         "register": MessageLookupByLibrary.simpleMessage("Register"),
         "remotely": MessageLookupByLibrary.simpleMessage("Remotely"),
-        "resetAllFilter": MessageLookupByLibrary.simpleMessage("Reset filters"),
+        "resetAll": MessageLookupByLibrary.simpleMessage("Reset all"),
         "respond": MessageLookupByLibrary.simpleMessage("Respond"),
         "resume": MessageLookupByLibrary.simpleMessage("Resume"),
         "saveChanges": MessageLookupByLibrary.simpleMessage("Save changes"),

@@ -1,50 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
-
-extension DiscountModelExtensions on List<DiscountModel> {
-  List<String> getLocationFilter(BuildContext context) {
-    final filter = [context.l10n.fromLargestToSmallest, context.l10n.free];
-    final cities = context
-        .read<DiscountWatcherBloc>()
-        .state
-        .discountModelItems
-        .overallItems(
-          getFilter: (item) => item.location ?? [],
-          context: context,
-        );
-    final subLocation = SubLocation.all.getList(context);
-    return [...filter, ...subLocation, ...cities];
-  }
-  // List<String> overallCategory(BuildContext context) {
-  //   final allTags = <String>[];
-  //   for (final item in this) {
-  //     allTags.addAll(
-  //       context.read<AuthenticationBloc>().state.userSetting.locale ==
-  //               Language.english
-  //           ? item.category
-  //           : item.categoryUA,
-  //     );
-  //   }
-  //   return allTags.toSet().toList();
-  // }
-}
-
-// extension InformationModelExtensions on List<InformationModel> {
-//   List<String> overallTags(BuildContext context) {
-//     final allTags = <String>[];
-//     for (final item in this) {
-//       allTags.addAll(
-//         context.read<AuthenticationBloc>().state.userSetting.locale ==
-//                 Language.english
-//             ? item.category
-//             : item.categoryUA,
-//       );
-//     }
-//     return allTags.toSet().toList();
-//   }
-// }
 
 extension DiscountFailureValue on DiscountFailure {
   String value(BuildContext context) {

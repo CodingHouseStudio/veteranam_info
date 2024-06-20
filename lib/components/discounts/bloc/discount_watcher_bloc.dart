@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -71,7 +72,7 @@ class DiscountWatcherBloc
         loadingStatus: LoadingStatus.loaded,
         filteredDiscountModelItems: _filter(
           categoryIndex: state.filtersCategoriesIndex,
-          itemsLoaded: state.itemsLoaded,
+          itemsLoaded: KDimensions.loadItems,
           locationIndex: state.filtersLocationIndex,
           list: event.discountItemsModel,
         ),
@@ -170,32 +171,53 @@ class DiscountWatcherBloc
     required int itemsLoaded,
     List<DiscountModel>? list,
   }) {
-    final filteredList = (list ?? state.discountModelItems)
+    final items = list ?? state.discountModelItems;
+
+    final filterList = items
         .loadingFilter(
           filtersIndex: categoryIndex,
           itemsLoaded: null,
           getFilter: (item) => item.category,
         )
         .loadingFilter(
-          filtersIndex: locationIndex
-              ?.where((element) => element != 0 && element != 1)
-              .toList(),
+          filtersIndex:
+              locationIndex?.where((element) => element != 0).toList(),
           itemsLoaded: itemsLoaded,
           getFilter: (item) => [
             if (item.location != null) ...item.location!,
             if (item.subLocation != null) ...item.subLocation._getList,
           ],
-          overallFilter: (list ?? state.discountModelItems)._getLocationItems,
+          overallFilter: items._getLocationItems,
         );
 
-    return (locationIndex != null
-            ? (locationIndex.contains(0) ? filteredList.reversed : filteredList)
-                .where(
-                (element) =>
-                    !locationIndex.contains(1) ||
-                    element.discount.contains(100),
-              )
-            : filteredList)
+    // If no location index is provided, return the filtered list
+    if (locationIndex == null || locationIndex.isEmpty) {
+      return filterList
+        ..sort(
+          (a, b) => b.date.compareTo(a.date),
+        );
+    }
+
+    // Sort based on locationIndex and discount/date
+    filterList.sort((a, b) {
+      if (locationIndex.contains(0)) {
+        final maxDiscountA = a.discount.isNotEmpty ? a.discount.reduce(max) : 0;
+        final maxDiscountB = b.discount.isNotEmpty ? b.discount.reduce(max) : 0;
+
+        if (maxDiscountA != maxDiscountB) {
+          return maxDiscountB.compareTo(maxDiscountA);
+        }
+      }
+
+      return b.date.compareTo(a.date);
+    });
+
+    // Filter out elements not matching the specific condition
+    return filterList
+        .where(
+          (element) =>
+              !locationIndex.contains(1) || element.discount.contains(100),
+        )
         .toList();
   }
 

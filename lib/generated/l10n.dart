@@ -100,11 +100,11 @@ class AppLocalizations {
     );
   }
 
-  /// `Reset filters`
-  String get resetAllFilter {
+  /// `Reset all`
+  String get resetAll {
     return Intl.message(
-      'Reset filters',
-      name: 'resetAllFilter',
+      'Reset all',
+      name: 'resetAll',
       desc: '',
       args: [],
     );
@@ -1980,10 +1980,10 @@ class AppLocalizations {
     );
   }
 
-  /// `discount`
+  /// `Discount`
   String get discount {
     return Intl.message(
-      'discount',
+      'Discount',
       name: 'discount',
       desc: '',
       args: [],

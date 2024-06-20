@@ -42,9 +42,18 @@ class DiscountModel with _$DiscountModel {
 
 enum SubLocation { all, allStoresOfChain, online }
 
-extension SubLocationString on SubLocation {
+extension SubLocationString on SubLocation? {
   List<String> getList(BuildContext context) {
-    return [context.l10n.allStoresOfChain, context.l10n.online];
+    switch (this) {
+      case null:
+        return [];
+      case SubLocation.all:
+        return [context.l10n.allStoresOfChain, context.l10n.online];
+      case SubLocation.allStoresOfChain:
+        return [context.l10n.allStoresOfChain];
+      case SubLocation.online:
+        return [context.l10n.online];
+    }
   }
 }
 

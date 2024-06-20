@@ -21,7 +21,7 @@ class DiscountBodyWidget extends StatelessWidget {
       listenWhen: (previous, current) => current.failure != null,
       builder: (context, _) {
         return ScaffoldAutoLoadingWidget(
-          mainChildWidgetsFunction: ({required isDesk}) => [
+          titleChildWidgetsFunction: ({required isDesk}) => [
             KSizedBox.kHeightSizedBox24,
             ...TitleWidget.pointTitleWidgetList(
               title: context.l10n.specialOffers,
@@ -61,14 +61,15 @@ class DiscountBodyWidget extends StatelessWidget {
                 _myDiscountButton(context),
               ],
               KSizedBox.kHeightSizedBox24,
-              AdvancedFilter(
-                isDesk: isDesk,
-              ),
+              const AdvancedFilterMob(),
             ],
             if (isDesk)
               KSizedBox.kHeightSizedBox40
             else
               KSizedBox.kHeightSizedBox24,
+          ],
+          mainRightChildWidget: const AdvancedFilterDesk(),
+          mainChildWidgetsFunction: ({required isDesk}) => [
             if (_.discountModelItems.isEmpty &&
                 _.loadingStatus == LoadingStatus.loaded &&
                 Config.isDevelopment)

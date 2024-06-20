@@ -1,59 +1,163 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
 
-class AdvancedFilter extends StatelessWidget {
-  const AdvancedFilter({
-    required this.isDesk,
+class AdvancedFilterMob extends StatelessWidget {
+  const AdvancedFilterMob({
     super.key,
   });
-  final bool isDesk;
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: TextButton.icon(
-        style: KButtonStyles.advancedFilterButtonStyle,
-        label: Text(
-          context.l10n.advancedFilter,
-          style: isDesk
-              ? AppTextStyle.materialThemeHeadlineSmall
-              : AppTextStyle.materialThemeTitleMedium,
-        ),
-        // KSizedBox.kWidthSizedBox8,
-        icon: IconWidget(
-          icon: KIcon.tune,
-          background: AppColors.materialThemeKeyColorsNeutral,
-          padding: isDesk ? KPadding.kPaddingSize20 : KPadding.kPaddingSize12,
-        ),
-        onPressed: () async {
-          final bloc = context.read<DiscountWatcherBloc>();
-          await showModalBottomSheet<BlocProvider>(
-            context: context,
-            builder: (context) => BlocProvider.value(
+    return _AdvanceFilter.button(
+      onPressed: () async {
+        final bloc = context.read<DiscountWatcherBloc>();
+        await showModalBottomSheet<Widget>(
+          context: context,
+          isScrollControlled: true,
+          barrierColor:
+              AppColors.materialThemeKeyColorsSecondary.withOpacity(0.2),
+          backgroundColor: AppColors.materialThemeKeyColorsNeutral,
+          builder: (context) => FractionallySizedBox(
+            heightFactor: 0.9,
+            child: BlocProvider.value(
               value: bloc,
               child: BlocBuilder<DiscountWatcherBloc, DiscountWatcherState>(
-                builder: (context, state) {
-                  final body = widgetList(
-                    isDesk: isDesk,
-                    context: context,
-                  );
-                  return ListView.builder(
-                    itemBuilder: (context, index) => body.elementAt(index),
-                    itemCount: body.length,
-                  );
-                },
+                builder: (context, state) => Column(
+                  children: [
+                    Row(
+                      children: [
+                        IconButtonWidget(
+                          icon: KIcon.close,
+                          background: AppColors.materialThemeWhite,
+                          padding: KPadding.kPaddingSize12,
+                          onPressed: () => context.pop(),
+                        ),
+                        KSizedBox.kWidthSizedBox8,
+                        Text(
+                          context.l10n.advancedFilter,
+                          style: AppTextStyle.materialThemeTitleMedium,
+                        ),
+                      ],
+                    ),
+                    Expanded(
+                      child: _AdvanceFilter.listView(
+                        isDesk: false,
+                        context: context,
+                      ),
+                    ),
+                    ..._AdvanceFilter.resetButton(
+                      isDesk: false,
+                      context: context,
+                    ),
+                  ],
+                ),
               ),
             ),
+          ),
+        );
+      },
+      isDesk: false,
+      context: context,
+    );
+  }
+}
+
+class AdvancedFilterDesk extends StatefulWidget {
+  const AdvancedFilterDesk({super.key});
+
+  @override
+  State<AdvancedFilterDesk> createState() => _AdvancedFilterDeskState();
+}
+
+class _AdvancedFilterDeskState extends State<AdvancedFilterDesk> {
+  late bool bodyHiden;
+
+  @override
+  void initState() {
+    bodyHiden = true;
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(left: KPadding.kPaddingSize32),
+      child: BlocBuilder<DiscountWatcherBloc, DiscountWatcherState>(
+        builder: (context, state) {
+          return Column(
+            children: [
+              _AdvanceFilter.button(
+                onPressed: () => setState(() {
+                  bodyHiden = !bodyHiden;
+                }),
+                isDesk: true,
+                context: context,
+                icon: bodyHiden ? KIcon.trailing : KIcon.trailingUp,
+              ),
+              if (!bodyHiden) ...[
+                Expanded(
+                  child:
+                      _AdvanceFilter.listView(isDesk: true, context: context),
+                ),
+                ..._AdvanceFilter.resetButton(isDesk: true, context: context),
+              ],
+            ],
           );
         },
-        //if (isDesk) KIcon.meil,
       ),
     );
   }
+}
 
-  static List<Widget> widgetList({
+abstract class _AdvanceFilter {
+  static Widget listView({
+    required bool isDesk,
+    required BuildContext context,
+  }) {
+    final body = _widgetList(
+      isDesk: isDesk,
+      context: context,
+    );
+    return ListView.builder(
+      padding: isDesk
+          ? EdgeInsets.zero
+          : const EdgeInsets.all(KPadding.kPaddingSize16),
+      itemBuilder: (context, index) => body.elementAt(index),
+      itemCount: body.length,
+      semanticChildCount: body.length,
+      addAutomaticKeepAlives: false,
+      addRepaintBoundaries: false,
+    );
+  }
+
+  static List<Widget> resetButton({
+    required bool isDesk,
+    required BuildContext context,
+  }) =>
+      [
+        KSizedBox.kHeightSizedBox24,
+        Align(
+          alignment: Alignment.centerLeft,
+          child: TextButton(
+            style: KButtonStyles.borderBlackButtonStyle,
+            onPressed: () => context
+                .read<DiscountWatcherBloc>()
+                .add(const DiscountWatcherEvent.filterReset()),
+            child: Text(
+              context.l10n.resetAll,
+              style: isDesk
+                  ? AppTextStyle.materialThemeTitleLarge
+                  : AppTextStyle.materialThemeTitleMedium,
+            ),
+          ),
+        ),
+        KSizedBox.kHeightSizedBox16,
+      ];
+
+  static List<Widget> _widgetList({
     required bool isDesk,
     required BuildContext context,
   }) {
@@ -65,21 +169,7 @@ class AdvancedFilter extends StatelessWidget {
         .discountModelItems
         .getLocationFilter(context);
     return [
-      Row(
-        children: [
-          const IconWidget(
-            icon: KIcon.close,
-            background: AppColors.materialThemeWhite,
-            padding: KPadding.kPaddingSize12,
-          ),
-          KSizedBox.kWidthSizedBox8,
-          Text(
-            context.l10n.advancedFilter,
-            style: AppTextStyle.materialThemeTitleMedium,
-          ),
-        ],
-      ),
-      KSizedBox.kHeightSizedBox24,
+      if (isDesk) KSizedBox.kHeightSizedBox32 else KSizedBox.kHeightSizedBox24,
       Text(
         context.l10n.filterApplied,
         style: isDesk
@@ -94,10 +184,15 @@ class AdvancedFilter extends StatelessWidget {
             child: Align(
               alignment: Alignment.centerLeft,
               child: TextButton.icon(
-                style: KButtonStyles.filterButtonStyle,
+                style: KButtonStyles.advancedFilterButtonStyle,
                 icon: KIcon.close,
                 label: Text(
-                  location.elementAt(filterLocationIndex.elementAt(index)),
+                  location
+                      .elementAt(filterLocationIndex.elementAt(index))
+                      .value,
+                  style: isDesk
+                      ? AppTextStyle.materialThemeBodyLarge
+                      : AppTextStyle.materialThemeBodyMedium,
                 ),
                 onPressed: () => _onChange(
                   context: context,
@@ -110,7 +205,9 @@ class AdvancedFilter extends StatelessWidget {
       KSizedBox.kHeightSizedBox24,
       Text(
         context.l10n.discount,
-        style: AppTextStyle.materialThemeTitleMedium,
+        style: isDesk
+            ? AppTextStyle.materialThemeTitleLarge
+            : AppTextStyle.materialThemeTitleMedium,
       ),
       ...List.generate(
         2,
@@ -122,7 +219,7 @@ class AdvancedFilter extends StatelessWidget {
               index: index,
               filterLocationIndex: filterLocationIndex,
             ),
-            text: location.elementAt(index),
+            text: location.elementAt(index).value,
             isDesk: isDesk,
           ),
         ),
@@ -130,7 +227,9 @@ class AdvancedFilter extends StatelessWidget {
       KSizedBox.kHeightSizedBox24,
       Text(
         context.l10n.city,
-        style: AppTextStyle.materialThemeTitleLarge,
+        style: isDesk
+            ? AppTextStyle.materialThemeTitleLarge
+            : AppTextStyle.materialThemeTitleMedium,
       ),
       ...List.generate(
         location.length - 2,
@@ -138,11 +237,11 @@ class AdvancedFilter extends StatelessWidget {
           final i = index + 2;
           return Padding(
             padding: const EdgeInsets.only(top: KPadding.kPaddingSize16),
-            child: CheckPointWidget(
+            child: CheckPointAmountWidget(
               onChanged: () => _onChange(context: context, index: i),
               isCheck:
                   _isCheck(index: i, filterLocationIndex: filterLocationIndex),
-              text: location.elementAt(i),
+              filterItem: location.elementAt(i),
               isDesk: isDesk,
             ),
           );
@@ -150,6 +249,39 @@ class AdvancedFilter extends StatelessWidget {
       ),
     ];
   }
+
+  static Widget button({
+    required bool isDesk,
+    required void Function() onPressed,
+    required BuildContext context,
+    Icon? icon,
+  }) =>
+      Align(
+        alignment: Alignment.centerLeft,
+        child: TextButton.icon(
+          style: KButtonStyles.advancedButtonStyle,
+          label: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                context.l10n.advancedFilter,
+                style: isDesk
+                    ? AppTextStyle.materialThemeHeadlineSmall
+                    : AppTextStyle.materialThemeTitleMedium,
+              ),
+              if (icon != null) ...[KSizedBox.kWidthSizedBox8, icon],
+            ],
+          ),
+          // KSizedBox.kWidthSizedBox8,
+          icon: IconWidget(
+            icon: KIcon.tune,
+            background: AppColors.materialThemeKeyColorsNeutral,
+            padding: isDesk ? KPadding.kPaddingSize20 : KPadding.kPaddingSize12,
+          ),
+          onPressed: onPressed,
+          //if (isDesk) KIcon.meil,
+        ),
+      );
 
   static bool _isCheck({
     required int index,

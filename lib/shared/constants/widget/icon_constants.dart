@@ -5,8 +5,14 @@ import 'package:kozak/shared/shared.dart';
 import 'package:material_symbols_icons/symbols.dart';
 
 class _KIcon extends Icon {
-  // ignore: unused_element
-  const _KIcon(super.icon, {super.weight = 200, super.fill, super.size});
+  const _KIcon(
+    super.icon, {
+    // ignore: unused_element
+    super.weight = 200,
+    super.fill,
+    // ignore: unused_element
+    super.size = KSize.kIconSize,
+  });
 }
 
 extension IconExtension on Icon {
@@ -52,8 +58,8 @@ abstract class KIcon {
   static const _KIcon filter = _KIcon(Symbols.filter_alt);
   static const _KIcon edit = _KIcon(Symbols.edit);
   static const _KIcon button = _KIcon(Symbols.smart_button);
-  static const _KIcon trailing = _KIcon(Symbols.arrow_drop_down);
-  static const _KIcon trailingUp = _KIcon(Symbols.arrow_drop_up);
+  static const _KIcon trailing = _KIcon(Symbols.keyboard_arrow_down);
+  static const _KIcon trailingUp = _KIcon(Symbols.keyboard_arrow_up);
   static const _KIcon arrowUpRight = _KIcon(Symbols.arrow_outward);
   static const _KIcon arrowDownRight = _KIcon(Symbols.south_east);
   static const _KIcon arrowDownLeft = _KIcon(Symbols.south_west);
@@ -78,7 +84,6 @@ abstract class KIcon {
   static const _KIcon saved = _KIcon(Symbols.bookmark_added_sharp);
   static const _KIcon check = _KIcon(
     Symbols.check,
-    size: KSize.kcheckPointIconSize,
   );
   static const _KIcon volum = _KIcon(Symbols.volume_up);
   static const _KIcon eye = _KIcon(Symbols.remove_red_eye);

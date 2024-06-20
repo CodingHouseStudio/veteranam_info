@@ -59,7 +59,7 @@ abstract class KSize {
   static const kWrapRunSpacing4 = 4.0;
 
   static const kOpacityHalf = 0.5;
-  static const kcheckPointIconSize = 24.0;
+  static const kIconSize = 24.0;
 
   static const kTopScroll = 1000.0;
 }
