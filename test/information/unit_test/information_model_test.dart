@@ -9,49 +9,36 @@ void main() {
 
   setUpAll(setUpGlobal);
   group('${KScreenBlocName.information} ${KGroupText.model} ', () {
-    final fullJson = {
-      InformationModelJsonField.id: KTestText.informationModelItems.last.id,
-      InformationModelJsonField.title:
-          KTestText.informationModelItems.last.title,
-      InformationModelJsonField.news: KTestText.informationModelItems.last.news,
-      InformationModelJsonField.fetchDate:
-          KTestText.informationModelItems.last.fetchDate.toIso8601String(),
-      InformationModelJsonField.category:
-          KTestText.informationModelItems.last.category,
-      InformationModelJsonField.image: [
-        KTestText.informationModelItems.last.image!.toJson(),
-      ],
-      InformationModelJsonField.categoryUA:
-          KTestText.informationModelItems.last.categoryUA,
-      InformationModelJsonField.topic:
-          KTestText.informationModelItems.last.topic,
-      InformationModelJsonField.topicUA:
-          KTestText.informationModelItems.last.topicUA,
-      InformationModelJsonField.status:
-          KTestText.informationModelItems.last.status,
-    };
-    final nullableJson = {
-      InformationModelJsonField.id: KTestText.informationModelItems.last.id,
-      InformationModelJsonField.title:
-          KTestText.informationModelItems.last.title,
-      InformationModelJsonField.news: KTestText.informationModelItems.last.news,
-      InformationModelJsonField.fetchDate:
-          KTestText.informationModelItems.last.fetchDate.toIso8601String(),
-      InformationModelJsonField.category:
-          KTestText.informationModelItems.last.category,
-      InformationModelJsonField.image: null,
-      InformationModelJsonField.categoryUA:
-          KTestText.informationModelItems.last.categoryUA,
-      InformationModelJsonField.topic:
-          KTestText.informationModelItems.last.topic,
-      InformationModelJsonField.topicUA:
-          KTestText.informationModelItems.last.topicUA,
-      InformationModelJsonField.status:
-          KTestText.informationModelItems.last.status,
-    };
     group('${KGroupText.modelJson} ', () {
-      test('${KGroupText.full} ', () {
-        final informationModel = InformationModel.fromJson(fullJson);
+      test('${KGroupText.shouldBe} ', () {
+        final json = {
+          InformationModelJsonField.id: KTestText.informationModelItems.last.id,
+          InformationModelJsonField.title:
+              KTestText.informationModelItems.last.title,
+          InformationModelJsonField.news:
+              KTestText.informationModelItems.last.news,
+          InformationModelJsonField.fetchDate:
+              KTestText.informationModelItems.last.fetchDate.toIso8601String(),
+          InformationModelJsonField.category:
+              KTestText.informationModelItems.last.category,
+          InformationModelJsonField.image: [
+            KTestText.informationModelItems.last.image!.first.toJson(),
+          ],
+          InformationModelJsonField.categoryUA:
+              KTestText.informationModelItems.last.categoryUA,
+          InformationModelJsonField.topic:
+              KTestText.informationModelItems.last.topic,
+          InformationModelJsonField.topicUA:
+              KTestText.informationModelItems.last.topicUA,
+          InformationModelJsonField.status:
+              KTestText.informationModelItems.last.status,
+          InformationModelJsonField.directLink:
+              KTestText.informationModelItems.last.directLink,
+          InformationModelJsonField.link:
+              KTestText.informationModelItems.last.link,
+        };
+
+        final informationModel = InformationModel.fromJson(json);
 
         expect(
           informationModel.id,
@@ -93,10 +80,42 @@ void main() {
           informationModel.status,
           KTestText.informationModelItems.last.status,
         );
+        expect(
+          informationModel.directLink,
+          KTestText.informationModelItems.last.directLink,
+        );
+        expect(
+          informationModel.link,
+          KTestText.informationModelItems.last.link,
+        );
       });
 
-      test('${KGroupText.nullable} ', () {
-        final informationModel = InformationModel.fromJson(nullableJson);
+      test('${KGroupText.shouldBe} ', () {
+        final json = {
+          InformationModelJsonField.id: KTestText.informationModelItems.last.id,
+          InformationModelJsonField.title:
+              KTestText.informationModelItems.last.title,
+          InformationModelJsonField.news:
+              KTestText.informationModelItems.last.news,
+          InformationModelJsonField.fetchDate:
+              KTestText.informationModelItems.last.fetchDate.toIso8601String(),
+          InformationModelJsonField.category:
+              KTestText.informationModelItems.last.category,
+          InformationModelJsonField.categoryUA:
+              KTestText.informationModelItems.last.categoryUA,
+          InformationModelJsonField.topic:
+              KTestText.informationModelItems.last.topic,
+          InformationModelJsonField.topicUA:
+              KTestText.informationModelItems.last.topicUA,
+          InformationModelJsonField.status:
+              KTestText.informationModelItems.last.status,
+          InformationModelJsonField.directLink:
+              KTestText.informationModelItems.last.directLink,
+          InformationModelJsonField.link:
+              KTestText.informationModelItems.last.link,
+        };
+
+        final informationModel = InformationModel.fromJson(json);
 
         expect(
           informationModel.id,
@@ -138,9 +157,17 @@ void main() {
           informationModel.status,
           KTestText.informationModelItems.last.status,
         );
+        expect(
+          informationModel.directLink,
+          KTestText.informationModelItems.last.directLink,
+        );
+        expect(
+          informationModel.link,
+          KTestText.informationModelItems.last.link,
+        );
       });
 
-      test('${KGroupText.failure} ', () {
+      test('${KGroupText.shouldNotBe} ', () {
         final json = {
           InformationModelJsonField.id: KTestText.informationModelItems.last.id,
           // title is missing
@@ -153,7 +180,7 @@ void main() {
           InformationModelJsonField.categoryUA:
               KTestText.informationModelItems.last.categoryUA,
           InformationModelJsonField.image: [
-            KTestText.informationModelItems.last.image!.toJson(),
+            KTestText.informationModelItems.last.image!.first.toJson(),
           ],
           InformationModelJsonField.topic:
               KTestText.informationModelItems.last.topic,
@@ -161,6 +188,10 @@ void main() {
               KTestText.informationModelItems.last.topicUA,
           InformationModelJsonField.status:
               KTestText.informationModelItems.last.status,
+          InformationModelJsonField.directLink:
+              KTestText.informationModelItems.last.directLink,
+          InformationModelJsonField.link:
+              KTestText.informationModelItems.last.link,
         };
 
         expect(
@@ -170,18 +201,70 @@ void main() {
       });
     });
     group('${KGroupText.jsonModel} ', () {
-      test('${KGroupText.full} ', () {
+      test('${KGroupText.shouldBe} ', () {
+        final json = {
+          InformationModelJsonField.id: KTestText.informationModelItems.last.id,
+          InformationModelJsonField.title:
+              KTestText.informationModelItems.last.title,
+          InformationModelJsonField.news:
+              KTestText.informationModelItems.last.news,
+          InformationModelJsonField.fetchDate:
+              KTestText.informationModelItems.last.fetchDate.toIso8601String(),
+          InformationModelJsonField.category:
+              KTestText.informationModelItems.last.category,
+          InformationModelJsonField.image: [
+            KTestText.informationModelItems.last.image!.first.toJson(),
+          ],
+          InformationModelJsonField.categoryUA:
+              KTestText.informationModelItems.last.categoryUA,
+          InformationModelJsonField.topic:
+              KTestText.informationModelItems.last.topic,
+          InformationModelJsonField.topicUA:
+              KTestText.informationModelItems.last.topicUA,
+          InformationModelJsonField.status:
+              KTestText.informationModelItems.last.status,
+          InformationModelJsonField.directLink:
+              KTestText.informationModelItems.last.directLink,
+          InformationModelJsonField.link:
+              KTestText.informationModelItems.last.link,
+        };
+
         final informationModelJson =
             KTestText.informationModelItems.last.toJson();
 
-        expect(informationModelJson, fullJson);
+        expect(informationModelJson, json);
       });
 
-      test('${KGroupText.nullable} ', () {
+      test('${KGroupText.shouldBe} ', () {
+        final json = {
+          InformationModelJsonField.id: KTestText.informationModelItems.last.id,
+          InformationModelJsonField.title:
+              KTestText.informationModelItems.last.title,
+          InformationModelJsonField.news:
+              KTestText.informationModelItems.last.news,
+          InformationModelJsonField.fetchDate:
+              KTestText.informationModelItems.last.fetchDate.toIso8601String(),
+          InformationModelJsonField.category:
+              KTestText.informationModelItems.last.category,
+          InformationModelJsonField.image: null,
+          InformationModelJsonField.categoryUA:
+              KTestText.informationModelItems.last.categoryUA,
+          InformationModelJsonField.topic:
+              KTestText.informationModelItems.last.topic,
+          InformationModelJsonField.topicUA:
+              KTestText.informationModelItems.last.topicUA,
+          InformationModelJsonField.status:
+              KTestText.informationModelItems.last.status,
+          InformationModelJsonField.directLink:
+              KTestText.informationModelItems.last.directLink,
+          InformationModelJsonField.link:
+              KTestText.informationModelItems.last.link,
+        };
+
         final informationModelJson =
             KTestText.informationModelItems.last.copyWith(image: null).toJson();
 
-        expect(informationModelJson, nullableJson);
+        expect(informationModelJson, json);
       });
     });
   });

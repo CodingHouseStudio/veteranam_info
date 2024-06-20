@@ -134,16 +134,11 @@ class _CardTextDetailEvaluateWidgetState
                       Column(
                         children: [
                           IconButtonWidget(
-                            onPressed: () {},
                             background: AppColors.materialThemeKeyColorsNeutral,
-                            icon: Padding(
-                              padding: const EdgeInsets.all(
-                                KPadding.kPaddingSize4,
-                              ),
-                              child: KIcon.website.copyWith(
-                                key: KWidgetkeys
-                                    .widget.cardTextDetailEvaluate.iconWebsite,
-                              ),
+                            padding: KPadding.kPaddingSize12,
+                            icon: KIcon.website.copyWith(
+                              key: KWidgetkeys
+                                  .widget.cardTextDetailEvaluate.iconWebsite,
                             ),
                           ),
                           KSizedBox.kHeightSizedBox3,
