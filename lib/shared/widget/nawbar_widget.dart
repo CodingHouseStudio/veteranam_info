@@ -11,6 +11,7 @@ class NawbarWidget extends SliverPersistentHeaderDelegate {
     this.childWidget,
     this.maxMinHeight,
   });
+
   final bool isDesk;
   final Key? widgetKey;
   final Widget? childWidget;
@@ -28,11 +29,9 @@ class NawbarWidget extends SliverPersistentHeaderDelegate {
       oldDelegate is NawbarWidget && isDesk != oldDelegate.isDesk;
 
   @override
-  Widget build(
-    BuildContext context,
-    double shrinkOffset,
-    bool overlapsContent,
-  ) {
+  Widget build(BuildContext context,
+      double shrinkOffset,
+      bool overlapsContent,) {
     return _NawbarWidgetImplematation(
       key: widgetKey,
       isDesk: isDesk,
@@ -47,6 +46,7 @@ class _NawbarWidgetImplematation extends StatefulWidget {
     super.key,
     this.childWidget,
   });
+
   final bool isDesk;
   final Widget? childWidget;
 
@@ -65,9 +65,10 @@ class _NawbarWidgetImplematationState
   void initState() {
     focusNode = FocusNode();
     focusNode.addListener(
-      () => setState(() {
-        isFocused = focusNode.hasFocus;
-      }),
+          () =>
+          setState(() {
+            isFocused = focusNode.hasFocus;
+          }),
     );
     super.initState();
   }
@@ -94,71 +95,72 @@ class _NawbarWidgetImplematationState
           ),
           child: Row(
             // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
+              children: [
               if (widget.isDesk || !isFocused)
-                IconButton(
-                  padding: EdgeInsets.zero,
-                  onPressed: () => EasyDebounce.debounce(
-                    context.l10n.logo,
-                    Duration.zero,
+          IconButton(
+          padding: EdgeInsets.zero,
+          onPressed: () =>
+              EasyDebounce.debounce(
+                context.l10n.logo,
+                Duration.zero,
                     () => context.goNamedWithScroll(KRoute.home.name),
-                  ),
-                  icon: KImage.logo.copyWith(
-                    key: KWidgetkeys.widget.nawbar.logo,
-                  ),
-                ),
-              if (Config.isDevelopment)
-                if (widget.isDesk)
-                  KSizedBox.kWidthSizedBox40
-                else
-                  KSizedBox.kWidthSizedBox22,
-              if (Config.isDevelopment)
-                Expanded(
-                  child: TextFieldWidget(
-                    key: _formKey,
-                    widgetKey: KWidgetkeys.widget.nawbar.field,
-                    hintStyle: widget.isDesk
-                        ? AppTextStyle.text24
-                        : AppTextStyle.text16,
-                    focusNode: focusNode,
-                    prefixIcon: KIcon.search,
-                    onChanged: (text) {},
-                    hintText: context.l10n.search,
-                    // suffixIcon: widget.isDesk || !widget.hasMicrophone
-                    //     ? null
-                    //     : KIcon.mic.setIconKey(
-                    //         KWidgetkeys.widget.nawbar.iconMic,
-                    //       ),
-                    isDesk: widget.isDesk,
-                    contentPadding: widget.isDesk
-                        ? EdgeInsets.zero
-                        : const EdgeInsets.all(KPadding.kPaddingSize16),
-                  ),
-                )
-              else if (widget.isDesk) ...[
-                Expanded(
-                  child: TextButton.icon(
-                    style: const ButtonStyle(alignment: Alignment.centerRight),
-                    onPressed: () => context.goNamed(KRoute.discounts.name),
-                    label: Text(
-                      context.l10n.discounts,
-                      style: AppTextStyle.materialThemeTitleMedium,
-                    ),
-                    icon: KIcon.tag,
-                  ),
-                ),
-                KSizedBox.kWidthSizedBox64,
-                Expanded(
-                  child: TextButton.icon(
-                    onPressed: () => context.goNamed(KRoute.information.name),
-                    label: Text(
-                      context.l10n.information,
-                      style: AppTextStyle.materialThemeTitleMedium,
-                    ),
-                    icon: KIcon.globe,
-                  ),
-                ),
-                KSizedBox.kWidthSizedBox64,
+              ),
+          icon: KImage.logo.copyWith(
+            key: KWidgetkeys.widget.nawbar.logo,
+          ),
+        ),
+    if (Config.isDevelopment)
+    if (widget.isDesk)
+    KSizedBox.kWidthSizedBox40
+    else
+    KSizedBox.kWidthSizedBox22,
+    if (Config.isDevelopment)
+    Expanded(
+    child: TextFieldWidget(
+    key: _formKey,
+    widgetKey: KWidgetkeys.widget.nawbar.field,
+    hintStyle: widget.isDesk
+    ? AppTextStyle.text24
+        : AppTextStyle.text16,
+    focusNode: focusNode,
+    prefixIcon: KIcon.search,
+    onChanged: (text) {},
+    hintText: context.l10n.search,
+    // suffixIcon: widget.isDesk || !widget.hasMicrophone
+    //     ? null
+    //     : KIcon.mic.setIconKey(
+    //         KWidgetkeys.widget.nawbar.iconMic,
+    //       ),
+    isDesk: widget.isDesk,
+    contentPadding: widget.isDesk
+    ? EdgeInsets.zero
+        : const EdgeInsets.all(KPadding.kPaddingSize16),
+    ),
+    )
+    else if (widget.isDesk) ...[
+    Expanded(
+    child: TextButton.icon(
+    style: const ButtonStyle(alignment: Alignment.centerRight),
+    onPressed: () => context.goNamed(KRoute.discounts.name),
+    label: Text(
+    context.l10n.discounts,
+    style: AppTextStyle.materialThemeTitleMedium,
+    ),
+    icon: KIcon.tag,
+    ),
+    ),
+    KSizedBox.kWidthSizedBox64,
+    Expanded(
+    child: TextButton.icon(
+    onPressed: () => context.goNamed(KRoute.information.name),
+    label: Text(
+    context.l10n.information,
+    style: AppTextStyle.materialThemeTitleMedium,
+    ),
+    icon: KIcon.globe,
+    ),
+    ),
+    KSizedBox.kWidthSizedBox64,
     TextButton.icon(
     onPressed: () => context.goNamed(KRoute.investors.name),
     label: Text(
@@ -201,39 +203,39 @@ class _NawbarWidgetImplematationState
     KIcon.person.copyWith(color: AppColors.materialThemeWhite),
     background: AppColors.materialThemeKeyColorsSecondary,
     ),
-              if (context.read<AuthenticationBloc>().state.status ==
-                      AuthenticationStatus.authenticated &&
-                  Config.isDevelopment)
-                if (!isFocused || widget.isDesk)
-                  if (context.read<AuthenticationBloc>().state.user!.photo ==
-                      null)
-                    InkWell(
-                      key: KWidgetkeys.widget.nawbar.iconPerson,
-                      onTap: () => context.goNamed(KRoute.profile.name),
-                      child: const IconWidget(
-                        icon: KIcon.person,
-                      ),
-                    )
-                  else
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(KSize.kUserPhoto),
-                      child: InkWell(
-                        key: KWidgetkeys.widget.nawbar.iconPerson,
-                        onTap: () => context.goNamed(KRoute.profile.name),
-                        child: ImageWidget(
-                          imageUrl: context
-                              .read<AuthenticationBloc>()
-                              .state
-                              .user!
-                              .photo!,
-                          fit: BoxFit.contain,
-                          size: KSize.kUserPhoto,
-                        ),
-                      ),
-                    ),
-            ],
-          ),
-        );
+    if (context.read<AuthenticationBloc>().state.status ==
+    AuthenticationStatus.authenticated &&
+    Config.isDevelopment)
+    if (!isFocused || widget.isDesk)
+    if (context.read<AuthenticationBloc>().state.user!.photo ==
+    null)
+    InkWell(
+    key: KWidgetkeys.widget.nawbar.iconPerson,
+    onTap: () => context.goNamed(KRoute.profile.name),
+    child: const IconWidget(
+    icon: KIcon.person,
+    ),
+    )
+    else
+    ClipRRect(
+    borderRadius: BorderRadius.circular(KSize.kUserPhoto),
+    child: InkWell(
+    key: KWidgetkeys.widget.nawbar.iconPerson,
+    onTap: () => context.goNamed(KRoute.profile.name),
+    child: ImageWidget(
+    imageUrl: context
+        .read<AuthenticationBloc>()
+        .state
+        .user!
+        .photo!,
+    fit: BoxFit.contain,
+    size: KSize.kUserPhoto,
+    ),
+    ),
+    ),
+    ],
+    ),
+    );
   }
 
   void profileNavigation(BuildContext context) =>
