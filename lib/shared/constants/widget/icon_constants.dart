@@ -1,11 +1,18 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
+import 'package:kozak/shared/shared.dart';
 import 'package:material_symbols_icons/symbols.dart';
 
 class _KIcon extends Icon {
-  // ignore: unused_element
-  const _KIcon(super.icon, {super.weight = 200, super.fill});
+  const _KIcon(
+    super.icon, {
+    // ignore: unused_element
+    super.weight = 200,
+    super.fill,
+    // ignore: unused_element
+    super.size = KSize.kIconSize,
+  });
 }
 
 extension IconExtension on Icon {
@@ -51,8 +58,8 @@ abstract class KIcon {
   static const _KIcon filter = _KIcon(Symbols.filter_alt);
   static const _KIcon edit = _KIcon(Symbols.edit);
   static const _KIcon button = _KIcon(Symbols.smart_button);
-  static const _KIcon trailing = _KIcon(Symbols.arrow_drop_down);
-  static const _KIcon trailingUp = _KIcon(Symbols.arrow_drop_up);
+  static const _KIcon trailing = _KIcon(Symbols.keyboard_arrow_down);
+  static const _KIcon trailingUp = _KIcon(Symbols.keyboard_arrow_up);
   static const _KIcon arrowUpRight = _KIcon(Symbols.arrow_outward);
   static const _KIcon arrowDownRight = _KIcon(Symbols.south_east);
   static const _KIcon arrowDownLeft = _KIcon(Symbols.south_west);
@@ -96,6 +103,7 @@ abstract class KIcon {
   static const _KIcon fileText = _KIcon(Symbols.description);
   static const _KIcon meil = _KIcon(Symbols.mail);
   static const _KIcon close = _KIcon(Symbols.close);
+  static const _KIcon tune = _KIcon(Symbols.tune);
   static const _KIcon user = _KIcon(Symbols.person);
   static const _KIcon calendarClock = _KIcon(Symbols.calendar_clock);
   static const _KIcon distance = _KIcon(Symbols.distance);

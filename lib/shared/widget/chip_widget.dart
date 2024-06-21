@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kozak/shared/shared.dart';
 
-class ChipWidget extends StatelessWidget {
+class ChipWidget extends StatefulWidget {
   const ChipWidget({
     required this.filter,
     required this.isSelected,
@@ -9,30 +9,82 @@ class ChipWidget extends StatelessWidget {
     required this.isDesk,
     super.key,
   });
-  final String filter;
+  final FilterItem filter;
   final bool isSelected;
-  final void Function({required bool isSelected}) onSelected;
+  final ValueChanged<bool>? onSelected;
   final bool isDesk;
 
   @override
+  ChipWidgetState createState() => ChipWidgetState();
+}
+
+class ChipWidgetState extends State<ChipWidget> {
+  bool _isHovered = false;
+
+  @override
   Widget build(BuildContext context) {
-    return FilterChip(
-      key: KWidgetkeys.widget.chip.widget,
-      backgroundColor: AppColors.materialThemeWhite,
-      label: Text(
-        filter,
-        style: isDesk
-            ? AppTextStyle.materialThemeHeadlineSmall
-            : AppTextStyle.materialThemeLabelLarge,
+    final filterEmpty = widget.filter.number == 0;
+    return MouseRegion(
+      onEnter: (_) {
+        setState(() {
+          _isHovered = true;
+        });
+      },
+      onExit: (_) {
+        setState(() {
+          _isHovered = false;
+        });
+      },
+      child: FilterChip(
+        key: KWidgetkeys.widget.chip.widget,
+        backgroundColor: AppColors.materialThemeWhite,
+        label: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              widget.filter.value,
+              style: (widget.isDesk
+                      ? AppTextStyle.materialThemeHeadlineSmall
+                      : AppTextStyle.materialThemeLabelLarge)
+                  .copyWith(
+                color: _isHovered && !widget.isSelected && !filterEmpty
+                    ? AppColors.materialThemeKeyColorsNeutralVariant
+                    : AppColors.materialThemeBlack,
+              ),
+            ),
+            KSizedBox.kWidthSizedBox10,
+            if (!filterEmpty)
+              AmountWidget(
+                background: widget.isSelected
+                    ? AppColors.materialThemeBlack
+                    : AppColors.materialThemeKeyColorsPrimary,
+                textColor: widget.isSelected
+                    ? AppColors.materialThemeWhite
+                    : (!widget.isSelected && _isHovered
+                        ? AppColors.materialThemeKeyColorsNeutralVariant
+                        : AppColors.materialThemeBlack),
+                number: widget.filter.number,
+              ),
+          ],
+        ),
+        shape: const RoundedRectangleBorder(
+          borderRadius: KBorderRadius.kBorderRadius32,
+        ),
+        side: BorderSide(
+          color: !widget.isSelected
+              ? (_isHovered || filterEmpty
+                  ? AppColors.materialThemeKeyColorsNeutralVariant
+                  : AppColors.materialThemeBlack)
+              : Colors.transparent,
+        ),
+        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        selected: widget.isSelected,
+        onSelected: !filterEmpty ? widget.onSelected : null,
+        checkmarkColor: AppColors.materialThemeRefSecondarySecondary10,
+        selectedColor: _isHovered
+            ? AppColors.materialThemeRefPrimaryPrimary90
+            : AppColors.materialThemeSourceSeed,
       ),
-      shape: const RoundedRectangleBorder(
-        borderRadius: KBorderRadius.kBorderRadius32,
-      ),
-      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-      selected: isSelected,
-      onSelected: (value) => onSelected(isSelected: value),
-      // checkmarkColor: AppColors.black,
-      selectedColor: AppColors.materialThemeWhite,
     );
   }
 }

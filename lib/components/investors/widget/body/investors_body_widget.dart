@@ -106,18 +106,18 @@ class InvestorsBodyWidget extends StatelessWidget {
             KSizedBox.kHeightSizedBox32
           else
             KSizedBox.kHeightSizedBox24,
-          if (_.fundItems.isEmpty && _.loadingStatus == LoadingStatus.loaded)
-            Config.isDevelopment
-                ? MockButtonWidget(
-                    key: KWidgetkeys.screen.investors.buttonMock,
-                    onPressed: () {
-                      GetIt.I.get<IInvestorsRepository>().addMockFunds();
-                      context
-                          .read<InvestorsWatcherBloc>()
-                          .add(const InvestorsWatcherEvent.started());
-                    },
-                  )
-                : const SizedBox.shrink()
+          if (_.fundItems.isEmpty &&
+              _.loadingStatus == LoadingStatus.loaded &&
+              Config.isDevelopment)
+            MockButtonWidget(
+              key: KWidgetkeys.screen.investors.buttonMock,
+              onPressed: () {
+                GetIt.I.get<IInvestorsRepository>().addMockFunds();
+                context
+                    .read<InvestorsWatcherBloc>()
+                    .add(const InvestorsWatcherEvent.started());
+              },
+            )
           else
             ..._fundsWidgetList(context: context, isDesk: isDesk),
           if (isDesk)

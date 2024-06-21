@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,16 +24,18 @@ class DiscountWatcherBloc
             discountModelItems: [],
             loadingStatus: LoadingStatus.initial,
             filteredDiscountModelItems: [],
-            filtersIndex: null,
+            filtersCategoriesIndex: null,
             itemsLoaded: 0,
             failure: null,
+            filtersLocationIndex: null,
           ),
         ) {
     on<_Started>(_onStarted);
     on<_Updated>(_onUpdated);
     on<_Failure>(_onFailure);
     on<_LoadNextItems>(_onLoadNextItems);
-    on<_Filter>(_onFilter);
+    on<_FilterCategory>(_onFilterCategory);
+    on<_FilterLocation>(_onFilterLocation);
     on<_FilterReset>(_onFilterReset);
   }
 
@@ -67,17 +70,17 @@ class DiscountWatcherBloc
       DiscountWatcherState(
         discountModelItems: event.discountItemsModel,
         loadingStatus: LoadingStatus.loaded,
-        filteredDiscountModelItems: event.discountItemsModel.isNotEmpty
-            ? _filter(
-                filtersIndex: state.filtersIndex,
-                itemsLoaded: state.itemsLoaded,
-                discountModelItems: event.discountItemsModel,
-              )
-            : [],
-        filtersIndex: state.filtersIndex,
+        filteredDiscountModelItems: _filter(
+          categoryIndex: state.filtersCategoriesIndex,
+          itemsLoaded: KDimensions.loadItems,
+          locationIndex: state.filtersLocationIndex,
+          list: event.discountItemsModel,
+        ),
+        filtersCategoriesIndex: state.filtersCategoriesIndex,
         itemsLoaded:
             state.itemsLoaded.getLoaded(list: event.discountItemsModel),
         failure: null,
+        filtersLocationIndex: state.filtersLocationIndex,
       ),
     );
   }
@@ -89,9 +92,9 @@ class DiscountWatcherBloc
     if (state.itemsLoaded.checkLoadingPosible(state.discountModelItems)) return;
     emit(state.copyWith(loadingStatus: LoadingStatus.loading));
     final filterItems = _filter(
-      filtersIndex: state.filtersIndex,
+      categoryIndex: state.filtersCategoriesIndex,
       itemsLoaded: state.itemsLoaded + KDimensions.loadItems,
-      discountModelItems: state.discountModelItems,
+      locationIndex: state.filtersLocationIndex,
     );
     emit(
       state.copyWith(
@@ -109,60 +112,103 @@ class DiscountWatcherBloc
   ) {
     emit(
       state.copyWith(
-        filteredDiscountModelItems: _filter(
-          filtersIndex: null,
+        filteredDiscountModelItems: state.discountModelItems.loading(
           itemsLoaded: state.itemsLoaded,
-          discountModelItems: state.discountModelItems,
         ),
-        filtersIndex: null,
+        filtersCategoriesIndex: null,
+        filtersLocationIndex: null,
       ),
     );
   }
 
-  void _onFilter(
-    _Filter event,
+  void _onFilterCategory(
+    _FilterCategory event,
     Emitter<DiscountWatcherState> emit,
   ) {
-    final selectedFilters = state.filtersIndex.filterIndex(event.filterIndex);
+    final selectedFilters =
+        state.filtersCategoriesIndex.filterIndex(event.filterIndex);
 
     final filterItems = _filter(
-      filtersIndex: selectedFilters,
-      discountModelItems: state.discountModelItems,
+      categoryIndex: selectedFilters,
       itemsLoaded: state.itemsLoaded,
+      locationIndex: state.filtersLocationIndex,
     );
 
     emit(
       state.copyWith(
-        loadingStatus: LoadingStatus.loaded,
         filteredDiscountModelItems: filterItems,
-        filtersIndex: selectedFilters,
+        filtersCategoriesIndex: selectedFilters,
+        itemsLoaded: state.itemsLoaded.getLoaded(list: filterItems),
+      ),
+    );
+  }
+
+  void _onFilterLocation(
+    _FilterLocation event,
+    Emitter<DiscountWatcherState> emit,
+  ) {
+    final selectedFilters =
+        state.filtersLocationIndex.filterIndex(event.filterIndex);
+
+    final filterItems = _filter(
+      locationIndex: selectedFilters,
+      itemsLoaded: state.itemsLoaded,
+      categoryIndex: state.filtersCategoriesIndex,
+    );
+
+    emit(
+      state.copyWith(
+        filteredDiscountModelItems: filterItems,
+        filtersLocationIndex: selectedFilters,
         itemsLoaded: state.itemsLoaded.getLoaded(list: filterItems),
       ),
     );
   }
 
   List<DiscountModel> _filter({
-    required List<int>? filtersIndex,
+    required List<int>? categoryIndex,
+    required List<int>? locationIndex,
     required int itemsLoaded,
-    required List<DiscountModel> discountModelItems,
+    List<DiscountModel>? list,
   }) {
-    if (discountModelItems.isEmpty) return [];
-    final loadedItemsCount = itemsLoaded
-        .getLoaded(list: discountModelItems)
-        .clamp(0, discountModelItems.length);
+    final items = list ?? state.discountModelItems;
 
-    if (filtersIndex == null || filtersIndex.isEmpty) {
-      return discountModelItems.take(loadedItemsCount).toList();
-    }
+    return items
+        .where(
+          (element) =>
+              locationIndex == null ||
+              !locationIndex.contains(1) ||
+              element.discount.contains(100),
+        )
+        .toList()
+        .loadingFilter(
+          filtersIndex: categoryIndex,
+          itemsLoaded: null,
+          getFilter: (item) => item.category,
+          fullList: items,
+        )
+        .loadingFilter(
+          filtersIndex: locationIndex?.where((element) => element > 1).toList(),
+          itemsLoaded: itemsLoaded,
+          getFilter: (item) => [
+            if (item.location != null) ...item.location!,
+            if (item.subLocation != null) ...item.subLocation._getList,
+          ],
+          overallFilter: items._getLocationItems,
+        )..sort((a, b) {
+        if (locationIndex != null && locationIndex.contains(0)) {
+          final maxDiscountA =
+              a.discount.isNotEmpty ? a.discount.reduce(max) : 0;
+          final maxDiscountB =
+              b.discount.isNotEmpty ? b.discount.reduce(max) : 0;
 
-    final filtersText = filtersIndex
-        .map((index) => discountModelItems.overallTagsBloc.elementAt(index))
-        .toList();
+          if (maxDiscountA != maxDiscountB) {
+            return maxDiscountB.compareTo(maxDiscountA);
+          }
+        }
 
-    return discountModelItems
-        .where((item) => filtersText.every(item.category.contains))
-        .take(loadedItemsCount)
-        .toList();
+        return b.dateVerified.compareTo(a.dateVerified);
+      });
   }
 
   void _onFailure(

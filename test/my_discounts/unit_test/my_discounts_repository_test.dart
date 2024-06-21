@@ -19,19 +19,12 @@ void main() {
         ExtendedDateTime.id = '';
         ExtendedDateTime.current = KTestText.dateTime;
         mockFirestoreService = MockFirestoreService();
-        mockDiscountRepository = MockIDiscountRepository();
 
         when(
           mockFirestoreService
               .getDiscountsByUserId(KTestText.userWithoutPhoto.id),
         ).thenAnswer(
           (_) async => KTestText.discountModelItems,
-        );
-        when(
-          mockDiscountRepository
-              .getDiscountsById(KTestText.userWithoutPhoto.id),
-        ).thenAnswer(
-          (_) async => Right(KTestText.discountModelItems),
         );
         if (GetIt.I.isRegistered<FirestoreService>()) {
           GetIt.I.unregister<FirestoreService>();

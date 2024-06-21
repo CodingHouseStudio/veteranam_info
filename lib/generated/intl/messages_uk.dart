@@ -29,8 +29,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "addPhoto": MessageLookupByLibrary.simpleMessage("Добавте фото"),
         "addYourStory":
             MessageLookupByLibrary.simpleMessage("Написати свою історію"),
+        "advancedFilter":
+            MessageLookupByLibrary.simpleMessage("Розширений фільтр"),
+        "all": MessageLookupByLibrary.simpleMessage("Все"),
         "allRightsReserved":
             MessageLookupByLibrary.simpleMessage("Всі права захищені"),
+        "allStoresOfChain":
+            MessageLookupByLibrary.simpleMessage("Всі заклади мережі"),
         "anonymous": MessageLookupByLibrary.simpleMessage("анонім"),
         "answersYourQuestions":
             MessageLookupByLibrary.simpleMessage("Відповіді на Ваші запитання"),
@@ -61,6 +66,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "didNotFindYourVacancy":
             MessageLookupByLibrary.simpleMessage("Не знайшли свою вакансію?"),
         "disconnect": MessageLookupByLibrary.simpleMessage("Відʼєднати"),
+        "discount": MessageLookupByLibrary.simpleMessage("Знижка"),
         "discounts": MessageLookupByLibrary.simpleMessage("Знижки"),
         "discountsAndCoupons":
             MessageLookupByLibrary.simpleMessage("Знижки і купони"),
@@ -102,7 +108,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "fieldCannotBeEmpty":
             MessageLookupByLibrary.simpleMessage("Поле не може бути пустим"),
         "fillInForm": MessageLookupByLibrary.simpleMessage("Заповніть форму"),
+        "filterApplied":
+            MessageLookupByLibrary.simpleMessage("Застосований фільтр"),
         "findOut": MessageLookupByLibrary.simpleMessage("Щоб дізнатися"),
+        "forVeteransAndTheirFamilies":
+            MessageLookupByLibrary.simpleMessage("для ветеранів і їх родин"),
+        "free": MessageLookupByLibrary.simpleMessage("Безкоштовно"),
+        "fromLargestToSmallest":
+            MessageLookupByLibrary.simpleMessage("Від найбільшої до найменшої"),
         "fullEmail": MessageLookupByLibrary.simpleMessage("Електронна пошта"),
         "funds": MessageLookupByLibrary.simpleMessage("Фонди"),
         "fundsSubtitle": MessageLookupByLibrary.simpleMessage(
@@ -190,7 +203,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Запропонувати знижку"),
         "oneNumber": MessageLookupByLibrary.simpleMessage(
             "повинен містити одну чи більше цифр"),
-        "online": MessageLookupByLibrary.simpleMessage("онлайн"),
+        "online": MessageLookupByLibrary.simpleMessage("Вся Україна (онлайн)"),
         "or": MessageLookupByLibrary.simpleMessage("або"),
         "orDonateHere":
             MessageLookupByLibrary.simpleMessage("або донатьте тут"),
@@ -228,8 +241,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ми отримали Ваше повідомлення і надамо Вам відповідь найближчим часом."),
         "register": MessageLookupByLibrary.simpleMessage("Зареєструватись"),
         "remotely": MessageLookupByLibrary.simpleMessage("Віддалено"),
-        "resetAllFilter":
-            MessageLookupByLibrary.simpleMessage("Скинути фільтри"),
+        "resetAll": MessageLookupByLibrary.simpleMessage("Скинути все"),
         "respond": MessageLookupByLibrary.simpleMessage("Відгукнутися"),
         "resume": MessageLookupByLibrary.simpleMessage("Резюме"),
         "saveChanges": MessageLookupByLibrary.simpleMessage("Зберегти зміни"),
@@ -253,6 +265,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "signUp": MessageLookupByLibrary.simpleMessage("Реєстрація"),
         "signUpWith":
             MessageLookupByLibrary.simpleMessage("Зареєструйтесь через"),
+        "specialOffers":
+            MessageLookupByLibrary.simpleMessage("Спеціальні пропозиції"),
         "statistics": MessageLookupByLibrary.simpleMessage("Статистика"),
         "stories": MessageLookupByLibrary.simpleMessage("Історії"),
         "storyAddSubtitle": MessageLookupByLibrary.simpleMessage(
