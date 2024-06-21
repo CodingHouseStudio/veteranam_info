@@ -33,7 +33,7 @@ part 'screen/my_discounts.dart';
 part 'widget/widget.dart';
 part 'widget/question.dart';
 part 'widget/nawbar.dart';
-part 'widget/filter.dart';
+// part 'widget/filter.dart';
 part 'widget/drop_list_field.dart';
 part 'widget/footer.dart';
 part 'widget/message_field.dart';

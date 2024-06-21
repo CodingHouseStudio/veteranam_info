@@ -149,8 +149,7 @@ abstract class KMockText {
     phoneNumber: '+380 800 503 680',
     directLink:
         'https://esculab.com/20-vidsotkiv-na-analizy-dlya-viyskovyh-ta-lyudey-yaki-vnutrishno-peremishcheni',
-    dateVerified: DateTime(2024, 6, 3),
-    date: ExtendedDateTime.current,
+    dateVerified: ExtendedDateTime.current,
     userName: 'Anonymous',
   );
   static final informationModel = InformationModel(
