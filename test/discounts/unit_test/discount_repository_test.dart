@@ -20,11 +20,11 @@ void main() {
     group('${KGroupText.successfulGet} ', () {
       setUp(() {
         when(mockFirestoreService.getDiscounts()).thenAnswer(
-          (_) => Stream.value(KTestText.discountModelItems),
+          (_) => Stream.value(KTestText.repositoryDiscountModelItems),
         );
         when(
           mockFirestoreService.addDiscount(
-            KTestText.discountModelItems.first,
+            KTestText.repositoryDiscountModelItems.first,
           ),
         ).thenAnswer(
           (realInvocation) async {},
@@ -39,14 +39,14 @@ void main() {
       test('Discount', () async {
         expect(
           mockDiscountRepository.getDiscountItems(),
-          emits(KTestText.discountModelItems),
+          emits(KTestText.repositoryDiscountModelItems),
         );
       });
       test('mock', () async {
         mockDiscountRepository.addMockDiscountItems();
         verify(
           mockFirestoreService.addDiscount(
-            KTestText.discountModelItems.first,
+            KTestText.repositoryDiscountModelItems.first,
           ),
         ).called(1);
       });

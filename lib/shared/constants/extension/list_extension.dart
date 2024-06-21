@@ -92,17 +92,17 @@ extension ListExtensions<T> on List<T> {
     return allFilters.getToSet;
   }
 
-  List<T> filterIndex(T eventFilterIndex) {
-    final selectedFilters = List<T>.from(this);
+  // List<T> filterIndex(T eventFilterIndex) {
+  //   final selectedFilters = List<T>.from(this);
 
-    if (selectedFilters.contains(eventFilterIndex)) {
-      selectedFilters.remove(eventFilterIndex);
-    } else {
-      selectedFilters.add(eventFilterIndex);
-    }
+  //   if (selectedFilters.contains(eventFilterIndex)) {
+  //     selectedFilters.remove(eventFilterIndex);
+  //   } else {
+  //     selectedFilters.add(eventFilterIndex);
+  //   }
 
-    return selectedFilters;
-  }
+  //   return selectedFilters;
+  // }
 }
 
 extension ListExtensionsNull<T> on List<T>? {

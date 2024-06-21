@@ -58,8 +58,6 @@ abstract class KGroupText {
   static const mockButton = 'Tap on the mock button';
   static const error = 'Error';
   static const failureNetwork = 'Failure Network';
-  static const successfulDelete = 'Successful delete';
-  static const failureDelete = 'Failure delete';
 }
 
 abstract class KTestText {
@@ -211,6 +209,15 @@ abstract class KTestText {
       ),
   ];
 
+  static final repositoryDiscountModelItems = <DiscountModel>[
+    for (var i = 0; i < 5; i++)
+      KMockText.discountModel.copyWith(
+        id: i.toString(),
+        userId: i.toString(),
+        dateVerified: dateTime,
+      ),
+  ];
+
   static final discountModelItemsModify = <DiscountModel>[
     for (var i = 0; i < 50; i++)
       KMockText.discountModel.copyWith(
@@ -331,6 +338,7 @@ abstract class KScreenBlocName {
   static const profileMyStory = 'My Story Screen';
   static const underConstruction = 'Under Construction Screen';
   static const myDiscounts = 'My Discount Screen';
+  static const myStory = 'My Story Screen';
 
   static const feedback = 'Feedback Widget';
   static const authenticationServices = 'Authentication Services';

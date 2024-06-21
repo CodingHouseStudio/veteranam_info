@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
@@ -41,12 +42,20 @@ void main() {
               .having((e) => e.value, 'value', KTestText.fundItems),
         );
       });
+      test('mock', () async {
+        investorsRepository.addMockFunds();
+        verify(
+          mockFirestoreService.addFund(
+            KTestText.fundItems.first,
+          ),
+        ).called(1);
+      });
     });
 
     group('${KGroupText.failureGet} ', () {
       setUp(() {
         when(mockFirestoreService.getFunds()).thenThrow(
-          Exception(KGroupText.failureGet),
+          FirebaseException(plugin: KGroupText.failureGet),
         );
         if (GetIt.I.isRegistered<FirestoreService>()) {
           GetIt.I.unregister<FirestoreService>();
