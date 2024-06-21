@@ -431,7 +431,7 @@ class _ExpandableCityChipState extends State<ExpandableCityChip> {
               if ((widget.citiesList.location ?? []).length > 1)
                 Expanded(
                   child: Text(
-                    'Ще ${(widget.citiesList.location ?? []).length - 1} міст...',
+                    KMockText.moreCities,
                   ),
                 )
               else
