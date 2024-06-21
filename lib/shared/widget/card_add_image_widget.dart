@@ -31,9 +31,8 @@ class CardAddImageWidget extends StatelessWidget {
             ),
           if (image != null) buildImage(context),
           Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: KPadding.kPaddingSize16,
-              vertical: KPadding.kPaddingSize16,
+            padding: const EdgeInsets.all(
+              KPadding.kPaddingSize16,
             ),
             child: childWidget,
           ),

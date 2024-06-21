@@ -53,6 +53,10 @@ abstract class KImage {
       SvgPicture(SvgAssetLoader('assets/icons/linkedin.svg'));
   static const SvgPicture facebook =
       SvgPicture(SvgAssetLoader('assets/icons/facebook.svg'));
+  static const SvgPicture like =
+      SvgPicture(SvgAssetLoader('assets/icons/like.svg'));
+  static const SvgPicture activeLike =
+      SvgPicture(SvgAssetLoader('assets/icons/active_like.svg'));
   static const SvgPicture apple =
       SvgPicture(SvgAssetLoader('assets/icons/social_icons.svg'));
   static const SvgPicture google =
@@ -100,6 +104,7 @@ abstract class KImage {
   static final Image veteran5 = _get(
     'assets/images/veteran5.png',
   );
+
   // static const Image workImage = _get(
   //    'assets/images/work_image.png'),
   //   fit: BoxFit.fill,
