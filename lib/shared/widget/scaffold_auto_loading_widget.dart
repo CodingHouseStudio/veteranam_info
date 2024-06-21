@@ -8,12 +8,14 @@ class ScaffoldAutoLoadingWidget extends StatefulWidget {
     this.titleChildWidgetsFunction,
     super.key,
     this.mainDeskPadding,
+    this.mainRightChildWidget,
   });
   final List<Widget> Function({required bool isDesk})?
       titleChildWidgetsFunction;
   final List<Widget> Function({required bool isDesk}) mainChildWidgetsFunction;
   final EdgeInsetsGeometry? mainDeskPadding;
   final void Function() scrollFunction;
+  final Widget? mainRightChildWidget;
 
   @override
   State<ScaffoldAutoLoadingWidget> createState() =>
@@ -74,18 +76,25 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
                         .titleChildWidgetsFunction!(isDesk: isDesk).length,
                   ),
                 ),
+
               SliverPadding(
                 padding: isDesk && widget.mainDeskPadding != null
                     ? padding.add(widget.mainDeskPadding!)
                     : padding,
-                sliver: SliverList.builder(
-                  addAutomaticKeepAlives: false,
-                  addRepaintBoundaries: false,
-                  itemBuilder: (context, index) {
-                    return mainChildWidget.elementAt(index);
-                  },
-                  itemCount: mainChildWidget.length,
-                ),
+                sliver: widget.mainRightChildWidget != null && isDesk
+                    ? RowSliver(
+                        right: mainBody(mainChildWidget),
+                        left: SliverPersistentHeader(
+                          pinned: true,
+                          delegate: NawbarWidget(
+                            isDesk: isDesk,
+                            childWidget: widget.mainRightChildWidget,
+                            maxMinHeight: constraints.maxHeight,
+                          ),
+                        ),
+                        leftWidthPercent: 0.3,
+                      )
+                    : mainBody(mainChildWidget),
               ),
               // SliverPadding(
               //   padding: padding.copyWith(
@@ -120,6 +129,15 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
       },
     );
   }
+
+  Widget mainBody(List<Widget> mainChildWidget) => SliverList.builder(
+        addAutomaticKeepAlives: false,
+        addRepaintBoundaries: false,
+        itemBuilder: (context, index) {
+          return mainChildWidget.elementAt(index);
+        },
+        itemCount: mainChildWidget.length,
+      );
 
   @override
   void dispose() {
