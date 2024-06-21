@@ -12,7 +12,8 @@ class ScaffoldDecorationWidget extends StatelessWidget {
   });
   final List<Widget> Function({required bool isDesk})?
       titleChildWidgetsFunction;
-  final List<Widget> Function({required bool isDesk}) mainChildWidgetsFunction;
+  final List<Widget> Function({required bool isDesk, required bool isTablet})
+      mainChildWidgetsFunction;
   final EdgeInsetsGeometry Function({
     required bool isDesk,
     required double maxWidth,
@@ -26,8 +27,11 @@ class ScaffoldDecorationWidget extends StatelessWidget {
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
         final isDesk =
+            constraints.maxWidth > KPlatformConstants.minWidthThresholdDesk;
+        final isTablet =
             constraints.maxWidth > KPlatformConstants.minWidthThresholdTablet;
-        final mainChildWidget = mainChildWidgetsFunction(isDesk: isDesk);
+        final mainChildWidget =
+            mainChildWidgetsFunction(isDesk: isDesk, isTablet: isTablet);
         final padding = EdgeInsets.symmetric(
           horizontal: (isDesk
               ? KPadding.kPaddingSize90 +

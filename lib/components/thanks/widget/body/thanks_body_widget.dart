@@ -7,7 +7,7 @@ class ThanksBodyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScaffoldWidget(
-      mainChildWidgetsFunction: ({required isDesk}) => [
+      mainChildWidgetsFunction: ({required isDesk, required isTablet}) => [
         KSizedBox.kHeightSizedBox30,
         ...TitleWidget.titleWidgetList(
           title: context.l10n.thankYou,

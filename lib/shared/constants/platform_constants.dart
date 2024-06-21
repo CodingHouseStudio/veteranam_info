@@ -8,8 +8,9 @@ abstract class KPlatformConstants {
   //         defaultTargetPlatform == TargetPlatform.macOS ||
   //         defaultTargetPlatform == TargetPlatform.windows);
   // static const minWidthThresholdMobile = 800; // Example threshold for mobile
-  static const minWidthThresholdTablet = 1000; // Existing threshold for tablet
-  static const maxWidthThresholdTablet = 1400; // Existing threshold for tablet
+  static const minWidthThresholdDesk = 1024; // Existing threshold for tablet
+  static const minWidthThresholdTablet = 768; // Existing threshold for tablet
+  static const maxWidthThresholdTablet = 1440; // Existing threshold for tablet
   // static const minWidthThresholdDesktop =
   //     1400; // Existing threshold for desktop
   // static const mobilePaddingKoefficient = 0.25;

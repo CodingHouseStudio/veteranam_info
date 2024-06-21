@@ -26,10 +26,11 @@ class HomeBodyWidget extends StatelessWidget {
       listenWhen: (previous, current) => current.failure != null,
       builder: (context, _) => ScaffoldWidget(
         hasFooter: true,
-        mainChildWidgetsFunction: ({required isDesk}) => [
+        mainChildWidgetsFunction: ({required isDesk, required isTablet}) => [
           ..._boxWidgetList(
             context: context,
             isDesk: isDesk,
+            isTablet: isTablet,
             aboutProjectKey: aboutProjectKey,
           ),
           SizedBox(
@@ -56,6 +57,26 @@ class HomeBodyWidget extends StatelessWidget {
                 ),
               ],
             )
+          else if (isTablet)
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: KPadding.kPaddingSize56,
+              ),
+              child: Column(
+                children: [
+                  TextPointWidget(
+                    context.l10n.whatKindOfProject,
+                    key: KWidgetkeys.screen.home.aboutProjecPrefix,
+                  ),
+                  KSizedBox.kHeightSizedBox24,
+                  Text(
+                    context.l10n.aboutProject,
+                    key: KWidgetkeys.screen.home.aboutProjecSubtitle,
+                    style: AppTextStyle.materialThemeDisplaySmall,
+                  ),
+                ],
+              ),
+            )
           else ...[
             TextPointWidget(
               context.l10n.whatKindOfProject,
@@ -68,7 +89,7 @@ class HomeBodyWidget extends StatelessWidget {
               style: AppTextStyle.materialThemeHeadlineSmall,
             ),
           ],
-          if (isDesk)
+          if (isDesk || isTablet)
             KSizedBox.kHeightSizedBox160
           else
             KSizedBox.kHeightSizedBox48,
@@ -91,6 +112,7 @@ class HomeBodyWidget extends StatelessWidget {
                     route: () => context.goNamed(KRoute.discounts.name),
                     bottomWidget: KSizedBox.kHeightSizedBox90,
                     isDesk: true,
+                    isTablet: false,
                   ),
                 ),
               ),
@@ -98,7 +120,32 @@ class HomeBodyWidget extends StatelessWidget {
                   .setKey(KWidgetkeys.screen.home.discountImage),
               rightPadding: KPadding.kPaddingSize84,
             )
-          else ...[
+          else if (isTablet) ...[
+            KImage.discountImage.setKey(KWidgetkeys.screen.home.discountImage),
+            KSizedBox.kWidthSizedBox48,
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: KPadding.kPaddingSize56,
+              ),
+              child: Column(
+                children: [
+                  ...SectionWidget.get(
+                    buttonKey: KWidgetkeys.screen.home.discountButton,
+                    prefixKey: KWidgetkeys.screen.home.discountPrefix,
+                    titleKey: KWidgetkeys.screen.home.discountTitle,
+                    subtitleKey: KWidgetkeys.screen.home.discountSubtitle,
+                    textPoint: context.l10n.saveMoney,
+                    title: context.l10n.discountsServices,
+                    subtitle: context.l10n.discountsServicesSubtitle,
+                    textButton: context.l10n.toDiscount,
+                    route: () => context.goNamed(KRoute.discounts.name),
+                    isDesk: false,
+                    isTablet: true,
+                  ),
+                ],
+              ),
+            ),
+          ] else ...[
             KImage.discountImage.setKey(KWidgetkeys.screen.home.discountImage),
             KSizedBox.kWidthSizedBox16,
             ...SectionWidget.get(
@@ -112,9 +159,10 @@ class HomeBodyWidget extends StatelessWidget {
               textButton: context.l10n.toDiscount,
               route: () => context.goNamed(KRoute.discounts.name),
               isDesk: false,
+              isTablet: false,
             ),
           ],
-          if (isDesk)
+          if (isDesk || isTablet)
             KSizedBox.kHeightSizedBox160
           else
             KSizedBox.kHeightSizedBox40,
@@ -137,6 +185,7 @@ class HomeBodyWidget extends StatelessWidget {
                     route: () => context.goNamed(KRoute.information.name),
                     bottomWidget: KSizedBox.kHeightSizedBox48,
                     isDesk: true,
+                    isTablet: false,
                   ),
                 ),
               ),
@@ -144,7 +193,32 @@ class HomeBodyWidget extends StatelessWidget {
                   .setKey(KWidgetkeys.screen.home.informationImage),
               rightPadding: KPadding.kPaddingSize32,
             )
-          else ...[
+          else if (isTablet) ...[
+            KImage.discountImage.setKey(KWidgetkeys.screen.home.discountImage),
+            KSizedBox.kWidthSizedBox48,
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: KPadding.kPaddingSize56,
+              ),
+              child: Column(
+                children: [
+                  ...SectionWidget.get(
+                    buttonKey: KWidgetkeys.screen.home.informationButton,
+                    prefixKey: KWidgetkeys.screen.home.informationPrefix,
+                    subtitleKey: KWidgetkeys.screen.home.informationSubtitle,
+                    titleKey: KWidgetkeys.screen.home.informationTitle,
+                    textPoint: context.l10n.findOut,
+                    title: context.l10n.informationNews,
+                    subtitle: context.l10n.informationNewsSubtitle,
+                    textButton: context.l10n.toInfomation,
+                    route: () => context.goNamed(KRoute.information.name),
+                    isDesk: false,
+                    isTablet: true,
+                  ),
+                ],
+              ),
+            ),
+          ] else ...[
             KImage.inforamationImage
                 .setKey(KWidgetkeys.screen.home.informationImage),
             KSizedBox.kHeightSizedBox16,
@@ -159,9 +233,10 @@ class HomeBodyWidget extends StatelessWidget {
               textButton: context.l10n.toInfomation,
               route: () => context.goNamed(KRoute.information.name),
               isDesk: false,
+              isTablet: false,
             ),
           ],
-          if (isDesk)
+          if (isDesk || isTablet)
             KSizedBox.kHeightSizedBox160
           else
             KSizedBox.kHeightSizedBox40,
@@ -224,6 +299,28 @@ class HomeBodyWidget extends StatelessWidget {
                 ),
               ],
             )
+          else if (isTablet)
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: KPadding.kPaddingSize56,
+              ),
+              child: Column(
+                children: [
+                  ...faqTest(context: context, isDesk: true),
+                  KSizedBox.kHeightSizedBox40,
+                  if (_.questionModelItems.isEmpty &&
+                      _.loadingStatus == LoadingStatus.loaded)
+                    Config.isDevelopment
+                        ? mockButton(context)
+                        : const SizedBox.shrink()
+                  else
+                    ..._questionWidgetList(
+                      context: context,
+                      isDesk: isDesk,
+                    ),
+                ],
+              ),
+            )
           else ...[
             ...faqTest(context: context, isDesk: isDesk),
             KSizedBox.kHeightSizedBox24,
@@ -240,6 +337,8 @@ class HomeBodyWidget extends StatelessWidget {
           ],
           if (isDesk)
             KSizedBox.kHeightSizedBox160
+          else if (isTablet)
+            KSizedBox.kHeightSizedBox64
           else
             KSizedBox.kHeightSizedBox48,
         ],

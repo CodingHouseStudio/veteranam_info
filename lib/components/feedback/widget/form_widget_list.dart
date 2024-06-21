@@ -43,7 +43,7 @@ List<Widget> _formWidgegList({
                       KSizedBox.kHeightSizedBox8,
                       Wrap(
                         children: FooterWidget.socialMediaLinks(
-                          isDesk: isDesk,
+                          isTablet: isDesk,
                           context: context,
                           padding: KSizedBox.kWidthSizedBox24,
                           instagramKey: KWidgetkeys.screen.feedback.instagram,
@@ -107,7 +107,7 @@ List<Widget> _formWidgegList({
             KSizedBox.kHeightSizedBox8,
             Wrap(
               children: FooterWidget.socialMediaLinks(
-                isDesk: isDesk,
+                isTablet: isDesk,
                 context: context,
                 padding: KSizedBox.kWidthSizedBox24,
                 instagramKey: KWidgetkeys.screen.feedback.instagram,
