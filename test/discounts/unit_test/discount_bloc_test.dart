@@ -92,6 +92,11 @@ void main() {
             const DiscountWatcherEvent.filterCategory(
               -1,
             ),
+          )
+          ..add(
+            const DiscountWatcherEvent.filterCategory(
+              0,
+            ),
           );
       },
       expect: () => [
@@ -119,6 +124,12 @@ void main() {
               state.loadingStatus == LoadingStatus.loaded &&
               state.filtersCategoriesIndex != null &&
               state.filtersCategoriesIndex!.length == 2,
+        ),
+        predicate<DiscountWatcherState>(
+          (state) =>
+              state.loadingStatus == LoadingStatus.loaded &&
+              state.filtersCategoriesIndex != null &&
+              state.filtersCategoriesIndex!.length == 1,
         ),
         predicate<DiscountWatcherState>(
           (state) =>
