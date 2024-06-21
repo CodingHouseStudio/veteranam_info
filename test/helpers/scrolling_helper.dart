@@ -12,11 +12,15 @@ import 'package:kozak/shared/shared.dart';
 Future<void> scrollingHelper({
   required WidgetTester tester,
   Key? itemKey,
+  Key? scrollKey,
   Offset? offset,
   bool first = true,
 }) async {
   if (offset != null) {
-    await tester.drag(find.byKey(KWidgetkeys.widget.scaffold.scroll), offset);
+    await tester.drag(
+      find.byKey(scrollKey ?? KWidgetkeys.widget.scaffold.scroll),
+      offset,
+    );
     await tester.pumpAndSettle();
   }
   if (itemKey != null) {

@@ -15,4 +15,6 @@ Future<void> discountMockButtonHelper(
   );
 
   await tester.tap(find.byKey(KWidgetkeys.screen.discounts.buttonMock));
+
+  await tester.pumpAndSettle();
 }

@@ -39,11 +39,15 @@ class InformationBodyWidget extends StatelessWidget {
             KSizedBox.kHeightSizedBox24,
           FiltersChipWidget(
             key: KWidgetkeys.screen.information.filter,
-            filtersItems: _.informationModelItems.overallTags(context),
+            filtersItems: _.informationModelItems.overallItems(
+              context: context,
+              getFilter: (item) => item.category,
+              getUAFilter: (item) => item.categoryUA,
+            ),
             isDesk: isDesk,
-            onResetValue: () => context.read<InformationWatcherBloc>().add(
-                  const InformationWatcherEvent.filterReset(),
-                ),
+            // onResetValue: () => context.read<InformationWatcherBloc>().add(
+            //       const InformationWatcherEvent.filterReset(),
+            //     ),
             isSelected: (index) =>
                 context
                     .read<InformationWatcherBloc>()
@@ -56,6 +60,11 @@ class InformationBodyWidget extends StatelessWidget {
                     index,
                   ),
                 ),
+            fullLenght: context
+                .read<InformationWatcherBloc>()
+                .state
+                .informationModelItems
+                .length,
           ),
           if (isDesk)
             KSizedBox.kHeightSizedBox40
@@ -67,20 +76,17 @@ class InformationBodyWidget extends StatelessWidget {
         ),
         mainChildWidgetsFunction: ({required isDesk}) => [
           if (_.informationModelItems.isEmpty &&
-              _.loadingStatus == LoadingStatus.loaded)
-            Config.isDevelopment
-                ? MockButtonWidget(
-                    key: KWidgetkeys.screen.information.buttonMock,
-                    onPressed: () {
-                      GetIt.I
-                          .get<IInformationRepository>()
-                          .addMockInformationItems();
-                      context
-                          .read<InformationWatcherBloc>()
-                          .add(const InformationWatcherEvent.started());
-                    },
-                  )
-                : const SizedBox.shrink()
+              _.loadingStatus == LoadingStatus.loaded &&
+              Config.isDevelopment)
+            MockButtonWidget(
+              key: KWidgetkeys.screen.information.buttonMock,
+              onPressed: () {
+                GetIt.I.get<IInformationRepository>().addMockInformationItems();
+                context
+                    .read<InformationWatcherBloc>()
+                    .add(const InformationWatcherEvent.started());
+              },
+            )
           else
             ..._newsWidgetList(context: context, isDesk: isDesk),
           if (isDesk)
