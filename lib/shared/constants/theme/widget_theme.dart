@@ -94,14 +94,20 @@ abstract class KWidgetTheme {
     borderRadius: KBorderRadius.kBorderRadius32,
   );
   static const boxDecorCheckPointFalse = BoxDecoration(
-    color: AppColors.materialThemeKeyColorsNeutralVariant,
+    color: AppColors.materialThemeKeyColorsNeutral,
+    border: Border.fromBorderSide(
+      BorderSide(
+        color: AppColors.materialThemeRefNeutralNeutral80,
+        width: KSize.kPixel3,
+      ),
+    ),
     borderRadius: KBorderRadius.kBorderRadius8,
   );
   static const boxDecorCheckPointTrue = BoxDecoration(
-    color: AppColors.materialThemeWhite,
+    color: AppColors.materialThemeSourceSeed,
     border: Border.fromBorderSide(
       BorderSide(
-        color: AppColors.materialThemeKeyColorsNeutralVariant,
+        color: AppColors.materialThemeSourceSeed,
         width: KSize.kPixel3,
       ),
     ),
