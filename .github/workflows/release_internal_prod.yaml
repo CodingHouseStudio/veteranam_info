@@ -5,7 +5,10 @@ name: PRODUCTION build
 # Controls when the workflow will run
 on:
   workflow_dispatch:
-    branches: [ dev ]
+    branches: [ main ]
+concurrency:
+  group: $-$
+  cancel-in-progress: true
 
 permissions:
   id-token: write   # This is required for requesting the JWT
