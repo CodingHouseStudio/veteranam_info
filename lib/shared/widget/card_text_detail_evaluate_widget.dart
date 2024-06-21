@@ -134,6 +134,7 @@ class _CardTextDetailEvaluateWidgetState
                       Column(
                         children: [
                           IconButtonWidget(
+                            onPressed: null,
                             background: AppColors.materialThemeKeyColorsNeutral,
                             padding: KPadding.kPaddingSize12,
                             icon: KIcon.website.copyWith(
