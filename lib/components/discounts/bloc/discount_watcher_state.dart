@@ -9,21 +9,39 @@ class DiscountWatcherState with _$DiscountWatcherState {
   const factory DiscountWatcherState({
     required List<DiscountModel> discountModelItems,
     required List<DiscountModel> filteredDiscountModelItems,
-    required List<int>? filtersIndex,
+    required List<int>? filtersCategoriesIndex,
+    required List<int>? filtersLocationIndex,
     required LoadingStatus loadingStatus,
     required int itemsLoaded,
     required DiscountFailure? failure,
   }) = _Initial;
 }
 
-extension DiscountModelExtensions on List<DiscountModel> {
-  List<String> get overallTagsBloc {
-    final allTags = <String>[];
-    for (final item in this) {
-      allTags.addAll(
-        item.category,
-      );
+extension LocationGetter on List<DiscountModel> {
+  List<dynamic> get _getLocationItems => <dynamic>[
+        '',
+        '',
+        SubLocation.allStoresOfChain,
+        SubLocation.online,
+        ...overallItemBloc(
+          getFilter: (item) => item.location ?? [],
+        ),
+      ];
+}
+
+extension SubLocationString on SubLocation? {
+  List<SubLocation> get _getList {
+    switch (this) {
+      case null:
+        return [];
+      case SubLocation.all:
+        return [
+          SubLocation.allStoresOfChain,
+          SubLocation.online,
+        ];
+      case SubLocation.allStoresOfChain:
+      case SubLocation.online:
+        return [this!];
     }
-    return allTags.toSet().toList();
   }
 }

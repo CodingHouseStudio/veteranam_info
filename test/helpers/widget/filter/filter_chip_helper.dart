@@ -6,7 +6,7 @@ import '../../../text_dependency.dart';
 Future<void> filterChipHelper(
   WidgetTester tester,
 ) async {
-  expect(find.byKey(KWidgetkeys.widget.filter.widget), findsWidgets);
+  expect(find.byKey(KWidgetkeys.widget.filterChip.widget), findsWidgets);
 
   await chipHelper(tester);
 }
