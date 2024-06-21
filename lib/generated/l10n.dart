@@ -100,11 +100,11 @@ class AppLocalizations {
     );
   }
 
-  /// `Reset filters`
-  String get resetAllFilter {
+  /// `Reset all`
+  String get resetAll {
     return Intl.message(
-      'Reset filters',
-      name: 'resetAllFilter',
+      'Reset all',
+      name: 'resetAll',
       desc: '',
       args: [],
     );
@@ -1880,10 +1880,10 @@ class AppLocalizations {
     );
   }
 
-  /// `online`
+  /// `All of Ukraine (online)`
   String get online {
     return Intl.message(
-      'online',
+      'All of Ukraine (online)',
       name: 'online',
       desc: '',
       args: [],
@@ -1945,6 +1945,96 @@ class AppLocalizations {
     return Intl.message(
       'Statistics',
       name: 'statistics',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Special offers`
+  String get specialOffers {
+    return Intl.message(
+      'Special offers',
+      name: 'specialOffers',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `for veterans and their families`
+  String get forVeteransAndTheirFamilies {
+    return Intl.message(
+      'for veterans and their families',
+      name: 'forVeteransAndTheirFamilies',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Advanced filter`
+  String get advancedFilter {
+    return Intl.message(
+      'Advanced filter',
+      name: 'advancedFilter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Discount`
+  String get discount {
+    return Intl.message(
+      'Discount',
+      name: 'discount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Filter applied`
+  String get filterApplied {
+    return Intl.message(
+      'Filter applied',
+      name: 'filterApplied',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `From the largest to the smallest`
+  String get fromLargestToSmallest {
+    return Intl.message(
+      'From the largest to the smallest',
+      name: 'fromLargestToSmallest',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Free`
+  String get free {
+    return Intl.message(
+      'Free',
+      name: 'free',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `All establishments of the chain`
+  String get allStoresOfChain {
+    return Intl.message(
+      'All establishments of the chain',
+      name: 'allStoresOfChain',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `All`
+  String get all {
+    return Intl.message(
+      'All',
+      name: 'all',
       desc: '',
       args: [],
     );
