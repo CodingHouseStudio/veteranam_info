@@ -13,12 +13,13 @@ void main() {
   group('${KScreenBlocName.investors} ${KGroupText.repository} ', () {
     late IInvestorsRepository investorsRepository;
     late FirestoreService mockFirestoreService;
+    setUp(() {
+      ExtendedDateTime.id = '';
+      mockFirestoreService = MockFirestoreService();
+    });
 
     group('${KGroupText.successfulGet} ', () {
       setUp(() {
-        ExtendedDateTime.id = '';
-        mockFirestoreService = MockFirestoreService();
-
         when(mockFirestoreService.getFunds()).thenAnswer(
           (_) async => KTestText.fundItems,
         );
@@ -44,8 +45,6 @@ void main() {
 
     group('${KGroupText.failureGet} ', () {
       setUp(() {
-        mockFirestoreService = MockFirestoreService();
-
         when(mockFirestoreService.getFunds()).thenThrow(
           Exception(KGroupText.failureGet),
         );

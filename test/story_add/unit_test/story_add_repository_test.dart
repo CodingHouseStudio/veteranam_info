@@ -15,12 +15,14 @@ void main() {
     late IStoryRepository mockStoryRepository;
     late FirestoreService mockFirestoreService;
     late StorageService mockStorageService;
+    setUp(() {
+      ExtendedDateTime.id = '';
+      ExtendedDateTime.current = KTestText.dateTime;
+      mockFirestoreService = MockFirestoreService();
+      mockStorageService = MockStorageService();
+    });
     group('${KGroupText.successfulGet} ', () {
       setUp(() {
-        ExtendedDateTime.id = '';
-        ExtendedDateTime.current = KTestText.dateTime;
-        mockFirestoreService = MockFirestoreService();
-        mockStorageService = MockStorageService();
         when(
           mockFirestoreService.addStory(
             KTestText.storyModelItems.last,
@@ -77,10 +79,6 @@ void main() {
     });
     group('${KGroupText.failureGet} ', () {
       setUp(() {
-        ExtendedDateTime.id = '';
-        ExtendedDateTime.current = KTestText.dateTime;
-        mockFirestoreService = MockFirestoreService();
-        mockStorageService = MockStorageService();
         when(
           mockFirestoreService.addStory(
             KTestText.storyModelItems.last,

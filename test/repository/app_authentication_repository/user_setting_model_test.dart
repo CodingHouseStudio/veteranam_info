@@ -29,19 +29,26 @@ void main() {
         isFalse,
       );
     });
+    final fullJson = {
+      UserSettingModelJsonField.id: KTestText.userSettingModel.id,
+      UserSettingModelJsonField.locale:
+          _$LanguageEnumMap[KTestText.userSettingModel.locale],
+      UserSettingModelJsonField.userRole:
+          _$UserRoleEnumMap[KTestText.userSettingModel.userRole],
+      UserSettingModelJsonField.roleIsConfirmed:
+          KTestText.userSettingModel.roleIsConfirmed,
+    };
+    final nullableJson = {
+      UserSettingModelJsonField.id: KTestText.userSettingModel.id,
+      UserSettingModelJsonField.locale:
+          _$LanguageEnumMap[KTestText.userSettingModel.locale],
+      UserSettingModelJsonField.userRole: null,
+      UserSettingModelJsonField.roleIsConfirmed:
+          KTestText.userSettingModel.roleIsConfirmed,
+    };
     group('${KGroupText.modelJson} ', () {
-      test('${KGroupText.shouldBe} ', () {
-        final json = {
-          UserSettingModelJsonField.id: KTestText.userSettingModel.id,
-          UserSettingModelJsonField.locale:
-              _$LanguageEnumMap[KTestText.userSettingModel.locale],
-          UserSettingModelJsonField.userRole:
-              _$UserRoleEnumMap[KTestText.userSettingModel.userRole],
-          UserSettingModelJsonField.roleIsConfirmed:
-              KTestText.userSettingModel.roleIsConfirmed,
-        };
-
-        final userSettingModel = UserSetting.fromJson(json);
+      test('${KGroupText.full} ', () {
+        final userSettingModel = UserSetting.fromJson(fullJson);
 
         expect(userSettingModel.id, KTestText.userSettingModel.id);
         expect(userSettingModel.locale, KTestText.userSettingModel.locale);
@@ -51,16 +58,8 @@ void main() {
           KTestText.userSettingModel.roleIsConfirmed,
         );
       });
-      test('${KGroupText.shouldBe} ', () {
-        final json = {
-          UserSettingModelJsonField.id: KTestText.userSettingModel.id,
-          UserSettingModelJsonField.locale:
-              _$LanguageEnumMap[KTestText.userSettingModel.locale],
-          UserSettingModelJsonField.roleIsConfirmed:
-              KTestText.userSettingModel.roleIsConfirmed,
-        };
-
-        final userSettingModel = UserSetting.fromJson(json);
+      test('${KGroupText.nullable} ', () {
+        final userSettingModel = UserSetting.fromJson(nullableJson);
 
         expect(userSettingModel.id, KTestText.userSettingModel.id);
         expect(userSettingModel.locale, KTestText.userSettingModel.locale);
@@ -71,7 +70,7 @@ void main() {
         );
       });
 
-      test('${KGroupText.shouldNotBe} ', () {
+      test('${KGroupText.failure} ', () {
         final json = {
           // id is missing
           UserSettingModelJsonField.locale: KTestText.userSettingModel.locale,
@@ -88,39 +87,20 @@ void main() {
       });
     });
     group('${KGroupText.jsonModel} ', () {
-      test('${KGroupText.shouldBe} ', () {
-        final json = {
-          UserSettingModelJsonField.id: KTestText.userSettingModel.id,
-          UserSettingModelJsonField.locale:
-              _$LanguageEnumMap[KTestText.userSettingModel.locale],
-          UserSettingModelJsonField.userRole:
-              _$UserRoleEnumMap[KTestText.userSettingModel.userRole],
-          UserSettingModelJsonField.roleIsConfirmed:
-              KTestText.userSettingModel.roleIsConfirmed,
-        };
-
+      test('${KGroupText.full} ', () {
         final userModelJson = KTestText.userSettingModel.toJson();
 
-        expect(userModelJson, json);
+        expect(userModelJson, fullJson);
       });
 
-      test('${KGroupText.shouldBe} ', () {
-        final json = {
-          UserSettingModelJsonField.id: KTestText.userSettingModel.id,
-          UserSettingModelJsonField.locale:
-              _$LanguageEnumMap[KTestText.userSettingModel.locale],
-          UserSettingModelJsonField.userRole: null,
-          UserSettingModelJsonField.roleIsConfirmed:
-              KTestText.userSettingModel.roleIsConfirmed,
-        };
-
+      test('${KGroupText.nullable} ', () {
         final userModelJson = KTestText.userSettingModel
             .copyWith(
               userRole: null,
             )
             .toJson();
 
-        expect(userModelJson, json);
+        expect(userModelJson, nullableJson);
       });
     });
   });

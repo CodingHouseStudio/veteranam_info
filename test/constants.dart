@@ -43,8 +43,11 @@ abstract class KGroupText {
   static const goRouter = 'Mock Go Router';
   static const goTo = 'go to';
   static const validationError = 'Validation error';
-  static const shouldBe = 'should be';
-  static const shouldNotBe = 'should not be';
+  static const full = 'full';
+  static const nullable = 'nullable';
+  static const convertor = 'convertor';
+  static const shouldNotBe = 'Should not be';
+  static const shouldBe = 'Should be';
   static const empty = 'empty';
   static const modelJson = 'instance from valid JSON';
   static const jsonModel = 'json from valid model';
@@ -189,6 +192,13 @@ abstract class KTestText {
         id: i.toString(),
         userId: i.toString(),
         dateVerified: dateTime,
+        subLocation: i == 0
+            ? SubLocation.all
+            : i == 1
+                ? SubLocation.allStoresOfChain
+                : i == 2
+                    ? SubLocation.online
+                    : null,
       ),
   ];
 

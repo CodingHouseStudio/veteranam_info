@@ -16,14 +16,14 @@ class InformationWatcherState with _$InformationWatcherState {
   }) = _Initial;
 }
 
-extension InformationModelExtensions on List<InformationModel> {
-  List<String> get overallTagsBloc {
-    final allTags = <String>[];
-    for (final item in this) {
-      allTags.addAll(
-        item.category,
-      );
-    }
-    return allTags.toSet().toList();
-  }
-}
+// extension InformationModelExtensions on List<InformationModel> {
+//   List<String> get overallTagsBloc {
+//     final allTags = <String>[];
+//     for (final item in this) {
+//       allTags.addAll(
+//         item.category,
+//       );
+//     }
+//     return allTags.toSet().toList();
+//   }
+// }

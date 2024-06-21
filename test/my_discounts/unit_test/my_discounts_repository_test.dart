@@ -13,13 +13,14 @@ void main() {
   group('${KScreenBlocName.discount} ${KGroupText.repository} ', () {
     late IDiscountRepository mockDiscountRepository;
     late FirestoreService mockFirestoreService;
+    setUp(() {
+      ExtendedDateTime.id = '';
+      ExtendedDateTime.current = KTestText.dateTime;
+      mockFirestoreService = MockFirestoreService();
+    });
 
     group('${KGroupText.successfulGet} ', () {
       setUp(() {
-        ExtendedDateTime.id = '';
-        ExtendedDateTime.current = KTestText.dateTime;
-        mockFirestoreService = MockFirestoreService();
-
         when(
           mockFirestoreService
               .getDiscountsByUserId(KTestText.userWithoutPhoto.id),
@@ -46,8 +47,6 @@ void main() {
 
     group('${KGroupText.failureGet} ', () {
       setUp(() {
-        mockFirestoreService = MockFirestoreService();
-
         when(
           mockFirestoreService
               .getDiscountsByUserId(KTestText.userWithoutPhoto.id),
@@ -77,8 +76,6 @@ void main() {
 
     group('${KGroupText.successfulDelete} ', () {
       setUp(() {
-        mockFirestoreService = MockFirestoreService();
-
         when(
           mockFirestoreService
               .deleteDiscountById(KTestText.discountModelItems.first.id),
@@ -112,8 +109,6 @@ void main() {
 
     group('${KGroupText.failureDelete} ', () {
       setUp(() {
-        mockFirestoreService = MockFirestoreService();
-
         when(
           mockFirestoreService.deleteDiscountById(
             KTestText.discountModelItems.first.id,

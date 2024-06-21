@@ -15,10 +15,12 @@ void main() {
   group('${KScreenBlocName.home} ${KGroupText.repository} ', () {
     late IHomeRepository homeRepository;
     late FirestoreService mockFirestoreService;
+    setUp(() {
+      ExtendedDateTime.id = '';
+      mockFirestoreService = MockFirestoreService();
+    });
     group('${KGroupText.successfulGet} ', () {
       setUp(() {
-        ExtendedDateTime.id = '';
-        mockFirestoreService = MockFirestoreService();
         when(mockFirestoreService.getQuestions()).thenAnswer(
           (_) async => KTestText.questionModelItems,
         );
@@ -51,7 +53,6 @@ void main() {
     });
     group('${KGroupText.failureGet} ', () {
       setUp(() {
-        mockFirestoreService = MockFirestoreService();
         when(mockFirestoreService.getQuestions())
             .thenThrow(FirebaseException(plugin: KGroupText.failureGet));
         if (GetIt.I.isRegistered<FirestoreService>()) {

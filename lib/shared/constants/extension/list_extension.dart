@@ -33,22 +33,20 @@ extension ListExtensions<T> on List<T> {
     required int? itemsLoaded,
     required List<dynamic> Function(T item) getFilter,
     int? loadItems,
-    List<T>? fullList,
     List<dynamic>? overallFilter,
   }) {
     if (isEmpty) return [];
 
     final loadedItemsCount =
-        itemsLoaded?.getLoaded(list: this, loadItems: loadItems) ??
-            (fullList ?? this).length;
+        itemsLoaded?.getLoaded(list: this, loadItems: loadItems) ?? length;
 
     if (filtersIndex == null ||
         filtersIndex.isEmpty ||
         filtersIndex.contains(-1)) {
       return take(loadedItemsCount).toList();
     }
-    final overallFilterValue = overallFilter ??
-        overallItemBloc(getFilter: getFilter, fullList: fullList);
+    final overallFilterValue =
+        overallFilter ?? overallItemBloc(getFilter: getFilter);
 
     final filtersText = filtersIndex
         .map(
@@ -63,10 +61,9 @@ extension ListExtensions<T> on List<T> {
 
   List<dynamic> overallItemBloc({
     required List<dynamic> Function(T) getFilter,
-    List<T>? fullList,
   }) {
     final allTags = <dynamic>[];
-    for (final item in fullList ?? this) {
+    for (final item in this) {
       allTags.addAll(
         getFilter(item),
       );

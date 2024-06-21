@@ -185,7 +185,6 @@ class DiscountWatcherBloc
           filtersIndex: categoryIndex,
           itemsLoaded: null,
           getFilter: (item) => item.category,
-          fullList: items,
         )
         .loadingFilter(
           filtersIndex: locationIndex?.where((element) => element > 1).toList(),

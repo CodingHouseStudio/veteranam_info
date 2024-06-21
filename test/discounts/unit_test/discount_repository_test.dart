@@ -12,12 +12,13 @@ void main() {
   group('${KScreenBlocName.discount} ${KGroupText.repository} ', () {
     late IDiscountRepository mockDiscountRepository;
     late FirestoreService mockFirestoreService;
+    setUp(() {
+      ExtendedDateTime.id = '';
+      ExtendedDateTime.current = KTestText.dateTime;
+      mockFirestoreService = MockFirestoreService();
+    });
     group('${KGroupText.successfulGet} ', () {
       setUp(() {
-        ExtendedDateTime.id = '';
-        ExtendedDateTime.current = KTestText.dateTime;
-        mockFirestoreService = MockFirestoreService();
-        mockDiscountRepository = MockIDiscountRepository();
         when(mockFirestoreService.getDiscounts()).thenAnswer(
           (_) => Stream.value(KTestText.discountModelItems),
         );
@@ -52,9 +53,6 @@ void main() {
     });
     group('${KGroupText.failureGet} ', () {
       setUp(() {
-        ExtendedDateTime.id = '';
-        mockFirestoreService = MockFirestoreService();
-        //mockDiscountRepository = MockIDiscountRepository();
         when(mockFirestoreService.getDiscounts()).thenAnswer(
           (realInvocation) => Stream.error(
             KGroupText.failureGet,
