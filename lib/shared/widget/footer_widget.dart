@@ -117,7 +117,7 @@ abstract class FooterWidget {
                       ],
                     ),
                   ),
-                  KSizedBox.kWidthSizedBox73,
+                  KSizedBox.kWidthSizedBox72,
                 ],
               ),
             ]

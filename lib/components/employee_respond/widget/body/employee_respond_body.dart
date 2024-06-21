@@ -40,7 +40,7 @@ class EmployeeRespondBodyWidget extends StatelessWidget {
       mainDecorationPadding: ({required isDesk}) => EdgeInsets.all(
         isDesk ? KPadding.kPaddingSize32 : KPadding.kPaddingSize16,
       ),
-      mainChildWidgetsFunction: ({required isDesk, required isTablet}) =>
+      mainChildWidgetsFunction: ({required isDesk}) =>
           _employeeRespondContainerWidgetList(
         context: context,
         isDesk: isDesk,

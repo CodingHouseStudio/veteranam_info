@@ -15,7 +15,7 @@ class LeftCardWidget extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         final isDesk =
-            constraints.maxWidth > KPlatformConstants.minWidthThresholdTablet;
+            constraints.maxWidth > KPlatformConstants.minWidthThresholdDesk;
         final widgetList = widgetListFunction(isDesk: isDesk);
         return Scaffold(
           backgroundColor:

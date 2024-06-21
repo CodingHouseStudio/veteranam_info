@@ -162,8 +162,9 @@ class HomeBoxWidget extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding:
-                        const EdgeInsets.only(left: KPadding.kPaddingSize24),
+                    padding: const EdgeInsets.only(
+                      bottom: KPadding.kPaddingSize56,
+                    ),
                     child: Align(
                       alignment: Alignment.centerLeft,
                       child: KImage.logoHome.copyWith(

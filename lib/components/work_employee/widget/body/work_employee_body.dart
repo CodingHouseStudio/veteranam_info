@@ -43,7 +43,7 @@ class WorkEmployeeBody extends StatelessWidget {
                 vertical: KPadding.kPaddingSize56,
               )
             : EdgeInsets.zero,
-        mainChildWidgetsFunction: ({required isDesk, required isTablet}) => [
+        mainChildWidgetsFunction: ({required isDesk}) => [
           if (_.loadingStatus == LoadingStatus.loaded &&
               _.workModelItems.isNotEmpty)
             WorkEmployeeFilters(
