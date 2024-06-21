@@ -47,7 +47,7 @@ class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
           style: AppTextStyle.materialThemeBodyLarge,
           overflow: TextOverflow.clip,
         ),
-        if (widget.isDesk == false) KSizedBox.kHeightSizedBox16,
+        if (!widget.isDesk) KSizedBox.kHeightSizedBox16,
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

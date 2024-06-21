@@ -13,12 +13,14 @@ class CardTextDetailEvaluateWidget extends StatefulWidget {
     this.image,
     this.buttonStyle,
     this.bottom,
-    this.informationItem,
     this.titleTopMob = false,
     this.titleDate,
+    this.directLink,
+    this.link,
   });
 
-  final InformationModel? informationItem;
+  final String? directLink;
+  final String? link;
   final String text;
   final List<String>? buttonText;
   final ButtonStyle? buttonStyle;
@@ -101,11 +103,11 @@ class _CardTextDetailEvaluateWidgetState
                         background: AppColors.materialThemeKeyColorsNeutral,
                         padding: KPadding.kPaddingSize12,
                         icon: evaluation == EvaluationEnum.like
-                            ? KIcon.activeLike.copyWith(
+                            ? KImage.activeLike.copyWith(
                                 key: KWidgetkeys.widget.cardTextDetailEvaluate
                                     .iconActiveLike,
                               )
-                            : KIcon.like.copyWith(
+                            : KImage.like.copyWith(
                                 key: KWidgetkeys
                                     .widget.cardTextDetailEvaluate.iconLike,
                               ),
@@ -123,6 +125,7 @@ class _CardTextDetailEvaluateWidgetState
                       Column(
                         children: [
                           IconButtonWidget(
+                            onPressed: null,
                             background: AppColors.materialThemeKeyColorsNeutral,
                             padding: KPadding.kPaddingSize12,
                             icon: KIcon.website.copyWith(
@@ -171,6 +174,7 @@ class _CardTextDetailEvaluateWidgetState
                                   .widget.cardTextDetailEvaluate.iconSave,
                             ),
                             background: AppColors.materialThemeKeyColorsNeutral,
+                            onPressed: null,
                           ),
                           KSizedBox.kHeightSizedBox3,
                           Text(
@@ -211,7 +215,7 @@ class _CardTextDetailEvaluateWidgetState
 
   Future<void> _informationShareLink() async {
     await Share.share(
-      widget.informationItem?.directLink ?? widget.informationItem!.link!,
+      widget.directLink ?? widget.link!,
     );
   }
 }
