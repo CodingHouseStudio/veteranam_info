@@ -286,10 +286,9 @@ class HomeBodyWidget extends StatelessWidget {
                 Expanded(
                   flex: 3,
                   child: _.questionModelItems.isEmpty &&
-                          _.loadingStatus == LoadingStatus.loaded
-                      ? Config.isDevelopment
-                          ? mockButton(context)
-                          : const SizedBox.shrink()
+                          _.loadingStatus == LoadingStatus.loaded &&
+                          Config.isDevelopment
+                      ? mockButton(context)
                       : Column(
                           children: _questionWidgetList(
                             context: context,
@@ -325,10 +324,9 @@ class HomeBodyWidget extends StatelessWidget {
             ...faqTest(context: context, isDesk: isDesk),
             KSizedBox.kHeightSizedBox24,
             if (_.questionModelItems.isEmpty &&
-                _.loadingStatus == LoadingStatus.loaded)
-              Config.isDevelopment
-                  ? mockButton(context)
-                  : const SizedBox.shrink()
+                _.loadingStatus == LoadingStatus.loaded &&
+                Config.isDevelopment)
+              mockButton(context)
             else
               ..._questionWidgetList(
                 context: context,

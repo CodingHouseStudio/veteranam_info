@@ -57,18 +57,17 @@ class WorkEmployeeBody extends StatelessWidget {
           else
             KSizedBox.kHeightSizedBox24,
           if (_.workModelItems.isEmpty &&
-              _.loadingStatus == LoadingStatus.loaded)
-            Config.isDevelopment
-                ? MockButtonWidget(
-                    key: KWidgetkeys.screen.workEmployee.buttonMock,
-                    onPressed: () {
-                      GetIt.I.get<IWorkRepository>().addMockWorks();
-                      context
-                          .read<WorkEmployeeWatcherBloc>()
-                          .add(const WorkEmployeeWatcherEvent.started());
-                    },
-                  )
-                : const SizedBox.shrink()
+              _.loadingStatus == LoadingStatus.loaded &&
+              Config.isDevelopment)
+            MockButtonWidget(
+              key: KWidgetkeys.screen.workEmployee.buttonMock,
+              onPressed: () {
+                GetIt.I.get<IWorkRepository>().addMockWorks();
+                context
+                    .read<WorkEmployeeWatcherBloc>()
+                    .add(const WorkEmployeeWatcherEvent.started());
+              },
+            )
           else
             ...worksWidgetList(context: context, isDesk: isDesk),
           if (isDesk)
