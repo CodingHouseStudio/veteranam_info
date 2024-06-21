@@ -9,6 +9,7 @@ class NawbarWidget extends SliverPersistentHeaderDelegate {
     required this.isDesk,
     this.widgetKey,
   });
+
   final bool isDesk;
   final Key? widgetKey;
 
@@ -41,6 +42,7 @@ class _NawbarWidgetImplematation extends StatefulWidget {
     required this.isDesk,
     super.key,
   });
+
   final bool isDesk;
 
   @override
@@ -163,12 +165,22 @@ class _NawbarWidgetImplematationState
           //       icon: KIcon.mic,
           //     ),
           //   ),
-          if (widget.isDesk || !isFocused) const LanguagesSwitcherWidget(),
-          KSizedBox.kWidthSizedBox16,
+          if (widget.isDesk) KSizedBox.kWidthSizedBox16,
+          if (Config.isProduction) ...[
+            const Spacer(),
+            const LanguagesSwitcherWidget(),
+          ] else if (widget.isDesk && !isFocused && Config.isDevelopment) ...[
+            const LanguagesSwitcherWidget(),
+          ] else ...[
+            const LanguagesSwitcherWidget(),
+          ],
+          if (widget.isDesk)
+            KSizedBox.kWidthSizedBox16
+          else
+            KSizedBox.kWidthSizedBox4,
           if (context.read<AuthenticationBloc>().state.status !=
-                  AuthenticationStatus.authenticated &&
-              Config.isDevelopment)
-            if (widget.isDesk)
+              AuthenticationStatus.authenticated)
+            if (widget.isDesk && !Config.isProduction)
               TextButton(
                 key: KWidgetkeys.widget.nawbar.button,
                 style: KButtonStyles.whiteButtonStyle,
