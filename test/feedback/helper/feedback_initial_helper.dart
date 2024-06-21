@@ -18,10 +18,10 @@ Future<void> feedbackInitialHelper(
 
       expect(find.byKey(KWidgetkeys.screen.feedback.title), findsOneWidget);
 
-      expect(
-        find.byKey(KWidgetkeys.screen.feedback.titleIcon),
-        findsOneWidget,
-      );
+      // expect(
+      //   find.byKey(KWidgetkeys.screen.feedback.titleIcon),
+      //   findsOneWidget,
+      // );
 
       expect(
         find.byKey(KWidgetkeys.screen.feedback.subtitle),

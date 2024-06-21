@@ -18,25 +18,21 @@ class DonateButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (isDesk) {
-      return Align(
-        child: _DonateButtonWidgetDesk(
-          isDesk: isDesk,
-          text: text,
-          onPressed: onPressed,
-          icon: icon,
-        ),
-      );
-    } else {
-      return Align(
-        child: _DonateButtonWidgetMob(
-          isDesk: isDesk,
-          text: text,
-          onPressed: onPressed,
-          icon: icon,
-        ),
-      );
-    }
+    return Center(
+      child: isDesk
+          ? _DonateButtonWidgetDesk(
+              isDesk: isDesk,
+              text: text,
+              onPressed: onPressed,
+              icon: icon,
+            )
+          : _DonateButtonWidgetMob(
+              isDesk: isDesk,
+              text: text,
+              onPressed: onPressed,
+              icon: icon,
+            ),
+    );
   }
 }
 
