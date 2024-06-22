@@ -130,8 +130,10 @@ abstract class KTestText {
     email: userEmail,
     name: usernameCorrect,
     phoneNumber: 'test_phone_number',
-    photo: 'test_phot',
+    photo: image,
   );
+
+  static const image = 'test';
 
   static const userWithoutPhoto = User(
     id: '1',
@@ -156,16 +158,16 @@ abstract class KTestText {
     roleIsConfirmed: true,
   );
   static const imageModel = ImageModel(
-    downloadURL: 'test_URL',
+    downloadURL: image,
     lastModifiedTS: 1,
     name: 'test_name',
-    ref: 'test_name',
+    ref: image,
     type: 'test_type',
   );
   static const imageModels = ImageModel(
-    downloadURL: 'test_image',
-    name: 'test_image',
-    ref: 'test_image',
+    downloadURL: image,
+    name: image,
+    ref: image,
   );
 
   static final feedbackModel = FeedbackModel(

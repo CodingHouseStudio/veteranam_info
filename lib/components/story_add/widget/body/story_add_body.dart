@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
+import 'package:go_router/go_router.dart';
 import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
 
@@ -19,7 +20,7 @@ class StoryAddBody extends StatelessWidget {
           current.failure != null,
       listener: (context, state) {
         if (state.formStatus == FormzSubmissionStatus.success) {
-          context.goNamedWithScroll(KRoute.stories.name);
+          context.goNamed(KRoute.stories.name);
         } else if (state.failure != null) {
           context.dialog.showSendErrorDialog(
             state.failure!.value(context),
