@@ -16,10 +16,10 @@ void main() {
       StoryModelJsonField.date:
           KTestText.storyModelItems.last.date.toIso8601String(),
       StoryModelJsonField.userPhoto: [
-        KTestText.storyModelItems.last.userPhoto!.first.toJson(),
+        KTestText.storyModelItems.last.userPhoto!.toJson(),
       ],
       StoryModelJsonField.image: [
-        KTestText.storyModelItems.last.image!.first.toJson(),
+        KTestText.storyModelItems.last.image!.toJson(),
       ],
     };
     final nullableJson = {
@@ -44,10 +44,10 @@ void main() {
       StoryModelJsonField.date:
           KTestText.storyModelItems.last.date.toIso8601String(),
       StoryModelJsonField.userPhoto: [
-        KTestText.storyModelItems.last.userPhoto!.first.toJson(),
+        KTestText.storyModelItems.last.userPhoto!.toJson(),
       ],
       StoryModelJsonField.image: [
-        KTestText.storyModelItems.last.image!.first.toJson(),
+        KTestText.storyModelItems.last.image!.toJson(),
       ],
     };
 

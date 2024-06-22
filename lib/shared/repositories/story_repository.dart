@@ -18,17 +18,14 @@ class StoryRepository implements IStoryRepository {
   Future<Either<SomeFailure, bool>> addStory(StoryModel storyModel) async {
     try {
       late var methodStoryModel = storyModel;
-      if (methodStoryModel.image != null &&
-          methodStoryModel.image!.isNotEmpty) {
+      if (methodStoryModel.image != null) {
         final downloadURL = await _storageService.saveStoryImage(
-          imageModel: methodStoryModel.image!.first,
+          imageModel: methodStoryModel.image!,
           storyId: storyModel.id,
         );
         if (downloadURL.isNotEmpty) {
           methodStoryModel = methodStoryModel.copyWith(
-            image: [
-              methodStoryModel.image!.first.copyWith(downloadURL: downloadURL),
-            ],
+            image: methodStoryModel.image!.copyWith(downloadURL: downloadURL),
           );
         }
       }

@@ -140,11 +140,9 @@ abstract class KTestText {
     phoneNumber: 'test_phone_number',
   );
 
-  static final userPhotoModel = [
-    ImageModel(
-      downloadURL: user.photo!,
-    ),
-  ];
+  static final userPhotoModel = ImageModel(
+    downloadURL: user.photo!,
+  );
 
   static const userSetting = UserSetting(
     id: '1',
@@ -164,13 +162,11 @@ abstract class KTestText {
     ref: 'test_name',
     type: 'test_type',
   );
-  static const imageModels = [
-    ImageModel(
-      downloadURL: 'test_image',
-      name: 'test_image',
-      ref: 'test_image',
-    ),
-  ];
+  static const imageModels = ImageModel(
+    downloadURL: 'test_image',
+    name: 'test_image',
+    ref: 'test_image',
+  );
 
   static final feedbackModel = FeedbackModel(
     id: dateTime.microsecondsSinceEpoch.toString(),

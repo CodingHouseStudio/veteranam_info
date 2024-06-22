@@ -10,7 +10,7 @@ class CardAddImageWidget extends StatelessWidget {
     this.titleWidget,
   });
   final Widget childWidget;
-  final String? image;
+  final ImageModel? image;
   final bool isDesk;
   final Widget? titleWidget;
 
@@ -72,7 +72,7 @@ class CardAddImageWidget extends StatelessWidget {
       ),
       child: ImageWidget(
         key: KWidgetkeys.widget.cardAddImage.widget,
-        imageUrl: image!,
+        imageUrl: image!.downloadURL,
         fit: BoxFit.contain,
       ),
     );

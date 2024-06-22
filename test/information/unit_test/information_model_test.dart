@@ -19,7 +19,7 @@ void main() {
       InformationModelJsonField.category:
           KTestText.informationModelItems.last.category,
       InformationModelJsonField.image: [
-        KTestText.informationModelItems.last.image!.first.toJson(),
+        KTestText.informationModelItems.last.image!.toJson(),
       ],
       InformationModelJsonField.categoryUA:
           KTestText.informationModelItems.last.categoryUA,
@@ -153,7 +153,7 @@ void main() {
           InformationModelJsonField.categoryUA:
               KTestText.informationModelItems.last.categoryUA,
           InformationModelJsonField.image: [
-            KTestText.informationModelItems.last.image!.first.toJson(),
+            KTestText.informationModelItems.last.image!.toJson(),
           ],
           InformationModelJsonField.topic:
               KTestText.informationModelItems.last.topic,

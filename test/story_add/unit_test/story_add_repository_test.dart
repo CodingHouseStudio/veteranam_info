@@ -39,7 +39,7 @@ void main() {
         );
         when(
           mockStorageService.saveStoryImage(
-            imageModel: KTestText.storyModelItems.last.image!.first,
+            imageModel: KTestText.storyModelItems.last.image!,
             storyId: KTestText.storyModelItems.last.id,
           ),
         ).thenAnswer(
@@ -93,7 +93,7 @@ void main() {
         ).thenThrow(FirebaseException(plugin: KGroupText.failure));
         when(
           mockStorageService.saveStoryImage(
-            imageModel: KTestText.storyModelItems.last.image!.first,
+            imageModel: KTestText.storyModelItems.last.image!,
             storyId: KTestText.storyModelItems.last.id,
           ),
         ).thenThrow(FirebaseException(plugin: KGroupText.failure));
