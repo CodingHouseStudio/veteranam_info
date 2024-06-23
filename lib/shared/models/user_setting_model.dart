@@ -68,7 +68,7 @@ extension GetLanguage on String {
   Language get getLocale {
     switch (toUpperCase()) {
       case 'UA':
-      case 'uk':
+        // case 'uk':
         return Language.ukrain;
       case 'EN':
         return Language.english;

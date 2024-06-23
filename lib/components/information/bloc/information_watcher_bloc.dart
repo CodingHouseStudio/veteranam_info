@@ -33,7 +33,7 @@ class InformationWatcherBloc
     on<_Failure>(_onFailure);
     on<_LoadNextItems>(_onLoadNextItems);
     on<_Filter>(_onFilter);
-    on<_FilterReset>(_onFilterReset);
+    // on<_FilterReset>(_onFilterReset);
   }
 
   final IInformationRepository _informationRepository;
@@ -107,19 +107,19 @@ class InformationWatcherBloc
     );
   }
 
-  void _onFilterReset(
-    _FilterReset event,
-    Emitter<InformationWatcherState> emit,
-  ) {
-    emit(
-      state.copyWith(
-        filteredInformationModelItems: state.informationModelItems.loading(
-          itemsLoaded: state.itemsLoaded,
-        ),
-        filtersIndex: null,
-      ),
-    );
-  }
+  // void _onFilterReset(
+  //   _FilterReset event,
+  //   Emitter<InformationWatcherState> emit,
+  // ) {
+  //   emit(
+  //     state.copyWith(
+  //       filteredInformationModelItems: state.informationModelItems.loading(
+  //         itemsLoaded: state.itemsLoaded,
+  //       ),
+  //       filtersIndex: null,
+  //     ),
+  //   );
+  // }
 
   void _onFilter(
     _Filter event,
