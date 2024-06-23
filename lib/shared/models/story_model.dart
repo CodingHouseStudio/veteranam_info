@@ -12,8 +12,8 @@ class StoryModel with _$StoryModel {
     @SubtitleConverter() required String story,
     required String userId,
     String? userName,
-    @ImageConverter() List<ImageModel>? userPhoto,
-    @ImageConverter() List<ImageModel>? image,
+    @ImageConverter() ImageModel? userPhoto,
+    @ImageConverter() ImageModel? image,
   }) = _StoryModel;
 
   factory StoryModel.fromJson(Map<String, dynamic> json) =>
