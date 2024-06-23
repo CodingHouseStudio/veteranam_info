@@ -20,7 +20,7 @@ class InformationRepository implements IInformationRepository {
           id: '${ExtendedDateTime.id}$i',
           fetchDate: ExtendedDateTime.current,
           image: i > KMockText.tags.length - 2
-              ? [const ImageModel(downloadURL: KMockText.image)]
+              ? const ImageModel(downloadURL: KMockText.image)
               : null,
         ),
       );
