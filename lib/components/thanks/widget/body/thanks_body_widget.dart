@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:go_router/go_router.dart';
 import 'package:kozak/shared/shared.dart';
 
 class ThanksBodyWidget extends StatelessWidget {
@@ -41,7 +42,7 @@ class ThanksBodyWidget extends StatelessWidget {
         key: KWidgetkeys.screen.thanks.myProfielBox,
         text: context.l10n.myProfile,
         isDesk: isDesk,
-        onTap: () => context.goNamedWithScroll(KRoute.profile.name),
+        onTap: () => context.goNamed(KRoute.profile.name),
         textRightPadding: KPadding.kPaddingSize100,
       ),
       if (isDesk) KSizedBox.kWidthSizedBox56 else KSizedBox.kHeightSizedBox40,
@@ -49,7 +50,7 @@ class ThanksBodyWidget extends StatelessWidget {
         key: KWidgetkeys.screen.thanks.homeBox,
         text: context.l10n.mainScreen,
         isDesk: isDesk,
-        onTap: () => context.goNamedWithScroll(KRoute.home.name),
+        onTap: () => context.goNamed(KRoute.home.name),
         textRightPadding: KPadding.kPaddingSize100,
       ),
     ];

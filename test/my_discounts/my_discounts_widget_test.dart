@@ -25,50 +25,102 @@ void main() {
       when(mockAppAuthenticationRepository.currentUser)
           .thenAnswer((invocation) => KTestText.userWithoutPhoto);
       when(
-        mockDiscountRepository.getDiscountsById(KTestText.userWithoutPhoto.id),
-      ).thenAnswer(
-        (invocation) async =>
-            Right(KTestText.userDiscountModelItems.sublist(0, 1)),
-      );
-      when(
         mockDiscountRepository
             .deleteDiscountsById(KTestText.userDiscountModelItems.first.id),
       ).thenAnswer(
         (invocation) async => const Right(true),
       );
     });
+    group('${KGroupText.failure} ', () {
+      testWidgets('${KGroupText.error} ', (tester) async {
+        when(
+          mockDiscountRepository
+              .getDiscountsById(KTestText.userWithoutPhoto.id),
+        ).thenAnswer(
+          (invocation) async => const Left(SomeFailure.serverError()),
+        );
+        await myDiscountsPumpAppHelper(
+          mockDiscountRepository: mockDiscountRepository,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          tester: tester,
+        );
 
-    testWidgets('${KGroupText.intial} ', (tester) async {
-      await myDiscountsPumpAppHelper(
-        mockDiscountRepository: mockDiscountRepository,
-        mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-        tester: tester,
-      );
+        await myDiscountFailureHelper(tester);
+      });
+      testWidgets('${KGroupText.failureNetwork} ', (tester) async {
+        when(
+          mockDiscountRepository
+              .getDiscountsById(KTestText.userWithoutPhoto.id),
+        ).thenAnswer(
+          (invocation) async => const Left(SomeFailure.network()),
+        );
+        await myDiscountsPumpAppHelper(
+          mockDiscountRepository: mockDiscountRepository,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          tester: tester,
+        );
 
-      await myDiscountsInitialHelper(tester);
+        await myDiscountFailureHelper(tester);
+      });
+      testWidgets('${KGroupText.failureGet} ', (tester) async {
+        when(
+          mockDiscountRepository
+              .getDiscountsById(KTestText.userWithoutPhoto.id),
+        ).thenAnswer(
+          (invocation) async => const Left(SomeFailure.get()),
+        );
+        await myDiscountsPumpAppHelper(
+          mockDiscountRepository: mockDiscountRepository,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          tester: tester,
+        );
+
+        await myDiscountFailureHelper(tester);
+      });
     });
 
-    testWidgets('Delete discount', (tester) async {
-      await myDiscountsPumpAppHelper(
-        mockDiscountRepository: mockDiscountRepository,
-        mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-        tester: tester,
-      );
-
-      await deleteDiscountHelper(tester);
-    });
-    group('${KGroupText.goRouter} ', () {
-      late MockGoRouter mockGoRouter;
-      setUp(() => mockGoRouter = MockGoRouter());
+    group('${KGroupText.getList} ', () {
+      setUp(() {
+        when(
+          mockDiscountRepository
+              .getDiscountsById(KTestText.userWithoutPhoto.id),
+        ).thenAnswer(
+          (invocation) async =>
+              Right(KTestText.userDiscountModelItems.sublist(0, 1)),
+        );
+      });
       testWidgets('${KGroupText.intial} ', (tester) async {
         await myDiscountsPumpAppHelper(
           mockDiscountRepository: mockDiscountRepository,
           mockAppAuthenticationRepository: mockAppAuthenticationRepository,
           tester: tester,
-          mockGoRouter: mockGoRouter,
         );
 
         await myDiscountsInitialHelper(tester);
+      });
+
+      testWidgets('Delete discount', (tester) async {
+        await myDiscountsPumpAppHelper(
+          mockDiscountRepository: mockDiscountRepository,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          tester: tester,
+        );
+
+        await deleteDiscountHelper(tester);
+      });
+      group('${KGroupText.goRouter} ', () {
+        late MockGoRouter mockGoRouter;
+        setUp(() => mockGoRouter = MockGoRouter());
+        testWidgets('${KGroupText.intial} ', (tester) async {
+          await myDiscountsPumpAppHelper(
+            mockDiscountRepository: mockDiscountRepository,
+            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+            tester: tester,
+            mockGoRouter: mockGoRouter,
+          );
+
+          await myDiscountsInitialHelper(tester);
+        });
       });
     });
   });
