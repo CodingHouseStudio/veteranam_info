@@ -184,8 +184,7 @@ class _NawbarWidgetImplematationState
                   TextButton(
                     key: KWidgetkeys.widget.nawbar.button,
                     style: KButtonStyles.whiteButtonStyle,
-                    onPressed: () =>
-                        context.goNamedWithScroll(KRoute.login.name),
+                    onPressed: () => context.goNamed(KRoute.login.name),
                     child: Text(
                       context.l10n.login,
                       style: AppTextStyle.text24,
@@ -194,8 +193,7 @@ class _NawbarWidgetImplematationState
                 else if (!isFocused)
                   IconButtonWidget(
                     key: KWidgetkeys.widget.nawbar.iconPerson,
-                    onPressed: () =>
-                        context.goNamedWithScroll(KRoute.login.name),
+                    onPressed: () => context.goNamed(KRoute.login.name),
                     icon: KIcon.person
                         .copyWith(color: AppColors.materialThemeWhite),
                     background: AppColors.materialThemeKeyColorsSecondary,
@@ -207,10 +205,9 @@ class _NawbarWidgetImplematationState
                   if (context.read<AuthenticationBloc>().state.user!.photo ==
                       null)
                     InkWell(
-                      onTap: () =>
-                          context.goNamedWithScroll(KRoute.profile.name),
-                      child: IconWidget(
-                        key: KWidgetkeys.widget.nawbar.iconPerson,
+                      key: KWidgetkeys.widget.nawbar.iconPerson,
+                      onTap: () => context.goNamed(KRoute.profile.name),
+                      child: const IconWidget(
                         icon: KIcon.person,
                       ),
                     )
@@ -218,8 +215,8 @@ class _NawbarWidgetImplematationState
                     ClipRRect(
                       borderRadius: BorderRadius.circular(KSize.kUserPhoto),
                       child: InkWell(
-                        onTap: () =>
-                            context.goNamedWithScroll(KRoute.profile.name),
+                        key: KWidgetkeys.widget.nawbar.iconPerson,
+                        onTap: () => context.goNamed(KRoute.profile.name),
                         child: ImageWidget(
                           imageUrl: context
                               .read<AuthenticationBloc>()
@@ -235,4 +232,7 @@ class _NawbarWidgetImplematationState
           ),
         );
   }
+
+  void profileNavigation(BuildContext context) =>
+      context.goNamed(KRoute.profile.name);
 }

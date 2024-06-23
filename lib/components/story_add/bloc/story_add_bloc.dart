@@ -96,21 +96,17 @@ class StoryAddBloc extends Bloc<StoryAddEvent, StoryAddState> {
             ? null
             : _iAppAuthenticationRepository.currentUser.name,
         image: state.image.value != null
-            ? [
-                ImageModel(
-                  downloadURL: state.image.value!.path,
-                  name: state.image.value!.name,
-                  ref: state.image.value!.path,
-                ),
-              ]
+            ? ImageModel(
+                downloadURL: state.image.value!.path,
+                name: state.image.value!.name,
+                ref: state.image.value!.path,
+              )
             : null,
         userPhoto: _iAppAuthenticationRepository.currentUser.photo != null &&
                 !state.isAnonymously
-            ? [
-                ImageModel(
-                  downloadURL: _iAppAuthenticationRepository.currentUser.photo!,
-                ),
-              ]
+            ? ImageModel(
+                downloadURL: _iAppAuthenticationRepository.currentUser.photo!,
+              )
             : null,
         userId: _iAppAuthenticationRepository.currentUser.id,
       ),

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
@@ -13,18 +14,25 @@ void main() {
   group('${KScreenBlocName.discount} ${KGroupText.repository} ', () {
     late IDiscountRepository mockDiscountRepository;
     late FirestoreService mockFirestoreService;
+    setUp(() {
+      ExtendedDateTime.id = '';
+      ExtendedDateTime.current = KTestText.dateTime;
+      mockFirestoreService = MockFirestoreService();
+    });
 
     group('${KGroupText.successfulGet} ', () {
       setUp(() {
-        ExtendedDateTime.id = '';
-        ExtendedDateTime.current = KTestText.dateTime;
-        mockFirestoreService = MockFirestoreService();
-
         when(
           mockFirestoreService
               .getDiscountsByUserId(KTestText.userWithoutPhoto.id),
         ).thenAnswer(
           (_) async => KTestText.discountModelItems,
+        );
+        when(
+          mockFirestoreService
+              .deleteDiscountById(KTestText.discountModelItems.first.id),
+        ).thenAnswer(
+          (_) async {},
         );
         if (GetIt.I.isRegistered<FirestoreService>()) {
           GetIt.I.unregister<FirestoreService>();
@@ -42,17 +50,31 @@ void main() {
               .having((e) => e.value, 'value', KTestText.discountModelItems),
         );
       });
+
+      test('Delete by discount ID', () async {
+        expect(
+          await mockDiscountRepository.deleteDiscountsById(
+            KTestText.discountModelItems.first.id,
+          ),
+          isA<Right<SomeFailure, bool>>().having((e) => e.value, 'value', true),
+        );
+      });
     });
 
     group('${KGroupText.failureGet} ', () {
       setUp(() {
-        mockFirestoreService = MockFirestoreService();
-
         when(
           mockFirestoreService
               .getDiscountsByUserId(KTestText.userWithoutPhoto.id),
         ).thenThrow(
-          Exception(KGroupText.failureGet),
+          FirebaseException(plugin: KGroupText.failureGet),
+        );
+        when(
+          mockFirestoreService.deleteDiscountById(
+            KTestText.discountModelItems.first.id,
+          ),
+        ).thenThrow(
+          FirebaseException(plugin: KGroupText.failure),
         );
         if (GetIt.I.isRegistered<FirestoreService>()) {
           GetIt.I.unregister<FirestoreService>();
@@ -73,62 +95,6 @@ void main() {
           ),
         );
       });
-    });
-
-    group('${KGroupText.successfulDelete} ', () {
-      setUp(() {
-        mockFirestoreService = MockFirestoreService();
-
-        when(
-          mockFirestoreService
-              .deleteDiscountById(KTestText.discountModelItems.first.id),
-        ).thenAnswer(
-          (_) async {},
-        );
-        when(
-          mockDiscountRepository
-              .deleteDiscountsById(KTestText.discountModelItems.first.id),
-        ).thenAnswer(
-          (_) async => const Right(true),
-        );
-
-        if (GetIt.I.isRegistered<FirestoreService>()) {
-          GetIt.I.unregister<FirestoreService>();
-        }
-        GetIt.I.registerSingleton(mockFirestoreService);
-
-        mockDiscountRepository = DiscountRepository();
-      });
-
-      test('Delete by discount ID', () async {
-        expect(
-          await mockDiscountRepository.deleteDiscountsById(
-            KTestText.discountModelItems.first.id,
-          ),
-          isA<Right<SomeFailure, bool>>().having((e) => e.value, 'value', true),
-        );
-      });
-    });
-
-    group('${KGroupText.failureDelete} ', () {
-      setUp(() {
-        mockFirestoreService = MockFirestoreService();
-
-        when(
-          mockFirestoreService.deleteDiscountById(
-            KTestText.discountModelItems.first.id,
-          ),
-        ).thenThrow(
-          Exception(KGroupText.failureDelete),
-        );
-        if (GetIt.I.isRegistered<FirestoreService>()) {
-          GetIt.I.unregister<FirestoreService>();
-        }
-        GetIt.I.registerSingleton(mockFirestoreService);
-
-        mockDiscountRepository = DiscountRepository();
-      });
-
       test('Delete by discount ID Failure', () async {
         expect(
           await mockDiscountRepository.deleteDiscountsById(

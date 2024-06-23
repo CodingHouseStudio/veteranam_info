@@ -1,19 +1,23 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:kozak/shared/shared.dart';
 
-class ImageConverter
-    implements JsonConverter<List<ImageModel>?, List<dynamic>?> {
+class ImageConverter implements JsonConverter<ImageModel?, List<dynamic>?> {
   const ImageConverter();
 
   @override
-  List<ImageModel>? fromJson(List<dynamic>? json) {
-    return json
+  ImageModel? fromJson(List<dynamic>? json) {
+    final list = json
         ?.map((e) => ImageModel?.fromJson(e as Map<String, dynamic>))
         .toList();
+    if (list?.isEmpty ?? true) {
+      return null;
+    } else {
+      return list?.first;
+    }
   }
 
   @override
-  List<dynamic>? toJson(List<ImageModel>? object) {
-    return object?.map((e) => e.toJson()).toList();
+  List<dynamic>? toJson(ImageModel? object) {
+    return object != null ? [object.toJson()] : null;
   }
 }

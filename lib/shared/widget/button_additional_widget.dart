@@ -40,9 +40,7 @@ class _ButtonAdditionalWidgetState extends State<ButtonAdditionalWidget> {
         isHover = value;
       }),
       style: KButtonStyles.additionalButtonStyle.copyWith(
-        backgroundColor: widget.backgroundColor != null
-            ? WidgetStatePropertyAll(widget.backgroundColor)
-            : null,
+        backgroundColor: WidgetStatePropertyAll(widget.backgroundColor),
         side: isHover
             ? const WidgetStatePropertyAll(BorderSide())
             : const WidgetStatePropertyAll(
