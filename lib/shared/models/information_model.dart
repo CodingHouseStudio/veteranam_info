@@ -17,7 +17,7 @@ class InformationModel with _$InformationModel {
     required String topicUA,
     required String status,
     required DateTime fetchDate,
-    @ImageConverter() List<ImageModel>? image,
+    @ImageConverter() ImageModel? image,
   }) = _InformationModel;
 
   factory InformationModel.fromJson(Map<String, dynamic> json) =>
