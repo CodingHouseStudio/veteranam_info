@@ -12,7 +12,7 @@ dependencies:
   cloud_firestore: ^5.0.1
   dartz: ^0.10.1
   easy_debounce: ^2.0.3
-  email_validator: ^2.1.17
+  email_validator: ^3.0.0
   equatable: ^2.0.5
   firebase_analytics: ^11.0.1
   firebase_auth: ^5.1.0
