@@ -45,7 +45,7 @@ fvm flutter test --coverage
 
 # CREATE NEW BRANCH
 
-git checkout dev
+git checkout main
 git pull
 fvm flutter clean && fvm flutter pub get && fvm flutter pub run build_runner build --delete-conflicting-outputs
 git checkout -b "branch_name"
@@ -57,13 +57,13 @@ git commit -m "commit name"
 git push
 git push --set-upstream origin branch_name
 
-# How to merge or rebase from DEV
+# How to merge or rebase from MAIN
 
 # Rebase
 
 1. git fetch --all
-2. git pull origin dev
-3. git rebase dev
+2. git pull origin main
+3. git rebase main
 4. git add .
 5. git rebase --continue
 6. git push
@@ -71,8 +71,8 @@ git push --set-upstream origin branch_name
 # Merge
 
 1. git fetch --all
-2. git pull origin dev
-3. git merge dev
+2. git pull origin main
+3. git merge main
 4. resolve conflicts if any in your IDE
 5. git push
 
