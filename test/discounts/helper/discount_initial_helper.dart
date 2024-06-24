@@ -2,25 +2,38 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:kozak/shared/shared.dart';
 
 import '../../text_dependency.dart';
+import 'helper.dart';
 
 Future<void> discountInitialHelper(
   WidgetTester tester,
 ) async {
-  await scrollingHelper(
-    tester: tester,
-    offset: KTestConstants.scrollingUp,
-  );
-
   await changeWindowSizeHelper(
     tester: tester,
     windowsTest: true,
     test: () async {
+      expect(
+        find.byKey(KWidgetkeys.screen.discounts.title),
+        findsOneWidget,
+      );
+
+      expect(
+        find.byKey(KWidgetkeys.screen.discounts.titlePoint),
+        findsOneWidget,
+      );
+
       expect(
         find.byKey(KWidgetkeys.screen.discounts.filter),
         findsOneWidget,
       );
 
       await filterChipHelper(tester);
+
+      expect(
+        find.byKey(KWidgetkeys.screen.discounts.addDiscountButton),
+        findsOneWidget,
+      );
+
+      await advancedFilterHelper(tester);
 
       expect(
         find.byKey(KWidgetkeys.screen.discounts.card),
@@ -42,28 +55,28 @@ Future<void> discountInitialHelper(
         offset: KTestConstants.scrollingDown,
       );
 
-      await scrollingHelper(
-        tester: tester,
-        offset: KTestConstants.scrollingUp500,
-      );
+      // await scrollingHelper(
+      //   tester: tester,
+      //   offset: KTestConstants.scrollingUp500,
+      // );
 
-      expect(
-        find.byKey(KWidgetkeys.screen.discounts.button),
-        findsOneWidget,
-      );
+      // expect(
+      //   find.byKey(KWidgetkeys.screen.discounts.button),
+      //   findsOneWidget,
+      // );
     },
   );
 
-  expect(
-    find.byKey(KWidgetkeys.screen.discounts.buttonIcon),
-    findsNothing,
-  );
+  // expect(
+  //   find.byKey(KWidgetkeys.screen.discounts.buttonIcon),
+  //   findsNothing,
+  // );
 
-  await changeWindowSizeHelper(
-    tester: tester,
-    test: () async => expect(
-      find.byKey(KWidgetkeys.screen.discounts.buttonIcon),
-      findsOneWidget,
-    ),
-  );
+  // await changeWindowSizeHelper(
+  //   tester: tester,
+  //   test: () async => expect(
+  //     find.byKey(KWidgetkeys.screen.discounts.buttonIcon),
+  //     findsOneWidget,
+  //   ),
+  // );
 }

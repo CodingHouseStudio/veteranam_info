@@ -17,6 +17,9 @@ abstract class KSizedBox {
   static const SizedBox kHeightSizedBox90 = SizedBox(
     height: KSize.kPixel90,
   );
+  static const SizedBox kHeightSizedBox72 = SizedBox(
+    height: KSize.kPixel72,
+  );
   static const SizedBox kHeightSizedBox64 = SizedBox(
     height: KSize.kPixel64,
   );
@@ -50,6 +53,9 @@ abstract class KSizedBox {
   static const SizedBox kHeightSizedBox48 = SizedBox(
     height: KSize.kPixel48,
   );
+  static const SizedBox kHeightSizedBox50 = SizedBox(
+    height: KSize.kPixel50,
+  );
   static const SizedBox kHeightSizedBox56 = SizedBox(
     height: KSize.kPixel56,
   );
@@ -74,6 +80,9 @@ abstract class KSizedBox {
   static const SizedBox kHeightSizedBox3 = SizedBox(
     height: KSize.kPixel3,
   );
+  static const SizedBox kHeightSizedBox2 = SizedBox(
+    height: KSize.kPixel2,
+  );
   static const SizedBox kHeightSizedBox78 = SizedBox(
     height: KSize.kPixel78,
   );
@@ -93,8 +102,8 @@ abstract class KSizedBox {
   static const SizedBox kWidthSizedBox24 = SizedBox(
     width: KSize.kPixel24,
   );
-  static const SizedBox kWidthSizedBox73 = SizedBox(
-    width: KSize.kPixel73,
+  static const SizedBox kWidthSizedBox72 = SizedBox(
+    width: KSize.kPixel72,
   );
   static const SizedBox kWidthSizedBox30 = SizedBox(
     width: KSize.kPixel30,

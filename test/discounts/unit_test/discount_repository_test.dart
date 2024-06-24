@@ -12,18 +12,19 @@ void main() {
   group('${KScreenBlocName.discount} ${KGroupText.repository} ', () {
     late IDiscountRepository mockDiscountRepository;
     late FirestoreService mockFirestoreService;
+    setUp(() {
+      ExtendedDateTime.id = '';
+      ExtendedDateTime.current = KTestText.dateTime;
+      mockFirestoreService = MockFirestoreService();
+    });
     group('${KGroupText.successfulGet} ', () {
       setUp(() {
-        ExtendedDateTime.id = '';
-        ExtendedDateTime.current = KTestText.dateTime;
-        mockFirestoreService = MockFirestoreService();
-        mockDiscountRepository = MockIDiscountRepository();
         when(mockFirestoreService.getDiscounts()).thenAnswer(
-          (_) => Stream.value(KTestText.discountModelItems),
+          (_) => Stream.value(KTestText.repositoryDiscountModelItems),
         );
         when(
           mockFirestoreService.addDiscount(
-            KTestText.discountModelItems.first,
+            KTestText.repositoryDiscountModelItems.first,
           ),
         ).thenAnswer(
           (realInvocation) async {},
@@ -38,23 +39,20 @@ void main() {
       test('Discount', () async {
         expect(
           mockDiscountRepository.getDiscountItems(),
-          emits(KTestText.discountModelItems),
+          emits(KTestText.repositoryDiscountModelItems),
         );
       });
       test('mock', () async {
         mockDiscountRepository.addMockDiscountItems();
         verify(
           mockFirestoreService.addDiscount(
-            KTestText.discountModelItems.first,
+            KTestText.repositoryDiscountModelItems.first,
           ),
         ).called(1);
       });
     });
     group('${KGroupText.failureGet} ', () {
       setUp(() {
-        ExtendedDateTime.id = '';
-        mockFirestoreService = MockFirestoreService();
-        //mockDiscountRepository = MockIDiscountRepository();
         when(mockFirestoreService.getDiscounts()).thenAnswer(
           (realInvocation) => Stream.error(
             KGroupText.failureGet,

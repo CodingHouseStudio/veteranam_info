@@ -6,7 +6,8 @@ class _InformationKeys {
   final subtitle = const Key('information_screen_subtitle');
   final filter = const Key('information_screen_filter');
   final card = const Key('information_screen_card');
+  final cardLast = const Key('information_screen_card_last');
   final buttonMock = const Key('information_screen_button_mock');
-  final button = const Key('information_screen_button');
-  final buttonIcon = const Key('information_screen_button_icon');
+  // final button = const Key('information_screen_button');
+  // final buttonIcon = const Key('information_screen_button_icon');
 }

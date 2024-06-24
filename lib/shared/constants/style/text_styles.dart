@@ -254,15 +254,6 @@ abstract class AppTextStyle {
     fontWeight: FontWeight.w400,
     letterSpacing: 0.25,
   );
-
-  /// materialThemeBodyMedium figma properties
-  /// fontFamily: Gilroy
-  /// fontSize: 14px
-  /// height: 20px
-  /// fontWeight: 400
-  /// letterSpacing: 0.25px
-  /// fontStyle: none
-  /// decoration: none
   static const TextStyle materialThemeBodyMediumNeutralVariant35 = TextStyle(
     fontFamily: 'Gilroy',
     fontSize: 14,
@@ -452,5 +443,13 @@ abstract class AppTextStyle {
     height: 1.17,
     fontWeight: FontWeight.w500,
     letterSpacing: -0.25,
+  );
+  static const TextStyle materialThemeTitleMediumNeutral = TextStyle(
+    fontFamily: 'Gilroy',
+    fontSize: 16,
+    height: 1.5,
+    fontWeight: FontWeight.w500,
+    letterSpacing: 0.15,
+    color: AppColors.materialThemeKeyColorsNeutral,
   );
 }

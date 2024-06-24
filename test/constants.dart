@@ -43,8 +43,11 @@ abstract class KGroupText {
   static const goRouter = 'Mock Go Router';
   static const goTo = 'go to';
   static const validationError = 'Validation error';
-  static const shouldBe = 'should be';
-  static const shouldNotBe = 'should not be';
+  static const full = 'full';
+  static const nullable = 'nullable';
+  static const convertor = 'convertor';
+  static const shouldNotBe = 'Should not be';
+  static const shouldBe = 'Should be';
   static const empty = 'empty';
   static const modelJson = 'instance from valid JSON';
   static const jsonModel = 'json from valid model';
@@ -127,8 +130,10 @@ abstract class KTestText {
     email: userEmail,
     name: usernameCorrect,
     phoneNumber: 'test_phone_number',
-    photo: 'test_phot',
+    photo: image,
   );
+
+  static const image = 'test';
 
   static const userWithoutPhoto = User(
     id: '1',
@@ -137,11 +142,9 @@ abstract class KTestText {
     phoneNumber: 'test_phone_number',
   );
 
-  static final userPhotoModel = [
-    ImageModel(
-      downloadURL: user.photo!,
-    ),
-  ];
+  static final userPhotoModel = ImageModel(
+    downloadURL: user.photo!,
+  );
 
   static const userSetting = UserSetting(
     id: '1',
@@ -155,19 +158,17 @@ abstract class KTestText {
     roleIsConfirmed: true,
   );
   static const imageModel = ImageModel(
-    downloadURL: 'test_URL',
+    downloadURL: image,
     lastModifiedTS: 1,
     name: 'test_name',
-    ref: 'test_name',
+    ref: image,
     type: 'test_type',
   );
-  static const imageModels = [
-    ImageModel(
-      downloadURL: 'test_image',
-      name: 'test_image',
-      ref: 'test_image',
-    ),
-  ];
+  static const imageModels = ImageModel(
+    downloadURL: image,
+    name: image,
+    ref: image,
+  );
 
   static final feedbackModel = FeedbackModel(
     id: dateTime.microsecondsSinceEpoch.toString(),
@@ -187,6 +188,31 @@ abstract class KTestText {
         id: i.toString(),
         userId: i.toString(),
         dateVerified: dateTime,
+        subLocation: i == 0
+            ? SubLocation.all
+            : i == 1
+                ? SubLocation.allStoresOfChain
+                : i == 2
+                    ? SubLocation.online
+                    : null,
+      ),
+  ];
+
+  static final userDiscountModelItems = <DiscountModel>[
+    for (var i = 0; i < 5; i++)
+      KMockText.discountModel.copyWith(
+        id: i.toString(),
+        userId: userWithoutPhoto.id,
+        dateVerified: dateTime,
+      ),
+  ];
+
+  static final repositoryDiscountModelItems = <DiscountModel>[
+    for (var i = 0; i < 5; i++)
+      KMockText.discountModel.copyWith(
+        id: i.toString(),
+        userId: i.toString(),
+        dateVerified: dateTime,
       ),
   ];
 
@@ -197,11 +223,19 @@ abstract class KTestText {
         userId: i.toString(),
         category: i == 0 ? KMockText.tag : KMockText.discountModel.category,
         dateVerified: dateTime,
+        discount: i == 0 ? [12, 35, 100] : KMockText.discountModel.discount,
+        subLocation: i == 0
+            ? SubLocation.all
+            : i == 1
+                ? SubLocation.allStoresOfChain
+                : i == 2
+                    ? SubLocation.online
+                    : null,
       ),
   ];
 
   static final fundItems = <FundModel>[
-    for (var i = 0; i < 5; i++)
+    for (var i = 0; i < 40; i++)
       KMockText.fundModel.copyWith(
         id: i.toString(),
       ),
@@ -217,36 +251,38 @@ abstract class KTestText {
   );
 
   static final informationModelItemsModify = <InformationModel>[
-    for (var i = 0; i < 30; i++)
+    for (var i = 0; i < _items; i++)
       KMockText.informationModel.copyWith(
         id: i.toString(),
         fetchDate: dateTime,
-        image: i > KMockText.tags.length - 2 ? imageModels : null,
+        image: i > _itemsPhoto ? imageModels : null,
         category: i == 0 ? KMockText.tag : KMockText.informationModel.category,
       ),
   ];
 
   static final informationModelItems = <InformationModel>[
-    for (var i = 0; i < KMockText.tags.length; i++)
+    for (var i = 0; i < _items; i++)
       KMockText.informationModel.copyWith(
         id: i.toString(),
         fetchDate: dateTime,
-        image: i > KMockText.tags.length - 2 ? imageModels : null,
+        image: i > _itemsPhoto ? imageModels : null,
       ),
   ];
 
   static final storyModelItems = <StoryModel>[
-    for (var i = 0; i < 30; i++)
+    for (var i = 0; i < _items; i++)
       StoryModel(
         id: i.toString(),
         date: dateTime,
-        image: i > KMockText.tags.length ? imageModels : null,
+        image: i > _itemsPhoto ? imageModels : null,
         story: KMockText.cardData.substring(0, 200),
         userName: user.name,
         userId: user.id,
-        userPhoto: i > KMockText.tags.length ? userPhotoModel : null,
+        userPhoto: i > _itemsPhoto ? userPhotoModel : null,
       ),
   ];
+  static const _items = 30;
+  static const _itemsPhoto = 20;
 
   static List<String> routes({required bool hasAccount}) => [
         KRoute.aboutUs.name,
@@ -299,6 +335,8 @@ abstract class KScreenBlocName {
   static const thank = 'Thank Screen';
   static const profileMyStory = 'My Story Screen';
   static const underConstruction = 'Under Construction Screen';
+  static const myDiscounts = 'My Discount Screen';
+  static const myStory = 'My Story Screen';
 
   static const feedback = 'Feedback Widget';
   static const authenticationServices = 'Authentication Services';

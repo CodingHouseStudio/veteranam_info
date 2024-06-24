@@ -19,7 +19,7 @@ class FundModel with _$FundModel {
     String? phoneNumber,
     int? size,
     String? comments,
-    @ImageConverter() List<ImageModel>? image,
+    @ImageConverter() ImageModel? image,
   }) = _FundsModel;
 
   factory FundModel.fromJson(Map<String, dynamic> json) =>

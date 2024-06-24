@@ -56,7 +56,7 @@ void main() {
         await discountMockButtonHelper(tester);
       });
     });
-    group(KGroupText.getList, () {
+    group('${KGroupText.getList} ', () {
       setUp(() {
         when(mockDiscountRepository.getDiscountItems()).thenAnswer(
           (invocation) => Stream.value(KTestText.discountModelItems),
@@ -81,6 +81,20 @@ void main() {
           );
 
           await discountInitialHelper(tester);
+        });
+        group('${KGroupText.goTo} ', () {
+          testWidgets('nawbar widget navigation', (tester) async {
+            await discountsPumpAppHelper(
+              tester: tester,
+              mockDiscountRepository: mockDiscountRepository,
+              mockGoRouter: mockGoRouter,
+            );
+
+            await myDIscountHelper(
+              tester: tester,
+              mockGoRouter: mockGoRouter,
+            );
+          });
         });
       });
     });

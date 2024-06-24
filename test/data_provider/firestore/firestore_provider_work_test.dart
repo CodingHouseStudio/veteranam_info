@@ -6,7 +6,7 @@ import 'package:mockito/mockito.dart';
 import '../../text_dependency.dart';
 
 void main() {
-  group('${KScreenBlocName.firestoreService} ', () {
+  group('${KScreenBlocName.work} ${KScreenBlocName.firestoreService}', () {
     group(' ${KGroupText.provider} ', () {
       late FirestoreService firestoreService;
       late FirebaseFirestore mockFirebaseFirestore;

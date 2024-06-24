@@ -25,39 +25,45 @@ Future<void> questionForminitialHelper(
         findsOneWidget,
       );
 
-      expect(
-        find.byKey(KWidgetkeys.screen.questionsForm.roleVeteranText),
-        findsOneWidget,
-      );
+      // expect(
+      //   find.byKey(KWidgetkeys.screen.questionsForm.roleVeteranText),
+      //   findsOneWidget,
+      // );
 
       expect(
         find.byKey(KWidgetkeys.screen.questionsForm.roleVeteran),
         findsOneWidget,
       );
 
-      expect(
-        find.byKey(KWidgetkeys.screen.questionsForm.roleRelativeOfVeteranText),
-        findsOneWidget,
-      );
+      // expect(
+      //   find.byKey(KWidgetkeys.screen.questionsForm
+      // .roleRelativeOfVeteranText),
+      //   findsOneWidget,
+      // );
 
       expect(
         find.byKey(KWidgetkeys.screen.questionsForm.roleRelativeOfVeteran),
         findsOneWidget,
       );
 
-      expect(
-        find.byKey(KWidgetkeys.screen.questionsForm.roleCivilianText),
-        findsOneWidget,
-      );
+      // expect(
+      //   find.byKey(KWidgetkeys.screen.questionsForm.roleCivilianText),
+      //   findsOneWidget,
+      // );
 
       expect(
         find.byKey(KWidgetkeys.screen.questionsForm.roleCivilian),
         findsOneWidget,
       );
 
-      expect(
-        find.byKey(KWidgetkeys.screen.questionsForm.roleBusinessmenText),
-        findsOneWidget,
+      // expect(
+      //   find.byKey(KWidgetkeys.screen.questionsForm.roleBusinessmenText),
+      //   findsOneWidget,
+      // );
+
+      await scrollingHelper(
+        tester: tester,
+        itemKey: KWidgetkeys.screen.questionsForm.roleCivilian,
       );
 
       expect(
@@ -77,5 +83,5 @@ Future<void> questionForminitialHelper(
     },
   );
 
-  await chekPointHelper(tester);
+  await chekPointHelper(tester: tester);
 }

@@ -105,7 +105,7 @@ List<Widget> _employeeRespondContainerWidgetList({
           Expanded(
             child: sendButton(context: context, isDesk: true),
           ),
-          KSizedBox.kWidthSizedBox73,
+          KSizedBox.kWidthSizedBox72,
           Expanded(
             child: cancelButton(context: context, isDesk: true),
           ),

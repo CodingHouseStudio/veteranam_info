@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:go_router/go_router.dart';
 import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
 
@@ -20,86 +21,141 @@ class DiscountBodyWidget extends StatelessWidget {
       ),
       listenWhen: (previous, current) => current.failure != null,
       builder: (context, _) {
-        return ScaffoldWidget(
-          mainChildWidgetsFunction: ({required isDesk}) => [
+        return ScaffoldAutoLoadingWidget(
+          titleChildWidgetsFunction: ({required isDesk}) => [
+            KSizedBox.kHeightSizedBox24,
+            ...TitleWidget.pointTitleWidgetList(
+              title: context.l10n.specialOffers,
+              titleKey: KWidgetkeys.screen.discounts.title,
+              titleSecondPart: context.l10n.forVeteransAndTheirFamilies,
+              pointText: context.l10n.discounts,
+              pointKey: KWidgetkeys.screen.discounts.titlePoint,
+              isDesk: isDesk,
+              titleSecondPartPadding:
+                  const EdgeInsets.only(left: KPadding.kPaddingSize72),
+              iconCrossAxisAlignment: CrossAxisAlignment.end,
+              isRightArrow: false,
+            ),
             if (isDesk)
               KSizedBox.kHeightSizedBox40
             else
-              KSizedBox.kHeightSizedBox16,
-            ...TitleWidget.titleWidgetList(
-              title: context.l10n.discountsAndCoupons,
-              titleKey: KWidgetkeys.screen.discounts.title,
-              subtitle: context.l10n.discountsAndCouponsDescription,
-              subtitleKey: KWidgetkeys.screen.discounts.title,
-              isDesk: isDesk,
-            ),
-            if (isDesk)
-              KSizedBox.kHeightSizedBox56
-            else
               KSizedBox.kHeightSizedBox24,
-            FiltersChipWidget(
-              key: KWidgetkeys.screen.discounts.filter,
-              filtersItems: _.discountModelItems.overallTags(context),
-              isDesk: isDesk,
-              onResetValue: () => context.read<DiscountWatcherBloc>().add(
-                    const DiscountWatcherEvent.filterReset(),
-                  ),
-              isSelected: (index) =>
-                  context
-                      .read<DiscountWatcherBloc>()
-                      .state
-                      .filtersIndex
-                      ?.contains(index) ??
-                  false,
-              onSelected: (index) => context.read<DiscountWatcherBloc>().add(
-                    DiscountWatcherEvent.filter(
-                      index,
+            if (isDesk)
+              Row(
+                children: [
+                  Expanded(
+                    child: _filter(
+                      context: context,
+                      isDesk: isDesk,
                     ),
                   ),
-            ),
+                  if (Config.isDevelopment) _myDiscountButton(context),
+                ],
+              )
+            else ...[
+              _filter(
+                context: context,
+                isDesk: isDesk,
+              ),
+              if (Config.isDevelopment) ...[
+                KSizedBox.kHeightSizedBox8,
+                _myDiscountButton(context),
+              ],
+              KSizedBox.kHeightSizedBox24,
+              AdvancedFilterMob(
+                key: KWidgetkeys.screen.discounts.advancedFilter,
+              ),
+            ],
             if (isDesk)
-              KSizedBox.kHeightSizedBox56
+              KSizedBox.kHeightSizedBox40
             else
               KSizedBox.kHeightSizedBox24,
+          ],
+          mainRightChildWidget: AdvancedFilterDesk(
+            key: KWidgetkeys.screen.discounts.advancedFilter,
+          ),
+          mainChildWidgetsFunction: ({required isDesk}) => [
             if (_.discountModelItems.isEmpty &&
-                _.loadingStatus == LoadingStatus.loaded)
-              Config.isDevelopment
-                  ? MockButtonWidget(
-                      key: KWidgetkeys.screen.discounts.buttonMock,
-                      onPressed: () {
-                        GetIt.I
-                            .get<IDiscountRepository>()
-                            .addMockDiscountItems();
-                        context
-                            .read<DiscountWatcherBloc>()
-                            .add(const DiscountWatcherEvent.started());
-                      },
-                    )
-                  : const SizedBox.shrink()
+                _.loadingStatus == LoadingStatus.loaded &&
+                Config.isDevelopment)
+              MockButtonWidget(
+                key: KWidgetkeys.screen.discounts.buttonMock,
+                onPressed: () {
+                  GetIt.I.get<IDiscountRepository>().addMockDiscountItems();
+                  context
+                      .read<DiscountWatcherBloc>()
+                      .add(const DiscountWatcherEvent.started());
+                },
+              )
             else
               ...discountsWidgetList(context: context, isDesk: isDesk),
             if (isDesk)
               KSizedBox.kHeightSizedBox56
             else
               KSizedBox.kHeightSizedBox24,
-            Center(
-              child: LoadingButton(
-                key: KWidgetkeys.screen.discounts.button,
-                text: context.l10n.moreDiscounts,
-                onPressed: () => context
-                    .read<DiscountWatcherBloc>()
-                    .add(const DiscountWatcherEvent.loadNextItems()),
-                isDesk: isDesk,
-                iconKey: KWidgetkeys.screen.discounts.buttonIcon,
-              ),
-            ),
+            // LoadingButton(
+            //   widgetKey: KWidgetkeys.screen.discounts.button,
+            //   text: context.l10n.moreDiscounts,
+            //   onPressed: () => context
+            //       .read<DiscountWatcherBloc>()
+            //       .add(const DiscountWatcherEvent.loadNextItems()),
+            //   isDesk: isDesk,
+            // ),
             if (isDesk)
               KSizedBox.kHeightSizedBox56
             else
               KSizedBox.kHeightSizedBox24,
           ],
+          scrollFunction: () => context
+              .read<DiscountWatcherBloc>()
+              .add(const DiscountWatcherEvent.loadNextItems()),
         );
       },
     );
   }
+
+  Widget _filter({
+    required BuildContext context,
+    required bool isDesk,
+  }) =>
+      FiltersChipWidget(
+        key: KWidgetkeys.screen.discounts.filter,
+        filtersItems: context
+            .read<DiscountWatcherBloc>()
+            .state
+            .discountModelItems
+            .overallItems(
+              context: context,
+              getFilter: (item) => item.category,
+              getUAFilter: (item) => item.categoryUA,
+            ),
+        isDesk: isDesk,
+        // onResetValue: () => context.read<DiscountWatcherBloc>().add(
+        //       const DiscountWatcherEvent.filterReset(),
+        //     ),
+        isSelected: (index) =>
+            context
+                .read<DiscountWatcherBloc>()
+                .state
+                .filtersCategoriesIndex
+                ?.contains(index) ??
+            false,
+        onSelected: (index) => context.read<DiscountWatcherBloc>().add(
+              DiscountWatcherEvent.filterCategory(
+                index,
+              ),
+            ),
+        fullLenght:
+            context.read<DiscountWatcherBloc>().state.discountModelItems.length,
+      );
+
+  Widget _myDiscountButton(
+    BuildContext context,
+  ) =>
+      TextButton(
+        key: KWidgetkeys.screen.discounts.addDiscountButton,
+        onPressed: () => context.goNamed(KRoute.myDiscounts.name),
+        style: KButtonStyles.whiteButtonStyle,
+        child: Text(context.l10n.offerDiscount),
+      );
 }

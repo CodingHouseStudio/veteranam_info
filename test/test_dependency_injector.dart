@@ -22,7 +22,7 @@ void configureDependenciesTest() {
   );
   // Repositories
   GetIt.I.registerLazySingleton<IStorage>(SecureStorageRepository.new);
-  GetIt.I.registerSingleton<IFeedbackRepository>(FeedbackRepository());
+  // GetIt.I.registerSingleton<IFeedbackRepository>(FeedbackRepository());
   GetIt.I.registerSingleton<IHomeRepository>(HomeRepository());
   GetIt.I.registerSingleton<IAppAuthenticationRepository>(
     AppAuthenticationRepository(
@@ -37,18 +37,19 @@ void configureDependenciesTest() {
       GetIt.I.get<IAppAuthenticationRepository>(),
     ),
   );
-  GetIt.I.registerSingleton<IDiscountRepository>(DiscountRepository());
-  GetIt.I.registerSingleton<IInformationRepository>(InformationRepository());
-  GetIt.I.registerSingleton<IInvestorsRepository>(InvestorsRepository());
-  GetIt.I.registerSingleton<IWorkRepository>(WorkRepository());
-  GetIt.I.registerSingleton<IStoryRepository>(StoryRepository());
+  // GetIt.I.registerSingleton<IDiscountRepository>(DiscountRepository());
+  // GetIt.I.registerSingleton<IInformationRepository>(InformationRepository());
+  // GetIt.I.registerSingleton<IInvestorsRepository>(InvestorsRepository());
+  // GetIt.I.registerSingleton<IWorkRepository>(WorkRepository());
+  // GetIt.I.registerSingleton<IStoryRepository>(StoryRepository());
   // Blocs
-  GetIt.I.registerSingleton<FeedbackBloc>(
-    FeedbackBloc(
-      feedbackRepository: GetIt.I.get<IFeedbackRepository>(),
-      appAuthenticationRepository: GetIt.I.get<IAppAuthenticationRepository>(),
-    ),
-  );
+  // GetIt.I.registerSingleton<FeedbackBloc>(
+  //   FeedbackBloc(
+  //     feedbackRepository: GetIt.I.get<IFeedbackRepository>(),
+  //     appAuthenticationRepository: GetIt.I.get
+  // <IAppAuthenticationRepository>(),
+  //   ),
+  // );
   GetIt.I.registerSingleton<HomeWatcherBloc>(
     HomeWatcherBloc(homeRepository: GetIt.I.get<IHomeRepository>()),
   );
@@ -57,39 +58,48 @@ void configureDependenciesTest() {
       authenticationRepository: GetIt.I.get<AuthenticationRepository>(),
     ),
   );
-  GetIt.I.registerSingleton<LoginBloc>(
-    LoginBloc(
-      appAuthenticationRepository: GetIt.I.get<IAppAuthenticationRepository>(),
-    ),
-  );
-  GetIt.I.registerSingleton<SignUpBloc>(
-    SignUpBloc(
-      iAppAuthenticationRepository: GetIt.I.get<IAppAuthenticationRepository>(),
-    ),
-  );
-  GetIt.I.registerSingleton<InformationWatcherBloc>(
-    InformationWatcherBloc(
-      informationRepository: GetIt.I.get<IInformationRepository>(),
-    ),
-  );
-  GetIt.I.registerSingleton<InvestorsWatcherBloc>(
-    InvestorsWatcherBloc(
-      investorsRepository: GetIt.I.get<IInvestorsRepository>(),
-    ),
-  );
-  GetIt.I.registerSingleton<WorkEmployeeWatcherBloc>(
-    WorkEmployeeWatcherBloc(
-      workRepository: GetIt.I.get<IWorkRepository>(),
-    ),
-  );
-  GetIt.I.registerSingleton<StoryWatcherBloc>(
-    StoryWatcherBloc(
-      storyRepository: GetIt.I.get<IStoryRepository>(),
-    ),
-  );
-  GetIt.I.registerSingleton<DiscountWatcherBloc>(
-    DiscountWatcherBloc(
-      discountRepository: GetIt.I.get<IDiscountRepository>(),
-    ),
-  );
+  // GetIt.I.registerSingleton<LoginBloc>(
+  //   LoginBloc(
+  //     appAuthenticationRepository: GetIt.I.get<IAppAuthenticationRepository>
+  // (),
+  //   ),
+  // );
+  // GetIt.I.registerSingleton<SignUpBloc>(
+  //   SignUpBloc(
+  //     iAppAuthenticationRepository: GetIt.I.get<IAppAuthenticationRepository>
+  // (),
+  //   ),
+  // );
+  // GetIt.I.registerSingleton<InformationWatcherBloc>(
+  //   InformationWatcherBloc(
+  //     informationRepository: GetIt.I.get<IInformationRepository>(),
+  //   ),
+  // );
+  // GetIt.I.registerSingleton<InvestorsWatcherBloc>(
+  //   InvestorsWatcherBloc(
+  //     investorsRepository: GetIt.I.get<IInvestorsRepository>(),
+  //   ),
+  // );
+  // GetIt.I.registerSingleton<WorkEmployeeWatcherBloc>(
+  //   WorkEmployeeWatcherBloc(
+  //     workRepository: GetIt.I.get<IWorkRepository>(),
+  //   ),
+  // );
+  // GetIt.I.registerSingleton<StoryWatcherBloc>(
+  //   StoryWatcherBloc(
+  //     storyRepository: GetIt.I.get<IStoryRepository>(),
+  //   ),
+  // );
+  // GetIt.I.registerSingleton<DiscountWatcherBloc>(
+  //   DiscountWatcherBloc(
+  //     discountRepository: GetIt.I.get<IDiscountRepository>(),
+  //   ),
+  // );
+  // GetIt.I.registerSingleton<MyDiscountsWatcherBloc>(
+  //   MyDiscountsWatcherBloc(
+  //     discountRepository: GetIt.I.get<IDiscountRepository>(),
+  //     iAppAuthenticationRepository: GetIt.I.get<IAppAuthenticationRepository>
+  // (),
+  //   ),
+  // );
 }

@@ -6,7 +6,7 @@ import 'package:mockito/mockito.dart';
 import '../../text_dependency.dart';
 
 void main() {
-  group('${KScreenBlocName.firestoreService} ', () {
+  group('${KScreenBlocName.story} ${KScreenBlocName.firestoreService}', () {
     group(' ${KGroupText.provider} ', () {
       late FirestoreService firestoreService;
       late FirebaseFirestore mockFirebaseFirestore;
@@ -17,6 +17,7 @@ void main() {
       late DocumentReference<Map<String, dynamic>> mockDocumentReference;
       late List<DocumentChange<Map<String, dynamic>>> mockDocumentChange;
       late SnapshotMetadata mockSnapshotMetadata;
+      late Query<Map<String, dynamic>> mockQuery;
       setUp(() {
         mockCollectionReference = MockCollectionReference();
         mockFirebaseFirestore = MockFirebaseFirestore();
@@ -25,6 +26,7 @@ void main() {
         mockQueryDocumentSnapshot = [MockQueryDocumentSnapshot()];
         mockDocumentChange = [MockDocumentChange()];
         mockSnapshotMetadata = MockSnapshotMetadata();
+        mockQuery = MockQuery();
 
         when(
           mockFirebaseFirestore.collection(FirebaseCollectionName.stroies),
@@ -86,6 +88,20 @@ void main() {
         ).thenAnswer(
           (_) => false,
         );
+        when(
+          mockCollectionReference.where(
+            StoryModelJsonField.userId,
+            isEqualTo: KTestText.user.id,
+          ),
+        ).thenAnswer(
+          (_) => mockQuery,
+        );
+
+        when(
+          mockQuery.get(),
+        ).thenAnswer(
+          (_) async => mockQuerySnapshot,
+        );
 
         FirestoreService.firebaseFirestore = mockFirebaseFirestore;
         firestoreService = FirestoreService();
@@ -137,6 +153,31 @@ void main() {
           firestoreService.getStories(),
           emits([KTestText.storyModelItems.first]),
         );
+      });
+      test('Get User Story', () async {
+        expect(
+          await firestoreService.getStoriesByUserId(KTestText.user.id),
+          [KTestText.storyModelItems.first],
+        );
+
+        verify(
+          mockFirebaseFirestore.collection(FirebaseCollectionName.stroies),
+        ).called(1);
+        verify(
+          mockCollectionReference.where(
+            StoryModelJsonField.userId,
+            isEqualTo: KTestText.user.id,
+          ),
+        ).called(1);
+        verify(
+          mockQuery.get(),
+        ).called(1);
+        verify(
+          mockQuerySnapshot.docs,
+        ).called(1);
+        verify(
+          mockQueryDocumentSnapshot.last.data(),
+        ).called(1);
       });
     });
   });

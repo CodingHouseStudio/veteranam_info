@@ -23,6 +23,7 @@ class _ScreenKeys {
   final profileSaves = _ProfileSavesKeys();
   final storyAdd = _StoryAddKeys();
   final myStory = _MyStoryKeys();
+  final myDiscounts = _MyDiscountsKeys();
   // final contact = _ContactKeys();
   final underConstruction = _UnderConstructionKeys();
   final feedback = _FeedbackKeys();

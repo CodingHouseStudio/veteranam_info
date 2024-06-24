@@ -20,7 +20,7 @@ class InformationBodyWidget extends StatelessWidget {
             .add(const InformationWatcherEvent.started()),
       ),
       listenWhen: (previous, current) => current.failure != null,
-      builder: (context, _) => ScaffoldWidget(
+      builder: (context, _) => ScaffoldAutoLoadingWidget(
         titleChildWidgetsFunction: ({required isDesk}) => [
           if (isDesk)
             KSizedBox.kHeightSizedBox40
@@ -39,11 +39,15 @@ class InformationBodyWidget extends StatelessWidget {
             KSizedBox.kHeightSizedBox24,
           FiltersChipWidget(
             key: KWidgetkeys.screen.information.filter,
-            filtersItems: _.informationModelItems.overallTags(context),
+            filtersItems: _.informationModelItems.overallItems(
+              context: context,
+              getFilter: (item) => item.category,
+              getUAFilter: (item) => item.categoryUA,
+            ),
             isDesk: isDesk,
-            onResetValue: () => context.read<InformationWatcherBloc>().add(
-                  const InformationWatcherEvent.filterReset(),
-                ),
+            // onResetValue: () => context.read<InformationWatcherBloc>().add(
+            //       const InformationWatcherEvent.filterReset(),
+            //     ),
             isSelected: (index) =>
                 context
                     .read<InformationWatcherBloc>()
@@ -56,50 +60,55 @@ class InformationBodyWidget extends StatelessWidget {
                     index,
                   ),
                 ),
+            fullLenght: context
+                .read<InformationWatcherBloc>()
+                .state
+                .informationModelItems
+                .length,
           ),
           if (isDesk)
             KSizedBox.kHeightSizedBox40
           else
             KSizedBox.kHeightSizedBox24,
         ],
-        mainDeskPadding:
-            const EdgeInsets.symmetric(horizontal: KPadding.kPaddingSize48),
+        mainDeskPadding: const EdgeInsets.symmetric(
+          horizontal: KPadding.kPaddingSize48,
+        ),
         mainChildWidgetsFunction: ({required isDesk}) => [
           if (_.informationModelItems.isEmpty &&
-              _.loadingStatus == LoadingStatus.loaded)
-            Config.isDevelopment
-                ? MockButtonWidget(
-                    key: KWidgetkeys.screen.information.buttonMock,
-                    onPressed: () {
-                      GetIt.I
-                          .get<IInformationRepository>()
-                          .addMockInformationItems();
-                      context
-                          .read<InformationWatcherBloc>()
-                          .add(const InformationWatcherEvent.started());
-                    },
-                  )
-                : const SizedBox.shrink()
+              _.loadingStatus == LoadingStatus.loaded &&
+              Config.isDevelopment)
+            MockButtonWidget(
+              key: KWidgetkeys.screen.information.buttonMock,
+              onPressed: () {
+                GetIt.I.get<IInformationRepository>().addMockInformationItems();
+                context
+                    .read<InformationWatcherBloc>()
+                    .add(const InformationWatcherEvent.started());
+              },
+            )
           else
             ..._newsWidgetList(context: context, isDesk: isDesk),
           if (isDesk)
             KSizedBox.kHeightSizedBox56
           else
             KSizedBox.kHeightSizedBox24,
-          LoadingButton(
-            key: KWidgetkeys.screen.information.button,
-            isDesk: isDesk,
-            onPressed: () => context.read<InformationWatcherBloc>().add(
-                  const InformationWatcherEvent.loadNextItems(),
-                ),
-            iconKey: KWidgetkeys.screen.information.buttonIcon,
-            text: context.l10n.moreNews,
-          ),
+          // LoadingButton(
+          //   widgetKey: KWidgetkeys.screen.information.button,
+          //   isDesk: isDesk,
+          //   onPressed: () => context.read<InformationWatcherBloc>().add(
+          //         const InformationWatcherEvent.loadNextItems(),
+          //       ),
+          //   text: context.l10n.moreNews,
+          // ),
           if (isDesk)
             KSizedBox.kHeightSizedBox56
           else
             KSizedBox.kHeightSizedBox24,
         ],
+        scrollFunction: () => context.read<InformationWatcherBloc>().add(
+              const InformationWatcherEvent.loadNextItems(),
+            ),
       ),
     );
   }

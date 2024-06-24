@@ -29,8 +29,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "addPhoto": MessageLookupByLibrary.simpleMessage("Добавте фото"),
         "addYourStory":
             MessageLookupByLibrary.simpleMessage("Написати свою історію"),
+        "advancedFilter":
+            MessageLookupByLibrary.simpleMessage("Розширений фільтр"),
+        "all": MessageLookupByLibrary.simpleMessage("Все"),
         "allRightsReserved":
             MessageLookupByLibrary.simpleMessage("Всі права захищені"),
+        "allStoresOfChain":
+            MessageLookupByLibrary.simpleMessage("Всі заклади мережі"),
         "anonymous": MessageLookupByLibrary.simpleMessage("анонім"),
         "answersYourQuestions":
             MessageLookupByLibrary.simpleMessage("Відповіді на Ваші запитання"),
@@ -44,12 +49,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "category": MessageLookupByLibrary.simpleMessage("Категорія"),
         "city": MessageLookupByLibrary.simpleMessage("Місто"),
         "clear": MessageLookupByLibrary.simpleMessage("Очистити"),
+        "companyIsHidden":
+            MessageLookupByLibrary.simpleMessage("Компанію приховано"),
         "consultationOnline":
             MessageLookupByLibrary.simpleMessage("Консультація онлайн"),
         "contact": MessageLookupByLibrary.simpleMessage("Зв\'язатись"),
         "contacts": MessageLookupByLibrary.simpleMessage("Контакти"),
         "createSecurePassword":
             MessageLookupByLibrary.simpleMessage("Придумайте безпечний пароль"),
+        "deactivate": MessageLookupByLibrary.simpleMessage("Деактивувати"),
         "deleteAccount":
             MessageLookupByLibrary.simpleMessage("Видалити акаунт"),
         "deleteAccountQuestion": MessageLookupByLibrary.simpleMessage(
@@ -58,6 +66,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "didNotFindYourVacancy":
             MessageLookupByLibrary.simpleMessage("Не знайшли свою вакансію?"),
         "disconnect": MessageLookupByLibrary.simpleMessage("Відʼєднати"),
+        "discount": MessageLookupByLibrary.simpleMessage("Знижка"),
         "discounts": MessageLookupByLibrary.simpleMessage("Знижки"),
         "discountsAndCoupons":
             MessageLookupByLibrary.simpleMessage("Знижки і купони"),
@@ -99,7 +108,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "fieldCannotBeEmpty":
             MessageLookupByLibrary.simpleMessage("Поле не може бути пустим"),
         "fillInForm": MessageLookupByLibrary.simpleMessage("Заповніть форму"),
+        "filterApplied":
+            MessageLookupByLibrary.simpleMessage("Застосований фільтр"),
         "findOut": MessageLookupByLibrary.simpleMessage("Щоб дізнатися"),
+        "forVeteransAndTheirFamilies":
+            MessageLookupByLibrary.simpleMessage("для ветеранів і їх родин"),
+        "free": MessageLookupByLibrary.simpleMessage("Безкоштовно"),
+        "fromLargestToSmallest":
+            MessageLookupByLibrary.simpleMessage("Від найбільшої до найменшої"),
         "fullEmail": MessageLookupByLibrary.simpleMessage("Електронна пошта"),
         "funds": MessageLookupByLibrary.simpleMessage("Фонди"),
         "fundsSubtitle": MessageLookupByLibrary.simpleMessage(
@@ -115,7 +131,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Привіт, Ветеран!"),
         "hide": MessageLookupByLibrary.simpleMessage("Сховати"),
         "homeSubtitle": MessageLookupByLibrary.simpleMessage(
-            "Тут ти знайдеш корисну інформацію, пільги, знижки а також можеш поділитися своєю історією! "),
+            "Тут ти знайдеш корисну інформацію, пільги, знижки, а також можеш поділитися своєю історією!"),
         "howToContactYou": MessageLookupByLibrary.simpleMessage(
             "Напишіть як з Вами звʼязатися"),
         "iAmBusinessOwnerRepresentative": MessageLookupByLibrary.simpleMessage(
@@ -160,10 +176,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "mainScreen": MessageLookupByLibrary.simpleMessage("Головна"),
         "message": MessageLookupByLibrary.simpleMessage("Повідомлення"),
         "moreDiscounts": MessageLookupByLibrary.simpleMessage("Ще знижки"),
+        "moreFunds": MessageLookupByLibrary.simpleMessage("Більше фондів"),
         "moreNews": MessageLookupByLibrary.simpleMessage("Ще новини"),
         "moreStories": MessageLookupByLibrary.simpleMessage("Ще історії"),
+        "myDiscountsAndCoupons": MessageLookupByLibrary.simpleMessage(
+            "У цьому розділі ти можеш опублікувати знижку, а також керувати своїми публікаціями. Якщо ваша компанія надає персональні пропозиції для ветеранів, ти можеш розмістити оголошення тут."),
         "myFeedback": MessageLookupByLibrary.simpleMessage("Мої відгуки"),
         "myProfile": MessageLookupByLibrary.simpleMessage("Профіль"),
+        "myPublications":
+            MessageLookupByLibrary.simpleMessage("Мої публікації"),
         "myStory": MessageLookupByLibrary.simpleMessage("Мої історії"),
         "myStoryDetails": MessageLookupByLibrary.simpleMessage(
             "У цьому розділі ти можеш керувати своїми історіями."),
@@ -178,8 +199,11 @@ class MessageLookup extends MessageLookupByLibrary {
             "Користувач з таким паролем або електронною поштою не існує"),
         "notNecessarily":
             MessageLookupByLibrary.simpleMessage("(необовʼязково)"),
+        "offerDiscount":
+            MessageLookupByLibrary.simpleMessage("Запропонувати знижку"),
         "oneNumber": MessageLookupByLibrary.simpleMessage(
             "повинен містити одну чи більше цифр"),
+        "online": MessageLookupByLibrary.simpleMessage("Вся Україна (онлайн)"),
         "or": MessageLookupByLibrary.simpleMessage("або"),
         "orDonateHere":
             MessageLookupByLibrary.simpleMessage("або донатьте тут"),
@@ -217,8 +241,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ми отримали Ваше повідомлення і надамо Вам відповідь найближчим часом."),
         "register": MessageLookupByLibrary.simpleMessage("Зареєструватись"),
         "remotely": MessageLookupByLibrary.simpleMessage("Віддалено"),
-        "resetAllFilter":
-            MessageLookupByLibrary.simpleMessage("Скинути фільтри"),
+        "resetAll": MessageLookupByLibrary.simpleMessage("Скинути все"),
         "respond": MessageLookupByLibrary.simpleMessage("Відгукнутися"),
         "resume": MessageLookupByLibrary.simpleMessage("Резюме"),
         "saveChanges": MessageLookupByLibrary.simpleMessage("Зберегти зміни"),
@@ -242,6 +265,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "signUp": MessageLookupByLibrary.simpleMessage("Реєстрація"),
         "signUpWith":
             MessageLookupByLibrary.simpleMessage("Зареєструйтесь через"),
+        "specialOffers":
+            MessageLookupByLibrary.simpleMessage("Спеціальні пропозиції"),
+        "statistics": MessageLookupByLibrary.simpleMessage("Статистика"),
         "stories": MessageLookupByLibrary.simpleMessage("Історії"),
         "storyAddSubtitle": MessageLookupByLibrary.simpleMessage(
             "Поділіться своєю історією і ми опублікуємо її на нашому веб сайті. Всі історії проходять модерацію і будуть опубліковані після перевірки."),
@@ -257,7 +283,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "thisServiceForVeterans":
             MessageLookupByLibrary.simpleMessage("ЦЕЙ СЕРВІС ДЛЯ ВЕТЕРАНІВ"),
         "thisServiceForVeteransSubtitle": MessageLookupByLibrary.simpleMessage(
-            "Тут ти знайдеш корисну інформацію, пільги, знижки а також можеш поділитись своєю іторією"),
+            "Тут ти знайдеш корисну інформацію, пільги, знижки а також можеш поділитись своєю історією"),
         "toDiscount": MessageLookupByLibrary.simpleMessage("До знижок"),
         "toGetItYouNeed":
             MessageLookupByLibrary.simpleMessage("Щоб отримати потрібно:"),

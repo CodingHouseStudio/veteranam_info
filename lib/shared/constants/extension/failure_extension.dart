@@ -1,37 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
-
-extension DiscountModelExtensions on List<DiscountModel> {
-  List<String> overallTags(BuildContext context) {
-    final allTags = <String>[];
-    for (final item in this) {
-      allTags.addAll(
-        context.read<AuthenticationBloc>().state.userSetting.locale ==
-                Language.english
-            ? item.category
-            : item.categoryUA,
-      );
-    }
-    return allTags.toSet().toList();
-  }
-}
-
-extension InformationModelExtensions on List<InformationModel> {
-  List<String> overallTags(BuildContext context) {
-    final allTags = <String>[];
-    for (final item in this) {
-      allTags.addAll(
-        context.read<AuthenticationBloc>().state.userSetting.locale ==
-                Language.english
-            ? item.category
-            : item.categoryUA,
-      );
-    }
-    return allTags.toSet().toList();
-  }
-}
 
 extension DiscountFailureValue on DiscountFailure {
   String value(BuildContext context) {
@@ -134,6 +103,19 @@ extension WorkFailureValue on WorkFailure {
     switch (this) {
       case WorkFailure.error:
         return context.l10n.error;
+    }
+  }
+}
+
+extension MyDiscountFailureValue on MyDiscountFailure {
+  String value(BuildContext context) {
+    switch (this) {
+      case MyDiscountFailure.error:
+        return context.l10n.error;
+      case MyDiscountFailure.get:
+        return context.l10n.getFailure;
+      case MyDiscountFailure.network:
+        return context.l10n.networkFailure;
     }
   }
 }

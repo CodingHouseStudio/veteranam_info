@@ -28,17 +28,23 @@ void main() {
         isFalse,
       );
     });
+    final fullJson = {
+      UserModelJsonField.id: KTestText.user.id,
+      UserModelJsonField.email: KTestText.user.email,
+      UserModelJsonField.name: KTestText.user.name,
+      UserModelJsonField.photo: KTestText.user.photo,
+      UserModelJsonField.phoneNumber: KTestText.user.phoneNumber,
+    };
+    final nullableJson = {
+      UserModelJsonField.id: KTestText.user.id,
+      UserModelJsonField.email: null,
+      UserModelJsonField.name: null,
+      UserModelJsonField.photo: null,
+      UserModelJsonField.phoneNumber: null,
+    };
     group('${KGroupText.modelJson} ', () {
-      test('${KGroupText.shouldBe} ', () {
-        final json = {
-          UserModelJsonField.id: KTestText.user.id,
-          UserModelJsonField.email: KTestText.user.email,
-          UserModelJsonField.name: KTestText.user.name,
-          UserModelJsonField.photo: KTestText.user.photo,
-          UserModelJsonField.phoneNumber: KTestText.user.phoneNumber,
-        };
-
-        final user = User.fromJson(json);
+      test('${KGroupText.full} ', () {
+        final user = User.fromJson(fullJson);
 
         expect(user.id, KTestText.user.id);
         expect(user.email, KTestText.user.email);
@@ -46,12 +52,8 @@ void main() {
         expect(user.phoneNumber, KTestText.user.phoneNumber);
         expect(user.photo, KTestText.user.photo);
       });
-      test('${KGroupText.shouldBe} ', () {
-        final json = {
-          UserModelJsonField.id: KTestText.user.id,
-        };
-
-        final user = User.fromJson(json);
+      test('${KGroupText.nullable} ', () {
+        final user = User.fromJson(nullableJson);
 
         expect(user.id, KTestText.user.id);
         expect(user.email, isNull);
@@ -60,7 +62,7 @@ void main() {
         expect(user.photo, isNull);
       });
 
-      test('${KGroupText.shouldNotBe} ', () {
+      test('${KGroupText.failure} ', () {
         final json = {
           // id is missing
           UserModelJsonField.email: KTestText.user.email,
@@ -76,32 +78,16 @@ void main() {
       });
     });
     group('${KGroupText.jsonModel} ', () {
-      test('${KGroupText.shouldBe} ', () {
-        final json = {
-          UserModelJsonField.id: KTestText.user.id,
-          UserModelJsonField.email: KTestText.user.email,
-          UserModelJsonField.name: KTestText.user.name,
-          UserModelJsonField.photo: KTestText.user.photo,
-          UserModelJsonField.phoneNumber: KTestText.user.phoneNumber,
-        };
-
+      test('${KGroupText.full} ', () {
         final userModelJson = KTestText.user.toJson();
 
-        expect(userModelJson, json);
+        expect(userModelJson, fullJson);
       });
 
-      test('${KGroupText.shouldBe} ', () {
-        final json = {
-          UserModelJsonField.id: KTestText.user.id,
-          UserModelJsonField.email: null,
-          UserModelJsonField.name: null,
-          UserModelJsonField.photo: null,
-          UserModelJsonField.phoneNumber: null,
-        };
-
+      test('${KGroupText.nullable} ', () {
         final userModelJson = User(id: KTestText.user.id).toJson();
 
-        expect(userModelJson, json);
+        expect(userModelJson, nullableJson);
       });
     });
   });

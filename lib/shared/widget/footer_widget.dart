@@ -110,6 +110,7 @@ abstract class FooterWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Expanded(
+                    flex: 2,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: _sections(isDesk: isDesk, context: context),
@@ -117,6 +118,7 @@ abstract class FooterWidget {
                   ),
                   if (Config.isDevelopment)
                     Expanded(
+                      flex: 2,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children:
@@ -125,6 +127,7 @@ abstract class FooterWidget {
                     )
                   else
                     Expanded(
+                      flex: 3,
                       child: Column(
                         children: _contact(isDesk: isDesk, context: context),
                       ),
@@ -209,13 +212,13 @@ abstract class FooterWidget {
           text: context.l10n.discounts,
           onPressed: () => context.goNamed(KRoute.discounts.name),
         ),
-        if (isDesk) KSizedBox.kHeightSizedBox8 else KSizedBox.kHeightSizedBox12,
+        if (isDesk) KSizedBox.kHeightSizedBox8 else KSizedBox.kHeightSizedBox4,
         _button(
           key: KWidgetkeys.widget.footer.informationButton,
           text: context.l10n.information,
           onPressed: () => context.goNamed(KRoute.information.name),
         ),
-        if (isDesk) KSizedBox.kHeightSizedBox8 else KSizedBox.kHeightSizedBox12,
+        if (isDesk) KSizedBox.kHeightSizedBox8 else KSizedBox.kHeightSizedBox4,
         _button(
           key: KWidgetkeys.widget.footer.investorsButton,
           text: context.l10n.investors,
@@ -225,7 +228,7 @@ abstract class FooterWidget {
           if (isDesk)
             KSizedBox.kHeightSizedBox8
           else
-            KSizedBox.kHeightSizedBox12,
+            KSizedBox.kHeightSizedBox4,
           _button(
             key: KWidgetkeys.widget.footer.workButton,
             text: context.l10n.work,
@@ -234,7 +237,7 @@ abstract class FooterWidget {
           if (isDesk)
             KSizedBox.kHeightSizedBox8
           else
-            KSizedBox.kHeightSizedBox12,
+            KSizedBox.kHeightSizedBox4,
           _button(
             key: KWidgetkeys.widget.footer.storyButton,
             text: context.l10n.stories,
@@ -272,7 +275,7 @@ abstract class FooterWidget {
               ? context.goNamed(KRoute.profile.name)
               : context.goNamed(KRoute.login.name),
         ),
-        if (isDesk) KSizedBox.kHeightSizedBox8 else KSizedBox.kHeightSizedBox12,
+        if (isDesk) KSizedBox.kHeightSizedBox8 else KSizedBox.kHeightSizedBox4,
         _button(
           key: KWidgetkeys.widget.footer.consultationOnlineButton,
           text: context.l10n.consultationOnline,

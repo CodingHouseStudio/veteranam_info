@@ -27,12 +27,13 @@ part 'screen/story_add.dart';
 part 'screen/under_construction.dart';
 part 'screen/my_story.dart';
 part 'screen/feedback.dart';
+part 'screen/my_discounts.dart';
 // part 'screen/contact.dart';
 
 part 'widget/widget.dart';
 part 'widget/question.dart';
 part 'widget/nawbar.dart';
-part 'widget/filter.dart';
+// part 'widget/filter.dart';
 part 'widget/drop_list_field.dart';
 part 'widget/footer.dart';
 part 'widget/message_field.dart';
@@ -65,6 +66,7 @@ part 'widget/check_point_single.dart';
 part 'widget/dialogs.dart';
 part 'widget/button_additional.dart';
 part 'widget/filter_chip.dart';
+part 'widget/statistic_box.dart';
 
 abstract class KWidgetkeys {
   static _ScreenKeys get screen => _ScreenKeys();
