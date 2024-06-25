@@ -12,6 +12,7 @@ class _KIcon extends Icon {
     super.fill,
     // ignore: unused_element
     super.size = KSize.kIconSize,
+    super.color = AppColors.materialThemeKeyColorsSecondary,
   });
 }
 
@@ -104,4 +105,8 @@ abstract class KIcon {
   static const _KIcon meil = _KIcon(Symbols.mail);
   static const _KIcon close = _KIcon(Symbols.close);
   static const _KIcon tune = _KIcon(Symbols.tune);
+  static const _KIcon brightnessAlert = _KIcon(
+    Symbols.brightness_alert,
+    color: AppColors.materialThemeRefErrorError50,
+  );
 }

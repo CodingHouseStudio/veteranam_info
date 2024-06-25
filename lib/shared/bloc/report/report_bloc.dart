@@ -1,0 +1,123 @@
+import 'package:bloc/bloc.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:injectable/injectable.dart';
+import 'package:kozak/shared/shared.dart';
+
+part 'report_event.dart';
+part 'report_state.dart';
+part 'report_bloc.freezed.dart';
+
+@Injectable()
+class ReportBloc extends Bloc<ReportEvent, ReportState> {
+  ReportBloc({
+    required IReportRepository reportRepository,
+    required IAppAuthenticationRepository appAuthenticationRepository,
+  })  : _reportRepository = reportRepository,
+        _appAuthenticationRepository = appAuthenticationRepository,
+        super(
+          const _Initial(
+            reasonComplaint: null,
+            email: null,
+            message: null,
+            formState: ReportEnum.initial,
+            failure: null,
+          ),
+        ) {
+    on<_EmailUpdated>(_onEmailUpdated);
+    on<_MessageUpdated>(_onMessageUpdated);
+    on<_ReasonComplaintUpdated>(_onReasonComplaintUpdated);
+    on<_Send>(_onSend);
+  }
+  final IReportRepository _reportRepository;
+  final IAppAuthenticationRepository _appAuthenticationRepository;
+
+  void _onEmailUpdated(
+    _EmailUpdated event,
+    Emitter<ReportState> emit,
+  ) {
+    final emailFieldModel = EmailFieldModel.dirty(event.email);
+    emit(
+      state.copyWith(
+        email: emailFieldModel,
+        formState: ReportEnum.nextInProgress,
+        failure: null,
+      ),
+    );
+  }
+
+  void _onMessageUpdated(
+    _MessageUpdated event,
+    Emitter<ReportState> emit,
+  ) {
+    final messageFieldModel = MessageFieldModel.dirty(event.message);
+    emit(
+      state.copyWith(
+        message: messageFieldModel,
+        formState: ReportEnum.nextInProgress,
+        failure: null,
+      ),
+    );
+  }
+
+  void _onReasonComplaintUpdated(
+    _ReasonComplaintUpdated event,
+    Emitter<ReportState> emit,
+  ) {
+    emit(
+      state.copyWith(
+        reasonComplaint: event.reasonComplaint,
+        formState: ReportEnum.inProgress,
+        failure: null,
+      ),
+    );
+  }
+
+  Future<void> _onSend(
+    _Send event,
+    Emitter<ReportState> emit,
+  ) async {
+    if (state.formState == ReportEnum.inProgress ||
+        state.reasonComplaint == null) {
+      if (state.reasonComplaint != null) {
+        emit(state.copyWith(formState: ReportEnum.next, failure: null));
+      } else {
+        emit(state.copyWith(formState: ReportEnum.invalidData, failure: null));
+      }
+      return;
+    }
+    if (((state.email != null && state.email!.isValid) ||
+            !_appAuthenticationRepository.isAnonymously()) &&
+        ((state.message != null && state.message!.isValid) ||
+            state.reasonComplaint != ReasonComplaint.other)) {
+      final resault = await _reportRepository.sendReport(
+        ReportModel(
+          id: ExtendedDateTime.id,
+          reasonComplaint: state.reasonComplaint!,
+          email: state.email?.value ??
+              _appAuthenticationRepository.currentUser.email!,
+          message: state.message?.value,
+          date: ExtendedDateTime.current,
+          card: CardEnum.funds,
+        ),
+      );
+      resault.fold(
+        (l) => emit(
+          state.copyWith(
+            formState: ReportEnum.initial,
+            failure: l._toReport(),
+          ),
+        ),
+        (r) => emit(
+          state.copyWith(
+            failure: null,
+            formState: ReportEnum.success,
+          ),
+        ),
+      );
+    } else {
+      emit(
+        state.copyWith(formState: ReportEnum.nextInvalidData, failure: null),
+      );
+    }
+  }
+}
