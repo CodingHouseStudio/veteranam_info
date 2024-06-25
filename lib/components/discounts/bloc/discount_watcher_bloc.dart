@@ -91,6 +91,8 @@ class DiscountWatcherBloc
   ) {
     if (state.itemsLoaded.checkLoadingPosible(state.discountModelItems)) return;
     emit(state.copyWith(loadingStatus: LoadingStatus.loading));
+    if (state.itemsLoaded.checkLoadingPosible(state.discountModelItems)) return;
+    emit(state.copyWith(loadingStatus: LoadingStatus.loading));
     final filterItems = _filter(
       categoryIndex: state.filtersCategoriesIndex,
       itemsLoaded: state.itemsLoaded + KDimensions.loadItems,
@@ -185,7 +187,6 @@ class DiscountWatcherBloc
           filtersIndex: categoryIndex,
           itemsLoaded: null,
           getFilter: (item) => item.category,
-          fullList: items,
         )
         .loadingFilter(
           filtersIndex: locationIndex?.where((element) => element > 1).toList(),

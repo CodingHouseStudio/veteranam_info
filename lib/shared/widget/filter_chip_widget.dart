@@ -71,8 +71,7 @@ class FiltersChipWidget extends StatelessWidget {
                 key: KWidgetkeys.widget.filterChip.chips,
                 filter: i != -1
                     ? filtersItems.elementAt(i)
-                    : FilterItem(context.l10n.all)
-                  ..number = fullLenght,
+                    : (FilterItem(context.l10n.all)..number = fullLenght),
                 onSelected: (isSelected) => onSelected(
                   i,
                 ),
