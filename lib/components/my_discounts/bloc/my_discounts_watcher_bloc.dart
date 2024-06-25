@@ -42,7 +42,7 @@ class MyDiscountsWatcherBloc
     result.fold(
       (l) => emit(
         state.copyWith(
-          failure: l.toMyDiscount(),
+          failure: l._toMyDiscount(),
           loadingStatus: LoadingStatus.error,
         ),
       ),
@@ -65,7 +65,7 @@ class MyDiscountsWatcherBloc
     deleteResult.fold(
       (l) => emit(
         state.copyWith(
-          failure: l.toMyDiscount(),
+          failure: l._toMyDiscount(),
           loadingStatus: LoadingStatus.error,
         ),
       ),

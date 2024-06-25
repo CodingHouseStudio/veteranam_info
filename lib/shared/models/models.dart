@@ -7,6 +7,7 @@ export 'funds_model.dart';
 export 'image_model.dart';
 export 'information_model.dart';
 export 'question_model.dart';
+export 'report_model.dart';
 export 'story_model.dart';
 export 'tag_model.dart';
 export 'user_model.dart';

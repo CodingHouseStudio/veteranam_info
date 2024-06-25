@@ -39,4 +39,5 @@ class _WidgetKeys {
   final filterChip = _FilterChipKeys();
   final buttonAdditional = _ButtonAdditional();
   final statisticBox = _StatisticBoxKeys();
+  final reportDialog = _ReportDialogKeys();
 }

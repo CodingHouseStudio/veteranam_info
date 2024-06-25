@@ -2040,6 +2040,96 @@ class AppLocalizations {
     );
   }
 
+  /// `Complaint`
+  String get complaint {
+    return Intl.message(
+      'Complaint',
+      name: 'complaint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Report a publication`
+  String get reportPublication {
+    return Intl.message(
+      'Report a publication',
+      name: 'reportPublication',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Specify the reason for the complaint:`
+  String get specifyReasonForComplaint {
+    return Intl.message(
+      'Specify the reason for the complaint:',
+      name: 'specifyReasonForComplaint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Fraud or spam;`
+  String get fraudOrSpam {
+    return Intl.message(
+      'Fraud or spam;',
+      name: 'fraudOrSpam',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Fake news or disinformation;`
+  String get fakeNewsOrDisinformation {
+    return Intl.message(
+      'Fake news or disinformation;',
+      name: 'fakeNewsOrDisinformation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Offensive or hateful content;`
+  String get offensiveOrHatefulContent {
+    return Intl.message(
+      'Offensive or hateful content;',
+      name: 'offensiveOrHatefulContent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Other (specify)`
+  String get other {
+    return Intl.message(
+      'Other (specify)',
+      name: 'other',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add a comment:`
+  String get addComment {
+    return Intl.message(
+      'Add a comment:',
+      name: 'addComment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please select one of the following answers`
+  String get checkPointError {
+    return Intl.message(
+      'Please select one of the following answers',
+      name: 'checkPointError',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `We're sorry, there was an unforeseen error.`
   String get error {
     return Intl.message(
