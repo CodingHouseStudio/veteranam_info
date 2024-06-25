@@ -26,7 +26,7 @@ class CardTextDetailEvaluateWidget extends StatefulWidget {
   final ButtonStyle? buttonStyle;
   final Widget titleWidget;
   final bool titleTopMob;
-  final String? image;
+  final ImageModel? image;
   final Widget? bottom;
   final Widget? titleDate;
   final bool isDesk;
