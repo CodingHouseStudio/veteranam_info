@@ -16,8 +16,6 @@ class InformationModel with _$InformationModel {
     required String topicUA,
     required String status,
     required DateTime fetchDate,
-    String? link,
-    String? directLink,
     @ImageConverter() List<ImageModel>? image,
   }) = _InformationModel;
 

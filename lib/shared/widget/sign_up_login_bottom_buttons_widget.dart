@@ -8,8 +8,10 @@ class SignUpLoginBottomButtonsWidget extends StatelessWidget {
     required this.title,
     super.key,
   });
+
   final bool isDesk;
   final String title;
+
   @override
   Widget build(BuildContext context) {
     if (isDesk) {
