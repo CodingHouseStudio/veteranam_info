@@ -32,7 +32,7 @@ class DonateCardWidget extends StatelessWidget {
             if (fundModel.image != null)
               ImageWidget(
                 key: KWidgetkeys.widget.donateCard.image,
-                imageUrl: fundModel.image.firstImage!,
+                imageUrl: fundModel.image!.downloadURL,
                 fit: BoxFit.fill,
               ),
             Padding(

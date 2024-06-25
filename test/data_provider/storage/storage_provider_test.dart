@@ -29,7 +29,7 @@ void main() {
             StoragePath.getImagePath(
               collenction: FirebaseCollectionName.stroies,
               modelId: KTestText.storyModelItems.last.id,
-              imageName: KTestText.storyModelItems.last.image!.first.name,
+              imageName: KTestText.storyModelItems.last.image!.name,
             ),
           ),
         ).thenAnswer((realInvocation) => mockReference);
@@ -53,7 +53,7 @@ void main() {
           mockReference.getDownloadURL(),
         ).thenAnswer(
           (realInvocation) async =>
-              KTestText.storyModelItems.last.image.firstImage!,
+              KTestText.storyModelItems.last.image!.downloadURL,
         );
         storageService = StorageService();
       });
@@ -89,7 +89,7 @@ void main() {
 
       test('save empty story image', () async {
         await storageService.saveStoryImage(
-          imageModel: KTestText.storyModelItems.last.image!.first.copyWith(
+          imageModel: KTestText.storyModelItems.last.image!.copyWith(
             ref: null,
           ),
           storyId: KTestText.storyModelItems.last.id,
@@ -99,13 +99,13 @@ void main() {
           StoragePath.getImagePath(
             collenction: FirebaseCollectionName.stroies,
             modelId: KTestText.storyModelItems.last.id,
-            imageName: KTestText.storyModelItems.last.image!.first.name,
+            imageName: KTestText.storyModelItems.last.image!.name,
           ),
         );
       });
       test('save story image', () async {
         await storageService.saveStoryImage(
-          imageModel: KTestText.storyModelItems.last.image!.first,
+          imageModel: KTestText.storyModelItems.last.image!,
           storyId: KTestText.storyModelItems.last.id,
         );
 
@@ -113,7 +113,7 @@ void main() {
           StoragePath.getImagePath(
             collenction: FirebaseCollectionName.stroies,
             modelId: KTestText.storyModelItems.last.id,
-            imageName: KTestText.storyModelItems.last.image!.first.name,
+            imageName: KTestText.storyModelItems.last.image!.name,
           ),
         );
       });
