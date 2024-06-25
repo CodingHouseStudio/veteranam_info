@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     branches: [ main ]
 concurrency:
-  group: $-$
+  group: prod-$
   cancel-in-progress: true
 
 permissions:
