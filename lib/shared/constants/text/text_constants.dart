@@ -161,9 +161,7 @@ abstract class KMockText {
     topic: 'MEDICAL BENEFITS',
     topicUA: 'МЕДИЧНІ ПІЛЬГИ',
     status: 'Healthy',
-    link: '',
     fetchDate: DateTime(2024, 06, 07),
-    directLink: '',
   );
   static const fundModel = FundModel(
     id: '',
