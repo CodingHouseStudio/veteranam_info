@@ -72,7 +72,7 @@ class NewsCardWidget extends StatelessWidget {
           }).toList(),
         ),
       ),
-      image: informationItem.image.firstImage,
+      image: informationItem.image,
       text: informationItem.news,
       buttonText: [
         context.l10n.more,

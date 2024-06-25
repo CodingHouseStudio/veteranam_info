@@ -2,6 +2,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:kozak/shared/shared.dart';
 
 part 'information_model.freezed.dart';
+
 part 'information_model.g.dart';
 
 @freezed
@@ -34,6 +35,4 @@ abstract class InformationModelJsonField {
   static const topicUA = 'topicUA';
   static const status = 'status';
   static const image = 'image';
-  static const link = 'link';
-  static const directLink = 'directLink';
 }
