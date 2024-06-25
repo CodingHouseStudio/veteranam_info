@@ -347,4 +347,5 @@ abstract class KScreenBlocName {
   static const filter = 'Filter';
   static const scroll = 'scroll';
   static const image = 'image';
+  static const casheClient = 'cashe client';
 }
