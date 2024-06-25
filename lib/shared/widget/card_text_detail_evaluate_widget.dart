@@ -100,14 +100,17 @@ class _CardTextDetailEvaluateWidgetState
                             evaluation = EvaluationEnum.none;
                           }
                         }),
-                        background: AppColors.materialThemeKeyColorsNeutral,
+                        background: evaluation != EvaluationEnum.like
+                            ? AppColors.materialThemeKeyColorsNeutral
+                            : AppColors.materialThemeBlack,
                         padding: KPadding.kPaddingSize12,
                         icon: evaluation == EvaluationEnum.like
-                            ? KImage.activeLike.copyWith(
+                            ? KIcon.activeLike.copyWith(
+                                color: AppColors.materialThemeKeyColorsPrimary,
                                 key: KWidgetkeys.widget.cardTextDetailEvaluate
                                     .iconActiveLike,
                               )
-                            : KImage.like.copyWith(
+                            : KIcon.like.copyWith(
                                 key: KWidgetkeys
                                     .widget.cardTextDetailEvaluate.iconLike,
                               ),

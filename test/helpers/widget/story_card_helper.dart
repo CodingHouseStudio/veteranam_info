@@ -14,6 +14,8 @@ Future<void> storyCardHelper({
     findsWidgets,
   );
 
+  // expect(find.byKey(KWidgetkeys.widget.storyCard.trashIcon), findsWidgets);
+
   expect(
     find.byKey(KWidgetkeys.widget.storyCard.userName),
     findsWidgets,
