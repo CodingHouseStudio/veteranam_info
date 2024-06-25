@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:go_router/go_router.dart';
 import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
 
@@ -153,7 +154,7 @@ class DiscountBodyWidget extends StatelessWidget {
   ) =>
       TextButton(
         key: KWidgetkeys.screen.discounts.addDiscountButton,
-        onPressed: () => context.goNamedWithScroll(KRoute.myDiscounts.name),
+        onPressed: () => context.goNamed(KRoute.myDiscounts.name),
         style: KButtonStyles.whiteButtonStyle,
         child: Text(context.l10n.offerDiscount),
       );

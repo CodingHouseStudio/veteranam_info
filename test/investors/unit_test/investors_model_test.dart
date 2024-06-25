@@ -8,27 +8,40 @@ void main() {
 
   setUpAll(setUpGlobal);
   group('${KScreenBlocName.investors} ${KGroupText.model} ', () {
+    final fullJson = {
+      FundModelJsonField.id: KTestText.fundItems.last.id,
+      FundModelJsonField.title: KTestText.fundItems.last.title,
+      FundModelJsonField.description: KTestText.fundItems.last.description,
+      FundModelJsonField.link: KTestText.fundItems.last.link,
+      FundModelJsonField.image: KTestText.fundItems.last.image,
+      FundModelJsonField.comments: KTestText.fundItems.last.comments,
+      FundModelJsonField.domain: KTestText.fundItems.last.domain,
+      FundModelJsonField.email: KTestText.fundItems.last.email,
+      FundModelJsonField.phoneNumber: KTestText.fundItems.last.phoneNumber,
+      FundModelJsonField.projectsLink: KTestText.fundItems.last.projectsLink,
+      FundModelJsonField.registered: KTestText.fundItems.last.registered,
+      FundModelJsonField.size: KTestText.fundItems.last.size,
+      FundModelJsonField.teamPartnersLink:
+          KTestText.fundItems.last.teamPartnersLink,
+    };
+    final nullableJson = {
+      FundModelJsonField.id: KTestText.fundItems.last.id,
+      FundModelJsonField.title: KTestText.fundItems.last.title,
+      FundModelJsonField.description: KTestText.fundItems.last.description,
+      FundModelJsonField.link: KTestText.fundItems.last.link,
+      FundModelJsonField.image: null,
+      FundModelJsonField.comments: null,
+      FundModelJsonField.domain: KTestText.fundItems.last.domain,
+      FundModelJsonField.email: null,
+      FundModelJsonField.phoneNumber: null,
+      FundModelJsonField.projectsLink: null,
+      FundModelJsonField.registered: null,
+      FundModelJsonField.size: null,
+      FundModelJsonField.teamPartnersLink: null,
+    };
     group('${KGroupText.modelJson} ', () {
-      test('${KGroupText.shouldBe} ', () {
-        final json = {
-          FundModelJsonField.id: KTestText.fundItems.last.id,
-          FundModelJsonField.title: KTestText.fundItems.last.title,
-          FundModelJsonField.description: KTestText.fundItems.last.description,
-          FundModelJsonField.link: KTestText.fundItems.last.link,
-          FundModelJsonField.image: KTestText.fundItems.last.image,
-          FundModelJsonField.comments: KTestText.fundItems.last.comments,
-          FundModelJsonField.domain: KTestText.fundItems.last.domain,
-          FundModelJsonField.email: KTestText.fundItems.last.email,
-          FundModelJsonField.phoneNumber: KTestText.fundItems.last.phoneNumber,
-          FundModelJsonField.projectsLink:
-              KTestText.fundItems.last.projectsLink,
-          FundModelJsonField.registered: KTestText.fundItems.last.registered,
-          FundModelJsonField.size: KTestText.fundItems.last.size,
-          FundModelJsonField.teamPartnersLink:
-              KTestText.fundItems.last.teamPartnersLink,
-        };
-
-        final fundModel = FundModel.fromJson(json);
+      test('${KGroupText.full} ', () {
+        final fundModel = FundModel.fromJson(fullJson);
 
         expect(fundModel.id, KTestText.fundItems.last.id);
         expect(
@@ -81,16 +94,8 @@ void main() {
         );
       });
 
-      test('${KGroupText.shouldBe} ', () {
-        final json = {
-          FundModelJsonField.id: KTestText.fundItems.last.id,
-          FundModelJsonField.title: KTestText.fundItems.last.title,
-          FundModelJsonField.description: KTestText.fundItems.last.description,
-          FundModelJsonField.link: KTestText.fundItems.last.link,
-          FundModelJsonField.domain: KTestText.fundItems.last.domain,
-        };
-
-        final fundModel = FundModel.fromJson(json);
+      test('${KGroupText.nullable} ', () {
+        final fundModel = FundModel.fromJson(nullableJson);
 
         expect(fundModel.id, KTestText.fundItems.last.id);
         expect(
@@ -143,7 +148,7 @@ void main() {
         );
       });
 
-      test('${KGroupText.shouldNotBe} ', () {
+      test('${KGroupText.failure} ', () {
         final json = {
           FundModelJsonField.id: KTestText.fundItems.last.id,
           // title is missing
@@ -169,47 +174,13 @@ void main() {
       });
     });
     group('${KGroupText.jsonModel} ', () {
-      test('${KGroupText.shouldBe} ', () {
-        final json = {
-          FundModelJsonField.id: KTestText.fundItems.last.id,
-          FundModelJsonField.title: KTestText.fundItems.last.title,
-          FundModelJsonField.description: KTestText.fundItems.last.description,
-          FundModelJsonField.link: KTestText.fundItems.last.link,
-          FundModelJsonField.image: KTestText.fundItems.last.image,
-          FundModelJsonField.comments: KTestText.fundItems.last.comments,
-          FundModelJsonField.domain: KTestText.fundItems.last.domain,
-          FundModelJsonField.email: KTestText.fundItems.last.email,
-          FundModelJsonField.phoneNumber: KTestText.fundItems.last.phoneNumber,
-          FundModelJsonField.projectsLink:
-              KTestText.fundItems.last.projectsLink,
-          FundModelJsonField.registered: KTestText.fundItems.last.registered,
-          FundModelJsonField.size: KTestText.fundItems.last.size,
-          FundModelJsonField.teamPartnersLink:
-              KTestText.fundItems.last.teamPartnersLink,
-        };
-
+      test('${KGroupText.full} ', () {
         final fundModelJson = KTestText.fundItems.last.toJson();
 
-        expect(fundModelJson, json);
+        expect(fundModelJson, fullJson);
       });
 
-      test('${KGroupText.shouldBe} ', () {
-        final json = {
-          FundModelJsonField.id: KTestText.fundItems.last.id,
-          FundModelJsonField.title: KTestText.fundItems.last.title,
-          FundModelJsonField.description: KTestText.fundItems.last.description,
-          FundModelJsonField.link: KTestText.fundItems.last.link,
-          FundModelJsonField.image: null,
-          FundModelJsonField.comments: null,
-          FundModelJsonField.domain: KTestText.fundItems.last.domain,
-          FundModelJsonField.email: null,
-          FundModelJsonField.phoneNumber: null,
-          FundModelJsonField.projectsLink: null,
-          FundModelJsonField.registered: null,
-          FundModelJsonField.size: null,
-          FundModelJsonField.teamPartnersLink: null,
-        };
-
+      test('${KGroupText.nullable} ', () {
         final fundModelJson = FundModel(
           id: KTestText.fundItems.last.id,
           title: KTestText.fundItems.last.title,
@@ -218,7 +189,7 @@ void main() {
           domain: KTestText.fundItems.last.domain,
         ).toJson();
 
-        expect(fundModelJson, json);
+        expect(fundModelJson, nullableJson);
       });
     });
   });
