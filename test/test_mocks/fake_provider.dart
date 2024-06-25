@@ -1,7 +1,5 @@
-import 'package:injectable/injectable.dart';
-
 /// COMMENT: Class for caching data in tests
-@Singleton()
+// @Singleton()
 class FakeClient {
   FakeClient();
 
