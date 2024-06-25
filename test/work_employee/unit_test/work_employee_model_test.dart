@@ -9,24 +9,37 @@ void main() {
 
   setUpAll(setUpGlobal);
   group('${KScreenBlocName.workEmployee} ${KGroupText.model} ', () {
+    final fullJson = {
+      WorkModelJsonField.id: KTestText.workModelItems.first.id,
+      WorkModelJsonField.title: KTestText.workModelItems.first.title,
+      WorkModelJsonField.price: KTestText.workModelItems.first.price,
+      WorkModelJsonField.employerContact:
+          KTestText.workModelItems.first.employerContact,
+      WorkModelJsonField.companyName:
+          KTestText.workModelItems.first.companyName,
+      WorkModelJsonField.description:
+          KTestText.workModelItems.first.description,
+      WorkModelJsonField.category: KTestText.workModelItems.first.category,
+      WorkModelJsonField.city: KTestText.workModelItems.first.city,
+      WorkModelJsonField.remote: KTestText.workModelItems.first.remote,
+    };
+    final nullableJson = {
+      WorkModelJsonField.id: KTestText.workModelItems.first.id,
+      WorkModelJsonField.title: KTestText.workModelItems.first.title,
+      WorkModelJsonField.price: KTestText.workModelItems.first.price,
+      WorkModelJsonField.employerContact:
+          KTestText.workModelItems.first.employerContact,
+      WorkModelJsonField.companyName:
+          KTestText.workModelItems.first.companyName,
+      WorkModelJsonField.description:
+          KTestText.workModelItems.first.description,
+      WorkModelJsonField.category: null,
+      WorkModelJsonField.city: null,
+      WorkModelJsonField.remote: KTestText.workModelItems.first.remote,
+    };
     group('${KGroupText.modelJson} ', () {
-      test('${KGroupText.shouldBe} ', () {
-        final json = {
-          WorkModelJsonField.id: KTestText.workModelItems.first.id,
-          WorkModelJsonField.title: KTestText.workModelItems.first.title,
-          WorkModelJsonField.price: KTestText.workModelItems.first.price,
-          WorkModelJsonField.employerContact:
-              KTestText.workModelItems.first.employerContact,
-          WorkModelJsonField.companyName:
-              KTestText.workModelItems.first.companyName,
-          WorkModelJsonField.description:
-              KTestText.workModelItems.first.description,
-          WorkModelJsonField.category: KTestText.workModelItems.first.category,
-          WorkModelJsonField.city: KTestText.workModelItems.first.city,
-          WorkModelJsonField.remote: KTestText.workModelItems.first.remote,
-        };
-
-        final workModel = WorkModel.fromJson(json);
+      test('${KGroupText.full} ', () {
+        final workModel = WorkModel.fromJson(fullJson);
 
         expect(
           workModel.id,
@@ -66,20 +79,8 @@ void main() {
         );
       });
 
-      test('${KGroupText.shouldBe} ', () {
-        final json = {
-          WorkModelJsonField.id: KTestText.workModelItems.first.id,
-          WorkModelJsonField.title: KTestText.workModelItems.first.title,
-          WorkModelJsonField.price: KTestText.workModelItems.first.price,
-          WorkModelJsonField.employerContact:
-              KTestText.workModelItems.first.employerContact,
-          WorkModelJsonField.companyName:
-              KTestText.workModelItems.first.companyName,
-          WorkModelJsonField.description:
-              KTestText.workModelItems.first.description,
-        };
-
-        final workModel = WorkModel.fromJson(json);
+      test('${KGroupText.nullable} ', () {
+        final workModel = WorkModel.fromJson(nullableJson);
 
         expect(
           workModel.id,
@@ -119,7 +120,7 @@ void main() {
         );
       });
 
-      test('${KGroupText.shouldNotBe} ', () {
+      test('${KGroupText.failure} ', () {
         final json = {
           WorkModelJsonField.title: KTestText.workModelItems.first.title,
           WorkModelJsonField.price: KTestText.workModelItems.first.price,
@@ -138,48 +139,18 @@ void main() {
       });
     });
     group('${KGroupText.jsonModel} ', () {
-      test('${KGroupText.shouldBe} ', () {
-        final json = {
-          WorkModelJsonField.id: KTestText.workModelItems.first.id,
-          WorkModelJsonField.title: KTestText.workModelItems.first.title,
-          WorkModelJsonField.price: KTestText.workModelItems.first.price,
-          WorkModelJsonField.employerContact:
-              KTestText.workModelItems.first.employerContact,
-          WorkModelJsonField.companyName:
-              KTestText.workModelItems.first.companyName,
-          WorkModelJsonField.description:
-              KTestText.workModelItems.first.description,
-          WorkModelJsonField.category: KTestText.workModelItems.first.category,
-          WorkModelJsonField.city: KTestText.workModelItems.first.city,
-          WorkModelJsonField.remote: KTestText.workModelItems.first.remote,
-        };
-
+      test('${KGroupText.full} ', () {
         final workModelJson = KTestText.workModelItems.first.toJson();
 
-        expect(workModelJson, json);
+        expect(workModelJson, fullJson);
       });
 
-      test('${KGroupText.shouldBe} ', () {
-        final json = {
-          WorkModelJsonField.id: KTestText.workModelItems.first.id,
-          WorkModelJsonField.title: KTestText.workModelItems.first.title,
-          WorkModelJsonField.price: KTestText.workModelItems.first.price,
-          WorkModelJsonField.employerContact:
-              KTestText.workModelItems.first.employerContact,
-          WorkModelJsonField.companyName:
-              KTestText.workModelItems.first.companyName,
-          WorkModelJsonField.description:
-              KTestText.workModelItems.first.description,
-          WorkModelJsonField.category: null,
-          WorkModelJsonField.city: null,
-          WorkModelJsonField.remote: KTestText.workModelItems.first.remote,
-        };
-
+      test('${KGroupText.nullable} ', () {
         final workModelJson = KTestText.workModelItems.first
             .copyWith(category: null, city: null)
             .toJson();
 
-        expect(workModelJson, json);
+        expect(workModelJson, nullableJson);
       });
     });
   });
