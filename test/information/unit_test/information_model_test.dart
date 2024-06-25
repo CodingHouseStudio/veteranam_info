@@ -32,10 +32,6 @@ void main() {
               KTestText.informationModelItems.last.topicUA,
           InformationModelJsonField.status:
               KTestText.informationModelItems.last.status,
-          InformationModelJsonField.directLink:
-              KTestText.informationModelItems.last.directLink,
-          InformationModelJsonField.link:
-              KTestText.informationModelItems.last.link,
         };
 
         final informationModel = InformationModel.fromJson(json);
@@ -80,14 +76,6 @@ void main() {
           informationModel.status,
           KTestText.informationModelItems.last.status,
         );
-        expect(
-          informationModel.directLink,
-          KTestText.informationModelItems.last.directLink,
-        );
-        expect(
-          informationModel.link,
-          KTestText.informationModelItems.last.link,
-        );
       });
 
       test('${KGroupText.shouldBe} ', () {
@@ -109,10 +97,6 @@ void main() {
               KTestText.informationModelItems.last.topicUA,
           InformationModelJsonField.status:
               KTestText.informationModelItems.last.status,
-          InformationModelJsonField.directLink:
-              KTestText.informationModelItems.last.directLink,
-          InformationModelJsonField.link:
-              KTestText.informationModelItems.last.link,
         };
 
         final informationModel = InformationModel.fromJson(json);
@@ -157,14 +141,6 @@ void main() {
           informationModel.status,
           KTestText.informationModelItems.last.status,
         );
-        expect(
-          informationModel.directLink,
-          KTestText.informationModelItems.last.directLink,
-        );
-        expect(
-          informationModel.link,
-          KTestText.informationModelItems.last.link,
-        );
       });
 
       test('${KGroupText.shouldNotBe} ', () {
@@ -188,10 +164,6 @@ void main() {
               KTestText.informationModelItems.last.topicUA,
           InformationModelJsonField.status:
               KTestText.informationModelItems.last.status,
-          InformationModelJsonField.directLink:
-              KTestText.informationModelItems.last.directLink,
-          InformationModelJsonField.link:
-              KTestText.informationModelItems.last.link,
         };
 
         expect(
@@ -223,10 +195,6 @@ void main() {
               KTestText.informationModelItems.last.topicUA,
           InformationModelJsonField.status:
               KTestText.informationModelItems.last.status,
-          InformationModelJsonField.directLink:
-              KTestText.informationModelItems.last.directLink,
-          InformationModelJsonField.link:
-              KTestText.informationModelItems.last.link,
         };
 
         final informationModelJson =
@@ -255,10 +223,6 @@ void main() {
               KTestText.informationModelItems.last.topicUA,
           InformationModelJsonField.status:
               KTestText.informationModelItems.last.status,
-          InformationModelJsonField.directLink:
-              KTestText.informationModelItems.last.directLink,
-          InformationModelJsonField.link:
-              KTestText.informationModelItems.last.link,
         };
 
         final informationModelJson =
