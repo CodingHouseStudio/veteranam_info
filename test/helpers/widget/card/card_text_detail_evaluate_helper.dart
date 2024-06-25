@@ -15,7 +15,12 @@ Future<void> cardTextDetailEvaluateHelper(
     find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconWebsite),
     findsWidgets,
   );
-
+/*
+  expect(
+    find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconActiveSmile),
+    findsNothing,
+  );
+*/
   expect(
     find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconLike),
     findsWidgets,
@@ -62,5 +67,67 @@ Future<void> cardTextDetailEvaluateHelper(
     findsNothing,
   );
 
+  /*
+ await tester.tap(
+    find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconDislike).first,
+  );
+
   await tester.pumpAndSettle();
+
+  expect(
+    find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconActiveDislike),
+    findsOneWidget,
+  );
+
+  await tester.tap(
+    find
+        .byKey(
+          KWidgetkeys.widget.cardTextDetailEvaluate.iconActiveDislike,
+        )
+        .first,
+  );
+
+  await tester.pumpAndSettle();
+
+  expect(
+    find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconDislike),
+    findsWidgets,
+  );
+
+  expect(
+    find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconActiveDislike),
+    findsNothing,
+  );
+
+  await tester.tap(
+    find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconSmile).first,
+  );
+
+  await tester.pumpAndSettle();
+
+  expect(
+    find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconActiveSmile),
+    findsOneWidget,
+  );
+
+  await tester.tap(
+    find
+        .byKey(
+          KWidgetkeys.widget.cardTextDetailEvaluate.iconActiveSmile,
+        )
+        .first,
+  );
+
+  await tester.pumpAndSettle();
+
+  expect(
+    find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconSmile),
+    findsWidgets,
+  );
+
+  expect(
+    find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconActiveSmile),
+    findsNothing,
+  );
+  */
 }
