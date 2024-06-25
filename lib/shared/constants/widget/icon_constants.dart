@@ -108,4 +108,5 @@ abstract class KIcon {
   static const _KIcon calendarClock = _KIcon(Symbols.calendar_clock);
   static const _KIcon distance = _KIcon(Symbols.distance);
   static const _KIcon captivePortal = _KIcon(Symbols.captive_portal);
+  static const _KIcon report = _KIcon(Symbols.brightness_alert);
 }

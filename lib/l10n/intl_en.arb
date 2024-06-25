@@ -222,5 +222,9 @@
   "dublicateFailure": "The user with E-mail exist.",
   "@dublicateFailure": {
     "description": "an error message when trying to register an account with the same email as an already registered account"
-  }
+  },
+  "webSite": "Web site",
+  "share": "Share",
+  "report": "Report",
+  "hideExpansion": "Hide..."
 }

@@ -2101,6 +2101,46 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `Web site`
+  String get webSite {
+    return Intl.message(
+      'Web site',
+      name: 'webSite',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Share`
+  String get share {
+    return Intl.message(
+      'Share',
+      name: 'share',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Report`
+  String get report {
+    return Intl.message(
+      'Report',
+      name: 'report',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hide...`
+  String get hideExpansion {
+    return Intl.message(
+      'Hide...',
+      name: 'hideExpansion',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

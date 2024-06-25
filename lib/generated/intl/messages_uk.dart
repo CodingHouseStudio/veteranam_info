@@ -62,7 +62,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Видалити акаунт"),
         "deleteAccountQuestion": MessageLookupByLibrary.simpleMessage(
             "Ви впевнені, що хочете видалити ваш обліковий запис?"),
-        "detail": MessageLookupByLibrary.simpleMessage("Детальніше"),
+        "detail": MessageLookupByLibrary.simpleMessage("Більше"),
         "didNotFindYourVacancy":
             MessageLookupByLibrary.simpleMessage("Не знайшли свою вакансію?"),
         "disconnect": MessageLookupByLibrary.simpleMessage("Відʼєднати"),
@@ -130,6 +130,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "helloVeteran":
             MessageLookupByLibrary.simpleMessage("Привіт, Ветеран!"),
         "hide": MessageLookupByLibrary.simpleMessage("Сховати"),
+        "hideExpansion": MessageLookupByLibrary.simpleMessage("Сховати..."),
         "homeSubtitle": MessageLookupByLibrary.simpleMessage(
             "Тут ти знайдеш корисну інформацію, пільги, знижки, а також можеш поділитися своєю історією!"),
         "howToContactYou": MessageLookupByLibrary.simpleMessage(
@@ -241,6 +242,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ми отримали Ваше повідомлення і надамо Вам відповідь найближчим часом."),
         "register": MessageLookupByLibrary.simpleMessage("Зареєструватись"),
         "remotely": MessageLookupByLibrary.simpleMessage("Віддалено"),
+        "report": MessageLookupByLibrary.simpleMessage("Скарга"),
         "resetAll": MessageLookupByLibrary.simpleMessage("Скинути все"),
         "respond": MessageLookupByLibrary.simpleMessage("Відгукнутися"),
         "resume": MessageLookupByLibrary.simpleMessage("Резюме"),
@@ -262,6 +264,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sendMessage":
             MessageLookupByLibrary.simpleMessage("Надіслати повідомлення"),
         "sendMore": MessageLookupByLibrary.simpleMessage("Надіслати ще"),
+        "share": MessageLookupByLibrary.simpleMessage("Поділитись"),
         "signUp": MessageLookupByLibrary.simpleMessage("Реєстрація"),
         "signUpWith":
             MessageLookupByLibrary.simpleMessage("Зареєструйтесь через"),
@@ -298,6 +301,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "upload": MessageLookupByLibrary.simpleMessage("Завантажити"),
         "us": MessageLookupByLibrary.simpleMessage("нам"),
         "wage": MessageLookupByLibrary.simpleMessage("Заробітна плата*"),
+        "webSite": MessageLookupByLibrary.simpleMessage("Веб сайт"),
         "whatKindOfProject":
             MessageLookupByLibrary.simpleMessage("Що це за проект?"),
         "whatYouMostInterestedIn": MessageLookupByLibrary.simpleMessage(

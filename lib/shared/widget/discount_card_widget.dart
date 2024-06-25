@@ -54,7 +54,7 @@ class _DiscountsCardWidgetDesk extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DecoratedBox(
-      decoration: KWidgetTheme.boxDecorationDiscount,
+      decoration: KWidgetTheme.boxDecorationDiscountContainer,
       child: Column(
         children: [
           Padding(
@@ -71,6 +71,7 @@ class _DiscountsCardWidgetDesk extends StatelessWidget {
                 Column(
                   children: [
                     Text(
+                      key: KWidgetkeys.widget.discountCard.discount,
                       discountItem.company ?? context.l10n.companyIsHidden,
                       style: AppTextStyle.materialThemeTitleMedium,
                       overflow: TextOverflow.clip,
@@ -83,6 +84,7 @@ class _DiscountsCardWidgetDesk extends StatelessWidget {
                         ),
                         KSizedBox.kWidthSizedBox8,
                         Text(
+                          key: KWidgetkeys.widget.discountCard.date,
                           discountItem.dateVerified.toLocalDateString(),
                           style: AppTextStyle.materialThemeLabelSmall,
                           overflow: TextOverflow.clip,
@@ -97,16 +99,14 @@ class _DiscountsCardWidgetDesk extends StatelessWidget {
                     vertical: KPadding.kPaddingSize4,
                     horizontal: KPadding.kPaddingSize8,
                   ),
-                  decoration: KWidgetTheme.boxDecorationDiscount,
+                  decoration: KWidgetTheme.boxDecorationDiscountCategory,
                   child: Row(
                     children: [
                       KIcon.check,
                       KSizedBox.kWidthSizedBox8,
-                      Expanded(
-                        child: Text(
-                          discountItem.category.first,
-                          style: AppTextStyle.materialThemeLabelLarge,
-                        ),
+                      Text(
+                        discountItem.category.first,
+                        style: AppTextStyle.materialThemeLabelLarge,
                       ),
                     ],
                   ),
@@ -114,7 +114,6 @@ class _DiscountsCardWidgetDesk extends StatelessWidget {
               ],
             ),
           ),
-          KSizedBox.kHeightSizedBox16,
           Container(
             decoration: KWidgetTheme.boxDecorationWidget,
             padding: const EdgeInsets.symmetric(
@@ -135,10 +134,26 @@ class _DiscountsCardWidgetDesk extends StatelessWidget {
                         overflow: TextOverflow.clip,
                       ),
                     ),
-                    Text(
-                      discountItem.discount.toString(),
-                      key: KWidgetkeys.widget.discountCard.discount,
-                      style: AppTextStyle.materialThemeLabelLarge,
+                    Container(
+                      decoration: KWidgetTheme.boxDecorationDiscount,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: KPadding.kPaddingSize8,
+                        vertical: KPadding.kPaddingSize4,
+                      ),
+                      child: Row(
+                        children: [
+                          const CircleAvatar(
+                            radius: KPadding.kPaddingSize4,
+                          ),
+                          KSizedBox.kWidthSizedBox8,
+                          Text(
+                            // ignore: lines_longer_than_80_chars
+                            '${context.l10n.discount} ${discountItem.discount.first}%',
+                            key: KWidgetkeys.widget.discountCard.discount,
+                            style: AppTextStyle.materialThemeLabelLarge,
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
@@ -150,7 +165,7 @@ class _DiscountsCardWidgetDesk extends StatelessWidget {
                         vertical: KPadding.kPaddingSize8,
                         horizontal: KPadding.kPaddingSize16,
                       ),
-                      decoration: KWidgetTheme.boxDecorationDiscount,
+                      decoration: KWidgetTheme.boxDecorationDiscountContainer,
                       child: Row(
                         children: [
                           KIcon.calendarClock,
@@ -164,7 +179,7 @@ class _DiscountsCardWidgetDesk extends StatelessWidget {
                     ),
                     KSizedBox.kWidthSizedBox16,
                     ExpandableCityChip(
-                      citiesList: discountItem,
+                      discountModel: discountItem,
                       isDesk: isDesk,
                     ),
                   ],
@@ -201,11 +216,7 @@ class DiscountsCardWidgetMob extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: KWidgetTheme.boxDecorationDiscount.copyWith(
-        border: Border.all(
-          color: AppColors.materialThemeKeyColorsNeutral,
-        ),
-      ),
+      decoration: KWidgetTheme.boxDecorationDiscountContainer,
       child: Column(
         children: [
           Padding(
@@ -251,49 +262,97 @@ class DiscountsCardWidgetMob extends StatelessWidget {
           ),
           Container(
             decoration: KWidgetTheme.boxDecorationWidget,
-            padding: const EdgeInsets.symmetric(
-              horizontal: KPadding.kPaddingSize16,
-              vertical: KPadding.kPaddingSize16,
-            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 KSizedBox.kHeightSizedBox16,
                 Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          child: Text(
-                            discountItem.discount.toString(),
-                            key: KWidgetkeys.widget.discountCard.discount,
-                            style: AppTextStyle.materialThemeLabelLarge,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: KPadding.kPaddingSize16,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              vertical: KPadding.kPaddingSize4,
+                              horizontal: KPadding.kPaddingSize8,
+                            ),
+                            decoration:
+                                KWidgetTheme.boxDecorationDiscountCategory,
+                            child: Row(
+                              children: [
+                                KIcon.check,
+                                KSizedBox.kWidthSizedBox8,
+                                Text(
+                                  discountItem.category.first,
+                                  style: AppTextStyle.materialThemeLabelLarge,
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
+                          Container(
+                            decoration: KWidgetTheme.boxDecorationDiscount,
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: KPadding.kPaddingSize8,
+                              vertical: KPadding.kPaddingSize4,
+                            ),
+                            child: Expanded(
+                              child: Row(
+                                children: [
+                                  const CircleAvatar(
+                                    radius: KPadding.kPaddingSize4,
+                                  ),
+                                  KSizedBox.kWidthSizedBox8,
+                                  Text(
+                                    // ignore: lines_longer_than_80_chars
+                                    '${context.l10n.discount} ${discountItem.discount.first}%',
+                                    key: KWidgetkeys
+                                        .widget.discountCard.discount,
+                                    style: AppTextStyle.materialThemeLabelLarge,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                     KSizedBox.kHeightSizedBox16,
-                    Text(
-                      discountItem.title,
-                      key: KWidgetkeys.widget.discountCard.service,
-                      style: AppTextStyle.materialThemeHeadlineSmall,
-                      overflow: TextOverflow.clip,
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        left: KPadding.kPaddingSize16,
+                      ),
+                      child: Text(
+                        discountItem.title,
+                        key: KWidgetkeys.widget.discountCard.service,
+                        style: AppTextStyle.materialThemeHeadlineSmall,
+                        overflow: TextOverflow.clip,
+                      ),
                     ),
                   ],
                 ),
                 KSizedBox.kHeightSizedBox16,
                 Padding(
-                  padding:
-                      const EdgeInsets.only(right: KPadding.kPaddingSize56),
+                  padding: const EdgeInsets.only(
+                    right: KPadding.kPaddingSize56,
+                    left: KPadding.kPaddingSize16,
+                  ),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
+                        constraints: const BoxConstraints(
+                          maxWidth: KMinMaxSize.maxWidth220,
+                        ),
                         padding: const EdgeInsets.symmetric(
                           vertical: KPadding.kPaddingSize8,
-                          horizontal: KPadding.kPaddingSize16,
+                          horizontal: KPadding.kPaddingSize8,
                         ),
-                        decoration: KWidgetTheme.boxDecorationDiscount,
+                        decoration: KWidgetTheme.boxDecorationDiscountContainer,
                         child: Row(
                           children: [
                             KIcon.calendarClock,
@@ -309,18 +368,21 @@ class DiscountsCardWidgetMob extends StatelessWidget {
                       ),
                       KSizedBox.kHeightSizedBox8,
                       ExpandableCityChip(
-                        citiesList: discountItem,
+                        discountModel: discountItem,
                         isDesk: isDesk,
                       ),
                     ],
                   ),
                 ),
                 KSizedBox.kHeightSizedBox16,
-                _cardIconListWidget(
-                  context,
-                  text: discountItem.description,
-                  isDesk: isDesk,
-                  onPressed: onPressed,
+                Padding(
+                  padding: const EdgeInsets.only(left: KPadding.kPaddingSize16),
+                  child: _cardIconListWidget(
+                    context,
+                    text: discountItem.description,
+                    isDesk: isDesk,
+                    onPressed: onPressed,
+                  ),
                 ),
                 KSizedBox.kHeightSizedBox16,
               ],
@@ -336,13 +398,30 @@ Widget _cardIconWidget(
   BuildContext context, {
   required VoidCallback? onPressed,
   required Icon icon,
+  required String label,
 }) {
-  return CircleAvatar(
-    backgroundColor: AppColors.materialThemeWhite,
-    child: IconButton(
-      onPressed: onPressed,
-      icon: icon,
-    ),
+  return Column(
+    children: [
+      Padding(
+        padding: const EdgeInsets.all(KPadding.kPaddingSize12),
+        child: IconButton(
+          style: const ButtonStyle(
+            backgroundColor: WidgetStatePropertyAll(
+              AppColors.materialThemeWhite,
+            ),
+          ),
+          onPressed: onPressed,
+          icon: icon,
+        ),
+      ),
+      Text(
+        key: KWidgetkeys.widget.discountCard.description,
+        label,
+        style: AppTextStyle.materialThemeLabelSmall.copyWith(
+          color: AppColors.materialThemeBlack,
+        ),
+      ),
+    ],
   );
 }
 
@@ -355,27 +434,34 @@ Widget _cardIconListWidget(
   return CardTextDetailWidget(
     text: text,
     maxLines: 1,
-    icon: Wrap(
-      crossAxisAlignment: WrapCrossAlignment.end,
-      children: [
-        _cardIconWidget(
-          context,
-          onPressed: null,
-          icon: KIcon.captivePortal,
-        ),
-        KSizedBox.kWidthSizedBox24,
-        _cardIconWidget(
-          context,
-          onPressed: onPressed,
-          icon: KIcon.share,
-        ),
-        KSizedBox.kWidthSizedBox24,
-        _cardIconWidget(
-          context,
-          onPressed: null,
-          icon: KIcon.safe,
-        ),
-      ],
+    icon: Expanded(
+      flex: 2,
+      child: Wrap(
+        crossAxisAlignment: WrapCrossAlignment.end,
+        children: [
+          _cardIconWidget(
+            label: context.l10n.webSite,
+            context,
+            onPressed: null,
+            icon: KIcon.captivePortal,
+          ),
+          if (isDesk) KSizedBox.kWidthSizedBox24 else KSizedBox.kWidthSizedBox8,
+          _cardIconWidget(
+            label: context.l10n.share,
+            context,
+            onPressed: onPressed,
+            icon: KIcon.share,
+          ),
+          if (isDesk) KSizedBox.kWidthSizedBox24 else KSizedBox.kWidthSizedBox8,
+          _cardIconWidget(
+            label: context.l10n.report,
+            context,
+            onPressed: null,
+            icon: KIcon.report
+                .copyWith(color: AppColors.materialThemeRefErrorError60),
+          ),
+        ],
+      ),
     ),
     isDesk: isDesk,
   );
@@ -383,12 +469,12 @@ Widget _cardIconListWidget(
 
 class ExpandableCityChip extends StatefulWidget {
   const ExpandableCityChip({
-    required this.citiesList,
+    required this.discountModel,
     required this.isDesk,
     super.key,
   });
 
-  final DiscountModel citiesList;
+  final DiscountModel discountModel;
   final bool isDesk;
 
   @override
@@ -397,6 +483,9 @@ class ExpandableCityChip extends StatefulWidget {
 
 class _ExpandableCityChipState extends State<ExpandableCityChip> {
   bool isExpanded = false;
+
+  late final moreCities =
+      'Ще ${(widget.discountModel.location ?? []).length - 1} міст...';
 
   @override
   Widget build(BuildContext context) {
@@ -407,37 +496,53 @@ class _ExpandableCityChipState extends State<ExpandableCityChip> {
         });
       },
       child: Container(
-        constraints: BoxConstraints(
-          maxWidth: widget.isDesk ? KMinMaxSize.maxWidth328 : 220,
+        constraints: const BoxConstraints(
+          maxWidth: KMinMaxSize.maxWidth328,
         ),
         padding: const EdgeInsets.symmetric(
-          vertical: KPadding.kPaddingSize8,
+          vertical: KPadding.kPaddingSize10,
           horizontal: KPadding.kPaddingSize16,
         ),
-        decoration: KWidgetTheme.boxDecorationDiscount,
-        child: Expanded(
-          child: Row(
-            children: [
-              KIcon.distance,
-              KSizedBox.kWidthSizedBox8,
-              Expanded(
-                child: Text(
-                  isExpanded
-                      ? (widget.citiesList.location ?? []).join(', ')
-                      : widget.citiesList.location?.firstOrNull ?? '',
+        decoration: KWidgetTheme.boxDecorationDiscountContainer,
+        child: Wrap(
+          children: [
+            KIcon.distance,
+            if (widget.discountModel.location?.isEmpty ?? true)
+              Text(
+                widget.discountModel.subLocation.getList(context).first,
+                style: AppTextStyle.materialThemeLabelLarge,
+              ),
+            if (widget.discountModel.location?.isNotEmpty ?? false)
+              Text(
+                widget.discountModel.location!.first +
+                    (isExpanded ? ' | ' : ''),
+                style: AppTextStyle.materialThemeLabelLarge,
+              ),
+            if (isExpanded)
+              ...(widget.discountModel.location?.skip(1) ?? []).map(
+                (location) => Text(
+                  '$location | ',
                   style: AppTextStyle.materialThemeLabelLarge,
                 ),
               ),
-              if ((widget.citiesList.location ?? []).length > 1)
-                Expanded(
-                  child: Text(
-                    KMockText.moreCities,
+            KSizedBox.kWidthSizedBox8,
+            if ((widget.discountModel.location ?? []).length > 1)
+              if (widget.isDesk)
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: KPadding.kPaddingSize8,
                   ),
-                )
-              else
-                const Text(''),
-            ],
-          ),
+                  child: Expanded(
+                    child: Text(
+                      isExpanded ? context.l10n.hideExpansion : moreCities,
+                      style: AppTextStyle.materialThemeLabelLarge.copyWith(
+                        decoration: TextDecoration.underline,
+                        color: AppColors.materialThemeRefTertiaryTertiary40,
+                      ),
+                    ),
+                  ),
+                ),
+          ],
         ),
       ),
     );

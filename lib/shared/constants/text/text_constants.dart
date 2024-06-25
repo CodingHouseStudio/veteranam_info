@@ -177,8 +177,6 @@ abstract class KMockText {
     registered: 'Ukraine registered',
     domain: 'Ветерани',
   );
-  static final moreCities =
-      'Ще ${(discountModel.location ?? []).length - 1} міст...';
 }
 
 /// README: Variables with specific text

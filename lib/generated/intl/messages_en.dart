@@ -126,6 +126,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hello": MessageLookupByLibrary.simpleMessage("Hello"),
         "helloVeteran": MessageLookupByLibrary.simpleMessage("Hello, Veteran!"),
         "hide": MessageLookupByLibrary.simpleMessage("Hide"),
+        "hideExpansion": MessageLookupByLibrary.simpleMessage("Hide..."),
         "homeSubtitle": MessageLookupByLibrary.simpleMessage(
             "Here you will find useful information, benefits, discounts and you can also share your story!"),
         "howToContactYou":
@@ -236,6 +237,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "We have received your message and will respond to you as soon as possible."),
         "register": MessageLookupByLibrary.simpleMessage("Register"),
         "remotely": MessageLookupByLibrary.simpleMessage("Remotely"),
+        "report": MessageLookupByLibrary.simpleMessage("Report"),
         "resetAll": MessageLookupByLibrary.simpleMessage("Reset all"),
         "respond": MessageLookupByLibrary.simpleMessage("Respond"),
         "resume": MessageLookupByLibrary.simpleMessage("Resume"),
@@ -256,6 +258,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "We\'re sorry, there was an unforeseen error while sending the data. Please try again later."),
         "sendMessage": MessageLookupByLibrary.simpleMessage("Send message"),
         "sendMore": MessageLookupByLibrary.simpleMessage("Send more"),
+        "share": MessageLookupByLibrary.simpleMessage("Share"),
         "signUp": MessageLookupByLibrary.simpleMessage("Sign up"),
         "signUpWith": MessageLookupByLibrary.simpleMessage("Sign up with"),
         "specialOffers": MessageLookupByLibrary.simpleMessage("Special offers"),
@@ -291,6 +294,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "upload": MessageLookupByLibrary.simpleMessage("Upload"),
         "us": MessageLookupByLibrary.simpleMessage("us"),
         "wage": MessageLookupByLibrary.simpleMessage("Salary*"),
+        "webSite": MessageLookupByLibrary.simpleMessage("Web site"),
         "whatKindOfProject":
             MessageLookupByLibrary.simpleMessage("What kind of project it is?"),
         "whatYouMostInterestedIn": MessageLookupByLibrary.simpleMessage(

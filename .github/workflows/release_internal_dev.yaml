@@ -6,7 +6,11 @@ on:
   workflow_dispatch:
     branches: [ main ]
 concurrency:
+<<<<<<< HEAD
   group: $-$
+=======
+  group: $-dev-$
+>>>>>>> c7671f255369aeee480cc903a9bfb5ed215afb2d
   cancel-in-progress: true
 
 permissions:
