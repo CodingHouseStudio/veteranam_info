@@ -4,9 +4,9 @@ name: DEVELOPMENT build
 # Controls when the workflow will run
 on:
   workflow_dispatch:
-    branches: [main]
+    branches: [ main ]
 concurrency:
-  group: $-dev-$
+  group: dev-$
   cancel-in-progress: true
 
 permissions:

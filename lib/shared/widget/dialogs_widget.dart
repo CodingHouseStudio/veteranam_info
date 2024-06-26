@@ -143,7 +143,7 @@ class _DialogsWidget {
         },
       );
     } else {
-      showModalBottomSheet<Widget>(
+      showModalBottomSheet<void>(
         context: context,
         isScrollControlled: true,
         barrierColor:

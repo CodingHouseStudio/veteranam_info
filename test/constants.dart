@@ -294,6 +294,15 @@ abstract class KTestText {
         KRoute.information.name,
         KRoute.consultation.name,
       ];
+
+  static final reportModel = ReportModel(
+    id: '',
+    reasonComplaint: ReasonComplaint.fraudOrSpam,
+    email: userEmail,
+    message: field,
+    date: dateTime,
+    card: CardEnum.funds,
+  );
 }
 
 abstract class KTestConstants {
@@ -347,4 +356,5 @@ abstract class KScreenBlocName {
   static const filter = 'Filter';
   static const scroll = 'scroll';
   static const image = 'image';
+  static const casheClient = 'cashe client';
 }
