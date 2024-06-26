@@ -17,9 +17,38 @@ void main() {
   tearDown(GetIt.I.reset);
   group('${KScreenBlocName.investors} ', () {
     late IInvestorsRepository mockInvestorsRepository;
-    setUp(
-      () => mockInvestorsRepository = MockIInvestorsRepository(),
-    );
+    late IReportRepository mockReportRepository;
+    late IAppAuthenticationRepository mockAppAuthenticationRepository;
+    late AuthenticationRepository mockAuthenticationRepository;
+    setUp(() {
+      ExtendedDateTime.current = KTestText.dateTime;
+      ExtendedDateTime.id = KTestText.feedbackModel.id;
+
+      mockInvestorsRepository = MockIInvestorsRepository();
+      mockReportRepository = MockIReportRepository();
+      mockAuthenticationRepository = MockAuthenticationRepository();
+      mockAppAuthenticationRepository = MockAppAuthenticationRepository();
+
+      when(mockReportRepository.sendReport(KTestText.reportModel)).thenAnswer(
+        (invocation) async => const Right(true),
+      );
+
+      when(mockAuthenticationRepository.currentUser).thenAnswer(
+        (realInvocation) => User.empty,
+      );
+      when(mockAppAuthenticationRepository.currentUserSetting).thenAnswer(
+        (realInvocation) => UserSetting.empty,
+      );
+      when(mockAppAuthenticationRepository.currentUser).thenAnswer(
+        (realInvocation) => User.empty,
+      );
+      when(mockAuthenticationRepository.currentUserSetting).thenAnswer(
+        (realInvocation) => UserSetting.empty,
+      );
+      when(mockAuthenticationRepository.isAnonymouslyOrEmty()).thenAnswer(
+        (realInvocation) => true,
+      );
+    });
     group('${KGroupText.failure} ', () {
       testWidgets('${KGroupText.error} ', (tester) async {
         when(mockInvestorsRepository.getFunds()).thenAnswer(
@@ -27,6 +56,9 @@ void main() {
         );
         await investorsPumpAppHelper(
           mockInvestorsRepository: mockInvestorsRepository,
+          mockReportRepository: mockReportRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
           tester: tester,
         );
 
@@ -38,6 +70,9 @@ void main() {
         );
         await investorsPumpAppHelper(
           mockInvestorsRepository: mockInvestorsRepository,
+          mockReportRepository: mockReportRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
           tester: tester,
         );
 
@@ -49,6 +84,9 @@ void main() {
         );
         await investorsPumpAppHelper(
           mockInvestorsRepository: mockInvestorsRepository,
+          mockReportRepository: mockReportRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
           tester: tester,
         );
 
@@ -74,6 +112,9 @@ void main() {
       testWidgets('${KGroupText.mockButton} ', (tester) async {
         await investorsPumpAppHelper(
           mockInvestorsRepository: mockInvestorsRepository,
+          mockReportRepository: mockReportRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
           tester: tester,
         );
 
@@ -90,6 +131,9 @@ void main() {
       testWidgets('${KGroupText.intial} ', (tester) async {
         await investorsPumpAppHelper(
           mockInvestorsRepository: mockInvestorsRepository,
+          mockReportRepository: mockReportRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
           tester: tester,
         );
 
@@ -98,6 +142,9 @@ void main() {
       testWidgets('Loading list', (tester) async {
         await investorsPumpAppHelper(
           mockInvestorsRepository: mockInvestorsRepository,
+          mockReportRepository: mockReportRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
           tester: tester,
         );
 
@@ -110,6 +157,9 @@ void main() {
         testWidgets('${KGroupText.intial} ', (tester) async {
           await investorsPumpAppHelper(
             mockInvestorsRepository: mockInvestorsRepository,
+            mockReportRepository: mockReportRepository,
+            mockAuthenticationRepository: mockAuthenticationRepository,
+            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
             tester: tester,
             mockGoRouter: mockGoRouter,
           );
@@ -120,6 +170,9 @@ void main() {
           testWidgets('nawbar widget navigation', (tester) async {
             await investorsPumpAppHelper(
               mockInvestorsRepository: mockInvestorsRepository,
+              mockReportRepository: mockReportRepository,
+              mockAuthenticationRepository: mockAuthenticationRepository,
+              mockAppAuthenticationRepository: mockAppAuthenticationRepository,
               tester: tester,
               mockGoRouter: mockGoRouter,
             );
