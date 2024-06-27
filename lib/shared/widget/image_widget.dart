@@ -18,22 +18,22 @@ class ImageWidget extends StatelessWidget {
     precacheImage(
       NetworkImage(
         imageUrl,
+        headers: {
+          'Cache-Control': 'max-age=7200',
+        },
       ),
       context,
     );
     return Image.network(
       imageUrl,
-      // placeholder: (context, url) =>
-      //     const CircularProgressIndicator.adaptive(), //Image.asset(''),
-      // errorWidget: (context, url, error) {
-      //   debugPrint('image error: $error');
-      //   return KIcon.error;
-      // },
       fit: fit,
       width: size,
       height: size,
       cacheWidth: KMinMaxSize.kImageMaxSize,
       cacheHeight: KMinMaxSize.kImageMaxSize,
+      headers: const {
+        'Cache-Control': 'max-age=7200',
+      },
     );
     // return CachedNetworkImage(
     //   imageUrl: imageUrl,
