@@ -67,7 +67,7 @@ class _CardTextDetailEvaluateWidgetState
             )
           : null,
       filters: widget.bottom,
-      image: widget.image?.downloadURL,
+      image: widget.image,
       childWidget: Center(
         key: KWidgetkeys.widget.cardTextDetailEvaluate.widget,
         child: ConstrainedBox(
