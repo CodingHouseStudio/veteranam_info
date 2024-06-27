@@ -5,12 +5,12 @@ import 'package:kozak/shared/shared.dart';
 class ImageWidget extends StatelessWidget {
   const ImageWidget({
     required this.imageUrl,
-    required this.fit,
+    this.fit,
     super.key,
     this.size,
   });
   final String imageUrl;
-  final BoxFit fit;
+  final BoxFit? fit;
   final double? size;
 
   @override
