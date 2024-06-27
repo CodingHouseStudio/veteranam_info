@@ -31,7 +31,11 @@ void main() {
           mockDiscountRepository: mockDiscountRepository,
         );
 
-        await discountFailureHelper(tester);
+        await loadingFailureHelper(
+          tester: tester,
+          card: KWidgetkeys.screen.discounts.card,
+          buttonMock: KWidgetkeys.screen.discounts.buttonMock,
+        );
       });
     });
     group('${KGroupText.getEmptyList} ', () {
@@ -53,7 +57,11 @@ void main() {
           mockDiscountRepository: mockDiscountRepository,
         );
 
-        await discountMockButtonHelper(tester);
+        await mockButtonHelper(
+          tester: tester,
+          card: KWidgetkeys.screen.discounts.card,
+          buttonMock: KWidgetkeys.screen.discounts.buttonMock,
+        );
       });
     });
     group('${KGroupText.getList} ', () {
