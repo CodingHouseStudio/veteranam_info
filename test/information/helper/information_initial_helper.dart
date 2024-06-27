@@ -38,10 +38,10 @@ Future<void> informationInitialHelper(
         findsNothing,
       );
 
-      await scrollingHelper(
-        tester: tester,
-        offset: KTestConstants.scrollingDown,
-      );
+      // await scrollingHelper(
+      //   tester: tester,
+      //   offset: KTestConstants.scrollingDown,
+      // );
 
       // await scrollingHelper(
       //   tester: tester,

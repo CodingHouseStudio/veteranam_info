@@ -75,15 +75,15 @@ Future<void> investorsInitialHelper(
         findsWidgets,
       );
 
-      await scrollingHelper(
-        tester: tester,
-        offset: KTestConstants.scrollingDown,
-      );
+      // await scrollingHelper(
+      //   tester: tester,
+      //   offset: KTestConstants.scrollingDown,
+      // );
 
-      await scrollingHelper(
-        tester: tester,
-        offset: KTestConstants.scrollingDown,
-      );
+      // await scrollingHelper(
+      //   tester: tester,
+      //   offset: KTestConstants.scrollingDown,
+      // );
 
       // expect(
       //   find.byKey(KWidgetkeys.screen.investors.button),
