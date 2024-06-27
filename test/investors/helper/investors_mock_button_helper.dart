@@ -21,20 +21,9 @@ Future<void> investorsMockButtonHelper(
     itemKey: KWidgetkeys.screen.investors.fundsPoint,
   );
 
-  expect(
-    find.byKey(KWidgetkeys.screen.information.card),
-    findsNothing,
-  );
-
-  await scrollingHelper(
+  await mockButtonHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.investors.buttonMock,
+    card: KWidgetkeys.screen.information.card,
+    buttonMock: KWidgetkeys.screen.investors.buttonMock,
   );
-
-  expect(
-    find.byKey(KWidgetkeys.screen.investors.buttonMock),
-    findsOneWidget,
-  );
-
-  await tester.tap(find.byKey(KWidgetkeys.screen.investors.buttonMock));
 }
