@@ -67,7 +67,7 @@ class _CardTextDetailEvaluateWidgetState
             )
           : null,
       filters: widget.bottom,
-      image: widget.image?.downloadURL,
+      image: widget.image,
       childWidget: Center(
         key: KWidgetkeys.widget.cardTextDetailEvaluate.widget,
         child: ConstrainedBox(
@@ -106,7 +106,6 @@ class _CardTextDetailEvaluateWidgetState
                         padding: KPadding.kPaddingSize12,
                         icon: evaluation == EvaluationEnum.like
                             ? KIcon.activeLike.copyWith(
-                                color: AppColors.materialThemeKeyColorsPrimary,
                                 key: KWidgetkeys.widget.cardTextDetailEvaluate
                                     .iconActiveLike,
                               )
