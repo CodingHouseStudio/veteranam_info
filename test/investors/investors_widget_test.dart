@@ -18,34 +18,42 @@ void main() {
   group('${KScreenBlocName.investors} ', () {
     late IInvestorsRepository mockInvestorsRepository;
     late IReportRepository mockReportRepository;
-    late IAppAuthenticationRepository mockAppAuthenticationRepository;
     late AuthenticationRepository mockAuthenticationRepository;
+    late IAppAuthenticationRepository mockAppAuthenticationRepository;
     setUp(() {
       ExtendedDateTime.current = KTestText.dateTime;
-      ExtendedDateTime.id = KTestText.feedbackModel.id;
+      ExtendedDateTime.id = '';
 
       mockInvestorsRepository = MockIInvestorsRepository();
       mockReportRepository = MockIReportRepository();
       mockAuthenticationRepository = MockAuthenticationRepository();
       mockAppAuthenticationRepository = MockAppAuthenticationRepository();
 
-      when(mockReportRepository.sendReport(KTestText.reportModel)).thenAnswer(
+      when(
+        mockReportRepository.sendReport(
+          KTestText.reportModel
+              .copyWith(reasonComplaint: ReasonComplaint.other),
+        ),
+      ).thenAnswer(
         (invocation) async => const Right(true),
       );
 
       when(mockAuthenticationRepository.currentUser).thenAnswer(
         (realInvocation) => User.empty,
       );
-      when(mockAppAuthenticationRepository.currentUserSetting).thenAnswer(
-        (realInvocation) => UserSetting.empty,
-      );
-      when(mockAppAuthenticationRepository.currentUser).thenAnswer(
-        (realInvocation) => User.empty,
-      );
       when(mockAuthenticationRepository.currentUserSetting).thenAnswer(
         (realInvocation) => UserSetting.empty,
       );
       when(mockAuthenticationRepository.isAnonymouslyOrEmty()).thenAnswer(
+        (realInvocation) => true,
+      );
+      when(mockAppAuthenticationRepository.currentUserSetting).thenAnswer(
+        (realInvocation) => UserSetting.empty,
+      );
+      when(mockAppAuthenticationRepository.currentUser).thenAnswer(
+        (realInvocation) => KTestText.user,
+      );
+      when(mockAppAuthenticationRepository.isAnonymously()).thenAnswer(
         (realInvocation) => true,
       );
     });
@@ -55,10 +63,10 @@ void main() {
           (invocation) async => const Left(SomeFailure.serverError()),
         );
         await investorsPumpAppHelper(
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
           mockInvestorsRepository: mockInvestorsRepository,
           mockReportRepository: mockReportRepository,
           mockAuthenticationRepository: mockAuthenticationRepository,
-          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
           tester: tester,
         );
 
@@ -69,10 +77,10 @@ void main() {
           (invocation) async => const Left(SomeFailure.network()),
         );
         await investorsPumpAppHelper(
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
           mockInvestorsRepository: mockInvestorsRepository,
           mockReportRepository: mockReportRepository,
           mockAuthenticationRepository: mockAuthenticationRepository,
-          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
           tester: tester,
         );
 
@@ -83,10 +91,10 @@ void main() {
           (invocation) async => const Left(SomeFailure.get()),
         );
         await investorsPumpAppHelper(
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
           mockInvestorsRepository: mockInvestorsRepository,
           mockReportRepository: mockReportRepository,
           mockAuthenticationRepository: mockAuthenticationRepository,
-          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
           tester: tester,
         );
 
@@ -111,10 +119,10 @@ void main() {
       });
       testWidgets('${KGroupText.mockButton} ', (tester) async {
         await investorsPumpAppHelper(
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
           mockInvestorsRepository: mockInvestorsRepository,
           mockReportRepository: mockReportRepository,
           mockAuthenticationRepository: mockAuthenticationRepository,
-          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
           tester: tester,
         );
 
@@ -130,10 +138,10 @@ void main() {
 
       testWidgets('${KGroupText.intial} ', (tester) async {
         await investorsPumpAppHelper(
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
           mockInvestorsRepository: mockInvestorsRepository,
           mockReportRepository: mockReportRepository,
           mockAuthenticationRepository: mockAuthenticationRepository,
-          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
           tester: tester,
         );
 
@@ -141,14 +149,71 @@ void main() {
       });
       testWidgets('Loading list', (tester) async {
         await investorsPumpAppHelper(
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
           mockInvestorsRepository: mockInvestorsRepository,
           mockReportRepository: mockReportRepository,
           mockAuthenticationRepository: mockAuthenticationRepository,
-          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
           tester: tester,
         );
 
         await investorsListLoadHelper(tester);
+      });
+      testWidgets('Report Dialog Check Point Failure', (tester) async {
+        await investorsPumpAppHelper(
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          mockInvestorsRepository: mockInvestorsRepository,
+          mockReportRepository: mockReportRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
+          tester: tester,
+        );
+
+        await reportDialogCheckFailureHelper(tester);
+      });
+      testWidgets('Report Dialog Incorect Send', (tester) async {
+        await investorsPumpAppHelper(
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          mockInvestorsRepository: mockInvestorsRepository,
+          mockReportRepository: mockReportRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
+          tester: tester,
+        );
+
+        await reportDialogIncorrectSendHelper(
+          tester: tester,
+        );
+      });
+      testWidgets('Report Dialog Incorect Send(field null and user)',
+          (tester) async {
+        when(mockAuthenticationRepository.isAnonymouslyOrEmty()).thenAnswer(
+          (realInvocation) => false,
+        );
+
+        await investorsPumpAppHelper(
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          mockInvestorsRepository: mockInvestorsRepository,
+          mockReportRepository: mockReportRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
+          tester: tester,
+        );
+
+        await reportDialogIncorrectSendHelper(
+          tester: tester,
+          fieldNull: true,
+        );
+      });
+      testWidgets('Report Dialog Incorect Send(field null)', (tester) async {
+        await investorsPumpAppHelper(
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          mockInvestorsRepository: mockInvestorsRepository,
+          mockReportRepository: mockReportRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
+          tester: tester,
+        );
+
+        await reportDialogIncorrectSendHelper(
+          tester: tester,
+          fieldNull: true,
+        );
       });
 
       group('${KGroupText.goRouter} ', () {
@@ -156,23 +221,37 @@ void main() {
         setUp(() => mockGoRouter = MockGoRouter());
         testWidgets('${KGroupText.intial} ', (tester) async {
           await investorsPumpAppHelper(
+            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
             mockInvestorsRepository: mockInvestorsRepository,
             mockReportRepository: mockReportRepository,
             mockAuthenticationRepository: mockAuthenticationRepository,
-            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
             tester: tester,
             mockGoRouter: mockGoRouter,
           );
 
           await investorsInitialHelper(tester);
         });
+        testWidgets('Report Dialog Correct Send', (tester) async {
+          await investorsPumpAppHelper(
+            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+            mockInvestorsRepository: mockInvestorsRepository,
+            mockReportRepository: mockReportRepository,
+            mockAuthenticationRepository: mockAuthenticationRepository,
+            tester: tester,
+            mockGoRouter: mockGoRouter,
+          );
+
+          await reportDialogcorrectSaveHelper(
+            tester,
+          );
+        });
         group('${KGroupText.goTo} ', () {
           testWidgets('nawbar widget navigation', (tester) async {
             await investorsPumpAppHelper(
+              mockAppAuthenticationRepository: mockAppAuthenticationRepository,
               mockInvestorsRepository: mockInvestorsRepository,
               mockReportRepository: mockReportRepository,
               mockAuthenticationRepository: mockAuthenticationRepository,
-              mockAppAuthenticationRepository: mockAppAuthenticationRepository,
               tester: tester,
               mockGoRouter: mockGoRouter,
             );

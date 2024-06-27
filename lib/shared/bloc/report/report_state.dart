@@ -2,17 +2,17 @@ part of 'report_bloc.dart';
 
 enum ReportFailure {
   error,
-  network,
-  send,
+  // network,
+  // send,
 }
 
 extension ReportFailureExtension on SomeFailure {
   ReportFailure _toReport() {
     switch (this) {
-      case FailureSend():
-        return ReportFailure.send;
-      case FailureNetwork():
-        return ReportFailure.network;
+      // case FailureSend():
+      //   return ReportFailure.send;
+      // case FailureNetwork():
+      //   return ReportFailure.network;
       default:
         return ReportFailure.error;
     }

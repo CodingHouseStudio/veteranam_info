@@ -116,28 +116,42 @@ class _DialogsWidget {
         builder: (BuildContext context) {
           return BlocProvider(
             create: (context) => GetIt.I.get<ReportBloc>(),
-            child: AlertDialog(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(KSize.kRadius32),
-              ),
-              icon: Align(
-                alignment: Alignment.centerRight,
-                child: IconButtonWidget(
-                  onPressed: () => context.pop(),
-                  icon: KIcon.close,
-                  background: AppColors.materialThemeWhite,
-                  padding: KPadding.kPaddingSize12,
-                ),
-              ),
-              iconPadding: const EdgeInsets.all(KPadding.kPaddingSize16),
-              backgroundColor: AppColors.materialThemeKeyColorsNeutral,
-              actionsOverflowAlignment: OverflowBarAlignment.center,
-              contentPadding: const EdgeInsets.only(
-                left: KPadding.kPaddingSize160,
-                right: KPadding.kPaddingSize160,
-                bottom: KPadding.kPaddingSize40,
-              ),
-              content: const ReportDialogWidget(isDesk: true),
+            child: LayoutBuilder(
+              builder: (BuildContext context, BoxConstraints constraints) {
+                final isDeskValue = constraints.maxWidth >
+                    KPlatformConstants.minWidthThresholdTablet;
+                return AlertDialog(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(KSize.kRadius32),
+                  ),
+                  scrollable: true,
+                  insetPadding: EdgeInsets.zero,
+                  icon: Align(
+                    alignment: Alignment.centerRight,
+                    child: IconButtonWidget(
+                      key: KWidgetkeys.widget.reportDialog.cancel,
+                      onPressed: () => context.pop(),
+                      icon: KIcon.close,
+                      background: AppColors.materialThemeWhite,
+                      padding: KPadding.kPaddingSize12,
+                    ),
+                  ),
+                  iconPadding: const EdgeInsets.all(KPadding.kPaddingSize16),
+                  backgroundColor: AppColors.materialThemeKeyColorsNeutral,
+                  actionsOverflowAlignment: OverflowBarAlignment.center,
+                  contentPadding: isDeskValue
+                      ? const EdgeInsets.only(
+                          left: KPadding.kPaddingSize160,
+                          right: KPadding.kPaddingSize160,
+                          bottom: KPadding.kPaddingSize40,
+                        )
+                      : const EdgeInsets.symmetric(
+                          horizontal: KPadding.kPaddingSize16,
+                          vertical: KPadding.kPaddingSize32,
+                        ),
+                  content: ReportDialogWidget(isDesk: isDeskValue),
+                );
+              },
             ),
           );
         },
@@ -156,12 +170,25 @@ class _DialogsWidget {
         backgroundColor: AppColors.materialThemeKeyColorsNeutral,
         builder: (context) => BlocProvider(
           create: (context) => GetIt.I.get<ReportBloc>(),
-          child: const Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: KPadding.kPaddingSize16,
-              vertical: KPadding.kPaddingSize32,
-            ),
-            child: ReportDialogWidget(isDesk: false),
+          child: LayoutBuilder(
+            builder: (BuildContext context, BoxConstraints constraints) {
+              final isDeskValue =
+                  constraints.maxWidth >= KMinMaxSize.maxWidth600;
+              return Padding(
+                padding: isDeskValue
+                    ? const EdgeInsets.symmetric(
+                        vertical: KPadding.kPaddingSize40,
+                        horizontal: KPadding.kPaddingSize160,
+                      )
+                    : const EdgeInsets.symmetric(
+                        horizontal: KPadding.kPaddingSize16,
+                        vertical: KPadding.kPaddingSize32,
+                      ),
+                child: SingleChildScrollView(
+                  child: ReportDialogWidget(isDesk: isDeskValue),
+                ),
+              );
+            },
           ),
         ),
       );
