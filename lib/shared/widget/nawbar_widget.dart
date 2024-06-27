@@ -177,25 +177,18 @@ class _NawbarWidgetImplematationState
               //       icon: KIcon.mic,
               //     ),
               //   ),
-              if (widget.isDesk)
+              if (widget.isDesk) KSizedBox.kWidthSizedBox16,
+              if (Config.isProduction)
                 const Align(
-                  alignment: Alignment.centerLeft,
-                  child: KSizedBox.kWidthSizedBox16,
-                ),
-              Align(
-                alignment: Alignment.centerRight,
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    if (Config.isProduction) const Spacer(),
-                    const LanguagesSwitcherWidget(),
-                  ],
-                ),
-              ),
+                  alignment: Alignment.centerRight,
+                  child: LanguagesSwitcherWidget(),
+                )
+              else
+                const LanguagesSwitcherWidget(),
               if (widget.isDesk)
                 KSizedBox.kWidthSizedBox16
               else
-                KSizedBox.kWidthSizedBox4,
+                KSizedBox.kWidthSizedBox8,
               if (context.read<AuthenticationBloc>().state.status !=
                   AuthenticationStatus.authenticated)
                 if (widget.isDesk && !Config.isProduction)
