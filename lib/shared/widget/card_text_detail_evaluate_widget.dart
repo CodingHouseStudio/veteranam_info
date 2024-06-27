@@ -124,66 +124,37 @@ class _CardTextDetailEvaluateWidgetState
                   KSizedBox.kWidthSizedBox8,
                   Row(
                     children: [
-                      Column(
-                        children: [
-                          IconButtonWidget(
-                            onPressed: null,
-                            background: AppColors.materialThemeKeyColorsNeutral,
-                            padding: KPadding.kPaddingSize12,
-                            icon: KIcon.website.copyWith(
-                              key: KWidgetkeys
-                                  .widget.cardTextDetailEvaluate.iconWebsite,
-                            ),
-                          ),
-                          KSizedBox.kHeightSizedBox3,
-                          Text(
-                            context.l10n.website,
-                            style: AppTextStyle.materialThemeLabelSmall,
-                          ),
-                        ],
+                      buildIcon(
+                        icon: KIcon.website.copyWith(
+                          key: KWidgetkeys
+                              .widget.cardTextDetailEvaluate.iconWebsite,
+                        ),
+                        text: context.l10n.website,
+                        onPressed: null,
                       ),
                       if (widget.isDesk)
                         KSizedBox.kWidthSizedBox24
                       else
                         KSizedBox.kWidthSizedBox8,
-                      Column(
-                        children: [
-                          IconButtonWidget(
-                            padding: KPadding.kPaddingSize12,
-                            icon: KIcon.share,
-                            background: AppColors.materialThemeKeyColorsNeutral,
-                            key: KWidgetkeys
-                                .widget.cardTextDetailEvaluate.iconShare,
-                            onPressed: _informationShareLink,
-                          ),
-                          KSizedBox.kHeightSizedBox3,
-                          Text(
-                            context.l10n.share,
-                            style: AppTextStyle.materialThemeLabelSmall,
-                          ),
-                        ],
+                      buildIcon(
+                        icon: KIcon.share.copyWith(
+                          key: KWidgetkeys
+                              .widget.cardTextDetailEvaluate.iconShare,
+                        ),
+                        text: context.l10n.share,
+                        onPressed: _informationShareLink,
                       ),
                       if (widget.isDesk)
                         KSizedBox.kWidthSizedBox24
                       else
                         KSizedBox.kWidthSizedBox8,
-                      Column(
-                        children: [
-                          IconButtonWidget(
-                            padding: KPadding.kPaddingSize12,
-                            icon: KIcon.safe.copyWith(
-                              key: KWidgetkeys
-                                  .widget.cardTextDetailEvaluate.iconSave,
-                            ),
-                            background: AppColors.materialThemeKeyColorsNeutral,
-                            onPressed: null,
-                          ),
-                          KSizedBox.kHeightSizedBox3,
-                          Text(
-                            context.l10n.save,
-                            style: AppTextStyle.materialThemeLabelSmall,
-                          ),
-                        ],
+                      buildIcon(
+                        icon: KIcon.safe.copyWith(
+                          key: KWidgetkeys
+                              .widget.cardTextDetailEvaluate.iconSave,
+                        ),
+                        text: context.l10n.save,
+                        onPressed: null,
                       ),
                     ],
                   ),
@@ -218,6 +189,28 @@ class _CardTextDetailEvaluateWidgetState
   Future<void> _informationShareLink() async {
     await Share.share(
       widget.directLink ?? widget.link!,
+    );
+  }
+
+  Widget buildIcon({
+    required Icon icon,
+    required String text,
+    required VoidCallback? onPressed,
+  }) {
+    return Column(
+      children: [
+        IconButtonWidget(
+          onPressed: onPressed,
+          background: AppColors.materialThemeKeyColorsNeutral,
+          icon: icon,
+          padding: KPadding.kPaddingSize12,
+        ),
+        KSizedBox.kHeightSizedBox3,
+        Text(
+          text,
+          style: AppTextStyle.materialThemeLabelSmall,
+        ),
+      ],
     );
   }
 }
