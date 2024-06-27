@@ -93,6 +93,10 @@
       margin: 0;
       padding: 0;
       position: fixed;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
     }
 
     #splash {
@@ -141,7 +145,7 @@
     .bouncing-image {
       width: 100%;
       height: auto;
-      transition: transform 0.3s ease-in-out;
+      animation: bounce 2s infinite;
     }
 
     .image-container:hover .bouncing-image {
