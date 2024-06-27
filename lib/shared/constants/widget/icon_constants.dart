@@ -65,10 +65,10 @@ abstract class KIcon {
   static const _KIcon arrowDownRight = _KIcon(Symbols.south_east);
   static const _KIcon arrowDownLeft = _KIcon(Symbols.south_west);
   static const _KIcon like = _KIcon(Symbols.thumb_up);
-  static const _KIcon activeLike = _KIcon(
+  static Icon activeLike = const _KIcon(
     Symbols.thumb_up,
     fill: 1,
-  );
+  ).copyWith(color: AppColors.materialThemeKeyColorsPrimary);
   static const _KIcon smile = _KIcon(Symbols.sentiment_very_satisfied);
   static const _KIcon activeSmile = _KIcon(
     Symbols.sentiment_very_satisfied,
