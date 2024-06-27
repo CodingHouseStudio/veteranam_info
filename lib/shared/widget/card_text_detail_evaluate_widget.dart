@@ -131,23 +131,13 @@ class _CardTextDetailEvaluateWidgetState
                   ),
                   Row(
                     children: [
-                      Column(
-                        children: [
-                          IconButtonWidget(
-                            onPressed: null,
-                            background: AppColors.materialThemeKeyColorsNeutral,
-                            padding: KPadding.kPaddingSize12,
-                            icon: KIcon.website.copyWith(
-                              key: KWidgetkeys
-                                  .widget.cardTextDetailEvaluate.iconWebsite,
-                            ),
-                          ),
-                          KSizedBox.kHeightSizedBox3,
-                          Text(
-                            context.l10n.website,
-                            style: AppTextStyle.materialThemeLabelSmall,
-                          ),
-                        ],
+                      buildIcon(
+                        icon: KIcon.website.copyWith(
+                          key: KWidgetkeys
+                              .widget.cardTextDetailEvaluate.iconWebsite,
+                        ),
+                        text: context.l10n.website,
+                        onPressed: null,
                       ),
                     ],
                   ),
