@@ -42,7 +42,7 @@ class MyDiscountsBodyWidget extends StatelessWidget {
         mainDeskPadding: const EdgeInsets.symmetric(
           horizontal: KPadding.kPaddingSize100,
         ),
-        mainChildWidgetsFunction: ({required isDesk}) => [
+        mainChildWidgetsFunction: ({required isDesk, required isTablet}) => [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

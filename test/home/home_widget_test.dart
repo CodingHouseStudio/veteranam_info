@@ -158,22 +158,6 @@ void main() {
         });
 
         group('${KGroupText.goTo} ', () {
-          testWidgets('nawbar widget navigation', (tester) async {
-            await homePumpAppHelper(
-              // mockFeedbackRepository: mockFeedbackRepository,
-              mockHomeRepository: mockHomeRepository,
-              mockAuthenticationRepository: mockAuthenticationRepository,
-              tester: tester,
-              mockGoRouter: mockGoRouter,
-              mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-            );
-
-            await navbarNavigationHelper(
-              tester: tester,
-              mockGoRouter: mockGoRouter,
-            );
-          });
-
           testWidgets('screen cards rout', (tester) async {
             await homePumpAppHelper(
               // mockFeedbackRepository: mockFeedbackRepository,

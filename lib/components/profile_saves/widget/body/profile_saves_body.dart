@@ -39,7 +39,8 @@ class ProfileSavesBody extends StatelessWidget {
               mainDeskPadding: const EdgeInsets.symmetric(
                 horizontal: KPadding.kPaddingSize220,
               ),
-              mainChildWidgetsFunction: ({required isDesk}) => [
+              mainChildWidgetsFunction:
+                  ({required isDesk, required isTablet}) => [
                 DiscountsCardWidget(
                   key: KWidgetkeys.screen.profileSaves.discountCard,
                   isDesk: isDesk,

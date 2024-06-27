@@ -147,17 +147,17 @@ void main() {
 
         await investorsInitialHelper(tester);
       });
-      testWidgets('Loading list', (tester) async {
-        await investorsPumpAppHelper(
+
+      loadingList(
+        pumpApp: (tester) async => investorsPumpAppHelper(
           mockAppAuthenticationRepository: mockAppAuthenticationRepository,
           mockInvestorsRepository: mockInvestorsRepository,
           mockReportRepository: mockReportRepository,
           mockAuthenticationRepository: mockAuthenticationRepository,
           tester: tester,
-        );
-
-        await investorsListLoadHelper(tester);
-      });
+        ),
+        lastCard: KWidgetkeys.screen.investors.cardLast,
+      );
       testWidgets('Report Dialog Check Point Failure', (tester) async {
         await investorsPumpAppHelper(
           mockAppAuthenticationRepository: mockAppAuthenticationRepository,

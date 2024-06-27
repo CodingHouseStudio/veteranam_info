@@ -22,6 +22,7 @@ class DiscountBodyWidget extends StatelessWidget {
       listenWhen: (previous, current) => current.failure != null,
       builder: (context, _) {
         return ScaffoldAutoLoadingWidget(
+          loadingButtonText: context.l10n.moreDiscounts,
           titleChildWidgetsFunction: ({required isDesk}) => [
             KSizedBox.kHeightSizedBox24,
             ...TitleWidget.pointTitleWidgetList(

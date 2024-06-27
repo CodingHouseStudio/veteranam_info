@@ -16,15 +16,9 @@ Future<void> homeFailureHelper(
     offset: KTestConstants.scrollingUp1000,
   );
 
-  expect(
-    find.byKey(KWidgetkeys.screen.home.faq),
-    findsNothing,
+  await loadingFailureHelper(
+    tester: tester,
+    card: KWidgetkeys.screen.home.faq,
+    buttonMock: KWidgetkeys.screen.home.buttonMock,
   );
-
-  expect(
-    find.byKey(KWidgetkeys.screen.home.buttonMock),
-    findsNothing,
-  );
-
-  await dialogFailureGetTapHelper(tester: tester);
 }
