@@ -1,12 +1,21 @@
+import 'package:flutter/foundation.dart';
+
 abstract class KPlatformConstants {
-  // static final bool isWebMobile = kIsWeb &&
+  // static bool get isWebMobile => _isWebMobile;
+  // @visibleForTesting
+  // static set isWebMobile(bool isWebMobile) => _isWebMobile = isWebMobile;
+  static bool get isWebDesktop => _isWebDesktop;
+  @visibleForTesting
+  static set isWebDesktop(bool isWebDesktop) => _isWebDesktop = isWebDesktop;
+
+  // static bool _isWebMobile = kIsWeb &&
   //     (defaultTargetPlatform == TargetPlatform.android ||
   //         defaultTargetPlatform == TargetPlatform.iOS);
-  // static final bool isWebDesktop = kIsWeb &&
-  //     (defaultTargetPlatform == TargetPlatform.fuchsia ||
-  //         defaultTargetPlatform == TargetPlatform.linux ||
-  //         defaultTargetPlatform == TargetPlatform.macOS ||
-  //         defaultTargetPlatform == TargetPlatform.windows);
+  static bool _isWebDesktop = kIsWeb &&
+      (defaultTargetPlatform == TargetPlatform.fuchsia ||
+          defaultTargetPlatform == TargetPlatform.linux ||
+          defaultTargetPlatform == TargetPlatform.macOS ||
+          defaultTargetPlatform == TargetPlatform.windows);
   // static const minWidthThresholdMobile = 800; // Example threshold for mobile
   static const minWidthThresholdTablet = 1000; // Existing threshold for tablet
   static const maxWidthThresholdTablet = 1400; // Existing threshold for tablet
