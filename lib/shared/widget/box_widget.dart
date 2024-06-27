@@ -25,12 +25,8 @@ class BoxWidget extends StatelessWidget {
       padding: EdgeInsets.only(
         top: KPadding.kPaddingSize8,
         right: KPadding.kPaddingSize8,
-        bottom: isDesk
-            ? KPadding.kPaddingSize24
-            : KPadding.kPaddingSize8,
-        left: isDesk
-            ? KPadding.kPaddingSize24
-            : KPadding.kPaddingSize16,
+        bottom: isDesk ? KPadding.kPaddingSize24 : KPadding.kPaddingSize8,
+        left: isDesk ? KPadding.kPaddingSize24 : KPadding.kPaddingSize16,
       ),
       decoration: KWidgetTheme.boxDecorationCard,
       child: isDesk
