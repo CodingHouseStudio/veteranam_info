@@ -6,21 +6,20 @@ import '../../text_dependency.dart';
 
 void main() {
   group('${KScreenBlocName.feedback} ${KGroupText.model} ', () {
+    final fullJson = {
+      FeedbackModelJsonField.id: KTestText.feedbackModel.id,
+      FeedbackModelJsonField.guestId: KTestText.feedbackModel.guestId,
+      FeedbackModelJsonField.guestName: KTestText.feedbackModel.guestName,
+      FeedbackModelJsonField.email: KTestText.feedbackModel.email,
+      FeedbackModelJsonField.timestamp:
+          KTestText.feedbackModel.timestamp.toIso8601String(),
+      FeedbackModelJsonField.message: KTestText.feedbackModel.message,
+      FeedbackModelJsonField.status:
+          _$FeedbackStatusEnumMap[KTestText.feedbackModel.status],
+    };
     group('${KGroupText.modelJson} ', () {
-      test('${KGroupText.shouldBe} ', () {
-        final json = {
-          FeedbackModelJsonField.id: KTestText.feedbackModel.id,
-          FeedbackModelJsonField.guestId: KTestText.feedbackModel.guestId,
-          FeedbackModelJsonField.guestName: KTestText.feedbackModel.guestName,
-          FeedbackModelJsonField.email: KTestText.feedbackModel.email,
-          FeedbackModelJsonField.timestamp:
-              KTestText.feedbackModel.timestamp.toIso8601String(),
-          FeedbackModelJsonField.message: KTestText.feedbackModel.message,
-          FeedbackModelJsonField.status:
-              _$FeedbackStatusEnumMap[KTestText.feedbackModel.status],
-        };
-
-        final feedbackModel = FeedbackModel.fromJson(json);
+      test('${KGroupText.full} ', () {
+        final feedbackModel = FeedbackModel.fromJson(fullJson);
 
         expect(feedbackModel.id, KTestText.feedbackModel.id);
         expect(feedbackModel.email, KTestText.feedbackModel.email);
@@ -37,7 +36,7 @@ void main() {
         );
       });
 
-      test('${KGroupText.shouldNotBe} ', () {
+      test('${KGroupText.failure} ', () {
         final json = {
           // id is missing
 
@@ -58,22 +57,10 @@ void main() {
       });
     });
     group('${KGroupText.jsonModel} ', () {
-      test('${KGroupText.shouldBe} ', () {
-        final json = {
-          FeedbackModelJsonField.id: KTestText.feedbackModel.id,
-          FeedbackModelJsonField.guestId: KTestText.feedbackModel.guestId,
-          FeedbackModelJsonField.guestName: KTestText.feedbackModel.guestName,
-          FeedbackModelJsonField.email: KTestText.feedbackModel.email,
-          FeedbackModelJsonField.timestamp:
-              KTestText.feedbackModel.timestamp.toIso8601String(),
-          FeedbackModelJsonField.message: KTestText.feedbackModel.message,
-          FeedbackModelJsonField.status:
-              _$FeedbackStatusEnumMap[KTestText.feedbackModel.status],
-        };
-
+      test('${KGroupText.full} ', () {
         final feedbackModelJson = KTestText.feedbackModel.toJson();
 
-        expect(feedbackModelJson, json);
+        expect(feedbackModelJson, fullJson);
       });
     });
   });

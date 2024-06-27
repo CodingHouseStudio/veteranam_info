@@ -8,19 +8,39 @@ void main() {
 
   setUpAll(setUpGlobal);
   group('${KScreenBlocName.home} ${KGroupText.model} ', () {
+    final fullJson = {
+      QuestionModelJsonField.id: KTestText.questionModelItems.first.id,
+      QuestionModelJsonField.title: KTestText.questionModelItems.first.title,
+      QuestionModelJsonField.subtitle:
+          KTestText.questionModelItems.first.subtitle,
+      QuestionModelJsonField.navigationLink:
+          KTestText.questionModelItems.first.navigationLink,
+    };
+    final nullableJson = {
+      QuestionModelJsonField.id: KTestText.questionModelItems.first.id,
+      QuestionModelJsonField.title: KTestText.questionModelItems.first.title,
+      QuestionModelJsonField.subtitle:
+          KTestText.questionModelItems.first.subtitle,
+      QuestionModelJsonField.navigationLink: null,
+    };
+    final convertorJson = {
+      QuestionModelJsonField.id: KTestText.questionModelItems.first.id,
+      QuestionModelJsonField.title: List.generate(
+        KMinMaxSize.questionsTitleMaxLength,
+        (_) => KTestText.questionModelItems.first.title
+            .split(KTestText.questionModelItems.first.title),
+      ).join().substring(0, KMinMaxSize.questionsTitleMaxLength),
+      QuestionModelJsonField.subtitle: List.generate(
+        KMinMaxSize.subtitleMaxLength,
+        (_) => KTestText.questionModelItems.first.subtitle
+            .split(KTestText.questionModelItems.first.subtitle),
+      ).join().substring(0, KMinMaxSize.subtitleMaxLength),
+      QuestionModelJsonField.navigationLink:
+          KTestText.questionModelItems.first.navigationLink,
+    };
     group('${KGroupText.modelJson} ', () {
-      test('${KGroupText.shouldBe} ', () {
-        final json = {
-          QuestionModelJsonField.id: KTestText.questionModelItems.first.id,
-          QuestionModelJsonField.title:
-              KTestText.questionModelItems.first.title,
-          QuestionModelJsonField.subtitle:
-              KTestText.questionModelItems.first.subtitle,
-          QuestionModelJsonField.navigationLink:
-              KTestText.questionModelItems.first.navigationLink,
-        };
-
-        final questionModel = QuestionModel.fromJson(json);
+      test('${KGroupText.full} ', () {
+        final questionModel = QuestionModel.fromJson(fullJson);
 
         expect(questionModel.id, KTestText.questionModelItems.first.id);
         expect(
@@ -37,16 +57,8 @@ void main() {
         );
       });
 
-      test('${KGroupText.shouldBe} ', () {
-        final json = {
-          QuestionModelJsonField.id: KTestText.questionModelItems.first.id,
-          QuestionModelJsonField.title:
-              KTestText.questionModelItems.first.title,
-          QuestionModelJsonField.subtitle:
-              KTestText.questionModelItems.first.subtitle,
-        };
-
-        final questionModel = QuestionModel.fromJson(json);
+      test('${KGroupText.nullable} ', () {
+        final questionModel = QuestionModel.fromJson(nullableJson);
 
         expect(questionModel.id, KTestText.questionModelItems.first.id);
         expect(
@@ -60,7 +72,7 @@ void main() {
         expect(questionModel.navigationLink, null);
       });
 
-      test('${KGroupText.shouldNotBe} ', () {
+      test('${KGroupText.failure} ', () {
         final json = {
           QuestionModelJsonField.id: KTestText.questionModelItems.first.id,
           // title is missing
@@ -76,24 +88,8 @@ void main() {
         );
       });
 
-      test('${KGroupText.shouldBe} ', () {
-        final json = {
-          QuestionModelJsonField.id: KTestText.questionModelItems.first.id,
-          QuestionModelJsonField.title: List.generate(
-            100,
-            (_) => KTestText.questionModelItems.first.title
-                .split(KTestText.questionModelItems.first.title),
-          ).join(),
-          QuestionModelJsonField.subtitle: List.generate(
-            100,
-            (_) => KTestText.questionModelItems.first.subtitle
-                .split(KTestText.questionModelItems.first.subtitle),
-          ).join(),
-          QuestionModelJsonField.navigationLink:
-              KTestText.questionModelItems.first.navigationLink,
-        };
-
-        final questionModel = QuestionModel.fromJson(json);
+      test('${KGroupText.convertor} ', () {
+        final questionModel = QuestionModel.fromJson(convertorJson);
 
         expect(questionModel.id, KTestText.questionModelItems.first.id);
         expect(
@@ -111,77 +107,37 @@ void main() {
       });
     });
     group('${KGroupText.jsonModel} ', () {
-      test('${KGroupText.shouldBe} ', () {
-        final json = {
-          QuestionModelJsonField.id: KTestText.questionModelItems.first.id,
-          QuestionModelJsonField.title:
-              KTestText.questionModelItems.first.title,
-          QuestionModelJsonField.subtitle:
-              KTestText.questionModelItems.first.subtitle,
-          QuestionModelJsonField.navigationLink:
-              KTestText.questionModelItems.first.navigationLink,
-        };
-
+      test('${KGroupText.full} ', () {
         final questionModel = KTestText.questionModelItems.first.toJson();
 
-        expect(questionModel, json);
+        expect(questionModel, fullJson);
       });
 
-      test('${KGroupText.shouldBe} ', () {
-        final json = {
-          QuestionModelJsonField.id: KTestText.questionModelItems.first.id,
-          QuestionModelJsonField.title:
-              KTestText.questionModelItems.first.title,
-          QuestionModelJsonField.subtitle:
-              KTestText.questionModelItems.first.subtitle,
-          QuestionModelJsonField.navigationLink: null,
-        };
-
+      test('${KGroupText.nullable} ', () {
         final questionModelJson = KTestText.questionModelItems.first
             .copyWith(navigationLink: null)
             .toJson();
 
-        expect(questionModelJson, json);
+        expect(questionModelJson, nullableJson);
       });
 
-      test('${KGroupText.shouldBe} ', () {
-        final questionModel = QuestionModel(
+      test('${KGroupText.convertor} ', () {
+        final questionModelJson = QuestionModel(
           id: KTestText.questionModelItems.first.id,
           title: List.generate(
             KMinMaxSize.questionsTitleMaxLength,
             (_) => KTestText.questionModelItems.first.title
                 .split(KTestText.questionModelItems.first.title),
-          ).join().substring(0, KMinMaxSize.questionsTitleMaxLength),
+          ).join(),
           subtitle: List.generate(
             KMinMaxSize.subtitleMaxLength,
             (_) => KTestText.questionModelItems.first.subtitle
                 .split(KTestText.questionModelItems.first.subtitle),
-          ).join().substring(0, KMinMaxSize.subtitleMaxLength),
+          ).join(),
           navigationLink: KTestText.questionModelItems.first.navigationLink,
-        );
-        final json = {
-          QuestionModelJsonField.id: questionModel.id,
-          QuestionModelJsonField.title: questionModel.title,
-          QuestionModelJsonField.subtitle: questionModel.subtitle,
-          QuestionModelJsonField.navigationLink: questionModel.navigationLink,
-        };
+        ).toJson();
 
-        final questionModelJson = questionModel
-            .copyWith(
-              title: List.generate(
-                KMinMaxSize.questionsTitleMaxLength,
-                (_) => KTestText.questionModelItems.first.title
-                    .split(KTestText.questionModelItems.first.title),
-              ).join(),
-              subtitle: List.generate(
-                KMinMaxSize.subtitleMaxLength,
-                (_) => KTestText.questionModelItems.first.subtitle
-                    .split(KTestText.questionModelItems.first.subtitle),
-              ).join(),
-            )
-            .toJson();
-
-        expect(questionModelJson, json);
+        expect(questionModelJson, convertorJson);
       });
     });
   });
