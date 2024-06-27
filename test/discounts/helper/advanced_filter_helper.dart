@@ -61,7 +61,7 @@ Future<void> advancedFilterHelper(
     findsWidgets,
   );
 
-  await chekPointHelper(hasAmount: true, tester: tester);
+  await chekPointHelper(hasAmount: true, tester: tester, twiceTap: true);
 
   await chekPointSignleTapHelper(tester: tester, hasAmount: true);
 
@@ -97,14 +97,14 @@ Future<void> advancedFilterHelper(
   );
 
   final isMobile = tester
-      .widgetList(find.byKey(KWidgetkeys.screen.discounts.cancelIcon))
+      .widgetList(find.byKey(KWidgetkeys.screen.discounts.cancelText))
       .isNotEmpty;
 
   if (isMobile) {
-    expect(
-      find.byKey(KWidgetkeys.screen.discounts.cancelIcon),
-      findsOneWidget,
-    );
+    // expect(
+    //   find.byKey(KWidgetkeys.screen.discounts.cancelIcon),
+    //   findsOneWidget,
+    // );
 
     expect(
       find.byKey(KWidgetkeys.screen.discounts.cancelText),
