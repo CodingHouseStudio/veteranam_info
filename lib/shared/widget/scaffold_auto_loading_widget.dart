@@ -13,7 +13,8 @@ class ScaffoldAutoLoadingWidget extends StatefulWidget {
   final List<Widget> Function({required bool isDesk})?
       titleChildWidgetsFunction;
   final List<Widget> Function({required bool isDesk}) mainChildWidgetsFunction;
-  final EdgeInsetsGeometry? mainDeskPadding;
+  final EdgeInsetsGeometry Function({required double maxWidth})?
+      mainDeskPadding;
   final void Function() scrollFunction;
   final Widget? mainRightChildWidget;
 
@@ -79,7 +80,11 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
 
               SliverPadding(
                 padding: isDesk && widget.mainDeskPadding != null
-                    ? padding.add(widget.mainDeskPadding!)
+                    ? padding.add(
+                        widget.mainDeskPadding!(
+                          maxWidth: constraints.maxWidth,
+                        ),
+                      )
                     : padding,
                 sliver: widget.mainRightChildWidget != null && isDesk
                     ? RowSliver(
