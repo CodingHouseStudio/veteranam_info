@@ -42,7 +42,7 @@ class ProfileMyStoryBodyWidget extends StatelessWidget {
         ],
         mainDeskPadding:
             const EdgeInsets.symmetric(horizontal: KPadding.kPaddingSize48),
-        mainChildWidgetsFunction: ({required isDesk}) => [
+        mainChildWidgetsFunction: ({required isDesk, required isTablet}) => [
           ..._storiesWidgetList(context: context, isDesk: isDesk),
           if (isDesk)
             KSizedBox.kHeightSizedBox56

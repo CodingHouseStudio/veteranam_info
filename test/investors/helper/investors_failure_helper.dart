@@ -6,15 +6,24 @@ import '../../text_dependency.dart';
 Future<void> investorsFailureHelper(
   WidgetTester tester,
 ) async {
-  expect(
-    find.byKey(KWidgetkeys.screen.information.card),
-    findsNothing,
+  await scrollingHelper(
+    tester: tester,
+    itemKey: KWidgetkeys.screen.investors.feedbackTitle,
   );
 
-  expect(
-    find.byKey(KWidgetkeys.screen.investors.buttonMock),
-    findsNothing,
+  await scrollingHelper(
+    tester: tester,
+    itemKey: KWidgetkeys.screen.investors.leftImages,
   );
 
-  await dialogFailureGetTapHelper(tester: tester);
+  await scrollingHelper(
+    tester: tester,
+    itemKey: KWidgetkeys.screen.investors.fundsPoint,
+  );
+
+  await loadingFailureHelper(
+    tester: tester,
+    card: KWidgetkeys.screen.information.card,
+    buttonMock: KWidgetkeys.screen.investors.buttonMock,
+  );
 }
