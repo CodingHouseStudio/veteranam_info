@@ -22,6 +22,69 @@ abstract class TitleWidget {
           style: isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
         ),
       ];
+  static List<Widget> titleIconWidgetList({
+    required String title,
+    required Key titleKey,
+    required bool isDesk,
+    required String titleSecondPart,
+    // bool isRightArrow = true,
+    CrossAxisAlignment iconCrossAxisAlignment = CrossAxisAlignment.end,
+  }) =>
+      [
+        if (isDesk)
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const IconWidget(
+                // key: KWidgetkeys.screen.feedback.titleIcon,
+                icon: KIcon.arrowDownRight,
+              ),
+              KSizedBox.kWidthSizedBox90,
+              Expanded(
+                child: Column(
+                  key: titleKey,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Text(
+                      title,
+                      style: AppTextStyle.materialThemeDisplayLarge,
+                    ),
+                    Text(
+                      titleSecondPart,
+                      style: AppTextStyle.materialThemeDisplayLarge,
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          )
+        else ...[
+          Row(
+            key: titleKey,
+            crossAxisAlignment: iconCrossAxisAlignment,
+            children: [
+              Expanded(
+                flex: 4,
+                child: Text(
+                  '$title $titleSecondPart',
+                  style: AppTextStyle.materialThemeDisplaySmall,
+                ),
+              ),
+              IconWidget(
+                // key: KWidgetkeys.screen.feedback.titleIcon,
+                icon: KIcon.arrowDownLeft,
+                padding:
+                    isDesk ? KPadding.kPaddingSize20 : KPadding.kPaddingSize12,
+              ),
+            ],
+          ),
+        ],
+        KSizedBox.kHeightSizedBox32,
+        const Divider(
+          color: AppColors.materialThemeKeyColorsNeutral,
+        ),
+      ];
   static List<Widget> pointTitleWidgetList({
     required String title,
     required String titleSecondPart,
