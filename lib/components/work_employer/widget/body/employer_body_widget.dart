@@ -11,7 +11,7 @@ class WorkEmployerBodyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScaffoldWidget(
-      mainChildWidgetsFunction: ({required isDesk}) => [
+      mainChildWidgetsFunction: ({required isDesk, required isTablet}) => [
         if (isDesk)
           KSizedBox.kHeightSizedBox40
         else

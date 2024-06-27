@@ -93,7 +93,7 @@ class _NawbarWidgetImplematationState
             bottom: KPadding.kPaddingSize12,
           ),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               if (widget.isDesk || !isFocused)
                 IconButton(
@@ -135,37 +135,43 @@ class _NawbarWidgetImplematationState
                         : const EdgeInsets.all(KPadding.kPaddingSize16),
                   ),
                 )
-              else if (widget.isDesk)
-                Row(
-                  children: [
-                    TextButton.icon(
-                      onPressed: () => context.goNamed(KRoute.discounts.name),
-                      label: Text(
-                        context.l10n.discounts,
-                        style: AppTextStyle.materialThemeTitleMedium,
-                      ),
-                      icon: KIcon.tag,
+              else if (widget.isDesk) ...[
+                Expanded(
+                  child: TextButton.icon(
+                    style: const ButtonStyle(alignment: Alignment.centerRight),
+                    onPressed: () => context.goNamed(KRoute.discounts.name),
+                    label: Text(
+                      context.l10n.discounts,
+                      style: AppTextStyle.materialThemeTitleMedium,
                     ),
-                    KSizedBox.kWidthSizedBox64,
-                    TextButton.icon(
-                      onPressed: () => context.goNamed(KRoute.information.name),
-                      label: Text(
-                        context.l10n.information,
-                        style: AppTextStyle.materialThemeTitleMedium,
-                      ),
-                      icon: KIcon.globe,
-                    ),
-                    KSizedBox.kWidthSizedBox64,
-                    TextButton.icon(
-                      onPressed: () => context.goNamed(KRoute.investors.name),
-                      label: Text(
-                        context.l10n.investors,
-                        style: AppTextStyle.materialThemeTitleMedium,
-                      ),
-                      icon: KIcon.fileText,
-                    ),
-                  ],
+                    icon: KIcon.tag,
+                  ),
                 ),
+                KSizedBox.kWidthSizedBox64,
+                Expanded(
+                  child: TextButton.icon(
+                    onPressed: () => context.goNamed(KRoute.information.name),
+                    label: Text(
+                      context.l10n.information,
+                      style: AppTextStyle.materialThemeTitleMedium,
+                    ),
+                    icon: KIcon.globe,
+                  ),
+                ),
+                KSizedBox.kWidthSizedBox64,
+                Expanded(
+                  child: TextButton.icon(
+                    style: const ButtonStyle(alignment: Alignment.centerLeft),
+                    onPressed: () => context.goNamed(KRoute.investors.name),
+                    label: Text(
+                      context.l10n.investors,
+                      style: AppTextStyle.materialThemeTitleMedium,
+                    ),
+                    icon: KIcon.fileText,
+                  ),
+                ),
+              ],
+
               // if (widget.isDesk && widget.hasMicrophone)
               //   Padding(
               //     padding: const EdgeInsets.only(right:
