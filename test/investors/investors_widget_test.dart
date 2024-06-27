@@ -95,14 +95,14 @@ void main() {
 
         await investorsInitialHelper(tester);
       });
-      testWidgets('Loading list', (tester) async {
-        await investorsPumpAppHelper(
+
+      loadingList(
+        pumpApp: (tester) async => investorsPumpAppHelper(
           mockInvestorsRepository: mockInvestorsRepository,
           tester: tester,
-        );
-
-        await investorsListLoadHelper(tester);
-      });
+        ),
+        lastCard: KWidgetkeys.screen.investors.cardLast,
+      );
 
       group('${KGroupText.goRouter} ', () {
         late MockGoRouter mockGoRouter;
