@@ -16,7 +16,7 @@ class HomeBoxWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (isDesk) {
+    if (isDesk || isTablet) {
       return Row(
         key: KWidgetkeys.screen.home.box,
         children: [
@@ -90,94 +90,15 @@ class HomeBoxWidget extends StatelessWidget {
                       ),
                     ),
                   ),
-                  KImage.homeImage,
-                ],
-              ),
-            ),
-          ),
-        ],
-      );
-    } else if (isTablet) {
-      return Row(
-        key: KWidgetkeys.screen.home.box,
-        children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                KSizedBox.kHeightSizedBox45,
-                Row(
-                  children: [
-                    Text(
-                      context.l10n.hello,
-                      key: KWidgetkeys.screen.home.boxHi,
-                      style: AppTextStyle.materialThemeTitleMedium,
-                    ),
-                    KSizedBox.kWidthSizedBox8,
-                    KImage.wavingHand,
-                  ],
-                ),
-                KSizedBox.kHeightSizedBox16,
-                Text(
-                  context.l10n.thisServiceForVeterans,
-                  key: KWidgetkeys.screen.home.boxTitle,
-                  style: AppTextStyle.h1Tablet,
-                ),
-                KSizedBox.kHeightSizedBox24,
-                Text(
-                  context.l10n.thisServiceForVeteransSubtitle,
-                  key: KWidgetkeys.screen.home.boxSubtitle,
-                  style: AppTextStyle.materialThemeBodyLarge,
-                ),
-                KSizedBox.kHeightSizedBox16,
-                DoubleButtonWidget(
-                  widgetKey: KWidgetkeys.screen.home.boxButton,
-                  text: context.l10n.detail,
-                  textColor: AppColors.materialThemeWhite,
-                  color: AppColors.materialThemeKeyColorsSecondary,
-                  onPressed: () => Scrollable.ensureVisible(
-                    aboutProjectKey.currentContext!,
-                    duration: const Duration(microseconds: 1000),
-                    curve: Curves.easeInOut,
-                  ),
-                  isDesk: isDesk,
-                ),
-                KSizedBox.kHeightSizedBox45,
-              ],
-            ),
-          ),
-          Expanded(
-            child: ConstrainedBox(
-              constraints:
-                  const BoxConstraints(maxHeight: KMinMaxSize.maxHeight400),
-              child: Stack(
-                alignment: Alignment.bottomRight,
-                children: [
-                  const Positioned.fill(
-                    child: Padding(
-                      padding: EdgeInsets.only(top: KPadding.kPaddingSize40),
-                      child: DecoratedBox(
-                        decoration: KWidgetTheme.boxDecorNeutralVariant,
+                  if (isDesk)
+                    KImage.homeImage
+                  else
+                    ConstrainedBox(
+                      constraints: const BoxConstraints(
+                        maxHeight: KMinMaxSize.maxHeight400,
                       ),
+                      child: KImage.homeImageMob,
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      bottom: KPadding.kPaddingSize56,
-                    ),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: KImage.logoHome.copyWith(
-                        height: KSize.kPixel400,
-                      ),
-                    ),
-                  ),
-                  ConstrainedBox(
-                    constraints: const BoxConstraints(
-                      maxHeight: KMinMaxSize.maxHeight400,
-                    ),
-                    child: KImage.homeImageMob,
-                  ),
                 ],
               ),
             ),

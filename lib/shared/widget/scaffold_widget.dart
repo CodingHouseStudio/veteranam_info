@@ -54,7 +54,7 @@ class ScaffoldWidget extends StatelessWidget {
             slivers: [
               SliverPersistentHeader(
                 delegate: NawbarWidget(
-                  isDesk: isTablet ? (isDesk ? true : true) : false,
+                  isDesk: isTablet,
                 ),
               ),
               if (titleChildWidgetsFunction != null)

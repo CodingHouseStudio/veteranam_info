@@ -27,8 +27,9 @@ List<Widget> _boxWidgetList({
                     BoxWidget(
                       key: KWidgetkeys.screen.home.storyBox,
                       text: context.l10n.stories,
-                      onTap: () =>
-                          context.goNamedWithScroll(KRoute.stories.name),
+                      onTap: () => context.goNamedWithScroll(
+                        KRoute.stories.name,
+                      ),
                       isDesk: true,
                       icon: KIcon.messageSquare,
                     ),
@@ -36,7 +37,9 @@ List<Widget> _boxWidgetList({
                     BoxWidget(
                       key: KWidgetkeys.screen.home.workBox,
                       text: context.l10n.work,
-                      onTap: () => context.goNamedWithScroll(KRoute.work.name),
+                      onTap: () => context.goNamedWithScroll(
+                        KRoute.work.name,
+                      ),
                       isDesk: true,
                       icon: KIcon.briefcase,
                     ),
@@ -57,7 +60,9 @@ List<Widget> _boxWidgetList({
           BoxWidget(
             key: KWidgetkeys.screen.home.storyBox,
             text: context.l10n.stories,
-            onTap: () => context.goNamedWithScroll(KRoute.stories.name),
+            onTap: () => context.goNamedWithScroll(
+              KRoute.stories.name,
+            ),
             isDesk: false,
             icon: KIcon.messageSquare,
           ),
@@ -65,7 +70,9 @@ List<Widget> _boxWidgetList({
           BoxWidget(
             key: KWidgetkeys.screen.home.workBox,
             text: context.l10n.work,
-            onTap: () => context.goNamedWithScroll(KRoute.work.name),
+            onTap: () => context.goNamedWithScroll(
+              KRoute.work.name,
+            ),
             isDesk: false,
             icon: KIcon.briefcase,
           ),
@@ -136,7 +143,9 @@ List<Widget> _boxWidgetList({
         BoxWidget(
           key: KWidgetkeys.screen.home.investorsBox,
           text: context.l10n.investors,
-          onTap: () => context.goNamedWithScroll(KRoute.investors.name),
+          onTap: () => context.goNamedWithScroll(
+            KRoute.investors.name,
+          ),
           isDesk: isTablet,
           icon: KIcon.fileText,
         ),

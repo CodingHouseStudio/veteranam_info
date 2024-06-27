@@ -194,7 +194,8 @@ class HomeBodyWidget extends StatelessWidget {
               rightPadding: KPadding.kPaddingSize32,
             )
           else if (isTablet) ...[
-            KImage.discountImage.setKey(KWidgetkeys.screen.home.discountImage),
+            KImage.inforamationImage
+                .setKey(KWidgetkeys.screen.home.informationImage),
             KSizedBox.kWidthSizedBox48,
             Padding(
               padding: const EdgeInsets.symmetric(
