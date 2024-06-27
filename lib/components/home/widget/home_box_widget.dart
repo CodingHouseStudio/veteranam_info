@@ -6,15 +6,17 @@ import 'package:kozak/shared/shared.dart';
 class HomeBoxWidget extends StatelessWidget {
   const HomeBoxWidget({
     required this.isDesk,
+    required this.isTablet,
     required this.aboutProjectKey,
     super.key,
   });
   final bool isDesk;
+  final bool isTablet;
   final GlobalKey aboutProjectKey;
 
   @override
   Widget build(BuildContext context) {
-    if (isDesk) {
+    if (isDesk || isTablet) {
       return Row(
         key: KWidgetkeys.screen.home.box,
         children: [
@@ -88,7 +90,15 @@ class HomeBoxWidget extends StatelessWidget {
                       ),
                     ),
                   ),
-                  KImage.homeImage,
+                  if (isDesk)
+                    KImage.homeImage
+                  else
+                    ConstrainedBox(
+                      constraints: const BoxConstraints(
+                        maxHeight: KMinMaxSize.maxHeight400,
+                      ),
+                      child: KImage.homeImageMob,
+                    ),
                 ],
               ),
             ),

@@ -79,7 +79,7 @@ class _ScaffoldAutoLoadingWidgetMobileState
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
         final isDesk =
-            constraints.maxWidth > KPlatformConstants.minWidthThresholdTablet;
+            constraints.maxWidth > KPlatformConstants.minWidthThresholdDesk;
         final mainChildWidget = widget.mainChildWidgetsFunction(isDesk: isDesk);
         final padding = EdgeInsets.symmetric(
           horizontal: (isDesk

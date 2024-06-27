@@ -49,7 +49,7 @@ class InvestorsBodyWidget extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: SectionWidget.get(
-                      isDesk: true,
+                      isTablet: isDesk,
                       textPoint: null,
                       title: context.l10n.supportOurVeterans,
                       subtitle: context.l10n.investorsSubtitle,
@@ -70,7 +70,7 @@ class InvestorsBodyWidget extends StatelessWidget {
             )
           else ...[
             ...SectionWidget.get(
-              isDesk: false,
+              isTablet: isDesk,
               textPoint: null,
               title: context.l10n.supportOurVeterans,
               subtitle: context.l10n.investorsSubtitle,
