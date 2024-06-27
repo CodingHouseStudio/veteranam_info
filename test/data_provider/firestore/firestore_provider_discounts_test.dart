@@ -7,42 +7,51 @@ import '../../text_dependency.dart';
 
 void main() {
   group(
-      '${KScreenBlocName.story} ${KScreenBlocName.firestoreService}'
+      '${KScreenBlocName.discount} ${KScreenBlocName.firestoreService}'
       ' ${KGroupText.provider} ', () {
     late FirestoreService firestoreService;
     late FirebaseFirestore mockFirebaseFirestore;
     late CollectionReference<Map<String, dynamic>> mockCollectionReference;
+    late DocumentReference<Map<String, dynamic>> mockDocumentReference;
+    late Query<Map<String, dynamic>> mockQuery;
     late QuerySnapshot<Map<String, dynamic>> mockQuerySnapshot;
     late List<QueryDocumentSnapshot<Map<String, dynamic>>>
         mockQueryDocumentSnapshot;
-    late DocumentReference<Map<String, dynamic>> mockDocumentReference;
-    late List<DocumentChange<Map<String, dynamic>>> mockDocumentChange;
     late SnapshotMetadata mockSnapshotMetadata;
-    late Query<Map<String, dynamic>> mockQuery;
+    late List<DocumentChange<Map<String, dynamic>>> mockDocumentChange;
     setUp(() {
       mockCollectionReference = MockCollectionReference();
       mockFirebaseFirestore = MockFirebaseFirestore();
       mockDocumentReference = MockDocumentReference();
+      mockQuery = MockQuery();
       mockQuerySnapshot = MockQuerySnapshot();
       mockQueryDocumentSnapshot = [MockQueryDocumentSnapshot()];
-      mockDocumentChange = [MockDocumentChange()];
       mockSnapshotMetadata = MockSnapshotMetadata();
-      mockQuery = MockQuery();
+      mockDocumentChange = [MockDocumentChange()];
 
       when(
-        mockFirebaseFirestore.collection(FirebaseCollectionName.stroies),
+        mockFirebaseFirestore.collection(FirebaseCollectionName.discount),
       ).thenAnswer((realInvocation) => mockCollectionReference);
 
       when(
-        mockCollectionReference.doc(KTestText.storyModelItems.first.id),
+        mockCollectionReference.doc(KTestText.discountModelItems.last.id),
       ).thenAnswer(
         (_) => mockDocumentReference,
       );
 
       when(
-        mockDocumentReference.set(KTestText.storyModelItems.first.toJson()),
+        mockCollectionReference.where(
+          DiscountModelJsonField.userId,
+          isEqualTo: KTestText.user.id,
+        ),
       ).thenAnswer(
-        (_) async {},
+        (_) => mockQuery,
+      );
+
+      when(
+        mockQuery.get(),
+      ).thenAnswer(
+        (_) async => mockQuerySnapshot,
       );
 
       when(
@@ -58,13 +67,6 @@ void main() {
       ).thenAnswer(
         (_) => mockQueryDocumentSnapshot,
       );
-
-      when(
-        mockQueryDocumentSnapshot.first.data(),
-      ).thenAnswer(
-        (_) => KTestText.storyModelItems.map((e) => e.toJson()).toList().first,
-      );
-
       when(
         mockQuerySnapshot.docChanges,
       ).thenAnswer(
@@ -72,11 +74,17 @@ void main() {
       );
 
       when(
-        mockDocumentChange.first.type,
+        mockDocumentChange.last.type,
       ).thenAnswer(
         (_) => DocumentChangeType.added,
       );
 
+      when(
+        mockQueryDocumentSnapshot.last.data(),
+      ).thenAnswer(
+        (_) =>
+            KTestText.discountModelItems.map((e) => e.toJson()).toList().last,
+      );
       when(
         mockQuerySnapshot.metadata,
       ).thenAnswer(
@@ -88,84 +96,35 @@ void main() {
       ).thenAnswer(
         (_) => false,
       );
+
       when(
-        mockCollectionReference.where(
-          StoryModelJsonField.userId,
-          isEqualTo: KTestText.user.id,
-        ),
+        mockDocumentReference.set(KTestText.discountModelItems.last.toJson()),
       ).thenAnswer(
-        (_) => mockQuery,
+        (_) async {},
       );
 
       when(
-        mockQuery.get(),
+        mockDocumentReference.delete(),
       ).thenAnswer(
-        (_) async => mockQuerySnapshot,
+        (_) async {},
       );
 
       FirestoreService.firebaseFirestore = mockFirebaseFirestore;
       firestoreService = FirestoreService();
     });
-    test('add story', () async {
-      await firestoreService.addStory(KTestText.storyModelItems.first);
 
-      verify(
-        mockFirebaseFirestore.collection(FirebaseCollectionName.stroies),
-      ).called(1);
-      verify(
-        mockCollectionReference.doc(KTestText.storyModelItems.first.id),
-      ).called(1);
-      verify(
-        mockDocumentReference.set(KTestText.storyModelItems.first.toJson()),
-      ).called(1);
-    });
-    test('get stories', () async {
-      await expectLater(
-        firestoreService.getStories(),
-        emitsInOrder([
-          [KTestText.storyModelItems.first],
-        ]),
-        reason: 'Wait for getting information',
-      );
-
-      verify(
-        mockFirebaseFirestore.collection(FirebaseCollectionName.stroies),
-      ).called(1);
-      verify(
-        mockCollectionReference.snapshots(
-          includeMetadataChanges: true,
-        ),
-      ).called(1);
-      verify(
-        mockQuerySnapshot.docs,
-      ).called(1);
-      verify(
-        mockQueryDocumentSnapshot.first.data(),
-      ).called(1);
-      verify(
-        mockQuerySnapshot.metadata,
-      ).called(1);
-      verify(
-        mockSnapshotMetadata.isFromCache,
-      ).called(1);
-
+    test('Get User Discount', () async {
       expect(
-        firestoreService.getStories(),
-        emits([KTestText.storyModelItems.first]),
-      );
-    });
-    test('Get User Story', () async {
-      expect(
-        await firestoreService.getStoriesByUserId(KTestText.user.id),
-        [KTestText.storyModelItems.first],
+        await firestoreService.getDiscountsByUserId(KTestText.user.id),
+        [KTestText.discountModelItems.last],
       );
 
       verify(
-        mockFirebaseFirestore.collection(FirebaseCollectionName.stroies),
+        mockFirebaseFirestore.collection(FirebaseCollectionName.discount),
       ).called(1);
       verify(
         mockCollectionReference.where(
-          StoryModelJsonField.userId,
+          DiscountModelJsonField.userId,
           isEqualTo: KTestText.user.id,
         ),
       ).called(1);
@@ -177,6 +136,68 @@ void main() {
       ).called(1);
       verify(
         mockQueryDocumentSnapshot.last.data(),
+      ).called(1);
+    });
+    test('get discounts', () async {
+      await expectLater(
+        firestoreService.getDiscounts(),
+        emitsInOrder([
+          [KTestText.discountModelItems.last],
+        ]),
+        reason: 'Wait for getting discounts',
+      );
+
+      verify(
+        mockFirebaseFirestore.collection(FirebaseCollectionName.discount),
+      ).called(1);
+      verify(
+        mockCollectionReference.snapshots(
+          includeMetadataChanges: true,
+        ),
+      ).called(1);
+      verify(
+        mockQuerySnapshot.docs,
+      ).called(1);
+      verify(
+        mockQueryDocumentSnapshot.last.data(),
+      ).called(1);
+      verify(
+        mockQuerySnapshot.metadata,
+      ).called(1);
+      verify(
+        mockSnapshotMetadata.isFromCache,
+      ).called(1);
+
+      expect(
+        firestoreService.getDiscounts(),
+        emits([KTestText.discountModelItems.last]),
+      );
+    });
+    test('add discount', () async {
+      await firestoreService.addDiscount(KTestText.discountModelItems.last);
+
+      verify(
+        mockFirebaseFirestore.collection(FirebaseCollectionName.discount),
+      ).called(1);
+      verify(
+        mockCollectionReference.doc(KTestText.discountModelItems.last.id),
+      ).called(1);
+      verify(
+        mockDocumentReference.set(KTestText.discountModelItems.last.toJson()),
+      ).called(1);
+    });
+    test('add discount', () async {
+      await firestoreService
+          .deleteDiscountById(KTestText.discountModelItems.last.id);
+
+      verify(
+        mockFirebaseFirestore.collection(FirebaseCollectionName.discount),
+      ).called(1);
+      verify(
+        mockCollectionReference.doc(KTestText.discountModelItems.last.id),
+      ).called(1);
+      verify(
+        mockDocumentReference.delete(),
       ).called(1);
     });
   });

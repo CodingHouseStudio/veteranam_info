@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:kozak/shared/shared.dart';
@@ -20,8 +22,9 @@ void main() {
     });
     group('${KGroupText.successfulGet} ', () {
       setUp(() {
-        when(mockFirestoreService.getStories()).thenAnswer(
-          (_) => Stream.value(KTestText.storyModelItems),
+        when(mockFirestoreService.getStoriesByUserId(KTestText.user.id))
+            .thenAnswer(
+          (_) async => KTestText.storyModelItems,
         );
         if (GetIt.I.isRegistered<FirestoreService>()) {
           GetIt.I.unregister<FirestoreService>();
@@ -34,18 +37,20 @@ void main() {
 
         mockStoryRepository = StoryRepository();
       });
-      test('Get Story', () async {
+      test('Get Story by id', () async {
         expect(
-          mockStoryRepository.getStoryItems(),
-          emits(KTestText.storyModelItems),
+          await mockStoryRepository.getStoriesById(KTestText.user.id),
+          isA<Right<SomeFailure, List<StoryModel>>>()
+              .having((e) => e.value, 'value', KTestText.storyModelItems),
         );
       });
     });
     group('${KGroupText.failureGet} ', () {
       setUp(() {
-        when(mockFirestoreService.getStories()).thenAnswer(
-          (realInvocation) => Stream.error(
-            KGroupText.failureGet,
+        when(mockFirestoreService.getStoriesByUserId(KTestText.user.id))
+            .thenThrow(
+          FirebaseException(
+            plugin: KGroupText.failureGet,
           ),
         );
         if (GetIt.I.isRegistered<FirestoreService>()) {
@@ -59,10 +64,14 @@ void main() {
 
         mockStoryRepository = StoryRepository();
       });
-      test('Get Story', () async {
+      test('Get Story by id', () async {
         expect(
-          mockStoryRepository.getStoryItems(),
-          emitsError(KGroupText.failureGet),
+          await mockStoryRepository.getStoriesById(KTestText.user.id),
+          isA<Left<SomeFailure, List<StoryModel>>>().having(
+            (e) => e.value,
+            'value',
+            equals(const SomeFailure.serverError()),
+          ),
         );
       });
     });

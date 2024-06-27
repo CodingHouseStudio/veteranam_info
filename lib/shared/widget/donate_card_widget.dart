@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kozak/shared/shared.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DonateCardWidget extends StatelessWidget {
   const DonateCardWidget({
@@ -31,7 +32,7 @@ class DonateCardWidget extends StatelessWidget {
             if (fundModel.image != null)
               ImageWidget(
                 key: KWidgetkeys.widget.donateCard.image,
-                imageUrl: fundModel.image.firstImage!,
+                imageUrl: fundModel.image!.downloadURL,
                 fit: BoxFit.fill,
               ),
             Padding(
@@ -67,6 +68,7 @@ class DonateCardWidget extends StatelessWidget {
                   DonateButtonWidget(
                     key: KWidgetkeys.widget.donateCard.button,
                     text: context.l10n.support,
+                    onPressed: () => _launchURL(fundModel.projectsLink!),
                     isDesk: isDesk,
                   ),
                 ],
@@ -76,5 +78,15 @@ class DonateCardWidget extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<void> _launchURL(String url) async {
+    final uri = Uri.parse(url);
+
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri);
+    } else {
+      throw Exception('Could not launch $url');
+    }
   }
 }
