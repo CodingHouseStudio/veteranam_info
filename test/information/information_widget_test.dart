@@ -16,8 +16,19 @@ void main() {
   tearDown(GetIt.I.reset);
   group('${KScreenBlocName.information} ', () {
     late IInformationRepository mockInformationRepository;
+    late AuthenticationRepository mockAuthenticationRepository;
     setUp(() {
       mockInformationRepository = MockIInformationRepository();
+      mockAuthenticationRepository = MockAuthenticationRepository();
+      when(mockAuthenticationRepository.currentUser).thenAnswer(
+        (realInvocation) => User.empty,
+      );
+      when(mockAuthenticationRepository.currentUserSetting).thenAnswer(
+        (realInvocation) => UserSetting.empty,
+      );
+      when(mockAuthenticationRepository.isAnonymouslyOrEmty()).thenAnswer(
+        (realInvocation) => true,
+      );
     });
     group('${KGroupText.failure} ', () {
       setUp(() {
@@ -30,6 +41,7 @@ void main() {
       testWidgets('${KGroupText.failureGet} ', (tester) async {
         await informationPumpAppHelper(
           mockInformationRepository: mockInformationRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
           tester: tester,
         );
 
@@ -59,6 +71,7 @@ void main() {
       testWidgets('${KGroupText.mockButton} ', (tester) async {
         await informationPumpAppHelper(
           mockInformationRepository: mockInformationRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
           tester: tester,
         );
 
@@ -79,6 +92,7 @@ void main() {
       testWidgets('${KGroupText.intial} ', (tester) async {
         await informationPumpAppHelper(
           mockInformationRepository: mockInformationRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
           tester: tester,
         );
 
@@ -97,6 +111,7 @@ void main() {
         KPlatformConstants.isWebDesktop = false;
         await informationPumpAppHelper(
           mockInformationRepository: mockInformationRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
           tester: tester,
         );
 
@@ -109,6 +124,7 @@ void main() {
         testWidgets('${KGroupText.intial} ', (tester) async {
           await informationPumpAppHelper(
             mockInformationRepository: mockInformationRepository,
+            mockAuthenticationRepository: mockAuthenticationRepository,
             tester: tester,
             mockGoRouter: mockGoRouter,
           );
@@ -116,8 +132,21 @@ void main() {
           await informationInitialHelper(tester);
         });
 
-        // group('${KGroupText.goTo} ', () {
-        // });
+        group('${KGroupText.goTo} ', () {
+          testWidgets('nawbar widget navigation', (tester) async {
+            await informationPumpAppHelper(
+              mockInformationRepository: mockInformationRepository,
+              mockAuthenticationRepository: mockAuthenticationRepository,
+              tester: tester,
+              mockGoRouter: mockGoRouter,
+            );
+
+            await navbarNavigationHelper(
+              tester: tester,
+              mockGoRouter: mockGoRouter,
+            );
+          });
+        });
       });
     });
   });

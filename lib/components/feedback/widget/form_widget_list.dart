@@ -2,6 +2,7 @@ part of 'body/feedback_body_widget.dart';
 
 List<Widget> _formWidgegList({
   required bool isDesk,
+  required bool isTablet,
   required BuildContext context,
   required TextEditingController nameController,
   required TextEditingController emailController,
@@ -43,7 +44,7 @@ List<Widget> _formWidgegList({
                       KSizedBox.kHeightSizedBox8,
                       Wrap(
                         children: FooterWidget.socialMediaLinks(
-                          isDesk: isDesk,
+                          isTablet: isTablet,
                           context: context,
                           padding: KSizedBox.kWidthSizedBox24,
                           instagramKey: KWidgetkeys.screen.feedback.instagram,
@@ -107,7 +108,7 @@ List<Widget> _formWidgegList({
             KSizedBox.kHeightSizedBox8,
             Wrap(
               children: FooterWidget.socialMediaLinks(
-                isDesk: isDesk,
+                isTablet: isTablet,
                 context: context,
                 padding: KSizedBox.kWidthSizedBox24,
                 instagramKey: KWidgetkeys.screen.feedback.instagram,

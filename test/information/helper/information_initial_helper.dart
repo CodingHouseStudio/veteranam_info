@@ -6,6 +6,10 @@ import '../../text_dependency.dart';
 Future<void> informationInitialHelper(
   WidgetTester tester,
 ) async {
+  await nawbarHelper(
+    tester: tester,
+    searchText: KTestText.field,
+  );
   await changeWindowSizeHelper(
     tester: tester,
     test: () async {
