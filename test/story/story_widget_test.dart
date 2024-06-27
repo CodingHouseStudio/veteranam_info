@@ -58,6 +58,16 @@ void main() {
 
         await storyInitialHelper(tester);
       });
+
+      loadingList(
+        pumpApp: (tester) async => storyPumpAppHelper(
+          tester: tester,
+          mockStoryRepository: mockStoryRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
+        ),
+        lastCard: KWidgetkeys.screen.story.cardLast,
+      );
+
       testWidgets('Stories list load ', (tester) async {
         await storyPumpAppHelper(
           mockStoryRepository: mockStoryRepository,

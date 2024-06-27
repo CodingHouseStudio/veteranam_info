@@ -21,6 +21,7 @@ class InformationBodyWidget extends StatelessWidget {
       ),
       listenWhen: (previous, current) => current.failure != null,
       builder: (context, _) => ScaffoldAutoLoadingWidget(
+        loadingButtonText: context.l10n.moreNews,
         titleChildWidgetsFunction: ({required isDesk}) => [
           if (isDesk)
             KSizedBox.kHeightSizedBox40

@@ -75,6 +75,14 @@ void main() {
         await informationInitialHelper(tester);
       });
 
+      loadingList(
+        pumpApp: (tester) async => informationPumpAppHelper(
+          mockInformationRepository: mockInformationRepository,
+          tester: tester,
+        ),
+        lastCard: KWidgetkeys.screen.information.cardLast,
+      );
+
       testWidgets('News list load and filter', (tester) async {
         await informationPumpAppHelper(
           mockInformationRepository: mockInformationRepository,
