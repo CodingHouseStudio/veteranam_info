@@ -52,16 +52,16 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   @override
   Stream<User> get user => _firebaseAuth.authStateChanges().map(
         (firebaseUser) {
-          debugPrint('================================================');
+          // debugPrint('================================================');
           if (firebaseUser != null) {
-            debugPrint('Firebase Auth State Changed: User is authenticated');
-            debugPrint('Firebase User Details: $firebaseUser');
+            // debugPrint('Firebase Auth State Changed: User is authenticated');
+            // debugPrint('Firebase User Details: $firebaseUser');
             final user = firebaseUser.toUser;
             _cache.write(key: userCacheKey, value: user);
             return user;
           } else {
-            debugPrint('Firebase Auth State Changed: '
-                'User is unauthenticated (User.empty)');
+            // debugPrint('Firebase Auth State Changed: '
+            //     'User is unauthenticated (User.empty)');
             return User.empty;
           }
         },
@@ -74,13 +74,13 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
           .map(
         (firebaseUserSetting) {
           if (firebaseUserSetting.isNotEmpty) {
-            debugPrint('================================================');
-            debugPrint('Firebase Auth State Changed: User is authenticated');
-            debugPrint('Firebase User Details: $firebaseUserSetting');
+            // debugPrint('================================================');
+            // debugPrint('Firebase Auth State Changed: User is authenticated');
+            // debugPrint('Firebase User Details: $firebaseUserSetting');
             _cache.write(key: userSettingCacheKey, value: firebaseUserSetting);
           } else {
-            debugPrint('Firebase Auth State Changed: '
-                'User is unauthenticated (User.empty)');
+            // debugPrint('Firebase Auth State Changed: '
+            //     'User is unauthenticated (User.empty)');
           }
           return firebaseUserSetting;
         },
@@ -229,10 +229,10 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
       ]);
       return logInAnonymously();
     } on firebase_auth.FirebaseAuthException catch (e) {
-      debugPrint('Firebase Auth Error: ${e.message}');
+      // debugPrint('Firebase Auth Error: ${e.message}');
       return Left(const LogOutFailure().status);
     } catch (e) {
-      debugPrint('Logout error: $e');
+      // debugPrint('Logout error: $e');
       return const Left(SomeFailure.serverError());
     }
     // finally {
@@ -257,10 +257,10 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
       await operation();
       return const Right(true);
     } on firebase_auth.FirebaseAuthException catch (e) {
-      debugPrint('Firebase Auth Error: ${e.message}');
+      // debugPrint('Firebase Auth Error: ${e.message}');
       return Left(exception(e));
     } catch (e) {
-      debugPrint('General Auth Error: $e');
+      // debugPrint('General Auth Error: $e');
       return const Left(SomeFailure.serverError());
     } finally {
       _updateAuthStatusBasedOnCache();
@@ -269,19 +269,19 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   }
 
   void _updateAuthStatusBasedOnCache() {
-    debugPrint('Updating auth status based on cache');
+    // debugPrint('Updating auth status based on cache');
     final user = currentUser.isEmpty;
-    debugPrint('Current user inside '
-        '_updateAuthStatusBasedOnCache : $currentUser');
-    debugPrint('user is $user');
+    // debugPrint('Current user inside '
+    //     '_updateAuthStatusBasedOnCache : $currentUser');
+    // debugPrint('user is $user');
   }
 
   void _updateUserSettingBasedOnCache() {
-    debugPrint('Updating user setting based on cache');
+    // debugPrint('Updating user setting based on cache');
     final userSetting = currentUserSetting.isEmpty;
-    debugPrint('Current user setting inside '
-        '_updateAuthStatusBasedOnCache : $currentUserSetting');
-    debugPrint('userSertting is $userSetting');
+    // debugPrint('Current user setting inside '
+    //     '_updateAuthStatusBasedOnCache : $currentUserSetting');
+    // debugPrint('userSertting is $userSetting');
   }
 
   @override
@@ -292,10 +292,10 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
       await _firebaseAuth.sendPasswordResetEmail(email: email);
       return const Right(true);
     } on firebase_auth.FirebaseAuthException catch (e) {
-      debugPrint('Sendig error: ${e.message}');
+      // debugPrint('Sendig error: ${e.message}');
       return const Left(SomeFailure.emailSendingFailed());
     } catch (e) {
-      debugPrint('Unknown error: $e');
+      // debugPrint('Unknown error: $e');
       return const Left(SomeFailure.serverError());
     }
   }
@@ -308,10 +308,10 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
       _cache.clear(); // Clear the cache after user deletion
       return logInAnonymously();
     } on firebase_auth.FirebaseAuthException catch (e) {
-      debugPrint('Firebase Auth Error: ${e.message}');
+      // debugPrint('Firebase Auth Error: ${e.message}');
       return const Left(SomeFailure.serverError());
     } catch (e) {
-      debugPrint('General Auth Error: $e');
+      // debugPrint('General Auth Error: $e');
       return const Left(SomeFailure.serverError());
     }
     // finally {

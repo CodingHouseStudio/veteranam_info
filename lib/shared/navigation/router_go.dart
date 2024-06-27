@@ -1,4 +1,5 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:flutter/foundation.dart' deferred as foundation;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -21,7 +22,9 @@ GoRouter router = GoRouter(
   observers: [
     FirebaseAnalyticsObserver(
       analytics: FirebaseAnalytics.instance,
-      onError: (_) => debugPrint('FirebaseAnalyticsObserver error $_'),
+      onError: (_) => foundation.kDebugMode
+          ? debugPrint('FirebaseAnalyticsObserver error $_')
+          : null,
     ),
   ],
   redirect: (BuildContext context, GoRouterState state) async {
