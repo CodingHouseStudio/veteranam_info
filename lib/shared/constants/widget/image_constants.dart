@@ -106,7 +106,7 @@ abstract class KImage {
   //   fit: BoxFit.fill,
   // );
   precacheImage(
-    NetworkImage(
+    AssetImage(
       name,
     ),
     context,
@@ -118,15 +118,13 @@ abstract class KImage {
     double? height,
     int? casheSize,
   }) =>
-      Image.network(
-          key: Key(name),
-          name,
-          fit: fit,
-          width: width,
-          height: height,
-          cacheHeight: casheSize ?? KMinMaxSize.kImageMaxSize,
-          cacheWidth: casheSize ?? KMinMaxSize.kImageMaxSize,
-          headers: const {
-            'Cache-Control': 'max-age=7200',
-          });
+      Image.asset(
+        key: Key(name),
+        name,
+        fit: fit,
+        width: width,
+        height: height,
+        cacheHeight: casheSize ?? KMinMaxSize.kImageMaxSize,
+        cacheWidth: casheSize ?? KMinMaxSize.kImageMaxSize,
+      );
 }
