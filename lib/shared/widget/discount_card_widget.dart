@@ -266,74 +266,56 @@ class DiscountsCardWidgetMob extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 KSizedBox.kHeightSizedBox16,
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: KPadding.kPaddingSize16,
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                              vertical: KPadding.kPaddingSize4,
-                              horizontal: KPadding.kPaddingSize8,
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: KPadding.kPaddingSize16,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: KPadding.kPaddingSize4,
+                          horizontal: KPadding.kPaddingSize8,
+                        ),
+                        decoration: KWidgetTheme.boxDecorationDiscountCategory,
+                        child: Row(
+                          children: [
+                            KIcon.check,
+                            KSizedBox.kWidthSizedBox8,
+                            Text(
+                              discountItem.category.first,
+                              style: AppTextStyle.materialThemeLabelLarge,
                             ),
-                            decoration:
-                                KWidgetTheme.boxDecorationDiscountCategory,
-                            child: Row(
-                              children: [
-                                KIcon.check,
-                                KSizedBox.kWidthSizedBox8,
-                                Text(
-                                  discountItem.category.first,
-                                  style: AppTextStyle.materialThemeLabelLarge,
-                                ),
-                              ],
-                            ),
-                          ),
-                          Container(
-                            decoration: KWidgetTheme.boxDecorationDiscount,
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: KPadding.kPaddingSize8,
-                              vertical: KPadding.kPaddingSize4,
-                            ),
-                            child: Expanded(
-                              child: Row(
-                                children: [
-                                  const CircleAvatar(
-                                    radius: KPadding.kPaddingSize4,
-                                  ),
-                                  KSizedBox.kWidthSizedBox8,
-                                  Text(
-                                    // ignore: lines_longer_than_80_chars
-                                    '${context.l10n.discount} ${discountItem.discount.first}%',
-                                    key: KWidgetkeys
-                                        .widget.discountCard.discount,
-                                    style: AppTextStyle.materialThemeLabelLarge,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                    KSizedBox.kHeightSizedBox16,
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        left: KPadding.kPaddingSize16,
+                      Container(
+                        decoration: KWidgetTheme.boxDecorationDiscount,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: KPadding.kPaddingSize8,
+                          vertical: KPadding.kPaddingSize4,
+                        ),
+                        child: TextPointWidget(
+                          hasExpanded: false,
+                          '${context.l10n.discount} '
+                          '${discountItem.discount.first}%',
+                        ),
                       ),
-                      child: Text(
-                        discountItem.title,
-                        key: KWidgetkeys.widget.discountCard.service,
-                        style: AppTextStyle.materialThemeHeadlineSmall,
-                        overflow: TextOverflow.clip,
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
+                ),
+                KSizedBox.kHeightSizedBox16,
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: KPadding.kPaddingSize16,
+                  ),
+                  child: Text(
+                    discountItem.title,
+                    key: KWidgetkeys.widget.discountCard.service,
+                    style: AppTextStyle.materialThemeHeadlineSmall,
+                    overflow: TextOverflow.clip,
+                  ),
                 ),
                 KSizedBox.kHeightSizedBox16,
                 Padding(
@@ -434,35 +416,30 @@ Widget _cardIconListWidget(
   return CardTextDetailWidget(
     text: text,
     maxLines: 1,
-    icon: Expanded(
-      flex: 2,
-      child: Wrap(
-        crossAxisAlignment: WrapCrossAlignment.end,
-        children: [
-          _cardIconWidget(
-            label: context.l10n.webSite,
-            context,
-            onPressed: null,
-            icon: KIcon.captivePortal,
-          ),
-          if (isDesk) KSizedBox.kWidthSizedBox24 else KSizedBox.kWidthSizedBox8,
-          _cardIconWidget(
-            label: context.l10n.share,
-            context,
-            onPressed: onPressed,
-            icon: KIcon.share,
-          ),
-          if (isDesk) KSizedBox.kWidthSizedBox24 else KSizedBox.kWidthSizedBox8,
-          _cardIconWidget(
-            label: context.l10n.report,
-            context,
-            onPressed: null,
-            icon: KIcon.report
-                .copyWith(color: AppColors.materialThemeRefErrorError60),
-          ),
-        ],
+    icon: [
+      _cardIconWidget(
+        label: context.l10n.webSite,
+        context,
+        onPressed: null,
+        icon: KIcon.captivePortal,
       ),
-    ),
+      if (isDesk) KSizedBox.kWidthSizedBox24 else KSizedBox.kWidthSizedBox8,
+      _cardIconWidget(
+        label: context.l10n.share,
+        context,
+        onPressed: onPressed,
+        icon: KIcon.share,
+      ),
+      if (isDesk) KSizedBox.kWidthSizedBox24 else KSizedBox.kWidthSizedBox8,
+      _cardIconWidget(
+        label: context.l10n.report,
+        context,
+        onPressed: null,
+        icon: KIcon.report.copyWith(
+          color: AppColors.materialThemeRefErrorError60,
+        ),
+      ),
+    ],
     isDesk: isDesk,
   );
 }
@@ -532,13 +509,11 @@ class _ExpandableCityChipState extends State<ExpandableCityChip> {
                   padding: const EdgeInsets.only(
                     left: KPadding.kPaddingSize8,
                   ),
-                  child: Expanded(
-                    child: Text(
-                      isExpanded ? context.l10n.hideExpansion : moreCities,
-                      style: AppTextStyle.materialThemeLabelLarge.copyWith(
-                        decoration: TextDecoration.underline,
-                        color: AppColors.materialThemeRefTertiaryTertiary40,
-                      ),
+                  child: Text(
+                    isExpanded ? context.l10n.hideExpansion : moreCities,
+                    style: AppTextStyle.materialThemeLabelLarge.copyWith(
+                      decoration: TextDecoration.underline,
+                      color: AppColors.materialThemeRefTertiaryTertiary40,
                     ),
                   ),
                 ),

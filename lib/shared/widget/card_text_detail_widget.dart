@@ -14,7 +14,7 @@ class CardTextDetailWidget extends StatefulWidget {
 
   final String text;
   final int maxLines;
-  final Widget? icon;
+  final List<Widget>? icon;
   final List<String>? buttonText;
   final ButtonStyle? buttonStyle;
   final bool isDesk;
@@ -38,7 +38,7 @@ class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
   Widget build(BuildContext context) {
     return Column(
       key: cardDetailKey,
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Text(
           widget.text,
@@ -49,37 +49,41 @@ class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
         ),
         KSizedBox.kHeightSizedBox24,
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          // mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Flexible(
-              child: TextButton(
-                key: KWidgetkeys.widget.cardTextDetail.button,
-                onPressed: () {
-                  setState(() {
-                    if (maxLines == null) {
-                      maxLines = widget.maxLines;
-                      Scrollable.ensureVisible(
-                        cardDetailKey.currentContext!,
-                      );
-                    } else {
-                      maxLines = null;
-                    }
-                  });
-                },
-                style:
-                    widget.buttonStyle ?? KButtonStyles.borderBlackButtonStyle,
-                child: Text(
-                  maxLines == null
-                      ? widget.buttonText?.elementAt(1) ?? context.l10n.hide
-                      : widget.buttonText?.elementAt(0) ?? context.l10n.detail,
-                  key: KWidgetkeys.widget.cardTextDetail.buttonText,
-                  style: widget.isDesk
-                      ? AppTextStyle.materialThemeTitleMedium
-                      : AppTextStyle.materialThemeTitleSmall,
+            Expanded(
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: TextButton(
+                  key: KWidgetkeys.widget.cardTextDetail.button,
+                  onPressed: () {
+                    setState(() {
+                      if (maxLines == null) {
+                        maxLines = widget.maxLines;
+                        Scrollable.ensureVisible(
+                          cardDetailKey.currentContext!,
+                        );
+                      } else {
+                        maxLines = null;
+                      }
+                    });
+                  },
+                  style: widget.buttonStyle ??
+                      KButtonStyles.borderBlackButtonStyle,
+                  child: Text(
+                    maxLines == null
+                        ? widget.buttonText?.elementAt(1) ?? context.l10n.hide
+                        : widget.buttonText?.elementAt(0) ??
+                            context.l10n.detail,
+                    key: KWidgetkeys.widget.cardTextDetail.buttonText,
+                    style: widget.isDesk
+                        ? AppTextStyle.materialThemeTitleMedium
+                        : AppTextStyle.materialThemeTitleSmall,
+                  ),
                 ),
               ),
             ),
-            if (widget.icon != null) Flexible(child: widget.icon!),
+            if (widget.icon != null) ...widget.icon!,
           ],
         ),
       ],
