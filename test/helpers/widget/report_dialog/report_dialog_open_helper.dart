@@ -9,9 +9,12 @@ Future<void> reportDialogOpenHelper(
   await scrollingHelper(
     tester: tester,
     itemKey: KWidgetkeys.widget.reportDialog.button,
+    offset: KTestConstants.scrollingDown,
   );
 
   await tester.tap(find.byKey(KWidgetkeys.widget.reportDialog.button).first);
 
   await tester.pumpAndSettle();
+
+  expect(find.byKey(KWidgetkeys.widget.reportDialog.widget), findsOneWidget);
 }

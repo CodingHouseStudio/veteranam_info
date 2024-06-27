@@ -75,17 +75,27 @@ Future<void> investorsInitialHelper(
         findsWidgets,
       );
 
+      await scrollingHelper(
+        tester: tester,
+        offset: KTestConstants.scrollingDown,
+      );
+
+      expect(
+        find.byKey(KWidgetkeys.screen.investors.cardLast),
+        findsNothing,
+      );
+
+      await scrollingHelper(
+        tester: tester,
+        offset: KTestConstants.scrollingDown,
+      );
+
+      expect(
+        find.byKey(KWidgetkeys.screen.investors.cardLast),
+        findsNothing,
+      );
+
       await reportDialogInitialHelper(tester);
-
-      await scrollingHelper(
-        tester: tester,
-        offset: KTestConstants.scrollingDown,
-      );
-
-      await scrollingHelper(
-        tester: tester,
-        offset: KTestConstants.scrollingDown,
-      );
 
       // expect(
       //   find.byKey(KWidgetkeys.screen.investors.button),

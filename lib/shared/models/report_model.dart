@@ -50,8 +50,9 @@ class ReportModel with _$ReportModel {
 
 abstract class ReportModelJsonField {
   static const id = 'id';
-  static const guestId = 'reasonComplaint';
-  static const guestName = 'email';
-  static const email = 'message';
-  static const timestamp = 'date';
+  static const date = 'date';
+  static const email = 'email';
+  static const message = 'message';
+  static const reasonComplaint = 'reasonComplaint';
+  static const card = 'card';
 }

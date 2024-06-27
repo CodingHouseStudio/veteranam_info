@@ -14,8 +14,9 @@ class ReportDialogWidget extends StatelessWidget {
       key: KWidgetkeys.widget.reportDialog.widget,
       constraints: const BoxConstraints(maxWidth: KMinMaxSize.maxWidth460),
       child: BlocConsumer<ReportBloc, ReportState>(
-        listener: (context, state) =>
-            state.formState == ReportEnum.success ? context.pop() : null,
+        listener: (context, state) => context.pop(),
+        listenWhen: (previous, current) =>
+            current.formState == ReportEnum.success,
         builder: (context, _) {
           return Column(
             mainAxisSize: MainAxisSize.min,
@@ -61,17 +62,17 @@ class ReportDialogWidget extends StatelessWidget {
                           .user
                           ?.isAnonymously ??
                       false),
-                  errorText: _.formState == ReportEnum.nextInvalidData
-                      ? _.email?.error.value(context) ??
+                  errorText: _.formState == ReportEnum.nextInvalidData &&
                           (context
-                                      .read<AuthenticationBloc>()
-                                      .state
-                                      .user
-                                      ?.isAnonymously ??
-                                  false
-                              ? null
-                              : context.l10n.fieldCannotBeEmpty)
+                                  .read<AuthenticationBloc>()
+                                  .state
+                                  .user
+                                  ?.isAnonymously ??
+                              true)
+                      ? _.email?.error.value(context) ??
+                          context.l10n.fieldCannotBeEmpty
                       : null,
+                  text: context.read<AuthenticationBloc>().state.user?.email,
                 ),
                 KSizedBox.kHeightSizedBox16,
                 MessageFieldWidget(
@@ -81,11 +82,10 @@ class ReportDialogWidget extends StatelessWidget {
                       .add(ReportEvent.messageUpdated(text)),
                   isDesk: isDesk,
                   labelText: context.l10n.writeYourMessage,
-                  errorText: _.formState == ReportEnum.nextInvalidData
+                  errorText: _.formState == ReportEnum.nextInvalidData &&
+                          _.reasonComplaint == ReasonComplaint.other
                       ? _.message?.error.value(context) ??
-                          (_.reasonComplaint == ReasonComplaint.other
-                              ? context.l10n.fieldCannotBeEmpty
-                              : null)
+                          context.l10n.fieldCannotBeEmpty
                       : null,
                 ),
               ] else ...[
@@ -117,6 +117,8 @@ class ReportDialogWidget extends StatelessWidget {
                             KSizedBox.kHeightSizedBox16,
                             Text(
                               context.l10n.checkPointError,
+                              key: KWidgetkeys
+                                  .widget.reportDialog.checkPointError,
                               style: AppTextStyle.materialThemeBodySmallError,
                             ),
                           ]

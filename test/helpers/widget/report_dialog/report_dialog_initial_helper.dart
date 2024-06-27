@@ -14,6 +14,8 @@ Future<void> reportDialogInitialHelper(
 
   expect(find.byKey(KWidgetkeys.widget.reportDialog.checkPoint), findsWidgets);
 
+  // await chekPointHelper(tester: tester);
+
   expect(
     find.byKey(KWidgetkeys.widget.reportDialog.sendButton),
     findsOneWidget,
@@ -23,6 +25,26 @@ Future<void> reportDialogInitialHelper(
 
   expect(
     find.byKey(KWidgetkeys.widget.reportDialog.messageField),
+    findsNothing,
+  );
+
+  await tester.tapAt(Offset.zero);
+
+  await tester.pumpAndSettle();
+
+  expect(find.byKey(KWidgetkeys.widget.reportDialog.title), findsNothing);
+
+  expect(find.byKey(KWidgetkeys.widget.reportDialog.subtitle), findsNothing);
+
+  expect(find.byKey(KWidgetkeys.widget.reportDialog.checkPoint), findsNothing);
+
+  expect(
+    find.byKey(KWidgetkeys.widget.reportDialog.sendButton),
+    findsNothing,
+  );
+
+  expect(
+    find.byKey(KWidgetkeys.widget.reportDialog.widget),
     findsNothing,
   );
 }
