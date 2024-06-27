@@ -8,23 +8,25 @@ void loadingList({
   required Future<void> Function(WidgetTester) pumpApp,
   required Key lastCard,
 }) {
-  testWidgets('Desk', (tester) async {
-    KPlatformConstants.isWebDesktop = true;
-    await pumpApp(tester);
+  group('Loading List', () {
+    testWidgets('Desk', (tester) async {
+      KPlatformConstants.isWebDesktop = true;
+      await pumpApp(tester);
 
-    await _deskLoadingHelper(
-      tester: tester,
-      cardLast: lastCard,
-    );
-  });
-  testWidgets('Mobile', (tester) async {
-    KPlatformConstants.isWebDesktop = false;
-    await pumpApp(tester);
+      await _deskLoadingHelper(
+        tester: tester,
+        cardLast: lastCard,
+      );
+    });
+    testWidgets('Mobile', (tester) async {
+      KPlatformConstants.isWebDesktop = false;
+      await pumpApp(tester);
 
-    await _mobileLoadingHelper(
-      tester: tester,
-      cardLast: lastCard,
-    );
+      await _mobileLoadingHelper(
+        tester: tester,
+        cardLast: lastCard,
+      );
+    });
   });
 }
 
