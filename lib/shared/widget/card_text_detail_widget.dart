@@ -25,19 +25,16 @@ class CardTextDetailWidget extends StatefulWidget {
 
 class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
   late int? maxLines;
-  late GlobalKey cardDetailKey;
 
   @override
   void initState() {
     super.initState();
-    cardDetailKey = GlobalKey();
     maxLines = widget.maxLines;
   }
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      key: cardDetailKey,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
