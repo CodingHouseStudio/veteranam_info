@@ -199,6 +199,15 @@
   "free": "Free",
   "allStoresOfChain": "All establishments of the chain",
   "all": "All",
+  "complaint": "Complaint",
+  "reportPublication": "Report a publication",
+  "specifyReasonForComplaint": "Specify the reason for the complaint:",
+  "fraudOrSpam": "Fraud or spam;",
+  "fakeNewsOrDisinformation": "Fake news or disinformation;",
+  "offensiveOrHatefulContent": "Offensive or hateful content;",
+  "other": "Other (specify)",
+  "addComment": "Add a comment:",
+  "checkPointError": "Please select one of the following answers",
   "error": "We're sorry, there was an unforeseen error.",
   "@error": {
     "description": "message of an unforeseen error that was not foreseen."
