@@ -65,6 +65,7 @@ class _FeedbackBodyWidgetState extends State<FeedbackBodyWidget> {
             else
               ..._formWidgegList(
                 isDesk: isDesk,
+                isTablet: isTablet,
                 context: context,
                 nameController: nameController,
                 emailController: emailController,

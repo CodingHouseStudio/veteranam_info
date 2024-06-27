@@ -57,10 +57,10 @@ class HomeBodyWidget extends StatelessWidget {
                 ),
               ],
             )
-          else if (isTablet)
+          else
             Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: KPadding.kPaddingSize56,
+              padding: EdgeInsets.symmetric(
+                horizontal: isTablet ? KPadding.kPaddingSize56 : 0,
               ),
               child: Column(
                 children: [
@@ -68,28 +68,21 @@ class HomeBodyWidget extends StatelessWidget {
                     context.l10n.whatKindOfProject,
                     key: KWidgetkeys.screen.home.aboutProjecPrefix,
                   ),
-                  KSizedBox.kHeightSizedBox24,
+                  if (isTablet)
+                    KSizedBox.kHeightSizedBox24
+                  else
+                    KSizedBox.kHeightSizedBox8,
                   Text(
                     context.l10n.aboutProject,
                     key: KWidgetkeys.screen.home.aboutProjecSubtitle,
-                    style: AppTextStyle.materialThemeDisplaySmall,
+                    style: isTablet
+                        ? AppTextStyle.materialThemeDisplaySmall
+                        : AppTextStyle.materialThemeHeadlineSmall,
                   ),
                 ],
               ),
-            )
-          else ...[
-            TextPointWidget(
-              context.l10n.whatKindOfProject,
-              key: KWidgetkeys.screen.home.aboutProjecPrefix,
             ),
-            KSizedBox.kHeightSizedBox8,
-            Text(
-              context.l10n.aboutProject,
-              key: KWidgetkeys.screen.home.aboutProjecSubtitle,
-              style: AppTextStyle.materialThemeHeadlineSmall,
-            ),
-          ],
-          if (isDesk || isTablet)
+          if (isTablet)
             KSizedBox.kHeightSizedBox160
           else
             KSizedBox.kHeightSizedBox48,
@@ -111,8 +104,7 @@ class HomeBodyWidget extends StatelessWidget {
                     textButton: context.l10n.toDiscount,
                     route: () => context.goNamed(KRoute.discounts.name),
                     bottomWidget: KSizedBox.kHeightSizedBox90,
-                    isDesk: true,
-                    isTablet: false,
+                    isTablet: isTablet,
                   ),
                 ),
               ),
@@ -120,12 +112,15 @@ class HomeBodyWidget extends StatelessWidget {
                   .setKey(KWidgetkeys.screen.home.discountImage),
               rightPadding: KPadding.kPaddingSize84,
             )
-          else if (isTablet) ...[
+          else ...[
             KImage.discountImage.setKey(KWidgetkeys.screen.home.discountImage),
-            KSizedBox.kWidthSizedBox48,
+            if (isTablet)
+              KSizedBox.kWidthSizedBox48
+            else
+              KSizedBox.kWidthSizedBox16,
             Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: KPadding.kPaddingSize56,
+              padding: EdgeInsets.symmetric(
+                horizontal: isTablet ? KPadding.kPaddingSize56 : 0,
               ),
               child: Column(
                 children: [
@@ -139,30 +134,13 @@ class HomeBodyWidget extends StatelessWidget {
                     subtitle: context.l10n.discountsServicesSubtitle,
                     textButton: context.l10n.toDiscount,
                     route: () => context.goNamed(KRoute.discounts.name),
-                    isDesk: false,
-                    isTablet: true,
+                    isTablet: isTablet,
                   ),
                 ],
               ),
             ),
-          ] else ...[
-            KImage.discountImage.setKey(KWidgetkeys.screen.home.discountImage),
-            KSizedBox.kWidthSizedBox16,
-            ...SectionWidget.get(
-              buttonKey: KWidgetkeys.screen.home.discountButton,
-              prefixKey: KWidgetkeys.screen.home.discountPrefix,
-              titleKey: KWidgetkeys.screen.home.discountTitle,
-              subtitleKey: KWidgetkeys.screen.home.discountSubtitle,
-              textPoint: context.l10n.saveMoney,
-              title: context.l10n.discountsServices,
-              subtitle: context.l10n.discountsServicesSubtitle,
-              textButton: context.l10n.toDiscount,
-              route: () => context.goNamed(KRoute.discounts.name),
-              isDesk: false,
-              isTablet: false,
-            ),
           ],
-          if (isDesk || isTablet)
+          if (isTablet)
             KSizedBox.kHeightSizedBox160
           else
             KSizedBox.kHeightSizedBox40,
@@ -184,8 +162,7 @@ class HomeBodyWidget extends StatelessWidget {
                     textButton: context.l10n.toInfomation,
                     route: () => context.goNamed(KRoute.information.name),
                     bottomWidget: KSizedBox.kHeightSizedBox48,
-                    isDesk: true,
-                    isTablet: false,
+                    isTablet: isTablet,
                   ),
                 ),
               ),
@@ -193,13 +170,16 @@ class HomeBodyWidget extends StatelessWidget {
                   .setKey(KWidgetkeys.screen.home.informationImage),
               rightPadding: KPadding.kPaddingSize32,
             )
-          else if (isTablet) ...[
+          else ...[
             KImage.inforamationImage
                 .setKey(KWidgetkeys.screen.home.informationImage),
-            KSizedBox.kWidthSizedBox48,
+            if (isTablet)
+              KSizedBox.kWidthSizedBox48
+            else
+              KSizedBox.kHeightSizedBox16,
             Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: KPadding.kPaddingSize56,
+              padding: EdgeInsets.symmetric(
+                horizontal: isTablet ? KPadding.kPaddingSize56 : 0,
               ),
               child: Column(
                 children: [
@@ -213,28 +193,10 @@ class HomeBodyWidget extends StatelessWidget {
                     subtitle: context.l10n.informationNewsSubtitle,
                     textButton: context.l10n.toInfomation,
                     route: () => context.goNamed(KRoute.information.name),
-                    isDesk: false,
-                    isTablet: true,
+                    isTablet: isTablet,
                   ),
                 ],
               ),
-            ),
-          ] else ...[
-            KImage.inforamationImage
-                .setKey(KWidgetkeys.screen.home.informationImage),
-            KSizedBox.kHeightSizedBox16,
-            ...SectionWidget.get(
-              buttonKey: KWidgetkeys.screen.home.informationButton,
-              prefixKey: KWidgetkeys.screen.home.informationPrefix,
-              subtitleKey: KWidgetkeys.screen.home.informationSubtitle,
-              titleKey: KWidgetkeys.screen.home.informationTitle,
-              textPoint: context.l10n.findOut,
-              title: context.l10n.informationNews,
-              subtitle: context.l10n.informationNewsSubtitle,
-              textButton: context.l10n.toInfomation,
-              route: () => context.goNamed(KRoute.information.name),
-              isDesk: false,
-              isTablet: false,
             ),
           ],
           if (isDesk || isTablet)
@@ -299,15 +261,18 @@ class HomeBodyWidget extends StatelessWidget {
                 ),
               ],
             )
-          else if (isTablet)
+          else
             Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: KPadding.kPaddingSize56,
+              padding: EdgeInsets.symmetric(
+                horizontal: isTablet ? KPadding.kPaddingSize56 : 0,
               ),
               child: Column(
                 children: [
-                  ...faqTest(context: context, isDesk: true),
-                  KSizedBox.kHeightSizedBox40,
+                  ...faqTest(context: context, isDesk: isTablet),
+                  if (isTablet)
+                    KSizedBox.kHeightSizedBox40
+                  else
+                    KSizedBox.kHeightSizedBox24,
                   if (_.questionModelItems.isEmpty &&
                       _.loadingStatus == LoadingStatus.loaded)
                     Config.isDevelopment
@@ -320,20 +285,7 @@ class HomeBodyWidget extends StatelessWidget {
                     ),
                 ],
               ),
-            )
-          else ...[
-            ...faqTest(context: context, isDesk: isDesk),
-            KSizedBox.kHeightSizedBox24,
-            if (_.questionModelItems.isEmpty &&
-                _.loadingStatus == LoadingStatus.loaded &&
-                Config.isDevelopment)
-              mockButton(context)
-            else
-              ..._questionWidgetList(
-                context: context,
-                isDesk: isDesk,
-              ),
-          ],
+            ),
           if (isDesk)
             KSizedBox.kHeightSizedBox160
           else if (isTablet)

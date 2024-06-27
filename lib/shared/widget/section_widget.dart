@@ -3,7 +3,6 @@ import 'package:kozak/shared/shared.dart';
 
 abstract class SectionWidget {
   static List<Widget> get({
-    required bool isDesk,
     required bool isTablet,
     required String? textPoint,
     required String title,
@@ -22,7 +21,7 @@ abstract class SectionWidget {
             textPoint,
             key: prefixKey,
           ),
-          if (isDesk || isTablet)
+          if (isTablet)
             KSizedBox.kHeightSizedBox16
           else
             KSizedBox.kHeightSizedBox8,
@@ -32,25 +31,25 @@ abstract class SectionWidget {
           child: Text(
             title,
             key: titleKey,
-            style: isDesk
+            style: isTablet
                 ? AppTextStyle.materialThemeDisplayLarge
                 : isTablet
                     ? AppTextStyle.materialThemeDisplayMedium
                     : AppTextStyle.materialThemeDisplaySmall,
           ),
         ),
-        if (isDesk || isTablet)
+        if (isTablet)
           KSizedBox.kHeightSizedBox16
         else
           KSizedBox.kHeightSizedBox8,
         Text(
           subtitle,
           key: subtitleKey,
-          style: isDesk || isTablet
+          style: isTablet
               ? AppTextStyle.materialThemeBodyLarge
               : AppTextStyle.materialThemeBodyMedium,
         ),
-        if (isDesk || isTablet)
+        if (isTablet)
           KSizedBox.kHeightSizedBox16
         else
           KSizedBox.kHeightSizedBox8,
@@ -58,7 +57,7 @@ abstract class SectionWidget {
           widgetKey: buttonKey,
           text: textButton,
           onPressed: route,
-          isDesk: isDesk,
+          isDesk: isTablet,
         ),
         if (bottomWidget != null) bottomWidget,
       ];
