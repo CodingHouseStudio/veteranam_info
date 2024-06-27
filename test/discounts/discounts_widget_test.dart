@@ -79,13 +79,13 @@ void main() {
         await discountInitialHelper(tester);
       });
 
-      // loadingList(
-      //   pumpApp: (tester) async => discountsPumpAppHelper(
-      //     tester: tester,
-      //     mockDiscountRepository: mockDiscountRepository,
-      //   ),
-      //   lastCard: KWidgetkeys.screen.discounts.cardLast,
-      // );
+      loadingListSeparate(
+        pumpApp: (tester) async => discountsPumpAppHelper(
+          tester: tester,
+          mockDiscountRepository: mockDiscountRepository,
+        ),
+        lastCard: KWidgetkeys.screen.discounts.cardLast,
+      );
 
       group('${KGroupText.goRouter} ', () {
         late MockGoRouter mockGoRouter;
