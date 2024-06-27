@@ -128,13 +128,48 @@
         /* Optional: Remove scaling for no size change */
       }
     }
+
+    .image-container {
+      width: 200px;
+      height: 200px;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .bouncing-image {
+      width: 100%;
+      height: auto;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .image-container:hover .bouncing-image {
+      animation: bounce 1s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+      }
+      40% {
+        transform: translateY(-30px);
+      }
+      60% {
+        transform: translateY(-15px);
+      }
+    }
   </style>
 
 </head>
 
 <body style="font-family: Tahoma, Verdana, sans-serif">
-  <div id="splash">
-    <img src="icons/logo_image.svg" alt="Loading indicator..." />
+<!--  <div id="splash">-->
+<!--    <img src="icons/logo_image.svg" alt="Loading indicator..." />-->
+<!--  </div>-->
+
+  <div class="splash">
+    <img src="icons/logo_image.svg" alt="Loading indicator..." class="bouncing-image">
   </div>
 
   <script id="splash-screen-script">
