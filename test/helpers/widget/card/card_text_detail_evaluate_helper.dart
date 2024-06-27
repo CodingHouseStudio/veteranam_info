@@ -7,11 +7,13 @@ Future<void> cardTextDetailEvaluateHelper(
   WidgetTester tester,
 ) async {
   expect(
+    //find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconDislike),
     find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconSave),
     findsWidgets,
   );
 
   expect(
+    //find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconSmile),
     find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconWebsite),
     findsWidgets,
   );
