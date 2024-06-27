@@ -7,11 +7,15 @@ import '../../text_dependency.dart';
 
 Future<void> informationPumpAppHelper({
   required IInformationRepository mockInformationRepository,
+  required AuthenticationRepository mockAuthenticationRepository,
   required WidgetTester tester,
   MockGoRouter? mockGoRouter,
 }) async {
   _registerInformationBloc(
     mockInformationRepository: mockInformationRepository,
+  );
+  _registerAuthenticationBloc(
+    mockAuthenticationRepository: mockAuthenticationRepository,
   );
   await tester.pumpApp(const InformationScreen(), mockGoRouter: mockGoRouter);
 
@@ -33,4 +37,16 @@ void _registerInformationBloc({
     GetIt.I.unregister<InformationWatcherBloc>();
   }
   GetIt.I.registerSingleton<InformationWatcherBloc>(informationBloc);
+}
+
+void _registerAuthenticationBloc({
+  required AuthenticationRepository mockAuthenticationRepository,
+}) {
+  final authenticationBloc = AuthenticationBloc(
+    authenticationRepository: mockAuthenticationRepository,
+  );
+  if (GetIt.I.isRegistered<AuthenticationBloc>()) {
+    GetIt.I.unregister<AuthenticationBloc>();
+  }
+  GetIt.I.registerSingleton<AuthenticationBloc>(authenticationBloc);
 }
