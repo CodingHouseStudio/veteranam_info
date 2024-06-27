@@ -28,6 +28,6 @@ class _DiscountsKeys {
   final discountItems = const Key('discounts_screen_discount_items');
   final cityText = const Key('discounts_screen_city_text');
   final cityItems = const Key('discounts_screen_city_items');
-  final cancelIcon = const Key('discounts_screen_cancel_icon');
+  // final cancelIcon = const Key('discounts_screen_cancel_icon');
   final cancelText = const Key('discounts_screen_cancel_text');
 }

@@ -50,6 +50,7 @@ class CheckPointWidget extends StatelessWidget {
         label: Text(
           text,
           key: KWidgetkeys.widget.checkPoint.text,
+          maxLines: 3,
           style: textStyle ??
               (isDesk
                   ? AppTextStyle.materialThemeBodyLarge

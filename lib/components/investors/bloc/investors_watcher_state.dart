@@ -7,7 +7,7 @@ enum InvestorsFailure {
 }
 
 extension InvestorsFailureExtension on SomeFailure {
-  InvestorsFailure toInvestors() {
+  InvestorsFailure _toInvestors() {
     switch (this) {
       case FailureGet():
         return InvestorsFailure.get;
