@@ -7,7 +7,7 @@ enum MyDiscountFailure {
 }
 
 extension MyDiscountFailureExtension on SomeFailure {
-  MyDiscountFailure toMyDiscount() {
+  MyDiscountFailure _toMyDiscount() {
     switch (this) {
       case FailureGet():
         return MyDiscountFailure.get;

@@ -269,4 +269,11 @@ class FirestoreService {
         .doc(discountId)
         .delete();
   }
+
+  Future<void> addReport(ReportModel report) {
+    return _db
+        .collection(FirebaseCollectionName.report)
+        .doc(report.id)
+        .set(report.toJson());
+  }
 }
