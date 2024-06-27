@@ -61,7 +61,17 @@ class CardAddImageWidget extends StatelessWidget {
         Align(
           alignment: Alignment.topLeft,
           child: Padding(
-            padding: const EdgeInsets.only(left: KPadding.kPaddingSize16),
+            padding: isDesk
+                ? const EdgeInsets.only(
+                    left: KPadding.kPaddingSize32,
+                    right: KPadding.kPaddingSize16,
+                    top: KPadding.kPaddingSize16,
+                  )
+                : const EdgeInsets.only(
+                    left: KPadding.kPaddingSize16,
+                    right: KPadding.kPaddingSize16,
+                    top: KPadding.kPaddingSize16,
+                  ),
             child: filters != null ? filters! : Container(),
           ),
         ),
