@@ -290,6 +290,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "This page is under construction."),
         "upload": MessageLookupByLibrary.simpleMessage("Upload"),
         "us": MessageLookupByLibrary.simpleMessage("us"),
+        "verifiedInformation":
+            MessageLookupByLibrary.simpleMessage("Verified information"),
         "wage": MessageLookupByLibrary.simpleMessage("Salary*"),
         "whatKindOfProject":
             MessageLookupByLibrary.simpleMessage("What kind of project it is?"),
