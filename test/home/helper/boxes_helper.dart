@@ -3,14 +3,16 @@ import 'package:kozak/shared/shared.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../text_dependency.dart';
+import 'helper.dart';
 
 Future<void> boxexHelper({
   required WidgetTester tester,
   required MockGoRouter mockGoRouter,
 }) async {
-  await changeWindowSizeHelper(
+  await homeChangeWindowSizeHelper(
     tester: tester,
-    windowsTest: true,
+    isMobile: true,
+    tabletTest: true,
     test: () async {
       await scrollingHelper(
         tester: tester,
@@ -25,6 +27,11 @@ Future<void> boxexHelper({
         ),
       ).called(1);
 
+      await scrollingHelper(
+        tester: tester,
+        itemKey: KWidgetkeys.screen.home.workBox,
+      );
+
       await tester.tap(find.byKey(KWidgetkeys.screen.home.workBox));
 
       verify(
@@ -32,6 +39,11 @@ Future<void> boxexHelper({
           KRoute.work.name,
         ),
       ).called(1);
+
+      await scrollingHelper(
+        tester: tester,
+        itemKey: KWidgetkeys.screen.home.informationBox,
+      );
 
       await tester.tap(find.byKey(KWidgetkeys.screen.home.informationBox));
 

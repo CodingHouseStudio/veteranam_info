@@ -12,7 +12,7 @@ Future<void> changeWindowSizeHelper({
   required Future<void> Function() test,
   bool windowsTest = false,
 }) async {
-  await tester.binding.setSurfaceSize(KTestConstants.windowTabletSize);
+  await tester.binding.setSurfaceSize(KTestConstants.windowDeskSize);
 
   await tester.pumpAndSettle();
 
