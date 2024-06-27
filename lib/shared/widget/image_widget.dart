@@ -15,6 +15,12 @@ class ImageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    precacheImage(
+      NetworkImage(
+        imageUrl,
+      ),
+      context,
+    );
     return Image.network(
       imageUrl,
       // placeholder: (context, url) =>
