@@ -105,6 +105,12 @@ abstract class KImage {
   //    'assets/images/work_image.png'),
   //   fit: BoxFit.fill,
   // );
+  precacheImage(
+    NetworkImage(
+      name,
+    ),
+    context,
+  );
   static Image _get(
     String name, {
     BoxFit? fit,
@@ -112,12 +118,15 @@ abstract class KImage {
     double? height,
     int? casheSize,
   }) =>
-      Image.asset(
-        name,
-        fit: fit,
-        width: width,
-        height: height,
-        cacheHeight: casheSize ?? KMinMaxSize.kImageMaxSize,
-        cacheWidth: casheSize ?? KMinMaxSize.kImageMaxSize,
-      );
+      Image.network(
+          key: Key(name),
+          name,
+          fit: fit,
+          width: width,
+          height: height,
+          cacheHeight: casheSize ?? KMinMaxSize.kImageMaxSize,
+          cacheWidth: casheSize ?? KMinMaxSize.kImageMaxSize,
+          headers: const {
+            'Cache-Control': 'max-age=7200',
+          });
 }
