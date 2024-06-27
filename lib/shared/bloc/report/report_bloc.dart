@@ -76,8 +76,7 @@ class ReportBloc extends Bloc<ReportEvent, ReportState> {
     _Send event,
     Emitter<ReportState> emit,
   ) async {
-    if (state.formState == ReportEnum.inProgress ||
-        state.reasonComplaint == null) {
+    if (!state.formState.isNext) {
       if (state.reasonComplaint != null) {
         emit(state.copyWith(formState: ReportEnum.next, failure: null));
       } else {
@@ -85,19 +84,22 @@ class ReportBloc extends Bloc<ReportEvent, ReportState> {
       }
       return;
     }
-    if (((state.email != null && state.email!.isValid) ||
-            !_appAuthenticationRepository.isAnonymously()) &&
-        ((state.message != null && state.message!.isValid) ||
-            state.reasonComplaint != ReasonComplaint.other)) {
+    if (!((state.email == null || state.email!.isNotValid) &&
+            _appAuthenticationRepository.isAnonymously() ||
+        (state.message == null || state.message!.isNotValid) &&
+            state.reasonComplaint == ReasonComplaint.other)) {
       final resault = await _reportRepository.sendReport(
         ReportModel(
           id: ExtendedDateTime.id,
           reasonComplaint: state.reasonComplaint!,
-          email: state.email?.value ??
-              _appAuthenticationRepository.currentUser.email!,
-          message: state.message?.value,
+          email: state.email?.value.isEmpty ?? true
+              ? _appAuthenticationRepository.currentUser.email!
+              : state.email!.value,
+          message: state.message?.value.isEmpty ?? true
+              ? null
+              : state.message?.value,
           date: ExtendedDateTime.current,
-          card: CardEnum.funds,
+          card: event.card,
         ),
       );
       resault.fold(
