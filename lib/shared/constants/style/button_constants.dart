@@ -255,6 +255,8 @@ abstract class KButtonStyles {
         borderRadius: KBorderRadius.kBorderRadius32,
       ),
     ),
+    foregroundColor:
+        WidgetStatePropertyAll(AppColors.materialThemeKeyColorsSecondary),
   );
 
   static const filterButtonStyleBorder = ButtonStyle(

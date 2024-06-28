@@ -1,0 +1,22 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dartz/dartz.dart';
+import 'package:get_it/get_it.dart';
+import 'package:injectable/injectable.dart';
+import 'package:kozak/shared/shared.dart';
+
+@Singleton(as: IReportRepository)
+class ReportRepository implements IReportRepository {
+  final FirestoreService _firestoreService = GetIt.I.get<FirestoreService>();
+
+  @override
+  Future<Either<SomeFailure, bool>> sendReport(ReportModel report) async {
+    try {
+      await _firestoreService.addReport(report);
+      return const Right(true);
+    } on FirebaseException catch (e) {
+      return Left(SendFailure.fromCode(e).status);
+    } catch (e) {
+      return const Left(SomeFailure.serverError());
+    }
+  }
+}

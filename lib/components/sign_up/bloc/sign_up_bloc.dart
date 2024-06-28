@@ -83,7 +83,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
       emit(
         result.fold(
           (l) => state.copyWith(
-            failure: l.toSignUpError(),
+            failure: l._toSignUpError(),
             showPasswordField: false,
           ),
           (r) => state.copyWith(

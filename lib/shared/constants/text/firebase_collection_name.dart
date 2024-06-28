@@ -8,4 +8,5 @@ abstract class FirebaseCollectionName {
   static const tags = 'tags';
   static const discount = 'discount';
   static const stroies = 'stories';
+  static const report = 'report';
 }

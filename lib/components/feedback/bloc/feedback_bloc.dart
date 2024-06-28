@@ -48,7 +48,7 @@ class FeedbackBloc extends Bloc<FeedbackEvent, FeedbackState> {
     result.fold(
         (l) => emit(
               state.copyWith(
-                failure: l.toFeedback(),
+                failure: l._toFeedback(),
                 formState: FeedbackEnum.initial,
               ),
             ), (r) {
@@ -139,8 +139,8 @@ class FeedbackBloc extends Bloc<FeedbackEvent, FeedbackState> {
       result.fold(
         (l) => emit(
           state.copyWith(
-            failure: l.toFeedback(),
-            formState: FeedbackEnum.invalidData,
+            failure: l._toFeedback(),
+            formState: FeedbackEnum.initial,
           ),
         ),
         (r) => emit(
