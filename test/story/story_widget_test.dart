@@ -18,6 +18,7 @@ void main() {
     late IStoryRepository mockStoryRepository;
     late AuthenticationRepository mockAuthenticationRepository;
     setUp(() {
+      KPlatformConstants.isWebDesktop = false;
       ExtendedDateTime.current = KTestText.dateTime;
       ExtendedDateTime.id = '';
       mockStoryRepository = MockIStoryRepository();
