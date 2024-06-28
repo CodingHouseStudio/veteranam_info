@@ -38,21 +38,29 @@ class ChipWidgetState extends State<ChipWidget> {
       child: FilterChip(
         key: KWidgetkeys.widget.chip.widget,
         backgroundColor: AppColors.materialThemeWhite,
+        labelPadding: EdgeInsets.zero,
         label: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(
-              widget.filter.value,
-              style: (widget.isDesk
-                      ? AppTextStyle.materialThemeHeadlineSmall
-                      : AppTextStyle.materialThemeLabelLarge)
-                  .copyWith(
-                color: _isHovered && !widget.isSelected && !filterEmpty
-                    ? AppColors.materialThemeKeyColorsNeutralVariant
-                    : AppColors.materialThemeBlack,
+            Padding(
+              padding: EdgeInsets.only(
+                left: widget.isSelected
+                    ? KPadding.kPaddingSize8
+                    : KPadding.kPaddingSize10,
+                right: KPadding.kPaddingSize10,
+              ),
+              child: Text(
+                widget.filter.value,
+                style: (widget.isDesk
+                        ? AppTextStyle.materialThemeHeadlineSmall
+                        : AppTextStyle.materialThemeLabelLarge)
+                    .copyWith(
+                  color: _isHovered && !widget.isSelected && !filterEmpty
+                      ? AppColors.materialThemeKeyColorsNeutralVariant
+                      : AppColors.materialThemeBlack,
+                ),
               ),
             ),
-            KSizedBox.kWidthSizedBox10,
             if (!filterEmpty)
               AmountWidget(
                 background: widget.isSelected

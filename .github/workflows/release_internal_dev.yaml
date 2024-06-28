@@ -6,11 +6,7 @@ on:
   workflow_dispatch:
     branches: [ main ]
 concurrency:
-<<<<<<< HEAD
-  group: $-$
-=======
-  group: $-dev-$
->>>>>>> c7671f255369aeee480cc903a9bfb5ed215afb2d
+  group: dev-$
   cancel-in-progress: true
 
 permissions:
@@ -89,7 +85,7 @@ jobs:
       - name: Build the Web static pages # generate deployment files
         run: |
           buildNumber=$(date +%s)
-          flutter build web --release -t lib/main_development.dart --web-renderer html --build-name=1.0.2 --build-number=$buildNumber --dart-define=FLAVOUR=development
+          flutter build web --release -t lib/main_development.dart --web-renderer canvaskit --build-name=1.0.2 --build-number=$buildNumber --dart-define=FLAVOUR=development
           dt="$(date "+%s000")"
           mv build/web/main.dart.js build/web/$dt.main.dart.js
           sed "s/main.dart.js/$dt.main.dart.js/g" build/web/index.html >build/web/newindex.html

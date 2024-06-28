@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:dartz/dartz.dart';
-import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kozak/shared/shared.dart';
 
@@ -98,10 +97,10 @@ class AuthenticationRepository {
 
   Future<Either<SomeFailure, bool>> deleteUser() async {
     final resault = await iAppAuthenticationRepository.deleteUser();
-    resault.fold(
-      (l) => debugPrint(l.toString()),
-      (r) => debugPrint('ever reached here?'),
-    );
+    // resault.fold(
+    //   (l) => debugPrint(l.toString()),
+    //   (r) => debugPrint('ever reached here?'),
+    // );
     return resault;
   }
 
@@ -119,14 +118,14 @@ class AuthenticationRepository {
     );
     return result.fold(
       (l) {
-        debugPrint('error: $l');
+        // debugPrint('error: $l');
         _authenticationStatuscontroller.add(
           AuthenticationStatus.anonymous,
         );
         return Left(l);
       },
       (r) {
-        debugPrint('authenticated');
+        // debugPrint('authenticated');
         _authenticationStatuscontroller.add(AuthenticationStatus.authenticated);
         return Right(r);
       },
@@ -137,11 +136,11 @@ class AuthenticationRepository {
     final result = await iAppAuthenticationRepository.logInAnonymously();
     return result.fold(
       (l) {
-        debugPrint('error: $l');
+        // debugPrint('error: $l');
         return Left(l);
       },
       (r) {
-        debugPrint('authenticated');
+        // debugPrint('authenticated');
         return Right(r);
       },
     );
@@ -151,14 +150,14 @@ class AuthenticationRepository {
     final result = await iAppAuthenticationRepository.signUpWithGoogle();
     return result.fold(
       (l) {
-        debugPrint('error: $l');
+        // debugPrint('error: $l');
         _authenticationStatuscontroller.add(
           AuthenticationStatus.anonymous,
         );
         return Left(l);
       },
       (r) {
-        debugPrint('authenticated');
+        // debugPrint('authenticated');
         _authenticationStatuscontroller.add(AuthenticationStatus.authenticated);
         return Right(r);
       },
@@ -167,10 +166,10 @@ class AuthenticationRepository {
 
   Future<Either<SomeFailure, bool>> logOut() async {
     final resault = await iAppAuthenticationRepository.logOut();
-    resault.fold(
-      (l) => debugPrint(l.toString()),
-      (r) => debugPrint('ever reached here?'),
-    );
+    // resault.fold(
+    //   (l) => debugPrint(l.toString()),
+    //   (r) => debugPrint('ever reached here?'),
+    // );
     return resault;
   }
 
@@ -179,14 +178,14 @@ class AuthenticationRepository {
   }) async {
     final result =
         await iAppAuthenticationRepository.sendVerificationCode(email: email);
-    result.fold(
-      (failure) {
-        debugPrint('Sending error: $failure');
-      },
-      (success) {
-        debugPrint('Sending succeses $email');
-      },
-    );
+    // result.fold(
+    //   (failure) {
+    //     debugPrint('Sending error: $failure');
+    //   },
+    //   (success) {
+    //     debugPrint('Sending succeses $email');
+    //   },
+    // );
     return result;
   }
 
@@ -195,14 +194,14 @@ class AuthenticationRepository {
   }) async {
     final result =
         await iAppAuthenticationRepository.updateUserSetting(userSetting);
-    result.fold(
-      (failure) {
-        debugPrint('Sending error: $failure');
-      },
-      (success) {
-        debugPrint('Sending succeses $userSetting');
-      },
-    );
+    // result.fold(
+    //   (failure) {
+    //     debugPrint('Sending error: $failure');
+    //   },
+    //   (success) {
+    //     debugPrint('Sending succeses $userSetting');
+    //   },
+    // );
     return result;
   }
 

@@ -11,9 +11,11 @@ void main() {
   group('${KScreenBlocName.authentication} ${KGroupText.repository} ', () {
     late AuthenticationRepository authenticationRepository;
     late IAppAuthenticationRepository mockAppAuthenticationRepository;
+    setUp(() {
+      mockAppAuthenticationRepository = MockIAppAuthenticationRepository();
+    });
     group('${KGroupText.successful} ', () {
       setUp(() {
-        mockAppAuthenticationRepository = MockIAppAuthenticationRepository();
         when(
           mockAppAuthenticationRepository.logInAnonymously(),
         ).thenAnswer(
@@ -139,7 +141,6 @@ void main() {
     });
     group('${KGroupText.failure} ', () {
       setUp(() {
-        mockAppAuthenticationRepository = MockIAppAuthenticationRepository();
         when(
           mockAppAuthenticationRepository.logInAnonymously(),
         ).thenAnswer(

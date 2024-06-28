@@ -27,7 +27,7 @@ void main() {
       mockImagePicker = MockImagePicker();
       when(mockImagePicker.pickImage(source: ImageSource.gallery)).thenAnswer(
         (realInvocation) async =>
-            XFile(KTestText.storyModelItems.last.image.firstImage!),
+            XFile(KTestText.storyModelItems.last.image!.downloadURL),
       );
       StoryAddBloc.imagePickerValue = mockImagePicker;
       mockStoryRepository = MockIStoryRepository();

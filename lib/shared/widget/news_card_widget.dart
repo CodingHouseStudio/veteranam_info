@@ -15,7 +15,7 @@ class NewsCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CardTextDetailEvaluateWidget(
-      image: informationItem.image.firstImage,
+      image: informationItem.image,
       text: informationItem.news,
       buttonText: [
         context.l10n.readMore,

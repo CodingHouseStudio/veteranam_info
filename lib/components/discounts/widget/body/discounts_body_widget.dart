@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:go_router/go_router.dart';
 import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
 
@@ -21,6 +22,7 @@ class DiscountBodyWidget extends StatelessWidget {
       listenWhen: (previous, current) => current.failure != null,
       builder: (context, _) {
         return ScaffoldAutoLoadingWidget(
+          loadingButtonText: context.l10n.moreDiscounts,
           titleChildWidgetsFunction: ({required isDesk}) => [
             KSizedBox.kHeightSizedBox24,
             ...TitleWidget.pointTitleWidgetList(
@@ -132,13 +134,11 @@ class DiscountBodyWidget extends StatelessWidget {
         // onResetValue: () => context.read<DiscountWatcherBloc>().add(
         //       const DiscountWatcherEvent.filterReset(),
         //     ),
-        isSelected: (index) =>
-            context
-                .read<DiscountWatcherBloc>()
-                .state
-                .filtersCategoriesIndex
-                ?.contains(index) ??
-            false,
+        isSelected: (index) => context
+            .read<DiscountWatcherBloc>()
+            .state
+            .filtersCategoriesIndex
+            .contains(index),
         onSelected: (index) => context.read<DiscountWatcherBloc>().add(
               DiscountWatcherEvent.filterCategory(
                 index,
@@ -146,6 +146,11 @@ class DiscountBodyWidget extends StatelessWidget {
             ),
         fullLenght:
             context.read<DiscountWatcherBloc>().state.discountModelItems.length,
+        filterIsEmpty: context
+            .read<DiscountWatcherBloc>()
+            .state
+            .filtersCategoriesIndex
+            .isEmpty,
       );
 
   Widget _myDiscountButton(
@@ -153,7 +158,7 @@ class DiscountBodyWidget extends StatelessWidget {
   ) =>
       TextButton(
         key: KWidgetkeys.screen.discounts.addDiscountButton,
-        onPressed: () => context.goNamedWithScroll(KRoute.myDiscounts.name),
+        onPressed: () => context.goNamed(KRoute.myDiscounts.name),
         style: KButtonStyles.whiteButtonStyle,
         child: Text(context.l10n.offerDiscount),
       );

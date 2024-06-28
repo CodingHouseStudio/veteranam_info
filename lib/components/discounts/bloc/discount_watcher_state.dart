@@ -9,8 +9,8 @@ class DiscountWatcherState with _$DiscountWatcherState {
   const factory DiscountWatcherState({
     required List<DiscountModel> discountModelItems,
     required List<DiscountModel> filteredDiscountModelItems,
-    required List<int>? filtersCategoriesIndex,
-    required List<int>? filtersLocationIndex,
+    required List<int> filtersCategoriesIndex,
+    required List<int> filtersLocationIndex,
     required LoadingStatus loadingStatus,
     required int itemsLoaded,
     required DiscountFailure? failure,

@@ -83,17 +83,21 @@ class _DiscountsCardWidgetDesk extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          Text(
-                            key: KWidgetkeys.widget.discountCard.userName,
-                            KMockText.userName,
-                            style: AppTextStyle.materialThemeLabelSmall,
+                          Expanded(
+                            child: Text(
+                              key: KWidgetkeys.widget.discountCard.userName,
+                              KMockText.userName,
+                              style: AppTextStyle.materialThemeLabelSmall,
+                            ),
                           ),
                           KSizedBox.kWidthSizedBox8,
-                          Text(
-                            key: KWidgetkeys.widget.discountCard.date,
-                            discountItem.dateVerified.toLocalDateString(),
-                            style: AppTextStyle.materialThemeLabelSmall,
-                            overflow: TextOverflow.clip,
+                          Expanded(
+                            child: Text(
+                              key: KWidgetkeys.widget.discountCard.date,
+                              discountItem.dateVerified.toLocalDateString(),
+                              style: AppTextStyle.materialThemeLabelSmall,
+                              overflow: TextOverflow.clip,
+                            ),
                           ),
                         ],
                       ),
@@ -169,22 +173,30 @@ class _DiscountsCardWidgetDesk extends StatelessWidget {
                 KSizedBox.kHeightSizedBox16,
                 Row(
                   children: [
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: KPadding.kPaddingSize8,
-                        horizontal: KPadding.kPaddingSize16,
-                      ),
-                      decoration: KWidgetTheme.boxDecorationDiscountContainer,
-                      child: Row(
-                        children: [
-                          KIcon.calendarClock,
-                          KSizedBox.kWidthSizedBox8,
-                          Text(
-                            key: KWidgetkeys.widget.discountCard.expiration,
-                            discountItem.expiration,
-                            style: AppTextStyle.materialThemeLabelLarge,
+                    Flexible(
+                      child: IntrinsicWidth(
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                            vertical: KPadding.kPaddingSize8,
+                            horizontal: KPadding.kPaddingSize16,
                           ),
-                        ],
+                          decoration:
+                              KWidgetTheme.boxDecorationDiscountContainer,
+                          child: Row(
+                            children: [
+                              KIcon.calendarClock,
+                              KSizedBox.kWidthSizedBox8,
+                              Expanded(
+                                child: Text(
+                                  key: KWidgetkeys
+                                      .widget.discountCard.expiration,
+                                  discountItem.expiration,
+                                  style: AppTextStyle.materialThemeLabelLarge,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
                     ),
                     KSizedBox.kWidthSizedBox16,
@@ -250,7 +262,7 @@ class DiscountsCardWidgetMob extends StatelessWidget {
                           discountItem.company ?? context.l10n.companyIsHidden,
                           style: AppTextStyle.materialThemeTitleSmall,
                         ),
-                        Wrap(
+                        Row(
                           children: [
                             Text(
                               key: KWidgetkeys.widget.discountCard.userName,

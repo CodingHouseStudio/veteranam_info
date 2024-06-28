@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kozak/shared/shared.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DonateCardWidget extends StatelessWidget {
   const DonateCardWidget({
@@ -23,58 +24,72 @@ class DonateCardWidget extends StatelessWidget {
         decoration: KWidgetTheme.boxDecorationCard,
         constraints: const BoxConstraints(
           minHeight: KMinMaxSize.minHeight640,
+          maxHeight: KMinMaxSize.minHeight640,
           maxWidth: KMinMaxSize.maxWidth640,
         ),
+        padding: const EdgeInsets.all(KPadding.kPaddingSize16),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            if (fundModel.image != null)
-              ImageWidget(
-                key: KWidgetkeys.widget.donateCard.image,
-                imageUrl: fundModel.image.firstImage!,
-                fit: BoxFit.fill,
+            Align(
+              alignment: Alignment.topRight,
+              child: ComplaintWidget(
+                isDesk: isDesk,
               ),
+            ),
+            Expanded(
+              child: fundModel.image != null
+                  ? ImageWidget(
+                      key: KWidgetkeys.widget.donateCard.image,
+                      imageUrl: fundModel.image!.downloadURL,
+                    )
+                  : const SizedBox.shrink(),
+            ),
             Padding(
-              padding: const EdgeInsets.all(KPadding.kPaddingSize16),
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: KPadding.kPaddingSize16,
-                    ),
-                    child: Text(
-                      fundModel.title,
-                      key: KWidgetkeys.widget.donateCard.title,
-                      style:
-                          titleStyle ?? AppTextStyle.materialThemeHeadlineLarge,
-                    ),
-                  ),
-                  if (hasSubtitle)
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: KPadding.kPaddingSize16,
-                        vertical: KPadding.kPaddingSize16,
-                      ),
-                      child: Text(
-                        fundModel.description,
-                        key: KWidgetkeys.widget.donateCard.subtitle,
-                        style: isDesk
-                            ? AppTextStyle.materialThemeBodyLarge
-                            : AppTextStyle.materialThemeBodyMedium,
-                      ),
-                    ),
-                  KSizedBox.kHeightSizedBox16,
-                  DonateButtonWidget(
-                    key: KWidgetkeys.widget.donateCard.button,
-                    text: context.l10n.support,
-                    isDesk: isDesk,
-                  ),
-                ],
+              padding: const EdgeInsets.symmetric(
+                horizontal: KPadding.kPaddingSize16,
               ),
+              child: Text(
+                fundModel.title,
+                key: KWidgetkeys.widget.donateCard.title,
+                style: titleStyle ?? AppTextStyle.materialThemeHeadlineLarge,
+              ),
+            ),
+            if (hasSubtitle)
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: KPadding.kPaddingSize16,
+                  vertical: KPadding.kPaddingSize16,
+                ),
+                child: Text(
+                  fundModel.description,
+                  key: KWidgetkeys.widget.donateCard.subtitle,
+                  style: isDesk
+                      ? AppTextStyle.materialThemeBodyLarge
+                      : AppTextStyle.materialThemeBodyMedium,
+                ),
+              ),
+            KSizedBox.kHeightSizedBox16,
+            DonateButtonWidget(
+              key: KWidgetkeys.widget.donateCard.button,
+              text: context.l10n.support,
+              onPressed: () => _launchURL(fundModel.projectsLink!),
+              isDesk: isDesk,
             ),
           ],
         ),
       ),
     );
+  }
+
+  Future<void> _launchURL(String url) async {
+    final uri = Uri.parse(url);
+
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri);
+    } else {
+      throw Exception('Could not launch $url');
+    }
   }
 }

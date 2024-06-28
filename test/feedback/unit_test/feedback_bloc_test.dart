@@ -127,7 +127,7 @@ void main() {
       ],
     );
     blocTest<FeedbackBloc, FeedbackState>(
-      'emits [FeedbackBloc] when valid data is submitted'
+      'emits [ReportState] when valid data is submitted'
       ' with correct credentials',
       build: () => feedbackBloc,
       act: (bloc) async {
@@ -189,7 +189,7 @@ void main() {
       ],
     );
     blocTest<FeedbackBloc, FeedbackState>(
-      'emits [FeedbackBloc] when valid data is submitted'
+      'emits [ReportState] when valid data is submitted'
       ' with correct credentials and sendignMessageAgain',
       build: () => feedbackBloc,
       act: (bloc) async => bloc
@@ -336,7 +336,7 @@ void main() {
           failure: null,
         ),
         const FeedbackState(
-          formState: FeedbackEnum.invalidData,
+          formState: FeedbackEnum.initial,
           name: NameFieldModel.dirty(KTestText.field),
           email: EmailFieldModel.dirty(KTestText.userEmail),
           message: MessageFieldModel.dirty(KTestText.field),

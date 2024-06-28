@@ -25,19 +25,16 @@ class CardTextDetailWidget extends StatefulWidget {
 
 class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
   late int? maxLines;
-  late GlobalKey cardDetailKey;
 
   @override
   void initState() {
     super.initState();
-    cardDetailKey = GlobalKey();
     maxLines = widget.maxLines;
   }
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      key: cardDetailKey,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Text(
@@ -49,7 +46,6 @@ class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
         ),
         KSizedBox.kHeightSizedBox24,
         Row(
-          // mainAxisAlignment: MainAxisAlignment.end,
           children: [
             Expanded(
               child: Align(
@@ -60,9 +56,6 @@ class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
                     setState(() {
                       if (maxLines == null) {
                         maxLines = widget.maxLines;
-                        Scrollable.ensureVisible(
-                          cardDetailKey.currentContext!,
-                        );
                       } else {
                         maxLines = null;
                       }
@@ -77,8 +70,8 @@ class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
                             context.l10n.detail,
                     key: KWidgetkeys.widget.cardTextDetail.buttonText,
                     style: widget.isDesk
-                        ? AppTextStyle.materialThemeTitleMedium
-                        : AppTextStyle.materialThemeTitleSmall,
+                        ? AppTextStyle.text20
+                        : AppTextStyle.hint16,
                   ),
                 ),
               ),

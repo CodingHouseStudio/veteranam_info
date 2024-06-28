@@ -1,16 +1,13 @@
 import 'dart:async';
 
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kozak/shared/shared.dart';
 
-part 'information_watcher_event.dart';
-
-part 'information_watcher_state.dart';
-
 part 'information_watcher_bloc.freezed.dart';
+part 'information_watcher_event.dart';
+part 'information_watcher_state.dart';
 
 @Injectable()
 class InformationWatcherBloc
@@ -23,7 +20,7 @@ class InformationWatcherBloc
             informationModelItems: [],
             loadingStatus: LoadingStatus.initial,
             filteredInformationModelItems: [],
-            filtersIndex: null,
+            filtersIndex: [],
             itemsLoaded: 0,
             failure: null,
           ),
@@ -33,7 +30,7 @@ class InformationWatcherBloc
     on<_Failure>(_onFailure);
     on<_LoadNextItems>(_onLoadNextItems);
     on<_Filter>(_onFilter);
-    on<_FilterReset>(_onFilterReset);
+    // on<_FilterReset>(_onFilterReset);
   }
 
   final IInformationRepository _informationRepository;
@@ -54,7 +51,7 @@ class InformationWatcherBloc
         ),
       ),
       onError: (dynamic error) {
-        debugPrint('error is $error');
+        // debugPrint('error is $error');
         add(InformationWatcherEvent.failure(error));
       },
     );
@@ -89,6 +86,10 @@ class InformationWatcherBloc
       return;
     }
     emit(state.copyWith(loadingStatus: LoadingStatus.loading));
+    if (state.itemsLoaded.checkLoadingPosible(state.informationModelItems)) {
+      return;
+    }
+    emit(state.copyWith(loadingStatus: LoadingStatus.loading));
     final filterItems = _filter(
       filtersIndex: state.filtersIndex,
       itemsLoaded: state.itemsLoaded + KDimensions.loadItems,
@@ -103,19 +104,19 @@ class InformationWatcherBloc
     );
   }
 
-  void _onFilterReset(
-    _FilterReset event,
-    Emitter<InformationWatcherState> emit,
-  ) {
-    emit(
-      state.copyWith(
-        filteredInformationModelItems: state.informationModelItems.loading(
-          itemsLoaded: state.itemsLoaded,
-        ),
-        filtersIndex: null,
-      ),
-    );
-  }
+  // void _onFilterReset(
+  //   _FilterReset event,
+  //   Emitter<InformationWatcherState> emit,
+  // ) {
+  //   emit(
+  //     state.copyWith(
+  //       filteredInformationModelItems: state.informationModelItems.loading(
+  //         itemsLoaded: state.itemsLoaded,
+  //       ),
+  //       filtersIndex: null,
+  //     ),
+  //   );
+  // }
 
   void _onFilter(
     _Filter event,
@@ -153,7 +154,7 @@ class InformationWatcherBloc
     _Failure event,
     Emitter<InformationWatcherState> emit,
   ) {
-    debugPrint('error is ${event.failure}');
+    // debugPrint('error is ${event.failure}');
     emit(
       state.copyWith(
         loadingStatus: LoadingStatus.error,
