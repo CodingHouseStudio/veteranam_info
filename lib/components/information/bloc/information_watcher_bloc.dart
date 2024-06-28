@@ -20,7 +20,7 @@ class InformationWatcherBloc
             informationModelItems: [],
             loadingStatus: LoadingStatus.initial,
             filteredInformationModelItems: [],
-            filtersIndex: null,
+            filtersIndex: [],
             itemsLoaded: 0,
             failure: null,
           ),

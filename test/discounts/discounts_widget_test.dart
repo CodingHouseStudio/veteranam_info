@@ -17,6 +17,7 @@ void main() {
   group('${KScreenBlocName.discount} ', () {
     late IDiscountRepository mockDiscountRepository;
     setUp(() {
+      KPlatformConstants.isWebDesktop = false;
       mockDiscountRepository = MockIDiscountRepository();
     });
     group('${KGroupText.failure} ', () {
@@ -79,13 +80,13 @@ void main() {
         await discountInitialHelper(tester);
       });
 
-      // loadingList(
-      //   pumpApp: (tester) async => discountsPumpAppHelper(
-      //     tester: tester,
-      //     mockDiscountRepository: mockDiscountRepository,
-      //   ),
-      //   lastCard: KWidgetkeys.screen.discounts.cardLast,
-      // );
+      loadingListSeparate(
+        pumpApp: (tester) async => discountsPumpAppHelper(
+          tester: tester,
+          mockDiscountRepository: mockDiscountRepository,
+        ),
+        lastCard: KWidgetkeys.screen.discounts.cardLast,
+      );
 
       group('${KGroupText.goRouter} ', () {
         late MockGoRouter mockGoRouter;
@@ -100,14 +101,14 @@ void main() {
           await discountInitialHelper(tester);
         });
         group('${KGroupText.goTo} ', () {
-          testWidgets('nawbar widget navigation', (tester) async {
+          testWidgets('${KRoute.myDiscounts.name} ', (tester) async {
             await discountsPumpAppHelper(
               tester: tester,
               mockDiscountRepository: mockDiscountRepository,
               mockGoRouter: mockGoRouter,
             );
 
-            await myDIscountHelper(
+            await myDiscountHelper(
               tester: tester,
               mockGoRouter: mockGoRouter,
             );
