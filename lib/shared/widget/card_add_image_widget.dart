@@ -61,7 +61,7 @@ class CardAddImageWidget extends StatelessWidget {
   }
 
   Widget buildImage(BuildContext context) {
-    debugPrint('Image: $image');
+    // debugPrint('Image: $image');
     return Container(
       decoration: isDesk
           ? KWidgetTheme.boxDecorationImageDesk
