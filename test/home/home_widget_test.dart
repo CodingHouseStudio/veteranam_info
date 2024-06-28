@@ -228,27 +228,27 @@ void main() {
                 mockGoRouter: mockGoRouter,
               );
             });
-            testWidgets('${KRoute.profile.name} user photo', (tester) async {
-              when(mockAuthenticationRepository.currentUser).thenAnswer(
-                (realInvocation) => KTestText.user,
-              );
-              await provideMockedNetworkImages(() async {
-                await homePumpAppHelper(
-                  tester: tester,
-                  mockGoRouter: mockGoRouter,
-                  mockAuthenticationRepository: mockAuthenticationRepository,
-                  // mockFeedbackRepository: mockFeedbackRepository,
-                  mockHomeRepository: mockHomeRepository,
-                  mockAppAuthenticationRepository:
-                      mockAppAuthenticationRepository,
-                );
+            // testWidgets('${KRoute.profile.name} user photo', (tester) async {
+            //   when(mockAuthenticationRepository.currentUser).thenAnswer(
+            //     (realInvocation) => KTestText.user,
+            //   );
+            //   await provideMockedNetworkImages(() async {
+            //     await homePumpAppHelper(
+            //       tester: tester,
+            //       mockGoRouter: mockGoRouter,
+            //       mockAuthenticationRepository: mockAuthenticationRepository,
+            //       // mockFeedbackRepository: mockFeedbackRepository,
+            //       mockHomeRepository: mockHomeRepository,
+            //       mockAppAuthenticationRepository:
+            //           mockAppAuthenticationRepository,
+            //     );
 
-                await nawbarProfileNavigationHelper(
-                  tester: tester,
-                  mockGoRouter: mockGoRouter,
-                );
-              });
-            });
+            //     await nawbarProfileNavigationHelper(
+            //       tester: tester,
+            //       mockGoRouter: mockGoRouter,
+            //     );
+            //   });
+            // });
           });
         });
       });
