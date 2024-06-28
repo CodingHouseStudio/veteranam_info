@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
-import 'package:skeletonizer/skeletonizer.dart';
 
 part '../stories_widget_list.dart';
 
@@ -11,9 +11,17 @@ class StoryBodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<StoryWatcherBloc, StoryWatcherState>(
+    return BlocConsumer<StoryWatcherBloc, StoryWatcherState>(
+      listener: (context, state) => context.dialog.showGetErrorDialog(
+        error: state.failure!.value(context),
+        onPressed: () => context
+            .read<StoryWatcherBloc>()
+            .add(const StoryWatcherEvent.started()),
+      ),
+      listenWhen: (previous, current) => current.failure != null,
       builder: (context, _) {
-        return ScaffoldWidget(
+        return ScaffoldAutoLoadingWidget(
+          loadingButtonText: context.l10n.moreStories,
           titleChildWidgetsFunction: ({required isDesk}) => [
             if (isDesk)
               KSizedBox.kHeightSizedBox40
@@ -31,7 +39,7 @@ class StoryBodyWidget extends StatelessWidget {
             else
               KSizedBox.kHeightSizedBox24,
           ],
-          mainDeskPadding: const EdgeInsets.symmetric(
+          mainDeskPadding: ({required maxWidth}) => const EdgeInsets.symmetric(
             horizontal: KPadding.kPaddingSize48,
           ),
           mainChildWidgetsFunction: ({required isDesk}) => [
@@ -41,7 +49,7 @@ class StoryBodyWidget extends StatelessWidget {
               text: context.l10n.addYourStory,
               onPressed: context.read<AuthenticationBloc>().state.status ==
                       AuthenticationStatus.authenticated
-                  ? () => context.goNamedWithScroll(KRoute.storyAdd.name)
+                  ? () => context.goNamed(KRoute.storyAdd.name)
                   : null,
             ),
             if (isDesk)
@@ -55,20 +63,22 @@ class StoryBodyWidget extends StatelessWidget {
               KSizedBox.kHeightSizedBox56
             else
               KSizedBox.kHeightSizedBox24,
-            LoadingButton(
-              key: KWidgetkeys.screen.story.button,
-              isDesk: isDesk,
-              onPressed: () => context.read<StoryWatcherBloc>().add(
-                    const StoryWatcherEvent.loadNextItems(),
-                  ),
-              iconKey: KWidgetkeys.screen.story.buttonIcon,
-              text: context.l10n.moreStories,
-            ),
+            // LoadingButton(
+            //   widgetKey: KWidgetkeys.screen.story.button,
+            //   isDesk: isDesk,
+            //   onPressed: () => context.read<StoryWatcherBloc>().add(
+            //         const StoryWatcherEvent.loadNextItems(),
+            //       ),
+            //   text: context.l10n.moreStories,
+            // ),
             if (isDesk)
               KSizedBox.kHeightSizedBox56
             else
               KSizedBox.kHeightSizedBox24,
           ],
+          scrollFunction: () => context.read<StoryWatcherBloc>().add(
+                const StoryWatcherEvent.loadNextItems(),
+              ),
         );
       },
     );

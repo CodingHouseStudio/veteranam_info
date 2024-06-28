@@ -100,28 +100,31 @@ List<Widget> _employeeRespondContainerWidgetList({
       ),
     ),
     if (isDesk) KSizedBox.kHeightSizedBox10 else KSizedBox.kHeightSizedBox8,
-    Row(
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(
-            left: KPadding.kPaddingSize32,
-            right: KPadding.kPaddingSize16,
+    // Row(
+    //   children: [
+    //     Padding(
+    //       padding: const EdgeInsets.only(
+    //         left: KPadding.kPaddingSize32,
+    //         right: KPadding.kPaddingSize16,
+    //       ),
+    //       child:
+    CheckPointWidget(
+      key: KWidgetkeys.screen.employeeRespond.checkPoint,
+      isCheck: context.read<EmployeeRespondBloc>().state.noResume,
+      onChanged: () => context.read<EmployeeRespondBloc>().add(
+            const EmployeeRespondEvent.noResumeChanged(),
           ),
-          child: CheckPointWidget(
-            key: KWidgetkeys.screen.employeeRespond.checkPoint,
-            isCheck: context.read<EmployeeRespondBloc>().state.noResume,
-            onChanged: () => context.read<EmployeeRespondBloc>().add(
-                  const EmployeeRespondEvent.noResumeChanged(),
-                ),
-          ),
-        ),
-        Text(
-          key: KWidgetkeys.screen.employeeRespond.noResume,
-          context.l10n.noResume,
-          style: isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
-        ),
-      ],
+      text: context.l10n.noResume,
+      isDesk: isDesk,
     ),
+    // ),
+    //     Text(
+    //       key: KWidgetkeys.screen.employeeRespond.noResume,
+    //       context.l10n.noResume,
+    //       style: isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
+    //     ),
+    //   ],
+    // ),
     if (isDesk) KSizedBox.kHeightSizedBox32 else KSizedBox.kHeightSizedBox16,
     if (isDesk)
       Row(
@@ -129,7 +132,7 @@ List<Widget> _employeeRespondContainerWidgetList({
           Expanded(
             child: sendButton(context: context, isDesk: true),
           ),
-          KSizedBox.kWidthSizedBox73,
+          KSizedBox.kWidthSizedBox72,
           Expanded(
             child: cancelButton(context: context, isDesk: true),
           ),

@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
-import 'package:skeletonizer/skeletonizer.dart';
 
 part '../works_widget_list.dart';
 
@@ -12,7 +11,14 @@ class WorkEmployeeBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<WorkEmployeeWatcherBloc, WorkEmployeeWatcherState>(
+    return BlocConsumer<WorkEmployeeWatcherBloc, WorkEmployeeWatcherState>(
+      listener: (context, state) => context.dialog.showGetErrorDialog(
+        error: state.failure!.value(context),
+        onPressed: () => context
+            .read<WorkEmployeeWatcherBloc>()
+            .add(const WorkEmployeeWatcherEvent.started()),
+      ),
+      listenWhen: (previous, current) => current.failure != null,
       builder: (context, _) => ScaffoldDecorationWidget(
         titleChildWidgetsFunction: ({required isDesk}) => [
           if (isDesk)
@@ -39,7 +45,7 @@ class WorkEmployeeBody extends StatelessWidget {
             : EdgeInsets.zero,
         mainChildWidgetsFunction: ({required isDesk}) => [
           if (_.loadingStatus == LoadingStatus.loaded &&
-              _.filteredWorkModelItems.isNotEmpty)
+              _.workModelItems.isNotEmpty)
             WorkEmployeeFilters(
               key: KWidgetkeys.screen.workEmployee.filter,
               cities: _.workModelItems.overallCities,
@@ -51,18 +57,17 @@ class WorkEmployeeBody extends StatelessWidget {
           else
             KSizedBox.kHeightSizedBox24,
           if (_.workModelItems.isEmpty &&
-              _.loadingStatus == LoadingStatus.loaded)
-            Config.isDevelopment
-                ? MockButtonWidget(
-                    key: KWidgetkeys.screen.workEmployee.buttonMock,
-                    onPressed: () {
-                      GetIt.I.get<IWorkRepository>().addMockWorks();
-                      context
-                          .read<WorkEmployeeWatcherBloc>()
-                          .add(const WorkEmployeeWatcherEvent.started());
-                    },
-                  )
-                : const SizedBox.shrink()
+              _.loadingStatus == LoadingStatus.loaded &&
+              Config.isDevelopment)
+            MockButtonWidget(
+              key: KWidgetkeys.screen.workEmployee.buttonMock,
+              onPressed: () {
+                GetIt.I.get<IWorkRepository>().addMockWorks();
+                context
+                    .read<WorkEmployeeWatcherBloc>()
+                    .add(const WorkEmployeeWatcherEvent.started());
+              },
+            )
           else
             ...worksWidgetList(context: context, isDesk: isDesk),
           if (isDesk)

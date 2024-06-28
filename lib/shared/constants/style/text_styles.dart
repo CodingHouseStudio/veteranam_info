@@ -222,22 +222,21 @@ abstract class AppTextStyle {
     fontWeight: FontWeight.w400,
     letterSpacing: 0.5,
   );
-
-  /// materialThemeBodyLarge figma properties
-  /// fontFamily: Gilroy
-  /// fontSize: 16px
-  /// height: 24px
-  /// fontWeight: 400
-  /// letterSpacing: 0.5px
-  /// fontStyle: none
-  /// decoration: none
-  static const TextStyle materialThemeBodyLargeHint = TextStyle(
+  static const TextStyle materialThemeBodyLargeNeutralVariant35 = TextStyle(
     fontFamily: 'Gilroy',
     fontSize: 16,
     height: 1.5,
     fontWeight: FontWeight.w400,
     letterSpacing: 0.5,
     color: AppColors.materialThemeRefNeutralVariantNeutralVariant35,
+  );
+  static const TextStyle materialThemeBodyLargeNeutralVariant60 = TextStyle(
+    fontFamily: 'Gilroy',
+    fontSize: 16,
+    height: 1.5,
+    fontWeight: FontWeight.w400,
+    letterSpacing: 0.5,
+    color: AppColors.materialThemeRefNeutralVariantNeutralVariant60,
   );
 
   /// materialThemeBodyMedium figma properties
@@ -255,22 +254,21 @@ abstract class AppTextStyle {
     fontWeight: FontWeight.w400,
     letterSpacing: 0.25,
   );
-
-  /// materialThemeBodyMedium figma properties
-  /// fontFamily: Gilroy
-  /// fontSize: 14px
-  /// height: 20px
-  /// fontWeight: 400
-  /// letterSpacing: 0.25px
-  /// fontStyle: none
-  /// decoration: none
-  static const TextStyle materialThemeBodyMediumHint = TextStyle(
+  static const TextStyle materialThemeBodyMediumNeutralVariant35 = TextStyle(
     fontFamily: 'Gilroy',
     fontSize: 14,
     height: 1.43,
     fontWeight: FontWeight.w400,
     letterSpacing: 0.25,
     color: AppColors.materialThemeRefNeutralVariantNeutralVariant35,
+  );
+  static const TextStyle materialThemeBodyMediumNeutralVariant60 = TextStyle(
+    fontFamily: 'Gilroy',
+    fontSize: 14,
+    height: 1.43,
+    fontWeight: FontWeight.w400,
+    letterSpacing: 0.25,
+    color: AppColors.materialThemeRefNeutralVariantNeutralVariant60,
   );
 
   /// materialThemeBodySmall figma properties
@@ -287,6 +285,14 @@ abstract class AppTextStyle {
     height: 1.33,
     fontWeight: FontWeight.w400,
     letterSpacing: 0.4,
+  );
+  static const TextStyle materialThemeBodySmallError = TextStyle(
+    fontFamily: 'Gilroy',
+    fontSize: 12,
+    height: 1.33,
+    fontWeight: FontWeight.w400,
+    letterSpacing: 0.4,
+    color: AppColors.materialThemeRefErrorError50,
   );
 
   /// materialThemeLabelLarge figma properties
@@ -336,6 +342,14 @@ abstract class AppTextStyle {
     fontWeight: FontWeight.w500,
     letterSpacing: 0.5,
   );
+  static const TextStyle materialThemeLabelSmallHint = TextStyle(
+    fontFamily: 'Gilroy',
+    fontSize: 11,
+    height: 1.45,
+    fontWeight: FontWeight.w500,
+    letterSpacing: 0.5,
+    color: AppColors.materialThemeRefNeutralVariantNeutralVariant35,
+  );
 
   /// materialThemeTitleLarge figma properties
   /// fontFamily: Gilroy
@@ -367,6 +381,14 @@ abstract class AppTextStyle {
     fontWeight: FontWeight.w500,
     letterSpacing: 0.15,
   );
+  static const TextStyle materialThemeTitleMediumHint = TextStyle(
+    fontFamily: 'Gilroy',
+    fontSize: 16,
+    height: 1.5,
+    fontWeight: FontWeight.w500,
+    letterSpacing: 0.15,
+    color: AppColors.materialThemeRefNeutralVariantNeutralVariant35,
+  );
 
   /// materialThemeTitleSmall figma properties
   /// fontFamily: Gilroy
@@ -382,5 +404,60 @@ abstract class AppTextStyle {
     height: 1.43,
     fontWeight: FontWeight.w500,
     letterSpacing: 0.1,
+  );
+
+  /// h1 figma properties
+  /// fontFamily: Gilroy
+  /// fontSize: 64px
+  /// height: 64px
+  /// fontWeight: 500
+  /// letterSpacing: -0.25px
+  /// fontStyle: none
+  /// decoration: none
+  static const TextStyle h1 = TextStyle(
+    fontFamily: 'Gilroy',
+    fontSize: 64,
+    height: 1,
+    fontWeight: FontWeight.w500,
+    letterSpacing: -0.25,
+  );
+
+  /// h1Mob figma properties
+  /// fontFamily: Gilroy
+  /// fontSize: 36px
+  /// height: 44px
+  /// fontWeight: 500
+  /// letterSpacing: none
+  /// fontStyle: none
+  /// decoration: none
+  static const TextStyle h1Mob = TextStyle(
+    fontFamily: 'Gilroy',
+    fontSize: 36,
+    height: 1.22,
+    fontWeight: FontWeight.w500,
+  );
+
+  /// h1Tablet figma properties
+  /// fontFamily: Gilroy
+  /// fontSize: 48px
+  /// height: 56px
+  /// fontWeight: 500
+  /// letterSpacing: -0.25px
+  /// fontStyle: none
+  /// decoration: none
+  static const TextStyle h1Tablet = TextStyle(
+    fontFamily: 'Gilroy',
+    fontSize: 48,
+    height: 1.17,
+    fontWeight: FontWeight.w500,
+    letterSpacing: -0.25,
+  );
+  static const TextStyle materialThemeTitleMediumNeutral = TextStyle(
+    fontFamily: 'Gilroy',
+    fontSize: 16,
+    height: 1.5,
+    fontWeight: FontWeight.w500,
+    letterSpacing: 0.15,
+    color: AppColors.materialThemeKeyColorsNeutral,
   );
 }

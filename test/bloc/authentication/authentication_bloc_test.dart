@@ -93,9 +93,7 @@ void main() {
       build: () => authenticationBloc,
       act: (bloc) async {
         bloc.add(
-          const AppLanguageChanged(
-            Language.english,
-          ),
+          const AppLanguageChanged(),
         );
       },
       expect: () async => [

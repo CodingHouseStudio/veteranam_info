@@ -18,11 +18,11 @@ void main() {
     late IStoryRepository mockStoryRepository;
     late AuthenticationRepository mockAuthenticationRepository;
     setUp(() {
+      KPlatformConstants.isWebDesktop = false;
+      ExtendedDateTime.current = KTestText.dateTime;
+      ExtendedDateTime.id = '';
       mockStoryRepository = MockIStoryRepository();
       mockAuthenticationRepository = MockAuthenticationRepository();
-      when(mockStoryRepository.getStoryItems()).thenAnswer(
-        (invocation) => Stream.value(KTestText.storyModelItems),
-      );
       when(mockAuthenticationRepository.currentUser).thenAnswer(
         (realInvocation) => KTestText.userWithoutPhoto,
       );
@@ -30,39 +30,61 @@ void main() {
         (realInvocation) => UserSetting.empty,
       );
     });
-    testWidgets('${KGroupText.intial} ', (tester) async {
-      await storyPumpAppHelper(
-        tester: tester,
-        mockStoryRepository: mockStoryRepository,
-        mockAuthenticationRepository: mockAuthenticationRepository,
-      );
+    group('${KGroupText.failure} ', () {
+      setUp(() {
+        when(mockStoryRepository.getStoryItems()).thenAnswer(
+          (invocation) => Stream.error(Exception(KGroupText.failureGet)),
+        );
+      });
+      testWidgets('${KGroupText.failureGet} ', (tester) async {
+        await storyPumpAppHelper(
+          mockAuthenticationRepository: mockAuthenticationRepository,
+          mockStoryRepository: mockStoryRepository,
+          tester: tester,
+        );
 
-      await storyInitialHelper(tester);
+        await storyFailureHelper(tester);
+      });
     });
-    testWidgets('Stories list load ', (tester) async {
-      await storyPumpAppHelper(
-        mockStoryRepository: mockStoryRepository,
-        tester: tester,
-        mockAuthenticationRepository: mockAuthenticationRepository,
-      );
-
-      await listLoadHelper(tester);
-    });
-    group('${KGroupText.goRouter} ', () {
-      late MockGoRouter mockGoRouter;
-      setUp(() => mockGoRouter = MockGoRouter());
+    group('${KGroupText.getList} ', () {
+      setUp(() {
+        when(mockStoryRepository.getStoryItems()).thenAnswer(
+          (invocation) => Stream.value(KTestText.storyModelItems),
+        );
+      });
       testWidgets('${KGroupText.intial} ', (tester) async {
         await storyPumpAppHelper(
           tester: tester,
-          mockGoRouter: mockGoRouter,
           mockStoryRepository: mockStoryRepository,
           mockAuthenticationRepository: mockAuthenticationRepository,
         );
 
         await storyInitialHelper(tester);
       });
-      group('${KGroupText.goTo} ', () {
-        testWidgets('${KRoute.storyAdd.name} ', (tester) async {
+
+      loadingList(
+        pumpApp: (tester) async => storyPumpAppHelper(
+          tester: tester,
+          mockStoryRepository: mockStoryRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
+        ),
+        lastCard: KWidgetkeys.screen.story.cardLast,
+      );
+
+      testWidgets('Stories list load ', (tester) async {
+        KPlatformConstants.isWebDesktop = false;
+        await storyPumpAppHelper(
+          mockStoryRepository: mockStoryRepository,
+          tester: tester,
+          mockAuthenticationRepository: mockAuthenticationRepository,
+        );
+
+        await listLoadHelper(tester);
+      });
+      group('${KGroupText.goRouter} ', () {
+        late MockGoRouter mockGoRouter;
+        setUp(() => mockGoRouter = MockGoRouter());
+        testWidgets('${KGroupText.intial} ', (tester) async {
           await storyPumpAppHelper(
             tester: tester,
             mockGoRouter: mockGoRouter,
@@ -70,10 +92,22 @@ void main() {
             mockAuthenticationRepository: mockAuthenticationRepository,
           );
 
-          await storyAddNavigationHelper(
-            tester: tester,
-            mockGoRouter: mockGoRouter,
-          );
+          await storyInitialHelper(tester);
+        });
+        group('${KGroupText.goTo} ', () {
+          testWidgets('${KRoute.storyAdd.name} ', (tester) async {
+            await storyPumpAppHelper(
+              tester: tester,
+              mockGoRouter: mockGoRouter,
+              mockStoryRepository: mockStoryRepository,
+              mockAuthenticationRepository: mockAuthenticationRepository,
+            );
+
+            await storyAddNavigationHelper(
+              tester: tester,
+              mockGoRouter: mockGoRouter,
+            );
+          });
         });
       });
     });

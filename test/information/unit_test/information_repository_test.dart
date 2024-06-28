@@ -12,12 +12,13 @@ void main() {
   group('${KScreenBlocName.information} ${KGroupText.repository} ', () {
     late IInformationRepository mockInformationRepository;
     late FirestoreService mockFirestoreService;
+    setUp(() {
+      ExtendedDateTime.id = '';
+      ExtendedDateTime.current = KTestText.dateTime;
+      mockFirestoreService = MockFirestoreService();
+    });
     group('${KGroupText.successfulGet} ', () {
       setUp(() {
-        ExtendedDateTime.id = '';
-        ExtendedDateTime.current = KTestText.dateTime;
-        mockFirestoreService = MockFirestoreService();
-        mockInformationRepository = MockIInformationRepository();
         when(mockFirestoreService.getInformations()).thenAnswer(
           (_) => Stream.value(KTestText.informationModelItems),
         );
@@ -52,9 +53,6 @@ void main() {
     });
     group('${KGroupText.failureGet} ', () {
       setUp(() {
-        ExtendedDateTime.id = '';
-        mockFirestoreService = MockFirestoreService();
-        //mockInformationRepository = MockIInformationRepository();
         when(mockFirestoreService.getInformations()).thenAnswer(
           (realInvocation) => Stream.error(
             KGroupText.failureGet,

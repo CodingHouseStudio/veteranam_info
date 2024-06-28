@@ -3,10 +3,24 @@ import 'package:kozak/shared/shared.dart';
 
 /// COMMENT: Variables with widget theme that don't have a specific group
 abstract class KWidgetTheme {
-  KWidgetTheme.of(this.context);
-  final BuildContext context;
   static const outlineInputBorder = OutlineInputBorder(
     borderSide: BorderSide(color: AppColors.materialThemeKeyColorsNeutral),
+    borderRadius: KBorderRadius.kBorderRadius32,
+  );
+  static const outlineInputBorderEnabled = OutlineInputBorder(
+    borderSide: BorderSide(color: AppColors.materialThemeRefNeutralNeutral80),
+    borderRadius: KBorderRadius.kBorderRadius32,
+  );
+  static const outlineInputBorderHovered = OutlineInputBorder(
+    borderSide: BorderSide(color: AppColors.materialThemeRefNeutralNeutral40),
+    borderRadius: KBorderRadius.kBorderRadius32,
+  );
+  static const outlineInputBorderFocused = OutlineInputBorder(
+    borderSide: BorderSide(color: AppColors.materialThemeRefNeutralNeutral70),
+    borderRadius: KBorderRadius.kBorderRadius32,
+  );
+  static const outlineInputBorderDisabled = OutlineInputBorder(
+    borderSide: BorderSide(color: AppColors.materialThemeRefNeutralNeutral90),
     borderRadius: KBorderRadius.kBorderRadius32,
   );
   static const outlineInputBorderError = OutlineInputBorder(
@@ -23,19 +37,27 @@ abstract class KWidgetTheme {
   );
   static const boxDecorationCircular = BoxDecoration(
     shape: BoxShape.circle,
-    color: AppColors.materialThemeWhite,
+    color: AppColors.materialThemeSourceSeed,
   );
 
   static const boxDecorationGrayCircular = BoxDecoration(
     shape: BoxShape.circle,
-    color: AppColors.materialThemeWhite,
+    color: AppColors.materialThemeKeyColorsNeutral,
   );
 
   static const boxDecorationCard = BoxDecoration(
     borderRadius: KBorderRadius.kBorderRadius32,
     color: AppColors.materialThemeKeyColorsNeutral,
   );
-
+  static const boxDecorationCardGrayBorder = BoxDecoration(
+    borderRadius: KBorderRadius.kBorderRadius32,
+    color: AppColors.materialThemeWhite,
+    border: Border.fromBorderSide(
+      BorderSide(
+        color: AppColors.materialThemeKeyColorsNeutralVariant,
+      ),
+    ),
+  );
   static const boxDecorationFooter = BoxDecoration(
     borderRadius: KBorderRadius.kBorderRadius32,
     color: AppColors.materialThemeKeyColorsNeutralVariant,
@@ -60,7 +82,14 @@ abstract class KWidgetTheme {
     borderRadius: KBorderRadius.kBorderRadiusRight32,
     color: AppColors.materialThemeWhite,
   );
-
+  static const boxDecorationBlackCircular = BoxDecoration(
+    shape: BoxShape.circle,
+    color: AppColors.materialThemeBlack,
+  );
+  static const boxDecorationWhiteMain = BoxDecoration(
+    borderRadius: KBorderRadius.kBorderRadius32,
+    color: AppColors.materialThemeWhite,
+  );
   static const boxDecorChatMessage = BoxDecoration(
     color: AppColors.materialThemeKeyColorsNeutralVariant,
     borderRadius: KBorderRadius.kBorderRadiusChat,
@@ -70,35 +99,47 @@ abstract class KWidgetTheme {
     borderRadius: KBorderRadius.kBorderRadius32,
   );
   static const boxDecorCheckPointFalse = BoxDecoration(
-    color: AppColors.materialThemeKeyColorsNeutralVariant,
-    borderRadius: KBorderRadius.kBorderRadius8,
-  );
-  static const boxDecorCheckPointTrue = BoxDecoration(
-    color: AppColors.materialThemeWhite,
+    color: AppColors.materialThemeKeyColorsNeutral,
     border: Border.fromBorderSide(
       BorderSide(
-        color: AppColors.materialThemeKeyColorsNeutralVariant,
+        color: AppColors.materialThemeRefNeutralNeutral80,
         width: KSize.kPixel3,
       ),
     ),
     borderRadius: KBorderRadius.kBorderRadius8,
   );
-  static const boxDecorationBlack = BoxDecoration(
+  static const boxDecorCheckPointTrue = BoxDecoration(
+    color: AppColors.materialThemeSourceSeed,
+    border: Border.fromBorderSide(
+      BorderSide(
+        color: AppColors.materialThemeSourceSeed,
+        width: KSize.kPixel3,
+      ),
+    ),
+    borderRadius: KBorderRadius.kBorderRadius8,
+  );
+  static const boxDecorationGreen = BoxDecoration(
     color: AppColors.materialThemeSourceSeed,
     borderRadius: KBorderRadius.kBorderRadius32,
   );
+  static const boxDecorationBlack = BoxDecoration(
+    color: AppColors.materialThemeKeyColorsSecondary,
+    borderRadius: KBorderRadius.kBorderRadius32,
+  );
   static const inputDecoration = InputDecoration(
-    hintStyle: AppTextStyle.hint24,
+    hintStyle: AppTextStyle.materialThemeTitleMediumHint,
     contentPadding: EdgeInsets.symmetric(
       horizontal: KPadding.kPaddingSize20,
     ),
     floatingLabelBehavior: FloatingLabelBehavior.auto,
     border: outlineInputBorder,
-    enabledBorder: outlineInputBorder,
-    disabledBorder: outlineInputBorder,
-    focusedBorder: outlineInputBorder,
+    enabledBorder: outlineInputBorderEnabled,
+    disabledBorder: outlineInputBorderDisabled,
+    focusedBorder: outlineInputBorderFocused,
     focusedErrorBorder: outlineInputBorderError,
     filled: true,
     fillColor: AppColors.materialThemeWhite,
+    labelStyle: AppTextStyle.materialThemeTitleMedium,
+    alignLabelWithHint: true,
   );
 }

@@ -79,13 +79,11 @@ class EmployeeRespondBloc
           id: ExtendedDateTime.id,
           email: state.email.value,
           resume: state.resume.value != null
-              ? [
-                  ResumeModel(
-                    downloadURL: state.resume.value!.path,
-                    name: state.resume.value!.name,
-                    ref: state.resume.value!.path,
-                  ),
-                ]
+              ? ResumeModel(
+                  downloadURL: state.resume.value!.path,
+                  name: state.resume.value!.name,
+                  ref: state.resume.value!.path,
+                )
               : null,
           noResume: state.noResume,
           phoneNumber: state.phoneNumber.value!,

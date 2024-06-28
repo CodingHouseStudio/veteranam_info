@@ -7,23 +7,25 @@ class ScaffoldWidget extends StatelessWidget {
     this.titleChildWidgetsFunction,
     super.key,
     this.mainDeskPadding,
+    this.hasFooter = false,
   });
   final List<Widget> Function({required bool isDesk})?
       titleChildWidgetsFunction;
-  final List<Widget> Function({required bool isDesk}) mainChildWidgetsFunction;
+  final List<Widget> Function({required bool isDesk, required bool isTablet})
+      mainChildWidgetsFunction;
   final EdgeInsetsGeometry? mainDeskPadding;
+  final bool hasFooter;
 
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
         final isDesk =
+            constraints.maxWidth > KPlatformConstants.minWidthThresholdDesk;
+        final isTablet =
             constraints.maxWidth > KPlatformConstants.minWidthThresholdTablet;
-        final mainChildWidget = mainChildWidgetsFunction(isDesk: isDesk);
-        final nawbarPadding = EdgeInsets.symmetric(
-          horizontal:
-              isDesk ? KPadding.kPaddingSize90 : KPadding.kPaddingSize16,
-        );
+        final mainChildWidget =
+            mainChildWidgetsFunction(isDesk: isDesk, isTablet: isTablet);
         final padding = EdgeInsets.symmetric(
           horizontal: (isDesk
               ? KPadding.kPaddingSize90 +
@@ -33,22 +35,26 @@ class ScaffoldWidget extends StatelessWidget {
                               KPlatformConstants.maxWidthThresholdTablet) /
                           2
                       : 0)
-              : KPadding.kPaddingSize16),
+              : isTablet
+                  ? KPadding.kPaddingSize32
+                  : KPadding.kPaddingSize16),
         );
-        final footerList = FooterWidget.get(
-          context: context,
-          isDesk: isDesk,
-        );
+        final footerWidget = <Widget>[];
+        if (hasFooter) {
+          footerWidget.addAll(
+            FooterWidget.get(
+              context: context,
+              isTablet: isTablet,
+            ),
+          );
+        }
         return Scaffold(
           body: CustomScrollView(
             key: KWidgetkeys.widget.scaffold.scroll,
             slivers: [
-              SliverPadding(
-                padding: nawbarPadding,
-                sliver: SliverPersistentHeader(
-                  delegate: NawbarWidget(
-                    isDesk: isDesk,
-                  ),
+              SliverPersistentHeader(
+                delegate: NawbarWidget(
+                  isDesk: isTablet,
                 ),
               ),
               if (titleChildWidgetsFunction != null)
@@ -78,33 +84,37 @@ class ScaffoldWidget extends StatelessWidget {
                   itemCount: mainChildWidget.length,
                 ),
               ),
-              SliverPadding(
-                padding: padding.copyWith(
-                  bottom: KPadding.kPaddingSize40,
-                ),
-                sliver: DecoratedSliver(
-                  decoration: KWidgetTheme.boxDecorationFooter,
-                  sliver: SliverPadding(
-                    padding: isDesk
-                        ? const EdgeInsets.all(KPadding.kPaddingSize32)
-                            .copyWith(left: KPadding.kPaddingSize46)
-                        : const EdgeInsets.symmetric(
-                            vertical: KPadding.kPaddingSize32,
-                            horizontal: KPadding.kPaddingSize16,
-                          ),
-                    sliver: SliverList.builder(
-                      key: KWidgetkeys.widget.footer.widget,
-                      addAutomaticKeepAlives: false,
-                      addRepaintBoundaries: false,
-                      itemBuilder: (context, index) =>
-                          footerList.elementAt(index),
-                      itemCount: footerList.length,
+              if (hasFooter)
+                SliverPadding(
+                  padding: padding.copyWith(
+                    bottom: KPadding.kPaddingSize40,
+                  ),
+                  sliver: DecoratedSliver(
+                    decoration: KWidgetTheme.boxDecorationFooter,
+                    sliver: SliverPadding(
+                      padding: isDesk
+                          ? const EdgeInsets.all(KPadding.kPaddingSize32)
+                              .copyWith(left: KPadding.kPaddingSize46)
+                          : isTablet
+                              ? const EdgeInsets.all(KPadding.kPaddingSize46)
+                              : const EdgeInsets.symmetric(
+                                  vertical: KPadding.kPaddingSize32,
+                                  horizontal: KPadding.kPaddingSize16,
+                                ),
+                      sliver: SliverList.builder(
+                        key: KWidgetkeys.widget.footer.widget,
+                        addAutomaticKeepAlives: false,
+                        addRepaintBoundaries: false,
+                        itemBuilder: (context, index) =>
+                            footerWidget.elementAt(index),
+                        itemCount: footerWidget.length,
+                      ),
                     ),
                   ),
                 ),
-              ),
             ],
-            semanticChildCount: mainChildWidget.length,
+            semanticChildCount: mainChildWidget.length +
+                (hasFooter ? (footerWidget.length + 1) : 1),
           ),
         );
       },

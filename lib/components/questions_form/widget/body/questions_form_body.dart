@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
 
 class QuestionsFormBody extends StatefulWidget {
@@ -43,57 +42,59 @@ class _QuestionsFormBodyState extends State<QuestionsFormBody> {
           KSizedBox.kHeightSizedBox40
         else
           KSizedBox.kHeightSizedBox32,
-        AnswerWidget(
+        CheckPointWidget(
           onChanged: () => setState(() {
             userRole = UserRole.veteran;
           }),
           text: context.l10n.iAmVeteran,
-          isDesk: isDesk,
           isCheck: userRole == UserRole.veteran,
-          textKey: KWidgetkeys.screen.questionsForm.roleVeteranText,
-          checkPointKey: KWidgetkeys.screen.questionsForm.roleVeteran,
+          textStyle: isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
+          // key: KWidgetkeys.screen.questionsForm.roleVeteranText,
+          key: KWidgetkeys.screen.questionsForm.roleVeteran, isDesk: isDesk,
         ),
         if (isDesk)
           KSizedBox.kHeightSizedBox32
         else
           KSizedBox.kHeightSizedBox24,
-        AnswerWidget(
+        CheckPointWidget(
           onChanged: () => setState(() {
             userRole = UserRole.relativeOfVeteran;
           }),
           text: context.l10n.iAmRelativeOfVeteran,
-          isDesk: isDesk,
           isCheck: userRole == UserRole.relativeOfVeteran,
-          textKey: KWidgetkeys.screen.questionsForm.roleRelativeOfVeteranText,
-          checkPointKey: KWidgetkeys.screen.questionsForm.roleRelativeOfVeteran,
+          textStyle: isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
+          // textKey: KWidgetkeys.screen.questionsForm
+          // .roleRelativeOfVeteranText,
+          key: KWidgetkeys.screen.questionsForm.roleRelativeOfVeteran,
+          isDesk: isDesk,
         ),
         if (isDesk)
           KSizedBox.kHeightSizedBox32
         else
           KSizedBox.kHeightSizedBox24,
-        AnswerWidget(
+        CheckPointWidget(
           onChanged: () => setState(() {
             userRole = UserRole.civilian;
           }),
           text: context.l10n.iAmCivilian,
-          isDesk: isDesk,
           isCheck: userRole == UserRole.civilian,
-          textKey: KWidgetkeys.screen.questionsForm.roleCivilianText,
-          checkPointKey: KWidgetkeys.screen.questionsForm.roleCivilian,
+          textStyle: isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
+          // textKey: KWidgetkeys.screen.questionsForm.roleCivilianText,
+          key: KWidgetkeys.screen.questionsForm.roleCivilian, isDesk: isDesk,
         ),
         if (isDesk)
           KSizedBox.kHeightSizedBox32
         else
           KSizedBox.kHeightSizedBox24,
-        AnswerWidget(
+        CheckPointWidget(
           onChanged: () => setState(() {
             userRole = UserRole.businessmen;
           }),
           text: context.l10n.iAmBusinessOwnerRepresentative,
-          isDesk: isDesk,
           isCheck: userRole == UserRole.businessmen,
-          textKey: KWidgetkeys.screen.questionsForm.roleBusinessmenText,
-          checkPointKey: KWidgetkeys.screen.questionsForm.roleBusinessmen,
+          textStyle: isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
+          // textKey: KWidgetkeys.screen.questionsForm.roleBusinessmenText,
+          key: KWidgetkeys.screen.questionsForm.roleBusinessmen, isDesk: isDesk,
         ),
         if (isDesk)
           KSizedBox.kHeightSizedBox40

@@ -39,6 +39,7 @@ class BoxWidget extends StatelessWidget {
                     key: KWidgetkeys.widget.box.icon,
                     icon: icon ?? KIcon.arrowUpRight,
                     padding: KPadding.kPaddingSize20,
+                    background: AppColors.materialThemeWhite,
                   ),
                   textIconPaddingWidget,
                   Align(
@@ -56,25 +57,25 @@ class BoxWidget extends StatelessWidget {
                 ],
               ),
             )
-          : InkWell(
-              onTap: onTap,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: Text(
-                      text,
-                      key: KWidgetkeys.widget.box.text,
-                      style: AppTextStyle.materialThemeTitleLarge,
-                      maxLines: 1,
-                    ),
-                  ),
-                  IconWidget(
-                    key: KWidgetkeys.widget.box.icon,
-                    icon: icon ?? KIcon.arrowUpRight,
-                    padding: KPadding.kPaddingSize20,
-                  ),
-                ],
+          : TextButton.icon(
+              onPressed: onTap,
+              style: KButtonStyles.boxButtonStyle,
+              icon: Expanded(
+                child: Text(
+                  text,
+                  key: KWidgetkeys.widget.box.text,
+                  style: AppTextStyle.materialThemeTitleLarge,
+                  maxLines: 1,
+                ),
+              ),
+              label: Align(
+                alignment: Alignment.centerRight,
+                child: IconWidget(
+                  key: KWidgetkeys.widget.box.icon,
+                  icon: icon ?? KIcon.arrowUpRight,
+                  padding: KPadding.kPaddingSize20,
+                  background: AppColors.materialThemeWhite,
+                ),
               ),
             ),
     );

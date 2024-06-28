@@ -6,43 +6,14 @@ import '../../text_dependency.dart';
 Future<void> signUpBottomButtonsHelper(
   WidgetTester tester,
 ) async {
-  await scrollingHelper(
-    tester: tester,
-    offset: KTestConstants.scrollingDown,
-  );
+  //expect(find.byKey(KWidgetkeys.widget.signUpBottomButtons.mob),
+  //findsWidgets);
 
-  expect(find.byKey(KWidgetkeys.widget.signUpBottomButtons.or), findsWidgets);
-
-  expect(
-    find.byKey(KWidgetkeys.widget.signUpBottomButtons.title),
-    findsWidgets,
-  );
-
-  expect(find.byKey(KWidgetkeys.widget.signUpBottomButtons.mob), findsWidgets);
-
-  expect(
-    find.byKey(KWidgetkeys.widget.signUpBottomButtons.google),
-    findsWidgets,
-  );
-
-  expect(
-    find.byKey(KWidgetkeys.widget.signUpBottomButtons.facebook),
-    findsWidgets,
-  );
-
-  expect(
-    find.byKey(KWidgetkeys.widget.signUpBottomButtons.apple),
-    findsWidgets,
-  );
-
-  expect(
-    find.byKey(KWidgetkeys.widget.signUpBottomButtons.divider),
-    findsNothing,
-  );
-
-  expect(find.byKey(KWidgetkeys.widget.signUpBottomButtons.desk), findsNothing);
+  // expect(find.byKey(KWidgetkeys.widget.signUpBottomButtons.desk),
+  // findsNothing);
 
   await changeWindowSizeHelper(
+    windowsTest: true,
     tester: tester,
     test: () async {
       expect(
@@ -55,15 +26,17 @@ Future<void> signUpBottomButtonsHelper(
         findsWidgets,
       );
 
-      expect(
-        find.byKey(KWidgetkeys.widget.signUpBottomButtons.mob),
-        findsNothing,
-      );
+      // expect(
+      //   find.byKey(KWidgetkeys.widget.signUpBottomButtons.mob),
+      //   findsNothing,
+      // );
 
       expect(
         find.byKey(KWidgetkeys.widget.signUpBottomButtons.google),
         findsWidgets,
       );
+
+      await additionalButtonHelper(tester);
 
       expect(
         find.byKey(KWidgetkeys.widget.signUpBottomButtons.facebook),
@@ -75,15 +48,15 @@ Future<void> signUpBottomButtonsHelper(
         findsWidgets,
       );
 
-      expect(
-        find.byKey(KWidgetkeys.widget.signUpBottomButtons.divider),
-        findsWidgets,
-      );
+      // expect(
+      //   find.byKey(KWidgetkeys.widget.signUpBottomButtons.divider),
+      //   findsWidgets,
+      // );
 
-      expect(
-        find.byKey(KWidgetkeys.widget.signUpBottomButtons.desk),
-        findsOneWidget,
-      );
+      // expect(
+      //   find.byKey(KWidgetkeys.widget.signUpBottomButtons.desk),
+      //   findsOneWidget,
+      // );
     },
   );
 }

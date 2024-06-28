@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
@@ -14,10 +15,12 @@ void main() {
   group('${KScreenBlocName.home} ${KGroupText.repository} ', () {
     late IHomeRepository homeRepository;
     late FirestoreService mockFirestoreService;
+    setUp(() {
+      ExtendedDateTime.id = '';
+      mockFirestoreService = MockFirestoreService();
+    });
     group('${KGroupText.successfulGet} ', () {
       setUp(() {
-        ExtendedDateTime.id = '';
-        mockFirestoreService = MockFirestoreService();
         when(mockFirestoreService.getQuestions()).thenAnswer(
           (_) async => KTestText.questionModelItems,
         );
@@ -50,9 +53,8 @@ void main() {
     });
     group('${KGroupText.failureGet} ', () {
       setUp(() {
-        mockFirestoreService = MockFirestoreService();
         when(mockFirestoreService.getQuestions())
-            .thenThrow(Exception(KGroupText.failureGet));
+            .thenThrow(FirebaseException(plugin: KGroupText.failureGet));
         if (GetIt.I.isRegistered<FirestoreService>()) {
           GetIt.I.unregister<FirestoreService>();
         }

@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:kozak/shared/shared.dart';
 
@@ -15,7 +14,7 @@ class StoryCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CardTextDetailEvaluateWidget(
-      image: storyModel.image.firstImage,
+      image: storyModel.image,
       text: storyModel.story,
       titleTopMob: true,
       titleWidget: Row(
@@ -29,13 +28,10 @@ class StoryCardWidget extends StatelessWidget {
           else
             ClipRRect(
               borderRadius: BorderRadius.circular(KSize.kUserPhoto),
-              child: CachedNetworkImage(
-                imageUrl: storyModel.userPhoto.firstImage!,
-                placeholder: (context, url) => Image.asset(''),
-                errorWidget: (context, url, error) => KIcon.error,
+              child: ImageWidget(
+                imageUrl: storyModel.userPhoto!.downloadURL,
                 fit: BoxFit.contain,
-                width: KSize.kUserPhoto,
-                height: KSize.kUserPhoto,
+                size: KSize.kUserPhoto,
               ),
             ),
           KSizedBox.kWidthSizedBox8,

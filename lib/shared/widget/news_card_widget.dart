@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:kozak/components/information/bloc/information_watcher_bloc.dart';
 import 'package:kozak/shared/shared.dart';
 
 class NewsCardWidget extends StatelessWidget {
@@ -15,64 +14,76 @@ class NewsCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final selectedFilters =
-        context.select((InformationWatcherBloc bloc) => bloc.state.filters);
-
     return CardTextDetailEvaluateWidget(
-      image: informationItem.image.firstImage,
+      image: informationItem.image,
       text: informationItem.news,
       buttonText: [
-        context.l10n.readMore,
-        context.l10n.readLess,
+        context.l10n.more,
+        context.l10n.hide,
       ],
-      buttonStyle: KButtonStyles.transparentButtonStyleBottomBorder,
+      buttonStyle: KButtonStyles.borderBlackButtonStyle,
       titleWidget: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
             informationItem.title,
             key: KWidgetkeys.widget.newsCard.title,
-            style: isDesk ? AppTextStyle.text40 : AppTextStyle.text24,
+            style: isDesk
+                ? AppTextStyle.materialThemeDisplaySmall
+                : AppTextStyle.materialThemeHeadlineSmall,
           ),
+          if (isDesk)
+            KSizedBox.kHeightSizedBox8
+          else
+            KSizedBox.kHeightSizedBox4,
           Text(
-            informationItem.date.localeTime,
+            informationItem.fetchDate.localeTime,
             key: KWidgetkeys.widget.newsCard.date,
-            style: AppTextStyle.hint16,
+            style: isDesk
+                ? AppTextStyle.materialThemeLabelMedium
+                : AppTextStyle.materialThemeLabelSmall,
           ),
+          if (isDesk)
+            KSizedBox.kHeightSizedBox24
+          else
+            KSizedBox.kHeightSizedBox16,
         ],
       ),
-      bottom: selectedFilters != null && selectedFilters.isNotEmpty
-          ? Padding(
-              padding: const EdgeInsets.only(
-                bottom: KPadding.kPaddingSize16,
-                top: KPadding.kPaddingSize24,
+      bottom: Padding(
+        padding: const EdgeInsets.only(
+          bottom: KPadding.kPaddingSize8,
+          top: KPadding.kPaddingSize16,
+        ),
+        child: Wrap(
+          key: KWidgetkeys.widget.newsCard.tags,
+          spacing: KSize.kWrapSpacing8,
+          runSpacing: KSize.kWrapRunSpacing4,
+          children:
+              (context.read<AuthenticationBloc>().state.userSetting.locale ==
+                          Language.english
+                      ? informationItem.category
+                      : informationItem.categoryUA)
+                  .map((category) {
+            return Container(
+              decoration: KWidgetTheme.boxDecorationCardGrayBorder,
+              padding: const EdgeInsets.symmetric(
+                vertical: KPadding.kPaddingSize4,
+                horizontal: KPadding.kPaddingSize8,
               ),
-              child: Wrap(
-                key: KWidgetkeys.widget.newsCard.tags,
-                spacing: KSize.kWrapSpacing8,
-                runSpacing: KSize.kWrapRunSpacing4,
-                children: selectedFilters.map((tag) {
-                  return Container(
-                    decoration: KWidgetTheme.boxDecorationWidget,
-                    padding: const EdgeInsets.symmetric(
-                      vertical: KPadding.kPaddingSize4,
-                      horizontal: KPadding.kPaddingSize8,
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          tag,
-                          style: AppTextStyle.text14,
-                        ),
-                        KIcon.check,
-                      ],
-                    ),
-                  );
-                }).toList(),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    category,
+                    style: AppTextStyle.materialThemeLabelLarge,
+                  ),
+                  KIcon.check,
+                ],
               ),
-            )
-          : null,
+            );
+          }).toList(),
+        ),
+      ),
       isDesk: isDesk,
     );
   }

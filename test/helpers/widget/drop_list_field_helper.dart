@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:kozak/shared/shared.dart';
 
-import '../../../integration_test/helper/helper.dart';
+import '../../text_dependency.dart';
 
 Future<void> dropListFieldBoxHelper({
   required WidgetTester tester,
@@ -41,12 +41,12 @@ Future<void> dropListFieldBoxHelper({
   expect(
     find.descendant(
       of: find.byKey(KWidgetkeys.widget.dropListField.list),
-      matching: find.byKey(KWidgetkeys.widget.dropListField.item).first,
+      matching: find.byKey(KWidgetkeys.widget.dropListField.item),
     ),
     findsNothing,
   );
 
-  await scrollingHelperInt(
+  await scrollingHelper(
     tester: tester,
     itemKey: KWidgetkeys.widget.dropListField.field,
   );
@@ -78,8 +78,8 @@ Future<void> dropListFieldBoxHelper({
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.dropListField.item).first,
-    findsOneWidget,
+    find.byKey(KWidgetkeys.widget.dropListField.item),
+    findsWidgets,
   );
 
   final textWidget = tester.widget<Text>(
@@ -132,7 +132,7 @@ Future<void> dropListFieldBoxHelper({
   await tester.pumpAndSettle();
 
   expect(
-    find.byKey(KWidgetkeys.widget.dropListField.item).first,
+    find.byKey(KWidgetkeys.widget.dropListField.item),
     findsNothing,
   );
 }

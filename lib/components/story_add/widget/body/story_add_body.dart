@@ -1,7 +1,7 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
+import 'package:go_router/go_router.dart';
 import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
 
@@ -16,16 +16,24 @@ class StoryAddBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<StoryAddBloc, StoryAddState>(
       listenWhen: (previous, current) =>
-          current.formStatus == FormzSubmissionStatus.success,
-      listener: (context, state) =>
-          context.goNamedWithScroll(KRoute.stories.name),
+          current.formStatus == FormzSubmissionStatus.success ||
+          current.failure != null,
+      listener: (context, state) {
+        if (state.formStatus == FormzSubmissionStatus.success) {
+          context.goNamed(KRoute.stories.name);
+        } else if (state.failure != null) {
+          context.dialog.showSendErrorDialog(
+            state.failure!.value(context),
+          );
+        }
+      },
       buildWhen: (previous, current) =>
           previous.formStatus != current.formStatus ||
           previous.isAnonymously != current.isAnonymously ||
           previous.image != current.image,
       builder: (context, _) {
         return ScaffoldWidget(
-          mainChildWidgetsFunction: ({required isDesk}) => [
+          mainChildWidgetsFunction: ({required isDesk, required isTablet}) => [
             if (isDesk)
               KSizedBox.kHeightSizedBox40
             else

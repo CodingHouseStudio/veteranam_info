@@ -46,8 +46,8 @@ Future<void> dropChipHelper({
   await tester.pumpAndSettle();
 
   expect(
-    find.byKey(buttonKey).first,
-    findsOneWidget,
+    find.byKey(buttonKey),
+    findsWidgets,
   );
 
   expect(

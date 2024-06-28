@@ -1,16 +1,13 @@
 import 'dart:async';
 
-import 'package:bloc/bloc.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kozak/shared/shared.dart';
 
-part 'information_watcher_event.dart';
-
-part 'information_watcher_state.dart';
-
 part 'information_watcher_bloc.freezed.dart';
+part 'information_watcher_event.dart';
+part 'information_watcher_state.dart';
 
 @Injectable()
 class InformationWatcherBloc
@@ -23,7 +20,7 @@ class InformationWatcherBloc
             informationModelItems: [],
             loadingStatus: LoadingStatus.initial,
             filteredInformationModelItems: [],
-            filters: null,
+            filtersIndex: [],
             itemsLoaded: 0,
             failure: null,
           ),
@@ -33,7 +30,7 @@ class InformationWatcherBloc
     on<_Failure>(_onFailure);
     on<_LoadNextItems>(_onLoadNextItems);
     on<_Filter>(_onFilter);
-    on<_FilterReset>(_onFilterReset);
+    // on<_FilterReset>(_onFilterReset);
   }
 
   final IInformationRepository _informationRepository;
@@ -54,14 +51,12 @@ class InformationWatcherBloc
         ),
       ),
       onError: (dynamic error) {
-        debugPrint('error is $error');
+        // debugPrint('error is $error');
         add(InformationWatcherEvent.failure(error));
       },
     );
   }
 
-  // ignore: flutter_style_todos
-  /// TODO: Need to change filters value on state.filters
   void _onUpdated(
     _Updated event,
     Emitter<InformationWatcherState> emit,
@@ -70,21 +65,14 @@ class InformationWatcherBloc
       InformationWatcherState(
         informationModelItems: event.informationItemsModel,
         loadingStatus: LoadingStatus.loaded,
-        filteredInformationModelItems: event.informationItemsModel.isNotEmpty
-            ? _filter(
-                filters: state.filters,
-                itemsLoaded: state.itemsLoaded != 0
-                    ? state.itemsLoaded
-                    : KDimensions.loadItems,
-                informationModelItems: event.informationItemsModel,
-              )
-            : [],
-        filters: null,
-        itemsLoaded: event.informationItemsModel.isNotEmpty
-            ? state.itemsLoaded != 0
-                ? state.itemsLoaded
-                : KDimensions.loadItems
-            : 0,
+        filteredInformationModelItems: _filter(
+          filtersIndex: state.filtersIndex,
+          itemsLoaded: state.itemsLoaded,
+          list: event.informationItemsModel,
+        ),
+        filtersIndex: state.filtersIndex,
+        itemsLoaded:
+            state.itemsLoaded.getLoaded(list: event.informationItemsModel),
         failure: null,
       ),
     );
@@ -94,109 +82,83 @@ class InformationWatcherBloc
     _LoadNextItems event,
     Emitter<InformationWatcherState> emit,
   ) {
-    if (state.itemsLoaded + 1 > state.informationModelItems.length) return;
+    if (state.itemsLoaded.checkLoadingPosible(state.informationModelItems)) {
+      return;
+    }
+    emit(state.copyWith(loadingStatus: LoadingStatus.loading));
+    if (state.itemsLoaded.checkLoadingPosible(state.informationModelItems)) {
+      return;
+    }
+    emit(state.copyWith(loadingStatus: LoadingStatus.loading));
     final filterItems = _filter(
-      filters: state.filters,
+      filtersIndex: state.filtersIndex,
       itemsLoaded: state.itemsLoaded + KDimensions.loadItems,
-      informationModelItems: state.informationModelItems,
     );
     emit(
       state.copyWith(
         filteredInformationModelItems: filterItems,
-        itemsLoaded: filterItems.length > state.itemsLoaded
-            ? state.itemsLoaded + KDimensions.loadItems
-            : filterItems.length,
+        itemsLoaded: (state.itemsLoaded + KDimensions.loadItems)
+            .getLoaded(list: filterItems),
+        loadingStatus: LoadingStatus.loaded,
       ),
     );
   }
 
-  void _onFilterReset(
-    _FilterReset event,
-    Emitter<InformationWatcherState> emit,
-  ) {
-    emit(
-      state.copyWith(
-        filteredInformationModelItems: _filter(
-          filters: null,
-          itemsLoaded: state.itemsLoaded,
-          informationModelItems: state.informationModelItems,
-        ),
-        filters: null,
-      ),
-    );
-  }
+  // void _onFilterReset(
+  //   _FilterReset event,
+  //   Emitter<InformationWatcherState> emit,
+  // ) {
+  //   emit(
+  //     state.copyWith(
+  //       filteredInformationModelItems: state.informationModelItems.loading(
+  //         itemsLoaded: state.itemsLoaded,
+  //       ),
+  //       filtersIndex: null,
+  //     ),
+  //   );
+  // }
 
   void _onFilter(
     _Filter event,
     Emitter<InformationWatcherState> emit,
   ) {
-    emit(state.copyWith(loadingStatus: LoadingStatus.loading));
-
-    final selectedFilters = List<String>.from(state.filters ?? []);
-
-    event.isSelected
-        ? selectedFilters.add(event.filter)
-        : selectedFilters.remove(event.filter);
+    final selectedFilters = state.filtersIndex.filterIndex(event.filterIndex);
 
     final filterItems = _filter(
-      filters: selectedFilters,
-      informationModelItems: state.informationModelItems,
+      filtersIndex: selectedFilters,
       itemsLoaded: state.itemsLoaded,
     );
 
     emit(
       state.copyWith(
-        loadingStatus: LoadingStatus.loaded,
         filteredInformationModelItems: filterItems,
-        filters: selectedFilters,
-        itemsLoaded: filterItems.length >= state.itemsLoaded
-            ? state.itemsLoaded
-            : filterItems.length,
+        filtersIndex: selectedFilters,
+        itemsLoaded: state.itemsLoaded.getLoaded(list: filterItems),
       ),
     );
   }
 
   List<InformationModel> _filter({
-    required List<String>? filters,
+    required List<int>? filtersIndex,
     required int itemsLoaded,
-    required List<InformationModel> informationModelItems,
+    List<InformationModel>? list,
   }) {
-    if (itemsLoaded > informationModelItems.length) {
-      itemsLoaded = informationModelItems.length;
-    }
-    if (filters != null && filters.isNotEmpty) {
-      final filterItems = informationModelItems
-          .where(
-            (element) =>
-                element.tags == null ||
-                filters.any(
-                  (filter) => element.tags!.contains(filter),
-                ),
-          )
-          .toList();
-      return filterItems.sublist(
-        0,
-        itemsLoaded > filterItems.length ? filterItems.length : itemsLoaded,
-      );
-    } else {
-      return informationModelItems.sublist(
-        0,
-        itemsLoaded > informationModelItems.length
-            ? informationModelItems.length
-            : itemsLoaded,
-      );
-    }
+    return (list ?? state.informationModelItems).loadingFilter(
+      filtersIndex: filtersIndex,
+      itemsLoaded: itemsLoaded,
+      getFilter: (InformationModel item) => item.category,
+    );
   }
 
   void _onFailure(
     _Failure event,
     Emitter<InformationWatcherState> emit,
   ) {
-    debugPrint('error is ${event.failure}');
+    // debugPrint('error is ${event.failure}');
     emit(
       state.copyWith(
         loadingStatus: LoadingStatus.error,
-        failure: GetFailur.fromCode(event.failure).status.toInformation(),
+        failure: InformationFailure.error,
       ),
     );
   }
