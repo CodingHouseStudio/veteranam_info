@@ -6,6 +6,7 @@ class ScaffoldAutoLoadingWidget extends StatelessWidget {
     required this.mainChildWidgetsFunction,
     required this.scrollFunction,
     required this.loadingButtonText,
+    required this.listCanLoaded,
     super.key,
     this.titleChildWidgetsFunction,
     this.mainDeskPadding,
@@ -19,6 +20,7 @@ class ScaffoldAutoLoadingWidget extends StatelessWidget {
   final void Function() scrollFunction;
   final Widget? mainRightChildWidget;
   final String loadingButtonText;
+  final bool listCanLoaded;
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +32,7 @@ class ScaffoldAutoLoadingWidget extends StatelessWidget {
         mainRightChildWidget: mainRightChildWidget,
         titleChildWidgetsFunction: titleChildWidgetsFunction,
         loadingButtonText: loadingButtonText,
+        listCanLoaded: listCanLoaded,
       );
     } else {
       return _ScaffoldAutoLoadingWidgetMobile(
@@ -38,6 +41,7 @@ class ScaffoldAutoLoadingWidget extends StatelessWidget {
         mainDeskPadding: mainDeskPadding,
         mainRightChildWidget: mainRightChildWidget,
         titleChildWidgetsFunction: titleChildWidgetsFunction,
+        listCanLoaded: listCanLoaded,
       );
     }
   }
@@ -47,6 +51,7 @@ class _ScaffoldAutoLoadingWidgetMobile extends StatefulWidget {
   const _ScaffoldAutoLoadingWidgetMobile({
     required this.mainChildWidgetsFunction,
     required this.scrollFunction,
+    required this.listCanLoaded,
     this.titleChildWidgetsFunction,
     this.mainDeskPadding,
     this.mainRightChildWidget,
@@ -58,6 +63,7 @@ class _ScaffoldAutoLoadingWidgetMobile extends StatefulWidget {
       mainDeskPadding;
   final void Function() scrollFunction;
   final Widget? mainRightChildWidget;
+  final bool listCanLoaded;
 
   @override
   State<_ScaffoldAutoLoadingWidgetMobile> createState() =>
@@ -93,6 +99,17 @@ class _ScaffoldAutoLoadingWidgetMobileState
                       : 0)
               : KPadding.kPaddingSize16),
         );
+        if (!widget.listCanLoaded) {
+          mainChildWidget.addAll([
+            Center(
+              child: Text(
+                context.l10n.youHaveLoadedFullList,
+                style: AppTextStyle.materialThemeBodyMedium,
+              ),
+            ),
+            KSizedBox.kHeightSizedBox24,
+          ]);
+        }
         // final footerList = FooterWidget.get(
         //   context: context,
         //   isDesk: isDesk,
@@ -196,7 +213,7 @@ class _ScaffoldAutoLoadingWidgetMobileState
   }
 
   void _onScroll() {
-    if (_isBottom) widget.scrollFunction();
+    if (_isBottom && widget.listCanLoaded) widget.scrollFunction();
   }
 
   bool get _isBottom {
@@ -212,6 +229,7 @@ class _ScaffoldAutoLoadingWidgetDesk extends StatelessWidget {
     required this.mainChildWidgetsFunction,
     required this.loadFunction,
     required this.loadingButtonText,
+    required this.listCanLoaded,
     this.titleChildWidgetsFunction,
     this.mainDeskPadding,
     this.mainRightChildWidget,
@@ -224,23 +242,33 @@ class _ScaffoldAutoLoadingWidgetDesk extends StatelessWidget {
   final void Function() loadFunction;
   final Widget? mainRightChildWidget;
   final String loadingButtonText;
+  final bool listCanLoaded;
 
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
         final isDesk =
-            constraints.maxWidth > KPlatformConstants.minWidthThresholdTablet;
+            constraints.maxWidth > KPlatformConstants.minWidthThresholdDesk;
         final mainChildWidget = mainChildWidgetsFunction(isDesk: isDesk)
           ..addAll([
-            LoadingButton(
-              isDesk: isDesk,
-              onPressed: loadFunction,
-              text: loadingButtonText,
-              widgetKey: KWidgetkeys.widget.scaffold.loadingButton,
-            ),
+            if (listCanLoaded)
+              LoadingButton(
+                isDesk: isDesk,
+                onPressed: loadFunction,
+                text: loadingButtonText,
+                widgetKey: KWidgetkeys.widget.scaffold.loadingButton,
+              )
+            else
+              Center(
+                child: Text(
+                  context.l10n.youHaveLoadedFullList,
+                  style: AppTextStyle.materialThemeBodyLarge,
+                ),
+              ),
             KSizedBox.kHeightSizedBox40,
           ]);
+
         final padding = EdgeInsets.symmetric(
           horizontal: (isDesk
               ? KPadding.kPaddingSize90 +

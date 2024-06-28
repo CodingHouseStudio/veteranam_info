@@ -136,7 +136,8 @@ class _DialogsWidget {
                       padding: KPadding.kPaddingSize12,
                     ),
                   ),
-                  iconPadding: const EdgeInsets.all(KPadding.kPaddingSize16),
+                  iconPadding: const EdgeInsets.all(KPadding.kPaddingSize16)
+                      .copyWith(bottom: 0),
                   backgroundColor: AppColors.materialThemeKeyColorsNeutral,
                   actionsOverflowAlignment: OverflowBarAlignment.center,
                   contentPadding: isDeskValue

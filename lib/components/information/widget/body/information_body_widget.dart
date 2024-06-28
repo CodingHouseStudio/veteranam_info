@@ -13,6 +13,7 @@ class InformationBodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    late var listCanLoaded = true;
     return BlocConsumer<InformationWatcherBloc, InformationWatcherState>(
       listener: (context, state) => context.dialog.showGetErrorDialog(
         error: state.failure!.value(context),
@@ -20,9 +21,16 @@ class InformationBodyWidget extends StatelessWidget {
             .read<InformationWatcherBloc>()
             .add(const InformationWatcherEvent.started()),
       ),
-      listenWhen: (previous, current) => current.failure != null,
+      listenWhen: (previous, current) {
+        listCanLoaded = previous.filteredInformationModelItems.length !=
+            current.filteredInformationModelItems.length;
+        return current.failure != null;
+      },
       builder: (context, _) => ScaffoldAutoLoadingWidget(
         loadingButtonText: context.l10n.moreNews,
+        listCanLoaded: _.informationModelItems.length >
+                _.filteredInformationModelItems.length ||
+            listCanLoaded,
         titleChildWidgetsFunction: ({required isDesk}) => [
           KSizedBox.kHeightSizedBox24,
           ...TitleWidget.titleIconWidgetList(

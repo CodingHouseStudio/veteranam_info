@@ -343,6 +343,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "writeYourSuggenstions":
             MessageLookupByLibrary.simpleMessage("Напишіть Ваші пропозиції"),
         "yes": MessageLookupByLibrary.simpleMessage("Так"),
+        "youHaveLoadedFullList": MessageLookupByLibrary.simpleMessage(
+            "Ви завантажили повний список"),
         "yourStory": MessageLookupByLibrary.simpleMessage("Ваша історія")
       };
 }

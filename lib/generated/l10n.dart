@@ -2140,6 +2140,16 @@ class AppLocalizations {
     );
   }
 
+  /// `You have loaded the full list`
+  String get youHaveLoadedFullList {
+    return Intl.message(
+      'You have loaded the full list',
+      name: 'youHaveLoadedFullList',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `We're sorry, there was an unforeseen error.`
   String get error {
     return Intl.message(

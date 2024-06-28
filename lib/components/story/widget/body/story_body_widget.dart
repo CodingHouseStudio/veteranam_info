@@ -22,6 +22,8 @@ class StoryBodyWidget extends StatelessWidget {
       builder: (context, _) {
         return ScaffoldAutoLoadingWidget(
           loadingButtonText: context.l10n.moreStories,
+          listCanLoaded:
+              _.storyModelItems.length > _.loadingStoryModelItems.length,
           titleChildWidgetsFunction: ({required isDesk}) => [
             if (isDesk)
               KSizedBox.kHeightSizedBox40

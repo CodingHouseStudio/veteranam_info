@@ -209,6 +209,7 @@
   "addComment": "Add a comment:",
   "checkPointError": "Please select one of the following answers",
   "verifiedInformation": "Verified information",
+  "youHaveLoadedFullList": "You have loaded the full list",
   "error": "We're sorry, there was an unforeseen error.",
   "@error": {
     "description": "message of an unforeseen error that was not foreseen."
