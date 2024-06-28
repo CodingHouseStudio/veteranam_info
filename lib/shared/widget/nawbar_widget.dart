@@ -209,7 +209,10 @@ class _NawbarWidgetImplematationState
                     background: AppColors.materialThemeKeyColorsSecondary,
                   )
                 else
-                  const LanguagesSwitcherWidget(),
+                  const Align(
+                    alignment: Alignment.centerRight,
+                    child: LanguagesSwitcherWidget(),
+                  ),
               if (context.read<AuthenticationBloc>().state.status ==
                       AuthenticationStatus.authenticated &&
                   Config.isDevelopment)
