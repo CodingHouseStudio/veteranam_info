@@ -294,6 +294,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "upload": MessageLookupByLibrary.simpleMessage("Upload"),
         "us": MessageLookupByLibrary.simpleMessage("us"),
         "useful": MessageLookupByLibrary.simpleMessage("Useful"),
+        "verifiedInformation":
+            MessageLookupByLibrary.simpleMessage("Verified information"),
         "wage": MessageLookupByLibrary.simpleMessage("Salary*"),
         "website": MessageLookupByLibrary.simpleMessage("Website"),
         "whatKindOfProject":

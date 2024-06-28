@@ -112,7 +112,7 @@ class StoryAddBloc extends Bloc<StoryAddEvent, StoryAddState> {
       ),
     );
     result.fold(
-      (l) => emit(state.copyWith(failure: l.toStoryAdd())),
+      (l) => emit(state.copyWith(failure: l._toStoryAdd())),
       (r) => emit(
         state.copyWith(
           formStatus: FormzSubmissionStatus.success,

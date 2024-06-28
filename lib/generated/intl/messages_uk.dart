@@ -141,7 +141,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "iAmRelativeOfVeteran":
             MessageLookupByLibrary.simpleMessage("Я родич ветерана/-ки;"),
         "iAmVeteran": MessageLookupByLibrary.simpleMessage("Я ветеран/-ка;"),
-        "information": MessageLookupByLibrary.simpleMessage("Інфо"),
+        "information": MessageLookupByLibrary.simpleMessage("Інформація"),
         "informationNews":
             MessageLookupByLibrary.simpleMessage("Інформація і новини"),
         "informationNewsSubtitle": MessageLookupByLibrary.simpleMessage(
@@ -301,6 +301,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "upload": MessageLookupByLibrary.simpleMessage("Завантажити"),
         "us": MessageLookupByLibrary.simpleMessage("нам"),
         "useful": MessageLookupByLibrary.simpleMessage("Корисно"),
+        "verifiedInformation":
+            MessageLookupByLibrary.simpleMessage("Перевірена інформація"),
         "wage": MessageLookupByLibrary.simpleMessage("Заробітна плата*"),
         "website": MessageLookupByLibrary.simpleMessage("Сайт"),
         "whatKindOfProject":
