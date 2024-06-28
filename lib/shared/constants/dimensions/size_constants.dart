@@ -2,6 +2,7 @@
 abstract class KSize {
   static const kPixel1 = 1.0;
   static const kPixel2 = 2.0;
+  static const kPixel1 = 1.0;
   static const kPixel3 = 3.0;
   static const kPixel4 = 4.0;
   static const kPixel6 = 6.0;
