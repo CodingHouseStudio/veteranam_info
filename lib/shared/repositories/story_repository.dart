@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
@@ -17,17 +18,14 @@ class StoryRepository implements IStoryRepository {
   Future<Either<SomeFailure, bool>> addStory(StoryModel storyModel) async {
     try {
       late var methodStoryModel = storyModel;
-      if (methodStoryModel.image != null &&
-          methodStoryModel.image!.isNotEmpty) {
+      if (methodStoryModel.image != null) {
         final downloadURL = await _storageService.saveStoryImage(
-          imageModel: methodStoryModel.image!.first,
+          imageModel: methodStoryModel.image!,
           storyId: storyModel.id,
         );
         if (downloadURL.isNotEmpty) {
           methodStoryModel = methodStoryModel.copyWith(
-            image: [
-              methodStoryModel.image!.first.copyWith(downloadURL: downloadURL),
-            ],
+            image: methodStoryModel.image!.copyWith(downloadURL: downloadURL),
           );
         }
       }
@@ -47,7 +45,7 @@ class StoryRepository implements IStoryRepository {
           await _firestoreService.getStoriesByUserId(userId);
 
       return Right(userStoriesItems);
-    } on Exception catch (e) {
+    } on FirebaseException catch (e) {
       return Left(GetFailur.fromCode(e).status);
     } catch (e) {
       return const Left(SomeFailure.serverError());

@@ -2,11 +2,20 @@ part of 'home_watcher_bloc.dart';
 
 enum HomeFailure {
   error,
+  get,
+  network,
 }
 
 extension HomeFailureExtension on SomeFailure {
-  HomeFailure toHome() {
-    return HomeFailure.error;
+  HomeFailure _toHome() {
+    switch (this) {
+      case FailureGet():
+        return HomeFailure.get;
+      case FailureNetwork():
+        return HomeFailure.network;
+      default:
+        return HomeFailure.error;
+    }
   }
 }
 

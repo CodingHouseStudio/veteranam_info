@@ -6,7 +6,10 @@ abstract class KDimensions {
   static const donateCardBigExpanded = 4;
   static const donateCardStandartExpanded = 3;
   static const pageItems = 3;
-  static const loadItems = 1;
+
+  static const loadItems = 3;
+  static const investorsLoadItems = 6;
+
   static const leftCardPaddingMultiply = 0.5;
   static const respondPaddingMultiply = 0.1;
   static const paddingMultiply = 0.1;
@@ -16,7 +19,7 @@ abstract class KDimensions {
 
   static const shimmerQuestionItems = 4;
   static const shimmerInformationItems = 1;
-  static const shimmerFundsItems = 4;
+  static const shimmerFundsItems = 3;
   static const shimmerStoriesItems = 1;
   static const shimmerWorksItems = 3;
   static const shimmerDiscountsItems = 1;

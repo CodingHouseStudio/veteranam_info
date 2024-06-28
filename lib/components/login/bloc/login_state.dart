@@ -1,33 +1,23 @@
 part of 'login_bloc.dart';
 
 enum LoginError {
-  none,
   error,
   notFound,
-  initial,
+  network,
+  send,
 }
 
 extension AuthFailureToLoginError on SomeFailure {
-  LoginError toLogInError() {
+  LoginError _toLogInError() {
     switch (this) {
+      case FailureSend():
+        return LoginError.send;
       case FailureNotFound():
         return LoginError.notFound;
+      case FailureNetwork():
+        return LoginError.network;
       default:
         return LoginError.error;
-    }
-  }
-}
-
-extension LoginErrorExtention on LoginError {
-  String? getString(BuildContext context) {
-    switch (this) {
-      case LoginError.error:
-        return context.l10n.serverError;
-      case LoginError.notFound:
-        return context.l10n.notFound;
-      case LoginError.none:
-      case LoginError.initial:
-        return null;
     }
   }
 }
@@ -37,7 +27,7 @@ class LoginState with _$LoginState {
   const factory LoginState({
     required EmailFieldModel email,
     required PasswordFieldModel password,
-    required LoginError failure,
+    required LoginError? failure,
     required bool? fieldsIsCorrect,
     required bool showPasswordField,
   }) = _LoginState;

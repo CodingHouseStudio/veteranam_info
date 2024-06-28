@@ -3,14 +3,16 @@ import 'package:kozak/shared/shared.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../text_dependency.dart';
+import 'helper.dart';
 
 Future<void> cardsScreenHelper({
   required WidgetTester tester,
   required MockGoRouter mockGoRouter,
 }) async {
-  await changeWindowSizeHelper(
+  await homeChangeWindowSizeHelper(
     tester: tester,
-    windowsTest: true,
+    isMobile: true,
+    tabletTest: true,
     test: () async {
       await scrollingHelper(
         tester: tester,
@@ -61,6 +63,11 @@ Future<void> cardsScreenHelper({
 
       await scrollingHelper(
         tester: tester,
+        itemKey: KWidgetkeys.screen.home.informationImage,
+      );
+
+      await scrollingHelper(
+        tester: tester,
         itemKey: KWidgetkeys.screen.home.informationTitle,
       );
 
@@ -74,6 +81,19 @@ Future<void> cardsScreenHelper({
       verify(
         () => mockGoRouter.goNamed(
           KRoute.information.name,
+        ),
+      ).called(1);
+
+      await scrollingHelper(
+        tester: tester,
+        itemKey: KWidgetkeys.screen.home.faqButton,
+      );
+
+      await tester.tap(find.byKey(KWidgetkeys.screen.home.faqButton));
+
+      verify(
+        () => mockGoRouter.goNamed(
+          KRoute.feedback.name,
         ),
       ).called(1);
     },

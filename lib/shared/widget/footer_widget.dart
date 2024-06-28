@@ -8,9 +8,9 @@ import 'package:url_launcher/url_launcher.dart';
 abstract class FooterWidget {
   static List<Widget> get({
     required BuildContext context,
-    required bool isDesk,
+    required bool isTablet,
   }) =>
-      isDesk
+      isTablet
           ? [
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -18,13 +18,16 @@ abstract class FooterWidget {
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: _support(context: context, isDesk: isDesk),
+                      children: _support(context: context, isTablet: isTablet),
                     ),
                   ),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: _sections(isDesk: isDesk, context: context),
+                      children: _sections(
+                        isTablet: isTablet,
+                        context: context,
+                      ),
                     ),
                   ),
                   if (Config.isDevelopment)
@@ -32,36 +35,30 @@ abstract class FooterWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children:
-                            _information(isDesk: isDesk, context: context),
+                            _information(isTablet: isTablet, context: context),
                       ),
                     ),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: _contact(isDesk: isDesk, context: context),
+                      children: _contact(
+                        isTablet: isTablet,
+                        context: context,
+                      ),
                     ),
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      IconWidget(
-                        key: KWidgetkeys.widget.footer.likedInIcon,
-                        icon: KImage.linkedIn,
-                        background: AppColors.materialThemeSourceSeed,
-                      ),
-                      KSizedBox.kHeightSizedBox24,
-                      IconWidget(
-                        key: KWidgetkeys.widget.footer.instagramIcon,
-                        icon: KImage.instagram,
-                        background: AppColors.materialThemeSourceSeed,
-                      ),
-                      KSizedBox.kHeightSizedBox24,
-                      IconWidget(
-                        key: KWidgetkeys.widget.footer.facebookIcon,
-                        icon: KImage.facebook,
-                        background: AppColors.materialThemeSourceSeed,
-                      ),
-                    ],
+                    children: socialMediaLinks(
+                      isTablet: isTablet,
+                      context: context,
+                      padding: isTablet
+                          ? KSizedBox.kHeightSizedBox24
+                          : KSizedBox.kWidthSizedBox16,
+                      instagramKey: KWidgetkeys.widget.footer.instagramIcon,
+                      linkedInKey: KWidgetkeys.widget.footer.likedInIcon,
+                      facebookKey: KWidgetkeys.widget.footer.facebookIcon,
+                    ),
                   ),
                 ],
               ),
@@ -76,94 +73,110 @@ abstract class FooterWidget {
                     child: KImage.logo,
                   ),
                   Expanded(
-                    child: Text(
-                      KAppText.madeBy,
-                      key: KWidgetkeys.widget.footer.madeBy,
-                      style: AppTextStyle.materialThemeBodyLargeHint,
-                      textAlign: TextAlign.end,
+                    child: Wrap(
+                      spacing: KPadding.kPaddingSize16,
+                      alignment: WrapAlignment.end,
+                      crossAxisAlignment: WrapCrossAlignment.end,
+                      children: [
+                        Text(
+                          KAppText.madeBy,
+                          key: KWidgetkeys.widget.footer.madeBy,
+                          style: AppTextStyle
+                              .materialThemeBodyLargeNeutralVariant35,
+                          textAlign: TextAlign.end,
+                        ),
+                        // KSizedBox.kWidthSizedBox16,
+                        // const VerticalDivider(
+                        //   thickness: 1,
+                        //   color: AppColors
+                        //
+                        // .materialThemeRefNeutralVariantNeutralVariant35,
+                        // ),
+                        //KSizedBox.kWidthSizedBox16,
+                        Text(
+                          context.l10n.allRightsReserved,
+                          key: KWidgetkeys.widget.footer.rightReserved,
+                          style: AppTextStyle
+                              .materialThemeBodyLargeNeutralVariant35,
+                        ),
+                        // KSizedBox.kWidthSizedBox16,
+                        // const VerticalDivider(
+                        //   thickness: 1,
+                        //   color: AppColors
+                        //
+                        // .materialThemeRefNeutralVariantNeutralVariant35,
+                        // ),
+                        //KSizedBox.kWidthSizedBox16,
+                        Text(
+                          context.l10n.privacyPolicy,
+                          key: KWidgetkeys.widget.footer.privacyPolicy,
+                          style: AppTextStyle
+                              .materialThemeBodyLargeNeutralVariant35,
+                        ),
+                        // KSizedBox.kHeightSizedBox90,
+                      ],
                     ),
                   ),
-                  // KSizedBox.kWidthSizedBox16,
-                  // const VerticalDivider(
-                  //   thickness: 1,
-                  //   color: AppColors
-                  //       .materialThemeRefNeutralVariantNeutralVariant35,
-                  // ),
-                  KSizedBox.kWidthSizedBox16,
-                  Text(
-                    context.l10n.allRightsReserved,
-                    key: KWidgetkeys.widget.footer.rightReserved,
-                    style: AppTextStyle.materialThemeBodyLargeHint,
-                  ),
-                  // KSizedBox.kWidthSizedBox16,
-                  // const VerticalDivider(
-                  //   thickness: 1,
-                  //   color: AppColors
-                  //       .materialThemeRefNeutralVariantNeutralVariant35,
-                  // ),
-                  KSizedBox.kWidthSizedBox16,
-                  Text(
-                    context.l10n.privacyPolicy,
-                    key: KWidgetkeys.widget.footer.privacyPolicy,
-                    style: AppTextStyle.materialThemeBodyLargeHint,
-                  ),
-                  KSizedBox.kHeightSizedBox90,
+                  KSizedBox.kWidthSizedBox72,
                 ],
               ),
             ]
           : [
-              ..._support(context: context, isDesk: isDesk),
+              ..._support(context: context, isTablet: isTablet),
               KSizedBox.kHeightSizedBox40,
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Expanded(
+                    flex: 2,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: _sections(isDesk: isDesk, context: context),
+                      children: _sections(
+                        isTablet: isTablet,
+                        context: context,
+                      ),
                     ),
                   ),
                   if (Config.isDevelopment)
                     Expanded(
+                      flex: 2,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children:
-                            _information(isDesk: isDesk, context: context),
+                            _information(isTablet: isTablet, context: context),
                       ),
                     )
                   else
                     Expanded(
+                      flex: 3,
                       child: Column(
-                        children: _contact(isDesk: isDesk, context: context),
+                        children: _contact(
+                          isTablet: isTablet,
+                          context: context,
+                        ),
                       ),
                     ),
                 ],
               ),
               if (Config.isDevelopment) ...[
                 KSizedBox.kHeightSizedBox40,
-                ..._contact(isDesk: isDesk, context: context),
+                ..._contact(
+                  isTablet: isTablet,
+                  context: context,
+                ),
               ],
               KSizedBox.kHeightSizedBox40,
               Wrap(
-                children: [
-                  IconWidget(
-                    key: KWidgetkeys.widget.footer.likedInIcon,
-                    icon: KImage.linkedIn,
-                    background: AppColors.materialThemeSourceSeed,
-                  ),
-                  KSizedBox.kWidthSizedBox16,
-                  IconWidget(
-                    key: KWidgetkeys.widget.footer.instagramIcon,
-                    icon: KImage.instagram,
-                    background: AppColors.materialThemeSourceSeed,
-                  ),
-                  KSizedBox.kWidthSizedBox16,
-                  IconWidget(
-                    key: KWidgetkeys.widget.footer.facebookIcon,
-                    icon: KImage.facebook,
-                    background: AppColors.materialThemeSourceSeed,
-                  ),
-                ],
+                children: socialMediaLinks(
+                  isTablet: isTablet,
+                  context: context,
+                  padding: isTablet
+                      ? KSizedBox.kHeightSizedBox24
+                      : KSizedBox.kWidthSizedBox16,
+                  instagramKey: KWidgetkeys.widget.footer.instagramIcon,
+                  linkedInKey: KWidgetkeys.widget.footer.likedInIcon,
+                  facebookKey: KWidgetkeys.widget.footer.facebookIcon,
+                ),
               ),
               KSizedBox.kHeightSizedBox40,
               Container(
@@ -176,7 +189,7 @@ abstract class FooterWidget {
               Text(
                 KAppText.madeBy,
                 key: KWidgetkeys.widget.footer.madeBy,
-                style: AppTextStyle.materialThemeBodyLargeHint,
+                style: AppTextStyle.materialThemeLabelSmall,
               ),
               KSizedBox.kHeightSizedBox4,
               Row(
@@ -185,7 +198,7 @@ abstract class FooterWidget {
                     child: Text(
                       context.l10n.allRightsReserved,
                       key: KWidgetkeys.widget.footer.rightReserved,
-                      style: AppTextStyle.materialThemeBodyLargeHint,
+                      style: AppTextStyle.materialThemeLabelSmall,
                     ),
                   ),
                   // KSizedBox.kWidthSizedBox8,
@@ -199,14 +212,14 @@ abstract class FooterWidget {
                     child: Text(
                       context.l10n.privacyPolicy,
                       key: KWidgetkeys.widget.footer.privacyPolicy,
-                      style: AppTextStyle.materialThemeBodyLargeHint,
+                      style: AppTextStyle.materialThemeLabelSmall,
                     ),
                   ),
                 ],
               ),
             ];
   static List<Widget> _sections({
-    required bool isDesk,
+    required bool isTablet,
     required BuildContext context,
   }) =>
       [
@@ -215,66 +228,61 @@ abstract class FooterWidget {
           child: Text(
             context.l10n.sections,
             key: KWidgetkeys.widget.footer.sections,
-            style: isDesk
-                ? AppTextStyle.materialThemeBodyLargeHint
-                : AppTextStyle.materialThemeBodyMediumHint,
+            style: isTablet
+                ? AppTextStyle.materialThemeBodyLargeNeutralVariant35
+                : AppTextStyle.materialThemeBodyMediumNeutralVariant35,
           ),
         ),
-        if (isDesk)
-          KSizedBox.kHeightSizedBox24
+        if (isTablet)
+          KSizedBox.kHeightSizedBox16
         else
-          KSizedBox.kHeightSizedBox16,
+          KSizedBox.kHeightSizedBox8,
         _button(
           key: KWidgetkeys.widget.footer.discountsButton,
-          isDesk: true,
           text: context.l10n.discounts,
           onPressed: () => context.goNamed(KRoute.discounts.name),
         ),
-        if (isDesk)
-          KSizedBox.kHeightSizedBox16
+        if (isTablet)
+          KSizedBox.kHeightSizedBox8
         else
-          KSizedBox.kHeightSizedBox12,
+          KSizedBox.kHeightSizedBox4,
         _button(
           key: KWidgetkeys.widget.footer.informationButton,
-          isDesk: true,
           text: context.l10n.information,
           onPressed: () => context.goNamed(KRoute.information.name),
         ),
-        if (isDesk)
-          KSizedBox.kHeightSizedBox16
+        if (isTablet)
+          KSizedBox.kHeightSizedBox8
         else
-          KSizedBox.kHeightSizedBox12,
+          KSizedBox.kHeightSizedBox4,
         _button(
           key: KWidgetkeys.widget.footer.investorsButton,
-          isDesk: true,
-          text: context.l10n.forInvestors,
+          text: context.l10n.investors,
           onPressed: () => context.goNamed(KRoute.investors.name),
         ),
         if (Config.isDevelopment) ...[
-          if (isDesk)
-            KSizedBox.kHeightSizedBox16
+          if (isTablet)
+            KSizedBox.kHeightSizedBox8
           else
-            KSizedBox.kHeightSizedBox12,
+            KSizedBox.kHeightSizedBox4,
           _button(
             key: KWidgetkeys.widget.footer.workButton,
-            isDesk: true,
             text: context.l10n.work,
             onPressed: () => context.goNamed(KRoute.work.name),
           ),
-          if (isDesk)
-            KSizedBox.kHeightSizedBox16
+          if (isTablet)
+            KSizedBox.kHeightSizedBox8
           else
-            KSizedBox.kHeightSizedBox12,
+            KSizedBox.kHeightSizedBox4,
           _button(
             key: KWidgetkeys.widget.footer.storyButton,
-            isDesk: true,
             text: context.l10n.stories,
             onPressed: () => context.goNamed(KRoute.stories.name),
           ),
         ],
       ];
   static List<Widget> _information({
-    required bool isDesk,
+    required bool isTablet,
     required BuildContext context,
   }) =>
       [
@@ -283,58 +291,55 @@ abstract class FooterWidget {
           child: Text(
             context.l10n.information,
             key: KWidgetkeys.widget.footer.information,
-            style: isDesk
-                ? AppTextStyle.materialThemeBodyLargeHint
-                : AppTextStyle.materialThemeBodyMediumHint,
+            style: isTablet
+                ? AppTextStyle.materialThemeBodyLargeNeutralVariant35
+                : AppTextStyle.materialThemeBodyMediumNeutralVariant35,
           ),
         ),
-        if (isDesk)
-          KSizedBox.kHeightSizedBox24
+        if (isTablet)
+          KSizedBox.kHeightSizedBox16
         else
-          KSizedBox.kHeightSizedBox16,
+          KSizedBox.kHeightSizedBox8,
         _button(
           key: KWidgetkeys.widget.footer.aboutUsButton,
-          isDesk: true,
           text: context.l10n.aboutUs,
           onPressed: () => context.goNamed(KRoute.aboutUs.name),
         ),
-        if (isDesk)
-          KSizedBox.kHeightSizedBox16
+        if (isTablet)
+          KSizedBox.kHeightSizedBox8
         else
-          KSizedBox.kHeightSizedBox12,
+          KSizedBox.kHeightSizedBox4,
         _button(
           key: KWidgetkeys.widget.footer.profileButton,
-          isDesk: true,
           text: context.l10n.myProfile,
           onPressed: () => context.read<AuthenticationBloc>().state.status ==
                   AuthenticationStatus.authenticated
               ? context.goNamed(KRoute.profile.name)
               : context.goNamed(KRoute.login.name),
         ),
-        if (isDesk)
-          KSizedBox.kHeightSizedBox16
+        if (isTablet)
+          KSizedBox.kHeightSizedBox8
         else
-          KSizedBox.kHeightSizedBox12,
+          KSizedBox.kHeightSizedBox4,
         _button(
           key: KWidgetkeys.widget.footer.consultationOnlineButton,
-          isDesk: true,
           text: context.l10n.consultationOnline,
           onPressed: () => context.goNamed(KRoute.consultation.name),
         ),
       ];
   static List<Widget> _contact({
-    required bool isDesk,
+    required bool isTablet,
     required BuildContext context,
   }) =>
       [
-        Padding(
-          padding: const EdgeInsets.only(left: KPadding.kPaddingSize4),
+        Align(
+          alignment: Alignment.centerLeft,
           child: Text(
             context.l10n.contacts,
             key: KWidgetkeys.widget.footer.contact,
-            style: isDesk
-                ? AppTextStyle.materialThemeBodyLargeHint
-                : AppTextStyle.materialThemeBodyMediumHint,
+            style: isTablet
+                ? AppTextStyle.materialThemeBodyLargeNeutralVariant35
+                : AppTextStyle.materialThemeBodyMediumNeutralVariant35,
           ),
         ),
         KSizedBox.kHeightSizedBox16,
@@ -351,11 +356,13 @@ abstract class FooterWidget {
                 ),
                 data: KAppText.email,
                 styleSheet: MarkdownStyleSheet(
-                  a: isDesk
-                      ? AppTextStyle.materialThemeTitleMedium
-                          .copyWith(color: AppColors.materialThemeBlack)
-                      : AppTextStyle.materialThemeTitleSmall
-                          .copyWith(color: AppColors.materialThemeBlack),
+                  a: isTablet
+                      ? AppTextStyle.materialThemeTitleMedium.copyWith(
+                          color: AppColors.materialThemeKeyColorsSecondary,
+                        )
+                      : AppTextStyle.materialThemeTitleSmall.copyWith(
+                          color: AppColors.materialThemeKeyColorsSecondary,
+                        ),
                 ),
                 shrinkWrap: true,
                 onTapLink: (text, href, title) async {
@@ -374,14 +381,14 @@ abstract class FooterWidget {
         ),
       ];
   static List<Widget> _support({
-    required bool isDesk,
+    required bool isTablet,
     required BuildContext context,
   }) =>
       [
         Text(
           context.l10n.doYouWantSupportOurProject,
           key: KWidgetkeys.widget.footer.title,
-          style: isDesk
+          style: isTablet
               ? AppTextStyle.materialThemeDisplaySmall
               : AppTextStyle.materialThemeHeadlineMedium,
         ),
@@ -389,12 +396,11 @@ abstract class FooterWidget {
         DoubleButtonWidget(
           widgetKey: KWidgetkeys.widget.footer.button,
           text: context.l10n.contact,
-          onPressed: null,
-          isDesk: isDesk,
+          onPressed: () => context.goNamed(KRoute.feedback.name),
+          isDesk: isTablet,
         ),
       ];
   static Widget _button({
-    required bool isDesk,
     required void Function() onPressed,
     required String text,
     required Key key,
@@ -404,4 +410,56 @@ abstract class FooterWidget {
         onPressed: onPressed,
         child: Text(text),
       );
+
+  static List<Widget> socialMediaLinks({
+    required bool isTablet,
+    required BuildContext context,
+    required Widget padding,
+    required Key instagramKey,
+    required Key linkedInKey,
+    required Key facebookKey,
+  }) =>
+      [
+        IconButtonWidget(
+          key: linkedInKey,
+          onPressed: () async {
+            if (await canLaunchUrl(Uri.parse(KAppText.linkedIn))) {
+              await launchUrl(
+                Uri.parse(KAppText.linkedIn),
+                mode: LaunchMode.externalApplication,
+              );
+            }
+          },
+          icon: KImage.linkedIn,
+          background: AppColors.materialThemeSourceSeed,
+        ),
+        padding,
+        IconButtonWidget(
+          key: instagramKey,
+          onPressed: () async {
+            if (await canLaunchUrl(Uri.parse(KAppText.instagram))) {
+              await launchUrl(
+                Uri.parse(KAppText.instagram),
+                mode: LaunchMode.externalApplication,
+              );
+            }
+          },
+          icon: KImage.instagram,
+          background: AppColors.materialThemeSourceSeed,
+        ),
+        padding,
+        IconButtonWidget(
+          key: facebookKey,
+          onPressed: () async {
+            if (await canLaunchUrl(Uri.parse(KAppText.facebook))) {
+              await launchUrl(
+                Uri.parse(KAppText.facebook),
+                mode: LaunchMode.externalApplication,
+              );
+            }
+          },
+          icon: KImage.facebook,
+          background: AppColors.materialThemeSourceSeed,
+        ),
+      ];
 }

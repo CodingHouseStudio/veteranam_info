@@ -32,7 +32,10 @@ class HomeWatcherBloc extends Bloc<HomeWatcherEvent, HomeWatcherState> {
     final result = await _homeRepository.getQuestions();
     result.fold(
       (l) => emit(
-        state.copyWith(failure: l.toHome(), loadingStatus: LoadingStatus.error),
+        state.copyWith(
+          failure: l._toHome(),
+          loadingStatus: LoadingStatus.error,
+        ),
       ),
       (r) => emit(
         HomeWatcherState(

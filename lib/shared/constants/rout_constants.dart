@@ -80,7 +80,7 @@ abstract class KRoute {
   );
   static const _RouteItem storyAdd = _RouteItem(
     path: 'add',
-    name: 'Add',
+    name: 'AddSaves',
   );
   static const _RouteItem profileMyStory = _RouteItem(
     path: 'myStory',
@@ -89,5 +89,13 @@ abstract class KRoute {
   static const _RouteItem underConstruction = _RouteItem(
     path: '/underConstruction',
     name: 'UnderConstruction',
+  );
+  static const _RouteItem feedback = _RouteItem(
+    path: '/feedback',
+    name: 'Feedback',
+  );
+  static const _RouteItem myDiscounts = _RouteItem(
+    path: 'my',
+    name: 'MyDiscounts',
   );
 }

@@ -1,14 +1,13 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:flutter/widgets.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kozak/shared/shared.dart';
 
+part 'work_employee_watcher_bloc.freezed.dart';
 part 'work_employee_watcher_event.dart';
 part 'work_employee_watcher_state.dart';
-part 'work_employee_watcher_bloc.freezed.dart';
 
 @Injectable()
 class WorkEmployeeWatcherBloc
@@ -51,7 +50,7 @@ class WorkEmployeeWatcherBloc
         ),
       ),
       onError: (dynamic error) {
-        debugPrint('error is $error');
+        // debugPrint('error is $error');
         add(WorkEmployeeWatcherEvent.failure(error));
       },
     );
@@ -239,11 +238,11 @@ class WorkEmployeeWatcherBloc
     _Failure event,
     Emitter<WorkEmployeeWatcherState> emit,
   ) {
-    debugPrint('error is ${event.failure}');
+    // debugPrint('error is ${event.failure}');
     emit(
       state.copyWith(
         loadingStatus: LoadingStatus.error,
-        failure: GetFailur.fromCode(event.failure).status.toWork(),
+        failure: WorkFailure.error,
       ),
     );
   }

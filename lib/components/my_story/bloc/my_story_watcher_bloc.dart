@@ -17,7 +17,12 @@ class MyStoryWatcherBloc
     required IAppAuthenticationRepository iAppAuthenticationRepository,
   })  : _storyRepository = storyRepository,
         _iAppAuthenticationRepository = iAppAuthenticationRepository,
-        super(const MyStoryWatcherState.initial()) {
+        super(
+          const MyStoryWatcherState(
+            storyModelItems: [],
+            loadingStatus: LoadingStatus.initial,
+          ),
+        ) {
     on<_Started>(_onStarted);
   }
   final IStoryRepository _storyRepository;
@@ -27,16 +32,24 @@ class MyStoryWatcherBloc
     _Started event,
     Emitter<MyStoryWatcherState> emit,
   ) async {
-    emit(const MyStoryWatcherState.loading());
+    emit(state.copyWith(loadingStatus: LoadingStatus.loading));
 
     final result = await _storyRepository.getStoriesById(
       _iAppAuthenticationRepository.currentUser.id,
     );
     result.fold(
       (l) => emit(
-        MyStoryWatcherState.failure(l.toMyStory()),
+        state.copyWith(
+          failure: l._toMyStory(),
+          loadingStatus: LoadingStatus.error,
+        ),
       ),
-      (r) => emit(MyStoryWatcherState.success(storyModelItems: r)),
+      (r) => emit(
+        MyStoryWatcherState(
+          loadingStatus: LoadingStatus.loaded,
+          storyModelItems: r,
+        ),
+      ),
     );
   }
 }

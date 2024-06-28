@@ -4,24 +4,24 @@ List<Widget> _newsWidgetList({
   required BuildContext context,
   required bool isDesk,
 }) {
-  final informationModelItems = context
+  final isLoading =
+      context.read<InformationWatcherBloc>().state.loadingStatus !=
+          LoadingStatus.loaded;
+  final informationModelItems = [
+    if (context.read<InformationWatcherBloc>().state.failure == null) ...[
+      ...context
           .read<InformationWatcherBloc>()
           .state
-          .informationModelItems
-          .isNotEmpty
-      ? context
-          .read<InformationWatcherBloc>()
-          .state
-          .filteredInformationModelItems
-      : List.generate(
+          .filteredInformationModelItems,
+      if (isLoading)
+        ...List.generate(
           KDimensions.shimmerInformationItems,
-          (index) => InformationModel(
+          (index) => KMockText.informationModel.copyWith(
             id: index.toString(),
-            title: KMockText.title,
-            news: KMockText.cardData,
-            date: ExtendedDateTime.current,
           ),
-        );
+        ),
+    ],
+  ];
   return List.generate(informationModelItems.length, (index) {
     return Padding(
       padding: index != 0
@@ -29,11 +29,14 @@ List<Widget> _newsWidgetList({
               top: isDesk ? KPadding.kPaddingSize40 : KPadding.kPaddingSize24,
             )
           : EdgeInsets.zero,
-      child: Skeletonizer(
-        enabled: context.read<InformationWatcherBloc>().state.loadingStatus !=
-            LoadingStatus.loaded,
+      child: SkeletonizerWidget(
+        isLoading: informationModelItems.length - index <=
+                KDimensions.shimmerInformationItems &&
+            isLoading,
         child: NewsCardWidget(
-          key: KWidgetkeys.screen.information.card,
+          key: index != informationModelItems.length - 1
+              ? KWidgetkeys.screen.information.card
+              : KWidgetkeys.screen.information.cardLast,
           informationItem: informationModelItems.elementAt(index),
           isDesk: isDesk,
         ),

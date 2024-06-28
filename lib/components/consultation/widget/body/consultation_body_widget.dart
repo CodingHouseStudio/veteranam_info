@@ -7,7 +7,7 @@ class ConsultationBodyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScaffoldWidget(
-      mainChildWidgetsFunction: ({required isDesk}) => [
+      mainChildWidgetsFunction: ({required isDesk, required isTablet}) => [
         KSizedBox.kHeightSizedBox30,
       ],
     );

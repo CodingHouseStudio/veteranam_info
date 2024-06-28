@@ -14,11 +14,13 @@ void main() {
     late IWorkRepository mockWorkRepository;
     late FirestoreService mockFirestoreService;
     late StorageService mockStorageService;
+    setUp(() {
+      ExtendedDateTime.id = '';
+      mockFirestoreService = MockFirestoreService();
+      mockStorageService = MockStorageService();
+    });
     group('${KGroupText.successfulGet} ', () {
       setUp(() {
-        ExtendedDateTime.id = '';
-        mockFirestoreService = MockFirestoreService();
-        mockStorageService = MockStorageService();
         when(mockFirestoreService.getWorks()).thenAnswer(
           (_) => Stream.value(KTestText.workModelItems),
         );
@@ -56,9 +58,6 @@ void main() {
     });
     group('${KGroupText.failureGet} ', () {
       setUp(() {
-        ExtendedDateTime.id = '';
-        mockFirestoreService = MockFirestoreService();
-        mockStorageService = MockStorageService();
         when(mockFirestoreService.getWorks()).thenAnswer(
           (realInvocation) => Stream.error(
             KGroupText.failureGet,

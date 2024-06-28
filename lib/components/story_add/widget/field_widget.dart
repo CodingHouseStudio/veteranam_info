@@ -8,15 +8,9 @@ Widget _imageWidget(BuildContext context) {
           context.read<StoryAddBloc>().add(const StoryAddEvent.imageUpdated()),
       child: DecoratedBox(
         decoration: KWidgetTheme.boxDecorationImage,
-        child: CachedNetworkImage(
+        child: ImageWidget(
           key: KWidgetkeys.widget.cardAddImage.widget,
           imageUrl: context.read<StoryAddBloc>().state.image.value!.path,
-          placeholder: (context, url) =>
-              const CircularProgressIndicator.adaptive(), //Image.asset(''),
-          errorWidget: (context, url, error) {
-            debugPrint('image error: $error');
-            return KIcon.error;
-          },
           fit: BoxFit.cover,
         ),
       ),

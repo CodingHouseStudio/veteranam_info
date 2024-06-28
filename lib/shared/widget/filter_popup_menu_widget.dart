@@ -19,10 +19,10 @@ class FilterPopupMenuWidget extends StatelessWidget {
         return [
           PopupMenuItem<String>(
             key: KWidgetkeys.widget.filterPopupMenu.resetAll,
-            value: context.l10n.resetAllFilter,
+            value: context.l10n.resetAll,
             child: ListTile(
               title: Text(
-                context.l10n.resetAllFilter,
+                context.l10n.resetAll,
                 style: isDesk ? AppTextStyle.text20 : AppTextStyle.text16,
               ),
             ),
@@ -30,7 +30,7 @@ class FilterPopupMenuWidget extends StatelessWidget {
         ];
       },
       onSelected: (dynamic selectedValue) {
-        if (selectedValue == context.l10n.resetAllFilter) {
+        if (selectedValue == context.l10n.resetAll) {
           onResetValue();
         }
       },

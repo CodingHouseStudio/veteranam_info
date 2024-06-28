@@ -6,17 +6,21 @@ import 'package:kozak/shared/shared.dart';
 import '../../text_dependency.dart';
 
 Future<void> investorsPumpAppHelper({
-  required IFeedbackRepository mockFeedbackRepository,
   required IInvestorsRepository mockInvestorsRepository,
+  required IReportRepository mockReportRepository,
+  required AuthenticationRepository mockAuthenticationRepository,
   required IAppAuthenticationRepository mockAppAuthenticationRepository,
   required WidgetTester tester,
   MockGoRouter? mockGoRouter,
 }) async {
-  _registerFeedbackBloc(
-    mockFeedbackRepository: mockFeedbackRepository,
+  _registerInvestorsBloc(mockInvestorsRepository: mockInvestorsRepository);
+  _registerReportBloc(
+    mockReportRepository: mockReportRepository,
     mockAppAuthenticationRepository: mockAppAuthenticationRepository,
   );
-  _registerInvestorsBloc(mockInvestorsRepository: mockInvestorsRepository);
+  _registerAuthenticationBloc(
+    mockAuthenticationRepository: mockAuthenticationRepository,
+  );
   await tester.pumpApp(const InvestorsScreen(), mockGoRouter: mockGoRouter);
 
   expect(
@@ -25,20 +29,6 @@ Future<void> investorsPumpAppHelper({
   );
 
   await tester.pumpAndSettle();
-}
-
-void _registerFeedbackBloc({
-  required IFeedbackRepository mockFeedbackRepository,
-  required IAppAuthenticationRepository mockAppAuthenticationRepository,
-}) {
-  final feedbackBloc = FeedbackBloc(
-    feedbackRepository: mockFeedbackRepository,
-    appAuthenticationRepository: mockAppAuthenticationRepository,
-  );
-  if (GetIt.I.isRegistered<FeedbackBloc>()) {
-    GetIt.I.unregister<FeedbackBloc>();
-  }
-  GetIt.I.registerSingleton<FeedbackBloc>(feedbackBloc);
 }
 
 void _registerInvestorsBloc({
@@ -50,4 +40,30 @@ void _registerInvestorsBloc({
     GetIt.I.unregister<InvestorsWatcherBloc>();
   }
   GetIt.I.registerSingleton<InvestorsWatcherBloc>(investorsBloc);
+}
+
+void _registerReportBloc({
+  required IReportRepository mockReportRepository,
+  required IAppAuthenticationRepository mockAppAuthenticationRepository,
+}) {
+  final reportBloc = ReportBloc(
+    reportRepository: mockReportRepository,
+    appAuthenticationRepository: mockAppAuthenticationRepository,
+  );
+  if (GetIt.I.isRegistered<ReportBloc>()) {
+    GetIt.I.unregister<ReportBloc>();
+  }
+  GetIt.I.registerSingleton<ReportBloc>(reportBloc);
+}
+
+void _registerAuthenticationBloc({
+  required AuthenticationRepository mockAuthenticationRepository,
+}) {
+  final authenticationBloc = AuthenticationBloc(
+    authenticationRepository: mockAuthenticationRepository,
+  );
+  if (GetIt.I.isRegistered<AuthenticationBloc>()) {
+    GetIt.I.unregister<AuthenticationBloc>();
+  }
+  GetIt.I.registerSingleton<AuthenticationBloc>(authenticationBloc);
 }

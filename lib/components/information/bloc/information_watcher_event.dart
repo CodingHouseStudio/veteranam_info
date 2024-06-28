@@ -10,12 +10,11 @@ class InformationWatcherEvent with _$InformationWatcherEvent {
 
   const factory InformationWatcherEvent.loadNextItems() = _LoadNextItems;
 
-  const factory InformationWatcherEvent.filter({
-    required String filter,
-    required bool isSelected,
-  }) = _Filter;
+  const factory InformationWatcherEvent.filter(
+    int filterIndex,
+  ) = _Filter;
 
-  const factory InformationWatcherEvent.filterReset() = _FilterReset;
+  // const factory InformationWatcherEvent.filterReset() = _FilterReset;
 
   const factory InformationWatcherEvent.failure(dynamic failure) = _Failure;
 }

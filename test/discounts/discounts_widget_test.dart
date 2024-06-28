@@ -14,10 +14,30 @@ void main() {
   setupFirebaseAuthMocks();
 
   tearDown(GetIt.I.reset);
-  group('${KScreenBlocName.discounts} ', () {
+  group('${KScreenBlocName.discount} ', () {
     late IDiscountRepository mockDiscountRepository;
     setUp(() {
+      KPlatformConstants.isWebDesktop = false;
       mockDiscountRepository = MockIDiscountRepository();
+    });
+    group('${KGroupText.failure} ', () {
+      setUp(() {
+        when(mockDiscountRepository.getDiscountItems()).thenAnswer(
+          (invocation) => Stream.error(Exception(KGroupText.failureGet)),
+        );
+      });
+      testWidgets('${KGroupText.failureGet} ', (tester) async {
+        await discountsPumpAppHelper(
+          tester: tester,
+          mockDiscountRepository: mockDiscountRepository,
+        );
+
+        await loadingFailureHelper(
+          tester: tester,
+          card: KWidgetkeys.screen.discounts.card,
+          buttonMock: KWidgetkeys.screen.discounts.buttonMock,
+        );
+      });
     });
     group('${KGroupText.getEmptyList} ', () {
       setUp(() {
@@ -38,10 +58,14 @@ void main() {
           mockDiscountRepository: mockDiscountRepository,
         );
 
-        await mockButtonHelper(tester);
+        await mockButtonHelper(
+          tester: tester,
+          card: KWidgetkeys.screen.discounts.card,
+          buttonMock: KWidgetkeys.screen.discounts.buttonMock,
+        );
       });
     });
-    group(KGroupText.getList, () {
+    group('${KGroupText.getList} ', () {
       setUp(() {
         when(mockDiscountRepository.getDiscountItems()).thenAnswer(
           (invocation) => Stream.value(KTestText.discountModelItems),
@@ -55,6 +79,15 @@ void main() {
 
         await discountInitialHelper(tester);
       });
+
+      loadingListSeparate(
+        pumpApp: (tester) async => discountsPumpAppHelper(
+          tester: tester,
+          mockDiscountRepository: mockDiscountRepository,
+        ),
+        lastCard: KWidgetkeys.screen.discounts.cardLast,
+      );
+
       group('${KGroupText.goRouter} ', () {
         late MockGoRouter mockGoRouter;
         setUp(() => mockGoRouter = MockGoRouter());
@@ -66,6 +99,20 @@ void main() {
           );
 
           await discountInitialHelper(tester);
+        });
+        group('${KGroupText.goTo} ', () {
+          testWidgets('${KRoute.myDiscounts.name} ', (tester) async {
+            await discountsPumpAppHelper(
+              tester: tester,
+              mockDiscountRepository: mockDiscountRepository,
+              mockGoRouter: mockGoRouter,
+            );
+
+            await myDiscountHelper(
+              tester: tester,
+              mockGoRouter: mockGoRouter,
+            );
+          });
         });
       });
     });

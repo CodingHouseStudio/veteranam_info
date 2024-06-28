@@ -1,19 +1,23 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:kozak/shared/shared.dart';
 
-class ResumeConverter
-    implements JsonConverter<List<ResumeModel>?, List<dynamic>?> {
+class ResumeConverter implements JsonConverter<ResumeModel?, List<dynamic>?> {
   const ResumeConverter();
 
   @override
-  List<ResumeModel>? fromJson(List<dynamic>? json) {
-    return json
+  ResumeModel? fromJson(List<dynamic>? json) {
+    final list = json
         ?.map((e) => ResumeModel?.fromJson(e as Map<String, dynamic>))
         .toList();
+    if (list?.isEmpty ?? true) {
+      return null;
+    } else {
+      return list?.first;
+    }
   }
 
   @override
-  List<dynamic>? toJson(List<ResumeModel>? object) {
-    return object?.map((e) => e.toJson()).toList();
+  List<dynamic>? toJson(ResumeModel? object) {
+    return object != null ? [object.toJson()] : null;
   }
 }

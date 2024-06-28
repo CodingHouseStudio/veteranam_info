@@ -9,9 +9,17 @@ class FundModel with _$FundModel {
   const factory FundModel({
     required String id,
     required String title,
-    required String subtitle,
+    required String description,
     required String link,
-    @ImageConverter() List<ImageModel>? image,
+    required String domain,
+    String? registered,
+    String? teamPartnersLink,
+    String? projectsLink,
+    String? email,
+    String? phoneNumber,
+    int? size,
+    String? comments,
+    @ImageConverter() ImageModel? image,
   }) = _FundsModel;
 
   factory FundModel.fromJson(Map<String, dynamic> json) =>
@@ -21,7 +29,15 @@ class FundModel with _$FundModel {
 abstract class FundModelJsonField {
   static const id = 'id';
   static const title = 'title';
-  static const subtitle = 'subtitle';
+  static const description = 'description';
   static const link = 'link';
   static const image = 'image';
+  static const domain = 'domain';
+  static const registered = 'registered';
+  static const teamPartnersLink = 'teamPartnersLink';
+  static const projectsLink = 'projectsLink';
+  static const email = 'email';
+  static const phoneNumber = 'phoneNumber';
+  static const size = 'size';
+  static const comments = 'comments';
 }

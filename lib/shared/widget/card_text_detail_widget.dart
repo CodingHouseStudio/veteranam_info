@@ -25,29 +25,26 @@ class CardTextDetailWidget extends StatefulWidget {
 
 class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
   late int? maxLines;
-  late GlobalKey cardDetailKey;
 
   @override
   void initState() {
     super.initState();
-    cardDetailKey = GlobalKey();
     maxLines = widget.maxLines;
   }
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      key: cardDetailKey,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           widget.text,
           key: KWidgetkeys.widget.cardTextDetail.text,
           maxLines: maxLines,
-          style: widget.isDesk ? AppTextStyle.text20 : AppTextStyle.text16,
+          style: AppTextStyle.materialThemeBodyLarge,
           overflow: TextOverflow.clip,
         ),
-        KSizedBox.kHeightSizedBox24,
+        if (!widget.isDesk) KSizedBox.kHeightSizedBox16,
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -58,9 +55,6 @@ class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
                   setState(() {
                     if (maxLines == null) {
                       maxLines = widget.maxLines;
-                      Scrollable.ensureVisible(
-                        cardDetailKey.currentContext!,
-                      );
                     } else {
                       maxLines = null;
                     }
@@ -73,11 +67,16 @@ class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
                       ? widget.buttonText?.elementAt(1) ?? context.l10n.hide
                       : widget.buttonText?.elementAt(0) ?? context.l10n.detail,
                   key: KWidgetkeys.widget.cardTextDetail.buttonText,
-                  style:
-                      widget.isDesk ? AppTextStyle.text20 : AppTextStyle.hint16,
+                  style: widget.isDesk
+                      ? AppTextStyle.materialThemeTitleMedium
+                      : AppTextStyle.materialThemeTitleSmall,
                 ),
               ),
             ),
+            if (widget.isDesk)
+              KSizedBox.kHeightSizedBox24
+            else
+              KSizedBox.kHeightSizedBox16,
             if (widget.icon != null) widget.icon!,
           ],
         ),

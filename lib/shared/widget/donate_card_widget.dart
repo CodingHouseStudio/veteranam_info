@@ -1,6 +1,6 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:kozak/shared/shared.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DonateCardWidget extends StatelessWidget {
   const DonateCardWidget({
@@ -10,6 +10,7 @@ class DonateCardWidget extends StatelessWidget {
     super.key,
     this.titleStyle,
   });
+
   final FundModel fundModel;
   final bool hasSubtitle;
   final TextStyle? titleStyle;
@@ -17,61 +18,78 @@ class DonateCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      key: KWidgetkeys.widget.donateCard.widget,
-      decoration: KWidgetTheme.boxDecorationCard,
-      constraints: const BoxConstraints(
-        minHeight: KMinMaxSize.minHeight640,
-      ),
-      child: Stack(
-        alignment: Alignment.bottomCenter,
-        children: [
-          if (fundModel.image != null)
-            CachedNetworkImage(
-              key: KWidgetkeys.widget.donateCard.image,
-              imageUrl: fundModel.image.firstImage!,
-              placeholder: (context, url) => Image.asset(''),
-              errorWidget: (context, url, error) => KIcon.error,
-              fit: BoxFit.fill,
+    return Center(
+      child: Container(
+        key: KWidgetkeys.widget.donateCard.widget,
+        decoration: KWidgetTheme.boxDecorationCard,
+        constraints: const BoxConstraints(
+          minHeight: KMinMaxSize.minHeight640,
+          maxHeight: KMinMaxSize.minHeight640,
+          maxWidth: KMinMaxSize.maxWidth640,
+        ),
+        padding: const EdgeInsets.all(KPadding.kPaddingSize16),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Align(
+              alignment: Alignment.topRight,
+              child: ComplaintWidget(
+                isDesk: isDesk,
+              ),
             ),
-          Padding(
-            padding: const EdgeInsets.all(KPadding.kPaddingSize16),
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: KPadding.kPaddingSize16,
-                  ),
-                  child: Text(
-                    fundModel.title,
-                    key: KWidgetkeys.widget.donateCard.title,
-                    style: titleStyle ??
-                        (isDesk ? AppTextStyle.text32 : AppTextStyle.text24),
-                  ),
-                ),
-                if (hasSubtitle)
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: KPadding.kPaddingSize16,
-                      vertical: KPadding.kPaddingSize16,
-                    ),
-                    child: Text(
-                      fundModel.subtitle,
-                      key: KWidgetkeys.widget.donateCard.subtitle,
-                      style: isDesk ? AppTextStyle.text18 : AppTextStyle.text16,
-                    ),
-                  ),
-                KSizedBox.kHeightSizedBox16,
-                DonateButtonWidget(
-                  key: KWidgetkeys.widget.donateCard.button,
-                  text: context.l10n.support,
-                  isDesk: isDesk,
-                ),
-              ],
+            Expanded(
+              child: fundModel.image != null
+                  ? ImageWidget(
+                      key: KWidgetkeys.widget.donateCard.image,
+                      imageUrl: fundModel.image!.downloadURL,
+                    )
+                  : const SizedBox.shrink(),
             ),
-          ),
-        ],
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: KPadding.kPaddingSize16,
+              ),
+              child: Text(
+                fundModel.title,
+                key: KWidgetkeys.widget.donateCard.title,
+                style: titleStyle ?? AppTextStyle.materialThemeHeadlineLarge,
+              ),
+            ),
+            if (hasSubtitle)
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: KPadding.kPaddingSize16,
+                  vertical: KPadding.kPaddingSize16,
+                ),
+                child: Text(
+                  fundModel.description,
+                  key: KWidgetkeys.widget.donateCard.subtitle,
+                  style: isDesk
+                      ? AppTextStyle.materialThemeBodyLarge
+                      : AppTextStyle.materialThemeBodyMedium,
+                ),
+              ),
+            KSizedBox.kHeightSizedBox16,
+            DonateButtonWidget(
+              key: KWidgetkeys.widget.donateCard.button,
+              text: context.l10n.support,
+              onPressed: () => _launchURL(fundModel.projectsLink!),
+              isDesk: isDesk,
+            ),
+          ],
+        ),
       ),
     );
+  }
+
+  Future<void> _launchURL(String url) async {
+    final uri = Uri.parse(url);
+
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri);
+    } else {
+      throw Exception('Could not launch $url');
+    }
   }
 }
