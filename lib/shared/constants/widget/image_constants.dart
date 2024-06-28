@@ -104,12 +104,12 @@ abstract class KImage {
   //    'assets/images/work_image.png'),
   //   fit: BoxFit.fill,
   // );
-  precacheImage(
-    AssetImage(
-      name,
-    ),
-    context,
-  );
+  // precacheImage(
+  //   AssetImage(
+  //     name,
+  //   ),
+  //   context,
+  // );
   static Image _get(
     String name, {
     BoxFit? fit,
