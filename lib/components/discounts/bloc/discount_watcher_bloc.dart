@@ -24,10 +24,10 @@ class DiscountWatcherBloc
             discountModelItems: [],
             loadingStatus: LoadingStatus.initial,
             filteredDiscountModelItems: [],
-            filtersCategoriesIndex: null,
+            filtersCategoriesIndex: [],
             itemsLoaded: 0,
             failure: null,
-            filtersLocationIndex: null,
+            filtersLocationIndex: [],
           ),
         ) {
     on<_Started>(_onStarted);
@@ -117,8 +117,8 @@ class DiscountWatcherBloc
         filteredDiscountModelItems: state.discountModelItems.loading(
           itemsLoaded: state.itemsLoaded,
         ),
-        filtersCategoriesIndex: null,
-        filtersLocationIndex: null,
+        filtersCategoriesIndex: [],
+        filtersLocationIndex: [],
       ),
     );
   }
