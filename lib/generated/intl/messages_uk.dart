@@ -20,6 +20,8 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'uk';
 
+  static String m0(count) => "Ще ${count} міст..";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "aMessage": MessageLookupByLibrary.simpleMessage("повідомлення"),
@@ -130,7 +132,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "helloVeteran":
             MessageLookupByLibrary.simpleMessage("Привіт, Ветеран!"),
         "hide": MessageLookupByLibrary.simpleMessage("Сховати"),
-        "hideExpansion": MessageLookupByLibrary.simpleMessage("Сховати..."),
+        "hideExpansion": MessageLookupByLibrary.simpleMessage("cховати.."),
         "homeSubtitle": MessageLookupByLibrary.simpleMessage(
             "Тут ти знайдеш корисну інформацію, пільги, знижки, а також можеш поділитися своєю історією!"),
         "howToContactYou": MessageLookupByLibrary.simpleMessage(
@@ -176,6 +178,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Основна інформація"),
         "mainScreen": MessageLookupByLibrary.simpleMessage("Головна"),
         "message": MessageLookupByLibrary.simpleMessage("Повідомлення"),
+        "moreCities": m0,
         "moreDiscounts": MessageLookupByLibrary.simpleMessage("Ще знижки"),
         "moreFunds": MessageLookupByLibrary.simpleMessage("Більше фондів"),
         "moreNews": MessageLookupByLibrary.simpleMessage("Ще новини"),

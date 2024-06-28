@@ -20,6 +20,8 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
+  static String m0(count) => "${count} more..";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "aMessage": MessageLookupByLibrary.simpleMessage("a message"),
@@ -126,7 +128,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hello": MessageLookupByLibrary.simpleMessage("Hello"),
         "helloVeteran": MessageLookupByLibrary.simpleMessage("Hello, Veteran!"),
         "hide": MessageLookupByLibrary.simpleMessage("Hide"),
-        "hideExpansion": MessageLookupByLibrary.simpleMessage("Hide..."),
+        "hideExpansion": MessageLookupByLibrary.simpleMessage("hide..."),
         "homeSubtitle": MessageLookupByLibrary.simpleMessage(
             "Here you will find useful information, benefits, discounts and you can also share your story!"),
         "howToContactYou":
@@ -172,6 +174,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Main information"),
         "mainScreen": MessageLookupByLibrary.simpleMessage("Home"),
         "message": MessageLookupByLibrary.simpleMessage("Message"),
+        "moreCities": m0,
         "moreDiscounts": MessageLookupByLibrary.simpleMessage("More discounts"),
         "moreFunds": MessageLookupByLibrary.simpleMessage("More funds"),
         "moreNews": MessageLookupByLibrary.simpleMessage("More news"),

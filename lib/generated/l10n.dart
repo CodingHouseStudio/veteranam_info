@@ -2132,13 +2132,23 @@ class AppLocalizations {
     );
   }
 
-  /// `Hide...`
+  /// `hide...`
   String get hideExpansion {
     return Intl.message(
-      'Hide...',
+      'hide...',
       name: 'hideExpansion',
       desc: '',
       args: [],
+    );
+  }
+
+  /// `{count} more..`
+  String moreCities(Object count) {
+    return Intl.message(
+      '$count more..',
+      name: 'moreCities',
+      desc: '',
+      args: [count],
     );
   }
 }
