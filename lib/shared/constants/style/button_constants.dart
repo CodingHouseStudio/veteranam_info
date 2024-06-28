@@ -178,7 +178,7 @@ abstract class KButtonStyles {
     shape: WidgetStatePropertyAll(
       RoundedRectangleBorder(
         borderRadius: KBorderRadius.kBorderRadius32,
-        side: BorderSide(color: AppColors.materialThemeKeyColorsNeutralVariant),
+        side: BorderSide(),
       ),
     ),
   );
