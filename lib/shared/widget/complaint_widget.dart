@@ -11,6 +11,7 @@ class ComplaintWidget extends StatelessWidget {
     return Column(
       children: [
         IconButtonWidget(
+          key: KWidgetkeys.widget.reportDialog.button,
           onPressed: () => context.dialog.showReportDialog(isDesk: isDesk),
           icon: KIcon.brightnessAlert,
           padding: KPadding.kPaddingSize12,

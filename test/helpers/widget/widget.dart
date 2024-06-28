@@ -20,6 +20,7 @@ export 'pagination_helper.dart';
 export 'profile_card/profile_card.dart';
 export 'question_helper.dart';
 export 'rate_helper.dart';
+export 'report_dialog/report_dialog.dart';
 export 'sign_up_bottom_buttons_helper.dart';
 export 'statistic_box_helper.dart';
 export 'story_card_helper.dart';

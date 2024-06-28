@@ -103,6 +103,7 @@ void main() {
       loadingList(
         pumpApp: (tester) async => informationPumpAppHelper(
           mockInformationRepository: mockInformationRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
           tester: tester,
         ),
         lastCard: KWidgetkeys.screen.information.cardLast,
