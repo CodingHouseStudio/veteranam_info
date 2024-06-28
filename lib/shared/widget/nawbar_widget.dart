@@ -139,37 +139,43 @@ class _NawbarWidgetImplematationState
                 )
               else if (widget.isDesk) ...[
                 Expanded(
-                  child: TextButton.icon(
-                    style: const ButtonStyle(alignment: Alignment.centerRight),
-                    onPressed: () => context.goNamed(KRoute.discounts.name),
-                    label: Text(
-                      context.l10n.discounts,
-                      style: AppTextStyle.materialThemeTitleMedium,
+                  child: Align(
+                    child: TextButton.icon(
+                      style: const ButtonStyle(alignment: Alignment.center),
+                      onPressed: () => context.goNamed(KRoute.discounts.name),
+                      label: Text(
+                        context.l10n.discounts,
+                        style: AppTextStyle.materialThemeTitleMedium,
+                      ),
+                      icon: KIcon.tag,
                     ),
-                    icon: KIcon.tag,
                   ),
                 ),
                 KSizedBox.kWidthSizedBox64,
                 Expanded(
-                  child: TextButton.icon(
-                    onPressed: () => context.goNamed(KRoute.information.name),
-                    label: Text(
-                      context.l10n.information,
-                      style: AppTextStyle.materialThemeTitleMedium,
+                  child: Align(
+                    child: TextButton.icon(
+                      onPressed: () => context.goNamed(KRoute.information.name),
+                      label: Text(
+                        context.l10n.information,
+                        style: AppTextStyle.materialThemeTitleMedium,
+                      ),
+                      icon: KIcon.globe,
                     ),
-                    icon: KIcon.globe,
                   ),
                 ),
                 KSizedBox.kWidthSizedBox64,
                 Expanded(
-                  child: TextButton.icon(
-                    style: const ButtonStyle(alignment: Alignment.centerLeft),
-                    onPressed: () => context.goNamed(KRoute.investors.name),
-                    label: Text(
-                      context.l10n.investors,
-                      style: AppTextStyle.materialThemeTitleMedium,
+                  child: Align(
+                    child: TextButton.icon(
+                      style: const ButtonStyle(alignment: Alignment.center),
+                      onPressed: () => context.goNamed(KRoute.investors.name),
+                      label: Text(
+                        context.l10n.investors,
+                        style: AppTextStyle.materialThemeTitleMedium,
+                      ),
+                      icon: KIcon.fileText,
                     ),
-                    icon: KIcon.fileText,
                   ),
                 ),
               ],
