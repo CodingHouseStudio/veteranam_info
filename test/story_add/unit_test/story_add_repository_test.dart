@@ -1,5 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:kozak/shared/shared.dart';
@@ -15,12 +15,14 @@ void main() {
     late IStoryRepository mockStoryRepository;
     late FirestoreService mockFirestoreService;
     late StorageService mockStorageService;
+    setUp(() {
+      ExtendedDateTime.id = '';
+      ExtendedDateTime.current = KTestText.dateTime;
+      mockFirestoreService = MockFirestoreService();
+      mockStorageService = MockStorageService();
+    });
     group('${KGroupText.successfulGet} ', () {
       setUp(() {
-        ExtendedDateTime.id = '';
-        ExtendedDateTime.current = KTestText.dateTime;
-        mockFirestoreService = MockFirestoreService();
-        mockStorageService = MockStorageService();
         when(
           mockFirestoreService.addStory(
             KTestText.storyModelItems.last,
@@ -37,7 +39,7 @@ void main() {
         );
         when(
           mockStorageService.saveStoryImage(
-            imageModel: KTestText.storyModelItems.last.image!.first,
+            imageModel: KTestText.storyModelItems.last.image!,
             storyId: KTestText.storyModelItems.last.id,
           ),
         ).thenAnswer(
@@ -77,10 +79,6 @@ void main() {
     });
     group('${KGroupText.failureGet} ', () {
       setUp(() {
-        ExtendedDateTime.id = '';
-        ExtendedDateTime.current = KTestText.dateTime;
-        mockFirestoreService = MockFirestoreService();
-        mockStorageService = MockStorageService();
         when(
           mockFirestoreService.addStory(
             KTestText.storyModelItems.last,
@@ -95,7 +93,7 @@ void main() {
         ).thenThrow(FirebaseException(plugin: KGroupText.failure));
         when(
           mockStorageService.saveStoryImage(
-            imageModel: KTestText.storyModelItems.last.image!.first,
+            imageModel: KTestText.storyModelItems.last.image!,
             storyId: KTestText.storyModelItems.last.id,
           ),
         ).thenThrow(FirebaseException(plugin: KGroupText.failure));

@@ -26,8 +26,10 @@ class ScaffoldDecorationWidget extends StatelessWidget {
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
         final isDesk =
-            constraints.maxWidth > KPlatformConstants.minWidthThresholdTablet;
-        final mainChildWidget = mainChildWidgetsFunction(isDesk: isDesk);
+            constraints.maxWidth > KPlatformConstants.minWidthThresholdDesk;
+        final mainChildWidget = mainChildWidgetsFunction(
+          isDesk: isDesk,
+        );
         final padding = EdgeInsets.symmetric(
           horizontal: (isDesk
               ? KPadding.kPaddingSize90 +

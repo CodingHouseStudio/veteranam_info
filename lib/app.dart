@@ -36,6 +36,7 @@ class AppWidget extends StatelessWidget {
         return MaterialApp.router(
           key: KWidgetkeys.screen.app.screen,
           theme: themeData,
+          scrollBehavior: CustomScrollBehavior(),
           localizationsDelegates: const [
             locale,
             GlobalCupertinoLocalizations.delegate,

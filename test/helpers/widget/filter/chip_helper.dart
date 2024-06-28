@@ -8,7 +8,7 @@ Future<void> chipHelper(WidgetTester tester) async {
   expect(find.byKey(KWidgetkeys.widget.chip.widget), findsWidgets);
 
   late var filterChip = tester
-      .widget<FilterChip>(find.byKey(KWidgetkeys.widget.chip.widget).first);
+      .widget<FilterChip>(find.byKey(KWidgetkeys.widget.chip.widget).last);
 
   expect(filterChip.selected, isFalse);
 
@@ -18,33 +18,33 @@ Future<void> chipHelper(WidgetTester tester) async {
   );
 
   await tester.tap(
-    find.byKey(KWidgetkeys.widget.chip.widget).first,
+    find.byKey(KWidgetkeys.widget.chip.widget).last,
     warnIfMissed: false,
   );
 
   await tester.pumpAndSettle();
 
   filterChip = tester
-      .widget<FilterChip>(find.byKey(KWidgetkeys.widget.chip.widget).first);
+      .widget<FilterChip>(find.byKey(KWidgetkeys.widget.chip.widget).last);
 
   expect(filterChip.selected, isTrue);
 
   await tester.tap(
-    find.byKey(KWidgetkeys.widget.chip.widget).first,
+    find.byKey(KWidgetkeys.widget.chip.widget).last,
     warnIfMissed: false,
   );
 
   await tester.pumpAndSettle();
 
   filterChip = tester
-      .widget<FilterChip>(find.byKey(KWidgetkeys.widget.chip.widget).first);
+      .widget<FilterChip>(find.byKey(KWidgetkeys.widget.chip.widget).last);
 
   expect(filterChip.selected, isFalse);
 
   // await filterPopupMenuHelper(tester);
 
   // filterChip = tester
-  //     .widget<FilterChip>(find.byKey(KWidgetkeys.widget.chip.widget).first);
+  //     .widget<FilterChip>(find.byKey(KWidgetkeys.widget.chip.widget).last);
 
   // expect(filterChip.selected, isFalse);
 }

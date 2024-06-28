@@ -9,12 +9,14 @@ class FiltersChipWidget extends StatelessWidget {
     required this.onSelected,
     required this.isSelected,
     required this.fullLenght,
+    required this.filterIsEmpty,
     super.key,
   });
 
   final List<FilterItem> filtersItems;
   final int fullLenght;
   final bool isDesk;
+  final bool filterIsEmpty;
   // final void Function() onResetValue;
   final void Function(
     int index,
@@ -71,14 +73,14 @@ class FiltersChipWidget extends StatelessWidget {
                 key: KWidgetkeys.widget.filterChip.chips,
                 filter: i != -1
                     ? filtersItems.elementAt(i)
-                    : FilterItem(context.l10n.all)
-                  ..number = fullLenght,
+                    : (FilterItem(context.l10n.all)..number = fullLenght),
                 onSelected: (isSelected) => onSelected(
                   i,
                 ),
                 isSelected: isSelected(
-                  i,
-                ),
+                      i,
+                    ) ||
+                    (i == -1 && filterIsEmpty),
                 isDesk: isDesk,
               ),
             );

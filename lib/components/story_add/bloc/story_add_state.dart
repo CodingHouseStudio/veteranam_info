@@ -7,7 +7,7 @@ enum StoryAddFailure {
 }
 
 extension StoryAddFailureExtension on SomeFailure {
-  StoryAddFailure toStoryAdd() {
+  StoryAddFailure _toStoryAdd() {
     switch (this) {
       case FailureSend():
         return StoryAddFailure.send;

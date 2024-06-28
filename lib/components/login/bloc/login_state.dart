@@ -8,7 +8,7 @@ enum LoginError {
 }
 
 extension AuthFailureToLoginError on SomeFailure {
-  LoginError toLogInError() {
+  LoginError _toLogInError() {
     switch (this) {
       case FailureSend():
         return LoginError.send;

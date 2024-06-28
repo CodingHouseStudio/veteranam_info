@@ -104,6 +104,12 @@ abstract class KImage {
   //    'assets/images/work_image.png'),
   //   fit: BoxFit.fill,
   // );
+  // precacheImage(
+  //   AssetImage(
+  //     name,
+  //   ),
+  //   context,
+  // );
   static Image _get(
     String name, {
     BoxFit? fit,
@@ -112,6 +118,7 @@ abstract class KImage {
     int? casheSize,
   }) =>
       Image.asset(
+        key: Key(name),
         name,
         fit: fit,
         width: width,

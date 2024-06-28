@@ -43,8 +43,11 @@ abstract class KGroupText {
   static const goRouter = 'Mock Go Router';
   static const goTo = 'go to';
   static const validationError = 'Validation error';
-  static const shouldBe = 'should be';
-  static const shouldNotBe = 'should not be';
+  static const full = 'full';
+  static const nullable = 'nullable';
+  static const convertor = 'convertor';
+  static const shouldNotBe = 'Should not be';
+  static const shouldBe = 'Should be';
   static const empty = 'empty';
   static const modelJson = 'instance from valid JSON';
   static const jsonModel = 'json from valid model';
@@ -55,8 +58,6 @@ abstract class KGroupText {
   static const mockButton = 'Tap on the mock button';
   static const error = 'Error';
   static const failureNetwork = 'Failure Network';
-  static const successfulDelete = 'Successful delete';
-  static const failureDelete = 'Failure delete';
 }
 
 abstract class KTestText {
@@ -129,8 +130,10 @@ abstract class KTestText {
     email: userEmail,
     name: usernameCorrect,
     phoneNumber: 'test_phone_number',
-    photo: 'test_phot',
+    photo: image,
   );
+
+  static const image = 'test';
 
   static const userWithoutPhoto = User(
     id: '1',
@@ -139,11 +142,9 @@ abstract class KTestText {
     phoneNumber: 'test_phone_number',
   );
 
-  static final userPhotoModel = [
-    ImageModel(
-      downloadURL: user.photo!,
-    ),
-  ];
+  static final userPhotoModel = ImageModel(
+    downloadURL: user.photo!,
+  );
 
   static const userSetting = UserSetting(
     id: '1',
@@ -157,22 +158,20 @@ abstract class KTestText {
     roleIsConfirmed: true,
   );
   static const imageModel = ImageModel(
-    downloadURL: 'test_URL',
+    downloadURL: image,
     lastModifiedTS: 1,
     name: 'test_name',
-    ref: 'test_name',
+    ref: image,
     type: 'test_type',
   );
-  static const imageModels = [
-    ImageModel(
-      downloadURL: 'test_image',
-      name: 'test_image',
-      ref: 'test_image',
-    ),
-  ];
+  static const imageModels = ImageModel(
+    downloadURL: image,
+    name: image,
+    ref: image,
+  );
 
   static final feedbackModel = FeedbackModel(
-    id: dateTime.microsecondsSinceEpoch.toString(),
+    id: '',
     guestId: KTestText.user.id,
     guestName: KTestText.field,
     email: KTestText.userEmail,
@@ -189,6 +188,13 @@ abstract class KTestText {
         id: i.toString(),
         userId: i.toString(),
         dateVerified: dateTime,
+        subLocation: i == 0
+            ? SubLocation.all
+            : i == 1
+                ? SubLocation.allStoresOfChain
+                : i == 2
+                    ? SubLocation.online
+                    : null,
       ),
   ];
 
@@ -197,6 +203,15 @@ abstract class KTestText {
       KMockText.discountModel.copyWith(
         id: i.toString(),
         userId: userWithoutPhoto.id,
+        dateVerified: dateTime,
+      ),
+  ];
+
+  static final repositoryDiscountModelItems = <DiscountModel>[
+    for (var i = 0; i < 5; i++)
+      KMockText.discountModel.copyWith(
+        id: i.toString(),
+        userId: i.toString(),
         dateVerified: dateTime,
       ),
   ];
@@ -279,6 +294,24 @@ abstract class KTestText {
         KRoute.information.name,
         KRoute.consultation.name,
       ];
+
+  static final reportModel = ReportModel(
+    id: '',
+    reasonComplaint: ReasonComplaint.fraudOrSpam,
+    email: userEmail,
+    message: field,
+    date: dateTime,
+    card: CardEnum.funds,
+  );
+
+  static final reportModelIncorect = ReportModel(
+    id: '',
+    reasonComplaint: ReasonComplaint.fraudOrSpam,
+    email: userEmailIncorrect,
+    message: field,
+    date: dateTime,
+    card: CardEnum.funds,
+  );
 }
 
 abstract class KTestConstants {
@@ -289,7 +322,7 @@ abstract class KTestConstants {
   static const scrollingUp1000 = Offset(0, 1000);
   static const scrollingUp1500 = Offset(0, 1500);
 
-  static const windowTabletSize = Size(1700, 1700);
+  static const windowDeskSize = Size(1700, 1700);
   static const windowMobileSize = Size(700, 700);
 
   static const englishIndex = 1;
@@ -321,8 +354,9 @@ abstract class KScreenBlocName {
   static const profileMyStory = 'My Story Screen';
   static const underConstruction = 'Under Construction Screen';
   static const myDiscounts = 'My Discount Screen';
+  static const myStory = 'My Story Screen';
+  static const feedback = 'Feedback Screen';
 
-  static const feedback = 'Feedback Widget';
   static const authenticationServices = 'Authentication Services';
   static const appAuthentication = 'App Authentication';
   static const authentication = ' Authentication';
@@ -331,4 +365,6 @@ abstract class KScreenBlocName {
   static const filter = 'Filter';
   static const scroll = 'scroll';
   static const image = 'image';
+  static const casheClient = 'cashe client';
+  static const report = 'Report';
 }
