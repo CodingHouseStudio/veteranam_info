@@ -90,7 +90,7 @@ void main() {
         predicate<InformationWatcherState>(
           (state) =>
               state.loadingStatus == LoadingStatus.loaded &&
-              state.filtersIndex == null,
+              state.filtersIndex.isEmpty,
         ),
         predicate<InformationWatcherState>(
           (state) =>
@@ -100,7 +100,7 @@ void main() {
                   KTestText.informationModelItemsModify.first.category.first,
                 ),
               ) &&
-              state.filtersIndex != null,
+              state.filtersIndex.isNotEmpty,
         ),
       ],
     );
@@ -189,12 +189,12 @@ void main() {
         predicate<InformationWatcherState>(
           (state) =>
               state.loadingStatus == LoadingStatus.loaded &&
-              state.filtersIndex == null,
+              state.filtersIndex.isEmpty,
         ),
         predicate<InformationWatcherState>(
           (state) =>
               state.loadingStatus == LoadingStatus.loading &&
-              state.filtersIndex == null,
+              state.filtersIndex.isEmpty,
         ),
         predicate<InformationWatcherState>(
           (state) =>
@@ -202,13 +202,13 @@ void main() {
               state.filteredInformationModelItems.length ==
                   KDimensions.loadItems * 2 &&
               state.itemsLoaded == KDimensions.loadItems * 2 &&
-              state.filtersIndex == null,
+              state.filtersIndex.isEmpty,
         ),
         predicate<InformationWatcherState>(
           (state) =>
               state.loadingStatus == LoadingStatus.loaded &&
               state.filteredInformationModelItems.length == 1 &&
-              state.filtersIndex != null &&
+              state.filtersIndex.isNotEmpty &&
               state.itemsLoaded == 1,
         ),
       ],
@@ -257,28 +257,27 @@ void main() {
         predicate<InformationWatcherState>(
           (state) =>
               state.loadingStatus == LoadingStatus.loaded &&
-              state.filtersIndex == null,
+              state.filtersIndex.isEmpty,
         ),
         predicate<InformationWatcherState>(
           (state) =>
               state.loadingStatus == LoadingStatus.loaded &&
               state.filteredInformationModelItems.length == 1 &&
-              state.filtersIndex != null &&
+              state.filtersIndex.isNotEmpty &&
               state.itemsLoaded == 1,
         ),
         predicate<InformationWatcherState>(
           (state) =>
               state.loadingStatus == LoadingStatus.loading &&
               state.filteredInformationModelItems.length == 1 &&
-              state.filtersIndex != null &&
+              state.filtersIndex.isNotEmpty &&
               state.itemsLoaded == 1,
         ),
         predicate<InformationWatcherState>(
           (state) =>
               state.loadingStatus == LoadingStatus.loaded &&
               state.filteredInformationModelItems.length == 1 &&
-              state.filtersIndex != null &&
-              state.filtersIndex!.isNotEmpty &&
+              state.filtersIndex.isNotEmpty &&
               state.itemsLoaded == 1,
         ),
         predicate<InformationWatcherState>(
@@ -286,8 +285,7 @@ void main() {
               state.loadingStatus == LoadingStatus.loaded &&
               state.filteredInformationModelItems.length ==
                   KDimensions.loadItems &&
-              state.filtersIndex != null &&
-              state.filtersIndex!.isEmpty &&
+              state.filtersIndex.isEmpty &&
               state.itemsLoaded == KDimensions.loadItems,
         ),
         predicate<InformationWatcherState>(
@@ -295,8 +293,7 @@ void main() {
               state.loadingStatus == LoadingStatus.loading &&
               state.filteredInformationModelItems.length ==
                   KDimensions.loadItems &&
-              state.filtersIndex != null &&
-              state.filtersIndex!.isEmpty &&
+              state.filtersIndex.isEmpty &&
               state.itemsLoaded == KDimensions.loadItems,
         ),
         predicate<InformationWatcherState>(
@@ -305,8 +302,7 @@ void main() {
               state.filteredInformationModelItems.length ==
                   KDimensions.loadItems * 2 &&
               state.itemsLoaded == KDimensions.loadItems * 2 &&
-              state.filtersIndex != null &&
-              state.filtersIndex!.isEmpty,
+              state.filtersIndex.isEmpty,
         ),
       ],
     );

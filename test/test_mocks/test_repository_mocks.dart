@@ -53,6 +53,7 @@ import 'package:mockito/annotations.dart';
     MockSpec<HttpClientRequest>(),
     MockSpec<HttpClientResponse>(),
     MockSpec<HttpHeaders>(),
+    MockSpec<IReportRepository>(),
   ],
 )
 void load() => debugPrint('loaded');

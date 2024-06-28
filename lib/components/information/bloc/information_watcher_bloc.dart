@@ -1,16 +1,13 @@
 import 'dart:async';
 
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kozak/shared/shared.dart';
 
-part 'information_watcher_event.dart';
-
-part 'information_watcher_state.dart';
-
 part 'information_watcher_bloc.freezed.dart';
+part 'information_watcher_event.dart';
+part 'information_watcher_state.dart';
 
 @Injectable()
 class InformationWatcherBloc
@@ -23,7 +20,7 @@ class InformationWatcherBloc
             informationModelItems: [],
             loadingStatus: LoadingStatus.initial,
             filteredInformationModelItems: [],
-            filtersIndex: null,
+            filtersIndex: [],
             itemsLoaded: 0,
             failure: null,
           ),
@@ -54,7 +51,7 @@ class InformationWatcherBloc
         ),
       ),
       onError: (dynamic error) {
-        debugPrint('error is $error');
+        // debugPrint('error is $error');
         add(InformationWatcherEvent.failure(error));
       },
     );
@@ -157,7 +154,7 @@ class InformationWatcherBloc
     _Failure event,
     Emitter<InformationWatcherState> emit,
   ) {
-    debugPrint('error is ${event.failure}');
+    // debugPrint('error is ${event.failure}');
     emit(
       state.copyWith(
         loadingStatus: LoadingStatus.error,

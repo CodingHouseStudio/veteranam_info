@@ -810,7 +810,7 @@ mixin _$InformationWatcherState {
       throw _privateConstructorUsedError;
   List<InformationModel> get filteredInformationModelItems =>
       throw _privateConstructorUsedError;
-  List<int>? get filtersIndex => throw _privateConstructorUsedError;
+  List<int> get filtersIndex => throw _privateConstructorUsedError;
   LoadingStatus get loadingStatus => throw _privateConstructorUsedError;
   int get itemsLoaded => throw _privateConstructorUsedError;
   InformationFailure? get failure => throw _privateConstructorUsedError;
@@ -829,7 +829,7 @@ abstract class $InformationWatcherStateCopyWith<$Res> {
   $Res call(
       {List<InformationModel> informationModelItems,
       List<InformationModel> filteredInformationModelItems,
-      List<int>? filtersIndex,
+      List<int> filtersIndex,
       LoadingStatus loadingStatus,
       int itemsLoaded,
       InformationFailure? failure});
@@ -851,7 +851,7 @@ class _$InformationWatcherStateCopyWithImpl<$Res,
   $Res call({
     Object? informationModelItems = null,
     Object? filteredInformationModelItems = null,
-    Object? filtersIndex = freezed,
+    Object? filtersIndex = null,
     Object? loadingStatus = null,
     Object? itemsLoaded = null,
     Object? failure = freezed,
@@ -865,10 +865,10 @@ class _$InformationWatcherStateCopyWithImpl<$Res,
           ? _value.filteredInformationModelItems
           : filteredInformationModelItems // ignore: cast_nullable_to_non_nullable
               as List<InformationModel>,
-      filtersIndex: freezed == filtersIndex
+      filtersIndex: null == filtersIndex
           ? _value.filtersIndex
           : filtersIndex // ignore: cast_nullable_to_non_nullable
-              as List<int>?,
+              as List<int>,
       loadingStatus: null == loadingStatus
           ? _value.loadingStatus
           : loadingStatus // ignore: cast_nullable_to_non_nullable
@@ -896,7 +896,7 @@ abstract class _$$InitialImplCopyWith<$Res>
   $Res call(
       {List<InformationModel> informationModelItems,
       List<InformationModel> filteredInformationModelItems,
-      List<int>? filtersIndex,
+      List<int> filtersIndex,
       LoadingStatus loadingStatus,
       int itemsLoaded,
       InformationFailure? failure});
@@ -915,7 +915,7 @@ class __$$InitialImplCopyWithImpl<$Res>
   $Res call({
     Object? informationModelItems = null,
     Object? filteredInformationModelItems = null,
-    Object? filtersIndex = freezed,
+    Object? filtersIndex = null,
     Object? loadingStatus = null,
     Object? itemsLoaded = null,
     Object? failure = freezed,
@@ -929,10 +929,10 @@ class __$$InitialImplCopyWithImpl<$Res>
           ? _value._filteredInformationModelItems
           : filteredInformationModelItems // ignore: cast_nullable_to_non_nullable
               as List<InformationModel>,
-      filtersIndex: freezed == filtersIndex
+      filtersIndex: null == filtersIndex
           ? _value._filtersIndex
           : filtersIndex // ignore: cast_nullable_to_non_nullable
-              as List<int>?,
+              as List<int>,
       loadingStatus: null == loadingStatus
           ? _value.loadingStatus
           : loadingStatus // ignore: cast_nullable_to_non_nullable
@@ -955,7 +955,7 @@ class _$InitialImpl implements _Initial {
   const _$InitialImpl(
       {required final List<InformationModel> informationModelItems,
       required final List<InformationModel> filteredInformationModelItems,
-      required final List<int>? filtersIndex,
+      required final List<int> filtersIndex,
       required this.loadingStatus,
       required this.itemsLoaded,
       required this.failure})
@@ -981,14 +981,12 @@ class _$InitialImpl implements _Initial {
     return EqualUnmodifiableListView(_filteredInformationModelItems);
   }
 
-  final List<int>? _filtersIndex;
+  final List<int> _filtersIndex;
   @override
-  List<int>? get filtersIndex {
-    final value = _filtersIndex;
-    if (value == null) return null;
+  List<int> get filtersIndex {
     if (_filtersIndex is EqualUnmodifiableListView) return _filtersIndex;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
+    return EqualUnmodifiableListView(_filtersIndex);
   }
 
   @override
@@ -1043,7 +1041,7 @@ abstract class _Initial implements InformationWatcherState {
   const factory _Initial(
       {required final List<InformationModel> informationModelItems,
       required final List<InformationModel> filteredInformationModelItems,
-      required final List<int>? filtersIndex,
+      required final List<int> filtersIndex,
       required final LoadingStatus loadingStatus,
       required final int itemsLoaded,
       required final InformationFailure? failure}) = _$InitialImpl;
@@ -1053,7 +1051,7 @@ abstract class _Initial implements InformationWatcherState {
   @override
   List<InformationModel> get filteredInformationModelItems;
   @override
-  List<int>? get filtersIndex;
+  List<int> get filtersIndex;
   @override
   LoadingStatus get loadingStatus;
   @override

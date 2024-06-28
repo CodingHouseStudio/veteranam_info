@@ -33,7 +33,7 @@ class StoryAddBody extends StatelessWidget {
           previous.image != current.image,
       builder: (context, _) {
         return ScaffoldWidget(
-          mainChildWidgetsFunction: ({required isDesk}) => [
+          mainChildWidgetsFunction: ({required isDesk, required isTablet}) => [
             if (isDesk)
               KSizedBox.kHeightSizedBox40
             else

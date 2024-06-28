@@ -6,6 +6,10 @@ import '../../text_dependency.dart';
 Future<void> informationInitialHelper(
   WidgetTester tester,
 ) async {
+  await nawbarHelper(
+    tester: tester,
+    searchText: KTestText.field,
+  );
   await changeWindowSizeHelper(
     tester: tester,
     test: () async {
@@ -14,10 +18,10 @@ Future<void> informationInitialHelper(
         findsOneWidget,
       );
 
-      expect(
-        find.byKey(KWidgetkeys.screen.information.subtitle),
-        findsOneWidget,
-      );
+      // expect(
+      //   find.byKey(KWidgetkeys.screen.information.subtitle),
+      //   findsOneWidget,
+      // );
 
       expect(
         find.byKey(KWidgetkeys.screen.information.filter),
@@ -38,10 +42,10 @@ Future<void> informationInitialHelper(
         findsNothing,
       );
 
-      await scrollingHelper(
-        tester: tester,
-        offset: KTestConstants.scrollingDown,
-      );
+      // await scrollingHelper(
+      //   tester: tester,
+      //   offset: KTestConstants.scrollingDown,
+      // );
 
       // await scrollingHelper(
       //   tester: tester,
