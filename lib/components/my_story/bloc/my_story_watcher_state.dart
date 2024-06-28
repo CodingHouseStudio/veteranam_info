@@ -6,21 +6,8 @@ enum MyStoryFailure {
   network,
 }
 
-extension MyStoryFailureValue on MyStoryFailure {
-  String value(BuildContext context) {
-    switch (this) {
-      case MyStoryFailure.error:
-        return context.l10n.error;
-      case MyStoryFailure.get:
-        return context.l10n.getFailure;
-      case MyStoryFailure.network:
-        return context.l10n.networkFailure;
-    }
-  }
-}
-
 extension MyStoryFailureExtension on SomeFailure {
-  MyStoryFailure toMyStory() {
+  MyStoryFailure _toMyStory() {
     switch (this) {
       case FailureGet():
         return MyStoryFailure.get;

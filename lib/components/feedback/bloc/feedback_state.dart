@@ -7,7 +7,7 @@ enum FeedbackFailure {
 }
 
 extension FeedbackFailureExtension on SomeFailure {
-  FeedbackFailure toFeedback() {
+  FeedbackFailure _toFeedback() {
     switch (this) {
       case FailureSend():
         return FeedbackFailure.send;
