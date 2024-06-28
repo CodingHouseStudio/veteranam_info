@@ -17,6 +17,7 @@ void main() {
   group('${KScreenBlocName.discount} ', () {
     late IDiscountRepository mockDiscountRepository;
     setUp(() {
+      KPlatformConstants.isWebDesktop = false;
       mockDiscountRepository = MockIDiscountRepository();
     });
     group('${KGroupText.failure} ', () {
@@ -31,7 +32,11 @@ void main() {
           mockDiscountRepository: mockDiscountRepository,
         );
 
-        await discountFailureHelper(tester);
+        await loadingFailureHelper(
+          tester: tester,
+          card: KWidgetkeys.screen.discounts.card,
+          buttonMock: KWidgetkeys.screen.discounts.buttonMock,
+        );
       });
     });
     group('${KGroupText.getEmptyList} ', () {
@@ -53,7 +58,11 @@ void main() {
           mockDiscountRepository: mockDiscountRepository,
         );
 
-        await discountMockButtonHelper(tester);
+        await mockButtonHelper(
+          tester: tester,
+          card: KWidgetkeys.screen.discounts.card,
+          buttonMock: KWidgetkeys.screen.discounts.buttonMock,
+        );
       });
     });
     group('${KGroupText.getList} ', () {
@@ -70,6 +79,15 @@ void main() {
 
         await discountInitialHelper(tester);
       });
+
+      loadingListSeparate(
+        pumpApp: (tester) async => discountsPumpAppHelper(
+          tester: tester,
+          mockDiscountRepository: mockDiscountRepository,
+        ),
+        lastCard: KWidgetkeys.screen.discounts.cardLast,
+      );
+
       group('${KGroupText.goRouter} ', () {
         late MockGoRouter mockGoRouter;
         setUp(() => mockGoRouter = MockGoRouter());
@@ -83,14 +101,14 @@ void main() {
           await discountInitialHelper(tester);
         });
         group('${KGroupText.goTo} ', () {
-          testWidgets('nawbar widget navigation', (tester) async {
+          testWidgets('${KRoute.myDiscounts.name} ', (tester) async {
             await discountsPumpAppHelper(
               tester: tester,
               mockDiscountRepository: mockDiscountRepository,
               mockGoRouter: mockGoRouter,
             );
 
-            await myDIscountHelper(
+            await myDiscountHelper(
               tester: tester,
               mockGoRouter: mockGoRouter,
             );

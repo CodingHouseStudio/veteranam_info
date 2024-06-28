@@ -1,17 +1,14 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kozak/shared/shared.dart';
 
-part 'discount_watcher_event.dart';
-
-part 'discount_watcher_state.dart';
-
 part 'discount_watcher_bloc.freezed.dart';
+part 'discount_watcher_event.dart';
+part 'discount_watcher_state.dart';
 
 @Injectable()
 class DiscountWatcherBloc
@@ -24,10 +21,10 @@ class DiscountWatcherBloc
             discountModelItems: [],
             loadingStatus: LoadingStatus.initial,
             filteredDiscountModelItems: [],
-            filtersCategoriesIndex: null,
+            filtersCategoriesIndex: [],
             itemsLoaded: 0,
             failure: null,
-            filtersLocationIndex: null,
+            filtersLocationIndex: [],
           ),
         ) {
     on<_Started>(_onStarted);
@@ -56,7 +53,7 @@ class DiscountWatcherBloc
         ),
       ),
       onError: (dynamic error) {
-        debugPrint('error is $error');
+        // debugPrint('error is $error');
         add(DiscountWatcherEvent.failure(error));
       },
     );
@@ -117,8 +114,8 @@ class DiscountWatcherBloc
         filteredDiscountModelItems: state.discountModelItems.loading(
           itemsLoaded: state.itemsLoaded,
         ),
-        filtersCategoriesIndex: null,
-        filtersLocationIndex: null,
+        filtersCategoriesIndex: [],
+        filtersLocationIndex: [],
       ),
     );
   }
@@ -216,7 +213,7 @@ class DiscountWatcherBloc
     _Failure event,
     Emitter<DiscountWatcherState> emit,
   ) {
-    debugPrint('error is ${event.failure}');
+    // debugPrint('error is ${event.failure}');
     emit(
       state.copyWith(
         loadingStatus: LoadingStatus.error,

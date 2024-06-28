@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/widgets.dart';
 import 'package:kozak/shared/shared.dart';
 
 /// COMMENT: Error handling classes
@@ -11,7 +10,7 @@ class SendFailure {
   factory SendFailure.fromCode(
     FirebaseException error,
   ) {
-    debugPrint('SomeFailure: ${error.code}');
+    // debugPrint('SomeFailure: ${error.code}');
     switch (error.code) {
       case 'invalid-argument':
       case 'missing-argument':
@@ -41,7 +40,7 @@ class GetFailur {
   factory GetFailur.fromCode(
     FirebaseException error,
   ) {
-    debugPrint('SomeFailure: ${error.code}');
+    // debugPrint('SomeFailure: ${error.code}');
     switch (error.code) {
       case 'missing-argument':
       case 'timeout':
@@ -75,7 +74,7 @@ class SignUpWithEmailAndPasswordFailure {
   factory SignUpWithEmailAndPasswordFailure.fromCode(
     FirebaseAuthException error,
   ) {
-    debugPrint('SomeFailure: ${error.code}');
+    // debugPrint('SomeFailure: ${error.code}');
     switch (error.code) {
       case 'email-already-in-use':
         return const SignUpWithEmailAndPasswordFailure(
@@ -107,7 +106,7 @@ class LogInWithEmailAndPasswordFailure {
   factory LogInWithEmailAndPasswordFailure.fromCode(
     FirebaseAuthException error,
   ) {
-    debugPrint('SomeFailure: ${error.code}');
+    // debugPrint('SomeFailure: ${error.code}');
     switch (error.code) {
       case 'user-disabled':
       case 'invalid-email':
@@ -137,7 +136,7 @@ class LogOutFailure {
   factory LogOutFailure.fromCode(
     FirebaseException error,
   ) {
-    debugPrint('SomeFailure: ${error.code}');
+    // debugPrint('SomeFailure: ${error.code}');
     switch (error.code) {
       case 'missing-argument':
       case 'timeout':
@@ -164,7 +163,7 @@ class SignUpWithGoogleFailure {
   ]);
 
   factory SignUpWithGoogleFailure.fromCode(FirebaseAuthException error) {
-    debugPrint('SomeFailure: ${error.code}');
+    // debugPrint('SomeFailure: ${error.code}');
     switch (error.code) {
       case 'account-exists-with-different-credential':
       case 'user-not-found':

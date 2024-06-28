@@ -11,7 +11,8 @@ class ScaffoldWidget extends StatelessWidget {
   });
   final List<Widget> Function({required bool isDesk})?
       titleChildWidgetsFunction;
-  final List<Widget> Function({required bool isDesk}) mainChildWidgetsFunction;
+  final List<Widget> Function({required bool isDesk, required bool isTablet})
+      mainChildWidgetsFunction;
   final EdgeInsetsGeometry? mainDeskPadding;
   final bool hasFooter;
 
@@ -20,8 +21,11 @@ class ScaffoldWidget extends StatelessWidget {
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
         final isDesk =
+            constraints.maxWidth > KPlatformConstants.minWidthThresholdDesk;
+        final isTablet =
             constraints.maxWidth > KPlatformConstants.minWidthThresholdTablet;
-        final mainChildWidget = mainChildWidgetsFunction(isDesk: isDesk);
+        final mainChildWidget =
+            mainChildWidgetsFunction(isDesk: isDesk, isTablet: isTablet);
         final padding = EdgeInsets.symmetric(
           horizontal: (isDesk
               ? KPadding.kPaddingSize90 +
@@ -31,14 +35,16 @@ class ScaffoldWidget extends StatelessWidget {
                               KPlatformConstants.maxWidthThresholdTablet) /
                           2
                       : 0)
-              : KPadding.kPaddingSize16),
+              : isTablet
+                  ? KPadding.kPaddingSize32
+                  : KPadding.kPaddingSize16),
         );
         final footerWidget = <Widget>[];
         if (hasFooter) {
           footerWidget.addAll(
             FooterWidget.get(
               context: context,
-              isDesk: isDesk,
+              isTablet: isTablet,
             ),
           );
         }
@@ -48,7 +54,7 @@ class ScaffoldWidget extends StatelessWidget {
             slivers: [
               SliverPersistentHeader(
                 delegate: NawbarWidget(
-                  isDesk: isDesk,
+                  isDesk: isTablet,
                 ),
               ),
               if (titleChildWidgetsFunction != null)
@@ -89,10 +95,12 @@ class ScaffoldWidget extends StatelessWidget {
                       padding: isDesk
                           ? const EdgeInsets.all(KPadding.kPaddingSize32)
                               .copyWith(left: KPadding.kPaddingSize46)
-                          : const EdgeInsets.symmetric(
-                              vertical: KPadding.kPaddingSize32,
-                              horizontal: KPadding.kPaddingSize16,
-                            ),
+                          : isTablet
+                              ? const EdgeInsets.all(KPadding.kPaddingSize46)
+                              : const EdgeInsets.symmetric(
+                                  vertical: KPadding.kPaddingSize32,
+                                  horizontal: KPadding.kPaddingSize16,
+                                ),
                       sliver: SliverList.builder(
                         key: KWidgetkeys.widget.footer.widget,
                         addAutomaticKeepAlives: false,

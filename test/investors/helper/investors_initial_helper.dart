@@ -80,10 +80,12 @@ Future<void> investorsInitialHelper(
         offset: KTestConstants.scrollingDown,
       );
 
-      await scrollingHelper(
-        tester: tester,
-        offset: KTestConstants.scrollingDown,
-      );
+      await reportDialogInitialHelper(tester);
+
+      // await scrollingHelper(
+      //   tester: tester,
+      //   offset: KTestConstants.scrollingDown,
+      // );
 
       // expect(
       //   find.byKey(KWidgetkeys.screen.investors.button),

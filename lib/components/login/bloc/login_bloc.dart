@@ -84,7 +84,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       result.fold(
         (l) => emit(
           state.copyWith(
-            failure: l.toLogInError(),
+            failure: l._toLogInError(),
             showPasswordField: false,
           ),
         ),
