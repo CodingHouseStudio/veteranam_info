@@ -12,7 +12,7 @@ class _KIcon extends Icon {
     super.fill,
     // ignore: unused_element
     super.size = KSize.kIconSize,
-    super.color = AppColors.materialThemeKeyColorsSecondary,
+    super.color,
   });
 }
 
@@ -51,6 +51,7 @@ extension IconExtension on Icon {
 abstract class KIcon {
   static const _KIcon arrowLeft = _KIcon(Symbols.arrow_left);
   static const _KIcon arrowRight = _KIcon(Symbols.arrow_right);
+
   // static const Icon mic = Icon(Icons.mic_none_outlined);
   static const _KIcon person = _KIcon(Symbols.person_outline);
   static const _KIcon search = _KIcon(Symbols.search);
@@ -66,8 +67,9 @@ abstract class KIcon {
   static const _KIcon arrowDownLeft = _KIcon(Symbols.south_west);
   static const _KIcon like = _KIcon(Symbols.thumb_up);
   static const _KIcon activeLike = _KIcon(
-    Symbols.thumb_up,
     fill: 1,
+    Symbols.thumb_up,
+    color: AppColors.materialThemeKeyColorsPrimary,
   );
   static const _KIcon smile = _KIcon(Symbols.sentiment_very_satisfied);
   static const _KIcon activeSmile = _KIcon(
@@ -86,6 +88,7 @@ abstract class KIcon {
   static const _KIcon check = _KIcon(
     Symbols.check,
   );
+  static const _KIcon website = _KIcon(Symbols.captive_portal);
   static const _KIcon volum = _KIcon(Symbols.volume_up);
   static const _KIcon eye = _KIcon(Symbols.remove_red_eye);
   static const _KIcon eyeOff = _KIcon(Symbols.remove_red_eye_sharp);

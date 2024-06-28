@@ -18,29 +18,41 @@ class NewsCardWidget extends StatelessWidget {
       image: informationItem.image,
       text: informationItem.news,
       buttonText: [
-        context.l10n.readMore,
-        context.l10n.readLess,
+        context.l10n.more,
+        context.l10n.hide,
       ],
-      buttonStyle: KButtonStyles.transparentButtonStyleBottomBorder,
+      buttonStyle: KButtonStyles.borderBlackButtonStyle,
       titleWidget: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
             informationItem.title,
             key: KWidgetkeys.widget.newsCard.title,
-            style: isDesk ? AppTextStyle.text40 : AppTextStyle.text24,
+            style: isDesk
+                ? AppTextStyle.materialThemeDisplaySmall
+                : AppTextStyle.materialThemeHeadlineSmall,
           ),
+          if (isDesk)
+            KSizedBox.kHeightSizedBox8
+          else
+            KSizedBox.kHeightSizedBox4,
           Text(
             informationItem.fetchDate.localeTime,
             key: KWidgetkeys.widget.newsCard.date,
-            style: AppTextStyle.hint16,
+            style: isDesk
+                ? AppTextStyle.materialThemeLabelMedium
+                : AppTextStyle.materialThemeLabelSmall,
           ),
+          if (isDesk)
+            KSizedBox.kHeightSizedBox24
+          else
+            KSizedBox.kHeightSizedBox16,
         ],
       ),
       bottom: Padding(
         padding: const EdgeInsets.only(
-          bottom: KPadding.kPaddingSize16,
-          top: KPadding.kPaddingSize24,
+          bottom: KPadding.kPaddingSize8,
+          top: KPadding.kPaddingSize16,
         ),
         child: Wrap(
           key: KWidgetkeys.widget.newsCard.tags,
@@ -53,7 +65,7 @@ class NewsCardWidget extends StatelessWidget {
                       : informationItem.categoryUA)
                   .map((category) {
             return Container(
-              decoration: KWidgetTheme.boxDecorationWidget,
+              decoration: KWidgetTheme.boxDecorationCardGrayBorder,
               padding: const EdgeInsets.symmetric(
                 vertical: KPadding.kPaddingSize4,
                 horizontal: KPadding.kPaddingSize8,
@@ -63,7 +75,7 @@ class NewsCardWidget extends StatelessWidget {
                 children: [
                   Text(
                     category,
-                    style: AppTextStyle.text14,
+                    style: AppTextStyle.materialThemeLabelLarge,
                   ),
                   KIcon.check,
                 ],
