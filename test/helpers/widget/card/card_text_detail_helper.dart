@@ -48,10 +48,10 @@ Future<void> cardTextDetailHelper(
   expect(
     tester
         .widget<Text>(
-          find.byKey(KWidgetkeys.widget.cardTextDetail.buttonText).first,
+          find.byKey(KWidgetkeys.widget.cardTextDetail.buttonText).last,
         )
         .data,
-    isNot(buttonText.data),
+    buttonText.data,
   );
 
   text = tester.widget<Text>(

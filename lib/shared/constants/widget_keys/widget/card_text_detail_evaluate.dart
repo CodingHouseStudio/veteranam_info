@@ -10,6 +10,6 @@ class _CardTextDetailEvaluateKeys {
       const Key('card_text_detail_evaluate_icon_icon_active_dislike');
   final iconActiveLike =
       const Key('card_text_detail_evaluate_icon_icon_active_like');
-  final iconActiveSmile =
-      const Key('card_text_detail_evaluate_icon_happy_smile');
+  final iconWebsite = const Key('card_text_detail_evaluate_icon_website');
+  final iconSave = const Key('card_text_detail_evaluate_icon_save');
 }
