@@ -86,7 +86,10 @@ class _CardTextDetailEvaluateWidgetState
                 buttonStyle: widget.buttonStyle,
                 isDesk: widget.isDesk,
               ),
-              KSizedBox.kHeightSizedBox24,
+              if (widget.isDesk)
+                KSizedBox.kHeightSizedBox24
+              else
+                KSizedBox.kHeightSizedBox16,
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -102,22 +105,19 @@ class _CardTextDetailEvaluateWidgetState
                                 evaluation = EvaluationEnum.none;
                               }
                             }),
-                            background: AppColors.materialThemeKeyColorsNeutral,
-                            icon: Padding(
-                              padding:
-                                  const EdgeInsets.all(KPadding.kPaddingSize4),
-                              child: evaluation == EvaluationEnum.like
-                                  ? KIcon.activeLike.copyWith(
-                                      key: KWidgetkeys
-                                          .widget
-                                          .cardTextDetailEvaluate
-                                          .iconActiveLike,
-                                    )
-                                  : KIcon.like.copyWith(
-                                      key: KWidgetkeys.widget
-                                          .cardTextDetailEvaluate.iconLike,
-                                    ),
-                            ),
+                            background: evaluation != EvaluationEnum.like
+                                ? AppColors.materialThemeKeyColorsNeutral
+                                : AppColors.materialThemeBlack,
+                            padding: KPadding.kPaddingSize12,
+                            icon: evaluation == EvaluationEnum.like
+                                ? KIcon.activeLike.copyWith(
+                                    key: KWidgetkeys.widget
+                                        .cardTextDetailEvaluate.iconActiveLike,
+                                  )
+                                : KIcon.like.copyWith(
+                                    key: KWidgetkeys
+                                        .widget.cardTextDetailEvaluate.iconLike,
+                                  ),
                           ),
                           KSizedBox.kHeightSizedBox3,
                           Text(
@@ -129,19 +129,6 @@ class _CardTextDetailEvaluateWidgetState
                       KSizedBox.kWidthSizedBox8,
                     ],
                   ),
-                  Row(
-                    children: [
-                      buildIcon(
-                        icon: KIcon.website.copyWith(
-                          key: KWidgetkeys
-                              .widget.cardTextDetailEvaluate.iconWebsite,
-                        ),
-                        text: context.l10n.website,
-                        onPressed: null,
-                      ),
-                    ],
-                  ),
-                  KSizedBox.kWidthSizedBox8,
                   Row(
                     children: [
                       buildIcon(

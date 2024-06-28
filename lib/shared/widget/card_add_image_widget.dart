@@ -42,7 +42,7 @@ class CardAddImageWidget extends StatelessWidget {
   }
 
   Widget buildImage(BuildContext context) {
-    debugPrint('Image: $image');
+    //ebugPrint('Image: $image');
     return Stack(
       alignment: Alignment.topCenter,
       children: [
