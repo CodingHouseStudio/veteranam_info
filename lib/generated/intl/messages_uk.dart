@@ -26,7 +26,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "aboutProject": MessageLookupByLibrary.simpleMessage(
             "Незалежна інформаційна платформа для ветеранів і ветеранок, де зібрано і систематизовано дані для зручного пошуку."),
         "aboutUs": MessageLookupByLibrary.simpleMessage("Про проєкт"),
-        "addComment": MessageLookupByLibrary.simpleMessage("Додайте коментар:"),
         "addPhoto": MessageLookupByLibrary.simpleMessage("Добавте фото"),
         "addYourStory":
             MessageLookupByLibrary.simpleMessage("Написати свою історію"),
@@ -48,13 +47,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "capitalLetter": MessageLookupByLibrary.simpleMessage(
             "повинен містити одну чи більше великих букв"),
         "category": MessageLookupByLibrary.simpleMessage("Категорія"),
-        "checkPointError": MessageLookupByLibrary.simpleMessage(
-            "Будь ласка виберіть одну з вище наведених відповідей"),
         "city": MessageLookupByLibrary.simpleMessage("Місто"),
         "clear": MessageLookupByLibrary.simpleMessage("Очистити"),
         "companyIsHidden":
             MessageLookupByLibrary.simpleMessage("Компанію приховано"),
-        "complaint": MessageLookupByLibrary.simpleMessage("Скарга"),
         "consultationOnline":
             MessageLookupByLibrary.simpleMessage("Консультація онлайн"),
         "contact": MessageLookupByLibrary.simpleMessage("Зв\'язатись"),
@@ -100,8 +96,6 @@ class MessageLookup extends MessageLookupByLibrary {
             "Помилка при завантаженні сторінки"),
         "errorTitle": MessageLookupByLibrary.simpleMessage("Помилка"),
         "facebook": MessageLookupByLibrary.simpleMessage("Facebook"),
-        "fakeNewsOrDisinformation": MessageLookupByLibrary.simpleMessage(
-            "Фальшиві новини або дезінформація;"),
         "feedback": MessageLookupByLibrary.simpleMessage("Зворотній звʼязок"),
         "feedbackBoxSubtitle": MessageLookupByLibrary.simpleMessage(
             "Ми отримали Ваше повідомлення і надамо Вам відповідь найближчим часом."),
@@ -119,8 +113,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "findOut": MessageLookupByLibrary.simpleMessage("Щоб дізнатися"),
         "forVeteransAndTheirFamilies":
             MessageLookupByLibrary.simpleMessage("для ветеранів і їх родин"),
-        "fraudOrSpam":
-            MessageLookupByLibrary.simpleMessage("Шахрайство або спам;"),
         "free": MessageLookupByLibrary.simpleMessage("Безкоштовно"),
         "fromLargestToSmallest":
             MessageLookupByLibrary.simpleMessage("Від найбільшої до найменшої"),
@@ -183,6 +175,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Основна інформація"),
         "mainScreen": MessageLookupByLibrary.simpleMessage("Головна"),
         "message": MessageLookupByLibrary.simpleMessage("Повідомлення"),
+        "more": MessageLookupByLibrary.simpleMessage("Більше"),
         "moreDiscounts": MessageLookupByLibrary.simpleMessage("Ще знижки"),
         "moreFunds": MessageLookupByLibrary.simpleMessage("Більше фондів"),
         "moreNews": MessageLookupByLibrary.simpleMessage("Ще новини"),
@@ -207,8 +200,6 @@ class MessageLookup extends MessageLookupByLibrary {
             "Користувач з таким паролем або електронною поштою не існує"),
         "notNecessarily":
             MessageLookupByLibrary.simpleMessage("(необовʼязково)"),
-        "offensiveOrHatefulContent": MessageLookupByLibrary.simpleMessage(
-            "Образливий або ненависницький контент;"),
         "offerDiscount":
             MessageLookupByLibrary.simpleMessage("Запропонувати знижку"),
         "oneNumber": MessageLookupByLibrary.simpleMessage(
@@ -217,7 +208,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "or": MessageLookupByLibrary.simpleMessage("або"),
         "orDonateHere":
             MessageLookupByLibrary.simpleMessage("або донатьте тут"),
-        "other": MessageLookupByLibrary.simpleMessage("Інше (вкажіть)"),
         "ourSocialNetworks":
             MessageLookupByLibrary.simpleMessage("Наші соцмережі"),
         "password": MessageLookupByLibrary.simpleMessage("Пароль"),
@@ -252,11 +242,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ми отримали Ваше повідомлення і надамо Вам відповідь найближчим часом."),
         "register": MessageLookupByLibrary.simpleMessage("Зареєструватись"),
         "remotely": MessageLookupByLibrary.simpleMessage("Віддалено"),
-        "reportPublication":
-            MessageLookupByLibrary.simpleMessage("Поскаржитись на публікацію"),
         "resetAll": MessageLookupByLibrary.simpleMessage("Скинути все"),
         "respond": MessageLookupByLibrary.simpleMessage("Відгукнутися"),
         "resume": MessageLookupByLibrary.simpleMessage("Резюме"),
+        "save": MessageLookupByLibrary.simpleMessage("Зберегти"),
         "saveChanges": MessageLookupByLibrary.simpleMessage("Зберегти зміни"),
         "saveMoney": MessageLookupByLibrary.simpleMessage("Щоб зекономити"),
         "saved": MessageLookupByLibrary.simpleMessage("Збережене"),
@@ -275,13 +264,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "sendMessage":
             MessageLookupByLibrary.simpleMessage("Надіслати повідомлення"),
         "sendMore": MessageLookupByLibrary.simpleMessage("Надіслати ще"),
+        "share": MessageLookupByLibrary.simpleMessage("Поділитися"),
         "signUp": MessageLookupByLibrary.simpleMessage("Реєстрація"),
         "signUpWith":
             MessageLookupByLibrary.simpleMessage("Зареєструйтесь через"),
         "specialOffers":
             MessageLookupByLibrary.simpleMessage("Спеціальні пропозиції"),
-        "specifyReasonForComplaint":
-            MessageLookupByLibrary.simpleMessage("Вкажіть причину скарги:"),
         "statistics": MessageLookupByLibrary.simpleMessage("Статистика"),
         "stories": MessageLookupByLibrary.simpleMessage("Історії"),
         "storyAddSubtitle": MessageLookupByLibrary.simpleMessage(
@@ -312,9 +300,11 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ця сторінка знаходиться на стадії розробки."),
         "upload": MessageLookupByLibrary.simpleMessage("Завантажити"),
         "us": MessageLookupByLibrary.simpleMessage("нам"),
+        "useful": MessageLookupByLibrary.simpleMessage("Корисно"),
         "verifiedInformation":
             MessageLookupByLibrary.simpleMessage("Перевірена інформація"),
         "wage": MessageLookupByLibrary.simpleMessage("Заробітна плата*"),
+        "website": MessageLookupByLibrary.simpleMessage("Сайт"),
         "whatKindOfProject":
             MessageLookupByLibrary.simpleMessage("Що це за проект?"),
         "whatYouMostInterestedIn": MessageLookupByLibrary.simpleMessage(
