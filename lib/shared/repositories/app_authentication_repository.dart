@@ -4,7 +4,7 @@ import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:firebase_core/firebase_core.dart' as firebase_core;
 import 'package:flutter/foundation.dart'
-    show debugPrint, kIsWeb, visibleForTesting;
+    show kIsWeb, visibleForTesting; //debugPrint
 import 'package:get_it/get_it.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
@@ -228,7 +228,7 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
         _secureStorageRepository.deleteAll(),
       ]);
       return logInAnonymously();
-    } on firebase_auth.FirebaseAuthException catch (e) {
+    } on firebase_auth.FirebaseAuthException {
       // debugPrint('Firebase Auth Error: ${e.message}');
       return Left(const LogOutFailure().status);
     } catch (e) {
@@ -270,7 +270,7 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
 
   void _updateAuthStatusBasedOnCache() {
     // debugPrint('Updating auth status based on cache');
-    final user = currentUser.isEmpty;
+    // final user = currentUser.isEmpty;
     // debugPrint('Current user inside '
     //     '_updateAuthStatusBasedOnCache : $currentUser');
     // debugPrint('user is $user');
@@ -278,7 +278,7 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
 
   void _updateUserSettingBasedOnCache() {
     // debugPrint('Updating user setting based on cache');
-    final userSetting = currentUserSetting.isEmpty;
+    // final userSetting = currentUserSetting.isEmpty;
     // debugPrint('Current user setting inside '
     //     '_updateAuthStatusBasedOnCache : $currentUserSetting');
     // debugPrint('userSertting is $userSetting');
@@ -291,7 +291,7 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
     try {
       await _firebaseAuth.sendPasswordResetEmail(email: email);
       return const Right(true);
-    } on firebase_auth.FirebaseAuthException catch (e) {
+    } on firebase_auth.FirebaseAuthException {
       // debugPrint('Sendig error: ${e.message}');
       return const Left(SomeFailure.emailSendingFailed());
     } catch (e) {
@@ -307,7 +307,7 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
       await _firebaseAuth.currentUser?.delete();
       _cache.clear(); // Clear the cache after user deletion
       return logInAnonymously();
-    } on firebase_auth.FirebaseAuthException catch (e) {
+    } on firebase_auth.FirebaseAuthException {
       // debugPrint('Firebase Auth Error: ${e.message}');
       return const Left(SomeFailure.serverError());
     } catch (e) {
