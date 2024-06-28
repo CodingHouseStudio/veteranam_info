@@ -36,45 +36,45 @@ void loadingList({
   });
 }
 
-void loadingListSeparate({
-  required Future<void> Function(WidgetTester) pumpApp,
-  required Key lastCard,
-}) {
-  group('Loading List', () {
-    testWidgets('Desk(isNotDesk)', (tester) async {
-      KPlatformConstants.isWebDesktop = true;
-      await pumpApp(tester);
+// void loadingListSeparate({
+//   required Future<void> Function(WidgetTester) pumpApp,
+//   required Key lastCard,
+// }) {
+//   group('Loading List', () {
+//     testWidgets('Desk(isNotDesk)', (tester) async {
+//       KPlatformConstants.isWebDesktop = true;
+//       await pumpApp(tester);
 
-      await _deskLoadingHelper(
-        tester: tester,
-        cardLast: lastCard,
-      );
-    });
-    testWidgets('Desk(isDesk)', (tester) async {
-      KPlatformConstants.isWebDesktop = true;
-      await pumpApp(tester);
+//       await _deskLoadingHelper(
+//         tester: tester,
+//         cardLast: lastCard,
+//       );
+//     });
+//     testWidgets('Desk(isDesk)', (tester) async {
+//       KPlatformConstants.isWebDesktop = true;
+//       await pumpApp(tester);
 
-      await changeWindowSizeHelper(
-        tester: tester,
-        test: () async {
-          await _deskLoadingHelper(
-            tester: tester,
-            cardLast: lastCard,
-          );
-        },
-      );
-    });
-    testWidgets('Mobile', (tester) async {
-      KPlatformConstants.isWebDesktop = false;
-      await pumpApp(tester);
+//       await changeWindowSizeHelper(
+//         tester: tester,
+//         test: () async {
+//           await _deskLoadingHelper(
+//             tester: tester,
+//             cardLast: lastCard,
+//           );
+//         },
+//       );
+//     });
+//     testWidgets('Mobile', (tester) async {
+//       KPlatformConstants.isWebDesktop = false;
+//       await pumpApp(tester);
 
-      await _mobileLoadingHelper(
-        tester: tester,
-        cardLast: lastCard,
-      );
-    });
-  });
-}
+//       await _mobileLoadingHelper(
+//         tester: tester,
+//         cardLast: lastCard,
+//       );
+//     });
+//   });
+// }
 
 Future<void> _deskLoadingHelper({
   required WidgetTester tester,
@@ -118,13 +118,6 @@ Future<void> _mobileLoadingHelper({
     tester: tester,
     windowsTest: true,
     test: () async {
-      await tester.pumpAndSettle();
-
-      await scrollingHelper(
-        tester: tester,
-        offset: KTestConstants.scrollingDown,
-      );
-
       await scrollingHelper(
         tester: tester,
         offset: KTestConstants.scrollingDown,

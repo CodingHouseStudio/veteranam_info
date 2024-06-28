@@ -139,7 +139,7 @@ class InvestorsBodyWidget extends StatelessWidget {
           else
             KSizedBox.kHeightSizedBox24,
         ],
-        scrollFunction: () => context
+        loadFunction: () => context
             .read<InvestorsWatcherBloc>()
             .add(const InvestorsWatcherEvent.loadeNextItems()),
       ),

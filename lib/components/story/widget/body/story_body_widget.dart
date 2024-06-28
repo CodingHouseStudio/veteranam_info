@@ -78,7 +78,7 @@ class StoryBodyWidget extends StatelessWidget {
             else
               KSizedBox.kHeightSizedBox24,
           ],
-          scrollFunction: () => context.read<StoryWatcherBloc>().add(
+          loadFunction: () => context.read<StoryWatcherBloc>().add(
                 const StoryWatcherEvent.loadNextItems(),
               ),
         );

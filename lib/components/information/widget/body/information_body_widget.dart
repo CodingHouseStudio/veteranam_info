@@ -22,15 +22,16 @@ class InformationBodyWidget extends StatelessWidget {
             .add(const InformationWatcherEvent.started()),
       ),
       listenWhen: (previous, current) {
-        listCanLoaded = previous.filteredInformationModelItems.length !=
+        listCanLoaded = previous.filteredInformationModelItems.length <
             current.filteredInformationModelItems.length;
         return current.failure != null;
       },
       builder: (context, _) => ScaffoldAutoLoadingWidget(
         loadingButtonText: context.l10n.moreNews,
         listCanLoaded: _.informationModelItems.length >
-                _.filteredInformationModelItems.length ||
+                _.filteredInformationModelItems.length &&
             listCanLoaded,
+        cardListIsEmpty: _.filteredInformationModelItems.isEmpty,
         titleChildWidgetsFunction: ({required isDesk}) => [
           KSizedBox.kHeightSizedBox24,
           ...TitleWidget.titleIconWidgetList(
@@ -99,7 +100,7 @@ class InformationBodyWidget extends StatelessWidget {
           else
             KSizedBox.kHeightSizedBox24,
         ],
-        scrollFunction: () => context.read<InformationWatcherBloc>().add(
+        loadFunction: () => context.read<InformationWatcherBloc>().add(
               const InformationWatcherEvent.loadNextItems(),
             ),
       ),

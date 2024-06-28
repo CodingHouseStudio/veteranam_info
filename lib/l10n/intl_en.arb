@@ -209,7 +209,9 @@
   "addComment": "Add a comment:",
   "checkPointError": "Please select one of the following answers",
   "verifiedInformation": "Verified information",
-  "youHaveLoadedFullList": "You have loaded the full list",
+  "thatEndOfList": "That's the end of the list! We hope you found what you were looking for.",
+  "returnToTop": "Return to the top",
+  "cardListEmptyText": "Sorry, nothing was found using your filters. Try changing your search criteria",
   "error": "We're sorry, there was an unforeseen error.",
   "@error": {
     "description": "message of an unforeseen error that was not foreseen."
@@ -234,9 +236,9 @@
   "@dublicateFailure": {
     "description": "an error message when trying to register an account with the same email as an already registered account"
   },
-   "more" : "More",
-   "useful" : "Useful",
-   "website" : "Website",
-   "share" : "Share",
-   "save" : "Save"
+  "more": "More",
+  "useful": "Useful",
+  "website": "Website",
+  "share": "Share",
+  "save": "Save"
 }

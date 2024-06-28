@@ -80,7 +80,7 @@ void main() {
         await discountInitialHelper(tester);
       });
 
-      loadingListSeparate(
+      loadingList(
         pumpApp: (tester) async => discountsPumpAppHelper(
           tester: tester,
           mockDiscountRepository: mockDiscountRepository,

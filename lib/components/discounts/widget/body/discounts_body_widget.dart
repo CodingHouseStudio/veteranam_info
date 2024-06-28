@@ -21,7 +21,7 @@ class DiscountBodyWidget extends StatelessWidget {
             .add(const DiscountWatcherEvent.started()),
       ),
       listenWhen: (previous, current) {
-        listCanLoaded = previous.filteredDiscountModelItems.length !=
+        listCanLoaded = previous.filteredDiscountModelItems.length <
             current.filteredDiscountModelItems.length;
         return current.failure != null;
       },
@@ -29,8 +29,9 @@ class DiscountBodyWidget extends StatelessWidget {
         return ScaffoldAutoLoadingWidget(
           loadingButtonText: context.l10n.moreDiscounts,
           listCanLoaded: _.discountModelItems.length >
-                  _.filteredDiscountModelItems.length ||
+                  _.filteredDiscountModelItems.length &&
               listCanLoaded,
+          cardListIsEmpty: _.filteredDiscountModelItems.isEmpty,
           titleChildWidgetsFunction: ({required isDesk}) => [
             KSizedBox.kHeightSizedBox24,
             ...TitleWidget.pointTitleWidgetList(
@@ -115,7 +116,7 @@ class DiscountBodyWidget extends StatelessWidget {
             else
               KSizedBox.kHeightSizedBox24,
           ],
-          scrollFunction: () => context
+          loadFunction: () => context
               .read<DiscountWatcherBloc>()
               .add(const DiscountWatcherEvent.loadNextItems()),
         );

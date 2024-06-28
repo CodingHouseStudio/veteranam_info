@@ -88,8 +88,6 @@ class DiscountWatcherBloc
   ) {
     if (state.itemsLoaded.checkLoadingPosible(state.discountModelItems)) return;
     emit(state.copyWith(loadingStatus: LoadingStatus.loading));
-    if (state.itemsLoaded.checkLoadingPosible(state.discountModelItems)) return;
-    emit(state.copyWith(loadingStatus: LoadingStatus.loading));
     final filterItems = _filter(
       categoryIndex: state.filtersCategoriesIndex,
       itemsLoaded: state.itemsLoaded + KDimensions.loadItems,
@@ -172,7 +170,7 @@ class DiscountWatcherBloc
   }) {
     final items = list ?? state.discountModelItems;
 
-    return items
+    final listItems = items
         .where(
           (element) =>
               locationIndex == null ||
@@ -180,20 +178,7 @@ class DiscountWatcherBloc
               element.discount.contains(100),
         )
         .toList()
-        .loadingFilter(
-          filtersIndex: categoryIndex,
-          itemsLoaded: null,
-          getFilter: (item) => item.category,
-        )
-        .loadingFilter(
-          filtersIndex: locationIndex?.where((element) => element > 1).toList(),
-          itemsLoaded: itemsLoaded,
-          getFilter: (item) => [
-            if (item.location != null) ...item.location!,
-            if (item.subLocation != null) ...item.subLocation._getList,
-          ],
-          overallFilter: items._getLocationItems,
-        )..sort((a, b) {
+      ..sort((a, b) {
         if (locationIndex != null && locationIndex.contains(0)) {
           final maxDiscountA =
               a.discount.isNotEmpty ? a.discount.reduce(max) : 0;
@@ -207,6 +192,21 @@ class DiscountWatcherBloc
 
         return b.dateVerified.compareTo(a.dateVerified);
       });
+    return listItems
+        .loadingFilter(
+          filtersIndex: categoryIndex,
+          itemsLoaded: null,
+          getFilter: (item) => item.category,
+        )
+        .loadingFilter(
+          filtersIndex: locationIndex?.where((element) => element > 1).toList(),
+          itemsLoaded: itemsLoaded,
+          getFilter: (item) => [
+            if (item.location != null) ...item.location!,
+            if (item.subLocation != null) ...item.subLocation._getList,
+          ],
+          overallFilter: items._getLocationItems,
+        );
   }
 
   void _onFailure(

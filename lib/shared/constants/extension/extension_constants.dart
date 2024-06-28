@@ -29,8 +29,7 @@ extension ItemLoadedExtensions on int {
           loadItems ?? KDimensions.loadItems,
         ),
       );
-  bool checkLoadingPosible(List<dynamic> list) =>
-      this + KDimensions.loadItems > list.length;
+  bool checkLoadingPosible(List<dynamic> list) => this >= list.length;
 }
 
 extension LocalizedDateTime on DateTime {

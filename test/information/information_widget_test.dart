@@ -110,7 +110,6 @@ void main() {
       );
 
       testWidgets('News list load and filter', (tester) async {
-        KPlatformConstants.isWebDesktop = false;
         await informationPumpAppHelper(
           mockInformationRepository: mockInformationRepository,
           mockAuthenticationRepository: mockAuthenticationRepository,
