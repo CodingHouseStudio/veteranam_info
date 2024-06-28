@@ -18,6 +18,7 @@ void main() {
     late IInformationRepository mockInformationRepository;
     late AuthenticationRepository mockAuthenticationRepository;
     setUp(() {
+      KPlatformConstants.isWebDesktop = false;
       mockInformationRepository = MockIInformationRepository();
       mockAuthenticationRepository = MockAuthenticationRepository();
       when(mockAuthenticationRepository.currentUser).thenAnswer(
