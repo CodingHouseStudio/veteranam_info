@@ -36,7 +36,7 @@ class WorkRepository implements IWorkRepository {
     try {
       if (respond.resume != null) {
         await _storageService.saveRespond(
-          resumeModel: respond.resume!.first,
+          resumeModel: respond.resume!,
           respondId: respond.id,
         );
       }

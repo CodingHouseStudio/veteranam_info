@@ -2,21 +2,28 @@ part of 'my_story_watcher_bloc.dart';
 
 enum MyStoryFailure {
   error,
+  get,
+  network,
 }
 
 extension MyStoryFailureExtension on SomeFailure {
-  MyStoryFailure toMyStory() {
-    return MyStoryFailure.error;
+  MyStoryFailure _toMyStory() {
+    switch (this) {
+      case FailureGet():
+        return MyStoryFailure.get;
+      case FailureNetwork():
+        return MyStoryFailure.network;
+      default:
+        return MyStoryFailure.error;
+    }
   }
 }
 
 @freezed
 class MyStoryWatcherState with _$MyStoryWatcherState {
-  const factory MyStoryWatcherState.initial() = MyStoryWatcherStateInitial;
-  const factory MyStoryWatcherState.loading() = MyStoryWatcherStateLoading;
-  const factory MyStoryWatcherState.success({
+  const factory MyStoryWatcherState({
     required List<StoryModel> storyModelItems,
-  }) = MyStoryWatcherStateSuccess;
-  const factory MyStoryWatcherState.failure(MyStoryFailure failure) =
-      MyStoryWatcherStateFailure;
+    required LoadingStatus loadingStatus,
+    MyStoryFailure? failure,
+  }) = _Initial;
 }

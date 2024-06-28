@@ -30,18 +30,22 @@ final class _AppUserSettingChanged extends AuthenticationEvent {
   const _AppUserSettingChanged(this.userSetting);
 
   final UserSetting userSetting;
+
+  @override
+  List<Object> get props => [userSetting];
 }
 
 final class AppLanguageChanged extends AuthenticationEvent {
-  const AppLanguageChanged(this.language);
-
-  final Language language;
+  const AppLanguageChanged();
 }
 
 final class AppUserRoleChanged extends AuthenticationEvent {
   const AppUserRoleChanged(this.userRole);
 
   final UserRole userRole;
+
+  @override
+  List<Object> get props => [userRole];
 }
 
 class AuthenticationDeleteRequested extends AuthenticationEvent {}

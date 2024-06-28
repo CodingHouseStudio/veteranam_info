@@ -1,11 +1,19 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
+import 'package:kozak/shared/shared.dart';
 import 'package:material_symbols_icons/symbols.dart';
 
 class _KIcon extends Icon {
-  // ignore: unused_element
-  const _KIcon(super.icon, {super.weight = 200, super.fill});
+  const _KIcon(
+    super.icon, {
+    // ignore: unused_element
+    super.weight = 200,
+    super.fill,
+    // ignore: unused_element
+    super.size = KSize.kIconSize,
+    super.color,
+  });
 }
 
 extension IconExtension on Icon {
@@ -43,6 +51,7 @@ extension IconExtension on Icon {
 abstract class KIcon {
   static const _KIcon arrowLeft = _KIcon(Symbols.arrow_left);
   static const _KIcon arrowRight = _KIcon(Symbols.arrow_right);
+
   // static const Icon mic = Icon(Icons.mic_none_outlined);
   static const _KIcon person = _KIcon(Symbols.person_outline);
   static const _KIcon search = _KIcon(Symbols.search);
@@ -51,13 +60,16 @@ abstract class KIcon {
   static const _KIcon filter = _KIcon(Symbols.filter_alt);
   static const _KIcon edit = _KIcon(Symbols.edit);
   static const _KIcon button = _KIcon(Symbols.smart_button);
-  static const _KIcon trailing = _KIcon(Symbols.arrow_drop_down);
-  static const _KIcon trailingUp = _KIcon(Symbols.arrow_drop_up);
+  static const _KIcon trailing = _KIcon(Symbols.keyboard_arrow_down);
+  static const _KIcon trailingUp = _KIcon(Symbols.keyboard_arrow_up);
   static const _KIcon arrowUpRight = _KIcon(Symbols.arrow_outward);
+  static const _KIcon arrowDownRight = _KIcon(Symbols.south_east);
+  static const _KIcon arrowDownLeft = _KIcon(Symbols.south_west);
   static const _KIcon like = _KIcon(Symbols.thumb_up);
   static const _KIcon activeLike = _KIcon(
-    Symbols.thumb_up,
     fill: 1,
+    Symbols.thumb_up,
+    color: AppColors.materialThemeKeyColorsPrimary,
   );
   static const _KIcon smile = _KIcon(Symbols.sentiment_very_satisfied);
   static const _KIcon activeSmile = _KIcon(
@@ -76,10 +88,11 @@ abstract class KIcon {
   static const _KIcon check = _KIcon(
     Symbols.check,
   );
+  static const _KIcon website = _KIcon(Symbols.captive_portal);
   static const _KIcon volum = _KIcon(Symbols.volume_up);
   static const _KIcon eye = _KIcon(Symbols.remove_red_eye);
   static const _KIcon eyeOff = _KIcon(Symbols.remove_red_eye_sharp);
-  static const _KIcon refresh = _KIcon(Symbols.refresh);
+  static const _KIcon refresh = _KIcon(Symbols.cached);
   static const _KIcon message = _KIcon(Symbols.chat_bubble);
   static const _KIcon star = _KIcon(Symbols.star);
   static const _KIcon attachFile = _KIcon(Symbols.attach_file);
@@ -93,4 +106,10 @@ abstract class KIcon {
   static const _KIcon briefcase = _KIcon(Symbols.trip);
   static const _KIcon fileText = _KIcon(Symbols.description);
   static const _KIcon meil = _KIcon(Symbols.mail);
+  static const _KIcon close = _KIcon(Symbols.close);
+  static const _KIcon tune = _KIcon(Symbols.tune);
+  static const _KIcon brightnessAlert = _KIcon(
+    Symbols.brightness_alert,
+    color: AppColors.materialThemeRefErrorError50,
+  );
 }

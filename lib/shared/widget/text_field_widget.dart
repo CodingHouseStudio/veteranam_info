@@ -5,9 +5,9 @@ import 'package:kozak/shared/shared.dart';
 class TextFieldWidget extends StatefulWidget {
   const TextFieldWidget({
     required this.widgetKey,
-    required this.hintText,
     required this.onChanged,
     required this.isDesk,
+    this.hintText,
     this.textAlign,
     super.key,
     this.errorText,
@@ -34,11 +34,12 @@ class TextFieldWidget extends StatefulWidget {
     this.labelText,
     this.minLines,
     this.hintStyle,
+    this.text,
   });
   final Key widgetKey;
   final TextAlign? textAlign;
   final ValueChanged<String>? onChanged;
-  final String hintText;
+  final String? hintText;
   final String? errorText;
   final TextInputType? keyboardType;
   final int? maxLines;
@@ -64,12 +65,22 @@ class TextFieldWidget extends StatefulWidget {
   final String? labelText;
   final TextStyle? hintStyle;
   final bool isDesk;
+  final String? text;
 
   @override
   State<TextFieldWidget> createState() => _TextFieldWidgetState();
 }
 
 class _TextFieldWidgetState extends State<TextFieldWidget> {
+  TextEditingController? controller;
+  @override
+  void initState() {
+    if (widget.text != null) {
+      controller = TextEditingController(text: widget.text);
+    }
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return TextField(
@@ -82,20 +93,23 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
       onEditingComplete: widget.onEditingCompleted,
       obscureText: widget.obscureText,
       autocorrect: !widget.obscureText,
-      controller: widget.controller,
+      controller: controller ?? widget.controller,
       maxLines: widget.expands == null ? widget.maxLines ?? 1 : null,
       maxLength: widget.maxLength,
       keyboardType: widget.keyboardType ?? TextInputType.text,
       textInputAction: TextInputAction.done,
       textAlign: widget.textAlign ?? TextAlign.start,
-      style: widget.isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
+      style: AppTextStyle.materialThemeTitleMedium,
       // context.theme.textTheme.headlineSmall,
       onChanged: widget.onChanged,
       decoration: KWidgetTheme.inputDecoration.copyWith(
         hintStyle: widget.hintStyle,
         contentPadding: widget.contentPadding ??
             (widget.isDesk
-                ? const EdgeInsets.all(KPadding.kPaddingSize24)
+                ? const EdgeInsets.symmetric(
+                    horizontal: KPadding.kPaddingSize32,
+                    vertical: KPadding.kPaddingSize16,
+                  )
                 : const EdgeInsets.all(KPadding.kPaddingSize16)),
         labelText: widget.labelText,
         border: widget.border,

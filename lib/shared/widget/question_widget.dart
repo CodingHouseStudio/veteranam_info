@@ -44,7 +44,6 @@ class _QuestionWidgetState extends State<QuestionWidget> {
             style: widget.isDesk
                 ? AppTextStyle.materialThemeHeadlineSmall
                 : AppTextStyle.materialThemeTitleLarge,
-            maxLines: 2,
           ),
           onExpansionChanged: (value) => setState(() {
             openQuestion = value;
@@ -57,19 +56,24 @@ class _QuestionWidgetState extends State<QuestionWidget> {
                 : KIcon.plus.copyWith(
                     key: KWidgetkeys.widget.question.iconPlus,
                   ),
+            padding: KPadding.kPaddingSize12,
+            background: AppColors.materialThemeWhite,
           ),
-          tilePadding: const EdgeInsets.symmetric(
-            horizontal: KPadding.kPaddingSize32,
+          tilePadding: EdgeInsets.symmetric(
+            horizontal: widget.isDesk
+                ? KPadding.kPaddingSize32
+                : KPadding.kPaddingSize16,
             vertical: KPadding.kPaddingSize16,
           ).copyWith(
-            bottom: widget.isDesk
+            bottom: KPadding.kPaddingSize16,
+            right: widget.isDesk
                 ? KPadding.kPaddingSize16
                 : KPadding.kPaddingSize8,
           ),
           childrenPadding: EdgeInsets.symmetric(
             horizontal: widget.isDesk
-                ? KPadding.kPaddingSize32
-                : KPadding.kPaddingSize16,
+                ? KPadding.kPaddingSize16
+                : KPadding.kPaddingSize4,
             vertical: KPadding.kPaddingSize16,
           ).copyWith(top: 0),
           children: [

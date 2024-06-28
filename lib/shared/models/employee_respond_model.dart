@@ -11,7 +11,7 @@ class EmployeeRespondModel with _$EmployeeRespondModel {
     required String email,
     required String phoneNumber,
     required bool noResume,
-    @ResumeConverter() List<ResumeModel>? resume,
+    @ResumeConverter() ResumeModel? resume,
   }) = _EmployeeRespondModel;
 
   factory EmployeeRespondModel.fromJson(Map<String, dynamic> json) =>

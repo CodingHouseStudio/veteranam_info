@@ -88,9 +88,9 @@ class FirestoreService {
         (snapshot) {
           for (final change in snapshot.docChanges) {
             if (change.type == DocumentChangeType.added) {
-              final source =
-                  (snapshot.metadata.isFromCache) ? 'local cache' : 'server';
-              debugPrint('Data fetched from $source}');
+              // final source =
+              //     (snapshot.metadata.isFromCache) ? 'local cache' : 'server';
+              // debugPrint('Data fetched from $source}');
             }
           }
           return snapshot.docs
@@ -123,9 +123,9 @@ class FirestoreService {
           .map(
         (snapshot) {
           if (snapshot.exists) {
-            final source =
-                (snapshot.metadata.isFromCache) ? 'local cache' : 'server';
-            debugPrint('Data fetched from $source}');
+            // final source =
+            //     (snapshot.metadata.isFromCache) ? 'local cache' : 'server';
+            // debugPrint('Data fetched from $source}');
             return UserSetting.fromJson(snapshot.data()!);
           } else {
             return UserSetting.empty;
@@ -149,9 +149,9 @@ class FirestoreService {
         (snapshot) {
           for (final change in snapshot.docChanges) {
             if (change.type == DocumentChangeType.added) {
-              final source =
-                  (snapshot.metadata.isFromCache) ? 'local cache' : 'server';
-              debugPrint('Data fetched from $source}');
+              // final source =
+              //     (snapshot.metadata.isFromCache) ? 'local cache' : 'server';
+              // debugPrint('Data fetched from $source}');
             }
           }
           return snapshot.docs
@@ -174,9 +174,9 @@ class FirestoreService {
         (snapshot) {
           for (final change in snapshot.docChanges) {
             if (change.type == DocumentChangeType.added) {
-              final source =
-                  (snapshot.metadata.isFromCache) ? 'local cache' : 'server';
-              debugPrint('Data fetched from $source}');
+              // final source =
+              //     (snapshot.metadata.isFromCache) ? 'local cache' : 'server';
+              // debugPrint('Data fetched from $source}');
             }
           }
           return snapshot.docs
@@ -195,7 +195,7 @@ class FirestoreService {
   Future<List<StoryModel>> getStoriesByUserId(String userId) async {
     final querySnapshot = await _db
         .collection(FirebaseCollectionName.stroies)
-        .where('userId', isEqualTo: userId)
+        .where(StoryModelJsonField.userId, isEqualTo: userId)
         .get();
 
     return querySnapshot.docs
@@ -210,9 +210,9 @@ class FirestoreService {
         (snapshot) {
           for (final change in snapshot.docChanges) {
             if (change.type == DocumentChangeType.added) {
-              final source =
-                  (snapshot.metadata.isFromCache) ? 'local cache' : 'server';
-              debugPrint('Data fetched from $source}');
+              // final source =
+              //     (snapshot.metadata.isFromCache) ? 'local cache' : 'server';
+              // debugPrint('Data fetched from $source}');
             }
           }
           return snapshot.docs
@@ -228,29 +228,54 @@ class FirestoreService {
         .set(discount.toJson());
   }
 
-  Stream<List<TagModel>> getTags() => _db
-          .collection(FirebaseCollectionName.tags)
-          .snapshots(includeMetadataChanges: true) // Enable caching
-          .map(
-        (snapshot) {
-          for (final change in snapshot.docChanges) {
-            if (change.type == DocumentChangeType.added) {
-              final source =
-                  (snapshot.metadata.isFromCache) ? 'local cache' : 'server';
-              debugPrint('Data fetched from $source}');
-            }
-          }
-          return snapshot.docs
-              .map((doc) => TagModel.fromJson(doc.data()))
-              .toList();
-        },
-      );
+  // Stream<List<TagModel>> getTags() => _db
+  //         .collection(FirebaseCollectionName.tags)
+  //         .snapshots(includeMetadataChanges: true) // Enable caching
+  //         .map(
+  //       (snapshot) {
+  //         for (final change in snapshot.docChanges) {
+  //           if (change.type == DocumentChangeType.added) {
+  //             final source =
+  //                 (snapshot.metadata.isFromCache) ? 'local cache' : 'server';
+  //             debugPrint('Data fetched from $source}');
+  //           }
+  //         }
+  //         return snapshot.docs
+  //             .map((doc) => TagModel.fromJson(doc.data()))
+  //             .toList();
+  //       },
+  //     );
 
-  Future<void> addTags(TagModel tags) {
+  // Future<void> addTags(TagModel tags) {
+  //   return _db
+  //       .collection(FirebaseCollectionName.tags)
+  //       .doc(tags.id)
+  //       .set(tags.toJson());
+  // }
+
+  Future<List<DiscountModel>> getDiscountsByUserId(String userId) async {
+    final querySnapshot = await _db
+        .collection(FirebaseCollectionName.discount)
+        .where(DiscountModelJsonField.userId, isEqualTo: userId)
+        .get();
+
+    return querySnapshot.docs
+        .map((doc) => DiscountModel.fromJson(doc.data()))
+        .toList();
+  }
+
+  Future<void> deleteDiscountById(String discountId) {
     return _db
-        .collection(FirebaseCollectionName.tags)
-        .doc(tags.id)
-        .set(tags.toJson());
+        .collection(FirebaseCollectionName.discount)
+        .doc(discountId)
+        .delete();
+  }
+
+  Future<void> addReport(ReportModel report) {
+    return _db
+        .collection(FirebaseCollectionName.report)
+        .doc(report.id)
+        .set(report.toJson());
   }
 
   Future<void> sendRespond(EmployeeRespondModel respondModel) => _db

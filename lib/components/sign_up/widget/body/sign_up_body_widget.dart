@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
 
@@ -8,7 +9,11 @@ class SignUpBodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SignUpBloc, SignUpState>(
+    return BlocConsumer<SignUpBloc, SignUpState>(
+      listener: (context, state) => context.dialog.showSendErrorDialog(
+        state.failure!.value(context),
+      ),
+      listenWhen: (previous, current) => current.failure != null,
       builder: (context, _) {
         return LeftCardWidget(
           key: KWidgetkeys.screen.signUp.card,
@@ -42,14 +47,6 @@ class SignUpBodyWidget extends StatelessWidget {
                     const SignUpEvent.passwordFieldHide(),
                   ),
             ),
-            if (_.failure.getString(context) != null)
-              Center(
-                child: Text(
-                  _.failure.getString(context)!,
-                  key: KWidgetkeys.screen.signUp.failureMessage,
-                  style: AppTextStyle.error14,
-                ),
-              ),
             if (isDesk)
               KSizedBox.kHeightSizedBox24
             else
@@ -78,7 +75,7 @@ class SignUpBodyWidget extends StatelessWidget {
                 ),
                 TextButton(
                   key: KWidgetkeys.screen.signUp.loginButton,
-                  onPressed: () => context.goNamedWithScroll(KRoute.login.name),
+                  onPressed: () => context.goNamed(KRoute.login.name),
                   style: KButtonStyles.transparentButtonStyleBottomBorder,
                   child: Text(
                     context.l10n.login,

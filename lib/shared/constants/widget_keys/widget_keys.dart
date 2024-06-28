@@ -26,12 +26,14 @@ part 'screen/employer.dart';
 part 'screen/story_add.dart';
 part 'screen/under_construction.dart';
 part 'screen/my_story.dart';
+part 'screen/feedback.dart';
+part 'screen/my_discounts.dart';
 // part 'screen/contact.dart';
 
 part 'widget/widget.dart';
 part 'widget/question.dart';
 part 'widget/nawbar.dart';
-part 'widget/filter.dart';
+// part 'widget/filter.dart';
 part 'widget/drop_list_field.dart';
 part 'widget/footer.dart';
 part 'widget/message_field.dart';
@@ -52,18 +54,20 @@ part 'widget/discount_card.dart';
 part 'widget/check_point.dart';
 part 'widget/scaffold.dart';
 part 'widget/pagination.dart';
-part 'widget/feedback.dart';
 part 'widget/email_password_fields.dart';
 part 'widget/left_card.dart';
 part 'widget/sign_up_bottom_buttons.dart';
 part 'widget/donate_card.dart';
 part 'widget/profile_card_widget.dart';
-part 'widget/feedback_box.dart';
 part 'widget/rate.dart';
 part 'widget/chat_input.dart';
 part 'widget/work_request_card.dart';
 part 'widget/check_point_single.dart';
 part 'widget/dialogs.dart';
+part 'widget/button_additional.dart';
+part 'widget/filter_chip.dart';
+part 'widget/statistic_box.dart';
+part 'widget/report_dialog.dart';
 
 abstract class KWidgetkeys {
   static _ScreenKeys get screen => _ScreenKeys();

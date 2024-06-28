@@ -23,10 +23,14 @@ mixin _$InformationModel {
   String get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get news => throw _privateConstructorUsedError;
-  DateTime get date => throw _privateConstructorUsedError;
-  List<String>? get tags => throw _privateConstructorUsedError;
+  List<String> get category => throw _privateConstructorUsedError;
+  List<String> get categoryUA => throw _privateConstructorUsedError;
+  String get topic => throw _privateConstructorUsedError;
+  String get topicUA => throw _privateConstructorUsedError;
+  String get status => throw _privateConstructorUsedError;
+  DateTime get fetchDate => throw _privateConstructorUsedError;
   @ImageConverter()
-  List<ImageModel>? get image => throw _privateConstructorUsedError;
+  ImageModel? get image => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -44,9 +48,15 @@ abstract class $InformationModelCopyWith<$Res> {
       {String id,
       String title,
       String news,
-      DateTime date,
-      List<String>? tags,
-      @ImageConverter() List<ImageModel>? image});
+      List<String> category,
+      List<String> categoryUA,
+      String topic,
+      String topicUA,
+      String status,
+      DateTime fetchDate,
+      @ImageConverter() ImageModel? image});
+
+  $ImageModelCopyWith<$Res>? get image;
 }
 
 /// @nodoc
@@ -65,8 +75,12 @@ class _$InformationModelCopyWithImpl<$Res, $Val extends InformationModel>
     Object? id = null,
     Object? title = null,
     Object? news = null,
-    Object? date = null,
-    Object? tags = freezed,
+    Object? category = null,
+    Object? categoryUA = null,
+    Object? topic = null,
+    Object? topicUA = null,
+    Object? status = null,
+    Object? fetchDate = null,
     Object? image = freezed,
   }) {
     return _then(_value.copyWith(
@@ -82,19 +96,47 @@ class _$InformationModelCopyWithImpl<$Res, $Val extends InformationModel>
           ? _value.news
           : news // ignore: cast_nullable_to_non_nullable
               as String,
-      date: null == date
-          ? _value.date
-          : date // ignore: cast_nullable_to_non_nullable
+      category: null == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      categoryUA: null == categoryUA
+          ? _value.categoryUA
+          : categoryUA // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      topic: null == topic
+          ? _value.topic
+          : topic // ignore: cast_nullable_to_non_nullable
+              as String,
+      topicUA: null == topicUA
+          ? _value.topicUA
+          : topicUA // ignore: cast_nullable_to_non_nullable
+              as String,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String,
+      fetchDate: null == fetchDate
+          ? _value.fetchDate
+          : fetchDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      tags: freezed == tags
-          ? _value.tags
-          : tags // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
       image: freezed == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
-              as List<ImageModel>?,
+              as ImageModel?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ImageModelCopyWith<$Res>? get image {
+    if (_value.image == null) {
+      return null;
+    }
+
+    return $ImageModelCopyWith<$Res>(_value.image!, (value) {
+      return _then(_value.copyWith(image: value) as $Val);
+    });
   }
 }
 
@@ -110,9 +152,16 @@ abstract class _$$InformationModelImplCopyWith<$Res>
       {String id,
       String title,
       String news,
-      DateTime date,
-      List<String>? tags,
-      @ImageConverter() List<ImageModel>? image});
+      List<String> category,
+      List<String> categoryUA,
+      String topic,
+      String topicUA,
+      String status,
+      DateTime fetchDate,
+      @ImageConverter() ImageModel? image});
+
+  @override
+  $ImageModelCopyWith<$Res>? get image;
 }
 
 /// @nodoc
@@ -129,8 +178,12 @@ class __$$InformationModelImplCopyWithImpl<$Res>
     Object? id = null,
     Object? title = null,
     Object? news = null,
-    Object? date = null,
-    Object? tags = freezed,
+    Object? category = null,
+    Object? categoryUA = null,
+    Object? topic = null,
+    Object? topicUA = null,
+    Object? status = null,
+    Object? fetchDate = null,
     Object? image = freezed,
   }) {
     return _then(_$InformationModelImpl(
@@ -146,18 +199,34 @@ class __$$InformationModelImplCopyWithImpl<$Res>
           ? _value.news
           : news // ignore: cast_nullable_to_non_nullable
               as String,
-      date: null == date
-          ? _value.date
-          : date // ignore: cast_nullable_to_non_nullable
+      category: null == category
+          ? _value._category
+          : category // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      categoryUA: null == categoryUA
+          ? _value._categoryUA
+          : categoryUA // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      topic: null == topic
+          ? _value.topic
+          : topic // ignore: cast_nullable_to_non_nullable
+              as String,
+      topicUA: null == topicUA
+          ? _value.topicUA
+          : topicUA // ignore: cast_nullable_to_non_nullable
+              as String,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String,
+      fetchDate: null == fetchDate
+          ? _value.fetchDate
+          : fetchDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      tags: freezed == tags
-          ? _value._tags
-          : tags // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
       image: freezed == image
-          ? _value._image
+          ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
-              as List<ImageModel>?,
+              as ImageModel?,
     ));
   }
 }
@@ -169,11 +238,15 @@ class _$InformationModelImpl implements _InformationModel {
       {required this.id,
       required this.title,
       required this.news,
-      required this.date,
-      final List<String>? tags = const <String>[],
-      @ImageConverter() final List<ImageModel>? image})
-      : _tags = tags,
-        _image = image;
+      required final List<String> category,
+      required final List<String> categoryUA,
+      required this.topic,
+      required this.topicUA,
+      required this.status,
+      required this.fetchDate,
+      @ImageConverter() this.image})
+      : _category = category,
+        _categoryUA = categoryUA;
 
   factory _$InformationModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$InformationModelImplFromJson(json);
@@ -184,33 +257,37 @@ class _$InformationModelImpl implements _InformationModel {
   final String title;
   @override
   final String news;
+  final List<String> _category;
   @override
-  final DateTime date;
-  final List<String>? _tags;
-  @override
-  @JsonKey()
-  List<String>? get tags {
-    final value = _tags;
-    if (value == null) return null;
-    if (_tags is EqualUnmodifiableListView) return _tags;
+  List<String> get category {
+    if (_category is EqualUnmodifiableListView) return _category;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
+    return EqualUnmodifiableListView(_category);
   }
 
-  final List<ImageModel>? _image;
+  final List<String> _categoryUA;
+  @override
+  List<String> get categoryUA {
+    if (_categoryUA is EqualUnmodifiableListView) return _categoryUA;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_categoryUA);
+  }
+
+  @override
+  final String topic;
+  @override
+  final String topicUA;
+  @override
+  final String status;
+  @override
+  final DateTime fetchDate;
   @override
   @ImageConverter()
-  List<ImageModel>? get image {
-    final value = _image;
-    if (value == null) return null;
-    if (_image is EqualUnmodifiableListView) return _image;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
+  final ImageModel? image;
 
   @override
   String toString() {
-    return 'InformationModel(id: $id, title: $title, news: $news, date: $date, tags: $tags, image: $image)';
+    return 'InformationModel(id: $id, title: $title, news: $news, category: $category, categoryUA: $categoryUA, topic: $topic, topicUA: $topicUA, status: $status, fetchDate: $fetchDate, image: $image)';
   }
 
   @override
@@ -221,9 +298,15 @@ class _$InformationModelImpl implements _InformationModel {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.news, news) || other.news == news) &&
-            (identical(other.date, date) || other.date == date) &&
-            const DeepCollectionEquality().equals(other._tags, _tags) &&
-            const DeepCollectionEquality().equals(other._image, _image));
+            const DeepCollectionEquality().equals(other._category, _category) &&
+            const DeepCollectionEquality()
+                .equals(other._categoryUA, _categoryUA) &&
+            (identical(other.topic, topic) || other.topic == topic) &&
+            (identical(other.topicUA, topicUA) || other.topicUA == topicUA) &&
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.fetchDate, fetchDate) ||
+                other.fetchDate == fetchDate) &&
+            (identical(other.image, image) || other.image == image));
   }
 
   @JsonKey(ignore: true)
@@ -233,9 +316,13 @@ class _$InformationModelImpl implements _InformationModel {
       id,
       title,
       news,
-      date,
-      const DeepCollectionEquality().hash(_tags),
-      const DeepCollectionEquality().hash(_image));
+      const DeepCollectionEquality().hash(_category),
+      const DeepCollectionEquality().hash(_categoryUA),
+      topic,
+      topicUA,
+      status,
+      fetchDate,
+      image);
 
   @JsonKey(ignore: true)
   @override
@@ -254,13 +341,16 @@ class _$InformationModelImpl implements _InformationModel {
 
 abstract class _InformationModel implements InformationModel {
   const factory _InformationModel(
-          {required final String id,
-          required final String title,
-          required final String news,
-          required final DateTime date,
-          final List<String>? tags,
-          @ImageConverter() final List<ImageModel>? image}) =
-      _$InformationModelImpl;
+      {required final String id,
+      required final String title,
+      required final String news,
+      required final List<String> category,
+      required final List<String> categoryUA,
+      required final String topic,
+      required final String topicUA,
+      required final String status,
+      required final DateTime fetchDate,
+      @ImageConverter() final ImageModel? image}) = _$InformationModelImpl;
 
   factory _InformationModel.fromJson(Map<String, dynamic> json) =
       _$InformationModelImpl.fromJson;
@@ -272,12 +362,20 @@ abstract class _InformationModel implements InformationModel {
   @override
   String get news;
   @override
-  DateTime get date;
+  List<String> get category;
   @override
-  List<String>? get tags;
+  List<String> get categoryUA;
+  @override
+  String get topic;
+  @override
+  String get topicUA;
+  @override
+  String get status;
+  @override
+  DateTime get fetchDate;
   @override
   @ImageConverter()
-  List<ImageModel>? get image;
+  ImageModel? get image;
   @override
   @JsonKey(ignore: true)
   _$$InformationModelImplCopyWith<_$InformationModelImpl> get copyWith =>

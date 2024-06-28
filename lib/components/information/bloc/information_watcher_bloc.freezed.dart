@@ -22,8 +22,7 @@ mixin _$InformationWatcherEvent {
     required TResult Function(List<InformationModel> informationItemsModel)
         updated,
     required TResult Function() loadNextItems,
-    required TResult Function(String filter, bool isSelected) filter,
-    required TResult Function() filterReset,
+    required TResult Function(int filterIndex) filter,
     required TResult Function(dynamic failure) failure,
   }) =>
       throw _privateConstructorUsedError;
@@ -32,8 +31,7 @@ mixin _$InformationWatcherEvent {
     TResult? Function()? started,
     TResult? Function(List<InformationModel> informationItemsModel)? updated,
     TResult? Function()? loadNextItems,
-    TResult? Function(String filter, bool isSelected)? filter,
-    TResult? Function()? filterReset,
+    TResult? Function(int filterIndex)? filter,
     TResult? Function(dynamic failure)? failure,
   }) =>
       throw _privateConstructorUsedError;
@@ -42,8 +40,7 @@ mixin _$InformationWatcherEvent {
     TResult Function()? started,
     TResult Function(List<InformationModel> informationItemsModel)? updated,
     TResult Function()? loadNextItems,
-    TResult Function(String filter, bool isSelected)? filter,
-    TResult Function()? filterReset,
+    TResult Function(int filterIndex)? filter,
     TResult Function(dynamic failure)? failure,
     required TResult orElse(),
   }) =>
@@ -54,7 +51,6 @@ mixin _$InformationWatcherEvent {
     required TResult Function(_Updated value) updated,
     required TResult Function(_LoadNextItems value) loadNextItems,
     required TResult Function(_Filter value) filter,
-    required TResult Function(_FilterReset value) filterReset,
     required TResult Function(_Failure value) failure,
   }) =>
       throw _privateConstructorUsedError;
@@ -64,7 +60,6 @@ mixin _$InformationWatcherEvent {
     TResult? Function(_Updated value)? updated,
     TResult? Function(_LoadNextItems value)? loadNextItems,
     TResult? Function(_Filter value)? filter,
-    TResult? Function(_FilterReset value)? filterReset,
     TResult? Function(_Failure value)? failure,
   }) =>
       throw _privateConstructorUsedError;
@@ -74,7 +69,6 @@ mixin _$InformationWatcherEvent {
     TResult Function(_Updated value)? updated,
     TResult Function(_LoadNextItems value)? loadNextItems,
     TResult Function(_Filter value)? filter,
-    TResult Function(_FilterReset value)? filterReset,
     TResult Function(_Failure value)? failure,
     required TResult orElse(),
   }) =>
@@ -142,8 +136,7 @@ class _$StartedImpl implements _Started {
     required TResult Function(List<InformationModel> informationItemsModel)
         updated,
     required TResult Function() loadNextItems,
-    required TResult Function(String filter, bool isSelected) filter,
-    required TResult Function() filterReset,
+    required TResult Function(int filterIndex) filter,
     required TResult Function(dynamic failure) failure,
   }) {
     return started();
@@ -155,8 +148,7 @@ class _$StartedImpl implements _Started {
     TResult? Function()? started,
     TResult? Function(List<InformationModel> informationItemsModel)? updated,
     TResult? Function()? loadNextItems,
-    TResult? Function(String filter, bool isSelected)? filter,
-    TResult? Function()? filterReset,
+    TResult? Function(int filterIndex)? filter,
     TResult? Function(dynamic failure)? failure,
   }) {
     return started?.call();
@@ -168,8 +160,7 @@ class _$StartedImpl implements _Started {
     TResult Function()? started,
     TResult Function(List<InformationModel> informationItemsModel)? updated,
     TResult Function()? loadNextItems,
-    TResult Function(String filter, bool isSelected)? filter,
-    TResult Function()? filterReset,
+    TResult Function(int filterIndex)? filter,
     TResult Function(dynamic failure)? failure,
     required TResult orElse(),
   }) {
@@ -186,7 +177,6 @@ class _$StartedImpl implements _Started {
     required TResult Function(_Updated value) updated,
     required TResult Function(_LoadNextItems value) loadNextItems,
     required TResult Function(_Filter value) filter,
-    required TResult Function(_FilterReset value) filterReset,
     required TResult Function(_Failure value) failure,
   }) {
     return started(this);
@@ -199,7 +189,6 @@ class _$StartedImpl implements _Started {
     TResult? Function(_Updated value)? updated,
     TResult? Function(_LoadNextItems value)? loadNextItems,
     TResult? Function(_Filter value)? filter,
-    TResult? Function(_FilterReset value)? filterReset,
     TResult? Function(_Failure value)? failure,
   }) {
     return started?.call(this);
@@ -212,7 +201,6 @@ class _$StartedImpl implements _Started {
     TResult Function(_Updated value)? updated,
     TResult Function(_LoadNextItems value)? loadNextItems,
     TResult Function(_Filter value)? filter,
-    TResult Function(_FilterReset value)? filterReset,
     TResult Function(_Failure value)? failure,
     required TResult orElse(),
   }) {
@@ -304,8 +292,7 @@ class _$UpdatedImpl implements _Updated {
     required TResult Function(List<InformationModel> informationItemsModel)
         updated,
     required TResult Function() loadNextItems,
-    required TResult Function(String filter, bool isSelected) filter,
-    required TResult Function() filterReset,
+    required TResult Function(int filterIndex) filter,
     required TResult Function(dynamic failure) failure,
   }) {
     return updated(informationItemsModel);
@@ -317,8 +304,7 @@ class _$UpdatedImpl implements _Updated {
     TResult? Function()? started,
     TResult? Function(List<InformationModel> informationItemsModel)? updated,
     TResult? Function()? loadNextItems,
-    TResult? Function(String filter, bool isSelected)? filter,
-    TResult? Function()? filterReset,
+    TResult? Function(int filterIndex)? filter,
     TResult? Function(dynamic failure)? failure,
   }) {
     return updated?.call(informationItemsModel);
@@ -330,8 +316,7 @@ class _$UpdatedImpl implements _Updated {
     TResult Function()? started,
     TResult Function(List<InformationModel> informationItemsModel)? updated,
     TResult Function()? loadNextItems,
-    TResult Function(String filter, bool isSelected)? filter,
-    TResult Function()? filterReset,
+    TResult Function(int filterIndex)? filter,
     TResult Function(dynamic failure)? failure,
     required TResult orElse(),
   }) {
@@ -348,7 +333,6 @@ class _$UpdatedImpl implements _Updated {
     required TResult Function(_Updated value) updated,
     required TResult Function(_LoadNextItems value) loadNextItems,
     required TResult Function(_Filter value) filter,
-    required TResult Function(_FilterReset value) filterReset,
     required TResult Function(_Failure value) failure,
   }) {
     return updated(this);
@@ -361,7 +345,6 @@ class _$UpdatedImpl implements _Updated {
     TResult? Function(_Updated value)? updated,
     TResult? Function(_LoadNextItems value)? loadNextItems,
     TResult? Function(_Filter value)? filter,
-    TResult? Function(_FilterReset value)? filterReset,
     TResult? Function(_Failure value)? failure,
   }) {
     return updated?.call(this);
@@ -374,7 +357,6 @@ class _$UpdatedImpl implements _Updated {
     TResult Function(_Updated value)? updated,
     TResult Function(_LoadNextItems value)? loadNextItems,
     TResult Function(_Filter value)? filter,
-    TResult Function(_FilterReset value)? filterReset,
     TResult Function(_Failure value)? failure,
     required TResult orElse(),
   }) {
@@ -437,8 +419,7 @@ class _$LoadNextItemsImpl implements _LoadNextItems {
     required TResult Function(List<InformationModel> informationItemsModel)
         updated,
     required TResult Function() loadNextItems,
-    required TResult Function(String filter, bool isSelected) filter,
-    required TResult Function() filterReset,
+    required TResult Function(int filterIndex) filter,
     required TResult Function(dynamic failure) failure,
   }) {
     return loadNextItems();
@@ -450,8 +431,7 @@ class _$LoadNextItemsImpl implements _LoadNextItems {
     TResult? Function()? started,
     TResult? Function(List<InformationModel> informationItemsModel)? updated,
     TResult? Function()? loadNextItems,
-    TResult? Function(String filter, bool isSelected)? filter,
-    TResult? Function()? filterReset,
+    TResult? Function(int filterIndex)? filter,
     TResult? Function(dynamic failure)? failure,
   }) {
     return loadNextItems?.call();
@@ -463,8 +443,7 @@ class _$LoadNextItemsImpl implements _LoadNextItems {
     TResult Function()? started,
     TResult Function(List<InformationModel> informationItemsModel)? updated,
     TResult Function()? loadNextItems,
-    TResult Function(String filter, bool isSelected)? filter,
-    TResult Function()? filterReset,
+    TResult Function(int filterIndex)? filter,
     TResult Function(dynamic failure)? failure,
     required TResult orElse(),
   }) {
@@ -481,7 +460,6 @@ class _$LoadNextItemsImpl implements _LoadNextItems {
     required TResult Function(_Updated value) updated,
     required TResult Function(_LoadNextItems value) loadNextItems,
     required TResult Function(_Filter value) filter,
-    required TResult Function(_FilterReset value) filterReset,
     required TResult Function(_Failure value) failure,
   }) {
     return loadNextItems(this);
@@ -494,7 +472,6 @@ class _$LoadNextItemsImpl implements _LoadNextItems {
     TResult? Function(_Updated value)? updated,
     TResult? Function(_LoadNextItems value)? loadNextItems,
     TResult? Function(_Filter value)? filter,
-    TResult? Function(_FilterReset value)? filterReset,
     TResult? Function(_Failure value)? failure,
   }) {
     return loadNextItems?.call(this);
@@ -507,7 +484,6 @@ class _$LoadNextItemsImpl implements _LoadNextItems {
     TResult Function(_Updated value)? updated,
     TResult Function(_LoadNextItems value)? loadNextItems,
     TResult Function(_Filter value)? filter,
-    TResult Function(_FilterReset value)? filterReset,
     TResult Function(_Failure value)? failure,
     required TResult orElse(),
   }) {
@@ -528,7 +504,7 @@ abstract class _$$FilterImplCopyWith<$Res> {
           _$FilterImpl value, $Res Function(_$FilterImpl) then) =
       __$$FilterImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String filter, bool isSelected});
+  $Res call({int filterIndex});
 }
 
 /// @nodoc
@@ -542,18 +518,13 @@ class __$$FilterImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? filter = null,
-    Object? isSelected = null,
+    Object? filterIndex = null,
   }) {
     return _then(_$FilterImpl(
-      filter: null == filter
-          ? _value.filter
-          : filter // ignore: cast_nullable_to_non_nullable
-              as String,
-      isSelected: null == isSelected
-          ? _value.isSelected
-          : isSelected // ignore: cast_nullable_to_non_nullable
-              as bool,
+      null == filterIndex
+          ? _value.filterIndex
+          : filterIndex // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -561,16 +532,14 @@ class __$$FilterImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$FilterImpl implements _Filter {
-  const _$FilterImpl({required this.filter, required this.isSelected});
+  const _$FilterImpl(this.filterIndex);
 
   @override
-  final String filter;
-  @override
-  final bool isSelected;
+  final int filterIndex;
 
   @override
   String toString() {
-    return 'InformationWatcherEvent.filter(filter: $filter, isSelected: $isSelected)';
+    return 'InformationWatcherEvent.filter(filterIndex: $filterIndex)';
   }
 
   @override
@@ -578,13 +547,12 @@ class _$FilterImpl implements _Filter {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$FilterImpl &&
-            (identical(other.filter, filter) || other.filter == filter) &&
-            (identical(other.isSelected, isSelected) ||
-                other.isSelected == isSelected));
+            (identical(other.filterIndex, filterIndex) ||
+                other.filterIndex == filterIndex));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, filter, isSelected);
+  int get hashCode => Object.hash(runtimeType, filterIndex);
 
   @JsonKey(ignore: true)
   @override
@@ -599,11 +567,10 @@ class _$FilterImpl implements _Filter {
     required TResult Function(List<InformationModel> informationItemsModel)
         updated,
     required TResult Function() loadNextItems,
-    required TResult Function(String filter, bool isSelected) filter,
-    required TResult Function() filterReset,
+    required TResult Function(int filterIndex) filter,
     required TResult Function(dynamic failure) failure,
   }) {
-    return filter(this.filter, isSelected);
+    return filter(filterIndex);
   }
 
   @override
@@ -612,11 +579,10 @@ class _$FilterImpl implements _Filter {
     TResult? Function()? started,
     TResult? Function(List<InformationModel> informationItemsModel)? updated,
     TResult? Function()? loadNextItems,
-    TResult? Function(String filter, bool isSelected)? filter,
-    TResult? Function()? filterReset,
+    TResult? Function(int filterIndex)? filter,
     TResult? Function(dynamic failure)? failure,
   }) {
-    return filter?.call(this.filter, isSelected);
+    return filter?.call(filterIndex);
   }
 
   @override
@@ -625,13 +591,12 @@ class _$FilterImpl implements _Filter {
     TResult Function()? started,
     TResult Function(List<InformationModel> informationItemsModel)? updated,
     TResult Function()? loadNextItems,
-    TResult Function(String filter, bool isSelected)? filter,
-    TResult Function()? filterReset,
+    TResult Function(int filterIndex)? filter,
     TResult Function(dynamic failure)? failure,
     required TResult orElse(),
   }) {
     if (filter != null) {
-      return filter(this.filter, isSelected);
+      return filter(filterIndex);
     }
     return orElse();
   }
@@ -643,7 +608,6 @@ class _$FilterImpl implements _Filter {
     required TResult Function(_Updated value) updated,
     required TResult Function(_LoadNextItems value) loadNextItems,
     required TResult Function(_Filter value) filter,
-    required TResult Function(_FilterReset value) filterReset,
     required TResult Function(_Failure value) failure,
   }) {
     return filter(this);
@@ -656,7 +620,6 @@ class _$FilterImpl implements _Filter {
     TResult? Function(_Updated value)? updated,
     TResult? Function(_LoadNextItems value)? loadNextItems,
     TResult? Function(_Filter value)? filter,
-    TResult? Function(_FilterReset value)? filterReset,
     TResult? Function(_Failure value)? failure,
   }) {
     return filter?.call(this);
@@ -669,7 +632,6 @@ class _$FilterImpl implements _Filter {
     TResult Function(_Updated value)? updated,
     TResult Function(_LoadNextItems value)? loadNextItems,
     TResult Function(_Filter value)? filter,
-    TResult Function(_FilterReset value)? filterReset,
     TResult Function(_Failure value)? failure,
     required TResult orElse(),
   }) {
@@ -681,142 +643,12 @@ class _$FilterImpl implements _Filter {
 }
 
 abstract class _Filter implements InformationWatcherEvent {
-  const factory _Filter(
-      {required final String filter,
-      required final bool isSelected}) = _$FilterImpl;
+  const factory _Filter(final int filterIndex) = _$FilterImpl;
 
-  String get filter;
-  bool get isSelected;
+  int get filterIndex;
   @JsonKey(ignore: true)
   _$$FilterImplCopyWith<_$FilterImpl> get copyWith =>
       throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$FilterResetImplCopyWith<$Res> {
-  factory _$$FilterResetImplCopyWith(
-          _$FilterResetImpl value, $Res Function(_$FilterResetImpl) then) =
-      __$$FilterResetImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$FilterResetImplCopyWithImpl<$Res>
-    extends _$InformationWatcherEventCopyWithImpl<$Res, _$FilterResetImpl>
-    implements _$$FilterResetImplCopyWith<$Res> {
-  __$$FilterResetImplCopyWithImpl(
-      _$FilterResetImpl _value, $Res Function(_$FilterResetImpl) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$FilterResetImpl implements _FilterReset {
-  const _$FilterResetImpl();
-
-  @override
-  String toString() {
-    return 'InformationWatcherEvent.filterReset()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$FilterResetImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() started,
-    required TResult Function(List<InformationModel> informationItemsModel)
-        updated,
-    required TResult Function() loadNextItems,
-    required TResult Function(String filter, bool isSelected) filter,
-    required TResult Function() filterReset,
-    required TResult Function(dynamic failure) failure,
-  }) {
-    return filterReset();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
-    TResult? Function(List<InformationModel> informationItemsModel)? updated,
-    TResult? Function()? loadNextItems,
-    TResult? Function(String filter, bool isSelected)? filter,
-    TResult? Function()? filterReset,
-    TResult? Function(dynamic failure)? failure,
-  }) {
-    return filterReset?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
-    TResult Function(List<InformationModel> informationItemsModel)? updated,
-    TResult Function()? loadNextItems,
-    TResult Function(String filter, bool isSelected)? filter,
-    TResult Function()? filterReset,
-    TResult Function(dynamic failure)? failure,
-    required TResult orElse(),
-  }) {
-    if (filterReset != null) {
-      return filterReset();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
-    required TResult Function(_Updated value) updated,
-    required TResult Function(_LoadNextItems value) loadNextItems,
-    required TResult Function(_Filter value) filter,
-    required TResult Function(_FilterReset value) filterReset,
-    required TResult Function(_Failure value) failure,
-  }) {
-    return filterReset(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Started value)? started,
-    TResult? Function(_Updated value)? updated,
-    TResult? Function(_LoadNextItems value)? loadNextItems,
-    TResult? Function(_Filter value)? filter,
-    TResult? Function(_FilterReset value)? filterReset,
-    TResult? Function(_Failure value)? failure,
-  }) {
-    return filterReset?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
-    TResult Function(_Updated value)? updated,
-    TResult Function(_LoadNextItems value)? loadNextItems,
-    TResult Function(_Filter value)? filter,
-    TResult Function(_FilterReset value)? filterReset,
-    TResult Function(_Failure value)? failure,
-    required TResult orElse(),
-  }) {
-    if (filterReset != null) {
-      return filterReset(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _FilterReset implements InformationWatcherEvent {
-  const factory _FilterReset() = _$FilterResetImpl;
 }
 
 /// @nodoc
@@ -888,8 +720,7 @@ class _$FailureImpl implements _Failure {
     required TResult Function(List<InformationModel> informationItemsModel)
         updated,
     required TResult Function() loadNextItems,
-    required TResult Function(String filter, bool isSelected) filter,
-    required TResult Function() filterReset,
+    required TResult Function(int filterIndex) filter,
     required TResult Function(dynamic failure) failure,
   }) {
     return failure(this.failure);
@@ -901,8 +732,7 @@ class _$FailureImpl implements _Failure {
     TResult? Function()? started,
     TResult? Function(List<InformationModel> informationItemsModel)? updated,
     TResult? Function()? loadNextItems,
-    TResult? Function(String filter, bool isSelected)? filter,
-    TResult? Function()? filterReset,
+    TResult? Function(int filterIndex)? filter,
     TResult? Function(dynamic failure)? failure,
   }) {
     return failure?.call(this.failure);
@@ -914,8 +744,7 @@ class _$FailureImpl implements _Failure {
     TResult Function()? started,
     TResult Function(List<InformationModel> informationItemsModel)? updated,
     TResult Function()? loadNextItems,
-    TResult Function(String filter, bool isSelected)? filter,
-    TResult Function()? filterReset,
+    TResult Function(int filterIndex)? filter,
     TResult Function(dynamic failure)? failure,
     required TResult orElse(),
   }) {
@@ -932,7 +761,6 @@ class _$FailureImpl implements _Failure {
     required TResult Function(_Updated value) updated,
     required TResult Function(_LoadNextItems value) loadNextItems,
     required TResult Function(_Filter value) filter,
-    required TResult Function(_FilterReset value) filterReset,
     required TResult Function(_Failure value) failure,
   }) {
     return failure(this);
@@ -945,7 +773,6 @@ class _$FailureImpl implements _Failure {
     TResult? Function(_Updated value)? updated,
     TResult? Function(_LoadNextItems value)? loadNextItems,
     TResult? Function(_Filter value)? filter,
-    TResult? Function(_FilterReset value)? filterReset,
     TResult? Function(_Failure value)? failure,
   }) {
     return failure?.call(this);
@@ -958,7 +785,6 @@ class _$FailureImpl implements _Failure {
     TResult Function(_Updated value)? updated,
     TResult Function(_LoadNextItems value)? loadNextItems,
     TResult Function(_Filter value)? filter,
-    TResult Function(_FilterReset value)? filterReset,
     TResult Function(_Failure value)? failure,
     required TResult orElse(),
   }) {
@@ -984,7 +810,7 @@ mixin _$InformationWatcherState {
       throw _privateConstructorUsedError;
   List<InformationModel> get filteredInformationModelItems =>
       throw _privateConstructorUsedError;
-  List<String>? get filters => throw _privateConstructorUsedError;
+  List<int> get filtersIndex => throw _privateConstructorUsedError;
   LoadingStatus get loadingStatus => throw _privateConstructorUsedError;
   int get itemsLoaded => throw _privateConstructorUsedError;
   InformationFailure? get failure => throw _privateConstructorUsedError;
@@ -1003,7 +829,7 @@ abstract class $InformationWatcherStateCopyWith<$Res> {
   $Res call(
       {List<InformationModel> informationModelItems,
       List<InformationModel> filteredInformationModelItems,
-      List<String>? filters,
+      List<int> filtersIndex,
       LoadingStatus loadingStatus,
       int itemsLoaded,
       InformationFailure? failure});
@@ -1025,7 +851,7 @@ class _$InformationWatcherStateCopyWithImpl<$Res,
   $Res call({
     Object? informationModelItems = null,
     Object? filteredInformationModelItems = null,
-    Object? filters = freezed,
+    Object? filtersIndex = null,
     Object? loadingStatus = null,
     Object? itemsLoaded = null,
     Object? failure = freezed,
@@ -1039,10 +865,10 @@ class _$InformationWatcherStateCopyWithImpl<$Res,
           ? _value.filteredInformationModelItems
           : filteredInformationModelItems // ignore: cast_nullable_to_non_nullable
               as List<InformationModel>,
-      filters: freezed == filters
-          ? _value.filters
-          : filters // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
+      filtersIndex: null == filtersIndex
+          ? _value.filtersIndex
+          : filtersIndex // ignore: cast_nullable_to_non_nullable
+              as List<int>,
       loadingStatus: null == loadingStatus
           ? _value.loadingStatus
           : loadingStatus // ignore: cast_nullable_to_non_nullable
@@ -1070,7 +896,7 @@ abstract class _$$InitialImplCopyWith<$Res>
   $Res call(
       {List<InformationModel> informationModelItems,
       List<InformationModel> filteredInformationModelItems,
-      List<String>? filters,
+      List<int> filtersIndex,
       LoadingStatus loadingStatus,
       int itemsLoaded,
       InformationFailure? failure});
@@ -1089,7 +915,7 @@ class __$$InitialImplCopyWithImpl<$Res>
   $Res call({
     Object? informationModelItems = null,
     Object? filteredInformationModelItems = null,
-    Object? filters = freezed,
+    Object? filtersIndex = null,
     Object? loadingStatus = null,
     Object? itemsLoaded = null,
     Object? failure = freezed,
@@ -1103,10 +929,10 @@ class __$$InitialImplCopyWithImpl<$Res>
           ? _value._filteredInformationModelItems
           : filteredInformationModelItems // ignore: cast_nullable_to_non_nullable
               as List<InformationModel>,
-      filters: freezed == filters
-          ? _value._filters
-          : filters // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
+      filtersIndex: null == filtersIndex
+          ? _value._filtersIndex
+          : filtersIndex // ignore: cast_nullable_to_non_nullable
+              as List<int>,
       loadingStatus: null == loadingStatus
           ? _value.loadingStatus
           : loadingStatus // ignore: cast_nullable_to_non_nullable
@@ -1129,13 +955,13 @@ class _$InitialImpl implements _Initial {
   const _$InitialImpl(
       {required final List<InformationModel> informationModelItems,
       required final List<InformationModel> filteredInformationModelItems,
-      required final List<String>? filters,
+      required final List<int> filtersIndex,
       required this.loadingStatus,
       required this.itemsLoaded,
       required this.failure})
       : _informationModelItems = informationModelItems,
         _filteredInformationModelItems = filteredInformationModelItems,
-        _filters = filters;
+        _filtersIndex = filtersIndex;
 
   final List<InformationModel> _informationModelItems;
   @override
@@ -1155,14 +981,12 @@ class _$InitialImpl implements _Initial {
     return EqualUnmodifiableListView(_filteredInformationModelItems);
   }
 
-  final List<String>? _filters;
+  final List<int> _filtersIndex;
   @override
-  List<String>? get filters {
-    final value = _filters;
-    if (value == null) return null;
-    if (_filters is EqualUnmodifiableListView) return _filters;
+  List<int> get filtersIndex {
+    if (_filtersIndex is EqualUnmodifiableListView) return _filtersIndex;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
+    return EqualUnmodifiableListView(_filtersIndex);
   }
 
   @override
@@ -1174,7 +998,7 @@ class _$InitialImpl implements _Initial {
 
   @override
   String toString() {
-    return 'InformationWatcherState(informationModelItems: $informationModelItems, filteredInformationModelItems: $filteredInformationModelItems, filters: $filters, loadingStatus: $loadingStatus, itemsLoaded: $itemsLoaded, failure: $failure)';
+    return 'InformationWatcherState(informationModelItems: $informationModelItems, filteredInformationModelItems: $filteredInformationModelItems, filtersIndex: $filtersIndex, loadingStatus: $loadingStatus, itemsLoaded: $itemsLoaded, failure: $failure)';
   }
 
   @override
@@ -1187,7 +1011,8 @@ class _$InitialImpl implements _Initial {
             const DeepCollectionEquality().equals(
                 other._filteredInformationModelItems,
                 _filteredInformationModelItems) &&
-            const DeepCollectionEquality().equals(other._filters, _filters) &&
+            const DeepCollectionEquality()
+                .equals(other._filtersIndex, _filtersIndex) &&
             (identical(other.loadingStatus, loadingStatus) ||
                 other.loadingStatus == loadingStatus) &&
             (identical(other.itemsLoaded, itemsLoaded) ||
@@ -1200,7 +1025,7 @@ class _$InitialImpl implements _Initial {
       runtimeType,
       const DeepCollectionEquality().hash(_informationModelItems),
       const DeepCollectionEquality().hash(_filteredInformationModelItems),
-      const DeepCollectionEquality().hash(_filters),
+      const DeepCollectionEquality().hash(_filtersIndex),
       loadingStatus,
       itemsLoaded,
       failure);
@@ -1216,7 +1041,7 @@ abstract class _Initial implements InformationWatcherState {
   const factory _Initial(
       {required final List<InformationModel> informationModelItems,
       required final List<InformationModel> filteredInformationModelItems,
-      required final List<String>? filters,
+      required final List<int> filtersIndex,
       required final LoadingStatus loadingStatus,
       required final int itemsLoaded,
       required final InformationFailure? failure}) = _$InitialImpl;
@@ -1226,7 +1051,7 @@ abstract class _Initial implements InformationWatcherState {
   @override
   List<InformationModel> get filteredInformationModelItems;
   @override
-  List<String>? get filters;
+  List<int> get filtersIndex;
   @override
   LoadingStatus get loadingStatus;
   @override

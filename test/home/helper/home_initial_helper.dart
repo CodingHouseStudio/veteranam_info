@@ -2,18 +2,16 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:kozak/shared/shared.dart';
 
 import '../../text_dependency.dart';
+import 'helper.dart';
 
 Future<void> homeInitialHelper(
   WidgetTester tester,
 ) async {
-  await changeWindowSizeHelper(
+  await homeChangeWindowSizeHelper(
+    isMobile: true,
+    tabletTest: true,
     tester: tester,
     test: () async {
-      await nawbarHelper(
-        tester: tester,
-        searchText: KTestText.field,
-      );
-
       expect(
         find.byKey(KWidgetkeys.screen.home.box),
         findsOneWidget,
@@ -159,7 +157,7 @@ Future<void> homeInitialHelper(
 
       await questionHelper(tester);
 
-      // await feedbackHelper(tester);
+      await dialogFailureGetHelper(tester: tester, isFailure: false);
 
       await scrollingHelper(
         tester: tester,

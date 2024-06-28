@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kozak/shared/shared.dart';
+import 'package:share_plus/share_plus.dart';
 
 class DiscountsCardWidget extends StatelessWidget {
   const DiscountsCardWidget({
@@ -26,7 +26,7 @@ class DiscountsCardWidget extends StatelessWidget {
           Row(
             children: [
               Text(
-                discountItem.percent,
+                discountItem.company ?? context.l10n.companyIsHidden,
                 key: KWidgetkeys.widget.discountCard.discount,
                 style: isDesk ? AppTextStyle.text40 : AppTextStyle.text18,
                 overflow: TextOverflow.clip,
@@ -34,7 +34,7 @@ class DiscountsCardWidget extends StatelessWidget {
               const Spacer(),
               Expanded(
                 child: Text(
-                  discountItem.service,
+                  discountItem.title,
                   key: KWidgetkeys.widget.discountCard.service,
                   style: isDesk ? AppTextStyle.text40 : AppTextStyle.text18,
                   overflow: TextOverflow.clip,
@@ -46,16 +46,20 @@ class DiscountsCardWidget extends StatelessWidget {
           if (isDesk)
             Row(
               children: [
-                Text(
-                  discountItem.date.toLocalDateString(),
-                  key: KWidgetkeys.widget.discountCard.date,
-                  style: AppTextStyle.hint24,
+                Expanded(
+                  child: Text(
+                    discountItem.dateVerified.toLocalDateString(),
+                    key: KWidgetkeys.widget.discountCard.date,
+                    style: AppTextStyle.hint24,
+                  ),
                 ),
-                const Spacer(),
-                Text(
-                  discountItem.city,
-                  key: KWidgetkeys.widget.discountCard.city,
-                  style: AppTextStyle.hint24,
+                Expanded(
+                  child: Text(
+                    discountItem.location?.first ?? context.l10n.online,
+                    key: KWidgetkeys.widget.discountCard.city,
+                    style: AppTextStyle.hint24,
+                    textAlign: TextAlign.end,
+                  ),
                 ),
               ],
             )
@@ -64,12 +68,12 @@ class DiscountsCardWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  discountItem.date.toLocalDateString(),
+                  discountItem.dateVerified.toLocalDateString(),
                   key: KWidgetkeys.widget.discountCard.date,
                   style: AppTextStyle.hint24,
                 ),
                 Text(
-                  discountItem.city,
+                  discountItem.location?.first ?? context.l10n.online,
                   key: KWidgetkeys.widget.discountCard.city,
                   style: AppTextStyle.hint24,
                 ),
@@ -77,7 +81,7 @@ class DiscountsCardWidget extends StatelessWidget {
             ),
           KSizedBox.kHeightSizedBox4,
           Text(
-            discountItem.comment,
+            discountItem.description,
             key: KWidgetkeys.widget.discountCard.description,
             style: isDesk ? AppTextStyle.text24 : AppTextStyle.text14,
           ),
@@ -89,13 +93,14 @@ class DiscountsCardWidget extends StatelessWidget {
           ),
           KSizedBox.kHeightSizedBox16,
           CardTextDetailWidget(
-            text: discountItem.instruction,
+            text: discountItem.requirements,
             maxLines: 1,
             icon: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                  child: KIcon.share,
+                IconButton(
+                  onPressed: _discountsShareLink,
+                  icon: KIcon.share,
                 ),
                 KSizedBox.kWidthSizedBox16,
                 Container(
@@ -108,6 +113,15 @@ class DiscountsCardWidget extends StatelessWidget {
           KSizedBox.kHeightSizedBox16,
         ],
       ),
+    );
+  }
+
+  Future<void> _discountsShareLink() async {
+    // final discountsLink = Uri.parse(
+    //   discountItem.directLink,
+    // );
+    await Share.share(
+      discountItem.directLink ?? discountItem.link,
     );
   }
 }

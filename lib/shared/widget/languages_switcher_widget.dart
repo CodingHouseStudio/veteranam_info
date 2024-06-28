@@ -7,34 +7,66 @@ class LanguagesSwitcherWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PopupMenuButton<String>(
-      key: KWidgetkeys.widget.languageSwitcher.widget,
-      child: Container(
-        decoration: KWidgetTheme.boxDecorationCircular,
-        padding: const EdgeInsets.all(
-          KPadding.kPaddingSize12,
-        ),
-        child: Text(
-          context.l10n.localeName.getLocale.text,
-          key: KWidgetkeys.widget.languageSwitcher.text,
-          style: AppTextStyle.materialThemeTitleMedium,
-        ),
-      ),
-      onSelected: (value) => context
-          .read<AuthenticationBloc>()
-          .add(AppLanguageChanged(value.getLocale)),
-      itemBuilder: (BuildContext context) {
-        final languages = LanguageExtension.getAllLanguage;
-        return List.generate(languages.length, (index) {
-          return PopupMenuItem<String>(
-            key: KWidgetkeys.widget.languageSwitcher.item,
-            value: languages.elementAt(index).text,
-            enabled: languages.elementAt(index).value.languageCode !=
-                context.l10n.localeName,
-            child: Text(languages.elementAt(index).text),
-          );
-        }).toList();
+    return BlocBuilder<AuthenticationBloc, AuthenticationState>(
+      builder: (context, state) {
+        return IconButton(
+          key: KWidgetkeys.widget.languageSwitcher.widget,
+          style: KButtonStyles.boxButtonStyle,
+          onPressed: () {
+            context.read<AuthenticationBloc>().add(
+                  const AppLanguageChanged(),
+                );
+          },
+          icon: Container(
+            decoration: KWidgetTheme.boxDecorationWhiteMain,
+            child: Row(
+              key: KWidgetkeys.widget.languageSwitcher.item,
+              children: [
+                _buildLanguageOption(
+                  Language.ukrain.text,
+                  Language.ukrain == state.userSetting.locale,
+                ),
+                KSizedBox.kWidthSizedBox8,
+                _buildLanguageOption(
+                  Language.english.text,
+                  Language.english == state.userSetting.locale,
+                ),
+              ],
+            ),
+          ),
+        );
       },
+    );
+  }
+
+  Widget _buildLanguageOption(
+    String languageName,
+    bool isSelected,
+  ) {
+    return Column(
+      children: [
+        KSizedBox.kHeightSizedBox3,
+        Container(
+          decoration: isSelected
+              ? KWidgetTheme.boxDecorationBlackCircular
+              : KWidgetTheme.boxDecorationGrayCircular,
+          padding: const EdgeInsets.all(KPadding.kPaddingSize8),
+          child: Row(
+            children: [
+              KSizedBox.kWidthSizedBox4,
+              Text(
+                languageName,
+                key: KWidgetkeys.widget.languageSwitcher.text,
+                style: isSelected
+                    ? AppTextStyle.materialThemeTitleMediumNeutral
+                    : AppTextStyle.materialThemeTitleMedium,
+              ),
+              KSizedBox.kWidthSizedBox4,
+            ],
+          ),
+        ),
+        KSizedBox.kHeightSizedBox2,
+      ],
     );
   }
 }

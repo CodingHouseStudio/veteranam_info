@@ -38,10 +38,10 @@ Future<void> workEmployeeInitialHelper(
         offset: KTestConstants.scrollingDown,
       );
 
-      await scrollingHelper(
-        tester: tester,
-        offset: KTestConstants.scrollingUp1000,
-      );
+      // await scrollingHelper(
+      //   tester: tester,
+      //   offset: KTestConstants.scrollingUp1000,
+      // );
 
       expect(
         find.byKey(KWidgetkeys.screen.workEmployee.requestCard),

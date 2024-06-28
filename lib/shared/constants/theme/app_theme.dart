@@ -3,15 +3,15 @@ import 'package:kozak/shared/shared.dart';
 
 ThemeData themeData = ThemeData(
   colorScheme: const ColorScheme(
-    primary: AppColors.materialThemeBlack,
+    primary: AppColors.materialThemeKeyColorsSecondary,
     secondary: AppColors.materialThemeWhite,
     surface: AppColors.materialThemeWhite,
-    background: AppColors.materialThemeWhite,
+    // background: AppColors.materialThemeWhite,
     error: AppColors.materialThemeRefErrorError50,
     onPrimary: AppColors.materialThemeWhite,
     onSecondary: AppColors.materialThemeWhite,
-    onSurface: AppColors.materialThemeBlack,
-    onBackground: AppColors.materialThemeBlack,
+    onSurface: AppColors.materialThemeKeyColorsSecondary,
+    // onBackground: AppColors.materialThemeKeyColorsSecondary,
     onError: AppColors.materialThemeWhite,
     brightness: Brightness.light,
   ),
@@ -20,13 +20,20 @@ ThemeData themeData = ThemeData(
     backgroundColor: AppColors.materialThemeKeyColorsNeutralVariant,
     elevation: 0,
   ),
-  iconButtonTheme: IconButtonThemeData(
+  iconButtonTheme: const IconButtonThemeData(
     style: ButtonStyle(
-      backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent),
-      foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
-      overlayColor: MaterialStateProperty.all<Color>(Colors.transparent),
+      backgroundColor: WidgetStatePropertyAll<Color>(Colors.transparent),
+      foregroundColor: WidgetStatePropertyAll<Color>(
+        AppColors.materialThemeKeyColorsSecondary,
+      ),
+      overlayColor: WidgetStatePropertyAll<Color>(Colors.transparent),
     ),
   ),
+  textTheme: const TextTheme()
+    ..apply(
+      bodyColor: AppColors.materialThemeKeyColorsSecondary,
+      displayColor: AppColors.materialThemeKeyColorsSecondary,
+    ),
   useMaterial3: true,
   buttonTheme: ButtonThemeData(
     colorScheme: ColorScheme.fromSwatch(

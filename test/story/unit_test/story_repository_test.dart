@@ -13,10 +13,13 @@ void main() {
     late IStoryRepository mockStoryRepository;
     late FirestoreService mockFirestoreService;
     late StorageService mockStorageService;
+    setUp(() {
+      ExtendedDateTime.id = '';
+      mockFirestoreService = MockFirestoreService();
+      mockStorageService = MockStorageService();
+    });
     group('${KGroupText.successfulGet} ', () {
       setUp(() {
-        mockFirestoreService = MockFirestoreService();
-        mockStorageService = MockStorageService();
         when(mockFirestoreService.getStories()).thenAnswer(
           (_) => Stream.value(KTestText.storyModelItems),
         );
@@ -40,15 +43,11 @@ void main() {
     });
     group('${KGroupText.failureGet} ', () {
       setUp(() {
-        ExtendedDateTime.id = '';
-        mockFirestoreService = MockFirestoreService();
         when(mockFirestoreService.getStories()).thenAnswer(
           (realInvocation) => Stream.error(
             KGroupText.failureGet,
           ),
         );
-        mockStorageService = MockStorageService();
-
         if (GetIt.I.isRegistered<FirestoreService>()) {
           GetIt.I.unregister<FirestoreService>();
         }

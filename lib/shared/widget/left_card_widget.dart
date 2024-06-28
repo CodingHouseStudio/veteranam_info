@@ -15,7 +15,7 @@ class LeftCardWidget extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         final isDesk =
-            constraints.maxWidth > KPlatformConstants.minWidthThresholdTablet;
+            constraints.maxWidth > KPlatformConstants.minWidthThresholdDesk;
         final widgetList = widgetListFunction(isDesk: isDesk);
         return Scaffold(
           backgroundColor:
@@ -75,11 +75,9 @@ class LeftCardWidget extends StatelessWidget {
               ),
               // Expanded(
               //   child: image != null
-              //       ? CachedNetworkImage(
+              //       ? ImageWidget(
               //           key: KWidgetkeys.widget.leftCard.image,
               //           imageUrl: KMockText.image,
-              //           placeholder: (context, url) => Image.asset(''),
-              //           errorWidget: (context, url, error) => KIcon.error,
               //           fit: BoxFit.fill,
               //         )
               //       : const SizedBox.shrink(),

@@ -5,11 +5,20 @@ abstract class KSizedBox {
   static const SizedBox kHeightSizedBox160 = SizedBox(
     height: KSize.kPixel160,
   );
+  static const SizedBox kHeightSizedBox132 = SizedBox(
+    height: KSize.kPixel132,
+  );
   static const SizedBox kHeightSizedBox120 = SizedBox(
     height: KSize.kPixel120,
   );
+  static const SizedBox kHeightSizedBox100 = SizedBox(
+    height: KSize.kPixel100,
+  );
   static const SizedBox kHeightSizedBox90 = SizedBox(
     height: KSize.kPixel90,
+  );
+  static const SizedBox kHeightSizedBox72 = SizedBox(
+    height: KSize.kPixel72,
   );
   static const SizedBox kHeightSizedBox64 = SizedBox(
     height: KSize.kPixel64,
@@ -44,6 +53,9 @@ abstract class KSizedBox {
   static const SizedBox kHeightSizedBox48 = SizedBox(
     height: KSize.kPixel48,
   );
+  static const SizedBox kHeightSizedBox50 = SizedBox(
+    height: KSize.kPixel50,
+  );
   static const SizedBox kHeightSizedBox56 = SizedBox(
     height: KSize.kPixel56,
   );
@@ -68,6 +80,9 @@ abstract class KSizedBox {
   static const SizedBox kHeightSizedBox3 = SizedBox(
     height: KSize.kPixel3,
   );
+  static const SizedBox kHeightSizedBox2 = SizedBox(
+    height: KSize.kPixel2,
+  );
   static const SizedBox kHeightSizedBox78 = SizedBox(
     height: KSize.kPixel78,
   );
@@ -87,8 +102,8 @@ abstract class KSizedBox {
   static const SizedBox kWidthSizedBox24 = SizedBox(
     width: KSize.kPixel24,
   );
-  static const SizedBox kWidthSizedBox73 = SizedBox(
-    width: KSize.kPixel73,
+  static const SizedBox kWidthSizedBox72 = SizedBox(
+    width: KSize.kPixel72,
   );
   static const SizedBox kWidthSizedBox30 = SizedBox(
     width: KSize.kPixel30,
@@ -114,6 +129,9 @@ abstract class KSizedBox {
   static const SizedBox kWidthSizedBox16 = SizedBox(
     width: KSize.kPixel16,
   );
+  static const SizedBox kWidthSizedBox12 = SizedBox(
+    width: KSize.kPixel12,
+  );
   static const SizedBox kWidthSizedBox8 = SizedBox(
     width: KSize.kPixel8,
   );
@@ -122,6 +140,9 @@ abstract class KSizedBox {
   );
   static const SizedBox kWidthSizedBox3 = SizedBox(
     width: KSize.kPixel3,
+  );
+  static const SizedBox kWidthSizedBox45 = SizedBox(
+    width: KSize.kPixel45,
   );
   static const SizedBox kWidthSizedBox80 = SizedBox(
     width: KSize.kPixel80,

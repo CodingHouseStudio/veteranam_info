@@ -26,11 +26,9 @@ class ScaffoldDecorationWidget extends StatelessWidget {
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
         final isDesk =
-            constraints.maxWidth > KPlatformConstants.minWidthThresholdTablet;
-        final mainChildWidget = mainChildWidgetsFunction(isDesk: isDesk);
-        final nawbarPadding = EdgeInsets.symmetric(
-          horizontal:
-              isDesk ? KPadding.kPaddingSize90 : KPadding.kPaddingSize16,
+            constraints.maxWidth > KPlatformConstants.minWidthThresholdDesk;
+        final mainChildWidget = mainChildWidgetsFunction(
+          isDesk: isDesk,
         );
         final padding = EdgeInsets.symmetric(
           horizontal: (isDesk
@@ -43,20 +41,17 @@ class ScaffoldDecorationWidget extends StatelessWidget {
                       : 0)
               : KPadding.kPaddingSize16),
         );
-        final footerList = FooterWidget.get(
-          context: context,
-          isDesk: isDesk,
-        );
+        // final footerList = FooterWidget.get(
+        //   context: context,
+        //   isDesk: isDesk,
+        // );
         return Scaffold(
           body: CustomScrollView(
             key: KWidgetkeys.widget.scaffold.scroll,
             slivers: [
-              SliverPadding(
-                padding: nawbarPadding,
-                sliver: SliverPersistentHeader(
-                  delegate: NawbarWidget(
-                    isDesk: isDesk,
-                  ),
+              SliverPersistentHeader(
+                delegate: NawbarWidget(
+                  isDesk: isDesk,
                 ),
               ),
               if (titleChildWidgetsFunction != null)
@@ -97,33 +92,33 @@ class ScaffoldDecorationWidget extends StatelessWidget {
                   ),
                 ),
               ),
-              SliverPadding(
-                padding: padding.copyWith(
-                  bottom: KPadding.kPaddingSize40,
-                ),
-                sliver: DecoratedSliver(
-                  decoration: KWidgetTheme.boxDecorationFooter,
-                  sliver: SliverPadding(
-                    padding: isDesk
-                        ? const EdgeInsets.all(KPadding.kPaddingSize48)
-                            .copyWith(left: KPadding.kPaddingSize46)
-                        : const EdgeInsets.symmetric(
-                            vertical: KPadding.kPaddingSize32,
-                            horizontal: KPadding.kPaddingSize16,
-                          ),
-                    sliver: SliverList.builder(
-                      key: KWidgetkeys.widget.footer.widget,
-                      addAutomaticKeepAlives: false,
-                      addRepaintBoundaries: false,
-                      itemBuilder: (context, index) =>
-                          footerList.elementAt(index),
-                      itemCount: footerList.length,
-                    ),
-                  ),
-                ),
-              ),
+              // SliverPadding(
+              //   padding: padding.copyWith(
+              //     bottom: KPadding.kPaddingSize40,
+              //   ),
+              //   sliver: DecoratedSliver(
+              //     decoration: KWidgetTheme.boxDecorationFooter,
+              //     sliver: SliverPadding(
+              //       padding: isDesk
+              //           ? const EdgeInsets.all(KPadding.kPaddingSize48)
+              //               .copyWith(left: KPadding.kPaddingSize46)
+              //           : const EdgeInsets.symmetric(
+              //               vertical: KPadding.kPaddingSize32,
+              //               horizontal: KPadding.kPaddingSize16,
+              //             ),
+              //       sliver: SliverList.builder(
+              //         key: KWidgetkeys.widget.footer.widget,
+              //         addAutomaticKeepAlives: false,
+              //         addRepaintBoundaries: false,
+              //         itemBuilder: (context, index) =>
+              //             footerList.elementAt(index),
+              //         itemCount: footerList.length,
+              //       ),
+              //     ),
+              //   ),
+              // ),
             ],
-            semanticChildCount: mainChildWidget.length,
+            semanticChildCount: mainChildWidget.length + 1,
           ),
         );
       },

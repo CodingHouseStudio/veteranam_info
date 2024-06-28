@@ -1,4 +1,5 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:flutter/foundation.dart' deferred as foundation;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -21,7 +22,9 @@ GoRouter router = GoRouter(
   observers: [
     FirebaseAnalyticsObserver(
       analytics: FirebaseAnalytics.instance,
-      onError: (_) => debugPrint('FirebaseAnalyticsObserver error $_'),
+      onError: (_) => foundation.kDebugMode
+          ? debugPrint('FirebaseAnalyticsObserver error $_')
+          : null,
     ),
   ],
   redirect: (BuildContext context, GoRouterState state) async {
@@ -104,6 +107,17 @@ GoRouter router = GoRouter(
             name: state.name,
             child: const DiscountsScreen(),
           ),
+          routes: [
+            GoRoute(
+              name: KRoute.myDiscounts.name,
+              path: KRoute.myDiscounts.path,
+              pageBuilder: (context, state) => NoTransitionPage(
+                key: state.pageKey,
+                name: state.name,
+                child: const MyDiscountsScreen(),
+              ),
+            ),
+          ],
         ),
         GoRoute(
           name: KRoute.stories.name,
@@ -236,6 +250,15 @@ GoRouter router = GoRouter(
         //   ),
         // ),
       ],
+    ),
+    GoRoute(
+      name: KRoute.feedback.name,
+      path: KRoute.feedback.path,
+      pageBuilder: (context, state) => NoTransitionPage(
+        key: state.pageKey,
+        name: state.name,
+        child: const FeedbackScreen(),
+      ),
     ),
   ],
 );
