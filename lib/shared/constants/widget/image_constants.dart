@@ -100,6 +100,7 @@ abstract class KImage {
   static final Image veteran5 = _get(
     'assets/images/veteran5.png',
   );
+
   // static const Image workImage = _get(
   //    'assets/images/work_image.png'),
   //   fit: BoxFit.fill,
