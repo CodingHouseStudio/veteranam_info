@@ -149,7 +149,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "iAmRelativeOfVeteran":
             MessageLookupByLibrary.simpleMessage("Я родич ветерана/-ки;"),
         "iAmVeteran": MessageLookupByLibrary.simpleMessage("Я ветеран/-ка;"),
-        "information": MessageLookupByLibrary.simpleMessage("Інфо"),
+        "information": MessageLookupByLibrary.simpleMessage("Інформація"),
         "informationNews":
             MessageLookupByLibrary.simpleMessage("Інформація і новини"),
         "informationNewsSubtitle": MessageLookupByLibrary.simpleMessage(
@@ -312,6 +312,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ця сторінка знаходиться на стадії розробки."),
         "upload": MessageLookupByLibrary.simpleMessage("Завантажити"),
         "us": MessageLookupByLibrary.simpleMessage("нам"),
+        "verifiedInformation":
+            MessageLookupByLibrary.simpleMessage("Перевірена інформація"),
         "wage": MessageLookupByLibrary.simpleMessage("Заробітна плата*"),
         "whatKindOfProject":
             MessageLookupByLibrary.simpleMessage("Що це за проект?"),

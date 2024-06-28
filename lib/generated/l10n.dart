@@ -2130,6 +2130,16 @@ class AppLocalizations {
     );
   }
 
+  /// `Verified information`
+  String get verifiedInformation {
+    return Intl.message(
+      'Verified information',
+      name: 'verifiedInformation',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `We're sorry, there was an unforeseen error.`
   String get error {
     return Intl.message(

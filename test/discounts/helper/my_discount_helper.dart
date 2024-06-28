@@ -4,7 +4,7 @@ import 'package:mocktail/mocktail.dart';
 
 import '../../text_dependency.dart';
 
-Future<void> myDIscountHelper({
+Future<void> myDiscountHelper({
   required WidgetTester tester,
   required MockGoRouter mockGoRouter,
 }) async {

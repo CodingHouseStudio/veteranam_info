@@ -87,8 +87,8 @@ class FirestoreService {
         (snapshot) {
           for (final change in snapshot.docChanges) {
             if (change.type == DocumentChangeType.added) {
-              final source =
-                  (snapshot.metadata.isFromCache) ? 'local cache' : 'server';
+              // final source =
+              //     (snapshot.metadata.isFromCache) ? 'local cache' : 'server';
               // debugPrint('Data fetched from $source}');
             }
           }
@@ -122,8 +122,8 @@ class FirestoreService {
           .map(
         (snapshot) {
           if (snapshot.exists) {
-            final source =
-                (snapshot.metadata.isFromCache) ? 'local cache' : 'server';
+            // final source =
+            //     (snapshot.metadata.isFromCache) ? 'local cache' : 'server';
             // debugPrint('Data fetched from $source}');
             return UserSetting.fromJson(snapshot.data()!);
           } else {
@@ -148,8 +148,8 @@ class FirestoreService {
         (snapshot) {
           for (final change in snapshot.docChanges) {
             if (change.type == DocumentChangeType.added) {
-              final source =
-                  (snapshot.metadata.isFromCache) ? 'local cache' : 'server';
+              // final source =
+              //     (snapshot.metadata.isFromCache) ? 'local cache' : 'server';
               // debugPrint('Data fetched from $source}');
             }
           }
@@ -173,8 +173,8 @@ class FirestoreService {
         (snapshot) {
           for (final change in snapshot.docChanges) {
             if (change.type == DocumentChangeType.added) {
-              final source =
-                  (snapshot.metadata.isFromCache) ? 'local cache' : 'server';
+              // final source =
+              //     (snapshot.metadata.isFromCache) ? 'local cache' : 'server';
               // debugPrint('Data fetched from $source}');
             }
           }
@@ -209,8 +209,8 @@ class FirestoreService {
         (snapshot) {
           for (final change in snapshot.docChanges) {
             if (change.type == DocumentChangeType.added) {
-              final source =
-                  (snapshot.metadata.isFromCache) ? 'local cache' : 'server';
+              // final source =
+              //     (snapshot.metadata.isFromCache) ? 'local cache' : 'server';
               // debugPrint('Data fetched from $source}');
             }
           }
