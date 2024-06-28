@@ -66,8 +66,8 @@ class _CardTextDetailEvaluateWidgetState
               ],
             )
           : null,
-      filters: widget.bottom,
       image: widget.image,
+      filters: widget.bottom,
       childWidget: Center(
         key: KWidgetkeys.widget.cardTextDetailEvaluate.widget,
         child: ConstrainedBox(
@@ -92,32 +92,66 @@ class _CardTextDetailEvaluateWidgetState
                 children: [
                   Column(
                     children: [
-                      IconButtonWidget(
-                        onPressed: () => setState(() {
-                          if (evaluation != EvaluationEnum.like) {
-                            evaluation = EvaluationEnum.like;
-                          } else {
-                            evaluation = EvaluationEnum.none;
-                          }
-                        }),
-                        background: evaluation != EvaluationEnum.like
-                            ? AppColors.materialThemeKeyColorsNeutral
-                            : AppColors.materialThemeBlack,
-                        padding: KPadding.kPaddingSize12,
-                        icon: evaluation == EvaluationEnum.like
-                            ? KIcon.activeLike.copyWith(
-                                key: KWidgetkeys.widget.cardTextDetailEvaluate
-                                    .iconActiveLike,
-                              )
-                            : KIcon.like.copyWith(
-                                key: KWidgetkeys
-                                    .widget.cardTextDetailEvaluate.iconLike,
-                              ),
+                      Column(
+                        children: [
+                          IconButtonWidget(
+                            onPressed: () => setState(() {
+                              if (evaluation != EvaluationEnum.like) {
+                                evaluation = EvaluationEnum.like;
+                              } else {
+                                evaluation = EvaluationEnum.none;
+                              }
+                            }),
+                            background: AppColors.materialThemeKeyColorsNeutral,
+                            icon: Padding(
+                              padding:
+                                  const EdgeInsets.all(KPadding.kPaddingSize4),
+                              child: evaluation == EvaluationEnum.like
+                                  ? KIcon.activeLike.copyWith(
+                                      key: KWidgetkeys
+                                          .widget
+                                          .cardTextDetailEvaluate
+                                          .iconActiveLike,
+                                    )
+                                  : KIcon.like.copyWith(
+                                      key: KWidgetkeys.widget
+                                          .cardTextDetailEvaluate.iconLike,
+                                    ),
+                            ),
+                          ),
+                          KSizedBox.kHeightSizedBox3,
+                          Text(
+                            context.l10n.useful,
+                            style: AppTextStyle.materialThemeLabelSmall,
+                          ),
+                        ],
                       ),
-                      KSizedBox.kHeightSizedBox3,
-                      Text(
-                        context.l10n.useful,
-                        style: AppTextStyle.materialThemeLabelSmall,
+                      KSizedBox.kWidthSizedBox8,
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Column(
+                        children: [
+                          IconButtonWidget(
+                            onPressed: () {},
+                            background: AppColors.materialThemeKeyColorsNeutral,
+                            icon: Padding(
+                              padding: const EdgeInsets.all(
+                                KPadding.kPaddingSize4,
+                              ),
+                              child: KIcon.website.copyWith(
+                                key: KWidgetkeys
+                                    .widget.cardTextDetailEvaluate.iconWebsite,
+                              ),
+                            ),
+                          ),
+                          KSizedBox.kHeightSizedBox3,
+                          Text(
+                            context.l10n.website,
+                            style: AppTextStyle.materialThemeLabelSmall,
+                          ),
+                        ],
                       ),
                     ],
                   ),
