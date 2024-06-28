@@ -15,28 +15,6 @@ class NewsCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CardTextDetailEvaluateWidget(
-      image: informationItem.image,
-      text: informationItem.news,
-      buttonText: [
-        context.l10n.readMore,
-        context.l10n.readLess,
-      ],
-      buttonStyle: KButtonStyles.transparentButtonStyleBottomBorder,
-      titleWidget: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Text(
-            informationItem.title,
-            key: KWidgetkeys.widget.newsCard.title,
-            style: isDesk ? AppTextStyle.text40 : AppTextStyle.text24,
-          ),
-          Text(
-            informationItem.fetchDate.localeTime,
-            key: KWidgetkeys.widget.newsCard.date,
-            style: AppTextStyle.hint16,
-          ),
-        ],
-      ),
       bottom: Padding(
         padding: const EdgeInsets.only(
           bottom: KPadding.kPaddingSize8,
@@ -72,13 +50,15 @@ class NewsCardWidget extends StatelessWidget {
           }).toList(),
         ),
       ),
-      image: informationItem.image,
+      image: informationItem.image.firstImage,
       text: informationItem.news,
       buttonText: [
         context.l10n.more,
-        context.l10n.hide,
+        context.l10n.more,
       ],
-      buttonStyle: KButtonStyles.secondaryButtonStyle,
+      buttonStyle: isDesk
+          ? KButtonStyles.secondaryButtonStyle
+          : KButtonStyles.secondaryButtonStyle,
       titleWidget: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -89,10 +69,6 @@ class NewsCardWidget extends StatelessWidget {
                 ? AppTextStyle.materialThemeDisplaySmall
                 : AppTextStyle.materialThemeHeadlineSmall,
           ),
-          if (isDesk)
-            KSizedBox.kHeightSizedBox8
-          else
-            KSizedBox.kHeightSizedBox4,
           Text(
             informationItem.fetchDate.localeTime,
             key: KWidgetkeys.widget.newsCard.date,
@@ -100,10 +76,6 @@ class NewsCardWidget extends StatelessWidget {
                 ? AppTextStyle.materialThemeLabelMedium
                 : AppTextStyle.materialThemeLabelSmall,
           ),
-          if (isDesk)
-            KSizedBox.kHeightSizedBox24
-          else
-            KSizedBox.kHeightSizedBox16,
         ],
       ),
       isDesk: isDesk,
