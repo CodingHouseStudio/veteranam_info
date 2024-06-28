@@ -13,7 +13,7 @@ class AdvancedFilterMob extends StatelessWidget {
     return _AdvanceFilter.button(
       onPressed: () async {
         final bloc = context.read<DiscountWatcherBloc>();
-        await showModalBottomSheet<Widget>(
+        await showModalBottomSheet<void>(
           context: context,
           isScrollControlled: true,
           barrierColor:

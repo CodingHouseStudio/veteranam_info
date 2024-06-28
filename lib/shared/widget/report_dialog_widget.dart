@@ -11,10 +11,12 @@ class ReportDialogWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ConstrainedBox(
+      key: KWidgetkeys.widget.reportDialog.widget,
       constraints: const BoxConstraints(maxWidth: KMinMaxSize.maxWidth460),
       child: BlocConsumer<ReportBloc, ReportState>(
-        listener: (context, state) =>
-            state.formState == ReportEnum.success ? context.pop() : null,
+        listener: (context, state) => context.pop(),
+        listenWhen: (previous, current) =>
+            current.formState == ReportEnum.success,
         builder: (context, _) {
           return Column(
             mainAxisSize: MainAxisSize.min,
@@ -22,6 +24,7 @@ class ReportDialogWidget extends StatelessWidget {
             children: [
               Text(
                 context.l10n.reportPublication,
+                key: KWidgetkeys.widget.reportDialog.title,
                 style: isDesk
                     ? AppTextStyle.materialThemeHeadlineLarge
                     : AppTextStyle.materialThemeHeadlineSmall,
@@ -33,10 +36,12 @@ class ReportDialogWidget extends StatelessWidget {
               if (_.formState.isNext) ...[
                 Text(
                   context.l10n.addComment,
+                  key: KWidgetkeys.widget.reportDialog.subtitle,
                   style: AppTextStyle.materialThemeTitleMedium,
                 ),
                 KSizedBox.kHeightSizedBox24,
                 CheckPointWidget(
+                  key: KWidgetkeys.widget.reportDialog.checkPoint,
                   onChanged: null,
                   isCheck: ReasonComplaint.other ==
                       context.read<ReportBloc>().state.reasonComplaint,
@@ -45,7 +50,7 @@ class ReportDialogWidget extends StatelessWidget {
                 ),
                 KSizedBox.kHeightSizedBox16,
                 TextFieldWidget(
-                  widgetKey: const Key('value'),
+                  widgetKey: KWidgetkeys.widget.reportDialog.emailField,
                   onChanged: (text) => context
                       .read<ReportBloc>()
                       .add(ReportEvent.emailUpdated(text)),
@@ -57,83 +62,75 @@ class ReportDialogWidget extends StatelessWidget {
                           .user
                           ?.isAnonymously ??
                       false),
-                  errorText: _.formState == ReportEnum.nextInvalidData
-                      ? _.email?.error.value(context) ??
+                  errorText: _.formState == ReportEnum.nextInvalidData &&
                           (context
-                                      .read<AuthenticationBloc>()
-                                      .state
-                                      .user
-                                      ?.isAnonymously ??
-                                  false
-                              ? null
-                              : context.l10n.fieldCannotBeEmpty)
+                                  .read<AuthenticationBloc>()
+                                  .state
+                                  .user
+                                  ?.isAnonymously ??
+                              true)
+                      ? _.email?.error.value(context) ??
+                          context.l10n.fieldCannotBeEmpty
                       : null,
+                  text: context.read<AuthenticationBloc>().state.user?.email,
                 ),
                 KSizedBox.kHeightSizedBox16,
                 MessageFieldWidget(
+                  key: KWidgetkeys.widget.reportDialog.messageField,
                   changeMessage: (text) => context
                       .read<ReportBloc>()
                       .add(ReportEvent.messageUpdated(text)),
                   isDesk: isDesk,
                   labelText: context.l10n.writeYourMessage,
-                  errorText: _.formState == ReportEnum.nextInvalidData
+                  errorText: _.formState == ReportEnum.nextInvalidData &&
+                          _.reasonComplaint == ReasonComplaint.other
                       ? _.message?.error.value(context) ??
-                          (_.reasonComplaint == ReasonComplaint.other
-                              ? context.l10n.fieldCannotBeEmpty
-                              : null)
+                          context.l10n.fieldCannotBeEmpty
                       : null,
                 ),
               ] else ...[
                 Text(
                   context.l10n.specifyReasonForComplaint,
+                  key: KWidgetkeys.widget.reportDialog.subtitle,
                   style: AppTextStyle.materialThemeTitleMedium,
                 ),
                 if (isDesk)
                   KSizedBox.kHeightSizedBox40
                 else
                   KSizedBox.kHeightSizedBox24,
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: KPadding.kPaddingSize16,
+                ...List.generate(
+                  ReasonComplaint.values.length,
+                  (index) => Padding(
+                    padding: EdgeInsets.only(
+                      top: index != 0 ? KPadding.kPaddingSize24 : 0,
+                      left: KPadding.kPaddingSize16,
+                    ),
+                    child: _reportCheckPoint(
+                      context: context,
+                      reasonComplaint: ReasonComplaint.values.elementAt(index),
+                      isDesk: isDesk,
+                    ),
                   ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: List.generate(
-                      ReasonComplaint.values.length,
-                      (index) => Padding(
-                        padding: index != 0
-                            ? const EdgeInsets.only(
-                                top: KPadding.kPaddingSize24,
-                              )
-                            : EdgeInsets.zero,
-                        child: _reportCheckPoint(
-                          context: context,
-                          reasonComplaint:
-                              ReasonComplaint.values.elementAt(index),
-                          isDesk: isDesk,
-                        ),
-                      ),
-                    )..addAll(
-                        _.formState == ReportEnum.invalidData
-                            ? [
-                                KSizedBox.kHeightSizedBox16,
-                                Text(
-                                  context.l10n.checkPointError,
-                                  style:
-                                      AppTextStyle.materialThemeBodySmallError,
-                                ),
-                              ]
-                            : [],
-                      ),
+                )..addAll(
+                    _.formState == ReportEnum.invalidData
+                        ? [
+                            KSizedBox.kHeightSizedBox16,
+                            Text(
+                              context.l10n.checkPointError,
+                              key: KWidgetkeys
+                                  .widget.reportDialog.checkPointError,
+                              style: AppTextStyle.materialThemeBodySmallError,
+                            ),
+                          ]
+                        : [],
                   ),
-                ),
               ],
               if (isDesk)
                 KSizedBox.kHeightSizedBox40
               else
                 KSizedBox.kHeightSizedBox32,
               DoubleButtonWidget(
-                widgetKey: const Key(''),
+                widgetKey: KWidgetkeys.widget.reportDialog.sendButton,
                 text:
                     _.formState.isNext ? context.l10n.send : context.l10n.next,
                 isDesk: isDesk,
@@ -159,6 +156,7 @@ class ReportDialogWidget extends StatelessWidget {
     required bool isDesk,
   }) =>
       CheckPointWidget(
+        key: KWidgetkeys.widget.reportDialog.checkPoint,
         onChanged: () => context
             .read<ReportBloc>()
             .add(ReportEvent.reasonComplaintUpdated(reasonComplaint)),

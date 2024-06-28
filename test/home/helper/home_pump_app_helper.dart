@@ -6,17 +6,17 @@ import 'package:kozak/shared/shared.dart';
 import '../../text_dependency.dart';
 
 Future<void> homePumpAppHelper({
-  required IFeedbackRepository mockFeedbackRepository,
+  // required IFeedbackRepository mockFeedbackRepository,
   required IHomeRepository mockHomeRepository,
   required AuthenticationRepository mockAuthenticationRepository,
   required IAppAuthenticationRepository mockAppAuthenticationRepository,
   required WidgetTester tester,
   MockGoRouter? mockGoRouter,
 }) async {
-  _registerFeedbackBloc(
-    mockFeedbackRepository: mockFeedbackRepository,
-    mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-  );
+  // _registerFeedbackBloc(
+  //   mockFeedbackRepository: mockFeedbackRepository,
+  //   mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+  // );
   _registerHomeBloc(mockHomeRepository: mockHomeRepository);
   _registerAuthenticationBloc(
     mockAuthenticationRepository: mockAuthenticationRepository,
@@ -31,19 +31,19 @@ Future<void> homePumpAppHelper({
   await tester.pumpAndSettle();
 }
 
-void _registerFeedbackBloc({
-  required IFeedbackRepository mockFeedbackRepository,
-  required IAppAuthenticationRepository mockAppAuthenticationRepository,
-}) {
-  final feedbackBloc = FeedbackBloc(
-    feedbackRepository: mockFeedbackRepository,
-    appAuthenticationRepository: mockAppAuthenticationRepository,
-  );
-  if (GetIt.I.isRegistered<FeedbackBloc>()) {
-    GetIt.I.unregister<FeedbackBloc>();
-  }
-  GetIt.I.registerSingleton<FeedbackBloc>(feedbackBloc);
-}
+// void _registerFeedbackBloc({
+//   required IFeedbackRepository mockFeedbackRepository,
+//   required IAppAuthenticationRepository mockAppAuthenticationRepository,
+// }) {
+//   final feedbackBloc = FeedbackBloc(
+//     feedbackRepository: mockFeedbackRepository,
+//     appAuthenticationRepository: mockAppAuthenticationRepository,
+//   );
+//   if (GetIt.I.isRegistered<FeedbackBloc>()) {
+//     GetIt.I.unregister<FeedbackBloc>();
+//   }
+//   GetIt.I.registerSingleton<FeedbackBloc>(feedbackBloc);
+// }
 
 void _registerHomeBloc({
   required IHomeRepository mockHomeRepository,
