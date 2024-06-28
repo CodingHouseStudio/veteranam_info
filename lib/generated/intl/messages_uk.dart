@@ -256,9 +256,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ми отримали Ваше повідомлення і надамо Вам відповідь найближчим часом."),
         "register": MessageLookupByLibrary.simpleMessage("Зареєструватись"),
         "remotely": MessageLookupByLibrary.simpleMessage("Віддалено"),
+        "report": MessageLookupByLibrary.simpleMessage("Скарга"),
         "reportPublication":
             MessageLookupByLibrary.simpleMessage("Поскаржитись на публікацію"),
-        "report": MessageLookupByLibrary.simpleMessage("Скарга"),
         "resetAll": MessageLookupByLibrary.simpleMessage("Скинути все"),
         "respond": MessageLookupByLibrary.simpleMessage("Відгукнутися"),
         "resume": MessageLookupByLibrary.simpleMessage("Резюме"),

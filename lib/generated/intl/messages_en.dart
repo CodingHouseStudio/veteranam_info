@@ -250,9 +250,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "We have received your message and will respond to you as soon as possible."),
         "register": MessageLookupByLibrary.simpleMessage("Register"),
         "remotely": MessageLookupByLibrary.simpleMessage("Remotely"),
+        "report": MessageLookupByLibrary.simpleMessage("Report"),
         "reportPublication":
             MessageLookupByLibrary.simpleMessage("Report a publication"),
-        "report": MessageLookupByLibrary.simpleMessage("Report"),
         "resetAll": MessageLookupByLibrary.simpleMessage("Reset all"),
         "respond": MessageLookupByLibrary.simpleMessage("Respond"),
         "resume": MessageLookupByLibrary.simpleMessage("Resume"),
