@@ -21,6 +21,7 @@ class StoryBodyWidget extends StatelessWidget {
       listenWhen: (previous, current) => current.failure != null,
       builder: (context, _) {
         return ScaffoldAutoLoadingWidget(
+          loadingButtonText: context.l10n.moreStories,
           titleChildWidgetsFunction: ({required isDesk}) => [
             if (isDesk)
               KSizedBox.kHeightSizedBox40
@@ -38,7 +39,7 @@ class StoryBodyWidget extends StatelessWidget {
             else
               KSizedBox.kHeightSizedBox24,
           ],
-          mainDeskPadding: const EdgeInsets.symmetric(
+          mainDeskPadding: ({required maxWidth}) => const EdgeInsets.symmetric(
             horizontal: KPadding.kPaddingSize48,
           ),
           mainChildWidgetsFunction: ({required isDesk}) => [

@@ -3,9 +3,10 @@ import 'package:kozak/shared/shared.dart';
 
 import '../../../text_dependency.dart';
 
-Future<void> chekPointSingleHelper(
-  WidgetTester tester,
-) async {
+Future<void> chekPointSingleHelper({
+  required WidgetTester tester,
+  bool hasAmount = false,
+}) async {
   await scrollingHelper(
     tester: tester,
     itemKey: KWidgetkeys.widget.checkPointSingle.widget,
@@ -18,6 +19,11 @@ Future<void> chekPointSingleHelper(
   expect(
     find.byKey(KWidgetkeys.widget.checkPointSingle.icon),
     findsNothing,
+  );
+
+  expect(
+    find.byKey(KWidgetkeys.widget.checkPoint.ammount),
+    hasAmount ? findsWidgets : findsNothing,
   );
 
   await scrollingHelper(
