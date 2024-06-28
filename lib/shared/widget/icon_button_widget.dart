@@ -9,10 +9,12 @@ class IconButtonWidget extends StatelessWidget {
     super.key,
     this.padding,
   });
+
   final Color? background;
   final Widget icon;
   final double? padding;
-  final void Function() onPressed;
+  final void Function()? onPressed;
+
   @override
   Widget build(BuildContext context) {
     return IconButton(
