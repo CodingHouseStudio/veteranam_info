@@ -15,6 +15,40 @@ class NewsCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CardTextDetailEvaluateWidget(
+      image: informationItem.image,
+      text: informationItem.news,
+      buttonText: [
+        context.l10n.more,
+        context.l10n.hide,
+      ],
+      buttonStyle: KButtonStyles.borderBlackButtonStyle,
+      titleWidget: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Text(
+            informationItem.title,
+            key: KWidgetkeys.widget.newsCard.title,
+            style: isDesk
+                ? AppTextStyle.materialThemeDisplaySmall
+                : AppTextStyle.materialThemeHeadlineSmall,
+          ),
+          if (isDesk)
+            KSizedBox.kHeightSizedBox8
+          else
+            KSizedBox.kHeightSizedBox4,
+          Text(
+            informationItem.fetchDate.localeTime,
+            key: KWidgetkeys.widget.newsCard.date,
+            style: isDesk
+                ? AppTextStyle.materialThemeLabelMedium
+                : AppTextStyle.materialThemeLabelSmall,
+          ),
+          if (isDesk)
+            KSizedBox.kHeightSizedBox24
+          else
+            KSizedBox.kHeightSizedBox16,
+        ],
+      ),
       bottom: Padding(
         padding: const EdgeInsets.only(
           bottom: KPadding.kPaddingSize8,
