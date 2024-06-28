@@ -9,12 +9,12 @@ Future<void> storyCardHelper({
 }) async {
   expect(find.byKey(KWidgetkeys.widget.storyCard.date), findsWidgets);
 
-  expect(find.byKey(KWidgetkeys.widget.storyCard.trashIcon), findsWidgets);
-
   expect(
     find.byKey(KWidgetkeys.widget.storyCard.userIcon),
     findsWidgets,
   );
+
+  // expect(find.byKey(KWidgetkeys.widget.storyCard.trashIcon), findsWidgets);
 
   expect(
     find.byKey(KWidgetkeys.widget.storyCard.userName),

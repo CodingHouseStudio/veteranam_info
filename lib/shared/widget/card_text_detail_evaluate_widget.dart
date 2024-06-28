@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kozak/shared/shared.dart';
+import 'package:share_plus/share_plus.dart';
 
 class CardTextDetailEvaluateWidget extends StatefulWidget {
   const CardTextDetailEvaluateWidget({
@@ -14,7 +15,12 @@ class CardTextDetailEvaluateWidget extends StatefulWidget {
     this.bottom,
     this.titleTopMob = false,
     this.titleDate,
+    this.directLink,
+    this.link,
   });
+
+  final String? directLink;
+  final String? link;
   final String text;
   final List<String>? buttonText;
   final ButtonStyle? buttonStyle;
@@ -60,6 +66,7 @@ class _CardTextDetailEvaluateWidgetState
               ],
             )
           : null,
+      filters: widget.bottom,
       image: widget.image,
       childWidget: Center(
         key: KWidgetkeys.widget.cardTextDetailEvaluate.widget,
@@ -70,17 +77,8 @@ class _CardTextDetailEvaluateWidgetState
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Padding(
-                padding: EdgeInsets.only(
-                  top: widget.isDesk
-                      ? KPadding.kPaddingSize8
-                      : KPadding.kPaddingSize16,
-                  bottom: widget.isDesk
-                      ? KPadding.kPaddingSize32
-                      : KPadding.kPaddingSize16,
-                ),
-                child: buildTitle(isDesk: widget.isDesk),
-              ),
+              if (widget.bottom != null && widget.image == null) widget.bottom!,
+              buildTitle(isDesk: widget.isDesk),
               CardTextDetailWidget(
                 text: widget.text,
                 maxLines: KDimensions.storyCardMaxLines,
@@ -88,97 +86,91 @@ class _CardTextDetailEvaluateWidgetState
                 buttonStyle: widget.buttonStyle,
                 isDesk: widget.isDesk,
               ),
-              KSizedBox.kHeightSizedBox24,
+              if (widget.isDesk)
+                KSizedBox.kHeightSizedBox24
+              else
+                KSizedBox.kHeightSizedBox16,
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
+                  Column(
                     children: [
-                      InkWell(
-                        onTap: () => setState(() {
-                          if (evaluation != EvaluationEnum.like) {
-                            evaluation = EvaluationEnum.like;
-                          } else {
-                            evaluation = EvaluationEnum.none;
-                          }
-                        }),
-                        borderRadius: BorderRadius.circular(KSize.kRadius32),
-                        child: Padding(
-                          padding: const EdgeInsets.all(KPadding.kPaddingSize4),
-                          child: evaluation == EvaluationEnum.like
-                              ? KIcon.activeLike.copyWith(
-                                  key: KWidgetkeys.widget.cardTextDetailEvaluate
-                                      .iconActiveLike,
-                                )
-                              : KIcon.like.copyWith(
-                                  key: KWidgetkeys
-                                      .widget.cardTextDetailEvaluate.iconLike,
-                                ),
-                        ),
+                      Column(
+                        children: [
+                          IconButtonWidget(
+                            onPressed: () => setState(() {
+                              if (evaluation != EvaluationEnum.like) {
+                                evaluation = EvaluationEnum.like;
+                              } else {
+                                evaluation = EvaluationEnum.none;
+                              }
+                            }),
+                            background: evaluation != EvaluationEnum.like
+                                ? AppColors.materialThemeKeyColorsNeutral
+                                : AppColors.materialThemeBlack,
+                            padding: KPadding.kPaddingSize12,
+                            icon: evaluation == EvaluationEnum.like
+                                ? KIcon.activeLike.copyWith(
+                                    key: KWidgetkeys.widget
+                                        .cardTextDetailEvaluate.iconActiveLike,
+                                  )
+                                : KIcon.like.copyWith(
+                                    key: KWidgetkeys
+                                        .widget.cardTextDetailEvaluate.iconLike,
+                                  ),
+                          ),
+                          KSizedBox.kHeightSizedBox3,
+                          Text(
+                            context.l10n.useful,
+                            style: AppTextStyle.materialThemeLabelSmall,
+                          ),
+                        ],
                       ),
                       KSizedBox.kWidthSizedBox8,
-                      InkWell(
-                        onTap: () => setState(() {
-                          if (evaluation != EvaluationEnum.smile) {
-                            evaluation = EvaluationEnum.smile;
-                          } else {
-                            evaluation = EvaluationEnum.none;
-                          }
-                        }),
-                        borderRadius: BorderRadius.circular(KSize.kRadius32),
-                        child: Padding(
-                          padding: const EdgeInsets.all(KPadding.kPaddingSize4),
-                          child: evaluation == EvaluationEnum.smile
-                              ? KIcon.activeSmile.copyWith(
-                                  key: KWidgetkeys.widget.cardTextDetailEvaluate
-                                      .iconActiveSmile,
-                                  // changeColor: AppColors.grey,
-                                )
-                              : KIcon.smile.copyWith(
-                                  key: KWidgetkeys
-                                      .widget.cardTextDetailEvaluate.iconSmile,
-                                ),
-                        ),
-                      ),
-                      KSizedBox.kWidthSizedBox8,
-                      InkWell(
-                        onTap: () => setState(() {
-                          if (evaluation != EvaluationEnum.dislike) {
-                            evaluation = EvaluationEnum.dislike;
-                          } else {
-                            evaluation = EvaluationEnum.none;
-                          }
-                        }),
-                        borderRadius: BorderRadius.circular(KSize.kRadius32),
-                        child: Padding(
-                          padding: const EdgeInsets.all(KPadding.kPaddingSize4),
-                          child: evaluation == EvaluationEnum.dislike
-                              ? KIcon.activeDislike.copyWith(
-                                  key: KWidgetkeys.widget.cardTextDetailEvaluate
-                                      .iconActiveDislike,
-                                )
-                              : KIcon.dislike.copyWith(
-                                  key: KWidgetkeys.widget.cardTextDetailEvaluate
-                                      .iconDislike,
-                                ),
-                        ),
-                      ),
                     ],
                   ),
                   Row(
                     children: [
-                      if (widget.titleIcon != null && widget.isDesk)
-                        widget.titleIcon!,
-                      KSizedBox.kWidthSizedBox16,
-                      KIcon.share.copyWith(
-                        key:
-                            KWidgetkeys.widget.cardTextDetailEvaluate.iconShare,
+                      buildIcon(
+                        icon: KIcon.website.copyWith(
+                          key: KWidgetkeys
+                              .widget.cardTextDetailEvaluate.iconWebsite,
+                        ),
+                        text: context.l10n.website,
+                        onPressed: null,
+                      ),
+                      if (widget.isDesk)
+                        KSizedBox.kWidthSizedBox24
+                      else
+                        KSizedBox.kWidthSizedBox8,
+                      buildIcon(
+                        icon: KIcon.share.copyWith(
+                          key: KWidgetkeys
+                              .widget.cardTextDetailEvaluate.iconShare,
+                        ),
+                        text: context.l10n.share,
+                        onPressed: _informationShareLink,
+                      ),
+                      if (widget.isDesk)
+                        KSizedBox.kWidthSizedBox24
+                      else
+                        KSizedBox.kWidthSizedBox8,
+                      buildIcon(
+                        icon: KIcon.safe.copyWith(
+                          key: KWidgetkeys
+                              .widget.cardTextDetailEvaluate.iconSave,
+                        ),
+                        text: context.l10n.save,
+                        onPressed: null,
                       ),
                     ],
                   ),
                 ],
               ),
-              if (widget.bottom != null) widget.bottom!,
+              if (widget.isDesk)
+                KSizedBox.kHeightSizedBox32
+              else
+                KSizedBox.kHeightSizedBox16,
             ],
           ),
         ),
@@ -199,5 +191,33 @@ class _CardTextDetailEvaluateWidgetState
     } else {
       return widget.titleWidget;
     }
+  }
+
+  Future<void> _informationShareLink() async {
+    await Share.share(
+      widget.directLink ?? widget.link!,
+    );
+  }
+
+  Widget buildIcon({
+    required Icon icon,
+    required String text,
+    required VoidCallback? onPressed,
+  }) {
+    return Column(
+      children: [
+        IconButtonWidget(
+          onPressed: onPressed,
+          background: AppColors.materialThemeKeyColorsNeutral,
+          icon: icon,
+          padding: KPadding.kPaddingSize12,
+        ),
+        KSizedBox.kHeightSizedBox3,
+        Text(
+          text,
+          style: AppTextStyle.materialThemeLabelSmall,
+        ),
+      ],
+    );
   }
 }
