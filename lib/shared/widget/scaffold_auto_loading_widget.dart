@@ -67,6 +67,7 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
               Center(
                 child: Text(
                   context.l10n.cardListEmptyText,
+                  key: KWidgetkeys.widget.scaffold.emptyListText,
                   style: AppTextStyle.materialThemeTitleMediumNeutralVariant70,
                 ),
               ),
@@ -75,6 +76,7 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
               Center(
                 child: Text(
                   context.l10n.thatEndOfList,
+                  key: KWidgetkeys.widget.scaffold.emptyListText,
                   style: AppTextStyle.materialThemeTitleMediumNeutralVariant70,
                 ),
               ),

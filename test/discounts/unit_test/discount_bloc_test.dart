@@ -116,7 +116,6 @@ void main() {
                   KTestText.discountModelItemsModify.first.category.first,
                 ),
               ) &&
-              state.filtersCategoriesIndex.isNotEmpty &&
               state.filtersCategoriesIndex.length == 1,
         ),
         predicate<DiscountWatcherState>(

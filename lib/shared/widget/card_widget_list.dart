@@ -4,13 +4,13 @@ import 'package:kozak/shared/shared.dart';
 List<Widget> cardWidgetList<T>({
   required bool isLoading,
   required List<T> modelItems,
-  required Widget Function({
-    required T modelItem,
-    required Key key,
-  }) cardWidget,
+  required Widget Function(
+    T modelItem,
+    // required Key key,
+  ) cardWidget,
   required int shimmerItemsNumber,
-  required Key cardKey,
-  required Key cardLastKey,
+  // required Key cardKey,
+  // required Key cardLastKey,
   required bool isNotFailure,
   required T shimmerItem,
   required bool isDesk,
@@ -35,8 +35,7 @@ List<Widget> cardWidgetList<T>({
       child: SkeletonizerWidget(
         isLoading: fullList.length - index <= shimmerItemsNumber && isLoading,
         child: cardWidget(
-          modelItem: fullList.elementAt(index),
-          key: index != fullList.length - 1 ? cardKey : cardLastKey,
+          fullList.elementAt(index),
         ),
       ),
     );

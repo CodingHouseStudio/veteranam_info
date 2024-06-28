@@ -24,15 +24,13 @@ List<Widget> _fundsWidgetList({
     return cardWidgetList<List<FundModel>>(
       isLoading: isLoading,
       modelItems: fundsModelItems,
-      cardWidget: ({required modelItem, required key}) => DonatesCardsWidget(
+      cardWidget: (modelItem) => DonatesCardsWidget(
         key: KWidgetkeys.screen.investors.cards,
         fundItems: modelItem,
         isLoading: isLoading,
       ),
       isDesk: isDesk,
       shimmerItemsNumber: KDimensions.shimmerFundsItems,
-      cardKey: KWidgetkeys.screen.investors.card,
-      cardLastKey: KWidgetkeys.screen.investors.cardLast,
       isNotFailure: isNotFailure,
       shimmerItem: List.generate(
         KDimensions.donateCardsLine,
@@ -43,16 +41,14 @@ List<Widget> _fundsWidgetList({
     return cardWidgetList<FundModel>(
       isLoading: isLoading,
       modelItems: fundsModel,
-      cardWidget: ({required modelItem, required key}) => DonateCardWidget(
-        key: key,
+      cardWidget: (modelItem) => DonateCardWidget(
+        key: KWidgetkeys.screen.investors.card,
         fundModel: modelItem,
         isDesk: isDesk,
         hasSubtitle: true,
       ),
       isDesk: isDesk,
       shimmerItemsNumber: KDimensions.shimmerFundsItems,
-      cardKey: KWidgetkeys.screen.investors.card,
-      cardLastKey: KWidgetkeys.screen.investors.cardLast,
       isNotFailure: isNotFailure,
       shimmerItem: KMockText.fundModel,
     );

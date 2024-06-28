@@ -11,15 +11,13 @@ List<Widget> _newsWidgetList({
           .read<InformationWatcherBloc>()
           .state
           .filteredInformationModelItems,
-      cardWidget: ({required modelItem, required key}) => NewsCardWidget(
-        key: key,
+      cardWidget: (modelItem) => NewsCardWidget(
+        key: KWidgetkeys.screen.information.card,
         informationItem: modelItem,
         isDesk: isDesk,
       ),
       isDesk: isDesk,
       shimmerItemsNumber: KDimensions.shimmerInformationItems,
-      cardKey: KWidgetkeys.screen.information.card,
-      cardLastKey: KWidgetkeys.screen.information.cardLast,
       isNotFailure:
           context.read<InformationWatcherBloc>().state.failure == null,
       shimmerItem: KMockText.informationModel,

@@ -13,12 +13,12 @@ Future<void> listLoadHelper(
     offset: KTestConstants.scrollingDown,
   );
 
-  expect(find.byKey(KWidgetkeys.screen.story.cardLast), findsNothing);
+  expect(find.byKey(KWidgetkeys.widget.scaffold.endListText), findsNothing);
 
   await scrollingHelper(
     tester: tester,
     offset: KTestConstants.scrollingDown,
   );
 
-  expect(find.byKey(KWidgetkeys.screen.story.cardLast), findsNothing);
+  expect(find.byKey(KWidgetkeys.widget.scaffold.endListText), findsNothing);
 }

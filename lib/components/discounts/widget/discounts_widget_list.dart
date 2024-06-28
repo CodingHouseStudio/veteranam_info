@@ -9,15 +9,13 @@ List<Widget> discountsWidgetList({
           LoadingStatus.loaded,
       modelItems:
           context.read<DiscountWatcherBloc>().state.filteredDiscountModelItems,
-      cardWidget: ({required modelItem, required key}) => DiscountsCardWidget(
-        key: key,
+      cardWidget: (modelItem) => DiscountsCardWidget(
+        key: KWidgetkeys.screen.discounts.card,
         discountItem: modelItem,
         isDesk: isDesk,
       ),
       isDesk: isDesk,
       shimmerItemsNumber: KDimensions.shimmerDiscountsItems,
-      cardKey: KWidgetkeys.screen.discounts.card,
-      cardLastKey: KWidgetkeys.screen.discounts.cardLast,
       isNotFailure: context.read<DiscountWatcherBloc>().state.failure == null,
       shimmerItem: KMockText.discountModel,
     );
