@@ -193,33 +193,30 @@ abstract class _AdvanceFilter {
             ? AppTextStyle.materialThemeTitleLarge
             : AppTextStyle.materialThemeTitleMedium,
       ),
-      if (filterLocationIndex != null)
-        ...List.generate(
-          filterLocationIndex.length,
-          (index) => Padding(
-            padding: const EdgeInsets.only(top: KPadding.kPaddingSize16),
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: TextButton.icon(
-                key: KWidgetkeys.screen.discounts.appliedFilterItems,
-                style: KButtonStyles.advancedFilterButtonStyle,
-                icon: KIcon.close,
-                label: Text(
-                  location
-                      .elementAt(filterLocationIndex.elementAt(index))
-                      .value,
-                  style: isDesk
-                      ? AppTextStyle.materialThemeBodyLarge
-                      : AppTextStyle.materialThemeBodyMedium,
-                ),
-                onPressed: () => _onChange(
-                  context: context,
-                  index: filterLocationIndex.elementAt(index),
-                ),
+      ...List.generate(
+        filterLocationIndex.length,
+        (index) => Padding(
+          padding: const EdgeInsets.only(top: KPadding.kPaddingSize16),
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: TextButton.icon(
+              key: KWidgetkeys.screen.discounts.appliedFilterItems,
+              style: KButtonStyles.advancedFilterButtonStyle,
+              icon: KIcon.close,
+              label: Text(
+                location.elementAt(filterLocationIndex.elementAt(index)).value,
+                style: isDesk
+                    ? AppTextStyle.materialThemeBodyLarge
+                    : AppTextStyle.materialThemeBodyMedium,
+              ),
+              onPressed: () => _onChange(
+                context: context,
+                index: filterLocationIndex.elementAt(index),
               ),
             ),
           ),
         ),
+      ),
       KSizedBox.kHeightSizedBox24,
       Text(
         context.l10n.discount,
