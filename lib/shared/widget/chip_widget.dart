@@ -7,14 +7,12 @@ class ChipWidget extends StatefulWidget {
     required this.isSelected,
     required this.onSelected,
     required this.isDesk,
-    required this.itemCount,
     super.key,
   });
-  final String filter;
+  final FilterItem filter;
   final bool isSelected;
   final ValueChanged<bool>? onSelected;
   final bool isDesk;
-  final int itemCount;
 
   @override
   ChipWidgetState createState() => ChipWidgetState();
@@ -25,6 +23,7 @@ class ChipWidgetState extends State<ChipWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final filterEmpty = widget.filter.number == 0;
     return MouseRegion(
       onEnter: (_) {
         setState(() {
@@ -39,40 +38,40 @@ class ChipWidgetState extends State<ChipWidget> {
       child: FilterChip(
         key: KWidgetkeys.widget.chip.widget,
         backgroundColor: AppColors.materialThemeWhite,
+        labelPadding: EdgeInsets.zero,
         label: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(
-              widget.filter,
-              style: (widget.isDesk
-                      ? AppTextStyle.materialThemeHeadlineSmall
-                      : AppTextStyle.materialThemeLabelLarge)
-                  .copyWith(
-                color: _isHovered && !widget.isSelected && widget.itemCount > 0
-                    ? AppColors.materialThemeKeyColorsNeutralVariant
-                    : AppColors.materialThemeBlack,
+            Padding(
+              padding: EdgeInsets.only(
+                left: widget.isSelected
+                    ? KPadding.kPaddingSize8
+                    : KPadding.kPaddingSize10,
+                right: KPadding.kPaddingSize10,
+              ),
+              child: Text(
+                widget.filter.value,
+                style: (widget.isDesk
+                        ? AppTextStyle.materialThemeHeadlineSmall
+                        : AppTextStyle.materialThemeLabelLarge)
+                    .copyWith(
+                  color: _isHovered && !widget.isSelected && !filterEmpty
+                      ? AppColors.materialThemeKeyColorsNeutralVariant
+                      : AppColors.materialThemeBlack,
+                ),
               ),
             ),
-            KSizedBox.kWidthSizedBox10,
-            if (widget.itemCount > 0)
-              Container(
-                padding: const EdgeInsets.all(KPadding.kPaddingSize8),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: widget.isSelected
-                      ? AppColors.materialThemeBlack
-                      : AppColors.materialThemeKeyColorsPrimary,
-                ),
-                child: Text(
-                  '${widget.itemCount}',
-                  style: AppTextStyle.materialThemeLabelSmall.copyWith(
-                    color: widget.isSelected
-                        ? AppColors.materialThemeWhite
-                        : (!widget.isSelected && _isHovered
-                            ? AppColors.materialThemeKeyColorsNeutralVariant
-                            : AppColors.materialThemeBlack),
-                  ),
-                ),
+            if (!filterEmpty)
+              AmountWidget(
+                background: widget.isSelected
+                    ? AppColors.materialThemeBlack
+                    : AppColors.materialThemeKeyColorsPrimary,
+                textColor: widget.isSelected
+                    ? AppColors.materialThemeWhite
+                    : (!widget.isSelected && _isHovered
+                        ? AppColors.materialThemeKeyColorsNeutralVariant
+                        : AppColors.materialThemeBlack),
+                number: widget.filter.number,
               ),
           ],
         ),
@@ -81,14 +80,14 @@ class ChipWidgetState extends State<ChipWidget> {
         ),
         side: BorderSide(
           color: !widget.isSelected
-              ? (_isHovered || widget.itemCount == 0
+              ? (_isHovered || filterEmpty
                   ? AppColors.materialThemeKeyColorsNeutralVariant
                   : AppColors.materialThemeBlack)
               : Colors.transparent,
         ),
         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
         selected: widget.isSelected,
-        onSelected: widget.itemCount > 0 ? widget.onSelected : null,
+        onSelected: !filterEmpty ? widget.onSelected : null,
         checkmarkColor: AppColors.materialThemeRefSecondarySecondary10,
         selectedColor: _isHovered
             ? AppColors.materialThemeRefPrimaryPrimary90

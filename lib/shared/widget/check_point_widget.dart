@@ -5,29 +5,101 @@ class CheckPointWidget extends StatelessWidget {
   const CheckPointWidget({
     required this.onChanged,
     required this.isCheck,
+    required this.text,
+    required this.isDesk,
     super.key,
+    this.textStyle,
   });
-  final void Function() onChanged;
+  final void Function()? onChanged;
   final bool isCheck;
+  final String text;
+  final TextStyle? textStyle;
+  final bool isDesk;
 
   @override
   Widget build(BuildContext context) {
-    return DecoratedBox(
-      key: KWidgetkeys.widget.checkPoint.widget,
-      decoration: isCheck
-          ? KWidgetTheme.boxDecorCheckPointFalse
-          : KWidgetTheme.boxDecorCheckPointTrue,
-      child: InkWell(
-        onTap: onChanged,
-        child: isCheck
-            ? KIcon.check.copyWith(
-                key: KWidgetkeys.widget.checkPoint.icon,
-              )
-            : const SizedBox(
-                width: KSize.kcheckPointIconSize,
-                height: KSize.kcheckPointIconSize,
-              ),
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: TextButton.icon(
+        key: KWidgetkeys.widget.checkPoint.widget,
+        style: KButtonStyles.additionalButtonStyle,
+        onPressed: onChanged,
+        icon: DecoratedBox(
+          decoration: isCheck
+              ? KWidgetTheme.boxDecorCheckPointTrue
+              : KWidgetTheme.boxDecorCheckPointFalse,
+          // padding: const EdgeInsets.only(
+          //   top: KPadding.kPaddingSize4,
+          //   left: KPadding.kPaddingSize8,
+          //   bottom: KPadding.kPaddingSize8,
+          // ),
+          child: Padding(
+            padding: const EdgeInsets.all(
+              KPadding.kPaddingSize4,
+            ),
+            child: isCheck
+                ? KIcon.check.copyWith(
+                    key: KWidgetkeys.widget.checkPoint.icon,
+                  )
+                : const SizedBox(
+                    width: KSize.kIconSize,
+                    height: KSize.kIconSize,
+                  ),
+          ),
+        ),
+        label: Text(
+          text,
+          key: KWidgetkeys.widget.checkPoint.text,
+          maxLines: 3,
+          style: textStyle ??
+              (isDesk
+                  ? AppTextStyle.materialThemeBodyLarge
+                  : AppTextStyle.materialThemeBodyMedium),
+        ),
       ),
+    );
+  }
+}
+
+class CheckPointAmountWidget extends StatelessWidget {
+  const CheckPointAmountWidget({
+    required this.isDesk,
+    required this.isCheck,
+    required this.filterItem,
+    super.key,
+    this.onChanged,
+  });
+  final bool isDesk;
+  final void Function()? onChanged;
+  final bool isCheck;
+  final FilterItem filterItem;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          child: CheckPointWidget(
+            onChanged: onChanged,
+            isCheck: isCheck,
+            text: filterItem.value,
+            isDesk: isDesk,
+          ),
+        ),
+        KSizedBox.kWidthSizedBox12,
+        AmountWidget(
+          key: KWidgetkeys.widget.checkPoint.ammount,
+          background: isCheck
+              ? AppColors.materialThemeKeyColorsSecondary
+              : AppColors.materialThemeRefNeutralVariantNeutralVariant40,
+          textColor: AppColors.materialThemeKeyColorsNeutral,
+          number: filterItem.number,
+          padding: const EdgeInsets.symmetric(
+            horizontal: KPadding.kPaddingSize8,
+            vertical: KPadding.kPaddingSize4,
+          ),
+        ),
+      ],
     );
   }
 }

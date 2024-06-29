@@ -23,10 +23,17 @@ ThemeData themeData = ThemeData(
   iconButtonTheme: const IconButtonThemeData(
     style: ButtonStyle(
       backgroundColor: WidgetStatePropertyAll<Color>(Colors.transparent),
-      foregroundColor: WidgetStatePropertyAll<Color>(Colors.black),
+      foregroundColor: WidgetStatePropertyAll<Color>(
+        AppColors.materialThemeKeyColorsSecondary,
+      ),
       overlayColor: WidgetStatePropertyAll<Color>(Colors.transparent),
     ),
   ),
+  textTheme: const TextTheme()
+    ..apply(
+      bodyColor: AppColors.materialThemeKeyColorsSecondary,
+      displayColor: AppColors.materialThemeKeyColorsSecondary,
+    ),
   useMaterial3: true,
   buttonTheme: ButtonThemeData(
     colorScheme: ColorScheme.fromSwatch(

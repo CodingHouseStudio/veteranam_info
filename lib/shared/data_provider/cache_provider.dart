@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 
 /// COMMENT: Class for caching data
@@ -20,9 +19,9 @@ class CacheClient {
   /// Looks up the value for the provided [key].
   /// Defaults to `null` if no value exists for the provided key.
   T? read<T extends Object>({required String key}) {
-    debugPrint('reading key: $key');
+    // debugPrint('reading key: $key');
     final value = _cache[key];
-    debugPrint('value: $value');
+    // debugPrint('value: $value');
     if (value is T) return value;
     return null;
   }

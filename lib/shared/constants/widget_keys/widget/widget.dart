@@ -4,7 +4,7 @@ class _WidgetKeys {
   /// COMMENT: Add new variable here when you add a new file for widget keys
   final nawbar = _NawbarKeys();
   final question = _QuestionKeys();
-  final filter = _FilterKeys();
+  // final filter = _FilterKeys();
   final messageField = _MessageFieldKeys();
   final footer = _FooterKeys();
   final dropListField = _DropListFieldKeys();
@@ -39,4 +39,5 @@ class _WidgetKeys {
   final filterChip = _FilterChipKeys();
   final buttonAdditional = _ButtonAdditional();
   final statisticBox = _StatisticBoxKeys();
+  final reportDialog = _ReportDialogKeys();
 }
