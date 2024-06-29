@@ -227,5 +227,11 @@
   "webSite": "Веб сайт",
   "share": "Поділитись",
   "report": "Скарга",
-  "hideExpansion": "Сховати..."
+  "hideExpansion": "cховати..",
+  "moreCities": "Ще {count} міст..",
+  "@moreCities": {
+    "placeholders": {
+      "count": {}
+    }
+  }
 }

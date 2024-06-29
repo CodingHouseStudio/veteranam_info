@@ -226,5 +226,11 @@
   "webSite": "Web site",
   "share": "Share",
   "report": "Report",
-  "hideExpansion": "Hide..."
+  "hideExpansion": "hide...",
+  "moreCities": "{count} more..",
+  "@moreCities": {
+    "placeholders": {
+      "count": {}
+    }
+  }
 }
