@@ -5,10 +5,9 @@ List<Widget> _storiesWidgetList({
   required bool isDesk,
 }) =>
     cardWidgetList<StoryModel>(
-      isLoading: context.read<StoryWatcherBloc>().state.loadingStatus !=
-          LoadingStatus.loaded,
+      loadingStatus: context.read<StoryWatcherBloc>().state.loadingStatus,
       modelItems: context.read<StoryWatcherBloc>().state.loadingStoryModelItems,
-      cardWidget: (modelItem) => StoryCardWidget(
+      cardWidget: ({required modelItem, required isLoading}) => StoryCardWidget(
         key: KWidgetkeys.screen.story.card,
         storyModel: modelItem,
         isDesk: isDesk,

@@ -5,11 +5,11 @@ List<Widget> discountsWidgetList({
   required bool isDesk,
 }) =>
     cardWidgetList<DiscountModel>(
-      isLoading: context.read<DiscountWatcherBloc>().state.loadingStatus !=
-          LoadingStatus.loaded,
+      loadingStatus: context.read<DiscountWatcherBloc>().state.loadingStatus,
       modelItems:
           context.read<DiscountWatcherBloc>().state.filteredDiscountModelItems,
-      cardWidget: (modelItem) => DiscountsCardWidget(
+      cardWidget: ({required modelItem, required isLoading}) =>
+          DiscountsCardWidget(
         key: KWidgetkeys.screen.discounts.card,
         discountItem: modelItem,
         isDesk: isDesk,

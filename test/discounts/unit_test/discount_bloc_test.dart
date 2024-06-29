@@ -110,7 +110,7 @@ void main() {
         ),
         predicate<DiscountWatcherState>(
           (state) =>
-              state.loadingStatus == LoadingStatus.loaded &&
+              state.loadingStatus == LoadingStatus.listLoadedFull &&
               state.filteredDiscountModelItems.every(
                 (element) => element.category.contains(
                   KTestText.discountModelItemsModify.first.category.first,
@@ -120,7 +120,7 @@ void main() {
         ),
         predicate<DiscountWatcherState>(
           (state) =>
-              state.loadingStatus == LoadingStatus.loaded &&
+              state.loadingStatus == LoadingStatus.listLoadedFull &&
               state.filtersCategoriesIndex.isNotEmpty &&
               state.filtersCategoriesIndex.length == 2,
         ),
@@ -132,7 +132,7 @@ void main() {
         ),
         predicate<DiscountWatcherState>(
           (state) =>
-              state.loadingStatus == LoadingStatus.loaded &&
+              state.loadingStatus == LoadingStatus.listLoadedFull &&
               state.filtersCategoriesIndex.isNotEmpty &&
               state.filtersCategoriesIndex.length == 1,
         ),
@@ -176,7 +176,7 @@ void main() {
         ),
         predicate<DiscountWatcherState>(
           (state) =>
-              state.loadingStatus == LoadingStatus.loaded &&
+              state.loadingStatus == LoadingStatus.listLoadedFull &&
               state.filteredDiscountModelItems.length == 1 &&
               state.filtersLocationIndex.isNotEmpty,
         ),
@@ -196,7 +196,7 @@ void main() {
         ),
         predicate<DiscountWatcherState>(
           (state) =>
-              state.loadingStatus == LoadingStatus.loaded &&
+              state.loadingStatus == LoadingStatus.listLoadedFull &&
               state.filteredDiscountModelItems.every(
                 (element) => element.location!.contains(
                   KTestText.discountModelItemsModify.first.location!.first,
@@ -325,7 +325,7 @@ void main() {
         ),
         predicate<DiscountWatcherState>(
           (state) =>
-              state.loadingStatus == LoadingStatus.loaded &&
+              state.loadingStatus == LoadingStatus.listLoadedFull &&
               state.filteredDiscountModelItems.length == 1 &&
               state.filtersCategoriesIndex.isNotEmpty &&
               state.itemsLoaded == 1,
@@ -380,7 +380,7 @@ void main() {
         ),
         predicate<DiscountWatcherState>(
           (state) =>
-              state.loadingStatus == LoadingStatus.loaded &&
+              state.loadingStatus == LoadingStatus.listLoadedFull &&
               state.filteredDiscountModelItems.length == 1 &&
               state.filtersCategoriesIndex.isNotEmpty &&
               state.itemsLoaded == 1,
@@ -394,7 +394,7 @@ void main() {
         ),
         predicate<DiscountWatcherState>(
           (state) =>
-              state.loadingStatus == LoadingStatus.loaded &&
+              state.loadingStatus == LoadingStatus.listLoadedFull &&
               state.filteredDiscountModelItems.length == 1 &&
               state.filtersCategoriesIndex.isNotEmpty &&
               state.itemsLoaded == 1,

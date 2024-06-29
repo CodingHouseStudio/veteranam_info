@@ -4,8 +4,6 @@ List<Widget> _fundsWidgetList({
   required BuildContext context,
   required bool isDesk,
 }) {
-  final isLoading = context.read<InvestorsWatcherBloc>().state.loadingStatus !=
-      LoadingStatus.loaded;
   final fundsModel =
       context.read<InvestorsWatcherBloc>().state.loadingFundItems;
   final fundsModelItems = <List<FundModel>>[];
@@ -22,9 +20,10 @@ List<Widget> _fundsWidgetList({
       context.read<InvestorsWatcherBloc>().state.failure == null;
   if (isDesk) {
     return cardWidgetList<List<FundModel>>(
-      isLoading: isLoading,
+      loadingStatus: context.read<InvestorsWatcherBloc>().state.loadingStatus,
       modelItems: fundsModelItems,
-      cardWidget: (modelItem) => DonatesCardsWidget(
+      cardWidget: ({required modelItem, required isLoading}) =>
+          DonatesCardsWidget(
         key: KWidgetkeys.screen.investors.cards,
         fundItems: modelItem,
         isLoading: isLoading,
@@ -39,9 +38,10 @@ List<Widget> _fundsWidgetList({
     );
   } else {
     return cardWidgetList<FundModel>(
-      isLoading: isLoading,
+      loadingStatus: context.read<InvestorsWatcherBloc>().state.loadingStatus,
       modelItems: fundsModel,
-      cardWidget: (modelItem) => DonateCardWidget(
+      cardWidget: ({required modelItem, required isLoading}) =>
+          DonateCardWidget(
         key: KWidgetkeys.screen.investors.card,
         fundModel: modelItem,
         isDesk: isDesk,

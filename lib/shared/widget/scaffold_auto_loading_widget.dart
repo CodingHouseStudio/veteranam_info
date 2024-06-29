@@ -37,7 +37,8 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
   void initState() {
     super.initState();
     _scrollController = ScrollController();
-    if (!KPlatformConstants.isWebDesktop) {
+    if (!KPlatformConstants.isWebDesktop &&
+        !(widget.cardListIsEmpty ?? false)) {
       _scrollController.addListener(_onScroll);
     }
   }
@@ -53,14 +54,16 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
             widget.titleChildWidgetsFunction?.call(isDesk: isDesk);
         final mainChildWidget = widget.mainChildWidgetsFunction(isDesk: isDesk)
           ..addAll([
-            if (widget.listCanLoaded && KPlatformConstants.isWebDesktop)
+            if (widget.listCanLoaded &&
+                KPlatformConstants.isWebDesktop &&
+                !(widget.cardListIsEmpty ?? false))
               LoadingButton(
                 isDesk: isDesk,
                 onPressed: widget.loadFunction,
                 text: widget.loadingButtonText,
                 widgetKey: KWidgetkeys.widget.scaffold.loadingButton,
               ),
-            if (widget.cardListIsEmpty ?? false) ...[
+            if ((widget.cardListIsEmpty ?? false) && Config.isProduction) ...[
               KSizedBox.kHeightSizedBox100,
               // const Center(child: KImage.emptyList),
               KSizedBox.kHeightSizedBox36,
@@ -72,7 +75,8 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
                 ),
               ),
               KSizedBox.kHeightSizedBox100,
-            ] else if (!widget.listCanLoaded) ...[
+            ],
+            if (!widget.listCanLoaded) ...[
               Center(
                 child: Text(
                   context.l10n.thatEndOfList,

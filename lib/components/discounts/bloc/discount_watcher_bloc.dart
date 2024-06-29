@@ -86,7 +86,10 @@ class DiscountWatcherBloc
     _LoadNextItems event,
     Emitter<DiscountWatcherState> emit,
   ) {
-    if (state.itemsLoaded.checkLoadingPosible(state.discountModelItems)) return;
+    if (state.itemsLoaded.checkLoadingPosible(state.discountModelItems)) {
+      emit(state.copyWith(loadingStatus: LoadingStatus.listLoadedFull));
+      return;
+    }
     emit(state.copyWith(loadingStatus: LoadingStatus.loading));
     final filterItems = _filter(
       categoryIndex: state.filtersCategoriesIndex,
@@ -98,7 +101,7 @@ class DiscountWatcherBloc
         filteredDiscountModelItems: filterItems,
         itemsLoaded: (state.itemsLoaded + KDimensions.loadItems)
             .getLoaded(list: filterItems),
-        loadingStatus: LoadingStatus.loaded,
+        loadingStatus: filterItems.isLoading(state.filteredDiscountModelItems),
       ),
     );
   }
@@ -136,6 +139,8 @@ class DiscountWatcherBloc
         filteredDiscountModelItems: filterItems,
         filtersCategoriesIndex: selectedFilters,
         itemsLoaded: state.itemsLoaded.getLoaded(list: filterItems),
+        loadingStatus:
+            filterItems.isLoadingFilter(state.filteredDiscountModelItems),
       ),
     );
   }
@@ -158,6 +163,8 @@ class DiscountWatcherBloc
         filteredDiscountModelItems: filterItems,
         filtersLocationIndex: selectedFilters,
         itemsLoaded: state.itemsLoaded.getLoaded(list: filterItems),
+        loadingStatus:
+            filterItems.isLoadingFilter(state.filteredDiscountModelItems),
       ),
     );
   }

@@ -94,6 +94,22 @@ extension ListExtensions<T> on List<T> {
     return allFilters.getToSet;
   }
 
+  LoadingStatus isLoading(
+    List<T> previousList,
+  ) {
+    return length > previousList.length
+        ? LoadingStatus.loaded
+        : LoadingStatus.listLoadedFull;
+  }
+
+  LoadingStatus isLoadingFilter(
+    List<T> previousList,
+  ) {
+    return length >= previousList.length
+        ? LoadingStatus.loaded
+        : LoadingStatus.listLoadedFull;
+  }
+
   // List<T> filterIndex(T eventFilterIndex) {
   //   final selectedFilters = List<T>.from(this);
 

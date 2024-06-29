@@ -5,13 +5,12 @@ List<Widget> _newsWidgetList({
   required bool isDesk,
 }) =>
     cardWidgetList<InformationModel>(
-      isLoading: context.read<InformationWatcherBloc>().state.loadingStatus !=
-          LoadingStatus.loaded,
+      loadingStatus: context.read<InformationWatcherBloc>().state.loadingStatus,
       modelItems: context
           .read<InformationWatcherBloc>()
           .state
           .filteredInformationModelItems,
-      cardWidget: (modelItem) => NewsCardWidget(
+      cardWidget: ({required modelItem, required isLoading}) => NewsCardWidget(
         key: KWidgetkeys.screen.information.card,
         informationItem: modelItem,
         isDesk: isDesk,

@@ -2,12 +2,14 @@ import 'package:flutter/widgets.dart';
 import 'package:kozak/shared/shared.dart';
 
 List<Widget> cardWidgetList<T>({
-  required bool isLoading,
+  required LoadingStatus loadingStatus,
   required List<T> modelItems,
-  required Widget Function(
-    T modelItem,
-    // required Key key,
-  ) cardWidget,
+  required Widget Function({
+    required T modelItem,
+    required bool isLoading,
+  }
+      // required Key key,
+      ) cardWidget,
   required int shimmerItemsNumber,
   // required Key cardKey,
   // required Key cardLastKey,
@@ -15,6 +17,8 @@ List<Widget> cardWidgetList<T>({
   required T shimmerItem,
   required bool isDesk,
 }) {
+  final isLoading = loadingStatus != LoadingStatus.loaded &&
+      loadingStatus != LoadingStatus.listLoadedFull;
   final fullList = [
     if (isNotFailure) ...[
       ...modelItems,
@@ -35,7 +39,8 @@ List<Widget> cardWidgetList<T>({
       child: SkeletonizerWidget(
         isLoading: fullList.length - index <= shimmerItemsNumber && isLoading,
         child: cardWidget(
-          fullList.elementAt(index),
+          modelItem: fullList.elementAt(index),
+          isLoading: isLoading,
         ),
       ),
     );

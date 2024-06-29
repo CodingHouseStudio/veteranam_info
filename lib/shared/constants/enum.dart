@@ -1,4 +1,4 @@
-enum LoadingStatus { initial, loading, loaded, error }
+enum LoadingStatus { initial, loading, loaded, error, listLoadedFull }
 
 enum EvaluationEnum { like, dislike, smile, none }
 
