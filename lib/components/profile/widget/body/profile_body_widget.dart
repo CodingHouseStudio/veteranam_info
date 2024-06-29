@@ -9,7 +9,7 @@ class ProfileBodyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScaffoldWidget(
-      mainChildWidgetsFunction: ({required isDesk}) => [
+      mainChildWidgetsFunction: ({required isDesk, required isTablet}) => [
         KSizedBox.kHeightSizedBox30,
         ...TitleWidget.titleWidgetList(
           title: context.l10n.myProfile,
@@ -86,8 +86,7 @@ class ProfileBodyWidget extends StatelessWidget {
                 text: context.l10n.myStory,
                 isDesk: isDesk,
                 textIconPaddingWidget: KSizedBox.kHeightSizedBox56,
-                onTap: () =>
-                    context.goNamedWithScroll(KRoute.profileMyStory.name),
+                onTap: () => context.goNamed(KRoute.profileMyStory.name),
               ),
               KSizedBox.kHeightSizedBox30,
               BoxWidget(
@@ -114,7 +113,7 @@ class ProfileBodyWidget extends StatelessWidget {
           text: context.l10n.myStory,
           isDesk: isDesk,
           textIconPaddingWidget: KSizedBox.kHeightSizedBox56,
-          onTap: () => context.goNamedWithScroll(KRoute.profileMyStory.name),
+          onTap: () => context.goNamed(KRoute.profileMyStory.name),
         ),
         KSizedBox.kHeightSizedBox30,
       ];

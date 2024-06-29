@@ -49,7 +49,7 @@ class _FeedbackBodyWidgetState extends State<FeedbackBodyWidget> {
           current.failure != null || previous.formState != current.formState,
       builder: (context, state) {
         return ScaffoldWidget(
-          mainChildWidgetsFunction: ({required isDesk}) => [
+          mainChildWidgetsFunction: ({required isDesk, required isTablet}) => [
             ..._titleWidgetList(isDesk: isDesk, context: context),
             if (context.read<FeedbackBloc>().state.formState ==
                     FeedbackEnum.success ||
@@ -65,6 +65,7 @@ class _FeedbackBodyWidgetState extends State<FeedbackBodyWidget> {
             else
               ..._formWidgegList(
                 isDesk: isDesk,
+                isTablet: isTablet,
                 context: context,
                 nameController: nameController,
                 emailController: emailController,

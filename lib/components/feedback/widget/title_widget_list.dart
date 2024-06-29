@@ -32,10 +32,8 @@ List<Widget> _titleWidgetList({
               key: KWidgetkeys.screen.feedback.title,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                IconWidget(
-                  icon: KIcon.arrowDownRight.copyWith(
-                    key: KWidgetkeys.screen.feedback.titleIcon,
-                  ),
+                const IconWidget(
+                  icon: KIcon.arrowDownRight,
                   padding: KPadding.kPaddingSize12,
                 ),
                 KSizedBox.kWidthSizedBox16,

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
-import 'package:kozak/shared/widget/statistic_box_widget.dart';
 
 part '../my_discounts_box_widget_list.dart';
 part '../my_discounts_box_widgets.dart';
@@ -43,7 +42,7 @@ class MyDiscountsBodyWidget extends StatelessWidget {
         mainDeskPadding: const EdgeInsets.symmetric(
           horizontal: KPadding.kPaddingSize100,
         ),
-        mainChildWidgetsFunction: ({required isDesk}) => [
+        mainChildWidgetsFunction: ({required isDesk, required isTablet}) => [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
