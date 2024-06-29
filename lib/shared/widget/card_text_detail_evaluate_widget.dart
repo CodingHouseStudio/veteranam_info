@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kozak/shared/shared.dart';
+import 'package:share_plus/share_plus.dart';
 
 class CardTextDetailEvaluateWidget extends StatefulWidget {
   const CardTextDetailEvaluateWidget({
@@ -186,6 +187,17 @@ class _CardTextDetailEvaluateWidgetState
                           ),
                           text: context.l10n.more,
                           onPressed: null,
+                        text: context.l10n.share,
+                        onPressed: _informationShareLink,
+                      ),
+                      if (widget.isDesk)
+                        KSizedBox.kWidthSizedBox24
+                      else
+                        KSizedBox.kWidthSizedBox8,
+                      buildIcon(
+                        icon: KIcon.safe.copyWith(
+                          key: KWidgetkeys
+                              .widget.cardTextDetailEvaluate.iconSave,
                         ),
                       ],
                     ),
@@ -241,6 +253,12 @@ class _CardTextDetailEvaluateWidgetState
           style: AppTextStyle.materialThemeLabelSmall,
         ),
       ],
+    );
+  }
+
+  Future<void> _informationShareLink() async {
+    await Share.share(
+      widget.directLink ?? widget.link!,
     );
   }
 }
