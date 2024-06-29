@@ -70,13 +70,14 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
               Center(
                 child: Text(
                   context.l10n.cardListEmptyText,
-                  key: KWidgetkeys.widget.scaffold.emptyListText,
+                  key: KWidgetkeys.widget.scaffold.endListText,
                   style: AppTextStyle.materialThemeTitleMediumNeutralVariant70,
                 ),
               ),
               KSizedBox.kHeightSizedBox100,
             ],
-            if (!widget.listCanLoaded) ...[
+            if (!widget.listCanLoaded &&
+                !(widget.cardListIsEmpty ?? false)) ...[
               Center(
                 child: Text(
                   context.l10n.thatEndOfList,
