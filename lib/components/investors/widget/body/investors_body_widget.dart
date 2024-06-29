@@ -22,6 +22,7 @@ class InvestorsBodyWidget extends StatelessWidget {
       ),
       listenWhen: (previous, current) => current.failure != null,
       builder: (context, _) => ScaffoldAutoLoadingWidget(
+        loadingButtonText: context.l10n.moreFunds,
         mainChildWidgetsFunction: ({required isDesk}) => [
           KSizedBox.kHeightSizedBox24,
           ...TitleWidget.pointTitleWidgetList(
@@ -48,7 +49,7 @@ class InvestorsBodyWidget extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: SectionWidget.get(
-                      isDesk: true,
+                      isTablet: isDesk,
                       textPoint: null,
                       title: context.l10n.supportOurVeterans,
                       subtitle: context.l10n.investorsSubtitle,
@@ -69,7 +70,7 @@ class InvestorsBodyWidget extends StatelessWidget {
             )
           else ...[
             ...SectionWidget.get(
-              isDesk: false,
+              isTablet: isDesk,
               textPoint: null,
               title: context.l10n.supportOurVeterans,
               subtitle: context.l10n.investorsSubtitle,
@@ -106,18 +107,18 @@ class InvestorsBodyWidget extends StatelessWidget {
             KSizedBox.kHeightSizedBox32
           else
             KSizedBox.kHeightSizedBox24,
-          if (_.fundItems.isEmpty && _.loadingStatus == LoadingStatus.loaded)
-            Config.isDevelopment
-                ? MockButtonWidget(
-                    key: KWidgetkeys.screen.investors.buttonMock,
-                    onPressed: () {
-                      GetIt.I.get<IInvestorsRepository>().addMockFunds();
-                      context
-                          .read<InvestorsWatcherBloc>()
-                          .add(const InvestorsWatcherEvent.started());
-                    },
-                  )
-                : const SizedBox.shrink()
+          if (_.fundItems.isEmpty &&
+              _.loadingStatus == LoadingStatus.loaded &&
+              Config.isDevelopment)
+            MockButtonWidget(
+              key: KWidgetkeys.screen.investors.buttonMock,
+              onPressed: () {
+                GetIt.I.get<IInvestorsRepository>().addMockFunds();
+                context
+                    .read<InvestorsWatcherBloc>()
+                    .add(const InvestorsWatcherEvent.started());
+              },
+            )
           else
             ..._fundsWidgetList(context: context, isDesk: isDesk),
           if (isDesk)

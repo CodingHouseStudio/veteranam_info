@@ -14,7 +14,7 @@ class StoryCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CardTextDetailEvaluateWidget(
-      image: storyModel.image.firstImage,
+      image: storyModel.image,
       text: storyModel.story,
       titleTopMob: true,
       titleWidget: Row(
@@ -29,7 +29,7 @@ class StoryCardWidget extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(KSize.kUserPhoto),
               child: ImageWidget(
-                imageUrl: storyModel.userPhoto.firstImage!,
+                imageUrl: storyModel.userPhoto!.downloadURL,
                 fit: BoxFit.contain,
                 size: KSize.kUserPhoto,
               ),

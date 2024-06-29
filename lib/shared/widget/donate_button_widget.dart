@@ -18,25 +18,21 @@ class DonateButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (isDesk) {
-      return Align(
-        child: _DonateButtonWidgetDesk(
-          isDesk: isDesk,
-          text: text,
-          onPressed: onPressed,
-          icon: icon,
-        ),
-      );
-    } else {
-      return Align(
-        child: _DonateButtonWidgetMob(
-          isDesk: isDesk,
-          text: text,
-          onPressed: onPressed,
-          icon: icon,
-        ),
-      );
-    }
+    return Center(
+      child: isDesk
+          ? _DonateButtonWidgetDesk(
+              isDesk: isDesk,
+              text: text,
+              onPressed: onPressed,
+              icon: icon,
+            )
+          : _DonateButtonWidgetMob(
+              isDesk: isDesk,
+              text: text,
+              onPressed: onPressed,
+              icon: icon,
+            ),
+    );
   }
 }
 
@@ -139,9 +135,9 @@ class _DonateButtonWidgetMob extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.only(
           left: KPadding.kPaddingSize32,
-          bottom: KPadding.kPaddingSize16,
-          right: KPadding.kPaddingSize16,
-          top: KPadding.kPaddingSize16,
+          bottom: KPadding.kPaddingSize8,
+          right: KPadding.kPaddingSize8,
+          top: KPadding.kPaddingSize8,
         ),
         child: Row(
           children: [

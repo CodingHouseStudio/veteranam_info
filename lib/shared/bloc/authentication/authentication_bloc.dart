@@ -7,6 +7,7 @@ import 'package:injectable/injectable.dart';
 import 'package:kozak/shared/shared.dart';
 
 part 'authentication_event.dart';
+
 part 'authentication_state.dart';
 
 @Singleton()
@@ -133,7 +134,9 @@ class AuthenticationBloc
     Emitter<AuthenticationState> emit,
   ) async {
     final userSetting = state.userSetting.copyWith(
-      locale: event.language,
+      locale: state.userSetting.locale == Language.english
+          ? Language.ukrain
+          : Language.english,
     );
     add(_AppUserSettingChanged(userSetting));
     if (state.user.hasValue) {

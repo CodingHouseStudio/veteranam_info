@@ -20,19 +20,11 @@ Future<void> homeMockButtonHelper(
         itemKey: KWidgetkeys.screen.home.buttonMock,
       );
 
-      expect(
-        find.byKey(KWidgetkeys.screen.home.faq),
-        findsNothing,
+      await mockButtonHelper(
+        tester: tester,
+        card: KWidgetkeys.screen.home.faq,
+        buttonMock: KWidgetkeys.screen.home.buttonMock,
       );
-
-      await dialogFailureGetHelper(tester: tester, isFailure: false);
-
-      expect(
-        find.byKey(KWidgetkeys.screen.home.buttonMock),
-        findsOneWidget,
-      );
-
-      await tester.tap(find.byKey(KWidgetkeys.screen.home.buttonMock));
     },
   );
 }

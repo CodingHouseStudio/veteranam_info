@@ -17,7 +17,10 @@ List<Widget> _discountsboxWidgetList({
         )
       : context.read<MyDiscountsWatcherBloc>().state.discountsModelItems;
 
-  return List.generate(discountsWidgetList.length, (index) {
+  return List.generate(
+      context.read<MyDiscountsWatcherBloc>().state.failure == null
+          ? discountsWidgetList.length
+          : 0, (index) {
     return Padding(
       padding: index != 0
           ? const EdgeInsets.only(

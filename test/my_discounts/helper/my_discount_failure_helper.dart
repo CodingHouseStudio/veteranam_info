@@ -3,7 +3,7 @@ import 'package:kozak/shared/shared.dart';
 
 import '../../text_dependency.dart';
 
-Future<void> discountFailureHelper(
+Future<void> myDiscountFailureHelper(
   WidgetTester tester,
 ) async {
   expect(
@@ -16,5 +16,5 @@ Future<void> discountFailureHelper(
     findsNothing,
   );
 
-  await dialogFailureGetHelper(tester: tester);
+  await dialogFailureGetTapHelper(tester: tester);
 }
