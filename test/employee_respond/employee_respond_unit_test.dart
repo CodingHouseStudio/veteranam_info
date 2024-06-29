@@ -6,7 +6,7 @@ import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
 import 'package:mockito/mockito.dart';
 
-import '../../text_dependency.dart';
+import '../text_dependency.dart';
 
 void main() {
   setupFirebaseAuthMocks();
