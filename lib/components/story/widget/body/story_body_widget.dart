@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
 
@@ -20,6 +21,7 @@ class StoryBodyWidget extends StatelessWidget {
       listenWhen: (previous, current) => current.failure != null,
       builder: (context, _) {
         return ScaffoldAutoLoadingWidget(
+          loadingButtonText: context.l10n.moreStories,
           titleChildWidgetsFunction: ({required isDesk}) => [
             if (isDesk)
               KSizedBox.kHeightSizedBox40
@@ -37,7 +39,7 @@ class StoryBodyWidget extends StatelessWidget {
             else
               KSizedBox.kHeightSizedBox24,
           ],
-          mainDeskPadding: const EdgeInsets.symmetric(
+          mainDeskPadding: ({required maxWidth}) => const EdgeInsets.symmetric(
             horizontal: KPadding.kPaddingSize48,
           ),
           mainChildWidgetsFunction: ({required isDesk}) => [
@@ -47,7 +49,7 @@ class StoryBodyWidget extends StatelessWidget {
               text: context.l10n.addYourStory,
               onPressed: context.read<AuthenticationBloc>().state.status ==
                       AuthenticationStatus.authenticated
-                  ? () => context.goNamedWithScroll(KRoute.storyAdd.name)
+                  ? () => context.goNamed(KRoute.storyAdd.name)
                   : null,
             ),
             if (isDesk)

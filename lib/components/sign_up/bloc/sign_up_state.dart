@@ -8,7 +8,7 @@ enum SignUpError {
 }
 
 extension AuthFailureToSignUpError on SomeFailure {
-  SignUpError toSignUpError() {
+  SignUpError _toSignUpError() {
     switch (this) {
       case FailureDuplicate():
         return SignUpError.duplicate;

@@ -178,7 +178,7 @@ abstract class KButtonStyles {
     shape: WidgetStatePropertyAll(
       RoundedRectangleBorder(
         borderRadius: KBorderRadius.kBorderRadius32,
-        side: BorderSide(color: AppColors.materialThemeKeyColorsNeutralVariant),
+        side: BorderSide(),
       ),
     ),
   );
@@ -223,6 +223,30 @@ abstract class KButtonStyles {
     backgroundColor: WidgetStatePropertyAll(AppColors.materialThemeWhite),
   );
 
+  static const advancedButtonStyle = ButtonStyle(
+    padding:
+        WidgetStatePropertyAll(EdgeInsets.only(right: KPadding.kPaddingSize8)),
+    shape: WidgetStatePropertyAll(
+      RoundedRectangleBorder(
+        borderRadius: KBorderRadius.kBorderRadius32,
+      ),
+    ),
+  );
+  static const advancedFilterButtonStyle = ButtonStyle(
+    padding: WidgetStatePropertyAll(
+      EdgeInsets.symmetric(
+        horizontal: KPadding.kPaddingSize16,
+        vertical: KPadding.kPaddingSize8,
+      ),
+    ),
+    backgroundColor: WidgetStatePropertyAll(AppColors.materialThemeSourceSeed),
+    shape: WidgetStatePropertyAll(
+      RoundedRectangleBorder(
+        borderRadius: KBorderRadius.kBorderRadius32,
+      ),
+    ),
+  );
+
   static const additionalButtonStyle = ButtonStyle(
     padding: WidgetStatePropertyAll(EdgeInsets.zero),
     overlayColor: WidgetStatePropertyAll(Colors.transparent),
@@ -231,6 +255,8 @@ abstract class KButtonStyles {
         borderRadius: KBorderRadius.kBorderRadius32,
       ),
     ),
+    foregroundColor:
+        WidgetStatePropertyAll(AppColors.materialThemeKeyColorsSecondary),
   );
 
   static const filterButtonStyleBorder = ButtonStyle(
@@ -263,5 +289,20 @@ abstract class KButtonStyles {
       ),
     ),
     backgroundColor: WidgetStatePropertyAll(AppColors.materialThemeWhite),
+  );
+
+  static const borderBlackButtonStyle = ButtonStyle(
+    padding: WidgetStatePropertyAll(
+      EdgeInsets.symmetric(
+        vertical: KPadding.kPaddingSize8,
+        horizontal: KPadding.kPaddingSize24,
+      ),
+    ),
+    shape: WidgetStatePropertyAll(
+      RoundedRectangleBorder(
+        borderRadius: KBorderRadius.kBorderRadius32,
+        side: BorderSide(color: AppColors.materialThemeKeyColorsSecondary),
+      ),
+    ),
   );
 }

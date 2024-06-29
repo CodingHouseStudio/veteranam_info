@@ -8,7 +8,7 @@ Future<void> sendUserRoleHelper({
   required WidgetTester tester,
   required AuthenticationRepository mockAuthenticationRepository,
 }) async {
-  await chekPointHelper(tester);
+  await chekPointHelper(tester: tester);
 
   await scrollingHelper(
     tester: tester,

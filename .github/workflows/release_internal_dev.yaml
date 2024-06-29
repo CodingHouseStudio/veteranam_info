@@ -3,10 +3,11 @@ name: DEVELOPMENT build
 
 # Controls when the workflow will run
 on:
-  #   workflow_dispatch:
-  #   # Triggers the workflow on push or pull request events but only for the dev-release
-  push:
-    branches: [dev]
+  workflow_dispatch:
+    branches: [main]
+concurrency:
+  group: dev-$
+  cancel-in-progress: true
 
 permissions:
   id-token: write # This is required for requesting the JWT
@@ -84,7 +85,7 @@ jobs:
       - name: Build the Web static pages # generate deployment files
         run: |
           buildNumber=$(date +%s)
-          flutter build web --release -t lib/main_development.dart --web-renderer html --build-name=1.0.2 --build-number=$buildNumber --dart-define=FLAVOUR=development
+          flutter build web --release -t lib/main_development.dart --web-renderer canvaskit --build-name=1.0.2 --build-number=$buildNumber --dart-define=FLAVOUR=development
           dt="$(date "+%s000")"
           mv build/web/main.dart.js build/web/$dt.main.dart.js
           sed "s/main.dart.js/$dt.main.dart.js/g" build/web/index.html >build/web/newindex.html

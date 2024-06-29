@@ -149,8 +149,7 @@ abstract class KMockText {
     phoneNumber: '+380 800 503 680',
     directLink:
         'https://esculab.com/20-vidsotkiv-na-analizy-dlya-viyskovyh-ta-lyudey-yaki-vnutrishno-peremishcheni',
-    dateVerified: DateTime(2024, 6, 3),
-    date: ExtendedDateTime.current,
+    dateVerified: ExtendedDateTime.current,
     userName: 'Anonymous',
   );
   static final informationModel = InformationModel(
@@ -186,7 +185,7 @@ abstract class KAppText {
   static const String authChange = 'AuthenticationStatusChanged:';
   static const String backendString = '';
   static const String usernameToken = 'USERNAME_TOKEN';
-  static const String madeBy = '© MadeByCodingHouseLLC 2024';
+  static const String madeBy = '© Coding House Studio LLC - 2024';
   static const String email = 'hello@veteranam.info';
   static const String linkedIn = 'https://www.linkedin.com/company/veteranam/';
   static const String instagram = 'https://www.instagram.com/veteranam_info';

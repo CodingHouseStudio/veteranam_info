@@ -44,8 +44,8 @@ class _CheckPointSingleWidgetState extends State<CheckPointSingleWidget> {
                 key: KWidgetkeys.widget.checkPointSingle.icon,
               )
             : const SizedBox(
-                width: KSize.kcheckPointIconSize,
-                height: KSize.kcheckPointIconSize,
+                width: KSize.kIconSize,
+                height: KSize.kIconSize,
               ),
       ),
     );

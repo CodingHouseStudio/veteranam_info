@@ -1,23 +1,29 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:kozak/shared/shared.dart';
 
-import '../../text_dependency.dart';
+import '../../../text_dependency.dart';
 
-Future<void> chekPointSingleHelper(
-  WidgetTester tester,
-) async {
+Future<void> chekPointSingleHelper({
+  required WidgetTester tester,
+  bool hasAmount = false,
+}) async {
   await scrollingHelper(
     tester: tester,
     itemKey: KWidgetkeys.widget.checkPointSingle.widget,
   );
   expect(
-    find.byKey(KWidgetkeys.widget.checkPointSingle.widget).first,
-    findsOneWidget,
+    find.byKey(KWidgetkeys.widget.checkPointSingle.widget),
+    findsWidgets,
   );
 
   expect(
     find.byKey(KWidgetkeys.widget.checkPointSingle.icon),
     findsNothing,
+  );
+
+  expect(
+    find.byKey(KWidgetkeys.widget.checkPoint.ammount),
+    hasAmount ? findsWidgets : findsNothing,
   );
 
   await scrollingHelper(
