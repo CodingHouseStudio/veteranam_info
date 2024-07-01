@@ -2140,11 +2140,31 @@ class AppLocalizations {
     );
   }
 
-  /// `You have loaded the full list`
-  String get youHaveLoadedFullList {
+  /// `That's the end of the list! We hope you found what you were looking for.`
+  String get thatEndOfList {
     return Intl.message(
-      'You have loaded the full list',
-      name: 'youHaveLoadedFullList',
+      'That\'s the end of the list! We hope you found what you were looking for.',
+      name: 'thatEndOfList',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Return to the top`
+  String get returnToTop {
+    return Intl.message(
+      'Return to the top',
+      name: 'returnToTop',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sorry, nothing was found using your filters. Try changing your search criteria`
+  String get cardListEmptyText {
+    return Intl.message(
+      'Sorry, nothing was found using your filters. Try changing your search criteria',
+      name: 'cardListEmptyText',
       desc: '',
       args: [],
     );

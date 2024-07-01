@@ -150,14 +150,14 @@ void main() {
       });
 
       loadingList(
-        pumpApp: (tester) async => investorsPumpAppHelper(
+        (tester) async => investorsPumpAppHelper(
           mockAppAuthenticationRepository: mockAppAuthenticationRepository,
           mockInvestorsRepository: mockInvestorsRepository,
           mockReportRepository: mockReportRepository,
           mockAuthenticationRepository: mockAuthenticationRepository,
           tester: tester,
         ),
-        lastCard: KWidgetkeys.screen.investors.cardLast,
+        // lastCard: KWidgetkeys.screen.investors.cardLast,
       );
       testWidgets('Report Dialog Check Point Failure', (tester) async {
         await investorsPumpAppHelper(

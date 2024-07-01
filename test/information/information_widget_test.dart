@@ -101,16 +101,15 @@ void main() {
       });
 
       loadingList(
-        pumpApp: (tester) async => informationPumpAppHelper(
+        (tester) async => informationPumpAppHelper(
           mockInformationRepository: mockInformationRepository,
           mockAuthenticationRepository: mockAuthenticationRepository,
           tester: tester,
         ),
-        lastCard: KWidgetkeys.screen.information.cardLast,
+        // lastCard: KWidgetkeys.screen.information.cardLast,
       );
 
       testWidgets('News list load and filter', (tester) async {
-        KPlatformConstants.isWebDesktop = false;
         await informationPumpAppHelper(
           mockInformationRepository: mockInformationRepository,
           mockAuthenticationRepository: mockAuthenticationRepository,

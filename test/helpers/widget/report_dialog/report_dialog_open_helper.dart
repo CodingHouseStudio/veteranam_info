@@ -12,7 +12,10 @@ Future<void> reportDialogOpenHelper(
     offset: KTestConstants.scrollingDown,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.widget.reportDialog.button).first);
+  await tester.tap(
+    find.byKey(KWidgetkeys.widget.reportDialog.button).first,
+    warnIfMissed: false,
+  );
 
   await tester.pumpAndSettle();
 

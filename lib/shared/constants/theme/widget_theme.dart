@@ -127,7 +127,7 @@ abstract class KWidgetTheme {
     borderRadius: KBorderRadius.kBorderRadius32,
   );
   static const inputDecoration = InputDecoration(
-    hintStyle: AppTextStyle.materialThemeTitleMediumHint,
+    hintStyle: AppTextStyle.materialThemeTitleMediumNeutralVariant35,
     contentPadding: EdgeInsets.symmetric(
       horizontal: KPadding.kPaddingSize20,
     ),
