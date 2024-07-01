@@ -20,6 +20,7 @@ Future<void> scrollingHelper({
     await tester.drag(
       find.byKey(scrollKey ?? KWidgetkeys.widget.scaffold.scroll),
       offset,
+      warnIfMissed: false,
     );
     await tester.pumpAndSettle();
   }

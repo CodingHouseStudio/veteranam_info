@@ -183,6 +183,21 @@ abstract class KButtonStyles {
     ),
   );
 
+  static const endListButtonStyle = ButtonStyle(
+    padding: WidgetStatePropertyAll(
+      EdgeInsets.symmetric(
+        horizontal: KPadding.kPaddingSize16,
+        vertical: KPadding.kPaddingSize4,
+      ),
+    ),
+    shape: WidgetStatePropertyAll(
+      RoundedRectangleBorder(
+        borderRadius: KBorderRadius.kBorderRadius32,
+        side: BorderSide(),
+      ),
+    ),
+  );
+
   static const dropListButtonStyle = ButtonStyle(
     minimumSize: WidgetStatePropertyAll(
       Size(KMinMaxSize.minWidth100, KMinMaxSize.minHeight50),
