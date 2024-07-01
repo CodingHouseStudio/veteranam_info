@@ -10,8 +10,10 @@ class NawbarWidget extends SliverPersistentHeaderDelegate {
     this.widgetKey,
     this.childWidget,
     this.maxMinHeight,
+    this.isTablet,
   });
   final bool isDesk;
+  final bool? isTablet;
   final Key? widgetKey;
   final Widget? childWidget;
   final double? maxMinHeight;
@@ -25,7 +27,8 @@ class NawbarWidget extends SliverPersistentHeaderDelegate {
   //Rebuild screen only when isDesk value change
   @override
   bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) =>
-      oldDelegate is NawbarWidget && isDesk != oldDelegate.isDesk;
+      oldDelegate is NawbarWidget &&
+      (isDesk != oldDelegate.isDesk || isTablet != oldDelegate.isTablet);
 
   @override
   Widget build(
@@ -37,6 +40,7 @@ class NawbarWidget extends SliverPersistentHeaderDelegate {
       key: widgetKey,
       isDesk: isDesk,
       childWidget: childWidget,
+      isTablet: isTablet,
     );
   }
 }
@@ -44,10 +48,12 @@ class NawbarWidget extends SliverPersistentHeaderDelegate {
 class _NawbarWidgetImplematation extends StatefulWidget {
   const _NawbarWidgetImplematation({
     required this.isDesk,
+    this.isTablet,
     super.key,
     this.childWidget,
   });
   final bool isDesk;
+  final bool? isTablet;
   final Widget? childWidget;
 
   @override
@@ -81,10 +87,14 @@ class _NawbarWidgetImplematationState
             top: KPadding.kPaddingSize24,
             left: widget.isDesk
                 ? KPadding.kPaddingSize90
-                : KPadding.kPaddingSize16,
+                : widget.isTablet ?? false
+                    ? KPadding.kPaddingSize32
+                    : KPadding.kPaddingSize16,
             right: widget.isDesk
                 ? KPadding.kPaddingSize90
-                : KPadding.kPaddingSize16,
+                : widget.isTablet ?? false
+                    ? KPadding.kPaddingSize32
+                    : KPadding.kPaddingSize16,
           ),
           padding: const EdgeInsets.only(
             left: KPadding.kPaddingSize32,
@@ -95,7 +105,7 @@ class _NawbarWidgetImplematationState
           child: Row(
             // mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              if (widget.isDesk || !isFocused)
+              if ((widget.isDesk || (widget.isTablet ?? false)) || !isFocused)
                 IconButton(
                   padding: EdgeInsets.zero,
                   onPressed: () => EasyDebounce.debounce(
@@ -108,7 +118,7 @@ class _NawbarWidgetImplematationState
                   ),
                 ),
               if (Config.isDevelopment)
-                if (widget.isDesk)
+                if (widget.isDesk || (widget.isTablet ?? false))
                   KSizedBox.kWidthSizedBox40
                 else
                   KSizedBox.kWidthSizedBox22,
@@ -117,62 +127,72 @@ class _NawbarWidgetImplematationState
                   child: TextFieldWidget(
                     key: _formKey,
                     widgetKey: KWidgetkeys.widget.nawbar.field,
-                    hintStyle: widget.isDesk
+                    hintStyle: (widget.isDesk || (widget.isTablet ?? false))
                         ? AppTextStyle.text24
                         : AppTextStyle.text16,
                     focusNode: focusNode,
                     prefixIcon: KIcon.search,
                     onChanged: (text) {},
                     hintText: context.l10n.search,
-                    // suffixIcon: widget.isDesk || !widget.hasMicrophone
+                    // suffixIcon: (widget.isDesk && (widget.isTablet?? false))  || !widget.hasMicrophone
                     //     ? null
                     //     : KIcon.mic.setIconKey(
                     //         KWidgetkeys.widget.nawbar.iconMic,
                     //       ),
-                    isDesk: widget.isDesk,
-                    contentPadding: widget.isDesk
-                        ? EdgeInsets.zero
-                        : const EdgeInsets.all(KPadding.kPaddingSize16),
+                    isDesk: widget.isDesk || (widget.isTablet ?? false),
+                    contentPadding:
+                        (widget.isDesk || (widget.isTablet ?? false))
+                            ? EdgeInsets.zero
+                            : const EdgeInsets.all(KPadding.kPaddingSize16),
                   ),
                 )
-              else if (widget.isDesk) ...[
+              else if (widget.isDesk || (widget.isTablet ?? false)) ...[
                 Expanded(
-                  child: TextButton.icon(
-                    style: const ButtonStyle(alignment: Alignment.centerRight),
-                    onPressed: () => context.goNamed(KRoute.discounts.name),
-                    label: Text(
-                      context.l10n.discounts,
-                      style: AppTextStyle.materialThemeTitleMedium,
+                  child: Align(
+                    alignment: Alignment.centerRight,
+                    child: TextButton.icon(
+                      style:
+                          const ButtonStyle(alignment: Alignment.centerRight),
+                      onPressed: () => context.goNamed(KRoute.discounts.name),
+                      label: Text(
+                        context.l10n.discounts,
+                        style: AppTextStyle.materialThemeTitleMedium,
+                      ),
+                      icon: KIcon.tag,
                     ),
-                    icon: KIcon.tag,
                   ),
                 ),
                 KSizedBox.kWidthSizedBox64,
                 Expanded(
-                  child: TextButton.icon(
-                    onPressed: () => context.goNamed(KRoute.information.name),
-                    label: Text(
-                      context.l10n.information,
-                      style: AppTextStyle.materialThemeTitleMedium,
+                  child: Center(
+                    child: TextButton.icon(
+                      onPressed: () => context.goNamed(KRoute.information.name),
+                      label: Text(
+                        context.l10n.information,
+                        style: AppTextStyle.materialThemeTitleMedium,
+                      ),
+                      icon: KIcon.globe,
                     ),
-                    icon: KIcon.globe,
                   ),
                 ),
                 KSizedBox.kWidthSizedBox64,
                 Expanded(
-                  child: TextButton.icon(
-                    style: const ButtonStyle(alignment: Alignment.centerLeft),
-                    onPressed: () => context.goNamed(KRoute.investors.name),
-                    label: Text(
-                      context.l10n.investors,
-                      style: AppTextStyle.materialThemeTitleMedium,
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: TextButton.icon(
+                      style: const ButtonStyle(alignment: Alignment.centerLeft),
+                      onPressed: () => context.goNamed(KRoute.investors.name),
+                      label: Text(
+                        context.l10n.investors,
+                        style: AppTextStyle.materialThemeTitleMedium,
+                      ),
+                      icon: KIcon.fileText,
                     ),
-                    icon: KIcon.fileText,
                   ),
                 ),
               ],
 
-              // if (widget.isDesk && widget.hasMicrophone)
+              // if ((widget.isDesk && (widget.isTablet?? false))  && widget.hasMicrophone)
               //   Padding(
               //     padding: const EdgeInsets.only(right:
               // KPadding.kPaddingSize32),
@@ -181,12 +201,13 @@ class _NawbarWidgetImplematationState
               //       icon: KIcon.mic,
               //     ),
               //   ),
-              if (widget.isDesk || !isFocused) const LanguagesSwitcherWidget(),
+              if ((widget.isDesk || (widget.isTablet ?? false)) || !isFocused)
+                const LanguagesSwitcherWidget(),
               KSizedBox.kWidthSizedBox16,
               if (context.read<AuthenticationBloc>().state.status !=
                       AuthenticationStatus.authenticated &&
                   Config.isDevelopment)
-                if (widget.isDesk)
+                if (widget.isDesk || (widget.isTablet ?? false))
                   TextButton(
                     key: KWidgetkeys.widget.nawbar.button,
                     style: KButtonStyles.whiteButtonStyle,
@@ -207,7 +228,7 @@ class _NawbarWidgetImplematationState
               if (context.read<AuthenticationBloc>().state.status ==
                       AuthenticationStatus.authenticated &&
                   Config.isDevelopment)
-                if (!isFocused || widget.isDesk)
+                if (!isFocused || (widget.isDesk || (widget.isTablet ?? false)))
                   if (context.read<AuthenticationBloc>().state.user!.photo ==
                       null)
                     InkWell(

@@ -281,7 +281,7 @@ class HomeBodyWidget extends StatelessWidget {
                   else
                     ..._questionWidgetList(
                       context: context,
-                      isDesk: isDesk,
+                      isDesk: isTablet,
                     ),
                 ],
               ),

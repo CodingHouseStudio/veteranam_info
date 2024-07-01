@@ -54,7 +54,15 @@ class ScaffoldWidget extends StatelessWidget {
             slivers: [
               SliverPersistentHeader(
                 delegate: NawbarWidget(
-                  isDesk: isTablet,
+                  isDesk: isDesk,
+                  isTablet: isTablet,
+                  // margin: !isDesk && isTablet
+                  //     ? EdgeInsets.only(
+                  //         top: KPadding.kPaddingSize16,
+                  //         left: KPadding.kPaddingSize32,
+                  //         right: KPadding.kPaddingSize32,
+                  //       )
+                  //     : null,
                 ),
               ),
               if (titleChildWidgetsFunction != null)
@@ -96,7 +104,10 @@ class ScaffoldWidget extends StatelessWidget {
                           ? const EdgeInsets.all(KPadding.kPaddingSize32)
                               .copyWith(left: KPadding.kPaddingSize46)
                           : isTablet
-                              ? const EdgeInsets.all(KPadding.kPaddingSize46)
+                              ? const EdgeInsets.symmetric(
+                                  horizontal: KPadding.kPaddingSize46,
+                                  vertical: KPadding.kPaddingSize32,
+                                )
                               : const EdgeInsets.symmetric(
                                   vertical: KPadding.kPaddingSize32,
                                   horizontal: KPadding.kPaddingSize16,
