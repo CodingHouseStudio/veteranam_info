@@ -26,7 +26,7 @@ dependencies:
   flutter_markdown: ^0.7.1
   flutter_rating_bar: ^4.0.1
   flutter_secure_storage: ^9.0.0
-  flutter_svg: ^2.0.10+1
+  # flutter_svg: ^2.0.10+1
   formz: ^0.7.0
   freezed: ^2.5.2
   freezed_annotation: ^2.4.1
