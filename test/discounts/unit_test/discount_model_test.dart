@@ -12,8 +12,8 @@ void main() {
     final fullJson = {
       DiscountModelJsonField.id: KTestText.discountModelItems.last.id,
       DiscountModelJsonField.userId: KTestText.discountModelItems.last.userId,
-      DiscountModelJsonField.additionaldetails:
-          KTestText.discountModelItems.last.additionaldetails,
+      DiscountModelJsonField.additionalDetails:
+          KTestText.discountModelItems.last.additionalDetails,
       DiscountModelJsonField.category:
           KTestText.discountModelItems.last.category,
       DiscountModelJsonField.categoryUA:
@@ -93,7 +93,7 @@ void main() {
       //     KTestText.discountModelItems.last.date.toIso8601String(),
       DiscountModelJsonField.directLink: null,
       DiscountModelJsonField.html: null,
-      DiscountModelJsonField.additionaldetails: null,
+      DiscountModelJsonField.additionalDetails: null,
       DiscountModelJsonField.userName: null,
     };
     group('${KGroupText.modelJson} ', () {
@@ -113,8 +113,8 @@ void main() {
           KTestText.discountModelItems.last.userId,
         );
         expect(
-          discountModel.additionaldetails,
-          KTestText.discountModelItems.last.additionaldetails,
+          discountModel.additionalDetails,
+          KTestText.discountModelItems.last.additionalDetails,
         );
         expect(
           discountModel.category,
@@ -218,7 +218,7 @@ void main() {
           null,
         );
         expect(
-          discountModel.additionaldetails,
+          discountModel.additionalDetails,
           null,
         );
         expect(
@@ -316,8 +316,8 @@ void main() {
               KTestText.discountModelItems.last.userId,
           DiscountModelJsonField.userName:
               KTestText.discountModelItems.last.userName,
-          DiscountModelJsonField.additionaldetails:
-              KTestText.discountModelItems.last.additionaldetails,
+          DiscountModelJsonField.additionalDetails:
+              KTestText.discountModelItems.last.additionalDetails,
           DiscountModelJsonField.category:
               KTestText.discountModelItems.last.category,
           DiscountModelJsonField.categoryUA:
@@ -375,7 +375,7 @@ void main() {
         final discountModelJson = KTestText.discountModelItems.last
             .copyWith(
               directLink: null,
-              additionaldetails: null,
+              additionalDetails: null,
               html: null,
               userId: null,
               userName: null,
