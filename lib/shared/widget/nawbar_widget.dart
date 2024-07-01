@@ -103,11 +103,9 @@ class _NawbarWidgetImplematationState
                     Duration.zero,
                     () => context.goNamedWithScroll(KRoute.home.name),
                   ),
-                  icon: KImage.logo
-                  // .copyWith(
-                  //   key: KWidgetkeys.widget.nawbar.logo,
-                  // )
-                  ,
+                  icon: KImage.logo.setKey(
+                    KWidgetkeys.widget.nawbar.logo,
+                  ),
                 ),
               if (Config.isDevelopment)
                 if (widget.isDesk)
