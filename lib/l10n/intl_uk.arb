@@ -4,7 +4,7 @@
   "login": "Увійти",
   "search": "Пошук...",
   "hide": "Сховати",
-  "detail": "Детальніше",
+  "detail": "Більше",
   "resetAll": "Скинути все",
   "aboutUs": "Про проєкт",
   "stories": "Історії",
@@ -241,5 +241,14 @@
   "useful": "Корисно",
   "website": "Сайт",
   "share": "Поділитися",
-  "save": "Зберегти"
+  "save": "Зберегти",
+  "webSite": "Веб сайт",
+  "report": "Поскаржитись",
+  "hideExpansion": "сховати...",
+  "moreCities": "Ще {count} міст..",
+  "@moreCities": {
+    "placeholders": {
+      "count": {}
+    }
+  }
 }
