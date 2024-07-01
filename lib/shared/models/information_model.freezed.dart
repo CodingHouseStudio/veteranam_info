@@ -30,7 +30,7 @@ mixin _$InformationModel {
   String get status => throw _privateConstructorUsedError;
   DateTime get fetchDate => throw _privateConstructorUsedError;
   @ImageConverter()
-  List<ImageModel>? get image => throw _privateConstructorUsedError;
+  ImageModel? get image => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -54,6 +54,8 @@ abstract class $InformationModelCopyWith<$Res> {
       String topicUA,
       String status,
       DateTime fetchDate,
+      String? link,
+      String? directLink,
       @ImageConverter() List<ImageModel>? image});
 }
 
@@ -121,8 +123,20 @@ class _$InformationModelCopyWithImpl<$Res, $Val extends InformationModel>
       image: freezed == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
-              as List<ImageModel>?,
+              as ImageModel?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ImageModelCopyWith<$Res>? get image {
+    if (_value.image == null) {
+      return null;
+    }
+
+    return $ImageModelCopyWith<$Res>(_value.image!, (value) {
+      return _then(_value.copyWith(image: value) as $Val);
+    });
   }
 }
 
@@ -144,6 +158,8 @@ abstract class _$$InformationModelImplCopyWith<$Res>
       String topicUA,
       String status,
       DateTime fetchDate,
+      String? link,
+      String? directLink,
       @ImageConverter() List<ImageModel>? image});
 }
 
@@ -207,9 +223,9 @@ class __$$InformationModelImplCopyWithImpl<$Res>
           : fetchDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
       image: freezed == image
-          ? _value._image
+          ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
-              as List<ImageModel>?,
+              as ImageModel?,
     ));
   }
 }
@@ -227,10 +243,11 @@ class _$InformationModelImpl implements _InformationModel {
       required this.topicUA,
       required this.status,
       required this.fetchDate,
+      this.link,
+      this.directLink,
       @ImageConverter() final List<ImageModel>? image})
       : _category = category,
-        _categoryUA = categoryUA,
-        _image = image;
+        _categoryUA = categoryUA;
 
   factory _$InformationModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$InformationModelImplFromJson(json);
@@ -265,16 +282,14 @@ class _$InformationModelImpl implements _InformationModel {
   final String status;
   @override
   final DateTime fetchDate;
+  @override
+  final String? link;
+  @override
+  final String? directLink;
   final List<ImageModel>? _image;
   @override
   @ImageConverter()
-  List<ImageModel>? get image {
-    final value = _image;
-    if (value == null) return null;
-    if (_image is EqualUnmodifiableListView) return _image;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
+  final ImageModel? image;
 
   @override
   String toString() {
@@ -297,6 +312,9 @@ class _$InformationModelImpl implements _InformationModel {
             (identical(other.status, status) || other.status == status) &&
             (identical(other.fetchDate, fetchDate) ||
                 other.fetchDate == fetchDate) &&
+            (identical(other.link, link) || other.link == link) &&
+            (identical(other.directLink, directLink) ||
+                other.directLink == directLink) &&
             const DeepCollectionEquality().equals(other._image, _image));
   }
 
@@ -313,6 +331,8 @@ class _$InformationModelImpl implements _InformationModel {
       topicUA,
       status,
       fetchDate,
+      link,
+      directLink,
       const DeepCollectionEquality().hash(_image));
 
   @JsonKey(ignore: true)
@@ -341,6 +361,8 @@ abstract class _InformationModel implements InformationModel {
           required final String topicUA,
           required final String status,
           required final DateTime fetchDate,
+          final String? link,
+          final String? directLink,
           @ImageConverter() final List<ImageModel>? image}) =
       _$InformationModelImpl;
 
@@ -367,7 +389,7 @@ abstract class _InformationModel implements InformationModel {
   DateTime get fetchDate;
   @override
   @ImageConverter()
-  List<ImageModel>? get image;
+  ImageModel? get image;
   @override
   @JsonKey(ignore: true)
   _$$InformationModelImplCopyWith<_$InformationModelImpl> get copyWith =>
