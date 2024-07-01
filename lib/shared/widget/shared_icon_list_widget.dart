@@ -1,21 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:kozak/shared/shared.dart';
+import 'package:share_plus/share_plus.dart';
 
-class DiscountCardIconListWidget extends StatelessWidget {
-  const DiscountCardIconListWidget({
+class SharedIconListWidget extends StatelessWidget {
+  const SharedIconListWidget({
     required this.text,
     required this.isDesk,
+    required this.link,
+    required this.cardEnum,
     super.key,
-    this.onPressed,
   });
   final String text;
   final bool isDesk;
-  final VoidCallback? onPressed;
+  final String link;
+  final CardEnum cardEnum;
   @override
   Widget build(BuildContext context) {
     return CardTextDetailWidget(
       text: text,
-      maxLines: 1,
+      maxLines: 3,
       icon: [
         _cardIconWidget(
           label: context.l10n.webSite,
@@ -27,17 +30,15 @@ class DiscountCardIconListWidget extends StatelessWidget {
         _cardIconWidget(
           label: context.l10n.share,
           context,
-          onPressed: onPressed,
+          onPressed: () async => Share.share(
+            link,
+          ),
           icon: KIcon.share,
         ),
         if (isDesk) KSizedBox.kWidthSizedBox24 else KSizedBox.kWidthSizedBox8,
-        _cardIconWidget(
-          label: context.l10n.report,
-          context,
-          onPressed: null,
-          icon: KIcon.report.copyWith(
-            color: AppColors.materialThemeRefErrorError60,
-          ),
+        ComplaintWidget(
+          isDesk: isDesk,
+          cardEnum: cardEnum,
         ),
       ],
       isDesk: isDesk,
