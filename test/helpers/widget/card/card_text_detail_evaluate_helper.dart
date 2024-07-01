@@ -29,7 +29,7 @@ Future<void> cardTextDetailEvaluateHelper(
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconShare),
+    find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconComplaint),
     findsWidgets,
   );
 

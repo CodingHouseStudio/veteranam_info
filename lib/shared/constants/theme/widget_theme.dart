@@ -67,7 +67,7 @@ abstract class KWidgetTheme {
     color: AppColors.materialThemeKeyColorsNeutral,
   );
   static const boxDecorationImageDesk = BoxDecoration(
-    borderRadius: KBorderRadius.kBorderRadiusLeft32,
+    borderRadius: KBorderRadius.kBorderRadius32,
     color: AppColors.materialThemeKeyColorsNeutralVariant,
   );
   static const boxDecorationImageMob = BoxDecoration(
