@@ -193,6 +193,7 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
     final currentScroll = _scrollController.offset;
     return currentScroll >= (maxScroll * 0.9);
   }
+
   void scrollUp() {
     _scrollController.animateTo(
       0,

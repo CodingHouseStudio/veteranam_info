@@ -12,7 +12,6 @@ class DiscountBodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    late var listCanLoaded = true;
     return BlocConsumer<DiscountWatcherBloc, DiscountWatcherState>(
       listener: (context, state) => context.dialog.showGetErrorDialog(
         error: state.failure!.value(context),
@@ -20,11 +19,7 @@ class DiscountBodyWidget extends StatelessWidget {
             .read<DiscountWatcherBloc>()
             .add(const DiscountWatcherEvent.started()),
       ),
-      listenWhen: (previous, current) {
-        listCanLoaded = previous.filteredDiscountModelItems.length !=
-            current.filteredDiscountModelItems.length;
-        return current.failure != null;
-      },
+      listenWhen: (previous, current) => current.failure != null,
       builder: (context, _) {
         return ScaffoldAutoLoadingWidget(
           loadingButtonText: context.l10n.moreDiscounts,
