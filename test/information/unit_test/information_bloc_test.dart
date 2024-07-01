@@ -94,7 +94,7 @@ void main() {
         ),
         predicate<InformationWatcherState>(
           (state) =>
-              state.loadingStatus == LoadingStatus.loaded &&
+              state.loadingStatus == LoadingStatus.listLoadedFull &&
               state.filteredInformationModelItems.every(
                 (element) => element.category.contains(
                   KTestText.informationModelItemsModify.first.category.first,
@@ -206,7 +206,7 @@ void main() {
         ),
         predicate<InformationWatcherState>(
           (state) =>
-              state.loadingStatus == LoadingStatus.loaded &&
+              state.loadingStatus == LoadingStatus.listLoadedFull &&
               state.filteredInformationModelItems.length == 1 &&
               state.filtersIndex.isNotEmpty &&
               state.itemsLoaded == 1,
@@ -261,7 +261,7 @@ void main() {
         ),
         predicate<InformationWatcherState>(
           (state) =>
-              state.loadingStatus == LoadingStatus.loaded &&
+              state.loadingStatus == LoadingStatus.listLoadedFull &&
               state.filteredInformationModelItems.length == 1 &&
               state.filtersIndex.isNotEmpty &&
               state.itemsLoaded == 1,
@@ -275,7 +275,7 @@ void main() {
         ),
         predicate<InformationWatcherState>(
           (state) =>
-              state.loadingStatus == LoadingStatus.loaded &&
+              state.loadingStatus == LoadingStatus.listLoadedFull &&
               state.filteredInformationModelItems.length == 1 &&
               state.filtersIndex.isNotEmpty &&
               state.itemsLoaded == 1,
