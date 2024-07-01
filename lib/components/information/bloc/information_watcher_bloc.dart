@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -31,6 +32,7 @@ class InformationWatcherBloc
     on<_LoadNextItems>(_onLoadNextItems);
     on<_Filter>(_onFilter);
     // on<_FilterReset>(_onFilterReset);
+    on<_LikeInformation>(_onLikeInformation);
   }
 
   final IInformationRepository _informationRepository;
@@ -160,6 +162,27 @@ class InformationWatcherBloc
         loadingStatus: LoadingStatus.error,
         failure: InformationFailure.error,
       ),
+    );
+  }
+
+  Future<void> _onLikeInformation(
+    _LikeInformation event,
+    Emitter<InformationWatcherState> emit,
+  ) async {
+    final result = await _informationRepository.updateLikeCount(
+      informationModel: state.filteredInformationModelItems.elementAt(
+        event.informatioIndex,
+      ),
+      isLiked: event.isLiked,
+    );
+    result.fold(
+      (l) => emit(
+        state.copyWith(
+          failure: InformationFailure.error,
+          loadingStatus: LoadingStatus.error,
+        ),
+      ),
+      (r) => debugPrint('informationModel ${event.informatioIndex} +1'),
     );
   }
 

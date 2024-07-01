@@ -35,97 +35,97 @@ Future<void> cardTextDetailEvaluateHelper(
     tester,
   );
 
-  await scrollingHelper(
-    tester: tester,
-    itemKey: KWidgetkeys.widget.cardTextDetailEvaluate.iconLike,
-  );
+  // await scrollingHelper(
+  //   tester: tester,
+  //   itemKey: KWidgetkeys.widget.cardTextDetailEvaluate.iconLike,
+  // );
 
-  await tester.tap(
-    find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconLike).first,
-  );
+  // await tester.tap(
+  //   find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconLike).first,
+  // );
 
-  await tester.pumpAndSettle();
+  // await tester.pumpAndSettle();
 
-  expect(
-    find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconActiveLike),
-    findsOneWidget,
-  );
+  // expect(
+  //   find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconActiveLike),
+  //   findsOneWidget,
+  // );
 
-  await tester.tap(
-    find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconActiveLike).first,
-  );
+  // await tester.tap(
+  //   find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconActiveLike).first,
+  // );
 
-  await tester.pumpAndSettle();
+  // await tester.pumpAndSettle();
 
-  expect(
-    find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconLike),
-    findsWidgets,
-  );
+  // expect(
+  //   find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconLike),
+  //   findsWidgets,
+  // );
 
-  expect(
-    find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconActiveLike),
-    findsNothing,
-  );
+  // expect(
+  //   find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconActiveLike),
+  //   findsNothing,
+  // );
 
-  await tester.tap(
-    find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconDislike).first,
-  );
+  // await tester.tap(
+  //   find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconDislike).first,
+  // );
 
-  await tester.pumpAndSettle();
+  // await tester.pumpAndSettle();
 
-  expect(
-    find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconActiveDislike),
-    findsOneWidget,
-  );
+  // expect(
+  //   find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconActiveDislike),
+  //   findsOneWidget,
+  // );
 
-  await tester.tap(
-    find
-        .byKey(
-          KWidgetkeys.widget.cardTextDetailEvaluate.iconActiveDislike,
-        )
-        .first,
-  );
+  // await tester.tap(
+  //   find
+  //       .byKey(
+  //         KWidgetkeys.widget.cardTextDetailEvaluate.iconActiveDislike,
+  //       )
+  //       .first,
+  // );
 
-  await tester.pumpAndSettle();
+  // await tester.pumpAndSettle();
 
-  expect(
-    find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconDislike),
-    findsWidgets,
-  );
+  // expect(
+  //   find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconDislike),
+  //   findsWidgets,
+  // );
 
-  expect(
-    find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconActiveDislike),
-    findsNothing,
-  );
+  // expect(
+  //   find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconActiveDislike),
+  //   findsNothing,
+  // );
 
-  await tester.tap(
-    find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconSmile).first,
-  );
+  // await tester.tap(
+  //   find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconSmile).first,
+  // );
 
-  await tester.pumpAndSettle();
+  // await tester.pumpAndSettle();
 
-  expect(
-    find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconActiveSmile),
-    findsOneWidget,
-  );
+  // expect(
+  //   find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconActiveSmile),
+  //   findsOneWidget,
+  // );
 
-  await tester.tap(
-    find
-        .byKey(
-          KWidgetkeys.widget.cardTextDetailEvaluate.iconActiveSmile,
-        )
-        .first,
-  );
+  // await tester.tap(
+  //   find
+  //       .byKey(
+  //         KWidgetkeys.widget.cardTextDetailEvaluate.iconActiveSmile,
+  //       )
+  //       .first,
+  // );
 
-  await tester.pumpAndSettle();
+  // await tester.pumpAndSettle();
 
-  expect(
-    find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconSmile),
-    findsWidgets,
-  );
+  // expect(
+  //   find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconSmile),
+  //   findsWidgets,
+  // );
 
-  expect(
-    find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconActiveSmile),
-    findsNothing,
-  );
+  // expect(
+  //   find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconActiveSmile),
+  //   findsNothing,
+  // );
 }

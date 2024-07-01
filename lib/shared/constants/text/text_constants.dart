@@ -162,6 +162,7 @@ abstract class KMockText {
     topicUA: 'МЕДИЧНІ ПІЛЬГИ',
     status: 'Healthy',
     fetchDate: DateTime(2024, 06, 07),
+    likes: null,
   );
   static const fundModel = FundModel(
     id: '',

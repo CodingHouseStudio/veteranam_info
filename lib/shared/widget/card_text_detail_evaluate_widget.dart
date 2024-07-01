@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
 
 class CardTextDetailEvaluateWidget extends StatefulWidget {
@@ -14,6 +16,7 @@ class CardTextDetailEvaluateWidget extends StatefulWidget {
     this.bottom,
     this.titleTopMob = false,
     this.titleDate,
+    this.onLikeChange,
   });
   final String text;
   final List<String>? buttonText;
@@ -25,6 +28,7 @@ class CardTextDetailEvaluateWidget extends StatefulWidget {
   final Widget? titleDate;
   final bool isDesk;
   final Widget? titleIcon;
+  final void Function({required bool like})? onLikeChange;
 
   @override
   State<CardTextDetailEvaluateWidget> createState() =>
@@ -33,13 +37,13 @@ class CardTextDetailEvaluateWidget extends StatefulWidget {
 
 class _CardTextDetailEvaluateWidgetState
     extends State<CardTextDetailEvaluateWidget> {
-  late EvaluationEnum evaluation;
+  late bool like;
   late int? maxLines;
 
   @override
   void initState() {
     super.initState();
-    evaluation = EvaluationEnum.none;
+    like = false;
     maxLines = 10;
   }
 
@@ -95,17 +99,33 @@ class _CardTextDetailEvaluateWidgetState
                   Row(
                     children: [
                       InkWell(
-                        onTap: () => setState(() {
-                          if (evaluation != EvaluationEnum.like) {
-                            evaluation = EvaluationEnum.like;
-                          } else {
-                            evaluation = EvaluationEnum.none;
-                          }
-                        }),
+                        onTap: () {
+                          setState(() {
+                            like = !like;
+                            // if (evaluation != EvaluationEnum.like) {
+                            //   evaluation = EvaluationEnum.like;
+                            // context.read<InformationWatcherBloc>().add(
+                            //       InformationWatcherEvent.like(
+                            //         widget.storyId,
+                            //         true,
+                            //       ),
+                            //     );
+                            // } else {
+                            //   evaluation = EvaluationEnum.none;
+                            // context.read<InformationWatcherBloc>().add(
+                            //       InformationWatcherEvent.like(
+                            //         widget.i,
+                            //         false,
+                            //       ),
+                            //     );
+                            // }
+                          });
+                          widget.onLikeChange?.call(like: like);
+                        },
                         borderRadius: BorderRadius.circular(KSize.kRadius32),
                         child: Padding(
                           padding: const EdgeInsets.all(KPadding.kPaddingSize4),
-                          child: evaluation == EvaluationEnum.like
+                          child: like //== EvaluationEnum.like
                               ? KIcon.activeLike.copyWith(
                                   key: KWidgetkeys.widget.cardTextDetailEvaluate
                                       .iconActiveLike,
@@ -117,51 +137,53 @@ class _CardTextDetailEvaluateWidgetState
                         ),
                       ),
                       KSizedBox.kWidthSizedBox8,
-                      InkWell(
-                        onTap: () => setState(() {
-                          if (evaluation != EvaluationEnum.smile) {
-                            evaluation = EvaluationEnum.smile;
-                          } else {
-                            evaluation = EvaluationEnum.none;
-                          }
-                        }),
-                        borderRadius: BorderRadius.circular(KSize.kRadius32),
-                        child: Padding(
-                          padding: const EdgeInsets.all(KPadding.kPaddingSize4),
-                          child: evaluation == EvaluationEnum.smile
-                              ? KIcon.activeSmile.copyWith(
-                                  key: KWidgetkeys.widget.cardTextDetailEvaluate
-                                      .iconActiveSmile,
-                                  // changeColor: AppColors.grey,
-                                )
-                              : KIcon.smile.copyWith(
-                                  key: KWidgetkeys
-                                      .widget.cardTextDetailEvaluate.iconSmile,
-                                ),
-                        ),
+                      // InkWell(
+                      //   onTap: () => setState(() {
+                      //     if (like != EvaluationEnum.smile) {
+                      //       like = EvaluationEnum.smile;
+                      //     } else {
+                      //       like = EvaluationEnum.none;
+                      //     }
+                      //   }),
+                      //   borderRadius: BorderRadius.circular(KSize.kRadius32),
+                      //   child:
+                      Padding(
+                        padding: const EdgeInsets.all(KPadding.kPaddingSize4),
+                        child: like //== EvaluationEnum.smile
+                            ? KIcon.activeSmile.copyWith(
+                                key: KWidgetkeys.widget.cardTextDetailEvaluate
+                                    .iconActiveSmile,
+                                // changeColor: AppColors.grey,
+                              )
+                            : KIcon.smile.copyWith(
+                                key: KWidgetkeys
+                                    .widget.cardTextDetailEvaluate.iconSmile,
+                              ),
+                        // ),
                       ),
                       KSizedBox.kWidthSizedBox8,
-                      InkWell(
-                        onTap: () => setState(() {
-                          if (evaluation != EvaluationEnum.dislike) {
-                            evaluation = EvaluationEnum.dislike;
-                          } else {
-                            evaluation = EvaluationEnum.none;
-                          }
-                        }),
-                        borderRadius: BorderRadius.circular(KSize.kRadius32),
-                        child: Padding(
-                          padding: const EdgeInsets.all(KPadding.kPaddingSize4),
-                          child: evaluation == EvaluationEnum.dislike
-                              ? KIcon.activeDislike.copyWith(
-                                  key: KWidgetkeys.widget.cardTextDetailEvaluate
-                                      .iconActiveDislike,
-                                )
-                              : KIcon.dislike.copyWith(
-                                  key: KWidgetkeys.widget.cardTextDetailEvaluate
-                                      .iconDislike,
-                                ),
-                        ),
+                      // InkWell(
+                      //   onTap: () => setState(() {
+                      //     if (like != EvaluationEnum.dislike) {
+                      //       like = EvaluationEnum.dislike;
+                      //     } else {
+                      //       like = EvaluationEnum.none;
+                      //     }
+                      //   }),
+                      //   borderRadius: BorderRadius.circular(KSize.kRadius32),
+                      //   child:
+                      Padding(
+                        padding: const EdgeInsets.all(KPadding.kPaddingSize4),
+                        child: like //== EvaluationEnum.dislike
+                            ? KIcon.activeDislike.copyWith(
+                                key: KWidgetkeys.widget.cardTextDetailEvaluate
+                                    .iconActiveDislike,
+                              )
+                            : KIcon.dislike.copyWith(
+                                key: KWidgetkeys
+                                    .widget.cardTextDetailEvaluate.iconDislike,
+                              ),
+                        //),
                       ),
                     ],
                   ),

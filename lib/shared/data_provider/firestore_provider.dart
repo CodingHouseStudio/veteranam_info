@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:injectable/injectable.dart';
+import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
 
 /// COMMENT: Class to get, update, delete or set values in firebase
@@ -275,5 +276,14 @@ class FirestoreService {
         .collection(FirebaseCollectionName.report)
         .doc(report.id)
         .set(report.toJson());
+  }
+
+  Future<void> updateInformationModel(
+    InformationModel informationModel,
+  ) async {
+    return _db
+        .collection(FirebaseCollectionName.information)
+        .doc(informationModel.id)
+        .update(informationModel.toJson());
   }
 }

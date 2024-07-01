@@ -39,6 +39,13 @@ List<Widget> _newsWidgetList({
               : KWidgetkeys.screen.information.cardLast,
           informationItem: informationModelItems.elementAt(index),
           isDesk: isDesk,
+          onLikeChange: ({required like}) =>
+              context.read<InformationWatcherBloc>().add(
+                    InformationWatcherEvent.like(
+                      informatioIndex: index,
+                      isLiked: like,
+                    ),
+                  ),
         ),
       ),
     );

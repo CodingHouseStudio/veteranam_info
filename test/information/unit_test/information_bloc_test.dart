@@ -1,4 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
+import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
@@ -21,6 +22,14 @@ void main() {
       );
       when(mockInformationRepository.getInformationItems()).thenAnswer(
         (_) => Stream.value(KTestText.informationModelItemsModify),
+      );
+      when(
+        mockInformationRepository.updateLikeCount(
+          informationModel: KTestText.informationModelItems.first,
+          isLiked: true,
+        ),
+      ).thenAnswer(
+        (_) async => const Right(true),
       );
     });
 
@@ -306,5 +315,29 @@ void main() {
         ),
       ],
     );
+
+    // blocTest<InformationWatcherBloc, InformationWatcherState>(
+    //   'emits [InformationWatcherState()] when error',
+    //   build: () => informationWatcherBloc,
+    //   act: (bloc) async => bloc
+    //     ..add(const InformationWatcherEvent.started())
+    //     ..add(
+    //       InformationWatcherEvent.like(
+    //         informatioIndex:
+    //             int.parse(KTestText.informationModelItems.first.id),
+    //         isLiked: true,
+    //       ),
+    //     ),
+
+    //   expect: () async => [
+    //     predicate<InformationWatcherState>(
+    //       (state) => state.loadingStatus == LoadingStatus.loading,
+    //     ),
+    //     predicate<InformationWatcherState>(
+    //       (state) => state.loadingStatus == LoadingStatus.error &&
+    //           state.failure != null,
+    //     ),
+    //   ],
+    // );
   });
 }

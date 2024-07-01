@@ -6,11 +6,13 @@ class NewsCardWidget extends StatelessWidget {
   const NewsCardWidget({
     required this.informationItem,
     required this.isDesk,
+    this.onLikeChange,
     super.key,
   });
 
   final InformationModel informationItem;
   final bool isDesk;
+  final void Function({required bool like})? onLikeChange;
 
   @override
   Widget build(BuildContext context) {
@@ -73,6 +75,7 @@ class NewsCardWidget extends StatelessWidget {
         ),
       ),
       isDesk: isDesk,
+      onLikeChange: onLikeChange,
     );
   }
 }
