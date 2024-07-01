@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter_svg/svg.dart';
+// import 'package:flutter_svg/svg.dart';
 
 import 'package:kozak/shared/constants/constants.dart';
 
@@ -16,7 +16,7 @@ class ButtonAdditionalWidget extends StatefulWidget {
 
   final void Function()? onPressed;
   final Color? backgroundColor;
-  final SvgPicture picture;
+  final Widget picture;
   final String text;
   final bool isDesk;
 
