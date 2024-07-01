@@ -2281,6 +2281,46 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `Web site`
+  String get webSite {
+    return Intl.message(
+      'Web site',
+      name: 'webSite',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Report`
+  String get report {
+    return Intl.message(
+      'Report',
+      name: 'report',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `hide...`
+  String get hideExpansion {
+    return Intl.message(
+      'hide...',
+      name: 'hideExpansion',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `{count} more..`
+  String moreCities(Object count) {
+    return Intl.message(
+      '$count more..',
+      name: 'moreCities',
+      desc: '',
+      args: [count],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

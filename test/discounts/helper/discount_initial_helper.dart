@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:kozak/shared/shared.dart';
 
+import '../../helpers/widget/discount_card_helper.dart';
 import '../../text_dependency.dart';
 import 'helper.dart';
 
@@ -39,6 +40,7 @@ Future<void> discountInitialHelper(
         find.byKey(KWidgetkeys.screen.discounts.card),
         findsWidgets,
       );
+      await discountCardHelper(tester);
 
       await scrollingHelper(
         tester: tester,
@@ -50,10 +52,10 @@ Future<void> discountInitialHelper(
         findsNothing,
       );
 
-      // await scrollingHelper(
-      //   tester: tester,
-      //   offset: KTestConstants.scrollingDown,
-      // );
+      await scrollingHelper(
+        tester: tester,
+        offset: KTestConstants.scrollingDown,
+      );
 
       // await scrollingHelper(
       //   tester: tester,
