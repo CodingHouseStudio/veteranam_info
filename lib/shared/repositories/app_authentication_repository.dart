@@ -270,7 +270,8 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
 
   void _updateAuthStatusBasedOnCache() {
     // debugPrint('Updating auth status based on cache');
-    // final user = currentUser.isEmpty;
+    // ignore: unused_local_variable
+    final user = currentUser.isEmpty;
     // debugPrint('Current user inside '
     //     '_updateAuthStatusBasedOnCache : $currentUser');
     // debugPrint('user is $user');
@@ -278,7 +279,8 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
 
   void _updateUserSettingBasedOnCache() {
     // debugPrint('Updating user setting based on cache');
-    // final userSetting = currentUserSetting.isEmpty;
+    // ignore: unused_local_variable
+    final userSetting = currentUserSetting.isEmpty;
     // debugPrint('Current user setting inside '
     //     '_updateAuthStatusBasedOnCache : $currentUserSetting');
     // debugPrint('userSertting is $userSetting');

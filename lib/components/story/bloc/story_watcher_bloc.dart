@@ -70,7 +70,10 @@ class StoryWatcherBloc extends Bloc<StoryWatcherEvent, StoryWatcherState> {
     _LoadNextItems event,
     Emitter<StoryWatcherState> emit,
   ) {
-    if (state.itemsLoaded.checkLoadingPosible(state.storyModelItems)) return;
+    if (state.itemsLoaded.checkLoadingPosible(state.storyModelItems)) {
+      emit(state.copyWith(loadingStatus: LoadingStatus.listLoadedFull));
+      return;
+    }
     emit(state.copyWith(loadingStatus: LoadingStatus.loading));
     final filterItems = state.storyModelItems.loading(
       itemsLoaded: state.itemsLoaded + KDimensions.loadItems,

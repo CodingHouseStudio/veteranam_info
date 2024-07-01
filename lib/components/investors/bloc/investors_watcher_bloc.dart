@@ -56,7 +56,10 @@ class InvestorsWatcherBloc
     _LoadNextItems event,
     Emitter<InvestorsWatcherState> emit,
   ) async {
-    if (state.itemsLoaded.checkLoadingPosible(state.fundItems)) return;
+    if (state.itemsLoaded.checkLoadingPosible(state.fundItems)) {
+      emit(state.copyWith(loadingStatus: LoadingStatus.listLoadedFull));
+      return;
+    }
 
     emit(state.copyWith(loadingStatus: LoadingStatus.loading));
     final filterItems = state.fundItems.loading(

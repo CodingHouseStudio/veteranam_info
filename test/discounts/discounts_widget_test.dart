@@ -80,12 +80,12 @@ void main() {
         await discountInitialHelper(tester);
       });
 
-      loadingListSeparate(
-        pumpApp: (tester) async => discountsPumpAppHelper(
+      loadingList(
+        (tester) async => discountsPumpAppHelper(
           tester: tester,
           mockDiscountRepository: mockDiscountRepository,
         ),
-        lastCard: KWidgetkeys.screen.discounts.cardLast,
+        // lastCard: KWidgetkeys.screen.discounts.cardLast,
       );
 
       group('${KGroupText.goRouter} ', () {
