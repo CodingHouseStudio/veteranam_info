@@ -165,4 +165,13 @@ abstract class KWidgetTheme {
       ),
     ),
   );
+  static const boxDecorationCardGrayBorder = BoxDecoration(
+    borderRadius: KBorderRadius.kBorderRadius32,
+    color: AppColors.materialThemeWhite,
+    border: Border.fromBorderSide(
+      BorderSide(
+        color: AppColors.materialThemeKeyColorsNeutralVariant,
+      ),
+    ),
+  );
 }
