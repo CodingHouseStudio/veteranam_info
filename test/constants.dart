@@ -281,8 +281,8 @@ abstract class KTestText {
         userPhoto: i > _itemsPhoto ? userPhotoModel : null,
       ),
   ];
-  static const _items = 30;
-  static const _itemsPhoto = 20;
+  static const _items = 40;
+  static const _itemsPhoto = 30;
 
   static List<String> routes({required bool hasAccount}) => [
         KRoute.aboutUs.name,

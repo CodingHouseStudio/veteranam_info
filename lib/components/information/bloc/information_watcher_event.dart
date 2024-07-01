@@ -19,7 +19,7 @@ class InformationWatcherEvent with _$InformationWatcherEvent {
   const factory InformationWatcherEvent.failure(dynamic failure) = _Failure;
 
   const factory InformationWatcherEvent.like({
-    required int informatioIndex,
+    required InformationModel informationModel,
     required bool isLiked,
   }) = _LikeInformation;
 }

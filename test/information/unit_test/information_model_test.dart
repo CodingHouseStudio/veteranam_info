@@ -29,6 +29,8 @@ void main() {
           KTestText.informationModelItems.last.topicUA,
       InformationModelJsonField.status:
           KTestText.informationModelItems.last.status,
+      InformationModelJsonField.likes:
+          KTestText.informationModelItems.last.likes,
     };
     final nullableJson = {
       InformationModelJsonField.id: KTestText.informationModelItems.last.id,
@@ -48,6 +50,7 @@ void main() {
           KTestText.informationModelItems.last.topicUA,
       InformationModelJsonField.status:
           KTestText.informationModelItems.last.status,
+      InformationModelJsonField.likes: null,
     };
     group('${KGroupText.modelJson} ', () {
       test('${KGroupText.full} ', () {
@@ -92,6 +95,10 @@ void main() {
         expect(
           informationModel.status,
           KTestText.informationModelItems.last.status,
+        );
+        expect(
+          informationModel.likes,
+          KTestText.informationModelItems.last.likes,
         );
       });
 
@@ -138,6 +145,10 @@ void main() {
           informationModel.status,
           KTestText.informationModelItems.last.status,
         );
+        expect(
+          informationModel.likes,
+          null,
+        );
       });
 
       test('${KGroupText.failure} ', () {
@@ -161,6 +172,8 @@ void main() {
               KTestText.informationModelItems.last.topicUA,
           InformationModelJsonField.status:
               KTestText.informationModelItems.last.status,
+          InformationModelJsonField.likes:
+              KTestText.informationModelItems.last.likes,
         };
 
         expect(
@@ -178,8 +191,9 @@ void main() {
       });
 
       test('${KGroupText.nullable} ', () {
-        final informationModelJson =
-            KTestText.informationModelItems.last.copyWith(image: null).toJson();
+        final informationModelJson = KTestText.informationModelItems.last
+            .copyWith(image: null, likes: null)
+            .toJson();
 
         expect(informationModelJson, nullableJson);
       });

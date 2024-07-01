@@ -83,12 +83,28 @@ void main() {
         ).thenThrow(
           FirebaseException(plugin: KGroupText.failureGet),
         );
+        when(
+          mockFirestoreService.updateInformationModel(
+            KTestText.informationModelItems.first,
+          ),
+        ).thenThrow(
+          FirebaseException(plugin: KGroupText.failure),
+        );
         if (GetIt.I.isRegistered<FirestoreService>()) {
           GetIt.I.unregister<FirestoreService>();
         }
         GetIt.I.registerSingleton(mockFirestoreService);
 
         mockInformationRepository = InformationRepository();
+
+        // when(
+        //   mockInformationRepository.updateLikeCount(
+        //     informationModel: KTestText.informationModelItems.first,
+        //     isLiked: false,
+        //   ),
+        // ).thenAnswer(
+        //   (_) async => const Left(SomeFailure.serverError()),
+        // );
       });
       test('information', () async {
         expect(

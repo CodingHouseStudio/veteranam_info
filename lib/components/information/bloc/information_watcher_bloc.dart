@@ -85,10 +85,7 @@ class InformationWatcherBloc
     Emitter<InformationWatcherState> emit,
   ) {
     if (state.itemsLoaded.checkLoadingPosible(state.informationModelItems)) {
-      return;
-    }
-    emit(state.copyWith(loadingStatus: LoadingStatus.loading));
-    if (state.itemsLoaded.checkLoadingPosible(state.informationModelItems)) {
+      emit(state.copyWith(loadingStatus: LoadingStatus.listLoadedFull));
       return;
     }
     emit(state.copyWith(loadingStatus: LoadingStatus.loading));
@@ -101,7 +98,8 @@ class InformationWatcherBloc
         filteredInformationModelItems: filterItems,
         itemsLoaded: (state.itemsLoaded + KDimensions.loadItems)
             .getLoaded(list: filterItems),
-        loadingStatus: LoadingStatus.loaded,
+        loadingStatus:
+            filterItems.isLoading(state.filteredInformationModelItems),
       ),
     );
   }
@@ -136,6 +134,8 @@ class InformationWatcherBloc
         filteredInformationModelItems: filterItems,
         filtersIndex: selectedFilters,
         itemsLoaded: state.itemsLoaded.getLoaded(list: filterItems),
+        loadingStatus:
+            filterItems.isLoadingFilter(state.filteredInformationModelItems),
       ),
     );
   }
@@ -170,9 +170,7 @@ class InformationWatcherBloc
     Emitter<InformationWatcherState> emit,
   ) async {
     final result = await _informationRepository.updateLikeCount(
-      informationModel: state.filteredInformationModelItems.elementAt(
-        event.informatioIndex,
-      ),
+      informationModel: event.informationModel,
       isLiked: event.isLiked,
     );
     result.fold(
@@ -182,7 +180,12 @@ class InformationWatcherBloc
           loadingStatus: LoadingStatus.error,
         ),
       ),
-      (r) => debugPrint('informationModel ${event.informatioIndex} +1'),
+      (r) => emit(
+        state.copyWith(
+          failure: null,
+          loadingStatus: LoadingStatus.loaded,
+        ),
+      ),
     );
   }
 

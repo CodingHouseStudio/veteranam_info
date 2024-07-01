@@ -46,6 +46,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "capitalLetter": MessageLookupByLibrary.simpleMessage(
             "must contain one or more capital letter"),
+        "cardListEmptyText": MessageLookupByLibrary.simpleMessage(
+            "Sorry, nothing was found using your filters. Try changing your search criteria"),
         "category": MessageLookupByLibrary.simpleMessage("Category"),
         "checkPointError": MessageLookupByLibrary.simpleMessage(
             "Please select one of the following answers"),
@@ -178,6 +180,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Main information"),
         "mainScreen": MessageLookupByLibrary.simpleMessage("Home"),
         "message": MessageLookupByLibrary.simpleMessage("Message"),
+        "more": MessageLookupByLibrary.simpleMessage("More"),
         "moreDiscounts": MessageLookupByLibrary.simpleMessage("More discounts"),
         "moreFunds": MessageLookupByLibrary.simpleMessage("More funds"),
         "moreNews": MessageLookupByLibrary.simpleMessage("More news"),
@@ -251,6 +254,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "resetAll": MessageLookupByLibrary.simpleMessage("Reset all"),
         "respond": MessageLookupByLibrary.simpleMessage("Respond"),
         "resume": MessageLookupByLibrary.simpleMessage("Resume"),
+        "returnToTop":
+            MessageLookupByLibrary.simpleMessage("Return to the top"),
+        "save": MessageLookupByLibrary.simpleMessage("Save"),
         "saveChanges": MessageLookupByLibrary.simpleMessage("Save changes"),
         "saveMoney": MessageLookupByLibrary.simpleMessage("To save money"),
         "saved": MessageLookupByLibrary.simpleMessage("Saved"),
@@ -268,6 +274,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "We\'re sorry, there was an unforeseen error while sending the data. Please try again later."),
         "sendMessage": MessageLookupByLibrary.simpleMessage("Send message"),
         "sendMore": MessageLookupByLibrary.simpleMessage("Send more"),
+        "share": MessageLookupByLibrary.simpleMessage("Share"),
         "signUp": MessageLookupByLibrary.simpleMessage("Sign up"),
         "signUpWith": MessageLookupByLibrary.simpleMessage("Sign up with"),
         "specialOffers": MessageLookupByLibrary.simpleMessage("Special offers"),
@@ -286,6 +293,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "thankYou": MessageLookupByLibrary.simpleMessage("Thank you!"),
         "thankYouDescription": MessageLookupByLibrary.simpleMessage(
             "Please note! To access some services, you will need to confirm your status by showing the appropriate ID."),
+        "thatEndOfList": MessageLookupByLibrary.simpleMessage(
+            "That\'s the end of the list! We hope you found what you were looking for."),
         "thisServiceForVeterans": MessageLookupByLibrary.simpleMessage(
             "THIS SERVICE IS FOR VETERANS"),
         "thisServiceForVeteransSubtitle": MessageLookupByLibrary.simpleMessage(
@@ -304,9 +313,11 @@ class MessageLookup extends MessageLookupByLibrary {
             "This page is under construction."),
         "upload": MessageLookupByLibrary.simpleMessage("Upload"),
         "us": MessageLookupByLibrary.simpleMessage("us"),
+        "useful": MessageLookupByLibrary.simpleMessage("Useful"),
         "verifiedInformation":
             MessageLookupByLibrary.simpleMessage("Verified information"),
         "wage": MessageLookupByLibrary.simpleMessage("Salary*"),
+        "website": MessageLookupByLibrary.simpleMessage("Website"),
         "whatKindOfProject":
             MessageLookupByLibrary.simpleMessage("What kind of project it is?"),
         "whatYouMostInterestedIn": MessageLookupByLibrary.simpleMessage(

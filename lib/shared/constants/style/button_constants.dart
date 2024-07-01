@@ -178,7 +178,22 @@ abstract class KButtonStyles {
     shape: WidgetStatePropertyAll(
       RoundedRectangleBorder(
         borderRadius: KBorderRadius.kBorderRadius32,
-        side: BorderSide(color: AppColors.materialThemeKeyColorsNeutralVariant),
+        side: BorderSide(),
+      ),
+    ),
+  );
+
+  static const endListButtonStyle = ButtonStyle(
+    padding: WidgetStatePropertyAll(
+      EdgeInsets.symmetric(
+        horizontal: KPadding.kPaddingSize16,
+        vertical: KPadding.kPaddingSize4,
+      ),
+    ),
+    shape: WidgetStatePropertyAll(
+      RoundedRectangleBorder(
+        borderRadius: KBorderRadius.kBorderRadius32,
+        side: BorderSide(),
       ),
     ),
   );

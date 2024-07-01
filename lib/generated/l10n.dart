@@ -2140,6 +2140,36 @@ class AppLocalizations {
     );
   }
 
+  /// `That's the end of the list! We hope you found what you were looking for.`
+  String get thatEndOfList {
+    return Intl.message(
+      'That\'s the end of the list! We hope you found what you were looking for.',
+      name: 'thatEndOfList',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Return to the top`
+  String get returnToTop {
+    return Intl.message(
+      'Return to the top',
+      name: 'returnToTop',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sorry, nothing was found using your filters. Try changing your search criteria`
+  String get cardListEmptyText {
+    return Intl.message(
+      'Sorry, nothing was found using your filters. Try changing your search criteria',
+      name: 'cardListEmptyText',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `We're sorry, there was an unforeseen error.`
   String get error {
     return Intl.message(
@@ -2198,6 +2228,56 @@ class AppLocalizations {
       name: 'dublicateFailure',
       desc:
           'an error message when trying to register an account with the same email as an already registered account',
+      args: [],
+    );
+  }
+
+  /// `More`
+  String get more {
+    return Intl.message(
+      'More',
+      name: 'more',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Useful`
+  String get useful {
+    return Intl.message(
+      'Useful',
+      name: 'useful',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Website`
+  String get website {
+    return Intl.message(
+      'Website',
+      name: 'website',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Share`
+  String get share {
+    return Intl.message(
+      'Share',
+      name: 'share',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save`
+  String get save {
+    return Intl.message(
+      'Save',
+      name: 'save',
+      desc: '',
       args: [],
     );
   }

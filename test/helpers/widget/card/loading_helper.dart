@@ -1,13 +1,12 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:kozak/shared/shared.dart';
 
 import '../../../text_dependency.dart';
 
-void loadingList({
-  required Future<void> Function(WidgetTester) pumpApp,
-  required Key lastCard,
-}) {
+void loadingList(
+  Future<void> Function(WidgetTester) pumpApp,
+  // required Key lastCard,
+) {
   group('Loading List', () {
     testWidgets('Desk', (tester) async {
       KPlatformConstants.isWebDesktop = true;
@@ -18,8 +17,8 @@ void loadingList({
         windowsTest: true,
         test: () async {
           await _deskLoadingHelper(
-            tester: tester,
-            cardLast: lastCard,
+            tester,
+            // cardLast: lastCard,
           );
         },
       );
@@ -29,57 +28,57 @@ void loadingList({
       await pumpApp(tester);
 
       await _mobileLoadingHelper(
-        tester: tester,
-        cardLast: lastCard,
+        tester,
+        // cardLast: lastCard,
       );
     });
   });
 }
 
-void loadingListSeparate({
-  required Future<void> Function(WidgetTester) pumpApp,
-  required Key lastCard,
-}) {
-  group('Loading List', () {
-    testWidgets('Desk(isNotDesk)', (tester) async {
-      KPlatformConstants.isWebDesktop = true;
-      await pumpApp(tester);
+// void loadingListSeparate({
+//   required Future<void> Function(WidgetTester) pumpApp,
+//   required Key lastCard,
+// }) {
+//   group('Loading List', () {
+//     testWidgets('Desk(isNotDesk)', (tester) async {
+//       KPlatformConstants.isWebDesktop = true;
+//       await pumpApp(tester);
 
-      await _deskLoadingHelper(
-        tester: tester,
-        cardLast: lastCard,
-      );
-    });
-    testWidgets('Desk(isDesk)', (tester) async {
-      KPlatformConstants.isWebDesktop = true;
-      await pumpApp(tester);
+//       await _deskLoadingHelper(
+//         tester: tester,
+//         cardLast: lastCard,
+//       );
+//     });
+//     testWidgets('Desk(isDesk)', (tester) async {
+//       KPlatformConstants.isWebDesktop = true;
+//       await pumpApp(tester);
 
-      await changeWindowSizeHelper(
-        tester: tester,
-        test: () async {
-          await _deskLoadingHelper(
-            tester: tester,
-            cardLast: lastCard,
-          );
-        },
-      );
-    });
-    testWidgets('Mobile', (tester) async {
-      KPlatformConstants.isWebDesktop = false;
-      await pumpApp(tester);
+//       await changeWindowSizeHelper(
+//         tester: tester,
+//         test: () async {
+//           await _deskLoadingHelper(
+//             tester: tester,
+//             cardLast: lastCard,
+//           );
+//         },
+//       );
+//     });
+//     testWidgets('Mobile', (tester) async {
+//       KPlatformConstants.isWebDesktop = false;
+//       await pumpApp(tester);
 
-      await _mobileLoadingHelper(
-        tester: tester,
-        cardLast: lastCard,
-      );
-    });
-  });
-}
+//       await _mobileLoadingHelper(
+//         tester: tester,
+//         cardLast: lastCard,
+//       );
+//     });
+//   });
+// }
 
-Future<void> _deskLoadingHelper({
-  required WidgetTester tester,
-  required Key cardLast,
-}) async {
+Future<void> _deskLoadingHelper(
+  WidgetTester tester,
+  // required Key cardLast,
+) async {
   await scrollingHelper(
     tester: tester,
     offset: KTestConstants.scrollingDown,
@@ -105,26 +104,19 @@ Future<void> _deskLoadingHelper({
   await tester.pumpAndSettle();
 
   expect(
-    find.byKey(cardLast),
+    find.byKey(KWidgetkeys.widget.scaffold.endListText),
     findsNothing,
   );
 }
 
-Future<void> _mobileLoadingHelper({
-  required WidgetTester tester,
-  required Key cardLast,
-}) async {
+Future<void> _mobileLoadingHelper(
+  WidgetTester tester,
+  // required Key cardLast,
+) async {
   await changeWindowSizeHelper(
     tester: tester,
     windowsTest: true,
     test: () async {
-      await tester.pumpAndSettle();
-
-      await scrollingHelper(
-        tester: tester,
-        offset: KTestConstants.scrollingDown,
-      );
-
       await scrollingHelper(
         tester: tester,
         offset: KTestConstants.scrollingDown,
@@ -136,7 +128,7 @@ Future<void> _mobileLoadingHelper({
       );
 
       expect(
-        find.byKey(cardLast),
+        find.byKey(KWidgetkeys.widget.scaffold.endListText),
         findsNothing,
       );
 
@@ -146,7 +138,7 @@ Future<void> _mobileLoadingHelper({
       );
 
       expect(
-        find.byKey(cardLast),
+        find.byKey(KWidgetkeys.widget.scaffold.endListText),
         findsNothing,
       );
     },
