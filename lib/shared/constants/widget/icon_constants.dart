@@ -59,6 +59,7 @@ abstract class KIcon {
   static const _KIcon minus = _KIcon(Symbols.remove);
   static const _KIcon filter = _KIcon(Symbols.filter_alt);
   static const _KIcon edit = _KIcon(Symbols.edit);
+  static const _KIcon more = _KIcon(Symbols.more_vert);
   static const _KIcon button = _KIcon(Symbols.smart_button);
   static const _KIcon trailing = _KIcon(Symbols.keyboard_arrow_down);
   static const _KIcon trailingUp = _KIcon(Symbols.keyboard_arrow_up);

@@ -37,48 +37,66 @@ class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          widget.text,
-          key: KWidgetkeys.widget.cardTextDetail.text,
-          maxLines: maxLines,
-          style: AppTextStyle.materialThemeBodyLarge,
-          overflow: TextOverflow.clip,
+        Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: widget.isDesk
+                ? KPadding.kPaddingSize32
+                : KPadding.kPaddingSize16,
+          ),
+          child: Text(
+            widget.text,
+            key: KWidgetkeys.widget.cardTextDetail.text,
+            maxLines: maxLines,
+            style: AppTextStyle.materialThemeBodyLarge,
+            overflow: TextOverflow.clip,
+          ),
         ),
-        if (!widget.isDesk) KSizedBox.kHeightSizedBox16,
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Flexible(
-              child: TextButton(
-                key: KWidgetkeys.widget.cardTextDetail.button,
-                onPressed: () {
-                  setState(() {
-                    if (maxLines == null) {
-                      maxLines = widget.maxLines;
-                    } else {
-                      maxLines = null;
-                    }
-                  });
-                },
-                style:
-                    widget.buttonStyle ?? KButtonStyles.whiteButtonStyleBorder,
-                child: Text(
-                  maxLines == null
-                      ? widget.buttonText?.elementAt(1) ?? context.l10n.hide
-                      : widget.buttonText?.elementAt(0) ?? context.l10n.detail,
-                  key: KWidgetkeys.widget.cardTextDetail.buttonText,
-                  style: widget.isDesk
-                      ? AppTextStyle.materialThemeTitleMedium
-                      : AppTextStyle.materialThemeTitleSmall,
+        if (widget.isDesk)
+          KSizedBox.kHeightSizedBox24
+        else
+          KSizedBox.kHeightSizedBox16,
+        Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: widget.isDesk
+                ? KPadding.kPaddingSize32
+                : KPadding.kPaddingSize16,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Flexible(
+                child: TextButton(
+                  key: KWidgetkeys.widget.cardTextDetail.button,
+                  onPressed: () {
+                    setState(() {
+                      if (maxLines == null) {
+                        maxLines = widget.maxLines;
+                      } else {
+                        maxLines = null;
+                      }
+                    });
+                  },
+                  style: widget.buttonStyle ??
+                      KButtonStyles.whiteButtonStyleBorder,
+                  child: Text(
+                    maxLines == null
+                        ? widget.buttonText?.elementAt(1) ?? context.l10n.hide
+                        : widget.buttonText?.elementAt(0) ??
+                            context.l10n.detail,
+                    key: KWidgetkeys.widget.cardTextDetail.buttonText,
+                    style: widget.isDesk
+                        ? AppTextStyle.materialThemeTitleMedium
+                        : AppTextStyle.materialThemeTitleSmall,
+                  ),
                 ),
               ),
-            ),
-            if (widget.isDesk)
-              KSizedBox.kHeightSizedBox24
-            else
-              KSizedBox.kHeightSizedBox16,
-            if (widget.icon != null) widget.icon!,
-          ],
+              if (widget.isDesk)
+                KSizedBox.kHeightSizedBox24
+              else
+                KSizedBox.kHeightSizedBox16,
+              if (widget.icon != null) widget.icon!,
+            ],
+          ),
         ),
       ],
     );

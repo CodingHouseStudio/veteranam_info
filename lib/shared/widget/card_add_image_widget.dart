@@ -26,13 +26,14 @@ class CardAddImageWidget extends StatelessWidget {
         children: [
           if (titleWidget != null)
             Padding(
-              padding: const EdgeInsets.all(KPadding.kPaddingSize8),
+              padding:
+                  const EdgeInsets.symmetric(vertical: KPadding.kPaddingSize8),
               child: titleWidget,
             ),
           if (image != null) buildImage(context),
           Padding(
-            padding: const EdgeInsets.all(
-              KPadding.kPaddingSize16,
+            padding: const EdgeInsets.symmetric(
+              vertical: KPadding.kPaddingSize12,
             ),
             child: childWidget,
           ),
@@ -42,39 +43,44 @@ class CardAddImageWidget extends StatelessWidget {
   }
 
   Widget buildImage(BuildContext context) {
-    //ebugPrint('Image: $image');
     return Stack(
       alignment: Alignment.topCenter,
       children: [
         Container(
-          decoration: KWidgetTheme.boxDecorationImageMob,
-          constraints: const BoxConstraints(
-            maxHeight: KMinMaxSize.minHeight640,
-            maxWidth: KMinMaxSize.maxWidth640,
-          ),
-          child: ImageWidget(
-            key: KWidgetkeys.widget.cardAddImage.widget,
-            imageUrl: image!.downloadURL,
-            fit: BoxFit.contain,
-          ),
-        ),
-        Align(
-          alignment: Alignment.topLeft,
-          child: Padding(
-            padding: isDesk
-                ? const EdgeInsets.only(
-                    left: KPadding.kPaddingSize32,
-                    right: KPadding.kPaddingSize16,
-                    top: KPadding.kPaddingSize16,
-                  )
-                : const EdgeInsets.only(
-                    left: KPadding.kPaddingSize16,
-                    right: KPadding.kPaddingSize16,
-                    top: KPadding.kPaddingSize16,
-                  ),
-            child: filters != null ? filters! : Container(),
+          width: double.infinity,
+          decoration: isDesk
+              ? KWidgetTheme.boxDecorationImageDesk
+              : KWidgetTheme.boxDecorationImageMob,
+          child: ClipRRect(
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(32),
+              topRight: Radius.circular(32),
+            ),
+            child: ImageWidget(
+              key: KWidgetkeys.widget.cardAddImage.widget,
+              imageUrl: image!.downloadURL,
+              fit: BoxFit.cover,
+            ),
           ),
         ),
+        if (filters != null)
+          Align(
+            alignment: Alignment.topLeft,
+            child: Padding(
+              padding: isDesk
+                  ? const EdgeInsets.only(
+                      left: KPadding.kPaddingSize32,
+                      right: KPadding.kPaddingSize16,
+                      top: KPadding.kPaddingSize16,
+                    )
+                  : const EdgeInsets.only(
+                      left: KPadding.kPaddingSize16,
+                      right: KPadding.kPaddingSize16,
+                      top: KPadding.kPaddingSize16,
+                    ),
+              child: filters,
+            ),
+          ),
       ],
     );
   }
