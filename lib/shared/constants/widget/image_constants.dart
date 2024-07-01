@@ -32,7 +32,8 @@ import 'package:kozak/shared/shared.dart';
 //       allowDrawingOutsideViewBox:
 //           allowDrawingOutsideViewBox ?? this.allowDrawingOutsideViewBox,
 //       semanticsLabel: semanticsLabel ?? this.semanticsLabel,
-//       excludeFromSemantics: excludeFromSemantics ?? this.excludeFromSemantics,
+//       excludeFromSemantics: excludeFromSemantics ??
+// this.excludeFromSemantics,
 //       clipBehavior: clipBehavior ?? this.clipBehavior,
 //       colorFilter: colorFilter ?? this.colorFilter,
 //     );
