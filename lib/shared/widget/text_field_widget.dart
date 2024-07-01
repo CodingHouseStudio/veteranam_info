@@ -70,49 +70,91 @@ class TextFieldWidget extends StatefulWidget {
 }
 
 class _TextFieldWidgetState extends State<TextFieldWidget> {
+  //TextEditingController? controller;
+  late bool isHovered;
+
+  @override
+  void initState() {
+    // if (widget.text != null) {
+    //   controller = TextEditingController(text: widget.text);
+    // }
+    isHovered = false;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      key: widget.widgetKey,
-      expands: widget.expands ?? false,
-      focusNode: widget.focusNode,
-      enabled: widget.enabled,
-      readOnly: widget.readOnly ?? false,
-      onSubmitted: widget.onSubmitted,
-      onEditingComplete: widget.onEditingCompleted,
-      obscureText: widget.obscureText,
-      autocorrect: !widget.obscureText,
-      controller: widget.controller,
-      maxLines: widget.expands == null ? widget.maxLines ?? 1 : null,
-      maxLength: widget.maxLength,
-      keyboardType: widget.keyboardType ?? TextInputType.text,
-      textInputAction: TextInputAction.done,
-      textAlign: widget.textAlign ?? TextAlign.start,
-      style: AppTextStyle.materialThemeTitleMedium,
-      // context.theme.textTheme.headlineSmall,
-      onChanged: widget.onChanged,
-      decoration: KWidgetTheme.inputDecoration.copyWith(
-        hintStyle: widget.hintStyle,
-        contentPadding: widget.contentPadding ??
-            (widget.isDesk
-                ? const EdgeInsets.symmetric(
-                    horizontal: KPadding.kPaddingSize32,
-                    vertical: KPadding.kPaddingSize16,
-                  )
-                : const EdgeInsets.all(KPadding.kPaddingSize16)),
-        labelText: widget.labelText,
-        border: widget.border,
-        enabledBorder: widget.enabledBorder,
-        disabledBorder: widget.border,
-        focusedBorder: widget.focusedBorder,
-        focusedErrorBorder: kIsWeb ? null : widget.border,
-        fillColor: widget.fillColor,
-        hintText: widget.hintText,
-        errorText: widget.errorText,
-        errorStyle: AppTextStyle.error14,
-        suffixIcon: widget.suffixIcon,
-        prefixIcon: widget.prefixIcon,
-        errorMaxLines: widget.errorMaxLines,
+    return MouseRegion(
+      onEnter: (_) {
+        setState(() {
+          isHovered = true;
+        });
+      },
+      onExit: (_) {
+        setState(() {
+          isHovered = false;
+        });
+      },
+      child: TextField(
+        key: widget.widgetKey,
+        expands: widget.expands ?? false,
+        focusNode: widget.focusNode,
+        enabled: widget.enabled,
+        readOnly: widget.readOnly ?? false,
+        onSubmitted: widget.onSubmitted,
+        onEditingComplete: widget.onEditingCompleted,
+        obscureText: widget.obscureText,
+        autocorrect: !widget.obscureText,
+        controller: widget.controller,
+        maxLines: widget.expands == null ? widget.maxLines ?? 1 : null,
+        maxLength: widget.maxLength,
+        keyboardType: widget.keyboardType ?? TextInputType.text,
+        textInputAction: TextInputAction.done,
+        textAlign: widget.textAlign ?? TextAlign.start,
+        style: AppTextStyle.materialThemeTitleMedium,
+        // context.theme.textTheme.headlineSmall,
+        onChanged: widget.onChanged,
+        decoration: KWidgetTheme.inputDecoration.copyWith(
+          hintStyle: widget.hintStyle,
+          contentPadding: widget.contentPadding ??
+              (widget.isDesk
+                  ? const EdgeInsets.symmetric(
+                      horizontal: KPadding.kPaddingSize32,
+                      vertical: KPadding.kPaddingSize16,
+                    )
+                  : const EdgeInsets.all(KPadding.kPaddingSize16)),
+          labelText: widget.labelText,
+          border: widget.border,
+          enabledBorder: OutlineInputBorder(
+            borderRadius: KBorderRadius.kBorderRadius32,
+            borderSide: BorderSide(
+              color: isHovered
+                  ? AppColors.materialThemeRefNeutralNeutral40
+                  : AppColors.materialThemeRefNeutralNeutral80,
+            ),
+          ),
+          disabledBorder: const OutlineInputBorder(
+            borderRadius: KBorderRadius.kBorderRadius32,
+            borderSide: BorderSide(
+              color: AppColors.materialThemeRefNeutralNeutral90,
+            ),
+          ),
+          hoverColor: AppColors.materialThemeWhite,
+          focusedBorder: const OutlineInputBorder(
+            borderRadius: KBorderRadius.kBorderRadius32,
+            borderSide: BorderSide(
+              color: AppColors.materialThemeRefNeutralNeutral70,
+            ),
+          ),
+          focusedErrorBorder: kIsWeb ? null : widget.border,
+          fillColor: widget.fillColor,
+          hintText: widget.hintText,
+          errorText: widget.errorText,
+          errorStyle: AppTextStyle.error14,
+          suffixIcon: widget.suffixIcon,
+          prefixIcon: widget.prefixIcon,
+          errorMaxLines: widget.errorMaxLines,
+        ),
       ),
     );
   }
