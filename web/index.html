@@ -76,9 +76,9 @@
 
   <!-- images -->
   <!-- <link rel="preload" href="assets/assets/images/logo.svg" as="image" type="image/svg"> -->
-  <link rel="preload" href="assets/assets/images/home_image.png" as="image" type="image/png">
+  <!-- <link rel="preload" href="assets/assets/images/home_image.png" as="image" type="image/png">
   <link rel="preload" href="assets/assets/images/discount_image.png" as="image" type="image/png">
-  <link rel="preload" href="assets/assets/images/information_image.png" as="image" type="image/png">
+  <link rel="preload" href="assets/assets/images/information_image.png" as="image" type="image/png"> -->
   <!-- <link rel="preload" href="assets/assets/images/logo_home.svg" as="image" type="image/svg"> -->
   <!-- <link rel="preload" href="assets/assets/images/veteran1.png" as="image" crossorigin>
   <link rel="preload" href="assets/assets/images/veteran2.png" as="image" crossorigin>
@@ -153,12 +153,19 @@
     }
 
     @keyframes bounce {
-      0%, 20%, 50%, 80%, 100% {
+
+      0%,
+      20%,
+      50%,
+      80%,
+      100% {
         transform: translateY(0);
       }
+
       40% {
         transform: translateY(-30px);
       }
+
       60% {
         transform: translateY(-15px);
       }
@@ -168,9 +175,9 @@
 </head>
 
 <body style="font-family: Tahoma, Verdana, sans-serif">
-<!--  <div id="splash">-->
-<!--    <img src="icons/logo_image.svg" alt="Loading indicator..." />-->
-<!--  </div>-->
+  <!--  <div id="splash">-->
+  <!--    <img src="icons/logo_image.svg" alt="Loading indicator..." />-->
+  <!--  </div>-->
 
   <div class="splash">
     <img src="icons/logo_image.svg" alt="Loading indicator..." class="bouncing-image">
