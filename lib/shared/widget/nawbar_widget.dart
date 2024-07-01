@@ -141,7 +141,8 @@ class _NawbarWidgetImplematationState
                 Expanded(
                   child: Align(
                     child: TextButton.icon(
-                      style: const ButtonStyle(alignment: Alignment.center),
+                      style:
+                          const ButtonStyle(alignment: Alignment.centerRight),
                       onPressed: () => context.goNamed(KRoute.discounts.name),
                       label: Text(
                         context.l10n.discounts,
@@ -168,7 +169,7 @@ class _NawbarWidgetImplematationState
                 Expanded(
                   child: Align(
                     child: TextButton.icon(
-                      style: const ButtonStyle(alignment: Alignment.center),
+                      style: const ButtonStyle(alignment: Alignment.centerLeft),
                       onPressed: () => context.goNamed(KRoute.investors.name),
                       label: Text(
                         context.l10n.investors,
