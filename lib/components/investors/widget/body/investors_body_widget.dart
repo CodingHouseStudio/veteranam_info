@@ -22,6 +22,9 @@ class InvestorsBodyWidget extends StatelessWidget {
       ),
       listenWhen: (previous, current) => current.failure != null,
       builder: (context, _) => ScaffoldAutoLoadingWidget(
+        loadingButtonText: context.l10n.moreFunds,
+        listCanLoaded: _.loadingStatus != LoadingStatus.listLoadedFull,
+        cardListIsEmpty: _.fundItems.isEmpty,
         mainChildWidgetsFunction: ({required isDesk}) => [
           KSizedBox.kHeightSizedBox24,
           ...TitleWidget.pointTitleWidgetList(
@@ -48,7 +51,7 @@ class InvestorsBodyWidget extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: SectionWidget.get(
-                      isDesk: true,
+                      isTablet: isDesk,
                       textPoint: null,
                       title: context.l10n.supportOurVeterans,
                       subtitle: context.l10n.investorsSubtitle,
@@ -69,7 +72,7 @@ class InvestorsBodyWidget extends StatelessWidget {
             )
           else ...[
             ...SectionWidget.get(
-              isDesk: false,
+              isTablet: isDesk,
               textPoint: null,
               title: context.l10n.supportOurVeterans,
               subtitle: context.l10n.investorsSubtitle,
@@ -137,7 +140,7 @@ class InvestorsBodyWidget extends StatelessWidget {
           else
             KSizedBox.kHeightSizedBox24,
         ],
-        scrollFunction: () => context
+        loadFunction: () => context
             .read<InvestorsWatcherBloc>()
             .add(const InvestorsWatcherEvent.loadeNextItems()),
       ),

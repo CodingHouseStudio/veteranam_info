@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kozak/shared/shared.dart';
 
@@ -25,7 +26,7 @@ class _DialogsWidget {
           ),
           content: Column(
             mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
+            children: [
               Text(
                 context.l10n.logOutQuestion,
                 key: KWidgetkeys.widget.dialogs.profileText,
@@ -72,7 +73,7 @@ class _DialogsWidget {
           ),
           content: Column(
             mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
+            children: [
               Text(
                 context.l10n.deleteAccountQuestion,
                 key: KWidgetkeys.widget.dialogs.profileText,
@@ -106,6 +107,95 @@ class _DialogsWidget {
     );
   }
 
+  void showReportDialog({
+    required bool isDesk,
+  }) {
+    if (isDesk) {
+      showDialog<void>(
+        context: context,
+        builder: (BuildContext context) {
+          return BlocProvider(
+            create: (context) => GetIt.I.get<ReportBloc>(),
+            child: LayoutBuilder(
+              builder: (BuildContext context, BoxConstraints constraints) {
+                final isDeskValue = constraints.maxWidth >
+                    KPlatformConstants.minWidthThresholdTablet;
+                return AlertDialog(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(KSize.kRadius32),
+                  ),
+                  scrollable: true,
+                  insetPadding: EdgeInsets.zero,
+                  icon: Align(
+                    alignment: Alignment.centerRight,
+                    child: IconButtonWidget(
+                      key: KWidgetkeys.widget.reportDialog.cancel,
+                      onPressed: () => context.pop(),
+                      icon: KIcon.close,
+                      background: AppColors.materialThemeWhite,
+                      padding: KPadding.kPaddingSize12,
+                    ),
+                  ),
+                  iconPadding: const EdgeInsets.all(KPadding.kPaddingSize16)
+                      .copyWith(bottom: 0),
+                  backgroundColor: AppColors.materialThemeKeyColorsNeutral,
+                  actionsOverflowAlignment: OverflowBarAlignment.center,
+                  contentPadding: isDeskValue
+                      ? const EdgeInsets.only(
+                          left: KPadding.kPaddingSize160,
+                          right: KPadding.kPaddingSize160,
+                          bottom: KPadding.kPaddingSize40,
+                        )
+                      : const EdgeInsets.symmetric(
+                          horizontal: KPadding.kPaddingSize16,
+                          vertical: KPadding.kPaddingSize32,
+                        ),
+                  content: ReportDialogWidget(isDesk: isDeskValue),
+                );
+              },
+            ),
+          );
+        },
+      );
+    } else {
+      showModalBottomSheet<void>(
+        context: context,
+        isScrollControlled: true,
+        barrierColor:
+            AppColors.materialThemeKeyColorsSecondary.withOpacity(0.2),
+        shape: const RoundedRectangleBorder(
+          borderRadius:
+              BorderRadius.vertical(top: Radius.circular(KSize.kRadius32)),
+        ),
+        showDragHandle: true,
+        backgroundColor: AppColors.materialThemeKeyColorsNeutral,
+        builder: (context) => BlocProvider(
+          create: (context) => GetIt.I.get<ReportBloc>(),
+          child: LayoutBuilder(
+            builder: (BuildContext context, BoxConstraints constraints) {
+              final isDeskValue =
+                  constraints.maxWidth >= KMinMaxSize.maxWidth600;
+              return Padding(
+                padding: isDeskValue
+                    ? const EdgeInsets.symmetric(
+                        vertical: KPadding.kPaddingSize40,
+                        horizontal: KPadding.kPaddingSize160,
+                      )
+                    : const EdgeInsets.symmetric(
+                        horizontal: KPadding.kPaddingSize16,
+                        vertical: KPadding.kPaddingSize32,
+                      ),
+                child: SingleChildScrollView(
+                  child: ReportDialogWidget(isDesk: isDeskValue),
+                ),
+              );
+            },
+          ),
+        ),
+      );
+    }
+  }
+
   void showGetErrorDialog({
     required String error,
     required void Function() onPressed,
@@ -114,48 +204,7 @@ class _DialogsWidget {
       SnackBar(
         key: KWidgetkeys.widget.dialogs.failure,
         backgroundColor: AppColors.materialThemeKeyColorsSecondary,
-        content: Row(
-          children: [
-            Expanded(
-              child: Text(
-                error,
-                key: KWidgetkeys.widget.dialogs.failureText,
-                style: AppTextStyle.materialThemeTitleMedium,
-              ),
-            ),
-            Expanded(
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Align(
-                      alignment: Alignment.centerRight,
-                      child: TextButton(
-                        key: KWidgetkeys.widget.dialogs.failureButton,
-                        style: KButtonStyles.whiteSnackBarButtonStyle,
-                        onPressed: () {
-                          onPressed();
-                          ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                        },
-                        child: Text(
-                          context.l10n.tryItAgain,
-                          style: AppTextStyle.materialThemeTitleMedium,
-                        ),
-                      ),
-                    ),
-                  ),
-                  KSizedBox.kWidthSizedBox12,
-                  IconButtonWidget(
-                    icon: KIcon.close.copyWith(weight: 300),
-                    onPressed: () =>
-                        ScaffoldMessenger.of(context).hideCurrentSnackBar(),
-                    background: AppColors.materialThemeWhite,
-                    padding: KPadding.kPaddingSize10,
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
+        content: GetErrorDialogWidget(onPressed: onPressed, error: error),
         duration: const Duration(minutes: 1),
       ),
     );

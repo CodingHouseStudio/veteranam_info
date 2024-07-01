@@ -13,7 +13,7 @@ class AuthenticationServicesCubit extends Cubit<AuthenticationServicesFailure> {
     final result = await _authenticationRepository.signUpWithGoogle();
     result.fold(
       (l) => emit(
-        l.toAuthenticationServicesFailure(),
+        l._toAuthenticationServicesFailure(),
       ),
       (r) => emit(
         AuthenticationServicesFailure.none,
@@ -29,7 +29,7 @@ enum AuthenticationServicesFailure {
 }
 
 extension AuthenticationServicesFailureExtentions on SomeFailure {
-  AuthenticationServicesFailure toAuthenticationServicesFailure() {
+  AuthenticationServicesFailure _toAuthenticationServicesFailure() {
     return AuthenticationServicesFailure.error;
   }
 }

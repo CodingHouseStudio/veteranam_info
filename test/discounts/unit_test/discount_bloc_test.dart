@@ -106,36 +106,35 @@ void main() {
         predicate<DiscountWatcherState>(
           (state) =>
               state.loadingStatus == LoadingStatus.loaded &&
-              state.filtersCategoriesIndex == null,
+              state.filtersCategoriesIndex.isEmpty,
         ),
         predicate<DiscountWatcherState>(
           (state) =>
-              state.loadingStatus == LoadingStatus.loaded &&
+              state.loadingStatus == LoadingStatus.listLoadedFull &&
               state.filteredDiscountModelItems.every(
                 (element) => element.category.contains(
                   KTestText.discountModelItemsModify.first.category.first,
                 ),
               ) &&
-              state.filtersCategoriesIndex != null &&
-              state.filtersCategoriesIndex!.length == 1,
+              state.filtersCategoriesIndex.length == 1,
+        ),
+        predicate<DiscountWatcherState>(
+          (state) =>
+              state.loadingStatus == LoadingStatus.listLoadedFull &&
+              state.filtersCategoriesIndex.isNotEmpty &&
+              state.filtersCategoriesIndex.length == 2,
         ),
         predicate<DiscountWatcherState>(
           (state) =>
               state.loadingStatus == LoadingStatus.loaded &&
-              state.filtersCategoriesIndex != null &&
-              state.filtersCategoriesIndex!.length == 2,
+              state.filtersCategoriesIndex.isNotEmpty &&
+              state.filtersCategoriesIndex.length == 1,
         ),
         predicate<DiscountWatcherState>(
           (state) =>
-              state.loadingStatus == LoadingStatus.loaded &&
-              state.filtersCategoriesIndex != null &&
-              state.filtersCategoriesIndex!.length == 1,
-        ),
-        predicate<DiscountWatcherState>(
-          (state) =>
-              state.loadingStatus == LoadingStatus.loaded &&
-              state.filtersCategoriesIndex != null &&
-              state.filtersCategoriesIndex!.length == 1,
+              state.loadingStatus == LoadingStatus.listLoadedFull &&
+              state.filtersCategoriesIndex.isNotEmpty &&
+              state.filtersCategoriesIndex.length == 1,
         ),
       ],
     );
@@ -173,27 +172,37 @@ void main() {
         predicate<DiscountWatcherState>(
           (state) =>
               state.loadingStatus == LoadingStatus.loaded &&
-              state.filtersLocationIndex == null,
+              state.filtersLocationIndex.isEmpty,
         ),
         predicate<DiscountWatcherState>(
           (state) =>
-              state.loadingStatus == LoadingStatus.loaded &&
+              state.loadingStatus == LoadingStatus.listLoadedFull &&
               state.filteredDiscountModelItems.length == 1 &&
-              state.filtersLocationIndex != null,
+              state.filtersLocationIndex.isNotEmpty,
         ),
         predicate<DiscountWatcherState>(
           (state) =>
               state.loadingStatus == LoadingStatus.loaded &&
               state.filteredDiscountModelItems.length ==
                   KDimensions.loadItems &&
-              state.filtersLocationIndex != null,
+              state.filtersLocationIndex.isEmpty,
         ),
         predicate<DiscountWatcherState>(
           (state) =>
               state.loadingStatus == LoadingStatus.loaded &&
               state.filteredDiscountModelItems.length ==
                   KDimensions.loadItems &&
-              state.filtersLocationIndex != null,
+              state.filtersLocationIndex.isNotEmpty,
+        ),
+        predicate<DiscountWatcherState>(
+          (state) =>
+              state.loadingStatus == LoadingStatus.listLoadedFull &&
+              state.filteredDiscountModelItems.every(
+                (element) => element.location!.contains(
+                  KTestText.discountModelItemsModify.first.location!.first,
+                ),
+              ) &&
+              state.filtersLocationIndex.isNotEmpty,
         ),
         predicate<DiscountWatcherState>(
           (state) =>
@@ -203,26 +212,14 @@ void main() {
                   KTestText.discountModelItemsModify.first.location!.first,
                 ),
               ) &&
-              state.filtersLocationIndex != null &&
-              state.filtersLocationIndex!.isNotEmpty,
-        ),
-        predicate<DiscountWatcherState>(
-          (state) =>
-              state.loadingStatus == LoadingStatus.loaded &&
-              state.filteredDiscountModelItems.every(
-                (element) => element.location!.contains(
-                  KTestText.discountModelItemsModify.first.location!.first,
-                ),
-              ) &&
-              state.filtersLocationIndex != null &&
-              state.filtersLocationIndex!.isNotEmpty,
+              state.filtersLocationIndex.isNotEmpty,
         ),
         predicate<DiscountWatcherState>(
           (state) =>
               state.loadingStatus == LoadingStatus.loaded &&
               state.filteredDiscountModelItems.length ==
                   KDimensions.loadItems &&
-              state.filtersLocationIndex != null,
+              state.filtersLocationIndex.isEmpty,
         ),
       ],
     );
@@ -311,12 +308,12 @@ void main() {
         predicate<DiscountWatcherState>(
           (state) =>
               state.loadingStatus == LoadingStatus.loaded &&
-              state.filtersCategoriesIndex == null,
+              state.filtersCategoriesIndex.isEmpty,
         ),
         predicate<DiscountWatcherState>(
           (state) =>
               state.loadingStatus == LoadingStatus.loading &&
-              state.filtersCategoriesIndex == null,
+              state.filtersCategoriesIndex.isEmpty,
         ),
         predicate<DiscountWatcherState>(
           (state) =>
@@ -324,13 +321,13 @@ void main() {
               state.filteredDiscountModelItems.length ==
                   KDimensions.loadItems * 2 &&
               state.itemsLoaded == KDimensions.loadItems * 2 &&
-              state.filtersCategoriesIndex == null,
+              state.filtersCategoriesIndex.isEmpty,
         ),
         predicate<DiscountWatcherState>(
           (state) =>
-              state.loadingStatus == LoadingStatus.loaded &&
+              state.loadingStatus == LoadingStatus.listLoadedFull &&
               state.filteredDiscountModelItems.length == 1 &&
-              state.filtersCategoriesIndex != null &&
+              state.filtersCategoriesIndex.isNotEmpty &&
               state.itemsLoaded == 1,
         ),
       ],
@@ -379,27 +376,27 @@ void main() {
         predicate<DiscountWatcherState>(
           (state) =>
               state.loadingStatus == LoadingStatus.loaded &&
-              state.filtersCategoriesIndex == null,
+              state.filtersCategoriesIndex.isEmpty,
         ),
         predicate<DiscountWatcherState>(
           (state) =>
-              state.loadingStatus == LoadingStatus.loaded &&
+              state.loadingStatus == LoadingStatus.listLoadedFull &&
               state.filteredDiscountModelItems.length == 1 &&
-              state.filtersCategoriesIndex != null &&
+              state.filtersCategoriesIndex.isNotEmpty &&
               state.itemsLoaded == 1,
         ),
         predicate<DiscountWatcherState>(
           (state) =>
               state.loadingStatus == LoadingStatus.loading &&
               state.filteredDiscountModelItems.length == 1 &&
-              state.filtersCategoriesIndex != null &&
+              state.filtersCategoriesIndex.isNotEmpty &&
               state.itemsLoaded == 1,
         ),
         predicate<DiscountWatcherState>(
           (state) =>
-              state.loadingStatus == LoadingStatus.loaded &&
+              state.loadingStatus == LoadingStatus.listLoadedFull &&
               state.filteredDiscountModelItems.length == 1 &&
-              state.filtersCategoriesIndex != null &&
+              state.filtersCategoriesIndex.isNotEmpty &&
               state.itemsLoaded == 1,
         ),
         predicate<DiscountWatcherState>(
@@ -407,8 +404,7 @@ void main() {
               state.loadingStatus == LoadingStatus.loaded &&
               state.filteredDiscountModelItems.length ==
                   KDimensions.loadItems &&
-              state.filtersCategoriesIndex != null &&
-              state.filtersCategoriesIndex!.isEmpty &&
+              state.filtersCategoriesIndex.isEmpty &&
               state.itemsLoaded == KDimensions.loadItems,
         ),
         predicate<DiscountWatcherState>(
@@ -416,8 +412,7 @@ void main() {
               state.loadingStatus == LoadingStatus.loading &&
               state.filteredDiscountModelItems.length ==
                   KDimensions.loadItems &&
-              state.filtersCategoriesIndex != null &&
-              state.filtersCategoriesIndex!.isEmpty &&
+              state.filtersCategoriesIndex.isEmpty &&
               state.itemsLoaded == KDimensions.loadItems,
         ),
         predicate<DiscountWatcherState>(
@@ -426,8 +421,7 @@ void main() {
               state.filteredDiscountModelItems.length ==
                   KDimensions.loadItems * 2 &&
               state.itemsLoaded == KDimensions.loadItems * 2 &&
-              state.filtersCategoriesIndex != null &&
-              state.filtersCategoriesIndex!.isEmpty,
+              state.filtersCategoriesIndex.isEmpty,
         ),
       ],
     );

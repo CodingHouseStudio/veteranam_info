@@ -6,15 +6,17 @@ import 'package:kozak/shared/shared.dart';
 class HomeBoxWidget extends StatelessWidget {
   const HomeBoxWidget({
     required this.isDesk,
+    required this.isTablet,
     required this.aboutProjectKey,
     super.key,
   });
   final bool isDesk;
+  final bool isTablet;
   final GlobalKey aboutProjectKey;
 
   @override
   Widget build(BuildContext context) {
-    if (isDesk) {
+    if (isDesk || isTablet) {
       return Row(
         key: KWidgetkeys.screen.home.box,
         children: [
@@ -63,36 +65,23 @@ class HomeBoxWidget extends StatelessWidget {
               ],
             ),
           ),
-          Expanded(
-            child: ConstrainedBox(
-              constraints:
-                  const BoxConstraints(maxHeight: KMinMaxSize.maxHeight400),
-              child: Stack(
-                alignment: Alignment.bottomRight,
-                children: [
-                  const Positioned.fill(
-                    child: Padding(
-                      padding: EdgeInsets.only(top: KPadding.kPaddingSize40),
-                      child: DecoratedBox(
-                        decoration: KWidgetTheme.boxDecorNeutralVariant,
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                        const EdgeInsets.only(left: KPadding.kPaddingSize24),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: KImage.logoHome.copyWith(
-                        height: KSize.kPixel400,
-                      ),
-                    ),
-                  ),
-                  KImage.homeImage,
-                ],
-              ),
-            ),
-          ),
+          // Expanded(
+          //   child: ConstrainedBox(
+          //     constraints:
+          //         const BoxConstraints(maxHeight: KMinMaxSize.maxHeight400),
+          //     child: isDesk
+          //         ? Container(
+          //             decoration: KWidgetTheme.boxDecorNeutralVariant,
+          //             child: KImage.homeImage,
+          //           )
+          //         : ConstrainedBox(
+          //             constraints: const BoxConstraints(
+          //               maxHeight: KMinMaxSize.maxHeight400,
+          //             ),
+          //             child: KImage.homeImageMob,
+          //           ),
+          //   ),
+          // ),
         ],
       );
     } else {
@@ -173,12 +162,12 @@ class HomeBoxWidget extends StatelessWidget {
               ),
             ],
           ),
-          KImage.logoHome,
-          ConstrainedBox(
-            constraints:
-                const BoxConstraints(maxHeight: KMinMaxSize.maxHeight220),
-            child: KImage.homeImageMob,
-          ),
+          // KImage.logoHome,
+          // ConstrainedBox(
+          //   constraints:
+          //       const BoxConstraints(maxHeight: KMinMaxSize.maxHeight220),
+          //   child: KImage.homeImageMob,
+          // ),
         ],
       );
     }

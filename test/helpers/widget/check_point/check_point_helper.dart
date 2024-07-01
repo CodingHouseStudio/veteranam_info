@@ -6,6 +6,7 @@ import '../../../text_dependency.dart';
 Future<void> chekPointHelper({
   required WidgetTester tester,
   bool hasAmount = false,
+  bool twiceTap = false,
 }) async {
   await scrollingHelper(
     tester: tester,
@@ -46,7 +47,23 @@ Future<void> chekPointHelper({
     findsOneWidget,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.widget.checkPoint.widget).first);
+  if (twiceTap) {
+    await tester.tap(find.byKey(KWidgetkeys.widget.checkPoint.widget).first);
 
-  await tester.pumpAndSettle();
+    await tester.pumpAndSettle();
+
+    expect(
+      find.byKey(KWidgetkeys.widget.checkPoint.icon),
+      findsNothing,
+    );
+  } else {
+    await tester.tap(find.byKey(KWidgetkeys.widget.checkPoint.widget).first);
+
+    await tester.pumpAndSettle();
+
+    expect(
+      find.byKey(KWidgetkeys.widget.checkPoint.icon),
+      findsOneWidget,
+    );
+  }
 }

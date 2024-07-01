@@ -11,6 +11,8 @@ class ProfileSavesBody extends StatelessWidget {
     return BlocBuilder<DiscountWatcherBloc, DiscountWatcherState>(
       builder: (context, state) {
         switch (state.loadingStatus) {
+          case LoadingStatus.listLoadedFull:
+            return const CircularProgressIndicator.adaptive();
           case LoadingStatus.initial:
             return const CircularProgressIndicator.adaptive();
           case LoadingStatus.loading:
@@ -39,7 +41,8 @@ class ProfileSavesBody extends StatelessWidget {
               mainDeskPadding: const EdgeInsets.symmetric(
                 horizontal: KPadding.kPaddingSize220,
               ),
-              mainChildWidgetsFunction: ({required isDesk}) => [
+              mainChildWidgetsFunction:
+                  ({required isDesk, required isTablet}) => [
                 DiscountsCardWidget(
                   key: KWidgetkeys.screen.profileSaves.discountCard,
                   isDesk: isDesk,

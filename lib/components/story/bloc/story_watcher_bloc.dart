@@ -1,14 +1,13 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kozak/shared/shared.dart';
 
+part 'story_watcher_bloc.freezed.dart';
 part 'story_watcher_event.dart';
 part 'story_watcher_state.dart';
-part 'story_watcher_bloc.freezed.dart';
 
 @Injectable()
 class StoryWatcherBloc extends Bloc<StoryWatcherEvent, StoryWatcherState> {
@@ -45,7 +44,7 @@ class StoryWatcherBloc extends Bloc<StoryWatcherEvent, StoryWatcherState> {
         ),
       ),
       onError: (dynamic error) {
-        debugPrint('error is $error');
+        // debugPrint('error is $error');
         add(StoryWatcherEvent.failure(error));
       },
     );
@@ -71,7 +70,10 @@ class StoryWatcherBloc extends Bloc<StoryWatcherEvent, StoryWatcherState> {
     _LoadNextItems event,
     Emitter<StoryWatcherState> emit,
   ) {
-    if (state.itemsLoaded.checkLoadingPosible(state.storyModelItems)) return;
+    if (state.itemsLoaded.checkLoadingPosible(state.storyModelItems)) {
+      emit(state.copyWith(loadingStatus: LoadingStatus.listLoadedFull));
+      return;
+    }
     emit(state.copyWith(loadingStatus: LoadingStatus.loading));
     final filterItems = state.storyModelItems.loading(
       itemsLoaded: state.itemsLoaded + KDimensions.loadItems,
@@ -91,7 +93,7 @@ class StoryWatcherBloc extends Bloc<StoryWatcherEvent, StoryWatcherState> {
     _Failure event,
     Emitter<StoryWatcherState> emit,
   ) {
-    debugPrint('error is ${event.failure}');
+    // debugPrint('error is ${event.failure}');
     emit(
       state.copyWith(
         loadingStatus: LoadingStatus.error,

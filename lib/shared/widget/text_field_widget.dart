@@ -34,6 +34,7 @@ class TextFieldWidget extends StatefulWidget {
     this.labelText,
     this.minLines,
     this.hintStyle,
+    this.text,
   });
   final Key widgetKey;
   final TextAlign? textAlign;
@@ -64,12 +65,14 @@ class TextFieldWidget extends StatefulWidget {
   final String? labelText;
   final TextStyle? hintStyle;
   final bool isDesk;
+  final String? text;
 
   @override
   State<TextFieldWidget> createState() => _TextFieldWidgetState();
 }
 
 class _TextFieldWidgetState extends State<TextFieldWidget> {
+
   //TextEditingController? controller;
   late bool isHovered;
 

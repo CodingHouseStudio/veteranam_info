@@ -4,18 +4,26 @@ import 'package:kozak/shared/shared.dart';
 class ScaffoldAutoLoadingWidget extends StatefulWidget {
   const ScaffoldAutoLoadingWidget({
     required this.mainChildWidgetsFunction,
-    required this.scrollFunction,
+    required this.loadFunction,
+    required this.loadingButtonText,
+    required this.listCanLoaded,
+    this.cardListIsEmpty,
     this.titleChildWidgetsFunction,
-    super.key,
     this.mainDeskPadding,
     this.mainRightChildWidget,
+    super.key,
   });
+
   final List<Widget> Function({required bool isDesk})?
       titleChildWidgetsFunction;
   final List<Widget> Function({required bool isDesk}) mainChildWidgetsFunction;
-  final EdgeInsetsGeometry? mainDeskPadding;
-  final void Function() scrollFunction;
+  final EdgeInsetsGeometry Function({required double maxWidth})?
+      mainDeskPadding;
+  final void Function() loadFunction;
   final Widget? mainRightChildWidget;
+  final String loadingButtonText;
+  final bool listCanLoaded;
+  final bool? cardListIsEmpty;
 
   @override
   State<ScaffoldAutoLoadingWidget> createState() =>
@@ -23,12 +31,16 @@ class ScaffoldAutoLoadingWidget extends StatefulWidget {
 }
 
 class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
-  final _scrollController = ScrollController();
+  late ScrollController _scrollController;
 
   @override
   void initState() {
     super.initState();
-    _scrollController.addListener(_onScroll);
+    _scrollController = ScrollController();
+    if (!KPlatformConstants.isWebDesktop &&
+        !(widget.cardListIsEmpty ?? false)) {
+      _scrollController.addListener(_onScroll);
+    }
   }
 
   @override
@@ -36,8 +48,58 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
         final isDesk =
-            constraints.maxWidth > KPlatformConstants.minWidthThresholdTablet;
-        final mainChildWidget = widget.mainChildWidgetsFunction(isDesk: isDesk);
+            constraints.maxWidth > KPlatformConstants.minWidthThresholdDesk;
+
+        final titleChildWidget =
+            widget.titleChildWidgetsFunction?.call(isDesk: isDesk);
+        final mainChildWidget = widget.mainChildWidgetsFunction(isDesk: isDesk)
+          ..addAll([
+            if (widget.listCanLoaded &&
+                KPlatformConstants.isWebDesktop &&
+                !(widget.cardListIsEmpty ?? false))
+              LoadingButton(
+                isDesk: isDesk,
+                onPressed: widget.loadFunction,
+                text: widget.loadingButtonText,
+                widgetKey: KWidgetkeys.widget.scaffold.loadingButton,
+              ),
+            if ((widget.cardListIsEmpty ?? false) && Config.isProduction) ...[
+              KSizedBox.kHeightSizedBox100,
+              // const Center(child: KImage.emptyList),
+              KSizedBox.kHeightSizedBox36,
+              Center(
+                child: Text(
+                  context.l10n.cardListEmptyText,
+                  key: KWidgetkeys.widget.scaffold.endListText,
+                  style: AppTextStyle.materialThemeTitleMediumNeutralVariant70,
+                ),
+              ),
+              KSizedBox.kHeightSizedBox100,
+            ],
+            if (!widget.listCanLoaded &&
+                !(widget.cardListIsEmpty ?? false)) ...[
+              Center(
+                child: Text(
+                  context.l10n.thatEndOfList,
+                  key: KWidgetkeys.widget.scaffold.emptyListText,
+                  style: AppTextStyle.materialThemeTitleMediumNeutralVariant70,
+                ),
+              ),
+              KSizedBox.kHeightSizedBox24,
+              Center(
+                child: TextButton(
+                  style: KButtonStyles.endListButtonStyle,
+                  onPressed: scrollUp,
+                  child: Text(
+                    context.l10n.returnToTop,
+                    style: AppTextStyle.materialThemeTitleMedium,
+                  ),
+                ),
+              ),
+            ],
+            KSizedBox.kHeightSizedBox40,
+          ]);
+
         final padding = EdgeInsets.symmetric(
           horizontal: (isDesk
               ? KPadding.kPaddingSize90 +
@@ -49,10 +111,7 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
                       : 0)
               : KPadding.kPaddingSize16),
         );
-        // final footerList = FooterWidget.get(
-        //   context: context,
-        //   isDesk: isDesk,
-        // );
+
         return Scaffold(
           body: CustomScrollView(
             key: KWidgetkeys.widget.scaffold.scroll,
@@ -62,24 +121,23 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
                   isDesk: isDesk,
                 ),
               ),
-              if (widget.titleChildWidgetsFunction != null)
+              if (titleChildWidget != null)
                 SliverPadding(
                   padding: padding,
                   sliver: SliverList.builder(
                     addAutomaticKeepAlives: false,
                     addRepaintBoundaries: false,
                     itemBuilder: (context, index) {
-                      return widget.titleChildWidgetsFunction!(isDesk: isDesk)
-                          .elementAt(index);
+                      return titleChildWidget.elementAt(index);
                     },
-                    itemCount: widget
-                        .titleChildWidgetsFunction!(isDesk: isDesk).length,
+                    itemCount: titleChildWidget.length,
                   ),
                 ),
-
               SliverPadding(
                 padding: isDesk && widget.mainDeskPadding != null
-                    ? padding.add(widget.mainDeskPadding!)
+                    ? padding.add(
+                        widget.mainDeskPadding!(maxWidth: constraints.maxWidth),
+                      )
                     : padding,
                 sliver: widget.mainRightChildWidget != null && isDesk
                     ? RowSliver(
@@ -96,33 +154,9 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
                       )
                     : mainBody(mainChildWidget),
               ),
-              // SliverPadding(
-              //   padding: padding.copyWith(
-              //     bottom: KPadding.kPaddingSize40,
-              //   ),
-              //   sliver: DecoratedSliver(
-              //     decoration: KWidgetTheme.boxDecorationFooter,
-              //     sliver: SliverPadding(
-              //       padding: isDesk
-              //           ? const EdgeInsets.all(KPadding.kPaddingSize32)
-              //               .copyWith(left: KPadding.kPaddingSize46)
-              //           : const EdgeInsets.symmetric(
-              //               vertical: KPadding.kPaddingSize32,
-              //               horizontal: KPadding.kPaddingSize16,
-              //             ),
-              //       sliver: SliverList.builder(
-              //         key: KWidgetkeys.widget.footer.widget,
-              //         addAutomaticKeepAlives: false,
-              //         addRepaintBoundaries: false,
-              //         itemBuilder: (context, index) =>
-              //             footerWidget.elementAt(index),
-              //         itemCount: footerWidget.length,
-              //       ),
-              //     ),
-              //   ),
-              // ),
             ],
-            semanticChildCount: mainChildWidget.length + 1,
+            semanticChildCount:
+                mainChildWidget.length + (titleChildWidget?.length ?? 0) + 1,
             controller: _scrollController,
           ),
         );
@@ -141,14 +175,18 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
 
   @override
   void dispose() {
-    _scrollController
-      ..removeListener(_onScroll)
-      ..dispose();
+    if (KPlatformConstants.isWebDesktop) {
+      _scrollController.dispose();
+    } else {
+      _scrollController
+        ..removeListener(_onScroll)
+        ..dispose();
+    }
     super.dispose();
   }
 
   void _onScroll() {
-    if (_isBottom) widget.scrollFunction();
+    if (_isBottom && widget.listCanLoaded) widget.loadFunction();
   }
 
   bool get _isBottom {
@@ -156,5 +194,13 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
     final maxScroll = _scrollController.position.maxScrollExtent;
     final currentScroll = _scrollController.offset;
     return currentScroll >= (maxScroll * 0.9);
+  }
+
+  void scrollUp() {
+    _scrollController.animateTo(
+      0,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeInOut,
+    );
   }
 }

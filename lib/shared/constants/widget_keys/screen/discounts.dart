@@ -4,7 +4,7 @@ class _DiscountsKeys {
   final screen = const Key('discounts_screen');
   final filter = const Key('discounts_screen_filter');
   final card = const Key('discounts_screen_card');
-  final cardLast = const Key('discounts_screen_card_last');
+  // final cardLast = const Key('discounts_screen_card_last');
   // final button = const Key('discount_screen_button');
   final buttonMock = const Key('discounts_screen_button_mock');
   final buttonIcon = const Key('discount_screen_button_icon');
@@ -28,6 +28,6 @@ class _DiscountsKeys {
   final discountItems = const Key('discounts_screen_discount_items');
   final cityText = const Key('discounts_screen_city_text');
   final cityItems = const Key('discounts_screen_city_items');
-  final cancelIcon = const Key('discounts_screen_cancel_icon');
+  // final cancelIcon = const Key('discounts_screen_cancel_icon');
   final cancelText = const Key('discounts_screen_cancel_text');
 }

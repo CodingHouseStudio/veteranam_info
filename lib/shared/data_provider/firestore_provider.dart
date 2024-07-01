@@ -87,9 +87,9 @@ class FirestoreService {
         (snapshot) {
           for (final change in snapshot.docChanges) {
             if (change.type == DocumentChangeType.added) {
-              final source =
-                  (snapshot.metadata.isFromCache) ? 'local cache' : 'server';
-              debugPrint('Data fetched from $source}');
+              // final source =
+              //     (snapshot.metadata.isFromCache) ? 'local cache' : 'server';
+              // debugPrint('Data fetched from $source}');
             }
           }
           return snapshot.docs
@@ -122,9 +122,9 @@ class FirestoreService {
           .map(
         (snapshot) {
           if (snapshot.exists) {
-            final source =
-                (snapshot.metadata.isFromCache) ? 'local cache' : 'server';
-            debugPrint('Data fetched from $source}');
+            // final source =
+            //     (snapshot.metadata.isFromCache) ? 'local cache' : 'server';
+            // debugPrint('Data fetched from $source}');
             return UserSetting.fromJson(snapshot.data()!);
           } else {
             return UserSetting.empty;
@@ -148,9 +148,9 @@ class FirestoreService {
         (snapshot) {
           for (final change in snapshot.docChanges) {
             if (change.type == DocumentChangeType.added) {
-              final source =
-                  (snapshot.metadata.isFromCache) ? 'local cache' : 'server';
-              debugPrint('Data fetched from $source}');
+              // final source =
+              //     (snapshot.metadata.isFromCache) ? 'local cache' : 'server';
+              // debugPrint('Data fetched from $source}');
             }
           }
           return snapshot.docs
@@ -173,9 +173,9 @@ class FirestoreService {
         (snapshot) {
           for (final change in snapshot.docChanges) {
             if (change.type == DocumentChangeType.added) {
-              final source =
-                  (snapshot.metadata.isFromCache) ? 'local cache' : 'server';
-              debugPrint('Data fetched from $source}');
+              // final source =
+              //     (snapshot.metadata.isFromCache) ? 'local cache' : 'server';
+              // debugPrint('Data fetched from $source}');
             }
           }
           return snapshot.docs
@@ -209,9 +209,9 @@ class FirestoreService {
         (snapshot) {
           for (final change in snapshot.docChanges) {
             if (change.type == DocumentChangeType.added) {
-              final source =
-                  (snapshot.metadata.isFromCache) ? 'local cache' : 'server';
-              debugPrint('Data fetched from $source}');
+              // final source =
+              //     (snapshot.metadata.isFromCache) ? 'local cache' : 'server';
+              // debugPrint('Data fetched from $source}');
             }
           }
           return snapshot.docs
@@ -268,5 +268,12 @@ class FirestoreService {
         .collection(FirebaseCollectionName.discount)
         .doc(discountId)
         .delete();
+  }
+
+  Future<void> addReport(ReportModel report) {
+    return _db
+        .collection(FirebaseCollectionName.report)
+        .doc(report.id)
+        .set(report.toJson());
   }
 }
