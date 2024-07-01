@@ -46,6 +46,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "capitalLetter": MessageLookupByLibrary.simpleMessage(
             "must contain one or more capital letter"),
+        "cardListEmptyText": MessageLookupByLibrary.simpleMessage(
+            "Sorry, nothing was found using your filters. Try changing your search criteria"),
         "category": MessageLookupByLibrary.simpleMessage("Category"),
         "checkPointError": MessageLookupByLibrary.simpleMessage(
             "Please select one of the following answers"),
@@ -252,6 +254,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "resetAll": MessageLookupByLibrary.simpleMessage("Reset all"),
         "respond": MessageLookupByLibrary.simpleMessage("Respond"),
         "resume": MessageLookupByLibrary.simpleMessage("Resume"),
+        "returnToTop":
+            MessageLookupByLibrary.simpleMessage("Return to the top"),
         "save": MessageLookupByLibrary.simpleMessage("Save"),
         "saveChanges": MessageLookupByLibrary.simpleMessage("Save changes"),
         "saveMoney": MessageLookupByLibrary.simpleMessage("To save money"),
@@ -289,6 +293,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "thankYou": MessageLookupByLibrary.simpleMessage("Thank you!"),
         "thankYouDescription": MessageLookupByLibrary.simpleMessage(
             "Please note! To access some services, you will need to confirm your status by showing the appropriate ID."),
+        "thatEndOfList": MessageLookupByLibrary.simpleMessage(
+            "That\'s the end of the list! We hope you found what you were looking for."),
         "thisServiceForVeterans": MessageLookupByLibrary.simpleMessage(
             "THIS SERVICE IS FOR VETERANS"),
         "thisServiceForVeteransSubtitle": MessageLookupByLibrary.simpleMessage(
