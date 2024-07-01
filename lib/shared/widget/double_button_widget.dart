@@ -178,7 +178,7 @@ class _DoubleButtonWidgetMob extends StatelessWidget {
         children: [
           Container(
             width: textWidth,
-            margin: const EdgeInsets.only(right: KPadding.kPaddingSize40),
+            margin: const EdgeInsets.only(right: KPadding.kPaddingSize36),
             decoration: KWidgetTheme.boxDecorationGreen.copyWith(color: color),
             padding: EdgeInsets.symmetric(
               horizontal: KPadding.kPaddingSize30,
@@ -197,7 +197,7 @@ class _DoubleButtonWidgetMob extends StatelessWidget {
               color: textColor ?? AppColors.materialThemeKeyColorsSecondary,
             ),
             background: color,
-            padding: KPadding.kPaddingSize12,
+            padding: KPadding.kPaddingSize8,
           ),
         ],
       ),
