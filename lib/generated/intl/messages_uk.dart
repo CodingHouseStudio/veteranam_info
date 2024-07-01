@@ -47,6 +47,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "cancel": MessageLookupByLibrary.simpleMessage("Скасувати"),
         "capitalLetter": MessageLookupByLibrary.simpleMessage(
             "повинен містити одну чи більше великих букв"),
+        "cardListEmptyText": MessageLookupByLibrary.simpleMessage(
+            "На жаль, за вашими фільтрами нічого не знайдено. Спробуйте змінити критерії пошуку"),
         "category": MessageLookupByLibrary.simpleMessage("Категорія"),
         "checkPointError": MessageLookupByLibrary.simpleMessage(
             "Будь ласка виберіть одну з вище наведених відповідей"),
@@ -258,6 +260,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "resetAll": MessageLookupByLibrary.simpleMessage("Скинути все"),
         "respond": MessageLookupByLibrary.simpleMessage("Відгукнутися"),
         "resume": MessageLookupByLibrary.simpleMessage("Резюме"),
+        "returnToTop":
+            MessageLookupByLibrary.simpleMessage("Повернутись на гору"),
         "save": MessageLookupByLibrary.simpleMessage("Зберегти"),
         "saveChanges": MessageLookupByLibrary.simpleMessage("Зберегти зміни"),
         "saveMoney": MessageLookupByLibrary.simpleMessage("Щоб зекономити"),
@@ -298,6 +302,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "thankYou": MessageLookupByLibrary.simpleMessage("Дякуємо!"),
         "thankYouDescription": MessageLookupByLibrary.simpleMessage(
             "Зверніть увагу! Для доступу до деяких послуг Вам потрібно буде підтвердити Ваш статус показавши відповідне посвідчення."),
+        "thatEndOfList": MessageLookupByLibrary.simpleMessage(
+            "Це кінець списку! Сподіваємось, ви знайшли те, що шукали."),
         "thisServiceForVeterans":
             MessageLookupByLibrary.simpleMessage("ЦЕЙ СЕРВІС ДЛЯ ВЕТЕРАНІВ"),
         "thisServiceForVeteransSubtitle": MessageLookupByLibrary.simpleMessage(
