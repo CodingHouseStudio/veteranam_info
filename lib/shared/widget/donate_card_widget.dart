@@ -36,6 +36,7 @@ class DonateCardWidget extends StatelessWidget {
               alignment: Alignment.topRight,
               child: ComplaintWidget(
                 isDesk: isDesk,
+                cardEnum: CardEnum.funds,
               ),
             ),
             Expanded(
