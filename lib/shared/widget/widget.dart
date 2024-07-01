@@ -13,6 +13,8 @@ export 'check_point_widget.dart';
 export 'chip_widget.dart';
 export 'complaint_widget.dart';
 export 'dialogs_widget.dart';
+export 'discount_card_expandable_city_chip_widget.dart';
+export 'discount_card_icon_list_widget.dart';
 export 'discount_card_widget.dart';
 export 'donate_button_widget.dart';
 export 'donate_card_widget.dart';

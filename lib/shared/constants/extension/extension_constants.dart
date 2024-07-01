@@ -37,3 +37,10 @@ extension LocalizedDateTime on DateTime {
     return toLocal().toString().split(' ')[0];
   }
 }
+
+extension DiscountModelLocation on DiscountModel {
+  List<String> fullLocationList(BuildContext context) => [
+        if (location != null) ...location!,
+        if (subLocation != null) ...subLocation!.getList(context),
+      ];
+}
