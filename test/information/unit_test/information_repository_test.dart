@@ -76,16 +76,18 @@ void main() {
             KGroupText.failureGet,
           ),
         );
+        // when(
+        //   mockFirestoreService.updateInformationModel(
+        //     KTestText.informationModelItems.first,
+        //   ),
+        // ).thenThrow(
+        //   FirebaseException(plugin: KGroupText.failureGet),
+        // );
         when(
           mockFirestoreService.updateInformationModel(
-            KTestText.informationModelItems.first,
-          ),
-        ).thenThrow(
-          FirebaseException(plugin: KGroupText.failureGet),
-        );
-        when(
-          mockFirestoreService.updateInformationModel(
-            KTestText.informationModelItems.first,
+            KTestText.informationModelItems.first.copyWith(
+              likes: KTestText.informationModelItems.first.likes ?? 0 + 1,
+            ),
           ),
         ).thenThrow(
           FirebaseException(plugin: KGroupText.failure),
@@ -116,7 +118,7 @@ void main() {
         expect(
           await mockInformationRepository.updateLikeCount(
             informationModel: KTestText.informationModelItems.first,
-            isLiked: false,
+            isLiked: true,
           ),
           isA<Left<SomeFailure, bool>>().having(
             (e) => e.value,

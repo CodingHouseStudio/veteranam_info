@@ -38,9 +38,7 @@ class InformationRepository implements IInformationRepository {
       await _firestoreService.updateInformationModel(
         informationModel.copyWith(
           likes: isLiked
-              ? informationModel.likes != null
-                  ? informationModel.likes! + 1
-                  : 1
+              ? informationModel.likes ?? 0 + 1
               : informationModel.likes != null && informationModel.likes! > 1
                   ? informationModel.likes! - 1
                   : null,
