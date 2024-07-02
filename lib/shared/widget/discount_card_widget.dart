@@ -51,8 +51,9 @@ class _DiscountsCardWidgetDesk extends StatelessWidget {
             ),
             child: Row(
               children: [
-                const CircleAvatar(
-                  child: KIcon.user,
+                UserPhotoWidget(
+                  imageUrl: discountItem.userPhoto?.downloadURL,
+                  onPressed: null,
                 ),
                 KSizedBox.kWidthSizedBox16,
                 Expanded(
@@ -70,7 +71,7 @@ class _DiscountsCardWidgetDesk extends StatelessWidget {
                         children: [
                           Text(
                             key: KWidgetkeys.widget.discountCard.userName,
-                            KMockText.userName,
+                            discountItem.userName ?? KAppText.veteranamName,
                             style: AppTextStyle.materialThemeLabelSmall,
                           ),
                           KSizedBox.kWidthSizedBox8,
@@ -164,25 +165,7 @@ class _DiscountsCardWidgetDesk extends StatelessWidget {
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: KPadding.kPaddingSize8,
-                        horizontal: KPadding.kPaddingSize16,
-                      ),
-                      alignment: Alignment.centerLeft,
-                      decoration: KWidgetTheme.boxDecorationDiscountContainer,
-                      child: Row(
-                        children: [
-                          KIcon.calendarClock,
-                          KSizedBox.kWidthSizedBox8,
-                          Text(
-                            key: KWidgetkeys.widget.discountCard.expiration,
-                            discountItem.expiration,
-                            style: AppTextStyle.materialThemeLabelLarge,
-                          ),
-                        ],
-                      ),
-                    ),
+                    _expiration(discountItem.expiration),
                     KSizedBox.kWidthSizedBox16,
                     Expanded(
                       child: CityWidgetList(
@@ -235,11 +218,9 @@ class DiscountsCardWidgetMob extends StatelessWidget {
           children: [
             Row(
               children: [
-                IconWidget(
-                  icon:
-                      KIcon.user.copyWith(color: AppColors.materialThemeWhite),
-                  background: AppColors.materialThemeKeyColorsSecondary,
-                  padding: KPadding.kPaddingSize12,
+                UserPhotoWidget(
+                  imageUrl: discountItem.userPhoto?.downloadURL,
+                  onPressed: null,
                 ),
                 KSizedBox.kWidthSizedBox16,
                 Expanded(
@@ -285,7 +266,6 @@ class DiscountsCardWidgetMob extends StatelessWidget {
                   children: [
                     KSizedBox.kHeightSizedBox16,
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         ...List.generate(discountItem.category.length,
                             (int index) {
@@ -320,6 +300,7 @@ class DiscountsCardWidgetMob extends StatelessWidget {
                             ),
                           );
                         }),
+                        const Spacer(),
                         Container(
                           decoration: KWidgetTheme.boxDecorationDiscount,
                           padding: const EdgeInsets.symmetric(
@@ -346,30 +327,7 @@ class DiscountsCardWidgetMob extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Align(
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(
-                              vertical: KPadding.kPaddingSize8,
-                              horizontal: KPadding.kPaddingSize8,
-                            ),
-                            decoration:
-                                KWidgetTheme.boxDecorationDiscountContainer,
-                            child: Row(
-                              children: [
-                                KIcon.calendarClock,
-                                KSizedBox.kWidthSizedBox8,
-                                Expanded(
-                                  child: Text(
-                                    key: KWidgetkeys
-                                        .widget.discountCard.expiration,
-                                    discountItem.expiration,
-                                    style: AppTextStyle.materialThemeLabelLarge,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
+                        _expiration(discountItem.expiration),
                         KSizedBox.kHeightSizedBox8,
                         CityWidgetList(
                           discountModel: discountItem,
@@ -399,3 +357,23 @@ class DiscountsCardWidgetMob extends StatelessWidget {
     );
   }
 }
+
+Widget _expiration(String expiration) => Container(
+      padding: const EdgeInsets.symmetric(
+        vertical: KPadding.kPaddingSize8,
+        horizontal: KPadding.kPaddingSize8,
+      ),
+      decoration: KWidgetTheme.boxDecorationDiscountContainer,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          KIcon.calendarClock,
+          KSizedBox.kWidthSizedBox8,
+          Text(
+            expiration,
+            key: KWidgetkeys.widget.discountCard.expiration,
+            style: AppTextStyle.materialThemeLabelLarge,
+          ),
+        ],
+      ),
+    );

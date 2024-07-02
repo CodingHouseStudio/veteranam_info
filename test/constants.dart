@@ -195,6 +195,7 @@ abstract class KTestText {
                 : i == 2
                     ? SubLocation.online
                     : null,
+        userPhoto: i > _itemsPhoto ? imageModels : null,
       ),
   ];
 
