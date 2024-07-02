@@ -10,6 +10,7 @@ class ScaffoldDecorationWidget extends StatelessWidget {
     this.mainPadding,
     this.mainDecorationPadding,
   });
+
   final List<Widget> Function({required bool isDesk})?
       titleChildWidgetsFunction;
   final List<Widget> Function({required bool isDesk}) mainChildWidgetsFunction;
@@ -26,6 +27,8 @@ class ScaffoldDecorationWidget extends StatelessWidget {
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
         final isDesk =
+            constraints.maxWidth > KPlatformConstants.minWidthThresholdDesk;
+        final isTablet =
             constraints.maxWidth > KPlatformConstants.minWidthThresholdDesk;
         final mainChildWidget = mainChildWidgetsFunction(
           isDesk: isDesk,
@@ -52,6 +55,7 @@ class ScaffoldDecorationWidget extends StatelessWidget {
               SliverPersistentHeader(
                 delegate: NawbarWidget(
                   isDesk: isDesk,
+                  isTablet: isTablet,
                 ),
               ),
               if (titleChildWidgetsFunction != null)

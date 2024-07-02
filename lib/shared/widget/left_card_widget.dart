@@ -10,12 +10,15 @@ class LeftCardWidget extends StatelessWidget {
 
   final List<Widget> Function({required bool isDesk}) widgetListFunction;
   final String? image;
+
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
         final isDesk =
             constraints.maxWidth > KPlatformConstants.minWidthThresholdDesk;
+        final isTablet =
+            constraints.maxWidth > KPlatformConstants.minWidthThresholdTablet;
         final widgetList = widgetListFunction(isDesk: isDesk);
         return Scaffold(
           backgroundColor:
@@ -24,7 +27,7 @@ class LeftCardWidget extends StatelessWidget {
             key: KWidgetkeys.widget.scaffold.scroll,
             slivers: [
               SliverPersistentHeader(
-                delegate: NawbarWidget(isDesk: isDesk),
+                delegate: NawbarWidget(isDesk: isDesk, isTablet: isTablet),
               ),
 
               SliverPadding(
