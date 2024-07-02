@@ -3,11 +3,11 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:kozak/shared/shared.dart';
+import 'package:veteranam/shared/shared.dart';
 
+part 'home_watcher_bloc.freezed.dart';
 part 'home_watcher_event.dart';
 part 'home_watcher_state.dart';
-part 'home_watcher_bloc.freezed.dart';
 
 @Injectable()
 class HomeWatcherBloc extends Bloc<HomeWatcherEvent, HomeWatcherState> {

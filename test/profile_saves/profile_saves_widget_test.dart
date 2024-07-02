@@ -1,8 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
-import 'package:kozak/components/discounts/bloc/discount_watcher_bloc.dart';
-import 'package:kozak/shared/repositories/i_discount_repository.dart';
 import 'package:mockito/mockito.dart';
+import 'package:veteranam/components/components.dart';
+import 'package:veteranam/shared/shared.dart';
 
 import '../text_dependency.dart';
 import 'helper/profile_saves_initial_helper.dart';

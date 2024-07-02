@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:go_router/go_router.dart';
-import 'package:kozak/shared/shared.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:veteranam/shared/shared.dart';
 
 abstract class FooterWidget {
   static List<Widget> get({

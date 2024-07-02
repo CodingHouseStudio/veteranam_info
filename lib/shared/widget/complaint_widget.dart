@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'package:kozak/shared/shared.dart';
+import 'package:veteranam/shared/shared.dart';
 
 class ComplaintWidget extends StatelessWidget {
   const ComplaintWidget({required this.isDesk, super.key});
