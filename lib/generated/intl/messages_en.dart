@@ -352,8 +352,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "writeYourSuggenstions":
             MessageLookupByLibrary.simpleMessage("Write your suggestions"),
         "yes": MessageLookupByLibrary.simpleMessage("Yes"),
-        "youHaveLoadedFullList": MessageLookupByLibrary.simpleMessage(
-            "You have loaded the full list"),
         "yourStory": MessageLookupByLibrary.simpleMessage("Your story")
       };
 }
