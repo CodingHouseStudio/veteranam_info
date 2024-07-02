@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:kozak/shared/shared.dart';
+import 'package:veteranam/shared/shared.dart';
 
 extension SvgPictureExtension on SvgPicture {
   SvgPicture copyWith({
@@ -100,6 +100,9 @@ abstract class KImage {
   static final Image veteran5 = _get(
     'assets/images/veteran5.png',
   );
+  // static const SvgPicture emptyList = SvgPicture(
+  //   SvgAssetLoader('assets/images/empty_list.svg'),
+  // );
 
   // static const Image workImage = _get(
   //    'assets/images/work_image.png'),

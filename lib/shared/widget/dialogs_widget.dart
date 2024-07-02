@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
-import 'package:kozak/shared/shared.dart';
+import 'package:veteranam/shared/shared.dart';
 
 extension DiaglogExtention on BuildContext {
   // ignore: library_private_types_in_public_api
@@ -109,6 +109,7 @@ class _DialogsWidget {
 
   void showReportDialog({
     required bool isDesk,
+    required CardEnum cardEnum,
   }) {
     if (isDesk) {
       showDialog<void>(
@@ -150,7 +151,10 @@ class _DialogsWidget {
                           horizontal: KPadding.kPaddingSize16,
                           vertical: KPadding.kPaddingSize32,
                         ),
-                  content: ReportDialogWidget(isDesk: isDeskValue),
+                  content: ReportDialogWidget(
+                    isDesk: isDeskValue,
+                    cardEnum: cardEnum,
+                  ),
                 );
               },
             ),
@@ -186,7 +190,10 @@ class _DialogsWidget {
                         vertical: KPadding.kPaddingSize32,
                       ),
                 child: SingleChildScrollView(
-                  child: ReportDialogWidget(isDesk: isDeskValue),
+                  child: ReportDialogWidget(
+                    isDesk: isDeskValue,
+                    cardEnum: cardEnum,
+                  ),
                 ),
               );
             },

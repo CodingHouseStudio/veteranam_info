@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
-import 'package:kozak/shared/shared.dart';
 import 'package:mockito/mockito.dart';
+import 'package:veteranam/shared/shared.dart';
 
 import '../text_dependency.dart';
 import 'helper/helper.dart';
@@ -63,12 +63,12 @@ void main() {
       });
 
       loadingList(
-        pumpApp: (tester) async => storyPumpAppHelper(
+        (tester) async => storyPumpAppHelper(
           tester: tester,
           mockStoryRepository: mockStoryRepository,
           mockAuthenticationRepository: mockAuthenticationRepository,
         ),
-        lastCard: KWidgetkeys.screen.story.cardLast,
+        // lastCard: KWidgetkeys.screen.story.cardLast,
       );
 
       testWidgets('Stories list load ', (tester) async {

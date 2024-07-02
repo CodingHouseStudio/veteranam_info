@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:kozak/components/components.dart';
-import 'package:kozak/shared/shared.dart';
+import 'package:veteranam/components/components.dart';
+import 'package:veteranam/shared/shared.dart';
 
 part '../stories_widget_list.dart';
 
@@ -22,8 +22,8 @@ class StoryBodyWidget extends StatelessWidget {
       builder: (context, _) {
         return ScaffoldAutoLoadingWidget(
           loadingButtonText: context.l10n.moreStories,
-          listCanLoaded:
-              _.storyModelItems.length > _.loadingStoryModelItems.length,
+          listCanLoaded: _.loadingStatus != LoadingStatus.listLoadedFull,
+          cardListIsEmpty: _.storyModelItems.isEmpty,
           titleChildWidgetsFunction: ({required isDesk}) => [
             if (isDesk)
               KSizedBox.kHeightSizedBox40
@@ -78,7 +78,7 @@ class StoryBodyWidget extends StatelessWidget {
             else
               KSizedBox.kHeightSizedBox24,
           ],
-          scrollFunction: () => context.read<StoryWatcherBloc>().add(
+          loadFunction: () => context.read<StoryWatcherBloc>().add(
                 const StoryWatcherEvent.loadNextItems(),
               ),
         );

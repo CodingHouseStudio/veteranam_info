@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:kozak/shared/shared.dart';
+import 'package:veteranam/shared/shared.dart';
 
 abstract class IHomeRepository {
   Future<Either<SomeFailure, List<QuestionModel>>> getQuestions();

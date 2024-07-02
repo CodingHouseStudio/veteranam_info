@@ -1,20 +1,24 @@
 import 'package:flutter/widgets.dart';
-import 'package:kozak/shared/shared.dart';
+import 'package:veteranam/shared/shared.dart';
 
 List<Widget> cardWidgetList<T>({
-  required bool isLoading,
+  required LoadingStatus loadingStatus,
   required List<T> modelItems,
   required Widget Function({
     required T modelItem,
-    required Key key,
-  }) cardWidget,
+    required bool isLoading,
+  }
+      // required Key key,
+      ) cardWidget,
   required int shimmerItemsNumber,
-  required Key cardKey,
-  required Key cardLastKey,
+  // required Key cardKey,
+  // required Key cardLastKey,
   required bool isNotFailure,
   required T shimmerItem,
   required bool isDesk,
 }) {
+  final isLoading = loadingStatus != LoadingStatus.loaded &&
+      loadingStatus != LoadingStatus.listLoadedFull;
   final fullList = [
     if (isNotFailure) ...[
       ...modelItems,
@@ -36,7 +40,7 @@ List<Widget> cardWidgetList<T>({
         isLoading: fullList.length - index <= shimmerItemsNumber && isLoading,
         child: cardWidget(
           modelItem: fullList.elementAt(index),
-          key: index != fullList.length - 1 ? cardKey : cardLastKey,
+          isLoading: isLoading,
         ),
       ),
     );

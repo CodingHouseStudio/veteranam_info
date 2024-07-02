@@ -5,19 +5,17 @@ List<Widget> discountsWidgetList({
   required bool isDesk,
 }) =>
     cardWidgetList<DiscountModel>(
-      isLoading: context.read<DiscountWatcherBloc>().state.loadingStatus !=
-          LoadingStatus.loaded,
+      loadingStatus: context.read<DiscountWatcherBloc>().state.loadingStatus,
       modelItems:
           context.read<DiscountWatcherBloc>().state.filteredDiscountModelItems,
-      cardWidget: ({required modelItem, required key}) => DiscountsCardWidget(
-        key: key,
+      cardWidget: ({required modelItem, required isLoading}) =>
+          DiscountsCardWidget(
+        key: KWidgetkeys.screen.discounts.card,
         discountItem: modelItem,
         isDesk: isDesk,
       ),
       isDesk: isDesk,
       shimmerItemsNumber: KDimensions.shimmerDiscountsItems,
-      cardKey: KWidgetkeys.screen.discounts.card,
-      cardLastKey: KWidgetkeys.screen.discounts.cardLast,
       isNotFailure: context.read<DiscountWatcherBloc>().state.failure == null,
       shimmerItem: KMockText.discountModel,
     );

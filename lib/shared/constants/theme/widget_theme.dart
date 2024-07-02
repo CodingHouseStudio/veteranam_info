@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kozak/shared/shared.dart';
+import 'package:veteranam/shared/shared.dart';
 
 /// COMMENT: Variables with widget theme that don't have a specific group
 abstract class KWidgetTheme {
@@ -127,7 +127,7 @@ abstract class KWidgetTheme {
     borderRadius: KBorderRadius.kBorderRadius32,
   );
   static const inputDecoration = InputDecoration(
-    hintStyle: AppTextStyle.materialThemeTitleMediumHint,
+    hintStyle: AppTextStyle.materialThemeTitleMediumNeutralVariant35,
     contentPadding: EdgeInsets.symmetric(
       horizontal: KPadding.kPaddingSize20,
     ),
@@ -141,5 +141,32 @@ abstract class KWidgetTheme {
     fillColor: AppColors.materialThemeWhite,
     labelStyle: AppTextStyle.materialThemeTitleMedium,
     alignLabelWithHint: true,
+  );
+  static const boxDecorationDiscountContainer = BoxDecoration(
+    borderRadius: KBorderRadius.kBorderRadius32,
+    color: AppColors.materialThemeWhite,
+    border: Border.fromBorderSide(
+      BorderSide(
+        color: AppColors.materialThemeKeyColorsNeutral,
+      ),
+    ),
+  );
+  static const boxDecorationDiscountCategory = BoxDecoration(
+    borderRadius: KBorderRadius.kBorderRadius32,
+    color: AppColors.materialThemeWhite,
+    border: Border.fromBorderSide(
+      BorderSide(
+        color: AppColors.materialThemeRefTertiaryTertiary80,
+      ),
+    ),
+  );
+  static const boxDecorationDiscount = BoxDecoration(
+    borderRadius: KBorderRadius.kBorderRadius32,
+    color: AppColors.materialThemeSourceSeed,
+    border: Border.fromBorderSide(
+      BorderSide(
+        color: AppColors.materialThemeKeyColorsNeutral,
+      ),
+    ),
   );
 }

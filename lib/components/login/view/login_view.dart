@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:kozak/components/components.dart';
-import 'package:kozak/shared/shared.dart';
+import 'package:veteranam/components/components.dart';
+import 'package:veteranam/shared/shared.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});

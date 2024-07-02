@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
-import 'package:kozak/components/components.dart';
-import 'package:kozak/shared/shared.dart';
+import 'package:veteranam/components/components.dart';
+import 'package:veteranam/shared/shared.dart';
 
 part '../discounts_widget_list.dart';
 
@@ -12,7 +12,6 @@ class DiscountBodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    late var listCanLoaded = true;
     return BlocConsumer<DiscountWatcherBloc, DiscountWatcherState>(
       listener: (context, state) => context.dialog.showGetErrorDialog(
         error: state.failure!.value(context),
@@ -20,17 +19,12 @@ class DiscountBodyWidget extends StatelessWidget {
             .read<DiscountWatcherBloc>()
             .add(const DiscountWatcherEvent.started()),
       ),
-      listenWhen: (previous, current) {
-        listCanLoaded = previous.filteredDiscountModelItems.length !=
-            current.filteredDiscountModelItems.length;
-        return current.failure != null;
-      },
+      listenWhen: (previous, current) => current.failure != null,
       builder: (context, _) {
         return ScaffoldAutoLoadingWidget(
           loadingButtonText: context.l10n.moreDiscounts,
-          listCanLoaded: _.discountModelItems.length >
-                  _.filteredDiscountModelItems.length ||
-              listCanLoaded,
+          listCanLoaded: _.loadingStatus != LoadingStatus.listLoadedFull,
+          cardListIsEmpty: _.filteredDiscountModelItems.isEmpty,
           titleChildWidgetsFunction: ({required isDesk}) => [
             KSizedBox.kHeightSizedBox24,
             ...TitleWidget.pointTitleWidgetList(
@@ -115,7 +109,7 @@ class DiscountBodyWidget extends StatelessWidget {
             else
               KSizedBox.kHeightSizedBox24,
           ],
-          scrollFunction: () => context
+          loadFunction: () => context
               .read<DiscountWatcherBloc>()
               .add(const DiscountWatcherEvent.loadNextItems()),
         );

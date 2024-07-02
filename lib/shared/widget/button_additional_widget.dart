@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_svg/svg.dart';
-
-import 'package:kozak/shared/constants/constants.dart';
+import 'package:veteranam/shared/constants/constants.dart';
 
 class ButtonAdditionalWidget extends StatefulWidget {
   const ButtonAdditionalWidget({
