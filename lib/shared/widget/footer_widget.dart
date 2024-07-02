@@ -9,6 +9,7 @@ abstract class FooterWidget {
   static List<Widget> get({
     required BuildContext context,
     required bool isTablet,
+    ScrollController? homePageController,
   }) =>
       isTablet
           ? [
@@ -70,7 +71,14 @@ abstract class FooterWidget {
                     key: KWidgetkeys.widget.footer.logo,
                     height: KSize.kPixel80,
                     width: KSize.kPixel140,
-                    child: KImage.logo,
+                    child: GestureDetector(
+                      child: KImage.logo,
+                      onTap: () => homePageController!.animateTo(
+                        0,
+                        duration: const Duration(milliseconds: 500),
+                        curve: Curves.easeInOut,
+                      ),
+                    ),
                   ),
                   Expanded(
                     child: Wrap(

@@ -8,6 +8,7 @@ class ScaffoldWidget extends StatelessWidget {
     super.key,
     this.mainDeskPadding,
     this.hasFooter = false,
+    this.scrollController,
   });
   final List<Widget> Function({required bool isDesk})?
       titleChildWidgetsFunction;
@@ -15,6 +16,7 @@ class ScaffoldWidget extends StatelessWidget {
       mainChildWidgetsFunction;
   final EdgeInsetsGeometry? mainDeskPadding;
   final bool hasFooter;
+  final ScrollController? scrollController;
 
   @override
   Widget build(BuildContext context) {
@@ -45,11 +47,13 @@ class ScaffoldWidget extends StatelessWidget {
             FooterWidget.get(
               context: context,
               isTablet: isTablet,
+              homePageController: scrollController,
             ),
           );
         }
         return Scaffold(
           body: CustomScrollView(
+            controller: scrollController,
             key: KWidgetkeys.widget.scaffold.scroll,
             slivers: [
               SliverPersistentHeader(

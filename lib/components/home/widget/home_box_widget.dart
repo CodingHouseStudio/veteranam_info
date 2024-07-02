@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:veteranam/shared/shared.dart';
 
 class HomeBoxWidget extends StatelessWidget {
-  const HomeBoxWidget({
+  HomeBoxWidget({
     required this.isDesk,
     required this.isTablet,
     required this.aboutProjectKey,
@@ -13,6 +13,7 @@ class HomeBoxWidget extends StatelessWidget {
   final bool isDesk;
   final bool isTablet;
   final GlobalKey aboutProjectKey;
+  final homePageController = ScrollController();
 
   @override
   Widget build(BuildContext context) {

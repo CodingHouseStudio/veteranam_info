@@ -16,6 +16,7 @@ class HomeBodyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final aboutProjectKey = GlobalKey();
+    final scrollController = ScrollController();
     return BlocConsumer<HomeWatcherBloc, HomeWatcherState>(
       listener: (context, state) => context.dialog.showGetErrorDialog(
         error: state.failure!.value(context),
@@ -25,6 +26,7 @@ class HomeBodyWidget extends StatelessWidget {
       ),
       listenWhen: (previous, current) => current.failure != null,
       builder: (context, _) => ScaffoldWidget(
+        scrollController: scrollController,
         hasFooter: true,
         mainChildWidgetsFunction: ({required isDesk, required isTablet}) => [
           ..._boxWidgetList(
