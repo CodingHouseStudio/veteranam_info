@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:injectable/injectable.dart';
-import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
 
 /// COMMENT: Class to get, update, delete or set values in firebase
