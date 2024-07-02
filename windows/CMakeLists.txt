@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
-project(kozak LANGUAGES CXX)
+project(veteranam LANGUAGES CXX)
 
-set(BINARY_NAME "kozak")
+set(BINARY_NAME "veteranam")
 
 cmake_policy(SET CMP0063 NEW)
 
