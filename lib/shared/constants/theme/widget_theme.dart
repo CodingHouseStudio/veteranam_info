@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kozak/shared/shared.dart';
+import 'package:veteranam/shared/shared.dart';
 
 /// COMMENT: Variables with widget theme that don't have a specific group
 abstract class KWidgetTheme {

@@ -3,12 +3,10 @@ import 'package:flutter/foundation.dart';
 import 'package:formz/formz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:kozak/shared/shared.dart';
+import 'package:veteranam/shared/shared.dart';
 
 part 'sign_up_bloc.freezed.dart';
-
 part 'sign_up_event.dart';
-
 part 'sign_up_state.dart';
 
 @injectable

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:kozak/shared/shared.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:veteranam/shared/shared.dart';
 
 class DonateCardWidget extends StatelessWidget {
   const DonateCardWidget({
@@ -47,9 +47,11 @@ class DonateCardWidget extends StatelessWidget {
                   : const SizedBox.shrink(),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: KPadding.kPaddingSize16,
-              ),
+              padding: isDesk
+                  ? const EdgeInsets.symmetric(
+                      horizontal: KPadding.kPaddingSize16,
+                    )
+                  : EdgeInsets.zero,
               child: Text(
                 fundModel.title,
                 key: KWidgetkeys.widget.donateCard.title,
@@ -58,8 +60,8 @@ class DonateCardWidget extends StatelessWidget {
             ),
             if (hasSubtitle)
               Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: KPadding.kPaddingSize16,
+                padding: EdgeInsets.symmetric(
+                  horizontal: isDesk ? KPadding.kPaddingSize16 : 0,
                   vertical: KPadding.kPaddingSize16,
                 ),
                 child: Text(
