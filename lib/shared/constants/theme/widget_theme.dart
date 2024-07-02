@@ -142,6 +142,7 @@ abstract class KWidgetTheme {
     labelStyle: AppTextStyle.materialThemeTitleMedium,
     alignLabelWithHint: true,
   );
+
   static const textFieldDecoration = BoxDecoration(
     color: AppColors.materialThemeWhite,
     border: Border.fromBorderSide(
@@ -150,5 +151,33 @@ abstract class KWidgetTheme {
       ),
     ),
     borderRadius: KBorderRadius.kBorderRadius32,
+
+  static const boxDecorationDiscountContainer = BoxDecoration(
+    borderRadius: KBorderRadius.kBorderRadius32,
+    color: AppColors.materialThemeWhite,
+    border: Border.fromBorderSide(
+      BorderSide(
+        color: AppColors.materialThemeKeyColorsNeutral,
+      ),
+    ),
+  );
+  static const boxDecorationDiscountCategory = BoxDecoration(
+    borderRadius: KBorderRadius.kBorderRadius32,
+    color: AppColors.materialThemeWhite,
+    border: Border.fromBorderSide(
+      BorderSide(
+        color: AppColors.materialThemeRefTertiaryTertiary80,
+      ),
+    ),
+  );
+  static const boxDecorationDiscount = BoxDecoration(
+    borderRadius: KBorderRadius.kBorderRadius32,
+    color: AppColors.materialThemeSourceSeed,
+    border: Border.fromBorderSide(
+      BorderSide(
+        color: AppColors.materialThemeKeyColorsNeutral,
+      ),
+    ),
+
   );
 }

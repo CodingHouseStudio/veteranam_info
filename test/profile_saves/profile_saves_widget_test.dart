@@ -23,7 +23,7 @@ void main() {
     setUp(() {
       mockDiscountRepository = MockIDiscountRepository();
       when(mockDiscountRepository.getDiscountItems()).thenAnswer(
-        (invocation) => Stream.value(KTestText.discountModelItems),
+        (invocation) => Stream.value(KTestText.userDiscountModelItems),
       );
     });
     void registerDiscountBloc() {

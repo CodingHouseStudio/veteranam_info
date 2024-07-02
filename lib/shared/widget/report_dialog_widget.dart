@@ -4,9 +4,14 @@ import 'package:go_router/go_router.dart';
 import 'package:veteranam/shared/shared.dart';
 
 class ReportDialogWidget extends StatelessWidget {
-  const ReportDialogWidget({required this.isDesk, super.key});
+  const ReportDialogWidget({
+    required this.isDesk,
+    required this.cardEnum,
+    super.key,
+  });
 
   final bool isDesk;
+  final CardEnum cardEnum;
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +62,7 @@ class ReportDialogWidget extends StatelessWidget {
                     .read<ReportBloc>()
                     .add(ReportEvent.emailUpdated(text)),
                 isDesk: isDesk,
-                labelText: context.l10n.email,
+                labelText: '${context.l10n.email}*',
                 enabled: context
                         .read<AuthenticationBloc>()
                         .state
@@ -135,9 +140,8 @@ class ReportDialogWidget extends StatelessWidget {
               widgetKey: KWidgetkeys.widget.reportDialog.sendButton,
               text: _.formState.isNext ? context.l10n.send : context.l10n.next,
               isDesk: isDesk,
-              onPressed: () => context
-                  .read<ReportBloc>()
-                  .add(const ReportEvent.send(CardEnum.funds)),
+              onPressed: () =>
+                  context.read<ReportBloc>().add(ReportEvent.send(cardEnum)),
               color: AppColors.materialThemeKeyColorsSecondary,
               textColor: AppColors.materialThemeWhite,
               hasAlign: isDesk,
