@@ -29,9 +29,10 @@ class DiscountModel with _$DiscountModel {
     String? userId,
     String? html,
     String? userName,
+    @ImageConverter() ImageModel? userPhoto,
     String? company,
     String? directLink,
-    String? additionaldetails,
+    String? additionalDetails,
     SubLocation? subLocation,
   }) = _DiscountModel;
 
@@ -77,9 +78,10 @@ abstract class DiscountModelJsonField {
   static const directLink = 'directLink';
   static const dateVerified = 'dateVerified';
   static const html = 'html';
-  static const additionaldetails = 'additionaldetails';
+  static const additionalDetails = 'additionalDetails';
   static const link = 'link';
   static const userName = 'userName';
+  static const userPhoto = 'userPhoto';
   // static const date = 'date';
   static const subLocation = 'subLocation';
 }

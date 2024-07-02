@@ -121,13 +121,13 @@ WEB tests
 
 Windows(works on the Mac)
 run one test:
-fvm flutter drive --driver=test_driver/integration_test.dart --target=integration_test/navigation_test.dart  -d chrome
+fvm flutter drive --driver=test_driver/integration_test.dart --target=integration_test/navigation_test.dart -d chrome --web-port=8080
 or
 fvm flutter run -d chrome --web-port 4445 integration_test/your_test.dart
 run all tests
-Get-ChildItem -Path integration_test -Filter '*_test.dart' | ForEach-Object { fvm flutter drive --driver=test_driver/integration_test.dart -d chrome --target="$($_.FullName)" }
+Get-ChildItem -Path integration_test -Filter '*_test.dart' | ForEach-Object { fvm flutter drive --driver=test_driver/integration_test.dart -d chrome --web-port=8080 --target="$($_.FullName)" }
 or
-Get-ChildItem -Path integration_test -Filter '*_test.dart' | ForEach-Object { flutter run -d chrome --web-port 2024 $_.FullName }
+Get-ChildItem -Path integration_test -Filter '*_test.dart' | ForEach-Object { flutter run -d chrome --web-port 8080 $_.FullName }
 
 pre requisite - run chrome web driver in a different terminal window
 
@@ -189,7 +189,7 @@ This project relies on [flutter_localizations][flutter_localizations_link] and f
 3. Use the new string
 
 ```dart
-import 'package:kozak/l10n/l10n.dart';
+import 'package:veteranam/l10n/l10n.dart';
 
 @override
 Widget build(BuildContext context) {
