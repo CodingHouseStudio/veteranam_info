@@ -127,27 +127,16 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
                   : const EdgeInsets.all(KPadding.kPaddingSize16)),
           labelText: widget.labelText,
           border: widget.border,
-          enabledBorder: OutlineInputBorder(
-            borderRadius: KBorderRadius.kBorderRadius32,
+          enabledBorder: KWidgetTheme.outlineInputBorderEnabled.copyWith(
             borderSide: BorderSide(
               color: isHovered
                   ? AppColors.materialThemeRefNeutralNeutral40
                   : AppColors.materialThemeRefNeutralNeutral80,
             ),
           ),
-          disabledBorder: const OutlineInputBorder(
-            borderRadius: KBorderRadius.kBorderRadius32,
-            borderSide: BorderSide(
-              color: AppColors.materialThemeRefNeutralNeutral90,
-            ),
-          ),
+          disabledBorder: KWidgetTheme.outlineInputBorderDisabled,
           hoverColor: AppColors.materialThemeWhite,
-          focusedBorder: const OutlineInputBorder(
-            borderRadius: KBorderRadius.kBorderRadius32,
-            borderSide: BorderSide(
-              color: AppColors.materialThemeRefNeutralNeutral70,
-            ),
-          ),
+          focusedBorder: KWidgetTheme.outlineInputBorderFocused,
           focusedErrorBorder: kIsWeb ? null : widget.border,
           fillColor: widget.fillColor,
           hintText: widget.hintText,
