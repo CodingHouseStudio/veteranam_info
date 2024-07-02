@@ -151,6 +151,7 @@ abstract class KWidgetTheme {
       ),
     ),
     borderRadius: KBorderRadius.kBorderRadius32,
+  );
 
   static const boxDecorationDiscountContainer = BoxDecoration(
     borderRadius: KBorderRadius.kBorderRadius32,
@@ -178,6 +179,5 @@ abstract class KWidgetTheme {
         color: AppColors.materialThemeKeyColorsNeutral,
       ),
     ),
-
   );
 }
