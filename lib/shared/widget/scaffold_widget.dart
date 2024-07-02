@@ -56,13 +56,6 @@ class ScaffoldWidget extends StatelessWidget {
                 delegate: NawbarWidget(
                   isDesk: isDesk,
                   isTablet: isTablet,
-                  // margin: !isDesk && isTablet
-                  //     ? EdgeInsets.only(
-                  //         top: KPadding.kPaddingSize16,
-                  //         left: KPadding.kPaddingSize32,
-                  //         right: KPadding.kPaddingSize32,
-                  //       )
-                  //     : null,
                 ),
               ),
               if (titleChildWidgetsFunction != null)

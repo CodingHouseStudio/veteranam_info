@@ -1,7 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'intl/messages_all.dart';
+import 'package:kozak/generated/intl/messages_all.dart';
 
 // **************************************************************************
 // Generator: Flutter Intl IDE plugin
@@ -18,8 +18,10 @@ class AppLocalizations {
   static AppLocalizations? _current;
 
   static AppLocalizations get current {
-    assert(_current != null,
-        'No instance of AppLocalizations was loaded. Try to initialize the AppLocalizations delegate before accessing AppLocalizations.current.');
+    assert(
+      _current != null,
+      'No instance of AppLocalizations was loaded. Try to initialize the AppLocalizations delegate before accessing AppLocalizations.current.',
+    );
     return _current!;
   }
 
@@ -41,8 +43,10 @@ class AppLocalizations {
 
   static AppLocalizations of(BuildContext context) {
     final instance = AppLocalizations.maybeOf(context);
-    assert(instance != null,
-        'No instance of AppLocalizations present in the widget tree. Did you add AppLocalizations.delegate in localizationsDelegates?');
+    assert(
+      instance != null,
+      'No instance of AppLocalizations present in the widget tree. Did you add AppLocalizations.delegate in localizationsDelegates?',
+    );
     return instance!;
   }
 
@@ -2040,6 +2044,136 @@ class AppLocalizations {
     );
   }
 
+  /// `Complaint`
+  String get complaint {
+    return Intl.message(
+      'Complaint',
+      name: 'complaint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Report a publication`
+  String get reportPublication {
+    return Intl.message(
+      'Report a publication',
+      name: 'reportPublication',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Specify the reason for the complaint:`
+  String get specifyReasonForComplaint {
+    return Intl.message(
+      'Specify the reason for the complaint:',
+      name: 'specifyReasonForComplaint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Fraud or spam;`
+  String get fraudOrSpam {
+    return Intl.message(
+      'Fraud or spam;',
+      name: 'fraudOrSpam',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Fake news or disinformation;`
+  String get fakeNewsOrDisinformation {
+    return Intl.message(
+      'Fake news or disinformation;',
+      name: 'fakeNewsOrDisinformation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Offensive or hateful content;`
+  String get offensiveOrHatefulContent {
+    return Intl.message(
+      'Offensive or hateful content;',
+      name: 'offensiveOrHatefulContent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Other (specify)`
+  String get other {
+    return Intl.message(
+      'Other (specify)',
+      name: 'other',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add a comment:`
+  String get addComment {
+    return Intl.message(
+      'Add a comment:',
+      name: 'addComment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please select one of the following answers`
+  String get checkPointError {
+    return Intl.message(
+      'Please select one of the following answers',
+      name: 'checkPointError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Verified information`
+  String get verifiedInformation {
+    return Intl.message(
+      'Verified information',
+      name: 'verifiedInformation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `That's the end of the list! We hope you found what you were looking for.`
+  String get thatEndOfList {
+    return Intl.message(
+      'That\'s the end of the list! We hope you found what you were looking for.',
+      name: 'thatEndOfList',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Return to the top`
+  String get returnToTop {
+    return Intl.message(
+      'Return to the top',
+      name: 'returnToTop',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sorry, nothing was found using your filters. Try changing your search criteria`
+  String get cardListEmptyText {
+    return Intl.message(
+      'Sorry, nothing was found using your filters. Try changing your search criteria',
+      name: 'cardListEmptyText',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `We're sorry, there was an unforeseen error.`
   String get error {
     return Intl.message(
@@ -2098,6 +2232,56 @@ class AppLocalizations {
       name: 'dublicateFailure',
       desc:
           'an error message when trying to register an account with the same email as an already registered account',
+      args: [],
+    );
+  }
+
+  /// `More`
+  String get more {
+    return Intl.message(
+      'More',
+      name: 'more',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Useful`
+  String get useful {
+    return Intl.message(
+      'Useful',
+      name: 'useful',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Website`
+  String get website {
+    return Intl.message(
+      'Website',
+      name: 'website',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Share`
+  String get share {
+    return Intl.message(
+      'Share',
+      name: 'share',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save`
+  String get save {
+    return Intl.message(
+      'Save',
+      name: 'save',
+      desc: '',
       args: [],
     );
   }

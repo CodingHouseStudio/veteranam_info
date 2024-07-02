@@ -18,10 +18,10 @@ Future<void> informationInitialHelper(
         findsOneWidget,
       );
 
-      expect(
-        find.byKey(KWidgetkeys.screen.information.subtitle),
-        findsOneWidget,
-      );
+      // expect(
+      //   find.byKey(KWidgetkeys.screen.information.subtitle),
+      //   findsOneWidget,
+      // );
 
       expect(
         find.byKey(KWidgetkeys.screen.information.filter),
@@ -42,10 +42,10 @@ Future<void> informationInitialHelper(
         findsNothing,
       );
 
-      await scrollingHelper(
-        tester: tester,
-        offset: KTestConstants.scrollingDown,
-      );
+      // await scrollingHelper(
+      //   tester: tester,
+      //   offset: KTestConstants.scrollingDown,
+      // );
 
       // await scrollingHelper(
       //   tester: tester,

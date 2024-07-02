@@ -11,6 +11,8 @@ class ProfileSavesBody extends StatelessWidget {
     return BlocBuilder<DiscountWatcherBloc, DiscountWatcherState>(
       builder: (context, state) {
         switch (state.loadingStatus) {
+          case LoadingStatus.listLoadedFull:
+            return const CircularProgressIndicator.adaptive();
           case LoadingStatus.initial:
             return const CircularProgressIndicator.adaptive();
           case LoadingStatus.loading:

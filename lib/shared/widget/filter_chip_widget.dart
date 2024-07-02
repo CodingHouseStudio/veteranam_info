@@ -9,12 +9,14 @@ class FiltersChipWidget extends StatelessWidget {
     required this.onSelected,
     required this.isSelected,
     required this.fullLenght,
+    required this.filterIsEmpty,
     super.key,
   });
 
   final List<FilterItem> filtersItems;
   final int fullLenght;
   final bool isDesk;
+  final bool filterIsEmpty;
   // final void Function() onResetValue;
   final void Function(
     int index,
@@ -44,7 +46,7 @@ class FiltersChipWidget extends StatelessWidget {
                   AppColors.materialThemeWhite,
                   AppColors.materialThemeWhite.withOpacity(0.03),
                 ],
-                stops: const [0.6, 1],
+                stops: const [0.8, 1],
                 tileMode: TileMode.mirror,
               ).createShader(bounds);
             },
@@ -76,8 +78,9 @@ class FiltersChipWidget extends StatelessWidget {
                   i,
                 ),
                 isSelected: isSelected(
-                  i,
-                ),
+                      i,
+                    ) ||
+                    (i == -1 && filterIsEmpty),
                 isDesk: isDesk,
               ),
             );

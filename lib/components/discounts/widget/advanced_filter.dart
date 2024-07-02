@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:kozak/components/components.dart';
 import 'package:kozak/shared/shared.dart';
 
@@ -14,12 +13,17 @@ class AdvancedFilterMob extends StatelessWidget {
     return _AdvanceFilter.button(
       onPressed: () async {
         final bloc = context.read<DiscountWatcherBloc>();
-        await showModalBottomSheet<Widget>(
+        await showModalBottomSheet<void>(
           context: context,
           isScrollControlled: true,
           barrierColor:
               AppColors.materialThemeKeyColorsSecondary.withOpacity(0.2),
           backgroundColor: AppColors.materialThemeKeyColorsNeutral,
+          shape: const RoundedRectangleBorder(
+            borderRadius:
+                BorderRadius.vertical(top: Radius.circular(KSize.kRadius32)),
+          ),
+          showDragHandle: true,
           builder: (context) => FractionallySizedBox(
             heightFactor: 0.9,
             child: BlocProvider.value(
@@ -27,23 +31,23 @@ class AdvancedFilterMob extends StatelessWidget {
               child: BlocBuilder<DiscountWatcherBloc, DiscountWatcherState>(
                 builder: (context, state) => Column(
                   children: [
-                    Row(
-                      children: [
-                        IconButtonWidget(
-                          key: KWidgetkeys.screen.discounts.cancelIcon,
-                          icon: KIcon.close,
-                          background: AppColors.materialThemeWhite,
-                          padding: KPadding.kPaddingSize12,
-                          onPressed: () => context.pop(),
-                        ),
-                        KSizedBox.kWidthSizedBox8,
-                        Text(
-                          context.l10n.advancedFilter,
-                          key: KWidgetkeys.screen.discounts.cancelText,
-                          style: AppTextStyle.materialThemeTitleMedium,
-                        ),
-                      ],
+                    // Row(
+                    //   children: [
+                    //     IconButtonWidget(
+                    //       key: KWidgetkeys.screen.discounts.cancelIcon,
+                    //       icon: KIcon.close,
+                    //       background: AppColors.materialThemeWhite,
+                    //       padding: KPadding.kPaddingSize12,
+                    //       onPressed: () => context.pop(),
+                    //     ),
+                    KSizedBox.kHeightSizedBox16,
+                    Text(
+                      context.l10n.advancedFilter,
+                      key: KWidgetkeys.screen.discounts.cancelText,
+                      style: AppTextStyle.materialThemeTitleMedium,
                     ),
+                    //   ],
+                    // ),
                     Expanded(
                       child: _AdvanceFilter.listView(
                         isDesk: false,
@@ -189,33 +193,30 @@ abstract class _AdvanceFilter {
             ? AppTextStyle.materialThemeTitleLarge
             : AppTextStyle.materialThemeTitleMedium,
       ),
-      if (filterLocationIndex != null)
-        ...List.generate(
-          filterLocationIndex.length,
-          (index) => Padding(
-            padding: const EdgeInsets.only(top: KPadding.kPaddingSize16),
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: TextButton.icon(
-                key: KWidgetkeys.screen.discounts.appliedFilterItems,
-                style: KButtonStyles.advancedFilterButtonStyle,
-                icon: KIcon.close,
-                label: Text(
-                  location
-                      .elementAt(filterLocationIndex.elementAt(index))
-                      .value,
-                  style: isDesk
-                      ? AppTextStyle.materialThemeBodyLarge
-                      : AppTextStyle.materialThemeBodyMedium,
-                ),
-                onPressed: () => _onChange(
-                  context: context,
-                  index: filterLocationIndex.elementAt(index),
-                ),
+      ...List.generate(
+        filterLocationIndex.length,
+        (index) => Padding(
+          padding: const EdgeInsets.only(top: KPadding.kPaddingSize16),
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: TextButton.icon(
+              key: KWidgetkeys.screen.discounts.appliedFilterItems,
+              style: KButtonStyles.advancedFilterButtonStyle,
+              icon: KIcon.close,
+              label: Text(
+                location.elementAt(filterLocationIndex.elementAt(index)).value,
+                style: isDesk
+                    ? AppTextStyle.materialThemeBodyLarge
+                    : AppTextStyle.materialThemeBodyMedium,
+              ),
+              onPressed: () => _onChange(
+                context: context,
+                index: filterLocationIndex.elementAt(index),
               ),
             ),
           ),
         ),
+      ),
       KSizedBox.kHeightSizedBox24,
       Text(
         context.l10n.discount,

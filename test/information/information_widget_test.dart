@@ -18,6 +18,7 @@ void main() {
     late IInformationRepository mockInformationRepository;
     late AuthenticationRepository mockAuthenticationRepository;
     setUp(() {
+      KPlatformConstants.isWebDesktop = false;
       mockInformationRepository = MockIInformationRepository();
       mockAuthenticationRepository = MockAuthenticationRepository();
       when(mockAuthenticationRepository.currentUser).thenAnswer(
@@ -32,6 +33,8 @@ void main() {
     });
     group('${KGroupText.failure} ', () {
       setUp(() {
+        ExtendedDateTime.current = KTestText.dateTime;
+        ExtendedDateTime.id = '';
         when(mockInformationRepository.getInformationItems()).thenAnswer(
           (invocation) => Stream.error(Exception(KGroupText.failureGet)),
         );
@@ -43,7 +46,11 @@ void main() {
           tester: tester,
         );
 
-        await informationFailureHelper(tester);
+        await loadingFailureHelper(
+          tester: tester,
+          card: KWidgetkeys.screen.information.card,
+          buttonMock: KWidgetkeys.screen.information.buttonMock,
+        );
       });
     });
     group('${KGroupText.getEmptyList} ', () {
@@ -69,7 +76,11 @@ void main() {
           tester: tester,
         );
 
-        await informationMockButtonHelper(tester);
+        await mockButtonHelper(
+          tester: tester,
+          card: KWidgetkeys.screen.information.card,
+          buttonMock: KWidgetkeys.screen.information.buttonMock,
+        );
       });
     });
     group('${KGroupText.getList} ', () {
@@ -88,6 +99,15 @@ void main() {
 
         await informationInitialHelper(tester);
       });
+
+      loadingList(
+        (tester) async => informationPumpAppHelper(
+          mockInformationRepository: mockInformationRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
+          tester: tester,
+        ),
+        // lastCard: KWidgetkeys.screen.information.cardLast,
+      );
 
       testWidgets('News list load and filter', (tester) async {
         await informationPumpAppHelper(

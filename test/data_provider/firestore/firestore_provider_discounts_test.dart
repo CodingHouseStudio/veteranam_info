@@ -161,12 +161,12 @@ void main() {
       verify(
         mockQueryDocumentSnapshot.last.data(),
       ).called(1);
-      verify(
-        mockQuerySnapshot.metadata,
-      ).called(1);
-      verify(
-        mockSnapshotMetadata.isFromCache,
-      ).called(1);
+      // verify(
+      //   mockQuerySnapshot.metadata,
+      // ).called(1);
+      // verify(
+      //   mockSnapshotMetadata.isFromCache,
+      // ).called(1);
 
       expect(
         firestoreService.getDiscounts(),

@@ -18,6 +18,9 @@ void main() {
     late IStoryRepository mockStoryRepository;
     late AuthenticationRepository mockAuthenticationRepository;
     setUp(() {
+      KPlatformConstants.isWebDesktop = false;
+      ExtendedDateTime.current = KTestText.dateTime;
+      ExtendedDateTime.id = '';
       mockStoryRepository = MockIStoryRepository();
       mockAuthenticationRepository = MockAuthenticationRepository();
       when(mockAuthenticationRepository.currentUser).thenAnswer(
@@ -58,7 +61,18 @@ void main() {
 
         await storyInitialHelper(tester);
       });
+
+      loadingList(
+        (tester) async => storyPumpAppHelper(
+          tester: tester,
+          mockStoryRepository: mockStoryRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
+        ),
+        // lastCard: KWidgetkeys.screen.story.cardLast,
+      );
+
       testWidgets('Stories list load ', (tester) async {
+        KPlatformConstants.isWebDesktop = false;
         await storyPumpAppHelper(
           mockStoryRepository: mockStoryRepository,
           tester: tester,

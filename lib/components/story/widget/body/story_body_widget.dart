@@ -21,6 +21,9 @@ class StoryBodyWidget extends StatelessWidget {
       listenWhen: (previous, current) => current.failure != null,
       builder: (context, _) {
         return ScaffoldAutoLoadingWidget(
+          loadingButtonText: context.l10n.moreStories,
+          listCanLoaded: _.loadingStatus != LoadingStatus.listLoadedFull,
+          cardListIsEmpty: _.storyModelItems.isEmpty,
           titleChildWidgetsFunction: ({required isDesk}) => [
             if (isDesk)
               KSizedBox.kHeightSizedBox40
@@ -38,7 +41,7 @@ class StoryBodyWidget extends StatelessWidget {
             else
               KSizedBox.kHeightSizedBox24,
           ],
-          mainDeskPadding: const EdgeInsets.symmetric(
+          mainDeskPadding: ({required maxWidth}) => const EdgeInsets.symmetric(
             horizontal: KPadding.kPaddingSize48,
           ),
           mainChildWidgetsFunction: ({required isDesk}) => [
@@ -75,7 +78,7 @@ class StoryBodyWidget extends StatelessWidget {
             else
               KSizedBox.kHeightSizedBox24,
           ],
-          scrollFunction: () => context.read<StoryWatcherBloc>().add(
+          loadFunction: () => context.read<StoryWatcherBloc>().add(
                 const StoryWatcherEvent.loadNextItems(),
               ),
         );

@@ -171,7 +171,7 @@ abstract class KTestText {
   );
 
   static final feedbackModel = FeedbackModel(
-    id: dateTime.microsecondsSinceEpoch.toString(),
+    id: '',
     guestId: KTestText.user.id,
     guestName: KTestText.field,
     email: KTestText.userEmail,
@@ -281,8 +281,8 @@ abstract class KTestText {
         userPhoto: i > _itemsPhoto ? userPhotoModel : null,
       ),
   ];
-  static const _items = 30;
-  static const _itemsPhoto = 20;
+  static const _items = 40;
+  static const _itemsPhoto = 30;
 
   static List<String> routes({required bool hasAccount}) => [
         KRoute.aboutUs.name,
@@ -294,6 +294,24 @@ abstract class KTestText {
         KRoute.information.name,
         KRoute.consultation.name,
       ];
+
+  static final reportModel = ReportModel(
+    id: '',
+    reasonComplaint: ReasonComplaint.fraudOrSpam,
+    email: userEmail,
+    message: field,
+    date: dateTime,
+    card: CardEnum.funds,
+  );
+
+  static final reportModelIncorect = ReportModel(
+    id: '',
+    reasonComplaint: ReasonComplaint.fraudOrSpam,
+    email: userEmailIncorrect,
+    message: field,
+    date: dateTime,
+    card: CardEnum.funds,
+  );
 }
 
 abstract class KTestConstants {
@@ -337,8 +355,8 @@ abstract class KScreenBlocName {
   static const underConstruction = 'Under Construction Screen';
   static const myDiscounts = 'My Discount Screen';
   static const myStory = 'My Story Screen';
+  static const feedback = 'Feedback Screen';
 
-  static const feedback = 'Feedback Widget';
   static const authenticationServices = 'Authentication Services';
   static const appAuthentication = 'App Authentication';
   static const authentication = ' Authentication';
@@ -348,4 +366,5 @@ abstract class KScreenBlocName {
   static const scroll = 'scroll';
   static const image = 'image';
   static const casheClient = 'cashe client';
+  static const report = 'Report';
 }
