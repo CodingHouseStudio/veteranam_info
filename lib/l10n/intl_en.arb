@@ -212,6 +212,7 @@
   "thatEndOfList": "That's the end of the list! We hope you found what you were looking for.",
   "returnToTop": "Return to the top",
   "cardListEmptyText": "Sorry, nothing was found using your filters. Try changing your search criteria",
+  "ofUpTo": "of up to",
   "error": "We're sorry, there was an unforeseen error.",
   "@error": {
     "description": "message of an unforeseen error that was not foreseen."

@@ -2170,6 +2170,16 @@ class AppLocalizations {
     );
   }
 
+  /// `of up to`
+  String get ofUpTo {
+    return Intl.message(
+      'of up to',
+      name: 'ofUpTo',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `We're sorry, there was an unforeseen error.`
   String get error {
     return Intl.message(

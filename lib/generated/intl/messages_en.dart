@@ -210,6 +210,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "The user with this password or address does not exist."),
         "notNecessarily":
             MessageLookupByLibrary.simpleMessage("(not necessarily)"),
+        "ofUpTo": MessageLookupByLibrary.simpleMessage("of up to"),
         "offensiveOrHatefulContent": MessageLookupByLibrary.simpleMessage(
             "Offensive or hateful content;"),
         "offerDiscount":

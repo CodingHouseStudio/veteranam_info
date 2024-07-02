@@ -177,29 +177,45 @@ class DiscountWatcherBloc
   }) {
     final items = list ?? state.discountModelItems;
 
-    final listItems = items
-        .where(
-          (element) =>
-              locationIndex == null ||
-              !locationIndex.contains(1) ||
-              element.discount.contains(100),
-        )
-        .toList()
+    // Combine location filtering logic
+    final locationFiltered = items.where(
+      (item) =>
+          locationIndex == null ||
+          !locationIndex.contains(1) ||
+          item.discount.contains(100),
+    );
+
+    // Optimized sorting with null-aware conversion
+    final sortedItems = locationFiltered.toList()
       ..sort((a, b) {
         if (locationIndex != null && locationIndex.contains(0)) {
           final maxDiscountA =
-              a.discount.isNotEmpty ? a.discount.reduce(max) : 0;
+              a.discount.isNotEmpty == true ? a.discount.reduce(max) : 0;
           final maxDiscountB =
-              b.discount.isNotEmpty ? b.discount.reduce(max) : 0;
+              b.discount.isNotEmpty == true ? b.discount.reduce(max) : 0;
 
           if (maxDiscountA != maxDiscountB) {
-            return maxDiscountB.compareTo(maxDiscountA);
+            return maxDiscountB.compareTo(maxDiscountA); // Descending order
           }
         }
 
-        return b.dateVerified.compareTo(a.dateVerified);
+        final dateComparison = b.dateVerified.compareTo(a.dateVerified);
+        if (dateComparison == 0) {
+          // Attempt int conversion using null-aware operators
+          final idA = int.tryParse(a.id);
+          final idB = int.tryParse(b.id);
+
+          if (idA != null && idB != null) {
+            return idB.compareTo(idA); // Descending order
+          } else {
+            return 1;
+          }
+        }
+        return dateComparison;
       });
-    return listItems
+
+    // Apply category and location filtering (chained)
+    return sortedItems
         .loadingFilter(
           filtersIndex: categoryIndex,
           itemsLoaded: null,
@@ -209,10 +225,8 @@ class DiscountWatcherBloc
         .loadingFilter(
           filtersIndex: locationIndex?.where((element) => element > 1).toList(),
           itemsLoaded: itemsLoaded,
-          getFilter: (item) => [
-            if (item.location != null) ...item.location!,
-            if (item.subLocation != null) ...item.subLocation._getList,
-          ],
+          getFilter: (item) =>
+              item.location?.toList() ?? item.subLocation?._getList ?? const [],
           overallFilter: items._getLocationItems,
         );
   }
