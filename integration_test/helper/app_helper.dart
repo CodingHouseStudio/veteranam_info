@@ -1,8 +1,8 @@
 import 'dart:developer';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:kozak/app.dart';
-import 'package:kozak/shared/shared.dart';
+import 'package:veteranam/app.dart';
+import 'package:veteranam/shared/shared.dart';
 
 /// COMMENT: Helpers intial app in integration tests
 Future<void> appHelper(WidgetTester tester) async {

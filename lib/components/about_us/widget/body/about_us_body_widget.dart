@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kozak/shared/shared.dart';
+import 'package:veteranam/shared/shared.dart';
 
 class AboutUsBodyWidget extends StatelessWidget {
   const AboutUsBodyWidget({super.key});

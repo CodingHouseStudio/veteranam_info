@@ -20,6 +20,8 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'uk';
 
+  static String m0(count) => "Ще ${count} міст..";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "aMessage": MessageLookupByLibrary.simpleMessage("повідомлення"),
@@ -68,7 +70,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Видалити акаунт"),
         "deleteAccountQuestion": MessageLookupByLibrary.simpleMessage(
             "Ви впевнені, що хочете видалити ваш обліковий запис?"),
-        "detail": MessageLookupByLibrary.simpleMessage("Детальніше"),
+        "detail": MessageLookupByLibrary.simpleMessage("Більше"),
         "didNotFindYourVacancy":
             MessageLookupByLibrary.simpleMessage("Не знайшли свою вакансію?"),
         "disconnect": MessageLookupByLibrary.simpleMessage("Відʼєднати"),
@@ -141,6 +143,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "helloVeteran":
             MessageLookupByLibrary.simpleMessage("Привіт, Ветеран!"),
         "hide": MessageLookupByLibrary.simpleMessage("Сховати"),
+        "hideExpansion": MessageLookupByLibrary.simpleMessage("сховати..."),
         "homeSubtitle": MessageLookupByLibrary.simpleMessage(
             "Тут можно знайти корисну інформацію про знижки "),
         "howToContactYou": MessageLookupByLibrary.simpleMessage(
@@ -187,6 +190,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "mainScreen": MessageLookupByLibrary.simpleMessage("Головна"),
         "message": MessageLookupByLibrary.simpleMessage("Повідомлення"),
         "more": MessageLookupByLibrary.simpleMessage("Більше"),
+        "moreCities": m0,
         "moreDiscounts": MessageLookupByLibrary.simpleMessage("Ще знижки"),
         "moreFunds": MessageLookupByLibrary.simpleMessage("Більше фондів"),
         "moreNews": MessageLookupByLibrary.simpleMessage("Ще новини"),
@@ -211,6 +215,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Користувач з таким паролем або електронною поштою не існує"),
         "notNecessarily":
             MessageLookupByLibrary.simpleMessage("(необовʼязково)"),
+        "ofUpTo": MessageLookupByLibrary.simpleMessage("до"),
         "offensiveOrHatefulContent": MessageLookupByLibrary.simpleMessage(
             "Образливий або ненависницький контент;"),
         "offerDiscount":
@@ -219,8 +224,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "повинен містити одну чи більше цифр"),
         "online": MessageLookupByLibrary.simpleMessage("Вся Україна (онлайн)"),
         "or": MessageLookupByLibrary.simpleMessage("або"),
-        "orDonateHere":
-            MessageLookupByLibrary.simpleMessage("або донатьте тут"),
+        "orDonateHere": MessageLookupByLibrary.simpleMessage(
+            "або виберіть фонд/організацію для допомоги нашим військовим"),
         "other": MessageLookupByLibrary.simpleMessage("Інше (вкажіть)"),
         "ourSocialNetworks":
             MessageLookupByLibrary.simpleMessage("Наші соцмережі"),
@@ -257,6 +262,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ми отримали Ваше повідомлення. Дякуємо за Ваш час."),
         "register": MessageLookupByLibrary.simpleMessage("Зареєструватись"),
         "remotely": MessageLookupByLibrary.simpleMessage("Віддалено"),
+        "report": MessageLookupByLibrary.simpleMessage("Поскаржитись"),
         "reportPublication":
             MessageLookupByLibrary.simpleMessage("Поскаржитись на публікацію"),
         "resetAll": MessageLookupByLibrary.simpleMessage("Скинути все"),
@@ -327,6 +333,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "verifiedInformation":
             MessageLookupByLibrary.simpleMessage("Перевірена інформація"),
         "wage": MessageLookupByLibrary.simpleMessage("Заробітна плата*"),
+        "webSite": MessageLookupByLibrary.simpleMessage("Веб сайт"),
         "website": MessageLookupByLibrary.simpleMessage("Сайт"),
         "whatKindOfProject":
             MessageLookupByLibrary.simpleMessage("Що це за проект?"),

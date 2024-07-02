@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:kozak/shared/shared.dart';
+import 'package:veteranam/shared/shared.dart';
 
 @Injectable()
 class AuthenticationServicesCubit extends Cubit<AuthenticationServicesFailure> {
