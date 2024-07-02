@@ -3,11 +3,11 @@ import 'package:formz/formz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
-import 'package:kozak/shared/shared.dart';
+import 'package:veteranam/shared/shared.dart';
 
+part 'story_add_bloc.freezed.dart';
 part 'story_add_event.dart';
 part 'story_add_state.dart';
-part 'story_add_bloc.freezed.dart';
 
 @Injectable()
 class StoryAddBloc extends Bloc<StoryAddEvent, StoryAddState> {

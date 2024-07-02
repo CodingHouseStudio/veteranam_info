@@ -224,8 +224,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "повинен містити одну чи більше цифр"),
         "online": MessageLookupByLibrary.simpleMessage("Вся Україна (онлайн)"),
         "or": MessageLookupByLibrary.simpleMessage("або"),
-        "orDonateHere":
-            MessageLookupByLibrary.simpleMessage("або донатьте тут"),
+        "orDonateHere": MessageLookupByLibrary.simpleMessage(
+            "або виберіть фонд/організацію для допомоги нашим військовим"),
         "other": MessageLookupByLibrary.simpleMessage("Інше (вкажіть)"),
         "ourSocialNetworks":
             MessageLookupByLibrary.simpleMessage("Наші соцмережі"),

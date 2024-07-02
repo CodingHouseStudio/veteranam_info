@@ -1,11 +1,11 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:kozak/shared/shared.dart';
+import 'package:veteranam/shared/shared.dart';
 
+part 'investors_watcher_bloc.freezed.dart';
 part 'investors_watcher_event.dart';
 part 'investors_watcher_state.dart';
-part 'investors_watcher_bloc.freezed.dart';
 
 @Injectable()
 class InvestorsWatcherBloc

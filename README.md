@@ -1,6 +1,6 @@
 <<<<<<< HEAD
 
-# Kozak
+# Veteranam
 
 Available types of Pull requests:
 
@@ -101,7 +101,7 @@ $ flutter run --flavor production --target lib/main_production.dart
 
 When you write code and want to hide an element in the production or development version, you need to call the Config class and select one of its parameters that returns a bool value, for example, if you write Config.isDevelopment, this variable will return true if you start using the development version or false if production.
 
-_\*Kozak works Web._
+_\*Veteranam works Web._
 
 ---
 

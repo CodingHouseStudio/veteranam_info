@@ -1,9 +1,8 @@
 import 'package:flutter/widgets.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:kozak/shared/shared.dart';
+import 'package:veteranam/shared/shared.dart';
 
 part 'discount_model.freezed.dart';
-
 part 'discount_model.g.dart';
 
 @freezed
