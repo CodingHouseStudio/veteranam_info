@@ -13,11 +13,6 @@ Future<void> nawbarProfileNavigationHelper({
     findsOneWidget,
   );
 
-  await scrollingHelper(
-    tester: tester,
-    itemKey: KWidgetkeys.widget.nawbar.iconPerson,
-  );
-
   await tester.tap(find.byKey(KWidgetkeys.widget.nawbar.iconPerson));
 
   verify(

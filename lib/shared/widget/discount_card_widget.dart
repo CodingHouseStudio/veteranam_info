@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:share_plus/share_plus.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:veteranam/shared/shared.dart';
 
 class DiscountsCardWidget extends StatelessWidget {
@@ -14,114 +15,365 @@ class DiscountsCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: KWidgetTheme.boxDecorationWidget,
-      padding: EdgeInsets.symmetric(
-        horizontal: isDesk ? KPadding.kPaddingSize48 : KPadding.kPaddingSize16,
-        vertical: KPadding.kPaddingSize16,
-      ),
+    if (isDesk) {
+      return _DiscountsCardWidgetDesk(
+        discountItem: discountItem,
+        isDesk: isDesk,
+      );
+    } else {
+      return DiscountsCardWidgetMob(
+        discountItem: discountItem,
+        isDesk: isDesk,
+      );
+    }
+  }
+}
+
+class _DiscountsCardWidgetDesk extends StatelessWidget {
+  const _DiscountsCardWidgetDesk({
+    required this.discountItem,
+    required this.isDesk,
+  });
+
+  final DiscountModel discountItem;
+  final bool isDesk;
+
+  @override
+  Widget build(BuildContext context) {
+    return DecoratedBox(
+      decoration: KWidgetTheme.boxDecorationDiscountContainer,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              Text(
-                discountItem.company ?? context.l10n.companyIsHidden,
-                key: KWidgetkeys.widget.discountCard.discount,
-                style: isDesk ? AppTextStyle.text40 : AppTextStyle.text18,
-                overflow: TextOverflow.clip,
-              ),
-              const Spacer(),
-              Expanded(
-                child: Text(
-                  discountItem.title,
-                  key: KWidgetkeys.widget.discountCard.service,
-                  style: isDesk ? AppTextStyle.text40 : AppTextStyle.text18,
-                  overflow: TextOverflow.clip,
-                ),
-              ),
-            ],
-          ),
-          KSizedBox.kHeightSizedBox4,
-          if (isDesk)
-            Row(
-              children: [
-                Expanded(
-                  child: Text(
-                    discountItem.dateVerified.toLocalDateString(),
-                    key: KWidgetkeys.widget.discountCard.date,
-                    style: AppTextStyle.hint24,
-                  ),
-                ),
-                Expanded(
-                  child: Text(
-                    discountItem.location?.first ?? context.l10n.online,
-                    key: KWidgetkeys.widget.discountCard.city,
-                    style: AppTextStyle.hint24,
-                    textAlign: TextAlign.end,
-                  ),
-                ),
-              ],
-            )
-          else
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  discountItem.dateVerified.toLocalDateString(),
-                  key: KWidgetkeys.widget.discountCard.date,
-                  style: AppTextStyle.hint24,
-                ),
-                Text(
-                  discountItem.location?.first ?? context.l10n.online,
-                  key: KWidgetkeys.widget.discountCard.city,
-                  style: AppTextStyle.hint24,
-                ),
-              ],
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              vertical: KPadding.kPaddingSize16,
+              horizontal: KPadding.kPaddingSize24,
             ),
-          KSizedBox.kHeightSizedBox4,
-          Text(
-            discountItem.description,
-            key: KWidgetkeys.widget.discountCard.description,
-            style: isDesk ? AppTextStyle.text24 : AppTextStyle.text14,
-          ),
-          KSizedBox.kHeightSizedBox4,
-          Text(
-            context.l10n.toGetItYouNeed,
-            key: KWidgetkeys.widget.discountCard.preInstructionDiscount,
-            style: isDesk ? AppTextStyle.hint24 : AppTextStyle.hint14,
-          ),
-          KSizedBox.kHeightSizedBox16,
-          CardTextDetailWidget(
-            text: discountItem.requirements,
-            maxLines: 1,
-            icon: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            child: Row(
               children: [
-                IconButton(
-                  onPressed: _discountsShareLink,
-                  icon: KIcon.share,
+                UserPhotoWidget(
+                  imageUrl: discountItem.userPhoto?.downloadURL,
+                  onPressed: null,
                 ),
                 KSizedBox.kWidthSizedBox16,
-                Container(
-                  child: KIcon.safe,
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        key: KWidgetkeys.widget.discountCard.service,
+                        discountItem.company ?? context.l10n.companyIsHidden,
+                        style: AppTextStyle.materialThemeTitleMedium,
+                        overflow: TextOverflow.clip,
+                        textAlign: TextAlign.left,
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            key: KWidgetkeys.widget.discountCard.userName,
+                            discountItem.userName ?? KAppText.veteranamName,
+                            style: AppTextStyle.materialThemeLabelSmall,
+                          ),
+                          KSizedBox.kWidthSizedBox8,
+                          Text(
+                            key: KWidgetkeys.widget.discountCard.date,
+                            discountItem.dateVerified.toLocalDateString(),
+                            style: AppTextStyle.materialThemeLabelSmall,
+                            overflow: TextOverflow.clip,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
+                ...List.generate(discountItem.category.length, (int index) {
+                  return Container(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: KPadding.kPaddingSize4,
+                      horizontal: KPadding.kPaddingSize8,
+                    ),
+                    decoration: KWidgetTheme.boxDecorationDiscountCategory,
+                    margin: const EdgeInsets.only(
+                      right: KPadding.kPaddingSize4,
+                    ),
+                    child: Row(
+                      children: [
+                        KIcon.check,
+                        KSizedBox.kWidthSizedBox8,
+                        Text(
+                          key: KWidgetkeys.widget.discountCard.category,
+                          context
+                                      .read<AuthenticationBloc>()
+                                      .state
+                                      .userSetting
+                                      .locale ==
+                                  Language.english
+                              ? discountItem.category.elementAt(index)
+                              : discountItem.categoryUA.elementAt(index),
+                          style: AppTextStyle.materialThemeLabelLarge,
+                        ),
+                      ],
+                    ),
+                  );
+                }),
               ],
             ),
-            isDesk: isDesk,
           ),
-          KSizedBox.kHeightSizedBox16,
+          Container(
+            decoration: KWidgetTheme.boxDecorationWidget,
+            padding: const EdgeInsets.symmetric(
+              horizontal: KPadding.kPaddingSize32,
+              vertical: KPadding.kPaddingSize16,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                KSizedBox.kHeightSizedBox16,
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        discountItem.title,
+                        key: KWidgetkeys.widget.discountCard.discountTitle,
+                        style: AppTextStyle.materialThemeDisplaySmall,
+                        overflow: TextOverflow.clip,
+                      ),
+                    ),
+                    Container(
+                      decoration: KWidgetTheme.boxDecorationDiscount,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: KPadding.kPaddingSize8,
+                        vertical: KPadding.kPaddingSize4,
+                      ),
+                      child: Row(
+                        children: [
+                          const CircleAvatar(
+                            radius: KPadding.kPaddingSize4,
+                          ),
+                          KSizedBox.kWidthSizedBox8,
+                          Text(
+                            discountItem.discount.getDiscountString(context),
+                            key: KWidgetkeys.widget.discountCard.discount,
+                            style: AppTextStyle.materialThemeLabelLarge,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                KSizedBox.kHeightSizedBox16,
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _expiration(discountItem.expiration),
+                    KSizedBox.kWidthSizedBox16,
+                    Expanded(
+                      child: CityWidgetList(
+                        discountModel: discountItem,
+                        isDesk: isDesk,
+                      ),
+                    ),
+                  ],
+                ),
+                KSizedBox.kHeightSizedBox16,
+                SharedIconListWidget(
+                  text: '${discountItem.description}\n'
+                      '\n${context.l10n.toGetItYouNeed}' //Title medium
+                      '\n${discountItem.requirements}\n'
+                      '\n${discountItem.exclusions}\n'
+                      // ignore: lines_longer_than_80_chars
+                      '${discountItem.additionalDetails != null ? '\n${discountItem.additionalDetails}\n' : ''}'
+                      '\n${discountItem.phoneNumber}',
+                  isDesk: isDesk,
+                  link: discountItem.directLink ?? discountItem.link,
+                  cardEnum: CardEnum.discount,
+                ),
+                KSizedBox.kHeightSizedBox16,
+              ],
+            ),
+          ),
         ],
       ),
     );
   }
+}
 
-  Future<void> _discountsShareLink() async {
-    // final discountsLink = Uri.parse(
-    //   discountItem.directLink,
-    // );
-    await Share.share(
-      discountItem.directLink ?? discountItem.link,
+class DiscountsCardWidgetMob extends StatelessWidget {
+  const DiscountsCardWidgetMob({
+    required this.discountItem,
+    required this.isDesk,
+    super.key,
+  });
+
+  final DiscountModel discountItem;
+  final bool isDesk;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(KPadding.kPaddingSize16),
+      child: Container(
+        decoration: KWidgetTheme.boxDecorationDiscountContainer,
+        child: Column(
+          children: [
+            Row(
+              children: [
+                UserPhotoWidget(
+                  imageUrl: discountItem.userPhoto?.downloadURL,
+                  onPressed: null,
+                ),
+                KSizedBox.kWidthSizedBox16,
+                Expanded(
+                  child: ClipRect(
+                    clipBehavior: Clip.antiAlias,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Text(
+                          key: KWidgetkeys.widget.discountCard.service,
+                          discountItem.company ?? context.l10n.companyIsHidden,
+                          style: AppTextStyle.materialThemeTitleSmall,
+                        ),
+                        Wrap(
+                          children: [
+                            Text(
+                              key: KWidgetkeys.widget.discountCard.userName,
+                              discountItem.userName ?? context.l10n.anonymous,
+                              style: AppTextStyle.materialThemeLabelSmall,
+                            ),
+                            KSizedBox.kWidthSizedBox8,
+                            Text(
+                              key: KWidgetkeys.widget.discountCard.date,
+                              discountItem.dateVerified.toLocalDateString(),
+                              style: AppTextStyle.materialThemeLabelSmall,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Container(
+              decoration: KWidgetTheme.boxDecorationWidget,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: KPadding.kPaddingSize16,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    KSizedBox.kHeightSizedBox16,
+                    Row(
+                      children: [
+                        ...List.generate(discountItem.category.length,
+                            (int index) {
+                          return Container(
+                            padding: const EdgeInsets.symmetric(
+                              vertical: KPadding.kPaddingSize4,
+                              horizontal: KPadding.kPaddingSize8,
+                            ),
+                            decoration:
+                                KWidgetTheme.boxDecorationDiscountCategory,
+                            margin: const EdgeInsets.only(
+                              right: KPadding.kPaddingSize4,
+                            ),
+                            child: Row(
+                              children: [
+                                KIcon.check,
+                                KSizedBox.kWidthSizedBox8,
+                                Text(
+                                  key: KWidgetkeys.widget.discountCard.category,
+                                  context
+                                              .read<AuthenticationBloc>()
+                                              .state
+                                              .userSetting
+                                              .locale ==
+                                          Language.english
+                                      ? discountItem.category.elementAt(index)
+                                      : discountItem.categoryUA
+                                          .elementAt(index),
+                                  style: AppTextStyle.materialThemeLabelLarge,
+                                ),
+                              ],
+                            ),
+                          );
+                        }),
+                        const Spacer(),
+                        Container(
+                          decoration: KWidgetTheme.boxDecorationDiscount,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: KPadding.kPaddingSize8,
+                            vertical: KPadding.kPaddingSize4,
+                          ),
+                          child: TextPointWidget(
+                            key: KWidgetkeys.widget.discountCard.discount,
+                            hasExpanded: false,
+                            '${context.l10n.discount} '
+                            '${discountItem.discount.first}%',
+                          ),
+                        ),
+                      ],
+                    ),
+                    KSizedBox.kHeightSizedBox16,
+                    Text(
+                      discountItem.title,
+                      key: KWidgetkeys.widget.discountCard.discountTitle,
+                      style: AppTextStyle.materialThemeHeadlineSmall,
+                      overflow: TextOverflow.clip,
+                    ),
+                    KSizedBox.kHeightSizedBox16,
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _expiration(discountItem.expiration),
+                        KSizedBox.kHeightSizedBox8,
+                        CityWidgetList(
+                          discountModel: discountItem,
+                          isDesk: isDesk,
+                        ),
+                      ],
+                    ),
+                    KSizedBox.kHeightSizedBox16,
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(left: KPadding.kPaddingSize16),
+                      child: SharedIconListWidget(
+                        text: '${discountItem.description} ',
+                        isDesk: isDesk,
+                        cardEnum: CardEnum.discount,
+                        link: discountItem.directLink ?? discountItem.link,
+                      ),
+                    ),
+                    KSizedBox.kHeightSizedBox16,
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
+
+Widget _expiration(String expiration) => Container(
+      padding: const EdgeInsets.symmetric(
+        vertical: KPadding.kPaddingSize8,
+        horizontal: KPadding.kPaddingSize8,
+      ),
+      decoration: KWidgetTheme.boxDecorationDiscountContainer,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          KIcon.calendarClock,
+          KSizedBox.kWidthSizedBox8,
+          Text(
+            expiration,
+            key: KWidgetkeys.widget.discountCard.expiration,
+            style: AppTextStyle.materialThemeLabelLarge,
+          ),
+        ],
+      ),
+    );
