@@ -73,7 +73,7 @@ Future<void> nawbarHelper({
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.nawbar.iconPerson),
+    find.byKey(KWidgetkeys.widget.nawbar.iconPersonLogin),
     findsOneWidget,
   );
 
