@@ -148,6 +148,28 @@ extension ExtendedImage on List<ImageModel>? {
       this?.isNotEmpty ?? false ? this!.first.downloadURL : null;
 }
 
+extension ListIntExtension on List<int> {
+  String getDiscountString(BuildContext context) {
+    if (isEmpty) {
+      return '';
+    }
+    if (length == 1) {
+      if (first == 100) {
+        return context.l10n.free;
+      }
+      return '${context.l10n.discount} $first%';
+    }
+
+    var highestItem = elementAt(0);
+    for (var i = 1; i < length; i++) {
+      if (elementAt(i) > highestItem) {
+        highestItem = elementAt(i);
+      }
+    }
+    return '${context.l10n.discounts} ${context.l10n.ofUpTo} $highestItem%';
+  }
+}
+
 extension DiscountModelExtensions on List<DiscountModel> {
   List<FilterItem> getLocationFilter(BuildContext context) {
     final list = context.read<DiscountWatcherBloc>().state.discountModelItems;

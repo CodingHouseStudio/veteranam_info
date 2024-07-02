@@ -151,8 +151,7 @@ class _DiscountsCardWidgetDesk extends StatelessWidget {
                           ),
                           KSizedBox.kWidthSizedBox8,
                           Text(
-                            '${context.l10n.discount} '
-                            '${discountItem.discount.first}%',
+                            discountItem.discount.getDiscountString(context),
                             key: KWidgetkeys.widget.discountCard.discount,
                             style: AppTextStyle.materialThemeLabelLarge,
                           ),
@@ -196,11 +195,12 @@ class _DiscountsCardWidgetDesk extends StatelessWidget {
                 KSizedBox.kHeightSizedBox16,
                 SharedIconListWidget(
                   text: '${discountItem.description}\n'
-                      '\nЩоб отримати потрібно:' //Title medium
+                      '\n${context.l10n.toGetItYouNeed}' //Title medium
                       '\n${discountItem.requirements}\n'
                       '\n${discountItem.exclusions}\n'
+                      // ignore: lines_longer_than_80_chars
                       '${discountItem.additionalDetails != null ? '\n${discountItem.additionalDetails}\n' : ''}'
-                      '\n${discountItem.phoneNumber}\n',
+                      '\n${discountItem.phoneNumber}',
                   isDesk: isDesk,
                   link: discountItem.directLink ?? discountItem.link,
                   cardEnum: CardEnum.discount,
