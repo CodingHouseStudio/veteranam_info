@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:kozak/shared/shared.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:veteranam/shared/shared.dart';
 
 class DiscountsCardWidget extends StatelessWidget {
   const DiscountsCardWidget({

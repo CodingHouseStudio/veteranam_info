@@ -1,6 +1,6 @@
 // ignore_for_file: lines_longer_than_80_chars, inference_failure_on_collection_literal
 
-import 'package:kozak/shared/shared.dart';
+import 'package:veteranam/shared/shared.dart';
 
 /// COMMENT: Variables with mock text. It's temporary data we change it when add firebase for this elements
 abstract class KMockText {
