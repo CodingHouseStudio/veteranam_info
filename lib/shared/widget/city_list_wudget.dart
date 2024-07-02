@@ -60,7 +60,6 @@ class _CityWidgetListState extends State<CityWidgetList> {
                     style: AppTextStyle.materialThemeLabelLarge,
                   ),
                 ),
-              KSizedBox.kWidthSizedBox8,
               if ((widget.discountModel.location ?? []).length > 1)
                 if (widget.isDesk)
                   Padding(

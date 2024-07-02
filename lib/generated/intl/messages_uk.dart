@@ -215,6 +215,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Користувач з таким паролем або електронною поштою не існує"),
         "notNecessarily":
             MessageLookupByLibrary.simpleMessage("(необовʼязково)"),
+        "ofUpTo": MessageLookupByLibrary.simpleMessage("до"),
         "offensiveOrHatefulContent": MessageLookupByLibrary.simpleMessage(
             "Образливий або ненависницький контент;"),
         "offerDiscount":
