@@ -2170,6 +2170,16 @@ class AppLocalizations {
     );
   }
 
+  /// `of up to`
+  String get ofUpTo {
+    return Intl.message(
+      'of up to',
+      name: 'ofUpTo',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `We're sorry, there was an unforeseen error.`
   String get error {
     return Intl.message(
@@ -2279,6 +2289,46 @@ class AppLocalizations {
       name: 'save',
       desc: '',
       args: [],
+    );
+  }
+
+  /// `Web site`
+  String get webSite {
+    return Intl.message(
+      'Web site',
+      name: 'webSite',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Report`
+  String get report {
+    return Intl.message(
+      'Report',
+      name: 'report',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `hide...`
+  String get hideExpansion {
+    return Intl.message(
+      'hide...',
+      name: 'hideExpansion',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `{count} more..`
+  String moreCities(Object count) {
+    return Intl.message(
+      '$count more..',
+      name: 'moreCities',
+      desc: '',
+      args: [count],
     );
   }
 }
