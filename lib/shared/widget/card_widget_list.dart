@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:kozak/shared/shared.dart';
+import 'package:veteranam/shared/shared.dart';
 
 List<Widget> cardWidgetList<T>({
   required LoadingStatus loadingStatus,

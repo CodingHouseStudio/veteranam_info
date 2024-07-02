@@ -1,8 +1,8 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
-import 'package:kozak/shared/shared.dart';
 import 'package:material_symbols_icons/symbols.dart';
+import 'package:veteranam/shared/shared.dart';
 
 class _KIcon extends Icon {
   const _KIcon(

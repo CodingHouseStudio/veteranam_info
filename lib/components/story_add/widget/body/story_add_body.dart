@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:go_router/go_router.dart';
-import 'package:kozak/components/components.dart';
-import 'package:kozak/shared/shared.dart';
+import 'package:veteranam/components/components.dart';
+import 'package:veteranam/shared/shared.dart';
 
-part '../form_widget_list.dart';
 part '../buttons_widget_list.dart';
 part '../field_widget.dart';
+part '../form_widget_list.dart';
 
 class StoryAddBody extends StatelessWidget {
   const StoryAddBody({super.key});

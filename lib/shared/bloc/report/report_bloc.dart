@@ -1,11 +1,11 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:kozak/shared/shared.dart';
+import 'package:veteranam/shared/shared.dart';
 
+part 'report_bloc.freezed.dart';
 part 'report_event.dart';
 part 'report_state.dart';
-part 'report_bloc.freezed.dart';
 
 @Injectable()
 class ReportBloc extends Bloc<ReportEvent, ReportState> {

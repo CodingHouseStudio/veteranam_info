@@ -1,5 +1,5 @@
 // import 'package:flutter/material.dart';
-// import 'package:kozak/shared/shared.dart';
+// import 'package:veteranam/shared/shared.dart';
 
 // class AnswerWidget extends StatelessWidget {
 //   const AnswerWidget({

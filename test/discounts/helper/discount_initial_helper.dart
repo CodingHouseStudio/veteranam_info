@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:kozak/shared/shared.dart';
+import 'package:veteranam/shared/shared.dart';
 
 import '../../helpers/widget/discount_card_helper.dart';
 import '../../text_dependency.dart';
