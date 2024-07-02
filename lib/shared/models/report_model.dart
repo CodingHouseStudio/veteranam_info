@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:kozak/l10n/l10n.dart';
+import 'package:veteranam/l10n/l10n.dart';
 
 part 'report_model.freezed.dart';
 part 'report_model.g.dart';

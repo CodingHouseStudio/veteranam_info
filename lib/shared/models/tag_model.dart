@@ -1,5 +1,5 @@
 // import 'package:freezed_annotation/freezed_annotation.dart';
-// import 'package:kozak/shared/shared.dart';
+// import 'package:veteranam/shared/shared.dart';
 
 // part 'tag_model.freezed.dart';
 

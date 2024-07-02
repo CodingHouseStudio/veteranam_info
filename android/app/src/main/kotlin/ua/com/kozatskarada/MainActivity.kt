@@ -1,4 +1,4 @@
-package ua.com.kozatskarada.kozak
+package info.veteranam
 
 import io.flutter.embedding.android.FlutterActivity
 

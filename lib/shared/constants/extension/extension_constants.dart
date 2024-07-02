@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/widgets.dart';
-import 'package:kozak/shared/shared.dart';
+import 'package:veteranam/shared/shared.dart';
 
 extension ExtendedDateTime on DateTime {
   static DateTime? _customTime;
