@@ -68,7 +68,7 @@ void main() {
     group('${KGroupText.getList} ', () {
       setUp(() {
         when(mockDiscountRepository.getDiscountItems()).thenAnswer(
-          (invocation) => Stream.value(KTestText.discountModelItems),
+          (invocation) => Stream.value(KTestText.discountModelItemsModify),
         );
       });
       testWidgets('${KGroupText.intial} ', (tester) async {

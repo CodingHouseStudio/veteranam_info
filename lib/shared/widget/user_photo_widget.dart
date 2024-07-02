@@ -1,0 +1,42 @@
+import 'package:flutter/material.dart';
+import 'package:veteranam/shared/shared.dart';
+
+class UserPhotoWidget extends StatelessWidget {
+  const UserPhotoWidget({
+    required this.onPressed,
+    required this.imageUrl,
+    super.key,
+  });
+  final String? imageUrl;
+  final VoidCallback? onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    if (onPressed == null) {
+      return IconWidget(
+        icon: _body,
+        padding: _padding,
+        background: AppColors.materialThemeKeyColorsSecondary,
+      );
+    } else {
+      return IconButtonWidget(
+        icon: _body,
+        onPressed: onPressed,
+        background: AppColors.materialThemeKeyColorsSecondary,
+        padding: _padding,
+      );
+    }
+  }
+
+  Widget get _body => imageUrl != null
+      ? ClipRRect(
+          borderRadius: BorderRadius.circular(KSize.kUserPhoto),
+          child: ImageWidget(
+            imageUrl: imageUrl!,
+            fit: BoxFit.contain,
+            size: KSize.kUserPhoto,
+          ),
+        )
+      : KIcon.user.copyWith(color: AppColors.materialThemeWhite);
+  double get _padding => imageUrl != null ? 0 : KPadding.kPaddingSize12;
+}
