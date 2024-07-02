@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
-import 'package:kozak/shared/shared.dart';
 import 'package:mockito/mockito.dart';
+import 'package:veteranam/shared/shared.dart';
 
 import '../text_dependency.dart';
 import 'helper/helper.dart';
@@ -205,52 +205,50 @@ void main() {
               mockGoRouter: mockGoRouter,
             );
           });
-          group("user isn't anonymously", () {
-            setUp(
-              () => when(mockAuthenticationRepository.isAnonymouslyOrEmty())
-                  .thenAnswer(
-                (realInvocation) => false,
-              ),
+        });
+        group("user isn't anonymously", () {
+          setUp(
+            () => when(mockAuthenticationRepository.isAnonymouslyOrEmty())
+                .thenAnswer(
+              (realInvocation) => false,
+            ),
+          );
+          testWidgets('${KRoute.profile.name} ', (tester) async {
+            await homePumpAppHelper(
+              tester: tester,
+              mockGoRouter: mockGoRouter,
+              mockAuthenticationRepository: mockAuthenticationRepository,
+              // mockFeedbackRepository: mockFeedbackRepository,
+              mockHomeRepository: mockHomeRepository,
+              mockAppAuthenticationRepository: mockAppAuthenticationRepository,
             );
-            // testWidgets('${KRoute.profile.name} ', (tester) async {
-            //   await homePumpAppHelper(
-            //     tester: tester,
-            //     mockGoRouter: mockGoRouter,
-            //     mockAuthenticationRepository: mockAuthenticationRepository,
-            //     // mockFeedbackRepository: mockFeedbackRepository,
-            //     mockHomeRepository: mockHomeRepository,
-            //     mockAppAuthenticationRepository:
-            //         mockAppAuthenticationRepository,
-            //   );
 
-            //   await nawbarProfileNavigationHelper(
-            //     tester: tester,
-            //     mockGoRouter: mockGoRouter,
-            //   );
-            // });
-
-            // testWidgets('${KRoute.profile.name} user photo', (tester) async {
-            //   when(mockAuthenticationRepository.currentUser).thenAnswer(
-            //     (realInvocation) => KTestText.user,
-            //   );
-            //   await provideMockedNetworkImages(() async {
-            //     await homePumpAppHelper(
-            //       tester: tester,
-            //       mockGoRouter: mockGoRouter,
-            //       mockAuthenticationRepository: mockAuthenticationRepository,
-            //       // mockFeedbackRepository: mockFeedbackRepository,
-            //       mockHomeRepository: mockHomeRepository,
-            //       mockAppAuthenticationRepository:
-            //           mockAppAuthenticationRepository,
-            //     );
-
-            //     await nawbarProfileNavigationHelper(
-            //       tester: tester,
-            //       mockGoRouter: mockGoRouter,
-            //     );
-            //   });
-            // });
+            await nawbarProfileNavigationHelper(
+              tester: tester,
+              mockGoRouter: mockGoRouter,
+            );
           });
+          // testWidgets('${KRoute.profile.name} user photo', (tester) async {
+          //   when(mockAuthenticationRepository.currentUser).thenAnswer(
+          //     (realInvocation) => KTestText.user,
+          //   );
+          //   await provideMockedNetworkImages(() async {
+          //     await homePumpAppHelper(
+          //       tester: tester,
+          //       mockGoRouter: mockGoRouter,
+          //       mockAuthenticationRepository: mockAuthenticationRepository,
+          //       // mockFeedbackRepository: mockFeedbackRepository,
+          //       mockHomeRepository: mockHomeRepository,
+          //       mockAppAuthenticationRepository:
+          //           mockAppAuthenticationRepository,
+          //     );
+
+          //     await nawbarProfileNavigationHelper(
+          //       tester: tester,
+          //       mockGoRouter: mockGoRouter,
+          //     );
+          //   });
+          // });
         });
       });
     });

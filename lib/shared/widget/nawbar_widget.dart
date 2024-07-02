@@ -2,7 +2,7 @@ import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:kozak/shared/shared.dart';
+import 'package:veteranam/shared/shared.dart';
 
 class NawbarWidget extends SliverPersistentHeaderDelegate {
   const NawbarWidget({
@@ -261,6 +261,6 @@ class _NawbarWidgetImplematationState
         );
   }
 
-  void profileNavigation(BuildContext context) =>
-      context.goNamed(KRoute.profile.name);
+  void loginNavigation(BuildContext context) =>
+      context.goNamed(KRoute.login.name);
 }

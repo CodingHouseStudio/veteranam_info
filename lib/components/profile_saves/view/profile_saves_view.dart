@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:kozak/components/discounts/widget/blocprovider/discount_blocprovider.dart';
-import 'package:kozak/components/profile_saves/widget/body/profile_saves_body.dart';
-import 'package:kozak/shared/constants/constants.dart';
+import 'package:veteranam/components/components.dart';
+import 'package:veteranam/components/profile_saves/widget/body/profile_saves_body.dart';
+import 'package:veteranam/shared/shared.dart';
 
 class ProfileSavesScreen extends StatelessWidget {
   const ProfileSavesScreen({super.key});

@@ -11,6 +11,9 @@
       "program": "lib/main_development.dart",
       "args": [
         "--dart-define=FLAVOUR=development",
+        "localhost",
+        "--web-port",
+        "4001",
         "--flavor",
         "development",
         "--target",
@@ -24,6 +27,9 @@
       "program": "lib/main_staging.dart",
       "args": [
         "--dart-define=FLAVOUR=staging",
+        "localhost",
+        "--web-port",
+        "8080",
         "--flavor",
         "staging",
         "--target",
@@ -37,6 +43,9 @@
       "program": "lib/main_production.dart",
       "args": [
         "--dart-define=FLAVOUR=production",
+        "localhost",
+        "--web-port",
+        "4001",
         "--flavor",
         "production",
         "--target",
