@@ -51,6 +51,9 @@ void main() {
       DiscountModelJsonField.title: KTestText.discountModelItems.last.title,
       DiscountModelJsonField.userName:
           KTestText.discountModelItems.last.userName,
+      DiscountModelJsonField.userPhoto: [
+        KTestText.discountModelItems.last.userPhoto!.toJson(),
+      ],
       // DiscountModelJsonField.date:
       //     KTestText.discountModelItems.last.date.toIso8601String(),
     };
@@ -75,12 +78,10 @@ void main() {
           KTestText.discountModelItems.last.exclusions,
       DiscountModelJsonField.expiration:
           KTestText.discountModelItems.last.expiration,
-      DiscountModelJsonField.location: null,
       DiscountModelJsonField.phoneNumber:
           KTestText.discountModelItems.last.phoneNumber,
       DiscountModelJsonField.requirements:
           KTestText.discountModelItems.last.requirements,
-      DiscountModelJsonField.subLocation: null,
       DiscountModelJsonField.subcategory:
           KTestText.discountModelItems.last.subcategory,
       DiscountModelJsonField.subcategoryUA:
@@ -88,6 +89,9 @@ void main() {
       DiscountModelJsonField.territory:
           KTestText.discountModelItems.last.territory,
       DiscountModelJsonField.title: KTestText.discountModelItems.last.title,
+      DiscountModelJsonField.userPhoto: null,
+      DiscountModelJsonField.subLocation: null,
+      DiscountModelJsonField.location: null,
       // DiscountModelJsonField.date:
       //     KTestText.discountModelItems.last.date.toIso8601String(),
       DiscountModelJsonField.directLink: null,
@@ -195,6 +199,10 @@ void main() {
           discountModel.userName,
           KTestText.discountModelItems.last.userName,
         );
+        expect(
+          discountModel.userPhoto,
+          KTestText.discountModelItems.last.userPhoto,
+        );
         // expect(
         //   discountModel.date,
         //   KTestText.discountModelItems.last.date,
@@ -300,6 +308,10 @@ void main() {
           discountModel.userName,
           null,
         );
+        expect(
+          discountModel.userPhoto,
+          null,
+        );
         // expect(
         //   discountModel.date,
         //   KTestText.discountModelItems.last.date,
@@ -381,6 +393,7 @@ void main() {
               company: null,
               location: null,
               subLocation: null,
+              userPhoto: null,
             )
             .toJson();
 
