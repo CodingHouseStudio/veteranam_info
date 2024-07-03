@@ -1,6 +1,6 @@
-name: kozak
-description: VeteranUA
-version: 1.0.0+3
+name: veteranam
+description: veteran
+version: 1.0.0+4
 publish_to: none
 
 environment:
@@ -12,7 +12,7 @@ dependencies:
   cloud_firestore: ^5.0.2
   dartz: ^0.10.1
   easy_debounce: ^2.0.3
-  email_validator: ^2.1.17
+  email_validator: ^3.0.0
   equatable: ^2.0.5
   firebase_analytics: ^11.0.1
   firebase_auth: ^5.1.0
@@ -28,7 +28,7 @@ dependencies:
   flutter_secure_storage: ^9.0.0
   # flutter_svg: ^2.0.10+1
   formz: ^0.7.0
-  freezed: ^2.5.2
+  freezed: ^2.5.3
   freezed_annotation: ^2.4.1
   get_it: ^7.6.0 # Used for dependency injection
   go_router: ^14.0.2 # Decoupled routing package which is a must for any app
@@ -45,6 +45,8 @@ dependencies:
 
 dependency_overrides:
   flutter_secure_storage_web: ^2.0.0-beta.1
+  meta: ^1.15.0
+
 dev_dependencies:
   bloc_test: ^9.1.7
   build_runner: ^2.4.8 # Used for class generation
@@ -59,7 +61,7 @@ dev_dependencies:
   mocktail: ^1.0.3
   plugin_platform_interface: ^2.1.8
   url_launcher_platform_interface: ^2.3.2
-  very_good_analysis: ^5.1.0
+  very_good_analysis: ^6.0.0
 
 flutter:
   uses-material-design: true

@@ -99,15 +99,15 @@
       height: 100vh;
     }
 
-    #splash {
+    .splash {
       align-items: center;
       display: flex;
       /* Center both horizontally and vertically */
-      height: 100vh;
-      /* Using vh for viewport height ensures full-screen coverage */
+      height: 25vh;
+      /* Set height to 25% of the viewport height */
       justify-content: center;
-      width: 100vw;
-      /* Using vw for viewport width ensures full-screen coverage */
+      width: 25vw;
+      /* Set width to 25% of the viewport width */
     }
 
     #splash img {
@@ -163,12 +163,22 @@
       }
 
       40% {
-        transform: translateY(-30px);
+        transform: translateY(-40px);
       }
 
       60% {
-        transform: translateY(-15px);
+        transform: translateY(-20px);
       }
+
+      /* 40% {
+    transform: translateY(-30px) ease-in-out;
+    transform: scale(1.1); 
+    }
+
+    60% {
+      transform: translateY(-15px) ease-in-out;
+      transform: scale(1.1);
+    }*/
     }
   </style>
 
