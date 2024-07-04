@@ -320,4 +320,7 @@ abstract class KButtonStyles {
       ),
     ),
   );
+  static const footerButtonTransparent = ButtonStyle(
+    overlayColor: WidgetStatePropertyAll(Colors.transparent),
+  );
 }
