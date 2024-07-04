@@ -408,6 +408,7 @@ abstract class FooterWidget {
       TextButton(
         key: key,
         onPressed: onPressed,
+        style: KButtonStyles.footerButtonTransparent,
         child: Text(text),
       );
 
