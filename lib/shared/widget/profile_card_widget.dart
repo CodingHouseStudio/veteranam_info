@@ -274,7 +274,7 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
           ),
           child: Row(
             children: [
-              KImage.facebook,
+              KImage.facebook(),
               KSizedBox.kWidthSizedBox8,
               Expanded(
                 child: Text(
