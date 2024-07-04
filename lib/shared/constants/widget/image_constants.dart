@@ -1,7 +1,7 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+// import 'package:flutter_svg/svg.dart';
 import 'package:veteranam/shared/shared.dart';
 
 // extension SvgPictureExtension on SvgPicture {
@@ -40,63 +40,94 @@ import 'package:veteranam/shared/shared.dart';
 //   }
 // }
 
-extension ImageExension on Image {
-  Image setKey(Key key) => Image(
-        image: image,
+// extension ImageExension on Image {
+//   Image setKey(Key key) => Image(
+//         image: image,
+//         key: key,
+//       );
+// }
+
+class KImage {
+  static SvgImageWidget instagram({Key? key}) => SvgImageWidget(
+        path: 'assets/icons/instagram.svg',
         key: key,
       );
-}
-
-abstract class KImage {
-  static final Image instagram = _get('assets/icons/instagram.svg');
-  static final Image linkedIn = _get('assets/icons/linkedin.svg');
-  static final Image facebook = _get('assets/icons/facebook.svg');
-  static final Image apple = _get('assets/icons/social_icons.svg');
-  static final Image google = _get('assets/icons/social_icons_g.svg');
-  static final Image logo = _get('assets/images/logo.svg');
-  static final Image logoHome = _get('assets/images/logo_home.svg');
-  static final Image homeImage = _get(
-    'assets/images/home_image.png',
-    fit: BoxFit.fill,
-  );
-  static final Image homeImageMob = _get(
-    'assets/images/home_image_mob.png',
-  );
-  static final Image discountImage = _get(
-    'assets/images/discount_image.png',
-    fit: BoxFit.fill,
-    casheSize: KMinMaxSize.kHomeImageMaxSize,
-  );
-  static final Image inforamationImage = _get(
-    'assets/images/information_image.png',
-    fit: BoxFit.fill,
-    casheSize: KMinMaxSize.kHomeImageMaxSize,
-  );
-  static final Image wavingHand = _get(
-    'assets/icons/waving_hand.png',
-    width: KSize.kPixel16,
-    height: KSize.kPixel16,
-  );
-  static final Image veteran1 = _get(
-    'assets/images/veteran1.png',
-  );
-  static final Image veteran2 = _get(
-    'assets/images/veteran2.png',
-  );
-  static final Image veteran3 = _get(
-    'assets/images/veteran3.png',
-  );
-  static final Image veteran4 = _get(
-    'assets/images/veteran4.png',
-  );
-  static final Image veteran5 = _get(
-    'assets/images/veteran5.png',
-  );
-  // static const SvgPicture emptyList = SvgPicture(
+  static SvgImageWidget linkedIn({Key? key}) => SvgImageWidget(
+        path: 'assets/icons/linkedin.svg',
+        key: key,
+      );
+  static SvgImageWidget facebook({Key? key}) => SvgImageWidget(
+        path: 'assets/icons/facebook.svg',
+        key: key,
+      );
+  static SvgImageWidget apple({Key? key}) => SvgImageWidget(
+        path: 'assets/icons/social_icons.svg',
+        key: key,
+      );
+  static SvgImageWidget google({Key? key}) => SvgImageWidget(
+        path: 'assets/icons/social_icons_g.svg',
+        key: key,
+      );
+  static SvgImageWidget logo({Key? key}) => SvgImageWidget(
+        path: 'assets/images/logo.svg',
+        key: key,
+      );
+  static Image logoHome({Key? key}) => _get(
+        'assets/images/logo_home.svg',
+        key: key,
+      );
+  static Image homeImage({Key? key}) => _get(
+        'assets/images/home_image.png',
+        fit: BoxFit.fill,
+        key: key,
+      );
+  static Image homeImageMob({Key? key}) => _get(
+        'assets/images/home_image_mob.png',
+        key: key,
+      );
+  static Image discountImage({Key? key}) => _get(
+        'assets/images/discount_image.png',
+        fit: BoxFit.fill,
+        casheSize: KMinMaxSize.kHomeImageMaxSize,
+        key: key,
+      );
+  static Image inforamationImage({Key? key}) => _get(
+        'assets/images/information_image.png',
+        fit: BoxFit.fill,
+        casheSize: KMinMaxSize.kHomeImageMaxSize,
+        key: key,
+      );
+  static Image wavingHand({Key? key}) => _get(
+        'assets/icons/waving_hand.png',
+        width: KSize.kPixel16,
+        height: KSize.kPixel16,
+        key: key,
+      );
+  static Image veteran1({Key? key}) => _get(
+        'assets/images/veteran1.png',
+        key: key,
+      );
+  static Image veteran2({Key? key}) => _get(
+        'assets/images/veteran2.png',
+        key: key,
+      );
+  static Image veteran3({Key? key}) => _get(
+        'assets/images/veteran3.png',
+        key: key,
+      );
+  static Image veteran4({Key? key}) => _get(
+        'assets/images/veteran4.png',
+        key: key,
+      );
+  static Image veteran5({Key? key}) => _get(
+        'assets/images/veteran5.png',
+        key: key,
+      );
+  // static const SvgPicture emptyList({Key? key}) =>SvgPicture(
   //   SvgAssetLoader('assets/images/empty_list.svg'),
   // );
 
-  // static const Image workImage = _get(
+  // static const Image workImage({Key? key}) =>_get(
   //    'assets/images/work_image.png'),
   //   fit: BoxFit.fill,
   // );
@@ -112,9 +143,10 @@ abstract class KImage {
     double? width,
     double? height,
     int? casheSize,
+    Key? key,
   }) =>
       Image.asset(
-        key: Key(name),
+        key: key ?? Key(name),
         name,
         fit: fit,
         width: width,
