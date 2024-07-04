@@ -137,37 +137,38 @@ class _NawbarWidgetImplematationState
                 )
               else if (widget.isDesk) ...[
                 Expanded(
-                  child: ActionChip(
-                    // style: const ButtonStyle(alignment: Alignment.centerRight),
+                  child: TextButton.icon(
+                    style: const ButtonStyle(alignment: Alignment.centerRight),
                     onPressed: () => context.goNamed(KRoute.discounts.name),
                     label: Text(
                       context.l10n.discounts,
                       style: AppTextStyle.materialThemeTitleMedium,
                     ),
-                    avatar: KIcon.tag,
+                    icon: KIcon.tag,
                   ),
                 ),
                 KSizedBox.kWidthSizedBox64,
                 Expanded(
-                  child: ActionChip(
+                  child: TextButton.icon(
+                    style: const ButtonStyle(alignment: Alignment.center),
                     onPressed: () => context.goNamed(KRoute.information.name),
                     label: Text(
                       context.l10n.information,
                       style: AppTextStyle.materialThemeTitleMedium,
                     ),
-                    avatar: KIcon.globe,
+                    icon: KIcon.globe,
                   ),
                 ),
                 KSizedBox.kWidthSizedBox64,
                 Expanded(
-                  child: ActionChip(
-                    // style: const ButtonStyle(alignment: Alignment.centerLeft),
+                  child: TextButton.icon(
+                    style: const ButtonStyle(alignment: Alignment.centerLeft),
                     onPressed: () => context.goNamed(KRoute.investors.name),
                     label: Text(
                       context.l10n.investors,
                       style: AppTextStyle.materialThemeTitleMedium,
                     ),
-                    avatar: KIcon.fileText,
+                    icon: KIcon.fileText,
                   ),
                 ),
               ],
