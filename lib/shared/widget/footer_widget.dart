@@ -70,7 +70,7 @@ abstract class FooterWidget {
                     key: KWidgetkeys.widget.footer.logo,
                     height: KSize.kPixel80,
                     width: KSize.kPixel140,
-                    child: KImage.logo,
+                    child: KImage.logo(),
                   ),
                   Expanded(
                     child: Wrap(
@@ -183,7 +183,7 @@ abstract class FooterWidget {
                 key: KWidgetkeys.widget.footer.logo,
                 alignment: Alignment.centerLeft,
                 height: KSize.kPixel60,
-                child: KImage.logo,
+                child: KImage.logo(),
               ),
               KSizedBox.kHeightSizedBox24,
               Text(
@@ -430,7 +430,7 @@ abstract class FooterWidget {
               );
             }
           },
-          icon: KImage.linkedIn,
+          icon: KImage.linkedIn(),
           background: AppColors.materialThemeSourceSeed,
         ),
         padding,
@@ -444,7 +444,7 @@ abstract class FooterWidget {
               );
             }
           },
-          icon: KImage.instagram,
+          icon: KImage.instagram(),
           background: AppColors.materialThemeSourceSeed,
         ),
         padding,
@@ -458,7 +458,7 @@ abstract class FooterWidget {
               );
             }
           },
-          icon: KImage.facebook,
+          icon: KImage.facebook(),
           background: AppColors.materialThemeSourceSeed,
         ),
       ];

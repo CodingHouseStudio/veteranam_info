@@ -67,7 +67,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '326120302123',
     projectId: 'veteran-production',
     storageBucket: 'veteran-production.appspot.com',
-    iosClientId: '326120302123-6imcoq7lddeov8i8dcicp15cjn6a418u.apps.googleusercontent.com',
+    iosClientId:
+        '326120302123-6imcoq7lddeov8i8dcicp15cjn6a418u.apps.googleusercontent.com',
     iosBundleId: 'info.veteranam',
   );
 
