@@ -210,10 +210,10 @@ class AppLocalizations {
     );
   }
 
-  /// `E-mail`
+  /// `Email`
   String get email {
     return Intl.message(
-      'E-mail',
+      'Email',
       name: 'email',
       desc: '',
       args: [],
@@ -290,10 +290,10 @@ class AppLocalizations {
     );
   }
 
-  /// `In this section you can add personal information, set your profile to be anonymous, and find your saved content.`
+  /// `You can add/edit personal information, manage anonymous setting, and find your saved content.`
   String get profileDetails {
     return Intl.message(
-      'In this section you can add personal information, set your profile to be anonymous, and find your saved content.',
+      'You can add/edit personal information, manage anonymous setting, and find your saved content.',
       name: 'profileDetails',
       desc: '',
       args: [],
@@ -310,40 +310,40 @@ class AppLocalizations {
     );
   }
 
-  /// `Write your name`
+  /// `First name`
   String get writeYouName {
     return Intl.message(
-      'Write your name',
+      'First name',
       name: 'writeYouName',
       desc: '',
       args: [],
     );
   }
 
-  /// `Write your last name`
+  /// `Last name`
   String get writeYouLastName {
     return Intl.message(
-      'Write your last name',
+      'Last name',
       name: 'writeYouLastName',
       desc: '',
       args: [],
     );
   }
 
-  /// `Save changes`
+  /// `Save`
   String get saveChanges {
     return Intl.message(
-      'Save changes',
+      'Save',
       name: 'saveChanges',
       desc: '',
       args: [],
     );
   }
 
-  /// `Edit data`
+  /// `Edit`
   String get editData {
     return Intl.message(
-      'Edit data',
+      'Edit',
       name: 'editData',
       desc: '',
       args: [],
@@ -400,10 +400,10 @@ class AppLocalizations {
     );
   }
 
-  /// `In this section, you can support veterans. If you have a business, you can provide discounts or personalized offers for veterans. Write to us and we will contact you to discuss the details.`
+  /// `Support veterans and their families. Business owners, offer discounts or personalized offers for veterans. Contact us to discuss details.`
   String get investorsSubtitle {
     return Intl.message(
-      'In this section, you can support veterans. If you have a business, you can provide discounts or personalized offers for veterans. Write to us and we will contact you to discuss the details.',
+      'Support veterans and their families. Business owners, offer discounts or personalized offers for veterans. Contact us to discuss details.',
       name: 'investorsSubtitle',
       desc: '',
       args: [],
@@ -420,10 +420,10 @@ class AppLocalizations {
     );
   }
 
-  /// `Write your email`
+  /// `Email`
   String get writeYourEmail {
     return Intl.message(
-      'Write your email',
+      'Email',
       name: 'writeYourEmail',
       desc: '',
       args: [],
@@ -440,10 +440,10 @@ class AppLocalizations {
     );
   }
 
-  /// `Write your suggestions`
+  /// `Suggestions`
   String get writeYourSuggenstions {
     return Intl.message(
-      'Write your suggestions',
+      'Suggestions',
       name: 'writeYourSuggenstions',
       desc: '',
       args: [],
@@ -460,20 +460,20 @@ class AppLocalizations {
     );
   }
 
-  /// `Didn't find what you were looking for, want to get in touch, or have questions or requests? We are happy to talk to you! Please fill out the form below.`
+  /// `Can't find what you need? Have questions or requests? Fill out the form below. We're here to help!`
   String get feedbackSubtitle {
     return Intl.message(
-      'Didn\'t find what you were looking for, want to get in touch, or have questions or requests? We are happy to talk to you! Please fill out the form below.',
+      'Can\'t find what you need? Have questions or requests? Fill out the form below. We\'re here to help!',
       name: 'feedbackSubtitle',
       desc: '',
       args: [],
     );
   }
 
-  /// `Write your message`
+  /// `Message`
   String get writeYourMessage {
     return Intl.message(
-      'Write your message',
+      'Message',
       name: 'writeYourMessage',
       desc: '',
       args: [],
@@ -490,10 +490,10 @@ class AppLocalizations {
     );
   }
 
-  /// `Here you will find useful information, benefits, discounts and you can also share your story!`
+  /// `Here you can find discounts!`
   String get homeSubtitle {
     return Intl.message(
-      'Here you will find useful information, benefits, discounts and you can also share your story!',
+      'Here you can find discounts!',
       name: 'homeSubtitle',
       desc: '',
       args: [],
@@ -520,10 +520,10 @@ class AppLocalizations {
     );
   }
 
-  /// `Field cann't be empty`
+  /// `Field cannot be empty`
   String get fieldCannotBeEmpty {
     return Intl.message(
-      'Field cann`t be empty',
+      'Field cannot be empty',
       name: 'fieldCannotBeEmpty',
       desc: '',
       args: [],
@@ -550,20 +550,20 @@ class AppLocalizations {
     );
   }
 
-  /// `is wrong`
+  /// `has errors`
   String get isWrong {
     return Intl.message(
-      'is wrong',
+      'has errors',
       name: 'isWrong',
       desc: '',
       args: [],
     );
   }
 
-  /// `is wrong`
+  /// `is not properly formatted`
   String get isWrongEmail {
     return Intl.message(
-      'is wrong',
+      'is not properly formatted',
       name: 'isWrongEmail',
       desc: '',
       args: [],
@@ -620,10 +620,10 @@ class AppLocalizations {
     );
   }
 
-  /// `Do you have an account`
+  /// `Have an account`
   String get doYouHavenAccount {
     return Intl.message(
-      'Do you have an account',
+      'Have an account',
       name: 'doYouHavenAccount',
       desc: '',
       args: [],
@@ -740,10 +740,10 @@ class AppLocalizations {
     );
   }
 
-  /// `In this section you will find verified information on how to get help, etc. You can use filters for convenience.`
+  /// `Find verified help information. Use filters for convenience.`
   String get informationSubtitle {
     return Intl.message(
-      'In this section you will find verified information on how to get help, etc. You can use filters for convenience.',
+      'Find verified help information. Use filters for convenience.',
       name: 'informationSubtitle',
       desc: '',
       args: [],
@@ -780,10 +780,10 @@ class AppLocalizations {
     );
   }
 
-  /// `Do you want to support veterans not with words but with deeds? Here are the largest proven foundations you can donate to. You can send any amount of money, because there are no small donations.`
+  /// `Support veterans with deeds, not just words. Donate to these proven foundations. Every donation counts.`
   String get fundsSubtitle {
     return Intl.message(
-      'Do you want to support veterans not with words but with deeds? Here are the largest proven foundations you can donate to. You can send any amount of money, because there are no small donations.',
+      'Support veterans with deeds, not just words. Donate to these proven foundations. Every donation counts.',
       name: 'fundsSubtitle',
       desc: '',
       args: [],
@@ -800,10 +800,10 @@ class AppLocalizations {
     );
   }
 
-  /// `We have received your message and will respond to you as soon as possible.`
+  /// `We've received your message and will respond soon.`
   String get feedbackBoxSubtitle {
     return Intl.message(
-      'We have received your message and will respond to you as soon as possible.',
+      'We\'ve received your message and will respond soon.',
       name: 'feedbackBoxSubtitle',
       desc: '',
       args: [],
@@ -830,10 +830,10 @@ class AppLocalizations {
     );
   }
 
-  /// `Your Veteran account is currently linked to a Facebook account.`
+  /// `Your Veteran account is linked to a Facebook account.`
   String get linkedAccountsDetails {
     return Intl.message(
-      'Your Veteran account is currently linked to a Facebook account.',
+      'Your Veteran account is linked to a Facebook account.',
       name: 'linkedAccountsDetails',
       desc: '',
       args: [],
@@ -850,10 +850,10 @@ class AppLocalizations {
     );
   }
 
-  /// `We have received your message and will respond to you as soon as possible.`
+  /// `We've received your message and will respond soon.`
   String get receivedYourMessage {
     return Intl.message(
-      'We have received your message and will respond to you as soon as possible.',
+      'We\'ve received your message and will respond soon.',
       name: 'receivedYourMessage',
       desc: '',
       args: [],
@@ -890,10 +890,10 @@ class AppLocalizations {
     );
   }
 
-  /// `Please note! To access some services, you will need to confirm your status by showing the appropriate ID.`
+  /// `Please note! To access some services, you may need to confirm your identity.`
   String get thankYouDescription {
     return Intl.message(
-      'Please note! To access some services, you will need to confirm your status by showing the appropriate ID.',
+      'Please note! To access some services, you may need to confirm your identity.',
       name: 'thankYouDescription',
       desc: '',
       args: [],
@@ -920,10 +920,10 @@ class AppLocalizations {
     );
   }
 
-  /// `In order for us to provide you with the most useful services, please answer the following question:`
+  /// `To provide the best service, please answer the following question(s):`
   String get questionsFormSubtitle {
     return Intl.message(
-      'In order for us to provide you with the most useful services, please answer the following question:',
+      'To provide the best service, please answer the following question(s):',
       name: 'questionsFormSubtitle',
       desc: '',
       args: [],
@@ -940,40 +940,40 @@ class AppLocalizations {
     );
   }
 
-  /// `I am a veteran;`
+  /// `I am a veteran`
   String get iAmVeteran {
     return Intl.message(
-      'I am a veteran;',
+      'I am a veteran',
       name: 'iAmVeteran',
       desc: '',
       args: [],
     );
   }
 
-  /// `I am a relative of a veteran;`
+  /// `Family member of a veteran`
   String get iAmRelativeOfVeteran {
     return Intl.message(
-      'I am a relative of a veteran;',
+      'Family member of a veteran',
       name: 'iAmRelativeOfVeteran',
       desc: '',
       args: [],
     );
   }
 
-  /// `I am a civilian;`
+  /// `Civilian`
   String get iAmCivilian {
     return Intl.message(
-      'I am a civilian;',
+      'Civilian',
       name: 'iAmCivilian',
       desc: '',
       args: [],
     );
   }
 
-  /// `I am a business owner/representative, I want to provide benefits.`
+  /// `Business owner/representative, Looking to help veterans.`
   String get iAmBusinessOwnerRepresentative {
     return Intl.message(
-      'I am a business owner/representative, I want to provide benefits.',
+      'Business owner/representative, Looking to help veterans.',
       name: 'iAmBusinessOwnerRepresentative',
       desc: '',
       args: [],
@@ -1060,10 +1060,10 @@ class AppLocalizations {
     );
   }
 
-  /// `In this section you will find discounts and coupons from our partners. You can use filters for convenience.`
+  /// `In this section you can find discounts and coupons from our partners. For your convenience, you can use filters.`
   String get discountsAndCouponsDescription {
     return Intl.message(
-      'In this section you will find discounts and coupons from our partners. You can use filters for convenience.',
+      'In this section you can find discounts and coupons from our partners. For your convenience, you can use filters.',
       name: 'discountsAndCouponsDescription',
       desc: '',
       args: [],
@@ -1490,20 +1490,20 @@ class AppLocalizations {
     );
   }
 
-  /// `THIS SERVICE IS FOR VETERANS`
+  /// `Thank you Veterans!`
   String get thisServiceForVeterans {
     return Intl.message(
-      'THIS SERVICE IS FOR VETERANS',
+      'Thank you Veterans!',
       name: 'thisServiceForVeterans',
       desc: '',
       args: [],
     );
   }
 
-  /// `Here you can find useful information, benefits, discounts and share your story`
+  /// `Here you can find useful discounts`
   String get thisServiceForVeteransSubtitle {
     return Intl.message(
-      'Here you can find useful information, benefits, discounts and share your story',
+      'Here you can find useful discounts',
       name: 'thisServiceForVeteransSubtitle',
       desc: '',
       args: [],
@@ -1520,10 +1520,10 @@ class AppLocalizations {
     );
   }
 
-  /// `An independent information platform for female and male veterans, which collects and systematizes data for easy search.`
+  /// `An independent information platform for veterans and their families.`
   String get aboutProject {
     return Intl.message(
-      'An independent information platform for female and male veterans, which collects and systematizes data for easy search.',
+      'An independent information platform for veterans and their families.',
       name: 'aboutProject',
       desc: '',
       args: [],
@@ -1540,30 +1540,30 @@ class AppLocalizations {
     );
   }
 
-  /// `Discounts and services`
+  /// `Discounts`
   String get discountsServices {
     return Intl.message(
-      'Discounts and services',
+      'Discounts',
       name: 'discountsServices',
       desc: '',
       args: [],
     );
   }
 
-  /// `Here you will find current offers for veterans and active military personnel that are updated in real time. Medical, service, catering, and clothing discounts are all available in this section.`
+  /// `Here you will find current offers for veterans and their families that are updated monthly. Medical, service, catering, and clothing discounts are all available in this section.`
   String get discountsServicesSubtitle {
     return Intl.message(
-      'Here you will find current offers for veterans and active military personnel that are updated in real time. Medical, service, catering, and clothing discounts are all available in this section.',
+      'Here you will find current offers for veterans and their families that are updated monthly. Medical, service, catering, and clothing discounts are all available in this section.',
       name: 'discountsServicesSubtitle',
       desc: '',
       args: [],
     );
   }
 
-  /// `To Discount`
+  /// `To Discounts`
   String get toDiscount {
     return Intl.message(
-      'To Discount',
+      'To Discounts',
       name: 'toDiscount',
       desc: '',
       args: [],
@@ -2170,6 +2170,16 @@ class AppLocalizations {
     );
   }
 
+  /// `of up to`
+  String get ofUpTo {
+    return Intl.message(
+      'of up to',
+      name: 'ofUpTo',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `We're sorry, there was an unforeseen error.`
   String get error {
     return Intl.message(
@@ -2279,6 +2289,46 @@ class AppLocalizations {
       name: 'save',
       desc: '',
       args: [],
+    );
+  }
+
+  /// `Web site`
+  String get webSite {
+    return Intl.message(
+      'Web site',
+      name: 'webSite',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Report`
+  String get report {
+    return Intl.message(
+      'Report',
+      name: 'report',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `hide...`
+  String get hideExpansion {
+    return Intl.message(
+      'hide...',
+      name: 'hideExpansion',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `{count} more..`
+  String moreCities(Object count) {
+    return Intl.message(
+      '$count more..',
+      name: 'moreCities',
+      desc: '',
+      args: [count],
     );
   }
 }

@@ -1,12 +1,14 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:kozak/app.dart';
-import 'package:kozak/bootstrap.dart';
-import 'package:kozak/firebase_options_development.dart';
+import 'package:flutter/material.dart';
+import 'package:veteranam/app.dart';
+import 'package:veteranam/bootstrap.dart';
+import 'package:veteranam/firebase_options_development.dart';
 
 /// COMMENT: Our main file
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.web,
+    options: DefaultFirebaseOptions.currentPlatform,
   );
   await bootstrap(App.new);
 }

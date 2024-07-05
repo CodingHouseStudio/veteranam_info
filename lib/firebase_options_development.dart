@@ -8,7 +8,7 @@ import 'package:flutter/foundation.dart'
 ///
 /// Example:
 /// ```dart
-/// import 'firebase_options_production.dart';
+/// import 'firebase_options_development.dart';
 /// // ...
 /// await Firebase.initializeApp(
 ///   options: DefaultFirebaseOptions.currentPlatform,
@@ -21,20 +21,11 @@ class DefaultFirebaseOptions {
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for android - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return android;
       case TargetPlatform.iOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for ios - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return ios;
       case TargetPlatform.macOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for macos - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return macos;
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -54,51 +45,41 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions web = FirebaseOptions(
     apiKey: 'AIzaSyBEyjiJOQxksq81cI865BN4T28i-P1gGGo',
-    appId: '1:32851885972:web:cfc67afc73c0e1cbecd981',
+    appId: '1:32851885972:web:c0230fc5a9606103ecd981',
     messagingSenderId: '32851885972',
     projectId: 'veteran-development',
     authDomain: 'veteran-development.firebaseapp.com',
     storageBucket: 'veteran-development.appspot.com',
-    measurementId: 'G-PEH6XXFC05',
+    measurementId: 'G-CWWP8DND1D',
   );
 
-  // static const FirebaseOptions android = FirebaseOptions(
-  //   apiKey: 'AIzaSyA8CbivBU82h3WhxgoZ0mkdMq5y1OEfbQk',
-  //   appId: '1:32851885972:android:8c88121886d3834eecd981',
-  //   messagingSenderId: '32851885972',
-  //   projectId: 'veteran-development',
-  //   storageBucket: 'veteran-development.appspot.com',
-  // );
+  static const FirebaseOptions android = FirebaseOptions(
+    apiKey: 'AIzaSyA8CbivBU82h3WhxgoZ0mkdMq5y1OEfbQk',
+    appId: '1:32851885972:android:d920f90e0bb70673ecd981',
+    messagingSenderId: '32851885972',
+    projectId: 'veteran-development',
+    storageBucket: 'veteran-development.appspot.com',
+  );
 
-  // static const FirebaseOptions ios = FirebaseOptions(
-  //   apiKey: 'AIzaSyCbrgwKWeMZ69SHecID9NFHohsA7v8YOss',
-  //   appId: '1:32851885972:ios:87468196658b11a8ecd981',
-  //   messagingSenderId: '32851885972',
-  //   projectId: 'veteran-development',
-  //   storageBucket: 'veteran-development.appspot.com',
-  //   iosClientId:
-  //       '32851885972-qe9sf5udiu1sn1il656tpl2ifvdlgtcr.apps.googleusercontent.com',
-  //   iosBundleId: 'ua.com.kozatskarada.kozak',
-  // );
+  static const FirebaseOptions ios = FirebaseOptions(
+    apiKey: 'AIzaSyCbrgwKWeMZ69SHecID9NFHohsA7v8YOss',
+    appId: '1:32851885972:ios:1f70471fce23766fecd981',
+    messagingSenderId: '32851885972',
+    projectId: 'veteran-development',
+    storageBucket: 'veteran-development.appspot.com',
+    iosClientId:
+        '32851885972-39m4c4lb48qj9p40542l7o0d8hebfoaa.apps.googleusercontent.com',
+    iosBundleId: 'info.veteranam.dev',
+  );
 
-  // static const FirebaseOptions macos = FirebaseOptions(
-  //   apiKey: 'AIzaSyCbrgwKWeMZ69SHecID9NFHohsA7v8YOss',
-  //   appId: '1:32851885972:ios:541a9f206a1c8d7fecd981',
-  //   messagingSenderId: '32851885972',
-  //   projectId: 'veteran-development',
-  //   storageBucket: 'veteran-development.appspot.com',
-  //   iosClientId:
-  //       '32851885972-dug7bniacnr414ninjv0uc45v527q1j7.apps.googleusercontent.com',
-  //   iosBundleId: 'com.example.myApp',
-  // );
-
-  // static const FirebaseOptions windows = FirebaseOptions(
-  //   apiKey: 'AIzaSyBEyjiJOQxksq81cI865BN4T28i-P1gGGo',
-  //   appId: '1:32851885972:web:3bb208f45cb967d1ecd981',
-  //   messagingSenderId: '32851885972',
-  //   projectId: 'veteran-development',
-  //   authDomain: 'veteran-development.firebaseapp.com',
-  //   storageBucket: 'veteran-development.appspot.com',
-  //   measurementId: 'G-DKS1DNPQVC',
-  // );
+  static const FirebaseOptions macos = FirebaseOptions(
+    apiKey: 'AIzaSyCbrgwKWeMZ69SHecID9NFHohsA7v8YOss',
+    appId: '1:32851885972:ios:658759515917d638ecd981',
+    messagingSenderId: '32851885972',
+    projectId: 'veteran-development',
+    storageBucket: 'veteran-development.appspot.com',
+    iosClientId:
+        '32851885972-dug7bniacnr414ninjv0uc45v527q1j7.apps.googleusercontent.com',
+    iosBundleId: 'com.example.myApp',
+  );
 }

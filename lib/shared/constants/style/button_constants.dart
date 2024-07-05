@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kozak/shared/shared.dart';
+import 'package:veteranam/shared/shared.dart';
 
 abstract class KButtonStyles {
   static const ButtonStyle widgetBackgroundButtonStyleWInf = ButtonStyle(
@@ -319,5 +319,8 @@ abstract class KButtonStyles {
         side: BorderSide(color: AppColors.materialThemeKeyColorsSecondary),
       ),
     ),
+  );
+  static const footerButtonTransparent = ButtonStyle(
+    overlayColor: WidgetStatePropertyAll(Colors.transparent),
   );
 }

@@ -1,6 +1,6 @@
 // ignore_for_file: lines_longer_than_80_chars, inference_failure_on_collection_literal
 
-import 'package:kozak/shared/shared.dart';
+import 'package:veteranam/shared/shared.dart';
 
 /// COMMENT: Variables with mock text. It's temporary data we change it when add firebase for this elements
 abstract class KMockText {
@@ -208,8 +208,9 @@ abstract class KAppText {
   static const String authChange = 'AuthenticationStatusChanged:';
   static const String backendString = '';
   static const String usernameToken = 'USERNAME_TOKEN';
-  static const String madeBy = '© Coding House Studio LLC - 2024';
+  static const String madeBy = '© - 2024';
   static const String email = 'hello@veteranam.info';
+  static const String veteranamName = 'veteranam.info';
   static const String linkedIn = 'https://www.linkedin.com/company/veteranam/';
   static const String instagram = 'https://www.instagram.com/veteranam_info';
   static const String facebook =

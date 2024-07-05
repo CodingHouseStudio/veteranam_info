@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:go_router/go_router.dart';
-import 'package:kozak/shared/shared.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:veteranam/shared/shared.dart';
 
 abstract class FooterWidget {
   static List<Widget> get({
@@ -70,7 +70,7 @@ abstract class FooterWidget {
                     key: KWidgetkeys.widget.footer.logo,
                     height: KSize.kPixel80,
                     width: KSize.kPixel140,
-                    child: KImage.logo,
+                    child: KImage.logo(),
                   ),
                   Expanded(
                     child: Wrap(
@@ -183,7 +183,7 @@ abstract class FooterWidget {
                 key: KWidgetkeys.widget.footer.logo,
                 alignment: Alignment.centerLeft,
                 height: KSize.kPixel60,
-                child: KImage.logo,
+                child: KImage.logo(),
               ),
               KSizedBox.kHeightSizedBox24,
               Text(
@@ -408,6 +408,7 @@ abstract class FooterWidget {
       TextButton(
         key: key,
         onPressed: onPressed,
+        style: KButtonStyles.footerButtonTransparent,
         child: Text(text),
       );
 
@@ -430,7 +431,7 @@ abstract class FooterWidget {
               );
             }
           },
-          icon: KImage.linkedIn,
+          icon: KImage.linkedIn(),
           background: AppColors.materialThemeSourceSeed,
         ),
         padding,
@@ -444,7 +445,7 @@ abstract class FooterWidget {
               );
             }
           },
-          icon: KImage.instagram,
+          icon: KImage.instagram(),
           background: AppColors.materialThemeSourceSeed,
         ),
         padding,
@@ -458,7 +459,7 @@ abstract class FooterWidget {
               );
             }
           },
-          icon: KImage.facebook,
+          icon: KImage.facebook(),
           background: AppColors.materialThemeSourceSeed,
         ),
       ];
