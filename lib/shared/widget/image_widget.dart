@@ -28,9 +28,9 @@ class _ImageWidgetState extends State<ImageWidget> {
     precacheImage(
       NetworkImage(
         widget.imageUrl,
-        headers: {
-          'Cache-Control': 'max-age=3600',
-        },
+        // headers: {
+        //   'Cache-Control': 'max-age=3600',
+        // },
       ),
       context,
     );
