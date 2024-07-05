@@ -310,8 +310,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("To get it you need:"),
         "toInfomation": MessageLookupByLibrary.simpleMessage("To information"),
         "toVacancy": MessageLookupByLibrary.simpleMessage("To vacancies"),
-        "tooShortEmail":
-            MessageLookupByLibrary.simpleMessage("Email too short"),
+        "tooShortEmail": MessageLookupByLibrary.simpleMessage("too short"),
         "tooShortPassword": MessageLookupByLibrary.simpleMessage("too short"),
         "tooshort": MessageLookupByLibrary.simpleMessage("too short"),
         "tryItAgain": MessageLookupByLibrary.simpleMessage("Try it again"),
