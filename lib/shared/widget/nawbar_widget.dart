@@ -103,7 +103,7 @@ class _NawbarWidgetImplematationState
                     Duration.zero,
                     () => context.goNamedWithScroll(KRoute.home.name),
                   ),
-                  icon: KImage.logo.copyWith(
+                  icon: KImage.logo(
                     key: KWidgetkeys.widget.nawbar.logo,
                   ),
                 ),
@@ -150,6 +150,7 @@ class _NawbarWidgetImplematationState
                 KSizedBox.kWidthSizedBox64,
                 Expanded(
                   child: TextButton.icon(
+                    style: const ButtonStyle(alignment: Alignment.center),
                     onPressed: () => context.goNamed(KRoute.information.name),
                     label: Text(
                       context.l10n.information,

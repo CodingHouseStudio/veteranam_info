@@ -55,7 +55,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyA8CbivBU82h3WhxgoZ0mkdMq5y1OEfbQk',
-    appId: '1:32851885972:android:523e345adc30cf4decd981',
+    appId: '1:32851885972:android:d920f90e0bb70673ecd981',
     messagingSenderId: '32851885972',
     projectId: 'veteran-development',
     storageBucket: 'veteran-development.appspot.com',
@@ -63,7 +63,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyCbrgwKWeMZ69SHecID9NFHohsA7v8YOss',
-    appId: '1:32851885972:ios:8be191fe4c3d7aceecd981',
+    appId: '1:32851885972:ios:1f70471fce23766fecd981',
     messagingSenderId: '32851885972',
     projectId: 'veteran-development',
     storageBucket: 'veteran-development.appspot.com',
@@ -74,12 +74,12 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions macos = FirebaseOptions(
     apiKey: 'AIzaSyCbrgwKWeMZ69SHecID9NFHohsA7v8YOss',
-    appId: '1:32851885972:ios:8be191fe4c3d7aceecd981',
+    appId: '1:32851885972:ios:658759515917d638ecd981',
     messagingSenderId: '32851885972',
     projectId: 'veteran-development',
     storageBucket: 'veteran-development.appspot.com',
     iosClientId:
-        '32851885972-39m4c4lb48qj9p40542l7o0d8hebfoaa.apps.googleusercontent.com',
-    iosBundleId: 'info.veteranam.dev',
+        '32851885972-dug7bniacnr414ninjv0uc45v527q1j7.apps.googleusercontent.com',
+    iosBundleId: 'com.example.myApp',
   );
 }

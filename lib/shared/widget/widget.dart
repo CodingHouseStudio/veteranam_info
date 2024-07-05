@@ -53,6 +53,7 @@ export 'sign_up_login_bottom_buttons_widget.dart';
 export 'skeletonizer_widget.dart';
 export 'statistic_box_widget.dart';
 export 'story_card_widget.dart';
+export 'svg_image_widget.dart';
 export 'switch_widget.dart';
 export 'switch_widget_withoud_bloc.dart';
 export 'text_field_widget.dart';
