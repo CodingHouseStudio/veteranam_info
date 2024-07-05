@@ -49,8 +49,6 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
       builder: (BuildContext context, BoxConstraints constraints) {
         final isDesk =
             constraints.maxWidth > KPlatformConstants.minWidthThresholdDesk;
-        final isTablet =
-            constraints.maxWidth > KPlatformConstants.minWidthThresholdTablet;
         final titleChildWidget =
             widget.titleChildWidgetsFunction?.call(isDesk: isDesk);
         final mainChildWidget = widget.mainChildWidgetsFunction(isDesk: isDesk)
@@ -120,7 +118,6 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
               SliverPersistentHeader(
                 delegate: NawbarWidget(
                   isDesk: isDesk,
-                  isTablet: isTablet,
                 ),
               ),
               if (titleChildWidget != null)
@@ -150,7 +147,6 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
                             isDesk: isDesk,
                             childWidget: widget.mainRightChildWidget,
                             maxMinHeight: constraints.maxHeight,
-                            isTablet: isTablet,
                           ),
                         ),
                         leftWidthPercent: 0.3,

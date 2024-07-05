@@ -7,14 +7,12 @@ import 'package:veteranam/shared/shared.dart';
 class NawbarWidget extends SliverPersistentHeaderDelegate {
   const NawbarWidget({
     required this.isDesk,
-    required this.isTablet,
     this.widgetKey,
     this.childWidget,
     this.maxMinHeight,
   });
 
   final bool isDesk;
-  final bool isTablet;
   final Key? widgetKey;
   final Widget? childWidget;
   final double? maxMinHeight;
@@ -40,7 +38,6 @@ class NawbarWidget extends SliverPersistentHeaderDelegate {
       key: widgetKey,
       isDesk: isDesk,
       childWidget: childWidget,
-      isTablet: isTablet,
     );
   }
 }
@@ -48,13 +45,11 @@ class NawbarWidget extends SliverPersistentHeaderDelegate {
 class _NawbarWidgetImplematation extends StatefulWidget {
   const _NawbarWidgetImplematation({
     required this.isDesk,
-    required this.isTablet,
     super.key,
     this.childWidget,
   });
 
   final bool isDesk;
-  final bool isTablet;
   final Widget? childWidget;
 
   @override
@@ -213,43 +208,34 @@ class _NawbarWidgetImplematationState
               //       icon: KIcon.mic,
               //     ),
               //   ),
-              if (widget.isDesk && Config.isProduction) ...[
+              if (widget.isDesk ||
+                  Config.isProduction ||
+                  Config.isDevelopment) ...[
                 const LanguagesSwitcherWidget(),
                 KSizedBox.kWidthSizedBox8,
               ],
               if (context.read<AuthenticationBloc>().state.status !=
                       AuthenticationStatus.authenticated &&
                   Config.isDevelopment)
-                if (widget.isDesk && Config.isDevelopment)
-                  const LanguagesSwitcherWidget(),
-              if (widget.isDesk)
-                KSizedBox.kWidthSizedBox8
-              else
-                KSizedBox.kWidthSizedBox4,
-              if (widget.isDesk)
-                TextButton(
-                  key: KWidgetkeys.widget.nawbar.button,
-                  style: KButtonStyles.whiteButtonStyle,
-                  onPressed: () => context.goNamed(KRoute.login.name),
-                  child: Text(
-                    context.l10n.login,
-                    style: AppTextStyle.text24,
-                  ),
-                )
-              else if (!isFocused) ...[
-                const LanguagesSwitcherWidget(),
                 if (widget.isDesk)
-                  KSizedBox.kWidthSizedBox8
-                else
-                  KSizedBox.kWidthSizedBox4,
-                IconButtonWidget(
-                  key: KWidgetkeys.widget.nawbar.iconPersonLogin,
-                  onPressed: () => context.goNamed(KRoute.login.name),
-                  icon: KIcon.person
-                      .copyWith(color: AppColors.materialThemeWhite),
-                  background: AppColors.materialThemeKeyColorsSecondary,
-                ),
-              ],
+                  TextButton(
+                    key: KWidgetkeys.widget.nawbar.button,
+                    style: KButtonStyles.whiteButtonStyle,
+                    onPressed: () => context.goNamed(KRoute.login.name),
+                    child: Text(
+                      context.l10n.login,
+                      style: AppTextStyle.text24,
+                    ),
+                  )
+                else if (!isFocused) ...[
+                  IconButtonWidget(
+                    key: KWidgetkeys.widget.nawbar.iconPerson,
+                    onPressed: () => context.goNamed(KRoute.login.name),
+                    icon: KIcon.person
+                        .copyWith(color: AppColors.materialThemeWhite),
+                    background: AppColors.materialThemeKeyColorsSecondary,
+                  ),
+                ],
               if (context.read<AuthenticationBloc>().state.status ==
                       AuthenticationStatus.authenticated &&
                   Config.isDevelopment)
