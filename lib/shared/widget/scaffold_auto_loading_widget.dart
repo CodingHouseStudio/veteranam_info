@@ -185,7 +185,11 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
   }
 
   void _onScroll() {
-    if (_isBottom && widget.listCanLoaded) widget.loadFunction();
+    if (_isBottom &&
+        widget.listCanLoaded &&
+        !(widget.cardListIsEmpty ?? false)) {
+      widget.loadFunction();
+    }
   }
 
   bool get _isBottom {
