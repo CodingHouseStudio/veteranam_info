@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:kozak/shared/shared.dart';
-import 'package:share_plus/share_plus.dart';
 
 class CardTextDetailEvaluateWidget extends StatefulWidget {
   const CardTextDetailEvaluateWidget({
