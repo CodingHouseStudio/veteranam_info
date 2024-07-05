@@ -37,8 +37,7 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
   void initState() {
     super.initState();
     _scrollController = ScrollController();
-    if (!KPlatformConstants.isWebDesktop &&
-        !(widget.cardListIsEmpty ?? false)) {
+    if (!KPlatformConstants.isWebDesktop) {
       _scrollController.addListener(_onScroll);
     }
   }
@@ -186,7 +185,11 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
   }
 
   void _onScroll() {
-    if (_isBottom && widget.listCanLoaded) widget.loadFunction();
+    if (_isBottom &&
+        widget.listCanLoaded &&
+        !(widget.cardListIsEmpty ?? false)) {
+      widget.loadFunction();
+    }
   }
 
   bool get _isBottom {
