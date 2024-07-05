@@ -319,7 +319,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "verifiedInformation":
             MessageLookupByLibrary.simpleMessage("Перевірена інформація"),
         "wage": MessageLookupByLibrary.simpleMessage("Заробітна плата*"),
-        "website": MessageLookupByLibrary.simpleMessage("Сайт"),
+        "website": MessageLookupByLibrary.simpleMessage("Веб сайт"),
         "whatKindOfProject":
             MessageLookupByLibrary.simpleMessage("Що це за проект?"),
         "whatYouMostInterestedIn": MessageLookupByLibrary.simpleMessage(

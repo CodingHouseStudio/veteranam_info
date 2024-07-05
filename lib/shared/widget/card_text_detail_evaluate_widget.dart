@@ -71,7 +71,9 @@ class _CardTextDetailEvaluateWidgetState
       childWidget: Center(
         key: KWidgetkeys.widget.cardTextDetailEvaluate.widget,
         child: ConstrainedBox(
-          constraints: const BoxConstraints(),
+          constraints: const BoxConstraints(
+            maxWidth: KMinMaxSize.maxWidth640,
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -187,18 +189,11 @@ class _CardTextDetailEvaluateWidgetState
                           ),
                           text: context.l10n.more,
                           onPressed: null,
-                        text: context.l10n.share,
-                        onPressed: _informationShareLink,
-                      ),
-                      if (widget.isDesk)
-                        KSizedBox.kWidthSizedBox24
-                      else
-                        KSizedBox.kWidthSizedBox8,
-                      buildIcon(
-                        icon: KIcon.safe.copyWith(
-                          key: KWidgetkeys
-                              .widget.cardTextDetailEvaluate.iconSave,
                         ),
+                        if (widget.isDesk)
+                          KSizedBox.kWidthSizedBox24
+                        else
+                          KSizedBox.kWidthSizedBox8,
                       ],
                     ),
                   ],
@@ -253,12 +248,6 @@ class _CardTextDetailEvaluateWidgetState
           style: AppTextStyle.materialThemeLabelSmall,
         ),
       ],
-    );
-  }
-
-  Future<void> _informationShareLink() async {
-    await Share.share(
-      widget.directLink ?? widget.link!,
     );
   }
 }
