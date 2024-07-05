@@ -147,6 +147,7 @@ class ReportDialogWidget extends StatelessWidget {
               hasAlign: isDesk,
               mobTextWidth: double.infinity,
               mobVerticalTextPadding: KPadding.kPaddingSize16,
+              mobIconPadding: KPadding.kPaddingSize16,
             ),
           ],
         ),
