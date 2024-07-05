@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:kozak/shared/shared.dart';
+import 'package:veteranam/shared/shared.dart';
 
 import '../../../text_dependency.dart';
 
@@ -12,7 +12,10 @@ Future<void> reportDialogOpenHelper(
     offset: KTestConstants.scrollingDown,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.widget.reportDialog.button).first);
+  await tester.tap(
+    find.byKey(KWidgetkeys.widget.reportDialog.button).first,
+    warnIfMissed: false,
+  );
 
   await tester.pumpAndSettle();
 

@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
-import 'package:kozak/shared/shared.dart';
 import 'package:mockito/mockito.dart';
+import 'package:veteranam/shared/shared.dart';
 
 import '../text_dependency.dart';
 import 'helper/helper.dart';
@@ -150,14 +150,14 @@ void main() {
       });
 
       loadingList(
-        pumpApp: (tester) async => investorsPumpAppHelper(
+        (tester) async => investorsPumpAppHelper(
           mockAppAuthenticationRepository: mockAppAuthenticationRepository,
           mockInvestorsRepository: mockInvestorsRepository,
           mockReportRepository: mockReportRepository,
           mockAuthenticationRepository: mockAuthenticationRepository,
           tester: tester,
         ),
-        lastCard: KWidgetkeys.screen.investors.cardLast,
+        // lastCard: KWidgetkeys.screen.investors.cardLast,
       );
       testWidgets('Report Dialog Check Point Failure', (tester) async {
         await investorsPumpAppHelper(

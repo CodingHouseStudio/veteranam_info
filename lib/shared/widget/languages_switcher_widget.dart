@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:kozak/shared/shared.dart';
+import 'package:veteranam/shared/shared.dart';
 
 class LanguagesSwitcherWidget extends StatelessWidget {
   const LanguagesSwitcherWidget({super.key});

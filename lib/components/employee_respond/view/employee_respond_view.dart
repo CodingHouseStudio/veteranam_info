@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:kozak/components/employee_respond/widget/body/employee_respond_body.dart';
-import 'package:kozak/shared/constants/constants.dart';
+import 'package:veteranam/components/components.dart';
+import 'package:veteranam/shared/shared.dart';
 
 class EmployeeRespondScreen extends StatelessWidget {
   const EmployeeRespondScreen({super.key});

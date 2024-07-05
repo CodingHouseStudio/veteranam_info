@@ -1,25 +1,12 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:kozak/shared/shared.dart';
+import 'package:veteranam/shared/shared.dart';
 
 import '../../text_dependency.dart';
 
 Future<void> investorsMockButtonHelper(
   WidgetTester tester,
 ) async {
-  await scrollingHelper(
-    tester: tester,
-    itemKey: KWidgetkeys.screen.investors.feedbackTitle,
-  );
-
-  await scrollingHelper(
-    tester: tester,
-    itemKey: KWidgetkeys.screen.investors.leftImages,
-  );
-
-  await scrollingHelper(
-    tester: tester,
-    itemKey: KWidgetkeys.screen.investors.fundsPoint,
-  );
+  await scrollingHelper(tester: tester, offset: KTestConstants.scrollingDown);
 
   await mockButtonHelper(
     tester: tester,

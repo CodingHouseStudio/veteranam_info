@@ -76,9 +76,9 @@
 
   <!-- images -->
   <!-- <link rel="preload" href="assets/assets/images/logo.svg" as="image" type="image/svg"> -->
-  <link rel="preload" href="assets/assets/images/home_image.png" as="image" type="image/png">
+  <!-- <link rel="preload" href="assets/assets/images/home_image.png" as="image" type="image/png">
   <link rel="preload" href="assets/assets/images/discount_image.png" as="image" type="image/png">
-  <link rel="preload" href="assets/assets/images/information_image.png" as="image" type="image/png">
+  <link rel="preload" href="assets/assets/images/information_image.png" as="image" type="image/png"> -->
   <!-- <link rel="preload" href="assets/assets/images/logo_home.svg" as="image" type="image/svg"> -->
   <!-- <link rel="preload" href="assets/assets/images/veteran1.png" as="image" crossorigin>
   <link rel="preload" href="assets/assets/images/veteran2.png" as="image" crossorigin>
@@ -99,15 +99,15 @@
       height: 100vh;
     }
 
-    #splash {
+    .splash {
       align-items: center;
       display: flex;
       /* Center both horizontally and vertically */
-      height: 100vh;
-      /* Using vh for viewport height ensures full-screen coverage */
+      height: 25vh;
+      /* Set height to 25% of the viewport height */
       justify-content: center;
-      width: 100vw;
-      /* Using vw for viewport width ensures full-screen coverage */
+      width: 25vw;
+      /* Set width to 25% of the viewport width */
     }
 
     #splash img {
@@ -153,24 +153,41 @@
     }
 
     @keyframes bounce {
-      0%, 20%, 50%, 80%, 100% {
+
+      0%,
+      20%,
+      50%,
+      80%,
+      100% {
         transform: translateY(0);
       }
+
       40% {
-        transform: translateY(-30px);
+        transform: translateY(-40px);
       }
+
       60% {
-        transform: translateY(-15px);
+        transform: translateY(-20px);
       }
+
+      /* 40% {
+    transform: translateY(-30px) ease-in-out;
+    transform: scale(1.1); 
+    }
+
+    60% {
+      transform: translateY(-15px) ease-in-out;
+      transform: scale(1.1);
+    }*/
     }
   </style>
 
 </head>
 
 <body style="font-family: Tahoma, Verdana, sans-serif">
-<!--  <div id="splash">-->
-<!--    <img src="icons/logo_image.svg" alt="Loading indicator..." />-->
-<!--  </div>-->
+  <!--  <div id="splash">-->
+  <!--    <img src="icons/logo_image.svg" alt="Loading indicator..." />-->
+  <!--  </div>-->
 
   <div class="splash">
     <img src="icons/logo_image.svg" alt="Loading indicator..." class="bouncing-image">

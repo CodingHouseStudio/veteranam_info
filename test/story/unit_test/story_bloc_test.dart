@@ -1,8 +1,8 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:kozak/components/components.dart';
-import 'package:kozak/shared/shared.dart';
 import 'package:mockito/mockito.dart';
+import 'package:veteranam/components/components.dart';
+import 'package:veteranam/shared/shared.dart';
 
 import '../../text_dependency.dart';
 
@@ -144,12 +144,12 @@ void main() {
         predicate<StoryWatcherState>(
           (state) => state.loadingStatus == LoadingStatus.loaded,
         ),
-        // predicate<StoryWatcherState>(
-        //   (state) =>
-        //       state.loadingStatus == LoadingStatus.loaded &&
-        //       state.loadingStoryModelItems.length != KDimensions.loadItems &&
-        //       state.itemsLoaded != KDimensions.loadItems,
-        // ),
+        predicate<StoryWatcherState>(
+          (state) => state.loadingStatus == LoadingStatus.listLoadedFull,
+          // &&
+          // state.loadingStoryModelItems.length != KDimensions.loadItems &&
+          // state.itemsLoaded != KDimensions.loadItems,
+        ),
       ],
     );
 

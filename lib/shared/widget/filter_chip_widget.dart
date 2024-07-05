@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kozak/shared/shared.dart';
+import 'package:veteranam/shared/shared.dart';
 
 class FiltersChipWidget extends StatelessWidget {
   const FiltersChipWidget({
@@ -46,7 +46,7 @@ class FiltersChipWidget extends StatelessWidget {
                   AppColors.materialThemeWhite,
                   AppColors.materialThemeWhite.withOpacity(0.03),
                 ],
-                stops: const [0.6, 1],
+                stops: const [0.8, 1],
                 tileMode: TileMode.mirror,
               ).createShader(bounds);
             },

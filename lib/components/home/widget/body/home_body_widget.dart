@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
-import 'package:kozak/components/components.dart';
-import 'package:kozak/shared/shared.dart';
+import 'package:veteranam/components/components.dart';
+import 'package:veteranam/shared/shared.dart';
 
 part '../box_widget_list.dart';
 part '../question_widget_list.dart';
@@ -108,12 +108,13 @@ class HomeBodyWidget extends StatelessWidget {
                   ),
                 ),
               ),
-              leftWidget: KImage.discountImage
-                  .setKey(KWidgetkeys.screen.home.discountImage),
+              leftWidget: KImage.discountImage(
+                key: KWidgetkeys.screen.home.discountImage,
+              ),
               rightPadding: KPadding.kPaddingSize84,
             )
           else ...[
-            KImage.discountImage.setKey(KWidgetkeys.screen.home.discountImage),
+            KImage.discountImage(key: KWidgetkeys.screen.home.discountImage),
             if (isTablet)
               KSizedBox.kWidthSizedBox48
             else
@@ -166,13 +167,15 @@ class HomeBodyWidget extends StatelessWidget {
                   ),
                 ),
               ),
-              rightWidget: KImage.inforamationImage
-                  .setKey(KWidgetkeys.screen.home.informationImage),
+              rightWidget: KImage.inforamationImage(
+                key: KWidgetkeys.screen.home.informationImage,
+              ),
               rightPadding: KPadding.kPaddingSize32,
             )
           else ...[
-            KImage.inforamationImage
-                .setKey(KWidgetkeys.screen.home.informationImage),
+            KImage.inforamationImage(
+              key: KWidgetkeys.screen.home.informationImage,
+            ),
             if (isTablet)
               KSizedBox.kWidthSizedBox48
             else

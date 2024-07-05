@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:kozak/shared/shared.dart';
+import 'package:veteranam/shared/shared.dart';
 
 /// COMMENT: Helpers for scroll screen in integration tests
 ///
@@ -13,12 +13,14 @@ Future<void> scrollingHelperInt({
   Key? itemKey,
 }) async {
   if (offset != null) {
-    await tester.drag(find.byKey(KWidgetkeys.widget.scaffold.scroll), offset);
+    await tester.drag(
+      find.byKey(KWidgetkeys.widget.scaffold.scroll),
+      offset,
+    );
+    await tester.pumpAndSettle();
   }
-  await tester.pumpAndSettle();
   if (itemKey != null) {
     await tester.ensureVisible(find.byKey(itemKey).first);
     await tester.pumpAndSettle();
   }
-  await tester.pumpAndSettle();
 }

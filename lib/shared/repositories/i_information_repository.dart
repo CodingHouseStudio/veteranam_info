@@ -1,4 +1,4 @@
-import 'package:kozak/shared/shared.dart';
+import 'package:veteranam/shared/shared.dart';
 
 abstract class IInformationRepository {
   Stream<List<InformationModel>> getInformationItems();
