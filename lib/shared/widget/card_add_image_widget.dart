@@ -59,7 +59,7 @@ class CardAddImageWidget extends StatelessWidget {
             child: ImageWidget(
               key: KWidgetkeys.widget.cardAddImage.widget,
               imageUrl: image!.downloadURL,
-              fit: BoxFit.cover,
+              fit: BoxFit.fill,
             ),
           ),
         ),
