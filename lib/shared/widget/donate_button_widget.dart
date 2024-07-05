@@ -149,9 +149,11 @@ class _DonateButtonWidgetMob extends StatelessWidget {
               ),
             ),
             IconWidget(
+              padding: KPadding.kPaddingSize16,
               icon: icon ??
                   KIcon.arrowUpRight.copyWith(
                     color: AppColors.materialThemeKeyColorsNeutral,
+                    size: KSize.kPixel30,
                   ),
               background: AppColors.materialThemeKeyColorsSecondary,
             ),
