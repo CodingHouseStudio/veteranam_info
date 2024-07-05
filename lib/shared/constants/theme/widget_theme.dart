@@ -142,6 +142,17 @@ abstract class KWidgetTheme {
     labelStyle: AppTextStyle.materialThemeTitleMedium,
     alignLabelWithHint: true,
   );
+
+  static const textFieldDecoration = BoxDecoration(
+    color: AppColors.materialThemeWhite,
+    border: Border.fromBorderSide(
+      BorderSide(
+        color: AppColors.materialThemeRefNeutralNeutral80,
+      ),
+    ),
+    borderRadius: KBorderRadius.kBorderRadius32,
+  );
+
   static const boxDecorationDiscountContainer = BoxDecoration(
     borderRadius: KBorderRadius.kBorderRadius32,
     color: AppColors.materialThemeWhite,

@@ -58,7 +58,7 @@ class SignUpLoginBottomButtonsWidget extends StatelessWidget {
                 child: buildBottomButton(
                   key: KWidgetkeys.widget.signUpBottomButtons.facebook,
                   text: context.l10n.facebook,
-                  icon: KImage.facebook,
+                  icon: KImage.facebook(),
                 ),
               ),
               KSizedBox.kWidthSizedBox16,
@@ -66,7 +66,7 @@ class SignUpLoginBottomButtonsWidget extends StatelessWidget {
                 child: buildBottomButton(
                   key: KWidgetkeys.widget.signUpBottomButtons.apple,
                   text: context.l10n.apple,
-                  icon: KImage.apple,
+                  icon: KImage.apple(),
                 ),
               ),
             ],
@@ -94,13 +94,13 @@ class SignUpLoginBottomButtonsWidget extends StatelessWidget {
           buildBottomButton(
             key: KWidgetkeys.widget.signUpBottomButtons.facebook,
             text: context.l10n.facebook,
-            icon: KImage.facebook,
+            icon: KImage.facebook(),
           ),
           KSizedBox.kHeightSizedBox16,
           buildBottomButton(
             key: KWidgetkeys.widget.signUpBottomButtons.apple,
             text: context.l10n.apple,
-            icon: KImage.apple,
+            icon: KImage.apple(),
           ),
         ],
       );
@@ -111,7 +111,7 @@ class SignUpLoginBottomButtonsWidget extends StatelessWidget {
         isDesk: true,
         key: KWidgetkeys.widget.signUpBottomButtons.google,
         text: context.l10n.google,
-        picture: KImage.google,
+        picture: KImage.google(),
         onPressed: () => context
             .read<AuthenticationServicesCubit>()
             .authenticationUseGoogle(),
