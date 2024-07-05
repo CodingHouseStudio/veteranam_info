@@ -540,10 +540,10 @@ class AppLocalizations {
     );
   }
 
-  /// `Email too short`
+  /// `too short`
   String get tooShortEmail {
     return Intl.message(
-      'Email too short',
+      'too short',
       name: 'tooShortEmail',
       desc: '',
       args: [],
