@@ -4,8 +4,6 @@ List<Widget> _fundsWidgetList({
   required BuildContext context,
   required bool isDesk,
 }) {
-  final isLoading = context.read<InvestorsWatcherBloc>().state.loadingStatus !=
-      LoadingStatus.loaded;
   final fundsModel =
       context.read<InvestorsWatcherBloc>().state.loadingFundItems;
   final fundsModelItems = <List<FundModel>>[];
@@ -22,17 +20,16 @@ List<Widget> _fundsWidgetList({
       context.read<InvestorsWatcherBloc>().state.failure == null;
   if (isDesk) {
     return cardWidgetList<List<FundModel>>(
-      isLoading: isLoading,
+      loadingStatus: context.read<InvestorsWatcherBloc>().state.loadingStatus,
       modelItems: fundsModelItems,
-      cardWidget: ({required modelItem, required key}) => DonatesCardsWidget(
+      cardWidget: ({required modelItem, required isLoading}) =>
+          DonatesCardsWidget(
         key: KWidgetkeys.screen.investors.cards,
         fundItems: modelItem,
         isLoading: isLoading,
       ),
       isDesk: isDesk,
       shimmerItemsNumber: KDimensions.shimmerFundsItems,
-      cardKey: KWidgetkeys.screen.investors.card,
-      cardLastKey: KWidgetkeys.screen.investors.cardLast,
       isNotFailure: isNotFailure,
       shimmerItem: List.generate(
         KDimensions.donateCardsLine,
@@ -41,18 +38,17 @@ List<Widget> _fundsWidgetList({
     );
   } else {
     return cardWidgetList<FundModel>(
-      isLoading: isLoading,
+      loadingStatus: context.read<InvestorsWatcherBloc>().state.loadingStatus,
       modelItems: fundsModel,
-      cardWidget: ({required modelItem, required key}) => DonateCardWidget(
-        key: key,
+      cardWidget: ({required modelItem, required isLoading}) =>
+          DonateCardWidget(
+        key: KWidgetkeys.screen.investors.card,
         fundModel: modelItem,
         isDesk: isDesk,
         hasSubtitle: true,
       ),
       isDesk: isDesk,
       shimmerItemsNumber: KDimensions.shimmerFundsItems,
-      cardKey: KWidgetkeys.screen.investors.card,
-      cardLastKey: KWidgetkeys.screen.investors.cardLast,
       isNotFailure: isNotFailure,
       shimmerItem: KMockText.fundModel,
     );

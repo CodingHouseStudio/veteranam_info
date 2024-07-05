@@ -5,18 +5,15 @@ List<Widget> _storiesWidgetList({
   required bool isDesk,
 }) =>
     cardWidgetList<StoryModel>(
-      isLoading: context.read<StoryWatcherBloc>().state.loadingStatus !=
-          LoadingStatus.loaded,
+      loadingStatus: context.read<StoryWatcherBloc>().state.loadingStatus,
       modelItems: context.read<StoryWatcherBloc>().state.loadingStoryModelItems,
-      cardWidget: ({required modelItem, required key}) => StoryCardWidget(
-        key: key,
+      cardWidget: ({required modelItem, required isLoading}) => StoryCardWidget(
+        key: KWidgetkeys.screen.story.card,
         storyModel: modelItem,
         isDesk: isDesk,
       ),
       isDesk: isDesk,
       shimmerItemsNumber: KDimensions.shimmerStoriesItems,
-      cardKey: KWidgetkeys.screen.story.card,
-      cardLastKey: KWidgetkeys.screen.story.cardLast,
       isNotFailure: context.read<StoryWatcherBloc>().state.failure == null,
       shimmerItem: KMockText.storyModel,
     );

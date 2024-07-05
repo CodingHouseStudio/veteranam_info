@@ -5,21 +5,18 @@ List<Widget> _newsWidgetList({
   required bool isDesk,
 }) =>
     cardWidgetList<InformationModel>(
-      isLoading: context.read<InformationWatcherBloc>().state.loadingStatus !=
-          LoadingStatus.loaded,
+      loadingStatus: context.read<InformationWatcherBloc>().state.loadingStatus,
       modelItems: context
           .read<InformationWatcherBloc>()
           .state
           .filteredInformationModelItems,
-      cardWidget: ({required modelItem, required key}) => NewsCardWidget(
-        key: key,
+      cardWidget: ({required modelItem, required isLoading}) => NewsCardWidget(
+        key: KWidgetkeys.screen.information.card,
         informationItem: modelItem,
         isDesk: isDesk,
       ),
       isDesk: isDesk,
       shimmerItemsNumber: KDimensions.shimmerInformationItems,
-      cardKey: KWidgetkeys.screen.information.card,
-      cardLastKey: KWidgetkeys.screen.information.cardLast,
       isNotFailure:
           context.read<InformationWatcherBloc>().state.failure == null,
       shimmerItem: KMockText.informationModel,

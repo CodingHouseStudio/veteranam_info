@@ -23,9 +23,8 @@ class DiscountBodyWidget extends StatelessWidget {
       builder: (context, _) {
         return ScaffoldAutoLoadingWidget(
           loadingButtonText: context.l10n.moreDiscounts,
-          listCanLoaded: _.discountModelItems.length >
-                  _.filteredDiscountModelItems.length ||
-              listCanLoaded,
+          listCanLoaded: _.loadingStatus != LoadingStatus.listLoadedFull,
+          cardListIsEmpty: _.filteredDiscountModelItems.isEmpty,
           titleChildWidgetsFunction: ({required isDesk}) => [
             KSizedBox.kHeightSizedBox24,
             ...TitleWidget.pointTitleWidgetList(
@@ -110,7 +109,7 @@ class DiscountBodyWidget extends StatelessWidget {
             else
               KSizedBox.kHeightSizedBox24,
           ],
-          scrollFunction: () => context
+          loadFunction: () => context
               .read<DiscountWatcherBloc>()
               .add(const DiscountWatcherEvent.loadNextItems()),
         );
