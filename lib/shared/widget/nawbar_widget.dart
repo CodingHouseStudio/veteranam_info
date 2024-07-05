@@ -110,7 +110,7 @@ class _NawbarWidgetImplematationState
                     Duration.zero,
                     () => context.goNamedWithScroll(KRoute.home.name),
                   ),
-                  icon: KImage.logo.copyWith(
+                  icon: KImage.logo(
                     key: KWidgetkeys.widget.nawbar.logo,
                   ),
                 ),
