@@ -37,8 +37,7 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
   void initState() {
     super.initState();
     _scrollController = ScrollController();
-    if (!KPlatformConstants.isWebDesktop &&
-        !(widget.cardListIsEmpty ?? false)) {
+    if (!KPlatformConstants.isWebDesktop) {
       _scrollController.addListener(_onScroll);
     }
   }
