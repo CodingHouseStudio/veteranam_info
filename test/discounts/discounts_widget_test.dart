@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
-import 'package:kozak/shared/shared.dart';
 import 'package:mockito/mockito.dart';
+import 'package:veteranam/shared/shared.dart';
 
 import '../text_dependency.dart';
 import 'helper/helper.dart';
@@ -68,7 +68,7 @@ void main() {
     group('${KGroupText.getList} ', () {
       setUp(() {
         when(mockDiscountRepository.getDiscountItems()).thenAnswer(
-          (invocation) => Stream.value(KTestText.discountModelItems),
+          (invocation) => Stream.value(KTestText.discountModelItemsModify),
         );
       });
       testWidgets('${KGroupText.intial} ', (tester) async {
@@ -80,12 +80,12 @@ void main() {
         await discountInitialHelper(tester);
       });
 
-      loadingListSeparate(
-        pumpApp: (tester) async => discountsPumpAppHelper(
+      loadingList(
+        (tester) async => discountsPumpAppHelper(
           tester: tester,
           mockDiscountRepository: mockDiscountRepository,
         ),
-        lastCard: KWidgetkeys.screen.discounts.cardLast,
+        // lastCard: KWidgetkeys.screen.discounts.cardLast,
       );
 
       group('${KGroupText.goRouter} ', () {

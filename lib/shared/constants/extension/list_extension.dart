@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:kozak/components/components.dart';
-import 'package:kozak/shared/shared.dart';
+import 'package:veteranam/components/components.dart';
+import 'package:veteranam/shared/shared.dart';
 
 extension FilterItems on List<FilterItem> {
   List<FilterItem> get getToSet {
@@ -34,6 +34,7 @@ extension ListExtensions<T> on List<T> {
     required List<dynamic> Function(T item) getFilter,
     int? loadItems,
     List<dynamic>? overallFilter,
+    List<T>? fullList,
   }) {
     if (isEmpty) return [];
 
@@ -45,8 +46,8 @@ extension ListExtensions<T> on List<T> {
         filtersIndex.contains(-1)) {
       return take(loadedItemsCount).toList();
     }
-    final overallFilterValue =
-        overallFilter ?? overallItemBloc(getFilter: getFilter);
+    final overallFilterValue = overallFilter ??
+        overallItemBloc(getFilter: getFilter, fullList: fullList);
 
     final filtersText = filtersIndex
         .map(
@@ -61,9 +62,10 @@ extension ListExtensions<T> on List<T> {
 
   List<dynamic> overallItemBloc({
     required List<dynamic> Function(T) getFilter,
+    List<T>? fullList,
   }) {
     final allTags = <dynamic>[];
-    for (final item in this) {
+    for (final item in fullList ?? this) {
       allTags.addAll(
         getFilter(item),
       );
@@ -90,6 +92,22 @@ extension ListExtensions<T> on List<T> {
       );
     }
     return allFilters.getToSet;
+  }
+
+  LoadingStatus isLoading(
+    List<T> previousList,
+  ) {
+    return length > previousList.length
+        ? LoadingStatus.loaded
+        : LoadingStatus.listLoadedFull;
+  }
+
+  LoadingStatus isLoadingFilter(
+    List<T> previousList,
+  ) {
+    return length >= previousList.length
+        ? LoadingStatus.loaded
+        : LoadingStatus.listLoadedFull;
   }
 
   // List<T> filterIndex(T eventFilterIndex) {
@@ -128,6 +146,28 @@ extension ListExtensionsNull<T> on List<T>? {
 extension ExtendedImage on List<ImageModel>? {
   String? get firstImage =>
       this?.isNotEmpty ?? false ? this!.first.downloadURL : null;
+}
+
+extension ListIntExtension on List<int> {
+  String getDiscountString(BuildContext context) {
+    if (isEmpty) {
+      return '';
+    }
+    if (length == 1) {
+      if (first == 100) {
+        return context.l10n.free;
+      }
+      return '${context.l10n.discount} $first%';
+    }
+
+    var highestItem = elementAt(0);
+    for (var i = 1; i < length; i++) {
+      if (elementAt(i) > highestItem) {
+        highestItem = elementAt(i);
+      }
+    }
+    return '${context.l10n.discounts} ${context.l10n.ofUpTo} $highestItem%';
+  }
 }
 
 extension DiscountModelExtensions on List<DiscountModel> {

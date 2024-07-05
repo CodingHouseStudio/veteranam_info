@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:kozak/shared/shared.dart';
+import 'package:veteranam/shared/shared.dart';
 
 part 'information_watcher_bloc.freezed.dart';
 part 'information_watcher_event.dart';
@@ -83,10 +83,7 @@ class InformationWatcherBloc
     Emitter<InformationWatcherState> emit,
   ) {
     if (state.itemsLoaded.checkLoadingPosible(state.informationModelItems)) {
-      return;
-    }
-    emit(state.copyWith(loadingStatus: LoadingStatus.loading));
-    if (state.itemsLoaded.checkLoadingPosible(state.informationModelItems)) {
+      emit(state.copyWith(loadingStatus: LoadingStatus.listLoadedFull));
       return;
     }
     emit(state.copyWith(loadingStatus: LoadingStatus.loading));
@@ -99,7 +96,8 @@ class InformationWatcherBloc
         filteredInformationModelItems: filterItems,
         itemsLoaded: (state.itemsLoaded + KDimensions.loadItems)
             .getLoaded(list: filterItems),
-        loadingStatus: LoadingStatus.loaded,
+        loadingStatus:
+            filterItems.isLoading(state.filteredInformationModelItems),
       ),
     );
   }
@@ -134,6 +132,8 @@ class InformationWatcherBloc
         filteredInformationModelItems: filterItems,
         filtersIndex: selectedFilters,
         itemsLoaded: state.itemsLoaded.getLoaded(list: filterItems),
+        loadingStatus:
+            filterItems.isLoadingFilter(state.filteredInformationModelItems),
       ),
     );
   }

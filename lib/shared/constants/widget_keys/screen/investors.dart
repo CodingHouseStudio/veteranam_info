@@ -13,7 +13,7 @@ class _InvestorsKeys {
   final fundsPoint = const Key('investors_screen_funds_point');
   final fundsTitle = const Key('investors_screen_funds_title');
   final card = const Key('investors_screen_card');
-  final cardLast = const Key('investors_screen_card_last');
+  // final cardLast = const Key('investors_screen_card_last');
   final cards = const Key('investors_screen_cards');
   // final button = const Key('investors_screen_button');
 }

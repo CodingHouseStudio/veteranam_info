@@ -2,11 +2,11 @@ import 'package:bloc/bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:kozak/shared/shared.dart';
+import 'package:veteranam/shared/shared.dart';
 
+part 'feedback_bloc.freezed.dart';
 part 'feedback_event.dart';
 part 'feedback_state.dart';
-part 'feedback_bloc.freezed.dart';
 
 @Injectable()
 class FeedbackBloc extends Bloc<FeedbackEvent, FeedbackState> {

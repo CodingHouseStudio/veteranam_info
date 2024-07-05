@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kozak/shared/shared.dart';
+import 'package:veteranam/shared/shared.dart';
 
 abstract class KButtonStyles {
   static const ButtonStyle widgetBackgroundButtonStyleWInf = ButtonStyle(
@@ -183,6 +183,21 @@ abstract class KButtonStyles {
     ),
   );
 
+  static const endListButtonStyle = ButtonStyle(
+    padding: WidgetStatePropertyAll(
+      EdgeInsets.symmetric(
+        horizontal: KPadding.kPaddingSize16,
+        vertical: KPadding.kPaddingSize4,
+      ),
+    ),
+    shape: WidgetStatePropertyAll(
+      RoundedRectangleBorder(
+        borderRadius: KBorderRadius.kBorderRadius32,
+        side: BorderSide(),
+      ),
+    ),
+  );
+
   static const dropListButtonStyle = ButtonStyle(
     minimumSize: WidgetStatePropertyAll(
       Size(KMinMaxSize.minWidth100, KMinMaxSize.minHeight50),
@@ -304,5 +319,8 @@ abstract class KButtonStyles {
         side: BorderSide(color: AppColors.materialThemeKeyColorsSecondary),
       ),
     ),
+  );
+  static const footerButtonTransparent = ButtonStyle(
+    overlayColor: WidgetStatePropertyAll(Colors.transparent),
   );
 }

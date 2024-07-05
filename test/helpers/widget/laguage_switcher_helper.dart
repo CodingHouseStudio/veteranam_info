@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:kozak/shared/shared.dart';
+import 'package:veteranam/shared/shared.dart';
 
 Future<void> languageSwitcherHelper(
   WidgetTester tester,
@@ -40,6 +40,7 @@ Future<void> languageSwitcherHelper(
 
   await tester.tap(
     find.byKey(KWidgetkeys.widget.languageSwitcher.item).last,
+    warnIfMissed: false,
   );
   await tester.pumpAndSettle();
 
@@ -59,6 +60,7 @@ Future<void> languageSwitcherHelper(
 
   await tester.tap(
     find.byKey(KWidgetkeys.widget.languageSwitcher.item).last,
+    warnIfMissed: false,
   );
   await tester.pumpAndSettle();
 
@@ -74,6 +76,7 @@ Future<void> languageSwitcherHelper(
 
   await tester.tap(
     find.byKey(KWidgetkeys.widget.languageSwitcher.item).first,
+    warnIfMissed: false,
   );
   await tester.pumpAndSettle();
 

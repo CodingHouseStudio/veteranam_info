@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:kozak/shared/shared.dart';
+import 'package:veteranam/shared/shared.dart';
 
 class WorkCardWidget extends StatelessWidget {
   const WorkCardWidget({
@@ -56,20 +56,17 @@ class WorkCardWidget extends StatelessWidget {
             CardTextDetailWidget(
               text: workModel.description,
               maxLines: 3,
-              icon: Row(
-                children: [
-                  KIcon.share
-                      .copyWith(key: KWidgetkeys.widget.workCard.iconShare),
-                  KSizedBox.kWidthSizedBox16,
-                  if (isSaved)
-                    KIcon.safe
-                        .copyWith(key: KWidgetkeys.widget.workCard.iconSafe)
-                  else
-                    KIcon.saved.copyWith(
-                      key: KWidgetkeys.widget.workCard.iconSafe,
-                    ),
-                ],
-              ),
+              icon: [
+                KIcon.share
+                    .copyWith(key: KWidgetkeys.widget.workCard.iconShare),
+                KSizedBox.kWidthSizedBox16,
+                if (isSaved)
+                  KIcon.safe.copyWith(key: KWidgetkeys.widget.workCard.iconSafe)
+                else
+                  KIcon.saved.copyWith(
+                    key: KWidgetkeys.widget.workCard.iconSafe,
+                  ),
+              ],
               isDesk: isDesk,
             ),
             KSizedBox.kHeightSizedBox16,
