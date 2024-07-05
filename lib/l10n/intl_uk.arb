@@ -49,7 +49,7 @@
   "clear": "Очистити",
   "fieldCannotBeEmpty": "Поле не може бути пустим",
   "tooshort": "закоротке",
-  "tooShortEmail": "Закоротке",
+  "tooShortEmail": "Закороткий",
   "isWrong": "не правильне",
   "isWrongEmail": "не правильний",
   "logOut": "Вийти",

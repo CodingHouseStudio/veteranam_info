@@ -321,7 +321,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Щоб отримати потрібно:"),
         "toInfomation": MessageLookupByLibrary.simpleMessage("До інформації"),
         "toVacancy": MessageLookupByLibrary.simpleMessage("До вакансій"),
-        "tooShortEmail": MessageLookupByLibrary.simpleMessage("Закоротке"),
+        "tooShortEmail": MessageLookupByLibrary.simpleMessage("Закороткий"),
         "tooShortPassword": MessageLookupByLibrary.simpleMessage("закороткий"),
         "tooshort": MessageLookupByLibrary.simpleMessage("закоротке"),
         "tryItAgain": MessageLookupByLibrary.simpleMessage("Спробувати ще раз"),
