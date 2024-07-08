@@ -247,6 +247,7 @@ class FirestoreService {
       (snapshot) {
         for (final change in snapshot.docChanges) {
           if (change.type == DocumentChangeType.added) {
+            // ignore: unused_local_variable
             final source =
                 (snapshot.metadata.isFromCache) ? 'local cache' : 'server';
             // debugPrint('Data fetched from $source');
