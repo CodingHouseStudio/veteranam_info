@@ -16,6 +16,10 @@ class FirestoreService {
 
   @visibleForTesting
   static FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+  @visibleForTesting
+  static const getOptions = GetOptions();
+  @visibleForTesting
+  static const getCahseOptions = GetOptions(source: Source.cache);
 
   Future<void> _initFirestoreSettings() async {
     // Set settings for persistence based on platform
@@ -53,7 +57,7 @@ class FirestoreService {
       // Try to get the data from the server first
       final docSnapshot = await _db
           .collection(FirebaseCollectionName.questions)
-          .get(const GetOptions());
+          .get(getOptions);
 
       // If the server fetch is successful, return the data
       return docSnapshot.docs
@@ -64,7 +68,7 @@ class FirestoreService {
         // If the server is unavailable, fall back to the cache
         final docSnapshot = await _db
             .collection(FirebaseCollectionName.questions)
-            .get(const GetOptions(source: Source.cache));
+            .get(getCahseOptions);
 
         return docSnapshot.docs
             .map((doc) => QuestionModel.fromJson(doc.data()))
@@ -78,9 +82,8 @@ class FirestoreService {
   Future<List<FundModel>> getFunds() async {
     try {
       // Try to get the data from the server first
-      final docSnapshot = await _db
-          .collection(FirebaseCollectionName.funds)
-          .get(const GetOptions());
+      final docSnapshot =
+          await _db.collection(FirebaseCollectionName.funds).get(getOptions);
 
       // If the server fetch is successful, return the data
       return docSnapshot.docs
@@ -92,7 +95,7 @@ class FirestoreService {
         // If the server is unavailable, fall back to the cache
         final docSnapshot = await _db
             .collection(FirebaseCollectionName.funds)
-            .get(const GetOptions(source: Source.cache));
+            .get(getCahseOptions);
 
         return docSnapshot.docs
             .map((doc) => FundModel.fromJson(doc.data()))
@@ -124,8 +127,9 @@ class FirestoreService {
         (snapshot) {
           for (final change in snapshot.docChanges) {
             if (change.type == DocumentChangeType.added) {
-              // final source =
-              //     (snapshot.metadata.isFromCache) ? 'local cache' : 'server';
+              // ignore: unused_local_variable
+              final source =
+                  (snapshot.metadata.isFromCache) ? 'local cache' : 'server';
               // debugPrint('Data fetched from $source}');
             }
           }
@@ -159,8 +163,9 @@ class FirestoreService {
           .map(
         (snapshot) {
           if (snapshot.exists) {
-            // final source =
-            //     (snapshot.metadata.isFromCache) ? 'local cache' : 'server';
+            // ignore: unused_local_variable
+            final source =
+                (snapshot.metadata.isFromCache) ? 'local cache' : 'server';
             // debugPrint('Data fetched from $source}');
             return UserSetting.fromJson(snapshot.data()!);
           } else {
@@ -185,8 +190,9 @@ class FirestoreService {
         (snapshot) {
           for (final change in snapshot.docChanges) {
             if (change.type == DocumentChangeType.added) {
-              // final source =
-              //     (snapshot.metadata.isFromCache) ? 'local cache' : 'server';
+              // ignore: unused_local_variable
+              final source =
+                  (snapshot.metadata.isFromCache) ? 'local cache' : 'server';
               // debugPrint('Data fetched from $source}');
             }
           }
@@ -210,8 +216,9 @@ class FirestoreService {
         (snapshot) {
           for (final change in snapshot.docChanges) {
             if (change.type == DocumentChangeType.added) {
-              // final source =
-              //     (snapshot.metadata.isFromCache) ? 'local cache' : 'server';
+              // ignore: unused_local_variable
+              final source =
+                  (snapshot.metadata.isFromCache) ? 'local cache' : 'server';
               // debugPrint('Data fetched from $source}');
             }
           }
@@ -247,6 +254,7 @@ class FirestoreService {
       (snapshot) {
         for (final change in snapshot.docChanges) {
           if (change.type == DocumentChangeType.added) {
+            // ignore: unused_local_variable
             final source =
                 (snapshot.metadata.isFromCache) ? 'local cache' : 'server';
             // debugPrint('Data fetched from $source');
