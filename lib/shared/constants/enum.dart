@@ -1,6 +1,6 @@
 enum LoadingStatus { initial, loading, loaded, error, listLoadedFull }
 
-enum EvaluationEnum { like, dislike, smile, none }
+//enum EvaluationEnum { like, dislike, smile, none }
 
 class FilterItem {
   FilterItem(this.value);
