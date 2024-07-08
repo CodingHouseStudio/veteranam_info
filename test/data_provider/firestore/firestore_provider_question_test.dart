@@ -43,7 +43,7 @@ void main() {
       );
 
       when(
-        mockCollectionReference.get(),
+        mockCollectionReference.get(FirestoreService.getOptions),
       ).thenAnswer(
         (_) async => mockQuerySnapshot,
       );
@@ -87,7 +87,7 @@ void main() {
         mockFirebaseFirestore.collection(FirebaseCollectionName.questions),
       ).called(1);
       verify(
-        mockCollectionReference.get(),
+        mockCollectionReference.get(FirestoreService.getOptions),
       ).called(1);
       verify(
         mockQuerySnapshot.docs,
