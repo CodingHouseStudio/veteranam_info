@@ -242,6 +242,14 @@ abstract class KTestText {
       ),
   ];
 
+  static final fundItemsWithImage = <FundModel>[
+    for (var i = 0; i < 40; i++)
+      KMockText.fundModel.copyWith(
+        id: i.toString(),
+        image: imageModel,
+      ),
+  ];
+
   static final feedbackModelIncorect = FeedbackModel(
     id: dateTime.microsecondsSinceEpoch.toString(),
     guestId: dateTime.microsecondsSinceEpoch.toString(),
