@@ -341,7 +341,13 @@ class DiscountsCardWidgetMob extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(left: KPadding.kPaddingSize16),
                   child: SharedIconListWidget(
-                    text: '${discountItem.description} ',
+                    text: '${discountItem.description}\n'
+                        '\n${context.l10n.toGetItYouNeed}' //Title medium
+                        '\n${discountItem.requirements}\n'
+                        '\n${discountItem.exclusions}\n'
+                        // ignore: lines_longer_than_80_chars
+                        '${discountItem.additionalDetails != null ? '\n${discountItem.additionalDetails}\n' : ''}'
+                        '\n${discountItem.phoneNumber}',
                     isDesk: isDesk,
                     cardEnum: CardEnum.discount,
                     link: discountItem.directLink ?? discountItem.link,
