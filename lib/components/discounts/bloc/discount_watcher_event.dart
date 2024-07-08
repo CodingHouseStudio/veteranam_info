@@ -21,4 +21,7 @@ class DiscountWatcherEvent with _$DiscountWatcherEvent {
   const factory DiscountWatcherEvent.filterReset() = _FilterReset;
 
   const factory DiscountWatcherEvent.failure(dynamic failure) = _Failure;
+
+  const factory DiscountWatcherEvent.report(DiscountModel discountModel) =
+      _Report;
 }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:veteranam/components/discounts/bloc/discount_watcher_bloc.dart';
 import 'package:veteranam/shared/shared.dart';
 
 class DonateCardWidget extends StatelessWidget {
@@ -37,6 +39,7 @@ class DonateCardWidget extends StatelessWidget {
               child: ComplaintWidget(
                 isDesk: isDesk,
                 cardEnum: CardEnum.funds,
+                afterEvent: null,
               ),
             ),
             Expanded(

@@ -14,6 +14,7 @@ class DiscountWatcherState with _$DiscountWatcherState {
     required LoadingStatus loadingStatus,
     required int itemsLoaded,
     required DiscountFailure? failure,
+    required List<int> reportItems,
   }) = _Initial;
 }
 

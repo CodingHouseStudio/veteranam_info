@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:veteranam/components/components.dart';
 
 import 'package:veteranam/shared/shared.dart';
 
@@ -187,6 +188,9 @@ class _DiscountsCardWidgetDesk extends StatelessWidget {
                   isDesk: isDesk,
                   link: discountItem.directLink ?? discountItem.link,
                   cardEnum: CardEnum.discount,
+                  afterEvent: () => context
+                      .read<DiscountWatcherBloc>()
+                      .add(DiscountWatcherEvent.report(discountItem)),
                 ),
                 KSizedBox.kHeightSizedBox16,
               ],
@@ -344,6 +348,9 @@ class DiscountsCardWidgetMob extends StatelessWidget {
                         isDesk: isDesk,
                         cardEnum: CardEnum.discount,
                         link: discountItem.directLink ?? discountItem.link,
+                        afterEvent: () => context
+                            .read<DiscountWatcherBloc>()
+                            .add(DiscountWatcherEvent.report(discountItem)),
                       ),
                     ),
                     KSizedBox.kHeightSizedBox16,

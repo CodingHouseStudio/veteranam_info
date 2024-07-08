@@ -25,6 +25,7 @@ class DiscountWatcherBloc
             itemsLoaded: 0,
             failure: null,
             filtersLocationIndex: [],
+            reportItems: [],
           ),
         ) {
     on<_Started>(_onStarted);
@@ -34,6 +35,7 @@ class DiscountWatcherBloc
     on<_FilterCategory>(_onFilterCategory);
     on<_FilterLocation>(_onFilterLocation);
     on<_FilterReset>(_onFilterReset);
+    on<_Report>(_onReport);
   }
 
   final IDiscountRepository _discountRepository;
@@ -64,7 +66,7 @@ class DiscountWatcherBloc
     Emitter<DiscountWatcherState> emit,
   ) {
     emit(
-      DiscountWatcherState(
+      _Initial(
         discountModelItems: event.discountItemsModel,
         loadingStatus: LoadingStatus.loaded,
         filteredDiscountModelItems: _filter(
@@ -78,6 +80,7 @@ class DiscountWatcherBloc
             state.itemsLoaded.getLoaded(list: event.discountItemsModel),
         failure: null,
         filtersLocationIndex: state.filtersLocationIndex,
+        reportItems: state.reportItems,
       ),
     );
   }
@@ -174,19 +177,24 @@ class DiscountWatcherBloc
     required List<int>? locationIndex,
     required int itemsLoaded,
     List<DiscountModel>? list,
+    List<int>? reportItems,
   }) {
     final items = list ?? state.discountModelItems;
+    final reportItemsValue = reportItems ?? state.reportItems;
 
     // Combine location filtering logic
-    final locationFiltered = items.where(
-      (item) =>
-          locationIndex == null ||
-          !locationIndex.contains(1) ||
-          item.discount.contains(100),
-    );
+    final locationFiltered = items
+        .where(
+          (item) =>
+              locationIndex == null ||
+              !locationIndex.contains(1) ||
+              item.discount.contains(100),
+        )
+        .toList()
+        .filterIndexs(reportItemsValue);
 
     // Optimized sorting with null-aware conversion
-    final sortedItems = locationFiltered.toList()
+    final sortedItems = locationFiltered
       ..sort((a, b) {
         if (locationIndex != null && locationIndex.contains(0)) {
           final maxDiscountA =
@@ -229,6 +237,23 @@ class DiscountWatcherBloc
               item.location?.toList() ?? item.subLocation?._getList ?? const [],
           overallFilter: items._getLocationItems,
         );
+  }
+
+  void _onReport(
+    _Report event,
+    Emitter<DiscountWatcherState> emit,
+  ) {
+    emit(
+      state.copyWith(
+        reportItems: state.reportItems
+          ..add(state.discountModelItems.indexOf(event.discountModel)),
+        filteredDiscountModelItems: _filter(
+          categoryIndex: state.filtersCategoriesIndex,
+          locationIndex: state.filtersLocationIndex,
+          itemsLoaded: state.itemsLoaded,
+        ),
+      ),
+    );
   }
 
   void _onFailure(

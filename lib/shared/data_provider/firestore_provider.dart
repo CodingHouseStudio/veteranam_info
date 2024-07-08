@@ -87,8 +87,8 @@ class FirestoreService {
         (snapshot) {
           for (final change in snapshot.docChanges) {
             if (change.type == DocumentChangeType.added) {
-              // final source =
-              //     (snapshot.metadata.isFromCache) ? 'local cache' : 'server';
+              final source =
+                  (snapshot.metadata.isFromCache) ? 'local cache' : 'server';
               // debugPrint('Data fetched from $source}');
             }
           }

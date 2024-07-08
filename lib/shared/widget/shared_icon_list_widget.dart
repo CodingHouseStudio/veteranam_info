@@ -8,12 +8,14 @@ class SharedIconListWidget extends StatelessWidget {
     required this.isDesk,
     required this.link,
     required this.cardEnum,
+    required this.afterEvent,
     super.key,
   });
   final String text;
   final bool isDesk;
   final String link;
   final CardEnum cardEnum;
+  final void Function()? afterEvent;
   @override
   Widget build(BuildContext context) {
     return CardTextDetailWidget(
@@ -39,6 +41,7 @@ class SharedIconListWidget extends StatelessWidget {
         ComplaintWidget(
           isDesk: isDesk,
           cardEnum: cardEnum,
+          afterEvent: afterEvent,
         ),
       ],
       isDesk: isDesk,

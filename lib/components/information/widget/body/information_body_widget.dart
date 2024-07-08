@@ -39,6 +39,7 @@ class InformationBodyWidget extends StatelessWidget {
             KSizedBox.kHeightSizedBox24,
           if (isDesk)
             Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 TextPointWidget(
                   context.l10n.information,
