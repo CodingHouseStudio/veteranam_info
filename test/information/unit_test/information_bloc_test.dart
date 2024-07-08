@@ -371,6 +371,27 @@ void main() {
         predicate<InformationWatcherState>(
           (state) => state.loadingStatus == LoadingStatus.loaded,
         ),
+      ],
+    );
+
+    blocTest<InformationWatcherBloc, InformationWatcherState>(
+      'emits [InformationWatcherState()] ',
+      build: () => informationWatcherBloc,
+      act: (bloc) async => bloc
+        ..add(const InformationWatcherEvent.started())
+        ..add(
+          InformationWatcherEvent.changeLike(
+            informationModel: KTestText.informationModelItems.first,
+            isLiked: true,
+          ),
+        ),
+      expect: () => [
+        predicate<InformationWatcherState>(
+          (state) => state.loadingStatus == LoadingStatus.loading,
+        ),
+        predicate<InformationWatcherState>(
+          (state) => state.loadingStatus == LoadingStatus.loaded,
+        ),
         predicate<InformationWatcherState>(
           (state) => state.loadingStatus == LoadingStatus.loaded,
         ),

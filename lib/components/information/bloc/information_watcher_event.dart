@@ -21,5 +21,10 @@ class InformationWatcherEvent with _$InformationWatcherEvent {
   const factory InformationWatcherEvent.like({
     required InformationModel informationModel,
     required bool isLiked,
-  }) = _LikeInformation;
+  }) = _Like;
+
+  const factory InformationWatcherEvent.changeLike({
+    required InformationModel informationModel,
+    required bool isLiked,
+  }) = _ChangeLike;
 }

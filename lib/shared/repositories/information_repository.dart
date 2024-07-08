@@ -39,6 +39,9 @@ class InformationRepository implements IInformationRepository {
         informationModel.copyWith(
           likes: isLiked
               ? informationModel.likes ?? 0 + 1
+              // ? informationModel.likes != null
+              //     ? informationModel.likes! + 1
+              //     : 1
               : informationModel.likes != null && informationModel.likes! > 1
                   ? informationModel.likes! - 1
                   : null,

@@ -13,6 +13,7 @@ class InformationWatcherState with _$InformationWatcherState {
     required LoadingStatus loadingStatus,
     required int itemsLoaded,
     required InformationFailure? failure,
+    // required List<int> likeIndex,
   }) = _Initial;
 }
 
