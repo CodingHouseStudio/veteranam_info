@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mockito/mockito.dart';
@@ -29,6 +30,22 @@ void main() {
       );
       when(mockAuthenticationRepository.isAnonymouslyOrEmty()).thenAnswer(
         (realInvocation) => true,
+      );
+      when(
+        mockInformationRepository.updateLikeCount(
+          informationModel: KTestText.informationModelItems.first,
+          isLiked: true,
+        ),
+      ).thenAnswer(
+        (invocation) async => const Right(true),
+      );
+      when(
+        mockInformationRepository.updateLikeCount(
+          informationModel: KTestText.informationModelItems.first,
+          isLiked: false,
+        ),
+      ).thenAnswer(
+        (invocation) async => const Right(true),
       );
     });
     group('${KGroupText.failure} ', () {

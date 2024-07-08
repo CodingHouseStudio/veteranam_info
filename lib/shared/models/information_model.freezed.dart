@@ -29,6 +29,7 @@ mixin _$InformationModel {
   String get topicUA => throw _privateConstructorUsedError;
   String get status => throw _privateConstructorUsedError;
   DateTime get fetchDate => throw _privateConstructorUsedError;
+  int? get likes => throw _privateConstructorUsedError;
   @ImageConverter()
   ImageModel? get image => throw _privateConstructorUsedError;
 
@@ -54,6 +55,7 @@ abstract class $InformationModelCopyWith<$Res> {
       String topicUA,
       String status,
       DateTime fetchDate,
+      int? likes,
       @ImageConverter() ImageModel? image});
 
   $ImageModelCopyWith<$Res>? get image;
@@ -81,6 +83,7 @@ class _$InformationModelCopyWithImpl<$Res, $Val extends InformationModel>
     Object? topicUA = null,
     Object? status = null,
     Object? fetchDate = null,
+    Object? likes = freezed,
     Object? image = freezed,
   }) {
     return _then(_value.copyWith(
@@ -120,6 +123,10 @@ class _$InformationModelCopyWithImpl<$Res, $Val extends InformationModel>
           ? _value.fetchDate
           : fetchDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      likes: freezed == likes
+          ? _value.likes
+          : likes // ignore: cast_nullable_to_non_nullable
+              as int?,
       image: freezed == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
@@ -158,6 +165,7 @@ abstract class _$$InformationModelImplCopyWith<$Res>
       String topicUA,
       String status,
       DateTime fetchDate,
+      int? likes,
       @ImageConverter() ImageModel? image});
 
   @override
@@ -184,6 +192,7 @@ class __$$InformationModelImplCopyWithImpl<$Res>
     Object? topicUA = null,
     Object? status = null,
     Object? fetchDate = null,
+    Object? likes = freezed,
     Object? image = freezed,
   }) {
     return _then(_$InformationModelImpl(
@@ -223,6 +232,10 @@ class __$$InformationModelImplCopyWithImpl<$Res>
           ? _value.fetchDate
           : fetchDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      likes: freezed == likes
+          ? _value.likes
+          : likes // ignore: cast_nullable_to_non_nullable
+              as int?,
       image: freezed == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
@@ -244,6 +257,7 @@ class _$InformationModelImpl implements _InformationModel {
       required this.topicUA,
       required this.status,
       required this.fetchDate,
+      required this.likes,
       @ImageConverter() this.image})
       : _category = category,
         _categoryUA = categoryUA;
@@ -282,12 +296,14 @@ class _$InformationModelImpl implements _InformationModel {
   @override
   final DateTime fetchDate;
   @override
+  final int? likes;
+  @override
   @ImageConverter()
   final ImageModel? image;
 
   @override
   String toString() {
-    return 'InformationModel(id: $id, title: $title, news: $news, category: $category, categoryUA: $categoryUA, topic: $topic, topicUA: $topicUA, status: $status, fetchDate: $fetchDate, image: $image)';
+    return 'InformationModel(id: $id, title: $title, news: $news, category: $category, categoryUA: $categoryUA, topic: $topic, topicUA: $topicUA, status: $status, fetchDate: $fetchDate, likes: $likes, image: $image)';
   }
 
   @override
@@ -306,6 +322,7 @@ class _$InformationModelImpl implements _InformationModel {
             (identical(other.status, status) || other.status == status) &&
             (identical(other.fetchDate, fetchDate) ||
                 other.fetchDate == fetchDate) &&
+            (identical(other.likes, likes) || other.likes == likes) &&
             (identical(other.image, image) || other.image == image));
   }
 
@@ -322,6 +339,7 @@ class _$InformationModelImpl implements _InformationModel {
       topicUA,
       status,
       fetchDate,
+      likes,
       image);
 
   @JsonKey(ignore: true)
@@ -350,6 +368,7 @@ abstract class _InformationModel implements InformationModel {
       required final String topicUA,
       required final String status,
       required final DateTime fetchDate,
+      required final int? likes,
       @ImageConverter() final ImageModel? image}) = _$InformationModelImpl;
 
   factory _InformationModel.fromJson(Map<String, dynamic> json) =
@@ -373,6 +392,8 @@ abstract class _InformationModel implements InformationModel {
   String get status;
   @override
   DateTime get fetchDate;
+  @override
+  int? get likes;
   @override
   @ImageConverter()
   ImageModel? get image;

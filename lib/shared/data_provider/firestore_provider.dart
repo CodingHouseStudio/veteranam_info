@@ -323,4 +323,13 @@ class FirestoreService {
         .doc(report.id)
         .set(report.toJson());
   }
+
+  Future<void> updateInformationModel(
+    InformationModel informationModel,
+  ) async {
+    return _db
+        .collection(FirebaseCollectionName.information)
+        .doc(informationModel.id)
+        .update(informationModel.toJson());
+  }
 }

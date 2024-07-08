@@ -24,6 +24,10 @@ mixin _$InformationWatcherEvent {
     required TResult Function() loadNextItems,
     required TResult Function(int filterIndex) filter,
     required TResult Function(dynamic failure) failure,
+    required TResult Function(InformationModel informationModel, bool isLiked)
+        like,
+    required TResult Function(InformationModel informationModel, bool isLiked)
+        changeLike,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -33,6 +37,9 @@ mixin _$InformationWatcherEvent {
     TResult? Function()? loadNextItems,
     TResult? Function(int filterIndex)? filter,
     TResult? Function(dynamic failure)? failure,
+    TResult? Function(InformationModel informationModel, bool isLiked)? like,
+    TResult? Function(InformationModel informationModel, bool isLiked)?
+        changeLike,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -42,6 +49,9 @@ mixin _$InformationWatcherEvent {
     TResult Function()? loadNextItems,
     TResult Function(int filterIndex)? filter,
     TResult Function(dynamic failure)? failure,
+    TResult Function(InformationModel informationModel, bool isLiked)? like,
+    TResult Function(InformationModel informationModel, bool isLiked)?
+        changeLike,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -52,6 +62,8 @@ mixin _$InformationWatcherEvent {
     required TResult Function(_LoadNextItems value) loadNextItems,
     required TResult Function(_Filter value) filter,
     required TResult Function(_Failure value) failure,
+    required TResult Function(_Like value) like,
+    required TResult Function(_ChangeLike value) changeLike,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -61,6 +73,8 @@ mixin _$InformationWatcherEvent {
     TResult? Function(_LoadNextItems value)? loadNextItems,
     TResult? Function(_Filter value)? filter,
     TResult? Function(_Failure value)? failure,
+    TResult? Function(_Like value)? like,
+    TResult? Function(_ChangeLike value)? changeLike,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -70,6 +84,8 @@ mixin _$InformationWatcherEvent {
     TResult Function(_LoadNextItems value)? loadNextItems,
     TResult Function(_Filter value)? filter,
     TResult Function(_Failure value)? failure,
+    TResult Function(_Like value)? like,
+    TResult Function(_ChangeLike value)? changeLike,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -138,6 +154,10 @@ class _$StartedImpl implements _Started {
     required TResult Function() loadNextItems,
     required TResult Function(int filterIndex) filter,
     required TResult Function(dynamic failure) failure,
+    required TResult Function(InformationModel informationModel, bool isLiked)
+        like,
+    required TResult Function(InformationModel informationModel, bool isLiked)
+        changeLike,
   }) {
     return started();
   }
@@ -150,6 +170,9 @@ class _$StartedImpl implements _Started {
     TResult? Function()? loadNextItems,
     TResult? Function(int filterIndex)? filter,
     TResult? Function(dynamic failure)? failure,
+    TResult? Function(InformationModel informationModel, bool isLiked)? like,
+    TResult? Function(InformationModel informationModel, bool isLiked)?
+        changeLike,
   }) {
     return started?.call();
   }
@@ -162,6 +185,9 @@ class _$StartedImpl implements _Started {
     TResult Function()? loadNextItems,
     TResult Function(int filterIndex)? filter,
     TResult Function(dynamic failure)? failure,
+    TResult Function(InformationModel informationModel, bool isLiked)? like,
+    TResult Function(InformationModel informationModel, bool isLiked)?
+        changeLike,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -178,6 +204,8 @@ class _$StartedImpl implements _Started {
     required TResult Function(_LoadNextItems value) loadNextItems,
     required TResult Function(_Filter value) filter,
     required TResult Function(_Failure value) failure,
+    required TResult Function(_Like value) like,
+    required TResult Function(_ChangeLike value) changeLike,
   }) {
     return started(this);
   }
@@ -190,6 +218,8 @@ class _$StartedImpl implements _Started {
     TResult? Function(_LoadNextItems value)? loadNextItems,
     TResult? Function(_Filter value)? filter,
     TResult? Function(_Failure value)? failure,
+    TResult? Function(_Like value)? like,
+    TResult? Function(_ChangeLike value)? changeLike,
   }) {
     return started?.call(this);
   }
@@ -202,6 +232,8 @@ class _$StartedImpl implements _Started {
     TResult Function(_LoadNextItems value)? loadNextItems,
     TResult Function(_Filter value)? filter,
     TResult Function(_Failure value)? failure,
+    TResult Function(_Like value)? like,
+    TResult Function(_ChangeLike value)? changeLike,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -294,6 +326,10 @@ class _$UpdatedImpl implements _Updated {
     required TResult Function() loadNextItems,
     required TResult Function(int filterIndex) filter,
     required TResult Function(dynamic failure) failure,
+    required TResult Function(InformationModel informationModel, bool isLiked)
+        like,
+    required TResult Function(InformationModel informationModel, bool isLiked)
+        changeLike,
   }) {
     return updated(informationItemsModel);
   }
@@ -306,6 +342,9 @@ class _$UpdatedImpl implements _Updated {
     TResult? Function()? loadNextItems,
     TResult? Function(int filterIndex)? filter,
     TResult? Function(dynamic failure)? failure,
+    TResult? Function(InformationModel informationModel, bool isLiked)? like,
+    TResult? Function(InformationModel informationModel, bool isLiked)?
+        changeLike,
   }) {
     return updated?.call(informationItemsModel);
   }
@@ -318,6 +357,9 @@ class _$UpdatedImpl implements _Updated {
     TResult Function()? loadNextItems,
     TResult Function(int filterIndex)? filter,
     TResult Function(dynamic failure)? failure,
+    TResult Function(InformationModel informationModel, bool isLiked)? like,
+    TResult Function(InformationModel informationModel, bool isLiked)?
+        changeLike,
     required TResult orElse(),
   }) {
     if (updated != null) {
@@ -334,6 +376,8 @@ class _$UpdatedImpl implements _Updated {
     required TResult Function(_LoadNextItems value) loadNextItems,
     required TResult Function(_Filter value) filter,
     required TResult Function(_Failure value) failure,
+    required TResult Function(_Like value) like,
+    required TResult Function(_ChangeLike value) changeLike,
   }) {
     return updated(this);
   }
@@ -346,6 +390,8 @@ class _$UpdatedImpl implements _Updated {
     TResult? Function(_LoadNextItems value)? loadNextItems,
     TResult? Function(_Filter value)? filter,
     TResult? Function(_Failure value)? failure,
+    TResult? Function(_Like value)? like,
+    TResult? Function(_ChangeLike value)? changeLike,
   }) {
     return updated?.call(this);
   }
@@ -358,6 +404,8 @@ class _$UpdatedImpl implements _Updated {
     TResult Function(_LoadNextItems value)? loadNextItems,
     TResult Function(_Filter value)? filter,
     TResult Function(_Failure value)? failure,
+    TResult Function(_Like value)? like,
+    TResult Function(_ChangeLike value)? changeLike,
     required TResult orElse(),
   }) {
     if (updated != null) {
@@ -421,6 +469,10 @@ class _$LoadNextItemsImpl implements _LoadNextItems {
     required TResult Function() loadNextItems,
     required TResult Function(int filterIndex) filter,
     required TResult Function(dynamic failure) failure,
+    required TResult Function(InformationModel informationModel, bool isLiked)
+        like,
+    required TResult Function(InformationModel informationModel, bool isLiked)
+        changeLike,
   }) {
     return loadNextItems();
   }
@@ -433,6 +485,9 @@ class _$LoadNextItemsImpl implements _LoadNextItems {
     TResult? Function()? loadNextItems,
     TResult? Function(int filterIndex)? filter,
     TResult? Function(dynamic failure)? failure,
+    TResult? Function(InformationModel informationModel, bool isLiked)? like,
+    TResult? Function(InformationModel informationModel, bool isLiked)?
+        changeLike,
   }) {
     return loadNextItems?.call();
   }
@@ -445,6 +500,9 @@ class _$LoadNextItemsImpl implements _LoadNextItems {
     TResult Function()? loadNextItems,
     TResult Function(int filterIndex)? filter,
     TResult Function(dynamic failure)? failure,
+    TResult Function(InformationModel informationModel, bool isLiked)? like,
+    TResult Function(InformationModel informationModel, bool isLiked)?
+        changeLike,
     required TResult orElse(),
   }) {
     if (loadNextItems != null) {
@@ -461,6 +519,8 @@ class _$LoadNextItemsImpl implements _LoadNextItems {
     required TResult Function(_LoadNextItems value) loadNextItems,
     required TResult Function(_Filter value) filter,
     required TResult Function(_Failure value) failure,
+    required TResult Function(_Like value) like,
+    required TResult Function(_ChangeLike value) changeLike,
   }) {
     return loadNextItems(this);
   }
@@ -473,6 +533,8 @@ class _$LoadNextItemsImpl implements _LoadNextItems {
     TResult? Function(_LoadNextItems value)? loadNextItems,
     TResult? Function(_Filter value)? filter,
     TResult? Function(_Failure value)? failure,
+    TResult? Function(_Like value)? like,
+    TResult? Function(_ChangeLike value)? changeLike,
   }) {
     return loadNextItems?.call(this);
   }
@@ -485,6 +547,8 @@ class _$LoadNextItemsImpl implements _LoadNextItems {
     TResult Function(_LoadNextItems value)? loadNextItems,
     TResult Function(_Filter value)? filter,
     TResult Function(_Failure value)? failure,
+    TResult Function(_Like value)? like,
+    TResult Function(_ChangeLike value)? changeLike,
     required TResult orElse(),
   }) {
     if (loadNextItems != null) {
@@ -569,6 +633,10 @@ class _$FilterImpl implements _Filter {
     required TResult Function() loadNextItems,
     required TResult Function(int filterIndex) filter,
     required TResult Function(dynamic failure) failure,
+    required TResult Function(InformationModel informationModel, bool isLiked)
+        like,
+    required TResult Function(InformationModel informationModel, bool isLiked)
+        changeLike,
   }) {
     return filter(filterIndex);
   }
@@ -581,6 +649,9 @@ class _$FilterImpl implements _Filter {
     TResult? Function()? loadNextItems,
     TResult? Function(int filterIndex)? filter,
     TResult? Function(dynamic failure)? failure,
+    TResult? Function(InformationModel informationModel, bool isLiked)? like,
+    TResult? Function(InformationModel informationModel, bool isLiked)?
+        changeLike,
   }) {
     return filter?.call(filterIndex);
   }
@@ -593,6 +664,9 @@ class _$FilterImpl implements _Filter {
     TResult Function()? loadNextItems,
     TResult Function(int filterIndex)? filter,
     TResult Function(dynamic failure)? failure,
+    TResult Function(InformationModel informationModel, bool isLiked)? like,
+    TResult Function(InformationModel informationModel, bool isLiked)?
+        changeLike,
     required TResult orElse(),
   }) {
     if (filter != null) {
@@ -609,6 +683,8 @@ class _$FilterImpl implements _Filter {
     required TResult Function(_LoadNextItems value) loadNextItems,
     required TResult Function(_Filter value) filter,
     required TResult Function(_Failure value) failure,
+    required TResult Function(_Like value) like,
+    required TResult Function(_ChangeLike value) changeLike,
   }) {
     return filter(this);
   }
@@ -621,6 +697,8 @@ class _$FilterImpl implements _Filter {
     TResult? Function(_LoadNextItems value)? loadNextItems,
     TResult? Function(_Filter value)? filter,
     TResult? Function(_Failure value)? failure,
+    TResult? Function(_Like value)? like,
+    TResult? Function(_ChangeLike value)? changeLike,
   }) {
     return filter?.call(this);
   }
@@ -633,6 +711,8 @@ class _$FilterImpl implements _Filter {
     TResult Function(_LoadNextItems value)? loadNextItems,
     TResult Function(_Filter value)? filter,
     TResult Function(_Failure value)? failure,
+    TResult Function(_Like value)? like,
+    TResult Function(_ChangeLike value)? changeLike,
     required TResult orElse(),
   }) {
     if (filter != null) {
@@ -722,6 +802,10 @@ class _$FailureImpl implements _Failure {
     required TResult Function() loadNextItems,
     required TResult Function(int filterIndex) filter,
     required TResult Function(dynamic failure) failure,
+    required TResult Function(InformationModel informationModel, bool isLiked)
+        like,
+    required TResult Function(InformationModel informationModel, bool isLiked)
+        changeLike,
   }) {
     return failure(this.failure);
   }
@@ -734,6 +818,9 @@ class _$FailureImpl implements _Failure {
     TResult? Function()? loadNextItems,
     TResult? Function(int filterIndex)? filter,
     TResult? Function(dynamic failure)? failure,
+    TResult? Function(InformationModel informationModel, bool isLiked)? like,
+    TResult? Function(InformationModel informationModel, bool isLiked)?
+        changeLike,
   }) {
     return failure?.call(this.failure);
   }
@@ -746,6 +833,9 @@ class _$FailureImpl implements _Failure {
     TResult Function()? loadNextItems,
     TResult Function(int filterIndex)? filter,
     TResult Function(dynamic failure)? failure,
+    TResult Function(InformationModel informationModel, bool isLiked)? like,
+    TResult Function(InformationModel informationModel, bool isLiked)?
+        changeLike,
     required TResult orElse(),
   }) {
     if (failure != null) {
@@ -762,6 +852,8 @@ class _$FailureImpl implements _Failure {
     required TResult Function(_LoadNextItems value) loadNextItems,
     required TResult Function(_Filter value) filter,
     required TResult Function(_Failure value) failure,
+    required TResult Function(_Like value) like,
+    required TResult Function(_ChangeLike value) changeLike,
   }) {
     return failure(this);
   }
@@ -774,6 +866,8 @@ class _$FailureImpl implements _Failure {
     TResult? Function(_LoadNextItems value)? loadNextItems,
     TResult? Function(_Filter value)? filter,
     TResult? Function(_Failure value)? failure,
+    TResult? Function(_Like value)? like,
+    TResult? Function(_ChangeLike value)? changeLike,
   }) {
     return failure?.call(this);
   }
@@ -786,6 +880,8 @@ class _$FailureImpl implements _Failure {
     TResult Function(_LoadNextItems value)? loadNextItems,
     TResult Function(_Filter value)? filter,
     TResult Function(_Failure value)? failure,
+    TResult Function(_Like value)? like,
+    TResult Function(_ChangeLike value)? changeLike,
     required TResult orElse(),
   }) {
     if (failure != null) {
@@ -801,6 +897,386 @@ abstract class _Failure implements InformationWatcherEvent {
   dynamic get failure;
   @JsonKey(ignore: true)
   _$$FailureImplCopyWith<_$FailureImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$LikeImplCopyWith<$Res> {
+  factory _$$LikeImplCopyWith(
+          _$LikeImpl value, $Res Function(_$LikeImpl) then) =
+      __$$LikeImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({InformationModel informationModel, bool isLiked});
+
+  $InformationModelCopyWith<$Res> get informationModel;
+}
+
+/// @nodoc
+class __$$LikeImplCopyWithImpl<$Res>
+    extends _$InformationWatcherEventCopyWithImpl<$Res, _$LikeImpl>
+    implements _$$LikeImplCopyWith<$Res> {
+  __$$LikeImplCopyWithImpl(_$LikeImpl _value, $Res Function(_$LikeImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? informationModel = null,
+    Object? isLiked = null,
+  }) {
+    return _then(_$LikeImpl(
+      informationModel: null == informationModel
+          ? _value.informationModel
+          : informationModel // ignore: cast_nullable_to_non_nullable
+              as InformationModel,
+      isLiked: null == isLiked
+          ? _value.isLiked
+          : isLiked // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $InformationModelCopyWith<$Res> get informationModel {
+    return $InformationModelCopyWith<$Res>(_value.informationModel, (value) {
+      return _then(_value.copyWith(informationModel: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$LikeImpl implements _Like {
+  const _$LikeImpl({required this.informationModel, required this.isLiked});
+
+  @override
+  final InformationModel informationModel;
+  @override
+  final bool isLiked;
+
+  @override
+  String toString() {
+    return 'InformationWatcherEvent.like(informationModel: $informationModel, isLiked: $isLiked)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$LikeImpl &&
+            (identical(other.informationModel, informationModel) ||
+                other.informationModel == informationModel) &&
+            (identical(other.isLiked, isLiked) || other.isLiked == isLiked));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, informationModel, isLiked);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$LikeImplCopyWith<_$LikeImpl> get copyWith =>
+      __$$LikeImplCopyWithImpl<_$LikeImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(List<InformationModel> informationItemsModel)
+        updated,
+    required TResult Function() loadNextItems,
+    required TResult Function(int filterIndex) filter,
+    required TResult Function(dynamic failure) failure,
+    required TResult Function(InformationModel informationModel, bool isLiked)
+        like,
+    required TResult Function(InformationModel informationModel, bool isLiked)
+        changeLike,
+  }) {
+    return like(informationModel, isLiked);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function(List<InformationModel> informationItemsModel)? updated,
+    TResult? Function()? loadNextItems,
+    TResult? Function(int filterIndex)? filter,
+    TResult? Function(dynamic failure)? failure,
+    TResult? Function(InformationModel informationModel, bool isLiked)? like,
+    TResult? Function(InformationModel informationModel, bool isLiked)?
+        changeLike,
+  }) {
+    return like?.call(informationModel, isLiked);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(List<InformationModel> informationItemsModel)? updated,
+    TResult Function()? loadNextItems,
+    TResult Function(int filterIndex)? filter,
+    TResult Function(dynamic failure)? failure,
+    TResult Function(InformationModel informationModel, bool isLiked)? like,
+    TResult Function(InformationModel informationModel, bool isLiked)?
+        changeLike,
+    required TResult orElse(),
+  }) {
+    if (like != null) {
+      return like(informationModel, isLiked);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_Updated value) updated,
+    required TResult Function(_LoadNextItems value) loadNextItems,
+    required TResult Function(_Filter value) filter,
+    required TResult Function(_Failure value) failure,
+    required TResult Function(_Like value) like,
+    required TResult Function(_ChangeLike value) changeLike,
+  }) {
+    return like(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_Updated value)? updated,
+    TResult? Function(_LoadNextItems value)? loadNextItems,
+    TResult? Function(_Filter value)? filter,
+    TResult? Function(_Failure value)? failure,
+    TResult? Function(_Like value)? like,
+    TResult? Function(_ChangeLike value)? changeLike,
+  }) {
+    return like?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_Updated value)? updated,
+    TResult Function(_LoadNextItems value)? loadNextItems,
+    TResult Function(_Filter value)? filter,
+    TResult Function(_Failure value)? failure,
+    TResult Function(_Like value)? like,
+    TResult Function(_ChangeLike value)? changeLike,
+    required TResult orElse(),
+  }) {
+    if (like != null) {
+      return like(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Like implements InformationWatcherEvent {
+  const factory _Like(
+      {required final InformationModel informationModel,
+      required final bool isLiked}) = _$LikeImpl;
+
+  InformationModel get informationModel;
+  bool get isLiked;
+  @JsonKey(ignore: true)
+  _$$LikeImplCopyWith<_$LikeImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ChangeLikeImplCopyWith<$Res> {
+  factory _$$ChangeLikeImplCopyWith(
+          _$ChangeLikeImpl value, $Res Function(_$ChangeLikeImpl) then) =
+      __$$ChangeLikeImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({InformationModel informationModel, bool isLiked});
+
+  $InformationModelCopyWith<$Res> get informationModel;
+}
+
+/// @nodoc
+class __$$ChangeLikeImplCopyWithImpl<$Res>
+    extends _$InformationWatcherEventCopyWithImpl<$Res, _$ChangeLikeImpl>
+    implements _$$ChangeLikeImplCopyWith<$Res> {
+  __$$ChangeLikeImplCopyWithImpl(
+      _$ChangeLikeImpl _value, $Res Function(_$ChangeLikeImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? informationModel = null,
+    Object? isLiked = null,
+  }) {
+    return _then(_$ChangeLikeImpl(
+      informationModel: null == informationModel
+          ? _value.informationModel
+          : informationModel // ignore: cast_nullable_to_non_nullable
+              as InformationModel,
+      isLiked: null == isLiked
+          ? _value.isLiked
+          : isLiked // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $InformationModelCopyWith<$Res> get informationModel {
+    return $InformationModelCopyWith<$Res>(_value.informationModel, (value) {
+      return _then(_value.copyWith(informationModel: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$ChangeLikeImpl implements _ChangeLike {
+  const _$ChangeLikeImpl(
+      {required this.informationModel, required this.isLiked});
+
+  @override
+  final InformationModel informationModel;
+  @override
+  final bool isLiked;
+
+  @override
+  String toString() {
+    return 'InformationWatcherEvent.changeLike(informationModel: $informationModel, isLiked: $isLiked)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ChangeLikeImpl &&
+            (identical(other.informationModel, informationModel) ||
+                other.informationModel == informationModel) &&
+            (identical(other.isLiked, isLiked) || other.isLiked == isLiked));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, informationModel, isLiked);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ChangeLikeImplCopyWith<_$ChangeLikeImpl> get copyWith =>
+      __$$ChangeLikeImplCopyWithImpl<_$ChangeLikeImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(List<InformationModel> informationItemsModel)
+        updated,
+    required TResult Function() loadNextItems,
+    required TResult Function(int filterIndex) filter,
+    required TResult Function(dynamic failure) failure,
+    required TResult Function(InformationModel informationModel, bool isLiked)
+        like,
+    required TResult Function(InformationModel informationModel, bool isLiked)
+        changeLike,
+  }) {
+    return changeLike(informationModel, isLiked);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function(List<InformationModel> informationItemsModel)? updated,
+    TResult? Function()? loadNextItems,
+    TResult? Function(int filterIndex)? filter,
+    TResult? Function(dynamic failure)? failure,
+    TResult? Function(InformationModel informationModel, bool isLiked)? like,
+    TResult? Function(InformationModel informationModel, bool isLiked)?
+        changeLike,
+  }) {
+    return changeLike?.call(informationModel, isLiked);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(List<InformationModel> informationItemsModel)? updated,
+    TResult Function()? loadNextItems,
+    TResult Function(int filterIndex)? filter,
+    TResult Function(dynamic failure)? failure,
+    TResult Function(InformationModel informationModel, bool isLiked)? like,
+    TResult Function(InformationModel informationModel, bool isLiked)?
+        changeLike,
+    required TResult orElse(),
+  }) {
+    if (changeLike != null) {
+      return changeLike(informationModel, isLiked);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_Updated value) updated,
+    required TResult Function(_LoadNextItems value) loadNextItems,
+    required TResult Function(_Filter value) filter,
+    required TResult Function(_Failure value) failure,
+    required TResult Function(_Like value) like,
+    required TResult Function(_ChangeLike value) changeLike,
+  }) {
+    return changeLike(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_Updated value)? updated,
+    TResult? Function(_LoadNextItems value)? loadNextItems,
+    TResult? Function(_Filter value)? filter,
+    TResult? Function(_Failure value)? failure,
+    TResult? Function(_Like value)? like,
+    TResult? Function(_ChangeLike value)? changeLike,
+  }) {
+    return changeLike?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_Updated value)? updated,
+    TResult Function(_LoadNextItems value)? loadNextItems,
+    TResult Function(_Filter value)? filter,
+    TResult Function(_Failure value)? failure,
+    TResult Function(_Like value)? like,
+    TResult Function(_ChangeLike value)? changeLike,
+    required TResult orElse(),
+  }) {
+    if (changeLike != null) {
+      return changeLike(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ChangeLike implements InformationWatcherEvent {
+  const factory _ChangeLike(
+      {required final InformationModel informationModel,
+      required final bool isLiked}) = _$ChangeLikeImpl;
+
+  InformationModel get informationModel;
+  bool get isLiked;
+  @JsonKey(ignore: true)
+  _$$ChangeLikeImplCopyWith<_$ChangeLikeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

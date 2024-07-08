@@ -17,4 +17,14 @@ class InformationWatcherEvent with _$InformationWatcherEvent {
   // const factory InformationWatcherEvent.filterReset() = _FilterReset;
 
   const factory InformationWatcherEvent.failure(dynamic failure) = _Failure;
+
+  const factory InformationWatcherEvent.like({
+    required InformationModel informationModel,
+    required bool isLiked,
+  }) = _Like;
+
+  const factory InformationWatcherEvent.changeLike({
+    required InformationModel informationModel,
+    required bool isLiked,
+  }) = _ChangeLike;
 }
