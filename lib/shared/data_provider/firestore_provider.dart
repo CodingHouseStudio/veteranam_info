@@ -49,21 +49,58 @@ class FirestoreService {
   }
 
   Future<List<QuestionModel>> getQuestions() async {
-    final docSnapshot =
-        await _db.collection(FirebaseCollectionName.questions).get();
+    try {
+      // Try to get the data from the server first
+      final docSnapshot = await _db
+          .collection(FirebaseCollectionName.questions)
+          .get(const GetOptions());
 
-    return docSnapshot.docs
-        .map((doc) => QuestionModel.fromJson(doc.data()))
-        .toList();
+      // If the server fetch is successful, return the data
+      return docSnapshot.docs
+          .map((doc) => QuestionModel.fromJson(doc.data()))
+          .toList();
+    } on FirebaseException catch (e) {
+      if (e.code == 'unavailable') {
+        // If the server is unavailable, fall back to the cache
+        final docSnapshot = await _db
+            .collection(FirebaseCollectionName.questions)
+            .get(const GetOptions(source: Source.cache));
+
+        return docSnapshot.docs
+            .map((doc) => QuestionModel.fromJson(doc.data()))
+            .toList();
+      } else {
+        rethrow;
+      }
+    }
   }
 
   Future<List<FundModel>> getFunds() async {
-    final docSnapshot =
-        await _db.collection(FirebaseCollectionName.funds).get();
+    try {
+      // Try to get the data from the server first
+      final docSnapshot = await _db
+          .collection(FirebaseCollectionName.funds)
+          .get(const GetOptions());
 
-    return docSnapshot.docs
-        .map((doc) => FundModel.fromJson(doc.data()))
-        .toList();
+      // If the server fetch is successful, return the data
+      return docSnapshot.docs
+          .map((doc) => FundModel.fromJson(doc.data()))
+          .where((e) => e.image != null)
+          .toList();
+    } on FirebaseException catch (e) {
+      if (e.code == 'unavailable') {
+        // If the server is unavailable, fall back to the cache
+        final docSnapshot = await _db
+            .collection(FirebaseCollectionName.funds)
+            .get(const GetOptions(source: Source.cache));
+
+        return docSnapshot.docs
+            .map((doc) => FundModel.fromJson(doc.data()))
+            .toList();
+      } else {
+        rethrow;
+      }
+    }
   }
 
   Future<void> addFund(FundModel fund) {
@@ -202,23 +239,25 @@ class FirestoreService {
         .toList();
   }
 
-  Stream<List<DiscountModel>> getDiscounts() => _db
-          .collection(FirebaseCollectionName.discount)
-          .snapshots(includeMetadataChanges: true) // Enable caching
-          .map(
-        (snapshot) {
-          for (final change in snapshot.docChanges) {
-            if (change.type == DocumentChangeType.added) {
-              // final source =
-              //     (snapshot.metadata.isFromCache) ? 'local cache' : 'server';
-              // debugPrint('Data fetched from $source}');
-            }
+  Stream<List<DiscountModel>> getDiscounts() {
+    return _db
+        .collection(FirebaseCollectionName.discount)
+        .snapshots(includeMetadataChanges: true) // Enable caching
+        .map(
+      (snapshot) {
+        for (final change in snapshot.docChanges) {
+          if (change.type == DocumentChangeType.added) {
+            final source =
+                (snapshot.metadata.isFromCache) ? 'local cache' : 'server';
+            // debugPrint('Data fetched from $source');
           }
-          return snapshot.docs
-              .map((doc) => DiscountModel.fromJson(doc.data()))
-              .toList();
-        },
-      );
+        }
+        return snapshot.docs
+            .map((doc) => DiscountModel.fromJson(doc.data()))
+            .toList();
+      },
+    );
+  }
 
   Future<void> addDiscount(DiscountModel discount) {
     return _db

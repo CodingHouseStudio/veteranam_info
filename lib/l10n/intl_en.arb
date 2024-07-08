@@ -49,7 +49,7 @@
   "clear": "Clear",
   "fieldCannotBeEmpty": "Field cannot be empty",
   "tooshort": "too short",
-  "tooShortEmail": "Email too short",
+  "tooShortEmail": "too short",
   "isWrong": "has errors",
   "isWrongEmail": "is not properly formatted",
   "logOut": " Log out",
