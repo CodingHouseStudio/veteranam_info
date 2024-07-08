@@ -75,7 +75,10 @@ class InformationBodyWidget extends StatelessWidget {
               },
             )
           else
-            ..._newsWidgetList(context: context, isDesk: isDesk),
+            ..._newsWidgetList(
+              context: context,
+              isDesk: isDesk,
+            ),
           if (isDesk)
             KSizedBox.kHeightSizedBox56
           else
