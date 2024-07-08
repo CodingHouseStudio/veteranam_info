@@ -14,15 +14,13 @@ class ComplaintWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Padding(
-          padding: const EdgeInsets.only(top: KPadding.kPaddingSize10),
-          child: IconButtonWidget(
-            key: KWidgetkeys.widget.reportDialog.button,
-            onPressed: () => context.dialog
-                .showReportDialog(isDesk: isDesk, cardEnum: cardEnum),
-            icon: KIcon.brightnessAlert,
-            background: AppColors.materialThemeWhite,
-          ),
+        KSizedBox.kHeightSizedBox10,
+        IconButtonWidget(
+          key: KWidgetkeys.widget.reportDialog.button,
+          onPressed: () => context.dialog
+              .showReportDialog(isDesk: isDesk, cardEnum: cardEnum),
+          icon: KIcon.brightnessAlert,
+          background: AppColors.materialThemeWhite,
         ),
         KSizedBox.kHeightSizedBox6,
         Text(
