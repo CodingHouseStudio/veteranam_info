@@ -31,19 +31,19 @@ void main() {
       ).thenAnswer((realInvocation) => mockCollectionReference);
 
       when(
-        mockCollectionReference.doc(KTestText.fundItems.first.id),
+        mockCollectionReference.doc(KTestText.fundItemsWithImage.first.id),
       ).thenAnswer(
         (_) => mockDocumentReference,
       );
 
       when(
-        mockDocumentReference.set(KTestText.fundItems.first.toJson()),
+        mockDocumentReference.set(KTestText.fundItemsWithImage.first.toJson()),
       ).thenAnswer(
         (_) async {},
       );
 
       when(
-        mockCollectionReference.get(),
+        mockCollectionReference.get(FirestoreService.getOptions),
       ).thenAnswer(
         (_) async => mockQuerySnapshot,
       );
@@ -57,37 +57,38 @@ void main() {
       when(
         mockQueryDocumentSnapshot.first.data(),
       ).thenAnswer(
-        (_) => KTestText.fundItems.map((e) => e.toJson()).toList().first,
+        (_) =>
+            KTestText.fundItemsWithImage.map((e) => e.toJson()).toList().first,
       );
 
       FirestoreService.firebaseFirestore = mockFirebaseFirestore;
       firestoreService = FirestoreService();
     });
     test('add fund', () async {
-      await firestoreService.addFund(KTestText.fundItems.first);
+      await firestoreService.addFund(KTestText.fundItemsWithImage.first);
 
       verify(
         mockFirebaseFirestore.collection(FirebaseCollectionName.funds),
       ).called(1);
       verify(
-        mockCollectionReference.doc(KTestText.fundItems.first.id),
+        mockCollectionReference.doc(KTestText.fundItemsWithImage.first.id),
       ).called(1);
       verify(
-        mockDocumentReference.set(KTestText.fundItems.first.toJson()),
+        mockDocumentReference.set(KTestText.fundItemsWithImage.first.toJson()),
       ).called(1);
     });
 
     test('get funds', () async {
       expect(
         await firestoreService.getFunds(),
-        [KTestText.fundItems.first],
+        [KTestText.fundItemsWithImage.first],
       );
 
       verify(
         mockFirebaseFirestore.collection(FirebaseCollectionName.funds),
       ).called(1);
       verify(
-        mockCollectionReference.get(),
+        mockCollectionReference.get(FirestoreService.getOptions),
       ).called(1);
       verify(
         mockQuerySnapshot.docs,
