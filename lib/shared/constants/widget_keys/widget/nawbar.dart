@@ -6,5 +6,4 @@ class _NawbarKeys {
   // final iconMic = const Key('nawbar_micro_icon');
   final button = const Key('nawbar_button');
   final iconPerson = const Key('nawbar_person_icon');
-  final iconPersonLogin = const Key('nawbar_icon_person_login');
 }

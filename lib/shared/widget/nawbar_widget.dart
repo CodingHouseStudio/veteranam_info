@@ -227,49 +227,29 @@ class _NawbarWidgetImplematationState
                       style: AppTextStyle.text24,
                     ),
                   )
-                else if (!isFocused) ...[
+                else if (!isFocused)
                   IconButtonWidget(
                     key: KWidgetkeys.widget.nawbar.iconPerson,
-                    onPressed: () => context.goNamed(KRoute.login.name),
+                    onPressed: () => loginNavigation(context),
                     icon: KIcon.person
                         .copyWith(color: AppColors.materialThemeWhite),
                     background: AppColors.materialThemeKeyColorsSecondary,
                   ),
-                ],
               if (context.read<AuthenticationBloc>().state.status ==
                       AuthenticationStatus.authenticated &&
                   Config.isDevelopment)
                 if (!isFocused || widget.isDesk)
-                  if (context.read<AuthenticationBloc>().state.user!.photo ==
-                      null)
-                    InkWell(
-                      key: KWidgetkeys.widget.nawbar.iconPerson,
-                      onTap: () => context.goNamed(KRoute.profile.name),
-                      child: const IconWidget(
-                        icon: KIcon.person,
-                      ),
-                    )
-                  else
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(KSize.kUserPhoto),
-                      child: InkWell(
-                        onTap: () => context.goNamed(KRoute.profile.name),
-                        child: ImageWidget(
-                          imageUrl: context
-                              .read<AuthenticationBloc>()
-                              .state
-                              .user!
-                              .photo!,
-                          fit: BoxFit.contain,
-                          size: KSize.kUserPhoto,
-                        ),
-                      ),
-                    ),
+                  UserPhotoWidget(
+                    key: KWidgetkeys.widget.nawbar.iconPerson,
+                    onPressed: () => context.goNamed(KRoute.profile.name),
+                    imageUrl:
+                        context.read<AuthenticationBloc>().state.user?.photo,
+                  ),
             ],
           ),
         );
   }
 
-  void profileNavigation(BuildContext context) =>
-      context.goNamed(KRoute.profile.name);
+  void loginNavigation(BuildContext context) =>
+      context.goNamed(KRoute.login.name);
 }
