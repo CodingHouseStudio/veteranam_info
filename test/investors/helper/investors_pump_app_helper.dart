@@ -13,10 +13,14 @@ Future<void> investorsPumpAppHelper({
   required WidgetTester tester,
   MockGoRouter? mockGoRouter,
 }) async {
-  _registerInvestorsBloc(mockInvestorsRepository: mockInvestorsRepository);
   _registerReportBloc(
     mockReportRepository: mockReportRepository,
     mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+  );
+  _registerInvestorsBloc(
+    mockInvestorsRepository: mockInvestorsRepository,
+    mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+    mockReportRepository: mockReportRepository,
   );
   _registerAuthenticationBloc(
     mockAuthenticationRepository: mockAuthenticationRepository,
@@ -33,9 +37,14 @@ Future<void> investorsPumpAppHelper({
 
 void _registerInvestorsBloc({
   required IInvestorsRepository mockInvestorsRepository,
+  required IAppAuthenticationRepository mockAppAuthenticationRepository,
+  required IReportRepository mockReportRepository,
 }) {
-  final investorsBloc =
-      InvestorsWatcherBloc(investorsRepository: mockInvestorsRepository);
+  final investorsBloc = InvestorsWatcherBloc(
+    investorsRepository: mockInvestorsRepository,
+    reportRepository: mockReportRepository,
+    appAuthenticationRepository: mockAppAuthenticationRepository,
+  );
   if (GetIt.I.isRegistered<InvestorsWatcherBloc>()) {
     GetIt.I.unregister<InvestorsWatcherBloc>();
   }
