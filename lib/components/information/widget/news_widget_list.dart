@@ -14,6 +14,13 @@ List<Widget> _newsWidgetList({
         key: KWidgetkeys.screen.information.card,
         informationItem: modelItem,
         isDesk: isDesk,
+        onLikeChange: ({required like}) =>
+            context.read<InformationWatcherBloc>().add(
+                  InformationWatcherEvent.like(
+                    informationModel: modelItem,
+                    isLiked: like,
+                  ),
+                ),
       ),
       isDesk: isDesk,
       shimmerItemsNumber: KDimensions.shimmerInformationItems,

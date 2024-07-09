@@ -324,6 +324,15 @@ class FirestoreService {
         .set(report.toJson());
   }
 
+  Future<void> updateInformationModel(
+    InformationModel informationModel,
+  ) async {
+    return _db
+        .collection(FirebaseCollectionName.information)
+        .doc(informationModel.id)
+        .update(informationModel.toJson());
+  }
+
   Future<List<ReportModel>> getCardReportById({
     required CardEnum cardEnum,
     required String userId,

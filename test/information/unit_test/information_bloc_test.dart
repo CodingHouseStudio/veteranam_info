@@ -24,6 +24,14 @@ void main() {
       when(mockInformationRepository.getInformationItems()).thenAnswer(
         (_) => Stream.value(KTestText.informationModelItemsModify),
       );
+      when(
+        mockInformationRepository.updateLikeCount(
+          informationModel: KTestText.informationModelItems.first,
+          isLiked: true,
+        ),
+      ).thenAnswer(
+        (_) async => const Right(true),
+      );
       when(mockAppAuthenticationRepository.currentUser).thenAnswer(
         (invocation) => KTestText.user,
       );
@@ -342,6 +350,88 @@ void main() {
                   KDimensions.loadItems * 2 &&
               state.itemsLoaded == KDimensions.loadItems * 2 &&
               state.filtersIndex.isEmpty,
+        ),
+      ],
+    );
+
+    // blocTest<InformationWatcherBloc, InformationWatcherState>(
+    //   'emits [InformationWatcherState()] ',
+    //   build: () => informationWatcherBloc,
+    //   act: (bloc) async {
+    //     bloc.add(const InformationWatcherEvent.started());
+    //     await expectLater(
+    //       bloc.stream,
+    //       emitsInOrder([
+    //         predicate<InformationWatcherState>(
+    //           (state) => state.loadingStatus == LoadingStatus.loading,
+    //         ),
+    //         predicate<InformationWatcherState>(
+    //           (state) => state.loadingStatus == LoadingStatus.loaded,
+    //         ),
+    //       ]),
+    //       reason: 'Wait loading data',
+    //     );
+    //     bloc.add(
+    //       InformationWatcherEvent.like(
+    //         informationModel: KTestText.informationModelItems.first,
+    //         isLiked: true,
+    //       ),
+    //     );
+    //   },
+    //   expect: () async => [
+    //     predicate<InformationWatcherState>(
+    //       (state) => state.loadingStatus == LoadingStatus.loading,
+    //     ),
+    //     predicate<InformationWatcherState>(
+    //       (state) => state.loadingStatus == LoadingStatus.loaded,
+    //     ),
+    //     predicate<InformationWatcherState>(
+    //       (state) => state.loadingStatus == LoadingStatus.loaded,
+    //     ),
+    //   ],
+    // );
+
+    blocTest<InformationWatcherBloc, InformationWatcherState>(
+      'emits [InformationWatcherState()] ',
+      build: () => informationWatcherBloc,
+      act: (bloc) async => bloc
+        ..add(const InformationWatcherEvent.started())
+        ..add(
+          InformationWatcherEvent.like(
+            informationModel: KTestText.informationModelItems.first,
+            isLiked: true,
+          ),
+        ),
+      expect: () => [
+        predicate<InformationWatcherState>(
+          (state) => state.loadingStatus == LoadingStatus.loading,
+        ),
+        predicate<InformationWatcherState>(
+          (state) => state.loadingStatus == LoadingStatus.loaded,
+        ),
+      ],
+    );
+
+    blocTest<InformationWatcherBloc, InformationWatcherState>(
+      'emits [InformationWatcherState()] ',
+      build: () => informationWatcherBloc,
+      act: (bloc) async => bloc
+        ..add(const InformationWatcherEvent.started())
+        ..add(
+          InformationWatcherEvent.changeLike(
+            informationModel: KTestText.informationModelItems.first,
+            isLiked: true,
+          ),
+        ),
+      expect: () => [
+        predicate<InformationWatcherState>(
+          (state) => state.loadingStatus == LoadingStatus.loading,
+        ),
+        predicate<InformationWatcherState>(
+          (state) => state.loadingStatus == LoadingStatus.loaded,
+        ),
+        predicate<InformationWatcherState>(
+          (state) => state.loadingStatus == LoadingStatus.loaded,
         ),
       ],
     );

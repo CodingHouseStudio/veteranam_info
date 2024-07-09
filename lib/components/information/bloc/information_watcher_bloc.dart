@@ -37,12 +37,15 @@ class InformationWatcherBloc
     on<_Filter>(_onFilter);
     on<_GetReport>(_onGetReport);
     // on<_FilterReset>(_onFilterReset);
+    on<_Like>(_onLike);
+    on<_ChangeLike>(_onChangeLike);
   }
 
   final IInformationRepository _informationRepository;
   StreamSubscription<List<InformationModel>>? _informationItemsSubscription;
   final IReportRepository _reportRepository;
   final IAppAuthenticationRepository _appAuthenticationRepository;
+  Timer? _debounceTimer;
 
   Future<void> _onStarted(
     _Started event,
@@ -216,6 +219,86 @@ class InformationWatcherBloc
       ),
     );
   }
+
+  Future<void> _onLike(
+    _Like event,
+    Emitter<InformationWatcherState> emit,
+  ) async {
+    if (_debounceTimer?.isActive ?? false) {
+      _debounceTimer?.cancel();
+      _debounceTimer = null;
+      return;
+    }
+    if (!(_debounceTimer?.isActive ?? false)) {
+      _debounceTimer = Timer(const Duration(seconds: 5), () async {
+        add(
+          InformationWatcherEvent.changeLike(
+            informationModel: event.informationModel,
+            isLiked: event.isLiked,
+          ),
+        );
+      });
+    }
+  }
+
+  Future<void> _onChangeLike(
+    _ChangeLike event,
+    Emitter<InformationWatcherState> emit,
+  ) async {
+    final result = await _informationRepository.updateLikeCount(
+      informationModel: event.informationModel,
+      isLiked: event.isLiked,
+    );
+
+    result.fold(
+      (l) => emit(
+        state.copyWith(
+          failure: InformationFailure.error,
+          loadingStatus: LoadingStatus.error,
+        ),
+      ),
+      (r) => emit(
+        state.copyWith(
+          failure: null,
+          loadingStatus: LoadingStatus.loaded,
+        ),
+      ),
+    );
+  }
+
+  // EasyDebounce.debounce(
+  //   'change like',
+  //   const Duration(seconds: 5),
+  //   () => _informationRepository.updateLikeCount(
+  //     informationModel: event.informationModel,
+  //     isLiked: event.isLiked,
+  //   ),
+  // );
+  // final stream = Stream.periodic(const Duration(seconds: 5), (i) => i)
+  //     .take(1)
+  //     .asyncMap((_) async {
+  //   final result = await _informationRepository.updateLikeCount(
+  //     informationModel: event.informationModel,
+  //     isLiked: event.isLiked,
+  //   );
+
+  //   result.fold(
+  //     (l) => emit(
+  //       state.copyWith(
+  //         failure: InformationFailure.error,
+  //         loadingStatus: LoadingStatus.error,
+  //       ),
+  //     ),
+  //     (r) => emit(
+  //       state.copyWith(
+  //         failure: null,
+  //         loadingStatus: LoadingStatus.loaded,
+  //       ),
+  //     ),
+  //   );
+  // });
+
+  // stream.throttle(const Duration(seconds: 5)).listen((_) {});
 
   @override
   Future<void> close() {

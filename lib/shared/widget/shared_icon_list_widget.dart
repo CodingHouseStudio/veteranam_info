@@ -30,7 +30,7 @@ class SharedIconListWidget extends StatelessWidget {
           onPressed: null,
           icon: KIcon.captivePortal,
         ),
-        if (isDesk) KSizedBox.kWidthSizedBox24 else KSizedBox.kWidthSizedBox8,
+        if (isDesk) KSizedBox.kWidthSizedBox24,
         _cardIconWidget(
           label: context.l10n.share,
           context,
