@@ -39,5 +39,7 @@ Future<void> reportDialogCheckFailureHelper(
     findsOneWidget,
   );
 
-  await reportDialogInitialHelper(tester);
+  await reportDialogOpenHelper(tester);
+
+  await reportDialogHelper(tester);
 }

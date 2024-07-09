@@ -22,11 +22,11 @@ class ReportDialogWidget extends StatelessWidget {
       constraints: const BoxConstraints(maxWidth: KMinMaxSize.maxWidth460),
       child: BlocConsumer<ReportBloc, ReportState>(
         listener: (context, state) {
-          context.pop();
-          afterEvent?.call();
+          if (state.formState == ReportEnum.success) {
+            context.pop();
+            afterEvent?.call();
+          }
         },
-        listenWhen: (previous, current) =>
-            current.formState == ReportEnum.success,
         builder: (context, _) => Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,

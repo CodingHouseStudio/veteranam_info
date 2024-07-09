@@ -6,11 +6,13 @@ class ComplaintWidget extends StatelessWidget {
     required this.isDesk,
     required this.cardEnum,
     required this.afterEvent,
+    required this.cardId,
     super.key,
   });
   final bool isDesk;
   final CardEnum cardEnum;
   final void Function()? afterEvent;
+  final String cardId;
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +24,7 @@ class ComplaintWidget extends StatelessWidget {
             isDesk: isDesk,
             cardEnum: cardEnum,
             afterEvent: afterEvent,
+            cardId: cardId,
           ),
           icon: KIcon.brightnessAlert,
           padding: KPadding.kPaddingSize12,

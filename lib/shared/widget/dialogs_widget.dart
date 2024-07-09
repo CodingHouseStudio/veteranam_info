@@ -111,13 +111,15 @@ class _DialogsWidget {
     required bool isDesk,
     required CardEnum cardEnum,
     required void Function()? afterEvent,
+    required String cardId,
   }) {
     if (isDesk) {
       showDialog<void>(
         context: context,
         builder: (BuildContext context) {
           return BlocProvider(
-            create: (context) => GetIt.I.get<ReportBloc>(),
+            create: (context) =>
+                GetIt.I.get<ReportBloc>()..add(ReportEvent.started(cardId)),
             child: LayoutBuilder(
               builder: (BuildContext context, BoxConstraints constraints) {
                 final isDeskValue = constraints.maxWidth >
@@ -176,7 +178,8 @@ class _DialogsWidget {
         showDragHandle: true,
         backgroundColor: AppColors.materialThemeKeyColorsNeutral,
         builder: (context) => BlocProvider(
-          create: (context) => GetIt.I.get<ReportBloc>(),
+          create: (context) =>
+              GetIt.I.get<ReportBloc>()..add(ReportEvent.started(cardId)),
           child: LayoutBuilder(
             builder: (BuildContext context, BoxConstraints constraints) {
               final isDeskValue =

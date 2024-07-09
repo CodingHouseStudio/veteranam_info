@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:veteranam/components/components.dart';
 
 import 'package:veteranam/shared/shared.dart';
 
@@ -8,11 +7,13 @@ class DiscountsCardWidget extends StatelessWidget {
   const DiscountsCardWidget({
     required this.discountItem,
     required this.isDesk,
+    required this.reportEvent,
     super.key,
   });
 
   final DiscountModel discountItem;
   final bool isDesk;
+  final void Function()? reportEvent;
 
   @override
   Widget build(BuildContext context) {
@@ -20,11 +21,13 @@ class DiscountsCardWidget extends StatelessWidget {
       return _DiscountsCardWidgetDesk(
         discountItem: discountItem,
         isDesk: isDesk,
+        reportEvent: reportEvent,
       );
     } else {
-      return DiscountsCardWidgetMob(
+      return _DiscountsCardWidgetMob(
         discountItem: discountItem,
         isDesk: isDesk,
+        reportEvent: reportEvent,
       );
     }
   }
@@ -34,10 +37,12 @@ class _DiscountsCardWidgetDesk extends StatelessWidget {
   const _DiscountsCardWidgetDesk({
     required this.discountItem,
     required this.isDesk,
+    required this.reportEvent,
   });
 
   final DiscountModel discountItem;
   final bool isDesk;
+  final void Function()? reportEvent;
 
   @override
   Widget build(BuildContext context) {
@@ -146,18 +151,10 @@ class _DiscountsCardWidgetDesk extends StatelessWidget {
                         horizontal: KPadding.kPaddingSize8,
                         vertical: KPadding.kPaddingSize4,
                       ),
-                      child: Row(
-                        children: [
-                          const CircleAvatar(
-                            radius: KPadding.kPaddingSize4,
-                          ),
-                          KSizedBox.kWidthSizedBox8,
-                          Text(
-                            discountItem.discount.getDiscountString(context),
-                            key: KWidgetkeys.widget.discountCard.discount,
-                            style: AppTextStyle.materialThemeLabelLarge,
-                          ),
-                        ],
+                      child: TextPointWidget(
+                        discountItem.discount.getDiscountString(context),
+                        key: KWidgetkeys.widget.discountCard.discount,
+                        hasExpanded: false,
                       ),
                     ),
                   ],
@@ -177,20 +174,11 @@ class _DiscountsCardWidgetDesk extends StatelessWidget {
                   ],
                 ),
                 KSizedBox.kHeightSizedBox16,
-                SharedIconListWidget(
-                  text: '${discountItem.description}\n'
-                      '\n${context.l10n.toGetItYouNeed}' //Title medium
-                      '\n${discountItem.requirements}\n'
-                      '\n${discountItem.exclusions}\n'
-                      // ignore: lines_longer_than_80_chars
-                      '${discountItem.additionalDetails != null ? '\n${discountItem.additionalDetails}\n' : ''}'
-                      '\n${discountItem.phoneNumber}',
-                  isDesk: isDesk,
-                  link: discountItem.directLink ?? discountItem.link,
-                  cardEnum: CardEnum.discount,
-                  afterEvent: () => context
-                      .read<DiscountWatcherBloc>()
-                      .add(DiscountWatcherEvent.report(discountItem)),
+                _sharedIconListWidget(
+                  discountItem: discountItem,
+                  context: context,
+                  isDesk: true,
+                  reportEvent: reportEvent,
                 ),
                 KSizedBox.kHeightSizedBox16,
               ],
@@ -202,15 +190,16 @@ class _DiscountsCardWidgetDesk extends StatelessWidget {
   }
 }
 
-class DiscountsCardWidgetMob extends StatelessWidget {
-  const DiscountsCardWidgetMob({
+class _DiscountsCardWidgetMob extends StatelessWidget {
+  const _DiscountsCardWidgetMob({
     required this.discountItem,
     required this.isDesk,
-    super.key,
+    required this.reportEvent,
   });
 
   final DiscountModel discountItem;
   final bool isDesk;
+  final void Function()? reportEvent;
 
   @override
   Widget build(BuildContext context) {
@@ -312,10 +301,9 @@ class DiscountsCardWidgetMob extends StatelessWidget {
                             vertical: KPadding.kPaddingSize4,
                           ),
                           child: TextPointWidget(
+                            discountItem.discount.getDiscountString(context),
                             key: KWidgetkeys.widget.discountCard.discount,
                             hasExpanded: false,
-                            '${context.l10n.discount} '
-                            '${discountItem.discount.first}%',
                           ),
                         ),
                       ],
@@ -343,14 +331,11 @@ class DiscountsCardWidgetMob extends StatelessWidget {
                     Padding(
                       padding:
                           const EdgeInsets.only(left: KPadding.kPaddingSize16),
-                      child: SharedIconListWidget(
-                        text: '${discountItem.description} ',
-                        isDesk: isDesk,
-                        cardEnum: CardEnum.discount,
-                        link: discountItem.directLink ?? discountItem.link,
-                        afterEvent: () => context
-                            .read<DiscountWatcherBloc>()
-                            .add(DiscountWatcherEvent.report(discountItem)),
+                      child: _sharedIconListWidget(
+                        discountItem: discountItem,
+                        context: context,
+                        isDesk: false,
+                        reportEvent: reportEvent,
                       ),
                     ),
                     KSizedBox.kHeightSizedBox16,
@@ -383,4 +368,25 @@ Widget _expiration(String expiration) => Container(
           ),
         ],
       ),
+    );
+
+Widget _sharedIconListWidget({
+  required DiscountModel discountItem,
+  required BuildContext context,
+  required bool isDesk,
+  required void Function()? reportEvent,
+}) =>
+    SharedIconListWidget(
+      text: '${discountItem.description}\n'
+          '\n${context.l10n.toGetItYouNeed}' //Title medium
+          '\n${discountItem.requirements}\n'
+          '\n${discountItem.exclusions}\n'
+          // ignore: lines_longer_than_80_chars
+          '${discountItem.additionalDetails != null ? '\n${discountItem.additionalDetails}\n' : ''}'
+          '\n${discountItem.phoneNumber}',
+      isDesk: isDesk,
+      link: discountItem.directLink ?? discountItem.link,
+      cardEnum: CardEnum.discount,
+      afterEvent: reportEvent,
+      cardId: discountItem.id,
     );

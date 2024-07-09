@@ -17,13 +17,8 @@ class TextPointWidget extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Container(
-          decoration: const BoxDecoration(
-            shape: BoxShape.circle,
-            color: AppColors.materialThemeKeyColorsSecondary,
-          ),
-          height: KSize.kPixel8,
-          width: KSize.kPixel8,
+        const CircleAvatar(
+          radius: KPadding.kPaddingSize4,
         ),
         KSizedBox.kWidthSizedBox8,
         if (hasExpanded)
