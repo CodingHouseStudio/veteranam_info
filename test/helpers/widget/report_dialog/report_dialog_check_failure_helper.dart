@@ -38,6 +38,4 @@ Future<void> reportDialogCheckFailureHelper(
     find.byKey(KWidgetkeys.widget.reportDialog.checkPointError),
     findsOneWidget,
   );
-
-  await reportDialogInitialHelper(tester);
 }

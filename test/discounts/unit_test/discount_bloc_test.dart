@@ -1,4 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
+import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:veteranam/components/components.dart';
@@ -13,14 +14,31 @@ void main() {
   group('${KScreenBlocName.discount} ${KGroupText.bloc}', () {
     late DiscountWatcherBloc discountWatcherBloc;
     late IDiscountRepository mockdiscountRepository;
+    late IAppAuthenticationRepository mockAppAuthenticationRepository;
+    late IReportRepository mockReportRepository;
 
     setUp(() {
       mockdiscountRepository = MockIDiscountRepository();
-      discountWatcherBloc = DiscountWatcherBloc(
-        discountRepository: mockdiscountRepository,
-      );
+      mockAppAuthenticationRepository = MockIAppAuthenticationRepository();
+      mockReportRepository = MockIReportRepository();
       when(mockdiscountRepository.getDiscountItems()).thenAnswer(
         (_) => Stream.value(KTestText.discountModelItemsModify),
+      );
+      when(mockAppAuthenticationRepository.currentUser).thenAnswer(
+        (invocation) => KTestText.user,
+      );
+      when(
+        mockReportRepository.getCardReportById(
+          cardEnum: CardEnum.discount,
+          userId: KTestText.user.id,
+        ),
+      ).thenAnswer(
+        (invocation) async => Right(KTestText.reportItems),
+      );
+      discountWatcherBloc = DiscountWatcherBloc(
+        discountRepository: mockdiscountRepository,
+        reportRepository: mockReportRepository,
+        appAuthenticationRepository: mockAppAuthenticationRepository,
       );
     });
 
@@ -38,6 +56,7 @@ void main() {
         ),
       ],
     );
+
     blocTest<DiscountWatcherBloc, DiscountWatcherState>(
       'emits [discountWatcherState()] when error',
       build: () => discountWatcherBloc,
@@ -58,7 +77,6 @@ void main() {
         ),
       ],
     );
-
     blocTest<DiscountWatcherBloc, DiscountWatcherState>(
       'emits [discountWatcherState()] when loading'
       ' discountModel list and filtering category it',
@@ -245,6 +263,15 @@ void main() {
         bloc.add(
           const DiscountWatcherEvent.loadNextItems(),
         );
+        when(
+          mockReportRepository.getCardReportById(
+            cardEnum: CardEnum.discount,
+            userId: KTestText.user.id,
+          ),
+        ).thenAnswer(
+          (invocation) async => Right([KTestText.reportItems.first]),
+        );
+        bloc.add(const DiscountWatcherEvent.getReport());
       },
       expect: () => [
         predicate<DiscountWatcherState>(
@@ -255,7 +282,8 @@ void main() {
               state.loadingStatus == LoadingStatus.loaded &&
               state.filteredDiscountModelItems.length ==
                   KDimensions.loadItems &&
-              state.itemsLoaded == KDimensions.loadItems,
+              state.itemsLoaded == KDimensions.loadItems &&
+              state.reportItems.isNotEmpty,
         ),
         predicate<DiscountWatcherState>(
           (state) =>
@@ -269,7 +297,16 @@ void main() {
               state.loadingStatus == LoadingStatus.loaded &&
               state.filteredDiscountModelItems.length ==
                   KDimensions.loadItems * 2 &&
-              state.itemsLoaded == KDimensions.loadItems * 2,
+              state.itemsLoaded == KDimensions.loadItems * 2 &&
+              state.reportItems.length != 1,
+        ),
+        predicate<DiscountWatcherState>(
+          (state) =>
+              state.loadingStatus == LoadingStatus.loaded &&
+              state.filteredDiscountModelItems.length ==
+                  KDimensions.loadItems * 2 &&
+              state.itemsLoaded == KDimensions.loadItems * 2 &&
+              state.reportItems.length == 1,
         ),
       ],
     );

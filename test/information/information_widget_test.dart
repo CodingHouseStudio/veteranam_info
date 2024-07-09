@@ -18,6 +18,8 @@ void main() {
   group('${KScreenBlocName.information} ', () {
     late IInformationRepository mockInformationRepository;
     late AuthenticationRepository mockAuthenticationRepository;
+    late IAppAuthenticationRepository mockAppAuthenticationRepository;
+    late IReportRepository mockReportRepository;
     setUp(() {
       KPlatformConstants.isWebDesktop = false;
       mockInformationRepository = MockIInformationRepository();
@@ -47,6 +49,19 @@ void main() {
       ).thenAnswer(
         (invocation) async => const Right(true),
       );
+      mockAppAuthenticationRepository = MockAppAuthenticationRepository();
+      when(mockAppAuthenticationRepository.currentUser).thenAnswer(
+        (invocation) => KTestText.user,
+      );
+      mockReportRepository = MockIReportRepository();
+      when(
+        mockReportRepository.getCardReportById(
+          cardEnum: CardEnum.information,
+          userId: KTestText.user.id,
+        ),
+      ).thenAnswer(
+        (invocation) async => Right(KTestText.reportItems),
+      );
     });
     group('${KGroupText.failure} ', () {
       setUp(() {
@@ -61,6 +76,8 @@ void main() {
           mockInformationRepository: mockInformationRepository,
           mockAuthenticationRepository: mockAuthenticationRepository,
           tester: tester,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          mockReportRepository: mockReportRepository,
         );
 
         await loadingFailureHelper(
@@ -90,6 +107,8 @@ void main() {
         await informationPumpAppHelper(
           mockInformationRepository: mockInformationRepository,
           mockAuthenticationRepository: mockAuthenticationRepository,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          mockReportRepository: mockReportRepository,
           tester: tester,
         );
 
@@ -111,6 +130,8 @@ void main() {
         await informationPumpAppHelper(
           mockInformationRepository: mockInformationRepository,
           mockAuthenticationRepository: mockAuthenticationRepository,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          mockReportRepository: mockReportRepository,
           tester: tester,
         );
 
@@ -121,6 +142,8 @@ void main() {
         (tester) async => informationPumpAppHelper(
           mockInformationRepository: mockInformationRepository,
           mockAuthenticationRepository: mockAuthenticationRepository,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          mockReportRepository: mockReportRepository,
           tester: tester,
         ),
         // lastCard: KWidgetkeys.screen.information.cardLast,
@@ -130,6 +153,8 @@ void main() {
         await informationPumpAppHelper(
           mockInformationRepository: mockInformationRepository,
           mockAuthenticationRepository: mockAuthenticationRepository,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          mockReportRepository: mockReportRepository,
           tester: tester,
         );
 
@@ -143,6 +168,8 @@ void main() {
           await informationPumpAppHelper(
             mockInformationRepository: mockInformationRepository,
             mockAuthenticationRepository: mockAuthenticationRepository,
+            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+            mockReportRepository: mockReportRepository,
             tester: tester,
             mockGoRouter: mockGoRouter,
           );
@@ -155,6 +182,8 @@ void main() {
             await informationPumpAppHelper(
               mockInformationRepository: mockInformationRepository,
               mockAuthenticationRepository: mockAuthenticationRepository,
+              mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+              mockReportRepository: mockReportRepository,
               tester: tester,
               mockGoRouter: mockGoRouter,
             );
@@ -175,6 +204,9 @@ void main() {
               await informationPumpAppHelper(
                 mockInformationRepository: mockInformationRepository,
                 mockAuthenticationRepository: mockAuthenticationRepository,
+                mockAppAuthenticationRepository:
+                    mockAppAuthenticationRepository,
+                mockReportRepository: mockReportRepository,
                 tester: tester,
                 mockGoRouter: mockGoRouter,
               );

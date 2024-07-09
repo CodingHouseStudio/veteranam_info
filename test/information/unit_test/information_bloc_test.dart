@@ -14,12 +14,13 @@ void main() {
   group('${KScreenBlocName.information} ${KGroupText.bloc}', () {
     late InformationWatcherBloc informationWatcherBloc;
     late IInformationRepository mockInformationRepository;
+    late IAppAuthenticationRepository mockAppAuthenticationRepository;
+    late IReportRepository mockReportRepository;
 
     setUp(() {
       mockInformationRepository = MockIInformationRepository();
-      informationWatcherBloc = InformationWatcherBloc(
-        informationRepository: mockInformationRepository,
-      );
+      mockAppAuthenticationRepository = MockIAppAuthenticationRepository();
+      mockReportRepository = MockIReportRepository();
       when(mockInformationRepository.getInformationItems()).thenAnswer(
         (_) => Stream.value(KTestText.informationModelItemsModify),
       );
@@ -30,6 +31,22 @@ void main() {
         ),
       ).thenAnswer(
         (_) async => const Right(true),
+      );
+      when(mockAppAuthenticationRepository.currentUser).thenAnswer(
+        (invocation) => KTestText.user,
+      );
+      when(
+        mockReportRepository.getCardReportById(
+          cardEnum: CardEnum.information,
+          userId: KTestText.user.id,
+        ),
+      ).thenAnswer(
+        (invocation) async => Right(KTestText.reportItems),
+      );
+      informationWatcherBloc = InformationWatcherBloc(
+        informationRepository: mockInformationRepository,
+        reportRepository: mockReportRepository,
+        appAuthenticationRepository: mockAppAuthenticationRepository,
       );
     });
 
@@ -135,6 +152,17 @@ void main() {
         bloc.add(
           const InformationWatcherEvent.loadNextItems(),
         );
+        when(
+          mockReportRepository.getCardReportById(
+            cardEnum: CardEnum.information,
+            userId: KTestText.user.id,
+          ),
+        ).thenAnswer(
+          (invocation) async => Right([KTestText.reportItems.first]),
+        );
+        bloc.add(
+          const InformationWatcherEvent.getReport(),
+        );
       },
       expect: () => [
         predicate<InformationWatcherState>(
@@ -145,7 +173,8 @@ void main() {
               state.loadingStatus == LoadingStatus.loaded &&
               state.filteredInformationModelItems.length ==
                   KDimensions.loadItems &&
-              state.itemsLoaded == KDimensions.loadItems,
+              state.itemsLoaded == KDimensions.loadItems &&
+              state.reportItems.isNotEmpty,
         ),
         predicate<InformationWatcherState>(
           (state) =>
@@ -159,7 +188,16 @@ void main() {
               state.loadingStatus == LoadingStatus.loaded &&
               state.filteredInformationModelItems.length ==
                   KDimensions.loadItems * 2 &&
-              state.itemsLoaded == KDimensions.loadItems * 2,
+              state.itemsLoaded == KDimensions.loadItems * 2 &&
+              state.reportItems.length != 1,
+        ),
+        predicate<InformationWatcherState>(
+          (state) =>
+              state.loadingStatus == LoadingStatus.loaded &&
+              state.filteredInformationModelItems.length ==
+                  KDimensions.loadItems * 2 &&
+              state.itemsLoaded == KDimensions.loadItems * 2 &&
+              state.reportItems.length == 1,
         ),
       ],
     );

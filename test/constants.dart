@@ -181,6 +181,7 @@ abstract class KTestText {
   static final dateTime = DateTime(2024, 4, 12);
   static final dateTimeId = DateTime(0, 0, 0, 0, 1, 1, 1, 1);
   static const downloadURL = 'test_URL';
+  static const id = '1';
 
   static final discountModelItems = <DiscountModel>[
     for (var i = 0; i < 50; i++)
@@ -236,7 +237,7 @@ abstract class KTestText {
   ];
 
   static final fundItems = <FundModel>[
-    for (var i = 0; i < 40; i++)
+    for (var i = 0; i < _items; i++)
       KMockText.fundModel.copyWith(
         id: i.toString(),
       ),
@@ -305,21 +306,39 @@ abstract class KTestText {
       ];
 
   static final reportModel = ReportModel(
-    id: '',
+    id: id,
     reasonComplaint: ReasonComplaint.fraudOrSpam,
     email: userEmail,
     message: field,
     date: dateTime,
     card: CardEnum.funds,
+    userId: user.id,
+    cardId: id,
   );
 
+  static final reportItems = <ReportModel>[
+    for (var i = 0; i < 3; i++)
+      ReportModel(
+        id: i.toString(),
+        reasonComplaint: ReasonComplaint.fraudOrSpam,
+        email: userEmail,
+        message: field,
+        date: dateTime,
+        card: CardEnum.discount,
+        userId: user.id,
+        cardId: id,
+      ),
+  ];
+
   static final reportModelIncorect = ReportModel(
-    id: '',
+    id: id,
     reasonComplaint: ReasonComplaint.fraudOrSpam,
     email: userEmailIncorrect,
     message: field,
     date: dateTime,
     card: CardEnum.funds,
+    userId: user.id,
+    cardId: id,
   );
 }
 

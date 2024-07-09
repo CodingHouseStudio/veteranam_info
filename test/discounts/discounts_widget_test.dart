@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mockito/mockito.dart';
@@ -16,9 +17,37 @@ void main() {
   tearDown(GetIt.I.reset);
   group('${KScreenBlocName.discount} ', () {
     late IDiscountRepository mockDiscountRepository;
+    late IAppAuthenticationRepository mockAppAuthenticationRepository;
+    late IReportRepository mockReportRepository;
+    late AuthenticationRepository mockAuthenticationRepository;
     setUp(() {
       KPlatformConstants.isWebDesktop = false;
       mockDiscountRepository = MockIDiscountRepository();
+      mockAppAuthenticationRepository = MockAppAuthenticationRepository();
+      mockAuthenticationRepository = MockAuthenticationRepository();
+
+      when(mockAuthenticationRepository.currentUser).thenAnswer(
+        (realInvocation) => User.empty,
+      );
+      when(mockAuthenticationRepository.currentUserSetting).thenAnswer(
+        (realInvocation) => UserSetting.empty,
+      );
+      when(mockAuthenticationRepository.isAnonymouslyOrEmty()).thenAnswer(
+        (realInvocation) => true,
+      );
+
+      when(mockAppAuthenticationRepository.currentUser).thenAnswer(
+        (invocation) => KTestText.user,
+      );
+      mockReportRepository = MockIReportRepository();
+      when(
+        mockReportRepository.getCardReportById(
+          cardEnum: CardEnum.discount,
+          userId: KTestText.user.id,
+        ),
+      ).thenAnswer(
+        (invocation) async => Right(KTestText.reportItems),
+      );
     });
     group('${KGroupText.failure} ', () {
       setUp(() {
@@ -30,6 +59,9 @@ void main() {
         await discountsPumpAppHelper(
           tester: tester,
           mockDiscountRepository: mockDiscountRepository,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          mockReportRepository: mockReportRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
         );
 
         await loadingFailureHelper(
@@ -56,6 +88,9 @@ void main() {
         await discountsPumpAppHelper(
           tester: tester,
           mockDiscountRepository: mockDiscountRepository,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          mockReportRepository: mockReportRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
         );
 
         await mockButtonHelper(
@@ -75,6 +110,9 @@ void main() {
         await discountsPumpAppHelper(
           tester: tester,
           mockDiscountRepository: mockDiscountRepository,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          mockReportRepository: mockReportRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
         );
 
         await discountInitialHelper(tester);
@@ -84,9 +122,70 @@ void main() {
         (tester) async => discountsPumpAppHelper(
           tester: tester,
           mockDiscountRepository: mockDiscountRepository,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          mockReportRepository: mockReportRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
         ),
         // lastCard: KWidgetkeys.screen.discounts.cardLast,
       );
+
+      testWidgets('Report Dialog Check Point Failure', (tester) async {
+        await discountsPumpAppHelper(
+          tester: tester,
+          mockDiscountRepository: mockDiscountRepository,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          mockReportRepository: mockReportRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
+        );
+
+        await reportDialogCheckFailureHelper(tester);
+      });
+      testWidgets('Report Dialog Incorect Send', (tester) async {
+        await discountsPumpAppHelper(
+          tester: tester,
+          mockDiscountRepository: mockDiscountRepository,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          mockReportRepository: mockReportRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
+        );
+
+        await reportDialogIncorrectSendHelper(
+          tester: tester,
+        );
+      });
+      testWidgets('Report Dialog Incorect Send(field null and user)',
+          (tester) async {
+        when(mockAuthenticationRepository.isAnonymouslyOrEmty()).thenAnswer(
+          (realInvocation) => false,
+        );
+
+        await discountsPumpAppHelper(
+          tester: tester,
+          mockDiscountRepository: mockDiscountRepository,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          mockReportRepository: mockReportRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
+        );
+
+        await reportDialogIncorrectSendHelper(
+          tester: tester,
+          fieldNull: true,
+        );
+      });
+      testWidgets('Report Dialog Incorect Send(field null)', (tester) async {
+        await discountsPumpAppHelper(
+          tester: tester,
+          mockDiscountRepository: mockDiscountRepository,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          mockReportRepository: mockReportRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
+        );
+
+        await reportDialogIncorrectSendHelper(
+          tester: tester,
+          fieldNull: true,
+        );
+      });
 
       group('${KGroupText.goRouter} ', () {
         late MockGoRouter mockGoRouter;
@@ -96,6 +195,9 @@ void main() {
             tester: tester,
             mockDiscountRepository: mockDiscountRepository,
             mockGoRouter: mockGoRouter,
+            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+            mockReportRepository: mockReportRepository,
+            mockAuthenticationRepository: mockAuthenticationRepository,
           );
 
           await discountInitialHelper(tester);
@@ -106,6 +208,9 @@ void main() {
               tester: tester,
               mockDiscountRepository: mockDiscountRepository,
               mockGoRouter: mockGoRouter,
+              mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+              mockReportRepository: mockReportRepository,
+              mockAuthenticationRepository: mockAuthenticationRepository,
             );
 
             await myDiscountHelper(
