@@ -77,9 +77,9 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
 
   @override
   void initState() {
-    // if (widget.text != null) {
-    //   controller = TextEditingController(text: widget.text);
-    // }
+    if (widget.text != null) {
+      controller = TextEditingController(text: widget.text);
+    }
     isHovered = false;
     super.initState();
   }
@@ -107,7 +107,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
         onEditingComplete: widget.onEditingCompleted,
         obscureText: widget.obscureText,
         autocorrect: !widget.obscureText,
-        controller: widget.controller,
+        controller: controller ?? widget.controller,
         maxLines: widget.expands == null ? widget.maxLines ?? 1 : null,
         maxLength: widget.maxLength,
         keyboardType: widget.keyboardType ?? TextInputType.text,
@@ -154,6 +154,9 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
   void dispose() {
     if (widget.disposeFocusNode ?? false) {
       widget.focusNode?.dispose();
+    }
+    if (widget.text != null) {
+      controller?.dispose();
     }
     super.dispose();
   }

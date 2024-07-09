@@ -88,7 +88,7 @@ class FirestoreService {
       // If the server fetch is successful, return the data
       return docSnapshot.docs
           .map((doc) => FundModel.fromJson(doc.data()))
-          .where((e) => e.image != null)
+          .where((e) => e.image != null || Config.isDevelopment)
           .toList();
     } on FirebaseException catch (e) {
       if (e.code == 'unavailable') {
@@ -331,5 +331,20 @@ class FirestoreService {
         .collection(FirebaseCollectionName.information)
         .doc(informationModel.id)
         .update(informationModel.toJson());
+  }
+
+  Future<List<ReportModel>> getCardReportById({
+    required CardEnum cardEnum,
+    required String userId,
+  }) async {
+    final querySnapshot = await _db
+        .collection(FirebaseCollectionName.report)
+        .where(ReportModelJsonField.card, isEqualTo: cardEnum.getValue)
+        .where(ReportModelJsonField.userId, isEqualTo: userId)
+        .get();
+
+    return querySnapshot.docs
+        .map((doc) => ReportModel.fromJson(doc.data()))
+        .toList();
   }
 }

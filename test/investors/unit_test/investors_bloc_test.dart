@@ -14,13 +14,30 @@ void main() {
   group('${KScreenBlocName.investors} ${KGroupText.bloc}', () {
     late InvestorsWatcherBloc investorsWatcherBloc;
     late IInvestorsRepository mockInvestorsRepository;
+    late IAppAuthenticationRepository mockAppAuthenticationRepository;
+    late IReportRepository mockReportRepository;
     setUp(() {
       mockInvestorsRepository = MockIInvestorsRepository();
-      investorsWatcherBloc = InvestorsWatcherBloc(
-        investorsRepository: mockInvestorsRepository,
-      );
+      mockAppAuthenticationRepository = MockIAppAuthenticationRepository();
+      mockReportRepository = MockIReportRepository();
       when(mockInvestorsRepository.getFunds()).thenAnswer(
         (_) async => Right(KTestText.fundItems),
+      );
+      when(mockAppAuthenticationRepository.currentUser).thenAnswer(
+        (invocation) => KTestText.user,
+      );
+      when(
+        mockReportRepository.getCardReportById(
+          cardEnum: CardEnum.funds,
+          userId: KTestText.user.id,
+        ),
+      ).thenAnswer(
+        (invocation) async => Right(KTestText.reportItems),
+      );
+      investorsWatcherBloc = InvestorsWatcherBloc(
+        investorsRepository: mockInvestorsRepository,
+        reportRepository: mockReportRepository,
+        appAuthenticationRepository: mockAppAuthenticationRepository,
       );
     });
 
@@ -79,6 +96,17 @@ void main() {
         bloc.add(
           const InvestorsWatcherEvent.loadeNextItems(),
         );
+        when(
+          mockReportRepository.getCardReportById(
+            cardEnum: CardEnum.funds,
+            userId: KTestText.user.id,
+          ),
+        ).thenAnswer(
+          (invocation) async => Right([KTestText.reportItems.first]),
+        );
+        bloc.add(
+          const InvestorsWatcherEvent.getReport(),
+        );
       },
       expect: () => [
         predicate<InvestorsWatcherState>(
@@ -88,7 +116,8 @@ void main() {
           (state) =>
               state.loadingStatus == LoadingStatus.loaded &&
               state.loadingFundItems.length == KDimensions.investorsLoadItems &&
-              state.itemsLoaded == KDimensions.investorsLoadItems,
+              state.itemsLoaded == KDimensions.investorsLoadItems &&
+              state.reportItems.isNotEmpty,
         ),
         predicate<InvestorsWatcherState>(
           (state) =>
@@ -101,7 +130,16 @@ void main() {
               state.loadingStatus == LoadingStatus.loaded &&
               state.loadingFundItems.length ==
                   KDimensions.investorsLoadItems * 2 &&
-              state.itemsLoaded == KDimensions.investorsLoadItems * 2,
+              state.itemsLoaded == KDimensions.investorsLoadItems * 2 &&
+              state.reportItems.length != 1,
+        ),
+        predicate<InvestorsWatcherState>(
+          (state) =>
+              state.loadingStatus == LoadingStatus.loaded &&
+              state.loadingFundItems.length ==
+                  KDimensions.investorsLoadItems * 2 &&
+              state.itemsLoaded == KDimensions.investorsLoadItems * 2 &&
+              state.reportItems.length == 1,
         ),
       ],
     );

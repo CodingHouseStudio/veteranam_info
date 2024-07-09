@@ -19,11 +19,13 @@ mixin _$InformationWatcherEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(List<InformationModel> informationItemsModel)
+    required TResult Function(List<InformationModel> informationItemsModel,
+            List<ReportModel> reportItems)
         updated,
     required TResult Function() loadNextItems,
     required TResult Function(int filterIndex) filter,
     required TResult Function(dynamic failure) failure,
+    required TResult Function() getReport,
     required TResult Function(InformationModel informationModel, bool isLiked)
         like,
     required TResult Function(InformationModel informationModel, bool isLiked)
@@ -33,10 +35,13 @@ mixin _$InformationWatcherEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(List<InformationModel> informationItemsModel)? updated,
+    TResult? Function(List<InformationModel> informationItemsModel,
+            List<ReportModel> reportItems)?
+        updated,
     TResult? Function()? loadNextItems,
     TResult? Function(int filterIndex)? filter,
     TResult? Function(dynamic failure)? failure,
+    TResult? Function()? getReport,
     TResult? Function(InformationModel informationModel, bool isLiked)? like,
     TResult? Function(InformationModel informationModel, bool isLiked)?
         changeLike,
@@ -45,10 +50,13 @@ mixin _$InformationWatcherEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(List<InformationModel> informationItemsModel)? updated,
+    TResult Function(List<InformationModel> informationItemsModel,
+            List<ReportModel> reportItems)?
+        updated,
     TResult Function()? loadNextItems,
     TResult Function(int filterIndex)? filter,
     TResult Function(dynamic failure)? failure,
+    TResult Function()? getReport,
     TResult Function(InformationModel informationModel, bool isLiked)? like,
     TResult Function(InformationModel informationModel, bool isLiked)?
         changeLike,
@@ -62,6 +70,7 @@ mixin _$InformationWatcherEvent {
     required TResult Function(_LoadNextItems value) loadNextItems,
     required TResult Function(_Filter value) filter,
     required TResult Function(_Failure value) failure,
+    required TResult Function(_GetReport value) getReport,
     required TResult Function(_Like value) like,
     required TResult Function(_ChangeLike value) changeLike,
   }) =>
@@ -73,6 +82,7 @@ mixin _$InformationWatcherEvent {
     TResult? Function(_LoadNextItems value)? loadNextItems,
     TResult? Function(_Filter value)? filter,
     TResult? Function(_Failure value)? failure,
+    TResult? Function(_GetReport value)? getReport,
     TResult? Function(_Like value)? like,
     TResult? Function(_ChangeLike value)? changeLike,
   }) =>
@@ -84,6 +94,7 @@ mixin _$InformationWatcherEvent {
     TResult Function(_LoadNextItems value)? loadNextItems,
     TResult Function(_Filter value)? filter,
     TResult Function(_Failure value)? failure,
+    TResult Function(_GetReport value)? getReport,
     TResult Function(_Like value)? like,
     TResult Function(_ChangeLike value)? changeLike,
     required TResult orElse(),
@@ -149,11 +160,13 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(List<InformationModel> informationItemsModel)
+    required TResult Function(List<InformationModel> informationItemsModel,
+            List<ReportModel> reportItems)
         updated,
     required TResult Function() loadNextItems,
     required TResult Function(int filterIndex) filter,
     required TResult Function(dynamic failure) failure,
+    required TResult Function() getReport,
     required TResult Function(InformationModel informationModel, bool isLiked)
         like,
     required TResult Function(InformationModel informationModel, bool isLiked)
@@ -166,10 +179,13 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(List<InformationModel> informationItemsModel)? updated,
+    TResult? Function(List<InformationModel> informationItemsModel,
+            List<ReportModel> reportItems)?
+        updated,
     TResult? Function()? loadNextItems,
     TResult? Function(int filterIndex)? filter,
     TResult? Function(dynamic failure)? failure,
+    TResult? Function()? getReport,
     TResult? Function(InformationModel informationModel, bool isLiked)? like,
     TResult? Function(InformationModel informationModel, bool isLiked)?
         changeLike,
@@ -181,10 +197,13 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(List<InformationModel> informationItemsModel)? updated,
+    TResult Function(List<InformationModel> informationItemsModel,
+            List<ReportModel> reportItems)?
+        updated,
     TResult Function()? loadNextItems,
     TResult Function(int filterIndex)? filter,
     TResult Function(dynamic failure)? failure,
+    TResult Function()? getReport,
     TResult Function(InformationModel informationModel, bool isLiked)? like,
     TResult Function(InformationModel informationModel, bool isLiked)?
         changeLike,
@@ -204,6 +223,7 @@ class _$StartedImpl implements _Started {
     required TResult Function(_LoadNextItems value) loadNextItems,
     required TResult Function(_Filter value) filter,
     required TResult Function(_Failure value) failure,
+    required TResult Function(_GetReport value) getReport,
     required TResult Function(_Like value) like,
     required TResult Function(_ChangeLike value) changeLike,
   }) {
@@ -218,6 +238,7 @@ class _$StartedImpl implements _Started {
     TResult? Function(_LoadNextItems value)? loadNextItems,
     TResult? Function(_Filter value)? filter,
     TResult? Function(_Failure value)? failure,
+    TResult? Function(_GetReport value)? getReport,
     TResult? Function(_Like value)? like,
     TResult? Function(_ChangeLike value)? changeLike,
   }) {
@@ -232,6 +253,7 @@ class _$StartedImpl implements _Started {
     TResult Function(_LoadNextItems value)? loadNextItems,
     TResult Function(_Filter value)? filter,
     TResult Function(_Failure value)? failure,
+    TResult Function(_GetReport value)? getReport,
     TResult Function(_Like value)? like,
     TResult Function(_ChangeLike value)? changeLike,
     required TResult orElse(),
@@ -253,7 +275,9 @@ abstract class _$$UpdatedImplCopyWith<$Res> {
           _$UpdatedImpl value, $Res Function(_$UpdatedImpl) then) =
       __$$UpdatedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<InformationModel> informationItemsModel});
+  $Res call(
+      {List<InformationModel> informationItemsModel,
+      List<ReportModel> reportItems});
 }
 
 /// @nodoc
@@ -268,12 +292,17 @@ class __$$UpdatedImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? informationItemsModel = null,
+    Object? reportItems = null,
   }) {
     return _then(_$UpdatedImpl(
-      null == informationItemsModel
+      informationItemsModel: null == informationItemsModel
           ? _value._informationItemsModel
           : informationItemsModel // ignore: cast_nullable_to_non_nullable
               as List<InformationModel>,
+      reportItems: null == reportItems
+          ? _value._reportItems
+          : reportItems // ignore: cast_nullable_to_non_nullable
+              as List<ReportModel>,
     ));
   }
 }
@@ -281,8 +310,11 @@ class __$$UpdatedImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$UpdatedImpl implements _Updated {
-  const _$UpdatedImpl(final List<InformationModel> informationItemsModel)
-      : _informationItemsModel = informationItemsModel;
+  const _$UpdatedImpl(
+      {required final List<InformationModel> informationItemsModel,
+      required final List<ReportModel> reportItems})
+      : _informationItemsModel = informationItemsModel,
+        _reportItems = reportItems;
 
   final List<InformationModel> _informationItemsModel;
   @override
@@ -293,9 +325,17 @@ class _$UpdatedImpl implements _Updated {
     return EqualUnmodifiableListView(_informationItemsModel);
   }
 
+  final List<ReportModel> _reportItems;
+  @override
+  List<ReportModel> get reportItems {
+    if (_reportItems is EqualUnmodifiableListView) return _reportItems;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_reportItems);
+  }
+
   @override
   String toString() {
-    return 'InformationWatcherEvent.updated(informationItemsModel: $informationItemsModel)';
+    return 'InformationWatcherEvent.updated(informationItemsModel: $informationItemsModel, reportItems: $reportItems)';
   }
 
   @override
@@ -304,12 +344,16 @@ class _$UpdatedImpl implements _Updated {
         (other.runtimeType == runtimeType &&
             other is _$UpdatedImpl &&
             const DeepCollectionEquality()
-                .equals(other._informationItemsModel, _informationItemsModel));
+                .equals(other._informationItemsModel, _informationItemsModel) &&
+            const DeepCollectionEquality()
+                .equals(other._reportItems, _reportItems));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_informationItemsModel));
+      runtimeType,
+      const DeepCollectionEquality().hash(_informationItemsModel),
+      const DeepCollectionEquality().hash(_reportItems));
 
   @JsonKey(ignore: true)
   @override
@@ -321,49 +365,57 @@ class _$UpdatedImpl implements _Updated {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(List<InformationModel> informationItemsModel)
+    required TResult Function(List<InformationModel> informationItemsModel,
+            List<ReportModel> reportItems)
         updated,
     required TResult Function() loadNextItems,
     required TResult Function(int filterIndex) filter,
     required TResult Function(dynamic failure) failure,
+    required TResult Function() getReport,
     required TResult Function(InformationModel informationModel, bool isLiked)
         like,
     required TResult Function(InformationModel informationModel, bool isLiked)
         changeLike,
   }) {
-    return updated(informationItemsModel);
+    return updated(informationItemsModel, reportItems);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(List<InformationModel> informationItemsModel)? updated,
+    TResult? Function(List<InformationModel> informationItemsModel,
+            List<ReportModel> reportItems)?
+        updated,
     TResult? Function()? loadNextItems,
     TResult? Function(int filterIndex)? filter,
     TResult? Function(dynamic failure)? failure,
+    TResult? Function()? getReport,
     TResult? Function(InformationModel informationModel, bool isLiked)? like,
     TResult? Function(InformationModel informationModel, bool isLiked)?
         changeLike,
   }) {
-    return updated?.call(informationItemsModel);
+    return updated?.call(informationItemsModel, reportItems);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(List<InformationModel> informationItemsModel)? updated,
+    TResult Function(List<InformationModel> informationItemsModel,
+            List<ReportModel> reportItems)?
+        updated,
     TResult Function()? loadNextItems,
     TResult Function(int filterIndex)? filter,
     TResult Function(dynamic failure)? failure,
+    TResult Function()? getReport,
     TResult Function(InformationModel informationModel, bool isLiked)? like,
     TResult Function(InformationModel informationModel, bool isLiked)?
         changeLike,
     required TResult orElse(),
   }) {
     if (updated != null) {
-      return updated(informationItemsModel);
+      return updated(informationItemsModel, reportItems);
     }
     return orElse();
   }
@@ -376,6 +428,7 @@ class _$UpdatedImpl implements _Updated {
     required TResult Function(_LoadNextItems value) loadNextItems,
     required TResult Function(_Filter value) filter,
     required TResult Function(_Failure value) failure,
+    required TResult Function(_GetReport value) getReport,
     required TResult Function(_Like value) like,
     required TResult Function(_ChangeLike value) changeLike,
   }) {
@@ -390,6 +443,7 @@ class _$UpdatedImpl implements _Updated {
     TResult? Function(_LoadNextItems value)? loadNextItems,
     TResult? Function(_Filter value)? filter,
     TResult? Function(_Failure value)? failure,
+    TResult? Function(_GetReport value)? getReport,
     TResult? Function(_Like value)? like,
     TResult? Function(_ChangeLike value)? changeLike,
   }) {
@@ -404,6 +458,7 @@ class _$UpdatedImpl implements _Updated {
     TResult Function(_LoadNextItems value)? loadNextItems,
     TResult Function(_Filter value)? filter,
     TResult Function(_Failure value)? failure,
+    TResult Function(_GetReport value)? getReport,
     TResult Function(_Like value)? like,
     TResult Function(_ChangeLike value)? changeLike,
     required TResult orElse(),
@@ -416,10 +471,12 @@ class _$UpdatedImpl implements _Updated {
 }
 
 abstract class _Updated implements InformationWatcherEvent {
-  const factory _Updated(final List<InformationModel> informationItemsModel) =
-      _$UpdatedImpl;
+  const factory _Updated(
+      {required final List<InformationModel> informationItemsModel,
+      required final List<ReportModel> reportItems}) = _$UpdatedImpl;
 
   List<InformationModel> get informationItemsModel;
+  List<ReportModel> get reportItems;
   @JsonKey(ignore: true)
   _$$UpdatedImplCopyWith<_$UpdatedImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -464,11 +521,13 @@ class _$LoadNextItemsImpl implements _LoadNextItems {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(List<InformationModel> informationItemsModel)
+    required TResult Function(List<InformationModel> informationItemsModel,
+            List<ReportModel> reportItems)
         updated,
     required TResult Function() loadNextItems,
     required TResult Function(int filterIndex) filter,
     required TResult Function(dynamic failure) failure,
+    required TResult Function() getReport,
     required TResult Function(InformationModel informationModel, bool isLiked)
         like,
     required TResult Function(InformationModel informationModel, bool isLiked)
@@ -481,10 +540,13 @@ class _$LoadNextItemsImpl implements _LoadNextItems {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(List<InformationModel> informationItemsModel)? updated,
+    TResult? Function(List<InformationModel> informationItemsModel,
+            List<ReportModel> reportItems)?
+        updated,
     TResult? Function()? loadNextItems,
     TResult? Function(int filterIndex)? filter,
     TResult? Function(dynamic failure)? failure,
+    TResult? Function()? getReport,
     TResult? Function(InformationModel informationModel, bool isLiked)? like,
     TResult? Function(InformationModel informationModel, bool isLiked)?
         changeLike,
@@ -496,10 +558,13 @@ class _$LoadNextItemsImpl implements _LoadNextItems {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(List<InformationModel> informationItemsModel)? updated,
+    TResult Function(List<InformationModel> informationItemsModel,
+            List<ReportModel> reportItems)?
+        updated,
     TResult Function()? loadNextItems,
     TResult Function(int filterIndex)? filter,
     TResult Function(dynamic failure)? failure,
+    TResult Function()? getReport,
     TResult Function(InformationModel informationModel, bool isLiked)? like,
     TResult Function(InformationModel informationModel, bool isLiked)?
         changeLike,
@@ -519,6 +584,7 @@ class _$LoadNextItemsImpl implements _LoadNextItems {
     required TResult Function(_LoadNextItems value) loadNextItems,
     required TResult Function(_Filter value) filter,
     required TResult Function(_Failure value) failure,
+    required TResult Function(_GetReport value) getReport,
     required TResult Function(_Like value) like,
     required TResult Function(_ChangeLike value) changeLike,
   }) {
@@ -533,6 +599,7 @@ class _$LoadNextItemsImpl implements _LoadNextItems {
     TResult? Function(_LoadNextItems value)? loadNextItems,
     TResult? Function(_Filter value)? filter,
     TResult? Function(_Failure value)? failure,
+    TResult? Function(_GetReport value)? getReport,
     TResult? Function(_Like value)? like,
     TResult? Function(_ChangeLike value)? changeLike,
   }) {
@@ -547,6 +614,7 @@ class _$LoadNextItemsImpl implements _LoadNextItems {
     TResult Function(_LoadNextItems value)? loadNextItems,
     TResult Function(_Filter value)? filter,
     TResult Function(_Failure value)? failure,
+    TResult Function(_GetReport value)? getReport,
     TResult Function(_Like value)? like,
     TResult Function(_ChangeLike value)? changeLike,
     required TResult orElse(),
@@ -628,11 +696,13 @@ class _$FilterImpl implements _Filter {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(List<InformationModel> informationItemsModel)
+    required TResult Function(List<InformationModel> informationItemsModel,
+            List<ReportModel> reportItems)
         updated,
     required TResult Function() loadNextItems,
     required TResult Function(int filterIndex) filter,
     required TResult Function(dynamic failure) failure,
+    required TResult Function() getReport,
     required TResult Function(InformationModel informationModel, bool isLiked)
         like,
     required TResult Function(InformationModel informationModel, bool isLiked)
@@ -645,10 +715,13 @@ class _$FilterImpl implements _Filter {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(List<InformationModel> informationItemsModel)? updated,
+    TResult? Function(List<InformationModel> informationItemsModel,
+            List<ReportModel> reportItems)?
+        updated,
     TResult? Function()? loadNextItems,
     TResult? Function(int filterIndex)? filter,
     TResult? Function(dynamic failure)? failure,
+    TResult? Function()? getReport,
     TResult? Function(InformationModel informationModel, bool isLiked)? like,
     TResult? Function(InformationModel informationModel, bool isLiked)?
         changeLike,
@@ -660,10 +733,13 @@ class _$FilterImpl implements _Filter {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(List<InformationModel> informationItemsModel)? updated,
+    TResult Function(List<InformationModel> informationItemsModel,
+            List<ReportModel> reportItems)?
+        updated,
     TResult Function()? loadNextItems,
     TResult Function(int filterIndex)? filter,
     TResult Function(dynamic failure)? failure,
+    TResult Function()? getReport,
     TResult Function(InformationModel informationModel, bool isLiked)? like,
     TResult Function(InformationModel informationModel, bool isLiked)?
         changeLike,
@@ -683,6 +759,7 @@ class _$FilterImpl implements _Filter {
     required TResult Function(_LoadNextItems value) loadNextItems,
     required TResult Function(_Filter value) filter,
     required TResult Function(_Failure value) failure,
+    required TResult Function(_GetReport value) getReport,
     required TResult Function(_Like value) like,
     required TResult Function(_ChangeLike value) changeLike,
   }) {
@@ -697,6 +774,7 @@ class _$FilterImpl implements _Filter {
     TResult? Function(_LoadNextItems value)? loadNextItems,
     TResult? Function(_Filter value)? filter,
     TResult? Function(_Failure value)? failure,
+    TResult? Function(_GetReport value)? getReport,
     TResult? Function(_Like value)? like,
     TResult? Function(_ChangeLike value)? changeLike,
   }) {
@@ -711,6 +789,7 @@ class _$FilterImpl implements _Filter {
     TResult Function(_LoadNextItems value)? loadNextItems,
     TResult Function(_Filter value)? filter,
     TResult Function(_Failure value)? failure,
+    TResult Function(_GetReport value)? getReport,
     TResult Function(_Like value)? like,
     TResult Function(_ChangeLike value)? changeLike,
     required TResult orElse(),
@@ -797,11 +876,13 @@ class _$FailureImpl implements _Failure {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(List<InformationModel> informationItemsModel)
+    required TResult Function(List<InformationModel> informationItemsModel,
+            List<ReportModel> reportItems)
         updated,
     required TResult Function() loadNextItems,
     required TResult Function(int filterIndex) filter,
     required TResult Function(dynamic failure) failure,
+    required TResult Function() getReport,
     required TResult Function(InformationModel informationModel, bool isLiked)
         like,
     required TResult Function(InformationModel informationModel, bool isLiked)
@@ -814,10 +895,13 @@ class _$FailureImpl implements _Failure {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(List<InformationModel> informationItemsModel)? updated,
+    TResult? Function(List<InformationModel> informationItemsModel,
+            List<ReportModel> reportItems)?
+        updated,
     TResult? Function()? loadNextItems,
     TResult? Function(int filterIndex)? filter,
     TResult? Function(dynamic failure)? failure,
+    TResult? Function()? getReport,
     TResult? Function(InformationModel informationModel, bool isLiked)? like,
     TResult? Function(InformationModel informationModel, bool isLiked)?
         changeLike,
@@ -829,10 +913,13 @@ class _$FailureImpl implements _Failure {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(List<InformationModel> informationItemsModel)? updated,
+    TResult Function(List<InformationModel> informationItemsModel,
+            List<ReportModel> reportItems)?
+        updated,
     TResult Function()? loadNextItems,
     TResult Function(int filterIndex)? filter,
     TResult Function(dynamic failure)? failure,
+    TResult Function()? getReport,
     TResult Function(InformationModel informationModel, bool isLiked)? like,
     TResult Function(InformationModel informationModel, bool isLiked)?
         changeLike,
@@ -852,6 +939,7 @@ class _$FailureImpl implements _Failure {
     required TResult Function(_LoadNextItems value) loadNextItems,
     required TResult Function(_Filter value) filter,
     required TResult Function(_Failure value) failure,
+    required TResult Function(_GetReport value) getReport,
     required TResult Function(_Like value) like,
     required TResult Function(_ChangeLike value) changeLike,
   }) {
@@ -866,6 +954,7 @@ class _$FailureImpl implements _Failure {
     TResult? Function(_LoadNextItems value)? loadNextItems,
     TResult? Function(_Filter value)? filter,
     TResult? Function(_Failure value)? failure,
+    TResult? Function(_GetReport value)? getReport,
     TResult? Function(_Like value)? like,
     TResult? Function(_ChangeLike value)? changeLike,
   }) {
@@ -880,6 +969,7 @@ class _$FailureImpl implements _Failure {
     TResult Function(_LoadNextItems value)? loadNextItems,
     TResult Function(_Filter value)? filter,
     TResult Function(_Failure value)? failure,
+    TResult Function(_GetReport value)? getReport,
     TResult Function(_Like value)? like,
     TResult Function(_ChangeLike value)? changeLike,
     required TResult orElse(),
@@ -898,6 +988,154 @@ abstract class _Failure implements InformationWatcherEvent {
   @JsonKey(ignore: true)
   _$$FailureImplCopyWith<_$FailureImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$GetReportImplCopyWith<$Res> {
+  factory _$$GetReportImplCopyWith(
+          _$GetReportImpl value, $Res Function(_$GetReportImpl) then) =
+      __$$GetReportImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$GetReportImplCopyWithImpl<$Res>
+    extends _$InformationWatcherEventCopyWithImpl<$Res, _$GetReportImpl>
+    implements _$$GetReportImplCopyWith<$Res> {
+  __$$GetReportImplCopyWithImpl(
+      _$GetReportImpl _value, $Res Function(_$GetReportImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$GetReportImpl implements _GetReport {
+  const _$GetReportImpl();
+
+  @override
+  String toString() {
+    return 'InformationWatcherEvent.getReport()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$GetReportImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(List<InformationModel> informationItemsModel,
+            List<ReportModel> reportItems)
+        updated,
+    required TResult Function() loadNextItems,
+    required TResult Function(int filterIndex) filter,
+    required TResult Function(dynamic failure) failure,
+    required TResult Function() getReport,
+    required TResult Function(InformationModel informationModel, bool isLiked)
+        like,
+    required TResult Function(InformationModel informationModel, bool isLiked)
+        changeLike,
+  }) {
+    return getReport();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function(List<InformationModel> informationItemsModel,
+            List<ReportModel> reportItems)?
+        updated,
+    TResult? Function()? loadNextItems,
+    TResult? Function(int filterIndex)? filter,
+    TResult? Function(dynamic failure)? failure,
+    TResult? Function()? getReport,
+    TResult? Function(InformationModel informationModel, bool isLiked)? like,
+    TResult? Function(InformationModel informationModel, bool isLiked)?
+        changeLike,
+  }) {
+    return getReport?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(List<InformationModel> informationItemsModel,
+            List<ReportModel> reportItems)?
+        updated,
+    TResult Function()? loadNextItems,
+    TResult Function(int filterIndex)? filter,
+    TResult Function(dynamic failure)? failure,
+    TResult Function()? getReport,
+    TResult Function(InformationModel informationModel, bool isLiked)? like,
+    TResult Function(InformationModel informationModel, bool isLiked)?
+        changeLike,
+    required TResult orElse(),
+  }) {
+    if (getReport != null) {
+      return getReport();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_Updated value) updated,
+    required TResult Function(_LoadNextItems value) loadNextItems,
+    required TResult Function(_Filter value) filter,
+    required TResult Function(_Failure value) failure,
+    required TResult Function(_GetReport value) getReport,
+    required TResult Function(_Like value) like,
+    required TResult Function(_ChangeLike value) changeLike,
+  }) {
+    return getReport(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_Updated value)? updated,
+    TResult? Function(_LoadNextItems value)? loadNextItems,
+    TResult? Function(_Filter value)? filter,
+    TResult? Function(_Failure value)? failure,
+    TResult? Function(_GetReport value)? getReport,
+    TResult? Function(_Like value)? like,
+    TResult? Function(_ChangeLike value)? changeLike,
+  }) {
+    return getReport?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_Updated value)? updated,
+    TResult Function(_LoadNextItems value)? loadNextItems,
+    TResult Function(_Filter value)? filter,
+    TResult Function(_Failure value)? failure,
+    TResult Function(_GetReport value)? getReport,
+    TResult Function(_Like value)? like,
+    TResult Function(_ChangeLike value)? changeLike,
+    required TResult orElse(),
+  }) {
+    if (getReport != null) {
+      return getReport(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GetReport implements InformationWatcherEvent {
+  const factory _GetReport() = _$GetReportImpl;
 }
 
 /// @nodoc
@@ -983,11 +1221,13 @@ class _$LikeImpl implements _Like {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(List<InformationModel> informationItemsModel)
+    required TResult Function(List<InformationModel> informationItemsModel,
+            List<ReportModel> reportItems)
         updated,
     required TResult Function() loadNextItems,
     required TResult Function(int filterIndex) filter,
     required TResult Function(dynamic failure) failure,
+    required TResult Function() getReport,
     required TResult Function(InformationModel informationModel, bool isLiked)
         like,
     required TResult Function(InformationModel informationModel, bool isLiked)
@@ -1000,10 +1240,13 @@ class _$LikeImpl implements _Like {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(List<InformationModel> informationItemsModel)? updated,
+    TResult? Function(List<InformationModel> informationItemsModel,
+            List<ReportModel> reportItems)?
+        updated,
     TResult? Function()? loadNextItems,
     TResult? Function(int filterIndex)? filter,
     TResult? Function(dynamic failure)? failure,
+    TResult? Function()? getReport,
     TResult? Function(InformationModel informationModel, bool isLiked)? like,
     TResult? Function(InformationModel informationModel, bool isLiked)?
         changeLike,
@@ -1015,10 +1258,13 @@ class _$LikeImpl implements _Like {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(List<InformationModel> informationItemsModel)? updated,
+    TResult Function(List<InformationModel> informationItemsModel,
+            List<ReportModel> reportItems)?
+        updated,
     TResult Function()? loadNextItems,
     TResult Function(int filterIndex)? filter,
     TResult Function(dynamic failure)? failure,
+    TResult Function()? getReport,
     TResult Function(InformationModel informationModel, bool isLiked)? like,
     TResult Function(InformationModel informationModel, bool isLiked)?
         changeLike,
@@ -1038,6 +1284,7 @@ class _$LikeImpl implements _Like {
     required TResult Function(_LoadNextItems value) loadNextItems,
     required TResult Function(_Filter value) filter,
     required TResult Function(_Failure value) failure,
+    required TResult Function(_GetReport value) getReport,
     required TResult Function(_Like value) like,
     required TResult Function(_ChangeLike value) changeLike,
   }) {
@@ -1052,6 +1299,7 @@ class _$LikeImpl implements _Like {
     TResult? Function(_LoadNextItems value)? loadNextItems,
     TResult? Function(_Filter value)? filter,
     TResult? Function(_Failure value)? failure,
+    TResult? Function(_GetReport value)? getReport,
     TResult? Function(_Like value)? like,
     TResult? Function(_ChangeLike value)? changeLike,
   }) {
@@ -1066,6 +1314,7 @@ class _$LikeImpl implements _Like {
     TResult Function(_LoadNextItems value)? loadNextItems,
     TResult Function(_Filter value)? filter,
     TResult Function(_Failure value)? failure,
+    TResult Function(_GetReport value)? getReport,
     TResult Function(_Like value)? like,
     TResult Function(_ChangeLike value)? changeLike,
     required TResult orElse(),
@@ -1174,11 +1423,13 @@ class _$ChangeLikeImpl implements _ChangeLike {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(List<InformationModel> informationItemsModel)
+    required TResult Function(List<InformationModel> informationItemsModel,
+            List<ReportModel> reportItems)
         updated,
     required TResult Function() loadNextItems,
     required TResult Function(int filterIndex) filter,
     required TResult Function(dynamic failure) failure,
+    required TResult Function() getReport,
     required TResult Function(InformationModel informationModel, bool isLiked)
         like,
     required TResult Function(InformationModel informationModel, bool isLiked)
@@ -1191,10 +1442,13 @@ class _$ChangeLikeImpl implements _ChangeLike {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(List<InformationModel> informationItemsModel)? updated,
+    TResult? Function(List<InformationModel> informationItemsModel,
+            List<ReportModel> reportItems)?
+        updated,
     TResult? Function()? loadNextItems,
     TResult? Function(int filterIndex)? filter,
     TResult? Function(dynamic failure)? failure,
+    TResult? Function()? getReport,
     TResult? Function(InformationModel informationModel, bool isLiked)? like,
     TResult? Function(InformationModel informationModel, bool isLiked)?
         changeLike,
@@ -1206,10 +1460,13 @@ class _$ChangeLikeImpl implements _ChangeLike {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(List<InformationModel> informationItemsModel)? updated,
+    TResult Function(List<InformationModel> informationItemsModel,
+            List<ReportModel> reportItems)?
+        updated,
     TResult Function()? loadNextItems,
     TResult Function(int filterIndex)? filter,
     TResult Function(dynamic failure)? failure,
+    TResult Function()? getReport,
     TResult Function(InformationModel informationModel, bool isLiked)? like,
     TResult Function(InformationModel informationModel, bool isLiked)?
         changeLike,
@@ -1229,6 +1486,7 @@ class _$ChangeLikeImpl implements _ChangeLike {
     required TResult Function(_LoadNextItems value) loadNextItems,
     required TResult Function(_Filter value) filter,
     required TResult Function(_Failure value) failure,
+    required TResult Function(_GetReport value) getReport,
     required TResult Function(_Like value) like,
     required TResult Function(_ChangeLike value) changeLike,
   }) {
@@ -1243,6 +1501,7 @@ class _$ChangeLikeImpl implements _ChangeLike {
     TResult? Function(_LoadNextItems value)? loadNextItems,
     TResult? Function(_Filter value)? filter,
     TResult? Function(_Failure value)? failure,
+    TResult? Function(_GetReport value)? getReport,
     TResult? Function(_Like value)? like,
     TResult? Function(_ChangeLike value)? changeLike,
   }) {
@@ -1257,6 +1516,7 @@ class _$ChangeLikeImpl implements _ChangeLike {
     TResult Function(_LoadNextItems value)? loadNextItems,
     TResult Function(_Filter value)? filter,
     TResult Function(_Failure value)? failure,
+    TResult Function(_GetReport value)? getReport,
     TResult Function(_Like value)? like,
     TResult Function(_ChangeLike value)? changeLike,
     required TResult orElse(),
@@ -1289,7 +1549,9 @@ mixin _$InformationWatcherState {
   List<int> get filtersIndex => throw _privateConstructorUsedError;
   LoadingStatus get loadingStatus => throw _privateConstructorUsedError;
   int get itemsLoaded => throw _privateConstructorUsedError;
-  InformationFailure? get failure => throw _privateConstructorUsedError;
+  InformationFailure? get failure =>
+      throw _privateConstructorUsedError; // required List<int> likeIndex,
+  List<ReportModel> get reportItems => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $InformationWatcherStateCopyWith<InformationWatcherState> get copyWith =>
@@ -1308,7 +1570,8 @@ abstract class $InformationWatcherStateCopyWith<$Res> {
       List<int> filtersIndex,
       LoadingStatus loadingStatus,
       int itemsLoaded,
-      InformationFailure? failure});
+      InformationFailure? failure,
+      List<ReportModel> reportItems});
 }
 
 /// @nodoc
@@ -1331,6 +1594,7 @@ class _$InformationWatcherStateCopyWithImpl<$Res,
     Object? loadingStatus = null,
     Object? itemsLoaded = null,
     Object? failure = freezed,
+    Object? reportItems = null,
   }) {
     return _then(_value.copyWith(
       informationModelItems: null == informationModelItems
@@ -1357,6 +1621,10 @@ class _$InformationWatcherStateCopyWithImpl<$Res,
           ? _value.failure
           : failure // ignore: cast_nullable_to_non_nullable
               as InformationFailure?,
+      reportItems: null == reportItems
+          ? _value.reportItems
+          : reportItems // ignore: cast_nullable_to_non_nullable
+              as List<ReportModel>,
     ) as $Val);
   }
 }
@@ -1375,7 +1643,8 @@ abstract class _$$InitialImplCopyWith<$Res>
       List<int> filtersIndex,
       LoadingStatus loadingStatus,
       int itemsLoaded,
-      InformationFailure? failure});
+      InformationFailure? failure,
+      List<ReportModel> reportItems});
 }
 
 /// @nodoc
@@ -1395,6 +1664,7 @@ class __$$InitialImplCopyWithImpl<$Res>
     Object? loadingStatus = null,
     Object? itemsLoaded = null,
     Object? failure = freezed,
+    Object? reportItems = null,
   }) {
     return _then(_$InitialImpl(
       informationModelItems: null == informationModelItems
@@ -1421,6 +1691,10 @@ class __$$InitialImplCopyWithImpl<$Res>
           ? _value.failure
           : failure // ignore: cast_nullable_to_non_nullable
               as InformationFailure?,
+      reportItems: null == reportItems
+          ? _value._reportItems
+          : reportItems // ignore: cast_nullable_to_non_nullable
+              as List<ReportModel>,
     ));
   }
 }
@@ -1434,10 +1708,12 @@ class _$InitialImpl implements _Initial {
       required final List<int> filtersIndex,
       required this.loadingStatus,
       required this.itemsLoaded,
-      required this.failure})
+      required this.failure,
+      required final List<ReportModel> reportItems})
       : _informationModelItems = informationModelItems,
         _filteredInformationModelItems = filteredInformationModelItems,
-        _filtersIndex = filtersIndex;
+        _filtersIndex = filtersIndex,
+        _reportItems = reportItems;
 
   final List<InformationModel> _informationModelItems;
   @override
@@ -1471,10 +1747,19 @@ class _$InitialImpl implements _Initial {
   final int itemsLoaded;
   @override
   final InformationFailure? failure;
+// required List<int> likeIndex,
+  final List<ReportModel> _reportItems;
+// required List<int> likeIndex,
+  @override
+  List<ReportModel> get reportItems {
+    if (_reportItems is EqualUnmodifiableListView) return _reportItems;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_reportItems);
+  }
 
   @override
   String toString() {
-    return 'InformationWatcherState(informationModelItems: $informationModelItems, filteredInformationModelItems: $filteredInformationModelItems, filtersIndex: $filtersIndex, loadingStatus: $loadingStatus, itemsLoaded: $itemsLoaded, failure: $failure)';
+    return 'InformationWatcherState(informationModelItems: $informationModelItems, filteredInformationModelItems: $filteredInformationModelItems, filtersIndex: $filtersIndex, loadingStatus: $loadingStatus, itemsLoaded: $itemsLoaded, failure: $failure, reportItems: $reportItems)';
   }
 
   @override
@@ -1493,7 +1778,9 @@ class _$InitialImpl implements _Initial {
                 other.loadingStatus == loadingStatus) &&
             (identical(other.itemsLoaded, itemsLoaded) ||
                 other.itemsLoaded == itemsLoaded) &&
-            (identical(other.failure, failure) || other.failure == failure));
+            (identical(other.failure, failure) || other.failure == failure) &&
+            const DeepCollectionEquality()
+                .equals(other._reportItems, _reportItems));
   }
 
   @override
@@ -1504,7 +1791,8 @@ class _$InitialImpl implements _Initial {
       const DeepCollectionEquality().hash(_filtersIndex),
       loadingStatus,
       itemsLoaded,
-      failure);
+      failure,
+      const DeepCollectionEquality().hash(_reportItems));
 
   @JsonKey(ignore: true)
   @override
@@ -1520,7 +1808,8 @@ abstract class _Initial implements InformationWatcherState {
       required final List<int> filtersIndex,
       required final LoadingStatus loadingStatus,
       required final int itemsLoaded,
-      required final InformationFailure? failure}) = _$InitialImpl;
+      required final InformationFailure? failure,
+      required final List<ReportModel> reportItems}) = _$InitialImpl;
 
   @override
   List<InformationModel> get informationModelItems;
@@ -1534,6 +1823,8 @@ abstract class _Initial implements InformationWatcherState {
   int get itemsLoaded;
   @override
   InformationFailure? get failure;
+  @override // required List<int> likeIndex,
+  List<ReportModel> get reportItems;
   @override
   @JsonKey(ignore: true)
   _$$InitialImplCopyWith<_$InitialImpl> get copyWith =>

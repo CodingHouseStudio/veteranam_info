@@ -13,57 +13,136 @@ void main() {
     late FirestoreService mockFirestoreService;
     setUp(() {
       mockFirestoreService = MockFirestoreService();
-      when(mockFirestoreService.addReport(KTestText.reportModel)).thenAnswer(
-        (_) async {},
-      );
+    });
+    group('${KGroupText.successful} ', () {
+      setUp(() {
+        when(mockFirestoreService.addReport(KTestText.reportModel)).thenAnswer(
+          (_) async {},
+        );
+        when(
+          mockFirestoreService.getCardReportById(
+            cardEnum: CardEnum.discount,
+            userId: KTestText.user.id,
+          ),
+        ).thenAnswer(
+          (_) async => KTestText.reportItems,
+        );
+        if (GetIt.I.isRegistered<FirestoreService>()) {
+          GetIt.I.unregister<FirestoreService>();
+        }
+        GetIt.I.registerSingleton(mockFirestoreService);
+        mockReportRepository = ReportRepository();
+      });
+      test('${KGroupText.successfulSet} ', () async {
+        expect(
+          await mockReportRepository.sendReport(KTestText.reportModel),
+          isA<Right<SomeFailure, bool>>()
+              .having((e) => e.value, 'value', isTrue),
+        );
+      });
+      test('${KGroupText.successfulGet} ', () async {
+        expect(
+          await mockReportRepository.getCardReportById(
+            cardEnum: CardEnum.discount,
+            userId: KTestText.user.id,
+          ),
+          isA<Right<SomeFailure, List<ReportModel>>>()
+              .having((e) => e.value, 'value', KTestText.reportItems),
+        );
+      });
+    });
+    group('${KGroupText.failure} ', () {
+      setUp(() {
+        when(
+          mockFirestoreService.addReport(KTestText.reportModelIncorect),
+        ).thenThrow(Exception(KGroupText.failureSend));
+        when(
+          mockFirestoreService.getCardReportById(
+            cardEnum: CardEnum.discount,
+            userId: KTestText.user.id,
+          ),
+        ).thenThrow(Exception(KGroupText.failureGet));
 
-      when(
-        mockFirestoreService.addReport(KTestText.reportModelIncorect),
-      ).thenThrow(FirebaseException(plugin: KGroupText.failureSend));
-      when(
-        mockFirestoreService.addReport(
-          KTestText.reportModelIncorect.copyWith(
-            message: KTestText.fieldEmpty,
-            reasonComplaint: ReasonComplaint.other,
+        if (GetIt.I.isRegistered<FirestoreService>()) {
+          GetIt.I.unregister<FirestoreService>();
+        }
+        GetIt.I.registerSingleton(mockFirestoreService);
+        mockReportRepository = ReportRepository();
+      });
+      test('${KGroupText.failureSend} ', () async {
+        expect(
+          await mockReportRepository.sendReport(KTestText.reportModelIncorect),
+          isA<Left<SomeFailure, bool>>().having(
+            (e) => e.value,
+            'value',
+            const SomeFailure.serverError(),
           ),
-        ),
-      ).thenThrow(FirebaseException(plugin: KGroupText.failureSend));
-      if (GetIt.I.isRegistered<FirestoreService>()) {
-        GetIt.I.unregister<FirestoreService>();
-      }
-      GetIt.I.registerSingleton(mockFirestoreService);
-      mockReportRepository = ReportRepository();
-    });
-    test('${KGroupText.successfulSet} Report', () async {
-      expect(
-        await mockReportRepository.sendReport(KTestText.reportModel),
-        isA<Right<SomeFailure, bool>>().having((e) => e.value, 'value', isTrue),
-      );
-    });
-    test('${KGroupText.failureSend} Report', () async {
-      expect(
-        await mockReportRepository.sendReport(KTestText.reportModelIncorect),
-        isA<Left<SomeFailure, bool>>().having(
-          (e) => e.value,
-          'value',
-          const SomeFailure.serverError(),
-        ),
-      );
-    });
-    test('${KGroupText.failureSend} firebase Report', () async {
-      expect(
-        await mockReportRepository.sendReport(
-          KTestText.reportModelIncorect.copyWith(
-            message: KTestText.fieldEmpty,
-            reasonComplaint: ReasonComplaint.other,
+        );
+      });
+      test('${KGroupText.failureGet} ', () async {
+        expect(
+          await mockReportRepository.getCardReportById(
+            cardEnum: CardEnum.discount,
+            userId: KTestText.user.id,
           ),
-        ),
-        isA<Left<SomeFailure, bool>>().having(
-          (e) => e.value,
-          'value',
-          const SomeFailure.serverError(),
-        ),
-      );
+          isA<Left<SomeFailure, List<ReportModel>>>().having(
+            (e) => e.value,
+            'value',
+            const SomeFailure.serverError(),
+          ),
+        );
+      });
+    });
+    group('${KGroupText.firebaseFailure} ', () {
+      setUp(() {
+        when(
+          mockFirestoreService.addReport(
+            KTestText.reportModelIncorect.copyWith(
+              message: KTestText.fieldEmpty,
+              reasonComplaint: ReasonComplaint.other,
+            ),
+          ),
+        ).thenThrow(FirebaseException(plugin: KGroupText.failureSend));
+        when(
+          mockFirestoreService.getCardReportById(
+            cardEnum: CardEnum.discount,
+            userId: KTestText.user.id,
+          ),
+        ).thenThrow(FirebaseException(plugin: KGroupText.failureGet));
+        if (GetIt.I.isRegistered<FirestoreService>()) {
+          GetIt.I.unregister<FirestoreService>();
+        }
+        GetIt.I.registerSingleton(mockFirestoreService);
+        mockReportRepository = ReportRepository();
+      });
+      test('${KGroupText.failureSend} ', () async {
+        expect(
+          await mockReportRepository.sendReport(
+            KTestText.reportModelIncorect.copyWith(
+              message: KTestText.fieldEmpty,
+              reasonComplaint: ReasonComplaint.other,
+            ),
+          ),
+          isA<Left<SomeFailure, bool>>().having(
+            (e) => e.value,
+            'value',
+            const SomeFailure.serverError(),
+          ),
+        );
+      });
+      test('${KGroupText.failureGet} ', () async {
+        expect(
+          await mockReportRepository.getCardReportById(
+            cardEnum: CardEnum.discount,
+            userId: KTestText.user.id,
+          ),
+          isA<Left<SomeFailure, List<ReportModel>>>().having(
+            (e) => e.value,
+            'value',
+            const SomeFailure.serverError(),
+          ),
+        );
+      });
     });
   });
 }

@@ -59,6 +59,7 @@ List<Widget> _boxesWidget(
       key: KWidgetkeys.screen.myDiscounts.card,
       discountItem: discountsWidgetList.elementAt(index),
       isDesk: isDesk,
+      reportEvent: null,
     ),
     if (!isDesk) KSizedBox.kHeightSizedBox16,
     StatisticBoxWidget(

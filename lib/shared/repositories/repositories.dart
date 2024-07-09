@@ -20,6 +20,5 @@ export 'investors_repository.dart';
 export 'report_repository.dart';
 export 'secure_storage_repository.dart';
 export 'story_repository.dart';
-export 'svg_image_repository.dart';
 export 'tags_repository.dart';
 export 'work_repository.dart';

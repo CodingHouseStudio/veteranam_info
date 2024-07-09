@@ -40,6 +40,7 @@ Future<void> discountInitialHelper(
         find.byKey(KWidgetkeys.screen.discounts.card),
         findsWidgets,
       );
+
       await discountCardHelper(tester);
 
       await scrollingHelper(
