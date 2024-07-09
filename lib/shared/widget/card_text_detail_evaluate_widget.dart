@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kozak/shared/shared.dart';
+import 'package:veteranam/shared/shared.dart';
 
 class CardTextDetailEvaluateWidget extends StatefulWidget {
   const CardTextDetailEvaluateWidget({
@@ -162,7 +162,7 @@ class _CardTextDetailEvaluateWidgetState
                             key: KWidgetkeys
                                 .widget.cardTextDetailEvaluate.iconWebsite,
                           ),
-                          text: context.l10n.website,
+                          text: context.l10n.webSite,
                           onPressed: null,
                         ),
                         if (widget.isDesk)

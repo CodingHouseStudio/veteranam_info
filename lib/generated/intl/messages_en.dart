@@ -323,8 +323,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "verifiedInformation":
             MessageLookupByLibrary.simpleMessage("Verified information"),
         "wage": MessageLookupByLibrary.simpleMessage("Salary*"),
-        "webSite": MessageLookupByLibrary.simpleMessage("Web site"),
-        "website": MessageLookupByLibrary.simpleMessage("Website"),
+        "webSite": MessageLookupByLibrary.simpleMessage("Website"),
         "whatKindOfProject":
             MessageLookupByLibrary.simpleMessage("What kind of project it is?"),
         "whatYouMostInterestedIn": MessageLookupByLibrary.simpleMessage(

@@ -10,37 +10,39 @@ class SharedIconListWidget extends StatelessWidget {
     required this.cardEnum,
     super.key,
   });
+
   final String text;
   final bool isDesk;
   final String link;
   final CardEnum cardEnum;
+
   @override
   Widget build(BuildContext context) {
     return CardTextDetailWidget(
       text: text,
       maxLines: 3,
-      icon: [
-        _cardIconWidget(
-          label: context.l10n.webSite,
-          context,
-          onPressed: null,
-          icon: KIcon.captivePortal,
-        ),
-        if (isDesk) KSizedBox.kWidthSizedBox24 else KSizedBox.kWidthSizedBox8,
-        _cardIconWidget(
-          label: context.l10n.share,
-          context,
-          onPressed: () async => Share.share(
-            link,
+      icon: Row(
+        children: [
+          _cardIconWidget(
+            label: context.l10n.webSite,
+            context,
+            onPressed: null,
+            icon: KIcon.captivePortal,
           ),
-          icon: KIcon.share,
-        ),
-        if (isDesk) KSizedBox.kWidthSizedBox24 else KSizedBox.kWidthSizedBox8,
-        ComplaintWidget(
-          isDesk: isDesk,
-          cardEnum: cardEnum,
-        ),
-      ],
+          if (isDesk) KSizedBox.kWidthSizedBox24 else KSizedBox.kWidthSizedBox8,
+          _cardIconWidget(
+            label: context.l10n.share,
+            context,
+            onPressed: () async => Share.share(link),
+            icon: KIcon.share,
+          ),
+          if (isDesk) KSizedBox.kWidthSizedBox24 else KSizedBox.kWidthSizedBox8,
+          ComplaintWidget(
+            isDesk: isDesk,
+            cardEnum: cardEnum,
+          ),
+        ],
+      ),
       isDesk: isDesk,
     );
   }

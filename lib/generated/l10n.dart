@@ -2263,10 +2263,10 @@ class AppLocalizations {
   }
 
   /// `Website`
-  String get website {
+  String get webSite {
     return Intl.message(
       'Website',
-      name: 'website',
+      name: 'webSite',
       desc: '',
       args: [],
     );
@@ -2287,16 +2287,6 @@ class AppLocalizations {
     return Intl.message(
       'Save',
       name: 'save',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Web site`
-  String get webSite {
-    return Intl.message(
-      'Web site',
-      name: 'webSite',
       desc: '',
       args: [],
     );
