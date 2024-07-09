@@ -108,12 +108,13 @@ class HomeBodyWidget extends StatelessWidget {
                   ),
                 ),
               ),
-              leftWidget: KImage.discountImage
-                  .setKey(KWidgetkeys.screen.home.discountImage),
+              leftWidget: KImage.discountImage(
+                key: KWidgetkeys.screen.home.discountImage,
+              ),
               rightPadding: KPadding.kPaddingSize84,
             )
           else ...[
-            KImage.discountImage.setKey(KWidgetkeys.screen.home.discountImage),
+            KImage.discountImage(key: KWidgetkeys.screen.home.discountImage),
             if (isTablet)
               KSizedBox.kWidthSizedBox48
             else
@@ -166,13 +167,15 @@ class HomeBodyWidget extends StatelessWidget {
                   ),
                 ),
               ),
-              rightWidget: KImage.inforamationImage
-                  .setKey(KWidgetkeys.screen.home.informationImage),
+              rightWidget: KImage.inforamationImage(
+                key: KWidgetkeys.screen.home.informationImage,
+              ),
               rightPadding: KPadding.kPaddingSize32,
             )
           else ...[
-            KImage.inforamationImage
-                .setKey(KWidgetkeys.screen.home.informationImage),
+            KImage.inforamationImage(
+              key: KWidgetkeys.screen.home.informationImage,
+            ),
             if (isTablet)
               KSizedBox.kWidthSizedBox48
             else

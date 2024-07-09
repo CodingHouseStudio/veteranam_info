@@ -41,14 +41,14 @@ List<Widget> _investorsImageWidgetList({required bool isDesk}) {
 }
 
 List<Widget> _leftImage({required bool isDesk}) => [
-      KImage.veteran1,
+      KImage.veteran1(),
       if (isDesk) KSizedBox.kHeightSizedBox24 else KSizedBox.kHeightSizedBox8,
-      KImage.veteran2,
+      KImage.veteran2(),
       if (isDesk) KSizedBox.kHeightSizedBox24 else KSizedBox.kHeightSizedBox8,
-      KImage.veteran3,
+      KImage.veteran3(),
     ];
 List<Widget> _rightImage({required bool isDesk}) => [
-      KImage.veteran4,
+      KImage.veteran4(),
       if (isDesk) KSizedBox.kHeightSizedBox24 else KSizedBox.kHeightSizedBox8,
-      KImage.veteran5,
+      KImage.veteran5(),
     ];

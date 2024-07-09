@@ -113,7 +113,7 @@ class _NawbarWidgetImplematationState
                     Duration.zero,
                     () => context.goNamedWithScroll(KRoute.home.name),
                   ),
-                  icon: KImage.logo.copyWith(
+                  icon: KImage.logo(
                     key: KWidgetkeys.widget.nawbar.logo,
                   ),
                 ),
@@ -134,8 +134,7 @@ class _NawbarWidgetImplematationState
                     prefixIcon: KIcon.search,
                     onChanged: (text) {},
                     hintText: context.l10n.search,
-                    // suffixIcon: (widget.isDesk &&
-                    //(widget.isTablet?? false))  || !widget.hasMicrophone
+                    // suffixIcon: widget.isDesk || !widget.hasMicrophone
                     //     ? null
                     //     : KIcon.mic.setIconKey(
                     //         KWidgetkeys.widget.nawbar.iconMic,
@@ -167,6 +166,7 @@ class _NawbarWidgetImplematationState
                 Expanded(
                   child: Center(
                     child: TextButton.icon(
+                      style: const ButtonStyle(alignment: Alignment.center),
                       onPressed: () => context.goNamed(KRoute.information.name),
                       label: Text(
                         context.l10n.information,
@@ -191,71 +191,51 @@ class _NawbarWidgetImplematationState
                     ),
                   ),
                 ),
-                // if (widget.isDesk && widget.hasMicrophone)
-                //   Padding(
-                //     padding: const EdgeInsets.only(right:
-                // KPadding.kPaddingSize32),
-                //     child: IconWidget(
-                //       key: KWidgetkeys.widget.nawbar.iconMic,
-                //       icon: KIcon.mic,
-                //     ),
-                //   ),
-                if ((widget.isDesk || (widget.isTablet ?? false)) || !isFocused)
-                  const LanguagesSwitcherWidget(),
-                KSizedBox.kWidthSizedBox16,
-                if (context.read<AuthenticationBloc>().state.status !=
-                        AuthenticationStatus.authenticated &&
-                    Config.isDevelopment)
-                  if (widget.isDesk || (widget.isTablet ?? false))
-                    TextButton(
-                      key: KWidgetkeys.widget.nawbar.button,
-                      style: KButtonStyles.whiteButtonStyle,
-                      onPressed: () => context.goNamed(KRoute.login.name),
-                      child: Text(
-                        context.l10n.login,
-                        style: AppTextStyle.text24,
-                      ),
-                    )
-                  else if (!isFocused)
-                    IconButtonWidget(
-                      key: KWidgetkeys.widget.nawbar.iconPerson,
-                      onPressed: () => context.goNamed(KRoute.login.name),
-                      icon: KIcon.person
-                          .copyWith(color: AppColors.materialThemeWhite),
-                      background: AppColors.materialThemeKeyColorsSecondary,
-                    ),
-                if (context.read<AuthenticationBloc>().state.status ==
-                        AuthenticationStatus.authenticated &&
-                    Config.isDevelopment)
-                  if (!isFocused ||
-                      (widget.isDesk || (widget.isTablet ?? false)))
-                    if (context.read<AuthenticationBloc>().state.user!.photo ==
-                        null)
-                      InkWell(
-                        key: KWidgetkeys.widget.nawbar.iconPerson,
-                        onTap: () => context.goNamed(KRoute.profile.name),
-                        child: const IconWidget(
-                          icon: KIcon.person,
-                        ),
-                      )
-                    else
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(KSize.kUserPhoto),
-                        child: InkWell(
-                          key: KWidgetkeys.widget.nawbar.iconPerson,
-                          onTap: () => context.goNamed(KRoute.profile.name),
-                          child: ImageWidget(
-                            imageUrl: context
-                                .read<AuthenticationBloc>()
-                                .state
-                                .user!
-                                .photo!,
-                            fit: BoxFit.contain,
-                            size: KSize.kUserPhoto,
-                          ),
-                        ),
-                      ),
               ],
+
+              // if (widget.isDesk && widget.hasMicrophone)
+              //   Padding(
+              //     padding: const EdgeInsets.only(right:
+              // KPadding.kPaddingSize32),
+              //     child: IconWidget(
+              //       key: KWidgetkeys.widget.nawbar.iconMic,
+              //       icon: KIcon.mic,
+              //     ),
+              //   ),
+              if ((widget.isDesk || (widget.isTablet ?? false)) || !isFocused)
+                const LanguagesSwitcherWidget(),
+              KSizedBox.kWidthSizedBox16,
+              if (context.read<AuthenticationBloc>().state.status !=
+                      AuthenticationStatus.authenticated &&
+                  Config.isDevelopment)
+                if (widget.isDesk || (widget.isTablet ?? false))
+                  TextButton(
+                    key: KWidgetkeys.widget.nawbar.button,
+                    style: KButtonStyles.whiteButtonStyle,
+                    onPressed: () => loginNavigation(context),
+                    child: Text(
+                      context.l10n.login,
+                      style: AppTextStyle.text24,
+                    ),
+                  )
+                else if (!isFocused)
+                  IconButtonWidget(
+                    key: KWidgetkeys.widget.nawbar.iconPerson,
+                    onPressed: () => loginNavigation(context),
+                    icon: KIcon.person
+                        .copyWith(color: AppColors.materialThemeWhite),
+                    background: AppColors.materialThemeKeyColorsSecondary,
+                  ),
+              if (context.read<AuthenticationBloc>().state.status ==
+                      AuthenticationStatus.authenticated &&
+                  Config.isDevelopment)
+                if (!isFocused || (widget.isTablet ?? widget.isDesk))
+                  UserPhotoWidget(
+                    key: KWidgetkeys.widget.nawbar.iconPerson,
+                    onPressed: () => context.goNamed(KRoute.profile.name),
+                    imageUrl:
+                        context.read<AuthenticationBloc>().state.user?.photo,
+                  ),
             ],
           ),
         );
