@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:veteranam/shared/shared.dart';
 
 class SharedIconListWidget extends StatelessWidget {
@@ -23,7 +24,13 @@ class SharedIconListWidget extends StatelessWidget {
         _cardIconWidget(
           label: context.l10n.webSite,
           context,
-          onPressed: null,
+          onPressed: () async {
+            if (await canLaunchUrl(Uri.parse(link))) {
+              await launchUrl(
+                Uri.parse(link),
+              );
+            }
+          },
           icon: KIcon.captivePortal,
         ),
         if (isDesk) KSizedBox.kWidthSizedBox24,
