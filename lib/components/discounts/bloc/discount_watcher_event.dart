@@ -4,9 +4,10 @@ part of 'discount_watcher_bloc.dart';
 class DiscountWatcherEvent with _$DiscountWatcherEvent {
   const factory DiscountWatcherEvent.started() = _Started;
 
-  const factory DiscountWatcherEvent.updated(
-    List<DiscountModel> discountItemsModel,
-  ) = _Updated;
+  const factory DiscountWatcherEvent.updated({
+    required List<DiscountModel> discountItemsModel,
+    required List<ReportModel> reportItems,
+  }) = _Updated;
 
   const factory DiscountWatcherEvent.loadNextItems() = _LoadNextItems;
 
@@ -21,4 +22,6 @@ class DiscountWatcherEvent with _$DiscountWatcherEvent {
   const factory DiscountWatcherEvent.filterReset() = _FilterReset;
 
   const factory DiscountWatcherEvent.failure(dynamic failure) = _Failure;
+
+  const factory DiscountWatcherEvent.getReport() = _GetReport;
 }
