@@ -57,31 +57,24 @@ class HomeBodyWidget extends StatelessWidget {
                 ),
               ],
             )
-          else
-            Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: isTablet ? KPadding.kPaddingSize56 : 0,
-              ),
-              child: Column(
-                children: [
-                  TextPointWidget(
-                    context.l10n.whatKindOfProject,
-                    key: KWidgetkeys.screen.home.aboutProjecPrefix,
-                  ),
-                  if (isTablet)
-                    KSizedBox.kHeightSizedBox24
-                  else
-                    KSizedBox.kHeightSizedBox8,
-                  Text(
-                    context.l10n.aboutProject,
-                    key: KWidgetkeys.screen.home.aboutProjecSubtitle,
-                    style: isTablet
-                        ? AppTextStyle.materialThemeDisplaySmall
-                        : AppTextStyle.materialThemeHeadlineSmall,
-                  ),
-                ],
-              ),
+          else ...[
+            TextPointWidget(
+              context.l10n.whatKindOfProject,
+              key: KWidgetkeys.screen.home.aboutProjecPrefix,
             ),
+            if (isTablet)
+              KSizedBox.kHeightSizedBox24
+            else
+              KSizedBox.kHeightSizedBox8,
+            Text(
+              context.l10n.aboutProject,
+              key: KWidgetkeys.screen.home.aboutProjecSubtitle,
+              style: isTablet
+                  ? AppTextStyle.materialThemeDisplaySmall
+                  : AppTextStyle.materialThemeHeadlineSmall,
+            ),
+          ],
+
           if (isTablet)
             KSizedBox.kHeightSizedBox160
           else
@@ -119,28 +112,20 @@ class HomeBodyWidget extends StatelessWidget {
               KSizedBox.kWidthSizedBox48
             else
               KSizedBox.kWidthSizedBox16,
-            Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: isTablet ? KPadding.kPaddingSize56 : 0,
-              ),
-              child: Column(
-                children: [
-                  ...SectionWidget.get(
-                    buttonKey: KWidgetkeys.screen.home.discountButton,
-                    prefixKey: KWidgetkeys.screen.home.discountPrefix,
-                    titleKey: KWidgetkeys.screen.home.discountTitle,
-                    subtitleKey: KWidgetkeys.screen.home.discountSubtitle,
-                    textPoint: context.l10n.saveMoney,
-                    title: context.l10n.discountsServices,
-                    subtitle: context.l10n.discountsServicesSubtitle,
-                    textButton: context.l10n.toDiscount,
-                    route: () => context.goNamed(KRoute.discounts.name),
-                    isTablet: isTablet,
-                  ),
-                ],
-              ),
+            ...SectionWidget.get(
+              buttonKey: KWidgetkeys.screen.home.discountButton,
+              prefixKey: KWidgetkeys.screen.home.discountPrefix,
+              titleKey: KWidgetkeys.screen.home.discountTitle,
+              subtitleKey: KWidgetkeys.screen.home.discountSubtitle,
+              textPoint: context.l10n.saveMoney,
+              title: context.l10n.discountsServices,
+              subtitle: context.l10n.discountsServicesSubtitle,
+              textButton: context.l10n.toDiscount,
+              route: () => context.goNamed(KRoute.discounts.name),
+              isTablet: isTablet,
             ),
           ],
+
           if (isTablet)
             KSizedBox.kHeightSizedBox160
           else
@@ -180,26 +165,17 @@ class HomeBodyWidget extends StatelessWidget {
               KSizedBox.kWidthSizedBox48
             else
               KSizedBox.kHeightSizedBox16,
-            Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: isTablet ? KPadding.kPaddingSize56 : 0,
-              ),
-              child: Column(
-                children: [
-                  ...SectionWidget.get(
-                    buttonKey: KWidgetkeys.screen.home.informationButton,
-                    prefixKey: KWidgetkeys.screen.home.informationPrefix,
-                    subtitleKey: KWidgetkeys.screen.home.informationSubtitle,
-                    titleKey: KWidgetkeys.screen.home.informationTitle,
-                    textPoint: context.l10n.findOut,
-                    title: context.l10n.informationNews,
-                    subtitle: context.l10n.informationNewsSubtitle,
-                    textButton: context.l10n.toInfomation,
-                    route: () => context.goNamed(KRoute.information.name),
-                    isTablet: isTablet,
-                  ),
-                ],
-              ),
+            ...SectionWidget.get(
+              buttonKey: KWidgetkeys.screen.home.informationButton,
+              prefixKey: KWidgetkeys.screen.home.informationPrefix,
+              subtitleKey: KWidgetkeys.screen.home.informationSubtitle,
+              titleKey: KWidgetkeys.screen.home.informationTitle,
+              textPoint: context.l10n.findOut,
+              title: context.l10n.informationNews,
+              subtitle: context.l10n.informationNewsSubtitle,
+              textButton: context.l10n.toInfomation,
+              route: () => context.goNamed(KRoute.information.name),
+              isTablet: isTablet,
             ),
           ],
           if (isDesk || isTablet)
@@ -264,31 +240,24 @@ class HomeBodyWidget extends StatelessWidget {
                 ),
               ],
             )
-          else
-            Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: isTablet ? KPadding.kPaddingSize56 : 0,
+          else ...[
+            ...faqTest(context: context, isDesk: isTablet),
+            if (isTablet)
+              KSizedBox.kHeightSizedBox40
+            else
+              KSizedBox.kHeightSizedBox24,
+            if (_.questionModelItems.isEmpty &&
+                _.loadingStatus == LoadingStatus.loaded)
+              Config.isDevelopment
+                  ? mockButton(context)
+                  : const SizedBox.shrink()
+            else
+              ..._questionWidgetList(
+                context: context,
+                isDesk: isDesk,
               ),
-              child: Column(
-                children: [
-                  ...faqTest(context: context, isDesk: isTablet),
-                  if (isTablet)
-                    KSizedBox.kHeightSizedBox40
-                  else
-                    KSizedBox.kHeightSizedBox24,
-                  if (_.questionModelItems.isEmpty &&
-                      _.loadingStatus == LoadingStatus.loaded)
-                    Config.isDevelopment
-                        ? mockButton(context)
-                        : const SizedBox.shrink()
-                  else
-                    ..._questionWidgetList(
-                      context: context,
-                      isDesk: isDesk,
-                    ),
-                ],
-              ),
-            ),
+          ],
+
           if (isDesk)
             KSizedBox.kHeightSizedBox160
           else if (isTablet)

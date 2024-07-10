@@ -16,6 +16,40 @@ Future<void> boxexHelper({
     test: () async {
       await scrollingHelper(
         tester: tester,
+        itemKey: KWidgetkeys.screen.home.discountsBox,
+      );
+
+      await tester.tap(find.byKey(KWidgetkeys.screen.home.discountsBox));
+
+      verify(
+        () => mockGoRouter.goNamed(
+          KRoute.discounts.name,
+        ),
+      ).called(1);
+
+      await tester.tap(find.byKey(KWidgetkeys.screen.home.investorsBox));
+
+      verify(
+        () => mockGoRouter.goNamed(
+          KRoute.investors.name,
+        ),
+      ).called(1);
+
+      await scrollingHelper(
+        tester: tester,
+        itemKey: KWidgetkeys.screen.home.informationBox,
+      );
+
+      await tester.tap(find.byKey(KWidgetkeys.screen.home.informationBox));
+
+      verify(
+        () => mockGoRouter.goNamed(
+          KRoute.information.name,
+        ),
+      ).called(1);
+
+      await scrollingHelper(
+        tester: tester,
         itemKey: KWidgetkeys.screen.home.storyBox,
       );
 
@@ -37,35 +71,6 @@ Future<void> boxexHelper({
       verify(
         () => mockGoRouter.goNamed(
           KRoute.work.name,
-        ),
-      ).called(1);
-
-      await scrollingHelper(
-        tester: tester,
-        itemKey: KWidgetkeys.screen.home.informationBox,
-      );
-
-      await tester.tap(find.byKey(KWidgetkeys.screen.home.informationBox));
-
-      verify(
-        () => mockGoRouter.goNamed(
-          KRoute.information.name,
-        ),
-      ).called(1);
-
-      await tester.tap(find.byKey(KWidgetkeys.screen.home.discountsBox));
-
-      verify(
-        () => mockGoRouter.goNamed(
-          KRoute.discounts.name,
-        ),
-      ).called(1);
-
-      await tester.tap(find.byKey(KWidgetkeys.screen.home.investorsBox));
-
-      verify(
-        () => mockGoRouter.goNamed(
-          KRoute.investors.name,
         ),
       ).called(1);
     },
