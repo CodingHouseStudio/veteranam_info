@@ -130,54 +130,55 @@ class HomeBodyWidget extends StatelessWidget {
             KSizedBox.kHeightSizedBox160
           else
             KSizedBox.kHeightSizedBox40,
-          if (isDesk)
-            HomeScreenCard(
-              leftWidget: Padding(
-                padding: const EdgeInsets.only(
-                  right: KPadding.kPaddingSize48,
-                ),
-                child: Column(
-                  children: SectionWidget.get(
-                    buttonKey: KWidgetkeys.screen.home.informationButton,
-                    prefixKey: KWidgetkeys.screen.home.informationPrefix,
-                    subtitleKey: KWidgetkeys.screen.home.informationSubtitle,
-                    titleKey: KWidgetkeys.screen.home.informationTitle,
-                    textPoint: context.l10n.findOut,
-                    title: context.l10n.informationNews,
-                    subtitle: context.l10n.informationNewsSubtitle,
-                    textButton: context.l10n.toInfomation,
-                    route: () => context.goNamed(KRoute.information.name),
-                    bottomWidget: KSizedBox.kHeightSizedBox48,
-                    isTablet: isTablet,
+          if (Config.isDevelopment)
+            if (isDesk)
+              HomeScreenCard(
+                leftWidget: Padding(
+                  padding: const EdgeInsets.only(
+                    right: KPadding.kPaddingSize48,
+                  ),
+                  child: Column(
+                    children: SectionWidget.get(
+                      buttonKey: KWidgetkeys.screen.home.informationButton,
+                      prefixKey: KWidgetkeys.screen.home.informationPrefix,
+                      subtitleKey: KWidgetkeys.screen.home.informationSubtitle,
+                      titleKey: KWidgetkeys.screen.home.informationTitle,
+                      textPoint: context.l10n.findOut,
+                      title: context.l10n.informationNews,
+                      subtitle: context.l10n.informationNewsSubtitle,
+                      textButton: context.l10n.toInfomation,
+                      route: () => context.goNamed(KRoute.information.name),
+                      bottomWidget: KSizedBox.kHeightSizedBox48,
+                      isTablet: isTablet,
+                    ),
                   ),
                 ),
-              ),
-              rightWidget: KImage.inforamationImage(
+                rightWidget: KImage.inforamationImage(
+                  key: KWidgetkeys.screen.home.informationImage,
+                ),
+                rightPadding: KPadding.kPaddingSize32,
+              )
+            else ...[
+              KImage.inforamationImage(
                 key: KWidgetkeys.screen.home.informationImage,
               ),
-              rightPadding: KPadding.kPaddingSize32,
-            )
-          else ...[
-            KImage.inforamationImage(
-              key: KWidgetkeys.screen.home.informationImage,
-            ),
-            if (isTablet)
-              KSizedBox.kWidthSizedBox48
-            else
-              KSizedBox.kHeightSizedBox16,
-            ...SectionWidget.get(
-              buttonKey: KWidgetkeys.screen.home.informationButton,
-              prefixKey: KWidgetkeys.screen.home.informationPrefix,
-              subtitleKey: KWidgetkeys.screen.home.informationSubtitle,
-              titleKey: KWidgetkeys.screen.home.informationTitle,
-              textPoint: context.l10n.findOut,
-              title: context.l10n.informationNews,
-              subtitle: context.l10n.informationNewsSubtitle,
-              textButton: context.l10n.toInfomation,
-              route: () => context.goNamed(KRoute.information.name),
-              isTablet: isTablet,
-            ),
-          ],
+              if (isTablet)
+                KSizedBox.kWidthSizedBox48
+              else
+                KSizedBox.kHeightSizedBox16,
+              ...SectionWidget.get(
+                buttonKey: KWidgetkeys.screen.home.informationButton,
+                prefixKey: KWidgetkeys.screen.home.informationPrefix,
+                subtitleKey: KWidgetkeys.screen.home.informationSubtitle,
+                titleKey: KWidgetkeys.screen.home.informationTitle,
+                textPoint: context.l10n.findOut,
+                title: context.l10n.informationNews,
+                subtitle: context.l10n.informationNewsSubtitle,
+                textButton: context.l10n.toInfomation,
+                route: () => context.goNamed(KRoute.information.name),
+                isTablet: isTablet,
+              ),
+            ],
           if (isDesk || isTablet)
             KSizedBox.kHeightSizedBox160
           else
