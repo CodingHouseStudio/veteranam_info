@@ -25,7 +25,7 @@ jobs:
       flutter_version: 3.22.0
       min_coverage: 90
       format_directories: "lib test"
-      coverage_exclude_file: lib/shared/data_provider/*
+      coverage_exclude_file: lib/shared/widget/image_widget.dart
 
   spell-check:
     uses: CodingHouseStudio/flutter_workflows/.github/workflows/spell_check.yml@main
