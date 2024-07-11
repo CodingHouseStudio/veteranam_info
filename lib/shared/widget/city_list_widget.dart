@@ -34,14 +34,21 @@ class _CityWidgetListState extends State<CityWidgetList> {
           });
         },
         child: Container(
-          padding: const EdgeInsets.symmetric(
-            vertical: KPadding.kPaddingSize10,
-            horizontal: KPadding.kPaddingSize16,
+          padding: const EdgeInsets.only(
+            top: KPadding.kPaddingSize8,
+            left: KPadding.kPaddingSize16,
+            right: KPadding.kPaddingSize16,
           ),
           decoration: KWidgetTheme.boxDecorationDiscountContainer,
           child: Wrap(
             children: [
-              KIcon.distance,
+              const Padding(
+                padding: EdgeInsets.only(
+                  bottom: KPadding.kPaddingSize4,
+                ),
+                child: KIcon.distance,
+              ),
+              KSizedBox.kWidthSizedBox4,
               if (widget.discountModel.location?.isEmpty ?? true)
                 Text(
                   widget.discountModel.subLocation.getList(context).first,
@@ -66,15 +73,21 @@ class _CityWidgetListState extends State<CityWidgetList> {
                     padding: const EdgeInsets.only(
                       left: KPadding.kPaddingSize8,
                     ),
-                    child: Text(
-                      isExpanded
-                          ? context.l10n.hideExpansion
-                          : context.l10n.moreCities(
-                              (widget.discountModel.location ?? []).length - 1,
-                            ),
-                      style: AppTextStyle.materialThemeLabelLarge.copyWith(
-                        decoration: TextDecoration.underline,
-                        color: AppColors.materialThemeRefTertiaryTertiary40,
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                        bottom: KPadding.kPaddingSize8,
+                      ),
+                      child: Text(
+                        isExpanded
+                            ? context.l10n.hideExpansion
+                            : context.l10n.moreCities(
+                                (widget.discountModel.location ?? []).length -
+                                    1,
+                              ),
+                        style: AppTextStyle.materialThemeLabelLarge.copyWith(
+                          decoration: TextDecoration.underline,
+                          color: AppColors.materialThemeRefTertiaryTertiary40,
+                        ),
                       ),
                     ),
                   ),
