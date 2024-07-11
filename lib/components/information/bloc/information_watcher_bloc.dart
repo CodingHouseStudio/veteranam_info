@@ -75,14 +75,18 @@ class InformationWatcherBloc
     _Updated event,
     Emitter<InformationWatcherState> emit,
   ) {
+    final list = event.informationItemsModel.removeReportItems(
+      checkFunction: (item) => item.id,
+      reportItems: event.reportItems,
+    );
     emit(
       InformationWatcherState(
-        informationModelItems: event.informationItemsModel,
+        informationModelItems: list,
         loadingStatus: LoadingStatus.loaded,
         filteredInformationModelItems: _filter(
           filtersIndex: state.filtersIndex,
           itemsLoaded: state.itemsLoaded,
-          list: event.informationItemsModel,
+          list: list,
           reportItems: event.reportItems,
         ),
         filtersIndex: state.filtersIndex,
@@ -183,15 +187,27 @@ class InformationWatcherBloc
     Emitter<InformationWatcherState> emit,
   ) async {
     final reportItems = await _getReport();
+    final list = state.informationModelItems.removeReportItems(
+      checkFunction: (item) => item.id,
+      reportItems: reportItems,
+    );
+
+    final filtersIndex = list.updateFilterList(
+      getFilter: (item) => item.category,
+      previousList: state.informationModelItems,
+      previousFilter: state.filtersIndex,
+    );
+    final filterItems = _filter(
+      filtersIndex: filtersIndex,
+      itemsLoaded: state.itemsLoaded,
+      list: list,
+    );
 
     emit(
       state.copyWith(
         reportItems: reportItems,
-        filteredInformationModelItems: _filter(
-          filtersIndex: state.filtersIndex,
-          itemsLoaded: state.itemsLoaded,
-          reportItems: reportItems,
-        ),
+        filteredInformationModelItems: filterItems,
+        filtersIndex: filtersIndex,
       ),
     );
   }

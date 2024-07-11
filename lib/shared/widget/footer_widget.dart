@@ -246,11 +246,12 @@ abstract class FooterWidget {
           KSizedBox.kHeightSizedBox8
         else
           KSizedBox.kHeightSizedBox4,
-        _button(
-          key: KWidgetkeys.widget.footer.informationButton,
-          text: context.l10n.information,
-          onPressed: () => context.goNamed(KRoute.information.name),
-        ),
+        if (Config.isDevelopment)
+          _button(
+            key: KWidgetkeys.widget.footer.informationButton,
+            text: context.l10n.information,
+            onPressed: () => context.goNamed(KRoute.information.name),
+          ),
         if (isTablet)
           KSizedBox.kHeightSizedBox8
         else
