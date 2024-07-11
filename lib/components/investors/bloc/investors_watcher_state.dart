@@ -26,6 +26,7 @@ class InvestorsWatcherState with _$InvestorsWatcherState {
     required List<FundModel> loadingFundItems,
     required LoadingStatus loadingStatus,
     required int itemsLoaded,
-    InvestorsFailure? failure,
+    required List<ReportModel> reportItems,
+    required InvestorsFailure? failure,
   }) = _Initial;
 }

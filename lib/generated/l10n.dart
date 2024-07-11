@@ -1490,11 +1490,11 @@ class AppLocalizations {
     );
   }
 
-  /// `Thank you Veterans!`
-  String get thisServiceForVeterans {
+  /// `Thank you\nVeterans!`
+  String get thankYouVeterans {
     return Intl.message(
-      'Thank you Veterans!',
-      name: 'thisServiceForVeterans',
+      'Thank you\nVeterans!',
+      name: 'thankYouVeterans',
       desc: '',
       args: [],
     );
@@ -1840,6 +1840,26 @@ class AppLocalizations {
     );
   }
 
+  /// `SUPPORT\nVETERANS`
+  String get supportVeterans {
+    return Intl.message(
+      'SUPPORT\nVETERANS',
+      name: 'supportVeterans',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `HAVE\nQUESTIONS?`
+  String get haveQuestions {
+    return Intl.message(
+      'HAVE\nQUESTIONS?',
+      name: 'haveQuestions',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Donate here`
   String get donateHere {
     return Intl.message(
@@ -2175,6 +2195,16 @@ class AppLocalizations {
     return Intl.message(
       'of up to',
       name: 'ofUpTo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `FIND YOUR DISCOUNT`
+  String get findYourDiscount {
+    return Intl.message(
+      'FIND YOUR DISCOUNT',
+      name: 'findYourDiscount',
       desc: '',
       args: [],
     );

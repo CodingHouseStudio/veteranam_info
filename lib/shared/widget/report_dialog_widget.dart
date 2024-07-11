@@ -7,11 +7,13 @@ class ReportDialogWidget extends StatelessWidget {
   const ReportDialogWidget({
     required this.isDesk,
     required this.cardEnum,
+    required this.afterEvent,
     super.key,
   });
 
   final bool isDesk;
   final CardEnum cardEnum;
+  final void Function()? afterEvent;
 
   @override
   Widget build(BuildContext context) {
@@ -19,9 +21,12 @@ class ReportDialogWidget extends StatelessWidget {
       key: KWidgetkeys.widget.reportDialog.widget,
       constraints: const BoxConstraints(maxWidth: KMinMaxSize.maxWidth460),
       child: BlocConsumer<ReportBloc, ReportState>(
-        listener: (context, state) => context.pop(),
-        listenWhen: (previous, current) =>
-            current.formState == ReportEnum.success,
+        listener: (context, state) {
+          if (state.formState == ReportEnum.success) {
+            context.pop();
+            afterEvent?.call();
+          }
+        },
         builder: (context, _) => Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,

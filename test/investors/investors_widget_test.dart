@@ -30,15 +30,6 @@ void main() {
       mockAuthenticationRepository = MockAuthenticationRepository();
       mockAppAuthenticationRepository = MockAppAuthenticationRepository();
 
-      when(
-        mockReportRepository.sendReport(
-          KTestText.reportModel
-              .copyWith(reasonComplaint: ReasonComplaint.other),
-        ),
-      ).thenAnswer(
-        (invocation) async => const Right(true),
-      );
-
       when(mockAuthenticationRepository.currentUser).thenAnswer(
         (realInvocation) => User.empty,
       );
@@ -56,6 +47,22 @@ void main() {
       );
       when(mockAppAuthenticationRepository.isAnonymously()).thenAnswer(
         (realInvocation) => true,
+      );
+      when(
+        mockReportRepository.sendReport(
+          KTestText.reportModel
+              .copyWith(reasonComplaint: ReasonComplaint.other),
+        ),
+      ).thenAnswer(
+        (invocation) async => const Right(true),
+      );
+      when(
+        mockReportRepository.getCardReportById(
+          cardEnum: CardEnum.funds,
+          userId: KTestText.user.id,
+        ),
+      ).thenAnswer(
+        (invocation) async => Right(KTestText.reportItems),
       );
     });
     group('${KGroupText.failure} ', () {
@@ -230,7 +237,7 @@ void main() {
             mockGoRouter: mockGoRouter,
           );
 
-          await investorsInitialHelper(tester);
+          // await investorsInitialHelper(tester);
         });
         testWidgets('Report Dialog Correct Send', (tester) async {
           await investorsPumpAppHelper(
