@@ -5,6 +5,7 @@ import 'package:veteranam/shared/shared.dart';
 extension DiscountFailureValue on DiscountFailure {
   String value(BuildContext context) {
     switch (this) {
+      case DiscountFailure.report:
       case DiscountFailure.error:
         return context.l10n.error;
     }

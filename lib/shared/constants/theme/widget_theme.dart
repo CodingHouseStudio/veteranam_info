@@ -171,13 +171,12 @@ abstract class KWidgetTheme {
       ),
     ),
   );
+  static const boxDecorationHome = BoxDecoration(
+    borderRadius: KBorderRadius.kBorderRadius32,
+    color: AppColors.materialThemeKeyColorsTertiary,
+  );
   static const boxDecorationDiscount = BoxDecoration(
     borderRadius: KBorderRadius.kBorderRadius32,
-    color: AppColors.materialThemeSourceSeed,
-    border: Border.fromBorderSide(
-      BorderSide(
-        color: AppColors.materialThemeKeyColorsNeutral,
-      ),
-    ),
+    color: AppColors.materialThemeKeyColorsPrimary,
   );
 }

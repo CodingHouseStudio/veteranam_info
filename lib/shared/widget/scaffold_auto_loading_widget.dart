@@ -36,8 +36,7 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
   void initState() {
     super.initState();
     _scrollController = ScrollController();
-    if (!KPlatformConstants.isWebDesktop &&
-        !(widget.cardListIsEmpty ?? false)) {
+    if (!KPlatformConstants.isWebDesktop) {
       _scrollController.addListener(_onScroll);
     }
   }
@@ -48,6 +47,8 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
       builder: (BuildContext context, BoxConstraints constraints) {
         final isDesk =
             constraints.maxWidth > KPlatformConstants.minWidthThresholdDesk;
+        final isTablet =
+            constraints.maxWidth > KPlatformConstants.minWidthThresholdTablet;
 
         final titleChildWidget =
             widget.titleChildWidgetsFunction?.call(isDesk: isDesk);
@@ -117,6 +118,7 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
               SliverPersistentHeader(
                 delegate: NawbarWidget(
                   isDesk: isDesk,
+                  isTablet: isTablet,
                 ),
               ),
               if (titleChildWidget != null)
@@ -146,6 +148,7 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
                             isDesk: isDesk,
                             childWidget: widget.mainRightChildWidget,
                             maxMinHeight: constraints.maxHeight,
+                            isTablet: isTablet,
                           ),
                         ),
                         leftWidthPercent: 0.3,
@@ -184,7 +187,11 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
   }
 
   void _onScroll() {
-    if (_isBottom && widget.listCanLoaded) widget.loadFunction();
+    if (_isBottom &&
+        widget.listCanLoaded &&
+        !(widget.cardListIsEmpty ?? false)) {
+      widget.loadFunction();
+    }
   }
 
   bool get _isBottom {

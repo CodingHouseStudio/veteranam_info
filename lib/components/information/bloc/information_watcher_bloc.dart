@@ -14,15 +14,20 @@ class InformationWatcherBloc
     extends Bloc<InformationWatcherEvent, InformationWatcherState> {
   InformationWatcherBloc({
     required IInformationRepository informationRepository,
+    required IReportRepository reportRepository,
+    required IAppAuthenticationRepository appAuthenticationRepository,
   })  : _informationRepository = informationRepository,
+        _reportRepository = reportRepository,
+        _appAuthenticationRepository = appAuthenticationRepository,
         super(
-          const _Initial(
+          const InformationWatcherState(
             informationModelItems: [],
             loadingStatus: LoadingStatus.initial,
             filteredInformationModelItems: [],
             filtersIndex: [],
             itemsLoaded: 0,
             failure: null,
+            reportItems: [],
           ),
         ) {
     on<_Started>(_onStarted);
@@ -30,11 +35,17 @@ class InformationWatcherBloc
     on<_Failure>(_onFailure);
     on<_LoadNextItems>(_onLoadNextItems);
     on<_Filter>(_onFilter);
+    on<_GetReport>(_onGetReport);
     // on<_FilterReset>(_onFilterReset);
+    on<_Like>(_onLike);
+    on<_ChangeLike>(_onChangeLike);
   }
 
   final IInformationRepository _informationRepository;
   StreamSubscription<List<InformationModel>>? _informationItemsSubscription;
+  final IReportRepository _reportRepository;
+  final IAppAuthenticationRepository _appAuthenticationRepository;
+  Timer? _debounceTimer;
 
   Future<void> _onStarted(
     _Started event,
@@ -42,12 +53,15 @@ class InformationWatcherBloc
   ) async {
     emit(state.copyWith(loadingStatus: LoadingStatus.loading));
 
+    final reportItems = await _getReport();
+
     await _informationItemsSubscription?.cancel();
     _informationItemsSubscription =
         _informationRepository.getInformationItems().listen(
       (information) => add(
         InformationWatcherEvent.updated(
-          information,
+          informationItemsModel: information,
+          reportItems: reportItems,
         ),
       ),
       onError: (dynamic error) {
@@ -69,11 +83,13 @@ class InformationWatcherBloc
           filtersIndex: state.filtersIndex,
           itemsLoaded: state.itemsLoaded,
           list: event.informationItemsModel,
+          reportItems: event.reportItems,
         ),
         filtersIndex: state.filtersIndex,
         itemsLoaded:
             state.itemsLoaded.getLoaded(list: event.informationItemsModel),
         failure: null,
+        reportItems: event.reportItems,
       ),
     );
   }
@@ -89,13 +105,13 @@ class InformationWatcherBloc
     emit(state.copyWith(loadingStatus: LoadingStatus.loading));
     final filterItems = _filter(
       filtersIndex: state.filtersIndex,
-      itemsLoaded: state.itemsLoaded + KDimensions.loadItems,
+      itemsLoaded: state.itemsLoaded,
+      loadItems: KDimensions.loadItems,
     );
     emit(
       state.copyWith(
         filteredInformationModelItems: filterItems,
-        itemsLoaded: (state.itemsLoaded + KDimensions.loadItems)
-            .getLoaded(list: filterItems),
+        itemsLoaded: filterItems.length,
         loadingStatus:
             filterItems.isLoading(state.filteredInformationModelItems),
       ),
@@ -120,7 +136,8 @@ class InformationWatcherBloc
     _Filter event,
     Emitter<InformationWatcherState> emit,
   ) {
-    final selectedFilters = state.filtersIndex.filterIndex(event.filterIndex);
+    final selectedFilters =
+        state.filtersIndex.changeListValue(event.filterIndex);
 
     final filterItems = _filter(
       filtersIndex: selectedFilters,
@@ -142,11 +159,51 @@ class InformationWatcherBloc
     required List<int>? filtersIndex,
     required int itemsLoaded,
     List<InformationModel>? list,
+    List<ReportModel>? reportItems,
+    int? loadItems,
   }) {
-    return (list ?? state.informationModelItems).loadingFilter(
-      filtersIndex: filtersIndex,
-      itemsLoaded: itemsLoaded,
-      getFilter: (InformationModel item) => item.category,
+    final reportItemsValue = reportItems ?? state.reportItems;
+    return (list ?? state.informationModelItems)
+        .where(
+          (item) => reportItemsValue.every(
+            (report) => report.cardId != item.id,
+          ),
+        )
+        .toList()
+        .loadingFilter(
+          filtersIndex: filtersIndex,
+          itemsLoaded: itemsLoaded,
+          getFilter: (InformationModel item) => item.category,
+          loadItems: loadItems,
+        );
+  }
+
+  Future<void> _onGetReport(
+    _GetReport event,
+    Emitter<InformationWatcherState> emit,
+  ) async {
+    final reportItems = await _getReport();
+
+    emit(
+      state.copyWith(
+        reportItems: reportItems,
+        filteredInformationModelItems: _filter(
+          filtersIndex: state.filtersIndex,
+          itemsLoaded: state.itemsLoaded,
+          reportItems: reportItems,
+        ),
+      ),
+    );
+  }
+
+  Future<List<ReportModel>> _getReport() async {
+    final reportItems = await _reportRepository.getCardReportById(
+      cardEnum: CardEnum.information,
+      userId: _appAuthenticationRepository.currentUser.id,
+    );
+    return reportItems.fold(
+      (l) => [],
+      (r) => r,
     );
   }
 
@@ -162,6 +219,86 @@ class InformationWatcherBloc
       ),
     );
   }
+
+  Future<void> _onLike(
+    _Like event,
+    Emitter<InformationWatcherState> emit,
+  ) async {
+    if (_debounceTimer?.isActive ?? false) {
+      _debounceTimer?.cancel();
+      _debounceTimer = null;
+      return;
+    }
+    if (!(_debounceTimer?.isActive ?? false)) {
+      _debounceTimer = Timer(const Duration(seconds: 5), () async {
+        add(
+          InformationWatcherEvent.changeLike(
+            informationModel: event.informationModel,
+            isLiked: event.isLiked,
+          ),
+        );
+      });
+    }
+  }
+
+  Future<void> _onChangeLike(
+    _ChangeLike event,
+    Emitter<InformationWatcherState> emit,
+  ) async {
+    final result = await _informationRepository.updateLikeCount(
+      informationModel: event.informationModel,
+      isLiked: event.isLiked,
+    );
+
+    result.fold(
+      (l) => emit(
+        state.copyWith(
+          failure: InformationFailure.error,
+          loadingStatus: LoadingStatus.error,
+        ),
+      ),
+      (r) => emit(
+        state.copyWith(
+          failure: null,
+          loadingStatus: LoadingStatus.loaded,
+        ),
+      ),
+    );
+  }
+
+  // EasyDebounce.debounce(
+  //   'change like',
+  //   const Duration(seconds: 5),
+  //   () => _informationRepository.updateLikeCount(
+  //     informationModel: event.informationModel,
+  //     isLiked: event.isLiked,
+  //   ),
+  // );
+  // final stream = Stream.periodic(const Duration(seconds: 5), (i) => i)
+  //     .take(1)
+  //     .asyncMap((_) async {
+  //   final result = await _informationRepository.updateLikeCount(
+  //     informationModel: event.informationModel,
+  //     isLiked: event.isLiked,
+  //   );
+
+  //   result.fold(
+  //     (l) => emit(
+  //       state.copyWith(
+  //         failure: InformationFailure.error,
+  //         loadingStatus: LoadingStatus.error,
+  //       ),
+  //     ),
+  //     (r) => emit(
+  //       state.copyWith(
+  //         failure: null,
+  //         loadingStatus: LoadingStatus.loaded,
+  //       ),
+  //     ),
+  //   );
+  // });
+
+  // stream.throttle(const Duration(seconds: 5)).listen((_) {});
 
   @override
   Future<void> close() {

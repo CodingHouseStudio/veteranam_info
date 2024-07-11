@@ -39,6 +39,7 @@ class InformationBodyWidget extends StatelessWidget {
             KSizedBox.kHeightSizedBox24,
           if (isDesk)
             Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 TextPointWidget(
                   context.l10n.information,
@@ -75,7 +76,10 @@ class InformationBodyWidget extends StatelessWidget {
               },
             )
           else
-            ..._newsWidgetList(context: context, isDesk: isDesk),
+            ..._newsWidgetList(
+              context: context,
+              isDesk: isDesk,
+            ),
           if (isDesk)
             KSizedBox.kHeightSizedBox56
           else

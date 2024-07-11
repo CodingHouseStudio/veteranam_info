@@ -122,6 +122,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "filterApplied":
             MessageLookupByLibrary.simpleMessage("Застосований фільтр"),
         "findOut": MessageLookupByLibrary.simpleMessage("Щоб дізнатися"),
+        "findYourDiscount":
+            MessageLookupByLibrary.simpleMessage("ЗНАЙДІТЬ СВОЮ ЗНИЖКУ"),
         "forVeteransAndTheirFamilies":
             MessageLookupByLibrary.simpleMessage("для ветеранів і їх родин"),
         "fraudOrSpam":
@@ -139,6 +141,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Не знайдено данних, натисніть щоб додати тестові дані"),
         "givingJob": MessageLookupByLibrary.simpleMessage("Даю роботу"),
         "google": MessageLookupByLibrary.simpleMessage("Google"),
+        "haveQuestions":
+            MessageLookupByLibrary.simpleMessage("МАЄТЕ\nПИТАННЯ?"),
         "hello": MessageLookupByLibrary.simpleMessage("Привіт"),
         "helloVeteran":
             MessageLookupByLibrary.simpleMessage("Привіт, Ветеран!"),
@@ -306,14 +310,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "support": MessageLookupByLibrary.simpleMessage("Підтримати"),
         "supportOurVeterans":
             MessageLookupByLibrary.simpleMessage("Підтримайте наших ветеранів"),
+        "supportVeterans":
+            MessageLookupByLibrary.simpleMessage("ПІДТРИМАЙТЕ\nВЕТЕРАНІВ"),
         "text": MessageLookupByLibrary.simpleMessage("Текст"),
         "thankYou": MessageLookupByLibrary.simpleMessage("Дякуємо!"),
         "thankYouDescription": MessageLookupByLibrary.simpleMessage(
             "Зверніть увагу! Для доступу до деяких послуг Вам потрібно буде підтвердити Ваш статус показавши відповідне посвідчення."),
+        "thankYouVeterans":
+            MessageLookupByLibrary.simpleMessage("Дякуємо\nВЕТЕРАНИ!"),
         "thatEndOfList": MessageLookupByLibrary.simpleMessage(
             "Це кінець списку! Дякуємо за ваш час."),
-        "thisServiceForVeterans":
-            MessageLookupByLibrary.simpleMessage("Дякуємо  ВЕТЕРАНИ!"),
         "thisServiceForVeteransSubtitle": MessageLookupByLibrary.simpleMessage(
             "Тут ти знайдеш корисну інформацію про знижки для ветеранів та їх сімей"),
         "toDiscount": MessageLookupByLibrary.simpleMessage("До знижок"),
@@ -321,7 +327,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Щоб отримати потрібно:"),
         "toInfomation": MessageLookupByLibrary.simpleMessage("До інформації"),
         "toVacancy": MessageLookupByLibrary.simpleMessage("До вакансій"),
-        "tooShortEmail": MessageLookupByLibrary.simpleMessage("Закоротке"),
+        "tooShortEmail": MessageLookupByLibrary.simpleMessage("Закороткий"),
         "tooShortPassword": MessageLookupByLibrary.simpleMessage("закороткий"),
         "tooshort": MessageLookupByLibrary.simpleMessage("закоротке"),
         "tryItAgain": MessageLookupByLibrary.simpleMessage("Спробувати ще раз"),

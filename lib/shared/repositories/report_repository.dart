@@ -19,4 +19,23 @@ class ReportRepository implements IReportRepository {
       return const Left(SomeFailure.serverError());
     }
   }
+
+  @override
+  Future<Either<SomeFailure, List<ReportModel>>> getCardReportById({
+    required CardEnum cardEnum,
+    required String userId,
+  }) async {
+    try {
+      final userDiscountsItems = await _firestoreService.getCardReportById(
+        cardEnum: cardEnum,
+        userId: userId,
+      );
+
+      return Right(userDiscountsItems);
+    } on FirebaseException catch (e) {
+      return Left(GetFailur.fromCode(e).status);
+    } catch (e) {
+      return const Left(SomeFailure.serverError());
+    }
+  }
 }

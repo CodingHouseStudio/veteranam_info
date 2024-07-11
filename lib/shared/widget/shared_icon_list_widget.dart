@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:veteranam/shared/shared.dart';
 
 class SharedIconListWidget extends StatelessWidget {
@@ -8,6 +9,8 @@ class SharedIconListWidget extends StatelessWidget {
     required this.isDesk,
     required this.link,
     required this.cardEnum,
+    required this.afterEvent,
+    required this.cardId,
     super.key,
   });
 
@@ -15,34 +18,44 @@ class SharedIconListWidget extends StatelessWidget {
   final bool isDesk;
   final String link;
   final CardEnum cardEnum;
+  final void Function()? afterEvent;
+  final String cardId;
 
   @override
   Widget build(BuildContext context) {
     return CardTextDetailWidget(
       text: text,
       maxLines: 3,
-      icon: Row(
-        children: [
-          _cardIconWidget(
-            label: context.l10n.webSite,
-            context,
-            onPressed: null,
-            icon: KIcon.captivePortal,
+      icon: [
+        _cardIconWidget(
+          label: context.l10n.webSite,
+          context,
+          onPressed: () async {
+            if (await canLaunchUrl(Uri.parse(link))) {
+              await launchUrl(
+                Uri.parse(link),
+              );
+            }
+          },
+          icon: KIcon.captivePortal,
+        ),
+        if (isDesk) KSizedBox.kWidthSizedBox24,
+        _cardIconWidget(
+          label: context.l10n.share,
+          context,
+          onPressed: () async => Share.share(
+            link,
           ),
-          if (isDesk) KSizedBox.kWidthSizedBox24 else KSizedBox.kWidthSizedBox8,
-          _cardIconWidget(
-            label: context.l10n.share,
-            context,
-            onPressed: () async => Share.share(link),
-            icon: KIcon.share,
-          ),
-          if (isDesk) KSizedBox.kWidthSizedBox24 else KSizedBox.kWidthSizedBox8,
-          ComplaintWidget(
-            isDesk: isDesk,
-            cardEnum: cardEnum,
-          ),
-        ],
-      ),
+          icon: KIcon.share,
+        ),
+        if (isDesk) KSizedBox.kWidthSizedBox24 else KSizedBox.kWidthSizedBox8,
+        ComplaintWidget(
+          isDesk: isDesk,
+          cardEnum: cardEnum,
+          afterEvent: afterEvent,
+          cardId: cardId,
+        ),
+      ],
       isDesk: isDesk,
     );
   }
