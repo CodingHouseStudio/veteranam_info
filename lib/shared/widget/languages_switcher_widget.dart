@@ -21,17 +21,19 @@ class LanguagesSwitcherWidget extends StatelessWidget {
             decoration: KWidgetTheme.boxDecorationWhiteMain,
             child: Row(
               key: KWidgetkeys.widget.languageSwitcher.item,
-              children: [
-                _buildLanguageOption(
-                  Language.ukrain.text,
-                  Language.ukrain == state.userSetting.locale,
+              children: List.generate(
+                Language.values.length,
+                (index) => Padding(
+                  padding: index == 0
+                      ? EdgeInsets.zero
+                      : const EdgeInsets.only(left: KPadding.kPaddingSize8),
+                  child: _buildLanguageOption(
+                    Language.values.elementAt(index).text,
+                    Language.values.elementAt(index) ==
+                        state.userSetting.locale,
+                  ),
                 ),
-                KSizedBox.kWidthSizedBox8,
-                _buildLanguageOption(
-                  Language.english.text,
-                  Language.english == state.userSetting.locale,
-                ),
-              ],
+              ),
             ),
           ),
         );
@@ -43,30 +45,22 @@ class LanguagesSwitcherWidget extends StatelessWidget {
     String languageName,
     bool isSelected,
   ) {
-    return Column(
-      children: [
-        KSizedBox.kHeightSizedBox3,
-        Container(
-          decoration: isSelected
-              ? KWidgetTheme.boxDecorationBlackCircular
-              : KWidgetTheme.boxDecorationGrayCircular,
-          padding: const EdgeInsets.all(KPadding.kPaddingSize8),
-          child: Row(
-            children: [
-              KSizedBox.kWidthSizedBox4,
-              Text(
-                languageName,
-                key: KWidgetkeys.widget.languageSwitcher.text,
-                style: isSelected
-                    ? AppTextStyle.materialThemeTitleMediumNeutral
-                    : AppTextStyle.materialThemeTitleMedium,
-              ),
-              KSizedBox.kWidthSizedBox4,
-            ],
-          ),
-        ),
-        KSizedBox.kHeightSizedBox2,
-      ],
+    return Container(
+      decoration: isSelected
+          ? KWidgetTheme.boxDecorationBlackCircular
+          : KWidgetTheme.boxDecorationGrayCircular,
+      margin: const EdgeInsets.symmetric(vertical: KPadding.kPaddingSize2),
+      padding: const EdgeInsets.symmetric(
+        horizontal: KPadding.kPaddingSize12,
+        vertical: KPadding.kPaddingSize8,
+      ),
+      child: Text(
+        languageName,
+        key: KWidgetkeys.widget.languageSwitcher.text,
+        style: isSelected
+            ? AppTextStyle.materialThemeTitleMediumNeutral
+            : AppTextStyle.materialThemeTitleMedium,
+      ),
     );
   }
 }

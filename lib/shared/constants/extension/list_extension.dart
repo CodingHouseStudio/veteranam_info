@@ -21,9 +21,14 @@ extension FilterItems on List<FilterItem> {
 extension ListExtensions<T> on List<T> {
   List<T> loading({required int itemsLoaded, int? loadItems}) {
     if (isEmpty) return [];
-    final loadedItemsCount = itemsLoaded
-        .getLoaded(list: this, loadItems: loadItems)
-        .clamp(0, length);
+    late int loadNumber;
+    if (loadItems != null) {
+      loadNumber = itemsLoaded + loadItems;
+    } else {
+      loadNumber = itemsLoaded;
+    }
+    final loadedItemsCount =
+        loadNumber.getLoaded(list: this, loadItems: loadItems).clamp(0, length);
 
     return take(loadedItemsCount).toList();
   }
@@ -39,7 +44,8 @@ extension ListExtensions<T> on List<T> {
     if (isEmpty) return [];
 
     final loadedItemsCount =
-        itemsLoaded?.getLoaded(list: this, loadItems: loadItems) ?? length;
+        (itemsLoaded?.getLoaded(list: this, loadItems: loadItems) ?? length) +
+            (loadItems ?? 0);
 
     if (filtersIndex == null ||
         filtersIndex.isEmpty ||
@@ -121,10 +127,27 @@ extension ListExtensions<T> on List<T> {
 
   //   return selectedFilters;
   // }
+
+  List<T> filterIndexs(List<int> listIndex) {
+    // Create a new list to store filtered items
+    final filteredList = <T>[];
+
+    // Iterate through each item in the original list
+    for (final item in this) {
+      // Check if the item's index is NOT in the list of indices to remove
+      if (!listIndex.contains(indexOf(item))) {
+        // If not, add the item to the new list
+        filteredList.add(item);
+      }
+    }
+
+    // Return the new filtered list
+    return filteredList;
+  }
 }
 
 extension ListExtensionsNull<T> on List<T>? {
-  List<T> filterIndex(T eventFilterIndex) {
+  List<T> changeListValue(T eventFilterIndex) {
     final selectedFilters = List<T>.from(this ?? []);
 
     if (selectedFilters.contains(eventFilterIndex)) {
