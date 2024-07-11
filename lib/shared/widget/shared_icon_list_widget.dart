@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:veteranam/shared/shared.dart';
 
 class SharedIconListWidget extends StatelessWidget {
@@ -26,36 +25,30 @@ class SharedIconListWidget extends StatelessWidget {
     return CardTextDetailWidget(
       text: text,
       maxLines: 3,
-      icon: [
-        _cardIconWidget(
-          label: context.l10n.webSite,
-          context,
-          onPressed: () async {
-            if (await canLaunchUrl(Uri.parse(link))) {
-              await launchUrl(
-                Uri.parse(link),
-              );
-            }
-          },
-          icon: KIcon.captivePortal,
-        ),
-        if (isDesk) KSizedBox.kWidthSizedBox24,
-        _cardIconWidget(
-          label: context.l10n.share,
-          context,
-          onPressed: () async => Share.share(
-            link,
+      icon: Row(
+        children: [
+          _cardIconWidget(
+            label: context.l10n.webSite,
+            context,
+            onPressed: null,
+            icon: KIcon.captivePortal,
           ),
-          icon: KIcon.share,
-        ),
-        if (isDesk) KSizedBox.kWidthSizedBox24 else KSizedBox.kWidthSizedBox8,
-        ComplaintWidget(
-          isDesk: isDesk,
-          cardEnum: cardEnum,
-          afterEvent: afterEvent,
-          cardId: cardId,
-        ),
-      ],
+          if (isDesk) KSizedBox.kWidthSizedBox24 else KSizedBox.kWidthSizedBox8,
+          _cardIconWidget(
+            label: context.l10n.share,
+            context,
+            onPressed: () async => Share.share(link),
+            icon: KIcon.share,
+          ),
+          if (isDesk) KSizedBox.kWidthSizedBox24 else KSizedBox.kWidthSizedBox8,
+          ComplaintWidget(
+            isDesk: isDesk,
+            cardEnum: cardEnum,
+            afterEvent: afterEvent,
+            cardId: cardId,
+          ),
+        ],
+      ),
       isDesk: isDesk,
     );
   }
