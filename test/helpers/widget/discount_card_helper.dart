@@ -1,6 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:veteranam/shared/shared.dart';
 
+import '../../text_dependency.dart';
+
 Future<void> discountCardHelper(
   WidgetTester tester,
 ) async {
@@ -42,8 +44,14 @@ Future<void> discountCardHelper(
     find.byKey(KWidgetkeys.widget.discountCard.description),
     findsWidgets,
   );
+
   expect(
     find.byKey(KWidgetkeys.widget.discountCard.buttons),
     findsWidgets,
+  );
+
+  await scrollingHelper(
+    tester: tester,
+    itemKey: KWidgetkeys.widget.discountCard.buttons,
   );
 }

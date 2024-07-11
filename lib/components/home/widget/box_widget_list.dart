@@ -7,43 +7,54 @@ List<Widget> _boxWidgetList({
   required GlobalKey aboutProjectKey,
 }) =>
     [
-      if (isTablet) KSizedBox.kHeightSizedBox6 else KSizedBox.kHeightSizedBox24,
+      if (isDesk) KSizedBox.kHeightSizedBox36 else KSizedBox.kHeightSizedBox16,
       if (isTablet)
-        Row(
-          children: [
-            Expanded(
-              flex: 2,
-              child: HomeBoxWidget(
-                aboutProjectKey: aboutProjectKey,
-                isDesk: isDesk,
-                isTablet: true,
+        IntrinsicHeight(
+          child: Row(
+            children: [
+              Expanded(
+                flex: isDesk ? 3 : 2,
+                child: HomeBoxWidget(
+                  aboutProjectKey: aboutProjectKey,
+                  isDesk: isDesk,
+                  isTablet: true,
+                ),
               ),
-            ),
-            if (Config.isDevelopment) ...[
               KSizedBox.kWidthSizedBox24,
               Expanded(
+                flex: 2,
                 child: Column(
                   children: [
-                    BoxWidget(
-                      key: KWidgetkeys.screen.home.storyBox,
-                      text: context.l10n.stories,
-                      onTap: () => context.goNamed(KRoute.stories.name),
-                      isDesk: true,
-                      icon: KIcon.messageSquare,
+                    Expanded(
+                      flex: 3,
+                      child: DiscountCard(
+                        key: KWidgetkeys.screen.home.discountsBox,
+                        isTablet: true,
+                      ),
+                      // BoxWidget(
+                      //   key: KWidgetkeys.screen.home.discountsBox,
+                      //   text: context.l10n.discounts,
+                      //   onTap: () => context.goNamed(
+                      //     KRoute.discounts.name,
+                      //   ),
+                      //   isDesk: isDesk,
+                      //   icon: KIcon.tag,
+                      // ),
                     ),
-                    KSizedBox.kHeightSizedBox24,
-                    BoxWidget(
-                      key: KWidgetkeys.screen.home.workBox,
-                      text: context.l10n.work,
-                      onTap: () => context.goNamed(KRoute.work.name),
-                      isDesk: true,
-                      icon: KIcon.briefcase,
+                    KSizedBox.kHeightSizedBox16,
+                    Expanded(
+                      flex: 2,
+                      child: doubleBox(
+                        context: context,
+                        textIconPaddingWidget: const Spacer(),
+                        isTablet: isTablet,
+                      ),
                     ),
                   ],
                 ),
               ),
             ],
-          ],
+          ),
         )
       else ...[
         HomeBoxWidget(
@@ -51,7 +62,85 @@ List<Widget> _boxWidgetList({
           isDesk: false,
           isTablet: false,
         ),
-        if (Config.isDevelopment) ...[
+        // if (Config.isDevelopment) ...[
+        //   KSizedBox.kHeightSizedBox16,
+        //   BoxWidget(
+        //     key: KWidgetkeys.screen.home.storyBox,
+        //     text: context.l10n.stories,
+        //     onTap: () => context.goNamed(KRoute.stories.name),
+        //     isDesk: false,
+        //     icon: KIcon.messageSquare,
+        //   ),
+        //   KSizedBox.kHeightSizedBox16,
+        //   BoxWidget(
+        //     key: KWidgetkeys.screen.home.workBox,
+        //     text: context.l10n.work,
+        //     onTap: () => context.goNamed(KRoute.work.name),
+        //     isDesk: false,
+        //     icon: KIcon.briefcase,
+        //   ),
+        // ],
+      ],
+      if (!isTablet) ...[
+        KSizedBox.kHeightSizedBox16,
+        DiscountCard(
+          key: KWidgetkeys.screen.home.discountsBox,
+          isTablet: false,
+        ),
+        KSizedBox.kHeightSizedBox16,
+        doubleBox(
+          context: context,
+          isTablet: isTablet,
+        ),
+      ],
+      KSizedBox.kHeightSizedBox16,
+      if (Config.isDevelopment)
+        if (isTablet)
+          Row(
+            children: [
+              Expanded(
+                child: BoxWidget(
+                  key: KWidgetkeys.screen.home.informationBox,
+                  text: context.l10n.information,
+                  onTap: () => context.goNamed(
+                    KRoute.information.name,
+                  ),
+                  isDesk: true,
+                  icon: KIcon.globe,
+                ),
+              ),
+              KSizedBox.kWidthSizedBox24,
+              Expanded(
+                child: BoxWidget(
+                  key: KWidgetkeys.screen.home.storyBox,
+                  text: context.l10n.stories,
+                  onTap: () => context.goNamed(KRoute.stories.name),
+                  isDesk: true,
+                  icon: KIcon.messageSquare,
+                ),
+              ),
+              KSizedBox.kWidthSizedBox24,
+              Expanded(
+                child: BoxWidget(
+                  key: KWidgetkeys.screen.home.workBox,
+                  text: context.l10n.work,
+                  onTap: () => context.goNamed(KRoute.work.name),
+                  isDesk: true,
+                  icon: KIcon.briefcase,
+                ),
+              ),
+            ],
+          )
+        else ...[
+          BoxWidget(
+            key: KWidgetkeys.screen.home.informationBox,
+            text: context.l10n.information,
+            onTap: () => context.goNamed(
+              KRoute.information.name,
+            ),
+            isDesk: false,
+            icon: KIcon.globe,
+          ),
           KSizedBox.kHeightSizedBox16,
           BoxWidget(
             key: KWidgetkeys.screen.home.storyBox,
@@ -69,75 +158,46 @@ List<Widget> _boxWidgetList({
             icon: KIcon.briefcase,
           ),
         ],
-      ],
-      KSizedBox.kHeightSizedBox16,
-      if (isTablet)
-        Row(
-          children: [
-            Expanded(
-              child: BoxWidget(
-                key: KWidgetkeys.screen.home.informationBox,
-                text: context.l10n.information,
-                onTap: () => context.goNamed(
-                  KRoute.information.name,
-                ),
-                isDesk: isTablet,
-                icon: KIcon.globe,
-              ),
-            ),
-            KSizedBox.kWidthSizedBox24,
-            Expanded(
-              child: BoxWidget(
-                key: KWidgetkeys.screen.home.discountsBox,
-                text: context.l10n.discounts,
-                onTap: () => context.goNamed(
-                  KRoute.discounts.name,
-                ),
-                isDesk: isTablet,
-                icon: KIcon.tag,
-              ),
-            ),
-            KSizedBox.kWidthSizedBox24,
-            Expanded(
-              child: BoxWidget(
-                key: KWidgetkeys.screen.home.investorsBox,
-                text: context.l10n.investors,
-                onTap: () => context.goNamed(
-                  KRoute.investors.name,
-                ),
-                isDesk: isTablet,
-                icon: KIcon.fileText,
-              ),
-            ),
-          ],
-        )
-      else ...[
-        BoxWidget(
-          key: KWidgetkeys.screen.home.informationBox,
-          text: context.l10n.information,
-          onTap: () => context.goNamed(
-            KRoute.information.name,
-          ),
-          isDesk: isTablet,
-          icon: KIcon.globe,
-        ),
-        KSizedBox.kHeightSizedBox16,
-        BoxWidget(
-          key: KWidgetkeys.screen.home.discountsBox,
-          text: context.l10n.discounts,
-          onTap: () => context.goNamed(
-            KRoute.discounts.name,
-          ),
-          isDesk: isTablet,
-          icon: KIcon.tag,
-        ),
-        KSizedBox.kHeightSizedBox16,
-        BoxWidget(
-          key: KWidgetkeys.screen.home.investorsBox,
-          text: context.l10n.investors,
-          onTap: () => context.goNamed(KRoute.investors.name),
-          isDesk: isDesk,
-          icon: KIcon.fileText,
-        ),
-      ],
     ];
+
+Widget doubleBox({
+  required BuildContext context,
+  required bool isTablet,
+  Widget? textIconPaddingWidget,
+}) =>
+    Row(
+      children: [
+        Expanded(
+          flex: isTablet ? 5 : 4,
+          child: BoxWidget(
+            key: KWidgetkeys.screen.home.investorsBox,
+            text: context.l10n.investors,
+            onTap: () => context.goNamed(KRoute.investors.name),
+            isDesk: true,
+            iconHasBackground: false,
+            textIconPaddingWidget: textIconPaddingWidget,
+            background: AppColors.materialThemeKeyColorsNeutralVariant,
+            iconText: context.l10n.supportVeterans,
+            textStyle: isTablet
+                ? AppTextStyle.materialThemeHeadlineSmall
+                : AppTextStyle.materialThemeTitleLarge,
+          ),
+        ),
+        KSizedBox.kWidthSizedBox16,
+        Expanded(
+          flex: 4,
+          child: BoxWidget(
+            text: context.l10n.contacts,
+            onTap: null,
+            isDesk: true,
+            icon: KIcon.fileText,
+            iconHasBackground: false,
+            textIconPaddingWidget: textIconPaddingWidget,
+            iconText: context.l10n.haveQuestions,
+            textStyle: isTablet
+                ? AppTextStyle.materialThemeHeadlineSmall
+                : AppTextStyle.materialThemeTitleLarge,
+          ),
+        ),
+      ],
+    );

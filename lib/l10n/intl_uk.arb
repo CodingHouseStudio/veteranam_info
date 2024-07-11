@@ -145,7 +145,7 @@
   "moreDiscounts": "Ще знижки",
   "underConstruction": "Ця сторінка знаходиться на стадії розробки.",
   "hello": "Привіт",
-  "thisServiceForVeterans": "Дякуємо  ВЕТЕРАНИ!",
+  "thankYouVeterans": "Дякуємо\nВЕТЕРАНИ!",
   "thisServiceForVeteransSubtitle": "Тут ти знайдеш корисну інформацію про знижки для ветеранів та їх сімей",
   "whatKindOfProject": "Що це за проект?",
   "aboutProject": "Ми намагаємося створити єдиний інформаційний простір для ветеранів та їх сімей.",
@@ -180,6 +180,8 @@
   "provideSuggestionsFromBusinesses": "Надавайте пропозиції від бізнесу,",
   "orDonateHere": "або виберіть фонд/організацію для допомоги нашим військовим",
   "supportOurVeterans": "Підтримайте наших ветеранів",
+  "supportVeterans": "ПІДТРИМАЙТЕ\nВЕТЕРАНІВ",
+  "haveQuestions": "МАЄТЕ\nПИТАННЯ?",
   "donateHere": "Донать тут",
   "provenFunds": "Перевірені фонди",
   "tryItAgain": "Спробувати ще раз",
@@ -215,6 +217,7 @@
   "cardListEmptyText": "На жаль, за вашими фільтрами нічого не знайдено. Спробуйте змінити критерії пошуку",
   "buyMeACoffee": "Buy me a Coffee",
   "ofUpTo": "до",
+  "findYourDiscount": "ЗНАЙДІТЬ СВОЮ ЗНИЖКУ",
   "error": "Вибачте, сталася непередбачена помилка.",
   "@error": {
     "description": "повідомлення про непередбачену помилку."
