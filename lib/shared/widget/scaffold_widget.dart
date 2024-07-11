@@ -9,7 +9,6 @@ class ScaffoldWidget extends StatelessWidget {
     this.mainDeskPadding,
     this.hasFooter = false,
   });
-
   final List<Widget> Function({required bool isDesk})?
       titleChildWidgetsFunction;
   final List<Widget> Function({required bool isDesk, required bool isTablet})
@@ -56,6 +55,7 @@ class ScaffoldWidget extends StatelessWidget {
               SliverPersistentHeader(
                 delegate: NawbarWidget(
                   isDesk: isDesk,
+                  isTablet: isTablet,
                 ),
               ),
               if (titleChildWidgetsFunction != null)

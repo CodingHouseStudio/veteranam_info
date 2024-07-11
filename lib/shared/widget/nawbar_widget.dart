@@ -7,12 +7,13 @@ import 'package:veteranam/shared/shared.dart';
 class NawbarWidget extends SliverPersistentHeaderDelegate {
   const NawbarWidget({
     required this.isDesk,
+    required this.isTablet,
     this.widgetKey,
     this.childWidget,
     this.maxMinHeight,
   });
-
   final bool isDesk;
+  final bool isTablet;
   final Key? widgetKey;
   final Widget? childWidget;
   final double? maxMinHeight;
@@ -26,7 +27,8 @@ class NawbarWidget extends SliverPersistentHeaderDelegate {
   //Rebuild screen only when isDesk value change
   @override
   bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) =>
-      oldDelegate is NawbarWidget && isDesk != oldDelegate.isDesk;
+      oldDelegate is NawbarWidget &&
+      (isDesk != oldDelegate.isDesk || isTablet != oldDelegate.isTablet);
 
   @override
   Widget build(
@@ -38,6 +40,7 @@ class NawbarWidget extends SliverPersistentHeaderDelegate {
       key: widgetKey,
       isDesk: isDesk,
       childWidget: childWidget,
+      isTablet: isTablet,
     );
   }
 }
@@ -45,12 +48,13 @@ class NawbarWidget extends SliverPersistentHeaderDelegate {
 class _NawbarWidgetImplematation extends StatefulWidget {
   const _NawbarWidgetImplematation({
     required this.isDesk,
+    required this.isTablet,
     super.key,
     this.childWidget,
   });
-
   final bool isDesk;
   final Widget? childWidget;
+  final bool isTablet;
 
   @override
   State<_NawbarWidgetImplematation> createState() =>
