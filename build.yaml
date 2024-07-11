@@ -12,6 +12,7 @@ targets:
         generate_for:
           - lib/shared/models/**.dart
           - lib/components/*/bloc/**.dart
+          - lib/shared/bloc/**.dart
       injectable_generator|injectable_builder:
         generate_for:
           - lib/components/*/bloc/**.dart
