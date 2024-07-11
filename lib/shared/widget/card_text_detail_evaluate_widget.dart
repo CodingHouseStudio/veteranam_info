@@ -16,6 +16,7 @@ class CardTextDetailEvaluateWidget extends StatefulWidget {
     this.titleDate,
     this.directLink,
     this.link,
+    this.onLikeChange,
   });
 
   final String? directLink;
@@ -30,6 +31,7 @@ class CardTextDetailEvaluateWidget extends StatefulWidget {
   final Widget? titleDate;
   final bool isDesk;
   final Widget? titleIcon;
+  final void Function({required bool like})? onLikeChange;
 
   @override
   State<CardTextDetailEvaluateWidget> createState() =>
@@ -38,13 +40,13 @@ class CardTextDetailEvaluateWidget extends StatefulWidget {
 
 class _CardTextDetailEvaluateWidgetState
     extends State<CardTextDetailEvaluateWidget> {
-  late EvaluationEnum evaluation;
+  late bool like;
   late int? maxLines;
 
   @override
   void initState() {
     super.initState();
-    evaluation = EvaluationEnum.none;
+    like = false;
     maxLines = 10;
   }
 
@@ -122,18 +124,34 @@ class _CardTextDetailEvaluateWidgetState
                         Column(
                           children: [
                             IconButtonWidget(
-                              onPressed: () => setState(() {
-                                if (evaluation != EvaluationEnum.like) {
-                                  evaluation = EvaluationEnum.like;
-                                } else {
-                                  evaluation = EvaluationEnum.none;
-                                }
-                              }),
-                              background: evaluation != EvaluationEnum.like
+                              onPressed: () {
+                                setState(() {
+                                  like = !like;
+                                  // if (evaluation != EvaluationEnum.like) {
+                                  //   evaluation = EvaluationEnum.like;
+                                  // context.read<InformationWatcherBloc>().add(
+                                  //       InformationWatcherEvent.like(
+                                  //         widget.storyId,
+                                  //         true,
+                                  //       ),
+                                  //     );
+                                  // } else {
+                                  //   evaluation = EvaluationEnum.none;
+                                  // context.read<InformationWatcherBloc>().add(
+                                  //       InformationWatcherEvent.like(
+                                  //         widget.i,
+                                  //         false,
+                                  //       ),
+                                  //     );
+                                  // }
+                                });
+                                widget.onLikeChange?.call(like: like);
+                              },
+                              background: !like
                                   ? AppColors.materialThemeKeyColorsNeutral
                                   : AppColors.materialThemeBlack,
                               padding: KPadding.kPaddingSize12,
-                              icon: evaluation == EvaluationEnum.like
+                              icon: like //evaluation == EvaluationEnum.like
                                   ? KIcon.activeLike.copyWith(
                                       key: KWidgetkeys
                                           .widget
