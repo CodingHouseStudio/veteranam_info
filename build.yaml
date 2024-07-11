@@ -8,11 +8,19 @@ targets:
       json_serializable|json_serializable:
         generate_for:
           - lib/shared/models/**.dart
-      freezed|freezed_annotation:
+      freezed|freezed:
         generate_for:
           - lib/shared/models/**.dart
           - lib/components/*/bloc/**.dart
-      injectable|injectable_generator:
+      injectable:
+        generate_for:
+          - lib/components/*/bloc/**.dart
+          - lib/shared/bloc/**.dart
+          - lib/shared/data_provider/**.dart
+          - lib/shared/data_provider/**.dart
+          - lib/shared/helpers/get_it_service_locator.dart
+          - lib/shared/repositories/**.dart
+      injectable_generator:
         generate_for:
           - lib/components/*/bloc/**.dart
           - lib/shared/bloc/**.dart
