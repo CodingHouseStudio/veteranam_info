@@ -85,12 +85,8 @@ class _NawbarWidgetImplematationState
           decoration: KWidgetTheme.boxDecorationNawbar,
           margin: EdgeInsets.only(
             top: KPadding.kPaddingSize24,
-            left: widget.isDesk
-                ? KPadding.kPaddingSize90
-                : KPadding.kPaddingSize16,
-            right: widget.isDesk
-                ? KPadding.kPaddingSize90
-                : KPadding.kPaddingSize16,
+            left: padding,
+            right: padding,
           ),
           padding: const EdgeInsets.only(
             left: KPadding.kPaddingSize32,
@@ -202,7 +198,7 @@ class _NawbarWidgetImplematationState
                   ),
                 ),
               ],
-
+              
               // if (widget.isDesk && widget.hasMicrophone)
               //   Padding(
               //     padding: const EdgeInsets.only(right:
@@ -254,6 +250,26 @@ class _NawbarWidgetImplematationState
         );
   }
 
+  Widget button({
+    required String text,
+    required Icon icon,
+    required void Function() onPressed,
+  }) {
+    return TextButton.icon(
+      onPressed: onPressed,
+      label: Text(
+        text,
+        style: AppTextStyle.materialThemeTitleMedium,
+      ),
+      icon: widget.isDesk ? icon : null,
+    );
+  }
+
+  double get padding => widget.isDesk
+      ? KPadding.kPaddingSize90
+      : widget.isTablet
+          ? KPadding.kPaddingSize32
+          : KPadding.kPaddingSize16;
   void loginNavigation(BuildContext context) =>
       context.goNamed(KRoute.login.name);
 }

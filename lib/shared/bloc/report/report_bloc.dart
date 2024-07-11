@@ -15,14 +15,16 @@ class ReportBloc extends Bloc<ReportEvent, ReportState> {
   })  : _reportRepository = reportRepository,
         _appAuthenticationRepository = appAuthenticationRepository,
         super(
-          const _Initial(
+          const ReportState(
             reasonComplaint: null,
             email: null,
             message: null,
             formState: ReportEnum.initial,
             failure: null,
+            cardId: null,
           ),
         ) {
+    on<_Started>(_onStarted);
     on<_EmailUpdated>(_onEmailUpdated);
     on<_MessageUpdated>(_onMessageUpdated);
     on<_ReasonComplaintUpdated>(_onReasonComplaintUpdated);
@@ -30,6 +32,22 @@ class ReportBloc extends Bloc<ReportEvent, ReportState> {
   }
   final IReportRepository _reportRepository;
   final IAppAuthenticationRepository _appAuthenticationRepository;
+
+  void _onStarted(
+    _Started event,
+    Emitter<ReportState> emit,
+  ) {
+    emit(
+      ReportState(
+        reasonComplaint: null,
+        email: null,
+        message: null,
+        formState: ReportEnum.initial,
+        failure: null,
+        cardId: event.cardId,
+      ),
+    );
+  }
 
   void _onEmailUpdated(
     _EmailUpdated event,
@@ -84,10 +102,11 @@ class ReportBloc extends Bloc<ReportEvent, ReportState> {
       }
       return;
     }
-    if (!((state.email == null || state.email!.isNotValid) &&
-            _appAuthenticationRepository.isAnonymously() ||
-        (state.message == null || state.message!.isNotValid) &&
-            state.reasonComplaint == ReasonComplaint.other)) {
+    if (state.cardId != null &&
+        !((state.email == null || state.email!.isNotValid) &&
+                _appAuthenticationRepository.isAnonymously() ||
+            (state.message == null || state.message!.isNotValid) &&
+                state.reasonComplaint == ReasonComplaint.other)) {
       final resault = await _reportRepository.sendReport(
         ReportModel(
           id: ExtendedDateTime.id,
@@ -100,6 +119,8 @@ class ReportBloc extends Bloc<ReportEvent, ReportState> {
               : state.message?.value,
           date: ExtendedDateTime.current,
           card: event.card,
+          userId: _appAuthenticationRepository.currentUser.id,
+          cardId: state.cardId!,
         ),
       );
       resault.fold(

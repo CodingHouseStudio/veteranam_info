@@ -4,7 +4,7 @@ class _HomeKeys {
   final screen = const Key('home_screen');
   final buttonMock = const Key('home_screen_button_mock');
   final box = const Key('home_screen_box');
-  final boxHi = const Key('home_screen_box_hi');
+  // final boxHi = const Key('home_screen_box_hi');
   final boxTitle = const Key('home_screen_box_title');
   final boxSubtitle = const Key('home_screen_box_subtitle');
   final boxButton = const Key('home_screen_box_button');
