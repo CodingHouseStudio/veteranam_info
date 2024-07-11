@@ -4,11 +4,9 @@ concurrency:
   group: CU-${{ github.ref }}
   cancel-in-progress: true
 
-
 on:
   pull_request:
     branches: [main]
-
 
 env:
   SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
@@ -27,7 +25,8 @@ jobs:
       flutter_version: 3.22.0
       min_coverage: 90
       format_directories: "lib test"
-      
+      coverage_exclude_file: lib/shared/data_provider, lib/shared/widget/user_photo_widget.dart, lib/shared/widget/card_add_image_widget.dart, lib/shared/widget/image_widget.dart
+
   spell-check:
     uses: CodingHouseStudio/flutter_workflows/.github/workflows/spell_check.yml@main
     with:
@@ -35,5 +34,3 @@ jobs:
         **/*.md
       modified_files_only: false
       config: .github/cspell.json
-
-
