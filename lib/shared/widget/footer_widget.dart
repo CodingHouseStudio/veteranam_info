@@ -399,7 +399,11 @@ abstract class FooterWidget {
               : AppTextStyle.materialThemeHeadlineMedium,
         ),
         KSizedBox.kHeightSizedBox16,
-        if (isTablet) BuyMeACoffeeWidget(isDesk: isDesk),
+        if (isTablet)
+          BuyMeACoffeeWidget(
+            isDesk: isDesk,
+            key: KWidgetkeys.widget.footer.button,
+          ),
 
         // DoubleButtonWidget(
         //   widgetKey: KWidgetkeys.widget.footer.button,

@@ -7,6 +7,12 @@ Future<void> footerHelper(
   WidgetTester tester,
   // required String email,
 ) async {
+  await changeWindowSizeHelper(
+    tester: tester,
+    test: () async {
+      expect(find.byKey(KWidgetkeys.widget.footer.button), findsOneWidget);
+    },
+  );
   await scrollingHelper(
     tester: tester,
     offset: KTestConstants.scrollingDown,
@@ -20,7 +26,7 @@ Future<void> footerHelper(
 
   expect(find.byKey(KWidgetkeys.widget.footer.title), findsOneWidget);
 
-  expect(find.byKey(KWidgetkeys.widget.footer.button), findsOneWidget);
+  //expect(find.byKey(KWidgetkeys.widget.footer.button), findsOneWidget);
 
   expect(find.byKey(KWidgetkeys.widget.footer.sections), findsOneWidget);
 

@@ -32,11 +32,14 @@ class BuyMeACoffeeWidget extends StatelessWidget {
               KSizedBox.kWidthSizedBox16
             else
               KSizedBox.kWidthSizedBox8,
-            Text(
-              context.l10n.buyMeACoffee,
-              style: isDesk
-                  ? AppTextStyle.materialThemeTitleMediumNeutral
-                  : AppTextStyle.materialThemeTitleSmallNeutral,
+            Flexible(
+              child: Text(
+                context.l10n.buyMeACoffee,
+                style: isDesk
+                    ? AppTextStyle.materialThemeTitleMediumNeutral
+                    : AppTextStyle.materialThemeTitleSmallNeutral,
+                overflow: TextOverflow.ellipsis,
+              ),
             ),
           ],
         ),
