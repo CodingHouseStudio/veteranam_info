@@ -13,6 +13,8 @@ void main() {
       ReportModelJsonField.card: _$CardEnumEnumMap[KTestText.reportModel.card],
       ReportModelJsonField.reasonComplaint:
           _$ReasonComplaintEnumMap[KTestText.reportModel.reasonComplaint],
+      ReportModelJsonField.cardId: KTestText.reportModel.cardId,
+      ReportModelJsonField.userId: KTestText.reportModel.userId,
     };
     final nullableJson = {
       ReportModelJsonField.id: KTestText.reportModel.id,
@@ -22,6 +24,8 @@ void main() {
       ReportModelJsonField.card: _$CardEnumEnumMap[KTestText.reportModel.card],
       ReportModelJsonField.reasonComplaint:
           _$ReasonComplaintEnumMap[KTestText.reportModel.reasonComplaint],
+      ReportModelJsonField.cardId: KTestText.reportModel.cardId,
+      ReportModelJsonField.userId: KTestText.reportModel.userId,
     };
     group('${KGroupText.modelJson} ', () {
       test('${KGroupText.full} ', () {
@@ -36,6 +40,8 @@ void main() {
           reportModel.reasonComplaint,
           KTestText.reportModel.reasonComplaint,
         );
+        expect(reportModel.userId, KTestText.reportModel.userId);
+        expect(reportModel.cardId, KTestText.reportModel.cardId);
       });
       test('${KGroupText.nullable} ', () {
         final reportModel = ReportModel.fromJson(nullableJson);
@@ -49,6 +55,8 @@ void main() {
           reportModel.reasonComplaint,
           KTestText.reportModel.reasonComplaint,
         );
+        expect(reportModel.userId, KTestText.reportModel.userId);
+        expect(reportModel.cardId, KTestText.reportModel.cardId);
       });
 
       test('${KGroupText.failure} ', () {

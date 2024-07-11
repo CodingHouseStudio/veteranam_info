@@ -7,11 +7,13 @@ import 'package:veteranam/shared/shared.dart';
 class NawbarWidget extends SliverPersistentHeaderDelegate {
   const NawbarWidget({
     required this.isDesk,
+    required this.isTablet,
     this.widgetKey,
     this.childWidget,
     this.maxMinHeight,
   });
   final bool isDesk;
+  final bool isTablet;
   final Key? widgetKey;
   final Widget? childWidget;
   final double? maxMinHeight;
@@ -25,7 +27,8 @@ class NawbarWidget extends SliverPersistentHeaderDelegate {
   //Rebuild screen only when isDesk value change
   @override
   bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) =>
-      oldDelegate is NawbarWidget && isDesk != oldDelegate.isDesk;
+      oldDelegate is NawbarWidget &&
+      (isDesk != oldDelegate.isDesk || isTablet != oldDelegate.isTablet);
 
   @override
   Widget build(
@@ -37,6 +40,7 @@ class NawbarWidget extends SliverPersistentHeaderDelegate {
       key: widgetKey,
       isDesk: isDesk,
       childWidget: childWidget,
+      isTablet: isTablet,
     );
   }
 }
@@ -44,11 +48,13 @@ class NawbarWidget extends SliverPersistentHeaderDelegate {
 class _NawbarWidgetImplematation extends StatefulWidget {
   const _NawbarWidgetImplematation({
     required this.isDesk,
+    required this.isTablet,
     super.key,
     this.childWidget,
   });
   final bool isDesk;
   final Widget? childWidget;
+  final bool isTablet;
 
   @override
   State<_NawbarWidgetImplematation> createState() =>
@@ -79,12 +85,8 @@ class _NawbarWidgetImplematationState
           decoration: KWidgetTheme.boxDecorationNawbar,
           margin: EdgeInsets.only(
             top: KPadding.kPaddingSize24,
-            left: widget.isDesk
-                ? KPadding.kPaddingSize90
-                : KPadding.kPaddingSize16,
-            right: widget.isDesk
-                ? KPadding.kPaddingSize90
-                : KPadding.kPaddingSize16,
+            left: padding,
+            right: padding,
           ),
           padding: const EdgeInsets.only(
             left: KPadding.kPaddingSize32,
@@ -135,43 +137,32 @@ class _NawbarWidgetImplematationState
                         : const EdgeInsets.all(KPadding.kPaddingSize16),
                   ),
                 )
-              else if (widget.isDesk) ...[
+              else if (widget.isTablet)
                 Expanded(
-                  child: TextButton.icon(
-                    style: const ButtonStyle(alignment: Alignment.centerRight),
-                    onPressed: () => context.goNamed(KRoute.discounts.name),
-                    label: Text(
-                      context.l10n.discounts,
-                      style: AppTextStyle.materialThemeTitleMedium,
-                    ),
-                    icon: KIcon.tag,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      button(
+                        text: context.l10n.discounts,
+                        icon: KIcon.tag,
+                        onPressed: () => context.goNamed(KRoute.discounts.name),
+                      ),
+                      button(
+                        text: context.l10n.information,
+                        icon: KIcon.globe,
+                        onPressed: () =>
+                            context.goNamed(KRoute.information.name),
+                      ),
+                      button(
+                        text: context.l10n.investors,
+                        icon: KIcon.fileText,
+                        onPressed: () => context.goNamed(KRoute.investors.name),
+                      ),
+                    ],
                   ),
-                ),
-                KSizedBox.kWidthSizedBox64,
-                Expanded(
-                  child: TextButton.icon(
-                    style: const ButtonStyle(alignment: Alignment.center),
-                    onPressed: () => context.goNamed(KRoute.information.name),
-                    label: Text(
-                      context.l10n.information,
-                      style: AppTextStyle.materialThemeTitleMedium,
-                    ),
-                    icon: KIcon.globe,
-                  ),
-                ),
-                KSizedBox.kWidthSizedBox64,
-                Expanded(
-                  child: TextButton.icon(
-                    style: const ButtonStyle(alignment: Alignment.centerLeft),
-                    onPressed: () => context.goNamed(KRoute.investors.name),
-                    label: Text(
-                      context.l10n.investors,
-                      style: AppTextStyle.materialThemeTitleMedium,
-                    ),
-                    icon: KIcon.fileText,
-                  ),
-                ),
-              ],
+                )
+              else
+                const Spacer(),
 
               // if (widget.isDesk && widget.hasMicrophone)
               //   Padding(
@@ -220,6 +211,26 @@ class _NawbarWidgetImplematationState
         );
   }
 
+  Widget button({
+    required String text,
+    required Icon icon,
+    required void Function() onPressed,
+  }) {
+    return TextButton.icon(
+      onPressed: onPressed,
+      label: Text(
+        text,
+        style: AppTextStyle.materialThemeTitleMedium,
+      ),
+      icon: widget.isDesk ? icon : null,
+    );
+  }
+
+  double get padding => widget.isDesk
+      ? KPadding.kPaddingSize90
+      : widget.isTablet
+          ? KPadding.kPaddingSize32
+          : KPadding.kPaddingSize16;
   void loginNavigation(BuildContext context) =>
       context.goNamed(KRoute.login.name);
 }

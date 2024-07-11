@@ -16,6 +16,7 @@ class DoubleButtonWidget extends StatelessWidget {
     this.hasAlign = true,
     this.mobTextWidth,
     this.mobIconPadding,
+    this.align,
   });
   final String text;
   final Color? color;
@@ -27,12 +28,13 @@ class DoubleButtonWidget extends StatelessWidget {
   final double? mobVerticalTextPadding;
   final double? mobTextWidth;
   final double? mobIconPadding;
+  final Alignment? align;
 
   @override
   Widget build(BuildContext context) {
     if (hasAlign) {
       return Align(
-        alignment: Alignment.centerLeft,
+        alignment: align ?? Alignment.centerLeft,
         child: _body,
       );
     } else {

@@ -2,6 +2,7 @@ part of 'discount_watcher_bloc.dart';
 
 enum DiscountFailure {
   error,
+  report,
 }
 
 @freezed
@@ -14,6 +15,7 @@ class DiscountWatcherState with _$DiscountWatcherState {
     required LoadingStatus loadingStatus,
     required int itemsLoaded,
     required DiscountFailure? failure,
+    required List<ReportModel> reportItems,
   }) = _Initial;
 }
 

@@ -76,14 +76,14 @@ class StoryWatcherBloc extends Bloc<StoryWatcherEvent, StoryWatcherState> {
     }
     emit(state.copyWith(loadingStatus: LoadingStatus.loading));
     final filterItems = state.storyModelItems.loading(
-      itemsLoaded: state.itemsLoaded + KDimensions.loadItems,
+      itemsLoaded: state.itemsLoaded,
+      loadItems: KDimensions.loadItems,
     );
 
     emit(
       state.copyWith(
         loadingStoryModelItems: filterItems,
-        itemsLoaded: (state.itemsLoaded + KDimensions.loadItems)
-            .getLoaded(list: filterItems),
+        itemsLoaded: filterItems.length,
         loadingStatus: LoadingStatus.loaded,
       ),
     );

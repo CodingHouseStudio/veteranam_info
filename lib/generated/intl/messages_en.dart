@@ -117,6 +117,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "fillInForm": MessageLookupByLibrary.simpleMessage("Fill in the form"),
         "filterApplied": MessageLookupByLibrary.simpleMessage("Filter applied"),
         "findOut": MessageLookupByLibrary.simpleMessage("To find out"),
+        "findYourDiscount":
+            MessageLookupByLibrary.simpleMessage("FIND YOUR DISCOUNT"),
         "forVeteransAndTheirFamilies": MessageLookupByLibrary.simpleMessage(
             "for veterans and their families"),
         "fraudOrSpam": MessageLookupByLibrary.simpleMessage("Fraud or spam;"),
@@ -133,6 +135,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "No data found, click to add test data once"),
         "givingJob": MessageLookupByLibrary.simpleMessage("Giving a job"),
         "google": MessageLookupByLibrary.simpleMessage("Google"),
+        "haveQuestions":
+            MessageLookupByLibrary.simpleMessage("HAVE\nQUESTIONS?"),
         "hello": MessageLookupByLibrary.simpleMessage("Hello"),
         "helloVeteran": MessageLookupByLibrary.simpleMessage("Hello, Veteran!"),
         "hide": MessageLookupByLibrary.simpleMessage("Hide"),
@@ -295,14 +299,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "support": MessageLookupByLibrary.simpleMessage("Support"),
         "supportOurVeterans":
             MessageLookupByLibrary.simpleMessage("Support our veterans"),
+        "supportVeterans":
+            MessageLookupByLibrary.simpleMessage("SUPPORT\nVETERANS"),
         "text": MessageLookupByLibrary.simpleMessage("text"),
         "thankYou": MessageLookupByLibrary.simpleMessage("Thank you!"),
         "thankYouDescription": MessageLookupByLibrary.simpleMessage(
             "Please note! To access some services, you may need to confirm your identity."),
+        "thankYouVeterans":
+            MessageLookupByLibrary.simpleMessage("Thank you\nVeterans!"),
         "thatEndOfList": MessageLookupByLibrary.simpleMessage(
             "That\'s the end of the list! We hope you found what you were looking for."),
-        "thisServiceForVeterans":
-            MessageLookupByLibrary.simpleMessage("Thank you Veterans!"),
         "thisServiceForVeteransSubtitle": MessageLookupByLibrary.simpleMessage(
             "Here you can find useful discounts"),
         "toDiscount": MessageLookupByLibrary.simpleMessage("To Discounts"),

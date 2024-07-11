@@ -46,6 +46,9 @@ List<Widget> _fundsWidgetList({
         fundModel: modelItem,
         isDesk: isDesk,
         hasSubtitle: true,
+        reportEvent: () => context
+            .read<InvestorsWatcherBloc>()
+            .add(const InvestorsWatcherEvent.getReport()),
       ),
       isDesk: isDesk,
       shimmerItemsNumber: KDimensions.shimmerFundsItems,

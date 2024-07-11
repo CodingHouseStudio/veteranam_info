@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mockito/mockito.dart';
@@ -29,6 +31,13 @@ void main() {
         ).thenAnswer(
           (realInvocation) async {},
         );
+        when(
+          mockFirestoreService.updateInformationModel(
+            KTestText.informationModelItems.first,
+          ),
+        ).thenAnswer(
+          (_) async {},
+        );
         if (GetIt.I.isRegistered<FirestoreService>()) {
           GetIt.I.unregister<FirestoreService>();
         }
@@ -50,6 +59,15 @@ void main() {
           ),
         ).called(1);
       });
+      test('update', () async {
+        expect(
+          await mockInformationRepository.updateLikeCount(
+            informationModel: KTestText.informationModelItems.first,
+            isLiked: true,
+          ),
+          isA<Right<SomeFailure, bool>>().having((e) => e.value, 'value', true),
+        );
+      });
     });
     group('${KGroupText.failureGet} ', () {
       setUp(() {
@@ -58,7 +76,15 @@ void main() {
             KGroupText.failureGet,
           ),
         );
-
+        when(
+          mockFirestoreService.updateInformationModel(
+            KTestText.informationModelItems.first.copyWith(
+              likes: KTestText.informationModelItems.first.likes ?? 0 + 1,
+            ),
+          ),
+        ).thenThrow(
+          FirebaseException(plugin: KGroupText.failure),
+        );
         if (GetIt.I.isRegistered<FirestoreService>()) {
           GetIt.I.unregister<FirestoreService>();
         }
@@ -70,6 +96,19 @@ void main() {
         expect(
           mockInformationRepository.getInformationItems(),
           emitsError(KGroupText.failureGet),
+        );
+      });
+      test('update', () async {
+        expect(
+          await mockInformationRepository.updateLikeCount(
+            informationModel: KTestText.informationModelItems.first,
+            isLiked: true,
+          ),
+          isA<Left<SomeFailure, bool>>().having(
+            (e) => e.value,
+            'value',
+            equals(const SomeFailure.serverError()),
+          ),
         );
       });
     });

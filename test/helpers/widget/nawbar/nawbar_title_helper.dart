@@ -16,6 +16,7 @@ Future<void> nawbarTitleHelper({
   // for (var i = 0; i < 10; i++) {
   await tester.tap(
     find.byKey(KWidgetkeys.widget.nawbar.logo),
+    warnIfMissed: false,
   );
   // }
 

@@ -36,13 +36,9 @@ abstract class KButtonStyles {
   );
 
   static const ButtonStyle transparentButtonStyle = ButtonStyle(
-    minimumSize: WidgetStatePropertyAll(
-      Size(KMinMaxSize.minWidth100, KMinMaxSize.minHeight50),
-    ),
     padding: WidgetStatePropertyAll(
-      EdgeInsets.all(KPadding.kPaddingSize8),
+      EdgeInsets.all(KPadding.kPaddingSize4),
     ),
-    alignment: Alignment.centerLeft,
     shape: WidgetStatePropertyAll(
       RoundedRectangleBorder(
         borderRadius: KBorderRadius.kBorderRadius32,

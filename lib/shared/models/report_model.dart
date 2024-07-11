@@ -18,6 +18,19 @@ enum CardEnum {
   information,
 }
 
+extension CardEnumExtention on CardEnum {
+  String get getValue {
+    switch (this) {
+      case CardEnum.funds:
+        return 'funds';
+      case CardEnum.discount:
+        return 'discount';
+      case CardEnum.information:
+        return 'information';
+    }
+  }
+}
+
 extension ReasonComplaintText on ReasonComplaint {
   String toText(BuildContext context) {
     switch (this) {
@@ -42,6 +55,8 @@ class ReportModel with _$ReportModel {
     required String? message,
     required DateTime date,
     required CardEnum card,
+    required String userId,
+    required String cardId,
   }) = _ReportModel;
 
   factory ReportModel.fromJson(Map<String, dynamic> json) =>
@@ -55,4 +70,6 @@ abstract class ReportModelJsonField {
   static const message = 'message';
   static const reasonComplaint = 'reasonComplaint';
   static const card = 'card';
+  static const userId = 'userId';
+  static const cardId = 'cardId';
 }
