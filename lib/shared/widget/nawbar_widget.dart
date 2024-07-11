@@ -198,7 +198,7 @@ class _NawbarWidgetImplematationState
                   ),
                 ),
               ],
-              
+
               // if (widget.isDesk && widget.hasMicrophone)
               //   Padding(
               //     padding: const EdgeInsets.only(right:
