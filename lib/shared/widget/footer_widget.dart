@@ -9,6 +9,7 @@ abstract class FooterWidget {
   static List<Widget> get({
     required BuildContext context,
     required bool isTablet,
+    required bool isDesk,
   }) =>
       isTablet
           ? [
@@ -18,7 +19,11 @@ abstract class FooterWidget {
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: _support(context: context, isTablet: isTablet),
+                      children: _support(
+                        context: context,
+                        isTablet: isTablet,
+                        isDesk: isDesk,
+                      ),
                     ),
                   ),
                   Expanded(
@@ -122,7 +127,7 @@ abstract class FooterWidget {
               ),
             ]
           : [
-              ..._support(context: context, isTablet: isTablet),
+              ..._support(context: context, isTablet: isTablet, isDesk: isDesk),
               KSizedBox.kHeightSizedBox40,
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -382,6 +387,7 @@ abstract class FooterWidget {
       ];
   static List<Widget> _support({
     required bool isTablet,
+    required bool isDesk,
     required BuildContext context,
   }) =>
       [
@@ -393,12 +399,14 @@ abstract class FooterWidget {
               : AppTextStyle.materialThemeHeadlineMedium,
         ),
         KSizedBox.kHeightSizedBox16,
-        DoubleButtonWidget(
-          widgetKey: KWidgetkeys.widget.footer.button,
-          text: context.l10n.contact,
-          onPressed: () => context.goNamed(KRoute.feedback.name),
-          isDesk: isTablet,
-        ),
+        if (isTablet) BuyMeACoffeeWidget(isDesk: isDesk),
+
+        // DoubleButtonWidget(
+        //   widgetKey: KWidgetkeys.widget.footer.button,
+        //   text: context.l10n.contact,
+        //   onPressed: () => context.goNamed(KRoute.feedback.name),
+        //   isDesk: isTablet,
+        // ),
       ];
   static Widget _button({
     required void Function() onPressed,

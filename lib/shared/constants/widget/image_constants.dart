@@ -103,6 +103,12 @@ class KImage {
         height: KSize.kPixel16,
         key: key,
       );
+  static Image coffee({Key? key}) => _get(
+        'assets/icons/hot_beverage.png',
+        width: KSize.kPixel24,
+        height: KSize.kPixel24,
+        key: key,
+      );
   static Image veteran1({Key? key}) => _get(
         'assets/images/veteran1.png',
         key: key,

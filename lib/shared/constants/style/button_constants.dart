@@ -323,4 +323,17 @@ abstract class KButtonStyles {
   static const footerButtonTransparent = ButtonStyle(
     overlayColor: WidgetStatePropertyAll(Colors.transparent),
   );
+
+  static const blackButtonStyle = ButtonStyle(
+    minimumSize: WidgetStatePropertyAll(
+      Size(KMinMaxSize.minWidth100, KMinMaxSize.minHeight50),
+    ),
+    padding: WidgetStatePropertyAll(EdgeInsets.all(KPadding.kPaddingSize16)),
+    shape: WidgetStatePropertyAll(
+      RoundedRectangleBorder(
+        borderRadius: KBorderRadius.kBorderRadius16,
+      ),
+    ),
+    backgroundColor: WidgetStatePropertyAll(AppColors.materialThemeBlack),
+  );
 }
