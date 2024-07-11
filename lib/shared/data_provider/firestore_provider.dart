@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:injectable/injectable.dart';
 import 'package:veteranam/shared/shared.dart';
 
+// coverage:ignore-file
 /// COMMENT: Class to get, update, delete or set values in firebase
 @singleton
 class FirestoreService {

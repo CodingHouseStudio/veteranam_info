@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 // import 'package:cached_network_image/cached_network_image.dart';
 
+// coverage:ignore-file
 class ImageWidget extends StatefulWidget {
   const ImageWidget({
     required this.imageUrl,

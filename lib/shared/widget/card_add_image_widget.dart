@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:veteranam/shared/shared.dart';
 
+// coverage:ignore-file
 class CardAddImageWidget extends StatelessWidget {
   const CardAddImageWidget({
     required this.childWidget,

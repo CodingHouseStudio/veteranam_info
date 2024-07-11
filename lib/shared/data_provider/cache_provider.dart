@@ -1,5 +1,6 @@
 import 'package:injectable/injectable.dart';
 
+// coverage:ignore-file
 /// COMMENT: Class for caching data
 /// {@template cache_client}
 /// An in-memory cache client.

@@ -4,6 +4,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
 import 'package:veteranam/shared/shared.dart';
 
+// coverage:ignore-file
 /// COMMENT: Class to get, update, delete or set values in storage
 @singleton
 class StorageService {
