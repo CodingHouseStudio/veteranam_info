@@ -72,24 +72,27 @@ class _CityWidgetListState extends State<CityWidgetList> {
                   Padding(
                     padding: const EdgeInsets.only(
                       left: KPadding.kPaddingSize8,
+                      bottom: KPadding.kPaddingSize8,
                     ),
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                        bottom: KPadding.kPaddingSize8,
-                      ),
-                      child: Text(
-                        isExpanded
-                            ? context.l10n.hideExpansion
-                            : context.l10n.moreCities(
-                                (widget.discountModel.location ?? []).length -
-                                    1,
-                              ),
-                        style: AppTextStyle.materialThemeLabelLarge.copyWith(
-                          decoration: TextDecoration.underline,
-                          color: AppColors.materialThemeRefTertiaryTertiary40,
-                        ),
+                    child: Text(
+                      isExpanded
+                          ? context.l10n.hideExpansion
+                          : context.l10n.moreCities(
+                              (widget.discountModel.location ?? []).length - 1,
+                            ),
+                      style: AppTextStyle.materialThemeLabelLarge.copyWith(
+                        decoration: TextDecoration.underline,
+                        color: AppColors.materialThemeRefTertiaryTertiary40,
                       ),
                     ),
+                  )
+                else
+                  const Padding(
+                    padding: EdgeInsets.only(
+                      left: KPadding.kPaddingSize8,
+                      bottom: KPadding.kPaddingSize8,
+                    ),
+                    child: Text(''),
                   ),
             ],
           ),
