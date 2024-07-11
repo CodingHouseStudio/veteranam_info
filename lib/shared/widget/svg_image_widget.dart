@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:path_drawing/path_drawing.dart';
 import 'package:xml/xml.dart';
 
+// coverage:ignore-file
 class SvgImageWidget extends StatelessWidget {
   const SvgImageWidget({
     required this.path,

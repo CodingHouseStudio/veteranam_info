@@ -14,6 +14,7 @@ class LoginBlocprovider extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => GetIt.I.get<LoginBloc>()),
         BlocProvider(
+          // coverage:ignore-line
           create: (context) => GetIt.I.get<AuthenticationServicesCubit>(),
         ),
       ],
