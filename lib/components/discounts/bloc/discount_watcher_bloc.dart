@@ -74,20 +74,22 @@ class DiscountWatcherBloc
     _Updated event,
     Emitter<DiscountWatcherState> emit,
   ) async {
+    final list = event.discountItemsModel.removeReportItems(
+      checkFunction: (item) => item.id,
+      reportItems: event.reportItems,
+    );
     emit(
       _Initial(
-        discountModelItems: event.discountItemsModel,
+        discountModelItems: list,
         loadingStatus: LoadingStatus.loaded,
         filteredDiscountModelItems: _filter(
           categoryIndex: state.filtersCategoriesIndex,
           itemsLoaded: KDimensions.loadItems,
           locationIndex: state.filtersLocationIndex,
-          list: event.discountItemsModel,
-          reportItems: event.reportItems,
+          list: list,
         ),
         filtersCategoriesIndex: state.filtersCategoriesIndex,
-        itemsLoaded:
-            state.itemsLoaded.getLoaded(list: event.discountItemsModel),
+        itemsLoaded: state.itemsLoaded.getLoaded(list: list),
         failure: null,
         filtersLocationIndex: state.filtersLocationIndex,
         reportItems: event.reportItems,
@@ -188,22 +190,17 @@ class DiscountWatcherBloc
     required List<int>? locationIndex,
     required int itemsLoaded,
     List<DiscountModel>? list,
-    List<ReportModel>? reportItems,
     int? loadItems,
   }) {
     final items = list ?? state.discountModelItems;
-    final reportItemsValue = reportItems ?? state.reportItems;
 
     // Combine location filtering logic
     final locationFiltered = items
         .where(
           (item) =>
-              (locationIndex == null ||
-                  !locationIndex.contains(1) ||
-                  item.discount.contains(100)) &&
-              reportItemsValue.every(
-                (report) => report.cardId != item.id,
-              ),
+              locationIndex == null ||
+              !locationIndex.contains(1) ||
+              item.discount.contains(100),
         )
         .toList();
 
@@ -258,17 +255,38 @@ class DiscountWatcherBloc
     _GetReport event,
     Emitter<DiscountWatcherState> emit,
   ) async {
+    // Get report items and remove them from existing items
     final reportItems = await _getReport();
+    final list = state.discountModelItems.removeReportItems(
+      checkFunction: (item) => item.id,
+      reportItems: reportItems,
+    );
 
+    final filtersCategoriesIndex = list.updateFilterList(
+      getFilter: (item) => item.category,
+      previousList: state.discountModelItems,
+      previousFilter: state.filtersCategoriesIndex,
+    );
+    final filtersLocationIndex = list.updateFilterList(
+      getFilter: (item) =>
+          item.location?.toList() ?? item.subLocation?._getList ?? const [],
+      previousList: state.discountModelItems,
+      previousFilter: state.filtersLocationIndex,
+    );
+    final filterItems = _filter(
+      categoryIndex: filtersCategoriesIndex,
+      locationIndex: filtersLocationIndex,
+      itemsLoaded: state.itemsLoaded,
+      list: list,
+    );
     emit(
       state.copyWith(
+        discountModelItems: list,
         reportItems: reportItems,
-        filteredDiscountModelItems: _filter(
-          categoryIndex: state.filtersCategoriesIndex,
-          locationIndex: state.filtersLocationIndex,
-          itemsLoaded: state.itemsLoaded,
-          reportItems: reportItems,
-        ),
+        filteredDiscountModelItems: filterItems,
+        loadingStatus: LoadingStatus.loaded,
+        filtersCategoriesIndex: filtersCategoriesIndex,
+        filtersLocationIndex: filtersLocationIndex,
       ),
     );
   }
