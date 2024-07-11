@@ -4,7 +4,7 @@ targets:
       - $package$
       - lib/$lib$
       - lib/**.dart
-      - test/test_mocks/test_repository_mocks.dart
+      - test/**.dart
     builders:
       mockito|mockBuilder:
         enabled: true
