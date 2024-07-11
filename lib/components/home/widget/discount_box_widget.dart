@@ -12,6 +12,7 @@ class DiscountCard extends StatelessWidget {
   Widget build(BuildContext context) {
     if (isTablet) {
       return InkWell(
+        hoverColor: Colors.transparent,
         onTap: () => context.goNamed(KRoute.discounts.name),
         child: DecoratedBox(
           decoration: KWidgetTheme.boxDecorationDiscount,
