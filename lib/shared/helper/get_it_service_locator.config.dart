@@ -13,16 +13,16 @@ import 'package:get_it/get_it.dart' as _i1;
 import 'package:google_sign_in/google_sign_in.dart' as _i7;
 import 'package:injectable/injectable.dart' as _i2;
 import 'package:veteranam/components/discounts/bloc/discount_watcher_bloc.dart'
-    as _i23;
+    as _i22;
 import 'package:veteranam/components/employee_respond/bloc/employee_respond_bloc.dart'
     as _i30;
 import 'package:veteranam/components/feedback/bloc/feedback_bloc.dart' as _i24;
 import 'package:veteranam/components/home/bloc/home_watcher_bloc.dart' as _i21;
 import 'package:veteranam/components/information/bloc/information_watcher_bloc.dart'
-    as _i22;
+    as _i27;
 import 'package:veteranam/components/investors/bloc/investors_watcher_bloc.dart'
-    as _i25;
-import 'package:veteranam/components/login/bloc/login_bloc.dart' as _i27;
+    as _i23;
+import 'package:veteranam/components/login/bloc/login_bloc.dart' as _i26;
 import 'package:veteranam/components/my_discounts/bloc/my_discounts_watcher_bloc.dart'
     as _i31;
 import 'package:veteranam/components/my_story/bloc/my_story_watcher_bloc.dart'
@@ -45,7 +45,7 @@ import 'package:veteranam/shared/data_provider/storage_provider.dart' as _i5;
 import 'package:veteranam/shared/repositories/app_authentication_repository.dart'
     as _i14;
 import 'package:veteranam/shared/repositories/authentication_repository.dart'
-    as _i26;
+    as _i25;
 import 'package:veteranam/shared/repositories/discount_repository.dart' as _i9;
 import 'package:veteranam/shared/repositories/feedback_repository.dart' as _i10;
 import 'package:veteranam/shared/repositories/firebase_module.dart' as _i36;
@@ -101,20 +101,29 @@ extension GetItInjectableX on _i1.GetIt {
         _i20.StoryWatcherBloc(storyRepository: gh<_i8.IStoryRepository>()));
     gh.factory<_i21.HomeWatcherBloc>(
         () => _i21.HomeWatcherBloc(homeRepository: gh<_i8.IHomeRepository>()));
-    gh.factory<_i22.InformationWatcherBloc>(() => _i22.InformationWatcherBloc(
-        informationRepository: gh<_i8.IInformationRepository>()));
-    gh.factory<_i23.DiscountWatcherBloc>(() => _i23.DiscountWatcherBloc(
-        discountRepository: gh<_i8.IDiscountRepository>()));
+    gh.factory<_i22.DiscountWatcherBloc>(() => _i22.DiscountWatcherBloc(
+          discountRepository: gh<_i8.IDiscountRepository>(),
+          reportRepository: gh<_i8.IReportRepository>(),
+          appAuthenticationRepository: gh<_i8.IAppAuthenticationRepository>(),
+        ));
+    gh.factory<_i23.InvestorsWatcherBloc>(() => _i23.InvestorsWatcherBloc(
+          investorsRepository: gh<_i8.IInvestorsRepository>(),
+          reportRepository: gh<_i8.IReportRepository>(),
+          appAuthenticationRepository: gh<_i8.IAppAuthenticationRepository>(),
+        ));
     gh.factory<_i24.FeedbackBloc>(() => _i24.FeedbackBloc(
           feedbackRepository: gh<_i8.IFeedbackRepository>(),
           appAuthenticationRepository: gh<_i8.IAppAuthenticationRepository>(),
         ));
-    gh.factory<_i25.InvestorsWatcherBloc>(() => _i25.InvestorsWatcherBloc(
-        investorsRepository: gh<_i8.IInvestorsRepository>()));
-    gh.singleton<_i26.AuthenticationRepository>(() =>
-        _i26.AuthenticationRepository(gh<_i8.IAppAuthenticationRepository>()));
-    gh.factory<_i27.LoginBloc>(() => _i27.LoginBloc(
+    gh.singleton<_i25.AuthenticationRepository>(() =>
+        _i25.AuthenticationRepository(gh<_i8.IAppAuthenticationRepository>()));
+    gh.factory<_i26.LoginBloc>(() => _i26.LoginBloc(
         appAuthenticationRepository: gh<_i8.IAppAuthenticationRepository>()));
+    gh.factory<_i27.InformationWatcherBloc>(() => _i27.InformationWatcherBloc(
+          informationRepository: gh<_i8.IInformationRepository>(),
+          reportRepository: gh<_i8.IReportRepository>(),
+          appAuthenticationRepository: gh<_i8.IAppAuthenticationRepository>(),
+        ));
     gh.factory<_i28.MyStoryWatcherBloc>(() => _i28.MyStoryWatcherBloc(
           storyRepository: gh<_i8.IStoryRepository>(),
           iAppAuthenticationRepository: gh<_i8.IAppAuthenticationRepository>(),

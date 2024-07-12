@@ -626,6 +626,47 @@ class MockIInformationRepository extends _i1.Mock
         ),
         returnValueForMissingStub: null,
       );
+
+  @override
+  _i8.Future<_i2.Either<_i3.SomeFailure, bool>> updateLikeCount({
+    required _i3.InformationModel? informationModel,
+    required bool? isLiked,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateLikeCount,
+          [],
+          {
+            #informationModel: informationModel,
+            #isLiked: isLiked,
+          },
+        ),
+        returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
+            _FakeEither_0<_i3.SomeFailure, bool>(
+          this,
+          Invocation.method(
+            #updateLikeCount,
+            [],
+            {
+              #informationModel: informationModel,
+              #isLiked: isLiked,
+            },
+          ),
+        )),
+        returnValueForMissingStub:
+            _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
+                _FakeEither_0<_i3.SomeFailure, bool>(
+          this,
+          Invocation.method(
+            #updateLikeCount,
+            [],
+            {
+              #informationModel: informationModel,
+              #isLiked: isLiked,
+            },
+          ),
+        )),
+      ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
 }
 
 /// A class which mocks [IFeedbackRepository].
@@ -939,6 +980,38 @@ class MockFirestoreService extends _i1.Mock implements _i3.FirestoreService {
         returnValue: _i8.Future<void>.value(),
         returnValueForMissingStub: _i8.Future<void>.value(),
       ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<void> updateInformationModel(
+          _i3.InformationModel? informationModel) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateInformationModel,
+          [informationModel],
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<List<_i3.ReportModel>> getCardReportById({
+    required _i3.CardEnum? cardEnum,
+    required String? userId,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getCardReportById,
+          [],
+          {
+            #cardEnum: cardEnum,
+            #userId: userId,
+          },
+        ),
+        returnValue:
+            _i8.Future<List<_i3.ReportModel>>.value(<_i3.ReportModel>[]),
+        returnValueForMissingStub:
+            _i8.Future<List<_i3.ReportModel>>.value(<_i3.ReportModel>[]),
+      ) as _i8.Future<List<_i3.ReportModel>>);
 
   @override
   _i8.Future<void> sendRespond(_i3.EmployeeRespondModel? respondModel) =>
@@ -9210,4 +9283,47 @@ class MockIReportRepository extends _i1.Mock implements _i3.IReportRepository {
           ),
         )),
       ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
+
+  @override
+  _i8.Future<
+      _i2.Either<_i3.SomeFailure, List<_i3.ReportModel>>> getCardReportById({
+    required _i3.CardEnum? cardEnum,
+    required String? userId,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getCardReportById,
+          [],
+          {
+            #cardEnum: cardEnum,
+            #userId: userId,
+          },
+        ),
+        returnValue: _i8
+            .Future<_i2.Either<_i3.SomeFailure, List<_i3.ReportModel>>>.value(
+            _FakeEither_0<_i3.SomeFailure, List<_i3.ReportModel>>(
+          this,
+          Invocation.method(
+            #getCardReportById,
+            [],
+            {
+              #cardEnum: cardEnum,
+              #userId: userId,
+            },
+          ),
+        )),
+        returnValueForMissingStub: _i8
+            .Future<_i2.Either<_i3.SomeFailure, List<_i3.ReportModel>>>.value(
+            _FakeEither_0<_i3.SomeFailure, List<_i3.ReportModel>>(
+          this,
+          Invocation.method(
+            #getCardReportById,
+            [],
+            {
+              #cardEnum: cardEnum,
+              #userId: userId,
+            },
+          ),
+        )),
+      ) as _i8.Future<_i2.Either<_i3.SomeFailure, List<_i3.ReportModel>>>);
 }
