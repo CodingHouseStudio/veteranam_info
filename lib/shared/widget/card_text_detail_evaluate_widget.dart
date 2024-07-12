@@ -149,14 +149,15 @@ class _CardTextDetailEvaluateWidgetState
                   ),
                   Row(
                     children: [
-                      buildIcon(
-                        icon: KIcon.website.copyWith(
-                          key: KWidgetkeys
-                              .widget.cardTextDetailEvaluate.iconWebsite,
+                      if (widget.link != null)
+                        buildIcon(
+                          icon: KIcon.website.copyWith(
+                            key: KWidgetkeys
+                                .widget.cardTextDetailEvaluate.iconWebsite,
+                          ),
+                          text: context.l10n.website,
+                          onPressed: null,
                         ),
-                        text: context.l10n.website,
-                        onPressed: null,
-                      ),
                       if (widget.isDesk)
                         KSizedBox.kWidthSizedBox24
                       else
@@ -169,18 +170,20 @@ class _CardTextDetailEvaluateWidgetState
                         text: context.l10n.share,
                         onPressed: _informationShareLink,
                       ),
-                      if (widget.isDesk)
-                        KSizedBox.kWidthSizedBox24
-                      else
-                        KSizedBox.kWidthSizedBox8,
-                      buildIcon(
-                        icon: KIcon.safe.copyWith(
-                          key: KWidgetkeys
-                              .widget.cardTextDetailEvaluate.iconSave,
+                      if (Config.isDevelopment)
+                        if (widget.isDesk)
+                          KSizedBox.kWidthSizedBox24
+                        else
+                          KSizedBox.kWidthSizedBox8,
+                      if (Config.isDevelopment)
+                        buildIcon(
+                          icon: KIcon.safe.copyWith(
+                            key: KWidgetkeys
+                                .widget.cardTextDetailEvaluate.iconSave,
+                          ),
+                          text: context.l10n.save,
+                          onPressed: null,
                         ),
-                        text: context.l10n.save,
-                        onPressed: null,
-                      ),
                     ],
                   ),
                 ],
