@@ -143,10 +143,8 @@ extension ListExtensions<T> on List<T> {
     return allFilters.getToSet;
   }
 
-  LoadingStatus isLoading(
-    List<T> previousList,
-  ) {
-    return length > previousList.length
+  LoadingStatus isLoading(List<T> previousList) {
+    return length > previousList.length && length % KDimensions.loadItems == 0
         ? LoadingStatus.loaded
         : LoadingStatus.listLoadedFull;
   }
@@ -154,7 +152,7 @@ extension ListExtensions<T> on List<T> {
   LoadingStatus isLoadingFilter(
     List<T> previousList,
   ) {
-    return length >= previousList.length
+    return length >= previousList.length && length % KDimensions.loadItems == 0
         ? LoadingStatus.loaded
         : LoadingStatus.listLoadedFull;
   }
@@ -252,6 +250,22 @@ extension ListIntExtension on List<int> {
       adjustedIndices.add(element);
     }
     return adjustedIndices;
+  }
+
+  List<int> checkValue({
+    required int filterIndex,
+    required int equalNumber,
+    required int largerNumber,
+  }) {
+    final newList = changeListValue(filterIndex);
+
+    if (filterIndex == equalNumber) {
+      newList.removeWhere((element) => element > largerNumber);
+    } else if (filterIndex > largerNumber) {
+      newList.removeWhere((element) => element == equalNumber);
+    }
+
+    return newList;
   }
 }
 

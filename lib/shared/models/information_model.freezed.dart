@@ -33,8 +33,12 @@ mixin _$InformationModel {
   @ImageConverter()
   ImageModel? get image => throw _privateConstructorUsedError;
 
+  /// Serializes this InformationModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of InformationModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $InformationModelCopyWith<InformationModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -71,6 +75,8 @@ class _$InformationModelCopyWithImpl<$Res, $Val extends InformationModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of InformationModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -134,6 +140,8 @@ class _$InformationModelCopyWithImpl<$Res, $Val extends InformationModel>
     ) as $Val);
   }
 
+  /// Create a copy of InformationModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $ImageModelCopyWith<$Res>? get image {
@@ -180,6 +188,8 @@ class __$$InformationModelImplCopyWithImpl<$Res>
       $Res Function(_$InformationModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of InformationModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -326,7 +336,7 @@ class _$InformationModelImpl implements _InformationModel {
             (identical(other.image, image) || other.image == image));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -342,7 +352,9 @@ class _$InformationModelImpl implements _InformationModel {
       likes,
       image);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of InformationModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$InformationModelImplCopyWith<_$InformationModelImpl> get copyWith =>
@@ -397,8 +409,11 @@ abstract class _InformationModel implements InformationModel {
   @override
   @ImageConverter()
   ImageModel? get image;
+
+  /// Create a copy of InformationModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$InformationModelImplCopyWith<_$InformationModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
