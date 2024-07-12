@@ -143,10 +143,8 @@ extension ListExtensions<T> on List<T> {
     return allFilters.getToSet;
   }
 
-  LoadingStatus isLoading(
-    List<T> previousList,
-  ) {
-    return length > previousList.length
+  LoadingStatus isLoading(List<T> previousList) {
+    return length > previousList.length && length % KDimensions.loadItems == 0
         ? LoadingStatus.loaded
         : LoadingStatus.listLoadedFull;
   }
