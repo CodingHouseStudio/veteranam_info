@@ -332,6 +332,7 @@ abstract class KButtonStyles {
       ),
     ),
     backgroundColor: WidgetStatePropertyAll(AppColors.materialThemeBlack),
+  );
   static const discountCityButtonStyle = ButtonStyle(
     backgroundColor: WidgetStatePropertyAll(AppColors.materialThemeWhite),
     shape: WidgetStatePropertyAll(
