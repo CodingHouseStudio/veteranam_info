@@ -25,6 +25,9 @@ class DiscountBodyWidget extends StatelessWidget {
           loadingButtonText: context.l10n.moreDiscounts,
           listCanLoaded: _.loadingStatus != LoadingStatus.listLoadedFull,
           cardListIsEmpty: _.filteredDiscountModelItems.isEmpty,
+          resetFilter: () => context.read<DiscountWatcherBloc>().add(
+                const DiscountWatcherEvent.filterReset(),
+              ),
           titleChildWidgetsFunction: ({required isDesk}) => [
             KSizedBox.kHeightSizedBox24,
             ...TitleWidget.pointTitleWidgetList(
