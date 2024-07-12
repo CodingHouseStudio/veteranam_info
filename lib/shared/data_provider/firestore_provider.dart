@@ -347,4 +347,9 @@ class FirestoreService {
         .map((doc) => ReportModel.fromJson(doc.data()))
         .toList();
   }
+
+  Future<void> sendRespond(EmployeeRespondModel respondModel) => _db
+      .collection(FirebaseCollectionName.respond)
+      .doc(respondModel.id)
+      .set(respondModel.toJson());
 }

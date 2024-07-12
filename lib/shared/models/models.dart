@@ -1,5 +1,6 @@
 export 'convertors/convertors.dart';
 export 'discount_model.dart';
+export 'employee_respond_model.dart';
 export 'failure_model/failure_model.dart';
 export 'feedback_model.dart';
 export 'field_models/field_models.dart';
@@ -8,6 +9,7 @@ export 'image_model.dart';
 export 'information_model.dart';
 export 'question_model.dart';
 export 'report_model.dart';
+export 'resume_model.dart';
 export 'story_model.dart';
 export 'tag_model.dart';
 export 'user_model.dart';
