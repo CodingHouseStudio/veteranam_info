@@ -154,7 +154,7 @@ extension ListExtensions<T> on List<T> {
   LoadingStatus isLoadingFilter(
     List<T> previousList,
   ) {
-    return length >= previousList.length
+    return length >= previousList.length && length % KDimensions.loadItems == 0
         ? LoadingStatus.loaded
         : LoadingStatus.listLoadedFull;
   }
