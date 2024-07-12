@@ -2,7 +2,7 @@ import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:kozak/shared/shared.dart';
+import 'package:veteranam/shared/shared.dart';
 
 class NawbarWidget extends SliverPersistentHeaderDelegate {
   const NawbarWidget({
@@ -103,7 +103,7 @@ class _NawbarWidgetImplematationState
                     Duration.zero,
                     () => context.goNamedWithScroll(KRoute.home.name),
                   ),
-                  icon: KImage.logo.copyWith(
+                  icon: KImage.logo(
                     key: KWidgetkeys.widget.nawbar.logo,
                   ),
                 ),
@@ -190,7 +190,7 @@ class _NawbarWidgetImplematationState
                   TextButton(
                     key: KWidgetkeys.widget.nawbar.button,
                     style: KButtonStyles.whiteButtonStyle,
-                    onPressed: () => context.goNamed(KRoute.login.name),
+                    onPressed: () => loginNavigation(context),
                     child: Text(
                       context.l10n.login,
                       style: AppTextStyle.text24,
@@ -199,7 +199,7 @@ class _NawbarWidgetImplematationState
                 else if (!isFocused)
                   IconButtonWidget(
                     key: KWidgetkeys.widget.nawbar.iconPerson,
-                    onPressed: () => context.goNamed(KRoute.login.name),
+                    onPressed: () => loginNavigation(context),
                     icon: KIcon.person
                         .copyWith(color: AppColors.materialThemeWhite),
                     background: AppColors.materialThemeKeyColorsSecondary,
@@ -208,37 +208,17 @@ class _NawbarWidgetImplematationState
                       AuthenticationStatus.authenticated &&
                   Config.isDevelopment)
                 if (!isFocused || widget.isDesk)
-                  if (context.read<AuthenticationBloc>().state.user!.photo ==
-                      null)
-                    InkWell(
-                      key: KWidgetkeys.widget.nawbar.iconPerson,
-                      onTap: () => context.goNamed(KRoute.profile.name),
-                      child: const IconWidget(
-                        icon: KIcon.person,
-                      ),
-                    )
-                  else
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(KSize.kUserPhoto),
-                      child: InkWell(
-                        key: KWidgetkeys.widget.nawbar.iconPerson,
-                        onTap: () => context.goNamed(KRoute.profile.name),
-                        child: ImageWidget(
-                          imageUrl: context
-                              .read<AuthenticationBloc>()
-                              .state
-                              .user!
-                              .photo!,
-                          fit: BoxFit.contain,
-                          size: KSize.kUserPhoto,
-                        ),
-                      ),
-                    ),
+                  UserPhotoWidget(
+                    key: KWidgetkeys.widget.nawbar.iconPerson,
+                    onPressed: () => context.goNamed(KRoute.profile.name),
+                    imageUrl:
+                        context.read<AuthenticationBloc>().state.user?.photo,
+                  ),
             ],
           ),
         );
   }
 
-  void profileNavigation(BuildContext context) =>
-      context.goNamed(KRoute.profile.name);
+  void loginNavigation(BuildContext context) =>
+      context.goNamed(KRoute.login.name);
 }

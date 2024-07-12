@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:kozak/components/components.dart';
-import 'package:kozak/shared/shared.dart';
+import 'package:veteranam/components/components.dart';
+import 'package:veteranam/shared/shared.dart';
 
 part '../news_widget_list.dart';
 
@@ -23,6 +23,8 @@ class InformationBodyWidget extends StatelessWidget {
       listenWhen: (previous, current) => current.failure != null,
       builder: (context, _) => ScaffoldAutoLoadingWidget(
         loadingButtonText: context.l10n.moreNews,
+        listCanLoaded: _.loadingStatus != LoadingStatus.listLoadedFull,
+        cardListIsEmpty: _.filteredInformationModelItems.isEmpty,
         titleChildWidgetsFunction: ({required isDesk}) => [
           KSizedBox.kHeightSizedBox24,
           ...TitleWidget.titleIconWidgetList(
@@ -91,7 +93,7 @@ class InformationBodyWidget extends StatelessWidget {
           else
             KSizedBox.kHeightSizedBox24,
         ],
-        scrollFunction: () => context.read<InformationWatcherBloc>().add(
+        loadFunction: () => context.read<InformationWatcherBloc>().add(
               const InformationWatcherEvent.loadNextItems(),
             ),
       ),

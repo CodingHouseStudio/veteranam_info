@@ -1,78 +1,46 @@
 import 'package:flutter/material.dart';
-import 'package:kozak/shared/shared.dart';
+import 'package:veteranam/shared/shared.dart';
 
-class ScaffoldAutoLoadingWidget extends StatelessWidget {
+class ScaffoldAutoLoadingWidget extends StatefulWidget {
   const ScaffoldAutoLoadingWidget({
     required this.mainChildWidgetsFunction,
-    required this.scrollFunction,
+    required this.loadFunction,
     required this.loadingButtonText,
-    super.key,
+    required this.listCanLoaded,
+    this.cardListIsEmpty,
     this.titleChildWidgetsFunction,
     this.mainDeskPadding,
     this.mainRightChildWidget,
+    super.key,
   });
+
   final List<Widget> Function({required bool isDesk})?
       titleChildWidgetsFunction;
   final List<Widget> Function({required bool isDesk}) mainChildWidgetsFunction;
   final EdgeInsetsGeometry Function({required double maxWidth})?
       mainDeskPadding;
-  final void Function() scrollFunction;
+  final void Function() loadFunction;
   final Widget? mainRightChildWidget;
   final String loadingButtonText;
+  final bool listCanLoaded;
+  final bool? cardListIsEmpty;
 
   @override
-  Widget build(BuildContext context) {
-    if (KPlatformConstants.isWebDesktop) {
-      return _ScaffoldAutoLoadingWidgetDesk(
-        mainChildWidgetsFunction: mainChildWidgetsFunction,
-        loadFunction: scrollFunction,
-        mainDeskPadding: mainDeskPadding,
-        mainRightChildWidget: mainRightChildWidget,
-        titleChildWidgetsFunction: titleChildWidgetsFunction,
-        loadingButtonText: loadingButtonText,
-      );
-    } else {
-      return _ScaffoldAutoLoadingWidgetMobile(
-        mainChildWidgetsFunction: mainChildWidgetsFunction,
-        scrollFunction: scrollFunction,
-        mainDeskPadding: mainDeskPadding,
-        mainRightChildWidget: mainRightChildWidget,
-        titleChildWidgetsFunction: titleChildWidgetsFunction,
-      );
-    }
-  }
+  State<ScaffoldAutoLoadingWidget> createState() =>
+      _ScaffoldAutoLoadingWidgetState();
 }
 
-class _ScaffoldAutoLoadingWidgetMobile extends StatefulWidget {
-  const _ScaffoldAutoLoadingWidgetMobile({
-    required this.mainChildWidgetsFunction,
-    required this.scrollFunction,
-    this.titleChildWidgetsFunction,
-    this.mainDeskPadding,
-    this.mainRightChildWidget,
-  });
-  final List<Widget> Function({required bool isDesk})?
-      titleChildWidgetsFunction;
-  final List<Widget> Function({required bool isDesk}) mainChildWidgetsFunction;
-  final EdgeInsetsGeometry Function({required double maxWidth})?
-      mainDeskPadding;
-  final void Function() scrollFunction;
-  final Widget? mainRightChildWidget;
-
-  @override
-  State<_ScaffoldAutoLoadingWidgetMobile> createState() =>
-      _ScaffoldAutoLoadingWidgetMobileState();
-}
-
-class _ScaffoldAutoLoadingWidgetMobileState
-    extends State<_ScaffoldAutoLoadingWidgetMobile> {
+class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
   late ScrollController _scrollController;
 
   @override
   void initState() {
-    _scrollController = ScrollController();
     super.initState();
-    _scrollController.addListener(_onScroll);
+    _scrollController = ScrollController();
+    if (!KPlatformConstants.isWebDesktop &&
+        !(widget.cardListIsEmpty ?? false)) {
+      _scrollController.addListener(_onScroll);
+    }
   }
 
   @override
@@ -81,7 +49,57 @@ class _ScaffoldAutoLoadingWidgetMobileState
       builder: (BuildContext context, BoxConstraints constraints) {
         final isDesk =
             constraints.maxWidth > KPlatformConstants.minWidthThresholdDesk;
-        final mainChildWidget = widget.mainChildWidgetsFunction(isDesk: isDesk);
+
+        final titleChildWidget =
+            widget.titleChildWidgetsFunction?.call(isDesk: isDesk);
+        final mainChildWidget = widget.mainChildWidgetsFunction(isDesk: isDesk)
+          ..addAll([
+            if (widget.listCanLoaded &&
+                KPlatformConstants.isWebDesktop &&
+                !(widget.cardListIsEmpty ?? false))
+              LoadingButton(
+                isDesk: isDesk,
+                onPressed: widget.loadFunction,
+                text: widget.loadingButtonText,
+                widgetKey: KWidgetkeys.widget.scaffold.loadingButton,
+              ),
+            if ((widget.cardListIsEmpty ?? false) && Config.isProduction) ...[
+              KSizedBox.kHeightSizedBox100,
+              // const Center(child: KImage.emptyList),
+              KSizedBox.kHeightSizedBox36,
+              Center(
+                child: Text(
+                  context.l10n.cardListEmptyText,
+                  key: KWidgetkeys.widget.scaffold.endListText,
+                  style: AppTextStyle.materialThemeTitleMediumNeutralVariant70,
+                ),
+              ),
+              KSizedBox.kHeightSizedBox100,
+            ],
+            if (!widget.listCanLoaded &&
+                !(widget.cardListIsEmpty ?? false)) ...[
+              Center(
+                child: Text(
+                  context.l10n.thatEndOfList,
+                  key: KWidgetkeys.widget.scaffold.emptyListText,
+                  style: AppTextStyle.materialThemeTitleMediumNeutralVariant70,
+                ),
+              ),
+              KSizedBox.kHeightSizedBox24,
+              Center(
+                child: TextButton(
+                  style: KButtonStyles.endListButtonStyle,
+                  onPressed: scrollUp,
+                  child: Text(
+                    context.l10n.returnToTop,
+                    style: AppTextStyle.materialThemeTitleMedium,
+                  ),
+                ),
+              ),
+            ],
+            KSizedBox.kHeightSizedBox40,
+          ]);
+
         final padding = EdgeInsets.symmetric(
           horizontal: (isDesk
               ? KPadding.kPaddingSize90 +
@@ -93,10 +111,7 @@ class _ScaffoldAutoLoadingWidgetMobileState
                       : 0)
               : KPadding.kPaddingSize16),
         );
-        // final footerList = FooterWidget.get(
-        //   context: context,
-        //   isDesk: isDesk,
-        // );
+
         return Scaffold(
           body: CustomScrollView(
             key: KWidgetkeys.widget.scaffold.scroll,
@@ -106,27 +121,22 @@ class _ScaffoldAutoLoadingWidgetMobileState
                   isDesk: isDesk,
                 ),
               ),
-              if (widget.titleChildWidgetsFunction != null)
+              if (titleChildWidget != null)
                 SliverPadding(
                   padding: padding,
                   sliver: SliverList.builder(
                     addAutomaticKeepAlives: false,
                     addRepaintBoundaries: false,
                     itemBuilder: (context, index) {
-                      return widget.titleChildWidgetsFunction!(isDesk: isDesk)
-                          .elementAt(index);
+                      return titleChildWidget.elementAt(index);
                     },
-                    itemCount: widget
-                        .titleChildWidgetsFunction!(isDesk: isDesk).length,
+                    itemCount: titleChildWidget.length,
                   ),
                 ),
-
               SliverPadding(
                 padding: isDesk && widget.mainDeskPadding != null
                     ? padding.add(
-                        widget.mainDeskPadding!(
-                          maxWidth: constraints.maxWidth,
-                        ),
+                        widget.mainDeskPadding!(maxWidth: constraints.maxWidth),
                       )
                     : padding,
                 sliver: widget.mainRightChildWidget != null && isDesk
@@ -144,33 +154,9 @@ class _ScaffoldAutoLoadingWidgetMobileState
                       )
                     : mainBody(mainChildWidget),
               ),
-              // SliverPadding(
-              //   padding: padding.copyWith(
-              //     bottom: KPadding.kPaddingSize40,
-              //   ),
-              //   sliver: DecoratedSliver(
-              //     decoration: KWidgetTheme.boxDecorationFooter,
-              //     sliver: SliverPadding(
-              //       padding: isDesk
-              //           ? const EdgeInsets.all(KPadding.kPaddingSize32)
-              //               .copyWith(left: KPadding.kPaddingSize46)
-              //           : const EdgeInsets.symmetric(
-              //               vertical: KPadding.kPaddingSize32,
-              //               horizontal: KPadding.kPaddingSize16,
-              //             ),
-              //       sliver: SliverList.builder(
-              //         key: KWidgetkeys.widget.footer.widget,
-              //         addAutomaticKeepAlives: false,
-              //         addRepaintBoundaries: false,
-              //         itemBuilder: (context, index) =>
-              //             footerWidget.elementAt(index),
-              //         itemCount: footerWidget.length,
-              //       ),
-              //     ),
-              //   ),
-              // ),
             ],
-            semanticChildCount: mainChildWidget.length + 1,
+            semanticChildCount:
+                mainChildWidget.length + (titleChildWidget?.length ?? 0) + 1,
             controller: _scrollController,
           ),
         );
@@ -189,14 +175,18 @@ class _ScaffoldAutoLoadingWidgetMobileState
 
   @override
   void dispose() {
-    _scrollController
-      ..removeListener(_onScroll)
-      ..dispose();
+    if (KPlatformConstants.isWebDesktop) {
+      _scrollController.dispose();
+    } else {
+      _scrollController
+        ..removeListener(_onScroll)
+        ..dispose();
+    }
     super.dispose();
   }
 
   void _onScroll() {
-    if (_isBottom) widget.scrollFunction();
+    if (_isBottom && widget.listCanLoaded) widget.loadFunction();
   }
 
   bool get _isBottom {
@@ -205,143 +195,12 @@ class _ScaffoldAutoLoadingWidgetMobileState
     final currentScroll = _scrollController.offset;
     return currentScroll >= (maxScroll * 0.9);
   }
-}
 
-class _ScaffoldAutoLoadingWidgetDesk extends StatelessWidget {
-  const _ScaffoldAutoLoadingWidgetDesk({
-    required this.mainChildWidgetsFunction,
-    required this.loadFunction,
-    required this.loadingButtonText,
-    this.titleChildWidgetsFunction,
-    this.mainDeskPadding,
-    this.mainRightChildWidget,
-  });
-  final List<Widget> Function({required bool isDesk})?
-      titleChildWidgetsFunction;
-  final List<Widget> Function({required bool isDesk}) mainChildWidgetsFunction;
-  final EdgeInsetsGeometry Function({required double maxWidth})?
-      mainDeskPadding;
-  final void Function() loadFunction;
-  final Widget? mainRightChildWidget;
-  final String loadingButtonText;
-
-  @override
-  Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints) {
-        final isDesk =
-            constraints.maxWidth > KPlatformConstants.minWidthThresholdTablet;
-        final mainChildWidget = mainChildWidgetsFunction(isDesk: isDesk)
-          ..addAll([
-            LoadingButton(
-              isDesk: isDesk,
-              onPressed: loadFunction,
-              text: loadingButtonText,
-              widgetKey: KWidgetkeys.widget.scaffold.loadingButton,
-            ),
-            KSizedBox.kHeightSizedBox40,
-          ]);
-        final padding = EdgeInsets.symmetric(
-          horizontal: (isDesk
-              ? KPadding.kPaddingSize90 +
-                  ((constraints.maxWidth >
-                          KPlatformConstants.maxWidthThresholdTablet)
-                      ? (constraints.maxWidth -
-                              KPlatformConstants.maxWidthThresholdTablet) /
-                          2
-                      : 0)
-              : KPadding.kPaddingSize16),
-        );
-        // final footerList = FooterWidget.get(
-        //   context: context,
-        //   isDesk: isDesk,
-        // );
-        return Scaffold(
-          body: CustomScrollView(
-            key: KWidgetkeys.widget.scaffold.scroll,
-            slivers: [
-              SliverPersistentHeader(
-                delegate: NawbarWidget(
-                  isDesk: isDesk,
-                ),
-              ),
-              if (titleChildWidgetsFunction != null)
-                SliverPadding(
-                  padding: padding,
-                  sliver: SliverList.builder(
-                    addAutomaticKeepAlives: false,
-                    addRepaintBoundaries: false,
-                    itemBuilder: (context, index) {
-                      return titleChildWidgetsFunction!(isDesk: isDesk)
-                          .elementAt(index);
-                    },
-                    itemCount:
-                        titleChildWidgetsFunction!(isDesk: isDesk).length,
-                  ),
-                ),
-
-              SliverPadding(
-                padding: isDesk && mainDeskPadding != null
-                    ? padding.add(
-                        mainDeskPadding!(
-                          maxWidth: constraints.maxWidth,
-                        ),
-                      )
-                    : padding,
-                sliver: mainRightChildWidget != null && isDesk
-                    ? RowSliver(
-                        right: mainBody(mainChildWidget),
-                        left: SliverPersistentHeader(
-                          pinned: true,
-                          delegate: NawbarWidget(
-                            isDesk: isDesk,
-                            childWidget: mainRightChildWidget,
-                            maxMinHeight: constraints.maxHeight,
-                          ),
-                        ),
-                        leftWidthPercent: 0.3,
-                      )
-                    : mainBody(mainChildWidget),
-              ),
-              // SliverPadding(
-              //   padding: padding.copyWith(
-              //     bottom: KPadding.kPaddingSize40,
-              //   ),
-              //   sliver: DecoratedSliver(
-              //     decoration: KWidgetTheme.boxDecorationFooter,
-              //     sliver: SliverPadding(
-              //       padding: isDesk
-              //           ? const EdgeInsets.all(KPadding.kPaddingSize32)
-              //               .copyWith(left: KPadding.kPaddingSize46)
-              //           : const EdgeInsets.symmetric(
-              //               vertical: KPadding.kPaddingSize32,
-              //               horizontal: KPadding.kPaddingSize16,
-              //             ),
-              //       sliver: SliverList.builder(
-              //         key: KWidgetkeys.widget.footer.widget,
-              //         addAutomaticKeepAlives: false,
-              //         addRepaintBoundaries: false,
-              //         itemBuilder: (context, index) =>
-              //             footerWidget.elementAt(index),
-              //         itemCount: footerWidget.length,
-              //       ),
-              //     ),
-              //   ),
-              // ),
-            ],
-            semanticChildCount: mainChildWidget.length + 1,
-          ),
-        );
-      },
+  void scrollUp() {
+    _scrollController.animateTo(
+      0,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeInOut,
     );
   }
-
-  Widget mainBody(List<Widget> mainChildWidget) => SliverList.builder(
-        addAutomaticKeepAlives: false,
-        addRepaintBoundaries: false,
-        itemBuilder: (context, index) {
-          return mainChildWidget.elementAt(index);
-        },
-        itemCount: mainChildWidget.length,
-      );
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:kozak/components/discounts/bloc/discount_watcher_bloc.dart';
-import 'package:kozak/shared/shared.dart';
+import 'package:veteranam/components/components.dart';
+import 'package:veteranam/shared/shared.dart';
 
 class ProfileSavesBody extends StatelessWidget {
   const ProfileSavesBody({super.key});
@@ -11,6 +11,8 @@ class ProfileSavesBody extends StatelessWidget {
     return BlocBuilder<DiscountWatcherBloc, DiscountWatcherState>(
       builder: (context, state) {
         switch (state.loadingStatus) {
+          case LoadingStatus.listLoadedFull:
+            return const CircularProgressIndicator.adaptive();
           case LoadingStatus.initial:
             return const CircularProgressIndicator.adaptive();
           case LoadingStatus.loading:

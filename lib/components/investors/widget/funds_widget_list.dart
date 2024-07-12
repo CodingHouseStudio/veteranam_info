@@ -4,58 +4,53 @@ List<Widget> _fundsWidgetList({
   required BuildContext context,
   required bool isDesk,
 }) {
-  final isLoading = context.read<InvestorsWatcherBloc>().state.loadingStatus !=
-      LoadingStatus.loaded;
-  final fundItems = [
-    if (context.read<InvestorsWatcherBloc>().state.failure == null) ...[
-      ...context.read<InvestorsWatcherBloc>().state.loadingFundItems,
-      if (isLoading)
-        ...List<FundModel>.generate(
-          KDimensions.shimmerFundsItems,
-          (index) => KMockText.fundModel.copyWith(
-            id: index.toString(),
-          ),
-        ),
-    ],
-  ];
-  return List.generate(
-    (isDesk
-        ? (fundItems.length / KDimensions.donateCardsLine).ceil()
-        : fundItems.length),
-    (index) {
-      return Padding(
-        padding: index != 0
-            ? const EdgeInsets.only(
-                top: KPadding.kPaddingSize24,
-              )
-            : EdgeInsets.zero,
-        child: isDesk
-            ? DonatesCardsWidget(
-                key: KWidgetkeys.screen.investors.cards,
-                fundItems: fundItems.sublist(
-                  index * 3,
-                  (fundItems.length > (index + 1) * KDimensions.donateCardsLine)
-                      ? index * 3 + 3
-                      : fundItems.length,
-                ),
-                isLoading: fundItems.length - index * 3 <=
-                        KDimensions.shimmerFundsItems &&
-                    isLoading,
-              )
-            : SkeletonizerWidget(
-                isLoading:
-                    fundItems.length - index <= KDimensions.shimmerFundsItems &&
-                        isLoading,
-                child: DonateCardWidget(
-                  key: index != fundItems.length - 1
-                      ? KWidgetkeys.screen.investors.card
-                      : KWidgetkeys.screen.investors.cardLast,
-                  fundModel: fundItems.elementAt(index),
-                  isDesk: false,
-                  hasSubtitle: true,
-                ),
-              ),
-      );
-    },
-  );
+  final fundsModel =
+      context.read<InvestorsWatcherBloc>().state.loadingFundItems;
+  final fundsModelItems = <List<FundModel>>[];
+
+  for (var i = 0; i < fundsModel.length; i += KDimensions.donateCardsLine) {
+    if (i + KDimensions.donateCardsLine <= fundsModel.length) {
+      fundsModelItems
+          .add(fundsModel.sublist(i, i + KDimensions.donateCardsLine));
+    } else {
+      fundsModelItems.add(fundsModel.sublist(i));
+    }
+  }
+  final isNotFailure =
+      context.read<InvestorsWatcherBloc>().state.failure == null;
+  if (isDesk) {
+    return cardWidgetList<List<FundModel>>(
+      loadingStatus: context.read<InvestorsWatcherBloc>().state.loadingStatus,
+      modelItems: fundsModelItems,
+      cardWidget: ({required modelItem, required isLoading}) =>
+          DonatesCardsWidget(
+        key: KWidgetkeys.screen.investors.cards,
+        fundItems: modelItem,
+        isLoading: isLoading,
+      ),
+      isDesk: isDesk,
+      shimmerItemsNumber: KDimensions.shimmerFundsItems,
+      isNotFailure: isNotFailure,
+      shimmerItem: List.generate(
+        KDimensions.donateCardsLine,
+        (index) => KMockText.fundModel,
+      ),
+    );
+  } else {
+    return cardWidgetList<FundModel>(
+      loadingStatus: context.read<InvestorsWatcherBloc>().state.loadingStatus,
+      modelItems: fundsModel,
+      cardWidget: ({required modelItem, required isLoading}) =>
+          DonateCardWidget(
+        key: KWidgetkeys.screen.investors.card,
+        fundModel: modelItem,
+        isDesk: isDesk,
+        hasSubtitle: true,
+      ),
+      isDesk: isDesk,
+      shimmerItemsNumber: KDimensions.shimmerFundsItems,
+      isNotFailure: isNotFailure,
+      shimmerItem: KMockText.fundModel,
+    );
+  }
 }

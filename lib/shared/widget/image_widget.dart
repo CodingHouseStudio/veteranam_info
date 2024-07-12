@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 // import 'package:cached_network_image/cached_network_image.dart';
 
-class ImageWidget extends StatelessWidget {
+class ImageWidget extends StatefulWidget {
   const ImageWidget({
     required this.imageUrl,
     this.fit,
@@ -14,28 +14,41 @@ class ImageWidget extends StatelessWidget {
   final double? size;
 
   @override
+  State<ImageWidget> createState() => _ImageWidgetState();
+}
+
+class _ImageWidgetState extends State<ImageWidget> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    precacheImage(
+      NetworkImage(
+        widget.imageUrl,
+        // headers: {
+        //   'Cache-Control': 'max-age=3600',
+        // },
+      ),
+      context,
+    );
+    super.didChangeDependencies();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    // ignore: flutter_style_todos
-    /// TODO: FIX
     // Precache the image with error handling
-    // precacheImage(
-    //   NetworkImage(
-    //     imageUrl,
-    //     headers: {
-    //       'Cache-Control': 'max-age=7200',
-    //     },
-    //   ),
-    //   context,
-    // )
 
     return Image.network(
-      imageUrl,
-      fit: fit,
-      width: size,
-      height: size,
-      // headers: const {
-      //   'Cache-Control': 'max-age=7200',
-      // },
+      widget.imageUrl,
+      fit: widget.fit,
+      width: widget.size,
+      height: widget.size,
+      headers: const {
+        'Cache-Control': 'max-age=3600',
+      },
       loadingBuilder: (context, child, loadingProgress) {
         if (loadingProgress == null) {
           return child;

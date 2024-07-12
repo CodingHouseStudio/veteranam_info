@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/widgets.dart';
-import 'package:kozak/shared/shared.dart';
+import 'package:veteranam/shared/shared.dart';
 
 extension ExtendedDateTime on DateTime {
   static DateTime? _customTime;
@@ -29,12 +29,18 @@ extension ItemLoadedExtensions on int {
           loadItems ?? KDimensions.loadItems,
         ),
       );
-  bool checkLoadingPosible(List<dynamic> list) =>
-      this + KDimensions.loadItems > list.length;
+  bool checkLoadingPosible(List<dynamic> list) => this >= list.length;
 }
 
 extension LocalizedDateTime on DateTime {
   String toLocalDateString() {
     return toLocal().toString().split(' ')[0];
   }
+}
+
+extension DiscountModelLocation on DiscountModel {
+  List<String> fullLocationList(BuildContext context) => [
+        if (location != null) ...location!,
+        if (subLocation != null) ...subLocation!.getList(context),
+      ];
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kozak/shared/shared.dart';
+import 'package:veteranam/shared/shared.dart';
 
 abstract class KButtonStyles {
   static const ButtonStyle widgetBackgroundButtonStyleWInf = ButtonStyle(
@@ -173,6 +173,21 @@ abstract class KButtonStyles {
       EdgeInsets.symmetric(
         horizontal: KPadding.kPaddingSize24,
         vertical: KPadding.kPaddingSize8,
+      ),
+    ),
+    shape: WidgetStatePropertyAll(
+      RoundedRectangleBorder(
+        borderRadius: KBorderRadius.kBorderRadius32,
+        side: BorderSide(),
+      ),
+    ),
+  );
+
+  static const endListButtonStyle = ButtonStyle(
+    padding: WidgetStatePropertyAll(
+      EdgeInsets.symmetric(
+        horizontal: KPadding.kPaddingSize16,
+        vertical: KPadding.kPaddingSize4,
       ),
     ),
     shape: WidgetStatePropertyAll(

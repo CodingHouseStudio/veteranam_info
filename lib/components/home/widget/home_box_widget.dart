@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:kozak/shared/shared.dart';
+import 'package:veteranam/shared/shared.dart';
 
 class HomeBoxWidget extends StatelessWidget {
   const HomeBoxWidget({
@@ -33,7 +33,7 @@ class HomeBoxWidget extends StatelessWidget {
                       style: AppTextStyle.materialThemeTitleMedium,
                     ),
                     KSizedBox.kWidthSizedBox8,
-                    KImage.wavingHand,
+                    KImage.wavingHand(),
                   ],
                 ),
                 KSizedBox.kHeightSizedBox16,
@@ -104,7 +104,7 @@ class HomeBoxWidget extends StatelessWidget {
                       style: AppTextStyle.materialThemeTitleSmall,
                     ),
                     KSizedBox.kWidthSizedBox8,
-                    KImage.wavingHand,
+                    KImage.wavingHand(),
                   ],
                 ),
               ),

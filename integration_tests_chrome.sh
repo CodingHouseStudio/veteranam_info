@@ -13,7 +13,8 @@ run_flutter_test() {
             --flavor development \
             --driver=test_driver/integration_test.dart \
             --target=integration_test/"$test_name"_test.dart \
-            -d chrome)
+            -d chrome\
+            --web-port=8080)
 
         # Check if the test passed or failed and print the relevant message
         if echo "$output" | grep -q "All tests passed"; then

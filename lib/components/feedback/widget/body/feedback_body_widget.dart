@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:go_router/go_router.dart';
-import 'package:kozak/components/components.dart';
-import 'package:kozak/shared/shared.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:veteranam/components/components.dart';
+import 'package:veteranam/shared/shared.dart';
 
 part '../feedback_box_widget.dart';
 part '../field_widget_list.dart';
-part '../title_widget_list.dart';
 part '../form_widget_list.dart';
+part '../title_widget_list.dart';
 
 class FeedbackBodyWidget extends StatefulWidget {
   const FeedbackBodyWidget({super.key});

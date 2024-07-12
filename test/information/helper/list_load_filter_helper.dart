@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:kozak/shared/shared.dart';
+import 'package:veteranam/shared/shared.dart';
 
 import '../../text_dependency.dart';
 
@@ -13,14 +13,14 @@ Future<void> listLoadFilterHelper(
     offset: KTestConstants.scrollingDown,
   );
 
-  expect(find.byKey(KWidgetkeys.screen.information.cardLast), findsNothing);
+  expect(find.byKey(KWidgetkeys.widget.scaffold.endListText), findsNothing);
 
   await scrollingHelper(
     tester: tester,
     offset: KTestConstants.scrollingDown,
   );
 
-  expect(find.byKey(KWidgetkeys.screen.information.cardLast), findsNothing);
+  expect(find.byKey(KWidgetkeys.widget.scaffold.endListText), findsNothing);
 
   await scrollingHelper(
     tester: tester,
@@ -37,7 +37,7 @@ Future<void> listLoadFilterHelper(
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.information.cardLast),
+    find.byKey(KWidgetkeys.widget.scaffold.endListText),
     findsNothing,
   );
 }

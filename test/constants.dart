@@ -4,9 +4,9 @@ import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:kozak/bootstrap.dart';
-import 'package:kozak/firebase_options_development.dart';
-import 'package:kozak/shared/shared.dart';
+import 'package:veteranam/bootstrap.dart';
+import 'package:veteranam/firebase_options_development.dart';
+import 'package:veteranam/shared/shared.dart';
 
 Future<void> setUpGlobal({bool? kIsWeb}) async {
   FlutterError.onError = (details) {
@@ -204,6 +204,7 @@ abstract class KTestText {
                 : i == 2
                     ? SubLocation.online
                     : null,
+        userPhoto: i > _itemsPhoto ? imageModels : null,
       ),
   ];
 
@@ -290,8 +291,8 @@ abstract class KTestText {
         userPhoto: i > _itemsPhoto ? userPhotoModel : null,
       ),
   ];
-  static const _items = 30;
-  static const _itemsPhoto = 20;
+  static const _items = 40;
+  static const _itemsPhoto = 30;
 
   static List<String> routes({required bool hasAccount}) => [
         KRoute.aboutUs.name,
