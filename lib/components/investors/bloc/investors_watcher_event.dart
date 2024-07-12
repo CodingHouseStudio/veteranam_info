@@ -4,4 +4,6 @@ part of 'investors_watcher_bloc.dart';
 class InvestorsWatcherEvent with _$InvestorsWatcherEvent {
   const factory InvestorsWatcherEvent.started() = _Started;
   const factory InvestorsWatcherEvent.loadeNextItems() = _LoadNextItems;
+
+  const factory InvestorsWatcherEvent.getReport() = _GetReport;
 }
