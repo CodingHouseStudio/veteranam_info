@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kozak/shared/shared.dart';
+import 'package:veteranam/shared/shared.dart';
 
 abstract class KBorder {
   static const outlineInputLightGray = OutlineInputBorder(

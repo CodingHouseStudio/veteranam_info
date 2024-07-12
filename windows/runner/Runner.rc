@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "ua.com.kozatskarada.kozak" "\0"
-            VALUE "FileDescription", "kozak" "\0"
+            VALUE "FileDescription", "veteranam" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "kozak" "\0"
+            VALUE "InternalName", "veteranam" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2022 ua.com.kozatskarada.kozak. All rights reserved." "\0"
-            VALUE "OriginalFilename", "kozak.exe" "\0"
-            VALUE "ProductName", "Kozak" "\0"
+            VALUE "OriginalFilename", "veteranam.exe" "\0"
+            VALUE "ProductName", "Veteranam" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

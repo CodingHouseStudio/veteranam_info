@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="ua.com.kozatskarada.kozak">
+    package="info.veteranam">
    <application
         android:label="${appName}"
         android:name="${applicationName}"

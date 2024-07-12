@@ -8,3 +8,4 @@ analyzer:
 linter:
   rules:
     public_member_api_docs: false
+    prefer_relative_imports: false

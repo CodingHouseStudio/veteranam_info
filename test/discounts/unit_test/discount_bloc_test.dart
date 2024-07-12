@@ -1,8 +1,8 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:kozak/components/components.dart';
-import 'package:kozak/shared/shared.dart';
 import 'package:mockito/mockito.dart';
+import 'package:veteranam/components/components.dart';
+import 'package:veteranam/shared/shared.dart';
 
 import '../../text_dependency.dart';
 
@@ -110,18 +110,17 @@ void main() {
         ),
         predicate<DiscountWatcherState>(
           (state) =>
-              state.loadingStatus == LoadingStatus.loaded &&
+              state.loadingStatus == LoadingStatus.listLoadedFull &&
               state.filteredDiscountModelItems.every(
                 (element) => element.category.contains(
                   KTestText.discountModelItemsModify.first.category.first,
                 ),
               ) &&
-              state.filtersCategoriesIndex.isNotEmpty &&
               state.filtersCategoriesIndex.length == 1,
         ),
         predicate<DiscountWatcherState>(
           (state) =>
-              state.loadingStatus == LoadingStatus.loaded &&
+              state.loadingStatus == LoadingStatus.listLoadedFull &&
               state.filtersCategoriesIndex.isNotEmpty &&
               state.filtersCategoriesIndex.length == 2,
         ),
@@ -133,7 +132,7 @@ void main() {
         ),
         predicate<DiscountWatcherState>(
           (state) =>
-              state.loadingStatus == LoadingStatus.loaded &&
+              state.loadingStatus == LoadingStatus.listLoadedFull &&
               state.filtersCategoriesIndex.isNotEmpty &&
               state.filtersCategoriesIndex.length == 1,
         ),
@@ -177,7 +176,7 @@ void main() {
         ),
         predicate<DiscountWatcherState>(
           (state) =>
-              state.loadingStatus == LoadingStatus.loaded &&
+              state.loadingStatus == LoadingStatus.listLoadedFull &&
               state.filteredDiscountModelItems.length == 1 &&
               state.filtersLocationIndex.isNotEmpty,
         ),
@@ -197,7 +196,7 @@ void main() {
         ),
         predicate<DiscountWatcherState>(
           (state) =>
-              state.loadingStatus == LoadingStatus.loaded &&
+              state.loadingStatus == LoadingStatus.listLoadedFull &&
               state.filteredDiscountModelItems.every(
                 (element) => element.location!.contains(
                   KTestText.discountModelItemsModify.first.location!.first,
@@ -326,7 +325,7 @@ void main() {
         ),
         predicate<DiscountWatcherState>(
           (state) =>
-              state.loadingStatus == LoadingStatus.loaded &&
+              state.loadingStatus == LoadingStatus.listLoadedFull &&
               state.filteredDiscountModelItems.length == 1 &&
               state.filtersCategoriesIndex.isNotEmpty &&
               state.itemsLoaded == 1,
@@ -381,7 +380,7 @@ void main() {
         ),
         predicate<DiscountWatcherState>(
           (state) =>
-              state.loadingStatus == LoadingStatus.loaded &&
+              state.loadingStatus == LoadingStatus.listLoadedFull &&
               state.filteredDiscountModelItems.length == 1 &&
               state.filtersCategoriesIndex.isNotEmpty &&
               state.itemsLoaded == 1,
@@ -395,7 +394,7 @@ void main() {
         ),
         predicate<DiscountWatcherState>(
           (state) =>
-              state.loadingStatus == LoadingStatus.loaded &&
+              state.loadingStatus == LoadingStatus.listLoadedFull &&
               state.filteredDiscountModelItems.length == 1 &&
               state.filtersCategoriesIndex.isNotEmpty &&
               state.itemsLoaded == 1,

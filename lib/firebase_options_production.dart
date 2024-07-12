@@ -21,20 +21,11 @@ class DefaultFirebaseOptions {
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for android - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return android;
       case TargetPlatform.iOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for ios - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return ios;
       case TargetPlatform.macOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for macos - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return macos;
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -54,11 +45,41 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions web = FirebaseOptions(
     apiKey: 'AIzaSyAWXzOYOBDQXFlU6Gp_8BYyvk5_L9Ev3dU',
-    appId: '1:326120302123:web:133ea973ac660982edac6e',
+    appId: '1:326120302123:web:286bf85d6c4789dcedac6e',
     messagingSenderId: '326120302123',
     projectId: 'veteran-production',
     authDomain: 'veteran-production.firebaseapp.com',
     storageBucket: 'veteran-production.appspot.com',
-    measurementId: 'G-718JYL8FY0',
+    measurementId: 'G-L45XB73JLM',
+  );
+
+  static const FirebaseOptions android = FirebaseOptions(
+    apiKey: 'AIzaSyCMWzGq_-aa1c-ywngHWm-1gL_R9uBYsFg',
+    appId: '1:326120302123:android:bc4862ae5990f5c0edac6e',
+    messagingSenderId: '326120302123',
+    projectId: 'veteran-production',
+    storageBucket: 'veteran-production.appspot.com',
+  );
+
+  static const FirebaseOptions ios = FirebaseOptions(
+    apiKey: 'AIzaSyC23K7nwAkDvjcZAs5auqB1SjChELepAQ4',
+    appId: '1:326120302123:ios:f7fe329bb88f4091edac6e',
+    messagingSenderId: '326120302123',
+    projectId: 'veteran-production',
+    storageBucket: 'veteran-production.appspot.com',
+    iosClientId:
+        '326120302123-6imcoq7lddeov8i8dcicp15cjn6a418u.apps.googleusercontent.com',
+    iosBundleId: 'info.veteranam',
+  );
+
+  static const FirebaseOptions macos = FirebaseOptions(
+    apiKey: 'AIzaSyC23K7nwAkDvjcZAs5auqB1SjChELepAQ4',
+    appId: '1:326120302123:ios:f7fe329bb88f4091edac6e',
+    messagingSenderId: '326120302123',
+    projectId: 'veteran-production',
+    storageBucket: 'veteran-production.appspot.com',
+    iosClientId:
+        '326120302123-6imcoq7lddeov8i8dcicp15cjn6a418u.apps.googleusercontent.com',
+    iosBundleId: 'info.veteranam',
   );
 }

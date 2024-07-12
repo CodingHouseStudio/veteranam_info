@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kozak/shared/shared.dart';
+import 'package:veteranam/shared/shared.dart';
 
 /// Text Styles
 
@@ -381,13 +381,29 @@ abstract class AppTextStyle {
     fontWeight: FontWeight.w500,
     letterSpacing: 0.15,
   );
-  static const TextStyle materialThemeTitleMediumHint = TextStyle(
+  static const TextStyle materialThemeTitleMediumNeutralVariant35 = TextStyle(
     fontFamily: 'Gilroy',
     fontSize: 16,
     height: 1.5,
     fontWeight: FontWeight.w500,
     letterSpacing: 0.15,
     color: AppColors.materialThemeRefNeutralVariantNeutralVariant35,
+  );
+  static const TextStyle materialThemeTitleMediumNeutralVariant70 = TextStyle(
+    fontFamily: 'Gilroy',
+    fontSize: 16,
+    height: 1.5,
+    fontWeight: FontWeight.w500,
+    letterSpacing: 0.15,
+    color: AppColors.materialThemeRefNeutralVariantNeutralVariant70,
+  );
+  static const TextStyle materialThemeTitleMediumNeutral = TextStyle(
+    fontFamily: 'Gilroy',
+    fontSize: 16,
+    height: 1.5,
+    fontWeight: FontWeight.w500,
+    letterSpacing: 0.15,
+    color: AppColors.materialThemeKeyColorsNeutral,
   );
 
   /// materialThemeTitleSmall figma properties
@@ -451,13 +467,5 @@ abstract class AppTextStyle {
     height: 1.17,
     fontWeight: FontWeight.w500,
     letterSpacing: -0.25,
-  );
-  static const TextStyle materialThemeTitleMediumNeutral = TextStyle(
-    fontFamily: 'Gilroy',
-    fontSize: 16,
-    height: 1.5,
-    fontWeight: FontWeight.w500,
-    letterSpacing: 0.15,
-    color: AppColors.materialThemeKeyColorsNeutral,
   );
 }

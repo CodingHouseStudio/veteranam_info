@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:kozak/shared/shared.dart';
+import 'package:veteranam/shared/shared.dart';
 
 class ProfileCardWidget extends StatefulWidget {
   const ProfileCardWidget({
@@ -274,7 +274,7 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
           ),
           child: Row(
             children: [
-              KImage.facebook,
+              KImage.facebook(),
               KSizedBox.kWidthSizedBox8,
               Expanded(
                 child: Text(

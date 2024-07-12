@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:kozak/shared/shared.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:veteranam/shared/shared.dart';
 
 import '../../../text_dependency.dart';
 
@@ -11,11 +11,6 @@ Future<void> nawbarProfileNavigationHelper({
   expect(
     find.byKey(KWidgetkeys.widget.nawbar.iconPerson),
     findsOneWidget,
-  );
-
-  await scrollingHelper(
-    tester: tester,
-    itemKey: KWidgetkeys.widget.nawbar.iconPerson,
   );
 
   await tester.tap(find.byKey(KWidgetkeys.widget.nawbar.iconPerson));
