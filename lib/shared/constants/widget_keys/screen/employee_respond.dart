@@ -14,7 +14,7 @@ class _EmployeeRespondKeys {
   final resume = const Key('employee_respond_screen_resume');
   final upload = const Key('employee_respond_screen_upload');
   final checkPoint = const Key('employee_respond_screen_check_point');
-  final noResume = const Key('employee_respond_screen_no_resume');
+  // final noResume = const Key('employee_respond_screen_no_resume');
   final send = const Key('employee_respond_screen_send');
   final cancel = const Key('employee_respond_screen_cancel');
 }

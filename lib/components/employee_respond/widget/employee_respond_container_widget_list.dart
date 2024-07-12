@@ -22,9 +22,15 @@ List<Widget> _employeeRespondContainerWidgetList({
     KSizedBox.kHeightSizedBox8,
     TextFieldWidget(
       widgetKey: KWidgetkeys.screen.employeeRespond.emailField,
-      onChanged: null,
+      onChanged: (value) => context.read<EmployeeRespondBloc>().add(
+            EmployeeRespondEvent.emailUpdated(value),
+          ),
       hintText: context.l10n.emailHint,
       isDesk: isDesk,
+      errorText: context.read<EmployeeRespondBloc>().state.formState ==
+              EmployeeRespondEnum.invalidData
+          ? context.read<EmployeeRespondBloc>().state.email.error.value(context)
+          : null,
     ),
     if (isDesk) KSizedBox.kHeightSizedBox32 else KSizedBox.kHeightSizedBox16,
     Padding(
@@ -38,9 +44,20 @@ List<Widget> _employeeRespondContainerWidgetList({
     KSizedBox.kHeightSizedBox8,
     TextFieldWidget(
       widgetKey: KWidgetkeys.screen.employeeRespond.phoneNumberField,
-      onChanged: null,
+      onChanged: (value) => context.read<EmployeeRespondBloc>().add(
+            EmployeeRespondEvent.phoneUpdated(value),
+          ),
       hintText: context.l10n.phoneNumberHint,
       isDesk: isDesk,
+      errorText: context.read<EmployeeRespondBloc>().state.formState ==
+              EmployeeRespondEnum.invalidData
+          ? context
+              .read<EmployeeRespondBloc>()
+              .state
+              .phoneNumber
+              .error
+              .value(context)
+          : null,
     ),
     if (isDesk) KSizedBox.kHeightSizedBox32 else KSizedBox.kHeightSizedBox16,
     Padding(
@@ -53,7 +70,11 @@ List<Widget> _employeeRespondContainerWidgetList({
     ),
     KSizedBox.kHeightSizedBox8,
     TextButton.icon(
-      onPressed: null,
+      onPressed: context.read<EmployeeRespondBloc>().state.noResume
+          ? null
+          : () => context.read<EmployeeRespondBloc>().add(
+                const EmployeeRespondEvent.loadResumeClicked(),
+              ),
       style: KButtonStyles.borderButtonStyle,
       icon: Padding(
         padding: EdgeInsets.symmetric(
@@ -79,25 +100,31 @@ List<Widget> _employeeRespondContainerWidgetList({
       ),
     ),
     if (isDesk) KSizedBox.kHeightSizedBox10 else KSizedBox.kHeightSizedBox8,
-    Row(
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(
-            left: KPadding.kPaddingSize32,
-            right: KPadding.kPaddingSize16,
+    // Row(
+    //   children: [
+    //     Padding(
+    //       padding: const EdgeInsets.only(
+    //         left: KPadding.kPaddingSize32,
+    //         right: KPadding.kPaddingSize16,
+    //       ),
+    //       child:
+    CheckPointWidget(
+      key: KWidgetkeys.screen.employeeRespond.checkPoint,
+      isCheck: context.read<EmployeeRespondBloc>().state.noResume,
+      onChanged: () => context.read<EmployeeRespondBloc>().add(
+            const EmployeeRespondEvent.noResumeChanged(),
           ),
-          child: CheckPointSingleWidget(
-            key: KWidgetkeys.screen.employeeRespond.checkPoint,
-            onChanged: null,
-          ),
-        ),
-        Text(
-          key: KWidgetkeys.screen.employeeRespond.noResume,
-          context.l10n.noResume,
-          style: isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
-        ),
-      ],
+      text: context.l10n.noResume,
+      isDesk: isDesk,
     ),
+    // ),
+    //     Text(
+    //       key: KWidgetkeys.screen.employeeRespond.noResume,
+    //       context.l10n.noResume,
+    //       style: isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
+    //     ),
+    //   ],
+    // ),
     if (isDesk) KSizedBox.kHeightSizedBox32 else KSizedBox.kHeightSizedBox16,
     if (isDesk)
       Row(
@@ -123,7 +150,7 @@ Widget cancelButton({required BuildContext context, required bool isDesk}) =>
     ButtonWidget(
       key: KWidgetkeys.screen.employeeRespond.cancel,
       text: context.l10n.cancel,
-      onPressed: null,
+      onPressed: () => context.goNamedWithScroll(KRoute.workEmployee.name),
       isDesk: isDesk,
       backgroundColor: AppColors.materialThemeKeyColorsNeutral,
     );
@@ -131,7 +158,9 @@ Widget sendButton({required BuildContext context, required bool isDesk}) =>
     ButtonWidget(
       key: KWidgetkeys.screen.employeeRespond.send,
       text: context.l10n.send,
-      onPressed: null,
+      onPressed: () => context.read<EmployeeRespondBloc>().add(
+            const EmployeeRespondEvent.save(),
+          ),
       isDesk: isDesk,
       backgroundColor: AppColors.materialThemeKeyColorsNeutralVariant,
     );

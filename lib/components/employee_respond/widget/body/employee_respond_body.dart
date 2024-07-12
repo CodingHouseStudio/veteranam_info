@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:veteranam/components/employee_respond/bloc/employee_respond_bloc.dart';
 import 'package:veteranam/shared/shared.dart';
 
-part '../employee_respond_container_widget.dart';
+part '../employee_respond_container_widget_list.dart';
 
 class EmployeeRespondBodyWidget extends StatelessWidget {
   const EmployeeRespondBodyWidget({super.key});
