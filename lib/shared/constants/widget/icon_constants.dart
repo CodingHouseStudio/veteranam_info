@@ -1,8 +1,8 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
-import 'package:kozak/shared/shared.dart';
 import 'package:material_symbols_icons/symbols.dart';
+import 'package:veteranam/shared/shared.dart';
 
 class _KIcon extends Icon {
   const _KIcon(
@@ -112,4 +112,9 @@ abstract class KIcon {
     Symbols.brightness_alert,
     color: AppColors.materialThemeRefErrorError50,
   );
+  static const _KIcon report = _KIcon(Symbols.brightness_alert);
+  static const _KIcon distance = _KIcon(Symbols.distance);
+  static const _KIcon captivePortal = _KIcon(Symbols.captive_portal);
+  static const _KIcon calendarClock = _KIcon(Symbols.calendar_clock);
+  static const _KIcon user = _KIcon(Symbols.person);
 }

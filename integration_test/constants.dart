@@ -4,8 +4,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 // ignore: depend_on_referenced_packages
 import 'package:flutter_web_plugins/url_strategy.dart' show usePathUrlStrategy;
-import 'package:kozak/firebase_options_development.dart';
-import 'package:kozak/shared/shared.dart';
+import 'package:veteranam/firebase_options_development.dart';
+import 'package:veteranam/shared/shared.dart';
 
 // const String usernameCorrectIntegrationTest = 'andreytest@gmail.com';
 // const String passwordCorrectIntegrationTest = 'qwerty';

@@ -4,7 +4,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
 
-import 'package:kozak/shared/shared.dart';
+import 'package:veteranam/shared/shared.dart';
 
 part 'employee_respond_bloc.freezed.dart';
 part 'employee_respond_event.dart';
@@ -92,7 +92,7 @@ class EmployeeRespondBloc
       result.fold(
         (l) => emit(
           state.copyWith(
-            failure: l.toEmployeeRespond(),
+            //failure: l.toEmployeeRespond(),
             formState: EmployeeRespondEnum.invalidData,
           ),
         ),

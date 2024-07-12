@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:kozak/shared/shared.dart';
+import 'package:veteranam/shared/shared.dart';
 
 /// COMMENT: Helpers for scroll screen in tests
 ///
@@ -20,6 +20,7 @@ Future<void> scrollingHelper({
     await tester.drag(
       find.byKey(scrollKey ?? KWidgetkeys.widget.scaffold.scroll),
       offset,
+      warnIfMissed: false,
     );
     await tester.pumpAndSettle();
   }

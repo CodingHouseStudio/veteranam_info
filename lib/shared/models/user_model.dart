@@ -26,7 +26,7 @@ class User with _$User {
 
   /// Convenience getter to determine whether the current user is empty.
   bool get isAnonymously =>
-      this != User.empty && email != null && email!.isNotEmpty;
+      this == User.empty || email == null || email!.isEmpty;
 
   /// Convenience getter to determine whether the current user is not empty.
   bool get isNotEmpty => this != User.empty;

@@ -20,6 +20,8 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
+  static String m0(count) => "${count} more..";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "aMessage": MessageLookupByLibrary.simpleMessage("a message"),
@@ -46,6 +48,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "capitalLetter": MessageLookupByLibrary.simpleMessage(
             "must contain one or more capital letter"),
+        "cardListEmptyText": MessageLookupByLibrary.simpleMessage(
+            "Sorry, nothing was found using your filters. Try changing your search criteria"),
         "category": MessageLookupByLibrary.simpleMessage("Category"),
         "checkPointError": MessageLookupByLibrary.simpleMessage(
             "Please select one of the following answers"),
@@ -133,6 +137,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hello": MessageLookupByLibrary.simpleMessage("Hello"),
         "helloVeteran": MessageLookupByLibrary.simpleMessage("Hello, Veteran!"),
         "hide": MessageLookupByLibrary.simpleMessage("Hide"),
+        "hideExpansion": MessageLookupByLibrary.simpleMessage("hide..."),
         "homeSubtitle": MessageLookupByLibrary.simpleMessage(
             "Here you will find useful information, benefits, discounts and you can also share your story!"),
         "howToContactYou":
@@ -179,6 +184,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "mainScreen": MessageLookupByLibrary.simpleMessage("Home"),
         "message": MessageLookupByLibrary.simpleMessage("Message"),
         "more": MessageLookupByLibrary.simpleMessage("More"),
+        "moreCities": m0,
         "moreDiscounts": MessageLookupByLibrary.simpleMessage("More discounts"),
         "moreFunds": MessageLookupByLibrary.simpleMessage("More funds"),
         "moreNews": MessageLookupByLibrary.simpleMessage("More news"),
@@ -204,6 +210,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "The user with this password or address does not exist."),
         "notNecessarily":
             MessageLookupByLibrary.simpleMessage("(not necessarily)"),
+        "ofUpTo": MessageLookupByLibrary.simpleMessage("of up to"),
         "offensiveOrHatefulContent": MessageLookupByLibrary.simpleMessage(
             "Offensive or hateful content;"),
         "offerDiscount":
@@ -247,11 +254,14 @@ class MessageLookup extends MessageLookupByLibrary {
             "We have received your message and will respond to you as soon as possible."),
         "register": MessageLookupByLibrary.simpleMessage("Register"),
         "remotely": MessageLookupByLibrary.simpleMessage("Remotely"),
+        "report": MessageLookupByLibrary.simpleMessage("Report"),
         "reportPublication":
             MessageLookupByLibrary.simpleMessage("Report a publication"),
         "resetAll": MessageLookupByLibrary.simpleMessage("Reset all"),
         "respond": MessageLookupByLibrary.simpleMessage("Respond"),
         "resume": MessageLookupByLibrary.simpleMessage("Resume"),
+        "returnToTop":
+            MessageLookupByLibrary.simpleMessage("Return to the top"),
         "save": MessageLookupByLibrary.simpleMessage("Save"),
         "saveChanges": MessageLookupByLibrary.simpleMessage("Save changes"),
         "saveMoney": MessageLookupByLibrary.simpleMessage("To save money"),
@@ -289,6 +299,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "thankYou": MessageLookupByLibrary.simpleMessage("Thank you!"),
         "thankYouDescription": MessageLookupByLibrary.simpleMessage(
             "Please note! To access some services, you will need to confirm your status by showing the appropriate ID."),
+        "thatEndOfList": MessageLookupByLibrary.simpleMessage(
+            "That\'s the end of the list! We hope you found what you were looking for."),
         "thisServiceForVeterans": MessageLookupByLibrary.simpleMessage(
             "THIS SERVICE IS FOR VETERANS"),
         "thisServiceForVeteransSubtitle": MessageLookupByLibrary.simpleMessage(
@@ -311,6 +323,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "verifiedInformation":
             MessageLookupByLibrary.simpleMessage("Verified information"),
         "wage": MessageLookupByLibrary.simpleMessage("Salary*"),
+        "webSite": MessageLookupByLibrary.simpleMessage("Web site"),
         "website": MessageLookupByLibrary.simpleMessage("Website"),
         "whatKindOfProject":
             MessageLookupByLibrary.simpleMessage("What kind of project it is?"),

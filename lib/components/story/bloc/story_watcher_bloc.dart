@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:kozak/shared/shared.dart';
+import 'package:veteranam/shared/shared.dart';
 
 part 'story_watcher_bloc.freezed.dart';
 part 'story_watcher_event.dart';
@@ -70,7 +70,10 @@ class StoryWatcherBloc extends Bloc<StoryWatcherEvent, StoryWatcherState> {
     _LoadNextItems event,
     Emitter<StoryWatcherState> emit,
   ) {
-    if (state.itemsLoaded.checkLoadingPosible(state.storyModelItems)) return;
+    if (state.itemsLoaded.checkLoadingPosible(state.storyModelItems)) {
+      emit(state.copyWith(loadingStatus: LoadingStatus.listLoadedFull));
+      return;
+    }
     emit(state.copyWith(loadingStatus: LoadingStatus.loading));
     final filterItems = state.storyModelItems.loading(
       itemsLoaded: state.itemsLoaded + KDimensions.loadItems,

@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
-
-import 'package:kozak/shared/shared.dart';
+import 'package:veteranam/shared/shared.dart';
 
 class ComplaintWidget extends StatelessWidget {
-  const ComplaintWidget({required this.isDesk, super.key});
+  const ComplaintWidget({
+    required this.isDesk,
+    required this.cardEnum,
+    super.key,
+  });
   final bool isDesk;
+  final CardEnum cardEnum;
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +16,8 @@ class ComplaintWidget extends StatelessWidget {
       children: [
         IconButtonWidget(
           key: KWidgetkeys.widget.reportDialog.button,
-          onPressed: () => context.dialog.showReportDialog(isDesk: isDesk),
+          onPressed: () => context.dialog
+              .showReportDialog(isDesk: isDesk, cardEnum: cardEnum),
           icon: KIcon.brightnessAlert,
           padding: KPadding.kPaddingSize12,
           background: AppColors.materialThemeWhite,

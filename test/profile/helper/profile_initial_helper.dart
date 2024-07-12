@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:kozak/shared/constants/constants.dart';
+import 'package:veteranam/shared/shared.dart';
 
 import '../../helpers/change_window_size_helper.dart';
 

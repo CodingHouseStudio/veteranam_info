@@ -2,8 +2,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
-
-import 'package:kozak/shared/shared.dart';
+import 'package:veteranam/shared/shared.dart';
 
 /// COMMENT: Class to get, update, delete or set values in storage
 @singleton
