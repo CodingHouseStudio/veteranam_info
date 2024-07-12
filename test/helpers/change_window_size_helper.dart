@@ -11,6 +11,7 @@ Future<void> changeWindowSizeHelper({
   required WidgetTester tester,
   required Future<void> Function() test,
   bool windowsTest = false,
+  bool scrollUp = true,
 }) async {
   await tester.binding.setSurfaceSize(KTestConstants.windowDeskSize);
 
@@ -23,10 +24,12 @@ Future<void> changeWindowSizeHelper({
   await tester.pumpAndSettle();
 
   if (windowsTest) {
-    await scrollingHelper(tester: tester, offset: KTestConstants.scrollingUp);
+    if (scrollUp) {
+      await scrollingHelper(tester: tester, offset: KTestConstants.scrollingUp);
+    }
 
     await test();
   }
 }
-
+ 
 /// FOLDER FILES COMMENT: Files for widgets test or helper for test
