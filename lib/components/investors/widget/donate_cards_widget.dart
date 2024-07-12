@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:veteranam/components/components.dart';
 import 'package:veteranam/shared/shared.dart';
 
 class DonatesCardsWidget extends StatefulWidget {
@@ -62,6 +64,10 @@ class _DonatesCardsWidgetState extends State<DonatesCardsWidget> {
                               ? AppTextStyle.text24
                               : null,
                           isDesk: true,
+                          reportEvent: () =>
+                              context.read<InvestorsWatcherBloc>().add(
+                                    const InvestorsWatcherEvent.getReport(),
+                                  ),
                         ),
                       ),
                     ),

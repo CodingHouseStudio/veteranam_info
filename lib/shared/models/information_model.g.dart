@@ -21,6 +21,7 @@ _$InformationModelImpl _$$InformationModelImplFromJson(
       topicUA: json['topicUA'] as String,
       status: json['status'] as String,
       fetchDate: DateTime.parse(json['fetchDate'] as String),
+      likes: (json['likes'] as num?)?.toInt(),
       image: const ImageConverter().fromJson(json['image'] as List?),
     );
 
@@ -36,5 +37,6 @@ Map<String, dynamic> _$$InformationModelImplToJson(
       'topicUA': instance.topicUA,
       'status': instance.status,
       'fetchDate': instance.fetchDate.toIso8601String(),
+      'likes': instance.likes,
       'image': const ImageConverter().toJson(instance.image),
     };

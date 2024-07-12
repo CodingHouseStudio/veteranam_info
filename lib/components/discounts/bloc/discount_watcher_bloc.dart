@@ -15,7 +15,11 @@ class DiscountWatcherBloc
     extends Bloc<DiscountWatcherEvent, DiscountWatcherState> {
   DiscountWatcherBloc({
     required IDiscountRepository discountRepository,
+    required IReportRepository reportRepository,
+    required IAppAuthenticationRepository appAuthenticationRepository,
   })  : _discountRepository = discountRepository,
+        _reportRepository = reportRepository,
+        _appAuthenticationRepository = appAuthenticationRepository,
         super(
           const _Initial(
             discountModelItems: [],
@@ -25,6 +29,7 @@ class DiscountWatcherBloc
             itemsLoaded: 0,
             failure: null,
             filtersLocationIndex: [],
+            reportItems: [],
           ),
         ) {
     on<_Started>(_onStarted);
@@ -34,10 +39,13 @@ class DiscountWatcherBloc
     on<_FilterCategory>(_onFilterCategory);
     on<_FilterLocation>(_onFilterLocation);
     on<_FilterReset>(_onFilterReset);
+    on<_GetReport>(_onGetReport);
   }
 
   final IDiscountRepository _discountRepository;
   StreamSubscription<List<DiscountModel>>? _discountItemsSubscription;
+  final IReportRepository _reportRepository;
+  final IAppAuthenticationRepository _appAuthenticationRepository;
 
   Future<void> _onStarted(
     _Started event,
@@ -45,11 +53,14 @@ class DiscountWatcherBloc
   ) async {
     emit(state.copyWith(loadingStatus: LoadingStatus.loading));
 
+    final reportItems = await _getReport();
+
     await _discountItemsSubscription?.cancel();
     _discountItemsSubscription = _discountRepository.getDiscountItems().listen(
       (discount) => add(
         DiscountWatcherEvent.updated(
-          discount,
+          discountItemsModel: discount,
+          reportItems: reportItems,
         ),
       ),
       onError: (dynamic error) {
@@ -59,25 +70,29 @@ class DiscountWatcherBloc
     );
   }
 
-  void _onUpdated(
+  Future<void> _onUpdated(
     _Updated event,
     Emitter<DiscountWatcherState> emit,
-  ) {
+  ) async {
+    final list = event.discountItemsModel.removeReportItems(
+      checkFunction: (item) => item.id,
+      reportItems: event.reportItems,
+    );
     emit(
-      DiscountWatcherState(
-        discountModelItems: event.discountItemsModel,
+      _Initial(
+        discountModelItems: list,
         loadingStatus: LoadingStatus.loaded,
         filteredDiscountModelItems: _filter(
           categoryIndex: state.filtersCategoriesIndex,
           itemsLoaded: KDimensions.loadItems,
           locationIndex: state.filtersLocationIndex,
-          list: event.discountItemsModel,
+          list: list,
         ),
         filtersCategoriesIndex: state.filtersCategoriesIndex,
-        itemsLoaded:
-            state.itemsLoaded.getLoaded(list: event.discountItemsModel),
+        itemsLoaded: state.itemsLoaded.getLoaded(list: list),
         failure: null,
         filtersLocationIndex: state.filtersLocationIndex,
+        reportItems: event.reportItems,
       ),
     );
   }
@@ -93,8 +108,9 @@ class DiscountWatcherBloc
     emit(state.copyWith(loadingStatus: LoadingStatus.loading));
     final filterItems = _filter(
       categoryIndex: state.filtersCategoriesIndex,
-      itemsLoaded: state.itemsLoaded + KDimensions.loadItems,
+      itemsLoaded: state.itemsLoaded,
       locationIndex: state.filtersLocationIndex,
+      loadItems: KDimensions.loadItems,
     );
     emit(
       state.copyWith(
@@ -126,7 +142,7 @@ class DiscountWatcherBloc
     Emitter<DiscountWatcherState> emit,
   ) {
     final selectedFilters =
-        state.filtersCategoriesIndex.filterIndex(event.filterIndex);
+        state.filtersCategoriesIndex.changeListValue(event.filterIndex);
 
     final filterItems = _filter(
       categoryIndex: selectedFilters,
@@ -150,7 +166,7 @@ class DiscountWatcherBloc
     Emitter<DiscountWatcherState> emit,
   ) {
     final selectedFilters =
-        state.filtersLocationIndex.filterIndex(event.filterIndex);
+        state.filtersLocationIndex.changeListValue(event.filterIndex);
 
     final filterItems = _filter(
       locationIndex: selectedFilters,
@@ -174,19 +190,22 @@ class DiscountWatcherBloc
     required List<int>? locationIndex,
     required int itemsLoaded,
     List<DiscountModel>? list,
+    int? loadItems,
   }) {
     final items = list ?? state.discountModelItems;
 
     // Combine location filtering logic
-    final locationFiltered = items.where(
-      (item) =>
-          locationIndex == null ||
-          !locationIndex.contains(1) ||
-          item.discount.contains(100),
-    );
+    final locationFiltered = items
+        .where(
+          (item) =>
+              locationIndex == null ||
+              !locationIndex.contains(1) ||
+              item.discount.contains(100),
+        )
+        .toList();
 
     // Optimized sorting with null-aware conversion
-    final sortedItems = locationFiltered.toList()
+    final sortedItems = locationFiltered
       ..sort((a, b) {
         if (locationIndex != null && locationIndex.contains(0)) {
           final maxDiscountA =
@@ -228,7 +247,59 @@ class DiscountWatcherBloc
           getFilter: (item) =>
               item.location?.toList() ?? item.subLocation?._getList ?? const [],
           overallFilter: items._getLocationItems,
+          loadItems: loadItems,
         );
+  }
+
+  Future<void> _onGetReport(
+    _GetReport event,
+    Emitter<DiscountWatcherState> emit,
+  ) async {
+    // Get report items and remove them from existing items
+    final reportItems = await _getReport();
+    final list = state.discountModelItems.removeReportItems(
+      checkFunction: (item) => item.id,
+      reportItems: reportItems,
+    );
+
+    final filtersCategoriesIndex = list.updateFilterList(
+      getFilter: (item) => item.category,
+      previousList: state.discountModelItems,
+      previousFilter: state.filtersCategoriesIndex,
+    );
+    final filtersLocationIndex = list.updateFilterList(
+      getFilter: (item) =>
+          item.location?.toList() ?? item.subLocation?._getList ?? const [],
+      previousList: state.discountModelItems,
+      previousFilter: state.filtersLocationIndex,
+    );
+    final filterItems = _filter(
+      categoryIndex: filtersCategoriesIndex,
+      locationIndex: filtersLocationIndex,
+      itemsLoaded: state.itemsLoaded,
+      list: list,
+    );
+    emit(
+      state.copyWith(
+        discountModelItems: list,
+        reportItems: reportItems,
+        filteredDiscountModelItems: filterItems,
+        loadingStatus: LoadingStatus.loaded,
+        filtersCategoriesIndex: filtersCategoriesIndex,
+        filtersLocationIndex: filtersLocationIndex,
+      ),
+    );
+  }
+
+  Future<List<ReportModel>> _getReport() async {
+    final reportItems = await _reportRepository.getCardReportById(
+      cardEnum: CardEnum.discount,
+      userId: _appAuthenticationRepository.currentUser.id,
+    );
+    return reportItems.fold(
+      (l) => [],
+      (r) => r,
+    );
   }
 
   void _onFailure(

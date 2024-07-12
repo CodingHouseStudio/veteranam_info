@@ -7,6 +7,7 @@ class DonateCardWidget extends StatelessWidget {
     required this.hasSubtitle,
     required this.fundModel,
     required this.isDesk,
+    required this.reportEvent,
     super.key,
     this.titleStyle,
   });
@@ -15,6 +16,7 @@ class DonateCardWidget extends StatelessWidget {
   final bool hasSubtitle;
   final TextStyle? titleStyle;
   final bool isDesk;
+  final void Function() reportEvent;
 
   @override
   Widget build(BuildContext context) {
@@ -37,16 +39,19 @@ class DonateCardWidget extends StatelessWidget {
               child: ComplaintWidget(
                 isDesk: isDesk,
                 cardEnum: CardEnum.funds,
+                afterEvent: reportEvent,
+                cardId: fundModel.id,
               ),
             ),
-            Expanded(
-              child: fundModel.image != null
-                  ? ImageWidget(
-                      key: KWidgetkeys.widget.donateCard.image,
-                      imageUrl: fundModel.image!.downloadURL,
-                    )
-                  : const SizedBox.shrink(),
-            ),
+            if (fundModel.image != null)
+              Expanded(
+                child: ImageWidget(
+                  key: KWidgetkeys.widget.donateCard.image,
+                  imageUrl: fundModel.image!.downloadURL,
+                ),
+              )
+            else
+              const Spacer(),
             Padding(
               padding: isDesk
                   ? const EdgeInsets.symmetric(

@@ -8,40 +8,56 @@ class BoxWidget extends StatelessWidget {
     required this.isDesk,
     super.key,
     this.textRightPadding,
-    this.textIconPaddingWidget = KSizedBox.kHeightSizedBox24,
+    this.textIconPaddingWidget,
     this.icon,
+    this.iconText,
+    this.iconHasBackground = true,
+    this.background,
+    this.textStyle,
   });
 
   final String text;
+  final String? iconText;
   final void Function()? onTap;
   final bool isDesk;
   final double? textRightPadding;
   final Icon? icon;
-  final Widget textIconPaddingWidget;
+  final bool iconHasBackground;
+  final Widget? textIconPaddingWidget;
+  final Color? background;
+  final TextStyle? textStyle;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(
-        top: KPadding.kPaddingSize8,
-        right: KPadding.kPaddingSize8,
+        top: KPadding.kPaddingSize16,
+        right: KPadding.kPaddingSize16,
         bottom: isDesk ? KPadding.kPaddingSize24 : KPadding.kPaddingSize8,
         left: isDesk ? KPadding.kPaddingSize24 : KPadding.kPaddingSize16,
       ),
-      decoration: KWidgetTheme.boxDecorationCard,
+      decoration: KWidgetTheme.boxDecorationCard.copyWith(color: background),
       child: isDesk
           ? InkWell(
               onTap: onTap,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  IconWidget(
-                    key: KWidgetkeys.widget.box.icon,
-                    icon: icon ?? KIcon.arrowUpRight,
-                    padding: KPadding.kPaddingSize20,
-                    background: AppColors.materialThemeWhite,
-                  ),
-                  textIconPaddingWidget,
+                  if (iconText != null)
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            iconText!,
+                            style: AppTextStyle.materialThemeBodySmall,
+                          ),
+                        ),
+                        getIcon,
+                      ],
+                    )
+                  else
+                    getIcon,
+                  textIconPaddingWidget ?? KSizedBox.kHeightSizedBox24,
                   Align(
                     alignment: Alignment.bottomLeft,
                     child: Padding(
@@ -49,8 +65,8 @@ class BoxWidget extends StatelessWidget {
                       child: Text(
                         text,
                         key: KWidgetkeys.widget.box.text,
-                        style: AppTextStyle.materialThemeHeadlineSmall,
-                        maxLines: 1,
+                        style: textStyle ??
+                            AppTextStyle.materialThemeHeadlineSmall,
                       ),
                     ),
                   ),
@@ -79,5 +95,18 @@ class BoxWidget extends StatelessWidget {
               ),
             ),
     );
+  }
+
+  Widget get getIcon {
+    if (iconHasBackground) {
+      return IconWidget(
+        key: KWidgetkeys.widget.box.icon,
+        icon: icon ?? KIcon.arrowUpRight,
+        padding: KPadding.kPaddingSize20,
+        background: AppColors.materialThemeWhite,
+      );
+    } else {
+      return icon ?? KIcon.arrowUpRight;
+    }
   }
 }
