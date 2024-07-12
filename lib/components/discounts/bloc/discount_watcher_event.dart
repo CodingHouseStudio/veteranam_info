@@ -19,6 +19,14 @@ class DiscountWatcherEvent with _$DiscountWatcherEvent {
     int filterIndex,
   ) = _FilterLocation;
 
+  const factory DiscountWatcherEvent.filterSubcategory(
+    int filterIndex,
+  ) = _FilterSubcategory;
+
+  const factory DiscountWatcherEvent.sort(
+    SortEnum sortEnum,
+  ) = _Sort;
+
   const factory DiscountWatcherEvent.filterReset() = _FilterReset;
 
   const factory DiscountWatcherEvent.failure(dynamic failure) = _Failure;

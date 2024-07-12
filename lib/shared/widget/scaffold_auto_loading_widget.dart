@@ -20,7 +20,7 @@ class ScaffoldAutoLoadingWidget extends StatefulWidget {
   final EdgeInsetsGeometry Function({required double maxWidth})?
       mainDeskPadding;
   final void Function() loadFunction;
-  final Widget? mainRightChildWidget;
+  final Widget Function({required double maxHeight})? mainRightChildWidget;
   final String loadingButtonText;
   final bool listCanLoaded;
   final bool? cardListIsEmpty;
@@ -144,16 +144,11 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
                 sliver: widget.mainRightChildWidget != null && isDesk
                     ? RowSliver(
                         right: mainBody(mainChildWidget),
-                        left: SliverPersistentHeader(
-                          pinned: true,
-                          delegate: NawbarWidget(
-                            isDesk: isDesk,
-                            childWidget: widget.mainRightChildWidget,
-                            maxMinHeight: constraints.maxHeight,
-                            isTablet: isTablet,
-                          ),
+                        left: SliverToBoxAdapter(
+                          child: widget.mainRightChildWidget
+                              ?.call(maxHeight: constraints.maxHeight),
                         ),
-                        leftWidthPercent: 0.3,
+                        leftWidthPercent: 1 / 3,
                       )
                     : mainBody(mainChildWidget),
               ),

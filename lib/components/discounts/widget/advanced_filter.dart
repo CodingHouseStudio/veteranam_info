@@ -48,15 +48,9 @@ class AdvancedFilterMob extends StatelessWidget {
                     ),
                     //   ],
                     // ),
-                    Expanded(
-                      child: _AdvanceFilter.listView(
-                        isDesk: false,
-                        context: context,
-                      ),
-                    ),
-                    ..._AdvanceFilter.resetButton(
+                    const _ListViewWidget(
                       isDesk: false,
-                      context: context,
+                      maxHeight: double.infinity,
                     ),
                   ],
                 ),
@@ -72,7 +66,8 @@ class AdvancedFilterMob extends StatelessWidget {
 }
 
 class AdvancedFilterDesk extends StatefulWidget {
-  const AdvancedFilterDesk({super.key});
+  const AdvancedFilterDesk({required this.maxHeight, super.key});
+  final double maxHeight;
 
   @override
   State<AdvancedFilterDesk> createState() => _AdvancedFilterDeskState();
@@ -112,11 +107,10 @@ class _AdvancedFilterDeskState extends State<AdvancedFilterDesk> {
                       ),
               ),
               if (!bodyHiden) ...[
-                Expanded(
-                  child:
-                      _AdvanceFilter.listView(isDesk: true, context: context),
+                _ListViewWidget(
+                  isDesk: true,
+                  maxHeight: widget.maxHeight / 2,
                 ),
-                ..._AdvanceFilter.resetButton(isDesk: true, context: context),
               ],
             ],
           ),
@@ -127,148 +121,6 @@ class _AdvancedFilterDeskState extends State<AdvancedFilterDesk> {
 }
 
 abstract class _AdvanceFilter {
-  static Widget listView({
-    required bool isDesk,
-    required BuildContext context,
-  }) {
-    final body = _widgetList(
-      isDesk: isDesk,
-      context: context,
-    );
-    return ListView.builder(
-      key: KWidgetkeys.screen.discounts.advancedFilterList,
-      padding: isDesk
-          ? EdgeInsets.zero
-          : const EdgeInsets.all(KPadding.kPaddingSize16),
-      itemBuilder: (context, index) => body.elementAt(index),
-      itemCount: body.length,
-      semanticChildCount: body.length,
-      addAutomaticKeepAlives: false,
-      addRepaintBoundaries: false,
-    );
-  }
-
-  static List<Widget> resetButton({
-    required bool isDesk,
-    required BuildContext context,
-  }) =>
-      [
-        KSizedBox.kHeightSizedBox24,
-        Align(
-          alignment: Alignment.centerLeft,
-          child: TextButton(
-            key: KWidgetkeys.screen.discounts.advancedFilterResetButton,
-            style: KButtonStyles.borderBlackButtonStyle,
-            onPressed: () => context
-                .read<DiscountWatcherBloc>()
-                .add(const DiscountWatcherEvent.filterReset()),
-            child: Text(
-              context.l10n.resetAll,
-              style: isDesk
-                  ? AppTextStyle.materialThemeTitleLarge
-                  : AppTextStyle.materialThemeTitleMedium,
-            ),
-          ),
-        ),
-        KSizedBox.kHeightSizedBox16,
-      ];
-
-  static List<Widget> _widgetList({
-    required bool isDesk,
-    required BuildContext context,
-  }) {
-    final filterLocationIndex =
-        context.read<DiscountWatcherBloc>().state.filtersLocationIndex;
-    final location = context
-        .read<DiscountWatcherBloc>()
-        .state
-        .discountModelItems
-        .getLocationFilter(context);
-    return [
-      if (isDesk) KSizedBox.kHeightSizedBox32 else KSizedBox.kHeightSizedBox24,
-      Text(
-        context.l10n.filterApplied,
-        key: KWidgetkeys.screen.discounts.appliedFilterText,
-        style: isDesk
-            ? AppTextStyle.materialThemeTitleLarge
-            : AppTextStyle.materialThemeTitleMedium,
-      ),
-      ...List.generate(
-        filterLocationIndex.length,
-        (index) => Padding(
-          padding: const EdgeInsets.only(top: KPadding.kPaddingSize16),
-          child: Align(
-            alignment: Alignment.centerLeft,
-            child: TextButton.icon(
-              key: KWidgetkeys.screen.discounts.appliedFilterItems,
-              style: KButtonStyles.advancedFilterButtonStyle,
-              icon: KIcon.close,
-              label: Text(
-                location.elementAt(filterLocationIndex.elementAt(index)).value,
-                style: isDesk
-                    ? AppTextStyle.materialThemeBodyLarge
-                    : AppTextStyle.materialThemeBodyMedium,
-              ),
-              onPressed: () => _onChange(
-                context: context,
-                index: filterLocationIndex.elementAt(index),
-              ),
-            ),
-          ),
-        ),
-      ),
-      KSizedBox.kHeightSizedBox24,
-      Text(
-        context.l10n.discount,
-        key: KWidgetkeys.screen.discounts.discountText,
-        style: isDesk
-            ? AppTextStyle.materialThemeTitleLarge
-            : AppTextStyle.materialThemeTitleMedium,
-      ),
-      ...List.generate(
-        2,
-        (index) => Padding(
-          padding: const EdgeInsets.only(top: KPadding.kPaddingSize16),
-          child: CheckPointWidget(
-            key: KWidgetkeys.screen.discounts.discountItems,
-            onChanged: () => _onChange(context: context, index: index),
-            isCheck: _isCheck(
-              index: index,
-              filterLocationIndex: filterLocationIndex,
-            ),
-            text: location.elementAt(index).value,
-            isDesk: isDesk,
-          ),
-        ),
-      ),
-      KSizedBox.kHeightSizedBox24,
-      Text(
-        context.l10n.city,
-        key: KWidgetkeys.screen.discounts.cityText,
-        style: isDesk
-            ? AppTextStyle.materialThemeTitleLarge
-            : AppTextStyle.materialThemeTitleMedium,
-      ),
-      ...List.generate(
-        location.length - 2,
-        (index) {
-          final i = index + 2;
-          return Padding(
-            padding: const EdgeInsets.only(top: KPadding.kPaddingSize16),
-            child: CheckPointAmountWidget(
-              key: KWidgetkeys.screen.discounts.cityItems,
-              onChanged: () => _onChange(context: context, index: i),
-              isCheck:
-                  _isCheck(index: i, filterLocationIndex: filterLocationIndex),
-              filterItem: location.elementAt(i),
-              isDesk: isDesk,
-            ),
-          );
-        },
-      ),
-    ];
-  }
-
   static Widget button({
     required bool isDesk,
     required void Function() onPressed,
@@ -312,6 +164,252 @@ abstract class _AdvanceFilter {
           //if (isDesk) KIcon.meil,
         ),
       );
+}
+
+class _ListViewWidget extends StatefulWidget {
+  const _ListViewWidget({
+    required this.isDesk,
+    required this.maxHeight,
+  });
+  final bool isDesk;
+  final double maxHeight;
+
+  @override
+  _ListViewWidgetState createState() => _ListViewWidgetState();
+}
+
+class _ListViewWidgetState extends State<_ListViewWidget> {
+  final ScrollController _scrollController = ScrollController();
+  late List<bool> openFilter;
+  late List<FilterItem> location;
+
+  @override
+  void initState() {
+    openFilter = [true, false, true, false];
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final body = _body;
+
+    return Column(
+      key: KWidgetkeys.screen.discounts.advancedFilterList,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: body,
+    );
+  }
+
+  List<Widget> get _body {
+    final filterLocationIndex =
+        context.read<DiscountWatcherBloc>().state.filtersLocationIndex;
+    final filtersSubcategoriesIndex =
+        context.read<DiscountWatcherBloc>().state.filtersSubcategoriesIndex;
+    location = context
+        .read<DiscountWatcherBloc>()
+        .state
+        .discountModelItems
+        .getLocationFilter(context);
+    final subcategory = context
+        .read<DiscountWatcherBloc>()
+        .state
+        .discountModelItems
+        .overallItems(
+          getFilter: (item) => item.subcategory,
+          context: context,
+          getUAFilter: (item) => item.subcategoryUA,
+        );
+    final uniqueFirstLetters = location.extractValues.uniqueFirstLetters;
+    return [
+      if (widget.isDesk)
+        KSizedBox.kHeightSizedBox32
+      else
+        KSizedBox.kHeightSizedBox24,
+      Row(
+        children: [
+          if (filterLocationIndex.isNotEmpty) ...[
+            Expanded(
+              child: Text(
+                context.l10n.filterApplied,
+                key: KWidgetkeys.screen.discounts.appliedFilterText,
+                style: widget.isDesk
+                    ? AppTextStyle.materialThemeTitleLarge
+                    : AppTextStyle.materialThemeTitleMedium,
+              ),
+            ),
+            KSizedBox.kWidthSizedBox4,
+          ],
+          _resetButton,
+        ],
+      ),
+      if (filterLocationIndex.isNotEmpty) ...[
+        ...List.generate(
+          filterLocationIndex.length,
+          (index) => Padding(
+            padding: const EdgeInsets.only(top: KPadding.kPaddingSize16),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: TextButton.icon(
+                key: KWidgetkeys.screen.discounts.appliedFilterItems,
+                style: KButtonStyles.advancedFilterButtonStyle,
+                icon: KIcon.close,
+                label: Text(
+                  location
+                      .elementAt(filterLocationIndex.elementAt(index))
+                      .value,
+                  style: widget.isDesk
+                      ? AppTextStyle.materialThemeBodyLarge
+                      : AppTextStyle.materialThemeBodyMedium,
+                ),
+                onPressed: () => _onChange(
+                  context: context,
+                  index: filterLocationIndex.elementAt(index),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
+      KSizedBox.kHeightSizedBox32,
+      button(
+        index: 0,
+        text: context.l10n.discount,
+        key: KWidgetkeys.screen.discounts.discountText,
+      ),
+      if (openFilter.elementAt(0))
+        ...List.generate(
+          2,
+          (index) => Padding(
+            padding: const EdgeInsets.only(top: KPadding.kPaddingSize16),
+            child: CheckPointWidget(
+              key: KWidgetkeys.screen.discounts.discountItems,
+              onChanged: () => _onChange(context: context, index: index),
+              isCheck: _isCheck(
+                index: index,
+                filterLocationIndex: filterLocationIndex,
+              ),
+              text: location.elementAt(index).value,
+              isDesk: widget.isDesk,
+            ),
+          ),
+        ),
+      KSizedBox.kHeightSizedBox32,
+      button(
+        index: 1,
+        text: context.l10n.subcategory,
+        key: Key('value'),
+      ),
+      if (openFilter.elementAt(1))
+        ConstrainedBox(
+          constraints: BoxConstraints(maxHeight: widget.maxHeight),
+          child: ListView.builder(
+            itemCount: subcategory.length,
+            semanticChildCount: subcategory.length,
+            itemBuilder: (context, index) => Padding(
+              padding: const EdgeInsets.only(top: KPadding.kPaddingSize16),
+              child: CheckPointWidget(
+                key: KWidgetkeys.screen.discounts.cityItems,
+                onChanged: () => context
+                    .read<DiscountWatcherBloc>()
+                    .add(DiscountWatcherEvent.filterSubcategory(index)),
+                isCheck: filtersSubcategoriesIndex.contains(index),
+                text: subcategory.elementAt(index).value,
+                isDesk: widget.isDesk,
+              ),
+            ),
+            addAutomaticKeepAlives: false,
+            addRepaintBoundaries: false,
+            shrinkWrap: true,
+          ),
+        ),
+      KSizedBox.kHeightSizedBox32,
+      button(
+        index: 2,
+        text: context.l10n.city,
+        key: KWidgetkeys.screen.discounts.cityText,
+      ),
+      if (openFilter.elementAt(2)) ...[
+        KSizedBox.kHeightSizedBox16,
+        Wrap(
+          spacing: KPadding.kPaddingSize8,
+          children: List.generate(
+            uniqueFirstLetters.length,
+            (index) => InkWell(
+              onTap: () => _scrollToLetter(uniqueFirstLetters.elementAt(index)),
+              child: Text(
+                uniqueFirstLetters.elementAt(index).toUpperCase(),
+                style: AppTextStyle.materialThemeTitleMediumNeutralVariant70,
+              ),
+            ),
+          ),
+        ),
+        ConstrainedBox(
+          constraints: BoxConstraints(maxHeight: widget.maxHeight),
+          child: ListView.builder(
+            itemCount: location.length,
+            semanticChildCount: location.length,
+            controller: _scrollController,
+            padding: const EdgeInsets.only(right: KPadding.kPaddingSize16),
+            itemBuilder: (context, index) {
+              return Padding(
+                padding: const EdgeInsets.only(top: KPadding.kPaddingSize16),
+                child: CheckPointAmountWidget(
+                  key: KWidgetkeys.screen.discounts.cityItems,
+                  onChanged: () => _onChange(context: context, index: index),
+                  isCheck: _isCheck(
+                    index: index,
+                    filterLocationIndex: filterLocationIndex,
+                  ),
+                  filterItem: location.elementAt(index),
+                  isDesk: widget.isDesk,
+                ),
+              );
+            },
+            addAutomaticKeepAlives: false,
+            addRepaintBoundaries: false,
+            shrinkWrap: true,
+          ),
+        ),
+      ],
+    ];
+  }
+
+  void _scrollToLetter(String letter) {
+    final index =
+        location.indexWhere((element) => element.value.startsWith(letter));
+    if (index != -1) {
+      _scrollController.animateTo(
+        index * 48.0,
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.easeInOut,
+      );
+    }
+  }
+
+  Widget button({
+    required int index,
+    required String text,
+    required Key key,
+  }) =>
+      TextButton.icon(
+        key: key,
+        style: KButtonStyles.doubleButtonStyle,
+        onPressed: () => setState(() {
+          openFilter[index] = !openFilter[index];
+        }),
+        label: IconWidget(
+          icon: openFilter.elementAt(index) ? KIcon.minus : KIcon.plus,
+          padding: KPadding.kPaddingSize8,
+          background: AppColors.materialThemeKeyColorsNeutral,
+        ),
+        icon: Text(
+          text,
+          key: KWidgetkeys.screen.discounts.discountText,
+          style: widget.isDesk
+              ? AppTextStyle.materialThemeTitleLarge
+              : AppTextStyle.materialThemeTitleMedium,
+        ),
+      );
 
   static bool _isCheck({
     required int index,
@@ -323,4 +421,19 @@ abstract class _AdvanceFilter {
       context
           .read<DiscountWatcherBloc>()
           .add(DiscountWatcherEvent.filterLocation(index));
+
+  Widget get _resetButton => Align(
+        alignment: Alignment.centerLeft,
+        child: TextButton(
+          key: KWidgetkeys.screen.discounts.advancedFilterResetButton,
+          style: KButtonStyles.borderBlackButtonStyle,
+          onPressed: () => context
+              .read<DiscountWatcherBloc>()
+              .add(const DiscountWatcherEvent.filterReset()),
+          child: Text(
+            context.l10n.resetAll,
+            style: AppTextStyle.materialThemeTitleMedium,
+          ),
+        ),
+      );
 }

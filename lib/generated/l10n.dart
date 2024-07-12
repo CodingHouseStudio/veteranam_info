@@ -2210,6 +2210,16 @@ class AppLocalizations {
     );
   }
 
+  /// `Subcategory`
+  String get subcategory {
+    return Intl.message(
+      'Subcategory',
+      name: 'subcategory',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `We're sorry, there was an unforeseen error.`
   String get error {
     return Intl.message(

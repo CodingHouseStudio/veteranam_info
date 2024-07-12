@@ -296,6 +296,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Share your story and we will publish it on our website. All stories are moderated and will be published after review."),
         "storySubtitle": MessageLookupByLibrary.simpleMessage(
             "In this section, you can share your life and service stories anonymously or openly. You can also support other participants."),
+        "subcategory": MessageLookupByLibrary.simpleMessage("Subcategory"),
         "support": MessageLookupByLibrary.simpleMessage("Support"),
         "supportOurVeterans":
             MessageLookupByLibrary.simpleMessage("Support our veterans"),

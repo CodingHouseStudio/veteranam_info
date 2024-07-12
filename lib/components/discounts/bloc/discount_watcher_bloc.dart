@@ -21,7 +21,7 @@ class DiscountWatcherBloc
         _reportRepository = reportRepository,
         _appAuthenticationRepository = appAuthenticationRepository,
         super(
-          const _Initial(
+          const DiscountWatcherState(
             discountModelItems: [],
             loadingStatus: LoadingStatus.initial,
             filteredDiscountModelItems: [],
@@ -30,6 +30,7 @@ class DiscountWatcherBloc
             failure: null,
             filtersLocationIndex: [],
             reportItems: [],
+            filtersSubcategoriesIndex: [],
           ),
         ) {
     on<_Started>(_onStarted);
@@ -38,6 +39,7 @@ class DiscountWatcherBloc
     on<_LoadNextItems>(_onLoadNextItems);
     on<_FilterCategory>(_onFilterCategory);
     on<_FilterLocation>(_onFilterLocation);
+    on<_FilterSubcategory>(_onFilterSubcategory);
     on<_FilterReset>(_onFilterReset);
     on<_GetReport>(_onGetReport);
   }
@@ -79,7 +81,7 @@ class DiscountWatcherBloc
       reportItems: event.reportItems,
     );
     emit(
-      _Initial(
+      DiscountWatcherState(
         discountModelItems: list,
         loadingStatus: LoadingStatus.loaded,
         filteredDiscountModelItems: _filter(
@@ -87,12 +89,14 @@ class DiscountWatcherBloc
           itemsLoaded: KDimensions.loadItems,
           locationIndex: state.filtersLocationIndex,
           list: list,
+          subcategoriesIndex: state.filtersSubcategoriesIndex,
         ),
         filtersCategoriesIndex: state.filtersCategoriesIndex,
         itemsLoaded: state.itemsLoaded.getLoaded(list: list),
         failure: null,
         filtersLocationIndex: state.filtersLocationIndex,
         reportItems: event.reportItems,
+        filtersSubcategoriesIndex: state.filtersSubcategoriesIndex,
       ),
     );
   }
@@ -111,6 +115,7 @@ class DiscountWatcherBloc
       itemsLoaded: state.itemsLoaded,
       locationIndex: state.filtersLocationIndex,
       loadItems: KDimensions.loadItems,
+      subcategoriesIndex: state.filtersSubcategoriesIndex,
     );
     emit(
       state.copyWith(
@@ -133,6 +138,7 @@ class DiscountWatcherBloc
         ),
         filtersCategoriesIndex: [],
         filtersLocationIndex: [],
+        filtersSubcategoriesIndex: [],
       ),
     );
   }
@@ -148,12 +154,38 @@ class DiscountWatcherBloc
       categoryIndex: selectedFilters,
       itemsLoaded: state.itemsLoaded,
       locationIndex: state.filtersLocationIndex,
+      subcategoriesIndex: state.filtersSubcategoriesIndex,
     );
 
     emit(
       state.copyWith(
         filteredDiscountModelItems: filterItems,
         filtersCategoriesIndex: selectedFilters,
+        itemsLoaded: state.itemsLoaded.getLoaded(list: filterItems),
+        loadingStatus:
+            filterItems.isLoadingFilter(state.filteredDiscountModelItems),
+      ),
+    );
+  }
+
+  void _onFilterSubcategory(
+    _FilterSubcategory event,
+    Emitter<DiscountWatcherState> emit,
+  ) {
+    final selectedFilters =
+        state.filtersSubcategoriesIndex.changeListValue(event.filterIndex);
+
+    final filterItems = _filter(
+      categoryIndex: state.filtersCategoriesIndex,
+      itemsLoaded: state.itemsLoaded,
+      locationIndex: state.filtersLocationIndex,
+      subcategoriesIndex: selectedFilters,
+    );
+
+    emit(
+      state.copyWith(
+        filteredDiscountModelItems: filterItems,
+        filtersSubcategoriesIndex: selectedFilters,
         itemsLoaded: state.itemsLoaded.getLoaded(list: filterItems),
         loadingStatus:
             filterItems.isLoadingFilter(state.filteredDiscountModelItems),
@@ -172,6 +204,7 @@ class DiscountWatcherBloc
       locationIndex: selectedFilters,
       itemsLoaded: state.itemsLoaded,
       categoryIndex: state.filtersCategoriesIndex,
+      subcategoriesIndex: state.filtersSubcategoriesIndex,
     );
 
     emit(
@@ -187,6 +220,7 @@ class DiscountWatcherBloc
 
   List<DiscountModel> _filter({
     required List<int>? categoryIndex,
+    required List<int>? subcategoriesIndex,
     required List<int>? locationIndex,
     required int itemsLoaded,
     List<DiscountModel>? list,
@@ -195,46 +229,46 @@ class DiscountWatcherBloc
     final items = list ?? state.discountModelItems;
 
     // Combine location filtering logic
-    final locationFiltered = items
-        .where(
-          (item) =>
-              locationIndex == null ||
-              !locationIndex.contains(1) ||
-              item.discount.contains(100),
-        )
-        .toList();
+    // final locationFiltered = items
+    //     .where(
+    //       (item) =>
+    //           locationIndex == null ||
+    //           !locationIndex.contains(1) ||
+    //           item.discount.contains(100),
+    //     )
+    //     .toList();
 
     // Optimized sorting with null-aware conversion
-    final sortedItems = locationFiltered
-      ..sort((a, b) {
-        if (locationIndex != null && locationIndex.contains(0)) {
-          final maxDiscountA =
-              a.discount.isNotEmpty == true ? a.discount.reduce(max) : 0;
-          final maxDiscountB =
-              b.discount.isNotEmpty == true ? b.discount.reduce(max) : 0;
+    // final sortedItems = items
+    //   ..sort((a, b) {
+    //     // if (locationIndex != null && locationIndex.contains(0)) {
+    //     //   final maxDiscountA =
+    //     //       a.discount.isNotEmpty == true ? a.discount.reduce(max) : 0;
+    //     //   final maxDiscountB =
+    //     //       b.discount.isNotEmpty == true ? b.discount.reduce(max) : 0;
 
-          if (maxDiscountA != maxDiscountB) {
-            return maxDiscountB.compareTo(maxDiscountA); // Descending order
-          }
-        }
+    //     //   if (maxDiscountA != maxDiscountB) {
+    //     //     return maxDiscountB.compareTo(maxDiscountA); // Descending order
+    //     //   }
+    //     // }
 
-        final dateComparison = b.dateVerified.compareTo(a.dateVerified);
-        if (dateComparison == 0) {
-          // Attempt int conversion using null-aware operators
-          final idA = int.tryParse(a.id);
-          final idB = int.tryParse(b.id);
+    //     final dateComparison = b.dateVerified.compareTo(a.dateVerified);
+    //     if (dateComparison == 0) {
+    //       // Attempt int conversion using null-aware operators
+    //       final idA = int.tryParse(a.id);
+    //       final idB = int.tryParse(b.id);
 
-          if (idA != null && idB != null) {
-            return idB.compareTo(idA); // Descending order
-          } else {
-            return 1;
-          }
-        }
-        return dateComparison;
-      });
+    //       if (idA != null && idB != null) {
+    //         return idB.compareTo(idA); // Descending order
+    //       } else {
+    //         return 1;
+    //       }
+    //     }
+    //     return dateComparison;
+    //   });
 
     // Apply category and location filtering (chained)
-    return sortedItems
+    return items
         .loadingFilter(
           filtersIndex: categoryIndex,
           itemsLoaded: null,
@@ -242,10 +276,18 @@ class DiscountWatcherBloc
           fullList: items,
         )
         .loadingFilter(
-          filtersIndex: locationIndex?.where((element) => element > 1).toList(),
+          filtersIndex: subcategoriesIndex,
+          itemsLoaded: null,
+          getFilter: (item) => item.subcategory,
+          fullList: items,
+        )
+        .loadingFilter(
+          filtersIndex: locationIndex,
           itemsLoaded: itemsLoaded,
-          getFilter: (item) =>
-              item.location?.toList() ?? item.subLocation?._getList ?? const [],
+          getFilter: (item) => [
+            if (item.location != null) ...item.location!,
+            if (item.subLocation != null) ...item.subLocation!._getList,
+          ],
           overallFilter: items._getLocationItems,
           loadItems: loadItems,
         );
@@ -278,6 +320,7 @@ class DiscountWatcherBloc
       locationIndex: filtersLocationIndex,
       itemsLoaded: state.itemsLoaded,
       list: list,
+      subcategoriesIndex: state.filtersSubcategoriesIndex,
     );
     emit(
       state.copyWith(

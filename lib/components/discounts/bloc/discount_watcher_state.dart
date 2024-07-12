@@ -5,12 +5,21 @@ enum DiscountFailure {
   report,
 }
 
+enum SortEnum {
+  reverse,
+  free,
+  old,
+  indefinitely,
+  expired,
+}
+
 @freezed
 class DiscountWatcherState with _$DiscountWatcherState {
   const factory DiscountWatcherState({
     required List<DiscountModel> discountModelItems,
     required List<DiscountModel> filteredDiscountModelItems,
     required List<int> filtersCategoriesIndex,
+    required List<int> filtersSubcategoriesIndex,
     required List<int> filtersLocationIndex,
     required LoadingStatus loadingStatus,
     required int itemsLoaded,
@@ -21,8 +30,8 @@ class DiscountWatcherState with _$DiscountWatcherState {
 
 extension LocationGetter on List<DiscountModel> {
   List<dynamic> get _getLocationItems => <dynamic>[
-        '',
-        '',
+        // '',
+        // '',
         SubLocation.allStoresOfChain,
         SubLocation.online,
         ...overallItemBloc(

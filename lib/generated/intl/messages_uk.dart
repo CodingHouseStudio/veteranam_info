@@ -307,6 +307,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Поділіться своєю історією і ми опублікуємо її на нашому веб сайті. Всі історії проходять модерацію і будуть опубліковані після перевірки."),
         "storySubtitle": MessageLookupByLibrary.simpleMessage(
             "У цьому розділі ти можеш поділитися історіями з життя і служби анонімно або відкрито. А також підтримати інших учасників."),
+        "subcategory": MessageLookupByLibrary.simpleMessage("Підкатегорії"),
         "support": MessageLookupByLibrary.simpleMessage("Підтримати"),
         "supportOurVeterans":
             MessageLookupByLibrary.simpleMessage("Підтримайте наших ветеранів"),

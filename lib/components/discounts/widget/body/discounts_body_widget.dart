@@ -74,8 +74,9 @@ class DiscountBodyWidget extends StatelessWidget {
             else
               KSizedBox.kHeightSizedBox24,
           ],
-          mainRightChildWidget: AdvancedFilterDesk(
+          mainRightChildWidget: ({required maxHeight}) => AdvancedFilterDesk(
             key: KWidgetkeys.screen.discounts.advancedFilter,
+            maxHeight: maxHeight,
           ),
           mainChildWidgetsFunction: ({required isDesk}) => [
             if (_.discountModelItems.isEmpty &&

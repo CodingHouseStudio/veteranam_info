@@ -129,18 +129,67 @@ extension ListExtensions<T> on List<T> {
   }) {
     final allFilters = <FilterItem>[];
     for (final item in this) {
+      final filters =
+          (context.read<AuthenticationBloc>().state.userSetting.locale ==
+                      Language.english ||
+                  getUAFilter == null)
+              ? getFilter(item)
+              : getUAFilter(item);
+
       allFilters.addAll(
-        (context.read<AuthenticationBloc>().state.userSetting.locale ==
-                        Language.english ||
-                    getUAFilter == null
-                ? getFilter(item)
-                : getUAFilter(item))
-            .map(
-          FilterItem.new,
-        ),
+        filters.map(FilterItem.new),
       );
     }
-    return allFilters.getToSet;
+    return allFilters.getToSet
+      ..alphabetSorting(
+        (item) => item.value,
+      );
+  }
+
+  void alphabetSorting(
+    String Function(T) getValue,
+  ) {
+    final ukrainianAlphabet = [
+      'а',
+      'б',
+      'в',
+      'г',
+      'ґ',
+      'д',
+      'е',
+      'є',
+      'ж',
+      'з',
+      'и',
+      'і',
+      'ї',
+      'й',
+      'к',
+      'л',
+      'м',
+      'н',
+      'о',
+      'п',
+      'р',
+      'с',
+      'т',
+      'у',
+      'ф',
+      'х',
+      'ц',
+      'ч',
+      'ш',
+      'щ',
+      'ь',
+      'ю',
+      'я',
+    ];
+
+    sort((a, b) {
+      return ukrainianAlphabet
+          .indexOf(getValue(a)[0].toLowerCase())
+          .compareTo(ukrainianAlphabet.indexOf(getValue(b)[0].toLowerCase()));
+    });
   }
 
   LoadingStatus isLoading(
@@ -259,8 +308,8 @@ extension DiscountModelExtensions on List<DiscountModel> {
   List<FilterItem> getLocationFilter(BuildContext context) {
     final list = context.read<DiscountWatcherBloc>().state.discountModelItems;
     return [
-      FilterItem(context.l10n.fromLargestToSmallest),
-      FilterItem(context.l10n.free),
+      // FilterItem(context.l10n.fromLargestToSmallest),
+      // FilterItem(context.l10n.free),
       ...list.overallItems(
         getFilter: (item) => item.subLocation.getList(context),
         context: context,
@@ -283,4 +332,26 @@ extension DiscountModelExtensions on List<DiscountModel> {
   //   }
   //   return allTags.toSet().toList();
   // }
+}
+
+extension ListStringExtension on List<String> {
+  List<String> get uniqueFirstLetters {
+    final uniqueLetters = <String>[];
+    for (final item in this) {
+      if (item.isNotEmpty) {
+        uniqueLetters.add(item[0].toUpperCase());
+      }
+    }
+
+    return uniqueLetters.toSet().toList()
+      ..alphabetSorting(
+        (item) => item,
+      );
+  }
+}
+
+extension ListFilterExtension on List<FilterItem> {
+  List<String> get extractValues {
+    return map((filterItem) => filterItem.value).toList();
+  }
 }
