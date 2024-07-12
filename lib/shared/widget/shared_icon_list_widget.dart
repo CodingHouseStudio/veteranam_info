@@ -29,7 +29,8 @@ class SharedIconListWidget extends StatelessWidget {
           label: context.l10n.webSite,
           context,
           onPressed: () async {
-            if (await canLaunchUrl(Uri.parse(link))) {
+            final linkParse = await canLaunchUrl(Uri.parse(link));
+            if (linkParse) {
               await launchUrl(
                 Uri.parse(link),
               );

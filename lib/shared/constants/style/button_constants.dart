@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:veteranam/shared/constants/constants.dart';
 import 'package:veteranam/shared/shared.dart';
 
 abstract class KButtonStyles {
@@ -317,6 +318,18 @@ abstract class KButtonStyles {
     ),
   );
   static const footerButtonTransparent = ButtonStyle(
+    overlayColor: WidgetStatePropertyAll(Colors.transparent),
+  );
+  static const discountCityButtonStyle = ButtonStyle(
+    backgroundColor: WidgetStatePropertyAll(AppColors.materialThemeWhite),
+    shape: WidgetStatePropertyAll(
+      RoundedRectangleBorder(
+        borderRadius: KBorderRadius.kBorderRadius32,
+      ),
+    ),
+    side: WidgetStatePropertyAll(
+      BorderSide(color: AppColors.materialThemeKeyColorsNeutral),
+    ),
     overlayColor: WidgetStatePropertyAll(Colors.transparent),
   );
 }

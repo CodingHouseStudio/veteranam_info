@@ -424,7 +424,12 @@ abstract class FooterWidget {
         IconButtonWidget(
           key: linkedInKey,
           onPressed: () async {
-            if (await canLaunchUrl(Uri.parse(KAppText.linkedIn))) {
+            final linkedInLinkParse = await canLaunchUrl(
+              Uri.parse(
+                KAppText.linkedIn,
+              ),
+            );
+            if (linkedInLinkParse) {
               await launchUrl(
                 Uri.parse(KAppText.linkedIn),
                 mode: LaunchMode.externalApplication,
@@ -438,7 +443,9 @@ abstract class FooterWidget {
         IconButtonWidget(
           key: instagramKey,
           onPressed: () async {
-            if (await canLaunchUrl(Uri.parse(KAppText.instagram))) {
+            final instagramLinkParse =
+                await canLaunchUrl(Uri.parse(KAppText.instagram));
+            if (instagramLinkParse) {
               await launchUrl(
                 Uri.parse(KAppText.instagram),
                 mode: LaunchMode.externalApplication,
@@ -452,7 +459,9 @@ abstract class FooterWidget {
         IconButtonWidget(
           key: facebookKey,
           onPressed: () async {
-            if (await canLaunchUrl(Uri.parse(KAppText.facebook))) {
+            final facebookLinkParse =
+                await canLaunchUrl(Uri.parse(KAppText.facebook));
+            if (facebookLinkParse) {
               await launchUrl(
                 Uri.parse(KAppText.facebook),
                 mode: LaunchMode.externalApplication,

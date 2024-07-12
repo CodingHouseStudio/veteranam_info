@@ -16,6 +16,14 @@ class CityWidgetList extends StatefulWidget {
 }
 
 class _CityWidgetListState extends State<CityWidgetList> {
+  String? get cityList {
+    String? cityText = widget.discountModel.location!.first;
+    if ((widget.discountModel.location ?? []).length > 1) {
+      isExpanded ? cityText += ' | ' : cityText += '';
+    }
+    return cityText;
+  }
+
   bool isExpanded = false;
   @override
   void initState() {
@@ -27,37 +35,28 @@ class _CityWidgetListState extends State<CityWidgetList> {
   Widget build(BuildContext context) {
     return Align(
       alignment: widget.isDesk ? Alignment.centerRight : Alignment.centerLeft,
-      child: GestureDetector(
-        onTap: () {
+      child: TextButton.icon(
+        style: KButtonStyles.discountCityButtonStyle,
+        onPressed: () {
           setState(() {
             isExpanded = !isExpanded;
           });
         },
-        child: Container(
-          padding: const EdgeInsets.only(
-            top: KPadding.kPaddingSize8,
-            left: KPadding.kPaddingSize16,
-            right: KPadding.kPaddingSize16,
+        icon: KIcon.distance,
+        label: Padding(
+          padding: const EdgeInsets.symmetric(
+            vertical: KPadding.kPaddingSize10,
           ),
-          decoration: KWidgetTheme.boxDecorationDiscountContainer,
           child: Wrap(
             children: [
-              const Padding(
-                padding: EdgeInsets.only(
-                  bottom: KPadding.kPaddingSize4,
-                ),
-                child: KIcon.distance,
-              ),
-              KSizedBox.kWidthSizedBox4,
               if (widget.discountModel.location?.isEmpty ?? true)
                 Text(
                   widget.discountModel.subLocation.getList(context).first,
                   style: AppTextStyle.materialThemeLabelLarge,
-                ),
-              if (widget.discountModel.location?.isNotEmpty ?? false)
+                )
+              else
                 Text(
-                  widget.discountModel.location!.first +
-                      (isExpanded ? ' | ' : ''),
+                  cityList!,
                   style: AppTextStyle.materialThemeLabelLarge,
                 ),
               if (isExpanded)
@@ -68,32 +67,28 @@ class _CityWidgetListState extends State<CityWidgetList> {
                   ),
                 ),
               if ((widget.discountModel.location ?? []).length > 1)
-                if (widget.isDesk)
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      left: KPadding.kPaddingSize8,
-                      bottom: KPadding.kPaddingSize8,
-                    ),
-                    child: Text(
-                      isExpanded
-                          ? context.l10n.hideExpansion
-                          : context.l10n.moreCities(
-                              (widget.discountModel.location ?? []).length - 1,
-                            ),
-                      style: AppTextStyle.materialThemeLabelLarge.copyWith(
-                        decoration: TextDecoration.underline,
-                        color: AppColors.materialThemeRefTertiaryTertiary40,
-                      ),
-                    ),
-                  )
-                else
-                  const Padding(
-                    padding: EdgeInsets.only(
-                      left: KPadding.kPaddingSize8,
-                      bottom: KPadding.kPaddingSize8,
-                    ),
-                    child: Text(''),
+                //if (widget.isDesk)
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: KPadding.kPaddingSize8,
                   ),
+                  child: Text(
+                    isExpanded
+                        ? widget.isDesk
+                            ? context.l10n.hideExpansion
+                            : ''
+                        : widget.isDesk
+                            ? context.l10n.moreCities(
+                                (widget.discountModel.location ?? []).length -
+                                    1,
+                              )
+                            : '...',
+                    style: AppTextStyle.materialThemeLabelLarge.copyWith(
+                      decoration: TextDecoration.underline,
+                      color: AppColors.materialThemeRefTertiaryTertiary40,
+                    ),
+                  ),
+                ),
             ],
           ),
         ),
