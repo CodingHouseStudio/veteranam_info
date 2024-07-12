@@ -84,7 +84,7 @@ void main() {
       when(
         mockSnapshotMetadata.isFromCache,
       ).thenAnswer(
-        (_) => false,
+        (_) => true,
       );
 
       FirestoreService.firebaseFirestore = mockFirebaseFirestore;
@@ -126,12 +126,12 @@ void main() {
       verify(
         mockQueryDocumentSnapshot.first.data(),
       ).called(1);
-      // verify(
-      //   mockQuerySnapshot.metadata,
-      // ).called(1);
-      // verify(
-      //   mockSnapshotMetadata.isFromCache,
-      // ).called(1);
+      verify(
+        mockQuerySnapshot.metadata,
+      ).called(1);
+      verify(
+        mockSnapshotMetadata.isFromCache,
+      ).called(1);
 
       expect(
         firestoreService.getWorks(),

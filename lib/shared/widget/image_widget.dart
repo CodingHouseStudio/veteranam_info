@@ -58,7 +58,7 @@ class _ImageWidgetState extends State<ImageWidget> {
         );
       },
       errorBuilder: (context, error, stackTrace) {
-        debugPrint('Image load error: $error');
+        // debugPrint('Image load error: $error');
         return const Icon(Icons.error);
       },
     );

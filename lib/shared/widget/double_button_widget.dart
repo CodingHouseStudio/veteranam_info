@@ -15,6 +15,8 @@ class DoubleButtonWidget extends StatelessWidget {
     this.textColor,
     this.hasAlign = true,
     this.mobTextWidth,
+    this.mobIconPadding,
+    this.align,
   });
   final String text;
   final Color? color;
@@ -25,12 +27,14 @@ class DoubleButtonWidget extends StatelessWidget {
   final bool hasAlign;
   final double? mobVerticalTextPadding;
   final double? mobTextWidth;
+  final double? mobIconPadding;
+  final Alignment? align;
 
   @override
   Widget build(BuildContext context) {
     if (hasAlign) {
       return Align(
-        alignment: Alignment.centerLeft,
+        alignment: align ?? Alignment.centerLeft,
         child: _body,
       );
     } else {
@@ -54,6 +58,7 @@ class DoubleButtonWidget extends StatelessWidget {
           widgetKey: widgetKey,
           verticalTextPadding: mobVerticalTextPadding,
           textWidth: mobTextWidth,
+          iconPadding: mobIconPadding,
         );
 }
 
@@ -158,6 +163,7 @@ class _DoubleButtonWidgetMob extends StatelessWidget {
     this.textColor,
     this.color,
     this.textWidth,
+    this.iconPadding,
   });
   final String text;
   final Color? color;
@@ -166,9 +172,11 @@ class _DoubleButtonWidgetMob extends StatelessWidget {
   final Key widgetKey;
   final double? verticalTextPadding;
   final double? textWidth;
+  final double? iconPadding;
 
   @override
   Widget build(BuildContext context) {
+    final iconPaddingValue = iconPadding ?? KPadding.kPaddingSize8;
     return TextButton(
       key: widgetKey,
       onPressed: onPressed,
@@ -178,7 +186,11 @@ class _DoubleButtonWidgetMob extends StatelessWidget {
         children: [
           Container(
             width: textWidth,
-            margin: const EdgeInsets.only(right: KPadding.kPaddingSize36),
+            margin: EdgeInsets.only(
+              right: KPadding.kPaddingSize24 +
+                  (iconPaddingValue * 2) -
+                  KSize.kPixel8,
+            ),
             decoration: KWidgetTheme.boxDecorationGreen.copyWith(color: color),
             padding: EdgeInsets.symmetric(
               horizontal: KPadding.kPaddingSize30,
@@ -197,7 +209,7 @@ class _DoubleButtonWidgetMob extends StatelessWidget {
               color: textColor ?? AppColors.materialThemeKeyColorsSecondary,
             ),
             background: color,
-            padding: KPadding.kPaddingSize8,
+            padding: iconPaddingValue,
           ),
         ],
       ),

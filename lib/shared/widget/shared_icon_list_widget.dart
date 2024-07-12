@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:veteranam/shared/shared.dart';
 
 class SharedIconListWidget extends StatelessWidget {
@@ -8,12 +9,16 @@ class SharedIconListWidget extends StatelessWidget {
     required this.isDesk,
     required this.link,
     required this.cardEnum,
+    required this.afterEvent,
+    required this.cardId,
     super.key,
   });
   final String text;
   final bool isDesk;
   final String link;
   final CardEnum cardEnum;
+  final void Function()? afterEvent;
+  final String cardId;
   @override
   Widget build(BuildContext context) {
     return CardTextDetailWidget(
@@ -23,10 +28,16 @@ class SharedIconListWidget extends StatelessWidget {
         _cardIconWidget(
           label: context.l10n.webSite,
           context,
-          onPressed: null,
+          onPressed: () async {
+            if (await canLaunchUrl(Uri.parse(link))) {
+              await launchUrl(
+                Uri.parse(link),
+              );
+            }
+          },
           icon: KIcon.captivePortal,
         ),
-        if (isDesk) KSizedBox.kWidthSizedBox24 else KSizedBox.kWidthSizedBox8,
+        if (isDesk) KSizedBox.kWidthSizedBox24,
         _cardIconWidget(
           label: context.l10n.share,
           context,
@@ -39,6 +50,8 @@ class SharedIconListWidget extends StatelessWidget {
         ComplaintWidget(
           isDesk: isDesk,
           cardEnum: cardEnum,
+          afterEvent: afterEvent,
+          cardId: cardId,
         ),
       ],
       isDesk: isDesk,

@@ -8,11 +8,19 @@ import '../../text_dependency.dart';
 Future<void> informationPumpAppHelper({
   required IInformationRepository mockInformationRepository,
   required AuthenticationRepository mockAuthenticationRepository,
+  required IAppAuthenticationRepository mockAppAuthenticationRepository,
+  required IReportRepository mockReportRepository,
   required WidgetTester tester,
   MockGoRouter? mockGoRouter,
 }) async {
   _registerInformationBloc(
     mockInformationRepository: mockInformationRepository,
+    mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+    mockReportRepository: mockReportRepository,
+  );
+  _registerReportBloc(
+    mockReportRepository: mockReportRepository,
+    mockAppAuthenticationRepository: mockAppAuthenticationRepository,
   );
   _registerAuthenticationBloc(
     mockAuthenticationRepository: mockAuthenticationRepository,
@@ -27,11 +35,29 @@ Future<void> informationPumpAppHelper({
   await tester.pumpAndSettle();
 }
 
+void _registerReportBloc({
+  required IReportRepository mockReportRepository,
+  required IAppAuthenticationRepository mockAppAuthenticationRepository,
+}) {
+  final reportBloc = ReportBloc(
+    reportRepository: mockReportRepository,
+    appAuthenticationRepository: mockAppAuthenticationRepository,
+  );
+  if (GetIt.I.isRegistered<ReportBloc>()) {
+    GetIt.I.unregister<ReportBloc>();
+  }
+  GetIt.I.registerSingleton<ReportBloc>(reportBloc);
+}
+
 void _registerInformationBloc({
   required IInformationRepository mockInformationRepository,
+  required IAppAuthenticationRepository mockAppAuthenticationRepository,
+  required IReportRepository mockReportRepository,
 }) {
   final informationBloc = InformationWatcherBloc(
     informationRepository: mockInformationRepository,
+    reportRepository: mockReportRepository,
+    appAuthenticationRepository: mockAppAuthenticationRepository,
   );
   if (GetIt.I.isRegistered<InformationWatcherBloc>()) {
     GetIt.I.unregister<InformationWatcherBloc>();

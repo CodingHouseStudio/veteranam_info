@@ -21,12 +21,27 @@ extension FilterItems on List<FilterItem> {
 extension ListExtensions<T> on List<T> {
   List<T> loading({required int itemsLoaded, int? loadItems}) {
     if (isEmpty) return [];
-    final loadedItemsCount = itemsLoaded
-        .getLoaded(list: this, loadItems: loadItems)
-        .clamp(0, length);
+    late int loadNumber;
+    if (loadItems != null) {
+      loadNumber = itemsLoaded + loadItems;
+    } else {
+      loadNumber = itemsLoaded;
+    }
+    final loadedItemsCount =
+        loadNumber.getLoaded(list: this, loadItems: loadItems).clamp(0, length);
 
     return take(loadedItemsCount).toList();
   }
+
+  List<T> removeReportItems({
+    required List<ReportModel> reportItems,
+    required String Function(T item) checkFunction,
+  }) =>
+      where(
+        (item) => reportItems.every(
+          (report) => report.cardId != checkFunction(item),
+        ),
+      ).toList();
 
   List<T> loadingFilter({
     required List<int>? filtersIndex,
@@ -39,7 +54,8 @@ extension ListExtensions<T> on List<T> {
     if (isEmpty) return [];
 
     final loadedItemsCount =
-        itemsLoaded?.getLoaded(list: this, loadItems: loadItems) ?? length;
+        (itemsLoaded?.getLoaded(list: this, loadItems: loadItems) ?? length) +
+            (loadItems ?? 0);
 
     if (filtersIndex == null ||
         filtersIndex.isEmpty ||
@@ -71,6 +87,39 @@ extension ListExtensions<T> on List<T> {
       );
     }
     return allTags.toSet().toList();
+  }
+
+  List<int> updateFilterList({
+    required List<dynamic> Function(T) getFilter,
+    required List<T> previousList,
+    required List<int> previousFilter,
+    List<T>? fullList,
+  }) {
+    // Get overall items grouped by category and location
+    final filter = overallItemBloc(getFilter: getFilter);
+
+    // Find the difference in indices between category lists
+    final differentCategoryIndices = previousList
+        .overallItemBloc(getFilter: getFilter)
+        .findDifferencesIndex(newList: filter);
+
+    // Adjust filtersCategoriesIndex based on differences
+    return previousFilter.adjustIndices(differentCategoryIndices);
+  }
+
+  List<int> findDifferencesIndex({required List<T> newList}) {
+    final differentIndices = <int>[];
+    var add = 0;
+    for (var i = 0; i < length; i++) {
+      if ((i < newList.length && newList[i] != elementAt(i)) ||
+          (i >= newList.length && add <= 0)) {
+        differentIndices.add(i);
+        add++;
+      } else if (i >= newList.length && add > 0) {
+        add--;
+      }
+    }
+    return differentIndices;
   }
 
   List<FilterItem> overallItems({
@@ -121,10 +170,27 @@ extension ListExtensions<T> on List<T> {
 
   //   return selectedFilters;
   // }
+
+  List<T> filterIndexs(List<int> listIndex) {
+    // Create a new list to store filtered items
+    final filteredList = <T>[];
+
+    // Iterate through each item in the original list
+    for (final item in this) {
+      // Check if the item's index is NOT in the list of indices to remove
+      if (!listIndex.contains(indexOf(item))) {
+        // If not, add the item to the new list
+        filteredList.add(item);
+      }
+    }
+
+    // Return the new filtered list
+    return filteredList;
+  }
 }
 
 extension ListExtensionsNull<T> on List<T>? {
-  List<T> filterIndex(T eventFilterIndex) {
+  List<T> changeListValue(T eventFilterIndex) {
     final selectedFilters = List<T>.from(this ?? []);
 
     if (selectedFilters.contains(eventFilterIndex)) {
@@ -167,6 +233,25 @@ extension ListIntExtension on List<int> {
       }
     }
     return '${context.l10n.discounts} ${context.l10n.ofUpTo} $highestItem%';
+  }
+
+  List<int> adjustIndices(List<int> differences) {
+    final adjustedIndices = <int>[];
+    for (var element in this) {
+      if (differences.any((index) => index == element)) {
+        continue;
+      }
+      var numSmallerDifferences = 0;
+      for (final index in differences) {
+        if (index < element) {
+          numSmallerDifferences--;
+        }
+      }
+      element += numSmallerDifferences;
+
+      adjustedIndices.add(element);
+    }
+    return adjustedIndices;
   }
 }
 

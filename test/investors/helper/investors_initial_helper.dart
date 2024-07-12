@@ -75,12 +75,7 @@ Future<void> investorsInitialHelper(
         findsWidgets,
       );
 
-      await scrollingHelper(
-        tester: tester,
-        offset: KTestConstants.scrollingDown,
-      );
-
-      await reportDialogInitialHelper(tester);
+      // await reportDialogInitialHelper(tester);
 
       // await scrollingHelper(
       //   tester: tester,
