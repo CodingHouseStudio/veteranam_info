@@ -29,10 +29,10 @@ class AppLocalizations {
 
   //String get buyMeACoffee => null;
 
-  String get buyMeACoffee {
+  String get coffee {
     return Intl.message(
       'Buy me a Coffee',
-      name: 'buyMeACoffee',
+      name: 'coffee',
       desc: '',
       args: [],
     );

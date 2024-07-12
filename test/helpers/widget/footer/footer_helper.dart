@@ -20,7 +20,7 @@ Future<void> footerHelper(
 
   expect(find.byKey(KWidgetkeys.widget.footer.title), findsOneWidget);
 
-  //expect(find.byKey(KWidgetkeys.widget.footer.button), findsOneWidget);
+  expect(find.byKey(KWidgetkeys.widget.footer.button), findsOneWidget);
 
   expect(find.byKey(KWidgetkeys.widget.footer.sections), findsOneWidget);
 
