@@ -21,9 +21,9 @@ class BuyMeACoffeeWidget extends StatelessWidget {
           children: [
             KImage.coffee(),
             KSizedBox.kWidthSizedBox16,
-            Flexible(
+            const Flexible(
               child: Text(
-                context.l10n.coffee,
+                KAppText.coffee,
                 style: AppTextStyle.materialThemeTitleMediumNeutral,
               ),
             ),

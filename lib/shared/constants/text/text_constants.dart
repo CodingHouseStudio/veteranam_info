@@ -216,4 +216,5 @@ abstract class KAppText {
   static const String instagram = 'https://www.instagram.com/veteranam_info';
   static const String facebook =
       'https://www.facebook.com/profile.php?id=61560499465895';
+  static const String coffee = 'Buy me a Coffee';
 }
