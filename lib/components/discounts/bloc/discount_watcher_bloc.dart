@@ -165,8 +165,11 @@ class DiscountWatcherBloc
     _FilterLocation event,
     Emitter<DiscountWatcherState> emit,
   ) {
-    final selectedFilters =
-        state.filtersLocationIndex.changeListValue(event.filterIndex);
+    final selectedFilters = state.filtersLocationIndex.checkValue(
+      filterIndex: event.filterIndex,
+      equalNumber: 2,
+      largerNumber: 3,
+    );
 
     final filterItems = _filter(
       locationIndex: selectedFilters,
@@ -244,8 +247,10 @@ class DiscountWatcherBloc
         .loadingFilter(
           filtersIndex: locationIndex?.where((element) => element > 1).toList(),
           itemsLoaded: itemsLoaded,
-          getFilter: (item) =>
-              item.location?.toList() ?? item.subLocation?._getList ?? const [],
+          getFilter: (item) => [
+            if (item.location != null) ...item.location!,
+            if (item.subLocation != null) ...item.subLocation._getList,
+          ],
           overallFilter: items._getLocationItems,
           loadItems: loadItems,
         );

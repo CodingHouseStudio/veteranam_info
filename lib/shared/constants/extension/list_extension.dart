@@ -253,6 +253,22 @@ extension ListIntExtension on List<int> {
     }
     return adjustedIndices;
   }
+
+  List<int> checkValue({
+    required int filterIndex,
+    required int equalNumber,
+    required int largerNumber,
+  }) {
+    final newList = changeListValue(filterIndex);
+
+    if (filterIndex == equalNumber) {
+      newList.removeWhere((element) => element > largerNumber);
+    } else if (filterIndex > largerNumber) {
+      newList.removeWhere((element) => element == equalNumber);
+    }
+
+    return newList;
+  }
 }
 
 extension DiscountModelExtensions on List<DiscountModel> {
