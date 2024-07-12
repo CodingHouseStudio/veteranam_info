@@ -34,7 +34,7 @@ extension ItemLoadedExtensions on int {
 
 extension LocalizedDateTime on DateTime {
   String toLocalDateString() {
-    return toLocal().toString().split(' ')[0];
+    return '${toLocal().day}.${toLocal().month}.${toLocal().year}';
   }
 }
 

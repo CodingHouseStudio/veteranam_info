@@ -83,9 +83,7 @@ class _DiscountsCardWidgetDesk extends StatelessWidget {
                           KSizedBox.kWidthSizedBox8,
                           Text(
                             key: KWidgetkeys.widget.discountCard.date,
-                            '${discountItem.dateVerified.day}.'
-                            '${discountItem.dateVerified.month}.'
-                            '${discountItem.dateVerified.year}',
+                            discountItem.dateVerified.toLocalDateString(),
                             style: AppTextStyle.materialThemeLabelSmall,
                             overflow: TextOverflow.clip,
                           ),
