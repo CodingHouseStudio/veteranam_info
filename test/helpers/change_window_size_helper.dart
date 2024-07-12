@@ -31,5 +31,5 @@ Future<void> changeWindowSizeHelper({
     await test();
   }
 }
- 
+
 /// FOLDER FILES COMMENT: Files for widgets test or helper for test
