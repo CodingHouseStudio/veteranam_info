@@ -224,7 +224,7 @@ void main() {
         ),
         predicate<DiscountWatcherState>(
           (state) =>
-              state.loadingStatus == LoadingStatus.loaded &&
+              state.loadingStatus == LoadingStatus.listLoadedFull &&
               state.filteredDiscountModelItems.every(
                 (element) => element.location!.contains(
                   KTestText.discountModelItemsModify.first.location!.first,

@@ -85,6 +85,8 @@ abstract class KTestText {
   static const field = 'field_test';
   static const fieldEmpty = '';
 
+  static const phoneNumber = '+3809900000';
+
   static final questionModelItems = <QuestionModel>[
     QuestionModel(
       id: '0',
@@ -168,6 +170,13 @@ abstract class KTestText {
     downloadURL: image,
     name: image,
     ref: image,
+  );
+  static const resumeModel = ResumeModel(
+    downloadURL: 'test_URL',
+    lastModifiedTS: 1,
+    name: 'test_name',
+    ref: 'test_name',
+    type: 'test_type',
   );
 
   static final feedbackModel = FeedbackModel(
@@ -339,6 +348,13 @@ abstract class KTestText {
     card: CardEnum.funds,
     userId: user.id,
     cardId: id,
+  );
+  static final employeeRespondModel = EmployeeRespondModel(
+    id: dateTime.microsecondsSinceEpoch.toString(),
+    email: KTestText.userEmail,
+    phoneNumber: KTestText.phoneNumber,
+    resume: resumeModel,
+    noResume: false,
   );
 }
 

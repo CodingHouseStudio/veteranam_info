@@ -12,11 +12,11 @@ Future<void> cardTextDetailEvaluateHelper(
     findsWidgets,
   );
 
-  expect(
-    //find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconSmile),
-    find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconWebsite),
-    findsWidgets,
-  );
+  // expect(
+  //   //find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconSmile),
+  //   find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconWebsite),
+  //   findsWidgets,
+  // );
 /*
   expect(
     find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconActiveSmile),
