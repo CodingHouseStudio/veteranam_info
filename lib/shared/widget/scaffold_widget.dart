@@ -45,6 +45,7 @@ class ScaffoldWidget extends StatelessWidget {
             FooterWidget.get(
               context: context,
               isTablet: isTablet,
+              isDesk: isDesk,
             ),
           );
         }

@@ -12,15 +12,9 @@ void loadingList(
       KPlatformConstants.isWebDesktop = true;
       await pumpApp(tester);
 
-      await changeWindowSizeHelper(
-        tester: tester,
-        windowsTest: true,
-        test: () async {
-          await _deskLoadingHelper(
-            tester,
-            // cardLast: lastCard,
-          );
-        },
+      await _deskLoadingHelper(
+        tester,
+        // cardLast: lastCard,
       );
     });
     testWidgets('Mobile', (tester) async {
@@ -79,33 +73,44 @@ Future<void> _deskLoadingHelper(
   WidgetTester tester,
   // required Key cardLast,
 ) async {
-  await scrollingHelper(
+  await changeWindowSizeHelper(
     tester: tester,
-    offset: KTestConstants.scrollingDown,
-  );
+    windowsTest: true,
+    test: () async {
+      await scrollingHelper(
+        tester: tester,
+        offset: KTestConstants.scrollingDown,
+      );
 
-  await scrollingHelper(
-    tester: tester,
-    offset: KTestConstants.scrollingDown,
-  );
+      await scrollingHelper(
+        tester: tester,
+        offset: KTestConstants.scrollingDown,
+      );
 
-  // expect(
-  //   find.byKey(cardLast),
-  //   findsOneWidget,
-  // );
+      await scrollingHelper(
+        tester: tester,
+        offset: KTestConstants.scrollingDown,
+      );
 
-  expect(
-    find.byKey(KWidgetkeys.widget.scaffold.loadingButton),
-    findsOneWidget,
-  );
+      // expect(
+      //   find.byKey(cardLast),
+      //   findsOneWidget,
+      // );
 
-  await tester.tap(find.byKey(KWidgetkeys.widget.scaffold.loadingButton));
+      expect(
+        find.byKey(KWidgetkeys.widget.scaffold.loadingButton),
+        findsOneWidget,
+      );
 
-  await tester.pumpAndSettle();
+      await tester.tap(find.byKey(KWidgetkeys.widget.scaffold.loadingButton));
 
-  expect(
-    find.byKey(KWidgetkeys.widget.scaffold.endListText),
-    findsNothing,
+      await tester.pumpAndSettle();
+
+      expect(
+        find.byKey(KWidgetkeys.widget.scaffold.endListText),
+        findsNothing,
+      );
+    },
   );
 }
 
@@ -115,6 +120,7 @@ Future<void> _mobileLoadingHelper(
 ) async {
   await changeWindowSizeHelper(
     tester: tester,
+    scrollUp: false,
     windowsTest: true,
     test: () async {
       await scrollingHelper(
