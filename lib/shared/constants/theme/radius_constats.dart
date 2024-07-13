@@ -4,6 +4,8 @@ import 'package:veteranam/shared/shared.dart';
 abstract class KBorderRadius {
   static const kBorderRadius10 =
       BorderRadius.all(Radius.circular(KSize.kRadius10));
+  static const kBorderRadius16 =
+      BorderRadius.all(Radius.circular(KSize.kRadius16));
   static const kBorderRadius32 =
       BorderRadius.all(Radius.circular(KSize.kRadius32));
   static const kBorderRadius40 =
