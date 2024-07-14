@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
@@ -9,6 +10,7 @@ abstract class FooterWidget {
   static List<Widget> get({
     required BuildContext context,
     required bool isTablet,
+    required bool isDesk,
   }) =>
       isTablet
           ? [
@@ -18,7 +20,11 @@ abstract class FooterWidget {
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: _support(context: context, isTablet: isTablet),
+                      children: _support(
+                        context: context,
+                        isTablet: isTablet,
+                        isDesk: isDesk,
+                      ),
                     ),
                   ),
                   Expanded(
@@ -122,7 +128,7 @@ abstract class FooterWidget {
               ),
             ]
           : [
-              ..._support(context: context, isTablet: isTablet),
+              ..._support(context: context, isTablet: isTablet, isDesk: isDesk),
               KSizedBox.kHeightSizedBox40,
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -383,6 +389,7 @@ abstract class FooterWidget {
       ];
   static List<Widget> _support({
     required bool isTablet,
+    required bool isDesk,
     required BuildContext context,
   }) =>
       [
@@ -394,12 +401,20 @@ abstract class FooterWidget {
               : AppTextStyle.materialThemeHeadlineMedium,
         ),
         KSizedBox.kHeightSizedBox16,
-        DoubleButtonWidget(
-          widgetKey: KWidgetkeys.widget.footer.button,
-          text: context.l10n.contact,
-          onPressed: () => context.goNamed(KRoute.feedback.name),
-          isDesk: isTablet,
-        ),
+        if (kIsWeb)
+          Align(
+            alignment: Alignment.centerLeft,
+            child: BuyMeACoffeeWidget(
+              key: KWidgetkeys.widget.footer.button,
+            ),
+          )
+        else
+          DoubleButtonWidget(
+            widgetKey: KWidgetkeys.widget.footer.button,
+            text: context.l10n.contact,
+            onPressed: () => context.goNamed(KRoute.feedback.name),
+            isDesk: isTablet,
+          ),
       ];
   static Widget _button({
     required void Function() onPressed,
@@ -425,7 +440,12 @@ abstract class FooterWidget {
         IconButtonWidget(
           key: linkedInKey,
           onPressed: () async {
-            if (await canLaunchUrl(Uri.parse(KAppText.linkedIn))) {
+            final linkedInLinkParse = await canLaunchUrl(
+              Uri.parse(
+                KAppText.linkedIn,
+              ),
+            );
+            if (linkedInLinkParse) {
               await launchUrl(
                 Uri.parse(KAppText.linkedIn),
                 mode: LaunchMode.externalApplication,
@@ -439,7 +459,9 @@ abstract class FooterWidget {
         IconButtonWidget(
           key: instagramKey,
           onPressed: () async {
-            if (await canLaunchUrl(Uri.parse(KAppText.instagram))) {
+            final instagramLinkParse =
+                await canLaunchUrl(Uri.parse(KAppText.instagram));
+            if (instagramLinkParse) {
               await launchUrl(
                 Uri.parse(KAppText.instagram),
                 mode: LaunchMode.externalApplication,
@@ -453,7 +475,9 @@ abstract class FooterWidget {
         IconButtonWidget(
           key: facebookKey,
           onPressed: () async {
-            if (await canLaunchUrl(Uri.parse(KAppText.facebook))) {
+            final facebookLinkParse =
+                await canLaunchUrl(Uri.parse(KAppText.facebook));
+            if (facebookLinkParse) {
               await launchUrl(
                 Uri.parse(KAppText.facebook),
                 mode: LaunchMode.externalApplication,

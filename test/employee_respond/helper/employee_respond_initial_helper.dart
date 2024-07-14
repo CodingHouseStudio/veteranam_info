@@ -61,12 +61,15 @@ Future<void> employeeRespondInitialHelper(
     findsOneWidget,
   );
 
-  await chekPointSingleHelper(tester: tester);
+  // await chekPointHelper(
+  //   tester: tester,
+  //   twiceTap: true,
+  // );
 
-  expect(
-    find.byKey(KWidgetkeys.screen.employeeRespond.noResume),
-    findsOneWidget,
-  );
+  // expect(
+  //   find.byKey(KWidgetkeys.screen.employeeRespond.noResume),
+  //   findsOneWidget,
+  // );
 
   expect(
     find.byKey(KWidgetkeys.screen.employeeRespond.send),

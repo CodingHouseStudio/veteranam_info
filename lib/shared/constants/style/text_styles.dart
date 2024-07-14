@@ -422,6 +422,15 @@ abstract class AppTextStyle {
     letterSpacing: 0.1,
   );
 
+  static const TextStyle materialThemeTitleSmallNeutral = TextStyle(
+    fontFamily: 'Gilroy',
+    fontSize: 14,
+    height: 1.43,
+    fontWeight: FontWeight.w500,
+    letterSpacing: 0.1,
+    color: AppColors.materialThemeKeyColorsNeutral,
+  );
+
   /// h1 figma properties
   /// fontFamily: Gilroy
   /// fontSize: 64px

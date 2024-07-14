@@ -35,6 +35,28 @@ class StorageService {
 
     return snapshot.ref.getDownloadURL();
   }
+
+  Future<String?> saveRespond({
+    required ResumeModel resumeModel,
+    required String respondId,
+  }) async {
+    if (resumeModel.ref == null && resumeModel.name == null) return null;
+    final value = storage
+        .ref(
+          StoragePath.getResumePath(
+            collenction: FirebaseCollectionName.respond,
+            modelId: respondId,
+            resumeName: resumeModel.name,
+            fileExtension: resumeModel.name!.substring(
+              resumeModel.name!.lastIndexOf('.'),
+            ),
+          ),
+        )
+        .putBlob(await _xFile(resumeModel.ref!));
+
+    final snapshot = await value.getTaskSnapshot();
+    return snapshot.ref.getDownloadURL();
+  }
 }
 
 extension UploadTaskExtention on UploadTask {
