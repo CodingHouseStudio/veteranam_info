@@ -1,6 +1,7 @@
 import 'dart:math';
-
 import 'package:flutter/widgets.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:intl/intl.dart';
 import 'package:veteranam/shared/shared.dart';
 
 extension ExtendedDateTime on DateTime {
@@ -33,10 +34,9 @@ extension ItemLoadedExtensions on int {
 }
 
 extension LocalizedDateTime on DateTime {
-  String toLocalDateString() {
-    return '${toLocal().day.toString().padLeft(2, '0')}'
-        '.${toLocal().month.toString().padLeft(2, '0')}'
-        '.${toLocal().year}';
+  String toLocalDateString([String locale = 'en_US']) {
+    initializeDateFormatting(locale);
+    return DateFormat.yMMMM(locale).format(toLocal());
   }
 }
 
