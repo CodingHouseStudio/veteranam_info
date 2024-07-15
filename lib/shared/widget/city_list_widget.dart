@@ -25,9 +25,11 @@ class _CityWidgetListState extends State<CityWidgetList> {
   }
 
   bool isExpanded = false;
+  bool isHovered = false;
   @override
   void initState() {
     isExpanded = false;
+    isHovered = false;
     super.initState();
   }
 
@@ -36,7 +38,12 @@ class _CityWidgetListState extends State<CityWidgetList> {
     return Align(
       alignment: widget.isDesk ? Alignment.centerRight : Alignment.centerLeft,
       child: TextButton.icon(
-        style: KButtonStyles.discountCityButtonStyle,
+        style: (widget.discountModel.location ?? []).length == 1
+            ? KButtonStyles.discountCityButtonStyle.copyWith(
+                mouseCursor:
+                    const WidgetStatePropertyAll(MouseCursor.uncontrolled),
+              )
+            : KButtonStyles.discountCityButtonStyle,
         onPressed: () {
           setState(() {
             isExpanded = !isExpanded;
@@ -44,8 +51,10 @@ class _CityWidgetListState extends State<CityWidgetList> {
         },
         icon: KIcon.distance,
         label: Padding(
-          padding: const EdgeInsets.symmetric(
-            vertical: KPadding.kPaddingSize10,
+          padding: EdgeInsets.symmetric(
+            vertical: widget.isDesk
+                ? KPadding.kPaddingSize10
+                : KPadding.kPaddingSize6_5,
           ),
           child: Wrap(
             children: [

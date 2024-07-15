@@ -163,7 +163,7 @@ class _DiscountsCardWidgetDesk extends StatelessWidget {
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _expiration(discountItem.expiration),
+                    _expiration(discountItem.expiration, isDesk),
                     KSizedBox.kWidthSizedBox16,
                     Expanded(
                       child: CityWidgetList(
@@ -322,7 +322,7 @@ class _DiscountsCardWidgetMob extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _expiration(discountItem.expiration),
+                    _expiration(discountItem.expiration, isDesk),
                     KSizedBox.kHeightSizedBox8,
                     CityWidgetList(
                       discountModel: discountItem,
@@ -350,9 +350,9 @@ class _DiscountsCardWidgetMob extends StatelessWidget {
   }
 }
 
-Widget _expiration(String expiration) => Container(
-      padding: const EdgeInsets.symmetric(
-        vertical: KPadding.kPaddingSize8,
+Widget _expiration(String expiration, bool isDesk) => Container(
+      padding: EdgeInsets.symmetric(
+        vertical: isDesk ? KPadding.kPaddingSize10 : KPadding.kPaddingSize4,
         horizontal: KPadding.kPaddingSize8,
       ),
       decoration: KWidgetTheme.boxDecorationDiscountContainer,
