@@ -20,7 +20,7 @@ void main() {
           (_) async {},
         );
         when(
-          mockFirestoreService.getCardReportById(
+          mockFirestoreService.getCardReportByUserId(
             cardEnum: CardEnum.discount,
             userId: KTestText.user.id,
           ),
@@ -57,7 +57,7 @@ void main() {
           mockFirestoreService.addReport(KTestText.reportModelIncorect),
         ).thenThrow(Exception(KGroupText.failureSend));
         when(
-          mockFirestoreService.getCardReportById(
+          mockFirestoreService.getCardReportByUserId(
             cardEnum: CardEnum.discount,
             userId: KTestText.user.id,
           ),
@@ -104,7 +104,7 @@ void main() {
           ),
         ).thenThrow(FirebaseException(plugin: KGroupText.failureSend));
         when(
-          mockFirestoreService.getCardReportById(
+          mockFirestoreService.getCardReportByUserId(
             cardEnum: CardEnum.discount,
             userId: KTestText.user.id,
           ),

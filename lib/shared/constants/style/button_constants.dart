@@ -345,4 +345,22 @@ abstract class KButtonStyles {
     ),
     overlayColor: WidgetStatePropertyAll(Colors.transparent),
   );
+  static const closeDialogButtonStyle = ButtonStyle(
+    padding: WidgetStatePropertyAll(
+      EdgeInsets.only(
+        top: KPadding.kPaddingSize8,
+        bottom: KPadding.kPaddingSize8,
+        left: KPadding.kPaddingSize24,
+      ),
+    ),
+    backgroundColor: WidgetStatePropertyAll(
+      AppColors.materialThemeKeyColorsSecondary,
+    ),
+    shape: WidgetStatePropertyAll(
+      RoundedRectangleBorder(
+        borderRadius: KBorderRadius.kBorderRadius32,
+        side: BorderSide(color: AppColors.materialThemeWhite),
+      ),
+    ),
+  );
 }

@@ -1,10 +1,14 @@
 import 'package:flutter/widgets.dart';
-import 'package:go_router/go_router.dart';
 import 'package:veteranam/shared/shared.dart';
 
 class CancelWidget extends StatelessWidget {
-  const CancelWidget({required this.widgetKey, super.key});
+  const CancelWidget({
+    required this.widgetKey,
+    required this.onPressed,
+    super.key,
+  });
   final Key widgetKey;
+  final void Function() onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +16,7 @@ class CancelWidget extends StatelessWidget {
       alignment: Alignment.topRight,
       child: IconButtonWidget(
         key: widgetKey,
-        onPressed: () => context.pop(),
+        onPressed: onPressed,
         icon: KIcon.close,
         background: AppColors.materialThemeWhite,
         padding: KPadding.kPaddingSize12,

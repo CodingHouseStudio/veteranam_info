@@ -7,7 +7,9 @@ class PrivacyPolicyBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: KSize.kPixel794, // A4 width in points (1 point = 1/72 inches)
+      constraints: const BoxConstraints(
+        maxWidth: KMinMaxSize.maxWidth768,
+      ),
       padding: const EdgeInsets.symmetric(horizontal: KPadding.kPaddingSize32),
       child: RichText(
         key: KWidgetkeys.screen.privacyPolicy.text,

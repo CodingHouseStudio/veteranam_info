@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:share_plus/share_plus.dart';
 import 'package:veteranam/shared/shared.dart';
 
 class CardTextDetailEvaluateWidget extends StatefulWidget {
@@ -18,6 +17,7 @@ class CardTextDetailEvaluateWidget extends StatefulWidget {
     this.directLink,
     this.link,
     this.onLikeChange,
+    this.onShare,
   });
 
   final String? directLink;
@@ -33,6 +33,7 @@ class CardTextDetailEvaluateWidget extends StatefulWidget {
   final bool isDesk;
   final Widget? titleIcon;
   final void Function({required bool like})? onLikeChange;
+  final void Function()? onShare;
 
   @override
   State<CardTextDetailEvaluateWidget> createState() =>
@@ -168,7 +169,7 @@ class _CardTextDetailEvaluateWidgetState
                               .widget.cardTextDetailEvaluate.iconShare,
                         ),
                         text: context.l10n.share,
-                        onPressed: _informationShareLink,
+                        onPressed: widget.onShare,
                       ),
                       if (Config.isDevelopment)
                         if (widget.isDesk)
@@ -212,12 +213,6 @@ class _CardTextDetailEvaluateWidgetState
     } else {
       return widget.titleWidget;
     }
-  }
-
-  Future<void> _informationShareLink() async {
-    await Share.share(
-      widget.directLink ?? widget.link!,
-    );
   }
 
   Widget buildIcon({

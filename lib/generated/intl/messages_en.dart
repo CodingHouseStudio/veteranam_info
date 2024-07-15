@@ -55,6 +55,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Please select one of the following answers"),
         "city": MessageLookupByLibrary.simpleMessage("City"),
         "clear": MessageLookupByLibrary.simpleMessage("Clear"),
+        "close": MessageLookupByLibrary.simpleMessage("Close"),
         "companyIsHidden":
             MessageLookupByLibrary.simpleMessage("The company is hidden"),
         "complaint": MessageLookupByLibrary.simpleMessage("Complaint"),

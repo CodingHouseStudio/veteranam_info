@@ -35,7 +35,7 @@ void main() {
       testWidgets('${KGroupText.error} ', (tester) async {
         when(
           mockDiscountRepository
-              .getDiscountsById(KTestText.userWithoutPhoto.id),
+              .getDiscountsByUserId(KTestText.userWithoutPhoto.id),
         ).thenAnswer(
           (invocation) async => const Left(SomeFailure.serverError()),
         );
@@ -50,7 +50,7 @@ void main() {
       testWidgets('${KGroupText.failureNetwork} ', (tester) async {
         when(
           mockDiscountRepository
-              .getDiscountsById(KTestText.userWithoutPhoto.id),
+              .getDiscountsByUserId(KTestText.userWithoutPhoto.id),
         ).thenAnswer(
           (invocation) async => const Left(SomeFailure.network()),
         );
@@ -65,7 +65,7 @@ void main() {
       testWidgets('${KGroupText.failureGet} ', (tester) async {
         when(
           mockDiscountRepository
-              .getDiscountsById(KTestText.userWithoutPhoto.id),
+              .getDiscountsByUserId(KTestText.userWithoutPhoto.id),
         ).thenAnswer(
           (invocation) async => const Left(SomeFailure.get()),
         );
@@ -83,7 +83,7 @@ void main() {
       setUp(() {
         when(
           mockDiscountRepository
-              .getDiscountsById(KTestText.userWithoutPhoto.id),
+              .getDiscountsByUserId(KTestText.userWithoutPhoto.id),
         ).thenAnswer(
           (invocation) async =>
               Right(KTestText.userDiscountModelItems.sublist(0, 1)),

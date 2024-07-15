@@ -4,8 +4,8 @@ import 'package:go_router/go_router.dart';
 
 import 'package:veteranam/shared/shared.dart';
 
-class DiscountCard extends StatelessWidget {
-  const DiscountCard({required this.isTablet, super.key});
+class DiscountBoxwWidget extends StatelessWidget {
+  const DiscountBoxwWidget({required this.isTablet, super.key});
   final bool isTablet;
 
   @override

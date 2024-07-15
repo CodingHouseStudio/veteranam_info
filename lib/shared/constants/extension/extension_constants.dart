@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:veteranam/shared/shared.dart';
@@ -34,7 +35,14 @@ extension ItemLoadedExtensions on int {
 }
 
 extension LocalizedDateTime on DateTime {
-  String toLocalDateString([String locale = 'en_US']) {
+  String toLocalDateString(BuildContext context) {
+    final locale = context
+        .read<AuthenticationBloc>()
+        .state
+        .userSetting
+        .locale
+        .value
+        .languageCode;
     initializeDateFormatting(locale);
     return DateFormat.yMMMM(locale).format(toLocal());
   }

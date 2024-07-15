@@ -26,7 +26,7 @@ class ReportRepository implements IReportRepository {
     required String userId,
   }) async {
     try {
-      final userDiscountsItems = await _firestoreService.getCardReportById(
+      final userDiscountsItems = await _firestoreService.getCardReportByUserId(
         cardEnum: cardEnum,
         userId: userId,
       );
