@@ -205,6 +205,21 @@ void main() {
               mockGoRouter: mockGoRouter,
             );
           });
+          testWidgets('Privacy policy', (tester) async {
+            await homePumpAppHelper(
+              tester: tester,
+              mockGoRouter: mockGoRouter,
+              mockAuthenticationRepository: mockAuthenticationRepository,
+              // mockFeedbackRepository: mockFeedbackRepository,
+              mockHomeRepository: mockHomeRepository,
+              mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+            );
+
+            await footerPrivacyPolicyHelper(
+              tester: tester,
+              mockGoRouter: mockGoRouter,
+            );
+          });
         });
       });
     });

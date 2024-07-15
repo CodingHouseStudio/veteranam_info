@@ -90,6 +90,15 @@ GoRouter router = GoRouter(
       ),
       routes: [
         GoRoute(
+          name: KRoute.privacyPolicy.name,
+          path: KRoute.privacyPolicy.path,
+          pageBuilder: (context, state) => DialogPage(
+            key: state.pageKey,
+            name: state.name,
+            builder: (_) => const PrivacyPolicyDialog(),
+          ),
+        ),
+        GoRoute(
           name: KRoute.information.name,
           path: KRoute.information.path,
           pageBuilder: (context, state) => NoTransitionPage(
