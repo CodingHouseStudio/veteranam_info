@@ -56,6 +56,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Будь ласка виберіть одну з вище наведених відповідей"),
         "city": MessageLookupByLibrary.simpleMessage("Місто"),
         "clear": MessageLookupByLibrary.simpleMessage("Очистити"),
+        "close": MessageLookupByLibrary.simpleMessage("Закрити"),
         "companyIsHidden":
             MessageLookupByLibrary.simpleMessage("Компанію приховано"),
         "complaint": MessageLookupByLibrary.simpleMessage("Скарга"),

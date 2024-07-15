@@ -30,7 +30,9 @@ part 'screen/my_story.dart';
 part 'screen/feedback.dart';
 part 'screen/my_discounts.dart';
 // part 'screen/contact.dart';
-part 'screen/privacy_policy.dart';
+part 'screen/privacy_policy_dialog.dart';
+part 'screen/discount_card_dialog.dart';
+part 'screen/news_card_dialog.dart';
 
 //WIDGET
 part 'widget/widget.dart';

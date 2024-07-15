@@ -9,7 +9,7 @@ List<Widget> discountsWidgetList({
       modelItems:
           context.read<DiscountWatcherBloc>().state.filteredDiscountModelItems,
       cardWidget: ({required modelItem, required isLoading}) =>
-          DiscountsCardWidget(
+          DiscountCardWidget(
         key: KWidgetkeys.screen.discounts.card,
         discountItem: modelItem,
         isDesk: isDesk,
