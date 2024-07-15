@@ -36,7 +36,7 @@ class MyDiscountsWatcherBloc
   ) async {
     emit(state.copyWith(loadingStatus: LoadingStatus.loading));
 
-    final result = await _discountRepository.getDiscountsById(
+    final result = await _discountRepository.getDiscountsByUserId(
       _iAppAuthenticationRepository.currentUser.id,
     );
     result.fold(

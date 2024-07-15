@@ -27,7 +27,7 @@ List<Widget> _boxWidgetList({
                   children: [
                     Expanded(
                       flex: 3,
-                      child: DiscountCard(
+                      child: DiscountBoxwWidget(
                         key: KWidgetkeys.screen.home.discountsBox,
                         isTablet: true,
                       ),
@@ -83,7 +83,7 @@ List<Widget> _boxWidgetList({
       ],
       if (!isTablet) ...[
         KSizedBox.kHeightSizedBox16,
-        DiscountCard(
+        DiscountBoxwWidget(
           key: KWidgetkeys.screen.home.discountsBox,
           isTablet: false,
         ),
