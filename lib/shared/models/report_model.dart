@@ -16,6 +16,7 @@ enum CardEnum {
   funds,
   discount,
   information,
+  story,
 }
 
 extension CardEnumExtention on CardEnum {
@@ -27,6 +28,8 @@ extension CardEnumExtention on CardEnum {
         return 'discount';
       case CardEnum.information:
         return 'information';
+      case CardEnum.story:
+        return 'story';
     }
   }
 }
