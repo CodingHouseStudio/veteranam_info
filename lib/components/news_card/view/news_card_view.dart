@@ -1,0 +1,33 @@
+import 'package:flutter/material.dart';
+import 'package:veteranam/components/components.dart';
+import 'package:veteranam/shared/shared.dart';
+
+class NewsCardDialog extends StatelessWidget {
+  const NewsCardDialog({required this.id, super.key});
+  final String? id;
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final isDesk =
+            constraints.maxWidth > KPlatformConstants.minWidthThresholdDesk;
+        return AlertDialog(
+          key: KWidgetkeys.screen.newsCard.dialog,
+          shape: const RoundedRectangleBorder(
+            borderRadius: KBorderRadius.kBorderRadius32,
+          ),
+          backgroundColor: AppColors.materialThemeKeyColorsNeutral,
+          contentPadding: EdgeInsets.zero,
+          scrollable: true,
+          content: NewsCardBlocprovider(
+            childWidget: NewsCardBody(
+              isDesk: isDesk,
+            ),
+            id: id,
+          ),
+        );
+      },
+    );
+  }
+}

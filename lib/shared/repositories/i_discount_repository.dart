@@ -3,10 +3,11 @@ import 'package:veteranam/shared/shared.dart';
 
 abstract class IDiscountRepository {
   Stream<List<DiscountModel>> getDiscountItems();
+  Future<Either<SomeFailure, DiscountModel>> getDiscount(String id);
 
   void addMockDiscountItems();
 
-  Future<Either<SomeFailure, List<DiscountModel>>> getDiscountsById(
+  Future<Either<SomeFailure, List<DiscountModel>>> getDiscountsByUserId(
     String userId,
   );
 

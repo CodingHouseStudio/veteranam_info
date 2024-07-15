@@ -106,6 +106,19 @@ GoRouter router = GoRouter(
             name: state.name,
             child: const InformationScreen(),
           ),
+          routes: [
+            GoRoute(
+              name: KRoute.newsCard.name,
+              path: ':cardId',
+              pageBuilder: (context, state) => DialogPage(
+                key: state.pageKey,
+                name: state.name,
+                builder: (_) => NewsCardDialog(
+                  id: state.pathParameters['cardId'],
+                ),
+              ),
+            ),
+          ],
         ),
         GoRoute(
           name: KRoute.discounts.name,
@@ -116,6 +129,17 @@ GoRouter router = GoRouter(
             child: const DiscountsScreen(),
           ),
           routes: [
+            GoRoute(
+              name: KRoute.discountCard.name,
+              path: ':cardId',
+              pageBuilder: (context, state) => DialogPage(
+                key: state.pageKey,
+                name: state.name,
+                builder: (_) => DiscountCardDialog(
+                  id: state.pathParameters['cardId'],
+                ),
+              ),
+            ),
             GoRoute(
               name: KRoute.myDiscounts.name,
               path: KRoute.myDiscounts.path,
