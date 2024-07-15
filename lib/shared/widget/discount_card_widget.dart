@@ -145,7 +145,7 @@ class DiscountCardWidget extends StatelessWidget {
                   ),
                 ],
                 KSizedBox.kHeightSizedBox16,
-                SharedIconListWidget(
+                CardTextDetailWidget(
                   text: '${discountItem.description}\n'
                       '\n${context.l10n.toGetItYouNeed}' //Title medium
                       '\n${discountItem.requirements}\n'
@@ -153,13 +153,21 @@ class DiscountCardWidget extends StatelessWidget {
                       // ignore: lines_longer_than_80_chars
                       '${discountItem.additionalDetails != null ? '\n${discountItem.additionalDetails ?? ''}\n' : ''}'
                       '\n${discountItem.phoneNumber}',
+                  maxLines: 3,
                   isDesk: isDesk,
-                  link: discountItem.directLink ?? discountItem.link,
-                  cardEnum: CardEnum.discount,
-                  afterEvent: reportEvent,
-                  cardId: discountItem.id,
-                  onShare: () async => Share.share(
-                    '${Uri.base.origin}/${KRoute.discounts.path}/${discountItem.id}',
+                  icon: SharedIconListWidget.get(
+                    context: context,
+                    isDesk: isDesk,
+                    link: discountItem.directLink ?? discountItem.link,
+                    cardEnum: CardEnum.discount,
+                    afterEvent: reportEvent,
+                    cardId: discountItem.id,
+                    onShare: () async => Share.share(
+                      '${Uri.base.origin}/${KRoute.discounts.path}/${discountItem.id}',
+                    ),
+                    complaintKey: KWidgetkeys.widget.discountCard.iconComplaint,
+                    shareKey: KWidgetkeys.widget.discountCard.iconShare,
+                    webSiteKey: KWidgetkeys.widget.discountCard.iconWebsite,
                   ),
                 ),
                 KSizedBox.kHeightSizedBox16,

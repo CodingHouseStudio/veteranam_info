@@ -10,12 +10,14 @@ class NewsCardWidget extends StatelessWidget {
     this.onLikeChange,
     super.key,
     this.closeWidget,
+    this.afterReportEvent,
   });
 
   final InformationModel informationItem;
   final bool isDesk;
   final void Function({required bool like})? onLikeChange;
   final Widget? closeWidget;
+  final void Function()? afterReportEvent;
 
   @override
   Widget build(BuildContext context) {
@@ -104,6 +106,9 @@ class NewsCardWidget extends StatelessWidget {
       ),
       isDesk: isDesk,
       onLikeChange: onLikeChange,
+      cardId: informationItem.id,
+      cardEnum: CardEnum.information,
+      afterEvent: afterReportEvent,
     );
   }
 }
