@@ -66,28 +66,31 @@ Widget _cardIconWidget(
   required Icon icon,
   required String label,
 }) {
-  return Column(
-    children: [
-      Padding(
-        padding: const EdgeInsets.all(KPadding.kPaddingSize12),
-        child: IconButton(
-          key: KWidgetkeys.widget.discountCard.buttons,
-          style: const ButtonStyle(
-            backgroundColor: WidgetStatePropertyAll(
-              AppColors.materialThemeWhite,
+  return InkWell(
+    onTap: onPressed,
+    child: Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(KPadding.kPaddingSize12),
+          child: IconButton(
+            key: KWidgetkeys.widget.discountCard.buttons,
+            style: const ButtonStyle(
+              backgroundColor: WidgetStatePropertyAll(
+                AppColors.materialThemeWhite,
+              ),
             ),
+            onPressed: onPressed,
+            icon: icon,
           ),
-          onPressed: onPressed,
-          icon: icon,
         ),
-      ),
-      Text(
-        key: KWidgetkeys.widget.discountCard.description,
-        label,
-        style: AppTextStyle.materialThemeLabelSmall.copyWith(
-          color: AppColors.materialThemeBlack,
+        Text(
+          key: KWidgetkeys.widget.discountCard.description,
+          label,
+          style: AppTextStyle.materialThemeLabelSmall.copyWith(
+            color: AppColors.materialThemeBlack,
+          ),
         ),
-      ),
-    ],
+      ],
+    ),
   );
 }

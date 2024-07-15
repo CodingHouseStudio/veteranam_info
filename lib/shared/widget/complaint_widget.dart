@@ -16,26 +16,34 @@ class ComplaintWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        KSizedBox.kHeightSizedBox10,
-        IconButtonWidget(
-          key: KWidgetkeys.widget.reportDialog.button,
-          onPressed: () => context.dialog.showReportDialog(
-            isDesk: isDesk,
-            cardEnum: cardEnum,
-            afterEvent: afterEvent,
-            cardId: cardId,
+    return InkWell(
+      onTap: () => context.dialog.showReportDialog(
+        isDesk: isDesk,
+        cardEnum: cardEnum,
+        afterEvent: afterEvent,
+        cardId: cardId,
+      ),
+      child: Column(
+        children: [
+          KSizedBox.kHeightSizedBox10,
+          IconButtonWidget(
+            key: KWidgetkeys.widget.reportDialog.button,
+            onPressed: () => context.dialog.showReportDialog(
+              isDesk: isDesk,
+              cardEnum: cardEnum,
+              afterEvent: afterEvent,
+              cardId: cardId,
+            ),
+            icon: KIcon.brightnessAlert,
+            background: AppColors.materialThemeWhite,
           ),
-          icon: KIcon.brightnessAlert,
-          background: AppColors.materialThemeWhite,
-        ),
-        KSizedBox.kHeightSizedBox6,
-        Text(
-          context.l10n.complaint,
-          style: AppTextStyle.materialThemeLabelSmall,
-        ),
-      ],
+          KSizedBox.kHeightSizedBox6,
+          Text(
+            context.l10n.complaint,
+            style: AppTextStyle.materialThemeLabelSmall,
+          ),
+        ],
+      ),
     );
   }
 }
