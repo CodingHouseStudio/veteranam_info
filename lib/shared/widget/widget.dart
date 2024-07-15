@@ -14,6 +14,7 @@ export 'check_point_single_widget.dart';
 export 'check_point_widget.dart';
 export 'chip_widget.dart';
 export 'city_list_widget.dart';
+export 'closel_button_widget.dart';
 export 'complaint_widget.dart';
 export 'dialogs_widget.dart';
 export 'dilog_page_widget.dart';

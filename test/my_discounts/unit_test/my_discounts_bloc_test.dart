@@ -22,7 +22,8 @@ void main() {
       when(mockAuthRepository.currentUser)
           .thenAnswer((invocation) => KTestText.userWithoutPhoto);
       when(
-        mockDiscountRepository.getDiscountsById(KTestText.userWithoutPhoto.id),
+        mockDiscountRepository
+            .getDiscountsByUserId(KTestText.userWithoutPhoto.id),
       ).thenAnswer((_) async => Right(KTestText.discountModelItems));
 
       when(
@@ -81,7 +82,7 @@ void main() {
       act: (bloc) async {
         when(
           mockDiscountRepository
-              .getDiscountsById(KTestText.userWithoutPhoto.id),
+              .getDiscountsByUserId(KTestText.userWithoutPhoto.id),
         ).thenAnswer((_) async => const Left(SomeFailure.serverError()));
         bloc.add(const MyDiscountsWatcherEvent.started());
       },

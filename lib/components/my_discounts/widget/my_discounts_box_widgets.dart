@@ -55,7 +55,7 @@ List<Widget> _boxesWidget(
   int index,
 ) {
   return [
-    DiscountsCardWidget(
+    DiscountCardWidget(
       key: KWidgetkeys.screen.myDiscounts.card,
       discountItem: discountsWidgetList.elementAt(index),
       isDesk: isDesk,

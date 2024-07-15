@@ -27,5 +27,7 @@ class _ScreenKeys {
   // final contact = _ContactKeys();
   final underConstruction = _UnderConstructionKeys();
   final feedback = _FeedbackKeys();
-  final privacyPolicy = _PrivacyPolicyKeys();
+  final privacyPolicy = _PrivacyPolicyDialogKeys();
+  final discountCard = _DiscountCardDialogKeys();
+  final newsCard = _NewsCardDialogKeys();
 }

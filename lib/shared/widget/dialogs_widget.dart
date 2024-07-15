@@ -132,6 +132,7 @@ class _DialogsWidget {
                   insetPadding: EdgeInsets.zero,
                   icon: CancelWidget(
                     widgetKey: KWidgetkeys.widget.reportDialog.cancel,
+                    onPressed: () => context.pop(),
                   ),
                   iconPadding: const EdgeInsets.all(KPadding.kPaddingSize16)
                       .copyWith(bottom: 0),

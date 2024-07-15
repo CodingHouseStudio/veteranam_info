@@ -9,13 +9,13 @@ Future<void> cancelHelper({
   required MockGoRouter mockGoRouter,
 }) async {
   expect(
-    find.byKey(KWidgetkeys.screen.privacyPolicy.icon),
+    find.byKey(KWidgetkeys.screen.privacyPolicy.closeIcon),
     findsWidgets,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.screen.privacyPolicy.icon));
+  await tester.tap(find.byKey(KWidgetkeys.screen.privacyPolicy.closeIcon));
 
   verify(
-    () => mockGoRouter.pop(),
+    () => mockGoRouter.goNamed(KRoute.home.name),
   ).called(1);
 }

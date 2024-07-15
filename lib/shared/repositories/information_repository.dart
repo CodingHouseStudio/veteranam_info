@@ -54,4 +54,18 @@ class InformationRepository implements IInformationRepository {
       return const Left(SomeFailure.serverError());
     }
   }
+
+  @override
+  Future<Either<SomeFailure, InformationModel>> getInformation(
+    String id,
+  ) async {
+    try {
+      final informationModel = await _firestoreService.getInformation(id);
+      return Right(informationModel);
+    } on FirebaseException catch (e) {
+      return Left(GetFailur.fromCode(e).status);
+    } catch (e) {
+      return const Left(SomeFailure.serverError());
+    }
+  }
 }

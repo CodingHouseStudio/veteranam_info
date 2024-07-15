@@ -1,0 +1,33 @@
+import 'package:flutter/material.dart';
+import 'package:veteranam/components/components.dart';
+import 'package:veteranam/shared/shared.dart';
+
+class DiscountCardDialog extends StatelessWidget {
+  const DiscountCardDialog({required this.id, super.key});
+  final String? id;
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final isDesk =
+            constraints.maxWidth > KPlatformConstants.minWidthThresholdDesk;
+        return AlertDialog(
+          key: KWidgetkeys.screen.discountCard.dialog,
+          shape: const RoundedRectangleBorder(
+            borderRadius: KBorderRadius.kBorderRadius32,
+          ),
+          backgroundColor: AppColors.materialThemeKeyColorsNeutral,
+          contentPadding: EdgeInsets.zero,
+          scrollable: true,
+          content: DiscountCardBlocprovider(
+            childWidget: DiscountCardBody(
+              isDesk: isDesk,
+            ),
+            id: id,
+          ),
+        );
+      },
+    );
+  }
+}

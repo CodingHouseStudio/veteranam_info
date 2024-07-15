@@ -10,7 +10,7 @@ Future<void> privacyPolicyInitialHelper(
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.privacyPolicy.icon),
+    find.byKey(KWidgetkeys.screen.privacyPolicy.closeIcon),
     findsWidgets,
   );
 }

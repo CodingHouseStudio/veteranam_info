@@ -1,6 +1,7 @@
 export 'about_us/about_us.dart';
 export 'consultation/consultation.dart';
 export 'contact/contact.dart';
+export 'discount_card/discount_card.dart';
 export 'discounts/discounts.dart';
 export 'employee_respond/employee_respond.dart';
 export 'error/error.dart';
@@ -11,6 +12,7 @@ export 'investors/investors.dart';
 export 'login/login.dart';
 export 'my_discounts/my_discounts.dart';
 export 'my_story/my_story.dart';
+export 'news_card/news_card.dart';
 export 'privacy_policy/privacy_policy.dart';
 export 'profile/profile.dart';
 export 'profile_saves/profile_saves.dart';

@@ -4,9 +4,7 @@ import 'package:veteranam/shared/shared.dart';
 
 import '../../../text_dependency.dart';
 
-Future<void> cardTextDetailHelper(
-  WidgetTester tester,
-) async {
+Future<void> cardTextDetailHelper(WidgetTester tester) async {
   expect(
     find.byKey(KWidgetkeys.widget.cardTextDetail.text),
     findsWidgets,
@@ -66,7 +64,6 @@ Future<void> cardTextDetailHelper(
 
   await scrollingHelper(
     tester: tester,
-    offset: KTestConstants.scrollingUp,
     itemKey: KWidgetkeys.widget.cardTextDetail.text,
   );
 

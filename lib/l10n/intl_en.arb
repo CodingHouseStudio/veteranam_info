@@ -216,6 +216,7 @@
   "cardListEmptyText": "Sorry, nothing was found using your filters. Try changing your search criteria",
   "ofUpTo": "of up to",
   "findYourDiscount": "FIND YOUR DISCOUNT",
+  "close": "Close",
   "error": "We're sorry, there was an unforeseen error.",
   "@error": {
     "description": "message of an unforeseen error that was not foreseen."
