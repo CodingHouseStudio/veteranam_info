@@ -247,10 +247,16 @@ class _DiscountsCardWidgetMob extends StatelessWidget {
                               style: AppTextStyle.materialThemeLabelSmall,
                             ),
                             KSizedBox.kWidthSizedBox8,
-                            Text(
-                              key: KWidgetkeys.widget.discountCard.date,
-                              discountItem.dateVerified.toLocalDateString(),
-                              style: AppTextStyle.materialThemeLabelSmall,
+                            Builder(
+                              builder: (context) {
+                                final locale = Localizations.localeOf(context);
+                                return Text(
+                                  key: KWidgetkeys.widget.discountCard.date,
+                                  discountItem.dateVerified
+                                      .toLocalDateString(locale.languageCode),
+                                  style: AppTextStyle.materialThemeLabelSmall,
+                                );
+                              },
                             ),
                           ],
                         ),
