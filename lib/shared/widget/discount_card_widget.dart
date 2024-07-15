@@ -60,7 +60,8 @@ class DiscountCardWidget extends StatelessWidget {
                           KSizedBox.kWidthSizedBox8,
                           Text(
                             key: KWidgetkeys.widget.discountCard.date,
-                            discountItem.dateVerified.toLocalDateString(),
+                            discountItem.dateVerified
+                                .toLocalDateString(context),
                             style: AppTextStyle.materialThemeLabelSmall,
                             overflow: TextOverflow.clip,
                           ),
@@ -227,13 +228,11 @@ class DiscountCardWidget extends StatelessWidget {
 //     required this.discountItem,
 //     required this.isDesk,
 //     required this.reportEvent,
-//     this.closeWidget,
 //   });
 
 //   final DiscountModel discountItem;
 //   final bool isDesk;
 //   final void Function()? reportEvent;
-//   final Widget? closeWidget;
 
 //   @override
 //   Widget build(BuildContext context) {
@@ -264,17 +263,15 @@ class DiscountCardWidget extends StatelessWidget {
 //                       children: [
 //                         Text(
 //                           key: KWidgetkeys.widget.discountCard.service,
-//                           discountItem.company ?? 
+//                           discountItem.company ??
 // context.l10n.companyIsHidden,
-//                           style: isDesk
-//                               ? AppTextStyle.materialThemeTitleSmall
-//                               : AppTextStyle.materialThemeTitleSmall,
+//                           style: AppTextStyle.materialThemeTitleSmall,
 //                         ),
 //                         Wrap(
 //                           children: [
 //                             Text(
 //                               key: KWidgetkeys.widget.discountCard.userName,
-//                               discountItem.userName ?? 
+//                               discountItem.userName ??
 // context.l10n.anonymous,
 //                               style: AppTextStyle.materialThemeLabelSmall,
 //                             ),
@@ -303,17 +300,16 @@ class DiscountCardWidget extends StatelessWidget {
 //               children: [
 //                 KSizedBox.kHeightSizedBox16,
 //                 Row(
-//                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
 //                   children: [
-//                     ...List.generate(discountItem.category.length, 
-//(int index) {
+//                     ...List.generate(discountItem.category.length,
+// (int index) {
 //                       return Container(
 //                         padding: const EdgeInsets.symmetric(
 //                           vertical: KPadding.kPaddingSize4,
 //                           horizontal: KPadding.kPaddingSize8,
 //                         ),
-//                         decoration: KWidgetTheme.
-// boxDecorationDiscountCategory,
+//                         decoration:
+// KWidgetTheme.boxDecorationDiscountCategory,
 //                         margin: const EdgeInsets.only(
 //                           right: KPadding.kPaddingSize4,
 //                         ),
@@ -337,6 +333,7 @@ class DiscountCardWidget extends StatelessWidget {
 //                         ),
 //                       );
 //                     }),
+//                     const Spacer(),
 //                     Container(
 //                       decoration: KWidgetTheme.boxDecorationDiscount,
 //                       padding: const EdgeInsets.symmetric(
@@ -382,10 +379,6 @@ class DiscountCardWidget extends StatelessWidget {
 //                   ),
 //                 ),
 //                 KSizedBox.kHeightSizedBox16,
-//                 if (closeWidget != null) ...[
-//                   closeWidget!,
-//                   KSizedBox.kHeightSizedBox16,
-//                 ],
 //               ],
 //             ),
 //           ),
