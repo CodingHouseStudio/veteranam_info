@@ -21,33 +21,35 @@ extension PumpApp on WidgetTester {
             GetIt.I.get<AuthenticationBloc>()..add(AuthenticationInitialized()),
         child: BlocBuilder<AuthenticationBloc, AuthenticationState>(
           builder: (context, state) => mockGoRouter == null
-              ? MaterialApp(
-                  localizationsDelegates: const [
-                    locale,
-                    GlobalCupertinoLocalizations.delegate,
-                    GlobalMaterialLocalizations.delegate,
-                    GlobalWidgetsLocalizations.delegate,
-                  ],
-                  locale: state.userSetting.locale.value,
-                  supportedLocales: locale.supportedLocales,
-                  home: widget,
+              ? _body(
+                  widget: widget,
+                  currentLocale: state.userSetting.locale.value,
                 )
               : MockGoRouterProvider(
                   goRouter: mockGoRouter,
-                  child: MaterialApp(
-                    localizationsDelegates: const [
-                      locale,
-                      GlobalCupertinoLocalizations.delegate,
-                      GlobalMaterialLocalizations.delegate,
-                      GlobalWidgetsLocalizations.delegate,
-                    ],
-                    locale: state.userSetting.locale.value,
-                    supportedLocales: locale.supportedLocales,
-                    home: widget,
+                  child: _body(
+                    widget: widget,
+                    currentLocale: state.userSetting.locale.value,
                   ),
                 ),
         ),
       ),
     );
   }
+
+  Widget _body({
+    required Widget widget,
+    required Locale currentLocale,
+  }) =>
+      MaterialApp(
+        localizationsDelegates: const [
+          locale,
+          GlobalCupertinoLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+        ],
+        locale: currentLocale,
+        supportedLocales: locale.supportedLocales,
+        home: widget,
+      );
 }

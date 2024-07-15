@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 
 /// COMMENT: Add a part here when you add a new file for keys
+// SCREEN
 part 'screen/screen.dart';
 part 'screen/home.dart';
 part 'screen/app.dart';
@@ -29,7 +30,9 @@ part 'screen/my_story.dart';
 part 'screen/feedback.dart';
 part 'screen/my_discounts.dart';
 // part 'screen/contact.dart';
+part 'screen/privacy_policy.dart';
 
+//WIDGET
 part 'widget/widget.dart';
 part 'widget/question.dart';
 part 'widget/nawbar.dart';
