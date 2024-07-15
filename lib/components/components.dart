@@ -11,6 +11,7 @@ export 'investors/investors.dart';
 export 'login/login.dart';
 export 'my_discounts/my_discounts.dart';
 export 'my_story/my_story.dart';
+export 'privacy_policy/privacy_policy.dart';
 export 'profile/profile.dart';
 export 'profile_saves/profile_saves.dart';
 export 'questions_form/questions_form.dart';

@@ -58,6 +58,10 @@ abstract class KRoute {
     path: '/thanks',
     name: 'Thanks',
   );
+  static const _RouteItem privacyPolicy = _RouteItem(
+    path: 'privacy-policy',
+    name: 'Privacy-policy',
+  );
   static const _RouteItem questionsForm = _RouteItem(
     path: '/questionsForm',
     name: 'QuestionsForm',
