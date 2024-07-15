@@ -113,12 +113,7 @@ abstract class FooterWidget {
                         // .materialThemeRefNeutralVariantNeutralVariant35,
                         // ),
                         //KSizedBox.kWidthSizedBox16,
-                        Text(
-                          context.l10n.privacyPolicy,
-                          key: KWidgetkeys.widget.footer.privacyPolicy,
-                          style: AppTextStyle
-                              .materialThemeBodyLargeNeutralVariant35,
-                        ),
+                        _privacyPolice(context: context, isDesk: true),
                         // KSizedBox.kHeightSizedBox90,
                       ],
                     ),
@@ -195,16 +190,18 @@ abstract class FooterWidget {
               Text(
                 KAppText.madeBy,
                 key: KWidgetkeys.widget.footer.madeBy,
-                style: AppTextStyle.materialThemeLabelSmall,
+                style: AppTextStyle.materialThemeLabelSmallNeutralVariant35,
               ),
               KSizedBox.kHeightSizedBox4,
               Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Expanded(
                     child: Text(
                       context.l10n.allRightsReserved,
                       key: KWidgetkeys.widget.footer.rightReserved,
-                      style: AppTextStyle.materialThemeLabelSmall,
+                      style:
+                          AppTextStyle.materialThemeLabelSmallNeutralVariant35,
                     ),
                   ),
                   // KSizedBox.kWidthSizedBox8,
@@ -215,11 +212,7 @@ abstract class FooterWidget {
                   // ),
                   KSizedBox.kWidthSizedBox8,
                   Expanded(
-                    child: Text(
-                      context.l10n.privacyPolicy,
-                      key: KWidgetkeys.widget.footer.privacyPolicy,
-                      style: AppTextStyle.materialThemeLabelSmall,
-                    ),
+                    child: _privacyPolice(context: context, isDesk: false),
                   ),
                 ],
               ),
@@ -488,4 +481,20 @@ abstract class FooterWidget {
           background: AppColors.materialThemeSourceSeed,
         ),
       ];
+  static Widget _privacyPolice({
+    required BuildContext context,
+    required bool isDesk,
+  }) =>
+      TextButton(
+        key: KWidgetkeys.widget.footer.privacyPolicy,
+        onPressed: () => context.goNamed(KRoute.privacyPolicy.name),
+        style: KButtonStyles.doubleButtonStyle
+            .copyWith(alignment: Alignment.bottomLeft),
+        child: Text(
+          context.l10n.privacyPolicy,
+          style: isDesk
+              ? AppTextStyle.materialThemeBodyLargeNeutralVariant35
+              : AppTextStyle.materialThemeLabelSmallNeutralVariant35,
+        ),
+      );
 }

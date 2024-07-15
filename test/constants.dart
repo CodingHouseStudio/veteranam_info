@@ -410,5 +410,7 @@ abstract class KScreenBlocName {
   static const scroll = 'scroll';
   static const image = 'image';
   static const casheClient = 'cashe client';
-  static const report = 'Report';
+
+  static const report = 'Report Dialog';
+  static const privacyPolicy = 'Privacy Policy Dialog';
 }
