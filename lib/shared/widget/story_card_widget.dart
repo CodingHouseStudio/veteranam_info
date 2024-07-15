@@ -51,6 +51,8 @@ class StoryCardWidget extends StatelessWidget {
       titleIcon: KIcon.trash.copyWith(
         key: KWidgetkeys.widget.storyCard.trashIcon,
       ),
+      cardId: storyModel.id,
+      cardEnum: CardEnum.story,
     );
   }
 }

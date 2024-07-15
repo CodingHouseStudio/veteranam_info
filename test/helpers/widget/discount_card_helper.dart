@@ -40,18 +40,33 @@ Future<void> discountCardHelper(
     findsNothing,
   );
 
+  // expect(
+  //   find.byKey(KWidgetkeys.widget.discountCard.description),
+  //   findsWidgets,
+  // );
+
   expect(
-    find.byKey(KWidgetkeys.widget.discountCard.description),
+    find.byKey(KWidgetkeys.widget.discountCard.iconComplaint),
     findsWidgets,
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.discountCard.buttons),
+    find.byKey(KWidgetkeys.widget.discountCard.iconShare),
+    findsWidgets,
+  );
+
+  expect(
+    find.byKey(KWidgetkeys.widget.discountCard.iconComplaint),
+    findsWidgets,
+  );
+
+  expect(
+    find.byKey(KWidgetkeys.widget.discountCard.iconWebsite),
     findsWidgets,
   );
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.widget.discountCard.buttons,
+    itemKey: KWidgetkeys.widget.discountCard.iconComplaint,
   );
 }
