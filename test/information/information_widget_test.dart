@@ -49,6 +49,22 @@ void main() {
       ).thenAnswer(
         (invocation) async => const Right(true),
       );
+      when(
+        mockInformationRepository.updateLikeCount(
+          informationModel: KTestText.informationModelItems.elementAt(2),
+          isLiked: true,
+        ),
+      ).thenAnswer(
+        (invocation) async => const Right(true),
+      );
+      when(
+        mockInformationRepository.updateLikeCount(
+          informationModel: KTestText.informationModelItems.elementAt(2),
+          isLiked: false,
+        ),
+      ).thenAnswer(
+        (invocation) async => const Right(true),
+      );
       mockAppAuthenticationRepository = MockAppAuthenticationRepository();
       when(mockAppAuthenticationRepository.currentUser).thenAnswer(
         (invocation) => KTestText.user,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:veteranam/components/components.dart';
 import 'package:veteranam/shared/shared.dart';
 
@@ -14,7 +15,8 @@ class PrivacyPolicyDialog extends StatelessWidget {
       ),
       backgroundColor: AppColors.materialThemeKeyColorsNeutral,
       icon: CancelWidget(
-        widgetKey: KWidgetkeys.screen.privacyPolicy.icon,
+        widgetKey: KWidgetkeys.screen.privacyPolicy.closeIcon,
+        onPressed: () => context.goNamed(KRoute.home.name),
       ),
       contentPadding: EdgeInsets.zero,
       iconPadding: const EdgeInsets.only(

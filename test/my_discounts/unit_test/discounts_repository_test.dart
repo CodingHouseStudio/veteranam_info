@@ -45,7 +45,7 @@ void main() {
       test('Get by user ID', () async {
         expect(
           await mockDiscountRepository
-              .getDiscountsById(KTestText.userWithoutPhoto.id),
+              .getDiscountsByUserId(KTestText.userWithoutPhoto.id),
           isA<Right<SomeFailure, List<DiscountModel>>>()
               .having((e) => e.value, 'value', KTestText.discountModelItems),
         );
@@ -87,7 +87,7 @@ void main() {
       test('Get by user ID Failure', () async {
         expect(
           await mockDiscountRepository
-              .getDiscountsById(KTestText.userWithoutPhoto.id),
+              .getDiscountsByUserId(KTestText.userWithoutPhoto.id),
           isA<Left<SomeFailure, List<DiscountModel>>>().having(
             (e) => e.value,
             'value',

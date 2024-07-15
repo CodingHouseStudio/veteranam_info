@@ -34,7 +34,7 @@ class DiscountRepository implements IDiscountRepository {
   }
 
   @override
-  Future<Either<SomeFailure, List<DiscountModel>>> getDiscountsById(
+  Future<Either<SomeFailure, List<DiscountModel>>> getDiscountsByUserId(
     String userId,
   ) async {
     try {
@@ -56,6 +56,20 @@ class DiscountRepository implements IDiscountRepository {
     try {
       await _firestoreService.deleteDiscountById(discountId);
       return const Right(true);
+    } on FirebaseException catch (e) {
+      return Left(GetFailur.fromCode(e).status);
+    } catch (e) {
+      return const Left(SomeFailure.serverError());
+    }
+  }
+
+  @override
+  Future<Either<SomeFailure, DiscountModel>> getDiscount(
+    String id,
+  ) async {
+    try {
+      final discountModel = await _firestoreService.getDiscount(id);
+      return Right(discountModel);
     } on FirebaseException catch (e) {
       return Left(GetFailur.fromCode(e).status);
     } catch (e) {
