@@ -8,6 +8,7 @@ Future<void> profileInitialHelper(
 ) async {
   await changeWindowSizeHelper(
     tester: tester,
+    windowsTest: true,
     test: () async {
       expect(
         find.byKey(KWidgetkeys.screen.profile.profileCard),
