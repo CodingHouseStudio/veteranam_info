@@ -10,8 +10,7 @@ Future<void> cancelHelper({
 }) async {
   await scrollingHelper(
     tester: tester,
-    scrollKey: KWidgetkeys.screen.discountCard.dialog,
-    offset: KTestConstants.scrollingDown,
+    itemKey: KWidgetkeys.screen.discountCard.closeButton,
   );
 
   expect(

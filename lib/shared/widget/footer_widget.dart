@@ -85,7 +85,7 @@ abstract class FooterWidget {
                       crossAxisAlignment: WrapCrossAlignment.end,
                       children: [
                         Text(
-                          KAppText.madeBy,
+                          '${KAppText.madeBy}  | ',
                           key: KWidgetkeys.widget.footer.madeBy,
                           style: AppTextStyle
                               .materialThemeBodyLargeNeutralVariant35,
@@ -100,7 +100,7 @@ abstract class FooterWidget {
                         // ),
                         //KSizedBox.kWidthSizedBox16,
                         Text(
-                          context.l10n.allRightsReserved,
+                          '${context.l10n.allRightsReserved}  | ',
                           key: KWidgetkeys.widget.footer.rightReserved,
                           style: AppTextStyle
                               .materialThemeBodyLargeNeutralVariant35,
