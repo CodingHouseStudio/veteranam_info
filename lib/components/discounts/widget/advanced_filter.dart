@@ -154,19 +154,24 @@ abstract class _AdvanceFilter {
   }) =>
       [
         KSizedBox.kHeightSizedBox24,
-        Align(
-          alignment: Alignment.centerLeft,
-          child: TextButton(
-            key: KWidgetkeys.screen.discounts.advancedFilterResetButton,
-            style: KButtonStyles.borderBlackButtonStyle,
-            onPressed: () => context
-                .read<DiscountWatcherBloc>()
-                .add(const DiscountWatcherEvent.filterReset()),
-            child: Text(
-              context.l10n.resetAll,
-              style: isDesk
-                  ? AppTextStyle.materialThemeTitleLarge
-                  : AppTextStyle.materialThemeTitleMedium,
+        Padding(
+          padding: isDesk
+              ? EdgeInsets.zero
+              : const EdgeInsets.only(left: KPadding.kPaddingSize16),
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: TextButton(
+              key: KWidgetkeys.screen.discounts.advancedFilterResetButton,
+              style: KButtonStyles.borderBlackButtonStyle,
+              onPressed: () => context
+                  .read<DiscountWatcherBloc>()
+                  .add(const DiscountWatcherEvent.filterReset()),
+              child: Text(
+                context.l10n.resetAll,
+                style: isDesk
+                    ? AppTextStyle.materialThemeTitleLarge
+                    : AppTextStyle.materialThemeTitleMedium,
+              ),
             ),
           ),
         ),
