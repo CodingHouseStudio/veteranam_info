@@ -50,6 +50,7 @@ extension ListExtensions<T> on List<T> {
     int? loadItems,
     List<dynamic>? overallFilter,
     List<T>? fullList,
+    bool containAnyItems = true,
   }) {
     if (isEmpty) return [];
 
@@ -71,9 +72,11 @@ extension ListExtensions<T> on List<T> {
         )
         .toList();
 
-    return where((item) => filtersText.every(getFilter(item).contains))
-        .take(loadedItemsCount)
-        .toList();
+    return where(
+      (item) => containAnyItems
+          ? filtersText.any(getFilter(item).contains)
+          : filtersText.every(getFilter(item).contains),
+    ).take(loadedItemsCount).toList();
   }
 
   List<dynamic> overallItemBloc({
