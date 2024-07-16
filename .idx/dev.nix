@@ -3,12 +3,6 @@
 { pkgs, ... }: {
   # Which nixpkgs channel to use.
   channel = "stable-23.11"; # or "unstable"
-
-  # Sets environment variables in the workspace
-  env = {
-    # Set the environment variable for the build flavor
-    BUILD_FLAVOR = "production"; # or "development"
-  };
   # Use https://search.nixos.org/packages to find packages
   packages = [
     pkgs.nodePackages.firebase-tools
@@ -17,8 +11,7 @@
     pkgs.chromedriver
   ];
 
-  # Sets environment variables in the workspace
-  env = {};
+
   idx = {
     # Search for the extensions you want on https://open-vsx.org/ and use "publisher.id"
     extensions = [
@@ -36,13 +29,16 @@
       previews = {
         web = {
           # Use the environment variable in the command
-          command = ["flutter" "run" "--flavor" "$BUILD_FLAVOR" "-t" "lib/main_$BUILD_FLAVOR.dart" "-dart--define" "FLAVOUR=$BUILD_FLAVOR" "--machine" "-d" "web-server" "--web-hostname" "0.0.0.0" "--web-port" "$PORT"];
+          command = ["flutter" "run" "-t" "lib/main_production.dart" "-dart--define" "FLAVOUR=production" "--machine" "-d" "web-server" "--web-hostname" "0.0.0.0" "--web-port" "$PORT"];
           manager = "flutter";
         };
         android = {
           # Use the environment variable in the command
-          command = ["flutter" "run" "--flavor" "$BUILD_FLAVOR" "-t" "lib/main_$BUILD_FLAVOR.dart" "-dart--define" "FLAVOUR=$BUILD_FLAVOR" "--machine" "-d" "android" "-d" "localhost:5555" ];
+          command = ["flutter" "run" "--flavor" "production" "-t" "lib/main_production.dart" "-dart--define" "FLAVOUR=production" "--machine" "-d" "android" "-d" "localhost:5555" ];
           manager = "flutter";
+          env = {
+            BUILD_FLAVOR = "production";
+          };
         };
       };
     };
@@ -63,18 +59,18 @@
  \
             -Pverbose=true \
             -Ptarget-platform=android-x86 \
-            -Ptarget=/home/user/veteran/lib/main_$BUILD_FLAVOR.dart \
+            -Ptarget=/home/user/veteran/lib/main_production.dart \
             -Pbase-application-name=info.veteranam \
-            -Pdart-defines=FLAVOUR=$BUILD_FLAVOR \
+            -Pdart-defines=FLAVOUR=production \
             -Pdart-obfuscation=false \
             -Ptrack-widget-creation=true \
             -Ptree-shake-icons=false \
             -Pfilesystem-scheme=org-dartlang-root \
             assembleDebug
-          # TODO: Execute web build in debug mode using $BUILD_FLAVOR.
+          # TODO: Execute web build in debug mode using production.
           # flutter run does this transparently either way
           # https://github.com/flutter/flutter/issues/96283#issuecomment-1144750411
-          flutter build web --debug -t lib/main_$BUILD_FLAVOR.dart --flavor $BUILD_FLAVOR --dart-define=FLAVOUR=$BUILD_FLAVOR 
+          flutter build web --debug -t lib/main_production.dart --flavor production --dart-define=FLAVOUR=production 
           adb -s localhost:5555 wait-for-device
         '';
       };
