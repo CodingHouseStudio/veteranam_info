@@ -253,6 +253,7 @@ class DiscountWatcherBloc
           ],
           overallFilter: items._getLocationItems,
           loadItems: loadItems,
+          containAnyItems: false,
         );
   }
 
