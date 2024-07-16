@@ -188,7 +188,7 @@ abstract class FooterWidget {
               ),
               KSizedBox.kHeightSizedBox24,
               Text(
-                KAppText.madeBy,
+                '${KAppText.madeBy}  | ',
                 key: KWidgetkeys.widget.footer.madeBy,
                 style: AppTextStyle.materialThemeLabelSmallNeutralVariant35,
               ),
@@ -198,7 +198,7 @@ abstract class FooterWidget {
                 children: [
                   Expanded(
                     child: Text(
-                      context.l10n.allRightsReserved,
+                      '${context.l10n.allRightsReserved}  | ',
                       key: KWidgetkeys.widget.footer.rightReserved,
                       style:
                           AppTextStyle.materialThemeLabelSmallNeutralVariant35,
