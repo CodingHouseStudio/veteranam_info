@@ -23,15 +23,14 @@ extension ExtendedDateTime on DateTime {
   String get localeTime => toLocal().toString().split(' ')[0];
 }
 
+// Extension for handling item loading logic on int
 extension ItemLoadedExtensions on int {
-  int getLoaded({required List<dynamic> list, int? loadItems}) => min(
-        list.length,
-        max(
-          this,
-          loadItems ?? KDimensions.loadItems,
-        ),
-      );
-  bool checkLoadingPosible(List<dynamic> list) => this >= list.length;
+  // Get the number of loaded items
+  int getLoaded({required List<dynamic> list, int? loadItems}) =>
+      min(list.length, max(this, loadItems ?? KDimensions.loadItems));
+
+  // Check if loading more items is possible
+  bool checkLoadingPosible(List<dynamic> list) => this > list.length;
 }
 
 extension LocalizedDateTime on DateTime {
