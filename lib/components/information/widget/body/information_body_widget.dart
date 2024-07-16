@@ -25,6 +25,9 @@ class InformationBodyWidget extends StatelessWidget {
         loadingButtonText: context.l10n.moreNews,
         listCanLoaded: _.loadingStatus != LoadingStatus.listLoadedFull,
         cardListIsEmpty: _.filteredInformationModelItems.isEmpty,
+        resetFilter: () => context
+            .read<InformationWatcherBloc>()
+            .add(const InformationWatcherEvent.filter(-1)),
         titleChildWidgetsFunction: ({required isDesk}) => [
           KSizedBox.kHeightSizedBox24,
           ...TitleWidget.titleIconWidgetList(

@@ -342,7 +342,7 @@ abstract class AppTextStyle {
     fontWeight: FontWeight.w500,
     letterSpacing: 0.5,
   );
-  static const TextStyle materialThemeLabelSmallHint = TextStyle(
+  static const TextStyle materialThemeLabelSmallNeutralVariant35 = TextStyle(
     fontFamily: 'Gilroy',
     fontSize: 11,
     height: 1.45,
@@ -420,6 +420,15 @@ abstract class AppTextStyle {
     height: 1.43,
     fontWeight: FontWeight.w500,
     letterSpacing: 0.1,
+  );
+
+  static const TextStyle materialThemeTitleSmallNeutral = TextStyle(
+    fontFamily: 'Gilroy',
+    fontSize: 14,
+    height: 1.43,
+    fontWeight: FontWeight.w500,
+    letterSpacing: 0.1,
+    color: AppColors.materialThemeKeyColorsNeutral,
   );
 
   /// h1 figma properties

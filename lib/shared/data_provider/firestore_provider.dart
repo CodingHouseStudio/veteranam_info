@@ -139,6 +139,17 @@ class FirestoreService {
         },
       );
 
+  Future<InformationModel> getInformation(String id) async {
+    final docSnapshot =
+        await _db.collection(FirebaseCollectionName.information).doc(id).get();
+
+    if (docSnapshot.exists) {
+      return InformationModel.fromJson(docSnapshot.data()!);
+    } else {
+      throw FirebaseException(code: 'not-found', plugin: 'not-found');
+    }
+  }
+
   Future<void> addInformation(InformationModel information) {
     return _db
         .collection(FirebaseCollectionName.information)
@@ -228,11 +239,11 @@ class FirestoreService {
         },
       );
 
-  Future<void> addStory(StoryModel information) {
+  Future<void> addStory(StoryModel story) {
     return _db
         .collection(FirebaseCollectionName.stroies)
-        .doc(information.id)
-        .set(information.toJson());
+        .doc(story.id)
+        .set(story.toJson());
   }
 
   Future<List<StoryModel>> getStoriesByUserId(String userId) async {
@@ -265,6 +276,17 @@ class FirestoreService {
             .toList();
       },
     );
+  }
+
+  Future<DiscountModel> getDiscount(String id) async {
+    final docSnapshot =
+        await _db.collection(FirebaseCollectionName.discount).doc(id).get();
+
+    if (docSnapshot.exists) {
+      return DiscountModel.fromJson(docSnapshot.data()!);
+    } else {
+      throw FirebaseException(code: 'not-found', plugin: 'not-found');
+    }
   }
 
   Future<void> addDiscount(DiscountModel discount) {
@@ -333,7 +355,7 @@ class FirestoreService {
         .update(informationModel.toJson());
   }
 
-  Future<List<ReportModel>> getCardReportById({
+  Future<List<ReportModel>> getCardReportByUserId({
     required CardEnum cardEnum,
     required String userId,
   }) async {
@@ -347,4 +369,9 @@ class FirestoreService {
         .map((doc) => ReportModel.fromJson(doc.data()))
         .toList();
   }
+
+  Future<void> sendRespond(EmployeeRespondModel respondModel) => _db
+      .collection(FirebaseCollectionName.respond)
+      .doc(respondModel.id)
+      .set(respondModel.toJson());
 }

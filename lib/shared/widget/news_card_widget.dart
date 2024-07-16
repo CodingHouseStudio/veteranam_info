@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:veteranam/shared/shared.dart';
 
 class NewsCardWidget extends StatelessWidget {
@@ -8,11 +9,15 @@ class NewsCardWidget extends StatelessWidget {
     required this.isDesk,
     this.onLikeChange,
     super.key,
+    this.closeWidget,
+    this.afterReportEvent,
   });
 
   final InformationModel informationItem;
   final bool isDesk;
   final void Function({required bool like})? onLikeChange;
+  final Widget? closeWidget;
+  final void Function()? afterReportEvent;
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +28,9 @@ class NewsCardWidget extends StatelessWidget {
         context.l10n.more,
         context.l10n.hide,
       ],
+      onShare: () async => Share.share(
+        '${Uri.base.origin}/${KRoute.information.path}/${informationItem.id}',
+      ),
       buttonStyle: KButtonStyles.borderBlackButtonStyle,
       titleWidget: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -56,38 +64,51 @@ class NewsCardWidget extends StatelessWidget {
           bottom: KPadding.kPaddingSize8,
           top: KPadding.kPaddingSize16,
         ),
-        child: Wrap(
-          key: KWidgetkeys.widget.newsCard.tags,
-          spacing: KSize.kWrapSpacing8,
-          runSpacing: KSize.kWrapRunSpacing4,
-          children:
-              (context.read<AuthenticationBloc>().state.userSetting.locale ==
-                          Language.english
-                      ? informationItem.category
-                      : informationItem.categoryUA)
-                  .map((category) {
-            return Container(
-              decoration: KWidgetTheme.boxDecorationCardGrayBorder,
-              padding: const EdgeInsets.symmetric(
-                vertical: KPadding.kPaddingSize4,
-                horizontal: KPadding.kPaddingSize8,
+        child: Row(
+          children: [
+            Expanded(
+              child: Wrap(
+                key: KWidgetkeys.widget.newsCard.tags,
+                spacing: KSize.kWrapSpacing8,
+                runSpacing: KSize.kWrapRunSpacing4,
+                children: (context
+                                .read<AuthenticationBloc>()
+                                .state
+                                .userSetting
+                                .locale ==
+                            Language.english
+                        ? informationItem.category
+                        : informationItem.categoryUA)
+                    .map((category) {
+                  return Container(
+                    decoration: KWidgetTheme.boxDecorationCardGrayBorder,
+                    padding: const EdgeInsets.symmetric(
+                      vertical: KPadding.kPaddingSize4,
+                      horizontal: KPadding.kPaddingSize8,
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          category,
+                          style: AppTextStyle.materialThemeLabelLarge,
+                        ),
+                        KIcon.check,
+                      ],
+                    ),
+                  );
+                }).toList(),
               ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    category,
-                    style: AppTextStyle.materialThemeLabelLarge,
-                  ),
-                  KIcon.check,
-                ],
-              ),
-            );
-          }).toList(),
+            ),
+            if (closeWidget != null) closeWidget!,
+          ],
         ),
       ),
       isDesk: isDesk,
       onLikeChange: onLikeChange,
+      cardId: informationItem.id,
+      cardEnum: CardEnum.information,
+      afterEvent: afterReportEvent,
     );
   }
 }

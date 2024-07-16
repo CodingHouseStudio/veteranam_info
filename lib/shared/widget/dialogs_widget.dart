@@ -130,15 +130,9 @@ class _DialogsWidget {
                   ),
                   scrollable: true,
                   insetPadding: EdgeInsets.zero,
-                  icon: Align(
-                    alignment: Alignment.centerRight,
-                    child: IconButtonWidget(
-                      key: KWidgetkeys.widget.reportDialog.cancel,
-                      onPressed: () => context.pop(),
-                      icon: KIcon.close,
-                      background: AppColors.materialThemeWhite,
-                      padding: KPadding.kPaddingSize12,
-                    ),
+                  icon: CancelWidget(
+                    widgetKey: KWidgetkeys.widget.reportDialog.cancel,
+                    onPressed: () => context.pop(),
                   ),
                   iconPadding: const EdgeInsets.all(KPadding.kPaddingSize16)
                       .copyWith(bottom: 0),

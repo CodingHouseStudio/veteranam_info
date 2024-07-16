@@ -12,6 +12,7 @@ class ScaffoldAutoLoadingWidget extends StatefulWidget {
     this.mainDeskPadding,
     this.mainRightChildWidget,
     super.key,
+    this.resetFilter,
   });
 
   final List<Widget> Function({required bool isDesk})?
@@ -24,6 +25,7 @@ class ScaffoldAutoLoadingWidget extends StatefulWidget {
   final String loadingButtonText;
   final bool listCanLoaded;
   final bool? cardListIsEmpty;
+  final void Function()? resetFilter;
 
   @override
   State<ScaffoldAutoLoadingWidget> createState() =>
@@ -64,10 +66,9 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
                 text: widget.loadingButtonText,
                 widgetKey: KWidgetkeys.widget.scaffold.loadingButton,
               ),
-            if ((widget.cardListIsEmpty ?? false) && Config.isProduction) ...[
+            if (widget.cardListIsEmpty ?? false) ...[
               KSizedBox.kHeightSizedBox100,
               // const Center(child: KImage.emptyList),
-              KSizedBox.kHeightSizedBox36,
               Center(
                 child: Text(
                   context.l10n.cardListEmptyText,
@@ -75,7 +76,16 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
                   style: AppTextStyle.materialThemeTitleMediumNeutralVariant70,
                 ),
               ),
-              KSizedBox.kHeightSizedBox100,
+              KSizedBox.kHeightSizedBox36,
+              Center(
+                child: TextButton(
+                  onPressed: widget.resetFilter,
+                  child: Text(
+                    context.l10n.resetAll,
+                    style: AppTextStyle.materialThemeTitleLarge,
+                  ),
+                ),
+              ),
             ],
             if (!widget.listCanLoaded &&
                 !(widget.cardListIsEmpty ?? false)) ...[

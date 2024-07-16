@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
@@ -9,6 +10,7 @@ abstract class FooterWidget {
   static List<Widget> get({
     required BuildContext context,
     required bool isTablet,
+    required bool isDesk,
   }) =>
       isTablet
           ? [
@@ -18,7 +20,11 @@ abstract class FooterWidget {
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: _support(context: context, isTablet: isTablet),
+                      children: _support(
+                        context: context,
+                        isTablet: isTablet,
+                        isDesk: isDesk,
+                      ),
                     ),
                   ),
                   Expanded(
@@ -79,7 +85,7 @@ abstract class FooterWidget {
                       crossAxisAlignment: WrapCrossAlignment.end,
                       children: [
                         Text(
-                          KAppText.madeBy,
+                          '${KAppText.madeBy}  | ',
                           key: KWidgetkeys.widget.footer.madeBy,
                           style: AppTextStyle
                               .materialThemeBodyLargeNeutralVariant35,
@@ -94,7 +100,7 @@ abstract class FooterWidget {
                         // ),
                         //KSizedBox.kWidthSizedBox16,
                         Text(
-                          context.l10n.allRightsReserved,
+                          '${context.l10n.allRightsReserved}  | ',
                           key: KWidgetkeys.widget.footer.rightReserved,
                           style: AppTextStyle
                               .materialThemeBodyLargeNeutralVariant35,
@@ -107,12 +113,7 @@ abstract class FooterWidget {
                         // .materialThemeRefNeutralVariantNeutralVariant35,
                         // ),
                         //KSizedBox.kWidthSizedBox16,
-                        Text(
-                          context.l10n.privacyPolicy,
-                          key: KWidgetkeys.widget.footer.privacyPolicy,
-                          style: AppTextStyle
-                              .materialThemeBodyLargeNeutralVariant35,
-                        ),
+                        _privacyPolice(context: context, isDesk: true),
                         // KSizedBox.kHeightSizedBox90,
                       ],
                     ),
@@ -122,7 +123,7 @@ abstract class FooterWidget {
               ),
             ]
           : [
-              ..._support(context: context, isTablet: isTablet),
+              ..._support(context: context, isTablet: isTablet, isDesk: isDesk),
               KSizedBox.kHeightSizedBox40,
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -187,18 +188,20 @@ abstract class FooterWidget {
               ),
               KSizedBox.kHeightSizedBox24,
               Text(
-                KAppText.madeBy,
+                '${KAppText.madeBy}  | ',
                 key: KWidgetkeys.widget.footer.madeBy,
-                style: AppTextStyle.materialThemeLabelSmall,
+                style: AppTextStyle.materialThemeLabelSmallNeutralVariant35,
               ),
               KSizedBox.kHeightSizedBox4,
               Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Expanded(
                     child: Text(
-                      context.l10n.allRightsReserved,
+                      '${context.l10n.allRightsReserved}  | ',
                       key: KWidgetkeys.widget.footer.rightReserved,
-                      style: AppTextStyle.materialThemeLabelSmall,
+                      style:
+                          AppTextStyle.materialThemeLabelSmallNeutralVariant35,
                     ),
                   ),
                   // KSizedBox.kWidthSizedBox8,
@@ -209,11 +212,7 @@ abstract class FooterWidget {
                   // ),
                   KSizedBox.kWidthSizedBox8,
                   Expanded(
-                    child: Text(
-                      context.l10n.privacyPolicy,
-                      key: KWidgetkeys.widget.footer.privacyPolicy,
-                      style: AppTextStyle.materialThemeLabelSmall,
-                    ),
+                    child: _privacyPolice(context: context, isDesk: false),
                   ),
                 ],
               ),
@@ -246,11 +245,12 @@ abstract class FooterWidget {
           KSizedBox.kHeightSizedBox8
         else
           KSizedBox.kHeightSizedBox4,
-        _button(
-          key: KWidgetkeys.widget.footer.informationButton,
-          text: context.l10n.information,
-          onPressed: () => context.goNamed(KRoute.information.name),
-        ),
+        if (Config.isDevelopment)
+          _button(
+            key: KWidgetkeys.widget.footer.informationButton,
+            text: context.l10n.information,
+            onPressed: () => context.goNamed(KRoute.information.name),
+          ),
         if (isTablet)
           KSizedBox.kHeightSizedBox8
         else
@@ -382,6 +382,7 @@ abstract class FooterWidget {
       ];
   static List<Widget> _support({
     required bool isTablet,
+    required bool isDesk,
     required BuildContext context,
   }) =>
       [
@@ -393,12 +394,20 @@ abstract class FooterWidget {
               : AppTextStyle.materialThemeHeadlineMedium,
         ),
         KSizedBox.kHeightSizedBox16,
-        DoubleButtonWidget(
-          widgetKey: KWidgetkeys.widget.footer.button,
-          text: context.l10n.contact,
-          onPressed: () => context.goNamed(KRoute.feedback.name),
-          isDesk: isTablet,
-        ),
+        if (kIsWeb)
+          Align(
+            alignment: Alignment.centerLeft,
+            child: BuyMeACoffeeWidget(
+              key: KWidgetkeys.widget.footer.button,
+            ),
+          )
+        else
+          DoubleButtonWidget(
+            widgetKey: KWidgetkeys.widget.footer.button,
+            text: context.l10n.contact,
+            onPressed: () => context.goNamed(KRoute.feedback.name),
+            isDesk: isTablet,
+          ),
       ];
   static Widget _button({
     required void Function() onPressed,
@@ -472,4 +481,20 @@ abstract class FooterWidget {
           background: AppColors.materialThemeSourceSeed,
         ),
       ];
+  static Widget _privacyPolice({
+    required BuildContext context,
+    required bool isDesk,
+  }) =>
+      TextButton(
+        key: KWidgetkeys.widget.footer.privacyPolicy,
+        onPressed: () => context.goNamed(KRoute.privacyPolicy.name),
+        style: KButtonStyles.doubleButtonStyle
+            .copyWith(alignment: Alignment.bottomLeft),
+        child: Text(
+          context.l10n.privacyPolicy,
+          style: isDesk
+              ? AppTextStyle.materialThemeBodyLargeNeutralVariant35
+              : AppTextStyle.materialThemeLabelSmallNeutralVariant35,
+        ),
+      );
 }

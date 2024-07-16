@@ -147,12 +147,12 @@ class _NawbarWidgetImplematationState
                         icon: KIcon.tag,
                         onPressed: () => context.goNamed(KRoute.discounts.name),
                       ),
-                      button(
-                        text: context.l10n.information,
-                        icon: KIcon.globe,
-                        onPressed: () =>
-                            context.goNamed(KRoute.information.name),
-                      ),
+                      // button(
+                      //   text: context.l10n.information,
+                      //   icon: KIcon.globe,
+                      //   onPressed: () =>
+                      //       context.goNamed(KRoute.information.name),
+                      // ),
                       button(
                         text: context.l10n.investors,
                         icon: KIcon.fileText,

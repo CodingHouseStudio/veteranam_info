@@ -1,30 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:veteranam/shared/shared.dart';
 
-class SharedIconListWidget extends StatelessWidget {
-  const SharedIconListWidget({
-    required this.text,
-    required this.isDesk,
-    required this.link,
-    required this.cardEnum,
-    required this.afterEvent,
-    required this.cardId,
-    super.key,
-  });
-  final String text;
-  final bool isDesk;
-  final String link;
-  final CardEnum cardEnum;
-  final void Function()? afterEvent;
-  final String cardId;
-  @override
-  Widget build(BuildContext context) {
-    return CardTextDetailWidget(
-      text: text,
-      maxLines: 3,
-      icon: [
+abstract class SharedIconListWidget {
+  static List<Widget> get({
+    required BuildContext context,
+    required bool isDesk,
+    required String? link,
+    required CardEnum cardEnum,
+    required void Function()? afterEvent,
+    required String cardId,
+    required Key? webSiteKey,
+    required Key shareKey,
+    required Key complaintKey,
+    void Function()? onShare,
+    Color background = AppColors.materialThemeWhite,
+  }) {
+    return [
+      if (link != null) ...[
         _cardIconWidget(
           label: context.l10n.webSite,
           context,
@@ -37,57 +30,59 @@ class SharedIconListWidget extends StatelessWidget {
             }
           },
           icon: KIcon.captivePortal,
+          background: background,
+          key: webSiteKey,
         ),
-        if (isDesk) KSizedBox.kWidthSizedBox24,
-        _cardIconWidget(
-          label: context.l10n.share,
-          context,
-          onPressed: () async => Share.share(
-            link,
-          ),
-          icon: KIcon.share,
-        ),
-        if (isDesk) KSizedBox.kWidthSizedBox24 else KSizedBox.kWidthSizedBox8,
-        ComplaintWidget(
-          isDesk: isDesk,
-          cardEnum: cardEnum,
-          afterEvent: afterEvent,
-          cardId: cardId,
-        ),
+        if (isDesk) KSizedBox.kWidthSizedBox12,
       ],
-      isDesk: isDesk,
-    );
+      _cardIconWidget(
+        label: context.l10n.share,
+        context,
+        onPressed: onShare,
+        icon: KIcon.share,
+        background: background,
+        key: shareKey,
+      ),
+      if (isDesk) KSizedBox.kWidthSizedBox12,
+      ComplaintWidget(
+        key: complaintKey,
+        isDesk: isDesk,
+        cardEnum: cardEnum,
+        afterEvent: afterEvent,
+        cardId: cardId,
+        background: background,
+      ),
+    ];
   }
-}
 
-Widget _cardIconWidget(
-  BuildContext context, {
-  required VoidCallback? onPressed,
-  required Icon icon,
-  required String label,
-}) {
-  return Column(
-    children: [
-      Padding(
-        padding: const EdgeInsets.all(KPadding.kPaddingSize12),
-        child: IconButton(
-          key: KWidgetkeys.widget.discountCard.buttons,
-          style: const ButtonStyle(
-            backgroundColor: WidgetStatePropertyAll(
-              AppColors.materialThemeWhite,
+  static Widget _cardIconWidget(
+    BuildContext context, {
+    required VoidCallback? onPressed,
+    required Icon icon,
+    required String label,
+    required Color background,
+    required Key? key,
+  }) {
+    return TextButton(
+      key: key,
+      onPressed: onPressed,
+      style: KButtonStyles.doubleButtonStyle,
+      child: Column(
+        children: [
+          IconWidget(
+            background: background,
+            icon: icon,
+            padding: KPadding.kPaddingSize12,
+          ),
+          KSizedBox.kHeightSizedBox6,
+          Text(
+            label,
+            style: AppTextStyle.materialThemeLabelSmall.copyWith(
+              color: AppColors.materialThemeBlack,
             ),
           ),
-          onPressed: onPressed,
-          icon: icon,
-        ),
+        ],
       ),
-      Text(
-        key: KWidgetkeys.widget.discountCard.description,
-        label,
-        style: AppTextStyle.materialThemeLabelSmall.copyWith(
-          color: AppColors.materialThemeBlack,
-        ),
-      ),
-    ],
-  );
+    );
+  }
 }

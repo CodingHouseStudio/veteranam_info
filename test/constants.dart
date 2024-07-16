@@ -85,6 +85,8 @@ abstract class KTestText {
   static const field = 'field_test';
   static const fieldEmpty = '';
 
+  static const phoneNumber = '+3809900000';
+
   static final questionModelItems = <QuestionModel>[
     QuestionModel(
       id: '0',
@@ -168,6 +170,13 @@ abstract class KTestText {
     downloadURL: image,
     name: image,
     ref: image,
+  );
+  static const resumeModel = ResumeModel(
+    downloadURL: 'test_URL',
+    lastModifiedTS: 1,
+    name: 'test_name',
+    ref: 'test_name',
+    type: 'test_type',
   );
 
   static final feedbackModel = FeedbackModel(
@@ -340,6 +349,13 @@ abstract class KTestText {
     userId: user.id,
     cardId: id,
   );
+  static final employeeRespondModel = EmployeeRespondModel(
+    id: dateTime.microsecondsSinceEpoch.toString(),
+    email: KTestText.userEmail,
+    phoneNumber: KTestText.phoneNumber,
+    resume: resumeModel,
+    noResume: false,
+  );
 }
 
 abstract class KTestConstants {
@@ -394,5 +410,9 @@ abstract class KScreenBlocName {
   static const scroll = 'scroll';
   static const image = 'image';
   static const casheClient = 'cashe client';
-  static const report = 'Report';
+
+  static const report = 'Report Dialog';
+  static const privacyPolicy = 'Privacy Policy Dialog';
+  static const discountCard = 'Discount Card Dialog';
+  static const newsCard = 'News Card Dialog';
 }

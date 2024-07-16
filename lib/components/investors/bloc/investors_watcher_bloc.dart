@@ -50,21 +50,27 @@ class InvestorsWatcherBloc
           loadingStatus: LoadingStatus.error,
         ),
       ),
-      (r) => emit(
-        InvestorsWatcherState(
-          fundItems: r,
-          loadingStatus: LoadingStatus.loaded,
-          loadingFundItems: _filter(
-            itemsLoaded: state.itemsLoaded,
-            loadItems: KDimensions.investorsLoadItems,
-            reportItems: reportItems,
-            list: r,
-          ),
-          itemsLoaded: KDimensions.investorsLoadItems,
+      (r) {
+        final list = r.removeReportItems(
+          checkFunction: (item) => item.id,
           reportItems: reportItems,
-          failure: null,
-        ),
-      ),
+        );
+        emit(
+          InvestorsWatcherState(
+            fundItems: list,
+            loadingStatus: LoadingStatus.loaded,
+            loadingFundItems: _filter(
+              itemsLoaded: state.itemsLoaded,
+              loadItems: KDimensions.investorsLoadItems,
+              reportItems: reportItems,
+              list: list,
+            ),
+            itemsLoaded: KDimensions.investorsLoadItems,
+            reportItems: reportItems,
+            failure: null,
+          ),
+        );
+      },
     );
   }
 
@@ -101,6 +107,10 @@ class InvestorsWatcherBloc
     Emitter<InvestorsWatcherState> emit,
   ) async {
     final reportItems = await _getReport();
+    final list = state.fundItems.removeReportItems(
+      checkFunction: (item) => item.id,
+      reportItems: reportItems,
+    );
 
     emit(
       state.copyWith(
@@ -109,7 +119,9 @@ class InvestorsWatcherBloc
           itemsLoaded: state.itemsLoaded,
           loadItems: null,
           reportItems: reportItems,
+          list: list,
         ),
+        fundItems: list,
       ),
     );
   }

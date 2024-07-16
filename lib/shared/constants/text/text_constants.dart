@@ -209,11 +209,12 @@ abstract class KAppText {
   static const String authChange = 'AuthenticationStatusChanged:';
   static const String backendString = '';
   static const String usernameToken = 'USERNAME_TOKEN';
-  static const String madeBy = '© - 2024';
+  static const String madeBy = '© Coding House Studio LLC - 2024';
   static const String email = 'hello@veteranam.info';
   static const String veteranamName = 'veteranam.info';
   static const String linkedIn = 'https://www.linkedin.com/company/veteranam/';
   static const String instagram = 'https://www.instagram.com/veteranam_info';
   static const String facebook =
       'https://www.facebook.com/profile.php?id=61560499465895';
+  static const String coffee = 'Buy me a Coffee';
 }

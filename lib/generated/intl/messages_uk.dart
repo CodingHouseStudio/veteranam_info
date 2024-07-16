@@ -26,7 +26,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "aMessage": MessageLookupByLibrary.simpleMessage("повідомлення"),
         "aboutProject": MessageLookupByLibrary.simpleMessage(
-            "Ми намагаємося створити єдиний інформаційний простір для ветеранів та їх сімей."),
+            "Ми створюємо єдиний інформаційний простір для ветеранів та їх сімей."),
         "aboutUs": MessageLookupByLibrary.simpleMessage("Про проєкт"),
         "addComment": MessageLookupByLibrary.simpleMessage("Додайте коментар:"),
         "addPhoto": MessageLookupByLibrary.simpleMessage("Добавте фото"),
@@ -56,6 +56,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Будь ласка виберіть одну з вище наведених відповідей"),
         "city": MessageLookupByLibrary.simpleMessage("Місто"),
         "clear": MessageLookupByLibrary.simpleMessage("Очистити"),
+        "close": MessageLookupByLibrary.simpleMessage("Закрити"),
         "companyIsHidden":
             MessageLookupByLibrary.simpleMessage("Компанію приховано"),
         "complaint": MessageLookupByLibrary.simpleMessage("Скарга"),
@@ -105,8 +106,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Помилка при завантаженні"),
         "errorTitle": MessageLookupByLibrary.simpleMessage("Помилка"),
         "facebook": MessageLookupByLibrary.simpleMessage("Facebook"),
-        "fakeNewsOrDisinformation": MessageLookupByLibrary.simpleMessage(
-            "Фальшиві новини або дезінформація;"),
+        "fakeNewsOrDisinformation":
+            MessageLookupByLibrary.simpleMessage("Фейк/дезінформація;"),
         "feedback": MessageLookupByLibrary.simpleMessage("Зворотній звʼязок"),
         "feedbackBoxSubtitle": MessageLookupByLibrary.simpleMessage(
             "Ми отримали Ваше повідомлення. Дякуємо за Ваш час."),
@@ -126,11 +127,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("ЗНАЙДІТЬ СВОЮ ЗНИЖКУ"),
         "forVeteransAndTheirFamilies":
             MessageLookupByLibrary.simpleMessage("для ветеранів і їх родин"),
-        "fraudOrSpam":
-            MessageLookupByLibrary.simpleMessage("Шахрайство або спам;"),
+        "fraudOrSpam": MessageLookupByLibrary.simpleMessage("Шахрайство/спам;"),
         "free": MessageLookupByLibrary.simpleMessage("Безкоштовно"),
         "fromLargestToSmallest":
-            MessageLookupByLibrary.simpleMessage("Від найбільшої до найменшої"),
+            MessageLookupByLibrary.simpleMessage("Найбільші знижки зверху"),
         "fullEmail": MessageLookupByLibrary.simpleMessage("Електронна пошта"),
         "funds": MessageLookupByLibrary.simpleMessage("Фонди та організації"),
         "fundsSubtitle": MessageLookupByLibrary.simpleMessage(
@@ -165,10 +165,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "informationNewsSubtitle": MessageLookupByLibrary.simpleMessage(
             "Вся інформація в одному місці. Ми проаналізували різноманітні ресурси та надаємо безкоштовний доступ до інформаціх, що слід знати ветерану."),
         "informationSubtitle": MessageLookupByLibrary.simpleMessage(
-            "У цьому розділі ти знайдеш корисну інформацію для ветеранів та їм сімей."),
+            "У цьому розділі ти знайдеш корисну інформацію для ветеранів та їх сімей"),
         "investors": MessageLookupByLibrary.simpleMessage("Інвесторам"),
         "investorsSubtitle": MessageLookupByLibrary.simpleMessage(
-            "Зв\'яжіться з нами для підтримки ветеранів. Розкажіть нам про знижки та персональні пропозиції для ветеранів. Напишіть нам на hello@veteranam.info"),
+            "Зв\'яжіться з нами для підтримки ветеранів. Напишіть нам на hello@veteranam.info"),
         "isWrong": MessageLookupByLibrary.simpleMessage("не правильне"),
         "isWrongEmail": MessageLookupByLibrary.simpleMessage("не правильний"),
         "jobsVacancies":
@@ -220,8 +220,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "notNecessarily":
             MessageLookupByLibrary.simpleMessage("(необовʼязково)"),
         "ofUpTo": MessageLookupByLibrary.simpleMessage("до"),
-        "offensiveOrHatefulContent": MessageLookupByLibrary.simpleMessage(
-            "Образливий або ненависницький контент;"),
+        "offensiveOrHatefulContent":
+            MessageLookupByLibrary.simpleMessage("Образливий контент;"),
         "offerDiscount":
             MessageLookupByLibrary.simpleMessage("Запропонувати знижку"),
         "oneNumber": MessageLookupByLibrary.simpleMessage(
@@ -243,6 +243,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "previous": MessageLookupByLibrary.simpleMessage("Попередня"),
         "privacyPolicy":
             MessageLookupByLibrary.simpleMessage("Політика конфіденційності"),
+        "privacyPolicyText": MessageLookupByLibrary.simpleMessage(
+            "Політика конфіденційності для Veteranam.info\n\nДАТА НАБРАННЯ ЧИННОСТІ: 11 ЛИПНЯ 2024 РОКУ\n\nНа Veteranam.info ми цінуємо вашу конфіденційність і ставимося до неї серйозно. Ця політика конфіденційності пояснює як ми обробляємо вашу особисту інформацію коли ви користуєтесь нашим веб-сайтом і послугами. Якщо ви не погоджуєтесь з будь-якою частиною цієї політики будь ласка негайно припиніть використання нашого сайту та послуг.\n\nЗбір інформації\n\nКоли ви створюєте обліковий запис у нас ми збираємо таку інформацію профілю як ваше ім’я та електронну адресу щоб покращити ваш досвід і підтвердити вас як зареєстрованого користувача. Ми також можемо збирати таку інформацію як ваша IP-адреса деталі інтернет-браузера та інші дані щоб надати доступ до наших послуг і отримати аналітику. Для доступу до певних функцій ви повинні створити обліковий запис використовуючи електронну пошту та пароль. Ми не збираємо та не використовуємо жодну платіжну інформацію.\n\nМи збираємо інформацію від вас коли ви підписуєтесь на інформаційну розсилку заповнюєте форму відкриваєте заявку на підтримку або вводите інформацію на нашому сайті. Наприклад ми можемо збирати інформацію коли ви надаєте відгуки про наші продукти чи послуги.\n\nКомунікації\n\nВи можете відмовитись від комунікацій Veteranam.info натиснувши кнопку «Відписатися» внизу кожного електронного листа або надіславши електронний лист нашому офіцеру із захисту даних за адресою hello@veteranam.info.\n\nВи можете оновити або видалити свої особисті дані відписавшись від наших електронних листів або надіславши нам електронного листа на адресу hello@veteranam.info. Якщо ви проживаєте або перебуваєте в ЄЕЗ ви маєте певні права щодо вашої особистої інформації включаючи право запитувати доступ оновлення видалення та обмеження обробки.\n\nВикористання інформації\n\nМи використовуємо вашу інформацію щоб надавати персоналізовані рекомендації безпечно підтверджувати вас спілкуватися з вами покращувати наші послуги та надавати підтримку клієнтів. Ми можемо залучати сторонні компанії та окремих осіб для сприяння нашим послугам і вони зобов’язані дотримуватись конфіденційності та захисту особистих даних.\n\nМи можемо час від часу використовувати ваші дані в анонімізованій агрегованій формі щоб покращити наш двигун аналізу та для цілей аналітики. Ми ніколи не будемо використовувати зміст вашого профілю в жодних наших інструментах або послугах.\n\nЗаходи безпеки\n\nМи впроваджуємо різні заходи безпеки для захисту вашої інформації включаючи регулярне сканування на наявність дірок у безпеці та шкідливого програмного забезпечення використання захищених мереж і впровадження заходів безпеки при обробці транзакцій.\n\nФайли cookie\n\nВи можете налаштувати свій комп’ютер так щоб він попереджав вас кожного разу коли надсилається файл cookie або вимкнути всі файли cookie через налаштування браузера. Однак вимкнення файлів cookie може вплинути на деякі функції нашого сайту.\n\nПередача інформації\n\nМи не продаємо не торгуємо та не передаємо вашу особисту інформацію стороннім особам без попереднього повідомлення. Неперсоналізована інформація про відвідувачів може надаватись іншим сторонам для маркетингових рекламних або інших цілей.\n\nКонтакти\n\nЯкщо у вас є будь-які питання щодо цієї політики конфіденційності будь ласка надішліть електронний лист на адресу hello@veteranam.info."),
         "profileDetails": MessageLookupByLibrary.simpleMessage(
             "У цьому розділі ти можеш додати особисту інформацію, налаштувати анонімність, а також знайти збережені матеріали."),
         "provenFunds": MessageLookupByLibrary.simpleMessage("Перевірені фонди"),
@@ -321,7 +323,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "thatEndOfList": MessageLookupByLibrary.simpleMessage(
             "Це кінець списку! Дякуємо за ваш час."),
         "thisServiceForVeteransSubtitle": MessageLookupByLibrary.simpleMessage(
-            "Тут ти знайдеш корисну інформацію про знижки для ветеранів та їх сімей"),
+            "Тут ти зібрали корисну інформацію про знижки для ветеранів та їх сімей"),
         "toDiscount": MessageLookupByLibrary.simpleMessage("До знижок"),
         "toGetItYouNeed":
             MessageLookupByLibrary.simpleMessage("Щоб отримати потрібно:"),
