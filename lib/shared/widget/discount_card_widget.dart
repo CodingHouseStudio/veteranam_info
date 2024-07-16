@@ -75,10 +75,10 @@ class DiscountCardWidget extends StatelessWidget {
               ],
             ),
           ),
-          if (isDesk)
-            KSizedBox.kHeightSizedBox16
-          else
-            KSizedBox.kHeightSizedBox8,
+          // if (isDesk)
+          //   KSizedBox.kHeightSizedBox16
+          // else
+          //   KSizedBox.kHeightSizedBox8,
           Container(
             decoration: KWidgetTheme.boxDecorationWidget,
             padding: EdgeInsets.symmetric(
