@@ -237,7 +237,6 @@ class DiscountCardWidget extends StatelessWidget {
 //     required this.isDesk,
 //     required this.reportEvent,
 //   });
-
 //   final DiscountModel discountItem;
 //   final bool isDesk;
 //   final void Function()? reportEvent;
