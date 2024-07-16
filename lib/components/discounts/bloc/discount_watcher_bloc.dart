@@ -133,6 +133,7 @@ class DiscountWatcherBloc
         ),
         filtersCategoriesIndex: [],
         filtersLocationIndex: [],
+        loadingStatus: LoadingStatus.loaded,
       ),
     );
   }
@@ -155,8 +156,10 @@ class DiscountWatcherBloc
         filteredDiscountModelItems: filterItems,
         filtersCategoriesIndex: selectedFilters,
         itemsLoaded: state.itemsLoaded.getLoaded(list: filterItems),
-        loadingStatus:
-            filterItems.isLoadingFilter(state.filteredDiscountModelItems),
+        loadingStatus: filterItems.isLoading(
+          state.filteredDiscountModelItems,
+          isFilter: true,
+        ),
       ),
     );
   }
@@ -182,8 +185,10 @@ class DiscountWatcherBloc
         filteredDiscountModelItems: filterItems,
         filtersLocationIndex: selectedFilters,
         itemsLoaded: state.itemsLoaded.getLoaded(list: filterItems),
-        loadingStatus:
-            filterItems.isLoadingFilter(state.filteredDiscountModelItems),
+        loadingStatus: filterItems.isLoading(
+          state.filteredDiscountModelItems,
+          isFilter: true,
+        ),
       ),
     );
   }
@@ -253,6 +258,7 @@ class DiscountWatcherBloc
           ],
           overallFilter: items._getLocationItems,
           loadItems: loadItems,
+          containAnyItems: false,
         );
   }
 

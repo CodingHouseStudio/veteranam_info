@@ -84,7 +84,9 @@ class StoryWatcherBloc extends Bloc<StoryWatcherEvent, StoryWatcherState> {
       state.copyWith(
         loadingStoryModelItems: filterItems,
         itemsLoaded: filterItems.length,
-        loadingStatus: LoadingStatus.loaded,
+        loadingStatus: state.storyModelItems.length <= filterItems.length
+            ? LoadingStatus.listLoadedFull
+            : LoadingStatus.loaded,
       ),
     );
   }
