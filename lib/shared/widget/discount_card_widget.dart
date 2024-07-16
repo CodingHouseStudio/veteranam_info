@@ -28,9 +28,10 @@ class DiscountCardWidget extends StatelessWidget {
       child: Column(
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal:
-                  isDesk ? KPadding.kPaddingSize32 : KPadding.kPaddingSize16,
+            padding: EdgeInsets.only(
+              right: isDesk ? KPadding.kPaddingSize32 : KPadding.kPaddingSize16,
+              left: isDesk ? KPadding.kPaddingSize32 : KPadding.kPaddingSize16,
+              bottom: isDesk ? KPadding.kPaddingSize16 : KPadding.kPaddingSize8,
             ),
             child: Row(
               children: [
