@@ -44,8 +44,8 @@ import 'package:veteranam/shared/bloc/authentication_services/authentication_ser
     as _i35;
 import 'package:veteranam/shared/bloc/report/report_bloc.dart' as _i37;
 import 'package:veteranam/shared/data_provider/cache_provider.dart' as _i3;
-import 'package:veteranam/shared/data_provider/firestore_provider.dart' as _i5;
-import 'package:veteranam/shared/data_provider/storage_provider.dart' as _i4;
+import 'package:veteranam/shared/data_provider/firestore_provider.dart' as _i4;
+import 'package:veteranam/shared/data_provider/storage_provider.dart' as _i5;
 import 'package:veteranam/shared/repositories/app_authentication_repository.dart'
     as _i14;
 import 'package:veteranam/shared/repositories/authentication_repository.dart'
@@ -78,8 +78,8 @@ extension GetItInjectableX on _i1.GetIt {
     );
     final firebaseModule = _$FirebaseModule();
     gh.factory<_i3.CacheClient>(() => _i3.CacheClient());
-    gh.singleton<_i4.StorageService>(() => _i4.StorageService());
-    gh.singleton<_i5.FirestoreService>(() => _i5.FirestoreService());
+    gh.singleton<_i4.FirestoreService>(() => _i4.FirestoreService());
+    gh.singleton<_i5.StorageService>(() => _i5.StorageService());
     gh.singleton<_i6.FirebaseAuth>(() => firebaseModule.firebaseAuth);
     gh.singleton<_i7.GoogleSignIn>(() => firebaseModule.googleSignIn);
     gh.singleton<_i8.IDiscountRepository>(() => _i9.DiscountRepository());
