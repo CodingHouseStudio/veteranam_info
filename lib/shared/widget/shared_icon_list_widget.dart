@@ -33,7 +33,7 @@ abstract class SharedIconListWidget {
           background: background,
           key: webSiteKey,
         ),
-        if (isDesk) KSizedBox.kWidthSizedBox12,
+        if (isDesk) KSizedBox.kWidthSizedBox12 else KSizedBox.kWidthSizedBox4,
       ],
       _cardIconWidget(
         label: context.l10n.share,
@@ -43,7 +43,7 @@ abstract class SharedIconListWidget {
         background: background,
         key: shareKey,
       ),
-      if (isDesk) KSizedBox.kWidthSizedBox12,
+      if (isDesk) KSizedBox.kWidthSizedBox12 else KSizedBox.kWidthSizedBox8,
       ComplaintWidget(
         key: complaintKey,
         isDesk: isDesk,
