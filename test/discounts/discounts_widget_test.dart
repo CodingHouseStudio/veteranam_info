@@ -39,6 +39,7 @@ void main() {
       when(mockAppAuthenticationRepository.currentUser).thenAnswer(
         (invocation) => KTestText.user,
       );
+
       mockReportRepository = MockIReportRepository();
       when(
         mockReportRepository.getCardReportById(
