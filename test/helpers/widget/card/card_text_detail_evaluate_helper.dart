@@ -8,15 +8,19 @@ Future<void> cardTextDetailEvaluateHelper(
 ) async {
   expect(
     //find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconDislike),
-    find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconSave),
+    find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconShare),
     findsWidgets,
   );
 
-  // expect(
-  //   //find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconSmile),
-  //   find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconWebsite),
-  //   findsWidgets,
-  // );
+  expect(
+    find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconComplaint),
+    findsWidgets,
+  );
+
+  expect(
+    find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconWebsite),
+    findsNothing,
+  );
 /*
   expect(
     find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconActiveSmile),

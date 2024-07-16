@@ -8,34 +8,31 @@ class ComplaintWidget extends StatelessWidget {
     required this.afterEvent,
     required this.cardId,
     super.key,
+    this.background,
   });
   final bool isDesk;
   final CardEnum cardEnum;
   final void Function()? afterEvent;
   final String cardId;
+  final Color? background;
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () => context.dialog.showReportDialog(
+    return TextButton(
+      onPressed: () => context.dialog.showReportDialog(
         isDesk: isDesk,
         cardEnum: cardEnum,
         afterEvent: afterEvent,
         cardId: cardId,
       ),
+      style: KButtonStyles.doubleButtonStyle,
       child: Column(
         children: [
-          KSizedBox.kHeightSizedBox10,
-          IconButtonWidget(
+          IconWidget(
             key: KWidgetkeys.widget.reportDialog.button,
-            onPressed: () => context.dialog.showReportDialog(
-              isDesk: isDesk,
-              cardEnum: cardEnum,
-              afterEvent: afterEvent,
-              cardId: cardId,
-            ),
             icon: KIcon.brightnessAlert,
-            background: AppColors.materialThemeWhite,
+            background: background ?? AppColors.materialThemeWhite,
+            padding: KPadding.kPaddingSize12,
           ),
           KSizedBox.kHeightSizedBox6,
           Text(
