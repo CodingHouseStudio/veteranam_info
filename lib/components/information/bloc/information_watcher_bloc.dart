@@ -153,8 +153,10 @@ class InformationWatcherBloc
         filteredInformationModelItems: filterItems,
         filtersIndex: selectedFilters,
         itemsLoaded: state.itemsLoaded.getLoaded(list: filterItems),
-        loadingStatus:
-            filterItems.isLoadingFilter(state.filteredInformationModelItems),
+        loadingStatus: filterItems.isLoading(
+          state.filteredInformationModelItems,
+          isFilter: true,
+        ),
       ),
     );
   }
