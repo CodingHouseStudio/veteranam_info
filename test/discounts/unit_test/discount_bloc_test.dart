@@ -138,7 +138,7 @@ void main() {
         ),
         predicate<DiscountWatcherState>(
           (state) =>
-              state.loadingStatus == LoadingStatus.listLoadedFull &&
+              state.loadingStatus == LoadingStatus.loaded &&
               state.filtersCategoriesIndex.isNotEmpty &&
               state.filtersCategoriesIndex.length == 2,
         ),
