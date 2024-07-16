@@ -38,7 +38,9 @@ class _CityWidgetListState extends State<CityWidgetList> {
     return Align(
       alignment: widget.isDesk ? Alignment.centerRight : Alignment.centerLeft,
       child: TextButton.icon(
-        style: (widget.discountModel.location ?? []).length == 1
+        style: (widget.discountModel.location ?? []).length == 1 ||
+                ((widget.discountModel.location ?? []).isEmpty &&
+                    widget.discountModel.subLocation != null)
             ? KButtonStyles.discountCityButtonStyle.copyWith(
                 mouseCursor:
                     const WidgetStatePropertyAll(MouseCursor.uncontrolled),
