@@ -29,7 +29,7 @@
       previews = {
         web = {
           # Use the environment variable in the command
-          command = ["flutter" "run" "-t" "lib/main_production.dart" "-dart--define" "FLAVOUR=production" "--machine" "-d" "web-server" "--web-hostname" "0.0.0.0" "--web-port" "$PORT"];
+          command = ["flutter" "run" "--flavor" "production" "-t" "lib/main_production.dart" "-dart--define" "FLAVOUR=production" "--machine" "-d" "web-server" "--web-hostname" "0.0.0.0" "--web-port" "$PORT"];
           manager = "flutter";
         };
         android = {
