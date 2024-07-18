@@ -74,7 +74,7 @@
   "support": "Support",
   "funds": "Funds",
   "fundsSubtitle": "Support veterans with deeds, not just words. Donate to these proven foundations. Every donation counts.",
-  "thankYou": "Thank you!",
+  "thankYou": "Thank you",
   "feedbackBoxSubtitle": "We've received your message and will respond soon.",
   "sendMore": "Send more",
   "linkedAccounts": "Linked accounts",
@@ -144,7 +144,6 @@
   "myStoryDetails": "In this section you can manage your stories.",
   "underConstruction": "This page is under construction.",
   "hello": "Hello",
-  "thankYouVeterans": "Thank you\nVeterans!",
   "thisServiceForVeteransSubtitle": "Here you can find useful discounts",
   "whatKindOfProject": "What kind of project it is?",
   "aboutProject": "An independent information platform for veterans and their families.",
@@ -217,6 +216,10 @@
   "ofUpTo": "of up to",
   "findYourDiscount": "FIND YOUR DISCOUNT",
   "close": "Close",
+  "veterans": "Veterans",
+  "theirFamilies": "Their Families",
+  "activeMilitary": "Active Military",
+  "militaryDoctors": "Military Doctors",
   "error": "We're sorry, there was an unforeseen error.",
   "@error": {
     "description": "message of an unforeseen error that was not foreseen."

@@ -77,7 +77,7 @@
   "linkedAccounts": "Привʼязані облікові записи",
   "linkedAccountsDetails": "Ваш обліковий запис наразі прив’язано до облікового запису Facebook.",
   "disconnect": "Відʼєднати",
-  "thankYou": "Дякуємо!",
+  "thankYou": "Дякуємо",
   "feedbackBoxSubtitle": "Ми отримали Ваше повідомлення. Дякуємо за Ваш час.",
   "sendMore": "Надіслати ще",
   "receivedYourMessage": "Ми отримали Ваше повідомлення. Дякуємо за Ваш час.",
@@ -218,6 +218,10 @@
   "ofUpTo": "до",
   "findYourDiscount": "ЗНАЙДІТЬ СВОЮ ЗНИЖКУ",
   "close": "Закрити",
+  "veterans": "Ветерани",
+  "theirFamilies": "Їхні сім'ї",
+  "activeMilitary": "Діючі військові",
+  "militaryDoctors": "Військові лікарі",
   "error": "Вибачте, сталася непередбачена помилка.",
   "@error": {
     "description": "повідомлення про непередбачену помилку."
