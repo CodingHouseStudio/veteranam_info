@@ -85,4 +85,5 @@ abstract class DiscountModelJsonField {
   static const userPhoto = 'userPhoto';
   // static const date = 'date';
   static const subLocation = 'subLocation';
+  static const hasMarkdown = 'hasMarkdown';
 }

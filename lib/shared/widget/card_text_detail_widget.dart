@@ -104,8 +104,8 @@ class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
     final index = widget.text.indexOf('\n');
     return index != -1
         ? index
-        : widget.text.length > KMinMaxSize.messageMaxLength
-            ? KMinMaxSize.messageMaxLength
+        : widget.text.length > KMinMaxSize.titleMaxLength
+            ? KMinMaxSize.titleMaxLength
             : widget.text.length;
   }
 }
