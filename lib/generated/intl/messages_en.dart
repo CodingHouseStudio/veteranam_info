@@ -45,6 +45,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "beAnonymous": MessageLookupByLibrary.simpleMessage("Anonymous"),
         "beAnonymousDetails": MessageLookupByLibrary.simpleMessage(
             "If you make your profile anonymous, your page will not display personal information, only your nickname."),
+        "callForDetails":
+            MessageLookupByLibrary.simpleMessage("Call for details"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "capitalLetter": MessageLookupByLibrary.simpleMessage(
             "must contain one or more capital letter"),

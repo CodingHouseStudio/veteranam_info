@@ -71,7 +71,11 @@ void main() {
     group('${KGroupText.getList} ', () {
       setUp(() {
         when(mockStoryRepository.getStoriesById(KTestText.userWithoutPhoto.id))
-            .thenAnswer((invocation) async => Right(KTestText.storyModelItems));
+            .thenAnswer(
+          (invocation) async => Right(
+            KTestText.storyModelItems,
+          ),
+        );
       });
       testWidgets('${KGroupText.intial} ', (tester) async {
         await myStoryPumpAppHelper(

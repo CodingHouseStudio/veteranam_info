@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:veteranam/shared/shared.dart';
 
 class CardTextDetailWidget extends StatefulWidget {
@@ -6,6 +7,7 @@ class CardTextDetailWidget extends StatefulWidget {
     required this.text,
     required this.maxLines,
     required this.isDesk,
+    this.hasMarkdown = false,
     this.icon,
     super.key,
     this.buttonText,
@@ -18,18 +20,19 @@ class CardTextDetailWidget extends StatefulWidget {
   final List<String>? buttonText;
   final ButtonStyle? buttonStyle;
   final bool isDesk;
+  final bool hasMarkdown;
 
   @override
   State<CardTextDetailWidget> createState() => _CardTextDetailWidgetState();
 }
 
 class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
-  late int? maxLines;
+  late String text;
 
   @override
   void initState() {
     super.initState();
-    maxLines = widget.maxLines;
+    text = widget.text.substring(0, getIndex);
   }
 
   @override
@@ -37,13 +40,22 @@ class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Text(
-          widget.text,
-          key: KWidgetkeys.widget.cardTextDetail.text,
-          maxLines: maxLines,
-          style: AppTextStyle.materialThemeBodyLarge,
-          overflow: TextOverflow.clip,
-        ),
+        if (widget.hasMarkdown)
+          MarkdownBody(
+            data: text,
+            selectable: true,
+            styleSheet: MarkdownStyleSheet(
+              a: AppTextStyle.materialThemeBodyLarge,
+            ),
+          )
+        else
+          Text(
+            text,
+            key: KWidgetkeys.widget.cardTextDetail.text,
+            // maxLines: maxLines,
+            style: AppTextStyle.materialThemeBodyLarge,
+            overflow: TextOverflow.clip,
+          ),
         if (!widget.isDesk) KSizedBox.kHeightSizedBox16,
         Row(
           //mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -55,17 +67,17 @@ class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
                   key: KWidgetkeys.widget.cardTextDetail.button,
                   onPressed: () {
                     setState(() {
-                      if (maxLines == null) {
-                        maxLines = widget.maxLines;
+                      if (text.length == widget.text.length) {
+                        text = widget.text.substring(0, getIndex);
                       } else {
-                        maxLines = null;
+                        text = widget.text;
                       }
                     });
                   },
                   style: widget.buttonStyle ??
                       KButtonStyles.borderBlackButtonStyle,
                   child: Text(
-                    maxLines == null
+                    text.length == widget.text.length
                         ? widget.buttonText?.elementAt(1) ?? context.l10n.hide
                         : widget.buttonText?.elementAt(0) ??
                             context.l10n.detail,
@@ -86,5 +98,14 @@ class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
         ),
       ],
     );
+  }
+
+  int get getIndex {
+    final index = widget.text.indexOf('\n');
+    return index != -1
+        ? index
+        : widget.text.length > KMinMaxSize.titleMaxLength
+            ? KMinMaxSize.titleMaxLength
+            : widget.text.length;
   }
 }
