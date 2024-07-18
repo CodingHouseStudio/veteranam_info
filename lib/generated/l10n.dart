@@ -2220,6 +2220,16 @@ class AppLocalizations {
     );
   }
 
+  /// `Call for details`
+  String get callForDetails {
+    return Intl.message(
+      'Call for details',
+      name: 'callForDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `We're sorry, there was an unforeseen error.`
   String get error {
     return Intl.message(
