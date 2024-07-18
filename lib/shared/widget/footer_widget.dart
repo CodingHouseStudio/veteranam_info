@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:go_router/go_router.dart';
+
 import 'package:url_launcher/url_launcher.dart';
 import 'package:veteranam/shared/shared.dart';
 
@@ -80,12 +81,12 @@ abstract class FooterWidget {
                   ),
                   Expanded(
                     child: Wrap(
-                      spacing: KPadding.kPaddingSize16,
+                      spacing: KPadding.kPaddingSize8,
                       alignment: WrapAlignment.end,
                       crossAxisAlignment: WrapCrossAlignment.end,
                       children: [
                         Text(
-                          '${KAppText.madeBy}  | ',
+                          '${KAppText.madeBy}  |',
                           key: KWidgetkeys.widget.footer.madeBy,
                           style: AppTextStyle
                               .materialThemeBodyLargeNeutralVariant35,
@@ -100,7 +101,7 @@ abstract class FooterWidget {
                         // ),
                         //KSizedBox.kWidthSizedBox16,
                         Text(
-                          '${context.l10n.allRightsReserved}  | ',
+                          '${context.l10n.allRightsReserved}  |',
                           key: KWidgetkeys.widget.footer.rightReserved,
                           style: AppTextStyle
                               .materialThemeBodyLargeNeutralVariant35,
@@ -118,7 +119,9 @@ abstract class FooterWidget {
                       ],
                     ),
                   ),
-                  KSizedBox.kWidthSizedBox72,
+                  FooterInfoVersionWidget(
+                    isDesk: isDesk,
+                  ),
                 ],
               ),
             ]
@@ -214,6 +217,7 @@ abstract class FooterWidget {
                   Expanded(
                     child: _privacyPolice(context: context, isDesk: false),
                   ),
+                  Expanded(child: FooterInfoVersionWidget(isDesk: isDesk)),
                 ],
               ),
             ];
