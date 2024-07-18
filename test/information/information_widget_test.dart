@@ -51,6 +51,22 @@ void main() {
       // );
       when(
         mockInformationRepository.updateLikeCount(
+          informationModel: KTestText.informationModelItems.first,
+          isLiked: true,
+        ),
+      ).thenAnswer(
+        (invocation) async => const Right(true),
+      );
+      when(
+        mockInformationRepository.updateLikeCount(
+          informationModel: KTestText.informationModelItems.first,
+          isLiked: false,
+        ),
+      ).thenAnswer(
+        (invocation) async => const Right(true),
+      );
+      when(
+        mockInformationRepository.updateLikeCount(
           informationModel: KTestText.informationModelItems.elementAt(2),
           isLiked: true,
         ),
@@ -59,27 +75,11 @@ void main() {
       );
       when(
         mockInformationRepository.updateLikeCount(
-          informationModel: KTestText.informationModelItems.elementAt(2),
-          isLiked: false,
-        ),
-      ).thenAnswer(
-        (invocation) async => const Right(true),
-      );
-      when(
-        mockInformationRepository.updateLikeCount(
-          informationModel: KTestText.informationModelItems.elementAt(3),
-          isLiked: true,
-        ),
-      ).thenAnswer(
-        (invocation) async => const Right(true),
-      );
-      when(
-        mockInformationRepository.updateLikeCount(
           informationModel: KTestText.informationModelItems.elementAt(3),
           isLiked: false,
         ),
       ).thenAnswer(
-        (invocation) async => const Right(false),
+        (invocation) async => const Right(true),
       );
       mockAppAuthenticationRepository = MockAppAuthenticationRepository();
       when(mockAppAuthenticationRepository.currentUser).thenAnswer(
