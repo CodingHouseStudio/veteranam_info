@@ -6,7 +6,7 @@ List<Widget> _titleWidgetList({
 }) =>
     isDesk
         ? [
-            KSizedBox.kHeightSizedBox48,
+            KSizedBox.kHeightSizedBox24,
             ...TitleWidget.pointTitleWidgetList(
               isDesk: true,
               pointText: context.l10n.feedback,
