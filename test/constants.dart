@@ -294,7 +294,7 @@ abstract class KTestText {
         id: i.toString(),
         date: dateTime,
         image: i > _itemsPhoto ? imageModels : null,
-        story: KMockText.cardData.substring(0, 200),
+        story: KMockText.cardData,
         userName: user.name,
         userId: user.id,
         userPhoto: i > _itemsPhoto ? userPhotoModel : null,
