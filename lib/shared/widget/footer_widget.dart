@@ -119,7 +119,9 @@ abstract class FooterWidget {
                       ],
                     ),
                   ),
-                  const FooterInfoVersionWidget(),
+                  FooterInfoVersionWidget(
+                    isDesk: isDesk,
+                  ),
                 ],
               ),
             ]
@@ -215,6 +217,7 @@ abstract class FooterWidget {
                   Expanded(
                     child: _privacyPolice(context: context, isDesk: false),
                   ),
+                  Expanded(child: FooterInfoVersionWidget(isDesk: isDesk)),
                 ],
               ),
             ];

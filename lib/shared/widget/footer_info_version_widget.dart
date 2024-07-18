@@ -3,7 +3,8 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:veteranam/shared/shared.dart';
 
 class FooterInfoVersionWidget extends StatefulWidget {
-  const FooterInfoVersionWidget({super.key});
+  const FooterInfoVersionWidget({required this.isDesk, super.key});
+  final bool isDesk;
 
   @override
   State<FooterInfoVersionWidget> createState() =>
@@ -37,8 +38,10 @@ class _FooterInfoVersionWidgetState extends State<FooterInfoVersionWidget> {
   @override
   Widget build(BuildContext context) {
     return Text(
-      ' v${packageInfo.version} build ${packageInfo.buildNumber}',
-      style: AppTextStyle.materialThemeBodyLarge,
+      '  v${packageInfo.version} build ${packageInfo.buildNumber}',
+      style: widget.isDesk
+          ? AppTextStyle.materialThemeBodyLarge
+          : AppTextStyle.materialThemeBodySmall,
     );
   }
 }
