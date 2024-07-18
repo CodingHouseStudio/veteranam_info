@@ -36,7 +36,7 @@ List<Widget> _feedbackBoxWidgetList({
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              context.l10n.thankYou,
+                              '${context.l10n.thankYou}!',
                               key: KWidgetkeys.screen.feedback.boxTitle,
                               style: AppTextStyle.text96,
                             ),
@@ -93,7 +93,7 @@ List<Widget> _feedbackBoxWidgetList({
           ]
         : [
             Text(
-              context.l10n.thankYou,
+              '${context.l10n.thankYou}!',
               key: KWidgetkeys.screen.feedback.boxTitle,
               style: AppTextStyle.text48,
             ),
