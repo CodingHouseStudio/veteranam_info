@@ -24,6 +24,9 @@ class StoryBodyWidget extends StatelessWidget {
           loadingButtonText: context.l10n.moreStories,
           listCanLoaded: _.loadingStatus != LoadingStatus.listLoadedFull,
           cardListIsEmpty: _.storyModelItems.isEmpty,
+          loadDataAgain: () => context
+              .read<StoryWatcherBloc>()
+              .add(const StoryWatcherEvent.started()),
           titleChildWidgetsFunction: ({required isDesk}) => [
             if (isDesk)
               KSizedBox.kHeightSizedBox40
