@@ -32,7 +32,7 @@ class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
   @override
   void initState() {
     super.initState();
-    text = widget.text.substring(0, widget.text.indexOf('\n'));
+    text = widget.text.substring(0, getIndex);
   }
 
   @override
@@ -54,7 +54,7 @@ class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
             key: KWidgetkeys.widget.cardTextDetail.text,
             // maxLines: maxLines,
             style: AppTextStyle.materialThemeBodyLarge,
-            // overflow: TextOverflow.clip,
+            overflow: TextOverflow.clip,
           ),
         if (!widget.isDesk) KSizedBox.kHeightSizedBox16,
         Row(
@@ -68,8 +68,7 @@ class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
                   onPressed: () {
                     setState(() {
                       if (text.length == widget.text.length) {
-                        text =
-                            widget.text.substring(0, widget.text.indexOf('\n'));
+                        text = widget.text.substring(0, getIndex);
                       } else {
                         text = widget.text;
                       }
@@ -99,5 +98,14 @@ class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
         ),
       ],
     );
+  }
+
+  int get getIndex {
+    final index = widget.text.indexOf('\n');
+    return index != -1
+        ? index
+        : widget.text.length > KMinMaxSize.messageMaxLength
+            ? KMinMaxSize.messageMaxLength
+            : widget.text.length;
   }
 }
