@@ -48,6 +48,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "beAnonymous": MessageLookupByLibrary.simpleMessage("Анонімно"),
         "beAnonymousDetails": MessageLookupByLibrary.simpleMessage(
             "Якщо ви зробите свій профіль анонімним, на вашій сторінці не буде відображатися персональна інформація, тільки nickname."),
+        "callForDetails":
+            MessageLookupByLibrary.simpleMessage("Телефон для деталей"),
         "cancel": MessageLookupByLibrary.simpleMessage("Скасувати"),
         "capitalLetter": MessageLookupByLibrary.simpleMessage(
             "повинен містити одну чи більше великих букв"),
