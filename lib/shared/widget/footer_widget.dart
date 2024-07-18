@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:go_router/go_router.dart';
-import 'package:package_info_plus/package_info_plus.dart';
+
 import 'package:url_launcher/url_launcher.dart';
 import 'package:veteranam/shared/shared.dart';
 
@@ -81,12 +81,12 @@ abstract class FooterWidget {
                   ),
                   Expanded(
                     child: Wrap(
-                      spacing: KPadding.kPaddingSize16,
+                      spacing: KPadding.kPaddingSize8,
                       alignment: WrapAlignment.end,
                       crossAxisAlignment: WrapCrossAlignment.end,
                       children: [
                         Text(
-                          '${KAppText.madeBy}  | ',
+                          '${KAppText.madeBy}  |',
                           key: KWidgetkeys.widget.footer.madeBy,
                           style: AppTextStyle
                               .materialThemeBodyLargeNeutralVariant35,
@@ -101,7 +101,7 @@ abstract class FooterWidget {
                         // ),
                         //KSizedBox.kWidthSizedBox16,
                         Text(
-                          '${context.l10n.allRightsReserved}  | ',
+                          '${context.l10n.allRightsReserved}  |',
                           key: KWidgetkeys.widget.footer.rightReserved,
                           style: AppTextStyle
                               .materialThemeBodyLargeNeutralVariant35,
@@ -119,8 +119,7 @@ abstract class FooterWidget {
                       ],
                     ),
                   ),
-                  KSizedBox.kWidthSizedBox90,
-                  _versionInfo(),
+                  const FooterInfoVersionWidget(),
                 ],
               ),
             ]
@@ -499,18 +498,4 @@ abstract class FooterWidget {
               : AppTextStyle.materialThemeLabelSmallNeutralVariant35,
         ),
       );
-}
-
-Widget _versionInfo() {
-  final packageInfo = PackageInfo(
-    appName: '',
-    packageName: '',
-    version: '1.0.0',
-    buildNumber: '6',
-  );
-  // final packageInfo = await PackageInfo.fromPlatform();
-  return Text(
-    'v.${packageInfo.version} build ${packageInfo.buildNumber}',
-    style: AppTextStyle.materialThemeBodyLargeNeutralVariant35,
-  );
 }
