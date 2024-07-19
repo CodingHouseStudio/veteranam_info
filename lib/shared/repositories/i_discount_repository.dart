@@ -14,4 +14,8 @@ abstract class IDiscountRepository {
   Future<Either<SomeFailure, bool>> deleteDiscountsById(
     String discountId,
   );
+
+  Future<Either<SomeFailure, bool>> sendLink(
+    String link,
+  );
 }

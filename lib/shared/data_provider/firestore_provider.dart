@@ -289,6 +289,12 @@ class FirestoreService {
     }
   }
 
+  Future<DiscountModel> sendLink({
+    required String id,
+    required String link,
+  }) async =>
+      _db.collection(FirebaseCollectionName.discountLink).doc(id).set(link);
+
   Future<void> addDiscount(DiscountModel discount) {
     return _db
         .collection(FirebaseCollectionName.discount)

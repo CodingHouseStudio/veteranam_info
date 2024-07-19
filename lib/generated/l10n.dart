@@ -2230,6 +2230,26 @@ class AppLocalizations {
     );
   }
 
+  /// `Link`
+  String get link {
+    return Intl.message(
+      'Link',
+      name: 'link',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Do you know about discounts that are not yet available on our website? Send us the link and we'll add them as soon as possible.`
+  String get discountLinkTitle {
+    return Intl.message(
+      'Do you know about discounts that are not yet available on our website? Send us the link and we\'ll add them as soon as possible.',
+      name: 'discountLinkTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `We're sorry, there was an unforeseen error.`
   String get error {
     return Intl.message(

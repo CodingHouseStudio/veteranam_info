@@ -14,7 +14,7 @@ import 'package:google_sign_in/google_sign_in.dart' as _i7;
 import 'package:injectable/injectable.dart' as _i2;
 import 'package:veteranam/components/discount_card/bloc/discount_card_watcher_bloc.dart'
     as _i23;
-import 'package:veteranam/components/discounts/bloc/discount_watcher_bloc.dart'
+import 'package:veteranam/components/discounts/bloc/watcher/discount_watcher_bloc.dart'
     as _i24;
 import 'package:veteranam/components/employee_respond/bloc/employee_respond_bloc.dart'
     as _i32;

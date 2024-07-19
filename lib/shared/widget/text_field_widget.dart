@@ -35,6 +35,7 @@ class TextFieldWidget extends StatefulWidget {
     this.minLines,
     this.hintStyle,
     this.text,
+    this.suffixIconPadding,
   });
   final Key widgetKey;
   final TextAlign? textAlign;
@@ -66,6 +67,7 @@ class TextFieldWidget extends StatefulWidget {
   final TextStyle? hintStyle;
   final bool isDesk;
   final String? text;
+  final double? suffixIconPadding;
 
   @override
   State<TextFieldWidget> createState() => _TextFieldWidgetState();
@@ -142,7 +144,12 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
           hintText: widget.hintText,
           errorText: widget.errorText,
           errorStyle: AppTextStyle.error14,
-          suffixIcon: widget.suffixIcon,
+          suffixIcon: Padding(
+            padding: EdgeInsets.only(
+              right: widget.suffixIconPadding ?? KPadding.kPaddingSize16,
+            ),
+            child: widget.suffixIcon,
+          ),
           prefixIcon: widget.prefixIcon,
           errorMaxLines: widget.errorMaxLines,
         ),

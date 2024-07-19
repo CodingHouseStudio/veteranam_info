@@ -78,6 +78,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Не знайшли свою вакансію?"),
         "disconnect": MessageLookupByLibrary.simpleMessage("Відʼєднати"),
         "discount": MessageLookupByLibrary.simpleMessage("Знижка"),
+        "discountLinkTitle": MessageLookupByLibrary.simpleMessage(
+            "Знаєте про знижки, яких ще немає у нас на сайті? Надішліть посилання нам, і ми добавимо їх якнайшвидше."),
         "discounts": MessageLookupByLibrary.simpleMessage("Знижки"),
         "discountsAndCoupons":
             MessageLookupByLibrary.simpleMessage("Знижки/Купони"),
@@ -180,6 +182,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "key": MessageLookupByLibrary.simpleMessage("Ключ"),
         "lastName": MessageLookupByLibrary.simpleMessage("Прізвище"),
         "leaveRequest": MessageLookupByLibrary.simpleMessage("Залишити заявку"),
+        "link": MessageLookupByLibrary.simpleMessage("Посилання"),
         "linkedAccounts":
             MessageLookupByLibrary.simpleMessage("Привʼязані облікові записи"),
         "linkedAccountsDetails": MessageLookupByLibrary.simpleMessage(

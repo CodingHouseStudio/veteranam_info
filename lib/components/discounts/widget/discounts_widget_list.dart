@@ -21,4 +21,11 @@ List<Widget> discountsWidgetList({
       shimmerItemsNumber: KDimensions.shimmerDiscountsItems,
       isNotFailure: context.read<DiscountWatcherBloc>().state.failure == null,
       shimmerItem: KMockText.discountModel,
-    );
+    )..add(
+        NotificationLinkWidget(
+          onChanged: (p0) {},
+          isDesk: isDesk,
+          title: context.l10n.discountLinkTitle,
+          sendOnPressed: () {},
+        ),
+      );

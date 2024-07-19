@@ -76,4 +76,16 @@ class DiscountRepository implements IDiscountRepository {
       return const Left(SomeFailure.serverError());
     }
   }
+
+  @override
+  Future<Either<SomeFailure, bool>> sendLink(String link) async {
+    try {
+      await _firestoreService.getDiscount(id);
+      return Right(true);
+    } on FirebaseException catch (e) {
+      return Left(GetFailur.fromCode(e).status);
+    } catch (e) {
+      return const Left(SomeFailure.serverError());
+    }
+  }
 }

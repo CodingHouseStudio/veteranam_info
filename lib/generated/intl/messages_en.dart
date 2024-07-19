@@ -76,6 +76,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Didn\'t find your vacancy?"),
         "disconnect": MessageLookupByLibrary.simpleMessage("Disconnect"),
         "discount": MessageLookupByLibrary.simpleMessage("Discount"),
+        "discountLinkTitle": MessageLookupByLibrary.simpleMessage(
+            "Do you know about discounts that are not yet available on our website? Send us the link and we\'ll add them as soon as possible."),
         "discounts": MessageLookupByLibrary.simpleMessage("Discounts"),
         "discountsAndCoupons":
             MessageLookupByLibrary.simpleMessage("Discounts and coupons"),
@@ -174,6 +176,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "key": MessageLookupByLibrary.simpleMessage("Key"),
         "lastName": MessageLookupByLibrary.simpleMessage("Last name"),
         "leaveRequest": MessageLookupByLibrary.simpleMessage("Leave a request"),
+        "link": MessageLookupByLibrary.simpleMessage("Link"),
         "linkedAccounts":
             MessageLookupByLibrary.simpleMessage("Linked accounts"),
         "linkedAccountsDetails": MessageLookupByLibrary.simpleMessage(

@@ -218,6 +218,8 @@
   "findYourDiscount": "FIND YOUR DISCOUNT",
   "close": "Close",
   "callForDetails": "Call for details",
+  "link": "Link",
+  "discountLinkTitle": "Do you know about discounts that are not yet available on our website? Send us the link and we'll add them as soon as possible.",
   "error": "We're sorry, there was an unforeseen error.",
   "@error": {
     "description": "message of an unforeseen error that was not foreseen."

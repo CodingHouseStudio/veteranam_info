@@ -40,6 +40,7 @@ export 'message_field_widget.dart';
 export 'mock_button_widget.dart';
 export 'nawbar_widget.dart';
 export 'news_card_widget.dart';
+export 'notification_link_widget.dart';
 export 'page_indicator_control.dart';
 export 'pagination_widget.dart';
 export 'profile_card_widget.dart';
