@@ -38,9 +38,8 @@ class _FooterInfoVersionWidgetState extends State<FooterInfoVersionWidget> {
   @override
   Widget build(BuildContext context) {
     return Text(
-      widget.isDesk
-          ? ' v${packageInfo.version} build ${packageInfo.buildNumber}'
-          : ' v.${packageInfo.version}\n build ${packageInfo.buildNumber}',
+      ' v${packageInfo.version} ${widget.isDesk ? '' : '\n'}'
+      ' build ${packageInfo.buildNumber}',
       style: widget.isDesk
           ? AppTextStyle.materialThemeBodyLarge
           : AppTextStyle.materialThemeBodySmall,
