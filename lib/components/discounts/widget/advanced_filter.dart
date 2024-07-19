@@ -137,9 +137,7 @@ abstract class _AdvanceFilter {
     );
     return ListView.builder(
       key: KWidgetkeys.screen.discounts.advancedFilterList,
-      padding: isDesk
-          ? EdgeInsets.zero
-          : const EdgeInsets.all(KPadding.kPaddingSize16),
+      padding: const EdgeInsets.all(KPadding.kPaddingSize16),
       itemBuilder: (context, index) => body.elementAt(index),
       itemCount: body.length,
       semanticChildCount: body.length,

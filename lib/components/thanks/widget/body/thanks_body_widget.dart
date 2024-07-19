@@ -11,7 +11,7 @@ class ThanksBodyWidget extends StatelessWidget {
       mainChildWidgetsFunction: ({required isDesk, required isTablet}) => [
         KSizedBox.kHeightSizedBox30,
         ...TitleWidget.titleWidgetList(
-          title: context.l10n.thankYou,
+          title: '${context.l10n.thankYou}!',
           titleKey: KWidgetkeys.screen.thanks.title,
           subtitle: context.l10n.thankYouDescription,
           subtitleKey: KWidgetkeys.screen.thanks.subtitle,

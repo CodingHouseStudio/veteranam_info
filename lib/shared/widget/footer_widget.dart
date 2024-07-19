@@ -82,10 +82,12 @@ abstract class FooterWidget {
                   Expanded(
                     child: Wrap(
                       spacing: KPadding.kPaddingSize8,
+                      spacing: KPadding.kPaddingSize8,
                       alignment: WrapAlignment.end,
                       crossAxisAlignment: WrapCrossAlignment.end,
                       children: [
                         Text(
+                          '${KAppText.madeBy}  |',
                           '${KAppText.madeBy}  |',
                           key: KWidgetkeys.widget.footer.madeBy,
                           style: AppTextStyle
@@ -101,6 +103,7 @@ abstract class FooterWidget {
                         // ),
                         //KSizedBox.kWidthSizedBox16,
                         Text(
+                          '${context.l10n.allRightsReserved}  |',
                           '${context.l10n.allRightsReserved}  |',
                           key: KWidgetkeys.widget.footer.rightReserved,
                           style: AppTextStyle

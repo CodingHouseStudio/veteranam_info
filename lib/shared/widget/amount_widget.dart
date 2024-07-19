@@ -22,11 +22,13 @@ class AmountWidget extends StatelessWidget {
         shape: BoxShape.circle,
         color: background,
       ),
+      constraints: const BoxConstraints(minWidth: KMinMaxSize.minWidth30),
       child: Text(
         number.toString(),
         style: AppTextStyle.materialThemeLabelSmall.copyWith(
           color: textColor,
         ),
+        textAlign: TextAlign.center,
       ),
     );
   }
