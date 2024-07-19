@@ -185,7 +185,7 @@ abstract class _AdvanceFilter {
     final location = context
         .read<DiscountWatcherBloc>()
         .state
-        .discountModelItems
+        .categoryDiscountModelItems
         .getLocationFilter(context);
     return [
       if (isDesk) KSizedBox.kHeightSizedBox32 else KSizedBox.kHeightSizedBox24,
@@ -207,7 +207,10 @@ abstract class _AdvanceFilter {
               style: KButtonStyles.advancedFilterButtonStyle,
               icon: KIcon.close,
               label: Text(
-                location.elementAt(filterLocationIndex.elementAt(index)).value,
+                location
+                    .elementAt(filterLocationIndex.elementAt(index))
+                    .value
+                    .toString(),
                 style: isDesk
                     ? AppTextStyle.materialThemeBodyLarge
                     : AppTextStyle.materialThemeBodyMedium,
@@ -239,7 +242,7 @@ abstract class _AdvanceFilter {
               index: index,
               filterLocationIndex: filterLocationIndex,
             ),
-            text: location.elementAt(index).value,
+            text: location.elementAt(index).value.toString(),
             isDesk: isDesk,
           ),
         ),
