@@ -37,73 +37,69 @@ class _CityWidgetListState extends State<CityWidgetList> {
   Widget build(BuildContext context) {
     return Align(
       alignment: widget.isDesk ? Alignment.centerRight : Alignment.centerLeft,
-      child: ConstrainedBox(
-        constraints: const BoxConstraints(minHeight: KMinMaxSize.minHeight30),
-        child: TextButton.icon(
-          style: (widget.discountModel.location ?? []).length == 1 ||
-                  ((widget.discountModel.location ?? []).isEmpty &&
-                      widget.discountModel.subLocation != null)
-              ? KButtonStyles.discountCityButtonStyle.copyWith(
-                  mouseCursor:
-                      const WidgetStatePropertyAll(MouseCursor.uncontrolled),
+      child: TextButton.icon(
+        style: (widget.discountModel.location ?? []).length == 1 ||
+                ((widget.discountModel.location ?? []).isEmpty &&
+                    widget.discountModel.subLocation != null)
+            ? KButtonStyles.discountCityButtonStyle.copyWith(
+                mouseCursor:
+                    const WidgetStatePropertyAll(MouseCursor.uncontrolled),
+              )
+            : KButtonStyles.discountCityButtonStyle,
+        onPressed: () {
+          setState(() {
+            isExpanded = !isExpanded;
+          });
+        },
+        icon: KIcon.distance,
+        label: Padding(
+          padding: EdgeInsets.symmetric(
+            vertical:
+                widget.isDesk ? KPadding.kPaddingSize8 : KPadding.kPaddingSize4,
+          ),
+          child: Wrap(
+            children: [
+              if (widget.discountModel.location?.isEmpty ?? true)
+                Text(
+                  widget.discountModel.subLocation.getList(context).first,
+                  style: AppTextStyle.materialThemeLabelLarge,
                 )
-              : KButtonStyles.discountCityButtonStyle,
-          onPressed: () {
-            setState(() {
-              isExpanded = !isExpanded;
-            });
-          },
-          icon: KIcon.distance,
-          label: Padding(
-            padding: EdgeInsets.symmetric(
-              vertical: widget.isDesk
-                  ? KPadding.kPaddingSize8
-                  : KPadding.kPaddingSize4,
-            ),
-            child: Wrap(
-              children: [
-                if (widget.discountModel.location?.isEmpty ?? true)
-                  Text(
-                    widget.discountModel.subLocation.getList(context).first,
-                    style: AppTextStyle.materialThemeLabelLarge,
-                  )
-                else
-                  Text(
-                    cityList!,
+              else
+                Text(
+                  cityList!,
+                  style: AppTextStyle.materialThemeLabelLarge,
+                ),
+              if (isExpanded)
+                ...(widget.discountModel.location?.skip(1) ?? []).map(
+                  (location) => Text(
+                    '$location | ',
                     style: AppTextStyle.materialThemeLabelLarge,
                   ),
-                if (isExpanded)
-                  ...(widget.discountModel.location?.skip(1) ?? []).map(
-                    (location) => Text(
-                      '$location | ',
-                      style: AppTextStyle.materialThemeLabelLarge,
+                ),
+              if ((widget.discountModel.location ?? []).length > 1)
+                //if (widget.isDesk)
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: KPadding.kPaddingSize8,
+                  ),
+                  child: Text(
+                    isExpanded
+                        ? widget.isDesk
+                            ? context.l10n.hideExpansion
+                            : ''
+                        : widget.isDesk
+                            ? context.l10n.moreCities(
+                                (widget.discountModel.location ?? []).length -
+                                    1,
+                              )
+                            : '...',
+                    style: AppTextStyle.materialThemeLabelLarge.copyWith(
+                      decoration: TextDecoration.underline,
+                      color: AppColors.materialThemeRefTertiaryTertiary40,
                     ),
                   ),
-                if ((widget.discountModel.location ?? []).length > 1)
-                  //if (widget.isDesk)
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      left: KPadding.kPaddingSize8,
-                    ),
-                    child: Text(
-                      isExpanded
-                          ? widget.isDesk
-                              ? context.l10n.hideExpansion
-                              : ''
-                          : widget.isDesk
-                              ? context.l10n.moreCities(
-                                  (widget.discountModel.location ?? []).length -
-                                      1,
-                                )
-                              : '...',
-                      style: AppTextStyle.materialThemeLabelLarge.copyWith(
-                        decoration: TextDecoration.underline,
-                        color: AppColors.materialThemeRefTertiaryTertiary40,
-                      ),
-                    ),
-                  ),
-              ],
-            ),
+                ),
+            ],
           ),
         ),
       ),
