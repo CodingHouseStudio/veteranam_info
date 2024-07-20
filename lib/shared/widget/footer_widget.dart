@@ -119,6 +119,7 @@ abstract class FooterWidget {
                       ],
                     ),
                   ),
+                  KSizedBox.kWidthSizedBox4,
                   FooterInfoVersionWidget(
                     isDesk: isDesk,
                   ),
@@ -217,7 +218,11 @@ abstract class FooterWidget {
                   Expanded(
                     child: _privacyPolice(context: context, isDesk: false),
                   ),
-                  Expanded(child: FooterInfoVersionWidget(isDesk: isDesk)),
+                  KSizedBox.kWidthSizedBox3,
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: FooterInfoVersionWidget(isDesk: isDesk),
+                  ),
                 ],
               ),
             ];
