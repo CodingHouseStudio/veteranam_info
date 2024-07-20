@@ -195,8 +195,9 @@ class DiscountCardWidget extends StatelessWidget {
   List<Widget> _category(BuildContext context) =>
       List.generate(discountItem.category.length, (int index) {
         return Container(
+          constraints: const BoxConstraints(minHeight: KMinMaxSize.minHeight30),
           padding: const EdgeInsets.symmetric(
-            vertical: KPadding.kPaddingSize4,
+            //vertical: KPadding.kPaddingSize4,
             horizontal: KPadding.kPaddingSize8,
           ),
           decoration: KWidgetTheme.boxDecorationDiscountCategory,
@@ -220,8 +221,9 @@ class DiscountCardWidget extends StatelessWidget {
         );
       });
   Widget _expiration(String expiration) => Container(
+        constraints: const BoxConstraints(minHeight: KMinMaxSize.minHeight30),
         padding: const EdgeInsets.symmetric(
-          vertical: KPadding.kPaddingSize8,
+          vertical: KPadding.kPaddingSize4,
           horizontal: KPadding.kPaddingSize8,
         ),
         decoration: KWidgetTheme.boxDecorationDiscountContainer,
