@@ -5,6 +5,6 @@ enum LoadingStatus { initial, loading, loaded, error, listLoadedFull }
 class FilterItem {
   FilterItem(this.value, {this.number = 1});
 
-  final String value;
+  final dynamic value;
   int number;
 }
