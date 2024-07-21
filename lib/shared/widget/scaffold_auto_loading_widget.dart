@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:veteranam/shared/shared.dart';
 
@@ -7,6 +10,7 @@ class ScaffoldAutoLoadingWidget extends StatefulWidget {
     required this.loadFunction,
     required this.loadingButtonText,
     required this.listCanLoaded,
+    required this.loadDataAgain,
     this.cardListIsEmpty,
     this.titleChildWidgetsFunction,
     this.mainDeskPadding,
@@ -26,6 +30,7 @@ class ScaffoldAutoLoadingWidget extends StatefulWidget {
   final bool listCanLoaded;
   final bool? cardListIsEmpty;
   final void Function()? resetFilter;
+  final void Function() loadDataAgain;
 
   @override
   State<ScaffoldAutoLoadingWidget> createState() =>
@@ -34,14 +39,16 @@ class ScaffoldAutoLoadingWidget extends StatefulWidget {
 
 class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
   late ScrollController _scrollController;
+  late StreamSubscription<List<ConnectivityResult>> _connectivitySubscription;
+  late Connectivity _connectivity;
 
   @override
   void initState() {
     super.initState();
     _scrollController = ScrollController();
-    if (!KPlatformConstants.isWebDesktop) {
-      _scrollController.addListener(_onScroll);
-    }
+    _connectivity = Connectivity();
+    _connectivitySubscription =
+        Connectivity().onConnectivityChanged.listen(_updateConnectionStatus);
   }
 
   @override
@@ -186,18 +193,6 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
         itemCount: mainChildWidget.length,
       );
 
-  @override
-  void dispose() {
-    if (KPlatformConstants.isWebDesktop) {
-      _scrollController.dispose();
-    } else {
-      _scrollController
-        ..removeListener(_onScroll)
-        ..dispose();
-    }
-    super.dispose();
-  }
-
   void _onScroll() {
     if (_isBottom &&
         widget.listCanLoaded &&
@@ -219,5 +214,44 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
       duration: const Duration(milliseconds: 300),
       curve: Curves.easeInOut,
     );
+  }
+
+  // Platform messages are asynchronous, so we initialize in an async method.
+  Future<void> initConnectivity() async {
+    late List<ConnectivityResult> result;
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    try {
+      result = await _connectivity.checkConnectivity();
+    } catch (e) {
+      return;
+    }
+
+    // If the widget was removed from the tree while the asynchronous platform
+    // message was in flight, we want to discard the reply rather than calling
+    // setState to update our non-existent appearance.
+    if (!mounted) {
+      return;
+    }
+
+    return _updateConnectionStatus(result);
+  }
+
+  Future<void> _updateConnectionStatus(List<ConnectivityResult> result) async {
+    if (result.any((element) => element != ConnectivityResult.none)) {
+      widget.loadDataAgain();
+    }
+  }
+
+  @override
+  void dispose() {
+    if (KPlatformConstants.isWebDesktop) {
+      _scrollController.dispose();
+    } else {
+      _scrollController
+        ..removeListener(_onScroll)
+        ..dispose();
+    }
+    _connectivitySubscription.cancel();
+    super.dispose();
   }
 }

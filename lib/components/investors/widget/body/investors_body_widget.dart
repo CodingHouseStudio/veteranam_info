@@ -25,6 +25,9 @@ class InvestorsBodyWidget extends StatelessWidget {
         loadingButtonText: context.l10n.moreFunds,
         listCanLoaded: _.loadingStatus != LoadingStatus.listLoadedFull,
         cardListIsEmpty: _.fundItems.isEmpty,
+        loadDataAgain: () => context
+            .read<InvestorsWatcherBloc>()
+            .add(const InvestorsWatcherEvent.started()),
         mainChildWidgetsFunction: ({required isDesk}) => [
           KSizedBox.kHeightSizedBox24,
           ...TitleWidget.pointTitleWidgetList(

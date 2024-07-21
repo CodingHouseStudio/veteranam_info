@@ -790,10 +790,10 @@ class AppLocalizations {
     );
   }
 
-  /// `Thank you!`
+  /// `Thank you`
   String get thankYou {
     return Intl.message(
-      'Thank you!',
+      'Thank you',
       name: 'thankYou',
       desc: '',
       args: [],
@@ -1485,16 +1485,6 @@ class AppLocalizations {
     return Intl.message(
       'Hello',
       name: 'hello',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Thank you\nVeterans!`
-  String get thankYouVeterans {
-    return Intl.message(
-      'Thank you\nVeterans!',
-      name: 'thankYouVeterans',
       desc: '',
       args: [],
     );
@@ -2215,6 +2205,56 @@ class AppLocalizations {
     return Intl.message(
       'Close',
       name: 'close',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Call for details`
+  String get callForDetails {
+    return Intl.message(
+      'Call for details',
+      name: 'callForDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Veterans`
+  String get veterans {
+    return Intl.message(
+      'Veterans',
+      name: 'veterans',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Their Families`
+  String get theirFamilies {
+    return Intl.message(
+      'Their Families',
+      name: 'theirFamilies',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Active Military`
+  String get activeMilitary {
+    return Intl.message(
+      'Active Military',
+      name: 'activeMilitary',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Military Doctors`
+  String get militaryDoctors {
+    return Intl.message(
+      'Military Doctors',
+      name: 'militaryDoctors',
       desc: '',
       args: [],
     );

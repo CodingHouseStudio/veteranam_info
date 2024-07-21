@@ -28,6 +28,9 @@ class DiscountBodyWidget extends StatelessWidget {
           resetFilter: () => context.read<DiscountWatcherBloc>().add(
                 const DiscountWatcherEvent.filterReset(),
               ),
+          loadDataAgain: () => context
+              .read<DiscountWatcherBloc>()
+              .add(const DiscountWatcherEvent.started()),
           titleChildWidgetsFunction: ({required isDesk}) => [
             KSizedBox.kHeightSizedBox24,
             ...TitleWidget.pointTitleWidgetList(
