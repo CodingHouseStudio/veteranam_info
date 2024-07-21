@@ -54,9 +54,8 @@ class _CityWidgetListState extends State<CityWidgetList> {
         icon: KIcon.distance,
         label: Padding(
           padding: EdgeInsets.symmetric(
-            vertical: widget.isDesk
-                ? KPadding.kPaddingSize10
-                : KPadding.kPaddingSize6_5,
+            vertical:
+                widget.isDesk ? KPadding.kPaddingSize8 : KPadding.kPaddingSize4,
           ),
           child: Wrap(
             children: [

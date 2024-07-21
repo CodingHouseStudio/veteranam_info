@@ -28,6 +28,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "aboutProject": MessageLookupByLibrary.simpleMessage(
             "An independent information platform for veterans and their families."),
         "aboutUs": MessageLookupByLibrary.simpleMessage("About project"),
+        "activeMilitary":
+            MessageLookupByLibrary.simpleMessage("Active Military"),
         "addComment": MessageLookupByLibrary.simpleMessage("Add a comment:"),
         "addPhoto": MessageLookupByLibrary.simpleMessage("Add Photo"),
         "addYourStory": MessageLookupByLibrary.simpleMessage("Add your story"),
@@ -45,6 +47,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "beAnonymous": MessageLookupByLibrary.simpleMessage("Anonymous"),
         "beAnonymousDetails": MessageLookupByLibrary.simpleMessage(
             "If you make your profile anonymous, your page will not display personal information, only your nickname."),
+        "callForDetails":
+            MessageLookupByLibrary.simpleMessage("Call for details"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "capitalLetter": MessageLookupByLibrary.simpleMessage(
             "must contain one or more capital letter"),
@@ -188,6 +192,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Main information"),
         "mainScreen": MessageLookupByLibrary.simpleMessage("Home"),
         "message": MessageLookupByLibrary.simpleMessage("Message"),
+        "militaryDoctors":
+            MessageLookupByLibrary.simpleMessage("Military Doctors"),
         "more": MessageLookupByLibrary.simpleMessage("More"),
         "moreCities": m0,
         "moreDiscounts": MessageLookupByLibrary.simpleMessage("More discounts"),
@@ -305,13 +311,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "supportVeterans":
             MessageLookupByLibrary.simpleMessage("SUPPORT\nVETERANS"),
         "text": MessageLookupByLibrary.simpleMessage("text"),
-        "thankYou": MessageLookupByLibrary.simpleMessage("Thank you!"),
+        "thankYou": MessageLookupByLibrary.simpleMessage("Thank you"),
         "thankYouDescription": MessageLookupByLibrary.simpleMessage(
             "Please note! To access some services, you may need to confirm your identity."),
-        "thankYouVeterans":
-            MessageLookupByLibrary.simpleMessage("Thank you\nVeterans!"),
         "thatEndOfList": MessageLookupByLibrary.simpleMessage(
             "That\'s the end of the list! We hope you found what you were looking for."),
+        "theirFamilies": MessageLookupByLibrary.simpleMessage("Their Families"),
         "thisServiceForVeteransSubtitle": MessageLookupByLibrary.simpleMessage(
             "Here you can find useful discounts"),
         "toDiscount": MessageLookupByLibrary.simpleMessage("To Discounts"),
@@ -330,6 +335,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "useful": MessageLookupByLibrary.simpleMessage("Useful"),
         "verifiedInformation":
             MessageLookupByLibrary.simpleMessage("Verified information"),
+        "veterans": MessageLookupByLibrary.simpleMessage("Veterans"),
         "wage": MessageLookupByLibrary.simpleMessage("Salary*"),
         "webSite": MessageLookupByLibrary.simpleMessage("Web site"),
         "website": MessageLookupByLibrary.simpleMessage("Website"),

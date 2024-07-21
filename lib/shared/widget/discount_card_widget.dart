@@ -152,12 +152,16 @@ class DiscountCardWidget extends StatelessWidget {
                 KSizedBox.kHeightSizedBox16,
                 CardTextDetailWidget(
                   text: '${discountItem.description}\n'
-                      '\n${context.l10n.toGetItYouNeed}' //Title medium
+                      '\n${discountItem.hasMarkdown ? '***' : ''}'
+                      '${context.l10n.toGetItYouNeed}' //Title medium
+                      '${discountItem.hasMarkdown ? '***' : ''}\n'
                       '\n${discountItem.requirements}\n'
                       '\n${discountItem.exclusions}\n'
                       // ignore: lines_longer_than_80_chars
                       '${discountItem.additionalDetails != null ? '\n${discountItem.additionalDetails ?? ''}\n' : ''}'
-                      '\n${discountItem.phoneNumber}',
+                      '\n${context.l10n.callForDetails}:'
+                      ' ${discountItem.phoneNumber}',
+                  hasMarkdown: discountItem.hasMarkdown,
                   maxLines: 3,
                   isDesk: isDesk,
                   icon: SharedIconListWidget.get(
@@ -191,8 +195,9 @@ class DiscountCardWidget extends StatelessWidget {
   List<Widget> _category(BuildContext context) =>
       List.generate(discountItem.category.length, (int index) {
         return Container(
+          constraints: const BoxConstraints(minHeight: KMinMaxSize.minHeight30),
           padding: const EdgeInsets.symmetric(
-            vertical: KPadding.kPaddingSize4,
+            //vertical: KPadding.kPaddingSize4,
             horizontal: KPadding.kPaddingSize8,
           ),
           decoration: KWidgetTheme.boxDecorationDiscountCategory,
@@ -216,8 +221,9 @@ class DiscountCardWidget extends StatelessWidget {
         );
       });
   Widget _expiration(String expiration) => Container(
+        constraints: const BoxConstraints(minHeight: KMinMaxSize.minHeight30),
         padding: const EdgeInsets.symmetric(
-          vertical: KPadding.kPaddingSize8,
+          vertical: KPadding.kPaddingSize4,
           horizontal: KPadding.kPaddingSize8,
         ),
         decoration: KWidgetTheme.boxDecorationDiscountContainer,

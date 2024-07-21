@@ -344,6 +344,9 @@ abstract class KButtonStyles {
       BorderSide(color: AppColors.materialThemeKeyColorsNeutral),
     ),
     overlayColor: WidgetStatePropertyAll(Colors.transparent),
+    minimumSize: WidgetStatePropertyAll(
+      Size(double.minPositive, KMinMaxSize.minHeight30),
+    ),
   );
   static const closeDialogButtonStyle = ButtonStyle(
     padding: WidgetStatePropertyAll(
