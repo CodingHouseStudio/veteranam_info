@@ -98,12 +98,12 @@ void main() {
         bloc
           ..add(
             const DiscountWatcherEvent.filterCategory(
-              0,
+              1,
             ),
           )
           ..add(
             const DiscountWatcherEvent.filterCategory(
-              1,
+              0,
             ),
           )
           ..add(
@@ -113,7 +113,7 @@ void main() {
           )
           ..add(
             const DiscountWatcherEvent.filterCategory(
-              0,
+              1,
             ),
           );
       },
@@ -334,7 +334,7 @@ void main() {
           )
           ..add(
             const DiscountWatcherEvent.filterCategory(
-              0,
+              1,
             ),
           );
       },
@@ -363,7 +363,7 @@ void main() {
         predicate<DiscountWatcherState>(
           (state) =>
               state.loadingStatus == LoadingStatus.listLoadedFull &&
-              state.filteredDiscountModelItems.length == 1 &&
+              state.categoryDiscountModelItems.length == 1 &&
               state.filtersCategoriesIndex.isNotEmpty &&
               state.itemsLoaded == 1,
         ),
@@ -391,7 +391,7 @@ void main() {
         bloc
           ..add(
             const DiscountWatcherEvent.filterCategory(
-              0,
+              1,
             ),
           )
           ..add(
@@ -399,7 +399,7 @@ void main() {
           )
           ..add(
             const DiscountWatcherEvent.filterCategory(
-              0,
+              1,
             ),
           )
           ..add(

@@ -28,6 +28,9 @@ class InformationBodyWidget extends StatelessWidget {
         resetFilter: () => context
             .read<InformationWatcherBloc>()
             .add(const InformationWatcherEvent.filter(-1)),
+        loadDataAgain: () => context
+            .read<InformationWatcherBloc>()
+            .add(const InformationWatcherEvent.started()),
         titleChildWidgetsFunction: ({required isDesk}) => [
           KSizedBox.kHeightSizedBox24,
           ...TitleWidget.titleIconWidgetList(

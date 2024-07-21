@@ -19,7 +19,10 @@ class WorkEmployeeBody extends StatelessWidget {
             .add(const WorkEmployeeWatcherEvent.started()),
       ),
       listenWhen: (previous, current) => current.failure != null,
-      builder: (context, _) => ScaffoldDecorationWidget(
+      builder: (context, _) => ScaffoldDecorationNetworkWidget(
+        loadDataAgain: () => context
+            .read<WorkEmployeeWatcherBloc>()
+            .add(const WorkEmployeeWatcherEvent.started()),
         titleChildWidgetsFunction: ({required isDesk}) => [
           if (isDesk)
             KSizedBox.kHeightSizedBox40
