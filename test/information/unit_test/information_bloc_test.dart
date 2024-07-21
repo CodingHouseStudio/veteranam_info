@@ -105,7 +105,7 @@ void main() {
         );
         bloc.add(
           const InformationWatcherEvent.filter(
-            0,
+            1,
           ),
         );
       },
@@ -225,7 +225,7 @@ void main() {
           )
           ..add(
             const InformationWatcherEvent.filter(
-              0,
+              1,
             ),
           );
       },
@@ -282,7 +282,7 @@ void main() {
         bloc
           ..add(
             const InformationWatcherEvent.filter(
-              0,
+              1,
             ),
           )
           ..add(
@@ -290,7 +290,7 @@ void main() {
           )
           ..add(
             const InformationWatcherEvent.filter(
-              0,
+              1,
             ),
           )
           ..add(

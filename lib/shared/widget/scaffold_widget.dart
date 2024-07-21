@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:veteranam/shared/shared.dart';
 
@@ -6,6 +9,107 @@ class ScaffoldWidget extends StatelessWidget {
     required this.mainChildWidgetsFunction,
     this.titleChildWidgetsFunction,
     super.key,
+    this.mainDeskPadding,
+    this.hasFooter = false,
+  });
+  final List<Widget> Function({required bool isDesk})?
+      titleChildWidgetsFunction;
+  final List<Widget> Function({required bool isDesk, required bool isTablet})
+      mainChildWidgetsFunction;
+  final EdgeInsetsGeometry? mainDeskPadding;
+  final bool hasFooter;
+
+  @override
+  Widget build(BuildContext context) {
+    return _ScaffoldWidget(
+      mainChildWidgetsFunction: mainChildWidgetsFunction,
+      hasFooter: hasFooter,
+      mainDeskPadding: mainDeskPadding,
+      titleChildWidgetsFunction: titleChildWidgetsFunction,
+    );
+  }
+}
+
+class ScaffoldNetworkWidget extends StatefulWidget {
+  const ScaffoldNetworkWidget({
+    required this.mainChildWidgetsFunction,
+    required this.loadDataAgain,
+    this.titleChildWidgetsFunction,
+    super.key,
+    this.mainDeskPadding,
+    this.hasFooter = false,
+  });
+  final List<Widget> Function({required bool isDesk})?
+      titleChildWidgetsFunction;
+  final List<Widget> Function({required bool isDesk, required bool isTablet})
+      mainChildWidgetsFunction;
+  final EdgeInsetsGeometry? mainDeskPadding;
+  final bool hasFooter;
+  final void Function() loadDataAgain;
+
+  @override
+  State<ScaffoldNetworkWidget> createState() => _ScaffoldNetworkWidgetState();
+}
+
+class _ScaffoldNetworkWidgetState extends State<ScaffoldNetworkWidget> {
+  late StreamSubscription<List<ConnectivityResult>> _connectivitySubscription;
+  late Connectivity _connectivity;
+
+  @override
+  void initState() {
+    super.initState();
+    _connectivity = Connectivity();
+    _connectivitySubscription =
+        Connectivity().onConnectivityChanged.listen(_updateConnectionStatus);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return _ScaffoldWidget(
+      mainChildWidgetsFunction: widget.mainChildWidgetsFunction,
+      hasFooter: widget.hasFooter,
+      mainDeskPadding: widget.mainDeskPadding,
+      titleChildWidgetsFunction: widget.titleChildWidgetsFunction,
+    );
+  }
+
+  // Platform messages are asynchronous, so we initialize in an async method.
+  Future<void> initConnectivity() async {
+    late List<ConnectivityResult> result;
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    try {
+      result = await _connectivity.checkConnectivity();
+    } catch (e) {
+      return;
+    }
+
+    // If the widget was removed from the tree while the asynchronous platform
+    // message was in flight, we want to discard the reply rather than calling
+    // setState to update our non-existent appearance.
+    if (!mounted) {
+      return;
+    }
+
+    return _updateConnectionStatus(result);
+  }
+
+  Future<void> _updateConnectionStatus(List<ConnectivityResult> result) async {
+    if (result.any((element) => element != ConnectivityResult.none)) {
+      widget.loadDataAgain();
+    }
+  }
+
+  @override
+  void dispose() {
+    _connectivitySubscription.cancel();
+    super.dispose();
+  }
+}
+
+class _ScaffoldWidget extends StatelessWidget {
+  const _ScaffoldWidget({
+    required this.mainChildWidgetsFunction,
+    this.titleChildWidgetsFunction,
     this.mainDeskPadding,
     this.hasFooter = false,
   });

@@ -24,8 +24,11 @@ class HomeBodyWidget extends StatelessWidget {
             .add(const HomeWatcherEvent.started()),
       ),
       listenWhen: (previous, current) => current.failure != null,
-      builder: (context, _) => ScaffoldWidget(
+      builder: (context, _) => ScaffoldNetworkWidget(
         hasFooter: true,
+        loadDataAgain: () => context
+            .read<HomeWatcherBloc>()
+            .add(const HomeWatcherEvent.started()),
         mainChildWidgetsFunction: ({required isDesk, required isTablet}) => [
           ..._boxWidgetList(
             context: context,

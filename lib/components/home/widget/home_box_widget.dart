@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -27,7 +28,7 @@ class HomeBoxWidget extends StatelessWidget {
             isTablet ? CrossAxisAlignment.start : CrossAxisAlignment.center,
         children: [
           Text(
-            context.l10n.thankYouVeterans,
+            context.l10n.thankYou,
             key: KWidgetkeys.screen.home.boxTitle,
             style: isDesk
                 ? AppTextStyle.h1
@@ -35,6 +36,22 @@ class HomeBoxWidget extends StatelessWidget {
                     ? AppTextStyle.h1Tablet
                     : AppTextStyle.h1Mob,
             textAlign: isTablet ? null : TextAlign.center,
+          ),
+          if (isDesk) KSizedBox.kHeightSizedBox8,
+          DefaultTextStyle(
+            style: isDesk
+                ? AppTextStyle.h1
+                : isTablet
+                    ? AppTextStyle.h1Tablet
+                    : AppTextStyle.h1Mob,
+            child: AnimatedTextKit(
+              animatedTexts: [
+                TyperAnimatedText(context.l10n.veterans),
+                TyperAnimatedText(context.l10n.theirFamilies),
+                TyperAnimatedText(context.l10n.activeMilitary),
+                TyperAnimatedText(context.l10n.militaryDoctors),
+              ],
+            ),
           ),
           if (isDesk)
             KSizedBox.kHeightSizedBox24
