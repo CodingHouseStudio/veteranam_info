@@ -1,6 +1,7 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 // import 'package:flutter_svg/svg.dart';
 import 'package:veteranam/shared/shared.dart';
 
@@ -68,8 +69,18 @@ class KImage {
         path: 'assets/icons/social_icons_g.svg',
         key: key,
       );
-  static Image logo({Key? key}) =>
-      _get('assets/images/logo.png', key: key, fit: BoxFit.contain);
+  static SvgPicture logo({Key? key}) => SvgPicture.asset(
+        'assets/images/logo.svg',
+        key: key,
+      );
+  // _get(
+  //       'assets/images/logo.png',
+  //       key: key,
+  //       fit: BoxFit.contain,
+  //       casheSize: null,
+  //       // casheSize: KMinMaxSize.kHomeImageMaxSize,
+  //       // height: KMinMaxSize.minHeight50,
+  //     );
   static Image logoHome({Key? key}) => _get(
         'assets/images/logo_home.svg',
         key: key,
@@ -144,7 +155,7 @@ class KImage {
     BoxFit? fit,
     double? width,
     double? height,
-    int? casheSize,
+    int? casheSize = KMinMaxSize.kImageMaxSize,
     Key? key,
   }) =>
       Image.asset(
@@ -153,7 +164,7 @@ class KImage {
         fit: fit,
         width: width,
         height: height,
-        cacheHeight: casheSize ?? KMinMaxSize.kImageMaxSize,
-        cacheWidth: casheSize ?? KMinMaxSize.kImageMaxSize,
+        cacheHeight: casheSize,
+        cacheWidth: casheSize,
       );
 }

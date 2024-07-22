@@ -107,6 +107,7 @@ class _NawbarWidgetImplematationState
                   ),
                   icon: KImage.logo(
                     key: KWidgetkeys.widget.nawbar.logo,
+                    // width: 78,
                   ),
                 ),
               if (Config.isDevelopment)
