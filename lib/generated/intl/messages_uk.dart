@@ -175,6 +175,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Зв\'яжіться з нами для підтримки ветеранів. Напишіть нам на hello@veteranam.info"),
         "isWrong": MessageLookupByLibrary.simpleMessage("не правильне"),
         "isWrongEmail": MessageLookupByLibrary.simpleMessage("не правильний"),
+        "itIsValidAllTime":
+            MessageLookupByLibrary.simpleMessage("Діє постійно"),
         "jobsVacancies":
             MessageLookupByLibrary.simpleMessage("Робота і вакансії"),
         "jobsVacanciesSubtitle": MessageLookupByLibrary.simpleMessage(
