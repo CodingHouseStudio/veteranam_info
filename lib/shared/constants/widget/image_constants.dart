@@ -68,12 +68,13 @@ class KImage {
         path: 'assets/icons/social_icons_g.svg',
         key: key,
       );
-  static Image logo({Key? key}) => _get(
+  static Image logo({Key? key, double? width}) => _get(
         'assets/images/logo.png',
         key: key,
-        fit: BoxFit.fill,
-        height: KMinMaxSize.minHeight50,
-        width: KMinMaxSize.minWidth78,
+        fit: BoxFit.contain,
+        // casheSize: KMinMaxSize.kHomeImageMaxSize,
+        // height: KMinMaxSize.minHeight50,
+        width: width,
       );
   static Image logoHome({Key? key}) => _get(
         'assets/images/logo_home.svg',
