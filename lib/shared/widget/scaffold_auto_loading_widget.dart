@@ -49,7 +49,9 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
     _connectivity = Connectivity();
     _connectivitySubscription =
         Connectivity().onConnectivityChanged.listen(_updateConnectionStatus);
-    _scrollController.addListener(_onScroll);
+    if (!KPlatformConstants.isWebDesktop) {
+      _scrollController.addListener(_onScroll);
+    }
   }
 
   @override

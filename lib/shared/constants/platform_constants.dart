@@ -8,7 +8,7 @@ abstract class KPlatformConstants {
   @visibleForTesting
   static set isWebDesktop(bool isWebDesktop) => _isWebDesktop = isWebDesktop;
 
-  static bool _kIsWeb = kIsWeb;
+  static bool _kIsWeb = true;
   static bool get kIsWeb => _kIsWeb;
   @visibleForTesting
   static set kIsWeb(bool isWeb) => _kIsWeb = isWeb;
