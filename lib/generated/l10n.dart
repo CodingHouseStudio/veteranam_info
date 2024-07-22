@@ -2260,6 +2260,16 @@ class AppLocalizations {
     );
   }
 
+  /// `It is valid all the time`
+  String get itIsValidAllTime {
+    return Intl.message(
+      'It is valid all the time',
+      name: 'itIsValidAllTime',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `We're sorry, there was an unforeseen error.`
   String get error {
     return Intl.message(
