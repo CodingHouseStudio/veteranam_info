@@ -54,6 +54,7 @@ abstract class KSize {
   static const kFont40 = 40.0;
   static const kFont48 = 48.0;
   static const kFont64 = 64.0;
+  static const kFont78 = 78.0;
   static const kFont96 = 96.0;
   static const kFont128 = 128.0;
 
