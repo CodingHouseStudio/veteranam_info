@@ -169,6 +169,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "isWrong": MessageLookupByLibrary.simpleMessage("has errors"),
         "isWrongEmail":
             MessageLookupByLibrary.simpleMessage("is not properly formatted"),
+        "itIsValidAllTime":
+            MessageLookupByLibrary.simpleMessage("It is valid all the time"),
         "jobsVacancies":
             MessageLookupByLibrary.simpleMessage("Jobs and vacancies"),
         "jobsVacanciesSubtitle": MessageLookupByLibrary.simpleMessage(
