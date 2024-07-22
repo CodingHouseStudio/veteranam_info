@@ -223,6 +223,7 @@
   "theirFamilies": "Їхні сім'ї",
   "activeMilitary": "Діючі військові",
   "militaryDoctors": "Військові лікарі",
+  "itIsValidAllTime": "Діє постійно",
   "error": "Вибачте, сталася непередбачена помилка.",
   "@error": {
     "description": "повідомлення про непередбачену помилку."
