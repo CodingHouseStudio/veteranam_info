@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:veteranam/shared/shared.dart';
@@ -51,10 +50,10 @@ class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
             ),
             onTapLink: (text, href, title) async {
               if (href == null) return;
-              if (!href.isUrlValid && KPlatformConstants.isWebDesktop) {
-                await Clipboard.setData(ClipboardData(text: text));
-                return;
-              }
+              // if (!href.isUrlValid && KPlatformConstants.isWebDesktop) {
+              //   await Clipboard.setData(ClipboardData(text: text));
+              //   return;
+              // }
               final canLaunch = await canLaunchUrl(Uri.parse(href));
               if (canLaunch) {
                 await launchUrl(
