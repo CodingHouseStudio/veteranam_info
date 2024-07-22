@@ -53,3 +53,11 @@ extension DiscountModelLocation on DiscountModel {
         if (subLocation != null) ...subLocation!.getList(context),
       ];
 }
+
+extension StringExtension on String {
+  bool get isUrlValid {
+    const urlPattern = r'(https?://[^\s]+)';
+    final regex = RegExp(urlPattern);
+    return regex.hasMatch(this);
+  }
+}

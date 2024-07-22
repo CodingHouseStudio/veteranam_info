@@ -151,17 +151,8 @@ class DiscountCardWidget extends StatelessWidget {
                 ],
                 KSizedBox.kHeightSizedBox16,
                 CardTextDetailWidget(
-                  text: '${discountItem.description}\n'
-                      '\n${discountItem.hasMarkdown ? '***' : ''}'
-                      '${context.l10n.toGetItYouNeed}' //Title medium
-                      '${discountItem.hasMarkdown ? '***' : ''}\n'
-                      '\n${discountItem.requirements}\n'
-                      '\n${discountItem.exclusions}\n'
-                      // ignore: lines_longer_than_80_chars
-                      '${discountItem.additionalDetails != null ? '\n${discountItem.additionalDetails ?? ''}\n' : ''}'
-                      '\n${context.l10n.callForDetails}:'
-                      ' ${discountItem.phoneNumber}',
-                  hasMarkdown: discountItem.hasMarkdown,
+                  text: getText(context),
+                  hasMarkdown: true,
                   maxLines: 3,
                   isDesk: isDesk,
                   icon: SharedIconListWidget.get(
@@ -240,6 +231,22 @@ class DiscountCardWidget extends StatelessWidget {
           ],
         ),
       );
+  String getText(BuildContext context) => '**${discountItem.description}**\n'
+              '\n***${context.l10n.toGetItYouNeed}***\n'
+              '\n- ${discountItem.requirements.replaceAll('-', '  -')}'
+              '\n'
+              '\n${discountItem.exclusions.replaceAll('-', '  -')}\n'
+              // ignore: lines_longer_than_80_chars
+              '${discountItem.additionalDetails != null ? '\n${discountItem.additionalDetails ?? ''}\n' : ''}'
+              '\n***${context.l10n.callForDetails}:***'
+              ' ${KPlatformConstants.isWebDesktop ? '***' : '['}'
+              '${discountItem.phoneNumber}'
+              // ignore: lines_longer_than_80_chars
+              '${KPlatformConstants.isWebDesktop ? '***' : '](tel:${discountItem.phoneNumber.replaceAll('(', '').replaceAll(')', '').replaceAll(' ', '')})'}'
+          .replaceAllMapped(RegExp(r'(https?://[^\s]+)'), (match) {
+        final url = match.group(0);
+        return url != null ? '[$url]($url)' : '';
+      });
 }
 
 // class _DiscountsCardWidgetMob extends StatelessWidget {

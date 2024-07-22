@@ -54,8 +54,8 @@ void main() {
       DiscountModelJsonField.userPhoto: [
         KTestText.discountModelItems.last.userPhoto!.toJson(),
       ],
-      DiscountModelJsonField.hasMarkdown:
-          KTestText.discountModelItems.last.hasMarkdown,
+      // DiscountModelJsonField.hasMarkdown:
+      //     KTestText.discountModelItems.last.hasMarkdown,
       // DiscountModelJsonField.date:
       //     KTestText.discountModelItems.last.date.toIso8601String(),
     };
@@ -91,8 +91,8 @@ void main() {
       DiscountModelJsonField.territory:
           KTestText.discountModelItems.last.territory,
       DiscountModelJsonField.title: KTestText.discountModelItems.last.title,
-      DiscountModelJsonField.hasMarkdown:
-          KTestText.discountModelItems.last.hasMarkdown,
+      // DiscountModelJsonField.hasMarkdown:
+      //     KTestText.discountModelItems.last.hasMarkdown,
       DiscountModelJsonField.userPhoto: null,
       DiscountModelJsonField.subLocation: null,
       DiscountModelJsonField.location: null,
