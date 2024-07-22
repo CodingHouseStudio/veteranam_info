@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-// import 'package:flutter_markdown/flutter_markdown.dart';
-import 'package:flutter_markdown_selectionarea/flutter_markdown.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:veteranam/shared/shared.dart';
 
@@ -44,27 +43,25 @@ class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         if (widget.hasMarkdown)
-          SelectionArea(
-            child: MarkdownBody(
-              data: fullText ? widget.text : subtext,
-              // selectable: true,
-              styleSheet: MarkdownStyleSheet(
-                a: AppTextStyle.materialThemeBodyLarge,
-              ),
-              onTapLink: (text, href, title) async {
-                if (href == null) return;
-                if (!href.isUrlValid && KPlatformConstants.isWebDesktop) {
-                  await Clipboard.setData(ClipboardData(text: text));
-                  return;
-                }
-                final canLaunch = await canLaunchUrl(Uri.parse(href));
-                if (canLaunch) {
-                  await launchUrl(
-                    Uri.parse(href),
-                  );
-                }
-              },
+          MarkdownBody(
+            data: fullText ? widget.text : subtext,
+            // selectable: true,
+            styleSheet: MarkdownStyleSheet(
+              a: AppTextStyle.materialThemeBodyLarge,
             ),
+            onTapLink: (text, href, title) async {
+              if (href == null) return;
+              if (!href.isUrlValid && KPlatformConstants.isWebDesktop) {
+                await Clipboard.setData(ClipboardData(text: text));
+                return;
+              }
+              final canLaunch = await canLaunchUrl(Uri.parse(href));
+              if (canLaunch) {
+                await launchUrl(
+                  Uri.parse(href),
+                );
+              }
+            },
           )
         else
           Text(
