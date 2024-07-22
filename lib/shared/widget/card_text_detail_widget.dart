@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:veteranam/shared/shared.dart';
 
 class CardTextDetailWidget extends StatefulWidget {
@@ -27,12 +28,12 @@ class CardTextDetailWidget extends StatefulWidget {
 }
 
 class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
-  late String text;
+  late bool fullText;
 
   @override
   void initState() {
     super.initState();
-    text = widget.text.substring(0, getIndex);
+    fullText = false;
   }
 
   @override
@@ -42,15 +43,28 @@ class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
       children: [
         if (widget.hasMarkdown)
           MarkdownBody(
-            data: text,
-            selectable: true,
+            data: fullText ? widget.text : subtext,
+            // selectable: true,
             styleSheet: MarkdownStyleSheet(
               a: AppTextStyle.materialThemeBodyLarge,
             ),
+            onTapLink: (text, href, title) async {
+              if (href == null) return;
+              // if (!href.isUrlValid && KPlatformConstants.isWebDesktop) {
+              //   await Clipboard.setData(ClipboardData(text: text));
+              //   return;
+              // }
+              final canLaunch = await canLaunchUrl(Uri.parse(href));
+              if (canLaunch) {
+                await launchUrl(
+                  Uri.parse(href),
+                );
+              }
+            },
           )
         else
           Text(
-            text,
+            fullText ? widget.text : subtext,
             key: KWidgetkeys.widget.cardTextDetail.text,
             // maxLines: maxLines,
             style: AppTextStyle.materialThemeBodyLarge,
@@ -65,19 +79,13 @@ class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
                 alignment: Alignment.centerLeft,
                 child: TextButton(
                   key: KWidgetkeys.widget.cardTextDetail.button,
-                  onPressed: () {
-                    setState(() {
-                      if (text.length == widget.text.length) {
-                        text = widget.text.substring(0, getIndex);
-                      } else {
-                        text = widget.text;
-                      }
-                    });
-                  },
+                  onPressed: () => setState(() {
+                    fullText = !fullText;
+                  }),
                   style: widget.buttonStyle ??
                       KButtonStyles.borderBlackButtonStyle,
                   child: Text(
-                    text.length == widget.text.length
+                    fullText
                         ? widget.buttonText?.elementAt(1) ?? context.l10n.hide
                         : widget.buttonText?.elementAt(0) ??
                             context.l10n.detail,
@@ -100,12 +108,13 @@ class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
     );
   }
 
-  int get getIndex {
-    final index = widget.text.indexOf('\n');
-    return index != -1
+  String get subtext {
+    final index = widget.text.indexOf('\n\n');
+    final i = index != -1
         ? index
         : widget.text.length > KMinMaxSize.titleMaxLength
             ? KMinMaxSize.titleMaxLength
             : widget.text.length;
+    return '${widget.text.substring(0, i)}...';
   }
 }
