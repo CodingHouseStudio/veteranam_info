@@ -34,7 +34,7 @@ class DiscountModel with _$DiscountModel {
     String? directLink,
     String? additionalDetails,
     SubLocation? subLocation,
-    @Default(false) bool hasMarkdown,
+    // @Default(false) bool hasMarkdown,
   }) = _DiscountModel;
 
   factory DiscountModel.fromJson(Map<String, dynamic> json) =>
@@ -85,5 +85,5 @@ abstract class DiscountModelJsonField {
   static const userPhoto = 'userPhoto';
   // static const date = 'date';
   static const subLocation = 'subLocation';
-  static const hasMarkdown = 'hasMarkdown';
+  // static const hasMarkdown = 'hasMarkdown';
 }
