@@ -9,14 +9,14 @@ abstract class KPlatformConstants {
   static set isWebDesktop(bool isWebDesktop) => _isWebDesktop = isWebDesktop;
 
   static bool _kIsWeb = true;
-  static bool get kIsWeb => _kIsWeb;
+  static bool get testIsWeb => _kIsWeb;
   @visibleForTesting
-  static set kIsWeb(bool isWeb) => _kIsWeb = isWeb;
+  static set testIsWeb(bool isWeb) => _kIsWeb = isWeb;
 
   // static bool _isWebMobile = kIsWeb &&
   //     (defaultTargetPlatform == TargetPlatform.android ||
   //         defaultTargetPlatform == TargetPlatform.iOS);
-  static bool _isWebDesktop = kIsWeb &&
+  static bool _isWebDesktop = testIsWeb &&
       (defaultTargetPlatform == TargetPlatform.fuchsia ||
           defaultTargetPlatform == TargetPlatform.linux ||
           defaultTargetPlatform == TargetPlatform.macOS ||
