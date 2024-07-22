@@ -29,7 +29,7 @@ dependencies:
   flutter_markdown: ^0.7.1
   flutter_rating_bar: ^4.0.1
   flutter_secure_storage: ^9.0.0
-  # flutter_svg: ^2.0.10+1
+  flutter_svg: ^2.0.10+1
   formz: ^0.7.0
   freezed: ^2.5.3
   freezed_annotation: ^2.4.1
@@ -55,6 +55,11 @@ dependencies:
 dependency_overrides:
   flutter_secure_storage_web: ^2.0.0-beta.1
   meta: ^1.15.0
+  vector_graphics_compiler:
+    git:
+      url: https://github.com/nohli/vector_graphics
+      path: packages/vector_graphics_compiler
+      ref: js_interop
 
 dev_dependencies:
   bloc_test: ^9.1.7
