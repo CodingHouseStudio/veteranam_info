@@ -70,7 +70,7 @@ class KImage {
         key: key,
       );
   static SvgPicture logo({Key? key}) => SvgPicture.asset(
-        'assets/images/logo_image.svg',
+        'assets/images/logo.svg',
         key: key,
       );
   // _get(
