@@ -19,6 +19,7 @@ void main() {
   group('${KScreenBlocName.app} ', () {
     late AuthenticationRepository mockAuthenticationRepository;
     setUp(() {
+      KPlatformConstants.kIsWeb = true;
       mockAuthenticationRepository = MockAuthenticationRepository();
       when(mockAuthenticationRepository.userSetting).thenAnswer(
         (realInvocation) => Stream.value(UserSetting.empty),

@@ -18,7 +18,9 @@ GoRouter router = GoRouter(
   errorBuilder: (context, state) => const ErrorScreen(),
   refreshListenable:
       GoRouterRefreshStream(GetIt.instance<AuthenticationBloc>().stream),
-  initialLocation: kIsWeb ? KRoute.home.path : '/${KRoute.discounts.path}',
+  initialLocation: KPlatformConstants.kIsWeb
+      ? KRoute.home.path
+      : '/${KRoute.discounts.path}',
   observers: [
     FirebaseAnalyticsObserver(
       analytics: FirebaseAnalytics.instance,
