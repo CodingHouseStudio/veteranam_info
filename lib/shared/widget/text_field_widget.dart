@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:veteranam/shared/shared.dart';
 
@@ -130,20 +129,16 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
           labelText: widget.labelText,
           border: widget.border,
           enabledBorder: KWidgetTheme.outlineInputBorderEnabled.copyWith(
-            borderSide: BorderSide(
-              color: isHovered
-                  ? AppColors.materialThemeRefNeutralNeutral40
-                  : AppColors.materialThemeRefNeutralNeutral80,
-            ),
+            borderSide: isHovered
+                ? const BorderSide(
+                    color: AppColors.materialThemeRefNeutralNeutral40,
+                  )
+                : null,
           ),
-          disabledBorder: KWidgetTheme.outlineInputBorderDisabled,
-          hoverColor: AppColors.materialThemeWhite,
-          focusedBorder: KWidgetTheme.outlineInputBorderFocused,
-          focusedErrorBorder: kIsWeb ? null : widget.border,
+          focusedErrorBorder: widget.border,
           fillColor: widget.fillColor,
           hintText: widget.hintText,
           errorText: widget.errorText,
-          errorStyle: AppTextStyle.error14,
           suffixIcon: Padding(
             padding: EdgeInsets.only(
               right: widget.suffixIconPadding ?? KPadding.kPaddingSize16,

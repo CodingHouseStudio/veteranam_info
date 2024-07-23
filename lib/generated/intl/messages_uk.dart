@@ -28,6 +28,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "aboutProject": MessageLookupByLibrary.simpleMessage(
             "Ми створюємо єдиний інформаційний простір для ветеранів та їх сімей."),
         "aboutUs": MessageLookupByLibrary.simpleMessage("Про проєкт"),
+        "activeMilitary":
+            MessageLookupByLibrary.simpleMessage("Діючі військові"),
         "addComment": MessageLookupByLibrary.simpleMessage("Додайте коментар:"),
         "addPhoto": MessageLookupByLibrary.simpleMessage("Добавте фото"),
         "addYourStory":
@@ -170,11 +172,15 @@ class MessageLookup extends MessageLookupByLibrary {
             "Вся інформація в одному місці. Ми проаналізували різноманітні ресурси та надаємо безкоштовний доступ до інформаціх, що слід знати ветерану."),
         "informationSubtitle": MessageLookupByLibrary.simpleMessage(
             "У цьому розділі ти знайдеш корисну інформацію для ветеранів та їх сімей"),
+        "invalidLink":
+            MessageLookupByLibrary.simpleMessage("Невірне посилання"),
         "investors": MessageLookupByLibrary.simpleMessage("Інвесторам"),
         "investorsSubtitle": MessageLookupByLibrary.simpleMessage(
             "Зв\'яжіться з нами для підтримки ветеранів. Напишіть нам на hello@veteranam.info"),
         "isWrong": MessageLookupByLibrary.simpleMessage("не правильне"),
         "isWrongEmail": MessageLookupByLibrary.simpleMessage("не правильний"),
+        "itIsValidAllTime":
+            MessageLookupByLibrary.simpleMessage("Діє постійно"),
         "jobsVacancies":
             MessageLookupByLibrary.simpleMessage("Робота і вакансії"),
         "jobsVacanciesSubtitle": MessageLookupByLibrary.simpleMessage(
@@ -183,6 +189,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "lastName": MessageLookupByLibrary.simpleMessage("Прізвище"),
         "leaveRequest": MessageLookupByLibrary.simpleMessage("Залишити заявку"),
         "link": MessageLookupByLibrary.simpleMessage("Посилання"),
+        "linkLimitMessage": MessageLookupByLibrary.simpleMessage(
+            "Сьогодні ви вже надіслали максимальну кількість посилань. Будь ласка, спробуйте знову завтра."),
         "linkedAccounts":
             MessageLookupByLibrary.simpleMessage("Привʼязані облікові записи"),
         "linkedAccountsDetails": MessageLookupByLibrary.simpleMessage(
@@ -198,6 +206,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Основна інформація"),
         "mainScreen": MessageLookupByLibrary.simpleMessage("Головна"),
         "message": MessageLookupByLibrary.simpleMessage("Повідомлення"),
+        "militaryDoctors":
+            MessageLookupByLibrary.simpleMessage("Військові лікарі"),
         "more": MessageLookupByLibrary.simpleMessage("Більше"),
         "moreCities": m0,
         "moreDiscounts": MessageLookupByLibrary.simpleMessage("Ще знижки"),
@@ -320,13 +330,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "supportVeterans":
             MessageLookupByLibrary.simpleMessage("ПІДТРИМАЙТЕ\nВЕТЕРАНІВ"),
         "text": MessageLookupByLibrary.simpleMessage("Текст"),
-        "thankYou": MessageLookupByLibrary.simpleMessage("Дякуємо!"),
+        "thankYou": MessageLookupByLibrary.simpleMessage("Дякуємо"),
         "thankYouDescription": MessageLookupByLibrary.simpleMessage(
             "Зверніть увагу! Для доступу до деяких послуг Вам потрібно буде підтвердити Ваш статус показавши відповідне посвідчення."),
-        "thankYouVeterans":
-            MessageLookupByLibrary.simpleMessage("Дякуємо\nВЕТЕРАНИ!"),
         "thatEndOfList": MessageLookupByLibrary.simpleMessage(
             "Це кінець списку! Дякуємо за ваш час."),
+        "theirFamilies": MessageLookupByLibrary.simpleMessage("Їхні сім\'ї"),
         "thisServiceForVeteransSubtitle": MessageLookupByLibrary.simpleMessage(
             "Тут ти зібрали корисну інформацію про знижки для ветеранів та їх сімей"),
         "toDiscount": MessageLookupByLibrary.simpleMessage("До знижок"),
@@ -334,9 +343,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Щоб отримати потрібно:"),
         "toInfomation": MessageLookupByLibrary.simpleMessage("До інформації"),
         "toVacancy": MessageLookupByLibrary.simpleMessage("До вакансій"),
+        "tooShort": MessageLookupByLibrary.simpleMessage("закоротке"),
         "tooShortEmail": MessageLookupByLibrary.simpleMessage("Закороткий"),
         "tooShortPassword": MessageLookupByLibrary.simpleMessage("закороткий"),
-        "tooshort": MessageLookupByLibrary.simpleMessage("закоротке"),
         "tryItAgain": MessageLookupByLibrary.simpleMessage("Спробувати ще раз"),
         "underConstruction": MessageLookupByLibrary.simpleMessage(
             "Ця сторінка знаходиться на стадії розробки."),
@@ -345,6 +354,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "useful": MessageLookupByLibrary.simpleMessage("Корисно"),
         "verifiedInformation":
             MessageLookupByLibrary.simpleMessage("Перевірена інформація"),
+        "veterans": MessageLookupByLibrary.simpleMessage("Ветерани"),
         "wage": MessageLookupByLibrary.simpleMessage("Заробітна плата*"),
         "webSite": MessageLookupByLibrary.simpleMessage("Веб сайт"),
         "website": MessageLookupByLibrary.simpleMessage("Сайт"),

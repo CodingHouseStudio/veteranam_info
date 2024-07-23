@@ -22,7 +22,7 @@ class StoryBodyWidget extends StatelessWidget {
       builder: (context, _) {
         return ScaffoldAutoLoadingWidget(
           loadingButtonText: context.l10n.moreStories,
-          listCanLoaded: _.loadingStatus != LoadingStatus.listLoadedFull,
+          loadingStatus: _.loadingStatus,
           cardListIsEmpty: _.storyModelItems.isEmpty,
           loadDataAgain: () => context
               .read<StoryWatcherBloc>()

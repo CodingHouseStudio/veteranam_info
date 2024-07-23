@@ -21,6 +21,8 @@ void main() {
     late IReportRepository mockReportRepository;
     late AuthenticationRepository mockAuthenticationRepository;
     setUp(() {
+      ExtendedDateTime.id = KTestText.id;
+      ExtendedDateTime.current = KTestText.dateTime;
       KPlatformConstants.isWebDesktop = false;
       mockDiscountRepository = MockIDiscountRepository();
       mockAppAuthenticationRepository = MockAppAuthenticationRepository();
@@ -48,6 +50,11 @@ void main() {
         ),
       ).thenAnswer(
         (invocation) async => Right(KTestText.reportItems),
+      );
+
+      when(mockDiscountRepository.userCanSendLink(KTestText.user.id))
+          .thenAnswer(
+        (invocation) async => const Right(true),
       );
     });
     group('${KGroupText.failure} ', () {
@@ -105,6 +112,9 @@ void main() {
       setUp(() {
         when(mockDiscountRepository.getDiscountItems()).thenAnswer(
           (invocation) => Stream.value(KTestText.discountModelItemsModify),
+        );
+        when(mockDiscountRepository.sendLink(KTestText.linkModel)).thenAnswer(
+          (invocation) async => const Right(true),
         );
       });
       testWidgets('${KGroupText.intial} ', (tester) async {

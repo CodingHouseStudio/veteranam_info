@@ -78,10 +78,33 @@ class DiscountRepository implements IDiscountRepository {
   }
 
   @override
-  Future<Either<SomeFailure, bool>> sendLink(String link) async {
+  Future<Either<SomeFailure, bool>> sendLink(
+    LinkModel discountLink,
+  ) async {
     try {
-      await _firestoreService.getDiscount(id);
-      return Right(true);
+      await _firestoreService.sendDiscountLink(discountLink);
+      return const Right(true);
+    } on FirebaseException catch (e) {
+      return Left(SendFailure.fromCode(e).status);
+    } catch (e) {
+      return const Left(SomeFailure.serverError());
+    }
+  }
+
+  @override
+  Future<Either<SomeFailure, bool>> userCanSendLink(
+    String userId,
+  ) async {
+    try {
+      final userLink = await _firestoreService.getUserDiscountLink(userId);
+      final oneDayAgo =
+          ExtendedDateTime.current.subtract(const Duration(days: 1));
+      final oneDayUserLink = userLink
+          .where(
+            (element) => element.date.isAfter(oneDayAgo),
+          )
+          .toList();
+      return Right(oneDayUserLink.length < KDimensions.maxLinkPerDay);
     } on FirebaseException catch (e) {
       return Left(GetFailur.fromCode(e).status);
     } catch (e) {

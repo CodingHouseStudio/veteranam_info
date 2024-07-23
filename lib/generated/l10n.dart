@@ -531,10 +531,10 @@ class AppLocalizations {
   }
 
   /// `too short`
-  String get tooshort {
+  String get tooShort {
     return Intl.message(
       'too short',
-      name: 'tooshort',
+      name: 'tooShort',
       desc: '',
       args: [],
     );
@@ -790,10 +790,10 @@ class AppLocalizations {
     );
   }
 
-  /// `Thank you!`
+  /// `Thank you`
   String get thankYou {
     return Intl.message(
-      'Thank you!',
+      'Thank you',
       name: 'thankYou',
       desc: '',
       args: [],
@@ -1485,16 +1485,6 @@ class AppLocalizations {
     return Intl.message(
       'Hello',
       name: 'hello',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Thank you\nVeterans!`
-  String get thankYouVeterans {
-    return Intl.message(
-      'Thank you\nVeterans!',
-      name: 'thankYouVeterans',
       desc: '',
       args: [],
     );
@@ -2230,6 +2220,56 @@ class AppLocalizations {
     );
   }
 
+  /// `Veterans`
+  String get veterans {
+    return Intl.message(
+      'Veterans',
+      name: 'veterans',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Their Families`
+  String get theirFamilies {
+    return Intl.message(
+      'Their Families',
+      name: 'theirFamilies',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Active Military`
+  String get activeMilitary {
+    return Intl.message(
+      'Active Military',
+      name: 'activeMilitary',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Military Doctors`
+  String get militaryDoctors {
+    return Intl.message(
+      'Military Doctors',
+      name: 'militaryDoctors',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `It is valid all the time`
+  String get itIsValidAllTime {
+    return Intl.message(
+      'It is valid all the time',
+      name: 'itIsValidAllTime',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Link`
   String get link {
     return Intl.message(
@@ -2245,6 +2285,26 @@ class AppLocalizations {
     return Intl.message(
       'Do you know about discounts that are not yet available on our website? Send us the link and we\'ll add them as soon as possible.',
       name: 'discountLinkTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invalid link`
+  String get invalidLink {
+    return Intl.message(
+      'Invalid link',
+      name: 'invalidLink',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You have already sent the maximum number of links today. Please try again tomorrow.`
+  String get linkLimitMessage {
+    return Intl.message(
+      'You have already sent the maximum number of links today. Please try again tomorrow.',
+      name: 'linkLimitMessage',
       desc: '',
       args: [],
     );

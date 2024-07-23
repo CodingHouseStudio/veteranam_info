@@ -97,7 +97,7 @@ void main() {
       },
       expect: () => [
         const FeedbackState(
-          formState: FeedbackEnum.notShowFeedback,
+          formState: FeedbackEnum.notShow,
           name: NameFieldModel.pure(),
           email: EmailFieldModel.pure(),
           message: MessageFieldModel.pure(),

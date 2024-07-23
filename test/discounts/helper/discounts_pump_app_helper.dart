@@ -25,6 +25,14 @@ Future<void> discountsPumpAppHelper({
   _registerAuthenticationBloc(
     mockAuthenticationRepository: mockAuthenticationRepository,
   );
+  _registerDiscountLinkFormBloc(
+    mockDiscountRepository: mockDiscountRepository,
+    mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+  );
+  _registerDiscountLinkCubit(
+    mockDiscountRepository: mockDiscountRepository,
+    mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+  );
   await tester.pumpApp(const DiscountsScreen(), mockGoRouter: mockGoRouter);
 
   expect(
@@ -75,4 +83,32 @@ void _registerAuthenticationBloc({
     GetIt.I.unregister<AuthenticationBloc>();
   }
   GetIt.I.registerSingleton<AuthenticationBloc>(authenticationBloc);
+}
+
+void _registerDiscountLinkFormBloc({
+  required IDiscountRepository mockDiscountRepository,
+  required IAppAuthenticationRepository mockAppAuthenticationRepository,
+}) {
+  final authenticationBloc = DiscountLinkFormBloc(
+    discountRepository: mockDiscountRepository,
+    appAuthenticationRepository: mockAppAuthenticationRepository,
+  );
+  if (GetIt.I.isRegistered<DiscountLinkFormBloc>()) {
+    GetIt.I.unregister<DiscountLinkFormBloc>();
+  }
+  GetIt.I.registerSingleton<DiscountLinkFormBloc>(authenticationBloc);
+}
+
+void _registerDiscountLinkCubit({
+  required IDiscountRepository mockDiscountRepository,
+  required IAppAuthenticationRepository mockAppAuthenticationRepository,
+}) {
+  final authenticationBloc = DiscountLinkCubit(
+    discountRepository: mockDiscountRepository,
+    appAuthenticationRepository: mockAppAuthenticationRepository,
+  );
+  if (GetIt.I.isRegistered<DiscountLinkCubit>()) {
+    GetIt.I.unregister<DiscountLinkCubit>();
+  }
+  GetIt.I.registerSingleton<DiscountLinkCubit>(authenticationBloc);
 }

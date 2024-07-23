@@ -289,11 +289,26 @@ class FirestoreService {
     }
   }
 
-  Future<DiscountModel> sendLink({
-    required String id,
-    required String link,
-  }) async =>
-      _db.collection(FirebaseCollectionName.discountLink).doc(id).set(link);
+  Future<void> sendDiscountLink(
+    LinkModel discountLink,
+  ) async =>
+      _db
+          .collection(FirebaseCollectionName.discountLink)
+          .doc(discountLink.id)
+          .set(discountLink.toJson());
+
+  Future<List<LinkModel>> getUserDiscountLink(
+    String userId,
+  ) async {
+    final querySnapshot = await _db
+        .collection(FirebaseCollectionName.discountLink)
+        .where(LinkModelJsonField.userId, isEqualTo: userId)
+        .get();
+
+    return querySnapshot.docs
+        .map((doc) => LinkModel.fromJson(doc.data()))
+        .toList();
+  }
 
   Future<void> addDiscount(DiscountModel discount) {
     return _db

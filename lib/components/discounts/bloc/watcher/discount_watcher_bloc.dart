@@ -30,6 +30,7 @@ class DiscountWatcherBloc
             failure: null,
             filtersLocationIndex: [],
             reportItems: [],
+            categoryDiscountModelItems: [],
           ),
         ) {
     on<_Started>(_onStarted);
@@ -74,25 +75,46 @@ class DiscountWatcherBloc
     _Updated event,
     Emitter<DiscountWatcherState> emit,
   ) async {
-    final list = event.discountItemsModel.removeReportItems(
+    final items = event.discountItemsModel.removeReportItems(
       checkFunction: (item) => item.id,
       reportItems: event.reportItems,
+    )..sort(
+        (a, b) {
+          final dateComparison = b.dateVerified.compareTo(a.dateVerified);
+          if (dateComparison == 0) {
+            // Attempt int conversion using null-aware operators
+            final idA = int.tryParse(a.id);
+            final idB = int.tryParse(b.id);
+
+            if (idA != null && idB != null) {
+              return idB.compareTo(idA); // Descending order
+            } else {
+              return 1;
+            }
+          }
+          return dateComparison;
+        },
+      );
+    final categoryFilter = _filterCategory(
+      categoryIndex: state.filtersCategoriesIndex,
+      list: items,
+    );
+    final (:list, :loadingStatus) = _filterLocation(
+      itemsLoaded: KDimensions.loadItems,
+      locationIndex: state.filtersLocationIndex,
+      list: categoryFilter,
     );
     emit(
       _Initial(
-        discountModelItems: list,
-        loadingStatus: LoadingStatus.loaded,
-        filteredDiscountModelItems: _filter(
-          categoryIndex: state.filtersCategoriesIndex,
-          itemsLoaded: KDimensions.loadItems,
-          locationIndex: state.filtersLocationIndex,
-          list: list,
-        ),
+        discountModelItems: items,
+        loadingStatus: loadingStatus,
+        filteredDiscountModelItems: list,
         filtersCategoriesIndex: state.filtersCategoriesIndex,
         itemsLoaded: state.itemsLoaded.getLoaded(list: list),
         failure: null,
         filtersLocationIndex: state.filtersLocationIndex,
         reportItems: event.reportItems,
+        categoryDiscountModelItems: categoryFilter,
       ),
     );
   }
@@ -101,23 +123,23 @@ class DiscountWatcherBloc
     _LoadNextItems event,
     Emitter<DiscountWatcherState> emit,
   ) {
-    if (state.itemsLoaded.checkLoadingPosible(state.discountModelItems)) {
+    if (state.itemsLoaded
+        .checkLoadingPosible(state.categoryDiscountModelItems)) {
       emit(state.copyWith(loadingStatus: LoadingStatus.listLoadedFull));
       return;
     }
     emit(state.copyWith(loadingStatus: LoadingStatus.loading));
-    final filterItems = _filter(
-      categoryIndex: state.filtersCategoriesIndex,
+    final (:list, :loadingStatus) = _filterLocation(
       itemsLoaded: state.itemsLoaded,
       locationIndex: state.filtersLocationIndex,
       loadItems: KDimensions.loadItems,
     );
     emit(
       state.copyWith(
-        filteredDiscountModelItems: filterItems,
-        itemsLoaded: (state.itemsLoaded + KDimensions.loadItems)
-            .getLoaded(list: filterItems),
-        loadingStatus: filterItems.isLoading(state.filteredDiscountModelItems),
+        filteredDiscountModelItems: list,
+        itemsLoaded:
+            (state.itemsLoaded + KDimensions.loadItems).getLoaded(list: list),
+        loadingStatus: loadingStatus,
       ),
     );
   }
@@ -131,6 +153,7 @@ class DiscountWatcherBloc
         filteredDiscountModelItems: state.discountModelItems.loading(
           itemsLoaded: state.itemsLoaded,
         ),
+        categoryDiscountModelItems: state.discountModelItems,
         filtersCategoriesIndex: [],
         filtersLocationIndex: [],
         loadingStatus: LoadingStatus.loaded,
@@ -145,21 +168,23 @@ class DiscountWatcherBloc
     final selectedFilters =
         state.filtersCategoriesIndex.changeListValue(event.filterIndex);
 
-    final filterItems = _filter(
+    final categoryItems = _filterCategory(
       categoryIndex: selectedFilters,
+    );
+
+    final (:list, :loadingStatus) = _filterLocation(
       itemsLoaded: state.itemsLoaded,
       locationIndex: state.filtersLocationIndex,
+      list: categoryItems,
     );
 
     emit(
       state.copyWith(
-        filteredDiscountModelItems: filterItems,
+        filteredDiscountModelItems: list,
         filtersCategoriesIndex: selectedFilters,
-        itemsLoaded: state.itemsLoaded.getLoaded(list: filterItems),
-        loadingStatus: filterItems.isLoading(
-          state.filteredDiscountModelItems,
-          isFilter: true,
-        ),
+        itemsLoaded: state.itemsLoaded.getLoaded(list: list),
+        loadingStatus: loadingStatus,
+        categoryDiscountModelItems: categoryItems,
       ),
     );
   }
@@ -174,33 +199,28 @@ class DiscountWatcherBloc
       largerNumber: 3,
     );
 
-    final filterItems = _filter(
+    final (:list, :loadingStatus) = _filterLocation(
       locationIndex: selectedFilters,
       itemsLoaded: state.itemsLoaded,
-      categoryIndex: state.filtersCategoriesIndex,
     );
 
     emit(
       state.copyWith(
-        filteredDiscountModelItems: filterItems,
+        filteredDiscountModelItems: list,
         filtersLocationIndex: selectedFilters,
-        itemsLoaded: state.itemsLoaded.getLoaded(list: filterItems),
-        loadingStatus: filterItems.isLoading(
-          state.filteredDiscountModelItems,
-          isFilter: true,
-        ),
+        itemsLoaded: state.itemsLoaded.getLoaded(list: list),
+        loadingStatus: loadingStatus,
       ),
     );
   }
 
-  List<DiscountModel> _filter({
-    required List<int>? categoryIndex,
+  ({List<DiscountModel> list, LoadingStatus loadingStatus}) _filterLocation({
     required List<int>? locationIndex,
     required int itemsLoaded,
     List<DiscountModel>? list,
     int? loadItems,
   }) {
-    final items = list ?? state.discountModelItems;
+    final items = list ?? state.categoryDiscountModelItems;
 
     // Combine location filtering logic
     final locationFiltered = items
@@ -213,54 +233,55 @@ class DiscountWatcherBloc
         .toList();
 
     // Optimized sorting with null-aware conversion
-    final sortedItems = locationFiltered
-      ..sort((a, b) {
-        if (locationIndex != null && locationIndex.contains(0)) {
+
+    final sortedItems =
+        _sorting(list: locationFiltered, locationIndex: locationIndex);
+
+    // Apply category and location filtering (chained)
+    return sortedItems.loadingFilterAndStatus(
+      filtersIndex: locationIndex?.where((element) => element > 1).toList(),
+      itemsLoaded: itemsLoaded,
+      getFilter: (item) => [
+        if (item.location != null) ...item.location!,
+        if (item.subLocation != null) ...item.subLocation._getList,
+      ],
+      overallFilter: items._getLocationItems,
+      loadItems: loadItems,
+      containAnyItems: false,
+    );
+  }
+
+  List<DiscountModel> _sorting({
+    required List<DiscountModel> list,
+    required List<int>? locationIndex,
+  }) {
+    if (locationIndex != null && locationIndex.contains(0)) {
+      return list
+        ..sort((a, b) {
+          // if (locationIndex != null && locationIndex.contains(0)) {
           final maxDiscountA =
               a.discount.isNotEmpty == true ? a.discount.reduce(max) : 0;
           final maxDiscountB =
               b.discount.isNotEmpty == true ? b.discount.reduce(max) : 0;
 
-          if (maxDiscountA != maxDiscountB) {
-            return maxDiscountB.compareTo(maxDiscountA); // Descending order
-          }
-        }
+          return maxDiscountB.compareTo(maxDiscountA); // Descending order
 
-        final dateComparison = b.dateVerified.compareTo(a.dateVerified);
-        if (dateComparison == 0) {
-          // Attempt int conversion using null-aware operators
-          final idA = int.tryParse(a.id);
-          final idB = int.tryParse(b.id);
-
-          if (idA != null && idB != null) {
-            return idB.compareTo(idA); // Descending order
-          } else {
-            return 1;
-          }
-        }
-        return dateComparison;
-      });
-
-    // Apply category and location filtering (chained)
-    return sortedItems
-        .loadingFilter(
-          filtersIndex: categoryIndex,
-          itemsLoaded: null,
-          getFilter: (item) => item.category,
-          fullList: items,
-        )
-        .loadingFilter(
-          filtersIndex: locationIndex?.where((element) => element > 1).toList(),
-          itemsLoaded: itemsLoaded,
-          getFilter: (item) => [
-            if (item.location != null) ...item.location!,
-            if (item.subLocation != null) ...item.subLocation._getList,
-          ],
-          overallFilter: items._getLocationItems,
-          loadItems: loadItems,
-          containAnyItems: false,
-        );
+          // }
+        });
+    } else {
+      return list;
+    }
   }
+
+  List<DiscountModel> _filterCategory({
+    required List<int>? categoryIndex,
+    List<DiscountModel>? list,
+  }) =>
+      (list ?? state.discountModelItems).loadingFilter(
+        filtersIndex: categoryIndex,
+        itemsLoaded: null,
+        getFilter: (item) => item.category,
+      );
 
   Future<void> _onGetReport(
     _GetReport event,
@@ -268,36 +289,40 @@ class DiscountWatcherBloc
   ) async {
     // Get report items and remove them from existing items
     final reportItems = await _getReport();
-    final list = state.discountModelItems.removeReportItems(
+    final items = state.discountModelItems.removeReportItems(
       checkFunction: (item) => item.id,
       reportItems: reportItems,
     );
 
-    final filtersCategoriesIndex = list.updateFilterList(
+    final filtersCategoriesIndex = items.updateFilterList(
       getFilter: (item) => item.category,
       previousList: state.discountModelItems,
       previousFilter: state.filtersCategoriesIndex,
     );
-    final filtersLocationIndex = list.updateFilterList(
+    final filtersLocationIndex = items.updateFilterList(
       getFilter: (item) =>
           item.location?.toList() ?? item.subLocation?._getList ?? const [],
       previousList: state.discountModelItems,
       previousFilter: state.filtersLocationIndex,
     );
-    final filterItems = _filter(
+    final categoryItems = _filterCategory(
       categoryIndex: filtersCategoriesIndex,
+      list: items,
+    );
+    final (:list, :loadingStatus) = _filterLocation(
       locationIndex: filtersLocationIndex,
       itemsLoaded: state.itemsLoaded,
-      list: list,
+      list: categoryItems,
     );
     emit(
       state.copyWith(
-        discountModelItems: list,
+        discountModelItems: items,
         reportItems: reportItems,
-        filteredDiscountModelItems: filterItems,
-        loadingStatus: LoadingStatus.loaded,
+        filteredDiscountModelItems: list,
+        loadingStatus: loadingStatus,
         filtersCategoriesIndex: filtersCategoriesIndex,
         filtersLocationIndex: filtersLocationIndex,
+        categoryDiscountModelItems: categoryItems,
       ),
     );
   }

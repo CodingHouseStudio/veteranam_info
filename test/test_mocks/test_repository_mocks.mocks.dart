@@ -1034,6 +1034,29 @@ class MockFirestoreService extends _i1.Mock implements _i3.FirestoreService {
       ) as _i8.Future<_i3.DiscountModel>);
 
   @override
+  _i8.Future<void> sendDiscountLink(_i3.LinkModel? discountLink) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #sendDiscountLink,
+          [discountLink],
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<List<_i3.LinkModel>> getUserDiscountLink(String? userId) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getUserDiscountLink,
+          [userId],
+        ),
+        returnValue: _i8.Future<List<_i3.LinkModel>>.value(<_i3.LinkModel>[]),
+        returnValueForMissingStub:
+            _i8.Future<List<_i3.LinkModel>>.value(<_i3.LinkModel>[]),
+      ) as _i8.Future<List<_i3.LinkModel>>);
+
+  @override
   _i8.Future<void> addDiscount(_i3.DiscountModel? discount) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -6976,6 +6999,60 @@ class MockIDiscountRepository extends _i1.Mock
           Invocation.method(
             #deleteDiscountsById,
             [discountId],
+          ),
+        )),
+      ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
+
+  @override
+  _i8.Future<_i2.Either<_i3.SomeFailure, bool>> sendLink(
+          _i3.LinkModel? discountLink) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #sendLink,
+          [discountLink],
+        ),
+        returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
+            _FakeEither_0<_i3.SomeFailure, bool>(
+          this,
+          Invocation.method(
+            #sendLink,
+            [discountLink],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
+                _FakeEither_0<_i3.SomeFailure, bool>(
+          this,
+          Invocation.method(
+            #sendLink,
+            [discountLink],
+          ),
+        )),
+      ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
+
+  @override
+  _i8.Future<_i2.Either<_i3.SomeFailure, bool>> userCanSendLink(
+          String? userId) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #userCanSendLink,
+          [userId],
+        ),
+        returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
+            _FakeEither_0<_i3.SomeFailure, bool>(
+          this,
+          Invocation.method(
+            #userCanSendLink,
+            [userId],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
+                _FakeEither_0<_i3.SomeFailure, bool>(
+          this,
+          Invocation.method(
+            #userCanSendLink,
+            [userId],
           ),
         )),
       ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);

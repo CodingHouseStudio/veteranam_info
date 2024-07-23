@@ -16,6 +16,10 @@ abstract class IDiscountRepository {
   );
 
   Future<Either<SomeFailure, bool>> sendLink(
-    String link,
+    LinkModel discountLink,
+  );
+
+  Future<Either<SomeFailure, bool>> userCanSendLink(
+    String userId,
   );
 }
