@@ -22,34 +22,11 @@ class DiscountLinkFormBloc
             formState: LinkEnum.initial,
           ),
         ) {
-    on<_Started>(_onStarted);
     on<_UpdateLink>(_onUpdatLink);
     on<_SendLink>(_onSendLink);
   }
   final IDiscountRepository _discountRepository;
   final IAppAuthenticationRepository _appAuthenticationRepository;
-  Future<void> _onStarted(
-    _Started event,
-    Emitter<DiscountLinkFormState> emit,
-  ) async {
-    final showLink = await _discountRepository
-        .userCanSendLink(_appAuthenticationRepository.currentUser.id);
-    showLink.fold(
-      (l) => emit(
-        _Initial(
-          link: const LinkFieldModel.pure(),
-          formState: LinkEnum.initial,
-          failure: l._toDiscountLinkForm(),
-        ),
-      ),
-      (r) => emit(
-        _Initial(
-          link: const LinkFieldModel.pure(),
-          formState: r ? LinkEnum.initial : LinkEnum.notShow,
-        ),
-      ),
-    );
-  }
 
   void _onUpdatLink(
     _UpdateLink event,
@@ -74,9 +51,7 @@ class DiscountLinkFormBloc
           await _discountRepository.sendLink(discountLinkFormModel);
       showLink.fold(
         (l) => emit(
-          _Initial(
-            link: const LinkFieldModel.pure(),
-            formState: state.formState,
+          state.copyWith(
             failure: l._toDiscountLinkForm(),
           ),
         ),
@@ -87,7 +62,6 @@ class DiscountLinkFormBloc
               formState: LinkEnum.success,
             ),
           );
-          add(const DiscountLinkFormEvent.started());
         },
       );
     } else {

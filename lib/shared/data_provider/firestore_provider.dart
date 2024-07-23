@@ -289,7 +289,7 @@ class FirestoreService {
     }
   }
 
-  Future<void> sendDiscountLink(
+  Future<void> sendLink(
     LinkModel discountLink,
   ) async =>
       _db
@@ -297,7 +297,7 @@ class FirestoreService {
           .doc(discountLink.id)
           .set(discountLink.toJson());
 
-  Future<List<LinkModel>> getUserDiscountLink(
+  Future<List<LinkModel>> getUserDiscountsLink(
     String userId,
   ) async {
     final querySnapshot = await _db

@@ -1034,10 +1034,9 @@ class MockFirestoreService extends _i1.Mock implements _i3.FirestoreService {
       ) as _i8.Future<_i3.DiscountModel>);
 
   @override
-  _i8.Future<void> sendDiscountLink(_i3.LinkModel? discountLink) =>
-      (super.noSuchMethod(
+  _i8.Future<void> sendLink(_i3.LinkModel? discountLink) => (super.noSuchMethod(
         Invocation.method(
-          #sendDiscountLink,
+          #sendLink,
           [discountLink],
         ),
         returnValue: _i8.Future<void>.value(),
@@ -1045,10 +1044,10 @@ class MockFirestoreService extends _i1.Mock implements _i3.FirestoreService {
       ) as _i8.Future<void>);
 
   @override
-  _i8.Future<List<_i3.LinkModel>> getUserDiscountLink(String? userId) =>
+  _i8.Future<List<_i3.LinkModel>> getUserDiscountsLink(String? userId) =>
       (super.noSuchMethod(
         Invocation.method(
-          #getUserDiscountLink,
+          #getUserDiscountsLink,
           [userId],
         ),
         returnValue: _i8.Future<List<_i3.LinkModel>>.value(<_i3.LinkModel>[]),

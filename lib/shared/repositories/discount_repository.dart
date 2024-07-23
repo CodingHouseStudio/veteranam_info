@@ -82,7 +82,7 @@ class DiscountRepository implements IDiscountRepository {
     LinkModel discountLink,
   ) async {
     try {
-      await _firestoreService.sendDiscountLink(discountLink);
+      await _firestoreService.sendLink(discountLink);
       return const Right(true);
     } on FirebaseException catch (e) {
       return Left(SendFailure.fromCode(e).status);
@@ -96,7 +96,7 @@ class DiscountRepository implements IDiscountRepository {
     String userId,
   ) async {
     try {
-      final userLink = await _firestoreService.getUserDiscountLink(userId);
+      final userLink = await _firestoreService.getUserDiscountsLink(userId);
       final oneDayAgo =
           ExtendedDateTime.current.subtract(const Duration(days: 1));
       final oneDayUserLink = userLink
