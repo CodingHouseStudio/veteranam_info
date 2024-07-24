@@ -4,12 +4,10 @@ concurrency:
   group: CU-${{ github.ref }}
   cancel-in-progress: true
 
-
 on:
   workflow_dispatch:
   pull_request:
     branches: [main]
-
 
 env:
   SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
@@ -25,10 +23,10 @@ jobs:
     uses: CodingHouseStudio/flutter_workflows/.github/workflows/flutter_package.yml@main
     with:
       flutter_channel: stable
-      flutter_version: 3.22.0
+      flutter_version: 3.22.2
       min_coverage: 90
       format_directories: "lib test"
-      
+
   spell-check:
     uses: CodingHouseStudio/flutter_workflows/.github/workflows/spell_check.yml@main
     with:
@@ -36,5 +34,3 @@ jobs:
         **/*.md
       modified_files_only: false
       config: .github/cspell.json
-
-
