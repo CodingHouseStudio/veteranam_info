@@ -21,6 +21,8 @@ void main() {
     late IReportRepository mockReportRepository;
     late AuthenticationRepository mockAuthenticationRepository;
     setUp(() {
+      ExtendedDateTime.id = KTestText.id;
+      ExtendedDateTime.current = KTestText.dateTime;
       KPlatformConstants.isWebDesktop = false;
       mockDiscountRepository = MockIDiscountRepository();
       mockAppAuthenticationRepository = MockAppAuthenticationRepository();
@@ -48,6 +50,11 @@ void main() {
         ),
       ).thenAnswer(
         (invocation) async => Right(KTestText.reportItems),
+      );
+
+      when(mockDiscountRepository.userCanSendLink(KTestText.user.id))
+          .thenAnswer(
+        (invocation) async => const Right(true),
       );
     });
     group('${KGroupText.failure} ', () {
@@ -105,6 +112,9 @@ void main() {
       setUp(() {
         when(mockDiscountRepository.getDiscountItems()).thenAnswer(
           (invocation) => Stream.value(KTestText.discountModelItemsModify),
+        );
+        when(mockDiscountRepository.sendLink(KTestText.linkModel)).thenAnswer(
+          (invocation) async => const Right(true),
         );
       });
       testWidgets('${KGroupText.intial} ', (tester) async {
@@ -187,6 +197,66 @@ void main() {
           fieldNull: true,
         );
       });
+      testWidgets('Notification Link Correct Send', (tester) async {
+        await discountsPumpAppHelper(
+          tester: tester,
+          mockDiscountRepository: mockDiscountRepository,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          mockReportRepository: mockReportRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
+        );
+        await notificationLinkScrollHelper(
+          tester: tester,
+          test: () async => notificationLinkCorrectHelper(
+            tester,
+          ),
+        );
+      });
+      testWidgets('Notification Link Wrong Send', (tester) async {
+        await discountsPumpAppHelper(
+          tester: tester,
+          mockDiscountRepository: mockDiscountRepository,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          mockReportRepository: mockReportRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
+        );
+        await notificationLinkScrollHelper(
+          tester: tester,
+          test: () async => notificationLinkWrongHelper(
+            tester,
+          ),
+        );
+      });
+
+      group(
+        'Notification Link Limited',
+        () {
+          setUp(
+            () =>
+                when(mockDiscountRepository.userCanSendLink(KTestText.user.id))
+                    .thenAnswer(
+              (invocation) async => const Right(false),
+            ),
+          );
+
+          testWidgets("User Can't Send Link", (tester) async {
+            await discountsPumpAppHelper(
+              tester: tester,
+              mockDiscountRepository: mockDiscountRepository,
+              mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+              mockReportRepository: mockReportRepository,
+              mockAuthenticationRepository: mockAuthenticationRepository,
+            );
+            await notificationLinkScrollHelper(
+              tester: tester,
+              test: () async => expect(
+                find.byKey(KWidgetkeys.widget.notificationLink.limitText),
+                findsOneWidget,
+              ),
+            );
+          });
+        },
+      );
 
       group('${KGroupText.goRouter} ', () {
         late MockGoRouter mockGoRouter;

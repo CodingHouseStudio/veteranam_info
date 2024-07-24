@@ -8,7 +8,8 @@ abstract class KWidgetTheme {
     borderRadius: KBorderRadius.kBorderRadius32,
   );
   static const outlineInputBorderEnabled = OutlineInputBorder(
-    borderSide: BorderSide(color: AppColors.materialThemeRefNeutralNeutral80),
+    borderSide:
+        BorderSide(color: AppColors.materialThemeKeyColorsNeutralVariant),
     borderRadius: KBorderRadius.kBorderRadius32,
   );
   static const outlineInputBorderHovered = OutlineInputBorder(
@@ -25,6 +26,10 @@ abstract class KWidgetTheme {
   );
   static const outlineInputBorderError = OutlineInputBorder(
     borderSide: BorderSide(color: AppColors.materialThemeRefErrorError50),
+    borderRadius: KBorderRadius.kBorderRadius32,
+  );
+  static const outlineInputBorderErrorFocused = OutlineInputBorder(
+    borderSide: BorderSide(color: AppColors.materialThemeRefErrorError30),
     borderRadius: KBorderRadius.kBorderRadius32,
   );
 
@@ -136,11 +141,14 @@ abstract class KWidgetTheme {
     enabledBorder: outlineInputBorderEnabled,
     disabledBorder: outlineInputBorderDisabled,
     focusedBorder: outlineInputBorderFocused,
-    focusedErrorBorder: outlineInputBorderError,
+    focusedErrorBorder: outlineInputBorderErrorFocused,
     filled: true,
     fillColor: AppColors.materialThemeWhite,
     labelStyle: AppTextStyle.materialThemeTitleMedium,
     alignLabelWithHint: true,
+    errorStyle: AppTextStyle.error14,
+    hoverColor: AppColors.materialThemeWhite,
+    errorBorder: outlineInputBorderError,
   );
 
   static const textFieldDecoration = BoxDecoration(

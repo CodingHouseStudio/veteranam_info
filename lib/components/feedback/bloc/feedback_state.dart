@@ -38,5 +38,5 @@ enum FeedbackEnum {
   sendignMessageAgain,
   success,
   invalidData,
-  notShowFeedback
+  notShow
 }
