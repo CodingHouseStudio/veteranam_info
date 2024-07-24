@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:veteranam/shared/shared.dart';
@@ -42,14 +42,9 @@ extension PumpApp on WidgetTester {
     required Locale currentLocale,
   }) =>
       MaterialApp(
-        localizationsDelegates: const [
-          locale,
-          GlobalCupertinoLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-        ],
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
         locale: currentLocale,
-        supportedLocales: locale.supportedLocales,
+        supportedLocales: AppLocalizations.supportedLocales,
         home: widget,
       );
 }
