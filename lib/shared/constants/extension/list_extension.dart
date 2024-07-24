@@ -67,7 +67,7 @@ extension ListExtensions<T> on List<T> {
   /// - overallFilter: Pre-calculated overall filter values.
   /// - fullList: Full list of items to filter.
   /// - containAnyItems: Flag indicating whether to match any filter or all
-  ///  filters.
+  /// filters.
   ///
   /// Returns:
   /// A filtered and loaded list of items.
@@ -80,19 +80,47 @@ extension ListExtensions<T> on List<T> {
     List<T>? fullList,
     bool containAnyItems = true,
   }) {
-    if (isEmpty) return []; // Return empty list if the input list is empty
-
     // Calculate the total number of items to load
     final loadedItemsCount =
         (itemsLoaded?.getLoaded(list: this, loadItems: loadItems) ?? length) +
             (loadItems ?? 0);
 
-    // Return the first 'loadedItemsCount' items if no specific filters are
-    // applied
+    // Apply filters to the list and return up to 'loadedItemsCount' items
+    return _filter(
+      filtersIndex: filtersIndex,
+      getFilter: getFilter,
+      overallFilter: overallFilter,
+      fullList: fullList,
+      containAnyItems: containAnyItems,
+    ).take(loadedItemsCount).toList();
+  }
+
+  /// Method to filter items based on multiple filters.
+  ///
+  /// Parameters:
+  /// - filtersIndex: Indexes of filters to apply.
+  /// - getFilter: Function to retrieve filter values from an item.
+  /// - overallFilter: Pre-calculated overall filter values.
+  /// - fullList: Full list of items to filter.
+  /// - containAnyItems: Flag indicating whether to match any filter or all
+  /// filters.
+  ///
+  /// Returns:
+  /// A filtered list of items.
+  List<T> _filter({
+    required List<int>? filtersIndex,
+    required List<dynamic> Function(T item) getFilter,
+    required List<FilterItem>? overallFilter,
+    required List<T>? fullList,
+    required bool containAnyItems,
+  }) {
+    if (isEmpty) return []; // Return empty list if the input list is empty
+
+    // Return the full list if no specific filters are applied
     if (filtersIndex == null ||
         filtersIndex.isEmpty ||
         filtersIndex.contains(-1)) {
-      return take(loadedItemsCount).toList();
+      return this;
     }
 
     // Calculate overall filter values if not provided
@@ -100,13 +128,10 @@ extension ListExtensions<T> on List<T> {
         overallItems(getFilter: getFilter, fullList: fullList, context: null);
 
     // Retrieve filter texts based on filter indexes
-    final filtersText = filtersIndex
-        .map(
-          (e) => overallFilterValue.elementAt(e).value,
-        )
-        .toList();
+    final filtersText =
+        filtersIndex.map((e) => overallFilterValue.elementAt(e).value).toList();
 
-    // Apply filters to the list and return up to 'loadedItemsCount' items
+    // Apply filters to the list
     return where(
       (item) => containAnyItems
           ? filtersText.any(
@@ -115,7 +140,58 @@ extension ListExtensions<T> on List<T> {
           : filtersText.every(
               getFilter(item).contains,
             ), // Match all filters if 'containAnyItems' is false
-    ).take(loadedItemsCount).toList();
+    ).toList();
+  }
+
+  /// Method to filter items, load a specific number of items, and return the
+  /// loading status.
+  ///
+  /// Parameters:
+  /// - filtersIndex: Indexes of filters to apply.
+  /// - itemsLoaded: Number of items already loaded.
+  /// - getFilter: Function to retrieve filter values from an item.
+  /// - loadItems: Number of items to load.
+  /// - overallFilter: Pre-calculated overall filter values.
+  /// - fullList: Full list of items to filter.
+  /// - containAnyItems: Flag indicating whether to match any filter or all
+  /// filters.
+  ///
+  /// Returns:
+  /// A tuple containing a filtered and loaded list of items and the loading
+  /// status.
+  ({List<T> list, LoadingStatus loadingStatus}) loadingFilterAndStatus({
+    required List<int>? filtersIndex,
+    required int? itemsLoaded,
+    required List<dynamic> Function(T item) getFilter,
+    int? loadItems,
+    List<FilterItem>? overallFilter,
+    List<T>? fullList,
+    bool containAnyItems = true,
+  }) {
+    // Apply filters to the list
+    final list = _filter(
+      filtersIndex: filtersIndex,
+      getFilter: getFilter,
+      overallFilter: overallFilter,
+      fullList: fullList,
+      containAnyItems: containAnyItems,
+    );
+
+    // Calculate the total number of items to load
+    final loadedItemsCount =
+        (itemsLoaded?.getLoaded(list: this, loadItems: loadItems) ?? length) +
+            (loadItems ?? 0);
+
+    // Determine the loading status based on the number of loaded items
+    final loadingStatus = list.length <= loadedItemsCount && list.isNotEmpty
+        ? LoadingStatus.listLoadedFull
+        : LoadingStatus.loaded;
+
+    // Return the filtered and loaded list along with the loading status
+    return (
+      list: list.take(loadedItemsCount).toList(),
+      loadingStatus: loadingStatus
+    );
   }
 
   /// Method to calculate overall filter values.
@@ -249,18 +325,18 @@ extension ListExtensions<T> on List<T> {
   /// Returns:
   /// LoadingStatus based on the comparison of current and previous list
   ///  lengths.
-  LoadingStatus isLoading(List<T> previousList, {bool isFilter = false}) {
-    // Determine if loading status is based on filter or regular list length
-    // comparison.
-    return (isFilter
-                ? length >= previousList.length
-                : length > previousList.length) &&
-            length % KDimensions.loadItems == 0
-        ? LoadingStatus
-            .loaded // Return loaded if conditions meet loading criteria.
-        : LoadingStatus
-            .listLoadedFull; // Return listLoadedFull if loading is complete.
-  }
+  // LoadingStatus isLoading(List<T> previousList, {bool isFilter = false}) {
+  //   // Determine if loading status is based on filter or regular list length
+  //   // comparison.
+  //   return (isFilter
+  //               ? length >= previousList.length
+  //               : length > previousList.length) &&
+  //           length % KDimensions.loadItems == 0
+  //       ? LoadingStatus
+  //           .loaded // Return loaded if conditions meet loading criteria.
+  //       : LoadingStatus
+  //           .listLoadedFull; // Return listLoadedFull if loading is complete.
+  // }
 
   /// Method to filter items based on a list of indices.
   ///

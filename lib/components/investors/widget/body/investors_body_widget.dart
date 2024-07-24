@@ -23,7 +23,7 @@ class InvestorsBodyWidget extends StatelessWidget {
       listenWhen: (previous, current) => current.failure != null,
       builder: (context, _) => ScaffoldAutoLoadingWidget(
         loadingButtonText: context.l10n.moreFunds,
-        listCanLoaded: _.loadingStatus != LoadingStatus.listLoadedFull,
+        loadingStatus: _.loadingStatus,
         cardListIsEmpty: _.fundItems.isEmpty,
         loadDataAgain: () => context
             .read<InvestorsWatcherBloc>()

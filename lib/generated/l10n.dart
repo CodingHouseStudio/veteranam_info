@@ -531,10 +531,10 @@ class AppLocalizations {
   }
 
   /// `too short`
-  String get tooshort {
+  String get tooShort {
     return Intl.message(
       'too short',
-      name: 'tooshort',
+      name: 'tooShort',
       desc: '',
       args: [],
     );
@@ -2265,6 +2265,46 @@ class AppLocalizations {
     return Intl.message(
       'It is valid all the time',
       name: 'itIsValidAllTime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Link`
+  String get link {
+    return Intl.message(
+      'Link',
+      name: 'link',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Do you know about discounts that are not yet available on our website? Send us the link and we'll add them as soon as possible.`
+  String get discountLinkTitle {
+    return Intl.message(
+      'Do you know about discounts that are not yet available on our website? Send us the link and we\'ll add them as soon as possible.',
+      name: 'discountLinkTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invalid link`
+  String get invalidLink {
+    return Intl.message(
+      'Invalid link',
+      name: 'invalidLink',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You have already sent the maximum number of links today. Please try again tomorrow.`
+  String get linkLimitMessage {
+    return Intl.message(
+      'You have already sent the maximum number of links today. Please try again tomorrow.',
+      name: 'linkLimitMessage',
       desc: '',
       args: [],
     );
