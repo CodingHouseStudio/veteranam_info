@@ -16,7 +16,7 @@ extension EmailFieldModelValidationErrorEmpl
       case EmailFieldModelValidationError.empty:
         return context.l10n.fieldCannotBeEmpty;
       case EmailFieldModelValidationError.invalidLength:
-        return '${context.l10n.email} ${context.l10n.tooShortEmail}';
+        return '${context.l10n.email} ${context.l10n.tooShortEmailPassword}';
       case EmailFieldModelValidationError.wrong:
         return '${context.l10n.email} ${context.l10n.isWrongEmail}';
       case null:

@@ -217,7 +217,7 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
       ),
       KSizedBox.kHeightSizedBox8,
       _textField(
-        label: context.l10n.nickname,
+        label: KMockText.nickname,
         labelText: null,
         hint: KMockText.nickname,
         readOnly: !isEditing,

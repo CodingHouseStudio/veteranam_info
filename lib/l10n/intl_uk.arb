@@ -1,229 +1,912 @@
 {
   "@@locale": "uk",
-  "logo": "Veteranam",
   "login": "Увійти",
+  "@login": {
+    "examples": "Текст для кнопки, яка знаходиться в NawBar.",
+    "description": "Кнопка використовується для переходу до сторінки Login."
+  },
   "search": "Пошук...",
+  "@search": {
+    "examples": "Текст для текстового поля, яке знаходиться в NawBar.",
+    "description": "Поле використовується для пошуку."
+  },
   "hide": "Сховати",
+  "@hide": {
+    "examples": "Текст для кнопки, яка знаходиться на карточках (знижок, новин, історій, роботи).",
+    "description": "Кнопка використовується для приховання частини тексту в описі."
+  },
   "detail": "Більше",
+  "@detail": {
+    "examples": "Текст для кнопки, яка знаходиться на карточках (знижок, новин, історій, роботи).",
+    "description": "Кнопка використовується для розгортання повного тексту в описі."
+  },
   "resetAll": "Скинути все",
+  "@resetAll": {
+    "examples": "Текст для кнопки, яка знаходиться в повідомленні, коли по вказаним фільтрам не знайдено жодної карточки, та в розширеному фільтрі на сторінці Discounts.",
+    "description": "Кнопка використовується для скидання всіх застосованих фільтрів."
+  },
   "aboutUs": "Про проєкт",
+  "@aboutUs": {
+    "examples": "Текст для кнопки, яка знаходиться в Footer.",
+    "description": "Кнопка використовується для переходу на сторінку AboutUs."
+  },
   "stories": "Історії",
+  "@stories": {
+    "examples": "Текст для кнопки, яка знаходиться в Footer та на сторінці Home на одному з Box віджетів.",
+    "description": "Кнопка використовується для переходу на сторінку Story."
+  },
   "discounts": "Знижки",
+  "@discounts": {
+    "examples": "Текст для кнопки, яка знаходиться в Footer та на сторінці Home на одному з Box віджетів.",
+    "description": "Кнопка використовується для переходу на сторінку Discounts."
+  },
   "myProfile": "Профіль",
+  "@myProfile": {
+    "examples": "Текст для кнопки, яка знаходиться в Footer.",
+    "description": "Кнопка використовується для переходу на сторінку Profile."
+  },
   "work": "Робота",
+  "@work": {
+    "examples": "Текст для кнопки, яка знаходиться в Footer та на сторінці Home на одному з Box віджетів.",
+    "description": "Кнопка використовується для переходу на сторінку Work."
+  },
   "information": "Інформація",
+  "@information": {
+    "examples": "Текст для кнопки, яка знаходиться в Footer та на сторінці Home на одному з Box віджетів.",
+    "description": "Кнопка використовується для переходу на сторінку Information."
+  },
   "consultationOnline": "Консультація онлайн",
-  "readLess": "Читати менше",
-  "readMore": "Читати більше",
+  "@consultationOnline": {
+    "examples": "Текст для кнопки, яка знаходиться в Footer.",
+    "description": "Кнопка використовується для переходу на сторінку Consultation."
+  },
   "respond": "Відгукнутися",
+  "@respond": {
+    "examples": "Текст для кнопки, яка знаходиться на карточці роботи.",
+    "description": "Кнопка використовується для переходу на сторінку Respond."
+  },
   "email": "E-mail",
-  "nickname": "Nickname",
+  "@email": {
+    "examples": "Текст для полів та виводу помилок в них.",
+    "description": "Поле використовується для вводу електронної пошти. Частина виведеної помилки, якщо дані в полі невірні."
+  },
   "beAnonymous": "Анонімно",
+  "@beAnonymous": {
+    "examples": "Текст, який показується біля деяких Check віджетів.",
+    "description": "Якщо Check віджет має галочку, це означає, що дія робиться анонімно."
+  },
   "errorTitle": "Помилка",
+  "@errorTitle": {
+    "examples": "Заголовок для сторінки Error"
+  },
   "errorMessage": "Помилка при завантаженні",
+  "@errorMessage": {
+    "examples": "Повідомлення на сторінці Error"
+  },
   "send": "Надіслати",
+  "@send": {
+    "examples": "Текст для кнопки, яка знаходиться на сторінці Respond та в діалозі Report.",
+    "description": "Кнопка використовується для надсилання даних при заповненій формі."
+  },
   "myStory": "Мої історії",
+  "@myStory": {
+    "examples": "Текст для кнопки, яка знаходиться на сторінці Profile та заголовок для сторінки MyStory.",
+    "description": "Кнопка використовується для переходу на сторінку MyStory."
+  },
   "saved": "Збережене",
+  "@saved": {
+    "examples": "Текст для кнопки, яка знаходиться на сторінці Profile та заголовок для сторінки Saves.",
+    "description": "Кнопка використовується для переходу на сторінку Saves."
+  },
   "profileDetails": "У цьому розділі ти можеш додати особисту інформацію, налаштувати анонімність, а також знайти збережені матеріали.",
+  "@profileDetails": {
+    "examples": "Текст для опису сторінки Profile"
+  },
   "beAnonymousDetails": "Якщо ви зробите свій профіль анонімним, на вашій сторінці не буде відображатися персональна інформація, тільки nickname.",
+  "@beAnonymousDetails": {
+    "examples": "Текст опису для перемикача анонімності на сторінці Profile"
+  },
   "writeYouName": "Ім'я",
+  "@writeYouName": {
+    "examples": "Текст для поля на сторінці Profile.",
+    "description": "Поле використовується для вводу імені."
+  },
   "writeYouLastName": "Прізвище",
+  "@writeYouLastName": {
+    "examples": "Текст для поля на сторінці Profile.",
+    "description": "Поле використовується для вводу прізвища."
+  },
   "saveChanges": "Зберегти",
+  "@saveChanges": {
+    "examples": "Текст для кнопки на сторінці Profile.",
+    "description": "Кнопка використовується для зберігання змін в описі профілю."
+  },
   "editData": "Редагувати",
+  "@editData": {
+    "examples": "Текст для кнопки на сторінці Profile.",
+    "description": "Кнопка використовується для редагування опису профілю."
+  },
+  "name": "Ім'я",
+  "@name": {
+    "examples": "Текст над полем вводу імені на сторінці Profile."
+  },
   "lastName": "Прізвище",
-  "key": "Ключ",
-  "getMockData": "Не знайдено данних, натисніть щоб додати тестові дані",
+  "@lastName": {
+    "examples": "Текст над полем вводу прізвища на сторінці Profile."
+  },
+  "getMockData": "Не знайдено даних, натисніть, щоб додати тестові дані",
+  "@getMockData": {
+    "examples": "Текст для кнопки на сторінках, де завантажуються певні дані з Firebase.",
+    "description": "Кнопка використовується для додавання тестових даних до Firebase."
+  },
   "investors": "Інвесторам",
+  "@investors": {
+    "examples": "Текст для кнопки, яка знаходиться в Footer та на сторінці Home на одному з Box віджетів.",
+    "description": "Кнопка використовується для переходу на сторінку Investors."
+  },
   "investorsSubtitle": "Зв'яжіться з нами для підтримки ветеранів. Напишіть нам на hello@veteranam.info",
-  "name": "Імʼя",
-  "message": "Повідомлення",
-  "writeYourEmail": "Ваш е-mail",
-  "text": "Текст",
-  "writeYourSuggenstions": "Ваші пропозиції",
-  "feedback": "Зворотній звʼязок",
-  "feedbackSubtitle": "Не знайшли те, що шукали, хочете звʼязатись з нами, або маєте питання чи запити? Ми радо поспілкуємось! Будь ласка, заповніть форму.",
+  "@investorsSubtitle": {
+    "examples": "Текст для опису сторінки Investors"
+  },
+  "writeYourEmail": "Ваш e-mail",
+  "@writeYourEmail": {
+    "examples": "Текст для поля на сторінках Login, SignUp.",
+    "description": "Поле використовується для вводу електронної пошти."
+  },
+  "feedback": "Зворотній зв'язок",
+  "@feedback": {
+    "examples": "Назва сторінки Feedback."
+  },
+  "feedbackSubtitle": "Не знайшли те, що шукали, хочете зв'язатися з нами, або маєте питання чи запити? Ми радо поспілкуємось! Будь ласка, заповніть форму.",
+  "@feedbackSubtitle": {
+    "examples": "Текст для опису сторінки Feedback."
+  },
   "writeYourMessage": "Ваше повідомлення",
-  "helloVeteran": "Привіт, Ветеран!",
-  "homeSubtitle": "Тут можно знайти корисну інформацію про знижки ",
-  "feedbackSaveMessage": "Заявка прийнята",
+  "@writeYourMessage": {
+    "examples": "Текст для поля.",
+    "description": "Поле використовується для вводу повідомлення."
+  },
+  "homeSubtitle": "Тут можна знайти корисну інформацію про знижки.",
+  "@homeSubtitle": {
+    "examples": "Текст для опису сторінки Home."
+  },
   "clear": "Очистити",
-  "fieldCannotBeEmpty": "Поле не може бути пустим",
-  "tooshort": "закоротке",
-  "tooShortEmail": "Закороткий",
-  "isWrong": "не правильне",
-  "isWrongEmail": "не правильний",
+  "@clear": {
+    "examples": "Текст для кнопки.",
+    "description": "Кнопка використовується для очистки всіх полів форми."
+  },
+  "fieldCannotBeEmpty": "Поле не може бути порожнім",
+  "@fieldCannotBeEmpty": {
+    "examples": "Текст помилки для поля, якщо його значення порожнє."
+  },
+  "tooshort": "Занадто коротке",
+  "@tooshort": {
+    "examples": "Текст помилки для поля, якщо його значення занадто коротке."
+  },
+  "tooShortEmailPassword": "Занадто короткий",
+  "@tooShortEmailPassword": {
+    "examples": "Текст помилки для полів електронної адреси та паролю, якщо їх значення занадто коротке."
+  },
+  "isWrong": "Неправильне",
+  "@isWrong": {
+    "examples": "Текст помилки для поля, якщо його значення неправильне."
+  },
+  "isWrongEmail": "Неправильний",
+  "@isWrongEmail": {
+    "examples": "Текст помилки для поля електронної адреси, якщо її значення неправильне."
+  },
   "logOut": "Вийти",
+  "@logOut": {
+    "examples": "Текст для кнопки на сторінці Profile.",
+    "description": "Кнопка використовується для виходу з облікового запису."
+  },
   "deleteAccount": "Видалити акаунт",
+  "@deleteAccount": {
+    "examples": "Текст для кнопки на сторінці Profile.",
+    "description": "Кнопка використовується для видалення облікового запису."
+  },
   "signUp": "Реєстрація",
+  "@signUp": {
+    "examples": "Текст для кнопки на сторінці Login та заголовок сторінки SignUp.",
+    "description": "Кнопка використовується для переходу до сторінки SignUp."
+  },
   "fullEmail": "Електронна пошта",
+  "@fullEmail": {
+    "examples": "Текст над полем вводу електронної пошти."
+  },
   "register": "Зареєструватись",
+  "@register": {
+    "examples": "Текст для кнопки на сторінці SignUp.",
+    "description": "Кнопка використовується для переходу реєстрації облікового запису."
+  },
   "doYouHavenAccount": "Маєте акаунт?",
+  "@doYouHavenAccount": {
+    "examples": "Текст на сторінці SignUp."
+  },
   "donotYouHavenAccount": "Створити аккаунт можно тут",
+  "@donotYouHavenAccount": {
+    "examples": "Текст на сторінці Login."
+  },
   "or": "або",
+  "@or": {
+    "examples": "Текст на сторінках Login та SignUp."
+  },
   "signUpWith": "Зареєструйтесь через",
+  "@signUpWith": {
+    "examples": "Текст на сторінці SignUp перед кнопкою реєстрації за допомогою google, facebook, apple."
+  },
   "google": "Google",
+  "@google": {
+    "examples": "Текст для кнопки на сторінці SignUp та Login.",
+    "description": "Кнопка використовується для реєстрації/входу за допомогою google."
+  },
   "facebook": "Facebook",
+  "@facebook": {
+    "examples": "Текст для кнопки на сторінці SignUp та Login.",
+    "description": "Кнопка використовується для реєстрації/входу за допомогою facebook."
+  },
   "apple": "Apple",
-  "tooShortPassword": "закороткий",
+  "@apple": {
+    "examples": "Текст для кнопки на сторінці SignUp та Login.",
+    "description": "Кнопка використовується для реєстрації/входу за допомогою apple."
+  },
   "password": "Пароль",
+  "@password": {
+    "examples": "Текст над полем вводу пароля та частина помилки."
+  },
   "createSecurePassword": "Придумайте безпечніший пароль",
+  "@createSecurePassword": {
+    "examples": "Текст для поля на сторінках Login та SignUp.",
+    "description": "Поле використовується для вводу пароля."
+  },
   "capitalLetter": "повинен містити одну чи більше великих букв",
+  "@capitalLetter": {
+    "examples": "Текст помилки для поля паролю якщо воно не містить ніодної великої літери."
+  },
   "oneNumber": "повинен містити одну чи більше цифр",
+  "@oneNumber": {
+    "examples": "Текст помилки для поля паролю якщо воно не містить ніодної цифри."
+  },
   "informationSubtitle": "У цьому розділі ти знайдеш корисну інформацію для ветеранів та їх сімей",
+  "@informationSubtitle": {
+    "examples": "Текст для опису сторінки Information"
+  },
   "moreNews": "Ще новини",
+  "@moreNews": {
+    "examples": "Текст для кнопки на сторінці Information.",
+    "description": "Кнопка використовується для завантаження нових на комп'ютерній версії."
+  },
   "support": "Підтримати",
-  "funds": "Фонди та організації",
+  "@support": {
+    "examples": "Текст для кнопки на сторінці Funds.",
+    "description": "Кнопка використовується для переходу на сайт фонду."
+  },
   "fundsSubtitle": "Бажаєте підтримати ветеранів не словом, а ділом? Ми зібрали список фондів та організацій, куди ви можете задонатити. Ми не приймаємо платежі напряму натисніть на картку фонда щоб зв'язатись з ними напряму.",
-  "linkedAccounts": "Привʼязані облікові записи",
-  "linkedAccountsDetails": "Ваш обліковий запис наразі прив’язано до облікового запису Facebook.",
-  "disconnect": "Відʼєднати",
+  "@fundsSubtitle": {
+    "examples": "Текст для опису сторінки Investors"
+  },
   "thankYou": "Дякуємо",
+  "@thankYou": {
+    "examples": "Частина текст для заголовку на сторінці Home"
+  },
   "feedbackBoxSubtitle": "Ми отримали Ваше повідомлення. Дякуємо за Ваш час.",
+  "@feedbackBoxSubtitle": {
+    "examples": "Текст заголовку віджета FeedbackBox на сторінці Feedback коли користувач надіслав повідомлення."
+  },
   "sendMore": "Надіслати ще",
-  "receivedYourMessage": "Ми отримали Ваше повідомлення. Дякуємо за Ваш час.",
+  "@sendMore": {
+    "examples": "Текст для кнопки віджета FeedbackBox на сторінці Feedback коли користувач надіслав повідомлення.",
+    "description": "Кнопка використовується для змоги знов надіслати повідомлення."
+  },
+  "linkedAccounts": "Привʼязані облікові записи",
+  "@linkedAccounts": {
+    "examples": "Текст на сторінці Profile"
+  },
+  "linkedAccountsDetails": "Ваш обліковий запис наразі прив’язано до облікового запису Facebook.",
+  "@linkedAccountsDetails": {
+    "examples": "Текст на сторінці Profile"
+  },
+  "disconnect": "Відʼєднати",
+  "@disconnect": {
+    "examples": "Текст для кнопки на сторінці Profile",
+    "description": "Кнопка використовується для від'єднання облікового запису користувача від: google, facebook, apple"
+  },
   "logInWith": "Увійдіть через",
-  "dublicate": "Користувач з таким паролем або електронною поштою існує",
+  "@logInWith": {
+    "examples": "Текст на сторінці Login перед кнопкою увійти за допомогою google, facebook, apple."
+  },
   "rateOurSite": "Оцініть наш проект",
+  "@rateOurSite": {
+    "examples": "Текст в формі оцінки.",
+    "description": "Форма використовується для виставлення оцінки вебсайту"
+  },
   "next": "Далі",
+  "@next": {
+    "examples": "Текст для кнопки на формах де всі поля не показуються зразу",
+    "description": "Кнопка використовується для переходу на наступне поле"
+  },
   "thankYouDescription": "Зверніть увагу! Для доступу до деяких послуг Вам потрібно буде підтвердити Ваш статус показавши відповідне посвідчення.",
+  "@thankYouDescription": {
+    "examples": "Текст заголовку на сторінці Thank."
+  },
   "mainScreen": "Головна",
+  "@mainScreen": {
+    "examples": "Текст для кнопки на сторінці Thank",
+    "description": "Кнопка використовується для переходу до сторінки Home."
+  },
+  "dublicate": "Користувач з таким паролем або електронною поштою існує",
+  "@dublicate": {
+    "examples": "Текст помилки для сторінки SignUp."
+  },
   "fillInForm": "Заповніть форму",
+  "@fillInForm": {
+    "examples": "Текст заголовку на сторінці QuestionForm."
+  },
   "questionsFormSubtitle": "Для того щоб ми могли надати Вам найкорисніші послуги, будь ласка, дайте відповідь на наступне питання:",
+  "@questionsFormSubtitle": {
+    "examples": "Текст для опису сторінки QuestionForm."
+  },
   "selectAppropriateOne": "Виберіть відповідне:",
+  "@selectAppropriateOne": {
+    "examples": "Текст на сторінці QuestionForm для вибору ролі."
+  },
   "iAmVeteran": "Я ветеран/-ка;",
+  "@iAmVeteran": {
+    "examples": "Текст на сторінці QuestionForm для вибору ролі."
+  },
   "iAmRelativeOfVeteran": "Я родич ветерана/-ки;",
+  "@iAmRelativeOfVeteran": {
+    "examples": "Текст на сторінці QuestionForm для вибору ролі."
+  },
   "iAmCivilian": "Я цивільна особа;",
+  "@iAmCivilian": {
+    "examples": "Текст на сторінці QuestionForm для вибору ролі."
+  },
   "iAmBusinessOwnerRepresentative": "Я власник/представник бізнесу, хочу надавати пільги.",
+  "@iAmBusinessOwnerRepresentative": {
+    "examples": "Текст на сторінці QuestionForm для вибору ролі."
+  },
   "workSubtitle": "У цьому розділі ти знайдеш актуальні вакансії, а також можеш залишити заявку, щоб ми допомогли тобі в пошуку. Для зручності можеш користуватися фільтрами.",
+  "@workSubtitle": {
+    "examples": "Текст для опису сторінки Work."
+  },
   "lookingForJob": "Шукаю роботу",
+  "@lookingForJob": {
+    "examples": "Текст для кнопки на сторінці Work.",
+    "description": "Кнопка використовується для переходу на сторінку Employee."
+  },
   "givingJob": "Даю роботу",
-  "emailHint": "example@veteranam.info",
+  "@givingJob": {
+    "examples": "Текст для кнопки на сторінці Work.",
+    "description": "Кнопка використовується для переходу на сторінку Employer."
+  },
   "phoneNumber": "Номер телефону",
-  "phoneNumberHint": "+38 099 000 00 00",
-  "discountsAndCoupons": "Знижки/Купони",
-  "discountsAndCouponsDescription": "У цьому розділі ти знайдеш знижки/купони для ветеранів та їх сімей.",
-  "resume": "Резюме",
-  "noResume": "У мене немає резюме",
-  "cancel": "Скасувати",
-  "upload": "Завантажити",
-  "employerSubtitle": "У цьому розділі ти можеш працевлаштувати ветерана. Якщо у вас в компанії відкрита вакансія, ти можеш розмістити оголошення тут.",
-  "mainInformation": "Основна інформація",
-  "position": "Посада*",
-  "writeProposedPosition": "Напишіть запропоновану посаду",
-  "wage": "Заробітна плата*",
-  "writeTheWage": "Напишіть заробітну плату",
-  "selectCityOfWork": "Виберіть місто роботи*",
-  "selectCity": "Виберіть місто",
-  "contacts": "Контакти",
-  "howToContactYou": "Напишіть як з Вами звʼязатися",
-  "remotely": "Віддалено",
-  "myFeedback": "Мої відгуки",
-  "didNotFindYourVacancy": "Не знайшли свою вакансію?",
-  "workRequestSubtitle": "Ми можемо допомогти. Залишіть Ваші дані і побажання про роботу у наступній формі і ми розішлемо Ваше CV до релевантних компаній.",
-  "leaveRequest": "Залишити заявку",
-  "savesSubtitle": "У цьому розділі ти можеш побачити всі збережені матеріали",
-  "storySubtitle": "У цьому розділі ти можеш поділитися історіями з життя і служби анонімно або відкрито. А також підтримати інших учасників.",
-  "writeYourStory": "Написати свою історію",
-  "moreStories": "Ще історії",
-  "addYourStory": "Написати свою історію",
-  "yourStory": "Ваша історія",
-  "addPhoto": "Добавте фото",
-  "notNecessarily": "(необовʼязково)",
-  "publishAnonymously": "Опублікувати анонімно",
-  "anonymous": "анонім",
-  "city": "Місто",
-  "category": "Категорія",
-  "publishAnonymouslyStorySubtitle": "Якщо Ви публікуєте історію анонімно, читачі зможуть бачити тільки Ваш нікнейм, що вказаний в профілі.",
-  "publish": "Опублікувати",
-  "storyAddSubtitle": "Поділіться своєю історією і ми опублікуємо її на нашому веб сайті. Всі історії проходять модерацію і будуть опубліковані після перевірки.",
-  "logOutQuestion": "Ви впевнені, що бажаєте вийти з вашого облікового запису?",
-  "deleteAccountQuestion": "Ви впевнені, що хочете видалити ваш обліковий запис?",
-  "yes": "Так",
-  "no": "Ні",
-  "previous": "Попередня",
-  "myStoryDetails": "У цьому розділі ти можеш керувати своїми історіями.",
+  "@phoneNumber": {
+    "examples": "Текст над полем вводу номера телефону."
+  },
   "moreDiscounts": "Ще знижки",
-  "underConstruction": "Ця сторінка знаходиться на стадії розробки.",
-  "hello": "Привіт",
-  "thankYouVeterans": "Дякуємо\nВЕТЕРАНИ!",
-  "thisServiceForVeteransSubtitle": "Тут ти зібрали корисну інформацію про знижки для ветеранів та їх сімей",
+  "@moreDiscounts": {
+    "examples": "Текст для кнопки на сторінці Discounts.",
+    "description": "Кнопка використовується для завантаження знижок на комп'ютерній версії."
+  },
+  "discountsAndCoupons": "Знижки/Купони",
+  "@discountsAndCoupons": {
+    "examples": "Текст заголовку на сторінці Discount."
+  },
+  "discountsAndCouponsDescription": "У цьому розділі ти знайдеш знижки/купони для ветеранів та їх сімей.",
+  "@discountsAndCouponsDescription": {
+    "examples": "Текст для опису сторінки Discount."
+  },
+  "resume": "Резюме",
+  "@resume": {
+    "examples": "Текст над полем для резюме на сторінці Respond."
+  },
+  "noResume": "У мене немає резюме",
+  "@noResume": {
+    "examples": "Текст на сторінці Respond."
+  },
+  "cancel": "Скасувати",
+  "@cancel": {
+    "examples": "Текст для кнопки на сторінці Respond.",
+    "description": "Кнопка використовується для повернення на попередню сторінку."
+  },
+  "upload": "Завантажити",
+  "@upload": {
+    "examples": "Текст для кнопки на сторінці Respond.",
+    "description": "Кнопка використовується для надсилання зайвки і переходу на сторінку Congratulations."
+  },
+  "employerSubtitle": "У цьому розділі ти можеш працевлаштувати ветерана. Якщо у вас в компанії відкрита вакансія, ти можеш розмістити оголошення тут.",
+  "@employerSubtitle": {
+    "examples": "Текст для опису сторінки Empolyer."
+  },
+  "mainInformation": "Основна інформація",
+  "@mainInformation": {
+    "examples": "Текст на сторінці Empolyer."
+  },
+  "position": "Посада*",
+  "@position": {
+    "examples": "Текст над полем вводу посади на сторінці Empolyer."
+  },
+  "writeProposedPosition": "Напишіть запропоновану посаду",
+  "@writeProposedPosition": {
+    "examples": "Текст для поля на сторінці Empolyer.",
+    "description": "Поле використовується для вводу посади."
+  },
+  "wage": "Заробітна плата*",
+  "@wage": {
+    "examples": "Текст над полем вводу заробітньої плати на сторінці Empolyer."
+  },
+  "writeTheWage": "Напишіть заробітну плату",
+  "@writeTheWage": {
+    "examples": "Текст для поля на сторінці Empolyer.",
+    "description": "Поле використовується для вводу заробітньої плати."
+  },
+  "selectCityOfWork": "Виберіть місто роботи*",
+  "@selectCityOfWork": {
+    "examples": "Текст над полем вибору міста на сторінці Empolyer."
+  },
+  "selectCity": "Виберіть місто",
+  "@selectCity": {
+    "examples": "Текст для поля на сторінці Empolyer.",
+    "description": "Поле використовується для вибору або вводу міста."
+  },
+  "contacts": "Контакти",
+  "@contacts": {
+    "examples": "Текст для кнопки, яка знаходиться в Footer та над полем вибору міста на сторінці Empolyer.",
+    "description": "Кнопка використовується для переходу на сторінку COntact."
+  },
+  "howToContactYou": "Напишіть як з Вами звʼязатися",
+  "@howToContactYou": {
+    "examples": "Текст для поля на сторінці Empolyer.",
+    "description": "Поле використовується для вводу контактів."
+  },
+  "remotely": "Віддалено",
+  "@remotely": {
+    "examples": "Текст опису для переключателя віддалено на сторінці Profile"
+  },
+  "myFeedback": "Мої відгуки",
+  "@myFeedback": {
+    "examples": "Текст для кнопки на сторінці Profile.",
+    "description": "Кнопка використовується для переходу на сторінку MyFeedback."
+  },
+  "didNotFindYourVacancy": "Не знайшли свою вакансію?",
+  "@didNotFindYourVacancy": {
+    "examples": "Текст на сторінці Empolyee."
+  },
+  "workRequestSubtitle": "Ми можемо допомогти. Залишіть Ваші дані і побажання про роботу у наступній формі і ми розішлемо Ваше CV до релевантних компаній.",
+  "@workRequestSubtitle": {
+    "examples": "Текст для опису сторінки Request."
+  },
+  "leaveRequest": "Залишити заявку",
+  "@leaveRequest": {
+    "examples": "Текст для кнопки на сторінці Employee.",
+    "description": "Кнопка використовується для переходу на сторінку Request."
+  },
+  "savesSubtitle": "У цьому розділі ти можеш побачити всі збережені матеріали",
+  "@savesSubtitle": {
+    "examples": "Текст для опису сторінки Saves."
+  },
+  "storySubtitle": "У цьому розділі ти можеш поділитися історіями з життя і служби анонімно або відкрито. А також підтримати інших учасників.",
+  "@storySubtitle": {
+    "examples": "Текст для опису сторінки Story."
+  },
+  "writeYourStory": "Написати свою історію",
+  "@writeYourStory": {
+    "examples": "Текст для поля на сторінці AddStory.",
+    "description": "Поле використовується для вводу історії."
+  },
+  "moreStories": "Ще історії",
+  "@moreStories": {
+    "examples": "Текст для кнопки на сторінці Story.",
+    "description": "Кнопка використовується для завантаження знижок історій на комп'ютерній версії."
+  },
+  "addYourStory": "Написати свою історію",
+  "@addYourStory": {
+    "examples": "Текст для кнопки на сторінці Story.",
+    "description": "Кнопка використовується для переходу до сторінки AddStory."
+  },
+  "yourStory": "Ваша історія",
+  "@yourStory": {
+    "examples": "Текст перед полем вводу історій."
+  },
+  "addPhoto": "Добавте фото",
+  "@addPhoto": {
+    "examples": "Текст перед полем добавлення фото."
+  },
+  "notNecessarily": "(необовʼязково)",
+  "@notNecessarily": {
+    "examples": "Текст перед полем добавлення фото на сторінці AddStory."
+  },
+  "publishAnonymously": "Опублікувати анонімно",
+  "@publishAnonymously": {
+    "examples": "Текст опису для переключателя аноніманості на сторінці StoryAdd"
+  },
+  "anonymous": "анонім",
+  "@anonymous": {
+    "examples": "Текст на сторінці Story якщо історія опублікована анонімно"
+  },
+  "city": "Місто",
+  "@city": {
+    "examples": "Текст на сторінці Discount для додаткових фільтрів"
+  },
+  "category": "Категорія",
+  "@category": {
+    "examples": "Текст на сторінці Employee"
+  },
+  "publishAnonymouslyStorySubtitle": "Якщо Ви публікуєте історію анонімно, читачі зможуть бачити тільки Ваш нікнейм, що вказаний в профілі.",
+  "@publishAnonymouslyStorySubtitle": {
+    "examples": "Текст додаткового опису для переключателя аноніманості на сторінці StoryAdd"
+  },
+  "publish": "Опублікувати",
+  "@publish": {
+    "examples": "Текст для кнопки на сторінці AddStory.",
+    "description": "Кнопка використовується для публікації історії та переходу до сторінки Story."
+  },
+  "storyAddSubtitle": "Поділіться своєю історією і ми опублікуємо її на нашому веб сайті. Всі історії проходять модерацію і будуть опубліковані після перевірки.",
+  "@storyAddSubtitle": {
+    "examples": "Текст для опису сторінки AddStory."
+  },
+  "logOutQuestion": "Ви впевнені, що бажаєте вийти з вашого облікового запису?",
+  "@logOutQuestion": {
+    "examples": "Текст для діологу виходу з облікового запису на сторінці Profile."
+  },
+  "deleteAccountQuestion": "Ви впевнені, що хочете видалити ваш обліковий запис?",
+  "@deleteAccountQuestion": {
+    "examples": "Текст для діологу видалення облікового запису на сторінці Profile."
+  },
+  "yes": "Так",
+  "@yes": {
+    "examples": "Текст для кнопки для діологів видалення та виходу з облікового запису на сторінці Profile.",
+    "description": "Кнопка використовується для підтвердження виходу/видалення облікового запису та переходу на сторінку Home."
+  },
+  "no": "Ні",
+  "@no": {
+    "examples": "Текст для кнопки для діологів видалення та виходу з облікового запису на сторінці Profile.",
+    "description": "Кнопка використовується для відмови виходу/видалення облікового запису та переходу на сторінку Home."
+  },
+  "previous": "Попередня",
+  "@previous": {
+    "examples": "Текст для кнопки на сторінці Work.",
+    "description": "Кнопка використовується для переходу на попередню сторінку з роботами."
+  },
+  "myStoryDetails": "У цьому розділі ти можеш керувати своїми історіями.",
+  "@myStoryDetails": {
+    "examples": "Текст для опису сторінки MyStory."
+  },
   "whatKindOfProject": "Що це за проект?",
+  "@whatKindOfProject": {
+    "examples": "Текст на сторінці Home, заголовок опису проекту"
+  },
   "aboutProject": "Ми створюємо єдиний інформаційний простір для ветеранів та їх сімей.",
+  "@aboutProject": {
+    "examples": "Текст на сторінці Home, опис проекту"
+  },
   "saveMoney": "Щоб зекономити",
+  "@saveMoney": {
+    "examples": "Текст на сторінці Home, знижки"
+  },
   "discountsServices": "Знижки і послуги",
+  "@discountsServices": {
+    "examples": "Текст на сторінці Home, заголовок знижок"
+  },
   "discountsServicesSubtitle": "Тут ви знайдете актуальні пропозиції для ветеранів та їх сімей, які оновлюються щотижня. Медицина, сфера обслуговування, заклади харчування та одяг - всі знижки шукайте в цьому розділі.",
+  "@discountsServicesSubtitle": {
+    "examples": "Текст на сторінці Home, опис знижок"
+  },
   "toDiscount": "До знижок",
+  "@toDiscount": {
+    "examples": "Текст для кнопки на сторінці Home.",
+    "description": "Кнопка використовується для переходу на сторінку Discounts."
+  },
   "findOut": "Щоб дізнатися",
+  "@findOut": {
+    "examples": "Текст на сторінці Home, інформація"
+  },
   "informationNews": "Інформація і новини",
+  "@informationNews": {
+    "examples": "Текст на сторінці Home, заголовок інформації"
+  },
   "informationNewsSubtitle": "Вся інформація в одному місці. Ми проаналізували різноманітні ресурси та надаємо безкоштовний доступ до інформаціх, що слід знати ветерану.",
+  "@informationNewsSubtitle": {
+    "examples": "Текст на сторінці Home, опис інформації"
+  },
   "toInfomation": "До інформації",
+  "@toInfomation": {
+    "examples": "Текст для кнопки на сторінці Home.",
+    "description": "Кнопка використовується для переходу на сторінку Information."
+  },
   "whatYouMostInterestedIn": "Те, що Вас цікавить найчастіше",
+  "@whatYouMostInterestedIn": {
+    "examples": "Текст на сторінці Home, Питання"
+  },
   "answersYourQuestions": "Відповіді на Ваші запитання",
+  "@answersYourQuestions": {
+    "examples": "Текст на сторінці Home, заголовок питання"
+  },
   "questionSubtitle": "Не знайшли те, що шукали, хочете звʼязатись з нами, або маєте питання чи запити? Пишіть нам.",
+  "@questionSubtitle": {
+    "examples": "Текст на сторінці Home, опис питання"
+  },
   "writeMessage": "Написати повідомлення",
+  "@writeMessage": {
+    "examples": "Текст для кнопки на сторінці Home.",
+    "description": "Кнопка використовується для переходу на сторінку Feedback."
+  },
   "doYouWantSupportOurProject": "Хочете підтримати наш проект?",
+  "@doYouWantSupportOurProject": {
+    "examples": "Текст який знаходиться в Footer."
+  },
   "allRightsReserved": "Всі права захищені",
+  "@allRightsReserved": {
+    "examples": "Текст який знаходиться в Footer."
+  },
   "privacyPolicy": "Політика конфіденційності",
+  "@privacyPolicy": {
+    "examples": "Текст для кнопки, яка знаходиться в Footer.",
+    "description": "Кнопка використовується для відриття діалогу PrivacyPolicy."
+  },
   "sections": "Розділи",
+  "@sections": {
+    "examples": "Текст який знаходиться в Footer."
+  },
   "contact": "Зв'язатись",
+  "@contact": {
+    "examples": "Текст для кнопки, яка знаходиться в Footer.",
+    "description": "Кнопка використовується для переходу до сторінки Contact."
+  },
   "jobsVacancies": "Робота і вакансії",
+  "@jobsVacancies": {
+    "examples": "Текст на сторінці Home, заголовок робота"
+  },
   "jobsVacanciesSubtitle": "Інформація про актуальні вакансії, спеціально орієнтовані на ветеранів, а також ресурси для пошуку роботи та кар'єрного розвитку.",
+  "@jobsVacanciesSubtitle": {
+    "examples": "Текст на сторінці Home, опис робота"
+  },
   "toVacancy": "До вакансій",
+  "@toVacancy": {
+    "examples": "Текст для кнопки на сторінці Home.",
+    "description": "Кнопка використовується для переходу на сторінку Work."
+  },
   "toGetItYouNeed": "Щоб отримати потрібно:",
+  "@toGetItYouNeed": {
+    "examples": "Текст на сторінці Discount, опис в каточці"
+  },
   "write": "Напишіть",
+  "@write": {
+    "examples": "Текст частини заголовку на сторінці Feedback."
+  },
   "aMessage": "повідомлення",
+  "@aMessage": {
+    "examples": "Текст частини заголовку на сторінці Feedback."
+  },
   "us": "нам",
+  "@us": {
+    "examples": "Текст частини заголовку на сторінці Feedback."
+  },
   "preferEmail": "Надаєте перевагу e-mail?",
+  "@preferEmail": {
+    "examples": "Текст сторінці Feedback, перед кнопкою email."
+  },
   "ourSocialNetworks": "Наші соцмережі",
+  "@ourSocialNetworks": {
+    "examples": "Текст сторінці Feedback, над кнопками соц мережей."
+  },
   "feedbackFormSubtitle": "Надсилаючи цю форму, я приймаю Політику конфіденційності цього сайту",
+  "@feedbackFormSubtitle": {
+    "examples": "Текст для опису форми на сторінци Feedback."
+  },
   "sendMessage": "Надіслати повідомлення",
+  "@sendMessage": {
+    "examples": "Текст для кнопки на сторінці Feedback.",
+    "description": "Кнопка використовується для надсилання даних при заповненій формі."
+  },
   "provideSuggestionsFromBusinesses": "Надавайте пропозиції від бізнесу,",
+  "@provideSuggestionsFromBusinesses": {
+    "examples": "Текст частини заголовку на сторінці Investors."
+  },
   "orDonateHere": "або виберіть фонд/організацію для допомоги нашим військовим",
+  "@orDonateHere": {
+    "examples": "Текст частини заголовку на сторінці Investors."
+  },
   "supportOurVeterans": "Підтримайте наших ветеранів",
+  "@supportOurVeterans": {
+    "examples": "Текст заголовку на сторінці Investors."
+  },
   "supportVeterans": "ПІДТРИМАЙТЕ\nВЕТЕРАНІВ",
+  "@supportVeterans": {
+    "examples": "Текст заголовку інветор кнопки на сторінці Home.",
+    "description": "Кнопка використовується для переходу до сторінки Investors."
+  },
   "haveQuestions": "МАЄТЕ\nПИТАННЯ?",
+  "@haveQuestions": {
+    "examples": "Текст заголовку кнопки контакти на сторінці Home.",
+    "description": "Кнопка використовується для переходу до сторінки Contact."
+  },
   "donateHere": "Донать тут",
+  "@donateHere": {
+    "examples": "Текст на сторінці Investors"
+  },
   "provenFunds": "Перевірені фонди",
+  "@provenFunds": {
+    "examples": "Текст на сторінці Investors"
+  },
   "tryItAgain": "Спробувати ще раз",
+  "@tryItAgain": {
+    "examples": "Текст для кнопки на сторінці Error.",
+    "description": "Кнопка використовується для переходу до сторінки Home."
+  },
   "companyIsHidden": "Компанію приховано",
+  "@companyIsHidden": {
+    "examples": "Текст на сторінці Discount, якщо в знижзці компанія прихована"
+  },
   "online": "Вся Україна (онлайн)",
+  "@online": {
+    "examples": "Текст на сторінці Discount для додаткових фільтрів"
+  },
   "moreFunds": "Більше фондів",
+  "@moreFunds": {
+    "examples": "Текст для кнопки на сторінці Investors.",
+    "description": "Кнопка використовується для завантаження фондів на комп'ютерній версії."
+  },
   "offerDiscount": "Запропонувати знижку",
+  "@offerDiscount": {
+    "examples": "Текст для кнопки на сторінці Discount.",
+    "description": "Кнопка використовується для переходу до сторінки MyDiscounts."
+  },
   "myDiscountsAndCoupons": "У цьому розділі ти можеш опублікувати знижку, а також керувати своїми публікаціями. Якщо ваша компанія надає персональні пропозиції для ветеранів, ти можеш розмістити оголошення тут.",
+  "@myDiscountsAndCoupons": {
+    "examples": "Текст для опису сторінки MyDiscount."
+  },
   "myPublications": "Мої публікації",
+  "@myPublications": {
+    "examples": "Текст на сторінці MyDiscount."
+  },
   "deactivate": "Деактивувати",
+  "@deactivate": {
+    "examples": "Текст для кнопки на сторінці MyDiscount.",
+    "description": "Кнопка використовується для деактивації знижки яку створив користувач."
+  },
   "statistics": "Статистика",
+  "@statistics": {
+    "examples": "Текст на сторінці MyDiscount."
+  },
   "advancedFilter": "Розширений фільтр",
+  "@advancedFilter": {
+    "examples": "Текст для кнопки на сторінці Discount.",
+    "description": "Кнопка використовується для відриття AdvancedFilter або відкриття діалогу з ним."
+  },
   "specialOffers": "Спеціальні пропозиції",
+  "@specialOffers": {
+    "examples": "Текст частини заголовку на сторінці Discount."
+  },
   "forVeteransAndTheirFamilies": "для ветеранів і їх родин",
+  "@forVeteransAndTheirFamilies": {
+    "examples": "Текст частини заголовку на сторінці Discount та Information."
+  },
   "discount": "Знижка",
+  "@discount": {
+    "examples": "Текст на сторінці Discount для додаткових фільтрів"
+  },
   "filterApplied": "Застосований фільтр",
+  "@filterApplied": {
+    "examples": "Текст на сторінці Discount для додаткових фільтрів"
+  },
   "fromLargestToSmallest": "Найбільші знижки зверху",
+  "@fromLargestToSmallest": {
+    "examples": "Текст для кнопки на сторінці Discount для додаткових фільтрів",
+    "description": "Кнопка використовується для застозування і деактивації фільтра за величиною знижки."
+  },
   "free": "Безкоштовно",
+  "@free": {
+    "examples": "Текст для кнопки на сторінці Discount для додаткових фільтрів",
+    "description": "Кнопка використовується для застозування і деактивації фільтра де знижка дорівню 100%."
+  },
   "allStoresOfChain": "Всі заклади мережі",
+  "@allStoresOfChain": {
+    "examples": "Текст для кнопки на сторінці Discount для додаткових фільтрів",
+    "description": "Кнопка використовується для застозування і деактивації фільтра де знижка застосовується в багатьох містах."
+  },
   "all": "Все",
+  "@all": {
+    "examples": "Текст для кнопки на сторінках з фільтрами по категоріям",
+    "description": "Кнопка використовується для деактивації фільтрування за категоріями."
+  },
   "complaint": "Скарга",
+  "@complaint": {
+    "examples": "Текст для кнопки на сторінках з картками",
+    "description": "Кнопка використовується для відриття діалогу Report."
+  },
   "reportPublication": "Поскаржитись на публікацію",
+  "@reportPublication": {
+    "examples": "Текст заголовку діалогу Report."
+  },
   "specifyReasonForComplaint": "Вкажіть причину скарги:",
+  "@specifyReasonForComplaint": {
+    "examples": "Текст підзагловок діалогу Report."
+  },
   "fraudOrSpam": "Шахрайство/спам;",
+  "@fraudOrSpam": {
+    "examples": "Текст для кнопки в діалозі Report.",
+    "description": "Кнопка використовується для вибору типу скарги."
+  },
   "fakeNewsOrDisinformation": "Фейк/дезінформація;",
+  "@fakeNewsOrDisinformation": {
+    "examples": "Текст для кнопки в діалозі Report.",
+    "description": "Кнопка використовується для вибору типу скарги."
+  },
   "offensiveOrHatefulContent": "Образливий контент;",
+  "@offensiveOrHatefulContent": {
+    "examples": "Текст для кнопки в діалозі Report.",
+    "description": "Кнопка використовується для вибору типу скарги."
+  },
   "other": "Інше (вкажіть)",
+  "@other": {
+    "examples": "Текст для кнопки в діалозі Report.",
+    "description": "Кнопка використовується для вибору типу скарги."
+  },
   "addComment": "Додайте коментар:",
+  "@addComment": {
+    "examples": "Текст перед полем вводу коментаря."
+  },
   "checkPointError": "Будь ласка виберіть одну з вище наведених відповідей",
+  "@checkPointError": {
+    "examples": "Текст помилки для діалогу Report при невибраному типі скарги."
+  },
   "verifiedInformation": "Перевірена інформація",
+  "@verifiedInformation": {
+    "examples": "Текст частини заголовку на Information Discount."
+  },
   "thatEndOfList": "Це кінець списку! Дякуємо за ваш час.",
+  "@thatEndOfList": {
+    "examples": "Текст на сторінках з картками коли завантажені всі картки"
+  },
   "returnToTop": "Повернутись нагору",
+  "@returnToTop": {
+    "examples": "Текст для кнопки на сторінках з картками коли завантажені всі картки",
+    "description": "Кнопка використовується для повернення на попередню верх сторінки."
+  },
   "cardListEmptyText": "На жаль, за вашими фільтрами нічого не знайдено. Спробуйте змінити критерії пошуку",
+  "@cardListEmptyText": {
+    "examples": "Текст на сторінках з картками та фільтрами коли при фільтрації немає ніодного результату"
+  },
   "ofUpTo": "до",
+  "@ofUpTo": {
+    "examples": "Текст на сторінці Discount"
+  },
   "findYourDiscount": "ЗНАЙДІТЬ СВОЮ ЗНИЖКУ",
+  "@findYourDiscount": {
+    "examples": "Текст заголовку кнопки контакти на сторінці Home.",
+    "description": "Кнопка використовується для переходу до сторінки Disocunt."
+  },
   "close": "Закрити",
+  "@close": {
+    "examples": "Текст для кнопки на сторінці DiscountCard",
+    "description": "Кнопка використовується для переходу до сторінки Disocunt."
+  },
   "callForDetails": "Телефон для деталей",
+  "@callForDetails": {
+    "examples": "Текст на сторінці Discount, опис в каточці"
+  },
   "veterans": "Ветерани",
+  "@veterans": {
+    "examples": "Текст на сторінці Home, частина тексту анімації"
+  },
   "theirFamilies": "Їхні сім'ї",
+  "@theirFamilies": {
+    "examples": "Текст на сторінці Home, частина тексту анімації"
+  },
   "activeMilitary": "Діючі військові",
+  "@activeMilitary": {
+    "examples": "Текст на сторінці Home, частина тексту анімації"
+  },
   "militaryDoctors": "Військові лікарі",
+  "@militaryDoctors": {
+    "examples": "Текст на сторінці Home, частина тексту анімації"
+  },
   "itIsValidAllTime": "Діє постійно",
+  "@itIsValidAllTime": {
+    "examples": "Текст на сторінці Discount, якщо знижка діє постійно"
+  },
   "error": "Вибачте, сталася непередбачена помилка.",
   "@error": {
     "description": "повідомлення про непередбачену помилку."
@@ -248,19 +931,39 @@
   "@dublicateFailure": {
     "description": "повідомлення про помилку при спробі зареєструвати акаунт на ту саму адресу електронної пошти, що й у вже зареєстрованого акаунта"
   },
-  "more": "Більше",
   "useful": "Корисно",
-  "website": "Сайт",
+  "@useful": {
+    "examples": "Текст на сторінках з картками під кнопкою подобається",
+    "description": "Кнопка використовується для додавання вподобання до каточки."
+  },
   "share": "Поділитися",
+  "@share": {
+    "examples": "Текст на сторінках з картками під кнопкою поширити",
+    "description": "Кнопка використовується щоб поширити дані карточки."
+  },
   "save": "Зберегти",
+  "@save": {
+    "examples": "Текст на сторінках з картками під кнопкою зберегти",
+    "description": "Кнопка використовується щоб зберегти карточку в зебережені."
+  },
   "webSite": "Веб сайт",
-  "report": "Поскаржитись",
+  "@webSite": {
+    "examples": "Текст на сторінках з картками під кнопкою веб сайт",
+    "description": "Кнопка використовується для переходу на сайт який прикріплений до каточки."
+  },
   "hideExpansion": "сховати...",
+  "@hideExpansion": {
+    "examples": "Текст на сторінці Discount, опис в каточці"
+  },
   "moreCities": "Ще {count} міст..",
   "@moreCities": {
     "placeholders": {
       "count": {}
-    }
+    },
+    "examples": "Текст на сторінці Discount, опис в каточці"
   },
-  "privacyPolicyText": "Політика конфіденційності для Veteranam.info\n\nДАТА НАБРАННЯ ЧИННОСТІ: 11 ЛИПНЯ 2024 РОКУ\n\nНа Veteranam.info ми цінуємо вашу конфіденційність і ставимося до неї серйозно. Ця політика конфіденційності пояснює як ми обробляємо вашу особисту інформацію коли ви користуєтесь нашим веб-сайтом і послугами. Якщо ви не погоджуєтесь з будь-якою частиною цієї політики будь ласка негайно припиніть використання нашого сайту та послуг.\n\nЗбір інформації\n\nКоли ви створюєте обліковий запис у нас ми збираємо таку інформацію профілю як ваше ім’я та електронну адресу щоб покращити ваш досвід і підтвердити вас як зареєстрованого користувача. Ми також можемо збирати таку інформацію як ваша IP-адреса деталі інтернет-браузера та інші дані щоб надати доступ до наших послуг і отримати аналітику. Для доступу до певних функцій ви повинні створити обліковий запис використовуючи електронну пошту та пароль. Ми не збираємо та не використовуємо жодну платіжну інформацію.\n\nМи збираємо інформацію від вас коли ви підписуєтесь на інформаційну розсилку заповнюєте форму відкриваєте заявку на підтримку або вводите інформацію на нашому сайті. Наприклад ми можемо збирати інформацію коли ви надаєте відгуки про наші продукти чи послуги.\n\nКомунікації\n\nВи можете відмовитись від комунікацій Veteranam.info натиснувши кнопку «Відписатися» внизу кожного електронного листа або надіславши електронний лист нашому офіцеру із захисту даних за адресою hello@veteranam.info.\n\nВи можете оновити або видалити свої особисті дані відписавшись від наших електронних листів або надіславши нам електронного листа на адресу hello@veteranam.info. Якщо ви проживаєте або перебуваєте в ЄЕЗ ви маєте певні права щодо вашої особистої інформації включаючи право запитувати доступ оновлення видалення та обмеження обробки.\n\nВикористання інформації\n\nМи використовуємо вашу інформацію щоб надавати персоналізовані рекомендації безпечно підтверджувати вас спілкуватися з вами покращувати наші послуги та надавати підтримку клієнтів. Ми можемо залучати сторонні компанії та окремих осіб для сприяння нашим послугам і вони зобов’язані дотримуватись конфіденційності та захисту особистих даних.\n\nМи можемо час від часу використовувати ваші дані в анонімізованій агрегованій формі щоб покращити наш двигун аналізу та для цілей аналітики. Ми ніколи не будемо використовувати зміст вашого профілю в жодних наших інструментах або послугах.\n\nЗаходи безпеки\n\nМи впроваджуємо різні заходи безпеки для захисту вашої інформації включаючи регулярне сканування на наявність дірок у безпеці та шкідливого програмного забезпечення використання захищених мереж і впровадження заходів безпеки при обробці транзакцій.\n\nФайли cookie\n\nВи можете налаштувати свій комп’ютер так щоб він попереджав вас кожного разу коли надсилається файл cookie або вимкнути всі файли cookie через налаштування браузера. Однак вимкнення файлів cookie може вплинути на деякі функції нашого сайту.\n\nПередача інформації\n\nМи не продаємо не торгуємо та не передаємо вашу особисту інформацію стороннім особам без попереднього повідомлення. Неперсоналізована інформація про відвідувачів може надаватись іншим сторонам для маркетингових рекламних або інших цілей.\n\nКонтакти\n\nЯкщо у вас є будь-які питання щодо цієї політики конфіденційності будь ласка надішліть електронний лист на адресу hello@veteranam.info."
+  "privacyPolicyText": "Політика конфіденційності для Veteranam.info\n\nДАТА НАБРАННЯ ЧИННОСТІ: 11 ЛИПНЯ 2024 РОКУ\n\nНа Veteranam.info ми цінуємо вашу конфіденційність і ставимося до неї серйозно. Ця політика конфіденційності пояснює як ми обробляємо вашу особисту інформацію коли ви користуєтесь нашим веб-сайтом і послугами. Якщо ви не погоджуєтесь з будь-якою частиною цієї політики будь ласка негайно припиніть використання нашого сайту та послуг.\n\nЗбір інформації\n\nКоли ви створюєте обліковий запис у нас ми збираємо таку інформацію профілю як ваше ім’я та електронну адресу щоб покращити ваш досвід і підтвердити вас як зареєстрованого користувача. Ми також можемо збирати таку інформацію як ваша IP-адреса деталі інтернет-браузера та інші дані щоб надати доступ до наших послуг і отримати аналітику. Для доступу до певних функцій ви повинні створити обліковий запис використовуючи електронну пошту та пароль. Ми не збираємо та не використовуємо жодну платіжну інформацію.\n\nМи збираємо інформацію від вас коли ви підписуєтесь на інформаційну розсилку заповнюєте форму відкриваєте заявку на підтримку або вводите інформацію на нашому сайті. Наприклад ми можемо збирати інформацію коли ви надаєте відгуки про наші продукти чи послуги.\n\nКомунікації\n\nВи можете відмовитись від комунікацій Veteranam.info натиснувши кнопку «Відписатися» внизу кожного електронного листа або надіславши електронний лист нашому офіцеру із захисту даних за адресою hello@veteranam.info.\n\nВи можете оновити або видалити свої особисті дані відписавшись від наших електронних листів або надіславши нам електронного листа на адресу hello@veteranam.info. Якщо ви проживаєте або перебуваєте в ЄЕЗ ви маєте певні права щодо вашої особистої інформації включаючи право запитувати доступ оновлення видалення та обмеження обробки.\n\nВикористання інформації\n\nМи використовуємо вашу інформацію щоб надавати персоналізовані рекомендації безпечно підтверджувати вас спілкуватися з вами покращувати наші послуги та надавати підтримку клієнтів. Ми можемо залучати сторонні компанії та окремих осіб для сприяння нашим послугам і вони зобов’язані дотримуватись конфіденційності та захисту особистих даних.\n\nМи можемо час від часу використовувати ваші дані в анонімізованій агрегованій формі щоб покращити наш двигун аналізу та для цілей аналітики. Ми ніколи не будемо використовувати зміст вашого профілю в жодних наших інструментах або послугах.\n\nЗаходи безпеки\n\nМи впроваджуємо різні заходи безпеки для захисту вашої інформації включаючи регулярне сканування на наявність дірок у безпеці та шкідливого програмного забезпечення використання захищених мереж і впровадження заходів безпеки при обробці транзакцій.\n\nФайли cookie\n\nВи можете налаштувати свій комп’ютер так щоб він попереджав вас кожного разу коли надсилається файл cookie або вимкнути всі файли cookie через налаштування браузера. Однак вимкнення файлів cookie може вплинути на деякі функції нашого сайту.\n\nПередача інформації\n\nМи не продаємо не торгуємо та не передаємо вашу особисту інформацію стороннім особам без попереднього повідомлення. Неперсоналізована інформація про відвідувачів може надаватись іншим сторонам для маркетингових рекламних або інших цілей.\n\nКонтакти\n\nЯкщо у вас є будь-які питання щодо цієї політики конфіденційності будь ласка надішліть електронний лист на адресу hello@veteranam.info.",
+  "@privacyPolicyText": {
+    "examples": "Текст на сторінці PrivacyPolicy"
+  }
 }
