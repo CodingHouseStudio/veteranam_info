@@ -8,169 +8,190 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:firebase_auth/firebase_auth.dart' as _i6;
-import 'package:get_it/get_it.dart' as _i1;
-import 'package:google_sign_in/google_sign_in.dart' as _i7;
-import 'package:injectable/injectable.dart' as _i2;
+import 'package:firebase_auth/firebase_auth.dart' as _i59;
+import 'package:get_it/get_it.dart' as _i174;
+import 'package:google_sign_in/google_sign_in.dart' as _i116;
+import 'package:injectable/injectable.dart' as _i526;
 import 'package:veteranam/components/discount_card/bloc/discount_card_watcher_bloc.dart'
-    as _i25;
+    as _i334;
 import 'package:veteranam/components/discounts/bloc/link/discount_link_cubit.dart'
-    as _i23;
+    as _i227;
 import 'package:veteranam/components/discounts/bloc/link/discount_link_form_bloc.dart'
-    as _i24;
+    as _i372;
 import 'package:veteranam/components/discounts/bloc/watcher/discount_watcher_bloc.dart'
-    as _i26;
+    as _i1006;
 import 'package:veteranam/components/employee_respond/bloc/employee_respond_bloc.dart'
-    as _i34;
-import 'package:veteranam/components/feedback/bloc/feedback_bloc.dart' as _i28;
-import 'package:veteranam/components/home/bloc/home_watcher_bloc.dart' as _i21;
+    as _i675;
+import 'package:veteranam/components/feedback/bloc/feedback_bloc.dart'
+    as _i1026;
+import 'package:veteranam/components/home/bloc/home_watcher_bloc.dart' as _i522;
 import 'package:veteranam/components/information/bloc/information_watcher_bloc.dart'
-    as _i31;
+    as _i408;
 import 'package:veteranam/components/investors/bloc/investors_watcher_bloc.dart'
-    as _i27;
-import 'package:veteranam/components/login/bloc/login_bloc.dart' as _i30;
+    as _i609;
+import 'package:veteranam/components/login/bloc/login_bloc.dart' as _i1025;
 import 'package:veteranam/components/my_discounts/bloc/my_discounts_watcher_bloc.dart'
-    as _i35;
+    as _i1032;
 import 'package:veteranam/components/my_story/bloc/my_story_watcher_bloc.dart'
-    as _i32;
+    as _i922;
 import 'package:veteranam/components/news_card/bloc/news_card_watcher_bloc.dart'
-    as _i22;
-import 'package:veteranam/components/sign_up/bloc/sign_up_bloc.dart' as _i17;
+    as _i688;
+import 'package:veteranam/components/sign_up/bloc/sign_up_bloc.dart' as _i785;
 import 'package:veteranam/components/story/bloc/story_watcher_bloc.dart'
-    as _i20;
+    as _i763;
 import 'package:veteranam/components/story_add/bloc/story_add_bloc.dart'
-    as _i33;
+    as _i716;
 import 'package:veteranam/components/work_employee/bloc/work_employee_watcher_bloc.dart'
-    as _i36;
+    as _i557;
 import 'package:veteranam/shared/bloc/authentication/authentication_bloc.dart'
-    as _i38;
+    as _i570;
 import 'package:veteranam/shared/bloc/authentication_services/authentication_services_cubit.dart'
-    as _i37;
-import 'package:veteranam/shared/bloc/report/report_bloc.dart' as _i39;
-import 'package:veteranam/shared/data_provider/cache_provider.dart' as _i3;
-import 'package:veteranam/shared/data_provider/firestore_provider.dart' as _i4;
-import 'package:veteranam/shared/data_provider/storage_provider.dart' as _i5;
+    as _i209;
+import 'package:veteranam/shared/bloc/report/report_bloc.dart' as _i765;
+import 'package:veteranam/shared/data_provider/cache_provider.dart' as _i37;
+import 'package:veteranam/shared/data_provider/firestore_provider.dart'
+    as _i1033;
+import 'package:veteranam/shared/data_provider/storage_provider.dart' as _i99;
 import 'package:veteranam/shared/repositories/app_authentication_repository.dart'
-    as _i14;
+    as _i99;
 import 'package:veteranam/shared/repositories/authentication_repository.dart'
-    as _i29;
-import 'package:veteranam/shared/repositories/discount_repository.dart' as _i9;
-import 'package:veteranam/shared/repositories/feedback_repository.dart' as _i10;
-import 'package:veteranam/shared/repositories/firebase_module.dart' as _i40;
-import 'package:veteranam/shared/repositories/home_repository.dart' as _i13;
+    as _i208;
+import 'package:veteranam/shared/repositories/discount_repository.dart'
+    as _i452;
+import 'package:veteranam/shared/repositories/feedback_repository.dart'
+    as _i361;
+import 'package:veteranam/shared/repositories/firebase_module.dart' as _i926;
+import 'package:veteranam/shared/repositories/home_repository.dart' as _i713;
 import 'package:veteranam/shared/repositories/information_repository.dart'
-    as _i18;
+    as _i154;
 import 'package:veteranam/shared/repositories/investors_repository.dart'
-    as _i12;
-import 'package:veteranam/shared/repositories/report_repository.dart' as _i19;
+    as _i994;
+import 'package:veteranam/shared/repositories/report_repository.dart' as _i205;
 import 'package:veteranam/shared/repositories/secure_storage_repository.dart'
-    as _i11;
-import 'package:veteranam/shared/repositories/story_repository.dart' as _i15;
-import 'package:veteranam/shared/repositories/work_repository.dart' as _i16;
-import 'package:veteranam/shared/shared.dart' as _i8;
+    as _i949;
+import 'package:veteranam/shared/repositories/story_repository.dart' as _i801;
+import 'package:veteranam/shared/repositories/work_repository.dart' as _i76;
+import 'package:veteranam/shared/shared.dart' as _i1001;
 
-extension GetItInjectableX on _i1.GetIt {
+extension GetItInjectableX on _i174.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
-  _i1.GetIt init({
+  _i174.GetIt init({
     String? environment,
-    _i2.EnvironmentFilter? environmentFilter,
+    _i526.EnvironmentFilter? environmentFilter,
   }) {
-    final gh = _i2.GetItHelper(
+    final gh = _i526.GetItHelper(
       this,
       environment,
       environmentFilter,
     );
     final firebaseModule = _$FirebaseModule();
-    gh.factory<_i3.CacheClient>(() => _i3.CacheClient());
-    gh.singleton<_i4.FirestoreService>(() => _i4.FirestoreService());
-    gh.singleton<_i5.StorageService>(() => _i5.StorageService());
-    gh.singleton<_i6.FirebaseAuth>(() => firebaseModule.firebaseAuth);
-    gh.singleton<_i7.GoogleSignIn>(() => firebaseModule.googleSignIn);
-    gh.singleton<_i8.IDiscountRepository>(() => _i9.DiscountRepository());
-    gh.singleton<_i8.IFeedbackRepository>(() => _i10.FeedbackRepository());
-    gh.lazySingleton<_i8.IStorage>(() => _i11.SecureStorageRepository());
-    gh.singleton<_i8.IInvestorsRepository>(() => _i12.InvestorsRepository());
-    gh.singleton<_i8.IHomeRepository>(() => _i13.HomeRepository());
-    gh.singleton<_i8.IAppAuthenticationRepository>(
-        () => _i14.AppAuthenticationRepository(
-              gh<_i8.IStorage>(),
-              gh<_i6.FirebaseAuth>(),
-              gh<_i7.GoogleSignIn>(),
-              gh<_i8.CacheClient>(),
+    gh.factory<_i37.CacheClient>(() => _i37.CacheClient());
+    gh.singleton<_i1033.FirestoreService>(() => _i1033.FirestoreService());
+    gh.singleton<_i99.StorageService>(() => _i99.StorageService());
+    gh.singleton<_i59.FirebaseAuth>(() => firebaseModule.firebaseAuth);
+    gh.singleton<_i116.GoogleSignIn>(() => firebaseModule.googleSignIn);
+    gh.singleton<_i1001.IDiscountRepository>(() => _i452.DiscountRepository());
+    gh.singleton<_i1001.IFeedbackRepository>(() => _i361.FeedbackRepository());
+    gh.lazySingleton<_i1001.IStorage>(() => _i949.SecureStorageRepository());
+    gh.singleton<_i1001.IInvestorsRepository>(
+        () => _i994.InvestorsRepository());
+    gh.singleton<_i1001.IHomeRepository>(() => _i713.HomeRepository());
+    gh.singleton<_i1001.IAppAuthenticationRepository>(
+        () => _i99.AppAuthenticationRepository(
+              gh<_i1001.IStorage>(),
+              gh<_i59.FirebaseAuth>(),
+              gh<_i116.GoogleSignIn>(),
+              gh<_i1001.CacheClient>(),
             ));
-    gh.singleton<_i8.IStoryRepository>(() => _i15.StoryRepository());
-    gh.singleton<_i8.IWorkRepository>(() => _i16.WorkRepository());
-    gh.factory<_i17.SignUpBloc>(() => _i17.SignUpBloc(
-        iAppAuthenticationRepository: gh<_i8.IAppAuthenticationRepository>()));
-    gh.singleton<_i8.IInformationRepository>(
-        () => _i18.InformationRepository());
-    gh.singleton<_i8.IReportRepository>(() => _i19.ReportRepository());
-    gh.factory<_i20.StoryWatcherBloc>(() =>
-        _i20.StoryWatcherBloc(storyRepository: gh<_i8.IStoryRepository>()));
-    gh.factory<_i21.HomeWatcherBloc>(
-        () => _i21.HomeWatcherBloc(homeRepository: gh<_i8.IHomeRepository>()));
-    gh.factory<_i22.NewsCardWatcherBloc>(() => _i22.NewsCardWatcherBloc(
-        informationRepository: gh<_i8.IInformationRepository>()));
-    gh.factory<_i23.DiscountLinkCubit>(() => _i23.DiscountLinkCubit(
-          discountRepository: gh<_i8.IDiscountRepository>(),
-          appAuthenticationRepository: gh<_i8.IAppAuthenticationRepository>(),
+    gh.singleton<_i1001.IStoryRepository>(() => _i801.StoryRepository());
+    gh.singleton<_i1001.IWorkRepository>(() => _i76.WorkRepository());
+    gh.factory<_i785.SignUpBloc>(() => _i785.SignUpBloc(
+        iAppAuthenticationRepository:
+            gh<_i1001.IAppAuthenticationRepository>()));
+    gh.singleton<_i1001.IInformationRepository>(
+        () => _i154.InformationRepository());
+    gh.singleton<_i1001.IReportRepository>(() => _i205.ReportRepository());
+    gh.factory<_i763.StoryWatcherBloc>(() =>
+        _i763.StoryWatcherBloc(storyRepository: gh<_i1001.IStoryRepository>()));
+    gh.factory<_i522.HomeWatcherBloc>(() =>
+        _i522.HomeWatcherBloc(homeRepository: gh<_i1001.IHomeRepository>()));
+    gh.factory<_i688.NewsCardWatcherBloc>(() => _i688.NewsCardWatcherBloc(
+        informationRepository: gh<_i1001.IInformationRepository>()));
+    gh.factory<_i227.DiscountLinkCubit>(() => _i227.DiscountLinkCubit(
+          discountRepository: gh<_i1001.IDiscountRepository>(),
+          appAuthenticationRepository:
+              gh<_i1001.IAppAuthenticationRepository>(),
         ));
-    gh.factory<_i24.DiscountLinkFormBloc>(() => _i24.DiscountLinkFormBloc(
-          discountRepository: gh<_i8.IDiscountRepository>(),
-          appAuthenticationRepository: gh<_i8.IAppAuthenticationRepository>(),
+    gh.factory<_i372.DiscountLinkFormBloc>(() => _i372.DiscountLinkFormBloc(
+          discountRepository: gh<_i1001.IDiscountRepository>(),
+          appAuthenticationRepository:
+              gh<_i1001.IAppAuthenticationRepository>(),
         ));
-    gh.factory<_i25.DiscountCardWatcherBloc>(() => _i25.DiscountCardWatcherBloc(
-        discountRepository: gh<_i8.IDiscountRepository>()));
-    gh.factory<_i26.DiscountWatcherBloc>(() => _i26.DiscountWatcherBloc(
-          discountRepository: gh<_i8.IDiscountRepository>(),
-          reportRepository: gh<_i8.IReportRepository>(),
-          appAuthenticationRepository: gh<_i8.IAppAuthenticationRepository>(),
+    gh.factory<_i334.DiscountCardWatcherBloc>(() =>
+        _i334.DiscountCardWatcherBloc(
+            discountRepository: gh<_i1001.IDiscountRepository>()));
+    gh.factory<_i1006.DiscountWatcherBloc>(() => _i1006.DiscountWatcherBloc(
+          discountRepository: gh<_i1001.IDiscountRepository>(),
+          reportRepository: gh<_i1001.IReportRepository>(),
+          appAuthenticationRepository:
+              gh<_i1001.IAppAuthenticationRepository>(),
         ));
-    gh.factory<_i27.InvestorsWatcherBloc>(() => _i27.InvestorsWatcherBloc(
-          investorsRepository: gh<_i8.IInvestorsRepository>(),
-          reportRepository: gh<_i8.IReportRepository>(),
-          appAuthenticationRepository: gh<_i8.IAppAuthenticationRepository>(),
+    gh.factory<_i609.InvestorsWatcherBloc>(() => _i609.InvestorsWatcherBloc(
+          investorsRepository: gh<_i1001.IInvestorsRepository>(),
+          reportRepository: gh<_i1001.IReportRepository>(),
+          appAuthenticationRepository:
+              gh<_i1001.IAppAuthenticationRepository>(),
         ));
-    gh.factory<_i28.FeedbackBloc>(() => _i28.FeedbackBloc(
-          feedbackRepository: gh<_i8.IFeedbackRepository>(),
-          appAuthenticationRepository: gh<_i8.IAppAuthenticationRepository>(),
+    gh.factory<_i1026.FeedbackBloc>(() => _i1026.FeedbackBloc(
+          feedbackRepository: gh<_i1001.IFeedbackRepository>(),
+          appAuthenticationRepository:
+              gh<_i1001.IAppAuthenticationRepository>(),
         ));
-    gh.singleton<_i29.AuthenticationRepository>(() =>
-        _i29.AuthenticationRepository(gh<_i8.IAppAuthenticationRepository>()));
-    gh.factory<_i30.LoginBloc>(() => _i30.LoginBloc(
-        appAuthenticationRepository: gh<_i8.IAppAuthenticationRepository>()));
-    gh.factory<_i31.InformationWatcherBloc>(() => _i31.InformationWatcherBloc(
-          informationRepository: gh<_i8.IInformationRepository>(),
-          reportRepository: gh<_i8.IReportRepository>(),
-          appAuthenticationRepository: gh<_i8.IAppAuthenticationRepository>(),
+    gh.singleton<_i208.AuthenticationRepository>(() =>
+        _i208.AuthenticationRepository(
+            gh<_i1001.IAppAuthenticationRepository>()));
+    gh.factory<_i1025.LoginBloc>(() => _i1025.LoginBloc(
+        appAuthenticationRepository:
+            gh<_i1001.IAppAuthenticationRepository>()));
+    gh.factory<_i408.InformationWatcherBloc>(() => _i408.InformationWatcherBloc(
+          informationRepository: gh<_i1001.IInformationRepository>(),
+          reportRepository: gh<_i1001.IReportRepository>(),
+          appAuthenticationRepository:
+              gh<_i1001.IAppAuthenticationRepository>(),
         ));
-    gh.factory<_i32.MyStoryWatcherBloc>(() => _i32.MyStoryWatcherBloc(
-          storyRepository: gh<_i8.IStoryRepository>(),
-          iAppAuthenticationRepository: gh<_i8.IAppAuthenticationRepository>(),
+    gh.factory<_i922.MyStoryWatcherBloc>(() => _i922.MyStoryWatcherBloc(
+          storyRepository: gh<_i1001.IStoryRepository>(),
+          iAppAuthenticationRepository:
+              gh<_i1001.IAppAuthenticationRepository>(),
         ));
-    gh.factory<_i33.StoryAddBloc>(() => _i33.StoryAddBloc(
-          storyRepository: gh<_i8.IStoryRepository>(),
-          iAppAuthenticationRepository: gh<_i8.IAppAuthenticationRepository>(),
+    gh.factory<_i716.StoryAddBloc>(() => _i716.StoryAddBloc(
+          storyRepository: gh<_i1001.IStoryRepository>(),
+          iAppAuthenticationRepository:
+              gh<_i1001.IAppAuthenticationRepository>(),
         ));
-    gh.factory<_i34.EmployeeRespondBloc>(() => _i34.EmployeeRespondBloc(
-        employeeRespondRepository: gh<_i8.IWorkRepository>()));
-    gh.factory<_i35.MyDiscountsWatcherBloc>(() => _i35.MyDiscountsWatcherBloc(
-          discountRepository: gh<_i8.IDiscountRepository>(),
-          iAppAuthenticationRepository: gh<_i8.IAppAuthenticationRepository>(),
-        ));
-    gh.factory<_i36.WorkEmployeeWatcherBloc>(() => _i36.WorkEmployeeWatcherBloc(
-        workRepository: gh<_i8.IWorkRepository>()));
-    gh.factory<_i37.AuthenticationServicesCubit>(() =>
-        _i37.AuthenticationServicesCubit(
-            authenticationRepository: gh<_i8.AuthenticationRepository>()));
-    gh.singleton<_i38.AuthenticationBloc>(() => _i38.AuthenticationBloc(
-        authenticationRepository: gh<_i8.AuthenticationRepository>()));
-    gh.factory<_i39.ReportBloc>(() => _i39.ReportBloc(
-          reportRepository: gh<_i8.IReportRepository>(),
-          appAuthenticationRepository: gh<_i8.IAppAuthenticationRepository>(),
+    gh.factory<_i675.EmployeeRespondBloc>(() => _i675.EmployeeRespondBloc(
+        employeeRespondRepository: gh<_i1001.IWorkRepository>()));
+    gh.factory<_i1032.MyDiscountsWatcherBloc>(
+        () => _i1032.MyDiscountsWatcherBloc(
+              discountRepository: gh<_i1001.IDiscountRepository>(),
+              iAppAuthenticationRepository:
+                  gh<_i1001.IAppAuthenticationRepository>(),
+            ));
+    gh.factory<_i557.WorkEmployeeWatcherBloc>(() =>
+        _i557.WorkEmployeeWatcherBloc(
+            workRepository: gh<_i1001.IWorkRepository>()));
+    gh.factory<_i209.AuthenticationServicesCubit>(() =>
+        _i209.AuthenticationServicesCubit(
+            authenticationRepository: gh<_i1001.AuthenticationRepository>()));
+    gh.singleton<_i570.AuthenticationBloc>(() => _i570.AuthenticationBloc(
+        authenticationRepository: gh<_i1001.AuthenticationRepository>()));
+    gh.factory<_i765.ReportBloc>(() => _i765.ReportBloc(
+          reportRepository: gh<_i1001.IReportRepository>(),
+          appAuthenticationRepository:
+              gh<_i1001.IAppAuthenticationRepository>(),
         ));
     return this;
   }
 }
 
-class _$FirebaseModule extends _i40.FirebaseModule {}
+class _$FirebaseModule extends _i926.FirebaseModule {}
