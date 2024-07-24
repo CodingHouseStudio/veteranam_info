@@ -50,22 +50,12 @@ class AppLocalizations {
     return Localizations.of<AppLocalizations>(context, AppLocalizations);
   }
 
-  /// `Veteranam`
-  String get logo {
-    return Intl.message(
-      'Veteranam',
-      name: 'logo',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Login`
   String get login {
     return Intl.message(
       'Login',
       name: 'login',
-      desc: '',
+      desc: 'The button is used to go to the Login page.',
       args: [],
     );
   }
@@ -75,7 +65,7 @@ class AppLocalizations {
     return Intl.message(
       'Search...',
       name: 'search',
-      desc: '',
+      desc: 'Field used for search.',
       args: [],
     );
   }
@@ -85,7 +75,7 @@ class AppLocalizations {
     return Intl.message(
       'Hide',
       name: 'hide',
-      desc: '',
+      desc: 'The button is used to hide part of the text in the subtitle.',
       args: [],
     );
   }
@@ -95,7 +85,7 @@ class AppLocalizations {
     return Intl.message(
       'Detail',
       name: 'detail',
-      desc: '',
+      desc: 'The button is used to expand the full text in the subtitle.',
       args: [],
     );
   }
@@ -105,7 +95,7 @@ class AppLocalizations {
     return Intl.message(
       'Reset all',
       name: 'resetAll',
-      desc: '',
+      desc: 'The button is used to reset all applied filters.',
       args: [],
     );
   }
@@ -115,7 +105,7 @@ class AppLocalizations {
     return Intl.message(
       'About project',
       name: 'aboutUs',
-      desc: '',
+      desc: 'The button is used to go to the AboutUs page.',
       args: [],
     );
   }
@@ -125,7 +115,7 @@ class AppLocalizations {
     return Intl.message(
       'Stories',
       name: 'stories',
-      desc: '',
+      desc: 'The button is used to go to the Story page.',
       args: [],
     );
   }
@@ -135,7 +125,7 @@ class AppLocalizations {
     return Intl.message(
       'Discounts',
       name: 'discounts',
-      desc: '',
+      desc: 'The button is used to go to the Discounts page.',
       args: [],
     );
   }
@@ -145,7 +135,7 @@ class AppLocalizations {
     return Intl.message(
       'Profile',
       name: 'myProfile',
-      desc: '',
+      desc: 'The button is used to go to the Profile page.',
       args: [],
     );
   }
@@ -155,7 +145,7 @@ class AppLocalizations {
     return Intl.message(
       'Work',
       name: 'work',
-      desc: '',
+      desc: 'The button is used to go to the Work page.',
       args: [],
     );
   }
@@ -165,7 +155,7 @@ class AppLocalizations {
     return Intl.message(
       'Information',
       name: 'information',
-      desc: '',
+      desc: 'The button is used to go to the Information page.',
       args: [],
     );
   }
@@ -175,27 +165,7 @@ class AppLocalizations {
     return Intl.message(
       'Consultation',
       name: 'consultationOnline',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Read less`
-  String get readLess {
-    return Intl.message(
-      'Read less',
-      name: 'readLess',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Read more`
-  String get readMore {
-    return Intl.message(
-      'Read more',
-      name: 'readMore',
-      desc: '',
+      desc: 'The button is used to go to the Consultation page.',
       args: [],
     );
   }
@@ -215,17 +185,8 @@ class AppLocalizations {
     return Intl.message(
       'Email',
       name: 'email',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Nickname`
-  String get nickname {
-    return Intl.message(
-      'Nickname',
-      name: 'nickname',
-      desc: '',
+      desc:
+          'Fields used to enter email. Part of the error output if the data in the field is incorrect.',
       args: [],
     );
   }
@@ -235,7 +196,8 @@ class AppLocalizations {
     return Intl.message(
       'Anonymous',
       name: 'beAnonymous',
-      desc: '',
+      desc:
+          'If the Check widget has a checkmark, it means that the action is done anonymously.',
       args: [],
     );
   }
@@ -265,7 +227,7 @@ class AppLocalizations {
     return Intl.message(
       'Send',
       name: 'send',
-      desc: '',
+      desc: 'The button is used to send data when the form is filled out.',
       args: [],
     );
   }
@@ -275,7 +237,7 @@ class AppLocalizations {
     return Intl.message(
       'My story',
       name: 'myStory',
-      desc: '',
+      desc: 'The button used to navigate to the MyStory page.',
       args: [],
     );
   }
@@ -285,7 +247,7 @@ class AppLocalizations {
     return Intl.message(
       'Saved',
       name: 'saved',
-      desc: '',
+      desc: 'The button used to navigate to the Saves page.',
       args: [],
     );
   }
@@ -315,7 +277,7 @@ class AppLocalizations {
     return Intl.message(
       'First name',
       name: 'writeYouName',
-      desc: '',
+      desc: 'Field used to enter a first name.',
       args: [],
     );
   }
@@ -325,7 +287,7 @@ class AppLocalizations {
     return Intl.message(
       'Last name',
       name: 'writeYouLastName',
-      desc: '',
+      desc: 'Field used to enter the Last Name.',
       args: [],
     );
   }
@@ -335,7 +297,7 @@ class AppLocalizations {
     return Intl.message(
       'Save',
       name: 'saveChanges',
-      desc: '',
+      desc: 'Button used to save changes to the profile subtitle.',
       args: [],
     );
   }
@@ -345,7 +307,7 @@ class AppLocalizations {
     return Intl.message(
       'Edit',
       name: 'editData',
-      desc: '',
+      desc: 'The button is used to edit the profile subtitle.',
       args: [],
     );
   }
@@ -370,22 +332,12 @@ class AppLocalizations {
     );
   }
 
-  /// `Key`
-  String get key {
-    return Intl.message(
-      'Key',
-      name: 'key',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `No data found, click to add test data once`
   String get getMockData {
     return Intl.message(
       'No data found, click to add test data once',
       name: 'getMockData',
-      desc: '',
+      desc: 'The button is used to add test data to Firebase.',
       args: [],
     );
   }
@@ -395,7 +347,7 @@ class AppLocalizations {
     return Intl.message(
       'Investors',
       name: 'investors',
-      desc: '',
+      desc: 'The button is used to go to the Investors page.',
       args: [],
     );
   }
@@ -410,42 +362,12 @@ class AppLocalizations {
     );
   }
 
-  /// `Message`
-  String get message {
-    return Intl.message(
-      'Message',
-      name: 'message',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Email`
   String get writeYourEmail {
     return Intl.message(
       'Email',
       name: 'writeYourEmail',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `text`
-  String get text {
-    return Intl.message(
-      'text',
-      name: 'text',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Suggestions`
-  String get writeYourSuggenstions {
-    return Intl.message(
-      'Suggestions',
-      name: 'writeYourSuggenstions',
-      desc: '',
+      desc: 'Field used to enter email.',
       args: [],
     );
   }
@@ -475,17 +397,7 @@ class AppLocalizations {
     return Intl.message(
       'Message',
       name: 'writeYourMessage',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Hello, Veteran!`
-  String get helloVeteran {
-    return Intl.message(
-      'Hello, Veteran!',
-      name: 'helloVeteran',
-      desc: '',
+      desc: 'Field used to enter a message.',
       args: [],
     );
   }
@@ -500,22 +412,12 @@ class AppLocalizations {
     );
   }
 
-  /// `Thank you for your submission`
-  String get feedbackSaveMessage {
-    return Intl.message(
-      'Thank you for your submission',
-      name: 'feedbackSaveMessage',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Clear`
   String get clear {
     return Intl.message(
       'Clear',
       name: 'clear',
-      desc: '',
+      desc: 'The button is used to clear all fields of the form.',
       args: [],
     );
   }
@@ -541,10 +443,10 @@ class AppLocalizations {
   }
 
   /// `too short`
-  String get tooShortEmail {
+  String get tooShortEmailPassword {
     return Intl.message(
       'too short',
-      name: 'tooShortEmail',
+      name: 'tooShortEmailPassword',
       desc: '',
       args: [],
     );
@@ -575,7 +477,7 @@ class AppLocalizations {
     return Intl.message(
       ' Log out',
       name: 'logOut',
-      desc: '',
+      desc: 'Button used to log out of the account.',
       args: [],
     );
   }
@@ -585,7 +487,7 @@ class AppLocalizations {
     return Intl.message(
       'Delete account',
       name: 'deleteAccount',
-      desc: '',
+      desc: 'Button used to delete an account.',
       args: [],
     );
   }
@@ -595,7 +497,7 @@ class AppLocalizations {
     return Intl.message(
       'Sign up',
       name: 'signUp',
-      desc: '',
+      desc: 'The button used to go to the SignUp page.',
       args: [],
     );
   }
@@ -615,7 +517,7 @@ class AppLocalizations {
     return Intl.message(
       'Register',
       name: 'register',
-      desc: '',
+      desc: 'The button is used to proceed to account registration.',
       args: [],
     );
   }
@@ -665,7 +567,7 @@ class AppLocalizations {
     return Intl.message(
       'Google',
       name: 'google',
-      desc: '',
+      desc: 'Button used to sign up/login with google.',
       args: [],
     );
   }
@@ -675,7 +577,7 @@ class AppLocalizations {
     return Intl.message(
       'Facebook',
       name: 'facebook',
-      desc: '',
+      desc: 'Button used to sign up/login with facebook.',
       args: [],
     );
   }
@@ -685,17 +587,7 @@ class AppLocalizations {
     return Intl.message(
       'Apple',
       name: 'apple',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `too short`
-  String get tooShortPassword {
-    return Intl.message(
-      'too short',
-      name: 'tooShortPassword',
-      desc: '',
+      desc: 'Button used to sign up/login with apple.',
       args: [],
     );
   }
@@ -715,7 +607,7 @@ class AppLocalizations {
     return Intl.message(
       'Create a secure password',
       name: 'createSecurePassword',
-      desc: '',
+      desc: 'Field used to enter a password.',
       args: [],
     );
   }
@@ -755,7 +647,7 @@ class AppLocalizations {
     return Intl.message(
       'More news',
       name: 'moreNews',
-      desc: '',
+      desc: 'Button used to load new news items on the computer version.',
       args: [],
     );
   }
@@ -765,17 +657,7 @@ class AppLocalizations {
     return Intl.message(
       'Support',
       name: 'support',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Funds`
-  String get funds {
-    return Intl.message(
-      'Funds',
-      name: 'funds',
-      desc: '',
+      desc: 'The button is used to go to the fund\'s website.',
       args: [],
     );
   }
@@ -815,7 +697,7 @@ class AppLocalizations {
     return Intl.message(
       'Send more',
       name: 'sendMore',
-      desc: '',
+      desc: 'The button is used to allow the user to send the message again.',
       args: [],
     );
   }
@@ -845,17 +727,8 @@ class AppLocalizations {
     return Intl.message(
       'Disconnect',
       name: 'disconnect',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `We've received your message and will respond soon.`
-  String get receivedYourMessage {
-    return Intl.message(
-      'We\'ve received your message and will respond soon.',
-      name: 'receivedYourMessage',
-      desc: '',
+      desc:
+          'The button is used to disconnect the user\'s account from: google, facebook, apple',
       args: [],
     );
   }
@@ -875,7 +748,7 @@ class AppLocalizations {
     return Intl.message(
       'Rate our site',
       name: 'rateOurSite',
-      desc: '',
+      desc: 'The form is used to rate a website.',
       args: [],
     );
   }
@@ -885,7 +758,7 @@ class AppLocalizations {
     return Intl.message(
       'Next',
       name: 'next',
-      desc: '',
+      desc: 'The button is used to move to the next field',
       args: [],
     );
   }
@@ -905,6 +778,16 @@ class AppLocalizations {
     return Intl.message(
       'Home',
       name: 'mainScreen',
+      desc: 'The button is used to go to the Home page.',
+      args: [],
+    );
+  }
+
+  /// `A user with this password or email exists`
+  String get dublicate {
+    return Intl.message(
+      'A user with this password or email exists',
+      name: 'dublicate',
       desc: '',
       args: [],
     );
@@ -995,7 +878,7 @@ class AppLocalizations {
     return Intl.message(
       'Looking for a job',
       name: 'lookingForJob',
-      desc: '',
+      desc: 'The button is used to go to the Employee page.',
       args: [],
     );
   }
@@ -1005,17 +888,7 @@ class AppLocalizations {
     return Intl.message(
       'Giving a job',
       name: 'givingJob',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `example@gmail.com`
-  String get emailHint {
-    return Intl.message(
-      'example@gmail.com',
-      name: 'emailHint',
-      desc: '',
+      desc: 'The button is used to go to the Employer page.',
       args: [],
     );
   }
@@ -1035,17 +908,7 @@ class AppLocalizations {
     return Intl.message(
       'More discounts',
       name: 'moreDiscounts',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `+38 099 000 00 00`
-  String get phoneNumberHint {
-    return Intl.message(
-      '+38 099 000 00 00',
-      name: 'phoneNumberHint',
-      desc: '',
+      desc: 'Button used to load news discounts on the desktop version.',
       args: [],
     );
   }
@@ -1095,7 +958,7 @@ class AppLocalizations {
     return Intl.message(
       'Cancel',
       name: 'cancel',
-      desc: '',
+      desc: 'Button used to return to the previous page.',
       args: [],
     );
   }
@@ -1105,7 +968,8 @@ class AppLocalizations {
     return Intl.message(
       'Upload',
       name: 'upload',
-      desc: '',
+      desc:
+          'The button is used to send a request and go to the Congratulations page.',
       args: [],
     );
   }
@@ -1145,7 +1009,7 @@ class AppLocalizations {
     return Intl.message(
       'Write the proposed position',
       name: 'writeProposedPosition',
-      desc: '',
+      desc: 'Field used to enter a position.',
       args: [],
     );
   }
@@ -1165,7 +1029,7 @@ class AppLocalizations {
     return Intl.message(
       'Write the salary',
       name: 'writeTheWage',
-      desc: '',
+      desc: 'Field used to enter a salary.',
       args: [],
     );
   }
@@ -1185,7 +1049,7 @@ class AppLocalizations {
     return Intl.message(
       'Select a city',
       name: 'selectCity',
-      desc: '',
+      desc: 'Field used to select or enter a city.',
       args: [],
     );
   }
@@ -1195,7 +1059,7 @@ class AppLocalizations {
     return Intl.message(
       'Contacts',
       name: 'contacts',
-      desc: '',
+      desc: 'The button is used to go to the COntact page.',
       args: [],
     );
   }
@@ -1205,7 +1069,7 @@ class AppLocalizations {
     return Intl.message(
       'Write how to contact you',
       name: 'howToContactYou',
-      desc: '',
+      desc: 'Field used to enter contacts.',
       args: [],
     );
   }
@@ -1225,7 +1089,7 @@ class AppLocalizations {
     return Intl.message(
       'My feedback',
       name: 'myFeedback',
-      desc: '',
+      desc: 'The button used to go to the MyFeedback page.',
       args: [],
     );
   }
@@ -1255,7 +1119,7 @@ class AppLocalizations {
     return Intl.message(
       'Leave a request',
       name: 'leaveRequest',
-      desc: '',
+      desc: 'Button used to go to the Request page.',
       args: [],
     );
   }
@@ -1285,7 +1149,7 @@ class AppLocalizations {
     return Intl.message(
       'Write your story',
       name: 'writeYourStory',
-      desc: '',
+      desc: 'Field used to enter a story.',
       args: [],
     );
   }
@@ -1295,7 +1159,8 @@ class AppLocalizations {
     return Intl.message(
       'More stories',
       name: 'moreStories',
-      desc: '',
+      desc:
+          'The button is used to download the discounted stories on the desktop version.',
       args: [],
     );
   }
@@ -1305,7 +1170,7 @@ class AppLocalizations {
     return Intl.message(
       'Add your story',
       name: 'addYourStory',
-      desc: '',
+      desc: 'The button used to go to the AddStory page.',
       args: [],
     );
   }
@@ -1395,7 +1260,7 @@ class AppLocalizations {
     return Intl.message(
       'Publish',
       name: 'publish',
-      desc: '',
+      desc: 'The button is used to publish a story and go to the Story page.',
       args: [],
     );
   }
@@ -1435,7 +1300,8 @@ class AppLocalizations {
     return Intl.message(
       'Yes',
       name: 'yes',
-      desc: '',
+      desc:
+          'The button is used to confirm logging out/deleting an account and going to the Home page.',
       args: [],
     );
   }
@@ -1445,7 +1311,8 @@ class AppLocalizations {
     return Intl.message(
       'No',
       name: 'no',
-      desc: '',
+      desc:
+          'The button is used to refuse to log out/delete the account and go to the Home page.',
       args: [],
     );
   }
@@ -1455,7 +1322,7 @@ class AppLocalizations {
     return Intl.message(
       'Previous',
       name: 'previous',
-      desc: '',
+      desc: 'The button is used to go to the previous page with works.',
       args: [],
     );
   }
@@ -1465,36 +1332,6 @@ class AppLocalizations {
     return Intl.message(
       'In this section you can manage your stories.',
       name: 'myStoryDetails',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `This page is under construction.`
-  String get underConstruction {
-    return Intl.message(
-      'This page is under construction.',
-      name: 'underConstruction',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Hello`
-  String get hello {
-    return Intl.message(
-      'Hello',
-      name: 'hello',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Here you can find useful discounts`
-  String get thisServiceForVeteransSubtitle {
-    return Intl.message(
-      'Here you can find useful discounts',
-      name: 'thisServiceForVeteransSubtitle',
       desc: '',
       args: [],
     );
@@ -1555,7 +1392,7 @@ class AppLocalizations {
     return Intl.message(
       'To Discounts',
       name: 'toDiscount',
-      desc: '',
+      desc: 'The button used to go to the Discounts page.',
       args: [],
     );
   }
@@ -1595,7 +1432,7 @@ class AppLocalizations {
     return Intl.message(
       'To information',
       name: 'toInfomation',
-      desc: '',
+      desc: 'Button used to go to the Information page.',
       args: [],
     );
   }
@@ -1635,7 +1472,7 @@ class AppLocalizations {
     return Intl.message(
       'Write message',
       name: 'writeMessage',
-      desc: '',
+      desc: 'The button is used to go to the Feedback page.',
       args: [],
     );
   }
@@ -1665,7 +1502,7 @@ class AppLocalizations {
     return Intl.message(
       'Privacy policy',
       name: 'privacyPolicy',
-      desc: '',
+      desc: 'Button used to open the PrivacyPolicy dialogue.',
       args: [],
     );
   }
@@ -1685,7 +1522,7 @@ class AppLocalizations {
     return Intl.message(
       'Contact',
       name: 'contact',
-      desc: '',
+      desc: 'The button is used to go to the Contact page.',
       args: [],
     );
   }
@@ -1715,7 +1552,7 @@ class AppLocalizations {
     return Intl.message(
       'To vacancies',
       name: 'toVacancy',
-      desc: '',
+      desc: 'Button used to go to the Work page.',
       args: [],
     );
   }
@@ -1795,7 +1632,7 @@ class AppLocalizations {
     return Intl.message(
       'Send message',
       name: 'sendMessage',
-      desc: '',
+      desc: 'The button is used to send data when the form is filled out.',
       args: [],
     );
   }
@@ -1835,7 +1672,7 @@ class AppLocalizations {
     return Intl.message(
       'SUPPORT\nVETERANS',
       name: 'supportVeterans',
-      desc: '',
+      desc: 'Button used to navigate to the Investors page.',
       args: [],
     );
   }
@@ -1845,7 +1682,7 @@ class AppLocalizations {
     return Intl.message(
       'HAVE\nQUESTIONS?',
       name: 'haveQuestions',
-      desc: '',
+      desc: 'The button is used to go to the Contact page.',
       args: [],
     );
   }
@@ -1875,7 +1712,7 @@ class AppLocalizations {
     return Intl.message(
       'Try it again',
       name: 'tryItAgain',
-      desc: '',
+      desc: 'The button is used to go to the Home page.',
       args: [],
     );
   }
@@ -1905,7 +1742,7 @@ class AppLocalizations {
     return Intl.message(
       'More funds',
       name: 'moreFunds',
-      desc: '',
+      desc: 'The button is used to load funds on the computer version.',
       args: [],
     );
   }
@@ -1915,7 +1752,7 @@ class AppLocalizations {
     return Intl.message(
       'Offer a discount',
       name: 'offerDiscount',
-      desc: '',
+      desc: 'The button is used to go to the MyDiscounts page.',
       args: [],
     );
   }
@@ -1945,7 +1782,7 @@ class AppLocalizations {
     return Intl.message(
       'Deactivate',
       name: 'deactivate',
-      desc: '',
+      desc: 'The button is used to deactivate a discount created by the user.',
       args: [],
     );
   }
@@ -1956,6 +1793,17 @@ class AppLocalizations {
       'Statistics',
       name: 'statistics',
       desc: '',
+      args: [],
+    );
+  }
+
+  /// `Advanced filter`
+  String get advancedFilter {
+    return Intl.message(
+      'Advanced filter',
+      name: 'advancedFilter',
+      desc:
+          'The button is used to open an AdvancedFilter or open a dialogue with it.',
       args: [],
     );
   }
@@ -1975,16 +1823,6 @@ class AppLocalizations {
     return Intl.message(
       'for veterans and their families',
       name: 'forVeteransAndTheirFamilies',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Advanced filter`
-  String get advancedFilter {
-    return Intl.message(
-      'Advanced filter',
-      name: 'advancedFilter',
       desc: '',
       args: [],
     );
@@ -2015,7 +1853,8 @@ class AppLocalizations {
     return Intl.message(
       'From the largest to the smallest',
       name: 'fromLargestToSmallest',
-      desc: '',
+      desc:
+          'The button is used to apply and deactivate a filter by discount value.',
       args: [],
     );
   }
@@ -2025,7 +1864,8 @@ class AppLocalizations {
     return Intl.message(
       'Free',
       name: 'free',
-      desc: '',
+      desc:
+          'The button is used to apply and deactivate a filter where the discount is 100%.',
       args: [],
     );
   }
@@ -2035,7 +1875,8 @@ class AppLocalizations {
     return Intl.message(
       'All establishments of the chain',
       name: 'allStoresOfChain',
-      desc: '',
+      desc:
+          'The button is used to apply and deactivate a filter where a discount is applied in many cities.',
       args: [],
     );
   }
@@ -2045,7 +1886,7 @@ class AppLocalizations {
     return Intl.message(
       'All',
       name: 'all',
-      desc: '',
+      desc: 'The button is used to deactivate category filtering.',
       args: [],
     );
   }
@@ -2055,7 +1896,7 @@ class AppLocalizations {
     return Intl.message(
       'Complaint',
       name: 'complaint',
-      desc: '',
+      desc: 'The button is used to open the Report dialog.',
       args: [],
     );
   }
@@ -2085,7 +1926,7 @@ class AppLocalizations {
     return Intl.message(
       'Fraud or spam;',
       name: 'fraudOrSpam',
-      desc: '',
+      desc: 'The button is used to select the type of complaint.',
       args: [],
     );
   }
@@ -2095,7 +1936,7 @@ class AppLocalizations {
     return Intl.message(
       'Fake news or disinformation;',
       name: 'fakeNewsOrDisinformation',
-      desc: '',
+      desc: 'The button is used to select the type of complaint.',
       args: [],
     );
   }
@@ -2105,7 +1946,7 @@ class AppLocalizations {
     return Intl.message(
       'Offensive or hateful content;',
       name: 'offensiveOrHatefulContent',
-      desc: '',
+      desc: 'The button is used to select the type of complaint.',
       args: [],
     );
   }
@@ -2115,7 +1956,7 @@ class AppLocalizations {
     return Intl.message(
       'Other (specify)',
       name: 'other',
-      desc: '',
+      desc: 'The button is used to select the type of complaint.',
       args: [],
     );
   }
@@ -2165,7 +2006,7 @@ class AppLocalizations {
     return Intl.message(
       'Return to the top',
       name: 'returnToTop',
-      desc: '',
+      desc: 'Button used to return to the previous top of the page.',
       args: [],
     );
   }
@@ -2195,7 +2036,7 @@ class AppLocalizations {
     return Intl.message(
       'FIND YOUR DISCOUNT',
       name: 'findYourDiscount',
-      desc: '',
+      desc: 'Button used to navigate to the Disocunt page.',
       args: [],
     );
   }
@@ -2205,7 +2046,7 @@ class AppLocalizations {
     return Intl.message(
       'Close',
       name: 'close',
-      desc: '',
+      desc: 'Button used to navigate to the Disocunt page.',
       args: [],
     );
   }
@@ -2332,32 +2173,12 @@ class AppLocalizations {
     );
   }
 
-  /// `More`
-  String get more {
-    return Intl.message(
-      'More',
-      name: 'more',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Useful`
   String get useful {
     return Intl.message(
       'Useful',
       name: 'useful',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Website`
-  String get website {
-    return Intl.message(
-      'Website',
-      name: 'website',
-      desc: '',
+      desc: 'The button is used to add a like to a card.',
       args: [],
     );
   }
@@ -2367,7 +2188,7 @@ class AppLocalizations {
     return Intl.message(
       'Share',
       name: 'share',
-      desc: '',
+      desc: 'The button is used to share the card data.',
       args: [],
     );
   }
@@ -2377,7 +2198,7 @@ class AppLocalizations {
     return Intl.message(
       'Save',
       name: 'save',
-      desc: '',
+      desc: 'The button is used to save the card in the save.',
       args: [],
     );
   }
@@ -2387,17 +2208,8 @@ class AppLocalizations {
     return Intl.message(
       'Web site',
       name: 'webSite',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Report`
-  String get report {
-    return Intl.message(
-      'Report',
-      name: 'report',
-      desc: '',
+      desc:
+          'The button is used to go to the website that is attached to the card.',
       args: [],
     );
   }
