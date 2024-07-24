@@ -241,11 +241,10 @@ class DiscountCardWidget extends StatelessWidget {
           ],
         ),
       );
-  String getText(BuildContext context) => '**${discountItem.description}**\n'
+  String getText(BuildContext context) => '${discountItem.description}\n'
               '\n***${context.l10n.toGetItYouNeed}***\n'
-              '\n- ${discountItem.requirements.replaceAll('-', '  -')}'
-              '\n'
-              '\n${discountItem.exclusions.replaceAll('-', '  -')}\n'
+              '\n- ${discountItem.requirements.replaceAll('-', '  -')}\n'
+              '\n${discountItem.exclusions}\n'
               // ignore: lines_longer_than_80_chars
               '${discountItem.additionalDetails != null ? '\n${discountItem.additionalDetails ?? ''}\n' : ''}'
               '\n***${context.l10n.callForDetails}:***'

@@ -356,6 +356,18 @@ abstract class KTestText {
     resume: resumeModel,
     noResume: false,
   );
+  static final linkModel = LinkModel(
+    id: id,
+    userId: user.id,
+    link: 'https://veteranam.info/',
+    date: dateTime,
+  );
+  static final linkModelWrong = LinkModel(
+    id: id,
+    userId: user.id,
+    link: 'https://veteranam.info/$field',
+    date: dateTime,
+  );
 }
 
 abstract class KTestConstants {
