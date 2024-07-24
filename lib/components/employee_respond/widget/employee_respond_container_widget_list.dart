@@ -25,7 +25,7 @@ List<Widget> _employeeRespondContainerWidgetList({
       onChanged: (value) => context.read<EmployeeRespondBloc>().add(
             EmployeeRespondEvent.emailUpdated(value),
           ),
-      hintText: context.l10n.emailHint,
+      hintText: KAppText.exampleEmail,
       isDesk: isDesk,
       errorText: context.read<EmployeeRespondBloc>().state.formState ==
               EmployeeRespondEnum.invalidData
@@ -47,7 +47,7 @@ List<Widget> _employeeRespondContainerWidgetList({
       onChanged: (value) => context.read<EmployeeRespondBloc>().add(
             EmployeeRespondEvent.phoneUpdated(value),
           ),
-      hintText: context.l10n.phoneNumberHint,
+      hintText: KAppText.examplePhone,
       isDesk: isDesk,
       errorText: context.read<EmployeeRespondBloc>().state.formState ==
               EmployeeRespondEnum.invalidData

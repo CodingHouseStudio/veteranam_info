@@ -101,7 +101,7 @@ class _NawbarWidgetImplematationState
                 IconButton(
                   padding: EdgeInsets.zero,
                   onPressed: () => EasyDebounce.debounce(
-                    context.l10n.logo,
+                    KAppText.logo,
                     Duration.zero,
                     () => context.goNamedWithScroll(KRoute.home.name),
                   ),

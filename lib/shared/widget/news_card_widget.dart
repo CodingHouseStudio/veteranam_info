@@ -25,7 +25,7 @@ class NewsCardWidget extends StatelessWidget {
       image: informationItem.image,
       text: informationItem.news,
       buttonText: [
-        context.l10n.more,
+        context.l10n.detail,
         context.l10n.hide,
       ],
       onShare: () async => Share.share(

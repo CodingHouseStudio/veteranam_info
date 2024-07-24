@@ -16,7 +16,7 @@ extension PasswordFieldModelValidationErrorEmpl
       case PasswordFieldModelValidationError.empty:
         return context.l10n.fieldCannotBeEmpty;
       case PasswordFieldModelValidationError.invalidLength:
-        return '${context.l10n.password} ${context.l10n.tooShortPassword}';
+        return '${context.l10n.password} ${context.l10n.tooShortEmailPassword}';
       case null:
         return null;
       case PasswordFieldModelValidationError.capitalLetter:
