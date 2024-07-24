@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get_it/get_it.dart';
 import 'package:veteranam/shared/shared.dart';
 
@@ -37,14 +36,9 @@ class AppWidget extends StatelessWidget {
           key: KWidgetkeys.screen.app.screen,
           theme: themeData,
           scrollBehavior: CustomScrollBehavior(),
-          localizationsDelegates: const [
-            locale,
-            GlobalCupertinoLocalizations.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-          ],
+          localizationsDelegates: locale,
           locale: _.userSetting.locale.value,
-          supportedLocales: locale.supportedLocales,
+          supportedLocales: supportedLocales,
           routerConfig: router,
         );
       },
