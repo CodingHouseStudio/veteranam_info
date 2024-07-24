@@ -1,231 +1,912 @@
 {
   "@@locale": "en",
-  "logo": "Veteranam",
   "login": "Login",
+  "@login": {
+    "examples": "Text for the button that is located in the NawBar.",
+    "description": "The button is used to go to the Login page."
+  },
   "search": "Search...",
+  "@search": {
+    "examples": "Text for the text field that is located in the NawBar.",
+    "description": "Field used for search."
+  },
   "hide": "Hide",
+  "@hide": {
+    "examples": "Text for the button that is found on cards (discounts, news, stories, work).",
+    "description": "The button is used to hide part of the text in the subtitle."
+  },
   "detail": "Detail",
+  "@detail": {
+    "examples": "Text for a button that is found on cards (discounts, news, stories, work).",
+    "description": "The button is used to expand the full text in the subtitle."
+  },
   "resetAll": "Reset all",
+  "@resetAll": {
+    "examples": "Text for the button that appears in the message when no cards are found using the specified filters and in the advanced filter on the Discounts page.",
+    "description": "The button is used to reset all applied filters."
+  },
   "aboutUs": "About project",
+  "@aboutUs": {
+    "examples": "Text for the button that is in the Footer.",
+    "description": "The button is used to go to the AboutUs page."
+  },
   "stories": "Stories",
+  "@stories": {
+    "examples": "Text for the button that is in the Footer and on the Home page on one of the Box widgets.",
+    "description": "The button is used to go to the Story page."
+  },
   "discounts": "Discounts",
+  "@discounts": {
+    "examples": "Text for the button that is in the Footer and on the Home page on one of the Box widgets.",
+    "description": "The button is used to go to the Discounts page."
+  },
   "myProfile": "Profile",
+  "@myProfile": {
+    "examples": "Text for the button that is in the Footer.",
+    "description": "The button is used to go to the Profile page."
+  },
   "work": "Work",
+  "@work": {
+    "examples": "Text for a button that is located in the Footer and on the Home page on one of the Box widgets.",
+    "description": "The button is used to go to the Work page."
+  },
   "information": "Information",
+  "@information": {
+    "examples": "Text for the button that is located in the Footer and on the Home page on one of the Box widgets.",
+    "description": "The button is used to go to the Information page."
+  },
   "consultationOnline": "Consultation",
-  "readLess": "Read less",
-  "readMore": "Read more",
+  "@consultationOnline": {
+    "examples": "Text for the button that is in the Footer.",
+    "description": "The button is used to go to the Consultation page."
+  },
   "respond": "Respond",
+  "@response": {
+    "examples": "Text for the button that is on the job card.",
+    "description": "The button is used to go to the Respond page."
+  },
   "email": "Email",
-  "nickname": "Nickname",
+  "@email": {
+    "examples": "Text for fields and error output in them.",
+    "description": "Fields used to enter email. Part of the error output if the data in the field is incorrect."
+  },
   "beAnonymous": "Anonymous",
+  "@beAnonymous": {
+    "examples": "Text that is displayed next to some Check widgets.",
+    "description": "If the Check widget has a checkmark, it means that the action is done anonymously."
+  },
   "errorTitle": "Error",
+  "@errorTitle": {
+    "examples": "Title for the Error page"
+  },
   "errorMessage": "An error occurred while loading the page",
+  "@errorMessage": {
+    "examples": "Error page message"
+  },
   "send": "Send",
+  "@send": {
+    "examples": "Text for the button that appears on the Respond page and in the Report dialog.",
+    "description": "The button is used to send data when the form is filled out."
+  },
   "myStory": "My story",
+  "@myStory": {
+    "examples": "Text for the button that appears on the Profile page and the title for the MyStory page.",
+    "description": "The button used to navigate to the MyStory page."
+  },
   "saved": "Saved",
+  "@saved": {
+    "examples": "Text for the button that appears on the Profile page and the title for the Saves page.",
+    "description": "The button used to navigate to the Saves page."
+  },
   "profileDetails": "You can add/edit personal information, manage anonymous setting, and find your saved content.",
+  "@profileDetails": {
+    "examples": "Profile page subtitle text"
+  },
   "beAnonymousDetails": "If you make your profile anonymous, your page will not display personal information, only your nickname.",
+  "@beAnonymousDetails": {
+    "examples": "Description text for the anonymity toggle on the Profile page"
+  },
   "writeYouName": "First name",
+  "@writeYouName": {
+    "examples": "Text for a field on the Profile page.",
+    "description": "Field used to enter a first name."
+  },
   "writeYouLastName": "Last name",
+  "@writeYouLastName": {
+    "examples": "Text for a field on the Profile page.",
+    "description": "Field used to enter the Last Name."
+  },
   "saveChanges": "Save",
+  "@saveChanges": {
+    "examples": "Text for the button on the Profile page.",
+    "description": "Button used to save changes to the profile subtitle."
+  },
   "editData": "Edit",
+  "@editData": {
+    "examples": "Text for the button on the Profile page.",
+    "description": "The button is used to edit the profile subtitle."
+  },
   "name": "Name",
+  "@name": {
+    "examples": "Text above the first name entry field on the Profile page."
+  },
   "lastName": "Last name",
-  "key": "Key",
+  "@lastName": {
+    "examples": "Text above the last name entry field on the Profile page."
+  },
   "getMockData": "No data found, click to add test data once",
+  "@getMockData": {
+    "examples": "Text for the button on the pages where certain data is loaded from Firebase.",
+    "description": "The button is used to add test data to Firebase."
+  },
   "investors": "Investors",
+  "@investors": {
+    "examples": "Text for the button that is in the Footer and on the Home page on one of the Box widgets.",
+    "description": "The button is used to go to the Investors page."
+  },
   "investorsSubtitle": "Support veterans and their families. Business owners, offer discounts or personalized offers for veterans. Contact us to discuss details.",
-  "message": "Message",
+  "@investorsSubtitle": {
+    "examples": "Text to subtitle the Investors page"
+  },
   "writeYourEmail": "Email",
-  "text": "text",
-  "writeYourSuggenstions": "Suggestions",
+  "@writeYourEmail": {
+    "examples": "Text for the field on the Login, SignUp pages.",
+    "description": "Field used to enter email."
+  },
   "feedback": "Feedback",
+  "@feedback": {
+    "examples": "Feedback page name."
+  },
   "feedbackSubtitle": "Can't find what you need? Have questions or requests? Fill out the form below. We're here to help!",
+  "@feedbackSubtitle": {
+    "examples": "Feedback page subtitle text."
+  },
   "writeYourMessage": "Message",
-  "helloVeteran": "Hello, Veteran!",
+  "@writeYourMessage": {
+    "examples": "Text for the field.",
+    "description": "Field used to enter a message."
+  },
   "homeSubtitle": "Here you can find discounts!",
-  "feedbackSaveMessage": "Thank you for your submission",
+  "@homeSubtitle": {
+    "examples": "The text of the Home page subtitle."
+  },
   "clear": "Clear",
+  "@clear": {
+    "examples": "Text for the button.",
+    "description": "The button is used to clear all fields of the form."
+  },
   "fieldCannotBeEmpty": "Field cannot be empty",
-  "tooShort": "too short",
-  "tooShortEmail": "too short",
+  "@fieldCannotBeEmpty": {
+    "examples": "Error text for the field if its value is empty."
+  },
+  "tooshort": "too short",
+  "@tooshort": {
+    "examples": "Error text for the field if its value is too short."
+  },
+  "tooShortEmailPassword": "too short",
+  "@tooShortEmailPassword": {
+    "examples": "Error text for the email and password fields if the value is too short."
+  },
   "isWrong": "has errors",
+  "@isWrong": {
+    "examples": "Error text for the field if its value is incorrect."
+  },
   "isWrongEmail": "is not properly formatted",
+  "@isWrongEmail": {
+    "examples": "Error text for the email field if its value is incorrect."
+  },
   "logOut": " Log out",
+  "@logOut": {
+    "examples": "Text for the button on the Profile page.",
+    "description": "Button used to log out of the account."
+  },
   "deleteAccount": "Delete account",
+  "@deleteAccount": {
+    "examples": "Text for the button on the Profile page.",
+    "description": "Button used to delete an account."
+  },
   "signUp": "Sign up",
+  "@signUp": {
+    "examples": "The text for the button on the Login page and the title of the SignUp page.",
+    "description": "The button used to go to the SignUp page."
+  },
   "fullEmail": "Email",
+  "@fullEmail": {
+    "examples": "The text above the email input field."
+  },
   "register": "Register",
+  "@register": {
+    "examples": "Text for the button on the SignUp page.",
+    "description": "The button is used to proceed to account registration."
+  },
   "doYouHavenAccount": "Have an account",
+  "@doYouHavenAccount": {
+    "examples": "SignUp page text."
+  },
   "donotYouHavenAccount": "Don't have an account?",
+  "@donotYouHavenAccount": {
+    "examples": "Login page text."
+  },
   "or": "or",
+  "@or": {
+    "examples": "Text on the Login and SignUp pages."
+  },
   "signUpWith": "Sign up with",
+  "@signUpWith": {
+    "examples": "Text on the SignUp page before the sign up button with google, facebook, apple."
+  },
   "google": "Google",
+  "@google": {
+    "examples": "Text for the button on the SignUp and Login page.",
+    "description": "Button used to sign up/login with google."
+  },
   "facebook": "Facebook",
+  "@facebook": {
+    "examples": "Text for the button on the SignUp and Login page.",
+    "description": "Button used to sign up/login with facebook."
+  },
   "apple": "Apple",
-  "tooShortPassword": "too short",
+  "@apple": {
+    "examples": "Text for the button on the SignUp and Login page.",
+    "description": "Button used to sign up/login with apple."
+  },
   "password": "Password",
+  "@password": {
+    "examples": "The text above the password field and part of the error."
+  },
   "createSecurePassword": "Create a secure password",
+  "@createSecurePassword": {
+    "examples": "Text for the field on the Login and SignUp pages.",
+    "description": "Field used to enter a password."
+  },
   "capitalLetter": "must contain one or more capital letter",
+  "@capitalLetter": {
+    "examples": "The error text for the password field if it does not contain any capital letters."
+  },
   "oneNumber": "must contain one or more number",
+  "@oneNumber": {
+    "examples": "Error text for the password field if it contains no digits."
+  },
   "informationSubtitle": "Find verified help information. Use filters for convenience.",
+  "@informationSubtitle": {
+    "examples": "Information page subtitle text"
+  },
   "moreNews": "More news",
+  "@moreNews": {
+    "examples": "Text for a button on the Information page.",
+    "description": "Button used to load new news items on the computer version."
+  },
   "support": "Support",
-  "funds": "Funds",
+  "@support": {
+    "examples": "Text for the button on the Funds page.",
+    "description": "The button is used to go to the fund's website."
+  },
   "fundsSubtitle": "Support veterans with deeds, not just words. Donate to these proven foundations. Every donation counts.",
+  "@fundsSubtitle": {
+    "examples": "Текст для опису сторінки Investors"
+  },
   "thankYou": "Thank you",
+  "@thankYou": {
+    "examples": "Part of the text for the title on the Home page"
+  },
   "feedbackBoxSubtitle": "We've received your message and will respond soon.",
+  "@feedbackBoxSubtitle": {
+    "examples": "The title text of the FeedbackBox widget on the Feedback page when a user submits a message."
+  },
   "sendMore": "Send more",
+  "@sendMore": {
+    "examples": "Text for the FeedbackBox widget button on the Feedback page when a user has sent a message.",
+    "description": "The button is used to allow the user to send the message again."
+  },
   "linkedAccounts": "Linked accounts",
+  "@linkedAccounts": {
+    "examples": "Text on the Profile page"
+  },
   "linkedAccountsDetails": "Your Veteran account is linked to a Facebook account.",
+  "@linkedAccountsDetails": {
+    "examples": "Text on the Profile page"
+  },
   "disconnect": "Disconnect",
-  "receivedYourMessage": "We've received your message and will respond soon.",
+  "@disconnect": {
+    "examples": "Text for the button on the Profile page.",
+    "description": "The button is used to disconnect the user's account from: google, facebook, apple"
+  },
   "logInWith": "Log in with",
+  "@logInWith": {
+    "examples": "The text on the Login page before the login button with google, facebook, apple."
+  },
   "rateOurSite": "Rate our site",
+  "@rateOurSite": {
+    "examples": "Text in the rating form.",
+    "description": "The form is used to rate a website."
+  },
   "next": "Next",
+  "@next": {
+    "examples": "Text for a button on forms where all fields are not displayed at once.",
+    "description": "The button is used to move to the next field"
+  },
   "thankYouDescription": "Please note! To access some services, you may need to confirm your identity.",
+  "@thankYouDescription": {
+    "examples": "The title text on the Thank You page."
+  },
   "mainScreen": "Home",
+  "@mainScreen": {
+    "examples": "Text for the button on the Thank you page",
+    "description": "The button is used to go to the Home page."
+  },
+  "dublicate": "A user with this password or email exists",
+  "@dublicate": {
+    "examples": "Error text for the SignUp page."
+  },
   "fillInForm": "Fill in the form",
+  "@fillInForm": {
+    "examples": "The title text on the QuestionForm page."
+  },
   "questionsFormSubtitle": "To provide the best service, please answer the following question(s):",
+  "@questionsFormSubtitle": {
+    "examples": "Text to subtitle the QuestionForm page."
+  },
   "selectAppropriateOne": "Select the appropriate one:",
+  "@selectAppropriateOne": {
+    "examples": "Text on the QuestionForm page."
+  },
   "iAmVeteran": "I am a veteran",
+  "@iAmVeteran": {
+    "examples": "Text on the QuestionForm page for selecting a role."
+  },
   "iAmRelativeOfVeteran": "Family member of a veteran",
+  "@iAmRelativeOfVeteran": {
+    "examples": "Text on the QuestionForm page for selecting a role."
+  },
   "iAmCivilian": "Civilian",
+  "@iAmCivilian": {
+    "examples": "Text on the QuestionForm page for selecting a role."
+  },
   "iAmBusinessOwnerRepresentative": "Business owner/representative, Looking to help veterans.",
+  "@iAmBusinessOwnerRepresentative": {
+    "examples": "Text on the QuestionForm page for selecting a role."
+  },
   "workSubtitle": "In this section, you will find current vacancies, and you can also leave a request to help us with your search. For your convenience, you can use filters.",
+  "@workSubtitle": {
+    "examples": "Text to subtitle the Work page."
+  },
   "lookingForJob": "Looking for a job",
+  "@lookingForJob": {
+    "examples": "Text for the button on the Work page.",
+    "description": "The button is used to go to the Employee page."
+  },
   "givingJob": "Giving a job",
-  "emailHint": "example@gmail.com",
+  "@givingJob": {
+    "examples": "Text for the button on the Work page.",
+    "description": "The button is used to go to the Employer page."
+  },
   "phoneNumber": "Phone number",
+  "@phoneNumber": {
+    "examples": "Text above the phone number entry field."
+  },
   "moreDiscounts": "More discounts",
-  "phoneNumberHint": "+38 099 000 00 00",
+  "@moreDiscounts": {
+    "examples": "Text for the button on the Discounts page.",
+    "description": "Button used to load news discounts on the desktop version."
+  },
   "discountsAndCoupons": "Discounts and coupons",
+  "@discountsAndCoupons": {
+    "examples": "The title text on the Discount page."
+  },
   "discountsAndCouponsDescription": "In this section you can find discounts and coupons from our partners. For your convenience, you can use filters.",
+  "@discountsAndCouponsDescription": {
+    "examples": "Text to subtitle the Discount page."
+  },
   "resume": "Resume",
+  "@resume": {
+    "examples": "The text above the resume field on the Respond page."
+  },
   "noResume": "I don't have a resume",
+  "@noResume": {
+    "examples": "The text on the Respond page."
+  },
   "cancel": "Cancel",
+  "@cancel": {
+    "examples": "Text for the button on the Reply page.",
+    "description": "Button used to return to the previous page."
+  },
   "upload": "Upload",
+  "@upload": {
+    "examples": "Text for the button on the Reply page.",
+    "description": "The button is used to send a request and go to the Congratulations page."
+  },
   "employerSubtitle": "In this section you can employ a veteran. If you have an open vacancy in your company, you can place an ad here.",
+  "@employerSubtitle": {
+    "examples": "Text to subtitle the Employer page."
+  },
   "mainInformation": "Main information",
+  "@mainInformation": {
+    "examples": "Text on the Empolyer page."
+  },
   "position": "Position*",
+  "@position": {
+    "examples": "The text above the position input field on the Empolyer page."
+  },
   "writeProposedPosition": "Write the proposed position",
+  "@writeProposedPosition": {
+    "examples": "Text for a field on the Empolyer page.",
+    "description": "Field used to enter a position."
+  },
   "wage": "Salary*",
+  "@wage": {
+    "examples": "The text above the wage input field on the Empolyer page."
+  },
   "writeTheWage": "Write the salary",
+  "@writeTheWage": {
+    "examples": "Text for a field on the Empolyer page.",
+    "description": "Field used to enter a salary."
+  },
   "selectCityOfWork": "Select the city of work*",
+  "@selectCityOfWork": {
+    "examples": "Text above the city of work selection field on the Empolyer page."
+  },
   "selectCity": "Select a city",
+  "@selectCity": {
+    "examples": "Text for a field on the Empolyer page.",
+    "description": "Field used to select or enter a city."
+  },
   "contacts": "Contacts",
+  "@contacts": {
+    "examples": "Text for the button that appears in the Footer and above the city selection field on the Empolyer page.",
+    "description": "The button is used to go to the COntact page."
+  },
   "howToContactYou": "Write how to contact you",
+  "@howToContactYou": {
+    "examples": "Text for a field on the Empolyer page.",
+    "description": "Field used to enter contacts."
+  },
   "remotely": "Remotely",
+  "@remotely": {
+    "examples": "Description text for the switch remotely on the Profile page"
+  },
   "myFeedback": "My feedback",
+  "@myFeedback": {
+    "examples": "Text for the button on the Profile page.",
+    "description": "The button used to go to the MyFeedback page."
+  },
   "didNotFindYourVacancy": "Didn't find your vacancy?",
+  "@didNotFindYourVacancy": {
+    "examples": "Text on the Empolyee page."
+  },
   "workRequestSubtitle": "We can help. Fill in your details and job preferences in the following form and we will send your CV to relevant companies.",
+  "@workRequestSubtitle": {
+    "examples": "Text to subtitle the Request page."
+  },
   "leaveRequest": "Leave a request",
+  "@leaveRequest": {
+    "examples": "Text for the button on the Employee page.",
+    "description": "Button used to go to the Request page."
+  },
   "savesSubtitle": "In this section, you can see all your saved materials",
+  "@savesSubtitle": {
+    "examples": "Text to subtitle the Saves page."
+  },
   "storySubtitle": "In this section, you can share your life and service stories anonymously or openly. You can also support other participants.",
+  "@storySubtitle": {
+    "examples": "Text to subtitle the Story page."
+  },
   "writeYourStory": "Write your story",
+  "@writeYourStory": {
+    "examples": "Text for a field on the AddStory page.",
+    "description": "Field used to enter a story."
+  },
   "moreStories": "More stories",
+  "@moreStories": {
+    "examples": "Text for a button on the Story page.",
+    "description": "The button is used to download the discounted stories on the desktop version."
+  },
   "addYourStory": "Add your story",
+  "@addYourStory": {
+    "examples": "Text for the button on the Story page.",
+    "description": "The button used to go to the AddStory page."
+  },
   "yourStory": "Your story",
+  "@yourStory": {
+    "examples": "Text before the story input field."
+  },
   "addPhoto": "Add Photo",
+  "@addPhoto": {
+    "examples": "Text in front of the add photo field."
+  },
   "notNecessarily": "(not necessarily)",
+  "@notNecessary": {
+    "examples": "The text before the photo add field on the AddStory page."
+  },
   "publishAnonymously": "Publish anonymously",
+  "@publishAnonymously": {
+    "examples": "Description text for the anonymity switch on the StoryAdd page"
+  },
   "anonymous": "Anonymous",
+  "@anonymous": {
+    "examples": "Text on the Story page if the story is published anonymously"
+  },
   "city": "City",
+  "@city": {
+    "examples": "Text on the Discount page for advanced filters"
+  },
   "category": "Category",
+  "@category": {
+    "examples": "Text on the Employee page"
+  },
   "publishAnonymouslyStorySubtitle": "If you post a story anonymously, readers will only be able to see your nickname in your profile.",
+  "@publishAnonymouslyStorySubtitle": {
+    "examples": "Additional subtitle text for the anonymity switch on the StoryAdd page"
+  },
   "publish": "Publish",
+  "@publish": {
+    "examples": "Text for the button on the AddStory page.",
+    "description": "The button is used to publish a story and go to the Story page."
+  },
   "storyAddSubtitle": "Share your story and we will publish it on our website. All stories are moderated and will be published after review.",
+  "@storyAddSubtitle": {
+    "examples": "Text to subtitle the AddStory page."
+  },
   "logOutQuestion": "Are you sure you want to log out of your account?",
+  "@logOutQuestion": {
+    "examples": "The text for the logout diologue on the Profile page."
+  },
   "deleteAccountQuestion": "Are you sure you want to delete your account?",
+  "@deleteAccountQuestion": {
+    "examples": "Text for the account deletion dialog on the Profile page."
+  },
   "yes": "Yes",
+  "@yes": {
+    "examples": "Text for the button for deleting and logging out of an account on the Profile page.",
+    "description": "The button is used to confirm logging out/deleting an account and going to the Home page."
+  },
   "no": "No",
+  "@no": {
+    "examples": "Text for the button for deleting and logging out of an account on the Profile page.",
+    "description": "The button is used to refuse to log out/delete the account and go to the Home page."
+  },
   "previous": "Previous",
+  "@previous": {
+    "examples": "Text for a button on the Work page.",
+    "description": "The button is used to go to the previous page with works."
+  },
   "myStoryDetails": "In this section you can manage your stories.",
-  "underConstruction": "This page is under construction.",
-  "hello": "Hello",
-  "thisServiceForVeteransSubtitle": "Here you can find useful discounts",
+  "@myStoryDetails": {
+    "examples": "Text to subtitle the MyStory page."
+  },
   "whatKindOfProject": "What kind of project it is?",
+  "@whatKindOfProject": {
+    "examples": "Text on the Home page, project subtitle title"
+  },
   "aboutProject": "An independent information platform for veterans and their families.",
+  "@aboutProject": {
+    "examples": "Text on the Home page, project subtitle"
+  },
   "saveMoney": "To save money",
+  "@saveMoney": {
+    "examples": "Text on the Home page, discount"
+  },
   "discountsServices": "Discounts",
+  "@discountsServices": {
+    "examples": "Text on the Home page, discount title"
+  },
   "discountsServicesSubtitle": "Here you will find current offers for veterans and their families that are updated monthly. Medical, service, catering, and clothing discounts are all available in this section.",
+  "@discountsServicesSubtitle": {
+    "examples": "Text on the Home page, discount subtitle"
+  },
   "toDiscount": "To Discounts",
+  "@toDiscount": {
+    "examples": "Text for a button on the Home page.",
+    "description": "The button used to go to the Discounts page."
+  },
   "findOut": "To find out",
+  "@findOut": {
+    "examples": "Text on the Home page, information"
+  },
   "informationNews": "Information and news",
+  "@informationNews": {
+    "examples": "Text on the Home page, information title"
+  },
   "informationNewsSubtitle": "All information in one place. We have analyzed various resources and highlighted the rights and benefits for veterans in this section. It contains systematized data - the most important things a veteran needs to know. In this section, you can learn more about the guarantees provided by the state to veterans.",
+  "@informationNewsSubtitle": {
+    "examples": "Text on the Home page, information subtitle"
+  },
   "toInfomation": "To information",
+  "@toInfomation": {
+    "examples": "Text for a button on the Home page.",
+    "description": "Button used to go to the Information page."
+  },
   "whatYouMostInterestedIn": "What you are most interested in",
+  "@whatYouMostInterestedIn": {
+    "examples": "Text on the Home page, Questions"
+  },
   "answersYourQuestions": "Answers to your questions",
+  "@answersYourQuestions": {
+    "examples": "Text on the Home page, question title"
+  },
   "questionSubtitle": "Didn't find what you were looking for, want to get in touch, or have questions or requests? We are happy to talk to you! Please fill out the form below.",
+  "@questionSubtitle": {
+    "examples": "Text on the Home page, question subtitle"
+  },
   "writeMessage": "Write message",
+  "@writeMessage": {
+    "examples": "Text for a button on the Home page.",
+    "description": "The button is used to go to the Feedback page."
+  },
   "doYouWantSupportOurProject": "Do you want to support our project?",
+  "@doYouWantSupportOurProject": {
+    "examples": "The text that is in the Footer."
+  },
   "allRightsReserved": "All rights reserved",
+  "@allRightsReserved": {
+    "examples": "The text that is in the Footer."
+  },
   "privacyPolicy": "Privacy policy",
+  "@privacyPolicy": {
+    "examples": "Text for the button that is in the Footer.",
+    "description": "Button used to open the PrivacyPolicy dialogue."
+  },
   "sections": "Sections",
+  "@sections": {
+    "examples": "The text that is in the Footer."
+  },
   "contact": "Contact",
+  "@contact": {
+    "examples": "Text for the button that is in the Footer.",
+    "description": "The button is used to go to the Contact page."
+  },
   "jobsVacancies": "Jobs and vacancies",
+  "@jobsVacancies": {
+    "examples": "Text on the Home page, job title"
+  },
   "jobsVacanciesSubtitle": "Information on current vacancies specifically targeted at veterans, as well as resources for job search and career development.",
+  "@jobsVacanciesSubtitle": {
+    "examples": "Text on the Home page, job description"
+  },
   "toVacancy": "To vacancies",
+  "@toVacancy": {
+    "examples": "Text for a button on the Home page.",
+    "description": "Button used to go to the Work page."
+  },
   "toGetItYouNeed": "To get it you need:",
+  "@toGetItYouNeed": {
+    "examples": "Text on the Discount page, description in the card"
+  },
   "write": "Write",
+  "@write": {
+    "examples": "The text of the title part of the Feedback page."
+  },
   "aMessage": "a message",
+  "@aMessage": {
+    "examples": "The text of the title part of the Feedback page."
+  },
   "us": "us",
+  "@us": {
+    "examples": "The text of the title part of the Feedback page."
+  },
   "preferEmail": "Prefer e-mail?",
+  "@preferEmail": {
+    "examples": "The text of the Feedback page, before the email button."
+  },
   "ourSocialNetworks": "Our social networks",
+  "@ourSocialNetworks": {
+    "examples": "The text of the Feedback page, above the social media buttons."
+  },
   "feedbackFormSubtitle": "By submitting this form, I accept the Privacy Policy of this site",
+  "@feedbackFormSubtitle": {
+    "examples": "Text to subtitle the form on the Feedback page."
+  },
   "sendMessage": "Send message",
+  "@sendMessage": {
+    "examples": "Text for the button on the Feedback page.",
+    "description": "The button is used to send data when the form is filled out."
+  },
   "provideSuggestionsFromBusinesses": "Provide suggestions from businesses,",
+  "@provideSuggestionsFromBusinesses": {
+    "examples": "The text of the headline portion of the Investors page."
+  },
   "orDonateHere": "or donate here",
+  "@orDonateHere": {
+    "examples": "The text of the headline portion of the Investors page."
+  },
   "supportOurVeterans": "Support our veterans",
+  "@supportOurVeterans": {
+    "examples": "title text on the Investors page."
+  },
   "supportVeterans": "SUPPORT\nVETERANS",
+  "@supportVeterans": {
+    "examples": "Title text for the investor button on the Home page.",
+    "description": "Button used to navigate to the Investors page."
+  },
   "haveQuestions": "HAVE\nQUESTIONS?",
+  "@haveQuestions": {
+    "examples": "The title text for the contact button on the Home page.",
+    "description": "The button is used to go to the Contact page."
+  },
   "donateHere": "Donate here",
+  "@donateHere": {
+    "examples": "Text on the Investors page"
+  },
   "provenFunds": "Proven funds",
+  "@provenFunds": {
+    "examples": "Text on the Investors page"
+  },
   "tryItAgain": "Try it again",
+  "@tryItAgain": {
+    "examples": "Text for the button on the Error page.",
+    "description": "The button is used to go to the Home page."
+  },
   "companyIsHidden": "The company is hidden",
+  "@companyIsHidden": {
+    "examples": "Text on the Discount page if the company is hidden in the discount"
+  },
   "online": "All of Ukraine (online)",
+  "@online": {
+    "examples": "Text on the Discount page for advanced filters"
+  },
   "moreFunds": "More funds",
+  "@moreFunds": {
+    "examples": "Text for the button on the Investors page.",
+    "description": "The button is used to load funds on the computer version."
+  },
   "offerDiscount": "Offer a discount",
+  "@offerDiscount": {
+    "examples": "Text for the button on the Discount page.",
+    "description": "The button is used to go to the MyDiscounts page."
+  },
   "myDiscountsAndCoupons": "In this section, you can publish a discount, as well as manage your publications. If your company provides personalized offers for veterans, you can advertise here.",
+  "@myDiscountsAndCoupons": {
+    "examples": "Text to subtitle the MyDiscount page."
+  },
   "myPublications": "My publications",
+  "@myPublications": {
+    "examples": "Text on the MyDiscount page."
+  },
   "deactivate": "Deactivate",
+  "@deactivate": {
+    "examples": "Text for the button on the MyDiscount page.",
+    "description": "The button is used to deactivate a discount created by the user."
+  },
   "statistics": "Statistics",
-  "specialOffers": "Special offers",
-  "forVeteransAndTheirFamilies": "for veterans and their families",
+  "@statistics": {
+    "examples": "Text on the MyDiscount page."
+  },
   "advancedFilter": "Advanced filter",
+  "@advancedFilter": {
+    "examples": "Text for the button on the Discount page.",
+    "description": "The button is used to open an AdvancedFilter or open a dialogue with it."
+  },
+  "specialOffers": "Special offers",
+  "@specialOffers": {
+    "examples": "The text of the title part on the Discount page."
+  },
+  "forVeteransAndTheirFamilies": "for veterans and their families",
+  "@forVeteransAndTheirFamilies": {
+    "examples": "The text of the title part on the Discount and Information pages."
+  },
   "discount": "Discount",
+  "@discount": {
+    "examples": "Text on the Discount page for additional filters"
+  },
   "filterApplied": "Filter applied",
+  "@filterApplied": {
+    "examples": "Text on the Discount page for additional filters"
+  },
   "fromLargestToSmallest": "From the largest to the smallest",
+  "@fromLargestToSmallest": {
+    "examples": "Text for the button on the Discount page for additional filters.",
+    "description": "The button is used to apply and deactivate a filter by discount value."
+  },
   "free": "Free",
+  "@free": {
+    "examples": "Text for the button on the Discount page for additional filters.",
+    "description": "The button is used to apply and deactivate a filter where the discount is 100%."
+  },
   "allStoresOfChain": "All establishments of the chain",
+  "@allStoresOfChain": {
+    "examples": "Text for the button on the Discount page for additional filters.",
+    "description": "The button is used to apply and deactivate a filter where a discount is applied in many cities."
+  },
   "all": "All",
+  "@all": {
+    "examples": "Text for the button on pages with category filters",
+    "description": "The button is used to deactivate category filtering."
+  },
   "complaint": "Complaint",
+  "@complaint": {
+    "examples": "Text for a button on card pages",
+    "description": "The button is used to open the Report dialog."
+  },
   "reportPublication": "Report a publication",
+  "@reportPublication": {
+    "examples": "Report dialog title text."
+  },
   "specifyReasonForComplaint": "Specify the reason for the complaint:",
+  "@specifyReasonForComplaint": {
+    "examples": "Report dialog subtitle text."
+  },
   "fraudOrSpam": "Fraud or spam;",
+  "@fraudOrSpam": {
+    "examples": "Text for a button in the Report dialog.",
+    "description": "The button is used to select the type of complaint."
+  },
   "fakeNewsOrDisinformation": "Fake news or disinformation;",
+  "@fakeNewsOrDisinformation": {
+    "examples": "Text for a button in the Report dialog.",
+    "description": "The button is used to select the type of complaint."
+  },
   "offensiveOrHatefulContent": "Offensive or hateful content;",
+  "@offensiveOrHatefulContent": {
+    "examples": "Text for a button in the Report dialog.",
+    "description": "The button is used to select the type of complaint."
+  },
   "other": "Other (specify)",
+  "@other": {
+    "examples": "Text for a button in the Report dialog.",
+    "description": "The button is used to select the type of complaint."
+  },
   "addComment": "Add a comment:",
+  "@addComment": {
+    "examples": "Text before the comment input field."
+  },
   "checkPointError": "Please select one of the following answers",
+  "@checkPointError": {
+    "examples": "Error text for the Report dialog when the complaint type is not selected."
+  },
   "verifiedInformation": "Verified information",
+  "@verifiedInformation": {
+    "examples": "Partial header text on Information Discount."
+  },
   "thatEndOfList": "That's the end of the list! We hope you found what you were looking for.",
+  "@thatEndOfList": {
+    "examples": "Text on card pages when all cards are loaded"
+  },
   "returnToTop": "Return to the top",
+  "@returnToTop": {
+    "examples": "Text for the button on card pages when all cards are loaded.",
+    "description": "Button used to return to the previous top of the page."
+  },
   "cardListEmptyText": "Sorry, nothing was found using your filters. Try changing your search criteria",
+  "@cardListEmptyText": {
+    "examples": "Text on pages with cards and filters when there are no results when filtering"
+  },
   "ofUpTo": "of up to",
+  "@ofUpTo": {
+    "examples": "Text on the Discount page"
+  },
   "findYourDiscount": "FIND YOUR DISCOUNT",
+  "@findYourDiscount": {
+    "examples": "The title text for the contact button on the Home page.",
+    "description": "Button used to navigate to the Disocunt page."
+  },
   "close": "Close",
+  "@close": {
+    "examples": "Text for the button on the DiscountCard page",
+    "description": "Button used to navigate to the Disocunt page."
+  },
   "callForDetails": "Call for details",
+  "@callForDetails": {
+    "examples": "Text on the Discount page, description in the card"
+  },
   "veterans": "Veterans",
+  "@veterans": {
+    "examples": "Text on the Home page, part of the animation text"
+  },
   "theirFamilies": "Their Families",
+  "@theirFamilies": {
+    "examples": "Text on the Home page, part of the animation text"
+  },
   "activeMilitary": "Active Military",
+  "@activeMilitary": {
+    "examples": "Text on the Home page, part of the animation text"
+  },
   "militaryDoctors": "Military Doctors",
+  "@militaryDoctors": {
+    "examples": "Text on the Home page, part of the animation text"
+  },
   "itIsValidAllTime": "It is valid all the time",
-  "link": "Link",
-  "discountLinkTitle": "Do you know about discounts that are not yet available on our website? Send us the link and we'll add them as soon as possible.",
-  "invalidLink": "Invalid link",
-  "linkLimitMessage": "You have already sent the maximum number of links today. Please try again tomorrow.",
+  "@itIsValidAllTime": {
+    "examples": "Text on the Discount page if the discount is valid all the time"
+  },
   "error": "We're sorry, there was an unforeseen error.",
   "@error": {
     "description": "message of an unforeseen error that was not foreseen."
@@ -250,19 +931,55 @@
   "@dublicateFailure": {
     "description": "an error message when trying to register an account with the same email as an already registered account"
   },
-  "more": "More",
   "useful": "Useful",
-  "website": "Website",
+  "@useful": {
+    "examples": "Text on card pages below the like button.",
+    "description": "The button is used to add a like to a card."
+  },
   "share": "Share",
+  "@share": {
+    "examples": "The text on the card pages below the share button.",
+    "description": "The button is used to share the card data."
+  },
   "save": "Save",
+  "@save": {
+    "examples": "Text on card pages below the save button.",
+    "description": "The button is used to save the card in the save."
+  },
   "webSite": "Web site",
-  "report": "Report",
+  "@webSite": {
+    "examples": "Text on card pages under the website button.",
+    "description": "The button is used to go to the website that is attached to the card."
+  },
   "hideExpansion": "hide...",
+  "@hideExpansion": {
+    "examples": "Text on the Discount page, description in the skating rink"
+  },
+  "discountLinkTitle": "Do you know about discounts that are not yet available on our website? Send us the link and we'll add them as soon as possible.",
+  "@discountLinkTitle": {
+    "examples": "Text on the Discount page"
+  },
+  "invalidLink": "Invalid link",
+  "@invalidLink": {
+    "examples": "Error text for the link field if the value is invalid."
+  },
+  "link": "link",
+  "@link": {
+    "examples": "Text on the Discount page, link add card."
+  },
+  "linkLimitMessage": "You have already sent the maximum number of links today. Please try again tomorrow.",
+  "@linkLimitMessage": {
+    "examples": "Error text for the link field if the user has sent the maximum number of links per day."
+  },
   "moreCities": "{count} more..",
   "@moreCities": {
     "placeholders": {
       "count": {}
-    }
+    },
+    "examples": "Text on the Discount page, description in the skating rink"
   },
-  "privacyPolicyText": "Privacy Policy for Veteranam.info\n\nEFFECTIVE DATE: Jul 11 2024\n\nAt Veteranam.info we value your privacy and take it seriously. This privacy policy explains how we handle your personal information when you use our website and services. If you disagree with any part of this policy please stop using our site and services immediately.\n\nInformation Collection\n\nWhen you create an account with us we collect profile information such as your name and email address to improve your experience and authenticate you as a registered user. We may also collect information such as your IP address internet browser details and other data to provide access to our services and obtain analytics. To access certain features you may need to create an account using an email and password. We do not collect or use any payment information.\n\nWe collect information from you when you subscribe to a newsletter fill out a form open a support ticket or enter information on our site. For example we may collect information when you provide feedback on our products or services.\n\nCommunications\n\nYou may opt out of Veteranam.info communications by clicking the “Unsubscribe” button at the bottom of every email or by emailing our Data Protection Officer at hello@veteranam.info.\n\nYou can update or delete your personal data by unsubscribing from our email list(s) or emailing us at hello@veteranam.info. If you reside or are located in the EEA you have certain rights regarding your personal information including the right to request access updates deletion and restriction of processing.\n\nUse of Information\n\nWe use your information to provide personalized recommendations securely authenticate you communicate with you improve our services and provide customer support. We may employ third-party companies and individuals to facilitate our services and they are bound by confidentiality and privacy obligations.\n\nWe may occasionally use your data in an anonymized aggregated form to improve our analysis engine and for analytics purposes. We will never use your profile content in any of our tools or services.\n\nSecurity Measures\n\nWe implement various security measures to protect your information including regular scanning for security holes and malware using secured networks and implementing security measures when processing transactions.\n\nCookies\n\nYou may choose to have your computer warn you each time a cookie is being sent or turn off all cookies through your browser settings. However disabling cookies may affect some features of our site.\n\nInformation Sharing\n\nWe do not sell trade or transfer your personally identifiable information to outside parties unless we provide advance notice. Non-personally identifiable visitor information may be provided to other parties for marketing advertising or other uses.\n\nContact Us\n\nIf you have any questions regarding this privacy policy please send an email to hello@veteranam.info."
+  "privacyPolicyText": "Privacy Policy for Veteranam.info\n\nEFFECTIVE DATE: Jul 11 2024\n\nAt Veteranam.info we value your privacy and take it seriously. This privacy policy explains how we handle your personal information when you use our website and services. If you disagree with any part of this policy please stop using our site and services immediately.\n\nInformation Collection\n\nWhen you create an account with us we collect profile information such as your name and email address to improve your experience and authenticate you as a registered user. We may also collect information such as your IP address internet browser details and other data to provide access to our services and obtain analytics. To access certain features you may need to create an account using an email and password. We do not collect or use any payment information.\n\nWe collect information from you when you subscribe to a newsletter fill out a form open a support ticket or enter information on our site. For example we may collect information when you provide feedback on our products or services.\n\nCommunications\n\nYou may opt out of Veteranam.info communications by clicking the “Unsubscribe” button at the bottom of every email or by emailing our Data Protection Officer at hello@veteranam.info.\n\nYou can update or delete your personal data by unsubscribing from our email list(s) or emailing us at hello@veteranam.info. If you reside or are located in the EEA you have certain rights regarding your personal information including the right to request access updates deletion and restriction of processing.\n\nUse of Information\n\nWe use your information to provide personalized recommendations securely authenticate you communicate with you improve our services and provide customer support. We may employ third-party companies and individuals to facilitate our services and they are bound by confidentiality and privacy obligations.\n\nWe may occasionally use your data in an anonymized aggregated form to improve our analysis engine and for analytics purposes. We will never use your profile content in any of our tools or services.\n\nSecurity Measures\n\nWe implement various security measures to protect your information including regular scanning for security holes and malware using secured networks and implementing security measures when processing transactions.\n\nCookies\n\nYou may choose to have your computer warn you each time a cookie is being sent or turn off all cookies through your browser settings. However disabling cookies may affect some features of our site.\n\nInformation Sharing\n\nWe do not sell trade or transfer your personally identifiable information to outside parties unless we provide advance notice. Non-personally identifiable visitor information may be provided to other parties for marketing advertising or other uses.\n\nContact Us\n\nIf you have any questions regarding this privacy policy please send an email to hello@veteranam.info.",
+  "@privacyPolicyText": {
+    "examples": "The text on the PrivacyPolicy page"
+  }
 }
