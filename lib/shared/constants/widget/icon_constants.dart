@@ -117,4 +117,5 @@ abstract class KIcon {
   static const _KIcon captivePortal = _KIcon(Symbols.captive_portal);
   static const _KIcon calendarClock = _KIcon(Symbols.calendar_clock);
   static const _KIcon user = _KIcon(Symbols.person);
+  static const _KIcon link = _KIcon(Symbols.link);
 }
