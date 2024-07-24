@@ -955,6 +955,22 @@
   "@hideExpansion": {
     "examples": "Text on the Discount page, description in the skating rink"
   },
+  "discountLinkTitle": "Do you know about discounts that are not yet available on our website? Send us the link and we'll add them as soon as possible.",
+  "@discountLinkTitle": {
+    "examples": "Text on the Discount page"
+  },
+  "invalidLink": "Invalid link",
+  "@invalidLink": {
+    "examples": "Error text for the link field if the value is invalid."
+  },
+  "link": "link",
+  "@link": {
+    "examples": "Text on the Discount page, link add card."
+  },
+  "linkLimitMessage": "You have already sent the maximum number of links today. Please try again tomorrow.",
+  "@linkLimitMessage": {
+    "examples": "Error text for the link field if the user has sent the maximum number of links per day."
+  },
   "moreCities": "{count} more..",
   "@moreCities": {
     "placeholders": {

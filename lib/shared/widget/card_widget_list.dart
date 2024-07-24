@@ -7,9 +7,7 @@ List<Widget> cardWidgetList<T>({
   required Widget Function({
     required T modelItem,
     required bool isLoading,
-  }
-      // required Key key,
-      ) cardWidget,
+  }) cardWidget,
   required int shimmerItemsNumber,
   // required Key cardKey,
   // required Key cardLastKey,
