@@ -7,6 +7,7 @@ export 'field_models/field_models.dart';
 export 'funds_model.dart';
 export 'image_model.dart';
 export 'information_model.dart';
+export 'link_model.dart';
 export 'question_model.dart';
 export 'report_model.dart';
 export 'resume_model.dart';

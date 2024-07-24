@@ -57,7 +57,10 @@ extension DiscountModelLocation on DiscountModel {
 extension StringExtension on String {
   bool get isUrlValid {
     const urlPattern = r'(https?://[^\s]+)';
-    final regex = RegExp(urlPattern);
+    final regex = RegExp(
+      urlPattern,
+      caseSensitive: false,
+    );
     return regex.hasMatch(this);
   }
 }

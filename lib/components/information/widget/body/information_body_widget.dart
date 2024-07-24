@@ -23,7 +23,7 @@ class InformationBodyWidget extends StatelessWidget {
       listenWhen: (previous, current) => current.failure != null,
       builder: (context, _) => ScaffoldAutoLoadingWidget(
         loadingButtonText: context.l10n.moreNews,
-        listCanLoaded: _.loadingStatus != LoadingStatus.listLoadedFull,
+        loadingStatus: _.loadingStatus,
         cardListIsEmpty: _.filteredInformationModelItems.isEmpty,
         resetFilter: () => context
             .read<InformationWatcherBloc>()

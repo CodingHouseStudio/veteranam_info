@@ -62,7 +62,7 @@ class FeedbackBloc extends Bloc<FeedbackEvent, FeedbackState> {
       } else {
         emit(
           state.copyWith(
-            formState: FeedbackEnum.notShowFeedback,
+            formState: FeedbackEnum.notShow,
           ),
         );
       }

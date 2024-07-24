@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:veteranam/shared/shared.dart';
 
@@ -35,6 +34,7 @@ class TextFieldWidget extends StatefulWidget {
     this.minLines,
     this.hintStyle,
     this.text,
+    this.suffixIconPadding,
   });
   final Key widgetKey;
   final TextAlign? textAlign;
@@ -66,6 +66,7 @@ class TextFieldWidget extends StatefulWidget {
   final TextStyle? hintStyle;
   final bool isDesk;
   final String? text;
+  final double? suffixIconPadding;
 
   @override
   State<TextFieldWidget> createState() => _TextFieldWidgetState();
@@ -128,21 +129,22 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
           labelText: widget.labelText,
           border: widget.border,
           enabledBorder: KWidgetTheme.outlineInputBorderEnabled.copyWith(
-            borderSide: BorderSide(
-              color: isHovered
-                  ? AppColors.materialThemeRefNeutralNeutral40
-                  : AppColors.materialThemeRefNeutralNeutral80,
-            ),
+            borderSide: isHovered
+                ? const BorderSide(
+                    color: AppColors.materialThemeRefNeutralNeutral40,
+                  )
+                : null,
           ),
-          disabledBorder: KWidgetTheme.outlineInputBorderDisabled,
-          hoverColor: AppColors.materialThemeWhite,
-          focusedBorder: KWidgetTheme.outlineInputBorderFocused,
-          focusedErrorBorder: kIsWeb ? null : widget.border,
+          focusedErrorBorder: widget.border,
           fillColor: widget.fillColor,
           hintText: widget.hintText,
           errorText: widget.errorText,
-          errorStyle: AppTextStyle.error14,
-          suffixIcon: widget.suffixIcon,
+          suffixIcon: Padding(
+            padding: EdgeInsets.only(
+              right: widget.suffixIconPadding ?? KPadding.kPaddingSize16,
+            ),
+            child: widget.suffixIcon,
+          ),
           prefixIcon: widget.prefixIcon,
           errorMaxLines: widget.errorMaxLines,
         ),
