@@ -75,23 +75,23 @@ class InformationWatcherBloc
     _Updated event,
     Emitter<InformationWatcherState> emit,
   ) {
-    final list = event.informationItemsModel.removeReportItems(
+    final items = event.informationItemsModel.removeReportItems(
       checkFunction: (item) => item.id,
+      reportItems: event.reportItems,
+    );
+    final (:list, :loadingStatus) = _filter(
+      filtersIndex: state.filtersIndex,
+      itemsLoaded: state.itemsLoaded,
+      list: items,
       reportItems: event.reportItems,
     );
     emit(
       InformationWatcherState(
-        informationModelItems: list,
-        loadingStatus: LoadingStatus.loaded,
-        filteredInformationModelItems: _filter(
-          filtersIndex: state.filtersIndex,
-          itemsLoaded: state.itemsLoaded,
-          list: list,
-          reportItems: event.reportItems,
-        ),
+        informationModelItems: items,
+        loadingStatus: loadingStatus,
+        filteredInformationModelItems: list,
         filtersIndex: state.filtersIndex,
-        itemsLoaded:
-            state.itemsLoaded.getLoaded(list: event.informationItemsModel),
+        itemsLoaded: state.itemsLoaded.getLoaded(list: list),
         failure: null,
         reportItems: event.reportItems,
       ),
@@ -107,17 +107,16 @@ class InformationWatcherBloc
       return;
     }
     emit(state.copyWith(loadingStatus: LoadingStatus.loading));
-    final filterItems = _filter(
+    final (:list, :loadingStatus) = _filter(
       filtersIndex: state.filtersIndex,
       itemsLoaded: state.itemsLoaded,
       loadItems: KDimensions.loadItems,
     );
     emit(
       state.copyWith(
-        filteredInformationModelItems: filterItems,
-        itemsLoaded: filterItems.length,
-        loadingStatus:
-            filterItems.isLoading(state.filteredInformationModelItems),
+        filteredInformationModelItems: list,
+        itemsLoaded: list.length,
+        loadingStatus: loadingStatus,
       ),
     );
   }
@@ -143,25 +142,25 @@ class InformationWatcherBloc
     final selectedFilters =
         state.filtersIndex.changeListValue(event.filterIndex);
 
-    final filterItems = _filter(
+    final (:list, :loadingStatus) = _filter(
       filtersIndex: selectedFilters,
       itemsLoaded: state.itemsLoaded,
     );
 
     emit(
       state.copyWith(
-        filteredInformationModelItems: filterItems,
+        filteredInformationModelItems: list,
         filtersIndex: selectedFilters,
-        itemsLoaded: state.itemsLoaded.getLoaded(list: filterItems),
-        loadingStatus: filterItems.isLoading(
-          state.filteredInformationModelItems,
-          isFilter: true,
-        ),
+        itemsLoaded: state.itemsLoaded.getLoaded(list: list),
+        loadingStatus: loadingStatus,
       ),
     );
   }
 
-  List<InformationModel> _filter({
+  ({
+    List<InformationModel> list,
+    LoadingStatus loadingStatus,
+  }) _filter({
     required List<int>? filtersIndex,
     required int itemsLoaded,
     List<InformationModel>? list,
@@ -176,7 +175,7 @@ class InformationWatcherBloc
           ),
         )
         .toList()
-        .loadingFilter(
+        .loadingFilterAndStatus(
           filtersIndex: filtersIndex,
           itemsLoaded: itemsLoaded,
           getFilter: (InformationModel item) => item.category,
@@ -189,27 +188,29 @@ class InformationWatcherBloc
     Emitter<InformationWatcherState> emit,
   ) async {
     final reportItems = await _getReport();
-    final list = state.informationModelItems.removeReportItems(
+    final items = state.informationModelItems.removeReportItems(
       checkFunction: (item) => item.id,
       reportItems: reportItems,
     );
 
-    final filtersIndex = list.updateFilterList(
+    final filtersIndex = items.updateFilterList(
       getFilter: (item) => item.category,
       previousList: state.informationModelItems,
       previousFilter: state.filtersIndex,
     );
-    final filterItems = _filter(
+    final (:list, :loadingStatus) = _filter(
       filtersIndex: filtersIndex,
       itemsLoaded: state.itemsLoaded,
-      list: list,
+      list: items,
     );
 
     emit(
       state.copyWith(
         reportItems: reportItems,
-        filteredInformationModelItems: filterItems,
+        informationModelItems: items,
+        filteredInformationModelItems: list,
         filtersIndex: filtersIndex,
+        loadingStatus: loadingStatus,
       ),
     );
   }

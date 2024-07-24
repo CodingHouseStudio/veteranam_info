@@ -1,0 +1,14 @@
+import 'package:flutter_test/flutter_test.dart';
+
+import '../../../text_dependency.dart';
+
+Future<void> notificationLinkCorrectHelper(
+  WidgetTester tester,
+) async {
+  await notificationLinkSaveHelper(
+    tester: tester,
+    link: KTestText.linkModel.link,
+  );
+
+  expect(find.text(KTestText.linkModel.link), findsNothing);
+}
