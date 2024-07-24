@@ -8,4 +8,4 @@ extension AppLocalizationsX on BuildContext {
 }
 
 const locale = AppLocalizations.localizationsDelegates;
-const supportLocale = AppLocalizations.supportedLocales;
+const supportedLocales = AppLocalizations.supportedLocales;

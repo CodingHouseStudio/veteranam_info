@@ -38,7 +38,7 @@ class AppWidget extends StatelessWidget {
           scrollBehavior: CustomScrollBehavior(),
           localizationsDelegates: locale,
           locale: _.userSetting.locale.value,
-          supportedLocales: supportLocale,
+          supportedLocales: supportedLocales,
           routerConfig: router,
         );
       },

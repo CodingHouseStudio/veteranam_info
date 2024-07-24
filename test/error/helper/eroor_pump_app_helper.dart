@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:veteranam/components/components.dart';
 import 'package:veteranam/shared/shared.dart';
@@ -13,8 +12,8 @@ Future<void> errorPumpAppHelper({
   if (mockGoRouter == null) {
     await tester.pumpWidget(
       const MaterialApp(
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
-        supportedLocales: AppLocalizations.supportedLocales,
+        localizationsDelegates: locale,
+        supportedLocales: supportedLocales,
         home: ErrorScreen(),
       ),
     );
@@ -23,8 +22,8 @@ Future<void> errorPumpAppHelper({
       MockGoRouterProvider(
         goRouter: mockGoRouter,
         child: const MaterialApp(
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
-          supportedLocales: AppLocalizations.supportedLocales,
+          localizationsDelegates: locale,
+          supportedLocales: supportedLocales,
           home: ErrorScreen(),
         ),
       ),
