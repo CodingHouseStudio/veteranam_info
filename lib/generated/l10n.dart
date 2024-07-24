@@ -2224,6 +2224,46 @@ class AppLocalizations {
     );
   }
 
+  /// `Do you know about discounts that are not yet available on our website? Send us the link and we'll add them as soon as possible.`
+  String get discountLinkTitle {
+    return Intl.message(
+      'Do you know about discounts that are not yet available on our website? Send us the link and we\'ll add them as soon as possible.',
+      name: 'discountLinkTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invalid link`
+  String get invalidLink {
+    return Intl.message(
+      'Invalid link',
+      name: 'invalidLink',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `link`
+  String get link {
+    return Intl.message(
+      'link',
+      name: 'link',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You have already sent the maximum number of links today. Please try again tomorrow.`
+  String get linkLimitMessage {
+    return Intl.message(
+      'You have already sent the maximum number of links today. Please try again tomorrow.',
+      name: 'linkLimitMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `{count} more..`
   String moreCities(Object count) {
     return Intl.message(

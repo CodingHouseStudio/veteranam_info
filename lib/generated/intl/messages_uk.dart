@@ -80,6 +80,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Не знайшли свою вакансію?"),
         "disconnect": MessageLookupByLibrary.simpleMessage("Відʼєднати"),
         "discount": MessageLookupByLibrary.simpleMessage("Знижка"),
+        "discountLinkTitle": MessageLookupByLibrary.simpleMessage(
+            "Знаєте про знижки, яких ще немає у нас на сайті? Надішліть посилання нам, і ми добавимо їх якнайшвидше."),
         "discounts": MessageLookupByLibrary.simpleMessage("Знижки"),
         "discountsAndCoupons":
             MessageLookupByLibrary.simpleMessage("Знижки/Купони"),
@@ -164,6 +166,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Вся інформація в одному місці. Ми проаналізували різноманітні ресурси та надаємо безкоштовний доступ до інформаціх, що слід знати ветерану."),
         "informationSubtitle": MessageLookupByLibrary.simpleMessage(
             "У цьому розділі ти знайдеш корисну інформацію для ветеранів та їх сімей"),
+        "invalidLink":
+            MessageLookupByLibrary.simpleMessage("Невірне посилання"),
         "investors": MessageLookupByLibrary.simpleMessage("Інвесторам"),
         "investorsSubtitle": MessageLookupByLibrary.simpleMessage(
             "Зв\'яжіться з нами для підтримки ветеранів. Напишіть нам на hello@veteranam.info"),
@@ -177,6 +181,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "Інформація про актуальні вакансії, спеціально орієнтовані на ветеранів, а також ресурси для пошуку роботи та кар\'єрного розвитку."),
         "lastName": MessageLookupByLibrary.simpleMessage("Прізвище"),
         "leaveRequest": MessageLookupByLibrary.simpleMessage("Залишити заявку"),
+        "link": MessageLookupByLibrary.simpleMessage("Посилання"),
+        "linkLimitMessage": MessageLookupByLibrary.simpleMessage(
+            "Сьогодні ви вже надіслали максимальну кількість посилань. Будь ласка, спробуйте знову завтра."),
         "linkedAccounts":
             MessageLookupByLibrary.simpleMessage("Привʼязані облікові записи"),
         "linkedAccountsDetails": MessageLookupByLibrary.simpleMessage(

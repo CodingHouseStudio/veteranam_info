@@ -7,6 +7,11 @@ import 'helper.dart';
 Future<void> discountInitialHelper(
   WidgetTester tester,
 ) async {
+  await notificationLinkScrollHelper(
+    tester: tester,
+    test: () async => notificationLinkHelper(tester),
+  );
+
   await changeWindowSizeHelper(
     tester: tester,
     windowsTest: true,
@@ -50,11 +55,6 @@ Future<void> discountInitialHelper(
       expect(
         find.byKey(KWidgetkeys.screen.discounts.buttonMock),
         findsNothing,
-      );
-
-      await scrollingHelper(
-        tester: tester,
-        offset: KTestConstants.scrollingDown,
       );
 
       // await scrollingHelper(

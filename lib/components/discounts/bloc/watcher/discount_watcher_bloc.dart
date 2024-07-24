@@ -75,7 +75,7 @@ class DiscountWatcherBloc
     _Updated event,
     Emitter<DiscountWatcherState> emit,
   ) async {
-    final list = event.discountItemsModel.removeReportItems(
+    final items = event.discountItemsModel.removeReportItems(
       checkFunction: (item) => item.id,
       reportItems: event.reportItems,
     )..sort(
@@ -97,17 +97,18 @@ class DiscountWatcherBloc
       );
     final categoryFilter = _filterCategory(
       categoryIndex: state.filtersCategoriesIndex,
-      list: list,
+      list: items,
+    );
+    final (:list, :loadingStatus) = _filterLocation(
+      itemsLoaded: KDimensions.loadItems,
+      locationIndex: state.filtersLocationIndex,
+      list: categoryFilter,
     );
     emit(
       _Initial(
-        discountModelItems: list,
-        loadingStatus: LoadingStatus.loaded,
-        filteredDiscountModelItems: _filterLocation(
-          itemsLoaded: KDimensions.loadItems,
-          locationIndex: state.filtersLocationIndex,
-          list: categoryFilter,
-        ),
+        discountModelItems: items,
+        loadingStatus: loadingStatus,
+        filteredDiscountModelItems: list,
         filtersCategoriesIndex: state.filtersCategoriesIndex,
         itemsLoaded: state.itemsLoaded.getLoaded(list: list),
         failure: null,
@@ -128,17 +129,17 @@ class DiscountWatcherBloc
       return;
     }
     emit(state.copyWith(loadingStatus: LoadingStatus.loading));
-    final filterItems = _filterLocation(
+    final (:list, :loadingStatus) = _filterLocation(
       itemsLoaded: state.itemsLoaded,
       locationIndex: state.filtersLocationIndex,
       loadItems: KDimensions.loadItems,
     );
     emit(
       state.copyWith(
-        filteredDiscountModelItems: filterItems,
-        itemsLoaded: (state.itemsLoaded + KDimensions.loadItems)
-            .getLoaded(list: filterItems),
-        loadingStatus: filterItems.isLoading(state.filteredDiscountModelItems),
+        filteredDiscountModelItems: list,
+        itemsLoaded:
+            (state.itemsLoaded + KDimensions.loadItems).getLoaded(list: list),
+        loadingStatus: loadingStatus,
       ),
     );
   }
@@ -171,7 +172,7 @@ class DiscountWatcherBloc
       categoryIndex: selectedFilters,
     );
 
-    final filterItems = _filterLocation(
+    final (:list, :loadingStatus) = _filterLocation(
       itemsLoaded: state.itemsLoaded,
       locationIndex: state.filtersLocationIndex,
       list: categoryItems,
@@ -179,13 +180,10 @@ class DiscountWatcherBloc
 
     emit(
       state.copyWith(
-        filteredDiscountModelItems: filterItems,
+        filteredDiscountModelItems: list,
         filtersCategoriesIndex: selectedFilters,
-        itemsLoaded: state.itemsLoaded.getLoaded(list: filterItems),
-        loadingStatus: filterItems.isLoading(
-          state.filteredDiscountModelItems,
-          isFilter: true,
-        ),
+        itemsLoaded: state.itemsLoaded.getLoaded(list: list),
+        loadingStatus: loadingStatus,
         categoryDiscountModelItems: categoryItems,
       ),
     );
@@ -201,25 +199,22 @@ class DiscountWatcherBloc
       largerNumber: 3,
     );
 
-    final filterItems = _filterLocation(
+    final (:list, :loadingStatus) = _filterLocation(
       locationIndex: selectedFilters,
       itemsLoaded: state.itemsLoaded,
     );
 
     emit(
       state.copyWith(
-        filteredDiscountModelItems: filterItems,
+        filteredDiscountModelItems: list,
         filtersLocationIndex: selectedFilters,
-        itemsLoaded: state.itemsLoaded.getLoaded(list: filterItems),
-        loadingStatus: filterItems.isLoading(
-          state.filteredDiscountModelItems,
-          isFilter: true,
-        ),
+        itemsLoaded: state.itemsLoaded.getLoaded(list: list),
+        loadingStatus: loadingStatus,
       ),
     );
   }
 
-  List<DiscountModel> _filterLocation({
+  ({List<DiscountModel> list, LoadingStatus loadingStatus}) _filterLocation({
     required List<int>? locationIndex,
     required int itemsLoaded,
     List<DiscountModel>? list,
@@ -243,7 +238,7 @@ class DiscountWatcherBloc
         _sorting(list: locationFiltered, locationIndex: locationIndex);
 
     // Apply category and location filtering (chained)
-    return sortedItems.loadingFilter(
+    return sortedItems.loadingFilterAndStatus(
       filtersIndex: locationIndex?.where((element) => element > 1).toList(),
       itemsLoaded: itemsLoaded,
       getFilter: (item) => [
@@ -294,17 +289,17 @@ class DiscountWatcherBloc
   ) async {
     // Get report items and remove them from existing items
     final reportItems = await _getReport();
-    final list = state.discountModelItems.removeReportItems(
+    final items = state.discountModelItems.removeReportItems(
       checkFunction: (item) => item.id,
       reportItems: reportItems,
     );
 
-    final filtersCategoriesIndex = list.updateFilterList(
+    final filtersCategoriesIndex = items.updateFilterList(
       getFilter: (item) => item.category,
       previousList: state.discountModelItems,
       previousFilter: state.filtersCategoriesIndex,
     );
-    final filtersLocationIndex = list.updateFilterList(
+    final filtersLocationIndex = items.updateFilterList(
       getFilter: (item) =>
           item.location?.toList() ?? item.subLocation?._getList ?? const [],
       previousList: state.discountModelItems,
@@ -312,19 +307,19 @@ class DiscountWatcherBloc
     );
     final categoryItems = _filterCategory(
       categoryIndex: filtersCategoriesIndex,
-      list: list,
+      list: items,
     );
-    final filterItems = _filterLocation(
+    final (:list, :loadingStatus) = _filterLocation(
       locationIndex: filtersLocationIndex,
       itemsLoaded: state.itemsLoaded,
       list: categoryItems,
     );
     emit(
       state.copyWith(
-        discountModelItems: list,
+        discountModelItems: items,
         reportItems: reportItems,
-        filteredDiscountModelItems: filterItems,
-        loadingStatus: LoadingStatus.loaded,
+        filteredDiscountModelItems: list,
+        loadingStatus: loadingStatus,
         filtersCategoriesIndex: filtersCategoriesIndex,
         filtersLocationIndex: filtersLocationIndex,
         categoryDiscountModelItems: categoryItems,

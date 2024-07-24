@@ -78,6 +78,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Didn\'t find your vacancy?"),
         "disconnect": MessageLookupByLibrary.simpleMessage("Disconnect"),
         "discount": MessageLookupByLibrary.simpleMessage("Discount"),
+        "discountLinkTitle": MessageLookupByLibrary.simpleMessage(
+            "Do you know about discounts that are not yet available on our website? Send us the link and we\'ll add them as soon as possible."),
         "discounts": MessageLookupByLibrary.simpleMessage("Discounts"),
         "discountsAndCoupons":
             MessageLookupByLibrary.simpleMessage("Discounts and coupons"),
@@ -159,6 +161,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "All information in one place. We have analyzed various resources and highlighted the rights and benefits for veterans in this section. It contains systematized data - the most important things a veteran needs to know. In this section, you can learn more about the guarantees provided by the state to veterans."),
         "informationSubtitle": MessageLookupByLibrary.simpleMessage(
             "Find verified help information. Use filters for convenience."),
+        "invalidLink": MessageLookupByLibrary.simpleMessage("Invalid link"),
         "investors": MessageLookupByLibrary.simpleMessage("Investors"),
         "investorsSubtitle": MessageLookupByLibrary.simpleMessage(
             "Support veterans and their families. Business owners, offer discounts or personalized offers for veterans. Contact us to discuss details."),
@@ -173,6 +176,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "Information on current vacancies specifically targeted at veterans, as well as resources for job search and career development."),
         "lastName": MessageLookupByLibrary.simpleMessage("Last name"),
         "leaveRequest": MessageLookupByLibrary.simpleMessage("Leave a request"),
+        "link": MessageLookupByLibrary.simpleMessage("link"),
+        "linkLimitMessage": MessageLookupByLibrary.simpleMessage(
+            "You have already sent the maximum number of links today. Please try again tomorrow."),
         "linkedAccounts":
             MessageLookupByLibrary.simpleMessage("Linked accounts"),
         "linkedAccountsDetails": MessageLookupByLibrary.simpleMessage(
