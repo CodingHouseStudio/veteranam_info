@@ -95,11 +95,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "donateHere": MessageLookupByLibrary.simpleMessage("Donate here"),
         "donotYouHavenAccount":
             MessageLookupByLibrary.simpleMessage("Don\'t have an account?"),
+        "dublicate": MessageLookupByLibrary.simpleMessage(
+            "A user with this password or email exists"),
         "dublicateFailure":
             MessageLookupByLibrary.simpleMessage("The user with E-mail exist."),
         "editData": MessageLookupByLibrary.simpleMessage("Edit"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
-        "emailHint": MessageLookupByLibrary.simpleMessage("example@gmail.com"),
         "employerSubtitle": MessageLookupByLibrary.simpleMessage(
             "In this section you can employ a veteran. If you have an open vacancy in your company, you can place an ad here."),
         "error": MessageLookupByLibrary.simpleMessage(
@@ -115,8 +116,6 @@ class MessageLookup extends MessageLookupByLibrary {
             "We\'ve received your message and will respond soon."),
         "feedbackFormSubtitle": MessageLookupByLibrary.simpleMessage(
             "By submitting this form, I accept the Privacy Policy of this site"),
-        "feedbackSaveMessage": MessageLookupByLibrary.simpleMessage(
-            "Thank you for your submission"),
         "feedbackSubtitle": MessageLookupByLibrary.simpleMessage(
             "Can\'t find what you need? Have questions or requests? Fill out the form below. We\'re here to help!"),
         "fieldCannotBeEmpty":
@@ -133,7 +132,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "fromLargestToSmallest": MessageLookupByLibrary.simpleMessage(
             "From the largest to the smallest"),
         "fullEmail": MessageLookupByLibrary.simpleMessage("Email"),
-        "funds": MessageLookupByLibrary.simpleMessage("Funds"),
         "fundsSubtitle": MessageLookupByLibrary.simpleMessage(
             "Support veterans with deeds, not just words. Donate to these proven foundations. Every donation counts."),
         "getFailure": MessageLookupByLibrary.simpleMessage(
@@ -144,8 +142,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "google": MessageLookupByLibrary.simpleMessage("Google"),
         "haveQuestions":
             MessageLookupByLibrary.simpleMessage("HAVE\nQUESTIONS?"),
-        "hello": MessageLookupByLibrary.simpleMessage("Hello"),
-        "helloVeteran": MessageLookupByLibrary.simpleMessage("Hello, Veteran!"),
         "hide": MessageLookupByLibrary.simpleMessage("Hide"),
         "hideExpansion": MessageLookupByLibrary.simpleMessage("hide..."),
         "homeSubtitle": MessageLookupByLibrary.simpleMessage(
@@ -178,10 +174,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Jobs and vacancies"),
         "jobsVacanciesSubtitle": MessageLookupByLibrary.simpleMessage(
             "Information on current vacancies specifically targeted at veterans, as well as resources for job search and career development."),
-        "key": MessageLookupByLibrary.simpleMessage("Key"),
         "lastName": MessageLookupByLibrary.simpleMessage("Last name"),
         "leaveRequest": MessageLookupByLibrary.simpleMessage("Leave a request"),
-        "link": MessageLookupByLibrary.simpleMessage("Link"),
+        "link": MessageLookupByLibrary.simpleMessage("link"),
         "linkLimitMessage": MessageLookupByLibrary.simpleMessage(
             "You have already sent the maximum number of links today. Please try again tomorrow."),
         "linkedAccounts":
@@ -193,16 +188,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "logOutQuestion": MessageLookupByLibrary.simpleMessage(
             "Are you sure you want to log out of your account?"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
-        "logo": MessageLookupByLibrary.simpleMessage("Veteranam"),
         "lookingForJob":
             MessageLookupByLibrary.simpleMessage("Looking for a job"),
         "mainInformation":
             MessageLookupByLibrary.simpleMessage("Main information"),
         "mainScreen": MessageLookupByLibrary.simpleMessage("Home"),
-        "message": MessageLookupByLibrary.simpleMessage("Message"),
         "militaryDoctors":
             MessageLookupByLibrary.simpleMessage("Military Doctors"),
-        "more": MessageLookupByLibrary.simpleMessage("More"),
         "moreCities": m0,
         "moreDiscounts": MessageLookupByLibrary.simpleMessage("More discounts"),
         "moreFunds": MessageLookupByLibrary.simpleMessage("More funds"),
@@ -221,7 +213,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "networkFailure": MessageLookupByLibrary.simpleMessage(
             "There is no internet connection. Please check your connection."),
         "next": MessageLookupByLibrary.simpleMessage("Next"),
-        "nickname": MessageLookupByLibrary.simpleMessage("Nickname"),
         "no": MessageLookupByLibrary.simpleMessage("No"),
         "noResume":
             MessageLookupByLibrary.simpleMessage("I don\'t have a resume"),
@@ -245,8 +236,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Our social networks"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone number"),
-        "phoneNumberHint":
-            MessageLookupByLibrary.simpleMessage("+38 099 000 00 00"),
         "position": MessageLookupByLibrary.simpleMessage("Position*"),
         "preferEmail": MessageLookupByLibrary.simpleMessage("Prefer e-mail?"),
         "previous": MessageLookupByLibrary.simpleMessage("Previous"),
@@ -269,13 +258,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "questionsFormSubtitle": MessageLookupByLibrary.simpleMessage(
             "To provide the best service, please answer the following question(s):"),
         "rateOurSite": MessageLookupByLibrary.simpleMessage("Rate our site"),
-        "readLess": MessageLookupByLibrary.simpleMessage("Read less"),
-        "readMore": MessageLookupByLibrary.simpleMessage("Read more"),
-        "receivedYourMessage": MessageLookupByLibrary.simpleMessage(
-            "We\'ve received your message and will respond soon."),
         "register": MessageLookupByLibrary.simpleMessage("Register"),
         "remotely": MessageLookupByLibrary.simpleMessage("Remotely"),
-        "report": MessageLookupByLibrary.simpleMessage("Report"),
         "reportPublication":
             MessageLookupByLibrary.simpleMessage("Report a publication"),
         "resetAll": MessageLookupByLibrary.simpleMessage("Reset all"),
@@ -318,26 +302,21 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Support our veterans"),
         "supportVeterans":
             MessageLookupByLibrary.simpleMessage("SUPPORT\nVETERANS"),
-        "text": MessageLookupByLibrary.simpleMessage("text"),
         "thankYou": MessageLookupByLibrary.simpleMessage("Thank you"),
         "thankYouDescription": MessageLookupByLibrary.simpleMessage(
             "Please note! To access some services, you may need to confirm your identity."),
         "thatEndOfList": MessageLookupByLibrary.simpleMessage(
             "That\'s the end of the list! We hope you found what you were looking for."),
         "theirFamilies": MessageLookupByLibrary.simpleMessage("Their Families"),
-        "thisServiceForVeteransSubtitle": MessageLookupByLibrary.simpleMessage(
-            "Here you can find useful discounts"),
         "toDiscount": MessageLookupByLibrary.simpleMessage("To Discounts"),
         "toGetItYouNeed":
             MessageLookupByLibrary.simpleMessage("To get it you need:"),
         "toInfomation": MessageLookupByLibrary.simpleMessage("To information"),
         "toVacancy": MessageLookupByLibrary.simpleMessage("To vacancies"),
-        "tooShort": MessageLookupByLibrary.simpleMessage("too short"),
-        "tooShortEmail": MessageLookupByLibrary.simpleMessage("too short"),
-        "tooShortPassword": MessageLookupByLibrary.simpleMessage("too short"),
+        "tooShortEmailPassword":
+            MessageLookupByLibrary.simpleMessage("too short"),
+        "tooshort": MessageLookupByLibrary.simpleMessage("too short"),
         "tryItAgain": MessageLookupByLibrary.simpleMessage("Try it again"),
-        "underConstruction": MessageLookupByLibrary.simpleMessage(
-            "This page is under construction."),
         "upload": MessageLookupByLibrary.simpleMessage("Upload"),
         "us": MessageLookupByLibrary.simpleMessage("us"),
         "useful": MessageLookupByLibrary.simpleMessage("Useful"),
@@ -346,7 +325,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "veterans": MessageLookupByLibrary.simpleMessage("Veterans"),
         "wage": MessageLookupByLibrary.simpleMessage("Salary*"),
         "webSite": MessageLookupByLibrary.simpleMessage("Web site"),
-        "website": MessageLookupByLibrary.simpleMessage("Website"),
         "whatKindOfProject":
             MessageLookupByLibrary.simpleMessage("What kind of project it is?"),
         "whatYouMostInterestedIn": MessageLookupByLibrary.simpleMessage(
@@ -368,8 +346,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "writeYourMessage": MessageLookupByLibrary.simpleMessage("Message"),
         "writeYourStory":
             MessageLookupByLibrary.simpleMessage("Write your story"),
-        "writeYourSuggenstions":
-            MessageLookupByLibrary.simpleMessage("Suggestions"),
         "yes": MessageLookupByLibrary.simpleMessage("Yes"),
         "yourStory": MessageLookupByLibrary.simpleMessage("Your story")
       };

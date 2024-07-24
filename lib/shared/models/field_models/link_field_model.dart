@@ -16,7 +16,7 @@ extension LinkFieldModelValidationErrorEmpl on LinkFieldModelValidationError? {
       case LinkFieldModelValidationError.invalidLink:
         return context.l10n.invalidLink;
       case LinkFieldModelValidationError.invalidLength:
-        return '${context.l10n.link} ${context.l10n.tooShort}';
+        return '${context.l10n.link} ${context.l10n.tooshort}';
       case null:
         return null;
     }
