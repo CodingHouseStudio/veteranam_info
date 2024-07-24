@@ -15,6 +15,8 @@ class PrivacyPolicyBody extends StatelessWidget {
         key: KWidgetkeys.screen.privacyPolicy.text,
         text: TextSpan(
           children: context.l10n.privacyPolicyText
+              // ignore: noop_primitive_operations
+              .toString()
               .trim()
               .split('\n\n')
               .asMap()
