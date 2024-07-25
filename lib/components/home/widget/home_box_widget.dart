@@ -2,6 +2,7 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:veteranam/shared/shared.dart';
 
 class HomeBoxWidget extends StatelessWidget {
@@ -45,11 +46,26 @@ class HomeBoxWidget extends StatelessWidget {
                     ? AppTextStyle.h1Tablet
                     : AppTextStyle.h1Mob,
             child: AnimatedTextKit(
+              key: ValueKey<Language>(
+                context.read<AuthenticationBloc>().state.userSetting.locale,
+              ),
               animatedTexts: [
-                TyperAnimatedText(context.l10n.veterans),
-                TyperAnimatedText(context.l10n.theirFamilies),
-                TyperAnimatedText(context.l10n.activeMilitary),
-                TyperAnimatedText(context.l10n.militaryDoctors),
+                TyperAnimatedText(
+                  context.l10n.veterans,
+                  speed: const Duration(milliseconds: 55),
+                ),
+                TyperAnimatedText(
+                  context.l10n.theirFamilies,
+                  speed: const Duration(milliseconds: 55),
+                ),
+                TyperAnimatedText(
+                  context.l10n.activeMilitary,
+                  speed: const Duration(milliseconds: 55),
+                ),
+                TyperAnimatedText(
+                  context.l10n.militaryDoctors,
+                  speed: const Duration(milliseconds: 55),
+                ),
               ],
             ),
           ),
