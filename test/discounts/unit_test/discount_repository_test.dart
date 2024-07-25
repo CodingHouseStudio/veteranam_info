@@ -21,7 +21,7 @@ void main() {
     });
     group('${KGroupText.successful} ', () {
       setUp(() {
-        when(mockFirestoreService.getDiscounts()).thenAnswer(
+        when(mockFirestoreService.getDiscounts(null)).thenAnswer(
           (_) => Stream.value(KTestText.repositoryDiscountModelItems),
         );
         when(
@@ -81,7 +81,7 @@ void main() {
     });
     group('${KGroupText.failure} ', () {
       setUp(() {
-        when(mockFirestoreService.getDiscounts()).thenAnswer(
+        when(mockFirestoreService.getDiscounts(null)).thenAnswer(
           (realInvocation) => Stream.error(
             KGroupText.failureGet,
           ),

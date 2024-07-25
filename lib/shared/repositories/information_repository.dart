@@ -11,8 +11,10 @@ class InformationRepository implements IInformationRepository {
   final FirestoreService _firestoreService = GetIt.I.get<FirestoreService>();
 
   @override
-  Stream<List<InformationModel>> getInformationItems() =>
-      _firestoreService.getInformations();
+  Stream<List<InformationModel>> getInformationItems({
+    List<String>? reportIdItems,
+  }) =>
+      _firestoreService.getInformations(reportIdItems);
 
   @override
   void addMockInformationItems() {

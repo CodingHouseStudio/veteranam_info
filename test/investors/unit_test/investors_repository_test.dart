@@ -21,7 +21,7 @@ void main() {
 
     group('${KGroupText.successfulGet} ', () {
       setUp(() {
-        when(mockFirestoreService.getFunds()).thenAnswer(
+        when(mockFirestoreService.getFunds(null)).thenAnswer(
           (_) async => KTestText.fundItems,
         );
         when(
@@ -54,7 +54,7 @@ void main() {
 
     group('${KGroupText.failureGet} ', () {
       setUp(() {
-        when(mockFirestoreService.getFunds()).thenThrow(
+        when(mockFirestoreService.getFunds(null)).thenThrow(
           FirebaseException(plugin: KGroupText.failureGet),
         );
         if (GetIt.I.isRegistered<FirestoreService>()) {
