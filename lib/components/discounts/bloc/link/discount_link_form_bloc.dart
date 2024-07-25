@@ -47,12 +47,18 @@ class DiscountLinkFormBloc
         link: state.link.value,
         date: ExtendedDateTime.current,
       );
-      final showLink =
-          await _discountRepository.sendLink(discountLinkFormModel);
-      showLink.fold(
+      emit(
+        state.copyWith(
+          formState: LinkEnum.sending,
+          link: const LinkFieldModel.pure(),
+        ),
+      );
+      final resault = await _discountRepository.sendLink(discountLinkFormModel);
+      resault.fold(
         (l) => emit(
           state.copyWith(
             failure: l._toDiscountLinkForm(),
+            formState: LinkEnum.initial,
           ),
         ),
         (r) {
