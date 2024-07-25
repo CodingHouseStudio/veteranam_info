@@ -41,6 +41,7 @@ class DiscountLinkFormBloc
     Emitter<DiscountLinkFormState> emit,
   ) async {
     if (state.link.isValid) {
+      emit(state.copyWith(formState: LinkEnum.sending));
       final discountLinkFormModel = LinkModel(
         id: ExtendedDateTime.id,
         userId: _appAuthenticationRepository.currentUser.id,

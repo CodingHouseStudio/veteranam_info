@@ -28,4 +28,4 @@ class DiscountLinkFormState with _$DiscountLinkFormState {
   }) = _Initial;
 }
 
-enum LinkEnum { initial, inProgress, success, invalidData, notShow }
+enum LinkEnum { initial, inProgress, success, invalidData, notShow, sending }
