@@ -41,19 +41,24 @@ class DiscountLinkFormBloc
     Emitter<DiscountLinkFormState> emit,
   ) async {
     if (state.link.isValid) {
-      emit(state.copyWith(formState: LinkEnum.sending));
       final discountLinkFormModel = LinkModel(
         id: ExtendedDateTime.id,
         userId: _appAuthenticationRepository.currentUser.id,
         link: state.link.value,
         date: ExtendedDateTime.current,
       );
-      final showLink =
-          await _discountRepository.sendLink(discountLinkFormModel);
-      showLink.fold(
+      emit(
+        state.copyWith(
+          formState: LinkEnum.sending,
+          link: const LinkFieldModel.pure(),
+        ),
+      );
+      final resault = await _discountRepository.sendLink(discountLinkFormModel);
+      resault.fold(
         (l) => emit(
           state.copyWith(
             failure: l._toDiscountLinkForm(),
+            formState: LinkEnum.initial,
           ),
         ),
         (r) {
