@@ -10,7 +10,6 @@ class NotificationLinkWidget extends StatelessWidget {
     required this.fieldController,
     required this.filedErrorText,
     required this.enabled,
-    required this.showThankText,
     super.key,
   });
   final void Function(String) onChanged;
@@ -20,7 +19,6 @@ class NotificationLinkWidget extends StatelessWidget {
   final TextEditingController fieldController;
   final String? filedErrorText;
   final bool enabled;
-  final bool showThankText;
 
   @override
   Widget build(BuildContext context) {
@@ -62,13 +60,6 @@ class NotificationLinkWidget extends StatelessWidget {
                   field(context),
                   KSizedBox.kHeightSizedBox16,
                   button(context),
-                ],
-                if (showThankText) ...[
-                  KSizedBox.kHeightSizedBox8,
-                  Text(
-                    context.l10n.linkThankMessage,
-                    style: AppTextStyle.materialThemeBodyMediumNeutralVariant60,
-                  ),
                 ],
               ],
             ),

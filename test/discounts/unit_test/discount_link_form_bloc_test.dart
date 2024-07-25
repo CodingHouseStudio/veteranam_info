@@ -54,10 +54,6 @@ void main() {
         ),
         const DiscountLinkFormState(
           link: LinkFieldModel.pure(),
-          formState: LinkEnum.sending,
-        ),
-        const DiscountLinkFormState(
-          link: LinkFieldModel.pure(),
           formState: LinkEnum.success,
         ),
       ],
@@ -85,13 +81,9 @@ void main() {
           link: LinkFieldModel.dirty(KTestText.linkModelWrong.link),
           formState: LinkEnum.inProgress,
         ),
-        const DiscountLinkFormState(
-          link: LinkFieldModel.pure(),
-          formState: LinkEnum.sending,
-        ),
-        const DiscountLinkFormState(
-          link: LinkFieldModel.pure(),
-          formState: LinkEnum.initial,
+        DiscountLinkFormState(
+          link: LinkFieldModel.dirty(KTestText.linkModelWrong.link),
+          formState: LinkEnum.inProgress,
           failure: DiscountLinkFormFailure.error,
         ),
       ],
