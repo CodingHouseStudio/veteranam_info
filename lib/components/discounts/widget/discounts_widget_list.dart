@@ -35,9 +35,11 @@ List<Widget> discountsWidgetList({
           create: (context) => GetIt.I.get<DiscountLinkFormBloc>(),
           child: BlocConsumer<DiscountLinkFormBloc, DiscountLinkFormState>(
             listener: (context, state) {
+              if (state.formState == LinkEnum.sending) {
+                controller.clear();
+              }
               if (state.formState == LinkEnum.success) {
                 context.read<DiscountLinkCubit>().started();
-                controller.clear();
               }
             },
             builder: (context, _) => NotificationLinkWidget(
@@ -61,6 +63,11 @@ List<Widget> discountsWidgetList({
                           .value(context)
                       : null,
               enabled: context.read<DiscountLinkCubit>().state,
+              showThankText:
+                  context.read<DiscountLinkFormBloc>().state.formState ==
+                          LinkEnum.sending ||
+                      context.read<DiscountLinkFormBloc>().state.formState ==
+                          LinkEnum.success,
             ),
           ),
         ),
