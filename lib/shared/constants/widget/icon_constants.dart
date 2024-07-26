@@ -118,4 +118,6 @@ abstract class KIcon {
   static const _KIcon calendarClock = _KIcon(Symbols.calendar_clock);
   static const _KIcon user = _KIcon(Symbols.person);
   static const _KIcon link = _KIcon(Symbols.link);
+  static const _KIcon settings = _KIcon(Symbols.settings);
+  static const _KIcon investors = _KIcon(Symbols.business);
 }
