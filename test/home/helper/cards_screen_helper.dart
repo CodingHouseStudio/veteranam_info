@@ -35,6 +35,11 @@ Future<void> cardsScreenHelper({
 
       await scrollingHelper(
         tester: tester,
+        offset: KTestConstants.scrollingDown100,
+      );
+
+      await scrollingHelper(
+        tester: tester,
         itemKey: KWidgetkeys.screen.home.discountImage,
       );
 
