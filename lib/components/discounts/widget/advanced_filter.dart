@@ -10,82 +10,83 @@ class AdvancedFilterMob extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _AdvanceFilter.button(
-      onPressed: () async {
-        final bloc = context.read<DiscountWatcherBloc>();
-        await showModalBottomSheet<void>(
-          context: context,
-          isScrollControlled: true,
-          barrierColor:
-              AppColors.materialThemeKeyColorsSecondary.withOpacity(0.2),
-          backgroundColor: AppColors.materialThemeKeyColorsNeutral,
-          shape: const RoundedRectangleBorder(
-            borderRadius:
-                BorderRadius.vertical(top: Radius.circular(KSize.kRadius32)),
-          ),
-          showDragHandle: true,
-          builder: (context) => FractionallySizedBox(
-            heightFactor: 0.9,
-            child: BlocProvider.value(
-              value: bloc,
-              child: BlocBuilder<DiscountWatcherBloc, DiscountWatcherState>(
-                builder: (context, state) => Column(
-                  children: [
-                    // Row(
-                    //   children: [
-                    //     IconButtonWidget(
-                    //       key: KWidgetkeys.screen.discounts.cancelIcon,
-                    //       icon: KIcon.close,
-                    //       background: AppColors.materialThemeWhite,
-                    //       padding: KPadding.kPaddingSize12,
-                    //       onPressed: () => context.pop(),
-                    //     ),
-                    KSizedBox.kHeightSizedBox16,
-                    Text(
-                      context.l10n.advancedFilter,
-                      key: KWidgetkeys.screen.discounts.cancelText,
-                      style: AppTextStyle.materialThemeTitleMedium,
-                    ),
-                    //   ],
-                    // ),
-                    Expanded(
-                      child: _AdvanceFilter.listView(
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: TextButton.icon(
+        key: KWidgetkeys.screen.discounts.advancedFilterButton,
+        style: KButtonStyles.advancedButtonStyle,
+        label: Text(
+          context.l10n.advancedFilter,
+          style: AppTextStyle.materialThemeTitleMedium,
+        ),
+        // KSizedBox.kWidthSizedBox8,
+        icon: const IconWidget(
+          icon: KIcon.tune,
+          background: AppColors.materialThemeKeyColorsNeutral,
+          padding: KPadding.kPaddingSize12,
+        ),
+
+        onPressed: () async {
+          final bloc = context.read<DiscountWatcherBloc>();
+          await showModalBottomSheet<void>(
+            context: context,
+            isScrollControlled: true,
+            barrierColor:
+                AppColors.materialThemeKeyColorsSecondary.withOpacity(0.2),
+            backgroundColor: AppColors.materialThemeKeyColorsNeutral,
+            shape: const RoundedRectangleBorder(
+              borderRadius:
+                  BorderRadius.vertical(top: Radius.circular(KSize.kRadius32)),
+            ),
+            showDragHandle: true,
+            builder: (context) => FractionallySizedBox(
+              heightFactor: 0.9,
+              child: BlocProvider.value(
+                value: bloc,
+                child: BlocBuilder<DiscountWatcherBloc, DiscountWatcherState>(
+                  builder: (context, state) => Column(
+                    children: [
+                      // Row(
+                      //   children: [
+                      //     IconButtonWidget(
+                      //       key: KWidgetkeys.screen.discounts.cancelIcon,
+                      //       icon: KIcon.close,
+                      //       background: AppColors.materialThemeWhite,
+                      //       padding: KPadding.kPaddingSize12,
+                      //       onPressed: () => context.pop(),
+                      //     ),
+                      KSizedBox.kHeightSizedBox16,
+                      Text(
+                        context.l10n.advancedFilter,
+                        key: KWidgetkeys.screen.discounts.cancelText,
+                        style: AppTextStyle.materialThemeTitleMedium,
+                      ),
+                      //   ],
+                      // ),
+                      Expanded(
+                        child: _AdvanceFilter.listView(
+                          isDesk: false,
+                          context: context,
+                        ),
+                      ),
+                      ..._AdvanceFilter.resetButton(
                         isDesk: false,
                         context: context,
                       ),
-                    ),
-                    ..._AdvanceFilter.resetButton(
-                      isDesk: false,
-                      context: context,
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-        );
-      },
-      isDesk: false,
-      context: context,
+          );
+        },
+      ),
     );
   }
 }
 
-class AdvancedFilterDesk extends StatefulWidget {
+class AdvancedFilterDesk extends StatelessWidget {
   const AdvancedFilterDesk({super.key});
-
-  @override
-  State<AdvancedFilterDesk> createState() => _AdvancedFilterDeskState();
-}
-
-class _AdvancedFilterDeskState extends State<AdvancedFilterDesk> {
-  late bool bodyHiden;
-
-  @override
-  void initState() {
-    bodyHiden = true;
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -95,29 +96,26 @@ class _AdvancedFilterDeskState extends State<AdvancedFilterDesk> {
           padding: const EdgeInsets.only(right: KPadding.kPaddingSize32),
           child: Column(
             children: [
-              _AdvanceFilter.button(
-                onPressed: () => setState(() {
-                  bodyHiden = !bodyHiden;
-                }),
-                isDesk: true,
-                context: context,
-                icon: bodyHiden
-                    ? KIcon.trailing.copyWith(
-                        key: KWidgetkeys
-                            .screen.discounts.advancedFilterButtonIcon,
-                      )
-                    : KIcon.trailingUp.copyWith(
-                        key: KWidgetkeys
-                            .screen.discounts.advancedFilterButtonIconUp,
-                      ),
+              Row(
+                children: [
+                  const IconWidget(
+                    icon: KIcon.tune,
+                    background: AppColors.materialThemeKeyColorsNeutral,
+                    padding: KPadding.kPaddingSize20,
+                  ),
+                  KSizedBox.kWidthSizedBox8,
+                  Expanded(
+                    child: Text(
+                      context.l10n.advancedFilter,
+                      style: AppTextStyle.materialThemeHeadlineSmall,
+                    ),
+                  ),
+                ],
               ),
-              if (!bodyHiden) ...[
-                Expanded(
-                  child:
-                      _AdvanceFilter.listView(isDesk: true, context: context),
-                ),
-                ..._AdvanceFilter.resetButton(isDesk: true, context: context),
-              ],
+              Expanded(
+                child: _AdvanceFilter.listView(isDesk: true, context: context),
+              ),
+              ..._AdvanceFilter.resetButton(isDesk: true, context: context),
             ],
           ),
         );
@@ -274,50 +272,6 @@ abstract class _AdvanceFilter {
       ),
     ];
   }
-
-  static Widget button({
-    required bool isDesk,
-    required void Function() onPressed,
-    required BuildContext context,
-    Icon? icon,
-  }) =>
-      Align(
-        alignment: Alignment.centerLeft,
-        child: TextButton.icon(
-          key: KWidgetkeys.screen.discounts.advancedFilterButton,
-          style: KButtonStyles.advancedButtonStyle,
-          label: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              if (isDesk)
-                Expanded(
-                  child: Text(
-                    context.l10n.advancedFilter,
-                    style: isDesk
-                        ? AppTextStyle.materialThemeHeadlineSmall
-                        : AppTextStyle.materialThemeTitleMedium,
-                  ),
-                )
-              else
-                Text(
-                  context.l10n.advancedFilter,
-                  style: isDesk
-                      ? AppTextStyle.materialThemeHeadlineSmall
-                      : AppTextStyle.materialThemeTitleMedium,
-                ),
-              if (icon != null) ...[KSizedBox.kWidthSizedBox8, icon],
-            ],
-          ),
-          // KSizedBox.kWidthSizedBox8,
-          icon: IconWidget(
-            icon: KIcon.tune,
-            background: AppColors.materialThemeKeyColorsNeutral,
-            padding: isDesk ? KPadding.kPaddingSize20 : KPadding.kPaddingSize12,
-          ),
-          onPressed: onPressed,
-          //if (isDesk) KIcon.meil,
-        ),
-      );
 
   static bool _isCheck({
     required int index,
