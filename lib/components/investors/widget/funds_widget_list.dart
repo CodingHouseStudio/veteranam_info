@@ -29,7 +29,7 @@ List<Widget> _fundsWidgetList({
         isLoading: isLoading,
       ),
       isDesk: isDesk,
-      shimmerItemsNumber: KDimensions.shimmerFundsItems,
+      shimmerItemsNumber: KDimensions.shimmerFundsDeskItems,
       isNotFailure: isNotFailure,
       shimmerItem: List.generate(
         KDimensions.donateCardsLine,
@@ -51,7 +51,7 @@ List<Widget> _fundsWidgetList({
             .add(const InvestorsWatcherEvent.getReport()),
       ),
       isDesk: isDesk,
-      shimmerItemsNumber: KDimensions.shimmerFundsItems,
+      shimmerItemsNumber: KDimensions.shimmerFundsMobItems,
       isNotFailure: isNotFailure,
       shimmerItem: KMockText.fundModel,
     );
