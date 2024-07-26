@@ -8,7 +8,7 @@ Widget _imageWidget(BuildContext context) {
           context.read<StoryAddBloc>().add(const StoryAddEvent.imageUpdated()),
       child: DecoratedBox(
         decoration: KWidgetTheme.boxDecorationImage,
-        child: ImageWidget(
+        child: NetworkImageWidget(
           key: KWidgetkeys.widget.cardAddImage.widget,
           imageUrl: context.read<StoryAddBloc>().state.image.value!.path,
           fit: BoxFit.cover,
