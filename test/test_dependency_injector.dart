@@ -10,6 +10,7 @@ import 'text_dependency.dart';
 void configureDependenciesTest() {
   // register logic if user id empty user setting is also empty
   userSetting();
+  KTest.testIsWeb = true;
   // Services
   GetIt.I.registerSingleton<FirebaseAuth>(MockFirebaseAuth());
   GetIt.I.registerSingleton<GoogleSignIn>(GoogleSignIn());

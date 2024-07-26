@@ -9,7 +9,7 @@ Future<void> homePumpAppHelper({
   // required IFeedbackRepository mockFeedbackRepository,
   required IHomeRepository mockHomeRepository,
   required AuthenticationRepository mockAuthenticationRepository,
-  required IAppAuthenticationRepository mockAppAuthenticationRepository,
+  // required IAppAuthenticationRepository mockAppAuthenticationRepository,
   required WidgetTester tester,
   MockGoRouter? mockGoRouter,
 }) async {
