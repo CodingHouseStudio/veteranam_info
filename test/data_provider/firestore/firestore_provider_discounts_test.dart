@@ -37,6 +37,19 @@ void main() {
       ).thenAnswer((realInvocation) => mockCollectionReference);
 
       when(
+        mockCollectionReference.orderBy(
+          DiscountModelJsonField.dateVerified,
+          descending: true,
+        ),
+      ).thenAnswer((realInvocation) => mockQuery);
+      when(
+        mockQuery.where(
+          DiscountModelJsonField.id,
+          whereNotIn: null,
+        ),
+      ).thenAnswer((realInvocation) => mockQuery);
+
+      when(
         mockCollectionReference.doc(KTestText.discountModelItems.last.id),
       ).thenAnswer(
         (_) => mockDocumentReference,
@@ -58,7 +71,7 @@ void main() {
       );
 
       when(
-        mockCollectionReference.snapshots(
+        mockQuery.snapshots(
           includeMetadataChanges: true,
         ),
       ).thenAnswer(
@@ -143,7 +156,7 @@ void main() {
     });
     test('get discounts', () async {
       await expectLater(
-        firestoreService.getDiscounts(),
+        firestoreService.getDiscounts(null),
         emitsInOrder([
           [KTestText.discountModelItems.last],
         ]),
@@ -154,7 +167,16 @@ void main() {
         mockFirebaseFirestore.collection(FirebaseCollectionName.discount),
       ).called(1);
       verify(
-        mockCollectionReference.snapshots(
+        mockCollectionReference.orderBy(
+          DiscountModelJsonField.dateVerified,
+          descending: true,
+        ),
+      ).called(1);
+      verify(
+        mockQuery.where(DiscountModelJsonField.id, whereNotIn: null),
+      ).called(1);
+      verify(
+        mockQuery.snapshots(
           includeMetadataChanges: true,
         ),
       ).called(1);
@@ -172,7 +194,7 @@ void main() {
       ).called(1);
 
       expect(
-        firestoreService.getDiscounts(),
+        firestoreService.getDiscounts(null),
         emits([KTestText.discountModelItems.last]),
       );
     });

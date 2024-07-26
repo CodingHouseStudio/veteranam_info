@@ -23,13 +23,13 @@ class InvestorsWatcherBloc
             loadingStatus: LoadingStatus.initial,
             loadingFundItems: [],
             itemsLoaded: 0,
-            reportItems: [],
+            // reportItems: [],
             failure: null,
           ),
         ) {
     on<_Started>(_onStarted);
     on<_LoadNextItems>(_loadNextItems);
-    on<_GetReport>(_onGetReport);
+    // on<_GetReport>(_onGetReport);
   }
   final IInvestorsRepository _investorsRepository;
   final IReportRepository _reportRepository;
@@ -42,7 +42,9 @@ class InvestorsWatcherBloc
 
     final reportItems = await _getReport();
 
-    final result = await _investorsRepository.getFunds();
+    final result = await _investorsRepository.getFunds(
+      reportIdItems: reportItems?.getIdCard,
+    );
     result.fold(
       (l) => emit(
         state.copyWith(
@@ -51,22 +53,22 @@ class InvestorsWatcherBloc
         ),
       ),
       (r) {
-        final list = r.removeReportItems(
-          checkFunction: (item) => item.id,
-          reportItems: reportItems,
-        );
+        // final list = r.removeReportItems(
+        //   checkFunction: (item) => item.id,
+        //   reportItems: reportItems,
+        // );
         emit(
           InvestorsWatcherState(
-            fundItems: list,
+            fundItems: r,
             loadingStatus: LoadingStatus.loaded,
             loadingFundItems: _filter(
               itemsLoaded: state.itemsLoaded,
               loadItems: KDimensions.investorsLoadItems,
               reportItems: reportItems,
-              list: list,
+              list: r,
             ),
             itemsLoaded: KDimensions.investorsLoadItems,
-            reportItems: reportItems,
+            // reportItems: reportItems,
             failure: null,
           ),
         );
@@ -104,38 +106,38 @@ class InvestorsWatcherBloc
     );
   }
 
-  Future<void> _onGetReport(
-    _GetReport event,
-    Emitter<InvestorsWatcherState> emit,
-  ) async {
-    final reportItems = await _getReport();
-    final list = state.fundItems.removeReportItems(
-      checkFunction: (item) => item.id,
-      reportItems: reportItems,
-    );
+  // Future<void> _onGetReport(
+  //   _GetReport event,
+  //   Emitter<InvestorsWatcherState> emit,
+  // ) async {
+  //   final reportItems = await _getReport();
+  //   final list = state.fundItems.removeReportItems(
+  //     checkFunction: (item) => item.id,
+  //     reportItems: reportItems,
+  //   );
 
-    emit(
-      state.copyWith(
-        reportItems: reportItems,
-        loadingFundItems: _filter(
-          itemsLoaded: state.itemsLoaded,
-          loadItems: null,
-          reportItems: reportItems,
-          list: list,
-        ),
-        fundItems: list,
-      ),
-    );
-  }
+  //   emit(
+  //     state.copyWith(
+  //       reportItems: reportItems,
+  //       loadingFundItems: _filter(
+  //         itemsLoaded: state.itemsLoaded,
+  //         loadItems: null,
+  //         reportItems: reportItems,
+  //         list: list,
+  //       ),
+  //       fundItems: list,
+  //     ),
+  //   );
+  // }
 
-  Future<List<ReportModel>> _getReport() async {
+  Future<List<ReportModel>?> _getReport() async {
     final reportItems = await _reportRepository.getCardReportById(
       cardEnum: CardEnum.funds,
       userId: _appAuthenticationRepository.currentUser.id,
     );
     return reportItems.fold(
-      (l) => [],
-      (r) => r,
+      (l) => null,
+      (r) => r.isEmpty ? null : r,
     );
   }
 
@@ -145,17 +147,17 @@ class InvestorsWatcherBloc
     List<FundModel>? list,
     List<ReportModel>? reportItems,
   }) {
-    final reportItemsValue = reportItems ?? state.reportItems;
+    // final reportItemsValue = reportItems ?? state.reportItems;
     return (list ?? state.fundItems)
-        .where(
-          (item) => reportItemsValue.every(
-            (report) => report.cardId != item.id,
-          ),
-        )
-        .toList()
+        // .where(
+        //   (item) => reportItemsValue.every(
+        //     (report) => report.cardId != item.id,
+        //   ),
+        // )
+        // .toList()
         .loading(
-          itemsLoaded: itemsLoaded,
-          loadItems: loadItems,
-        );
+      itemsLoaded: itemsLoaded,
+      loadItems: loadItems,
+    );
   }
 }

@@ -19,7 +19,7 @@ class FirestoreService {
   @visibleForTesting
   static const getOptions = GetOptions();
   @visibleForTesting
-  static const getCahseOptions = GetOptions(source: Source.cache);
+  static const getCacheOptions = GetOptions(source: Source.cache);
 
   Future<void> _initFirestoreSettings() async {
     // Set settings for persistence based on platform
@@ -68,7 +68,7 @@ class FirestoreService {
         // If the server is unavailable, fall back to the cache
         final docSnapshot = await _db
             .collection(FirebaseCollectionName.questions)
-            .get(getCahseOptions);
+            .get(getCacheOptions);
 
         return docSnapshot.docs
             .map((doc) => QuestionModel.fromJson(doc.data()))
@@ -79,11 +79,15 @@ class FirestoreService {
     }
   }
 
-  Future<List<FundModel>> getFunds() async {
+  Future<List<FundModel>> getFunds(
+    List<String>? reportIdItems,
+  ) async {
     try {
       // Try to get the data from the server first
-      final docSnapshot =
-          await _db.collection(FirebaseCollectionName.funds).get(getOptions);
+      final docSnapshot = await _db
+          .collection(FirebaseCollectionName.funds)
+          .where(DiscountModelJsonField.id, whereNotIn: reportIdItems?.toSet())
+          .get(getOptions);
 
       // If the server fetch is successful, return the data
       return docSnapshot.docs
@@ -95,7 +99,7 @@ class FirestoreService {
         // If the server is unavailable, fall back to the cache
         final docSnapshot = await _db
             .collection(FirebaseCollectionName.funds)
-            .get(getCahseOptions);
+            .get(getCacheOptions);
 
         return docSnapshot.docs
             .map((doc) => FundModel.fromJson(doc.data()))
@@ -120,8 +124,10 @@ class FirestoreService {
         .update(userSetting.toJson());
   }
 
-  Stream<List<InformationModel>> getInformations() => _db
+  Stream<List<InformationModel>> getInformations(List<String>? reportIdItems) =>
+      _db
           .collection(FirebaseCollectionName.information)
+          .where(DiscountModelJsonField.id, whereNotIn: reportIdItems?.toSet())
           .snapshots(includeMetadataChanges: true) // Enable caching
           .map(
         (snapshot) {
@@ -257,9 +263,11 @@ class FirestoreService {
         .toList();
   }
 
-  Stream<List<DiscountModel>> getDiscounts() {
+  Stream<List<DiscountModel>> getDiscounts(List<String>? reportIdItems) {
     return _db
         .collection(FirebaseCollectionName.discount)
+        .orderBy(DiscountModelJsonField.dateVerified, descending: true)
+        .where(DiscountModelJsonField.id, whereNotIn: reportIdItems?.toSet())
         .snapshots(includeMetadataChanges: true) // Enable caching
         .map(
       (snapshot) {
@@ -380,15 +388,34 @@ class FirestoreService {
     required CardEnum cardEnum,
     required String userId,
   }) async {
-    final querySnapshot = await _db
-        .collection(FirebaseCollectionName.report)
-        .where(ReportModelJsonField.card, isEqualTo: cardEnum.getValue)
-        .where(ReportModelJsonField.userId, isEqualTo: userId)
-        .get();
+    try {
+      // If cache is not successful or not used, try to get data from server
+      final querySnapshot = await _db
+          .collection(FirebaseCollectionName.report)
+          .where(ReportModelJsonField.card, isEqualTo: cardEnum.getValue)
+          .where(ReportModelJsonField.userId, isEqualTo: userId)
+          .get(getOptions);
 
-    return querySnapshot.docs
-        .map((doc) => ReportModel.fromJson(doc.data()))
-        .toList();
+      return querySnapshot.docs
+          .map((doc) => ReportModel.fromJson(doc.data()))
+          .toList();
+    } on FirebaseException catch (e) {
+      if (e.code == 'unavailable') {
+        // If the server is unavailable and cache has not been tried, attempt
+        // to get data from cache
+        final cacheSnapshot = await _db
+            .collection(FirebaseCollectionName.report)
+            .where(ReportModelJsonField.card, isEqualTo: cardEnum.getValue)
+            .where(ReportModelJsonField.userId, isEqualTo: userId)
+            .get(getCacheOptions);
+
+        return cacheSnapshot.docs
+            .map((doc) => ReportModel.fromJson(doc.data()))
+            .toList();
+      } else {
+        rethrow;
+      }
+    }
   }
 
   Future<void> sendRespond(EmployeeRespondModel respondModel) => _db

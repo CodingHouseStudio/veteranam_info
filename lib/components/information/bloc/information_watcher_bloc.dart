@@ -27,7 +27,7 @@ class InformationWatcherBloc
             filtersIndex: [],
             itemsLoaded: 0,
             failure: null,
-            reportItems: [],
+            // reportItems: [],
           ),
         ) {
     on<_Started>(_onStarted);
@@ -35,7 +35,7 @@ class InformationWatcherBloc
     on<_Failure>(_onFailure);
     on<_LoadNextItems>(_onLoadNextItems);
     on<_Filter>(_onFilter);
-    on<_GetReport>(_onGetReport);
+    // on<_GetReport>(_onGetReport);
     // on<_FilterReset>(_onFilterReset);
     on<_Like>(_onLike);
     on<_ChangeLike>(_onChangeLike);
@@ -56,12 +56,15 @@ class InformationWatcherBloc
     final reportItems = await _getReport();
 
     await _informationItemsSubscription?.cancel();
-    _informationItemsSubscription =
-        _informationRepository.getInformationItems().listen(
+    _informationItemsSubscription = _informationRepository
+        .getInformationItems(
+      reportIdItems: reportItems?.getIdCard,
+    )
+        .listen(
       (information) => add(
         InformationWatcherEvent.updated(
-          informationItemsModel: information,
-          reportItems: reportItems,
+          information,
+          // reportItems: reportItems,
         ),
       ),
       onError: (dynamic error) {
@@ -75,25 +78,25 @@ class InformationWatcherBloc
     _Updated event,
     Emitter<InformationWatcherState> emit,
   ) {
-    final items = event.informationItemsModel.removeReportItems(
-      checkFunction: (item) => item.id,
-      reportItems: event.reportItems,
-    );
+    // final items = event.informationItemsModel.removeReportItems(
+    //   checkFunction: (item) => item.id,
+    //   reportItems: event.reportItems,
+    // );
     final (:list, :loadingStatus) = _filter(
       filtersIndex: state.filtersIndex,
       itemsLoaded: state.itemsLoaded,
-      list: items,
-      reportItems: event.reportItems,
+      list: event.informationItemsModel,
+      // reportItems: event.reportItems,
     );
     emit(
       InformationWatcherState(
-        informationModelItems: items,
+        informationModelItems: event.informationItemsModel,
         loadingStatus: loadingStatus,
         filteredInformationModelItems: list,
         filtersIndex: state.filtersIndex,
         itemsLoaded: state.itemsLoaded.getLoaded(list: list),
         failure: null,
-        reportItems: event.reportItems,
+        // reportItems: event.reportItems,
       ),
     );
   }
@@ -164,65 +167,65 @@ class InformationWatcherBloc
     required List<int>? filtersIndex,
     required int itemsLoaded,
     List<InformationModel>? list,
-    List<ReportModel>? reportItems,
+    // List<ReportModel>? reportItems,
     int? loadItems,
   }) {
-    final reportItemsValue = reportItems ?? state.reportItems;
+    // final reportItemsValue = reportItems ?? state.reportItems;
     return (list ?? state.informationModelItems)
-        .where(
-          (item) => reportItemsValue.every(
-            (report) => report.cardId != item.id,
-          ),
-        )
-        .toList()
+        // .where(
+        //   (item) => reportItemsValue.every(
+        //     (report) => report.cardId != item.id,
+        //   ),
+        // )
+        // .toList()
         .loadingFilterAndStatus(
-          filtersIndex: filtersIndex,
-          itemsLoaded: itemsLoaded,
-          getFilter: (InformationModel item) => item.category,
-          loadItems: loadItems,
-        );
-  }
-
-  Future<void> _onGetReport(
-    _GetReport event,
-    Emitter<InformationWatcherState> emit,
-  ) async {
-    final reportItems = await _getReport();
-    final items = state.informationModelItems.removeReportItems(
-      checkFunction: (item) => item.id,
-      reportItems: reportItems,
-    );
-
-    final filtersIndex = items.updateFilterList(
-      getFilter: (item) => item.category,
-      previousList: state.informationModelItems,
-      previousFilter: state.filtersIndex,
-    );
-    final (:list, :loadingStatus) = _filter(
       filtersIndex: filtersIndex,
-      itemsLoaded: state.itemsLoaded,
-      list: items,
-    );
-
-    emit(
-      state.copyWith(
-        reportItems: reportItems,
-        informationModelItems: items,
-        filteredInformationModelItems: list,
-        filtersIndex: filtersIndex,
-        loadingStatus: loadingStatus,
-      ),
+      itemsLoaded: itemsLoaded,
+      getFilter: (InformationModel item) => item.category,
+      loadItems: loadItems,
     );
   }
 
-  Future<List<ReportModel>> _getReport() async {
+  // Future<void> _onGetReport(
+  //   _GetReport event,
+  //   Emitter<InformationWatcherState> emit,
+  // ) async {
+  //   final reportItems = await _getReport();
+  //   final items = state.informationModelItems.removeReportItems(
+  //     checkFunction: (item) => item.id,
+  //     reportItems: reportItems,
+  //   );
+
+  //   final filtersIndex = items.updateFilterList(
+  //     getFilter: (item) => item.category,
+  //     previousList: state.informationModelItems,
+  //     previousFilter: state.filtersIndex,
+  //   );
+  //   final (:list, :loadingStatus) = _filter(
+  //     filtersIndex: filtersIndex,
+  //     itemsLoaded: state.itemsLoaded,
+  //     list: items,
+  //   );
+
+  //   emit(
+  //     state.copyWith(
+  //       reportItems: reportItems,
+  //       informationModelItems: items,
+  //       filteredInformationModelItems: list,
+  //       filtersIndex: filtersIndex,
+  //       loadingStatus: loadingStatus,
+  //     ),
+  //   );
+  // }
+
+  Future<List<ReportModel>?> _getReport() async {
     final reportItems = await _reportRepository.getCardReportById(
       cardEnum: CardEnum.information,
       userId: _appAuthenticationRepository.currentUser.id,
     );
     return reportItems.fold(
-      (l) => [],
-      (r) => r,
+      (l) => null,
+      (r) => r.isEmpty ? null : r,
     );
   }
 

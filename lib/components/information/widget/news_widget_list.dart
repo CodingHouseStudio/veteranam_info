@@ -21,9 +21,9 @@ List<Widget> _newsWidgetList({
                     isLiked: like,
                   ),
                 ),
-        afterReportEvent: () => context
-            .read<InformationWatcherBloc>()
-            .add(const InformationWatcherEvent.getReport()),
+        // () => context
+        //     .read<InformationWatcherBloc>()
+        //     .add(const InformationWatcherEvent.getReport()),
       ),
       isDesk: isDesk,
       shimmerItemsNumber: KDimensions.shimmerInformationItems,

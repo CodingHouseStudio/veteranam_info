@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -29,7 +30,7 @@ class DiscountWatcherBloc
             itemsLoaded: 0,
             failure: null,
             filtersLocationIndex: [],
-            reportItems: [],
+            // reportItems: [],
             categoryDiscountModelItems: [],
           ),
         ) {
@@ -40,7 +41,7 @@ class DiscountWatcherBloc
     on<_FilterCategory>(_onFilterCategory);
     on<_FilterLocation>(_onFilterLocation);
     on<_FilterReset>(_onFilterReset);
-    on<_GetReport>(_onGetReport);
+    // on<_GetReport>(_onGetReport);
   }
 
   final IDiscountRepository _discountRepository;
@@ -52,18 +53,24 @@ class DiscountWatcherBloc
     _Started event,
     Emitter<DiscountWatcherState> emit,
   ) async {
+    debugPrint('start date: ${DateTime.now()}');
     emit(state.copyWith(loadingStatus: LoadingStatus.loading));
 
     final reportItems = await _getReport();
 
     await _discountItemsSubscription?.cancel();
-    _discountItemsSubscription = _discountRepository.getDiscountItems().listen(
-      (discount) => add(
-        DiscountWatcherEvent.updated(
-          discountItemsModel: discount,
-          reportItems: reportItems,
-        ),
-      ),
+    _discountItemsSubscription = _discountRepository
+        .getDiscountItems(
+      reportIdItems: reportItems?.getIdCard,
+    )
+        .listen(
+      (discount) {
+        add(
+          DiscountWatcherEvent.updated(
+            discount,
+          ),
+        );
+      },
       onError: (dynamic error) {
         // debugPrint('error is $error');
         add(DiscountWatcherEvent.failure(error));
@@ -75,45 +82,48 @@ class DiscountWatcherBloc
     _Updated event,
     Emitter<DiscountWatcherState> emit,
   ) async {
-    final items = event.discountItemsModel.removeReportItems(
-      checkFunction: (item) => item.id,
-      reportItems: event.reportItems,
-    )..sort(
-        (a, b) {
-          final dateComparison = b.dateVerified.compareTo(a.dateVerified);
-          if (dateComparison == 0) {
-            // Attempt int conversion using null-aware operators
-            final idA = int.tryParse(a.id);
-            final idB = int.tryParse(b.id);
+    // final items = event.discountItemsModel.removeReportItems(
+    //   checkFunction: (item) => item.id,
+    //   reportItems: event.reportItems,
+    // );
+    // ..sort(
+    //     (a, b) {
+    //       final dateComparison = b.dateVerified.compareTo(a.dateVerified);
+    //       if (dateComparison == 0) {
+    //         // Attempt int conversion using null-aware operators
+    //         final idA = int.tryParse(a.id);
+    //         final idB = int.tryParse(b.id);
 
-            if (idA != null && idB != null) {
-              return idB.compareTo(idA); // Descending order
-            } else {
-              return 1;
-            }
-          }
-          return dateComparison;
-        },
-      );
+    //         if (idA != null && idB != null) {
+    //           return idB.compareTo(idA); // Descending order
+    //         } else {
+    //           return 1;
+    //         }
+    //       }
+    //       return dateComparison;
+    //     },
+    //   );
+    debugPrint('without filter finish date: ${DateTime.now()}');
     final categoryFilter = _filterCategory(
       categoryIndex: state.filtersCategoriesIndex,
-      list: items,
+      list: event.discountItemsModel,
     );
     final (:list, :loadingStatus) = _filterLocation(
       itemsLoaded: KDimensions.loadItems,
       locationIndex: state.filtersLocationIndex,
       list: categoryFilter,
     );
+    debugPrint('finish date: ${DateTime.now()}');
     emit(
       _Initial(
-        discountModelItems: items,
+        discountModelItems: event.discountItemsModel,
         loadingStatus: loadingStatus,
         filteredDiscountModelItems: list,
         filtersCategoriesIndex: state.filtersCategoriesIndex,
         itemsLoaded: state.itemsLoaded.getLoaded(list: list),
         failure: null,
         filtersLocationIndex: state.filtersLocationIndex,
-        reportItems: event.reportItems,
+        // reportItems: event.reportItems,
         categoryDiscountModelItems: categoryFilter,
       ),
     );
@@ -283,58 +293,58 @@ class DiscountWatcherBloc
         getFilter: (item) => item.category,
       );
 
-  Future<void> _onGetReport(
-    _GetReport event,
-    Emitter<DiscountWatcherState> emit,
-  ) async {
-    // Get report items and remove them from existing items
-    final reportItems = await _getReport();
-    final items = state.discountModelItems.removeReportItems(
-      checkFunction: (item) => item.id,
-      reportItems: reportItems,
-    );
+  // Future<void> _onGetReport(
+  //   _GetReport event,
+  //   Emitter<DiscountWatcherState> emit,
+  // ) async {
+  //   // Get report items and remove them from existing items
+  //   final reportItems = await _getReport();
+  //   final items = state.discountModelItems.removeReportItems(
+  //     checkFunction: (item) => item.id,
+  //     reportItems: reportItems,
+  //   );
 
-    final filtersCategoriesIndex = items.updateFilterList(
-      getFilter: (item) => item.category,
-      previousList: state.discountModelItems,
-      previousFilter: state.filtersCategoriesIndex,
-    );
-    final filtersLocationIndex = items.updateFilterList(
-      getFilter: (item) =>
-          item.location?.toList() ?? item.subLocation?._getList ?? const [],
-      previousList: state.discountModelItems,
-      previousFilter: state.filtersLocationIndex,
-    );
-    final categoryItems = _filterCategory(
-      categoryIndex: filtersCategoriesIndex,
-      list: items,
-    );
-    final (:list, :loadingStatus) = _filterLocation(
-      locationIndex: filtersLocationIndex,
-      itemsLoaded: state.itemsLoaded,
-      list: categoryItems,
-    );
-    emit(
-      state.copyWith(
-        discountModelItems: items,
-        reportItems: reportItems,
-        filteredDiscountModelItems: list,
-        loadingStatus: loadingStatus,
-        filtersCategoriesIndex: filtersCategoriesIndex,
-        filtersLocationIndex: filtersLocationIndex,
-        categoryDiscountModelItems: categoryItems,
-      ),
-    );
-  }
+  //   final filtersCategoriesIndex = items.updateFilterList(
+  //     getFilter: (item) => item.category,
+  //     previousList: state.discountModelItems,
+  //     previousFilter: state.filtersCategoriesIndex,
+  //   );
+  //   final filtersLocationIndex = items.updateFilterList(
+  //     getFilter: (item) =>
+  //         item.location?.toList() ?? item.subLocation?._getList ?? const [],
+  //     previousList: state.discountModelItems,
+  //     previousFilter: state.filtersLocationIndex,
+  //   );
+  //   final categoryItems = _filterCategory(
+  //     categoryIndex: filtersCategoriesIndex,
+  //     list: items,
+  //   );
+  //   final (:list, :loadingStatus) = _filterLocation(
+  //     locationIndex: filtersLocationIndex,
+  //     itemsLoaded: state.itemsLoaded,
+  //     list: categoryItems,
+  //   );
+  //   emit(
+  //     state.copyWith(
+  //       discountModelItems: items,
+  //       // reportItems: reportItems,
+  //       filteredDiscountModelItems: list,
+  //       loadingStatus: loadingStatus,
+  //       filtersCategoriesIndex: filtersCategoriesIndex,
+  //       filtersLocationIndex: filtersLocationIndex,
+  //       categoryDiscountModelItems: categoryItems,
+  //     ),
+  //   );
+  // }
 
-  Future<List<ReportModel>> _getReport() async {
+  Future<List<ReportModel>?> _getReport() async {
     final reportItems = await _reportRepository.getCardReportById(
       cardEnum: CardEnum.discount,
       userId: _appAuthenticationRepository.currentUser.id,
     );
     return reportItems.fold(
-      (l) => [],
-      (r) => r,
+      (l) => null,
+      (r) => r.isEmpty ? null : r,
     );
   }
 

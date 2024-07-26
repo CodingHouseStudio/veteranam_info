@@ -5,5 +5,5 @@ class InvestorsWatcherEvent with _$InvestorsWatcherEvent {
   const factory InvestorsWatcherEvent.started() = _Started;
   const factory InvestorsWatcherEvent.loadeNextItems() = _LoadNextItems;
 
-  const factory InvestorsWatcherEvent.getReport() = _GetReport;
+  // const factory InvestorsWatcherEvent.getReport() = _GetReport;
 }

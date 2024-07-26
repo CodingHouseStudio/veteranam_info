@@ -18,6 +18,7 @@ void main() {
     late QuerySnapshot<Map<String, dynamic>> mockQuerySnapshot;
     late List<QueryDocumentSnapshot<Map<String, dynamic>>>
         mockQueryDocumentSnapshot;
+    late Query<Map<String, dynamic>> mockQuery;
     late DocumentReference<Map<String, dynamic>> mockDocumentReference;
     setUp(() {
       mockCollectionReference = MockCollectionReference();
@@ -25,10 +26,15 @@ void main() {
       mockDocumentReference = MockDocumentReference();
       mockQuerySnapshot = MockQuerySnapshot();
       mockQueryDocumentSnapshot = [MockQueryDocumentSnapshot()];
+      mockQuery = MockQuery();
 
       when(
         mockFirebaseFirestore.collection(FirebaseCollectionName.funds),
       ).thenAnswer((realInvocation) => mockCollectionReference);
+
+      when(
+        mockCollectionReference.where(FundModelJsonField.id, whereIn: null),
+      ).thenAnswer((realInvocation) => mockQuery);
 
       when(
         mockCollectionReference.doc(KTestText.fundItemsWithImage.first.id),
@@ -43,7 +49,7 @@ void main() {
       );
 
       when(
-        mockCollectionReference.get(FirestoreService.getOptions),
+        mockQuery.get(FirestoreService.getOptions),
       ).thenAnswer(
         (_) async => mockQuerySnapshot,
       );
@@ -80,7 +86,7 @@ void main() {
 
     test('get funds', () async {
       expect(
-        await firestoreService.getFunds(),
+        await firestoreService.getFunds(null),
         [KTestText.fundItemsWithImage.first],
       );
 
@@ -88,7 +94,10 @@ void main() {
         mockFirebaseFirestore.collection(FirebaseCollectionName.funds),
       ).called(1);
       verify(
-        mockCollectionReference.get(FirestoreService.getOptions),
+        mockCollectionReference.where(FundModelJsonField.id, whereIn: null),
+      ).called(1);
+      verify(
+        mockQuery.get(FirestoreService.getOptions),
       ).called(1);
       verify(
         mockQuerySnapshot.docs,

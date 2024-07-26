@@ -67,7 +67,11 @@ void main() {
     });
     group('${KGroupText.failure} ', () {
       testWidgets('${KGroupText.error} ', (tester) async {
-        when(mockInvestorsRepository.getFunds()).thenAnswer(
+        when(
+          mockInvestorsRepository.getFunds(
+            reportIdItems: KTestText.reportItems.getIdCard,
+          ),
+        ).thenAnswer(
           (invocation) async => const Left(SomeFailure.serverError()),
         );
         await investorsPumpAppHelper(
@@ -81,7 +85,11 @@ void main() {
         await investorsFailureHelper(tester);
       });
       testWidgets('${KGroupText.failureNetwork} ', (tester) async {
-        when(mockInvestorsRepository.getFunds()).thenAnswer(
+        when(
+          mockInvestorsRepository.getFunds(
+            reportIdItems: KTestText.reportItems.getIdCard,
+          ),
+        ).thenAnswer(
           (invocation) async => const Left(SomeFailure.network()),
         );
         await investorsPumpAppHelper(
@@ -95,7 +103,11 @@ void main() {
         await investorsFailureHelper(tester);
       });
       testWidgets('${KGroupText.failureGet} ', (tester) async {
-        when(mockInvestorsRepository.getFunds()).thenAnswer(
+        when(
+          mockInvestorsRepository.getFunds(
+            reportIdItems: KTestText.reportItems.getIdCard,
+          ),
+        ).thenAnswer(
           (invocation) async => const Left(SomeFailure.get()),
         );
         await investorsPumpAppHelper(
@@ -111,7 +123,11 @@ void main() {
     });
     group('${KGroupText.getEmptyList} ', () {
       setUp(() {
-        when(mockInvestorsRepository.getFunds()).thenAnswer(
+        when(
+          mockInvestorsRepository.getFunds(
+            reportIdItems: KTestText.reportItems.getIdCard,
+          ),
+        ).thenAnswer(
           (invocation) async => const Right([]),
         );
 
@@ -139,7 +155,11 @@ void main() {
     });
     group('${KGroupText.getList} ', () {
       setUp(() {
-        when(mockInvestorsRepository.getFunds()).thenAnswer(
+        when(
+          mockInvestorsRepository.getFunds(
+            reportIdItems: KTestText.reportItems.getIdCard,
+          ),
+        ).thenAnswer(
           (invocation) async => Right(KTestText.fundItems),
         );
       });

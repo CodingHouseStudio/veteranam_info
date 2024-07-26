@@ -21,6 +21,7 @@ void main() {
     late DocumentReference<Map<String, dynamic>> mockDocumentReference;
     late List<DocumentChange<Map<String, dynamic>>> mockDocumentChange;
     late SnapshotMetadata mockSnapshotMetadata;
+    late Query<Map<String, dynamic>> mockQuery;
     setUp(() {
       mockCollectionReference = MockCollectionReference();
       mockFirebaseFirestore = MockFirebaseFirestore();
@@ -29,10 +30,18 @@ void main() {
       mockQueryDocumentSnapshot = [MockQueryDocumentSnapshot()];
       mockDocumentChange = [MockDocumentChange()];
       mockSnapshotMetadata = MockSnapshotMetadata();
+      mockQuery = MockQuery();
 
       when(
         mockFirebaseFirestore.collection(FirebaseCollectionName.information),
       ).thenAnswer((realInvocation) => mockCollectionReference);
+
+      when(
+        mockCollectionReference.where(
+          InformationModelJsonField.id,
+          whereIn: null,
+        ),
+      ).thenAnswer((realInvocation) => mockQuery);
 
       when(
         mockCollectionReference.doc(KTestText.informationModelItems.first.id),
@@ -48,7 +57,7 @@ void main() {
       );
 
       when(
-        mockCollectionReference.snapshots(
+        mockQuery.snapshots(
           includeMetadataChanges: true,
         ),
       ).thenAnswer(
@@ -114,7 +123,7 @@ void main() {
     });
     test('get information', () async {
       await expectLater(
-        firestoreService.getInformations(),
+        firestoreService.getInformations(null),
         emitsInOrder([
           [KTestText.informationModelItems.first],
         ]),
@@ -125,7 +134,13 @@ void main() {
         mockFirebaseFirestore.collection(FirebaseCollectionName.information),
       ).called(1);
       verify(
-        mockCollectionReference.snapshots(
+        mockCollectionReference.where(
+          InformationModelJsonField.id,
+          whereIn: null,
+        ),
+      ).called(1);
+      verify(
+        mockQuery.snapshots(
           includeMetadataChanges: true,
         ),
       ).called(1);
@@ -143,7 +158,7 @@ void main() {
       ).called(1);
 
       expect(
-        firestoreService.getInformations(),
+        firestoreService.getInformations(null),
         emits([KTestText.informationModelItems.first]),
       );
     });
