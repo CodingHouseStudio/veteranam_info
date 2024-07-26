@@ -13,9 +13,6 @@ permissions:
 
 jobs:
   build:
-    needs:
-      - semantic-pull-request
-      - spell-check
     uses: CodingHouseStudio/flutter_workflows/.github/workflows/integration_test.yml@main
     with:
       flutter_channel: stable
