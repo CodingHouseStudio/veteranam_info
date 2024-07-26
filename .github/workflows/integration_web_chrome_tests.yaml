@@ -1,0 +1,23 @@
+name: Integration Tests
+# Controls when the workflow will run
+on:
+  workflow_dispatch:
+    branches: [main]
+concurrency:
+  group: exp-prod-$
+  cancel-in-progress: true
+
+permissions:
+  id-token: write # This is required for requesting the JWT
+  contents: read # This is required for actions/checkout
+
+jobs:
+  build:
+    needs:
+      - semantic-pull-request
+      - spell-check
+    uses: CodingHouseStudio/flutter_workflows/.github/workflows/integration_test.yml@main
+    with:
+      flutter_channel: stable
+      flutter_version: 3.22.3
+      # format_directories: "lib test"
