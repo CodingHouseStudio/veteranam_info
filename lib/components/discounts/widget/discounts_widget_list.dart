@@ -13,9 +13,10 @@ List<Widget> discountsWidgetList({
       key: KWidgetkeys.screen.discounts.card,
       discountItem: modelItem,
       isDesk: isDesk,
-      reportEvent: () => context
-          .read<DiscountWatcherBloc>()
-          .add(const DiscountWatcherEvent.getReport()),
+      reportEvent: null,
+      // () => context
+      //     .read<DiscountWatcherBloc>()
+      //     .add(const DiscountWatcherEvent.getReport()),
     ),
     isDesk: isDesk,
     shimmerItemsNumber: KDimensions.shimmerDiscountsItems,

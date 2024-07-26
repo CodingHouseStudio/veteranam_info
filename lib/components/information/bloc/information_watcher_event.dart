@@ -4,10 +4,10 @@ part of 'information_watcher_bloc.dart';
 class InformationWatcherEvent with _$InformationWatcherEvent {
   const factory InformationWatcherEvent.started() = _Started;
 
-  const factory InformationWatcherEvent.updated({
-    required List<InformationModel> informationItemsModel,
-    required List<ReportModel> reportItems,
-  }) = _Updated;
+  const factory InformationWatcherEvent.updated(
+    List<InformationModel> informationItemsModel,
+    // required List<ReportModel> reportItems,
+  ) = _Updated;
 
   const factory InformationWatcherEvent.loadNextItems() = _LoadNextItems;
 
@@ -19,7 +19,7 @@ class InformationWatcherEvent with _$InformationWatcherEvent {
 
   const factory InformationWatcherEvent.failure(dynamic failure) = _Failure;
 
-  const factory InformationWatcherEvent.getReport() = _GetReport;
+  // const factory InformationWatcherEvent.getReport() = _GetReport;
 
   const factory InformationWatcherEvent.like({
     required InformationModel informationModel,

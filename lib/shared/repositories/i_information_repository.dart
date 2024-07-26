@@ -2,7 +2,9 @@ import 'package:dartz/dartz.dart';
 import 'package:veteranam/shared/shared.dart';
 
 abstract class IInformationRepository {
-  Stream<List<InformationModel>> getInformationItems();
+  Stream<List<InformationModel>> getInformationItems({
+    List<String>? reportIdItems,
+  });
   Future<Either<SomeFailure, InformationModel>> getInformation(String id);
   void addMockInformationItems();
   // ignore: avoid_positional_boolean_parameters

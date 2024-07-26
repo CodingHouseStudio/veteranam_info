@@ -59,7 +59,11 @@ void main() {
     });
     group('${KGroupText.failure} ', () {
       setUp(() {
-        when(mockDiscountRepository.getDiscountItems()).thenAnswer(
+        when(
+          mockDiscountRepository.getDiscountItems(
+            reportIdItems: KTestText.reportItems.getIdCard,
+          ),
+        ).thenAnswer(
           (invocation) => Stream.error(Exception(KGroupText.failureGet)),
         );
       });
@@ -81,7 +85,11 @@ void main() {
     });
     group('${KGroupText.getEmptyList} ', () {
       setUp(() {
-        when(mockDiscountRepository.getDiscountItems()).thenAnswer(
+        when(
+          mockDiscountRepository.getDiscountItems(
+            reportIdItems: KTestText.reportItems.getIdCard,
+          ),
+        ).thenAnswer(
           (invocation) => Stream.value([]),
         );
         when(mockDiscountRepository.addMockDiscountItems()).thenAnswer(
@@ -110,7 +118,11 @@ void main() {
     });
     group('${KGroupText.getList} ', () {
       setUp(() {
-        when(mockDiscountRepository.getDiscountItems()).thenAnswer(
+        when(
+          mockDiscountRepository.getDiscountItems(
+            reportIdItems: KTestText.reportItems.getIdCard,
+          ),
+        ).thenAnswer(
           (invocation) => Stream.value(KTestText.discountModelItemsModify),
         );
         when(mockDiscountRepository.sendLink(KTestText.linkModel)).thenAnswer(

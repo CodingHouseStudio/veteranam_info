@@ -21,6 +21,8 @@ void main() {
     late IAppAuthenticationRepository mockAppAuthenticationRepository;
     late IReportRepository mockReportRepository;
     setUp(() {
+      ExtendedDateTime.current = KTestText.dateTime;
+      ExtendedDateTime.id = '';
       KPlatformConstants.isWebDesktop = false;
       mockInformationRepository = MockIInformationRepository();
       mockAuthenticationRepository = MockAuthenticationRepository();
@@ -33,54 +35,24 @@ void main() {
       when(mockAuthenticationRepository.isAnonymouslyOrEmty()).thenAnswer(
         (realInvocation) => true,
       );
-      // when(
-      //   mockInformationRepository.updateLikeCount(
-      //     informationModel: KTestText.informationModelItems.first,
-      //     isLiked: true,
-      //   ),
-      // ).thenAnswer(
-      //   (invocation) async => const Right(true),
-      // );
-      // when(
-      //   mockInformationRepository.updateLikeCount(
-      //     informationModel: KTestText.informationModelItems.first,
-      //     isLiked: false,
-      //   ),
-      // ).thenAnswer(
-      //   (invocation) async => const Right(true),
-      // );
-      when(
-        mockInformationRepository.updateLikeCount(
-          informationModel: KTestText.informationModelItems.elementAt(2),
-          isLiked: true,
-        ),
-      ).thenAnswer(
-        (invocation) async => const Right(true),
-      );
-      when(
-        mockInformationRepository.updateLikeCount(
-          informationModel: KTestText.informationModelItems.elementAt(2),
-          isLiked: false,
-        ),
-      ).thenAnswer(
-        (invocation) async => const Right(true),
-      );
-      when(
-        mockInformationRepository.updateLikeCount(
-          informationModel: KTestText.informationModelItems.elementAt(3),
-          isLiked: true,
-        ),
-      ).thenAnswer(
-        (invocation) async => const Right(true),
-      );
-      when(
-        mockInformationRepository.updateLikeCount(
-          informationModel: KTestText.informationModelItems.elementAt(3),
-          isLiked: false,
-        ),
-      ).thenAnswer(
-        (invocation) async => const Right(false),
-      );
+      for (var i = 0; i < 3; i++) {
+        when(
+          mockInformationRepository.updateLikeCount(
+            informationModel: KTestText.informationModelItems.elementAt(i),
+            isLiked: true,
+          ),
+        ).thenAnswer(
+          (invocation) async => const Right(true),
+        );
+        when(
+          mockInformationRepository.updateLikeCount(
+            informationModel: KTestText.informationModelItems.elementAt(i),
+            isLiked: false,
+          ),
+        ).thenAnswer(
+          (invocation) async => const Right(true),
+        );
+      }
       mockAppAuthenticationRepository = MockAppAuthenticationRepository();
       when(mockAppAuthenticationRepository.currentUser).thenAnswer(
         (invocation) => KTestText.user,
@@ -97,9 +69,11 @@ void main() {
     });
     group('${KGroupText.failure} ', () {
       setUp(() {
-        ExtendedDateTime.current = KTestText.dateTime;
-        ExtendedDateTime.id = '';
-        when(mockInformationRepository.getInformationItems()).thenAnswer(
+        when(
+          mockInformationRepository.getInformationItems(
+            reportIdItems: KTestText.reportItems.getIdCard,
+          ),
+        ).thenAnswer(
           (invocation) => Stream.error(Exception(KGroupText.failureGet)),
         );
       });
@@ -121,7 +95,11 @@ void main() {
     });
     group('${KGroupText.getEmptyList} ', () {
       setUp(() {
-        when(mockInformationRepository.getInformationItems()).thenAnswer(
+        when(
+          mockInformationRepository.getInformationItems(
+            reportIdItems: KTestText.reportItems.getIdCard,
+          ),
+        ).thenAnswer(
           (invocation) => Stream.value([]),
         );
 
@@ -153,7 +131,11 @@ void main() {
     });
     group('${KGroupText.getList} ', () {
       setUp(() {
-        when(mockInformationRepository.getInformationItems()).thenAnswer(
+        when(
+          mockInformationRepository.getInformationItems(
+            reportIdItems: KTestText.reportItems.getIdCard,
+          ),
+        ).thenAnswer(
           (invocation) => Stream.value(KTestText.informationModelItems),
         );
       });
