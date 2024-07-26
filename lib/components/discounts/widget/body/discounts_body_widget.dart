@@ -27,6 +27,7 @@ class DiscountBodyWidget extends StatelessWidget {
               loadingButtonText: context.l10n.moreDiscounts,
               loadingStatus: _.loadingStatus,
               cardListIsEmpty: _.filteredDiscountModelItems.isEmpty,
+              pageName: context.l10n.discounts,
               resetFilter: () => context.read<DiscountWatcherBloc>().add(
                     const DiscountWatcherEvent.filterReset(),
                   ),

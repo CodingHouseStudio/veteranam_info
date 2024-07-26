@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:veteranam/components/components.dart';
 import 'package:veteranam/shared/shared.dart';
 
 class PrivacyPolicyBody extends StatelessWidget {
@@ -6,42 +10,53 @@ class PrivacyPolicyBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      constraints: const BoxConstraints(
-        maxWidth: KMinMaxSize.maxWidth768,
-      ),
-      padding: const EdgeInsets.symmetric(horizontal: KPadding.kPaddingSize32),
-      child: RichText(
-        key: KWidgetkeys.screen.privacyPolicy.text,
-        text: TextSpan(
-          children: context.l10n.privacyPolicyText
-              .trim()
-              .split('\n\n')
-              .asMap()
-              .entries
-              .map((entry) {
-            final index = entry.key;
-            final paragraph = entry.value;
-            late var textStyle = AppTextStyle.materialThemeBodyMedium;
-            switch (index) {
-              case 0:
-                textStyle = AppTextStyle.materialThemeTitleLarge
-                    .copyWith(fontWeight: FontWeight.bold);
-              case 1:
-              case 3:
-              case 6:
-              case 9:
-              case 12:
-              case 14:
-              case 16:
-              case 18:
-                textStyle = AppTextStyle.materialThemeTitleMedium
-                    .copyWith(fontWeight: FontWeight.w700);
-            }
-            return TextSpan(text: '$paragraph\n\n', style: textStyle);
-          }).toList(), // Adjust font size as needed
-        ),
-      ),
+    return BlocBuilder<PrivacyPolicyMarkdownCubit, String?>(
+      builder: (context, _) {
+        return Container(
+          constraints: const BoxConstraints(
+            maxWidth: KMinMaxSize.maxWidth768,
+          ),
+          width: double.infinity,
+          padding: const EdgeInsets.only(
+            right: KPadding.kPaddingSize32,
+            left: KPadding.kPaddingSize32,
+            bottom: KPadding.kPaddingSize32,
+          ),
+          child: _ == null
+              ? Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    MarkdownBody(
+                      data: context.l10n.privacyPolicyStartText,
+                    ),
+                    KSizedBox.kHeightSizedBox32,
+                    const Padding(
+                      padding: EdgeInsets.all(KPadding.kPaddingSize32),
+                      child:
+                          Center(child: CircularProgressIndicator.adaptive()),
+                    ),
+                    KSizedBox.kHeightSizedBox32,
+                  ],
+                )
+              : MarkdownBody(
+                  key: KWidgetkeys.screen.privacyPolicy.text,
+                  data: _,
+                  styleSheet: MarkdownStyleSheet(
+                    a: AppTextStyle.materialThemeBodyLarge,
+                  ),
+                  onTapLink: (text, href, title) async {
+                    final emailUri = Uri(
+                      scheme: 'mailto',
+                      path: KAppText.email,
+                    );
+
+                    if (await canLaunchUrl(emailUri)) {
+                      await launchUrl(emailUri);
+                    }
+                  },
+                ),
+        );
+      },
     );
   }
 }
