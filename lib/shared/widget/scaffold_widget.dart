@@ -179,7 +179,7 @@ class _ScaffoldWidget extends StatelessWidget {
         ];
         return Scaffold(
           bottomNavigationBar:
-              KPlatformConstants.testIsWeb || !(showMobBottomNavigation ?? true)
+              KTest.testIsWeb || !(showMobBottomNavigation ?? true)
                   ? null
                   : BottomNavigationBar(
                       items: <BottomNavigationBarItem>[
