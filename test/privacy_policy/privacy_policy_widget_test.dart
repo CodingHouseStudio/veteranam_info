@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
+import 'package:mockito/mockito.dart';
 import 'package:veteranam/shared/shared.dart';
 import '../text_dependency.dart';
 
@@ -14,8 +15,24 @@ void main() {
 
   tearDown(GetIt.I.reset);
   group('${KScreenBlocName.privacyPolicy} ', () {
+    late IAppAuthenticationRepository mockAppAuthenticationRepository;
+    setUp(
+      () {
+        KTest.cashe = false;
+        mockAppAuthenticationRepository = MockAppAuthenticationRepository();
+
+        when(
+          mockAppAuthenticationRepository.currentUserSetting,
+        ).thenAnswer(
+          (realInvocation) => KTestText.userSetting,
+        );
+      },
+    );
     testWidgets('${KGroupText.intial} ', (tester) async {
-      await privacyPolicyPumpAppHelper(tester: tester);
+      await privacyPolicyPumpAppHelper(
+        tester: tester,
+        mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+      );
 
       await privacyPolicyInitialHelper(tester);
     });
@@ -26,6 +43,7 @@ void main() {
       testWidgets('${KGroupText.intial} ', (tester) async {
         await privacyPolicyPumpAppHelper(
           tester: tester,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
           mockGoRouter: mockGoRouter,
         );
 
@@ -35,6 +53,7 @@ void main() {
         testWidgets('${KRoute.home.name} ', (tester) async {
           await privacyPolicyPumpAppHelper(
             tester: tester,
+            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
             mockGoRouter: mockGoRouter,
           );
 
