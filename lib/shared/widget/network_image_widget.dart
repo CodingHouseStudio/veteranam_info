@@ -22,14 +22,34 @@ class _NetworkImageWidgetState extends State<NetworkImageWidget> {
   @override
   void initState() {
     super.initState();
-    image = Image.network(
+  }
+
+  @override
+  void didChangeDependencies() {
+    precacheImage(
+      NetworkImage(
+        widget.imageUrl,
+        // headers: {
+        //   'Cache-Control': 'max-age=3600',
+        // },
+      ),
+      context,
+    );
+    super.didChangeDependencies();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // Precache the image with error handling
+
+    return Image.network(
       widget.imageUrl,
       fit: widget.fit,
       width: widget.size,
       height: widget.size,
-      // headers: const {
-      //   'Cache-Control': 'max-age=3600',
-      // },
+      headers: const {
+        'Cache-Control': 'max-age=3600',
+      },
       loadingBuilder: (context, child, loadingProgress) {
         if (loadingProgress == null) {
           return child;
@@ -43,28 +63,6 @@ class _NetworkImageWidgetState extends State<NetworkImageWidget> {
         return const Icon(Icons.error);
       },
     );
-  }
-
-  @override
-  void didChangeDependencies() {
-    precacheImage(
-      // NetworkImage(
-      //   widget.imageUrl,
-      //   // headers: {
-      //   //   'Cache-Control': 'max-age=3600',
-      //   // },
-      // ),
-      image.image,
-      context,
-    );
-    super.didChangeDependencies();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    // Precache the image with error handling
-
-    return image;
 
     // Alternative: Using CachedNetworkImage
     // return CachedNetworkImage(
