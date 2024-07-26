@@ -9,17 +9,19 @@ class AssetImageWidget extends StatelessWidget {
     this.width,
     this.height,
     this.cacheSize = KMinMaxSize.kImageMaxSize,
+    this.widgetKey,
   });
   final String name;
   final BoxFit? fit;
   final double? width;
   final double? height;
   final int cacheSize;
+  final Key? widgetKey;
 
   @override
   Widget build(BuildContext context) {
     return Image.asset(
-      key: key ?? Key(name),
+      key: widgetKey ?? Key(name),
       name,
       fit: fit,
       width: width,

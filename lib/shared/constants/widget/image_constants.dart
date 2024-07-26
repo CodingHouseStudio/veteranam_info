@@ -83,58 +83,58 @@ class KImage {
   //     );
   static AssetImageWidget logoHome({Key? key}) => AssetImageWidget(
         'assets/images/logo_home.svg',
-        key: key,
+        widgetKey: key,
       );
   static AssetImageWidget homeImage({Key? key}) => AssetImageWidget(
         'assets/images/home_image.png',
         fit: BoxFit.fill,
-        key: key,
+        widgetKey: key,
       );
   static AssetImageWidget homeImageMob({Key? key}) => AssetImageWidget(
         'assets/images/home_image_mob.png',
-        key: key,
+        widgetKey: key,
       );
   static AssetImageWidget discountImage({Key? key}) => AssetImageWidget(
         'assets/images/discount_image.png',
         fit: BoxFit.fill,
         cacheSize: KMinMaxSize.kHomeImageMaxSize,
-        key: key,
+        widgetKey: key,
       );
   static AssetImageWidget inforamationImage({Key? key}) => AssetImageWidget(
         'assets/images/information_image.png',
         fit: BoxFit.fill,
         cacheSize: KMinMaxSize.kHomeImageMaxSize,
-        key: key,
+        widgetKey: key,
       );
   static AssetImageWidget wavingHand({Key? key}) => AssetImageWidget(
         'assets/icons/waving_hand.png',
         width: KSize.kPixel16,
         height: KSize.kPixel16,
-        key: key,
+        widgetKey: key,
       );
   static AssetImageWidget coffee({Key? key}) => AssetImageWidget(
         'assets/icons/hot_beverage.png',
-        key: key,
+        widgetKey: key,
       );
   static AssetImageWidget veteran1({Key? key}) => AssetImageWidget(
         'assets/images/veteran1.png',
-        key: key,
+        widgetKey: key,
       );
   static AssetImageWidget veteran2({Key? key}) => AssetImageWidget(
         'assets/images/veteran2.png',
-        key: key,
+        widgetKey: key,
       );
   static AssetImageWidget veteran3({Key? key}) => AssetImageWidget(
         'assets/images/veteran3.png',
-        key: key,
+        widgetKey: key,
       );
   static AssetImageWidget veteran4({Key? key}) => AssetImageWidget(
         'assets/images/veteran4.png',
-        key: key,
+        widgetKey: key,
       );
   static AssetImageWidget veteran5({Key? key}) => AssetImageWidget(
         'assets/images/veteran5.png',
-        key: key,
+        widgetKey: key,
       );
   // static const SvgPicture emptyList({Key? key}) =>SvgPicture(
   //   SvgAssetLoader('assets/images/empty_list.svg'),
