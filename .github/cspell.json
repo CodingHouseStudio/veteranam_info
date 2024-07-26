@@ -18,9 +18,6 @@
     }
   ],
   "useGitignore": true,
-  "ignorePaths": [
-    "*.md"
-  ],
   "words": [
     "Contador",
     "localizable",
