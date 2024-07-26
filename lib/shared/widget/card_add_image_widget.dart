@@ -52,7 +52,7 @@ class CardAddImageWidget extends StatelessWidget {
             maxHeight: KMinMaxSize.minHeight640,
             maxWidth: KMinMaxSize.maxWidth640,
           ),
-          child: ImageWidget(
+          child: NetworkImageWidget(
             key: KWidgetkeys.widget.cardAddImage.widget,
             imageUrl: image!.downloadURL,
             fit: BoxFit.contain,

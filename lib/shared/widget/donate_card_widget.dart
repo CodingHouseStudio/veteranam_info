@@ -45,7 +45,7 @@ class DonateCardWidget extends StatelessWidget {
             ),
             if (fundModel.image != null)
               Expanded(
-                child: ImageWidget(
+                child: NetworkImageWidget(
                   key: KWidgetkeys.widget.donateCard.image,
                   imageUrl: fundModel.image!.downloadURL,
                 ),

@@ -28,7 +28,7 @@ class StoryCardWidget extends StatelessWidget {
           else
             ClipRRect(
               borderRadius: BorderRadius.circular(KSize.kUserPhoto),
-              child: ImageWidget(
+              child: NetworkImageWidget(
                 imageUrl: storyModel.userPhoto!.downloadURL,
                 fit: BoxFit.contain,
                 size: KSize.kUserPhoto,

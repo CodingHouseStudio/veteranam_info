@@ -73,66 +73,66 @@ class KImage {
         'assets/images/logo.svg',
         key: key,
       );
-  // _get(
+  // AssetImageWidget(
   //       'assets/images/logo.png',
   //       key: key,
   //       fit: BoxFit.contain,
-  //       casheSize: null,
-  //       // casheSize: KMinMaxSize.kHomeImageMaxSize,
+  //       cacheSize: null,
+  //       // cacheSize: KMinMaxSize.kHomeImageMaxSize,
   //       // height: KMinMaxSize.minHeight50,
   //     );
-  static Image logoHome({Key? key}) => _get(
+  static AssetImageWidget logoHome({Key? key}) => AssetImageWidget(
         'assets/images/logo_home.svg',
         key: key,
       );
-  static Image homeImage({Key? key}) => _get(
+  static AssetImageWidget homeImage({Key? key}) => AssetImageWidget(
         'assets/images/home_image.png',
         fit: BoxFit.fill,
         key: key,
       );
-  static Image homeImageMob({Key? key}) => _get(
+  static AssetImageWidget homeImageMob({Key? key}) => AssetImageWidget(
         'assets/images/home_image_mob.png',
         key: key,
       );
-  static Image discountImage({Key? key}) => _get(
+  static AssetImageWidget discountImage({Key? key}) => AssetImageWidget(
         'assets/images/discount_image.png',
         fit: BoxFit.fill,
-        casheSize: KMinMaxSize.kHomeImageMaxSize,
+        cacheSize: KMinMaxSize.kHomeImageMaxSize,
         key: key,
       );
-  static Image inforamationImage({Key? key}) => _get(
+  static AssetImageWidget inforamationImage({Key? key}) => AssetImageWidget(
         'assets/images/information_image.png',
         fit: BoxFit.fill,
-        casheSize: KMinMaxSize.kHomeImageMaxSize,
+        cacheSize: KMinMaxSize.kHomeImageMaxSize,
         key: key,
       );
-  static Image wavingHand({Key? key}) => _get(
+  static AssetImageWidget wavingHand({Key? key}) => AssetImageWidget(
         'assets/icons/waving_hand.png',
         width: KSize.kPixel16,
         height: KSize.kPixel16,
         key: key,
       );
-  static Image coffee({Key? key}) => _get(
+  static AssetImageWidget coffee({Key? key}) => AssetImageWidget(
         'assets/icons/hot_beverage.png',
         key: key,
       );
-  static Image veteran1({Key? key}) => _get(
+  static AssetImageWidget veteran1({Key? key}) => AssetImageWidget(
         'assets/images/veteran1.png',
         key: key,
       );
-  static Image veteran2({Key? key}) => _get(
+  static AssetImageWidget veteran2({Key? key}) => AssetImageWidget(
         'assets/images/veteran2.png',
         key: key,
       );
-  static Image veteran3({Key? key}) => _get(
+  static AssetImageWidget veteran3({Key? key}) => AssetImageWidget(
         'assets/images/veteran3.png',
         key: key,
       );
-  static Image veteran4({Key? key}) => _get(
+  static AssetImageWidget veteran4({Key? key}) => AssetImageWidget(
         'assets/images/veteran4.png',
         key: key,
       );
-  static Image veteran5({Key? key}) => _get(
+  static AssetImageWidget veteran5({Key? key}) => AssetImageWidget(
         'assets/images/veteran5.png',
         key: key,
       );
@@ -140,7 +140,7 @@ class KImage {
   //   SvgAssetLoader('assets/images/empty_list.svg'),
   // );
 
-  // static const Image workImage({Key? key}) =>_get(
+  // static const Image workImage({Key? key}) =>AssetImageWidget(
   //    'assets/images/work_image.png'),
   //   fit: BoxFit.fill,
   // );
@@ -150,21 +150,4 @@ class KImage {
   //   ),
   //   context,
   // );
-  static Image _get(
-    String name, {
-    BoxFit? fit,
-    double? width,
-    double? height,
-    int? casheSize = KMinMaxSize.kImageMaxSize,
-    Key? key,
-  }) =>
-      Image.asset(
-        key: key ?? Key(name),
-        name,
-        fit: fit,
-        width: width,
-        height: height,
-        cacheHeight: casheSize,
-        cacheWidth: casheSize,
-      );
 }
