@@ -19,7 +19,7 @@
   ],
   "useGitignore": true,
   "ignorePaths": [
-    "assets/markdown/**"
+    "assets/markdown/privacy_policy_uk.md"
   ],
   "words": [
     "Contador",
