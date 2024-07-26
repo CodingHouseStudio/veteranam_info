@@ -54,12 +54,16 @@ class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
               //   await Clipboard.setData(ClipboardData(text: text));
               //   return;
               // }
-              final canLaunch = await canLaunchUrl(Uri.parse(href));
-              if (canLaunch) {
+              // final canLaunch = await canLaunchUrl(Uri.parse(href));
+              // if (canLaunch) {
+              try {
                 await launchUrl(
                   Uri.parse(href),
                 );
+              } catch (e) {
+                return;
               }
+              // }
             },
           )
         else
