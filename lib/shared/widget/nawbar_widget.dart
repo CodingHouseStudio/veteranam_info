@@ -104,7 +104,7 @@ class _NawbarWidgetImplematationState
             top: KPadding.kPaddingSize12,
             bottom: KPadding.kPaddingSize12,
           ),
-          child: KPlatformConstants.testIsWeb || widget.showMobileNawbar
+          child: KTest.testIsWeb || widget.showMobileNawbar
               ? Row(
                   // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -115,8 +115,7 @@ class _NawbarWidgetImplematationState
                           KAppText.logo,
                           Duration.zero,
                           () {
-                            if (KPlatformConstants.testIsWeb ||
-                                !widget.showMobileNawbar) {
+                            if (KTest.testIsWeb || !widget.showMobileNawbar) {
                               context.goNamedWithScroll(KRoute.home.name);
                             }
                           },
