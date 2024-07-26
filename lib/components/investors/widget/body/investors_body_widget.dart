@@ -25,6 +25,7 @@ class InvestorsBodyWidget extends StatelessWidget {
         loadingButtonText: context.l10n.moreFunds,
         loadingStatus: _.loadingStatus,
         cardListIsEmpty: _.fundItems.isEmpty,
+        pageName: context.l10n.investors,
         loadDataAgain: () => context
             .read<InvestorsWatcherBloc>()
             .add(const InvestorsWatcherEvent.started()),
