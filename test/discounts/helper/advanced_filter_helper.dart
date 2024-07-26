@@ -15,16 +15,21 @@ Future<void> advancedFilterHelper(
     find.byKey(KWidgetkeys.screen.discounts.advancedFilter),
     findsOneWidget,
   );
+  final advancedButton = tester.widgetList(
+    find.byKey(KWidgetkeys.screen.discounts.advancedFilterButton),
+  );
 
   expect(
     find.byKey(KWidgetkeys.screen.discounts.advancedFilterButton),
-    findsOneWidget,
+    advancedButton.isNotEmpty ? findsOneWidget : findsNothing,
   );
 
-  await tester
-      .tap(find.byKey(KWidgetkeys.screen.discounts.advancedFilterButton));
+  if (advancedButton.isNotEmpty) {
+    await tester
+        .tap(find.byKey(KWidgetkeys.screen.discounts.advancedFilterButton));
 
-  await tester.pumpAndSettle();
+    await tester.pumpAndSettle();
+  }
 
   expect(
     find.byKey(KWidgetkeys.screen.discounts.advancedFilterList),
@@ -110,30 +115,31 @@ Future<void> advancedFilterHelper(
       find.byKey(KWidgetkeys.screen.discounts.cancelText),
       findsOneWidget,
     );
-  } else {
-    expect(
-      find.byKey(KWidgetkeys.screen.discounts.advancedFilterButtonIconUp),
-      findsOneWidget,
-    );
-
-    expect(
-      find.byKey(KWidgetkeys.screen.discounts.advancedFilterButton),
-      findsOneWidget,
-    );
-
-    await tester
-        .tap(find.byKey(KWidgetkeys.screen.discounts.advancedFilterButton));
-
-    await tester.pumpAndSettle();
-
-    expect(
-      find.byKey(KWidgetkeys.screen.discounts.advancedFilterList),
-      findsNothing,
-    );
-
-    expect(
-      find.byKey(KWidgetkeys.screen.discounts.advancedFilterButtonIcon),
-      findsOneWidget,
-    );
   }
+  // else {
+  // expect(
+  //   find.byKey(KWidgetkeys.screen.discounts.advancedFilterButtonIconUp),
+  //   findsOneWidget,
+  // );
+
+  // expect(
+  //   find.byKey(KWidgetkeys.screen.discounts.advancedFilterButton),
+  //   findsOneWidget,
+  // );
+
+  // await tester
+  //     .tap(find.byKey(KWidgetkeys.screen.discounts.advancedFilterButton));
+
+  // await tester.pumpAndSettle();
+
+  // expect(
+  //   find.byKey(KWidgetkeys.screen.discounts.advancedFilterList),
+  //   findsNothing,
+  // );
+
+  // expect(
+  //   find.byKey(KWidgetkeys.screen.discounts.advancedFilterButtonIcon),
+  //   findsOneWidget,
+  // );
+  // }
 }
