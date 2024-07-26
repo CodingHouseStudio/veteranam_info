@@ -1,0 +1,62 @@
+name: Integration Test
+# Controls when the workflow will run
+on:
+  workflow_dispatch:
+    branches: [main]
+concurrency:
+  group: exp-prod-$
+  cancel-in-progress: true
+
+permissions:
+  id-token: write # This is required for requesting the JWT
+  contents: read # This is required for actions/checkout
+
+jobs:
+  build:
+    defaults:
+      run:
+        working-directory: ${{inputs.working_directory}}
+
+    runs-on: ${{inputs.runs_on}}
+
+    steps:
+      - name: 🐦 Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{inputs.flutter_version}}
+          channel: ${{inputs.flutter_channel}}
+          cache: true
+          cache-key: flutter-:os:-:channel:-:version:-:arch:-:hash:-${{ hashFiles('**/pubspec.lock') }}
+
+      - name: 🤫 Set SSH Key
+        env:
+          ssh_key: ${{secrets.ssh_key}}
+        if: env.ssh_key != null
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{secrets.ssh_key}}
+
+      - name: 📦 Install Dependencies
+        run: |
+          flutter pub global activate very_good_cli
+          very_good packages get --recursive --ignore=${{inputs.package_get_excludes}}
+
+      - name: ⚙️ Run Setup
+        if: "${{inputs.setup != ''}}"
+        run: ${{inputs.setup}}
+
+      - name: ✨ Check Formatting
+        run: dart format --line-length ${{inputs.format_line_length}} --set-exit-if-changed ${{inputs.format_directories}}
+
+      - name: 🕵️ Analyze
+        run: flutter analyze ${{inputs.analyze_directories}}
+
+      - name: 🧪 Run Tests
+        run: very_good test -j ${{inputs.concurrency}} ${{(inputs.test_recursion && '--recursive') || ''}} ${{(inputs.test_optimization && '--optimization') || '--no-optimization'}} --coverage --test-randomize-ordering-seed random
+
+      - name: 📊 Check Code Coverage
+        uses: VeryGoodOpenSource/very_good_coverage@v3
+        with:
+          path: ${{inputs.working_directory}}/coverage/lcov.info
+          exclude: ${{inputs.coverage_excludes}}
+          min_coverage: ${{inputs.min_coverage}}
