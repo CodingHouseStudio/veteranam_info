@@ -32,7 +32,5 @@ jobs:
     with:
       includes: |
         **/*.md
-      excludes: |
-        assets/markdown/privacy_policy_uk.md
       modified_files_only: false
       config: .github/cspell.json

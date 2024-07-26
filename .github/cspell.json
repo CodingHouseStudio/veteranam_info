@@ -3,7 +3,8 @@
   "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
   "dictionaries": [
     "vgv_allowed",
-    "vgv_forbidden"
+    "vgv_forbidden",
+    "ukrainian_allowed"
   ],
   "dictionaryDefinitions": [
     {
