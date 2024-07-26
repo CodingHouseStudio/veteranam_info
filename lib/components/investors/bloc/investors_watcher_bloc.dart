@@ -97,7 +97,9 @@ class InvestorsWatcherBloc
           list: filterItems,
           loadItems: KDimensions.investorsLoadItems,
         ),
-        loadingStatus: LoadingStatus.loaded,
+        loadingStatus: filterItems.length == state.fundItems.length
+            ? LoadingStatus.listLoadedFull
+            : LoadingStatus.loaded,
       ),
     );
   }
