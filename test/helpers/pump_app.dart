@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
+import 'package:veteranam/components/components.dart';
 import 'package:veteranam/shared/shared.dart';
 
 import '../test_mocks/test_mocks.dart';
@@ -15,9 +16,17 @@ extension PumpApp on WidgetTester {
     MockGoRouter? mockGoRouter,
   }) {
     return pumpWidget(
-      BlocProvider(
-        create: (context) =>
-            GetIt.I.get<AuthenticationBloc>()..add(AuthenticationInitialized()),
+      MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => GetIt.I.get<DiscountWatcherBloc>()
+              ..add(const DiscountWatcherEvent.started()),
+          ),
+          BlocProvider(
+            create: (context) => GetIt.I.get<AuthenticationBloc>()
+              ..add(AuthenticationInitialized()),
+          ),
+        ],
         child: BlocBuilder<AuthenticationBloc, AuthenticationState>(
           builder: (context, state) => mockGoRouter == null
               ? _body(

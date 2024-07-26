@@ -15,6 +15,49 @@ extension FilterItems on List<FilterItem> {
         .map((entry) => FilterItem(entry.key, number: entry.value.length))
         .toList();
   }
+
+  /// Method to find indices where differences occur between this list and a new
+  ///  list.
+  ///
+  /// Parameters:
+  /// - newList: New list to compare with.
+  ///
+  /// Returns:
+  /// A list of indices where differences were found.
+  // List<int> findDifferencesIndex({required List<FilterItem> newList}) {
+  //   if (length == newList.length) {
+  //     return [];
+  //   }
+  //   final differentIndices =
+  //       <int>[]; // Initialize an empty list for storing different indices.
+  //   var add = 0; // Variable to track how many indices need to be added to
+  //   // differentIndices.
+
+  //   // Iterate through indices of the current list.
+  //   for (var i = 0; i < length; i++) {
+  //     // Check if the index i is within bounds of newList and if elements at i
+  //     // differ.
+  //     if ((i < newList.length &&
+  //             newList.elementAt(i).value != elementAt(i).value) ||
+  //         (i >= newList.length && add <= i)) {
+  //       differentIndices
+  //           .add(i); // Add index i to differentIndices if there's a difference.
+  //       add--; // Increment add to indicate that an index was added.
+  //     } else if (i >= newList.length && add > 0) {
+  //       add++; // Decrement add if index i is beyond newList's length and was
+  //       // previously added.
+  //     }
+  //   }
+
+  //   return differentIndices; // Return the list of indices where differences
+  //   // were found.
+  // }
+}
+
+extension ListReportModelExtensions on List<ReportModel> {
+  List<String> get getIdCard => map(
+        (e) => e.cardId,
+      ).toList();
 }
 
 /// Extension providing utility methods for List<T>.
@@ -231,56 +274,27 @@ extension ListExtensions<T> on List<T> {
   ///
   /// Returns:
   /// Updated filter indices adjusted based on changes in filter values.
-  List<int> updateFilterList({
-    required List<dynamic> Function(T) getFilter,
-    required List<T> previousList,
-    required List<int> previousFilter,
-    List<T>? fullList,
-  }) {
-    // Get overall items grouped by category and location
-    final filter = overallItems(getFilter: getFilter, context: null);
+  // List<int> updateFilterList({
+  //   required List<dynamic> Function(T) getFilter,
+  //   required List<T> previousList,
+  //   required List<int> previousFilter,
+  //   List<T>? fullList,
+  // }) {
+  //   if (previousList.isEmpty ||
+  //       (previousList.length == 1 && previousList.first == -1)) {
+  //     return previousFilter;
+  //   }
+  //   // Get overall items grouped by category and location
+  //   final filter = overallItems(getFilter: getFilter, context: null);
 
-    // Find the difference in indices between category lists
-    final differentCategoryIndices = previousList
-        .overallItems(getFilter: getFilter, context: null)
-        .findDifferencesIndex(newList: filter);
+  //   // Find the difference in indices between category lists
+  //   final differentCategoryIndices = previousList
+  //       .overallItems(getFilter: getFilter, context: null)
+  //       .findDifferencesIndex(newList: filter);
 
-    // Adjust filtersCategoriesIndex based on differences
-    return previousFilter.adjustIndices(differentCategoryIndices);
-  }
-
-  /// Method to find indices where differences occur between this list and a new
-  ///  list.
-  ///
-  /// Parameters:
-  /// - newList: New list to compare with.
-  ///
-  /// Returns:
-  /// A list of indices where differences were found.
-  List<int> findDifferencesIndex({required List<T> newList}) {
-    final differentIndices =
-        <int>[]; // Initialize an empty list for storing different indices.
-    var add = 0; // Variable to track how many indices need to be added to
-    // differentIndices.
-
-    // Iterate through indices of the current list.
-    for (var i = 0; i < length; i++) {
-      // Check if the index i is within bounds of newList and if elements at i
-      // differ.
-      if ((i < newList.length && newList[i] != elementAt(i)) ||
-          (i >= newList.length && add <= 0)) {
-        differentIndices
-            .add(i); // Add index i to differentIndices if there's a difference.
-        add++; // Increment add to indicate that an index was added.
-      } else if (i >= newList.length && add > 0) {
-        add--; // Decrement add if index i is beyond newList's length and was
-        // previously added.
-      }
-    }
-
-    return differentIndices; // Return the list of indices where differences
-    // were found.
-  }
+  //   // Adjust filtersCategoriesIndex based on differences
+  //   return previousFilter.adjustIndices(differentCategoryIndices);
+  // }
 
   /// Method to calculate overall items and return them as FilterItem instances.
   ///
@@ -446,6 +460,9 @@ extension ListIntExtension on List<int> {
   /// Returns:
   /// Adjusted list indices after accounting for differences.
   List<int> adjustIndices(List<int> differences) {
+    if (differences.isEmpty) {
+      return this;
+    }
     final adjustedIndices = <int>[];
 
     // Iterate through each element in the list
@@ -456,10 +473,9 @@ extension ListIntExtension on List<int> {
       }
 
       var numSmallerDifferences = 0;
-      // Count how many elements in 'differences' are smaller than 'element'
       for (final index in differences) {
         if (index < element) {
-          numSmallerDifferences--;
+          numSmallerDifferences++;
         }
       }
 

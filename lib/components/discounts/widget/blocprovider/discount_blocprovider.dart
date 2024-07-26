@@ -12,10 +12,10 @@ class DiscountBlocprovider extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(
-          create: (context) => GetIt.I.get<DiscountWatcherBloc>()
-            ..add(const DiscountWatcherEvent.started()),
-        ),
+        // BlocProvider(
+        //   create: (context) => GetIt.I.get<DiscountWatcherBloc>()
+        //     ..add(const DiscountWatcherEvent.started()),
+        // ),
         BlocProvider(
           create: (context) => GetIt.I.get<DiscountLinkCubit>()..started(),
         ),

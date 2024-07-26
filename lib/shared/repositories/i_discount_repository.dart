@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:veteranam/shared/shared.dart';
 
 abstract class IDiscountRepository {
-  Stream<List<DiscountModel>> getDiscountItems();
+  Stream<List<DiscountModel>> getDiscountItems({List<String>? reportIdItems});
   Future<Either<SomeFailure, DiscountModel>> getDiscount(String id);
 
   void addMockDiscountItems();
