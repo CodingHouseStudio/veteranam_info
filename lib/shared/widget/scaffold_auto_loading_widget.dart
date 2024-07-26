@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:veteranam/shared/shared.dart';
 
 class ScaffoldAutoLoadingWidget extends StatefulWidget {
@@ -17,6 +18,8 @@ class ScaffoldAutoLoadingWidget extends StatefulWidget {
     this.mainRightChildWidget,
     super.key,
     this.resetFilter,
+    this.pageName,
+    this.showMobileNawbar,
   });
 
   final List<Widget> Function({required bool isDesk})?
@@ -31,6 +34,8 @@ class ScaffoldAutoLoadingWidget extends StatefulWidget {
   final LoadingStatus loadingStatus;
   final void Function()? resetFilter;
   final void Function() loadDataAgain;
+  final String? pageName;
+  final bool? showMobileNawbar;
 
   @override
   State<ScaffoldAutoLoadingWidget> createState() =>
@@ -134,8 +139,33 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
                       : 0)
               : KPadding.kPaddingSize16),
         );
-
+        final route = [
+          KRoute.discounts.name,
+          KRoute.investors.name,
+          KRoute.home.name,
+        ];
         return Scaffold(
+          bottomNavigationBar: KPlatformConstants.testIsWeb
+              ? null
+              : BottomNavigationBar(
+                  items: <BottomNavigationBarItem>[
+                    BottomNavigationBarItem(
+                      icon: KIcon.tag.copyWith(fill: 1),
+                      label: context.l10n.discounts,
+                    ),
+                    BottomNavigationBarItem(
+                      icon: KIcon.activeDislike,
+                      label: context.l10n.investors,
+                    ),
+                    BottomNavigationBarItem(
+                      icon: KIcon.settings.copyWith(fill: 1),
+                      label: context.l10n.settings,
+                    ),
+                  ],
+                  currentIndex:
+                      context.l10n.discounts == widget.pageName ? 0 : 1,
+                  onTap: (i) => context.goNamed(route.elementAt(i)),
+                ),
           body: CustomScrollView(
             key: KWidgetkeys.widget.scaffold.scroll,
             slivers: [
@@ -143,6 +173,8 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
                 delegate: NawbarWidget(
                   isDesk: isDesk,
                   isTablet: isTablet,
+                  pageName: widget.pageName,
+                  showMobileNawbar: widget.showMobileNawbar,
                 ),
               ),
               if (titleChildWidget != null)
