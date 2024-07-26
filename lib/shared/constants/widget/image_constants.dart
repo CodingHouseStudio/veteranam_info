@@ -78,7 +78,7 @@ class KImage {
   //       key: key,
   //       fit: BoxFit.contain,
   //       cacheSize: null,
-  //        // cacheSize: KMinMaxSize.kHomeImageMaxSize,
+  //       // cacheSize: KMinMaxSize.kHomeImageMaxSize,
   //       // height: KMinMaxSize.minHeight50,
   //     );
   static AssetImageWidget logoHome({Key? key}) => AssetImageWidget(
