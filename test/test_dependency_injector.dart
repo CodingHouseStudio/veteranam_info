@@ -37,7 +37,8 @@ void configureDependenciesTest() {
       GetIt.I.get<IAppAuthenticationRepository>(),
     ),
   );
-  // GetIt.I.registerSingleton<IDiscountRepository>(DiscountRepository());
+  GetIt.I.registerSingleton<IDiscountRepository>(DiscountRepository());
+  GetIt.I.registerSingleton<IReportRepository>(ReportRepository());
   // GetIt.I.registerSingleton<IInformationRepository>(InformationRepository());
   // GetIt.I.registerSingleton<IInvestorsRepository>(InvestorsRepository());
   // GetIt.I.registerSingleton<IWorkRepository>(WorkRepository());
@@ -90,11 +91,13 @@ void configureDependenciesTest() {
   //     storyRepository: GetIt.I.get<IStoryRepository>(),
   //   ),
   // );
-  // GetIt.I.registerSingleton<DiscountWatcherBloc>(
-  //   DiscountWatcherBloc(
-  //     discountRepository: GetIt.I.get<IDiscountRepository>(),
-  //   ),
-  // );
+  GetIt.I.registerSingleton<DiscountWatcherBloc>(
+    DiscountWatcherBloc(
+      discountRepository: GetIt.I.get<IDiscountRepository>(),
+      appAuthenticationRepository: GetIt.I.get<IAppAuthenticationRepository>(),
+      reportRepository: GetIt.I.get<IReportRepository>(),
+    ),
+  );
   // GetIt.I.registerSingleton<MyDiscountsWatcherBloc>(
   //   MyDiscountsWatcherBloc(
   //     discountRepository: GetIt.I.get<IDiscountRepository>(),

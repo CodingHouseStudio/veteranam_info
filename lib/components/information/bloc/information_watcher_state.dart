@@ -14,7 +14,7 @@ class InformationWatcherState with _$InformationWatcherState {
     required int itemsLoaded,
     required InformationFailure? failure,
     // required List<int> likeIndex,
-    required List<ReportModel> reportItems,
+    // required List<ReportModel> reportItems,
   }) = _Initial;
 }
 

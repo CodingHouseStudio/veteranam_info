@@ -21,7 +21,7 @@ void main() {
     });
     group('${KGroupText.successfulGet} ', () {
       setUp(() {
-        when(mockFirestoreService.getInformations()).thenAnswer(
+        when(mockFirestoreService.getInformations(null)).thenAnswer(
           (_) => Stream.value(KTestText.informationModelItems),
         );
         when(
@@ -71,7 +71,7 @@ void main() {
     });
     group('${KGroupText.failureGet} ', () {
       setUp(() {
-        when(mockFirestoreService.getInformations()).thenAnswer(
+        when(mockFirestoreService.getInformations(null)).thenAnswer(
           (realInvocation) => Stream.error(
             KGroupText.failureGet,
           ),

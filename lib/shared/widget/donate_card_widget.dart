@@ -16,7 +16,7 @@ class DonateCardWidget extends StatelessWidget {
   final bool hasSubtitle;
   final TextStyle? titleStyle;
   final bool isDesk;
-  final void Function() reportEvent;
+  final void Function()? reportEvent;
 
   @override
   Widget build(BuildContext context) {
