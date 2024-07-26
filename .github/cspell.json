@@ -18,9 +18,6 @@
     }
   ],
   "useGitignore": true,
-  "ignorePaths": [
-    "./assets/markdown/privacy_policy_uk.md"
-  ],
   "words": [
     "Contador",
     "localizable",
