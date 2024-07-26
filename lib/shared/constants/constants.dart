@@ -6,6 +6,7 @@ export 'platform_constants.dart';
 export 'rout_constants.dart';
 export 'scroll_behavior.dart';
 export 'style/style.dart';
+export 'test_constants.dart';
 export 'text/text.dart';
 export 'theme/theme.dart';
 export 'widget/widget.dart';

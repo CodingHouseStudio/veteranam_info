@@ -1,0 +1,39 @@
+import 'package:bloc_test/bloc_test.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/mockito.dart';
+import 'package:veteranam/components/components.dart';
+import 'package:veteranam/shared/shared.dart';
+
+import '../text_dependency.dart';
+
+void main() {
+  setupFirebaseAuthMocks();
+
+  setUpAll(setUpGlobal);
+  group('${KScreenBlocName.privacyPolicy} ${KGroupText.cubit}', () {
+    late PrivacyPolicyMarkdownCubit privacyPolicyMarkdownCubit;
+    late IAppAuthenticationRepository mockAppAuthenticationRepository;
+
+    setUp(() {
+      mockAppAuthenticationRepository = MockIAppAuthenticationRepository();
+      when(mockAppAuthenticationRepository.currentUserSetting).thenAnswer(
+        (invocation) => KTestText.userSetting,
+      );
+      privacyPolicyMarkdownCubit = PrivacyPolicyMarkdownCubit(
+        appAuthenticationRepository: mockAppAuthenticationRepository,
+      );
+    });
+
+    blocTest<PrivacyPolicyMarkdownCubit, String?>(
+      'emits [discountWatcherState()]'
+      ' when load discountModel list',
+      build: () => privacyPolicyMarkdownCubit,
+      act: (bloc) async => bloc.init(),
+      expect: () async => [
+        predicate<String?>(
+          (state) => state != null,
+        ),
+      ],
+    );
+  });
+}
