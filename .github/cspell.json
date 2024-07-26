@@ -18,6 +18,9 @@
     }
   ],
   "useGitignore": true,
+  "ignorePaths": [
+    "assets/markdown/**"
+  ],
   "words": [
     "Contador",
     "localizable",
