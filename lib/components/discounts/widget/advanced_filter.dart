@@ -284,4 +284,3 @@ abstract class _AdvanceFilter {
           .read<DiscountWatcherBloc>()
           .add(DiscountWatcherEvent.filterLocation(index));
 }
-//
