@@ -18,9 +18,6 @@
     }
   ],
   "useGitignore": true,
-  "ignoreWords": [
-    "\\p{Cyrillic}"
-  ],
   "words": [
     "Contador",
     "localizable",
