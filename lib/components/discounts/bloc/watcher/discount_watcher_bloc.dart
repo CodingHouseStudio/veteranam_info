@@ -53,7 +53,6 @@ class DiscountWatcherBloc
     _Started event,
     Emitter<DiscountWatcherState> emit,
   ) async {
-    debugPrint('start date: ${DateTime.now()}');
     emit(state.copyWith(loadingStatus: LoadingStatus.loading));
 
     final reportItems = await _getReport();
@@ -103,7 +102,6 @@ class DiscountWatcherBloc
     //       return dateComparison;
     //     },
     //   );
-    debugPrint('without filter finish date: ${DateTime.now()}');
     final categoryFilter = _filterCategory(
       categoryIndex: state.filtersCategoriesIndex,
       list: event.discountItemsModel,
@@ -113,7 +111,6 @@ class DiscountWatcherBloc
       locationIndex: state.filtersLocationIndex,
       list: categoryFilter,
     );
-    debugPrint('finish date: ${DateTime.now()}');
     emit(
       _Initial(
         discountModelItems: event.discountItemsModel,
