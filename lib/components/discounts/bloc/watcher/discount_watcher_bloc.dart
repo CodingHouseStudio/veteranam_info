@@ -101,7 +101,7 @@ class DiscountWatcherBloc
     //       }
     //       return dateComparison;
     //     },
-    //   );
+    //    );
     final categoryFilter = _filterCategory(
       categoryIndex: state.filtersCategoriesIndex,
       list: event.discountItemsModel,
