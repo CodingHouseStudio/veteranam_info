@@ -145,7 +145,7 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
           KRoute.home.name,
         ];
         return Scaffold(
-          bottomNavigationBar: KPlatformConstants.testIsWeb
+          bottomNavigationBar: KTest.testIsWeb
               ? null
               : BottomNavigationBar(
                   items: <BottomNavigationBarItem>[
