@@ -24,7 +24,8 @@ class PrivacyPolicyDialog extends StatelessWidget {
         right: KPadding.kPaddingSize16,
       ),
       scrollable: true,
-      content: const PrivacyPolicyBody(),
+      content:
+          const PrivacyPolicyBlocprovider(widgetChild: PrivacyPolicyBody()),
     );
   }
 }
