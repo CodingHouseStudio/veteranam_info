@@ -55,6 +55,11 @@ Future<void> homeInitialHelper(
         itemKey: KWidgetkeys.screen.home.aboutProjecSubtitle,
       );
 
+      await scrollingHelper(
+        tester: tester,
+        offset: KTestConstants.scrollingDown100,
+      );
+
       expect(
         find.byKey(KWidgetkeys.screen.home.discountImage),
         findsOneWidget,
