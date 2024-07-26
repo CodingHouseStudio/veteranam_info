@@ -975,6 +975,10 @@
   "@linkThankMessage": {
     "examples": "Thank you text for the link field if the user submitted a link."
   },
+  "settings": "Settings",
+  "@settings": {
+    "examples": "Page name for mobile app only, displayed in the BottomNavigationBar widget."
+  },
   "moreCities": "{count} more..",
   "@moreCities": {
     "placeholders": {

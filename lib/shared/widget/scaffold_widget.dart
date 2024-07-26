@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:veteranam/shared/shared.dart';
 
 class ScaffoldWidget extends StatelessWidget {
@@ -11,6 +12,8 @@ class ScaffoldWidget extends StatelessWidget {
     super.key,
     this.mainDeskPadding,
     this.hasFooter = false,
+    this.showMobBottomNavigation,
+    this.pageName,
   });
   final List<Widget> Function({required bool isDesk})?
       titleChildWidgetsFunction;
@@ -18,6 +21,8 @@ class ScaffoldWidget extends StatelessWidget {
       mainChildWidgetsFunction;
   final EdgeInsetsGeometry? mainDeskPadding;
   final bool hasFooter;
+  final bool? showMobBottomNavigation;
+  final String? pageName;
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +31,8 @@ class ScaffoldWidget extends StatelessWidget {
       hasFooter: hasFooter,
       mainDeskPadding: mainDeskPadding,
       titleChildWidgetsFunction: titleChildWidgetsFunction,
+      showMobBottomNavigation: showMobBottomNavigation,
+      pageName: pageName,
     );
   }
 }
@@ -34,10 +41,12 @@ class ScaffoldNetworkWidget extends StatefulWidget {
   const ScaffoldNetworkWidget({
     required this.mainChildWidgetsFunction,
     required this.loadDataAgain,
+    this.showMobileNawbar,
     this.titleChildWidgetsFunction,
     super.key,
     this.mainDeskPadding,
     this.hasFooter = false,
+    this.pageName,
   });
   final List<Widget> Function({required bool isDesk})?
       titleChildWidgetsFunction;
@@ -46,6 +55,8 @@ class ScaffoldNetworkWidget extends StatefulWidget {
   final EdgeInsetsGeometry? mainDeskPadding;
   final bool hasFooter;
   final void Function() loadDataAgain;
+  final String? pageName;
+  final bool? showMobileNawbar;
 
   @override
   State<ScaffoldNetworkWidget> createState() => _ScaffoldNetworkWidgetState();
@@ -70,6 +81,8 @@ class _ScaffoldNetworkWidgetState extends State<ScaffoldNetworkWidget> {
       hasFooter: widget.hasFooter,
       mainDeskPadding: widget.mainDeskPadding,
       titleChildWidgetsFunction: widget.titleChildWidgetsFunction,
+      pageName: widget.pageName,
+      showMobileNawbar: widget.showMobileNawbar,
     );
   }
 
@@ -112,6 +125,9 @@ class _ScaffoldWidget extends StatelessWidget {
     this.titleChildWidgetsFunction,
     this.mainDeskPadding,
     this.hasFooter = false,
+    this.pageName,
+    this.showMobileNawbar,
+    this.showMobBottomNavigation,
   });
   final List<Widget> Function({required bool isDesk})?
       titleChildWidgetsFunction;
@@ -119,6 +135,9 @@ class _ScaffoldWidget extends StatelessWidget {
       mainChildWidgetsFunction;
   final EdgeInsetsGeometry? mainDeskPadding;
   final bool hasFooter;
+  final String? pageName;
+  final bool? showMobileNawbar;
+  final bool? showMobBottomNavigation;
 
   @override
   Widget build(BuildContext context) {
@@ -153,7 +172,33 @@ class _ScaffoldWidget extends StatelessWidget {
             ),
           );
         }
+        final route = [
+          KRoute.discounts.name,
+          KRoute.investors.name,
+          KRoute.home.name,
+        ];
         return Scaffold(
+          bottomNavigationBar:
+              KTest.testIsWeb || !(showMobBottomNavigation ?? true)
+                  ? null
+                  : BottomNavigationBar(
+                      items: <BottomNavigationBarItem>[
+                        BottomNavigationBarItem(
+                          icon: KIcon.tag.copyWith(fill: 1),
+                          label: context.l10n.discounts,
+                        ),
+                        BottomNavigationBarItem(
+                          icon: KIcon.activeDislike,
+                          label: context.l10n.investors,
+                        ),
+                        BottomNavigationBarItem(
+                          icon: KIcon.settings.copyWith(fill: 1),
+                          label: context.l10n.settings,
+                        ),
+                      ],
+                      currentIndex: 2,
+                      onTap: (i) => context.goNamed(route.elementAt(i)),
+                    ),
           body: CustomScrollView(
             key: KWidgetkeys.widget.scaffold.scroll,
             slivers: [
@@ -161,6 +206,8 @@ class _ScaffoldWidget extends StatelessWidget {
                 delegate: NawbarWidget(
                   isDesk: isDesk,
                   isTablet: isTablet,
+                  pageName: pageName,
+                  showMobileNawbar: showMobileNawbar,
                 ),
               ),
               if (titleChildWidgetsFunction != null)
