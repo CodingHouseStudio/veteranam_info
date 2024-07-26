@@ -975,6 +975,10 @@
   "@linkThankMessage": {
     "examples": "Текст подяки для поля посилання, якщо користувач надіслав посилання."
   },
+  "settings": "Налаштування",
+  "@settings": {
+    "examples": "Ім'я сторінки тільки для мобльної програми, відображеється в віджеті BottomNavigationBar."
+  },
   "moreCities": "Ще {count} міст..",
   "@moreCities": {
     "placeholders": {
