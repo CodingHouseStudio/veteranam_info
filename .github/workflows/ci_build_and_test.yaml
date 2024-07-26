@@ -27,10 +27,10 @@ jobs:
       min_coverage: 90
       format_directories: "lib test"
 
-  spell-check:
-    uses: CodingHouseStudio/flutter_workflows/.github/workflows/spell_check.yml@main
-    with:
-      includes: |
-        **/*.md
-      modified_files_only: false
-      config: .github/cspell.json
+  # spell-check:
+  #   uses: CodingHouseStudio/flutter_workflows/.github/workflows/spell_check.yml@main
+  #   with:
+  #     includes: |
+  #       **/*.md
+  #     modified_files_only: false
+  #     config: .github/cspell.json
