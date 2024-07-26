@@ -85,6 +85,7 @@ flutter:
   assets:
     - assets/icons/
     - assets/images/
+    - assets/markdown/
 
   fonts:
     - family: Gilroy

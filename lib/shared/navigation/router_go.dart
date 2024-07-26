@@ -18,7 +18,7 @@ GoRouter router = GoRouter(
   errorBuilder: (context, state) => const ErrorScreen(),
   refreshListenable:
       GoRouterRefreshStream(GetIt.instance<AuthenticationBloc>().stream),
-  initialLocation: kIsWeb || KPlatformConstants.testIsWeb
+  initialLocation: kIsWeb || KTest.testIsWeb
       ? KRoute.home.path
       : '/${KRoute.discounts.path}',
   observers: [
