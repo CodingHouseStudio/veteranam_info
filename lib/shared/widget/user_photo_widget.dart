@@ -31,7 +31,7 @@ class UserPhotoWidget extends StatelessWidget {
   Widget get _body => imageUrl != null
       ? ClipRRect(
           borderRadius: BorderRadius.circular(KSize.kUserPhoto),
-          child: ImageWidget(
+          child: NetworkImageWidget(
             imageUrl: imageUrl!,
             fit: BoxFit.contain,
             size: KSize.kUserPhoto,
