@@ -166,7 +166,7 @@
     "examples": "Text for the field.",
     "description": "Field used to enter a message."
   },
-  "homeSubtitle": "Here you can find discounts!",
+  "homeSubtitle": "On our website you will find current discounts from businesses for you and your families.",
   "@homeSubtitle": {
     "examples": "The text of the Home page subtitle."
   },
@@ -577,7 +577,7 @@
   "@whatKindOfProject": {
     "examples": "Text on the Home page, project subtitle title"
   },
-  "aboutProject": "An independent information platform for veterans and their families.",
+  "aboutProject": "Veteranam is a platform to support veterans and their families. We post information about discounts and services to help veterans with their daily lives and development.",
   "@aboutProject": {
     "examples": "Text on the Home page, project subtitle"
   },
