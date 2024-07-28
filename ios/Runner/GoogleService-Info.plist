@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>32851885972-39m4c4lb48qj9p40542l7o0d8hebfoaa.apps.googleusercontent.com</string>
+	<string>326120302123-6imcoq7lddeov8i8dcicp15cjn6a418u.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.32851885972-39m4c4lb48qj9p40542l7o0d8hebfoaa</string>
+	<string>com.googleusercontent.apps.326120302123-6imcoq7lddeov8i8dcicp15cjn6a418u</string>
 	<key>API_KEY</key>
-	<string>AIzaSyCbrgwKWeMZ69SHecID9NFHohsA7v8YOss</string>
+	<string>AIzaSyC23K7nwAkDvjcZAs5auqB1SjChELepAQ4</string>
 	<key>GCM_SENDER_ID</key>
-	<string>32851885972</string>
+	<string>326120302123</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>info.veteranam.dev</string>
+	<string>info.veteranam</string>
 	<key>PROJECT_ID</key>
-	<string>veteran-development</string>
+	<string>veteran-production</string>
 	<key>STORAGE_BUCKET</key>
-	<string>veteran-development.appspot.com</string>
+	<string>veteran-production.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:32851885972:ios:1f70471fce23766fecd981</string>
+	<string>1:326120302123:ios:f7fe329bb88f4091edac6e</string>
 </dict>
 </plist>
