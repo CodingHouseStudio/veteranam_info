@@ -188,7 +188,7 @@ class _ScaffoldWidget extends StatelessWidget {
                           label: context.l10n.discounts,
                         ),
                         BottomNavigationBarItem(
-                          icon: KIcon.activeDislike,
+                          icon: KIcon.investors.copyWith(fill: 1),
                           label: context.l10n.investors,
                         ),
                         BottomNavigationBarItem(
