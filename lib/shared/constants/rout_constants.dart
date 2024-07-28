@@ -103,7 +103,7 @@ abstract class KRoute {
     name: 'UnderConstruction',
   );
   static const _RouteItem feedback = _RouteItem(
-    path: '/feedback',
+    path: 'feedback',
     name: 'Feedback',
   );
   static const _RouteItem myDiscounts = _RouteItem(
