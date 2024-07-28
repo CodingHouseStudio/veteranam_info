@@ -282,16 +282,16 @@ GoRouter router = GoRouter(
         //     child: const ContactScreen(),
         //   ),
         // ),
+        GoRoute(
+          name: KRoute.feedback.name,
+          path: KRoute.feedback.path,
+          pageBuilder: (context, state) => NoTransitionPage(
+            key: state.pageKey,
+            name: state.name,
+            child: const FeedbackScreen(),
+          ),
+        ),
       ],
-    ),
-    GoRoute(
-      name: KRoute.feedback.name,
-      path: KRoute.feedback.path,
-      pageBuilder: (context, state) => NoTransitionPage(
-        key: state.pageKey,
-        name: state.name,
-        child: const FeedbackScreen(),
-      ),
     ),
   ],
 );
