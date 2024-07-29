@@ -24,10 +24,10 @@ class NewsCardWidget extends StatelessWidget {
     return CardTextDetailEvaluateWidget(
       image: informationItem.image,
       text: informationItem.news,
-      buttonText: [
-        context.l10n.detail,
-        context.l10n.hide,
-      ],
+      // buttonText: [
+      //   context.l10n.detail,
+      //   context.l10n.hide,
+      // ],
       onShare: () async => Share.share(
         '${Uri.base.origin}/${KRoute.information.path}/${informationItem.id}',
       ),
