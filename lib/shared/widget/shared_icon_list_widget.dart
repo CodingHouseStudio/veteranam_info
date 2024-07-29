@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:veteranam/shared/shared.dart';
 
 abstract class SharedIconListWidget {
@@ -21,14 +21,7 @@ abstract class SharedIconListWidget {
         _cardIconWidget(
           label: context.l10n.webSite,
           context,
-          onPressed: () async {
-            final linkParse = await canLaunchUrl(Uri.parse(link));
-            if (linkParse) {
-              await launchUrl(
-                Uri.parse(link),
-              );
-            }
-          },
+          onPressed: () => context.read<UrlCubit>().launchUrl(url: link),
           icon: KIcon.captivePortal,
           background: background,
           key: webSiteKey,

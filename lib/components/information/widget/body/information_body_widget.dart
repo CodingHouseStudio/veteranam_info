@@ -13,99 +13,104 @@ class InformationBodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<InformationWatcherBloc, InformationWatcherState>(
-      listener: (context, state) => context.dialog.showGetErrorDialog(
-        error: state.failure!.value(context),
-        onPressed: () => context
-            .read<InformationWatcherBloc>()
-            .add(const InformationWatcherEvent.started()),
-      ),
-      listenWhen: (previous, current) => current.failure != null,
-      builder: (context, _) => ScaffoldAutoLoadingWidget(
-        loadingButtonText: context.l10n.moreNews,
-        loadingStatus: _.loadingStatus,
-        cardListIsEmpty: _.filteredInformationModelItems.isEmpty,
-        resetFilter: () => context
-            .read<InformationWatcherBloc>()
-            .add(const InformationWatcherEvent.filter(-1)),
-        loadDataAgain: () => context
-            .read<InformationWatcherBloc>()
-            .add(const InformationWatcherEvent.started()),
-        titleChildWidgetsFunction: ({required isDesk}) => [
-          KSizedBox.kHeightSizedBox24,
-          ...TitleWidget.titleIconWidgetList(
-            title: context.l10n.verifiedInformation,
-            titleKey: KWidgetkeys.screen.information.title,
-            isDesk: isDesk,
-            titleSecondPart: context.l10n.forVeteransAndTheirFamilies,
-          ),
-          if (isDesk)
-            KSizedBox.kHeightSizedBox40
-          else
-            KSizedBox.kHeightSizedBox24,
-          if (isDesk)
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                TextPointWidget(
-                  context.l10n.information,
-                  hasExpanded: false,
-                ),
-                KSizedBox.kWidthSizedBox90,
-                Expanded(child: _filter(isDesk: isDesk, context: context)),
-              ],
-            )
-          else ...[
-            TextPointWidget(context.l10n.information),
-            KSizedBox.kHeightSizedBox8,
-            _filter(isDesk: isDesk, context: context),
-          ],
-          if (isDesk)
-            KSizedBox.kHeightSizedBox40
-          else
-            KSizedBox.kHeightSizedBox24,
-        ],
-        mainDeskPadding: ({required maxWidth}) => EdgeInsets.symmetric(
-          horizontal: maxWidth * KDimensions.paddingMultiply,
+    return BlocListener<UrlCubit, UrlFailure?>(
+      listener: (context, state) =>
+          context.dialog.showSendErrorDialog(state?.value(context)),
+      child: BlocConsumer<InformationWatcherBloc, InformationWatcherState>(
+        listener: (context, state) => context.dialog.showGetErrorDialog(
+          error: state.failure?.value(context),
+          onPressed: () => context
+              .read<InformationWatcherBloc>()
+              .add(const InformationWatcherEvent.started()),
         ),
-        mainChildWidgetsFunction: ({required isDesk}) => [
-          if (_.informationModelItems.isEmpty &&
-              _.loadingStatus == LoadingStatus.loaded &&
-              Config.isDevelopment)
-            MockButtonWidget(
-              key: KWidgetkeys.screen.information.buttonMock,
-              onPressed: () {
-                GetIt.I.get<IInformationRepository>().addMockInformationItems();
-                context
-                    .read<InformationWatcherBloc>()
-                    .add(const InformationWatcherEvent.started());
-              },
-            )
-          else
-            ..._newsWidgetList(
-              context: context,
+        builder: (context, _) => ScaffoldAutoLoadingWidget(
+          loadingButtonText: context.l10n.moreNews,
+          loadingStatus: _.loadingStatus,
+          cardListIsEmpty: _.filteredInformationModelItems.isEmpty,
+          resetFilter: () => context
+              .read<InformationWatcherBloc>()
+              .add(const InformationWatcherEvent.filter(-1)),
+          loadDataAgain: () => context
+              .read<InformationWatcherBloc>()
+              .add(const InformationWatcherEvent.started()),
+          titleChildWidgetsFunction: ({required isDesk}) => [
+            KSizedBox.kHeightSizedBox24,
+            ...TitleWidget.titleIconWidgetList(
+              title: context.l10n.verifiedInformation,
+              titleKey: KWidgetkeys.screen.information.title,
               isDesk: isDesk,
+              titleSecondPart: context.l10n.forVeteransAndTheirFamilies,
             ),
-          if (isDesk)
-            KSizedBox.kHeightSizedBox56
-          else
-            KSizedBox.kHeightSizedBox24,
-          // LoadingButton(
-          //   widgetKey: KWidgetkeys.screen.information.button,
-          //   isDesk: isDesk,
-          //   onPressed: () => context.read<InformationWatcherBloc>().add(
-          //         const InformationWatcherEvent.loadNextItems(),
-          //       ),
-          //   text: context.l10n.moreNews,
-          // ),
-          if (isDesk)
-            KSizedBox.kHeightSizedBox56
-          else
-            KSizedBox.kHeightSizedBox24,
-        ],
-        loadFunction: () => context.read<InformationWatcherBloc>().add(
-              const InformationWatcherEvent.loadNextItems(),
-            ),
+            if (isDesk)
+              KSizedBox.kHeightSizedBox40
+            else
+              KSizedBox.kHeightSizedBox24,
+            if (isDesk)
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  TextPointWidget(
+                    context.l10n.information,
+                    hasExpanded: false,
+                  ),
+                  KSizedBox.kWidthSizedBox90,
+                  Expanded(child: _filter(isDesk: isDesk, context: context)),
+                ],
+              )
+            else ...[
+              TextPointWidget(context.l10n.information),
+              KSizedBox.kHeightSizedBox8,
+              _filter(isDesk: isDesk, context: context),
+            ],
+            if (isDesk)
+              KSizedBox.kHeightSizedBox40
+            else
+              KSizedBox.kHeightSizedBox24,
+          ],
+          mainDeskPadding: ({required maxWidth}) => EdgeInsets.symmetric(
+            horizontal: maxWidth * KDimensions.paddingMultiply,
+          ),
+          mainChildWidgetsFunction: ({required isDesk}) => [
+            if (_.informationModelItems.isEmpty &&
+                _.loadingStatus == LoadingStatus.loaded &&
+                Config.isDevelopment)
+              MockButtonWidget(
+                key: KWidgetkeys.screen.information.buttonMock,
+                onPressed: () {
+                  GetIt.I
+                      .get<IInformationRepository>()
+                      .addMockInformationItems();
+                  context
+                      .read<InformationWatcherBloc>()
+                      .add(const InformationWatcherEvent.started());
+                },
+              )
+            else
+              ..._newsWidgetList(
+                context: context,
+                isDesk: isDesk,
+              ),
+            if (isDesk)
+              KSizedBox.kHeightSizedBox56
+            else
+              KSizedBox.kHeightSizedBox24,
+            // LoadingButton(
+            //   widgetKey: KWidgetkeys.screen.information.button,
+            //   isDesk: isDesk,
+            //   onPressed: () => context.read<InformationWatcherBloc>().add(
+            //         const InformationWatcherEvent.loadNextItems(),
+            //       ),
+            //   text: context.l10n.moreNews,
+            // ),
+            if (isDesk)
+              KSizedBox.kHeightSizedBox56
+            else
+              KSizedBox.kHeightSizedBox24,
+          ],
+          loadFunction: () => context.read<InformationWatcherBloc>().add(
+                const InformationWatcherEvent.loadNextItems(),
+              ),
+        ),
       ),
     );
   }

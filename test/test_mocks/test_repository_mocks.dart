@@ -54,6 +54,7 @@ import 'package:veteranam/shared/shared.dart';
     MockSpec<HttpClientResponse>(),
     MockSpec<HttpHeaders>(),
     MockSpec<IReportRepository>(),
+    MockSpec<IUrlRepository>(),
   ],
 )
 void load() => debugPrint('loaded');
