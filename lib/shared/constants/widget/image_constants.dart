@@ -49,24 +49,24 @@ import 'package:veteranam/shared/shared.dart';
 // }
 
 class KImage {
-  static SvgImageWidget instagram({Key? key}) => SvgImageWidget(
-        path: 'assets/icons/instagram.svg',
+  static SvgPicture instagram({Key? key}) => SvgPicture.asset(
+        'assets/icons/instagram.svg',
         key: key,
       );
-  static SvgImageWidget linkedIn({Key? key}) => SvgImageWidget(
-        path: 'assets/icons/linkedin.svg',
+  static SvgPicture linkedIn({Key? key}) => SvgPicture.asset(
+        'assets/icons/linkedin.svg',
         key: key,
       );
-  static SvgImageWidget facebook({Key? key}) => SvgImageWidget(
-        path: 'assets/icons/facebook.svg',
+  static SvgPicture facebook({Key? key}) => SvgPicture.asset(
+        'assets/icons/facebook.svg',
         key: key,
       );
-  static SvgImageWidget apple({Key? key}) => SvgImageWidget(
-        path: 'assets/icons/social_icons.svg',
+  static SvgPicture apple({Key? key}) => SvgPicture.asset(
+        'assets/icons/social_icons.svg',
         key: key,
       );
-  static SvgImageWidget google({Key? key}) => SvgImageWidget(
-        path: 'assets/icons/social_icons_g.svg',
+  static SvgPicture google({Key? key}) => SvgPicture.asset(
+        'assets/icons/social_icons_g.svg',
         key: key,
       );
   static SvgPicture logo({Key? key}) => SvgPicture.asset(
