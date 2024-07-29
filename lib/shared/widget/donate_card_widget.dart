@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:veteranam/shared/shared.dart';
 
 class DonateCardWidget extends StatelessWidget {
@@ -82,22 +82,14 @@ class DonateCardWidget extends StatelessWidget {
             DonateButtonWidget(
               key: KWidgetkeys.widget.donateCard.button,
               text: context.l10n.support,
-              onPressed: () => _launchURL(fundModel.projectsLink!),
+              onPressed: () => context
+                  .read<UrlCubit>()
+                  .launchUrl(url: fundModel.projectsLink),
               isDesk: isDesk,
             ),
           ],
         ),
       ),
     );
-  }
-
-  Future<void> _launchURL(String url) async {
-    final uri = Uri.parse(url);
-
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(uri);
-    } else {
-      throw Exception('Could not launch $url');
-    }
   }
 }

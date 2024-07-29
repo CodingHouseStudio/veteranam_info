@@ -21,4 +21,8 @@ class SomeFailure with _$SomeFailure {
   const factory SomeFailure.duplicate() = FailureDuplicate;
   const factory SomeFailure.tooManyRequests() = FailureTooManyRequests;
   const factory SomeFailure.emailSendingFailed() = FailureEmailSendingFailed;
+
+  // Url
+  const factory SomeFailure.share() = FailureShare;
+  const factory SomeFailure.link() = FailureLink;
 }

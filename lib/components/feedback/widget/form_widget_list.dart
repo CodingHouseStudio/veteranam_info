@@ -31,7 +31,10 @@ List<Widget> _formWidgegList({
                             style: AppTextStyle
                                 .materialThemeBodyLargeNeutralVariant60,
                           ),
-                          emailButton(isDesk: isDesk),
+                          emailButton(
+                            isDesk: isDesk,
+                            context: context,
+                          ),
                         ],
                       ),
                       KSizedBox.kHeightSizedBox32,
@@ -95,7 +98,10 @@ List<Widget> _formWidgegList({
                   key: KWidgetkeys.screen.feedback.emailText,
                   style: AppTextStyle.materialThemeBodyMediumNeutralVariant35,
                 ),
-                emailButton(isDesk: isDesk),
+                emailButton(
+                  isDesk: isDesk,
+                  context: context,
+                ),
               ],
             ),
             KSizedBox.kHeightSizedBox32,
@@ -120,6 +126,7 @@ List<Widget> _formWidgegList({
 
 Widget emailButton({
   required bool isDesk,
+  required BuildContext context,
 }) =>
     Markdown(
       key: KWidgetkeys.screen.feedback.emailButton,
@@ -135,14 +142,6 @@ Widget emailButton({
       ),
       padding: EdgeInsets.zero,
       shrinkWrap: true,
-      onTapLink: (text, href, title) async {
-        final emailUri = Uri(
-          scheme: 'mailto',
-          path: KAppText.email,
-        );
-
-        if (await canLaunchUrl(emailUri)) {
-          await launchUrl(emailUri);
-        }
-      },
+      onTapLink: (text, href, title) =>
+          context.read<UrlCubit>().launchUrl(url: text, scheme: 'mailto'),
     );

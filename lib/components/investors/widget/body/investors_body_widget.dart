@@ -15,12 +15,11 @@ class InvestorsBodyWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<InvestorsWatcherBloc, InvestorsWatcherState>(
       listener: (context, state) => context.dialog.showGetErrorDialog(
-        error: state.failure!.value(context),
+        error: state.failure?.value(context),
         onPressed: () => context
             .read<InvestorsWatcherBloc>()
             .add(const InvestorsWatcherEvent.started()),
       ),
-      listenWhen: (previous, current) => current.failure != null,
       builder: (context, _) => ScaffoldAutoLoadingWidget(
         loadingButtonText: context.l10n.moreFunds,
         loadingStatus: _.loadingStatus,
