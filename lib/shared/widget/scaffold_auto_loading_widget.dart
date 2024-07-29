@@ -168,6 +168,7 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
                 ),
           body: CustomScrollView(
             key: KWidgetkeys.widget.scaffold.scroll,
+            physics: KTest.scroll,
             slivers: [
               SliverPersistentHeader(
                 delegate: NawbarWidget(
