@@ -43,8 +43,8 @@ class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
       children: [
         if (widget.hasMarkdown)
           MarkdownBody(
-            data: widget.text
-                .markdownCard(isDesk: widget.isDesk, fullText: fullText),
+            data: fullText ? widget.text : subtext,
+            // .markdownCard(isDesk: widget.isDesk, fullText: fullText),
 
             // selectable: true,
             styleSheet: MarkdownStyleSheet(
@@ -96,5 +96,15 @@ class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
         ),
       ],
     );
+  }
+
+  String get subtext {
+    final index = widget.text.indexOf('\n\n');
+    final i = index != -1
+        ? index
+        : widget.text.length > KMinMaxSize.titleDeskMaxLength
+            ? KMinMaxSize.titleDeskMaxLength
+            : widget.text.length;
+    return '${widget.text.substring(0, i)}...';
   }
 }
