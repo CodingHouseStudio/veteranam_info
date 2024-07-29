@@ -146,3 +146,29 @@ extension MyStoryFailureValue on MyStoryFailure {
     }
   }
 }
+
+extension UrlFailureValue on UrlFailure {
+  String value(BuildContext context) {
+    switch (this) {
+      case UrlFailure.error:
+        return context.l10n.error;
+      case UrlFailure.share:
+        return context.l10n.shareFailure;
+      case UrlFailure.link:
+        return context.l10n.linkFailure;
+    }
+  }
+}
+
+extension UrlFailureExtension on SomeFailure {
+  UrlFailure toUrl() {
+    switch (this) {
+      case FailureShare():
+        return UrlFailure.share;
+      case FailureLink():
+        return UrlFailure.link;
+      default:
+        return UrlFailure.error;
+    }
+  }
+}

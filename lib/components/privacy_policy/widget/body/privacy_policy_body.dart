@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:veteranam/components/components.dart';
 import 'package:veteranam/shared/shared.dart';
 
@@ -44,16 +43,9 @@ class PrivacyPolicyBody extends StatelessWidget {
                   styleSheet: MarkdownStyleSheet(
                     a: AppTextStyle.materialThemeBodyLarge,
                   ),
-                  onTapLink: (text, href, title) async {
-                    final emailUri = Uri(
-                      scheme: 'mailto',
-                      path: KAppText.email,
-                    );
-
-                    if (await canLaunchUrl(emailUri)) {
-                      await launchUrl(emailUri);
-                    }
-                  },
+                  onTapLink: (text, href, title) => context
+                      .read<UrlCubit>()
+                      .launchUrl(url: text, scheme: 'mailto'),
                 ),
         );
       },

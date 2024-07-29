@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:veteranam/shared/shared.dart';
 
 class CardTextDetailWidget extends StatefulWidget {
@@ -50,23 +50,8 @@ class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
             styleSheet: MarkdownStyleSheet(
               a: AppTextStyle.materialThemeBodyLarge,
             ),
-            onTapLink: (text, href, title) async {
-              if (href == null) return;
-              // if (!href.isUrlValid && KPlatformConstants.isWebDesktop) {
-              //   await Clipboard.setData(ClipboardData(text: text));
-              //   return;
-              // }
-              // final canLaunch = await canLaunchUrl(Uri.parse(href));
-              // if (canLaunch) {
-              try {
-                await launchUrl(
-                  Uri.parse(href),
-                );
-              } catch (e) {
-                return;
-              }
-              // }
-            },
+            onTapLink: (text, href, title) =>
+                context.read<UrlCubit>().launchUrl(url: href),
           )
         else
           Text(
