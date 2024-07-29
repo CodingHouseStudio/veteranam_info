@@ -170,16 +170,14 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
             key: KWidgetkeys.widget.scaffold.scroll,
             physics: KTest.scroll,
             slivers: [
-              if ((widget.pageName?.isNotEmpty ?? false) ||
-                  Config.isDevelopment)
-                SliverPersistentHeader(
-                  delegate: NawbarWidget(
-                    isDesk: isDesk,
-                    isTablet: isTablet,
-                    pageName: widget.pageName,
-                    showMobileNawbar: widget.showMobileNawbar,
-                  ),
+              SliverPersistentHeader(
+                delegate: NawbarWidget(
+                  isDesk: isDesk,
+                  isTablet: isTablet,
+                  pageName: widget.pageName,
+                  showMobileNawbar: widget.showMobileNawbar,
                 ),
+              ),
               if (titleChildWidget != null)
                 SliverPadding(
                   padding: padding,
