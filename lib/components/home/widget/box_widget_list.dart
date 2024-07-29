@@ -187,7 +187,7 @@ Widget doubleBox({
         Expanded(
           flex: 4,
           child: BoxWidget(
-            text: context.l10n.writeYourSuggenstions,
+            text: context.l10n.contacts,
             onTap: () => context.goNamed(KRoute.feedback.name),
             isDesk: true,
             icon: KIcon.fileText,
