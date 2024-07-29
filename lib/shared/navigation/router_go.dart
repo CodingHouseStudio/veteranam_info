@@ -136,8 +136,10 @@ GoRouter router = GoRouter(
               pageBuilder: (context, state) => DialogPage(
                 key: state.pageKey,
                 name: state.name,
-                builder: (_) => DiscountCardDialog(
-                  id: state.pathParameters['cardId'],
+                builder: (_) => SizedBox(
+                  child: DiscountCardDialog(
+                    id: state.pathParameters['cardId'],
+                  ),
                 ),
               ),
             ),

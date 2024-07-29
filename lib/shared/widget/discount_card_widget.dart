@@ -241,17 +241,18 @@ class DiscountCardWidget extends StatelessWidget {
         ),
       );
   String getText(BuildContext context) => '${discountItem.description}\n'
-      '\n***${context.l10n.toGetItYouNeed}***\n'
-      '\n- ${discountItem.requirements.replaceAll('-', '  -')}\n'
-      '\n${discountItem.exclusions}\n'
-      // ignore: lines_longer_than_80_chars
-      '${discountItem.additionalDetails != null ? '\n${discountItem.additionalDetails ?? ''}\n' : ''}'
-      '\n***${context.l10n.callForDetails}:***'
-      ' ${KPlatformConstants.isWebDesktop ? '***' : '['}'
-      '${discountItem.phoneNumber}'
-      '${KPlatformConstants.isWebDesktop ? '***' : '](tel:'
+          '\n***${context.l10n.toGetItYouNeed}***\n'
+          '\n- ${discountItem.requirements.replaceAll('-', '  -')}\n'
+          '\n${discountItem.exclusions}\n'
           // ignore: lines_longer_than_80_chars
-          '${discountItem.phoneNumber.replaceAll('(', '').replaceAll(')', '').replaceAll(' ', '')})'}';
+          '${discountItem.additionalDetails != null ? '\n${discountItem.additionalDetails ?? ''}\n' : ''}'
+          '\n***${context.l10n.callForDetails}:***'
+          ' ${KPlatformConstants.isWebDesktop ? '***' : '['}'
+          '${discountItem.phoneNumber}'
+          '${KPlatformConstants.isWebDesktop ? '***' : '](tel:'
+              // ignore: lines_longer_than_80_chars
+              '${discountItem.phoneNumber.replaceAll('(', '').replaceAll(')', '').replaceAll(' ', '')})'}'
+      .addMarkDownLink;
 }
 
 // class _DiscountsCardWidgetMob extends StatelessWidget {
