@@ -24,6 +24,9 @@ class NewsCardBody extends StatelessWidget {
                 isDesk: isDesk,
                 routeName: KRoute.information.name,
               ),
+              onShare: () => context.read<UrlCubit>().share(
+                    '${KRoute.home.path}${KRoute.information.path}/${_.informationModel?.id}',
+                  ),
             ),
           ),
         );
