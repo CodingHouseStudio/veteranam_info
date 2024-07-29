@@ -12,9 +12,8 @@ class MyDiscountsBodyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<MyDiscountsWatcherBloc, MyDiscountsWatcherState>(
-      listenWhen: (previous, current) => current.failure != null,
       listener: (context, state) => context.dialog.showGetErrorDialog(
-        error: state.failure!.value(context),
+        error: state.failure?.value(context),
         onPressed: () => context
             .read<MyDiscountsWatcherBloc>()
             .add(const MyDiscountsWatcherEvent.started()),

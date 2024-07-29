@@ -25,6 +25,9 @@ class DiscountCardBody extends StatelessWidget {
                 isDesk: isDesk,
                 routeName: KRoute.discounts.name,
               ),
+              onShare: () => context.read<UrlCubit>().share(
+                    '${KRoute.home.path}${KRoute.discounts.path}/${_.discountModel?.id}',
+                  ),
             ),
           ),
         );

@@ -50,6 +50,7 @@ import 'package:veteranam/shared/bloc/authentication/authentication_bloc.dart'
 import 'package:veteranam/shared/bloc/authentication_services/authentication_services_cubit.dart'
     as _i209;
 import 'package:veteranam/shared/bloc/report/report_bloc.dart' as _i765;
+import 'package:veteranam/shared/bloc/url/url_cubit.dart' as _i319;
 import 'package:veteranam/shared/data_provider/cache_provider.dart' as _i37;
 import 'package:veteranam/shared/data_provider/firestore_provider.dart'
     as _i1033;
@@ -72,6 +73,7 @@ import 'package:veteranam/shared/repositories/report_repository.dart' as _i205;
 import 'package:veteranam/shared/repositories/secure_storage_repository.dart'
     as _i949;
 import 'package:veteranam/shared/repositories/story_repository.dart' as _i801;
+import 'package:veteranam/shared/repositories/url_repository.dart' as _i929;
 import 'package:veteranam/shared/repositories/work_repository.dart' as _i76;
 import 'package:veteranam/shared/shared.dart' as _i1001;
 
@@ -94,6 +96,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i116.GoogleSignIn>(() => firebaseModule.googleSignIn);
     gh.singleton<_i1001.IDiscountRepository>(() => _i452.DiscountRepository());
     gh.singleton<_i1001.IFeedbackRepository>(() => _i361.FeedbackRepository());
+    gh.singleton<_i1001.IUrlRepository>(() => _i929.UrlRepository());
     gh.lazySingleton<_i1001.IStorage>(() => _i949.SecureStorageRepository());
     gh.singleton<_i1001.IInvestorsRepository>(
         () => _i994.InvestorsRepository());
@@ -105,18 +108,20 @@ extension GetItInjectableX on _i174.GetIt {
               gh<_i116.GoogleSignIn>(),
               gh<_i1001.CacheClient>(),
             ));
-    gh.singleton<_i1001.IStoryRepository>(() => _i801.StoryRepository());
-    gh.singleton<_i1001.IWorkRepository>(() => _i76.WorkRepository());
+    gh.lazySingleton<_i1001.IStoryRepository>(() => _i801.StoryRepository());
+    gh.lazySingleton<_i1001.IWorkRepository>(() => _i76.WorkRepository());
     gh.factory<_i785.SignUpBloc>(() => _i785.SignUpBloc(
         iAppAuthenticationRepository:
             gh<_i1001.IAppAuthenticationRepository>()));
-    gh.singleton<_i1001.IInformationRepository>(
+    gh.lazySingleton<_i1001.IInformationRepository>(
         () => _i154.InformationRepository());
-    gh.singleton<_i1001.IReportRepository>(() => _i205.ReportRepository());
+    gh.lazySingleton<_i1001.IReportRepository>(() => _i205.ReportRepository());
     gh.factory<_i763.StoryWatcherBloc>(() =>
         _i763.StoryWatcherBloc(storyRepository: gh<_i1001.IStoryRepository>()));
     gh.factory<_i522.HomeWatcherBloc>(() =>
         _i522.HomeWatcherBloc(homeRepository: gh<_i1001.IHomeRepository>()));
+    gh.factory<_i319.UrlCubit>(
+        () => _i319.UrlCubit(urlRepository: gh<_i1001.IUrlRepository>()));
     gh.factory<_i688.NewsCardWatcherBloc>(() => _i688.NewsCardWatcherBloc(
         informationRepository: gh<_i1001.IInformationRepository>()));
     gh.factory<_i227.DiscountLinkCubit>(() => _i227.DiscountLinkCubit(

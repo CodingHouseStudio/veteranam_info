@@ -9621,3 +9621,75 @@ class MockIReportRepository extends _i1.Mock implements _i3.IReportRepository {
         )),
       ) as _i8.Future<_i2.Either<_i3.SomeFailure, List<_i3.ReportModel>>>);
 }
+
+/// A class which mocks [IUrlRepository].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockIUrlRepository extends _i1.Mock implements _i3.IUrlRepository {
+  @override
+  _i8.Future<_i2.Either<_i3.SomeFailure, bool>> share(String? url) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #share,
+          [url],
+        ),
+        returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
+            _FakeEither_0<_i3.SomeFailure, bool>(
+          this,
+          Invocation.method(
+            #share,
+            [url],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
+                _FakeEither_0<_i3.SomeFailure, bool>(
+          this,
+          Invocation.method(
+            #share,
+            [url],
+          ),
+        )),
+      ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
+
+  @override
+  _i8.Future<_i2.Either<_i3.SomeFailure, bool>> launchUrl({
+    required String? url,
+    String? scheme,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #launchUrl,
+          [],
+          {
+            #url: url,
+            #scheme: scheme,
+          },
+        ),
+        returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
+            _FakeEither_0<_i3.SomeFailure, bool>(
+          this,
+          Invocation.method(
+            #launchUrl,
+            [],
+            {
+              #url: url,
+              #scheme: scheme,
+            },
+          ),
+        )),
+        returnValueForMissingStub:
+            _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
+                _FakeEither_0<_i3.SomeFailure, bool>(
+          this,
+          Invocation.method(
+            #launchUrl,
+            [],
+            {
+              #url: url,
+              #scheme: scheme,
+            },
+          ),
+        )),
+      ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
+}

@@ -23,6 +23,9 @@ class App extends StatelessWidget {
               AuthenticationInitialized(),
             ),
         ),
+        BlocProvider(
+          create: (context) => GetIt.I.get<UrlCubit>(),
+        ),
       ],
       child: const AppWidget(),
     );
