@@ -88,8 +88,17 @@ extension StringExtension on String {
               ? url
               : '[$url]($url)'
           : '';
-    });
+    }).substring(
+      0,
+    );
   }
+
+  String get addMarkDownLink =>
+      replaceAllMapped(RegExp(r'(https?://[^\s]+)'), (match) {
+        final url = match.group(0);
+
+        return url != null ? '[$url]($url)' : '';
+      });
 
   String markdownSubstring(int end) {
     late var substringValue = substring(0, end);
