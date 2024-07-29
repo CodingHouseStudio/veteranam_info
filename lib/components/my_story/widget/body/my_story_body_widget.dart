@@ -12,12 +12,11 @@ class ProfileMyStoryBodyWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<MyStoryWatcherBloc, MyStoryWatcherState>(
       listener: (context, state) => context.dialog.showGetErrorDialog(
-        error: state.failure!.value(context),
+        error: state.failure?.value(context),
         onPressed: () => context
             .read<MyStoryWatcherBloc>()
             .add(const MyStoryWatcherEvent.started()),
       ),
-      listenWhen: (previous, current) => current.failure != null,
       builder: (context, _) => ScaffoldWidget(
         titleChildWidgetsFunction: ({required isDesk}) => [
           if (isDesk)
