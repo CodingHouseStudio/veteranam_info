@@ -11,9 +11,8 @@ class SignUpBodyWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<SignUpBloc, SignUpState>(
       listener: (context, state) => context.dialog.showSendErrorDialog(
-        state.failure!.value(context),
+        state.failure?.value(context),
       ),
-      listenWhen: (previous, current) => current.failure != null,
       builder: (context, _) {
         return LeftCardWidget(
           key: KWidgetkeys.screen.signUp.card,
