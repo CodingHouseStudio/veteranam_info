@@ -18,12 +18,11 @@ class HomeBodyWidget extends StatelessWidget {
     final aboutProjectKey = GlobalKey();
     return BlocConsumer<HomeWatcherBloc, HomeWatcherState>(
       listener: (context, state) => context.dialog.showGetErrorDialog(
-        error: state.failure!.value(context),
+        error: state.failure?.value(context),
         onPressed: () => context
             .read<HomeWatcherBloc>()
             .add(const HomeWatcherEvent.started()),
       ),
-      listenWhen: (previous, current) => current.failure != null,
       builder: (context, _) => ScaffoldNetworkWidget(
         hasFooter: true,
         pageName: context.l10n.settings,

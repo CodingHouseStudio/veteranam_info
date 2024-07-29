@@ -21,11 +21,10 @@ class StoryAddBody extends StatelessWidget {
       listener: (context, state) {
         if (state.formStatus == FormzSubmissionStatus.success) {
           context.goNamed(KRoute.stories.name);
-        } else if (state.failure != null) {
-          context.dialog.showSendErrorDialog(
-            state.failure!.value(context),
-          );
         }
+        context.dialog.showSendErrorDialog(
+          state.failure?.value(context),
+        );
       },
       buildWhen: (previous, current) =>
           previous.formStatus != current.formStatus ||

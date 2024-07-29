@@ -204,32 +204,36 @@ class _DialogsWidget {
   }
 
   void showGetErrorDialog({
-    required String error,
+    required String? error,
     required void Function() onPressed,
   }) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        key: KWidgetkeys.widget.dialogs.failure,
-        backgroundColor: AppColors.materialThemeKeyColorsSecondary,
-        content: GetErrorDialogWidget(onPressed: onPressed, error: error),
-        duration: const Duration(minutes: 1),
-      ),
-    );
+    if (error != null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          key: KWidgetkeys.widget.dialogs.failure,
+          backgroundColor: AppColors.materialThemeKeyColorsSecondary,
+          content: GetErrorDialogWidget(onPressed: onPressed, error: error),
+          duration: const Duration(minutes: 1),
+        ),
+      );
+    }
   }
 
   void showSendErrorDialog(
-    String error,
+    String? error,
   ) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        key: KWidgetkeys.widget.dialogs.failure,
-        content: Text(
-          error,
-          key: KWidgetkeys.widget.dialogs.failureText,
-          style: AppTextStyle.materialThemeBodyLarge,
+    if (error != null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          key: KWidgetkeys.widget.dialogs.failure,
+          content: Text(
+            error,
+            key: KWidgetkeys.widget.dialogs.failureText,
+            style: AppTextStyle.materialThemeBodyLarge,
+          ),
+          duration: const Duration(minutes: 1),
         ),
-        duration: const Duration(minutes: 1),
-      ),
-    );
+      );
+    }
   }
 }

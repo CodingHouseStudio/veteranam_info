@@ -979,6 +979,14 @@
   "@settings": {
     "examples": "Page name for mobile app only, displayed in the BottomNavigationBar widget."
   },
+  "shareFailure": "Unfortunately, we were unable to share this information. There may be a problem with your network connection or the server is temporarily unavailable.",
+  "@shareFailure": {
+    "en-US": "error message when trying to share user data."
+  },
+  "linkFailure": "An error occurred while navigating to the page. Please try again later.",
+  "@linkFailure": {
+    "examples": "an error message when trying to follow a link."
+  },
   "moreCities": "{count} more..",
   "@moreCities": {
     "placeholders": {
