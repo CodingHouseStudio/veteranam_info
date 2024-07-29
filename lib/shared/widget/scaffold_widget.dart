@@ -201,6 +201,7 @@ class _ScaffoldWidget extends StatelessWidget {
                     ),
           body: CustomScrollView(
             key: KWidgetkeys.widget.scaffold.scroll,
+            physics: KTest.scroll,
             slivers: [
               SliverPersistentHeader(
                 delegate: NawbarWidget(
