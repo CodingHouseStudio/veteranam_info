@@ -180,7 +180,7 @@ class _NawbarWidgetImplematationState
                         ),
                       )
                     else
-                      widget.pageName != null && !KTest.testIsWeb
+                      widget.pageName != null
                           ? Expanded(
                               child: Text(
                                 '${widget.pageName}',
