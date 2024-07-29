@@ -8,3 +8,9 @@ class FilterItem {
   final dynamic value;
   int number;
 }
+
+enum UrlFailure {
+  share,
+  link,
+  error,
+}

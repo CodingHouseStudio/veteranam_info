@@ -374,16 +374,11 @@ abstract class FooterWidget {
                         ),
                 ),
                 shrinkWrap: true,
-                onTapLink: (text, href, title) async {
-                  final emailUri = Uri(
-                    scheme: 'mailto',
-                    path: KAppText.email,
-                  );
-
-                  if (await canLaunchUrl(emailUri)) {
-                    await launchUrl(emailUri);
-                  }
-                },
+                onTapLink: (text, href, title) =>
+                    context.read<UrlCubit>().launchUrl(
+                          url: text,
+                          scheme: 'mailto',
+                        ),
               ),
             ),
           ],
@@ -441,51 +436,30 @@ abstract class FooterWidget {
       [
         IconButtonWidget(
           key: linkedInKey,
-          onPressed: () async {
-            final linkedInLinkParse = await canLaunchUrl(
-              Uri.parse(
-                KAppText.linkedIn,
-              ),
-            );
-            if (linkedInLinkParse) {
-              await launchUrl(
-                Uri.parse(KAppText.linkedIn),
+          onPressed: () => context.read<UrlCubit>().launchUrl(
+                url: KAppText.linkedIn,
                 mode: LaunchMode.externalApplication,
-              );
-            }
-          },
+              ),
           icon: KImage.linkedIn(),
           background: AppColors.materialThemeSourceSeed,
         ),
         padding,
         IconButtonWidget(
           key: instagramKey,
-          onPressed: () async {
-            final instagramLinkParse =
-                await canLaunchUrl(Uri.parse(KAppText.instagram));
-            if (instagramLinkParse) {
-              await launchUrl(
-                Uri.parse(KAppText.instagram),
+          onPressed: () => context.read<UrlCubit>().launchUrl(
+                url: KAppText.instagram,
                 mode: LaunchMode.externalApplication,
-              );
-            }
-          },
+              ),
           icon: KImage.instagram(),
           background: AppColors.materialThemeSourceSeed,
         ),
         padding,
         IconButtonWidget(
           key: facebookKey,
-          onPressed: () async {
-            final facebookLinkParse =
-                await canLaunchUrl(Uri.parse(KAppText.facebook));
-            if (facebookLinkParse) {
-              await launchUrl(
-                Uri.parse(KAppText.facebook),
+          onPressed: () => context.read<UrlCubit>().launchUrl(
+                url: KAppText.facebook,
                 mode: LaunchMode.externalApplication,
-              );
-            }
-          },
+              ),
           icon: KImage.facebook(),
           background: AppColors.materialThemeSourceSeed,
         ),
