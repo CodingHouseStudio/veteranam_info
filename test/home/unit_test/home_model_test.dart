@@ -26,10 +26,10 @@ void main() {
     final convertorJson = {
       QuestionModelJsonField.id: KTestText.questionModelItems.first.id,
       QuestionModelJsonField.title: List.generate(
-        KMinMaxSize.titleMaxLength,
+        KMinMaxSize.titleDeskMaxLength,
         (_) => KTestText.questionModelItems.first.title
             .split(KTestText.questionModelItems.first.title),
-      ).join().substring(0, KMinMaxSize.titleMaxLength),
+      ).join().substring(0, KMinMaxSize.titleDeskMaxLength),
       QuestionModelJsonField.subtitle: List.generate(
         KMinMaxSize.subtitleMaxLength,
         (_) => KTestText.questionModelItems.first.subtitle
@@ -94,7 +94,7 @@ void main() {
         expect(questionModel.id, KTestText.questionModelItems.first.id);
         expect(
           questionModel.title.length,
-          KMinMaxSize.titleMaxLength,
+          KMinMaxSize.titleDeskMaxLength,
         );
         expect(
           questionModel.subtitle.length,
@@ -125,7 +125,7 @@ void main() {
         final questionModelJson = QuestionModel(
           id: KTestText.questionModelItems.first.id,
           title: List.generate(
-            KMinMaxSize.titleMaxLength,
+            KMinMaxSize.titleDeskMaxLength,
             (_) => KTestText.questionModelItems.first.title
                 .split(KTestText.questionModelItems.first.title),
           ).join(),
