@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:share_plus/share_plus.dart';
 
 import 'package:veteranam/shared/shared.dart';
 
@@ -9,6 +8,7 @@ class DiscountCardWidget extends StatelessWidget {
     required this.discountItem,
     required this.isDesk,
     required this.reportEvent,
+    required this.onShare,
     super.key,
     this.closeWidget,
   });
@@ -17,6 +17,7 @@ class DiscountCardWidget extends StatelessWidget {
   final bool isDesk;
   final void Function()? reportEvent;
   final Widget? closeWidget;
+  final void Function()? onShare;
 
   @override
   Widget build(BuildContext context) {
@@ -168,9 +169,7 @@ class DiscountCardWidget extends StatelessWidget {
                     cardEnum: CardEnum.discount,
                     afterEvent: reportEvent,
                     cardId: discountItem.id,
-                    onShare: () async => Share.share(
-                      '${Uri.base.origin}/${KRoute.discounts.path}/${discountItem.id}',
-                    ),
+                    onShare: onShare,
                     complaintKey: KWidgetkeys.widget.discountCard.iconComplaint,
                     shareKey: KWidgetkeys.widget.discountCard.iconShare,
                     webSiteKey: KWidgetkeys.widget.discountCard.iconWebsite,

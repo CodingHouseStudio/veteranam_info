@@ -26,6 +26,9 @@ extension PumpApp on WidgetTester {
             create: (context) => GetIt.I.get<AuthenticationBloc>()
               ..add(AuthenticationInitialized()),
           ),
+          BlocProvider(
+            create: (context) => GetIt.I.get<UrlCubit>(),
+          ),
         ],
         child: BlocBuilder<AuthenticationBloc, AuthenticationState>(
           builder: (context, state) => mockGoRouter == null
