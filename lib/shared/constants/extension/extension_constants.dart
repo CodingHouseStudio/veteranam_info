@@ -55,7 +55,7 @@ extension DiscountModelLocation on DiscountModel {
       ];
   String getDescription(BuildContext context) => '$description\n'
       '\n***${context.l10n.toGetItYouNeed}***\n'
-      '\n$requirements\n'
+      '\n- ${requirements.replaceAll('-', '  -')}\n'
       '\n$exclusions\n'
       // ignore: lines_longer_than_80_chars
       '${additionalDetails != null ? '\n${additionalDetails ?? ''}\n' : ''}'
