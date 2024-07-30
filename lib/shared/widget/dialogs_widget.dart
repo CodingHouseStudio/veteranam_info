@@ -179,20 +179,18 @@ class _DialogsWidget {
               final isDeskValue =
                   constraints.maxWidth >= KMinMaxSize.maxWidth600;
               return Padding(
-                padding: isDeskValue
-                    ? const EdgeInsets.symmetric(
-                        vertical: KPadding.kPaddingSize40,
-                        horizontal: KPadding.kPaddingSize160,
-                      )
-                    : const EdgeInsets.symmetric(
-                        horizontal: KPadding.kPaddingSize16,
-                        vertical: KPadding.kPaddingSize32,
-                      ),
-                child: SingleChildScrollView(
-                  child: ReportDialogWidget(
-                    isDesk: isDeskValue,
-                    cardEnum: cardEnum,
-                    afterEvent: afterEvent,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: KPadding.kPaddingSize16,
+                  vertical: KPadding.kPaddingSize32,
+                ),
+                child: SizedBox(
+                  width: double.infinity,
+                  child: SingleChildScrollView(
+                    child: ReportDialogWidget(
+                      isDesk: isDeskValue,
+                      cardEnum: cardEnum,
+                      afterEvent: afterEvent,
+                    ),
                   ),
                 ),
               );
@@ -201,6 +199,29 @@ class _DialogsWidget {
         ),
       );
     }
+  }
+
+  void showMobileMenuDialog() {
+    showModalBottomSheet<void>(
+      context: context,
+      isScrollControlled: true,
+      barrierColor: AppColors.materialThemeKeyColorsSecondary.withOpacity(0.2),
+      shape: const RoundedRectangleBorder(
+        borderRadius:
+            BorderRadius.vertical(top: Radius.circular(KSize.kRadius32)),
+      ),
+      showDragHandle: true,
+      backgroundColor: AppColors.materialThemeKeyColorsNeutral,
+      builder: (context) => const Padding(
+        padding: EdgeInsets.only(
+          left: KPadding.kPaddingSize40,
+          right: KPadding.kPaddingSize32,
+          bottom: KPadding.kPaddingSize32,
+          top: KPadding.kPaddingSize16,
+        ),
+        child: MenuDialogWidget(),
+      ),
+    );
   }
 
   void showGetErrorDialog({

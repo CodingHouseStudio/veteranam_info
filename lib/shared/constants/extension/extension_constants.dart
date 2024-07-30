@@ -94,7 +94,7 @@ extension StringExtension on String {
   }
 
   String markdownSubstring(int end) {
-    late var substringValue = substring(0, end);
+    late var substringValue = substring(0, end).trim();
     while (substringValue.endsWith('*')) {
       substringValue = substringValue.substring(0, substringValue.length - 1);
     }

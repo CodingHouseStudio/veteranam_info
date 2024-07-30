@@ -11,7 +11,7 @@ class LanguagesSwitcherWidget extends StatelessWidget {
       builder: (context, state) {
         return IconButton(
           key: KWidgetkeys.widget.languageSwitcher.widget,
-          style: KButtonStyles.boxButtonStyle,
+          style: KButtonStyles.withoutStyle,
           onPressed: () {
             context.read<AuthenticationBloc>().add(
                   const AppLanguageChanged(),
@@ -21,6 +21,7 @@ class LanguagesSwitcherWidget extends StatelessWidget {
             decoration: KWidgetTheme.boxDecorationWhiteMain,
             child: Row(
               key: KWidgetkeys.widget.languageSwitcher.item,
+              mainAxisSize: MainAxisSize.min,
               children: List.generate(
                 Language.values.length,
                 (index) => Padding(

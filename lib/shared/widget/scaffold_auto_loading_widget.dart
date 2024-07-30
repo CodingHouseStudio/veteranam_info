@@ -144,7 +144,7 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
           KRoute.investors.name,
           KRoute.home.name,
         ];
-        return Scaffold(
+        final scaffold = Scaffold(
           bottomNavigationBar: KTest.testIsWeb
               ? null
               : BottomNavigationBar(
@@ -170,14 +170,15 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
             key: KWidgetkeys.widget.scaffold.scroll,
             physics: KTest.scroll,
             slivers: [
-              SliverPersistentHeader(
-                delegate: NawbarWidget(
-                  isDesk: isDesk,
-                  isTablet: isTablet,
-                  pageName: widget.pageName,
-                  showMobileNawbar: widget.showMobileNawbar,
+              if (KTest.testIsWeb || widget.pageName != null)
+                SliverPersistentHeader(
+                  delegate: NawbarWidget(
+                    isDesk: isDesk,
+                    isTablet: isTablet,
+                    pageName: widget.pageName,
+                    showMobileNawbar: widget.showMobileNawbar,
+                  ),
                 ),
-              ),
               if (titleChildWidget != null)
                 SliverPadding(
                   padding: padding,
@@ -218,6 +219,7 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
             controller: _scrollController,
           ),
         );
+        return KTest.testIsWeb ? scaffold : SafeArea(child: scaffold);
       },
     );
   }
