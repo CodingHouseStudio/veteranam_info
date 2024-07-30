@@ -314,8 +314,13 @@ extension ListExtensions<T> on List<T> {
     final allFilters = <FilterItem>[];
     for (final item in fullList ?? this) {
       allFilters.addAll(
-        (context?.read<AuthenticationBloc>().state.userSetting.locale ==
-                        Language.english ||
+        ((context
+                            ?.read<AuthenticationBloc>()
+                            .state
+                            .userSetting
+                            .locale
+                            .isEnglish ??
+                        false) ||
                     getUAFilter == null
                 ? getFilter(item)
                 : getUAFilter(item))
@@ -359,22 +364,22 @@ extension ListExtensions<T> on List<T> {
   ///
   /// Returns:
   /// A list containing items not indexed in 'listIndex'.
-  List<T> filterIndexs(List<int> listIndex) {
-    // Create a new list to store filtered items
-    final filteredList = <T>[];
+  // List<T> filterIndexs(List<int> listIndex) {
+  //   // Create a new list to store filtered items
+  //   final filteredList = <T>[];
 
-    // Iterate through each item in the original list
-    for (final item in this) {
-      // Check if the item's index is NOT in the list of indices to remove
-      if (!listIndex.contains(indexOf(item))) {
-        // If not, add the item to the new list
-        filteredList.add(item);
-      }
-    }
+  //   // Iterate through each item in the original list
+  //   for (final item in this) {
+  //     // Check if the item's index is NOT in the list of indices to remove
+  //     if (!listIndex.contains(indexOf(item))) {
+  //       // If not, add the item to the new list
+  //       filteredList.add(item);
+  //     }
+  //   }
 
-    // Return the new filtered list
-    return filteredList;
-  }
+  //   // Return the new filtered list
+  //   return filteredList;
+  // }
 }
 
 /// Extension providing utility methods for handling nullable lists.
@@ -416,11 +421,11 @@ extension ListExtensionsNull<T> on List<T>? {
 }
 
 /// Extension on List<ImageModel> providing utility methods for image handling.
-extension ExtendedImage on List<ImageModel>? {
-  /// Property to get the download URL of the first image in the list.
-  String? get firstImage =>
-      this?.isNotEmpty ?? false ? this!.first.downloadURL : null;
-}
+// extension ExtendedImage on List<ImageModel>? {
+//   /// Property to get the download URL of the first image in the list.
+//   String? get firstImage =>
+//       this?.isNotEmpty ?? false ? this!.first.downloadURL : null;
+// }
 
 /// Extension on List<int> providing utility methods for handling discount
 ///  values.
@@ -459,35 +464,35 @@ extension ListIntExtension on List<int> {
   ///
   /// Returns:
   /// Adjusted list indices after accounting for differences.
-  List<int> adjustIndices(List<int> differences) {
-    if (differences.isEmpty) {
-      return this;
-    }
-    final adjustedIndices = <int>[];
+  // List<int> adjustIndices(List<int> differences) {
+  //   if (differences.isEmpty) {
+  //     return this;
+  //   }
+  //   final adjustedIndices = <int>[];
 
-    // Iterate through each element in the list
-    for (var element in this) {
-      // Skip elements that are in the 'differences' list
-      if (differences.any((index) => index == element)) {
-        continue;
-      }
+  //   // Iterate through each element in the list
+  //   for (var element in this) {
+  //     // Skip elements that are in the 'differences' list
+  //     if (differences.any((index) => index == element)) {
+  //       continue;
+  //     }
 
-      var numSmallerDifferences = 0;
-      for (final index in differences) {
-        if (index < element) {
-          numSmallerDifferences++;
-        }
-      }
+  //     var numSmallerDifferences = 0;
+  //     for (final index in differences) {
+  //       if (index < element) {
+  //         numSmallerDifferences++;
+  //       }
+  //     }
 
-      // Adjust 'element' based on the number of smaller differences found
-      element += numSmallerDifferences;
+  //     // Adjust 'element' based on the number of smaller differences found
+  //     element += numSmallerDifferences;
 
-      // Add adjusted 'element' to the result list
-      adjustedIndices.add(element);
-    }
+  //     // Add adjusted 'element' to the result list
+  //     adjustedIndices.add(element);
+  //   }
 
-    return adjustedIndices;
-  }
+  //   return adjustedIndices;
+  // }
 
   /// Method to check and modify list based on specific filter conditions.
   ///

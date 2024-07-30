@@ -78,7 +78,7 @@ abstract class KButtonStyles {
       ),
     ),
   );
-  static const doubleButtonStyle = ButtonStyle(
+  static const withoutStyle = ButtonStyle(
     alignment: Alignment.centerLeft,
     padding: WidgetStatePropertyAll(EdgeInsets.zero),
     overlayColor: WidgetStatePropertyAll(Colors.transparent),
