@@ -14,6 +14,7 @@ class BoxWidget extends StatelessWidget {
     this.iconHasBackground = true,
     this.background,
     this.textStyle,
+    this.padding,
   });
 
   final String text;
@@ -26,16 +27,18 @@ class BoxWidget extends StatelessWidget {
   final Widget? textIconPaddingWidget;
   final Color? background;
   final TextStyle? textStyle;
+  final EdgeInsets? padding;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(
-        top: KPadding.kPaddingSize16,
-        right: KPadding.kPaddingSize16,
-        bottom: isDesk ? KPadding.kPaddingSize24 : KPadding.kPaddingSize8,
-        left: isDesk ? KPadding.kPaddingSize24 : KPadding.kPaddingSize16,
-      ),
+      padding: padding ??
+          EdgeInsets.only(
+            top: KPadding.kPaddingSize16,
+            right: isDesk ? KPadding.kPaddingSize24 : KPadding.kPaddingSize16,
+            bottom: isDesk ? KPadding.kPaddingSize24 : KPadding.kPaddingSize8,
+            left: isDesk ? KPadding.kPaddingSize24 : KPadding.kPaddingSize16,
+          ),
       decoration: KWidgetTheme.boxDecorationCard.copyWith(color: background),
       child: isDesk
           ? InkWell(

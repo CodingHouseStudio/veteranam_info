@@ -1,6 +1,6 @@
 name: veteranam
 description: veteran
-version: 0.0.1+7
+version: 0.0.1+8
 publish_to: none
 
 environment:
@@ -34,7 +34,7 @@ dependencies:
   freezed: ^2.5.3
   freezed_annotation: ^2.4.1
   get_it: ^7.6.0 # Used for dependency injection
-  go_router: ^14.0.2 # Decoupled routing package which is a must for any app
+  go_router: ^14.0.2 # Decoupled routing  package which is a must for any app
   google_sign_in: ^6.2.1
   image_picker: ^1.1.1
   injectable: ^2.3.4 # Used for dependency injection

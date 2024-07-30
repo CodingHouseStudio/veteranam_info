@@ -15,10 +15,15 @@
     "examples": "Text for the button that is found on cards (discounts, news, stories, work).",
     "description": "The button is used to hide part of the text in the subtitle."
   },
-  "detail": "Detail",
-  "@detail": {
+  "more": "More",
+  "@more": {
     "examples": "Text for a button that is found on cards (discounts, news, stories, work).",
     "description": "The button is used to expand the full text in the subtitle."
+  },
+  "detail": "Detail",
+  "@detail": {
+    "examples": "Text for a button on the Home page.",
+    "description": "The button is used to scroll to the project information section."
   },
   "resetAll": "Reset all",
   "@resetAll": {
