@@ -61,6 +61,7 @@ List<Widget> _boxesWidget(
       isDesk: isDesk,
       reportEvent: null,
       onShare: null,
+      isLoading: true,
     ),
     if (!isDesk) KSizedBox.kHeightSizedBox16,
     StatisticBoxWidget(

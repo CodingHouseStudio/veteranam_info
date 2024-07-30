@@ -34,6 +34,7 @@ class ProfileSavesBody extends StatelessWidget {
           discountItem: KMockText.discountModel,
           reportEvent: null,
           onShare: null,
+          isLoading: true,
         ),
         if (isDesk)
           KSizedBox.kHeightSizedBox56
