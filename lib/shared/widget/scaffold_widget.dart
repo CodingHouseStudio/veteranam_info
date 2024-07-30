@@ -177,7 +177,7 @@ class _ScaffoldWidget extends StatelessWidget {
           KRoute.investors.name,
           KRoute.home.name,
         ];
-        return Scaffold(
+        final scaffold = Scaffold(
           bottomNavigationBar:
               KTest.testIsWeb || !(showMobBottomNavigation ?? true)
                   ? null
@@ -271,6 +271,7 @@ class _ScaffoldWidget extends StatelessWidget {
                 (hasFooter ? (footerWidget.length + 1) : 1),
           ),
         );
+        return KTest.testIsWeb ? scaffold : SafeArea(child: scaffold);
       },
     );
   }
