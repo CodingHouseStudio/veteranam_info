@@ -26,4 +26,7 @@ abstract class KDimensions {
   static const shimmerDiscountsItems = 3;
 
   static const maxLinkPerDay = 3;
+
+  static const descriptionMobHideLength = 200;
+  static const descriptionDeskHideLength = 100;
 }

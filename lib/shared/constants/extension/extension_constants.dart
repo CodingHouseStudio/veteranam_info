@@ -74,8 +74,8 @@ extension StringExtension on String {
       value = this;
     } else {
       final lengthValue = isDesk
-          ? KMinMaxSize.titleDeskMaxLength
-          : KMinMaxSize.titleMobileMaxLength;
+          ? KDimensions.descriptionDeskHideLength
+          : KDimensions.descriptionMobHideLength;
       final end = length > lengthValue ? lengthValue : length;
       value = '${markdownSubstring(end)}...';
     }
