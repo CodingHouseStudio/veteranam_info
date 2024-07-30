@@ -144,7 +144,7 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
           KRoute.investors.name,
           KRoute.home.name,
         ];
-        return Scaffold(
+        final scaffold = Scaffold(
           bottomNavigationBar: KTest.testIsWeb
               ? null
               : BottomNavigationBar(
@@ -218,6 +218,7 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
             controller: _scrollController,
           ),
         );
+        return KTest.testIsWeb ? scaffold : SafeArea(child: scaffold);
       },
     );
   }
