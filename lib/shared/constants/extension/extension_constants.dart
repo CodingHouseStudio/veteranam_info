@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:collection/collection.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -62,5 +63,60 @@ extension StringExtension on String {
       caseSensitive: false,
     );
     return regex.hasMatch(this);
+  }
+
+  String markdownCard({required bool isDesk, required bool fullText}) {
+    if (fullText) {
+      return this;
+    }
+    late String value;
+    if (fullText) {
+      value = this;
+    } else {
+      final lengthValue = isDesk
+          ? KDimensions.descriptionDeskHideLength
+          : KDimensions.descriptionMobHideLength;
+      final end = length > lengthValue ? lengthValue : length;
+      value = '${markdownSubstring(end)}...';
+    }
+    return value.replaceAllMapped(RegExp(r'(https?://[^\s]+)'), (match) {
+      final url = match.group(0);
+
+      final hasEllipsis = match.end > value.length - 3;
+      return url != null
+          ? hasEllipsis
+              ? url
+              : '[$url]($url)'
+          : '';
+    }).substring(
+      0,
+    );
+  }
+
+  String markdownSubstring(int end) {
+    late var substringValue = substring(0, end);
+    while (substringValue.endsWith('*')) {
+      substringValue = substringValue.substring(0, substringValue.length - 1);
+    }
+    final markdownSymbols = ['***', '**', '*'];
+
+    for (final markdownSymbol in markdownSymbols) {
+      final indexes = <int>[];
+      substringValue.split('').forEachIndexed((index, character) {
+        if (substringValue.substring(index).startsWith(markdownSymbol)) {
+          indexes.add(index);
+        }
+      });
+
+      if (!indexes.length.isEven) {
+        return '$substringValue$markdownSymbol';
+      }
+    }
+
+    return substringValue.endsWith('- ')
+        ? substringValue.substring(0, substringValue.length - 2)
+        : substringValue.endsWith('-')
+            ? substringValue.substring(0, substringValue.length - 1)
+            : substringValue;
   }
 }

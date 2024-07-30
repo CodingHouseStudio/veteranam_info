@@ -25,10 +25,10 @@ class NewsCardWidget extends StatelessWidget {
     return CardTextDetailEvaluateWidget(
       image: informationItem.image,
       text: informationItem.news,
-      buttonText: [
-        context.l10n.detail,
-        context.l10n.hide,
-      ],
+      // buttonText: [
+      //   context.l10n.detail,
+      //   context.l10n.hide,
+      // ],
       onShare: onShare,
       buttonStyle: KButtonStyles.borderBlackButtonStyle,
       titleWidget: Column(
