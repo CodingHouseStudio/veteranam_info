@@ -9,8 +9,10 @@ class DiscountCardWidget extends StatelessWidget {
     required this.isDesk,
     required this.reportEvent,
     required this.onShare,
+    required this.isLoading,
     super.key,
     this.closeWidget,
+    this.descriptionMethod,
   });
 
   final DiscountModel discountItem;
@@ -18,6 +20,8 @@ class DiscountCardWidget extends StatelessWidget {
   final void Function()? reportEvent;
   final Widget? closeWidget;
   final void Function()? onShare;
+  final bool isLoading;
+  final String Function(String)? descriptionMethod;
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +31,7 @@ class DiscountCardWidget extends StatelessWidget {
         vertical: KPadding.kPaddingSize16,
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Padding(
             padding: EdgeInsets.only(
@@ -158,9 +163,10 @@ class DiscountCardWidget extends StatelessWidget {
                 ],
                 KSizedBox.kHeightSizedBox16,
                 CardTextDetailWidget(
-                  text: getText(context),
-                  hasMarkdown: true,
-                  maxLines: 3,
+                  text: descriptionMethod == null
+                      ? getText(context)
+                      : descriptionMethod!(getText(context)),
+                  hasMarkdown: !isLoading,
                   isDesk: isDesk,
                   icon: SharedIconListWidget.get(
                     context: context,
@@ -241,20 +247,17 @@ class DiscountCardWidget extends StatelessWidget {
         ),
       );
   String getText(BuildContext context) => '${discountItem.description}\n'
-              '\n***${context.l10n.toGetItYouNeed}***\n'
-              '\n- ${discountItem.requirements.replaceAll('-', '  -')}\n'
-              '\n${discountItem.exclusions}\n'
-              // ignore: lines_longer_than_80_chars
-              '${discountItem.additionalDetails != null ? '\n${discountItem.additionalDetails ?? ''}\n' : ''}'
-              '\n***${context.l10n.callForDetails}:***'
-              ' ${KPlatformConstants.isWebDesktop ? '***' : '['}'
-              '${discountItem.phoneNumber}'
-              // ignore: lines_longer_than_80_chars
-              '${KPlatformConstants.isWebDesktop ? '***' : '](tel:${discountItem.phoneNumber.replaceAll('(', '').replaceAll(')', '').replaceAll(' ', '')})'}'
-          .replaceAllMapped(RegExp(r'(https?://[^\s]+)'), (match) {
-        final url = match.group(0);
-        return url != null ? '[$url]($url)' : '';
-      });
+      '\n***${context.l10n.toGetItYouNeed}***\n'
+      '\n- ${discountItem.requirements.replaceAll('-', '  -')}\n'
+      '\n${discountItem.exclusions}\n'
+      // ignore: lines_longer_than_80_chars
+      '${discountItem.additionalDetails != null ? '\n${discountItem.additionalDetails ?? ''}\n' : ''}'
+      '\n***${context.l10n.callForDetails}:***'
+      ' ${KPlatformConstants.isWebDesktop ? '***' : '['}'
+      '${discountItem.phoneNumber}'
+      '${KPlatformConstants.isWebDesktop ? '***' : '](tel:'
+          // ignore: lines_longer_than_80_chars
+          '${discountItem.phoneNumber.replaceAll('(', '').replaceAll(')', '').replaceAll(' ', '')})'}';
 }
 
 // class _DiscountsCardWidgetMob extends StatelessWidget {

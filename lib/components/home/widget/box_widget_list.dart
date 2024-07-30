@@ -181,6 +181,14 @@ Widget doubleBox({
             textStyle: isTablet
                 ? AppTextStyle.materialThemeHeadlineSmall
                 : AppTextStyle.materialThemeTitleLarge,
+            padding: isTablet
+                ? null
+                : const EdgeInsets.only(
+                    top: KPadding.kPaddingSize16,
+                    right: KPadding.kPaddingSize16,
+                    bottom: KPadding.kPaddingSize8,
+                    left: KPadding.kPaddingSize16,
+                  ),
           ),
         ),
         KSizedBox.kWidthSizedBox16,
@@ -197,6 +205,14 @@ Widget doubleBox({
             textStyle: isTablet
                 ? AppTextStyle.materialThemeHeadlineSmall
                 : AppTextStyle.materialThemeTitleLarge,
+            padding: isTablet
+                ? null
+                : const EdgeInsets.only(
+                    top: KPadding.kPaddingSize16,
+                    right: KPadding.kPaddingSize16,
+                    bottom: KPadding.kPaddingSize8,
+                    left: KPadding.kPaddingSize16,
+                  ),
           ),
         ),
       ],

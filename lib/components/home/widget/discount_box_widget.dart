@@ -17,8 +17,8 @@ class DiscountBoxwWidget extends StatelessWidget {
         child: DecoratedBox(
           decoration: KWidgetTheme.boxDecorationDiscount,
           child: Padding(
-            padding: const EdgeInsets.only(
-              left: KPadding.kPaddingSize24,
+            padding: const EdgeInsets.symmetric(
+              horizontal: KPadding.kPaddingSize24,
             ),
             child: Column(
               children: [
@@ -72,7 +72,7 @@ class DiscountBoxwWidget extends StatelessWidget {
           decoration: KWidgetTheme.boxDecorationDiscount,
           child: Padding(
             padding: const EdgeInsets.only(
-              left: KPadding.kPaddingSize24,
+              left: KPadding.kPaddingSize16,
             ),
             child: Column(
               children: [

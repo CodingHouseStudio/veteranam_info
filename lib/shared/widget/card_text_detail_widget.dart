@@ -6,8 +6,8 @@ import 'package:veteranam/shared/shared.dart';
 class CardTextDetailWidget extends StatefulWidget {
   const CardTextDetailWidget({
     required this.text,
-    required this.maxLines,
     required this.isDesk,
+    this.maxLines,
     this.hasMarkdown = false,
     this.icon,
     super.key,
@@ -16,7 +16,7 @@ class CardTextDetailWidget extends StatefulWidget {
   });
 
   final String text;
-  final int maxLines;
+  final int? maxLines;
   final List<Widget>? icon;
   final List<String>? buttonText;
   final ButtonStyle? buttonStyle;
@@ -43,7 +43,9 @@ class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
       children: [
         if (widget.hasMarkdown)
           MarkdownBody(
-            data: fullText ? widget.text : subtext,
+            data: widget.text
+                .markdownCard(isDesk: widget.isDesk, fullText: fullText),
+
             // selectable: true,
             styleSheet: MarkdownStyleSheet(
               a: AppTextStyle.materialThemeBodyLarge,
@@ -53,9 +55,9 @@ class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
           )
         else
           Text(
-            fullText ? widget.text : subtext,
+            widget.text,
             key: KWidgetkeys.widget.cardTextDetail.text,
-            // maxLines: maxLines,
+            maxLines: fullText ? null : widget.maxLines ?? 2,
             style: AppTextStyle.materialThemeBodyLarge,
             overflow: TextOverflow.clip,
           ),
@@ -76,8 +78,7 @@ class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
                   child: Text(
                     fullText
                         ? widget.buttonText?.elementAt(1) ?? context.l10n.hide
-                        : widget.buttonText?.elementAt(0) ??
-                            context.l10n.detail,
+                        : widget.buttonText?.elementAt(0) ?? context.l10n.more,
                     key: KWidgetkeys.widget.cardTextDetail.buttonText,
                     style: widget.isDesk
                         ? AppTextStyle.materialThemeTitleMedium
@@ -97,13 +98,13 @@ class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
     );
   }
 
-  String get subtext {
-    final index = widget.text.indexOf('\n\n');
-    final i = index != -1
-        ? index
-        : widget.text.length > KMinMaxSize.titleMaxLength
-            ? KMinMaxSize.titleMaxLength
-            : widget.text.length;
-    return '${widget.text.substring(0, i)}...';
-  }
+  // String get subtext {
+  //   final index = widget.text.indexOf('\n\n');
+  //   final i = index != -1
+  //       ? index
+  //       : widget.text.length > KMinMaxSize.titleDeskMaxLength
+  //           ? KMinMaxSize.titleDeskMaxLength
+  //           : widget.text.length;
+  //   return '${widget.text.substring(0, i)}...';
+  // }
 }
