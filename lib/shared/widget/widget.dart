@@ -1,5 +1,6 @@
 export 'amount_widget.dart';
 export 'asset_image_widget.dart';
+export 'bottom_line_button_widget.dart';
 export 'box_widget.dart';
 export 'button_additional_widget.dart';
 export 'button_widget.dart';

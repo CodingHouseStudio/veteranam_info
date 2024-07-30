@@ -13,10 +13,11 @@ class UserPhotoWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (onPressed == null) {
-      return IconWidget(
-        icon: _body,
-        padding: _padding,
-        background: AppColors.materialThemeKeyColorsSecondary,
+      return Container(
+        decoration: KWidgetTheme.boxDecorationCircular
+            .copyWith(color: AppColors.materialThemeKeyColorsSecondary),
+        padding: EdgeInsets.all(_padding),
+        child: _body,
       );
     } else {
       return IconButtonWidget(

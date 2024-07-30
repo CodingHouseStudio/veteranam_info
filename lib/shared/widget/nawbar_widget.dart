@@ -156,25 +156,37 @@ class _NawbarWidgetImplematationState
                     else if (widget.isTablet)
                       Expanded(
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            button(
+                            BottomLineButtonWidget(
                               text: context.l10n.discounts,
-                              icon: KIcon.tag,
+                              icon: const IconWidget(
+                                icon: KIcon.tag,
+                                background: AppColors.materialThemeSourceSeed,
+                                padding: KPadding.kPaddingSize8,
+                              ),
                               onPressed: () =>
                                   context.goNamed(KRoute.discounts.name),
                             ),
-                            // button(
-                            //   text: context.l10n.information,
-                            //   icon: KIcon.globe,
-                            //   onPressed: () =>
-                            //       context.goNamed(KRoute.information.name),
-                            // ),
-                            button(
+                            KSizedBox.kWidthSizedBox32,
+                            const CircleAvatar(
+                              radius: KPadding.kPaddingSize2,
+                            ),
+                            KSizedBox.kWidthSizedBox32,
+                            BottomLineButtonWidget(
                               text: context.l10n.investors,
-                              icon: KIcon.fileText,
                               onPressed: () =>
                                   context.goNamed(KRoute.investors.name),
+                            ),
+                            KSizedBox.kWidthSizedBox32,
+                            const CircleAvatar(
+                              radius: KPadding.kPaddingSize2,
+                            ),
+                            KSizedBox.kWidthSizedBox32,
+                            BottomLineButtonWidget(
+                              text: context.l10n.contact,
+                              onPressed: () =>
+                                  context.goNamed(KRoute.feedback.name),
                             ),
                           ],
                         ),
@@ -244,21 +256,6 @@ class _NawbarWidgetImplematationState
                   textAlign: TextAlign.center,
                 ),
         );
-  }
-
-  Widget button({
-    required String text,
-    required Icon icon,
-    required void Function() onPressed,
-  }) {
-    return TextButton.icon(
-      onPressed: onPressed,
-      label: Text(
-        text,
-        style: AppTextStyle.materialThemeTitleMedium,
-      ),
-      icon: widget.isDesk ? icon : null,
-    );
   }
 
   double get padding => widget.isDesk
