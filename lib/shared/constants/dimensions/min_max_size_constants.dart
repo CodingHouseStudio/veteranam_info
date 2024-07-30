@@ -22,7 +22,7 @@ abstract class KMinMaxSize {
   static const textMaxLineOne = 1;
   static const messageMaxLength = 256;
 
-  static const titleDeskMaxLength = 100;
+  static const titleDeskMaxLength = 200;
   static const titleMobileMaxLength = 100;
   static const subtitleMaxLength = 255;
 
