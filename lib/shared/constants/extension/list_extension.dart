@@ -314,8 +314,13 @@ extension ListExtensions<T> on List<T> {
     final allFilters = <FilterItem>[];
     for (final item in fullList ?? this) {
       allFilters.addAll(
-        (context?.read<AuthenticationBloc>().state.userSetting.locale ==
-                        Language.english ||
+        ((context
+                            ?.read<AuthenticationBloc>()
+                            .state
+                            .userSetting
+                            .locale
+                            .isEnglish ??
+                        false) ||
                     getUAFilter == null
                 ? getFilter(item)
                 : getUAFilter(item))

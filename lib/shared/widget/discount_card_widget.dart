@@ -206,8 +206,12 @@ class DiscountCardWidget extends StatelessWidget {
               KSizedBox.kWidthSizedBox8,
               Text(
                 key: KWidgetkeys.widget.discountCard.category,
-                context.read<AuthenticationBloc>().state.userSetting.locale ==
-                        Language.english
+                context
+                        .read<AuthenticationBloc>()
+                        .state
+                        .userSetting
+                        .locale
+                        .isEnglish
                     ? discountItem.category.elementAt(index)
                     : discountItem.categoryUA.elementAt(index),
                 style: AppTextStyle.materialThemeLabelLarge,

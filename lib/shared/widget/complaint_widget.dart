@@ -25,7 +25,7 @@ class ComplaintWidget extends StatelessWidget {
         afterEvent: afterEvent,
         cardId: cardId,
       ),
-      style: KButtonStyles.doubleButtonStyle,
+      style: KButtonStyles.withoutStyle,
       child: Column(
         children: [
           IconWidget(

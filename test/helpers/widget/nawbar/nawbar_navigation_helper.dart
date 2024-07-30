@@ -2,7 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 import '../../../text_dependency.dart';
 
-Future<void> navbarNavigationHelper({
+Future<void> nawbarNavigationHelper({
   required WidgetTester tester,
   required MockGoRouter mockGoRouter,
 }) async {

@@ -94,7 +94,7 @@ class _DoubleButtonWidgetDeskState extends State<_DoubleButtonWidgetDesk> {
     return TextButton(
       key: widget.widgetKey,
       onPressed: widget.onPressed,
-      style: KButtonStyles.doubleButtonStyle,
+      style: KButtonStyles.withoutStyle,
       onHover: (value) => setState(() {
         isHovering = value;
       }),
@@ -180,7 +180,7 @@ class _DoubleButtonWidgetMob extends StatelessWidget {
     return TextButton(
       key: widgetKey,
       onPressed: onPressed,
-      style: KButtonStyles.doubleButtonStyle,
+      style: KButtonStyles.withoutStyle,
       child: Stack(
         alignment: Alignment.centerRight,
         children: [
