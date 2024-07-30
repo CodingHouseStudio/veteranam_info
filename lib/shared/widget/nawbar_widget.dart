@@ -98,12 +98,19 @@ class _NawbarWidgetImplematationState
             left: padding,
             right: padding,
           ),
-          padding: const EdgeInsets.only(
-            left: KPadding.kPaddingSize32,
-            right: KPadding.kPaddingSize16,
-            top: KPadding.kPaddingSize12,
-            bottom: KPadding.kPaddingSize12,
-          ),
+          padding: widget.isTablet
+              ? const EdgeInsets.only(
+                  left: KPadding.kPaddingSize32,
+                  right: KPadding.kPaddingSize16,
+                  top: KPadding.kPaddingSize12,
+                  bottom: KPadding.kPaddingSize12,
+                )
+              : const EdgeInsets.only(
+                  left: KPadding.kPaddingSize16,
+                  right: KPadding.kPaddingSize8,
+                  top: KPadding.kPaddingSize8,
+                  bottom: KPadding.kPaddingSize8,
+                ),
           child: KTest.testIsWeb || widget.showMobileNawbar
               ? Row(
                   // mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -156,25 +163,35 @@ class _NawbarWidgetImplematationState
                     else if (widget.isTablet)
                       Expanded(
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          // mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            button(
+                            _button(
+                              ruoteName: KRoute.discounts.name,
                               text: context.l10n.discounts,
-                              icon: KIcon.tag,
-                              onPressed: () =>
-                                  context.goNamed(KRoute.discounts.name),
+                              icon: const IconWidget(
+                                icon: KIcon.tag,
+                                background: AppColors.materialThemeSourceSeed,
+                                padding: KPadding.kPaddingSize8,
+                              ),
                             ),
-                            // button(
-                            //   text: context.l10n.information,
-                            //   icon: KIcon.globe,
-                            //   onPressed: () =>
-                            //       context.goNamed(KRoute.information.name),
-                            // ),
-                            button(
+                            KSizedBox.kWidthSizedBox32,
+                            const CircleAvatar(
+                              radius: KPadding.kPaddingSize2,
+                            ),
+                            KSizedBox.kWidthSizedBox32,
+                            _button(
+                              ruoteName: KRoute.investors.name,
                               text: context.l10n.investors,
-                              icon: KIcon.fileText,
-                              onPressed: () =>
-                                  context.goNamed(KRoute.investors.name),
+                            ),
+                            KSizedBox.kWidthSizedBox32,
+                            const CircleAvatar(
+                              radius: KPadding.kPaddingSize2,
+                            ),
+                            KSizedBox.kWidthSizedBox32,
+                            _button(
+                              ruoteName: KRoute.feedback.name,
+                              text: context.l10n.contact,
                             ),
                           ],
                         ),
@@ -200,11 +217,21 @@ class _NawbarWidgetImplematationState
                     //     ),
                     //   ),
                     if (widget.isDesk || !isFocused)
-                      const LanguagesSwitcherWidget(),
-                    KSizedBox.kWidthSizedBox16,
+                      widget.isTablet
+                          ? const LanguagesSwitcherWidget()
+                          : IconButtonWidget(
+                              icon: KIcon.menu.copyWith(
+                                color: AppColors.materialThemeWhite,
+                              ),
+                              background:
+                                  AppColors.materialThemeKeyColorsSecondary,
+                              onPressed: () async =>
+                                  context.dialog.showMobileMenuDialog(),
+                            ),
                     if (context.read<AuthenticationBloc>().state.status !=
                             AuthenticationStatus.authenticated &&
-                        Config.isDevelopment)
+                        Config.isDevelopment) ...[
+                      KSizedBox.kWidthSizedBox16,
                       if (widget.isDesk)
                         TextButton(
                           key: KWidgetkeys.widget.nawbar.button,
@@ -223,6 +250,7 @@ class _NawbarWidgetImplematationState
                               .copyWith(color: AppColors.materialThemeWhite),
                           background: AppColors.materialThemeKeyColorsSecondary,
                         ),
+                    ],
                     if (context.read<AuthenticationBloc>().state.status ==
                             AuthenticationStatus.authenticated &&
                         Config.isDevelopment)
@@ -246,26 +274,26 @@ class _NawbarWidgetImplematationState
         );
   }
 
-  Widget button({
-    required String text,
-    required Icon icon,
-    required void Function() onPressed,
-  }) {
-    return TextButton.icon(
-      onPressed: onPressed,
-      label: Text(
-        text,
-        style: AppTextStyle.materialThemeTitleMedium,
-      ),
-      icon: widget.isDesk ? icon : null,
-    );
-  }
+  bool _isEnglish(BuildContext context) =>
+      context.read<AuthenticationBloc>().state.userSetting.locale.isEnglish;
 
   double get padding => widget.isDesk
       ? KPadding.kPaddingSize90
       : widget.isTablet
           ? KPadding.kPaddingSize32
           : KPadding.kPaddingSize16;
+  Widget _button({
+    required String ruoteName,
+    required String text,
+    Widget? icon,
+  }) =>
+      ButtonBottomLineWidget(
+        text: text,
+        onPressed: () => context.goNamed(ruoteName),
+        width: _isEnglish(context) ? KSize.kPixel62 : KSize.kPixel80,
+        isDesk: widget.isDesk,
+        icon: icon,
+      );
   void loginNavigation(BuildContext context) =>
       context.goNamed(KRoute.login.name);
 }

@@ -202,7 +202,7 @@ void main() {
               mockGoRouter: mockGoRouter,
             );
 
-            await navbarNavigationHelper(
+            await nawbarNavigationHelper(
               tester: tester,
               mockGoRouter: mockGoRouter,
             );
