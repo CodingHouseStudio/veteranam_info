@@ -25,8 +25,7 @@ class HomeBoxWidget extends StatelessWidget {
       ),
       decoration: KWidgetTheme.boxDecorationHome,
       child: Column(
-        crossAxisAlignment:
-            isTablet ? CrossAxisAlignment.start : CrossAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             context.l10n.thankYou,
@@ -99,7 +98,6 @@ class HomeBoxWidget extends StatelessWidget {
               curve: Curves.easeInOut,
             ),
             isDesk: isDesk,
-            align: isTablet ? null : Alignment.center,
           ),
           if (isDesk) KSizedBox.kHeightSizedBox40,
           // Row(
