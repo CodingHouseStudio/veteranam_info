@@ -164,8 +164,10 @@ class DiscountCardWidget extends StatelessWidget {
                 KSizedBox.kHeightSizedBox16,
                 CardTextDetailWidget(
                   text: descriptionMethod == null
-                      ? getText(context)
-                      : descriptionMethod!(getText(context)),
+                      ? discountItem.getDescription(context)
+                      : descriptionMethod!(
+                          discountItem.getDescription(context),
+                        ),
                   hasMarkdown: !isLoading,
                   isDesk: isDesk,
                   icon: SharedIconListWidget.get(
@@ -250,18 +252,6 @@ class DiscountCardWidget extends StatelessWidget {
           ],
         ),
       );
-  String getText(BuildContext context) => '${discountItem.description}\n'
-      '\n***${context.l10n.toGetItYouNeed}***\n'
-      '\n- ${discountItem.requirements.replaceAll('-', '  -')}\n'
-      '\n${discountItem.exclusions}\n'
-      // ignore: lines_longer_than_80_chars
-      '${discountItem.additionalDetails != null ? '\n${discountItem.additionalDetails ?? ''}\n' : ''}'
-      '\n***${context.l10n.callForDetails}:***'
-      ' ${KPlatformConstants.isWebDesktop ? '***' : '['}'
-      '${discountItem.phoneNumber}'
-      '${KPlatformConstants.isWebDesktop ? '***' : '](tel:'
-          // ignore: lines_longer_than_80_chars
-          '${discountItem.phoneNumber.replaceAll('(', '').replaceAll(')', '').replaceAll(' ', '')})'}';
 }
 
 // class _DiscountsCardWidgetMob extends StatelessWidget {
