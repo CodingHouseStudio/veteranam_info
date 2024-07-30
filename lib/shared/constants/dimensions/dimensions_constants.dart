@@ -27,6 +27,6 @@ abstract class KDimensions {
 
   static const maxLinkPerDay = 3;
 
-  static const descriptionMobHideLength = 200;
-  static const descriptionDeskHideLength = 100;
+  static const descriptionMobHideLength = 100;
+  static const descriptionDeskHideLength = 200;
 }

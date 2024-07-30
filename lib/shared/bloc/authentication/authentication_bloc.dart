@@ -133,7 +133,7 @@ class AuthenticationBloc
     Emitter<AuthenticationState> emit,
   ) async {
     final userSetting = state.userSetting.copyWith(
-      locale: state.userSetting.locale == Language.english
+      locale: state.userSetting.locale.isEnglish
           ? Language.ukrain
           : Language.english,
     );

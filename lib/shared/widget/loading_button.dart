@@ -86,7 +86,7 @@ class _LoadingButtonWidgetDeskState extends State<_LoadingButtonWidgetDesk>
     return TextButton(
       key: widget.widgetKey,
       onPressed: widget.onPressed,
-      style: KButtonStyles.doubleButtonStyle,
+      style: KButtonStyles.withoutStyle,
       onHover: _handleHover,
       child: Stack(
         alignment: Alignment.centerRight,
@@ -158,7 +158,7 @@ class _LoadingButtonWidgetMob extends StatelessWidget {
     return TextButton(
       key: widgetKey,
       onPressed: onPressed,
-      style: KButtonStyles.doubleButtonStyle,
+      style: KButtonStyles.withoutStyle,
       child: Stack(
         alignment: Alignment.centerRight,
         children: [
