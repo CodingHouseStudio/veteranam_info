@@ -6,8 +6,8 @@ import 'package:veteranam/shared/shared.dart';
 class CardTextDetailWidget extends StatefulWidget {
   const CardTextDetailWidget({
     required this.text,
-    required this.maxLines,
     required this.isDesk,
+    this.maxLines,
     this.hasMarkdown = false,
     this.icon,
     super.key,
@@ -16,7 +16,7 @@ class CardTextDetailWidget extends StatefulWidget {
   });
 
   final String text;
-  final int maxLines;
+  final int? maxLines;
   final List<Widget>? icon;
   final List<String>? buttonText;
   final ButtonStyle? buttonStyle;
@@ -43,8 +43,8 @@ class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
       children: [
         if (widget.hasMarkdown)
           MarkdownBody(
-            data: fullText ? widget.text : subtext,
-            // .markdownCard(isDesk: widget.isDesk, fullText: fullText),
+            data: widget.text
+                .markdownCard(isDesk: widget.isDesk, fullText: fullText),
 
             // selectable: true,
             styleSheet: MarkdownStyleSheet(
@@ -57,7 +57,7 @@ class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
           Text(
             widget.text,
             key: KWidgetkeys.widget.cardTextDetail.text,
-            maxLines: fullText ? null : 2,
+            maxLines: fullText ? null : widget.maxLines ?? 2,
             style: AppTextStyle.materialThemeBodyLarge,
             overflow: TextOverflow.clip,
           ),
@@ -98,13 +98,13 @@ class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
     );
   }
 
-  String get subtext {
-    final index = widget.text.indexOf('\n\n');
-    final i = index != -1
-        ? index
-        : widget.text.length > KMinMaxSize.titleDeskMaxLength
-            ? KMinMaxSize.titleDeskMaxLength
-            : widget.text.length;
-    return '${widget.text.substring(0, i)}...';
-  }
+  // String get subtext {
+  //   final index = widget.text.indexOf('\n\n');
+  //   final i = index != -1
+  //       ? index
+  //       : widget.text.length > KMinMaxSize.titleDeskMaxLength
+  //           ? KMinMaxSize.titleDeskMaxLength
+  //           : widget.text.length;
+  //   return '${widget.text.substring(0, i)}...';
+  // }
 }
