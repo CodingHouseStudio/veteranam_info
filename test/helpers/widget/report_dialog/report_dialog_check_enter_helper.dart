@@ -20,7 +20,7 @@ Future<void> reportDialogCheckEnterHelper(
   );
 
   await tester.tap(
-    find.byKey(KWidgetkeys.widget.reportDialog.checkPoint).last,
+    find.byKey(KWidgetkeys.widget.checkPoint.widget).last,
   );
 
   await tester.pumpAndSettle();

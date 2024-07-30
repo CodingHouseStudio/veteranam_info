@@ -14,18 +14,27 @@ class PrivacyPolicyDialog extends StatelessWidget {
         borderRadius: KBorderRadius.kBorderRadius32,
       ),
       backgroundColor: AppColors.materialThemeKeyColorsNeutral,
-      icon: CancelWidget(
-        widgetKey: KWidgetkeys.screen.privacyPolicy.closeIcon,
-        onPressed: () => context.goNamed(KRoute.home.name),
-      ),
       contentPadding: EdgeInsets.zero,
-      iconPadding: const EdgeInsets.only(
-        top: KPadding.kPaddingSize16,
-        right: KPadding.kPaddingSize16,
+      content: Stack(
+        children: [
+          const SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.only(
+                top: KPadding.kPaddingSize40,
+              ),
+              child:
+                  PrivacyPolicyBlocprovider(widgetChild: PrivacyPolicyBody()),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(KPadding.kPaddingSize16),
+            child: CancelWidget(
+              widgetKey: KWidgetkeys.screen.privacyPolicy.closeIcon,
+              onPressed: () => context.goNamed(KRoute.home.name),
+            ),
+          ),
+        ],
       ),
-      scrollable: true,
-      content:
-          const PrivacyPolicyBlocprovider(widgetChild: PrivacyPolicyBody()),
     );
   }
 }
