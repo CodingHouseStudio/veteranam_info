@@ -27,7 +27,7 @@ class DiscountBodyWidget extends StatelessWidget {
               loadingButtonText: context.l10n.moreDiscounts,
               loadingStatus: _.loadingStatus,
               cardListIsEmpty: _.filteredDiscountModelItems.isEmpty,
-              //pageName: context.l10n.discounts,
+              pageName: context.l10n.discounts,
               resetFilter: () => context.read<DiscountWatcherBloc>().add(
                     const DiscountWatcherEvent.filterReset(),
                   ),
@@ -36,21 +36,22 @@ class DiscountBodyWidget extends StatelessWidget {
                   .add(const DiscountWatcherEvent.started()),
               titleChildWidgetsFunction: ({required isDesk}) => [
                 KSizedBox.kHeightSizedBox24,
-                ...TitleWidget.pointTitleWidgetList(
-                  title: context.l10n.specialOffers,
-                  titleKey: KWidgetkeys.screen.discounts.title,
-                  titleSecondPart: context.l10n.forVeteransAndTheirFamilies,
-                  pointText: context.l10n.discounts,
-                  pointKey: KWidgetkeys.screen.discounts.titlePoint,
-                  isDesk: isDesk,
-                  titleSecondPartPadding:
-                      const EdgeInsets.only(left: KPadding.kPaddingSize72),
-                  iconCrossAxisAlignment: CrossAxisAlignment.end,
-                  isRightArrow: false,
-                ),
+                if (KTest.testIsWeb)
+                  ...TitleWidget.pointTitleWidgetList(
+                    title: context.l10n.specialOffers,
+                    titleKey: KWidgetkeys.screen.discounts.title,
+                    titleSecondPart: context.l10n.forVeteransAndTheirFamilies,
+                    pointText: context.l10n.discounts,
+                    pointKey: KWidgetkeys.screen.discounts.titlePoint,
+                    isDesk: isDesk,
+                    titleSecondPartPadding:
+                        const EdgeInsets.only(left: KPadding.kPaddingSize72),
+                    iconCrossAxisAlignment: CrossAxisAlignment.end,
+                    isRightArrow: false,
+                  ),
                 if (isDesk)
                   KSizedBox.kHeightSizedBox40
-                else
+                else if (KTest.testIsWeb)
                   KSizedBox.kHeightSizedBox24,
                 if (isDesk)
                   Row(

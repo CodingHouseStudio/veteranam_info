@@ -24,26 +24,27 @@ class InvestorsBodyWidget extends StatelessWidget {
         loadingButtonText: context.l10n.moreFunds,
         loadingStatus: _.loadingStatus,
         cardListIsEmpty: _.fundItems.isEmpty,
-        //pageName: context.l10n.investors,
+        pageName: context.l10n.investors,
         loadDataAgain: () => context
             .read<InvestorsWatcherBloc>()
             .add(const InvestorsWatcherEvent.started()),
         mainChildWidgetsFunction: ({required isDesk}) => [
           KSizedBox.kHeightSizedBox24,
-          ...TitleWidget.pointTitleWidgetList(
-            title: context.l10n.provideSuggestionsFromBusinesses,
-            titleKey: KWidgetkeys.screen.investors.title,
-            titleSecondPart: context.l10n.orDonateHere,
-            pointText: context.l10n.investors,
-            pointKey: KWidgetkeys.screen.investors.point,
-            isDesk: isDesk,
-            isRightArrow: false,
-            titleAlignment: WrapAlignment.end,
-            textAlign: TextAlign.end,
-          ),
+          if (KTest.testIsWeb)
+            ...TitleWidget.pointTitleWidgetList(
+              title: context.l10n.provideSuggestionsFromBusinesses,
+              titleKey: KWidgetkeys.screen.investors.title,
+              titleSecondPart: context.l10n.orDonateHere,
+              pointText: context.l10n.investors,
+              pointKey: KWidgetkeys.screen.investors.point,
+              isDesk: isDesk,
+              isRightArrow: false,
+              titleAlignment: WrapAlignment.end,
+              textAlign: TextAlign.end,
+            ),
           if (isDesk)
             KSizedBox.kHeightSizedBox40
-          else
+          else if (KTest.testIsWeb)
             KSizedBox.kHeightSizedBox24,
           if (isDesk)
             Row(
@@ -73,7 +74,7 @@ class InvestorsBodyWidget extends StatelessWidget {
                 ),
               ],
             )
-          else ...[
+          else if (KTest.testIsWeb) ...[
             ...SectionWidget.get(
               isTablet: isDesk,
               textPoint: null,
@@ -93,7 +94,7 @@ class InvestorsBodyWidget extends StatelessWidget {
           ],
           if (isDesk)
             KSizedBox.kHeightSizedBox40
-          else
+          else if (KTest.testIsWeb)
             KSizedBox.kHeightSizedBox24,
           TextPointWidget(
             context.l10n.donateHere,
