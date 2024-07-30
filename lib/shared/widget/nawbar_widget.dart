@@ -174,6 +174,9 @@ class _NawbarWidgetImplematationState
                                 background: AppColors.materialThemeSourceSeed,
                                 padding: KPadding.kPaddingSize8,
                               ),
+                              width: _isEnglish(context)
+                                  ? KSize.kPixel72
+                                  : KSize.kPixel56,
                             ),
                             KSizedBox.kWidthSizedBox32,
                             const CircleAvatar(
@@ -183,6 +186,9 @@ class _NawbarWidgetImplematationState
                             _button(
                               ruoteName: KRoute.investors.name,
                               text: context.l10n.investors,
+                              width: _isEnglish(context)
+                                  ? KSize.kPixel66
+                                  : KSize.kPixel88,
                             ),
                             KSizedBox.kWidthSizedBox32,
                             const CircleAvatar(
@@ -192,6 +198,9 @@ class _NawbarWidgetImplematationState
                             _button(
                               ruoteName: KRoute.feedback.name,
                               text: context.l10n.contact,
+                              width: _isEnglish(context)
+                                  ? KSize.kPixel62
+                                  : KSize.kPixel80,
                             ),
                           ],
                         ),
@@ -285,12 +294,13 @@ class _NawbarWidgetImplematationState
   Widget _button({
     required String ruoteName,
     required String text,
+    required double width,
     Widget? icon,
   }) =>
       ButtonBottomLineWidget(
         text: text,
         onPressed: () => context.goNamed(ruoteName),
-        width: _isEnglish(context) ? KSize.kPixel62 : KSize.kPixel80,
+        width: width,
         isDesk: widget.isDesk,
         icon: icon,
       );
