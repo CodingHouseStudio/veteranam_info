@@ -53,6 +53,18 @@ extension DiscountModelLocation on DiscountModel {
         if (location != null) ...location!,
         if (subLocation != null) ...subLocation!.getList(context),
       ];
+  String getDescription(BuildContext context) => '$description\n'
+      '\n***${context.l10n.toGetItYouNeed}***\n'
+      '\n- ${requirements.replaceAll('-', '  -')}\n'
+      '\n$exclusions\n'
+      // ignore: lines_longer_than_80_chars
+      '${additionalDetails != null ? '\n${additionalDetails ?? ''}\n' : ''}'
+      '\n***${context.l10n.callForDetails}:***'
+      ' ${KPlatformConstants.isWebDesktop ? '***' : '['}'
+      '$phoneNumber'
+      '${KPlatformConstants.isWebDesktop ? '***' : '](tel:'
+          // ignore: lines_longer_than_80_chars
+          '${phoneNumber.replaceAll('(', '').replaceAll(')', '').replaceAll(' ', '')})'}';
 }
 
 extension StringExtension on String {
@@ -94,7 +106,7 @@ extension StringExtension on String {
   }
 
   String markdownSubstring(int end) {
-    late var substringValue = substring(0, end);
+    late var substringValue = substring(0, end).trim();
     while (substringValue.endsWith('*')) {
       substringValue = substringValue.substring(0, substringValue.length - 1);
     }
