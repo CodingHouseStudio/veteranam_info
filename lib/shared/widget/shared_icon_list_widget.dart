@@ -59,7 +59,7 @@ abstract class SharedIconListWidget {
     return TextButton(
       key: key,
       onPressed: onPressed,
-      style: KButtonStyles.doubleButtonStyle,
+      style: KButtonStyles.withoutStyle,
       child: Column(
         children: [
           IconWidget(

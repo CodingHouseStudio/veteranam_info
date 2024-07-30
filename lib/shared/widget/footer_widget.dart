@@ -471,7 +471,7 @@ abstract class FooterWidget {
       TextButton(
         key: KWidgetkeys.widget.footer.privacyPolicy,
         onPressed: () => context.goNamed(KRoute.privacyPolicy.name),
-        style: KButtonStyles.doubleButtonStyle
+        style: KButtonStyles.withoutStyle
             .copyWith(alignment: Alignment.bottomLeft),
         child: Text(
           context.l10n.privacyPolicy,

@@ -108,9 +108,6 @@ class _$InformationWatcherEventCopyWithImpl<$Res,
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-
-  /// Create a copy of InformationWatcherEvent
-  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -127,9 +124,6 @@ class __$$StartedImplCopyWithImpl<$Res>
   __$$StartedImplCopyWithImpl(
       _$StartedImpl _value, $Res Function(_$StartedImpl) _then)
       : super(_value, _then);
-
-  /// Create a copy of InformationWatcherEvent
-  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -270,8 +264,6 @@ class __$$UpdatedImplCopyWithImpl<$Res>
       _$UpdatedImpl _value, $Res Function(_$UpdatedImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of InformationWatcherEvent
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -319,9 +311,7 @@ class _$UpdatedImpl implements _Updated {
   int get hashCode => Object.hash(
       runtimeType, const DeepCollectionEquality().hash(_informationItemsModel));
 
-  /// Create a copy of InformationWatcherEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$UpdatedImplCopyWith<_$UpdatedImpl> get copyWith =>
@@ -430,10 +420,7 @@ abstract class _Updated implements InformationWatcherEvent {
       _$UpdatedImpl;
 
   List<InformationModel> get informationItemsModel;
-
-  /// Create a copy of InformationWatcherEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$UpdatedImplCopyWith<_$UpdatedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -452,9 +439,6 @@ class __$$LoadNextItemsImplCopyWithImpl<$Res>
   __$$LoadNextItemsImplCopyWithImpl(
       _$LoadNextItemsImpl _value, $Res Function(_$LoadNextItemsImpl) _then)
       : super(_value, _then);
-
-  /// Create a copy of InformationWatcherEvent
-  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -595,8 +579,6 @@ class __$$FilterImplCopyWithImpl<$Res>
       _$FilterImpl _value, $Res Function(_$FilterImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of InformationWatcherEvent
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -636,9 +618,7 @@ class _$FilterImpl implements _Filter {
   @override
   int get hashCode => Object.hash(runtimeType, filterIndex);
 
-  /// Create a copy of InformationWatcherEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$FilterImplCopyWith<_$FilterImpl> get copyWith =>
@@ -746,10 +726,7 @@ abstract class _Filter implements InformationWatcherEvent {
   const factory _Filter(final int filterIndex) = _$FilterImpl;
 
   int get filterIndex;
-
-  /// Create a copy of InformationWatcherEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$FilterImplCopyWith<_$FilterImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -771,8 +748,6 @@ class __$$FailureImplCopyWithImpl<$Res>
       _$FailureImpl _value, $Res Function(_$FailureImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of InformationWatcherEvent
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -812,9 +787,7 @@ class _$FailureImpl implements _Failure {
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(failure));
 
-  /// Create a copy of InformationWatcherEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$FailureImplCopyWith<_$FailureImpl> get copyWith =>
@@ -922,10 +895,7 @@ abstract class _Failure implements InformationWatcherEvent {
   const factory _Failure(final dynamic failure) = _$FailureImpl;
 
   dynamic get failure;
-
-  /// Create a copy of InformationWatcherEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$FailureImplCopyWith<_$FailureImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -948,8 +918,6 @@ class __$$LikeImplCopyWithImpl<$Res>
   __$$LikeImplCopyWithImpl(_$LikeImpl _value, $Res Function(_$LikeImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of InformationWatcherEvent
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -968,8 +936,6 @@ class __$$LikeImplCopyWithImpl<$Res>
     ));
   }
 
-  /// Create a copy of InformationWatcherEvent
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $InformationModelCopyWith<$Res> get informationModel {
@@ -1007,9 +973,7 @@ class _$LikeImpl implements _Like {
   @override
   int get hashCode => Object.hash(runtimeType, informationModel, isLiked);
 
-  /// Create a copy of InformationWatcherEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$LikeImplCopyWith<_$LikeImpl> get copyWith =>
@@ -1120,10 +1084,7 @@ abstract class _Like implements InformationWatcherEvent {
 
   InformationModel get informationModel;
   bool get isLiked;
-
-  /// Create a copy of InformationWatcherEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$LikeImplCopyWith<_$LikeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1147,8 +1108,6 @@ class __$$ChangeLikeImplCopyWithImpl<$Res>
       _$ChangeLikeImpl _value, $Res Function(_$ChangeLikeImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of InformationWatcherEvent
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1167,8 +1126,6 @@ class __$$ChangeLikeImplCopyWithImpl<$Res>
     ));
   }
 
-  /// Create a copy of InformationWatcherEvent
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $InformationModelCopyWith<$Res> get informationModel {
@@ -1207,9 +1164,7 @@ class _$ChangeLikeImpl implements _ChangeLike {
   @override
   int get hashCode => Object.hash(runtimeType, informationModel, isLiked);
 
-  /// Create a copy of InformationWatcherEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ChangeLikeImplCopyWith<_$ChangeLikeImpl> get copyWith =>
@@ -1320,10 +1275,7 @@ abstract class _ChangeLike implements InformationWatcherEvent {
 
   InformationModel get informationModel;
   bool get isLiked;
-
-  /// Create a copy of InformationWatcherEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$ChangeLikeImplCopyWith<_$ChangeLikeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1339,9 +1291,7 @@ mixin _$InformationWatcherState {
   int get itemsLoaded => throw _privateConstructorUsedError;
   InformationFailure? get failure => throw _privateConstructorUsedError;
 
-  /// Create a copy of InformationWatcherState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $InformationWatcherStateCopyWith<InformationWatcherState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1372,8 +1322,6 @@ class _$InformationWatcherStateCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of InformationWatcherState
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1438,8 +1386,6 @@ class __$$InitialImplCopyWithImpl<$Res>
       _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of InformationWatcherState
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1560,9 +1506,7 @@ class _$InitialImpl implements _Initial {
       itemsLoaded,
       failure);
 
-  /// Create a copy of InformationWatcherState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$InitialImplCopyWith<_$InitialImpl> get copyWith =>
@@ -1590,11 +1534,8 @@ abstract class _Initial implements InformationWatcherState {
   int get itemsLoaded;
   @override
   InformationFailure? get failure;
-
-  /// Create a copy of InformationWatcherState
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$InitialImplCopyWith<_$InitialImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
