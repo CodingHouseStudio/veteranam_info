@@ -52,6 +52,8 @@ enum Language {
   /// Add another languages support here
   const Language(this.value, this.text);
 
+  bool get isEnglish => this == english;
+
   final Locale value;
   // final AssetGenImage
   //     image; // Optional: this properties used for ListTile details

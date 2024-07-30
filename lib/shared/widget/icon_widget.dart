@@ -9,7 +9,7 @@ class IconWidget extends StatelessWidget {
     this.padding,
   });
   final Color? background;
-  final Widget icon;
+  final Icon icon;
   final double? padding;
   @override
   Widget build(BuildContext context) {
