@@ -23,7 +23,7 @@ class EmployeeRespondBloc
             resume: ResumeFieldModel.pure(),
             noResume: false,
             formState: EmployeeRespondEnum.initial,
-            failure: EmployeeRespondFailure.initial,
+            failure: null,
           ),
         ) {
     on<_EmailUpdated>(_onEmailUpdated);
@@ -35,6 +35,7 @@ class EmployeeRespondBloc
 
   final IWorkRepository _employeeRespondRepository;
   final filePicker = filePickerValue;
+  @visibleForTesting
   static ImagePicker filePickerValue = ImagePicker();
 
   void _onEmailUpdated(
@@ -45,7 +46,7 @@ class EmployeeRespondBloc
     emit(
       state.copyWith(
         email: emailFieldModel,
-        formState: EmployeeRespondEnum.initial,
+        formState: EmployeeRespondEnum.inProgress,
       ),
     );
   }
@@ -58,7 +59,7 @@ class EmployeeRespondBloc
     emit(
       state.copyWith(
         phoneNumber: phoneFieldModel,
-        formState: EmployeeRespondEnum.initial,
+        formState: EmployeeRespondEnum.inProgress,
       ),
     );
   }
@@ -68,38 +69,41 @@ class EmployeeRespondBloc
     Emitter<EmployeeRespondState> emit,
   ) async {
     if (Formz.validate(
-      [
-        state.email,
-        state.phoneNumber,
-      ],
-    )) {
-      emit(state.copyWith(formState: EmployeeRespondEnum.sendingData));
+          [
+            state.email,
+            state.phoneNumber,
+          ],
+        ) &&
+        (state.noResume || state.resume.isValid)) {
       final result = await _employeeRespondRepository.sendRespond(
         EmployeeRespondModel(
           id: ExtendedDateTime.id,
           email: state.email.value,
-          resume: state.resume.value != null
-              ? ResumeModel(
+          resume: state.noResume
+              ? null
+              : ResumeModel(
                   downloadURL: state.resume.value!.path,
                   name: state.resume.value!.name,
                   ref: state.resume.value!.path,
-                )
-              : null,
+                ),
           noResume: state.noResume,
-          phoneNumber: state.phoneNumber.value!,
+          phoneNumber: state.phoneNumber.value,
         ),
       );
       result.fold(
         (l) => emit(
           state.copyWith(
-            //failure: l.toEmployeeRespond(),
-            formState: EmployeeRespondEnum.invalidData,
+            failure: l.toEmployeeRespond(),
           ),
         ),
         (r) => emit(
-          state.copyWith(
+          const EmployeeRespondState(
             formState: EmployeeRespondEnum.success,
-            failure: EmployeeRespondFailure.none,
+            failure: null,
+            email: EmailFieldModel.pure(),
+            noResume: false,
+            phoneNumber: PhoneNumberFieldModel.pure(),
+            resume: ResumeFieldModel.pure(),
           ),
         ),
       );
@@ -115,7 +119,7 @@ class EmployeeRespondBloc
     emit(
       state.copyWith(
         noResume: !state.noResume,
-        formState: EmployeeRespondEnum.initial,
+        formState: EmployeeRespondEnum.inProgress,
       ),
     );
   }
@@ -131,7 +135,7 @@ class EmployeeRespondBloc
     emit(
       state.copyWith(
         resume: resumeFieldModel,
-        formState: EmployeeRespondEnum.initial,
+        formState: EmployeeRespondEnum.inProgress,
       ),
     );
   }

@@ -33,11 +33,9 @@ extension LocationGetter on List<DiscountModel> {
       ];
 }
 
-extension SubLocationString on SubLocation? {
+extension SubLocationString on SubLocation {
   List<SubLocation> get _getList {
     switch (this) {
-      case null:
-        return [];
       case SubLocation.all:
         return [
           SubLocation.allStoresOfChain,
@@ -45,7 +43,7 @@ extension SubLocationString on SubLocation? {
         ];
       case SubLocation.allStoresOfChain:
       case SubLocation.online:
-        return [this!];
+        return [this];
     }
   }
 }

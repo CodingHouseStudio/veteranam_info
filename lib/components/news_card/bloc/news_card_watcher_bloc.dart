@@ -36,7 +36,12 @@ class NewsCardWatcherBloc
       );
       return;
     }
-    emit(state.copyWith(loadingStatus: LoadingStatus.loading));
+    emit(
+      state.copyWith(
+        loadingStatus: LoadingStatus.loading,
+        failure: null,
+      ),
+    );
 
     final resault = await _informationRepository.getInformation(event.id!);
 

@@ -47,12 +47,12 @@ Future<void> employeeRespondInitialHelper(
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.employeeRespond.resume),
+    find.byKey(KWidgetkeys.screen.employeeRespond.resumeText),
     findsOneWidget,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.employeeRespond.upload),
+    find.byKey(KWidgetkeys.screen.employeeRespond.resumeButton),
     findsOneWidget,
   );
 
@@ -72,7 +72,7 @@ Future<void> employeeRespondInitialHelper(
   // );
 
   expect(
-    find.byKey(KWidgetkeys.screen.employeeRespond.send),
+    find.byKey(KWidgetkeys.screen.employeeRespond.sendButton),
     findsOneWidget,
   );
 

@@ -171,21 +171,26 @@ abstract class KTestText {
     name: image,
     ref: image,
   );
-  static const resumeModel = ResumeModel(
-    downloadURL: 'test_URL',
+  static const resume = ResumeModel(
+    downloadURL: downloadURL,
     lastModifiedTS: 1,
     name: 'test_name',
     ref: 'test_name',
     type: 'test_type',
   );
+  static const resumeModel = ResumeModel(
+    downloadURL: downloadURL,
+    name: downloadURL,
+    ref: downloadURL,
+  );
 
   static final feedbackModel = FeedbackModel(
     id: '',
-    guestId: KTestText.user.id,
-    guestName: KTestText.field,
-    email: KTestText.userEmail,
+    guestId: user.id,
+    guestName: field,
+    email: userEmail,
     timestamp: dateTime,
-    message: KTestText.field,
+    message: field,
   );
   static final dateTime = DateTime(2024, 4, 12);
   static final dateTimeId = DateTime(0, 0, 0, 0, 1, 1, 1, 1);
@@ -263,10 +268,10 @@ abstract class KTestText {
   static final feedbackModelIncorect = FeedbackModel(
     id: dateTime.microsecondsSinceEpoch.toString(),
     guestId: dateTime.microsecondsSinceEpoch.toString(),
-    guestName: KTestText.field,
-    email: KTestText.userEmailIncorrect,
+    guestName: field,
+    email: userEmailIncorrect,
     timestamp: dateTime,
-    message: KTestText.field,
+    message: field,
   );
 
   static final informationModelItemsModify = <InformationModel>[
@@ -349,12 +354,18 @@ abstract class KTestText {
     userId: user.id,
     cardId: id,
   );
-  static final employeeRespondModel = EmployeeRespondModel(
-    id: dateTime.microsecondsSinceEpoch.toString(),
-    email: KTestText.userEmail,
-    phoneNumber: KTestText.phoneNumber,
+  static const employeeRespondModel = EmployeeRespondModel(
+    id: id,
+    email: userEmail,
+    phoneNumber: phoneNumber,
     resume: resumeModel,
     noResume: false,
+  );
+  static const employeeRespondWithoudResumeModel = EmployeeRespondModel(
+    id: id,
+    email: userEmail,
+    phoneNumber: phoneNumber,
+    noResume: true,
   );
   static final linkModel = LinkModel(
     id: id,

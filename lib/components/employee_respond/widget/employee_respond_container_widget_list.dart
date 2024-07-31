@@ -63,13 +63,14 @@ List<Widget> _employeeRespondContainerWidgetList({
     Padding(
       padding: const EdgeInsets.only(left: KPadding.kPaddingSize16),
       child: Text(
-        key: KWidgetkeys.screen.employeeRespond.resume,
+        key: KWidgetkeys.screen.employeeRespond.resumeText,
         context.l10n.resume,
         style: isDesk ? AppTextStyle.text32 : AppTextStyle.text24,
       ),
     ),
     KSizedBox.kHeightSizedBox8,
     TextButton.icon(
+      key: KWidgetkeys.screen.employeeRespond.resumeButton,
       onPressed: context.read<EmployeeRespondBloc>().state.noResume
           ? null
           : () => context.read<EmployeeRespondBloc>().add(
@@ -87,7 +88,6 @@ List<Widget> _employeeRespondContainerWidgetList({
       label: Align(
         alignment: Alignment.centerLeft,
         child: Text(
-          key: KWidgetkeys.screen.employeeRespond.upload,
           context.l10n.upload,
           style: isDesk
               ? AppTextStyle.text24.copyWith(
@@ -156,7 +156,7 @@ Widget cancelButton({required BuildContext context, required bool isDesk}) =>
     );
 Widget sendButton({required BuildContext context, required bool isDesk}) =>
     ButtonWidget(
-      key: KWidgetkeys.screen.employeeRespond.send,
+      key: KWidgetkeys.screen.employeeRespond.sendButton,
       text: context.l10n.send,
       onPressed: () => context.read<EmployeeRespondBloc>().add(
             const EmployeeRespondEvent.save(),
