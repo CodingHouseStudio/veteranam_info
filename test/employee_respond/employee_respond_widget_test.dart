@@ -70,6 +70,16 @@ void main() {
         );
         await employeeRespondInitialHelper(tester);
       });
+      group('${KGroupText.goTo} ', () {
+        testWidgets('Cancel', (tester) async {
+          await employeeRespondPumpAppHelper(
+            tester: tester,
+            mockGoRouter: mockGoRouter,
+            mockWorkRepository: mockWorkRepository,
+          );
+          await cancelHelper(mockGoRouter: mockGoRouter, tester: tester);
+        });
+      });
     });
   });
 }

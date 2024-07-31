@@ -148,9 +148,9 @@ List<Widget> _employeeRespondContainerWidgetList({
 
 Widget cancelButton({required BuildContext context, required bool isDesk}) =>
     ButtonWidget(
-      key: KWidgetkeys.screen.employeeRespond.cancel,
+      key: KWidgetkeys.screen.employeeRespond.cancelButton,
       text: context.l10n.cancel,
-      onPressed: () => context.goNamedWithScroll(KRoute.workEmployee.name),
+      onPressed: () => context.goNamed(KRoute.workEmployee.name),
       isDesk: isDesk,
       backgroundColor: AppColors.materialThemeKeyColorsNeutral,
     );

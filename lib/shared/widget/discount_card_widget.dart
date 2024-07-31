@@ -143,7 +143,7 @@ class DiscountCardWidget extends StatelessWidget {
                       ),
                       KSizedBox.kWidthSizedBox16,
                       Expanded(
-                        child: CityWidgetList(
+                        child: CityListWidget(
                           discountModel: discountItem,
                           isDesk: true,
                         ),
@@ -156,7 +156,7 @@ class DiscountCardWidget extends StatelessWidget {
                     expiration: discountItem.expiration,
                   ),
                   KSizedBox.kHeightSizedBox8,
-                  CityWidgetList(
+                  CityListWidget(
                     discountModel: discountItem,
                     isDesk: false,
                   ),

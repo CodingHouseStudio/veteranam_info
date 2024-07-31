@@ -16,5 +16,5 @@ class _EmployeeRespondKeys {
   final checkPoint = const Key('employee_respond_screen_check_point');
   // final noResume = const Key('employee_respond_screen_no_resume');
   final sendButton = const Key('employee_respond_screen_send_button');
-  final cancel = const Key('employee_respond_screen_cancel_button');
+  final cancelButton = const Key('employee_respond_screen_cancel_button');
 }
