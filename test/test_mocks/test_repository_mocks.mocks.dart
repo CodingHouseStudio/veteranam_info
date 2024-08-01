@@ -9,6 +9,7 @@ import 'dart:io' as _i13;
 import 'dart:typed_data' as _i17;
 
 import 'package:cloud_firestore/cloud_firestore.dart' as _i7;
+import 'package:connectivity_plus/connectivity_plus.dart' as _i18;
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:firebase_auth/firebase_auth.dart' as _i4;
 import 'package:firebase_core/firebase_core.dart' as _i6;
@@ -572,6 +573,17 @@ class _FakeSocket_50 extends _i1.SmartFake implements _i13.Socket {
 class _FakeStreamSubscription_51<T> extends _i1.SmartFake
     implements _i8.StreamSubscription<T> {
   _FakeStreamSubscription_51(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeIAppNetworkRepository_52 extends _i1.SmartFake
+    implements _i3.IAppNetworkRepository {
+  _FakeIAppNetworkRepository_52(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -9692,4 +9704,96 @@ class MockIUrlRepository extends _i1.Mock implements _i3.IUrlRepository {
           ),
         )),
       ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
+}
+
+/// A class which mocks [NetworkRepository].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockNetworkRepository extends _i1.Mock implements _i3.NetworkRepository {
+  @override
+  _i3.IAppNetworkRepository get appNetworkRepository => (super.noSuchMethod(
+        Invocation.getter(#appNetworkRepository),
+        returnValue: _FakeIAppNetworkRepository_52(
+          this,
+          Invocation.getter(#appNetworkRepository),
+        ),
+        returnValueForMissingStub: _FakeIAppNetworkRepository_52(
+          this,
+          Invocation.getter(#appNetworkRepository),
+        ),
+      ) as _i3.IAppNetworkRepository);
+
+  @override
+  _i8.Stream<_i3.NetworkStatus> get status => (super.noSuchMethod(
+        Invocation.getter(#status),
+        returnValue: _i8.Stream<_i3.NetworkStatus>.empty(),
+        returnValueForMissingStub: _i8.Stream<_i3.NetworkStatus>.empty(),
+      ) as _i8.Stream<_i3.NetworkStatus>);
+
+  @override
+  _i3.NetworkStatus get currentNetwork => (super.noSuchMethod(
+        Invocation.getter(#currentNetwork),
+        returnValue: _i3.NetworkStatus.network,
+        returnValueForMissingStub: _i3.NetworkStatus.network,
+      ) as _i3.NetworkStatus);
+
+  @override
+  void dispose() => super.noSuchMethod(
+        Invocation.method(
+          #dispose,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+}
+
+/// A class which mocks [IAppNetworkRepository].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockIAppNetworkRepository extends _i1.Mock
+    implements _i3.IAppNetworkRepository {
+  @override
+  _i8.Stream<List<_i18.ConnectivityResult>> get connectivityResults =>
+      (super.noSuchMethod(
+        Invocation.getter(#connectivityResults),
+        returnValue: _i8.Stream<List<_i18.ConnectivityResult>>.empty(),
+        returnValueForMissingStub:
+            _i8.Stream<List<_i18.ConnectivityResult>>.empty(),
+      ) as _i8.Stream<List<_i18.ConnectivityResult>>);
+
+  @override
+  List<_i18.ConnectivityResult> get currentConnectivityResults =>
+      (super.noSuchMethod(
+        Invocation.getter(#currentConnectivityResults),
+        returnValue: <_i18.ConnectivityResult>[],
+        returnValueForMissingStub: <_i18.ConnectivityResult>[],
+      ) as List<_i18.ConnectivityResult>);
+}
+
+/// A class which mocks [Connectivity].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockConnectivity extends _i1.Mock implements _i18.Connectivity {
+  @override
+  _i8.Stream<List<_i18.ConnectivityResult>> get onConnectivityChanged =>
+      (super.noSuchMethod(
+        Invocation.getter(#onConnectivityChanged),
+        returnValue: _i8.Stream<List<_i18.ConnectivityResult>>.empty(),
+        returnValueForMissingStub:
+            _i8.Stream<List<_i18.ConnectivityResult>>.empty(),
+      ) as _i8.Stream<List<_i18.ConnectivityResult>>);
+
+  @override
+  _i8.Future<List<_i18.ConnectivityResult>> checkConnectivity() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #checkConnectivity,
+          [],
+        ),
+        returnValue: _i8.Future<List<_i18.ConnectivityResult>>.value(
+            <_i18.ConnectivityResult>[]),
+        returnValueForMissingStub:
+            _i8.Future<List<_i18.ConnectivityResult>>.value(
+                <_i18.ConnectivityResult>[]),
+      ) as _i8.Future<List<_i18.ConnectivityResult>>);
 }

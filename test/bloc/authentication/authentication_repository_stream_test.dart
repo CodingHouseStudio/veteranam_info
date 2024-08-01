@@ -13,8 +13,9 @@ import '../../text_dependency.dart';
 void main() {
   setupFirebaseAuthMocks();
 
-  group('${KScreenBlocName.authentication} ${KGroupText.repository} Stream',
-      () {
+  group(
+      '${KScreenBlocName.authentication} ${KGroupText.repository} '
+      '${KGroupText.stream}', () {
     late AuthenticationRepository authenticationRepository;
     late IAppAuthenticationRepository mockAppAuthenticationRepository;
     late StreamController<User> userStreamController;
@@ -27,9 +28,6 @@ void main() {
         ..add(const UserSetting(id: KTestText.field));
       mockAppAuthenticationRepository = MockIAppAuthenticationRepository();
 
-      authenticationRepository =
-          AuthenticationRepository(mockAppAuthenticationRepository);
-
       when(mockAppAuthenticationRepository.user).thenAnswer(
         (_) => userStreamController.stream,
       );
@@ -41,6 +39,9 @@ void main() {
       when(mockAppAuthenticationRepository.userSetting).thenAnswer(
         (_) => userSettingStreamController.stream,
       );
+
+      authenticationRepository =
+          AuthenticationRepository(mockAppAuthenticationRepository);
     });
 
     group('anonymously when user change', () {
@@ -53,17 +54,22 @@ void main() {
           mockAppAuthenticationRepository.logInAnonymously(),
         ).thenAnswer(
           (_) async {
+            userSettingStreamController = StreamController<UserSetting>()
+              ..add(UserSetting.empty);
             userStreamController.add(KTestText.user.copyWith(email: null));
             return const Right(true);
           },
         );
       });
 
-      test('user stream', () async {
-        final authenticationStatus =
-            await authenticationRepository.status.first;
-
-        expect(authenticationStatus, AuthenticationStatus.anonymous);
+      test('user ${KGroupText.stream}', () async {
+        await expectLater(
+          authenticationRepository.status,
+          emitsInOrder([
+            AuthenticationStatus.anonymous,
+            AuthenticationStatus.anonymous,
+          ]),
+        );
       });
     });
     group('anonymously', () {
@@ -73,11 +79,13 @@ void main() {
         );
       });
 
-      test('user stream', () async {
-        final authenticationStatus =
-            await authenticationRepository.status.first;
-
-        expect(authenticationStatus, AuthenticationStatus.anonymous);
+      test('user ${KGroupText.stream}', () async {
+        await expectLater(
+          authenticationRepository.status,
+          emitsInOrder([
+            AuthenticationStatus.anonymous,
+          ]),
+        );
       });
     });
     group('authenticated', () {
@@ -96,11 +104,14 @@ void main() {
         );
       });
 
-      test('user stream', () async {
-        final authenticationStatus =
-            await authenticationRepository.status.first;
-
-        expect(authenticationStatus, AuthenticationStatus.authenticated);
+      test('user ${KGroupText.stream}', () async {
+        await expectLater(
+          authenticationRepository.status,
+          emitsInOrder([
+            AuthenticationStatus.authenticated,
+            AuthenticationStatus.authenticated,
+          ]),
+        );
       });
     });
     group('user setting', () {
@@ -110,10 +121,13 @@ void main() {
         );
       });
 
-      test('user stream', () async {
-        final userSetting = await authenticationRepository.userSetting.first;
-
-        expect(userSetting, const UserSetting(id: KTestText.field));
+      test('user ${KGroupText.stream}', () async {
+        await expectLater(
+          authenticationRepository.userSetting,
+          emitsInOrder([
+            const UserSetting(id: KTestText.field),
+          ]),
+        );
       });
     });
     group('${KGroupText.failure} log in anonymously', () {
@@ -129,11 +143,13 @@ void main() {
         );
       });
 
-      test('user stream', () async {
-        final authenticationStatus =
-            await authenticationRepository.status.first;
-
-        expect(authenticationStatus, AuthenticationStatus.anonymous);
+      test('user ${KGroupText.stream}', () async {
+        await expectLater(
+          authenticationRepository.status,
+          emitsInOrder(
+            [AuthenticationStatus.anonymous],
+          ),
+        );
       });
     });
 

@@ -9,7 +9,9 @@ import 'package:veteranam/shared/shared.dart';
 import '../../text_dependency.dart';
 
 void main() {
-  group('${KScreenBlocName.appAuthentication} ${KGroupText.repository}', () {
+  group(
+      '${KScreenBlocName.appRepository} ${KScreenBlocName.authentication}'
+      ' ${KGroupText.repository}', () {
     late AppAuthenticationRepository appAuthenticationRepository;
     late IStorage mockSecureStorageRepository;
     late firebase_auth.FirebaseAuth mockFirebaseAuth;

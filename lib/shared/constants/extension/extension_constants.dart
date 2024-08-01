@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:collection/collection.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -136,4 +137,10 @@ extension StringExtension on String {
             ? substringValue.substring(0, substringValue.length - 1)
             : substringValue;
   }
+}
+
+extension ConnectivityExtension on List<ConnectivityResult> {
+  bool get hasNetwork => any(
+        (result) => ConnectivityResult.none != result,
+      );
 }

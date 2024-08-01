@@ -38,8 +38,7 @@ class AuthenticationRepository {
     _userSubscription ??=
         iAppAuthenticationRepository.user.listen((currentUser) {
       if (currentUser.isNotEmpty) {
-        if (currentUserSetting.id != currentUser.id &&
-            _userSettingSubscription != null) {
+        if (currentUserSetting.id != currentUser.id) {
           _userSettingSubscription?.cancel();
           _userSettingSubscription = null;
         }
@@ -96,12 +95,12 @@ class AuthenticationRepository {
   }
 
   Future<Either<SomeFailure, bool>> deleteUser() async {
-    final resault = await iAppAuthenticationRepository.deleteUser();
+    final result = await iAppAuthenticationRepository.deleteUser();
     // resault.fold(
     //   (l) => debugPrint(l.toString()),
     //   (r) => debugPrint('ever reached here?'),
     // );
-    return resault;
+    return result;
   }
 
   UserSetting get currentUserSetting {
@@ -165,12 +164,12 @@ class AuthenticationRepository {
   }
 
   Future<Either<SomeFailure, bool>> logOut() async {
-    final resault = await iAppAuthenticationRepository.logOut();
+    final result = await iAppAuthenticationRepository.logOut();
     // resault.fold(
     //   (l) => debugPrint(l.toString()),
     //   (r) => debugPrint('ever reached here?'),
     // );
-    return resault;
+    return result;
   }
 
   Future<Either<SomeFailure, bool>> sendVerificationCodeToEmail({

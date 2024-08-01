@@ -43,9 +43,9 @@ class NewsCardWatcherBloc
       ),
     );
 
-    final resault = await _informationRepository.getInformation(event.id!);
+    final result = await _informationRepository.getInformation(event.id!);
 
-    resault.fold(
+    result.fold(
       (l) => emit(
         state.copyWith(
           loadingStatus: LoadingStatus.error,
