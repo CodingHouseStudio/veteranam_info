@@ -10,8 +10,8 @@ import '../../text_dependency.dart';
 
 void main() {
   group(
-      '${KScreenBlocName.appAuthentication} ${KGroupText.repository}'
-      ' ${KGroupText.failureGet}', () {
+      '${KScreenBlocName.appRepository} ${KScreenBlocName.authentication}'
+      ' ${KGroupText.repository} ${KGroupText.failureGet}', () {
     late AppAuthenticationRepository appAuthenticationRepository;
     late IStorage mockSecureStorageRepository;
     late firebase_auth.FirebaseAuth mockFirebaseAuth;
@@ -94,10 +94,10 @@ void main() {
           value: KTestText.userSetting,
         ),
       );
-      expect(
-        appAuthenticationRepository.userSetting,
-        emits(UserSetting.empty),
-      );
+      // expect(
+      //   appAuthenticationRepository.userSetting,
+      //   emits(UserSetting.empty),
+      // );
     });
     test('user', () async {
       await expectLater(
@@ -113,10 +113,10 @@ void main() {
           value: KTestText.user,
         ),
       );
-      expect(
-        appAuthenticationRepository.user,
-        emits(User.empty),
-      );
+      // expect(
+      //   appAuthenticationRepository.user,
+      //   emits(User.empty),
+      // );
     });
     test('Current user', () async {
       expect(

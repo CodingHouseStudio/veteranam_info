@@ -17,10 +17,10 @@ class UrlCubit extends Cubit<UrlFailure?> {
     if (url == null) {
       return;
     }
-    final resault = await _urlRepository.share(
+    final result = await _urlRepository.share(
       url,
     );
-    resault.fold(
+    result.fold(
       (l) => emit(l.toUrl()),
       (r) => emit(null),
     );
@@ -34,11 +34,11 @@ class UrlCubit extends Cubit<UrlFailure?> {
     if (url == null) {
       return;
     }
-    final resault = await _urlRepository.launchUrl(
+    final result = await _urlRepository.launchUrl(
       url: url,
       scheme: scheme,
     );
-    resault.fold(
+    result.fold(
       (l) => emit(l.toUrl()),
       (r) => emit(null),
     );
