@@ -74,6 +74,7 @@ part 'widget/filter_chip.dart';
 part 'widget/statistic_box.dart';
 part 'widget/report_dialog.dart';
 part 'widget/notification_link.dart';
+part 'widget/city_list.dart';
 
 abstract class KWidgetkeys {
   static _ScreenKeys get screen => _ScreenKeys();

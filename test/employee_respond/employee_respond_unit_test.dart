@@ -18,66 +18,250 @@ void main() {
     late EmployeeRespondBloc employeeRespondBloc;
     late IWorkRepository mockWorkRepository;
     late ImagePicker mockImagePicker;
+    final xFile = XFile(
+      KTestText.downloadURL,
+    );
     setUp(() {
+      ExtendedDateTime.id = KTestText.employeeRespondModel.id;
       mockImagePicker = MockImagePicker();
       when(mockImagePicker.pickMedia()).thenAnswer(
-        (realInvocation) async => XFile(
-          KTestText.employeeRespondModel.resume.toString(),
-        ),
+        (realInvocation) async => xFile,
       );
       EmployeeRespondBloc.filePickerValue = mockImagePicker;
       mockWorkRepository = MockIWorkRepository();
-      when(mockWorkRepository.sendRespond(KTestText.employeeRespondModel))
-          .thenAnswer(
-        (_) async => const Right(true),
-      );
       employeeRespondBloc = EmployeeRespondBloc(
         employeeRespondRepository: mockWorkRepository,
       );
     });
     blocTest<EmployeeRespondBloc, EmployeeRespondState>(
       'emits [EmployeeRespondState.initial(), EmployeeRespondState.success()]'
-      ' when load employeeResponModel list',
+      ' when update email, phone, load resume and save',
       build: () => employeeRespondBloc,
-      act: (bloc) => bloc
-        ..add(
-          EmployeeRespondEvent.emailUpdated(
+      act: (bloc) async {
+        when(mockWorkRepository.sendRespond(KTestText.employeeRespondModel))
+            .thenAnswer(
+          (_) async => const Right(true),
+        );
+        bloc
+          ..add(
+            EmployeeRespondEvent.emailUpdated(
+              KTestText.employeeRespondModel.email,
+            ),
+          )
+          ..add(
+            EmployeeRespondEvent.phoneUpdated(
+              KTestText.employeeRespondModel.phoneNumber,
+            ),
+          )
+          ..add(const EmployeeRespondEvent.loadResumeClicked());
+        await expectLater(
+          bloc.stream,
+          emitsInOrder([
+            predicate<EmployeeRespondState>(
+              (state) => state.email.isValid,
+            ),
+            predicate<EmployeeRespondState>(
+              (state) => state.phoneNumber.isValid,
+            ),
+            predicate<EmployeeRespondState>(
+              (state) => state.resume.isValid,
+            ),
+          ]),
+          reason: 'Wait resume get',
+        );
+        bloc.add(const EmployeeRespondEvent.save());
+      },
+      expect: () async => [
+        EmployeeRespondState(
+          email: EmailFieldModel.dirty(
             KTestText.employeeRespondModel.email,
           ),
-        )
-        ..add(
-          EmployeeRespondEvent.phoneUpdated(
+          phoneNumber: const PhoneNumberFieldModel.pure(),
+          resume: const ResumeFieldModel.pure(),
+          noResume: false,
+          formState: EmployeeRespondEnum.inProgress,
+          failure: null,
+        ),
+        EmployeeRespondState(
+          email: EmailFieldModel.dirty(
+            KTestText.employeeRespondModel.email,
+          ),
+          phoneNumber: PhoneNumberFieldModel.dirty(
             KTestText.employeeRespondModel.phoneNumber,
           ),
-        )
-        ..add(const EmployeeRespondEvent.loadResumeClicked())
-      // ..add(const EmployeeRespondEvent.noResumeChanged())
-      // ..add(const EmployeeRespondEvent.save()),
-      ,
+          resume: const ResumeFieldModel.pure(),
+          noResume: false,
+          formState: EmployeeRespondEnum.inProgress,
+          failure: null,
+        ),
+        EmployeeRespondState(
+          email: EmailFieldModel.dirty(
+            KTestText.employeeRespondModel.email,
+          ),
+          phoneNumber: PhoneNumberFieldModel.dirty(
+            KTestText.employeeRespondModel.phoneNumber,
+          ),
+          resume: ResumeFieldModel.dirty(
+            xFile,
+          ),
+          noResume: false,
+          formState: EmployeeRespondEnum.inProgress,
+          failure: null,
+        ),
+        const EmployeeRespondState(
+          email: EmailFieldModel.pure(),
+          phoneNumber: PhoneNumberFieldModel.pure(),
+          resume: ResumeFieldModel.pure(),
+          noResume: false,
+          formState: EmployeeRespondEnum.success,
+          failure: null,
+        ),
+      ],
+    );
+    blocTest<EmployeeRespondBloc, EmployeeRespondState>(
+      'emits [EmployeeRespondState.initial(), EmployeeRespondState.success()]'
+      ' when update email, phone, no resume and save',
+      build: () => employeeRespondBloc,
+      act: (bloc) async {
+        when(
+          mockWorkRepository.sendRespond(
+            KTestText.employeeRespondWithoudResumeModel,
+          ),
+        ).thenAnswer(
+          (_) async => const Right(true),
+        );
+        bloc
+          ..add(
+            EmployeeRespondEvent.emailUpdated(
+              KTestText.employeeRespondModel.email,
+            ),
+          )
+          ..add(
+            EmployeeRespondEvent.phoneUpdated(
+              KTestText.employeeRespondModel.phoneNumber,
+            ),
+          )
+          ..add(const EmployeeRespondEvent.noResumeChanged())
+          ..add(const EmployeeRespondEvent.save());
+      },
       expect: () async => [
-        predicate<EmployeeRespondState>(
-          (state) =>
-              state.email ==
-              EmailFieldModel.dirty(
-                KTestText.employeeRespondModel.email,
-              ),
+        EmployeeRespondState(
+          email: EmailFieldModel.dirty(
+            KTestText.employeeRespondModel.email,
+          ),
+          phoneNumber: const PhoneNumberFieldModel.pure(),
+          resume: const ResumeFieldModel.pure(),
+          noResume: false,
+          formState: EmployeeRespondEnum.inProgress,
+          failure: null,
         ),
-        predicate<EmployeeRespondState>(
-          (state) =>
-              state.phoneNumber ==
-              PhoneNumberFieldModel.dirty(
-                KTestText.employeeRespondModel.phoneNumber,
-              ),
+        EmployeeRespondState(
+          email: EmailFieldModel.dirty(
+            KTestText.employeeRespondModel.email,
+          ),
+          phoneNumber: PhoneNumberFieldModel.dirty(
+            KTestText.employeeRespondModel.phoneNumber,
+          ),
+          resume: const ResumeFieldModel.pure(),
+          noResume: false,
+          formState: EmployeeRespondEnum.inProgress,
+          failure: null,
         ),
-        predicate<EmployeeRespondState>(
-          (state) => state.resume != const ResumeFieldModel.pure(),
+        EmployeeRespondState(
+          email: EmailFieldModel.dirty(
+            KTestText.employeeRespondModel.email,
+          ),
+          phoneNumber: PhoneNumberFieldModel.dirty(
+            KTestText.employeeRespondModel.phoneNumber,
+          ),
+          resume: const ResumeFieldModel.pure(),
+          noResume: true,
+          formState: EmployeeRespondEnum.inProgress,
+          failure: null,
         ),
-        // predicate<EmployeeRespondState>(
-        //   (state) => state.noResume != false,
-        // ),
-        // predicate<EmployeeRespondState>(
-        //   (state) => state.formState == EmployeeRespondEnum.success,
-        // ),
+        const EmployeeRespondState(
+          email: EmailFieldModel.pure(),
+          phoneNumber: PhoneNumberFieldModel.pure(),
+          resume: ResumeFieldModel.pure(),
+          noResume: false,
+          formState: EmployeeRespondEnum.success,
+          failure: null,
+        ),
+      ],
+    );
+    blocTest<EmployeeRespondBloc, EmployeeRespondState>(
+      'emits [EmployeeRespondState.initial(), EmployeeRespondState.success()]'
+      ' when update email, phone, no resume and save ${KGroupText.failure}',
+      build: () => employeeRespondBloc,
+      act: (bloc) async {
+        when(
+          mockWorkRepository.sendRespond(
+            KTestText.employeeRespondWithoudResumeModel,
+          ),
+        ).thenAnswer(
+          (_) async => const Left(SomeFailure.serverError()),
+        );
+        bloc
+          ..add(
+            EmployeeRespondEvent.emailUpdated(
+              KTestText.employeeRespondModel.email,
+            ),
+          )
+          ..add(
+            EmployeeRespondEvent.phoneUpdated(
+              KTestText.employeeRespondModel.phoneNumber,
+            ),
+          )
+          ..add(const EmployeeRespondEvent.noResumeChanged())
+          ..add(const EmployeeRespondEvent.save());
+      },
+      expect: () async => [
+        EmployeeRespondState(
+          email: EmailFieldModel.dirty(
+            KTestText.employeeRespondModel.email,
+          ),
+          phoneNumber: const PhoneNumberFieldModel.pure(),
+          resume: const ResumeFieldModel.pure(),
+          noResume: false,
+          formState: EmployeeRespondEnum.inProgress,
+          failure: null,
+        ),
+        EmployeeRespondState(
+          email: EmailFieldModel.dirty(
+            KTestText.employeeRespondModel.email,
+          ),
+          phoneNumber: PhoneNumberFieldModel.dirty(
+            KTestText.employeeRespondModel.phoneNumber,
+          ),
+          resume: const ResumeFieldModel.pure(),
+          noResume: false,
+          formState: EmployeeRespondEnum.inProgress,
+          failure: null,
+        ),
+        EmployeeRespondState(
+          email: EmailFieldModel.dirty(
+            KTestText.employeeRespondModel.email,
+          ),
+          phoneNumber: PhoneNumberFieldModel.dirty(
+            KTestText.employeeRespondModel.phoneNumber,
+          ),
+          resume: const ResumeFieldModel.pure(),
+          noResume: true,
+          formState: EmployeeRespondEnum.inProgress,
+          failure: null,
+        ),
+        EmployeeRespondState(
+          email: EmailFieldModel.dirty(
+            KTestText.employeeRespondModel.email,
+          ),
+          phoneNumber: PhoneNumberFieldModel.dirty(
+            KTestText.employeeRespondModel.phoneNumber,
+          ),
+          resume: const ResumeFieldModel.pure(),
+          noResume: true,
+          formState: EmployeeRespondEnum.inProgress,
+          failure: EmployeeRespondFailure.error,
+        ),
       ],
     );
   });

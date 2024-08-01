@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:veteranam/shared/shared.dart';
 
-class CityWidgetList extends StatefulWidget {
-  const CityWidgetList({
+class CityListWidget extends StatelessWidget {
+  const CityListWidget({
     required this.discountModel,
     required this.isDesk,
     super.key,
@@ -12,96 +13,86 @@ class CityWidgetList extends StatefulWidget {
   final bool isDesk;
 
   @override
-  State<CityWidgetList> createState() => _CityWidgetListState();
+  Widget build(BuildContext context) {
+    final cityList = discountModel.getCityList(context);
+    return Align(
+      alignment: isDesk ? Alignment.centerRight : Alignment.centerLeft,
+      child: DecoratedBox(
+        decoration: KWidgetTheme.boxDecorationWhiteMain,
+        child: Padding(
+          padding: isDesk
+              ? const EdgeInsets.symmetric(
+                  horizontal: KPadding.kPaddingSize16,
+                  vertical: KPadding.kPaddingSize8,
+                )
+              : const EdgeInsets.symmetric(
+                  horizontal: KPadding.kPaddingSize8,
+                  vertical: KPadding.kPaddingSize4,
+                ),
+          child: IntrinsicWidth(
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                KIcon.distance,
+                KSizedBox.kWidthSizedBox8,
+                if (cityList.isEmpty)
+                  const SizedBox.shrink()
+                else
+                  Expanded(
+                    child: cityList.length == 1
+                        ? Text(
+                            cityList.first,
+                            key: KWidgetkeys.widget.cityList.text,
+                            style: AppTextStyle.materialThemeLabelLarge,
+                          )
+                        : CityWidgetListExpanded(
+                            key: KWidgetkeys.widget.cityList.markdown,
+                            cityList: cityList,
+                            isDesk: isDesk,
+                          ),
+                  ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 }
 
-class _CityWidgetListState extends State<CityWidgetList> {
-  String? get cityList {
-    String? cityText = widget.discountModel.location!.first;
-    if ((widget.discountModel.location ?? []).length > 1) {
-      isExpanded ? cityText += ' | ' : cityText += '';
-    }
-    return cityText;
-  }
+class CityWidgetListExpanded extends StatefulWidget {
+  const CityWidgetListExpanded({
+    required this.cityList,
+    required this.isDesk,
+    super.key,
+  });
 
+  final List<String> cityList;
+  final bool isDesk;
+
+  @override
+  State<CityWidgetListExpanded> createState() => _CityWidgetListExpandedState();
+}
+
+class _CityWidgetListExpandedState extends State<CityWidgetListExpanded> {
   bool isExpanded = false;
-  bool isHovered = false;
   @override
   void initState() {
     isExpanded = false;
-    isHovered = false;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Align(
-      alignment: widget.isDesk ? Alignment.centerRight : Alignment.centerLeft,
-      child: TextButton.icon(
-        style: (widget.discountModel.location ?? []).length == 1 ||
-                ((widget.discountModel.location ?? []).isEmpty &&
-                    widget.discountModel.subLocation != null)
-            ? KButtonStyles.discountCityButtonStyle.copyWith(
-                mouseCursor:
-                    const WidgetStatePropertyAll(MouseCursor.uncontrolled),
-              )
-            : KButtonStyles.discountCityButtonStyle,
-        onPressed: () {
-          setState(() {
-            isExpanded = !isExpanded;
-          });
-        },
-        icon: KIcon.distance,
-        label: Padding(
-          padding: EdgeInsets.symmetric(
-            vertical:
-                widget.isDesk ? KPadding.kPaddingSize8 : KPadding.kPaddingSize4,
-          ),
-          child: Wrap(
-            children: [
-              if (widget.discountModel.location?.isEmpty ?? true)
-                Text(
-                  widget.discountModel.subLocation.getList(context).first,
-                  style: AppTextStyle.materialThemeLabelLarge,
-                )
-              else
-                Text(
-                  cityList!,
-                  style: AppTextStyle.materialThemeLabelLarge,
-                ),
-              if (isExpanded)
-                ...(widget.discountModel.location?.skip(1) ?? []).map(
-                  (location) => Text(
-                    '$location | ',
-                    style: AppTextStyle.materialThemeLabelLarge,
-                  ),
-                ),
-              if ((widget.discountModel.location ?? []).length > 1)
-                //if (widget.isDesk)
-                Padding(
-                  padding: const EdgeInsets.only(
-                    left: KPadding.kPaddingSize8,
-                  ),
-                  child: Text(
-                    isExpanded
-                        ? widget.isDesk
-                            ? context.l10n.hideExpansion
-                            : ''
-                        : widget.isDesk
-                            ? context.l10n.moreCities(
-                                (widget.discountModel.location ?? []).length -
-                                    1,
-                              )
-                            : '...',
-                    style: AppTextStyle.materialThemeLabelLarge.copyWith(
-                      decoration: TextDecoration.underline,
-                      color: AppColors.materialThemeRefTertiaryTertiary40,
-                    ),
-                  ),
-                ),
-            ],
-          ),
-        ),
+    return MarkdownBody(
+      data: widget.cityList
+          .getCityList(showFullText: !isExpanded, context: context),
+      onTapLink: (text, href, title) => setState(() {
+        isExpanded = !isExpanded;
+      }),
+      styleSheet: MarkdownStyleSheet(
+        a: AppTextStyle.materialThemeLabelLargeRef,
+        p: AppTextStyle.materialThemeLabelLarge,
       ),
     );
   }

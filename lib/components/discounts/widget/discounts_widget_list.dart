@@ -14,9 +14,7 @@ List<Widget> discountsWidgetList({
       discountItem: modelItem,
       isDesk: isDesk,
       reportEvent: null,
-      onShare: () => context
-          .read<UrlCubit>()
-          .share('${KRoute.home.path}${KRoute.discounts.path}/${modelItem.id}'),
+      share: '${KRoute.home.path}${KRoute.discounts.path}/${modelItem.id}',
       isLoading: isLoading,
       // () => context
       //     .read<DiscountWatcherBloc>()
