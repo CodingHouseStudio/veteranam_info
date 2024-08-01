@@ -60,7 +60,7 @@ List<Widget> _boxesWidget(
       discountItem: discountsWidgetList.elementAt(index),
       isDesk: isDesk,
       reportEvent: null,
-      onShare: null,
+      share: null,
       isLoading: true,
     ),
     if (!isDesk) KSizedBox.kHeightSizedBox16,

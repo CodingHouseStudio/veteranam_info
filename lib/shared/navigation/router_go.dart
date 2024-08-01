@@ -298,22 +298,22 @@ GoRouter router = GoRouter(
   ],
 );
 
-extension NavigatorExtention on BuildContext {
-  void goNamedWithScroll(
-    String name, {
-    Map<String, String> pathParameters = const <String, String>{},
-    Map<String, dynamic> queryParameters = const <String, dynamic>{},
-    Object? extra,
-  }) {
-    // if (read<ScrollCubit>().state.positions.isNotEmpty) {
-    //   read<ScrollCubit>().scrollUp();
-    // }
-    // read<ScrollCubit>().initial();
-    goNamed(
-      name,
-      pathParameters: pathParameters,
-      queryParameters: queryParameters,
-      extra: extra,
-    );
-  }
-}
+// extension NavigatorExtention on BuildContext {
+//   void goNamedWithScroll(
+//     String name, {
+//     Map<String, String> pathParameters = const <String, String>{},
+//     Map<String, dynamic> queryParameters = const <String, dynamic>{},
+//     Object? extra,
+//   }) {
+//     // if (read<ScrollCubit>().state.positions.isNotEmpty) {
+//     //   read<ScrollCubit>().scrollUp();
+//     // }
+//     // read<ScrollCubit>().initial();
+//     goNamed(
+//       name,
+//       pathParameters: pathParameters,
+//       queryParameters: queryParameters,
+//       extra: extra,
+//     );
+//   }
+// }

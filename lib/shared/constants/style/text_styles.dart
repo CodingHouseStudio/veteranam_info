@@ -310,6 +310,15 @@ abstract class AppTextStyle {
     fontWeight: FontWeight.w500,
     letterSpacing: 0.1,
   );
+  static const TextStyle materialThemeLabelLargeRef = TextStyle(
+    fontFamily: 'Gilroy',
+    fontSize: 14,
+    height: 1.43,
+    fontWeight: FontWeight.w500,
+    letterSpacing: 0.1,
+    decoration: TextDecoration.underline,
+    color: AppColors.materialThemeRefTertiaryTertiary40,
+  );
 
   /// materialThemeLabelMedium figma properties
   /// fontFamily: Gilroy

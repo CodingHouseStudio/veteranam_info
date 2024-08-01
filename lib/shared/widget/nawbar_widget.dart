@@ -123,7 +123,7 @@ class _NawbarWidgetImplematationState
                           Duration.zero,
                           () {
                             if (KTest.testIsWeb || !widget.showMobileNawbar) {
-                              context.goNamedWithScroll(KRoute.home.name);
+                              context.goNamed(KRoute.home.name);
                             }
                           },
                         ),

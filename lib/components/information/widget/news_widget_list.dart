@@ -21,9 +21,8 @@ List<Widget> _newsWidgetList({
                     isLiked: like,
                   ),
                 ),
-        onShare: () => context.read<UrlCubit>().share(
-              '${KRoute.home.path}${KRoute.information.path}/${modelItem.id}',
-            ),
+        share: '${KRoute.home.path}${KRoute.information.path}/${modelItem.id}',
+
         // () => context
         //     .read<InformationWatcherBloc>()
         //     .add(const InformationWatcherEvent.getReport()),

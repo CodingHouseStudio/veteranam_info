@@ -65,6 +65,11 @@ extension DiscountModelLocation on DiscountModel {
       '${KPlatformConstants.isWebDesktop ? '***' : '](tel:'
           // ignore: lines_longer_than_80_chars
           '${phoneNumber.replaceAll('(', '').replaceAll(')', '').replaceAll(' ', '')})'}';
+
+  List<String> getCityList(BuildContext context) => [
+        if (location != null) ...location!,
+        if (subLocation != null) ...subLocation!.getList(context),
+      ];
 }
 
 extension StringExtension on String {
