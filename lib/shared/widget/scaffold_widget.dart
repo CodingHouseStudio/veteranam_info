@@ -1,4 +1,3 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -95,7 +94,6 @@ class ScaffoldWidget extends StatelessWidget {
                       ),
             body: CustomScrollView(
               key: KWidgetkeys.widget.scaffold.scroll,
-              dragStartBehavior: DragStartBehavior.down,
               physics: KTest.scroll,
               slivers: [
                 SliverPersistentHeader(
