@@ -92,10 +92,10 @@ class AuthenticationBloc
     await _authenticationRepository.deleteUser();
   }
 
-  Future<void> _onAuthenticationInitialized(
+  void _onAuthenticationInitialized(
     AuthenticationInitialized event,
     Emitter<AuthenticationState> emit,
-  ) async {
+  ) {
     userSettingSubscription = _authenticationRepository.userSetting
         .listen((userSetting) => add(_AppUserSettingChanged(userSetting)));
     authenticationStatusSubscription = _authenticationRepository.status.listen(

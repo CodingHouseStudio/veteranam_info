@@ -38,9 +38,9 @@ class DiscountCardWatcherBloc
     }
     emit(state.copyWith(loadingStatus: LoadingStatus.loading));
 
-    final resault = await _discountRepository.getDiscount(event.id!);
+    final result = await _discountRepository.getDiscount(event.id!);
 
-    resault.fold(
+    result.fold(
       (l) => emit(
         state.copyWith(
           loadingStatus: LoadingStatus.error,

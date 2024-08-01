@@ -58,6 +58,7 @@ abstract class KGroupText {
   static const mockButton = 'Tap on the mock button';
   static const error = 'Error';
   static const failureNetwork = 'Failure Network';
+  static const stream = 'Stream';
 }
 
 abstract class KTestText {
@@ -415,8 +416,9 @@ abstract class KScreenBlocName {
   static const feedback = 'Feedback Screen';
 
   static const authenticationServices = 'Authentication Services';
-  static const appAuthentication = 'App Authentication';
+  static const appRepository = 'App';
   static const authentication = ' Authentication';
+  static const network = ' Network';
   static const firestoreService = 'Firestore Service';
   static const secureStorage = 'Secure Storage';
   static const filter = 'Filter';
