@@ -4,17 +4,17 @@ import 'package:get_it/get_it.dart';
 import 'package:veteranam/components/components.dart';
 import 'package:veteranam/shared/shared.dart';
 
-class DiscountNotificationListWidget extends StatefulWidget {
-  const DiscountNotificationListWidget({required this.isDesk, super.key});
+class DiscountNotificationWidget extends StatefulWidget {
+  const DiscountNotificationWidget({required this.isDesk, super.key});
   final bool isDesk;
 
   @override
-  State<DiscountNotificationListWidget> createState() =>
-      _DiscountNotificationListWidgetState();
+  State<DiscountNotificationWidget> createState() =>
+      _DiscountNotificationWidgetState();
 }
 
-class _DiscountNotificationListWidgetState
-    extends State<DiscountNotificationListWidget> {
+class _DiscountNotificationWidgetState
+    extends State<DiscountNotificationWidget> {
   late TextEditingController controller;
   @override
   void initState() {
@@ -63,5 +63,11 @@ class _DiscountNotificationListWidgetState
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
   }
 }
