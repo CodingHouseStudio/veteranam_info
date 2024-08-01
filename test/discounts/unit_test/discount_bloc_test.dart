@@ -472,5 +472,56 @@ void main() {
         ),
       ],
     );
+    blocTest<DiscountWatcherBloc, DiscountWatcherState>(
+      'emits [discountWatcherState()]'
+      ' when get report failure and load nex with listLoadedFull',
+      build: () => discountWatcherBloc,
+      act: (bloc) async {
+        when(
+          mockReportRepository.getCardReportById(
+            cardEnum: CardEnum.discount,
+            userId: KTestText.user.id,
+          ),
+        ).thenAnswer(
+          (invocation) async => const Left(SomeFailure.serverError()),
+        );
+        when(
+          mockdiscountRepository.getDiscountItems(),
+        ).thenAnswer(
+          (_) => Stream.value([KTestText.discountModelItemsModify.first]),
+        );
+        bloc.add(const DiscountWatcherEvent.started());
+        await expectLater(
+          bloc.stream,
+          emitsInOrder([
+            predicate<DiscountWatcherState>(
+              (state) => state.loadingStatus == LoadingStatus.loading,
+            ),
+            predicate<DiscountWatcherState>(
+              (state) => state.loadingStatus == LoadingStatus.listLoadedFull,
+            ),
+          ]),
+          reason: 'Wait loading data',
+        );
+        // bloc.add(
+        //   const DiscountWatcherEvent.loadNextItems(),
+        // );
+      },
+      expect: () => [
+        predicate<DiscountWatcherState>(
+          (state) => state.loadingStatus == LoadingStatus.loading,
+        ),
+        predicate<DiscountWatcherState>(
+          (state) =>
+              state.loadingStatus == LoadingStatus.listLoadedFull &&
+              state.filtersCategoriesIndex.isEmpty,
+        ),
+        // predicate<DiscountWatcherState>(
+        //   (state) =>
+        //       state.loadingStatus == LoadingStatus.listLoadedFull &&
+        //       state.itemsLoaded == 1,
+        // ),
+      ],
+    );
   });
 }

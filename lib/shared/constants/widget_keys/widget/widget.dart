@@ -41,4 +41,5 @@ class _WidgetKeys {
   final statisticBox = _StatisticBoxKeys();
   final reportDialog = _ReportDialogKeys();
   final notificationLink = _NotificationLinkKeys();
+  final cityList = _CityListKeys();
 }
