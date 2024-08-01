@@ -250,7 +250,7 @@ class DiscountWatcherBloc
       itemsLoaded: itemsLoaded,
       getFilter: (item) => [
         if (item.location != null) ...item.location!,
-        if (item.subLocation != null) ...item.subLocation._getList,
+        if (item.subLocation != null) ...item.subLocation!._getList,
       ],
       overallFilter: items._getLocationItems,
       loadItems: loadItems,

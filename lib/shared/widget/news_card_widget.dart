@@ -6,7 +6,7 @@ class NewsCardWidget extends StatelessWidget {
   const NewsCardWidget({
     required this.informationItem,
     required this.isDesk,
-    required this.onShare,
+    required this.share,
     this.onLikeChange,
     super.key,
     this.closeWidget,
@@ -18,7 +18,7 @@ class NewsCardWidget extends StatelessWidget {
   final void Function({required bool like})? onLikeChange;
   final Widget? closeWidget;
   final void Function()? afterReportEvent;
-  final void Function()? onShare;
+  final String? share;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class NewsCardWidget extends StatelessWidget {
       //   context.l10n.detail,
       //   context.l10n.hide,
       // ],
-      onShare: onShare,
+      share: share,
       buttonStyle: KButtonStyles.borderBlackButtonStyle,
       titleWidget: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,

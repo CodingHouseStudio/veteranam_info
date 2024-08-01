@@ -11,10 +11,10 @@ class _EmployeeRespondKeys {
   final phoneNumberField = const Key(
     'employee_respond_screen_phone_number_hint',
   );
-  final resume = const Key('employee_respond_screen_resume');
-  final upload = const Key('employee_respond_screen_upload');
+  final resumeText = const Key('employee_respond_screen_resume_text');
+  final resumeButton = const Key('employee_respond_screen_resume_button');
   final checkPoint = const Key('employee_respond_screen_check_point');
   // final noResume = const Key('employee_respond_screen_no_resume');
-  final send = const Key('employee_respond_screen_send');
-  final cancel = const Key('employee_respond_screen_cancel');
+  final sendButton = const Key('employee_respond_screen_send_button');
+  final cancelButton = const Key('employee_respond_screen_cancel_button');
 }

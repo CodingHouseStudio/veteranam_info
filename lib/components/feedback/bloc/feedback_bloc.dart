@@ -130,7 +130,7 @@ class FeedbackBloc extends Bloc<FeedbackEvent, FeedbackState> {
         FeedbackModel(
           id: ExtendedDateTime.id,
           guestId: _appAuthenticationRepository.currentUser.id,
-          guestName: state.name.value!,
+          guestName: state.name.value,
           email: state.email.value,
           timestamp: ExtendedDateTime.current,
           message: state.message.value,
