@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
@@ -55,6 +56,9 @@ import 'package:veteranam/shared/shared.dart';
     MockSpec<HttpHeaders>(),
     MockSpec<IReportRepository>(),
     MockSpec<IUrlRepository>(),
+    MockSpec<NetworkRepository>(),
+    MockSpec<IAppNetworkRepository>(),
+    MockSpec<Connectivity>(),
   ],
 )
 void load() => debugPrint('loaded');

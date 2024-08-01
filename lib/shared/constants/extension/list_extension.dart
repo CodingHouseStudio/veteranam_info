@@ -60,6 +60,23 @@ extension ListReportModelExtensions on List<ReportModel> {
       ).toList();
 }
 
+extension ListStringExtensions on List<String> {
+  String getCityList({
+    required bool showFullText,
+    required BuildContext context,
+  }) {
+    if (showFullText) {
+      return '$first [${context.l10n.moreCities(
+        length - 1,
+      )}]()';
+    } else {
+      return '${map(
+        (e) => '$e | ',
+      ).join()}[${context.l10n.hideExpansion}]()';
+    }
+  }
+}
+
 /// Extension providing utility methods for List<T>.
 extension ListExtensions<T> on List<T> {
   /// Method to get the list of loaded items.

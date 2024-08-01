@@ -123,7 +123,7 @@ class _NawbarWidgetImplematationState
                           Duration.zero,
                           () {
                             if (KTest.testIsWeb || !widget.showMobileNawbar) {
-                              context.goNamedWithScroll(KRoute.home.name);
+                              context.goNamed(KRoute.home.name);
                             }
                           },
                         ),
@@ -197,7 +197,7 @@ class _NawbarWidgetImplematationState
                             KSizedBox.kWidthSizedBox32,
                             _button(
                               ruoteName: KRoute.feedback.name,
-                              text: context.l10n.contact,
+                              text: context.l10n.contacts,
                               width: _isEnglish(context)
                                   ? KSize.kPixel62
                                   : KSize.kPixel80,

@@ -107,7 +107,7 @@ class ReportBloc extends Bloc<ReportEvent, ReportState> {
                 _appAuthenticationRepository.isAnonymously() ||
             (state.message == null || state.message!.isNotValid) &&
                 state.reasonComplaint == ReasonComplaint.other)) {
-      final resault = await _reportRepository.sendReport(
+      final result = await _reportRepository.sendReport(
         ReportModel(
           id: ExtendedDateTime.id,
           reasonComplaint: state.reasonComplaint!,
@@ -123,7 +123,7 @@ class ReportBloc extends Bloc<ReportEvent, ReportState> {
           cardId: state.cardId!,
         ),
       );
-      resault.fold(
+      result.fold(
         (l) => emit(
           state.copyWith(
             formState: ReportEnum.initial,

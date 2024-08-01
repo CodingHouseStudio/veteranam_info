@@ -8,7 +8,7 @@ class DiscountCardWidget extends StatelessWidget {
     required this.discountItem,
     required this.isDesk,
     required this.reportEvent,
-    required this.onShare,
+    required this.share,
     required this.isLoading,
     super.key,
     this.closeWidget,
@@ -19,13 +19,14 @@ class DiscountCardWidget extends StatelessWidget {
   final bool isDesk;
   final void Function()? reportEvent;
   final Widget? closeWidget;
-  final void Function()? onShare;
+  final String? share;
   final bool isLoading;
   final String Function(String)? descriptionMethod;
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      key: ValueKey(discountItem.id),
       decoration: KWidgetTheme.boxDecorationDiscountContainer,
       padding: const EdgeInsets.symmetric(
         vertical: KPadding.kPaddingSize16,
@@ -143,7 +144,7 @@ class DiscountCardWidget extends StatelessWidget {
                       ),
                       KSizedBox.kWidthSizedBox16,
                       Expanded(
-                        child: CityWidgetList(
+                        child: CityListWidget(
                           discountModel: discountItem,
                           isDesk: true,
                         ),
@@ -156,7 +157,7 @@ class DiscountCardWidget extends StatelessWidget {
                     expiration: discountItem.expiration,
                   ),
                   KSizedBox.kHeightSizedBox8,
-                  CityWidgetList(
+                  CityListWidget(
                     discountModel: discountItem,
                     isDesk: false,
                   ),
@@ -177,7 +178,7 @@ class DiscountCardWidget extends StatelessWidget {
                     cardEnum: CardEnum.discount,
                     afterEvent: reportEvent,
                     cardId: discountItem.id,
-                    onShare: onShare,
+                    share: share,
                     complaintKey: KWidgetkeys.widget.discountCard.iconComplaint,
                     shareKey: KWidgetkeys.widget.discountCard.iconShare,
                     webSiteKey: KWidgetkeys.widget.discountCard.iconWebsite,

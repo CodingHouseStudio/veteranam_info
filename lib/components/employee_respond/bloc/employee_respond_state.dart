@@ -1,6 +1,6 @@
 part of 'employee_respond_bloc.dart';
 
-enum EmployeeRespondFailure { none, error, initial }
+enum EmployeeRespondFailure { error }
 
 extension EmployeeRespondFailureExtension on SomeFailure {
   EmployeeRespondFailure toEmployeeRespond() {
@@ -16,14 +16,13 @@ class EmployeeRespondState with _$EmployeeRespondState {
     required ResumeFieldModel resume,
     required bool noResume,
     required EmployeeRespondEnum formState,
-    required EmployeeRespondFailure failure,
+    required EmployeeRespondFailure? failure,
   }) = _EmployeeRespondState;
 }
 
 enum EmployeeRespondEnum {
   initial,
-  clear,
-  sendingData,
+  inProgress,
   success,
   invalidData,
 }
