@@ -18,7 +18,7 @@ class WorkEmployeeBody extends StatelessWidget {
             .read<WorkEmployeeWatcherBloc>()
             .add(const WorkEmployeeWatcherEvent.started()),
       ),
-      builder: (context, _) => ScaffoldDecorationNetworkWidget(
+      builder: (context, _) => ScaffoldDecorationWidget(
         loadDataAgain: () => context
             .read<WorkEmployeeWatcherBloc>()
             .add(const WorkEmployeeWatcherEvent.started()),
