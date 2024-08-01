@@ -53,8 +53,8 @@ class DiscountLinkFormBloc
           link: const LinkFieldModel.pure(),
         ),
       );
-      final resault = await _discountRepository.sendLink(discountLinkFormModel);
-      resault.fold(
+      final result = await _discountRepository.sendLink(discountLinkFormModel);
+      result.fold(
         (l) => emit(
           state.copyWith(
             failure: l._toDiscountLinkForm(),

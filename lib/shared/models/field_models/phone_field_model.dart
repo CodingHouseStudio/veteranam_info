@@ -19,8 +19,8 @@ extension PhoneNumberFieldModelValidationErrorEmpl
 }
 
 class PhoneNumberFieldModel
-    extends FormzInput<String?, PhoneNumberFieldModelValidationError> {
-  const PhoneNumberFieldModel.pure() : super.pure(null);
+    extends FormzInput<String, PhoneNumberFieldModelValidationError> {
+  const PhoneNumberFieldModel.pure() : super.pure('');
 
   const PhoneNumberFieldModel.dirty([super.value = '']) : super.dirty();
 

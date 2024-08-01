@@ -1,3 +1,4 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -22,6 +23,9 @@ void configureDependenciesTest() {
   GetIt.I.registerSingleton<StorageService>(
     MockStorageService(),
   );
+  GetIt.I.registerSingleton<Connectivity>(
+    Connectivity(),
+  );
   // Repositories
   GetIt.I.registerLazySingleton<IStorage>(SecureStorageRepository.new);
   // GetIt.I.registerSingleton<IFeedbackRepository>(FeedbackRepository());
@@ -42,6 +46,17 @@ void configureDependenciesTest() {
   GetIt.I.registerSingleton<IDiscountRepository>(DiscountRepository());
   GetIt.I.registerSingleton<IReportRepository>(ReportRepository());
   GetIt.I.registerSingleton<IUrlRepository>(UrlRepository());
+  GetIt.I.registerSingleton<IAppNetworkRepository>(
+    AppNetworkRepository(
+      GetIt.I.get<Connectivity>(),
+      CacheClient(),
+    ),
+  );
+  GetIt.I.registerSingleton<NetworkRepository>(
+    NetworkRepository(
+      GetIt.I.get<IAppNetworkRepository>(),
+    ),
+  );
   // GetIt.I.registerSingleton<IInformationRepository>(InformationRepository());
   // GetIt.I.registerSingleton<IInvestorsRepository>(InvestorsRepository());
   // GetIt.I.registerSingleton<IWorkRepository>(WorkRepository());
@@ -104,6 +119,11 @@ void configureDependenciesTest() {
   GetIt.I.registerSingleton<UrlCubit>(
     UrlCubit(
       urlRepository: GetIt.I.get<IUrlRepository>(),
+    ),
+  );
+  GetIt.I.registerSingleton<NetworkCubit>(
+    NetworkCubit(
+      networkRepository: GetIt.I.get<NetworkRepository>(),
     ),
   );
   // GetIt.I.registerSingleton<MyDiscountsWatcherBloc>(

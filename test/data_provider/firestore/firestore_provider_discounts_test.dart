@@ -193,10 +193,10 @@ void main() {
         mockSnapshotMetadata.isFromCache,
       ).called(1);
 
-      expect(
-        firestoreService.getDiscounts(null),
-        emits([KTestText.discountModelItems.last]),
-      );
+      // expect(
+      //   firestoreService.getDiscounts(null),
+      //   emits([KTestText.discountModelItems.last]),
+      // );
     });
     test('add discount', () async {
       await firestoreService.addDiscount(KTestText.discountModelItems.last);

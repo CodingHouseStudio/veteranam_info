@@ -15,9 +15,8 @@ extension NameFieldModelValidationErrorEmpl on NameFieldModelValidationError? {
   }
 }
 
-class NameFieldModel
-    extends FormzInput<String?, NameFieldModelValidationError> {
-  const NameFieldModel.pure() : super.pure(null);
+class NameFieldModel extends FormzInput<String, NameFieldModelValidationError> {
+  const NameFieldModel.pure() : super.pure('');
 
   const NameFieldModel.dirty([super.value = '']) : super.dirty();
 

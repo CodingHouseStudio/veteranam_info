@@ -10,8 +10,8 @@ import '../../text_dependency.dart';
 
 void main() {
   group(
-      '${KScreenBlocName.appAuthentication} ${KGroupText.repository}'
-      ' ${KGroupText.failure}', () {
+      '${KScreenBlocName.appRepository} ${KScreenBlocName.authentication}'
+      ' ${KGroupText.repository} ${KGroupText.failure}', () {
     late AppAuthenticationRepository appAuthenticationRepository;
     late IStorage mockSecureStorageRepository;
     late firebase_auth.FirebaseAuth mockFirebaseAuth;

@@ -36,11 +36,16 @@ class DiscountCardWatcherBloc
       );
       return;
     }
-    emit(state.copyWith(loadingStatus: LoadingStatus.loading));
+    emit(
+      state.copyWith(
+        loadingStatus: LoadingStatus.loading,
+        failure: null,
+      ),
+    );
 
-    final resault = await _discountRepository.getDiscount(event.id!);
+    final result = await _discountRepository.getDiscount(event.id!);
 
-    resault.fold(
+    result.fold(
       (l) => emit(
         state.copyWith(
           loadingStatus: LoadingStatus.error,

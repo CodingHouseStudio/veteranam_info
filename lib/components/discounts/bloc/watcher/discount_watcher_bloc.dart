@@ -109,7 +109,7 @@ class DiscountWatcherBloc
     final (:list, :loadingStatus) = _filterLocation(
       itemsLoaded: KDimensions.loadItems,
       locationIndex: state.filtersLocationIndex,
-      list: categoryFilter,
+      modelList: categoryFilter,
     );
     emit(
       _Initial(
@@ -182,7 +182,7 @@ class DiscountWatcherBloc
     final (:list, :loadingStatus) = _filterLocation(
       itemsLoaded: state.itemsLoaded,
       locationIndex: state.filtersLocationIndex,
-      list: categoryItems,
+      modelList: categoryItems,
     );
 
     emit(
@@ -224,37 +224,32 @@ class DiscountWatcherBloc
   ({List<DiscountModel> list, LoadingStatus loadingStatus}) _filterLocation({
     required List<int>? locationIndex,
     required int itemsLoaded,
-    List<DiscountModel>? list,
+    List<DiscountModel>? modelList,
     int? loadItems,
   }) {
-    final items = list ?? state.categoryDiscountModelItems;
-
-    // Combine location filtering logic
-    final locationFiltered = items
-        .where(
-          (item) =>
-              locationIndex == null ||
-              !locationIndex.contains(1) ||
-              item.discount.contains(100),
-        )
-        .toList();
-
-    // Optimized sorting with null-aware conversion
-
-    final sortedItems =
-        _sorting(list: locationFiltered, locationIndex: locationIndex);
-
-    // Apply category and location filtering (chained)
-    return sortedItems.loadingFilterAndStatus(
+    final items = modelList ??
+        state.categoryDiscountModelItems
+            .where(
+              (item) =>
+                  locationIndex == null ||
+                  !locationIndex.contains(1) ||
+                  item.discount.contains(100),
+            )
+            .toList();
+    final (:list, :loadingStatus) = items.loadingFilterAndStatus(
       filtersIndex: locationIndex?.where((element) => element > 1).toList(),
       itemsLoaded: itemsLoaded,
       getFilter: (item) => [
         if (item.location != null) ...item.location!,
-        if (item.subLocation != null) ...item.subLocation._getList,
+        if (item.subLocation != null) ...item.subLocation!._getList,
       ],
       overallFilter: items._getLocationItems,
       loadItems: loadItems,
       containAnyItems: false,
+    );
+    return (
+      list: _sorting(list: list, locationIndex: locationIndex),
+      loadingStatus: loadingStatus,
     );
   }
 
