@@ -32,48 +32,8 @@ List<Widget> discountsWidgetList({
     if ((i + 1) % (KDimensions.loadItems * 3) == 0 &&
         context.read<DiscountWatcherBloc>().state.loadingStatus !=
             LoadingStatus.listLoadedFull) {
-      final controller = TextEditingController();
       finalList.add(
-        BlocProvider(
-          create: (context) => GetIt.I.get<DiscountLinkFormBloc>(),
-          child: BlocConsumer<DiscountLinkFormBloc, DiscountLinkFormState>(
-            listener: (context, state) {
-              if (state.formState == LinkEnum.sending) {
-                controller.clear();
-              }
-              if (state.formState == LinkEnum.success) {
-                context.read<DiscountLinkCubit>().started();
-              }
-            },
-            builder: (context, _) => NotificationLinkWidget(
-              onChanged: (text) => context.read<DiscountLinkFormBloc>().add(
-                    DiscountLinkFormEvent.updateLink(text),
-                  ),
-              isDesk: isDesk,
-              title: context.l10n.discountLinkTitle,
-              sendOnPressed: () => context.read<DiscountLinkFormBloc>().add(
-                    const DiscountLinkFormEvent.sendLink(),
-                  ),
-              fieldController: controller,
-              filedErrorText:
-                  context.read<DiscountLinkFormBloc>().state.formState ==
-                          LinkEnum.invalidData
-                      ? context
-                          .read<DiscountLinkFormBloc>()
-                          .state
-                          .link
-                          .error
-                          .value(context)
-                      : null,
-              enabled: context.read<DiscountLinkCubit>().state,
-              showThankText:
-                  context.read<DiscountLinkFormBloc>().state.formState ==
-                          LinkEnum.sending ||
-                      context.read<DiscountLinkFormBloc>().state.formState ==
-                          LinkEnum.success,
-            ),
-          ),
-        ),
+        DiscountNotificationWidget(isDesk: isDesk),
       );
     }
   }
