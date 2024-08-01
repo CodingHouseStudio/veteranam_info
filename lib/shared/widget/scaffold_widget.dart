@@ -202,7 +202,7 @@ class _ScaffoldWidget extends StatelessWidget {
                     ),
           body: CustomScrollView(
             key: KWidgetkeys.widget.scaffold.scroll,
-            dragStartBehavior: DragStartBehavior.down,
+            // dragStartBehavior: DragStartBehavior.down,
             physics: KTest.scroll,
             slivers: [
               SliverPersistentHeader(
