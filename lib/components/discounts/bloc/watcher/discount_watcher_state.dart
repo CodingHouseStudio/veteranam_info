@@ -21,16 +21,29 @@ class DiscountWatcherState with _$DiscountWatcherState {
 }
 
 extension LocationGetter on List<DiscountModel> {
-  List<FilterItem> get _getLocationItems => <FilterItem>[
-        FilterItem(''),
-        FilterItem(''),
+  List<FilterItem> get _getLocationItems {
+    final hasFullSublocation = any(
+      (discount) => discount.subLocation == SubLocation.all,
+    );
+    return <FilterItem>[
+      FilterItem(''),
+      FilterItem(''),
+      if (hasFullSublocation ||
+          any(
+            (discount) => discount.subLocation == SubLocation.allStoresOfChain,
+          ))
         FilterItem(SubLocation.allStoresOfChain),
+      if (hasFullSublocation ||
+          any(
+            (discount) => discount.subLocation == SubLocation.online,
+          ))
         FilterItem(SubLocation.online),
-        ...overallItems(
-          getFilter: (item) => item.location ?? [],
-          context: null,
-        ),
-      ];
+      ...overallItems(
+        getFilter: (item) => item.location ?? [],
+        context: null,
+      ),
+    ];
+  }
 }
 
 extension SubLocationString on SubLocation? {
