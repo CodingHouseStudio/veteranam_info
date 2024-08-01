@@ -166,7 +166,7 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
                       context.l10n.discounts == widget.pageName ? 0 : 1,
                   onTap: (i) => context.goNamed(route.elementAt(i)),
                 ),
-          body: CustomScrollView(
+          body: KeyboardScrollView(
             key: KWidgetkeys.widget.scaffold.scroll,
             physics: KTest.scroll,
             slivers: [
@@ -216,7 +216,8 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
             ],
             semanticChildCount:
                 mainChildWidget.length + (titleChildWidget?.length ?? 0) + 1,
-            controller: _scrollController,
+            scrollController:
+                KPlatformConstants.isWebDesktop ? null : _scrollController,
           ),
         );
         return KTest.testIsWeb ? scaffold : SafeArea(child: scaffold);

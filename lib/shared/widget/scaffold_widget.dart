@@ -200,7 +200,7 @@ class _ScaffoldWidget extends StatelessWidget {
                       currentIndex: 2,
                       onTap: (i) => context.goNamed(route.elementAt(i)),
                     ),
-          body: CustomScrollView(
+          body: KeyboardScrollView(
             key: KWidgetkeys.widget.scaffold.scroll,
             // dragStartBehavior: DragStartBehavior.down,
             physics: KTest.scroll,
