@@ -9,7 +9,7 @@ class ResumeFieldModel
     extends FormzInput<XFile?, ResumeFieldModelValidationError> {
   const ResumeFieldModel.pure() : super.pure(null);
 
-  const ResumeFieldModel.dirty([super.value]) : super.dirty();
+  const ResumeFieldModel.dirty(super.value) : super.dirty();
 
   @override
   ResumeFieldModelValidationError? validator(XFile? value) {
