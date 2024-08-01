@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:flutter/gestures.dart';
+// import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:veteranam/shared/shared.dart';
@@ -202,7 +202,7 @@ class _ScaffoldWidget extends StatelessWidget {
                     ),
           body: CustomScrollView(
             key: KWidgetkeys.widget.scaffold.scroll,
-            dragStartBehavior: DragStartBehavior.down,
+            // dragStartBehavior: DragStartBehavior.down,
             physics: KTest.scroll,
             slivers: [
               SliverPersistentHeader(
