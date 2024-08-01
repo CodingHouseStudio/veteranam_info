@@ -8,6 +8,7 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:connectivity_plus/connectivity_plus.dart' as _i895;
 import 'package:firebase_auth/firebase_auth.dart' as _i59;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:google_sign_in/google_sign_in.dart' as _i116;
@@ -49,6 +50,7 @@ import 'package:veteranam/shared/bloc/authentication/authentication_bloc.dart'
     as _i570;
 import 'package:veteranam/shared/bloc/authentication_services/authentication_services_cubit.dart'
     as _i209;
+import 'package:veteranam/shared/bloc/network/network_cubit.dart' as _i891;
 import 'package:veteranam/shared/bloc/report/report_bloc.dart' as _i765;
 import 'package:veteranam/shared/bloc/url/url_cubit.dart' as _i319;
 import 'package:veteranam/shared/data_provider/cache_provider.dart' as _i37;
@@ -57,6 +59,8 @@ import 'package:veteranam/shared/data_provider/firestore_provider.dart'
 import 'package:veteranam/shared/data_provider/storage_provider.dart' as _i99;
 import 'package:veteranam/shared/repositories/app_authentication_repository.dart'
     as _i99;
+import 'package:veteranam/shared/repositories/app_nerwork_repository.dart'
+    as _i336;
 import 'package:veteranam/shared/repositories/authentication_repository.dart'
     as _i208;
 import 'package:veteranam/shared/repositories/discount_repository.dart'
@@ -69,6 +73,8 @@ import 'package:veteranam/shared/repositories/information_repository.dart'
     as _i154;
 import 'package:veteranam/shared/repositories/investors_repository.dart'
     as _i994;
+import 'package:veteranam/shared/repositories/network_module.dart' as _i385;
+import 'package:veteranam/shared/repositories/network_repository.dart' as _i997;
 import 'package:veteranam/shared/repositories/report_repository.dart' as _i205;
 import 'package:veteranam/shared/repositories/secure_storage_repository.dart'
     as _i949;
@@ -89,11 +95,13 @@ extension GetItInjectableX on _i174.GetIt {
       environmentFilter,
     );
     final firebaseModule = _$FirebaseModule();
+    final networkModule = _$NetworkModule();
     gh.factory<_i37.CacheClient>(() => _i37.CacheClient());
     gh.singleton<_i1033.FirestoreService>(() => _i1033.FirestoreService());
     gh.singleton<_i99.StorageService>(() => _i99.StorageService());
     gh.singleton<_i59.FirebaseAuth>(() => firebaseModule.firebaseAuth);
     gh.singleton<_i116.GoogleSignIn>(() => firebaseModule.googleSignIn);
+    gh.singleton<_i895.Connectivity>(() => networkModule.connectivity);
     gh.singleton<_i1001.IDiscountRepository>(() => _i452.DiscountRepository());
     gh.singleton<_i1001.IFeedbackRepository>(() => _i361.FeedbackRepository());
     gh.singleton<_i1001.IUrlRepository>(() => _i929.UrlRepository());
@@ -120,6 +128,10 @@ extension GetItInjectableX on _i174.GetIt {
         _i763.StoryWatcherBloc(storyRepository: gh<_i1001.IStoryRepository>()));
     gh.factory<_i522.HomeWatcherBloc>(() =>
         _i522.HomeWatcherBloc(homeRepository: gh<_i1001.IHomeRepository>()));
+    gh.singleton<_i1001.IAppNetworkRepository>(() => _i336.AppNetworkRepository(
+          gh<_i895.Connectivity>(),
+          gh<_i1001.CacheClient>(),
+        ));
     gh.factory<_i319.UrlCubit>(
         () => _i319.UrlCubit(urlRepository: gh<_i1001.IUrlRepository>()));
     gh.factory<_i688.NewsCardWatcherBloc>(() => _i688.NewsCardWatcherBloc(
@@ -201,8 +213,14 @@ extension GetItInjectableX on _i174.GetIt {
           appAuthenticationRepository:
               gh<_i1001.IAppAuthenticationRepository>(),
         ));
+    gh.singleton<_i997.NetworkRepository>(
+        () => _i997.NetworkRepository(gh<_i1001.IAppNetworkRepository>()));
+    gh.singleton<_i891.NetworkCubit>(() =>
+        _i891.NetworkCubit(networkRepository: gh<_i1001.NetworkRepository>()));
     return this;
   }
 }
 
 class _$FirebaseModule extends _i926.FirebaseModule {}
+
+class _$NetworkModule extends _i385.NetworkModule {}

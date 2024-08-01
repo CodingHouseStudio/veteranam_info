@@ -26,6 +26,10 @@ class App extends StatelessWidget {
         BlocProvider(
           create: (context) => GetIt.I.get<UrlCubit>(),
         ),
+        BlocProvider(
+          create: (context) =>
+              GetIt.I.get<NetworkCubit>()..networkInitialized(),
+        ),
       ],
       child: const AppWidget(),
     );

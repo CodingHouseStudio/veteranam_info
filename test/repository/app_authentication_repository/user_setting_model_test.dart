@@ -4,8 +4,9 @@ import 'package:veteranam/shared/shared.dart';
 import '../../text_dependency.dart';
 
 void main() {
-  group('${KScreenBlocName.appAuthentication} ${KGroupText.model} User Setting',
-      () {
+  group(
+      '${KScreenBlocName.appRepository} ${KScreenBlocName.authentication}'
+      ' ${KGroupText.model} User Setting', () {
     test('check is Empty ', () {
       expect(
         KTestText.userSettingModel.isEmpty,
