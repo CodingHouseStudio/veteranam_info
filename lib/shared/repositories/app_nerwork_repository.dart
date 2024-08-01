@@ -5,8 +5,13 @@ import 'package:flutter/foundation.dart' show visibleForTesting;
 import 'package:injectable/injectable.dart';
 import 'package:veteranam/shared/shared.dart';
 
+/// A singleton class that implements the [IAppNetworkRepository] interface.
+/// This class is responsible for monitoring network connectivity and caching
+/// the results.
 @Singleton(as: IAppNetworkRepository)
 class AppNetworkRepository implements IAppNetworkRepository {
+  /// Constructor for [AppNetworkRepository].
+  /// Takes [Connectivity] and [CacheClient] as dependencies.
   AppNetworkRepository(
     this._connectivity,
     this._cache,
@@ -20,6 +25,9 @@ class AppNetworkRepository implements IAppNetworkRepository {
   @visibleForTesting
   static const connectivityCacheKey = '__connectivity_cache_key__';
 
+  /// A stream of [ConnectivityResult] which emits network connectivity changes.
+  /// Caches the results if they are not empty, otherwise returns
+  /// [ConnectivityResult.none].
   @override
   Stream<List<ConnectivityResult>> get connectivityResults =>
       _connectivity.onConnectivityChanged.map(
@@ -33,11 +41,15 @@ class AppNetworkRepository implements IAppNetworkRepository {
         },
       );
 
+  /// Retrieves the current [ConnectivityResult] from the cache.
+  /// If the cache is empty, returns [ConnectivityResult.none].
   @override
   List<ConnectivityResult> get currentConnectivityResults =>
       _cache.read<List<ConnectivityResult>>(key: connectivityCacheKey) ??
       [ConnectivityResult.none];
 
+  /// Updates the authentication status based on the cached connectivity
+  /// results.
   void _updateAuthStatusBasedOnCache() {
     // ignore: unused_local_variable
     final connectivityResults = currentConnectivityResults.isEmpty;
