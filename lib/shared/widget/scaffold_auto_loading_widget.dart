@@ -197,7 +197,8 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
                   padding: isDesk && widget.mainDeskPadding != null
                       ? padding.add(
                           widget.mainDeskPadding!(
-                              maxWidth: constraints.maxWidth,),
+                            maxWidth: constraints.maxWidth,
+                          ),
                         )
                       : padding,
                   sliver: widget.mainRightChildWidget != null && isDesk
