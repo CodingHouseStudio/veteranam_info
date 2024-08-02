@@ -214,6 +214,7 @@ abstract class KAppText {
   static const String usernameToken = 'USERNAME_TOKEN';
   static const String madeBy = '© Coding House Studio LLC - 2024';
   static const String email = 'hello@veteranam.info';
+  static const String emailScheme = 'mailto';
   static const String veteranamName = 'veteranam.info';
   static const String linkedIn = 'https://www.linkedin.com/company/veteranam/';
   static const String instagram = 'https://www.instagram.com/veteranam_info';

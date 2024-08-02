@@ -112,6 +112,16 @@ void main() {
       await incorrectSaveHelper(tester);
     });
 
+    testWidgets('Email tap', (tester) async {
+      await feedbackPumpAppHelper(
+        mockFeedbackRepository: mockFeedbackRepository,
+        tester: tester,
+        mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+      );
+
+      await feedbackEmailTapHelper(tester);
+    });
+
     // testWidgets('Feedback enter text and clear it', (tester) async {
     //   await feedbackPumpAppHelper(
     //     mockFeedbackRepository: mockFeedbackRepository,

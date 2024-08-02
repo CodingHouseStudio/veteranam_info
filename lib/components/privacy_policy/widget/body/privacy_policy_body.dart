@@ -49,9 +49,11 @@ class PrivacyPolicyBody extends StatelessWidget {
                       styleSheet: MarkdownStyleSheet(
                         a: AppTextStyle.materialThemeBodyLarge,
                       ),
-                      onTapLink: (text, href, title) => context
-                          .read<UrlCubit>()
-                          .launchUrl(url: text, scheme: 'mailto'),
+                      onTapLink: (text, href, title) =>
+                          context.read<UrlCubit>().launchUrl(
+                                url: text,
+                                scheme: KAppText.emailScheme,
+                              ),
                     ),
             );
           },

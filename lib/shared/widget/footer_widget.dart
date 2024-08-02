@@ -377,7 +377,7 @@ abstract class FooterWidget {
                 onTapLink: (text, href, title) =>
                     context.read<UrlCubit>().launchUrl(
                           url: text,
-                          scheme: 'mailto',
+                          scheme: KAppText.emailScheme,
                         ),
               ),
             ),

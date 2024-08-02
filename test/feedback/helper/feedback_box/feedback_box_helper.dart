@@ -1,7 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:veteranam/shared/shared.dart';
 
-import '../../text_dependency.dart';
+import '../../../text_dependency.dart';
+import '../helper.dart';
 
 Future<void> feedbackBoxHelper({
   required WidgetTester tester,
@@ -30,5 +31,18 @@ Future<void> feedbackBoxHelper({
 
   if (exist) {
     await boxHelper(tester);
+
+    await scrollingHelper(
+      tester: tester,
+      itemKey: KWidgetkeys.screen.feedback.boxButton,
+    );
+
+    await tester.tap(find.byKey(KWidgetkeys.screen.feedback.boxButton));
+
+    await tester.pumpAndSettle();
+
+    await scrollingHelper(tester: tester, offset: KTestConstants.scrollingUp);
+
+    await feedbackFormInitialHelper(tester);
   }
 }

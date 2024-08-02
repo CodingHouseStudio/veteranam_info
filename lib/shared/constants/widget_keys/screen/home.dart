@@ -11,6 +11,7 @@ class _HomeKeys {
   final discountsBox = const Key('home_screen_discounts_box');
   final workBox = const Key('home_screen_work_box');
   final investorsBox = const Key('home_screen_investors_box');
+  final feedbackBox = const Key('home_screen_feedback_box');
   final storyBox = const Key('home_screen_story_box');
   final informationBox = const Key('home_screen_information_box');
   final aboutProjecPrefix = const Key('home_screen_about_project_title');

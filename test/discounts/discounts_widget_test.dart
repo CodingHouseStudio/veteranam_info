@@ -301,6 +301,22 @@ void main() {
               mockGoRouter: mockGoRouter,
             );
           });
+          testWidgets('Dialog pop to ${KRoute.discounts.name} ',
+              (tester) async {
+            await discountsPumpAppHelper(
+              tester: tester,
+              mockDiscountRepository: mockDiscountRepository,
+              mockGoRouter: mockGoRouter,
+              mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+              mockReportRepository: mockReportRepository,
+              mockAuthenticationRepository: mockAuthenticationRepository,
+            );
+
+            await advancedFilterAppliedHelper(
+              tester: tester,
+              mockGoRouter: mockGoRouter,
+            );
+          });
         });
       });
     });

@@ -276,7 +276,6 @@ class InformationWatcherBloc
       (l) => emit(
         state.copyWith(
           failure: InformationFailure.error,
-          loadingStatus: LoadingStatus.error,
         ),
       ),
       (r) => emit(

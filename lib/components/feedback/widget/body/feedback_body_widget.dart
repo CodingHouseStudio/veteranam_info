@@ -33,7 +33,7 @@ class _FeedbackBodyWidgetState extends State<FeedbackBodyWidget> {
   Widget build(BuildContext context) {
     return BlocConsumer<FeedbackBloc, FeedbackState>(
       listener: (context, state) {
-        if (state.formState == FeedbackEnum.clear) {
+        if (state.formState == FeedbackEnum.initial) {
           nameController.clear();
           emailController.clear();
           messageController.clear();
