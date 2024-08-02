@@ -33,6 +33,7 @@ Future<void> discountsPumpAppHelper({
     mockDiscountRepository: mockDiscountRepository,
     mockAppAuthenticationRepository: mockAppAuthenticationRepository,
   );
+  _registerAdvancedFilterMobCubit();
   await tester.pumpApp(const DiscountsScreen(), mockGoRouter: mockGoRouter);
 
   expect(
@@ -111,4 +112,12 @@ void _registerDiscountLinkCubit({
     GetIt.I.unregister<DiscountLinkCubit>();
   }
   GetIt.I.registerSingleton<DiscountLinkCubit>(authenticationBloc);
+}
+
+void _registerAdvancedFilterMobCubit() {
+  final advancedFilterMobCubit = AdvancedFilterMobCubit();
+  if (GetIt.I.isRegistered<AdvancedFilterMobCubit>()) {
+    GetIt.I.unregister<AdvancedFilterMobCubit>();
+  }
+  GetIt.I.registerSingleton<AdvancedFilterMobCubit>(advancedFilterMobCubit);
 }
