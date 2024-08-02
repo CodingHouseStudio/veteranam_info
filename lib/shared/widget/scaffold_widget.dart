@@ -71,27 +71,33 @@ class ScaffoldWidget extends StatelessWidget {
             KRoute.home.name,
           ];
           final scaffold = Scaffold(
-            bottomNavigationBar:
-                KTest.testIsWeb || !(showMobBottomNavigation ?? true)
-                    ? null
-                    : BottomNavigationBar(
-                        items: <BottomNavigationBarItem>[
-                          BottomNavigationBarItem(
-                            icon: KIcon.tag.copyWith(fill: 1),
-                            label: context.l10n.discounts,
-                          ),
-                          BottomNavigationBarItem(
-                            icon: KIcon.investors.copyWith(fill: 1),
-                            label: context.l10n.investors,
-                          ),
-                          BottomNavigationBarItem(
-                            icon: KIcon.settings.copyWith(fill: 1),
-                            label: context.l10n.settings,
-                          ),
-                        ],
-                        currentIndex: 2,
-                        onTap: (i) => context.goNamed(route.elementAt(i)),
-                      ),
+            bottomNavigationBar: KTest.testIsWeb ||
+                    !(showMobBottomNavigation ?? true)
+                ? null
+                : SizedBox(
+                    height: 60,
+                    child: BottomNavigationBar(
+                      items: <BottomNavigationBarItem>[
+                        BottomNavigationBarItem(
+                          icon: KIcon.tag,
+                          label: context.l10n.discounts,
+                        ),
+                        BottomNavigationBarItem(
+                          icon: KIcon.briefcase,
+                          label: context.l10n.investors,
+                        ),
+                        BottomNavigationBarItem(
+                          icon: KIcon.settings,
+                          label: context.l10n.settings,
+                        ),
+                      ],
+                      unselectedLabelStyle:
+                          AppTextStyle.materialThemeLabelSmall,
+                      selectedLabelStyle: AppTextStyle.materialThemeLabelSmall,
+                      currentIndex: 2,
+                      onTap: (i) => context.goNamed(route.elementAt(i)),
+                    ),
+                  ),
             body: CustomScrollView(
               key: KWidgetkeys.widget.scaffold.scroll,
               physics: KTest.scroll,

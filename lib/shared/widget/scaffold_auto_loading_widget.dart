@@ -149,24 +149,30 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
           final scaffold = Scaffold(
             bottomNavigationBar: KTest.testIsWeb
                 ? null
-                : BottomNavigationBar(
-                    items: <BottomNavigationBarItem>[
-                      BottomNavigationBarItem(
-                        icon: KIcon.tag.copyWith(fill: 1),
-                        label: context.l10n.discounts,
-                      ),
-                      BottomNavigationBarItem(
-                        icon: KIcon.investors.copyWith(fill: 1),
-                        label: context.l10n.investors,
-                      ),
-                      BottomNavigationBarItem(
-                        icon: KIcon.settings.copyWith(fill: 1),
-                        label: context.l10n.settings,
-                      ),
-                    ],
-                    currentIndex:
-                        context.l10n.discounts == widget.pageName ? 0 : 1,
-                    onTap: (i) => context.goNamed(route.elementAt(i)),
+                : SizedBox(
+                    height: 60,
+                    child: BottomNavigationBar(
+                      items: <BottomNavigationBarItem>[
+                        BottomNavigationBarItem(
+                          icon: KIcon.tag,
+                          label: context.l10n.discounts,
+                        ),
+                        BottomNavigationBarItem(
+                          icon: KIcon.briefcase,
+                          label: context.l10n.investors,
+                        ),
+                        BottomNavigationBarItem(
+                          icon: KIcon.settings,
+                          label: context.l10n.settings,
+                        ),
+                      ],
+                      unselectedLabelStyle:
+                          AppTextStyle.materialThemeLabelSmall,
+                      selectedLabelStyle: AppTextStyle.materialThemeLabelSmall,
+                      currentIndex:
+                          context.l10n.discounts == widget.pageName ? 0 : 1,
+                      onTap: (i) => context.goNamed(route.elementAt(i)),
+                    ),
                   ),
             body: CustomScrollView(
               key: KWidgetkeys.widget.scaffold.scroll,
