@@ -98,11 +98,11 @@ extension GetItInjectableX on _i174.GetIt {
     );
     final firebaseModule = _$FirebaseModule();
     final networkModule = _$NetworkModule();
+    gh.factory<_i37.CacheClient>(() => _i37.CacheClient());
     gh.factory<_i1017.AdvancedFilterMobCubit>(
         () => _i1017.AdvancedFilterMobCubit());
-    gh.factory<_i37.CacheClient>(() => _i37.CacheClient());
-    gh.singleton<_i1033.FirestoreService>(() => _i1033.FirestoreService());
     gh.singleton<_i99.StorageService>(() => _i99.StorageService());
+    gh.singleton<_i1033.FirestoreService>(() => _i1033.FirestoreService());
     gh.singleton<_i59.FirebaseAuth>(() => firebaseModule.firebaseAuth);
     gh.singleton<_i116.GoogleSignIn>(() => firebaseModule.googleSignIn);
     gh.singleton<_i895.Connectivity>(() => networkModule.connectivity);
