@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class KeyboardScrollView extends StatefulWidget {
   const KeyboardScrollView({
@@ -20,18 +21,15 @@ class KeyboardScrollView extends StatefulWidget {
 
 class KeyboardScrollViewState extends State<KeyboardScrollView> {
   late ScrollController _controller;
-  late FocusNode _focusNode;
 
   @override
   void initState() {
-    _focusNode = FocusNode();
     _controller = widget.scrollController ?? ScrollController();
     super.initState();
   }
 
   @override
   void dispose() {
-    _focusNode.dispose();
     if (widget.scrollController == null) {
       _controller.dispose();
     }
@@ -40,28 +38,61 @@ class KeyboardScrollViewState extends State<KeyboardScrollView> {
 
   @override
   Widget build(BuildContext context) {
-    return KeyboardListener(
+    return Focus(
       autofocus: true,
-      focusNode: _focusNode,
-      onKeyEvent: (value) {
-        if (_controller.position.outOfRange) {
-          return;
+      onKeyEvent: (FocusNode node, KeyEvent event) {
+        if (event is KeyDownEvent) {
+          final offset = _controller.offset;
+
+          switch (event.physicalKey) {
+            case PhysicalKeyboardKey.arrowDown:
+              _controller.animateTo(
+                offset + 100,
+                duration: const Duration(milliseconds: 200),
+                curve: Curves.linear,
+              );
+            case PhysicalKeyboardKey.arrowUp:
+              _controller.animateTo(
+                offset - 100,
+                duration: const Duration(milliseconds: 200),
+                curve: Curves.linear,
+              );
+            case PhysicalKeyboardKey.pageDown:
+              _controller.animateTo(
+                offset + 600,
+                duration: const Duration(milliseconds: 200),
+                curve: Curves.linear,
+              );
+            case PhysicalKeyboardKey.pageUp:
+              _controller.animateTo(
+                offset - 600,
+                duration: const Duration(milliseconds: 200),
+                curve: Curves.linear,
+              );
+            case PhysicalKeyboardKey.space:
+              _controller.animateTo(
+                offset + 600,
+                duration: const Duration(milliseconds: 200),
+                curve: Curves.linear,
+              );
+            case PhysicalKeyboardKey.home:
+              _controller.animateTo(
+                0,
+                duration: const Duration(milliseconds: 200),
+                curve: Curves.linear,
+              );
+            case PhysicalKeyboardKey.end:
+              _controller.animateTo(
+                _controller.position.maxScrollExtent,
+                duration: const Duration(milliseconds: 200),
+                curve: Curves.linear,
+              );
+            default:
+              return KeyEventResult.ignored;
+          }
+          return KeyEventResult.handled;
         }
-        final offset = _controller.offset;
-        if (value.physicalKey.debugName == 'Arrow Down') {
-          _controller.animateTo(
-            offset + 100,
-            duration: const Duration(milliseconds: 200),
-            curve: Curves.linear,
-          );
-        }
-        if (value.physicalKey.debugName == 'Arrow Up') {
-          _controller.animateTo(
-            offset - 100,
-            duration: const Duration(milliseconds: 200),
-            curve: Curves.linear,
-          );
-        }
+        return KeyEventResult.ignored;
       },
       child: CustomScrollView(
         controller: _controller,

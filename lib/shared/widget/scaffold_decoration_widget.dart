@@ -57,7 +57,7 @@ class ScaffoldDecorationWidget extends StatelessWidget {
           //   isDesk: isDesk,
           // );
           return Scaffold(
-            body: (!KTest.testIsWeb)
+            body: (!KPlatformConstants.isWebDesktop)
                 ? CustomScrollView(
                     key: KWidgetkeys.widget.scaffold.scroll,
                     slivers: [

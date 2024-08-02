@@ -92,7 +92,7 @@ class ScaffoldWidget extends StatelessWidget {
                         currentIndex: 2,
                         onTap: (i) => context.goNamed(route.elementAt(i)),
                       ),
-            body: (!KTest.testIsWeb)
+            body: (!KPlatformConstants.isWebDesktop)
                 ? CustomScrollView(
                     key: KWidgetkeys.widget.scaffold.scroll,
                     physics: KTest.scroll,

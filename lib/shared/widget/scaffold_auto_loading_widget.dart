@@ -168,7 +168,7 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
                         context.l10n.discounts == widget.pageName ? 0 : 1,
                     onTap: (i) => context.goNamed(route.elementAt(i)),
                   ),
-            body: (!KTest.testIsWeb)
+            body: (!KPlatformConstants.isWebDesktop)
                 ? CustomScrollView(
                     key: KWidgetkeys.widget.scaffold.scroll,
                     physics: KTest.scroll,
