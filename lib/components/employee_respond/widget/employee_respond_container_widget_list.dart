@@ -31,6 +31,7 @@ List<Widget> _employeeRespondContainerWidgetList({
               EmployeeRespondEnum.invalidData
           ? context.read<EmployeeRespondBloc>().state.email.error.value(context)
           : null,
+      inputFormatterList: [EmailInputFormatter()],
     ),
     if (isDesk) KSizedBox.kHeightSizedBox32 else KSizedBox.kHeightSizedBox16,
     Padding(
