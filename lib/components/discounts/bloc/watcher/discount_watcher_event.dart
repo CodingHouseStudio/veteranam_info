@@ -18,6 +18,10 @@ class DiscountWatcherEvent with _$DiscountWatcherEvent {
     int filterIndex,
   ) = _FilterLocation;
 
+  const factory DiscountWatcherEvent.filterLocations(
+    List<int> filterListIndex,
+  ) = _FilterLocations;
+
   const factory DiscountWatcherEvent.filterReset() = _FilterReset;
 
   const factory DiscountWatcherEvent.failure(dynamic failure) = _Failure;

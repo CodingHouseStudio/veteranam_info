@@ -992,6 +992,10 @@
   "@linkFailure": {
     "examples": "an error message when trying to follow a link."
   },
+  "apply": "Apply",
+  "@apply": {
+    "examples": "Text for the button in the AdvancedFilter dialog for the mobile version"
+  },
   "moreCities": "{count} more..",
   "@moreCities": {
     "placeholders": {
