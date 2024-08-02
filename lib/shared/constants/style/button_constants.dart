@@ -306,8 +306,8 @@ abstract class KButtonStyles {
   static const borderBlackButtonStyle = ButtonStyle(
     padding: WidgetStatePropertyAll(
       EdgeInsets.symmetric(
-        vertical: KPadding.kPaddingSize8,
-        horizontal: KPadding.kPaddingSize24,
+        vertical: KPadding.kPaddingSize4,
+        horizontal: KPadding.kPaddingSize16,
       ),
     ),
     shape: WidgetStatePropertyAll(

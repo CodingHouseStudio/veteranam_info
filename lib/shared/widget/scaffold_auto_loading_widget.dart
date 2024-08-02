@@ -171,7 +171,7 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
             body: (!KPlatformConstants.isWebDesktop)
                 ? CustomScrollView(
                     key: KWidgetkeys.widget.scaffold.scroll,
-                    physics: KTest.scroll,
+                    // physics: KTest.scroll,
                     slivers: [
                       if (KTest.testIsWeb || widget.pageName != null)
                         SliverPersistentHeader(
@@ -226,7 +226,7 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
                   )
                 : KeyboardScrollView(
                     key: KWidgetkeys.widget.scaffold.scroll,
-                    physics: KTest.scroll,
+                    // physics: KTest.scroll,
                     slivers: [
                       if (KTest.testIsWeb || widget.pageName != null)
                         SliverPersistentHeader(

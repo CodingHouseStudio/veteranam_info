@@ -13,15 +13,19 @@ class _DiscountsKeys {
   final addDiscountButton = const Key('discount_add_discount_button');
   final titlePoint = const Key('discount_title_point');
   final advancedFilter = const Key('discounts_screen_advanced_filter');
+  final advancedFilterDialog =
+      const Key('discounts_screen_advanced_filter_dialog');
   final advancedFilterList = const Key('discounts_screen_advanced_filter_list');
   final advancedFilterResetButton =
       const Key('discounts_screen_advanced_filter_reset_button');
+  final advancedFilterMobAppliedButton =
+      const Key('discounts_screen_advanced_filter_mob_applied_button');
   final advancedFilterButton =
       const Key('discounts_screen_advanced_filter_button');
-  // final advancedFilterButtonIcon =
-  //     const Key('discounts_screen_advanced_filter_button_icon');
-  // final advancedFilterButtonIconUp =
-  //     const Key('discounts_screen_advanced_filter_button_icon_up');
+  final advancedFilterButtonIcon =
+      const Key('discounts_screen_advanced_filter_button_icon');
+  final advancedFilterButtonIconUp =
+      const Key('discounts_screen_advanced_filter_button_icon_up');
   final appliedFilterText = const Key('discounts_screen_applied_filter_text');
   final appliedFilterItems = const Key('discounts_screen_applied_filter_items');
   final discountText = const Key('discounts_screen_discountText');
@@ -29,5 +33,5 @@ class _DiscountsKeys {
   final cityText = const Key('discounts_screen_city_text');
   final cityItems = const Key('discounts_screen_city_items');
   // final cancelIcon = const Key('discounts_screen_cancel_icon');
-  final cancelText = const Key('discounts_screen_cancel_text');
+  // final cancelText = const Key('discounts_screen_cancel_text');
 }
