@@ -61,7 +61,7 @@ Future<void> employeeRespondInitialHelper(
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.employeeRespond.checkPoint),
+        find.byKey(KWidgetkeys.screen.employeeRespond.checkWithoutResume),
         findsOneWidget,
       );
 

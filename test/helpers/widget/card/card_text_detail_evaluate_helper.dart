@@ -50,6 +50,21 @@ Future<void> cardTextDetailEvaluateHelper(
     find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconLike).first,
   );
 
+  await tester.tap(
+    find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconLike).first,
+  );
+
+  await tester.pumpAndSettle(const Duration(seconds: 6));
+
+  expect(
+    find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconActiveLike),
+    findsNothing,
+  );
+
+  await tester.tap(
+    find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconLike).first,
+  );
+
   await tester.pumpAndSettle(const Duration(seconds: 6));
 
   expect(
