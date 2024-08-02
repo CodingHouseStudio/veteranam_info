@@ -145,14 +145,14 @@ void main() {
           (state) => state.loadingStatus == LoadingStatus.loaded,
         ),
         predicate<StoryWatcherState>(
-          (state) => state.loadingStatus == LoadingStatus.loading,
-        ),
-        predicate<StoryWatcherState>(
           (state) => state.loadingStatus == LoadingStatus.listLoadedFull,
-          // &&
-          // state.loadingStoryModelItems.length != KDimensions.loadItems &&
-          // state.itemsLoaded != KDimensions.loadItems,
         ),
+        // predicate<StoryWatcherState>(
+        //   (state) => state.loadingStatus == LoadingStatus.listLoadedFull,
+        // &&
+        // state.loadingStoryModelItems.length != KDimensions.loadItems &&
+        // state.itemsLoaded != KDimensions.loadItems,
+        // ),
       ],
     );
 
