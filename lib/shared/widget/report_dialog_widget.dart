@@ -85,6 +85,7 @@ class ReportDialogWidget extends StatelessWidget {
                         context.l10n.fieldCannotBeEmpty
                     : null,
                 text: context.read<AuthenticationBloc>().state.user?.email,
+                inputFormatterList: [EmailInputFormatter()],
               ),
               KSizedBox.kHeightSizedBox16,
               MessageFieldWidget(
