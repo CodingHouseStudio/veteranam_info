@@ -1,4 +1,5 @@
 import 'package:email_validator/email_validator.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:formz/formz.dart';
 import 'package:veteranam/shared/shared.dart';
@@ -65,6 +66,21 @@ class EmailFieldModel
     }
 
     return null;
+  }
+}
+
+class EmailInputFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(
+    TextEditingValue oldValue,
+    TextEditingValue newValue,
+  ) {
+    // delete all spaces
+    final newText = newValue.text.replaceAll(RegExp(r'\s+'), '');
+    return TextEditingValue(
+      text: newText,
+      selection: newValue.selection,
+    );
   }
 }
 
