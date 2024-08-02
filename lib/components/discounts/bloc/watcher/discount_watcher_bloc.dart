@@ -207,22 +207,29 @@ class DiscountWatcherBloc
       largerNumber: 3,
     );
 
-    add(DiscountWatcherEvent.filterLocations(selectedFilters));
+    _filterLocations(emit: emit, selectedFilters: selectedFilters);
   }
 
   void _onFilterLocations(
     _FilterLocations event,
     Emitter<DiscountWatcherState> emit,
   ) {
+    _filterLocations(emit: emit, selectedFilters: event.filterListIndex);
+  }
+
+  void _filterLocations({
+    required Emitter<DiscountWatcherState> emit,
+    required List<int> selectedFilters,
+  }) {
     final (:list, :loadingStatus) = _filterLocation(
-      locationIndex: event.filterListIndex,
+      locationIndex: selectedFilters,
       itemsLoaded: state.itemsLoaded,
     );
 
     emit(
       state.copyWith(
         filteredDiscountModelItems: list,
-        filtersLocationIndex: event.filterListIndex,
+        filtersLocationIndex: selectedFilters,
         itemsLoaded: state.itemsLoaded.getLoaded(list: list),
         loadingStatus: loadingStatus,
       ),
