@@ -35,6 +35,7 @@ export 'footer_widget.dart';
 export 'get_error_dialog_widget.dart';
 export 'icon_button_widget.dart';
 export 'icon_widget.dart';
+export 'keyboard_scroll_view.dart';
 export 'languages_switcher_widget.dart';
 export 'left_card_widget.dart';
 export 'loading_button.dart';

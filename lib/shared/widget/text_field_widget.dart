@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:veteranam/shared/shared.dart';
 
 class TextFieldWidget extends StatefulWidget {
@@ -35,6 +36,7 @@ class TextFieldWidget extends StatefulWidget {
     this.hintStyle,
     this.text,
     this.suffixIconPadding,
+    this.inputFormatterList,
   });
   final Key widgetKey;
   final TextAlign? textAlign;
@@ -67,6 +69,7 @@ class TextFieldWidget extends StatefulWidget {
   final bool isDesk;
   final String? text;
   final double? suffixIconPadding;
+  final List<TextInputFormatter>? inputFormatterList;
 
   @override
   State<TextFieldWidget> createState() => _TextFieldWidgetState();
@@ -116,6 +119,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
         textAlign: widget.textAlign ?? TextAlign.start,
         style: AppTextStyle.materialThemeTitleMedium,
         // context.theme.textTheme.headlineSmall,
+        inputFormatters: widget.inputFormatterList,
         onChanged: widget.onChanged,
         decoration: KWidgetTheme.inputDecoration.copyWith(
           hintStyle: widget.hintStyle,
