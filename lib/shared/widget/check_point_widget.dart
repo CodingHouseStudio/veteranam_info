@@ -91,8 +91,10 @@ class CheckPointAmountWidget extends StatelessWidget {
           key: KWidgetkeys.widget.checkPoint.ammount,
           background: isCheck
               ? AppColors.materialThemeKeyColorsSecondary
-              : AppColors.materialThemeRefNeutralVariantNeutralVariant40,
-          textColor: AppColors.materialThemeKeyColorsNeutral,
+              : AppColors.materialThemeKeyColorsNeutral,
+          textColor: isCheck
+              ? AppColors.materialThemeKeyColorsNeutral
+              : AppColors.materialThemeKeyColorsSecondary,
           number: filterItem.number,
           padding: const EdgeInsets.symmetric(
             horizontal: KPadding.kPaddingSize8,
