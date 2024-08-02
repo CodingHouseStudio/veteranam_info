@@ -110,7 +110,7 @@ List<Widget> _employeeRespondContainerWidgetList({
     //       ),
     //       child:
     CheckPointWidget(
-      key: KWidgetkeys.screen.employeeRespond.checkPoint,
+      key: KWidgetkeys.screen.employeeRespond.checkWithoutResume,
       isCheck: context.read<EmployeeRespondBloc>().state.noResume,
       onChanged: () => context.read<EmployeeRespondBloc>().add(
             const EmployeeRespondEvent.noResumeChanged(),

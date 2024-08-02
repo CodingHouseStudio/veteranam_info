@@ -129,6 +129,11 @@ Future<void> advancedFilterHelper(
       find.byKey(KWidgetkeys.screen.discounts.advancedFilterDialog),
       findsOneWidget,
     );
+
+    expect(
+      find.byKey(KWidgetkeys.screen.discounts.advancedFilterMobAppliedButton),
+      findsOneWidget,
+    );
   } else {
     expect(
       find.byKey(KWidgetkeys.screen.discounts.advancedFilterButtonIcon),

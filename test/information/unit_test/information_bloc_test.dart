@@ -402,7 +402,7 @@ void main() {
     // );
 
     blocTest<InformationWatcherBloc, InformationWatcherState>(
-      'emits [InformationWatcherState()] ',
+      'emits [InformationWatcherState()] whene like',
       build: () => informationWatcherBloc,
       act: (bloc) async => bloc
         ..add(const InformationWatcherEvent.started())
@@ -423,7 +423,7 @@ void main() {
     );
 
     blocTest<InformationWatcherBloc, InformationWatcherState>(
-      'emits [InformationWatcherState()] ',
+      'emits [InformationWatcherState()] when change link',
       build: () => informationWatcherBloc,
       act: (bloc) async => bloc
         ..add(const InformationWatcherEvent.started())
@@ -441,7 +441,55 @@ void main() {
           (state) => state.loadingStatus == LoadingStatus.loaded,
         ),
         predicate<InformationWatcherState>(
-          (state) => state.loadingStatus == LoadingStatus.loaded,
+          (state) =>
+              state.loadingStatus == LoadingStatus.loaded &&
+              state.failure == null,
+        ),
+      ],
+    );
+    blocTest<InformationWatcherBloc, InformationWatcherState>(
+      'emits [InformationWatcherState()]'
+      ' when get report failure and load nex with listLoadedFull',
+      build: () => informationWatcherBloc,
+      act: (bloc) async {
+        when(
+          mockReportRepository.getCardReportById(
+            cardEnum: CardEnum.information,
+            userId: KTestText.user.id,
+          ),
+        ).thenAnswer(
+          (invocation) async => const Left(SomeFailure.serverError()),
+        );
+        when(
+          mockInformationRepository.getInformationItems(),
+        ).thenAnswer(
+          (_) => Stream.value([KTestText.informationModelItemsModify.first]),
+        );
+        bloc.add(const InformationWatcherEvent.started());
+        await expectLater(
+          bloc.stream,
+          emitsInOrder([
+            predicate<InformationWatcherState>(
+              (state) => state.loadingStatus == LoadingStatus.loading,
+            ),
+            predicate<InformationWatcherState>(
+              (state) => state.loadingStatus == LoadingStatus.listLoadedFull,
+            ),
+          ]),
+          reason: 'Wait loading data',
+        );
+        bloc.add(
+          const InformationWatcherEvent.loadNextItems(),
+        );
+      },
+      expect: () => [
+        predicate<InformationWatcherState>(
+          (state) => state.loadingStatus == LoadingStatus.loading,
+        ),
+        predicate<InformationWatcherState>(
+          (state) =>
+              state.loadingStatus == LoadingStatus.listLoadedFull &&
+              state.filtersIndex.isEmpty,
         ),
       ],
     );

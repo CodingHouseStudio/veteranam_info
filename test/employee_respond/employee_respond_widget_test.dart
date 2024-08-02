@@ -34,6 +34,12 @@ void main() {
 
       when(mockWorkRepository.sendRespond(KTestText.employeeRespondModel))
           .thenAnswer((invocation) async => const Right(true));
+
+      when(
+        mockWorkRepository.sendRespond(
+          KTestText.employeeRespondWithoudResumeModel,
+        ),
+      ).thenAnswer((invocation) async => const Right(true));
     });
     testWidgets('${KGroupText.intial} ', (tester) async {
       await employeeRespondPumpAppHelper(
@@ -59,6 +65,14 @@ void main() {
 
       await formCorrectSendHelper(tester);
     });
+    testWidgets('Fill Form Without Resume Send', (tester) async {
+      await employeeRespondPumpAppHelper(
+        tester: tester,
+        mockWorkRepository: mockWorkRepository,
+      );
+
+      await formWithoundResumeSendHelper(tester);
+    });
     group('${KGroupText.goRouter} ', () {
       late MockGoRouter mockGoRouter;
       setUp(() => mockGoRouter = MockGoRouter());
@@ -71,7 +85,7 @@ void main() {
         await employeeRespondInitialHelper(tester);
       });
       group('${KGroupText.goTo} ', () {
-        testWidgets('Cancel', (tester) async {
+        testWidgets('${KRoute.workEmployee.name} ', (tester) async {
           await employeeRespondPumpAppHelper(
             tester: tester,
             mockGoRouter: mockGoRouter,

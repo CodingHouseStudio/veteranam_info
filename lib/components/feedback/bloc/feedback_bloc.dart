@@ -29,7 +29,7 @@ class FeedbackBloc extends Bloc<FeedbackEvent, FeedbackState> {
     on<_EmailUpdated>(_onEmailUpdated);
     on<_MessageUpdated>(_onMessageUpdated);
     on<_Save>(_onSave);
-    on<_Clear>(_onClear);
+    // on<_Clear>(_onClear);
     on<_SendignMessageAgain>(_onSendignMessageAgain);
   }
 
@@ -158,23 +158,23 @@ class FeedbackBloc extends Bloc<FeedbackEvent, FeedbackState> {
     }
   }
 
-  void _onClear(
-    _Clear event,
-    Emitter<FeedbackState> emit,
-  ) {
-    if (state.formState == FeedbackEnum.initial ||
-        state.formState == FeedbackEnum.invalidData ||
-        state.formState == FeedbackEnum.clear) return;
-    emit(
-      const FeedbackState(
-        email: EmailFieldModel.pure(),
-        message: MessageFieldModel.pure(),
-        name: NameFieldModel.pure(),
-        formState: FeedbackEnum.clear,
-        failure: null,
-      ),
-    );
-  }
+  // void _onClear(
+  //   _Clear event,
+  //   Emitter<FeedbackState> emit,
+  // ) {
+  //   if (state.formState == FeedbackEnum.initial ||
+  //       state.formState == FeedbackEnum.invalidData ||
+  //       state.formState == FeedbackEnum.clear) return;
+  //   emit(
+  //     const FeedbackState(
+  //       email: EmailFieldModel.pure(),
+  //       message: MessageFieldModel.pure(),
+  //       name: NameFieldModel.pure(),
+  //       formState: FeedbackEnum.clear,
+  //       failure: null,
+  //     ),
+  //   );
+  // }
 
   void _onSendignMessageAgain(
     _SendignMessageAgain event,
@@ -185,7 +185,17 @@ class FeedbackBloc extends Bloc<FeedbackEvent, FeedbackState> {
         formState: FeedbackEnum.sendignMessageAgain,
       ),
     );
-    add(const FeedbackEvent.clear());
+
+    emit(
+      const FeedbackState(
+        email: EmailFieldModel.pure(),
+        message: MessageFieldModel.pure(),
+        name: NameFieldModel.pure(),
+        formState: FeedbackEnum.initial,
+        failure: null,
+      ),
+    );
+    // add(const FeedbackEvent.clear());
   }
 }
 

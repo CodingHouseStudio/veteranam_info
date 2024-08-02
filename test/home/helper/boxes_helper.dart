@@ -35,6 +35,14 @@ Future<void> boxexHelper({
         ),
       ).called(1);
 
+      await tester.tap(find.byKey(KWidgetkeys.screen.home.feedbackBox));
+
+      verify(
+        () => mockGoRouter.goNamed(
+          KRoute.feedback.name,
+        ),
+      ).called(1);
+
       await scrollingHelper(
         tester: tester,
         itemKey: KWidgetkeys.screen.home.informationBox,

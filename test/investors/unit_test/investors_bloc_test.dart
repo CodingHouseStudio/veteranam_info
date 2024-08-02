@@ -85,7 +85,7 @@ void main() {
     );
     blocTest<InvestorsWatcherBloc, InvestorsWatcherState>(
       'emits [InvestorsWatcherState()]'
-      ' when load informationModel list and loadNextItems it',
+      ' when load InvestorsModel list and loadNextItems it',
       build: () => investorsWatcherBloc,
       act: (bloc) async {
         bloc.add(const InvestorsWatcherEvent.started());
@@ -102,7 +102,7 @@ void main() {
           reason: 'Wait loading data',
         );
         bloc.add(
-          const InvestorsWatcherEvent.loadeNextItems(),
+          const InvestorsWatcherEvent.loadNextItems(),
         );
         when(
           mockReportRepository.getCardReportById(
@@ -151,6 +151,50 @@ void main() {
         //       state.itemsLoaded == KDimensions.investorsLoadItems * 2 &&
         //       state.reportItems.length == 1,
         // ),
+      ],
+    );
+    blocTest<InvestorsWatcherBloc, InvestorsWatcherState>(
+      'emits [InvestorsWatcherState()]'
+      ' when get report failure and load nex with listLoadedFull',
+      build: () => investorsWatcherBloc,
+      act: (bloc) async {
+        when(
+          mockReportRepository.getCardReportById(
+            cardEnum: CardEnum.funds,
+            userId: KTestText.user.id,
+          ),
+        ).thenAnswer(
+          (invocation) async => const Left(SomeFailure.serverError()),
+        );
+        when(
+          mockInvestorsRepository.getFunds(),
+        ).thenAnswer(
+          (_) async => Right([KTestText.fundItems.first]),
+        );
+        bloc.add(const InvestorsWatcherEvent.started());
+        await expectLater(
+          bloc.stream,
+          emitsInOrder([
+            predicate<InvestorsWatcherState>(
+              (state) => state.loadingStatus == LoadingStatus.loading,
+            ),
+            predicate<InvestorsWatcherState>(
+              (state) => state.loadingStatus == LoadingStatus.listLoadedFull,
+            ),
+          ]),
+          reason: 'Wait loading data',
+        );
+        bloc.add(
+          const InvestorsWatcherEvent.loadNextItems(),
+        );
+      },
+      expect: () => [
+        predicate<InvestorsWatcherState>(
+          (state) => state.loadingStatus == LoadingStatus.loading,
+        ),
+        predicate<InvestorsWatcherState>(
+          (state) => state.loadingStatus == LoadingStatus.listLoadedFull,
+        ),
       ],
     );
   });

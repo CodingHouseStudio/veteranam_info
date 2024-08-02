@@ -13,7 +13,8 @@ class _EmployeeRespondKeys {
   );
   final resumeText = const Key('employee_respond_screen_resume_text');
   final resumeButton = const Key('employee_respond_screen_resume_button');
-  final checkPoint = const Key('employee_respond_screen_check_point');
+  final checkWithoutResume =
+      const Key('employee_respond_screen_check_without_resume');
   // final noResume = const Key('employee_respond_screen_no_resume');
   final sendButton = const Key('employee_respond_screen_send_button');
   final cancelButton = const Key('employee_respond_screen_cancel_button');

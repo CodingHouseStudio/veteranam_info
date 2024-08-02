@@ -142,6 +142,8 @@ Widget emailButton({
       ),
       padding: EdgeInsets.zero,
       shrinkWrap: true,
-      onTapLink: (text, href, title) =>
-          context.read<UrlCubit>().launchUrl(url: text, scheme: 'mailto'),
+      onTapLink: (text, href, title) => context.read<UrlCubit>().launchUrl(
+            url: text,
+            scheme: KAppText.emailScheme,
+          ),
     );

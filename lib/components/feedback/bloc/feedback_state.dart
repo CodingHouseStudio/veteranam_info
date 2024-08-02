@@ -32,7 +32,7 @@ class FeedbackState with _$FeedbackState {
 
 enum FeedbackEnum {
   initial,
-  clear,
+  // clear,
   inProgress,
   sendingMessage,
   sendignMessageAgain,
