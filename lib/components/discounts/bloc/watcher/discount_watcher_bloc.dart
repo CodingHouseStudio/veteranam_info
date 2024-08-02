@@ -40,6 +40,7 @@ class DiscountWatcherBloc
     on<_LoadNextItems>(_onLoadNextItems);
     on<_FilterCategory>(_onFilterCategory);
     on<_FilterLocation>(_onFilterLocation);
+    on<_FilterLocations>(_onFilterLocations);
     on<_FilterReset>(_onFilterReset);
     // on<_GetReport>(_onGetReport);
   }
@@ -206,6 +207,20 @@ class DiscountWatcherBloc
       largerNumber: 3,
     );
 
+    _filterLocations(emit: emit, selectedFilters: selectedFilters);
+  }
+
+  void _onFilterLocations(
+    _FilterLocations event,
+    Emitter<DiscountWatcherState> emit,
+  ) {
+    _filterLocations(emit: emit, selectedFilters: event.filterListIndex);
+  }
+
+  void _filterLocations({
+    required Emitter<DiscountWatcherState> emit,
+    required List<int> selectedFilters,
+  }) {
     final (:list, :loadingStatus) = _filterLocation(
       locationIndex: selectedFilters,
       itemsLoaded: state.itemsLoaded,

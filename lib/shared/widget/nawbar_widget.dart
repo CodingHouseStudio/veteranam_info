@@ -198,9 +198,7 @@ class _NawbarWidgetImplematationState
                             _button(
                               ruoteName: KRoute.feedback.name,
                               text: context.l10n.contacts,
-                              width: _isEnglish(context)
-                                  ? KSize.kPixel62
-                                  : KSize.kPixel80,
+                              width: KSize.kPixel70,
                             ),
                           ],
                         ),
