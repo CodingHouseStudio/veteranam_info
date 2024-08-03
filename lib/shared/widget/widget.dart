@@ -39,6 +39,7 @@ export 'keyboard_scroll_view.dart';
 export 'languages_switcher_widget.dart';
 export 'left_card_widget.dart';
 export 'loading_button.dart';
+export 'markdown_email_widget.dart';
 export 'menu_dialog_widget.dart';
 export 'message_field_widget.dart';
 export 'mock_button_widget.dart';

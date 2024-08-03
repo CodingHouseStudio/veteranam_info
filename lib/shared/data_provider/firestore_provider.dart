@@ -423,3 +423,18 @@ class FirestoreService {
       .doc(respondModel.id)
       .set(respondModel.toJson());
 }
+
+extension CardEnumExtention on CardEnum {
+  String get getValue {
+    switch (this) {
+      case CardEnum.funds:
+        return 'funds';
+      case CardEnum.discount:
+        return 'discount';
+      case CardEnum.information:
+        return 'information';
+      case CardEnum.story:
+        return 'story';
+    }
+  }
+}

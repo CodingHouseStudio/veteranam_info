@@ -81,19 +81,19 @@ class KImage {
   //       // cacheSize: KMinMaxSize.kHomeImageMaxSize,
   //       // height: KMinMaxSize.minHeight50,
   //     );
-  static AssetImageWidget logoHome({Key? key}) => AssetImageWidget(
-        'assets/images/logo_home.svg',
-        widgetKey: key,
-      );
-  static AssetImageWidget homeImage({Key? key}) => AssetImageWidget(
-        'assets/images/home_image.png',
-        fit: BoxFit.fill,
-        widgetKey: key,
-      );
-  static AssetImageWidget homeImageMob({Key? key}) => AssetImageWidget(
-        'assets/images/home_image_mob.png',
-        widgetKey: key,
-      );
+  // static AssetImageWidget logoHome({Key? key}) => AssetImageWidget(
+  //       'assets/images/logo_home.svg',
+  //       widgetKey: key,
+  //     );
+  // static AssetImageWidget homeImage({Key? key}) => AssetImageWidget(
+  //       'assets/images/home_image.png',
+  //       fit: BoxFit.fill,
+  //       widgetKey: key,
+  //     );
+  // static AssetImageWidget homeImageMob({Key? key}) => AssetImageWidget(
+  //       'assets/images/home_image_mob.png',
+  //       widgetKey: key,
+  //     );
   static AssetImageWidget discountImage({Key? key}) => AssetImageWidget(
         'assets/images/discount_image.png',
         fit: BoxFit.fill,
@@ -106,12 +106,12 @@ class KImage {
         cacheSize: KMinMaxSize.kHomeImageMaxSize,
         widgetKey: key,
       );
-  static AssetImageWidget wavingHand({Key? key}) => AssetImageWidget(
-        'assets/icons/waving_hand.png',
-        width: KSize.kPixel16,
-        height: KSize.kPixel16,
-        widgetKey: key,
-      );
+  // static AssetImageWidget wavingHand({Key? key}) => AssetImageWidget(
+  //       'assets/icons/waving_hand.png',
+  //       width: KSize.kPixel16,
+  //       height: KSize.kPixel16,
+  //       widgetKey: key,
+  //     );
   static AssetImageWidget coffee({Key? key}) => AssetImageWidget(
         'assets/icons/hot_beverage.png',
         widgetKey: key,
