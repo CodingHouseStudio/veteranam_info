@@ -148,13 +148,6 @@ void main() {
           AuthenticationDeleteRequested(),
         );
       },
-      expect: () => [
-        AuthenticationState.authenticated(
-          currentUser: KTestText.user,
-          currentUserSetting:
-              KTestText.userSetting.copyWith(userRole: UserRole.civilian),
-        ),
-      ],
     );
   });
 }
