@@ -154,7 +154,7 @@ class DiscountBodyWidget extends StatelessWidget {
                 index,
               ),
             ),
-        fullLenght:
+        fullLength:
             context.read<DiscountWatcherBloc>().state.discountModelItems.length,
         filterIsEmpty: context
             .read<DiscountWatcherBloc>()

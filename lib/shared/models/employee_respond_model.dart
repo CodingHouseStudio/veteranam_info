@@ -17,3 +17,11 @@ class EmployeeRespondModel with _$EmployeeRespondModel {
   factory EmployeeRespondModel.fromJson(Map<String, dynamic> json) =>
       _$EmployeeRespondModelFromJson(json);
 }
+
+abstract class EmployeeRespondModelJsonField {
+  static const id = 'id';
+  static const email = 'email';
+  static const phoneNumber = 'phoneNumber';
+  static const noResume = 'noResume';
+  static const resume = 'resume';
+}

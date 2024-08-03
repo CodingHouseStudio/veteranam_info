@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:url_launcher/url_launcher.dart';
@@ -357,28 +356,21 @@ abstract class FooterWidget {
             KIcon.meil.copyWith(
               key: KWidgetkeys.widget.footer.emailIcon,
             ),
+            KSizedBox.kWidthSizedBox4,
             Expanded(
-              child: Markdown(
+              child: MarkdownEmailWidget(
                 key: KWidgetkeys.widget.footer.emailText,
                 padding: const EdgeInsets.only(
                   left: KPadding.kPaddingSize8,
                 ),
                 data: KAppText.email,
-                styleSheet: MarkdownStyleSheet(
-                  a: isTablet
-                      ? AppTextStyle.materialThemeTitleMedium.copyWith(
-                          color: AppColors.materialThemeKeyColorsSecondary,
-                        )
-                      : AppTextStyle.materialThemeTitleSmall.copyWith(
-                          color: AppColors.materialThemeKeyColorsSecondary,
-                        ),
-                ),
-                shrinkWrap: true,
-                onTapLink: (text, href, title) =>
-                    context.read<UrlCubit>().launchUrl(
-                          url: text,
-                          scheme: KAppText.emailScheme,
-                        ),
+                textStyle: isTablet
+                    ? AppTextStyle.materialThemeTitleMedium.copyWith(
+                        color: AppColors.materialThemeKeyColorsSecondary,
+                      )
+                    : AppTextStyle.materialThemeTitleSmall.copyWith(
+                        color: AppColors.materialThemeKeyColorsSecondary,
+                      ),
               ),
             ),
           ],

@@ -34,6 +34,11 @@ void main() {
       ).thenAnswer(
         (realInvocation) async => const Right(true),
       );
+      when(
+        mockAuthenticationRepository.deleteUser(),
+      ).thenAnswer(
+        (realInvocation) async => const Right(true),
+      );
       authenticationBloc = AuthenticationBloc(
         authenticationRepository: mockAuthenticationRepository,
       )..add(AuthenticationInitialized());
@@ -124,6 +129,23 @@ void main() {
       act: (bloc) async {
         bloc.add(
           const AppUserRoleChanged(UserRole.civilian),
+        );
+      },
+      expect: () => [
+        AuthenticationState.authenticated(
+          currentUser: KTestText.user,
+          currentUserSetting:
+              KTestText.userSetting.copyWith(userRole: UserRole.civilian),
+        ),
+      ],
+    );
+    blocTest<AuthenticationBloc, AuthenticationState>(
+      'emits [AuthenticationState] when'
+      ' AuthenticationDeleteRequested',
+      build: () => authenticationBloc,
+      act: (bloc) async {
+        bloc.add(
+          AuthenticationDeleteRequested(),
         );
       },
       expect: () => [

@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart' show FirebaseException;
 import 'package:dartz/dartz.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
@@ -39,19 +39,12 @@ class InformationRepository implements IInformationRepository {
     try {
       await _firestoreService.updateInformationModel(
         informationModel.copyWith(
-          likes: isLiked
-              ? informationModel.likes ?? 0 + 1
-              // ? informationModel.likes != null
-              //     ? informationModel.likes! + 1
-              //     : 1
-              : informationModel.likes != null && informationModel.likes! > 1
-                  ? informationModel.likes! - 1
-                  : null,
+          likes: informationModel.getLike(isLiked: isLiked),
         ),
       );
       return const Right(true);
     } on FirebaseException catch (e) {
-      return Left(GetFailur.fromCode(e).status);
+      return Left(SendFailure.fromCode(e).status);
     } catch (e) {
       return const Left(SomeFailure.serverError());
     }
