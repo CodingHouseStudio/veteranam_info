@@ -1,6 +1,5 @@
 import 'dart:math';
 import 'package:collection/collection.dart';
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -137,10 +136,24 @@ extension StringExtension on String {
             ? substringValue.substring(0, substringValue.length - 1)
             : substringValue;
   }
+
+  String setStringLength(int maxLength) {
+    if (length > maxLength) {
+      return substring(0, maxLength);
+    } else {
+      return this;
+    }
+  }
 }
 
-extension ConnectivityExtension on List<ConnectivityResult> {
-  bool get hasNetwork => any(
-        (result) => ConnectivityResult.none != result,
-      );
+extension InformationModelExtension on InformationModel {
+  int? getLike({required bool isLiked}) {
+    if (isLiked) {
+      return likes ?? 1;
+    } else if (likes != null && likes! > 1) {
+      return likes! - 1;
+    } else {
+      return null;
+    }
+  }
 }

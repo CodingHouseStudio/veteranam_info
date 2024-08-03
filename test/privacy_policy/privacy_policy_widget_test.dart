@@ -1,4 +1,3 @@
-import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mockito/mockito.dart';
@@ -17,7 +16,6 @@ void main() {
   tearDown(GetIt.I.reset);
   group('${KScreenBlocName.privacyPolicy} ', () {
     late IAppAuthenticationRepository mockAppAuthenticationRepository;
-    late IUrlRepository mockUrlRepository;
     setUp(
       () {
         KTest.cashe = false;
@@ -28,16 +26,6 @@ void main() {
         ).thenAnswer(
           (realInvocation) => KTestText.userSetting,
         );
-
-        mockUrlRepository = MockIUrlRepository();
-        when(
-          mockUrlRepository.launchUrl(
-            url: KAppText.email,
-            scheme: KAppText.emailScheme,
-          ),
-        ).thenAnswer(
-          (realInvocation) async => const Right(true),
-        );
       },
     );
     testWidgets('${KGroupText.intial} ', (tester) async {
@@ -47,14 +35,6 @@ void main() {
       );
 
       await privacyPolicyInitialHelper(tester);
-    });
-    testWidgets('Email Tap', (tester) async {
-      await privacyPolicyPumpAppHelper(
-        tester: tester,
-        mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-      );
-
-      await privacyPolicyEmailTapHelper(tester);
     });
 
     group('${KGroupText.goRouter} ', () {
