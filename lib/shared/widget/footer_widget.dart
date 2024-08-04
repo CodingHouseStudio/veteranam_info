@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -390,7 +389,7 @@ abstract class FooterWidget {
               : AppTextStyle.materialThemeHeadlineMedium,
         ),
         KSizedBox.kHeightSizedBox16,
-        if (kIsWeb)
+        if (KTest.testIsWeb)
           Align(
             alignment: Alignment.centerLeft,
             child: BuyMeACoffeeWidget(
@@ -426,36 +425,42 @@ abstract class FooterWidget {
     required Key facebookKey,
   }) =>
       [
-        IconButtonWidget(
+        _socialButton(
           key: linkedInKey,
-          onPressed: () => context.read<UrlCubit>().launchUrl(
-                url: KAppText.linkedIn,
-                mode: LaunchMode.externalApplication,
-              ),
-          icon: KImage.linkedIn(),
-          background: AppColors.materialThemeSourceSeed,
+          url: KAppText.linkedIn,
+          image: KImage.linkedIn(),
+          context: context,
         ),
         padding,
-        IconButtonWidget(
+        _socialButton(
           key: instagramKey,
-          onPressed: () => context.read<UrlCubit>().launchUrl(
-                url: KAppText.instagram,
-                mode: LaunchMode.externalApplication,
-              ),
-          icon: KImage.instagram(),
-          background: AppColors.materialThemeSourceSeed,
+          url: KAppText.instagram,
+          image: KImage.instagram(),
+          context: context,
         ),
         padding,
-        IconButtonWidget(
+        _socialButton(
           key: facebookKey,
-          onPressed: () => context.read<UrlCubit>().launchUrl(
-                url: KAppText.facebook,
-                mode: LaunchMode.externalApplication,
-              ),
-          icon: KImage.facebook(),
-          background: AppColors.materialThemeSourceSeed,
+          url: KAppText.facebook,
+          image: KImage.facebook(),
+          context: context,
         ),
       ];
+  static Widget _socialButton({
+    required BuildContext context,
+    required String url,
+    required Key key,
+    required Widget image,
+  }) =>
+      IconButtonWidget(
+        key: key,
+        onPressed: () => context.read<UrlCubit>().launchUrl(
+              url: url,
+              mode: LaunchMode.externalApplication,
+            ),
+        icon: image,
+        background: AppColors.materialThemeSourceSeed,
+      );
   static Widget _privacyPolice({
     required BuildContext context,
     required bool isDesk,
