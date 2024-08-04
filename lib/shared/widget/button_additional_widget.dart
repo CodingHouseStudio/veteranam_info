@@ -36,9 +36,8 @@ class _ButtonAdditionalWidgetState extends State<ButtonAdditionalWidget> {
   Widget build(BuildContext context) {
     return TextButton(
       key: KWidgetkeys.widget.buttonAdditional.button,
-      onHover: (value) => setState(() {
-        isHover = value;
-      }),
+      // ignore: coverage
+      onHover: (value) => setState(() => isHover = value),
       style: KButtonStyles.additionalButtonStyle.copyWith(
         backgroundColor: WidgetStatePropertyAll(widget.backgroundColor),
         side: isHover

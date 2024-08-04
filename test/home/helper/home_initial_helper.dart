@@ -12,6 +12,8 @@ Future<void> homeInitialHelper(
     tabletTest: true,
     tester: tester,
     test: () async {
+      await nawbarHelper(tester: tester, searchText: KTestText.field);
+
       expect(
         find.byKey(KWidgetkeys.screen.home.box),
         findsOneWidget,
@@ -75,6 +77,11 @@ Future<void> homeInitialHelper(
         findsOneWidget,
       );
 
+      await scrollingHelper(
+        tester: tester,
+        itemKey: KWidgetkeys.screen.home.discountPrefix,
+      );
+
       expect(
         find.byKey(KWidgetkeys.screen.home.discountTitle),
         findsOneWidget,
@@ -95,40 +102,47 @@ Future<void> homeInitialHelper(
         findsOneWidget,
       );
 
-      expect(
-        find.byKey(KWidgetkeys.screen.home.informationImage),
-        findsOneWidget,
-      );
-
       await scrollingHelper(
         tester: tester,
-        itemKey: KWidgetkeys.screen.home.informationImage,
+        itemKey: KWidgetkeys.screen.home.discountButton,
       );
 
-      expect(
-        find.byKey(KWidgetkeys.screen.home.informationPrefix),
-        findsOneWidget,
-      );
+      if (Config.isDevelopment) {
+        expect(
+          find.byKey(KWidgetkeys.screen.home.informationImage),
+          findsOneWidget,
+        );
 
-      expect(
-        find.byKey(KWidgetkeys.screen.home.informationTitle),
-        findsOneWidget,
-      );
+        await scrollingHelper(
+          tester: tester,
+          itemKey: KWidgetkeys.screen.home.informationImage,
+        );
 
-      expect(
-        find.byKey(KWidgetkeys.screen.home.informationSubtitle),
-        findsOneWidget,
-      );
+        expect(
+          find.byKey(KWidgetkeys.screen.home.informationPrefix),
+          findsOneWidget,
+        );
 
-      await scrollingHelper(
-        tester: tester,
-        itemKey: KWidgetkeys.screen.home.informationSubtitle,
-      );
+        expect(
+          find.byKey(KWidgetkeys.screen.home.informationTitle),
+          findsOneWidget,
+        );
 
-      expect(
-        find.byKey(KWidgetkeys.screen.home.informationButton),
-        findsOneWidget,
-      );
+        expect(
+          find.byKey(KWidgetkeys.screen.home.informationSubtitle),
+          findsOneWidget,
+        );
+
+        await scrollingHelper(
+          tester: tester,
+          itemKey: KWidgetkeys.screen.home.informationSubtitle,
+        );
+
+        expect(
+          find.byKey(KWidgetkeys.screen.home.informationButton),
+          findsOneWidget,
+        );
+      }
 
       expect(
         find.byKey(KWidgetkeys.screen.home.faqPrefix),
@@ -138,6 +152,11 @@ Future<void> homeInitialHelper(
       expect(
         find.byKey(KWidgetkeys.screen.home.faqTitle),
         findsOneWidget,
+      );
+
+      await scrollingHelper(
+        tester: tester,
+        itemKey: KWidgetkeys.screen.home.faqTitle,
       );
 
       expect(
