@@ -42,6 +42,7 @@ export 'loading_button.dart';
 export 'markdown_email_widget.dart';
 export 'menu_dialog_widget.dart';
 export 'message_field_widget.dart';
+export 'mob_navigation_widget.dart';
 export 'mock_button_widget.dart';
 export 'nawbar_widget.dart';
 export 'network_image_widget.dart';
