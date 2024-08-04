@@ -6,6 +6,7 @@ class ButtonBottomLineWidget extends StatelessWidget {
     required this.text,
     required this.onPressed,
     required this.isDesk,
+    required this.widgetKey,
     super.key,
     this.icon,
     this.width,
@@ -16,6 +17,7 @@ class ButtonBottomLineWidget extends StatelessWidget {
   final void Function() onPressed;
   final double? width;
   final bool isDesk;
+  final Key widgetKey;
 
   @override
   Widget build(BuildContext context) {
@@ -25,12 +27,14 @@ class ButtonBottomLineWidget extends StatelessWidget {
         onPressed: onPressed,
         width: width,
         icon: icon,
+        widgetKey: widgetKey,
       );
     } else {
       return ButtonBottomLineMobileWidget(
         text: text,
         onPressed: onPressed,
         icon: icon,
+        widgetKey: widgetKey,
       );
     }
   }
@@ -41,6 +45,7 @@ class ButtonBottomLineDeskWidget extends StatefulWidget {
     required this.text,
     required this.onPressed,
     required this.width,
+    required this.widgetKey,
     super.key,
     this.icon,
   });
@@ -49,6 +54,7 @@ class ButtonBottomLineDeskWidget extends StatefulWidget {
   final Widget? icon;
   final void Function() onPressed;
   final double? width;
+  final Key widgetKey;
 
   @override
   State<ButtonBottomLineDeskWidget> createState() =>
@@ -67,6 +73,7 @@ class _ButtonBottomLineDeskWidgetState
   @override
   Widget build(BuildContext context) {
     return TextButton.icon(
+      key: widget.widgetKey,
       onPressed: widget.onPressed,
       style: KButtonStyles.withoutStyle,
       onHover: (value) => setState(() => _isHovered = value),
@@ -105,6 +112,7 @@ class ButtonBottomLineMobileWidget extends StatelessWidget {
   const ButtonBottomLineMobileWidget({
     required this.text,
     required this.onPressed,
+    required this.widgetKey,
     super.key,
     this.icon,
   });
@@ -112,9 +120,11 @@ class ButtonBottomLineMobileWidget extends StatelessWidget {
   final String text;
   final Widget? icon;
   final void Function() onPressed;
+  final Key widgetKey;
   @override
   Widget build(BuildContext context) {
     return TextButton.icon(
+      key: widgetKey,
       onPressed: onPressed,
       style: KButtonStyles.withoutStyle,
       icon: Text(

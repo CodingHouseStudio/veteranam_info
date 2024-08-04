@@ -14,12 +14,12 @@ Future<void> nawbarLoginNavigationHelper({
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.nawbar.iconPerson),
+    find.byKey(KWidgetkeys.widget.nawbar.loginIcon),
     findsOneWidget,
   );
 
   await tester.tap(
-    find.byKey(KWidgetkeys.widget.nawbar.iconPerson),
+    find.byKey(KWidgetkeys.widget.nawbar.loginIcon),
   );
 
   await tester.pump();
@@ -34,12 +34,12 @@ Future<void> nawbarLoginNavigationHelper({
     tester: tester,
     test: () async {
       expect(
-        find.byKey(KWidgetkeys.widget.nawbar.button),
+        find.byKey(KWidgetkeys.widget.nawbar.loginButton),
         findsOneWidget,
       );
 
       await tester.tap(
-        find.byKey(KWidgetkeys.widget.nawbar.button),
+        find.byKey(KWidgetkeys.widget.nawbar.loginButton),
       );
 
       await tester.pumpAndSettle();
