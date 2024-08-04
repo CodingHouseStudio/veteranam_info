@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:veteranam/shared/shared.dart';
 
 class ScaffoldAutoLoadingWidget extends StatefulWidget {
@@ -141,11 +140,6 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
                         : 0)
                 : KPadding.kPaddingSize16),
           );
-          final route = [
-            KRoute.discounts.name,
-            KRoute.investors.name,
-            KRoute.home.name,
-          ];
           final bodyList = [
             if (KTest.testIsWeb || widget.pageName != null)
               SliverPersistentHeader(
@@ -196,27 +190,8 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
           final semanticChildCount =
               mainChildWidget.length + (titleChildWidget?.length ?? 0) + 1;
           final scaffold = Scaffold(
-            bottomNavigationBar: KTest.testIsWeb
-                ? null
-                : BottomNavigationBar(
-                    items: <BottomNavigationBarItem>[
-                      BottomNavigationBarItem(
-                        icon: KIcon.tag.copyWith(fill: 1),
-                        label: context.l10n.discounts,
-                      ),
-                      BottomNavigationBarItem(
-                        icon: KIcon.investors.copyWith(fill: 1),
-                        label: context.l10n.investors,
-                      ),
-                      BottomNavigationBarItem(
-                        icon: KIcon.settings.copyWith(fill: 1),
-                        label: context.l10n.settings,
-                      ),
-                    ],
-                    currentIndex:
-                        context.l10n.discounts == widget.pageName ? 0 : 1,
-                    onTap: (i) => context.goNamed(route.elementAt(i)),
-                  ),
+            bottomNavigationBar:
+                KTest.testIsWeb ? null : const MobNavigationWidget(),
             body: (!KPlatformConstants.isWebDesktop)
                 ? CustomScrollView(
                     key: KWidgetkeys.widget.scaffold.scroll,
