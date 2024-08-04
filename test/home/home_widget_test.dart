@@ -162,6 +162,27 @@ void main() {
 
           await homeInitialHelper(tester);
         });
+        testWidgets('Nawbar Menu', (tester) async {
+          await homePumpAppHelper(
+            tester: tester,
+            mockGoRouter: mockGoRouter,
+            mockAuthenticationRepository: mockAuthenticationRepository,
+            // mockFeedbackRepository: mockFeedbackRepository,
+            mockHomeRepository: mockHomeRepository,
+            // mockAppAuthenticationRepository:
+            // mockAppAuthenticationRepository,
+          );
+
+          await homeChangeWindowSizeHelper(
+            tester: tester,
+            isDesk: false,
+            isMobile: true,
+            test: () async => nawbarMenuHelper(
+              tester: tester,
+              mockGoRouter: mockGoRouter,
+            ),
+          );
+        });
 
         group('${KGroupText.goTo} ', () {
           testWidgets('nawbar widget navigation ${KRoute.profile.name}',

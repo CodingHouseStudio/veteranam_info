@@ -19,7 +19,7 @@ class DiscountCardBody extends StatelessWidget {
               key: KWidgetkeys.screen.discountCard.widget,
               isDesk: isDesk,
               discountItem: _.discountModel ?? KMockText.discountModel,
-              reportEvent: null,
+              // reportEvent: null,
               closeWidget: CloseButtonWidget(
                 widgetKey: KWidgetkeys.screen.discountCard.closeButton,
                 isDesk: isDesk,

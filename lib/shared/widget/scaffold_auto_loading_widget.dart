@@ -146,6 +146,55 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
             KRoute.investors.name,
             KRoute.home.name,
           ];
+          final bodyList = [
+            if (KTest.testIsWeb || widget.pageName != null)
+              SliverPersistentHeader(
+                delegate: NawbarWidget(
+                  isDesk: isDesk,
+                  isTablet: isTablet,
+                  pageName: widget.pageName,
+                  showMobileNawbar: widget.showMobileNawbar,
+                ),
+              ),
+            if (titleChildWidget != null)
+              SliverPadding(
+                padding: padding,
+                sliver: SliverList.builder(
+                  addAutomaticKeepAlives: false,
+                  addRepaintBoundaries: false,
+                  itemBuilder: (context, index) {
+                    return titleChildWidget.elementAt(index);
+                  },
+                  itemCount: titleChildWidget.length,
+                ),
+              ),
+            SliverPadding(
+              padding: isDesk && widget.mainDeskPadding != null
+                  ? padding.add(
+                      widget.mainDeskPadding!(
+                        maxWidth: constraints.maxWidth,
+                      ),
+                    )
+                  : padding,
+              sliver: widget.mainRightChildWidget != null && isDesk
+                  ? RowSliver(
+                      right: mainBody(mainChildWidget),
+                      left: SliverPersistentHeader(
+                        pinned: true,
+                        delegate: NawbarWidget(
+                          isDesk: isDesk,
+                          childWidget: widget.mainRightChildWidget,
+                          maxMinHeight: constraints.maxHeight,
+                          isTablet: isTablet,
+                        ),
+                      ),
+                      leftWidthPercent: 0.3,
+                    )
+                  : mainBody(mainChildWidget),
+            ),
+          ];
+          final semanticChildCount =
+              mainChildWidget.length + (titleChildWidget?.length ?? 0) + 1;
           final scaffold = Scaffold(
             bottomNavigationBar: KTest.testIsWeb
                 ? null
@@ -172,111 +221,15 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
                 ? CustomScrollView(
                     key: KWidgetkeys.widget.scaffold.scroll,
                     // physics: KTest.scroll,
-                    slivers: [
-                      if (KTest.testIsWeb || widget.pageName != null)
-                        SliverPersistentHeader(
-                          delegate: NawbarWidget(
-                            isDesk: isDesk,
-                            isTablet: isTablet,
-                            pageName: widget.pageName,
-                            showMobileNawbar: widget.showMobileNawbar,
-                          ),
-                        ),
-                      if (titleChildWidget != null)
-                        SliverPadding(
-                          padding: padding,
-                          sliver: SliverList.builder(
-                            addAutomaticKeepAlives: false,
-                            addRepaintBoundaries: false,
-                            itemBuilder: (context, index) {
-                              return titleChildWidget.elementAt(index);
-                            },
-                            itemCount: titleChildWidget.length,
-                          ),
-                        ),
-                      SliverPadding(
-                        padding: isDesk && widget.mainDeskPadding != null
-                            ? padding.add(
-                                widget.mainDeskPadding!(
-                                  maxWidth: constraints.maxWidth,
-                                ),
-                              )
-                            : padding,
-                        sliver: widget.mainRightChildWidget != null && isDesk
-                            ? RowSliver(
-                                right: mainBody(mainChildWidget),
-                                left: SliverPersistentHeader(
-                                  pinned: true,
-                                  delegate: NawbarWidget(
-                                    isDesk: isDesk,
-                                    childWidget: widget.mainRightChildWidget,
-                                    maxMinHeight: constraints.maxHeight,
-                                    isTablet: isTablet,
-                                  ),
-                                ),
-                                leftWidthPercent: 0.3,
-                              )
-                            : mainBody(mainChildWidget),
-                      ),
-                    ],
-                    semanticChildCount: mainChildWidget.length +
-                        (titleChildWidget?.length ?? 0) +
-                        1,
+                    slivers: bodyList,
+                    semanticChildCount: semanticChildCount,
                     controller: _scrollController,
                   )
                 : KeyboardScrollView(
                     key: KWidgetkeys.widget.scaffold.scroll,
                     // physics: KTest.scroll,
-                    slivers: [
-                      if (KTest.testIsWeb || widget.pageName != null)
-                        SliverPersistentHeader(
-                          delegate: NawbarWidget(
-                            isDesk: isDesk,
-                            isTablet: isTablet,
-                            pageName: widget.pageName,
-                            showMobileNawbar: widget.showMobileNawbar,
-                          ),
-                        ),
-                      if (titleChildWidget != null)
-                        SliverPadding(
-                          padding: padding,
-                          sliver: SliverList.builder(
-                            addAutomaticKeepAlives: false,
-                            addRepaintBoundaries: false,
-                            itemBuilder: (context, index) {
-                              return titleChildWidget.elementAt(index);
-                            },
-                            itemCount: titleChildWidget.length,
-                          ),
-                        ),
-                      SliverPadding(
-                        padding: isDesk && widget.mainDeskPadding != null
-                            ? padding.add(
-                                widget.mainDeskPadding!(
-                                  maxWidth: constraints.maxWidth,
-                                ),
-                              )
-                            : padding,
-                        sliver: widget.mainRightChildWidget != null && isDesk
-                            ? RowSliver(
-                                right: mainBody(mainChildWidget),
-                                left: SliverPersistentHeader(
-                                  pinned: true,
-                                  delegate: NawbarWidget(
-                                    isDesk: isDesk,
-                                    childWidget: widget.mainRightChildWidget,
-                                    maxMinHeight: constraints.maxHeight,
-                                    isTablet: isTablet,
-                                  ),
-                                ),
-                                leftWidthPercent: 0.3,
-                              )
-                            : mainBody(mainChildWidget),
-                      ),
-                    ],
-                    semanticChildCount: mainChildWidget.length +
-                        (titleChildWidget?.length ?? 0) +
-                        1,
+                    slivers: bodyList,
+                    semanticChildCount: semanticChildCount,
                     scrollController: KPlatformConstants.isWebDesktop
                         ? null
                         : _scrollController,
