@@ -11,4 +11,5 @@ class _NawbarKeys {
   final discountsButton = const Key('nawbar_discounts_button');
   final investorsButton = const Key('nawbar_investors_button');
   final feedbackButton = const Key('nawbar_feedback_button');
+  final menuButton = const Key('menu_button');
 }

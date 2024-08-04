@@ -32,7 +32,7 @@ class ProfileSavesBody extends StatelessWidget {
           key: KWidgetkeys.screen.profileSaves.discountCard,
           isDesk: isDesk,
           discountItem: KMockText.discountModel,
-          reportEvent: null,
+          // reportEvent: null,
           share: null,
           isLoading: true,
         ),

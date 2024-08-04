@@ -16,7 +16,7 @@ Future<void> deleteAccountConfirmButtonlHelper(
 
   await profileCardDeleteAccountHelper(tester);
 
-  await dialogUnconfirmHelper(
+  await dialogConfirmHelper(
     tester: tester,
     mockGoRouter: mockGoRouter,
   );
