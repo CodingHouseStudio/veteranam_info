@@ -37,4 +37,9 @@ class _FooterKeys {
         informationButton,
         consultationOnlineButton,
       ];
+
+  List<Key> get buttonsProdKey => [
+        investorsButton,
+        discountsButton,
+      ];
 }
