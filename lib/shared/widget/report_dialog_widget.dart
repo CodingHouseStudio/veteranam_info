@@ -7,13 +7,13 @@ class ReportDialogWidget extends StatelessWidget {
   const ReportDialogWidget({
     required this.isDesk,
     required this.cardEnum,
-    required this.afterEvent,
+    // required this.afterEvent,
     super.key,
   });
 
   final bool isDesk;
   final CardEnum cardEnum;
-  final void Function()? afterEvent;
+  // final void Function()? afterEvent;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class ReportDialogWidget extends StatelessWidget {
         listener: (context, state) {
           if (state.formState == ReportEnum.success) {
             context.pop();
-            afterEvent?.call();
+            // afterEvent?.call();
           }
         },
         builder: (context, _) => Column(

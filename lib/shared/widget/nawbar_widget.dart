@@ -236,6 +236,7 @@ class _NawbarWidgetImplematationState
                       )
                     else if (!isFocused)
                       IconButtonWidget(
+                        key: KWidgetkeys.widget.nawbar.menuButton,
                         icon: KIcon.menu.copyWith(
                           color: AppColors.materialThemeWhite,
                         ),

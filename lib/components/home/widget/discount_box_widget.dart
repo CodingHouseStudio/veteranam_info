@@ -181,7 +181,6 @@ class _DotPainter extends CustomPainter {
     }
   }
 
-  @override
-  // ignore: coverage
+  @override // coverage:ignore-line
   bool shouldRepaint(CustomPainter oldDelegate) => false;
 }

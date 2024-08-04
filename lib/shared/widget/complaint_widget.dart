@@ -5,14 +5,14 @@ class ComplaintWidget extends StatelessWidget {
   const ComplaintWidget({
     required this.isDesk,
     required this.cardEnum,
-    required this.afterEvent,
+    // required this.afterEvent,
     required this.cardId,
     super.key,
     this.background,
   });
   final bool isDesk;
   final CardEnum cardEnum;
-  final void Function()? afterEvent;
+  // final void Function()? afterEvent;
   final String cardId;
   final Color? background;
 
@@ -22,7 +22,7 @@ class ComplaintWidget extends StatelessWidget {
       onPressed: () => context.dialog.showReportDialog(
         isDesk: isDesk,
         cardEnum: cardEnum,
-        afterEvent: afterEvent,
+        // afterEvent: afterEvent,
         cardId: cardId,
       ),
       style: KButtonStyles.withoutStyle,

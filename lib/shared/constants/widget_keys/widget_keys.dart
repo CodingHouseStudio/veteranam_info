@@ -75,6 +75,7 @@ part 'widget/statistic_box.dart';
 part 'widget/report_dialog.dart';
 part 'widget/notification_link.dart';
 part 'widget/city_list.dart';
+part 'widget/menu_dialog.dart';
 
 abstract class KWidgetkeys {
   static _ScreenKeys get screen => _ScreenKeys();
