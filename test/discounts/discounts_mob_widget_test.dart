@@ -22,7 +22,6 @@ void main() {
     late AuthenticationRepository mockAuthenticationRepository;
     setUp(() {
       KTest.testIsWeb = false;
-      KPlatformConstants.isWebDesktop = true;
       Config.value = Config.production;
       ExtendedDateTime.id = KTestText.id;
       ExtendedDateTime.current = KTestText.dateTime;

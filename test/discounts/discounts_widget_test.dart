@@ -218,9 +218,7 @@ void main() {
         );
         await notificationLinkScrollHelper(
           tester: tester,
-          test: () async => notificationLinkCorrectHelper(
-            tester,
-          ),
+          test: notificationLinkCorrectHelper,
         );
       });
       testWidgets('Notification Link Wrong Send', (tester) async {
@@ -233,9 +231,7 @@ void main() {
         );
         await notificationLinkScrollHelper(
           tester: tester,
-          test: () async => notificationLinkWrongHelper(
-            tester,
-          ),
+          test: notificationLinkWrongHelper,
         );
       });
 
@@ -260,7 +256,8 @@ void main() {
             );
             await notificationLinkScrollHelper(
               tester: tester,
-              test: () async => expect(
+              itemKey: KWidgetkeys.widget.notificationLink.limitText,
+              test: (WidgetTester tester) async => expect(
                 find.byKey(KWidgetkeys.widget.notificationLink.limitText),
                 findsOneWidget,
               ),
