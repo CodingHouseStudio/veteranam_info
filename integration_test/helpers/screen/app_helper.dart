@@ -12,7 +12,7 @@ Future<void> appHelper(WidgetTester tester) async {
 
   log('Loading App...');
 
-  while (tester.widgetList<App>(finder).isEmpty) {
+  while (finder.evaluate().isEmpty) {
     await tester.pumpAndSettle();
   }
 
