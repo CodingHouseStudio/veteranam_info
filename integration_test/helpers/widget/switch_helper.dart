@@ -17,7 +17,7 @@ Future<void> switchHelper(
 
   expect(switchWidget.value, isFalse);
 
-  await scrollingHelper(
+  await scrollingHelperInt(
     tester: tester,
     itemKey: KWidgetkeys.widget.switchKeys.widget,
   );
@@ -31,7 +31,7 @@ Future<void> switchHelper(
 
   expect(switchWidget.value, isTrue);
 
-  await scrollingHelper(
+  await scrollingHelperInt(
     tester: tester,
     itemKey: KWidgetkeys.widget.switchKeys.widget,
   );

@@ -3,7 +3,8 @@ import 'package:go_router/go_router.dart';
 import 'package:veteranam/shared/shared.dart';
 
 class MobNavigationWidget extends StatelessWidget {
-  const MobNavigationWidget({super.key});
+  const MobNavigationWidget({required this.index, super.key});
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -13,21 +14,25 @@ class MobNavigationWidget extends StatelessWidget {
       KRoute.home.name,
     ];
     return BottomNavigationBar(
+      key: KWidgetkeys.widget.mobNavigation.widget,
       items: <BottomNavigationBarItem>[
         BottomNavigationBarItem(
+          key: KWidgetkeys.widget.mobNavigation.discounts,
           icon: KIcon.tag.copyWith(fill: 1),
           label: context.l10n.discounts,
         ),
         BottomNavigationBarItem(
+          key: KWidgetkeys.widget.mobNavigation.investors,
           icon: KIcon.investors.copyWith(fill: 1),
           label: context.l10n.investors,
         ),
         BottomNavigationBarItem(
+          key: KWidgetkeys.widget.mobNavigation.settings,
           icon: KIcon.settings.copyWith(fill: 1),
           label: context.l10n.settings,
         ),
       ],
-      currentIndex: 2,
+      currentIndex: index,
       onTap: (i) => context.goNamed(route.elementAt(i)),
     );
   }

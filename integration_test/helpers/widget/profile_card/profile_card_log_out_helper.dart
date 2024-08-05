@@ -11,7 +11,7 @@ Future<void> profileCardLogOutHelper(
     findsOneWidget,
   );
 
-  await scrollingHelper(
+  await scrollingHelperInt(
     tester: tester,
     itemKey: KWidgetkeys.widget.profileCardWidget.logOutButton,
   );

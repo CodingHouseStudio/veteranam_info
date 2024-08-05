@@ -13,7 +13,7 @@ Future<void> reportDialogCheckEnterHelper(
 
   expect(find.byKey(KWidgetkeys.widget.checkPoint.icon), findsNothing);
 
-  await scrollingHelper(
+  await scrollingHelperInt(
     tester: tester,
     itemKey: KWidgetkeys.widget.reportDialog.checkPoint,
     first: false,
@@ -30,7 +30,7 @@ Future<void> reportDialogCheckEnterHelper(
     findsOneWidget,
   );
 
-  await scrollingHelper(
+  await scrollingHelperInt(
     tester: tester,
     itemKey: KWidgetkeys.widget.reportDialog.sendButton,
   );

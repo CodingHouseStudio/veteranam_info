@@ -6,7 +6,7 @@ import '../../test_dependency.dart';
 Future<void> additionalButtonHelper(
   WidgetTester tester,
 ) async {
-  await scrollingHelper(
+  await scrollingHelperInt(
     tester: tester,
     itemKey: KWidgetkeys.widget.buttonAdditional.button,
   );

@@ -8,7 +8,7 @@ Future<void> chekPointSignleTapHelper({
   bool hasAmount = false,
   bool tapItemLast = false,
 }) async {
-  await scrollingHelper(
+  await scrollingHelperInt(
     tester: tester,
     itemKey: KWidgetkeys.widget.checkPoint.widget,
   );
@@ -28,7 +28,7 @@ Future<void> chekPointSignleTapHelper({
     hasAmount ? findsWidgets : findsNothing,
   );
 
-  await scrollingHelper(
+  await scrollingHelperInt(
     tester: tester,
     itemKey: KWidgetkeys.widget.checkPoint.widget,
   );

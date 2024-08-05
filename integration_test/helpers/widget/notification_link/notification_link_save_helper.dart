@@ -9,7 +9,7 @@ Future<void> notificationLinkSaveHelper({
 }) async {
   expect(find.byKey(KWidgetkeys.widget.notificationLink.field), findsOneWidget);
 
-  await scrollingHelper(
+  await scrollingHelperInt(
     tester: tester,
     itemKey: KWidgetkeys.widget.notificationLink.field,
   );

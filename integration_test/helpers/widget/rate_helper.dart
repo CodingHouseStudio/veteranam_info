@@ -6,7 +6,7 @@ import '../../test_dependency.dart';
 Future<void> rateHelper(
   WidgetTester tester,
 ) async {
-  await scrollingHelper(
+  await scrollingHelperInt(
     tester: tester,
     itemKey: KWidgetkeys.widget.rate.title,
   );

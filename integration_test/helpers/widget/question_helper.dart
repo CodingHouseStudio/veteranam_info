@@ -28,7 +28,7 @@ Future<void> questionHelper(
     findsNothing,
   );
 
-  await scrollingHelper(
+  await scrollingHelperInt(
     tester: tester,
     itemKey: KWidgetkeys.widget.question.title,
   );
