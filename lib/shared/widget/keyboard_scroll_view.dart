@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:veteranam/shared/shared.dart';
 
 class KeyboardScrollView extends StatefulWidget {
   const KeyboardScrollView({
@@ -42,21 +43,21 @@ class KeyboardScrollViewState extends State<KeyboardScrollView> {
   }
 
   void _startScroll(PhysicalKeyboardKey key) {
-    const duration = Duration(milliseconds: 400);
-    final step = widget.maxHeight * 0.80;
+    const duration = Duration(milliseconds: 300);
+    final step = widget.maxHeight * KSize.kPercentOfScreen;
 
     void scroll() {
       final offset = _controller.offset;
       switch (key) {
         case PhysicalKeyboardKey.arrowDown:
           _controller.animateTo(
-            offset + step,
+            offset + KSize.kArrowsStep,
             duration: duration,
             curve: Curves.linear,
           );
         case PhysicalKeyboardKey.arrowUp:
           _controller.animateTo(
-            offset - step,
+            offset - KSize.kArrowsStep,
             duration: duration,
             curve: Curves.linear,
           );
