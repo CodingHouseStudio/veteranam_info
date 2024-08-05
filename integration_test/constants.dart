@@ -103,4 +103,17 @@ abstract class KTestText {
 
     return routeKeys[routeName] ?? const Key('');
   }
+
+  static Key getMobNavigationKey(String routeName) {
+    // Using a Map instead of a switch statement because Dart does not allow
+    // accessing
+    // properties of an object (e.g., routeName) in constant expressions within
+    // a switch case.
+    final routeKeys = <String, Key>{
+      KRoute.investors.name: KWidgetkeys.widget.mobNavigation.investors,
+      KRoute.home.name: KWidgetkeys.widget.mobNavigation.settings,
+    };
+
+    return routeKeys[routeName] ?? const Key('');
+  }
 }

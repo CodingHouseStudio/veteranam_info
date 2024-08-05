@@ -6,17 +6,19 @@ import '../../../test_dependency.dart';
 Future<void> discountsInitialHelper(
   WidgetTester tester,
 ) async {
-  expect(find.byKey(KWidgetkeys.screen.discounts.screen), findsOneWidget);
-
   expect(
     find.byKey(KWidgetkeys.screen.discounts.title),
     findsOneWidget,
   );
 
-  expect(
-    find.byKey(KWidgetkeys.screen.discounts.titlePoint),
-    findsOneWidget,
-  );
+  if (KTest.testIsWeb) {
+    expect(
+      find.byKey(KWidgetkeys.screen.discounts.titlePoint),
+      findsOneWidget,
+    );
+  } else {
+    await mobNavigationHelper(tester);
+  }
 
   expect(
     find.byKey(KWidgetkeys.screen.discounts.filter),
@@ -25,11 +27,12 @@ Future<void> discountsInitialHelper(
 
   await filterChipHelper(tester);
 
-  expect(
-    find.byKey(KWidgetkeys.screen.discounts.addDiscountButton),
-    findsOneWidget,
-  );
-
+  if (Config.isDevelopment) {
+    expect(
+      find.byKey(KWidgetkeys.screen.discounts.addDiscountButton),
+      findsOneWidget,
+    );
+  }
   await advancedFilterHelper(tester);
 
   expect(
@@ -39,7 +42,7 @@ Future<void> discountsInitialHelper(
 
   await discountCardHelper(tester);
 
-  await scrollingHelper(
+  await scrollingHelperInt(
     tester: tester,
     itemKey: KWidgetkeys.screen.discounts.card,
   );

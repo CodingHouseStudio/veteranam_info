@@ -14,7 +14,7 @@ Future<void> reportDialogEnterTextHelper({
 
   await reportDialogFieldHelper(tester);
 
-  await scrollingHelper(
+  await scrollingHelperInt(
     tester: tester,
     itemKey: KWidgetkeys.widget.reportDialog.emailField,
   );
@@ -26,7 +26,7 @@ Future<void> reportDialogEnterTextHelper({
     );
   }
 
-  await scrollingHelper(
+  await scrollingHelperInt(
     tester: tester,
     itemKey: KWidgetkeys.widget.reportDialog.messageField,
   );
@@ -38,7 +38,7 @@ Future<void> reportDialogEnterTextHelper({
     );
   }
 
-  await scrollingHelper(
+  await scrollingHelperInt(
     tester: tester,
     itemKey: KWidgetkeys.widget.reportDialog.sendButton,
   );

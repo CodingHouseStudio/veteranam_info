@@ -43,4 +43,5 @@ class _WidgetKeys {
   final notificationLink = _NotificationLinkKeys();
   final cityList = _CityListKeys();
   final menuDialog = _MenuDialogKeys();
+  final mobNavigation = _MobNavigationKeys();
 }

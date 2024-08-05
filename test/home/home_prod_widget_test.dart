@@ -15,7 +15,7 @@ void main() {
   setupFirebaseAuthMocks();
 
   tearDown(GetIt.I.reset);
-  group('${KScreenBlocName.home} PROD', () {
+  group('${KScreenBlocName.home} ${KScreenBlocName.prod}', () {
     late AuthenticationRepository mockAuthenticationRepository;
     late IHomeRepository mockHomeRepository;
     setUp(() {

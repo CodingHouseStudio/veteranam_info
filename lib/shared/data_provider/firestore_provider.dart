@@ -92,7 +92,7 @@ class FirestoreService {
       // If the server fetch is successful, return the data
       return docSnapshot.docs
           .map((doc) => FundModel.fromJson(doc.data()))
-          .where((e) => e.image != null || Config.isDevelopment)
+          .where((e) => e.image != null || !Config.isProduction)
           .toList();
     } on FirebaseException catch (e) {
       if (e.code == 'unavailable') {

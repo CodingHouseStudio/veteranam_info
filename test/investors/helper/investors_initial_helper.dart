@@ -13,42 +13,43 @@ Future<void> investorsInitialHelper(
     test: () async {
       expect(find.byKey(KWidgetkeys.screen.investors.title), findsOneWidget);
 
-      expect(find.byKey(KWidgetkeys.screen.investors.point), findsOneWidget);
+      if (KTest.testIsWeb) {
+        expect(find.byKey(KWidgetkeys.screen.investors.point), findsOneWidget);
 
-      expect(
-        find.byKey(KWidgetkeys.screen.investors.feedbackTitle),
-        findsOneWidget,
-      );
+        expect(
+          find.byKey(KWidgetkeys.screen.investors.feedbackTitle),
+          findsOneWidget,
+        );
+        await scrollingHelper(
+          tester: tester,
+          itemKey: KWidgetkeys.screen.investors.feedbackTitle,
+        );
 
-      await scrollingHelper(
-        tester: tester,
-        itemKey: KWidgetkeys.screen.investors.feedbackTitle,
-      );
+        expect(
+          find.byKey(KWidgetkeys.screen.investors.feedbackSubtitle),
+          findsOneWidget,
+        );
 
-      expect(
-        find.byKey(KWidgetkeys.screen.investors.feedbackSubtitle),
-        findsOneWidget,
-      );
+        expect(
+          find.byKey(KWidgetkeys.screen.investors.feedbackButton),
+          findsOneWidget,
+        );
 
-      expect(
-        find.byKey(KWidgetkeys.screen.investors.feedbackButton),
-        findsOneWidget,
-      );
+        expect(
+          find.byKey(KWidgetkeys.screen.investors.rightImages),
+          findsOneWidget,
+        );
 
-      expect(
-        find.byKey(KWidgetkeys.screen.investors.rightImages),
-        findsOneWidget,
-      );
+        expect(
+          find.byKey(KWidgetkeys.screen.investors.leftImages),
+          findsOneWidget,
+        );
 
-      expect(
-        find.byKey(KWidgetkeys.screen.investors.leftImages),
-        findsOneWidget,
-      );
-
-      await scrollingHelper(
-        tester: tester,
-        itemKey: KWidgetkeys.screen.investors.leftImages,
-      );
+        await scrollingHelper(
+          tester: tester,
+          itemKey: KWidgetkeys.screen.investors.leftImages,
+        );
+      }
 
       expect(
         find.byKey(KWidgetkeys.screen.investors.fundsPoint),

@@ -10,12 +10,12 @@ Future<void> mobileLoadingHelper({
 }) async {
   await tester.pumpAndSettle();
 
-  await scrollingHelper(
+  await scrollingHelperInt(
     tester: tester,
     offset: KTestConstants.scrollingDown,
   );
 
-  await scrollingHelper(
+  await scrollingHelperInt(
     tester: tester,
     offset: KTestConstants.scrollingDown,
   );
@@ -30,7 +30,7 @@ Future<void> mobileLoadingHelper({
     findsNothing,
   );
 
-  await scrollingHelper(
+  await scrollingHelperInt(
     tester: tester,
     offset: KTestConstants.scrollingDown,
   );

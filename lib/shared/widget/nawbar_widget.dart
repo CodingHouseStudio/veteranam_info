@@ -13,6 +13,7 @@ class NawbarWidget extends SliverPersistentHeaderDelegate {
     this.maxMinHeight,
     this.pageName,
     this.showMobileNawbar,
+    this.pageNameKey,
   });
   final bool isDesk;
   final bool isTablet;
@@ -21,6 +22,7 @@ class NawbarWidget extends SliverPersistentHeaderDelegate {
   final double? maxMinHeight;
   final String? pageName;
   final bool? showMobileNawbar;
+  final Key? pageNameKey;
 
   @override
   double get maxExtent => maxMinHeight ?? KMinMaxSize.minmaxHeight94;
@@ -47,6 +49,7 @@ class NawbarWidget extends SliverPersistentHeaderDelegate {
       isTablet: isTablet,
       pageName: pageName,
       showMobileNawbar: showMobileNawbar ?? false,
+      pageNameKey: pageNameKey,
     );
   }
 }
@@ -56,6 +59,7 @@ class _NawbarWidgetImplematation extends StatefulWidget {
     required this.isDesk,
     required this.isTablet,
     required this.showMobileNawbar,
+    required this.pageNameKey,
     super.key,
     this.childWidget,
     this.pageName,
@@ -65,6 +69,7 @@ class _NawbarWidgetImplematation extends StatefulWidget {
   final bool isTablet;
   final String? pageName;
   final bool showMobileNawbar;
+  final Key? pageNameKey;
 
   @override
   State<_NawbarWidgetImplematation> createState() =>
@@ -215,6 +220,7 @@ class _NawbarWidgetImplematationState
                           ? Expanded(
                               child: Text(
                                 '${widget.pageName}',
+                                key: widget.pageNameKey,
                                 style: AppTextStyle.materialThemeTitleMedium,
                                 textAlign: TextAlign.center,
                               ),
@@ -284,6 +290,7 @@ class _NawbarWidgetImplematationState
                 )
               : Text(
                   '${widget.pageName}',
+                  key: widget.pageNameKey,
                   style: AppTextStyle.materialThemeTitleMedium,
                   textAlign: TextAlign.center,
                 ),

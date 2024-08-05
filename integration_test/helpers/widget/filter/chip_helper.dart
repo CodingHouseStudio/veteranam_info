@@ -12,7 +12,7 @@ Future<void> chipHelper(WidgetTester tester) async {
 
   expect(filterChip.selected, isFalse);
 
-  await scrollingHelper(
+  await scrollingHelperInt(
     tester: tester,
     itemKey: KWidgetkeys.widget.chip.widget,
   );

@@ -41,7 +41,7 @@ Future<void> cardTextDetailEvaluateHelper(
     tester,
   );
 
-  await scrollingHelper(
+  await scrollingHelperInt(
     tester: tester,
     itemKey: KWidgetkeys.widget.cardTextDetailEvaluate.iconLike,
   );

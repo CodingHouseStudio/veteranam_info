@@ -25,7 +25,7 @@ Future<void> reportDialogCheckFailureHelper(
     findsOneWidget,
   );
 
-  await scrollingHelper(
+  await scrollingHelperInt(
     tester: tester,
     itemKey: KWidgetkeys.widget.reportDialog.sendButton,
   );

@@ -6,7 +6,7 @@ import '../../../test_dependency.dart';
 Future<void> advancedFilterHelper(
   WidgetTester tester,
 ) async {
-  await scrollingHelper(
+  await scrollingHelperInt(
     tester: tester,
     itemKey: KWidgetkeys.screen.discounts.advancedFilter,
   );
@@ -45,7 +45,7 @@ Future<void> advancedFilterHelper(
     findsOneWidget,
   );
 
-  await scrollingHelper(
+  await scrollingHelperInt(
     tester: tester,
     offset: KTestConstants.scrollingUp,
     scrollKey: KWidgetkeys.screen.discounts.advancedFilterList,
@@ -56,7 +56,7 @@ Future<void> advancedFilterHelper(
     findsNothing,
   );
 
-  await scrollingHelper(
+  await scrollingHelperInt(
     tester: tester,
     offset: KTestConstants.scrollingUp,
     scrollKey: KWidgetkeys.screen.discounts.advancedFilterList,
@@ -72,7 +72,7 @@ Future<void> advancedFilterHelper(
     findsOneWidget,
   );
 
-  await scrollingHelper(
+  await scrollingHelperInt(
     tester: tester,
     offset: KTestConstants.scrollingUp,
     scrollKey: KWidgetkeys.screen.discounts.advancedFilterList,
@@ -88,7 +88,7 @@ Future<void> advancedFilterHelper(
     findsOneWidget,
   );
 
-  await scrollingHelper(
+  await scrollingHelperInt(
     tester: tester,
     offset: KTestConstants.scrollingUp,
     scrollKey: KWidgetkeys.screen.discounts.advancedFilterList,
@@ -103,7 +103,7 @@ Future<void> advancedFilterHelper(
 
   await chekPointSignleTapHelper(tester: tester, hasAmount: true);
 
-  await scrollingHelper(
+  await scrollingHelperInt(
     tester: tester,
     offset: KTestConstants.scrollingUp,
     scrollKey: KWidgetkeys.screen.discounts.advancedFilterList,
@@ -114,7 +114,7 @@ Future<void> advancedFilterHelper(
     findsOneWidget,
   );
 
-  await scrollingHelper(
+  await scrollingHelperInt(
     tester: tester,
     offset: KTestConstants.scrollingUp,
     scrollKey: KWidgetkeys.screen.discounts.advancedFilterList,
@@ -131,7 +131,7 @@ Future<void> advancedFilterHelper(
     hasAmount: true,
   );
 
-  await scrollingHelper(
+  await scrollingHelperInt(
     tester: tester,
     offset: KTestConstants.scrollingUp,
     scrollKey: KWidgetkeys.screen.discounts.advancedFilterList,
@@ -152,7 +152,7 @@ Future<void> advancedFilterHelper(
 
   await tester.pumpAndSettle();
 
-  await scrollingHelper(
+  await scrollingHelperInt(
     tester: tester,
     offset: KTestConstants.scrollingUp,
     scrollKey: KWidgetkeys.screen.discounts.advancedFilterList,
@@ -182,6 +182,8 @@ Future<void> advancedFilterHelper(
       find.byKey(KWidgetkeys.screen.discounts.advancedFilterMobAppliedButton),
       findsOneWidget,
     );
+
+    await tester.tapAt(Offset.zero);
   } else {
     expect(
       find.byKey(KWidgetkeys.screen.discounts.advancedFilterButtonIcon),
