@@ -29,6 +29,8 @@ Future<void> nawbarHelper({
 
     await tester.pumpAndSettle();
 
+    language = find.byKey(KWidgetkeys.widget.nawbar.language).evaluate();
+
     if (find.byKey(KWidgetkeys.widget.nawbar.language).evaluate().isNotEmpty) {
       expect(find.byKey(KWidgetkeys.widget.nawbar.language), findsOneWidget);
 
