@@ -7,7 +7,7 @@ Future<void> donateCardHelper({
   required WidgetTester tester,
   required bool isDesk,
 }) async {
-  await scrollingHelper(
+  await scrollingHelperInt(
     tester: tester,
     itemKey: KWidgetkeys.widget.donateCard.widget,
   );

@@ -18,7 +18,7 @@ Future<void> mockButtonHelper({
     findsOneWidget,
   );
 
-  await scrollingHelper(
+  await scrollingHelperInt(
     tester: tester,
     itemKey: buttonMock,
   );

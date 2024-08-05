@@ -18,7 +18,6 @@ void main() {
     late IStoryRepository mockStoryRepository;
     late AuthenticationRepository mockAuthenticationRepository;
     setUp(() {
-      KPlatformConstants.isWebDesktop = false;
       ExtendedDateTime.current = KTestText.dateTime;
       ExtendedDateTime.id = '';
       mockStoryRepository = MockIStoryRepository();
@@ -72,7 +71,6 @@ void main() {
       );
 
       testWidgets('Stories list load ', (tester) async {
-        KPlatformConstants.isWebDesktop = false;
         await storyPumpAppHelper(
           mockStoryRepository: mockStoryRepository,
           tester: tester,

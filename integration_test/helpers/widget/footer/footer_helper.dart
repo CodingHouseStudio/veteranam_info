@@ -7,12 +7,12 @@ Future<void> footerHelper(
   WidgetTester tester,
   // required String email,
 ) async {
-  await scrollingHelper(
+  await scrollingHelperInt(
     tester: tester,
     offset: KTestConstants.scrollingDown,
   );
 
-  await scrollingHelper(
+  await scrollingHelperInt(
     tester: tester,
     itemKey: KWidgetkeys.widget.footer.title,
     offset: KTestConstants.scrollingUp200,
@@ -27,7 +27,7 @@ Future<void> footerHelper(
   if (Config.isDevelopment) {
     expect(find.byKey(KWidgetkeys.widget.footer.information), findsOneWidget);
 
-    await scrollingHelper(
+    await scrollingHelperInt(
       tester: tester,
       itemKey: KWidgetkeys.widget.footer.information,
     );
@@ -56,7 +56,7 @@ Future<void> footerHelper(
 
   expect(find.byKey(KWidgetkeys.widget.footer.logo), findsOneWidget);
 
-  await scrollingHelper(
+  await scrollingHelperInt(
     tester: tester,
     itemKey: KWidgetkeys.widget.footer.logo,
   );

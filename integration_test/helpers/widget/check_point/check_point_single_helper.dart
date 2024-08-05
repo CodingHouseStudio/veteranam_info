@@ -7,7 +7,7 @@ Future<void> chekPointSingleHelper({
   required WidgetTester tester,
   bool hasAmount = false,
 }) async {
-  await scrollingHelper(
+  await scrollingHelperInt(
     tester: tester,
     itemKey: KWidgetkeys.widget.checkPointSingle.widget,
   );
@@ -26,7 +26,7 @@ Future<void> chekPointSingleHelper({
     hasAmount ? findsWidgets : findsNothing,
   );
 
-  await scrollingHelper(
+  await scrollingHelperInt(
     tester: tester,
     itemKey: KWidgetkeys.widget.checkPointSingle.widget,
   );

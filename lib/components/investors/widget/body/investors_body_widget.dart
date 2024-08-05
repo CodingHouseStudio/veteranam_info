@@ -25,6 +25,7 @@ class InvestorsBodyWidget extends StatelessWidget {
         loadingStatus: _.loadingStatus,
         cardListIsEmpty: _.fundItems.isEmpty,
         pageName: context.l10n.investors,
+        pageNameKey: KWidgetkeys.screen.investors.title,
         loadDataAgain: () => context
             .read<InvestorsWatcherBloc>()
             .add(const InvestorsWatcherEvent.started()),

@@ -6,7 +6,7 @@ import '../../../test_dependency.dart';
 Future<void> filterPopupMenuHelper(
   WidgetTester tester,
 ) async {
-  await scrollingHelper(
+  await scrollingHelperInt(
     tester: tester,
     itemKey: KWidgetkeys.widget.filterPopupMenu.widget,
   );

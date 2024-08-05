@@ -73,17 +73,17 @@ Future<void> _deskLoadingHelper(
   WidgetTester tester,
   // required Key cardLast,
 ) async {
-  await scrollingHelper(
+  await scrollingHelperInt(
     tester: tester,
     offset: KTestConstants.scrollingDown,
   );
 
-  await scrollingHelper(
+  await scrollingHelperInt(
     tester: tester,
     offset: KTestConstants.scrollingDown,
   );
 
-  await scrollingHelper(
+  await scrollingHelperInt(
     tester: tester,
     offset: KTestConstants.scrollingDown,
   );
@@ -112,7 +112,7 @@ Future<void> _mobileLoadingHelper(
   WidgetTester tester,
   // required Key cardLast,
 ) async {
-  await scrollingHelper(
+  await scrollingHelperInt(
     tester: tester,
     offset: KTestConstants.scrollingDown,
   );
@@ -127,7 +127,7 @@ Future<void> _mobileLoadingHelper(
     findsNothing,
   );
 
-  await scrollingHelper(
+  await scrollingHelperInt(
     tester: tester,
     offset: KTestConstants.scrollingDown,
   );

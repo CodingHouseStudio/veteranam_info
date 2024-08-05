@@ -64,93 +64,87 @@ class ScaffoldWidget extends StatelessWidget {
               ),
             );
           }
-          final bodyList = [
-            SliverPersistentHeader(
-              delegate: NawbarWidget(
-                isDesk: isDesk,
-                isTablet: isTablet,
-                pageName: pageName,
-                showMobileNawbar: showMobileNawbar,
-              ),
-            ),
-            if (titleChildWidgetsFunction != null)
-              SliverPadding(
-                padding: padding,
-                sliver: SliverList.builder(
-                  addAutomaticKeepAlives: false,
-                  addRepaintBoundaries: false,
-                  itemBuilder: (context, index) {
-                    return titleChildWidgetsFunction!(isDesk: isDesk)
-                        .elementAt(index);
-                  },
-                  itemCount: titleChildWidgetsFunction!(isDesk: isDesk).length,
-                ),
-              ),
-            SliverPadding(
-              padding: isDesk && mainDeskPadding != null
-                  ? padding.add(mainDeskPadding!)
-                  : padding,
-              sliver: SliverList.builder(
-                addAutomaticKeepAlives: false,
-                addRepaintBoundaries: false,
-                itemBuilder: (context, index) {
-                  return mainChildWidget.elementAt(index);
-                },
-                itemCount: mainChildWidget.length,
-              ),
-            ),
-            if (hasFooter)
-              SliverPadding(
-                padding: padding.copyWith(
-                  bottom: KPadding.kPaddingSize40,
-                ),
-                sliver: DecoratedSliver(
-                  decoration: KWidgetTheme.boxDecorationFooter,
-                  sliver: SliverPadding(
-                    padding: isDesk
-                        ? const EdgeInsets.all(
-                            KPadding.kPaddingSize32,
-                          ).copyWith(left: KPadding.kPaddingSize46)
-                        : isTablet
-                            ? const EdgeInsets.all(
-                                KPadding.kPaddingSize46,
-                              )
-                            : const EdgeInsets.symmetric(
-                                vertical: KPadding.kPaddingSize32,
-                                horizontal: KPadding.kPaddingSize16,
-                              ),
-                    sliver: SliverList.builder(
-                      key: KWidgetkeys.widget.footer.widget,
-                      addAutomaticKeepAlives: false,
-                      addRepaintBoundaries: false,
-                      itemBuilder: (context, index) =>
-                          footerWidget.elementAt(index),
-                      itemCount: footerWidget.length,
-                    ),
-                  ),
-                ),
-              ),
-          ];
-          final semanticChildCount = mainChildWidget.length +
-              (hasFooter ? (footerWidget.length + 1) : 1);
           final scaffold = Scaffold(
             bottomNavigationBar:
                 KTest.testIsWeb || !(showMobBottomNavigation ?? true)
                     ? null
-                    : const MobNavigationWidget(),
-            body: (!KPlatformConstants.isWebDesktop)
-                ? CustomScrollView(
-                    key: KWidgetkeys.widget.scaffold.scroll,
-                    // physics: KTest.scroll,
-                    slivers: bodyList,
-                    semanticChildCount: semanticChildCount,
-                  )
-                : KeyboardScrollView(
-                    key: KWidgetkeys.widget.scaffold.scroll,
-                    // physics: KTest.scroll,
-                    slivers: bodyList,
-                    semanticChildCount: semanticChildCount,
+                    : const MobNavigationWidget(
+                        index: 2,
+                      ),
+            body: KeyboardScrollView(
+              widgetKey: KWidgetkeys.widget.scaffold.scroll,
+              // physics: KTest.scroll,
+              slivers: [
+                SliverPersistentHeader(
+                  delegate: NawbarWidget(
+                    isDesk: isDesk,
+                    isTablet: isTablet,
+                    pageName: pageName,
+                    showMobileNawbar: showMobileNawbar,
                   ),
+                ),
+                if (titleChildWidgetsFunction != null)
+                  SliverPadding(
+                    padding: padding,
+                    sliver: SliverList.builder(
+                      addAutomaticKeepAlives: false,
+                      addRepaintBoundaries: false,
+                      itemBuilder: (context, index) {
+                        return titleChildWidgetsFunction!(isDesk: isDesk)
+                            .elementAt(index);
+                      },
+                      itemCount:
+                          titleChildWidgetsFunction!(isDesk: isDesk).length,
+                    ),
+                  ),
+                SliverPadding(
+                  padding: isDesk && mainDeskPadding != null
+                      ? padding.add(mainDeskPadding!)
+                      : padding,
+                  sliver: SliverList.builder(
+                    addAutomaticKeepAlives: false,
+                    addRepaintBoundaries: false,
+                    itemBuilder: (context, index) {
+                      return mainChildWidget.elementAt(index);
+                    },
+                    itemCount: mainChildWidget.length,
+                  ),
+                ),
+                if (hasFooter)
+                  SliverPadding(
+                    padding: padding.copyWith(
+                      bottom: KPadding.kPaddingSize40,
+                    ),
+                    sliver: DecoratedSliver(
+                      decoration: KWidgetTheme.boxDecorationFooter,
+                      sliver: SliverPadding(
+                        padding: isDesk
+                            ? const EdgeInsets.all(
+                                KPadding.kPaddingSize32,
+                              ).copyWith(left: KPadding.kPaddingSize46)
+                            : isTablet
+                                ? const EdgeInsets.all(
+                                    KPadding.kPaddingSize46,
+                                  )
+                                : const EdgeInsets.symmetric(
+                                    vertical: KPadding.kPaddingSize32,
+                                    horizontal: KPadding.kPaddingSize16,
+                                  ),
+                        sliver: SliverList.builder(
+                          key: KWidgetkeys.widget.footer.widget,
+                          addAutomaticKeepAlives: false,
+                          addRepaintBoundaries: false,
+                          itemBuilder: (context, index) =>
+                              footerWidget.elementAt(index),
+                          itemCount: footerWidget.length,
+                        ),
+                      ),
+                    ),
+                  ),
+              ],
+              semanticChildCount: mainChildWidget.length +
+                  (hasFooter ? (footerWidget.length + 1) : 1),
+            ),
           );
           return KTest.testIsWeb ? scaffold : SafeArea(child: scaffold);
         },

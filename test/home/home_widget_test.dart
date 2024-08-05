@@ -15,7 +15,7 @@ void main() {
   setupFirebaseAuthMocks();
 
   tearDown(GetIt.I.reset);
-  group('${KScreenBlocName.home} DEV', () {
+  group('${KScreenBlocName.home} ${KScreenBlocName.dev}', () {
     late AuthenticationRepository mockAuthenticationRepository;
     late IHomeRepository mockHomeRepository;
     // late IFeedbackRepository mockFeedbackRepository;
@@ -23,6 +23,7 @@ void main() {
     setUp(() {
       ExtendedDateTime.current = KTestText.dateTime;
       ExtendedDateTime.id = KTestText.feedbackModel.id;
+      KPlatformConstants.isWebDesktop = true;
       mockHomeRepository = MockIHomeRepository();
       mockAuthenticationRepository = MockAuthenticationRepository();
       // mockAppAuthenticationRepository = MockAppAuthenticationRepository();

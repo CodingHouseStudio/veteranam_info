@@ -30,7 +30,7 @@ Future<void> homeInitialHelper(
 
   await boxHelper(tester);
 
-  await scrollingHelper(
+  await scrollingHelperInt(
     tester: tester,
     itemKey: KWidgetkeys.widget.box.text,
     first: false,
@@ -46,12 +46,12 @@ Future<void> homeInitialHelper(
     findsOneWidget,
   );
 
-  await scrollingHelper(
+  await scrollingHelperInt(
     tester: tester,
     itemKey: KWidgetkeys.screen.home.aboutProjecSubtitle,
   );
 
-  await scrollingHelper(
+  await scrollingHelperInt(
     tester: tester,
     offset: KTestConstants.scrollingDown100,
   );
@@ -61,7 +61,7 @@ Future<void> homeInitialHelper(
     findsOneWidget,
   );
 
-  await scrollingHelper(
+  await scrollingHelperInt(
     tester: tester,
     itemKey: KWidgetkeys.screen.home.discountImage,
   );
@@ -71,7 +71,7 @@ Future<void> homeInitialHelper(
     findsOneWidget,
   );
 
-  await scrollingHelper(
+  await scrollingHelperInt(
     tester: tester,
     itemKey: KWidgetkeys.screen.home.discountPrefix,
   );
@@ -81,7 +81,7 @@ Future<void> homeInitialHelper(
     findsOneWidget,
   );
 
-  await scrollingHelper(
+  await scrollingHelperInt(
     tester: tester,
     itemKey: KWidgetkeys.screen.home.discountTitle,
   );
@@ -96,7 +96,7 @@ Future<void> homeInitialHelper(
     findsOneWidget,
   );
 
-  await scrollingHelper(
+  await scrollingHelperInt(
     tester: tester,
     itemKey: KWidgetkeys.screen.home.discountButton,
   );
@@ -107,7 +107,7 @@ Future<void> homeInitialHelper(
       findsOneWidget,
     );
 
-    await scrollingHelper(
+    await scrollingHelperInt(
       tester: tester,
       itemKey: KWidgetkeys.screen.home.informationImage,
     );
@@ -127,7 +127,7 @@ Future<void> homeInitialHelper(
       findsOneWidget,
     );
 
-    await scrollingHelper(
+    await scrollingHelperInt(
       tester: tester,
       itemKey: KWidgetkeys.screen.home.informationSubtitle,
     );
@@ -148,7 +148,7 @@ Future<void> homeInitialHelper(
     findsOneWidget,
   );
 
-  await scrollingHelper(
+  await scrollingHelperInt(
     tester: tester,
     itemKey: KWidgetkeys.screen.home.faqTitle,
   );
@@ -158,7 +158,7 @@ Future<void> homeInitialHelper(
     findsOneWidget,
   );
 
-  await scrollingHelper(
+  await scrollingHelperInt(
     tester: tester,
     itemKey: KWidgetkeys.screen.home.faqSubtitle,
   );
@@ -177,7 +177,7 @@ Future<void> homeInitialHelper(
 
   await dialogFailureGetHelper(tester: tester, isFailure: false);
 
-  await scrollingHelper(
+  await scrollingHelperInt(
     tester: tester,
     offset: KTestConstants.scrollingDown,
   );

@@ -9,7 +9,7 @@ import 'package:veteranam/shared/shared.dart';
 /// itemKey sets which widget will be scrolled to by its Key
 ///
 /// itemFinder sets which widget will be scrolled to by its Finder
-Future<void> scrollingHelper({
+Future<void> scrollingHelperInt({
   required WidgetTester tester,
   Key? itemKey,
   Key? scrollKey,

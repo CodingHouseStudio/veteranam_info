@@ -8,12 +8,12 @@ Future<void> footerButtonHelper({
   required WidgetTester tester,
   required Key buttonKey,
 }) async {
-  await scrollingHelper(
+  await scrollingHelperInt(
     tester: tester,
     offset: KTestConstants.scrollingDown,
   );
 
-  await scrollingHelper(
+  await scrollingHelperInt(
     tester: tester,
     itemKey: KWidgetkeys.widget.footer.title,
     offset: KTestConstants.scrollingUp200,

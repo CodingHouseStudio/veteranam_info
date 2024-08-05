@@ -12,7 +12,7 @@ Future<void> dropChipHelper({
 
   expect(find.byKey(buttonKey), findsWidgets);
 
-  await scrollingHelper(
+  await scrollingHelperInt(
     tester: tester,
     itemKey: dropChipKey,
   );
@@ -33,7 +33,7 @@ Future<void> dropChipHelper({
     findsWidgets,
   );
 
-  await scrollingHelper(
+  await scrollingHelperInt(
     tester: tester,
     itemKey: buttonKey,
   );

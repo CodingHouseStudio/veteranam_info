@@ -30,7 +30,7 @@ Future<void> cardTextDetailHelper(WidgetTester tester) async {
     find.byKey(KWidgetkeys.widget.cardTextDetail.buttonText).first,
   );
 
-  await scrollingHelper(
+  await scrollingHelperInt(
     tester: tester,
     itemKey: KWidgetkeys.widget.cardTextDetail.button,
   );
@@ -39,7 +39,7 @@ Future<void> cardTextDetailHelper(WidgetTester tester) async {
 
   await tester.pumpAndSettle();
 
-  await scrollingHelper(
+  await scrollingHelperInt(
     tester: tester,
     itemKey: KWidgetkeys.widget.cardTextDetail.button,
   );
@@ -63,7 +63,7 @@ Future<void> cardTextDetailHelper(WidgetTester tester) async {
 
   await tester.pumpAndSettle();
 
-  await scrollingHelper(
+  await scrollingHelperInt(
     tester: tester,
     itemKey: KWidgetkeys.widget.cardTextDetail.text,
   );
