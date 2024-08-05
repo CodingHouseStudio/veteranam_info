@@ -19,6 +19,11 @@ Future<void> notificationLinkSaveHelper({
     link,
   );
 
+  await scrollingHelper(
+    tester: tester,
+    itemKey: KWidgetkeys.widget.notificationLink.button,
+  );
+
   await tester.tap(find.byKey(KWidgetkeys.widget.notificationLink.button));
 
   await tester.pumpAndSettle();
