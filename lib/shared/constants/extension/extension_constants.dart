@@ -1,7 +1,6 @@
 import 'dart:math';
 import 'package:collection/collection.dart';
-import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/widgets.dart' show BuildContext, visibleForTesting;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
@@ -32,7 +31,7 @@ extension ItemLoadedExtensions on int {
       min(list.length, max(this, loadItems ?? KDimensions.loadItems));
 
   // Check if loading more items is possible
-  bool checkLoadingPosible(List<dynamic> list) => this > list.length;
+  bool checkLoadingPosible(List<dynamic> list) => this >= list.length;
 }
 
 extension LocalizedDateTime on DateTime {
@@ -137,10 +136,24 @@ extension StringExtension on String {
             ? substringValue.substring(0, substringValue.length - 1)
             : substringValue;
   }
+
+  String setStringLength(int maxLength) {
+    if (length > maxLength) {
+      return substring(0, maxLength);
+    } else {
+      return this;
+    }
+  }
 }
 
-extension ConnectivityExtension on List<ConnectivityResult> {
-  bool get hasNetwork => any(
-        (result) => ConnectivityResult.none != result,
-      );
+extension InformationModelExtension on InformationModel {
+  int? getLike({required bool isLiked}) {
+    if (isLiked) {
+      return likes ?? 1;
+    } else if (likes != null && likes! > 1) {
+      return likes! - 1;
+    } else {
+      return null;
+    }
+  }
 }

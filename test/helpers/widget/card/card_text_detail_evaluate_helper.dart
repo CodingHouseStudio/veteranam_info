@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:veteranam/shared/shared.dart';
 
-import '../../../text_dependency.dart';
+import '../../../test_dependency.dart';
 
 Future<void> cardTextDetailEvaluateHelper(
   WidgetTester tester,
@@ -44,6 +44,21 @@ Future<void> cardTextDetailEvaluateHelper(
   await scrollingHelper(
     tester: tester,
     itemKey: KWidgetkeys.widget.cardTextDetailEvaluate.iconLike,
+  );
+
+  await tester.tap(
+    find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconLike).first,
+  );
+
+  await tester.tap(
+    find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconLike).first,
+  );
+
+  await tester.pumpAndSettle(const Duration(seconds: 6));
+
+  expect(
+    find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconActiveLike),
+    findsNothing,
   );
 
   await tester.tap(

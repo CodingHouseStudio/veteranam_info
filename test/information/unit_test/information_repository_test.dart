@@ -1,11 +1,11 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart' show FirebaseException;
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mockito/mockito.dart';
 import 'package:veteranam/shared/shared.dart';
 
-import '../../text_dependency.dart';
+import '../../test_dependency.dart';
 
 void main() {
   setupFirebaseAuthMocks();
@@ -19,7 +19,7 @@ void main() {
       ExtendedDateTime.current = KTestText.dateTime;
       mockFirestoreService = MockFirestoreService();
     });
-    group('${KGroupText.successfulGet} ', () {
+    group('${KGroupText.successful} ', () {
       setUp(() {
         when(mockFirestoreService.getInformations(null)).thenAnswer(
           (_) => Stream.value(KTestText.informationModelItems),
@@ -33,10 +33,24 @@ void main() {
         );
         when(
           mockFirestoreService.updateInformationModel(
-            KTestText.informationModelItems.first,
+            KTestText.informationModelItems.first.copyWith(likes: 2),
           ),
         ).thenAnswer(
           (_) async {},
+        );
+        when(
+          mockFirestoreService.updateInformationModel(
+            KTestText.informationModelItems.first.copyWith(likes: null),
+          ),
+        ).thenAnswer(
+          (_) async {},
+        );
+        when(
+          mockFirestoreService.getInformation(
+            KTestText.informationModelItems.first.id,
+          ),
+        ).thenAnswer(
+          (_) async => KTestText.informationModelItems.first,
         );
         if (GetIt.I.isRegistered<FirestoreService>()) {
           GetIt.I.unregister<FirestoreService>();
@@ -59,7 +73,7 @@ void main() {
           ),
         ).called(1);
       });
-      test('update', () async {
+      test('update like count(plus)', () async {
         expect(
           await mockInformationRepository.updateLikeCount(
             informationModel: KTestText.informationModelItems.first,
@@ -68,8 +82,39 @@ void main() {
           isA<Right<SomeFailure, bool>>().having((e) => e.value, 'value', true),
         );
       });
+      test('update like count(minus, result null)', () async {
+        expect(
+          await mockInformationRepository.updateLikeCount(
+            informationModel: KTestText.informationModelItems.first,
+            isLiked: false,
+          ),
+          isA<Right<SomeFailure, bool>>().having((e) => e.value, 'value', true),
+        );
+      });
+      test('update like count(minus)', () async {
+        expect(
+          await mockInformationRepository.updateLikeCount(
+            informationModel:
+                KTestText.informationModelItems.first.copyWith(likes: 2),
+            isLiked: false,
+          ),
+          isA<Right<SomeFailure, bool>>().having((e) => e.value, 'value', true),
+        );
+      });
+      test('get information', () async {
+        expect(
+          await mockInformationRepository.getInformation(
+            KTestText.informationModelItems.first.id,
+          ),
+          isA<Right<SomeFailure, InformationModel>>().having(
+            (e) => e.value,
+            'value',
+            KTestText.informationModelItems.first,
+          ),
+        );
+      });
     });
-    group('${KGroupText.failureGet} ', () {
+    group('${KGroupText.failure} ', () {
       setUp(() {
         when(mockFirestoreService.getInformations(null)).thenAnswer(
           (realInvocation) => Stream.error(
@@ -83,7 +128,14 @@ void main() {
             ),
           ),
         ).thenThrow(
-          FirebaseException(plugin: KGroupText.failure),
+          Exception(KGroupText.failureSend),
+        );
+        when(
+          mockFirestoreService.getInformation(
+            KTestText.informationModelItems.first.id,
+          ),
+        ).thenThrow(
+          Exception(KGroupText.failureGet),
         );
         if (GetIt.I.isRegistered<FirestoreService>()) {
           GetIt.I.unregister<FirestoreService>();
@@ -98,13 +150,76 @@ void main() {
           emitsError(KGroupText.failureGet),
         );
       });
-      test('update', () async {
+      test('update like count', () async {
         expect(
           await mockInformationRepository.updateLikeCount(
             informationModel: KTestText.informationModelItems.first,
             isLiked: true,
           ),
           isA<Left<SomeFailure, bool>>().having(
+            (e) => e.value,
+            'value',
+            equals(const SomeFailure.serverError()),
+          ),
+        );
+      });
+      test('get information', () async {
+        expect(
+          await mockInformationRepository.getInformation(
+            KTestText.informationModelItems.first.id,
+          ),
+          isA<Left<SomeFailure, InformationModel>>().having(
+            (e) => e.value,
+            'value',
+            equals(const SomeFailure.serverError()),
+          ),
+        );
+      });
+    });
+    group('${KGroupText.firebaseFailure} ', () {
+      setUp(() {
+        when(
+          mockFirestoreService.updateInformationModel(
+            KTestText.informationModelItems.first.copyWith(
+              likes: KTestText.informationModelItems.first.likes ?? 0 + 1,
+            ),
+          ),
+        ).thenThrow(
+          FirebaseException(plugin: KGroupText.failureSend),
+        );
+        when(
+          mockFirestoreService.getInformation(
+            KTestText.informationModelItems.first.id,
+          ),
+        ).thenThrow(
+          FirebaseException(plugin: KGroupText.failureGet),
+        );
+        if (GetIt.I.isRegistered<FirestoreService>()) {
+          GetIt.I.unregister<FirestoreService>();
+        }
+        GetIt.I.registerSingleton(mockFirestoreService);
+
+        mockInformationRepository = InformationRepository();
+      });
+      test('update like count', () async {
+        expect(
+          await mockInformationRepository.updateLikeCount(
+            informationModel: KTestText.informationModelItems.first,
+            isLiked: true,
+          ),
+          isA<Left<SomeFailure, bool>>().having(
+            (e) => e.value,
+            'value',
+            equals(const SomeFailure.serverError()),
+          ),
+        );
+      });
+      test('get infromation', () async {
+        expect(
+          await mockInformationRepository.getInformation(
+            KTestText.informationModelItems.first.id,
+          ),
+          isA<Left<SomeFailure, InformationModel>>().having(
             (e) => e.value,
             'value',
             equals(const SomeFailure.serverError()),

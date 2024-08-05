@@ -384,9 +384,9 @@ abstract class KTestText {
 
 abstract class KTestConstants {
   static const scrollingDown = Offset(0, -10000);
+  static const scrollingDown100 = Offset(0, -100);
   static const scrollingUp = Offset(0, 10000);
   static const scrollingUp200 = Offset(0, 200);
-  static const scrollingDown100 = Offset(0, -100);
   static const scrollingUp500 = Offset(0, 500);
   static const scrollingUp1000 = Offset(0, 1000);
   static const scrollingUp1500 = Offset(0, 1500);
@@ -442,4 +442,8 @@ abstract class KScreenBlocName {
   static const privacyPolicy = 'Privacy Policy Dialog';
   static const discountCard = 'Discount Card Dialog';
   static const newsCard = 'News Card Dialog';
+
+  static const prod = 'PROD';
+  static const dev = 'DEV';
+  static const mobile = 'MOBILE $prod';
 }

@@ -7,7 +7,7 @@ class DonateCardWidget extends StatelessWidget {
     required this.hasSubtitle,
     required this.fundModel,
     required this.isDesk,
-    required this.reportEvent,
+    // required this.reportEvent,
     super.key,
     this.titleStyle,
   });
@@ -16,7 +16,7 @@ class DonateCardWidget extends StatelessWidget {
   final bool hasSubtitle;
   final TextStyle? titleStyle;
   final bool isDesk;
-  final void Function()? reportEvent;
+  // final void Function()? reportEvent;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +39,7 @@ class DonateCardWidget extends StatelessWidget {
               child: ComplaintWidget(
                 isDesk: isDesk,
                 cardEnum: CardEnum.funds,
-                afterEvent: reportEvent,
+                // afterEvent: reportEvent,
                 cardId: fundModel.id,
               ),
             ),

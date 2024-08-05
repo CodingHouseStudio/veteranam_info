@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:veteranam/shared/shared.dart';
 
-import '../../../text_dependency.dart';
+import '../../../test_dependency.dart';
 
 Future<void> deleteAccountConfirmButtonlHelper(
   WidgetTester tester,
@@ -16,7 +16,7 @@ Future<void> deleteAccountConfirmButtonlHelper(
 
   await profileCardDeleteAccountHelper(tester);
 
-  await dialogUnconfirmHelper(
+  await dialogConfirmHelper(
     tester: tester,
     mockGoRouter: mockGoRouter,
   );

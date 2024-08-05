@@ -20,7 +20,7 @@ class CardTextDetailEvaluateWidget extends StatefulWidget {
     this.link,
     this.onLikeChange,
     this.share,
-    this.afterEvent,
+    // this.afterEvent,
   });
 
   final String? directLink;
@@ -37,7 +37,7 @@ class CardTextDetailEvaluateWidget extends StatefulWidget {
   final Widget? titleIcon;
   final void Function({required bool like})? onLikeChange;
   final String? share;
-  final void Function()? afterEvent;
+  // final void Function()? afterEvent;
   final String cardId;
   final CardEnum cardEnum;
 
@@ -160,7 +160,7 @@ class _CardTextDetailEvaluateWidgetState
                       isDesk: widget.isDesk,
                       link: widget.link,
                       cardEnum: widget.cardEnum,
-                      afterEvent: widget.afterEvent,
+                      // afterEvent: widget.afterEvent,
                       cardId: widget.cardId,
                       background: AppColors.materialThemeKeyColorsNeutral,
                       share: widget.share,

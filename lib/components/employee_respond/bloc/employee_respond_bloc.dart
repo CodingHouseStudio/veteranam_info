@@ -3,7 +3,6 @@ import 'package:formz/formz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
-
 import 'package:veteranam/shared/shared.dart';
 
 part 'employee_respond_bloc.freezed.dart';

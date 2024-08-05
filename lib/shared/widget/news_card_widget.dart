@@ -10,14 +10,14 @@ class NewsCardWidget extends StatelessWidget {
     this.onLikeChange,
     super.key,
     this.closeWidget,
-    this.afterReportEvent,
+    // this.afterReportEvent,
   });
 
   final InformationModel informationItem;
   final bool isDesk;
   final void Function({required bool like})? onLikeChange;
   final Widget? closeWidget;
-  final void Function()? afterReportEvent;
+  // final void Function()? afterReportEvent;
   final String? share;
 
   @override
@@ -107,7 +107,7 @@ class NewsCardWidget extends StatelessWidget {
       onLikeChange: onLikeChange,
       cardId: informationItem.id,
       cardEnum: CardEnum.information,
-      afterEvent: afterReportEvent,
+      // afterEvent: afterReportEvent,
     );
   }
 }

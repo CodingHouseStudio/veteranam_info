@@ -4,7 +4,7 @@ import 'package:get_it/get_it.dart';
 import 'package:mockito/mockito.dart';
 import 'package:veteranam/shared/shared.dart';
 
-import '../text_dependency.dart';
+import '../test_dependency.dart';
 import 'helper/helper.dart';
 
 void main() {
@@ -23,7 +23,6 @@ void main() {
     setUp(() {
       ExtendedDateTime.id = KTestText.id;
       ExtendedDateTime.current = KTestText.dateTime;
-      KPlatformConstants.isWebDesktop = false;
       mockDiscountRepository = MockIDiscountRepository();
       mockAppAuthenticationRepository = MockAppAuthenticationRepository();
       mockAuthenticationRepository = MockAuthenticationRepository();
@@ -138,7 +137,7 @@ void main() {
           mockAuthenticationRepository: mockAuthenticationRepository,
         );
 
-        await discountInitialHelper(tester);
+        await discountsInitialHelper(tester);
       });
 
       loadingList(
@@ -283,7 +282,7 @@ void main() {
             mockAuthenticationRepository: mockAuthenticationRepository,
           );
 
-          await discountInitialHelper(tester);
+          await discountsInitialHelper(tester);
         });
         group('${KGroupText.goTo} ', () {
           testWidgets('${KRoute.myDiscounts.name} ', (tester) async {
@@ -297,6 +296,22 @@ void main() {
             );
 
             await myDiscountHelper(
+              tester: tester,
+              mockGoRouter: mockGoRouter,
+            );
+          });
+          testWidgets('Dialog pop to ${KRoute.discounts.name} ',
+              (tester) async {
+            await discountsPumpAppHelper(
+              tester: tester,
+              mockDiscountRepository: mockDiscountRepository,
+              mockGoRouter: mockGoRouter,
+              mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+              mockReportRepository: mockReportRepository,
+              mockAuthenticationRepository: mockAuthenticationRepository,
+            );
+
+            await advancedFilterAppliedHelper(
               tester: tester,
               mockGoRouter: mockGoRouter,
             );
