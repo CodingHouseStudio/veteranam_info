@@ -227,6 +227,7 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
                 : KeyboardScrollView(
                     key: KWidgetkeys.widget.scaffold.scroll,
                     physics: KTest.scroll,
+                    maxHeight: constraints.maxHeight,
                     slivers: [
                       if (KTest.testIsWeb || widget.pageName != null)
                         SliverPersistentHeader(

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -5,6 +6,7 @@ class KeyboardScrollView extends StatefulWidget {
   const KeyboardScrollView({
     required this.slivers,
     required this.semanticChildCount,
+    required this.maxHeight,
     this.physics,
     this.scrollController,
     super.key,
@@ -14,6 +16,7 @@ class KeyboardScrollView extends StatefulWidget {
   final int semanticChildCount;
   final ScrollPhysics? physics;
   final ScrollController? scrollController;
+  final double maxHeight;
 
   @override
   KeyboardScrollViewState createState() => KeyboardScrollViewState();
@@ -21,6 +24,7 @@ class KeyboardScrollView extends StatefulWidget {
 
 class KeyboardScrollViewState extends State<KeyboardScrollView> {
   late ScrollController _controller;
+  Timer? _timer;
 
   @override
   void initState() {
@@ -30,10 +34,69 @@ class KeyboardScrollViewState extends State<KeyboardScrollView> {
 
   @override
   void dispose() {
+    _timer?.cancel();
     if (widget.scrollController == null) {
       _controller.dispose();
     }
     super.dispose();
+  }
+
+  void _startScroll(PhysicalKeyboardKey key) {
+    const duration = Duration(milliseconds: 400);
+    final step = widget.maxHeight * 0.80;
+
+    void scroll() {
+      final offset = _controller.offset;
+      switch (key) {
+        case PhysicalKeyboardKey.arrowDown:
+          _controller.animateTo(
+            offset + step,
+            duration: duration,
+            curve: Curves.linear,
+          );
+        case PhysicalKeyboardKey.arrowUp:
+          _controller.animateTo(
+            offset - step,
+            duration: duration,
+            curve: Curves.linear,
+          );
+        case PhysicalKeyboardKey.pageDown:
+        case PhysicalKeyboardKey.space:
+          _controller.animateTo(
+            offset + step,
+            duration: duration,
+            curve: Curves.linear,
+          );
+        case PhysicalKeyboardKey.pageUp:
+          _controller.animateTo(
+            offset - step,
+            duration: duration,
+            curve: Curves.linear,
+          );
+        case PhysicalKeyboardKey.home:
+          _controller.animateTo(
+            0,
+            duration: duration,
+            curve: Curves.linear,
+          );
+        case PhysicalKeyboardKey.end:
+          _controller.animateTo(
+            _controller.position.maxScrollExtent,
+            duration: duration,
+            curve: Curves.linear,
+          );
+        default:
+          break;
+      }
+    }
+
+    scroll();
+    _timer = Timer.periodic(duration, (timer) => scroll());
+  }
+
+  void _stopScroll() {
+    _timer?.cancel();
+    _timer = null;
   }
 
   @override
@@ -42,54 +105,12 @@ class KeyboardScrollViewState extends State<KeyboardScrollView> {
       autofocus: true,
       onKeyEvent: (FocusNode node, KeyEvent event) {
         if (event is KeyDownEvent) {
-          final offset = _controller.offset;
-
-          switch (event.physicalKey) {
-            case PhysicalKeyboardKey.arrowDown:
-              _controller.animateTo(
-                offset + 100,
-                duration: const Duration(milliseconds: 200),
-                curve: Curves.linear,
-              );
-            case PhysicalKeyboardKey.arrowUp:
-              _controller.animateTo(
-                offset - 100,
-                duration: const Duration(milliseconds: 200),
-                curve: Curves.linear,
-              );
-            case PhysicalKeyboardKey.pageDown:
-              _controller.animateTo(
-                offset + 600,
-                duration: const Duration(milliseconds: 200),
-                curve: Curves.linear,
-              );
-            case PhysicalKeyboardKey.pageUp:
-              _controller.animateTo(
-                offset - 600,
-                duration: const Duration(milliseconds: 200),
-                curve: Curves.linear,
-              );
-            case PhysicalKeyboardKey.space:
-              _controller.animateTo(
-                offset + 600,
-                duration: const Duration(milliseconds: 200),
-                curve: Curves.linear,
-              );
-            case PhysicalKeyboardKey.home:
-              _controller.animateTo(
-                0,
-                duration: const Duration(milliseconds: 200),
-                curve: Curves.linear,
-              );
-            case PhysicalKeyboardKey.end:
-              _controller.animateTo(
-                _controller.position.maxScrollExtent,
-                duration: const Duration(milliseconds: 200),
-                curve: Curves.linear,
-              );
-            default:
-              return KeyEventResult.ignored;
+          if (_timer == null) {
+            _startScroll(event.physicalKey);
           }
+          return KeyEventResult.handled;
+        } else if (event is KeyUpEvent) {
+          _stopScroll();
           return KeyEventResult.handled;
         }
         return KeyEventResult.ignored;

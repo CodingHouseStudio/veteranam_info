@@ -171,6 +171,7 @@ class ScaffoldWidget extends StatelessWidget {
                 : KeyboardScrollView(
                     key: KWidgetkeys.widget.scaffold.scroll,
                     physics: KTest.scroll,
+                    maxHeight: constraints.maxHeight,
                     slivers: [
                       SliverPersistentHeader(
                         delegate: NawbarWidget(
