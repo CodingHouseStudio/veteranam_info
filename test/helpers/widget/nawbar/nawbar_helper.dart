@@ -14,7 +14,7 @@ Future<void> nawbarHelper({
     tester: tester,
     itemKey: KWidgetkeys.widget.nawbar.widget,
   );
-  late Iterable<Widget> language;
+  late FinderResult<Element> language;
 
   if (Config.isDevelopment) {
     expect(find.byKey(KWidgetkeys.widget.nawbar.field), findsOneWidget);
@@ -29,8 +29,7 @@ Future<void> nawbarHelper({
 
     await tester.pumpAndSettle();
 
-    language =
-        tester.widgetList(find.byKey(KWidgetkeys.widget.nawbar.language));
+    language = find.byKey(KWidgetkeys.widget.nawbar.language).evaluate();
 
     if (language.isNotEmpty) {
       expect(find.byKey(KWidgetkeys.widget.nawbar.language), findsOneWidget);
@@ -38,8 +37,7 @@ Future<void> nawbarHelper({
       await languageSwitcherHelper(tester);
     }
   } else {
-    language =
-        tester.widgetList(find.byKey(KWidgetkeys.widget.nawbar.language));
+    language = find.byKey(KWidgetkeys.widget.nawbar.language).evaluate();
 
     if (language.isNotEmpty) {
       expect(find.byKey(KWidgetkeys.widget.nawbar.language), findsOneWidget);
