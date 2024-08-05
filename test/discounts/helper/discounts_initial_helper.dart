@@ -10,8 +10,6 @@ Future<void> discountsInitialHelper(
   await notificationLinkScrollHelper(
     tester: tester,
     test: notificationLinkHelper,
-    scrollUp: true,
-    windowsTest: true,
   );
 
   await changeWindowSizeHelper(
