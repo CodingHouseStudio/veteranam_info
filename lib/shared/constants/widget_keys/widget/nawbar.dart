@@ -1,9 +1,15 @@
 part of '../widget_keys.dart';
 
 class _NawbarKeys {
-  final logo = const Key('nawbar_title');
+  final widget = const Key('nawbar');
+  final logo = const Key('nawbar_logo');
   final field = const Key('nawbar_field');
+  final language = const Key('nawbar_language');
   // final iconMic = const Key('nawbar_micro_icon');
-  final button = const Key('nawbar_button');
-  final iconPerson = const Key('nawbar_person_icon');
+  final loginButton = const Key('nawbar_login_button');
+  final loginIcon = const Key('nawbar_login_icon');
+  final discountsButton = const Key('nawbar_discounts_button');
+  final investorsButton = const Key('nawbar_investors_button');
+  final feedbackButton = const Key('nawbar_feedback_button');
+  final menuButton = const Key('menu_button');
 }

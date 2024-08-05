@@ -60,7 +60,9 @@ class InvestorsWatcherBloc
         emit(
           InvestorsWatcherState(
             fundItems: r,
-            loadingStatus: LoadingStatus.loaded,
+            loadingStatus: r.length > KDimensions.investorsLoadItems
+                ? LoadingStatus.loaded
+                : LoadingStatus.listLoadedFull,
             loadingFundItems: _filter(
               itemsLoaded: state.itemsLoaded,
               loadItems: KDimensions.investorsLoadItems,

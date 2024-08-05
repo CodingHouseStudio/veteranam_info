@@ -7,6 +7,7 @@ import 'package:veteranam/shared/shared.dart';
 
 part '../box_widget_list.dart';
 part '../question_widget_list.dart';
+part '../home_section_widget_list.dart';
 
 class HomeBodyWidget extends StatelessWidget {
   const HomeBodyWidget({
@@ -90,19 +91,8 @@ class HomeBodyWidget extends StatelessWidget {
                   left: KPadding.kPaddingSize48,
                 ),
                 child: Column(
-                  children: SectionWidget.get(
-                    buttonKey: KWidgetkeys.screen.home.discountButton,
-                    prefixKey: KWidgetkeys.screen.home.discountPrefix,
-                    titleKey: KWidgetkeys.screen.home.discountTitle,
-                    subtitleKey: KWidgetkeys.screen.home.discountSubtitle,
-                    textPoint: context.l10n.saveMoney,
-                    title: context.l10n.discountsServices,
-                    subtitle: context.l10n.discountsServicesSubtitle,
-                    textButton: context.l10n.toDiscount,
-                    route: () => context.goNamed(KRoute.discounts.name),
-                    bottomWidget: KSizedBox.kHeightSizedBox90,
-                    isTablet: isTablet,
-                  ),
+                  children:
+                      getDiscountSection(context: context, isTablet: isTablet),
                 ),
               ),
               leftWidget: KImage.discountImage(
@@ -113,28 +103,17 @@ class HomeBodyWidget extends StatelessWidget {
           else ...[
             KImage.discountImage(key: KWidgetkeys.screen.home.discountImage),
             if (isTablet)
-              KSizedBox.kWidthSizedBox48
+              KSizedBox.kHeightSizedBox48
             else
-              KSizedBox.kWidthSizedBox16,
-            ...SectionWidget.get(
-              buttonKey: KWidgetkeys.screen.home.discountButton,
-              prefixKey: KWidgetkeys.screen.home.discountPrefix,
-              titleKey: KWidgetkeys.screen.home.discountTitle,
-              subtitleKey: KWidgetkeys.screen.home.discountSubtitle,
-              textPoint: context.l10n.saveMoney,
-              title: context.l10n.discountsServices,
-              subtitle: context.l10n.discountsServicesSubtitle,
-              textButton: context.l10n.toDiscount,
-              route: () => context.goNamed(KRoute.discounts.name),
-              isTablet: isTablet,
-            ),
+              KSizedBox.kHeightSizedBox16,
+            ...getDiscountSection(context: context, isTablet: isTablet),
           ],
 
-          if (isTablet)
-            KSizedBox.kHeightSizedBox160
-          else
-            KSizedBox.kHeightSizedBox40,
-          if (Config.isDevelopment)
+          if (Config.isDevelopment) ...[
+            if (isTablet)
+              KSizedBox.kHeightSizedBox160
+            else
+              KSizedBox.kHeightSizedBox40,
             if (isDesk)
               HomeScreenCard(
                 leftWidget: Padding(
@@ -142,17 +121,8 @@ class HomeBodyWidget extends StatelessWidget {
                     right: KPadding.kPaddingSize48,
                   ),
                   child: Column(
-                    children: SectionWidget.get(
-                      buttonKey: KWidgetkeys.screen.home.informationButton,
-                      prefixKey: KWidgetkeys.screen.home.informationPrefix,
-                      subtitleKey: KWidgetkeys.screen.home.informationSubtitle,
-                      titleKey: KWidgetkeys.screen.home.informationTitle,
-                      textPoint: context.l10n.findOut,
-                      title: context.l10n.informationNews,
-                      subtitle: context.l10n.informationNewsSubtitle,
-                      textButton: context.l10n.toInfomation,
-                      route: () => context.goNamed(KRoute.information.name),
-                      bottomWidget: KSizedBox.kHeightSizedBox48,
+                    children: getInformationSection(
+                      context: context,
                       isTablet: isTablet,
                     ),
                   ),
@@ -170,19 +140,9 @@ class HomeBodyWidget extends StatelessWidget {
                 KSizedBox.kWidthSizedBox48
               else
                 KSizedBox.kHeightSizedBox16,
-              ...SectionWidget.get(
-                buttonKey: KWidgetkeys.screen.home.informationButton,
-                prefixKey: KWidgetkeys.screen.home.informationPrefix,
-                subtitleKey: KWidgetkeys.screen.home.informationSubtitle,
-                titleKey: KWidgetkeys.screen.home.informationTitle,
-                textPoint: context.l10n.findOut,
-                title: context.l10n.informationNews,
-                subtitle: context.l10n.informationNewsSubtitle,
-                textButton: context.l10n.toInfomation,
-                route: () => context.goNamed(KRoute.information.name),
-                isTablet: isTablet,
-              ),
+              ...getInformationSection(context: context, isTablet: isTablet),
             ],
+          ],
           if (isDesk || isTablet)
             KSizedBox.kHeightSizedBox160
           else
@@ -227,7 +187,7 @@ class HomeBodyWidget extends StatelessWidget {
                   flex: 2,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: faqTest(context: context, isDesk: isDesk),
+                    children: getFAQSection(context: context, isDesk: true),
                   ),
                 ),
                 Expanded(
@@ -246,7 +206,7 @@ class HomeBodyWidget extends StatelessWidget {
               ],
             )
           else ...[
-            ...faqTest(context: context, isDesk: isTablet),
+            ...getFAQSection(context: context, isDesk: isTablet),
             if (isTablet)
               KSizedBox.kHeightSizedBox40
             else
@@ -283,38 +243,4 @@ class HomeBodyWidget extends StatelessWidget {
               );
         },
       );
-
-  List<Widget> faqTest({
-    required BuildContext context,
-    required bool isDesk,
-  }) =>
-      [
-        TextPointWidget(
-          context.l10n.whatYouMostInterestedIn,
-          key: KWidgetkeys.screen.home.faqPrefix,
-        ),
-        if (isDesk) KSizedBox.kHeightSizedBox16 else KSizedBox.kHeightSizedBox8,
-        Text(
-          context.l10n.answersYourQuestions,
-          key: KWidgetkeys.screen.home.faqTitle,
-          style: isDesk
-              ? AppTextStyle.materialThemeDisplayLarge
-              : AppTextStyle.materialThemeDisplaySmall,
-        ),
-        if (isDesk) KSizedBox.kHeightSizedBox16 else KSizedBox.kHeightSizedBox8,
-        Text(
-          context.l10n.questionSubtitle,
-          key: KWidgetkeys.screen.home.faqSubtitle,
-          style: isDesk
-              ? AppTextStyle.materialThemeBodyLarge
-              : AppTextStyle.materialThemeBodyMedium,
-        ),
-        KSizedBox.kHeightSizedBox16,
-        DoubleButtonWidget(
-          widgetKey: KWidgetkeys.screen.home.faqButton,
-          text: context.l10n.writeMessage,
-          onPressed: () => context.goNamed(KRoute.feedback.name),
-          isDesk: isDesk,
-        ),
-      ];
 }

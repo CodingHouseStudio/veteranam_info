@@ -8,12 +8,14 @@ class MenuDialogWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      key: KWidgetkeys.widget.menuDialog.dialog,
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(
           width: double.infinity,
           child: TextButton.icon(
+            key: KWidgetkeys.widget.menuDialog.discountsButton,
             onPressed: () => context
               ..pop()
               ..goNamed(KRoute.discounts.name),
@@ -31,12 +33,14 @@ class MenuDialogWidget extends StatelessWidget {
         ),
         KSizedBox.kHeightSizedBox32,
         _button(
+          key: KWidgetkeys.widget.menuDialog.investorsButton,
           context: context,
           routeName: KRoute.investors.name,
           text: context.l10n.investors,
         ),
         KSizedBox.kHeightSizedBox32,
         _button(
+          key: KWidgetkeys.widget.menuDialog.feedbackButton,
           context: context,
           routeName: KRoute.feedback.name,
           text: context.l10n.contact,
@@ -44,15 +48,17 @@ class MenuDialogWidget extends StatelessWidget {
         KSizedBox.kHeightSizedBox32,
         Wrap(
           children: [
-            const LanguagesSwitcherWidget(),
+            LanguagesSwitcherWidget(
+              key: KWidgetkeys.widget.menuDialog.languageSwitcher,
+            ),
             KSizedBox.kWidthSizedBox30,
             ...FooterWidget.socialMediaLinks(
               isTablet: true,
               context: context,
               padding: KSizedBox.kWidthSizedBox8,
-              instagramKey: const Key('value'),
-              linkedInKey: const Key('linkedInKey'),
-              facebookKey: const Key('facebookKey'),
+              instagramKey: KWidgetkeys.widget.menuDialog.instagram,
+              linkedInKey: KWidgetkeys.widget.menuDialog.linkedIn,
+              facebookKey: KWidgetkeys.widget.menuDialog.facebook,
             ),
           ],
         ),
@@ -64,10 +70,12 @@ class MenuDialogWidget extends StatelessWidget {
     required BuildContext context,
     required String routeName,
     required String text,
+    required Key key,
   }) =>
       SizedBox(
         width: double.infinity,
         child: TextButton(
+          key: key,
           onPressed: () => context
             ..pop()
             ..goNamed(routeName),

@@ -43,16 +43,7 @@ class PrivacyPolicyBody extends StatelessWidget {
                         KSizedBox.kHeightSizedBox32,
                       ],
                     )
-                  : MarkdownBody(
-                      key: KWidgetkeys.screen.privacyPolicy.text,
-                      data: _,
-                      styleSheet: MarkdownStyleSheet(
-                        a: AppTextStyle.materialThemeBodyLarge,
-                      ),
-                      onTapLink: (text, href, title) => context
-                          .read<UrlCubit>()
-                          .launchUrl(url: text, scheme: 'mailto'),
-                    ),
+                  : MarkdownEmailWidget(data: _),
             );
           },
         );

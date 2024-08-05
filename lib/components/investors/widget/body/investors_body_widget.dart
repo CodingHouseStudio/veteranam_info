@@ -25,6 +25,7 @@ class InvestorsBodyWidget extends StatelessWidget {
         loadingStatus: _.loadingStatus,
         cardListIsEmpty: _.fundItems.isEmpty,
         pageName: context.l10n.investors,
+        pageNameKey: KWidgetkeys.screen.investors.title,
         loadDataAgain: () => context
             .read<InvestorsWatcherBloc>()
             .add(const InvestorsWatcherEvent.started()),
@@ -114,7 +115,7 @@ class InvestorsBodyWidget extends StatelessWidget {
           else
             KSizedBox.kHeightSizedBox24,
           if (_.fundItems.isEmpty &&
-              _.loadingStatus == LoadingStatus.loaded &&
+              _.loadingStatus == LoadingStatus.listLoadedFull &&
               Config.isDevelopment)
             MockButtonWidget(
               key: KWidgetkeys.screen.investors.buttonMock,
@@ -136,7 +137,7 @@ class InvestorsBodyWidget extends StatelessWidget {
           //   isDesk: isDesk,
           //   onPressed: () => context
           //       .read<InvestorsWatcherBloc>()
-          //       .add(const InvestorsWatcherEvent.loadeNextItems()),
+          //       .add(const InvestorsWatcherEvent.loadNextItems()),
           //   text: context.l10n.moreFunds,
           // ),
           if (isDesk)
@@ -146,7 +147,7 @@ class InvestorsBodyWidget extends StatelessWidget {
         ],
         loadFunction: () => context
             .read<InvestorsWatcherBloc>()
-            .add(const InvestorsWatcherEvent.loadeNextItems()),
+            .add(const InvestorsWatcherEvent.loadNextItems()),
       ),
     );
   }

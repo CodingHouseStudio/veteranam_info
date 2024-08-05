@@ -46,7 +46,7 @@ List<Widget> _fundsWidgetList({
         fundModel: modelItem,
         isDesk: isDesk,
         hasSubtitle: true,
-        reportEvent: null,
+        // reportEvent: null,
         // () => context
         //     .read<InvestorsWatcherBloc>()
         //     .add(const InvestorsWatcherEvent.getReport()),

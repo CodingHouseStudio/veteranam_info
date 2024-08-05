@@ -1,0 +1,30 @@
+import 'package:flutter_test/flutter_test.dart';
+import 'package:veteranam/shared/shared.dart';
+
+import '../../../test_dependency.dart';
+
+Future<void> filterPopupMenuHelper(
+  WidgetTester tester,
+) async {
+  await scrollingHelperInt(
+    tester: tester,
+    itemKey: KWidgetkeys.widget.filterPopupMenu.widget,
+  );
+
+  await tester.tap(
+    find.byKey(KWidgetkeys.widget.filterPopupMenu.widget),
+  );
+
+  await tester.pumpAndSettle();
+
+  expect(
+    find.byKey(KWidgetkeys.widget.filterPopupMenu.resetAll),
+    findsOneWidget,
+  );
+
+  await tester.tap(
+    find.byKey(KWidgetkeys.widget.filterPopupMenu.resetAll),
+  );
+
+  await tester.pumpAndSettle();
+}
