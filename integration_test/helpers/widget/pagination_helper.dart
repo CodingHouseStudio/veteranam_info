@@ -49,7 +49,7 @@ Future<void> paginationTest(
         findsWidgets,
       );
 
-      await scrollingHelper(
+      await scrollingHelperInt(
         tester: tester,
         itemKey: KWidgetkeys.widget.pagination.sixthNumber,
       );
@@ -58,7 +58,7 @@ Future<void> paginationTest(
 
       await tester.pumpAndSettle();
 
-      await scrollingHelper(
+      await scrollingHelperInt(
         tester: tester,
         offset: KTestConstants.scrollingDown,
       );
@@ -93,7 +93,7 @@ Future<void> paginationTest(
         findsWidgets,
       );
 
-      await scrollingHelper(
+      await scrollingHelperInt(
         tester: tester,
         itemKey: KWidgetkeys.widget.pagination.buttonPrevious,
       );
@@ -103,7 +103,7 @@ Future<void> paginationTest(
 
       await tester.pumpAndSettle();
 
-      await scrollingHelper(
+      await scrollingHelperInt(
         tester: tester,
         offset: KTestConstants.scrollingDown,
       );
@@ -138,7 +138,7 @@ Future<void> paginationTest(
         findsWidgets,
       );
 
-      await scrollingHelper(
+      await scrollingHelperInt(
         tester: tester,
         itemKey: KWidgetkeys.widget.pagination.buttonNext,
       );
@@ -147,7 +147,7 @@ Future<void> paginationTest(
 
       await tester.pumpAndSettle();
 
-      await scrollingHelper(
+      await scrollingHelperInt(
         tester: tester,
         offset: KTestConstants.scrollingDown,
       );
@@ -182,7 +182,7 @@ Future<void> paginationTest(
         findsWidgets,
       );
 
-      await scrollingHelper(
+      await scrollingHelperInt(
         tester: tester,
         itemKey: KWidgetkeys.widget.pagination.lastNumber,
       );
@@ -191,7 +191,7 @@ Future<void> paginationTest(
 
       await tester.pumpAndSettle();
 
-      await scrollingHelper(
+      await scrollingHelperInt(
         tester: tester,
         offset: KTestConstants.scrollingDown,
       );
@@ -221,7 +221,7 @@ Future<void> paginationTest(
         findsWidgets,
       );
 
-      await scrollingHelper(
+      await scrollingHelperInt(
         tester: tester,
         itemKey: KWidgetkeys.widget.pagination.firstNumber,
       );
@@ -230,7 +230,7 @@ Future<void> paginationTest(
 
       await tester.pumpAndSettle();
 
-      await scrollingHelper(
+      await scrollingHelperInt(
         tester: tester,
         offset: KTestConstants.scrollingDown,
       );

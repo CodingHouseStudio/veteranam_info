@@ -10,7 +10,7 @@ Future<void> nawbarHelper({
 }) async {
   expect(find.byKey(KWidgetkeys.widget.nawbar.widget), findsOneWidget);
 
-  await scrollingHelper(
+  await scrollingHelperInt(
     tester: tester,
     itemKey: KWidgetkeys.widget.nawbar.widget,
   );

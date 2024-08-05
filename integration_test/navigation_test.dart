@@ -16,9 +16,18 @@ void main() {
   testWidgets('Navigation test', (tester) async {
     await tester.pumpApp(tester, routeName: null);
 
-    await homeInitialHelper(tester);
+    if (KTest.testIsWeb) {
+      await homeInitialHelper(tester);
+    } else {
+      await discountsInitialHelper(tester);
+    }
+    final buttonsKey = KTest.testIsWeb
+        ? Config.isDevelopment
+            ? KWidgetkeys.widget.footer.buttonsKey
+            : KWidgetkeys.widget.footer.buttonsProdKey
+        : KWidgetkeys.widget.mobNavigation.buttonsKey;
 
-    for (var i = 0; i < KWidgetkeys.widget.footer.buttonsKey.length; i++) {
+    for (var i = 0; i < buttonsKey.length; i++) {
       // if (i == 5) {
       // await tester.tap(find.byKey(KWidgetkeys.widget.nawbar.logo));
 
@@ -27,34 +36,57 @@ void main() {
 
       // await tester.pumpAndSettle();
       // }
+      if (KTest.testIsWeb) {
+        await footerButtonHelper(
+          tester: tester,
+          buttonKey: buttonsKey.elementAt(i),
+        );
+        if (Config.isDevelopment) {
+          switch (i) {
+            case 0:
+              await aboutUsInitialHelper(tester);
+            case 1:
+              await investorsInitialHelper(tester);
+            case 2:
+              await storyInitialHelper(tester);
+            case 3:
+              await discountsInitialHelper(tester);
+            case 4:
+              await loginInitialHelper(tester);
+            case 5:
+              await workInitialHelper(tester);
+            case 6:
+              await informationInitialHelper(tester);
+          }
+        } else {
+          switch (i) {
+            case 0:
+              await investorsInitialHelper(tester);
+            case 1:
+              await discountsInitialHelper(tester);
+          }
+        }
+        await scrollingHelperInt(
+          tester: tester,
+          offset: KTestConstants.scrollingUp,
+        );
 
-      await footerButtonHelper(
-        tester: tester,
-        buttonKey: KWidgetkeys.widget.footer.buttonsKey.elementAt(i),
-      );
+        await tester.tap(find.byKey(KWidgetkeys.widget.nawbar.logo));
 
-      switch (i) {
-        case 0:
-          await aboutUsInitialHelper(tester);
-        case 1:
-          await investorsInitialHelper(tester);
-        case 2:
-          await storyInitialHelper(tester);
-        case 3:
-          await discountsInitialHelper(tester);
-        case 4:
-          await loginInitialHelper(tester);
-        case 5:
-          await workInitialHelper(tester);
-        case 6:
-          await informationInitialHelper(tester);
+        await tester.pumpAndSettle();
+      } else {
+        await mobNavigationButtonHelper(
+          tester: tester,
+          buttonKey: buttonsKey.elementAt(i),
+        );
+
+        switch (i) {
+          case 0:
+            await homeInitialHelper(tester);
+          case 1:
+            await investorsInitialHelper(tester);
+        }
       }
-
-      await scrollingHelper(tester: tester, offset: KTestConstants.scrollingUp);
-
-      await tester.tap(find.byKey(KWidgetkeys.widget.nawbar.logo));
-
-      await tester.pumpAndSettle();
     }
   });
 }

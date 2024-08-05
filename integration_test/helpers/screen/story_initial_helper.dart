@@ -30,7 +30,7 @@ Future<void> storyInitialHelper(
     findsNothing,
   );
 
-  await scrollingHelper(
+  await scrollingHelperInt(
     tester: tester,
     offset: KTestConstants.scrollingDown,
   );

@@ -9,7 +9,7 @@ Future<void> dialogFailureGetTapHelper({
 }) async {
   expect(find.byKey(KWidgetkeys.widget.dialogs.failureButton), findsOneWidget);
 
-  await scrollingHelper(
+  await scrollingHelperInt(
     tester: tester,
     itemKey: KWidgetkeys.widget.dialogs.failureButton,
   );

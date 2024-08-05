@@ -8,7 +8,7 @@ Future<void> loginInitialHelper(
 ) async {
   expect(find.byKey(KWidgetkeys.screen.login.screen), findsOneWidget);
 
-  await scrollingHelper(
+  await scrollingHelperInt(
     tester: tester,
     offset: KTestConstants.scrollingDown,
   );
@@ -28,7 +28,7 @@ Future<void> loginInitialHelper(
     findsOneWidget,
   );
 
-  await scrollingHelper(
+  await scrollingHelperInt(
     tester: tester,
     offset: KTestConstants.scrollingUp,
   );

@@ -442,4 +442,8 @@ abstract class KScreenBlocName {
   static const privacyPolicy = 'Privacy Policy Dialog';
   static const discountCard = 'Discount Card Dialog';
   static const newsCard = 'News Card Dialog';
+
+  static const prod = 'PROD';
+  static const dev = 'DEV';
+  static const mobile = 'MOBILE $prod';
 }

@@ -21,7 +21,6 @@ void main() {
     late AuthenticationRepository mockAuthenticationRepository;
     late IAppAuthenticationRepository mockAppAuthenticationRepository;
     setUp(() {
-      KPlatformConstants.isWebDesktop = false;
       ExtendedDateTime.current = KTestText.dateTime;
       ExtendedDateTime.id = '';
 
@@ -257,7 +256,7 @@ void main() {
             mockGoRouter: mockGoRouter,
           );
 
-          // await investorsInitialHelper(tester);
+          await investorsInitialHelper(tester);
         });
         testWidgets('Report Dialog Correct Send', (tester) async {
           await investorsPumpAppHelper(
