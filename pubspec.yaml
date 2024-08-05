@@ -1,6 +1,6 @@
 name: veteranam
 description: veteran
-version: 0.0.1+10
+version: 0.0.1+14
 publish_to: none
 
 environment:
@@ -62,9 +62,13 @@ dependency_overrides:
 
 dev_dependencies:
   bloc_test: ^9.1.7
+
   build_runner: ^2.4.8 # Used for class generation
+  flutter_launcher_icons: ^0.13.1
+  flutter_native_splash: ^2.4.1
   flutter_test:
     sdk: flutter
+
   injectable_generator: ^2.5.0 # Used for dependency injection for get_it
   integration_test:
     sdk: flutter

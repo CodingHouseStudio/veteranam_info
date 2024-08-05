@@ -95,7 +95,7 @@ class ScaffoldWidget extends StatelessWidget {
             body: (!KPlatformConstants.isWebDesktop)
                 ? CustomScrollView(
                     key: KWidgetkeys.widget.scaffold.scroll,
-                    physics: KTest.scroll,
+                    //physics: KTest.scroll,
                     slivers: [
                       SliverPersistentHeader(
                         delegate: NawbarWidget(
@@ -170,7 +170,7 @@ class ScaffoldWidget extends StatelessWidget {
                   )
                 : KeyboardScrollView(
                     key: KWidgetkeys.widget.scaffold.scroll,
-                    physics: KTest.scroll,
+                    //physics: KTest.scroll,
                     maxHeight: constraints.maxHeight,
                     slivers: [
                       SliverPersistentHeader(

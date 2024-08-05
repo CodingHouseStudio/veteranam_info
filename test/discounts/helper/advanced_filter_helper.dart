@@ -15,16 +15,25 @@ Future<void> advancedFilterHelper(
     find.byKey(KWidgetkeys.screen.discounts.advancedFilter),
     findsOneWidget,
   );
-  final advancedButton = tester.widgetList(
-    find.byKey(KWidgetkeys.screen.discounts.advancedFilterButton),
-  );
+  // final advancedButton = tester.widgetList(
+  //   find.byKey(KWidgetkeys.screen.discounts.advancedFilterButton),
+  // );
 
   expect(
     find.byKey(KWidgetkeys.screen.discounts.advancedFilterButton),
-    advancedButton.isNotEmpty ? findsOneWidget : findsNothing,
+    findsOneWidget,
   );
 
-  if (advancedButton.isNotEmpty) {
+  // if (advancedButton.isNotEmpty) {
+  await tester
+      .tap(find.byKey(KWidgetkeys.screen.discounts.advancedFilterButton));
+
+  await tester.pumpAndSettle();
+  // }
+  final list = tester.widgetList(
+    find.byKey(KWidgetkeys.screen.discounts.advancedFilterList),
+  );
+  if (list.isEmpty) {
     await tester
         .tap(find.byKey(KWidgetkeys.screen.discounts.advancedFilterButton));
 
@@ -38,7 +47,7 @@ Future<void> advancedFilterHelper(
 
   expect(
     find.byKey(KWidgetkeys.screen.discounts.appliedFilterText),
-    findsOneWidget,
+    findsNothing,
   );
 
   expect(
@@ -69,6 +78,11 @@ Future<void> advancedFilterHelper(
   await chekPointHelper(hasAmount: true, tester: tester, twiceTap: true);
 
   await chekPointSignleTapHelper(tester: tester, hasAmount: true);
+
+  expect(
+    find.byKey(KWidgetkeys.screen.discounts.appliedFilterText),
+    findsOneWidget,
+  );
 
   expect(
     find.byKey(KWidgetkeys.screen.discounts.appliedFilterItems),
@@ -102,7 +116,7 @@ Future<void> advancedFilterHelper(
   );
 
   final isMobile = tester
-      .widgetList(find.byKey(KWidgetkeys.screen.discounts.cancelText))
+      .widgetList(find.byKey(KWidgetkeys.screen.discounts.advancedFilterDialog))
       .isNotEmpty;
 
   if (isMobile) {
@@ -112,34 +126,33 @@ Future<void> advancedFilterHelper(
     // );
 
     expect(
-      find.byKey(KWidgetkeys.screen.discounts.cancelText),
+      find.byKey(KWidgetkeys.screen.discounts.advancedFilterDialog),
+      findsOneWidget,
+    );
+  } else {
+    expect(
+      find.byKey(KWidgetkeys.screen.discounts.advancedFilterButtonIcon),
+      findsOneWidget,
+    );
+
+    expect(
+      find.byKey(KWidgetkeys.screen.discounts.advancedFilterButton),
+      findsOneWidget,
+    );
+
+    await tester
+        .tap(find.byKey(KWidgetkeys.screen.discounts.advancedFilterButton));
+
+    await tester.pumpAndSettle();
+
+    expect(
+      find.byKey(KWidgetkeys.screen.discounts.advancedFilterList),
+      findsNothing,
+    );
+
+    expect(
+      find.byKey(KWidgetkeys.screen.discounts.advancedFilterButtonIconUp),
       findsOneWidget,
     );
   }
-  // else {
-  // expect(
-  //   find.byKey(KWidgetkeys.screen.discounts.advancedFilterButtonIconUp),
-  //   findsOneWidget,
-  // );
-
-  // expect(
-  //   find.byKey(KWidgetkeys.screen.discounts.advancedFilterButton),
-  //   findsOneWidget,
-  // );
-
-  // await tester
-  //     .tap(find.byKey(KWidgetkeys.screen.discounts.advancedFilterButton));
-
-  // await tester.pumpAndSettle();
-
-  // expect(
-  //   find.byKey(KWidgetkeys.screen.discounts.advancedFilterList),
-  //   findsNothing,
-  // );
-
-  // expect(
-  //   find.byKey(KWidgetkeys.screen.discounts.advancedFilterButtonIcon),
-  //   findsOneWidget,
-  // );
-  // }
 }
