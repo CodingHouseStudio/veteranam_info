@@ -13,6 +13,7 @@ class NawbarWidget extends SliverPersistentHeaderDelegate {
     this.maxMinHeight,
     this.pageName,
     this.showMobileNawbar,
+    this.pageNameKey,
   });
   final bool isDesk;
   final bool isTablet;
@@ -21,6 +22,7 @@ class NawbarWidget extends SliverPersistentHeaderDelegate {
   final double? maxMinHeight;
   final String? pageName;
   final bool? showMobileNawbar;
+  final Key? pageNameKey;
 
   @override
   double get maxExtent => maxMinHeight ?? KMinMaxSize.minmaxHeight94;
@@ -47,6 +49,7 @@ class NawbarWidget extends SliverPersistentHeaderDelegate {
       isTablet: isTablet,
       pageName: pageName,
       showMobileNawbar: showMobileNawbar ?? false,
+      pageNameKey: pageNameKey,
     );
   }
 }
@@ -56,6 +59,7 @@ class _NawbarWidgetImplematation extends StatefulWidget {
     required this.isDesk,
     required this.isTablet,
     required this.showMobileNawbar,
+    required this.pageNameKey,
     super.key,
     this.childWidget,
     this.pageName,
@@ -65,6 +69,7 @@ class _NawbarWidgetImplematation extends StatefulWidget {
   final bool isTablet;
   final String? pageName;
   final bool showMobileNawbar;
+  final Key? pageNameKey;
 
   @override
   State<_NawbarWidgetImplematation> createState() =>
@@ -74,11 +79,12 @@ class _NawbarWidgetImplematation extends StatefulWidget {
 class _NawbarWidgetImplematationState
     extends State<_NawbarWidgetImplematation> {
   late FocusNode focusNode;
-  late bool isFocused = false;
+  late bool isFocused;
   final _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
+    isFocused = false;
     focusNode = FocusNode();
     focusNode.addListener(
       () => setState(() {
@@ -92,6 +98,7 @@ class _NawbarWidgetImplematationState
   Widget build(BuildContext context) {
     return widget.childWidget ??
         Container(
+          key: KWidgetkeys.widget.nawbar.widget,
           decoration: KWidgetTheme.boxDecorationNawbar,
           margin: EdgeInsets.only(
             top: KPadding.kPaddingSize24,
@@ -115,7 +122,7 @@ class _NawbarWidgetImplematationState
               ? Row(
                   // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    if (widget.isDesk || !isFocused)
+                    if (widget.isTablet || !isFocused)
                       IconButton(
                         padding: EdgeInsets.zero,
                         onPressed: () => EasyDebounce.debounce(
@@ -162,11 +169,14 @@ class _NawbarWidgetImplematationState
                       )
                     else if (widget.isTablet)
                       Expanded(
-                        child: Row(
+                        child: Wrap(
                           // mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          // mainAxisAlignment: MainAxisAlignment.center,
+                          alignment: WrapAlignment.center,
+                          crossAxisAlignment: WrapCrossAlignment.center,
                           children: [
                             _button(
+                              key: KWidgetkeys.widget.nawbar.discountsButton,
                               ruoteName: KRoute.discounts.name,
                               text: context.l10n.discounts,
                               icon: const IconWidget(
@@ -184,6 +194,7 @@ class _NawbarWidgetImplematationState
                             ),
                             KSizedBox.kWidthSizedBox32,
                             _button(
+                              key: KWidgetkeys.widget.nawbar.investorsButton,
                               ruoteName: KRoute.investors.name,
                               text: context.l10n.investors,
                               width: _isEnglish(context)
@@ -196,6 +207,7 @@ class _NawbarWidgetImplematationState
                             ),
                             KSizedBox.kWidthSizedBox32,
                             _button(
+                              key: KWidgetkeys.widget.nawbar.feedbackButton,
                               ruoteName: KRoute.feedback.name,
                               text: context.l10n.contacts,
                               width: KSize.kPixel70,
@@ -208,6 +220,7 @@ class _NawbarWidgetImplematationState
                           ? Expanded(
                               child: Text(
                                 '${widget.pageName}',
+                                key: widget.pageNameKey,
                                 style: AppTextStyle.materialThemeTitleMedium,
                                 textAlign: TextAlign.center,
                               ),
@@ -223,25 +236,27 @@ class _NawbarWidgetImplematationState
                     //       icon: KIcon.mic,
                     //     ),
                     //   ),
-                    if (widget.isDesk || !isFocused)
-                      widget.isTablet
-                          ? const LanguagesSwitcherWidget()
-                          : IconButtonWidget(
-                              icon: KIcon.menu.copyWith(
-                                color: AppColors.materialThemeWhite,
-                              ),
-                              background:
-                                  AppColors.materialThemeKeyColorsSecondary,
-                              onPressed: () async =>
-                                  context.dialog.showMobileMenuDialog(),
-                            ),
+                    if (widget.isTablet)
+                      LanguagesSwitcherWidget(
+                        key: KWidgetkeys.widget.nawbar.language,
+                      )
+                    else if (!isFocused)
+                      IconButtonWidget(
+                        key: KWidgetkeys.widget.nawbar.menuButton,
+                        icon: KIcon.menu.copyWith(
+                          color: AppColors.materialThemeWhite,
+                        ),
+                        background: AppColors.materialThemeKeyColorsSecondary,
+                        onPressed: () async =>
+                            context.dialog.showMobileMenuDialog(),
+                      ),
                     if (context.read<AuthenticationBloc>().state.status !=
                             AuthenticationStatus.authenticated &&
                         Config.isDevelopment) ...[
                       KSizedBox.kWidthSizedBox16,
-                      if (widget.isDesk)
+                      if (widget.isTablet)
                         TextButton(
-                          key: KWidgetkeys.widget.nawbar.button,
+                          key: KWidgetkeys.widget.nawbar.loginButton,
                           style: KButtonStyles.whiteButtonStyle,
                           onPressed: () => loginNavigation(context),
                           child: Text(
@@ -251,7 +266,7 @@ class _NawbarWidgetImplematationState
                         )
                       else if (!isFocused)
                         IconButtonWidget(
-                          key: KWidgetkeys.widget.nawbar.iconPerson,
+                          key: KWidgetkeys.widget.nawbar.loginIcon,
                           onPressed: () => loginNavigation(context),
                           icon: KIcon.person
                               .copyWith(color: AppColors.materialThemeWhite),
@@ -261,9 +276,9 @@ class _NawbarWidgetImplematationState
                     if (context.read<AuthenticationBloc>().state.status ==
                             AuthenticationStatus.authenticated &&
                         Config.isDevelopment)
-                      if (!isFocused || widget.isDesk)
+                      if (!isFocused || widget.isTablet)
                         UserPhotoWidget(
-                          key: KWidgetkeys.widget.nawbar.iconPerson,
+                          key: KWidgetkeys.widget.nawbar.loginIcon,
                           onPressed: () => context.goNamed(KRoute.profile.name),
                           imageUrl: context
                               .read<AuthenticationBloc>()
@@ -275,6 +290,7 @@ class _NawbarWidgetImplematationState
                 )
               : Text(
                   '${widget.pageName}',
+                  key: widget.pageNameKey,
                   style: AppTextStyle.materialThemeTitleMedium,
                   textAlign: TextAlign.center,
                 ),
@@ -293,6 +309,7 @@ class _NawbarWidgetImplematationState
     required String ruoteName,
     required String text,
     required double width,
+    required Key key,
     Widget? icon,
   }) =>
       ButtonBottomLineWidget(
@@ -301,6 +318,7 @@ class _NawbarWidgetImplematationState
         width: width,
         isDesk: widget.isDesk,
         icon: icon,
+        widgetKey: key,
       );
   void loginNavigation(BuildContext context) =>
       context.goNamed(KRoute.login.name);

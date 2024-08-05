@@ -19,21 +19,6 @@ enum CardEnum {
   story,
 }
 
-extension CardEnumExtention on CardEnum {
-  String get getValue {
-    switch (this) {
-      case CardEnum.funds:
-        return 'funds';
-      case CardEnum.discount:
-        return 'discount';
-      case CardEnum.information:
-        return 'information';
-      case CardEnum.story:
-        return 'story';
-    }
-  }
-}
-
 extension ReasonComplaintText on ReasonComplaint {
   String toText(BuildContext context) {
     switch (this) {

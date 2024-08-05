@@ -1,22 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:formz/formz.dart';
-import 'package:veteranam/shared/shared.dart';
 
 enum PhoneNumberFieldModelValidationError { empty, invalid }
-
-extension PhoneNumberFieldModelValidationErrorEmpl
-    on PhoneNumberFieldModelValidationError? {
-  String? value(BuildContext context) {
-    switch (this) {
-      case PhoneNumberFieldModelValidationError.empty:
-        return context.l10n.fieldCannotBeEmpty;
-      case PhoneNumberFieldModelValidationError.invalid:
-        return context.l10n.isWrong;
-      case null:
-        return null;
-    }
-  }
-}
 
 class PhoneNumberFieldModel
     extends FormzInput<String, PhoneNumberFieldModelValidationError> {

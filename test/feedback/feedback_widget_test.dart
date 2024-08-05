@@ -4,7 +4,7 @@ import 'package:get_it/get_it.dart';
 import 'package:mockito/mockito.dart';
 import 'package:veteranam/shared/shared.dart';
 
-import '../text_dependency.dart';
+import '../test_dependency.dart';
 import 'helper/helper.dart';
 
 void main() {
@@ -110,6 +110,16 @@ void main() {
       );
 
       await incorrectSaveHelper(tester);
+    });
+
+    testWidgets('Email tap', (tester) async {
+      await feedbackPumpAppHelper(
+        mockFeedbackRepository: mockFeedbackRepository,
+        tester: tester,
+        mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+      );
+
+      await feedbackEmailTapHelper(tester);
     });
 
     // testWidgets('Feedback enter text and clear it', (tester) async {

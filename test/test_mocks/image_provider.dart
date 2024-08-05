@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:mockito/mockito.dart';
 
-import '../text_dependency.dart';
+import '../test_dependency.dart';
 
 R provideMockedNetworkImages<R>(
   R Function() body,

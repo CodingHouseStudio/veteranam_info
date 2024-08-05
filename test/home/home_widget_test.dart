@@ -4,7 +4,7 @@ import 'package:get_it/get_it.dart';
 import 'package:mockito/mockito.dart';
 import 'package:veteranam/shared/shared.dart';
 
-import '../text_dependency.dart';
+import '../test_dependency.dart';
 import 'helper/helper.dart';
 
 void main() {
@@ -15,7 +15,7 @@ void main() {
   setupFirebaseAuthMocks();
 
   tearDown(GetIt.I.reset);
-  group('${KScreenBlocName.home} ', () {
+  group('${KScreenBlocName.home} ${KScreenBlocName.dev}', () {
     late AuthenticationRepository mockAuthenticationRepository;
     late IHomeRepository mockHomeRepository;
     // late IFeedbackRepository mockFeedbackRepository;
@@ -23,6 +23,7 @@ void main() {
     setUp(() {
       ExtendedDateTime.current = KTestText.dateTime;
       ExtendedDateTime.id = KTestText.feedbackModel.id;
+      KPlatformConstants.isWebDesktop = true;
       mockHomeRepository = MockIHomeRepository();
       mockAuthenticationRepository = MockAuthenticationRepository();
       // mockAppAuthenticationRepository = MockAppAuthenticationRepository();
@@ -162,8 +163,96 @@ void main() {
 
           await homeInitialHelper(tester);
         });
+        testWidgets('Nawbar Menu', (tester) async {
+          await homePumpAppHelper(
+            tester: tester,
+            mockGoRouter: mockGoRouter,
+            mockAuthenticationRepository: mockAuthenticationRepository,
+            // mockFeedbackRepository: mockFeedbackRepository,
+            mockHomeRepository: mockHomeRepository,
+            // mockAppAuthenticationRepository:
+            // mockAppAuthenticationRepository,
+          );
+
+          await homeChangeWindowSizeHelper(
+            tester: tester,
+            isDesk: false,
+            isMobile: true,
+            test: () async => nawbarMenuHelper(
+              tester: tester,
+              mockGoRouter: mockGoRouter,
+            ),
+          );
+        });
 
         group('${KGroupText.goTo} ', () {
+          testWidgets('nawbar widget navigation ${KRoute.profile.name}',
+              (tester) async {
+            await homePumpAppHelper(
+              // mockFeedbackRepository: mockFeedbackRepository,
+              mockHomeRepository: mockHomeRepository,
+              mockAuthenticationRepository: mockAuthenticationRepository,
+              tester: tester,
+              mockGoRouter: mockGoRouter,
+              // mockAppAuthenticationRepository:
+              // mockAppAuthenticationRepository,
+            );
+
+            await homeChangeWindowSizeHelper(
+              tester: tester,
+              isMobile: true,
+              isDesk: false,
+              test: () async => nawbarNavigationHelper(
+                tester: tester,
+                mockGoRouter: mockGoRouter,
+              ),
+            );
+          });
+          group("user isn't anonymously", () {
+            setUp(
+              () => when(mockAuthenticationRepository.isAnonymouslyOrEmty())
+                  .thenAnswer(
+                (realInvocation) => false,
+              ),
+            );
+            testWidgets('${KRoute.profile.name} ', (tester) async {
+              await homePumpAppHelper(
+                // mockFeedbackRepository: mockFeedbackRepository,
+                mockHomeRepository: mockHomeRepository,
+                mockAuthenticationRepository: mockAuthenticationRepository,
+                tester: tester,
+                mockGoRouter: mockGoRouter,
+                // mockAppAuthenticationRepository:
+                // mockAppAuthenticationRepository,
+              );
+
+              await nawbarProfileNavigationHelper(
+                tester: tester,
+                mockGoRouter: mockGoRouter,
+              );
+            });
+            // testWidgets('${KRoute.profile.name} user photo', (tester) async {
+            //   when(mockAuthenticationRepository.currentUser).thenAnswer(
+            //     (realInvocation) => KTestText.user,
+            //   );
+            //   await provideMockedNetworkImages(() async {
+            //     await homePumpAppHelper(
+            //       tester: tester,
+            //       mockGoRouter: mockGoRouter,
+            //       mockAuthenticationRepository: mockAuthenticationRepository,
+            //       // mockFeedbackRepository: mockFeedbackRepository,
+            //       mockHomeRepository: mockHomeRepository,
+            //       mockAppAuthenticationRepository:
+            //           mockAppAuthenticationRepository,
+            //     );
+
+            //     await nawbarProfileNavigationHelper(
+            //       tester: tester,
+            //       mockGoRouter: mockGoRouter,
+            //     );
+            //   });
+            // });
+          });
           testWidgets('screen cards rout', (tester) async {
             await homePumpAppHelper(
               // mockFeedbackRepository: mockFeedbackRepository,

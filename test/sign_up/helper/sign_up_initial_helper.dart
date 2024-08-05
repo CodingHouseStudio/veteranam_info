@@ -1,51 +1,56 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:veteranam/shared/shared.dart';
 
-import '../../text_dependency.dart';
+import '../../test_dependency.dart';
 
 Future<void> signUpInitialHelper(
   WidgetTester tester,
 ) async {
-  expect(
-    find.byKey(KWidgetkeys.screen.signUp.bottomButtons),
-    findsOneWidget,
+  await changeWindowSizeHelper(
+    tester: tester,
+    test: () async {
+      expect(
+        find.byKey(KWidgetkeys.screen.signUp.bottomButtons),
+        findsOneWidget,
+      );
+
+      expect(
+        find.byKey(KWidgetkeys.screen.signUp.button),
+        findsOneWidget,
+      );
+
+      expect(
+        find.byKey(KWidgetkeys.screen.signUp.card),
+        findsOneWidget,
+      );
+
+      expect(
+        find.byKey(KWidgetkeys.screen.signUp.fields),
+        findsOneWidget,
+      );
+
+      expect(
+        find.byKey(KWidgetkeys.screen.signUp.loginButton),
+        findsOneWidget,
+      );
+
+      expect(
+        find.byKey(KWidgetkeys.screen.signUp.loginText),
+        findsOneWidget,
+      );
+
+      expect(
+        find.byKey(KWidgetkeys.screen.signUp.title),
+        findsOneWidget,
+      );
+
+      await dialogFailureSetHelper(tester: tester, isFailure: false);
+
+      await leftCardHelper(tester);
+
+      await emailPasswordFieldsHelper(tester: tester, showPassword: false);
+
+      await signUpBottomButtonsHelper(tester);
+    },
   );
-
-  expect(
-    find.byKey(KWidgetkeys.screen.signUp.button),
-    findsOneWidget,
-  );
-
-  expect(
-    find.byKey(KWidgetkeys.screen.signUp.card),
-    findsOneWidget,
-  );
-
-  expect(
-    find.byKey(KWidgetkeys.screen.signUp.fields),
-    findsOneWidget,
-  );
-
-  expect(
-    find.byKey(KWidgetkeys.screen.signUp.loginButton),
-    findsOneWidget,
-  );
-
-  expect(
-    find.byKey(KWidgetkeys.screen.signUp.loginText),
-    findsOneWidget,
-  );
-
-  expect(
-    find.byKey(KWidgetkeys.screen.signUp.title),
-    findsOneWidget,
-  );
-
-  await dialogFailureSetHelper(tester: tester, isFailure: false);
-
-  await leftCardHelper(tester);
-
-  await emailPasswordFieldsHelper(tester: tester, showPassword: false);
-
-  await signUpBottomButtonsHelper(tester);
 }

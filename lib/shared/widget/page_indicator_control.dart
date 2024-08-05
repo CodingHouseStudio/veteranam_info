@@ -13,18 +13,6 @@ class PageIndicatorControl extends StatefulWidget {
 class PageIndicatorControlState extends State<PageIndicatorControl> {
   int currentPage = 0;
 
-  void nextPage() {
-    setState(() {
-      currentPage = (currentPage + 1) % widget.pageCount;
-    });
-  }
-
-  void previousPage() {
-    setState(() {
-      currentPage = (currentPage - 1 + widget.pageCount) % widget.pageCount;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -35,7 +23,10 @@ class PageIndicatorControlState extends State<PageIndicatorControl> {
           children: [
             IconButton(
               icon: KIcon.arrowLeft,
-              onPressed: previousPage,
+              onPressed: () => setState(
+                () => currentPage =
+                    (currentPage - 1 + widget.pageCount) % widget.pageCount,
+              ),
             ),
             Expanded(
               child: SizedBox(
@@ -50,7 +41,9 @@ class PageIndicatorControlState extends State<PageIndicatorControl> {
             ),
             IconButton(
               icon: KIcon.arrowRight,
-              onPressed: nextPage,
+              onPressed: () => setState(
+                () => currentPage = (currentPage + 1) % widget.pageCount,
+              ),
             ),
           ],
         ),

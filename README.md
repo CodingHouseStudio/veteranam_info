@@ -129,6 +129,8 @@ Get-ChildItem -Path integration_test -Filter '*_test.dart' | ForEach-Object { fv
 or
 Get-ChildItem -Path integration_test -Filter '*_test.dart' | ForEach-Object { flutter run -d chrome --web-port 8080 $_.FullName }
 
+If you want to start test in production mode for tests, add this line to the end of the command --dart-define=FLAVOUR=staging --flavor=staging
+
 pre requisite - run chrome web driver in a different terminal window
 
 chromedriver --port=4444

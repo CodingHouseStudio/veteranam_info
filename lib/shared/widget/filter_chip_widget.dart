@@ -8,13 +8,13 @@ class FiltersChipWidget extends StatelessWidget {
     // required this.onResetValue,
     required this.onSelected,
     required this.isSelected,
-    required this.fullLenght,
+    required this.fullLength,
     required this.filterIsEmpty,
     super.key,
   });
 
   final List<FilterItem> filtersItems;
-  final int fullLenght;
+  final int fullLength;
   final bool isDesk;
   final bool filterIsEmpty;
   // final void Function() onResetValue;
@@ -73,7 +73,7 @@ class FiltersChipWidget extends StatelessWidget {
                 key: KWidgetkeys.widget.filterChip.chips,
                 filter: i != -1
                     ? filtersItems.elementAt(i)
-                    : (FilterItem(context.l10n.all)..number = fullLenght),
+                    : (FilterItem(context.l10n.all)..number = fullLength),
                 onSelected: (isSelected) => onSelected(
                   i,
                 ),

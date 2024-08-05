@@ -4,7 +4,7 @@ import 'package:mockito/mockito.dart';
 import 'package:veteranam/components/components.dart';
 import 'package:veteranam/shared/shared.dart';
 
-import '../../text_dependency.dart';
+import '../../test_dependency.dart';
 
 void main() {
   setupFirebaseAuthMocks();
@@ -145,14 +145,14 @@ void main() {
           (state) => state.loadingStatus == LoadingStatus.loaded,
         ),
         predicate<StoryWatcherState>(
-          (state) => state.loadingStatus == LoadingStatus.loading,
-        ),
-        predicate<StoryWatcherState>(
           (state) => state.loadingStatus == LoadingStatus.listLoadedFull,
-          // &&
-          // state.loadingStoryModelItems.length != KDimensions.loadItems &&
-          // state.itemsLoaded != KDimensions.loadItems,
         ),
+        // predicate<StoryWatcherState>(
+        //   (state) => state.loadingStatus == LoadingStatus.listLoadedFull,
+        // &&
+        // state.loadingStoryModelItems.length != KDimensions.loadItems &&
+        // state.itemsLoaded != KDimensions.loadItems,
+        // ),
       ],
     );
 

@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
-import '../text_dependency.dart';
+import '../test_dependency.dart';
 
 import 'helper/helper.dart';
 
@@ -21,13 +21,13 @@ void main() {
     testWidgets('Show log out dialog', (tester) async {
       await profilePumpAppHelper(tester: tester);
 
-      await logOutDialoglHelper(tester);
+      await profileCardLogOutHelper(tester);
     });
 
     testWidgets('Show delete account dialog', (tester) async {
       await profilePumpAppHelper(tester: tester);
 
-      await deleteAccountDialoglHelper(tester);
+      await profileCardDeleteAccountHelper(tester);
     });
 
     group('${KGroupText.goRouter} ', () {
