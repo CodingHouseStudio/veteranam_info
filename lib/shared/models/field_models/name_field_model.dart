@@ -1,19 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:formz/formz.dart';
-import 'package:veteranam/shared/shared.dart';
 
 enum NameFieldModelValidationError { empty }
-
-extension NameFieldModelValidationErrorEmpl on NameFieldModelValidationError? {
-  String? value(BuildContext context) {
-    switch (this) {
-      case NameFieldModelValidationError.empty:
-        return context.l10n.fieldCannotBeEmpty;
-      case null:
-        return null;
-    }
-  }
-}
 
 class NameFieldModel extends FormzInput<String, NameFieldModelValidationError> {
   const NameFieldModel.pure() : super.pure('');

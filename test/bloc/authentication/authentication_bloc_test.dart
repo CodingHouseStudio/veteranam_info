@@ -6,7 +6,7 @@ import 'package:mockito/mockito.dart';
 import 'package:veteranam/components/components.dart';
 import 'package:veteranam/shared/shared.dart';
 
-import '../../text_dependency.dart';
+import '../../test_dependency.dart';
 
 void main() {
   setupFirebaseAuthMocks();
@@ -31,6 +31,11 @@ void main() {
       );
       when(
         mockAuthenticationRepository.logOut(),
+      ).thenAnswer(
+        (realInvocation) async => const Right(true),
+      );
+      when(
+        mockAuthenticationRepository.deleteUser(),
       ).thenAnswer(
         (realInvocation) async => const Right(true),
       );
@@ -133,6 +138,16 @@ void main() {
               KTestText.userSetting.copyWith(userRole: UserRole.civilian),
         ),
       ],
+    );
+    blocTest<AuthenticationBloc, AuthenticationState>(
+      'emits [AuthenticationState] when'
+      ' AuthenticationDeleteRequested',
+      build: () => authenticationBloc,
+      act: (bloc) async {
+        bloc.add(
+          AuthenticationDeleteRequested(),
+        );
+      },
     );
   });
 }

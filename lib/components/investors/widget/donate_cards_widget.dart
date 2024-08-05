@@ -62,7 +62,7 @@ class _DonatesCardsWidgetState extends State<DonatesCardsWidget> {
                               ? AppTextStyle.text24
                               : null,
                           isDesk: true,
-                          reportEvent: null,
+                          // reportEvent: null,
                           // () =>
                           //     context.read<InvestorsWatcherBloc>().add(
                           //           const InvestorsWatcherEvent.getReport(),

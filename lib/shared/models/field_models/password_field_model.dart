@@ -1,30 +1,10 @@
-import 'package:flutter/widgets.dart';
 import 'package:formz/formz.dart';
-import 'package:veteranam/shared/shared.dart';
 
 enum PasswordFieldModelValidationError {
   empty,
   invalidLength,
   capitalLetter,
   oneNumber
-}
-
-extension PasswordFieldModelValidationErrorEmpl
-    on PasswordFieldModelValidationError? {
-  String? value(BuildContext context) {
-    switch (this) {
-      case PasswordFieldModelValidationError.empty:
-        return context.l10n.fieldCannotBeEmpty;
-      case PasswordFieldModelValidationError.invalidLength:
-        return '${context.l10n.password} ${context.l10n.tooShortEmailPassword}';
-      case null:
-        return null;
-      case PasswordFieldModelValidationError.capitalLetter:
-        return context.l10n.capitalLetter;
-      case PasswordFieldModelValidationError.oneNumber:
-        return context.l10n.oneNumber;
-    }
-  }
 }
 
 class PasswordFieldModel

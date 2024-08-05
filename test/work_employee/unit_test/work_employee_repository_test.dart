@@ -1,9 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart' show FirebaseException;
+import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mockito/mockito.dart';
 import 'package:veteranam/shared/shared.dart';
 
-import '../../text_dependency.dart';
+import '../../test_dependency.dart';
 
 /// COMMENT: exmaple for stream repository
 void main() {
@@ -29,16 +31,20 @@ void main() {
         ).thenAnswer(
           (realInvocation) async {},
         );
+        when(
+          mockFirestoreService.sendRespond(KTestText.employeeRespondModel),
+        ).thenAnswer(
+          (realInvocation) async {},
+        );
 
         if (GetIt.I.isRegistered<FirestoreService>()) {
           GetIt.I.unregister<FirestoreService>();
         }
+        GetIt.I.registerSingleton(mockFirestoreService);
 
         if (GetIt.I.isRegistered<StorageService>()) {
           GetIt.I.unregister<StorageService>();
         }
-
-        GetIt.I.registerSingleton(mockFirestoreService);
         GetIt.I.registerSingleton(mockStorageService);
 
         mockWorkRepository = WorkRepository();
@@ -55,22 +61,35 @@ void main() {
           mockFirestoreService.addWork(KTestText.workModelItems.first),
         ).called(1);
       });
+      test('send respond', () async {
+        expect(
+          await mockWorkRepository.sendRespond(
+            KTestText.employeeRespondModel,
+          ),
+          isA<Right<SomeFailure, bool>>().having((e) => e.value, 'value', true),
+        );
+      });
     });
-    group('${KGroupText.failureGet} ', () {
+    group('${KGroupText.failure} ', () {
       setUp(() {
         when(mockFirestoreService.getWorks()).thenAnswer(
           (realInvocation) => Stream.error(
             KGroupText.failureGet,
           ),
         );
+        when(
+          mockFirestoreService.sendRespond(KTestText.employeeRespondModel),
+        ).thenThrow(
+          Exception(KGroupText.failure),
+        );
         if (GetIt.I.isRegistered<FirestoreService>()) {
           GetIt.I.unregister<FirestoreService>();
         }
+        GetIt.I.registerSingleton(mockFirestoreService);
 
         if (GetIt.I.isRegistered<StorageService>()) {
           GetIt.I.unregister<StorageService>();
         }
-        GetIt.I.registerSingleton(mockFirestoreService);
         GetIt.I.registerSingleton(mockStorageService);
         mockWorkRepository = WorkRepository();
       });
@@ -78,6 +97,49 @@ void main() {
         expect(
           mockWorkRepository.getWorks(),
           emitsError(KGroupText.failureGet),
+        );
+      });
+      test('send respond', () async {
+        expect(
+          await mockWorkRepository.sendRespond(
+            KTestText.employeeRespondModel,
+          ),
+          isA<Left<SomeFailure, bool>>().having(
+            (e) => e.value,
+            'value',
+            equals(const SomeFailure.serverError()),
+          ),
+        );
+      });
+    });
+    group('${KGroupText.firebaseFailure} ', () {
+      setUp(() {
+        when(
+          mockFirestoreService.sendRespond(KTestText.employeeRespondModel),
+        ).thenThrow(
+          FirebaseException(plugin: KGroupText.failure),
+        );
+        if (GetIt.I.isRegistered<FirestoreService>()) {
+          GetIt.I.unregister<FirestoreService>();
+        }
+        GetIt.I.registerSingleton(mockFirestoreService);
+
+        if (GetIt.I.isRegistered<StorageService>()) {
+          GetIt.I.unregister<StorageService>();
+        }
+        GetIt.I.registerSingleton(mockStorageService);
+        mockWorkRepository = WorkRepository();
+      });
+      test('send respond', () async {
+        expect(
+          await mockWorkRepository.sendRespond(
+            KTestText.employeeRespondModel,
+          ),
+          isA<Left<SomeFailure, bool>>().having(
+            (e) => e.value,
+            'value',
+            equals(const SomeFailure.serverError()),
+          ),
         );
       });
     });

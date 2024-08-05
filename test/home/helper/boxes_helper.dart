@@ -2,7 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:veteranam/shared/shared.dart';
 
-import '../../text_dependency.dart';
+import '../../test_dependency.dart';
 import 'helper.dart';
 
 Future<void> boxexHelper({
@@ -32,6 +32,14 @@ Future<void> boxexHelper({
       verify(
         () => mockGoRouter.goNamed(
           KRoute.investors.name,
+        ),
+      ).called(1);
+
+      await tester.tap(find.byKey(KWidgetkeys.screen.home.feedbackBox));
+
+      verify(
+        () => mockGoRouter.goNamed(
+          KRoute.feedback.name,
         ),
       ).called(1);
 

@@ -24,6 +24,7 @@ class BuyMeACoffeeWidget extends StatelessWidget {
             const Flexible(
               child: Text(
                 KAppText.coffee,
+                maxLines: 2,
                 style: AppTextStyle.materialThemeTitleMediumNeutral,
               ),
             ),

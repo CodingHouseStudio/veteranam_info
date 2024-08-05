@@ -6,16 +6,12 @@ class SubtitleConverter implements JsonConverter<String, String> {
 
   @override
   String fromJson(String json) {
-    return json.length > KMinMaxSize.subtitleMaxLength
-        ? json.substring(0, KMinMaxSize.subtitleMaxLength)
-        : json;
+    return json.setStringLength(KMinMaxSize.subtitleMaxLength);
   }
 
   @override
   String toJson(String object) {
-    return object.length > KMinMaxSize.subtitleMaxLength
-        ? object.substring(0, KMinMaxSize.subtitleMaxLength)
-        : object;
+    return object.setStringLength(KMinMaxSize.subtitleMaxLength);
   }
 }
 

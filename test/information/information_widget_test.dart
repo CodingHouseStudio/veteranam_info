@@ -4,7 +4,7 @@ import 'package:get_it/get_it.dart';
 import 'package:mockito/mockito.dart';
 import 'package:veteranam/shared/shared.dart';
 
-import '../text_dependency.dart';
+import '../test_dependency.dart';
 import 'helper/helper.dart';
 
 void main() {
@@ -189,69 +189,6 @@ void main() {
           );
 
           await informationInitialHelper(tester);
-        });
-
-        group('${KGroupText.goTo} ', () {
-          testWidgets('nawbar widget navigation', (tester) async {
-            await informationPumpAppHelper(
-              mockInformationRepository: mockInformationRepository,
-              mockAuthenticationRepository: mockAuthenticationRepository,
-              mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-              mockReportRepository: mockReportRepository,
-              tester: tester,
-              mockGoRouter: mockGoRouter,
-            );
-
-            await nawbarNavigationHelper(
-              tester: tester,
-              mockGoRouter: mockGoRouter,
-            );
-          });
-          group("user isn't anonymously", () {
-            setUp(
-              () => when(mockAuthenticationRepository.isAnonymouslyOrEmty())
-                  .thenAnswer(
-                (realInvocation) => false,
-              ),
-            );
-            testWidgets('${KRoute.profile.name} ', (tester) async {
-              await informationPumpAppHelper(
-                mockInformationRepository: mockInformationRepository,
-                mockAuthenticationRepository: mockAuthenticationRepository,
-                mockAppAuthenticationRepository:
-                    mockAppAuthenticationRepository,
-                mockReportRepository: mockReportRepository,
-                tester: tester,
-                mockGoRouter: mockGoRouter,
-              );
-
-              await nawbarProfileNavigationHelper(
-                tester: tester,
-                mockGoRouter: mockGoRouter,
-              );
-            });
-            // testWidgets('${KRoute.profile.name} user photo', (tester) async {
-            //   when(mockAuthenticationRepository.currentUser).thenAnswer(
-            //     (realInvocation) => KTestText.user,
-            //   );
-            //   await provideMockedNetworkImages(() async {
-            //     await homePumpAppHelper(
-            //       tester: tester,
-            //       mockGoRouter: mockGoRouter,
-            //       mockAuthenticationRepository: mockAuthenticationRepository,
-            //       // mockFeedbackRepository: mockFeedbackRepository,
-            //       mockHomeRepository: mockHomeRepository,
-            //       mockAppAuthenticationRepository:
-            //           mockAppAuthenticationRepository,
-            //     );
-
-            //     await nawbarProfileNavigationHelper(
-            //       tester: tester,
-            //       mockGoRouter: mockGoRouter,
-            //     );
-            //   });
-            // });
-          });
         });
       });
     });

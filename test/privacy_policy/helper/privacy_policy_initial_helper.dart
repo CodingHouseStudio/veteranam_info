@@ -6,11 +6,11 @@ Future<void> privacyPolicyInitialHelper(
 ) async {
   expect(
     find.byKey(KWidgetkeys.screen.privacyPolicy.text),
-    findsWidgets,
+    findsOneWidget,
   );
 
   expect(
     find.byKey(KWidgetkeys.screen.privacyPolicy.closeIcon),
-    findsWidgets,
+    findsOneWidget,
   );
 }
