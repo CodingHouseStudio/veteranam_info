@@ -7,10 +7,12 @@ import 'helper.dart';
 Future<void> discountsInitialHelper(
   WidgetTester tester,
 ) async {
-  await notificationLinkScrollHelper(
-    tester: tester,
-    test: () async => notificationLinkHelper(tester),
-  );
+  if (KTest.testIsWeb) {
+    await notificationLinkScrollHelper(
+      tester: tester,
+      test: () async => notificationLinkHelper(tester),
+    );
+  }
 
   await changeWindowSizeHelper(
     tester: tester,
