@@ -1,4 +1,4 @@
-import '../text_dependency.dart';
+import '../test_dependency.dart';
 
 void main() {
   setupFirebaseAuthMocks();

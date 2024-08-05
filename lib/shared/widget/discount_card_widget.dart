@@ -7,7 +7,7 @@ class DiscountCardWidget extends StatelessWidget {
   const DiscountCardWidget({
     required this.discountItem,
     required this.isDesk,
-    required this.reportEvent,
+    // required this.reportEvent,
     required this.share,
     required this.isLoading,
     super.key,
@@ -17,7 +17,7 @@ class DiscountCardWidget extends StatelessWidget {
 
   final DiscountModel discountItem;
   final bool isDesk;
-  final void Function()? reportEvent;
+  // final void Function()? reportEvent;
   final Widget? closeWidget;
   final String? share;
   final bool isLoading;
@@ -176,7 +176,7 @@ class DiscountCardWidget extends StatelessWidget {
                     isDesk: isDesk,
                     link: discountItem.directLink ?? discountItem.link,
                     cardEnum: CardEnum.discount,
-                    afterEvent: reportEvent,
+                    // afterEvent: reportEvent,
                     cardId: discountItem.id,
                     share: share,
                     complaintKey: KWidgetkeys.widget.discountCard.iconComplaint,

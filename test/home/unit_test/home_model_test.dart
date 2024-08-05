@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:veteranam/shared/shared.dart';
 
-import '../../text_dependency.dart';
+import '../../test_dependency.dart';
 
 void main() {
   setupFirebaseAuthMocks();
@@ -22,21 +22,6 @@ void main() {
       QuestionModelJsonField.subtitle:
           KTestText.questionModelItems.first.subtitle,
       QuestionModelJsonField.navigationLink: null,
-    };
-    final convertorJson = {
-      QuestionModelJsonField.id: KTestText.questionModelItems.first.id,
-      QuestionModelJsonField.title: List.generate(
-        KMinMaxSize.titleMaxLength,
-        (_) => KTestText.questionModelItems.first.title
-            .split(KTestText.questionModelItems.first.title),
-      ).join().substring(0, KMinMaxSize.titleMaxLength),
-      QuestionModelJsonField.subtitle: List.generate(
-        KMinMaxSize.subtitleMaxLength,
-        (_) => KTestText.questionModelItems.first.subtitle
-            .split(KTestText.questionModelItems.first.subtitle),
-      ).join().substring(0, KMinMaxSize.subtitleMaxLength),
-      QuestionModelJsonField.navigationLink:
-          KTestText.questionModelItems.first.navigationLink,
     };
     group('${KGroupText.modelJson} ', () {
       test('${KGroupText.full} ', () {
@@ -89,6 +74,22 @@ void main() {
       });
 
       test('${KGroupText.convertor} ', () {
+        final convertorJson = {
+          QuestionModelJsonField.id: KTestText.questionModelItems.first.id,
+          QuestionModelJsonField.title: List.generate(
+            KMinMaxSize.titleMaxLength,
+            (_) => KTestText.questionModelItems.first.title
+                .split(KTestText.questionModelItems.first.title),
+          ).join(),
+          QuestionModelJsonField.subtitle: List.generate(
+            KMinMaxSize.subtitleMaxLength,
+            (_) => KTestText.questionModelItems.first.subtitle
+                .split(KTestText.questionModelItems.first.subtitle),
+          ).join(),
+          QuestionModelJsonField.navigationLink:
+              KTestText.questionModelItems.first.navigationLink,
+        };
+
         final questionModel = QuestionModel.fromJson(convertorJson);
 
         expect(questionModel.id, KTestText.questionModelItems.first.id);
@@ -122,6 +123,21 @@ void main() {
       });
 
       test('${KGroupText.convertor} ', () {
+        final convertorJson = {
+          QuestionModelJsonField.id: KTestText.questionModelItems.first.id,
+          QuestionModelJsonField.title: List.generate(
+            KMinMaxSize.titleMaxLength,
+            (_) => KTestText.questionModelItems.first.title
+                .split(KTestText.questionModelItems.first.title),
+          ).join().substring(0, KMinMaxSize.titleMaxLength),
+          QuestionModelJsonField.subtitle: List.generate(
+            KMinMaxSize.subtitleMaxLength,
+            (_) => KTestText.questionModelItems.first.subtitle
+                .split(KTestText.questionModelItems.first.subtitle),
+          ).join().substring(0, KMinMaxSize.subtitleMaxLength),
+          QuestionModelJsonField.navigationLink:
+              KTestText.questionModelItems.first.navigationLink,
+        };
         final questionModelJson = QuestionModel(
           id: KTestText.questionModelItems.first.id,
           title: List.generate(

@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:veteranam/shared/shared.dart';
 
-import '../../../text_dependency.dart';
+import '../../../test_dependency.dart';
 
 Future<void> footerHelper(
   WidgetTester tester,
@@ -15,7 +15,7 @@ Future<void> footerHelper(
   await scrollingHelper(
     tester: tester,
     itemKey: KWidgetkeys.widget.footer.title,
-    offset: KTestConstants.scrollingUp500,
+    offset: KTestConstants.scrollingUp200,
   );
 
   expect(find.byKey(KWidgetkeys.widget.footer.title), findsOneWidget);
@@ -24,14 +24,18 @@ Future<void> footerHelper(
 
   expect(find.byKey(KWidgetkeys.widget.footer.sections), findsOneWidget);
 
-  expect(find.byKey(KWidgetkeys.widget.footer.information), findsOneWidget);
+  if (Config.isDevelopment) {
+    expect(find.byKey(KWidgetkeys.widget.footer.information), findsOneWidget);
 
-  await scrollingHelper(
-    tester: tester,
-    itemKey: KWidgetkeys.widget.footer.information,
-  );
+    await scrollingHelper(
+      tester: tester,
+      itemKey: KWidgetkeys.widget.footer.information,
+    );
+  }
 
-  for (final buttonKey in KWidgetkeys.widget.footer.buttonsKey.reversed) {
+  for (final buttonKey in Config.isDevelopment
+      ? KWidgetkeys.widget.footer.buttonsKey.reversed
+      : KWidgetkeys.widget.footer.buttonsProdKey) {
     expect(
       find.byKey(buttonKey),
       findsOneWidget,

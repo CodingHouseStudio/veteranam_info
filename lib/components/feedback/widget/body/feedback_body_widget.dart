@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:go_router/go_router.dart';
 import 'package:veteranam/components/components.dart';
 import 'package:veteranam/shared/shared.dart';
@@ -33,7 +32,7 @@ class _FeedbackBodyWidgetState extends State<FeedbackBodyWidget> {
   Widget build(BuildContext context) {
     return BlocConsumer<FeedbackBloc, FeedbackState>(
       listener: (context, state) {
-        if (state.formState == FeedbackEnum.clear) {
+        if (state.formState == FeedbackEnum.initial) {
           nameController.clear();
           emailController.clear();
           messageController.clear();

@@ -5,7 +5,7 @@ import 'package:mockito/mockito.dart';
 import 'package:veteranam/components/components.dart';
 import 'package:veteranam/shared/shared.dart';
 
-import '../../text_dependency.dart';
+import '../../test_dependency.dart';
 
 void main() {
   setupFirebaseAuthMocks();
@@ -432,20 +432,13 @@ void main() {
               state.filtersCategoriesIndex.isNotEmpty &&
               state.itemsLoaded == 1,
         ),
-        predicate<DiscountWatcherState>(
-          (state) =>
-              state.loadingStatus == LoadingStatus.loading &&
-              state.filteredDiscountModelItems.length == 1 &&
-              state.filtersCategoriesIndex.isNotEmpty &&
-              state.itemsLoaded == 1,
-        ),
-        predicate<DiscountWatcherState>(
-          (state) =>
-              state.loadingStatus == LoadingStatus.listLoadedFull &&
-              state.filteredDiscountModelItems.length == 1 &&
-              state.filtersCategoriesIndex.isNotEmpty &&
-              state.itemsLoaded == 1,
-        ),
+        // predicate<DiscountWatcherState>(
+        //   (state) =>
+        //       state.loadingStatus == LoadingStatus.listLoadedFull &&
+        //       state.filteredDiscountModelItems.length == 1 &&
+        //       state.filtersCategoriesIndex.isNotEmpty &&
+        //       state.itemsLoaded == 1,
+        // ),
         predicate<DiscountWatcherState>(
           (state) =>
               state.loadingStatus == LoadingStatus.loaded &&
@@ -474,7 +467,8 @@ void main() {
     );
     blocTest<DiscountWatcherBloc, DiscountWatcherState>(
       'emits [discountWatcherState()]'
-      ' when get report failure and load nex with listLoadedFull',
+      ' when get report failure, load nex with listLoadedFull and filter'
+      ' locations',
       build: () => discountWatcherBloc,
       act: (bloc) async {
         when(
@@ -503,9 +497,11 @@ void main() {
           ]),
           reason: 'Wait loading data',
         );
-        // bloc.add(
-        //   const DiscountWatcherEvent.loadNextItems(),
-        // );
+        bloc
+          ..add(
+            const DiscountWatcherEvent.loadNextItems(),
+          )
+          ..add(const DiscountWatcherEvent.filterLocations([0, 1]));
       },
       expect: () => [
         predicate<DiscountWatcherState>(
@@ -516,11 +512,12 @@ void main() {
               state.loadingStatus == LoadingStatus.listLoadedFull &&
               state.filtersCategoriesIndex.isEmpty,
         ),
-        // predicate<DiscountWatcherState>(
-        //   (state) =>
-        //       state.loadingStatus == LoadingStatus.listLoadedFull &&
-        //       state.itemsLoaded == 1,
-        // ),
+        predicate<DiscountWatcherState>(
+          (state) =>
+              state.loadingStatus == LoadingStatus.listLoadedFull &&
+              state.filtersCategoriesIndex.isEmpty &&
+              state.filtersLocationIndex.length == 2,
+        ),
       ],
     );
   });

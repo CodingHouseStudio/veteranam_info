@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:veteranam/shared/shared.dart';
 
-import '../../../text_dependency.dart';
+import '../../../test_dependency.dart';
 
 Future<void> notificationLinkSaveHelper({
   required WidgetTester tester,
@@ -17,6 +17,11 @@ Future<void> notificationLinkSaveHelper({
   await tester.enterText(
     find.byKey(KWidgetkeys.widget.notificationLink.field),
     link,
+  );
+
+  await scrollingHelper(
+    tester: tester,
+    itemKey: KWidgetkeys.widget.notificationLink.button,
   );
 
   await tester.tap(find.byKey(KWidgetkeys.widget.notificationLink.button));

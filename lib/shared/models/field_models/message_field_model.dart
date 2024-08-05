@@ -1,20 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:formz/formz.dart';
-import 'package:veteranam/shared/shared.dart';
 
 enum MessageFieldModelValidationError { empty }
-
-extension MessageFieldModelValidationErrorEmpl
-    on MessageFieldModelValidationError? {
-  String? value(BuildContext context) {
-    switch (this) {
-      case MessageFieldModelValidationError.empty:
-        return context.l10n.fieldCannotBeEmpty;
-      case null:
-        return null;
-    }
-  }
-}
 
 class MessageFieldModel
     extends FormzInput<String, MessageFieldModelValidationError> {

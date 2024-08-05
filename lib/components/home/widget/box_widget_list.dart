@@ -195,6 +195,7 @@ Widget doubleBox({
         Expanded(
           flex: 4,
           child: BoxWidget(
+            key: KWidgetkeys.screen.home.feedbackBox,
             text: context.l10n.contacts,
             onTap: () => context.goNamed(KRoute.feedback.name),
             isDesk: true,

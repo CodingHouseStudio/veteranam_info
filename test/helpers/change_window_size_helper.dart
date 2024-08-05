@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 
-import '../text_dependency.dart';
+import '../test_dependency.dart';
 
 /// COMMENT: Helpers change window size in tests
 /// (Default value for setDefaultSize is false)

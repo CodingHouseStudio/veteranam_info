@@ -35,9 +35,7 @@ class CityListWidget extends StatelessWidget {
               children: [
                 KIcon.distance,
                 KSizedBox.kWidthSizedBox8,
-                if (cityList.isEmpty)
-                  const SizedBox.shrink()
-                else
+                if (cityList.isNotEmpty)
                   Expanded(
                     child: cityList.length == 1
                         ? Text(
