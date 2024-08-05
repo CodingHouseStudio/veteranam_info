@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
+//import 'package:go_router/go_router.dart';
 import 'package:veteranam/shared/shared.dart';
 
 class ScaffoldWidget extends StatelessWidget {
@@ -71,33 +71,13 @@ class ScaffoldWidget extends StatelessWidget {
             KRoute.home.name,
           ];
           final scaffold = Scaffold(
-            bottomNavigationBar: KTest.testIsWeb ||
-                    !(showMobBottomNavigation ?? true)
-                ? null
-                : SizedBox(
-                    height: 60,
-                    child: BottomNavigationBar(
-                      items: <BottomNavigationBarItem>[
-                        BottomNavigationBarItem(
-                          icon: KIcon.tag,
-                          label: context.l10n.discounts,
-                        ),
-                        BottomNavigationBarItem(
-                          icon: KIcon.briefcase,
-                          label: context.l10n.investors,
-                        ),
-                        BottomNavigationBarItem(
-                          icon: KIcon.settings,
-                          label: context.l10n.settings,
-                        ),
-                      ],
-                      unselectedLabelStyle:
-                          AppTextStyle.materialThemeLabelSmall,
-                      selectedLabelStyle: AppTextStyle.materialThemeLabelSmall,
-                      currentIndex: 2,
-                      onTap: (i) => context.goNamed(route.elementAt(i)),
-                    ),
-                  ),
+            bottomNavigationBar:
+                KTest.testIsWeb || !(showMobBottomNavigation ?? true)
+                    ? null
+                    : BottomNavbar(
+                        route: route,
+                        index: 2,
+                      ),
             body: (!KPlatformConstants.isWebDesktop)
                 ? CustomScrollView(
                     key: KWidgetkeys.widget.scaffold.scroll,

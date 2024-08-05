@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
+//import 'package:go_router/go_router.dart';
 import 'package:veteranam/shared/shared.dart';
 
 class ScaffoldAutoLoadingWidget extends StatefulWidget {
@@ -149,30 +149,9 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
           final scaffold = Scaffold(
             bottomNavigationBar: KTest.testIsWeb
                 ? null
-                : SizedBox(
-                    height: 60,
-                    child: BottomNavigationBar(
-                      items: <BottomNavigationBarItem>[
-                        BottomNavigationBarItem(
-                          icon: KIcon.tag,
-                          label: context.l10n.discounts,
-                        ),
-                        BottomNavigationBarItem(
-                          icon: KIcon.briefcase,
-                          label: context.l10n.investors,
-                        ),
-                        BottomNavigationBarItem(
-                          icon: KIcon.settings,
-                          label: context.l10n.settings,
-                        ),
-                      ],
-                      unselectedLabelStyle:
-                          AppTextStyle.materialThemeLabelSmall,
-                      selectedLabelStyle: AppTextStyle.materialThemeLabelSmall,
-                      currentIndex:
-                          context.l10n.discounts == widget.pageName ? 0 : 1,
-                      onTap: (i) => context.goNamed(route.elementAt(i)),
-                    ),
+                : BottomNavbar(
+                    route: route,
+                    index: context.l10n.discounts == widget.pageName ? 0 : 1,
                   ),
             body: (!KPlatformConstants.isWebDesktop)
                 ? CustomScrollView(
