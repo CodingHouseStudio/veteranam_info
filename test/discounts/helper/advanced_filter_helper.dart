@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:veteranam/shared/shared.dart';
 
-import '../../text_dependency.dart';
+import '../../test_dependency.dart';
 
 Future<void> advancedFilterHelper(
   WidgetTester tester,
@@ -45,6 +45,12 @@ Future<void> advancedFilterHelper(
     findsOneWidget,
   );
 
+  await scrollingHelper(
+    tester: tester,
+    offset: KTestConstants.scrollingUp,
+    scrollKey: KWidgetkeys.screen.discounts.advancedFilterList,
+  );
+
   expect(
     find.byKey(KWidgetkeys.screen.discounts.appliedFilterText),
     findsNothing,
@@ -78,6 +84,12 @@ Future<void> advancedFilterHelper(
   await chekPointHelper(hasAmount: true, tester: tester, twiceTap: true);
 
   await chekPointSignleTapHelper(tester: tester, hasAmount: true);
+
+  await scrollingHelper(
+    tester: tester,
+    offset: KTestConstants.scrollingUp,
+    scrollKey: KWidgetkeys.screen.discounts.advancedFilterList,
+  );
 
   expect(
     find.byKey(KWidgetkeys.screen.discounts.appliedFilterText),

@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 
-import '../../../text_dependency.dart';
+import '../../../test_dependency.dart';
 import '../helper.dart';
 
 Future<void> formIncorrectSendHelper(

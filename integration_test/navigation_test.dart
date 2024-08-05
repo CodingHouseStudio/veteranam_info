@@ -3,7 +3,7 @@ import 'package:integration_test/integration_test.dart';
 import 'package:veteranam/shared/shared.dart';
 
 import 'constants.dart';
-import 'helper/helper.dart';
+import 'helpers/helpers.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -14,19 +14,11 @@ void main() {
   tearDownAll(getIt.reset);
 
   testWidgets('Navigation test', (tester) async {
-    await appHelper(tester);
+    await tester.pumpApp(tester, routeName: null);
 
-    await scrollingHelperInt(tester: tester, offset: KTestConstants.scrolling);
-
-    await footerHelper(
-      tester: tester,
-      email: KTestText.useremail,
-    );
+    await homeInitialHelper(tester);
 
     for (var i = 0; i < KWidgetkeys.widget.footer.buttonsKey.length; i++) {
-      final buttonKey = KWidgetkeys.widget.footer.buttonsKey.elementAt(i);
-      final screenKey = KTestConstants.screens.elementAt(i);
-
       // if (i == 5) {
       // await tester.tap(find.byKey(KWidgetkeys.widget.nawbar.logo));
 
@@ -36,22 +28,29 @@ void main() {
       // await tester.pumpAndSettle();
       // }
 
-      await scrollingHelperInt(
+      await footerButtonHelper(
         tester: tester,
-        offset: KTestConstants.scrolling,
-        itemKey: buttonKey,
+        buttonKey: KWidgetkeys.widget.footer.buttonsKey.elementAt(i),
       );
 
-      expect(
-        find.byKey(buttonKey),
-        findsOneWidget,
-      );
+      switch (i) {
+        case 0:
+          await aboutUsInitialHelper(tester);
+        case 1:
+          await investorsInitialHelper(tester);
+        case 2:
+          await storyInitialHelper(tester);
+        case 3:
+          await discountsInitialHelper(tester);
+        case 4:
+          await loginInitialHelper(tester);
+        case 5:
+          await workInitialHelper(tester);
+        case 6:
+          await informationInitialHelper(tester);
+      }
 
-      await tester.tap(find.byKey(buttonKey));
-
-      await tester.pumpAndSettle();
-
-      expect(find.byKey(screenKey), findsOneWidget);
+      await scrollingHelper(tester: tester, offset: KTestConstants.scrollingUp);
 
       await tester.tap(find.byKey(KWidgetkeys.widget.nawbar.logo));
 
