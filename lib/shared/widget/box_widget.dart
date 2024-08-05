@@ -89,12 +89,7 @@ class BoxWidget extends StatelessWidget {
               ),
               label: Align(
                 alignment: Alignment.centerRight,
-                child: IconWidget(
-                  key: KWidgetkeys.widget.box.icon,
-                  icon: icon ?? KIcon.arrowUpRight,
-                  padding: KPadding.kPaddingSize20,
-                  background: AppColors.materialThemeWhite,
-                ),
+                child: getIcon,
               ),
             ),
     );
@@ -109,7 +104,10 @@ class BoxWidget extends StatelessWidget {
         background: AppColors.materialThemeWhite,
       );
     } else {
-      return icon ?? KIcon.arrowUpRight;
+      return icon ??
+          KIcon.arrowUpRight.copyWith(
+            key: KWidgetkeys.widget.box.icon,
+          );
     }
   }
 }

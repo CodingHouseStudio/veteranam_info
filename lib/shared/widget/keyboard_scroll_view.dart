@@ -1,25 +1,66 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:veteranam/shared/shared.dart';
 
-class KeyboardScrollView extends StatefulWidget {
+class KeyboardScrollView extends StatelessWidget {
   const KeyboardScrollView({
     required this.slivers,
     required this.semanticChildCount,
+    required this.widgetKey,
+    super.key,
     this.physics,
     this.scrollController,
-    super.key,
+  });
+  final List<Widget> slivers;
+  final int semanticChildCount;
+  final ScrollPhysics? physics;
+  final ScrollController? scrollController;
+  final Key widgetKey;
+
+  @override
+  Widget build(BuildContext context) {
+    if (KPlatformConstants.isWebDesktop) {
+      return _KeyboardScrollViewWebDesk(
+        widgetKey: widgetKey,
+        slivers: slivers,
+        semanticChildCount: semanticChildCount,
+        physics: physics,
+        scrollController: scrollController,
+      );
+    } else {
+      return CustomScrollView(
+        key: widgetKey,
+        controller: scrollController,
+        slivers: slivers,
+        physics: physics,
+        semanticChildCount: semanticChildCount,
+      );
+    }
+  }
+}
+
+class _KeyboardScrollViewWebDesk extends StatefulWidget {
+  const _KeyboardScrollViewWebDesk({
+    required this.slivers,
+    required this.semanticChildCount,
+    required this.physics,
+    required this.scrollController,
+    required this.widgetKey,
   });
 
   final List<Widget> slivers;
   final int semanticChildCount;
   final ScrollPhysics? physics;
   final ScrollController? scrollController;
+  final Key widgetKey;
 
   @override
-  KeyboardScrollViewState createState() => KeyboardScrollViewState();
+  State<_KeyboardScrollViewWebDesk> createState() =>
+      _KeyboardScrollViewWebDeskState();
 }
 
-class KeyboardScrollViewState extends State<KeyboardScrollView> {
+class _KeyboardScrollViewWebDeskState
+    extends State<_KeyboardScrollViewWebDesk> {
   late ScrollController _controller;
 
   @override
@@ -95,6 +136,7 @@ class KeyboardScrollViewState extends State<KeyboardScrollView> {
         return KeyEventResult.ignored;
       },
       child: CustomScrollView(
+        key: widget.widgetKey,
         controller: _controller,
         slivers: widget.slivers,
         physics: widget.physics,

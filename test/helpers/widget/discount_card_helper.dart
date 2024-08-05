@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:veteranam/shared/shared.dart';
 
-import '../../text_dependency.dart';
+import '../../test_dependency.dart';
 
 Future<void> discountCardHelper(
   WidgetTester tester,
@@ -55,6 +55,11 @@ Future<void> discountCardHelper(
     findsWidgets,
   );
 
+  await tester.tap(
+    find.byKey(KWidgetkeys.widget.discountCard.iconShare).first,
+    warnIfMissed: false,
+  );
+
   expect(
     find.byKey(KWidgetkeys.widget.discountCard.iconComplaint),
     findsWidgets,
@@ -63,6 +68,11 @@ Future<void> discountCardHelper(
   expect(
     find.byKey(KWidgetkeys.widget.discountCard.iconWebsite),
     findsWidgets,
+  );
+
+  await tester.tap(
+    find.byKey(KWidgetkeys.widget.discountCard.iconWebsite).first,
+    warnIfMissed: false,
   );
 
   await scrollingHelper(

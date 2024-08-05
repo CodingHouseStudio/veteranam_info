@@ -141,7 +141,7 @@ class InformationBodyWidget extends StatelessWidget {
                 index,
               ),
             ),
-        fullLenght: context
+        fullLength: context
             .read<InformationWatcherBloc>()
             .state
             .informationModelItems

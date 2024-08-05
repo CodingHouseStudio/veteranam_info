@@ -110,7 +110,7 @@ class _DialogsWidget {
   void showReportDialog({
     required bool isDesk,
     required CardEnum cardEnum,
-    required void Function()? afterEvent,
+    // required void Function()? afterEvent,
     required String cardId,
   }) {
     if (isDesk) {
@@ -151,7 +151,7 @@ class _DialogsWidget {
                   content: ReportDialogWidget(
                     isDesk: isDeskValue,
                     cardEnum: cardEnum,
-                    afterEvent: afterEvent,
+                    // afterEvent: afterEvent,
                   ),
                 );
               },
@@ -189,7 +189,7 @@ class _DialogsWidget {
                     child: ReportDialogWidget(
                       isDesk: isDeskValue,
                       cardEnum: cardEnum,
-                      afterEvent: afterEvent,
+                      // afterEvent: afterEvent,
                     ),
                   ),
                 ),

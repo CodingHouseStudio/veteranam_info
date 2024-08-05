@@ -26,14 +26,10 @@ class ChipWidgetState extends State<ChipWidget> {
     final filterEmpty = widget.filter.number == 0;
     return MouseRegion(
       onEnter: (_) {
-        setState(() {
-          _isHovered = true;
-        });
+        setState(() => _isHovered = true);
       },
       onExit: (_) {
-        setState(() {
-          _isHovered = false;
-        });
+        setState(() => _isHovered = false);
       },
       child: FilterChip(
         key: KWidgetkeys.widget.chip.widget,

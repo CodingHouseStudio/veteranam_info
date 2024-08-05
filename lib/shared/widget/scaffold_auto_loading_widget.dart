@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:veteranam/shared/shared.dart';
 
 class ScaffoldAutoLoadingWidget extends StatefulWidget {
@@ -18,6 +17,7 @@ class ScaffoldAutoLoadingWidget extends StatefulWidget {
     this.resetFilter,
     this.pageName,
     this.showMobileNawbar,
+    this.pageNameKey,
   });
 
   final List<Widget> Function({required bool isDesk})?
@@ -34,6 +34,7 @@ class ScaffoldAutoLoadingWidget extends StatefulWidget {
   final void Function() loadDataAgain;
   final String? pageName;
   final bool? showMobileNawbar;
+  final Key? pageNameKey;
 
   @override
   State<ScaffoldAutoLoadingWidget> createState() =>
@@ -141,146 +142,67 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
                         : 0)
                 : KPadding.kPaddingSize16),
           );
-          final route = [
-            KRoute.discounts.name,
-            KRoute.investors.name,
-            KRoute.home.name,
-          ];
           final scaffold = Scaffold(
             bottomNavigationBar: KTest.testIsWeb
                 ? null
-                : BottomNavigationBar(
-                    items: <BottomNavigationBarItem>[
-                      BottomNavigationBarItem(
-                        icon: KIcon.tag.copyWith(fill: 1),
-                        label: context.l10n.discounts,
-                      ),
-                      BottomNavigationBarItem(
-                        icon: KIcon.investors.copyWith(fill: 1),
-                        label: context.l10n.investors,
-                      ),
-                      BottomNavigationBarItem(
-                        icon: KIcon.settings.copyWith(fill: 1),
-                        label: context.l10n.settings,
-                      ),
-                    ],
-                    currentIndex:
-                        context.l10n.discounts == widget.pageName ? 0 : 1,
-                    onTap: (i) => context.goNamed(route.elementAt(i)),
+                : MobNavigationWidget(
+                    index: context.l10n.discounts == widget.pageName ? 0 : 1,
                   ),
-            body: (!KPlatformConstants.isWebDesktop)
-                ? CustomScrollView(
-                    key: KWidgetkeys.widget.scaffold.scroll,
-                    // physics: KTest.scroll,
-                    slivers: [
-                      if (KTest.testIsWeb || widget.pageName != null)
-                        SliverPersistentHeader(
-                          delegate: NawbarWidget(
-                            isDesk: isDesk,
-                            isTablet: isTablet,
-                            pageName: widget.pageName,
-                            showMobileNawbar: widget.showMobileNawbar,
-                          ),
-                        ),
-                      if (titleChildWidget != null)
-                        SliverPadding(
-                          padding: padding,
-                          sliver: SliverList.builder(
-                            addAutomaticKeepAlives: false,
-                            addRepaintBoundaries: false,
-                            itemBuilder: (context, index) {
-                              return titleChildWidget.elementAt(index);
-                            },
-                            itemCount: titleChildWidget.length,
-                          ),
-                        ),
-                      SliverPadding(
-                        padding: isDesk && widget.mainDeskPadding != null
-                            ? padding.add(
-                                widget.mainDeskPadding!(
-                                  maxWidth: constraints.maxWidth,
-                                ),
-                              )
-                            : padding,
-                        sliver: widget.mainRightChildWidget != null && isDesk
-                            ? RowSliver(
-                                right: mainBody(mainChildWidget),
-                                left: SliverPersistentHeader(
-                                  pinned: true,
-                                  delegate: NawbarWidget(
-                                    isDesk: isDesk,
-                                    childWidget: widget.mainRightChildWidget,
-                                    maxMinHeight: constraints.maxHeight,
-                                    isTablet: isTablet,
-                                  ),
-                                ),
-                                leftWidthPercent: 0.3,
-                              )
-                            : mainBody(mainChildWidget),
-                      ),
-                    ],
-                    semanticChildCount: mainChildWidget.length +
-                        (titleChildWidget?.length ?? 0) +
-                        1,
-                    controller: _scrollController,
-                  )
-                : KeyboardScrollView(
-                    key: KWidgetkeys.widget.scaffold.scroll,
-                    // physics: KTest.scroll,
-                    slivers: [
-                      if (KTest.testIsWeb || widget.pageName != null)
-                        SliverPersistentHeader(
-                          delegate: NawbarWidget(
-                            isDesk: isDesk,
-                            isTablet: isTablet,
-                            pageName: widget.pageName,
-                            showMobileNawbar: widget.showMobileNawbar,
-                          ),
-                        ),
-                      if (titleChildWidget != null)
-                        SliverPadding(
-                          padding: padding,
-                          sliver: SliverList.builder(
-                            addAutomaticKeepAlives: false,
-                            addRepaintBoundaries: false,
-                            itemBuilder: (context, index) {
-                              return titleChildWidget.elementAt(index);
-                            },
-                            itemCount: titleChildWidget.length,
-                          ),
-                        ),
-                      SliverPadding(
-                        padding: isDesk && widget.mainDeskPadding != null
-                            ? padding.add(
-                                widget.mainDeskPadding!(
-                                  maxWidth: constraints.maxWidth,
-                                ),
-                              )
-                            : padding,
-                        sliver: widget.mainRightChildWidget != null && isDesk
-                            ? RowSliver(
-                                right: mainBody(mainChildWidget),
-                                left: SliverPersistentHeader(
-                                  pinned: true,
-                                  delegate: NawbarWidget(
-                                    isDesk: isDesk,
-                                    childWidget: widget.mainRightChildWidget,
-                                    maxMinHeight: constraints.maxHeight,
-                                    isTablet: isTablet,
-                                  ),
-                                ),
-                                leftWidthPercent: 0.3,
-                              )
-                            : mainBody(mainChildWidget),
-                      ),
-                    ],
-                    semanticChildCount: mainChildWidget.length +
-                        (titleChildWidget?.length ?? 0) +
-                        1,
-                    scrollController: KPlatformConstants.isWebDesktop
-                        ? null
-                        : _scrollController,
+            body: KeyboardScrollView(
+              widgetKey: KWidgetkeys.widget.scaffold.scroll,
+              // physics: KTest.scroll,
+              slivers: [
+                if (KTest.testIsWeb || widget.pageName != null)
+                  SliverPersistentHeader(
+                    delegate: NawbarWidget(
+                      isDesk: isDesk,
+                      isTablet: isTablet,
+                      pageName: widget.pageName,
+                      showMobileNawbar: widget.showMobileNawbar,
+                      pageNameKey: widget.pageNameKey,
+                    ),
                   ),
+                if (titleChildWidget != null)
+                  SliverPadding(
+                    padding: padding,
+                    sliver: SliverList.builder(
+                      addAutomaticKeepAlives: false,
+                      addRepaintBoundaries: false,
+                      itemBuilder: (context, index) {
+                        return titleChildWidget.elementAt(index);
+                      },
+                      itemCount: titleChildWidget.length,
+                    ),
+                  ),
+                SliverPadding(
+                  padding: isDesk && widget.mainDeskPadding != null
+                      ? padding.add(
+                          widget.mainDeskPadding!(
+                            maxWidth: constraints.maxWidth,
+                          ),
+                        )
+                      : padding,
+                  sliver: widget.mainRightChildWidget != null && isDesk
+                      ? RowSliver(
+                          right: mainBody(mainChildWidget),
+                          left: SliverPersistentHeader(
+                            pinned: true,
+                            delegate: NawbarWidget(
+                              isDesk: isDesk,
+                              childWidget: widget.mainRightChildWidget,
+                              maxMinHeight: constraints.maxHeight,
+                              isTablet: isTablet,
+                            ),
+                          ),
+                          leftWidthPercent: 0.3,
+                        )
+                      : mainBody(mainChildWidget),
+                ),
+              ],
+              semanticChildCount:
+                  mainChildWidget.length + (titleChildWidget?.length ?? 0) + 1,
+              scrollController: _scrollController,
+            ),
           );
           return KTest.testIsWeb ? scaffold : SafeArea(child: scaffold);
         },

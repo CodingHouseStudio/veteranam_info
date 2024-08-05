@@ -1,11 +1,11 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart' show FirebaseException;
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mockito/mockito.dart';
 import 'package:veteranam/shared/shared.dart';
 
-import '../../text_dependency.dart';
+import '../../test_dependency.dart';
 
 void main() {
   setupFirebaseAuthMocks();
@@ -45,6 +45,13 @@ void main() {
         ).thenAnswer(
           (realInvocation) async {},
         );
+        when(
+          mockFirestoreService.getDiscount(
+            KTestText.discountModelItems.first.id,
+          ),
+        ).thenAnswer(
+          (realInvocation) async => KTestText.discountModelItems.first,
+        );
         if (GetIt.I.isRegistered<FirestoreService>()) {
           GetIt.I.unregister<FirestoreService>();
         }
@@ -78,6 +85,17 @@ void main() {
           isA<Right<SomeFailure, bool>>().having((e) => e.value, 'value', true),
         );
       });
+      test('Get Discount', () async {
+        expect(
+          await mockDiscountRepository
+              .getDiscount(KTestText.discountModelItems.first.id),
+          isA<Right<SomeFailure, DiscountModel>>().having(
+            (e) => e.value,
+            'value',
+            KTestText.discountModelItems.first,
+          ),
+        );
+      });
     });
     group('${KGroupText.failure} ', () {
       setUp(() {
@@ -92,14 +110,21 @@ void main() {
             KTestText.user.id,
           ),
         ).thenThrow(
-          (realInvocation) async => Exception(KGroupText.failureGet),
+          Exception(KGroupText.failureGet),
         );
         when(
           mockFirestoreService.sendLink(
             KTestText.linkModel,
           ),
         ).thenThrow(
-          (realInvocation) async => Exception(KGroupText.failureSend),
+          Exception(KGroupText.failureSend),
+        );
+        when(
+          mockFirestoreService.getDiscount(
+            KTestText.discountModelItems.first.id,
+          ),
+        ).thenThrow(
+          Exception(KGroupText.failureGet),
         );
         if (GetIt.I.isRegistered<FirestoreService>()) {
           GetIt.I.unregister<FirestoreService>();
@@ -134,6 +159,17 @@ void main() {
           ),
         );
       });
+      test('Get Discount', () async {
+        expect(
+          await mockDiscountRepository
+              .getDiscount(KTestText.discountModelItems.first.id),
+          isA<Left<SomeFailure, DiscountModel>>().having(
+            (e) => e.value,
+            'value',
+            equals(const SomeFailure.serverError()),
+          ),
+        );
+      });
     });
     group('${KGroupText.firebaseFailure} ', () {
       setUp(() {
@@ -142,16 +178,21 @@ void main() {
             KTestText.user.id,
           ),
         ).thenThrow(
-          (realInvocation) async =>
-              FirebaseException(plugin: KGroupText.failureGet),
+          FirebaseException(plugin: KGroupText.failureGet),
         );
         when(
           mockFirestoreService.sendLink(
             KTestText.linkModel,
           ),
         ).thenThrow(
-          (realInvocation) async =>
-              FirebaseException(plugin: KGroupText.failureSend),
+          FirebaseException(plugin: KGroupText.failureSend),
+        );
+        when(
+          mockFirestoreService.getDiscount(
+            KTestText.discountModelItems.first.id,
+          ),
+        ).thenThrow(
+          FirebaseException(plugin: KGroupText.failureGet),
         );
         if (GetIt.I.isRegistered<FirestoreService>()) {
           GetIt.I.unregister<FirestoreService>();
@@ -174,6 +215,17 @@ void main() {
         expect(
           await mockDiscountRepository.sendLink(KTestText.linkModel),
           isA<Left<SomeFailure, bool>>().having(
+            (e) => e.value,
+            'value',
+            equals(const SomeFailure.serverError()),
+          ),
+        );
+      });
+      test('Get Discount', () async {
+        expect(
+          await mockDiscountRepository
+              .getDiscount(KTestText.discountModelItems.first.id),
+          isA<Left<SomeFailure, DiscountModel>>().having(
             (e) => e.value,
             'value',
             equals(const SomeFailure.serverError()),

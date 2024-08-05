@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/foundation.dart';
+import 'package:flutter/foundation.dart' show visibleForTesting;
 import 'package:flutter/widgets.dart';
 import 'package:injectable/injectable.dart';
 import 'package:veteranam/shared/shared.dart';
@@ -92,7 +92,7 @@ class FirestoreService {
       // If the server fetch is successful, return the data
       return docSnapshot.docs
           .map((doc) => FundModel.fromJson(doc.data()))
-          .where((e) => e.image != null || Config.isDevelopment)
+          .where((e) => e.image != null || !Config.isProduction)
           .toList();
     } on FirebaseException catch (e) {
       if (e.code == 'unavailable') {
@@ -422,4 +422,19 @@ class FirestoreService {
       .collection(FirebaseCollectionName.respond)
       .doc(respondModel.id)
       .set(respondModel.toJson());
+}
+
+extension CardEnumExtention on CardEnum {
+  String get getValue {
+    switch (this) {
+      case CardEnum.funds:
+        return 'funds';
+      case CardEnum.discount:
+        return 'discount';
+      case CardEnum.information:
+        return 'information';
+      case CardEnum.story:
+        return 'story';
+    }
+  }
 }

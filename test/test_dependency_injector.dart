@@ -5,7 +5,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:veteranam/components/components.dart';
 import 'package:veteranam/shared/shared.dart';
 
-import 'text_dependency.dart';
+import 'test_dependency.dart';
 
 /// COMMENT: Method register Services, Repositories and Blocs in tests
 void configureDependenciesTest() {

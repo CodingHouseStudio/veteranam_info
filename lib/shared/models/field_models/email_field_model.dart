@@ -1,29 +1,11 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:formz/formz.dart';
-import 'package:veteranam/shared/shared.dart';
 
 enum EmailFieldModelValidationError {
   empty,
   invalidLength,
   wrong,
-}
-
-extension EmailFieldModelValidationErrorEmpl
-    on EmailFieldModelValidationError? {
-  String? value(BuildContext context) {
-    switch (this) {
-      case EmailFieldModelValidationError.empty:
-        return context.l10n.fieldCannotBeEmpty;
-      case EmailFieldModelValidationError.invalidLength:
-        return '${context.l10n.email} ${context.l10n.tooShortEmailPassword}';
-      case EmailFieldModelValidationError.wrong:
-        return '${context.l10n.email} ${context.l10n.isWrongEmail}';
-      case null:
-        return null;
-    }
-  }
 }
 
 class EmailFieldModel

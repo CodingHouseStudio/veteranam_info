@@ -13,7 +13,7 @@ List<Widget> discountsWidgetList({
       key: KWidgetkeys.screen.discounts.card,
       discountItem: modelItem,
       isDesk: isDesk,
-      reportEvent: null,
+      // reportEvent: null,
       share: '${KRoute.home.path}${KRoute.discounts.path}/${modelItem.id}',
       isLoading: isLoading,
       // () => context
