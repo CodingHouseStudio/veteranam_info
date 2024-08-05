@@ -12,8 +12,6 @@ extension PumpApp on WidgetTester {
   }) async {
     await appHelper(tester);
 
-    await tester.pumpAndSettle();
-
     if (routeName != null) {
       await footerButtonHelper(
         tester: tester,
