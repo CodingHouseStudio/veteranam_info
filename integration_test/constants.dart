@@ -19,7 +19,7 @@ Future<void> setUpGlobalIntegration() async {
     options: Config.isDevelopment
         ? dev.DefaultFirebaseOptions.currentPlatform
         : prod.DefaultFirebaseOptions.currentPlatform,
-    name: 'TEST',
+    name: kIsWeb ? null : 'TEST',
   );
 
   if (kIsWeb) {
