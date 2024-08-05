@@ -8,11 +8,9 @@ import 'package:veteranam/shared/shared.dart';
 Future<void> appHelper(WidgetTester tester) async {
   await tester.pumpWidget(const App());
 
-  final finder = find.byKey(KWidgetkeys.screen.app.screen);
-
   log('Loading App...');
 
-  while (finder.evaluate().isEmpty) {
+  while (find.byKey(KWidgetkeys.screen.app.screen).evaluate().isEmpty) {
     await tester.pumpAndSettle();
   }
 
