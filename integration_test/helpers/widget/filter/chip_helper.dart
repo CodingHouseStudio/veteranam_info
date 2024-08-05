@@ -15,6 +15,7 @@ Future<void> chipHelper(WidgetTester tester) async {
   await scrollingHelperInt(
     tester: tester,
     itemKey: KWidgetkeys.widget.chip.widget,
+    first: false,
   );
 
   await tester.tap(
