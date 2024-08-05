@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:veteranam/shared/shared.dart';
 
-import '../../text_dependency.dart';
+import '../../test_dependency.dart';
 import 'helper.dart';
 
 Future<void> investorsInitialHelper(
@@ -86,10 +86,14 @@ Future<void> investorsInitialHelper(
       //   find.byKey(KWidgetkeys.screen.investors.button),
       //   findsWidgets,
       // );
+
+      final cardSubtitle =
+          tester.widgetList(find.byKey(KWidgetkeys.widget.donateCard.subtitle));
+      if (cardSubtitle.isNotEmpty) {
+        await donateCardHelper(tester: tester, isDesk: false);
+      } else {
+        await donatesCardHelper(tester);
+      }
     },
   );
-
-  await donateCardHelper(tester: tester, isDesk: false);
-
-  await donatesCardHelper(tester);
 }
