@@ -15,6 +15,7 @@ Future<void> scrollingHelper({
   Key? scrollKey,
   Offset? offset,
   bool first = true,
+  int? itemIndex,
 }) async {
   if (offset != null) {
     await tester.drag(
@@ -25,8 +26,13 @@ Future<void> scrollingHelper({
     await tester.pumpAndSettle();
   }
   if (itemKey != null) {
+    final finder = find.byKey(itemKey);
     await tester.ensureVisible(
-      first ? find.byKey(itemKey).first : find.byKey(itemKey).last,
+      itemIndex != null
+          ? finder.at(itemIndex)
+          : first
+              ? finder.first
+              : finder.last,
     );
     await tester.pumpAndSettle();
   }
