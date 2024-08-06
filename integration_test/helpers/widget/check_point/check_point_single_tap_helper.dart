@@ -31,6 +31,7 @@ Future<void> chekPointSignleTapHelper({
   await scrollingHelperInt(
     tester: tester,
     itemKey: KWidgetkeys.widget.checkPoint.widget,
+    itemIndex: 2,
   );
   final keys = find.byKey(KWidgetkeys.widget.checkPoint.widget);
 
