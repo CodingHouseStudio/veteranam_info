@@ -132,6 +132,7 @@ class ScaffoldDecorationWidget extends StatelessWidget {
                 // ),
               ],
               semanticChildCount: mainChildWidget.length + 1,
+              maxHeight: constraints.maxHeight,
             ),
           );
         },

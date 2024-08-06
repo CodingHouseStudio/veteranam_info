@@ -144,6 +144,7 @@ class ScaffoldWidget extends StatelessWidget {
               ],
               semanticChildCount: mainChildWidget.length +
                   (hasFooter ? (footerWidget.length + 1) : 1),
+              maxHeight: constraints.maxHeight,
             ),
           );
           return KTest.testIsWeb ? scaffold : SafeArea(child: scaffold);
