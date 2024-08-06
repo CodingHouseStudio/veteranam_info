@@ -29,7 +29,11 @@ class MobNavigationWidget extends StatelessWidget {
                 padding: EdgeInsets.only(bottom: KPadding.kPaddingSize8),
                 child: KIcon.tag,
               ),
-              activeIcon: activeIcon(KIcon.tag),
+              activeIcon: const IconWidget(
+                icon: KIcon.tag,
+                background: AppColors.materialThemeKeyColorsPrimary,
+                padding: KPadding.kPaddingSize8,
+              ),
               label: context.l10n.discounts,
             ),
             BottomNavigationBarItem(
@@ -38,7 +42,11 @@ class MobNavigationWidget extends StatelessWidget {
                 padding: EdgeInsets.only(bottom: KPadding.kPaddingSize8),
                 child: KIcon.briefcase,
               ),
-              activeIcon: activeIcon(KIcon.briefcase),
+              activeIcon: const IconWidget(
+                icon: KIcon.briefcase,
+                background: AppColors.materialThemeKeyColorsPrimary,
+                padding: KPadding.kPaddingSize8,
+              ),
               label: context.l10n.investors,
             ),
             BottomNavigationBarItem(
@@ -47,7 +55,11 @@ class MobNavigationWidget extends StatelessWidget {
                 padding: EdgeInsets.only(bottom: KPadding.kPaddingSize8),
                 child: KIcon.settings,
               ),
-              activeIcon: activeIcon(KIcon.settings),
+              activeIcon: const IconWidget(
+                icon: KIcon.settings,
+                background: AppColors.materialThemeKeyColorsPrimary,
+                padding: KPadding.kPaddingSize8,
+              ),
               label: context.l10n.settings,
             ),
           ],
@@ -58,17 +70,6 @@ class MobNavigationWidget extends StatelessWidget {
           onTap: (i) => context.goNamed(route.elementAt(i)),
         ),
       ),
-    );
-  }
-
-  Container activeIcon(Icon icon) {
-    return Container(
-      decoration: const BoxDecoration(
-        shape: BoxShape.circle,
-        color: AppColors.materialThemeKeyColorsPrimary,
-      ),
-      padding: const EdgeInsets.all(KPadding.kPaddingSize8),
-      child: icon,
     );
   }
 }
