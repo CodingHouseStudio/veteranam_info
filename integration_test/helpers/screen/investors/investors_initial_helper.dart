@@ -82,10 +82,10 @@ Future<void> investorsInitialHelper(
   //   find.byKey(KWidgetkeys.screen.investors.button),
   //   findsWidgets,
   // );
-
-  final cardSubtitle =
-      tester.widgetList(find.byKey(KWidgetkeys.widget.donateCard.subtitle));
-  if (cardSubtitle.isNotEmpty) {
+  if (find
+      .byKey(KWidgetkeys.widget.donateCard.subtitle)
+      .evaluate()
+      .isNotEmpty) {
     await donateCardHelper(tester: tester, isDesk: false);
   } else {
     await donatesCardHelper(tester);
