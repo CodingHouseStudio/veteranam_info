@@ -1,10 +1,11 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:veteranam/shared/constants/widget_keys/widget_keys.dart';
 
 import '../../test_dependency.dart';
 
 Future<void> notificationLinkScrollHelper({
   required WidgetTester tester,
-  required Future<void> Function() test,
+  required Future<void> Function(WidgetTester tester) test,
 }) async {
   await changeWindowSizeHelper(
     tester: tester,
@@ -14,22 +15,25 @@ Future<void> notificationLinkScrollHelper({
         offset: KTestConstants.scrollingDown,
       );
 
-      await scrollingHelper(
-        tester: tester,
-        offset: KTestConstants.scrollingDown,
-      );
+      await tester.tap(find.byKey(KWidgetkeys.widget.scaffold.loadingButton));
+
+      await tester.pumpAndSettle();
 
       await scrollingHelper(
         tester: tester,
         offset: KTestConstants.scrollingDown,
       );
 
+      await tester.tap(find.byKey(KWidgetkeys.widget.scaffold.loadingButton));
+
+      await tester.pumpAndSettle();
+
       await scrollingHelper(
         tester: tester,
-        offset: KTestConstants.scrollingUp500,
+        offset: KTestConstants.scrollingDown,
       );
 
-      await test();
+      await test(tester);
 
       await scrollingHelper(
         tester: tester,
