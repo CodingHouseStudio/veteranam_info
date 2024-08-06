@@ -30,10 +30,10 @@ Future<void> advancedFilterHelper(
 
   await tester.pumpAndSettle();
   // }
-  final list = tester.widgetList(
-    find.byKey(KWidgetkeys.screen.discounts.advancedFilterList),
-  );
-  if (list.isEmpty) {
+  if (find
+      .byKey(KWidgetkeys.screen.discounts.advancedFilterList)
+      .evaluate()
+      .isEmpty) {
     await tester
         .tap(find.byKey(KWidgetkeys.screen.discounts.advancedFilterButton));
 
