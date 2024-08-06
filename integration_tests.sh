@@ -8,17 +8,13 @@ run_flutter_test() {
     for test_name in "$@"
     do
         echo "Running test: $test_name #$current_test_number out of $total_tests"
-        
-        # Attempt to run the test on port 8080, fallback to 8081 if it fails
-        for port in 8080 8081; do
-            # Run the test and store output in a variable
-            output=$(flutter drive \
-                --flavor development \
-                --driver=test_driver/integration_test.dart \
-                --target=integration_test/"$test_name"_test.dart \
-                -d web-server \
-                --web-port=$port 2>&1)
-        done
+        # Run the test and store output in a variable
+        output=$(flutter drive \
+            --flavor development \
+            --driver=test_driver/integration_test.dart \
+            --target=integration_test/"$test_name"_test.dart \
+            -d web-server\
+            --web-port=8080)
 
         # Check if the test passed or failed and print the relevant message
         if echo "$output" | grep -q "All tests passed"; then
@@ -45,5 +41,4 @@ TESTS=(
 )
 
 run_flutter_test "${TESTS[@]}"
-exit_code=$?
-exit $exit_code  # Exit with the status code from run_flutter_test
+exit $?  # Exit with the status code from run_flutter_test
