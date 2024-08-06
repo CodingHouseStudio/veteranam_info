@@ -21,6 +21,7 @@ run_flutter_test() {
             echo "Test #$current_test_number: $test_name PASSED"
         else
             echo "Test #$current_test_number: $test_name FAILED"
+            echo "$output"
             echo "$output" | grep -A 5 -B 5 "EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK" # Adjust this line as needed
             ((failed_tests++))  # Increment the failed tests counter
         fi
