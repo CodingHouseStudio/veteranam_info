@@ -202,6 +202,7 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
               semanticChildCount:
                   mainChildWidget.length + (titleChildWidget?.length ?? 0) + 1,
               scrollController: _scrollController,
+              maxHeight: constraints.maxHeight,
             ),
           );
           return KTest.testIsWeb ? scaffold : SafeArea(child: scaffold);
