@@ -94,6 +94,27 @@ extension GetItInjectableX on _i1.GetIt {
     );
     final firebaseModule = _$FirebaseModule();
     final networkModule = _$NetworkModule();
+    gh.factory<_i1017.AdvancedFilterMobCubit>(
+        () => _i1017.AdvancedFilterMobCubit());
+    gh.factory<_i37.CacheClient>(() => _i37.CacheClient());
+    gh.singleton<_i1033.FirestoreService>(() => _i1033.FirestoreService());
+    gh.singleton<_i99.StorageService>(() => _i99.StorageService());
+    gh.singleton<_i59.FirebaseAuth>(() => firebaseModule.firebaseAuth);
+    gh.singleton<_i116.GoogleSignIn>(() => firebaseModule.googleSignIn);
+    gh.singleton<_i895.Connectivity>(() => networkModule.connectivity);
+    gh.singleton<_i1001.IDiscountRepository>(() => _i452.DiscountRepository());
+    gh.singleton<_i1001.IFeedbackRepository>(() => _i361.FeedbackRepository());
+    gh.singleton<_i1001.IUrlRepository>(() => _i929.UrlRepository());
+    gh.lazySingleton<_i1001.IStorage>(() => _i949.SecureStorageRepository());
+    gh.singleton<_i1001.IInvestorsRepository>(
+        () => _i994.InvestorsRepository());
+    gh.singleton<_i1001.IHomeRepository>(() => _i713.HomeRepository());
+    gh.singleton<_i1001.IAppAuthenticationRepository>(
+        () => _i99.AppAuthenticationRepository(
+              gh<_i1001.IStorage>(),
+              gh<_i59.FirebaseAuth>(),
+              gh<_i116.GoogleSignIn>(),
+              gh<_i1001.CacheClient>(),
     gh.factory<_i3.AdvancedFilterMobCubit>(() => _i3.AdvancedFilterMobCubit());
     gh.factory<_i4.CacheClient>(() => _i4.CacheClient());
     gh.singleton<_i5.FirestoreService>(() => _i5.FirestoreService());

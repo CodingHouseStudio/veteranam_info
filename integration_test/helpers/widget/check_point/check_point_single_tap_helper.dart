@@ -31,10 +31,9 @@ Future<void> chekPointSignleTapHelper({
   await scrollingHelperInt(
     tester: tester,
     itemKey: KWidgetkeys.widget.checkPoint.widget,
+    itemIndex: 2,
   );
   final keys = find.byKey(KWidgetkeys.widget.checkPoint.widget);
 
-  await tester.tap(tapItemLast ? keys.last : keys.first);
-
-  await tester.pumpAndSettle();
+  await tester.tap(tapItemLast ? keys.at(2) : keys.first);
 }
