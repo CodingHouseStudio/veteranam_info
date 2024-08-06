@@ -4,8 +4,7 @@ import 'package:veteranam/shared/shared.dart';
 Future<void> leftCardHelper(
   WidgetTester tester,
 ) async {
-  final mob = tester.widgetList(find.byKey(KWidgetkeys.widget.leftCard.mob));
-  if (mob.isNotEmpty) {
+  if (find.byKey(KWidgetkeys.widget.leftCard.mob).evaluate().isNotEmpty) {
     expect(
       find.byKey(KWidgetkeys.widget.leftCard.mob),
       findsOneWidget,
