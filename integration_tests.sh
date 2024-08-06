@@ -8,20 +8,23 @@ run_flutter_test() {
     for test_name in "$@"
     do
         echo "Running test: $test_name #$current_test_number out of $total_tests"
-        # Run the test and store output in a variable
-        output=$(flutter drive \
-            --flavor development \
-            --driver=test_driver/integration_test.dart \
-            --target=integration_test/"$test_name"_test.dart \
-            -d web-server\
-            --web-port=8080)
+        
+        # Attempt to run the test on port 8080, fallback to 8081 if it fails
+        for port in 8080 8081; do
+            # Run the test and store output in a variable
+            output=$(flutter drive \
+                --flavor development \
+                --driver=test_driver/integration_test.dart \
+                --target=integration_test/"$test_name"_test.dart \
+                -d web-server \
+                --web-port=$port 2>&1)
+        done
 
         # Check if the test passed or failed and print the relevant message
         if echo "$output" | grep -q "All tests passed"; then
             echo "Test #$current_test_number: $test_name PASSED"
         else
             echo "Test #$current_test_number: $test_name FAILED"
-            echo "$output"
             echo "$output" | grep -A 5 -B 5 "EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK" # Adjust this line as needed
             ((failed_tests++))  # Increment the failed tests counter
         fi
@@ -42,4 +45,5 @@ TESTS=(
 )
 
 run_flutter_test "${TESTS[@]}"
-exit $?  # Exit with the status code from run_flutter_test
+exit_code=$?
+exit $exit_code  # Exit with the status code from run_flutter_test
