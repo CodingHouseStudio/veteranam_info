@@ -25,20 +25,29 @@ class MobNavigationWidget extends StatelessWidget {
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               key: KWidgetkeys.widget.mobNavigation.discounts,
-              icon: _buildIcon(KIcon.tag, false),
-              activeIcon: _buildIcon(KIcon.tag, true),
+              icon: const Padding(
+                padding: EdgeInsets.only(bottom: KPadding.kPaddingSize8),
+                child: KIcon.tag,
+              ),
+              activeIcon: activeIcon(KIcon.tag),
               label: context.l10n.discounts,
             ),
             BottomNavigationBarItem(
               key: KWidgetkeys.widget.mobNavigation.investors,
-              icon: _buildIcon(KIcon.briefcase, false),
-              activeIcon: _buildIcon(KIcon.briefcase, true),
+              icon: const Padding(
+                padding: EdgeInsets.only(bottom: KPadding.kPaddingSize8),
+                child: KIcon.briefcase,
+              ),
+              activeIcon: activeIcon(KIcon.briefcase),
               label: context.l10n.investors,
             ),
             BottomNavigationBarItem(
               key: KWidgetkeys.widget.mobNavigation.settings,
-              icon: _buildIcon(KIcon.settings, false),
-              activeIcon: _buildIcon(KIcon.settings, true),
+              icon: const Padding(
+                padding: EdgeInsets.only(bottom: KPadding.kPaddingSize8),
+                child: KIcon.settings,
+              ),
+              activeIcon: activeIcon(KIcon.settings),
               label: context.l10n.settings,
             ),
           ],
@@ -52,19 +61,14 @@ class MobNavigationWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildIcon(Widget icon, bool isActive) {
-    return isActive
-        ? Container(
-            decoration: const BoxDecoration(
-              shape: BoxShape.circle,
-              color: AppColors.materialThemeKeyColorsPrimary,
-            ),
-            padding: const EdgeInsets.all(KPadding.kPaddingSize8),
-            child: icon,
-          )
-        : Padding(
-            padding: const EdgeInsets.only(bottom: KPadding.kPaddingSize8),
-            child: icon,
-          );
+  Container activeIcon(Icon icon) {
+    return Container(
+      decoration: const BoxDecoration(
+        shape: BoxShape.circle,
+        color: AppColors.materialThemeKeyColorsPrimary,
+      ),
+      padding: const EdgeInsets.all(KPadding.kPaddingSize8),
+      child: icon,
+    );
   }
 }
