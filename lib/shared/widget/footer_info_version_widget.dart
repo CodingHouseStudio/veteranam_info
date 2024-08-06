@@ -38,7 +38,7 @@ class _FooterInfoVersionWidgetState extends State<FooterInfoVersionWidget> {
     return Text(
       ' v${packageInfo.version} ${widget.isDesk ? '' : '\n'}'
       ' build ${packageInfo.buildNumber}',
-      style: widget.isDesk
+      style: widget.isDesk && KTest.testIsWeb
           ? AppTextStyle.materialThemeBodyLarge
           : AppTextStyle.materialThemeBodySmall,
     );

@@ -1006,5 +1006,22 @@
   "privacyPolicyStartText": "# Privacy Policy for Veteranam.info\n\n",
   "@privacyPolicyText": {
     "examples": "The text on the PrivacyPolicy page when the markdown text isn't loaded"
+  },
+  "general": "General",
+  "@general": {
+    "examples": "Text on the settings page on the mobile version"
+  },
+  "faq": "Frequent questions",
+  "@faq": {
+    "examples": "Text on the button located on the settings page on the mobile version",
+    "description": "The button is used to go to the page with frequent questions."
+  },
+  "language": "Language",
+  "@language": {
+    "examples": "Text on the settings page on the mobile version"
+  },
+  "copyEmail": "Email copied to clipboard",
+  "@copyEmail": {
+    "examples": "Текст на сторінці налаштувань на мобільній версії"
   }
 }

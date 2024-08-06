@@ -55,7 +55,7 @@ class ScaffoldWidget extends StatelessWidget {
                     : KPadding.kPaddingSize16),
           );
           final footerWidget = <Widget>[];
-          if (hasFooter) {
+          if (hasFooter && KTest.testIsWeb) {
             footerWidget.addAll(
               FooterWidget.get(
                 context: context,
@@ -80,7 +80,7 @@ class ScaffoldWidget extends StatelessWidget {
                     isDesk: isDesk,
                     isTablet: isTablet,
                     pageName: pageName,
-                    showMobileNawbar: showMobileNawbar,
+                    showMobileNawbar: KTest.testIsWeb ? showMobileNawbar : null,
                   ),
                 ),
                 if (titleChildWidgetsFunction != null)
@@ -110,7 +110,7 @@ class ScaffoldWidget extends StatelessWidget {
                     itemCount: mainChildWidget.length,
                   ),
                 ),
-                if (hasFooter)
+                if (hasFooter && KTest.testIsWeb)
                   SliverPadding(
                     padding: padding.copyWith(
                       bottom: KPadding.kPaddingSize40,

@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:veteranam/components/components.dart';
 import 'package:veteranam/shared/shared.dart';
 
 part '../box_widget_list.dart';
 part '../question_widget_list.dart';
 part '../home_section_widget_list.dart';
+part '../settings_list.dart';
 
 class HomeBodyWidget extends StatelessWidget {
   const HomeBodyWidget({
@@ -32,12 +35,18 @@ class HomeBodyWidget extends StatelessWidget {
             .read<HomeWatcherBloc>()
             .add(const HomeWatcherEvent.started()),
         mainChildWidgetsFunction: ({required isDesk, required isTablet}) => [
-          ..._boxWidgetList(
-            context: context,
-            isDesk: isDesk,
-            isTablet: isTablet,
-            aboutProjectKey: aboutProjectKey,
-          ),
+          if (KTest.testIsWeb)
+            ..._boxWidgetList(
+              context: context,
+              isDesk: isDesk,
+              isTablet: isTablet,
+              aboutProjectKey: aboutProjectKey,
+            )
+          else
+            ..._settingsList(
+              context: context,
+              aboutProjectKey: aboutProjectKey,
+            ),
           SizedBox(
             key: aboutProjectKey,
             height: KSize.kPixel48,
@@ -62,14 +71,14 @@ class HomeBodyWidget extends StatelessWidget {
                 ),
               ],
             )
-          else ...[
+          else if (KTest.testIsWeb) ...[
             TextPointWidget(
               context.l10n.whatKindOfProject,
               key: KWidgetkeys.screen.home.aboutProjecPrefix,
             ),
             if (isTablet)
               KSizedBox.kHeightSizedBox24
-            else
+            else if (KTest.testIsWeb)
               KSizedBox.kHeightSizedBox8,
             Text(
               context.l10n.aboutProject,
@@ -100,7 +109,7 @@ class HomeBodyWidget extends StatelessWidget {
               ),
               rightPadding: KPadding.kPaddingSize84,
             )
-          else ...[
+          else if (KTest.testIsWeb) ...[
             KImage.discountImage(key: KWidgetkeys.screen.home.discountImage),
             if (isTablet)
               KSizedBox.kHeightSizedBox48
@@ -132,7 +141,7 @@ class HomeBodyWidget extends StatelessWidget {
                 ),
                 rightPadding: KPadding.kPaddingSize32,
               )
-            else ...[
+            else if (KTest.testIsWeb) ...[
               KImage.inforamationImage(
                 key: KWidgetkeys.screen.home.informationImage,
               ),
@@ -205,7 +214,7 @@ class HomeBodyWidget extends StatelessWidget {
                 ),
               ],
             )
-          else ...[
+          else if (KTest.testIsWeb) ...[
             ...getFAQSection(context: context, isDesk: isTablet),
             if (isTablet)
               KSizedBox.kHeightSizedBox40
@@ -227,7 +236,7 @@ class HomeBodyWidget extends StatelessWidget {
             KSizedBox.kHeightSizedBox160
           else if (isTablet)
             KSizedBox.kHeightSizedBox64
-          else
+          else if (KTest.testIsWeb)
             KSizedBox.kHeightSizedBox48,
         ],
       ),

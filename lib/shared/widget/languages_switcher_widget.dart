@@ -18,7 +18,9 @@ class LanguagesSwitcherWidget extends StatelessWidget {
                 );
           },
           icon: Container(
-            decoration: KWidgetTheme.boxDecorationWhiteMain,
+            decoration: KTest.testIsWeb
+                ? KWidgetTheme.boxDecorationWhiteMain
+                : KWidgetTheme.boxDecorationNawbar,
             child: Row(
               key: KWidgetkeys.widget.languageSwitcher.item,
               mainAxisSize: MainAxisSize.min,
