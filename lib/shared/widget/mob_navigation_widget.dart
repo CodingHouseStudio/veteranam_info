@@ -8,18 +8,6 @@ class MobNavigationWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final routes = [
-      KRoute.discounts.name,
-      KRoute.investors.name,
-      KRoute.home.name,
-    ];
-
-    final icons = [
-      KIcon.tag,
-      KIcon.briefcase,
-      KIcon.settings,
-    ];
-
     final labels = [
       context.l10n.discounts,
       context.l10n.investors,
@@ -35,20 +23,17 @@ class MobNavigationWidget extends StatelessWidget {
         constraints: const BoxConstraints(minHeight: KSize.kPixel80),
         child: BottomNavigationBar(
           key: KWidgetkeys.widget.mobNavigation.widget,
-          items: List.generate(icons.length, (index) {
+          items: List.generate(KIcon.icons.length, (index) {
             return BottomNavigationBarItem(
               key: KWidgetkeys.widget.mobNavigation.navButtonsKey[index],
               icon: Padding(
                 padding: const EdgeInsets.only(bottom: KPadding.kPaddingSize8),
-                child: icons[index],
+                child: KIcon.icons[index],
               ),
-              activeIcon: Container(
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: AppColors.materialThemeKeyColorsPrimary,
-                ),
-                padding: const EdgeInsets.all(KPadding.kPaddingSize8),
-                child: icons[index],
+              activeIcon: IconWidget(
+                icon: KIcon.icons[index],
+                background: AppColors.materialThemeKeyColorsPrimary,
+                padding: KPadding.kPaddingSize8,
               ),
               label: labels[index],
             );
@@ -57,7 +42,7 @@ class MobNavigationWidget extends StatelessWidget {
           unselectedLabelStyle: AppTextStyle.materialThemeLabelSmall,
           selectedLabelStyle: AppTextStyle.materialThemeLabelSmall,
           currentIndex: index,
-          onTap: (i) => context.goNamed(routes[i]),
+          onTap: (i) => context.goNamed(KAppText.routes[i]),
         ),
       ),
     );
