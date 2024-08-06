@@ -25,17 +25,20 @@ class MobNavigationWidget extends StatelessWidget {
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               key: KWidgetkeys.widget.mobNavigation.discounts,
-              icon: _buildIcon(KIcon.tag, 0),
+              icon: _buildIcon(KIcon.tag, false),
+              activeIcon: _buildIcon(KIcon.tag, true),
               label: context.l10n.discounts,
             ),
             BottomNavigationBarItem(
               key: KWidgetkeys.widget.mobNavigation.investors,
-              icon: _buildIcon(KIcon.briefcase, 1),
+              icon: _buildIcon(KIcon.briefcase, false),
+              activeIcon: _buildIcon(KIcon.briefcase, true),
               label: context.l10n.investors,
             ),
             BottomNavigationBarItem(
               key: KWidgetkeys.widget.mobNavigation.settings,
-              icon: _buildIcon(KIcon.settings, 2),
+              icon: _buildIcon(KIcon.settings, false),
+              activeIcon: _buildIcon(KIcon.settings, true),
               label: context.l10n.settings,
             ),
           ],
@@ -49,8 +52,8 @@ class MobNavigationWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildIcon(Widget icon, int itemIndex) {
-    return index == itemIndex
+  Widget _buildIcon(Widget icon, bool isActive) {
+    return isActive
         ? Container(
             decoration: const BoxDecoration(
               shape: BoxShape.circle,
