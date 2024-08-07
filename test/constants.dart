@@ -238,7 +238,7 @@ abstract class KTestText {
       KMockText.discountModel.copyWith(
         id: i.toString(),
         userId: i.toString(),
-        category: i == 0 ? KMockText.tag : KMockText.discountModel.category,
+        categoryEN: i == 0 ? KMockText.tag : KMockText.discountModel.categoryEN,
         dateVerified: dateTime,
         discount: i == 0 ? [12, 35, 100] : KMockText.discountModel.discount,
         subLocation: i == 0
