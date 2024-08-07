@@ -138,8 +138,8 @@ void main() {
           (state) =>
               state.loadingStatus == LoadingStatus.listLoadedFull &&
               state.filteredDiscountModelItems.every(
-                (element) => element.category.contains(
-                  KTestText.discountModelItemsModify.first.category.first,
+                (element) => element.categoryEN.contains(
+                  KTestText.discountModelItemsModify.first.categoryEN.first,
                 ),
               ) &&
               state.filtersCategoriesIndex.length == 1,
