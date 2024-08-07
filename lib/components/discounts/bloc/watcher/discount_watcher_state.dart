@@ -39,7 +39,7 @@ extension LocationGetter on List<DiscountModel> {
           ))
         FilterItem(SubLocation.online),
       ...overallItems(
-        getFilter: (item) => item.location ?? [],
+        getENFilter: (item) => item.location ?? [],
         context: null,
       ),
     ];
