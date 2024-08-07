@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:veteranam/shared/shared.dart';
 
@@ -102,7 +101,7 @@ class DiscountCardWidget extends StatelessWidget {
                     if (isDesk)
                       Expanded(
                         child: Text(
-                          discountItem.title,
+                          title(context),
                           key: KWidgetkeys.widget.discountCard.discountTitle,
                           style: AppTextStyle.materialThemeDisplaySmall,
                           overflow: TextOverflow.clip,
@@ -127,7 +126,7 @@ class DiscountCardWidget extends StatelessWidget {
                 if (!isDesk) ...[
                   KSizedBox.kHeightSizedBox16,
                   Text(
-                    discountItem.title,
+                    title(context),
                     key: KWidgetkeys.widget.discountCard.discountTitle,
                     style: AppTextStyle.materialThemeHeadlineSmall,
                     overflow: TextOverflow.clip,
@@ -197,8 +196,11 @@ class DiscountCardWidget extends StatelessWidget {
     );
   }
 
+  String title(BuildContext context) => discountItem.title
+      .getTrnslation(en: discountItem.titleEN, context: context);
+
   List<Widget> _category(BuildContext context) =>
-      List.generate(discountItem.category.length, (int index) {
+      List.generate(discountItem.categoryEN.length, (int index) {
         return Container(
           constraints: const BoxConstraints(minHeight: KMinMaxSize.minHeight30),
           padding: const EdgeInsets.symmetric(
@@ -215,14 +217,9 @@ class DiscountCardWidget extends StatelessWidget {
               KSizedBox.kWidthSizedBox8,
               Text(
                 key: KWidgetkeys.widget.discountCard.category,
-                context
-                        .read<AuthenticationBloc>()
-                        .state
-                        .userSetting
-                        .locale
-                        .isEnglish
-                    ? discountItem.category.elementAt(index)
-                    : discountItem.categoryUA.elementAt(index),
+                context.isEnglish
+                    ? discountItem.categoryEN.elementAt(index)
+                    : discountItem.category.elementAt(index),
                 style: AppTextStyle.materialThemeLabelLarge,
               ),
             ],
