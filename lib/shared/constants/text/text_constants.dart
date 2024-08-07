@@ -123,34 +123,35 @@ abstract class KMockText {
     discount: [10],
     title:
         '20% знижки на аналізи для військових та людей, які внутрішньо переміщені.',
-    category: ['Medical'],
-    categoryUA: ['Медицина'],
-    subcategory: ['Analyses'],
-    subcategoryUA: ['Аналізи'],
-    eligibility: 'Військовослужбовці та ВПО',
+    categoryEN: ['Medical'],
+    category: ['Медицина'],
+    subcategoryEN: ['Analyses'],
+    subcategory: ['Аналізи'],
+    // eligibility: 'Військовослужбовці та ВПО',
     description: 'Пропозиція діє у всіх відділеннях лабораторії.',
-    requirements: 'Військовим - наявність документу, що підтверджує  професійну'
-        ' приналежність до ЗСУ (військовий квиток з відміткою про несення служби '
-        '“призваний за мобілізацією” від 24 лютого або пізніше, тимчасове посвідчення офіцера з відміткою). '
-        ' Людям, які вимушено переміщені - довідка внутрішньо переміщеної особи або документ'
-        ' із зазначеною пропискою, у населених пунктах на яких ведуться (велися) бойові дії'
-        ' (Житомирська, Вінницька, Миколаївська, Київська, Черкаська, Чернігівська, Полтавська, Сумська,'
-        ' Одеська, Херсонська, Запорізька, Харківська, Дніпропетровська, Кіровоградська, Донецька та Луганська області).'
-        ' *Знижка надається персонально лише військовому (не надається членам сімей). ',
+    requirements:
+        'Військовим - наявність документу, що підтверджує  професійну',
     territory: 'Всі відділення лабораторії.',
     location: ['Вся Україна'],
     expiration: 'Діє постійно',
     exclusions:
-        '- при замовленні досліджень та оплаті їх онлайн на сайті Ескулаб;'
-        ' - до алергологічних, генетичних, бактеріологічних та інших досліджень затверджених переліком;'
-        ' - при замовленні послуги «Виклик медсестри додому» та придбанні Сертифікатів;'
-        ' - не додається до інших знижок, що діють в лабораторії Ескулаб (акцій, соціальні ініціативи, партнерські програми).'
-        ' - взяття біоматеріалу сплачується окремо. Грошовий еквівалент знижки не надається. ',
+        '- при замовленні досліджень та оплаті їх онлайн на сайті Ескулаб;',
     phoneNumber: '+380 800 503 680',
     directLink:
         'https://esculab.com/20-vidsotkiv-na-analizy-dlya-viyskovyh-ta-lyudey-yaki-vnutrishno-peremishcheni',
     dateVerified: ExtendedDateTime.current,
     userName: 'Anonymous',
+    titleEN:
+        '20% discount on tests for military personnel and internally displaced persons.',
+    // eligibilityEN: 'Military personnel and internally displaced persons',
+    descriptionEN: 'The offer is valid in all branches of the laboratory.',
+    requirementsEN:
+        'Military personnel - presence of a document confirming professional status',
+    territoryEN: 'All branches of the laboratory.',
+    exclusionsEN:
+        '- when ordering tests and paying for them online on the Esculab website;',
+    expirationEN: 'It works all the time',
+    locationEN: ['All Ukraine'],
   );
   static final informationModel = InformationModel(
     id: '',

@@ -124,7 +124,7 @@ class InformationBodyWidget extends StatelessWidget {
             .informationModelItems
             .overallItems(
               context: context,
-              getFilter: (item) => item.category,
+              getENFilter: (item) => item.category,
               getUAFilter: (item) => item.categoryUA,
             ),
         isDesk: isDesk,
