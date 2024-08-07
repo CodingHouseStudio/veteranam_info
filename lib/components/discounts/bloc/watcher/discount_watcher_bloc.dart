@@ -297,7 +297,7 @@ class DiscountWatcherBloc
       (list ?? state.discountModelItems).loadingFilter(
         filtersIndex: categoryIndex,
         itemsLoaded: null,
-        getFilter: (item) => item.category,
+        getENFilter: (item) => item.categoryEN,
       );
 
   // Future<void> _onGetReport(

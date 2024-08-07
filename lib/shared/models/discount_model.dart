@@ -12,27 +12,36 @@ class DiscountModel with _$DiscountModel {
     // required DateTime date,
     required List<int> discount,
     required String title,
+    required String titleEN,
     required List<String> category,
-    required List<String> categoryUA,
+    required List<String> categoryEN,
     required List<String> subcategory,
-    required List<String> subcategoryUA,
-    required String eligibility,
+    required List<String> subcategoryEN,
+    // required String eligibility,
+    // required String eligibilityEN,
     required String description,
+    required String descriptionEN,
     required String requirements,
+    required String requirementsEN,
     required String territory,
+    required String territoryEN,
     required String exclusions,
+    required String exclusionsEN,
     required String phoneNumber,
     required DateTime dateVerified,
     required String link,
     String? expiration,
+    String? expirationEN,
     List<String>? location,
+    List<String>? locationEN,
     String? userId,
-    String? html,
+    // String? html,
     String? userName,
     @ImageConverter() ImageModel? userPhoto,
     String? company,
     String? directLink,
     String? additionalDetails,
+    String? additionalDetailsEN,
     SubLocation? subLocation,
     // @Default(false) bool hasMarkdown,
   }) = _DiscountModel;
@@ -64,22 +73,31 @@ abstract class DiscountModelJsonField {
   static const company = 'company';
   static const discount = 'discount';
   static const title = 'title';
+  static const titleEN = 'titleEN';
   static const category = 'category';
-  static const categoryUA = 'categoryUA';
+  static const categoryEN = 'categoryEN';
   static const subcategory = 'subcategory';
-  static const subcategoryUA = 'subcategoryUA';
-  static const eligibility = 'eligibility';
+  static const subcategoryEN = 'subcategoryEN';
+  // static const eligibility = 'eligibility';
+  // static const eligibilityEN = 'eligibilityEN';
   static const description = 'description';
+  static const descriptionEN = 'descriptionEN';
   static const requirements = 'requirements';
+  static const requirementsEN = 'requirementsEN';
   static const territory = 'territory';
+  static const territoryEN = 'territoryEN';
   static const location = 'location';
+  static const locationEN = 'locationEN';
   static const expiration = 'expiration';
+  static const expirationEN = 'expirationEN';
   static const exclusions = 'exclusions';
+  static const exclusionsEN = 'exclusionsEN';
   static const phoneNumber = 'phoneNumber';
   static const directLink = 'directLink';
   static const dateVerified = 'dateVerified';
-  static const html = 'html';
+  // static const html = 'html';
   static const additionalDetails = 'additionalDetails';
+  static const additionalDetailsEN = 'additionalDetailsEN';
   static const link = 'link';
   static const userName = 'userName';
   static const userPhoto = 'userPhoto';

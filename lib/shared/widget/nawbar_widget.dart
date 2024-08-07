@@ -184,7 +184,7 @@ class _NawbarWidgetImplematationState
                                 background: AppColors.materialThemeSourceSeed,
                                 padding: KPadding.kPaddingSize8,
                               ),
-                              width: _isEnglish(context)
+                              width: context.isEnglish
                                   ? KSize.kPixel72
                                   : KSize.kPixel56,
                             ),
@@ -197,7 +197,7 @@ class _NawbarWidgetImplematationState
                               key: KWidgetkeys.widget.nawbar.investorsButton,
                               ruoteName: KRoute.investors.name,
                               text: context.l10n.investors,
-                              width: _isEnglish(context)
+                              width: context.isEnglish
                                   ? KSize.kPixel66
                                   : KSize.kPixel88,
                             ),
@@ -296,9 +296,6 @@ class _NawbarWidgetImplematationState
                 ),
         );
   }
-
-  bool _isEnglish(BuildContext context) =>
-      context.read<AuthenticationBloc>().state.userSetting.locale.isEnglish;
 
   double get padding => widget.isDesk
       ? KPadding.kPaddingSize90
