@@ -119,38 +119,40 @@ abstract class KMockText {
     id: '',
     userId: '',
     company: 'Ескулаб',
+    companyEN: 'Ecsculab',
     link: 'https://esculab.com/',
     discount: [10],
     title:
         '20% знижки на аналізи для військових та людей, які внутрішньо переміщені.',
-    category: ['Medical'],
-    categoryUA: ['Медицина'],
-    subcategory: ['Analyses'],
-    subcategoryUA: ['Аналізи'],
-    eligibility: 'Військовослужбовці та ВПО',
+    categoryEN: ['Medical'],
+    category: ['Медицина'],
+    subcategoryEN: ['Analyses'],
+    subcategory: ['Аналізи'],
+    // eligibility: 'Військовослужбовці та ВПО',
     description: 'Пропозиція діє у всіх відділеннях лабораторії.',
-    requirements: 'Військовим - наявність документу, що підтверджує  професійну'
-        ' приналежність до ЗСУ (військовий квиток з відміткою про несення служби '
-        '“призваний за мобілізацією” від 24 лютого або пізніше, тимчасове посвідчення офіцера з відміткою). '
-        ' Людям, які вимушено переміщені - довідка внутрішньо переміщеної особи або документ'
-        ' із зазначеною пропискою, у населених пунктах на яких ведуться (велися) бойові дії'
-        ' (Житомирська, Вінницька, Миколаївська, Київська, Черкаська, Чернігівська, Полтавська, Сумська,'
-        ' Одеська, Херсонська, Запорізька, Харківська, Дніпропетровська, Кіровоградська, Донецька та Луганська області).'
-        ' *Знижка надається персонально лише військовому (не надається членам сімей). ',
+    requirements:
+        'Військовим - наявність документу, що підтверджує  професійну',
     territory: 'Всі відділення лабораторії.',
     location: ['Вся Україна'],
     expiration: 'Діє постійно',
     exclusions:
-        '- при замовленні досліджень та оплаті їх онлайн на сайті Ескулаб;'
-        ' - до алергологічних, генетичних, бактеріологічних та інших досліджень затверджених переліком;'
-        ' - при замовленні послуги «Виклик медсестри додому» та придбанні Сертифікатів;'
-        ' - не додається до інших знижок, що діють в лабораторії Ескулаб (акцій, соціальні ініціативи, партнерські програми).'
-        ' - взяття біоматеріалу сплачується окремо. Грошовий еквівалент знижки не надається. ',
+        '- при замовленні досліджень та оплаті їх онлайн на сайті Ескулаб;',
     phoneNumber: '+380 800 503 680',
     directLink:
         'https://esculab.com/20-vidsotkiv-na-analizy-dlya-viyskovyh-ta-lyudey-yaki-vnutrishno-peremishcheni',
     dateVerified: ExtendedDateTime.current,
     userName: 'Anonymous',
+    titleEN:
+        '20% discount on tests for military personnel and internally displaced persons.',
+    // eligibilityEN: 'Military personnel and internally displaced persons',
+    descriptionEN: 'The offer is valid in all branches of the laboratory.',
+    requirementsEN:
+        'Military personnel - presence of a document confirming professional status',
+    territoryEN: 'All branches of the laboratory.',
+    exclusionsEN:
+        '- when ordering tests and paying for them online on the Esculab website;',
+    expirationEN: 'It works all the time',
+    locationEN: ['All Ukraine'],
   );
   static final informationModel = InformationModel(
     id: '',
@@ -181,24 +183,7 @@ abstract class KMockText {
   static final storyModel = StoryModel(
     id: '',
     date: ExtendedDateTime.current,
-    story: 'У тихому містечку затишно жив пан Джонс, ветеран війни, '
-        'який пройшов через низку важких випробувань на службі. Після '
-        'повернення додому він зіткнувся з труднощами в адаптації до '
-        'цивільного життя, борючись з посттравматичним стресовим '
-        'розладом та відсутністю підтримки.\n\n'
-        'Але, незважаючи на всі труднощі, пан Джонс не втратив свою '
-        'внутрішню силу та волю до життя. Він активно залучався до '
-        'волонтерської діяльності в місцевій громаді, допомагаючи '
-        'іншим ветеранам знаходити шлях до відновлення та адаптації.\n\n'
-        'Поступово він став опорою для багатьох, поділяючи свої '
-        'власні досвід та радіючи від їхніх успіхів. Його '
-        'безпосереднього оптимізму та відданості прикладали усі '
-        'зусилля для досягнення своєї мети, щоб знову стати '
-        'активними членами суспільства.\n\n'
-        'Історія пана Джонса стала великим натхненням для багатьох '
-        'у містечку. Він показав, що, незважаючи на випробування, '
-        'здатність до відновлення та допомога іншим може '
-        'принести неймовірну силу та значення у житті.',
+    story: 'У тихому містечку затишно жив пан Джонс, ветеран війни, ',
     userId: '',
   );
 }
@@ -221,4 +206,9 @@ abstract class KAppText {
   static const String facebook =
       'https://www.facebook.com/profile.php?id=61560499465895';
   static const String coffee = 'Buy me a Coffee';
+  static List<String> get routes => [
+        KRoute.discounts.name,
+        KRoute.investors.name,
+        KRoute.settings.name,
+      ];
 }

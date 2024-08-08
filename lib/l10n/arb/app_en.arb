@@ -1020,7 +1020,7 @@
   "@language": {
     "examples": "Text on the settings page on the mobile version"
   },
-  "copyEmail": "Email copied to clipboard",
+  "copyEmail": "Email copied",
   "@copyEmail": {
     "examples": "Текст на сторінці налаштувань на мобільній версії"
   }

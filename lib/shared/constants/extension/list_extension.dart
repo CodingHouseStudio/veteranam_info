@@ -1,7 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:veteranam/shared/shared.dart';
 
 /// Extension for filtering FilterItem list items.
@@ -135,7 +134,7 @@ extension ListExtensions<T> on List<T> {
   List<T> loadingFilter({
     required List<int>? filtersIndex,
     required int? itemsLoaded,
-    required List<dynamic> Function(T item) getFilter,
+    required List<dynamic> Function(T item) getENFilter,
     int? loadItems,
     List<FilterItem>? overallFilter,
     List<T>? fullList,
@@ -149,7 +148,7 @@ extension ListExtensions<T> on List<T> {
     // Apply filters to the list and return up to 'loadedItemsCount' items
     return _filter(
       filtersIndex: filtersIndex,
-      getFilter: getFilter,
+      getFilter: getENFilter,
       overallFilter: overallFilter,
       fullList: fullList,
       containAnyItems: containAnyItems,
@@ -186,7 +185,7 @@ extension ListExtensions<T> on List<T> {
 
     // Calculate overall filter values if not provided
     final overallFilterValue = overallFilter ??
-        overallItems(getFilter: getFilter, fullList: fullList, context: null);
+        overallItems(getENFilter: getFilter, fullList: fullList, context: null);
 
     // Retrieve filter texts based on filter indexes
     final filtersText =
@@ -324,7 +323,7 @@ extension ListExtensions<T> on List<T> {
   /// Returns:
   /// A list of FilterItem instances with summarized filter values.
   List<FilterItem> overallItems({
-    required List<dynamic> Function(T) getFilter,
+    required List<dynamic> Function(T) getENFilter,
     required BuildContext? context,
     List<String> Function(T)? getUAFilter,
     List<T>? fullList,
@@ -332,15 +331,8 @@ extension ListExtensions<T> on List<T> {
     final allFilters = <FilterItem>[];
     for (final item in fullList ?? this) {
       allFilters.addAll(
-        ((context
-                            ?.read<AuthenticationBloc>()
-                            .state
-                            .userSetting
-                            .locale
-                            .isEnglish ??
-                        false) ||
-                    getUAFilter == null
-                ? getFilter(item)
+        ((context?.isEnglish ?? false) || getUAFilter == null
+                ? getENFilter(item)
                 : getUAFilter(item))
             .map(
           FilterItem.new,
@@ -558,12 +550,13 @@ extension DiscountModelExtensions on List<DiscountModel> {
       FilterItem(context.l10n.free),
       // Additional filters based on sub-locations using overallItems method
       ...overallItems(
-        getFilter: (item) => item.subLocation.getList(context),
+        getENFilter: (item) => item.subLocation.getList(context),
         context: context,
       ),
       // Additional filters based on primary locations using overallItems method
       ...overallItems(
-        getFilter: (item) => item.location ?? [],
+        getENFilter: (item) => item.locationEN ?? [],
+        getUAFilter: (item) => item.location ?? [],
         context: context,
       ),
     ];

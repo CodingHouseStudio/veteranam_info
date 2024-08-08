@@ -2,16 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:veteranam/shared/shared.dart';
 
-class FooterInfoVersionWidget extends StatefulWidget {
-  const FooterInfoVersionWidget({required this.isDesk, super.key});
+class InfoVersionWidget extends StatefulWidget {
+  const InfoVersionWidget({required this.isDesk, super.key});
   final bool isDesk;
 
   @override
-  State<FooterInfoVersionWidget> createState() =>
-      _FooterInfoVersionWidgetState();
+  State<InfoVersionWidget> createState() => _InfoVersionWidgetState();
 }
 
-class _FooterInfoVersionWidgetState extends State<FooterInfoVersionWidget> {
+class _InfoVersionWidgetState extends State<InfoVersionWidget> {
   late PackageInfo packageInfo;
 
   @override

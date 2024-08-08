@@ -8,32 +8,43 @@ class MobNavigationWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final route = [
-      KRoute.discounts.name,
-      KRoute.investors.name,
-      KRoute.home.name,
+    final labels = [
+      context.l10n.discounts,
+      context.l10n.investors,
+      context.l10n.settings,
     ];
-    return BottomNavigationBar(
-      key: KWidgetkeys.widget.mobNavigation.widget,
-      items: <BottomNavigationBarItem>[
-        BottomNavigationBarItem(
-          key: KWidgetkeys.widget.mobNavigation.discounts,
-          icon: KIcon.tag.copyWith(fill: 1),
-          label: context.l10n.discounts,
+
+    return ClipRRect(
+      borderRadius: const BorderRadius.only(
+        topLeft: Radius.circular(KSize.kPixel32),
+        topRight: Radius.circular(KSize.kPixel32),
+      ),
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(minHeight: KSize.kPixel80),
+        child: BottomNavigationBar(
+          key: KWidgetkeys.widget.mobNavigation.widget,
+          items: List.generate(KIcon.icons.length, (index) {
+            return BottomNavigationBarItem(
+              key: KWidgetkeys.widget.mobNavigation.navButtonsKey[index],
+              icon: Padding(
+                padding: const EdgeInsets.only(bottom: KPadding.kPaddingSize8),
+                child: KIcon.icons[index],
+              ),
+              activeIcon: IconWidget(
+                icon: KIcon.icons[index],
+                background: AppColors.materialThemeKeyColorsPrimary,
+                padding: KPadding.kPaddingSize8,
+              ),
+              label: labels[index],
+            );
+          }),
+          backgroundColor: AppColors.materialThemeKeyColorsNeutral,
+          unselectedLabelStyle: AppTextStyle.materialThemeLabelSmall,
+          selectedLabelStyle: AppTextStyle.materialThemeLabelSmall,
+          currentIndex: index,
+          onTap: (i) => context.goNamed(KAppText.routes[i]),
         ),
-        BottomNavigationBarItem(
-          key: KWidgetkeys.widget.mobNavigation.investors,
-          icon: KIcon.investors.copyWith(fill: 1),
-          label: context.l10n.investors,
-        ),
-        BottomNavigationBarItem(
-          key: KWidgetkeys.widget.mobNavigation.settings,
-          icon: KIcon.settings.copyWith(fill: 1),
-          label: context.l10n.settings,
-        ),
-      ],
-      currentIndex: index,
-      onTap: (i) => context.goNamed(route.elementAt(i)),
+      ),
     );
   }
 }

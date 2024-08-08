@@ -53,12 +53,13 @@ extension DiscountModelLocation on DiscountModel {
         if (location != null) ...location!,
         if (subLocation != null) ...subLocation!.getList(context),
       ];
-  String getDescription(BuildContext context) => '$description\n'
+  String getDescription(BuildContext context) =>
+      '${context.isEnglish ? descriptionEN : description}\n'
       '\n***${context.l10n.toGetItYouNeed}***\n'
-      '\n- $requirements\n'
-      '\n$exclusions\n'
+      '\n- ${context.isEnglish ? requirementsEN : requirements}\n'
+      '\n${context.isEnglish ? exclusionsEN : exclusions}\n'
       // ignore: lines_longer_than_80_chars
-      '${additionalDetails != null ? '\n${additionalDetails ?? ''}\n' : ''}'
+      '${additionalDetails != null ? '\n${context.isEnglish ? additionalDetailsEN : additionalDetails ?? ''}\n' : ''}'
       '\n***${context.l10n.callForDetails}:***'
       ' ${KPlatformConstants.isWebDesktop ? '***' : '['}'
       '$phoneNumber'
@@ -67,7 +68,10 @@ extension DiscountModelLocation on DiscountModel {
           '${phoneNumber.replaceAll('(', '').replaceAll(')', '').replaceAll(' ', '')})'}';
 
   List<String> getCityList(BuildContext context) => [
-        if (location != null) ...location!,
+        if (context.isEnglish)
+          if (locationEN != null) ...locationEN!,
+        if (!context.isEnglish)
+          if (location != null) ...location!,
         if (subLocation != null) ...subLocation!.getList(context),
       ];
 }
@@ -156,4 +160,19 @@ extension InformationModelExtension on InformationModel {
       return null;
     }
   }
+}
+
+extension GenericsExtensions<T> on T {
+  T getTrnslation({
+    required T en,
+    required BuildContext context,
+  }) =>
+      context.isEnglish ? en : this;
+}
+
+// Extension for handling item loading logic on int
+extension ContextExtensions on BuildContext {
+  // Get the number of loaded items
+  bool get isEnglish =>
+      read<AuthenticationBloc>().state.userSetting.locale.isEnglish;
 }

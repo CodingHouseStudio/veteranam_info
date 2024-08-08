@@ -122,4 +122,9 @@ abstract class KIcon {
   static const _KIcon investors = _KIcon(Symbols.business);
   static const _KIcon menu = _KIcon(Symbols.menu);
   static const _KIcon copy = _KIcon(Symbols.content_copy);
+  static List<Icon> get icons => [
+        KIcon.tag,
+        KIcon.briefcase,
+        KIcon.settings,
+      ];
 }
