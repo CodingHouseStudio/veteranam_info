@@ -27,8 +27,10 @@ extension ExtendedDateTime on DateTime {
 // Extension for handling item loading logic on int
 extension ItemLoadedExtensions on int {
   // Get the number of loaded items
-  int getLoaded({required List<dynamic> list, int? loadItems}) =>
-      min(list.length, max(this, loadItems ?? KDimensions.loadItems));
+  int getLoaded({required List<dynamic> list, int? loadItems}) => min(
+        list.length,
+        max(this, (loadItems == 0 ? null : loadItems) ?? KDimensions.loadItems),
+      );
 
   // Check if loading more items is possible
   bool checkLoadingPosible(List<dynamic> list) => this >= list.length;
