@@ -52,7 +52,11 @@ class DiscountCardWidget extends StatelessWidget {
                     children: [
                       Text(
                         key: KWidgetkeys.widget.discountCard.service,
-                        discountItem.company ?? context.l10n.companyIsHidden,
+                        discountItem.company.getTrnslation(
+                              context: context,
+                              en: discountItem.companyEN,
+                            ) ??
+                            context.l10n.companyIsHidden,
                         style: AppTextStyle.materialThemeTitleMedium,
                         overflow: TextOverflow.clip,
                         textAlign: TextAlign.left,
