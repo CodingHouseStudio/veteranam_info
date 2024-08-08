@@ -66,6 +66,8 @@ void main() {
       //     KTestText.discountModelItems.last.eligibilityEN,
       DiscountModelJsonField.requirementsEN:
           KTestText.discountModelItems.last.requirementsEN,
+      DiscountModelJsonField.companyEN:
+          KTestText.discountModelItems.last.companyEN,
       DiscountModelJsonField.additionalDetailsEN:
           KTestText.discountModelItems.last.additionalDetailsEN,
       DiscountModelJsonField.userPhoto: [
@@ -133,6 +135,7 @@ void main() {
       DiscountModelJsonField.additionalDetails: null,
       DiscountModelJsonField.userName: null,
       DiscountModelJsonField.additionalDetailsEN: null,
+      DiscountModelJsonField.companyEN: null,
     };
     group('${KGroupText.modelJson} ', () {
       test('${KGroupText.full} ', () {
@@ -261,6 +264,10 @@ void main() {
         expect(
           discountModel.descriptionEN,
           KTestText.discountModelItems.last.descriptionEN,
+        );
+        expect(
+          discountModel.companyEN,
+          KTestText.discountModelItems.last.companyEN,
         );
         // expect(
         //   discountModel.eligibilityEN,
@@ -411,6 +418,10 @@ void main() {
           discountModel.requirementsEN,
           KTestText.discountModelItems.last.requirementsEN,
         );
+        expect(
+          discountModel.companyEN,
+          null,
+        );
         // expect(
         //   discountModel.date,
         //   KTestText.discountModelItems.last.date,
@@ -481,6 +492,8 @@ void main() {
           //     KTestText.discountModelItems.last.eligibilityEN,
           DiscountModelJsonField.requirementsEN:
               KTestText.discountModelItems.last.requirementsEN,
+          DiscountModelJsonField.companyEN:
+              KTestText.discountModelItems.last.companyEN,
           // DiscountModelJsonField.date:
           //     KTestText.discountModelItems.last.date.toIso8601String(),
         };
@@ -512,7 +525,7 @@ void main() {
               userPhoto: null,
               locationEN: null,
               expirationEN: null,
-              additionalDetailsEN: null,
+              additionalDetailsEN: null, companyEN: null,
             )
             .toJson();
 
