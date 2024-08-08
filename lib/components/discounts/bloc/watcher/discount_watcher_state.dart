@@ -11,6 +11,7 @@ class DiscountWatcherState with _$DiscountWatcherState {
     required List<DiscountModel> discountModelItems,
     required List<DiscountModel> filteredDiscountModelItems,
     required List<DiscountModel> categoryDiscountModelItems,
+    required List<DiscountModel> locationDiscountModelItems,
     required List<int> filtersCategoriesIndex,
     required List<int> filtersLocationIndex,
     required LoadingStatus loadingStatus,
@@ -21,29 +22,20 @@ class DiscountWatcherState with _$DiscountWatcherState {
 }
 
 extension LocationGetter on List<DiscountModel> {
-  List<FilterItem> get _getLocationItems {
-    final hasFullSublocation = any(
-      (discount) => discount.subLocation == SubLocation.all,
-    );
-    return <FilterItem>[
-      FilterItem(''),
-      FilterItem(''),
-      if (hasFullSublocation ||
-          any(
-            (discount) => discount.subLocation == SubLocation.allStoresOfChain,
-          ))
+  List<FilterItem> _getLocationItems(
+    List<DiscountModel>? listForFilter,
+  ) =>
+      <FilterItem>[
+        FilterItem(''),
+        FilterItem(''),
         FilterItem(SubLocation.allStoresOfChain),
-      if (hasFullSublocation ||
-          any(
-            (discount) => discount.subLocation == SubLocation.online,
-          ))
         FilterItem(SubLocation.online),
-      ...overallItems(
-        getENFilter: (item) => item.location ?? [],
-        context: null,
-      ),
-    ];
-  }
+        ...overallItems(
+          getENFilter: (item) => item.location ?? [],
+          context: null,
+          numberGetList: listForFilter,
+        ),
+      ];
 }
 
 extension SubLocationString on SubLocation {
