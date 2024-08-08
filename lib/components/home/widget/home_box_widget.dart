@@ -51,6 +51,7 @@ class HomeBoxWidget extends StatelessWidget {
                         color: AppColors.materialThemeKeyColorsSecondary,
                       ),
             child: AnimatedTextKit(
+              repeatForever: true,
               key: ValueKey<Language>(
                 context.read<AuthenticationBloc>().state.userSetting.locale,
               ),
