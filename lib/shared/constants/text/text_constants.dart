@@ -173,12 +173,15 @@ abstract class KMockText {
         'Державна установа у сфері управління Міністерства у справах ветеранів. Державний провайдер сервісу реінтеграції ветеранів до продуктивного цивільного життя.',
     link: 'https://veteranfund.com.ua/',
     projectsLink: 'https://veteranfund.com.ua/projects/',
-    teamPartnersLink: 'https://veteranfund.com.ua/about/team/',
-    email: 'info@veteranfund.mva.gov.ua',
-    phoneNumber: '+380 (98) 009 48 72',
-    size: 48,
-    registered: 'Ukraine registered',
-    domain: 'Ветерани',
+    titleEN: 'PATRIOT UA',
+    descriptionEN:
+        'A state institution under the management of the Ministry of Veterans Affairs. A state provider of services for reintegrating veterans into productive civilian life.',
+    // teamPartnersLink: 'https://veteranfund.com.ua/about/team/',
+    // email: 'info@veteranfund.mva.gov.ua',
+    // phoneNumber: '+380 (98) 009 48 72',
+    // size: 48,
+    // registered: 'Ukraine registered',
+    // domain: 'Ветерани',
   );
   static final storyModel = StoryModel(
     id: '',
