@@ -18,14 +18,13 @@ class ComplaintWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(
-      onPressed: () => context.dialog.showReportDialog(
+    return InkWell(
+      onTap: () => context.dialog.showReportDialog(
         isDesk: isDesk,
         cardEnum: cardEnum,
         // afterEvent: afterEvent,
         cardId: cardId,
       ),
-      style: KButtonStyles.withoutStyle,
       child: Column(
         children: [
           IconWidget(
