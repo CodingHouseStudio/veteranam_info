@@ -59,7 +59,7 @@ class DonateCardWidget extends StatelessWidget {
                     )
                   : EdgeInsets.zero,
               child: Text(
-                fundModel.title,
+                context.isEnglish ? fundModel.titleEN : fundModel.title,
                 key: KWidgetkeys.widget.donateCard.title,
                 style: titleStyle ?? AppTextStyle.materialThemeHeadlineLarge,
               ),
@@ -71,7 +71,9 @@ class DonateCardWidget extends StatelessWidget {
                   vertical: KPadding.kPaddingSize16,
                 ),
                 child: Text(
-                  fundModel.description,
+                  context.isEnglish
+                      ? fundModel.descriptionEN
+                      : fundModel.description,
                   key: KWidgetkeys.widget.donateCard.subtitle,
                   style: isDesk
                       ? AppTextStyle.materialThemeBodyLarge
@@ -84,7 +86,7 @@ class DonateCardWidget extends StatelessWidget {
               text: context.l10n.support,
               onPressed: () => context
                   .read<UrlCubit>()
-                  .launchUrl(url: fundModel.projectsLink),
+                  .launchUrl(url: fundModel.projectsLink ?? fundModel.link),
               isDesk: isDesk,
             ),
           ],
