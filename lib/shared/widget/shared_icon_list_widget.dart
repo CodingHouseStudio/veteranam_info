@@ -57,10 +57,9 @@ abstract class SharedIconListWidget {
     required Color background,
     required Key? key,
   }) {
-    return TextButton(
+    return InkWell(
       key: key,
-      onPressed: onPressed,
-      style: KButtonStyles.withoutStyle,
+      onTap: onPressed,
       child: Column(
         children: [
           IconWidget(
