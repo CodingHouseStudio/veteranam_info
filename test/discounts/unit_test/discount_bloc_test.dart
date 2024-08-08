@@ -203,7 +203,7 @@ void main() {
         predicate<DiscountWatcherState>(
           (state) =>
               state.loadingStatus == LoadingStatus.listLoadedFull &&
-              state.filteredDiscountModelItems.length == 1 &&
+              state.locationDiscountModelItems.length == 1 &&
               state.filtersLocationIndex.isNotEmpty,
         ),
         predicate<DiscountWatcherState>(
