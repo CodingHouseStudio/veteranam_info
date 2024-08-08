@@ -162,9 +162,7 @@ extension InformationModelExtension on InformationModel {
   }
 }
 
-// Extension for handling item loading logic on int
 extension GenericsExtensions<T> on T {
-  // Get the number of loaded items
   T getTrnslation({
     required T en,
     required BuildContext context,
