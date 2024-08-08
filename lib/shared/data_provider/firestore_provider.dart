@@ -91,7 +91,13 @@ class FirestoreService {
 
       // If the server fetch is successful, return the data
       return docSnapshot.docs
+          .where(
+            (doc) =>
+                doc.data()[FundModelJsonField.image] != null ||
+                !Config.isProduction,
+          )
           .map((doc) => FundModel.fromJson(doc.data()))
+          // Check if image was empty
           .where((e) => e.image != null || !Config.isProduction)
           .toList();
     } on FirebaseException catch (e) {
