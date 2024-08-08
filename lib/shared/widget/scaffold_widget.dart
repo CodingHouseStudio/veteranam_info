@@ -147,7 +147,9 @@ class ScaffoldWidget extends StatelessWidget {
               maxHeight: constraints.maxHeight,
             ),
           );
-          return KTest.testIsWeb ? scaffold : SafeArea(child: scaffold);
+          return KPlatformConstants.isWebDesktop
+              ? scaffold
+              : SafeArea(child: scaffold);
         },
       ),
     );
