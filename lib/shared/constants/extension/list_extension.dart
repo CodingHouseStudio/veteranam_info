@@ -1,19 +1,37 @@
 import 'package:collection/collection.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:veteranam/components/components.dart';
 import 'package:veteranam/shared/shared.dart';
 
 /// Extension for filtering FilterItem list items.
 extension FilterItems on List<FilterItem> {
   /// Get a list of FilterItem with summarized values.
-  List<FilterItem> get getToSet {
+  List<FilterItem> getToSet(
+    List<FilterItem>? numberGetList,
+  ) {
     // Group items by their value
     final grouped = groupBy(this, (FilterItem item) => item.value);
-
-    // Map each group to a new FilterItem with summarized number
-    return grouped.entries
-        .map((entry) => FilterItem(entry.key, number: entry.value.length))
-        .toList();
+    if (numberGetList == null) {
+      // Map each group to a new FilterItem with summarized number
+      return grouped.entries
+          .map((entry) => FilterItem(entry.key, number: entry.value.length))
+          .toList();
+    } else {
+      return grouped.entries
+          .map(
+            (element) => FilterItem(
+              element.key,
+              number: numberGetList
+                  .where(
+                    (item) => item.value == element.key,
+                  )
+                  .length,
+            ),
+          )
+          .toList();
+    }
   }
 
   /// Method to find indices where differences occur between this list and a new
@@ -138,6 +156,7 @@ extension ListExtensions<T> on List<T> {
     int? loadItems,
     List<FilterItem>? overallFilter,
     List<T>? fullList,
+    List<T>? listForFilter,
     bool containAnyItems = true,
   }) {
     // Calculate the total number of items to load
@@ -152,7 +171,24 @@ extension ListExtensions<T> on List<T> {
       overallFilter: overallFilter,
       fullList: fullList,
       containAnyItems: containAnyItems,
+      listForFilter: listForFilter,
     ).take(loadedItemsCount).toList();
+  }
+
+  ({List<T> list, LoadingStatus loadingStatus}) combiningFilteredLists({
+    required List<T> secondList,
+    required int itemsLoaded,
+    int? loadItems,
+  }) {
+    // Calculate the total number of items to load
+    final loadedItemsCount =
+        itemsLoaded.getLoaded(list: this, loadItems: loadItems) +
+            (loadItems ?? 0);
+    final list = toSet().intersection(secondList.toSet()).toList();
+    return (
+      list: list.take(loadedItemsCount).toList(),
+      loadingStatus: list.getLoadingStatus(loadedItemsCount)
+    );
   }
 
   /// Method to filter items based on multiple filters.
@@ -173,6 +209,7 @@ extension ListExtensions<T> on List<T> {
     required List<FilterItem>? overallFilter,
     required List<T>? fullList,
     required bool containAnyItems,
+    List<T>? listForFilter,
   }) {
     if (isEmpty) return []; // Return empty list if the input list is empty
 
@@ -185,7 +222,12 @@ extension ListExtensions<T> on List<T> {
 
     // Calculate overall filter values if not provided
     final overallFilterValue = overallFilter ??
-        overallItems(getENFilter: getFilter, fullList: fullList, context: null);
+        overallItems(
+          getENFilter: getFilter,
+          fullList: fullList,
+          context: null,
+          numberGetList: listForFilter,
+        );
 
     // Retrieve filter texts based on filter indexes
     final filtersText =
@@ -227,6 +269,7 @@ extension ListExtensions<T> on List<T> {
     List<FilterItem>? overallFilter,
     List<T>? fullList,
     bool containAnyItems = true,
+    List<T>? listForFilter,
   }) {
     // Apply filters to the list
     final list = _filter(
@@ -235,6 +278,7 @@ extension ListExtensions<T> on List<T> {
       overallFilter: overallFilter,
       fullList: fullList,
       containAnyItems: containAnyItems,
+      listForFilter: listForFilter,
     );
 
     // Calculate the total number of items to load
@@ -243,9 +287,7 @@ extension ListExtensions<T> on List<T> {
             (loadItems ?? 0);
 
     // Determine the loading status based on the number of loaded items
-    final loadingStatus = list.length <= loadedItemsCount && list.isNotEmpty
-        ? LoadingStatus.listLoadedFull
-        : LoadingStatus.loaded;
+    final loadingStatus = list.getLoadingStatus(loadedItemsCount);
 
     // Return the filtered and loaded list along with the loading status
     return (
@@ -253,6 +295,11 @@ extension ListExtensions<T> on List<T> {
       loadingStatus: loadingStatus
     );
   }
+
+  LoadingStatus getLoadingStatus(int loadedItemsCount) =>
+      length <= loadedItemsCount && isNotEmpty
+          ? LoadingStatus.listLoadedFull
+          : LoadingStatus.loaded;
 
   /// Method to calculate overall filter values.
   ///
@@ -327,6 +374,7 @@ extension ListExtensions<T> on List<T> {
     required BuildContext? context,
     List<String> Function(T)? getUAFilter,
     List<T>? fullList,
+    List<T>? numberGetList,
   }) {
     final allFilters = <FilterItem>[];
     for (final item in fullList ?? this) {
@@ -339,9 +387,28 @@ extension ListExtensions<T> on List<T> {
         ),
       );
     }
-    return allFilters.getToSet
+    final allNumberFilters = numberGetList == null ? null : <FilterItem>[];
+    if (numberGetList != null) {
+      for (final item in numberGetList) {
+        allNumberFilters!.addAll(
+          ((context?.isEnglish ?? false) || getUAFilter == null
+                  ? getENFilter(item)
+                  : getUAFilter(item))
+              .map(
+            FilterItem.new,
+          ),
+        );
+      }
+    }
+    return allFilters.getToSet(allNumberFilters)
       ..sort(
-        (a, b) => b.number.compareTo(a.number),
+        (a, b) {
+          final numberSort = b.number.compareTo(a.number);
+          if (numberSort == 0) {
+            return a.value.toString().compareTo(b.value.toString());
+          }
+          return numberSort;
+        },
       );
   }
 
@@ -552,12 +619,20 @@ extension DiscountModelExtensions on List<DiscountModel> {
       ...overallItems(
         getENFilter: (item) => item.subLocation.getList(context),
         context: context,
+        numberGetList: context
+            .read<DiscountWatcherBloc>()
+            .state
+            .categoryDiscountModelItems,
       ),
       // Additional filters based on primary locations using overallItems method
       ...overallItems(
         getENFilter: (item) => item.locationEN ?? [],
         getUAFilter: (item) => item.location ?? [],
         context: context,
+        numberGetList: context
+            .read<DiscountWatcherBloc>()
+            .state
+            .categoryDiscountModelItems,
       ),
     ];
   }
