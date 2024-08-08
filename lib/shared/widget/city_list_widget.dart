@@ -20,18 +20,14 @@ class CityListWidget extends StatelessWidget {
       child: DecoratedBox(
         decoration: KWidgetTheme.boxDecorationWhiteMain,
         child: Padding(
-          padding: isDesk
-              ? const EdgeInsets.symmetric(
-                  horizontal: KPadding.kPaddingSize16,
-                  vertical: KPadding.kPaddingSize8,
-                )
-              : const EdgeInsets.symmetric(
-                  horizontal: KPadding.kPaddingSize8,
-                  vertical: KPadding.kPaddingSize4,
-                ),
+          padding: const EdgeInsets.symmetric(
+            horizontal: KPadding.kPaddingSize8,
+            vertical: KPadding.kPaddingSize4,
+          ),
           child: IntrinsicWidth(
             child: Row(
               mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 KIcon.distance,
                 KSizedBox.kWidthSizedBox8,
