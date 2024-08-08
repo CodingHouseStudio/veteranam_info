@@ -555,7 +555,8 @@ extension DiscountModelExtensions on List<DiscountModel> {
       ),
       // Additional filters based on primary locations using overallItems method
       ...overallItems(
-        getENFilter: (item) => item.location ?? [],
+        getENFilter: (item) => item.locationEN ?? [],
+        getUAFilter: (item) => item.location ?? [],
         context: context,
       ),
     ];
