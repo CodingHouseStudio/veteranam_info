@@ -96,7 +96,7 @@ class FirestoreService {
           .toList();
     } on FirebaseException catch (e) {
       if (e.code == 'unavailable') {
-        // If the server is unavailable,fall back to the cache
+        // If the server is unavailable, fall back to the cache
         final docSnapshot = await _db
             .collection(FirebaseCollectionName.funds)
             .get(getCacheOptions);
