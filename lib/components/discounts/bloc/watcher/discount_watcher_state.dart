@@ -5,6 +5,11 @@ enum DiscountFailure {
   report,
 }
 
+enum DiscountEnum {
+  largestSmallest,
+  free,
+}
+
 @freezed
 class DiscountWatcherState with _$DiscountWatcherState {
   const factory DiscountWatcherState({
@@ -12,8 +17,8 @@ class DiscountWatcherState with _$DiscountWatcherState {
     required List<DiscountModel> filteredDiscountModelItems,
     required List<DiscountModel> categoryDiscountModelItems,
     required List<DiscountModel> locationDiscountModelItems,
-    required List<int> filtersCategoriesIndex,
-    required List<int> filtersLocationIndex,
+    required List<dynamic> filtersCategories,
+    required List<dynamic> filtersLocation,
     required LoadingStatus loadingStatus,
     required int itemsLoaded,
     required DiscountFailure? failure,
@@ -21,22 +26,22 @@ class DiscountWatcherState with _$DiscountWatcherState {
   }) = _Initial;
 }
 
-extension LocationGetter on List<DiscountModel> {
-  List<FilterItem> _getLocationItems(
-    List<DiscountModel>? listForFilter,
-  ) =>
-      <FilterItem>[
-        FilterItem(''),
-        FilterItem(''),
-        FilterItem(SubLocation.allStoresOfChain),
-        FilterItem(SubLocation.online),
-        ...overallItems(
-          getENFilter: (item) => item.location ?? [],
-          context: null,
-          numberGetList: listForFilter,
-        ),
-      ];
-}
+// extension LocationGetter on List<DiscountModel> {
+//   List<FilterItem> _getLocationItems(
+//     List<DiscountModel>? listForFilter,
+//   ) =>
+//       <FilterItem>[
+//         FilterItem(''),
+//         FilterItem(''),
+//         FilterItem(SubLocation.allStoresOfChain),
+//         FilterItem(SubLocation.online),
+//         ...overallItems(
+//           getENFilter: (item) => item.location ?? [],
+//           context: null,
+//           numberGetList: listForFilter,
+//         ),
+//       ];
+// }
 
 extension SubLocationString on SubLocation {
   List<SubLocation> get _getList {

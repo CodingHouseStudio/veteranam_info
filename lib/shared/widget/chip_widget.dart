@@ -46,7 +46,7 @@ class ChipWidgetState extends State<ChipWidget> {
                 right: KPadding.kPaddingSize10,
               ),
               child: Text(
-                widget.filter.value.toString(),
+                widget.filter.getString(context),
                 style: (widget.isDesk
                         ? AppTextStyle.materialThemeHeadlineSmall
                         : AppTextStyle.materialThemeLabelLarge)

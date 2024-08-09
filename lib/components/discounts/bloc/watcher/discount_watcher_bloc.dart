@@ -26,10 +26,10 @@ class DiscountWatcherBloc
             discountModelItems: [],
             loadingStatus: LoadingStatus.initial,
             filteredDiscountModelItems: [],
-            filtersCategoriesIndex: [],
+            filtersCategories: [],
             itemsLoaded: 0,
             failure: null,
-            filtersLocationIndex: [],
+            filtersLocation: [],
             // reportItems: [],
             categoryDiscountModelItems: [], locationDiscountModelItems: [],
           ),
@@ -103,19 +103,14 @@ class DiscountWatcherBloc
     //       return dateComparison;
     //     },
     //   );
-    late var categoryFilter = _filterCategory(
-      categoryIndex: state.filtersCategoriesIndex,
+    final categoryFilter = _filterCategory(
+      categories: state.filtersCategories,
       list: event.discountItemsModel,
     );
     final locationList = _filterLocation(
-      locationIndex: state.filtersLocationIndex,
+      location: state.filtersLocation,
       listValue: event.discountItemsModel,
-      categiryList: categoryFilter,
-    );
-    categoryFilter = _filterCategory(
-      categoryIndex: state.filtersCategoriesIndex,
-      list: event.discountItemsModel,
-      locationList: locationList,
+      // categiryList: categoryFilter,
     );
     final (:list, :loadingStatus) = _filter(
       categoryList: categoryFilter,
@@ -127,10 +122,10 @@ class DiscountWatcherBloc
         discountModelItems: event.discountItemsModel,
         loadingStatus: loadingStatus,
         filteredDiscountModelItems: list,
-        filtersCategoriesIndex: state.filtersCategoriesIndex,
+        filtersCategories: state.filtersCategories,
         itemsLoaded: state.itemsLoaded.getLoaded(list: list),
         failure: null,
-        filtersLocationIndex: state.filtersLocationIndex,
+        filtersLocation: state.filtersLocation,
         // reportItems: event.reportItems,
         categoryDiscountModelItems: categoryFilter,
         locationDiscountModelItems: locationList,
@@ -180,8 +175,8 @@ class DiscountWatcherBloc
         ),
         categoryDiscountModelItems: state.discountModelItems,
         locationDiscountModelItems: state.discountModelItems,
-        filtersCategoriesIndex: [],
-        filtersLocationIndex: [],
+        filtersCategories: [],
+        filtersLocation: [],
         loadingStatus: LoadingStatus.loaded,
       ),
     );
@@ -191,11 +186,13 @@ class DiscountWatcherBloc
     _FilterCategory event,
     Emitter<DiscountWatcherState> emit,
   ) {
-    final selectedFilters =
-        state.filtersCategoriesIndex.changeListValue(event.filterIndex);
+    final selectedFilters = state.filtersCategories.changeListValue(
+      eventFilter: event.value,
+      removeValue: CategoryEnum.all,
+    );
 
     final categoryItems = _filterCategory(
-      categoryIndex: selectedFilters,
+      categories: selectedFilters,
     );
     final (:list, :loadingStatus) = _filter(
       categoryList: categoryItems,
@@ -212,7 +209,7 @@ class DiscountWatcherBloc
     emit(
       state.copyWith(
         filteredDiscountModelItems: list,
-        filtersCategoriesIndex: selectedFilters,
+        filtersCategories: selectedFilters,
         itemsLoaded: state.itemsLoaded.getLoaded(list: list),
         loadingStatus: loadingStatus,
         categoryDiscountModelItems: categoryItems,
@@ -224,10 +221,9 @@ class DiscountWatcherBloc
     _FilterLocation event,
     Emitter<DiscountWatcherState> emit,
   ) {
-    final selectedFilters = state.filtersLocationIndex.checkValue(
-      filterIndex: event.filterIndex,
-      equalNumber: 2,
-      largerNumber: 3,
+    final selectedFilters = state.filtersLocation.checkValue(
+      filterValue: event.value,
+      equalValue: SubLocation.allStoresOfChain,
     );
 
     _filterLocations(emit: emit, selectedFilters: selectedFilters);
@@ -237,15 +233,15 @@ class DiscountWatcherBloc
     _FilterLocations event,
     Emitter<DiscountWatcherState> emit,
   ) {
-    _filterLocations(emit: emit, selectedFilters: event.filterListIndex);
+    _filterLocations(emit: emit, selectedFilters: event.filterList);
   }
 
   void _filterLocations({
     required Emitter<DiscountWatcherState> emit,
-    required List<int> selectedFilters,
+    required List<dynamic> selectedFilters,
   }) {
     final locationList = _filterLocation(
-      locationIndex: selectedFilters,
+      location: selectedFilters,
     );
     final (:list, :loadingStatus) = _filter(
       categoryList: state.categoryDiscountModelItems,
@@ -257,7 +253,7 @@ class DiscountWatcherBloc
       state.copyWith(
         filteredDiscountModelItems: list,
         locationDiscountModelItems: locationList,
-        filtersLocationIndex: selectedFilters,
+        filtersLocation: selectedFilters,
         itemsLoaded: state.itemsLoaded.getLoaded(list: list),
         loadingStatus: loadingStatus,
       ),
@@ -265,39 +261,41 @@ class DiscountWatcherBloc
   }
 
   List<DiscountModel> _filterLocation({
-    required List<int>? locationIndex,
+    required List<dynamic>? location,
     List<DiscountModel>? listValue,
-    List<DiscountModel>? categiryList,
+    // List<DiscountModel>? categiryList,
   }) {
     final items = listValue ??
         state.discountModelItems
             .where(
               (item) =>
-                  locationIndex == null ||
-                  !locationIndex.contains(1) ||
+                  location == null ||
+                  !location.contains(DiscountEnum.free) ||
                   item.discount.contains(100),
             )
             .toList();
     final list = items.loadingFilter(
-      filtersIndex: locationIndex?.where((element) => element > 1).toList(),
+      filtersValue:
+          location?.where((element) => element is! DiscountEnum).toList(),
       itemsLoaded: null,
       getENFilter: (item) => [
         if (item.location != null) ...item.location!,
         if (item.subLocation != null) ...item.subLocation!._getList,
       ],
-      overallFilter: items
-          ._getLocationItems(categiryList ?? state.categoryDiscountModelItems),
-      containAnyItems: false,
+      // overallFilter: items
+      //     ._getLocationItems(categiryList ?? state
+      // .categoryDiscountModelItems),
+      // containAnyItems: false,
     );
     return list;
   }
 
   List<DiscountModel> _sorting({
     required List<DiscountModel> list,
-    required List<int>? locationIndex,
+    required List<dynamic>? location,
   }) {
-    final indexes = locationIndex ?? state.filtersLocationIndex;
-    if (indexes.contains(0)) {
+    final indexes = location ?? state.filtersLocation;
+    if (indexes.contains(DiscountEnum.largestSmallest)) {
       return list
         ..sort((a, b) {
           // if (locationIndex != null && locationIndex.contains(0)) {
@@ -316,15 +314,15 @@ class DiscountWatcherBloc
   }
 
   List<DiscountModel> _filterCategory({
-    required List<int>? categoryIndex,
+    required List<dynamic>? categories,
     List<DiscountModel>? list,
-    List<DiscountModel>? locationList,
+    // List<DiscountModel>? locationList,
   }) =>
       (list ?? state.discountModelItems).loadingFilter(
-        filtersIndex: categoryIndex,
+        filtersValue: categories,
         itemsLoaded: null,
         getENFilter: (item) => item.category,
-        listForFilter: locationList ?? state.locationDiscountModelItems,
+        // listForFilter: locationList ?? state.locationDiscountModelItems,
       );
 
   ({List<DiscountModel> list, LoadingStatus loadingStatus}) _filter({
@@ -332,7 +330,7 @@ class DiscountWatcherBloc
     required List<DiscountModel> locationList,
     required int itemsLoaded,
     int? loadItems,
-    List<int>? locationIndex,
+    List<dynamic>? location,
   }) {
     final (:list, :loadingStatus) = categoryList.combiningFilteredLists(
       secondList: locationList,
@@ -340,7 +338,7 @@ class DiscountWatcherBloc
       loadItems: loadItems,
     );
     return (
-      list: _sorting(list: list, locationIndex: locationIndex),
+      list: _sorting(list: list, location: location),
       loadingStatus: loadingStatus
     );
   }

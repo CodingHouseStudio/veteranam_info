@@ -56,7 +56,7 @@ class AdvancedFilterMobDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AdvancedFilterMobCubit, List<int>>(
+    return BlocBuilder<AdvancedFilterMobCubit, List<dynamic>>(
       builder: (context, _) {
         return FractionallySizedBox(
           key: KWidgetkeys.screen.discounts.advancedFilterDialog,
@@ -87,7 +87,7 @@ class AdvancedFilterMobDialog extends StatelessWidget {
                   onChange: (index) => context
                       .read<AdvancedFilterMobCubit>()
                       .changeFilterList(index),
-                  filterLocationIndex: _,
+                  filterLocationes: _,
                 ),
               ),
               KSizedBox.kHeightSizedBox8,
