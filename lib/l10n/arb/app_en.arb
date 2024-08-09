@@ -1011,7 +1011,7 @@
   "@general": {
     "examples": "Text on the settings page on the mobile version"
   },
-  "faq": "Frequent questions",
+  "faq": "Frequently asked questions",
   "@faq": {
     "examples": "Text on the button located on the settings page on the mobile version",
     "description": "The button is used to go to the page with frequent questions."
@@ -1022,6 +1022,6 @@
   },
   "copyEmail": "Email copied",
   "@copyEmail": {
-    "examples": "Text on the settings page on the mobile version"
+    "examples": "Text of the dialogue on the settings page on the mobile version"
   }
 }

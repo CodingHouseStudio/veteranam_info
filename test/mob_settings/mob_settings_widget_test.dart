@@ -34,7 +34,7 @@ void main() {
         await mobSettingsInitialHelper(tester);
       });
       group('${KGroupText.goTo} ', () {
-        testWidgets('${KRoute.myDiscounts.name} ', (tester) async {
+        testWidgets('${KRoute.feedback.name} ', (tester) async {
           await mobSettingsPumpAppHelper(
             tester: tester,
             mockGoRouter: mockGoRouter,

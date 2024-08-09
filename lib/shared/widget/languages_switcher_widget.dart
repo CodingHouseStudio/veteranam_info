@@ -19,7 +19,7 @@ class LanguagesSwitcherWidget extends StatelessWidget {
                   const AppLanguageChanged(),
                 );
           },
-          icon: Container(
+          icon: DecoratedBox(
             decoration: decoration ?? KWidgetTheme.boxDecorationWhiteMain,
             child: Row(
               key: KWidgetkeys.widget.languageSwitcher.item,

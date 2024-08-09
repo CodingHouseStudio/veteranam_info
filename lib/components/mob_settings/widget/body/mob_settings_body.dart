@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:veteranam/shared/shared.dart';
 
 class MobSettingsBodyWidget extends StatelessWidget {
@@ -100,38 +98,15 @@ class MobSettingsBodyWidget extends StatelessWidget {
           padding: const EdgeInsets.symmetric(
             horizontal: KPadding.kPaddingSize16,
           ),
-          child: Row(
-            children: [
-              IconButtonWidget(
-                key: KWidgetkeys.screen.mobSettings.likedInIcon,
-                onPressed: () => context.read<UrlCubit>().launchUrl(
-                      url: KAppText.linkedIn,
-                      mode: LaunchMode.externalApplication,
-                    ),
-                icon: KImage.linkedIn(),
-                background: AppColors.materialThemeSourceSeed,
-              ),
-              KSizedBox.kWidthSizedBox16,
-              IconButtonWidget(
-                key: KWidgetkeys.screen.mobSettings.instagramIcon,
-                onPressed: () => context.read<UrlCubit>().launchUrl(
-                      url: KAppText.instagram,
-                      mode: LaunchMode.externalApplication,
-                    ),
-                icon: KImage.instagram(),
-                background: AppColors.materialThemeSourceSeed,
-              ),
-              KSizedBox.kWidthSizedBox16,
-              IconButtonWidget(
-                key: KWidgetkeys.screen.mobSettings.facebookIcon,
-                onPressed: () => context.read<UrlCubit>().launchUrl(
-                      url: KAppText.facebook,
-                      mode: LaunchMode.externalApplication,
-                    ),
-                icon: KImage.facebook(),
-                background: AppColors.materialThemeSourceSeed,
-              ),
-            ],
+          child: Wrap(
+            children: FooterWidget.socialMediaLinks(
+              isTablet: false,
+              context: context,
+              padding: KSizedBox.kWidthSizedBox16,
+              instagramKey: KWidgetkeys.screen.feedback.instagram,
+              linkedInKey: KWidgetkeys.screen.feedback.linkedIn,
+              facebookKey: KWidgetkeys.screen.feedback.facebook,
+            ),
           ),
         ),
         KSizedBox.kHeightSizedBox24,
