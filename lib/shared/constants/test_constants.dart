@@ -11,6 +11,11 @@ class KTest {
   @visibleForTesting
   static set testIsWeb(bool isWeb) => _kIsWeb = isWeb;
 
+  static bool _test = false;
+  static bool get test => _test;
+  @visibleForTesting
+  static set test(bool getTest) => _test = getTest;
+
   // static ScrollPhysics? _scroll = const BouncingScrollPhysics();
   // static ScrollPhysics? get scroll => _scroll;
   // @visibleForTesting
