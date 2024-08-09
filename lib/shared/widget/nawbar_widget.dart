@@ -101,7 +101,7 @@ class _NawbarWidgetImplematationState
           key: KWidgetkeys.widget.nawbar.widget,
           decoration: KWidgetTheme.boxDecorationNawbar,
           margin: EdgeInsets.only(
-            // top: KPadding.kPaddingSize24,
+            top: KPadding.kPaddingSize24,
             left: padding,
             right: padding,
           ),
