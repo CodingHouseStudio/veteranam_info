@@ -106,7 +106,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i59.FirebaseAuth>(() => firebaseModule.firebaseAuth);
     gh.singleton<_i116.GoogleSignIn>(() => firebaseModule.googleSignIn);
     gh.singleton<_i895.Connectivity>(() => networkModule.connectivity);
-    gh.singleton<_i1001.IDiscountRepository>(() => _i452.DiscountRepository());
     gh.singleton<_i1001.IFeedbackRepository>(() => _i361.FeedbackRepository());
     gh.singleton<_i1001.IUrlRepository>(() => _i929.UrlRepository());
     gh.lazySingleton<_i1001.IStorage>(() => _i949.SecureStorageRepository());
@@ -132,6 +131,8 @@ extension GetItInjectableX on _i174.GetIt {
         _i763.StoryWatcherBloc(storyRepository: gh<_i1001.IStoryRepository>()));
     gh.factory<_i522.HomeWatcherBloc>(() =>
         _i522.HomeWatcherBloc(homeRepository: gh<_i1001.IHomeRepository>()));
+    gh.singleton<_i1001.IDiscountRepository>(
+        () => _i452.DiscountRepository(gh<_i1001.CacheClient>()));
     gh.singleton<_i1001.IAppNetworkRepository>(() => _i336.AppNetworkRepository(
           gh<_i895.Connectivity>(),
           gh<_i1001.CacheClient>(),

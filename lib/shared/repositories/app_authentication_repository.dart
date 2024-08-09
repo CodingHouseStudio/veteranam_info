@@ -87,8 +87,8 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
       );
 
   //
-  // /// Returns the current cached user.
-  // /// Defaults to [User.empty] if there is no cached user.
+  /// Returns the current cached user.
+  /// Defaults to [User.empty] if there is no cached user.
   @override
   User get currentUser => _cache.read<User>(key: userCacheKey) ?? User.empty;
   @override

@@ -4,6 +4,7 @@ import 'package:veteranam/shared/shared.dart';
 abstract class IDiscountRepository {
   Stream<List<DiscountModel>> getDiscountItems({List<String>? reportIdItems});
   Future<Either<SomeFailure, DiscountModel>> getDiscount(String id);
+  List<DiscountModel>? get currentDiscounts;
 
   void addMockDiscountItems();
 

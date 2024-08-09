@@ -154,6 +154,22 @@ abstract class KMockText {
     expirationEN: 'It works all the time',
     locationEN: ['All Ukraine'],
   );
+  static final discountModelItems = <DiscountModel>[
+    for (var i = 0; i < 1000; i++)
+      discountModel.copyWith(
+        id: i.toString(),
+        userId: i.toString(),
+        // dateVerified: dateTime,
+        subLocation: i == 0
+            ? SubLocation.all
+            : i == 1
+                ? SubLocation.allStoresOfChain
+                : i == 2
+                    ? SubLocation.online
+                    : null,
+        // userPhoto: i > _itemsPhoto ? imageModels : null,
+      ),
+  ];
   static final informationModel = InformationModel(
     id: '',
     title: title,

@@ -56,6 +56,13 @@ class DiscountWatcherBloc
   ) async {
     emit(state.copyWith(loadingStatus: LoadingStatus.loading));
 
+    if (_discountRepository.currentDiscounts != null) {
+      add(
+        DiscountWatcherEvent.updated(
+          _discountRepository.currentDiscounts!,
+        ),
+      );
+    }
     final reportItems = await _getReport();
 
     await _discountItemsSubscription?.cancel();

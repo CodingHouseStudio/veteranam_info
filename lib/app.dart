@@ -14,14 +14,14 @@ class App extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => GetIt.I.get<DiscountWatcherBloc>()
-            ..add(const DiscountWatcherEvent.started()),
-        ),
-        BlocProvider(
           create: (context) => GetIt.I.get<AuthenticationBloc>()
             ..add(
               AuthenticationInitialized(),
             ),
+        ),
+        BlocProvider(
+          create: (context) => GetIt.I.get<DiscountWatcherBloc>()
+            ..add(const DiscountWatcherEvent.started()),
         ),
         BlocProvider(
           create: (context) => GetIt.I.get<UrlCubit>(),

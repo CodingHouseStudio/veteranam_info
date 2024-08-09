@@ -2,17 +2,43 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart' show FirebaseException;
 import 'package:dartz/dartz.dart';
+import 'package:flutter/foundation.dart' show visibleForTesting;
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:veteranam/shared/shared.dart';
 
 @Singleton(as: IDiscountRepository)
 class DiscountRepository implements IDiscountRepository {
+  DiscountRepository(
+    this._cache,
+  ) {
+    _updateDiscountsBasedOnCache();
+  }
   final FirestoreService _firestoreService = GetIt.I.get<FirestoreService>();
+  final CacheClient _cache;
+  @visibleForTesting
+  static const discountsCacheKey = '__discounts_cache_key__';
 
   @override
   Stream<List<DiscountModel>> getDiscountItems({List<String>? reportIdItems}) =>
-      _firestoreService.getDiscounts(reportIdItems);
+      _firestoreService.getDiscounts(reportIdItems).map(
+        (discounts) {
+          _cache.write(key: discountsCacheKey, value: discounts);
+          return discounts;
+        },
+      );
+  @override
+  List<DiscountModel>? get currentDiscounts =>
+      _cache.read<List<DiscountModel>>(key: discountsCacheKey);
+
+  void _updateDiscountsBasedOnCache() {
+    // debugPrint('Updating auth status based on cache');
+    // ignore: unused_local_variable
+    final user = currentDiscounts == null;
+    // debugPrint('Current user inside '
+    //     '_updateAuthStatusBasedOnCache : $currentUser');
+    // debugPrint('user is $user');
+  }
 
   @override
   Future<void> addMockDiscountItems() async {

@@ -268,17 +268,17 @@ class FirestoreService {
         .collection(FirebaseCollectionName.discount)
         .orderBy(DiscountModelJsonField.dateVerified, descending: true)
         .where(DiscountModelJsonField.id, whereNotIn: reportIdItems?.toSet())
-        .snapshots(includeMetadataChanges: true) // Enable caching
+        .snapshots() // Disable caching
         .map(
       (snapshot) {
-        for (final change in snapshot.docChanges) {
-          if (change.type == DocumentChangeType.added) {
-            // ignore: unused_local_variable
-            final source =
-                (snapshot.metadata.isFromCache) ? 'local cache' : 'server';
-            // debugPrint('Data fetched from $source');
-          }
-        }
+        // for (final change in snapshot.docChanges) {
+        //   if (change.type == DocumentChangeType.added) {
+        //     // ignore: unused_local_variable
+        //     final source =
+        //         (snapshot.metadata.isFromCache) ? 'local cache' : 'server';
+        //     // debugPrint('Data fetched from $source');
+        //   }
+        // }
         return snapshot.docs
             .map((doc) => DiscountModel.fromJson(doc.data()))
             .toList();
