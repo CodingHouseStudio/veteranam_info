@@ -231,6 +231,10 @@
       document.body.append(scriptTag);
     }
 
+    setTimeout(() => {
+      retryButton.style.display = "block";
+
+    }, 8000);
     if ('serviceWorker' in navigator) {
       // Service workers are supported. Use them.
       window.addEventListener('load', function () {
@@ -273,18 +277,13 @@
               'Failed to load app from service worker. Falling back to plain <script> tag.',
             );
             loadMainDartJs();
-            retryButton.style.display = "block";
+            // retryButton.style.display = "block";
           }
         }, 4000);
       });
     } else {
       // Service workers not supported. Just drop the <script> tag.
       loadMainDartJs();
-      setTimeout(() => {
-        if (!scriptLoaded) {
-          retryButton.style.display = "block";
-        }
-      }, 4000);
     }
     window.addEventListener('offline', function () {
       retryButton.style.display = 'block';
