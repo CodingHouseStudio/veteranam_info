@@ -12,6 +12,7 @@ void configureDependenciesTest() {
   // register logic if user id empty user setting is also empty
   userSetting();
   KTest.testIsWeb = true;
+  KTest.test = true;
   // KTest.scroll = null;
   // Services
   GetIt.I.registerSingleton<FirebaseAuth>(MockFirebaseAuth());
