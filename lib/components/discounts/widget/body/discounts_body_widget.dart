@@ -152,7 +152,7 @@ class DiscountBodyWidget extends StatelessWidget {
         isSelected: (index) => context
             .read<DiscountWatcherBloc>()
             .state
-            .filtersCategoriesIndex
+            .filtersCategories
             .contains(index),
         onSelected: (index) => context.read<DiscountWatcherBloc>().add(
               DiscountWatcherEvent.filterCategory(
@@ -161,11 +161,8 @@ class DiscountBodyWidget extends StatelessWidget {
             ),
         fullLength:
             context.read<DiscountWatcherBloc>().state.discountModelItems.length,
-        filterIsEmpty: context
-            .read<DiscountWatcherBloc>()
-            .state
-            .filtersCategoriesIndex
-            .isEmpty,
+        filterIsEmpty:
+            context.read<DiscountWatcherBloc>().state.filtersCategories.isEmpty,
       );
 
   Widget _myDiscountButton(

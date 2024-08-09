@@ -24,7 +24,7 @@ class InformationWatcherBloc
             informationModelItems: [],
             loadingStatus: LoadingStatus.initial,
             filteredInformationModelItems: [],
-            filtersIndex: [],
+            filters: [],
             itemsLoaded: 0,
             failure: null,
             // reportItems: [],
@@ -83,7 +83,7 @@ class InformationWatcherBloc
     //   reportItems: event.reportItems,
     // );
     final (:list, :loadingStatus) = _filter(
-      filtersIndex: state.filtersIndex,
+      filters: state.filters,
       itemsLoaded: state.itemsLoaded,
       list: event.informationItemsModel,
       // reportItems: event.reportItems,
@@ -93,7 +93,7 @@ class InformationWatcherBloc
         informationModelItems: event.informationItemsModel,
         loadingStatus: loadingStatus,
         filteredInformationModelItems: list,
-        filtersIndex: state.filtersIndex,
+        filters: state.filters,
         itemsLoaded: state.itemsLoaded.getLoaded(list: list),
         failure: null,
         // reportItems: event.reportItems,
@@ -111,7 +111,7 @@ class InformationWatcherBloc
     }
     emit(state.copyWith(loadingStatus: LoadingStatus.loading));
     final (:list, :loadingStatus) = _filter(
-      filtersIndex: state.filtersIndex,
+      filters: state.filters,
       itemsLoaded: state.itemsLoaded,
       loadItems: KDimensions.loadItems,
     );
@@ -133,7 +133,7 @@ class InformationWatcherBloc
   //       filteredInformationModelItems: state.informationModelItems.loading(
   //         itemsLoaded: state.itemsLoaded,
   //       ),
-  //       filtersIndex: null,
+  //       filters: null,
   //     ),
   //   );
   // }
@@ -142,18 +142,20 @@ class InformationWatcherBloc
     _Filter event,
     Emitter<InformationWatcherState> emit,
   ) {
-    final selectedFilters =
-        state.filtersIndex.changeListValue(event.filterIndex);
+    final selectedFilters = state.filters.changeListValue(
+      eventFilter: event.value,
+      removeValue: CategoryEnum.all,
+    );
 
     final (:list, :loadingStatus) = _filter(
-      filtersIndex: selectedFilters,
+      filters: selectedFilters,
       itemsLoaded: state.itemsLoaded,
     );
 
     emit(
       state.copyWith(
         filteredInformationModelItems: list,
-        filtersIndex: selectedFilters,
+        filters: selectedFilters,
         itemsLoaded: state.itemsLoaded.getLoaded(list: list),
         loadingStatus: loadingStatus,
       ),
@@ -164,7 +166,7 @@ class InformationWatcherBloc
     List<InformationModel> list,
     LoadingStatus loadingStatus,
   }) _filter({
-    required List<int>? filtersIndex,
+    required List<dynamic>? filters,
     required int itemsLoaded,
     List<InformationModel>? list,
     // List<ReportModel>? reportItems,
@@ -179,7 +181,7 @@ class InformationWatcherBloc
         // )
         // .toList()
         .loadingFilterAndStatus(
-      filtersIndex: filtersIndex,
+      filtersValue: filters,
       itemsLoaded: itemsLoaded,
       getFilter: (InformationModel item) => item.category,
       loadItems: loadItems,
@@ -196,13 +198,13 @@ class InformationWatcherBloc
   //     reportItems: reportItems,
   //   );
 
-  //   final filtersIndex = items.updateFilterList(
+  //   final filters = items.updateFilterList(
   //     getFilter: (item) => item.category,
   //     previousList: state.informationModelItems,
-  //     previousFilter: state.filtersIndex,
+  //     previousFilter: state.filters,
   //   );
   //   final (:list, :loadingStatus) = _filter(
-  //     filtersIndex: filtersIndex,
+  //     filters: filters,
   //     itemsLoaded: state.itemsLoaded,
   //     list: items,
   //   );
@@ -212,7 +214,7 @@ class InformationWatcherBloc
   //       reportItems: reportItems,
   //       informationModelItems: items,
   //       filteredInformationModelItems: list,
-  //       filtersIndex: filtersIndex,
+  //       filters: filters,
   //       loadingStatus: loadingStatus,
   //     ),
   //   );

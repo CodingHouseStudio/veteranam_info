@@ -22,7 +22,7 @@ mixin _$InformationWatcherEvent {
     required TResult Function(List<InformationModel> informationItemsModel)
         updated,
     required TResult Function() loadNextItems,
-    required TResult Function(int filterIndex) filter,
+    required TResult Function(dynamic value) filter,
     required TResult Function(dynamic failure) failure,
     required TResult Function(InformationModel informationModel, bool isLiked)
         like,
@@ -35,7 +35,7 @@ mixin _$InformationWatcherEvent {
     TResult? Function()? started,
     TResult? Function(List<InformationModel> informationItemsModel)? updated,
     TResult? Function()? loadNextItems,
-    TResult? Function(int filterIndex)? filter,
+    TResult? Function(dynamic value)? filter,
     TResult? Function(dynamic failure)? failure,
     TResult? Function(InformationModel informationModel, bool isLiked)? like,
     TResult? Function(InformationModel informationModel, bool isLiked)?
@@ -47,7 +47,7 @@ mixin _$InformationWatcherEvent {
     TResult Function()? started,
     TResult Function(List<InformationModel> informationItemsModel)? updated,
     TResult Function()? loadNextItems,
-    TResult Function(int filterIndex)? filter,
+    TResult Function(dynamic value)? filter,
     TResult Function(dynamic failure)? failure,
     TResult Function(InformationModel informationModel, bool isLiked)? like,
     TResult Function(InformationModel informationModel, bool isLiked)?
@@ -158,7 +158,7 @@ class _$StartedImpl implements _Started {
     required TResult Function(List<InformationModel> informationItemsModel)
         updated,
     required TResult Function() loadNextItems,
-    required TResult Function(int filterIndex) filter,
+    required TResult Function(dynamic value) filter,
     required TResult Function(dynamic failure) failure,
     required TResult Function(InformationModel informationModel, bool isLiked)
         like,
@@ -174,7 +174,7 @@ class _$StartedImpl implements _Started {
     TResult? Function()? started,
     TResult? Function(List<InformationModel> informationItemsModel)? updated,
     TResult? Function()? loadNextItems,
-    TResult? Function(int filterIndex)? filter,
+    TResult? Function(dynamic value)? filter,
     TResult? Function(dynamic failure)? failure,
     TResult? Function(InformationModel informationModel, bool isLiked)? like,
     TResult? Function(InformationModel informationModel, bool isLiked)?
@@ -189,7 +189,7 @@ class _$StartedImpl implements _Started {
     TResult Function()? started,
     TResult Function(List<InformationModel> informationItemsModel)? updated,
     TResult Function()? loadNextItems,
-    TResult Function(int filterIndex)? filter,
+    TResult Function(dynamic value)? filter,
     TResult Function(dynamic failure)? failure,
     TResult Function(InformationModel informationModel, bool isLiked)? like,
     TResult Function(InformationModel informationModel, bool isLiked)?
@@ -334,7 +334,7 @@ class _$UpdatedImpl implements _Updated {
     required TResult Function(List<InformationModel> informationItemsModel)
         updated,
     required TResult Function() loadNextItems,
-    required TResult Function(int filterIndex) filter,
+    required TResult Function(dynamic value) filter,
     required TResult Function(dynamic failure) failure,
     required TResult Function(InformationModel informationModel, bool isLiked)
         like,
@@ -350,7 +350,7 @@ class _$UpdatedImpl implements _Updated {
     TResult? Function()? started,
     TResult? Function(List<InformationModel> informationItemsModel)? updated,
     TResult? Function()? loadNextItems,
-    TResult? Function(int filterIndex)? filter,
+    TResult? Function(dynamic value)? filter,
     TResult? Function(dynamic failure)? failure,
     TResult? Function(InformationModel informationModel, bool isLiked)? like,
     TResult? Function(InformationModel informationModel, bool isLiked)?
@@ -365,7 +365,7 @@ class _$UpdatedImpl implements _Updated {
     TResult Function()? started,
     TResult Function(List<InformationModel> informationItemsModel)? updated,
     TResult Function()? loadNextItems,
-    TResult Function(int filterIndex)? filter,
+    TResult Function(dynamic value)? filter,
     TResult Function(dynamic failure)? failure,
     TResult Function(InformationModel informationModel, bool isLiked)? like,
     TResult Function(InformationModel informationModel, bool isLiked)?
@@ -483,7 +483,7 @@ class _$LoadNextItemsImpl implements _LoadNextItems {
     required TResult Function(List<InformationModel> informationItemsModel)
         updated,
     required TResult Function() loadNextItems,
-    required TResult Function(int filterIndex) filter,
+    required TResult Function(dynamic value) filter,
     required TResult Function(dynamic failure) failure,
     required TResult Function(InformationModel informationModel, bool isLiked)
         like,
@@ -499,7 +499,7 @@ class _$LoadNextItemsImpl implements _LoadNextItems {
     TResult? Function()? started,
     TResult? Function(List<InformationModel> informationItemsModel)? updated,
     TResult? Function()? loadNextItems,
-    TResult? Function(int filterIndex)? filter,
+    TResult? Function(dynamic value)? filter,
     TResult? Function(dynamic failure)? failure,
     TResult? Function(InformationModel informationModel, bool isLiked)? like,
     TResult? Function(InformationModel informationModel, bool isLiked)?
@@ -514,7 +514,7 @@ class _$LoadNextItemsImpl implements _LoadNextItems {
     TResult Function()? started,
     TResult Function(List<InformationModel> informationItemsModel)? updated,
     TResult Function()? loadNextItems,
-    TResult Function(int filterIndex)? filter,
+    TResult Function(dynamic value)? filter,
     TResult Function(dynamic failure)? failure,
     TResult Function(InformationModel informationModel, bool isLiked)? like,
     TResult Function(InformationModel informationModel, bool isLiked)?
@@ -584,7 +584,7 @@ abstract class _$$FilterImplCopyWith<$Res> {
           _$FilterImpl value, $Res Function(_$FilterImpl) then) =
       __$$FilterImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({int filterIndex});
+  $Res call({dynamic value});
 }
 
 /// @nodoc
@@ -600,13 +600,13 @@ class __$$FilterImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? filterIndex = null,
+    Object? value = freezed,
   }) {
     return _then(_$FilterImpl(
-      null == filterIndex
-          ? _value.filterIndex
-          : filterIndex // ignore: cast_nullable_to_non_nullable
-              as int,
+      freezed == value
+          ? _value.value
+          : value // ignore: cast_nullable_to_non_nullable
+              as dynamic,
     ));
   }
 }
@@ -614,14 +614,14 @@ class __$$FilterImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$FilterImpl implements _Filter {
-  const _$FilterImpl(this.filterIndex);
+  const _$FilterImpl(this.value);
 
   @override
-  final int filterIndex;
+  final dynamic value;
 
   @override
   String toString() {
-    return 'InformationWatcherEvent.filter(filterIndex: $filterIndex)';
+    return 'InformationWatcherEvent.filter(value: $value)';
   }
 
   @override
@@ -629,12 +629,12 @@ class _$FilterImpl implements _Filter {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$FilterImpl &&
-            (identical(other.filterIndex, filterIndex) ||
-                other.filterIndex == filterIndex));
+            const DeepCollectionEquality().equals(other.value, value));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, filterIndex);
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(value));
 
   /// Create a copy of InformationWatcherEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -651,14 +651,14 @@ class _$FilterImpl implements _Filter {
     required TResult Function(List<InformationModel> informationItemsModel)
         updated,
     required TResult Function() loadNextItems,
-    required TResult Function(int filterIndex) filter,
+    required TResult Function(dynamic value) filter,
     required TResult Function(dynamic failure) failure,
     required TResult Function(InformationModel informationModel, bool isLiked)
         like,
     required TResult Function(InformationModel informationModel, bool isLiked)
         changeLike,
   }) {
-    return filter(filterIndex);
+    return filter(value);
   }
 
   @override
@@ -667,13 +667,13 @@ class _$FilterImpl implements _Filter {
     TResult? Function()? started,
     TResult? Function(List<InformationModel> informationItemsModel)? updated,
     TResult? Function()? loadNextItems,
-    TResult? Function(int filterIndex)? filter,
+    TResult? Function(dynamic value)? filter,
     TResult? Function(dynamic failure)? failure,
     TResult? Function(InformationModel informationModel, bool isLiked)? like,
     TResult? Function(InformationModel informationModel, bool isLiked)?
         changeLike,
   }) {
-    return filter?.call(filterIndex);
+    return filter?.call(value);
   }
 
   @override
@@ -682,7 +682,7 @@ class _$FilterImpl implements _Filter {
     TResult Function()? started,
     TResult Function(List<InformationModel> informationItemsModel)? updated,
     TResult Function()? loadNextItems,
-    TResult Function(int filterIndex)? filter,
+    TResult Function(dynamic value)? filter,
     TResult Function(dynamic failure)? failure,
     TResult Function(InformationModel informationModel, bool isLiked)? like,
     TResult Function(InformationModel informationModel, bool isLiked)?
@@ -690,7 +690,7 @@ class _$FilterImpl implements _Filter {
     required TResult orElse(),
   }) {
     if (filter != null) {
-      return filter(filterIndex);
+      return filter(value);
     }
     return orElse();
   }
@@ -743,9 +743,9 @@ class _$FilterImpl implements _Filter {
 }
 
 abstract class _Filter implements InformationWatcherEvent {
-  const factory _Filter(final int filterIndex) = _$FilterImpl;
+  const factory _Filter(final dynamic value) = _$FilterImpl;
 
-  int get filterIndex;
+  dynamic get value;
 
   /// Create a copy of InformationWatcherEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -827,7 +827,7 @@ class _$FailureImpl implements _Failure {
     required TResult Function(List<InformationModel> informationItemsModel)
         updated,
     required TResult Function() loadNextItems,
-    required TResult Function(int filterIndex) filter,
+    required TResult Function(dynamic value) filter,
     required TResult Function(dynamic failure) failure,
     required TResult Function(InformationModel informationModel, bool isLiked)
         like,
@@ -843,7 +843,7 @@ class _$FailureImpl implements _Failure {
     TResult? Function()? started,
     TResult? Function(List<InformationModel> informationItemsModel)? updated,
     TResult? Function()? loadNextItems,
-    TResult? Function(int filterIndex)? filter,
+    TResult? Function(dynamic value)? filter,
     TResult? Function(dynamic failure)? failure,
     TResult? Function(InformationModel informationModel, bool isLiked)? like,
     TResult? Function(InformationModel informationModel, bool isLiked)?
@@ -858,7 +858,7 @@ class _$FailureImpl implements _Failure {
     TResult Function()? started,
     TResult Function(List<InformationModel> informationItemsModel)? updated,
     TResult Function()? loadNextItems,
-    TResult Function(int filterIndex)? filter,
+    TResult Function(dynamic value)? filter,
     TResult Function(dynamic failure)? failure,
     TResult Function(InformationModel informationModel, bool isLiked)? like,
     TResult Function(InformationModel informationModel, bool isLiked)?
@@ -1022,7 +1022,7 @@ class _$LikeImpl implements _Like {
     required TResult Function(List<InformationModel> informationItemsModel)
         updated,
     required TResult Function() loadNextItems,
-    required TResult Function(int filterIndex) filter,
+    required TResult Function(dynamic value) filter,
     required TResult Function(dynamic failure) failure,
     required TResult Function(InformationModel informationModel, bool isLiked)
         like,
@@ -1038,7 +1038,7 @@ class _$LikeImpl implements _Like {
     TResult? Function()? started,
     TResult? Function(List<InformationModel> informationItemsModel)? updated,
     TResult? Function()? loadNextItems,
-    TResult? Function(int filterIndex)? filter,
+    TResult? Function(dynamic value)? filter,
     TResult? Function(dynamic failure)? failure,
     TResult? Function(InformationModel informationModel, bool isLiked)? like,
     TResult? Function(InformationModel informationModel, bool isLiked)?
@@ -1053,7 +1053,7 @@ class _$LikeImpl implements _Like {
     TResult Function()? started,
     TResult Function(List<InformationModel> informationItemsModel)? updated,
     TResult Function()? loadNextItems,
-    TResult Function(int filterIndex)? filter,
+    TResult Function(dynamic value)? filter,
     TResult Function(dynamic failure)? failure,
     TResult Function(InformationModel informationModel, bool isLiked)? like,
     TResult Function(InformationModel informationModel, bool isLiked)?
@@ -1222,7 +1222,7 @@ class _$ChangeLikeImpl implements _ChangeLike {
     required TResult Function(List<InformationModel> informationItemsModel)
         updated,
     required TResult Function() loadNextItems,
-    required TResult Function(int filterIndex) filter,
+    required TResult Function(dynamic value) filter,
     required TResult Function(dynamic failure) failure,
     required TResult Function(InformationModel informationModel, bool isLiked)
         like,
@@ -1238,7 +1238,7 @@ class _$ChangeLikeImpl implements _ChangeLike {
     TResult? Function()? started,
     TResult? Function(List<InformationModel> informationItemsModel)? updated,
     TResult? Function()? loadNextItems,
-    TResult? Function(int filterIndex)? filter,
+    TResult? Function(dynamic value)? filter,
     TResult? Function(dynamic failure)? failure,
     TResult? Function(InformationModel informationModel, bool isLiked)? like,
     TResult? Function(InformationModel informationModel, bool isLiked)?
@@ -1253,7 +1253,7 @@ class _$ChangeLikeImpl implements _ChangeLike {
     TResult Function()? started,
     TResult Function(List<InformationModel> informationItemsModel)? updated,
     TResult Function()? loadNextItems,
-    TResult Function(int filterIndex)? filter,
+    TResult Function(dynamic value)? filter,
     TResult Function(dynamic failure)? failure,
     TResult Function(InformationModel informationModel, bool isLiked)? like,
     TResult Function(InformationModel informationModel, bool isLiked)?
@@ -1334,7 +1334,7 @@ mixin _$InformationWatcherState {
       throw _privateConstructorUsedError;
   List<InformationModel> get filteredInformationModelItems =>
       throw _privateConstructorUsedError;
-  List<int> get filtersIndex => throw _privateConstructorUsedError;
+  List<dynamic> get filters => throw _privateConstructorUsedError;
   LoadingStatus get loadingStatus => throw _privateConstructorUsedError;
   int get itemsLoaded => throw _privateConstructorUsedError;
   InformationFailure? get failure => throw _privateConstructorUsedError;
@@ -1355,7 +1355,7 @@ abstract class $InformationWatcherStateCopyWith<$Res> {
   $Res call(
       {List<InformationModel> informationModelItems,
       List<InformationModel> filteredInformationModelItems,
-      List<int> filtersIndex,
+      List<dynamic> filters,
       LoadingStatus loadingStatus,
       int itemsLoaded,
       InformationFailure? failure});
@@ -1379,7 +1379,7 @@ class _$InformationWatcherStateCopyWithImpl<$Res,
   $Res call({
     Object? informationModelItems = null,
     Object? filteredInformationModelItems = null,
-    Object? filtersIndex = null,
+    Object? filters = null,
     Object? loadingStatus = null,
     Object? itemsLoaded = null,
     Object? failure = freezed,
@@ -1393,10 +1393,10 @@ class _$InformationWatcherStateCopyWithImpl<$Res,
           ? _value.filteredInformationModelItems
           : filteredInformationModelItems // ignore: cast_nullable_to_non_nullable
               as List<InformationModel>,
-      filtersIndex: null == filtersIndex
-          ? _value.filtersIndex
-          : filtersIndex // ignore: cast_nullable_to_non_nullable
-              as List<int>,
+      filters: null == filters
+          ? _value.filters
+          : filters // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>,
       loadingStatus: null == loadingStatus
           ? _value.loadingStatus
           : loadingStatus // ignore: cast_nullable_to_non_nullable
@@ -1424,7 +1424,7 @@ abstract class _$$InitialImplCopyWith<$Res>
   $Res call(
       {List<InformationModel> informationModelItems,
       List<InformationModel> filteredInformationModelItems,
-      List<int> filtersIndex,
+      List<dynamic> filters,
       LoadingStatus loadingStatus,
       int itemsLoaded,
       InformationFailure? failure});
@@ -1445,7 +1445,7 @@ class __$$InitialImplCopyWithImpl<$Res>
   $Res call({
     Object? informationModelItems = null,
     Object? filteredInformationModelItems = null,
-    Object? filtersIndex = null,
+    Object? filters = null,
     Object? loadingStatus = null,
     Object? itemsLoaded = null,
     Object? failure = freezed,
@@ -1459,10 +1459,10 @@ class __$$InitialImplCopyWithImpl<$Res>
           ? _value._filteredInformationModelItems
           : filteredInformationModelItems // ignore: cast_nullable_to_non_nullable
               as List<InformationModel>,
-      filtersIndex: null == filtersIndex
-          ? _value._filtersIndex
-          : filtersIndex // ignore: cast_nullable_to_non_nullable
-              as List<int>,
+      filters: null == filters
+          ? _value._filters
+          : filters // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>,
       loadingStatus: null == loadingStatus
           ? _value.loadingStatus
           : loadingStatus // ignore: cast_nullable_to_non_nullable
@@ -1485,13 +1485,13 @@ class _$InitialImpl implements _Initial {
   const _$InitialImpl(
       {required final List<InformationModel> informationModelItems,
       required final List<InformationModel> filteredInformationModelItems,
-      required final List<int> filtersIndex,
+      required final List<dynamic> filters,
       required this.loadingStatus,
       required this.itemsLoaded,
       required this.failure})
       : _informationModelItems = informationModelItems,
         _filteredInformationModelItems = filteredInformationModelItems,
-        _filtersIndex = filtersIndex;
+        _filters = filters;
 
   final List<InformationModel> _informationModelItems;
   @override
@@ -1511,12 +1511,12 @@ class _$InitialImpl implements _Initial {
     return EqualUnmodifiableListView(_filteredInformationModelItems);
   }
 
-  final List<int> _filtersIndex;
+  final List<dynamic> _filters;
   @override
-  List<int> get filtersIndex {
-    if (_filtersIndex is EqualUnmodifiableListView) return _filtersIndex;
+  List<dynamic> get filters {
+    if (_filters is EqualUnmodifiableListView) return _filters;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_filtersIndex);
+    return EqualUnmodifiableListView(_filters);
   }
 
   @override
@@ -1528,7 +1528,7 @@ class _$InitialImpl implements _Initial {
 
   @override
   String toString() {
-    return 'InformationWatcherState(informationModelItems: $informationModelItems, filteredInformationModelItems: $filteredInformationModelItems, filtersIndex: $filtersIndex, loadingStatus: $loadingStatus, itemsLoaded: $itemsLoaded, failure: $failure)';
+    return 'InformationWatcherState(informationModelItems: $informationModelItems, filteredInformationModelItems: $filteredInformationModelItems, filters: $filters, loadingStatus: $loadingStatus, itemsLoaded: $itemsLoaded, failure: $failure)';
   }
 
   @override
@@ -1541,8 +1541,7 @@ class _$InitialImpl implements _Initial {
             const DeepCollectionEquality().equals(
                 other._filteredInformationModelItems,
                 _filteredInformationModelItems) &&
-            const DeepCollectionEquality()
-                .equals(other._filtersIndex, _filtersIndex) &&
+            const DeepCollectionEquality().equals(other._filters, _filters) &&
             (identical(other.loadingStatus, loadingStatus) ||
                 other.loadingStatus == loadingStatus) &&
             (identical(other.itemsLoaded, itemsLoaded) ||
@@ -1555,7 +1554,7 @@ class _$InitialImpl implements _Initial {
       runtimeType,
       const DeepCollectionEquality().hash(_informationModelItems),
       const DeepCollectionEquality().hash(_filteredInformationModelItems),
-      const DeepCollectionEquality().hash(_filtersIndex),
+      const DeepCollectionEquality().hash(_filters),
       loadingStatus,
       itemsLoaded,
       failure);
@@ -1573,7 +1572,7 @@ abstract class _Initial implements InformationWatcherState {
   const factory _Initial(
       {required final List<InformationModel> informationModelItems,
       required final List<InformationModel> filteredInformationModelItems,
-      required final List<int> filtersIndex,
+      required final List<dynamic> filters,
       required final LoadingStatus loadingStatus,
       required final int itemsLoaded,
       required final InformationFailure? failure}) = _$InitialImpl;
@@ -1583,7 +1582,7 @@ abstract class _Initial implements InformationWatcherState {
   @override
   List<InformationModel> get filteredInformationModelItems;
   @override
-  List<int> get filtersIndex;
+  List<dynamic> get filters;
   @override
   LoadingStatus get loadingStatus;
   @override
