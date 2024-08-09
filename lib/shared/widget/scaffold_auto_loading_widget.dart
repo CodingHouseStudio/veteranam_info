@@ -148,6 +148,10 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
                 : MobNavigationWidget(
                     index: context.l10n.discounts == widget.pageName ? 0 : 1,
                   ),
+            appBar: AppBar(
+              backgroundColor: AppColors.materialThemeWhite,
+              toolbarHeight: 0.1,
+            ),
             body: KeyboardScrollView(
               widgetKey: KWidgetkeys.widget.scaffold.scroll,
               // physics: KTest.scroll,
