@@ -76,7 +76,7 @@ class ScaffoldWidget extends StatelessWidget {
                           ),
                 appBar: AppBar(
                   backgroundColor: AppColors.materialThemeWhite,
-                  toolbarHeight: KSize.kPixel24,
+                  toolbarHeight: 0.1,
                 ),
                 body: KeyboardScrollView(
                   widgetKey: KWidgetkeys.widget.scaffold.scroll,

@@ -57,6 +57,10 @@ class ScaffoldDecorationWidget extends StatelessWidget {
           //   isDesk: isDesk,
           // );
           return Scaffold(
+            appBar: AppBar(
+              backgroundColor: AppColors.materialThemeWhite,
+              toolbarHeight: 0.1,
+            ),
             body: KeyboardScrollView(
               widgetKey: KWidgetkeys.widget.scaffold.scroll,
               slivers: [
