@@ -74,6 +74,9 @@ class ScaffoldWidget extends StatelessWidget {
                         : const MobNavigationWidget(
                             index: 2,
                           ),
+                appBar: AppBar(
+                  title: const Text('Test'),
+                ),
                 body: KeyboardScrollView(
                   widgetKey: KWidgetkeys.widget.scaffold.scroll,
                   //physics: KTest.scroll,
