@@ -7,7 +7,7 @@ Future<void> mobSettingsInitialHelper(
   WidgetTester tester,
 ) async {
   expect(
-    find.byKey(KWidgetkeys.screen.mobSettings.title1),
+    find.byKey(KWidgetkeys.screen.mobSettings.title),
     findsOneWidget,
   );
 
@@ -24,7 +24,7 @@ Future<void> mobSettingsInitialHelper(
   await languageSwitcherHelper(tester);
 
   expect(
-    find.byKey(KWidgetkeys.screen.mobSettings.title2),
+    find.byKey(KWidgetkeys.screen.mobSettings.subtitle),
     findsOneWidget,
   );
 
