@@ -74,4 +74,6 @@ abstract class KSize {
   static const kArrowsStep = 100.0;
 
   static const kPercentOfScreen = 0.80;
+
+  static const kAppBarHeight = 0.1;
 }
