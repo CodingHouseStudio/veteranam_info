@@ -3,7 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:veteranam/shared/shared.dart';
 
 class LanguagesSwitcherWidget extends StatelessWidget {
-  const LanguagesSwitcherWidget({super.key});
+  const LanguagesSwitcherWidget({this.decoration, super.key});
+
+  final Decoration? decoration;
 
   @override
   Widget build(BuildContext context) {
@@ -18,9 +20,7 @@ class LanguagesSwitcherWidget extends StatelessWidget {
                 );
           },
           icon: Container(
-            decoration: KTest.testIsWeb
-                ? KWidgetTheme.boxDecorationWhiteMain
-                : KWidgetTheme.boxDecorationNawbar,
+            decoration: decoration ?? KWidgetTheme.boxDecorationWhiteMain,
             child: Row(
               key: KWidgetkeys.widget.languageSwitcher.item,
               mainAxisSize: MainAxisSize.min,

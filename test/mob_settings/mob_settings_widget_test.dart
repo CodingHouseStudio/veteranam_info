@@ -40,7 +40,7 @@ void main() {
             mockGoRouter: mockGoRouter,
           );
 
-          await mobSettingsHelper(
+          await mobSettingsFeedbackHelper(
             tester: tester,
             mockGoRouter: mockGoRouter,
           );

@@ -55,7 +55,7 @@ class ScaffoldWidget extends StatelessWidget {
                     : KPadding.kPaddingSize16),
           );
           final footerWidget = <Widget>[];
-          if (hasFooter && KTest.testIsWeb) {
+          if (hasFooter) {
             footerWidget.addAll(
               FooterWidget.get(
                 context: context,

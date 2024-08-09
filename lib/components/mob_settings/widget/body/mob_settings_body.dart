@@ -45,6 +45,7 @@ class MobSettingsBodyWidget extends StatelessWidget {
               ),
               LanguagesSwitcherWidget(
                 key: KWidgetkeys.screen.mobSettings.languagesSwitcher,
+                decoration: KWidgetTheme.boxDecorationNawbar,
               ),
             ],
           ),

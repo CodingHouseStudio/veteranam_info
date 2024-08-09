@@ -4,7 +4,7 @@ import 'package:veteranam/shared/shared.dart';
 
 import '../../test_dependency.dart';
 
-Future<void> mobSettingsHelper({
+Future<void> mobSettingsFeedbackHelper({
   required WidgetTester tester,
   required MockGoRouter mockGoRouter,
 }) async {

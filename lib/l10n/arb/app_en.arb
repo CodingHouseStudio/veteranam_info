@@ -1022,6 +1022,6 @@
   },
   "copyEmail": "Email copied",
   "@copyEmail": {
-    "examples": "Текст на сторінці налаштувань на мобільній версії"
+    "examples": "Text on the settings page on the mobile version"
   }
 }
