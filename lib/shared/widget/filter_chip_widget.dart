@@ -19,10 +19,10 @@ class FiltersChipWidget extends StatelessWidget {
   final bool filterIsEmpty;
   // final void Function() onResetValue;
   final void Function(
-    int index,
+    dynamic value,
   ) onSelected;
   final bool Function(
-    int index,
+    dynamic value,
   ) isSelected;
 
   @override
@@ -73,12 +73,17 @@ class FiltersChipWidget extends StatelessWidget {
                 key: KWidgetkeys.widget.filterChip.chips,
                 filter: i != -1
                     ? filtersItems.elementAt(i)
-                    : (FilterItem(context.l10n.all)..number = fullLength),
+                    : (FilterItem(
+                        CategoryEnum.all.getValue(context),
+                        number: fullLength,
+                      )),
                 onSelected: (isSelected) => onSelected(
-                  i,
+                  i != -1 ? filtersItems.elementAt(i).value : CategoryEnum.all,
                 ),
                 isSelected: isSelected(
-                      i,
+                      i != -1
+                          ? filtersItems.elementAt(i).value
+                          : CategoryEnum.all,
                     ) ||
                     (i == -1 && filterIsEmpty),
                 isDesk: isDesk,
