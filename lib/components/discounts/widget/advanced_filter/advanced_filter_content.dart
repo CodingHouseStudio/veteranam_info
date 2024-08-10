@@ -7,13 +7,13 @@ abstract class AdvanceFilter {
   static Widget listView({
     required bool isDesk,
     required BuildContext context,
-    required List<int> filterLocationIndex,
-    required void Function(int) onChange,
+    required List<dynamic> filterLocationes,
+    required void Function(dynamic) onChange,
   }) {
     final body = _widgetList(
       isDesk: isDesk,
       context: context,
-      filterLocationIndex: filterLocationIndex,
+      filterLocationes: filterLocationes,
       onChange: onChange,
     );
     return ListView.builder(
@@ -62,10 +62,10 @@ abstract class AdvanceFilter {
   static List<Widget> _widgetList({
     required bool isDesk,
     required BuildContext context,
-    required List<int> filterLocationIndex,
-    required void Function(int) onChange,
+    required List<dynamic> filterLocationes,
+    required void Function(dynamic) onChange,
   }) {
-    final location = context
+    final locationes = context
         .read<DiscountWatcherBloc>()
         .state
         .discountModelItems
@@ -73,7 +73,7 @@ abstract class AdvanceFilter {
     return [
       // if (isDesk) KSizedBox.kHeightSizedBox32 else
       // KSizedBox.kHeightSizedBox24,
-      if (filterLocationIndex.isNotEmpty) ...[
+      if (filterLocationes.isNotEmpty) ...[
         if (isDesk)
           Row(
             children: [
@@ -99,9 +99,9 @@ abstract class AdvanceFilter {
             key: KWidgetkeys.screen.discounts.appliedFilterText,
             style: AppTextStyle.materialThemeTitleMedium,
           ),
-        ...List.generate(
-          filterLocationIndex.length,
-          (index) => Padding(
+        ...List.generate(filterLocationes.length, (index) {
+          final filter = filterLocationes.elementAt(index);
+          return Padding(
             padding: const EdgeInsets.only(top: KPadding.kPaddingSize16),
             child: Align(
               alignment: Alignment.centerLeft,
@@ -110,21 +110,28 @@ abstract class AdvanceFilter {
                 style: KButtonStyles.advancedFilterButtonStyle,
                 icon: KIcon.close,
                 label: Text(
-                  location
-                      .elementAt(filterLocationIndex.elementAt(index))
-                      .value
-                      .toString(),
+                  filter is SubLocation
+                      ? filter.getList(context).first
+                      : filter is DiscountEnum
+                          ? filter.getValue(context)
+                          : locationes
+                              .firstWhere(
+                                (element) =>
+                                    element.value == filter ||
+                                    element.valueEN == filter,
+                              )
+                              .getString(context),
                   style: isDesk
                       ? AppTextStyle.materialThemeBodyLarge
                       : AppTextStyle.materialThemeBodyMedium,
                 ),
                 onPressed: () => onChange(
-                  filterLocationIndex.elementAt(index),
+                  filter,
                 ),
               ),
             ),
-          ),
-        ),
+          );
+        }),
         KSizedBox.kHeightSizedBox24,
       ],
       Text(
@@ -135,17 +142,17 @@ abstract class AdvanceFilter {
             : AppTextStyle.materialThemeTitleMedium,
       ),
       ...List.generate(
-        2,
+        DiscountEnum.values.length,
         (index) => Padding(
           padding: const EdgeInsets.only(top: KPadding.kPaddingSize16),
           child: CheckPointWidget(
             key: KWidgetkeys.screen.discounts.discountItems,
-            onChanged: () => onChange(index),
+            onChanged: () => onChange(DiscountEnum.values.elementAt(index)),
             isCheck: _isCheck(
-              index: index,
-              filterLocationIndex: filterLocationIndex,
+              value: DiscountEnum.values.elementAt(index),
+              filterLocationes: filterLocationes,
             ),
-            text: location.elementAt(index).value.toString(),
+            text: DiscountEnum.values.elementAt(index).getValue(context),
             isDesk: isDesk,
           ),
         ),
@@ -159,17 +166,23 @@ abstract class AdvanceFilter {
             : AppTextStyle.materialThemeTitleMedium,
       ),
       ...List.generate(
-        location.length - 2,
+        locationes.length,
         (index) {
-          final i = index + 2;
+          final location = locationes.elementAt(index);
           return Padding(
             padding: const EdgeInsets.only(top: KPadding.kPaddingSize16),
             child: CheckPointAmountWidget(
               key: KWidgetkeys.screen.discounts.cityItems,
-              onChanged: () => onChange(i),
-              isCheck:
-                  _isCheck(index: i, filterLocationIndex: filterLocationIndex),
-              filterItem: location.elementAt(i),
+              onChanged: () => onChange(
+                location.value.toString().getSublocation(context) ??
+                    location.value,
+              ),
+              isCheck: _isCheck(
+                value: location.value.toString().getSublocation(context) ??
+                    location.value,
+                filterLocationes: filterLocationes,
+              ),
+              filterItem: location,
               isDesk: isDesk,
             ),
           );
@@ -223,8 +236,8 @@ abstract class AdvanceFilter {
       );
 
   static bool _isCheck({
-    required int index,
-    required List<int>? filterLocationIndex,
+    required dynamic value,
+    required List<dynamic>? filterLocationes,
   }) =>
-      filterLocationIndex != null && filterLocationIndex.contains(index);
+      filterLocationes != null && filterLocationes.contains(value);
 }
