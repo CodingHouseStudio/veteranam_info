@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart' show BuildContext, visibleForTesting;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
+import 'package:veteranam/components/components.dart';
 import 'package:veteranam/shared/shared.dart';
 
 extension ExtendedDateTime on DateTime {
@@ -150,6 +151,16 @@ extension StringExtension on String {
       return this;
     }
   }
+
+  SubLocation? getSublocation(BuildContext context) {
+    if (this == SubLocation.allStoresOfChain.getList(context).first) {
+      return SubLocation.allStoresOfChain;
+    }
+    if (this == SubLocation.online.getList(context).first) {
+      return SubLocation.online;
+    }
+    return null;
+  }
 }
 
 extension InformationModelExtension on InformationModel {
@@ -172,9 +183,27 @@ extension GenericsExtensions<T> on T {
       context.isEnglish ? en : this;
 }
 
-// Extension for handling item loading logic on int
 extension ContextExtensions on BuildContext {
-  // Get the number of loaded items
   bool get isEnglish =>
       read<AuthenticationBloc>().state.userSetting.locale.isEnglish;
+}
+
+extension DiscountEnumExtensions on DiscountEnum {
+  String getValue(BuildContext context) {
+    switch (this) {
+      case DiscountEnum.free:
+        return context.l10n.free;
+      case DiscountEnum.largestSmallest:
+        return context.l10n.fromLargestToSmallest;
+    }
+  }
+}
+
+extension CategoryEnumExtensions on CategoryEnum {
+  String getValue(BuildContext context) {
+    switch (this) {
+      case CategoryEnum.all:
+        return context.l10n.all;
+    }
+  }
 }
