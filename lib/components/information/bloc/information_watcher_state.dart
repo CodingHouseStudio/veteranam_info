@@ -9,7 +9,7 @@ class InformationWatcherState with _$InformationWatcherState {
   const factory InformationWatcherState({
     required List<InformationModel> informationModelItems,
     required List<InformationModel> filteredInformationModelItems,
-    required List<int> filtersIndex,
+    required List<dynamic> filters,
     required LoadingStatus loadingStatus,
     required int itemsLoaded,
     required InformationFailure? failure,

@@ -3,14 +3,13 @@ import 'package:injectable/injectable.dart';
 import 'package:veteranam/shared/shared.dart';
 
 @injectable
-class AdvancedFilterMobCubit extends Cubit<List<int>> {
+class AdvancedFilterMobCubit extends Cubit<List<dynamic>> {
   AdvancedFilterMobCubit() : super([]);
-  void started(List<int> initialList) => emit(initialList);
-  void changeFilterList(int value) {
+  void started(List<dynamic> initialList) => emit(initialList);
+  void changeFilterList(dynamic value) {
     final selectedFilters = state.checkValue(
-      filterIndex: value,
-      equalNumber: 2,
-      largerNumber: 3,
+      filterValue: value,
+      equalValue: SubLocation.allStoresOfChain,
     );
     emit(selectedFilters);
   }

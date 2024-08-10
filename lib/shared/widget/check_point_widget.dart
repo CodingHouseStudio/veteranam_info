@@ -83,7 +83,7 @@ class CheckPointAmountWidget extends StatelessWidget {
             child: CheckPointWidget(
               onChanged: onChanged,
               isCheck: isCheck,
-              text: filterItem.value.toString(),
+              text: filterItem.getString(context),
               isDesk: isDesk,
             ),
           ),
