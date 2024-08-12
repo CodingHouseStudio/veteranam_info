@@ -1022,7 +1022,7 @@
   },
   "copyEmail": "Email copied",
   "@copyEmail": {
-    "examples": "Text of the dialogue on the settings page on the mobile version"
+    "examples": "Text of the dialog on the settings page on the mobile version"
   },
   "copyFailure": "Failed to copy email",
   "@copyFailure": {
