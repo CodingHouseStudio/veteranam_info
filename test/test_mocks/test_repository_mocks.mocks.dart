@@ -6,7 +6,7 @@
 import 'dart:async' as _i8;
 import 'dart:convert' as _i15;
 import 'dart:io' as _i13;
-import 'dart:typed_data' as _i17;
+import 'dart:typed_data' as _i16;
 
 import 'package:cloud_firestore/cloud_firestore.dart' as _i7;
 import 'package:connectivity_plus/connectivity_plus.dart' as _i18;
@@ -21,7 +21,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i5;
 import 'package:google_sign_in/google_sign_in.dart' as _i9;
 import 'package:image_picker/image_picker.dart' as _i11;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i16;
+import 'package:mockito/src/dummies.dart' as _i17;
 import 'package:veteranam/shared/shared.dart' as _i3;
 
 // ignore_for_file: type=lint
@@ -765,6 +765,47 @@ class MockIFeedbackRepository extends _i1.Mock
       ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
 
   @override
+  _i8.Future<_i2.Either<_i3.SomeFailure, bool>> sendMobFeedback({
+    required _i3.FeedbackModel? feedback,
+    required _i16.Uint8List? image,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #sendMobFeedback,
+          [],
+          {
+            #feedback: feedback,
+            #image: image,
+          },
+        ),
+        returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
+            _FakeEither_0<_i3.SomeFailure, bool>(
+          this,
+          Invocation.method(
+            #sendMobFeedback,
+            [],
+            {
+              #feedback: feedback,
+              #image: image,
+            },
+          ),
+        )),
+        returnValueForMissingStub:
+            _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
+                _FakeEither_0<_i3.SomeFailure, bool>(
+          this,
+          Invocation.method(
+            #sendMobFeedback,
+            [],
+            {
+              #feedback: feedback,
+              #image: image,
+            },
+          ),
+        )),
+      ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
+
+  @override
   _i8.Future<_i2.Either<_i3.SomeFailure, bool>> checkUserNeedShowFeedback(
           String? userId) =>
       (super.noSuchMethod(
@@ -801,6 +842,17 @@ class MockFirestoreService extends _i1.Mock implements _i3.FirestoreService {
       (super.noSuchMethod(
         Invocation.method(
           #addFeedback,
+          [feedback],
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<void> addMobFeedback(_i3.FeedbackModel? feedback) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #addMobFeedback,
           [feedback],
         ),
         returnValue: _i8.Future<void>.value(),
@@ -2925,7 +2977,7 @@ class MockFirebaseAuth extends _i1.Mock implements _i4.FirebaseAuth {
           #verifyPasswordResetCode,
           [code],
         ),
-        returnValue: _i8.Future<String>.value(_i16.dummyValue<String>(
+        returnValue: _i8.Future<String>.value(_i17.dummyValue<String>(
           this,
           Invocation.method(
             #verifyPasswordResetCode,
@@ -2933,7 +2985,7 @@ class MockFirebaseAuth extends _i1.Mock implements _i4.FirebaseAuth {
           ),
         )),
         returnValueForMissingStub:
-            _i8.Future<String>.value(_i16.dummyValue<String>(
+            _i8.Future<String>.value(_i17.dummyValue<String>(
           this,
           Invocation.method(
             #verifyPasswordResetCode,
@@ -3069,11 +3121,11 @@ class MockFirebaseFirestore extends _i1.Mock implements _i7.FirebaseFirestore {
   @override
   String get databaseURL => (super.noSuchMethod(
         Invocation.getter(#databaseURL),
-        returnValue: _i16.dummyValue<String>(
+        returnValue: _i17.dummyValue<String>(
           this,
           Invocation.getter(#databaseURL),
         ),
-        returnValueForMissingStub: _i16.dummyValue<String>(
+        returnValueForMissingStub: _i17.dummyValue<String>(
           this,
           Invocation.getter(#databaseURL),
         ),
@@ -3091,11 +3143,11 @@ class MockFirebaseFirestore extends _i1.Mock implements _i7.FirebaseFirestore {
   @override
   String get databaseId => (super.noSuchMethod(
         Invocation.getter(#databaseId),
-        returnValue: _i16.dummyValue<String>(
+        returnValue: _i17.dummyValue<String>(
           this,
           Invocation.getter(#databaseId),
         ),
-        returnValueForMissingStub: _i16.dummyValue<String>(
+        returnValueForMissingStub: _i17.dummyValue<String>(
           this,
           Invocation.getter(#databaseId),
         ),
@@ -3209,7 +3261,7 @@ class MockFirebaseFirestore extends _i1.Mock implements _i7.FirebaseFirestore {
       ) as _i8.Future<void>);
 
   @override
-  _i7.LoadBundleTask loadBundle(_i17.Uint8List? bundle) => (super.noSuchMethod(
+  _i7.LoadBundleTask loadBundle(_i16.Uint8List? bundle) => (super.noSuchMethod(
         Invocation.method(
           #loadBundle,
           [bundle],
@@ -3421,8 +3473,8 @@ class MockFirebaseFirestore extends _i1.Mock implements _i7.FirebaseFirestore {
             #maxAttempts: maxAttempts,
           },
         ),
-        returnValue: _i16.ifNotNull(
-              _i16.dummyValueOrNull<T>(
+        returnValue: _i17.ifNotNull(
+              _i17.dummyValueOrNull<T>(
                 this,
                 Invocation.method(
                   #runTransaction,
@@ -3446,8 +3498,8 @@ class MockFirebaseFirestore extends _i1.Mock implements _i7.FirebaseFirestore {
                 },
               ),
             ),
-        returnValueForMissingStub: _i16.ifNotNull(
-              _i16.dummyValueOrNull<T>(
+        returnValueForMissingStub: _i17.ifNotNull(
+              _i17.dummyValueOrNull<T>(
                 this,
                 Invocation.method(
                   #runTransaction,
@@ -3901,11 +3953,11 @@ class MockGoogleAuthProvider extends _i1.Mock
   @override
   String get providerId => (super.noSuchMethod(
         Invocation.getter(#providerId),
-        returnValue: _i16.dummyValue<String>(
+        returnValue: _i17.dummyValue<String>(
           this,
           Invocation.getter(#providerId),
         ),
-        returnValueForMissingStub: _i16.dummyValue<String>(
+        returnValueForMissingStub: _i17.dummyValue<String>(
           this,
           Invocation.getter(#providerId),
         ),
@@ -4004,11 +4056,11 @@ class MockUser extends _i1.Mock implements _i4.User {
   @override
   String get uid => (super.noSuchMethod(
         Invocation.getter(#uid),
-        returnValue: _i16.dummyValue<String>(
+        returnValue: _i17.dummyValue<String>(
           this,
           Invocation.getter(#uid),
         ),
-        returnValueForMissingStub: _i16.dummyValue<String>(
+        returnValueForMissingStub: _i17.dummyValue<String>(
           this,
           Invocation.getter(#uid),
         ),
@@ -4428,11 +4480,11 @@ class MockGoogleSignInAccount extends _i1.Mock
   @override
   String get email => (super.noSuchMethod(
         Invocation.getter(#email),
-        returnValue: _i16.dummyValue<String>(
+        returnValue: _i17.dummyValue<String>(
           this,
           Invocation.getter(#email),
         ),
-        returnValueForMissingStub: _i16.dummyValue<String>(
+        returnValueForMissingStub: _i17.dummyValue<String>(
           this,
           Invocation.getter(#email),
         ),
@@ -4441,11 +4493,11 @@ class MockGoogleSignInAccount extends _i1.Mock
   @override
   String get id => (super.noSuchMethod(
         Invocation.getter(#id),
-        returnValue: _i16.dummyValue<String>(
+        returnValue: _i17.dummyValue<String>(
           this,
           Invocation.getter(#id),
         ),
-        returnValueForMissingStub: _i16.dummyValue<String>(
+        returnValueForMissingStub: _i17.dummyValue<String>(
           this,
           Invocation.getter(#id),
         ),
@@ -4502,11 +4554,11 @@ class MockCollectionReference<T extends Object?> extends _i1.Mock
   @override
   String get id => (super.noSuchMethod(
         Invocation.getter(#id),
-        returnValue: _i16.dummyValue<String>(
+        returnValue: _i17.dummyValue<String>(
           this,
           Invocation.getter(#id),
         ),
-        returnValueForMissingStub: _i16.dummyValue<String>(
+        returnValueForMissingStub: _i17.dummyValue<String>(
           this,
           Invocation.getter(#id),
         ),
@@ -4515,11 +4567,11 @@ class MockCollectionReference<T extends Object?> extends _i1.Mock
   @override
   String get path => (super.noSuchMethod(
         Invocation.getter(#path),
-        returnValue: _i16.dummyValue<String>(
+        returnValue: _i17.dummyValue<String>(
           this,
           Invocation.getter(#path),
         ),
-        returnValueForMissingStub: _i16.dummyValue<String>(
+        returnValueForMissingStub: _i17.dummyValue<String>(
           this,
           Invocation.getter(#path),
         ),
@@ -5195,11 +5247,11 @@ class MockDocumentReference<T extends Object?> extends _i1.Mock
   @override
   String get id => (super.noSuchMethod(
         Invocation.getter(#id),
-        returnValue: _i16.dummyValue<String>(
+        returnValue: _i17.dummyValue<String>(
           this,
           Invocation.getter(#id),
         ),
-        returnValueForMissingStub: _i16.dummyValue<String>(
+        returnValueForMissingStub: _i17.dummyValue<String>(
           this,
           Invocation.getter(#id),
         ),
@@ -5221,11 +5273,11 @@ class MockDocumentReference<T extends Object?> extends _i1.Mock
   @override
   String get path => (super.noSuchMethod(
         Invocation.getter(#path),
-        returnValue: _i16.dummyValue<String>(
+        returnValue: _i17.dummyValue<String>(
           this,
           Invocation.getter(#path),
         ),
-        returnValueForMissingStub: _i16.dummyValue<String>(
+        returnValueForMissingStub: _i17.dummyValue<String>(
           this,
           Invocation.getter(#path),
         ),
@@ -5423,11 +5475,11 @@ class MockQueryDocumentSnapshot<T extends Object?> extends _i1.Mock
   @override
   String get id => (super.noSuchMethod(
         Invocation.getter(#id),
-        returnValue: _i16.dummyValue<String>(
+        returnValue: _i17.dummyValue<String>(
           this,
           Invocation.getter(#id),
         ),
-        returnValueForMissingStub: _i16.dummyValue<String>(
+        returnValueForMissingStub: _i17.dummyValue<String>(
           this,
           Invocation.getter(#id),
         ),
@@ -5472,14 +5524,14 @@ class MockQueryDocumentSnapshot<T extends Object?> extends _i1.Mock
           #data,
           [],
         ),
-        returnValue: _i16.dummyValue<T>(
+        returnValue: _i17.dummyValue<T>(
           this,
           Invocation.method(
             #data,
             [],
           ),
         ),
-        returnValueForMissingStub: _i16.dummyValue<T>(
+        returnValueForMissingStub: _i17.dummyValue<T>(
           this,
           Invocation.method(
             #data,
@@ -5515,11 +5567,11 @@ class MockDocumentSnapshot<T extends Object?> extends _i1.Mock
   @override
   String get id => (super.noSuchMethod(
         Invocation.getter(#id),
-        returnValue: _i16.dummyValue<String>(
+        returnValue: _i17.dummyValue<String>(
           this,
           Invocation.getter(#id),
         ),
-        returnValueForMissingStub: _i16.dummyValue<String>(
+        returnValueForMissingStub: _i17.dummyValue<String>(
           this,
           Invocation.getter(#id),
         ),
@@ -5735,11 +5787,11 @@ class MockFirebaseStorage extends _i1.Mock implements _i10.FirebaseStorage {
   @override
   String get bucket => (super.noSuchMethod(
         Invocation.getter(#bucket),
-        returnValue: _i16.dummyValue<String>(
+        returnValue: _i17.dummyValue<String>(
           this,
           Invocation.getter(#bucket),
         ),
-        returnValueForMissingStub: _i16.dummyValue<String>(
+        returnValueForMissingStub: _i17.dummyValue<String>(
           this,
           Invocation.getter(#bucket),
         ),
@@ -5924,7 +5976,7 @@ class MockStorageService extends _i1.Mock implements _i3.StorageService {
             #collecltionName: collecltionName,
           },
         ),
-        returnValue: _i8.Future<String>.value(_i16.dummyValue<String>(
+        returnValue: _i8.Future<String>.value(_i17.dummyValue<String>(
           this,
           Invocation.method(
             #saveImage,
@@ -5937,13 +5989,56 @@ class MockStorageService extends _i1.Mock implements _i3.StorageService {
           ),
         )),
         returnValueForMissingStub:
-            _i8.Future<String>.value(_i16.dummyValue<String>(
+            _i8.Future<String>.value(_i17.dummyValue<String>(
           this,
           Invocation.method(
             #saveImage,
             [],
             {
               #imageModel: imageModel,
+              #id: id,
+              #collecltionName: collecltionName,
+            },
+          ),
+        )),
+      ) as _i8.Future<String>);
+
+  @override
+  _i8.Future<String> saveUseUint8ListImage({
+    required _i16.Uint8List? image,
+    required String? id,
+    required String? collecltionName,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #saveUseUint8ListImage,
+          [],
+          {
+            #image: image,
+            #id: id,
+            #collecltionName: collecltionName,
+          },
+        ),
+        returnValue: _i8.Future<String>.value(_i17.dummyValue<String>(
+          this,
+          Invocation.method(
+            #saveUseUint8ListImage,
+            [],
+            {
+              #image: image,
+              #id: id,
+              #collecltionName: collecltionName,
+            },
+          ),
+        )),
+        returnValueForMissingStub:
+            _i8.Future<String>.value(_i17.dummyValue<String>(
+          this,
+          Invocation.method(
+            #saveUseUint8ListImage,
+            [],
+            {
+              #image: image,
               #id: id,
               #collecltionName: collecltionName,
             },
@@ -6147,11 +6242,11 @@ class MockReference extends _i1.Mock implements _i10.Reference {
   @override
   String get bucket => (super.noSuchMethod(
         Invocation.getter(#bucket),
-        returnValue: _i16.dummyValue<String>(
+        returnValue: _i17.dummyValue<String>(
           this,
           Invocation.getter(#bucket),
         ),
-        returnValueForMissingStub: _i16.dummyValue<String>(
+        returnValueForMissingStub: _i17.dummyValue<String>(
           this,
           Invocation.getter(#bucket),
         ),
@@ -6160,11 +6255,11 @@ class MockReference extends _i1.Mock implements _i10.Reference {
   @override
   String get fullPath => (super.noSuchMethod(
         Invocation.getter(#fullPath),
-        returnValue: _i16.dummyValue<String>(
+        returnValue: _i17.dummyValue<String>(
           this,
           Invocation.getter(#fullPath),
         ),
-        returnValueForMissingStub: _i16.dummyValue<String>(
+        returnValueForMissingStub: _i17.dummyValue<String>(
           this,
           Invocation.getter(#fullPath),
         ),
@@ -6173,11 +6268,11 @@ class MockReference extends _i1.Mock implements _i10.Reference {
   @override
   String get name => (super.noSuchMethod(
         Invocation.getter(#name),
-        returnValue: _i16.dummyValue<String>(
+        returnValue: _i17.dummyValue<String>(
           this,
           Invocation.getter(#name),
         ),
-        returnValueForMissingStub: _i16.dummyValue<String>(
+        returnValueForMissingStub: _i17.dummyValue<String>(
           this,
           Invocation.getter(#name),
         ),
@@ -6234,7 +6329,7 @@ class MockReference extends _i1.Mock implements _i10.Reference {
           #getDownloadURL,
           [],
         ),
-        returnValue: _i8.Future<String>.value(_i16.dummyValue<String>(
+        returnValue: _i8.Future<String>.value(_i17.dummyValue<String>(
           this,
           Invocation.method(
             #getDownloadURL,
@@ -6242,7 +6337,7 @@ class MockReference extends _i1.Mock implements _i10.Reference {
           ),
         )),
         returnValueForMissingStub:
-            _i8.Future<String>.value(_i16.dummyValue<String>(
+            _i8.Future<String>.value(_i17.dummyValue<String>(
           this,
           Invocation.method(
             #getDownloadURL,
@@ -6322,19 +6417,19 @@ class MockReference extends _i1.Mock implements _i10.Reference {
       ) as _i8.Future<_i10.ListResult>);
 
   @override
-  _i8.Future<_i17.Uint8List?> getData([int? maxSize = 10485760]) =>
+  _i8.Future<_i16.Uint8List?> getData([int? maxSize = 10485760]) =>
       (super.noSuchMethod(
         Invocation.method(
           #getData,
           [maxSize],
         ),
-        returnValue: _i8.Future<_i17.Uint8List?>.value(),
-        returnValueForMissingStub: _i8.Future<_i17.Uint8List?>.value(),
-      ) as _i8.Future<_i17.Uint8List?>);
+        returnValue: _i8.Future<_i16.Uint8List?>.value(),
+        returnValueForMissingStub: _i8.Future<_i16.Uint8List?>.value(),
+      ) as _i8.Future<_i16.Uint8List?>);
 
   @override
   _i10.UploadTask putData(
-    _i17.Uint8List? data, [
+    _i16.Uint8List? data, [
     _i12.SettableMetadata? metadata,
   ]) =>
       (super.noSuchMethod(
@@ -6642,8 +6737,8 @@ class MockUploadTask extends _i1.Mock implements _i10.UploadTask {
           [onValue],
           {#onError: onError},
         ),
-        returnValue: _i16.ifNotNull(
-              _i16.dummyValueOrNull<S>(
+        returnValue: _i17.ifNotNull(
+              _i17.dummyValueOrNull<S>(
                 this,
                 Invocation.method(
                   #then,
@@ -6661,8 +6756,8 @@ class MockUploadTask extends _i1.Mock implements _i10.UploadTask {
                 {#onError: onError},
               ),
             ),
-        returnValueForMissingStub: _i16.ifNotNull(
-              _i16.dummyValueOrNull<S>(
+        returnValueForMissingStub: _i17.ifNotNull(
+              _i17.dummyValueOrNull<S>(
                 this,
                 Invocation.method(
                   #then,
@@ -6797,11 +6892,11 @@ class MockXFile extends _i1.Mock implements _i11.XFile {
   @override
   String get path => (super.noSuchMethod(
         Invocation.getter(#path),
-        returnValue: _i16.dummyValue<String>(
+        returnValue: _i17.dummyValue<String>(
           this,
           Invocation.getter(#path),
         ),
-        returnValueForMissingStub: _i16.dummyValue<String>(
+        returnValueForMissingStub: _i17.dummyValue<String>(
           this,
           Invocation.getter(#path),
         ),
@@ -6810,11 +6905,11 @@ class MockXFile extends _i1.Mock implements _i11.XFile {
   @override
   String get name => (super.noSuchMethod(
         Invocation.getter(#name),
-        returnValue: _i16.dummyValue<String>(
+        returnValue: _i17.dummyValue<String>(
           this,
           Invocation.getter(#name),
         ),
-        returnValueForMissingStub: _i16.dummyValue<String>(
+        returnValueForMissingStub: _i17.dummyValue<String>(
           this,
           Invocation.getter(#name),
         ),
@@ -6849,7 +6944,7 @@ class MockXFile extends _i1.Mock implements _i11.XFile {
           [],
           {#encoding: encoding},
         ),
-        returnValue: _i8.Future<String>.value(_i16.dummyValue<String>(
+        returnValue: _i8.Future<String>.value(_i17.dummyValue<String>(
           this,
           Invocation.method(
             #readAsString,
@@ -6858,7 +6953,7 @@ class MockXFile extends _i1.Mock implements _i11.XFile {
           ),
         )),
         returnValueForMissingStub:
-            _i8.Future<String>.value(_i16.dummyValue<String>(
+            _i8.Future<String>.value(_i17.dummyValue<String>(
           this,
           Invocation.method(
             #readAsString,
@@ -6869,18 +6964,18 @@ class MockXFile extends _i1.Mock implements _i11.XFile {
       ) as _i8.Future<String>);
 
   @override
-  _i8.Future<_i17.Uint8List> readAsBytes() => (super.noSuchMethod(
+  _i8.Future<_i16.Uint8List> readAsBytes() => (super.noSuchMethod(
         Invocation.method(
           #readAsBytes,
           [],
         ),
-        returnValue: _i8.Future<_i17.Uint8List>.value(_i17.Uint8List(0)),
+        returnValue: _i8.Future<_i16.Uint8List>.value(_i16.Uint8List(0)),
         returnValueForMissingStub:
-            _i8.Future<_i17.Uint8List>.value(_i17.Uint8List(0)),
-      ) as _i8.Future<_i17.Uint8List>);
+            _i8.Future<_i16.Uint8List>.value(_i16.Uint8List(0)),
+      ) as _i8.Future<_i16.Uint8List>);
 
   @override
-  _i8.Stream<_i17.Uint8List> openRead([
+  _i8.Stream<_i16.Uint8List> openRead([
     int? start,
     int? end,
   ]) =>
@@ -6892,9 +6987,9 @@ class MockXFile extends _i1.Mock implements _i11.XFile {
             end,
           ],
         ),
-        returnValue: _i8.Stream<_i17.Uint8List>.empty(),
-        returnValueForMissingStub: _i8.Stream<_i17.Uint8List>.empty(),
-      ) as _i8.Stream<_i17.Uint8List>);
+        returnValue: _i8.Stream<_i16.Uint8List>.empty(),
+        returnValueForMissingStub: _i8.Stream<_i16.Uint8List>.empty(),
+      ) as _i8.Stream<_i16.Uint8List>);
 
   @override
   _i8.Future<DateTime> lastModified() => (super.noSuchMethod(
@@ -8449,11 +8544,11 @@ class MockHttpClientRequest extends _i1.Mock implements _i13.HttpClientRequest {
   @override
   String get method => (super.noSuchMethod(
         Invocation.getter(#method),
-        returnValue: _i16.dummyValue<String>(
+        returnValue: _i17.dummyValue<String>(
           this,
           Invocation.getter(#method),
         ),
-        returnValueForMissingStub: _i16.dummyValue<String>(
+        returnValueForMissingStub: _i17.dummyValue<String>(
           this,
           Invocation.getter(#method),
         ),
@@ -8674,11 +8769,11 @@ class MockHttpClientResponse extends _i1.Mock
   @override
   String get reasonPhrase => (super.noSuchMethod(
         Invocation.getter(#reasonPhrase),
-        returnValue: _i16.dummyValue<String>(
+        returnValue: _i17.dummyValue<String>(
           this,
           Invocation.getter(#reasonPhrase),
         ),
-        returnValueForMissingStub: _i16.dummyValue<String>(
+        returnValueForMissingStub: _i17.dummyValue<String>(
           this,
           Invocation.getter(#reasonPhrase),
         ),
@@ -9030,8 +9125,8 @@ class MockHttpClientResponse extends _i1.Mock
             combine,
           ],
         ),
-        returnValue: _i16.ifNotNull(
-              _i16.dummyValueOrNull<S>(
+        returnValue: _i17.ifNotNull(
+              _i17.dummyValueOrNull<S>(
                 this,
                 Invocation.method(
                   #fold,
@@ -9053,8 +9148,8 @@ class MockHttpClientResponse extends _i1.Mock
                 ],
               ),
             ),
-        returnValueForMissingStub: _i16.ifNotNull(
-              _i16.dummyValueOrNull<S>(
+        returnValueForMissingStub: _i17.ifNotNull(
+              _i17.dummyValueOrNull<S>(
                 this,
                 Invocation.method(
                   #fold,
@@ -9084,7 +9179,7 @@ class MockHttpClientResponse extends _i1.Mock
           #join,
           [separator],
         ),
-        returnValue: _i8.Future<String>.value(_i16.dummyValue<String>(
+        returnValue: _i8.Future<String>.value(_i17.dummyValue<String>(
           this,
           Invocation.method(
             #join,
@@ -9092,7 +9187,7 @@ class MockHttpClientResponse extends _i1.Mock
           ),
         )),
         returnValueForMissingStub:
-            _i8.Future<String>.value(_i16.dummyValue<String>(
+            _i8.Future<String>.value(_i17.dummyValue<String>(
           this,
           Invocation.method(
             #join,
@@ -9180,8 +9275,8 @@ class MockHttpClientResponse extends _i1.Mock
           #drain,
           [futureValue],
         ),
-        returnValue: _i16.ifNotNull(
-              _i16.dummyValueOrNull<E>(
+        returnValue: _i17.ifNotNull(
+              _i17.dummyValueOrNull<E>(
                 this,
                 Invocation.method(
                   #drain,
@@ -9197,8 +9292,8 @@ class MockHttpClientResponse extends _i1.Mock
                 [futureValue],
               ),
             ),
-        returnValueForMissingStub: _i16.ifNotNull(
-              _i16.dummyValueOrNull<E>(
+        returnValueForMissingStub: _i17.ifNotNull(
+              _i17.dummyValueOrNull<E>(
                 this,
                 Invocation.method(
                   #drain,

@@ -1,5 +1,7 @@
 import 'dart:math';
+import 'dart:typed_data';
 import 'package:collection/collection.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/widgets.dart' show BuildContext, visibleForTesting;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -204,6 +206,16 @@ extension CategoryEnumExtensions on CategoryEnum {
     switch (this) {
       case CategoryEnum.all:
         return context.l10n.all;
+    }
+  }
+}
+
+extension ReferenceExtension on Reference {
+  UploadTask putImage(Uint8List data, [SettableMetadata? metadata]) {
+    if (KTest.testIsWeb) {
+      return putBlob(data, metadata);
+    } else {
+      return putData(data, metadata);
     }
   }
 }
