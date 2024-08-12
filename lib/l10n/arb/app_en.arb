@@ -996,9 +996,13 @@
   "@apply": {
     "examples": "Text for the button in the AdvancedFilter dialog for the mobile version"
   },
-  "whatIsWrong": "What's wrong",
+  "whatIsWrong": "What's wrong?",
   "@whatIsWrong": {
     "examples": "Text for a feedback dialog in a mobile app"
+  },
+  "mobFeedbackHint": "At the top of the screen you can indicate what the problem is, and at the bottom you can describe it in detail in words. Using the Navigation button, you can continue working with the application, and by clicking on the Draw button, you can continue describing the problem.",
+  "@mobFeedbackHint": {
+    "examples": "Hint text for the feedback dialog in the mobile app"
   },
   "moreCities": "{count} more..",
   "@moreCities": {
