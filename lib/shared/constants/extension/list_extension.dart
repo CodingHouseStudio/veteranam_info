@@ -1,19 +1,27 @@
 import 'package:collection/collection.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:veteranam/components/components.dart';
 import 'package:veteranam/shared/shared.dart';
 
 /// Extension for filtering FilterItem list items.
 extension FilterItems on List<FilterItem> {
   /// Get a list of FilterItem with summarized values.
-  List<FilterItem> get getToSet {
-    // Group items by their value
+  List<FilterItem> getToSet(List<FilterItem>? numberGetList) {
     final grouped = groupBy(this, (FilterItem item) => item.value);
 
-    // Map each group to a new FilterItem with summarized number
-    return grouped.entries
-        .map((entry) => FilterItem(entry.key, number: entry.value.length))
-        .toList();
+    return grouped.entries.map((entry) {
+      final item = FilterItem(
+        entry.key,
+        valueEN: entry.value.first.valueEN,
+        number:
+            numberGetList?.where((item) => item.value == entry.key).length ??
+                entry.value.length,
+      );
+
+      return item;
+    }).toList();
   }
 
   /// Method to find indices where differences occur between this list and a new
@@ -117,6 +125,35 @@ extension ListExtensions<T> on List<T> {
         .toList();
   }
 
+  /// Method to check and modify list based on specific filter conditions.
+  ///
+  /// Parameters:
+  /// - filterIndex: Index to compare with list elements.
+  /// - equalNumber: Number for equality comparison.
+  /// - largerNumber: Number for comparison with larger values.
+  ///
+  /// Returns:
+  /// Modified list based on the provided filter conditions.
+  List<T> checkValue({
+    required T filterValue,
+    required T equalValue,
+    // required int largerNumber,
+  }) {
+    final newList = changeListValue(
+      eventFilter: filterValue,
+      removeValue: equalValue,
+    );
+
+    // Conditionally remove elements from 'newList' based on filter conditions
+    // if (filterValue == equalValue) {
+    //   newList.removeWhere((element) => element > largerNumber);
+    // } else if (contains(element)) {
+    //   newList.removeWhere((element) => element == equalNumber);
+    // }
+
+    return newList;
+  }
+
   /// Method to filter and load items based on multiple filters.
   ///
   /// Parameters:
@@ -132,12 +169,13 @@ extension ListExtensions<T> on List<T> {
   /// Returns:
   /// A filtered and loaded list of items.
   List<T> loadingFilter({
-    required List<int>? filtersIndex,
+    required List<dynamic>? filtersValue,
     required int? itemsLoaded,
     required List<dynamic> Function(T item) getENFilter,
     int? loadItems,
-    List<FilterItem>? overallFilter,
-    List<T>? fullList,
+    // List<FilterItem>? overallFilter,
+    // List<T>? fullList,
+    // List<T>? listForFilter,
     bool containAnyItems = true,
   }) {
     // Calculate the total number of items to load
@@ -147,12 +185,29 @@ extension ListExtensions<T> on List<T> {
 
     // Apply filters to the list and return up to 'loadedItemsCount' items
     return _filter(
-      filtersIndex: filtersIndex,
+      filtersValue: filtersValue,
       getFilter: getENFilter,
-      overallFilter: overallFilter,
-      fullList: fullList,
+      // overallFilter: overallFilter,
+      // fullList: fullList,
       containAnyItems: containAnyItems,
+      // listForFilter: listForFilter,
     ).take(loadedItemsCount).toList();
+  }
+
+  ({List<T> list, LoadingStatus loadingStatus}) combiningFilteredLists({
+    required List<T> secondList,
+    required int itemsLoaded,
+    int? loadItems,
+  }) {
+    // Calculate the total number of items to load
+    final loadedItemsCount =
+        itemsLoaded.getLoaded(list: this, loadItems: loadItems) +
+            (loadItems ?? 0);
+    final list = toSet().intersection(secondList.toSet()).toList();
+    return (
+      list: list.take(loadedItemsCount).toList(),
+      loadingStatus: list.getLoadingStatus(loadedItemsCount)
+    );
   }
 
   /// Method to filter items based on multiple filters.
@@ -168,36 +223,43 @@ extension ListExtensions<T> on List<T> {
   /// Returns:
   /// A filtered list of items.
   List<T> _filter({
-    required List<int>? filtersIndex,
+    required List<dynamic>? filtersValue,
     required List<dynamic> Function(T item) getFilter,
-    required List<FilterItem>? overallFilter,
-    required List<T>? fullList,
+    // required List<FilterItem>? overallFilter,
+    // required List<T>? fullList,
     required bool containAnyItems,
+    // List<T>? listForFilter,
   }) {
     if (isEmpty) return []; // Return empty list if the input list is empty
 
     // Return the full list if no specific filters are applied
-    if (filtersIndex == null ||
-        filtersIndex.isEmpty ||
-        filtersIndex.contains(-1)) {
+    if (filtersValue == null ||
+        filtersValue.isEmpty ||
+        filtersValue.contains(CategoryEnum.all)) {
       return this;
     }
 
     // Calculate overall filter values if not provided
-    final overallFilterValue = overallFilter ??
-        overallItems(getENFilter: getFilter, fullList: fullList, context: null);
+    // final overallFilterValue = overallFilter ??
+    //     overallItems(
+    //       getENFilter: getFilter,
+    //       fullList: fullList,
+    //       context: null,
+    //       numberGetList: listForFilter,
+    //     );
 
     // Retrieve filter texts based on filter indexes
-    final filtersText =
-        filtersIndex.map((e) => overallFilterValue.elementAt(e).value).toList();
+    // final filtersText =
+    //     filtersIndex.map((e) => overallFilterValue.elementAt(e).value).
+    // toList();
 
     // Apply filters to the list
     return where(
       (item) => containAnyItems
-          ? filtersText.any(
+          ? filtersValue.any(
               getFilter(item).contains,
             ) // Match any filter if 'containAnyItems' is true
-          : filtersText.every(
+          : filtersValue.every(
               getFilter(item).contains,
             ), // Match all filters if 'containAnyItems' is false
     ).toList();
@@ -220,21 +282,23 @@ extension ListExtensions<T> on List<T> {
   /// A tuple containing a filtered and loaded list of items and the loading
   /// status.
   ({List<T> list, LoadingStatus loadingStatus}) loadingFilterAndStatus({
-    required List<int>? filtersIndex,
+    required List<dynamic>? filtersValue,
     required int? itemsLoaded,
     required List<dynamic> Function(T item) getFilter,
     int? loadItems,
-    List<FilterItem>? overallFilter,
-    List<T>? fullList,
+    // List<FilterItem>? overallFilter,
+    // List<T>? fullList,
     bool containAnyItems = true,
+    // List<T>? listForFilter,
   }) {
     // Apply filters to the list
     final list = _filter(
-      filtersIndex: filtersIndex,
+      filtersValue: filtersValue,
       getFilter: getFilter,
-      overallFilter: overallFilter,
-      fullList: fullList,
+      // overallFilter: overallFilter,
+      // fullList: fullList,
       containAnyItems: containAnyItems,
+      // listForFilter: listForFilter,
     );
 
     // Calculate the total number of items to load
@@ -243,9 +307,7 @@ extension ListExtensions<T> on List<T> {
             (loadItems ?? 0);
 
     // Determine the loading status based on the number of loaded items
-    final loadingStatus = list.length <= loadedItemsCount && list.isNotEmpty
-        ? LoadingStatus.listLoadedFull
-        : LoadingStatus.loaded;
+    final loadingStatus = list.getLoadingStatus(loadedItemsCount);
 
     // Return the filtered and loaded list along with the loading status
     return (
@@ -253,6 +315,11 @@ extension ListExtensions<T> on List<T> {
       loadingStatus: loadingStatus
     );
   }
+
+  LoadingStatus getLoadingStatus(int loadedItemsCount) =>
+      length <= loadedItemsCount && isNotEmpty
+          ? LoadingStatus.listLoadedFull
+          : LoadingStatus.loaded;
 
   /// Method to calculate overall filter values.
   ///
@@ -323,25 +390,43 @@ extension ListExtensions<T> on List<T> {
   /// Returns:
   /// A list of FilterItem instances with summarized filter values.
   List<FilterItem> overallItems({
-    required List<dynamic> Function(T) getENFilter,
     required BuildContext? context,
-    List<String> Function(T)? getUAFilter,
+    required List<dynamic> Function(T) getUAFilter,
+    List<dynamic> Function(T)? getENFilter,
     List<T>? fullList,
+    List<T>? numberGetList,
   }) {
     final allFilters = <FilterItem>[];
     for (final item in fullList ?? this) {
-      allFilters.addAll(
-        ((context?.isEnglish ?? false) || getUAFilter == null
-                ? getENFilter(item)
-                : getUAFilter(item))
-            .map(
-          FilterItem.new,
-        ),
-      );
+      for (var i = 0; i < (getUAFilter(item).length); i++) {
+        allFilters.add(
+          FilterItem(
+            getUAFilter(item).elementAt(i),
+            valueEN:
+                getENFilter == null ? null : getENFilter(item).elementAt(i),
+          ),
+        );
+      }
     }
-    return allFilters.getToSet
+    final allNumberFilters = numberGetList == null ? null : <FilterItem>[];
+    if (numberGetList != null) {
+      for (final item in numberGetList) {
+        allNumberFilters!.addAll(
+          getUAFilter(item).map(
+            FilterItem.new,
+          ),
+        );
+      }
+    }
+    return allFilters.getToSet(allNumberFilters)
       ..sort(
-        (a, b) => b.number.compareTo(a.number),
+        (a, b) {
+          final numberSort = b.number.compareTo(a.number);
+          if (numberSort == 0) {
+            return a.value.toString().compareTo(b.value.toString());
+          }
+          return numberSort;
+        },
       );
   }
 
@@ -397,33 +482,33 @@ extension ListExtensionsNull<T> on List<T>? {
   /// Method to toggle an element's presence in the list.
   ///
   /// Parameters:
-  /// - eventFilterIndex: Element to toggle.
+  /// - eventFilter: Element to toggle.
   ///
   /// Returns:
-  /// A list with eventFilterIndex added or removed based on its current
+  /// A list with eventFilter added or removed based on its current
   ///  presence.
-  List<T> changeListValue(T eventFilterIndex) {
+  List<T> changeListValue({required T eventFilter, T? removeValue}) {
     // Create a copy of the current list or an empty list if the original is
     // null.
     final selectedFilters = List<T>.from(this ?? []);
 
     // Toggle the presence of eventFilterIndex in selectedFilters.
-    if (selectedFilters.contains(eventFilterIndex)) {
-      selectedFilters.remove(eventFilterIndex); // Remove if already present.
+    if (selectedFilters.contains(eventFilter)) {
+      selectedFilters.remove(eventFilter); // Remove if already present.
     } else {
-      if (eventFilterIndex == -1) {
+      if (eventFilter == removeValue || selectedFilters.contains(removeValue)) {
         return [
-          eventFilterIndex,
+          eventFilter,
         ]; // Return a list with -1 if it's the special case.
       }
       selectedFilters.add(
-        eventFilterIndex,
+        eventFilter,
       ); // Add eventFilterIndex if not already present.
 
       // Remove -1 if it exists to ensure it's not duplicated.
-      if (selectedFilters.contains(-1)) {
-        selectedFilters.remove(-1);
-      }
+      // if (selectedFilters.contains(-1)) {
+      //   selectedFilters.remove(-1);
+      // }
     }
 
     return selectedFilters; // Return the modified list.
@@ -503,32 +588,6 @@ extension ListIntExtension on List<int> {
 
   //   return adjustedIndices;
   // }
-
-  /// Method to check and modify list based on specific filter conditions.
-  ///
-  /// Parameters:
-  /// - filterIndex: Index to compare with list elements.
-  /// - equalNumber: Number for equality comparison.
-  /// - largerNumber: Number for comparison with larger values.
-  ///
-  /// Returns:
-  /// Modified list based on the provided filter conditions.
-  List<int> checkValue({
-    required int filterIndex,
-    required int equalNumber,
-    required int largerNumber,
-  }) {
-    final newList = changeListValue(filterIndex);
-
-    // Conditionally remove elements from 'newList' based on filter conditions
-    if (filterIndex == equalNumber) {
-      newList.removeWhere((element) => element > largerNumber);
-    } else if (filterIndex > largerNumber) {
-      newList.removeWhere((element) => element == equalNumber);
-    }
-
-    return newList;
-  }
 }
 
 /// Extension on List<DiscountModel> providing utility methods for DiscountModel
@@ -545,19 +604,27 @@ extension DiscountModelExtensions on List<DiscountModel> {
     // Return a list of FilterItem instances
     return [
       // Filter items for overall locations sorted from largest to smallest
-      FilterItem(context.l10n.fromLargestToSmallest),
+      // FilterItem(context.l10n.fromLargestToSmallest),
       // Filter item for free items
-      FilterItem(context.l10n.free),
+      // FilterItem(context.l10n.free),
       // Additional filters based on sub-locations using overallItems method
       ...overallItems(
-        getENFilter: (item) => item.subLocation.getList(context),
+        getUAFilter: (item) => item.subLocation.getList(context),
         context: context,
+        numberGetList: context
+            .read<DiscountWatcherBloc>()
+            .state
+            .categoryDiscountModelItems,
       ),
       // Additional filters based on primary locations using overallItems method
       ...overallItems(
         getENFilter: (item) => item.locationEN ?? [],
         getUAFilter: (item) => item.location ?? [],
         context: context,
+        numberGetList: context
+            .read<DiscountWatcherBloc>()
+            .state
+            .categoryDiscountModelItems,
       ),
     ];
   }

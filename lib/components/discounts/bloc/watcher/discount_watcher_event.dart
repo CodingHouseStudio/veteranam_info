@@ -11,15 +11,15 @@ class DiscountWatcherEvent with _$DiscountWatcherEvent {
   const factory DiscountWatcherEvent.loadNextItems() = _LoadNextItems;
 
   const factory DiscountWatcherEvent.filterCategory(
-    int filterIndex,
+    dynamic value,
   ) = _FilterCategory;
 
   const factory DiscountWatcherEvent.filterLocation(
-    int filterIndex,
+    dynamic value,
   ) = _FilterLocation;
 
   const factory DiscountWatcherEvent.filterLocations(
-    List<int> filterListIndex,
+    List<dynamic> filterList,
   ) = _FilterLocations;
 
   const factory DiscountWatcherEvent.filterReset() = _FilterReset;

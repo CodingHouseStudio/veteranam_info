@@ -170,6 +170,7 @@
         transform: translateY(-20px);
       }
 
+
       /* 40% {
     transform: translateY(-30px) ease-in-out;
     transform: scale(1.1); 
@@ -180,6 +181,19 @@
       transform: scale(1.1);
     }*/
     }
+
+    .retry-button {
+      display: none;
+      position: absolute;
+      top: 65%;
+      background-color: white;
+      color: black;
+      border: 1px solid grey;
+      padding: 12px 20px;
+      cursor: pointer;
+      font-size: 32px;
+      border-radius: 32px;
+    }
   </style>
 
 </head>
@@ -188,7 +202,7 @@
   <!--  <div id="splash">-->
   <!--    <img src="icons/logo_192.svg" alt="Loading indicator..." />-->
   <!--  </div>-->
-
+  <button id="retry-button" class="retry-button" onclick="location.reload()">Перезавантажити</button>
   <div class="splash">
     <img src="icons/logo-192.svg" alt="Loading indicator..." class="bouncing-image">
   </div>
@@ -204,17 +218,23 @@
   <script>
     var serviceWorkerVersion = '{{flutter_service_worker_version}}';
     var scriptLoaded = false;
+    var retryButton = document.getElementById('retry-button');
     function loadMainDartJs() {
       if (scriptLoaded) {
         return;
       }
       scriptLoaded = true;
+      retryButton.style.display = 'none';
       var scriptTag = document.createElement('script');
       scriptTag.src = 'main.dart.js';
       scriptTag.type = 'application/javascript';
       document.body.append(scriptTag);
     }
 
+    setTimeout(() => {
+      retryButton.style.display = "block";
+
+    }, 8000);
     if ('serviceWorker' in navigator) {
       // Service workers are supported. Use them.
       window.addEventListener('load', function () {
@@ -257,6 +277,7 @@
               'Failed to load app from service worker. Falling back to plain <script> tag.',
             );
             loadMainDartJs();
+            // retryButton.style.display = "block";
           }
         }, 4000);
       });
@@ -264,6 +285,21 @@
       // Service workers not supported. Just drop the <script> tag.
       loadMainDartJs();
     }
+    window.addEventListener('offline', function () {
+      retryButton.style.display = 'block';
+    });
+
+    window.addEventListener('online', function () {
+      location.reload()
+      retryButton.style.display = 'none';
+    });
+
+    window.addEventListener('error', function () {
+      // if (retryButton.style.display != 'block') {
+      //   location.reload()
+      // }
+      retryButton.style.display = 'block';
+    });
   </script>
 </body>
 

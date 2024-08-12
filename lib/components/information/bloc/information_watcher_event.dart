@@ -12,7 +12,7 @@ class InformationWatcherEvent with _$InformationWatcherEvent {
   const factory InformationWatcherEvent.loadNextItems() = _LoadNextItems;
 
   const factory InformationWatcherEvent.filter(
-    int filterIndex,
+    dynamic value,
   ) = _Filter;
 
   // const factory InformationWatcherEvent.filterReset() = _FilterReset;

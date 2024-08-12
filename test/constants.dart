@@ -239,6 +239,7 @@ abstract class KTestText {
         id: i.toString(),
         userId: i.toString(),
         categoryEN: i == 0 ? KMockText.tag : KMockText.discountModel.categoryEN,
+        category: i == 0 ? KMockText.tag : KMockText.discountModel.category,
         dateVerified: dateTime,
         discount: i == 0 ? [12, 35, 100] : KMockText.discountModel.discount,
         subLocation: i == 0

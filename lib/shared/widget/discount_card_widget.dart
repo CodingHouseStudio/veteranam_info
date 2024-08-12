@@ -27,16 +27,16 @@ class DiscountCardWidget extends StatelessWidget {
     return Container(
       key: ValueKey(discountItem.id),
       decoration: KWidgetTheme.boxDecorationDiscountContainer,
-      padding: const EdgeInsets.symmetric(
-        vertical: KPadding.kPaddingSize16,
+      padding: const EdgeInsets.only(
+        top: KPadding.kPaddingSize16,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Padding(
             padding: EdgeInsets.only(
-              right: isDesk ? KPadding.kPaddingSize32 : KPadding.kPaddingSize16,
-              left: isDesk ? KPadding.kPaddingSize32 : KPadding.kPaddingSize16,
+              right: isDesk ? KPadding.kPaddingSize28 : KPadding.kPaddingSize16,
+              left: isDesk ? KPadding.kPaddingSize28 : KPadding.kPaddingSize16,
               bottom: isDesk ? KPadding.kPaddingSize16 : KPadding.kPaddingSize8,
             ),
             child: Row(

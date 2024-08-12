@@ -62,10 +62,10 @@ class _AdvancedFilterDeskState extends State<AdvancedFilterDesk> {
                     onChange: (index) => context
                         .read<DiscountWatcherBloc>()
                         .add(DiscountWatcherEvent.filterLocation(index)),
-                    filterLocationIndex: context
+                    filterLocationes: context
                         .read<DiscountWatcherBloc>()
                         .state
-                        .filtersLocationIndex,
+                        .filtersLocation,
                   ),
                 ),
               // ...AdvanceFilter.resetButton(isDesk: true, context: context),

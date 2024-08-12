@@ -65,7 +65,7 @@ class ScaffoldWidget extends StatelessWidget {
             );
           }
           final scaffold = FocusTraversalGroup(
-            policy: WidgetOrderTraversalPolicy(),
+            // policy: WidgetOrderTraversalPolicy(),
             child: Semantics(
               child: Scaffold(
                 bottomNavigationBar:
@@ -74,6 +74,10 @@ class ScaffoldWidget extends StatelessWidget {
                         : const MobNavigationWidget(
                             index: 2,
                           ),
+                appBar: AppBar(
+                  backgroundColor: AppColors.materialThemeWhite,
+                  toolbarHeight: KSize.kAppBarHeight,
+                ),
                 body: KeyboardScrollView(
                   widgetKey: KWidgetkeys.widget.scaffold.scroll,
                   //physics: KTest.scroll,
