@@ -7,8 +7,8 @@ class _FooterKeys {
   final sections = const Key('footer_sections');
   final information = const Key('footer_informatin');
   final contact = const Key('footer_contact');
-  final emailText = const Key('footer_email');
-  final emailIcon = const Key('footer_email_icon');
+  final emailButton = const Key('footer_email');
+  //final emailIcon = const Key('footer_email_icon');
   final aboutUsButton = const Key('footer_about_us_button');
   final informationButton = const Key('footer_information_button');
   final consultationOnlineButton =

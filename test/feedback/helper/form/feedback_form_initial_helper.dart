@@ -22,10 +22,12 @@ Future<void> feedbackFormInitialHelper(
     itemKey: KWidgetkeys.screen.feedback.nameField,
   );
 
-  expect(
-    find.byKey(KWidgetkeys.screen.feedback.emailButton),
-    findsOneWidget,
-  );
+  // expect(
+  //   find.byKey(KWidgetkeys.screen.feedback.emailButton),
+  //   findsOneWidget,
+  // );
+
+  await emailButtonHelper(tester);
 
   expect(
     find.byKey(KWidgetkeys.screen.feedback.messageField),
