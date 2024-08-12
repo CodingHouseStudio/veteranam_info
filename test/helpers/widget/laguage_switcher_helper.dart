@@ -6,7 +6,7 @@ Future<void> languageSwitcherHelper(
 ) async {
   expect(
     find.byKey(KWidgetkeys.widget.languageSwitcher.widget),
-    findsWidgets,
+    findsOneWidget,
   );
 
   expect(

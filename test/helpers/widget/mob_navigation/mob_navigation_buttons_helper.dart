@@ -30,5 +30,5 @@ Future<void> mobNavigationButtonsHelper({
 
   await tester.tap(find.byKey(KWidgetkeys.widget.mobNavigation.settings));
 
-  verify(() => mockGoRouter.goNamed(KRoute.home.name)).called(1);
+  verify(() => mockGoRouter.goNamed(KRoute.settings.name)).called(1);
 }

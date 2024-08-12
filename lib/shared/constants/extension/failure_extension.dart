@@ -147,28 +147,17 @@ extension MyStoryFailureValue on MyStoryFailure {
   }
 }
 
-extension UrlFailureValue on UrlFailure {
-  String value(BuildContext context) {
-    switch (this) {
-      case UrlFailure.error:
-        return context.l10n.error;
-      case UrlFailure.share:
-        return context.l10n.shareFailure;
-      case UrlFailure.link:
-        return context.l10n.linkFailure;
-    }
-  }
-}
-
 extension UrlFailureExtension on SomeFailure {
-  UrlFailure toUrl() {
+  UrlEnum toUrl() {
     switch (this) {
       case FailureShare():
-        return UrlFailure.share;
+        return UrlEnum.shareError;
       case FailureLink():
-        return UrlFailure.link;
+        return UrlEnum.linkError;
+      case FailureCopy():
+        return UrlEnum.copyError;
       default:
-        return UrlFailure.error;
+        return UrlEnum.error;
     }
   }
 }

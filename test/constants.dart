@@ -427,6 +427,7 @@ abstract class KScreenBlocName {
   static const myDiscounts = 'My Discount Screen';
   static const myStory = 'My Story Screen';
   static const feedback = 'Feedback Screen';
+  static const mobSettings = 'Settings Screen';
 
   static const authenticationServices = 'Authentication Services';
   static const appRepository = 'App';

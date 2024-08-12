@@ -25,4 +25,5 @@ class SomeFailure with _$SomeFailure {
   // Url
   const factory SomeFailure.share() = FailureShare;
   const factory SomeFailure.link() = FailureLink;
+  const factory SomeFailure.copy() = FailureCopy;
 }

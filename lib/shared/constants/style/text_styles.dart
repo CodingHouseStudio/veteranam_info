@@ -390,6 +390,14 @@ abstract class AppTextStyle {
     fontWeight: FontWeight.w500,
     letterSpacing: 0.15,
   );
+  static const TextStyle materialThemeTitleMediumBlack = TextStyle(
+    fontFamily: 'Gilroy',
+    fontSize: 16,
+    color: AppColors.materialThemeBlack,
+    height: 1.5,
+    fontWeight: FontWeight.w500,
+    letterSpacing: 0.15,
+  );
   static const TextStyle materialThemeTitleMediumNeutralVariant35 = TextStyle(
     fontFamily: 'Gilroy',
     fontSize: 16,
@@ -397,6 +405,14 @@ abstract class AppTextStyle {
     fontWeight: FontWeight.w500,
     letterSpacing: 0.15,
     color: AppColors.materialThemeRefNeutralVariantNeutralVariant35,
+  );
+  static const TextStyle materialThemeTitleMediumNeutralVariant50 = TextStyle(
+    fontFamily: 'Gilroy',
+    fontSize: 16,
+    height: 1.5,
+    fontWeight: FontWeight.w500,
+    letterSpacing: 0.15,
+    color: AppColors.materialThemeRefNeutralVariantNeutralVariant50,
   );
   static const TextStyle materialThemeTitleMediumNeutralVariant70 = TextStyle(
     fontFamily: 'Gilroy',
