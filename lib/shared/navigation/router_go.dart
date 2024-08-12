@@ -82,12 +82,12 @@ GoRouter router = GoRouter(
       ),
     ),
     GoRoute(
-      name: KRoute.home.name,
+      name: KTest.testIsWeb ? KRoute.home.name : KRoute.settings.name,
       path: KRoute.home.path,
       pageBuilder: (context, state) => NoTransitionPage(
         key: state.pageKey,
         name: state.name,
-        child: const HomeScreen(),
+        child: KTest.testIsWeb ? const HomeScreen() : const MobSettingsScreen(),
       ),
       routes: [
         GoRoute(

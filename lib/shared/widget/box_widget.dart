@@ -83,7 +83,7 @@ class BoxWidget extends StatelessWidget {
                 child: Text(
                   text,
                   key: KWidgetkeys.widget.box.text,
-                  style: AppTextStyle.materialThemeTitleLarge,
+                  style: textStyle ?? AppTextStyle.materialThemeTitleLarge,
                   maxLines: 1,
                 ),
               ),
