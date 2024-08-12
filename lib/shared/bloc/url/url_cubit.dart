@@ -4,7 +4,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:veteranam/shared/shared.dart';
 
 @injectable
-class UrlCubit extends Cubit<UrlFailure?> {
+class UrlCubit extends Cubit<UrlEnum?> {
   UrlCubit({
     required IUrlRepository urlRepository,
   })  : _urlRepository = urlRepository,
@@ -42,5 +42,21 @@ class UrlCubit extends Cubit<UrlFailure?> {
       (l) => emit(l.toUrl()),
       (r) => emit(null),
     );
+  }
+
+  Future<void> copy(
+    String text,
+  ) async {
+    final result = await _urlRepository.copy(
+      text,
+    );
+    result.fold(
+      (l) => emit(l.toUrl()),
+      (r) => emit(UrlEnum.copySucceed),
+    );
+  }
+
+  void reset() {
+    emit(null);
   }
 }
