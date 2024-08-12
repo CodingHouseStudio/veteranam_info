@@ -11,6 +11,7 @@ class NotificationLinkWidget extends StatelessWidget {
     required this.filedErrorText,
     required this.enabled,
     required this.showThankText,
+    required this.showErrorText,
     super.key,
   });
   final void Function(String) onChanged;
@@ -21,6 +22,7 @@ class NotificationLinkWidget extends StatelessWidget {
   final String? filedErrorText;
   final bool enabled;
   final bool showThankText;
+  final bool showErrorText;
 
   @override
   Widget build(BuildContext context) {
@@ -99,6 +101,7 @@ class NotificationLinkWidget extends StatelessWidget {
         labelText: context.l10n.link,
         controller: fieldController,
         errorText: filedErrorText,
+        showErrorText: showErrorText,
       );
   Widget button(BuildContext context) => DoubleButtonWidget(
         text: context.l10n.send,

@@ -41,14 +41,9 @@ class DiscountBodyWidget extends StatelessWidget {
                   child: const Text('Provide feedback'),
                   onPressed: () {
                     BetterFeedback.of(context).show(
-                      (feedback) async {
-                        // upload to server, share whatever
-                        // for example purposes just show it to the user
-                        // alertFeedbackFunction(
-                        //   context,
-                        //   feedback,
-                        // );
-                      },
+                      (feedback) async => context.read<MobFeedbackBloc>().add(
+                            MobFeedbackEvent.send(feedback.screenshot),
+                          ),
                     );
                   },
                 ),
