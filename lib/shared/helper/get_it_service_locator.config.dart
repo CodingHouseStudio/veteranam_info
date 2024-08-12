@@ -52,8 +52,8 @@ import 'package:veteranam/shared/bloc/authentication/authentication_bloc.dart'
     as _i570;
 import 'package:veteranam/shared/bloc/authentication_services/authentication_services_cubit.dart'
     as _i209;
-import 'package:veteranam/shared/bloc/mob_feedback/mob_feedback_cubit.dart'
-    as _i320;
+import 'package:veteranam/shared/bloc/mob_feedback/mob_feedback_bloc.dart'
+    as _i872;
 import 'package:veteranam/shared/bloc/network/network_cubit.dart' as _i891;
 import 'package:veteranam/shared/bloc/report/report_bloc.dart' as _i765;
 import 'package:veteranam/shared/bloc/url/url_cubit.dart' as _i319;
@@ -110,8 +110,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i895.Connectivity>(() => networkModule.connectivity);
     gh.singleton<_i1001.IDiscountRepository>(() => _i452.DiscountRepository());
     gh.singleton<_i1001.IFeedbackRepository>(() => _i361.FeedbackRepository());
-    gh.factory<_i320.MobFeedbackBloc>(() => _i320.MobFeedbackBloc(
-        feedbackRepository: gh<_i1001.IFeedbackRepository>()));
     gh.singleton<_i1001.IUrlRepository>(() => _i929.UrlRepository());
     gh.lazySingleton<_i1001.IStorage>(() => _i949.SecureStorageRepository());
     gh.singleton<_i1001.IInvestorsRepository>(
@@ -170,6 +168,11 @@ extension GetItInjectableX on _i174.GetIt {
               gh<_i1001.IAppAuthenticationRepository>(),
         ));
     gh.factory<_i1026.FeedbackBloc>(() => _i1026.FeedbackBloc(
+          feedbackRepository: gh<_i1001.IFeedbackRepository>(),
+          appAuthenticationRepository:
+              gh<_i1001.IAppAuthenticationRepository>(),
+        ));
+    gh.factory<_i872.MobFeedbackBloc>(() => _i872.MobFeedbackBloc(
           feedbackRepository: gh<_i1001.IFeedbackRepository>(),
           appAuthenticationRepository:
               gh<_i1001.IAppAuthenticationRepository>(),

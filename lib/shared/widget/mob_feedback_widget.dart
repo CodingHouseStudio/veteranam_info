@@ -1,80 +1,73 @@
+import 'package:feedback/feedback.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:veteranam/shared/shared.dart';
 
-class MobFeedbackWidget extends StatefulWidget {
-  /// Create a [MobFeedbackWidget].
-  /// This is the default feedback bottom sheet, which is presented to the user.
+class MobFeedbackWidget extends StatelessWidget {
   const MobFeedbackWidget({
+    required this.onSubmit,
     super.key,
-    // required this.onSubmit,
-    required this.scrollController,
   });
-
-  /// Should be called when the user taps the submit button.
-  // final OnSubmit onSubmit;
-
-  /// A scroll controller that expands the sheet when it's attached to a
-  /// scrollable widget and that widget is scrolled.
-  ///
-  /// Non null if the sheet is draggable.
-  /// See: [FeedbackThemeData.sheetIsDraggable].
-  final ScrollController? scrollController;
-
-  @override
-  State<MobFeedbackWidget> createState() => _MobFeedbackWidgetState();
-}
-
-class _MobFeedbackWidgetState extends State<MobFeedbackWidget> {
-  late TextEditingController controller;
-
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    controller = TextEditingController();
-  }
+  final OnSubmit onSubmit;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(KPadding.kPaddingSize16),
-      child: Column(
-        children: [
-          Text(
-            context.l10n.whatIsWrong,
-            style: AppTextStyle.materialThemeTitleMedium,
-          ),
-          TextFieldWidget(
-            widgetKey: const Key('text_input_field'),
-            controller: controller,
-            labelText: context.l10n.writeMessage,
-            // textInputAction: TextInputAction.done,
-            onChanged: (_) {
-              //print(_);
-            },
-            isDesk: false,
-          ),
-          KSizedBox.kHeightSizedBox16,
-          // if (widget.scrollController != null)
-          //   const FeedbackSheetDragHandle(),
-          TextButton(
-            key: const Key('submit_feedback_button'),
-            style: KButtonStyles.filterButtonStyleBorderWhite,
-            child: Text(
-              context.l10n.send,
-              style: AppTextStyle.materialThemeTitleMedium.copyWith(
-                color: AppColors.materialThemeKeyColorsSecondary,
+    return BlocBuilder<MobFeedbackBloc, MobFeedbackState>(
+      builder: (context, _) {
+        return ListView(
+          padding: const EdgeInsets.all(KPadding.kPaddingSize16),
+          children: [
+            KSizedBox.kHeightSizedBox8,
+            Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    context.l10n.whatIsWrong,
+                    style: AppTextStyle.materialThemeTitleMedium,
+                  ),
+                ),
+                Tooltip(
+                  message: context.l10n.mobFeedbackHint,
+                  waitDuration: const Duration(milliseconds: 100),
+                  showDuration: const Duration(seconds: 15),
+                  child: KIcon.info,
+                ),
+              ],
+            ),
+            KSizedBox.kHeightSizedBox8,
+            TextFieldWidget(
+              widgetKey: const Key('text_input_field'),
+              // controller: controller,
+              labelText: context.l10n.writeMessage,
+              // textInputAction: TextInputAction.done,
+              onChanged: (text) => context.read<MobFeedbackBloc>().add(
+                    MobFeedbackEvent.messageUpdated(text),
+                  ),
+              showErrorText: _.formState == MobFeedbackEnum.invalidData,
+              errorText: _.message.error.value(context),
+              isDesk: false,
+            ),
+            KSizedBox.kHeightSizedBox16,
+            // if (widget.scrollController != null)
+            //   const FeedbackSheetDragHandle(),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: TextButton(
+                // key: const Key('submit_feedback_button'),
+                style: KButtonStyles.filterButtonStyleBorderWhite,
+                child: Text(
+                  context.l10n.send,
+                  style: AppTextStyle.materialThemeBodyMedium.copyWith(
+                    color: AppColors.materialThemeKeyColorsSecondary,
+                  ),
+                ),
+                onPressed: () =>
+                    onSubmit(''), //() => widget.onSubmit(controller.text),
               ),
             ),
-            onPressed: () {}, //() => widget.onSubmit(controller.text),
-          ),
-        ],
-      ),
+          ],
+        );
+      },
     );
   }
 }
