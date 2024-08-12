@@ -1,3 +1,4 @@
+import 'package:feedback/feedback.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -36,6 +37,21 @@ class DiscountBodyWidget extends StatelessWidget {
                   .read<DiscountWatcherBloc>()
                   .add(const DiscountWatcherEvent.started()),
               titleChildWidgetsFunction: ({required isDesk}) => [
+                ElevatedButton(
+                  child: const Text('Provide feedback'),
+                  onPressed: () {
+                    BetterFeedback.of(context).show(
+                      (feedback) async {
+                        // upload to server, share whatever
+                        // for example purposes just show it to the user
+                        // alertFeedbackFunction(
+                        //   context,
+                        //   feedback,
+                        // );
+                      },
+                    );
+                  },
+                ),
                 KSizedBox.kHeightSizedBox24,
                 if (KTest.testIsWeb)
                   ...TitleWidget.pointTitleWidgetList(
