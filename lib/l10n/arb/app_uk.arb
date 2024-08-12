@@ -996,6 +996,10 @@
   "@apply": {
     "examples": "Текст для кнопки в діалозі AdvancedFilter для мобільної версії"
   },
+  "whatIsWrong": "Що не так",
+  "@whatIsWrong": {
+    "examples": "Текст для діалогу фідбеку в мобільному додатку"
+  },
   "moreCities": "Ще {count} міст..",
   "@moreCities": {
     "placeholders": {

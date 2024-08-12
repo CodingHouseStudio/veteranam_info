@@ -17,16 +17,17 @@ class StorageService {
   Future<Uint8List> _xFile(String ref) async =>
       uint8List ?? XFile(ref).readAsBytes();
 
-  Future<String> saveStoryImage({
+  Future<String> saveImage({
     required ImageModel imageModel,
-    required String storyId,
+    required String id,
+    required String collecltionName,
   }) async {
     if (imageModel.ref == null) return '';
     final value = storage
         .ref(
           StoragePath.getImagePath(
-            collenction: FirebaseCollectionName.stroies,
-            modelId: storyId,
+            collection: collecltionName,
+            modelId: id,
             imageName: imageModel.name,
           ),
         )
