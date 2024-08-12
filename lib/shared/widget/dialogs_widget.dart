@@ -257,4 +257,14 @@ class _DialogsWidget {
       );
     }
   }
+
+  void showCopyEmailDialog(String? text) {
+    if (text != null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(text),
+        ),
+      );
+    }
+  }
 }
