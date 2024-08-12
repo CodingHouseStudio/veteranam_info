@@ -7,11 +7,25 @@ import 'package:veteranam/shared/shared.dart';
 @Singleton(as: IFeedbackRepository)
 class FeedbackRepository implements IFeedbackRepository {
   final FirestoreService _firestoreService = GetIt.I.get<FirestoreService>();
+  final StorageService _storageService = GetIt.I.get<StorageService>();
 
   @override
   Future<Either<SomeFailure, bool>> sendFeedback(FeedbackModel feedback) async {
     try {
-      await _firestoreService.addFeedback(feedback);
+      late var feedbackModel = feedback;
+      if (feedback.image != null) {
+        final downloadURL = await _storageService.saveImage(
+          imageModel: feedbackModel.image!,
+          id: feedbackModel.id,
+          collecltionName: FirebaseCollectionName.feedback,
+        );
+        if (downloadURL.isNotEmpty) {
+          feedbackModel = feedbackModel.copyWith(
+            image: feedbackModel.image!.copyWith(downloadURL: downloadURL),
+          );
+        }
+      }
+      await _firestoreService.addFeedback(feedbackModel);
       return const Right(true);
     } on FirebaseException catch (e) {
       return Left(SendFailure.fromCode(e).status);

@@ -19,9 +19,10 @@ class StoryRepository implements IStoryRepository {
     try {
       late var methodStoryModel = storyModel;
       if (methodStoryModel.image != null) {
-        final downloadURL = await _storageService.saveStoryImage(
+        final downloadURL = await _storageService.saveImage(
           imageModel: methodStoryModel.image!,
-          storyId: storyModel.id,
+          id: storyModel.id,
+          collecltionName: FirebaseCollectionName.stroies,
         );
         if (downloadURL.isNotEmpty) {
           methodStoryModel = methodStoryModel.copyWith(

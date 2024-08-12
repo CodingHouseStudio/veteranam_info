@@ -5909,27 +5909,30 @@ class MockStorageService extends _i1.Mock implements _i3.StorageService {
       ) as _i10.FirebaseStorage);
 
   @override
-  _i8.Future<String> saveStoryImage({
+  _i8.Future<String> saveImage({
     required _i3.ImageModel? imageModel,
-    required String? storyId,
+    required String? id,
+    required String? collecltionName,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
-          #saveStoryImage,
+          #saveImage,
           [],
           {
             #imageModel: imageModel,
-            #storyId: storyId,
+            #id: id,
+            #collecltionName: collecltionName,
           },
         ),
         returnValue: _i8.Future<String>.value(_i16.dummyValue<String>(
           this,
           Invocation.method(
-            #saveStoryImage,
+            #saveImage,
             [],
             {
               #imageModel: imageModel,
-              #storyId: storyId,
+              #id: id,
+              #collecltionName: collecltionName,
             },
           ),
         )),
@@ -5937,11 +5940,12 @@ class MockStorageService extends _i1.Mock implements _i3.StorageService {
             _i8.Future<String>.value(_i16.dummyValue<String>(
           this,
           Invocation.method(
-            #saveStoryImage,
+            #saveImage,
             [],
             {
               #imageModel: imageModel,
-              #storyId: storyId,
+              #id: id,
+              #collecltionName: collecltionName,
             },
           ),
         )),
