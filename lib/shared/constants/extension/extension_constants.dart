@@ -75,7 +75,7 @@ extension DiscountModelLocation on DiscountModel {
           if (locationEN != null) ...locationEN!,
         if (!context.isEnglish)
           if (location != null) ...location!,
-        if (subLocation != null) ...subLocation!.getList(context),
+        if (subLocation != null) ...subLocation!.getCardList(context),
       ];
 }
 
@@ -153,12 +153,12 @@ extension StringExtension on String {
   }
 
   SubLocation? getSublocation(BuildContext context) {
-    if (this == SubLocation.allStoresOfChain.getList(context).first) {
-      return SubLocation.allStoresOfChain;
+    if (this == SubLocation.all.getList(context).first) {
+      return SubLocation.all;
     }
-    if (this == SubLocation.online.getList(context).first) {
-      return SubLocation.online;
-    }
+    // if (this == SubLocation.online.getList(context).first) {
+    //   return SubLocation.online;
+    // }
     return null;
   }
 }
