@@ -138,6 +138,16 @@ class _KeyboardScrollViewWebDeskState
     _timer = Timer.periodic(duration, (timer) => scroll());
   }
 
+  bool isScrollingKey(PhysicalKeyboardKey key) => [
+        PhysicalKeyboardKey.arrowDown,
+        PhysicalKeyboardKey.arrowUp,
+        PhysicalKeyboardKey.pageDown,
+        PhysicalKeyboardKey.pageUp,
+        PhysicalKeyboardKey.space,
+        PhysicalKeyboardKey.home,
+        PhysicalKeyboardKey.end,
+      ].contains(key);
+
   void _stopScroll() {
     _timer?.cancel();
     _timer = null;
@@ -148,14 +158,16 @@ class _KeyboardScrollViewWebDeskState
     return Focus(
       autofocus: true,
       onKeyEvent: (FocusNode node, KeyEvent event) {
-        if (event is KeyDownEvent) {
-          if (_timer == null) {
-            _startScroll(event.physicalKey);
+        if (!isScrollingKey(event.physicalKey)) {
+          if (event is KeyDownEvent) {
+            if (_timer == null) {
+              _startScroll(event.physicalKey);
+            }
+            return KeyEventResult.handled;
+          } else if (event is KeyUpEvent) {
+            _stopScroll();
+            return KeyEventResult.handled;
           }
-          return KeyEventResult.handled;
-        } else if (event is KeyUpEvent) {
-          _stopScroll();
-          return KeyEventResult.handled;
         }
         return KeyEventResult.ignored;
       },
