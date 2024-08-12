@@ -258,11 +258,13 @@ class _DialogsWidget {
     }
   }
 
-  void showCopyEmailDialog() {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(context.l10n.copyEmail),
-      ),
-    );
+  void showCopyEmailDialog(String? text) {
+    if (text != null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(text),
+        ),
+      );
+    }
   }
 }

@@ -7,4 +7,5 @@ abstract class IUrlRepository {
     required String url,
     String? scheme,
   });
+  Future<Either<SomeFailure, bool>> copy(String text);
 }

@@ -9,8 +9,10 @@ class FilterItem {
   int number;
 }
 
-enum UrlFailure {
-  share,
-  link,
+enum UrlEnum {
+  shareError,
+  linkError,
+  copyError,
   error,
+  copySucceed,
 }

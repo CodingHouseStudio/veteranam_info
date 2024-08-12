@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:flutter/services.dart';
 import 'package:injectable/injectable.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart' as url_launcher;
@@ -45,6 +46,18 @@ class UrlRepository extends IUrlRepository {
       return const Left(SomeFailure.link());
     } catch (e) {
       return const Left(SomeFailure.link());
+    }
+  }
+
+  @override
+  Future<Either<SomeFailure, bool>> copy(String text) async {
+    try {
+      await Clipboard.setData(
+        const ClipboardData(text: KAppText.email),
+      );
+      return const Right(true);
+    } catch (e) {
+      return const Left(SomeFailure.copy());
     }
   }
 }

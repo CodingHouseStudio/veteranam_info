@@ -1023,5 +1023,9 @@
   "copyEmail": "Email copied",
   "@copyEmail": {
     "examples": "Text of the dialogue on the settings page on the mobile version"
+  },
+  "copyFailure": "Failed to copy email",
+  "@copyFailure": {
+    "examples": "Error message when trying to copy mail."
   }
 }

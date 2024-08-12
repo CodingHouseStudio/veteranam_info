@@ -31,7 +31,7 @@ void main() {
           (invocation) async => const Right(true),
         );
       });
-      blocTest<UrlCubit, UrlFailure?>(
+      blocTest<UrlCubit, UrlEnum?>(
         'emits [discountWatcherState()]'
         ' when load discountModel list',
         build: () => discountLinkCubit,
@@ -40,7 +40,7 @@ void main() {
           null,
         ],
       );
-      blocTest<UrlCubit, UrlFailure?>(
+      blocTest<UrlCubit, UrlEnum?>(
         'emits [discountWatcherState()]'
         ' when load discountModel list',
         build: () => discountLinkCubit,
@@ -61,22 +61,22 @@ void main() {
           (invocation) async => const Left(SomeFailure.share()),
         );
       });
-      blocTest<UrlCubit, UrlFailure?>(
+      blocTest<UrlCubit, UrlEnum?>(
         'emits [discountWatcherState()]'
         ' when load discountModel list',
         build: () => discountLinkCubit,
         act: (bloc) async => bloc.launchUrl(url: KTestText.downloadURL),
         expect: () async => [
-          UrlFailure.link,
+          UrlEnum.linkError,
         ],
       );
-      blocTest<UrlCubit, UrlFailure?>(
+      blocTest<UrlCubit, UrlEnum?>(
         'emits [discountWatcherState()]'
         ' when load discountModel list',
         build: () => discountLinkCubit,
         act: (bloc) async => bloc.share(KTestText.downloadURL),
         expect: () async => [
-          UrlFailure.share,
+          UrlEnum.shareError,
         ],
       );
     });
