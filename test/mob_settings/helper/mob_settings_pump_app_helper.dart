@@ -8,7 +8,11 @@ Future<void> mobSettingsPumpAppHelper({
   required WidgetTester tester,
   MockGoRouter? mockGoRouter,
 }) async {
-  await tester.pumpApp(const MobSettingsScreen(), mockGoRouter: mockGoRouter);
+  await tester.pumpApp(
+    const MobSettingsScreen(),
+    mockGoRouter: mockGoRouter,
+    addFeedback: true,
+  );
 
   expect(
     find.byKey(KWidgetkeys.screen.mobSettings.screen),

@@ -16,6 +16,6 @@ Future<void> cancelHelper({
   await tester.tap(find.byKey(KWidgetkeys.screen.privacyPolicy.closeIcon));
 
   verify(
-    () => mockGoRouter.goNamed(KRoute.home.name),
+    () => mockGoRouter.pop(),
   ).called(1);
 }
