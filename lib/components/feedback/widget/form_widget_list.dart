@@ -22,31 +22,22 @@ List<Widget> _formWidgegList({
                         style: AppTextStyle.materialThemeBodyLarge,
                       ),
                       KSizedBox.kHeightSizedBox32,
-                      BlocListener<UrlCubit, UrlEnum?>(
-                        listener: (context, state) {
-                          context.dialog
-                              .showCopyEmailDialog(state?.value(context));
-                          if (state == UrlEnum.copySucceed) {
-                            context.read<UrlCubit>().reset();
-                          }
-                        },
-                        child: Wrap(
-                          crossAxisAlignment: WrapCrossAlignment.center,
-                          children: [
-                            Text(
-                              context.l10n.preferEmail,
-                              key: KWidgetkeys.screen.feedback.emailText,
-                              style: AppTextStyle
-                                  .materialThemeBodyLargeNeutralVariant60,
-                            ),
-                            KSizedBox.kWidthSizedBox4,
-                            EmailButtonWidget(
-                              key: KWidgetkeys.screen.feedback.emailButton,
-                              isDesk: isDesk,
-                              context: context,
-                            ),
-                          ],
-                        ),
+                      Wrap(
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        children: [
+                          Text(
+                            context.l10n.preferEmail,
+                            key: KWidgetkeys.screen.feedback.emailText,
+                            style: AppTextStyle
+                                .materialThemeBodyLargeNeutralVariant60,
+                          ),
+                          KSizedBox.kWidthSizedBox4,
+                          EmailButtonWidget(
+                            key: KWidgetkeys.screen.feedback.emailButton,
+                            isDesk: isDesk,
+                            context: context,
+                          ),
+                        ],
                       ),
                       KSizedBox.kHeightSizedBox32,
                       Text(
@@ -101,29 +92,21 @@ List<Widget> _formWidgegList({
               messageController: messageController,
             ),
             KSizedBox.kHeightSizedBox32,
-            BlocListener<UrlCubit, UrlEnum?>(
-              listener: (context, state) {
-                context.dialog.showCopyEmailDialog(state?.value(context));
-                if (state == UrlEnum.copySucceed) {
-                  context.read<UrlCubit>().reset();
-                }
-              },
-              child: Wrap(
-                crossAxisAlignment: WrapCrossAlignment.center,
-                children: [
-                  Text(
-                    context.l10n.preferEmail,
-                    key: KWidgetkeys.screen.feedback.emailText,
-                    style: AppTextStyle.materialThemeBodyMediumNeutralVariant35,
-                  ),
-                  KSizedBox.kWidthSizedBox4,
-                  EmailButtonWidget(
-                    key: KWidgetkeys.screen.feedback.emailButton,
-                    isDesk: isDesk,
-                    context: context,
-                  ),
-                ],
-              ),
+            Wrap(
+              crossAxisAlignment: WrapCrossAlignment.center,
+              children: [
+                Text(
+                  context.l10n.preferEmail,
+                  key: KWidgetkeys.screen.feedback.emailText,
+                  style: AppTextStyle.materialThemeBodyMediumNeutralVariant35,
+                ),
+                KSizedBox.kWidthSizedBox4,
+                EmailButtonWidget(
+                  key: KWidgetkeys.screen.feedback.emailButton,
+                  isDesk: isDesk,
+                  context: context,
+                ),
+              ],
             ),
             KSizedBox.kHeightSizedBox32,
             Text(

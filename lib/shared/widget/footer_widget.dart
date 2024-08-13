@@ -13,69 +13,61 @@ abstract class FooterWidget {
   }) =>
       isTablet
           ? [
-              BlocListener<UrlCubit, UrlEnum?>(
-                listener: (context, state) {
-                  context.dialog.showCopyEmailDialog(state?.value(context));
-                  if (state == UrlEnum.copySucceed) {
-                    context.read<UrlCubit>().reset();
-                  }
-                },
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: _support(
-                          context: context,
-                          isTablet: isTablet,
-                          isDesk: isDesk,
-                        ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: _support(
+                        context: context,
+                        isTablet: isTablet,
+                        isDesk: isDesk,
                       ),
                     ),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: _sections(
-                          isTablet: isTablet,
-                          context: context,
-                        ),
-                      ),
-                    ),
-                    if (Config.isDevelopment)
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: _information(
-                            isTablet: isTablet,
-                            context: context,
-                          ),
-                        ),
-                      ),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: _contact(
-                          isTablet: isTablet,
-                          context: context,
-                        ),
-                      ),
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: socialMediaLinks(
+                  ),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: _sections(
                         isTablet: isTablet,
                         context: context,
-                        padding: isTablet
-                            ? KSizedBox.kHeightSizedBox24
-                            : KSizedBox.kWidthSizedBox16,
-                        instagramKey: KWidgetkeys.widget.footer.instagramIcon,
-                        linkedInKey: KWidgetkeys.widget.footer.likedInIcon,
-                        facebookKey: KWidgetkeys.widget.footer.facebookIcon,
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                  if (Config.isDevelopment)
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: _information(
+                          isTablet: isTablet,
+                          context: context,
+                        ),
+                      ),
+                    ),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: _contact(
+                        isTablet: isTablet,
+                        context: context,
+                      ),
+                    ),
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: socialMediaLinks(
+                      isTablet: isTablet,
+                      context: context,
+                      padding: isTablet
+                          ? KSizedBox.kHeightSizedBox24
+                          : KSizedBox.kWidthSizedBox16,
+                      instagramKey: KWidgetkeys.widget.footer.instagramIcon,
+                      linkedInKey: KWidgetkeys.widget.footer.likedInIcon,
+                      facebookKey: KWidgetkeys.widget.footer.facebookIcon,
+                    ),
+                  ),
+                ],
               ),
               KSizedBox.kHeightSizedBox56,
               Row(
@@ -137,49 +129,41 @@ abstract class FooterWidget {
           : [
               ..._support(context: context, isTablet: isTablet, isDesk: isDesk),
               KSizedBox.kHeightSizedBox40,
-              BlocListener<UrlCubit, UrlEnum?>(
-                listener: (context, state) {
-                  context.dialog.showCopyEmailDialog(state?.value(context));
-                  if (state == UrlEnum.copySucceed) {
-                    context.read<UrlCubit>().reset();
-                  }
-                },
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    flex: 2,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: _sections(
+                        isTablet: isTablet,
+                        context: context,
+                      ),
+                    ),
+                  ),
+                  if (Config.isDevelopment)
                     Expanded(
                       flex: 2,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: _sections(
+                        children: _information(
+                          isTablet: isTablet,
+                          context: context,
+                        ),
+                      ),
+                    )
+                  else
+                    Expanded(
+                      flex: 3,
+                      child: Column(
+                        children: _contact(
                           isTablet: isTablet,
                           context: context,
                         ),
                       ),
                     ),
-                    if (Config.isDevelopment)
-                      Expanded(
-                        flex: 2,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: _information(
-                            isTablet: isTablet,
-                            context: context,
-                          ),
-                        ),
-                      )
-                    else
-                      Expanded(
-                        flex: 3,
-                        child: Column(
-                          children: _contact(
-                            isTablet: isTablet,
-                            context: context,
-                          ),
-                        ),
-                      ),
-                  ],
-                ),
+                ],
               ),
               if (Config.isDevelopment) ...[
                 KSizedBox.kHeightSizedBox40,
