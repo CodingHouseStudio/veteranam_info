@@ -28,7 +28,8 @@ class _DiscountNotificationWidgetState
       create: (context) => GetIt.I.get<DiscountLinkFormBloc>(),
       child: BlocConsumer<DiscountLinkFormBloc, DiscountLinkFormState>(
         listener: (context, state) {
-          if (state.formState == LinkEnum.sending) {
+          if (state.formState != LinkEnum.initial &&
+              state.formState != LinkEnum.inProgress) {
             controller.clear();
           }
           if (state.formState == LinkEnum.success) {
@@ -45,21 +46,21 @@ class _DiscountNotificationWidgetState
                 const DiscountLinkFormEvent.sendLink(),
               ),
           fieldController: controller,
-          filedErrorText:
-              context.read<DiscountLinkFormBloc>().state.formState ==
-                      LinkEnum.invalidData
-                  ? context
-                      .read<DiscountLinkFormBloc>()
-                      .state
-                      .link
-                      .error
-                      .value(context)
-                  : null,
+          // filedErrorText:
+          //     context.read<DiscountLinkFormBloc>().state.formState ==
+          //             LinkEnum.invalidData
+          //         ? context
+          //             .read<DiscountLinkFormBloc>()
+          //             .state
+          //             .link
+          //             .error
+          //             .value(context)
+          //         : null,
           enabled: context.read<DiscountLinkCubit>().state,
-          showThankText: context.read<DiscountLinkFormBloc>().state.formState ==
-                  LinkEnum.sending ||
-              context.read<DiscountLinkFormBloc>().state.formState ==
-                  LinkEnum.success,
+          showThankText: context.read<DiscountLinkFormBloc>().state.formState !=
+                  LinkEnum.initial &&
+              context.read<DiscountLinkFormBloc>().state.formState !=
+                  LinkEnum.inProgress,
         ),
       ),
     );
