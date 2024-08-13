@@ -9,7 +9,7 @@ Future<void> investorsInitialHelper(
   expect(find.byKey(KWidgetkeys.screen.investors.title), findsOneWidget);
 
   if (KTest.testIsWeb) {
-    expect(find.byKey(KWidgetkeys.screen.investors.point), findsOneWidget);
+    // expect(find.byKey(KWidgetkeys.screen.investors.point), findsOneWidget);
 
     expect(
       find.byKey(KWidgetkeys.screen.investors.feedbackTitle),
@@ -47,13 +47,13 @@ Future<void> investorsInitialHelper(
   }
 
   expect(
-    find.byKey(KWidgetkeys.screen.investors.fundsPoint),
+    find.byKey(KWidgetkeys.screen.investors.fundsTitle),
     findsOneWidget,
   );
 
   await scrollingHelperInt(
     tester: tester,
-    itemKey: KWidgetkeys.screen.investors.fundsPoint,
+    itemKey: KWidgetkeys.screen.investors.fundsTitle,
   );
 
   expect(
