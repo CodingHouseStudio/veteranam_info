@@ -22,6 +22,14 @@ void main() {
 
       await mobSettingsInitialHelper(tester);
     });
+    testWidgets('Mobile feedback wrong enter text', (tester) async {
+      await mobSettingsPumpAppHelper(tester: tester);
+
+      await mobFeedbackOpenHelperkHelper(
+        test: mobFeedbackWrongTextHelper,
+        tester: tester,
+      );
+    });
     group('${KGroupText.goRouter} ', () {
       late MockGoRouter mockGoRouter;
       setUp(() => mockGoRouter = MockGoRouter());
@@ -32,6 +40,14 @@ void main() {
         );
 
         await mobSettingsInitialHelper(tester);
+      });
+      testWidgets('Mobile feedback correct enter text', (tester) async {
+        await mobSettingsPumpAppHelper(tester: tester);
+
+        await mobFeedbackOpenHelperkHelper(
+          test: mobFeedbackCorrectTextHelper,
+          tester: tester,
+        );
       });
       group('${KGroupText.goTo} ', () {
         testWidgets('${KRoute.feedback.name} ', (tester) async {

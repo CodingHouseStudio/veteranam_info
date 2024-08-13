@@ -37,23 +37,24 @@ class DiscountBodyWidget extends StatelessWidget {
                   .add(const DiscountWatcherEvent.started()),
               titleChildWidgetsFunction: ({required isDesk}) => [
                 KSizedBox.kHeightSizedBox24,
-                if (KTest.testIsWeb)
+                if (KTest.testIsWeb) ...[
                   ...TitleWidget.pointTitleWidgetList(
                     title: context.l10n.specialOffers,
                     titleKey: KWidgetkeys.screen.discounts.title,
                     titleSecondPart: context.l10n.forVeteransAndTheirFamilies,
-                    pointText: context.l10n.discounts,
-                    pointKey: KWidgetkeys.screen.discounts.titlePoint,
+                    // pointText: context.l10n.discounts,
+                    // pointKey: KWidgetkeys.screen.discounts.titlePoint,
                     isDesk: isDesk,
                     titleSecondPartPadding:
                         const EdgeInsets.only(left: KPadding.kPaddingSize72),
                     iconCrossAxisAlignment: CrossAxisAlignment.end,
                     isRightArrow: false,
                   ),
-                if (isDesk)
-                  KSizedBox.kHeightSizedBox40
-                else if (KTest.testIsWeb)
-                  KSizedBox.kHeightSizedBox24,
+                  if (isDesk)
+                    KSizedBox.kHeightSizedBox40
+                  else
+                    KSizedBox.kHeightSizedBox24,
+                ],
                 if (isDesk)
                   Row(
                     children: [
@@ -140,10 +141,10 @@ class DiscountBodyWidget extends StatelessWidget {
               context: context,
               getENFilter: (item) => item.categoryEN,
               getUAFilter: (item) => item.category,
-              numberGetList: context
-                  .read<DiscountWatcherBloc>()
-                  .state
-                  .locationDiscountModelItems,
+              // numberGetList: context
+              //     .read<DiscountWatcherBloc>()
+              //     .state
+              //     .locationDiscountModelItems,
             ),
         isDesk: isDesk,
         // onResetValue: () => context.read<DiscountWatcherBloc>().add(

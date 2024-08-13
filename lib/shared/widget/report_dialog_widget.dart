@@ -60,33 +60,32 @@ class ReportDialogWidget extends StatelessWidget {
                     .toText(context),
                 isDesk: isDesk,
               ),
-              KSizedBox.kHeightSizedBox16,
-              TextFieldWidget(
-                widgetKey: KWidgetkeys.widget.reportDialog.emailField,
-                onChanged: (text) => context
-                    .read<ReportBloc>()
-                    .add(ReportEvent.emailUpdated(text)),
-                isDesk: isDesk,
-                labelText: '${context.l10n.email}*',
-                enabled: context
-                        .read<AuthenticationBloc>()
-                        .state
-                        .user
-                        ?.isAnonymously ??
-                    false,
-                errorText: _.formState == ReportEnum.nextInvalidData &&
-                        (context
-                                .read<AuthenticationBloc>()
-                                .state
-                                .user
-                                ?.isAnonymously ??
-                            true)
-                    ? _.email?.error.value(context) ??
-                        context.l10n.fieldCannotBeEmpty
-                    : null,
-                text: context.read<AuthenticationBloc>().state.user?.email,
-                inputFormatterList: [EmailInputFormatter()],
-              ),
+              // KSizedBox.kHeightSizedBox16,
+              // TextFieldWidget(
+              //   widgetKey: KWidgetkeys.widget.reportDialog.emailField,
+              //   onChanged: (text) => context
+              //       .read<ReportBloc>()
+              //       .add(ReportEvent.emailUpdated(text)),
+              //   isDesk: isDesk,
+              //   labelText: '${context.l10n.email}*',
+              //   enabled: context
+              //           .read<AuthenticationBloc>()
+              //           .state
+              //           .user
+              //           ?.isAnonymously ??
+              //       false,
+              //   errorText: _.email?.error.value(context) ??
+              //       context.l10n.fieldCannotBeEmpty,
+              //   showErrorText: _.formState == ReportEnum.nextInvalidData &&
+              //       (context
+              //               .read<AuthenticationBloc>()
+              //               .state
+              //               .user
+              //               ?.isAnonymously ??
+              //           true),
+              //   text: context.read<AuthenticationBloc>().state.user?.email,
+              //   inputFormatterList: [EmailInputFormatter()],
+              // ),
               KSizedBox.kHeightSizedBox16,
               MessageFieldWidget(
                 key: KWidgetkeys.widget.reportDialog.messageField,
@@ -95,11 +94,10 @@ class ReportDialogWidget extends StatelessWidget {
                     .add(ReportEvent.messageUpdated(text)),
                 isDesk: isDesk,
                 labelText: context.l10n.writeYourMessage,
-                errorText: _.formState == ReportEnum.nextInvalidData &&
-                        _.reasonComplaint == ReasonComplaint.other
-                    ? _.message?.error.value(context) ??
-                        context.l10n.fieldCannotBeEmpty
-                    : null,
+                errorText: _.message?.error.value(context) ??
+                    context.l10n.fieldCannotBeEmpty,
+                showErrorText: _.formState == ReportEnum.nextInvalidData &&
+                    _.reasonComplaint == ReasonComplaint.other,
               ),
             ] else ...[
               Text(

@@ -9,8 +9,8 @@ List<Widget> _titleWidgetList({
             KSizedBox.kHeightSizedBox24,
             ...TitleWidget.pointTitleWidgetList(
               isDesk: true,
-              pointText: context.l10n.feedback,
-              pointKey: KWidgetkeys.screen.feedback.pointText,
+              // pointText: context.l10n.feedback,
+              // pointKey: KWidgetkeys.screen.feedback.pointText,
               title: context.l10n.write,
               titleSecondPart: '${context.l10n.us} ${context.l10n.aMessage}',
               titleKey: KWidgetkeys.screen.feedback.title,
@@ -18,11 +18,11 @@ List<Widget> _titleWidgetList({
             KSizedBox.kHeightSizedBox100,
           ]
         : [
-            KSizedBox.kHeightSizedBox24,
-            TextPointWidget(
-              context.l10n.feedback,
-              key: KWidgetkeys.screen.feedback.pointText,
-            ),
+            // KSizedBox.kHeightSizedBox24,
+            // TextPointWidget(
+            //   context.l10n.feedback,
+            //   key: KWidgetkeys.screen.feedback.pointText,
+            // ),
             KSizedBox.kHeightSizedBox16,
             Text(
               '${context.l10n.write} ${context.l10n.us}',

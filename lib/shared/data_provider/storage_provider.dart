@@ -17,20 +17,39 @@ class StorageService {
   Future<Uint8List> _xFile(String ref) async =>
       uint8List ?? XFile(ref).readAsBytes();
 
-  Future<String> saveStoryImage({
+  Future<String> saveImage({
     required ImageModel imageModel,
-    required String storyId,
+    required String id,
+    required String collecltionName,
   }) async {
-    if (imageModel.ref == null) return '';
+    if (imageModel.ref == null || imageModel.ref!.isEmpty) return '';
     final value = storage
         .ref(
           StoragePath.getImagePath(
-            collenction: FirebaseCollectionName.stroies,
-            modelId: storyId,
+            collection: collecltionName,
+            modelId: id,
             imageName: imageModel.name,
           ),
         )
         .putBlob(await _xFile(imageModel.ref!));
+    final snapshot = await value.getTaskSnapshot();
+
+    return snapshot.ref.getDownloadURL();
+  }
+
+  Future<String> saveUseUint8ListImage({
+    required Uint8List image,
+    required String id,
+    required String collecltionName,
+  }) async {
+    final value = storage
+        .ref(
+          StoragePath.getImagePath(
+            collection: collecltionName,
+            modelId: id,
+          ),
+        )
+        .putImage(image);
     final snapshot = await value.getTaskSnapshot();
 
     return snapshot.ref.getDownloadURL();
@@ -52,7 +71,7 @@ class StorageService {
             ),
           ),
         )
-        .putBlob(await _xFile(resumeModel.ref!));
+        .putImage(await _xFile(resumeModel.ref!));
 
     final snapshot = await value.getTaskSnapshot();
     return snapshot.ref.getDownloadURL();
@@ -62,7 +81,7 @@ class StorageService {
 extension UploadTaskExtention on UploadTask {
   @visibleForTesting
   static Future<TaskSnapshot>? taskSnapshot;
-  Future<TaskSnapshot> getTaskSnapshot() async {
+  Future<TaskSnapshot> getTaskSnapshot() {
     return taskSnapshot ?? this;
   }
 }

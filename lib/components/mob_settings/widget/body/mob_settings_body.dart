@@ -86,9 +86,24 @@ class MobSettingsBodyWidget extends StatelessWidget {
               horizontal: KPadding.kPaddingSize16,
             ),
             child: DoubleButtonWidget(
-              widgetKey: KWidgetkeys.screen.mobSettings.button,
+              widgetKey: KWidgetkeys.screen.mobSettings.feedbackButton,
               text: context.l10n.contact,
               onPressed: () => context.goNamed(KRoute.feedback.name),
+              color: AppColors.materialThemeBlack,
+              textColor: AppColors.materialThemeWhite,
+              mobVerticalTextPadding: KPadding.kPaddingSize12,
+              isDesk: false,
+            ),
+          ),
+          KSizedBox.kHeightSizedBox16,
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: KPadding.kPaddingSize16,
+            ),
+            child: DoubleButtonWidget(
+              widgetKey: KWidgetkeys.screen.mobSettings.bugButton,
+              text: context.l10n.reportBugs,
+              onPressed: context.dialog.showMobFeedback,
               color: AppColors.materialThemeBlack,
               textColor: AppColors.materialThemeWhite,
               mobVerticalTextPadding: KPadding.kPaddingSize12,

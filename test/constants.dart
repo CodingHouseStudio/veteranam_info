@@ -193,6 +193,15 @@ abstract class KTestText {
     timestamp: dateTime,
     message: field,
   );
+  static final feedbackImageModel = FeedbackModel(
+    id: '',
+    guestId: user.id,
+    guestName: null,
+    email: null,
+    timestamp: dateTime,
+    message: field,
+    image: imageModel,
+  );
   static final dateTime = DateTime(2024, 4, 12);
   static final dateTimeId = DateTime(0, 0, 0, 0, 1, 1, 1, 1);
   static const downloadURL = 'test_URL';
@@ -324,7 +333,7 @@ abstract class KTestText {
   static final reportModel = ReportModel(
     id: id,
     reasonComplaint: ReasonComplaint.fraudOrSpam,
-    email: userEmail,
+    // email: userEmail,
     message: field,
     date: dateTime,
     card: CardEnum.funds,
@@ -337,7 +346,7 @@ abstract class KTestText {
       ReportModel(
         id: i.toString(),
         reasonComplaint: ReasonComplaint.fraudOrSpam,
-        email: userEmail,
+        // email: userEmail,
         message: field,
         date: dateTime,
         card: CardEnum.discount,
@@ -349,7 +358,7 @@ abstract class KTestText {
   static final reportModelIncorect = ReportModel(
     id: id,
     reasonComplaint: ReasonComplaint.fraudOrSpam,
-    email: userEmailIncorrect,
+    // email: userEmailIncorrect,
     message: field,
     date: dateTime,
     card: CardEnum.funds,

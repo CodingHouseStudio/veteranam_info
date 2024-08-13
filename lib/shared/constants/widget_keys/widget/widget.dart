@@ -44,5 +44,6 @@ class _WidgetKeys {
   final cityList = _CityListKeys();
   final menuDialog = _MenuDialogKeys();
   final mobNavigation = _MobNavigationKeys();
+  final mobFeedback = _MobFeedbackKeys();
   final emailButton = _EmailButtonsKeys();
 }

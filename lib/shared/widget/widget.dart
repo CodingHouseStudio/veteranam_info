@@ -42,6 +42,7 @@ export 'left_card_widget.dart';
 export 'loading_button.dart';
 export 'menu_dialog_widget.dart';
 export 'message_field_widget.dart';
+export 'mob_feedback_widget.dart';
 export 'mob_navigation_widget.dart';
 export 'mock_button_widget.dart';
 export 'nawbar_widget.dart';

@@ -2,6 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:veteranam/shared/shared.dart';
 
 import '../../test_dependency.dart';
+import 'helper.dart';
 
 Future<void> mobSettingsInitialHelper(
   WidgetTester tester,
@@ -36,7 +37,7 @@ Future<void> mobSettingsInitialHelper(
   await tester.tap(find.byKey(KWidgetkeys.screen.mobSettings.email));
 
   expect(
-    find.byKey(KWidgetkeys.screen.mobSettings.button),
+    find.byKey(KWidgetkeys.screen.mobSettings.feedbackButton),
     findsOneWidget,
   );
 
@@ -55,8 +56,24 @@ Future<void> mobSettingsInitialHelper(
     findsOneWidget,
   );
 
+  await scrollingHelper(
+    tester: tester,
+    itemKey: KWidgetkeys.screen.mobSettings.facebookIcon,
+  );
+
   expect(
     find.byKey(KWidgetkeys.screen.mobSettings.privacyPolicy),
     findsOneWidget,
   );
+
+  expect(
+    find.byKey(KWidgetkeys.screen.mobSettings.bugButton),
+    findsOneWidget,
+  );
+
+  await tester.tap(find.byKey(KWidgetkeys.screen.mobSettings.bugButton));
+
+  await tester.pumpAndSettle();
+
+  await mobFeedbackOpenHelperkHelper(test: mobFeedbackHelper, tester: tester);
 }

@@ -45,23 +45,24 @@ class InformationBodyWidget extends StatelessWidget {
               KSizedBox.kHeightSizedBox40
             else
               KSizedBox.kHeightSizedBox24,
-            if (isDesk)
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  TextPointWidget(
-                    context.l10n.information,
-                    hasExpanded: false,
-                  ),
-                  KSizedBox.kWidthSizedBox90,
-                  Expanded(child: _filter(isDesk: isDesk, context: context)),
-                ],
-              )
-            else ...[
-              TextPointWidget(context.l10n.information),
-              KSizedBox.kHeightSizedBox8,
-              _filter(isDesk: isDesk, context: context),
-            ],
+            // if (isDesk)
+            // Row(
+            //   crossAxisAlignment: CrossAxisAlignment.start,
+            //   children: [
+            //     TextPointWidget(
+            //       context.l10n.information,
+            //       hasExpanded: false,
+            //     ),
+            // KSizedBox.kWidthSizedBox90,
+            // Expanded(child: _filter(isDesk: isDesk, context: context))
+            //   ],
+            // )
+            // else
+            // ...[
+            //   TextPointWidget(context.l10n.information),
+            //   KSizedBox.kHeightSizedBox8,
+            _filter(isDesk: isDesk, context: context),
+            // ],
             if (isDesk)
               KSizedBox.kHeightSizedBox40
             else
