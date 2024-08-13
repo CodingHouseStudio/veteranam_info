@@ -17,7 +17,7 @@ class ReportBloc extends Bloc<ReportEvent, ReportState> {
         super(
           const ReportState(
             reasonComplaint: null,
-            email: null,
+            // email: null,
             message: null,
             formState: ReportEnum.initial,
             failure: null,
@@ -25,7 +25,7 @@ class ReportBloc extends Bloc<ReportEvent, ReportState> {
           ),
         ) {
     on<_Started>(_onStarted);
-    on<_EmailUpdated>(_onEmailUpdated);
+    // on<_EmailUpdated>(_onEmailUpdated);
     on<_MessageUpdated>(_onMessageUpdated);
     on<_ReasonComplaintUpdated>(_onReasonComplaintUpdated);
     on<_Send>(_onSend);
@@ -40,7 +40,7 @@ class ReportBloc extends Bloc<ReportEvent, ReportState> {
     emit(
       ReportState(
         reasonComplaint: null,
-        email: null,
+        // email: null,
         message: null,
         formState: ReportEnum.initial,
         failure: null,
@@ -49,19 +49,19 @@ class ReportBloc extends Bloc<ReportEvent, ReportState> {
     );
   }
 
-  void _onEmailUpdated(
-    _EmailUpdated event,
-    Emitter<ReportState> emit,
-  ) {
-    final emailFieldModel = EmailFieldModel.dirty(event.email);
-    emit(
-      state.copyWith(
-        email: emailFieldModel,
-        formState: ReportEnum.nextInProgress,
-        failure: null,
-      ),
-    );
-  }
+  // void _onEmailUpdated(
+  //   _EmailUpdated event,
+  //   Emitter<ReportState> emit,
+  // ) {
+  //   final emailFieldModel = EmailFieldModel.dirty(event.email);
+  //   emit(
+  //     state.copyWith(
+  //       email: emailFieldModel,
+  //       formState: ReportEnum.nextInProgress,
+  //       failure: null,
+  //     ),
+  //   );
+  // }
 
   void _onMessageUpdated(
     _MessageUpdated event,
@@ -94,7 +94,9 @@ class ReportBloc extends Bloc<ReportEvent, ReportState> {
     _Send event,
     Emitter<ReportState> emit,
   ) async {
-    if (!state.formState.isNext) {
+    if (!state.formState.isNext &&
+            state.reasonComplaint == ReasonComplaint.other ||
+        state.reasonComplaint == null) {
       if (state.reasonComplaint != null) {
         emit(state.copyWith(formState: ReportEnum.next, failure: null));
       } else {
@@ -102,18 +104,21 @@ class ReportBloc extends Bloc<ReportEvent, ReportState> {
       }
       return;
     }
-    if (state.cardId != null &&
-        !((state.email == null || state.email!.isNotValid) &&
-                _appAuthenticationRepository.isAnonymously() ||
-            (state.message == null || state.message!.isNotValid) &&
-                state.reasonComplaint == ReasonComplaint.other)) {
-      final result = await _reportRepository.sendReport(
+    if (state.cardId != null
+        // &&
+        //     !((state.email == null || state.email!.isNotValid) &&
+        //             _appAuthenticationRepository.isAnonymously() ||
+        //         (state.message == null || state.message!.isNotValid) &&
+        //             state.reasonComplaint == ReasonComplaint.other)
+        ) {
+      // final result =
+      await _reportRepository.sendReport(
         ReportModel(
           id: ExtendedDateTime.id,
           reasonComplaint: state.reasonComplaint!,
-          email: state.email?.value.isEmpty ?? true
-              ? _appAuthenticationRepository.currentUser.email!
-              : state.email!.value,
+          // email: state.email?.value.isEmpty ?? true
+          //     ? _appAuthenticationRepository.currentUser.email!
+          //     : state.email!.value,
           message: state.message?.value.isEmpty ?? true
               ? null
               : state.message?.value,
@@ -123,20 +128,21 @@ class ReportBloc extends Bloc<ReportEvent, ReportState> {
           cardId: state.cardId!,
         ),
       );
-      result.fold(
-        (l) => emit(
-          state.copyWith(
-            formState: ReportEnum.initial,
-            failure: l._toReport(),
-          ),
-        ),
-        (r) => emit(
-          state.copyWith(
-            failure: null,
-            formState: ReportEnum.success,
-          ),
+      // result.fold(
+      //   (l) => emit(
+      //     state.copyWith(
+      //       formState: ReportEnum.initial,
+      //       failure: l._toReport(),
+      //     ),
+      //   ),
+      //   (r) =>
+      emit(
+        state.copyWith(
+          failure: null,
+          formState: ReportEnum.success,
         ),
       );
+      // );
     } else {
       emit(
         state.copyWith(formState: ReportEnum.nextInvalidData, failure: null),

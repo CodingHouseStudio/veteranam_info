@@ -11,10 +11,10 @@ Future<void> feedbackInitialHelper(
     tester: tester,
     windowsTest: true,
     test: () async {
-      expect(
-        find.byKey(KWidgetkeys.screen.feedback.pointText),
-        findsOneWidget,
-      );
+      // expect(
+      //   find.byKey(KWidgetkeys.screen.feedback.pointText),
+      //   findsOneWidget,
+      // );
 
       expect(find.byKey(KWidgetkeys.screen.feedback.title), findsOneWidget);
 

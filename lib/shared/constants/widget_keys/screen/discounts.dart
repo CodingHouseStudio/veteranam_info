@@ -11,7 +11,7 @@ class _DiscountsKeys {
   final title = const Key('discount_title');
   final subtitleKey = const Key('discount_subtitleKey');
   final addDiscountButton = const Key('discount_add_discount_button');
-  final titlePoint = const Key('discount_title_point');
+  // final titlePoint = const Key('discount_title_point');
   final advancedFilter = const Key('discounts_screen_advanced_filter');
   final advancedFilterDialog =
       const Key('discounts_screen_advanced_filter_dialog');

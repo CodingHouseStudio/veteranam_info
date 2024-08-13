@@ -42,43 +42,52 @@ class HomeBodyWidget extends StatelessWidget {
             key: aboutProjectKey,
             height: KSize.kPixel48,
           ),
-          if (isDesk)
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  child: TextPointWidget(
-                    context.l10n.whatKindOfProject,
-                    key: KWidgetkeys.screen.home.aboutProjecPrefix,
-                  ),
-                ),
-                Expanded(
-                  flex: 3,
-                  child: Text(
-                    context.l10n.aboutProject,
-                    key: KWidgetkeys.screen.home.aboutProjecSubtitle,
-                    style: AppTextStyle.materialThemeDisplayMedium,
-                  ),
-                ),
-              ],
-            )
-          else ...[
-            TextPointWidget(
-              context.l10n.whatKindOfProject,
-              key: KWidgetkeys.screen.home.aboutProjecPrefix,
-            ),
-            if (isTablet)
-              KSizedBox.kHeightSizedBox24
-            else
-              KSizedBox.kHeightSizedBox8,
-            Text(
-              context.l10n.aboutProject,
-              key: KWidgetkeys.screen.home.aboutProjecSubtitle,
-              style: isTablet
-                  ? AppTextStyle.materialThemeDisplaySmall
-                  : AppTextStyle.materialThemeHeadlineSmall,
-            ),
-          ],
+          Text(
+            context.l10n.aboutProject,
+            key: KWidgetkeys.screen.home.aboutProjecSubtitle,
+            style: isDesk
+                ? AppTextStyle.materialThemeDisplayMedium
+                : isTablet
+                    ? AppTextStyle.materialThemeDisplaySmall
+                    : AppTextStyle.materialThemeHeadlineSmall,
+          ),
+          // if (isDesk)
+          //   Row(
+          //     crossAxisAlignment: CrossAxisAlignment.start,
+          //     children: [
+          //       Expanded(
+          //         child: TextPointWidget(
+          //           context.l10n.whatKindOfProject,
+          //           key: KWidgetkeys.screen.home.aboutProjecPrefix,
+          //         ),
+          //       ),
+          //       Expanded(
+          //         flex: 3,
+          //         child: Text(
+          //           context.l10n.aboutProject,
+          //           key: KWidgetkeys.screen.home.aboutProjecSubtitle,
+          //           style: AppTextStyle.materialThemeDisplayMedium,
+          //         ),
+          //       ),
+          //     ],
+          //   )
+          // else ...[
+          //   TextPointWidget(
+          //     context.l10n.whatKindOfProject,
+          //     key: KWidgetkeys.screen.home.aboutProjecPrefix,
+          //   ),
+          //   if (isTablet)
+          //     KSizedBox.kHeightSizedBox24
+          //   else
+          //     KSizedBox.kHeightSizedBox8,
+          //   Text(
+          //     context.l10n.aboutProject,
+          //     key: KWidgetkeys.screen.home.aboutProjecSubtitle,
+          //     style: isTablet
+          //         ? AppTextStyle.materialThemeDisplaySmall
+          //         : AppTextStyle.materialThemeHeadlineSmall,
+          //   ),
+          // ],
 
           if (isTablet)
             KSizedBox.kHeightSizedBox160
