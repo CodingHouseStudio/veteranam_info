@@ -55,7 +55,7 @@ Future<void> loginInitialHelper(
         findsOneWidget,
       );
 
-      await dialogFailureSetHelper(tester: tester, isFailure: false);
+      await dialogSnackBarTextHelper(tester: tester, showDialog: false);
 
       await leftCardHelper(tester);
 

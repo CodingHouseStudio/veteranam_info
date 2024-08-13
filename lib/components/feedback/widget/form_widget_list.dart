@@ -32,7 +32,8 @@ List<Widget> _formWidgegList({
                                 .materialThemeBodyLargeNeutralVariant60,
                           ),
                           KSizedBox.kWidthSizedBox4,
-                          emailButton(
+                          EmailButtonWidget(
+                            key: KWidgetkeys.screen.feedback.emailButton,
                             isDesk: isDesk,
                             context: context,
                           ),
@@ -100,7 +101,8 @@ List<Widget> _formWidgegList({
                   style: AppTextStyle.materialThemeBodyMediumNeutralVariant35,
                 ),
                 KSizedBox.kWidthSizedBox4,
-                emailButton(
+                EmailButtonWidget(
+                  key: KWidgetkeys.screen.feedback.emailButton,
                   isDesk: isDesk,
                   context: context,
                 ),
@@ -125,19 +127,3 @@ List<Widget> _formWidgegList({
             ),
             KSizedBox.kHeightSizedBox32,
           ];
-
-Widget emailButton({
-  required bool isDesk,
-  required BuildContext context,
-}) =>
-    MarkdownEmailWidget(
-      key: KWidgetkeys.screen.feedback.emailButton,
-      data: KAppText.email,
-      textStyle: isDesk
-          ? AppTextStyle.materialThemeBodyLarge.copyWith(
-              color: AppColors.materialThemeKeyColorsSecondary,
-            )
-          : AppTextStyle.materialThemeBodyMedium.copyWith(
-              color: AppColors.materialThemeKeyColorsSecondary,
-            ),
-    );
