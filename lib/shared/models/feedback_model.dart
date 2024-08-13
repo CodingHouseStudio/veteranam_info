@@ -36,4 +36,5 @@ abstract class FeedbackModelJsonField {
   static const timestamp = 'timestamp';
   static const message = 'message';
   static const status = 'status';
+  static const image = 'image';
 }
