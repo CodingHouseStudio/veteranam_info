@@ -324,7 +324,7 @@ abstract class KTestText {
   static final reportModel = ReportModel(
     id: id,
     reasonComplaint: ReasonComplaint.fraudOrSpam,
-    email: userEmail,
+    // email: userEmail,
     message: field,
     date: dateTime,
     card: CardEnum.funds,
@@ -337,7 +337,7 @@ abstract class KTestText {
       ReportModel(
         id: i.toString(),
         reasonComplaint: ReasonComplaint.fraudOrSpam,
-        email: userEmail,
+        // email: userEmail,
         message: field,
         date: dateTime,
         card: CardEnum.discount,
@@ -349,7 +349,7 @@ abstract class KTestText {
   static final reportModelIncorect = ReportModel(
     id: id,
     reasonComplaint: ReasonComplaint.fraudOrSpam,
-    email: userEmailIncorrect,
+    // email: userEmailIncorrect,
     message: field,
     date: dateTime,
     card: CardEnum.funds,
