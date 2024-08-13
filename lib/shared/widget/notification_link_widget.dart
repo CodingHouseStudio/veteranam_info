@@ -8,10 +8,10 @@ class NotificationLinkWidget extends StatelessWidget {
     required this.title,
     required this.sendOnPressed,
     required this.fieldController,
-    required this.filedErrorText,
+    // required this.filedErrorText,
     required this.enabled,
     required this.showThankText,
-    required this.showErrorText,
+    // required this.showErrorText,
     super.key,
   });
   final void Function(String) onChanged;
@@ -19,10 +19,10 @@ class NotificationLinkWidget extends StatelessWidget {
   final String title;
   final void Function() sendOnPressed;
   final TextEditingController fieldController;
-  final String? filedErrorText;
+  // final String? filedErrorText;
   final bool enabled;
   final bool showThankText;
-  final bool showErrorText;
+  // final bool showErrorText;
 
   @override
   Widget build(BuildContext context) {
@@ -65,13 +65,14 @@ class NotificationLinkWidget extends StatelessWidget {
                   KSizedBox.kHeightSizedBox16,
                   button(context),
                 ],
-                if (showThankText) ...[
-                  KSizedBox.kHeightSizedBox8,
-                  Text(
-                    context.l10n.linkThankMessage,
-                    style: AppTextStyle.materialThemeBodyMediumNeutralVariant60,
-                  ),
-                ],
+                // if (showThankText) ...[
+                //   KSizedBox.kHeightSizedBox8,
+                //   Text(
+                //     context.l10n.linkThankMessage,
+                //     style: AppTextStyle.
+                // materialThemeBodyMediumNeutralVariant60,
+                //   ),
+                // ],
               ],
             ),
           ),
@@ -81,7 +82,9 @@ class NotificationLinkWidget extends StatelessWidget {
       return Padding(
         padding: const EdgeInsets.only(top: KPadding.kPaddingSize8),
         child: Text(
-          context.l10n.linkLimitMessage,
+          showThankText
+              ? context.l10n.linkThankMessage
+              : context.l10n.linkLimitMessage,
           key: KWidgetkeys.widget.notificationLink.limitText,
           style: AppTextStyle.materialThemeBodyMediumNeutralVariant35,
           textAlign: TextAlign.center,
@@ -100,8 +103,8 @@ class NotificationLinkWidget extends StatelessWidget {
         suffixIcon: KIcon.link,
         labelText: context.l10n.link,
         controller: fieldController,
-        errorText: filedErrorText,
-        showErrorText: showErrorText,
+        // errorText: filedErrorText,
+        // showErrorText: showErrorText,
       );
   Widget button(BuildContext context) => DoubleButtonWidget(
         text: context.l10n.send,

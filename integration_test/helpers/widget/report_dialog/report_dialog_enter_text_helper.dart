@@ -14,17 +14,17 @@ Future<void> reportDialogEnterTextHelper({
 
   await reportDialogFieldHelper(tester);
 
-  await scrollingHelperInt(
-    tester: tester,
-    itemKey: KWidgetkeys.widget.reportDialog.emailField,
-  );
+  // await scrollingHelperInt(
+  //   tester: tester,
+  //   itemKey: KWidgetkeys.widget.reportDialog.emailField,
+  // );
 
-  if (email != null) {
-    await tester.enterText(
-      find.byKey(KWidgetkeys.widget.reportDialog.emailField),
-      email,
-    );
-  }
+  // if (email != null) {
+  //   await tester.enterText(
+  //     find.byKey(KWidgetkeys.widget.reportDialog.emailField),
+  //     email,
+  //   );
+  // }
 
   await scrollingHelperInt(
     tester: tester,

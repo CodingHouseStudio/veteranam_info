@@ -6,24 +6,24 @@ enum ReportFailure {
   // send,
 }
 
-extension ReportFailureExtension on SomeFailure {
-  ReportFailure _toReport() {
-    switch (this) {
-      // case FailureSend():
-      //   return ReportFailure.send;
-      // case FailureNetwork():
-      //   return ReportFailure.network;
-      default:
-        return ReportFailure.error;
-    }
-  }
-}
+// extension ReportFailureExtension on SomeFailure {
+//   ReportFailure _toReport() {
+//     switch (this) {
+//       // case FailureSend():
+//       //   return ReportFailure.send;
+//       // case FailureNetwork():
+//       //   return ReportFailure.network;
+//       default:
+//         return ReportFailure.error;
+//     }
+//   }
+// }
 
 @freezed
 class ReportState with _$ReportState {
   const factory ReportState({
     required ReasonComplaint? reasonComplaint,
-    required EmailFieldModel? email,
+    // required EmailFieldModel? email,
     required MessageFieldModel? message,
     required ReportEnum formState,
     required ReportFailure? failure,

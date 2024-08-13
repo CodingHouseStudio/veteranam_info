@@ -158,7 +158,7 @@ class _KeyboardScrollViewWebDeskState
     return Focus(
       autofocus: true,
       onKeyEvent: (FocusNode node, KeyEvent event) {
-        if (!isScrollingKey(event.physicalKey)) {
+        if (isScrollingKey(event.physicalKey)) {
           if (event is KeyDownEvent) {
             if (_timer == null) {
               _startScroll(event.physicalKey);
