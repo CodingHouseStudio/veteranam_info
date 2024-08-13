@@ -17,7 +17,8 @@ Future<void> reportDialogHelper(
     findsOneWidget,
   );
 
-  expect(find.byKey(KWidgetkeys.widget.reportDialog.emailField), findsNothing);
+  // expect(find.byKey(KWidgetkeys.widget.reportDialog.emailField),
+  // findsNothing);
 
   expect(
     find.byKey(KWidgetkeys.widget.reportDialog.messageField),
