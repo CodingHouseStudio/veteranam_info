@@ -193,7 +193,7 @@ void main() {
           )
           ..add(
             const DiscountWatcherEvent.filterLocation(
-              SubLocation.allStoresOfChain,
+              SubLocation.all,
             ),
           )
           ..add(
@@ -203,7 +203,7 @@ void main() {
           )
           ..add(
             const DiscountWatcherEvent.filterLocation(
-              SubLocation.allStoresOfChain,
+              SubLocation.all,
             ),
           );
       },
@@ -258,9 +258,9 @@ void main() {
         ),
         predicate<DiscountWatcherState>(
           (state) =>
-              state.loadingStatus == LoadingStatus.listLoadedFull &&
-              // state.filteredDiscountModelItems.length ==
-              //     KDimensions.loadItems &&
+              state.loadingStatus == LoadingStatus.loaded &&
+              state.filteredDiscountModelItems.length ==
+                  KDimensions.loadItems &&
               state.filtersLocation.isNotEmpty,
         ),
       ],
