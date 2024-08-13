@@ -15,7 +15,7 @@ Future<void> feedbackFailureHelper(
         field: KTestText.field,
       );
 
-      await dialogFailureSetHelper(tester: tester);
+      await dialogSnackBarTextHelper(tester: tester);
     },
   );
 }

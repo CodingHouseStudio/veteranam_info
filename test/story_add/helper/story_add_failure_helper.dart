@@ -8,5 +8,5 @@ Future<void> storyAddFailureHelper(
 ) async {
   await fieldCorrectHelper(tester);
 
-  await dialogFailureSetHelper(tester: tester);
+  await dialogSnackBarTextHelper(tester: tester);
 }

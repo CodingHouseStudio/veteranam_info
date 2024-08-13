@@ -39,8 +39,10 @@ abstract class FooterWidget {
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children:
-                            _information(isTablet: isTablet, context: context),
+                        children: _information(
+                          isTablet: isTablet,
+                          context: context,
+                        ),
                       ),
                     ),
                   Expanded(
@@ -145,8 +147,10 @@ abstract class FooterWidget {
                       flex: 2,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children:
-                            _information(isTablet: isTablet, context: context),
+                        children: _information(
+                          isTablet: isTablet,
+                          context: context,
+                        ),
                       ),
                     )
                   else
@@ -350,29 +354,11 @@ abstract class FooterWidget {
           ),
         ),
         KSizedBox.kHeightSizedBox16,
-        Row(
-          children: [
-            KIcon.meil.copyWith(
-              key: KWidgetkeys.widget.footer.emailIcon,
-            ),
-            KSizedBox.kWidthSizedBox4,
-            Expanded(
-              child: MarkdownEmailWidget(
-                key: KWidgetkeys.widget.footer.emailText,
-                padding: const EdgeInsets.only(
-                  left: KPadding.kPaddingSize8,
-                ),
-                data: KAppText.email,
-                textStyle: isTablet
-                    ? AppTextStyle.materialThemeTitleMedium.copyWith(
-                        color: AppColors.materialThemeKeyColorsSecondary,
-                      )
-                    : AppTextStyle.materialThemeTitleSmall.copyWith(
-                        color: AppColors.materialThemeKeyColorsSecondary,
-                      ),
-              ),
-            ),
-          ],
+        KSizedBox.kWidthSizedBox4,
+        EmailButtonWidget(
+          key: KWidgetkeys.widget.footer.emailButton,
+          isDesk: isTablet,
+          context: context,
         ),
       ];
   static List<Widget> _support({

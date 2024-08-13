@@ -10,7 +10,7 @@ class LoginBodyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<LoginBloc, LoginState>(
-      listener: (context, state) => context.dialog.showSendErrorDialog(
+      listener: (context, state) => context.dialog.showSnackBardTextDialog(
         state.failure?.value(context),
       ),
       builder: (context, _) {

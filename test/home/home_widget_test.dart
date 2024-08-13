@@ -18,6 +18,7 @@ void main() {
   group('${KScreenBlocName.home} ${KScreenBlocName.dev}', () {
     late AuthenticationRepository mockAuthenticationRepository;
     late IHomeRepository mockHomeRepository;
+    late IUrlRepository mockUrlRepository;
     // late IFeedbackRepository mockFeedbackRepository;
     // late IAppAuthenticationRepository mockAppAuthenticationRepository;
     setUp(() {
@@ -26,10 +27,14 @@ void main() {
       KPlatformConstants.isWebDesktop = true;
       mockHomeRepository = MockIHomeRepository();
       mockAuthenticationRepository = MockAuthenticationRepository();
+      mockUrlRepository = MockIUrlRepository();
       // mockAppAuthenticationRepository = MockAppAuthenticationRepository();
 
       when(mockAuthenticationRepository.currentUser).thenAnswer(
         (realInvocation) => User.empty,
+      );
+      when(mockUrlRepository.copy(KAppText.email)).thenAnswer(
+        (invocation) async => const Right(true),
       );
       // when(mockAppAuthenticationRepository.currentUserSetting).thenAnswer(
       //   (realInvocation) => UserSetting.empty,
@@ -42,6 +47,33 @@ void main() {
       );
       when(mockAuthenticationRepository.isAnonymouslyOrEmty()).thenAnswer(
         (realInvocation) => true,
+      );
+      when(
+        mockUrlRepository.launchUrl(
+          url: KAppText.instagram,
+        ),
+      ).thenAnswer(
+        (realInvocation) async => const Right(
+          true,
+        ),
+      );
+      when(
+        mockUrlRepository.launchUrl(
+          url: KAppText.facebook,
+        ),
+      ).thenAnswer(
+        (realInvocation) async => const Right(
+          true,
+        ),
+      );
+      when(
+        mockUrlRepository.launchUrl(
+          url: KAppText.linkedIn,
+        ),
+      ).thenAnswer(
+        (realInvocation) async => const Right(
+          true,
+        ),
       );
       // mockFeedbackRepository = MockIFeedbackRepository();
       // when(mockFeedbackRepository.sendFeedback(KTestText.feedbackModel))
@@ -63,7 +95,7 @@ void main() {
           // mockFeedbackRepository: mockFeedbackRepository,
           mockHomeRepository: mockHomeRepository,
           mockAuthenticationRepository: mockAuthenticationRepository,
-          tester: tester,
+          tester: tester, mockUrlRepository: mockUrlRepository,
           // mockAppAuthenticationRepository:
           // mockAppAuthenticationRepository,
         );
@@ -79,6 +111,7 @@ void main() {
           mockHomeRepository: mockHomeRepository,
           mockAuthenticationRepository: mockAuthenticationRepository,
           tester: tester,
+          mockUrlRepository: mockUrlRepository,
           // mockAppAuthenticationRepository:
           // mockAppAuthenticationRepository,
         );
@@ -94,6 +127,7 @@ void main() {
           mockHomeRepository: mockHomeRepository,
           mockAuthenticationRepository: mockAuthenticationRepository,
           tester: tester,
+          mockUrlRepository: mockUrlRepository,
           // mockAppAuthenticationRepository:
           // mockAppAuthenticationRepository,
         );
@@ -120,6 +154,7 @@ void main() {
           mockHomeRepository: mockHomeRepository,
           mockAuthenticationRepository: mockAuthenticationRepository,
           tester: tester,
+          mockUrlRepository: mockUrlRepository,
           // mockAppAuthenticationRepository:
           // mockAppAuthenticationRepository,
         );
@@ -140,6 +175,7 @@ void main() {
           mockHomeRepository: mockHomeRepository,
           mockAuthenticationRepository: mockAuthenticationRepository,
           tester: tester,
+          mockUrlRepository: mockUrlRepository,
           // mockAppAuthenticationRepository:
           // mockAppAuthenticationRepository,
         );
@@ -157,6 +193,7 @@ void main() {
             mockAuthenticationRepository: mockAuthenticationRepository,
             tester: tester,
             mockGoRouter: mockGoRouter,
+            mockUrlRepository: mockUrlRepository,
             // mockAppAuthenticationRepository:
             // mockAppAuthenticationRepository,
           );
@@ -170,6 +207,7 @@ void main() {
             mockAuthenticationRepository: mockAuthenticationRepository,
             // mockFeedbackRepository: mockFeedbackRepository,
             mockHomeRepository: mockHomeRepository,
+            mockUrlRepository: mockUrlRepository,
             // mockAppAuthenticationRepository:
             // mockAppAuthenticationRepository,
           );
@@ -194,6 +232,7 @@ void main() {
               mockAuthenticationRepository: mockAuthenticationRepository,
               tester: tester,
               mockGoRouter: mockGoRouter,
+              mockUrlRepository: mockUrlRepository,
               // mockAppAuthenticationRepository:
               // mockAppAuthenticationRepository,
             );
@@ -222,6 +261,7 @@ void main() {
                 mockAuthenticationRepository: mockAuthenticationRepository,
                 tester: tester,
                 mockGoRouter: mockGoRouter,
+                mockUrlRepository: mockUrlRepository,
                 // mockAppAuthenticationRepository:
                 // mockAppAuthenticationRepository,
               );
@@ -260,6 +300,7 @@ void main() {
               mockAuthenticationRepository: mockAuthenticationRepository,
               tester: tester,
               mockGoRouter: mockGoRouter,
+              mockUrlRepository: mockUrlRepository,
               // mockAppAuthenticationRepository:
               // mockAppAuthenticationRepository,
             );
@@ -277,6 +318,7 @@ void main() {
               mockAuthenticationRepository: mockAuthenticationRepository,
               tester: tester,
               mockGoRouter: mockGoRouter,
+              mockUrlRepository: mockUrlRepository,
               // mockAppAuthenticationRepository:
               // mockAppAuthenticationRepository,
             );
@@ -294,6 +336,7 @@ void main() {
               mockAuthenticationRepository: mockAuthenticationRepository,
               // mockFeedbackRepository: mockFeedbackRepository,
               mockHomeRepository: mockHomeRepository,
+              mockUrlRepository: mockUrlRepository,
               // mockAppAuthenticationRepository:
               // mockAppAuthenticationRepository,
             );
@@ -310,6 +353,7 @@ void main() {
               mockAuthenticationRepository: mockAuthenticationRepository,
               // mockFeedbackRepository: mockFeedbackRepository,
               mockHomeRepository: mockHomeRepository,
+              mockUrlRepository: mockUrlRepository,
               // mockAppAuthenticationRepository:
               // mockAppAuthenticationRepository,
             );

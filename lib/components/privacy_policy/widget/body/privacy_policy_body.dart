@@ -47,7 +47,15 @@ class PrivacyPolicyBody extends StatelessWidget {
                           ],
                         )
                       : SingleChildScrollView(
-                          child: MarkdownEmailWidget(data: _),
+                          child: MarkdownBody(
+                            key: KWidgetkeys.screen.privacyPolicy.text,
+                            data: _,
+                            styleSheet: MarkdownStyleSheet(
+                              a: AppTextStyle.materialThemeBodyLarge,
+                            ),
+                            onTapLink: (text, href, title) =>
+                                context.read<UrlCubit>().copy(text),
+                          ),
                         ),
                 );
               },

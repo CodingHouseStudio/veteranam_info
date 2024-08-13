@@ -15,7 +15,7 @@ class InformationBodyWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<UrlCubit, UrlEnum?>(
       listener: (context, state) =>
-          context.dialog.showSendErrorDialog(state?.value(context)),
+          context.dialog.showSnackBardTextDialog(state?.value(context)),
       child: BlocConsumer<InformationWatcherBloc, InformationWatcherState>(
         listener: (context, state) => context.dialog.showGetErrorDialog(
           error: state.failure?.value(context),

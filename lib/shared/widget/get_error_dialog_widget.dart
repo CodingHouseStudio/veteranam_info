@@ -17,7 +17,7 @@ class GetErrorDialogWidget extends StatelessWidget {
         Expanded(
           child: Text(
             error,
-            key: KWidgetkeys.widget.dialogs.failureText,
+            key: KWidgetkeys.widget.dialogs.snackBarText,
             style: AppTextStyle.materialThemeTitleMedium,
           ),
         ),
