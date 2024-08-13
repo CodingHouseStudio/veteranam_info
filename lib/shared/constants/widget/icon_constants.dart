@@ -125,6 +125,7 @@ abstract class KIcon {
     Symbols.info,
   );
 
+  static const _KIcon copy = _KIcon(Symbols.content_copy);
   static List<Icon> get icons => [
         KIcon.tag,
         KIcon.briefcase,

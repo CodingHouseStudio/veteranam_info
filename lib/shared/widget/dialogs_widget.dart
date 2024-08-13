@@ -1,3 +1,4 @@
+import 'package:feedback/feedback.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -256,5 +257,23 @@ class _DialogsWidget {
         ),
       );
     }
+  }
+
+  void showCopyEmailDialog(String? text) {
+    if (text != null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(text),
+        ),
+      );
+    }
+  }
+
+  void showMobFeedback() {
+    BetterFeedback.of(context).show(
+      (feedback) => context
+          .read<MobFeedbackBloc>()
+          .add(MobFeedbackEvent.send(feedback.screenshot)),
+    );
   }
 }

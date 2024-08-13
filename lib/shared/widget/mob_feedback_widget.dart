@@ -15,6 +15,7 @@ class MobFeedbackWidget extends StatelessWidget {
     return BlocBuilder<MobFeedbackBloc, MobFeedbackState>(
       builder: (context, _) {
         return ListView(
+          key: KWidgetkeys.widget.mobFeedback.widget,
           padding: const EdgeInsets.all(KPadding.kPaddingSize16),
           children: [
             KSizedBox.kHeightSizedBox8,
@@ -23,10 +24,12 @@ class MobFeedbackWidget extends StatelessWidget {
                 Expanded(
                   child: Text(
                     context.l10n.whatIsWrong,
+                    key: KWidgetkeys.widget.mobFeedback.text,
                     style: AppTextStyle.materialThemeTitleMedium,
                   ),
                 ),
                 Tooltip(
+                  key: KWidgetkeys.widget.mobFeedback.icon,
                   message: context.l10n.mobFeedbackHint,
                   waitDuration: const Duration(milliseconds: 100),
                   showDuration: const Duration(seconds: 15),
@@ -36,7 +39,7 @@ class MobFeedbackWidget extends StatelessWidget {
             ),
             KSizedBox.kHeightSizedBox8,
             TextFieldWidget(
-              widgetKey: const Key('text_input_field'),
+              widgetKey: KWidgetkeys.widget.mobFeedback.field,
               // controller: controller,
               labelText: context.l10n.writeMessage,
               // textInputAction: TextInputAction.done,
@@ -53,7 +56,7 @@ class MobFeedbackWidget extends StatelessWidget {
             Align(
               alignment: Alignment.centerLeft,
               child: TextButton(
-                // key: const Key('submit_feedback_button'),
+                key: KWidgetkeys.widget.mobFeedback.button,
                 style: KButtonStyles.filterButtonStyleBorderWhite,
                 child: Text(
                   context.l10n.send,
@@ -61,8 +64,9 @@ class MobFeedbackWidget extends StatelessWidget {
                     color: AppColors.materialThemeKeyColorsSecondary,
                   ),
                 ),
-                onPressed: () =>
-                    onSubmit(''), //() => widget.onSubmit(controller.text),
+                onPressed: () => onSubmit(
+                  _.message.value,
+                ), //() => widget.onSubmit(controller.text),
               ),
             ),
           ],

@@ -1,3 +1,4 @@
+import 'package:feedback/feedback.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -33,6 +34,10 @@ extension PumpApp on WidgetTester {
             create: (context) =>
                 GetIt.I.get<NetworkCubit>()..networkInitialized(),
           ),
+          if (!KTest.testIsWeb)
+            BlocProvider(
+              create: (context) => GetIt.I.get<MobFeedbackBloc>(),
+            ),
         ],
         child: BlocBuilder<AuthenticationBloc, AuthenticationState>(
           builder: (context, state) => mockGoRouter == null
@@ -53,6 +58,29 @@ extension PumpApp on WidgetTester {
   }
 
   Widget _body({
+    required Widget widget,
+    required Locale currentLocale,
+  }) =>
+      KTest.testIsWeb
+          ? body(
+              widget: widget,
+              currentLocale: currentLocale,
+            )
+          : BetterFeedback(
+              localizationsDelegates: locale,
+              localeOverride: currentLocale,
+              mode: FeedbackMode.navigate,
+              feedbackBuilder: (context, onSubmit, scrollController) =>
+                  MobFeedbackWidget(
+                onSubmit: onSubmit,
+                // scrollController: scrollController,
+              ),
+              child: body(
+                widget: widget,
+                currentLocale: currentLocale,
+              ),
+            );
+  Widget body({
     required Widget widget,
     required Locale currentLocale,
   }) =>

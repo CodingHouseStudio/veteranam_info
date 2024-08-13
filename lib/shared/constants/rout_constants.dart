@@ -110,4 +110,8 @@ abstract class KRoute {
     path: 'my',
     name: 'MyDiscounts',
   );
+  static const _RouteItem settings = _RouteItem(
+    path: '/',
+    name: 'Settings',
+  );
 }
