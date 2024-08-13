@@ -11,6 +11,7 @@ Future<void> homePumpAppHelper({
   required AuthenticationRepository mockAuthenticationRepository,
   // required IAppAuthenticationRepository mockAppAuthenticationRepository,
   required WidgetTester tester,
+  required IUrlRepository mockUrlRepository,
   MockGoRouter? mockGoRouter,
 }) async {
   // _registerFeedbackBloc(
@@ -21,6 +22,7 @@ Future<void> homePumpAppHelper({
   _registerAuthenticationBloc(
     mockAuthenticationRepository: mockAuthenticationRepository,
   );
+  _registerUrlCubit(mockUrlRepository);
   await tester.pumpApp(
     const HomeScreen(),
     mockGoRouter: mockGoRouter,
@@ -65,4 +67,16 @@ void _registerAuthenticationBloc({
     GetIt.I.unregister<AuthenticationBloc>();
   }
   GetIt.I.registerSingleton<AuthenticationBloc>(authenticationBloc);
+}
+
+void _registerUrlCubit(
+  IUrlRepository mockUrlRepository,
+) {
+  final urlCubit = UrlCubit(
+    urlRepository: mockUrlRepository,
+  );
+  if (GetIt.I.isRegistered<UrlCubit>()) {
+    GetIt.I.unregister<UrlCubit>();
+  }
+  GetIt.I.registerSingleton<UrlCubit>(urlCubit);
 }

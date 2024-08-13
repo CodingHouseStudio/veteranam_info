@@ -79,6 +79,7 @@ part 'widget/city_list.dart';
 part 'widget/menu_dialog.dart';
 part 'widget/mob_navigation.dart';
 part 'widget/mob_feedback.dart';
+part 'widget/email_button.dart';
 
 abstract class KWidgetkeys {
   static _ScreenKeys get screen => _ScreenKeys();

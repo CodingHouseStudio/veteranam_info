@@ -15,7 +15,7 @@ Future<void> footerHelper(
   await scrollingHelper(
     tester: tester,
     itemKey: KWidgetkeys.widget.footer.title,
-    offset: KTestConstants.scrollingUp200,
+    offset: KTestConstants.scrollingUp500,
   );
 
   expect(find.byKey(KWidgetkeys.widget.footer.title), findsOneWidget);
@@ -44,9 +44,11 @@ Future<void> footerHelper(
 
   expect(find.byKey(KWidgetkeys.widget.footer.contact), findsOneWidget);
 
-  expect(find.byKey(KWidgetkeys.widget.footer.emailText), findsOneWidget);
+  await emailButtonHelper(tester);
 
-  expect(find.byKey(KWidgetkeys.widget.footer.emailIcon), findsOneWidget);
+  // expect(find.byKey(KWidgetkeys.widget.footer.emailText), findsOneWidget);
+
+  // expect(find.byKey(KWidgetkeys.widget.footer.emailIcon), findsOneWidget);
 
   expect(find.byKey(KWidgetkeys.widget.footer.likedInIcon), findsOneWidget);
 

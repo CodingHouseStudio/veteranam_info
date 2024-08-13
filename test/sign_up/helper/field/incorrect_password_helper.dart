@@ -13,5 +13,5 @@ Future<void> incorrectPasswordHelper(
     dataIsCorrect: false,
   );
 
-  await dialogFailureSetHelper(tester: tester, isFailure: false);
+  await dialogSnackBarTextHelper(tester: tester, showDialog: false);
 }
