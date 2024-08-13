@@ -89,8 +89,8 @@ abstract class TitleWidget {
     required String title,
     required String titleSecondPart,
     required Key titleKey,
-    required String pointText,
-    required Key pointKey,
+    // required String pointText,
+    // required Key pointKey,
     required bool isDesk,
     EdgeInsets titleSecondPartPadding = EdgeInsets.zero,
     bool isRightArrow = true,
@@ -100,57 +100,58 @@ abstract class TitleWidget {
   }) =>
       [
         if (isDesk)
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          // Row(
+          //   crossAxisAlignment: CrossAxisAlignment.start,
+          //   children: [
+          //     Expanded(
+          //       child: TextPointWidget(
+          //         pointText,
+          //         key: pointKey,
+          //       ),
+          //     ),
+          //     Expanded(
+          //       flex: 4,
+          //       child:
+          Column(
+            key: titleKey,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Expanded(
-                child: TextPointWidget(
-                  pointText,
-                  key: pointKey,
-                ),
+              Text(
+                title,
+                textAlign: textAlign,
+                style: AppTextStyle.materialThemeDisplayLarge,
               ),
-              Expanded(
-                flex: 4,
-                child: Column(
-                  key: titleKey,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
+              Padding(
+                padding: titleSecondPartPadding,
+                child: Wrap(
+                  alignment: titleAlignment,
                   children: [
                     Text(
-                      title,
-                      textAlign: textAlign,
+                      titleSecondPart,
                       style: AppTextStyle.materialThemeDisplayLarge,
+                      textAlign: textAlign,
                     ),
-                    Padding(
-                      padding: titleSecondPartPadding,
-                      child: Wrap(
-                        alignment: titleAlignment,
-                        children: [
-                          Text(
-                            titleSecondPart,
-                            style: AppTextStyle.materialThemeDisplayLarge,
-                            textAlign: textAlign,
-                          ),
-                          KSizedBox.kWidthSizedBox24,
-                          IconWidget(
-                            // key: KWidgetkeys.screen.feedback.titleIcon,
-                            icon: isRightArrow
-                                ? KIcon.arrowDownRight
-                                : KIcon.arrowDownLeft,
-                          ),
-                        ],
-                      ),
+                    KSizedBox.kWidthSizedBox24,
+                    IconWidget(
+                      // key: KWidgetkeys.screen.feedback.titleIcon,
+                      icon: isRightArrow
+                          ? KIcon.arrowDownRight
+                          : KIcon.arrowDownLeft,
                     ),
                   ],
                 ),
               ),
             ],
           )
-        else ...[
-          TextPointWidget(
-            pointText,
-            key: pointKey,
-          ),
-          KSizedBox.kHeightSizedBox16,
+        //     ),
+        //   ],
+        // )
+        else
+          // TextPointWidget(
+          //   pointText,
+          //   key: pointKey,
+          // ),
+          // KSizedBox.kHeightSizedBox16,
           Row(
             key: titleKey,
             crossAxisAlignment: iconCrossAxisAlignment,
@@ -170,7 +171,6 @@ abstract class TitleWidget {
               ),
             ],
           ),
-        ],
         KSizedBox.kHeightSizedBox32,
         const Divider(
           color: AppColors.materialThemeKeyColorsNeutral,
