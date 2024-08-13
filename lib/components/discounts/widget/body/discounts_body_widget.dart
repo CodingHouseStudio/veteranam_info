@@ -1,4 +1,3 @@
-import 'package:feedback/feedback.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -37,18 +36,8 @@ class DiscountBodyWidget extends StatelessWidget {
                   .read<DiscountWatcherBloc>()
                   .add(const DiscountWatcherEvent.started()),
               titleChildWidgetsFunction: ({required isDesk}) => [
-                ElevatedButton(
-                  child: const Text('Provide feedback'),
-                  onPressed: () {
-                    BetterFeedback.of(context).show(
-                      (feedback) async => context.read<MobFeedbackBloc>().add(
-                            MobFeedbackEvent.send(feedback.screenshot),
-                          ),
-                    );
-                  },
-                ),
                 KSizedBox.kHeightSizedBox24,
-                if (KTest.testIsWeb)
+                if (KTest.testIsWeb) ...[
                   ...TitleWidget.pointTitleWidgetList(
                     title: context.l10n.specialOffers,
                     titleKey: KWidgetkeys.screen.discounts.title,
@@ -61,10 +50,11 @@ class DiscountBodyWidget extends StatelessWidget {
                     iconCrossAxisAlignment: CrossAxisAlignment.end,
                     isRightArrow: false,
                   ),
-                if (isDesk)
-                  KSizedBox.kHeightSizedBox40
-                else if (KTest.testIsWeb)
-                  KSizedBox.kHeightSizedBox24,
+                  if (isDesk)
+                    KSizedBox.kHeightSizedBox40
+                  else
+                    KSizedBox.kHeightSizedBox24,
+                ],
                 if (isDesk)
                   Row(
                     children: [

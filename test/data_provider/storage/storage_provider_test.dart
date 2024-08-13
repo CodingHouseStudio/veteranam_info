@@ -92,6 +92,7 @@ void main() {
           ref: null,
         ),
         id: KTestText.storyModelItems.last.id,
+        collecltionName: FirebaseCollectionName.stroies,
       );
 
       verifyNeverMethod(
@@ -106,6 +107,7 @@ void main() {
       await storageService.saveImage(
         imageModel: KTestText.storyModelItems.last.image!,
         id: KTestText.storyModelItems.last.id,
+        collecltionName: FirebaseCollectionName.stroies,
       );
 
       verifyMethod(

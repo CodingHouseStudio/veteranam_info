@@ -16,10 +16,12 @@ class FilterItem {
       (context.isEnglish && valueEN != null ? valueEN : value).toString();
 }
 
-enum UrlFailure {
-  share,
-  link,
+enum UrlEnum {
+  shareError,
+  linkError,
+  copyError,
   error,
+  copySucceed,
 }
 
 enum CategoryEnum { all }
