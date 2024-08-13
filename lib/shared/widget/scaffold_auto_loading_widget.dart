@@ -142,71 +142,77 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
                         : 0)
                 : KPadding.kPaddingSize16),
           );
-          final scaffold = Scaffold(
-            bottomNavigationBar: KTest.testIsWeb
-                ? null
-                : MobNavigationWidget(
-                    index: context.l10n.discounts == widget.pageName ? 0 : 1,
-                  ),
-            appBar: AppBar(
-              backgroundColor: AppColors.materialThemeWhite,
-              toolbarHeight: KSize.kAppBarHeight,
-            ),
-            body: KeyboardScrollView(
-              widgetKey: KWidgetkeys.widget.scaffold.scroll,
-              // physics: KTest.scroll,
-              slivers: [
-                if (KTest.testIsWeb || widget.pageName != null)
-                  SliverPersistentHeader(
-                    delegate: NawbarWidget(
-                      isDesk: isDesk,
-                      isTablet: isTablet,
-                      pageName: widget.pageName,
-                      showMobileNawbar: widget.showMobileNawbar,
-                      pageNameKey: widget.pageNameKey,
-                    ),
-                  ),
-                if (titleChildWidget != null)
-                  SliverPadding(
-                    padding: padding,
-                    sliver: SliverList.builder(
-                      addAutomaticKeepAlives: false,
-                      addRepaintBoundaries: false,
-                      itemBuilder: (context, index) {
-                        return titleChildWidget.elementAt(index);
-                      },
-                      itemCount: titleChildWidget.length,
-                    ),
-                  ),
-                SliverPadding(
-                  padding: isDesk && widget.mainDeskPadding != null
-                      ? padding.add(
-                          widget.mainDeskPadding!(
-                            maxWidth: constraints.maxWidth,
-                          ),
-                        )
-                      : padding,
-                  sliver: widget.mainRightChildWidget != null && isDesk
-                      ? RowSliver(
-                          right: mainBody(mainChildWidget),
-                          left: SliverPersistentHeader(
-                            pinned: true,
-                            delegate: NawbarWidget(
-                              isDesk: isDesk,
-                              childWidget: widget.mainRightChildWidget,
-                              maxMinHeight: constraints.maxHeight,
-                              isTablet: isTablet,
-                            ),
-                          ),
-                          leftWidthPercent: 0.3,
-                        )
-                      : mainBody(mainChildWidget),
+          final scaffold = FocusTraversalGroup(
+            child: Semantics(
+              child: Scaffold(
+                bottomNavigationBar: KTest.testIsWeb
+                    ? null
+                    : MobNavigationWidget(
+                        index:
+                            context.l10n.discounts == widget.pageName ? 0 : 1,
+                      ),
+                appBar: AppBar(
+                  backgroundColor: AppColors.materialThemeWhite,
+                  toolbarHeight: KSize.kAppBarHeight,
                 ),
-              ],
-              semanticChildCount:
-                  mainChildWidget.length + (titleChildWidget?.length ?? 0) + 1,
-              scrollController: _scrollController,
-              maxHeight: constraints.maxHeight,
+                body: KeyboardScrollView(
+                  widgetKey: KWidgetkeys.widget.scaffold.scroll,
+                  // physics: KTest.scroll,
+                  slivers: [
+                    if (KTest.testIsWeb || widget.pageName != null)
+                      SliverPersistentHeader(
+                        delegate: NawbarWidget(
+                          isDesk: isDesk,
+                          isTablet: isTablet,
+                          pageName: widget.pageName,
+                          showMobileNawbar: widget.showMobileNawbar,
+                          pageNameKey: widget.pageNameKey,
+                        ),
+                      ),
+                    if (titleChildWidget != null)
+                      SliverPadding(
+                        padding: padding,
+                        sliver: SliverList.builder(
+                          addAutomaticKeepAlives: false,
+                          addRepaintBoundaries: false,
+                          itemBuilder: (context, index) {
+                            return titleChildWidget.elementAt(index);
+                          },
+                          itemCount: titleChildWidget.length,
+                        ),
+                      ),
+                    SliverPadding(
+                      padding: isDesk && widget.mainDeskPadding != null
+                          ? padding.add(
+                              widget.mainDeskPadding!(
+                                maxWidth: constraints.maxWidth,
+                              ),
+                            )
+                          : padding,
+                      sliver: widget.mainRightChildWidget != null && isDesk
+                          ? RowSliver(
+                              right: mainBody(mainChildWidget),
+                              left: SliverPersistentHeader(
+                                pinned: true,
+                                delegate: NawbarWidget(
+                                  isDesk: isDesk,
+                                  childWidget: widget.mainRightChildWidget,
+                                  maxMinHeight: constraints.maxHeight,
+                                  isTablet: isTablet,
+                                ),
+                              ),
+                              leftWidthPercent: 0.3,
+                            )
+                          : mainBody(mainChildWidget),
+                    ),
+                  ],
+                  semanticChildCount: mainChildWidget.length +
+                      (titleChildWidget?.length ?? 0) +
+                      1,
+                  scrollController: _scrollController,
+                  maxHeight: constraints.maxHeight,
+                ),
+              ),
             ),
           );
           return KTest.testIsWeb ? scaffold : SafeArea(child: scaffold);
