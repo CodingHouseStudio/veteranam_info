@@ -1,5 +1,7 @@
 import 'dart:math';
+import 'dart:typed_data';
 import 'package:collection/collection.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/widgets.dart' show BuildContext, visibleForTesting;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -188,23 +190,6 @@ extension ContextExtensions on BuildContext {
       read<AuthenticationBloc>().state.userSetting.locale.isEnglish;
 }
 
-extension UrlEnumValue on UrlEnum {
-  String value(BuildContext context) {
-    switch (this) {
-      case UrlEnum.error:
-        return context.l10n.error;
-      case UrlEnum.shareError:
-        return context.l10n.shareFailure;
-      case UrlEnum.linkError:
-        return context.l10n.linkFailure;
-      case UrlEnum.copyError:
-        return context.l10n.copyFailure;
-      case UrlEnum.copySucceed:
-        return context.l10n.copyEmail;
-    }
-  }
-}
-
 extension DiscountEnumExtensions on DiscountEnum {
   String getValue(BuildContext context) {
     switch (this) {
@@ -221,6 +206,33 @@ extension CategoryEnumExtensions on CategoryEnum {
     switch (this) {
       case CategoryEnum.all:
         return context.l10n.all;
+    }
+  }
+}
+
+extension ReferenceExtension on Reference {
+  UploadTask putImage(Uint8List data, [SettableMetadata? metadata]) {
+    if (KTest.testIsWeb) {
+      return putBlob(data, metadata);
+    } else {
+      return putData(data, metadata);
+    }
+  }
+}
+
+extension UrlEnumValue on UrlEnum {
+  String value(BuildContext context) {
+    switch (this) {
+      case UrlEnum.error:
+        return context.l10n.error;
+      case UrlEnum.shareError:
+        return context.l10n.shareFailure;
+      case UrlEnum.linkError:
+        return context.l10n.linkFailure;
+      case UrlEnum.copyError:
+        return context.l10n.copyFailure;
+      case UrlEnum.copySucceed:
+        return context.l10n.copyEmail;
     }
   }
 }

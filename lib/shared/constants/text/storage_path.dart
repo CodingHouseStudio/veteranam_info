@@ -5,11 +5,11 @@ abstract class StoragePath {
   static const _standartImageFileExtension = 'png';
   static const _resume = 'resume';
   static String getImagePath({
-    required String collenction,
+    required String collection,
     required String modelId,
     String? imageName,
   }) =>
-      '$collenction/$modelId/$_image/${imageName ?? '${ExtendedDateTime.id}.$_standartImageFileExtension'}';
+      '$collection/$modelId/$_image/${imageName ?? '${ExtendedDateTime.id}.$_standartImageFileExtension'}';
 
   static String getResumePath({
     required String collenction,

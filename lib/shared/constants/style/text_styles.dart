@@ -389,6 +389,7 @@ abstract class AppTextStyle {
     height: 1.5,
     fontWeight: FontWeight.w500,
     letterSpacing: 0.15,
+    color: AppColors.materialThemeKeyColorsSecondary,
   );
   static const TextStyle materialThemeTitleMediumBlack = TextStyle(
     fontFamily: 'Gilroy',

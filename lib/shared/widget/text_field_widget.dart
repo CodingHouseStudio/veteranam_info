@@ -37,6 +37,7 @@ class TextFieldWidget extends StatefulWidget {
     this.text,
     this.suffixIconPadding,
     this.inputFormatterList,
+    this.showErrorText,
   });
   final Key widgetKey;
   final TextAlign? textAlign;
@@ -70,6 +71,7 @@ class TextFieldWidget extends StatefulWidget {
   final String? text;
   final double? suffixIconPadding;
   final List<TextInputFormatter>? inputFormatterList;
+  final bool? showErrorText;
 
   @override
   State<TextFieldWidget> createState() => _TextFieldWidgetState();
@@ -142,7 +144,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
           focusedErrorBorder: widget.border,
           fillColor: widget.fillColor,
           hintText: widget.hintText,
-          errorText: widget.errorText,
+          errorText: widget.showErrorText ?? true ? widget.errorText : null,
           suffixIcon: Padding(
             padding: EdgeInsets.only(
               right: widget.suffixIconPadding ?? KPadding.kPaddingSize16,

@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:cloud_firestore/cloud_firestore.dart' show FirebaseException;
 import 'package:dartz/dartz.dart';
 import 'package:get_it/get_it.dart';
@@ -7,11 +9,31 @@ import 'package:veteranam/shared/shared.dart';
 @Singleton(as: IFeedbackRepository)
 class FeedbackRepository implements IFeedbackRepository {
   final FirestoreService _firestoreService = GetIt.I.get<FirestoreService>();
+  final StorageService _storageService = GetIt.I.get<StorageService>();
 
   @override
   Future<Either<SomeFailure, bool>> sendFeedback(FeedbackModel feedback) async {
     try {
       await _firestoreService.addFeedback(feedback);
+      return const Right(true);
+    } on FirebaseException catch (e) {
+      return Left(SendFailure.fromCode(e).status);
+    } catch (e) {
+      return const Left(SomeFailure.serverError());
+    }
+  }
+
+  @override
+  Future<Either<SomeFailure, bool>> sendMobFeedback({
+    required FeedbackModel feedback,
+    required Uint8List image,
+  }) async {
+    try {
+      final feedbackModel = await _addImage(
+        feedback: feedback,
+        image: image,
+      );
+      await _firestoreService.addMobFeedback(feedbackModel);
       return const Right(true);
     } on FirebaseException catch (e) {
       return Left(SendFailure.fromCode(e).status);
@@ -40,5 +62,25 @@ class FeedbackRepository implements IFeedbackRepository {
     } catch (e) {
       return const Left(SomeFailure.serverError());
     }
+  }
+
+  Future<FeedbackModel> _addImage({
+    required Uint8List image,
+    required FeedbackModel feedback,
+  }) async {
+    final downloadURL = await _storageService.saveUseUint8ListImage(
+      image: image,
+      id: feedback.id,
+      collecltionName: FirebaseCollectionName.mobFeedback,
+    );
+    if (downloadURL.isNotEmpty) {
+      return feedback.copyWith(
+        image: ImageModel(
+          downloadURL: downloadURL,
+        ),
+      );
+    }
+
+    return feedback;
   }
 }

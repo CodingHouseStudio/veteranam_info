@@ -15,6 +15,9 @@ ThemeData themeData = ThemeData(
     onError: AppColors.materialThemeWhite,
     brightness: Brightness.light,
   ),
+  tooltipTheme: const TooltipThemeData(
+    preferBelow: false,
+  ),
   appBarTheme: const AppBarTheme(
     centerTitle: true,
     backgroundColor: AppColors.materialThemeKeyColorsNeutralVariant,

@@ -74,16 +74,15 @@ class ReportDialogWidget extends StatelessWidget {
               //           .user
               //           ?.isAnonymously ??
               //       false,
-              //   errorText: _.formState == ReportEnum.nextInvalidData &&
-              //           (context
-              //                   .read<AuthenticationBloc>()
-              //                   .state
-              //                   .user
-              //                   ?.isAnonymously ??
-              //               true)
-              //       ? _.email?.error.value(context) ??
-              //           context.l10n.fieldCannotBeEmpty
-              //       : null,
+              //   errorText: _.email?.error.value(context) ??
+              //       context.l10n.fieldCannotBeEmpty,
+              //   showErrorText: _.formState == ReportEnum.nextInvalidData &&
+              //       (context
+              //               .read<AuthenticationBloc>()
+              //               .state
+              //               .user
+              //               ?.isAnonymously ??
+              //           true),
               //   text: context.read<AuthenticationBloc>().state.user?.email,
               //   inputFormatterList: [EmailInputFormatter()],
               // ),
@@ -95,11 +94,10 @@ class ReportDialogWidget extends StatelessWidget {
                     .add(ReportEvent.messageUpdated(text)),
                 isDesk: isDesk,
                 labelText: context.l10n.writeYourMessage,
-                errorText: _.formState == ReportEnum.nextInvalidData &&
-                        _.reasonComplaint == ReasonComplaint.other
-                    ? _.message?.error.value(context) ??
-                        context.l10n.fieldCannotBeEmpty
-                    : null,
+                errorText: _.message?.error.value(context) ??
+                    context.l10n.fieldCannotBeEmpty,
+                showErrorText: _.formState == ReportEnum.nextInvalidData &&
+                    _.reasonComplaint == ReasonComplaint.other,
               ),
             ] else ...[
               Text(

@@ -28,7 +28,7 @@ void configureDependenciesTest() {
   );
   // Repositories
   GetIt.I.registerLazySingleton<IStorage>(SecureStorageRepository.new);
-  // GetIt.I.registerSingleton<IFeedbackRepository>(FeedbackRepository());
+  GetIt.I.registerSingleton<IFeedbackRepository>(FeedbackRepository());
   GetIt.I.registerSingleton<IHomeRepository>(HomeRepository());
   GetIt.I.registerSingleton<IAppAuthenticationRepository>(
     AppAuthenticationRepository(
@@ -124,6 +124,12 @@ void configureDependenciesTest() {
   GetIt.I.registerSingleton<NetworkCubit>(
     NetworkCubit(
       networkRepository: GetIt.I.get<NetworkRepository>(),
+    ),
+  );
+  GetIt.I.registerSingleton<MobFeedbackBloc>(
+    MobFeedbackBloc(
+      appAuthenticationRepository: GetIt.I.get<IAppAuthenticationRepository>(),
+      feedbackRepository: GetIt.I.get<IFeedbackRepository>(),
     ),
   );
   // GetIt.I.registerSingleton<MyDiscountsWatcherBloc>(
