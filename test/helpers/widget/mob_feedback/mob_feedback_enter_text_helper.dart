@@ -20,7 +20,10 @@ Future<void> mobFeedbackEnterTextHelper({
     findsOneWidget,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.widget.mobFeedback.button));
+  await tester.tap(
+    find.byKey(KWidgetkeys.widget.mobFeedback.button),
+    warnIfMissed: false,
+  );
 
   await tester.pumpAndSettle();
 }
