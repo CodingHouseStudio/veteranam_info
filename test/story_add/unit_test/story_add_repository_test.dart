@@ -38,9 +38,10 @@ void main() {
           (realInvocation) async {},
         );
         when(
-          mockStorageService.saveStoryImage(
+          mockStorageService.saveImage(
             imageModel: KTestText.storyModelItems.last.image!,
-            storyId: KTestText.storyModelItems.last.id,
+            id: KTestText.storyModelItems.last.id,
+            collecltionName: FirebaseCollectionName.stroies,
           ),
         ).thenAnswer(
           (realInvocation) async => KTestText.downloadURL,
@@ -92,9 +93,10 @@ void main() {
           ),
         ).thenThrow(FirebaseException(plugin: KGroupText.failure));
         when(
-          mockStorageService.saveStoryImage(
+          mockStorageService.saveImage(
             imageModel: KTestText.storyModelItems.last.image!,
-            storyId: KTestText.storyModelItems.last.id,
+            id: KTestText.storyModelItems.last.id,
+            collecltionName: FirebaseCollectionName.stroies,
           ),
         ).thenThrow(FirebaseException(plugin: KGroupText.failure));
         if (GetIt.I.isRegistered<FirestoreService>()) {

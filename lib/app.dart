@@ -1,3 +1,5 @@
+import 'package:feedback/feedback.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -30,6 +32,10 @@ class App extends StatelessWidget {
           create: (context) =>
               GetIt.I.get<NetworkCubit>()..networkInitialized(),
         ),
+        if (!kIsWeb)
+          BlocProvider(
+            create: (context) => GetIt.I.get<MobFeedbackBloc>(),
+          ),
       ],
       child: const AppWidget(),
     );
@@ -48,16 +54,31 @@ class AppWidget extends StatelessWidget {
         if (_.status == AuthenticationStatus.unknown) {
           return const SizedBox.shrink();
         }
-        return MaterialApp.router(
-          key: KWidgetkeys.screen.app.screen,
-          theme: themeData,
-          scrollBehavior: CustomScrollBehavior(),
-          localizationsDelegates: locale,
-          locale: _.userSetting.locale.value,
-          supportedLocales: supportedLocales,
-          routerConfig: router,
-        );
+        final localeValue = _.userSetting.locale.value;
+        return kIsWeb
+            ? body(localeValue)
+            : BetterFeedback(
+                localizationsDelegates: locale,
+                localeOverride: localeValue,
+                mode: FeedbackMode.navigate,
+                feedbackBuilder: (context, onSubmit, scrollController) =>
+                    MobFeedbackWidget(
+                  onSubmit: onSubmit,
+                  // scrollController: scrollController,
+                ),
+                child: body(localeValue),
+              );
       },
     );
   }
+
+  Widget body(Locale localeValue) => MaterialApp.router(
+        key: KWidgetkeys.screen.app.screen,
+        theme: themeData,
+        scrollBehavior: CustomScrollBehavior(),
+        localizationsDelegates: locale,
+        locale: localeValue,
+        supportedLocales: supportedLocales,
+        routerConfig: router,
+      );
 }
