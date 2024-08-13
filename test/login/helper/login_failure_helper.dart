@@ -10,5 +10,5 @@ Future<void> loginFailureHelper(
     tester,
   );
 
-  await dialogFailureSetHelper(tester: tester);
+  await dialogSnackBarTextHelper(tester: tester);
 }

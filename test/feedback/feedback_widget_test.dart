@@ -18,10 +18,12 @@ void main() {
   group('${KScreenBlocName.feedback} ', () {
     late IFeedbackRepository mockFeedbackRepository;
     late IAppAuthenticationRepository mockAppAuthenticationRepository;
+    late IUrlRepository mockUrlRepository;
     setUp(() {
       ExtendedDateTime.current = KTestText.dateTime;
       ExtendedDateTime.id = KTestText.feedbackModel.id;
 
+      mockUrlRepository = MockIUrlRepository();
       mockFeedbackRepository = MockIFeedbackRepository();
       when(mockFeedbackRepository.sendFeedback(KTestText.feedbackModel))
           .thenAnswer(
@@ -38,6 +40,9 @@ void main() {
       when(mockAppAuthenticationRepository.currentUser).thenAnswer(
         (realInvocation) => KTestText.user,
       );
+      when(mockUrlRepository.copy(KAppText.email)).thenAnswer(
+        (invocation) async => const Right(true),
+      );
     });
 
     group('${KGroupText.failure} ', () {
@@ -50,6 +55,7 @@ void main() {
           mockFeedbackRepository: mockFeedbackRepository,
           tester: tester,
           mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          mockUrlRepository: mockUrlRepository,
         );
 
         await feedbackFailureHelper(tester);
@@ -63,6 +69,7 @@ void main() {
           mockFeedbackRepository: mockFeedbackRepository,
           tester: tester,
           mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          mockUrlRepository: mockUrlRepository,
         );
 
         await feedbackFailureHelper(tester);
@@ -76,6 +83,7 @@ void main() {
           mockFeedbackRepository: mockFeedbackRepository,
           tester: tester,
           mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          mockUrlRepository: mockUrlRepository,
         );
 
         await feedbackFailureHelper(tester);
@@ -87,6 +95,7 @@ void main() {
         mockFeedbackRepository: mockFeedbackRepository,
         tester: tester,
         mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+        mockUrlRepository: mockUrlRepository,
       );
 
       await feedbackInitialHelper(tester);
@@ -97,6 +106,7 @@ void main() {
         mockFeedbackRepository: mockFeedbackRepository,
         tester: tester,
         mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+        mockUrlRepository: mockUrlRepository,
       );
 
       await correctSaveHelper(tester);
@@ -107,6 +117,7 @@ void main() {
         mockFeedbackRepository: mockFeedbackRepository,
         tester: tester,
         mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+        mockUrlRepository: mockUrlRepository,
       );
 
       await incorrectSaveHelper(tester);
@@ -117,6 +128,7 @@ void main() {
         mockFeedbackRepository: mockFeedbackRepository,
         tester: tester,
         mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+        mockUrlRepository: mockUrlRepository,
       );
 
       await feedbackEmailTapHelper(tester);
@@ -140,11 +152,18 @@ void main() {
       late MockGoRouter mockGoRouter;
       setUp(() => mockGoRouter = MockGoRouter());
       testWidgets('${KGroupText.intial} ', (tester) async {
+        when(mockUrlRepository.copy(KTestText.downloadURL)).thenAnswer(
+          (invocation) async => const Right(true),
+        );
+        when(mockUrlRepository.copy(KAppText.email)).thenAnswer(
+          (invocation) async => const Left(SomeFailure.copy()),
+        );
         await feedbackPumpAppHelper(
           mockFeedbackRepository: mockFeedbackRepository,
           tester: tester,
           mockGoRouter: mockGoRouter,
           mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          mockUrlRepository: mockUrlRepository,
         );
 
         await feedbackInitialHelper(tester);
@@ -156,6 +175,7 @@ void main() {
             tester: tester,
             mockGoRouter: mockGoRouter,
             mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+            mockUrlRepository: mockUrlRepository,
           );
 
           await feedbackNavigationHelper(

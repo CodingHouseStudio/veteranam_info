@@ -10,5 +10,5 @@ Future<void> dialogFailureGetHelper({
 
   expect(find.byKey(KWidgetkeys.widget.dialogs.failureButton), matcher);
 
-  expect(find.byKey(KWidgetkeys.widget.dialogs.failureText), matcher);
+  expect(find.byKey(KWidgetkeys.widget.dialogs.snackBarText), matcher);
 }

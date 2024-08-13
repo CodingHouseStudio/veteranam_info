@@ -11,12 +11,12 @@ void main() {
 
   setUpAll(setUpGlobal);
   group('${KScreenBlocName.url} ', () {
-    late UrlCubit discountLinkCubit;
+    late UrlCubit mockUrlCubit;
     late IUrlRepository mockUrlRepository;
 
     setUp(() {
       mockUrlRepository = MockIUrlRepository();
-      discountLinkCubit = UrlCubit(
+      mockUrlCubit = UrlCubit(
         urlRepository: mockUrlRepository,
       );
     });
@@ -30,14 +30,14 @@ void main() {
         when(mockUrlRepository.share(KTestText.downloadURL)).thenAnswer(
           (invocation) async => const Right(true),
         );
-        when(mockUrlRepository.copy(KTestText.downloadURL)).thenAnswer(
+        when(mockUrlRepository.copy(KAppText.email)).thenAnswer(
           (invocation) async => const Right(true),
         );
       });
       blocTest<UrlCubit, UrlEnum?>(
         'emits [discountWatcherState()]'
         ' when load discountModel list',
-        build: () => discountLinkCubit,
+        build: () => mockUrlCubit,
         act: (bloc) async => bloc.launchUrl(url: KTestText.downloadURL),
         expect: () async => [
           null,
@@ -46,7 +46,7 @@ void main() {
       blocTest<UrlCubit, UrlEnum?>(
         'emits [discountWatcherState()]'
         ' when load discountModel list',
-        build: () => discountLinkCubit,
+        build: () => mockUrlCubit,
         act: (bloc) async => bloc.share(KTestText.downloadURL),
         expect: () async => [
           null,
@@ -55,8 +55,8 @@ void main() {
       blocTest<UrlCubit, UrlEnum?>(
         'emits [discountWatcherState()]'
         ' when copy email',
-        build: () => discountLinkCubit,
-        act: (bloc) async => bloc.copy(KTestText.downloadURL),
+        build: () => mockUrlCubit,
+        act: (bloc) async => bloc.copy(KAppText.email),
         expect: () async => [
           UrlEnum.copySucceed,
         ],
@@ -64,7 +64,7 @@ void main() {
       blocTest<UrlCubit, UrlEnum?>(
         'emits [discountWatcherState()]'
         ' when email was copied',
-        build: () => discountLinkCubit,
+        build: () => mockUrlCubit,
         act: (bloc) async => bloc.reset(),
         expect: () async => [
           null,
@@ -81,14 +81,14 @@ void main() {
         when(mockUrlRepository.share(KTestText.downloadURL)).thenAnswer(
           (invocation) async => const Left(SomeFailure.share()),
         );
-        when(mockUrlRepository.copy(KTestText.downloadURL)).thenAnswer(
+        when(mockUrlRepository.copy(KAppText.email)).thenAnswer(
           (invocation) async => const Left(SomeFailure.copy()),
         );
       });
       blocTest<UrlCubit, UrlEnum?>(
         'emits [discountWatcherState()]'
         ' when load discountModel list',
-        build: () => discountLinkCubit,
+        build: () => mockUrlCubit,
         act: (bloc) async => bloc.launchUrl(url: KTestText.downloadURL),
         expect: () async => [
           UrlEnum.linkError,
@@ -97,7 +97,7 @@ void main() {
       blocTest<UrlCubit, UrlEnum?>(
         'emits [discountWatcherState()]'
         ' when load discountModel list',
-        build: () => discountLinkCubit,
+        build: () => mockUrlCubit,
         act: (bloc) async => bloc.share(KTestText.downloadURL),
         expect: () async => [
           UrlEnum.shareError,
@@ -106,8 +106,8 @@ void main() {
       blocTest<UrlCubit, UrlEnum?>(
         'emits [discountWatcherState()]'
         ' when copy email',
-        build: () => discountLinkCubit,
-        act: (bloc) async => bloc.copy(KTestText.downloadURL),
+        build: () => mockUrlCubit,
+        act: (bloc) async => bloc.copy(KAppText.email),
         expect: () async => [
           UrlEnum.copyError,
         ],

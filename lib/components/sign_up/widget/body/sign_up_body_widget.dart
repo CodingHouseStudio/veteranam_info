@@ -10,7 +10,7 @@ class SignUpBodyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<SignUpBloc, SignUpState>(
-      listener: (context, state) => context.dialog.showSendErrorDialog(
+      listener: (context, state) => context.dialog.showSnackBardTextDialog(
         state.failure?.value(context),
       ),
       builder: (context, _) {

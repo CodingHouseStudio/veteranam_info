@@ -37,7 +37,7 @@ class _FeedbackBodyWidgetState extends State<FeedbackBodyWidget> {
           emailController.clear();
           messageController.clear();
         }
-        context.dialog.showSendErrorDialog(
+        context.dialog.showSnackBardTextDialog(
           state.failure?.value(context),
         );
       },

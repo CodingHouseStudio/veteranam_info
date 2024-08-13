@@ -18,12 +18,14 @@ void main() {
   group('${KScreenBlocName.home} ${KScreenBlocName.prod}', () {
     late AuthenticationRepository mockAuthenticationRepository;
     late IHomeRepository mockHomeRepository;
+    late IUrlRepository mockUrlRepository;
     setUp(() {
       Config.value = Config.production;
       ExtendedDateTime.current = KTestText.dateTime;
       ExtendedDateTime.id = KTestText.feedbackModel.id;
       mockHomeRepository = MockIHomeRepository();
       mockAuthenticationRepository = MockAuthenticationRepository();
+      mockUrlRepository = MockIUrlRepository();
 
       when(mockAuthenticationRepository.currentUser).thenAnswer(
         (realInvocation) => User.empty,
@@ -37,6 +39,9 @@ void main() {
       when(mockHomeRepository.getQuestions()).thenAnswer(
         (invocation) async => Right(KTestText.questionModelItems),
       );
+      when(mockUrlRepository.copy(KAppText.email)).thenAnswer(
+        (invocation) async => const Right(true),
+      );
     });
 
     testWidgets('${KGroupText.intial} ', (tester) async {
@@ -45,6 +50,7 @@ void main() {
         mockHomeRepository: mockHomeRepository,
         mockAuthenticationRepository: mockAuthenticationRepository,
         tester: tester,
+        mockUrlRepository: mockUrlRepository,
         // mockAppAuthenticationRepository:
         // mockAppAuthenticationRepository,
       );
@@ -62,6 +68,7 @@ void main() {
           mockAuthenticationRepository: mockAuthenticationRepository,
           tester: tester,
           mockGoRouter: mockGoRouter,
+          mockUrlRepository: mockUrlRepository,
           // mockAppAuthenticationRepository:
           // mockAppAuthenticationRepository,
         );
@@ -76,6 +83,7 @@ void main() {
             mockAuthenticationRepository: mockAuthenticationRepository,
             tester: tester,
             mockGoRouter: mockGoRouter,
+            mockUrlRepository: mockUrlRepository,
             // mockAppAuthenticationRepository:
             // mockAppAuthenticationRepository,
           );

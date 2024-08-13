@@ -9,12 +9,14 @@ Future<void> feedbackPumpAppHelper({
   required IFeedbackRepository mockFeedbackRepository,
   required IAppAuthenticationRepository mockAppAuthenticationRepository,
   required WidgetTester tester,
+  required IUrlRepository mockUrlRepository,
   MockGoRouter? mockGoRouter,
 }) async {
   _registerFeedbackBloc(
     mockFeedbackRepository: mockFeedbackRepository,
     mockAppAuthenticationRepository: mockAppAuthenticationRepository,
   );
+  _registerUrlCubit(mockUrlRepository);
   await tester.pumpApp(const FeedbackScreen(), mockGoRouter: mockGoRouter);
 
   expect(
@@ -37,4 +39,16 @@ void _registerFeedbackBloc({
     GetIt.I.unregister<FeedbackBloc>();
   }
   GetIt.I.registerSingleton<FeedbackBloc>(feedbackBloc);
+}
+
+void _registerUrlCubit(
+  IUrlRepository mockUrlRepository,
+) {
+  final urlCubit = UrlCubit(
+    urlRepository: mockUrlRepository,
+  );
+  if (GetIt.I.isRegistered<UrlCubit>()) {
+    GetIt.I.unregister<UrlCubit>();
+  }
+  GetIt.I.registerSingleton<UrlCubit>(urlCubit);
 }
