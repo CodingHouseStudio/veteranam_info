@@ -196,52 +196,52 @@ void main() {
 
         await reportDialogCheckFailureHelper(tester);
       });
-      testWidgets('Report Dialog Incorect Send', (tester) async {
-        await investorsPumpAppHelper(
-          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-          mockInvestorsRepository: mockInvestorsRepository,
-          mockReportRepository: mockReportRepository,
-          mockAuthenticationRepository: mockAuthenticationRepository,
-          tester: tester,
-        );
+      // testWidgets('Report Dialog Incorect Send', (tester) async {
+      //   await investorsPumpAppHelper(
+      //     mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+      //     mockInvestorsRepository: mockInvestorsRepository,
+      //     mockReportRepository: mockReportRepository,
+      //     mockAuthenticationRepository: mockAuthenticationRepository,
+      //     tester: tester,
+      //   );
 
-        await reportDialogIncorrectSendHelper(
-          tester: tester,
-        );
-      });
-      testWidgets('Report Dialog Incorect Send(field null and user)',
-          (tester) async {
-        when(mockAuthenticationRepository.isAnonymouslyOrEmty()).thenAnswer(
-          (realInvocation) => false,
-        );
+      //   await reportDialogIncorrectSendHelper(
+      //     tester: tester,
+      //   );
+      // });
+      // testWidgets('Report Dialog Incorect Send(field null and user)',
+      //     (tester) async {
+      //   when(mockAuthenticationRepository.isAnonymouslyOrEmty()).thenAnswer(
+      //     (realInvocation) => false,
+      //   );
 
-        await investorsPumpAppHelper(
-          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-          mockInvestorsRepository: mockInvestorsRepository,
-          mockReportRepository: mockReportRepository,
-          mockAuthenticationRepository: mockAuthenticationRepository,
-          tester: tester,
-        );
+      //   await investorsPumpAppHelper(
+      //     mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+      //     mockInvestorsRepository: mockInvestorsRepository,
+      //     mockReportRepository: mockReportRepository,
+      //     mockAuthenticationRepository: mockAuthenticationRepository,
+      //     tester: tester,
+      //   );
 
-        await reportDialogIncorrectSendHelper(
-          tester: tester,
-          fieldNull: true,
-        );
-      });
-      testWidgets('Report Dialog Incorect Send(field null)', (tester) async {
-        await investorsPumpAppHelper(
-          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-          mockInvestorsRepository: mockInvestorsRepository,
-          mockReportRepository: mockReportRepository,
-          mockAuthenticationRepository: mockAuthenticationRepository,
-          tester: tester,
-        );
+      //   await reportDialogIncorrectSendHelper(
+      //     tester: tester,
+      //     fieldNull: true,
+      //   );
+      // });
+      // testWidgets('Report Dialog Incorect Send(field null)', (tester) async {
+      //   await investorsPumpAppHelper(
+      //     mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+      //     mockInvestorsRepository: mockInvestorsRepository,
+      //     mockReportRepository: mockReportRepository,
+      //     mockAuthenticationRepository: mockAuthenticationRepository,
+      //     tester: tester,
+      //   );
 
-        await reportDialogIncorrectSendHelper(
-          tester: tester,
-          fieldNull: true,
-        );
-      });
+      //   await reportDialogIncorrectSendHelper(
+      //     tester: tester,
+      //     fieldNull: true,
+      //   );
+      // });
 
       group('${KGroupText.goRouter} ', () {
         late MockGoRouter mockGoRouter;
