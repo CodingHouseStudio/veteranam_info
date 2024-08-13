@@ -30,4 +30,5 @@ class _ScreenKeys {
   final privacyPolicy = _PrivacyPolicyDialogKeys();
   final discountCard = _DiscountCardDialogKeys();
   final newsCard = _NewsCardDialogKeys();
+  final mobSettings = _MobSettingsKeys();
 }

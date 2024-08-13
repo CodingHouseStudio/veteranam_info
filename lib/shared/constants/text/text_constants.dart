@@ -212,6 +212,6 @@ abstract class KAppText {
   static List<String> get routes => [
         KRoute.discounts.name,
         KRoute.investors.name,
-        KRoute.home.name,
+        KRoute.settings.name,
       ];
 }

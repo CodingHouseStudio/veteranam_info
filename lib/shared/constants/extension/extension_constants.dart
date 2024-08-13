@@ -219,3 +219,20 @@ extension ReferenceExtension on Reference {
     }
   }
 }
+
+extension UrlEnumValue on UrlEnum {
+  String value(BuildContext context) {
+    switch (this) {
+      case UrlEnum.error:
+        return context.l10n.error;
+      case UrlEnum.shareError:
+        return context.l10n.shareFailure;
+      case UrlEnum.linkError:
+        return context.l10n.linkFailure;
+      case UrlEnum.copyError:
+        return context.l10n.copyFailure;
+      case UrlEnum.copySucceed:
+        return context.l10n.copyEmail;
+    }
+  }
+}

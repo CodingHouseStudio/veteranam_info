@@ -1004,6 +1004,11 @@
   "@mobFeedbackHint": {
     "examples": "Hint text for the feedback dialog in the mobile app"
   },
+  "reportBugs": "Report bugs",
+  "@reportBugs": {
+    "examples": "Text for a button on the Settings page.",
+    "description": "The button is used to switch to the feedback mode for mobile apps."
+  },
   "moreCities": "{count} more..",
   "@moreCities": {
     "placeholders": {
@@ -1014,5 +1019,26 @@
   "privacyPolicyStartText": "# Privacy Policy for Veteranam.info\n\n",
   "@privacyPolicyText": {
     "examples": "The text on the PrivacyPolicy page when the markdown text isn't loaded"
+  },
+  "general": "General",
+  "@general": {
+    "examples": "Text on the settings page on the mobile version"
+  },
+  "faq": "Frequently asked questions",
+  "@faq": {
+    "examples": "Text on the button located on the settings page on the mobile version",
+    "description": "The button is used to go to the page with frequent questions."
+  },
+  "language": "Language",
+  "@language": {
+    "examples": "Text on the settings page on the mobile version"
+  },
+  "copyEmail": "Email copied",
+  "@copyEmail": {
+    "examples": "Text of the dialog on the settings page on the mobile version"
+  },
+  "copyFailure": "Failed to copy email",
+  "@copyFailure": {
+    "examples": "Error message when trying to copy mail."
   }
 }

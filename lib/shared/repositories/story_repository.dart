@@ -32,6 +32,8 @@ class StoryRepository implements IStoryRepository {
       }
       await _firestoreService.addStory(methodStoryModel);
       return const Right(true);
+    } on FirebaseException catch (e) {
+      return Left(GetFailur.fromCode(e).status);
     } catch (e) {
       return const Left(SomeFailure.serverError());
     }

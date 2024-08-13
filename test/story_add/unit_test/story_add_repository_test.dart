@@ -41,6 +41,7 @@ void main() {
           mockStorageService.saveImage(
             imageModel: KTestText.storyModelItems.last.image!,
             id: KTestText.storyModelItems.last.id,
+            collecltionName: FirebaseCollectionName.stroies,
           ),
         ).thenAnswer(
           (realInvocation) async => KTestText.downloadURL,
@@ -95,6 +96,7 @@ void main() {
           mockStorageService.saveImage(
             imageModel: KTestText.storyModelItems.last.image!,
             id: KTestText.storyModelItems.last.id,
+            collecltionName: FirebaseCollectionName.stroies,
           ),
         ).thenThrow(FirebaseException(plugin: KGroupText.failure));
         if (GetIt.I.isRegistered<FirestoreService>()) {
