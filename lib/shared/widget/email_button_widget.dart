@@ -15,7 +15,10 @@ class EmailButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<UrlCubit, UrlEnum?>(
       listener: (context, state) {
-        context.dialog.showCopyEmailDialog(state?.value(context));
+        context.dialog.showSnackBardTextDialog(
+          state?.value(context),
+          duration: const Duration(milliseconds: 4000),
+        );
         if (state == UrlEnum.copySucceed) {
           context.read<UrlCubit>().reset();
         }

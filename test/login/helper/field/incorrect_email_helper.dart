@@ -25,5 +25,5 @@ Future<void> incorrectEmailHelper(
     showPassword: false,
   );
 
-  await dialogFailureSetHelper(tester: tester, isFailure: false);
+  await dialogSnackBarTextHelper(tester: tester, showDialog: false);
 }

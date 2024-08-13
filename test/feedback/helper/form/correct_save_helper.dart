@@ -22,7 +22,7 @@ Future<void> correctSaveHelper(
     field: KTestText.field,
   );
 
-  await dialogFailureSetHelper(tester: tester, isFailure: false);
+  await dialogSnackBarTextHelper(tester: tester, showDialog: false);
 
   await scrollingHelper(
     tester: tester,

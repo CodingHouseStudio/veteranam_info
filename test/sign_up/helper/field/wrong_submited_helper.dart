@@ -13,5 +13,5 @@ Future<void> wrongSubmitedHelper(
     dataIsCorrect: true,
   );
 
-  await dialogFailureSetHelper(tester: tester);
+  await dialogSnackBarTextHelper(tester: tester);
 }

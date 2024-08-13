@@ -240,29 +240,20 @@ class _DialogsWidget {
     }
   }
 
-  void showSendErrorDialog(
-    String? error,
-  ) {
-    if (error != null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          key: KWidgetkeys.widget.dialogs.failure,
-          content: Text(
-            error,
-            key: KWidgetkeys.widget.dialogs.failureText,
-            style: AppTextStyle.materialThemeBodyLarge,
-          ),
-          duration: const Duration(minutes: 1),
-        ),
-      );
-    }
-  }
-
-  void showCopyEmailDialog(String? text) {
+  void showSnackBardTextDialog(
+    String? text, {
+    Duration duration = const Duration(minutes: 1),
+  }) {
     if (text != null) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(text),
+          // key: KWidgetkeys.widget.dialogs.failure,
+          content: Text(
+            text,
+            key: KWidgetkeys.widget.dialogs.snackBarText,
+            style: AppTextStyle.materialThemeBodyLarge,
+          ),
+          duration: duration,
         ),
       );
     }
