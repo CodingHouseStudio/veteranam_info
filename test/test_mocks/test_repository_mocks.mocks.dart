@@ -9803,6 +9803,32 @@ class MockIUrlRepository extends _i1.Mock implements _i3.IUrlRepository {
           ),
         )),
       ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
+
+  @override
+  _i8.Future<_i2.Either<_i3.SomeFailure, bool>> copy(String? text) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #copy,
+          [text],
+        ),
+        returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
+            _FakeEither_0<_i3.SomeFailure, bool>(
+          this,
+          Invocation.method(
+            #copy,
+            [text],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
+                _FakeEither_0<_i3.SomeFailure, bool>(
+          this,
+          Invocation.method(
+            #copy,
+            [text],
+          ),
+        )),
+      ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
 }
 
 /// A class which mocks [NetworkRepository].
