@@ -15,6 +15,7 @@ extension PumpApp on WidgetTester {
   Future<void> pumpApp(
     Widget widget, {
     MockGoRouter? mockGoRouter,
+    bool addFeedback = false,
   }) {
     return pumpWidget(
       MultiBlocProvider(
@@ -44,12 +45,14 @@ extension PumpApp on WidgetTester {
               ? _body(
                   widget: widget,
                   currentLocale: state.userSetting.locale.value,
+                  addFeedback: addFeedback,
                 )
               : MockGoRouterProvider(
                   goRouter: mockGoRouter,
                   child: _body(
                     widget: widget,
                     currentLocale: state.userSetting.locale.value,
+                    addFeedback: addFeedback,
                   ),
                 ),
         ),
@@ -60,9 +63,10 @@ extension PumpApp on WidgetTester {
   Widget _body({
     required Widget widget,
     required Locale currentLocale,
+    required bool addFeedback,
   }) =>
-      KTest.testIsWeb
-          ? body(
+      KTest.testIsWeb || !addFeedback
+          ? _materialApp(
               widget: widget,
               currentLocale: currentLocale,
             )
@@ -75,12 +79,12 @@ extension PumpApp on WidgetTester {
                 onSubmit: onSubmit,
                 // scrollController: scrollController,
               ),
-              child: body(
+              child: _materialApp(
                 widget: widget,
                 currentLocale: currentLocale,
               ),
             );
-  Widget body({
+  Widget _materialApp({
     required Widget widget,
     required Locale currentLocale,
   }) =>
