@@ -68,7 +68,7 @@ abstract class AdvanceFilter {
     final locationes = context
         .read<DiscountWatcherBloc>()
         .state
-        .discountModelItems
+        .categoryDiscountModelItems
         .getLocationFilter(context);
     return [
       // if (isDesk) KSizedBox.kHeightSizedBox32 else
