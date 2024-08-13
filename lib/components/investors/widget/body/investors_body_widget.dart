@@ -36,8 +36,8 @@ class InvestorsBodyWidget extends StatelessWidget {
               title: context.l10n.provideSuggestionsFromBusinesses,
               titleKey: KWidgetkeys.screen.investors.title,
               titleSecondPart: context.l10n.orDonateHere,
-              pointText: context.l10n.investors,
-              pointKey: KWidgetkeys.screen.investors.point,
+              // pointText: context.l10n.investors,
+              // pointKey: KWidgetkeys.screen.investors.point,
               isDesk: isDesk,
               isRightArrow: false,
               titleAlignment: WrapAlignment.end,
@@ -57,12 +57,12 @@ class InvestorsBodyWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: SectionWidget.get(
                       isTablet: isDesk,
-                      textPoint: null,
+                      // textPoint: null,
                       title: context.l10n.supportOurVeterans,
                       subtitle: context.l10n.investorsSubtitle,
                       textButton: context.l10n.writeMessage,
                       route: () => context.goNamed(KRoute.feedback.name),
-                      prefixKey: null,
+                      // prefixKey: null,
                       titleKey: KWidgetkeys.screen.investors.feedbackTitle,
                       subtitleKey:
                           KWidgetkeys.screen.investors.feedbackSubtitle,
@@ -78,12 +78,12 @@ class InvestorsBodyWidget extends StatelessWidget {
           else if (KTest.testIsWeb) ...[
             ...SectionWidget.get(
               isTablet: isDesk,
-              textPoint: null,
+              // textPoint: null,
               title: context.l10n.supportOurVeterans,
               subtitle: context.l10n.investorsSubtitle,
               textButton: context.l10n.writeMessage,
               route: () => context.goNamed(KRoute.feedback.name),
-              prefixKey: null,
+              // prefixKey: null,
               titleKey: KWidgetkeys.screen.investors.feedbackTitle,
               subtitleKey: KWidgetkeys.screen.investors.feedbackSubtitle,
               buttonKey: KWidgetkeys.screen.investors.feedbackButton,
@@ -97,12 +97,12 @@ class InvestorsBodyWidget extends StatelessWidget {
             KSizedBox.kHeightSizedBox40
           else if (KTest.testIsWeb)
             KSizedBox.kHeightSizedBox24,
-          TextPointWidget(
-            context.l10n.donateHere,
-            key: KWidgetkeys.screen.investors.fundsPoint,
-            hasExpanded: false,
-          ),
-          KSizedBox.kHeightSizedBox8,
+          // TextPointWidget(
+          //   context.l10n.donateHere,
+          //   key: KWidgetkeys.screen.investors.fundsPoint,
+          //   hasExpanded: false,
+          // ),
+          // KSizedBox.kHeightSizedBox8,
           Center(
             child: Text(
               context.l10n.provenFunds,

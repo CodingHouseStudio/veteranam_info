@@ -59,6 +59,17 @@ extension SubLocationString on SubLocation? {
       case null:
         return [];
       case SubLocation.all:
+      case SubLocation.allStoresOfChain:
+      case SubLocation.online:
+        return [context.l10n.allUkraine];
+    }
+  }
+
+  List<String> getCardList(BuildContext context) {
+    switch (this) {
+      case null:
+        return [];
+      case SubLocation.all:
         return [context.l10n.allStoresOfChain, context.l10n.online];
       case SubLocation.allStoresOfChain:
         return [context.l10n.allStoresOfChain];
