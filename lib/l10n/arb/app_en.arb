@@ -844,12 +844,12 @@
     "examples": "Text for a button in the Report dialog.",
     "description": "The button is used to select the type of complaint."
   },
-  "other": "Other (specify)",
+  "other": "Other",
   "@other": {
     "examples": "Text for a button in the Report dialog.",
     "description": "The button is used to select the type of complaint."
   },
-  "addComment": "Add a comment:",
+  "addComment": "Add a comment (optional):",
   "@addComment": {
     "examples": "Text before the comment input field."
   },
@@ -1008,6 +1008,10 @@
   "@reportBugs": {
     "examples": "Text for a button on the Settings page.",
     "description": "The button is used to switch to the feedback mode for mobile apps."
+  },
+  "allUkraine": "All Ukraine",
+  "@allUkraine": {
+    "examples": "Text for the button in the AdvancedFilter dialog for the mobile version"
   },
   "moreCities": "{count} more..",
   "@moreCities": {

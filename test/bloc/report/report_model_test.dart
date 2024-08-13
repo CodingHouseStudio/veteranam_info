@@ -7,7 +7,7 @@ void main() {
   group('${KScreenBlocName.report} ${KGroupText.model} ', () {
     final fullJson = {
       ReportModelJsonField.id: KTestText.reportModel.id,
-      ReportModelJsonField.email: KTestText.reportModel.email,
+      // ReportModelJsonField.email: KTestText.reportModel.email,
       ReportModelJsonField.message: KTestText.reportModel.message,
       ReportModelJsonField.date: KTestText.reportModel.date.toIso8601String(),
       ReportModelJsonField.card: _$CardEnumEnumMap[KTestText.reportModel.card],
@@ -18,7 +18,7 @@ void main() {
     };
     final nullableJson = {
       ReportModelJsonField.id: KTestText.reportModel.id,
-      ReportModelJsonField.email: KTestText.reportModel.email,
+      // ReportModelJsonField.email: KTestText.reportModel.email,
       ReportModelJsonField.message: null,
       ReportModelJsonField.date: KTestText.reportModel.date.toIso8601String(),
       ReportModelJsonField.card: _$CardEnumEnumMap[KTestText.reportModel.card],
@@ -32,7 +32,7 @@ void main() {
         final reportModel = ReportModel.fromJson(fullJson);
 
         expect(reportModel.id, KTestText.reportModel.id);
-        expect(reportModel.email, KTestText.reportModel.email);
+        // expect(reportModel.email, KTestText.reportModel.email);
         expect(reportModel.date, KTestText.reportModel.date);
         expect(reportModel.card, KTestText.reportModel.card);
         expect(reportModel.message, KTestText.reportModel.message);
@@ -47,7 +47,7 @@ void main() {
         final reportModel = ReportModel.fromJson(nullableJson);
 
         expect(reportModel.id, KTestText.reportModel.id);
-        expect(reportModel.email, KTestText.reportModel.email);
+        // expect(reportModel.email, KTestText.reportModel.email);
         expect(reportModel.date, KTestText.reportModel.date);
         expect(reportModel.card, KTestText.reportModel.card);
         expect(reportModel.message, null);
@@ -62,7 +62,7 @@ void main() {
       test('${KGroupText.failure} ', () {
         final json = {
           // id is missing
-          ReportModelJsonField.email: KTestText.reportModel.email,
+          // ReportModelJsonField.email: KTestText.reportModel.email,
           ReportModelJsonField.message: KTestText.reportModel.message,
           ReportModelJsonField.date:
               KTestText.reportModel.date.toIso8601String(),

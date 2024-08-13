@@ -18,7 +18,7 @@ Future<void> investorsFailureHelper(
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.investors.fundsPoint,
+    itemKey: KWidgetkeys.screen.investors.fundsTitle,
   );
 
   await loadingFailureHelper(
