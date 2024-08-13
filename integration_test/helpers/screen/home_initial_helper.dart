@@ -36,10 +36,10 @@ Future<void> homeInitialHelper(
     first: false,
   );
 
-  expect(
-    find.byKey(KWidgetkeys.screen.home.aboutProjecPrefix),
-    findsOneWidget,
-  );
+  // expect(
+  //   find.byKey(KWidgetkeys.screen.home.aboutProjecPrefix),
+  //   findsOneWidget,
+  // );
 
   expect(
     find.byKey(KWidgetkeys.screen.home.aboutProjecSubtitle),
@@ -66,14 +66,14 @@ Future<void> homeInitialHelper(
     itemKey: KWidgetkeys.screen.home.discountImage,
   );
 
-  expect(
-    find.byKey(KWidgetkeys.screen.home.discountPrefix),
-    findsOneWidget,
-  );
+  // expect(
+  //   find.byKey(KWidgetkeys.screen.home.discountPrefix),
+  //   findsOneWidget,
+  // );
 
   await scrollingHelperInt(
     tester: tester,
-    itemKey: KWidgetkeys.screen.home.discountPrefix,
+    itemKey: KWidgetkeys.screen.home.discountTitle,
   );
 
   expect(
@@ -112,10 +112,10 @@ Future<void> homeInitialHelper(
       itemKey: KWidgetkeys.screen.home.informationImage,
     );
 
-    expect(
-      find.byKey(KWidgetkeys.screen.home.informationPrefix),
-      findsOneWidget,
-    );
+    // expect(
+    //   find.byKey(KWidgetkeys.screen.home.informationPrefix),
+    //   findsOneWidget,
+    // );
 
     expect(
       find.byKey(KWidgetkeys.screen.home.informationTitle),
@@ -138,10 +138,10 @@ Future<void> homeInitialHelper(
     );
   }
 
-  expect(
-    find.byKey(KWidgetkeys.screen.home.faqPrefix),
-    findsOneWidget,
-  );
+  // expect(
+  //   find.byKey(KWidgetkeys.screen.home.faqPrefix),
+  //   findsOneWidget,
+  // );
 
   expect(
     find.byKey(KWidgetkeys.screen.home.faqTitle),

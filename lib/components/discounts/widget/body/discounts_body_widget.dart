@@ -42,8 +42,8 @@ class DiscountBodyWidget extends StatelessWidget {
                     title: context.l10n.specialOffers,
                     titleKey: KWidgetkeys.screen.discounts.title,
                     titleSecondPart: context.l10n.forVeteransAndTheirFamilies,
-                    pointText: context.l10n.discounts,
-                    pointKey: KWidgetkeys.screen.discounts.titlePoint,
+                    // pointText: context.l10n.discounts,
+                    // pointKey: KWidgetkeys.screen.discounts.titlePoint,
                     isDesk: isDesk,
                     titleSecondPartPadding:
                         const EdgeInsets.only(left: KPadding.kPaddingSize72),

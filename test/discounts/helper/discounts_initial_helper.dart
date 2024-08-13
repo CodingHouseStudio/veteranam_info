@@ -21,12 +21,12 @@ Future<void> discountsInitialHelper(
         findsOneWidget,
       );
 
-      if (KTest.testIsWeb) {
-        expect(
-          find.byKey(KWidgetkeys.screen.discounts.titlePoint),
-          findsOneWidget,
-        );
-      } else {
+      if (!KTest.testIsWeb) {
+        //   expect(
+        //     find.byKey(KWidgetkeys.screen.discounts.titlePoint),
+        //     findsOneWidget,
+        //   );
+        // } else {
         await mobNavigationHelper(tester);
       }
 
