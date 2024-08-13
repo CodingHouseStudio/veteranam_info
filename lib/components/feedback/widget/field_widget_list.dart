@@ -14,15 +14,14 @@ List<Widget> _fieldWidgetList({
             Expanded(
               child: TextFieldWidget(
                 widgetKey: KWidgetkeys.screen.feedback.nameField,
-                errorText: context.read<FeedbackBloc>().state.formState ==
-                        FeedbackEnum.invalidData
-                    ? context
-                        .read<FeedbackBloc>()
-                        .state
-                        .name
-                        .error
-                        .value(context)
-                    : null,
+                errorText: context
+                    .read<FeedbackBloc>()
+                    .state
+                    .name
+                    .error
+                    .value(context),
+                showErrorText: context.read<FeedbackBloc>().state.formState ==
+                    FeedbackEnum.invalidData,
                 controller: nameController,
                 onChanged: (value) => context.read<FeedbackBloc>().add(
                       FeedbackEvent.nameUpdated(value),
@@ -35,15 +34,14 @@ List<Widget> _fieldWidgetList({
             Expanded(
               child: TextFieldWidget(
                 widgetKey: KWidgetkeys.screen.feedback.emailField,
-                errorText: context.read<FeedbackBloc>().state.formState ==
-                        FeedbackEnum.invalidData
-                    ? context
-                        .read<FeedbackBloc>()
-                        .state
-                        .email
-                        .error
-                        .value(context)
-                    : null,
+                showErrorText: context.read<FeedbackBloc>().state.formState ==
+                    FeedbackEnum.invalidData,
+                errorText: context
+                    .read<FeedbackBloc>()
+                    .state
+                    .email
+                    .error
+                    .value(context),
                 controller: emailController,
                 onChanged: (value) => context.read<FeedbackBloc>().add(
                       FeedbackEvent.emailUpdated(value),
@@ -58,10 +56,10 @@ List<Widget> _fieldWidgetList({
       else ...[
         TextFieldWidget(
           widgetKey: KWidgetkeys.screen.feedback.nameField,
-          errorText: context.read<FeedbackBloc>().state.formState ==
-                  FeedbackEnum.invalidData
-              ? context.read<FeedbackBloc>().state.name.error.value(context)
-              : null,
+          showErrorText: context.read<FeedbackBloc>().state.formState ==
+              FeedbackEnum.invalidData,
+          errorText:
+              context.read<FeedbackBloc>().state.name.error.value(context),
           controller: nameController,
           onChanged: (value) => context.read<FeedbackBloc>().add(
                 FeedbackEvent.nameUpdated(value),
@@ -72,10 +70,10 @@ List<Widget> _fieldWidgetList({
         KSizedBox.kHeightSizedBox16,
         TextFieldWidget(
           widgetKey: KWidgetkeys.screen.feedback.emailField,
-          errorText: context.read<FeedbackBloc>().state.formState ==
-                  FeedbackEnum.invalidData
-              ? context.read<FeedbackBloc>().state.email.error.value(context)
-              : null,
+          showErrorText: context.read<FeedbackBloc>().state.formState ==
+              FeedbackEnum.invalidData,
+          errorText:
+              context.read<FeedbackBloc>().state.email.error.value(context),
           controller: emailController,
           onChanged: (value) => context.read<FeedbackBloc>().add(
                 FeedbackEvent.emailUpdated(value),
@@ -88,10 +86,10 @@ List<Widget> _fieldWidgetList({
       KSizedBox.kHeightSizedBox16,
       MessageFieldWidget(
         key: KWidgetkeys.screen.feedback.messageField,
-        errorText: context.read<FeedbackBloc>().state.formState ==
-                FeedbackEnum.invalidData
-            ? context.read<FeedbackBloc>().state.message.error.value(context)
-            : null,
+        showErrorText: context.read<FeedbackBloc>().state.formState ==
+            FeedbackEnum.invalidData,
+        errorText:
+            context.read<FeedbackBloc>().state.message.error.value(context),
         changeMessage: (value) => context.read<FeedbackBloc>().add(
               FeedbackEvent.messageUpdated(value),
             ),

@@ -15,6 +15,21 @@ void main() {
       FeedbackModelJsonField.message: KTestText.feedbackModel.message,
       FeedbackModelJsonField.status:
           _$FeedbackStatusEnumMap[KTestText.feedbackModel.status],
+      FeedbackModelJsonField.image: [
+        KTestText.feedbackImageModel.image!.toJson(),
+      ],
+    };
+    final nullableJson = {
+      FeedbackModelJsonField.id: KTestText.feedbackModel.id,
+      FeedbackModelJsonField.guestId: KTestText.feedbackModel.guestId,
+      FeedbackModelJsonField.guestName: null,
+      FeedbackModelJsonField.email: null,
+      FeedbackModelJsonField.timestamp:
+          KTestText.feedbackModel.timestamp.toIso8601String(),
+      FeedbackModelJsonField.message: KTestText.feedbackModel.message,
+      FeedbackModelJsonField.status:
+          _$FeedbackStatusEnumMap[KTestText.feedbackModel.status],
+      FeedbackModelJsonField.image: null,
     };
     group('${KGroupText.modelJson} ', () {
       test('${KGroupText.full} ', () {
@@ -33,6 +48,31 @@ void main() {
           feedbackModel.timestamp,
           KTestText.feedbackModel.timestamp,
         );
+        expect(
+          feedbackModel.image,
+          KTestText.feedbackImageModel.image,
+        );
+      });
+      test('${KGroupText.nullable} ', () {
+        final feedbackModel = FeedbackModel.fromJson(nullableJson);
+
+        expect(feedbackModel.id, KTestText.feedbackModel.id);
+        expect(feedbackModel.email, null);
+        expect(feedbackModel.guestId, KTestText.feedbackModel.guestId);
+        expect(feedbackModel.guestName, null);
+        expect(feedbackModel.message, KTestText.feedbackModel.message);
+        expect(
+          feedbackModel.status,
+          KTestText.feedbackModel.status,
+        );
+        expect(
+          feedbackModel.timestamp,
+          KTestText.feedbackModel.timestamp,
+        );
+        expect(
+          feedbackModel.image,
+          null,
+        );
       });
 
       test('${KGroupText.failure} ', () {
@@ -47,6 +87,9 @@ void main() {
           FeedbackModelJsonField.message: KTestText.feedbackModel.message,
           FeedbackModelJsonField.status:
               _$FeedbackStatusEnumMap[KTestText.feedbackModel.status],
+          FeedbackModelJsonField.image: [
+            KTestText.feedbackImageModel.image!.toJson(),
+          ],
         };
 
         expect(
@@ -57,9 +100,17 @@ void main() {
     });
     group('${KGroupText.jsonModel} ', () {
       test('${KGroupText.full} ', () {
-        final feedbackModelJson = KTestText.feedbackModel.toJson();
+        final feedbackModelJson = KTestText.feedbackModel
+            .copyWith(image: KTestText.imageModel)
+            .toJson();
 
         expect(feedbackModelJson, fullJson);
+      });
+      test('${KGroupText.nullable} ', () {
+        final feedbackModelJson =
+            KTestText.feedbackImageModel.copyWith(image: null).toJson();
+
+        expect(feedbackModelJson, nullableJson);
       });
     });
   });

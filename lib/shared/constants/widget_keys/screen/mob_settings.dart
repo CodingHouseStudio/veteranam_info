@@ -7,7 +7,8 @@ class _MobSettingsKeys {
   final languagesSwitcher = const Key('mob_settings_screen_languages_switcher');
   final subtitle = const Key('mob_settings_screen_subtitle');
   final email = const Key('mob_settings_screen_email');
-  final button = const Key('mob_settings_screen_button');
+  final feedbackButton = const Key('mob_settings_screen_feedback_button');
+  final bugButton = const Key('mob_settings_screen_bug_button');
   final likedInIcon = const Key('mob_settings_screen_linked_in_icon');
   final instagramIcon = const Key('mob_settings_screen_instagram_icon');
   final facebookIcon = const Key('mob_settings_screen_facebook_icon');

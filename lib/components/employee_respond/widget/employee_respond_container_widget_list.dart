@@ -27,10 +27,10 @@ List<Widget> _employeeRespondContainerWidgetList({
           ),
       hintText: KAppText.exampleEmail,
       isDesk: isDesk,
-      errorText: context.read<EmployeeRespondBloc>().state.formState ==
-              EmployeeRespondEnum.invalidData
-          ? context.read<EmployeeRespondBloc>().state.email.error.value(context)
-          : null,
+      errorText:
+          context.read<EmployeeRespondBloc>().state.email.error.value(context),
+      showErrorText: context.read<EmployeeRespondBloc>().state.formState ==
+          EmployeeRespondEnum.invalidData,
       inputFormatterList: [EmailInputFormatter()],
     ),
     if (isDesk) KSizedBox.kHeightSizedBox32 else KSizedBox.kHeightSizedBox16,
@@ -50,15 +50,14 @@ List<Widget> _employeeRespondContainerWidgetList({
           ),
       hintText: KAppText.examplePhone,
       isDesk: isDesk,
-      errorText: context.read<EmployeeRespondBloc>().state.formState ==
-              EmployeeRespondEnum.invalidData
-          ? context
-              .read<EmployeeRespondBloc>()
-              .state
-              .phoneNumber
-              .error
-              .value(context)
-          : null,
+      showErrorText: context.read<EmployeeRespondBloc>().state.formState ==
+          EmployeeRespondEnum.invalidData,
+      errorText: context
+          .read<EmployeeRespondBloc>()
+          .state
+          .phoneNumber
+          .error
+          .value(context),
     ),
     if (isDesk) KSizedBox.kHeightSizedBox32 else KSizedBox.kHeightSizedBox16,
     Padding(

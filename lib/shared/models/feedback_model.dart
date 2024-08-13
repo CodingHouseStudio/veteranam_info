@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:veteranam/shared/shared.dart';
 
 part 'feedback_model.freezed.dart';
 part 'feedback_model.g.dart';
@@ -15,10 +16,11 @@ class FeedbackModel with _$FeedbackModel {
   const factory FeedbackModel({
     required String id,
     required String guestId,
-    required String guestName,
-    required String email,
+    required String? guestName,
+    required String? email,
     required DateTime timestamp,
     required String message,
+    @ImageConverter() ImageModel? image,
     @Default(FeedbackStatus.isNew) FeedbackStatus status,
   }) = _FeedbackModel;
 
@@ -34,4 +36,5 @@ abstract class FeedbackModelJsonField {
   static const timestamp = 'timestamp';
   static const message = 'message';
   static const status = 'status';
+  static const image = 'image';
 }

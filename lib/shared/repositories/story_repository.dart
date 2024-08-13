@@ -19,9 +19,10 @@ class StoryRepository implements IStoryRepository {
     try {
       late var methodStoryModel = storyModel;
       if (methodStoryModel.image != null) {
-        final downloadURL = await _storageService.saveStoryImage(
+        final downloadURL = await _storageService.saveImage(
           imageModel: methodStoryModel.image!,
-          storyId: storyModel.id,
+          id: storyModel.id,
+          collecltionName: FirebaseCollectionName.stroies,
         );
         if (downloadURL.isNotEmpty) {
           methodStoryModel = methodStoryModel.copyWith(
@@ -31,6 +32,8 @@ class StoryRepository implements IStoryRepository {
       }
       await _firestoreService.addStory(methodStoryModel);
       return const Right(true);
+    } on FirebaseException catch (e) {
+      return Left(GetFailur.fromCode(e).status);
     } catch (e) {
       return const Left(SomeFailure.serverError());
     }

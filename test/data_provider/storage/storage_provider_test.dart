@@ -26,7 +26,7 @@ void main() {
       when(
         mockFirebaseStorage.ref(
           StoragePath.getImagePath(
-            collenction: FirebaseCollectionName.stroies,
+            collection: FirebaseCollectionName.stroies,
             modelId: KTestText.storyModelItems.last.id,
             imageName: KTestText.storyModelItems.last.image!.name,
           ),
@@ -87,30 +87,32 @@ void main() {
     }
 
     test('save empty story image', () async {
-      await storageService.saveStoryImage(
+      await storageService.saveImage(
         imageModel: KTestText.storyModelItems.last.image!.copyWith(
           ref: null,
         ),
-        storyId: KTestText.storyModelItems.last.id,
+        id: KTestText.storyModelItems.last.id,
+        collecltionName: FirebaseCollectionName.stroies,
       );
 
       verifyNeverMethod(
         StoragePath.getImagePath(
-          collenction: FirebaseCollectionName.stroies,
+          collection: FirebaseCollectionName.stroies,
           modelId: KTestText.storyModelItems.last.id,
           imageName: KTestText.storyModelItems.last.image!.name,
         ),
       );
     });
     test('save story image', () async {
-      await storageService.saveStoryImage(
+      await storageService.saveImage(
         imageModel: KTestText.storyModelItems.last.image!,
-        storyId: KTestText.storyModelItems.last.id,
+        id: KTestText.storyModelItems.last.id,
+        collecltionName: FirebaseCollectionName.stroies,
       );
 
       verifyMethod(
         StoragePath.getImagePath(
-          collenction: FirebaseCollectionName.stroies,
+          collection: FirebaseCollectionName.stroies,
           modelId: KTestText.storyModelItems.last.id,
           imageName: KTestText.storyModelItems.last.image!.name,
         ),
