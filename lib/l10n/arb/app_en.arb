@@ -996,6 +996,19 @@
   "@apply": {
     "examples": "Text for the button in the AdvancedFilter dialog for the mobile version"
   },
+  "whatIsWrong": "What's wrong?",
+  "@whatIsWrong": {
+    "examples": "Text for a feedback dialog in a mobile app"
+  },
+  "mobFeedbackHint": "At the top of the screen you can indicate what the problem is, and at the bottom you can describe it in detail in words. Using the Navigation button, you can continue working with the application, and by clicking on the Draw button, you can continue describing the problem.",
+  "@mobFeedbackHint": {
+    "examples": "Hint text for the feedback dialog in the mobile app"
+  },
+  "reportBugs": "Report bugs",
+  "@reportBugs": {
+    "examples": "Text for a button on the Settings page.",
+    "description": "The button is used to switch to the feedback mode for mobile apps."
+  },
   "allUkraine": "All Ukraine",
   "@allUkraine": {
     "examples": "Text for the button in the AdvancedFilter dialog for the mobile version"

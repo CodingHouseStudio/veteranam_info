@@ -46,16 +46,15 @@ class _DiscountNotificationWidgetState
                 const DiscountLinkFormEvent.sendLink(),
               ),
           fieldController: controller,
-          // filedErrorText:
-          //     context.read<DiscountLinkFormBloc>().state.formState ==
-          //             LinkEnum.invalidData
-          //         ? context
-          //             .read<DiscountLinkFormBloc>()
-          //             .state
-          //             .link
-          //             .error
-          //             .value(context)
-          //         : null,
+          // showErrorText: context.read<DiscountLinkFormBloc>().state.formState
+          // ==
+          //     LinkEnum.invalidData,
+          // filedErrorText: context
+          //     .read<DiscountLinkFormBloc>()
+          //     .state
+          //     .link
+          //     .error
+          //     .value(context),
           enabled: context.read<DiscountLinkCubit>().state,
           showThankText: context.read<DiscountLinkFormBloc>().state.formState !=
                   LinkEnum.initial &&

@@ -13,6 +13,7 @@ class MessageFieldWidget extends StatelessWidget {
     this.focusNode,
     this.disposeFocusNode,
     this.labelText,
+    this.showErrorText,
   });
   final void Function(String text)? changeMessage;
   final String? hintText;
@@ -23,6 +24,7 @@ class MessageFieldWidget extends StatelessWidget {
   final bool? disposeFocusNode;
   final TextStyle? hintStyle;
   final bool isDesk;
+  final bool? showErrorText;
 
   @override
   Widget build(BuildContext context) {
@@ -55,6 +57,7 @@ class MessageFieldWidget extends StatelessWidget {
       // ),
       hintStyle: hintStyle,
       isDesk: isDesk,
+      showErrorText: showErrorText,
     );
   }
 }

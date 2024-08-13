@@ -1,3 +1,4 @@
+import 'package:feedback/feedback.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -14,6 +15,7 @@ extension PumpApp on WidgetTester {
   Future<void> pumpApp(
     Widget widget, {
     MockGoRouter? mockGoRouter,
+    bool addFeedback = false,
   }) {
     return pumpWidget(
       MultiBlocProvider(
@@ -33,18 +35,24 @@ extension PumpApp on WidgetTester {
             create: (context) =>
                 GetIt.I.get<NetworkCubit>()..networkInitialized(),
           ),
+          if (!KTest.testIsWeb)
+            BlocProvider(
+              create: (context) => GetIt.I.get<MobFeedbackBloc>(),
+            ),
         ],
         child: BlocBuilder<AuthenticationBloc, AuthenticationState>(
           builder: (context, state) => mockGoRouter == null
               ? _body(
                   widget: widget,
                   currentLocale: state.userSetting.locale.value,
+                  addFeedback: addFeedback,
                 )
               : MockGoRouterProvider(
                   goRouter: mockGoRouter,
                   child: _body(
                     widget: widget,
                     currentLocale: state.userSetting.locale.value,
+                    addFeedback: addFeedback,
                   ),
                 ),
         ),
@@ -53,6 +61,30 @@ extension PumpApp on WidgetTester {
   }
 
   Widget _body({
+    required Widget widget,
+    required Locale currentLocale,
+    required bool addFeedback,
+  }) =>
+      KTest.testIsWeb || !addFeedback
+          ? _materialApp(
+              widget: widget,
+              currentLocale: currentLocale,
+            )
+          : BetterFeedback(
+              localizationsDelegates: locale,
+              localeOverride: currentLocale,
+              mode: FeedbackMode.navigate,
+              feedbackBuilder: (context, onSubmit, scrollController) =>
+                  MobFeedbackWidget(
+                onSubmit: onSubmit,
+                // scrollController: scrollController,
+              ),
+              child: _materialApp(
+                widget: widget,
+                currentLocale: currentLocale,
+              ),
+            );
+  Widget _materialApp({
     required Widget widget,
     required Locale currentLocale,
   }) =>
