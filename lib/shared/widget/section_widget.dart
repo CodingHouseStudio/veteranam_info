@@ -4,28 +4,28 @@ import 'package:veteranam/shared/shared.dart';
 abstract class SectionWidget {
   static List<Widget> get({
     required bool isTablet,
-    required String? textPoint,
+    // required String? textPoint,
     required String title,
     required String subtitle,
     required String textButton,
     required void Function()? route,
-    required Key? prefixKey,
+    // required Key? prefixKey,
     required Key titleKey,
     required Key subtitleKey,
     required Key buttonKey,
     Widget? bottomWidget,
   }) =>
       [
-        if (textPoint != null) ...[
-          TextPointWidget(
-            textPoint,
-            key: prefixKey,
-          ),
-          if (isTablet)
-            KSizedBox.kHeightSizedBox16
-          else
-            KSizedBox.kHeightSizedBox8,
-        ],
+        // if (textPoint != null) ...[
+        //   TextPointWidget(
+        //     textPoint,
+        //     key: prefixKey,
+        //   ),
+        //   if (isTablet)
+        //     KSizedBox.kHeightSizedBox16
+        //   else
+        //     KSizedBox.kHeightSizedBox8,
+        // ],
         Align(
           alignment: Alignment.centerLeft,
           child: Text(
