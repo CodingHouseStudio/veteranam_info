@@ -25,7 +25,7 @@ void main() {
     testWidgets('Mobile feedback wrong enter text', (tester) async {
       await mobSettingsPumpAppHelper(tester: tester);
 
-      await mobFeedbackOpenHelperkHelper(
+      await mobFeedbackOpenHelper(
         test: mobFeedbackWrongTextHelper,
         tester: tester,
       );
@@ -44,7 +44,7 @@ void main() {
       testWidgets('Mobile feedback correct enter text', (tester) async {
         await mobSettingsPumpAppHelper(tester: tester);
 
-        await mobFeedbackOpenHelperkHelper(
+        await mobFeedbackOpenHelper(
           test: mobFeedbackCorrectTextHelper,
           tester: tester,
         );
