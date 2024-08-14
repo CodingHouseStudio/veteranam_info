@@ -5,5 +5,6 @@ export 'home_initial_helper.dart';
 export 'information_initial_helper.dart';
 export 'investors/investors.dart';
 export 'login_initial_helper.dart';
+export 'mob_settings_initial_helper.dart';
 export 'story_initial_helper.dart';
 export 'work_initial_helper.dart';

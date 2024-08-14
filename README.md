@@ -97,6 +97,23 @@ $ flutter run --flavor staging --target lib/main_staging.dart
 $ flutter run --flavor production --target lib/main_production.dart
 ```
 
+### Start web version on mobile
+
++ If you want start web version on mobile, you'll need to run these two commands in your terminal:
+```sh
+Prod:
+flutter run -d chrome emulator-5554 -t lib/main_production.dart
+flutter run -d web-server --web-port 8080 --web-hostname 0.0.0.0 -t lib/main_production.dart
+Dev:
+flutter run -d chrome emulator-5554 -t lib/main_development.dart
+flutter run -d web-server --web-port 8080 --web-hostname 0.0.0.0 -t lib/main_development.dart
+```
++ To find your computer's IP address, use the following command in your terminal: ipconfig. Look for the first line labeled "IPv4 Address" and note the address.
+
++ Finally, open a web browser on your mobile device (or emulator) and enter the following URL, replacing *your-ip* with your actual IP address: http://(*your-ip*):8080
+
+**important**: to open the page, the mobile device must be connected to the same Internet network as the computer
+
 ### Hide element
 
 When you write code and want to hide an element in the production or development version, you need to call the Config class and select one of its parameters that returns a bool value, for example, if you write Config.isDevelopment, this variable will return true if you start using the development version or false if production.
@@ -107,42 +124,19 @@ _\*Veteranam works Web._
 
 ## Running Tests 🧪
 
-To run all unit and widget tests use the following command:
+### To run all unit and widget tests use the following command:
 
 ```sh
 Testing
 
 All unit and widget tests
 fvm flutter test
-All integration tests on the chosen device which is active
-fvm flutter test integration_test
 
-WEB tests
-
-Windows(works on the Mac)
-run one test:
-fvm flutter drive --driver=test_driver/integration_test.dart --target=integration_test/navigation_test.dart -d chrome --web-port=8080
-or
-fvm flutter run -d chrome --web-port 4445 integration_test/your_test.dart
-run all tests
-Get-ChildItem -Path integration_test -Filter '*_test.dart' | ForEach-Object { fvm flutter drive --driver=test_driver/integration_test.dart -d chrome --web-port=8080 --target="$($_.FullName)" }
-or
-Get-ChildItem -Path integration_test -Filter '*_test.dart' | ForEach-Object { flutter run -d chrome --web-port 8080 $_.FullName }
-
-If you want to start test in production mode for tests, add this line to the end of the command --dart-define=FLAVOUR=staging --flavor=staging
-
-pre requisite - run chrome web driver in a different terminal window
-
-chromedriver --port=4444
-
-All integration tests on web server headless
-chmod +x integration_tests.sh && ./integration_tests.sh
-All integration tests on chrome headless with coverage
-chmod +x integration_tests_chrome.sh && ./integration_tests_chrome.sh
+All unit and widget tests use coverage
 $ flutter test --coverage --test-randomize-ordering-seed random
 ```
 
-To view the generated coverage report you can use [lcov](https://github.com/linux-test-project/lcov).
++ To view the generated coverage report you can use [lcov](https://github.com/linux-test-project/lcov).
 
 ```sh
 # Generate Coverage Report
@@ -150,6 +144,51 @@ $ genhtml coverage/lcov.info -o coverage/
 
 # Open Coverage Report
 $ open coverage/index.html
+```
+
+### Running Integration Tests
+
++ Chosen device (Windows android tests)
+
+```sh
+pre requisite - run chrome web driver in a different terminal window
+
+chromedriver --port=4444
+
+All integration tests on the chosen device which is active
+Prod:
+fvm flutter test integration_test --flavor production --dart-define=FLAVOUR=production --verbose
+Dev:
+fvm flutter test integration_test --flavor development --dart-define=FLAVOUR=development --verbose
+(If you want more information from tests add prefix -v)
+```
++ WEB tests
+
+```sh
+run one test:
+
+fvm flutter drive --driver=test_driver/integration_test.dart --target=integration_test/navigation_test.dart -d chrome --web-port=8080 --dart-define=FLAVOUR=development --flavor=development
+
+or
+fvm flutter run -d chrome --web-port 4445 integration_test/your_test.dart --dart-define=FLAVOUR=development --flavor=development
+
+run all tests
+
+Get-ChildItem -Path integration_test -Filter '*_test.dart' | ForEach-Object { fvm flutter drive --driver=test_driver/integration_test.dart -d chrome --web-port=8080 --target="$($_.FullName)" } --dart-define=FLAVOUR=development --flavor=development
+
+or
+
+Get-ChildItem -Path integration_test -Filter '*_test.dart' | ForEach-Object { flutter run -d chrome --web-port 8080 $_.FullName } --dart-define=FLAVOUR=development --flavor=development
+```
+If you want to start test in production mode for tests, change this line -  --dart-define=FLAVOUR=development --flavor=development to this --dart-define=FLAVOUR=production --flavor=production
+
+
++ All integration tests on web server headless
+
+```sh
+chmod +x integration_tests.sh && ./integration_tests.sh
+All integration tests on chrome headless with coverage
+chmod +x integration_tests_chrome.sh && ./integration_tests_chrome.sh
 ```
 
 ---
