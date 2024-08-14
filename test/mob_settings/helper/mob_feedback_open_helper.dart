@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:veteranam/shared/shared.dart';
 
-Future<void> mobFeedbackOpenHelperkHelper({
+Future<void> mobFeedbackOpenHelper({
   required WidgetTester tester,
   required Future<void> Function(WidgetTester tester) test,
 }) async {

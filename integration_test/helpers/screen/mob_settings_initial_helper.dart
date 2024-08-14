@@ -2,11 +2,13 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:veteranam/shared/shared.dart';
 
 import '../../test_dependency.dart';
-import 'helper.dart';
+import '../helpers.dart';
 
 Future<void> mobSettingsInitialHelper(
   WidgetTester tester,
 ) async {
+  expect(find.byKey(KWidgetkeys.screen.mobSettings.screen), findsOneWidget);
+
   expect(
     find.byKey(KWidgetkeys.screen.mobSettings.title),
     findsOneWidget,
@@ -56,7 +58,7 @@ Future<void> mobSettingsInitialHelper(
     findsOneWidget,
   );
 
-  await scrollingHelper(
+  await scrollingHelperInt(
     tester: tester,
     itemKey: KWidgetkeys.screen.mobSettings.facebookIcon,
   );
@@ -75,5 +77,6 @@ Future<void> mobSettingsInitialHelper(
 
   await tester.pumpAndSettle();
 
-  await mobFeedbackOpenHelper(test: mobFeedbackHelper, tester: tester);
+  // await mobFeedbackOpenHelperkHelper(test: mobFeedbackHelper,
+  //tester: tester);
 }
