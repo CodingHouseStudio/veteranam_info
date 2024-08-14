@@ -25,7 +25,7 @@ void main() {
         ? Config.isDevelopment
             ? KWidgetkeys.widget.footer.buttonsKey
             : KWidgetkeys.widget.footer.buttonsProdKey
-        : KWidgetkeys.widget.mobNavigation.buttonsKey;
+        : KWidgetkeys.widget.mobNavigation.navButtonsKey.sublist(1);
 
     for (var i = 0; i < buttonsKey.length; i++) {
       // if (i == 5) {
@@ -82,9 +82,9 @@ void main() {
 
         switch (i) {
           case 0:
-            await homeInitialHelper(tester);
-          case 1:
             await investorsInitialHelper(tester);
+          case 1:
+            await mobSettingsInitialHelper(tester);
         }
       }
     }
