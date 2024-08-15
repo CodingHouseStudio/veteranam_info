@@ -47,7 +47,6 @@ class _FeedbackBodyWidgetState extends State<FeedbackBodyWidget> {
         return ScaffoldWidget(
           showMobBottomNavigation: false,
           pageName: context.l10n.feedback,
-          hasFooter: true,
           mainChildWidgetsFunction: ({required isDesk, required isTablet}) => [
             if (context.read<FeedbackBloc>().state.formState ==
                     FeedbackEnum.success ||
