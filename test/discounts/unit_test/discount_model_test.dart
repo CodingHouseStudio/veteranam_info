@@ -99,8 +99,7 @@ void main() {
           KTestText.discountModelItems.last.exclusions,
       DiscountModelJsonField.expiration:
           KTestText.discountModelItems.last.expiration,
-      DiscountModelJsonField.phoneNumber:
-          KTestText.discountModelItems.last.phoneNumber,
+      DiscountModelJsonField.phoneNumber: null,
       DiscountModelJsonField.requirements:
           KTestText.discountModelItems.last.requirements,
       DiscountModelJsonField.subcategory:
@@ -356,7 +355,7 @@ void main() {
         );
         expect(
           discountModel.phoneNumber,
-          KTestText.discountModelItems.last.phoneNumber,
+          null,
         );
         expect(
           discountModel.requirements,
@@ -526,6 +525,7 @@ void main() {
               locationEN: null,
               expirationEN: null,
               additionalDetailsEN: null, companyEN: null,
+              phoneNumber: null,
             )
             .toJson();
 
