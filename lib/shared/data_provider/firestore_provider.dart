@@ -28,7 +28,7 @@ class FirestoreService {
   @visibleForTesting
   static const getCacheOptions = GetOptions(source: Source.cache);
 
-  Future<void> _initFirestoreSettings() async {
+  void _initFirestoreSettings() {
     // Set settings for persistence based on platform
     _db.settings = const Settings(
       persistenceEnabled: true,
