@@ -70,7 +70,7 @@ extension DiscountModelLocation on DiscountModel {
       '$phoneNumber'
       '${KPlatformConstants.isWebDesktop ? '***' : '](tel:'
           // ignore: lines_longer_than_80_chars
-          '${phoneNumber.replaceAll('(', '').replaceAll(')', '').replaceAll(' ', '')})'}';
+          '${phoneNumber?.replaceAll('(', '').replaceAll(')', '').replaceAll(' ', '') ?? ''})'}';
 
   List<String> getCityList(BuildContext context) => [
         if (context.isEnglish)
