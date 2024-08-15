@@ -62,15 +62,20 @@ extension DiscountModelLocation on DiscountModel {
       '${context.isEnglish ? descriptionEN : description}\n'
       '\n***${context.l10n.toGetItYouNeed}***\n'
       '\n- ${context.isEnglish ? requirementsEN : requirements}\n'
-      '\n${context.isEnglish ? exclusionsEN : exclusions}\n'
-      // ignore: lines_longer_than_80_chars
-      '${additionalDetails != null ? '\n${context.isEnglish ? additionalDetailsEN : additionalDetails ?? ''}\n' : ''}'
-      '\n***${context.l10n.callForDetails}:***'
+      '\n${context.isEnglish ? exclusionsEN : exclusions}'
+      '${additionalDetails != null ? _getMarkdownAdditionalDetails : ''}'
+      '${phoneNumber != null ? _getMarkdownPhoneNumber(context) : ''}';
+
+  String _getMarkdownAdditionalDetails(BuildContext context) => '\n\n'
+      '${context.isEnglish ? additionalDetailsEN : additionalDetails ?? ''}';
+
+  String _getMarkdownPhoneNumber(BuildContext context) =>
+      '\n\n***${context.l10n.callForDetails}:***'
       ' ${KPlatformConstants.isWebDesktop ? '***' : '['}'
       '$phoneNumber'
       '${KPlatformConstants.isWebDesktop ? '***' : '](tel:'
           // ignore: lines_longer_than_80_chars
-          '${phoneNumber?.replaceAll('(', '').replaceAll(')', '').replaceAll(' ', '') ?? ''})'}';
+          '${phoneNumber!.replaceAll('(', '').replaceAll(')', '').replaceAll(' ', '')})'}';
 
   List<String> getCityList(BuildContext context) => [
         if (context.isEnglish)
