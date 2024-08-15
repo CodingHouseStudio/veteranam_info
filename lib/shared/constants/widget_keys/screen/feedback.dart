@@ -21,7 +21,7 @@ class _FeedbackKeys {
   final boxSocialMedia = const Key('feedback_screen_box_social_media');
   final boxText = const Key('feedback_screen_box_text');
   final boxBackButton = const Key('feedback_screen_box_back_button');
-  final boxAgainButton = const Key('feedback_screen_box_again_button');
+  final boxButton = const Key('feedback_screen_box_button');
   // final boxInformationBox = const Key('feedback_screen_box_information_box');
   // final boxInvestorsBox = const Key('feedback_screen_box_investors_box');
   // final boxStoryBox = const Key('feedback_screen_box_story_box');

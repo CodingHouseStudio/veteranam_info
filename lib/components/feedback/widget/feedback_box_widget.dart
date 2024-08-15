@@ -60,14 +60,14 @@ List<Widget> _feedbackBoxWidgetList({
                                 KWidgetkeys.screen.feedback.boxBackButton,
                             text: context.l10n.toTheMainPage,
                             isDesk: true,
-                            onPressed: () => context.goNamed(KRoute.home.name),
+                            onPressed: () => _navMain(context),
                             color: AppColors.materialThemeBlack,
                             textColor: AppColors.materialThemeWhite,
                             align: Alignment.center,
                           ),
                           KSizedBox.kWidthSizedBox24,
                           TextButton(
-                            key: KWidgetkeys.screen.feedback.boxAgainButton,
+                            key: KWidgetkeys.screen.feedback.boxButton,
                             onPressed: sendAgain,
                             //() =>
                             //context.goNamed(KRoute.feedback.name),
@@ -102,7 +102,7 @@ List<Widget> _feedbackBoxWidgetList({
               widgetKey: KWidgetkeys.screen.feedback.boxBackButton,
               text: context.l10n.toTheMainPage,
               isDesk: false,
-              onPressed: () => context.goNamed(KRoute.home.name),
+              onPressed: () => _navMain(context),
               color: AppColors.materialThemeBlack,
               textColor: AppColors.materialThemeWhite,
               mobTextWidth: double.infinity,
@@ -111,7 +111,7 @@ List<Widget> _feedbackBoxWidgetList({
             ),
             KSizedBox.kHeightSizedBox16,
             TextButton(
-              key: KWidgetkeys.screen.feedback.boxAgainButton,
+              key: KWidgetkeys.screen.feedback.boxButton,
               onPressed:
                   sendAgain, //() => context.goNamed(KRoute.feedback.name),
               style: KButtonStyles.borderBlackButtonStyle,
@@ -143,3 +143,7 @@ List<Widget> _feedbackBoxWidgetList({
               ),
             ),
           ];
+
+void _navMain(BuildContext context) => context.goNamed(
+      KTest.testIsWeb ? KRoute.home.name : KRoute.discounts.name,
+    );

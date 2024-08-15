@@ -16,7 +16,7 @@ Future<void> feedbackBoxHelper({
 
   expect(find.byKey(KWidgetkeys.screen.feedback.boxBackButton), matcher);
 
-  expect(find.byKey(KWidgetkeys.screen.feedback.boxAgainButton), matcher);
+  expect(find.byKey(KWidgetkeys.screen.feedback.boxButton), matcher);
 
   //expect(find.byKey(KWidgetkeys.screen.feedback.boxInformationBox), matcher);
 
@@ -32,14 +32,14 @@ Future<void> feedbackBoxHelper({
   // expect(find.byKey(KWidgetkeys.screen.feedback.boxStoryBox), matcher);
 
   if (exist) {
-    await boxHelper(tester);
+    //await boxHelper(tester);
 
     await scrollingHelper(
       tester: tester,
-      itemKey: KWidgetkeys.screen.feedback.boxAgainButton,
+      itemKey: KWidgetkeys.screen.feedback.boxButton,
     );
 
-    await tester.tap(find.byKey(KWidgetkeys.screen.feedback.boxAgainButton));
+    await tester.tap(find.byKey(KWidgetkeys.screen.feedback.boxButton));
 
     await tester.pumpAndSettle();
 

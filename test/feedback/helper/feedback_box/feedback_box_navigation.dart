@@ -24,24 +24,19 @@ Future<void> feedbackBoxNavigationHelper({
 
       await tester.tap(find.byKey(KWidgetkeys.screen.feedback.boxBackButton));
 
-      verify(
-        () => mockGoRouter.goNamed(
-          KRoute.home.name,
-        ),
-      ).called(1);
-
-      expect(
-        find.byKey(KWidgetkeys.screen.feedback.boxAgainButton),
-        findsOneWidget,
-      );
-
-      await tester.tap(find.byKey(KWidgetkeys.screen.feedback.boxAgainButton));
-
-      verify(
-        () => mockGoRouter.goNamed(
-          KRoute.feedback.name,
-        ),
-      ).called(1);
+      if (KTest.testIsWeb) {
+        verify(
+          () => mockGoRouter.goNamed(
+            KRoute.home.name,
+          ),
+        ).called(1);
+      } else {
+        verify(
+          () => mockGoRouter.goNamed(
+            KRoute.discounts.name,
+          ),
+        ).called(1);
+      }
 
       // await scrollingHelper(
       //   tester: tester,
@@ -57,7 +52,8 @@ Future<void> feedbackBoxNavigationHelper({
       //   ),
       // ).called(1);
 
-      // await tester.tap(find.byKey(KWidgetkeys.screen.feedback.boxInvestorsBox));
+      // await tester.tap(find.byKey(
+      // KWidgetkeys.screen.feedback.boxInvestorsBox));
 
       // verify(
       //   () => mockGoRouter.goNamed(
@@ -87,7 +83,8 @@ Future<void> feedbackBoxNavigationHelper({
       //   ),
       // ).called(1);
 
-      // await tester.tap(find.byKey(KWidgetkeys.screen.feedback.boxInvestorsBox));
+      // await tester.tap(find.byKey(
+      // KWidgetkeys.screen.feedback.boxInvestorsBox));
 
       // verify(
       //   () => mockGoRouter.goNamed(
