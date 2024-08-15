@@ -47,6 +47,7 @@ class _FeedbackBodyWidgetState extends State<FeedbackBodyWidget> {
         return ScaffoldWidget(
           showMobBottomNavigation: false,
           pageName: context.l10n.feedback,
+          hasFooter: true,
           mainChildWidgetsFunction: ({required isDesk, required isTablet}) => [
             if (context.read<FeedbackBloc>().state.formState ==
                     FeedbackEnum.success ||
@@ -84,7 +85,10 @@ class _FeedbackBodyWidgetState extends State<FeedbackBodyWidget> {
                 messageController: messageController,
               ),
             ],
-            KSizedBox.kHeightSizedBox100,
+            if (isDesk)
+              KSizedBox.kHeightSizedBox100
+            else
+              KSizedBox.kHeightSizedBox32,
           ],
         );
       },
