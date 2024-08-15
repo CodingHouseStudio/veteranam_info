@@ -78,6 +78,7 @@ class InformationWatcherBloc
     _Updated event,
     Emitter<InformationWatcherState> emit,
   ) {
+    if (event.informationItemsModel.isEmpty && Config.isProduction) return;
     // final items = event.informationItemsModel.removeReportItems(
     //   checkFunction: (item) => item.id,
     //   reportItems: event.reportItems,

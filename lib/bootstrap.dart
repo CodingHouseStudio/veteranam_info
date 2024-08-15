@@ -39,12 +39,7 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
   };
 
   Bloc.observer = const AppBlocObserver();
-  try {
-    configureDependencies();
-  } catch (e) {
-    final value = e;
-    final valu2 = e;
-  }
+  configureDependencies();
 
   await initializeDateFormatting();
 

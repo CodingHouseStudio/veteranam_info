@@ -4,11 +4,7 @@ import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:veteranam/shared/shared.dart';
 
-@Singleton(
-  as: IWorkRepository,
-  env: [Config.development],
-  dependsOn: [FirestoreService],
-)
+@Singleton(as: IWorkRepository, env: [Config.development])
 class WorkRepository implements IWorkRepository {
   final FirestoreService _firestoreService = GetIt.I.get<FirestoreService>();
   final StorageService _storageService = GetIt.I.get<StorageService>();

@@ -60,6 +60,7 @@ class WorkEmployeeWatcherBloc
     _Updated event,
     Emitter<WorkEmployeeWatcherState> emit,
   ) {
+    if (event.workItemsModel.isEmpty && Config.isProduction) return;
     final filterItems = _filter(
       city: state.city,
       category: state.category,

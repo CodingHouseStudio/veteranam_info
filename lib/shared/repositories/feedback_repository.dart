@@ -6,7 +6,7 @@ import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:veteranam/shared/shared.dart';
 
-@Singleton(as: IFeedbackRepository, dependsOn: [FirestoreService])
+@Singleton(as: IFeedbackRepository)
 class FeedbackRepository implements IFeedbackRepository {
   final FirestoreService _firestoreService = GetIt.I.get<FirestoreService>();
   final StorageService _storageService = GetIt.I.get<StorageService>();

@@ -8,7 +8,7 @@ import 'package:veteranam/shared/shared.dart';
 /// A singleton class that implements the [IAppNetworkRepository] interface.
 /// This class is responsible for monitoring network connectivity and caching
 /// the results.
-@Singleton(as: IAppNetworkRepository)
+@Singleton(as: IAppNetworkRepository, order: -2)
 class AppNetworkRepository implements IAppNetworkRepository {
   /// Constructor for [AppNetworkRepository].
   /// Takes [Connectivity] and [CacheClient] as dependencies.
@@ -40,18 +40,13 @@ class AppNetworkRepository implements IAppNetworkRepository {
           }
         },
       );
-  @override
-  Future<void> updateCacheConnectivityResults() async => _cache.write(
-        key: connectivityCacheKey,
-        value: await _connectivity.checkConnectivity(),
-      );
 
   /// Retrieves the current [ConnectivityResult] from the cache.
   /// If the cache is empty, returns [ConnectivityResult.none].
   @override
   List<ConnectivityResult> get currentConnectivityResults =>
       _cache.read<List<ConnectivityResult>>(key: connectivityCacheKey) ??
-      [ConnectivityResult.none];
+      [ConnectivityResult.wifi];
 
   /// Updates the authentication status based on the cached connectivity
   /// results.

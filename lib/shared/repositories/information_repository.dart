@@ -6,11 +6,7 @@ import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:veteranam/shared/shared.dart';
 
-@Singleton(
-  as: IInformationRepository,
-  env: [Config.development],
-  dependsOn: [FirestoreService],
-)
+@Singleton(as: IInformationRepository, env: [Config.development])
 class InformationRepository implements IInformationRepository {
   final FirestoreService _firestoreService = GetIt.I.get<FirestoreService>();
 

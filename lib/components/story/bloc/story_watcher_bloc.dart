@@ -54,6 +54,7 @@ class StoryWatcherBloc extends Bloc<StoryWatcherEvent, StoryWatcherState> {
     _Updated event,
     Emitter<StoryWatcherState> emit,
   ) {
+    if (event.storyItemsModel.isEmpty && Config.isProduction) return;
     emit(
       StoryWatcherState(
         storyModelItems: event.storyItemsModel,

@@ -23,12 +23,14 @@ void configureDependenciesTest() {
   GetIt.I.registerSingleton<Connectivity>(
     Connectivity(),
   );
+  // Repository
   GetIt.I.registerSingleton<IAppNetworkRepository>(
     AppNetworkRepository(
       GetIt.I.get<Connectivity>(),
       CacheClient(),
     ),
   );
+  // Service
   GetIt.I.registerSingleton<FirestoreService>(
     FirestoreService(
       GetIt.I.get<IAppNetworkRepository>(),

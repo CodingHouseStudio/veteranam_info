@@ -1,20 +1,19 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-// import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/foundation.dart' show visibleForTesting;
 import 'package:flutter/widgets.dart';
 import 'package:injectable/injectable.dart';
 import 'package:veteranam/shared/shared.dart';
 
 /// COMMENT: Class to get, update, delete or set values in firebase
-@singleton //(dependsOn: [IAppNetworkRepository])
+@Singleton(order: -1)
 class FirestoreService {
   FirestoreService(
-      // this.appNetworkRepository,
-      ) {
+    this.appNetworkRepository,
+  ) {
     // Initialization logic can't use await directly in constructor
     _initFirestoreSettings();
   }
-  // final IAppNetworkRepository appNetworkRepository;
+  final IAppNetworkRepository appNetworkRepository;
   // final IAppNetworkRepository appNetworkRepository = AppNetworkRepository(
   //   Connectivity(),
   //   CacheClient(),
@@ -146,18 +145,23 @@ class FirestoreService {
           .snapshots(includeMetadataChanges: true) // Enable caching
           .map(
         (snapshot) {
+          late var isFromCache = false;
           for (final change in snapshot.docChanges) {
             if (change.type == DocumentChangeType.added) {
+              isFromCache = snapshot.metadata.isFromCache;
               // ignore: unused_local_variable
-              final source = (snapshot.metadata.isFromCache)
-                  ? KAppText.cache
-                  : KAppText.server;
+              // final source = (snapshot.metadata.isFromCache)
+              //     ? KAppText.cache
+              //     : KAppText.server;
               // debugPrint('Data fetched from $source}');
             }
           }
-          return snapshot.docs
-              .map((doc) => InformationModel.fromJson(doc.data()))
-              .toList();
+          return _tryCatchForCache(
+            isFromCache: isFromCache,
+            event: () => snapshot.docs
+                .map((doc) => InformationModel.fromJson(doc.data()))
+                .toList(),
+          );
         },
       );
 
@@ -222,18 +226,23 @@ class FirestoreService {
           .snapshots(includeMetadataChanges: true) // Enable caching
           .map(
         (snapshot) {
+          late var isFromCache = false;
           for (final change in snapshot.docChanges) {
             if (change.type == DocumentChangeType.added) {
+              isFromCache = snapshot.metadata.isFromCache;
               // ignore: unused_local_variable
-              final source = (snapshot.metadata.isFromCache)
-                  ? KAppText.cache
-                  : KAppText.server;
+              // final source = (snapshot.metadata.isFromCache)
+              //     ? KAppText.cache
+              //     : KAppText.server;
               // debugPrint('Data fetched from $source}');
             }
           }
-          return snapshot.docs
-              .map((doc) => WorkModel.fromJson(doc.data()))
-              .toList();
+          return _tryCatchForCache<WorkModel>(
+            event: () => snapshot.docs
+                .map((doc) => WorkModel.fromJson(doc.data()))
+                .toList(),
+            isFromCache: isFromCache,
+          );
         },
       );
 
@@ -249,18 +258,23 @@ class FirestoreService {
           .snapshots(includeMetadataChanges: true) // Enable caching
           .map(
         (snapshot) {
+          late var isFromCache = false;
           for (final change in snapshot.docChanges) {
             if (change.type == DocumentChangeType.added) {
+              isFromCache = snapshot.metadata.isFromCache;
               // ignore: unused_local_variable
-              final source = (snapshot.metadata.isFromCache)
-                  ? KAppText.cache
-                  : KAppText.server;
+              // final source = (snapshot.metadata.isFromCache)
+              //     ? KAppText.cache
+              //     : KAppText.server;
               // debugPrint('Data fetched from $source}');
             }
           }
-          return snapshot.docs
-              .map((doc) => StoryModel.fromJson(doc.data()))
-              .toList();
+          return _tryCatchForCache(
+            isFromCache: isFromCache,
+            event: () => snapshot.docs
+                .map((doc) => StoryModel.fromJson(doc.data()))
+                .toList(),
+          );
         },
       );
 
@@ -298,9 +312,9 @@ class FirestoreService {
             isFromCache = snapshot.metadata.isFromCache;
 
             // ignore: unused_local_variable
-            final source = (snapshot.metadata.isFromCache)
-                ? KAppText.cache
-                : KAppText.server;
+            // final source = (snapshot.metadata.isFromCache)
+            //     ? KAppText.cache
+            //     : KAppText.server;
             // debugPrint('Data fetched from $source');
           }
         }
@@ -457,13 +471,10 @@ class FirestoreService {
     required bool isFromCache,
     required List<T> Function() event,
   }) {
-    if (isFromCache
-        // &&
-        // appNetworkRepository.currentConnectivityResults.hasNetwork
-        ) {
+    if (isFromCache &&
+        appNetworkRepository.currentConnectivityResults.hasNetwork) {
       try {
         return event();
-        // ignore: empty_catches
       } catch (e) {
         return [];
       }
