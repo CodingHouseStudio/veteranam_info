@@ -9893,6 +9893,16 @@ class MockIAppNetworkRepository extends _i1.Mock
         returnValue: <_i18.ConnectivityResult>[],
         returnValueForMissingStub: <_i18.ConnectivityResult>[],
       ) as List<_i18.ConnectivityResult>);
+
+  @override
+  _i8.Future<void> updateCacheConnectivityResults() => (super.noSuchMethod(
+        Invocation.method(
+          #updateCacheConnectivityResults,
+          [],
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
 }
 
 /// A class which mocks [Connectivity].

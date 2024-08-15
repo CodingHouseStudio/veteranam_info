@@ -9,7 +9,7 @@ part 'work_employee_watcher_bloc.freezed.dart';
 part 'work_employee_watcher_event.dart';
 part 'work_employee_watcher_state.dart';
 
-@Injectable()
+@Injectable(env: [Config.development])
 class WorkEmployeeWatcherBloc
     extends Bloc<WorkEmployeeWatcherEvent, WorkEmployeeWatcherState> {
   WorkEmployeeWatcherBloc({required IWorkRepository workRepository})

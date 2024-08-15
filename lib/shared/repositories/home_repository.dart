@@ -4,7 +4,7 @@ import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:veteranam/shared/shared.dart';
 
-@Singleton(as: IHomeRepository)
+@Singleton(as: IHomeRepository, dependsOn: [FirestoreService])
 class HomeRepository implements IHomeRepository {
   final FirestoreService _firestoreService = GetIt.I.get<FirestoreService>();
 

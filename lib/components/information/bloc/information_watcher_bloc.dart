@@ -9,7 +9,7 @@ part 'information_watcher_bloc.freezed.dart';
 part 'information_watcher_event.dart';
 part 'information_watcher_state.dart';
 
-@Injectable()
+@Injectable(env: [Config.development])
 class InformationWatcherBloc
     extends Bloc<InformationWatcherEvent, InformationWatcherState> {
   InformationWatcherBloc({

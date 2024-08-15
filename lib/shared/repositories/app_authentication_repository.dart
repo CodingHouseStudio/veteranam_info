@@ -10,7 +10,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
 import 'package:veteranam/shared/shared.dart';
 
-@Singleton(as: IAppAuthenticationRepository)
+@Singleton(as: IAppAuthenticationRepository, dependsOn: [FirestoreService])
 class AppAuthenticationRepository implements IAppAuthenticationRepository {
   AppAuthenticationRepository(
     // super.dioClient,

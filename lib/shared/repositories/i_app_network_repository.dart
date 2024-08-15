@@ -4,4 +4,6 @@ abstract class IAppNetworkRepository {
   Stream<List<ConnectivityResult>> get connectivityResults;
 
   List<ConnectivityResult> get currentConnectivityResults;
+
+  Future<void> updateCacheConnectivityResults();
 }

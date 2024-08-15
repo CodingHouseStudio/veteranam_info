@@ -1,17 +1,24 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/foundation.dart' show visibleForTesting;
 import 'package:flutter/widgets.dart';
 import 'package:injectable/injectable.dart';
 import 'package:veteranam/shared/shared.dart';
 
 /// COMMENT: Class to get, update, delete or set values in firebase
-@singleton
+@singleton //(dependsOn: [IAppNetworkRepository])
 class FirestoreService {
-  FirestoreService() {
+  FirestoreService(
+      // this.appNetworkRepository,
+      ) {
     // Initialization logic can't use await directly in constructor
     _initFirestoreSettings();
   }
-
+  // final IAppNetworkRepository appNetworkRepository;
+  // final IAppNetworkRepository appNetworkRepository = AppNetworkRepository(
+  //   Connectivity(),
+  //   CacheClient(),
+  // );
   final FirebaseFirestore _db = firebaseFirestore;
 
   @visibleForTesting
@@ -26,6 +33,7 @@ class FirestoreService {
     _db.settings = const Settings(
       persistenceEnabled: true,
     );
+    // await appNetworkRepository.updateCacheConnectivityResults();
   }
 
   Future<void> addFeedback(FeedbackModel feedback) {
@@ -141,8 +149,9 @@ class FirestoreService {
           for (final change in snapshot.docChanges) {
             if (change.type == DocumentChangeType.added) {
               // ignore: unused_local_variable
-              final source =
-                  (snapshot.metadata.isFromCache) ? 'local cache' : 'server';
+              final source = (snapshot.metadata.isFromCache)
+                  ? KAppText.cache
+                  : KAppText.server;
               // debugPrint('Data fetched from $source}');
             }
           }
@@ -188,8 +197,9 @@ class FirestoreService {
         (snapshot) {
           if (snapshot.exists) {
             // ignore: unused_local_variable
-            final source =
-                (snapshot.metadata.isFromCache) ? 'local cache' : 'server';
+            final source = (snapshot.metadata.isFromCache)
+                ? KAppText.cache
+                : KAppText.server;
             // debugPrint('Data fetched from $source}');
             return UserSetting.fromJson(snapshot.data()!);
           } else {
@@ -215,8 +225,9 @@ class FirestoreService {
           for (final change in snapshot.docChanges) {
             if (change.type == DocumentChangeType.added) {
               // ignore: unused_local_variable
-              final source =
-                  (snapshot.metadata.isFromCache) ? 'local cache' : 'server';
+              final source = (snapshot.metadata.isFromCache)
+                  ? KAppText.cache
+                  : KAppText.server;
               // debugPrint('Data fetched from $source}');
             }
           }
@@ -241,8 +252,9 @@ class FirestoreService {
           for (final change in snapshot.docChanges) {
             if (change.type == DocumentChangeType.added) {
               // ignore: unused_local_variable
-              final source =
-                  (snapshot.metadata.isFromCache) ? 'local cache' : 'server';
+              final source = (snapshot.metadata.isFromCache)
+                  ? KAppText.cache
+                  : KAppText.server;
               // debugPrint('Data fetched from $source}');
             }
           }
@@ -270,7 +282,9 @@ class FirestoreService {
         .toList();
   }
 
-  Stream<List<DiscountModel>> getDiscounts(List<String>? reportIdItems) {
+  Stream<List<DiscountModel>> getDiscounts(
+    List<String>? reportIdItems,
+  ) {
     return _db
         .collection(FirebaseCollectionName.discount)
         .orderBy(DiscountModelJsonField.dateVerified, descending: true)
@@ -278,17 +292,25 @@ class FirestoreService {
         .snapshots(includeMetadataChanges: true) // Enable caching
         .map(
       (snapshot) {
+        late var isFromCache = false;
         for (final change in snapshot.docChanges) {
           if (change.type == DocumentChangeType.added) {
+            isFromCache = snapshot.metadata.isFromCache;
+
             // ignore: unused_local_variable
-            final source =
-                (snapshot.metadata.isFromCache) ? 'local cache' : 'server';
+            final source = (snapshot.metadata.isFromCache)
+                ? KAppText.cache
+                : KAppText.server;
             // debugPrint('Data fetched from $source');
           }
         }
-        return snapshot.docs
-            .map((doc) => DiscountModel.fromJson(doc.data()))
-            .toList();
+
+        return _tryCatchForCache<DiscountModel>(
+          event: () => snapshot.docs
+              .map((doc) => DiscountModel.fromJson(doc.data()))
+              .toList(),
+          isFromCache: isFromCache,
+        );
       },
     );
   }
@@ -340,7 +362,8 @@ class FirestoreService {
   //         for (final change in snapshot.docChanges) {
   //           if (change.type == DocumentChangeType.added) {
   //             final source =
-  //                 (snapshot.metadata.isFromCache) ? 'local cache' : 'server';
+  //                 (snapshot.metadata.isFromCache) ? KAppText.cache :
+  // KAppText.server;
   //             debugPrint('Data fetched from $source}');
   //           }
   //         }
@@ -429,6 +452,25 @@ class FirestoreService {
       .collection(FirebaseCollectionName.respond)
       .doc(respondModel.id)
       .set(respondModel.toJson());
+
+  List<T> _tryCatchForCache<T>({
+    required bool isFromCache,
+    required List<T> Function() event,
+  }) {
+    if (isFromCache
+        // &&
+        // appNetworkRepository.currentConnectivityResults.hasNetwork
+        ) {
+      try {
+        return event();
+        // ignore: empty_catches
+      } catch (e) {
+        return [];
+      }
+    } else {
+      return event();
+    }
+  }
 }
 
 extension CardEnumExtention on CardEnum {

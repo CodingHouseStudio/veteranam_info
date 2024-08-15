@@ -40,6 +40,11 @@ class AppNetworkRepository implements IAppNetworkRepository {
           }
         },
       );
+  @override
+  Future<void> updateCacheConnectivityResults() async => _cache.write(
+        key: connectivityCacheKey,
+        value: await _connectivity.checkConnectivity(),
+      );
 
   /// Retrieves the current [ConnectivityResult] from the cache.
   /// If the cache is empty, returns [ConnectivityResult.none].

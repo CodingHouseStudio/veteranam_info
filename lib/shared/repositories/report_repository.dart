@@ -4,7 +4,7 @@ import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:veteranam/shared/shared.dart';
 
-@LazySingleton(as: IReportRepository)
+@Singleton(as: IReportRepository, dependsOn: [FirestoreService])
 class ReportRepository implements IReportRepository {
   final FirestoreService _firestoreService = GetIt.I.get<FirestoreService>();
 

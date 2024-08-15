@@ -10,7 +10,7 @@ enum AuthenticationStatus {
   authenticated,
 } //unauthenticated
 
-@Singleton()
+@singleton
 class AuthenticationRepository {
   AuthenticationRepository(
     this.iAppAuthenticationRepository,

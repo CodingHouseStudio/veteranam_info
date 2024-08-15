@@ -82,6 +82,7 @@ class DiscountWatcherBloc
     _Updated event,
     Emitter<DiscountWatcherState> emit,
   ) async {
+    if (event.discountItemsModel.isEmpty && Config.isProduction) return;
     // final items = event.discountItemsModel.removeReportItems(
     //   checkFunction: (item) => item.id,
     //   reportItems: event.reportItems,

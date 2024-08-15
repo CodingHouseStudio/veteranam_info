@@ -22,6 +22,7 @@ void main() {
         mockQueryDocumentSnapshot;
     late SnapshotMetadata mockSnapshotMetadata;
     late List<DocumentChange<Map<String, dynamic>>> mockDocumentChange;
+    late IAppNetworkRepository appNetworkRepository;
     setUp(() {
       mockCollectionReference = MockCollectionReference();
       mockFirebaseFirestore = MockFirebaseFirestore();
@@ -31,6 +32,7 @@ void main() {
       mockQueryDocumentSnapshot = [MockQueryDocumentSnapshot()];
       mockSnapshotMetadata = MockSnapshotMetadata();
       mockDocumentChange = [MockDocumentChange()];
+      appNetworkRepository = MockIAppNetworkRepository();
 
       when(
         mockFirebaseFirestore.collection(FirebaseCollectionName.discount),
@@ -126,7 +128,7 @@ void main() {
       );
 
       FirestoreService.firebaseFirestore = mockFirebaseFirestore;
-      firestoreService = FirestoreService();
+      firestoreService = FirestoreService(appNetworkRepository);
     });
 
     test('Get User Discount', () async {

@@ -4,7 +4,11 @@ import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:veteranam/shared/shared.dart';
 
-@LazySingleton(as: IWorkRepository)
+@Singleton(
+  as: IWorkRepository,
+  env: [Config.development],
+  dependsOn: [FirestoreService],
+)
 class WorkRepository implements IWorkRepository {
   final FirestoreService _firestoreService = GetIt.I.get<FirestoreService>();
   final StorageService _storageService = GetIt.I.get<StorageService>();

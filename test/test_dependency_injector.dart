@@ -17,14 +17,22 @@ void configureDependenciesTest() {
   GetIt.I.registerSingleton<FirebaseAuth>(MockFirebaseAuth());
   GetIt.I.registerSingleton<GoogleSignIn>(GoogleSignIn());
   GetIt.I.registerSingleton<FakeClient>(FakeClient());
-  GetIt.I.registerFactory<FirestoreService>(
-    FirestoreService.new,
-  );
   GetIt.I.registerSingleton<StorageService>(
     MockStorageService(),
   );
   GetIt.I.registerSingleton<Connectivity>(
     Connectivity(),
+  );
+  GetIt.I.registerSingleton<IAppNetworkRepository>(
+    AppNetworkRepository(
+      GetIt.I.get<Connectivity>(),
+      CacheClient(),
+    ),
+  );
+  GetIt.I.registerSingleton<FirestoreService>(
+    FirestoreService(
+      GetIt.I.get<IAppNetworkRepository>(),
+    ),
   );
   // Repositories
   GetIt.I.registerLazySingleton<IStorage>(SecureStorageRepository.new);
@@ -46,12 +54,6 @@ void configureDependenciesTest() {
   GetIt.I.registerSingleton<IDiscountRepository>(DiscountRepository());
   GetIt.I.registerSingleton<IReportRepository>(ReportRepository());
   GetIt.I.registerSingleton<IUrlRepository>(UrlRepository());
-  GetIt.I.registerSingleton<IAppNetworkRepository>(
-    AppNetworkRepository(
-      GetIt.I.get<Connectivity>(),
-      CacheClient(),
-    ),
-  );
   GetIt.I.registerSingleton<NetworkRepository>(
     NetworkRepository(
       GetIt.I.get<IAppNetworkRepository>(),

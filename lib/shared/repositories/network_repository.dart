@@ -9,7 +9,7 @@ enum NetworkStatus {
   offline,
 }
 
-@Singleton()
+@singleton
 class NetworkRepository {
   NetworkRepository(
     this.appNetworkRepository,
