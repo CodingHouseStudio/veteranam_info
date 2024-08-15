@@ -48,19 +48,34 @@ class _FeedbackBodyWidgetState extends State<FeedbackBodyWidget> {
           showMobBottomNavigation: false,
           pageName: context.l10n.feedback,
           mainChildWidgetsFunction: ({required isDesk, required isTablet}) => [
-            ..._titleWidgetList(isDesk: isDesk, context: context),
             if (context.read<FeedbackBloc>().state.formState ==
                     FeedbackEnum.success ||
                 context.read<FeedbackBloc>().state.formState ==
-                    FeedbackEnum.sendingMessage)
+                    FeedbackEnum.sendingMessage) ...[
+              ..._titleWidgetList(
+                isDesk: isDesk,
+                context: context,
+                title: context.l10n.thanks,
+                titleSecondPart: null,
+                text: null,
+                secondText: context.l10n.thanks,
+              ),
               ..._feedbackBoxWidgetList(
                 isDesk: isDesk,
                 sendAgain: () => context
                     .read<FeedbackBloc>()
                     .add(const FeedbackEvent.sendignMessageAgain()),
                 context: context,
-              )
-            else
+              ),
+            ] else ...[
+              ..._titleWidgetList(
+                isDesk: isDesk,
+                context: context,
+                title: context.l10n.write,
+                titleSecondPart: '${context.l10n.us} ${context.l10n.aMessage}',
+                text: '${context.l10n.write} ${context.l10n.us}',
+                secondText: context.l10n.aMessage,
+              ),
               ..._formWidgegList(
                 isDesk: isDesk,
                 context: context,
@@ -68,6 +83,7 @@ class _FeedbackBodyWidgetState extends State<FeedbackBodyWidget> {
                 emailController: emailController,
                 messageController: messageController,
               ),
+            ],
             KSizedBox.kHeightSizedBox100,
           ],
         );

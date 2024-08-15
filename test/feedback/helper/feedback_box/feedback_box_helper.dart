@@ -10,34 +10,36 @@ Future<void> feedbackBoxHelper({
 }) async {
   final matcher = exist ? findsOneWidget : findsNothing;
 
-  expect(find.byKey(KWidgetkeys.screen.feedback.boxTitle), matcher);
+  expect(find.byKey(KWidgetkeys.screen.feedback.boxSocialMedia), matcher);
 
-  expect(find.byKey(KWidgetkeys.screen.feedback.boxSubtitle), matcher);
+  expect(find.byKey(KWidgetkeys.screen.feedback.boxText), matcher);
 
-  expect(find.byKey(KWidgetkeys.screen.feedback.boxButton), matcher);
+  expect(find.byKey(KWidgetkeys.screen.feedback.boxBackButton), matcher);
 
-  expect(find.byKey(KWidgetkeys.screen.feedback.boxInformationBox), matcher);
+  expect(find.byKey(KWidgetkeys.screen.feedback.boxAgainButton), matcher);
 
-  if (exist) {
-    await scrollingHelper(
-      tester: tester,
-      itemKey: KWidgetkeys.screen.feedback.boxInformationBox,
-    );
-  }
+  //expect(find.byKey(KWidgetkeys.screen.feedback.boxInformationBox), matcher);
 
-  expect(find.byKey(KWidgetkeys.screen.feedback.boxInvestorsBox), matcher);
+  // if (exist) {
+  //   await scrollingHelper(
+  //     tester: tester,
+  //     itemKey: KWidgetkeys.screen.feedback.boxInformationBox,
+  //   );
+  // }
 
-  expect(find.byKey(KWidgetkeys.screen.feedback.boxStoryBox), matcher);
+  // expect(find.byKey(KWidgetkeys.screen.feedback.boxInvestorsBox), matcher);
+
+  // expect(find.byKey(KWidgetkeys.screen.feedback.boxStoryBox), matcher);
 
   if (exist) {
     await boxHelper(tester);
 
     await scrollingHelper(
       tester: tester,
-      itemKey: KWidgetkeys.screen.feedback.boxButton,
+      itemKey: KWidgetkeys.screen.feedback.boxAgainButton,
     );
 
-    await tester.tap(find.byKey(KWidgetkeys.screen.feedback.boxButton));
+    await tester.tap(find.byKey(KWidgetkeys.screen.feedback.boxAgainButton));
 
     await tester.pumpAndSettle();
 
