@@ -1039,7 +1039,11 @@
   },
   "copyEmail": "Email copied",
   "@copyEmail": {
-    "examples": "Text of the dialog on the settings page on the mobile version"
+    "examples": "Text of the copy dialog"
+  },
+  "copyLink": "Link copied",
+  "@copyLink": {
+    "examples": "Text of the copy dialog"
   },
   "copyFailure": "Failed to copy email",
   "@copyFailure": {

@@ -32,7 +32,7 @@ abstract class SharedIconListWidget {
         listener: (context, state) {
           if (state == UrlEnum.copySucceed) {
             context.dialog.showSnackBardTextDialog(
-              state?.value(context),
+              context.l10n.copyLink,
               duration: const Duration(milliseconds: 4000),
             );
             context.read<UrlCubit>().reset();
