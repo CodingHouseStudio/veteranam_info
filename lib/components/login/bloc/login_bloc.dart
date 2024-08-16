@@ -9,7 +9,7 @@ part 'login_bloc.freezed.dart';
 part 'login_event.dart';
 part 'login_state.dart';
 
-@Injectable()
+@Injectable(env: [Config.development])
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc({required IAppAuthenticationRepository appAuthenticationRepository})
       : _appAuthenticationRepository = appAuthenticationRepository,

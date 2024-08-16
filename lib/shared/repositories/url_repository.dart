@@ -5,7 +5,7 @@ import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart' as url_launcher;
 import 'package:veteranam/shared/shared.dart';
 
-@Singleton(as: IUrlRepository)
+@LazySingleton(as: IUrlRepository)
 class UrlRepository extends IUrlRepository {
   @override
   Future<Either<SomeFailure, bool>> share(String url) async {

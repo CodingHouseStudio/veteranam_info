@@ -9,7 +9,7 @@ enum NetworkStatus {
   offline,
 }
 
-@Singleton()
+@singleton
 class NetworkRepository {
   NetworkRepository(
     this.appNetworkRepository,
@@ -52,6 +52,7 @@ class NetworkRepository {
     }
   }
 
+  @disposeMethod
   void dispose() {
     _networkStatuscontroller.close();
     _listConnectivityResultSubscription?.cancel();

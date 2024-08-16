@@ -9,7 +9,7 @@ part 'story_add_bloc.freezed.dart';
 part 'story_add_event.dart';
 part 'story_add_state.dart';
 
-@Injectable()
+@Injectable(env: [Config.development])
 class StoryAddBloc extends Bloc<StoryAddEvent, StoryAddState> {
   StoryAddBloc({
     required IStoryRepository storyRepository,

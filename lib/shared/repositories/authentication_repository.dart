@@ -10,7 +10,7 @@ enum AuthenticationStatus {
   authenticated,
 } //unauthenticated
 
-@Singleton()
+@singleton
 class AuthenticationRepository {
   AuthenticationRepository(
     this.iAppAuthenticationRepository,
@@ -209,6 +209,7 @@ class AuthenticationRepository {
   bool isAnonymouslyOrEmty() =>
       iAppAuthenticationRepository.isAnonymously() || currentUser.isEmpty;
 
+  @disposeMethod
   void dispose() {
     _authenticationStatuscontroller.close();
     _statusUserSubscription?.cancel();

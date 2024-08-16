@@ -9,7 +9,7 @@ part 'employee_respond_bloc.freezed.dart';
 part 'employee_respond_event.dart';
 part 'employee_respond_state.dart';
 
-@Injectable()
+@Injectable(env: [Config.development])
 class EmployeeRespondBloc
     extends Bloc<EmployeeRespondEvent, EmployeeRespondState> {
   EmployeeRespondBloc({
