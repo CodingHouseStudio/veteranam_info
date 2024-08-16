@@ -99,14 +99,12 @@ $ flutter run --flavor production --target lib/main_production.dart
 
 ### Start web version on mobile
 
-+ If you want start web version on mobile, you'll need to run these two commands in your terminal:
++ If you want start web version on mobile, you'll need to run this command in your terminal:
 ```sh
 Prod:
-flutter run -d chrome emulator-5554 -t lib/main_production.dart
-flutter run -d web-server --web-port 8080 --web-hostname 0.0.0.0 -t lib/main_production.dart
+flutter run -d web-server --web-port 8080 --web-hostname 0.0.0.0 -t lib/main_production.dart --flavor production --dart-define=FLAVOUR=production
 Dev:
-flutter run -d chrome emulator-5554 -t lib/main_development.dart
-flutter run -d web-server --web-port 8080 --web-hostname 0.0.0.0 -t lib/main_development.dart
+flutter run -d web-server --web-port 8080 --web-hostname 0.0.0.0 -t lib/main_development.dart --flavor development --dart-define=FLAVOUR=development
 ```
 + To find your computer's IP address, use the following command in your terminal: ipconfig. Look for the first line labeled "IPv4 Address" and note the address.
 
