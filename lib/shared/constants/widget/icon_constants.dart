@@ -83,7 +83,10 @@ abstract class KIcon {
     fill: 1,
   );
   static const _KIcon share = _KIcon(Symbols.file_upload);
-  static const _KIcon error = _KIcon(Symbols.error);
+  static const _KIcon error = _KIcon(
+    Symbols.error,
+    color: AppColors.materialThemeRefErrorError60,
+  );
   static const _KIcon safe = _KIcon(Symbols.bookmark_border_sharp);
   static const _KIcon saved = _KIcon(Symbols.bookmark_added_sharp);
   static const _KIcon check = _KIcon(
