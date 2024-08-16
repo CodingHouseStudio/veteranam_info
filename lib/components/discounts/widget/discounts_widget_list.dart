@@ -14,7 +14,7 @@ List<Widget> discountsWidgetList({
       discountItem: modelItem,
       isDesk: isDesk,
       // reportEvent: null,
-      share: '${KRoute.home.path}${KRoute.discounts.path}/${modelItem.id}',
+      share: '/${modelItem.id}',
       isLoading: isLoading,
       // () => context
       //     .read<DiscountWatcherBloc>()

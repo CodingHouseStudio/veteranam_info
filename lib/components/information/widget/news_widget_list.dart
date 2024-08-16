@@ -21,7 +21,7 @@ List<Widget> _newsWidgetList({
                     isLiked: like,
                   ),
                 ),
-        share: '${KRoute.home.path}${KRoute.information.path}/${modelItem.id}',
+        share: '/${modelItem.id}',
 
         // () => context
         //     .read<InformationWatcherBloc>()
