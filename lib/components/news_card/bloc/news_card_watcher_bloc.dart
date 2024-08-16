@@ -7,7 +7,7 @@ part 'news_card_watcher_event.dart';
 part 'news_card_watcher_state.dart';
 part 'news_card_watcher_bloc.freezed.dart';
 
-@Injectable()
+@Injectable(env: [Config.development])
 class NewsCardWatcherBloc
     extends Bloc<NewsCardWatcherEvent, NewsCardWatcherState> {
   NewsCardWatcherBloc({

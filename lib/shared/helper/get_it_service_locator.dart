@@ -6,4 +6,7 @@ final getIt = GetIt.instance;
 
 /// COMMENT: Method registers all classes that use Injectable
 @InjectableInit()
-void configureDependencies() => getIt.init();
+void configureDependencies() => getIt.init(
+      // environment: Config.flavour,
+      environmentFilter: NoEnvOrContains(Config.flavour),
+    );

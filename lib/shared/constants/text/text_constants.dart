@@ -209,6 +209,8 @@ abstract class KAppText {
   static const String facebook =
       'https://www.facebook.com/profile.php?id=61560499465895';
   static const String coffee = 'Buy me a Coffee';
+  static const String cache = 'local cache';
+  static const String server = 'server';
   static List<String> get routes => [
         KRoute.discounts.name,
         KRoute.investors.name,
