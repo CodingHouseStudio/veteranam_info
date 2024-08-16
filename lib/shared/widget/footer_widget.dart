@@ -269,7 +269,7 @@ abstract class FooterWidget {
         _button(
           key: KWidgetkeys.widget.footer.investorsButton,
           text: context.l10n.investors,
-          onPressed: () => context.goNamed(KRoute.investors.name),
+          onPressed: () => context.goNamed(KRoute.support.name),
         ),
         if (Config.isDevelopment) ...[
           if (isTablet)

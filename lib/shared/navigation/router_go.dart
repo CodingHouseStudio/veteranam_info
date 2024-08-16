@@ -249,8 +249,8 @@ GoRouter router = GoRouter(
                   : null,
         ),
         GoRoute(
-          name: KRoute.investors.name,
-          path: KRoute.investors.path,
+          name: KRoute.support.name,
+          path: KRoute.support.path,
           pageBuilder: (context, state) => NoTransitionPage(
             key: state.pageKey,
             name: state.name,

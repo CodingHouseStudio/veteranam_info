@@ -31,7 +31,7 @@ Future<void> boxexHelper({
 
       verify(
         () => mockGoRouter.goNamed(
-          KRoute.investors.name,
+          KRoute.support.name,
         ),
       ).called(1);
 

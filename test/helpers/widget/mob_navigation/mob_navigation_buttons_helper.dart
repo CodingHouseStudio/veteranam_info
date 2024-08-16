@@ -24,7 +24,7 @@ Future<void> mobNavigationButtonsHelper({
 
   await tester.tap(find.byKey(KWidgetkeys.widget.mobNavigation.investors));
 
-  verify(() => mockGoRouter.goNamed(KRoute.investors.name)).called(1);
+  verify(() => mockGoRouter.goNamed(KRoute.support.name)).called(1);
 
   expect(find.byKey(KWidgetkeys.widget.mobNavigation.settings), findsOneWidget);
 
