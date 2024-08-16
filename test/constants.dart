@@ -321,7 +321,7 @@ abstract class KTestText {
 
   static List<String> routes({required bool hasAccount}) => [
         KRoute.aboutUs.name,
-        KRoute.investors.name,
+        KRoute.support.name,
         KRoute.stories.name,
         KRoute.discounts.name,
         if (hasAccount) KRoute.profile.name else KRoute.login.name,
