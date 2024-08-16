@@ -19,12 +19,14 @@ void main() {
     late List<QueryDocumentSnapshot<Map<String, dynamic>>>
         mockQueryDocumentSnapshot;
     late DocumentReference<Map<String, dynamic>> mockDocumentReference;
+    late IAppNetworkRepository mockAppNetworkRepository;
     setUp(() {
       mockCollectionReference = MockCollectionReference();
       mockFirebaseFirestore = MockFirebaseFirestore();
       mockDocumentReference = MockDocumentReference();
       mockQuerySnapshot = MockQuerySnapshot();
       mockQueryDocumentSnapshot = [MockQueryDocumentSnapshot()];
+      mockAppNetworkRepository = MockIAppNetworkRepository();
 
       when(
         mockFirebaseFirestore.collection(FirebaseCollectionName.questions),
@@ -62,7 +64,7 @@ void main() {
       );
 
       FirestoreService.firebaseFirestore = mockFirebaseFirestore;
-      firestoreService = FirestoreService();
+      firestoreService = FirestoreService(mockAppNetworkRepository);
     });
     test('add question', () async {
       await firestoreService.addQuestion(KTestText.questionModelItems.first);

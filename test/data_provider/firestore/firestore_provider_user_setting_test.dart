@@ -18,6 +18,7 @@ void main() {
     late SnapshotMetadata mockSnapshotMetadata;
 
     late DocumentReference<Map<String, dynamic>> mockDocumentReference;
+    late IAppNetworkRepository mockAppNetworkRepository;
     setUp(() {
       mockCollectionReference = MockCollectionReference();
       mockFirebaseFirestore = MockFirebaseFirestore();
@@ -26,6 +27,7 @@ void main() {
       mockSnapshotMetadata = MockSnapshotMetadata();
       mockEmptyDocumentReference = MockDocumentReference();
       mockEmptyDocumentSnapshot = MockDocumentSnapshot();
+      mockAppNetworkRepository = MockIAppNetworkRepository();
 
       when(
         mockFirebaseFirestore.collection(FirebaseCollectionName.userSettings),
@@ -111,7 +113,7 @@ void main() {
       );
 
       FirestoreService.firebaseFirestore = mockFirebaseFirestore;
-      firestoreService = FirestoreService();
+      firestoreService = FirestoreService(mockAppNetworkRepository);
     });
     test('get user setting', () async {
       await expectLater(

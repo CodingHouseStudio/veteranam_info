@@ -3,7 +3,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:injectable/injectable.dart';
 import 'package:veteranam/shared/shared.dart';
 
-@LazySingleton(as: IStorage)
+@Singleton(as: IStorage)
 class SecureStorageRepository implements IStorage {
   SecureStorageRepository();
   late FlutterSecureStorage _secureStorage = const FlutterSecureStorage();

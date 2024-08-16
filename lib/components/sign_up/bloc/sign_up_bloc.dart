@@ -9,7 +9,7 @@ part 'sign_up_bloc.freezed.dart';
 part 'sign_up_event.dart';
 part 'sign_up_state.dart';
 
-@injectable
+@Injectable(env: [Config.development])
 class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   SignUpBloc({
     required IAppAuthenticationRepository iAppAuthenticationRepository,

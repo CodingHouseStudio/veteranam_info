@@ -9,7 +9,7 @@ part 'information_watcher_bloc.freezed.dart';
 part 'information_watcher_event.dart';
 part 'information_watcher_state.dart';
 
-@Injectable()
+@Injectable(env: [Config.development])
 class InformationWatcherBloc
     extends Bloc<InformationWatcherEvent, InformationWatcherState> {
   InformationWatcherBloc({
@@ -78,6 +78,7 @@ class InformationWatcherBloc
     _Updated event,
     Emitter<InformationWatcherState> emit,
   ) {
+    if (event.informationItemsModel.isEmpty && Config.isProduction) return;
     // final items = event.informationItemsModel.removeReportItems(
     //   checkFunction: (item) => item.id,
     //   reportItems: event.reportItems,
