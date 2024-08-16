@@ -168,6 +168,26 @@ extension StringExtension on String {
     // }
     return null;
   }
+
+  int compareUkrain(String b) {
+    final minLength = length < b.length ? length : b.length;
+
+    for (var i = 0; i < minLength; i++) {
+      final aChar = this[i].toLowerCase();
+      final bChar = b[i].toLowerCase();
+
+      final aIndex = aChar._ukraineIndex;
+      final bIndex = bChar._ukraineIndex;
+
+      if (aIndex != bIndex) {
+        return aIndex - bIndex;
+      }
+    }
+
+    return length - b.length;
+  }
+
+  int get _ukraineIndex => KAppText.ukrainianAlphabet.indexOf(this);
 }
 
 extension InformationModelExtension on InformationModel {
