@@ -12,8 +12,9 @@ class NawbarWidget extends SliverPersistentHeaderDelegate {
     this.childWidget,
     this.maxMinHeight,
     this.pageName,
-    this.showMobileNawbar,
+    // this.showMobileNawbar,
     this.pageNameKey,
+    this.showMobBackButton,
   });
   final bool isDesk;
   final bool isTablet;
@@ -21,8 +22,9 @@ class NawbarWidget extends SliverPersistentHeaderDelegate {
   final Widget? childWidget;
   final double? maxMinHeight;
   final String? pageName;
-  final bool? showMobileNawbar;
+  // final bool? showMobileNawbar;
   final Key? pageNameKey;
+  final bool? showMobBackButton;
 
   @override
   double get maxExtent => maxMinHeight ?? KMinMaxSize.minmaxHeight94;
@@ -48,8 +50,8 @@ class NawbarWidget extends SliverPersistentHeaderDelegate {
       childWidget: childWidget,
       isTablet: isTablet,
       pageName: pageName,
-      showMobileNawbar: showMobileNawbar ?? false,
-      pageNameKey: pageNameKey,
+      // showMobileNawbar: showMobileNawbar ?? false,
+      pageNameKey: pageNameKey, showBackButton: showMobBackButton,
     );
   }
 }
@@ -58,18 +60,20 @@ class _NawbarWidgetImplematation extends StatefulWidget {
   const _NawbarWidgetImplematation({
     required this.isDesk,
     required this.isTablet,
-    required this.showMobileNawbar,
+    // required this.showMobileNawbar,
     required this.pageNameKey,
     super.key,
     this.childWidget,
     this.pageName,
+    this.showBackButton,
   });
   final bool isDesk;
   final Widget? childWidget;
   final bool isTablet;
   final String? pageName;
-  final bool showMobileNawbar;
+  // final bool showMobileNawbar;
   final Key? pageNameKey;
+  final bool? showBackButton;
 
   @override
   State<_NawbarWidgetImplematation> createState() =>
@@ -118,7 +122,8 @@ class _NawbarWidgetImplematationState
                   top: KPadding.kPaddingSize8,
                   bottom: KPadding.kPaddingSize8,
                 ),
-          child: KTest.testIsWeb || widget.showMobileNawbar
+          child: KTest.testIsWeb
+              // || widget.showMobileNawbar
               ? Row(
                   // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -129,7 +134,9 @@ class _NawbarWidgetImplematationState
                           KAppText.logo,
                           Duration.zero,
                           () {
-                            if (KTest.testIsWeb || !widget.showMobileNawbar) {
+                            if (KTest.testIsWeb
+                                // || !widget.showMobileNawbar
+                                ) {
                               context.goNamed(KRoute.home.name);
                             }
                           },
@@ -216,16 +223,17 @@ class _NawbarWidgetImplematationState
                         ),
                       )
                     else
-                      widget.pageName != null && !KTest.testIsWeb
-                          ? Expanded(
-                              child: Text(
-                                '${widget.pageName}',
-                                key: widget.pageNameKey,
-                                style: AppTextStyle.materialThemeTitleMedium,
-                                textAlign: TextAlign.center,
-                              ),
-                            )
-                          : const Spacer(),
+                      // widget.pageName != null && !KTest.testIsWeb
+                      //     ? Expanded(
+                      //         child: Text(
+                      //           '${widget.pageName}',
+                      //           key: widget.pageNameKey,
+                      //           style: AppTextStyle.materialThemeTitleMedium,
+                      //           textAlign: TextAlign.center,
+                      //         ),
+                      //       )
+                      //     :
+                      const Spacer(),
 
                     // if (widget.isDesk && widget.hasMicrophone)
                     //   Padding(
@@ -288,14 +296,40 @@ class _NawbarWidgetImplematationState
                         ),
                   ],
                 )
-              : Text(
-                  '${widget.pageName}',
-                  key: widget.pageNameKey,
-                  style: AppTextStyle.materialThemeTitleMedium,
-                  textAlign: TextAlign.center,
-                ),
+              : widget.showBackButton ?? false
+                  ? Row(
+                      children: [
+                        TextButton(
+                          style: KButtonStyles.withoutStyle.copyWith(
+                            padding: const WidgetStatePropertyAll(
+                              EdgeInsets.symmetric(
+                                vertical: KPadding.kPaddingSize12,
+                                horizontal: KPadding.kPaddingSize16,
+                              ),
+                            ),
+                          ),
+                          onPressed: () => context.pop(),
+                          child: KIcon.arrowBack,
+                        ),
+                        Expanded(child: pageName),
+                        KSizedBox.kWidthSizedBox56,
+                      ],
+                    )
+                  : Padding(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: KPadding.kPaddingSize12,
+                      ),
+                      child: pageName,
+                    ),
         );
   }
+
+  Widget get pageName => Text(
+        '${widget.pageName}',
+        key: widget.pageNameKey,
+        style: AppTextStyle.materialThemeTitleMedium,
+        textAlign: TextAlign.center,
+      );
 
   double get padding => widget.isDesk
       ? KPadding.kPaddingSize90
