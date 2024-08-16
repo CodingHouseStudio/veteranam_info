@@ -25,6 +25,10 @@ extension PumpApp on WidgetTester {
               ..add(const DiscountWatcherEvent.started()),
           ),
           BlocProvider(
+            create: (context) => GetIt.I.get<InvestorsWatcherBloc>()
+              ..add(const InvestorsWatcherEvent.started()),
+          ),
+          BlocProvider(
             create: (context) => GetIt.I.get<AuthenticationBloc>()
               ..add(AuthenticationInitialized()),
           ),
