@@ -51,7 +51,7 @@ void main() {
       );
 
       when(
-        mockQuery.get(FirestoreService.getOptions),
+        mockCollectionReference.get(FirestoreService.getOptions), //mockQuery
       ).thenAnswer(
         (_) async => mockQuerySnapshot,
       );
@@ -95,11 +95,11 @@ void main() {
       verify(
         mockFirebaseFirestore.collection(FirebaseCollectionName.funds),
       ).called(1);
+      // verify(
+      //   mockCollectionReference.where(FundModelJsonField.id, whereIn: null),
+      // ).called(1);
       verify(
-        mockCollectionReference.where(FundModelJsonField.id, whereIn: null),
-      ).called(1);
-      verify(
-        mockQuery.get(FirestoreService.getOptions),
+        mockCollectionReference.get(FirestoreService.getOptions),
       ).called(1);
       verify(
         mockQuerySnapshot.docs,

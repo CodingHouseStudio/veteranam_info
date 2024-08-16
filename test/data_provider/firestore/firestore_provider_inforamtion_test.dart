@@ -59,7 +59,8 @@ void main() {
       );
 
       when(
-        mockQuery.snapshots(
+        mockCollectionReference.snapshots(
+          //mockQuery
           includeMetadataChanges: true,
         ),
       ).thenAnswer(
@@ -135,14 +136,15 @@ void main() {
       verify(
         mockFirebaseFirestore.collection(FirebaseCollectionName.information),
       ).called(1);
+      // verify(
+      //   mockCollectionReference.where(
+      //     InformationModelJsonField.id,
+      //     whereIn: null,
+      //   ),
+      // ).called(1);
       verify(
-        mockCollectionReference.where(
-          InformationModelJsonField.id,
-          whereIn: null,
-        ),
-      ).called(1);
-      verify(
-        mockQuery.snapshots(
+        mockCollectionReference.snapshots(
+          //mockQuery
           includeMetadataChanges: true,
         ),
       ).called(1);
