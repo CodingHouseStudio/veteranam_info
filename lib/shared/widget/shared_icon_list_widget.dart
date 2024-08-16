@@ -30,11 +30,11 @@ abstract class SharedIconListWidget {
       ],
       BlocListener<UrlCubit, UrlEnum?>(
         listener: (context, state) {
-          context.dialog.showSnackBardTextDialog(
-            state?.value(context),
-            duration: const Duration(milliseconds: 4000),
-          );
           if (state == UrlEnum.copySucceed) {
+            context.dialog.showSnackBardTextDialog(
+              state?.value(context),
+              duration: const Duration(milliseconds: 4000),
+            );
             context.read<UrlCubit>().reset();
           }
         },

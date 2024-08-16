@@ -62,7 +62,7 @@ class UrlRepository extends IUrlRepository {
   Future<Either<SomeFailure, bool>> copy(String text) async {
     try {
       await Clipboard.setData(
-        const ClipboardData(text: KAppText.email),
+        ClipboardData(text: text),
       );
       return const Right(true);
     } catch (e) {
