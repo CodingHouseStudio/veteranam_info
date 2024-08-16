@@ -176,4 +176,51 @@ abstract class TitleWidget {
           color: AppColors.materialThemeKeyColorsNeutral,
         ),
       ];
+
+  static List<Widget> oneTitleIconWidgetList({
+    required String title,
+    required Key titleKey,
+    required bool isDesk,
+    // bool isRightArrow = true,
+    CrossAxisAlignment iconCrossAxisAlignment = CrossAxisAlignment.end,
+  }) =>
+      [
+        if (isDesk)
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: AppTextStyle.materialThemeDisplayLarge,
+              ),
+              KSizedBox.kWidthSizedBox32,
+              const IconWidget(
+                // key: KWidgetkeys.screen.feedback.titleIcon,
+                icon: KIcon.arrowDownRight,
+              ),
+            ],
+          )
+        else ...[
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const IconWidget(
+                // key: KWidgetkeys.screen.feedback.titleIcon,
+                icon: KIcon.arrowDownRight,
+              ),
+              KSizedBox.kWidthSizedBox16,
+              Expanded(
+                child: Text(
+                  title,
+                  style: AppTextStyle.materialThemeDisplaySmall,
+                ),
+              ),
+            ],
+          ),
+        ],
+        KSizedBox.kHeightSizedBox32,
+        const Divider(
+          color: AppColors.materialThemeKeyColorsNeutral,
+        ),
+      ];
 }

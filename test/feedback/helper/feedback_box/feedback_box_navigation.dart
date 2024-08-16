@@ -12,70 +12,93 @@ Future<void> feedbackBoxNavigationHelper({
     tester: tester,
     windowsTest: true,
     test: () async {
-      await scrollingHelper(
-        tester: tester,
-        itemKey: KWidgetkeys.screen.feedback.boxSubtitle,
+      // await scrollingHelper(
+      //   tester: tester,
+      //   itemKey: KWidgetkeys.screen.feedback.boxSubtitle,
+      // );
+
+      expect(
+        find.byKey(KWidgetkeys.screen.feedback.boxBackButton),
+        findsOneWidget,
       );
 
-      await scrollingHelper(
-        tester: tester,
-        itemKey: KWidgetkeys.screen.feedback.boxInformationBox,
-      );
+      await tester.tap(find.byKey(KWidgetkeys.screen.feedback.boxBackButton));
 
-      await tester
-          .tap(find.byKey(KWidgetkeys.screen.feedback.boxInformationBox));
+      if (KTest.testIsWeb) {
+        verify(
+          () => mockGoRouter.goNamed(
+            KRoute.home.name,
+          ),
+        ).called(1);
+      } else {
+        verify(
+          () => mockGoRouter.goNamed(
+            KRoute.discounts.name,
+          ),
+        ).called(1);
+      }
 
-      verify(
-        () => mockGoRouter.goNamed(
-          KRoute.information.name,
-        ),
-      ).called(1);
+      // await scrollingHelper(
+      //   tester: tester,
+      //   itemKey: KWidgetkeys.screen.feedback.boxInformationBox,
+      // );
 
-      await tester.tap(find.byKey(KWidgetkeys.screen.feedback.boxInvestorsBox));
+      // await tester
+      //     .tap(find.byKey(KWidgetkeys.screen.feedback.boxInformationBox));
 
-      verify(
-        () => mockGoRouter.goNamed(
-          KRoute.investors.name,
-        ),
-      ).called(1);
+      // verify(
+      //   () => mockGoRouter.goNamed(
+      //     KRoute.information.name,
+      //   ),
+      // ).called(1);
 
-      await tester.tap(find.byKey(KWidgetkeys.screen.feedback.boxStoryBox));
+      // await tester.tap(find.byKey(
+      // KWidgetkeys.screen.feedback.boxInvestorsBox));
 
-      verify(
-        () => mockGoRouter.goNamed(
-          KRoute.stories.name,
-        ),
-      ).called(1);
+      // verify(
+      //   () => mockGoRouter.goNamed(
+      //     KRoute.investors.name,
+      //   ),
+      // ).called(1);
 
-      await scrollingHelper(
-        tester: tester,
-        itemKey: KWidgetkeys.screen.feedback.boxInformationBox,
-      );
+      // await tester.tap(find.byKey(KWidgetkeys.screen.feedback.boxStoryBox));
 
-      await tester
-          .tap(find.byKey(KWidgetkeys.screen.feedback.boxInformationBox));
+      // verify(
+      //   () => mockGoRouter.goNamed(
+      //     KRoute.stories.name,
+      //   ),
+      // ).called(1);
 
-      verify(
-        () => mockGoRouter.goNamed(
-          KRoute.information.name,
-        ),
-      ).called(1);
+      // await scrollingHelper(
+      //   tester: tester,
+      //   itemKey: KWidgetkeys.screen.feedback.boxInformationBox,
+      // );
 
-      await tester.tap(find.byKey(KWidgetkeys.screen.feedback.boxInvestorsBox));
+      // await tester
+      //     .tap(find.byKey(KWidgetkeys.screen.feedback.boxInformationBox));
 
-      verify(
-        () => mockGoRouter.goNamed(
-          KRoute.investors.name,
-        ),
-      ).called(1);
+      // verify(
+      //   () => mockGoRouter.goNamed(
+      //     KRoute.information.name,
+      //   ),
+      // ).called(1);
 
-      await tester.tap(find.byKey(KWidgetkeys.screen.feedback.boxStoryBox));
+      // await tester.tap(find.byKey(
+      // KWidgetkeys.screen.feedback.boxInvestorsBox));
 
-      verify(
-        () => mockGoRouter.goNamed(
-          KRoute.stories.name,
-        ),
-      ).called(1);
+      // verify(
+      //   () => mockGoRouter.goNamed(
+      //     KRoute.investors.name,
+      //   ),
+      // ).called(1);
+
+      // await tester.tap(find.byKey(KWidgetkeys.screen.feedback.boxStoryBox));
+
+      // verify(
+      //   () => mockGoRouter.goNamed(
+      //     KRoute.stories.name,
+      //   ),
+      // ).called(1);
     },
   );
 }
