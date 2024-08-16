@@ -1,4 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_performance/firebase_performance.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
@@ -11,6 +12,7 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await FirebasePerformance.instance.setPerformanceCollectionEnabled(true);
 
   if (kIsWeb) {
     await SentryFlutter.init(

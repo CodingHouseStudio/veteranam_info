@@ -50,6 +50,7 @@ extension IconExtension on Icon {
 
 abstract class KIcon {
   static const _KIcon arrowLeft = _KIcon(Symbols.arrow_left);
+  static const _KIcon arrowBack = _KIcon(Symbols.arrow_back);
   static const _KIcon arrowRight = _KIcon(Symbols.arrow_right);
 
   // static const Icon mic = Icon(Icons.mic_none_outlined);
@@ -82,7 +83,10 @@ abstract class KIcon {
     fill: 1,
   );
   static const _KIcon share = _KIcon(Symbols.file_upload);
-  static const _KIcon error = _KIcon(Symbols.error);
+  static const _KIcon error = _KIcon(
+    Symbols.error,
+    color: AppColors.materialThemeRefErrorError60,
+  );
   static const _KIcon safe = _KIcon(Symbols.bookmark_border_sharp);
   static const _KIcon saved = _KIcon(Symbols.bookmark_added_sharp);
   static const _KIcon check = _KIcon(

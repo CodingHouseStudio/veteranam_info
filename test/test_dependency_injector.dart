@@ -62,7 +62,7 @@ void configureDependenciesTest() {
     ),
   );
   // GetIt.I.registerSingleton<IInformationRepository>(InformationRepository());
-  // GetIt.I.registerSingleton<IInvestorsRepository>(InvestorsRepository());
+  GetIt.I.registerSingleton<IInvestorsRepository>(InvestorsRepository());
   // GetIt.I.registerSingleton<IWorkRepository>(WorkRepository());
   // GetIt.I.registerSingleton<IStoryRepository>(StoryRepository());
   // Blocs
@@ -98,11 +98,13 @@ void configureDependenciesTest() {
   //     informationRepository: GetIt.I.get<IInformationRepository>(),
   //   ),
   // );
-  // GetIt.I.registerSingleton<InvestorsWatcherBloc>(
-  //   InvestorsWatcherBloc(
-  //     investorsRepository: GetIt.I.get<IInvestorsRepository>(),
-  //   ),
-  // );
+  GetIt.I.registerSingleton<InvestorsWatcherBloc>(
+    InvestorsWatcherBloc(
+      investorsRepository: GetIt.I.get<IInvestorsRepository>(),
+      reportRepository: GetIt.I.get<IReportRepository>(),
+      appAuthenticationRepository: GetIt.I.get<IAppAuthenticationRepository>(),
+    ),
+  );
   // GetIt.I.registerSingleton<WorkEmployeeWatcherBloc>(
   //   WorkEmployeeWatcherBloc(
   //     workRepository: GetIt.I.get<IWorkRepository>(),

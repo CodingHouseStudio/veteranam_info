@@ -35,7 +35,7 @@ class MenuDialogWidget extends StatelessWidget {
         _button(
           key: KWidgetkeys.widget.menuDialog.investorsButton,
           context: context,
-          routeName: KRoute.investors.name,
+          routeName: KRoute.support.name,
           text: context.l10n.investors,
         ),
         KSizedBox.kHeightSizedBox32,
