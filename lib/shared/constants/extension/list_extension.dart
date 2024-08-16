@@ -6,8 +6,7 @@ import 'package:veteranam/shared/shared.dart';
 /// Extension for filtering FilterItem list items.
 extension FilterItems on List<FilterItem> {
   /// Get a list of FilterItem with summarized values.
-  List<FilterItem> getToSet() {
-    // List<FilterItem>? numberGetList) {
+  List<FilterItem> getToSet(List<FilterItem>? numberGetList) {
     final grouped = groupBy(this, (FilterItem item) => item.value);
 
     return grouped.entries.map((entry) {
@@ -15,8 +14,8 @@ extension FilterItems on List<FilterItem> {
         entry.key,
         valueEN: entry.value.first.valueEN,
         number:
-            // numberGetList?.where((item) => item.value == entry.key).length ??
-            entry.value.length,
+            numberGetList?.where((item) => item.value == entry.key).length ??
+                entry.value.length,
       );
 
       return item;
@@ -393,7 +392,7 @@ extension ListExtensions<T> on List<T> {
     required List<dynamic> Function(T) getUAFilter,
     List<dynamic> Function(T)? getENFilter,
     List<T>? fullList,
-    // List<T>? numberGetList,
+    List<T>? numberGetList,
   }) {
     final allFilters = <FilterItem>[];
     for (final item in fullList ?? this) {
@@ -407,17 +406,17 @@ extension ListExtensions<T> on List<T> {
         );
       }
     }
-    // final allNumberFilters = numberGetList == null ? null : <FilterItem>[];
-    // if (numberGetList != null) {
-    //   for (final item in numberGetList) {
-    //     allNumberFilters!.addAll(
-    //       getUAFilter(item).map(
-    //         FilterItem.new,
-    //       ),
-    //     );
-    //   }
-    // }
-    return allFilters.getToSet() //allNumberFilters)
+    final allNumberFilters = numberGetList == null ? null : <FilterItem>[];
+    if (numberGetList != null) {
+      for (final item in numberGetList) {
+        allNumberFilters!.addAll(
+          getUAFilter(item).map(
+            FilterItem.new,
+          ),
+        );
+      }
+    }
+    return allFilters.getToSet(allNumberFilters)
       ..sort(
         (a, b) {
           final numberSort = b.number.compareTo(a.number);
