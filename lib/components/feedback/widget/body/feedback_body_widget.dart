@@ -46,6 +46,7 @@ class _FeedbackBodyWidgetState extends State<FeedbackBodyWidget> {
       builder: (context, state) {
         return ScaffoldWidget(
           showMobBottomNavigation: false,
+          showMobNawbarBackButton: true,
           pageName: context.l10n.feedback,
           mainChildWidgetsFunction: ({required isDesk, required isTablet}) => [
             if (context.read<FeedbackBloc>().state.formState ==

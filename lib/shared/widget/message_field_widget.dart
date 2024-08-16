@@ -36,8 +36,8 @@ class MessageFieldWidget extends StatelessWidget {
       controller: controller,
       onChanged: changeMessage,
       hintText: hintText,
-      minLines: KMinMaxSize.messageMinLines,
-      maxLines: KMinMaxSize.messageMaxLines,
+      minLines: isDesk ? KMinMaxSize.messageMinLines : null,
+      maxLines: isDesk ? KMinMaxSize.messageMaxLines : null,
       maxLength: KMinMaxSize.messageMaxLength,
       labelText: labelText,
       // suffixIcon: Column(
