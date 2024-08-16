@@ -69,11 +69,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4.1.5
-      - name: Flutter action
-        uses: subosito/flutter-action@v2.12.0
+      - uses: subosito/flutter-action@v2.12.0
         with:
-          flutter-version: ${{ secrets.FLUTTER_FRAMEWORK_VERSION }}
           channel: "stable"
+          cache: true
+          cache-key: "flutter-:os:-:channel:-:version:-:arch:-:hash:" # optional, change this to force refresh cache
+          cache-path: "${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:" # optional, change this to specify the cache path
+          architecture: x64 # optional, x64 or arm64
+          flutter-version: ${{ secrets.FLUTTER_FRAMEWORK_VERSION }}
       - run: flutter config --no-analytics
       - run: flutter config --no-cli-animations
       - name: Flutter Pub Get # get flutter packages information
