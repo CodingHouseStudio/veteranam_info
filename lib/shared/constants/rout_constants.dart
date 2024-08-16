@@ -30,9 +30,9 @@ abstract class KRoute {
     path: 'profile',
     name: 'Profile',
   );
-  static const _RouteItem investors = _RouteItem(
-    path: 'investors',
-    name: 'Investors',
+  static const _RouteItem support = _RouteItem(
+    path: 'support',
+    name: 'Support',
   );
   static const _RouteItem aboutUs = _RouteItem(
     path: 'aboutUs',
