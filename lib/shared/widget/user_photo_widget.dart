@@ -36,6 +36,7 @@ class UserPhotoWidget extends StatelessWidget {
             imageUrl: imageUrl!,
             fit: BoxFit.contain,
             size: KSize.kUserPhoto,
+            // skeletonizerLoading: false,
           ),
         )
       : KIcon.user.copyWith(color: AppColors.materialThemeWhite);
