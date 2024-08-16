@@ -100,7 +100,8 @@ class FirestoreService {
       // Try to get the data from the server first
       final docSnapshot = await _db
           .collection(FirebaseCollectionName.funds)
-          .where(DiscountModelJsonField.id, whereNotIn: reportIdItems?.toSet())
+          // .where(DiscountModelJsonField.id, whereNotIn: reportIdItems?
+          // .toSet())
           .get(getOptions);
 
       // If the server fetch is successful, return the data
@@ -141,7 +142,8 @@ class FirestoreService {
   Stream<List<InformationModel>> getInformations(List<String>? reportIdItems) =>
       _db
           .collection(FirebaseCollectionName.information)
-          .where(DiscountModelJsonField.id, whereNotIn: reportIdItems?.toSet())
+          // .where(DiscountModelJsonField.id, whereNotIn: reportIdItems?.
+          // toSet())
           .snapshots(includeMetadataChanges: true) // Enable caching
           .map(
         (snapshot) {
