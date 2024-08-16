@@ -29,7 +29,7 @@ Future<void> menuDialogHelper({
   await tester.tap(find.byKey(KWidgetkeys.widget.menuDialog.investorsButton));
 
   verify(
-    () => mockGoRouter.goNamed(KRoute.investors.name),
+    () => mockGoRouter.goNamed(KRoute.support.name),
   ).called(1);
 
   expect(
