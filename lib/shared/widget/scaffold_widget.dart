@@ -10,9 +10,10 @@ class ScaffoldWidget extends StatelessWidget {
     this.mainDeskPadding,
     this.hasFooter = false,
     this.pageName,
-    this.showMobileNawbar,
+    // this.showMobileNawbar,
     this.showMobBottomNavigation,
     this.loadDataAgain,
+    this.showMobNawbarBackButton,
   });
   final List<Widget> Function({required bool isDesk})?
       titleChildWidgetsFunction;
@@ -21,9 +22,10 @@ class ScaffoldWidget extends StatelessWidget {
   final EdgeInsetsGeometry? mainDeskPadding;
   final bool hasFooter;
   final String? pageName;
-  final bool? showMobileNawbar;
+  // final bool? showMobileNawbar;
   final bool? showMobBottomNavigation;
   final void Function()? loadDataAgain;
+  final bool? showMobNawbarBackButton;
 
   @override
   Widget build(BuildContext context) {
@@ -87,7 +89,8 @@ class ScaffoldWidget extends StatelessWidget {
                         isDesk: isDesk,
                         isTablet: isTablet,
                         pageName: pageName,
-                        showMobileNawbar: showMobileNawbar,
+                        showMobBackButton: showMobNawbarBackButton,
+                        // showMobileNawbar: showMobileNawbar,
                       ),
                     ),
                     if (titleChildWidgetsFunction != null)

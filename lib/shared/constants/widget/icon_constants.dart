@@ -50,6 +50,7 @@ extension IconExtension on Icon {
 
 abstract class KIcon {
   static const _KIcon arrowLeft = _KIcon(Symbols.arrow_left);
+  static const _KIcon arrowBack = _KIcon(Symbols.arrow_back);
   static const _KIcon arrowRight = _KIcon(Symbols.arrow_right);
 
   // static const Icon mic = Icon(Icons.mic_none_outlined);
