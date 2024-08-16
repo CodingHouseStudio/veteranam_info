@@ -78,6 +78,7 @@ dev_dependencies:
   mockito: ^5.4.4 # Used for mocking classes
   mocktail: ^1.0.4
   plugin_platform_interface: ^2.1.8
+  sentry_dart_plugin: ^2.1.0
   url_launcher_platform_interface: ^2.3.2
   very_good_analysis: ^6.0.0
 
@@ -143,6 +144,31 @@ flutter:
         # - asset: assets/fonts/Gilroy-HeavyItalic.woff
         #   weight: 900
         #   style: italic
+
+sentry:
+  # enabled by default
+  #upload_debug_symbols: true
+  # disabled by default
+  upload_sources: true
+  # disabled by default
+  upload_source_maps: true
+  # project: sentry-flutter
+  # org: sentry-sdks
+
+  # set by env. var. SENTRY_AUTH_TOKEN
+  #auth_token:
+
+  # disabled by default
+  # wait_for_processing: true
+
+  # default 'warning'
+  # log_level: error
+
+  # default to build/web
+  #web_build_path: ...
+
+  # default to name@version from pubspec
+  #release: ...
 # flutter_intl:
 #   enabled: true # Required. Must be set to true to activate the package. Default: false
 #   class_name: AppLocalizations # Optional. Sets the name for the generated localization class. Default: S
