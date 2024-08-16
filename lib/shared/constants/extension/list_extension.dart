@@ -416,16 +416,32 @@ extension ListExtensions<T> on List<T> {
         );
       }
     }
-    return allFilters.getToSet(allNumberFilters)
+    final allFiltersList = allFilters.getToSet(allNumberFilters).toList()
+      ..sort((a, b) {
+        final numberSort = b.number.compareTo(a.number);
+        if (numberSort == 0) {
+          return a.alphabeteCompare(
+            b: b,
+            context: context,
+            addEnglish: getENFilter != null,
+          );
+        }
+        return numberSort;
+      });
+
+    final firstFive = allFiltersList.take(5).toList();
+    final remaining = allFiltersList.skip(5).toList()
       ..sort(
-        (a, b) {
-          final numberSort = b.number.compareTo(a.number);
-          if (numberSort == 0) {
-            return a.value.toString().compareTo(b.value.toString());
-          }
-          return numberSort;
-        },
+        (a, b) => a.alphabeteCompare(
+          b: b,
+          context: context,
+          addEnglish: getENFilter != null,
+        ),
       );
+
+    final sortedList = [...firstFive, ...remaining];
+
+    return sortedList;
   }
 
   /// Method to determine loading status based on previous list length.
