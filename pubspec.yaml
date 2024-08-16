@@ -153,17 +153,17 @@ sentry:
   upload_sources: true
   # disabled by default
   upload_source_maps: true
-  # project: sentry-flutter
-  # org: sentry-sdks
+  project: veteran
+  org: coding-house-studio-llc
 
   # set by env. var. SENTRY_AUTH_TOKEN
-  #auth_token:
+  auth_token: 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
 
   # disabled by default
   # wait_for_processing: true
 
   # default 'warning'
-  # log_level: error
+  log_level: error
 
   # default to build/web
   #web_build_path: ...
