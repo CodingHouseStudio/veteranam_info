@@ -1044,5 +1044,21 @@
   "copyFailure": "Failed to copy email",
   "@copyFailure": {
     "examples": "Error message when trying to copy mail."
+  },
+  "thanks": "Thank You!!",
+  "@thanks": {
+    "examples": "Text for the button on the Feedback page to return to the Home page"
+  },
+  "toTheMainPage": "To the main",
+  "@toTheMainPage": {
+    "examples": "Text for the button to return to the Home page"
+  },
+  "feedbackSent": "We have received your message and will respond to you as soon as possible.",
+  "@feedbackSent": {
+    "examples": "Main text after sending feedback"
+  },
+  "writeMore": "Write more",
+  "@writeMore": {
+    "examples": "Text for the button on the Feedback page"
   }
 }

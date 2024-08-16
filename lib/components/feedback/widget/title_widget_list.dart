@@ -3,18 +3,29 @@ part of 'body/feedback_body_widget.dart';
 List<Widget> _titleWidgetList({
   required bool isDesk,
   required BuildContext context,
+  required String title,
+  required String? titleSecondPart,
+  required String? text,
+  required String secondText,
 }) =>
     isDesk
         ? [
             KSizedBox.kHeightSizedBox24,
-            ...TitleWidget.pointTitleWidgetList(
-              isDesk: true,
-              // pointText: context.l10n.feedback,
-              // pointKey: KWidgetkeys.screen.feedback.pointText,
-              title: context.l10n.write,
-              titleSecondPart: '${context.l10n.us} ${context.l10n.aMessage}',
-              titleKey: KWidgetkeys.screen.feedback.title,
-            ),
+            if (titleSecondPart != null)
+              ...TitleWidget.pointTitleWidgetList(
+                isDesk: true,
+                //pointText: context.l10n.feedback,
+                // pointKey: KWidgetkeys.screen.feedback.pointText,
+                title: title,
+                titleSecondPart: titleSecondPart,
+                titleKey: KWidgetkeys.screen.feedback.title,
+              )
+            else
+              ...TitleWidget.oneTitleIconWidgetList(
+                title: title,
+                titleKey: KWidgetkeys.screen.feedback.title,
+                isDesk: isDesk,
+              ),
             KSizedBox.kHeightSizedBox100,
           ]
         : [
@@ -24,10 +35,11 @@ List<Widget> _titleWidgetList({
             //   key: KWidgetkeys.screen.feedback.pointText,
             // ),
             KSizedBox.kHeightSizedBox16,
-            Text(
-              '${context.l10n.write} ${context.l10n.us}',
-              style: AppTextStyle.materialThemeDisplaySmall,
-            ),
+            if (text != null)
+              Text(
+                text,
+                style: AppTextStyle.materialThemeDisplaySmall,
+              ),
             Row(
               key: KWidgetkeys.screen.feedback.title,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -39,7 +51,7 @@ List<Widget> _titleWidgetList({
                 KSizedBox.kWidthSizedBox16,
                 Expanded(
                   child: Text(
-                    context.l10n.aMessage,
+                    secondText,
                     style: AppTextStyle.materialThemeDisplaySmall,
                   ),
                 ),
