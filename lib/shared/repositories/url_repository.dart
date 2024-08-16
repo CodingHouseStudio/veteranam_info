@@ -10,9 +10,14 @@ class UrlRepository extends IUrlRepository {
   @override
   Future<Either<SomeFailure, bool>> share(String url) async {
     try {
-      await Share.share(
+      final resault = await Share.share(
         url,
       );
+      if (resault.status != ShareResultStatus.success) {
+        await Clipboard.setData(
+          ClipboardData(text: url),
+        );
+      }
       return const Right(true);
     } catch (e) {
       return const Left(SomeFailure.share());
