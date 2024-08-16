@@ -172,7 +172,7 @@ Widget doubleBox({
           child: BoxWidget(
             key: KWidgetkeys.screen.home.investorsBox,
             text: context.l10n.investors,
-            onTap: () => context.goNamed(KRoute.investors.name),
+            onTap: () => context.goNamed(KRoute.support.name),
             isDesk: true,
             iconHasBackground: false,
             textIconPaddingWidget: textIconPaddingWidget,
