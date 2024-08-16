@@ -195,7 +195,7 @@ class _NawbarWidgetImplematationState
                             KSizedBox.kWidthSizedBox32,
                             _button(
                               key: KWidgetkeys.widget.nawbar.investorsButton,
-                              ruoteName: KRoute.investors.name,
+                              ruoteName: KRoute.support.name,
                               text: context.l10n.investors,
                               width: context.isEnglish
                                   ? KSize.kPixel66

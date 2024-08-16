@@ -213,7 +213,7 @@ abstract class KAppText {
   static const String server = 'server';
   static List<String> get routes => [
         KRoute.discounts.name,
-        KRoute.investors.name,
+        KRoute.support.name,
         KRoute.settings.name,
       ];
 }

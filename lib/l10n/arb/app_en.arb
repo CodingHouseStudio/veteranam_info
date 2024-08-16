@@ -144,7 +144,7 @@
     "examples": "Text for the button on the pages where certain data is loaded from Firebase.",
     "description": "The button is used to add test data to Firebase."
   },
-  "investors": "Investors",
+  "investors": "Support",
   "@investors": {
     "examples": "Text for the button that is in the Footer and on the Home page on one of the Box widgets.",
     "description": "The button is used to go to the Investors page."
