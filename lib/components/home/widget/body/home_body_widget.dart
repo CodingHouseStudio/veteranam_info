@@ -27,7 +27,7 @@ class HomeBodyWidget extends StatelessWidget {
       builder: (context, _) => ScaffoldWidget(
         hasFooter: true,
         pageName: context.l10n.settings,
-        showMobileNawbar: true,
+        // showMobileNawbar: true,
         loadDataAgain: () => context
             .read<HomeWatcherBloc>()
             .add(const HomeWatcherEvent.started()),
