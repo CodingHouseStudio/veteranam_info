@@ -11,8 +11,8 @@ class UrlRepository extends IUrlRepository {
   Future<Either<SomeFailure, bool>> share(String url) async {
     try {
       // final resault =
-      await Share.share(
-        url,
+      await Share.shareUri(
+        Uri(path: url),
       );
       // if (resault.status != ShareResultStatus.success) {
       //   await Clipboard.setData(
