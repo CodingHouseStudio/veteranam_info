@@ -10,16 +10,20 @@ class UrlRepository extends IUrlRepository {
   @override
   Future<Either<SomeFailure, bool>> share(String url) async {
     try {
-      final resault = await Share.share(
-        url,
-      );
-      if (resault.status != ShareResultStatus.success) {
-        await Clipboard.setData(
-          ClipboardData(text: url),
+      if (KTest.testIsWeb) {
+        await Share.shareUri(
+          Uri(path: Uri.base.path + url),
+        );
+      } else {
+        await Share.share(
+          url,
         );
       }
       return const Right(true);
     } catch (e) {
+      await copy(
+        url,
+      );
       return const Left(SomeFailure.share());
     }
   }
