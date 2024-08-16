@@ -147,4 +147,7 @@ abstract class KSizedBox {
   static const SizedBox kWidthSizedBox80 = SizedBox(
     width: KSize.kPixel80,
   );
+  static const SizedBox kWidthSizedBox100 = SizedBox(
+    width: KSize.kPixel100,
+  );
 }
