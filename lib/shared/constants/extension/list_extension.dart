@@ -420,7 +420,11 @@ extension ListExtensions<T> on List<T> {
       ..sort((a, b) {
         final numberSort = b.number.compareTo(a.number);
         if (numberSort == 0) {
-          return a.value.toString().compareTo(b.value.toString());
+          return a.alphabeteCompare(
+            b: b,
+            context: context,
+            addEnglish: getENFilter != null,
+          );
         }
         return numberSort;
       });
@@ -428,12 +432,11 @@ extension ListExtensions<T> on List<T> {
     final firstFive = allFiltersList.take(5).toList();
     final remaining = allFiltersList.skip(5).toList()
       ..sort(
-        (a, b) => (context?.isEnglish ?? false) && getENFilter != null
-            ? a.valueEN
-                .toString()
-                .toLowerCase()
-                .compareTo(b.valueEN.toString().toLowerCase())
-            : a.value.toString().compareUkrain(b.value.toString()),
+        (a, b) => a.alphabeteCompare(
+          b: b,
+          context: context,
+          addEnglish: getENFilter != null,
+        ),
       );
 
     final sortedList = [...firstFive, ...remaining];

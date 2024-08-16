@@ -261,3 +261,20 @@ extension UrlEnumValue on UrlEnum {
     }
   }
 }
+
+extension FilterItemExtension on FilterItem {
+  int alphabeteCompare({
+    required FilterItem b,
+    required BuildContext? context,
+    required bool addEnglish,
+  }) {
+    if ((context?.isEnglish ?? false) && addEnglish) {
+      return valueEN
+          .toString()
+          .toLowerCase()
+          .compareTo(b.valueEN.toString().toLowerCase());
+    } else {
+      return value.toString().compareUkrain(b.value.toString());
+    }
+  }
+}
