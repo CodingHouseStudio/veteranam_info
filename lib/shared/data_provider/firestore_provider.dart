@@ -302,7 +302,7 @@ class FirestoreService {
     return _db
         .collection(FirebaseCollectionName.discount)
         .orderBy(DiscountModelJsonField.dateVerified, descending: true)
-        .where(DiscountModelJsonField.id, whereNotIn: reportIdItems?.toSet())
+        // .where(DiscountModelJsonField.id, whereNotIn: reportIdItems?.toSet())
         .snapshots(includeMetadataChanges: true) // Enable caching
         .map(
       (snapshot) {
