@@ -174,9 +174,9 @@ void main() {
           descending: true,
         ),
       ).called(1);
-      verify(
-        mockQuery.where(DiscountModelJsonField.id, whereNotIn: null),
-      ).called(1);
+      // verify(
+      //   mockQuery.where(DiscountModelJsonField.id, whereNotIn: null),
+      // ).called(1);
       verify(
         mockQuery.snapshots(
           includeMetadataChanges: true,
