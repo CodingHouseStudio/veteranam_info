@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:veteranam/shared/shared.dart';
 
-class KeyboardScrollView extends StatefulWidget {
+class KeyboardScrollView extends StatelessWidget {
   const KeyboardScrollView({
     required this.slivers,
     required this.semanticChildCount,
@@ -21,10 +21,52 @@ class KeyboardScrollView extends StatefulWidget {
   final double maxHeight;
 
   @override
-  State<KeyboardScrollView> createState() => _KeyboardScrollViewState();
+  Widget build(BuildContext context) {
+    if (KPlatformConstants.isWebDesktop) {
+      return _KeyboardScrollViewWebDesk(
+        widgetKey: widgetKey,
+        slivers: slivers,
+        semanticChildCount: semanticChildCount,
+        physics: physics,
+        scrollController: scrollController,
+        maxHeight: maxHeight,
+      );
+    } else {
+      return CustomScrollView(
+        key: widgetKey,
+        controller: scrollController,
+        slivers: slivers,
+        physics: physics,
+        semanticChildCount: semanticChildCount,
+      );
+    }
+  }
 }
 
-class _KeyboardScrollViewState extends State<KeyboardScrollView> {
+class _KeyboardScrollViewWebDesk extends StatefulWidget {
+  const _KeyboardScrollViewWebDesk({
+    required this.slivers,
+    required this.semanticChildCount,
+    required this.widgetKey,
+    required this.maxHeight,
+    this.physics,
+    this.scrollController,
+  });
+
+  final List<Widget> slivers;
+  final int semanticChildCount;
+  final ScrollPhysics? physics;
+  final ScrollController? scrollController;
+  final Key widgetKey;
+  final double maxHeight;
+
+  @override
+  State<_KeyboardScrollViewWebDesk> createState() =>
+      _KeyboardScrollViewWebDeskState();
+}
+
+class _KeyboardScrollViewWebDeskState
+    extends State<_KeyboardScrollViewWebDesk> {
   late FocusNode _focusNode;
   late ScrollController _controller;
 
