@@ -96,7 +96,7 @@ abstract class KTestText {
     // a switch case.
     final routeKeys = <String, Key>{
       KRoute.aboutUs.name: KWidgetkeys.screen.aboutUs.screen,
-      KRoute.investors.name: KWidgetkeys.screen.investors.screen,
+      KRoute.support.name: KWidgetkeys.screen.investors.screen,
       KRoute.stories.name: KWidgetkeys.screen.story.screen,
       KRoute.discounts.name: KWidgetkeys.screen.discounts.screen,
       KRoute.login.name: KWidgetkeys.screen.login.screen,
@@ -114,7 +114,7 @@ abstract class KTestText {
     // properties of an object (e.g., routeName) in constant expressions within
     // a switch case.
     final routeKeys = <String, Key>{
-      KRoute.investors.name: KWidgetkeys.widget.mobNavigation.investors,
+      KRoute.support.name: KWidgetkeys.widget.mobNavigation.investors,
       KRoute.home.name: KWidgetkeys.widget.mobNavigation.settings,
     };
 
