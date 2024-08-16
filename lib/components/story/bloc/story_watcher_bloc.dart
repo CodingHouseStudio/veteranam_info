@@ -9,7 +9,7 @@ part 'story_watcher_bloc.freezed.dart';
 part 'story_watcher_event.dart';
 part 'story_watcher_state.dart';
 
-@Injectable()
+@Injectable(env: [Config.development])
 class StoryWatcherBloc extends Bloc<StoryWatcherEvent, StoryWatcherState> {
   StoryWatcherBloc({required IStoryRepository storyRepository})
       : _storyRepository = storyRepository,
@@ -54,6 +54,7 @@ class StoryWatcherBloc extends Bloc<StoryWatcherEvent, StoryWatcherState> {
     _Updated event,
     Emitter<StoryWatcherState> emit,
   ) {
+    if (event.storyItemsModel.isEmpty && Config.isProduction) return;
     emit(
       StoryWatcherState(
         storyModelItems: event.storyItemsModel,

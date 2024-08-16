@@ -4,7 +4,7 @@ import 'package:injectable/injectable.dart';
 /// {@template cache_client}
 /// An in-memory cache client.
 /// {@endtemplate}
-@injectable
+@Injectable(order: -3)
 class CacheClient {
   /// {@macro cache_client}
   CacheClient() : _cache = <String, Object>{};

@@ -6,7 +6,10 @@ import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:veteranam/shared/shared.dart';
 
-@Singleton(as: IDiscountRepository)
+@Singleton(
+  as: IDiscountRepository,
+  signalsReady: true,
+)
 class DiscountRepository implements IDiscountRepository {
   final FirestoreService _firestoreService = GetIt.I.get<FirestoreService>();
 

@@ -9,7 +9,7 @@ part 'work_employee_watcher_bloc.freezed.dart';
 part 'work_employee_watcher_event.dart';
 part 'work_employee_watcher_state.dart';
 
-@Injectable()
+@Injectable(env: [Config.development])
 class WorkEmployeeWatcherBloc
     extends Bloc<WorkEmployeeWatcherEvent, WorkEmployeeWatcherState> {
   WorkEmployeeWatcherBloc({required IWorkRepository workRepository})
@@ -60,6 +60,7 @@ class WorkEmployeeWatcherBloc
     _Updated event,
     Emitter<WorkEmployeeWatcherState> emit,
   ) {
+    if (event.workItemsModel.isEmpty && Config.isProduction) return;
     final filterItems = _filter(
       city: state.city,
       category: state.category,

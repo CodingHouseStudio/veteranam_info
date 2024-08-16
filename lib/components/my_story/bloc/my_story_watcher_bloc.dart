@@ -9,7 +9,7 @@ part 'my_story_watcher_bloc.freezed.dart';
 part 'my_story_watcher_event.dart';
 part 'my_story_watcher_state.dart';
 
-@Injectable()
+@Injectable(env: [Config.development])
 class MyStoryWatcherBloc
     extends Bloc<MyStoryWatcherEvent, MyStoryWatcherState> {
   MyStoryWatcherBloc({
