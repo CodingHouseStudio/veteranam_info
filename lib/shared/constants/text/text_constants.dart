@@ -211,6 +211,7 @@ abstract class KAppText {
   static const String coffee = 'Buy me a Coffee';
   static const String cache = 'local cache';
   static const String server = 'server';
+  static const String site = 'https://veteranam.info';
   static List<String> get routes => [
         KRoute.discounts.name,
         KRoute.support.name,
