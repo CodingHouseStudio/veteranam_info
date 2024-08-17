@@ -205,8 +205,8 @@ class _NawbarWidgetImplematationState
                               ruoteName: KRoute.support.name,
                               text: context.l10n.investors,
                               width: context.isEnglish
-                                  ? KSize.kPixel66
-                                  : KSize.kPixel88,
+                                  ? KSize.kPixel60
+                                  : KSize.kPixel80,
                             ),
                             KSizedBox.kWidthSizedBox32,
                             const CircleAvatar(

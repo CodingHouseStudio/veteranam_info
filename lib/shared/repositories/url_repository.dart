@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/services.dart';
 import 'package:injectable/injectable.dart';
 import 'package:share_plus/share_plus.dart';
@@ -9,20 +10,21 @@ import 'package:veteranam/shared/shared.dart';
 class UrlRepository extends IUrlRepository {
   @override
   Future<Either<SomeFailure, bool>> share(String url) async {
+    final baseUrl = kIsWeb ? Uri.base.origin : KAppText.site;
     try {
-      if (KTest.testIsWeb) {
-        await Share.shareUri(
-          Uri(path: Uri.base.path + url),
-        );
-      } else {
-        await Share.share(
-          url,
-        );
-      }
+      // if (KTest.testIsWeb) {
+      await Share.shareUri(
+        Uri.parse(baseUrl + url),
+      );
+      // } else {
+      //   await Share.share(
+      //     url,
+      //   );
+      // }
       return const Right(true);
     } catch (e) {
       await copy(
-        url,
+        baseUrl + url,
       );
       return const Left(SomeFailure.share());
     }
