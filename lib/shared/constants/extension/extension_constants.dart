@@ -251,9 +251,9 @@ extension UrlEnumExtension on UrlEnum {
       case UrlEnum.error:
         return context.l10n.error;
       case UrlEnum.shareError:
-        return context.l10n.shareFailure;
-      case UrlEnum.linkError:
         return context.l10n.copyLink;
+      case UrlEnum.linkError:
+        return context.l10n.linkFailure;
       case UrlEnum.copyError:
         return context.l10n.copyFailure;
       case UrlEnum.copySucceed:
