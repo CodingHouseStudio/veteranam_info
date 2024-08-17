@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:veteranam/shared/shared.dart';
 
 class KeyboardScrollView extends StatelessWidget {
@@ -22,24 +23,33 @@ class KeyboardScrollView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (KPlatformConstants.isWebDesktop) {
-      return _KeyboardScrollViewWebDesk(
-        widgetKey: widgetKey,
-        slivers: slivers,
-        semanticChildCount: semanticChildCount,
-        physics: physics,
-        scrollController: scrollController,
-        maxHeight: maxHeight,
-      );
-    } else {
-      return CustomScrollView(
-        key: widgetKey,
-        controller: scrollController,
-        slivers: slivers,
-        physics: physics,
-        semanticChildCount: semanticChildCount,
-      );
-    }
+    return BlocListener<UrlCubit, UrlEnum?>(
+      listener: (context, state) {
+        if (state != null) {
+          context.dialog.showSnackBardTextDialog(
+            state.value(context),
+            duration: const Duration(milliseconds: 4000),
+          );
+          context.read<UrlCubit>().reset();
+        }
+      },
+      child: KPlatformConstants.isWebDesktop
+          ? _KeyboardScrollViewWebDesk(
+              widgetKey: widgetKey,
+              slivers: slivers,
+              semanticChildCount: semanticChildCount,
+              physics: physics,
+              scrollController: scrollController,
+              maxHeight: maxHeight,
+            )
+          : CustomScrollView(
+              key: widgetKey,
+              controller: scrollController,
+              slivers: slivers,
+              physics: physics,
+              semanticChildCount: semanticChildCount,
+            ),
+    );
   }
 }
 
