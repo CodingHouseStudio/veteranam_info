@@ -245,7 +245,7 @@ extension ReferenceExtension on Reference {
   }
 }
 
-extension UrlEnumValue on UrlEnum {
+extension UrlEnumExtension on UrlEnum {
   String value(BuildContext context) {
     switch (this) {
       case UrlEnum.error:
@@ -253,7 +253,7 @@ extension UrlEnumValue on UrlEnum {
       case UrlEnum.shareError:
         return context.l10n.shareFailure;
       case UrlEnum.linkError:
-        return context.l10n.linkFailure;
+        return context.l10n.copyLink;
       case UrlEnum.copyError:
         return context.l10n.copyFailure;
       case UrlEnum.copySucceed:
