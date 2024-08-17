@@ -28,26 +28,14 @@ abstract class SharedIconListWidget {
         ),
         if (isDesk) KSizedBox.kWidthSizedBox12 else KSizedBox.kWidthSizedBox4,
       ],
-      BlocListener<UrlCubit, UrlEnum?>(
-        listener: (context, state) {
-          if (state == UrlEnum.copySucceed) {
-            context.dialog.showSnackBardTextDialog(
-              context.l10n.copyLink,
-              duration: const Duration(milliseconds: 4000),
-            );
-            context.read<UrlCubit>().reset();
-          }
-        },
-        child: _cardIconWidget(
-          label: context.l10n.share,
-          context,
-          onPressed: share != null
-              ? () => context.read<UrlCubit>().share(share)
-              : null,
-          icon: KIcon.share,
-          background: background,
-          key: shareKey,
-        ),
+      _cardIconWidget(
+        label: context.l10n.share,
+        context,
+        onPressed:
+            share != null ? () => context.read<UrlCubit>().share(share) : null,
+        icon: KIcon.share,
+        background: background,
+        key: shareKey,
       ),
       if (isDesk) KSizedBox.kWidthSizedBox12 else KSizedBox.kWidthSizedBox8,
       ComplaintWidget(
