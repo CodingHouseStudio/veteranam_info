@@ -18,9 +18,14 @@ class DiscountWatcherEvent with _$DiscountWatcherEvent {
     dynamic value,
   ) = _FilterLocation;
 
-  const factory DiscountWatcherEvent.filterLocations(
-    List<dynamic> filterList,
-  ) = _FilterLocations;
+  const factory DiscountWatcherEvent.setMobFilter({
+    required List<dynamic> filterList,
+    required List<DiscountEnum> sorting,
+  }) = _SetMobFilter;
+
+  const factory DiscountWatcherEvent.sorting(
+    DiscountEnum value,
+  ) = _Sorting;
 
   const factory DiscountWatcherEvent.filterReset() = _FilterReset;
 

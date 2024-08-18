@@ -184,10 +184,10 @@ void main() {
           reason: 'Wait for loading data',
         );
         bloc
-          ..add(const DiscountWatcherEvent.filterLocation(DiscountEnum.free))
-          ..add(const DiscountWatcherEvent.filterLocation(DiscountEnum.free))
+          ..add(const DiscountWatcherEvent.sorting(DiscountEnum.free))
+          ..add(const DiscountWatcherEvent.sorting(DiscountEnum.free))
           ..add(
-            const DiscountWatcherEvent.filterLocation(
+            const DiscountWatcherEvent.sorting(
               DiscountEnum.largestSmallest,
             ),
           )
@@ -214,27 +214,27 @@ void main() {
         predicate<DiscountWatcherState>(
           (state) =>
               state.loadingStatus == LoadingStatus.loaded &&
-              state.filtersLocation.isEmpty,
+              state.sorting.isEmpty,
         ),
         predicate<DiscountWatcherState>(
           (state) =>
               state.loadingStatus == LoadingStatus.listLoadedFull &&
-              state.locationDiscountModelItems.length == 1 &&
-              state.filtersLocation.isNotEmpty,
+              state.sortingDiscountModelItems.length == 1 &&
+              state.sorting.isNotEmpty,
         ),
         predicate<DiscountWatcherState>(
           (state) =>
               state.loadingStatus == LoadingStatus.loaded &&
               state.filteredDiscountModelItems.length ==
                   KDimensions.loadItems &&
-              state.filtersLocation.isEmpty,
+              state.sorting.isEmpty,
         ),
         predicate<DiscountWatcherState>(
           (state) =>
               state.loadingStatus == LoadingStatus.loaded &&
               state.filteredDiscountModelItems.length ==
                   KDimensions.loadItems &&
-              state.filtersLocation.isNotEmpty,
+              state.sorting.isNotEmpty,
         ),
         predicate<DiscountWatcherState>(
           (state) =>
@@ -518,10 +518,13 @@ void main() {
             const DiscountWatcherEvent.loadNextItems(),
           )
           ..add(
-            DiscountWatcherEvent.filterLocations(
-              [
+            DiscountWatcherEvent.setMobFilter(
+              filterList: [
                 KTestText.discountModelItemsModify.first.location!.first,
                 KTestText.discountModelItemsModify.first.location!.last,
+              ],
+              sorting: [
+                DiscountEnum.largestSmallest,
               ],
             ),
           );

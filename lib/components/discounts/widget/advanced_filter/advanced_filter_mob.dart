@@ -56,7 +56,7 @@ class AdvancedFilterMobDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AdvancedFilterMobCubit, List<dynamic>>(
+    return BlocBuilder<AdvancedFilterMobCubit, AdvancedFilterMobState>(
       builder: (context, _) {
         return FractionallySizedBox(
           key: KWidgetkeys.screen.discounts.advancedFilterDialog,
@@ -87,7 +87,10 @@ class AdvancedFilterMobDialog extends StatelessWidget {
                   onChange: (index) => context
                       .read<AdvancedFilterMobCubit>()
                       .changeFilterList(index),
-                  filterLocationes: _,
+                  filterLocationes: _.filtersLocation,
+                  sorting: _.sorting,
+                  onChangeSorting: (value) =>
+                      context.read<AdvancedFilterMobCubit>().sorting(value),
                 ),
               ),
               KSizedBox.kHeightSizedBox8,
@@ -97,7 +100,8 @@ class AdvancedFilterMobDialog extends StatelessWidget {
                   AdvanceFilter.resetButton(
                     isDesk: false,
                     context: context,
-                    resetEvent: _.isNotEmpty
+                    resetEvent: _.sorting.isNotEmpty ||
+                            _.filtersLocation.isNotEmpty
                         ? () => context.read<AdvancedFilterMobCubit>().reset()
                         : null,
                   ),
@@ -106,9 +110,12 @@ class AdvancedFilterMobDialog extends StatelessWidget {
                     text: context.l10n.apply,
                     isDesk: false,
                     onPressed: () {
-                      context
-                          .read<DiscountWatcherBloc>()
-                          .add(DiscountWatcherEvent.filterLocations(_));
+                      context.read<DiscountWatcherBloc>().add(
+                            DiscountWatcherEvent.setMobFilter(
+                              filterList: _.filtersLocation,
+                              sorting: _.sorting,
+                            ),
+                          );
                       context.pop();
                     },
                     widgetKey: KWidgetkeys
