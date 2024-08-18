@@ -195,6 +195,7 @@ extension ListExtensions<T> on List<T> {
   ({List<T> list, LoadingStatus loadingStatus}) combiningFilteredLists({
     required List<T> secondList,
     required int itemsLoaded,
+    List<T> Function(List<T> list)? sorting,
     int? loadItems,
   }) {
     // Calculate the total number of items to load
@@ -202,8 +203,12 @@ extension ListExtensions<T> on List<T> {
         itemsLoaded.getLoaded(list: this, loadItems: loadItems) +
             (loadItems ?? 0);
     final list = toSet().intersection(secondList.toSet()).toList();
+    late var sortingList = list;
+    if (sorting != null) {
+      sortingList = sorting(sortingList);
+    }
     return (
-      list: list.take(loadedItemsCount).toList(),
+      list: sortingList.take(loadedItemsCount).toList(),
       loadingStatus: list.getLoadingStatus(loadedItemsCount)
     );
   }

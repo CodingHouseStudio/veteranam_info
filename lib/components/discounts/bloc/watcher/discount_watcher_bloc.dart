@@ -248,6 +248,7 @@ class DiscountWatcherBloc
       categoryList: state.categoryDiscountModelItems,
       locationList: locationList,
       itemsLoaded: state.itemsLoaded,
+      location: selectedFilters,
     );
 
     emit(
@@ -295,8 +296,8 @@ class DiscountWatcherBloc
     required List<DiscountModel> list,
     required List<dynamic>? location,
   }) {
-    final indexes = location ?? state.filtersLocation;
-    if (indexes.contains(DiscountEnum.largestSmallest)) {
+    final value = location ?? state.filtersLocation;
+    if (value.contains(DiscountEnum.largestSmallest)) {
       return list
         ..sort((a, b) {
           // if (locationIndex != null && locationIndex.contains(0)) {
@@ -337,11 +338,9 @@ class DiscountWatcherBloc
       secondList: locationList,
       itemsLoaded: itemsLoaded,
       loadItems: loadItems,
+      sorting: (list) => _sorting(list: list, location: location),
     );
-    return (
-      list: _sorting(list: list, location: location),
-      loadingStatus: loadingStatus
-    );
+    return (list: list, loadingStatus: loadingStatus);
   }
 
   // Future<void> _onGetReport(
