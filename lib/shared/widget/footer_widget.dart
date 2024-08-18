@@ -375,20 +375,20 @@ abstract class FooterWidget {
               : AppTextStyle.materialThemeHeadlineMedium,
         ),
         KSizedBox.kHeightSizedBox16,
-        if (KTest.testIsWeb)
-          Align(
-            alignment: Alignment.centerLeft,
-            child: BuyMeACoffeeWidget(
-              key: KWidgetkeys.widget.footer.button,
-            ),
-          )
-        else
-          DoubleButtonWidget(
-            widgetKey: KWidgetkeys.widget.footer.button,
-            text: context.l10n.contact,
-            onPressed: () => context.goNamed(KRoute.feedback.name),
-            isDesk: isTablet,
-          ),
+        // if (KTest.testIsWeb)
+        //   Align(
+        //     alignment: Alignment.centerLeft,
+        //     child: BuyMeACoffeeWidget(
+        //       key: KWidgetkeys.widget.footer.button,
+        //     ),
+        //   )
+        // else
+        DoubleButtonWidget(
+          widgetKey: KWidgetkeys.widget.footer.button,
+          text: context.l10n.contact,
+          onPressed: () => context.goNamed(KRoute.feedback.name),
+          isDesk: isTablet,
+        ),
       ];
   static Widget _button({
     required void Function() onPressed,
