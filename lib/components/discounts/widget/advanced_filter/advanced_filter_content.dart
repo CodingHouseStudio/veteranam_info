@@ -8,13 +8,17 @@ abstract class AdvanceFilter {
     required bool isDesk,
     required BuildContext context,
     required List<dynamic> filterLocationes,
+    required List<DiscountEnum> sorting,
     required void Function(dynamic) onChange,
+    required void Function(DiscountEnum) onChangeSorting,
   }) {
     final body = _widgetList(
       isDesk: isDesk,
       context: context,
       filterLocationes: filterLocationes,
       onChange: onChange,
+      sorting: sorting,
+      onChangeSorting: onChangeSorting,
     );
     return ListView.builder(
       key: KWidgetkeys.screen.discounts.advancedFilterList,
@@ -63,7 +67,9 @@ abstract class AdvanceFilter {
     required bool isDesk,
     required BuildContext context,
     required List<dynamic> filterLocationes,
+    required List<DiscountEnum> sorting,
     required void Function(dynamic) onChange,
+    required void Function(DiscountEnum) onChangeSorting,
   }) {
     final locationes = context
         .read<DiscountWatcherBloc>()
@@ -73,7 +79,7 @@ abstract class AdvanceFilter {
     return [
       // if (isDesk) KSizedBox.kHeightSizedBox32 else
       // KSizedBox.kHeightSizedBox24,
-      if (filterLocationes.isNotEmpty) ...[
+      if (filterLocationes.isNotEmpty || sorting.isNotEmpty) ...[
         if (isDesk)
           Row(
             children: [
@@ -99,8 +105,10 @@ abstract class AdvanceFilter {
             key: KWidgetkeys.screen.discounts.appliedFilterText,
             style: AppTextStyle.materialThemeTitleMedium,
           ),
-        ...List.generate(filterLocationes.length, (index) {
-          final filter = filterLocationes.elementAt(index);
+        ...List.generate(filterLocationes.length + sorting.length, (index) {
+          final filter = sorting.length <= index
+              ? filterLocationes.elementAt(index - sorting.length)
+              : sorting.elementAt(index);
           return Padding(
             padding: const EdgeInsets.only(top: KPadding.kPaddingSize16),
             child: Align(
@@ -125,9 +133,11 @@ abstract class AdvanceFilter {
                       ? AppTextStyle.materialThemeBodyLarge
                       : AppTextStyle.materialThemeBodyMedium,
                 ),
-                onPressed: () => onChange(
-                  filter,
-                ),
+                onPressed: () => filter is DiscountEnum
+                    ? onChangeSorting(filter)
+                    : onChange(
+                        filter,
+                      ),
               ),
             ),
           );
@@ -147,10 +157,11 @@ abstract class AdvanceFilter {
           padding: const EdgeInsets.only(top: KPadding.kPaddingSize16),
           child: CheckPointWidget(
             key: KWidgetkeys.screen.discounts.discountItems,
-            onChanged: () => onChange(DiscountEnum.values.elementAt(index)),
+            onChanged: () =>
+                onChangeSorting(DiscountEnum.values.elementAt(index)),
             isCheck: _isCheck(
               value: DiscountEnum.values.elementAt(index),
-              filterLocationes: filterLocationes,
+              filterLocationes: sorting,
             ),
             text: DiscountEnum.values.elementAt(index).getValue(context),
             isDesk: isDesk,

@@ -8,6 +8,8 @@ Future<void> nawbarHelper({
   required WidgetTester tester,
   required String searchText,
 }) async {
+  await scrollingHelper(tester: tester, offset: KTestConstants.scrollingUp);
+
   expect(find.byKey(KWidgetkeys.widget.nawbar.widget), findsOneWidget);
 
   await scrollingHelper(

@@ -23,7 +23,7 @@ class ChipWidgetState extends State<ChipWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final filterEmpty = widget.filter.number == 0;
+    final filterEmpty = widget.filter.number == 0 && !widget.isSelected;
     return MouseRegion(
       onEnter: (_) {
         setState(() => _isHovered = true);
