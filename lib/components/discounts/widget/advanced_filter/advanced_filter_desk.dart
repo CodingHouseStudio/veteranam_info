@@ -59,13 +59,17 @@ class _AdvancedFilterDeskState extends State<AdvancedFilterDesk> {
                   child: AdvanceFilter.listView(
                     isDesk: true,
                     context: context,
-                    onChange: (index) => context
+                    onChange: (value) => context
                         .read<DiscountWatcherBloc>()
-                        .add(DiscountWatcherEvent.filterLocation(index)),
+                        .add(DiscountWatcherEvent.filterLocation(value)),
                     filterLocationes: context
                         .read<DiscountWatcherBloc>()
                         .state
                         .filtersLocation,
+                    sorting: context.read<DiscountWatcherBloc>().state.sorting,
+                    onChangeSorting: (value) => context
+                        .read<DiscountWatcherBloc>()
+                        .add(DiscountWatcherEvent.sorting(value)),
                   ),
                 ),
               // ...AdvanceFilter.resetButton(isDesk: true, context: context),

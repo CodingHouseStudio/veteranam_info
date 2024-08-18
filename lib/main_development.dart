@@ -4,7 +4,7 @@ import 'package:veteranam/app.dart';
 import 'package:veteranam/bootstrap.dart';
 import 'package:veteranam/firebase_options_development.dart';
 
-/// COMMENT: Our main file
+/// COMMENT: DEV main file
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
