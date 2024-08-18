@@ -15,8 +15,8 @@ import 'package:google_sign_in/google_sign_in.dart' as _i116;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:veteranam/components/discount_card/bloc/discount_card_watcher_bloc.dart'
     as _i334;
-import 'package:veteranam/components/discounts/bloc/advanced_filter_mob_cubit.dart'
-    as _i1017;
+import 'package:veteranam/components/discounts/bloc/advanced_filter/advanced_filter_mob_cubit.dart'
+    as _i189;
 import 'package:veteranam/components/discounts/bloc/link/discount_link_cubit.dart'
     as _i227;
 import 'package:veteranam/components/discounts/bloc/link/discount_link_form_bloc.dart'
@@ -110,8 +110,8 @@ extension GetItInjectableX on _i174.GetIt {
         ));
     gh.singleton<_i1033.FirestoreService>(
         () => _i1033.FirestoreService(gh<_i1001.IAppNetworkRepository>()));
-    gh.factory<_i1017.AdvancedFilterMobCubit>(
-        () => _i1017.AdvancedFilterMobCubit());
+    gh.factory<_i189.AdvancedFilterMobCubit>(
+        () => _i189.AdvancedFilterMobCubit());
     gh.singleton<_i99.StorageService>(() => _i99.StorageService());
     gh.singleton<_i59.FirebaseAuth>(() => firebaseModule.firebaseAuth);
     gh.singleton<_i116.GoogleSignIn>(() => firebaseModule.googleSignIn);

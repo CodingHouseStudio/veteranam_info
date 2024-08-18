@@ -18,7 +18,8 @@ class AdvancedFilterMobBlocprovider extends StatelessWidget {
     return BlocProvider(
       create: (context) => GetIt.I.get<AdvancedFilterMobCubit>()
         ..started(
-          bloc.state.filtersLocation,
+          initialFilter: bloc.state.filtersLocation,
+          initialSorting: bloc.state.sorting,
         ),
       child: childWidget,
     );
