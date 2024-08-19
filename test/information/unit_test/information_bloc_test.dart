@@ -411,6 +411,12 @@ void main() {
             informationModel: KTestText.informationModelItems.first,
             isLiked: true,
           ),
+        )
+        ..add(
+          InformationWatcherEvent.like(
+            informationModel: KTestText.informationModelItems.first,
+            isLiked: false,
+          ),
         ),
       expect: () => [
         predicate<InformationWatcherState>(

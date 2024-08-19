@@ -9,6 +9,8 @@ import 'package:veteranam/shared/shared.dart';
 import '../../test_dependency.dart';
 
 void main() {
+  tearDown(GetIt.I.reset);
+
   group(
       '${KScreenBlocName.appRepository} ${KScreenBlocName.authentication}'
       ' ${KGroupText.repository} ${KGroupText.failureGet}', () {
