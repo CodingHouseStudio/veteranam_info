@@ -148,5 +148,7 @@ doc/api/
 **/get_it_service_locator.config.dart
 # Ignore generated folder
 # **/generated/
+# Ignore test generated folder
+test/.test_optimizer.dart
 
 
