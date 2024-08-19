@@ -35,6 +35,10 @@ void main() {
       });
     });
     group('${KGroupText.getEmptyList} ', () {
+      tearDown(
+        () => GetIt.I.unregister<IWorkRepository>(),
+      );
+
       setUp(() {
         when(mockWorkRepository.getWorks())
             .thenAnswer((invocation) => Stream.value([]));
