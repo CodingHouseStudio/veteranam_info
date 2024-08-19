@@ -12,6 +12,7 @@ void configureDependenciesTest() {
   // register logic if user id empty user setting is also empty
   userSetting();
   KTest.testIsWeb = true;
+  Config.value = Config.development;
   // KTest.scroll = null;
   // Services
   GetIt.I.registerSingleton<FirebaseAuth>(MockFirebaseAuth());
@@ -36,6 +37,7 @@ void configureDependenciesTest() {
       GetIt.I.get<IAppNetworkRepository>(),
     ),
   );
+
   // Repositories
   GetIt.I.registerLazySingleton<IStorage>(SecureStorageRepository.new);
   GetIt.I.registerSingleton<IFeedbackRepository>(FeedbackRepository());
