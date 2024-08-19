@@ -20,7 +20,7 @@ void main() {
         mockQueryDocumentSnapshot;
     late Query<Map<String, dynamic>> mockQuery;
     late DocumentReference<Map<String, dynamic>> mockDocumentReference;
-    late IAppNetworkRepository mockAppNetworkRepository;
+    late CacheClient mockCacheClient;
     setUp(() {
       mockCollectionReference = MockCollectionReference();
       mockFirebaseFirestore = MockFirebaseFirestore();
@@ -28,7 +28,7 @@ void main() {
       mockQuerySnapshot = MockQuerySnapshot();
       mockQueryDocumentSnapshot = [MockQueryDocumentSnapshot()];
       mockQuery = MockQuery();
-      mockAppNetworkRepository = MockIAppNetworkRepository();
+      mockCacheClient = MockCacheClient();
 
       when(
         mockFirebaseFirestore.collection(FirebaseCollectionName.funds),
@@ -70,7 +70,7 @@ void main() {
       );
 
       FirestoreService.firebaseFirestore = mockFirebaseFirestore;
-      firestoreService = FirestoreService(mockAppNetworkRepository);
+      firestoreService = FirestoreService(mockCacheClient);
     });
     test('add fund', () async {
       await firestoreService.addFund(KTestText.fundItemsWithImage.first);

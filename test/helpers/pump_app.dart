@@ -39,10 +39,14 @@ extension PumpApp on WidgetTester {
             create: (context) =>
                 GetIt.I.get<NetworkCubit>()..networkInitialized(),
           ),
-          if (!KTest.testIsWeb)
+          if (!KTest.testIsWeb) ...[
             BlocProvider(
               create: (context) => GetIt.I.get<MobFeedbackBloc>(),
             ),
+            BlocProvider(
+              create: (context) => GetIt.I.get<MobOfflineModeCubit>(),
+            ),
+          ],
         ],
         child: BlocBuilder<AuthenticationBloc, AuthenticationState>(
           builder: (context, state) => mockGoRouter == null
