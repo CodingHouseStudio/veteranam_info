@@ -1061,6 +1061,10 @@
   "@feedbackSent": {
     "examples": "Main text after sending feedback"
   },
+  "offline": "Offline",
+  "@offline": {
+    "examples": "Text on the settings page on the mobile version"
+  },
   "writeMore": "Write more",
   "@writeMore": {
     "examples": "Text for the button on the Feedback page"

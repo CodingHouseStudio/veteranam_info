@@ -24,17 +24,9 @@ void configureDependenciesTest() {
   GetIt.I.registerSingleton<Connectivity>(
     Connectivity(),
   );
-  // Repository
-  GetIt.I.registerSingleton<IAppNetworkRepository>(
-    AppNetworkRepository(
-      GetIt.I.get<Connectivity>(),
-      CacheClient(),
-    ),
-  );
-  // Service
   GetIt.I.registerSingleton<FirestoreService>(
     FirestoreService(
-      GetIt.I.get<IAppNetworkRepository>(),
+      CacheClient(),
     ),
   );
 
@@ -53,6 +45,12 @@ void configureDependenciesTest() {
   GetIt.I.registerSingleton<AuthenticationRepository>(
     AuthenticationRepository(
       GetIt.I.get<IAppAuthenticationRepository>(),
+    ),
+  );
+  GetIt.I.registerSingleton<IAppNetworkRepository>(
+    AppNetworkRepository(
+      GetIt.I.get<Connectivity>(),
+      CacheClient(),
     ),
   );
   GetIt.I.registerSingleton<IDiscountRepository>(DiscountRepository());
@@ -81,6 +79,11 @@ void configureDependenciesTest() {
   GetIt.I.registerSingleton<AuthenticationBloc>(
     AuthenticationBloc(
       authenticationRepository: GetIt.I.get<AuthenticationRepository>(),
+    ),
+  );
+  GetIt.I.registerSingleton<MobOfflineModeCubit>(
+    MobOfflineModeCubit(
+      firestoreService: GetIt.I.get<FirestoreService>(),
     ),
   );
   // GetIt.I.registerSingleton<LoginBloc>(

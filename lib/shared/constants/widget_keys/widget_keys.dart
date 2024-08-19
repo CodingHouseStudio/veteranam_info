@@ -55,7 +55,6 @@ part 'widget/switch.dart';
 part 'widget/drop_chip.dart';
 part 'widget/chip.dart';
 part 'widget/filter_popup_menu.dart';
-part 'widget/language_switcher.dart';
 part 'widget/discount_card.dart';
 part 'widget/check_point.dart';
 part 'widget/scaffold.dart';
@@ -80,6 +79,7 @@ part 'widget/menu_dialog.dart';
 part 'widget/mob_navigation.dart';
 part 'widget/mob_feedback.dart';
 part 'widget/email_button.dart';
+part 'widget/custom_switcher.dart';
 
 abstract class KWidgetkeys {
   static _ScreenKeys get screen => _ScreenKeys();

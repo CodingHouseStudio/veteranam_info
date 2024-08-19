@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:veteranam/shared/shared.dart';
 // import 'package:cached_network_image/cached_network_image.dart';
 
@@ -55,25 +56,52 @@ class _NetworkMobileImageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CachedNetworkImage(
-      imageUrl: imageUrl,
-      fit: fit,
-      height: size,
-      width: size,
-      errorWidget: (context, url, error) => KIcon.error,
-      placeholder: (context, url) =>
-          // skeletonizerLoading
-          //     ? const SkeletonizerWidget(
-          //         isLoading: true,
-          //         child: CircularProgressIndicator.adaptive(),
-          //       )
-          //     :
-          const CircularProgressIndicator.adaptive(
-        valueColor:
-            AlwaysStoppedAnimation(AppColors.materialThemeKeyColorsPrimary),
-        strokeWidth: 5,
-      ),
-    );
+    if (context.read<MobOfflineModeCubit>().state.isOffline) {
+      return CachedNetworkImage(
+        imageUrl: imageUrl,
+        fit: fit,
+        height: size,
+        width: size,
+        errorWidget: (context, url, error) => KIcon.error,
+        placeholder: (context, url) =>
+            // skeletonizerLoading
+            //     ? const SkeletonizerWidget(
+            //         isLoading: true,
+            //         child: CircularProgressIndicator.adaptive(),
+            //       )
+            //     :
+            const CircularProgressIndicator.adaptive(
+          valueColor:
+              AlwaysStoppedAnimation(AppColors.materialThemeKeyColorsPrimary),
+          strokeWidth: 5,
+        ),
+      );
+    } else {
+      return Image.network(
+        imageUrl,
+        fit: fit,
+        height: size,
+        width: size,
+        errorBuilder: (context, url, error) => KIcon.error,
+        loadingBuilder: (context, child, loadingProgress) {
+          if (loadingProgress == null) {
+            return child;
+          }
+          // if (widget.skeletonizerLoading) {
+          //   return const SkeletonizerWidget(
+          //     isLoading: true,
+          //     child: SizedBox.shrink(),
+          //   );
+          // } else {
+          return const CircularProgressIndicator.adaptive(
+            valueColor:
+                AlwaysStoppedAnimation(AppColors.materialThemeKeyColorsPrimary),
+            strokeWidth: 5,
+          );
+          // }
+        },
+      );
+    }
   }
 }
 
