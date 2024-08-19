@@ -32,7 +32,7 @@ class InvestorsBodyWidget extends StatelessWidget {
         mainChildWidgetsFunction: ({required isDesk}) => [
           KSizedBox.kHeightSizedBox24,
           if (KTest.testIsWeb)
-            ...TitleWidget.pointTitleWidgetList(
+            TitlePointWidget(
               title: context.l10n.provideSuggestionsFromBusinesses,
               titleKey: KWidgetkeys.screen.investors.title,
               titleSecondPart: context.l10n.orDonateHere,

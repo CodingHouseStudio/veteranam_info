@@ -133,7 +133,7 @@ abstract class KMockText {
     requirements:
         'Військовим - наявність документу, що підтверджує  професійну',
     territory: 'Всі відділення лабораторії.',
-    location: ['Вся Україна'],
+    location: ['Київ'],
     expiration: 'Діє постійно',
     exclusions:
         '- при замовленні досліджень та оплаті їх онлайн на сайті Ескулаб;',
@@ -152,7 +152,7 @@ abstract class KMockText {
     exclusionsEN:
         '- when ordering tests and paying for them online on the Esculab website;',
     expirationEN: 'It works all the time',
-    locationEN: ['All Ukraine'],
+    locationEN: ['Kyiv'],
   );
   static final informationModel = InformationModel(
     id: '',

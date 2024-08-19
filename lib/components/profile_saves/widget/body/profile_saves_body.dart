@@ -12,7 +12,7 @@ class ProfileSavesBody extends StatelessWidget {
           KSizedBox.kHeightSizedBox40
         else
           KSizedBox.kHeightSizedBox24,
-        ...TitleWidget.titleWidgetList(
+        TitleWidget(
           title: context.l10n.saved,
           titleKey: KWidgetkeys.screen.profileSaves.title,
           subtitle: context.l10n.savesSubtitle,
