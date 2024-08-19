@@ -1,15 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:veteranam/shared/shared.dart';
 
-abstract class TitleWidget {
-  static List<Widget> titleWidgetList({
-    required String title,
-    required Key titleKey,
-    required String subtitle,
-    required Key subtitleKey,
-    required bool isDesk,
-  }) =>
-      [
+class TitleWidget extends StatelessWidget {
+  const TitleWidget({
+    required this.title,
+    required this.titleKey,
+    required this.subtitle,
+    required this.subtitleKey,
+    required this.isDesk,
+    super.key,
+  });
+
+  final String title;
+  final Key titleKey;
+  final String subtitle;
+  final Key subtitleKey;
+  final bool isDesk;
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
         Text(
           title,
           key: titleKey,
@@ -21,16 +31,31 @@ abstract class TitleWidget {
           key: subtitleKey,
           style: isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
         ),
-      ];
-  static List<Widget> titleIconWidgetList({
-    required String title,
-    required Key titleKey,
-    required bool isDesk,
-    required String titleSecondPart,
-    // bool isRightArrow = true,
-    CrossAxisAlignment iconCrossAxisAlignment = CrossAxisAlignment.end,
-  }) =>
-      [
+      ],
+    );
+  }
+}
+
+class TitleIconWidget extends StatelessWidget {
+  const TitleIconWidget({
+    required this.title,
+    required this.titleKey,
+    required this.isDesk,
+    required this.titleSecondPart,
+    this.iconCrossAxisAlignment = CrossAxisAlignment.end,
+    super.key,
+  });
+  final String title;
+  final Key titleKey;
+  final bool isDesk;
+  final String titleSecondPart;
+  // bool isRightArrow = true;
+  final CrossAxisAlignment iconCrossAxisAlignment;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
         if (isDesk)
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -84,21 +109,99 @@ abstract class TitleWidget {
         const Divider(
           color: AppColors.materialThemeKeyColorsNeutral,
         ),
-      ];
-  static List<Widget> pointTitleWidgetList({
-    required String title,
-    required String titleSecondPart,
-    required Key titleKey,
-    // required String pointText,
-    // required Key pointKey,
-    required bool isDesk,
-    EdgeInsets titleSecondPartPadding = EdgeInsets.zero,
-    bool isRightArrow = true,
-    WrapAlignment titleAlignment = WrapAlignment.start,
-    CrossAxisAlignment iconCrossAxisAlignment = CrossAxisAlignment.start,
-    TextAlign textAlign = TextAlign.start,
-  }) =>
-      [
+      ],
+    );
+  }
+}
+
+class ShortTitleIconWidget extends StatelessWidget {
+  const ShortTitleIconWidget({
+    required this.title,
+    required this.titleKey,
+    required this.isDesk,
+    this.iconCrossAxisAlignment = CrossAxisAlignment.end,
+    super.key,
+  });
+  final String title;
+  final Key titleKey;
+  final bool isDesk;
+  // bool isRightArrow = true;
+  final CrossAxisAlignment iconCrossAxisAlignment;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        if (isDesk)
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: AppTextStyle.materialThemeDisplayLarge,
+              ),
+              KSizedBox.kWidthSizedBox32,
+              const IconWidget(
+                // key: KWidgetkeys.screen.feedback.titleIcon,
+                icon: KIcon.arrowDownRight,
+              ),
+            ],
+          )
+        else
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const IconWidget(
+                // key: KWidgetkeys.screen.feedback.titleIcon,
+                icon: KIcon.arrowDownRight,
+              ),
+              KSizedBox.kWidthSizedBox16,
+              Expanded(
+                child: Text(
+                  title,
+                  style: AppTextStyle.materialThemeDisplaySmall,
+                ),
+              ),
+            ],
+          ),
+        KSizedBox.kHeightSizedBox32,
+        const Divider(
+          color: AppColors.materialThemeKeyColorsNeutral,
+        ),
+      ],
+    );
+  }
+}
+
+class TitlePointWidget extends StatelessWidget {
+  const TitlePointWidget({
+    required this.title,
+    required this.titleSecondPart,
+    required this.titleKey,
+    required this.isDesk,
+    super.key,
+    this.titleSecondPartPadding = EdgeInsets.zero,
+    this.isRightArrow = true,
+    this.titleAlignment = WrapAlignment.start,
+    this.iconCrossAxisAlignment = CrossAxisAlignment.start,
+    this.textAlign = TextAlign.start,
+  });
+  final String title;
+  final String titleSecondPart;
+  final Key titleKey;
+  // final String pointText;
+  // final Key pointKey;
+  final bool isDesk;
+  final EdgeInsets titleSecondPartPadding;
+  final bool isRightArrow;
+  final WrapAlignment titleAlignment;
+  final CrossAxisAlignment iconCrossAxisAlignment;
+  final TextAlign textAlign;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
         if (isDesk)
           // Row(
           //   crossAxisAlignment: CrossAxisAlignment.start,
@@ -175,52 +278,7 @@ abstract class TitleWidget {
         const Divider(
           color: AppColors.materialThemeKeyColorsNeutral,
         ),
-      ];
-
-  static List<Widget> oneTitleIconWidgetList({
-    required String title,
-    required Key titleKey,
-    required bool isDesk,
-    // bool isRightArrow = true,
-    CrossAxisAlignment iconCrossAxisAlignment = CrossAxisAlignment.end,
-  }) =>
-      [
-        if (isDesk)
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                title,
-                style: AppTextStyle.materialThemeDisplayLarge,
-              ),
-              KSizedBox.kWidthSizedBox32,
-              const IconWidget(
-                // key: KWidgetkeys.screen.feedback.titleIcon,
-                icon: KIcon.arrowDownRight,
-              ),
-            ],
-          )
-        else ...[
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const IconWidget(
-                // key: KWidgetkeys.screen.feedback.titleIcon,
-                icon: KIcon.arrowDownRight,
-              ),
-              KSizedBox.kWidthSizedBox16,
-              Expanded(
-                child: Text(
-                  title,
-                  style: AppTextStyle.materialThemeDisplaySmall,
-                ),
-              ),
-            ],
-          ),
-        ],
-        KSizedBox.kHeightSizedBox32,
-        const Divider(
-          color: AppColors.materialThemeKeyColorsNeutral,
-        ),
-      ];
+      ],
+    );
+  }
 }

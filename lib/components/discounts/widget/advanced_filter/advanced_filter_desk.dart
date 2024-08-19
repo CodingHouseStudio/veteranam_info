@@ -37,12 +37,11 @@ class _AdvancedFilterDeskState extends State<AdvancedFilterDesk> {
               //     ),
               //   ],
               // ),
-              AdvanceFilter.button(
+              AdvancedFilterButton(
                 onPressed: () => setState(() {
                   showFilter = !showFilter;
                 }),
                 isDesk: true,
-                context: context,
                 icon: showFilter
                     ? KIcon.trailing.copyWith(
                         key: KWidgetkeys
@@ -56,9 +55,8 @@ class _AdvancedFilterDeskState extends State<AdvancedFilterDesk> {
 
               if (showFilter)
                 Expanded(
-                  child: AdvanceFilter.listView(
+                  child: AdvancedFilterContent(
                     isDesk: true,
-                    context: context,
                     onChange: (value) => context
                         .read<DiscountWatcherBloc>()
                         .add(DiscountWatcherEvent.filterLocation(value)),

@@ -11,7 +11,7 @@ class ProfileBodyWidget extends StatelessWidget {
     return ScaffoldWidget(
       mainChildWidgetsFunction: ({required isDesk, required isTablet}) => [
         KSizedBox.kHeightSizedBox30,
-        ...TitleWidget.titleWidgetList(
+        TitleWidget(
           title: context.l10n.myProfile,
           titleKey: KWidgetkeys.screen.profile.title,
           subtitle: context.l10n.profileDetails,
