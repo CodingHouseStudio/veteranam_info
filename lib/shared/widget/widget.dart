@@ -71,7 +71,7 @@ export 'switch_widget.dart';
 export 'switch_widget_withoud_bloc.dart';
 export 'text_field_widget.dart';
 export 'text_point_widget.dart';
-export 'title_widget_list.dart';
+export 'title_widgets.dart';
 export 'user_photo_widget.dart';
 export 'viewpager_indicator_widget.dart';
 export 'work_card_widget.dart';
