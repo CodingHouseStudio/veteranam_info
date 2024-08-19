@@ -11,6 +11,9 @@ void main() {
   setupFirebaseAuthMocks();
 
   setUpAll(setUpGlobal);
+
+  tearDown(GetIt.I.reset);
+
   group('${KScreenBlocName.discount} ${KGroupText.repository} ', () {
     late IDiscountRepository mockDiscountRepository;
     late FirestoreService mockFirestoreService;
