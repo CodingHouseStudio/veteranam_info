@@ -127,11 +127,15 @@ _\*Veteranam works Web._
 ```sh
 Testing
 
+You need to activate 'very good cli'
+(this is done only when running tests for the first time):
+dart pub global activate very_good_cli
+
 All unit and widget tests
-fvm flutter test
+fvm very_good test
 
 All unit and widget tests use coverage
-$ flutter test --coverage --test-randomize-ordering-seed random
+very_good test --coverage --test-randomize-ordering-seed random
 ```
 
 + To view the generated coverage report you can use [lcov](https://github.com/linux-test-project/lcov).
