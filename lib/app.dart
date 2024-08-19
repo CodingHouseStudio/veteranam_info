@@ -36,10 +36,14 @@ class App extends StatelessWidget {
           create: (context) =>
               GetIt.I.get<NetworkCubit>()..networkInitialized(),
         ),
-        if (!kIsWeb)
+        if (!kIsWeb) ...[
           BlocProvider(
             create: (context) => GetIt.I.get<MobFeedbackBloc>(),
           ),
+          BlocProvider(
+            create: (context) => GetIt.I.get<MobOfflineModeCubit>(),
+          ),
+        ],
       ],
       child: const AppWidget(),
     );
@@ -70,7 +74,11 @@ class AppWidget extends StatelessWidget {
                   onSubmit: onSubmit,
                   // scrollController: scrollController,
                 ),
-                child: body(localeValue),
+                child: BlocBuilder<MobOfflineModeCubit, MobMode>(
+                  builder: (context, state) {
+                    return body(localeValue);
+                  },
+                ),
               );
       },
     );

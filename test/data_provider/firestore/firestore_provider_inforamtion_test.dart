@@ -22,7 +22,7 @@ void main() {
     late List<DocumentChange<Map<String, dynamic>>> mockDocumentChange;
     late SnapshotMetadata mockSnapshotMetadata;
     late Query<Map<String, dynamic>> mockQuery;
-    late IAppNetworkRepository mockAppNetworkRepository;
+    late CacheClient mockCacheClient;
     setUp(() {
       mockCollectionReference = MockCollectionReference();
       mockFirebaseFirestore = MockFirebaseFirestore();
@@ -32,7 +32,7 @@ void main() {
       mockDocumentChange = [MockDocumentChange()];
       mockSnapshotMetadata = MockSnapshotMetadata();
       mockQuery = MockQuery();
-      mockAppNetworkRepository = MockIAppNetworkRepository();
+      mockCacheClient = MockCacheClient();
 
       when(
         mockFirebaseFirestore.collection(FirebaseCollectionName.information),
@@ -107,7 +107,7 @@ void main() {
       );
 
       FirestoreService.firebaseFirestore = mockFirebaseFirestore;
-      firestoreService = FirestoreService(mockAppNetworkRepository);
+      firestoreService = FirestoreService(mockCacheClient);
     });
     test('add information', () async {
       await firestoreService

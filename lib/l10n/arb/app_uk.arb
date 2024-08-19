@@ -1065,6 +1065,10 @@
   "@urlCopied": {
     "examples": "Повідомлення про помилку при спробі скопіювати пошту."
   },
+  "offline": "Офлайн",
+  "@offline": {
+    "examples": "Текст на сторінці Settings."
+  },
   "writeMore": "Написати ще",
   "@writeMore": {
     "examples": "Текст для кнопки на сторінці Feedback"

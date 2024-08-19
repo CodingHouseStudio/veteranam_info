@@ -7,8 +7,6 @@ import '../helpers.dart';
 Future<void> mobSettingsInitialHelper(
   WidgetTester tester,
 ) async {
-  expect(find.byKey(KWidgetkeys.screen.mobSettings.screen), findsOneWidget);
-
   expect(
     find.byKey(KWidgetkeys.screen.mobSettings.title),
     findsOneWidget,
@@ -24,7 +22,12 @@ Future<void> mobSettingsInitialHelper(
     findsOneWidget,
   );
 
-  await languageSwitcherHelper(tester);
+  expect(
+    find.byKey(KWidgetkeys.screen.mobSettings.offlinesSwitcher),
+    findsOneWidget,
+  );
+
+  await customSwitcherHelper(tester: tester);
 
   expect(
     find.byKey(KWidgetkeys.screen.mobSettings.subtitle),
@@ -41,6 +44,11 @@ Future<void> mobSettingsInitialHelper(
   expect(
     find.byKey(KWidgetkeys.screen.mobSettings.feedbackButton),
     findsOneWidget,
+  );
+
+  await scrollingHelperInt(
+    tester: tester,
+    itemKey: KWidgetkeys.screen.mobSettings.feedbackButton,
   );
 
   expect(
