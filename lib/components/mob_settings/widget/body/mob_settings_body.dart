@@ -48,6 +48,34 @@ class MobSettingsBodyWidget extends StatelessWidget {
             ],
           ),
         ),
+        KSizedBox.kHeightSizedBox8,
+        Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: KPadding.kPaddingSize16,
+          ),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                context.l10n.offline,
+                style: AppTextStyle.materialThemeTitleMedium,
+              ),
+              BlocBuilder<MobOfflineModeCubit, MobMode>(
+                builder: (context, _) => CustomSwitcherWidget<MobMode>(
+                  key: KWidgetkeys.screen.mobSettings.offlinesSwitcher,
+                  decoration: KWidgetTheme.boxDecorationNawbar,
+                  values: MobMode.values,
+                  getText: (value) => value.text,
+                  isCheck: (MobMode value) => _ == value,
+                  onSwitch: null,
+                  // () =>
+                  //     context.read<MobOfflineModeCubit>().switchMode(),
+                ),
+              ),
+            ],
+          ),
+        ),
         KSizedBox.kHeightSizedBox24,
         Text(
           key: KWidgetkeys.screen.mobSettings.subtitle,

@@ -4,21 +4,38 @@ import 'package:flutter/widgets.dart';
 import 'package:injectable/injectable.dart';
 import 'package:veteranam/shared/shared.dart';
 
+enum MobMode {
+  online('Off'),
+  offline('On');
+
+  const MobMode(this.text);
+  final String text;
+
+  bool get isOffline => this == MobMode.offline;
+  MobMode get switchMode => isOffline ? MobMode.online : MobMode.offline;
+}
+
 /// COMMENT: Class to get, update, delete or set values in firebase
 @Singleton(order: -1)
 class FirestoreService {
   FirestoreService(
-    this.appNetworkRepository,
+    // this.appNetworkRepository,
+    this._cache,
   ) {
     // Initialization logic can't use await directly in constructor
     _initFirestoreSettings();
   }
-  final IAppNetworkRepository appNetworkRepository;
+  // final IAppNetworkRepository appNetworkRepository;
   // final IAppNetworkRepository appNetworkRepository = AppNetworkRepository(
   //   Connectivity(),
   //   CacheClient(),
   // );
   final FirebaseFirestore _db = firebaseFirestore;
+  final CacheClient _cache;
+  late var _offlineMode = MobMode.offline;
+
+  MobMode get offlineMode =>
+      _cache.read<MobMode>(key: offlineModeCacheKey) ?? _offlineMode;
 
   @visibleForTesting
   static FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
@@ -26,12 +43,32 @@ class FirestoreService {
   static const getOptions = GetOptions();
   @visibleForTesting
   static const getCacheOptions = GetOptions(source: Source.cache);
+  @visibleForTesting
+  static const offlineModeCacheKey = '__offline_mode_cache_key__';
 
   void _initFirestoreSettings() {
     // Set settings for persistence based on platform
-    _db.settings = const Settings(
-      persistenceEnabled: true,
+    if (KTest.testIsWeb) {
+      _db.settings = const Settings(
+        persistenceEnabled: true,
+      );
+    } else {
+      _offlineMode = offlineMode;
+      _db.settings = Settings(
+        persistenceEnabled: _offlineMode.isOffline,
+      );
+    }
+    // await appNetworkRepository.updateCacheConnectivityResults();
+  }
+
+  MobMode get switchOfflineMode {
+    _offlineMode = _offlineMode.switchMode;
+    // Set settings for persistence based on platform
+    _db.settings = Settings(
+      persistenceEnabled: _offlineMode.isOffline,
     );
+    _cache.write(key: offlineModeCacheKey, value: _offlineMode);
+    return _offlineMode;
     // await appNetworkRepository.updateCacheConnectivityResults();
   }
 
@@ -78,7 +115,7 @@ class FirestoreService {
           .map((doc) => QuestionModel.fromJson(doc.data()))
           .toList();
     } on FirebaseException catch (e) {
-      if (e.code == 'unavailable') {
+      if (e.code == 'unavailable' && offlineMode.isOffline) {
         // If the server is unavailable, fall back to the cache
         final docSnapshot = await _db
             .collection(FirebaseCollectionName.questions)
@@ -110,7 +147,7 @@ class FirestoreService {
           .where((e) => e.image != null || !Config.isProduction)
           .toList();
     } on FirebaseException catch (e) {
-      if (e.code == 'unavailable') {
+      if (e.code == 'unavailable' && offlineMode.isOffline) {
         // If the server is unavailable, fall back to the cache
         final docSnapshot = await _db
             .collection(FirebaseCollectionName.funds)
@@ -144,7 +181,9 @@ class FirestoreService {
           .collection(FirebaseCollectionName.information)
           // .where(DiscountModelJsonField.id, whereNotIn: reportIdItems?.
           // toSet())
-          .snapshots(includeMetadataChanges: true) // Enable caching
+          .snapshots(
+            includeMetadataChanges: offlineMode.isOffline,
+          ) // Enable caching
           .map(
         (snapshot) {
           late var isFromCache = false;
@@ -198,7 +237,9 @@ class FirestoreService {
   Stream<UserSetting> getUserSetting(String userId) => _db
           .collection(FirebaseCollectionName.userSettings)
           .doc(userId)
-          .snapshots(includeMetadataChanges: true) // Enable caching
+          .snapshots(
+            includeMetadataChanges: offlineMode.isOffline,
+          ) // Enable caching
           .map(
         (snapshot) {
           if (snapshot.exists) {
@@ -225,7 +266,9 @@ class FirestoreService {
 
   Stream<List<WorkModel>> getWorks() => _db
           .collection(FirebaseCollectionName.work)
-          .snapshots(includeMetadataChanges: true) // Enable caching
+          .snapshots(
+            includeMetadataChanges: offlineMode.isOffline,
+          ) // Enable caching
           .map(
         (snapshot) {
           late var isFromCache = false;
@@ -257,7 +300,9 @@ class FirestoreService {
 
   Stream<List<StoryModel>> getStories() => _db
           .collection(FirebaseCollectionName.stroies)
-          .snapshots(includeMetadataChanges: true) // Enable caching
+          .snapshots(
+            includeMetadataChanges: offlineMode.isOffline,
+          ) // Enable caching
           .map(
         (snapshot) {
           late var isFromCache = false;
@@ -305,7 +350,9 @@ class FirestoreService {
         .collection(FirebaseCollectionName.discount)
         .orderBy(DiscountModelJsonField.dateVerified, descending: true)
         // .where(DiscountModelJsonField.id, whereNotIn: reportIdItems?.toSet())
-        .snapshots(includeMetadataChanges: true) // Enable caching
+        .snapshots(
+          includeMetadataChanges: offlineMode.isOffline,
+        ) // Enable caching
         .map(
       (snapshot) {
         late var isFromCache = false;
@@ -372,7 +419,7 @@ class FirestoreService {
 
   // Stream<List<TagModel>> getTags() => _db
   //         .collection(FirebaseCollectionName.tags)
-  //         .snapshots(includeMetadataChanges: true) // Enable caching
+  //         .snapshots(includeMetadataChanges: offlineMode.isOffline) // Enable caching
   //         .map(
   //       (snapshot) {
   //         for (final change in snapshot.docChanges) {
@@ -446,7 +493,7 @@ class FirestoreService {
           .map((doc) => ReportModel.fromJson(doc.data()))
           .toList();
     } on FirebaseException catch (e) {
-      if (e.code == 'unavailable') {
+      if (e.code == 'unavailable' && offlineMode.isOffline) {
         // If the server is unavailable and cache has not been tried, attempt
         // to get data from cache
         final cacheSnapshot = await _db
@@ -473,8 +520,10 @@ class FirestoreService {
     required bool isFromCache,
     required List<T> Function() event,
   }) {
-    if (isFromCache &&
-        appNetworkRepository.currentConnectivityResults.hasNetwork) {
+    if (isFromCache
+        // &&
+        //     appNetworkRepository.currentConnectivityResults.hasNetwork
+        ) {
       try {
         return event();
       } catch (e) {
