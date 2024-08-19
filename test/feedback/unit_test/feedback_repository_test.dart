@@ -10,6 +10,8 @@ import 'package:veteranam/shared/shared.dart';
 import '../../test_dependency.dart';
 
 void main() {
+  tearDown(GetIt.I.reset);
+
   group('${KScreenBlocName.feedback} ${KGroupText.repository} ', () {
     late IFeedbackRepository mockFeedbackRepository;
     late FirestoreService mockFirestoreService;
