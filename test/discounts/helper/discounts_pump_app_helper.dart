@@ -34,6 +34,7 @@ Future<void> discountsPumpAppHelper({
     mockAppAuthenticationRepository: mockAppAuthenticationRepository,
   );
   _registerAdvancedFilterMobCubit();
+
   await tester.pumpApp(const DiscountsScreen(), mockGoRouter: mockGoRouter);
 
   expect(
