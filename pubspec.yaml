@@ -19,7 +19,6 @@ dependencies:
   equatable: ^2.0.5
   feedback: ^3.1.0
   firebase_analytics: ^11.2.1
-  firebase_app_check: ^0.3.0+4
   firebase_auth: ^5.1.4
   firebase_core: ^3.3.0
   firebase_performance: ^0.10.0+4
