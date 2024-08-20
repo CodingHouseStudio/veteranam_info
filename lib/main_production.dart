@@ -15,7 +15,10 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   await FirebasePerformance.instance.setPerformanceCollectionEnabled(true);
-  await FirebaseAppCheck.instance.activate();
+  await FirebaseAppCheck.instance.activate(
+
+    ReCaptchaV3Provider('6LevUCsqAAAAAMPWh00wW3HQ7_yS2RYszBKLthP9'),
+  );
 
   if (kIsWeb) {
     await SentryFlutter.init(
