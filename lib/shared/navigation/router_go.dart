@@ -305,6 +305,16 @@ GoRouter router = GoRouter(
             child: const FeedbackScreen(),
           ),
         ),
+        if (!kIsWeb)
+          GoRoute(
+            name: KRoute.mobFAQ.name,
+            path: KRoute.mobFAQ.path,
+            pageBuilder: (context, state) => NoTransitionPage(
+              key: state.pageKey,
+              name: state.name,
+              child: const MobFaqScreen(),
+            ),
+          ),
       ],
     ),
   ],

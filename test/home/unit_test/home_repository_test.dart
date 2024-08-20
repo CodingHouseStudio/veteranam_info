@@ -16,7 +16,7 @@ void main() {
   tearDown(GetIt.I.reset);
 
   group('${KScreenBlocName.home} ${KGroupText.repository} ', () {
-    late IHomeRepository homeRepository;
+    late IFaqRepository faqRepository;
     late FirestoreService mockFirestoreService;
     setUp(() {
       ExtendedDateTime.id = '';
@@ -36,17 +36,17 @@ void main() {
           GetIt.I.unregister<FirestoreService>();
         }
         GetIt.I.registerSingleton(mockFirestoreService);
-        homeRepository = HomeRepository();
+        faqRepository = FaqRepository();
       });
       test('questions', () async {
         expect(
-          await homeRepository.getQuestions(),
+          await faqRepository.getQuestions(),
           isA<Right<SomeFailure, List<QuestionModel>>>()
               .having((e) => e.value, 'value', KTestText.questionModelItems),
         );
       });
       test('mock', () async {
-        homeRepository.addMockQuestions();
+        faqRepository.addMockQuestions();
         verify(
           mockFirestoreService.addQuestion(
             KTestText.questionModelItems.first.copyWith(navigationLink: null),
@@ -62,11 +62,11 @@ void main() {
           GetIt.I.unregister<FirestoreService>();
         }
         GetIt.I.registerSingleton(mockFirestoreService);
-        homeRepository = HomeRepository();
+        faqRepository = FaqRepository();
       });
       test('questions', () async {
         expect(
-          await homeRepository.getQuestions(),
+          await faqRepository.getQuestions(),
           isA<Left<SomeFailure, List<QuestionModel>>>().having(
             (e) => e.value,
             'value',

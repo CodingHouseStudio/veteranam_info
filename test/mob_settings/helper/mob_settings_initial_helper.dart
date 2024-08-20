@@ -8,6 +8,11 @@ Future<void> mobSettingsInitialHelper(
   WidgetTester tester,
 ) async {
   expect(
+    find.byKey(KWidgetkeys.widget.nawbar.pageName),
+    findsOneWidget,
+  );
+
+  expect(
     find.byKey(KWidgetkeys.screen.mobSettings.title),
     findsOneWidget,
   );
