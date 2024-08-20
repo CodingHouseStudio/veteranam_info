@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:veteranam/components/components.dart';
+import 'package:veteranam/shared/shared.dart';
 
 class DiscountBlocprovider extends StatelessWidget {
   const DiscountBlocprovider({required this.childWidget, super.key});
@@ -10,14 +11,20 @@ class DiscountBlocprovider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return
-        // BlocProvider(
-        //   create: (context) => GetIt.I.get<DiscountWatcherBloc>()
-        //     ..add(const DiscountWatcherEvent.started()),
-        // ),
+    return MultiBlocProvider(
+      providers: [
         BlocProvider(
-      create: (context) => GetIt.I.get<DiscountLinkCubit>()..started(),
+          create: (context) => GetIt.I.get<DiscountLinkCubit>()..started(),
+        ),
+        BlocProvider(
+          create: (context) => GetIt.I.get<DiscountUserEmailCubit>()..started(),
+        ),
+      ],
       child: childWidget,
     );
+    // BlocProvider(
+    //   create: (context) => GetIt.I.get<DiscountWatcherBloc>()
+    //     ..add(const DiscountWatcherEvent.started()),
+    // ),
   }
 }

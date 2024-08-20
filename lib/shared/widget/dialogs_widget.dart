@@ -267,4 +267,49 @@ class _DialogsWidget {
           .add(MobFeedbackEvent.send(feedback.screenshot)),
     );
   }
+
+  void showUserEmailDialog(
+    BuildContext context,
+  ) {
+    showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return BlocProvider(
+          create: (context) => GetIt.I.get<DiscountUserEmailFormBloc>(),
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              final isTablet = constraints.maxWidth >
+                  KPlatformConstants.minWidthThresholdTablet;
+              return Center(
+                child: AlertDialog(
+                  key: KWidgetkeys.screen.discountCard.dialog,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: KBorderRadius.kBorderRadius32,
+                  ),
+                  backgroundColor: AppColors.materialThemeKeyColorsNeutral,
+                  contentPadding: EdgeInsets.zero,
+                  scrollable: true,
+                  content: UserEmailDialog(
+                    isDesk: isTablet,
+                    enabled: true,
+                    sendOnPressed: () {
+                      context.read<DiscountUserEmailFormBloc>().add(
+                            const DiscountUserEmailFormEvent.sendEmail(),
+                          );
+                      //context.pop();
+                    },
+                    onChanged: (text) =>
+                        context.read<DiscountUserEmailFormBloc>().add(
+                              DiscountUserEmailFormEvent.updatedEmail(text),
+                            ),
+                    key: KWidgetkeys.screen.discounts.userEmailDialog,
+                  ),
+                ),
+              );
+            },
+          ),
+        );
+      },
+    );
+  }
 }

@@ -1064,5 +1064,13 @@
   "writeMore": "Write more",
   "@writeMore": {
     "examples": "Text for the button on the Feedback page"
+  },
+  "aboutNewDiscounts": "Do you want to be the first to know about new discounts?",
+  "@aboutNewDiscounts": {
+    "examples": "Text for a discount subscription"
+  },
+  "aboutNewDiscountsSubtitle": "Write us your email. We promise not to send spam! 😌",
+  "@aboutNewDiscountsSubtitle": {
+    "examples": "Text for a discount subscription"
   }
 }

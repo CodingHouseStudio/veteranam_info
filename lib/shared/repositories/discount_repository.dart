@@ -114,4 +114,39 @@ class DiscountRepository implements IDiscountRepository {
       return const Left(SomeFailure.serverError());
     }
   }
+
+  @override
+  Future<Either<SomeFailure, bool>> sendEmail(
+    EmailModel userEmail,
+  ) async {
+    try {
+      await _firestoreService.sendEmail(userEmail);
+      return const Right(true);
+    } on FirebaseException catch (e) {
+      return Left(SendFailure.fromCode(e).status);
+    } catch (e) {
+      return const Left(SomeFailure.serverError());
+    }
+  }
+
+  @override
+  Future<Either<SomeFailure, bool>> userCanSendUserEmail(
+    String userId,
+  ) async {
+    try {
+      final userEmail = await _firestoreService.getUserDiscountsEmail(userId);
+      final oneDayAgo =
+          ExtendedDateTime.current.subtract(const Duration(days: 1));
+      final oneDayUserEmail = userEmail
+          .where(
+            (element) => element.date.isAfter(oneDayAgo),
+          )
+          .toList();
+      return Right(oneDayUserEmail.length < KDimensions.maxLinkPerDay);
+    } on FirebaseException catch (e) {
+      return Left(GetFailur.fromCode(e).status);
+    } catch (e) {
+      return const Left(SomeFailure.serverError());
+    }
+  }
 }
