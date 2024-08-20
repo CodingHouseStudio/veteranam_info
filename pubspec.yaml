@@ -52,6 +52,7 @@ dependencies:
   sentry_flutter: ^8.6.0
   share_plus: ^10.0.0
   skeletonizer: ^1.4.2
+  universal_html: ^2.2.4
   url_launcher: ^6.3.0
   web: 0.5.1 # Wait when share plus support version 1.0.0
 

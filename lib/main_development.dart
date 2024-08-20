@@ -34,7 +34,7 @@ void main() async {
     if (kIsWeb) {
       final temp = await FirebaseAppCheck.instanceFor(app: app).activate(
         webProvider: ReCaptchaV3Provider(kReleaseMode
-            ? '6LevUCsqAAAAAMPWh00wW3HQ7_yS2RYszBKLthP9'
+            ? 'REDACTED'
             : '4A104621-0F8F-4D82-A07F-008910737512'),
       );
     } else {
