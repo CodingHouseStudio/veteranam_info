@@ -19,7 +19,7 @@ class MobSettingsBodyWidget extends StatelessWidget {
         BoxWidget(
           key: KWidgetkeys.screen.mobSettings.faq,
           isDesk: false,
-          onTap: null,
+          onTap: () => context.goNamed(KRoute.mobFAQ.name),
           text: context.l10n.faq,
           textStyle: AppTextStyle.materialThemeTitleMediumBlack,
           icon: KIcon.arrowUpRight,

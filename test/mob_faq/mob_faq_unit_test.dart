@@ -5,55 +5,55 @@ import 'package:mockito/mockito.dart';
 import 'package:veteranam/components/components.dart';
 import 'package:veteranam/shared/shared.dart';
 
-import '../../test_dependency.dart';
+import '../test_dependency.dart';
 
 void main() {
   setupFirebaseAuthMocks();
 
   setUpAll(setUpGlobal);
-  group('${KScreenBlocName.home} ${KGroupText.bloc}', () {
-    late HomeWatcherBloc homeWatcherBloc;
+  group('${KScreenBlocName.mobFaq} ${KGroupText.bloc}', () {
+    late MobFaqWatcherBloc mobFaqWatcherBloc;
     late IFaqRepository mockFaqRepository;
     setUp(() {
       mockFaqRepository = MockIFaqRepository();
-      homeWatcherBloc = HomeWatcherBloc(
+      mobFaqWatcherBloc = MobFaqWatcherBloc(
         faqRepository: mockFaqRepository,
       );
     });
 
-    blocTest<HomeWatcherBloc, HomeWatcherState>(
-      'emits [HomeWatcherState.loading(), HomeWatcherState.success()]'
+    blocTest<MobFaqWatcherBloc, MobFaqWatcherState>(
+      'emits [MobFaqWatcherState.loading(), MobFaqWatcherState.success()]'
       ' when load questionModel list',
-      build: () => homeWatcherBloc,
+      build: () => mobFaqWatcherBloc,
       act: (bloc) async {
         when(mockFaqRepository.getQuestions()).thenAnswer(
           (_) async => Right(KTestText.questionModelItems),
         );
-        bloc.add(const HomeWatcherEvent.started());
+        bloc.add(const MobFaqWatcherEvent.started());
       },
       expect: () async => [
-        predicate<HomeWatcherState>(
+        predicate<MobFaqWatcherState>(
           (state) => state.loadingStatus == LoadingStatus.loading,
         ),
-        predicate<HomeWatcherState>(
+        predicate<MobFaqWatcherState>(
           (state) => state.loadingStatus == LoadingStatus.loaded,
         ),
       ],
     );
-    blocTest<HomeWatcherBloc, HomeWatcherState>(
-      'emits [HomeWatcherState.faulure()] when error',
-      build: () => homeWatcherBloc,
+    blocTest<MobFaqWatcherBloc, MobFaqWatcherState>(
+      'emits [MobFaqWatcherState.faulure()] when error',
+      build: () => mobFaqWatcherBloc,
       act: (bloc) async {
         when(mockFaqRepository.getQuestions()).thenAnswer(
           (_) async => const Left(SomeFailure.serverError()),
         );
-        bloc.add(const HomeWatcherEvent.started());
+        bloc.add(const MobFaqWatcherEvent.started());
       },
       expect: () async => [
-        predicate<HomeWatcherState>(
+        predicate<MobFaqWatcherState>(
           (state) => state.loadingStatus == LoadingStatus.loading,
         ),
-        predicate<HomeWatcherState>(
+        predicate<MobFaqWatcherState>(
           (state) => state.loadingStatus == LoadingStatus.error,
         ),
       ],

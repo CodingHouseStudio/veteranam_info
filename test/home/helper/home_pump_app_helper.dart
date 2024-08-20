@@ -7,7 +7,7 @@ import '../../test_dependency.dart';
 
 Future<void> homePumpAppHelper({
   // required IFeedbackRepository mockFeedbackRepository,
-  required IHomeRepository mockHomeRepository,
+  required IFaqRepository mockFaqRepository,
   required AuthenticationRepository mockAuthenticationRepository,
   // required IAppAuthenticationRepository mockAppAuthenticationRepository,
   required WidgetTester tester,
@@ -18,7 +18,7 @@ Future<void> homePumpAppHelper({
   //   mockFeedbackRepository: mockFeedbackRepository,
   //   mockAppAuthenticationRepository: mockAppAuthenticationRepository,
   // );
-  _registerHomeBloc(mockHomeRepository: mockHomeRepository);
+  _registerHomeBloc(mockFaqRepository: mockFaqRepository);
   _registerAuthenticationBloc(
     mockAuthenticationRepository: mockAuthenticationRepository,
   );
@@ -48,9 +48,9 @@ Future<void> homePumpAppHelper({
 // }
 
 void _registerHomeBloc({
-  required IHomeRepository mockHomeRepository,
+  required IFaqRepository mockFaqRepository,
 }) {
-  final homeBloc = HomeWatcherBloc(homeRepository: mockHomeRepository);
+  final homeBloc = HomeWatcherBloc(faqRepository: mockFaqRepository);
   if (GetIt.I.isRegistered<HomeWatcherBloc>()) {
     GetIt.I.unregister<HomeWatcherBloc>();
   }
