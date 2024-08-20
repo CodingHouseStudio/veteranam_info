@@ -24,10 +24,6 @@ class DiscountCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (discountItem.id == '48') {
-      final value = discountItem.getDescription(context);
-      debugPrint('description: $value');
-    }
     return Container(
       key: ValueKey(discountItem.id),
       decoration: KWidgetTheme.boxDecorationDiscountContainer,
