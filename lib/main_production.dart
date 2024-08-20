@@ -1,3 +1,4 @@
+import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_performance/firebase_performance.dart';
 import 'package:flutter/foundation.dart';
@@ -14,6 +15,7 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   await FirebasePerformance.instance.setPerformanceCollectionEnabled(true);
+  await FirebaseAppCheck.instance.activate();
 
   if (kIsWeb) {
     await SentryFlutter.init(
