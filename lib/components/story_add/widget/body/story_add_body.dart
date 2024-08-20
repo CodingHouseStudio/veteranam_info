@@ -37,7 +37,7 @@ class StoryAddBody extends StatelessWidget {
               KSizedBox.kHeightSizedBox40
             else
               KSizedBox.kHeightSizedBox24,
-            ...TitleWidget.titleWidgetList(
+            TitleWidget(
               title: context.l10n.stories,
               titleKey: KWidgetkeys.screen.storyAdd.title,
               subtitle: context.l10n.storyAddSubtitle,

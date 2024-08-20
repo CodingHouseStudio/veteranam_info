@@ -6,7 +6,7 @@ import '../../../test_dependency.dart';
 Future<void> chekPointSignleTapHelper({
   required WidgetTester tester,
   bool hasAmount = false,
-  bool tapItemLast = false,
+  int index = 0,
 }) async {
   await scrollingHelper(
     tester: tester,
@@ -31,11 +31,10 @@ Future<void> chekPointSignleTapHelper({
   await scrollingHelper(
     tester: tester,
     itemKey: KWidgetkeys.widget.checkPoint.widget,
-    itemIndex: 2,
+    itemIndex: 3,
   );
-  final keys = find.byKey(KWidgetkeys.widget.checkPoint.widget);
 
-  await tester.tap(tapItemLast ? keys.at(2) : keys.first);
+  await tester.tap(find.byKey(KWidgetkeys.widget.checkPoint.widget).at(index));
 
   await tester.pumpAndSettle();
 }
