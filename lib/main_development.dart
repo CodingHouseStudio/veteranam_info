@@ -15,7 +15,7 @@ void main() async {
     // You can also use a `ReCaptchaEnterpriseProvider` provider instance as an
     // argument for `webProvider`
     webProvider:
-        ReCaptchaEnterpriseProvider('6LevUCsqAAAAAMPWh00wW3HQ7_yS2RYszBKLthP9'),
+        ReCaptchaV3Provider('6LevUCsqAAAAAMPWh00wW3HQ7_yS2RYszBKLthP9'),
   );
 
   await bootstrap(App.new);
