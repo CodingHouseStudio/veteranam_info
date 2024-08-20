@@ -56,9 +56,12 @@ Future<void> main() async {
       );
     } else {
       await FirebaseAppCheck.instance.activate(
-        webProvider: ReCaptchaV3Provider(kReleaseMode
-            ? '6LevUCsqAAAAAMPWh00wW3HQ7_yS2RYszBKLthP9'
-            : '4A104621-0F8F-4D82-A07F-008910737512'),
+        androidProvider: kReleaseMode
+            ? AndroidProvider.playIntegrity
+            : AndroidProvider.debug,
+        appleProvider: kReleaseMode
+            ? AppleProvider.appAttestWithDeviceCheckFallback
+            : AppleProvider.debug,
       );
     }
   } catch (e) {
