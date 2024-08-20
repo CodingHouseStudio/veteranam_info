@@ -31,4 +31,5 @@ class _ScreenKeys {
   final discountCard = _DiscountCardDialogKeys();
   final newsCard = _NewsCardDialogKeys();
   final mobSettings = _MobSettingsKeys();
+  final mobFaq = _MobFaqKeys();
 }

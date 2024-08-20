@@ -34,6 +34,7 @@ part 'screen/privacy_policy_dialog.dart';
 part 'screen/discount_card_dialog.dart';
 part 'screen/news_card_dialog.dart';
 part 'screen/mob_settings.dart';
+part 'screen/mob_faq.dart';
 
 //WIDGET
 part 'widget/widget.dart';

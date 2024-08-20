@@ -1,20 +1,18 @@
-import 'dart:async';
-
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:veteranam/shared/shared.dart';
 
-part 'home_watcher_bloc.freezed.dart';
-part 'home_watcher_event.dart';
-part 'home_watcher_state.dart';
+part 'mob_faq_wathcer_event.dart';
+part 'mob_faq_watcher_state.dart';
+part 'mob_faq_watcher_bloc.freezed.dart';
 
-@Injectable()
-class HomeWatcherBloc extends Bloc<HomeWatcherEvent, HomeWatcherState> {
-  HomeWatcherBloc({required IFaqRepository faqRepository})
+@injectable
+class MobFaqWatcherBloc extends Bloc<MobFaqWatcherEvent, MobFaqWatcherState> {
+  MobFaqWatcherBloc({required IFaqRepository faqRepository})
       : _faqRepository = faqRepository,
         super(
-          const HomeWatcherState(
+          const MobFaqWatcherState(
             questionModelItems: [],
             loadingStatus: LoadingStatus.initial,
           ),
@@ -22,10 +20,9 @@ class HomeWatcherBloc extends Bloc<HomeWatcherEvent, HomeWatcherState> {
     on<_Started>(_onStarted);
   }
   final IFaqRepository _faqRepository;
-
   Future<void> _onStarted(
     _Started event,
-    Emitter<HomeWatcherState> emit,
+    Emitter<MobFaqWatcherState> emit,
   ) async {
     emit(state.copyWith(loadingStatus: LoadingStatus.loading));
 
@@ -33,12 +30,12 @@ class HomeWatcherBloc extends Bloc<HomeWatcherEvent, HomeWatcherState> {
     result.fold(
       (l) => emit(
         state.copyWith(
-          failure: l._toHome(),
+          failure: l._toMobFAQ(),
           loadingStatus: LoadingStatus.error,
         ),
       ),
       (r) => emit(
-        HomeWatcherState(
+        MobFaqWatcherState(
           questionModelItems: r,
           loadingStatus: LoadingStatus.loaded,
         ),
