@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
+import 'package:veteranam/components/components.dart';
 import 'package:veteranam/shared/shared.dart';
 
 extension DiaglogExtention on BuildContext {
@@ -291,12 +292,18 @@ class _DialogsWidget {
                   scrollable: true,
                   content: UserEmailDialog(
                     isDesk: isTablet,
-                    enabled: true,
                     sendOnPressed: () {
                       context.read<DiscountUserEmailFormBloc>().add(
                             const DiscountUserEmailFormEvent.sendEmail(),
                           );
-                      //context.pop();
+                      context.pop();
+                    },
+                    closeOnPressed: () {
+                      context.read<DiscountUserEmailFormBloc>().add(
+                            const DiscountUserEmailFormEvent
+                                .sendEmailAfterClose(),
+                          );
+                      context.pop();
                     },
                     onChanged: (text) =>
                         context.read<DiscountUserEmailFormBloc>().add(

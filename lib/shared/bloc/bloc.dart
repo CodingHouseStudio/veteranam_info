@@ -5,4 +5,3 @@ export 'mob_feedback/mob_feedback_bloc.dart';
 export 'network/network_cubit.dart';
 export 'report/report_bloc.dart';
 export 'url/url_cubit.dart';
-export 'user_email/user_email.dart';

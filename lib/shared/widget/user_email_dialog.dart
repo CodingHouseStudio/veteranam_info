@@ -1,5 +1,4 @@
 import 'package:flutter/widgets.dart';
-import 'package:go_router/go_router.dart';
 import 'package:veteranam/shared/shared.dart';
 
 class UserEmailDialog extends StatelessWidget {
@@ -7,117 +6,114 @@ class UserEmailDialog extends StatelessWidget {
     required this.onChanged,
     required this.isDesk,
     required this.sendOnPressed,
-    required this.enabled,
+    required this.closeOnPressed,
     super.key,
   });
   final void Function(String) onChanged;
   final bool isDesk;
   final void Function() sendOnPressed;
-  final bool enabled;
+  final void Function() closeOnPressed;
 
   @override
   Widget build(BuildContext context) {
-    if (enabled) {
-      return DecoratedBox(
-        decoration: KWidgetTheme.boxDecorationDiscountContainer,
-        child: Padding(
-          padding: isDesk
-              ? const EdgeInsets.only(
-                  top: KPadding.kPaddingSize8,
-                  right: KPadding.kPaddingSize40,
-                  left: KPadding.kPaddingSize40,
-                  bottom: KPadding.kPaddingSize40,
-                )
-              : const EdgeInsets.only(
-                  top: KPadding.kPaddingSize8,
-                  right: KPadding.kPaddingSize16,
-                  left: KPadding.kPaddingSize16,
-                  bottom: KPadding.kPaddingSize32,
-                ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Align(
-                alignment: Alignment.topRight,
-                child: IconButtonWidget(
-                  icon: KIcon.close,
-                  onPressed: () => context.pop(),
-                  background: AppColors.materialThemeWhite,
-                ),
+    return DecoratedBox(
+      decoration: KWidgetTheme.boxDecorationDiscountContainer,
+      child: Padding(
+        padding: isDesk
+            ? const EdgeInsets.only(
+                top: KPadding.kPaddingSize8,
+                right: KPadding.kPaddingSize40,
+                left: KPadding.kPaddingSize40,
+                bottom: KPadding.kPaddingSize40,
+              )
+            : const EdgeInsets.only(
+                top: KPadding.kPaddingSize8,
+                right: KPadding.kPaddingSize16,
+                left: KPadding.kPaddingSize16,
+                bottom: KPadding.kPaddingSize32,
               ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Align(
+              alignment: Alignment.topRight,
+              child: IconButtonWidget(
+                icon: KIcon.close,
+                onPressed: closeOnPressed,
+                background: AppColors.materialThemeWhite,
+              ),
+            ),
+            Row(
+              children: [
+                IconWidget(
+                  icon: KIcon.arrowDownRight,
+                  padding:
+                      isDesk ? KPadding.kPaddingSize20 : KPadding.kPaddingSize8,
+                ),
+                KSizedBox.kWidthSizedBox16,
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        context.l10n.aboutNewDiscounts,
+                        key:
+                            KWidgetkeys.widget.userEmailDialog.emailDialogTitle,
+                        style: isDesk
+                            ? AppTextStyle.materialThemeHeadlineLarge
+                            : AppTextStyle.materialThemeHeadlineMedium,
+                      ),
+                      if (isDesk)
+                        KSizedBox.kHeightSizedBox16
+                      else
+                        KSizedBox.kHeightSizedBox8,
+                      Text(
+                        context.l10n.aboutNewDiscountsSubtitle,
+                        key: KWidgetkeys
+                            .widget.userEmailDialog.emailDialogSubtitle,
+                        style: isDesk
+                            ? AppTextStyle.materialThemeBodyLarge
+                            : AppTextStyle.materialThemeBodyMedium,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            if (isDesk)
+              KSizedBox.kHeightSizedBox32
+            else
+              KSizedBox.kHeightSizedBox24,
+            if (isDesk)
               Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  IconWidget(
-                    icon: KIcon.arrowDownRight,
-                    padding: isDesk
-                        ? KPadding.kPaddingSize20
-                        : KPadding.kPaddingSize8,
+                  Expanded(
+                    child: field(context),
                   ),
                   KSizedBox.kWidthSizedBox16,
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          context.l10n.aboutNewDiscounts,
-                          key: KWidgetkeys
-                              .widget.userEmailDialog.emailDialogTitle,
-                          style: isDesk
-                              ? AppTextStyle.materialThemeHeadlineLarge
-                              : AppTextStyle.materialThemeHeadlineMedium,
-                        ),
-                        if (isDesk)
-                          KSizedBox.kHeightSizedBox16
-                        else
-                          KSizedBox.kHeightSizedBox8,
-                        Text(
-                          context.l10n.aboutNewDiscountsSubtitle,
-                          key: KWidgetkeys
-                              .widget.userEmailDialog.emailDialogSubtitle,
-                          style: isDesk
-                              ? AppTextStyle.materialThemeBodyLarge
-                              : AppTextStyle.materialThemeBodyMedium,
-                        ),
-                      ],
-                    ),
-                  ),
+                  button(context),
                 ],
-              ),
-              if (isDesk)
-                KSizedBox.kHeightSizedBox32
-              else
-                KSizedBox.kHeightSizedBox24,
-              if (isDesk)
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: field(context),
-                    ),
-                    KSizedBox.kWidthSizedBox16,
-                    button(context),
-                  ],
-                )
-              else ...[
-                field(context),
-                KSizedBox.kHeightSizedBox16,
-                button(context),
-              ],
+              )
+            else ...[
+              field(context),
+              KSizedBox.kHeightSizedBox16,
+              button(context),
             ],
-          ),
+          ],
         ),
-      );
-    } else {
-      return Padding(
-        padding: const EdgeInsets.only(top: KPadding.kPaddingSize8),
-        child: Text(
-          context.l10n.linkLimitMessage,
-          key: KWidgetkeys.widget.notificationLink.limitText,
-          style: AppTextStyle.materialThemeBodyMediumNeutralVariant35,
-          textAlign: TextAlign.center,
-        ),
-      );
-    }
+      ),
+    );
+
+    // return Padding(
+    //   padding: const EdgeInsets.only(top: KPadding.kPaddingSize8),
+    //   child: Text(
+    //     context.l10n.linkLimitMessage,
+    //     key: KWidgetkeys.widget.notificationLink.limitText,
+    //     style: AppTextStyle.materialThemeBodyMediumNeutralVariant35,
+    //     textAlign: TextAlign.center,
+    //   ),
+    // );
   }
 
   Widget field(
@@ -132,7 +128,7 @@ class UserEmailDialog extends StatelessWidget {
   Widget button(BuildContext context) => DoubleButtonWidget(
         text: context.l10n.send,
         isDesk: isDesk,
-        onPressed: enabled ? sendOnPressed : null,
+        onPressed: sendOnPressed,
         widgetKey: KWidgetkeys.widget.userEmailDialog.button,
         color: AppColors.materialThemeBlack,
         textColor: AppColors.materialThemeWhite,

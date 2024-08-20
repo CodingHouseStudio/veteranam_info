@@ -5,4 +5,6 @@ class DiscountUserEmailFormEvent with _$DiscountUserEmailFormEvent {
   const factory DiscountUserEmailFormEvent.updatedEmail(String email) =
       _UpdateEmail;
   const factory DiscountUserEmailFormEvent.sendEmail() = _SendEmail;
+  const factory DiscountUserEmailFormEvent.sendEmailAfterClose() =
+      _SendEmailAfterClose;
 }

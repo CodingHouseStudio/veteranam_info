@@ -26,7 +26,6 @@ class DiscountBodyWidget extends StatelessWidget {
                         .add(const DiscountWatcherEvent.started()),
                   );
                 }
-
                 if (state.itemsLoaded == (KDimensions.loadItems * 4) &&
                     showEmail) {
                   context.dialog.showUserEmailDialog(

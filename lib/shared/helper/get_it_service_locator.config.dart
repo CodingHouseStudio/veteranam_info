@@ -21,6 +21,10 @@ import 'package:veteranam/components/discounts/bloc/link/discount_link_cubit.dar
     as _i227;
 import 'package:veteranam/components/discounts/bloc/link/discount_link_form_bloc.dart'
     as _i372;
+import 'package:veteranam/components/discounts/bloc/user_email/discount_user_email_cubit.dart'
+    as _i432;
+import 'package:veteranam/components/discounts/bloc/user_email/discount_user_email_form_bloc.dart'
+    as _i441;
 import 'package:veteranam/components/discounts/bloc/watcher/discount_watcher_bloc.dart'
     as _i1006;
 import 'package:veteranam/components/employee_respond/bloc/employee_respond_bloc.dart'
@@ -57,10 +61,6 @@ import 'package:veteranam/shared/bloc/mob_feedback/mob_feedback_bloc.dart'
 import 'package:veteranam/shared/bloc/network/network_cubit.dart' as _i891;
 import 'package:veteranam/shared/bloc/report/report_bloc.dart' as _i765;
 import 'package:veteranam/shared/bloc/url/url_cubit.dart' as _i319;
-import 'package:veteranam/shared/bloc/user_email/discount_user_email_cubit.dart'
-    as _i800;
-import 'package:veteranam/shared/bloc/user_email/discount_user_email_form_bloc.dart'
-    as _i978;
 import 'package:veteranam/shared/data_provider/cache_provider.dart' as _i37;
 import 'package:veteranam/shared/data_provider/firestore_provider.dart'
     as _i1033;
@@ -162,13 +162,13 @@ extension GetItInjectableX on _i174.GetIt {
           appAuthenticationRepository:
               gh<_i1001.IAppAuthenticationRepository>(),
         ));
-    gh.factory<_i800.DiscountUserEmailCubit>(() => _i800.DiscountUserEmailCubit(
+    gh.factory<_i432.DiscountUserEmailCubit>(() => _i432.DiscountUserEmailCubit(
           discountRepository: gh<_i1001.IDiscountRepository>(),
           appAuthenticationRepository:
               gh<_i1001.IAppAuthenticationRepository>(),
         ));
-    gh.factory<_i978.DiscountUserEmailFormBloc>(
-        () => _i978.DiscountUserEmailFormBloc(
+    gh.factory<_i441.DiscountUserEmailFormBloc>(
+        () => _i441.DiscountUserEmailFormBloc(
               discountRepository: gh<_i1001.IDiscountRepository>(),
               appAuthenticationRepository:
                   gh<_i1001.IAppAuthenticationRepository>(),
