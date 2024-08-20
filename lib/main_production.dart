@@ -7,7 +7,6 @@ import 'package:firebase_performance/firebase_performance.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
-import 'package:universal_html/js.dart' as js;
 import 'package:veteranam/app.dart';
 import 'package:veteranam/bootstrap.dart';
 import 'package:veteranam/firebase_options_production.dart';
@@ -50,10 +49,6 @@ Future<void> main() async {
   }
   try {
     if (kIsWeb) {
-      if (!kReleaseMode) {
-        js.context['FIREBASE_APPCHECK_DEBUG_TOKEN'] = true;
-      }
-
       final temp = await FirebaseAppCheck.instanceFor(app: app).activate(
         webProvider: ReCaptchaEnterpriseProvider(kReleaseMode
             ? 'REDACTED'
