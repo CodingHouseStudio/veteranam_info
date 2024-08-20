@@ -17,13 +17,13 @@ void main() {
   tearDown(GetIt.I.reset);
   group('${KScreenBlocName.home} ${KScreenBlocName.prod}', () {
     late AuthenticationRepository mockAuthenticationRepository;
-    late IHomeRepository mockHomeRepository;
+    late IFaqRepository mockFaqRepository;
     late IUrlRepository mockUrlRepository;
     setUp(() {
       Config.value = Config.production;
       ExtendedDateTime.current = KTestText.dateTime;
       ExtendedDateTime.id = KTestText.feedbackModel.id;
-      mockHomeRepository = MockIHomeRepository();
+      mockFaqRepository = MockIFaqRepository();
       mockAuthenticationRepository = MockAuthenticationRepository();
       mockUrlRepository = MockIUrlRepository();
 
@@ -36,7 +36,7 @@ void main() {
       when(mockAuthenticationRepository.isAnonymouslyOrEmty()).thenAnswer(
         (realInvocation) => true,
       );
-      when(mockHomeRepository.getQuestions()).thenAnswer(
+      when(mockFaqRepository.getQuestions()).thenAnswer(
         (invocation) async => Right(KTestText.questionModelItems),
       );
       when(mockUrlRepository.copy(KAppText.email)).thenAnswer(
@@ -47,7 +47,7 @@ void main() {
     testWidgets('${KGroupText.intial} ', (tester) async {
       await homePumpAppHelper(
         // mockFeedbackRepository: mockFeedbackRepository,
-        mockHomeRepository: mockHomeRepository,
+        mockFaqRepository: mockFaqRepository,
         mockAuthenticationRepository: mockAuthenticationRepository,
         tester: tester,
         mockUrlRepository: mockUrlRepository,
@@ -64,7 +64,7 @@ void main() {
       testWidgets('${KGroupText.intial} ', (tester) async {
         await homePumpAppHelper(
           // mockFeedbackRepository: mockFeedbackRepository,
-          mockHomeRepository: mockHomeRepository,
+          mockFaqRepository: mockFaqRepository,
           mockAuthenticationRepository: mockAuthenticationRepository,
           tester: tester,
           mockGoRouter: mockGoRouter,
@@ -79,7 +79,7 @@ void main() {
         testWidgets('nawbar navigation widget', (tester) async {
           await homePumpAppHelper(
             // mockFeedbackRepository: mockFeedbackRepository,
-            mockHomeRepository: mockHomeRepository,
+            mockFaqRepository: mockFaqRepository,
             mockAuthenticationRepository: mockAuthenticationRepository,
             tester: tester,
             mockGoRouter: mockGoRouter,

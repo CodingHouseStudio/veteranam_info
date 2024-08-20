@@ -114,4 +114,8 @@ abstract class KRoute {
     path: '/',
     name: 'Settings',
   );
+  static const _RouteItem mobFAQ = _RouteItem(
+    path: 'FAQ',
+    name: 'FAQ',
+  );
 }

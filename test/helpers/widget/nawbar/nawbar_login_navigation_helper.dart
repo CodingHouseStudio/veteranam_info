@@ -22,7 +22,7 @@ Future<void> nawbarLoginNavigationHelper({
     find.byKey(KWidgetkeys.widget.nawbar.loginIcon),
   );
 
-  await tester.pump();
+  await tester.pumpAndSettle();
 
   verify(
     () => mockGoRouter.goNamed(
