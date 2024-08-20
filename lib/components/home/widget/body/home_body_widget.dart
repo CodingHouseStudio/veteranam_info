@@ -246,7 +246,7 @@ class HomeBodyWidget extends StatelessWidget {
   Widget mockButton(BuildContext context) => MockButtonWidget(
         key: KWidgetkeys.screen.home.buttonMock,
         onPressed: () {
-          GetIt.I.get<IHomeRepository>().addMockQuestions();
+          GetIt.I.get<IFaqRepository>().addMockQuestions();
           context.read<HomeWatcherBloc>().add(
                 const HomeWatcherEvent.started(),
               );

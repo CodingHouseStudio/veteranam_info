@@ -13,7 +13,6 @@ class NawbarWidget extends SliverPersistentHeaderDelegate {
     this.maxMinHeight,
     this.pageName,
     // this.showMobileNawbar,
-    this.pageNameKey,
     this.showMobBackButton,
   });
   final bool isDesk;
@@ -23,7 +22,6 @@ class NawbarWidget extends SliverPersistentHeaderDelegate {
   final double? maxMinHeight;
   final String? pageName;
   // final bool? showMobileNawbar;
-  final Key? pageNameKey;
   final bool? showMobBackButton;
 
   @override
@@ -51,7 +49,7 @@ class NawbarWidget extends SliverPersistentHeaderDelegate {
       isTablet: isTablet,
       pageName: pageName,
       // showMobileNawbar: showMobileNawbar ?? false,
-      pageNameKey: pageNameKey, showBackButton: showMobBackButton,
+      showBackButton: showMobBackButton,
     );
   }
 }
@@ -61,7 +59,6 @@ class _NawbarWidgetImplematation extends StatefulWidget {
     required this.isDesk,
     required this.isTablet,
     // required this.showMobileNawbar,
-    required this.pageNameKey,
     super.key,
     this.childWidget,
     this.pageName,
@@ -72,7 +69,6 @@ class _NawbarWidgetImplematation extends StatefulWidget {
   final bool isTablet;
   final String? pageName;
   // final bool showMobileNawbar;
-  final Key? pageNameKey;
   final bool? showBackButton;
 
   @override
@@ -300,6 +296,7 @@ class _NawbarWidgetImplematationState
                   ? Row(
                       children: [
                         TextButton(
+                          key: KWidgetkeys.widget.nawbar.backButton,
                           style: KButtonStyles.withoutStyle.copyWith(
                             padding: const WidgetStatePropertyAll(
                               EdgeInsets.symmetric(
@@ -311,7 +308,9 @@ class _NawbarWidgetImplematationState
                           onPressed: () => context.pop(),
                           child: KIcon.arrowBack,
                         ),
-                        Expanded(child: pageName),
+                        Expanded(
+                          child: pageName,
+                        ),
                         KSizedBox.kWidthSizedBox56,
                       ],
                     )
@@ -326,7 +325,7 @@ class _NawbarWidgetImplematationState
 
   Widget get pageName => Text(
         '${widget.pageName}',
-        key: widget.pageNameKey,
+        key: KWidgetkeys.widget.nawbar.pageName,
         style: AppTextStyle.materialThemeTitleMedium,
         textAlign: TextAlign.center,
       );

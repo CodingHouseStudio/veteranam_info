@@ -13,7 +13,7 @@ import 'package:veteranam/shared/shared.dart';
 
 @GenerateNiceMocks(
   [
-    MockSpec<IHomeRepository>(),
+    MockSpec<IFaqRepository>(),
     MockSpec<IInformationRepository>(),
     MockSpec<IFeedbackRepository>(),
     MockSpec<FirestoreService>(),
