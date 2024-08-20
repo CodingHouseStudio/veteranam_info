@@ -7,6 +7,7 @@ import 'package:firebase_performance/firebase_performance.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
+import 'package:universal_html/js.dart' as js;
 import 'package:veteranam/app.dart';
 import 'package:veteranam/bootstrap.dart';
 import 'package:veteranam/firebase_options_production.dart';
@@ -49,9 +50,13 @@ Future<void> main() async {
   }
   try {
     if (kIsWeb) {
+      if (!kReleaseMode) {
+        js.context['FIREBASE_APPCHECK_DEBUG_TOKEN'] = true;
+      }
+
       final temp = await FirebaseAppCheck.instanceFor(app: app).activate(
         webProvider: ReCaptchaV3Provider(kReleaseMode
-            ? '6LevUCsqAAAAAMPWh00wW3HQ7_yS2RYszBKLthP9'
+            ? '6LevUCsqAAAAAEG431Qk2NsMNXurWJ8vs89UkrEG'
             : '4A104621-0F8F-4D82-A07F-008910737512'),
       );
     } else {
