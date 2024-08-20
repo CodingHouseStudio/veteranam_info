@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 // ignore: depend_on_referenced_packages
@@ -28,14 +29,30 @@ class AppBlocObserver extends BlocObserver {
 
 /// COMMENT: Method adds dependencies in App
 Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
+  // Non-async exceptions
   FlutterError.onError = (details) {
     if (kIsWeb) {
       Sentry.captureException(
         details.exceptionAsString(),
         stackTrace: details.stack,
       );
+    } else {
+      FirebaseCrashlytics.instance.recordFlutterError(details);
     }
     log(details.exceptionAsString(), stackTrace: details.stack);
+  };
+  // Async exceptions
+  PlatformDispatcher.instance.onError = (error, stack) {
+    if (kIsWeb) {
+      Sentry.captureException(
+        error,
+        stackTrace: stack,
+      );
+    } else {
+      FirebaseCrashlytics.instance.recordError(error, stack);
+    }
+
+    return true;
   };
 
   Bloc.observer = const AppBlocObserver();
