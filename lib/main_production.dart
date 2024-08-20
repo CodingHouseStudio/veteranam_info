@@ -55,7 +55,7 @@ Future<void> main() async {
       }
 
       final temp = await FirebaseAppCheck.instanceFor(app: app).activate(
-        webProvider: ReCaptchaV3Provider(kReleaseMode
+        webProvider: ReCaptchaEnterpriseProvider(kReleaseMode
             ? '6LevUCsqAAAAAEG431Qk2NsMNXurWJ8vs89UkrEG'
             : '4A104621-0F8F-4D82-A07F-008910737512'),
       );
