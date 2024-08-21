@@ -40,6 +40,12 @@ class DiscountLinkFormBloc
     _SendLink event,
     Emitter<DiscountLinkFormState> emit,
   ) async {
+    emit(
+      const _Initial(
+        link: LinkFieldModel.pure(),
+        formState: LinkEnum.success,
+      ),
+    );
     if (state.link.isValid) {
       final discountLinkFormModel = LinkModel(
         id: ExtendedDateTime.id,
@@ -47,35 +53,30 @@ class DiscountLinkFormBloc
         link: state.link.value,
         date: ExtendedDateTime.current,
       );
-      emit(
-        state.copyWith(
-          formState: LinkEnum.sending,
-          link: const LinkFieldModel.pure(),
-        ),
-      );
-      final result = await _discountRepository.sendLink(discountLinkFormModel);
-      result.fold(
-        (l) => emit(
-          state.copyWith(
-            failure: l._toDiscountLinkForm(),
-            formState: LinkEnum.initial,
-          ),
-        ),
-        (r) {
-          emit(
-            const _Initial(
-              link: LinkFieldModel.pure(),
-              formState: LinkEnum.success,
-            ),
-          );
-        },
-      );
-    } else {
-      emit(
-        state.copyWith(
-          formState: LinkEnum.invalidData,
-        ),
-      );
+      // emit(
+      //   state.copyWith(
+      //     formState: LinkEnum.sending,
+      //     link: const LinkFieldModel.pure(),
+      //   ),
+      // );
+      // final result =
+      await _discountRepository.sendLink(discountLinkFormModel);
+      // result.fold(
+      //   (l) => emit(
+      //     state.copyWith(
+      //       failure: l._toDiscountLinkForm(),
+      //       formState: LinkEnum.initial,
+      //     ),
+      //   ),
+      //   (r) {
+      //     emit(
+      //       const _Initial(
+      //         link: LinkFieldModel.pure(),
+      //         formState: LinkEnum.success,
+      //       ),
+      //     );
+      //   },
+      // );
     }
   }
 }
