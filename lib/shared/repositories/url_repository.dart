@@ -33,8 +33,7 @@ class UrlRepository extends IUrlRepository {
           (r) => const Right(false),
         );
       }
-      return const Right(true);
-      // return Left(error);
+      return Left(error);
     }
   }
 
