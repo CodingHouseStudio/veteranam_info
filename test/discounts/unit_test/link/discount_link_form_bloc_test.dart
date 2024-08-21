@@ -52,10 +52,10 @@ void main() {
           link: LinkFieldModel.dirty(KTestText.linkModel.link),
           formState: LinkEnum.inProgress,
         ),
-        const DiscountLinkFormState(
-          link: LinkFieldModel.pure(),
-          formState: LinkEnum.sending,
-        ),
+        // const DiscountLinkFormState(
+        //   link: LinkFieldModel.pure(),
+        //   formState: LinkEnum.sending,
+        // ),
         const DiscountLinkFormState(
           link: LinkFieldModel.pure(),
           formState: LinkEnum.success,
@@ -77,23 +77,32 @@ void main() {
           link: LinkFieldModel.dirty(KTestText.field),
           formState: LinkEnum.inProgress,
         ),
+        // const DiscountLinkFormState(
+        //   link: LinkFieldModel.dirty(KTestText.field),
+        //   formState: LinkEnum.invalidData,
+        // ),
         const DiscountLinkFormState(
-          link: LinkFieldModel.dirty(KTestText.field),
-          formState: LinkEnum.invalidData,
+          link: LinkFieldModel.pure(),
+          formState: LinkEnum.success,
         ),
         DiscountLinkFormState(
           link: LinkFieldModel.dirty(KTestText.linkModelWrong.link),
           formState: LinkEnum.inProgress,
         ),
+
         const DiscountLinkFormState(
           link: LinkFieldModel.pure(),
-          formState: LinkEnum.sending,
+          formState: LinkEnum.success,
         ),
-        const DiscountLinkFormState(
-          link: LinkFieldModel.pure(),
-          formState: LinkEnum.initial,
-          failure: DiscountLinkFormFailure.error,
-        ),
+        // const DiscountLinkFormState(
+        //   link: LinkFieldModel.pure(),
+        //   formState: LinkEnum.sending,
+        // ),
+        // const DiscountLinkFormState(
+        //   link: LinkFieldModel.pure(),
+        //   formState: LinkEnum.initial,
+        //   failure: DiscountLinkFormFailure.error,
+        // ),
       ],
     );
   });
