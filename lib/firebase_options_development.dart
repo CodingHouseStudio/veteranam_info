@@ -67,8 +67,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '32851885972',
     projectId: 'veteran-development',
     storageBucket: 'veteran-development.appspot.com',
-    iosClientId:
-        '32851885972-39m4c4lb48qj9p40542l7o0d8hebfoaa.apps.googleusercontent.com',
+    iosClientId: '32851885972-39m4c4lb48qj9p40542l7o0d8hebfoaa.apps.googleusercontent.com',
     iosBundleId: 'info.veteranam.dev',
   );
 
@@ -78,8 +77,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '32851885972',
     projectId: 'veteran-development',
     storageBucket: 'veteran-development.appspot.com',
-    iosClientId:
-        '32851885972-dug7bniacnr414ninjv0uc45v527q1j7.apps.googleusercontent.com',
+    iosClientId: '32851885972-dug7bniacnr414ninjv0uc45v527q1j7.apps.googleusercontent.com',
     iosBundleId: 'com.example.myApp',
   );
+
 }
