@@ -23,13 +23,17 @@ class UrlRepository extends IUrlRepository {
       // }
       return const Right(true);
     } catch (e) {
-      final resault = await copy(
-        baseUrl + url,
-      );
-      return resault.fold(
-        Left.new,
-        (r) => const Left(SomeFailure.share()),
-      );
+      final error = ShareFailure.fromCode(e).status;
+      if (error == const SomeFailure.initial()) {
+        final resault = await copy(
+          baseUrl + url,
+        );
+        return resault.fold(
+          Left.new,
+          (r) => const Right(false),
+        );
+      }
+      return Left(error);
     }
   }
 

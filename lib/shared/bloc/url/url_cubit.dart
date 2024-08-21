@@ -21,8 +21,8 @@ class UrlCubit extends Cubit<UrlEnum?> {
       url,
     );
     result.fold(
-      (l) => emit(UrlEnum.copySucceed),
-      (r) => emit(null),
+      (l) => emit(UrlEnum.copyEmailSucceed),
+      (r) => r ? emit(null) : emit(UrlEnum.copyLinkSucceed),
     );
   }
 
@@ -52,7 +52,7 @@ class UrlCubit extends Cubit<UrlEnum?> {
     );
     result.fold(
       (l) => emit(l.toUrl()),
-      (r) => emit(UrlEnum.copySucceed),
+      (r) => emit(UrlEnum.copyEmailSucceed),
     );
   }
 
