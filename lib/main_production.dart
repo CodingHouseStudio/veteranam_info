@@ -1,3 +1,5 @@
+// ignore_for_file: empty_catches
+
 import 'dart:developer';
 
 import 'package:firebase_app_check/firebase_app_check.dart';
@@ -43,16 +45,19 @@ Future<void> main() async {
       await FirebasePerformance.instance
           .setPerformanceCollectionEnabled(kReleaseMode);
     }
-  } catch (e) {
-    print('firebase performance issue');
-    print(e);
-  }
+  } catch (e) {}
   try {
     if (kIsWeb) {
       if (kReleaseMode) {
-        final temp = await FirebaseAppCheck.instanceFor(app: app).activate(
+        await FirebaseAppCheck.instanceFor(app: app).activate(
           webProvider: ReCaptchaV3Provider(
             'REDACTED',
+          ),
+        );
+      } else {
+        await FirebaseAppCheck.instanceFor(app: app).activate(
+          webProvider: ReCaptchaV3Provider(
+            '326946D7-ABAE-4F1A-AEE7-395C5E23F0D4',
           ),
         );
       }
@@ -66,10 +71,7 @@ Future<void> main() async {
             : AppleProvider.debug,
       );
     }
-  } catch (e) {
-    print('firebase app check issue');
-    print(e);
-  }
+  } catch (e) {}
 
   // Non-async exceptions
   FlutterError.onError = (details) {
