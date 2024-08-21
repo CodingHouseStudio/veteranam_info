@@ -2,7 +2,6 @@
 
 import 'dart:developer';
 
-import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_performance/firebase_performance.dart';
@@ -41,37 +40,51 @@ Future<void> main() async {
     if (kIsWeb) {
       await FirebasePerformance.instanceFor(app: app)
           .setPerformanceCollectionEnabled(kReleaseMode);
+
+      final temp = await FirebasePerformance.instanceFor(app: app)
+          .isPerformanceCollectionEnabled();
+      if (temp) {
+        await FirebasePerformance.instanceFor(app: app)
+            .newTrace('test-web')
+            .start();
+        print('Performance collection is enabled');
+
+        await FirebasePerformance.instanceFor(app: app)
+            .newTrace('test-web')
+            .stop();
+      } else {
+        print('Performance collection is disabled');
+      }
     } else {
       await FirebasePerformance.instance
           .setPerformanceCollectionEnabled(kReleaseMode);
     }
   } catch (e) {}
-  try {
-    if (kIsWeb) {
-      if (kReleaseMode) {
-        await FirebaseAppCheck.instanceFor(app: app).activate(
-          webProvider: ReCaptchaV3Provider(
-            'REDACTED',
-          ),
-        );
-      } else {
-        await FirebaseAppCheck.instanceFor(app: app).activate(
-          webProvider: ReCaptchaV3Provider(
-            '326946D7-ABAE-4F1A-AEE7-395C5E23F0D4',
-          ),
-        );
-      }
-    } else {
-      await FirebaseAppCheck.instance.activate(
-        androidProvider: kReleaseMode
-            ? AndroidProvider.playIntegrity
-            : AndroidProvider.debug,
-        appleProvider: kReleaseMode
-            ? AppleProvider.appAttestWithDeviceCheckFallback
-            : AppleProvider.debug,
-      );
-    }
-  } catch (e) {}
+  // try {
+  //   if (kIsWeb) {
+  //     if (kReleaseMode) {
+  //       await FirebaseAppCheck.instanceFor(app: app).activate(
+  //         webProvider: ReCaptchaV3Provider(
+  //           'REDACTED',
+  //         ),
+  //       );
+  //     } else {
+  //       await FirebaseAppCheck.instanceFor(app: app).activate(
+  //         webProvider: ReCaptchaV3Provider(
+  //           '326946D7-ABAE-4F1A-AEE7-395C5E23F0D4',
+  //         ),
+  //       );
+  //     }
+  //   } else {
+  //     await FirebaseAppCheck.instance.activate(
+  //       androidProvider: kReleaseMode
+  //           ? AndroidProvider.playIntegrity
+  //           : AndroidProvider.debug,
+  //       appleProvider:
+  //           kReleaseMode ? AppleProvider.deviceCheck : AppleProvider.debug,
+  //     );
+  //   }
+  // } catch (e) {}
 
   // Non-async exceptions
   FlutterError.onError = (details) {
