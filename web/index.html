@@ -207,12 +207,19 @@
   <div class="splash">
     <img id="splash-image" src="icons/logo-192.svg" alt="Loading indicator..." class="bouncing-image">
   </div>
+  <script>
+    function removeSplashFromWeb() {
+      document.getElementById("splash")?.remove();
+      document.getElementById("splash-branding")?.remove();
+      document.body.style.background = "transparent";
+    }
+  </script>
 
   <script>
     var serviceWorkerVersion = '{{flutter_service_worker_version}}';
     var scriptLoaded = false;
     var image_reloaded = false;
-    var splashImage = document.getElementById('splash-image');
+    // var splashImage = document.getElementById('splash-image');
     var retryButton = document.getElementById('retry-button');
 
     function loadMainDartJs() {
@@ -227,19 +234,14 @@
       document.body.append(scriptTag);
       removeSplashFromWeb();
     }
-    function removeSplashFromWeb() {
-      document.getElementById("splash")?.remove();
-      document.getElementById("splash-branding")?.remove();
-      document.body.style.background = "transparent";
-    }
-    splashImage.addEventListener('error', function () {
-      // if we try reload image all time it's stop another event
-      if (!image_reloaded) {
-        console.error("Failed to load splash image.");
-        splashImage.src = document.getElementById('splash-image').src;
-        image_reloaded = true;
-      }
-    });
+    // splashImage.addEventListener('error', function () {
+    //   // if we try reload image all time it's stop another event
+    //   if (!image_reloaded) {
+    //     console.error("Failed to load splash image.");
+    //     splashImage.src = document.getElementById('splash-image').src;
+    //     image_reloaded = true;
+    //   }
+    // });
 
     setTimeout(() => {
       retryButton.style.display = "block";
