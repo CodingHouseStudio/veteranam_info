@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:veteranam/shared/shared.dart';
 // import 'package:cached_network_image/cached_network_image.dart';
 
-class NetworkImageWidget extends StatelessWidget {
+class NetworkImageWidget extends StatefulWidget {
   const NetworkImageWidget({
     required this.imageUrl,
     super.key,
@@ -16,15 +16,33 @@ class NetworkImageWidget extends StatelessWidget {
   final BoxFit? fit;
   final double? size;
   // final bool skeletonizerLoading;
-  // final Color? loadingIndicatorColor;
+
+  @override
+  State<NetworkImageWidget> createState() => _NetworkImageWidgetState();
+}
+
+class _NetworkImageWidgetState extends State<NetworkImageWidget> {
+  @override
+  void didChangeDependencies() {
+    precacheImage(
+      CachedNetworkImageProvider(
+        widget.imageUrl,
+        headers: const {
+          'Cache-Control': 'max-age=3600',
+        },
+      ),
+      context,
+    );
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
     return CachedNetworkImage(
-      imageUrl: imageUrl,
-      fit: fit,
-      height: size,
-      width: size,
+      imageUrl: widget.imageUrl,
+      fit: widget.fit,
+      height: widget.size,
+      width: widget.size,
       errorWidget: (context, url, error) => KIcon.error,
       httpHeaders: const {
         'Cache-Control': 'max-age=3600',
