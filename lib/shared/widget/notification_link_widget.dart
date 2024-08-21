@@ -26,7 +26,7 @@ class NotificationLinkWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (enabled) {
+    if (!showThankText && enabled) {
       return Padding(
         padding: const EdgeInsets.only(top: KPadding.kPaddingSize48),
         child: DecoratedBox(
@@ -109,7 +109,7 @@ class NotificationLinkWidget extends StatelessWidget {
   Widget button(BuildContext context) => DoubleButtonWidget(
         text: context.l10n.send,
         isDesk: isDesk,
-        onPressed: enabled ? sendOnPressed : null,
+        onPressed: sendOnPressed,
         widgetKey: KWidgetkeys.widget.notificationLink.button,
         hasAlign: isDesk,
         mobTextWidth: double.infinity,
