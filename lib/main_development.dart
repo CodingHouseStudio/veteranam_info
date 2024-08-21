@@ -18,39 +18,39 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  try {
-    if (kIsWeb) {
-      await FirebasePerformance.instanceFor(app: app)
-          .setPerformanceCollectionEnabled(kReleaseMode);
-    } else {
-      await FirebasePerformance.instance
-          .setPerformanceCollectionEnabled(kReleaseMode);
-    }
-  } catch (e) {
-    print('firebase performance issue');
-    print(e);
+  // try {
+  if (kIsWeb) {
+    await FirebasePerformance.instanceFor(app: app)
+        .setPerformanceCollectionEnabled(kReleaseMode);
+  } else {
+    await FirebasePerformance.instance
+        .setPerformanceCollectionEnabled(kReleaseMode);
   }
-  try {
-    if (kIsWeb) {
-      final temp = await FirebaseAppCheck.instanceFor(app: app).activate(
-        webProvider: ReCaptchaV3Provider(kReleaseMode
-            ? 'REDACTED'
-            : '4A104621-0F8F-4D82-A07F-008910737512'),
-      );
-    } else {
-      await FirebaseAppCheck.instance.activate(
-        androidProvider: kReleaseMode
-            ? AndroidProvider.playIntegrity
-            : AndroidProvider.debug,
-        appleProvider: kReleaseMode
-            ? AppleProvider.appAttestWithDeviceCheckFallback
-            : AppleProvider.debug,
-      );
-    }
-  } catch (e) {
-    print('firebase app check issue');
-    print(e);
+  // } catch (e) {
+  //   print('firebase performance issue');
+  //   print(e);
+  // }
+  // try {
+  if (!kIsWeb) {
+    // {
+    //   final temp = await FirebaseAppCheck.instanceFor(app: app).activate(
+    //     webProvider: ReCaptchaV3Provider(kReleaseMode
+    //         ? 'REDACTED'
+    //         : '4A104621-0F8F-4D82-A07F-008910737512'),
+    //   );
+    // } else {
+    await FirebaseAppCheck.instance.activate(
+      androidProvider:
+          kReleaseMode ? AndroidProvider.playIntegrity : AndroidProvider.debug,
+      appleProvider: kReleaseMode
+          ? AppleProvider.appAttestWithDeviceCheckFallback
+          : AppleProvider.debug,
+    );
   }
+  // } catch (e) {
+  //   print('firebase app check issue');
+  //   print(e);
+  // }
 
   // Non-async exceptions
   FlutterError.onError = (details) {
@@ -74,6 +74,7 @@ void main() async {
     } else {
       FirebaseCrashlytics.instance.recordError(error, stack);
     }
+    log(error.toString(), stackTrace: stack);
 
     return true;
   };

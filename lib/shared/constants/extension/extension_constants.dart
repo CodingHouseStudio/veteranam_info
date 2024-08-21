@@ -251,13 +251,15 @@ extension UrlEnumExtension on UrlEnum {
       case UrlEnum.error:
         return context.l10n.error;
       case UrlEnum.shareError:
-        return context.l10n.copyLink;
+        return context.l10n.shareFailure;
       case UrlEnum.linkError:
         return context.l10n.linkFailure;
       case UrlEnum.copyError:
         return context.l10n.copyFailure;
-      case UrlEnum.copySucceed:
+      case UrlEnum.copyEmailSucceed:
         return context.l10n.copyEmail;
+      case UrlEnum.copyLinkSucceed:
+        return context.l10n.copyLink;
     }
   }
 }
