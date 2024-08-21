@@ -128,12 +128,12 @@ class NetworkImageWidget extends StatelessWidget {
 
 //   @override
 //   void didChangeDependencies() {
-        // precacheImage(
-        //   NetworkImage(
-        //     widget.imageUrl,
-        //   ),
-        //   context,
-        // );
+// precacheImage(
+//   NetworkImage(
+//     widget.imageUrl,
+//   ),
+//   context,
+// );
 //     super.didChangeDependencies();
 //   }
 
