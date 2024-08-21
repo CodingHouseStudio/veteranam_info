@@ -58,7 +58,7 @@ void main() {
         build: () => mockUrlCubit,
         act: (bloc) async => bloc.copy(KAppText.email),
         expect: () async => [
-          UrlEnum.copySucceed,
+          UrlEnum.copyEmailSucceed,
         ],
       );
       blocTest<UrlCubit, UrlEnum?>(
@@ -68,6 +68,26 @@ void main() {
         act: (bloc) async => bloc.reset(),
         expect: () async => [
           null,
+        ],
+      );
+    });
+
+    group('${KGroupText.successful} FALSE', () {
+      setUp(() {
+        when(mockUrlRepository.share(KTestText.downloadURL)).thenAnswer(
+          (invocation) async => const Right(false),
+        );
+        when(mockUrlRepository.copy(KAppText.email)).thenAnswer(
+          (invocation) async => const Right(false),
+        );
+      });
+      blocTest<UrlCubit, UrlEnum?>(
+        'emits [discountWatcherState()]'
+        ' when load discountModel list',
+        build: () => mockUrlCubit,
+        act: (bloc) async => bloc.share(KTestText.downloadURL),
+        expect: () async => [
+          UrlEnum.copyLinkSucceed,
         ],
       );
     });
@@ -100,7 +120,8 @@ void main() {
         build: () => mockUrlCubit,
         act: (bloc) async => bloc.share(KTestText.downloadURL),
         expect: () async => [
-          UrlEnum.copySucceed,
+          null,
+          // UrlEnum.copyEmailSucceed,
         ],
       );
       blocTest<UrlCubit, UrlEnum?>(

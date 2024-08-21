@@ -188,3 +188,29 @@ class SignUpWithGoogleFailure {
 
   final SomeFailure status;
 }
+
+class ShareFailure {
+  const ShareFailure([
+    this.status = const SomeFailure.initial(),
+  ]);
+
+  factory ShareFailure.fromCode(Object error) {
+    // debugPrint('SomeFailure: ${error.code}');
+    if (error is Exception) {
+      switch (error.toString()) {
+        case 'Exception: Navigator.canShare() is unavailable':
+          return const ShareFailure();
+        default:
+          return const ShareFailure(
+            SomeFailure.share(),
+          );
+      }
+    } else {
+      return const ShareFailure(
+        SomeFailure.serverError(),
+      );
+    }
+  }
+
+  final SomeFailure status;
+}
