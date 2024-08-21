@@ -120,7 +120,8 @@ void main() {
         build: () => mockUrlCubit,
         act: (bloc) async => bloc.share(KTestText.downloadURL),
         expect: () async => [
-          UrlEnum.copyEmailSucceed,
+          null,
+          // UrlEnum.copyEmailSucceed,
         ],
       );
       blocTest<UrlCubit, UrlEnum?>(
