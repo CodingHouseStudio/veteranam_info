@@ -54,6 +54,7 @@ class _NetworkImageWidgetState extends State<NetworkImageWidget> {
         httpHeaders: const {
           'Cache-Control': 'max-age=3600',
         },
+        filterQuality: kIsWeb ? FilterQuality.medium : FilterQuality.low,
         placeholder: (context, url) =>
             // skeletonizerLoading
             //     ? const SkeletonizerWidget(
