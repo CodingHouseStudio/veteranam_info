@@ -115,7 +115,8 @@ void main() {
     );
 
     blocTest<DiscountLinkFormBloc, DiscountLinkFormState>(
-      'emits [LinkEnum.inProgress, LinkEnum.success] when valid link is provided',
+      'emits [LinkEnum.inProgress, LinkEnum.success] when valid link'
+      ' is provided',
       build: () => discountLinkFormBloc,
       act: (bloc) async => bloc
         ..add(DiscountLinkFormEvent.updateLink(KTestText.linkModel.link))
@@ -137,7 +138,8 @@ void main() {
     );
 
     blocTest<DiscountLinkFormBloc, DiscountLinkFormState>(
-      'emits [LinkEnum.inProgress, LinkEnum.success] when invalid link is provided',
+      'emits [LinkEnum.inProgress, LinkEnum.success] when invalid link'
+      ' is provided',
       build: () => discountLinkFormBloc,
       act: (bloc) async => bloc
         ..add(DiscountLinkFormEvent.updateLink(KTestText.linkModel.link))
@@ -159,7 +161,8 @@ void main() {
     );
 
     blocTest<DiscountLinkFormBloc, DiscountLinkFormState>(
-      'emits [LinkEnum.inProgress, LinkEnum.success] when link is updated and sent multiple times',
+      'emits [LinkEnum.inProgress, LinkEnum.success] when link is updated and'
+      ' sent multiple times',
       build: () => discountLinkFormBloc,
       act: (bloc) async => bloc
         ..add(
@@ -182,7 +185,8 @@ void main() {
     );
 
     blocTest<DiscountLinkFormBloc, DiscountLinkFormState>(
-      'emits [LinkEnum.inProgress, LinkEnum.success] when valid link is added and sendLink is called',
+      'emits [LinkEnum.inProgress, LinkEnum.success] when valid link is added'
+      ' and sendLink is called',
       build: () {
         // Set up the mock responses for the repository and current user
         when(mockAppAuthenticationRepository.currentUser)
