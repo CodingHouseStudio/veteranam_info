@@ -7,9 +7,11 @@ class MobFaqScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MobFaqBlocprovider(
-      key: KWidgetkeys.screen.mobFaq.screen,
-      childWidget: const MobFaqBodyWidget(),
-    );
+    return
+        // MobFaqBlocprovider(
+        //   key: KWidgetkeys.screen.mobFaq.screen,
+        //   childWidget:
+        MobFaqBodyWidget(key: KWidgetkeys.screen.mobFaq.screen);
+    // );
   }
 }
