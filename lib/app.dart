@@ -36,10 +36,17 @@ class App extends StatelessWidget {
           create: (context) =>
               GetIt.I.get<NetworkCubit>()..networkInitialized(),
         ),
-        if (!kIsWeb)
+        if (!kIsWeb) ...[
           BlocProvider(
             create: (context) => GetIt.I.get<MobFeedbackBloc>(),
           ),
+          BlocProvider(
+            create: (context) => GetIt.I.get<MobFaqWatcherBloc>()
+              ..add(
+                const MobFaqWatcherEvent.started(),
+              ),
+          ),
+        ],
       ],
       child: const AppWidget(),
     );
