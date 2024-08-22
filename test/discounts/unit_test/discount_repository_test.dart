@@ -55,6 +55,22 @@ void main() {
         ).thenAnswer(
           (realInvocation) async => KTestText.discountModelItems.first,
         );
+
+        when(
+          mockFirestoreService.getUserDiscountsEmail(
+            KTestText.user.id,
+          ),
+        ).thenAnswer(
+          (realInvocation) async => [KTestText.emailModel],
+        );
+        when(
+          mockFirestoreService.sendEmail(
+            KTestText.emailModel,
+          ),
+        ).thenAnswer(
+          (realInvocation) async {},
+        );
+
         if (GetIt.I.isRegistered<FirestoreService>()) {
           GetIt.I.unregister<FirestoreService>();
         }
@@ -88,6 +104,19 @@ void main() {
           isA<Right<SomeFailure, bool>>().having((e) => e.value, 'value', true),
         );
       });
+      test('User Can Send Email', () async {
+        expect(
+          await mockDiscountRepository.userCanSendUserEmail(KTestText.user.id),
+          isA<Right<SomeFailure, bool>>()
+              .having((e) => e.value, 'value', false),
+        );
+      });
+      test('Send Email', () async {
+        expect(
+          await mockDiscountRepository.sendEmail(KTestText.emailModel),
+          isA<Right<SomeFailure, bool>>().having((e) => e.value, 'value', true),
+        );
+      });
       test('Get Discount', () async {
         expect(
           await mockDiscountRepository
@@ -118,6 +147,21 @@ void main() {
         when(
           mockFirestoreService.sendLink(
             KTestText.linkModel,
+          ),
+        ).thenThrow(
+          Exception(KGroupText.failureSend),
+        );
+
+        when(
+          mockFirestoreService.getUserDiscountsEmail(
+            KTestText.user.id,
+          ),
+        ).thenThrow(
+          Exception(KGroupText.failureGet),
+        );
+        when(
+          mockFirestoreService.sendEmail(
+            KTestText.emailModel,
           ),
         ).thenThrow(
           Exception(KGroupText.failureSend),
@@ -162,6 +206,26 @@ void main() {
           ),
         );
       });
+      test('User Can Send Email', () async {
+        expect(
+          await mockDiscountRepository.userCanSendUserEmail(KTestText.user.id),
+          isA<Left<SomeFailure, bool>>().having(
+            (e) => e.value,
+            'value',
+            equals(const SomeFailure.serverError()),
+          ),
+        );
+      });
+      test('Send Email', () async {
+        expect(
+          await mockDiscountRepository.sendEmail(KTestText.emailModel),
+          isA<Left<SomeFailure, bool>>().having(
+            (e) => e.value,
+            'value',
+            equals(const SomeFailure.serverError()),
+          ),
+        );
+      });
       test('Get Discount', () async {
         expect(
           await mockDiscountRepository
@@ -186,6 +250,20 @@ void main() {
         when(
           mockFirestoreService.sendLink(
             KTestText.linkModel,
+          ),
+        ).thenThrow(
+          FirebaseException(plugin: KGroupText.failureSend),
+        );
+        when(
+          mockFirestoreService.getUserDiscountsEmail(
+            KTestText.user.id,
+          ),
+        ).thenThrow(
+          FirebaseException(plugin: KGroupText.failureGet),
+        );
+        when(
+          mockFirestoreService.sendEmail(
+            KTestText.emailModel,
           ),
         ).thenThrow(
           FirebaseException(plugin: KGroupText.failureSend),
@@ -217,6 +295,26 @@ void main() {
       test('Send Link', () async {
         expect(
           await mockDiscountRepository.sendLink(KTestText.linkModel),
+          isA<Left<SomeFailure, bool>>().having(
+            (e) => e.value,
+            'value',
+            equals(const SomeFailure.serverError()),
+          ),
+        );
+      });
+      test('User Can Send Email', () async {
+        expect(
+          await mockDiscountRepository.userCanSendUserEmail(KTestText.user.id),
+          isA<Left<SomeFailure, bool>>().having(
+            (e) => e.value,
+            'value',
+            equals(const SomeFailure.serverError()),
+          ),
+        );
+      });
+      test('Send Email', () async {
+        expect(
+          await mockDiscountRepository.sendEmail(KTestText.emailModel),
           isA<Left<SomeFailure, bool>>().having(
             (e) => e.value,
             'value',

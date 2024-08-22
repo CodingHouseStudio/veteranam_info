@@ -56,6 +56,10 @@ void main() {
           .thenAnswer(
         (invocation) async => const Right(true),
       );
+      when(mockDiscountRepository.userCanSendUserEmail(KTestText.user.id))
+          .thenAnswer(
+        (invocation) async => const Right(false),
+      );
     });
     group('${KGroupText.failure} ', () {
       setUp(() {
@@ -126,6 +130,9 @@ void main() {
           (invocation) => Stream.value(KTestText.discountModelItemsModify),
         );
         when(mockDiscountRepository.sendLink(KTestText.linkModel)).thenAnswer(
+          (invocation) async => const Right(true),
+        );
+        when(mockDiscountRepository.sendEmail(KTestText.emailModel)).thenAnswer(
           (invocation) async => const Right(true),
         );
       });
@@ -315,6 +322,123 @@ void main() {
               tester: tester,
               mockGoRouter: mockGoRouter,
             );
+          });
+        });
+
+        group('User email dialog', () {
+          setUp(
+            () {
+              when(
+                mockDiscountRepository.userCanSendUserEmail(KTestText.user.id),
+              ).thenAnswer(
+                (invocation) async => const Right(true),
+              );
+            },
+          );
+          testWidgets('User email dialog', (tester) async {
+            await discountsPumpAppHelper(
+              tester: tester,
+              mockDiscountRepository: mockDiscountRepository,
+              mockGoRouter: mockGoRouter,
+              mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+              mockReportRepository: mockReportRepository,
+              mockAuthenticationRepository: mockAuthenticationRepository,
+            );
+
+            await discountsScrollHelper(
+              tester: tester,
+              test: (tester) async => userEmailCorrectHelper(
+                tester: tester,
+                mockGoRouter: mockGoRouter,
+              ),
+              showEmailDialog: true,
+            );
+          });
+          testWidgets('User email dialog close', (tester) async {
+            await discountsPumpAppHelper(
+              tester: tester,
+              mockDiscountRepository: mockDiscountRepository,
+              mockGoRouter: mockGoRouter,
+              mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+              mockReportRepository: mockReportRepository,
+              mockAuthenticationRepository: mockAuthenticationRepository,
+            );
+
+            await discountsScrollHelper(
+              tester: tester,
+              test: (tester) async => userEmailCloseHelper(
+                tester: tester,
+                mockGoRouter: mockGoRouter,
+              ),
+              showEmailDialog: true,
+            );
+          });
+          testWidgets('User email dialog empty', (tester) async {
+            await discountsPumpAppHelper(
+              tester: tester,
+              mockDiscountRepository: mockDiscountRepository,
+              mockGoRouter: mockGoRouter,
+              mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+              mockReportRepository: mockReportRepository,
+              mockAuthenticationRepository: mockAuthenticationRepository,
+            );
+
+            await discountsScrollHelper(
+              tester: tester,
+              test: userEmailEmptyHelper,
+              showEmailDialog: true,
+            );
+          });
+          testWidgets('User email dialog wrong', (tester) async {
+            await discountsPumpAppHelper(
+              tester: tester,
+              mockDiscountRepository: mockDiscountRepository,
+              mockGoRouter: mockGoRouter,
+              mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+              mockReportRepository: mockReportRepository,
+              mockAuthenticationRepository: mockAuthenticationRepository,
+            );
+
+            await discountsScrollHelper(
+              tester: tester,
+              test: (tester) async => userEmailWrongHelper(
+                tester: tester,
+                mockGoRouter: mockGoRouter,
+              ),
+              showEmailDialog: true,
+            );
+          });
+
+          group('${KGroupText.failureGet} ', () {
+            setUp(
+              () {
+                when(
+                  mockDiscountRepository.sendEmail(KTestText.emailModel),
+                ).thenAnswer(
+                  (invocation) async => const Left(SomeFailure.serverError()),
+                );
+              },
+            );
+            testWidgets('User email dialog incorect', (tester) async {
+              await discountsPumpAppHelper(
+                tester: tester,
+                mockDiscountRepository: mockDiscountRepository,
+                mockGoRouter: mockGoRouter,
+                mockAppAuthenticationRepository:
+                    mockAppAuthenticationRepository,
+                mockReportRepository: mockReportRepository,
+                mockAuthenticationRepository: mockAuthenticationRepository,
+              );
+
+              await discountsScrollHelper(
+                tester: tester,
+                test: (tester) async => userEmailCorrectHelper(
+                  tester: tester,
+                  mockGoRouter: mockGoRouter,
+                ),
+                showEmailDialog: true,
+              );
+            });
           });
         });
       });
