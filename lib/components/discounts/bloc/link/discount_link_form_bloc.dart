@@ -38,10 +38,10 @@ class DiscountLinkFormBloc
     emit(state.copyWith(link: linkFieldModel, formState: LinkEnum.inProgress));
   }
 
-  Future<void> _onSendLink(
+  void _onSendLink(
     _SendLink event,
     Emitter<DiscountLinkFormState> emit,
-  ) async {
+  ) {
     emit(
       const _Initial(
         link: LinkFieldModel.pure(),

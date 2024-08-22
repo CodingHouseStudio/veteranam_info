@@ -92,10 +92,10 @@ class ReportBloc extends Bloc<ReportEvent, ReportState> {
     );
   }
 
-  Future<void> _onSend(
+  void _onSend(
     _Send event,
     Emitter<ReportState> emit,
-  ) async {
+  ) {
     if (!state.formState.isNext &&
             state.reasonComplaint == ReasonComplaint.other ||
         state.reasonComplaint == null) {
