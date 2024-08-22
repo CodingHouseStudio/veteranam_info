@@ -3,13 +3,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'email_model.freezed.dart';
 part 'email_model.g.dart';
 
-enum DiscountEmailStatus {
-  isNew,
-  responseRequired,
-  resolved,
-  ideas,
-}
-
 @freezed
 class EmailModel with _$EmailModel {
   const factory EmailModel({

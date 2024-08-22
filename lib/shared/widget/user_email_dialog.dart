@@ -39,6 +39,7 @@ class UserEmailDialog extends StatelessWidget {
               alignment: Alignment.topRight,
               child: IconButtonWidget(
                 icon: KIcon.close,
+                key: KWidgetkeys.widget.userEmailDialog.icon,
                 onPressed: closeOnPressed,
                 background: AppColors.materialThemeWhite,
               ),
@@ -56,9 +57,9 @@ class UserEmailDialog extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        context.l10n.aboutNewDiscounts,
                         key:
                             KWidgetkeys.widget.userEmailDialog.emailDialogTitle,
+                        context.l10n.aboutNewDiscounts,
                         style: isDesk
                             ? AppTextStyle.materialThemeHeadlineLarge
                             : AppTextStyle.materialThemeHeadlineMedium,
@@ -68,9 +69,9 @@ class UserEmailDialog extends StatelessWidget {
                       else
                         KSizedBox.kHeightSizedBox8,
                       Text(
-                        context.l10n.aboutNewDiscountsSubtitle,
                         key: KWidgetkeys
                             .widget.userEmailDialog.emailDialogSubtitle,
+                        context.l10n.aboutNewDiscountsSubtitle,
                         style: isDesk
                             ? AppTextStyle.materialThemeBodyLarge
                             : AppTextStyle.materialThemeBodyMedium,

@@ -42,10 +42,10 @@ class DiscountUserEmailFormBloc
     );
   }
 
-  Future<void> _onSendEmail(
+  void _onSendEmail(
     _SendEmail event,
     Emitter<DiscountUserEmailFormState> emit,
-  ) async {
+  ) {
     if (state.email.value.isEmpty) {
       emit(state.copyWith(formState: EmailEnum.invalidData));
       return;
@@ -66,13 +66,13 @@ class DiscountUserEmailFormBloc
       ),
     );
 
-    await _discountRepository.sendEmail(discountUserEmailFormModel);
+    _discountRepository.sendEmail(discountUserEmailFormModel);
   }
 
-  Future<void> _onSendEmailAfterClose(
+  void _onSendEmailAfterClose(
     _SendEmailAfterClose event,
     Emitter<DiscountUserEmailFormState> emit,
-  ) async {
+  ) {
     emit(
       const _Initial(
         email: EmailFieldModel.pure(),
@@ -88,6 +88,6 @@ class DiscountUserEmailFormBloc
       isValid: state.email.isValid,
     );
 
-    await _discountRepository.sendEmail(discountUserEmailFormModel);
+    _discountRepository.sendEmail(discountUserEmailFormModel);
   }
 }
