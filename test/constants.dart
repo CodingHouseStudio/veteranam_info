@@ -450,6 +450,7 @@ abstract class KScreenBlocName {
   static const myStory = 'My Story Screen';
   static const feedback = 'Feedback Screen';
   static const mobSettings = 'Settings Screen';
+  static const mobFaq = 'Mob FAQ Screen';
 
   static const authenticationServices = 'Authentication Services';
   static const appRepository = 'App';

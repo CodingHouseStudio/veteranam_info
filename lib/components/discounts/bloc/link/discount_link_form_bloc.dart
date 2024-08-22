@@ -1,12 +1,13 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-
 import 'package:veteranam/shared/shared.dart';
 
+part 'discount_link_form_bloc.freezed.dart';
 part 'discount_link_form_event.dart';
 part 'discount_link_form_state.dart';
-part 'discount_link_form_bloc.freezed.dart';
 
 @Injectable()
 class DiscountLinkFormBloc
@@ -36,10 +37,15 @@ class DiscountLinkFormBloc
     emit(state.copyWith(link: linkFieldModel, formState: LinkEnum.inProgress));
   }
 
-  Future<void> _onSendLink(
+  void _onSendLink(
     _SendLink event,
     Emitter<DiscountLinkFormState> emit,
-  ) async {
+  ) {
+    emit(
+      state.copyWith(
+        formState: LinkEnum.success,
+      ),
+    );
     if (state.link.isValid) {
       final discountLinkFormModel = LinkModel(
         id: ExtendedDateTime.id,
@@ -47,35 +53,37 @@ class DiscountLinkFormBloc
         link: state.link.value,
         date: ExtendedDateTime.current,
       );
+
       emit(
-        state.copyWith(
-          formState: LinkEnum.sending,
-          link: const LinkFieldModel.pure(),
+        const _Initial(
+          link: LinkFieldModel.pure(),
+          formState: LinkEnum.success,
         ),
       );
-      final result = await _discountRepository.sendLink(discountLinkFormModel);
-      result.fold(
-        (l) => emit(
-          state.copyWith(
-            failure: l._toDiscountLinkForm(),
-            formState: LinkEnum.initial,
-          ),
-        ),
-        (r) {
-          emit(
-            const _Initial(
-              link: LinkFieldModel.pure(),
-              formState: LinkEnum.success,
-            ),
-          );
-        },
-      );
-    } else {
-      emit(
-        state.copyWith(
-          formState: LinkEnum.invalidData,
-        ),
-      );
+      // emit(
+      //   state.copyWith(
+      //     formState: LinkEnum.sending,
+      //     link: const LinkFieldModel.pure(),
+      //   ),
+      // );
+      // final result =
+      unawaited(_discountRepository.sendLink(discountLinkFormModel));
+      // result.fold(
+      //   (l) => emit(
+      //     state.copyWith(
+      //       failure: l._toDiscountLinkForm(),
+      //       formState: LinkEnum.initial,
+      //     ),
+      //   ),
+      //   (r) {
+      //     emit(
+      //       const _Initial(
+      //         link: LinkFieldModel.pure(),
+      //         formState: LinkEnum.success,
+      //       ),
+      //     );
+      //   },
+      // );
     }
   }
 }

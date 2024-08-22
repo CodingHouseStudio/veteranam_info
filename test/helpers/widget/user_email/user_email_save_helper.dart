@@ -7,6 +7,8 @@ Future<void> userEmailSaveHelper({
   required WidgetTester tester,
   required String email,
 }) async {
+  await userEmailHelper(tester);
+
   expect(find.byKey(KWidgetkeys.widget.userEmailDialog.field), findsOneWidget);
 
   await scrollingHelper(

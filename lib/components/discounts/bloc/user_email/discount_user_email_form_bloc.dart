@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -66,7 +68,7 @@ class DiscountUserEmailFormBloc
       ),
     );
 
-    _discountRepository.sendEmail(discountUserEmailFormModel);
+    unawaited(_discountRepository.sendEmail(discountUserEmailFormModel));
   }
 
   void _onSendEmailAfterClose(
@@ -88,6 +90,6 @@ class DiscountUserEmailFormBloc
       isValid: state.email.isValid,
     );
 
-    _discountRepository.sendEmail(discountUserEmailFormModel);
+    unawaited(_discountRepository.sendEmail(discountUserEmailFormModel));
   }
 }

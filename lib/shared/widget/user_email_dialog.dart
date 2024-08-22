@@ -105,16 +105,6 @@ class UserEmailDialog extends StatelessWidget {
         ),
       ),
     );
-
-    // return Padding(
-    //   padding: const EdgeInsets.only(top: KPadding.kPaddingSize8),
-    //   child: Text(
-    //     context.l10n.linkLimitMessage,
-    //     key: KWidgetkeys.widget.notificationLink.limitText,
-    //     style: AppTextStyle.materialThemeBodyMediumNeutralVariant35,
-    //     textAlign: TextAlign.center,
-    //   ),
-    // );
   }
 
   Widget field(

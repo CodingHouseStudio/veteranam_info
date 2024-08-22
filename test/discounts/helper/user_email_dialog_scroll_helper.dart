@@ -24,23 +24,23 @@ Future<void> userEmailScrollHelper({
         offset: KTestConstants.scrollingDown,
       );
 
-      // await tester.tap(find.byKey(KWidgetkeys.widget.scaffold.loadingButton));
+      await tester.tap(find.byKey(KWidgetkeys.widget.scaffold.loadingButton));
 
-      // await tester.pumpAndSettle();
+      await tester.pumpAndSettle();
 
-      // await scrollingHelper(
-      //   tester: tester,
-      //   offset: KTestConstants.scrollingDown,
-      // );
+      await scrollingHelper(
+        tester: tester,
+        offset: KTestConstants.scrollingDown,
+      );
 
-      // await tester.tap(find.byKey(KWidgetkeys.widget.scaffold.loadingButton));
+      await tester.tap(find.byKey(KWidgetkeys.widget.scaffold.loadingButton));
 
-      // await tester.pumpAndSettle();
+      await tester.pumpAndSettle();
 
-      // await scrollingHelper(
-      //   tester: tester,
-      //   offset: KTestConstants.scrollingDown,
-      // );
+      await scrollingHelper(
+        tester: tester,
+        offset: KTestConstants.scrollingDown,
+      );
 
       await test(tester);
 
