@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -60,7 +62,7 @@ class DiscountLinkFormBloc
       //   ),
       // );
       // final result =
-      await _discountRepository.sendLink(discountLinkFormModel);
+      unawaited(_discountRepository.sendLink(discountLinkFormModel));
       // result.fold(
       //   (l) => emit(
       //     state.copyWith(
