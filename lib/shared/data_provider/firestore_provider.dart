@@ -394,6 +394,14 @@ class FirestoreService {
           .doc(discountLink.id)
           .set(discountLink.toJson());
 
+  Future<void> sendEmail(
+    EmailModel userEmail,
+  ) async =>
+      _db
+          .collection(FirebaseCollectionName.discountUserEmail)
+          .doc(userEmail.id)
+          .set(userEmail.toJson());
+
   Future<List<LinkModel>> getUserDiscountsLink(
     String userId,
   ) async {
@@ -404,6 +412,19 @@ class FirestoreService {
 
     return querySnapshot.docs
         .map((doc) => LinkModel.fromJson(doc.data()))
+        .toList();
+  }
+
+  Future<List<EmailModel>> getUserDiscountsEmail(
+    String userId,
+  ) async {
+    final querySnapshot = await _db
+        .collection(FirebaseCollectionName.discountUserEmail)
+        .where(EmailModelJsonField.userId, isEqualTo: userId)
+        .get();
+
+    return querySnapshot.docs
+        .map((doc) => EmailModel.fromJson(doc.data()))
         .toList();
   }
 

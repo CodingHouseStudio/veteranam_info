@@ -62,6 +62,10 @@ void main() {
           .thenAnswer(
         (invocation) async => const Right(true),
       );
+      when(mockDiscountRepository.userCanSendUserEmail(KTestText.user.id))
+          .thenAnswer(
+        (invocation) async => const Right(true),
+      );
       when(
         mockDiscountRepository.getDiscountItems(
           reportIdItems: KTestText.reportItems.getIdCard,
@@ -100,6 +104,17 @@ void main() {
       GetIt.I.registerSingleton<DiscountLinkCubit>(authenticationBloc);
     }
 
+    void registerDiscountUserEmailCubit() {
+      final authenticationBloc = DiscountUserEmailCubit(
+        discountRepository: mockDiscountRepository,
+        appAuthenticationRepository: mockAppAuthenticationRepository,
+      );
+      if (GetIt.I.isRegistered<DiscountUserEmailCubit>()) {
+        GetIt.I.unregister<DiscountUserEmailCubit>();
+      }
+      GetIt.I.registerSingleton<DiscountUserEmailCubit>(authenticationBloc);
+    }
+
     void registerDiscountBloc() {
       final discountBloc = DiscountWatcherBloc(
         discountRepository: mockDiscountRepository,
@@ -117,6 +132,7 @@ void main() {
       registerHomeBloc();
       registerDiscountBloc();
       registerDiscountLinkCubit();
+      registerDiscountUserEmailCubit();
       await tester.pumpWidget(const App());
 
       await tester.pumpAndSettle();

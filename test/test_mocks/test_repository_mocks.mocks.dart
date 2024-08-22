@@ -1128,6 +1128,16 @@ class MockFirestoreService extends _i1.Mock implements _i3.FirestoreService {
       ) as _i8.Future<void>);
 
   @override
+  _i8.Future<void> sendEmail(_i3.EmailModel? userEmail) => (super.noSuchMethod(
+        Invocation.method(
+          #sendEmail,
+          [userEmail],
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
   _i8.Future<List<_i3.LinkModel>> getUserDiscountsLink(String? userId) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -1138,6 +1148,18 @@ class MockFirestoreService extends _i1.Mock implements _i3.FirestoreService {
         returnValueForMissingStub:
             _i8.Future<List<_i3.LinkModel>>.value(<_i3.LinkModel>[]),
       ) as _i8.Future<List<_i3.LinkModel>>);
+
+  @override
+  _i8.Future<List<_i3.EmailModel>> getUserDiscountsEmail(String? userId) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getUserDiscountsEmail,
+          [userId],
+        ),
+        returnValue: _i8.Future<List<_i3.EmailModel>>.value(<_i3.EmailModel>[]),
+        returnValueForMissingStub:
+            _i8.Future<List<_i3.EmailModel>>.value(<_i3.EmailModel>[]),
+      ) as _i8.Future<List<_i3.EmailModel>>);
 
   @override
   _i8.Future<void> addDiscount(_i3.DiscountModel? discount) =>
@@ -7189,6 +7211,60 @@ class MockIDiscountRepository extends _i1.Mock
           this,
           Invocation.method(
             #userCanSendLink,
+            [userId],
+          ),
+        )),
+      ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
+
+  @override
+  _i8.Future<_i2.Either<_i3.SomeFailure, bool>> sendEmail(
+          _i3.EmailModel? userEmail) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #sendEmail,
+          [userEmail],
+        ),
+        returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
+            _FakeEither_0<_i3.SomeFailure, bool>(
+          this,
+          Invocation.method(
+            #sendEmail,
+            [userEmail],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
+                _FakeEither_0<_i3.SomeFailure, bool>(
+          this,
+          Invocation.method(
+            #sendEmail,
+            [userEmail],
+          ),
+        )),
+      ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
+
+  @override
+  _i8.Future<_i2.Either<_i3.SomeFailure, bool>> userCanSendUserEmail(
+          String? userId) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #userCanSendUserEmail,
+          [userId],
+        ),
+        returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
+            _FakeEither_0<_i3.SomeFailure, bool>(
+          this,
+          Invocation.method(
+            #userCanSendUserEmail,
+            [userId],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
+                _FakeEither_0<_i3.SomeFailure, bool>(
+          this,
+          Invocation.method(
+            #userCanSendUserEmail,
             [userId],
           ),
         )),
