@@ -110,10 +110,12 @@ class _NetworkImageWidgetState extends State<NetworkImageWidget> {
           '$_urlPrefix${widget.imageUrl}'
       : widget.imageUrl;
 
-  String get _urlPrefix => widget.size == null
-      ? '/cdn-cgi/image/${kIsWeb ? 'quality=100' : 'quality=85'}/'
-      : '/cdn-cgi/image/${kIsWeb ? 'quality=100' : 'quality=85'}'
-          ',width=${widget.size! * 10},${widget.size! * 10}/';
+  String get _urlPrefix =>
+      // widget.size == null
+      // ?
+      '/cdn-cgi/image/${kIsWeb ? 'quality=100' : 'quality=85'}/';
+  // : '/cdn-cgi/image/${kIsWeb ? 'quality=100' : 'quality=85'}'
+  //     ',width=${widget.size! * 10},${widget.size! * 10}/';
   //format=auto - standart value
 }
 
