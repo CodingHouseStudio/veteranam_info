@@ -29,7 +29,7 @@ class _NetworkImageWidgetState extends State<NetworkImageWidget> {
     if (kIsWeb || context.read<MobOfflineModeCubit>().state.isOffline) {
       precacheImage(
         CachedNetworkImageProvider(
-          widget.imageUrl,
+          _url, // widget.imageUrl,
           headers: const {
             'Cache-Control': 'max-age=3600',
           },
@@ -44,7 +44,7 @@ class _NetworkImageWidgetState extends State<NetworkImageWidget> {
   Widget build(BuildContext context) {
     if (kIsWeb || context.read<MobOfflineModeCubit>().state.isOffline) {
       return CachedNetworkImage(
-        imageUrl: widget.imageUrl,
+        imageUrl: _url, // widget.imageUrl,
         fit: widget.fit,
         height: widget.size,
         width: widget.size,
@@ -101,6 +101,14 @@ class _NetworkImageWidgetState extends State<NetworkImageWidget> {
     //   // loadingIndicatorColor: loadingIndicatorColor,
     // );
   }
+
+  String get _url => Config.isProduction
+      ? widget.imageUrl //'https://veteranam.info$_urlPrefix${widget.imageUrl}'
+      : 'https://dev-app.veteranam.info$_urlPrefix${widget.imageUrl}';
+
+  String get _urlPrefix => widget.size == null
+      ? '/cdn-cgi/image/format=auto/'
+      : '/cdn-cgi/image/format=auto,width=${widget.size},${widget.size}/';
 }
 
 // class _NetworkMobileImageWidget extends StatelessWidget {
