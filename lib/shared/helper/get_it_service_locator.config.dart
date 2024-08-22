@@ -188,12 +188,12 @@ extension GetItInjectableX on _i174.GetIt {
       ),
       registerFor: {_development},
     );
-    gh.factory<_i1026.FeedbackBloc>(() => _i1026.FeedbackBloc(
+    gh.factory<_i872.MobFeedbackBloc>(() => _i872.MobFeedbackBloc(
           feedbackRepository: gh<_i1001.IFeedbackRepository>(),
           appAuthenticationRepository:
               gh<_i1001.IAppAuthenticationRepository>(),
         ));
-    gh.factory<_i872.MobFeedbackBloc>(() => _i872.MobFeedbackBloc(
+    gh.factory<_i1026.FeedbackBloc>(() => _i1026.FeedbackBloc(
           feedbackRepository: gh<_i1001.IFeedbackRepository>(),
           appAuthenticationRepository:
               gh<_i1001.IAppAuthenticationRepository>(),
