@@ -7,7 +7,7 @@ import 'helper.dart';
 Future<void> discountsInitialHelper(
   WidgetTester tester,
 ) async {
-  await notificationLinkScrollHelper(
+  await discountsScrollHelper(
     tester: tester,
     test: notificationLinkHelper,
   );
