@@ -34,6 +34,7 @@ part 'screen/privacy_policy_dialog.dart';
 part 'screen/discount_card_dialog.dart';
 part 'screen/news_card_dialog.dart';
 part 'screen/mob_settings.dart';
+part 'screen/mob_faq.dart';
 
 //WIDGET
 part 'widget/widget.dart';
@@ -79,7 +80,7 @@ part 'widget/menu_dialog.dart';
 part 'widget/mob_navigation.dart';
 part 'widget/mob_feedback.dart';
 part 'widget/email_button.dart';
-part 'widget/custom_switcher.dart';
+part 'widget/language_switcher.dart';
 
 abstract class KWidgetkeys {
   static _ScreenKeys get screen => _ScreenKeys();

@@ -79,7 +79,7 @@ void main() {
         await feedbackInitialHelper(tester);
       });
       group('${KGroupText.goTo} ', () {
-        testWidgets('Feedback box widget navigation', (tester) async {
+        testWidgets('nawbar back button pop() navigation', (tester) async {
           await feedbackPumpAppHelper(
             mockFeedbackRepository: mockFeedbackRepository,
             tester: tester,
@@ -88,7 +88,7 @@ void main() {
             mockUrlRepository: mockUrlRepository,
           );
 
-          await feedbackNavigationHelper(
+          await nawbarBackButtonHelper(
             tester: tester,
             mockGoRouter: mockGoRouter,
           );

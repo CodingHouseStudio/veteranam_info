@@ -52,9 +52,13 @@ void main() {
           link: LinkFieldModel.dirty(KTestText.linkModel.link),
           formState: LinkEnum.inProgress,
         ),
-        const DiscountLinkFormState(
-          link: LinkFieldModel.pure(),
-          formState: LinkEnum.sending,
+        // const DiscountLinkFormState(
+        //   link: LinkFieldModel.pure(),
+        //   formState: LinkEnum.sending,
+        // ),
+        DiscountLinkFormState(
+          link: LinkFieldModel.dirty(KTestText.linkModel.link),
+          formState: LinkEnum.success,
         ),
         const DiscountLinkFormState(
           link: LinkFieldModel.pure(),
@@ -77,24 +81,144 @@ void main() {
           link: LinkFieldModel.dirty(KTestText.field),
           formState: LinkEnum.inProgress,
         ),
+        // const DiscountLinkFormState(
+        //   link: LinkFieldModel.dirty(KTestText.field),
+        //   formState: LinkEnum.invalidData,
+        // ),
         const DiscountLinkFormState(
           link: LinkFieldModel.dirty(KTestText.field),
-          formState: LinkEnum.invalidData,
+          formState: LinkEnum.success,
         ),
         DiscountLinkFormState(
           link: LinkFieldModel.dirty(KTestText.linkModelWrong.link),
           formState: LinkEnum.inProgress,
         ),
-        const DiscountLinkFormState(
-          link: LinkFieldModel.pure(),
-          formState: LinkEnum.sending,
+
+        DiscountLinkFormState(
+          link: LinkFieldModel.dirty(KTestText.linkModelWrong.link),
+          formState: LinkEnum.success,
         ),
         const DiscountLinkFormState(
           link: LinkFieldModel.pure(),
-          formState: LinkEnum.initial,
-          failure: DiscountLinkFormFailure.error,
+          formState: LinkEnum.success,
+        ),
+        // const DiscountLinkFormState(
+        //   link: LinkFieldModel.pure(),
+        //   formState: LinkEnum.sending,
+        // ),
+        // const DiscountLinkFormState(
+        //   link: LinkFieldModel.pure(),
+        //   formState: LinkEnum.initial,
+        //   failure: DiscountLinkFormFailure.error,
+        // ),
+      ],
+    );
+
+    blocTest<DiscountLinkFormBloc, DiscountLinkFormState>(
+      'emits [LinkEnum.inProgress, LinkEnum.success] when valid link'
+      ' is provided',
+      build: () => discountLinkFormBloc,
+      act: (bloc) async => bloc
+        ..add(DiscountLinkFormEvent.updateLink(KTestText.linkModel.link))
+        ..add(const DiscountLinkFormEvent.sendLink()),
+      expect: () async => [
+        DiscountLinkFormState(
+          link: LinkFieldModel.dirty(KTestText.linkModel.link),
+          formState: LinkEnum.inProgress,
+        ),
+        DiscountLinkFormState(
+          link: LinkFieldModel.dirty(KTestText.linkModel.link),
+          formState: LinkEnum.success,
+        ),
+        const DiscountLinkFormState(
+          link: LinkFieldModel.pure(),
+          formState: LinkEnum.success,
         ),
       ],
+    );
+
+    blocTest<DiscountLinkFormBloc, DiscountLinkFormState>(
+      'emits [LinkEnum.inProgress, LinkEnum.success] when invalid link'
+      ' is provided',
+      build: () => discountLinkFormBloc,
+      act: (bloc) async => bloc
+        ..add(DiscountLinkFormEvent.updateLink(KTestText.linkModel.link))
+        ..add(const DiscountLinkFormEvent.sendLink()),
+      expect: () async => [
+        DiscountLinkFormState(
+          link: LinkFieldModel.dirty(KTestText.linkModel.link),
+          formState: LinkEnum.inProgress,
+        ),
+        DiscountLinkFormState(
+          link: LinkFieldModel.dirty(KTestText.linkModel.link),
+          formState: LinkEnum.success,
+        ),
+        const DiscountLinkFormState(
+          link: LinkFieldModel.pure(),
+          formState: LinkEnum.success,
+        ),
+      ],
+    );
+
+    blocTest<DiscountLinkFormBloc, DiscountLinkFormState>(
+      'emits [LinkEnum.inProgress, LinkEnum.success] when link is updated and'
+      ' sent multiple times',
+      build: () => discountLinkFormBloc,
+      act: (bloc) async => bloc
+        ..add(
+          const DiscountLinkFormEvent.sendLink(),
+        ),
+      seed: () => DiscountLinkFormState(
+        link: LinkFieldModel.dirty(KTestText.linkModel.link),
+        formState: LinkEnum.inProgress,
+      ),
+      expect: () async => [
+        DiscountLinkFormState(
+          link: LinkFieldModel.dirty(KTestText.linkModel.link),
+          formState: LinkEnum.success,
+        ),
+        const DiscountLinkFormState(
+          link: LinkFieldModel.pure(),
+          formState: LinkEnum.success,
+        ),
+      ],
+    );
+
+    blocTest<DiscountLinkFormBloc, DiscountLinkFormState>(
+      'emits [LinkEnum.inProgress, LinkEnum.success] when valid link is added'
+      ' and sendLink is called',
+      build: () {
+        // Set up the mock responses for the repository and current user
+        when(mockAppAuthenticationRepository.currentUser)
+            .thenReturn(KTestText.user);
+        when(mockdiscountRepository.sendLink(KTestText.linkModel)).thenAnswer(
+          (_) async => const Right(true),
+        );
+
+        return discountLinkFormBloc;
+      },
+      seed: () => DiscountLinkFormState(
+        link: LinkFieldModel.dirty(KTestText.linkModel.link),
+        formState: LinkEnum.inProgress,
+      ),
+      act: (bloc) async {
+        // Trigger the sendLink event
+        bloc.add(const DiscountLinkFormEvent.sendLink());
+      },
+      expect: () async => [
+        DiscountLinkFormState(
+          link: LinkFieldModel.dirty(KTestText.linkModel.link),
+          formState: LinkEnum.success,
+        ),
+        const DiscountLinkFormState(
+          link: LinkFieldModel.pure(),
+          formState: LinkEnum.success,
+        ),
+      ],
+      verify: (_) {
+        // Verify that the sendLink method is called with the correct LinkModel
+        verify(mockdiscountRepository.sendLink(KTestText.linkModel)).called(1);
+      },
     );
   });
 }

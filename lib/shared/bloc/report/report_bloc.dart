@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -90,10 +92,10 @@ class ReportBloc extends Bloc<ReportEvent, ReportState> {
     );
   }
 
-  Future<void> _onSend(
+  void _onSend(
     _Send event,
     Emitter<ReportState> emit,
-  ) async {
+  ) {
     if (!state.formState.isNext &&
             state.reasonComplaint == ReasonComplaint.other ||
         state.reasonComplaint == null) {
@@ -111,21 +113,29 @@ class ReportBloc extends Bloc<ReportEvent, ReportState> {
         //         (state.message == null || state.message!.isNotValid) &&
         //             state.reasonComplaint == ReasonComplaint.other)
         ) {
+      emit(
+        state.copyWith(
+          failure: null,
+          formState: ReportEnum.success,
+        ),
+      );
       // final result =
-      await _reportRepository.sendReport(
-        ReportModel(
-          id: ExtendedDateTime.id,
-          reasonComplaint: state.reasonComplaint!,
-          // email: state.email?.value.isEmpty ?? true
-          //     ? _appAuthenticationRepository.currentUser.email!
-          //     : state.email!.value,
-          message: state.message?.value.isEmpty ?? true
-              ? null
-              : state.message?.value,
-          date: ExtendedDateTime.current,
-          card: event.card,
-          userId: _appAuthenticationRepository.currentUser.id,
-          cardId: state.cardId!,
+      unawaited(
+        _reportRepository.sendReport(
+          ReportModel(
+            id: ExtendedDateTime.id,
+            reasonComplaint: state.reasonComplaint!,
+            // email: state.email?.value.isEmpty ?? true
+            //     ? _appAuthenticationRepository.currentUser.email!
+            //     : state.email!.value,
+            message: state.message?.value.isEmpty ?? true
+                ? null
+                : state.message?.value,
+            date: ExtendedDateTime.current,
+            card: event.card,
+            userId: _appAuthenticationRepository.currentUser.id,
+            cardId: state.cardId!,
+          ),
         ),
       );
       // result.fold(
@@ -136,12 +146,6 @@ class ReportBloc extends Bloc<ReportEvent, ReportState> {
       //     ),
       //   ),
       //   (r) =>
-      emit(
-        state.copyWith(
-          failure: null,
-          formState: ReportEnum.success,
-        ),
-      );
       // );
     } else {
       emit(

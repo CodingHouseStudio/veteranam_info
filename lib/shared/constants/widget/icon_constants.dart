@@ -128,6 +128,9 @@ abstract class KIcon {
   static const _KIcon info = _KIcon(
     Symbols.info,
   );
+  static const _KIcon modeOffOn = _KIcon(
+    Symbols.mode_off_on,
+  );
 
   static const _KIcon copy = _KIcon(Symbols.content_copy);
   static List<Icon> get icons => [

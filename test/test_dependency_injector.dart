@@ -33,7 +33,7 @@ void configureDependenciesTest() {
   // Repositories
   GetIt.I.registerLazySingleton<IStorage>(SecureStorageRepository.new);
   GetIt.I.registerSingleton<IFeedbackRepository>(FeedbackRepository());
-  GetIt.I.registerSingleton<IHomeRepository>(HomeRepository());
+  GetIt.I.registerSingleton<IFaqRepository>(FaqRepository());
   GetIt.I.registerSingleton<IAppAuthenticationRepository>(
     AppAuthenticationRepository(
       GetIt.I.get<IStorage>(),
@@ -74,7 +74,10 @@ void configureDependenciesTest() {
   //   ),
   // );
   GetIt.I.registerSingleton<HomeWatcherBloc>(
-    HomeWatcherBloc(homeRepository: GetIt.I.get<IHomeRepository>()),
+    HomeWatcherBloc(faqRepository: GetIt.I.get<IFaqRepository>()),
+  );
+  GetIt.I.registerSingleton<MobFaqWatcherBloc>(
+    MobFaqWatcherBloc(faqRepository: GetIt.I.get<IFaqRepository>()),
   );
   GetIt.I.registerSingleton<AuthenticationBloc>(
     AuthenticationBloc(

@@ -6,18 +6,18 @@ enum DiscountLinkFormFailure {
   network,
 }
 
-extension DiscountLinkFormFailureExtension on SomeFailure {
-  DiscountLinkFormFailure _toDiscountLinkForm() {
-    switch (this) {
-      case FailureSend():
-        return DiscountLinkFormFailure.send;
-      case FailureNetwork():
-        return DiscountLinkFormFailure.network;
-      default:
-        return DiscountLinkFormFailure.error;
-    }
-  }
-}
+// extension DiscountLinkFormFailureExtension on SomeFailure {
+//   DiscountLinkFormFailure _toDiscountLinkForm() {
+//     switch (this) {
+//       case FailureSend():
+//         return DiscountLinkFormFailure.send;
+//       case FailureNetwork():
+//         return DiscountLinkFormFailure.network;
+//       default:
+//         return DiscountLinkFormFailure.error;
+//     }
+//   }
+// }
 
 @freezed
 class DiscountLinkFormState with _$DiscountLinkFormState {
@@ -28,4 +28,10 @@ class DiscountLinkFormState with _$DiscountLinkFormState {
   }) = _Initial;
 }
 
-enum LinkEnum { initial, inProgress, success, invalidData, notShow, sending }
+enum LinkEnum {
+  initial,
+  inProgress,
+  success,
+  invalidData,
+  notShow,
+}

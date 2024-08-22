@@ -205,10 +205,9 @@
   <!--  </div>-->
   <button id="retry-button" class="retry-button" onclick="location.reload()">Перезавантажити</button>
   <div class="splash">
-    <img src="icons/logo-192.svg" alt="Loading indicator..." class="bouncing-image">
+    <img id="splash-image" src="icons/logo-192.svg" alt="Loading indicator..." class="bouncing-image">
   </div>
-
-  <script id="splash-screen-script">
+  <script>
     function removeSplashFromWeb() {
       document.getElementById("splash")?.remove();
       document.getElementById("splash-branding")?.remove();
@@ -219,7 +218,10 @@
   <script>
     var serviceWorkerVersion = '{{flutter_service_worker_version}}';
     var scriptLoaded = false;
+    var image_reloaded = false;
+    // var splashImage = document.getElementById('splash-image');
     var retryButton = document.getElementById('retry-button');
+
     function loadMainDartJs() {
       if (scriptLoaded) {
         return;
@@ -230,12 +232,21 @@
       scriptTag.src = 'main.dart.js';
       scriptTag.type = 'application/javascript';
       document.body.append(scriptTag);
+      removeSplashFromWeb();
     }
+    // splashImage.addEventListener('error', function () {
+    //   // if we try reload image all time it's stop another event
+    //   if (!image_reloaded) {
+    //     console.error("Failed to load splash image.");
+    //     splashImage.src = document.getElementById('splash-image').src;
+    //     image_reloaded = true;
+    //   }
+    // });
 
     setTimeout(() => {
       retryButton.style.display = "block";
-
     }, 8000);
+
     if ('serviceWorker' in navigator) {
       // Service workers are supported. Use them.
       window.addEventListener('load', function () {

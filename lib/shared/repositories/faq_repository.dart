@@ -4,8 +4,8 @@ import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:veteranam/shared/shared.dart';
 
-@Singleton(as: IHomeRepository)
-class HomeRepository implements IHomeRepository {
+@Singleton(as: IFaqRepository)
+class FaqRepository implements IFaqRepository {
   final FirestoreService _firestoreService = GetIt.I.get<FirestoreService>();
 
   @override

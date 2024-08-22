@@ -8,6 +8,11 @@ Future<void> mobSettingsInitialHelper(
   WidgetTester tester,
 ) async {
   expect(
+    find.byKey(KWidgetkeys.widget.nawbar.pageName),
+    findsOneWidget,
+  );
+
+  expect(
     find.byKey(KWidgetkeys.screen.mobSettings.title),
     findsOneWidget,
   );
@@ -22,12 +27,14 @@ Future<void> mobSettingsInitialHelper(
     findsOneWidget,
   );
 
+  await languageSwitcherHelper(tester);
+
   expect(
     find.byKey(KWidgetkeys.screen.mobSettings.offlinesSwitcher),
     findsOneWidget,
   );
 
-  await customSwitcherHelper(tester: tester);
+  await switchHelper(tester: tester, enabled: false, isActive: true);
 
   expect(
     find.byKey(KWidgetkeys.screen.mobSettings.subtitle),

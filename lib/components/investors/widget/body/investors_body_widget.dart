@@ -25,14 +25,13 @@ class InvestorsBodyWidget extends StatelessWidget {
         loadingStatus: _.loadingStatus,
         cardListIsEmpty: _.fundItems.isEmpty,
         pageName: context.l10n.investors,
-        pageNameKey: KWidgetkeys.screen.investors.title,
         loadDataAgain: () => context
             .read<InvestorsWatcherBloc>()
             .add(const InvestorsWatcherEvent.started()),
         mainChildWidgetsFunction: ({required isDesk}) => [
           KSizedBox.kHeightSizedBox24,
           if (KTest.testIsWeb)
-            ...TitleWidget.pointTitleWidgetList(
+            TitlePointWidget(
               title: context.l10n.provideSuggestionsFromBusinesses,
               titleKey: KWidgetkeys.screen.investors.title,
               titleSecondPart: context.l10n.orDonateHere,

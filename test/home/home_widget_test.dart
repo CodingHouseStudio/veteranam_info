@@ -17,7 +17,7 @@ void main() {
   tearDown(GetIt.I.reset);
   group('${KScreenBlocName.home} ${KScreenBlocName.dev}', () {
     late AuthenticationRepository mockAuthenticationRepository;
-    late IHomeRepository mockHomeRepository;
+    late IFaqRepository mockFaqRepository;
     late IUrlRepository mockUrlRepository;
     // late IFeedbackRepository mockFeedbackRepository;
     // late IAppAuthenticationRepository mockAppAuthenticationRepository;
@@ -25,7 +25,7 @@ void main() {
       ExtendedDateTime.current = KTestText.dateTime;
       ExtendedDateTime.id = KTestText.feedbackModel.id;
       KPlatformConstants.isWebDesktop = true;
-      mockHomeRepository = MockIHomeRepository();
+      mockFaqRepository = MockIFaqRepository();
       mockAuthenticationRepository = MockAuthenticationRepository();
       mockUrlRepository = MockIUrlRepository();
       // mockAppAuthenticationRepository = MockAppAuthenticationRepository();
@@ -88,12 +88,12 @@ void main() {
     });
     group('${KGroupText.failure} ', () {
       testWidgets('${KGroupText.error} ', (tester) async {
-        when(mockHomeRepository.getQuestions()).thenAnswer(
+        when(mockFaqRepository.getQuestions()).thenAnswer(
           (invocation) async => const Left(SomeFailure.serverError()),
         );
         await homePumpAppHelper(
           // mockFeedbackRepository: mockFeedbackRepository,
-          mockHomeRepository: mockHomeRepository,
+          mockFaqRepository: mockFaqRepository,
           mockAuthenticationRepository: mockAuthenticationRepository,
           tester: tester, mockUrlRepository: mockUrlRepository,
           // mockAppAuthenticationRepository:
@@ -103,12 +103,12 @@ void main() {
         await homeFailureHelper(tester);
       });
       testWidgets('${KGroupText.failureNetwork} ', (tester) async {
-        when(mockHomeRepository.getQuestions()).thenAnswer(
+        when(mockFaqRepository.getQuestions()).thenAnswer(
           (invocation) async => const Left(SomeFailure.network()),
         );
         await homePumpAppHelper(
           // mockFeedbackRepository: mockFeedbackRepository,
-          mockHomeRepository: mockHomeRepository,
+          mockFaqRepository: mockFaqRepository,
           mockAuthenticationRepository: mockAuthenticationRepository,
           tester: tester,
           mockUrlRepository: mockUrlRepository,
@@ -119,12 +119,12 @@ void main() {
         await homeFailureHelper(tester);
       });
       testWidgets('${KGroupText.failureGet} ', (tester) async {
-        when(mockHomeRepository.getQuestions()).thenAnswer(
+        when(mockFaqRepository.getQuestions()).thenAnswer(
           (invocation) async => const Left(SomeFailure.get()),
         );
         await homePumpAppHelper(
           // mockFeedbackRepository: mockFeedbackRepository,
-          mockHomeRepository: mockHomeRepository,
+          mockFaqRepository: mockFaqRepository,
           mockAuthenticationRepository: mockAuthenticationRepository,
           tester: tester,
           mockUrlRepository: mockUrlRepository,
@@ -137,21 +137,21 @@ void main() {
     });
     group('${KGroupText.getEmptyList} ', () {
       setUp(() {
-        when(mockHomeRepository.getQuestions()).thenAnswer(
+        when(mockFaqRepository.getQuestions()).thenAnswer(
           (invocation) async => const Right([]),
         );
-        when(mockHomeRepository.addMockQuestions()).thenAnswer(
+        when(mockFaqRepository.addMockQuestions()).thenAnswer(
           (invocation) {},
         );
-        if (GetIt.I.isRegistered<IHomeRepository>()) {
-          GetIt.I.unregister<IHomeRepository>();
+        if (GetIt.I.isRegistered<IFaqRepository>()) {
+          GetIt.I.unregister<IFaqRepository>();
         }
-        GetIt.I.registerSingleton<IHomeRepository>(mockHomeRepository);
+        GetIt.I.registerSingleton<IFaqRepository>(mockFaqRepository);
       });
       testWidgets('${KGroupText.mockButton} ', (tester) async {
         await homePumpAppHelper(
           // mockFeedbackRepository: mockFeedbackRepository,
-          mockHomeRepository: mockHomeRepository,
+          mockFaqRepository: mockFaqRepository,
           mockAuthenticationRepository: mockAuthenticationRepository,
           tester: tester,
           mockUrlRepository: mockUrlRepository,
@@ -164,7 +164,7 @@ void main() {
     });
     group('${KGroupText.getList} ', () {
       setUp(() {
-        when(mockHomeRepository.getQuestions()).thenAnswer(
+        when(mockFaqRepository.getQuestions()).thenAnswer(
           (invocation) async => Right(KTestText.questionModelItems),
         );
       });
@@ -172,7 +172,7 @@ void main() {
       testWidgets('${KGroupText.intial} ', (tester) async {
         await homePumpAppHelper(
           // mockFeedbackRepository: mockFeedbackRepository,
-          mockHomeRepository: mockHomeRepository,
+          mockFaqRepository: mockFaqRepository,
           mockAuthenticationRepository: mockAuthenticationRepository,
           tester: tester,
           mockUrlRepository: mockUrlRepository,
@@ -189,7 +189,7 @@ void main() {
         testWidgets('${KGroupText.intial} ', (tester) async {
           await homePumpAppHelper(
             // mockFeedbackRepository: mockFeedbackRepository,
-            mockHomeRepository: mockHomeRepository,
+            mockFaqRepository: mockFaqRepository,
             mockAuthenticationRepository: mockAuthenticationRepository,
             tester: tester,
             mockGoRouter: mockGoRouter,
@@ -206,7 +206,7 @@ void main() {
             mockGoRouter: mockGoRouter,
             mockAuthenticationRepository: mockAuthenticationRepository,
             // mockFeedbackRepository: mockFeedbackRepository,
-            mockHomeRepository: mockHomeRepository,
+            mockFaqRepository: mockFaqRepository,
             mockUrlRepository: mockUrlRepository,
             // mockAppAuthenticationRepository:
             // mockAppAuthenticationRepository,
@@ -228,7 +228,7 @@ void main() {
               (tester) async {
             await homePumpAppHelper(
               // mockFeedbackRepository: mockFeedbackRepository,
-              mockHomeRepository: mockHomeRepository,
+              mockFaqRepository: mockFaqRepository,
               mockAuthenticationRepository: mockAuthenticationRepository,
               tester: tester,
               mockGoRouter: mockGoRouter,
@@ -257,7 +257,7 @@ void main() {
             testWidgets('${KRoute.profile.name} ', (tester) async {
               await homePumpAppHelper(
                 // mockFeedbackRepository: mockFeedbackRepository,
-                mockHomeRepository: mockHomeRepository,
+                mockFaqRepository: mockFaqRepository,
                 mockAuthenticationRepository: mockAuthenticationRepository,
                 tester: tester,
                 mockGoRouter: mockGoRouter,
@@ -281,7 +281,7 @@ void main() {
             //       mockGoRouter: mockGoRouter,
             //       mockAuthenticationRepository: mockAuthenticationRepository,
             //       // mockFeedbackRepository: mockFeedbackRepository,
-            //       mockHomeRepository: mockHomeRepository,
+            //       mockFaqRepository: mockFaqRepository,
             //       mockAppAuthenticationRepository:
             //           mockAppAuthenticationRepository,
             //     );
@@ -296,7 +296,7 @@ void main() {
           testWidgets('screen cards rout', (tester) async {
             await homePumpAppHelper(
               // mockFeedbackRepository: mockFeedbackRepository,
-              mockHomeRepository: mockHomeRepository,
+              mockFaqRepository: mockFaqRepository,
               mockAuthenticationRepository: mockAuthenticationRepository,
               tester: tester,
               mockGoRouter: mockGoRouter,
@@ -314,7 +314,7 @@ void main() {
           testWidgets('box widget navigation', (tester) async {
             await homePumpAppHelper(
               // mockFeedbackRepository: mockFeedbackRepository,
-              mockHomeRepository: mockHomeRepository,
+              mockFaqRepository: mockFaqRepository,
               mockAuthenticationRepository: mockAuthenticationRepository,
               tester: tester,
               mockGoRouter: mockGoRouter,
@@ -335,7 +335,7 @@ void main() {
               mockGoRouter: mockGoRouter,
               mockAuthenticationRepository: mockAuthenticationRepository,
               // mockFeedbackRepository: mockFeedbackRepository,
-              mockHomeRepository: mockHomeRepository,
+              mockFaqRepository: mockFaqRepository,
               mockUrlRepository: mockUrlRepository,
               // mockAppAuthenticationRepository:
               // mockAppAuthenticationRepository,
@@ -352,7 +352,7 @@ void main() {
               mockGoRouter: mockGoRouter,
               mockAuthenticationRepository: mockAuthenticationRepository,
               // mockFeedbackRepository: mockFeedbackRepository,
-              mockHomeRepository: mockHomeRepository,
+              mockFaqRepository: mockFaqRepository,
               mockUrlRepository: mockUrlRepository,
               // mockAppAuthenticationRepository:
               // mockAppAuthenticationRepository,
