@@ -390,6 +390,19 @@ abstract class KTestText {
     link: 'https://veteranam.info/$field',
     date: dateTime,
   );
+  static final emailModel = EmailModel(
+    id: id,
+    userId: user.id,
+    email: 'test.email@gmail.com',
+    date: dateTime,
+    isValid: true,
+  );
+  static final emailModelWrong = EmailModel(
+    id: id,
+    userId: user.id,
+    email: field,
+    date: dateTime,
+  );
 }
 
 abstract class KTestConstants {
