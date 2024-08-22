@@ -22,12 +22,14 @@ Future<void> mobSettingsInitialHelper(
     findsOneWidget,
   );
 
+  await languageSwitcherHelper(tester);
+
   expect(
     find.byKey(KWidgetkeys.screen.mobSettings.offlinesSwitcher),
     findsOneWidget,
   );
 
-  await customSwitcherHelper(tester: tester);
+  await switchHelper(tester: tester, enabled: false, isActive: true);
 
   expect(
     find.byKey(KWidgetkeys.screen.mobSettings.subtitle),

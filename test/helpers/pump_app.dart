@@ -44,6 +44,12 @@ extension PumpApp on WidgetTester {
               create: (context) => GetIt.I.get<MobFeedbackBloc>(),
             ),
             BlocProvider(
+              create: (context) => GetIt.I.get<MobFaqWatcherBloc>()
+                ..add(
+                  const MobFaqWatcherEvent.started(),
+                ),
+            ),
+            BlocProvider(
               create: (context) => GetIt.I.get<MobOfflineModeCubit>(),
             ),
           ],

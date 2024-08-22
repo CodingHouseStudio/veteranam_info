@@ -22,7 +22,7 @@ class _WidgetKeys {
   final chip = _ChipKeys();
   final filterPopupMenu = _FilterPopupMenuKeys();
   final pagination = _PaginationKeys();
-  final customSwitcher = _CustomSwitcherKeys();
+  final languageSwitcher = _LanguageSwitcherKeys();
   final checkPoint = _CheckPointKeys();
   final scaffold = _ScaffoldKeys();
   final profileCard = _ProfileKeys();

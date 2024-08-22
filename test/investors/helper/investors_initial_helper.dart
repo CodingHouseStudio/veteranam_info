@@ -11,9 +11,8 @@ Future<void> investorsInitialHelper(
     tester: tester,
     windowsTest: true,
     test: () async {
-      expect(find.byKey(KWidgetkeys.screen.investors.title), findsOneWidget);
-
       if (KTest.testIsWeb) {
+        expect(find.byKey(KWidgetkeys.screen.investors.title), findsOneWidget);
         // expect(find.byKey(KWidgetkeys.screen.investors.point),
         // findsOneWidget);
 
@@ -49,6 +48,11 @@ Future<void> investorsInitialHelper(
         await scrollingHelper(
           tester: tester,
           itemKey: KWidgetkeys.screen.investors.leftImages,
+        );
+      } else {
+        expect(
+          find.byKey(KWidgetkeys.widget.nawbar.pageName),
+          findsOneWidget,
         );
       }
 

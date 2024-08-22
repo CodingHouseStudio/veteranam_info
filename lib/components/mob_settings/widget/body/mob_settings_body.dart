@@ -19,7 +19,7 @@ class MobSettingsBodyWidget extends StatelessWidget {
         BoxWidget(
           key: KWidgetkeys.screen.mobSettings.faq,
           isDesk: false,
-          onTap: null,
+          onTap: () => context.goNamed(KRoute.mobFAQ.name),
           text: context.l10n.faq,
           textStyle: AppTextStyle.materialThemeTitleMediumBlack,
           icon: KIcon.arrowUpRight,
@@ -44,6 +44,7 @@ class MobSettingsBodyWidget extends StatelessWidget {
               LanguagesSwitcherWidget(
                 key: KWidgetkeys.screen.mobSettings.languagesSwitcher,
                 decoration: KWidgetTheme.boxDecorationNawbar,
+                unactiveIconColor: AppColors.materialThemeWhite,
               ),
             ],
           ),
@@ -62,14 +63,11 @@ class MobSettingsBodyWidget extends StatelessWidget {
                 style: AppTextStyle.materialThemeTitleMedium,
               ),
               BlocBuilder<MobOfflineModeCubit, MobMode>(
-                builder: (context, _) => CustomSwitcherWidget<MobMode>(
+                builder: (context, _) => SwitchWidget(
                   key: KWidgetkeys.screen.mobSettings.offlinesSwitcher,
-                  decoration: KWidgetTheme.boxDecorationNawbar,
-                  values: MobMode.values,
-                  getText: (value) => value.text,
-                  isCheck: (MobMode value) => _ == value,
-                  onSwitch: null,
-                  // () =>
+                  isSelected: _.isOffline,
+                  onChanged: null,
+                  //  () =>
                   //     context.read<MobOfflineModeCubit>().switchMode(),
                 ),
               ),

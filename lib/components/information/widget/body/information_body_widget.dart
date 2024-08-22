@@ -32,7 +32,7 @@ class InformationBodyWidget extends StatelessWidget {
             .add(const InformationWatcherEvent.started()),
         titleChildWidgetsFunction: ({required isDesk}) => [
           KSizedBox.kHeightSizedBox24,
-          ...TitleWidget.titleIconWidgetList(
+          TitleIconWidget(
             title: context.l10n.verifiedInformation,
             titleKey: KWidgetkeys.screen.information.title,
             isDesk: isDesk,

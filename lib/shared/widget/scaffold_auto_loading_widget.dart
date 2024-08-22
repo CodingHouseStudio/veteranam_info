@@ -17,7 +17,6 @@ class ScaffoldAutoLoadingWidget extends StatefulWidget {
     this.resetFilter,
     this.pageName,
     // this.showMobileNawbar,
-    this.pageNameKey,
   });
 
   final List<Widget> Function({required bool isDesk})?
@@ -34,7 +33,6 @@ class ScaffoldAutoLoadingWidget extends StatefulWidget {
   final void Function() loadDataAgain;
   final String? pageName;
   // final bool? showMobileNawbar;
-  final Key? pageNameKey;
 
   @override
   State<ScaffoldAutoLoadingWidget> createState() =>
@@ -166,7 +164,6 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
                           isTablet: isTablet,
                           pageName: widget.pageName,
                           // showMobileNawbar: widget.showMobileNawbar,
-                          pageNameKey: widget.pageNameKey,
                         ),
                       ),
                     if (titleChildWidget != null)

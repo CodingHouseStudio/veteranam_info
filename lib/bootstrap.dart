@@ -7,7 +7,6 @@ import 'package:flutter/widgets.dart';
 // ignore: depend_on_referenced_packages
 import 'package:flutter_web_plugins/url_strategy.dart' show usePathUrlStrategy;
 import 'package:intl/date_symbol_data_local.dart';
-import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:veteranam/shared/shared.dart';
 
 class AppBlocObserver extends BlocObserver {
@@ -28,16 +27,6 @@ class AppBlocObserver extends BlocObserver {
 
 /// COMMENT: Method adds dependencies in App
 Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
-  FlutterError.onError = (details) {
-    if (kIsWeb) {
-      Sentry.captureException(
-        details.exceptionAsString(),
-        stackTrace: details.stack,
-      );
-    }
-    log(details.exceptionAsString(), stackTrace: details.stack);
-  };
-
   Bloc.observer = const AppBlocObserver();
   configureDependencies();
 

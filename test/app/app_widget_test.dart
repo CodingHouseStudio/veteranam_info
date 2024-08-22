@@ -19,7 +19,7 @@ void main() {
   tearDown(GetIt.I.reset);
   group('${KScreenBlocName.app} ', () {
     late AuthenticationRepository mockAuthenticationRepository;
-    late IHomeRepository mockHomeRepository;
+    late IFaqRepository mockFaqRepository;
     late IDiscountRepository mockDiscountRepository;
     late IAppAuthenticationRepository mockAppAuthenticationRepository;
     late IReportRepository mockReportRepository;
@@ -28,7 +28,7 @@ void main() {
       mockAuthenticationRepository = MockAuthenticationRepository();
       mockDiscountRepository = MockIDiscountRepository();
       mockAppAuthenticationRepository = MockAppAuthenticationRepository();
-      mockHomeRepository = MockIHomeRepository();
+      mockFaqRepository = MockIFaqRepository();
       when(mockAuthenticationRepository.userSetting).thenAnswer(
         (realInvocation) => Stream.value(UserSetting.empty),
       );
@@ -41,7 +41,7 @@ void main() {
       when(mockAuthenticationRepository.currentUserSetting).thenAnswer(
         (realInvocation) => UserSetting.empty,
       );
-      when(mockHomeRepository.getQuestions()).thenAnswer(
+      when(mockFaqRepository.getQuestions()).thenAnswer(
         (invocation) async => Right(KTestText.questionModelItems),
       );
       when(mockAppAuthenticationRepository.currentUser).thenAnswer(
@@ -82,7 +82,7 @@ void main() {
     }
 
     void registerHomeBloc() {
-      final homeBloc = HomeWatcherBloc(homeRepository: mockHomeRepository);
+      final homeBloc = HomeWatcherBloc(faqRepository: mockFaqRepository);
       if (GetIt.I.isRegistered<HomeWatcherBloc>()) {
         GetIt.I.unregister<HomeWatcherBloc>();
       }

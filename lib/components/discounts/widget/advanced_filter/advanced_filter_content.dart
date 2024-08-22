@@ -3,15 +3,23 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:veteranam/components/components.dart';
 import 'package:veteranam/shared/shared.dart';
 
-abstract class AdvanceFilter {
-  static Widget listView({
-    required bool isDesk,
-    required BuildContext context,
-    required List<dynamic> filterLocationes,
-    required List<DiscountEnum> sorting,
-    required void Function(dynamic) onChange,
-    required void Function(DiscountEnum) onChangeSorting,
-  }) {
+class AdvancedFilterContent extends StatelessWidget {
+  const AdvancedFilterContent({
+    required this.isDesk,
+    required this.filterLocationes,
+    required this.sorting,
+    required this.onChange,
+    required this.onChangeSorting,
+    super.key,
+  });
+  final bool isDesk;
+  final List<dynamic> filterLocationes;
+  final List<DiscountEnum> sorting;
+  final void Function(dynamic) onChange;
+  final void Function(DiscountEnum) onChangeSorting;
+
+  @override
+  Widget build(BuildContext context) {
     final body = _widgetList(
       isDesk: isDesk,
       context: context,
@@ -31,39 +39,7 @@ abstract class AdvanceFilter {
     );
   }
 
-  static Widget resetButton({
-    required bool isDesk,
-    required BuildContext context,
-    required void Function()? resetEvent,
-  }) =>
-      Padding(
-        padding: isDesk
-            ? EdgeInsets.zero
-            : const EdgeInsets.only(left: KPadding.kPaddingSize16),
-        child: Align(
-          alignment: Alignment.centerLeft,
-          child: TextButton(
-            key: KWidgetkeys.screen.discounts.advancedFilterResetButton,
-            style: KButtonStyles.borderBlackButtonStyle.copyWith(
-              padding: isDesk
-                  ? null
-                  : const WidgetStatePropertyAll(
-                      EdgeInsets.symmetric(
-                        vertical: KPadding.kPaddingSize8,
-                        horizontal: KPadding.kPaddingSize24,
-                      ),
-                    ),
-            ),
-            onPressed: resetEvent,
-            child: Text(
-              context.l10n.resetAll,
-              style: AppTextStyle.materialThemeTitleMedium,
-            ),
-          ),
-        ),
-      );
-
-  static List<Widget> _widgetList({
+  List<Widget> _widgetList({
     required bool isDesk,
     required BuildContext context,
     required List<dynamic> filterLocationes,
@@ -90,9 +66,8 @@ abstract class AdvanceFilter {
                   style: AppTextStyle.materialThemeTitleLarge,
                 ),
               ),
-              resetButton(
+              AdvancedFilterResetButton(
                 isDesk: true,
-                context: context,
                 resetEvent: () => context
                     .read<DiscountWatcherBloc>()
                     .add(const DiscountWatcherEvent.filterReset()),
@@ -201,50 +176,6 @@ abstract class AdvanceFilter {
       ),
     ];
   }
-
-  static Widget button({
-    required bool isDesk,
-    required void Function() onPressed,
-    required BuildContext context,
-    Icon? icon,
-  }) =>
-      Align(
-        alignment: Alignment.centerLeft,
-        child: TextButton.icon(
-          key: KWidgetkeys.screen.discounts.advancedFilterButton,
-          style: KButtonStyles.advancedButtonStyle,
-          label: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              if (isDesk)
-                Expanded(
-                  child: Text(
-                    context.l10n.advancedFilter,
-                    style: isDesk
-                        ? AppTextStyle.materialThemeHeadlineSmall
-                        : AppTextStyle.materialThemeTitleMedium,
-                  ),
-                )
-              else
-                Text(
-                  context.l10n.advancedFilter,
-                  style: isDesk
-                      ? AppTextStyle.materialThemeHeadlineSmall
-                      : AppTextStyle.materialThemeTitleMedium,
-                ),
-              if (icon != null) ...[KSizedBox.kWidthSizedBox8, icon],
-            ],
-          ),
-          // KSizedBox.kWidthSizedBox8,
-          icon: IconWidget(
-            icon: KIcon.tune,
-            background: AppColors.materialThemeKeyColorsNeutral,
-            padding: isDesk ? KPadding.kPaddingSize20 : KPadding.kPaddingSize12,
-          ),
-          onPressed: onPressed,
-          //if (isDesk) KIcon.meil,
-        ),
-      );
 
   static bool _isCheck({
     required dynamic value,
