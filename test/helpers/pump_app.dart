@@ -49,6 +49,9 @@ extension PumpApp on WidgetTester {
                   const MobFaqWatcherEvent.started(),
                 ),
             ),
+            BlocProvider(
+              create: (context) => GetIt.I.get<MobOfflineModeCubit>(),
+            ),
           ],
         ],
         child: BlocBuilder<AuthenticationBloc, AuthenticationState>(

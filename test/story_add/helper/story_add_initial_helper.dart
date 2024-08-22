@@ -57,7 +57,7 @@ Future<void> storyAddInitialHelper(
         findsOneWidget,
       );
 
-      await switchHelper(tester);
+      await switchHelper(tester: tester);
 
       expect(
         find.byKey(KWidgetkeys.screen.storyAdd.switchText),

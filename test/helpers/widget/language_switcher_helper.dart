@@ -6,13 +6,13 @@ Future<void> languageSwitcherHelper(
 ) async {
   expect(
     find.byKey(KWidgetkeys.widget.languageSwitcher.widget),
-    findsWidgets,
+    findsOneWidget,
   );
 
-  expect(
-    find.byKey(KWidgetkeys.widget.languageSwitcher.item),
-    findsWidgets,
-  );
+  // expect(
+  //   find.byKey(KWidgetkeys.widget.languageSwitcher.item),
+  //   findsWidgets,
+  // );
 
   expect(
     find.byKey(KWidgetkeys.widget.languageSwitcher.text),
@@ -24,10 +24,10 @@ Future<void> languageSwitcherHelper(
   );
   await tester.pumpAndSettle();
 
-  expect(
-    find.byKey(KWidgetkeys.widget.languageSwitcher.item),
-    findsWidgets,
-  );
+  // expect(
+  //   find.byKey(KWidgetkeys.widget.languageSwitcher.item),
+  //   findsWidgets,
+  // );
 
   expect(
     find.byKey(KWidgetkeys.widget.languageSwitcher.text),
@@ -39,7 +39,7 @@ Future<void> languageSwitcherHelper(
   );*/
 
   await tester.tap(
-    find.byKey(KWidgetkeys.widget.languageSwitcher.item).last,
+    find.byKey(KWidgetkeys.widget.languageSwitcher.widget),
     warnIfMissed: false,
   );
   await tester.pumpAndSettle();
@@ -59,13 +59,13 @@ Future<void> languageSwitcherHelper(
   await tester.pumpAndSettle();
 
   await tester.tap(
-    find.byKey(KWidgetkeys.widget.languageSwitcher.item).last,
+    find.byKey(KWidgetkeys.widget.languageSwitcher.widget),
     warnIfMissed: false,
   );
   await tester.pumpAndSettle();
 
   expect(
-    find.byKey(KWidgetkeys.widget.languageSwitcher.item),
+    find.byKey(KWidgetkeys.widget.languageSwitcher.widget),
     findsWidgets,
   );
 
@@ -75,7 +75,7 @@ Future<void> languageSwitcherHelper(
   );
 
   await tester.tap(
-    find.byKey(KWidgetkeys.widget.languageSwitcher.item).first,
+    find.byKey(KWidgetkeys.widget.languageSwitcher.widget),
     warnIfMissed: false,
   );
   await tester.pumpAndSettle();

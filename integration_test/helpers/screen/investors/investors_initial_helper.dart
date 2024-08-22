@@ -6,10 +6,12 @@ import '../../../test_dependency.dart';
 Future<void> investorsInitialHelper(
   WidgetTester tester,
 ) async {
-  expect(find.byKey(KWidgetkeys.screen.investors.title), findsOneWidget);
+  expect(find.byKey(KWidgetkeys.screen.investors.screen), findsOneWidget);
 
   if (KTest.testIsWeb) {
-    // expect(find.byKey(KWidgetkeys.screen.investors.point), findsOneWidget);
+    expect(find.byKey(KWidgetkeys.screen.investors.title), findsOneWidget);
+    // expect(find.byKey(KWidgetkeys.screen.investors.point),
+    // findsOneWidget);
 
     expect(
       find.byKey(KWidgetkeys.screen.investors.feedbackTitle),
@@ -43,6 +45,11 @@ Future<void> investorsInitialHelper(
     await scrollingHelperInt(
       tester: tester,
       itemKey: KWidgetkeys.screen.investors.leftImages,
+    );
+  } else {
+    expect(
+      find.byKey(KWidgetkeys.widget.nawbar.pageName),
+      findsOneWidget,
     );
   }
 

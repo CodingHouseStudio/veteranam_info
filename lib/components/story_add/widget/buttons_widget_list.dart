@@ -22,7 +22,7 @@ List<Widget> _buttonsWidgetList({
                                 .read<StoryAddBloc>()
                                 .state
                                 .isAnonymously,
-                            onChanged: (p0) => context.read<StoryAddBloc>().add(
+                            onChanged: () => context.read<StoryAddBloc>().add(
                                   const StoryAddEvent.anonymouslyUpdated(),
                                 ),
                           ),
@@ -56,7 +56,7 @@ List<Widget> _buttonsWidgetList({
                 SwitchWidget(
                   key: KWidgetkeys.screen.storyAdd.switchAnonymously,
                   isSelected: context.read<StoryAddBloc>().state.isAnonymously,
-                  onChanged: (p0) => context
+                  onChanged: () => context
                       .read<StoryAddBloc>()
                       .add(const StoryAddEvent.anonymouslyUpdated()),
                 ),

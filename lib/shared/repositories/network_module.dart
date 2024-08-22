@@ -3,6 +3,6 @@ import 'package:injectable/injectable.dart';
 
 @module
 abstract class NetworkModule {
-  @Singleton(order: -3)
+  @singleton
   Connectivity get connectivity => Connectivity();
 }
