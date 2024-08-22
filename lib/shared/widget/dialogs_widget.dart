@@ -292,19 +292,15 @@ class _DialogsWidget {
                   scrollable: true,
                   content: UserEmailDialog(
                     isDesk: isTablet,
-                    sendOnPressed: () {
-                      context.read<DiscountUserEmailFormBloc>().add(
-                            const DiscountUserEmailFormEvent.sendEmail(),
-                          );
-                      context.pop();
-                    },
-                    closeOnPressed: () {
-                      context.read<DiscountUserEmailFormBloc>().add(
-                            const DiscountUserEmailFormEvent
-                                .sendEmailAfterClose(),
-                          );
-                      context.pop();
-                    },
+                    sendOnPressed: () =>
+                        context.read<DiscountUserEmailFormBloc>().add(
+                              const DiscountUserEmailFormEvent.sendEmail(),
+                            ),
+                    closeOnPressed: () =>
+                        context.read<DiscountUserEmailFormBloc>().add(
+                              const DiscountUserEmailFormEvent
+                                  .sendEmailAfterClose(),
+                            ),
                     onChanged: (text) =>
                         context.read<DiscountUserEmailFormBloc>().add(
                               DiscountUserEmailFormEvent.updatedEmail(text),

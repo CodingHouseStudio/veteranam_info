@@ -14,9 +14,9 @@ Future<void> userEmailCloseHelper({
 
   await tester.tap(find.byKey(KWidgetkeys.widget.userEmailDialog.icon));
 
+  await tester.pumpAndSettle();
+
   verify(
     () => mockGoRouter.pop(),
   ).called(1);
-
-  await tester.pumpAndSettle();
 }

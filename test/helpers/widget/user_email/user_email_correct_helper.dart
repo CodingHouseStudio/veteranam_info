@@ -1,11 +1,12 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:veteranam/shared/shared.dart';
+import 'package:mocktail/mocktail.dart';
 
 import '../../../test_dependency.dart';
 
-Future<void> userEmailCorrectHelper(
-  WidgetTester tester,
-) async {
+Future<void> userEmailCorrectHelper({
+  required WidgetTester tester,
+  required MockGoRouter mockGoRouter,
+}) async {
   await userEmailHelper(tester);
 
   await userEmailSaveHelper(
@@ -13,5 +14,7 @@ Future<void> userEmailCorrectHelper(
     email: KTestText.emailModel.email,
   );
 
-  expect(find.byKey(KWidgetkeys.widget.userEmailDialog.field), findsNothing);
+  verify(
+    () => mockGoRouter.pop(),
+  ).called(1);
 }
