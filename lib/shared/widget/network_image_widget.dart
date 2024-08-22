@@ -105,7 +105,8 @@ class _NetworkImageWidgetState extends State<NetworkImageWidget> {
   }
 
   String get _url => Config.isProduction && kReleaseMode
-      ? 'https://veteranam.info$_urlPrefix${widget.imageUrl}'
+      ? '${kIsWeb ? Uri.base.origin : 'https://veteranam.info'}'
+          '$_urlPrefix${widget.imageUrl}'
       : widget.imageUrl;
 
   String get _urlPrefix => widget.size == null
