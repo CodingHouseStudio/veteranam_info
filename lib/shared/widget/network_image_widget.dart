@@ -1,5 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:veteranam/shared/shared.dart';
 // import 'package:cached_network_image/cached_network_image.dart';
 
@@ -24,42 +26,64 @@ class NetworkImageWidget extends StatefulWidget {
 class _NetworkImageWidgetState extends State<NetworkImageWidget> {
   @override
   void didChangeDependencies() {
-    precacheImage(
-      CachedNetworkImageProvider(
-        widget.imageUrl,
-        headers: const {
-          'Cache-Control': 'max-age=3600',
-        },
-      ),
-      context,
-    );
+    if (kIsWeb || context.read<MobOfflineModeCubit>().state.isOffline) {
+      precacheImage(
+        CachedNetworkImageProvider(
+          widget.imageUrl,
+          headers: const {
+            'Cache-Control': 'max-age=3600',
+          },
+        ),
+        context,
+      );
+    }
     super.didChangeDependencies();
   }
 
   @override
   Widget build(BuildContext context) {
-    return CachedNetworkImage(
-      imageUrl: widget.imageUrl,
-      fit: widget.fit,
-      height: widget.size,
-      width: widget.size,
-      errorWidget: (context, url, error) => KIcon.error,
-      httpHeaders: const {
-        'Cache-Control': 'max-age=3600',
-      },
-      placeholder: (context, url) =>
-          // skeletonizerLoading
-          //     ? const SkeletonizerWidget(
-          //         isLoading: true,
-          //         child: CircularProgressIndicator.adaptive(),
-          //       )
-          //     :
-          const CircularProgressIndicator.adaptive(
-        valueColor:
-            AlwaysStoppedAnimation(AppColors.materialThemeKeyColorsPrimary),
-        strokeWidth: 5,
-      ),
-    );
+    if (kIsWeb || context.read<MobOfflineModeCubit>().state.isOffline) {
+      return CachedNetworkImage(
+        imageUrl: widget.imageUrl,
+        fit: widget.fit,
+        height: widget.size,
+        width: widget.size,
+        errorWidget: (context, url, error) => KIcon.error,
+        httpHeaders: const {
+          'Cache-Control': 'max-age=3600',
+        },
+        placeholder: (context, url) =>
+            // skeletonizerLoading
+            //     ? const SkeletonizerWidget(
+            //         isLoading: true,
+            //         child: CircularProgressIndicator.adaptive(),
+            //       )
+            //     :
+            const CircularProgressIndicator.adaptive(
+          valueColor:
+              AlwaysStoppedAnimation(AppColors.materialThemeKeyColorsPrimary),
+          strokeWidth: 5,
+        ),
+      );
+    } else {
+      return Image.network(
+        widget.imageUrl,
+        fit: widget.fit,
+        height: widget.size,
+        width: widget.size,
+        errorBuilder: (context, url, error) => KIcon.error,
+        loadingBuilder: (context, child, loadingProgress) {
+          if (loadingProgress == null) {
+            return child;
+          }
+          return const CircularProgressIndicator.adaptive(
+            valueColor:
+                AlwaysStoppedAnimation(AppColors.materialThemeKeyColorsPrimary),
+            strokeWidth: 5,
+          );
+        },
+      );
+    }
     // if (KTest.testIsWeb) {
     //   return _NetworkWebImageWidget(
     //     imageUrl: imageUrl,

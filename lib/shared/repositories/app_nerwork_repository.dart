@@ -8,7 +8,7 @@ import 'package:veteranam/shared/shared.dart';
 /// A singleton class that implements the [IAppNetworkRepository] interface.
 /// This class is responsible for monitoring network connectivity and caching
 /// the results.
-@Singleton(as: IAppNetworkRepository, order: -2)
+@Singleton(as: IAppNetworkRepository)
 class AppNetworkRepository implements IAppNetworkRepository {
   /// Constructor for [AppNetworkRepository].
   /// Takes [Connectivity] and [CacheClient] as dependencies.

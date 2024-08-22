@@ -74,7 +74,7 @@ Future<void> employerInitialHelper(
         findsOneWidget,
       );
 
-      await switchHelper(tester);
+      await switchHelper(tester: tester);
 
       expect(
         find.byKey(KWidgetkeys.screen.employer.textSwitchWidget),
