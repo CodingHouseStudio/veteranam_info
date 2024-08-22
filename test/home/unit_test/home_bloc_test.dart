@@ -13,11 +13,11 @@ void main() {
   setUpAll(setUpGlobal);
   group('${KScreenBlocName.home} ${KGroupText.bloc}', () {
     late HomeWatcherBloc homeWatcherBloc;
-    late IHomeRepository mockHomeRepository;
+    late IFaqRepository mockFaqRepository;
     setUp(() {
-      mockHomeRepository = MockIHomeRepository();
+      mockFaqRepository = MockIFaqRepository();
       homeWatcherBloc = HomeWatcherBloc(
-        homeRepository: mockHomeRepository,
+        faqRepository: mockFaqRepository,
       );
     });
 
@@ -26,7 +26,7 @@ void main() {
       ' when load questionModel list',
       build: () => homeWatcherBloc,
       act: (bloc) async {
-        when(mockHomeRepository.getQuestions()).thenAnswer(
+        when(mockFaqRepository.getQuestions()).thenAnswer(
           (_) async => Right(KTestText.questionModelItems),
         );
         bloc.add(const HomeWatcherEvent.started());
@@ -44,7 +44,7 @@ void main() {
       'emits [HomeWatcherState.faulure()] when error',
       build: () => homeWatcherBloc,
       act: (bloc) async {
-        when(mockHomeRepository.getQuestions()).thenAnswer(
+        when(mockFaqRepository.getQuestions()).thenAnswer(
           (_) async => const Left(SomeFailure.serverError()),
         );
         bloc.add(const HomeWatcherEvent.started());

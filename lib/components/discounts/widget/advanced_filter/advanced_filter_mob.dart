@@ -11,7 +11,7 @@ class AdvancedFilterMob extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AdvanceFilter.button(
+    return AdvancedFilterButton(
       //   key: KWidgetkeys.screen.discounts.advancedFilterButton,
       //   style: KButtonStyles.advancedButtonStyle,
       //   label: Text(
@@ -46,7 +46,6 @@ class AdvancedFilterMob extends StatelessWidget {
       },
 
       isDesk: false,
-      context: context,
     );
   }
 }
@@ -81,9 +80,8 @@ class AdvancedFilterMobDialog extends StatelessWidget {
               //   ],
               // ),
               Expanded(
-                child: AdvanceFilter.listView(
+                child: AdvancedFilterContent(
                   isDesk: false,
-                  context: context,
                   onChange: (index) => context
                       .read<AdvancedFilterMobCubit>()
                       .changeFilterList(index),
@@ -97,9 +95,8 @@ class AdvancedFilterMobDialog extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  AdvanceFilter.resetButton(
+                  AdvancedFilterResetButton(
                     isDesk: false,
-                    context: context,
                     resetEvent: _.sorting.isNotEmpty ||
                             _.filtersLocation.isNotEmpty
                         ? () => context.read<AdvancedFilterMobCubit>().reset()

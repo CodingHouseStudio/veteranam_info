@@ -10,6 +10,7 @@ export 'home/home.dart';
 export 'information/information.dart';
 export 'investors/investors.dart';
 export 'login/login.dart';
+export 'mob_faq/mob_faq.dart';
 export 'mob_settings/mob_settings.dart';
 export 'my_discounts/my_discounts.dart';
 export 'my_story/my_story.dart';

@@ -103,7 +103,39 @@ Future<void> advancedFilterHelper(
 
   await chekPointSignleTapHelper(
     tester: tester,
-    tapItemLast: true,
+    hasAmount: true,
+  );
+
+  await chekPointSignleTapHelper(
+    tester: tester,
+    index: 3,
+    hasAmount: true,
+  );
+
+  await chekPointSignleTapHelper(
+    tester: tester,
+    index: 2,
+    hasAmount: true,
+  );
+
+  await tester.tap(
+    find.byKey(KWidgetkeys.screen.discounts.appliedFilterItems).first,
+    warnIfMissed: false,
+  );
+
+  await tester.tap(
+    find.byKey(KWidgetkeys.screen.discounts.appliedFilterItems).last,
+    warnIfMissed: false,
+  );
+
+  await chekPointSignleTapHelper(
+    tester: tester,
+    hasAmount: true,
+  );
+
+  await chekPointSignleTapHelper(
+    tester: tester,
+    index: 3,
     hasAmount: true,
   );
 

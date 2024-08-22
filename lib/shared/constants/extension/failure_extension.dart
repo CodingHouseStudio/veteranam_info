@@ -134,6 +134,19 @@ extension HomeFailureValue on HomeFailure {
   }
 }
 
+extension MobFAQFailureValue on MobFAQFailure {
+  String value(BuildContext context) {
+    switch (this) {
+      case MobFAQFailure.error:
+        return context.l10n.error;
+      case MobFAQFailure.get:
+        return context.l10n.getFailure;
+      case MobFAQFailure.network:
+        return context.l10n.networkFailure;
+    }
+  }
+}
+
 extension MyStoryFailureValue on MyStoryFailure {
   String value(BuildContext context) {
     switch (this) {

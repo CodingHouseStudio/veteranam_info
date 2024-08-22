@@ -5,11 +5,8 @@ import 'package:injectable/injectable.dart';
 import 'package:veteranam/shared/shared.dart';
 
 enum MobMode {
-  online('Off'),
-  offline('On');
-
-  const MobMode(this.text);
-  final String text;
+  online,
+  offline;
 
   bool get isOffline => this == MobMode.offline;
   MobMode get switchMode => isOffline ? MobMode.online : MobMode.offline;

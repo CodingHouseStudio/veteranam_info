@@ -46,7 +46,7 @@ Future<void> menuDialogHelper(
     findsOneWidget,
   );
 
-  await customSwitcherHelper(tester: tester);
+  await languageSwitcherHelper(tester);
 
   expect(
     find.byKey(KWidgetkeys.widget.menuDialog.linkedIn),

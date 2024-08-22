@@ -36,7 +36,7 @@ Future<void> nawbarHelper({
     if (language.isNotEmpty) {
       expect(find.byKey(KWidgetkeys.widget.nawbar.language), findsOneWidget);
 
-      await customSwitcherHelper(tester: tester);
+      await languageSwitcherHelper(tester);
     }
   } else {
     language = find.byKey(KWidgetkeys.widget.nawbar.language).evaluate();
@@ -44,7 +44,7 @@ Future<void> nawbarHelper({
     if (language.isNotEmpty) {
       expect(find.byKey(KWidgetkeys.widget.nawbar.language), findsOneWidget);
 
-      await customSwitcherHelper(tester: tester);
+      await languageSwitcherHelper(tester);
     }
 
     if (language.isNotEmpty) {

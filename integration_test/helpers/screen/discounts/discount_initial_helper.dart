@@ -6,18 +6,24 @@ import '../../../test_dependency.dart';
 Future<void> discountsInitialHelper(
   WidgetTester tester,
 ) async {
-  expect(
-    find.byKey(KWidgetkeys.screen.discounts.title),
-    findsOneWidget,
-  );
+  expect(find.byKey(KWidgetkeys.screen.discounts.screen), findsOneWidget);
 
   if (!KTest.testIsWeb) {
+    expect(
+      find.byKey(KWidgetkeys.widget.nawbar.pageName),
+      findsOneWidget,
+    );
     //   expect(
     //     find.byKey(KWidgetkeys.screen.discounts.titlePoint),
     //     findsOneWidget,
     //   );
     // } else {
     await mobNavigationHelper(tester);
+  } else {
+    expect(
+      find.byKey(KWidgetkeys.screen.discounts.title),
+      findsOneWidget,
+    );
   }
 
   expect(
@@ -33,6 +39,7 @@ Future<void> discountsInitialHelper(
       findsOneWidget,
     );
   }
+
   await advancedFilterHelper(tester);
 
   expect(
@@ -51,27 +58,4 @@ Future<void> discountsInitialHelper(
     find.byKey(KWidgetkeys.screen.discounts.buttonMock),
     findsNothing,
   );
-
-  // await scrollingHelper(
-  //   tester: tester,
-  //   offset: KTestConstants.scrollingUp500,
-  // );
-
-  // expect(
-  //   find.byKey(KWidgetkeys.screen.discounts.button),
-  //   findsOneWidget,
-  // );
-
-  // expect(
-  //   find.byKey(KWidgetkeys.screen.discounts.buttonIcon),
-  //   findsNothing,
-  // );
-
-  // await changeWindowSizeHelper(
-  //   tester: tester,
-  //   test: () async => expect(
-  //     find.byKey(KWidgetkeys.screen.discounts.buttonIcon),
-  //     findsOneWidget,
-  //   ),
-  // );
 }

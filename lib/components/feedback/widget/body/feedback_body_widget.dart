@@ -7,7 +7,6 @@ import 'package:veteranam/shared/shared.dart';
 part '../feedback_box_widget.dart';
 part '../field_widget_list.dart';
 part '../form_widget_list.dart';
-part '../title_widget_list.dart';
 
 class FeedbackBodyWidget extends StatefulWidget {
   const FeedbackBodyWidget({super.key});
@@ -53,12 +52,9 @@ class _FeedbackBodyWidgetState extends State<FeedbackBodyWidget> {
                     FeedbackEnum.success ||
                 context.read<FeedbackBloc>().state.formState ==
                     FeedbackEnum.sendingMessage) ...[
-              ..._titleWidgetList(
+              FeedbackTitle(
                 isDesk: isDesk,
-                context: context,
                 title: context.l10n.thanks,
-                titleSecondPart: null,
-                text: null,
                 secondText: context.l10n.thanks,
               ),
               ..._feedbackBoxWidgetList(
@@ -69,9 +65,8 @@ class _FeedbackBodyWidgetState extends State<FeedbackBodyWidget> {
                 context: context,
               ),
             ] else ...[
-              ..._titleWidgetList(
+              FeedbackTitle(
                 isDesk: isDesk,
-                context: context,
                 title: context.l10n.write,
                 titleSecondPart: '${context.l10n.us} ${context.l10n.aMessage}',
                 text: '${context.l10n.write} ${context.l10n.us}',

@@ -28,7 +28,6 @@ class DiscountBodyWidget extends StatelessWidget {
               loadingStatus: _.loadingStatus,
               cardListIsEmpty: _.filteredDiscountModelItems.isEmpty,
               pageName: context.l10n.discounts,
-              pageNameKey: KWidgetkeys.screen.discounts.title,
               resetFilter: () => context.read<DiscountWatcherBloc>().add(
                     const DiscountWatcherEvent.filterReset(),
                   ),
@@ -38,7 +37,7 @@ class DiscountBodyWidget extends StatelessWidget {
               titleChildWidgetsFunction: ({required isDesk}) => [
                 KSizedBox.kHeightSizedBox24,
                 if (KTest.testIsWeb) ...[
-                  ...TitleWidget.pointTitleWidgetList(
+                  TitlePointWidget(
                     title: context.l10n.specialOffers,
                     titleKey: KWidgetkeys.screen.discounts.title,
                     titleSecondPart: context.l10n.forVeteransAndTheirFamilies,

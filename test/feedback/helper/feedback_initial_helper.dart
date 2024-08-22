@@ -11,6 +11,12 @@ Future<void> feedbackInitialHelper(
     tester: tester,
     windowsTest: true,
     test: () async {
+      if (!KTest.testIsWeb) {
+        expect(
+          find.byKey(KWidgetkeys.widget.nawbar.pageName),
+          findsOneWidget,
+        );
+      }
       // expect(
       //   find.byKey(KWidgetkeys.screen.feedback.pointText),
       //   findsOneWidget,

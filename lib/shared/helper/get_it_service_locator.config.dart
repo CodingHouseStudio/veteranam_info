@@ -33,6 +33,8 @@ import 'package:veteranam/components/information/bloc/information_watcher_bloc.d
 import 'package:veteranam/components/investors/bloc/investors_watcher_bloc.dart'
     as _i609;
 import 'package:veteranam/components/login/bloc/login_bloc.dart' as _i1025;
+import 'package:veteranam/components/mob_faq/bloc/mob_faq_watcher_bloc.dart'
+    as _i687;
 import 'package:veteranam/components/my_discounts/bloc/my_discounts_watcher_bloc.dart'
     as _i1032;
 import 'package:veteranam/components/my_story/bloc/my_story_watcher_bloc.dart'
@@ -71,10 +73,10 @@ import 'package:veteranam/shared/repositories/authentication_repository.dart'
     as _i208;
 import 'package:veteranam/shared/repositories/discount_repository.dart'
     as _i452;
+import 'package:veteranam/shared/repositories/faq_repository.dart' as _i1007;
 import 'package:veteranam/shared/repositories/feedback_repository.dart'
     as _i361;
 import 'package:veteranam/shared/repositories/firebase_module.dart' as _i926;
-import 'package:veteranam/shared/repositories/home_repository.dart' as _i713;
 import 'package:veteranam/shared/repositories/information_repository.dart'
     as _i154;
 import 'package:veteranam/shared/repositories/investors_repository.dart'
@@ -117,14 +119,18 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i452.DiscountRepository(),
       signalsReady: true,
     );
+    gh.singleton<_i1001.IFaqRepository>(() => _i1007.FaqRepository());
     gh.singleton<_i1001.IFeedbackRepository>(() => _i361.FeedbackRepository());
+    gh.factory<_i522.HomeWatcherBloc>(() =>
+        _i522.HomeWatcherBloc(faqRepository: gh<_i1001.IFaqRepository>()));
+    gh.factory<_i687.MobFaqWatcherBloc>(() =>
+        _i687.MobFaqWatcherBloc(faqRepository: gh<_i1001.IFaqRepository>()));
     gh.lazySingleton<_i1001.IUrlRepository>(() => _i929.UrlRepository());
     gh.singleton<_i1001.IStorage>(() => _i949.SecureStorageRepository());
     gh.singleton<_i1001.IInvestorsRepository>(
       () => _i994.InvestorsRepository(),
       signalsReady: true,
     );
-    gh.singleton<_i1001.IHomeRepository>(() => _i713.HomeRepository());
     gh.singleton<_i1001.IAppAuthenticationRepository>(
         () => _i99.AppAuthenticationRepository(
               gh<_i1001.IStorage>(),
@@ -142,8 +148,6 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i205.ReportRepository(),
       signalsReady: true,
     );
-    gh.factory<_i522.HomeWatcherBloc>(() =>
-        _i522.HomeWatcherBloc(homeRepository: gh<_i1001.IHomeRepository>()));
     gh.singleton<_i1001.IAppNetworkRepository>(() => _i336.AppNetworkRepository(
           gh<_i895.Connectivity>(),
           gh<_i1001.CacheClient>(),
