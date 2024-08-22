@@ -111,8 +111,9 @@ class _NetworkImageWidgetState extends State<NetworkImageWidget> {
       : widget.imageUrl;
 
   String get _urlPrefix => widget.size == null
-      ? '/cdn-cgi/image/format=auto/'
-      : '/cdn-cgi/image/format=auto,width=${widget.size},${widget.size}/';
+      ? '/cdn-cgi/image/${kIsWeb ? 'quality=100' : 'quality=85'}/'
+      : '/cdn-cgi/image/${kIsWeb ? 'quality=100' : 'quality=85'},width=${widget.size},${widget.size}/';
+  //format=auto - standart value
 }
 
 // class _NetworkMobileImageWidget extends StatelessWidget {
