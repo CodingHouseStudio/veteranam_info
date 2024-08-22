@@ -1,12 +1,11 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-
 import 'package:veteranam/shared/shared.dart';
 
+part 'discount_link_form_bloc.freezed.dart';
 part 'discount_link_form_event.dart';
 part 'discount_link_form_state.dart';
-part 'discount_link_form_bloc.freezed.dart';
 
 @Injectable()
 class DiscountLinkFormBloc
@@ -41,8 +40,7 @@ class DiscountLinkFormBloc
     Emitter<DiscountLinkFormState> emit,
   ) async {
     emit(
-      const _Initial(
-        link: LinkFieldModel.pure(),
+      state.copyWith(
         formState: LinkEnum.success,
       ),
     );
@@ -52,6 +50,13 @@ class DiscountLinkFormBloc
         userId: _appAuthenticationRepository.currentUser.id,
         link: state.link.value,
         date: ExtendedDateTime.current,
+      );
+
+      emit(
+        const _Initial(
+          link: LinkFieldModel.pure(),
+          formState: LinkEnum.success,
+        ),
       );
       // emit(
       //   state.copyWith(
