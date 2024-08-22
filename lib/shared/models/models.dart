@@ -1,5 +1,6 @@
 export 'convertors/convertors.dart';
 export 'discount_model.dart';
+export 'email_model.dart';
 export 'employee_respond_model.dart';
 export 'failure_model/failure_model.dart';
 export 'feedback_model.dart';

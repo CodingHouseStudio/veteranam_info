@@ -31,5 +31,6 @@ export 'sign_up_bottom_buttons_helper.dart';
 export 'statistic_box_helper.dart';
 export 'story_card_helper.dart';
 export 'switch_helper.dart';
+export 'user_email/user_email.dart';
 export 'work_card_helper.dart';
 export 'work_request_card_helper.dart';
