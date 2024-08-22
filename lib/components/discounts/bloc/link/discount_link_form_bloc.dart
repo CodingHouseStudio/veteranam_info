@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -35,10 +37,10 @@ class DiscountLinkFormBloc
     emit(state.copyWith(link: linkFieldModel, formState: LinkEnum.inProgress));
   }
 
-  Future<void> _onSendLink(
+  void _onSendLink(
     _SendLink event,
     Emitter<DiscountLinkFormState> emit,
-  ) async {
+  ) {
     emit(
       state.copyWith(
         formState: LinkEnum.success,
@@ -65,7 +67,7 @@ class DiscountLinkFormBloc
       //   ),
       // );
       // final result =
-      await _discountRepository.sendLink(discountLinkFormModel);
+      unawaited(_discountRepository.sendLink(discountLinkFormModel));
       // result.fold(
       //   (l) => emit(
       //     state.copyWith(
