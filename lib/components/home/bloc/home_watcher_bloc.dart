@@ -11,8 +11,8 @@ part 'home_watcher_state.dart';
 
 @Injectable()
 class HomeWatcherBloc extends Bloc<HomeWatcherEvent, HomeWatcherState> {
-  HomeWatcherBloc({required IHomeRepository homeRepository})
-      : _homeRepository = homeRepository,
+  HomeWatcherBloc({required IFaqRepository faqRepository})
+      : _faqRepository = faqRepository,
         super(
           const HomeWatcherState(
             questionModelItems: [],
@@ -21,7 +21,7 @@ class HomeWatcherBloc extends Bloc<HomeWatcherEvent, HomeWatcherState> {
         ) {
     on<_Started>(_onStarted);
   }
-  final IHomeRepository _homeRepository;
+  final IFaqRepository _faqRepository;
 
   Future<void> _onStarted(
     _Started event,
@@ -29,7 +29,7 @@ class HomeWatcherBloc extends Bloc<HomeWatcherEvent, HomeWatcherState> {
   ) async {
     emit(state.copyWith(loadingStatus: LoadingStatus.loading));
 
-    final result = await _homeRepository.getQuestions();
+    final result = await _faqRepository.getQuestions();
     result.fold(
       (l) => emit(
         state.copyWith(

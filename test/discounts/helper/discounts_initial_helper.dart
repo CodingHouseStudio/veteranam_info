@@ -16,18 +16,22 @@ Future<void> discountsInitialHelper(
     tester: tester,
     windowsTest: true,
     test: () async {
-      expect(
-        find.byKey(KWidgetkeys.screen.discounts.title),
-        findsOneWidget,
-      );
-
       if (!KTest.testIsWeb) {
+        expect(
+          find.byKey(KWidgetkeys.widget.nawbar.pageName),
+          findsOneWidget,
+        );
         //   expect(
         //     find.byKey(KWidgetkeys.screen.discounts.titlePoint),
         //     findsOneWidget,
         //   );
         // } else {
         await mobNavigationHelper(tester);
+      } else {
+        expect(
+          find.byKey(KWidgetkeys.screen.discounts.title),
+          findsOneWidget,
+        );
       }
 
       expect(

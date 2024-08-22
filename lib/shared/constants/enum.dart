@@ -21,7 +21,8 @@ enum UrlEnum {
   linkError,
   copyError,
   error,
-  copySucceed,
+  copyEmailSucceed,
+  copyLinkSucceed,
 }
 
 enum CategoryEnum { all }

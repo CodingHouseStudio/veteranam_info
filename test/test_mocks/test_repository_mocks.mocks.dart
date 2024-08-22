@@ -592,10 +592,10 @@ class _FakeIAppNetworkRepository_52 extends _i1.SmartFake
         );
 }
 
-/// A class which mocks [IHomeRepository].
+/// A class which mocks [IFaqRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockIHomeRepository extends _i1.Mock implements _i3.IHomeRepository {
+class MockIFaqRepository extends _i1.Mock implements _i3.IFaqRepository {
   @override
   _i8.Future<
       _i2.Either<_i3.SomeFailure,

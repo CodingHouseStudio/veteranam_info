@@ -20,18 +20,18 @@ class _SwitchWidgetWithoutBlocState extends State<SwitchWidgetWithoutBloc> {
 
   @override
   Widget build(BuildContext context) {
-    return Switch(
-      key: KWidgetkeys.widget.switchKeys.widget,
+    return SwitchWidget(
+      // key: KWidgetkeys.widget.switchKeys.widget,
       // thumbColor: MaterialStatePropertyAll(
       // isSelected ? AppColors.black : AppColors.white,
       // ),
       // trackColor: const MaterialStatePropertyAll(AppColors.widgetBackground),
-      value: isSelected,
+      isSelected: isSelected,
       // trackOutlineColor:
       //     const MaterialStatePropertyAll(AppColors.widgetBackground),
-      onChanged: (value) {
+      onChanged: () {
         setState(() {
-          isSelected = value;
+          isSelected = !isSelected;
         });
       },
     );
