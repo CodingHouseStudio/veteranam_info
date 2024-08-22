@@ -30,6 +30,13 @@ Future<void> mobSettingsInitialHelper(
   await languageSwitcherHelper(tester);
 
   expect(
+    find.byKey(KWidgetkeys.screen.mobSettings.offlinesSwitcher),
+    findsOneWidget,
+  );
+
+  await switchHelper(tester: tester, enabled: false, isActive: true);
+
+  expect(
     find.byKey(KWidgetkeys.screen.mobSettings.subtitle),
     findsOneWidget,
   );
@@ -44,6 +51,11 @@ Future<void> mobSettingsInitialHelper(
   expect(
     find.byKey(KWidgetkeys.screen.mobSettings.feedbackButton),
     findsOneWidget,
+  );
+
+  await scrollingHelper(
+    tester: tester,
+    itemKey: KWidgetkeys.screen.mobSettings.feedbackButton,
   );
 
   expect(

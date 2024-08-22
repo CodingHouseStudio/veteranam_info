@@ -60,6 +60,8 @@ import 'package:veteranam/shared/bloc/authentication_services/authentication_ser
     as _i209;
 import 'package:veteranam/shared/bloc/mob_feedback/mob_feedback_bloc.dart'
     as _i872;
+import 'package:veteranam/shared/bloc/mob_offline_mode/mob_offline_mode_cubit.dart'
+    as _i43;
 import 'package:veteranam/shared/bloc/network/network_cubit.dart' as _i891;
 import 'package:veteranam/shared/bloc/report/report_bloc.dart' as _i765;
 import 'package:veteranam/shared/bloc/url/url_cubit.dart' as _i319;
@@ -106,21 +108,17 @@ extension GetItInjectableX on _i174.GetIt {
       environment,
       environmentFilter,
     );
-    final networkModule = _$NetworkModule();
     final firebaseModule = _$FirebaseModule();
-    gh.singleton<_i895.Connectivity>(() => networkModule.connectivity);
+    final networkModule = _$NetworkModule();
     gh.factory<_i37.CacheClient>(() => _i37.CacheClient());
-    gh.singleton<_i1001.IAppNetworkRepository>(() => _i336.AppNetworkRepository(
-          gh<_i895.Connectivity>(),
-          gh<_i1001.CacheClient>(),
-        ));
     gh.singleton<_i1033.FirestoreService>(
-        () => _i1033.FirestoreService(gh<_i1001.IAppNetworkRepository>()));
+        () => _i1033.FirestoreService(gh<_i1001.CacheClient>()));
     gh.factory<_i189.AdvancedFilterMobCubit>(
         () => _i189.AdvancedFilterMobCubit());
     gh.singleton<_i99.StorageService>(() => _i99.StorageService());
     gh.singleton<_i59.FirebaseAuth>(() => firebaseModule.firebaseAuth);
     gh.singleton<_i116.GoogleSignIn>(() => firebaseModule.googleSignIn);
+    gh.singleton<_i895.Connectivity>(() => networkModule.connectivity);
     gh.singleton<_i1001.IDiscountRepository>(
       () => _i452.DiscountRepository(),
       signalsReady: true,
@@ -154,6 +152,10 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i205.ReportRepository(),
       signalsReady: true,
     );
+    gh.singleton<_i1001.IAppNetworkRepository>(() => _i336.AppNetworkRepository(
+          gh<_i895.Connectivity>(),
+          gh<_i1001.CacheClient>(),
+        ));
     gh.factory<_i319.UrlCubit>(
         () => _i319.UrlCubit(urlRepository: gh<_i1001.IUrlRepository>()));
     gh.factory<_i227.DiscountLinkCubit>(() => _i227.DiscountLinkCubit(
@@ -246,6 +248,8 @@ extension GetItInjectableX on _i174.GetIt {
           informationRepository: gh<_i1001.IInformationRepository>()),
       registerFor: {_development},
     );
+    gh.factory<_i43.MobOfflineModeCubit>(() => _i43.MobOfflineModeCubit(
+        firestoreService: gh<_i1001.FirestoreService>()));
     gh.factory<_i209.AuthenticationServicesCubit>(() =>
         _i209.AuthenticationServicesCubit(
             authenticationRepository: gh<_i1001.AuthenticationRepository>()));
@@ -298,6 +302,6 @@ extension GetItInjectableX on _i174.GetIt {
   }
 }
 
-class _$NetworkModule extends _i385.NetworkModule {}
-
 class _$FirebaseModule extends _i926.FirebaseModule {}
+
+class _$NetworkModule extends _i385.NetworkModule {}

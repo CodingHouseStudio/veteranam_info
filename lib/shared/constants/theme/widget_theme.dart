@@ -49,6 +49,10 @@ abstract class KWidgetTheme {
     shape: BoxShape.circle,
     color: AppColors.materialThemeKeyColorsNeutral,
   );
+  static const boxDecorationWhiteCircular = BoxDecoration(
+    shape: BoxShape.circle,
+    color: AppColors.materialThemeWhite,
+  );
 
   static const boxDecorationCard = BoxDecoration(
     borderRadius: KBorderRadius.kBorderRadius32,

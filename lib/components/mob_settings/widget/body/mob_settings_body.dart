@@ -44,6 +44,32 @@ class MobSettingsBodyWidget extends StatelessWidget {
               LanguagesSwitcherWidget(
                 key: KWidgetkeys.screen.mobSettings.languagesSwitcher,
                 decoration: KWidgetTheme.boxDecorationNawbar,
+                unactiveIconColor: AppColors.materialThemeWhite,
+              ),
+            ],
+          ),
+        ),
+        KSizedBox.kHeightSizedBox8,
+        Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: KPadding.kPaddingSize16,
+          ),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                context.l10n.offline,
+                style: AppTextStyle.materialThemeTitleMedium,
+              ),
+              BlocBuilder<MobOfflineModeCubit, MobMode>(
+                builder: (context, _) => SwitchWidget(
+                  key: KWidgetkeys.screen.mobSettings.offlinesSwitcher,
+                  isSelected: _.isOffline,
+                  onChanged: null,
+                  //  () =>
+                  //     context.read<MobOfflineModeCubit>().switchMode(),
+                ),
               ),
             ],
           ),
