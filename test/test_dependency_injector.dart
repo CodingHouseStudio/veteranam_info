@@ -78,6 +78,9 @@ void configureDependenciesTest() {
   GetIt.I.registerSingleton<HomeWatcherBloc>(
     HomeWatcherBloc(faqRepository: GetIt.I.get<IFaqRepository>()),
   );
+  GetIt.I.registerSingleton<MobFaqWatcherBloc>(
+    MobFaqWatcherBloc(faqRepository: GetIt.I.get<IFaqRepository>()),
+  );
   GetIt.I.registerSingleton<AuthenticationBloc>(
     AuthenticationBloc(
       authenticationRepository: GetIt.I.get<AuthenticationRepository>(),
