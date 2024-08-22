@@ -80,6 +80,7 @@ part 'widget/menu_dialog.dart';
 part 'widget/mob_navigation.dart';
 part 'widget/mob_feedback.dart';
 part 'widget/email_button.dart';
+part 'widget/user_email_dialog.dart';
 part 'widget/language_switcher.dart';
 
 abstract class KWidgetkeys {

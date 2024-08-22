@@ -22,4 +22,12 @@ abstract class IDiscountRepository {
   Future<Either<SomeFailure, bool>> userCanSendLink(
     String userId,
   );
+
+  Future<Either<SomeFailure, bool>> sendEmail(
+    EmailModel userEmail,
+  );
+
+  Future<Either<SomeFailure, bool>> userCanSendUserEmail(
+    String userId,
+  );
 }
