@@ -46,4 +46,5 @@ class _WidgetKeys {
   final mobNavigation = _MobNavigationKeys();
   final mobFeedback = _MobFeedbackKeys();
   final emailButton = _EmailButtonsKeys();
+  final userEmailDialog = _UserEmailDialogKeys();
 }

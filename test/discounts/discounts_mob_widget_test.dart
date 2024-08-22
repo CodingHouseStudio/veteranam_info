@@ -58,6 +58,10 @@ void main() {
           .thenAnswer(
         (invocation) async => const Right(true),
       );
+      when(mockDiscountRepository.userCanSendUserEmail(KTestText.user.id))
+          .thenAnswer(
+        (invocation) async => const Right(false),
+      );
       when(
         mockDiscountRepository.getDiscountItems(
           reportIdItems: KTestText.reportItems.getIdCard,
@@ -66,6 +70,9 @@ void main() {
         (invocation) => Stream.value(KTestText.discountModelItemsModify),
       );
       when(mockDiscountRepository.sendLink(KTestText.linkModel)).thenAnswer(
+        (invocation) async => const Right(true),
+      );
+      when(mockDiscountRepository.sendEmail(KTestText.emailModel)).thenAnswer(
         (invocation) async => const Right(true),
       );
     });
