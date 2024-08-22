@@ -48,7 +48,7 @@ class DonateCardWidget extends StatelessWidget {
                 child: NetworkImageWidget(
                   key: KWidgetkeys.widget.donateCard.image,
                   imageUrl: fundModel.image!.downloadURL,
-                  useCloudflare: true,
+                  // useCloudflare: true,
                 ),
               )
             else
