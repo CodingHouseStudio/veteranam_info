@@ -12,7 +12,7 @@ export 'email_password_fields/email_password_fields.dart';
 export 'failure_loading_helper.dart';
 export 'filter/filter.dart';
 export 'footer/footer.dart';
-export 'laguage_switcher_helper.dart';
+export 'language_switcher_helper.dart';
 export 'left_card_helper.dart';
 export 'menu_dialog_helper.dart';
 export 'message_field_helper.dart';

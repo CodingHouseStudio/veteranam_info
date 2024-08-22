@@ -41,6 +41,9 @@ class App extends StatelessWidget {
             create: (context) => GetIt.I.get<MobFeedbackBloc>(),
           ),
           BlocProvider(
+            create: (context) => GetIt.I.get<MobOfflineModeCubit>(),
+          ),
+          BlocProvider(
             create: (context) => GetIt.I.get<MobFaqWatcherBloc>()
               ..add(
                 const MobFaqWatcherEvent.started(),
@@ -77,7 +80,11 @@ class AppWidget extends StatelessWidget {
                   onSubmit: onSubmit,
                   // scrollController: scrollController,
                 ),
-                child: body(localeValue),
+                child: BlocBuilder<MobOfflineModeCubit, MobMode>(
+                  builder: (context, state) {
+                    return body(localeValue);
+                  },
+                ),
               );
       },
     );
