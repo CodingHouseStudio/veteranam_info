@@ -8,7 +8,7 @@ import 'package:veteranam/shared/shared.dart';
 class NetworkImageWidget extends StatefulWidget {
   const NetworkImageWidget({
     required this.imageUrl,
-    this.useCloudflare,
+    // this.useCloudflare,
     super.key,
     this.fit,
     this.size,
@@ -18,7 +18,7 @@ class NetworkImageWidget extends StatefulWidget {
   final String imageUrl;
   final BoxFit? fit;
   final double? size;
-  final bool? useCloudflare;
+  // final bool? useCloudflare;
   // final bool skeletonizerLoading;
 
   @override
@@ -105,10 +105,8 @@ class _NetworkImageWidgetState extends State<NetworkImageWidget> {
   }
 
   String get _url => Config.isProduction
-      ? widget.useCloudflare ?? false
-          ? 'https://veteranam.info$_urlPrefix${widget.imageUrl}'
-          : widget.imageUrl
-      : 'https://dev-app.veteranam.info$_urlPrefix${widget.imageUrl}';
+      ? 'https://veteranam.info$_urlPrefix${widget.imageUrl}'
+      : widget.imageUrl;
 
   String get _urlPrefix => widget.size == null
       ? '/cdn-cgi/image/format=auto/'
