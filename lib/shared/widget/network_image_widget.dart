@@ -54,7 +54,7 @@ class _NetworkImageWidgetState extends State<NetworkImageWidget> {
         httpHeaders: const {
           'Cache-Control': 'max-age=3600',
         },
-        filterQuality: kIsWeb ? FilterQuality.medium : FilterQuality.low,
+        filterQuality: kIsWeb ? FilterQuality.high : FilterQuality.low,
         placeholder: (context, url) =>
             // skeletonizerLoading
             //     ? const SkeletonizerWidget(
@@ -112,7 +112,8 @@ class _NetworkImageWidgetState extends State<NetworkImageWidget> {
 
   String get _urlPrefix => widget.size == null
       ? '/cdn-cgi/image/${kIsWeb ? 'quality=100' : 'quality=85'}/'
-      : '/cdn-cgi/image/${kIsWeb ? 'quality=100' : 'quality=85'},width=${widget.size},${widget.size}/';
+      : '/cdn-cgi/image/${kIsWeb ? 'quality=100' : 'quality=85'}'
+          ',width=${widget.size! * 10},${widget.size! * 10}/';
   //format=auto - standart value
 }
 
