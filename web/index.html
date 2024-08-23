@@ -257,8 +257,6 @@
         navigator.serviceWorker.register(serviceWorkerUrl)
           .then((reg) => {
             function waitForActivation(serviceWorker) {
-              if (!serviceWorker) return; // If serviceWorker is null
-
               serviceWorker.addEventListener('statechange', () => {
                 if (serviceWorker.state == 'activated') {
                   console.log('Installed new service worker.');
@@ -274,12 +272,11 @@
               // When the app updates the serviceWorkerVersion changes, so we
               // need to ask the service worker to update.
               console.log('New service worker available.');
-              reg.update();
-
-              waitForInstallation().then(serviceWorker => {
-                console.log('Wait for new service worker.');
-                waitForActivation(serviceWorker);
+              reg.update().catch((error) => {
+                console.error('Failed to update service worker:', error);
               });
+
+              waitForActivation(reg.installing);
             } else {
               // Existing service worker is still good.
               console.log('Loading app from service worker.');
