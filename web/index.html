@@ -203,20 +203,22 @@
   <!--  <div id="splash">-->
   <!--    <img src="icons/logo_192.svg" alt="Loading indicator..." />-->
   <!--  </div>-->
-  <!-- <button id="retry-button" class="retry-button" onclick="location.reload()">Перезавантажити</button> -->
+  <button id="retry-button" class="retry-button" onclick="location.reload()">Перезавантажити</button>
   <div class="splash">
     <img id="splash-image" src="icons/logo-192.svg" alt="Loading indicator..." class="bouncing-image">
   </div>
   <script>
+    // var retryButton = document.getElementById('retry-button');
+
     function removeSplashFromWeb() {
       document.getElementById("splash")?.remove();
       document.getElementById("splash-branding")?.remove();
       document.body.style.background = "transparent";
     }
 
-    // setTimeout(() => {
-    //   retryButton.style.display = "block";
-    // }, 8000);
+    setTimeout(() => {
+      document.getElementById('retry-button').style.display = "block";
+    }, 8000);
 
     // window.addEventListener('offline', function () {
     //   retryButton.style.display = 'block';
@@ -240,7 +242,6 @@
     // var scriptLoaded = false;
     // var image_reloaded = false;
     // // var splashImage = document.getElementById('splash-image');
-    // var retryButton = document.getElementById('retry-button');
 
     // function loadMainDartJs() {
     //   if (scriptLoaded) {
