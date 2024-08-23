@@ -108,18 +108,24 @@ class _NetworkImageWidgetState extends State<NetworkImageWidget> {
     // );
   }
 
-  String get _url => (Config.isProduction && kReleaseMode) || !kIsWeb
-      ? '${kIsWeb ? Uri.base.origin : 'https://veteranam.info'}'
-          '$_urlPrefix${widget.imageUrl}'
-      : widget.imageUrl;
+  String get _url {
+    final url = kIsWeb ? Uri.base.origin : 'https://veteranam.info';
+    if ((Config.isProduction && kReleaseMode) || !kIsWeb) {
+      return '$url$_urlPrefix${widget.imageUrl}';
+    } else {
+      return widget.imageUrl;
+    }
+  }
 
-  String get _urlPrefix =>
-      // widget.size == null
-      // ?
-      '/cdn-cgi/image/${widget.highQuality ?? false ? 'quality=100' : 'quality=85'}/';
+  String get _urlPrefix {
+    // widget.size == null
+    // ?
+    final quality = widget.highQuality ?? false ? '100' : '85';
+    const format = 'auto';
+    return '/cdn-cgi/image/quality=$quality,format=$format/';
+  }
   // : '/cdn-cgi/image/${kIsWeb ? 'quality=100' : 'quality=85'}'
   //     ',width=${widget.size! * 10},${widget.size! * 10}/';
-  //format=auto - standart value
 }
 
 // class _NetworkMobileImageWidget extends StatelessWidget {
