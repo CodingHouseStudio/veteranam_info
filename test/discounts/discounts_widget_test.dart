@@ -291,6 +291,21 @@ void main() {
 
           await discountsInitialHelper(tester);
         });
+        testWidgets('Advanced filter reset mobile', (tester) async {
+          await discountsPumpAppHelper(
+            tester: tester,
+            mockDiscountRepository: mockDiscountRepository,
+            mockGoRouter: mockGoRouter,
+            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+            mockReportRepository: mockReportRepository,
+            mockAuthenticationRepository: mockAuthenticationRepository,
+          );
+
+          await advancedFilterResetMobHelper(
+            tester: tester,
+            mockGoRouter: mockGoRouter,
+          );
+        });
         group('${KGroupText.goTo} ', () {
           testWidgets('${KRoute.myDiscounts.name} ', (tester) async {
             await discountsPumpAppHelper(
