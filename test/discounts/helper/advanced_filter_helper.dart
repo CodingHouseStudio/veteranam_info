@@ -179,29 +179,34 @@ Future<void> advancedFilterHelper(
       findsOneWidget,
     );
   } else {
-    expect(
-      find.byKey(KWidgetkeys.screen.discounts.advancedFilterButtonIcon),
-      findsOneWidget,
-    );
+    // expect(
+    //   find.byKey(KWidgetkeys.screen.discounts.advancedFilterButtonIcon),
+    //   findsOneWidget,
+    // );
 
     expect(
       find.byKey(KWidgetkeys.screen.discounts.advancedFilterButton),
       findsOneWidget,
     );
 
-    await tester
-        .tap(find.byKey(KWidgetkeys.screen.discounts.advancedFilterButton));
-
-    await tester.pumpAndSettle();
-
     expect(
       find.byKey(KWidgetkeys.screen.discounts.advancedFilterList),
-      findsNothing,
-    );
-
-    expect(
-      find.byKey(KWidgetkeys.screen.discounts.advancedFilterButtonIconUp),
       findsOneWidget,
     );
+
+    // await tester
+    //     .tap(find.byKey(KWidgetkeys.screen.discounts.advancedFilterButton));
+
+    // await tester.pumpAndSettle();
+
+    // expect(
+    //   find.byKey(KWidgetkeys.screen.discounts.advancedFilterList),
+    //   findsNothing,
+    // );
+
+    // expect(
+    //   find.byKey(KWidgetkeys.screen.discounts.advancedFilterButtonIconUp),
+    //   findsOneWidget,
+    // );
   }
 }

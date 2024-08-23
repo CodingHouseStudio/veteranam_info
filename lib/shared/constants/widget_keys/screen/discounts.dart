@@ -22,10 +22,10 @@ class _DiscountsKeys {
       const Key('discounts_screen_advanced_filter_mob_applied_button');
   final advancedFilterButton =
       const Key('discounts_screen_advanced_filter_button');
-  final advancedFilterButtonIcon =
-      const Key('discounts_screen_advanced_filter_button_icon');
-  final advancedFilterButtonIconUp =
-      const Key('discounts_screen_advanced_filter_button_icon_up');
+  // final advancedFilterButtonIcon =
+  //     const Key('discounts_screen_advanced_filter_button_icon');
+  // final advancedFilterButtonIconUp =
+  //     const Key('discounts_screen_advanced_filter_button_icon_up');
   final appliedFilterText = const Key('discounts_screen_applied_filter_text');
   final appliedFilterItems = const Key('discounts_screen_applied_filter_items');
   final discountText = const Key('discounts_screen_discountText');

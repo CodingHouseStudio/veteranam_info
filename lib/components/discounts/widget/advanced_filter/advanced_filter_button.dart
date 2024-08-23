@@ -16,40 +16,74 @@ class AdvancedFilterButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Align(
       alignment: Alignment.centerLeft,
-      child: TextButton.icon(
-        key: KWidgetkeys.screen.discounts.advancedFilterButton,
-        style: KButtonStyles.advancedButtonStyle,
-        label: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            if (isDesk)
-              Expanded(
-                child: Text(
-                  context.l10n.advancedFilter,
-                  style: isDesk
-                      ? AppTextStyle.materialThemeHeadlineSmall
-                      : AppTextStyle.materialThemeTitleMedium,
+      child: isDesk
+          ? Row(
+              key: KWidgetkeys.screen.discounts.advancedFilterButton,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                if (isDesk)
+                  Expanded(
+                    child: Text(
+                      context.l10n.advancedFilter,
+                      style: isDesk
+                          ? AppTextStyle.materialThemeHeadlineSmall
+                          : AppTextStyle.materialThemeTitleMedium,
+                    ),
+                  )
+                else
+                  Text(
+                    context.l10n.advancedFilter,
+                    style: isDesk
+                        ? AppTextStyle.materialThemeHeadlineSmall
+                        : AppTextStyle.materialThemeTitleMedium,
+                  ),
+                if (icon != null) ...[KSizedBox.kWidthSizedBox8, icon!],
+                IconWidget(
+                  icon: KIcon.tune,
+                  background: AppColors.materialThemeKeyColorsNeutral,
+                  padding: isDesk
+                      ? KPadding.kPaddingSize20
+                      : KPadding.kPaddingSize12,
                 ),
-              )
-            else
-              Text(
-                context.l10n.advancedFilter,
-                style: isDesk
-                    ? AppTextStyle.materialThemeHeadlineSmall
-                    : AppTextStyle.materialThemeTitleMedium,
+              ],
+            )
+          : TextButton.icon(
+              key: KWidgetkeys.screen.discounts.advancedFilterButton,
+              style: KButtonStyles.advancedButtonStyle,
+              label: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  if (isDesk)
+                    Expanded(
+                      child: Text(
+                        context.l10n.advancedFilter,
+                        style: isDesk
+                            ? AppTextStyle.materialThemeHeadlineSmall
+                            : AppTextStyle.materialThemeTitleMedium,
+                      ),
+                    )
+                  else
+                    Text(
+                      context.l10n.advancedFilter,
+                      style: isDesk
+                          ? AppTextStyle.materialThemeHeadlineSmall
+                          : AppTextStyle.materialThemeTitleMedium,
+                    ),
+                  if (icon != null) ...[KSizedBox.kWidthSizedBox8, icon!],
+                ],
               ),
-            if (icon != null) ...[KSizedBox.kWidthSizedBox8, icon!],
-          ],
-        ),
-        // KSizedBox.kWidthSizedBox8,
-        icon: IconWidget(
-          icon: KIcon.tune,
-          background: AppColors.materialThemeKeyColorsNeutral,
-          padding: isDesk ? KPadding.kPaddingSize20 : KPadding.kPaddingSize12,
-        ),
-        onPressed: onPressed,
-        //if (isDesk) KIcon.meil,
-      ),
+              // KSizedBox.kWidthSizedBox8,
+              icon: IconWidget(
+                icon: KIcon.tune,
+                background: AppColors.materialThemeKeyColorsNeutral,
+                padding:
+                    isDesk ? KPadding.kPaddingSize20 : KPadding.kPaddingSize12,
+              ),
+              onPressed: onPressed,
+              //if (isDesk) KIcon.meil,
+            ),
+
+      // KSizedBox.kWidthSizedBox8,
     );
   }
 }

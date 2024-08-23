@@ -42,15 +42,15 @@ class _AdvancedFilterDeskState extends State<AdvancedFilterDesk> {
                   showFilter = !showFilter;
                 }),
                 isDesk: true,
-                icon: showFilter
-                    ? KIcon.trailing.copyWith(
-                        key: KWidgetkeys
-                            .screen.discounts.advancedFilterButtonIcon,
-                      )
-                    : KIcon.trailingUp.copyWith(
-                        key: KWidgetkeys
-                            .screen.discounts.advancedFilterButtonIconUp,
-                      ),
+                // icon: showFilter
+                //     ? KIcon.trailing.copyWith(
+                //         key: KWidgetkeys
+                //             .screen.discounts.advancedFilterButtonIcon,
+                //       )
+                //     : KIcon.trailingUp.copyWith(
+                //         key: KWidgetkeys
+                //             .screen.discounts.advancedFilterButtonIconUp,
+                //       ),
               ),
 
               if (showFilter)
