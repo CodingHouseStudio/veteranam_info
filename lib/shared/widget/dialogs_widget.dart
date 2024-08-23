@@ -284,6 +284,9 @@ class _DialogsWidget {
               return Center(
                 child: AlertDialog(
                   key: KWidgetkeys.screen.discountCard.dialog,
+                  insetPadding: const EdgeInsets.symmetric(
+                    horizontal: KPadding.kPaddingSize20,
+                  ),
                   shape: const RoundedRectangleBorder(
                     borderRadius: KBorderRadius.kBorderRadius32,
                   ),
