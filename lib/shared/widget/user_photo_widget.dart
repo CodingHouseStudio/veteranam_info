@@ -13,10 +13,11 @@ class UserPhotoWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (onPressed == null) {
-      return Container(
-        decoration: KWidgetTheme.boxDecorationCircular
-            .copyWith(color: AppColors.materialThemeKeyColorsSecondary),
-        padding: EdgeInsets.all(_padding),
+      return CircleAvatar(
+        // decoration: KWidgetTheme.boxDecorationCircular
+        //     .copyWith(color: AppColors.materialThemeKeyColorsSecondary),
+        // padding: EdgeInsets.all(_padding),
+        radius: KSize.kUserPhoto / 2,
         child: _body,
       );
     } else {
@@ -36,6 +37,7 @@ class UserPhotoWidget extends StatelessWidget {
             imageUrl: imageUrl!,
             fit: BoxFit.contain,
             size: KSize.kUserPhoto,
+            highQuality: true,
             // skeletonizerLoading: false,
           ),
         )
