@@ -12,13 +12,14 @@ class NetworkImageWidget extends StatefulWidget {
     super.key,
     this.fit,
     this.size,
+    this.highQuality,
     // this.skeletonizerLoading = true,
     // this.loadingIndicatorColor,
   });
   final String imageUrl;
   final BoxFit? fit;
   final double? size;
-  // final bool? useCloudflare;
+  final bool? highQuality;
   // final bool skeletonizerLoading;
 
   @override
@@ -54,7 +55,9 @@ class _NetworkImageWidgetState extends State<NetworkImageWidget> {
         httpHeaders: const {
           'Cache-Control': 'max-age=3600',
         },
-        filterQuality: kIsWeb ? FilterQuality.high : FilterQuality.low,
+        filterQuality: widget.highQuality ?? false
+            ? FilterQuality.high
+            : FilterQuality.low,
         placeholder: (context, url) =>
             // skeletonizerLoading
             //     ? const SkeletonizerWidget(
@@ -113,7 +116,7 @@ class _NetworkImageWidgetState extends State<NetworkImageWidget> {
   String get _urlPrefix =>
       // widget.size == null
       // ?
-      '/cdn-cgi/image/${kIsWeb ? 'quality=100' : 'quality=85'}/';
+      '/cdn-cgi/image/${widget.highQuality ?? false ? 'quality=100' : 'quality=85'}/';
   // : '/cdn-cgi/image/${kIsWeb ? 'quality=100' : 'quality=85'}'
   //     ',width=${widget.size! * 10},${widget.size! * 10}/';
   //format=auto - standart value
