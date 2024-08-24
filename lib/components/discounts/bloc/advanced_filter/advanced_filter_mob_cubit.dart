@@ -43,12 +43,12 @@ class AdvancedFilterMobCubit extends Cubit<AdvancedFilterMobState> {
     emit(state.copyWith(sorting: sorting));
   }
 
-  void reset() {
-    emit(
-      const AdvancedFilterMobState(
-        filtersLocation: [],
-        sorting: [],
-      ),
-    );
-  }
+  // void reset() {
+  //   emit(
+  //     const AdvancedFilterMobState(
+  //       filtersLocation: [],
+  //       sorting: [],
+  //     ),
+  //   );
+  // }
 }
