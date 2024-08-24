@@ -206,7 +206,7 @@ abstract class KTestText {
   );
   static final dateTime = DateTime(2024, 4, 12);
   static final dateTimeId = DateTime(0, 0, 0, 0, 1, 1, 1, 1);
-  static const downloadURL = 'test_URL';
+  static const downloadURL = 'test_URL.test';
   static const id = '1';
 
   static final discountModelItems = <DiscountModel>[
@@ -248,6 +248,7 @@ abstract class KTestText {
     for (var i = 0; i < 50; i++)
       KMockText.discountModel.copyWith(
         company: i == 0 ? null : KMockText.discountModel.company,
+        expiration: i == 0 ? null : KMockText.discountModel.expiration,
         id: i.toString(),
         userId: i.toString(),
         categoryEN: i == 0 ? KMockText.tag : KMockText.discountModel.categoryEN,
