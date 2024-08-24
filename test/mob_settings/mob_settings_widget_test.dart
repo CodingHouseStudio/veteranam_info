@@ -61,6 +61,30 @@ void main() {
             mockGoRouter: mockGoRouter,
           );
         });
+
+        testWidgets('${KRoute.mobFAQ.name} ', (tester) async {
+          await mobSettingsPumpAppHelper(
+            tester: tester,
+            mockGoRouter: mockGoRouter,
+          );
+
+          await mobFaqNavigationHelper(
+            tester: tester,
+            mockGoRouter: mockGoRouter,
+          );
+        });
+
+        testWidgets('${KRoute.privacyPolicy.name} ', (tester) async {
+          await mobSettingsPumpAppHelper(
+            tester: tester,
+            mockGoRouter: mockGoRouter,
+          );
+
+          await privacyPolicyNavigationHelper(
+            tester: tester,
+            mockGoRouter: mockGoRouter,
+          );
+        });
       });
     });
   });

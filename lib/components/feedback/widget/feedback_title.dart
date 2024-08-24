@@ -35,7 +35,7 @@ class FeedbackTitle extends StatelessWidget {
                 ShortTitleIconWidget(
                   title: title,
                   titleKey: KWidgetkeys.screen.feedback.title,
-                  isDesk: isDesk,
+                  // isDesk: isDesk,
                 ),
               KSizedBox.kHeightSizedBox100,
             ]

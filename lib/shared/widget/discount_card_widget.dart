@@ -122,7 +122,7 @@ class DiscountCardWidget extends StatelessWidget {
                       child: TextPointWidget(
                         discountItem.discount.getDiscountString(context),
                         key: KWidgetkeys.widget.discountCard.discount,
-                        hasExpanded: false,
+                        // hasExpanded: false,
                       ),
                     ),
                   ],

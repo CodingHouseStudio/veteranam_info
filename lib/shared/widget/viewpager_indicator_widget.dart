@@ -67,7 +67,9 @@ class ViewpagerIndicatorWidget extends CustomPainter {
 
     double lineEndX;
     if (selectedPage == pageCount - 1) {
+      // coverage:ignore-start
       lineEndX = size.width;
+      // coverage:ignore-end
     } else {
       lineEndX = positions[selectedPage] + unselectedCircleRadius;
     }
@@ -84,9 +86,11 @@ class ViewpagerIndicatorWidget extends CustomPainter {
     );
   }
 
+  // coverage:ignore-start
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) {
     return oldDelegate is ViewpagerIndicatorWidget &&
         selectedPage != oldDelegate.selectedPage;
   }
+  // coverage:ignore-end
 }

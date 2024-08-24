@@ -88,7 +88,7 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
               //   Center(
               //     child: Text(
               //       context.l10n.cardListEmptyText,
-              //       key: KWidgetkeys.widget.scaffold.endListText,
+              //       key: KWidgetkeys.widget.scaffold.emptyListText,
               //       style:
               //           AppTextStyle.materialThemeTitleMediumNeutralVariant70
               // ,
@@ -110,7 +110,7 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
                 Center(
                   child: Text(
                     context.l10n.thatEndOfList,
-                    key: KWidgetkeys.widget.scaffold.emptyListText,
+                    key: KWidgetkeys.widget.scaffold.endListText,
                     style:
                         AppTextStyle.materialThemeTitleMediumNeutralVariant70,
                   ),
@@ -118,6 +118,7 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
                 KSizedBox.kHeightSizedBox24,
                 Center(
                   child: TextButton(
+                    key: KWidgetkeys.widget.scaffold.endListButton,
                     style: KButtonStyles.endListButtonStyle,
                     onPressed: scrollUp,
                     child: Text(

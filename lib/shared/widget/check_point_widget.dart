@@ -76,41 +76,41 @@ class CheckPointAmountWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (filterItem.number > 0) {
-      return Row(
-        children: [
-          Expanded(
-            child: CheckPointWidget(
-              onChanged: onChanged,
-              isCheck: isCheck,
-              text: filterItem.getString(context),
-              isDesk: isDesk,
-            ),
+    // if (filterItem.number > 0) {
+    return Row(
+      children: [
+        Expanded(
+          child: CheckPointWidget(
+            onChanged: onChanged,
+            isCheck: isCheck,
+            text: filterItem.getString(context),
+            isDesk: isDesk,
           ),
-          KSizedBox.kWidthSizedBox12,
-          AmountWidget(
-            key: KWidgetkeys.widget.checkPoint.ammount,
-            background: isCheck
-                ? AppColors.materialThemeKeyColorsSecondary
-                : AppColors.materialThemeKeyColorsNeutral,
-            textColor: isCheck
-                ? AppColors.materialThemeKeyColorsNeutral
-                : AppColors.materialThemeKeyColorsSecondary,
-            number: filterItem.number,
-            padding: const EdgeInsets.symmetric(
-              horizontal: KPadding.kPaddingSize8,
-              vertical: KPadding.kPaddingSize4,
-            ),
+        ),
+        KSizedBox.kWidthSizedBox12,
+        AmountWidget(
+          key: KWidgetkeys.widget.checkPoint.ammount,
+          background: isCheck
+              ? AppColors.materialThemeKeyColorsSecondary
+              : AppColors.materialThemeKeyColorsNeutral,
+          textColor: isCheck
+              ? AppColors.materialThemeKeyColorsNeutral
+              : AppColors.materialThemeKeyColorsSecondary,
+          number: filterItem.number,
+          padding: const EdgeInsets.symmetric(
+            horizontal: KPadding.kPaddingSize8,
+            vertical: KPadding.kPaddingSize4,
           ),
-        ],
-      );
-    } else {
-      return CheckPointWidget(
-        onChanged: onChanged,
-        isCheck: isCheck,
-        text: filterItem.value.toString(),
-        isDesk: isDesk,
-      );
-    }
+        ),
+      ],
+    );
+    // } else {
+    //   return CheckPointWidget(
+    //     onChanged: onChanged,
+    //     isCheck: isCheck,
+    //     text: filterItem.value.toString(),
+    //     isDesk: isDesk,
+    //   );
+    // }
   }
 }

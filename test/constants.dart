@@ -40,6 +40,7 @@ abstract class KGroupText {
   static const firebaseFailure = 'Firebase Failure';
   static const failureSend = 'Failure set';
   static const intial = 'renders initial';
+  static const network = 'Reload network';
   static const goRouter = 'Mock Go Router';
   static const goTo = 'go to';
   static const validationError = 'Validation error';
@@ -59,6 +60,7 @@ abstract class KGroupText {
   static const error = 'Error';
   static const failureNetwork = 'Failure Network';
   static const stream = 'Stream';
+  static const smallList = 'Small list';
 }
 
 abstract class KTestText {
@@ -245,6 +247,7 @@ abstract class KTestText {
   static final discountModelItemsModify = <DiscountModel>[
     for (var i = 0; i < 50; i++)
       KMockText.discountModel.copyWith(
+        company: i == 0 ? null : KMockText.discountModel.company,
         id: i.toString(),
         userId: i.toString(),
         categoryEN: i == 0 ? KMockText.tag : KMockText.discountModel.categoryEN,

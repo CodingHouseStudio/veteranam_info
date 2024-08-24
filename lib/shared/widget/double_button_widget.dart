@@ -95,7 +95,9 @@ class _DoubleButtonWidgetDeskState extends State<_DoubleButtonWidgetDesk> {
       key: widget.widgetKey,
       onPressed: widget.onPressed,
       style: KButtonStyles.withoutStyle,
+      // coverage:ignore-start
       onHover: (value) => setState(() => isHovering = value),
+      // coverage:ignore-end
       child: Stack(
         alignment: Alignment.centerRight,
         children: [

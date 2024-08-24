@@ -656,3 +656,13 @@ extension ConnectivityExtension on List<ConnectivityResult> {
         (result) => ConnectivityResult.none != result,
       );
 }
+
+extension ListBoolExtension on List<bool> {
+  bool fundsCardChangeSize(int index) {
+    if (indexOf(true) < length - 1) {
+      return indexOf(true) + 1 == index;
+    } else {
+      return indexOf(true) - 1 == index;
+    }
+  }
+}

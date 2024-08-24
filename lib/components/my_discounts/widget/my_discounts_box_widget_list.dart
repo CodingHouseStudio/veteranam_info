@@ -104,6 +104,7 @@ List<Widget> _discountsboxWidgetList({
                       ..._buildDiactivateButtons(context, isDesk),
                       KSizedBox.kWidthSizedBox40,
                       IconButtonWidget(
+                        key: KWidgetkeys.screen.myDiscounts.iconTrash,
                         onPressed: () {
                           context.read<MyDiscountsWatcherBloc>().add(
                                 MyDiscountsWatcherEvent.deleteDiscount(
@@ -111,7 +112,6 @@ List<Widget> _discountsboxWidgetList({
                                 ),
                               );
                         },
-                        key: KWidgetkeys.screen.myDiscounts.iconTrash,
                         padding: KPadding.kPaddingSize12,
                         icon: KIcon.trash,
                         background:

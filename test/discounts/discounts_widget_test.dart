@@ -456,6 +456,29 @@ void main() {
             });
           });
         });
+        group('User sended limit link', () {
+          setUp(
+            () =>
+                when(mockDiscountRepository.userCanSendLink(KTestText.user.id))
+                    .thenAnswer(
+              (invocation) async => const Right(false),
+            ),
+          );
+          testWidgets('${KGroupText.intial} ', (tester) async {
+            await discountsPumpAppHelper(
+              tester: tester,
+              mockDiscountRepository: mockDiscountRepository,
+              mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+              mockReportRepository: mockReportRepository,
+              mockAuthenticationRepository: mockAuthenticationRepository,
+            );
+
+            await discountsScrollHelper(
+              tester: tester,
+              test: notificationLinkThankTextHelper,
+            );
+          });
+        });
       });
     });
   });

@@ -64,7 +64,7 @@ part 'widget/email_password_fields.dart';
 part 'widget/left_card.dart';
 part 'widget/sign_up_bottom_buttons.dart';
 part 'widget/donate_card.dart';
-part 'widget/profile_card_widget.dart';
+part 'widget/profile_card.dart';
 part 'widget/rate.dart';
 part 'widget/chat_input.dart';
 part 'widget/work_request_card.dart';

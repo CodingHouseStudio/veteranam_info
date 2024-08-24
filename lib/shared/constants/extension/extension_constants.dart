@@ -2,7 +2,8 @@ import 'dart:math';
 import 'dart:typed_data';
 import 'package:collection/collection.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/widgets.dart' show BuildContext, visibleForTesting;
+import 'package:flutter/widgets.dart'
+    show BuildContext, ScrollController, visibleForTesting;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
@@ -19,10 +20,10 @@ extension ExtendedDateTime on DateTime {
       _id ?? DateTime.now().toLocal().microsecondsSinceEpoch.toString();
 
   @visibleForTesting
-  static set current(DateTime customTime) => _customTime = customTime;
+  static set current(DateTime? customTime) => _customTime = customTime;
 
   @visibleForTesting
-  static set id(String customId) => _id = customId;
+  static set id(String? customId) => _id = customId;
 
   String get localeTime => toLocal().toString().split(' ')[0];
 }
@@ -54,10 +55,10 @@ extension LocalizedDateTime on DateTime {
 }
 
 extension DiscountModelLocation on DiscountModel {
-  List<String> fullLocationList(BuildContext context) => [
-        if (location != null) ...location!,
-        if (subLocation != null) ...subLocation!.getList(context),
-      ];
+  // List<String> fullLocationList(BuildContext context) => [
+  //       if (location != null) ...location!,
+  //       if (subLocation != null) ...subLocation!.getList(context),
+  //     ];
   String getDescription(BuildContext context) =>
       '${context.isEnglish ? descriptionEN : description}\n'
       '\n***${context.l10n.toGetItYouNeed}***\n'
@@ -213,6 +214,9 @@ extension GenericsExtensions<T> on T {
 extension ContextExtensions on BuildContext {
   bool get isEnglish =>
       read<AuthenticationBloc>().state.userSetting.locale.isEnglish;
+
+  void copyText(String text, String? href, String? title) =>
+      read<UrlCubit>().copy(text);
 }
 
 extension DiscountEnumExtensions on DiscountEnum {
@@ -278,5 +282,33 @@ extension FilterItemExtension on FilterItem {
     } else {
       return value.toString().compareUkrain(b.value.toString());
     }
+  }
+}
+
+extension UserRoleExtensions on UserRole {
+  String value(BuildContext context) {
+    switch (this) {
+      case UserRole.businessmen:
+        return context.l10n.iAmBusinessOwnerRepresentative;
+      case UserRole.civilian:
+        return context.l10n.iAmCivilian;
+      case UserRole.relativeOfVeteran:
+        return context.l10n.iAmRelativeOfVeteran;
+      case UserRole.veteran:
+        return context.l10n.iAmVeteran;
+    }
+  }
+}
+
+extension MobFeedbackWidgetExtensions on MobFeedbackWidget {
+  static MobFeedbackWidget feedbackBuilder(
+    BuildContext context,
+    Future<void> Function(String, {Map<String, dynamic>? extras}) onSubmit,
+    ScrollController? scrollController,
+  ) {
+    return MobFeedbackWidget(
+      onSubmit: onSubmit,
+      // scrollController: scrollController,
+    );
   }
 }

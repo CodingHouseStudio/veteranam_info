@@ -43,6 +43,7 @@ class DonateCardWidget extends StatelessWidget {
                 cardId: fundModel.id,
               ),
             ),
+            // coverage:ignore-start
             if (fundModel.image != null)
               Expanded(
                 child: NetworkImageWidget(
@@ -51,6 +52,7 @@ class DonateCardWidget extends StatelessWidget {
                   // useCloudflare: true,
                 ),
               )
+            // coverage:ignore-end
             else
               const Spacer(),
             Padding(

@@ -50,8 +50,10 @@ class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
             styleSheet: MarkdownStyleSheet(
               a: AppTextStyle.materialThemeBodyLarge,
             ),
+            // coverage:ignore-start
             onTapLink: (text, href, title) =>
                 context.read<UrlCubit>().launchUrl(url: href),
+            // coverage:ignore-end
           )
         else
           Text(

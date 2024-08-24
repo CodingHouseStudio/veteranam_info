@@ -237,6 +237,10 @@ extension GetItInjectableX on _i174.GetIt {
         _i686.PrivacyPolicyMarkdownCubit(
             appAuthenticationRepository:
                 gh<_i1001.IAppAuthenticationRepository>()));
+    gh.factory<_i209.AuthenticationServicesCubit>(() =>
+        _i209.AuthenticationServicesCubit(
+            appAuthenticationRepository:
+                gh<_i1001.IAppAuthenticationRepository>()));
     gh.singleton<_i1001.IWorkRepository>(
       () => _i76.WorkRepository(),
       registerFor: {_development},
@@ -248,9 +252,6 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i43.MobOfflineModeCubit>(() => _i43.MobOfflineModeCubit(
         firestoreService: gh<_i1001.FirestoreService>()));
-    gh.factory<_i209.AuthenticationServicesCubit>(() =>
-        _i209.AuthenticationServicesCubit(
-            authenticationRepository: gh<_i1001.AuthenticationRepository>()));
     gh.singleton<_i570.AuthenticationBloc>(() => _i570.AuthenticationBloc(
         authenticationRepository: gh<_i1001.AuthenticationRepository>()));
     gh.factory<_i765.ReportBloc>(() => _i765.ReportBloc(

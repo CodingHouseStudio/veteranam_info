@@ -23,6 +23,7 @@ void main() {
     setUp(() {
       ExtendedDateTime.current = KTestText.dateTime;
       ExtendedDateTime.id = '';
+      KTest.testIsWeb = true;
 
       mockInvestorsRepository = MockIInvestorsRepository();
       mockReportRepository = MockIReportRepository();
@@ -175,6 +176,25 @@ void main() {
         await investorsInitialHelper(tester);
       });
 
+      testWidgets('${KGroupText.network} ', (tester) async {
+        await networkHelper(
+          tester: tester,
+          pumpApp: () async => investorsPumpAppHelper(
+            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+            mockInvestorsRepository: mockInvestorsRepository,
+            mockReportRepository: mockReportRepository,
+            mockAuthenticationRepository: mockAuthenticationRepository,
+            tester: tester,
+          ),
+        );
+
+        verify(
+          mockInvestorsRepository.getFunds(
+            reportIdItems: KTestText.reportItems.getIdCard,
+          ),
+        ).called(2);
+      });
+
       loadingList(
         (tester) async => investorsPumpAppHelper(
           mockAppAuthenticationRepository: mockAppAuthenticationRepository,
@@ -268,7 +288,7 @@ void main() {
             mockGoRouter: mockGoRouter,
           );
 
-          await reportDialogcorrectSaveHelper(
+          await reportDialogCorrectSaveHelper(
             tester,
           );
         });
@@ -288,6 +308,28 @@ void main() {
               mockGoRouter: mockGoRouter,
             );
           });
+        });
+      });
+      group('${KGroupText.smallList} ', () {
+        setUp(() {
+          when(
+            mockInvestorsRepository.getFunds(
+              reportIdItems: KTestText.reportItems.getIdCard,
+            ),
+          ).thenAnswer(
+            (invocation) async => Right(KTestText.fundItems.sublist(0, 2)),
+          );
+        });
+        testWidgets('Tap on scroll button', (tester) async {
+          await investorsPumpAppHelper(
+            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+            mockInvestorsRepository: mockInvestorsRepository,
+            mockReportRepository: mockReportRepository,
+            mockAuthenticationRepository: mockAuthenticationRepository,
+            tester: tester,
+          );
+
+          await scaffoldEmptyScrollHelper(tester);
         });
       });
     });

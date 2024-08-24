@@ -183,6 +183,20 @@ void main() {
         await homeInitialHelper(tester);
       });
 
+      testWidgets('${KGroupText.network} ', (tester) async {
+        await networkHelper(
+          tester: tester,
+          pumpApp: () async => homePumpAppHelper(
+            mockFaqRepository: mockFaqRepository,
+            mockAuthenticationRepository: mockAuthenticationRepository,
+            tester: tester,
+            mockUrlRepository: mockUrlRepository,
+          ),
+        );
+
+        verify(mockFaqRepository.getQuestions()).called(2);
+      });
+
       group('${KGroupText.goRouter} ', () {
         late MockGoRouter mockGoRouter;
         setUp(() => mockGoRouter = MockGoRouter());
@@ -363,6 +377,31 @@ void main() {
               mockGoRouter: mockGoRouter,
             );
           });
+          group(
+            'User authentication',
+            () {
+              setUp(
+                () => when(mockAuthenticationRepository.status).thenAnswer(
+                  (realInvocation) =>
+                      Stream.value(AuthenticationStatus.authenticated),
+                ),
+              );
+              testWidgets('${KRoute.profile.name} ', (tester) async {
+                await homePumpAppHelper(
+                  tester: tester,
+                  mockGoRouter: mockGoRouter,
+                  mockAuthenticationRepository: mockAuthenticationRepository,
+                  mockFaqRepository: mockFaqRepository,
+                  mockUrlRepository: mockUrlRepository,
+                );
+
+                await footerProfileHelper(
+                  tester: tester,
+                  mockGoRouter: mockGoRouter,
+                );
+              });
+            },
+          );
         });
       });
     });
