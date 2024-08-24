@@ -20,6 +20,7 @@ void main() {
     late IReportRepository mockReportRepository;
     late AuthenticationRepository mockAuthenticationRepository;
     late IAppAuthenticationRepository mockAppAuthenticationRepository;
+    late IUrlRepository mockUrlRepository;
     setUp(() {
       ExtendedDateTime.current = KTestText.dateTime;
       ExtendedDateTime.id = '';
@@ -29,6 +30,7 @@ void main() {
       mockReportRepository = MockIReportRepository();
       mockAuthenticationRepository = MockAuthenticationRepository();
       mockAppAuthenticationRepository = MockAppAuthenticationRepository();
+      mockUrlRepository = MockIUrlRepository();
 
       when(mockAuthenticationRepository.currentUser).thenAnswer(
         (realInvocation) => User.empty,
@@ -71,6 +73,13 @@ void main() {
       ).thenAnswer(
         (invocation) async => Right(KTestText.fundItems),
       );
+      when(
+        mockUrlRepository.launchUrl(
+          url: KTestText.fundItems.first.projectsLink!,
+        ),
+      ).thenAnswer(
+        (invocation) async => const Right(true),
+      );
     });
 
     testWidgets('${KGroupText.intial} ', (tester) async {
@@ -79,6 +88,7 @@ void main() {
         mockInvestorsRepository: mockInvestorsRepository,
         mockReportRepository: mockReportRepository,
         mockAuthenticationRepository: mockAuthenticationRepository,
+        mockUrlRepository: mockUrlRepository,
         tester: tester,
       );
 
@@ -94,6 +104,7 @@ void main() {
           mockInvestorsRepository: mockInvestorsRepository,
           mockReportRepository: mockReportRepository,
           mockAuthenticationRepository: mockAuthenticationRepository,
+          mockUrlRepository: mockUrlRepository,
           tester: tester,
           mockGoRouter: mockGoRouter,
         );

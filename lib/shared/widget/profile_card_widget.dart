@@ -112,7 +112,7 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
                   textMaxLines: KMinMaxSize.textMaxLineOne,
                   textStyle: AppTextStyle.text32,
                   onPressed: () => context.dialog.showLogoutConfirmationDialog(
-                    isDesk: widget.isDesk,
+                    isDesk: true,
                   ),
                   isDesk: true,
                 ),
@@ -125,7 +125,7 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
                   textMaxLines: KMinMaxSize.textMaxLineOne,
                   textStyle: AppTextStyle.text32,
                   onPressed: () => context.dialog.showDeleteConfirmationDialog(
-                    isDesk: widget.isDesk,
+                    isDesk: true,
                   ),
                   isDesk: true,
                   // backgroundColor: AppColors.transparent,
@@ -138,7 +138,7 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
             key: KWidgetkeys.widget.profileCard.logOutButton,
             text: context.l10n.logOut,
             onPressed: () => context.dialog.showLogoutConfirmationDialog(
-              isDesk: widget.isDesk,
+              isDesk: false,
             ),
             isDesk: false,
           ),
@@ -147,7 +147,7 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
             key: KWidgetkeys.widget.profileCard.deleteButton,
             text: context.l10n.deleteAccount,
             onPressed: () => context.dialog.showDeleteConfirmationDialog(
-              isDesk: widget.isDesk,
+              isDesk: false,
             ),
             isDesk: false,
             // backgroundColor: AppColors.transparent,

@@ -42,7 +42,10 @@ void main() {
         await mobSettingsInitialHelper(tester);
       });
       testWidgets('Mobile feedback correct enter text', (tester) async {
-        await mobSettingsPumpAppHelper(tester: tester);
+        await mobSettingsPumpAppHelper(
+          tester: tester,
+          mockGoRouter: mockGoRouter,
+        );
 
         await mobFeedbackOpenHelper(
           test: mobFeedbackCorrectTextHelper,

@@ -27,7 +27,7 @@ void main() {
         (realInvocation) => UserSetting.empty,
       );
       when(mockAuthenticationRepository.isAnonymouslyOrEmty()).thenAnswer(
-        (realInvocation) => true,
+        (realInvocation) => false,
       );
     });
     testWidgets('${KGroupText.intial} ', (tester) async {
@@ -76,9 +76,12 @@ void main() {
           mockAuthenticationRepository: mockAuthenticationRepository,
         );
 
-        await logOutUnconfirmButtonlHelper(
+        await changeWindowSizeHelper(
           tester: tester,
-          mockGoRouter: mockGoRouter,
+          test: () async => logOutUnconfirmButtonlHelper(
+            tester: tester,
+            mockGoRouter: mockGoRouter,
+          ),
         );
       });
 
@@ -102,9 +105,12 @@ void main() {
           mockAuthenticationRepository: mockAuthenticationRepository,
         );
 
-        await deleteAccountUnconfirmButtonlHelper(
+        await changeWindowSizeHelper(
           tester: tester,
-          mockGoRouter: mockGoRouter,
+          test: () async => deleteAccountUnconfirmButtonlHelper(
+            tester: tester,
+            mockGoRouter: mockGoRouter,
+          ),
         );
       });
 

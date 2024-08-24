@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:veteranam/shared/shared.dart';
 
 class DonateCardWidget extends StatelessWidget {
@@ -74,9 +73,10 @@ class DonateCardWidget extends StatelessWidget {
                   vertical: KPadding.kPaddingSize16,
                 ),
                 child: Text(
-                  context.isEnglish
-                      ? fundModel.descriptionEN
-                      : fundModel.description,
+                  fundModel.description.getTrnslation(
+                    en: fundModel.descriptionEN,
+                    context: context,
+                  ),
                   key: KWidgetkeys.widget.donateCard.subtitle,
                   style: isDesk
                       ? AppTextStyle.materialThemeBodyLarge
@@ -87,9 +87,10 @@ class DonateCardWidget extends StatelessWidget {
             DonateButtonWidget(
               key: KWidgetkeys.widget.donateCard.button,
               text: context.l10n.support,
-              onPressed: () => context
-                  .read<UrlCubit>()
-                  .launchUrl(url: fundModel.projectsLink ?? fundModel.link),
+              // coverage:ignore-start
+              onPressed: () =>
+                  context.launchUrl(fundModel.projectsLink ?? fundModel.link),
+              // coverage:ignore-end
               isDesk: isDesk,
             ),
           ],

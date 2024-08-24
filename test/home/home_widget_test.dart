@@ -343,7 +343,7 @@ void main() {
             );
           });
 
-          testWidgets('All footer widget navigation', (tester) async {
+          testWidgets('Footer widget navigation', (tester) async {
             await homePumpAppHelper(
               tester: tester,
               mockGoRouter: mockGoRouter,
@@ -356,6 +356,24 @@ void main() {
             );
 
             await footerButtonsHelper(
+              tester: tester,
+              mockGoRouter: mockGoRouter,
+            );
+          });
+
+          testWidgets('${KRoute.feedback.name} ', (tester) async {
+            await homePumpAppHelper(
+              tester: tester,
+              mockGoRouter: mockGoRouter,
+              mockAuthenticationRepository: mockAuthenticationRepository,
+              // mockFeedbackRepository: mockFeedbackRepository,
+              mockFaqRepository: mockFaqRepository,
+              mockUrlRepository: mockUrlRepository,
+              // mockAppAuthenticationRepository:
+              // mockAppAuthenticationRepository,
+            );
+
+            await footerFeedbackHelper(
               tester: tester,
               mockGoRouter: mockGoRouter,
             );

@@ -217,6 +217,8 @@ extension ContextExtensions on BuildContext {
 
   void copyText(String text, String? href, String? title) =>
       read<UrlCubit>().copy(text);
+
+  void launchUrl(String? url) => read<UrlCubit>().launchUrl(url: url);
 }
 
 extension DiscountEnumExtensions on DiscountEnum {

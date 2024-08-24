@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:veteranam/shared/shared.dart';
 
 @injectable
@@ -30,7 +29,7 @@ class UrlCubit extends Cubit<UrlEnum?> {
   Future<void> launchUrl({
     required String? url,
     String? scheme,
-    LaunchMode? mode,
+    // LaunchMode? mode,
   }) async {
     if (url == null) {
       return;

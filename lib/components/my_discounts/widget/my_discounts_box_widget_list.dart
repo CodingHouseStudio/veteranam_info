@@ -21,6 +21,11 @@ List<Widget> _discountsboxWidgetList({
       context.read<MyDiscountsWatcherBloc>().state.failure == null
           ? discountsWidgetList.length
           : 0, (index) {
+    void deleteFucntion() => context.read<MyDiscountsWatcherBloc>().add(
+          MyDiscountsWatcherEvent.deleteDiscount(
+            discountsWidgetList.elementAt(index).id,
+          ),
+        );
     return Padding(
       padding: index != 0
           ? const EdgeInsets.only(
@@ -53,13 +58,7 @@ List<Widget> _discountsboxWidgetList({
                       Row(
                         children: [
                           IconButtonWidget(
-                            onPressed: () {
-                              context.read<MyDiscountsWatcherBloc>().add(
-                                    MyDiscountsWatcherEvent.deleteDiscount(
-                                      discountsWidgetList.elementAt(index).id,
-                                    ),
-                                  );
-                            },
+                            onPressed: deleteFucntion,
                             key: KWidgetkeys.screen.myDiscounts.iconTrash,
                             padding: KPadding.kPaddingSize12,
                             icon: KIcon.trash,
@@ -105,13 +104,7 @@ List<Widget> _discountsboxWidgetList({
                       KSizedBox.kWidthSizedBox40,
                       IconButtonWidget(
                         key: KWidgetkeys.screen.myDiscounts.iconTrash,
-                        onPressed: () {
-                          context.read<MyDiscountsWatcherBloc>().add(
-                                MyDiscountsWatcherEvent.deleteDiscount(
-                                  discountsWidgetList.elementAt(index).id,
-                                ),
-                              );
-                        },
+                        onPressed: deleteFucntion,
                         padding: KPadding.kPaddingSize12,
                         icon: KIcon.trash,
                         background:

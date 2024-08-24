@@ -33,7 +33,7 @@ List<Widget> discountsWidgetList({
         context.read<DiscountWatcherBloc>().state.loadingStatus !=
             LoadingStatus.listLoadedFull) {
       finalList.add(
-        DiscountNotificationWidget(isDesk: isDesk),
+        DiscountNotificationWidget(key: ValueKey(i), isDesk: isDesk),
       );
     }
   }

@@ -20,6 +20,7 @@ void main() {
     late IReportRepository mockReportRepository;
     late AuthenticationRepository mockAuthenticationRepository;
     late IAppAuthenticationRepository mockAppAuthenticationRepository;
+    late IUrlRepository mockUrlRepository;
     setUp(() {
       ExtendedDateTime.current = KTestText.dateTime;
       ExtendedDateTime.id = '';
@@ -29,6 +30,7 @@ void main() {
       mockReportRepository = MockIReportRepository();
       mockAuthenticationRepository = MockAuthenticationRepository();
       mockAppAuthenticationRepository = MockAppAuthenticationRepository();
+      mockUrlRepository = MockIUrlRepository();
 
       when(mockAuthenticationRepository.currentUser).thenAnswer(
         (realInvocation) => User.empty,
@@ -64,6 +66,13 @@ void main() {
       ).thenAnswer(
         (invocation) async => Right(KTestText.reportItems),
       );
+      when(
+        mockUrlRepository.launchUrl(
+          url: KTestText.fundItems.first.projectsLink!,
+        ),
+      ).thenAnswer(
+        (invocation) async => const Right(true),
+      );
     });
     group('${KGroupText.failure} ', () {
       testWidgets('${KGroupText.error} ', (tester) async {
@@ -79,6 +88,7 @@ void main() {
           mockInvestorsRepository: mockInvestorsRepository,
           mockReportRepository: mockReportRepository,
           mockAuthenticationRepository: mockAuthenticationRepository,
+          mockUrlRepository: mockUrlRepository,
           tester: tester,
         );
 
@@ -97,6 +107,7 @@ void main() {
           mockInvestorsRepository: mockInvestorsRepository,
           mockReportRepository: mockReportRepository,
           mockAuthenticationRepository: mockAuthenticationRepository,
+          mockUrlRepository: mockUrlRepository,
           tester: tester,
         );
 
@@ -115,6 +126,7 @@ void main() {
           mockInvestorsRepository: mockInvestorsRepository,
           mockReportRepository: mockReportRepository,
           mockAuthenticationRepository: mockAuthenticationRepository,
+          mockUrlRepository: mockUrlRepository,
           tester: tester,
         );
 
@@ -147,6 +159,7 @@ void main() {
           mockInvestorsRepository: mockInvestorsRepository,
           mockReportRepository: mockReportRepository,
           mockAuthenticationRepository: mockAuthenticationRepository,
+          mockUrlRepository: mockUrlRepository,
           tester: tester,
         );
 
@@ -170,6 +183,7 @@ void main() {
           mockInvestorsRepository: mockInvestorsRepository,
           mockReportRepository: mockReportRepository,
           mockAuthenticationRepository: mockAuthenticationRepository,
+          mockUrlRepository: mockUrlRepository,
           tester: tester,
         );
 
@@ -184,6 +198,7 @@ void main() {
             mockInvestorsRepository: mockInvestorsRepository,
             mockReportRepository: mockReportRepository,
             mockAuthenticationRepository: mockAuthenticationRepository,
+            mockUrlRepository: mockUrlRepository,
             tester: tester,
           ),
         );
@@ -201,6 +216,7 @@ void main() {
           mockInvestorsRepository: mockInvestorsRepository,
           mockReportRepository: mockReportRepository,
           mockAuthenticationRepository: mockAuthenticationRepository,
+          mockUrlRepository: mockUrlRepository,
           tester: tester,
         ),
         // lastCard: KWidgetkeys.screen.investors.cardLast,
@@ -211,6 +227,7 @@ void main() {
           mockInvestorsRepository: mockInvestorsRepository,
           mockReportRepository: mockReportRepository,
           mockAuthenticationRepository: mockAuthenticationRepository,
+          mockUrlRepository: mockUrlRepository,
           tester: tester,
         );
 
@@ -222,11 +239,11 @@ void main() {
       //     mockInvestorsRepository: mockInvestorsRepository,
       //     mockReportRepository: mockReportRepository,
       //     mockAuthenticationRepository: mockAuthenticationRepository,
-      //     tester: tester,
+      //    mockUrlRepository: mockUrlRepository, tester: tester,
       //   );
 
       //   await reportDialogIncorrectSendHelper(
-      //     tester: tester,
+      //    mockUrlRepository: mockUrlRepository, tester: tester,
       //   );
       // });
       // testWidgets('Report Dialog Incorect Send(field null and user)',
@@ -240,11 +257,11 @@ void main() {
       //     mockInvestorsRepository: mockInvestorsRepository,
       //     mockReportRepository: mockReportRepository,
       //     mockAuthenticationRepository: mockAuthenticationRepository,
-      //     tester: tester,
+      //    mockUrlRepository: mockUrlRepository, tester: tester,
       //   );
 
       //   await reportDialogIncorrectSendHelper(
-      //     tester: tester,
+      //    mockUrlRepository: mockUrlRepository, tester: tester,
       //     fieldNull: true,
       //   );
       // });
@@ -254,11 +271,11 @@ void main() {
       //     mockInvestorsRepository: mockInvestorsRepository,
       //     mockReportRepository: mockReportRepository,
       //     mockAuthenticationRepository: mockAuthenticationRepository,
-      //     tester: tester,
+      //    mockUrlRepository: mockUrlRepository, tester: tester,
       //   );
 
       //   await reportDialogIncorrectSendHelper(
-      //     tester: tester,
+      //    mockUrlRepository: mockUrlRepository, tester: tester,
       //     fieldNull: true,
       //   );
       // });
@@ -272,6 +289,7 @@ void main() {
             mockInvestorsRepository: mockInvestorsRepository,
             mockReportRepository: mockReportRepository,
             mockAuthenticationRepository: mockAuthenticationRepository,
+            mockUrlRepository: mockUrlRepository,
             tester: tester,
             mockGoRouter: mockGoRouter,
           );
@@ -284,6 +302,7 @@ void main() {
             mockInvestorsRepository: mockInvestorsRepository,
             mockReportRepository: mockReportRepository,
             mockAuthenticationRepository: mockAuthenticationRepository,
+            mockUrlRepository: mockUrlRepository,
             tester: tester,
             mockGoRouter: mockGoRouter,
           );
@@ -299,6 +318,7 @@ void main() {
               mockInvestorsRepository: mockInvestorsRepository,
               mockReportRepository: mockReportRepository,
               mockAuthenticationRepository: mockAuthenticationRepository,
+              mockUrlRepository: mockUrlRepository,
               tester: tester,
               mockGoRouter: mockGoRouter,
             );
@@ -326,6 +346,7 @@ void main() {
             mockInvestorsRepository: mockInvestorsRepository,
             mockReportRepository: mockReportRepository,
             mockAuthenticationRepository: mockAuthenticationRepository,
+            mockUrlRepository: mockUrlRepository,
             tester: tester,
           );
 

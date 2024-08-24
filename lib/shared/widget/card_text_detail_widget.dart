@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
@@ -51,8 +53,7 @@ class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
               a: AppTextStyle.materialThemeBodyLarge,
             ),
             // coverage:ignore-start
-            onTapLink: (text, href, title) =>
-                context.read<UrlCubit>().launchUrl(url: href),
+            onTapLink: (text, href, title) => context.launchUrl(href),
             // coverage:ignore-end
           )
         else

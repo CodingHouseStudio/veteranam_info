@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-import 'package:url_launcher/url_launcher.dart';
 import 'package:veteranam/shared/shared.dart';
 
 abstract class FooterWidget {
@@ -440,10 +439,10 @@ abstract class FooterWidget {
   }) =>
       IconButtonWidget(
         key: key,
-        onPressed: () => context.read<UrlCubit>().launchUrl(
-              url: url,
-              mode: LaunchMode.externalApplication,
-            ),
+        onPressed: () => context.launchUrl(
+          url,
+          // mode: LaunchMode.externalApplication,
+        ),
         icon: image,
         background: AppColors.materialThemeSourceSeed,
       );

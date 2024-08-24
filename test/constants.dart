@@ -422,6 +422,7 @@ abstract class KTestConstants {
 
   static const windowDeskSize = Size(1700, 1700);
   static const windowMobileSize = Size(700, 700);
+  static const windowSmallSize = Size(500, 500);
 
   static const englishIndex = 1;
   static const ukrainIndex = 0;
