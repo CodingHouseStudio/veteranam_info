@@ -3,6 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:veteranam/shared/shared.dart';
 
+MobFeedbackWidget feedbackBuilder(
+  BuildContext context,
+  Future<void> Function(String, {Map<String, dynamic>? extras}) onSubmit,
+  ScrollController? scrollController,
+) {
+  return MobFeedbackWidget(
+    onSubmit: onSubmit,
+    // scrollController: scrollController,
+  );
+}
+
 class MobFeedbackWidget extends StatelessWidget {
   const MobFeedbackWidget({
     required this.onSubmit,

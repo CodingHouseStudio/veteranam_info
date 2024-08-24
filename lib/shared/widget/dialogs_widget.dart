@@ -228,7 +228,7 @@ class _DialogsWidget {
 
   void showGetErrorDialog({
     required String? error,
-    required void Function() onPressed,
+    required void Function()? onPressed,
   }) {
     if (error != null) {
       ScaffoldMessenger.of(context).showSnackBar(

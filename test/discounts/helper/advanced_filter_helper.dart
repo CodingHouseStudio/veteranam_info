@@ -118,15 +118,32 @@ Future<void> advancedFilterHelper(
     hasAmount: true,
   );
 
+  await chekPointSignleTapHelper(
+    tester: tester,
+    index: 1,
+    hasAmount: true,
+  );
+
   await tester.tap(
     find.byKey(KWidgetkeys.screen.discounts.appliedFilterItems).first,
     warnIfMissed: false,
   );
 
+  await tester.pumpAndSettle();
+
+  await tester.tap(
+    find.byKey(KWidgetkeys.screen.discounts.appliedFilterItems).first,
+    warnIfMissed: false,
+  );
+
+  await tester.pumpAndSettle();
+
   await tester.tap(
     find.byKey(KWidgetkeys.screen.discounts.appliedFilterItems).last,
     warnIfMissed: false,
   );
+
+  await tester.pumpAndSettle();
 
   await chekPointSignleTapHelper(
     tester: tester,

@@ -224,11 +224,9 @@ extension GetItInjectableX on _i174.GetIt {
           storyRepository: gh<_i1001.IStoryRepository>()),
       registerFor: {_development},
     );
-    gh.singleton<_i208.AuthenticationRepository>(
-      () => _i208.AuthenticationRepository(
-          gh<_i1001.IAppAuthenticationRepository>()),
-      dispose: (i) => i.dispose(),
-    );
+    gh.singleton<_i208.AuthenticationRepository>(() =>
+        _i208.AuthenticationRepository(
+            gh<_i1001.IAppAuthenticationRepository>()));
     gh.factory<_i785.SignUpBloc>(
       () => _i785.SignUpBloc(
           iAppAuthenticationRepository:
@@ -261,9 +259,7 @@ extension GetItInjectableX on _i174.GetIt {
               gh<_i1001.IAppAuthenticationRepository>(),
         ));
     gh.singleton<_i997.NetworkRepository>(
-      () => _i997.NetworkRepository(gh<_i1001.IAppNetworkRepository>()),
-      dispose: (i) => i.dispose(),
-    );
+        () => _i997.NetworkRepository(gh<_i1001.IAppNetworkRepository>()));
     gh.factory<_i922.MyStoryWatcherBloc>(
       () => _i922.MyStoryWatcherBloc(
         storyRepository: gh<_i1001.IStoryRepository>(),

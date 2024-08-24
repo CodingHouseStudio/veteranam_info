@@ -291,6 +291,8 @@ abstract class KTestText {
         id: i.toString(),
         fetchDate: dateTime,
         image: i > _itemsPhoto ? imageModels : null,
+        categoryUA:
+            i == 0 ? KMockText.tag : KMockText.informationModel.categoryUA,
         category: i == 0 ? KMockText.tag : KMockText.informationModel.category,
       ),
   ];

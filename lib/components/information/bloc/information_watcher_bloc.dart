@@ -184,7 +184,7 @@ class InformationWatcherBloc
         .loadingFilterAndStatus(
       filtersValue: filters,
       itemsLoaded: itemsLoaded,
-      getFilter: (InformationModel item) => item.category,
+      getFilter: (InformationModel item) => item.categoryUA,
       loadItems: loadItems,
     );
   }

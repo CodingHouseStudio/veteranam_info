@@ -113,7 +113,7 @@ void main() {
         );
         bloc.add(
           InformationWatcherEvent.filter(
-            KTestText.informationModelItemsModify.first.category.first,
+            KTestText.informationModelItemsModify.first.categoryUA.first,
           ),
         );
       },
@@ -130,8 +130,8 @@ void main() {
           (state) =>
               state.loadingStatus == LoadingStatus.listLoadedFull &&
               state.filteredInformationModelItems.every(
-                (element) => element.category.contains(
-                  KTestText.informationModelItemsModify.first.category.first,
+                (element) => element.categoryUA.contains(
+                  KTestText.informationModelItemsModify.first.categoryUA.first,
                 ),
               ) &&
               state.filters.isNotEmpty,
@@ -235,7 +235,7 @@ void main() {
           )
           ..add(
             InformationWatcherEvent.filter(
-              KTestText.informationModelItemsModify.first.category.first,
+              KTestText.informationModelItemsModify.first.categoryUA.first,
             ),
           );
       },
@@ -292,7 +292,7 @@ void main() {
         bloc
           ..add(
             InformationWatcherEvent.filter(
-              KTestText.informationModelItemsModify.first.category.first,
+              KTestText.informationModelItemsModify.first.categoryUA.first,
             ),
           )
           ..add(
@@ -300,7 +300,7 @@ void main() {
           )
           ..add(
             InformationWatcherEvent.filter(
-              KTestText.informationModelItemsModify.first.category.first,
+              KTestText.informationModelItemsModify.first.categoryUA.first,
             ),
           )
           ..add(
