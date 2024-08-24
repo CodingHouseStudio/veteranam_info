@@ -75,7 +75,11 @@ class AppWidget extends StatelessWidget {
                 localizationsDelegates: locale,
                 localeOverride: localeValue,
                 mode: FeedbackMode.navigate,
-                feedbackBuilder: MobFeedbackWidgetExtensions.feedbackBuilder,
+                feedbackBuilder: (context, onSubmit, scrollController) =>
+                    MobFeedbackWidget(
+                  onSubmit: onSubmit,
+                  // scrollController: scrollController,
+                ),
                 child: BlocBuilder<MobOfflineModeCubit, MobMode>(
                   builder: (context, state) {
                     return body(localeValue);

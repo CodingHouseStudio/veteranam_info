@@ -301,16 +301,3 @@ extension UserRoleExtensions on UserRole {
     }
   }
 }
-
-extension MobFeedbackWidgetExtensions on MobFeedbackWidget {
-  static MobFeedbackWidget feedbackBuilder(
-    BuildContext context,
-    Future<void> Function(String, {Map<String, dynamic>? extras}) onSubmit,
-    ScrollController? scrollController,
-  ) {
-    return MobFeedbackWidget(
-      onSubmit: onSubmit,
-      // scrollController: scrollController,
-    );
-  }
-}
