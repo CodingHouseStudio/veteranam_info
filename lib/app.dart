@@ -1,4 +1,5 @@
 import 'package:feedback/feedback.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -35,7 +36,7 @@ class App extends StatelessWidget {
           create: (context) =>
               GetIt.I.get<NetworkCubit>()..networkInitialized(),
         ),
-        if (!KTest.testIsWeb) ...[
+        if (!kIsWeb) ...[
           BlocProvider(
             create: (context) => GetIt.I.get<MobFeedbackBloc>(),
           ),
@@ -68,7 +69,7 @@ class AppWidget extends StatelessWidget {
           return const SizedBox.shrink();
         }
         final localeValue = _.userSetting.locale.value;
-        return KTest.testIsWeb
+        return kIsWeb
             ? body(localeValue)
             : BetterFeedback(
                 localizationsDelegates: locale,
