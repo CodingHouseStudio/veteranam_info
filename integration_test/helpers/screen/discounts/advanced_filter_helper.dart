@@ -152,6 +152,33 @@ Future<void> advancedFilterHelper(
 
   await tester.pumpAndSettle();
 
+  if (find
+      .byKey(KWidgetkeys.screen.discounts.advancedFilterDialog)
+      .evaluate()
+      .isNotEmpty) {
+    await scrollingHelperInt(
+      tester: tester,
+      itemKey: KWidgetkeys.screen.discounts.advancedFilter,
+    );
+
+    expect(
+      find.byKey(KWidgetkeys.screen.discounts.advancedFilter),
+      findsOneWidget,
+    );
+    // final advancedButton = tester.widgetList(
+    //   find.byKey(KWidgetkeys.screen.discounts.advancedFilterButton),
+    // );
+
+    expect(
+      find.byKey(KWidgetkeys.screen.discounts.advancedFilterButton),
+      findsOneWidget,
+    );
+
+    // if (advancedButton.isNotEmpty) {
+    await tester
+        .tap(find.byKey(KWidgetkeys.screen.discounts.advancedFilterButton));
+  }
+
   await scrollingHelperInt(
     tester: tester,
     offset: KTestConstants.scrollingUp,

@@ -97,10 +97,15 @@ class AdvancedFilterMobDialog extends StatelessWidget {
                 children: [
                   AdvancedFilterResetButton(
                     isDesk: false,
-                    resetEvent: _.sorting.isNotEmpty ||
-                            _.filtersLocation.isNotEmpty
-                        ? () => context.read<AdvancedFilterMobCubit>().reset()
-                        : null,
+                    resetEvent:
+                        _.sorting.isNotEmpty || _.filtersLocation.isNotEmpty
+                            ? () {
+                                context.read<DiscountWatcherBloc>().add(
+                                      const DiscountWatcherEvent.filterReset(),
+                                    );
+                                context.pop();
+                              }
+                            : null,
                   ),
                   KSizedBox.kWidthSizedBox8,
                   DoubleButtonWidget(
