@@ -149,16 +149,6 @@ Future<void> advancedFilterHelper(
     findsOneWidget,
   );
 
-  await tester
-      .tap(find.byKey(KWidgetkeys.screen.discounts.advancedFilterResetButton));
-
-  await tester.pumpAndSettle();
-
-  expect(
-    find.byKey(KWidgetkeys.screen.discounts.appliedFilterItems),
-    findsNothing,
-  );
-
   final isMobile = tester
       .widgetList(find.byKey(KWidgetkeys.screen.discounts.advancedFilterDialog))
       .isNotEmpty;
@@ -179,6 +169,17 @@ Future<void> advancedFilterHelper(
       findsOneWidget,
     );
   } else {
+    await tester.tap(
+      find.byKey(KWidgetkeys.screen.discounts.advancedFilterResetButton),
+    );
+
+    await tester.pumpAndSettle();
+
+    expect(
+      find.byKey(KWidgetkeys.screen.discounts.appliedFilterItems),
+      findsNothing,
+    );
+
     expect(
       find.byKey(KWidgetkeys.screen.discounts.advancedFilterButtonIcon),
       findsOneWidget,
