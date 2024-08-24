@@ -2,8 +2,7 @@ import 'dart:math';
 import 'dart:typed_data';
 import 'package:collection/collection.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/widgets.dart'
-    show BuildContext, ScrollController, visibleForTesting;
+import 'package:flutter/widgets.dart' show BuildContext, visibleForTesting;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
