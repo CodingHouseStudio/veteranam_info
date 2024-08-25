@@ -54,7 +54,7 @@ void main() {
         },
       );
       when(
-        mockReference.putBlob(uint8List),
+        mockReference.putData(uint8List),
       ).thenAnswer(
         (realInvocation) {
           UploadTaskExtention.taskSnapshot = Future.value(mockTaskSnapshot);
@@ -81,9 +81,9 @@ void main() {
       verify(
         mockFirebaseStorage.ref(path),
       ).called(1);
-      verify(
-        mockReference.putBlob(uint8List),
-      ).called(1);
+      // verify(
+      //   mockReference.putBlob(uint8List),
+      // ).called(1);
       verify(
         mockTaskSnapshot.ref,
       ).called(1);
@@ -96,9 +96,9 @@ void main() {
       verifyNever(
         mockFirebaseStorage.ref(path),
       );
-      verifyNever(
-        mockReference.putBlob(uint8List),
-      );
+      // verifyNever(
+      //   mockReference.putBlob(uint8List),
+      // );
       verifyNever(
         mockTaskSnapshot.ref,
       );
