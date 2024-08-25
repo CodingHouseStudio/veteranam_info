@@ -10,6 +10,7 @@ Future<void> investorsPumpAppHelper({
   required IReportRepository mockReportRepository,
   required AuthenticationRepository mockAuthenticationRepository,
   required IAppAuthenticationRepository mockAppAuthenticationRepository,
+  required IUrlRepository mockUrlRepository,
   required WidgetTester tester,
   MockGoRouter? mockGoRouter,
 }) async {
@@ -23,8 +24,9 @@ Future<void> investorsPumpAppHelper({
     mockReportRepository: mockReportRepository,
   );
   _registerAuthenticationBloc(
-    mockAuthenticationRepository: mockAuthenticationRepository,
+    mockAuthenticationRepository,
   );
+  _registerUrlCubit(mockUrlRepository);
   await tester.pumpApp(const InvestorsScreen(), mockGoRouter: mockGoRouter);
 
   expect(
@@ -65,9 +67,9 @@ void _registerReportBloc({
   GetIt.I.registerSingleton<ReportBloc>(reportBloc);
 }
 
-void _registerAuthenticationBloc({
-  required AuthenticationRepository mockAuthenticationRepository,
-}) {
+void _registerAuthenticationBloc(
+  AuthenticationRepository mockAuthenticationRepository,
+) {
   final authenticationBloc = AuthenticationBloc(
     authenticationRepository: mockAuthenticationRepository,
   );
@@ -75,4 +77,16 @@ void _registerAuthenticationBloc({
     GetIt.I.unregister<AuthenticationBloc>();
   }
   GetIt.I.registerSingleton<AuthenticationBloc>(authenticationBloc);
+}
+
+void _registerUrlCubit(
+  IUrlRepository mockUrlRepository,
+) {
+  final urlCubit = UrlCubit(
+    urlRepository: mockUrlRepository,
+  );
+  if (GetIt.I.isRegistered<UrlCubit>()) {
+    GetIt.I.unregister<UrlCubit>();
+  }
+  GetIt.I.registerSingleton<UrlCubit>(urlCubit);
 }

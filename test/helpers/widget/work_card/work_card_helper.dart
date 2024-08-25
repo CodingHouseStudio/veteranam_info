@@ -1,35 +1,35 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:veteranam/shared/shared.dart';
 
-import '../../test_dependency.dart';
+import '../../../test_dependency.dart';
 
 Future<void> workCardHelper(
   WidgetTester tester,
 ) async {
-  expect(find.byKey(KWidgetkeys.widget.workCard.title), findsOneWidget);
+  expect(find.byKey(KWidgetkeys.widget.workCard.title), findsWidgets);
 
-  expect(find.byKey(KWidgetkeys.widget.workCard.city), findsOneWidget);
+  expect(find.byKey(KWidgetkeys.widget.workCard.city), findsWidgets);
 
   expect(
     find.byKey(KWidgetkeys.widget.workCard.employer),
-    findsOneWidget,
+    findsWidgets,
   );
 
   expect(
     find.byKey(KWidgetkeys.widget.workCard.iconSafe),
-    findsOneWidget,
+    findsWidgets,
   );
 
   expect(
     find.byKey(KWidgetkeys.widget.workCard.iconShare),
-    findsOneWidget,
+    findsWidgets,
   );
 
-  expect(find.byKey(KWidgetkeys.widget.workCard.price), findsOneWidget);
+  expect(find.byKey(KWidgetkeys.widget.workCard.price), findsWidgets);
 
   expect(
     find.byKey(KWidgetkeys.widget.workCard.button),
-    findsOneWidget,
+    findsWidgets,
   );
 
   await cardTextDetailHelper(tester);

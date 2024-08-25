@@ -12,7 +12,8 @@ class EmployeeRespondBodyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<EmployeeRespondBloc, EmployeeRespondState>(
-      buildWhen: (previous, current) => previous.formState != current.formState,
+      // buildWhen: (previous, current) => previous.formState !=
+      // current.formState,
       builder: (context, state) {
         return ScaffoldDecorationWidget(
           titleChildWidgetsFunction: ({required isDesk}) => [

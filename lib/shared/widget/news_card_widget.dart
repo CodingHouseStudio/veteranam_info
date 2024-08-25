@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:veteranam/shared/shared.dart';
 
 class NewsCardWidget extends StatelessWidget {
@@ -70,14 +69,11 @@ class NewsCardWidget extends StatelessWidget {
                 key: KWidgetkeys.widget.newsCard.tags,
                 spacing: KSize.kWrapSpacing8,
                 runSpacing: KSize.kWrapRunSpacing4,
-                children: (context
-                                .read<AuthenticationBloc>()
-                                .state
-                                .userSetting
-                                .locale ==
-                            Language.english
-                        ? informationItem.category
-                        : informationItem.categoryUA)
+                children: informationItem.categoryUA
+                    .getTrnslation(
+                  en: informationItem.category,
+                  context: context,
+                )
                     .map((category) {
                   return Container(
                     decoration: KWidgetTheme.boxDecorationCardGrayBorder,

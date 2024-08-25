@@ -15,39 +15,43 @@ class PageIndicatorControlState extends State<PageIndicatorControl> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            IconButton(
-              icon: KIcon.arrowLeft,
-              onPressed: () => setState(
-                () => currentPage =
-                    (currentPage - 1 + widget.pageCount) % widget.pageCount,
-              ),
-            ),
-            Expanded(
-              child: SizedBox(
-                height: 30,
-                child: CustomPaint(
-                  painter: ViewpagerIndicatorWidget(
-                    pageCount: widget.pageCount,
-                    selectedPage: currentPage,
-                  ),
-                ),
-              ),
-            ),
-            IconButton(
-              icon: KIcon.arrowRight,
-              onPressed: () => setState(
-                () => currentPage = (currentPage + 1) % widget.pageCount,
-              ),
-            ),
-          ],
+    return
+        // Column(
+        //   mainAxisAlignment: MainAxisAlignment.center,
+        //   children: [
+        //     Row(
+        //       mainAxisAlignment: MainAxisAlignment.center,
+        //       children: [
+        //         IconButton(
+        //           icon: KIcon.arrowLeft,
+        //           onPressed: () => setState(
+        //             () => currentPage =
+        //                 (currentPage - 1 + widget.pageCount) % widget
+        // .pageCount,
+        //           ),
+        //         ),
+        //         Expanded(
+        //           child:
+        SizedBox(
+      height: 30,
+      child: CustomPaint(
+        painter: ViewpagerIndicatorWidget(
+          pageCount: widget.pageCount,
+          selectedPage: currentPage,
         ),
-      ],
-    );
+      ),
+    )
+        // ),
+        //         IconButton(
+        //           icon: KIcon.arrowRight,
+        //           onPressed: () => setState(
+        //             () => currentPage = (currentPage + 1) % widget.pageCount,
+        //           ),
+        //         ),
+        //       ],
+        //     ),
+        //   ],
+        // )
+        ;
   }
 }

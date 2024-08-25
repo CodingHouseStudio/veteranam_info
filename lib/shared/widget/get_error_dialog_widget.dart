@@ -7,7 +7,7 @@ class GetErrorDialogWidget extends StatelessWidget {
     required this.error,
     super.key,
   });
-  final void Function() onPressed;
+  final void Function()? onPressed;
   final String error;
 
   @override
@@ -31,7 +31,7 @@ class GetErrorDialogWidget extends StatelessWidget {
                     key: KWidgetkeys.widget.dialogs.failureButton,
                     style: KButtonStyles.whiteSnackBarButtonStyle,
                     onPressed: () {
-                      onPressed();
+                      onPressed?.call();
                       ScaffoldMessenger.of(context).hideCurrentSnackBar();
                     },
                     child: Text(

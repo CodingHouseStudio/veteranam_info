@@ -41,7 +41,7 @@ class UrlRepository extends IUrlRepository {
   Future<Either<SomeFailure, bool>> launchUrl({
     required String url,
     String? scheme,
-    url_launcher.LaunchMode mode = url_launcher.LaunchMode.platformDefault,
+    // url_launcher.LaunchMode? mode,
   }) async {
     try {
       late Uri link;
@@ -57,7 +57,7 @@ class UrlRepository extends IUrlRepository {
       if (linkParse) {
         await url_launcher.launchUrl(
           link,
-          mode: mode,
+          // mode: mode ?? url_launcher.LaunchMode.platformDefault,
         );
         return const Right(true);
       }

@@ -7,17 +7,16 @@ Future<void> profileCardDeleteAccountHelper(
   WidgetTester tester,
 ) async {
   expect(
-    find.byKey(KWidgetkeys.widget.profileCardWidget.deleteButton),
+    find.byKey(KWidgetkeys.widget.profileCard.deleteButton),
     findsOneWidget,
   );
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.widget.profileCardWidget.deleteButton,
+    itemKey: KWidgetkeys.widget.profileCard.deleteButton,
   );
 
-  await tester
-      .tap(find.byKey(KWidgetkeys.widget.profileCardWidget.deleteButton));
+  await tester.tap(find.byKey(KWidgetkeys.widget.profileCard.deleteButton));
 
   await tester.pumpAndSettle();
 

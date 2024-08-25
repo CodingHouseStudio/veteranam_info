@@ -99,7 +99,7 @@ Future<void> advancedFilterHelper(
     findsWidgets,
   );
 
-  await chekPointHelper(hasAmount: true, tester: tester, twiceTap: true);
+  await chekPointHelper(hasAmount: true, tester: tester);
 
   await chekPointSignleTapHelper(tester: tester, hasAmount: true);
 

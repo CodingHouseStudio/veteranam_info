@@ -7,17 +7,16 @@ Future<void> profileCardLogOutHelper(
   WidgetTester tester,
 ) async {
   expect(
-    find.byKey(KWidgetkeys.widget.profileCardWidget.logOutButton),
+    find.byKey(KWidgetkeys.widget.profileCard.logOutButton),
     findsOneWidget,
   );
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.widget.profileCardWidget.logOutButton,
+    itemKey: KWidgetkeys.widget.profileCard.logOutButton,
   );
 
-  await tester
-      .tap(find.byKey(KWidgetkeys.widget.profileCardWidget.logOutButton));
+  await tester.tap(find.byKey(KWidgetkeys.widget.profileCard.logOutButton));
 
   await tester.pumpAndSettle();
 

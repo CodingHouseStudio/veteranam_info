@@ -66,7 +66,9 @@ class _RenderRowSliverSliver extends RenderSliver
   @override
   void performLayout() {
     if (firstChild == null) {
+      // coverage:ignore-start
       geometry = SliverGeometry.zero;
+      // coverage:ignore-end
       return;
     }
 

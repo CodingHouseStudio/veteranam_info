@@ -3,10 +3,10 @@ import 'package:veteranam/shared/shared.dart';
 
 import '../../../test_dependency.dart';
 
-Future<void> logOutConfirmButtonlHelper(
-  WidgetTester tester,
-  MockGoRouter mockGoRouter,
-) async {
+Future<void> logOutConfirmButtonlHelper({
+  required WidgetTester tester,
+  required MockGoRouter mockGoRouter,
+}) async {
   expect(
     find.byKey(KWidgetkeys.screen.profile.screen),
     findsOneWidget,

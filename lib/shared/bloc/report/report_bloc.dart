@@ -23,7 +23,7 @@ class ReportBloc extends Bloc<ReportEvent, ReportState> {
             message: null,
             formState: ReportEnum.initial,
             failure: null,
-            cardId: null,
+            cardId: '',
           ),
         ) {
     on<_Started>(_onStarted);
@@ -106,51 +106,51 @@ class ReportBloc extends Bloc<ReportEvent, ReportState> {
       }
       return;
     }
-    if (state.cardId != null
-        // &&
-        //     !((state.email == null || state.email!.isNotValid) &&
-        //             _appAuthenticationRepository.isAnonymously() ||
-        //         (state.message == null || state.message!.isNotValid) &&
-        //             state.reasonComplaint == ReasonComplaint.other)
-        ) {
-      emit(
-        state.copyWith(
-          failure: null,
-          formState: ReportEnum.success,
+    // if (state.cardId != null
+    // &&
+    //     !((state.email == null || state.email!.isNotValid) &&
+    //             _appAuthenticationRepository.isAnonymously() ||
+    //         (state.message == null || state.message!.isNotValid) &&
+    //             state.reasonComplaint == ReasonComplaint.other)
+    // ) {
+    emit(
+      state.copyWith(
+        failure: null,
+        formState: ReportEnum.success,
+      ),
+    );
+    // final result =
+    unawaited(
+      _reportRepository.sendReport(
+        ReportModel(
+          id: ExtendedDateTime.id,
+          reasonComplaint: state.reasonComplaint!,
+          // email: state.email?.value.isEmpty ?? true
+          //     ? _appAuthenticationRepository.currentUser.email!
+          //     : state.email!.value,
+          message: state.message?.value.isEmpty ?? true
+              ? null
+              : state.message?.value,
+          date: ExtendedDateTime.current,
+          card: event.card,
+          userId: _appAuthenticationRepository.currentUser.id,
+          cardId: state.cardId,
         ),
-      );
-      // final result =
-      unawaited(
-        _reportRepository.sendReport(
-          ReportModel(
-            id: ExtendedDateTime.id,
-            reasonComplaint: state.reasonComplaint!,
-            // email: state.email?.value.isEmpty ?? true
-            //     ? _appAuthenticationRepository.currentUser.email!
-            //     : state.email!.value,
-            message: state.message?.value.isEmpty ?? true
-                ? null
-                : state.message?.value,
-            date: ExtendedDateTime.current,
-            card: event.card,
-            userId: _appAuthenticationRepository.currentUser.id,
-            cardId: state.cardId!,
-          ),
-        ),
-      );
-      // result.fold(
-      //   (l) => emit(
-      //     state.copyWith(
-      //       formState: ReportEnum.initial,
-      //       failure: l._toReport(),
-      //     ),
-      //   ),
-      //   (r) =>
-      // );
-    } else {
-      emit(
-        state.copyWith(formState: ReportEnum.nextInvalidData, failure: null),
-      );
-    }
+      ),
+    );
+    // result.fold(
+    //   (l) => emit(
+    //     state.copyWith(
+    //       formState: ReportEnum.initial,
+    //       failure: l._toReport(),
+    //     ),
+    //   ),
+    //   (r) =>
+    // );
+    // } else {
+    //   emit(
+    //     state.copyWith(formState: ReportEnum.nextInvalidData, failure: null),
+    //   );
+    // }
   }
 }

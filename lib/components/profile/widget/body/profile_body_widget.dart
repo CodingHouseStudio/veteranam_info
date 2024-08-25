@@ -38,7 +38,7 @@ class ProfileBodyWidget extends StatelessWidget {
           Expanded(
             flex: 2,
             child: ProfileCardWidget(
-              key: KWidgetkeys.widget.profileCard.profileCard,
+              key: KWidgetkeys.screen.profile.profileCard,
               isDesk: isDesk,
             ),
           ),
@@ -60,7 +60,7 @@ class ProfileBodyWidget extends StatelessWidget {
     return [
       ..._buildBoxWidgets(context, isDesk),
       ProfileCardWidget(
-        key: KWidgetkeys.widget.profileCard.profileCard,
+        key: KWidgetkeys.screen.profile.profileCard,
         isDesk: isDesk,
       ),
       KSizedBox.kHeightSizedBox24,
@@ -68,55 +68,60 @@ class ProfileBodyWidget extends StatelessWidget {
   }
 
   List<Widget> _buildBoxWidgets(BuildContext context, bool isDesk) {
-    if (isDesk) {
-      return [
-        Padding(
-          padding: const EdgeInsets.all(KPadding.kPaddingSize8),
-          child: Column(
-            children: [
-              BoxWidget(
-                text: context.l10n.saved,
-                isDesk: isDesk,
-                onTap: () => context.goNamed(
-                  KRoute.profileSaves.name,
-                ),
+    // if (isDesk) {
+    return [
+      Padding(
+        padding: isDesk
+            ? const EdgeInsets.all(KPadding.kPaddingSize8)
+            : EdgeInsets.zero,
+        child: Column(
+          children: [
+            BoxWidget(
+              key: KWidgetkeys.screen.profile.boxSaves,
+              text: context.l10n.saved,
+              isDesk: isDesk,
+              onTap: () => context.goNamed(
+                KRoute.profileSaves.name,
               ),
-              KSizedBox.kHeightSizedBox30,
-              BoxWidget(
-                text: context.l10n.myStory,
-                isDesk: isDesk,
-                textIconPaddingWidget: KSizedBox.kHeightSizedBox56,
-                onTap: () => context.goNamed(KRoute.profileMyStory.name),
-              ),
-              KSizedBox.kHeightSizedBox30,
-              BoxWidget(
-                text: context.l10n.myFeedback,
-                isDesk: isDesk,
-                textIconPaddingWidget: KSizedBox.kHeightSizedBox56,
-                onTap: null,
-              ),
-            ],
-          ),
+            ),
+            KSizedBox.kHeightSizedBox30,
+            BoxWidget(
+              key: KWidgetkeys.screen.profile.boxStory,
+              text: context.l10n.myStory,
+              isDesk: isDesk,
+              textIconPaddingWidget: KSizedBox.kHeightSizedBox56,
+              onTap: () => context.goNamed(KRoute.profileMyStory.name),
+            ),
+            KSizedBox.kHeightSizedBox30,
+            BoxWidget(
+              key: KWidgetkeys.screen.profile.boxFeedback,
+              text: context.l10n.myFeedback,
+              isDesk: isDesk,
+              textIconPaddingWidget: KSizedBox.kHeightSizedBox56,
+              onTap: null,
+            ),
+          ],
         ),
-      ];
-    } else {
-      return [
-        BoxWidget(
-          text: context.l10n.saved,
-          isDesk: isDesk,
-          onTap: () => context.goNamed(
-            KRoute.profileSaves.name,
-          ),
-        ),
-        KSizedBox.kHeightSizedBox30,
-        BoxWidget(
-          text: context.l10n.myStory,
-          isDesk: isDesk,
-          textIconPaddingWidget: KSizedBox.kHeightSizedBox56,
-          onTap: () => context.goNamed(KRoute.profileMyStory.name),
-        ),
-        KSizedBox.kHeightSizedBox30,
-      ];
-    }
+      ),
+    ];
+    // } else {
+    //   return [
+    //     BoxWidget(
+    //       text: context.l10n.saved,
+    //       isDesk: isDesk,
+    //       onTap: () => context.goNamed(
+    //         KRoute.profileSaves.name,
+    //       ),
+    //     ),
+    //     KSizedBox.kHeightSizedBox30,
+    //     BoxWidget(
+    //       text: context.l10n.myStory,
+    //       isDesk: isDesk,
+    //       textIconPaddingWidget: KSizedBox.kHeightSizedBox56,
+    //       onTap: () => context.goNamed(KRoute.profileMyStory.name),
+    //     ),
+    //     KSizedBox.kHeightSizedBox30,
+    //   ];
+    // }
   }
 }

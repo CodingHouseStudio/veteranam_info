@@ -21,7 +21,7 @@ abstract class SharedIconListWidget {
         _cardIconWidget(
           label: context.l10n.webSite,
           context,
-          onPressed: () => context.read<UrlCubit>().launchUrl(url: link),
+          onPressed: () => context.launchUrl(link),
           icon: KIcon.captivePortal,
           background: background,
           key: webSiteKey,
