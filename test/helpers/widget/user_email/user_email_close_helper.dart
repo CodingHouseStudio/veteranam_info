@@ -12,7 +12,7 @@ Future<void> userEmailCloseHelper({
     tester: tester,
     size: KTestConstants.windowMobileSize,
     test: () async {
-      await userEmailHelper(tester);
+      await userEmailHelper(tester: tester, hover: false);
 
       expect(
         find.byKey(KWidgetkeys.widget.userEmailDialog.icon),

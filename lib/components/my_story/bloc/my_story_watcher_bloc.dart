@@ -14,9 +14,9 @@ class MyStoryWatcherBloc
     extends Bloc<MyStoryWatcherEvent, MyStoryWatcherState> {
   MyStoryWatcherBloc({
     required IStoryRepository storyRepository,
-    required IAppAuthenticationRepository iAppAuthenticationRepository,
+    required IAppAuthenticationRepository appAuthenticationRepository,
   })  : _storyRepository = storyRepository,
-        _iAppAuthenticationRepository = iAppAuthenticationRepository,
+        _appAuthenticationRepository = appAuthenticationRepository,
         super(
           const MyStoryWatcherState(
             storyModelItems: [],
@@ -26,7 +26,7 @@ class MyStoryWatcherBloc
     on<_Started>(_onStarted);
   }
   final IStoryRepository _storyRepository;
-  final IAppAuthenticationRepository _iAppAuthenticationRepository;
+  final IAppAuthenticationRepository _appAuthenticationRepository;
 
   Future<void> _onStarted(
     _Started event,
@@ -35,7 +35,7 @@ class MyStoryWatcherBloc
     emit(state.copyWith(loadingStatus: LoadingStatus.loading));
 
     final result = await _storyRepository.getStoriesById(
-      _iAppAuthenticationRepository.currentUser.id,
+      _appAuthenticationRepository.currentUser.id,
     );
     result.fold(
       (l) => emit(

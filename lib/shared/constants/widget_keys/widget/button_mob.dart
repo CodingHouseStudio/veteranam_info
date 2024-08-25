@@ -1,6 +1,6 @@
-part of '../widget_keys.dart';
+// part of '../widget_keys.dart';
 
-class _ButtonMobWidget {
-  final googleButton = const Key('google_send_button');
-  final button = const Key('send_button_mob');
-}
+// class _ButtonMobKeys {
+//   final googleButton = const Key('google_send_button');
+//   final widget = const Key('send_button_mob');
+// }

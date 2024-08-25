@@ -51,7 +51,7 @@ class SignUpLoginBottomButtonsWidget extends StatelessWidget {
           Row(
             children: [
               Expanded(
-                child: googleButton(context),
+                child: googleButton(context: context, isDesk: true),
               ),
               KSizedBox.kWidthSizedBox16,
               Expanded(
@@ -89,7 +89,7 @@ class SignUpLoginBottomButtonsWidget extends StatelessWidget {
             style: isDesk ? AppTextStyle.text40 : AppTextStyle.text24,
           ),
           KSizedBox.kHeightSizedBox16,
-          googleButton(context),
+          googleButton(context: context, isDesk: false),
           KSizedBox.kHeightSizedBox16,
           buildBottomButton(
             key: KWidgetkeys.widget.signUpBottomButtons.facebook,
@@ -107,8 +107,9 @@ class SignUpLoginBottomButtonsWidget extends StatelessWidget {
     }
   }
 
-  Widget googleButton(BuildContext context) => ButtonAdditionalWidget(
-        isDesk: true,
+  Widget googleButton({required BuildContext context, required bool isDesk}) =>
+      ButtonAdditionalWidget(
+        isDesk: isDesk,
         key: KWidgetkeys.widget.signUpBottomButtons.google,
         text: context.l10n.google,
         picture: KImage.google(),

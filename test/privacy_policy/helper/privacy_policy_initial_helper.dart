@@ -19,17 +19,9 @@ Future<void> privacyPolicyInitialHelper(
         findsOneWidget,
       );
 
-      // final link = find.textContaining(KAppText.email).last;
+      await tester.tapOnTextCustom(text: KAppText.email);
 
-      // await tester.ensureVisible(link);
-
-      // expect(link, findsOneWidget);
-
-      // final center = tester.getCenter(link);
-
-      // await tester.tapAt(center);
-
-      // await tester.pumpAndSettle();
+      await tester.pumpAndSettle();
 
       // await dialogSnackBarTextHelper(tester: tester);
     },

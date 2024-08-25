@@ -18,7 +18,7 @@ Future<void> newsCardHelper({
     );
   } else {
     await cardTextDetailEvaluateHelper(
-      tester,
+      tester: tester,
     );
   }
 
@@ -32,7 +32,7 @@ Future<void> newsCardHelper({
         );
       } else {
         await cardTextDetailEvaluateHelper(
-          tester,
+          tester: tester,
         );
       }
     },
