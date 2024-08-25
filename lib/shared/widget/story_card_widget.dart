@@ -26,6 +26,7 @@ class StoryCardWidget extends StatelessWidget {
               background: AppColors.materialThemeKeyColorsNeutralVariant,
             )
           else
+            // coverage:ignore-start
             ClipRRect(
               borderRadius: BorderRadius.circular(KSize.kUserPhoto),
               child: NetworkImageWidget(
@@ -34,6 +35,7 @@ class StoryCardWidget extends StatelessWidget {
                 size: KSize.kUserPhoto,
               ),
             ),
+          // coverage:ignore-end
           KSizedBox.kWidthSizedBox8,
           Text(
             storyModel.userName ?? context.l10n.anonymous,

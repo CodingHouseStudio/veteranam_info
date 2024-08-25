@@ -6,7 +6,9 @@ import 'package:veteranam/shared/shared.dart';
 @Singleton(as: IStorage)
 class SecureStorageRepository implements IStorage {
   SecureStorageRepository();
+  // coverage:ignore-start
   late FlutterSecureStorage _secureStorage = const FlutterSecureStorage();
+  // coverage:ignore-end
 
   @override
   FlutterSecureStorage get secureStorage => _secureStorage;

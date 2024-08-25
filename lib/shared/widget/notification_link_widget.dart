@@ -85,7 +85,7 @@ class NotificationLinkWidget extends StatelessWidget {
           showThankText
               ? context.l10n.linkThankMessage
               : context.l10n.linkLimitMessage,
-          key: KWidgetkeys.widget.notificationLink.limitText,
+          key: KWidgetkeys.widget.notificationLink.thankText,
           style: AppTextStyle.materialThemeBodyMediumNeutralVariant35,
           textAlign: TextAlign.center,
         ),

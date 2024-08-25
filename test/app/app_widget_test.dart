@@ -2,12 +2,10 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mockito/mockito.dart';
-import 'package:veteranam/app.dart';
-// ignore: unused_import
-import 'package:veteranam/components/components.dart';
 import 'package:veteranam/shared/shared.dart';
 
 import '../test_dependency.dart';
+import 'helper/helper.dart';
 
 void main() {
   setUp(configureDependenciesTest);
@@ -21,14 +19,16 @@ void main() {
     late AuthenticationRepository mockAuthenticationRepository;
     late IFaqRepository mockFaqRepository;
     late IDiscountRepository mockDiscountRepository;
+    late IInvestorsRepository mockInvestorsReportisory;
     late IAppAuthenticationRepository mockAppAuthenticationRepository;
     late IReportRepository mockReportRepository;
     setUp(() {
-      // KPlatformConstants.testIsWeb = true;
       mockAuthenticationRepository = MockAuthenticationRepository();
       mockDiscountRepository = MockIDiscountRepository();
       mockAppAuthenticationRepository = MockAppAuthenticationRepository();
       mockFaqRepository = MockIFaqRepository();
+      mockInvestorsReportisory = MockIInvestorsRepository();
+
       when(mockAuthenticationRepository.userSetting).thenAnswer(
         (realInvocation) => Stream.value(UserSetting.empty),
       );
@@ -73,74 +73,44 @@ void main() {
       ).thenAnswer(
         (invocation) => Stream.value(KTestText.discountModelItemsModify),
       );
+
+      when(
+        mockInvestorsReportisory.getFunds(
+          reportIdItems: KTestText.reportItems.getIdCard,
+        ),
+      ).thenAnswer(
+        (invocation) async => Right(KTestText.fundItems),
+      );
     });
 
-    void registerAuthenticationBloc() {
-      final authenticationBloc = AuthenticationBloc(
-        authenticationRepository: mockAuthenticationRepository,
-      );
-      if (GetIt.I.isRegistered<AuthenticationBloc>()) {
-        GetIt.I.unregister<AuthenticationBloc>();
-      }
-      GetIt.I.registerSingleton<AuthenticationBloc>(authenticationBloc);
-    }
+    group('Mobile', () {
+      setUp(() => KTest.testIsWeb = false);
+      testWidgets('${KGroupText.intial} ', (tester) async {
+        await appPumpAppHelper(
+          mockDiscountRepository: mockDiscountRepository,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
+          tester: tester,
+          mockFaqRepository: mockFaqRepository,
+          mockReportRepository: mockReportRepository,
+          mockInvestorsReportisory: mockInvestorsReportisory,
+        );
+      });
+    });
 
-    void registerHomeBloc() {
-      final homeBloc = HomeWatcherBloc(faqRepository: mockFaqRepository);
-      if (GetIt.I.isRegistered<HomeWatcherBloc>()) {
-        GetIt.I.unregister<HomeWatcherBloc>();
-      }
-      GetIt.I.registerSingleton<HomeWatcherBloc>(homeBloc);
-    }
-
-    void registerDiscountLinkCubit() {
-      final authenticationBloc = DiscountLinkCubit(
-        discountRepository: mockDiscountRepository,
-        appAuthenticationRepository: mockAppAuthenticationRepository,
-      );
-      if (GetIt.I.isRegistered<DiscountLinkCubit>()) {
-        GetIt.I.unregister<DiscountLinkCubit>();
-      }
-      GetIt.I.registerSingleton<DiscountLinkCubit>(authenticationBloc);
-    }
-
-    void registerDiscountUserEmailCubit() {
-      final authenticationBloc = DiscountUserEmailCubit(
-        discountRepository: mockDiscountRepository,
-        appAuthenticationRepository: mockAppAuthenticationRepository,
-      );
-      if (GetIt.I.isRegistered<DiscountUserEmailCubit>()) {
-        GetIt.I.unregister<DiscountUserEmailCubit>();
-      }
-      GetIt.I.registerSingleton<DiscountUserEmailCubit>(authenticationBloc);
-    }
-
-    void registerDiscountBloc() {
-      final discountBloc = DiscountWatcherBloc(
-        discountRepository: mockDiscountRepository,
-        reportRepository: mockReportRepository,
-        appAuthenticationRepository: mockAppAuthenticationRepository,
-      );
-      if (GetIt.I.isRegistered<DiscountWatcherBloc>()) {
-        GetIt.I.unregister<DiscountWatcherBloc>();
-      }
-      GetIt.I.registerSingleton<DiscountWatcherBloc>(discountBloc);
-    }
-
-    testWidgets('${KGroupText.intial} ', (tester) async {
-      registerAuthenticationBloc();
-      registerHomeBloc();
-      registerDiscountBloc();
-      registerDiscountLinkCubit();
-      registerDiscountUserEmailCubit();
-      await tester.pumpWidget(const App());
-
-      await tester.pumpAndSettle();
-
-      expect(
-        find.byKey(KWidgetkeys.screen.app.screen),
-        findsOneWidget,
-      );
+    group('Web', () {
+      setUp(() => KTest.testIsWeb = true);
+      testWidgets('${KGroupText.intial} ', (tester) async {
+        await appPumpAppHelper(
+          mockDiscountRepository: mockDiscountRepository,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
+          tester: tester,
+          mockFaqRepository: mockFaqRepository,
+          mockReportRepository: mockReportRepository,
+          mockInvestorsReportisory: mockInvestorsReportisory,
+        );
+      });
     });
   });
 }

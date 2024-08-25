@@ -44,7 +44,7 @@ class AuthenticationBloc
   Future<void> close() {
     authenticationStatusSubscription.cancel();
     userSettingSubscription.cancel();
-    // _authenticationRepository.dispose();
+    _authenticationRepository.dispose();
     return super.close();
   }
 

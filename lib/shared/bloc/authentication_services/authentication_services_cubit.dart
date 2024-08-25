@@ -5,12 +5,12 @@ import 'package:veteranam/shared/shared.dart';
 @Injectable()
 class AuthenticationServicesCubit extends Cubit<AuthenticationServicesFailure> {
   AuthenticationServicesCubit({
-    required AuthenticationRepository authenticationRepository,
-  })  : _authenticationRepository = authenticationRepository,
+    required IAppAuthenticationRepository appAuthenticationRepository,
+  })  : _appAuthenticationRepository = appAuthenticationRepository,
         super(AuthenticationServicesFailure.initial);
-  final AuthenticationRepository _authenticationRepository;
+  final IAppAuthenticationRepository _appAuthenticationRepository;
   Future<void> authenticationUseGoogle() async {
-    final result = await _authenticationRepository.signUpWithGoogle();
+    final result = await _appAuthenticationRepository.signUpWithGoogle();
     result.fold(
       (l) => emit(
         l._toAuthenticationServicesFailure(),

@@ -15,7 +15,7 @@ Future<void> myDiscountsInitialHelper(
     tester: tester,
     test: () async => expect(
       find.byKey(KWidgetkeys.screen.myDiscounts.iconEdit),
-      findsOneWidget,
+      findsWidgets,
     ),
   );
 

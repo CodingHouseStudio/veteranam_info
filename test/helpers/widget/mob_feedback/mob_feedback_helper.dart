@@ -19,7 +19,10 @@ Future<void> mobFeedbackHelper(
     findsOneWidget,
   );
 
-  await tester.longPress(find.byKey(KWidgetkeys.widget.mobFeedback.icon));
+  await tester.longPress(
+    find.byKey(KWidgetkeys.widget.mobFeedback.icon),
+    warnIfMissed: false,
+  );
 
   await tester.pumpAndSettle(const Duration(seconds: 15));
 

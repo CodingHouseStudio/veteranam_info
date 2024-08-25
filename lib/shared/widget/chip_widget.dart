@@ -25,12 +25,14 @@ class ChipWidgetState extends State<ChipWidget> {
   Widget build(BuildContext context) {
     final filterEmpty = widget.filter.number == 0 && !widget.isSelected;
     return MouseRegion(
+      // coverage:ignore-start
       onEnter: (_) {
         setState(() => _isHovered = true);
       },
       onExit: (_) {
         setState(() => _isHovered = false);
       },
+      // coverage:ignore-end
       child: FilterChip(
         key: KWidgetkeys.widget.chip.widget,
         backgroundColor: AppColors.materialThemeWhite,

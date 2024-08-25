@@ -16,20 +16,24 @@ class InformationBodyWidget extends StatelessWidget {
     return BlocConsumer<InformationWatcherBloc, InformationWatcherState>(
       listener: (context, state) => context.dialog.showGetErrorDialog(
         error: state.failure?.value(context),
-        onPressed: () => context
-            .read<InformationWatcherBloc>()
-            .add(const InformationWatcherEvent.started()),
+        onPressed: () {},
+        // I think this event is not necessary for Stream, but
+        // I think it's better to give
+        // the user imaginary control over it
+        // () => context
+        //     .read<InformationWatcherBloc>()
+        //     .add(const InformationWatcherEvent.started()),
       ),
       builder: (context, _) => ScaffoldAutoLoadingWidget(
         loadingButtonText: context.l10n.moreNews,
         loadingStatus: _.loadingStatus,
         cardListIsEmpty: _.filteredInformationModelItems.isEmpty,
-        resetFilter: () => context
-            .read<InformationWatcherBloc>()
-            .add(const InformationWatcherEvent.filter(-1)),
-        loadDataAgain: () => context
-            .read<InformationWatcherBloc>()
-            .add(const InformationWatcherEvent.started()),
+        // resetFilter: () => context
+        //     .read<InformationWatcherBloc>()
+        //     .add(const InformationWatcherEvent.filter(-1)),
+        // loadDataAgain: () => context
+        //     .read<InformationWatcherBloc>()
+        //     .add(const InformationWatcherEvent.started()),
         titleChildWidgetsFunction: ({required isDesk}) => [
           KSizedBox.kHeightSizedBox24,
           TitleIconWidget(

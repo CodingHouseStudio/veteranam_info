@@ -7,14 +7,14 @@ class ScaffoldAutoLoadingWidget extends StatefulWidget {
     required this.mainChildWidgetsFunction,
     required this.loadFunction,
     required this.loadingButtonText,
-    required this.loadDataAgain,
     required this.loadingStatus,
+    this.loadDataAgain,
     this.cardListIsEmpty,
     this.titleChildWidgetsFunction,
     this.mainDeskPadding,
     this.mainRightChildWidget,
     super.key,
-    this.resetFilter,
+    // this.resetFilter,
     this.pageName,
     // this.showMobileNawbar,
   });
@@ -29,8 +29,8 @@ class ScaffoldAutoLoadingWidget extends StatefulWidget {
   final String loadingButtonText;
   final bool? cardListIsEmpty;
   final LoadingStatus loadingStatus;
-  final void Function()? resetFilter;
-  final void Function() loadDataAgain;
+  // final void Function()? resetFilter;
+  final void Function()? loadDataAgain;
   final String? pageName;
   // final bool? showMobileNawbar;
 
@@ -56,7 +56,7 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
     return BlocListener<NetworkCubit, NetworkStatus>(
       listener: (context, state) {
         if (state == NetworkStatus.network) {
-          widget.loadDataAgain();
+          widget.loadDataAgain?.call();
         }
       },
       child: LayoutBuilder(
@@ -81,35 +81,36 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
                   text: widget.loadingButtonText,
                   widgetKey: KWidgetkeys.widget.scaffold.loadingButton,
                 ),
-              if ((widget.cardListIsEmpty ?? false) &&
-                  widget.loadingStatus != LoadingStatus.loading) ...[
-                KSizedBox.kHeightSizedBox100,
-                // const Center(child: KImage.emptyList),
-                Center(
-                  child: Text(
-                    context.l10n.cardListEmptyText,
-                    key: KWidgetkeys.widget.scaffold.endListText,
-                    style:
-                        AppTextStyle.materialThemeTitleMediumNeutralVariant70,
-                  ),
-                ),
-                KSizedBox.kHeightSizedBox36,
-                Center(
-                  child: TextButton(
-                    onPressed: widget.resetFilter,
-                    child: Text(
-                      context.l10n.resetAll,
-                      style: AppTextStyle.materialThemeTitleLarge,
-                    ),
-                  ),
-                ),
-              ],
+              // if ((widget.cardListIsEmpty ?? false) &&
+              //     widget.loadingStatus != LoadingStatus.loading) ...[
+              //   KSizedBox.kHeightSizedBox100,
+              //   // const Center(child: KImage.emptyList),
+              //   Center(
+              //     child: Text(
+              //       context.l10n.cardListEmptyText,
+              //       key: KWidgetkeys.widget.scaffold.emptyListText,
+              //       style:
+              //           AppTextStyle.materialThemeTitleMediumNeutralVariant70
+              // ,
+              //     ),
+              //   ),
+              //   KSizedBox.kHeightSizedBox36,
+              //   Center(
+              //     child: TextButton(
+              //       onPressed: widget.resetFilter,
+              //       child: Text(
+              //         context.l10n.resetAll,
+              //         style: AppTextStyle.materialThemeTitleLarge,
+              //       ),
+              //     ),
+              //   ),
+              // ],
               if (widget.loadingStatus == LoadingStatus.listLoadedFull &&
                   !(widget.cardListIsEmpty ?? false)) ...[
                 Center(
                   child: Text(
                     context.l10n.thatEndOfList,
-                    key: KWidgetkeys.widget.scaffold.emptyListText,
+                    key: KWidgetkeys.widget.scaffold.endListText,
                     style:
                         AppTextStyle.materialThemeTitleMediumNeutralVariant70,
                   ),
@@ -117,6 +118,7 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
                 KSizedBox.kHeightSizedBox24,
                 Center(
                   child: TextButton(
+                    key: KWidgetkeys.widget.scaffold.endListButton,
                     style: KButtonStyles.endListButtonStyle,
                     onPressed: scrollUp,
                     child: Text(

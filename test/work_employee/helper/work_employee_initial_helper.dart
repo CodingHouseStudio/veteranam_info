@@ -28,6 +28,8 @@ Future<void> workEmployeeInitialHelper(
         findsWidgets,
       );
 
+      await workCardHelper(tester);
+
       expect(
         find.byKey(KWidgetkeys.screen.workEmployee.buttonMock),
         findsNothing,

@@ -174,7 +174,7 @@ extension ListExtensions<T> on List<T> {
     // List<FilterItem>? overallFilter,
     // List<T>? fullList,
     // List<T>? listForFilter,
-    bool containAnyItems = true,
+    // bool containAnyItems = true,
   }) {
     // Calculate the total number of items to load
     final loadedItemsCount =
@@ -187,7 +187,7 @@ extension ListExtensions<T> on List<T> {
       getFilter: getENFilter,
       // overallFilter: overallFilter,
       // fullList: fullList,
-      containAnyItems: containAnyItems,
+      // containAnyItems: containAnyItems,
       // listForFilter: listForFilter,
     ).take(loadedItemsCount).toList();
   }
@@ -230,7 +230,7 @@ extension ListExtensions<T> on List<T> {
     required List<dynamic> Function(T item) getFilter,
     // required List<FilterItem>? overallFilter,
     // required List<T>? fullList,
-    required bool containAnyItems,
+    // required bool containAnyItems,
     // List<T>? listForFilter,
   }) {
     if (isEmpty) return []; // Return empty list if the input list is empty
@@ -258,13 +258,15 @@ extension ListExtensions<T> on List<T> {
 
     // Apply filters to the list
     return where(
-      (item) => containAnyItems
-          ? filtersValue.any(
-              getFilter(item).contains,
-            ) // Match any filter if 'containAnyItems' is true
-          : filtersValue.every(
-              getFilter(item).contains,
-            ), // Match all filters if 'containAnyItems' is false
+      (item) =>
+          //  containAnyItems
+          //     ?
+          filtersValue.any(
+        getFilter(item).contains,
+      ), // Match any filter if 'containAnyItems' is true
+      // : filtersValue.every(
+      //     getFilter(item).contains,
+      //   ), // Match all filters if 'containAnyItems' is false
     ).toList();
   }
 
@@ -291,7 +293,7 @@ extension ListExtensions<T> on List<T> {
     int? loadItems,
     // List<FilterItem>? overallFilter,
     // List<T>? fullList,
-    bool containAnyItems = true,
+    // bool containAnyItems = true,
     // List<T>? listForFilter,
   }) {
     // Apply filters to the list
@@ -300,7 +302,7 @@ extension ListExtensions<T> on List<T> {
       getFilter: getFilter,
       // overallFilter: overallFilter,
       // fullList: fullList,
-      containAnyItems: containAnyItems,
+      // containAnyItems: containAnyItems,
       // listForFilter: listForFilter,
     );
 
@@ -628,7 +630,7 @@ extension DiscountModelExtensions on List<DiscountModel> {
       // FilterItem(context.l10n.free),
       // Additional filters based on sub-locations using overallItems method
       ...overallItems(
-        getUAFilter: (item) => item.subLocation.getList(context),
+        getUAFilter: (item) => item.subLocation?.getList(context) ?? [],
         context: context,
         // numberGetList: context
         //     .read<DiscountWatcherBloc>()
@@ -653,4 +655,14 @@ extension ConnectivityExtension on List<ConnectivityResult> {
   bool get hasNetwork => any(
         (result) => ConnectivityResult.none != result,
       );
+}
+
+extension ListBoolExtension on List<bool> {
+  bool fundsCardChangeSize(int index) {
+    if (indexOf(true) < length - 1) {
+      return indexOf(true) + 1 == index;
+    } else {
+      return indexOf(true) - 1 == index;
+    }
+  }
 }

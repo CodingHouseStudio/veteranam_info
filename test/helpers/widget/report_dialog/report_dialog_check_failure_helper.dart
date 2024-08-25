@@ -8,34 +8,40 @@ Future<void> reportDialogCheckFailureHelper(
 ) async {
   await reportDialogOpenHelper(tester);
 
-  expect(
-    find.byKey(KWidgetkeys.widget.reportDialog.checkPointError),
-    findsNothing,
-  );
-
-  expect(
-    find.byKey(KWidgetkeys.widget.reportDialog.checkPoint),
-    findsWidgets,
-  );
-
-  expect(find.byKey(KWidgetkeys.widget.checkPoint.icon), findsNothing);
-
-  expect(
-    find.byKey(KWidgetkeys.widget.reportDialog.sendButton),
-    findsOneWidget,
-  );
-
-  await scrollingHelper(
+  await changeWindowSizeHelper(
     tester: tester,
-    itemKey: KWidgetkeys.widget.reportDialog.sendButton,
-  );
+    size: KTestConstants.windowSmallSize,
+    test: () async {
+      expect(
+        find.byKey(KWidgetkeys.widget.reportDialog.checkPointError),
+        findsNothing,
+      );
 
-  await tester.tap(find.byKey(KWidgetkeys.widget.reportDialog.sendButton));
+      expect(
+        find.byKey(KWidgetkeys.widget.reportDialog.checkPoint),
+        findsWidgets,
+      );
 
-  await tester.pumpAndSettle();
+      expect(find.byKey(KWidgetkeys.widget.checkPoint.icon), findsNothing);
 
-  expect(
-    find.byKey(KWidgetkeys.widget.reportDialog.checkPointError),
-    findsOneWidget,
+      expect(
+        find.byKey(KWidgetkeys.widget.reportDialog.sendButton),
+        findsOneWidget,
+      );
+
+      await scrollingHelper(
+        tester: tester,
+        itemKey: KWidgetkeys.widget.reportDialog.sendButton,
+      );
+
+      await tester.tap(find.byKey(KWidgetkeys.widget.reportDialog.sendButton));
+
+      await tester.pumpAndSettle();
+
+      expect(
+        find.byKey(KWidgetkeys.widget.reportDialog.checkPointError),
+        findsOneWidget,
+      );
+    },
   );
 }

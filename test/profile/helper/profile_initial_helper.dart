@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:veteranam/shared/shared.dart';
 
-import '../../helpers/change_window_size_helper.dart';
+import '../../test_dependency.dart';
 
 Future<void> profileInitialHelper(
   WidgetTester tester,
@@ -11,11 +11,6 @@ Future<void> profileInitialHelper(
     windowsTest: true,
     test: () async {
       expect(
-        find.byKey(KWidgetkeys.screen.profile.profileCard),
-        findsWidgets,
-      );
-
-      expect(
         find.byKey(KWidgetkeys.screen.profile.title),
         findsOneWidget,
       );
@@ -24,6 +19,28 @@ Future<void> profileInitialHelper(
         find.byKey(KWidgetkeys.screen.profile.subtitle),
         findsOneWidget,
       );
+
+      expect(
+        find.byKey(KWidgetkeys.screen.profile.profileCard),
+        findsWidgets,
+      );
+
+      expect(
+        find.byKey(KWidgetkeys.screen.profile.boxSaves),
+        findsOneWidget,
+      );
+
+      expect(
+        find.byKey(KWidgetkeys.screen.profile.boxStory),
+        findsOneWidget,
+      );
+
+      expect(
+        find.byKey(KWidgetkeys.screen.profile.boxFeedback),
+        findsOneWidget,
+      );
+
+      await profileCardHelper(tester);
     },
   );
 }

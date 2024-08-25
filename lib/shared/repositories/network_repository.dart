@@ -52,7 +52,7 @@ class NetworkRepository {
     }
   }
 
-  @disposeMethod
+  // @disposeMethod
   void dispose() {
     _networkStatuscontroller.close();
     _listConnectivityResultSubscription?.cancel();

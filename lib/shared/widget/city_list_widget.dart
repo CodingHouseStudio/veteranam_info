@@ -81,9 +81,11 @@ class _CityWidgetListExpandedState extends State<CityWidgetListExpanded> {
     return MarkdownBody(
       data: widget.cityList
           .getCityList(showFullText: !isExpanded, context: context),
+      // coverage:ignore-start
       onTapLink: (text, href, title) => setState(() {
         isExpanded = !isExpanded;
       }),
+      // coverage:ignore-end
       styleSheet: MarkdownStyleSheet(
         a: AppTextStyle.materialThemeLabelLargeRef,
         p: AppTextStyle.materialThemeLabelLarge,

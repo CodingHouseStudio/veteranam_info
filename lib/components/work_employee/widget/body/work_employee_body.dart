@@ -14,14 +14,18 @@ class WorkEmployeeBody extends StatelessWidget {
     return BlocConsumer<WorkEmployeeWatcherBloc, WorkEmployeeWatcherState>(
       listener: (context, state) => context.dialog.showGetErrorDialog(
         error: state.failure?.value(context),
-        onPressed: () => context
-            .read<WorkEmployeeWatcherBloc>()
-            .add(const WorkEmployeeWatcherEvent.started()),
+        onPressed: () {},
+        // I think this event is not necessary for Stream, but
+        // I think it's better to give
+        // the user imaginary control over it
+        // () => context
+        //     .read<WorkEmployeeWatcherBloc>()
+        //     .add(const WorkEmployeeWatcherEvent.started()),
       ),
       builder: (context, _) => ScaffoldDecorationWidget(
-        loadDataAgain: () => context
-            .read<WorkEmployeeWatcherBloc>()
-            .add(const WorkEmployeeWatcherEvent.started()),
+        // loadDataAgain: () => context
+        //     .read<WorkEmployeeWatcherBloc>()
+        //     .add(const WorkEmployeeWatcherEvent.started()),
         titleChildWidgetsFunction: ({required isDesk}) => [
           if (isDesk)
             KSizedBox.kHeightSizedBox40

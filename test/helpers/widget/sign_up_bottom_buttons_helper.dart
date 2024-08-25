@@ -38,6 +38,11 @@ Future<void> signUpBottomButtonsHelper(
 
       await additionalButtonHelper(tester);
 
+      await tester
+          .tap(find.byKey(KWidgetkeys.widget.signUpBottomButtons.google));
+
+      await tester.pumpAndSettle();
+
       expect(
         find.byKey(KWidgetkeys.widget.signUpBottomButtons.facebook),
         findsWidgets,

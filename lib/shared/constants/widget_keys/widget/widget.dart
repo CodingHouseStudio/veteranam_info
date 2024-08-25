@@ -25,8 +25,7 @@ class _WidgetKeys {
   final languageSwitcher = _LanguageSwitcherKeys();
   final checkPoint = _CheckPointKeys();
   final scaffold = _ScaffoldKeys();
-  final profileCard = _ProfileKeys();
-  final profileCardWidget = _ProfileCardWidgetKeys();
+  final profileCard = _ProfileCardKeys();
   final donateCard = _DoanteCardKeys();
   final emailPasswordFields = _EmailPasswordFieldsKeys();
   final leftCard = _LeftCardKeys();
