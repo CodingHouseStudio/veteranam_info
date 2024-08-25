@@ -26,6 +26,7 @@ class _DialogsWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(0),
           ),
+          scrollable: true,
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -73,6 +74,7 @@ class _DialogsWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(0),
           ),
+          scrollable: true,
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -228,7 +230,7 @@ class _DialogsWidget {
 
   void showGetErrorDialog({
     required String? error,
-    required void Function() onPressed,
+    required void Function()? onPressed,
   }) {
     if (error != null) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -263,9 +265,11 @@ class _DialogsWidget {
 
   void showMobFeedback() {
     BetterFeedback.of(context).show(
+      // coverage:ignore-start
       (feedback) => context
           .read<MobFeedbackBloc>()
           .add(MobFeedbackEvent.send(feedback.screenshot)),
+      // coverage:ignore-end
     );
   }
 

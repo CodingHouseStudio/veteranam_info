@@ -27,7 +27,7 @@ class ReportState with _$ReportState {
     required MessageFieldModel? message,
     required ReportEnum formState,
     required ReportFailure? failure,
-    required String? cardId,
+    required String cardId,
   }) = _Initial;
 }
 

@@ -13,6 +13,9 @@ Future<void> signUpPumpAppHelper({
   _registerAuthenticationBloc(
     mockAppAuthenticationRepository: mockAppAuthenticationRepository,
   );
+  _registerAuthenticationServiceCubit(
+    mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+  );
 
   await tester.pumpApp(
     const SignUpScreen(),
@@ -37,4 +40,18 @@ void _registerAuthenticationBloc({
     GetIt.I.unregister<SignUpBloc>();
   }
   GetIt.I.registerSingleton<SignUpBloc>(signUpBloc);
+}
+
+void _registerAuthenticationServiceCubit({
+  required IAppAuthenticationRepository mockAppAuthenticationRepository,
+}) {
+  final authenticationServicesCubit = AuthenticationServicesCubit(
+    appAuthenticationRepository: mockAppAuthenticationRepository,
+  );
+  if (GetIt.I.isRegistered<AuthenticationServicesCubit>()) {
+    GetIt.I.unregister<AuthenticationServicesCubit>();
+  }
+  GetIt.I.registerSingleton<AuthenticationServicesCubit>(
+    authenticationServicesCubit,
+  );
 }

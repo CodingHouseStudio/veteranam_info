@@ -19,5 +19,5 @@ Future<void> reportDialogOpenHelper(
 
   await tester.pumpAndSettle();
 
-  expect(find.byKey(KWidgetkeys.widget.reportDialog.widget), findsOneWidget);
+  await reportDialogHelper(tester);
 }

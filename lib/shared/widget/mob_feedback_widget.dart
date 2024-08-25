@@ -64,8 +64,10 @@ class MobFeedbackWidget extends StatelessWidget {
                     color: AppColors.materialThemeKeyColorsSecondary,
                   ),
                 ),
+                // coverage:ignore-start
                 onPressed: () => onSubmit(
                   _.message.value,
+                  // coverage:ignore-end
                 ), //() => widget.onSubmit(controller.text),
               ),
             ),

@@ -20,7 +20,7 @@ Future<void> notificationLinkHelper(
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.notificationLink.limitText),
+    find.byKey(KWidgetkeys.widget.notificationLink.thankText),
     findsNothing,
   );
 }

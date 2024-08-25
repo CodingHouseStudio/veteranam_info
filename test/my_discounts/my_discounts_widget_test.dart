@@ -85,8 +85,7 @@ void main() {
           mockDiscountRepository
               .getDiscountsByUserId(KTestText.userWithoutPhoto.id),
         ).thenAnswer(
-          (invocation) async =>
-              Right(KTestText.userDiscountModelItems.sublist(0, 1)),
+          (invocation) async => Right(KTestText.userDiscountModelItems),
         );
       });
       testWidgets('${KGroupText.intial} ', (tester) async {

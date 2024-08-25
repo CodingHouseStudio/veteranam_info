@@ -63,7 +63,7 @@ class StorageService {
     final value = storage
         .ref(
           StoragePath.getResumePath(
-            collenction: FirebaseCollectionName.respond,
+            collection: FirebaseCollectionName.respond,
             modelId: respondId,
             resumeName: resumeModel.name,
             fileExtension: resumeModel.name!.substring(

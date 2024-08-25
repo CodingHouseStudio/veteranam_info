@@ -112,10 +112,10 @@ class KImage {
   //       height: KSize.kPixel16,
   //       widgetKey: key,
   //     );
-  static AssetImageWidget coffee({Key? key}) => AssetImageWidget(
-        'assets/icons/hot_beverage.png',
-        widgetKey: key,
-      );
+  // static AssetImageWidget coffee({Key? key}) => AssetImageWidget(
+  //       'assets/icons/hot_beverage.png',
+  //       widgetKey: key,
+  //     );
   static AssetImageWidget veteran1({Key? key}) => AssetImageWidget(
         'assets/images/veteran1.png',
         widgetKey: key,

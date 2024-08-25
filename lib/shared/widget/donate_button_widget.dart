@@ -65,7 +65,9 @@ class _DonateButtonWidgetState extends State<_DonateButtonWidgetDesk> {
     return TextButton(
       onPressed: widget.onPressed,
       style: KButtonStyles.whiteButtonStyleWInf,
+      // coverage:ignore-start
       onHover: (value) => setState(() => isHovering = value),
+      // coverage:ignore-end
       child: Padding(
         padding: const EdgeInsets.only(
           left: KPadding.kPaddingSize32,

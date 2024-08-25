@@ -108,11 +108,15 @@ class AdvancedFilterContent extends StatelessWidget {
                       ? AppTextStyle.materialThemeBodyLarge
                       : AppTextStyle.materialThemeBodyMedium,
                 ),
-                onPressed: () => filter is DiscountEnum
-                    ? onChangeSorting(filter)
-                    : onChange(
-                        filter,
-                      ),
+                onPressed: () {
+                  if (filter is DiscountEnum) {
+                    onChangeSorting(filter);
+                  } else {
+                    onChange(
+                      filter,
+                    );
+                  }
+                },
               ),
             ),
           );

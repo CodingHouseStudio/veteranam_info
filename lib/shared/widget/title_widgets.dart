@@ -118,13 +118,13 @@ class ShortTitleIconWidget extends StatelessWidget {
   const ShortTitleIconWidget({
     required this.title,
     required this.titleKey,
-    required this.isDesk,
+    // required this.isDesk,
     this.iconCrossAxisAlignment = CrossAxisAlignment.end,
     super.key,
   });
   final String title;
   final Key titleKey;
-  final bool isDesk;
+  // final bool isDesk;
   // bool isRightArrow = true;
   final CrossAxisAlignment iconCrossAxisAlignment;
 
@@ -132,38 +132,38 @@ class ShortTitleIconWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        if (isDesk)
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                title,
-                style: AppTextStyle.materialThemeDisplayLarge,
-              ),
-              KSizedBox.kWidthSizedBox32,
-              const IconWidget(
-                // key: KWidgetkeys.screen.feedback.titleIcon,
-                icon: KIcon.arrowDownRight,
-              ),
-            ],
-          )
-        else
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const IconWidget(
-                // key: KWidgetkeys.screen.feedback.titleIcon,
-                icon: KIcon.arrowDownRight,
-              ),
-              KSizedBox.kWidthSizedBox16,
-              Expanded(
-                child: Text(
-                  title,
-                  style: AppTextStyle.materialThemeDisplaySmall,
-                ),
-              ),
-            ],
-          ),
+        // if (isDesk)
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              title,
+              style: AppTextStyle.materialThemeDisplayLarge,
+            ),
+            KSizedBox.kWidthSizedBox32,
+            const IconWidget(
+              // key: KWidgetkeys.screen.feedback.titleIcon,
+              icon: KIcon.arrowDownRight,
+            ),
+          ],
+        ),
+        // else
+        //   Row(
+        //     crossAxisAlignment: CrossAxisAlignment.start,
+        //     children: [
+        //       const IconWidget(
+        //         // key: KWidgetkeys.screen.feedback.titleIcon,
+        //         icon: KIcon.arrowDownRight,
+        //       ),
+        //       KSizedBox.kWidthSizedBox16,
+        //       Expanded(
+        //         child: Text(
+        //           title,
+        //           style: AppTextStyle.materialThemeDisplaySmall,
+        //         ),
+        //       ),
+        //     ],
+        //   ),
         KSizedBox.kHeightSizedBox32,
         const Divider(
           color: AppColors.materialThemeKeyColorsNeutral,

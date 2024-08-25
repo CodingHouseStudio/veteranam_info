@@ -14,12 +14,12 @@ void main() {
   setupFirebaseAuthMocks();
 
   group('${KScreenBlocName.authenticationServices} ${KGroupText.cubit}', () {
-    late AuthenticationRepository mockAuthenticationRepository;
+    late IAppAuthenticationRepository mockAppAuthenticationRepository;
     late AuthenticationServicesCubit authenticationServicesCubit;
     setUp(() {
-      mockAuthenticationRepository = MockAuthenticationRepository();
+      mockAppAuthenticationRepository = MockIAppAuthenticationRepository();
       authenticationServicesCubit = AuthenticationServicesCubit(
-        authenticationRepository: mockAuthenticationRepository,
+        appAuthenticationRepository: mockAppAuthenticationRepository,
       );
     });
     blocTest<AuthenticationServicesCubit, AuthenticationServicesFailure>(
@@ -27,7 +27,7 @@ void main() {
       build: () => authenticationServicesCubit,
       act: (cubit) async {
         when(
-          mockAuthenticationRepository.signUpWithGoogle(),
+          mockAppAuthenticationRepository.signUpWithGoogle(),
         ).thenAnswer(
           (_) async => const Right(true),
         );
@@ -42,7 +42,7 @@ void main() {
       build: () => authenticationServicesCubit,
       act: (cubit) async {
         when(
-          mockAuthenticationRepository.signUpWithGoogle(),
+          mockAppAuthenticationRepository.signUpWithGoogle(),
         ).thenAnswer(
           (_) async => const Left(SomeFailure.serverError()),
         );

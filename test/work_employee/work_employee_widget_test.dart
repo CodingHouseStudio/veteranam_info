@@ -88,8 +88,39 @@ void main() {
 
           await workEmployeeInitialHelper(tester);
         });
-        // group('${KGroupText.goTo} ', () {
-        // });
+        group('${KGroupText.goTo} ', () {
+          testWidgets('${KRoute.employeeRespond.name} ', (tester) async {
+            await workEmployeePumpAppHelper(
+              mockWorkRepository: mockWorkRepository,
+              tester: tester,
+              mockGoRouter: mockGoRouter,
+            );
+
+            await workCardNavigationHelper(
+              tester: tester,
+              mockGoRouter: mockGoRouter,
+            );
+          });
+        });
+      });
+      group('${KGroupText.smallList} ', () {
+        setUp(() {
+          when(mockWorkRepository.getWorks()).thenAnswer(
+            (invocation) =>
+                Stream.value(KTestText.workModelItems.sublist(0, 1)),
+          );
+        });
+        testWidgets('Only one card', (tester) async {
+          await workEmployeePumpAppHelper(
+            mockWorkRepository: mockWorkRepository,
+            tester: tester,
+          );
+
+          expect(
+            find.byKey(KWidgetkeys.screen.workEmployee.cards),
+            findsOneWidget,
+          );
+        });
       });
     });
   });

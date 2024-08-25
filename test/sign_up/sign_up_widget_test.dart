@@ -28,6 +28,11 @@ void main() {
       ).thenAnswer(
         (invocation) async => const Right(true),
       );
+      when(
+        mockAppAuthenticationRepository.signUpWithGoogle(),
+      ).thenAnswer(
+        (invocation) async => const Right(true),
+      );
     });
     group('${KGroupText.failure} ', () {
       testWidgets('${KGroupText.error} ', (tester) async {

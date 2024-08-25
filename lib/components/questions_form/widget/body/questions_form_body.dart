@@ -42,59 +42,34 @@ class _QuestionsFormBodyState extends State<QuestionsFormBody> {
           KSizedBox.kHeightSizedBox40
         else
           KSizedBox.kHeightSizedBox32,
-        CheckPointWidget(
-          onChanged: () => setState(() {
-            userRole = UserRole.veteran;
-          }),
-          text: context.l10n.iAmVeteran,
-          isCheck: userRole == UserRole.veteran,
-          textStyle: isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
-          // key: KWidgetkeys.screen.questionsForm.roleVeteranText,
-          key: KWidgetkeys.screen.questionsForm.roleVeteran, isDesk: isDesk,
-        ),
-        if (isDesk)
-          KSizedBox.kHeightSizedBox32
-        else
-          KSizedBox.kHeightSizedBox24,
-        CheckPointWidget(
-          onChanged: () => setState(() {
-            userRole = UserRole.relativeOfVeteran;
-          }),
-          text: context.l10n.iAmRelativeOfVeteran,
-          isCheck: userRole == UserRole.relativeOfVeteran,
-          textStyle: isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
-          // textKey: KWidgetkeys.screen.questionsForm
-          // .roleRelativeOfVeteranText,
-          key: KWidgetkeys.screen.questionsForm.roleRelativeOfVeteran,
-          isDesk: isDesk,
-        ),
-        if (isDesk)
-          KSizedBox.kHeightSizedBox32
-        else
-          KSizedBox.kHeightSizedBox24,
-        CheckPointWidget(
-          onChanged: () => setState(() {
-            userRole = UserRole.civilian;
-          }),
-          text: context.l10n.iAmCivilian,
-          isCheck: userRole == UserRole.civilian,
-          textStyle: isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
-          // textKey: KWidgetkeys.screen.questionsForm.roleCivilianText,
-          key: KWidgetkeys.screen.questionsForm.roleCivilian, isDesk: isDesk,
-        ),
-        if (isDesk)
-          KSizedBox.kHeightSizedBox32
-        else
-          KSizedBox.kHeightSizedBox24,
-        CheckPointWidget(
-          onChanged: () => setState(() {
-            userRole = UserRole.businessmen;
-          }),
-          text: context.l10n.iAmBusinessOwnerRepresentative,
-          isCheck: userRole == UserRole.businessmen,
-          textStyle: isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
-          // textKey: KWidgetkeys.screen.questionsForm.roleBusinessmenText,
-          key: KWidgetkeys.screen.questionsForm.roleBusinessmen, isDesk: isDesk,
+        ...List.generate(
+          UserRole.values.length,
+          (index) {
+            final role = UserRole.values.elementAt(index);
+            return Padding(
+              padding: index != 0
+                  ? EdgeInsets.only(
+                      top: isDesk
+                          ? KPadding.kPaddingSize32
+                          : KPadding.kPaddingSize24,
+                    )
+                  : EdgeInsets.zero,
+              child: CheckPointWidget(
+                onChanged: role == userRole
+                    ? null
+                    : () => setState(() {
+                          userRole = role;
+                        }),
+                text: role.value(context),
+                isCheck: userRole == role,
+                textStyle: isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
+                // key: KWidgetkeys.screen.questionsForm.roleVeteranText,
+                key:
+                    KWidgetkeys.screen.questionsForm.roleKeyes.elementAt(index),
+                isDesk: isDesk,
+              ),
+            );
+          },
         ),
         if (isDesk)
           KSizedBox.kHeightSizedBox40

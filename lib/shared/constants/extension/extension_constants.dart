@@ -19,10 +19,10 @@ extension ExtendedDateTime on DateTime {
       _id ?? DateTime.now().toLocal().microsecondsSinceEpoch.toString();
 
   @visibleForTesting
-  static set current(DateTime customTime) => _customTime = customTime;
+  static set current(DateTime? customTime) => _customTime = customTime;
 
   @visibleForTesting
-  static set id(String customId) => _id = customId;
+  static set id(String? customId) => _id = customId;
 
   String get localeTime => toLocal().toString().split(' ')[0];
 }
@@ -54,10 +54,10 @@ extension LocalizedDateTime on DateTime {
 }
 
 extension DiscountModelLocation on DiscountModel {
-  List<String> fullLocationList(BuildContext context) => [
-        if (location != null) ...location!,
-        if (subLocation != null) ...subLocation!.getList(context),
-      ];
+  // List<String> fullLocationList(BuildContext context) => [
+  //       if (location != null) ...location!,
+  //       if (subLocation != null) ...subLocation!.getList(context),
+  //     ];
   String getDescription(BuildContext context) =>
       '${context.isEnglish ? descriptionEN : description}\n'
       '\n***${context.l10n.toGetItYouNeed}***\n'
@@ -213,6 +213,11 @@ extension GenericsExtensions<T> on T {
 extension ContextExtensions on BuildContext {
   bool get isEnglish =>
       read<AuthenticationBloc>().state.userSetting.locale.isEnglish;
+
+  void copyText(String text, String? href, String? title) =>
+      read<UrlCubit>().copy(text);
+
+  void launchUrl(String? url) => read<UrlCubit>().launchUrl(url: url);
 }
 
 extension DiscountEnumExtensions on DiscountEnum {
@@ -277,6 +282,21 @@ extension FilterItemExtension on FilterItem {
           .compareTo(b.valueEN.toString().toLowerCase());
     } else {
       return value.toString().compareUkrain(b.value.toString());
+    }
+  }
+}
+
+extension UserRoleExtensions on UserRole {
+  String value(BuildContext context) {
+    switch (this) {
+      case UserRole.businessmen:
+        return context.l10n.iAmBusinessOwnerRepresentative;
+      case UserRole.civilian:
+        return context.l10n.iAmCivilian;
+      case UserRole.relativeOfVeteran:
+        return context.l10n.iAmRelativeOfVeteran;
+      case UserRole.veteran:
+        return context.l10n.iAmVeteran;
     }
   }
 }

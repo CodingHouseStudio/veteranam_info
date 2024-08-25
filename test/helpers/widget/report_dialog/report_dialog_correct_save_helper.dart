@@ -3,7 +3,7 @@ import 'package:veteranam/shared/shared.dart';
 
 import '../../../test_dependency.dart';
 
-Future<void> reportDialogcorrectSaveHelper(
+Future<void> reportDialogCorrectSaveHelper(
   WidgetTester tester,
 ) async {
   await changeWindowSizeHelper(

@@ -53,8 +53,7 @@ class PrivacyPolicyBody extends StatelessWidget {
                             styleSheet: MarkdownStyleSheet(
                               a: AppTextStyle.materialThemeBodyLarge,
                             ),
-                            onTapLink: (text, href, title) =>
-                                context.read<UrlCubit>().copy(text),
+                            onTapLink: context.copyText,
                           ),
                         ),
                 );
