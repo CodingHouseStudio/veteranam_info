@@ -40,6 +40,7 @@ abstract class KGroupText {
   static const firebaseFailure = 'Firebase Failure';
   static const failureSend = 'Failure set';
   static const intial = 'renders initial';
+  static const network = 'Reload network';
   static const goRouter = 'Mock Go Router';
   static const goTo = 'go to';
   static const validationError = 'Validation error';
@@ -59,6 +60,7 @@ abstract class KGroupText {
   static const error = 'Error';
   static const failureNetwork = 'Failure Network';
   static const stream = 'Stream';
+  static const smallList = 'Small list';
 }
 
 abstract class KTestText {
@@ -204,7 +206,7 @@ abstract class KTestText {
   );
   static final dateTime = DateTime(2024, 4, 12);
   static final dateTimeId = DateTime(0, 0, 0, 0, 1, 1, 1, 1);
-  static const downloadURL = 'test_URL';
+  static const downloadURL = 'test_URL.test';
   static const id = '1';
 
   static final discountModelItems = <DiscountModel>[
@@ -245,6 +247,8 @@ abstract class KTestText {
   static final discountModelItemsModify = <DiscountModel>[
     for (var i = 0; i < 50; i++)
       KMockText.discountModel.copyWith(
+        company: i == 0 ? null : KMockText.discountModel.company,
+        expiration: i == 0 ? null : KMockText.discountModel.expiration,
         id: i.toString(),
         userId: i.toString(),
         categoryEN: i == 0 ? KMockText.tag : KMockText.discountModel.categoryEN,
@@ -291,6 +295,8 @@ abstract class KTestText {
         id: i.toString(),
         fetchDate: dateTime,
         image: i > _itemsPhoto ? imageModels : null,
+        categoryUA:
+            i == 0 ? KMockText.tag : KMockText.informationModel.categoryUA,
         category: i == 0 ? KMockText.tag : KMockText.informationModel.category,
       ),
   ];
@@ -417,6 +423,7 @@ abstract class KTestConstants {
 
   static const windowDeskSize = Size(1700, 1700);
   static const windowMobileSize = Size(700, 700);
+  static const windowSmallSize = Size(500, 500);
 
   static const englishIndex = 1;
   static const ukrainIndex = 0;

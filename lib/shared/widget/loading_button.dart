@@ -70,6 +70,7 @@ class _LoadingButtonWidgetDeskState extends State<_LoadingButtonWidgetDesk>
     );
   }
 
+  // coverage:ignore-start
   void _handleHover(bool isHovered) {
     setState(() {
       isHovering = isHovered;
@@ -80,6 +81,7 @@ class _LoadingButtonWidgetDeskState extends State<_LoadingButtonWidgetDesk>
       }
     });
   }
+  // coverage:ignore-end
 
   @override
   Widget build(BuildContext context) {

@@ -42,7 +42,10 @@ void main() {
         await mobSettingsInitialHelper(tester);
       });
       testWidgets('Mobile feedback correct enter text', (tester) async {
-        await mobSettingsPumpAppHelper(tester: tester);
+        await mobSettingsPumpAppHelper(
+          tester: tester,
+          mockGoRouter: mockGoRouter,
+        );
 
         await mobFeedbackOpenHelper(
           test: mobFeedbackCorrectTextHelper,
@@ -57,6 +60,30 @@ void main() {
           );
 
           await mobSettingsFeedbackHelper(
+            tester: tester,
+            mockGoRouter: mockGoRouter,
+          );
+        });
+
+        testWidgets('${KRoute.mobFAQ.name} ', (tester) async {
+          await mobSettingsPumpAppHelper(
+            tester: tester,
+            mockGoRouter: mockGoRouter,
+          );
+
+          await mobFaqNavigationHelper(
+            tester: tester,
+            mockGoRouter: mockGoRouter,
+          );
+        });
+
+        testWidgets('${KRoute.privacyPolicy.name} ', (tester) async {
+          await mobSettingsPumpAppHelper(
+            tester: tester,
+            mockGoRouter: mockGoRouter,
+          );
+
+          await privacyPolicyNavigationHelper(
             tester: tester,
             mockGoRouter: mockGoRouter,
           );

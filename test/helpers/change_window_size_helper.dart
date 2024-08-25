@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter_test/flutter_test.dart';
 
 import '../test_dependency.dart';
@@ -10,10 +12,11 @@ import '../test_dependency.dart';
 Future<void> changeWindowSizeHelper({
   required WidgetTester tester,
   required Future<void> Function() test,
+  Size? size,
   bool windowsTest = false,
   bool scrollUp = true,
 }) async {
-  await tester.binding.setSurfaceSize(KTestConstants.windowDeskSize);
+  await tester.binding.setSurfaceSize(size ?? KTestConstants.windowDeskSize);
 
   await tester.pumpAndSettle();
 

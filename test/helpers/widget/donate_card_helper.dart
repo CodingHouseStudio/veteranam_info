@@ -14,14 +14,32 @@ Future<void> donateCardHelper({
 
   expect(find.byKey(KWidgetkeys.widget.donateCard.widget), findsWidgets);
 
-  expect(find.byKey(KWidgetkeys.widget.donateCard.button), findsWidgets);
+  await tester.pumpAndSettle();
 
   // expect(find.byKey(KWidgetkeys.widget.donateCard.image), findsWidgets);
+
+  expect(find.byKey(KWidgetkeys.widget.donateCard.title), findsWidgets);
 
   expect(
     find.byKey(KWidgetkeys.widget.donateCard.subtitle),
     isDesk ? findsNothing : findsWidgets,
   );
 
-  expect(find.byKey(KWidgetkeys.widget.donateCard.title), findsWidgets);
+  expect(find.byKey(KWidgetkeys.widget.donateCard.button), findsWidgets);
+
+  // await scrollingHelper(
+  //   tester: tester,
+  //   itemKey: KWidgetkeys.widget.donateCard.button,
+  // );
+
+  // await tester.tap(
+  //   find.byKey(KWidgetkeys.widget.donateCard.button).first,
+  //   warnIfMissed: false,
+  // );
+
+  // await scrollingHelper(
+  //   tester: tester,
+  //   itemKey: KWidgetkeys.widget.donateCard.widget,
+  //   offset: KTestConstants.scrollingUp1000,
+  // );
 }

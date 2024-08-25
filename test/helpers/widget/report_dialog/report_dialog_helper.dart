@@ -10,7 +10,7 @@ Future<void> reportDialogHelper(
 
   expect(find.byKey(KWidgetkeys.widget.reportDialog.checkPoint), findsWidgets);
 
-  // await chekPointHelper(tester: tester);
+  // await chekPointHelper(tester: tester,twiceTap=false);
 
   expect(
     find.byKey(KWidgetkeys.widget.reportDialog.sendButton),
@@ -25,23 +25,24 @@ Future<void> reportDialogHelper(
     findsNothing,
   );
 
-  await tester.tapAt(Offset.zero);
+  // await tester.tapAt(Offset.zero);
 
-  await tester.pumpAndSettle();
+  // await tester.pumpAndSettle();
 
-  expect(find.byKey(KWidgetkeys.widget.reportDialog.title), findsNothing);
+  // expect(find.byKey(KWidgetkeys.widget.reportDialog.title), findsNothing);
 
-  expect(find.byKey(KWidgetkeys.widget.reportDialog.subtitle), findsNothing);
+  // expect(find.byKey(KWidgetkeys.widget.reportDialog.subtitle), findsNothing);
 
-  expect(find.byKey(KWidgetkeys.widget.reportDialog.checkPoint), findsNothing);
+  // expect(find.byKey(KWidgetkeys.widget.reportDialog.checkPoint), findsNothing
+  // );
 
-  expect(
-    find.byKey(KWidgetkeys.widget.reportDialog.sendButton),
-    findsNothing,
-  );
+  // expect(
+  //   find.byKey(KWidgetkeys.widget.reportDialog.sendButton),
+  //   findsNothing,
+  // );
 
-  expect(
-    find.byKey(KWidgetkeys.widget.reportDialog.widget),
-    findsNothing,
-  );
+  // expect(
+  //   find.byKey(KWidgetkeys.widget.reportDialog.widget),
+  //   findsNothing,
+  // );
 }

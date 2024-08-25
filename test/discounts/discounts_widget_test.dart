@@ -216,19 +216,21 @@ void main() {
       //     fieldNull: true,
       //   );
       // });
-      // testWidgets('Notification Link Correct Send', (tester) async {
-      //   await discountsPumpAppHelper(
-      //     tester: tester,
-      //     mockDiscountRepository: mockDiscountRepository,
-      //     mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-      //     mockReportRepository: mockReportRepository,
-      //     mockAuthenticationRepository: mockAuthenticationRepository,
-      //   );
-      //   await notificationLinkScrollHelper(
-      //     tester: tester,
-      //     test: notificationLinkCorrectHelper,
-      //   );
-      // });
+      testWidgets('Notification Link Correct Send', (tester) async {
+        await discountsPumpAppHelper(
+          tester: tester,
+          mockDiscountRepository: mockDiscountRepository,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          mockReportRepository: mockReportRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
+        );
+
+        await discountsScrollHelper(
+          tester: tester,
+          test: notificationLinkCorrectHelper,
+          isDesk: false,
+        );
+      });
       // testWidgets('Notification Link Wrong Send', (tester) async {
       //   await discountsPumpAppHelper(
       //     tester: tester,
@@ -237,44 +239,42 @@ void main() {
       //     mockReportRepository: mockReportRepository,
       //     mockAuthenticationRepository: mockAuthenticationRepository,
       //   );
-      //   await notificationLinkScrollHelper(
+      //   await discountsScrollHelper(
       //     tester: tester,
       //     test: notificationLinkWrongHelper,
       //   );
       // });
 
-      // group(
-      //   'Notification Link Limited',
-      //   () {
-      //     setUp(
-      //       () =>
-      //           when(mockDiscountRepository.userCanSendLink(KTestText.
-      // user.id))
-      //               .thenAnswer(
-      //         (invocation) async => const Right(false),
-      //       ),
-      //     );
+      group(
+        'Notification Link Limited',
+        () {
+          setUp(
+            () =>
+                when(mockDiscountRepository.userCanSendLink(KTestText.user.id))
+                    .thenAnswer(
+              (invocation) async => const Right(false),
+            ),
+          );
 
-      //     testWidgets("User Can't Send Link", (tester) async {
-      //       await discountsPumpAppHelper(
-      //         tester: tester,
-      //         mockDiscountRepository: mockDiscountRepository,
-      //         mockAppAuthenticationRepository:
-      // mockAppAuthenticationRepository,
-      //         mockReportRepository: mockReportRepository,
-      //         mockAuthenticationRepository: mockAuthenticationRepository,
-      //       );
-      //       await notificationLinkScrollHelper(
-      //         tester: tester,
-      //         itemKey: KWidgetkeys.widget.notificationLink.limitText,
-      //         test: (WidgetTester tester) async => expect(
-      //           find.byKey(KWidgetkeys.widget.notificationLink.limitText),
-      //           findsOneWidget,
-      //         ),
-      //       );
-      //     });
-      //   },
-      // );
+          testWidgets("User Can't Send Link", (tester) async {
+            await discountsPumpAppHelper(
+              tester: tester,
+              mockDiscountRepository: mockDiscountRepository,
+              mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+              mockReportRepository: mockReportRepository,
+              mockAuthenticationRepository: mockAuthenticationRepository,
+            );
+            await discountsScrollHelper(
+              tester: tester,
+              // itemKey: KWidgetkeys.widget.notificationLink.limitText,
+              test: (WidgetTester tester) async => expect(
+                find.byKey(KWidgetkeys.widget.notificationLink.thankText),
+                findsOneWidget,
+              ),
+            );
+          });
+        },
+      );
 
       group('${KGroupText.goRouter} ', () {
         late MockGoRouter mockGoRouter;

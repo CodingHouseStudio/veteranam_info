@@ -113,7 +113,7 @@ void main() {
         );
         bloc.add(
           InformationWatcherEvent.filter(
-            KTestText.informationModelItemsModify.first.category.first,
+            KTestText.informationModelItemsModify.first.categoryUA.first,
           ),
         );
       },
@@ -130,8 +130,8 @@ void main() {
           (state) =>
               state.loadingStatus == LoadingStatus.listLoadedFull &&
               state.filteredInformationModelItems.every(
-                (element) => element.category.contains(
-                  KTestText.informationModelItemsModify.first.category.first,
+                (element) => element.categoryUA.contains(
+                  KTestText.informationModelItemsModify.first.categoryUA.first,
                 ),
               ) &&
               state.filters.isNotEmpty,
@@ -235,7 +235,7 @@ void main() {
           )
           ..add(
             InformationWatcherEvent.filter(
-              KTestText.informationModelItemsModify.first.category.first,
+              KTestText.informationModelItemsModify.first.categoryUA.first,
             ),
           );
       },
@@ -292,7 +292,7 @@ void main() {
         bloc
           ..add(
             InformationWatcherEvent.filter(
-              KTestText.informationModelItemsModify.first.category.first,
+              KTestText.informationModelItemsModify.first.categoryUA.first,
             ),
           )
           ..add(
@@ -300,7 +300,7 @@ void main() {
           )
           ..add(
             InformationWatcherEvent.filter(
-              KTestText.informationModelItemsModify.first.category.first,
+              KTestText.informationModelItemsModify.first.categoryUA.first,
             ),
           )
           ..add(
@@ -404,20 +404,34 @@ void main() {
     blocTest<InformationWatcherBloc, InformationWatcherState>(
       'emits [InformationWatcherState()] whene like',
       build: () => informationWatcherBloc,
-      act: (bloc) async => bloc
-        ..add(const InformationWatcherEvent.started())
-        ..add(
-          InformationWatcherEvent.like(
-            informationModel: KTestText.informationModelItems.first,
-            isLiked: true,
-          ),
-        )
-        ..add(
-          InformationWatcherEvent.like(
-            informationModel: KTestText.informationModelItems.first,
-            isLiked: false,
-          ),
-        ),
+      act: (bloc) async {
+        bloc.add(const InformationWatcherEvent.started());
+        await expectLater(
+          bloc.stream,
+          emitsInOrder([
+            predicate<InformationWatcherState>(
+              (state) => state.loadingStatus == LoadingStatus.loading,
+            ),
+            predicate<InformationWatcherState>(
+              (state) => state.loadingStatus == LoadingStatus.loaded,
+            ),
+          ]),
+          reason: 'Wait loading data',
+        );
+        bloc
+          ..add(
+            InformationWatcherEvent.like(
+              informationModel: KTestText.informationModelItems.first,
+              isLiked: true,
+            ),
+          )
+          ..add(
+            InformationWatcherEvent.like(
+              informationModel: KTestText.informationModelItems.first,
+              isLiked: false,
+            ),
+          );
+      },
       expect: () => [
         predicate<InformationWatcherState>(
           (state) => state.loadingStatus == LoadingStatus.loading,
@@ -429,16 +443,79 @@ void main() {
     );
 
     blocTest<InformationWatcherBloc, InformationWatcherState>(
-      'emits [InformationWatcherState()] when change link',
+      'emits [InformationWatcherState()] when change like',
       build: () => informationWatcherBloc,
-      act: (bloc) async => bloc
-        ..add(const InformationWatcherEvent.started())
-        ..add(
+      act: (bloc) async {
+        bloc.add(const InformationWatcherEvent.started());
+
+        await expectLater(
+          bloc.stream,
+          emitsInOrder([
+            predicate<InformationWatcherState>(
+              (state) => state.loadingStatus == LoadingStatus.loading,
+            ),
+            predicate<InformationWatcherState>(
+              (state) => state.loadingStatus == LoadingStatus.loaded,
+            ),
+          ]),
+          reason: 'Wait loading data',
+        );
+        bloc.add(
           InformationWatcherEvent.changeLike(
             informationModel: KTestText.informationModelItems.first,
             isLiked: true,
           ),
+        );
+      },
+      expect: () => [
+        predicate<InformationWatcherState>(
+          (state) => state.loadingStatus == LoadingStatus.loading,
         ),
+        predicate<InformationWatcherState>(
+          (state) => state.loadingStatus == LoadingStatus.loaded,
+        ),
+        // predicate<InformationWatcherState>(
+        //   (state) =>
+        //       state.loadingStatus == LoadingStatus.loaded &&
+        //       state.failure == null,
+        // ),
+      ],
+    );
+
+    blocTest<InformationWatcherBloc, InformationWatcherState>(
+      'emits [InformationWatcherState()] when change like failure',
+      build: () => informationWatcherBloc,
+      act: (bloc) async {
+        when(
+          mockInformationRepository.updateLikeCount(
+            informationModel: KTestText.informationModelItems.first,
+            isLiked: true,
+          ),
+        ).thenAnswer(
+          (_) async => const Left(SomeFailure.serverError()),
+        );
+
+        bloc.add(const InformationWatcherEvent.started());
+
+        await expectLater(
+          bloc.stream,
+          emitsInOrder([
+            predicate<InformationWatcherState>(
+              (state) => state.loadingStatus == LoadingStatus.loading,
+            ),
+            predicate<InformationWatcherState>(
+              (state) => state.loadingStatus == LoadingStatus.loaded,
+            ),
+          ]),
+          reason: 'Wait loading data',
+        );
+        bloc.add(
+          InformationWatcherEvent.changeLike(
+            informationModel: KTestText.informationModelItems.first,
+            isLiked: true,
+          ),
+        );
+      },
       expect: () => [
         predicate<InformationWatcherState>(
           (state) => state.loadingStatus == LoadingStatus.loading,
@@ -448,8 +525,8 @@ void main() {
         ),
         predicate<InformationWatcherState>(
           (state) =>
-              state.loadingStatus == LoadingStatus.loaded &&
-              state.failure == null,
+              state.loadingStatus == LoadingStatus.error &&
+              state.failure == InformationFailure.error,
         ),
       ],
     );

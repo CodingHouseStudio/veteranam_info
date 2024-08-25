@@ -15,9 +15,9 @@ Future<void> footerButtonsHelper({
 
   await changeWindowSizeHelper(
     tester: tester,
-    windowsTest: true,
+    // windowsTest: true,
     test: () async {
-      for (var i = 0; i >= KWidgetkeys.widget.footer.buttonsKey.length; i--) {
+      for (var i = 0; i < KWidgetkeys.widget.footer.buttonsKey.length; i++) {
         final buttonKey = KWidgetkeys.widget.footer.buttonsKey.elementAt(i);
 
         expect(

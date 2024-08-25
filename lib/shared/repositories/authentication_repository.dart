@@ -209,7 +209,7 @@ class AuthenticationRepository {
   bool isAnonymouslyOrEmty() =>
       iAppAuthenticationRepository.isAnonymously() || currentUser.isEmpty;
 
-  @disposeMethod
+  // @disposeMethod
   void dispose() {
     _authenticationStatuscontroller.close();
     _statusUserSubscription?.cancel();
