@@ -439,10 +439,11 @@ abstract class FooterWidget {
   }) =>
       IconButtonWidget(
         key: key,
-        onPressed: () => context.launchUrl(
-          url,
-          // mode: LaunchMode.externalApplication,
-        ),
+        onPressed: () => context
+          ..read<UrlCubit>().launchUrl(
+            url: url,
+            // mode: LaunchMode.externalApplication,
+          ),
         icon: image,
         background: AppColors.materialThemeSourceSeed,
       );

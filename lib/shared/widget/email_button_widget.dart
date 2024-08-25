@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:veteranam/shared/shared.dart';
 
 class EmailButtonWidget extends StatelessWidget {
@@ -15,7 +16,10 @@ class EmailButtonWidget extends StatelessWidget {
     return TextButton.icon(
       key: KWidgetkeys.widget.emailButton.widget,
       style: KButtonStyles.withoutStyle,
-      onPressed: () => context.copyText(KAppText.email, null, null),
+      onPressed: () => context
+        ..read<UrlCubit>().copy(
+          KAppText.email,
+        ),
       label: Text(
         key: KWidgetkeys.widget.emailButton.text,
         KAppText.email,

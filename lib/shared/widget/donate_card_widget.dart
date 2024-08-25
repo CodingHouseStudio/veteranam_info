@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:veteranam/shared/shared.dart';
 
 class DonateCardWidget extends StatelessWidget {
@@ -42,18 +43,7 @@ class DonateCardWidget extends StatelessWidget {
                 cardId: fundModel.id,
               ),
             ),
-            // coverage:ignore-start
-            if (fundModel.image != null)
-              Expanded(
-                child: NetworkImageWidget(
-                  key: KWidgetkeys.widget.donateCard.image,
-                  imageUrl: fundModel.image!.downloadURL,
-                  // useCloudflare: true,
-                ),
-              )
-            // coverage:ignore-end
-            else
-              const Spacer(),
+            fundModel.getImage,
             Padding(
               padding: isDesk
                   ? const EdgeInsets.symmetric(
@@ -87,10 +77,9 @@ class DonateCardWidget extends StatelessWidget {
             DonateButtonWidget(
               key: KWidgetkeys.widget.donateCard.button,
               text: context.l10n.support,
-              // coverage:ignore-start
-              onPressed: () =>
-                  context.launchUrl(fundModel.projectsLink ?? fundModel.link),
-              // coverage:ignore-end
+              onPressed: () => context
+                  .read<UrlCubit>()
+                  .launchUrl(url: fundModel.projectsLink ?? fundModel.link),
               isDesk: isDesk,
             ),
           ],

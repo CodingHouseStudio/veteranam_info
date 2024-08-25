@@ -4,7 +4,10 @@ import 'package:veteranam/shared/shared.dart';
 
 import '../../../test_dependency.dart';
 
-Future<void> cardTextDetailHelper(WidgetTester tester) async {
+Future<void> cardTextDetailHelper({
+  required WidgetTester tester,
+  String? link,
+}) async {
   expect(
     find.byKey(KWidgetkeys.widget.cardTextDetail.text),
     findsWidgets,
@@ -19,6 +22,27 @@ Future<void> cardTextDetailHelper(WidgetTester tester) async {
     find.byKey(KWidgetkeys.widget.cardTextDetail.button),
     findsWidgets,
   );
+
+  if (link != null) {
+    await scrollingHelper(
+      tester: tester,
+      itemKey: KWidgetkeys.widget.cardTextDetail.button,
+    );
+
+    await tester.tap(
+      find.byKey(KWidgetkeys.widget.cardTextDetail.button).first,
+      warnIfMissed: false,
+    );
+
+    await scrollingHelper(
+      tester: tester,
+      itemKey: KWidgetkeys.widget.cardTextDetail.text,
+    );
+
+    await tester.tapOnTextCustom(text: link);
+
+    await tester.pumpAndSettle();
+  }
 
   // late var text = tester
   //     .widget<Text>(find.byKey(KWidgetkeys.widget.cardTextDetail.text).

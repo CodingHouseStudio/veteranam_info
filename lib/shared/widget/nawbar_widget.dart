@@ -346,7 +346,7 @@ class _NawbarWidgetImplematationState
         text: text,
         onPressed: () => context.goNamed(ruoteName),
         width: width,
-        isDesk: widget.isDesk,
+        // isDesk: widget.isTablet,
         icon: icon,
         widgetKey: key,
       );

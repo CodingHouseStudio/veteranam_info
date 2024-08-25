@@ -18,21 +18,21 @@ class DonateButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: isDesk
-          ? _DonateButtonWidgetDesk(
-              isDesk: isDesk,
-              text: text,
-              onPressed: onPressed,
-              icon: icon,
-            )
-          : _DonateButtonWidgetMob(
-              isDesk: isDesk,
-              text: text,
-              onPressed: onPressed,
-              icon: icon,
-            ),
-    );
+    if (isDesk) {
+      return _DonateButtonWidgetDesk(
+        isDesk: isDesk,
+        text: text,
+        onPressed: onPressed,
+        icon: icon,
+      );
+    } else {
+      return _DonateButtonWidgetMob(
+        isDesk: isDesk,
+        text: text,
+        onPressed: onPressed,
+        icon: icon,
+      );
+    }
   }
 }
 
@@ -49,10 +49,11 @@ class _DonateButtonWidgetDesk extends StatefulWidget {
   final bool isDesk;
 
   @override
-  State<_DonateButtonWidgetDesk> createState() => _DonateButtonWidgetState();
+  State<_DonateButtonWidgetDesk> createState() =>
+      _DonateButtonDeskWidgetState();
 }
 
-class _DonateButtonWidgetState extends State<_DonateButtonWidgetDesk> {
+class _DonateButtonDeskWidgetState extends State<_DonateButtonWidgetDesk> {
   late bool isHovering;
   @override
   void initState() {
@@ -65,9 +66,7 @@ class _DonateButtonWidgetState extends State<_DonateButtonWidgetDesk> {
     return TextButton(
       onPressed: widget.onPressed,
       style: KButtonStyles.whiteButtonStyleWInf,
-      // coverage:ignore-start
       onHover: (value) => setState(() => isHovering = value),
-      // coverage:ignore-end
       child: Padding(
         padding: const EdgeInsets.only(
           left: KPadding.kPaddingSize32,
@@ -80,6 +79,7 @@ class _DonateButtonWidgetState extends State<_DonateButtonWidgetDesk> {
             Expanded(
               child: Text(
                 widget.text,
+                key: KWidgetkeys.widget.donateButton.text,
                 style: widget.isDesk
                     ? AppTextStyle.materialThemeTitleLarge
                     : AppTextStyle.materialThemeTitleMedium,
@@ -101,6 +101,9 @@ class _DonateButtonWidgetState extends State<_DonateButtonWidgetDesk> {
                 );
               },
               child: IconWidget(
+                key: isHovering
+                    ? KWidgetkeys.widget.donateButton.rotateIcon
+                    : KWidgetkeys.widget.donateButton.icon,
                 icon: widget.icon ??
                     KIcon.arrowUpRight.copyWith(
                       color: AppColors.materialThemeWhite,
@@ -144,11 +147,13 @@ class _DonateButtonWidgetMob extends StatelessWidget {
             Expanded(
               child: Text(
                 text,
+                key: KWidgetkeys.widget.donateButton.text,
                 style: AppTextStyle.materialThemeTitleLarge,
                 maxLines: KMinMaxSize.textMaxLineOne,
               ),
             ),
             IconWidget(
+              key: KWidgetkeys.widget.donateButton.icon,
               padding: KPadding.kPaddingSize16,
               icon: icon ??
                   KIcon.arrowUpRight.copyWith(

@@ -5,7 +5,7 @@ class ButtonBottomLineWidget extends StatelessWidget {
   const ButtonBottomLineWidget({
     required this.text,
     required this.onPressed,
-    required this.isDesk,
+    // required this.isDesk,
     required this.widgetKey,
     super.key,
     this.icon,
@@ -16,27 +16,27 @@ class ButtonBottomLineWidget extends StatelessWidget {
   final Widget? icon;
   final void Function() onPressed;
   final double? width;
-  final bool isDesk;
+  // final bool isDesk;
   final Key widgetKey;
 
   @override
   Widget build(BuildContext context) {
-    if (isDesk) {
-      return ButtonBottomLineDeskWidget(
-        text: text,
-        onPressed: onPressed,
-        width: width,
-        icon: icon,
-        widgetKey: widgetKey,
-      );
-    } else {
-      return ButtonBottomLineMobileWidget(
-        text: text,
-        onPressed: onPressed,
-        icon: icon,
-        widgetKey: widgetKey,
-      );
-    }
+    // if (isDesk) {
+    return ButtonBottomLineDeskWidget(
+      text: text,
+      onPressed: onPressed,
+      width: width,
+      icon: icon,
+      widgetKey: widgetKey,
+    );
+    // } else {
+    //   return ButtonBottomLineMobileWidget(
+    //     text: text,
+    //     onPressed: onPressed,
+    //     icon: icon,
+    //     widgetKey: widgetKey,
+    //   );
+    // }
   }
 }
 
@@ -84,19 +84,18 @@ class _ButtonBottomLineDeskWidgetState
         children: [
           Text(
             widget.text,
+            key: KWidgetkeys.widget.buttonBottomLine.text,
             style: AppTextStyle.materialThemeTitleMedium,
           ),
           AnimatedContainer(
+            key: _isHovered ? KWidgetkeys.widget.buttonBottomLine.line : null,
             duration: const Duration(milliseconds: 300),
             width: _isHovered
-                ? widget.width ??
-                    (widget.text.length *
-                                (AppTextStyle
-                                        .materialThemeTitleMedium.fontSize! +
-                                    AppTextStyle.materialThemeTitleMedium
-                                        .letterSpacing!) +
-                            (widget.icon != null ? KSize.kPixel8 : 0)) /
-                        KSize.kPixel2
+                ? widget.text.getTextLength(
+                    width: widget.width,
+                    textStyle: AppTextStyle.materialThemeTitleMedium,
+                    additional: widget.icon != null ? KSize.kPixel8 : null,
+                  )
                 : 0,
             height: 1,
             decoration: const BoxDecoration(color: Colors.black),
@@ -108,30 +107,31 @@ class _ButtonBottomLineDeskWidgetState
   }
 }
 
-class ButtonBottomLineMobileWidget extends StatelessWidget {
-  const ButtonBottomLineMobileWidget({
-    required this.text,
-    required this.onPressed,
-    required this.widgetKey,
-    super.key,
-    this.icon,
-  });
+// class ButtonBottomLineMobileWidget extends StatelessWidget {
+//   const ButtonBottomLineMobileWidget({
+//     required this.text,
+//     required this.onPressed,
+//     required this.widgetKey,
+//     super.key,
+//     this.icon,
+//   });
 
-  final String text;
-  final Widget? icon;
-  final void Function() onPressed;
-  final Key widgetKey;
-  @override
-  Widget build(BuildContext context) {
-    return TextButton.icon(
-      key: widgetKey,
-      onPressed: onPressed,
-      style: KButtonStyles.withoutStyle,
-      icon: Text(
-        text,
-        style: AppTextStyle.materialThemeTitleMedium,
-      ),
-      label: icon != null ? icon! : const SizedBox.shrink(),
-    );
-  }
-}
+//   final String text;
+//   final Widget? icon;
+//   final void Function() onPressed;
+//   final Key widgetKey;
+//   @override
+//   Widget build(BuildContext context) {
+//     return TextButton.icon(
+//       key: widgetKey,
+//       onPressed: onPressed,
+//       style: KButtonStyles.withoutStyle,
+//       icon: Text(
+//         text,
+//         key: KWidgetkeys.widget.buttonBottomLine.text,
+//         style: AppTextStyle.materialThemeTitleMedium,
+//       ),
+//       label: icon != null ? icon! : const SizedBox.shrink(),
+//     );
+//   }
+// }
