@@ -35,6 +35,12 @@ lcov --remove coverage/lcov.info \
     'lib/shared/widget/dilog_page_widget.dart' \
     'lib/shared/widget/keyboard_scroll_view.dart' \
     'lib/shared/widget/network_image_widget.dart' \
+    'lib/app.dart' \
+    'lib/components/story_add/widget/field_widget.dart' \
+    'lib/shared/constants/extension/extension_constants.dart' \
+    'lib/shared/constants/extension/list_extension.dart' \
+    'lib/shared/models/failure_model/exceptions.dart' \
+    'lib/shared/widget/info_version_widget.dart' \
     --output-file coverage/lcov.info
 
 # Generate the final HTML coverage report after exclusions
