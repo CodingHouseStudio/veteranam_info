@@ -148,6 +148,7 @@ class DiscountCardWidget extends StatelessWidget {
                       KSizedBox.kWidthSizedBox16,
                       Expanded(
                         child: CityListWidget(
+                          key: KWidgetkeys.widget.discountCard.city,
                           discountModel: discountItem,
                           isDesk: true,
                         ),
@@ -161,12 +162,14 @@ class DiscountCardWidget extends StatelessWidget {
                   ),
                   KSizedBox.kHeightSizedBox8,
                   CityListWidget(
+                    key: KWidgetkeys.widget.discountCard.city,
                     discountModel: discountItem,
                     isDesk: false,
                   ),
                 ],
                 KSizedBox.kHeightSizedBox16,
                 CardTextDetailWidget(
+                  key: KWidgetkeys.widget.discountCard.description,
                   text: descriptionMethod == null
                       ? discountItem.getDescription(context)
                       : descriptionMethod!(

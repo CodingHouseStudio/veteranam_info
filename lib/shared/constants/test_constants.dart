@@ -11,6 +11,11 @@ class KTest {
   @visibleForTesting
   static set testIsWeb(bool isWeb) => _kIsWeb = isWeb;
 
+  // static double? _animatioRepeat;
+  // static double? get animatioRepeat => _animatioRepeat;
+  // @visibleForTesting
+  // static set animatioRepeat(double? repeat) => _animatioRepeat = repeat;
+
   // static ScrollPhysics? _scroll = const BouncingScrollPhysics();
   // static ScrollPhysics? get scroll => _scroll;
   // @visibleForTesting

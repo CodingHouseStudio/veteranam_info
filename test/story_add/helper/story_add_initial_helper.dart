@@ -30,7 +30,10 @@ Future<void> storyAddInitialHelper(
         findsOneWidget,
       );
 
-      await messageFieldHelper(tester: tester, message: KTestText.field);
+      await messageFieldHelper(
+        tester: tester,
+        message: KTestText.field,
+      );
 
       expect(
         find.byKey(KWidgetkeys.screen.storyAdd.photoText),

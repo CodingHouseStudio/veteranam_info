@@ -3,10 +3,15 @@ import 'package:veteranam/shared/shared.dart';
 
 import '../../../test_dependency.dart';
 
-Future<void> scaffoldLoadingButtonHelper(
-  WidgetTester tester,
-) async {
+Future<void> scaffoldLoadingButtonHelper({
+  required WidgetTester tester,
+  bool hoverOnButton = false,
+}) async {
   expect(find.byKey(KWidgetkeys.widget.scaffold.loadingButton), findsOneWidget);
+
+  if (hoverOnButton) {
+    await loadingButtonHelper(tester);
+  }
 
   await scrollingHelper(
     tester: tester,
