@@ -264,7 +264,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i922.MyStoryWatcherBloc>(
       () => _i922.MyStoryWatcherBloc(
         storyRepository: gh<_i1001.IStoryRepository>(),
-        iAppAuthenticationRepository: gh<_i1001.IAppAuthenticationRepository>(),
+        appAuthenticationRepository: gh<_i1001.IAppAuthenticationRepository>(),
       ),
       registerFor: {_development},
     );

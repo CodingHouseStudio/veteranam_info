@@ -33,9 +33,7 @@ class DiscountBodyWidget extends StatelessWidget {
                 }
                 if (state.itemsLoaded == (KDimensions.loadItems * 4) &&
                     showEmail) {
-                  context.dialog.showUserEmailDialog(
-                    context,
-                  );
+                  context.dialog.showUserEmailDialog();
                 }
               },
               listenWhen: (previous, current) =>

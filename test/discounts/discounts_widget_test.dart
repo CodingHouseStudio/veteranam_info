@@ -21,6 +21,7 @@ void main() {
     late IReportRepository mockReportRepository;
     late AuthenticationRepository mockAuthenticationRepository;
     setUp(() {
+      // KTest.animatioRepeat=1;
       ExtendedDateTime.id = KTestText.id;
       ExtendedDateTime.current = KTestText.dateTime;
       KPlatformConstants.isWebDesktop = true;

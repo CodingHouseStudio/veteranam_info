@@ -1,7 +1,9 @@
 part of '../widget_keys.dart';
 
-class _ButtonAdditional {
-  final button = const Key('additional_button');
-  final buttonText = const Key('additional_button_text');
-  final buttonIcon = const Key('additional_button_icon');
+class _ButtonAdditionalKeys {
+  final desk = const Key('button_additional_desk');
+  final mob = const Key('button_additional_mob');
+  final text = const Key('button_additional_text');
+  final icon = const Key('button_additional_icon');
+  final line = const Key('button_additional_line');
 }

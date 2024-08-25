@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter_test/flutter_test.dart';
 import 'package:veteranam/shared/shared.dart';
 
@@ -17,17 +15,9 @@ Future<void> donatesCardHelper(
 
   await donateCardHelper(tester: tester, isDesk: true);
 
-  final widgetLocation =
-      tester.getCenter(find.byKey(KWidgetkeys.widget.donateCard.widget).first);
-
-  final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
-
-  await gesture.addPointer(location: widgetLocation);
-
-  await tester.pumpAndSettle();
-
-  expect(
-    find.byKey(KWidgetkeys.widget.donateCard.subtitle),
-    findsOneWidget,
+  await hoverHelper(
+    tester: tester,
+    key: KWidgetkeys.widget.donateCard.widget,
+    hoverElement: KWidgetkeys.widget.donateCard.subtitle,
   );
 }
