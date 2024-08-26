@@ -8,13 +8,23 @@ Future<void> advancedFilterResetMobHelper({
   required WidgetTester tester,
   required MockGoRouter mockGoRouter,
 }) async {
+  final isMobile = tester
+      .widgetList(find.byKey(KWidgetkeys.screen.discounts.advancedFilterMob))
+      .isNotEmpty;
+
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.discounts.advancedFilter,
+    itemKey: isMobile
+        ? KWidgetkeys.screen.discounts.advancedFilterMob
+        : KWidgetkeys.screen.discounts.advancedFilterDesk,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.discounts.advancedFilter),
+    find.byKey(
+      isMobile
+          ? KWidgetkeys.screen.discounts.advancedFilterMob
+          : KWidgetkeys.screen.discounts.advancedFilterDesk,
+    ),
     findsOneWidget,
   );
 
