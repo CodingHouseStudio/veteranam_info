@@ -3,15 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:veteranam/components/components.dart';
 import 'package:veteranam/shared/shared.dart';
 
-class AdvancedFilterDesk extends StatefulWidget {
+class AdvancedFilterDesk extends StatelessWidget {
   const AdvancedFilterDesk({super.key});
-
-  @override
-  State<AdvancedFilterDesk> createState() => _AdvancedFilterDeskState();
-}
-
-class _AdvancedFilterDeskState extends State<AdvancedFilterDesk> {
-  late bool showFilter = true;
 
   @override
   Widget build(BuildContext context) {
@@ -38,9 +31,7 @@ class _AdvancedFilterDeskState extends State<AdvancedFilterDesk> {
               //   ],
               // ),
               AdvancedFilterButton(
-                onPressed: () => setState(() {
-                  showFilter = !showFilter;
-                }),
+                onPressed: () {},
                 isDesk: true,
                 // icon: showFilter
                 //     ? KIcon.trailing.copyWith(
@@ -53,23 +44,20 @@ class _AdvancedFilterDeskState extends State<AdvancedFilterDesk> {
                 //       ),
               ),
 
-              if (showFilter)
-                Expanded(
-                  child: AdvancedFilterContent(
-                    isDesk: true,
-                    onChange: (value) => context
-                        .read<DiscountWatcherBloc>()
-                        .add(DiscountWatcherEvent.filterLocation(value)),
-                    filterLocationes: context
-                        .read<DiscountWatcherBloc>()
-                        .state
-                        .filtersLocation,
-                    sorting: context.read<DiscountWatcherBloc>().state.sorting,
-                    onChangeSorting: (value) => context
-                        .read<DiscountWatcherBloc>()
-                        .add(DiscountWatcherEvent.sorting(value)),
-                  ),
+              Expanded(
+                child: AdvancedFilterContent(
+                  isDesk: true,
+                  onChange: (value) => context
+                      .read<DiscountWatcherBloc>()
+                      .add(DiscountWatcherEvent.filterLocation(value)),
+                  filterLocationes:
+                      context.read<DiscountWatcherBloc>().state.filtersLocation,
+                  sorting: context.read<DiscountWatcherBloc>().state.sorting,
+                  onChangeSorting: (value) => context
+                      .read<DiscountWatcherBloc>()
+                      .add(DiscountWatcherEvent.sorting(value)),
                 ),
+              ),
               // ...AdvanceFilter.resetButton(isDesk: true, context: context),
             ],
           ),

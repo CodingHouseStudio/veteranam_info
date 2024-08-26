@@ -6,79 +6,24 @@ class AdvancedFilterButton extends StatelessWidget {
     required this.isDesk,
     required this.onPressed,
     super.key,
-    this.icon,
+    //this.icon,
   });
   final bool isDesk;
   final void Function() onPressed;
-  final Icon? icon;
+  //final Icon? icon;
 
   @override
   Widget build(BuildContext context) {
     return Align(
       alignment: Alignment.centerLeft,
       child: isDesk
-          ? Row(
-              key: KWidgetkeys.screen.discounts.advancedFilterButton,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                if (isDesk)
-                  Expanded(
-                    child: Text(
-                      context.l10n.advancedFilter,
-                      style: isDesk
-                          ? AppTextStyle.materialThemeHeadlineSmall
-                          : AppTextStyle.materialThemeTitleMedium,
-                    ),
-                  )
-                else
-                  Text(
-                    context.l10n.advancedFilter,
-                    style: isDesk
-                        ? AppTextStyle.materialThemeHeadlineSmall
-                        : AppTextStyle.materialThemeTitleMedium,
-                  ),
-                if (icon != null) ...[KSizedBox.kWidthSizedBox8, icon!],
-                IconWidget(
-                  icon: KIcon.tune,
-                  background: AppColors.materialThemeKeyColorsNeutral,
-                  padding: isDesk
-                      ? KPadding.kPaddingSize20
-                      : KPadding.kPaddingSize12,
-                ),
-              ],
-            )
+          ? _buildAdvancedFilterRow(context, isDesk)
           : TextButton.icon(
               key: KWidgetkeys.screen.discounts.advancedFilterButton,
               style: KButtonStyles.advancedButtonStyle,
-              label: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  if (isDesk)
-                    Expanded(
-                      child: Text(
-                        context.l10n.advancedFilter,
-                        style: isDesk
-                            ? AppTextStyle.materialThemeHeadlineSmall
-                            : AppTextStyle.materialThemeTitleMedium,
-                      ),
-                    )
-                  else
-                    Text(
-                      context.l10n.advancedFilter,
-                      style: isDesk
-                          ? AppTextStyle.materialThemeHeadlineSmall
-                          : AppTextStyle.materialThemeTitleMedium,
-                    ),
-                  if (icon != null) ...[KSizedBox.kWidthSizedBox8, icon!],
-                ],
-              ),
+              label: _buildAdvancedFilterRow(context, isDesk),
               // KSizedBox.kWidthSizedBox8,
-              icon: IconWidget(
-                icon: KIcon.tune,
-                background: AppColors.materialThemeKeyColorsNeutral,
-                padding:
-                    isDesk ? KPadding.kPaddingSize20 : KPadding.kPaddingSize12,
-              ),
+              icon: _icon(isDesk),
               onPressed: onPressed,
               //if (isDesk) KIcon.meil,
             ),
@@ -86,4 +31,38 @@ class AdvancedFilterButton extends StatelessWidget {
       // KSizedBox.kWidthSizedBox8,
     );
   }
+}
+
+Widget _buildAdvancedFilterRow(BuildContext context, bool isDesk) {
+  return Row(
+    key: isDesk ? KWidgetkeys.screen.discounts.advancedFilterButton : null,
+    mainAxisSize: MainAxisSize.min,
+    children: [
+      if (isDesk)
+        Expanded(
+          child: Text(
+            context.l10n.advancedFilter,
+            style: isDesk
+                ? AppTextStyle.materialThemeHeadlineSmall
+                : AppTextStyle.materialThemeTitleMedium,
+          ),
+        )
+      else
+        Text(
+          context.l10n.advancedFilter,
+          style: isDesk
+              ? AppTextStyle.materialThemeHeadlineSmall
+              : AppTextStyle.materialThemeTitleMedium,
+        ),
+      if (isDesk) _icon(isDesk),
+    ],
+  );
+}
+
+Widget _icon(bool isDesk) {
+  return IconWidget(
+    icon: KIcon.tune,
+    background: AppColors.materialThemeKeyColorsNeutral,
+    padding: isDesk ? KPadding.kPaddingSize20 : KPadding.kPaddingSize12,
+  );
 }

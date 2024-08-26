@@ -24,27 +24,31 @@ Future<void> advancedFilterHelper(
     findsOneWidget,
   );
 
-  // if (advancedButton.isNotEmpty) {
-  await tester
-      .tap(find.byKey(KWidgetkeys.screen.discounts.advancedFilterButton));
+  final isMobile = tester
+      .widgetList(find.byKey(KWidgetkeys.screen.discounts.advancedFilterDialog))
+      .isNotEmpty;
 
-  await tester.pumpAndSettle();
+  // if (isMobile) {
+  //   // if (advancedButton.isNotEmpty) {
+  //   await tester
+  //       .tap(find.byKey(KWidgetkeys.screen.discounts.advancedFilterButton));
+
+  //   await tester.pumpAndSettle();
   // }
-  if (find
-      .byKey(KWidgetkeys.screen.discounts.advancedFilterList)
-      .evaluate()
-      .isEmpty) {
-    await tester
-        .tap(find.byKey(KWidgetkeys.screen.discounts.advancedFilterButton));
+  // if (find
+  //     .byKey(KWidgetkeys.screen.discounts.advancedFilterList)
+  //     .evaluate()
+  //     .isEmpty) {
+  //   await tester
+  //       .tap(find.byKey(KWidgetkeys.screen.discounts.advancedFilterButton));
 
-    await tester.pumpAndSettle();
-  }
-
+  //   await tester.pumpAndSettle();
+  // }
+  // }
   expect(
     find.byKey(KWidgetkeys.screen.discounts.advancedFilterList),
     findsOneWidget,
   );
-
   await scrollingHelper(
     tester: tester,
     offset: KTestConstants.scrollingUp,
@@ -158,10 +162,6 @@ Future<void> advancedFilterHelper(
     find.byKey(KWidgetkeys.screen.discounts.appliedFilterItems),
     findsNothing,
   );
-
-  final isMobile = tester
-      .widgetList(find.byKey(KWidgetkeys.screen.discounts.advancedFilterDialog))
-      .isNotEmpty;
 
   if (isMobile) {
     // expect(
