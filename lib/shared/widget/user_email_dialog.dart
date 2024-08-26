@@ -85,9 +85,7 @@ class UserEmailDialog extends StatelessWidget {
                           Text(
                             key: KWidgetkeys
                                 .widget.userEmailDialog.emailDialogSubtitle,
-                            KTest.testIsWeb
-                                ? '${context.l10n.aboutNewDiscountsSubtitle})'
-                                : '${context.l10n.aboutNewDiscountsSubtitle} 😀',
+                            _text(context),
                             style: isDesk
                                 ? AppTextStyle.materialThemeBodyLarge
                                 : AppTextStyle.materialThemeBodyMedium,
@@ -100,9 +98,7 @@ class UserEmailDialog extends StatelessWidget {
               if (!isDesk)
                 Text(
                   key: KWidgetkeys.widget.userEmailDialog.emailDialogSubtitle,
-                  KTest.testIsWeb
-                      ? '${context.l10n.aboutNewDiscountsSubtitle})'
-                      : '${context.l10n.aboutNewDiscountsSubtitle} 😀',
+                  _text(context),
                   style: isDesk
                       ? AppTextStyle.materialThemeBodyLarge
                       : AppTextStyle.materialThemeBodyMedium,
@@ -132,6 +128,12 @@ class UserEmailDialog extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String _text(BuildContext context) {
+    return KTest.testIsWeb
+        ? '${context.l10n.aboutNewDiscountsSubtitle})'
+        : '${context.l10n.aboutNewDiscountsSubtitle} 😀';
   }
 
   Widget field(
