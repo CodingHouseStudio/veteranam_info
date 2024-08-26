@@ -6,7 +6,7 @@ import '../../../test_dependency.dart';
 Future<void> userEmailEmptyHelper(
   WidgetTester tester,
 ) async {
-  await userEmailHelper(tester);
+  await userEmailHelper(tester: tester);
 
   await userEmailSaveHelper(tester: tester, email: KTestText.fieldEmpty);
 

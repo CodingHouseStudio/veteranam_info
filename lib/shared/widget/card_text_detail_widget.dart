@@ -45,6 +45,7 @@ class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
       children: [
         if (widget.hasMarkdown)
           MarkdownBody(
+            key: KWidgetkeys.widget.cardTextDetail.text,
             data: widget.text
                 .markdownCard(isDesk: widget.isDesk, fullText: fullText),
 
@@ -52,9 +53,8 @@ class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
             styleSheet: MarkdownStyleSheet(
               a: AppTextStyle.materialThemeBodyLarge,
             ),
-            // coverage:ignore-start
-            onTapLink: (text, href, title) => context.launchUrl(href),
-            // coverage:ignore-end
+            onTapLink: (text, href, title) =>
+                context.read<UrlCubit>().launchUrl(url: href),
           )
         else
           Text(

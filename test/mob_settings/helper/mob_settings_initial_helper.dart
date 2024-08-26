@@ -53,6 +53,8 @@ Future<void> mobSettingsInitialHelper(
     findsOneWidget,
   );
 
+  await doubleButtonHelper(tester);
+
   await scrollingHelper(
     tester: tester,
     itemKey: KWidgetkeys.screen.mobSettings.feedbackButton,
