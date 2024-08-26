@@ -20,12 +20,13 @@ GoRouter router = GoRouter(
       GoRouterRefreshStream(GetIt.instance<AuthenticationBloc>().stream),
   initialLocation: kIsWeb ? KRoute.home.path : '/${KRoute.discounts.path}',
   observers: [
-    FirebaseAnalyticsObserver(
-      analytics: FirebaseAnalytics.instance,
-      onError: (_) => foundation.kDebugMode
-          ? debugPrint('FirebaseAnalyticsObserver error $_')
-          : null,
-    ),
+    if (Config.isProduction && kReleaseMode)
+      FirebaseAnalyticsObserver(
+        analytics: FirebaseAnalytics.instance,
+        onError: (_) => foundation.kDebugMode
+            ? debugPrint('FirebaseAnalyticsObserver error $_')
+            : null,
+      ),
   ],
   redirect: (BuildContext context, GoRouterState state) async {
     if (context.read<AuthenticationBloc>().state.status ==
