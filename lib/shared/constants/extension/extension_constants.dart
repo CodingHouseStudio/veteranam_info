@@ -1,8 +1,9 @@
 import 'dart:math';
 import 'dart:typed_data';
 import 'package:collection/collection.dart';
+import 'package:feedback/feedback.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/widgets.dart' show BuildContext, visibleForTesting;
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
@@ -188,6 +189,18 @@ extension StringExtension on String {
   }
 
   int get _ukraineIndex => KAppText.ukrainianAlphabet.indexOf(this);
+
+  double getTextLength({
+    required double? width,
+    required TextStyle textStyle,
+    double? additional,
+  }) {
+    if (width != null) return width;
+    final textLength =
+        length * (textStyle.fontSize! + textStyle.letterSpacing!) +
+            (additional ?? 0);
+    return textLength / KSize.kPixel2;
+  }
 }
 
 extension InformationModelExtension on InformationModel {
@@ -214,10 +227,13 @@ extension ContextExtensions on BuildContext {
   bool get isEnglish =>
       read<AuthenticationBloc>().state.userSetting.locale.isEnglish;
 
-  void copyText(String text, String? href, String? title) =>
-      read<UrlCubit>().copy(text);
+  Future<void> onMobFeedback(UserFeedback feedback) async =>
+      read<MobFeedbackBloc>().add(MobFeedbackEvent.send(feedback.screenshot));
 
-  void launchUrl(String? url) => read<UrlCubit>().launchUrl(url: url);
+  // void copyText(String text, String? href, String? title) =>
+  //     read<UrlCubit>().copy(text);
+
+  // void launchUrl(String? url) => read<UrlCubit>().launchUrl(url: url);
 }
 
 extension DiscountEnumExtensions on DiscountEnum {
@@ -299,4 +315,50 @@ extension UserRoleExtensions on UserRole {
         return context.l10n.iAmVeteran;
     }
   }
+}
+
+extension ImageExtensions on ImageModel? {
+  Widget? getImage({
+    required Widget Function(Widget child) parent,
+    Key? key,
+    double? size,
+    BoxFit? fit,
+  }) {
+    if (this == null) return null;
+    return parent(
+      NetworkImageWidget(
+        key: key,
+        imageUrl: this!.downloadURL,
+        fit: fit,
+        size: size,
+      ),
+    );
+  }
+}
+
+extension FundExtensions on FundModel {
+  Widget get getImage {
+    return image.getImage(
+          parent: (child) => Expanded(child: child),
+          key: KWidgetkeys.widget.donateCard.image,
+        ) ??
+        const Spacer();
+  }
+}
+
+extension StoryExtensions on StoryModel {
+  Widget get getImage =>
+      userPhoto.getImage(
+        parent: (child) => ClipRRect(
+          borderRadius: BorderRadius.circular(KSize.kUserPhoto),
+          child: child,
+        ),
+        fit: BoxFit.contain,
+        size: KSize.kUserPhoto,
+      ) ??
+      IconWidget(
+        key: KWidgetkeys.widget.storyCard.userIcon,
+        icon: KIcon.person,
+        background: AppColors.materialThemeKeyColorsNeutralVariant,
+      );
 }

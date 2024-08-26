@@ -264,18 +264,10 @@ class _DialogsWidget {
   }
 
   void showMobFeedback() {
-    BetterFeedback.of(context).show(
-      // coverage:ignore-start
-      (feedback) => context
-          .read<MobFeedbackBloc>()
-          .add(MobFeedbackEvent.send(feedback.screenshot)),
-      // coverage:ignore-end
-    );
+    BetterFeedback.of(context).show(context.onMobFeedback);
   }
 
-  void showUserEmailDialog(
-    BuildContext context,
-  ) {
+  void showUserEmailDialog() {
     showDialog<void>(
       context: context,
       builder: (BuildContext context) {

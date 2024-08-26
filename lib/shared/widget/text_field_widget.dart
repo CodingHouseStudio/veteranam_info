@@ -93,7 +93,6 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
   @override
   Widget build(BuildContext context) {
     return MouseRegion(
-      // coverage:ignore-start
       onEnter: (_) {
         setState(() {
           isHovered = true;
@@ -104,7 +103,6 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
           isHovered = false;
         });
       },
-      // coverage:ignore-end
       child: TextField(
         key: widget.widgetKey,
         expands: widget.expands ?? false,

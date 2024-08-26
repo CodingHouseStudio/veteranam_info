@@ -24,6 +24,6 @@ Future<void> storyCardHelper({
   if (image != null) {
     await cardAddImageHelper(tester: tester, image: image);
   } else {
-    await cardTextDetailEvaluateHelper(tester);
+    await cardTextDetailEvaluateHelper(tester: tester);
   }
 }

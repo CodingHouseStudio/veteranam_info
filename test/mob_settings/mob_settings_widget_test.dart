@@ -1,5 +1,9 @@
+import 'dart:typed_data';
+
+import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
+import 'package:mockito/mockito.dart';
 import 'package:veteranam/shared/shared.dart';
 
 import '../test_dependency.dart';
@@ -14,16 +18,51 @@ void main() {
 
   tearDown(GetIt.I.reset);
   group('${KScreenBlocName.mobSettings} ', () {
-    setUp(
-      () => KTest.testIsWeb = false,
-    );
+    late IFeedbackRepository mockFeedbackRepository;
+    late IAppAuthenticationRepository mockAppAuthenticationRepository;
+    setUp(() {
+      KTest.testIsWeb = false;
+      ExtendedDateTime.id = KTestText.id;
+      ExtendedDateTime.current = KTestText.dateTime;
+
+      mockFeedbackRepository = MockIFeedbackRepository();
+      mockAppAuthenticationRepository = MockAppAuthenticationRepository();
+
+      when(
+        mockAppAuthenticationRepository.currentUser,
+      ).thenAnswer((realInvocation) => KTestText.user);
+
+      when(
+        mockFeedbackRepository.sendMobFeedback(
+          feedback: FeedbackModel(
+            id: KTestText.id,
+            message: KTestText.field,
+            guestId: KTestText.user.id,
+            guestName: null,
+            email: null,
+            timestamp: KTestText.dateTime,
+          ),
+          image: Uint8List(1),
+        ),
+      ).thenAnswer(
+        (realInvocation) async => const Right(true),
+      );
+    });
     testWidgets('${KGroupText.intial} ', (tester) async {
-      await mobSettingsPumpAppHelper(tester: tester);
+      await mobSettingsPumpAppHelper(
+        tester: tester,
+        mockFeedbackRepository: mockFeedbackRepository,
+        mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+      );
 
       await mobSettingsInitialHelper(tester);
     });
     testWidgets('Mobile feedback wrong enter text', (tester) async {
-      await mobSettingsPumpAppHelper(tester: tester);
+      await mobSettingsPumpAppHelper(
+        tester: tester,
+        mockFeedbackRepository: mockFeedbackRepository,
+        mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+      );
 
       await mobFeedbackOpenHelper(
         test: mobFeedbackWrongTextHelper,
@@ -36,6 +75,8 @@ void main() {
       testWidgets('${KGroupText.intial} ', (tester) async {
         await mobSettingsPumpAppHelper(
           tester: tester,
+          mockFeedbackRepository: mockFeedbackRepository,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
           mockGoRouter: mockGoRouter,
         );
 
@@ -44,6 +85,8 @@ void main() {
       testWidgets('Mobile feedback correct enter text', (tester) async {
         await mobSettingsPumpAppHelper(
           tester: tester,
+          mockFeedbackRepository: mockFeedbackRepository,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
           mockGoRouter: mockGoRouter,
         );
 
@@ -56,6 +99,8 @@ void main() {
         testWidgets('${KRoute.feedback.name} ', (tester) async {
           await mobSettingsPumpAppHelper(
             tester: tester,
+            mockFeedbackRepository: mockFeedbackRepository,
+            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
             mockGoRouter: mockGoRouter,
           );
 
@@ -68,6 +113,8 @@ void main() {
         testWidgets('${KRoute.mobFAQ.name} ', (tester) async {
           await mobSettingsPumpAppHelper(
             tester: tester,
+            mockFeedbackRepository: mockFeedbackRepository,
+            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
             mockGoRouter: mockGoRouter,
           );
 
@@ -80,6 +127,8 @@ void main() {
         testWidgets('${KRoute.privacyPolicy.name} ', (tester) async {
           await mobSettingsPumpAppHelper(
             tester: tester,
+            mockFeedbackRepository: mockFeedbackRepository,
+            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
             mockGoRouter: mockGoRouter,
           );
 

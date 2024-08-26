@@ -42,12 +42,15 @@ Future<void> nawbarHelper({
     language = find.byKey(KWidgetkeys.widget.nawbar.language).evaluate();
 
     if (language.isNotEmpty) {
+      await buttonBottomLineHelper(
+        tester: tester,
+        isDesk: true,
+      );
+
       expect(find.byKey(KWidgetkeys.widget.nawbar.language), findsOneWidget);
 
       await languageSwitcherHelper(tester);
-    }
 
-    if (language.isNotEmpty) {
       expect(
         find.byKey(KWidgetkeys.widget.nawbar.discountsButton),
         findsOneWidget,

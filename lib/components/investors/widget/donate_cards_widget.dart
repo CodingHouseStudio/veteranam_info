@@ -37,14 +37,12 @@ class _DonatesCardsWidgetState extends State<DonatesCardsWidget> {
                     : KDimensions.donateCardSmallExpanded,
             child: widget.fundItems.length > index
                 ? MouseRegion(
-                    // coverage:ignore-start
                     onEnter: (event) => setState(() {
                       hasSubtitles[index] = true;
                     }),
                     onExit: (event) => setState(() {
                       hasSubtitles[index] = false;
                     }),
-                    // coverage:ignore-end
                     child: Padding(
                       padding: EdgeInsets.only(
                         right: widget.fundItems.length + 1 != index
