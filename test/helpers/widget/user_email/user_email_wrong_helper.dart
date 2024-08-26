@@ -7,7 +7,7 @@ Future<void> userEmailWrongHelper({
   required WidgetTester tester,
   required MockGoRouter mockGoRouter,
 }) async {
-  await userEmailHelper(tester);
+  await userEmailHelper(tester: tester);
 
   await userEmailSaveHelper(tester: tester, email: KTestText.field);
 

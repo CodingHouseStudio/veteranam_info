@@ -26,7 +26,7 @@ void main() {
       ).thenAnswer((_) async => Right(KTestText.storyModelItems));
       myStoryWatcherBloc = MyStoryWatcherBloc(
         storyRepository: mockStoryRepository,
-        iAppAuthenticationRepository: mockAuthRepository,
+        appAuthenticationRepository: mockAuthRepository,
       );
     });
     blocTest<MyStoryWatcherBloc, MyStoryWatcherState>(

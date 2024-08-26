@@ -35,7 +35,7 @@ void _registerMyStoryBloc({
 }) {
   final myStoryWatcherBloc = MyStoryWatcherBloc(
     storyRepository: mockStoryRepository,
-    iAppAuthenticationRepository: mockAppAuthenticationRepository,
+    appAuthenticationRepository: mockAppAuthenticationRepository,
   );
   if (GetIt.I.isRegistered<MyStoryWatcherBloc>()) {
     GetIt.I.unregister<MyStoryWatcherBloc>();

@@ -41,6 +41,8 @@ Future<void> feedbackFormInitialHelper(
 
   expect(find.byKey(KWidgetkeys.screen.feedback.button), findsOneWidget);
 
+  await doubleButtonHelper(tester);
+
   expect(
     find.byKey(KWidgetkeys.screen.feedback.emailText),
     findsOneWidget,

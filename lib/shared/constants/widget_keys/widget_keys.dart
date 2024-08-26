@@ -46,7 +46,7 @@ part 'widget/footer.dart';
 part 'widget/message_field.dart';
 part 'widget/story_card.dart';
 part 'widget/box.dart';
-part 'widget/button_mob.dart';
+// part 'widget/button_mob.dart';
 part 'widget/card_text_detail.dart';
 part 'widget/work_card.dart';
 part 'widget/card_text_detail_evaluate.dart';
@@ -82,6 +82,10 @@ part 'widget/mob_feedback.dart';
 part 'widget/email_button.dart';
 part 'widget/user_email_dialog.dart';
 part 'widget/language_switcher.dart';
+part 'widget/button_bottom_line.dart';
+part 'widget/donate_button.dart';
+part 'widget/double_button.dart';
+part 'widget/loading_button.dart';
 
 abstract class KWidgetkeys {
   static _ScreenKeys get screen => _ScreenKeys();

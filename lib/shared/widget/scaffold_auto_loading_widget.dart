@@ -75,7 +75,7 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
                   KPlatformConstants.isWebDesktop &&
                   !(widget.cardListIsEmpty ?? false) &&
                   widget.loadingStatus != LoadingStatus.loading)
-                LoadingButton(
+                LoadingButtonWidget(
                   isDesk: isDesk,
                   onPressed: widget.loadFunction,
                   text: widget.loadingButtonText,

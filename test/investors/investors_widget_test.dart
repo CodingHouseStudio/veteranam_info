@@ -280,6 +280,24 @@ void main() {
       //   );
       // });
 
+      testWidgets('Donate button', (tester) async {
+        await investorsPumpAppHelper(
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          mockInvestorsRepository: mockInvestorsRepository,
+          mockReportRepository: mockReportRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
+          mockUrlRepository: mockUrlRepository,
+          tester: tester,
+        );
+
+        await donateButtonHelper(
+          tester: tester,
+          tap: true,
+          scrollDown: true,
+          isDesk: false,
+        );
+      });
+
       group('${KGroupText.goRouter} ', () {
         late MockGoRouter mockGoRouter;
         setUp(() => mockGoRouter = MockGoRouter());

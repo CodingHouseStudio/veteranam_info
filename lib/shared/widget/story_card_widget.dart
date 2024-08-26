@@ -19,23 +19,7 @@ class StoryCardWidget extends StatelessWidget {
       titleTopMob: true,
       titleWidget: Row(
         children: [
-          if (storyModel.userPhoto == null)
-            IconWidget(
-              key: KWidgetkeys.widget.storyCard.userIcon,
-              icon: KIcon.person,
-              background: AppColors.materialThemeKeyColorsNeutralVariant,
-            )
-          else
-            // coverage:ignore-start
-            ClipRRect(
-              borderRadius: BorderRadius.circular(KSize.kUserPhoto),
-              child: NetworkImageWidget(
-                imageUrl: storyModel.userPhoto!.downloadURL,
-                fit: BoxFit.contain,
-                size: KSize.kUserPhoto,
-              ),
-            ),
-          // coverage:ignore-end
+          storyModel.getImage,
           KSizedBox.kWidthSizedBox8,
           Text(
             storyModel.userName ?? context.l10n.anonymous,

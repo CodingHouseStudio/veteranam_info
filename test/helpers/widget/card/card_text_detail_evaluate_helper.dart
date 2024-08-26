@@ -3,9 +3,10 @@ import 'package:veteranam/shared/shared.dart';
 
 import '../../../test_dependency.dart';
 
-Future<void> cardTextDetailEvaluateHelper(
-  WidgetTester tester,
-) async {
+Future<void> cardTextDetailEvaluateHelper({
+  required WidgetTester tester,
+  String? link,
+}) async {
   expect(
     //find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconDislike),
     find.byKey(KWidgetkeys.widget.cardTextDetailEvaluate.iconShare),
@@ -38,7 +39,8 @@ Future<void> cardTextDetailEvaluateHelper(
   );
 
   await cardTextDetailHelper(
-    tester,
+    tester: tester,
+    link: link,
   );
 
   await scrollingHelper(
