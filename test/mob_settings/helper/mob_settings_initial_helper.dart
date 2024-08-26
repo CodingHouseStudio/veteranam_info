@@ -37,6 +37,18 @@ Future<void> mobSettingsInitialHelper(
   await switchHelper(tester: tester, enabled: false, isActive: true);
 
   expect(
+    find.byKey(KWidgetkeys.screen.mobSettings.offlinesIcon),
+    findsOneWidget,
+  );
+
+  await tester.longPress(
+    find.byKey(KWidgetkeys.screen.mobSettings.offlinesIcon),
+    warnIfMissed: false,
+  );
+
+  await tester.pumpAndSettle(const Duration(seconds: 15));
+
+  expect(
     find.byKey(KWidgetkeys.screen.mobSettings.subtitle),
     findsOneWidget,
   );
