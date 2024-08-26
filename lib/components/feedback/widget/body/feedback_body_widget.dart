@@ -55,7 +55,7 @@ class _FeedbackBodyWidgetState extends State<FeedbackBodyWidget> {
               FeedbackTitle(
                 isDesk: isDesk,
                 title: context.l10n.thanks,
-                secondText: context.l10n.thanks,
+                // secondText: context.l10n.thanks,
               ),
               ..._feedbackBoxWidgetList(
                 isDesk: isDesk,
@@ -69,8 +69,8 @@ class _FeedbackBodyWidgetState extends State<FeedbackBodyWidget> {
                 isDesk: isDesk,
                 title: context.l10n.write,
                 titleSecondPart: '${context.l10n.us} ${context.l10n.aMessage}',
-                text: '${context.l10n.write} ${context.l10n.us}',
-                secondText: context.l10n.aMessage,
+                // text: '${context.l10n.write} ${context.l10n.us}',
+                // secondText: context.l10n.aMessage,
               ),
               ..._formWidgegList(
                 isDesk: isDesk,
