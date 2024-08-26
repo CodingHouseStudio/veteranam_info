@@ -93,7 +93,7 @@ class DiscountBodyWidget extends StatelessWidget {
                       ],
                       KSizedBox.kHeightSizedBox24,
                       AdvancedFilterMob(
-                        key: KWidgetkeys.screen.discounts.advancedFilter,
+                        key: KWidgetkeys.screen.discounts.advancedFilterMob,
                       ),
                     ],
                     if (isDesk)
@@ -102,7 +102,7 @@ class DiscountBodyWidget extends StatelessWidget {
                       KSizedBox.kHeightSizedBox24,
                   ],
                   mainRightChildWidget: AdvancedFilterDesk(
-                    key: KWidgetkeys.screen.discounts.advancedFilter,
+                    key: KWidgetkeys.screen.discounts.advancedFilterDesk,
                   ),
                   mainChildWidgetsFunction: ({required isDesk}) => [
                     if (_.discountModelItems.isEmpty &&

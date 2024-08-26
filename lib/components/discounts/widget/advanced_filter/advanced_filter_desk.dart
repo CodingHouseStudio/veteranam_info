@@ -30,8 +30,7 @@ class AdvancedFilterDesk extends StatelessWidget {
               //     ),
               //   ],
               // ),
-              AdvancedFilterButton(
-                onPressed: () {},
+              const AdvancedFilterButton(
                 isDesk: true,
                 // icon: showFilter
                 //     ? KIcon.trailing.copyWith(

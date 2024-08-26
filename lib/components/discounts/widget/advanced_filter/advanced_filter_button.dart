@@ -4,12 +4,12 @@ import 'package:veteranam/shared/shared.dart';
 class AdvancedFilterButton extends StatelessWidget {
   const AdvancedFilterButton({
     required this.isDesk,
-    required this.onPressed,
+    this.onPressed,
     super.key,
     //this.icon,
   });
   final bool isDesk;
-  final void Function() onPressed;
+  final void Function()? onPressed;
   //final Icon? icon;
 
   @override
