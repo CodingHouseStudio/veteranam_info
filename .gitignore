@@ -150,7 +150,5 @@ doc/api/
 # **/generated/
 # Ignore test generated folder
 test/.test_optimizer.dart
-# Ignore Demian test script
-coeverage_exclude_python.py
 
 
