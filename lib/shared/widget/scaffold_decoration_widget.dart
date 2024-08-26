@@ -60,6 +60,7 @@ class ScaffoldDecorationWidget extends StatelessWidget {
         return FocusTraversalGroup(
           child: Semantics(
             child: Scaffold(
+              resizeToAvoidBottomInset: !KTest.testIsWeb,
               appBar: AppBar(
                 backgroundColor: AppColors.materialThemeWhite,
                 toolbarHeight: KSize.kAppBarHeight,

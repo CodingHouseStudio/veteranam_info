@@ -109,6 +109,8 @@ List<Widget> _fieldWidgetList({
         isDesk: isDesk,
         onPressed: () =>
             context.read<FeedbackBloc>().add(const FeedbackEvent.save()),
+        mobVerticalTextPadding: KPadding.kPaddingSize16,
+        mobIconPadding: KPadding.kPaddingSize16,
         color: AppColors.materialThemeKeyColorsSecondary,
         textColor: AppColors.materialThemeWhite,
       ),

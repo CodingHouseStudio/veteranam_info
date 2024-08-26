@@ -47,6 +47,7 @@ class MenuDialogWidget extends StatelessWidget {
         ),
         KSizedBox.kHeightSizedBox32,
         Wrap(
+          runSpacing: 40,
           children: [
             LanguagesSwitcherWidget(
               key: KWidgetkeys.widget.menuDialog.languageSwitcher,

@@ -14,35 +14,42 @@ class MobNavigationWidget extends StatelessWidget {
       context.l10n.settings,
     ];
 
-    return ClipRRect(
-      borderRadius: const BorderRadius.only(
-        topLeft: Radius.circular(KSize.kPixel32),
-        topRight: Radius.circular(KSize.kPixel32),
+    return DecoratedBox(
+      decoration: const BoxDecoration(
+        boxShadow: [KWidgetTheme.boxShadow],
       ),
-      child: ConstrainedBox(
-        constraints: const BoxConstraints(minHeight: KSize.kPixel80),
-        child: BottomNavigationBar(
-          key: KWidgetkeys.widget.mobNavigation.widget,
-          items: List.generate(KIcon.icons.length, (index) {
-            return BottomNavigationBarItem(
-              key: KWidgetkeys.widget.mobNavigation.navButtonsKey[index],
-              icon: Padding(
-                padding: const EdgeInsets.only(bottom: KPadding.kPaddingSize8),
-                child: KIcon.icons[index],
-              ),
-              activeIcon: IconWidget(
-                icon: KIcon.icons[index],
-                background: AppColors.materialThemeKeyColorsPrimary,
-                padding: KPadding.kPaddingSize8,
-              ),
-              label: labels[index],
-            );
-          }),
-          backgroundColor: AppColors.materialThemeKeyColorsNeutral,
-          unselectedLabelStyle: AppTextStyle.materialThemeLabelSmall,
-          selectedLabelStyle: AppTextStyle.materialThemeLabelSmall,
-          currentIndex: index,
-          onTap: (i) => context.goNamed(KAppText.routes[i]),
+      child: ClipRRect(
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(KSize.kPixel32),
+          topRight: Radius.circular(KSize.kPixel32),
+        ),
+        clipBehavior: Clip.hardEdge,
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(minHeight: KSize.kPixel80),
+          child: BottomNavigationBar(
+            key: KWidgetkeys.widget.mobNavigation.widget,
+            items: List.generate(KIcon.icons.length, (index) {
+              return BottomNavigationBarItem(
+                key: KWidgetkeys.widget.mobNavigation.navButtonsKey[index],
+                icon: Padding(
+                  padding:
+                      const EdgeInsets.only(bottom: KPadding.kPaddingSize8),
+                  child: KIcon.icons[index],
+                ),
+                activeIcon: IconWidget(
+                  icon: KIcon.icons[index],
+                  background: AppColors.materialThemeKeyColorsPrimary,
+                  padding: KPadding.kPaddingSize8,
+                ),
+                label: labels[index],
+              );
+            }),
+            backgroundColor: AppColors.materialThemeKeyColorsNeutral,
+            selectedLabelStyle: AppTextStyle.materialThemeLabelSmall,
+            unselectedLabelStyle: AppTextStyle.materialThemeLabelSmall,
+            currentIndex: index,
+            onTap: (i) => context.goNamed(KAppText.routes[i]),
+          ),
         ),
       ),
     );

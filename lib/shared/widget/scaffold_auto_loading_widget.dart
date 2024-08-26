@@ -145,6 +145,7 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
           final scaffold = FocusTraversalGroup(
             child: Semantics(
               child: Scaffold(
+                resizeToAvoidBottomInset: !KTest.testIsWeb,
                 bottomNavigationBar: KTest.testIsWeb
                     ? null
                     : MobNavigationWidget(

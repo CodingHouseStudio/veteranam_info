@@ -70,6 +70,7 @@ class ScaffoldWidget extends StatelessWidget {
             // policy: WidgetOrderTraversalPolicy(),
             child: Semantics(
               child: Scaffold(
+                resizeToAvoidBottomInset: !KTest.testIsWeb,
                 bottomNavigationBar:
                     KTest.testIsWeb || !(showMobBottomNavigation ?? true)
                         ? null
