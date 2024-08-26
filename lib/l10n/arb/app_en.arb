@@ -1073,12 +1073,8 @@
   "@aboutNewDiscounts": {
     "examples": "Text for a discount subscription"
   },
-  "aboutNewDiscountsSubtitle": "Write us your email. We promise not to send spam!)",
+  "aboutNewDiscountsSubtitle": "Write us your email. We promise not to send spam!",
   "@aboutNewDiscountsSubtitle": {
-    "examples": "Text for a discount subscription"
-  },
-  "aboutNewDiscountsSubtitleWithSmile": "Write us your email. We promise not to send spam! 😀",
-  "@aboutNewDiscountsSubtitleWithSmile": {
     "examples": "Text for a discount subscription"
   }
 }

@@ -85,7 +85,9 @@ class UserEmailDialog extends StatelessWidget {
                           Text(
                             key: KWidgetkeys
                                 .widget.userEmailDialog.emailDialogSubtitle,
-                            context.l10n.aboutNewDiscountsSubtitle,
+                            KTest.testIsWeb
+                                ? '${context.l10n.aboutNewDiscountsSubtitle})'
+                                : '${context.l10n.aboutNewDiscountsSubtitle} 😀',
                             style: isDesk
                                 ? AppTextStyle.materialThemeBodyLarge
                                 : AppTextStyle.materialThemeBodyMedium,
@@ -98,7 +100,9 @@ class UserEmailDialog extends StatelessWidget {
               if (!isDesk)
                 Text(
                   key: KWidgetkeys.widget.userEmailDialog.emailDialogSubtitle,
-                  context.l10n.aboutNewDiscountsSubtitleWithSmile,
+                  KTest.testIsWeb
+                      ? '${context.l10n.aboutNewDiscountsSubtitle})'
+                      : '${context.l10n.aboutNewDiscountsSubtitle} 😀',
                   style: isDesk
                       ? AppTextStyle.materialThemeBodyLarge
                       : AppTextStyle.materialThemeBodyMedium,
