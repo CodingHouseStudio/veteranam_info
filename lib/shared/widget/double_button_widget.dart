@@ -97,6 +97,7 @@ class _DoubleButtonWidgetDeskState extends State<_DoubleButtonWidgetDesk> {
       style: KButtonStyles.withoutStyle,
       onHover: (value) => setState(() => isHovering = value),
       child: Stack(
+        key: KWidgetkeys.widget.doubleButton.desk,
         alignment: Alignment.centerRight,
         children: [
           AnimatedPadding(
@@ -116,6 +117,7 @@ class _DoubleButtonWidgetDeskState extends State<_DoubleButtonWidgetDesk> {
               ),
               child: Text(
                 widget.text,
+                key: KWidgetkeys.widget.doubleButton.text,
                 style: AppTextStyle.materialThemeTitleMedium.copyWith(
                   color: widget.textColor ??
                       AppColors.materialThemeKeyColorsSecondary,
@@ -138,6 +140,9 @@ class _DoubleButtonWidgetDeskState extends State<_DoubleButtonWidgetDesk> {
               );
             },
             child: IconWidget(
+              key: isHovering
+                  ? KWidgetkeys.widget.doubleButton.rotateIcon
+                  : KWidgetkeys.widget.doubleButton.icon,
               icon: KIcon.arrowUpRight.copyWith(
                 color: widget.textColor ??
                     AppColors.materialThemeKeyColorsSecondary,
@@ -180,6 +185,7 @@ class _DoubleButtonWidgetMob extends StatelessWidget {
       onPressed: onPressed,
       style: KButtonStyles.withoutStyle,
       child: Stack(
+        key: KWidgetkeys.widget.doubleButton.mob,
         alignment: Alignment.centerRight,
         children: [
           Container(
@@ -196,6 +202,7 @@ class _DoubleButtonWidgetMob extends StatelessWidget {
             ),
             child: Text(
               text,
+              key: KWidgetkeys.widget.doubleButton.text,
               style: AppTextStyle.materialThemeTitleMedium.copyWith(
                 color: textColor ?? AppColors.materialThemeKeyColorsSecondary,
               ),
@@ -203,6 +210,7 @@ class _DoubleButtonWidgetMob extends StatelessWidget {
             ),
           ),
           IconWidget(
+            key: KWidgetkeys.widget.doubleButton.icon,
             icon: KIcon.arrowUpRight.copyWith(
               color: textColor ?? AppColors.materialThemeKeyColorsSecondary,
             ),

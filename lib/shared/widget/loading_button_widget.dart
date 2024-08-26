@@ -3,8 +3,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:veteranam/shared/shared.dart';
 
-class LoadingButton extends StatelessWidget {
-  const LoadingButton({
+class LoadingButtonWidget extends StatelessWidget {
+  const LoadingButtonWidget({
     required this.isDesk,
     required this.onPressed,
     required this.text,
@@ -89,6 +89,7 @@ class _LoadingButtonWidgetDeskState extends State<_LoadingButtonWidgetDesk>
       style: KButtonStyles.withoutStyle,
       onHover: _handleHover,
       child: Stack(
+        key: KWidgetkeys.widget.loadingButton.desk,
         alignment: Alignment.centerRight,
         children: [
           AnimatedPadding(
@@ -107,6 +108,7 @@ class _LoadingButtonWidgetDeskState extends State<_LoadingButtonWidgetDesk>
               ),
               child: Text(
                 widget.text,
+                key: KWidgetkeys.widget.loadingButton.text,
                 style: AppTextStyle.materialThemeTitleMedium.copyWith(
                   color: AppColors.materialThemeWhite,
                 ),
@@ -124,6 +126,9 @@ class _LoadingButtonWidgetDeskState extends State<_LoadingButtonWidgetDesk>
               );
             },
             child: IconWidget(
+              key: isHovering
+                  ? KWidgetkeys.widget.loadingButton.loadingIcon
+                  : KWidgetkeys.widget.loadingButton.icon,
               icon: KIcon.refresh.copyWith(
                 color: AppColors.materialThemeWhite,
               ),
@@ -160,6 +165,7 @@ class _LoadingButtonWidgetMob extends StatelessWidget {
       onPressed: onPressed,
       style: KButtonStyles.withoutStyle,
       child: Stack(
+        key: KWidgetkeys.widget.loadingButton.mob,
         alignment: Alignment.centerRight,
         children: [
           Container(
@@ -171,12 +177,14 @@ class _LoadingButtonWidgetMob extends StatelessWidget {
             ),
             child: Text(
               text,
+              key: KWidgetkeys.widget.loadingButton.text,
               style: AppTextStyle.materialThemeTitleMedium.copyWith(
                 color: AppColors.materialThemeWhite,
               ),
             ),
           ),
           IconWidget(
+            key: KWidgetkeys.widget.loadingButton.icon,
             icon: KIcon.refresh.copyWith(
               color: AppColors.materialThemeWhite,
             ),

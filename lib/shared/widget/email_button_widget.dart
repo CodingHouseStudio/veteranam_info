@@ -16,7 +16,10 @@ class EmailButtonWidget extends StatelessWidget {
     return TextButton.icon(
       key: KWidgetkeys.widget.emailButton.widget,
       style: KButtonStyles.withoutStyle,
-      onPressed: () => context.read<UrlCubit>().copy(KAppText.email),
+      onPressed: () => context
+        ..read<UrlCubit>().copy(
+          KAppText.email,
+        ),
       label: Text(
         key: KWidgetkeys.widget.emailButton.text,
         KAppText.email,

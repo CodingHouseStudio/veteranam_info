@@ -91,7 +91,7 @@ Future<void> advancedFilterHelper(
     findsWidgets,
   );
 
-  await chekPointHelper(hasAmount: true, tester: tester, twiceTap: true);
+  await chekPointHelper(hasAmount: true, tester: tester);
 
   await chekPointSignleTapHelper(tester: tester, hasAmount: true);
 
@@ -128,15 +128,32 @@ Future<void> advancedFilterHelper(
     hasAmount: true,
   );
 
+  await chekPointSignleTapHelper(
+    tester: tester,
+    index: 1,
+    hasAmount: true,
+  );
+
   await tester.tap(
     find.byKey(KWidgetkeys.screen.discounts.appliedFilterItems).first,
     warnIfMissed: false,
   );
 
+  await tester.pumpAndSettle();
+
+  await tester.tap(
+    find.byKey(KWidgetkeys.screen.discounts.appliedFilterItems).first,
+    warnIfMissed: false,
+  );
+
+  await tester.pumpAndSettle();
+
   await tester.tap(
     find.byKey(KWidgetkeys.screen.discounts.appliedFilterItems).last,
     warnIfMissed: false,
   );
+
+  await tester.pumpAndSettle();
 
   await chekPointSignleTapHelper(
     tester: tester,
@@ -159,16 +176,6 @@ Future<void> advancedFilterHelper(
     findsOneWidget,
   );
 
-  await tester
-      .tap(find.byKey(KWidgetkeys.screen.discounts.advancedFilterResetButton));
-
-  await tester.pumpAndSettle();
-
-  expect(
-    find.byKey(KWidgetkeys.screen.discounts.appliedFilterItems),
-    findsNothing,
-  );
-
   if (isMobile) {
     // expect(
     //   find.byKey(KWidgetkeys.screen.discounts.cancelIcon),
@@ -185,6 +192,17 @@ Future<void> advancedFilterHelper(
       findsOneWidget,
     );
   } else {
+    await tester.tap(
+      find.byKey(KWidgetkeys.screen.discounts.advancedFilterResetButton),
+    );
+
+    await tester.pumpAndSettle();
+
+    expect(
+      find.byKey(KWidgetkeys.screen.discounts.appliedFilterItems),
+      findsNothing,
+    );
+
     // expect(
     //   find.byKey(KWidgetkeys.screen.discounts.advancedFilterButtonIcon),
     //   findsOneWidget,

@@ -21,7 +21,7 @@ class NetworkCubit extends Cubit<NetworkStatus> {
   @override
   Future<void> close() {
     networkStatusSubscription.cancel();
-    // _nerworkRepository.dispose();
+    _nerworkRepository.dispose();
     return super.close();
   }
 

@@ -1,8 +1,9 @@
 import 'dart:math';
 import 'dart:typed_data';
 import 'package:collection/collection.dart';
+import 'package:feedback/feedback.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/widgets.dart' show BuildContext, visibleForTesting;
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
@@ -19,10 +20,10 @@ extension ExtendedDateTime on DateTime {
       _id ?? DateTime.now().toLocal().microsecondsSinceEpoch.toString();
 
   @visibleForTesting
-  static set current(DateTime customTime) => _customTime = customTime;
+  static set current(DateTime? customTime) => _customTime = customTime;
 
   @visibleForTesting
-  static set id(String customId) => _id = customId;
+  static set id(String? customId) => _id = customId;
 
   String get localeTime => toLocal().toString().split(' ')[0];
 }
@@ -54,10 +55,10 @@ extension LocalizedDateTime on DateTime {
 }
 
 extension DiscountModelLocation on DiscountModel {
-  List<String> fullLocationList(BuildContext context) => [
-        if (location != null) ...location!,
-        if (subLocation != null) ...subLocation!.getList(context),
-      ];
+  // List<String> fullLocationList(BuildContext context) => [
+  //       if (location != null) ...location!,
+  //       if (subLocation != null) ...subLocation!.getList(context),
+  //     ];
   String getDescription(BuildContext context) =>
       '${context.isEnglish ? descriptionEN : description}\n'
       '\n***${context.l10n.toGetItYouNeed}***\n'
@@ -188,6 +189,18 @@ extension StringExtension on String {
   }
 
   int get _ukraineIndex => KAppText.ukrainianAlphabet.indexOf(this);
+
+  double getTextLength({
+    required double? width,
+    required TextStyle textStyle,
+    double? additional,
+  }) {
+    if (width != null) return width;
+    final textLength =
+        length * (textStyle.fontSize! + textStyle.letterSpacing!) +
+            (additional ?? 0);
+    return textLength / KSize.kPixel2;
+  }
 }
 
 extension InformationModelExtension on InformationModel {
@@ -213,6 +226,14 @@ extension GenericsExtensions<T> on T {
 extension ContextExtensions on BuildContext {
   bool get isEnglish =>
       read<AuthenticationBloc>().state.userSetting.locale.isEnglish;
+
+  Future<void> onMobFeedback(UserFeedback feedback) async =>
+      read<MobFeedbackBloc>().add(MobFeedbackEvent.send(feedback.screenshot));
+
+  // void copyText(String text, String? href, String? title) =>
+  //     read<UrlCubit>().copy(text);
+
+  // void launchUrl(String? url) => read<UrlCubit>().launchUrl(url: url);
 }
 
 extension DiscountEnumExtensions on DiscountEnum {
@@ -279,4 +300,65 @@ extension FilterItemExtension on FilterItem {
       return value.toString().compareUkrain(b.value.toString());
     }
   }
+}
+
+extension UserRoleExtensions on UserRole {
+  String value(BuildContext context) {
+    switch (this) {
+      case UserRole.businessmen:
+        return context.l10n.iAmBusinessOwnerRepresentative;
+      case UserRole.civilian:
+        return context.l10n.iAmCivilian;
+      case UserRole.relativeOfVeteran:
+        return context.l10n.iAmRelativeOfVeteran;
+      case UserRole.veteran:
+        return context.l10n.iAmVeteran;
+    }
+  }
+}
+
+extension ImageExtensions on ImageModel? {
+  Widget? getImage({
+    required Widget Function(Widget child) parent,
+    Key? key,
+    double? size,
+    BoxFit? fit,
+  }) {
+    if (this == null) return null;
+    return parent(
+      NetworkImageWidget(
+        key: key,
+        imageUrl: this!.downloadURL,
+        fit: fit,
+        size: size,
+      ),
+    );
+  }
+}
+
+extension FundExtensions on FundModel {
+  Widget get getImage {
+    return image.getImage(
+          parent: (child) => Expanded(child: child),
+          key: KWidgetkeys.widget.donateCard.image,
+        ) ??
+        const Spacer();
+  }
+}
+
+extension StoryExtensions on StoryModel {
+  Widget get getImage =>
+      userPhoto.getImage(
+        parent: (child) => ClipRRect(
+          borderRadius: BorderRadius.circular(KSize.kUserPhoto),
+          child: child,
+        ),
+        fit: BoxFit.contain,
+        size: KSize.kUserPhoto,
+      ) ??
+      IconWidget(
+        key: KWidgetkeys.widget.storyCard.userIcon,
+        icon: KIcon.person,
+        background: AppColors.materialThemeKeyColorsNeutralVariant,
+      );
 }

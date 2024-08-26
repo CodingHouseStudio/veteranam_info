@@ -18,5 +18,5 @@ Future<void> loadingFailureHelper({
     findsNothing,
   );
 
-  await dialogFailureGetHelper(tester: tester);
+  await dialogFailureGetTapHelper(tester: tester);
 }

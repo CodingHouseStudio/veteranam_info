@@ -8,15 +8,24 @@ Future<void> userEmailCloseHelper({
   required WidgetTester tester,
   required MockGoRouter mockGoRouter,
 }) async {
-  await userEmailHelper(tester);
+  await changeWindowSizeHelper(
+    tester: tester,
+    size: KTestConstants.windowMobileSize,
+    test: () async {
+      await userEmailHelper(tester: tester, hover: false);
 
-  expect(find.byKey(KWidgetkeys.widget.userEmailDialog.icon), findsOneWidget);
+      expect(
+        find.byKey(KWidgetkeys.widget.userEmailDialog.icon),
+        findsOneWidget,
+      );
 
-  await tester.tap(find.byKey(KWidgetkeys.widget.userEmailDialog.icon));
+      await tester.tap(find.byKey(KWidgetkeys.widget.userEmailDialog.icon));
 
-  await tester.pumpAndSettle();
+      await tester.pumpAndSettle();
 
-  verify(
-    () => mockGoRouter.pop(),
-  ).called(1);
+      verify(
+        () => mockGoRouter.pop(),
+      ).called(1);
+    },
+  );
 }

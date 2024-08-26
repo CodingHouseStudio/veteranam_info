@@ -184,7 +184,7 @@ class InformationWatcherBloc
         .loadingFilterAndStatus(
       filtersValue: filters,
       itemsLoaded: itemsLoaded,
-      getFilter: (InformationModel item) => item.category,
+      getFilter: (InformationModel item) => item.categoryUA,
       loadItems: loadItems,
     );
   }
@@ -279,6 +279,7 @@ class InformationWatcherBloc
       (l) => emit(
         state.copyWith(
           failure: InformationFailure.error,
+          loadingStatus: LoadingStatus.error,
         ),
       ),
       (r) => emit(

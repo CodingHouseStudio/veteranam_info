@@ -34,7 +34,7 @@ class TextFieldWidget extends StatefulWidget {
     this.labelText,
     this.minLines,
     this.hintStyle,
-    this.text,
+    // this.text,
     this.suffixIconPadding,
     this.inputFormatterList,
     this.showErrorText,
@@ -68,7 +68,7 @@ class TextFieldWidget extends StatefulWidget {
   final String? labelText;
   final TextStyle? hintStyle;
   final bool isDesk;
-  final String? text;
+  // final String? text;
   final double? suffixIconPadding;
   final List<TextInputFormatter>? inputFormatterList;
   final bool? showErrorText;
@@ -83,9 +83,9 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
 
   @override
   void initState() {
-    if (widget.text != null) {
-      controller = TextEditingController(text: widget.text);
-    }
+    // if (widget.text != null) {
+    //   controller = TextEditingController(text: widget.text);
+    // }
     isHovered = false;
     super.initState();
   }
@@ -163,9 +163,9 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
     if (widget.disposeFocusNode ?? false) {
       widget.focusNode?.dispose();
     }
-    if (widget.text != null) {
-      controller?.dispose();
-    }
+    // if (widget.text != null) {
+    //   controller?.dispose();
+    // }
     super.dispose();
   }
 }

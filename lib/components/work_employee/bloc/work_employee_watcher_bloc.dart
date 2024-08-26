@@ -221,16 +221,17 @@ class WorkEmployeeWatcherBloc
               : workModelItems.length,
         );
       }
-      for (var i = page * KDimensions.pageItems;
-          i > 0;
-          i -= KDimensions.pageItems) {
-        if (i <= workModelItems.length + KDimensions.pageItems) {
-          return workModelItems.sublist(
-            i - KDimensions.pageItems,
-            i <= workModelItems.length ? i : workModelItems.length,
-          );
-        }
+      // for (var i = page * KDimensions.pageItems;
+      //     i > 0;
+      //     i -= KDimensions.pageItems) {
+      final i = page * KDimensions.pageItems;
+      if (i <= workModelItems.length + KDimensions.pageItems) {
+        return workModelItems.sublist(
+          i - KDimensions.pageItems,
+          i <= workModelItems.length ? i : workModelItems.length,
+        );
       }
+      // }
     }
     return workModelItems;
   }

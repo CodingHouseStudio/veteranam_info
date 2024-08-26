@@ -83,15 +83,15 @@ jobs:
         run: flutter pub get
       - name: Flutter code generation # generate any missing code from source code
         run: flutter pub run build_runner build --delete-conflicting-outputs
-      - name: Flutter Pub Get # get flutter packages information
-        run: flutter pub get
+      # - name: Flutter Pub Get # get flutter packages information
+      #   run: flutter pub get
       - name: Build the Web static pages # generate deployment files
         run: |
           buildNumber=$(date +%s)
           flutter build web --release -t lib/main_development.dart --wasm --build-name=1.0.2 --build-number=$buildNumber --dart-define=FLAVOUR=development
           dt="$(date "+%s000")"
-          mv build/web/main.dart.js build/web/$dt.main.dart.js
-          sed "s/main.dart.js/$dt.main.dart.js/g" build/web/index.html >build/web/newindex.html
+          mv build/web/flutter_bootstrap.js build/web/$dt.flutter_bootstrap.js
+          sed "s/flutter_bootstrap.js/$dt.flutter_bootstrap.js/g" build/web/index.html >build/web/newindex.html
           mv build/web/newindex.html build/web/index.html
       - name: Configure AWS Credentials Action for GitHub Actions
         uses: aws-actions/configure-aws-credentials@v4.0.1

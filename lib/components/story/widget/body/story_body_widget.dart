@@ -14,18 +14,22 @@ class StoryBodyWidget extends StatelessWidget {
     return BlocConsumer<StoryWatcherBloc, StoryWatcherState>(
       listener: (context, state) => context.dialog.showGetErrorDialog(
         error: state.failure?.value(context),
-        onPressed: () => context
-            .read<StoryWatcherBloc>()
-            .add(const StoryWatcherEvent.started()),
+        onPressed: () {},
+        // I think this event is not necessary for Stream, but
+        // I think it's better to give
+        // the user imaginary control over it
+        // () => context
+        // .read<StoryWatcherBloc>()
+        // .add(const StoryWatcherEvent.started()),
       ),
       builder: (context, _) {
         return ScaffoldAutoLoadingWidget(
           loadingButtonText: context.l10n.moreStories,
           loadingStatus: _.loadingStatus,
           cardListIsEmpty: _.storyModelItems.isEmpty,
-          loadDataAgain: () => context
-              .read<StoryWatcherBloc>()
-              .add(const StoryWatcherEvent.started()),
+          // loadDataAgain: () => context
+          //     .read<StoryWatcherBloc>()
+          //     .add(const StoryWatcherEvent.started()),
           titleChildWidgetsFunction: ({required isDesk}) => [
             if (isDesk)
               KSizedBox.kHeightSizedBox40

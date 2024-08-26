@@ -129,7 +129,8 @@ abstract class KMockText {
     subcategoryEN: ['Analyses'],
     subcategory: ['Аналізи'],
     // eligibility: 'Військовослужбовці та ВПО',
-    description: 'Пропозиція діє у всіх відділеннях лабораторії.',
+    description:
+        'Пропозиція діє у всіх відділеннях[${KAppText.email}}(test) лабораторії.',
     requirements:
         'Військовим - наявність документу, що підтверджує  професійну',
     territory: 'Всі відділення лабораторії.',

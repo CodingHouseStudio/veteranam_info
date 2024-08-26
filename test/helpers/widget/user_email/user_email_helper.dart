@@ -1,9 +1,15 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:veteranam/shared/shared.dart';
 
-Future<void> userEmailHelper(
-  WidgetTester tester,
-) async {
+import '../../../test_dependency.dart';
+
+Future<void> userEmailHelper({
+  required WidgetTester tester,
+  bool hover = true,
+}) async {
+  // await changeWindowSizeHelper(
+  //   tester: tester,
+  //   test: () async {
   expect(
     find.byKey(KWidgetkeys.widget.userEmailDialog.icon),
     findsOneWidget,
@@ -23,8 +29,17 @@ Future<void> userEmailHelper(
     findsOneWidget,
   );
 
+  if (hover) {
+    await hoverHelper(
+      tester: tester,
+      key: KWidgetkeys.widget.userEmailDialog.field,
+    );
+  }
+
   expect(
     find.byKey(KWidgetkeys.widget.userEmailDialog.button),
     findsOneWidget,
   );
+  //   },
+  // );
 }

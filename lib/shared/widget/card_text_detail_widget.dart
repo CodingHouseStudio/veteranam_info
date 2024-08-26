@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
@@ -43,6 +45,7 @@ class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
       children: [
         if (widget.hasMarkdown)
           MarkdownBody(
+            key: KWidgetkeys.widget.cardTextDetail.text,
             data: widget.text
                 .markdownCard(isDesk: widget.isDesk, fullText: fullText),
 

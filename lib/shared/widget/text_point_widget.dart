@@ -6,11 +6,11 @@ class TextPointWidget extends StatelessWidget {
     this.text, {
     super.key,
     this.textAlign,
-    this.hasExpanded = true,
+    // this.hasExpanded = true,
   });
   final String text;
   final TextAlign? textAlign;
-  final bool hasExpanded;
+  // final bool hasExpanded;
 
   @override
   Widget build(BuildContext context) {
@@ -21,20 +21,20 @@ class TextPointWidget extends StatelessWidget {
           radius: KPadding.kPaddingSize4,
         ),
         KSizedBox.kWidthSizedBox8,
-        if (hasExpanded)
-          Expanded(
-            child: Text(
-              text,
-              style: AppTextStyle.materialThemeTitleSmall,
-              textAlign: textAlign,
-            ),
-          )
-        else
-          Text(
-            text,
-            style: AppTextStyle.materialThemeTitleSmall,
-            textAlign: textAlign,
-          ),
+        // if (hasExpanded)
+        //   Expanded(
+        //     child: Text(
+        //       text,
+        //       style: AppTextStyle.materialThemeTitleSmall,
+        //       textAlign: textAlign,
+        //     ),
+        //   )
+        // else
+        Text(
+          text,
+          style: AppTextStyle.materialThemeTitleSmall,
+          textAlign: textAlign,
+        ),
       ],
     );
   }

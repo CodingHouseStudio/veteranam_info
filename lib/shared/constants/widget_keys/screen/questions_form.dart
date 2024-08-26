@@ -19,4 +19,11 @@ class _QuestionsFormKeys {
   // final roleBusinessmenText =
   //     const Key('questions_form_screen_role_businessman_text');
   final button = const Key('questions_form_screen_button');
+
+  List<Key> get roleKeyes => [
+        roleVeteran,
+        roleRelativeOfVeteran,
+        roleCivilian,
+        roleBusinessmen,
+      ];
 }

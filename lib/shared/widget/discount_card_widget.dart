@@ -122,7 +122,7 @@ class DiscountCardWidget extends StatelessWidget {
                       child: TextPointWidget(
                         discountItem.discount.getDiscountString(context),
                         key: KWidgetkeys.widget.discountCard.discount,
-                        hasExpanded: false,
+                        // hasExpanded: false,
                       ),
                     ),
                   ],
@@ -148,6 +148,7 @@ class DiscountCardWidget extends StatelessWidget {
                       KSizedBox.kWidthSizedBox16,
                       Expanded(
                         child: CityListWidget(
+                          key: KWidgetkeys.widget.discountCard.city,
                           discountModel: discountItem,
                           isDesk: true,
                         ),
@@ -161,12 +162,14 @@ class DiscountCardWidget extends StatelessWidget {
                   ),
                   KSizedBox.kHeightSizedBox8,
                   CityListWidget(
+                    key: KWidgetkeys.widget.discountCard.city,
                     discountModel: discountItem,
                     isDesk: false,
                   ),
                 ],
                 KSizedBox.kHeightSizedBox16,
                 CardTextDetailWidget(
+                  key: KWidgetkeys.widget.discountCard.description,
                   text: descriptionMethod == null
                       ? discountItem.getDescription(context)
                       : descriptionMethod!(
@@ -221,9 +224,12 @@ class DiscountCardWidget extends StatelessWidget {
               KSizedBox.kWidthSizedBox8,
               Text(
                 key: KWidgetkeys.widget.discountCard.category,
-                context.isEnglish
-                    ? discountItem.categoryEN.elementAt(index)
-                    : discountItem.category.elementAt(index),
+                discountItem.category
+                    .getTrnslation(
+                      en: discountItem.categoryEN,
+                      context: context,
+                    )
+                    .elementAt(index),
                 style: AppTextStyle.materialThemeLabelLarge,
               ),
             ],

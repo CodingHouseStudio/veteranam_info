@@ -29,7 +29,9 @@ class CityListWidget extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                KIcon.distance,
+                KIcon.distance.copyWith(
+                  key: KWidgetkeys.widget.cityList.icon,
+                ),
                 KSizedBox.kWidthSizedBox8,
                 if (cityList.isNotEmpty)
                   Expanded(
@@ -40,7 +42,6 @@ class CityListWidget extends StatelessWidget {
                             style: AppTextStyle.materialThemeLabelLarge,
                           )
                         : CityWidgetListExpanded(
-                            key: KWidgetkeys.widget.cityList.markdown,
                             cityList: cityList,
                             isDesk: isDesk,
                           ),
@@ -79,6 +80,9 @@ class _CityWidgetListExpandedState extends State<CityWidgetListExpanded> {
   @override
   Widget build(BuildContext context) {
     return MarkdownBody(
+      key: isExpanded
+          ? KWidgetkeys.widget.cityList.markdownFulllList
+          : KWidgetkeys.widget.cityList.markdown,
       data: widget.cityList
           .getCityList(showFullText: !isExpanded, context: context),
       onTapLink: (text, href, title) => setState(() {

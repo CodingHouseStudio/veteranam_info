@@ -99,14 +99,19 @@ void _registerDiscountLinkFormBloc({
   required IDiscountRepository mockDiscountRepository,
   required IAppAuthenticationRepository mockAppAuthenticationRepository,
 }) {
-  final authenticationBloc = DiscountLinkFormBloc(
-    discountRepository: mockDiscountRepository,
-    appAuthenticationRepository: mockAppAuthenticationRepository,
-  );
+  // final authenticationBloc = DiscountLinkFormBloc(
+  //   discountRepository: mockDiscountRepository,
+  //   appAuthenticationRepository: mockAppAuthenticationRepository,
+  // );
   if (GetIt.I.isRegistered<DiscountLinkFormBloc>()) {
     GetIt.I.unregister<DiscountLinkFormBloc>();
   }
-  GetIt.I.registerSingleton<DiscountLinkFormBloc>(authenticationBloc);
+  GetIt.I.registerFactory<DiscountLinkFormBloc>(
+    () => DiscountLinkFormBloc(
+      discountRepository: mockDiscountRepository,
+      appAuthenticationRepository: mockAppAuthenticationRepository,
+    ),
+  );
 }
 
 void _registerDiscountLinkCubit({

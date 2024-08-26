@@ -20,14 +20,17 @@ void main() {
     late IReportRepository mockReportRepository;
     late AuthenticationRepository mockAuthenticationRepository;
     late IAppAuthenticationRepository mockAppAuthenticationRepository;
+    late IUrlRepository mockUrlRepository;
     setUp(() {
       ExtendedDateTime.current = KTestText.dateTime;
       ExtendedDateTime.id = '';
+      KTest.testIsWeb = true;
 
       mockInvestorsRepository = MockIInvestorsRepository();
       mockReportRepository = MockIReportRepository();
       mockAuthenticationRepository = MockAuthenticationRepository();
       mockAppAuthenticationRepository = MockAppAuthenticationRepository();
+      mockUrlRepository = MockIUrlRepository();
 
       when(mockAuthenticationRepository.currentUser).thenAnswer(
         (realInvocation) => User.empty,
@@ -63,6 +66,13 @@ void main() {
       ).thenAnswer(
         (invocation) async => Right(KTestText.reportItems),
       );
+      when(
+        mockUrlRepository.launchUrl(
+          url: KTestText.fundItems.first.projectsLink!,
+        ),
+      ).thenAnswer(
+        (invocation) async => const Right(true),
+      );
     });
     group('${KGroupText.failure} ', () {
       testWidgets('${KGroupText.error} ', (tester) async {
@@ -78,6 +88,7 @@ void main() {
           mockInvestorsRepository: mockInvestorsRepository,
           mockReportRepository: mockReportRepository,
           mockAuthenticationRepository: mockAuthenticationRepository,
+          mockUrlRepository: mockUrlRepository,
           tester: tester,
         );
 
@@ -96,6 +107,7 @@ void main() {
           mockInvestorsRepository: mockInvestorsRepository,
           mockReportRepository: mockReportRepository,
           mockAuthenticationRepository: mockAuthenticationRepository,
+          mockUrlRepository: mockUrlRepository,
           tester: tester,
         );
 
@@ -114,6 +126,7 @@ void main() {
           mockInvestorsRepository: mockInvestorsRepository,
           mockReportRepository: mockReportRepository,
           mockAuthenticationRepository: mockAuthenticationRepository,
+          mockUrlRepository: mockUrlRepository,
           tester: tester,
         );
 
@@ -146,6 +159,7 @@ void main() {
           mockInvestorsRepository: mockInvestorsRepository,
           mockReportRepository: mockReportRepository,
           mockAuthenticationRepository: mockAuthenticationRepository,
+          mockUrlRepository: mockUrlRepository,
           tester: tester,
         );
 
@@ -169,10 +183,31 @@ void main() {
           mockInvestorsRepository: mockInvestorsRepository,
           mockReportRepository: mockReportRepository,
           mockAuthenticationRepository: mockAuthenticationRepository,
+          mockUrlRepository: mockUrlRepository,
           tester: tester,
         );
 
         await investorsInitialHelper(tester);
+      });
+
+      testWidgets('${KGroupText.network} ', (tester) async {
+        await networkHelper(
+          tester: tester,
+          pumpApp: () async => investorsPumpAppHelper(
+            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+            mockInvestorsRepository: mockInvestorsRepository,
+            mockReportRepository: mockReportRepository,
+            mockAuthenticationRepository: mockAuthenticationRepository,
+            mockUrlRepository: mockUrlRepository,
+            tester: tester,
+          ),
+        );
+
+        verify(
+          mockInvestorsRepository.getFunds(
+            reportIdItems: KTestText.reportItems.getIdCard,
+          ),
+        ).called(2);
       });
 
       loadingList(
@@ -181,6 +216,7 @@ void main() {
           mockInvestorsRepository: mockInvestorsRepository,
           mockReportRepository: mockReportRepository,
           mockAuthenticationRepository: mockAuthenticationRepository,
+          mockUrlRepository: mockUrlRepository,
           tester: tester,
         ),
         // lastCard: KWidgetkeys.screen.investors.cardLast,
@@ -191,6 +227,7 @@ void main() {
           mockInvestorsRepository: mockInvestorsRepository,
           mockReportRepository: mockReportRepository,
           mockAuthenticationRepository: mockAuthenticationRepository,
+          mockUrlRepository: mockUrlRepository,
           tester: tester,
         );
 
@@ -202,11 +239,11 @@ void main() {
       //     mockInvestorsRepository: mockInvestorsRepository,
       //     mockReportRepository: mockReportRepository,
       //     mockAuthenticationRepository: mockAuthenticationRepository,
-      //     tester: tester,
+      //    mockUrlRepository: mockUrlRepository, tester: tester,
       //   );
 
       //   await reportDialogIncorrectSendHelper(
-      //     tester: tester,
+      //    mockUrlRepository: mockUrlRepository, tester: tester,
       //   );
       // });
       // testWidgets('Report Dialog Incorect Send(field null and user)',
@@ -220,11 +257,11 @@ void main() {
       //     mockInvestorsRepository: mockInvestorsRepository,
       //     mockReportRepository: mockReportRepository,
       //     mockAuthenticationRepository: mockAuthenticationRepository,
-      //     tester: tester,
+      //    mockUrlRepository: mockUrlRepository, tester: tester,
       //   );
 
       //   await reportDialogIncorrectSendHelper(
-      //     tester: tester,
+      //    mockUrlRepository: mockUrlRepository, tester: tester,
       //     fieldNull: true,
       //   );
       // });
@@ -234,14 +271,32 @@ void main() {
       //     mockInvestorsRepository: mockInvestorsRepository,
       //     mockReportRepository: mockReportRepository,
       //     mockAuthenticationRepository: mockAuthenticationRepository,
-      //     tester: tester,
+      //    mockUrlRepository: mockUrlRepository, tester: tester,
       //   );
 
       //   await reportDialogIncorrectSendHelper(
-      //     tester: tester,
+      //    mockUrlRepository: mockUrlRepository, tester: tester,
       //     fieldNull: true,
       //   );
       // });
+
+      testWidgets('Donate button', (tester) async {
+        await investorsPumpAppHelper(
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          mockInvestorsRepository: mockInvestorsRepository,
+          mockReportRepository: mockReportRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
+          mockUrlRepository: mockUrlRepository,
+          tester: tester,
+        );
+
+        await donateButtonHelper(
+          tester: tester,
+          tap: true,
+          scrollDown: true,
+          isDesk: false,
+        );
+      });
 
       group('${KGroupText.goRouter} ', () {
         late MockGoRouter mockGoRouter;
@@ -252,6 +307,7 @@ void main() {
             mockInvestorsRepository: mockInvestorsRepository,
             mockReportRepository: mockReportRepository,
             mockAuthenticationRepository: mockAuthenticationRepository,
+            mockUrlRepository: mockUrlRepository,
             tester: tester,
             mockGoRouter: mockGoRouter,
           );
@@ -264,11 +320,12 @@ void main() {
             mockInvestorsRepository: mockInvestorsRepository,
             mockReportRepository: mockReportRepository,
             mockAuthenticationRepository: mockAuthenticationRepository,
+            mockUrlRepository: mockUrlRepository,
             tester: tester,
             mockGoRouter: mockGoRouter,
           );
 
-          await reportDialogcorrectSaveHelper(
+          await reportDialogCorrectSaveHelper(
             tester,
           );
         });
@@ -279,6 +336,7 @@ void main() {
               mockInvestorsRepository: mockInvestorsRepository,
               mockReportRepository: mockReportRepository,
               mockAuthenticationRepository: mockAuthenticationRepository,
+              mockUrlRepository: mockUrlRepository,
               tester: tester,
               mockGoRouter: mockGoRouter,
             );
@@ -288,6 +346,29 @@ void main() {
               mockGoRouter: mockGoRouter,
             );
           });
+        });
+      });
+      group('${KGroupText.smallList} ', () {
+        setUp(() {
+          when(
+            mockInvestorsRepository.getFunds(
+              reportIdItems: KTestText.reportItems.getIdCard,
+            ),
+          ).thenAnswer(
+            (invocation) async => Right(KTestText.fundItems.sublist(0, 2)),
+          );
+        });
+        testWidgets('Tap on scroll button', (tester) async {
+          await investorsPumpAppHelper(
+            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+            mockInvestorsRepository: mockInvestorsRepository,
+            mockReportRepository: mockReportRepository,
+            mockAuthenticationRepository: mockAuthenticationRepository,
+            mockUrlRepository: mockUrlRepository,
+            tester: tester,
+          );
+
+          await scaffoldEmptyScrollHelper(tester);
         });
       });
     });

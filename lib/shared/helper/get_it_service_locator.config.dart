@@ -224,11 +224,9 @@ extension GetItInjectableX on _i174.GetIt {
           storyRepository: gh<_i1001.IStoryRepository>()),
       registerFor: {_development},
     );
-    gh.singleton<_i208.AuthenticationRepository>(
-      () => _i208.AuthenticationRepository(
-          gh<_i1001.IAppAuthenticationRepository>()),
-      dispose: (i) => i.dispose(),
-    );
+    gh.singleton<_i208.AuthenticationRepository>(() =>
+        _i208.AuthenticationRepository(
+            gh<_i1001.IAppAuthenticationRepository>()));
     gh.factory<_i785.SignUpBloc>(
       () => _i785.SignUpBloc(
           iAppAuthenticationRepository:
@@ -239,8 +237,19 @@ extension GetItInjectableX on _i174.GetIt {
         _i686.PrivacyPolicyMarkdownCubit(
             appAuthenticationRepository:
                 gh<_i1001.IAppAuthenticationRepository>()));
+    gh.factory<_i209.AuthenticationServicesCubit>(() =>
+        _i209.AuthenticationServicesCubit(
+            appAuthenticationRepository:
+                gh<_i1001.IAppAuthenticationRepository>()));
     gh.singleton<_i1001.IWorkRepository>(
       () => _i76.WorkRepository(),
+      registerFor: {_development},
+    );
+    gh.factory<_i922.MyStoryWatcherBloc>(
+      () => _i922.MyStoryWatcherBloc(
+        storyRepository: gh<_i1001.IStoryRepository>(),
+        appAuthenticationRepository: gh<_i1001.IAppAuthenticationRepository>(),
+      ),
       registerFor: {_development},
     );
     gh.factory<_i688.NewsCardWatcherBloc>(
@@ -250,9 +259,6 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i43.MobOfflineModeCubit>(() => _i43.MobOfflineModeCubit(
         firestoreService: gh<_i1001.FirestoreService>()));
-    gh.factory<_i209.AuthenticationServicesCubit>(() =>
-        _i209.AuthenticationServicesCubit(
-            authenticationRepository: gh<_i1001.AuthenticationRepository>()));
     gh.singleton<_i570.AuthenticationBloc>(() => _i570.AuthenticationBloc(
         authenticationRepository: gh<_i1001.AuthenticationRepository>()));
     gh.factory<_i765.ReportBloc>(() => _i765.ReportBloc(
@@ -261,16 +267,7 @@ extension GetItInjectableX on _i174.GetIt {
               gh<_i1001.IAppAuthenticationRepository>(),
         ));
     gh.singleton<_i997.NetworkRepository>(
-      () => _i997.NetworkRepository(gh<_i1001.IAppNetworkRepository>()),
-      dispose: (i) => i.dispose(),
-    );
-    gh.factory<_i922.MyStoryWatcherBloc>(
-      () => _i922.MyStoryWatcherBloc(
-        storyRepository: gh<_i1001.IStoryRepository>(),
-        iAppAuthenticationRepository: gh<_i1001.IAppAuthenticationRepository>(),
-      ),
-      registerFor: {_development},
-    );
+        () => _i997.NetworkRepository(gh<_i1001.IAppNetworkRepository>()));
     gh.factory<_i716.StoryAddBloc>(
       () => _i716.StoryAddBloc(
         storyRepository: gh<_i1001.IStoryRepository>(),

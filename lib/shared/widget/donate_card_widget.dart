@@ -43,16 +43,7 @@ class DonateCardWidget extends StatelessWidget {
                 cardId: fundModel.id,
               ),
             ),
-            if (fundModel.image != null)
-              Expanded(
-                child: NetworkImageWidget(
-                  key: KWidgetkeys.widget.donateCard.image,
-                  imageUrl: fundModel.image!.downloadURL,
-                  // useCloudflare: true,
-                ),
-              )
-            else
-              const Spacer(),
+            fundModel.getImage,
             Padding(
               padding: isDesk
                   ? const EdgeInsets.symmetric(
@@ -72,9 +63,10 @@ class DonateCardWidget extends StatelessWidget {
                   vertical: KPadding.kPaddingSize16,
                 ),
                 child: Text(
-                  context.isEnglish
-                      ? fundModel.descriptionEN
-                      : fundModel.description,
+                  fundModel.description.getTrnslation(
+                    en: fundModel.descriptionEN,
+                    context: context,
+                  ),
                   key: KWidgetkeys.widget.donateCard.subtitle,
                   style: isDesk
                       ? AppTextStyle.materialThemeBodyLarge

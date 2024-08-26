@@ -28,10 +28,7 @@ class _DonatesCardsWidgetState extends State<DonatesCardsWidget> {
       children: List.generate(
         KDimensions.donateCardsLine,
         (index) {
-          final changeSize =
-              hasSubtitles.indexOf(true) < hasSubtitles.length - 1
-                  ? hasSubtitles.indexOf(true) + 1 == index
-                  : hasSubtitles.indexOf(true) - 1 == index;
+          final changeSize = hasSubtitles.fundsCardChangeSize(index);
           return Expanded(
             flex: hasSubtitles.elementAt(index)
                 ? KDimensions.donateCardBigExpanded

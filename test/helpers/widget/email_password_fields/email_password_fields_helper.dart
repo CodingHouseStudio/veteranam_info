@@ -18,32 +18,72 @@ Future<void> emailPasswordFieldsHelper({
 
     expect(
       find.byKey(KWidgetkeys.widget.emailPasswordFields.fieldPassword),
-      findsWidgets,
+      findsOneWidget,
     );
 
     expect(
       find.byKey(KWidgetkeys.widget.emailPasswordFields.textPassword),
-      findsWidgets,
+      findsOneWidget,
     );
 
     expect(
       find.byKey(KWidgetkeys.widget.emailPasswordFields.buttonHidePassword),
-      findsWidgets,
+      findsOneWidget,
+    );
+
+    expect(
+      find.byKey(KWidgetkeys.widget.emailPasswordFields.iconHidePassword),
+      findsOneWidget,
     );
 
     expect(
       find.byKey(KWidgetkeys.widget.emailPasswordFields.iconEyeOff),
-      findsWidgets,
+      findsOneWidget,
+    );
+
+    expect(
+      find.byKey(KWidgetkeys.widget.emailPasswordFields.iconEye),
+      findsNothing,
+    );
+
+    await tester
+        .tap(find.byKey(KWidgetkeys.widget.emailPasswordFields.iconEyeOff));
+
+    await tester.pumpAndSettle();
+
+    expect(
+      find.byKey(KWidgetkeys.widget.emailPasswordFields.iconEye),
+      findsOneWidget,
+    );
+
+    expect(
+      find.byKey(KWidgetkeys.widget.emailPasswordFields.iconEyeOff),
+      findsNothing,
+    );
+
+    await tester
+        .tap(find.byKey(KWidgetkeys.widget.emailPasswordFields.iconEye));
+
+    await tester.pumpAndSettle();
+
+    expect(
+      find.byKey(KWidgetkeys.widget.emailPasswordFields.iconEyeOff),
+      findsOneWidget,
+    );
+
+    expect(
+      find.byKey(KWidgetkeys.widget.emailPasswordFields.iconEye),
+      findsNothing,
     );
   } else {
     expect(
       find.byKey(KWidgetkeys.widget.emailPasswordFields.fieldEmail),
-      findsWidgets,
+      findsOneWidget,
     );
 
     expect(
       find.byKey(KWidgetkeys.widget.emailPasswordFields.textEmail),
-      findsWidgets,
+      findsOneWidget,
     );
 
     expect(
@@ -63,6 +103,16 @@ Future<void> emailPasswordFieldsHelper({
 
     expect(
       find.byKey(KWidgetkeys.widget.emailPasswordFields.iconEyeOff),
+      findsNothing,
+    );
+
+    expect(
+      find.byKey(KWidgetkeys.widget.emailPasswordFields.iconEye),
+      findsNothing,
+    );
+
+    expect(
+      find.byKey(KWidgetkeys.widget.emailPasswordFields.iconHidePassword),
       findsNothing,
     );
   }

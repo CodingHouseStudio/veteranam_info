@@ -6,7 +6,7 @@ import '../../../test_dependency.dart';
 Future<void> chekPointHelper({
   required WidgetTester tester,
   bool hasAmount = false,
-  bool twiceTap = false,
+  bool twiceTap = true,
 }) async {
   await scrollingHelper(
     tester: tester,

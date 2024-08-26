@@ -34,6 +34,8 @@ Future<void> homeInitialHelper(
         findsOneWidget,
       );
 
+      await doubleButtonHelper(tester);
+
       await boxHelper(tester);
 
       await scrollingHelper(

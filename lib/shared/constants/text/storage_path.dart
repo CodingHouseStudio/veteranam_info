@@ -12,10 +12,10 @@ abstract class StoragePath {
       '$collection/$modelId/$_image/${imageName ?? '${ExtendedDateTime.id}.$_standartImageFileExtension'}';
 
   static String getResumePath({
-    required String collenction,
+    required String collection,
     required String modelId,
     required String fileExtension,
     String? resumeName,
   }) =>
-      '$collenction/$modelId/$_resume/${resumeName ?? '${ExtendedDateTime.id}.$fileExtension'}';
+      '$collection/$modelId/$_resume/${resumeName ?? '${ExtendedDateTime.id}.$fileExtension'}';
 }

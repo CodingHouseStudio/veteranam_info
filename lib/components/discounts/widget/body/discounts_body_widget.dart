@@ -21,16 +21,19 @@ class DiscountBodyWidget extends StatelessWidget {
                 if (state.failure != null) {
                   context.dialog.showGetErrorDialog(
                     error: state.failure!.value(context),
-                    onPressed: () => context
-                        .read<DiscountWatcherBloc>()
-                        .add(const DiscountWatcherEvent.started()),
+                    onPressed: () {},
+                    // I think this event is not necessary for Stream, but
+                    // I think it's better to give
+                    // the user imaginary control over it
+
+                    // () => context
+                    //     .read<DiscountWatcherBloc>()
+                    //     .add(const DiscountWatcherEvent.started()),
                   );
                 }
                 if (state.itemsLoaded == (KDimensions.loadItems * 4) &&
                     showEmail) {
-                  context.dialog.showUserEmailDialog(
-                    context,
-                  );
+                  context.dialog.showUserEmailDialog();
                 }
               },
               listenWhen: (previous, current) =>
@@ -42,12 +45,12 @@ class DiscountBodyWidget extends StatelessWidget {
                   loadingStatus: _.loadingStatus,
                   cardListIsEmpty: _.filteredDiscountModelItems.isEmpty,
                   pageName: context.l10n.discounts,
-                  resetFilter: () => context.read<DiscountWatcherBloc>().add(
-                        const DiscountWatcherEvent.filterReset(),
-                      ),
-                  loadDataAgain: () => context
-                      .read<DiscountWatcherBloc>()
-                      .add(const DiscountWatcherEvent.started()),
+                  // resetFilter: () => context.read<DiscountWatcherBloc>().add(
+                  //       const DiscountWatcherEvent.filterReset(),
+                  //     ),
+                  // loadDataAgain: () => context
+                  //     .read<DiscountWatcherBloc>()
+                  //     .add(const DiscountWatcherEvent.started()),
                   titleChildWidgetsFunction: ({required isDesk}) => [
                     KSizedBox.kHeightSizedBox24,
                     if (KTest.testIsWeb) ...[

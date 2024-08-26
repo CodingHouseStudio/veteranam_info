@@ -111,7 +111,7 @@ Future<void> advancedFilterHelper(
     findsWidgets,
   );
 
-  await chekPointHelper(hasAmount: true, tester: tester, twiceTap: true);
+  await chekPointHelper(hasAmount: true, tester: tester);
 
   await chekPointSignleTapHelper(tester: tester, hasAmount: true);
 
@@ -163,6 +163,30 @@ Future<void> advancedFilterHelper(
       .tap(find.byKey(KWidgetkeys.screen.discounts.advancedFilterResetButton));
 
   await tester.pumpAndSettle();
+
+  if (isMobile) {
+    await scrollingHelperInt(
+      tester: tester,
+      itemKey: KWidgetkeys.screen.discounts.advancedFilterMob,
+    );
+
+    expect(
+      find.byKey(KWidgetkeys.screen.discounts.advancedFilterMob),
+      findsOneWidget,
+    );
+    // final advancedButton = tester.widgetList(
+    //   find.byKey(KWidgetkeys.screen.discounts.advancedFilterButton),
+    // );
+
+    expect(
+      find.byKey(KWidgetkeys.screen.discounts.advancedFilterButton),
+      findsOneWidget,
+    );
+
+    // if (advancedButton.isNotEmpty) {
+    await tester
+        .tap(find.byKey(KWidgetkeys.screen.discounts.advancedFilterButton));
+  }
 
   await scrollingHelperInt(
     tester: tester,

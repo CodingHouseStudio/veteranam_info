@@ -85,7 +85,9 @@ class MobSettingsBodyWidget extends StatelessWidget {
             horizontal: KPadding.kPaddingSize10,
           ),
           child: TextButton(
-            onPressed: () => context.read<UrlCubit>().copy(KAppText.email),
+            onPressed: () => context.read<UrlCubit>().copy(
+                  KAppText.email,
+                ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -111,6 +113,7 @@ class MobSettingsBodyWidget extends StatelessWidget {
             color: AppColors.materialThemeBlack,
             textColor: AppColors.materialThemeWhite,
             mobVerticalTextPadding: KPadding.kPaddingSize12,
+            mobIconPadding: KPadding.kPaddingSize12,
             isDesk: false,
           ),
         ),
@@ -122,7 +125,7 @@ class MobSettingsBodyWidget extends StatelessWidget {
           child: DoubleButtonWidget(
             widgetKey: KWidgetkeys.screen.mobSettings.bugButton,
             text: context.l10n.reportBugs,
-            onPressed: context.dialog.showMobFeedback,
+            onPressed: () async => context.dialog.showMobFeedback(),
             color: AppColors.materialThemeBlack,
             textColor: AppColors.materialThemeWhite,
             mobVerticalTextPadding: KPadding.kPaddingSize12,

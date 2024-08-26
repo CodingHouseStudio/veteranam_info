@@ -17,7 +17,7 @@ class _WidgetKeys {
   final newsCard = _NewsCardKeys();
   final discountCard = _DiscountCardKeys();
   final switchKeys = _SwitchKeys();
-  final buttonMob = _ButtonMobWidget();
+  // final buttonMob = _ButtonMobKeys();
   final dropChip = _DropChipKeys();
   final chip = _ChipKeys();
   final filterPopupMenu = _FilterPopupMenuKeys();
@@ -25,8 +25,7 @@ class _WidgetKeys {
   final languageSwitcher = _LanguageSwitcherKeys();
   final checkPoint = _CheckPointKeys();
   final scaffold = _ScaffoldKeys();
-  final profileCard = _ProfileKeys();
-  final profileCardWidget = _ProfileCardWidgetKeys();
+  final profileCard = _ProfileCardKeys();
   final donateCard = _DoanteCardKeys();
   final emailPasswordFields = _EmailPasswordFieldsKeys();
   final leftCard = _LeftCardKeys();
@@ -37,7 +36,7 @@ class _WidgetKeys {
   final workRequestCard = _WorkRequestCardKeys();
   final dialogs = _DialogsKeys();
   final filterChip = _FilterChipKeys();
-  final buttonAdditional = _ButtonAdditional();
+  final buttonAdditional = _ButtonAdditionalKeys();
   final statisticBox = _StatisticBoxKeys();
   final reportDialog = _ReportDialogKeys();
   final notificationLink = _NotificationLinkKeys();
@@ -47,4 +46,8 @@ class _WidgetKeys {
   final mobFeedback = _MobFeedbackKeys();
   final emailButton = _EmailButtonsKeys();
   final userEmailDialog = _UserEmailDialogKeys();
+  final buttonBottomLine = _ButtonBottomLineKeys();
+  final donateButton = _DonateButtonKeys();
+  final doubleButton = _DoubleButtonKeys();
+  final loadingButton = _LoadingButtonKeys();
 }

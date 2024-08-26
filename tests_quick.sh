@@ -27,7 +27,6 @@ lcov --remove coverage/lcov.info \
     'lib/shared/bloc/authentication/listenable.dart' \
     'lib/shared/constants/extension/failure_extension.dart' \
     'lib/shared/repositories/url_repository.dart' \
-    'lib/shared/widget/button_bottom_line_widget.dart' \
     'lib/shared/bloc/authentication/authentication_event.dart' \
     'lib/shared/repositories/firebase_module.dart' \
     'lib/shared/repositories/network_module.dart' \
@@ -35,6 +34,14 @@ lcov --remove coverage/lcov.info \
     'lib/shared/widget/dilog_page_widget.dart' \
     'lib/shared/widget/keyboard_scroll_view.dart' \
     'lib/shared/widget/network_image_widget.dart' \
+    'lib/app.dart' \
+    'lib/components/story_add/widget/field_widget.dart' \
+    'lib/shared/constants/extension/extension_constants.dart' \
+    'lib/shared/constants/extension/list_extension.dart' \
+    'lib/shared/models/failure_model/exceptions.dart' \
+    'lib/shared/widget/info_version_widget.dart' \
+    'lib/shared/widget/viewpager_indicator_widget.dart' \
+    'lib/shared/widget/row_sliver_widget.dart' \
     --output-file coverage/lcov.info
 
 # Generate the final HTML coverage report after exclusions
