@@ -191,4 +191,6 @@ abstract class KWidgetTheme {
     borderRadius: KBorderRadius.kBorderRadius32,
     color: AppColors.materialThemeKeyColorsPrimary,
   );
+  static const boxShadow =
+      BoxShadow(color: AppColors.materialThemeBlackShadow, blurRadius: 12);
 }
