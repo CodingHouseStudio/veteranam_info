@@ -35,6 +35,8 @@ Future<void> investorsInitialHelper(
           findsOneWidget,
         );
 
+        await doubleButtonHelper(tester);
+
         expect(
           find.byKey(KWidgetkeys.screen.investors.rightImages),
           findsOneWidget,

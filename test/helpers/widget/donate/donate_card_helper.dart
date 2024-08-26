@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:veteranam/shared/shared.dart';
 
-import '../../test_dependency.dart';
+import '../../../test_dependency.dart';
 
 Future<void> donateCardHelper({
   required WidgetTester tester,
@@ -27,19 +27,5 @@ Future<void> donateCardHelper({
 
   expect(find.byKey(KWidgetkeys.widget.donateCard.button), findsWidgets);
 
-  // await scrollingHelper(
-  //   tester: tester,
-  //   itemKey: KWidgetkeys.widget.donateCard.button,
-  // );
-
-  // await tester.tap(
-  //   find.byKey(KWidgetkeys.widget.donateCard.button).first,
-  //   warnIfMissed: false,
-  // );
-
-  // await scrollingHelper(
-  //   tester: tester,
-  //   itemKey: KWidgetkeys.widget.donateCard.widget,
-  //   offset: KTestConstants.scrollingUp1000,
-  // );
+  await donateButtonHelper(tester: tester, tap: false, isDesk: isDesk);
 }

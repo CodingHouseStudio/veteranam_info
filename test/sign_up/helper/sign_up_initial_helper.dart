@@ -8,6 +8,7 @@ Future<void> signUpInitialHelper(
 ) async {
   await changeWindowSizeHelper(
     tester: tester,
+    windowsTest: true,
     test: () async {
       expect(
         find.byKey(KWidgetkeys.screen.signUp.bottomButtons),
