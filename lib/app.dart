@@ -74,6 +74,7 @@ class AppWidget extends StatelessWidget {
             : BetterFeedback(
                 localizationsDelegates: locale,
                 localeOverride: localeValue,
+                themeMode: ThemeMode.light,
                 mode: FeedbackMode.navigate,
                 feedbackBuilder: (context, onSubmit, scrollController) =>
                     MobFeedbackWidget(

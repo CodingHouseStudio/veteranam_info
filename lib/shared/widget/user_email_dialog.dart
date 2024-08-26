@@ -50,10 +50,13 @@ class UserEmailDialog extends StatelessWidget {
                   icon: KIcon.close,
                   key: KWidgetkeys.widget.userEmailDialog.icon,
                   onPressed: closeOnPressed,
+                  padding: 0,
+                  color: AppColors.materialThemeKeyColorsNeutralVariant,
                   background: AppColors.materialThemeWhite,
                 ),
               ),
               Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   IconWidget(
                     icon: KIcon.arrowDownRight,
@@ -78,19 +81,28 @@ class UserEmailDialog extends StatelessWidget {
                           KSizedBox.kHeightSizedBox16
                         else
                           KSizedBox.kHeightSizedBox8,
-                        Text(
-                          key: KWidgetkeys
-                              .widget.userEmailDialog.emailDialogSubtitle,
-                          context.l10n.aboutNewDiscountsSubtitle,
-                          style: isDesk
-                              ? AppTextStyle.materialThemeBodyLarge
-                              : AppTextStyle.materialThemeBodyMedium,
-                        ),
+                        if (isDesk)
+                          Text(
+                            key: KWidgetkeys
+                                .widget.userEmailDialog.emailDialogSubtitle,
+                            _text(context),
+                            style: isDesk
+                                ? AppTextStyle.materialThemeBodyLarge
+                                : AppTextStyle.materialThemeBodyMedium,
+                          ),
                       ],
                     ),
                   ),
                 ],
               ),
+              if (!isDesk)
+                Text(
+                  key: KWidgetkeys.widget.userEmailDialog.emailDialogSubtitle,
+                  _text(context),
+                  style: isDesk
+                      ? AppTextStyle.materialThemeBodyLarge
+                      : AppTextStyle.materialThemeBodyMedium,
+                ),
               if (isDesk)
                 KSizedBox.kHeightSizedBox32
               else
@@ -116,6 +128,11 @@ class UserEmailDialog extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String _text(BuildContext context) {
+    return context.l10n.aboutNewDiscountsSubtitle +
+        (KTest.testIsWeb ? ')' : '😀');
   }
 
   Widget field(
@@ -145,5 +162,7 @@ class UserEmailDialog extends StatelessWidget {
         textColor: AppColors.materialThemeWhite,
         hasAlign: isDesk,
         mobTextWidth: double.infinity,
+        mobVerticalTextPadding: KPadding.kPaddingSize16,
+        mobIconPadding: KPadding.kPaddingSize16,
       );
 }
