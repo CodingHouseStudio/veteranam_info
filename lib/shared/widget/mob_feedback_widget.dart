@@ -28,12 +28,11 @@ class MobFeedbackWidget extends StatelessWidget {
                     style: AppTextStyle.materialThemeTitleMedium,
                   ),
                 ),
-                Tooltip(
+                TooltipWidget(
                   key: KWidgetkeys.widget.mobFeedback.icon,
-                  message: context.l10n.mobFeedbackHint,
-                  waitDuration: const Duration(milliseconds: 100),
-                  showDuration: const Duration(seconds: 15),
-                  child: KIcon.info,
+                  text: context.l10n.mobFeedbackHint,
+                  duration: const Duration(seconds: 15),
+                  margin: KPadding.kPaddingSize12,
                 ),
               ],
             ),

@@ -135,6 +135,10 @@ abstract class KWidgetTheme {
     color: AppColors.materialThemeKeyColorsSecondary,
     borderRadius: KBorderRadius.kBorderRadius32,
   );
+  static const boxDecorationTooltip = BoxDecoration(
+    color: AppColors.materialThemeBlackOpacity,
+    borderRadius: KBorderRadius.kBorderRadius32,
+  );
   static const inputDecoration = InputDecoration(
     hintStyle: AppTextStyle.materialThemeTitleMediumNeutralVariant35,
     contentPadding: EdgeInsets.symmetric(

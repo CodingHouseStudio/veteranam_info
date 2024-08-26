@@ -1000,9 +1000,13 @@
   "@whatIsWrong": {
     "examples": "Text for a feedback dialog in a mobile app"
   },
-  "mobFeedbackHint": "At the top of the screen you can indicate what the problem is, and at the bottom you can describe it in detail in words. Using the Navigation button, you can continue working with the application, and by clicking on the Draw button, you can continue describing the problem.",
+  "mobFeedbackHint": "Let us know about any issues in the app:\nTap 'Navigation' to use the menu and navigate to other pages in the app. Tap 'Drawing' to draw on the screen. Tap 'Write a message' to provide a detailed description of the issue.",
   "@mobFeedbackHint": {
-    "examples": "Hint text for the feedback dialog in the mobile app"
+    "examples": "Description text for the feedback dialog in the mobile app"
+  },
+  "mobOfflineHint": "Offline mode for mobile devices allows you to use the app without an internet connection.",
+  "@mobOfflineHint": {
+    "examples": "Description text for offline mode on the settings page (phone)"
   },
   "reportBugs": "Report bugs",
   "@reportBugs": {
