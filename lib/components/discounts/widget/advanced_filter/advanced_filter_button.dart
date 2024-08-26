@@ -6,11 +6,9 @@ class AdvancedFilterButton extends StatelessWidget {
     required this.isDesk,
     this.onPressed,
     super.key,
-    //this.icon,
   });
   final bool isDesk;
   final void Function()? onPressed;
-  //final Icon? icon;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +21,11 @@ class AdvancedFilterButton extends StatelessWidget {
               style: KButtonStyles.advancedButtonStyle,
               label: _buildAdvancedFilterRow(context, isDesk),
               // KSizedBox.kWidthSizedBox8,
-              icon: _icon(isDesk),
+              icon: const IconWidget(
+                icon: KIcon.tune,
+                background: AppColors.materialThemeKeyColorsNeutral,
+                padding: KPadding.kPaddingSize12,
+              ),
               onPressed: onPressed,
               //if (isDesk) KIcon.meil,
             ),
@@ -54,15 +56,6 @@ Widget _buildAdvancedFilterRow(BuildContext context, bool isDesk) {
               ? AppTextStyle.materialThemeHeadlineSmall
               : AppTextStyle.materialThemeTitleMedium,
         ),
-      if (isDesk) _icon(isDesk),
     ],
-  );
-}
-
-Widget _icon(bool isDesk) {
-  return IconWidget(
-    icon: KIcon.tune,
-    background: AppColors.materialThemeKeyColorsNeutral,
-    padding: isDesk ? KPadding.kPaddingSize20 : KPadding.kPaddingSize12,
   );
 }
