@@ -6,11 +6,13 @@ class IconButtonWidget extends StatelessWidget {
     required this.icon,
     required this.onPressed,
     this.background,
+    this.color,
     super.key,
     this.padding,
   });
 
   final Color? background;
+  final Color? color;
   final Widget icon;
   final double? padding;
   final void Function()? onPressed;
@@ -24,6 +26,7 @@ class IconButtonWidget extends StatelessWidget {
       ),
       padding: EdgeInsets.all(padding ?? KPadding.kPaddingSize12),
       icon: icon,
+      color: color,
     );
   }
 }
