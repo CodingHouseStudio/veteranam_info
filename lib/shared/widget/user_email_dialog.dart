@@ -131,9 +131,8 @@ class UserEmailDialog extends StatelessWidget {
   }
 
   String _text(BuildContext context) {
-    return KTest.testIsWeb
-        ? '${context.l10n.aboutNewDiscountsSubtitle})'
-        : '${context.l10n.aboutNewDiscountsSubtitle} 😀';
+    return context.l10n.aboutNewDiscountsSubtitle +
+        (KTest.testIsWeb ? ')' : '😀');
   }
 
   Widget field(
