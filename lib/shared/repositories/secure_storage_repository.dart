@@ -10,7 +10,7 @@ class SecureStorageRepository implements IStorage {
 
   @override
   FlutterSecureStorage get secureStorage =>
-      _secureStorage ?? const FlutterSecureStorage();
+      _secureStorage ?? const FlutterSecureStorage(webOptions: WebOptions());
 
   @visibleForTesting
   @override
