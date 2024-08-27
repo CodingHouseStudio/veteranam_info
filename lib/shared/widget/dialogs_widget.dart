@@ -175,6 +175,8 @@ class _DialogsWidget {
         ),
         showDragHandle: true,
         backgroundColor: AppColors.materialThemeKeyColorsNeutral,
+        useSafeArea: true,
+        enableDrag: false,
         builder: (context) => BlocProvider(
           create: (context) =>
               GetIt.I.get<ReportBloc>()..add(ReportEvent.started(cardId)),
@@ -183,17 +185,22 @@ class _DialogsWidget {
               final isDeskValue =
                   constraints.maxWidth >= KMinMaxSize.maxWidth600;
               return Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: KPadding.kPaddingSize16,
-                  vertical: KPadding.kPaddingSize32,
-                ),
-                child: SizedBox(
-                  width: double.infinity,
-                  child: SingleChildScrollView(
-                    child: ReportDialogWidget(
-                      isDesk: isDeskValue,
-                      cardEnum: cardEnum,
-                      // afterEvent: afterEvent,
+                padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).viewInsets.bottom,
+                ), // padding if mobile keyboard open
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: KPadding.kPaddingSize16,
+                    vertical: KPadding.kPaddingSize32,
+                  ),
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: SingleChildScrollView(
+                      child: ReportDialogWidget(
+                        isDesk: isDeskValue,
+                        cardEnum: cardEnum,
+                        // afterEvent: afterEvent,
+                      ),
                     ),
                   ),
                 ),

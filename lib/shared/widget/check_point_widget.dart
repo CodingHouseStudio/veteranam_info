@@ -68,11 +68,15 @@ class CheckPointAmountWidget extends StatelessWidget {
     required this.filterItem,
     super.key,
     this.onChanged,
+    this.amoutActiveClor,
+    this.amoutInactiveClor,
   });
   final bool isDesk;
   final void Function()? onChanged;
   final bool isCheck;
   final FilterItem filterItem;
+  final Color? amoutActiveClor;
+  final Color? amoutInactiveClor;
 
   @override
   Widget build(BuildContext context) {
@@ -91,8 +95,8 @@ class CheckPointAmountWidget extends StatelessWidget {
         AmountWidget(
           key: KWidgetkeys.widget.checkPoint.ammount,
           background: isCheck
-              ? AppColors.materialThemeKeyColorsSecondary
-              : AppColors.materialThemeKeyColorsNeutral,
+              ? amoutActiveClor ?? AppColors.materialThemeKeyColorsSecondary
+              : amoutInactiveClor ?? AppColors.materialThemeKeyColorsNeutral,
           textColor: isCheck
               ? AppColors.materialThemeKeyColorsNeutral
               : AppColors.materialThemeKeyColorsSecondary,
