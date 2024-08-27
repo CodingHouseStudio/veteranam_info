@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -59,6 +60,7 @@ import 'package:veteranam/shared/shared.dart';
     MockSpec<NetworkRepository>(),
     MockSpec<IAppNetworkRepository>(),
     MockSpec<Connectivity>(),
+    MockSpec<FirebaseMessaging>(),
   ],
 )
 void load() => debugPrint('loaded');

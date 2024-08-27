@@ -1,5 +1,6 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:veteranam/components/components.dart';
@@ -18,6 +19,7 @@ void configureDependenciesTest() {
   GetIt.I.registerSingleton<FirebaseAuth>(MockFirebaseAuth());
   GetIt.I.registerSingleton<GoogleSignIn>(GoogleSignIn());
   GetIt.I.registerSingleton<FakeClient>(FakeClient());
+  GetIt.I.registerSingleton<FirebaseMessaging>(MockFirebaseMessaging());
   GetIt.I.registerSingleton<StorageService>(
     MockStorageService(),
   );
@@ -40,6 +42,7 @@ void configureDependenciesTest() {
       GetIt.I.get<FirebaseAuth>(),
       GetIt.I.get<GoogleSignIn>(),
       CacheClient(),
+      GetIt.I.get<FirebaseMessaging>(),
     ),
   );
   GetIt.I.registerSingleton<AuthenticationRepository>(

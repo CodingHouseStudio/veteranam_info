@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -21,6 +22,7 @@ void main() {
     late CacheClient mockCache;
     late firebase_auth.GoogleAuthProvider mockGoogleAuthProvider;
     late FirestoreService mockFirestoreService;
+    late FirebaseMessaging mockFirebaseMessaging;
     late firebase_auth.UserCredential mockUserCredential;
     setUp(() {
       mockSecureStorageRepository = MockIStorage();
@@ -30,6 +32,7 @@ void main() {
       mockFirestoreService = MockFirestoreService();
       mockGoogleAuthProvider = MockGoogleAuthProvider();
       mockUserCredential = MockUserCredential();
+      mockFirebaseMessaging = MockFirebaseMessaging();
       when(
         mockFirebaseAuth.currentUser,
       ).thenAnswer(
@@ -78,6 +81,7 @@ void main() {
         mockFirebaseAuth,
         mockGoogleSignIn,
         mockCache,
+        mockFirebaseMessaging,
       )
         ..isWeb = true
         ..googleAuthProvider = mockGoogleAuthProvider;
@@ -137,7 +141,10 @@ void main() {
         UserSetting.empty,
       );
       verifyNever(
-        mockFirestoreService.updateUserSetting(UserSetting.empty),
+        mockFirestoreService.setUserSetting(
+          userSetting: UserSetting.empty,
+          userId: User.empty.id,
+        ),
       );
       verifyNever(
         mockFirestoreService.setUserSetting(

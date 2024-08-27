@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -23,6 +24,7 @@ void main() {
     late firebase_auth.UserCredential mockUserCredential;
     late FirestoreService mockFirestoreService;
     late firebase_auth.User mockUser;
+    late FirebaseMessaging mockFirebaseMessaging;
     late GoogleSignInAccount mockGoogleSignInAccount;
     setUp(() {
       mockSecureStorageRepository = MockIStorage();
@@ -34,6 +36,7 @@ void main() {
       mockFirestoreService = MockFirestoreService();
       mockUser = MockUser();
       mockGoogleSignInAccount = MockGoogleSignInAccount();
+      mockFirebaseMessaging = MockFirebaseMessaging();
 
       when(mockUserCredential.credential).thenAnswer(
         (_) => KTestText.authCredential,
@@ -147,11 +150,11 @@ void main() {
       ).thenAnswer(
         (_) => Stream.value(KTestText.userSetting),
       );
-      when(
-        mockFirestoreService.updateUserSetting(KTestText.userSetting),
-      ).thenAnswer(
-        (_) async {},
-      );
+      // when(
+      //   mockFirestoreService.updateUserSetting(KTestText.userSetting),
+      // ).thenAnswer(
+      //   (_) async {},
+      // );
       when(
         mockFirestoreService.setUserSetting(
           userSetting: UserSetting.empty,
@@ -191,6 +194,7 @@ void main() {
         mockFirebaseAuth,
         mockGoogleSignIn,
         mockCache,
+        mockFirebaseMessaging,
       )
         ..isWeb = true
         ..googleAuthProvider = mockGoogleAuthProvider;
@@ -319,7 +323,10 @@ void main() {
         KTestText.userSetting,
       );
       verify(
-        mockFirestoreService.updateUserSetting(KTestText.userSetting),
+        mockFirestoreService.setUserSetting(
+          userSetting: KTestText.userSetting,
+          userId: User.empty.id,
+        ),
       ).called(1);
       verifyNever(
         mockFirestoreService.setUserSetting(
