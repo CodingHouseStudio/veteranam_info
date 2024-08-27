@@ -9,6 +9,7 @@ part 'user_setting_model.g.dart';
 class UserSetting with _$UserSetting {
   const factory UserSetting({
     required String id,
+    String? fcm,
     @Default(Language.ukrain) Language locale,
     UserRole? userRole,
     @Default(false) bool roleIsConfirmed,
@@ -21,7 +22,7 @@ class UserSetting with _$UserSetting {
       _$UserSettingFromJson(json);
 
   /// Empty userSetting which represents an unauthenticated user.
-  static const empty = UserSetting(id: '');
+  static const empty = UserSetting(id: '', fcm: '');
 
   /// Convenience getter to determine whether the current user is empty.
   bool get isEmpty => this == UserSetting.empty.copyWith(locale: locale);

@@ -166,12 +166,12 @@ class FirestoreService {
         .set(fund.toJson());
   }
 
-  Future<void> updateUserSetting(UserSetting userSetting) {
-    return _db
-        .collection(FirebaseCollectionName.userSettings)
-        .doc(userSetting.id)
-        .update(userSetting.toJson());
-  }
+  // Future<void> updateUserSetting(UserSetting userSetting) {
+  //   return _db
+  //       .collection(FirebaseCollectionName.userSettings)
+  //       .doc(userSetting.id)
+  //       .update(userSetting.toJson());
+  // }
 
   Stream<List<InformationModel>> getInformations(List<String>? reportIdItems) =>
       _db
@@ -225,10 +225,10 @@ class FirestoreService {
     required UserSetting userSetting,
     required String userId,
   }) {
-    return _db
-        .collection(FirebaseCollectionName.userSettings)
-        .doc(userId)
-        .set(userSetting.copyWith(id: userId).toJson());
+    return _db.collection(FirebaseCollectionName.userSettings).doc(userId).set(
+          userSetting.copyWith(id: userId).toJson(),
+          SetOptions(merge: true),
+        );
   }
 
   Stream<UserSetting> getUserSetting(String userId) => _db

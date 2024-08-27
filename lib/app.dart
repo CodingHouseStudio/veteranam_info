@@ -41,7 +41,7 @@ class App extends StatelessWidget {
             create: (context) => GetIt.I.get<MobFeedbackBloc>(),
           ),
           BlocProvider(
-            create: (context) => GetIt.I.get<MobOfflineModeCubit>(),
+            create: (context) => GetIt.I.get<MobOfflineModeCubit>()..started(),
           ),
           BlocProvider(
             create: (context) => GetIt.I.get<MobFaqWatcherBloc>()

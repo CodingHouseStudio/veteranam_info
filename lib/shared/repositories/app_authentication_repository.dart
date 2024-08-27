@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:firebase_core/firebase_core.dart' as firebase_core;
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart'
     show kIsWeb, visibleForTesting; //debugPrint
 import 'package:get_it/get_it.dart';
@@ -18,6 +19,7 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
     this._firebaseAuth,
     this._googleSignIn,
     this._cache,
+    this._firebaseMessaging,
   ) {
     _updateAuthStatusBasedOnCache();
     _updateUserSettingBasedOnCache();
@@ -28,6 +30,7 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   final GoogleSignIn _googleSignIn;
   final CacheClient _cache;
   final FirestoreService _firestoreService = GetIt.I.get<FirestoreService>();
+  final FirebaseMessaging _firebaseMessaging;
 
   /// Whether or not the current environment is web
   /// Should only be overridden for testing purposes. Otherwise,
@@ -170,7 +173,13 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   @override
   Future<Either<SomeFailure, bool>> logInAnonymously() async =>
       _handleAuthOperation(
-        _firebaseAuth.signInAnonymously,
+        () async {
+          final userCredential = await _firebaseAuth.signInAnonymously();
+          final user = userCredential.user?.toUser;
+          if (user != null) {
+            await _startCreateUserSetting(user.id);
+          }
+        },
         (e) => SendFailure.fromCode(e).status,
       );
 
@@ -328,17 +337,17 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   ) async {
     try {
       if (currentUser.isNotEmpty) {
-        if (currentUserSetting.id.isEmpty ||
-            currentUserSetting.id != currentUser.id) {
-          await _firestoreService.setUserSetting(
-            userSetting: userSetting,
-            userId: currentUser.id,
-          );
-        } else {
-          await _firestoreService.updateUserSetting(
-            userSetting,
-          );
-        }
+        // if (currentUserSetting.id.isEmpty ||
+        //     currentUserSetting.id != currentUser.id) {
+        await _firestoreService.setUserSetting(
+          userSetting: userSetting,
+          userId: currentUser.id,
+        );
+        // } else {
+        //   await _firestoreService.updateUserSetting(
+        //     userSetting,
+        //   );
+        // }
         return const Right(true);
       }
       return const Right(false);
@@ -349,6 +358,20 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
     } finally {
       _updateUserSettingBasedOnCache();
     }
+  }
+
+  Future<Either<SomeFailure, bool>> _startCreateUserSetting(
+    String userId,
+  ) async {
+    final fcm = await _firebaseMessaging.getToken(
+      vapidKey: SecurityKeys.firebaseVapidKey,
+    );
+
+    final userSetting = UserSetting(
+      id: userId,
+      fcm: fcm,
+    );
+    return updateUserSetting(userSetting);
   }
 }
 
