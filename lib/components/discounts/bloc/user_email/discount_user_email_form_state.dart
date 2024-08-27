@@ -28,4 +28,4 @@ class DiscountUserEmailFormState with _$DiscountUserEmailFormState {
   }) = _Initial;
 }
 
-enum EmailEnum { initial, inProgress, success, invalidData }
+enum EmailEnum { initial, inProgress, success, invalidData, close }
