@@ -9,6 +9,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:connectivity_plus/connectivity_plus.dart' as _i895;
+import 'package:firebase_analytics/firebase_analytics.dart' as _i398;
 import 'package:firebase_auth/firebase_auth.dart' as _i59;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:google_sign_in/google_sign_in.dart' as _i116;
@@ -65,7 +66,10 @@ import 'package:veteranam/shared/bloc/mob_offline_mode/mob_offline_mode_cubit.da
 import 'package:veteranam/shared/bloc/network/network_cubit.dart' as _i891;
 import 'package:veteranam/shared/bloc/report/report_bloc.dart' as _i765;
 import 'package:veteranam/shared/bloc/url/url_cubit.dart' as _i319;
+import 'package:veteranam/shared/data_provider/analytics_module.dart' as _i606;
 import 'package:veteranam/shared/data_provider/cache_provider.dart' as _i37;
+import 'package:veteranam/shared/data_provider/firebase_analytics_provider.dart'
+    as _i777;
 import 'package:veteranam/shared/data_provider/firestore_provider.dart'
     as _i1033;
 import 'package:veteranam/shared/data_provider/storage_provider.dart' as _i99;
@@ -108,6 +112,7 @@ extension GetItInjectableX on _i174.GetIt {
       environment,
       environmentFilter,
     );
+    final analytucsModule = _$AnalytucsModule();
     final firebaseModule = _$FirebaseModule();
     final networkModule = _$NetworkModule();
     gh.factory<_i37.CacheClient>(() => _i37.CacheClient());
@@ -115,6 +120,7 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i1033.FirestoreService(gh<_i1001.CacheClient>()));
     gh.factory<_i189.AdvancedFilterMobCubit>(
         () => _i189.AdvancedFilterMobCubit());
+    gh.singleton<_i398.FirebaseAnalytics>(() => analytucsModule.firebaseAuth);
     gh.singleton<_i99.StorageService>(() => _i99.StorageService());
     gh.singleton<_i59.FirebaseAuth>(() => firebaseModule.firebaseAuth);
     gh.singleton<_i116.GoogleSignIn>(() => firebaseModule.googleSignIn);
@@ -158,6 +164,8 @@ extension GetItInjectableX on _i174.GetIt {
         ));
     gh.factory<_i319.UrlCubit>(
         () => _i319.UrlCubit(urlRepository: gh<_i1001.IUrlRepository>()));
+    gh.singleton<_i777.FirebaseAnalyticsService>(
+        () => _i777.FirebaseAnalyticsService(gh<_i398.FirebaseAnalytics>()));
     gh.factory<_i227.DiscountLinkCubit>(() => _i227.DiscountLinkCubit(
           discountRepository: gh<_i1001.IDiscountRepository>(),
           appAuthenticationRepository:
@@ -173,12 +181,6 @@ extension GetItInjectableX on _i174.GetIt {
           appAuthenticationRepository:
               gh<_i1001.IAppAuthenticationRepository>(),
         ));
-    gh.factory<_i441.DiscountUserEmailFormBloc>(
-        () => _i441.DiscountUserEmailFormBloc(
-              discountRepository: gh<_i1001.IDiscountRepository>(),
-              appAuthenticationRepository:
-                  gh<_i1001.IAppAuthenticationRepository>(),
-            ));
     gh.factory<_i334.DiscountCardWatcherBloc>(() =>
         _i334.DiscountCardWatcherBloc(
             discountRepository: gh<_i1001.IDiscountRepository>()));
@@ -245,6 +247,13 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i76.WorkRepository(),
       registerFor: {_development},
     );
+    gh.factory<_i441.DiscountUserEmailFormBloc>(
+        () => _i441.DiscountUserEmailFormBloc(
+              discountRepository: gh<_i1001.IDiscountRepository>(),
+              appAuthenticationRepository:
+                  gh<_i1001.IAppAuthenticationRepository>(),
+              firebaseAnalyticsService: gh<_i1001.FirebaseAnalyticsService>(),
+            ));
     gh.factory<_i922.MyStoryWatcherBloc>(
       () => _i922.MyStoryWatcherBloc(
         storyRepository: gh<_i1001.IStoryRepository>(),
@@ -298,6 +307,8 @@ extension GetItInjectableX on _i174.GetIt {
     return this;
   }
 }
+
+class _$AnalytucsModule extends _i606.AnalytucsModule {}
 
 class _$FirebaseModule extends _i926.FirebaseModule {}
 

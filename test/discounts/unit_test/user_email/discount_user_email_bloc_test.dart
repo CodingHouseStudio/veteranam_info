@@ -15,12 +15,15 @@ void main() {
     late DiscountUserEmailFormBloc discountUserEmailFormBloc;
     late IDiscountRepository mockdiscountRepository;
     late IAppAuthenticationRepository mockAppAuthenticationRepository;
+    late FirebaseAnalyticsService mockFirebaseAnalyticsService;
 
     setUp(() {
       ExtendedDateTime.id = KTestText.id;
       ExtendedDateTime.current = KTestText.dateTime;
       mockdiscountRepository = MockIDiscountRepository();
       mockAppAuthenticationRepository = MockIAppAuthenticationRepository();
+      mockFirebaseAnalyticsService = MockFirebaseAnalyticsService();
+
       when(mockdiscountRepository.sendEmail(KTestText.emailModel)).thenAnswer(
         (_) async => const Right(true),
       );
@@ -44,6 +47,7 @@ void main() {
       discountUserEmailFormBloc = DiscountUserEmailFormBloc(
         discountRepository: mockdiscountRepository,
         appAuthenticationRepository: mockAppAuthenticationRepository,
+        firebaseAnalyticsService: mockFirebaseAnalyticsService,
       );
     });
 
@@ -88,7 +92,7 @@ void main() {
         ),
         const DiscountUserEmailFormState(
           email: EmailFieldModel.pure(),
-          formState: EmailEnum.success,
+          formState: EmailEnum.close,
         ),
       ],
     );

@@ -1,8 +1,10 @@
+import 'dart:async';
 import 'dart:math';
-import 'dart:typed_data';
 import 'package:collection/collection.dart';
 import 'package:feedback/feedback.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/foundation.dart' show Uint8List, kReleaseMode;
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -366,4 +368,22 @@ extension StoryExtensions on StoryModel {
         icon: KIcon.person,
         background: AppColors.materialThemeKeyColorsNeutralVariant,
       );
+}
+
+extension FirebaseAnalyticsExtensions on FirebaseAnalytics {
+  void releaseLogEvent({
+    required String name,
+    Map<String, Object>? parameters,
+    AnalyticsCallOptions? callOptions,
+  }) {
+    if (kReleaseMode && Config.isProduction) {
+      unawaited(
+        logEvent(
+          name: name,
+          callOptions: callOptions,
+          parameters: parameters,
+        ),
+      );
+    }
+  }
 }
