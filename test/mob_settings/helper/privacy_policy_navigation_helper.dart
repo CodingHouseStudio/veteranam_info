@@ -10,7 +10,7 @@ Future<void> privacyPolicyNavigationHelper({
 }) async {
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.mobSettings.bugButton,
+    itemKey: KWidgetkeys.screen.mobSettings.feedbackButton,
   );
 
   expect(

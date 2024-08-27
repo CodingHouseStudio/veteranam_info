@@ -17,6 +17,7 @@ class DoubleButtonWidget extends StatelessWidget {
     this.mobTextWidth,
     this.mobIconPadding,
     this.align,
+    this.mobHorizontalTextPadding,
   });
   final String text;
   final Color? color;
@@ -26,6 +27,7 @@ class DoubleButtonWidget extends StatelessWidget {
   final Key widgetKey;
   final bool hasAlign;
   final double? mobVerticalTextPadding;
+  final double? mobHorizontalTextPadding;
   final double? mobTextWidth;
   final double? mobIconPadding;
   final Alignment? align;
@@ -57,6 +59,7 @@ class DoubleButtonWidget extends StatelessWidget {
           textColor: textColor,
           widgetKey: widgetKey,
           verticalTextPadding: mobVerticalTextPadding,
+          horizontalTextPadding: mobHorizontalTextPadding,
           textWidth: mobTextWidth,
           iconPadding: mobIconPadding,
         );
@@ -167,6 +170,7 @@ class _DoubleButtonWidgetMob extends StatelessWidget {
     this.color,
     this.textWidth,
     this.iconPadding,
+    this.horizontalTextPadding,
   });
   final String text;
   final Color? color;
@@ -174,6 +178,7 @@ class _DoubleButtonWidgetMob extends StatelessWidget {
   final void Function()? onPressed;
   final Key widgetKey;
   final double? verticalTextPadding;
+  final double? horizontalTextPadding;
   final double? textWidth;
   final double? iconPadding;
 
@@ -197,7 +202,7 @@ class _DoubleButtonWidgetMob extends StatelessWidget {
             ),
             decoration: KWidgetTheme.boxDecorationGreen.copyWith(color: color),
             padding: EdgeInsets.symmetric(
-              horizontal: KPadding.kPaddingSize30,
+              horizontal: horizontalTextPadding ?? KPadding.kPaddingSize30,
               vertical: verticalTextPadding ?? KPadding.kPaddingSize8,
             ),
             child: Text(
