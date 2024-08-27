@@ -174,6 +174,7 @@ class AdvancedFilterContent extends StatelessWidget {
               ),
               filterItem: location,
               isDesk: isDesk,
+              amoutInactiveClor: isDesk ? null : AppColors.materialThemeWhite,
             ),
           );
         },

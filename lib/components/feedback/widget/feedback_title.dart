@@ -5,16 +5,16 @@ class FeedbackTitle extends StatelessWidget {
   const FeedbackTitle({
     required this.isDesk,
     required this.title,
-    required this.secondText,
+    // required this.secondText,
     super.key,
     this.titleSecondPart,
-    this.text,
+    // this.text,
   });
   final bool isDesk;
   final String title;
   final String? titleSecondPart;
-  final String? text;
-  final String secondText;
+  // final String? text;
+  // final String secondText;
 
   @override
   Widget build(BuildContext context) {
@@ -46,11 +46,11 @@ class FeedbackTitle extends StatelessWidget {
               //   key: KWidgetkeys.screen.feedback.pointText,
               // ),
               KSizedBox.kHeightSizedBox16,
-              if (text != null)
-                Text(
-                  text!,
-                  style: AppTextStyle.materialThemeDisplaySmall,
-                ),
+              // if (text != null)
+              //   Text(
+              //     text!,
+              //     style: AppTextStyle.materialThemeDisplaySmall,
+              //   ),
               Row(
                 key: KWidgetkeys.screen.feedback.title,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -62,7 +62,7 @@ class FeedbackTitle extends StatelessWidget {
                   KSizedBox.kWidthSizedBox16,
                   Expanded(
                     child: Text(
-                      secondText,
+                      '$title $titleSecondPart',
                       style: AppTextStyle.materialThemeDisplaySmall,
                     ),
                   ),
