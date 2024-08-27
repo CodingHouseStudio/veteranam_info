@@ -11,6 +11,7 @@ import 'dart:typed_data' as _i16;
 import 'package:cloud_firestore/cloud_firestore.dart' as _i7;
 import 'package:connectivity_plus/connectivity_plus.dart' as _i18;
 import 'package:dartz/dartz.dart' as _i2;
+import 'package:firebase_analytics/firebase_analytics.dart' as _i19;
 import 'package:firebase_auth/firebase_auth.dart' as _i4;
 import 'package:firebase_core/firebase_core.dart' as _i6;
 import 'package:firebase_storage/firebase_storage.dart' as _i10;
@@ -10011,4 +10012,1133 @@ class MockConnectivity extends _i1.Mock implements _i18.Connectivity {
             _i8.Future<List<_i18.ConnectivityResult>>.value(
                 <_i18.ConnectivityResult>[]),
       ) as _i8.Future<List<_i18.ConnectivityResult>>);
+}
+
+/// A class which mocks [FirebaseAnalyticsService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockFirebaseAnalyticsService extends _i1.Mock
+    implements _i3.FirebaseAnalyticsService {
+  @override
+  void addEvent({
+    required String? name,
+    Map<String, Object>? parameters,
+    _i19.AnalyticsCallOptions? callOptions,
+  }) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #addEvent,
+          [],
+          {
+            #name: name,
+            #parameters: parameters,
+            #callOptions: callOptions,
+          },
+        ),
+        returnValueForMissingStub: null,
+      );
+}
+
+/// A class which mocks [FirebaseAnalytics].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockFirebaseAnalytics extends _i1.Mock implements _i19.FirebaseAnalytics {
+  @override
+  _i6.FirebaseApp get app => (super.noSuchMethod(
+        Invocation.getter(#app),
+        returnValue: _FakeFirebaseApp_8(
+          this,
+          Invocation.getter(#app),
+        ),
+        returnValueForMissingStub: _FakeFirebaseApp_8(
+          this,
+          Invocation.getter(#app),
+        ),
+      ) as _i6.FirebaseApp);
+
+  @override
+  set app(_i6.FirebaseApp? _app) => super.noSuchMethod(
+        Invocation.setter(
+          #app,
+          _app,
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  _i8.Future<String?> get appInstanceId => (super.noSuchMethod(
+        Invocation.getter(#appInstanceId),
+        returnValue: _i8.Future<String?>.value(),
+        returnValueForMissingStub: _i8.Future<String?>.value(),
+      ) as _i8.Future<String?>);
+
+  @override
+  Map<dynamic, dynamic> get pluginConstants => (super.noSuchMethod(
+        Invocation.getter(#pluginConstants),
+        returnValue: <dynamic, dynamic>{},
+        returnValueForMissingStub: <dynamic, dynamic>{},
+      ) as Map<dynamic, dynamic>);
+
+  @override
+  _i8.Future<bool> isSupported() => (super.noSuchMethod(
+        Invocation.method(
+          #isSupported,
+          [],
+        ),
+        returnValue: _i8.Future<bool>.value(false),
+        returnValueForMissingStub: _i8.Future<bool>.value(false),
+      ) as _i8.Future<bool>);
+
+  @override
+  _i8.Future<int?> getSessionId() => (super.noSuchMethod(
+        Invocation.method(
+          #getSessionId,
+          [],
+        ),
+        returnValue: _i8.Future<int?>.value(),
+        returnValueForMissingStub: _i8.Future<int?>.value(),
+      ) as _i8.Future<int?>);
+
+  @override
+  _i8.Future<void> logEvent({
+    required String? name,
+    Map<String, Object>? parameters,
+    _i19.AnalyticsCallOptions? callOptions,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #logEvent,
+          [],
+          {
+            #name: name,
+            #parameters: parameters,
+            #callOptions: callOptions,
+          },
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<void> setConsent({
+    bool? adStorageConsentGranted,
+    bool? analyticsStorageConsentGranted,
+    bool? adPersonalizationSignalsConsentGranted,
+    bool? adUserDataConsentGranted,
+    bool? functionalityStorageConsentGranted,
+    bool? personalizationStorageConsentGranted,
+    bool? securityStorageConsentGranted,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #setConsent,
+          [],
+          {
+            #adStorageConsentGranted: adStorageConsentGranted,
+            #analyticsStorageConsentGranted: analyticsStorageConsentGranted,
+            #adPersonalizationSignalsConsentGranted:
+                adPersonalizationSignalsConsentGranted,
+            #adUserDataConsentGranted: adUserDataConsentGranted,
+            #functionalityStorageConsentGranted:
+                functionalityStorageConsentGranted,
+            #personalizationStorageConsentGranted:
+                personalizationStorageConsentGranted,
+            #securityStorageConsentGranted: securityStorageConsentGranted,
+          },
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<void> setDefaultEventParameters(
+          Map<String, Object?>? defaultParameters) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #setDefaultEventParameters,
+          [defaultParameters],
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<void> setAnalyticsCollectionEnabled(bool? enabled) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #setAnalyticsCollectionEnabled,
+          [enabled],
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<void> setUserId({
+    String? id,
+    _i19.AnalyticsCallOptions? callOptions,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #setUserId,
+          [],
+          {
+            #id: id,
+            #callOptions: callOptions,
+          },
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<void> setCurrentScreen({
+    required String? screenName,
+    String? screenClassOverride = r'Flutter',
+    _i19.AnalyticsCallOptions? callOptions,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #setCurrentScreen,
+          [],
+          {
+            #screenName: screenName,
+            #screenClassOverride: screenClassOverride,
+            #callOptions: callOptions,
+          },
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<void> setUserProperty({
+    required String? name,
+    required String? value,
+    _i19.AnalyticsCallOptions? callOptions,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #setUserProperty,
+          [],
+          {
+            #name: name,
+            #value: value,
+            #callOptions: callOptions,
+          },
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<void> resetAnalyticsData() => (super.noSuchMethod(
+        Invocation.method(
+          #resetAnalyticsData,
+          [],
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<void> logAddPaymentInfo({
+    String? coupon,
+    String? currency,
+    String? paymentType,
+    double? value,
+    List<_i19.AnalyticsEventItem>? items,
+    Map<String, Object>? parameters,
+    _i19.AnalyticsCallOptions? callOptions,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #logAddPaymentInfo,
+          [],
+          {
+            #coupon: coupon,
+            #currency: currency,
+            #paymentType: paymentType,
+            #value: value,
+            #items: items,
+            #parameters: parameters,
+            #callOptions: callOptions,
+          },
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<void> logAddShippingInfo({
+    String? coupon,
+    String? currency,
+    double? value,
+    String? shippingTier,
+    List<_i19.AnalyticsEventItem>? items,
+    Map<String, Object>? parameters,
+    _i19.AnalyticsCallOptions? callOptions,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #logAddShippingInfo,
+          [],
+          {
+            #coupon: coupon,
+            #currency: currency,
+            #value: value,
+            #shippingTier: shippingTier,
+            #items: items,
+            #parameters: parameters,
+            #callOptions: callOptions,
+          },
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<void> logAddToCart({
+    List<_i19.AnalyticsEventItem>? items,
+    double? value,
+    String? currency,
+    Map<String, Object>? parameters,
+    _i19.AnalyticsCallOptions? callOptions,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #logAddToCart,
+          [],
+          {
+            #items: items,
+            #value: value,
+            #currency: currency,
+            #parameters: parameters,
+            #callOptions: callOptions,
+          },
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<void> logAddToWishlist({
+    List<_i19.AnalyticsEventItem>? items,
+    double? value,
+    String? currency,
+    Map<String, Object>? parameters,
+    _i19.AnalyticsCallOptions? callOptions,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #logAddToWishlist,
+          [],
+          {
+            #items: items,
+            #value: value,
+            #currency: currency,
+            #parameters: parameters,
+            #callOptions: callOptions,
+          },
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<void> logAdImpression({
+    String? adPlatform,
+    String? adSource,
+    String? adFormat,
+    String? adUnitName,
+    double? value,
+    String? currency,
+    Map<String, Object>? parameters,
+    _i19.AnalyticsCallOptions? callOptions,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #logAdImpression,
+          [],
+          {
+            #adPlatform: adPlatform,
+            #adSource: adSource,
+            #adFormat: adFormat,
+            #adUnitName: adUnitName,
+            #value: value,
+            #currency: currency,
+            #parameters: parameters,
+            #callOptions: callOptions,
+          },
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<void> logAppOpen({
+    _i19.AnalyticsCallOptions? callOptions,
+    Map<String, Object>? parameters,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #logAppOpen,
+          [],
+          {
+            #callOptions: callOptions,
+            #parameters: parameters,
+          },
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<void> logBeginCheckout({
+    double? value,
+    String? currency,
+    List<_i19.AnalyticsEventItem>? items,
+    String? coupon,
+    Map<String, Object>? parameters,
+    _i19.AnalyticsCallOptions? callOptions,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #logBeginCheckout,
+          [],
+          {
+            #value: value,
+            #currency: currency,
+            #items: items,
+            #coupon: coupon,
+            #parameters: parameters,
+            #callOptions: callOptions,
+          },
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<void> logCampaignDetails({
+    required String? source,
+    required String? medium,
+    required String? campaign,
+    String? term,
+    String? content,
+    String? aclid,
+    String? cp1,
+    Map<String, Object>? parameters,
+    _i19.AnalyticsCallOptions? callOptions,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #logCampaignDetails,
+          [],
+          {
+            #source: source,
+            #medium: medium,
+            #campaign: campaign,
+            #term: term,
+            #content: content,
+            #aclid: aclid,
+            #cp1: cp1,
+            #parameters: parameters,
+            #callOptions: callOptions,
+          },
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<void> logEarnVirtualCurrency({
+    required String? virtualCurrencyName,
+    required num? value,
+    Map<String, Object>? parameters,
+    _i19.AnalyticsCallOptions? callOptions,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #logEarnVirtualCurrency,
+          [],
+          {
+            #virtualCurrencyName: virtualCurrencyName,
+            #value: value,
+            #parameters: parameters,
+            #callOptions: callOptions,
+          },
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<void> logGenerateLead({
+    String? currency,
+    double? value,
+    Map<String, Object>? parameters,
+    _i19.AnalyticsCallOptions? callOptions,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #logGenerateLead,
+          [],
+          {
+            #currency: currency,
+            #value: value,
+            #parameters: parameters,
+            #callOptions: callOptions,
+          },
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<void> logJoinGroup({
+    required String? groupId,
+    Map<String, Object>? parameters,
+    _i19.AnalyticsCallOptions? callOptions,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #logJoinGroup,
+          [],
+          {
+            #groupId: groupId,
+            #parameters: parameters,
+            #callOptions: callOptions,
+          },
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<void> logLevelUp({
+    required int? level,
+    String? character,
+    Map<String, Object>? parameters,
+    _i19.AnalyticsCallOptions? callOptions,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #logLevelUp,
+          [],
+          {
+            #level: level,
+            #character: character,
+            #parameters: parameters,
+            #callOptions: callOptions,
+          },
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<void> logLevelStart({
+    required String? levelName,
+    Map<String, Object>? parameters,
+    _i19.AnalyticsCallOptions? callOptions,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #logLevelStart,
+          [],
+          {
+            #levelName: levelName,
+            #parameters: parameters,
+            #callOptions: callOptions,
+          },
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<void> logLevelEnd({
+    required String? levelName,
+    int? success,
+    Map<String, Object>? parameters,
+    _i19.AnalyticsCallOptions? callOptions,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #logLevelEnd,
+          [],
+          {
+            #levelName: levelName,
+            #success: success,
+            #parameters: parameters,
+            #callOptions: callOptions,
+          },
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<void> logSetCheckoutOption({
+    required int? checkoutStep,
+    required String? checkoutOption,
+    Map<String, Object>? parameters,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #logSetCheckoutOption,
+          [],
+          {
+            #checkoutStep: checkoutStep,
+            #checkoutOption: checkoutOption,
+            #parameters: parameters,
+          },
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<void> logLogin({
+    String? loginMethod,
+    Map<String, Object>? parameters,
+    _i19.AnalyticsCallOptions? callOptions,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #logLogin,
+          [],
+          {
+            #loginMethod: loginMethod,
+            #parameters: parameters,
+            #callOptions: callOptions,
+          },
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<void> logPostScore({
+    required int? score,
+    int? level,
+    String? character,
+    Map<String, Object>? parameters,
+    _i19.AnalyticsCallOptions? callOptions,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #logPostScore,
+          [],
+          {
+            #score: score,
+            #level: level,
+            #character: character,
+            #parameters: parameters,
+            #callOptions: callOptions,
+          },
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<void> logPurchase({
+    String? currency,
+    String? coupon,
+    double? value,
+    List<_i19.AnalyticsEventItem>? items,
+    double? tax,
+    double? shipping,
+    String? transactionId,
+    String? affiliation,
+    Map<String, Object>? parameters,
+    _i19.AnalyticsCallOptions? callOptions,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #logPurchase,
+          [],
+          {
+            #currency: currency,
+            #coupon: coupon,
+            #value: value,
+            #items: items,
+            #tax: tax,
+            #shipping: shipping,
+            #transactionId: transactionId,
+            #affiliation: affiliation,
+            #parameters: parameters,
+            #callOptions: callOptions,
+          },
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<void> logRemoveFromCart({
+    String? currency,
+    double? value,
+    List<_i19.AnalyticsEventItem>? items,
+    Map<String, Object>? parameters,
+    _i19.AnalyticsCallOptions? callOptions,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #logRemoveFromCart,
+          [],
+          {
+            #currency: currency,
+            #value: value,
+            #items: items,
+            #parameters: parameters,
+            #callOptions: callOptions,
+          },
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<void> logScreenView({
+    String? screenClass,
+    String? screenName,
+    Map<String, Object>? parameters,
+    _i19.AnalyticsCallOptions? callOptions,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #logScreenView,
+          [],
+          {
+            #screenClass: screenClass,
+            #screenName: screenName,
+            #parameters: parameters,
+            #callOptions: callOptions,
+          },
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<void> logSelectItem({
+    String? itemListId,
+    String? itemListName,
+    List<_i19.AnalyticsEventItem>? items,
+    Map<String, Object>? parameters,
+    _i19.AnalyticsCallOptions? callOptions,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #logSelectItem,
+          [],
+          {
+            #itemListId: itemListId,
+            #itemListName: itemListName,
+            #items: items,
+            #parameters: parameters,
+            #callOptions: callOptions,
+          },
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<void> logSelectPromotion({
+    String? creativeName,
+    String? creativeSlot,
+    List<_i19.AnalyticsEventItem>? items,
+    String? locationId,
+    String? promotionId,
+    String? promotionName,
+    Map<String, Object>? parameters,
+    _i19.AnalyticsCallOptions? callOptions,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #logSelectPromotion,
+          [],
+          {
+            #creativeName: creativeName,
+            #creativeSlot: creativeSlot,
+            #items: items,
+            #locationId: locationId,
+            #promotionId: promotionId,
+            #promotionName: promotionName,
+            #parameters: parameters,
+            #callOptions: callOptions,
+          },
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<void> logViewCart({
+    String? currency,
+    double? value,
+    List<_i19.AnalyticsEventItem>? items,
+    Map<String, Object>? parameters,
+    _i19.AnalyticsCallOptions? callOptions,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #logViewCart,
+          [],
+          {
+            #currency: currency,
+            #value: value,
+            #items: items,
+            #parameters: parameters,
+            #callOptions: callOptions,
+          },
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<void> logSearch({
+    required String? searchTerm,
+    int? numberOfNights,
+    int? numberOfRooms,
+    int? numberOfPassengers,
+    String? origin,
+    String? destination,
+    String? startDate,
+    String? endDate,
+    String? travelClass,
+    Map<String, Object>? parameters,
+    _i19.AnalyticsCallOptions? callOptions,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #logSearch,
+          [],
+          {
+            #searchTerm: searchTerm,
+            #numberOfNights: numberOfNights,
+            #numberOfRooms: numberOfRooms,
+            #numberOfPassengers: numberOfPassengers,
+            #origin: origin,
+            #destination: destination,
+            #startDate: startDate,
+            #endDate: endDate,
+            #travelClass: travelClass,
+            #parameters: parameters,
+            #callOptions: callOptions,
+          },
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<void> logSelectContent({
+    required String? contentType,
+    required String? itemId,
+    Map<String, Object>? parameters,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #logSelectContent,
+          [],
+          {
+            #contentType: contentType,
+            #itemId: itemId,
+            #parameters: parameters,
+          },
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<void> logShare({
+    required String? contentType,
+    required String? itemId,
+    required String? method,
+    Map<String, Object>? parameters,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #logShare,
+          [],
+          {
+            #contentType: contentType,
+            #itemId: itemId,
+            #method: method,
+            #parameters: parameters,
+          },
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<void> logSignUp({
+    required String? signUpMethod,
+    Map<String, Object>? parameters,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #logSignUp,
+          [],
+          {
+            #signUpMethod: signUpMethod,
+            #parameters: parameters,
+          },
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<void> logSpendVirtualCurrency({
+    required String? itemName,
+    required String? virtualCurrencyName,
+    required num? value,
+    Map<String, Object>? parameters,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #logSpendVirtualCurrency,
+          [],
+          {
+            #itemName: itemName,
+            #virtualCurrencyName: virtualCurrencyName,
+            #value: value,
+            #parameters: parameters,
+          },
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<void> logTutorialBegin({Map<String, Object>? parameters}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #logTutorialBegin,
+          [],
+          {#parameters: parameters},
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<void> logTutorialComplete({Map<String, Object>? parameters}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #logTutorialComplete,
+          [],
+          {#parameters: parameters},
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<void> logUnlockAchievement({
+    required String? id,
+    Map<String, Object>? parameters,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #logUnlockAchievement,
+          [],
+          {
+            #id: id,
+            #parameters: parameters,
+          },
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<void> logViewItem({
+    String? currency,
+    double? value,
+    List<_i19.AnalyticsEventItem>? items,
+    Map<String, Object>? parameters,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #logViewItem,
+          [],
+          {
+            #currency: currency,
+            #value: value,
+            #items: items,
+            #parameters: parameters,
+          },
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<void> logViewItemList({
+    List<_i19.AnalyticsEventItem>? items,
+    String? itemListId,
+    String? itemListName,
+    Map<String, Object>? parameters,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #logViewItemList,
+          [],
+          {
+            #items: items,
+            #itemListId: itemListId,
+            #itemListName: itemListName,
+            #parameters: parameters,
+          },
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<void> logViewPromotion({
+    String? creativeName,
+    String? creativeSlot,
+    List<_i19.AnalyticsEventItem>? items,
+    String? locationId,
+    String? promotionId,
+    String? promotionName,
+    Map<String, Object>? parameters,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #logViewPromotion,
+          [],
+          {
+            #creativeName: creativeName,
+            #creativeSlot: creativeSlot,
+            #items: items,
+            #locationId: locationId,
+            #promotionId: promotionId,
+            #promotionName: promotionName,
+            #parameters: parameters,
+          },
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<void> logViewSearchResults({
+    required String? searchTerm,
+    Map<String, Object>? parameters,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #logViewSearchResults,
+          [],
+          {
+            #searchTerm: searchTerm,
+            #parameters: parameters,
+          },
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<void> logRefund({
+    String? currency,
+    String? coupon,
+    double? value,
+    double? tax,
+    double? shipping,
+    String? transactionId,
+    String? affiliation,
+    List<_i19.AnalyticsEventItem>? items,
+    Map<String, Object>? parameters,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #logRefund,
+          [],
+          {
+            #currency: currency,
+            #coupon: coupon,
+            #value: value,
+            #tax: tax,
+            #shipping: shipping,
+            #transactionId: transactionId,
+            #affiliation: affiliation,
+            #items: items,
+            #parameters: parameters,
+          },
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<void> setSessionTimeoutDuration(Duration? timeout) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #setSessionTimeoutDuration,
+          [timeout],
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<void> initiateOnDeviceConversionMeasurementWithEmailAddress(
+          String? emailAddress) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #initiateOnDeviceConversionMeasurementWithEmailAddress,
+          [emailAddress],
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<void> initiateOnDeviceConversionMeasurementWithPhoneNumber(
+          String? phoneNumber) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #initiateOnDeviceConversionMeasurementWithPhoneNumber,
+          [phoneNumber],
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<void> initiateOnDeviceConversionMeasurementWithHashedEmailAddress(
+          String? hashedEmailAddress) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #initiateOnDeviceConversionMeasurementWithHashedEmailAddress,
+          [hashedEmailAddress],
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<void> initiateOnDeviceConversionMeasurementWithHashedPhoneNumber(
+          String? hashedPhoneNumber) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #initiateOnDeviceConversionMeasurementWithHashedPhoneNumber,
+          [hashedPhoneNumber],
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
 }

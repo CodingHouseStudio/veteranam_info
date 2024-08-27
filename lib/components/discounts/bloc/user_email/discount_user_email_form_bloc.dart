@@ -16,8 +16,10 @@ class DiscountUserEmailFormBloc
   DiscountUserEmailFormBloc({
     required IDiscountRepository discountRepository,
     required IAppAuthenticationRepository appAuthenticationRepository,
+    required FirebaseAnalyticsService firebaseAnalyticsService,
   })  : _discountRepository = discountRepository,
         _appAuthenticationRepository = appAuthenticationRepository,
+        _firebaseAnalyticsService = firebaseAnalyticsService,
         super(
           const _Initial(
             email: EmailFieldModel.pure(),
@@ -30,6 +32,7 @@ class DiscountUserEmailFormBloc
   }
   final IDiscountRepository _discountRepository;
   final IAppAuthenticationRepository _appAuthenticationRepository;
+  final FirebaseAnalyticsService _firebaseAnalyticsService;
 
   void _onUpdatEmail(
     _UpdateEmail event,
@@ -62,13 +65,15 @@ class DiscountUserEmailFormBloc
     );
 
     emit(
-      state.copyWith(
-        // email: EmailFieldModel.pure(),
+      const _Initial(
+        email: EmailFieldModel.pure(),
         formState: EmailEnum.success,
       ),
     );
 
     unawaited(_discountRepository.sendEmail(discountUserEmailFormModel));
+
+    _firebaseAnalyticsService.addEvent(name: 'discount_email_acquire');
   }
 
   void _onSendEmailAfterClose(
@@ -91,5 +96,7 @@ class DiscountUserEmailFormBloc
     );
 
     unawaited(_discountRepository.sendEmail(discountUserEmailFormModel));
+
+    _firebaseAnalyticsService.addEvent(name: 'discount_email_abandon');
   }
 }
