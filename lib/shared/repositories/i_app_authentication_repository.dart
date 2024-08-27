@@ -35,5 +35,7 @@ abstract class IAppAuthenticationRepository {
 
   Future<Either<SomeFailure, bool>> deleteUser();
 
-  Future<Either<SomeFailure, bool>> updateUserSetting(UserSetting userSetting);
+  Future<Either<SomeFailure, bool>> updateUserSetting(
+    UserSetting userSetting,
+  );
 }
