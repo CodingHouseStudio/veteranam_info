@@ -20,6 +20,7 @@ void main() {
     late IAppAuthenticationRepository mockAppAuthenticationRepository;
     late IReportRepository mockReportRepository;
     late AuthenticationRepository mockAuthenticationRepository;
+    late FirebaseAnalyticsService mockFirebaseAnalyticsService;
     setUp(() {
       KTest.testIsWeb = false;
       KPlatformConstants.isWebDesktop = true;
@@ -29,6 +30,7 @@ void main() {
       mockDiscountRepository = MockIDiscountRepository();
       mockAppAuthenticationRepository = MockAppAuthenticationRepository();
       mockAuthenticationRepository = MockAuthenticationRepository();
+      mockFirebaseAnalyticsService = MockFirebaseAnalyticsService();
 
       when(mockAuthenticationRepository.currentUser).thenAnswer(
         (realInvocation) => User.empty,
@@ -83,6 +85,7 @@ void main() {
         mockAppAuthenticationRepository: mockAppAuthenticationRepository,
         mockReportRepository: mockReportRepository,
         mockAuthenticationRepository: mockAuthenticationRepository,
+        mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
       );
 
       await discountsInitialHelper(tester);
@@ -99,6 +102,7 @@ void main() {
           mockAppAuthenticationRepository: mockAppAuthenticationRepository,
           mockReportRepository: mockReportRepository,
           mockAuthenticationRepository: mockAuthenticationRepository,
+          mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
         );
 
         await discountsInitialHelper(tester);
@@ -112,6 +116,7 @@ void main() {
             mockAppAuthenticationRepository: mockAppAuthenticationRepository,
             mockReportRepository: mockReportRepository,
             mockAuthenticationRepository: mockAuthenticationRepository,
+            mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
           );
 
           await mobNavigationButtonsHelper(
