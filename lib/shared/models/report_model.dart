@@ -5,21 +5,19 @@ import 'package:veteranam/l10n/l10n.dart';
 part 'report_model.freezed.dart';
 part 'report_model.g.dart';
 
+enum ReportStatus {
+  isNew,
+  critical,
+  resolved,
+  // ideas,
+}
+
 enum ReasonComplaint {
   fraudOrSpam,
   fakeNewsOrDisinformation,
   offensiveOrHatefulContent,
-  other,
-}
+  other;
 
-enum CardEnum {
-  funds,
-  discount,
-  information,
-  story,
-}
-
-extension ReasonComplaintText on ReasonComplaint {
   String toText(BuildContext context) {
     switch (this) {
       case ReasonComplaint.fakeNewsOrDisinformation:
@@ -34,6 +32,13 @@ extension ReasonComplaintText on ReasonComplaint {
   }
 }
 
+enum CardEnum {
+  funds,
+  discount,
+  information,
+  story,
+}
+
 @freezed
 class ReportModel with _$ReportModel {
   const factory ReportModel({
@@ -45,6 +50,7 @@ class ReportModel with _$ReportModel {
     required CardEnum card,
     required String userId,
     required String cardId,
+    @Default(ReportStatus.isNew) ReportStatus status,
   }) = _ReportModel;
 
   factory ReportModel.fromJson(Map<String, dynamic> json) =>
@@ -60,4 +66,5 @@ abstract class ReportModelJsonField {
   static const card = 'card';
   static const userId = 'userId';
   static const cardId = 'cardId';
+  static const status = 'status';
 }
