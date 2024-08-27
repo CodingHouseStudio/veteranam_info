@@ -15,6 +15,10 @@ ThemeData themeData = ThemeData(
     onError: AppColors.materialThemeWhite,
     brightness: Brightness.light,
   ),
+  bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+    selectedItemColor: AppColors.materialThemeKeyColorsSecondary,
+    unselectedItemColor: AppColors.materialThemeKeyColorsSecondary,
+  ),
   tooltipTheme: const TooltipThemeData(
     preferBelow: false,
   ),
