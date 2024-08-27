@@ -62,8 +62,8 @@ class DiscountUserEmailFormBloc
     );
 
     emit(
-      const _Initial(
-        email: EmailFieldModel.pure(),
+      state.copyWith(
+        // email: EmailFieldModel.pure(),
         formState: EmailEnum.success,
       ),
     );
@@ -78,7 +78,7 @@ class DiscountUserEmailFormBloc
     emit(
       const _Initial(
         email: EmailFieldModel.pure(),
-        formState: EmailEnum.success,
+        formState: EmailEnum.close,
       ),
     );
 

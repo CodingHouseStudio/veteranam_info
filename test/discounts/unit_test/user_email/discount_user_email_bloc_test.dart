@@ -63,8 +63,8 @@ void main() {
           email: EmailFieldModel.dirty(KTestText.emailModel.email),
           formState: EmailEnum.inProgress,
         ),
-        const DiscountUserEmailFormState(
-          email: EmailFieldModel.pure(),
+        DiscountUserEmailFormState(
+          email: EmailFieldModel.dirty(KTestText.emailModel.email),
           formState: EmailEnum.success,
         ),
       ],
@@ -88,7 +88,7 @@ void main() {
         ),
         const DiscountUserEmailFormState(
           email: EmailFieldModel.pure(),
-          formState: EmailEnum.success,
+          formState: EmailEnum.close,
         ),
       ],
     );
@@ -109,8 +109,8 @@ void main() {
           email: EmailFieldModel.dirty(KTestText.emailModelWrong.email),
           formState: EmailEnum.inProgress,
         ),
-        const DiscountUserEmailFormState(
-          email: EmailFieldModel.pure(),
+        DiscountUserEmailFormState(
+          email: EmailFieldModel.dirty(KTestText.emailModelWrong.email),
           formState: EmailEnum.success,
         ),
       ],
