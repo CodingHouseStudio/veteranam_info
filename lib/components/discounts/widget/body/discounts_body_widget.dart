@@ -54,10 +54,6 @@ class DiscountBodyWidget extends StatelessWidget {
                   titleChildWidgetsFunction: ({required isDesk}) => [
                     KSizedBox.kHeightSizedBox24,
                     if (KTest.testIsWeb) ...[
-                      // ArtifactDownloadHelper<DiscountModel>(
-                      //   items: _.discountModelItems,
-                      //   getImageModel: (model) => model.userPhoto,
-                      // ),
                       TitlePointWidget(
                         title: context.l10n.specialOffers,
                         titleKey: KWidgetkeys.screen.discounts.title,
