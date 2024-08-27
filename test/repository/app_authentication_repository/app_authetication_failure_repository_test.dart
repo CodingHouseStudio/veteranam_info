@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -23,6 +24,7 @@ void main() {
     late firebase_auth.UserCredential mockUserCredential;
     late FirestoreService mockFirestoreService;
     late GoogleSignInAccount mockGoogleSignInAccount;
+    late FirebaseMessaging mockFirebaseMessaging;
     late firebase_auth.User mockUser;
     setUp(() {
       mockSecureStorageRepository = MockIStorage();
@@ -34,6 +36,7 @@ void main() {
       mockUserCredential = MockUserCredential();
       mockFirestoreService = MockFirestoreService();
       mockUser = MockUser();
+      mockFirebaseMessaging = MockFirebaseMessaging();
 
       when(
         mockCache.read<User>(
@@ -131,6 +134,7 @@ void main() {
         mockFirebaseAuth,
         mockGoogleSignIn,
         mockCache,
+        mockFirebaseMessaging,
       )
         ..isWeb = true
         ..googleAuthProvider = mockGoogleAuthProvider;

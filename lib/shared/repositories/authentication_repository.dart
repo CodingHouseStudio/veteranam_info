@@ -38,7 +38,8 @@ class AuthenticationRepository {
     _userSubscription ??=
         iAppAuthenticationRepository.user.listen((currentUser) {
       if (currentUser.isNotEmpty) {
-        if (currentUserSetting.id != currentUser.id) {
+        if (currentUserSetting.id != currentUser.id &&
+            _userSettingSubscription != null) {
           _userSettingSubscription?.cancel();
           _userSettingSubscription = null;
         }
@@ -61,7 +62,7 @@ class AuthenticationRepository {
         );
         return;
       }
-      _logInAnonymously();
+      unawaited(_logInAnonymously());
       _userSettingSubscription?.cancel();
       _userSettingSubscription = null;
     });
