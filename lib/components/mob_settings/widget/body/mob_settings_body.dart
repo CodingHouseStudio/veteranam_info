@@ -69,6 +69,11 @@ class MobSettingsBodyWidget extends StatelessWidget {
                 text: context.l10n.mobOfflineHint,
                 duration: const Duration(seconds: 8),
                 verticalOffset: KSize.kPixel40,
+                padding: const EdgeInsets.only(
+                  bottom: KPadding.kPaddingSize24,
+                  right: KPadding.kPaddingSize12,
+                  left: KPadding.kPaddingSize12,
+                ),
               ),
               const Spacer(),
               BlocBuilder<MobOfflineModeCubit, MobMode>(
@@ -91,7 +96,7 @@ class MobSettingsBodyWidget extends StatelessWidget {
         ),
         Padding(
           padding: const EdgeInsets.symmetric(
-            horizontal: KPadding.kPaddingSize10,
+            horizontal: KPadding.kPaddingSize8,
           ),
           child: TextButton(
             onPressed: () => context.read<UrlCubit>().copy(

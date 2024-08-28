@@ -5,6 +5,7 @@ class TooltipWidget extends StatelessWidget {
   const TooltipWidget({
     required this.text,
     required this.duration,
+    required this.padding,
     super.key,
     this.verticalOffset,
     this.margin,
@@ -13,11 +14,13 @@ class TooltipWidget extends StatelessWidget {
   final Duration duration;
   final double? verticalOffset;
   final double? margin;
+  final EdgeInsets padding;
 
   @override
   Widget build(BuildContext context) {
     return Tooltip(
       message: text,
+      triggerMode: TooltipTriggerMode.tap,
       waitDuration: const Duration(milliseconds: 100),
       showDuration: duration,
       preferBelow: true,
@@ -29,7 +32,10 @@ class TooltipWidget extends StatelessWidget {
       padding: const EdgeInsets.all(
         KPadding.kPaddingSize16,
       ),
-      child: KIcon.info,
+      child: Padding(
+        padding: padding,
+        child: KIcon.info,
+      ),
     );
   }
 }

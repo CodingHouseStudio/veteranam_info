@@ -18,8 +18,8 @@ class MobFeedbackWidget extends StatelessWidget {
           key: KWidgetkeys.widget.mobFeedback.widget,
           padding: const EdgeInsets.all(KPadding.kPaddingSize16),
           children: [
-            KSizedBox.kHeightSizedBox8,
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Expanded(
                   child: Text(
@@ -33,6 +33,9 @@ class MobFeedbackWidget extends StatelessWidget {
                   text: context.l10n.mobFeedbackHint,
                   duration: const Duration(seconds: 15),
                   margin: KPadding.kPaddingSize12,
+                  padding: const EdgeInsets.all(
+                    KPadding.kPaddingSize12,
+                  ),
                 ),
               ],
             ),
@@ -52,21 +55,22 @@ class MobFeedbackWidget extends StatelessWidget {
             KSizedBox.kHeightSizedBox16,
             // if (widget.scrollController != null)
             //   const FeedbackSheetDragHandle(),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: TextButton(
-                key: KWidgetkeys.widget.mobFeedback.button,
-                style: KButtonStyles.filterButtonStyleBorderWhite,
-                child: Text(
-                  context.l10n.send,
-                  style: AppTextStyle.materialThemeBodyMedium.copyWith(
-                    color: AppColors.materialThemeKeyColorsSecondary,
-                  ),
-                ),
-                onPressed: () => onSubmit(
-                  _.message.value,
-                ), //() => widget.onSubmit(controller.text),
-              ),
+            DoubleButtonWidget(
+              widgetKey: KWidgetkeys.widget.mobFeedback.button,
+              text: context.l10n.send,
+              color: AppColors.materialThemeBlack,
+              textColor: AppColors.materialThemeWhite,
+              isDesk: false, mobVerticalTextPadding: KPadding.kPaddingSize12,
+              mobIconPadding: KPadding.kPaddingSize12,
+              mobHorizontalTextPadding: KPadding.kPaddingSize64,
+
+              onPressed: () => _.message.isValid
+                  ? onSubmit(
+                      _.message.value,
+                    )
+                  : context.read<MobFeedbackBloc>().add(
+                        const MobFeedbackEvent.send(null),
+                      ), //() => widget.onSubmit(controller.text),
             ),
           ],
         );

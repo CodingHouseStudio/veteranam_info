@@ -19,7 +19,7 @@ Future<void> mobFeedbackHelper(
     findsOneWidget,
   );
 
-  await tester.longPress(
+  await tester.tap(
     find.byKey(KWidgetkeys.widget.mobFeedback.icon),
     warnIfMissed: false,
   );

@@ -41,9 +41,9 @@ Future<void> mobSettingsInitialHelper(
     findsOneWidget,
   );
 
-  await tester.longPress(
+  await tester.tap(
     find.byKey(KWidgetkeys.screen.mobSettings.offlinesIcon),
-    warnIfMissed: false,
+    // warnIfMissed: false,
   );
 
   await tester.pumpAndSettle(const Duration(seconds: 15));
