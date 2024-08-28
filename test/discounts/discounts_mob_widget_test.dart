@@ -21,6 +21,7 @@ void main() {
     late IReportRepository mockReportRepository;
     late AuthenticationRepository mockAuthenticationRepository;
     late FirebaseAnalyticsService mockFirebaseAnalyticsService;
+    late FirebaseRemoteConfigProvider mockFirebaseRemoteConfigProvider;
     setUp(() {
       KTest.testIsWeb = false;
       KPlatformConstants.isWebDesktop = true;
@@ -31,6 +32,7 @@ void main() {
       mockAppAuthenticationRepository = MockAppAuthenticationRepository();
       mockAuthenticationRepository = MockAuthenticationRepository();
       mockFirebaseAnalyticsService = MockFirebaseAnalyticsService();
+      mockFirebaseRemoteConfigProvider = MockFirebaseRemoteConfigProvider();
 
       when(mockAuthenticationRepository.currentUser).thenAnswer(
         (realInvocation) => User.empty,
@@ -84,6 +86,7 @@ void main() {
         mockDiscountRepository: mockDiscountRepository,
         mockAppAuthenticationRepository: mockAppAuthenticationRepository,
         mockReportRepository: mockReportRepository,
+        mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
         mockAuthenticationRepository: mockAuthenticationRepository,
         mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
       );
@@ -100,6 +103,7 @@ void main() {
           mockDiscountRepository: mockDiscountRepository,
           mockGoRouter: mockGoRouter,
           mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
           mockReportRepository: mockReportRepository,
           mockAuthenticationRepository: mockAuthenticationRepository,
           mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
@@ -114,6 +118,7 @@ void main() {
             mockDiscountRepository: mockDiscountRepository,
             mockGoRouter: mockGoRouter,
             mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+            mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
             mockReportRepository: mockReportRepository,
             mockAuthenticationRepository: mockAuthenticationRepository,
             mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,

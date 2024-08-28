@@ -4,5 +4,5 @@ import 'package:injectable/injectable.dart';
 @module
 abstract class AnalytucsModule {
   @singleton
-  FirebaseAnalytics get firebaseAuth => FirebaseAnalytics.instance;
+  FirebaseAnalytics get firebaseAnalytics => FirebaseAnalytics.instance;
 }

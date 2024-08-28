@@ -107,10 +107,24 @@ void main() {
             KTestText.emailModelWrong.email,
           ),
         )
+        ..add(const DiscountUserEmailFormEvent.sendEmail())
+        ..add(
+          DiscountUserEmailFormEvent.updatedEmail(
+            KTestText.emailModel.email,
+          ),
+        )
         ..add(const DiscountUserEmailFormEvent.sendEmail()),
       expect: () async => [
         DiscountUserEmailFormState(
           email: EmailFieldModel.dirty(KTestText.emailModelWrong.email),
+          formState: EmailEnum.inProgress,
+        ),
+        DiscountUserEmailFormState(
+          email: EmailFieldModel.dirty(KTestText.emailModelWrong.email),
+          formState: EmailEnum.invalidData,
+        ),
+        DiscountUserEmailFormState(
+          email: EmailFieldModel.dirty(KTestText.emailModel.email),
           formState: EmailEnum.inProgress,
         ),
         const DiscountUserEmailFormState(
