@@ -121,7 +121,7 @@ class _NetworkImageWidgetState extends State<NetworkImageWidget> {
     // widget.size == null
     // ?
     final quality = widget.highQuality ?? false ? '100' : '85';
-    const format = 'auto';
+    final format = KPlatformConstants.isWebSaffari ? 'jpeg' : 'auto';
     return '/cdn-cgi/image/quality=$quality,format=$format/';
   }
   // : '/cdn-cgi/image/${kIsWeb ? 'quality=100' : 'quality=85'}'
