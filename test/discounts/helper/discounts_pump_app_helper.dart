@@ -12,6 +12,7 @@ Future<void> discountsPumpAppHelper({
   required IReportRepository mockReportRepository,
   required AuthenticationRepository mockAuthenticationRepository,
   required FirebaseAnalyticsService mockFirebaseAnalyticsService,
+  required FirebaseRemoteConfigProvider mockFirebaseRemoteConfigProvider,
   MockGoRouter? mockGoRouter,
 }) async {
   _registerReportBloc(
@@ -42,6 +43,7 @@ Future<void> discountsPumpAppHelper({
   _registerDiscountUserEmailCubit(
     mockDiscountRepository: mockDiscountRepository,
     mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+    mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
   );
   _registerAdvancedFilterMobCubit();
 
@@ -149,10 +151,12 @@ void _registerDiscountUserEmailFormBloc({
 void _registerDiscountUserEmailCubit({
   required IDiscountRepository mockDiscountRepository,
   required IAppAuthenticationRepository mockAppAuthenticationRepository,
+  required FirebaseRemoteConfigProvider mockFirebaseRemoteConfigProvider,
 }) {
   final authenticationBloc = DiscountUserEmailCubit(
     discountRepository: mockDiscountRepository,
     appAuthenticationRepository: mockAppAuthenticationRepository,
+    firebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
   );
   if (GetIt.I.isRegistered<DiscountUserEmailCubit>()) {
     GetIt.I.unregister<DiscountUserEmailCubit>();

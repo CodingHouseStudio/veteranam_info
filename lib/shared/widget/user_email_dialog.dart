@@ -166,6 +166,7 @@ class UserEmailDialog extends StatelessWidget {
         showErrorText:
             context.read<DiscountUserEmailFormBloc>().state.formState ==
                 EmailEnum.invalidData,
+        inputFormatterList: [EmailInputFormatter()],
       );
   Widget button(BuildContext context) => DoubleButtonWidget(
         text: context.l10n.send,

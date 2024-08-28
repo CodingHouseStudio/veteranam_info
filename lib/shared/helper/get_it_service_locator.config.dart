@@ -11,6 +11,7 @@
 import 'package:connectivity_plus/connectivity_plus.dart' as _i895;
 import 'package:firebase_analytics/firebase_analytics.dart' as _i398;
 import 'package:firebase_auth/firebase_auth.dart' as _i59;
+import 'package:firebase_remote_config/firebase_remote_config.dart' as _i627;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:google_sign_in/google_sign_in.dart' as _i116;
 import 'package:injectable/injectable.dart' as _i526;
@@ -70,8 +71,12 @@ import 'package:veteranam/shared/data_provider/analytics_module.dart' as _i606;
 import 'package:veteranam/shared/data_provider/cache_provider.dart' as _i37;
 import 'package:veteranam/shared/data_provider/firebase_analytics_provider.dart'
     as _i777;
+import 'package:veteranam/shared/data_provider/firebase_remote_config_provider.dart'
+    as _i187;
 import 'package:veteranam/shared/data_provider/firestore_provider.dart'
     as _i1033;
+import 'package:veteranam/shared/data_provider/remote_config_module.dart'
+    as _i769;
 import 'package:veteranam/shared/data_provider/storage_provider.dart' as _i99;
 import 'package:veteranam/shared/repositories/app_authentication_repository.dart'
     as _i99;
@@ -113,6 +118,7 @@ extension GetItInjectableX on _i174.GetIt {
       environmentFilter,
     );
     final analytucsModule = _$AnalytucsModule();
+    final remoteConfigModule = _$RemoteConfigModule();
     final firebaseModule = _$FirebaseModule();
     final networkModule = _$NetworkModule();
     gh.factory<_i37.CacheClient>(() => _i37.CacheClient());
@@ -120,7 +126,10 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i1033.FirestoreService(gh<_i1001.CacheClient>()));
     gh.factory<_i189.AdvancedFilterMobCubit>(
         () => _i189.AdvancedFilterMobCubit());
-    gh.singleton<_i398.FirebaseAnalytics>(() => analytucsModule.firebaseAuth);
+    gh.singleton<_i398.FirebaseAnalytics>(
+        () => analytucsModule.firebaseAnalytics);
+    gh.singleton<_i627.FirebaseRemoteConfig>(
+        () => remoteConfigModule.firebaseRemoteConfig);
     gh.singleton<_i99.StorageService>(() => _i99.StorageService());
     gh.singleton<_i59.FirebaseAuth>(() => firebaseModule.firebaseAuth);
     gh.singleton<_i116.GoogleSignIn>(() => firebaseModule.googleSignIn);
@@ -176,11 +185,6 @@ extension GetItInjectableX on _i174.GetIt {
           appAuthenticationRepository:
               gh<_i1001.IAppAuthenticationRepository>(),
         ));
-    gh.factory<_i432.DiscountUserEmailCubit>(() => _i432.DiscountUserEmailCubit(
-          discountRepository: gh<_i1001.IDiscountRepository>(),
-          appAuthenticationRepository:
-              gh<_i1001.IAppAuthenticationRepository>(),
-        ));
     gh.factory<_i334.DiscountCardWatcherBloc>(() =>
         _i334.DiscountCardWatcherBloc(
             discountRepository: gh<_i1001.IDiscountRepository>()));
@@ -207,6 +211,8 @@ extension GetItInjectableX on _i174.GetIt {
       ),
       registerFor: {_development},
     );
+    gh.singleton<_i187.FirebaseRemoteConfigProvider>(() =>
+        _i187.FirebaseRemoteConfigProvider(gh<_i627.FirebaseRemoteConfig>()));
     gh.factory<_i1026.FeedbackBloc>(() => _i1026.FeedbackBloc(
           feedbackRepository: gh<_i1001.IFeedbackRepository>(),
           appAuthenticationRepository:
@@ -277,6 +283,13 @@ extension GetItInjectableX on _i174.GetIt {
         ));
     gh.singleton<_i997.NetworkRepository>(
         () => _i997.NetworkRepository(gh<_i1001.IAppNetworkRepository>()));
+    gh.factory<_i432.DiscountUserEmailCubit>(() => _i432.DiscountUserEmailCubit(
+          discountRepository: gh<_i1001.IDiscountRepository>(),
+          appAuthenticationRepository:
+              gh<_i1001.IAppAuthenticationRepository>(),
+          firebaseRemoteConfigProvider:
+              gh<_i1001.FirebaseRemoteConfigProvider>(),
+        ));
     gh.factory<_i716.StoryAddBloc>(
       () => _i716.StoryAddBloc(
         storyRepository: gh<_i1001.IStoryRepository>(),
@@ -309,6 +322,8 @@ extension GetItInjectableX on _i174.GetIt {
 }
 
 class _$AnalytucsModule extends _i606.AnalytucsModule {}
+
+class _$RemoteConfigModule extends _i769.RemoteConfigModule {}
 
 class _$FirebaseModule extends _i926.FirebaseModule {}
 
