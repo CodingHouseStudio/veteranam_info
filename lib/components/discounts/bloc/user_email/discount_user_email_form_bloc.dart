@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:veteranam/components/components.dart';
 
 import 'package:veteranam/shared/shared.dart';
 
@@ -96,6 +97,11 @@ class DiscountUserEmailFormBloc
 
     unawaited(_discountRepository.sendEmail(discountUserEmailFormModel));
 
-    _firebaseAnalyticsService.addEvent(name: 'discount_email_abandon');
+    _firebaseAnalyticsService.addEvent(
+      name: event.userEmailEnum.name,
+      parameters: {
+        'count': event.count.toString(),
+      },
+    );
   }
 }

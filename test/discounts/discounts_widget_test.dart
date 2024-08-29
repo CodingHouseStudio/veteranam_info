@@ -63,7 +63,7 @@ void main() {
       );
       when(mockDiscountRepository.userCanSendUserEmail(KTestText.user.id))
           .thenAnswer(
-        (invocation) async => const Right(false),
+        (invocation) async => const Right(-1),
       );
     });
     group('${KGroupText.failure} ', () {
@@ -376,7 +376,7 @@ void main() {
               when(
                 mockDiscountRepository.userCanSendUserEmail(KTestText.user.id),
               ).thenAnswer(
-                (invocation) async => const Right(true),
+                (invocation) async => const Right(0),
               );
             },
           );
@@ -499,6 +499,39 @@ void main() {
                 showEmailDialog: true,
               );
             });
+          });
+        });
+        group('User email dialog', () {
+          setUp(
+            () {
+              when(
+                mockDiscountRepository.userCanSendUserEmail(KTestText.user.id),
+              ).thenAnswer(
+                (invocation) async => const Right(4),
+              );
+            },
+          );
+          testWidgets('User email dialog', (tester) async {
+            await discountsPumpAppHelper(
+              tester: tester,
+              mockDiscountRepository: mockDiscountRepository,
+              mockGoRouter: mockGoRouter,
+              mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+              mockFirebaseRemoteConfigProvider:
+                  mockFirebaseRemoteConfigProvider,
+              mockReportRepository: mockReportRepository,
+              mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
+              mockAuthenticationRepository: mockAuthenticationRepository,
+            );
+
+            await discountsScrollHelper(
+              tester: tester,
+              test: (tester) async => userEmailCloseDelayHelper(
+                tester: tester,
+                mockGoRouter: mockGoRouter,
+              ),
+              showEmailDialog: true,
+            );
           });
         });
       });

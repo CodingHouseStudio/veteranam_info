@@ -84,7 +84,12 @@ void main() {
             KTestText.emailModel.email,
           ),
         )
-        ..add(const DiscountUserEmailFormEvent.sendEmailAfterClose()),
+        ..add(
+          const DiscountUserEmailFormEvent.sendEmailAfterClose(
+            userEmailEnum: UserEmailEnum.discountEmailAbandonRepeat,
+            count: 5,
+          ),
+        ),
       expect: () async => [
         DiscountUserEmailFormState(
           email: EmailFieldModel.dirty(KTestText.emailModel.email),

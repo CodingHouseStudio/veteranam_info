@@ -26,8 +26,12 @@ class FirebaseRemoteConfigProvider {
   }
 
   int getInt(String key) {
-    return _firebaseRemoteConfig.getInt(
-      key,
-    );
+    try {
+      return _firebaseRemoteConfig.getInt(
+        key,
+      );
+    } catch (e) {
+      return 0;
+    }
   }
 }
