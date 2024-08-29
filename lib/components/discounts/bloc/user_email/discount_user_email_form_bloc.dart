@@ -16,8 +16,10 @@ class DiscountUserEmailFormBloc
   DiscountUserEmailFormBloc({
     required IDiscountRepository discountRepository,
     required IAppAuthenticationRepository appAuthenticationRepository,
+    required FirebaseAnalyticsService firebaseAnalyticsService,
   })  : _discountRepository = discountRepository,
         _appAuthenticationRepository = appAuthenticationRepository,
+        _firebaseAnalyticsService = firebaseAnalyticsService,
         super(
           const _Initial(
             email: EmailFieldModel.pure(),
@@ -30,6 +32,7 @@ class DiscountUserEmailFormBloc
   }
   final IDiscountRepository _discountRepository;
   final IAppAuthenticationRepository _appAuthenticationRepository;
+  final FirebaseAnalyticsService _firebaseAnalyticsService;
 
   void _onUpdatEmail(
     _UpdateEmail event,
@@ -48,27 +51,28 @@ class DiscountUserEmailFormBloc
     _SendEmail event,
     Emitter<DiscountUserEmailFormState> emit,
   ) {
-    if (state.email.value.isEmpty) {
+    if (state.email.isValid) {
+      final discountUserEmailFormModel = EmailModel(
+        id: ExtendedDateTime.id,
+        userId: _appAuthenticationRepository.currentUser.id,
+        email: state.email.value,
+        date: ExtendedDateTime.current,
+        isValid: state.email.isValid,
+      );
+
+      emit(
+        const _Initial(
+          email: EmailFieldModel.pure(),
+          formState: EmailEnum.success,
+        ),
+      );
+
+      unawaited(_discountRepository.sendEmail(discountUserEmailFormModel));
+
+      _firebaseAnalyticsService.addEvent(name: 'discount_email_acquire');
+    } else {
       emit(state.copyWith(formState: EmailEnum.invalidData));
-      return;
     }
-
-    final discountUserEmailFormModel = EmailModel(
-      id: ExtendedDateTime.id,
-      userId: _appAuthenticationRepository.currentUser.id,
-      email: state.email.value,
-      date: ExtendedDateTime.current,
-      isValid: state.email.isValid,
-    );
-
-    emit(
-      const _Initial(
-        email: EmailFieldModel.pure(),
-        formState: EmailEnum.success,
-      ),
-    );
-
-    unawaited(_discountRepository.sendEmail(discountUserEmailFormModel));
   }
 
   void _onSendEmailAfterClose(
@@ -78,7 +82,7 @@ class DiscountUserEmailFormBloc
     emit(
       const _Initial(
         email: EmailFieldModel.pure(),
-        formState: EmailEnum.success,
+        formState: EmailEnum.close,
       ),
     );
 
@@ -91,5 +95,7 @@ class DiscountUserEmailFormBloc
     );
 
     unawaited(_discountRepository.sendEmail(discountUserEmailFormModel));
+
+    _firebaseAnalyticsService.addEvent(name: 'discount_email_abandon');
   }
 }

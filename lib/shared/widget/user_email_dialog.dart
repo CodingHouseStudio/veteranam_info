@@ -1,3 +1,4 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -21,7 +22,20 @@ class UserEmailDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<DiscountUserEmailFormBloc, DiscountUserEmailFormState>(
       listener: (context, state) {
-        if (state.formState == EmailEnum.success) {
+        if (state.formState == EmailEnum.success ||
+            state.formState == EmailEnum.close) {
+          if (state.formState == EmailEnum.close) {
+            FirebaseAnalytics.instance.releaseLogEvent(
+              name: 'discount_email_abandon',
+            );
+          } else {
+            FirebaseAnalytics.instance.releaseLogEvent(
+              name: 'discount_email_acquire',
+              parameters: {
+                'isValid': '${state.email.isValid}',
+              },
+            );
+          }
           context.pop();
         }
       },
@@ -131,8 +145,8 @@ class UserEmailDialog extends StatelessWidget {
   }
 
   String _text(BuildContext context) {
-    return context.l10n.aboutNewDiscountsSubtitle +
-        (KTest.testIsWeb ? ')' : '😀');
+    return '${context.l10n.aboutNewDiscountsSubtitle}'
+        '${KTest.testIsWeb ? ')' : '😀'}';
   }
 
   Widget field(
@@ -152,6 +166,7 @@ class UserEmailDialog extends StatelessWidget {
         showErrorText:
             context.read<DiscountUserEmailFormBloc>().state.formState ==
                 EmailEnum.invalidData,
+        inputFormatterList: [EmailInputFormatter()],
       );
   Widget button(BuildContext context) => DoubleButtonWidget(
         text: context.l10n.send,

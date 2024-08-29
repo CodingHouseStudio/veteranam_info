@@ -11,7 +11,7 @@ Future<void> userEmailWrongHelper({
 
   await userEmailSaveHelper(tester: tester, email: KTestText.field);
 
-  verify(
+  verifyNever(
     () => mockGoRouter.pop(),
-  ).called(1);
+  );
 }

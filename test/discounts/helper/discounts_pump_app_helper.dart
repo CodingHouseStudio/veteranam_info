@@ -11,6 +11,8 @@ Future<void> discountsPumpAppHelper({
   required IAppAuthenticationRepository mockAppAuthenticationRepository,
   required IReportRepository mockReportRepository,
   required AuthenticationRepository mockAuthenticationRepository,
+  required FirebaseAnalyticsService mockFirebaseAnalyticsService,
+  required FirebaseRemoteConfigProvider mockFirebaseRemoteConfigProvider,
   MockGoRouter? mockGoRouter,
 }) async {
   _registerReportBloc(
@@ -36,10 +38,12 @@ Future<void> discountsPumpAppHelper({
   _registerDiscountUserEmailFormBloc(
     mockDiscountRepository: mockDiscountRepository,
     mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+    mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
   );
   _registerDiscountUserEmailCubit(
     mockDiscountRepository: mockDiscountRepository,
     mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+    mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
   );
   _registerAdvancedFilterMobCubit();
 
@@ -131,10 +135,12 @@ void _registerDiscountLinkCubit({
 void _registerDiscountUserEmailFormBloc({
   required IDiscountRepository mockDiscountRepository,
   required IAppAuthenticationRepository mockAppAuthenticationRepository,
+  required FirebaseAnalyticsService mockFirebaseAnalyticsService,
 }) {
   final authenticationBloc = DiscountUserEmailFormBloc(
     discountRepository: mockDiscountRepository,
     appAuthenticationRepository: mockAppAuthenticationRepository,
+    firebaseAnalyticsService: mockFirebaseAnalyticsService,
   );
   if (GetIt.I.isRegistered<DiscountUserEmailFormBloc>()) {
     GetIt.I.unregister<DiscountUserEmailFormBloc>();
@@ -145,10 +151,12 @@ void _registerDiscountUserEmailFormBloc({
 void _registerDiscountUserEmailCubit({
   required IDiscountRepository mockDiscountRepository,
   required IAppAuthenticationRepository mockAppAuthenticationRepository,
+  required FirebaseRemoteConfigProvider mockFirebaseRemoteConfigProvider,
 }) {
   final authenticationBloc = DiscountUserEmailCubit(
     discountRepository: mockDiscountRepository,
     appAuthenticationRepository: mockAppAuthenticationRepository,
+    firebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
   );
   if (GetIt.I.isRegistered<DiscountUserEmailCubit>()) {
     GetIt.I.unregister<DiscountUserEmailCubit>();

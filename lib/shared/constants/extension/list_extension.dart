@@ -111,17 +111,17 @@ extension ListExtensions<T> on List<T> {
   ///
   /// Returns:
   /// A list with items not matching any report card ID.
-  List<T> removeReportItems({
-    required List<ReportModel> reportItems,
-    required String Function(T item) checkFunction,
-  }) {
-    // Create a set of report card IDs for efficient lookup
-    final reportCardIds = reportItems.map((report) => report.cardId).toSet();
+  // List<T> removeReportItems({
+  //   required List<ReportModel> reportItems,
+  //   required String Function(T item) checkFunction,
+  // }) {
+  //   // Create a set of report card IDs for efficient lookup
+  //   final reportCardIds = reportItems.map((report) => report.cardId).toSet();
 
-    // Filter items that do not have a matching report card ID
-    return where((item) => !reportCardIds.contains(checkFunction(item)))
-        .toList();
-  }
+  //   // Filter items that do not have a matching report card ID
+  //   return where((item) => !reportCardIds.contains(checkFunction(item)))
+  //       .toList();
+  // }
 
   /// Method to check and modify list based on specific filter conditions.
   ///
