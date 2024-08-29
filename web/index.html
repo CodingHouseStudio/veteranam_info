@@ -239,6 +239,7 @@
   <script src="flutter_bootstrap.js" async>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', function () {
+        console.log("Firebase messaging initialized.");
         navigator.serviceWorker.register('firebase-messaging-sw.js', {
           scope: '/firebase-cloud-messaging-push-scope',
         });

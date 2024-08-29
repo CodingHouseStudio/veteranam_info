@@ -136,7 +136,8 @@ class AuthenticationRepository {
   }
 
   Future<Either<SomeFailure, bool>> _startCreateUserSetting(
-      String userId) async {
+    String userId,
+  ) async {
     final result =
         await iAppAuthenticationRepository.startCreateUserSetting(userId);
     return result.fold(

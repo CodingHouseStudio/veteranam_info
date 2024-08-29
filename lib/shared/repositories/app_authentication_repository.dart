@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:firebase_core/firebase_core.dart' as firebase_core;
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart'
     show kIsWeb, visibleForTesting; //debugPrint
 import 'package:get_it/get_it.dart';
@@ -29,7 +28,7 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   final GoogleSignIn _googleSignIn;
   final CacheClient _cache;
   final FirestoreService _firestoreService = GetIt.I.get<FirestoreService>();
-  final DeviceRepository _deviceRepository = GetIt.I.get<DeviceRepository>();
+  final IDeviceRepository _deviceRepository = GetIt.I.get<IDeviceRepository>();
 
   /// Whether or not the current environment is web
   /// Should only be overridden for testing purposes. Otherwise,
@@ -371,7 +370,7 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
         (r) {
           final userSetting = UserSetting(
             id: userId,
-            deviceSetting: r,
+            devicesSetting: (currentUserSetting.devicesSetting ?? [])..add(r),
           );
           return updateUserSetting(userSetting);
         },

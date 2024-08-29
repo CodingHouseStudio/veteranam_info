@@ -14,7 +14,9 @@ import 'package:dartz/dartz.dart' as _i2;
 import 'package:firebase_analytics/firebase_analytics.dart' as _i21;
 import 'package:firebase_auth/firebase_auth.dart' as _i4;
 import 'package:firebase_core/firebase_core.dart' as _i6;
-import 'package:firebase_messaging/firebase_messaging.dart' as _i17;
+import 'package:firebase_messaging/firebase_messaging.dart' as _i22;
+import 'package:firebase_messaging_platform_interface/firebase_messaging_platform_interface.dart'
+    as _i17;
 import 'package:firebase_remote_config/firebase_remote_config.dart' as _i16;
 import 'package:firebase_storage/firebase_storage.dart' as _i10;
 import 'package:firebase_storage_platform_interface/firebase_storage_platform_interface.dart'
@@ -11454,7 +11456,7 @@ class MockFirebaseRemoteConfig extends _i1.Mock
 /// A class which mocks [FirebaseMessaging].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockFirebaseMessaging extends _i1.Mock implements _i17.FirebaseMessaging {
+class MockFirebaseMessaging extends _i1.Mock implements _i22.FirebaseMessaging {
   @override
   _i6.FirebaseApp get app => (super.noSuchMethod(
         Invocation.getter(#app),
