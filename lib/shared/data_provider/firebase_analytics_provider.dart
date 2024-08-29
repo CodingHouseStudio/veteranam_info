@@ -34,18 +34,18 @@ class FirebaseAnalyticsService {
           ),
         );
       } catch (e) {
-        unawaited(
-          _firebaseAnalytics.setUserId(
-            id: User.empty.id,
-            callOptions: AnalyticsCallOptions(global: true),
-          ),
-        );
-        unawaited(
-          _firebaseAnalytics.setUserProperty(
-            name: 'Language',
-            value: UserSetting.empty.locale.text,
-          ),
-        );
+        // unawaited(
+        //   _firebaseAnalytics.setUserId(
+        //     id: User.empty.id,
+        //     callOptions: AnalyticsCallOptions(global: true),
+        //   ),
+        // );
+        // unawaited(
+        //   _firebaseAnalytics.setUserProperty(
+        //     name: 'Language',
+        //     value: UserSetting.empty.locale.text,
+        //   ),
+        // );
       }
     }
   }
