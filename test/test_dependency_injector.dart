@@ -35,11 +35,6 @@ void configureDependenciesTest() {
       CacheClient(),
     ),
   );
-  GetIt.I.registerSingleton<FirebaseAnalyticsService>(
-    FirebaseAnalyticsService(
-      GetIt.I.get<FirebaseAnalytics>(),
-    ),
-  );
   GetIt.I.registerSingleton<FirebaseRemoteConfigProvider>(
     FirebaseRemoteConfigProvider(
       GetIt.I.get<FirebaseRemoteConfig>(),
@@ -62,6 +57,12 @@ void configureDependenciesTest() {
   GetIt.I.registerSingleton<AuthenticationRepository>(
     AuthenticationRepository(
       GetIt.I.get<IAppAuthenticationRepository>(),
+    ),
+  );
+  GetIt.I.registerSingleton<FirebaseAnalyticsService>(
+    FirebaseAnalyticsService(
+      GetIt.I.get<FirebaseAnalytics>(),
+      GetIt.I.get<AuthenticationRepository>(),
     ),
   );
   GetIt.I.registerSingleton<IAppNetworkRepository>(
