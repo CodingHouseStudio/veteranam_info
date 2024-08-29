@@ -8,6 +8,7 @@ abstract class KDimensions {
   static const pageItems = 3;
 
   static const loadItems = 3;
+  static const linkScrollCount = 2;
   static const investorsLoadItems = 6;
 
   static const leftCardPaddingMultiply = 0.5;
@@ -28,6 +29,7 @@ abstract class KDimensions {
   static const maxLinkPerDay = 3;
 
   static const emailScrollCount = 2;
+  static const emailCloseDelay = 3;
 
   static const descriptionMobHideLength = 100;
   static const descriptionDeskHideLength = 200;

@@ -57,13 +57,6 @@ void main() {
         );
 
         when(
-          mockFirestoreService.getUserDiscountsEmail(
-            KTestText.user.id,
-          ),
-        ).thenAnswer(
-          (realInvocation) async => [KTestText.emailModel],
-        );
-        when(
           mockFirestoreService.sendEmail(
             KTestText.emailModel,
           ),
@@ -104,11 +97,46 @@ void main() {
           isA<Right<SomeFailure, bool>>().having((e) => e.value, 'value', true),
         );
       });
+
       test('User Can Send Email', () async {
+        ExtendedDateTime.current = null;
+        when(
+          mockFirestoreService.getUserDiscountsEmail(
+            KTestText.user.id,
+          ),
+        ).thenAnswer(
+          (realInvocation) async => [KTestText.emailModel],
+        );
         expect(
           await mockDiscountRepository.userCanSendUserEmail(KTestText.user.id),
-          isA<Right<SomeFailure, bool>>()
-              .having((e) => e.value, 'value', false),
+          isA<Right<SomeFailure, int>>().having((e) => e.value, 'value', -1),
+        );
+      });
+      test('User Can Send Email Wrong', () async {
+        ExtendedDateTime.current = null;
+        when(
+          mockFirestoreService.getUserDiscountsEmail(
+            KTestText.user.id,
+          ),
+        ).thenAnswer(
+          (realInvocation) async => [KTestText.emailModelWrong],
+        );
+        expect(
+          await mockDiscountRepository.userCanSendUserEmail(KTestText.user.id),
+          isA<Right<SomeFailure, int>>().having((e) => e.value, 'value', 1),
+        );
+      });
+      test('User Can Send Email Wrong, last sending was today', () async {
+        when(
+          mockFirestoreService.getUserDiscountsEmail(
+            KTestText.user.id,
+          ),
+        ).thenAnswer(
+          (realInvocation) async => [KTestText.emailModelWrong],
+        );
+        expect(
+          await mockDiscountRepository.userCanSendUserEmail(KTestText.user.id),
+          isA<Right<SomeFailure, int>>().having((e) => e.value, 'value', -1),
         );
       });
       test('Send Email', () async {
@@ -117,6 +145,7 @@ void main() {
           isA<Right<SomeFailure, bool>>().having((e) => e.value, 'value', true),
         );
       });
+
       test('Get Discount', () async {
         expect(
           await mockDiscountRepository
@@ -209,7 +238,7 @@ void main() {
       test('User Can Send Email', () async {
         expect(
           await mockDiscountRepository.userCanSendUserEmail(KTestText.user.id),
-          isA<Left<SomeFailure, bool>>().having(
+          isA<Left<SomeFailure, int>>().having(
             (e) => e.value,
             'value',
             equals(const SomeFailure.serverError()),
@@ -305,7 +334,7 @@ void main() {
       test('User Can Send Email', () async {
         expect(
           await mockDiscountRepository.userCanSendUserEmail(KTestText.user.id),
-          isA<Left<SomeFailure, bool>>().having(
+          isA<Left<SomeFailure, int>>().having(
             (e) => e.value,
             'value',
             equals(const SomeFailure.serverError()),

@@ -130,24 +130,24 @@ class DiscountRepository implements IDiscountRepository {
   }
 
   @override
-  Future<Either<SomeFailure, bool>> userCanSendUserEmail(
+  Future<Either<SomeFailure, int>> userCanSendUserEmail(
     String userId,
   ) async {
     try {
       final userEmails = await _firestoreService.getUserDiscountsEmail(userId);
-      if (userEmails.isEmpty) {
-        return const Right(true);
-      }
-      if (userEmails.any((element) => element.isValid)) {
-        return const Right(false);
-      }
-      // final oneDaysAgo =
-      //     ExtendedDateTime.current.subtract(const Duration(days: 0));
+      // if (userEmails.isEmpty) {
+      //   return const Right(true);
+      // }
+      final oneDaysAgo =
+          ExtendedDateTime.current.subtract(const Duration(days: 1));
 
-      // final canSendEmail =
-      //     userEmails.any((record) => record.date.isBefore(oneDaysAgo));
+      final userSentEmail =
+          userEmails.any((record) => record.date.isAfter(oneDaysAgo));
+      if (userEmails.any((element) => element.isValid) || userSentEmail) {
+        return const Right(-1);
+      }
 
-      return const Right(true);
+      return Right(userEmails.length);
     } on FirebaseException catch (e) {
       return Left(GetFailur.fromCode(e).status);
     } catch (e) {
