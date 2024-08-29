@@ -41,6 +41,8 @@ class ScaffoldAutoLoadingWidget extends StatefulWidget {
 
 class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
   late ScrollController _scrollController;
+  bool offline = false;
+  bool slow = false;
 
   @override
   void initState() {
@@ -49,12 +51,30 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
     if (!KPlatformConstants.isWebDesktop) {
       _scrollController.addListener(_onScroll);
     }
+    final initialState = context.read<NetworkCubit>().state;
+    _updateNetworkStatus(initialState);
+  }
+
+  void _updateNetworkStatus(NetworkStatus state) {
+    setState(() {
+      if (state == NetworkStatus.offline) {
+        offline = true;
+        slow = false;
+      } else if (state == NetworkStatus.slow) {
+        offline = false;
+        slow = true;
+      } else {
+        offline = false;
+        slow = false;
+      }
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocListener<NetworkCubit, NetworkStatus>(
       listener: (context, state) {
+        _updateNetworkStatus(state);
         if (state == NetworkStatus.network) {
           widget.loadDataAgain?.call();
         }
@@ -151,10 +171,26 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
                         index:
                             context.l10n.discounts == widget.pageName ? 0 : 1,
                       ),
-                appBar: AppBar(
-                  backgroundColor: AppColors.materialThemeWhite,
-                  toolbarHeight: KSize.kAppBarHeight,
-                ),
+                appBar: !KTest.testIsWeb && (offline || slow)
+                    ? PreferredSize(
+                        preferredSize: const Size.fromHeight(KSize.kFont48),
+                        child: Column(
+                          children: [
+                            NetworkStatusBanner(
+                              offline: offline,
+                              slow: slow,
+                            ),
+                            AppBar(
+                              backgroundColor: AppColors.materialThemeWhite,
+                              toolbarHeight: KSize.kAppBarHeight,
+                            ),
+                          ],
+                        ),
+                      )
+                    : AppBar(
+                        backgroundColor: AppColors.materialThemeWhite,
+                        toolbarHeight: KSize.kAppBarHeight,
+                      ),
                 body: KeyboardScrollView(
                   widgetKey: KWidgetkeys.widget.scaffold.scroll,
                   // physics: KTest.scroll,

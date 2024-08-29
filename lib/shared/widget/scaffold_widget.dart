@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:veteranam/shared/shared.dart';
 
-class ScaffoldWidget extends StatelessWidget {
+class ScaffoldWidget extends StatefulWidget {
   const ScaffoldWidget({
     required this.mainChildWidgetsFunction,
     super.key,
@@ -28,11 +28,42 @@ class ScaffoldWidget extends StatelessWidget {
   final bool? showMobNawbarBackButton;
 
   @override
+  State<ScaffoldWidget> createState() => _ScaffoldWidgetState();
+}
+
+class _ScaffoldWidgetState extends State<ScaffoldWidget> {
+  bool offline = false;
+  bool slow = false;
+
+  @override
+  void initState() {
+    super.initState();
+    final initialState = context.read<NetworkCubit>().state;
+    _updateNetworkStatus(initialState);
+  }
+
+  void _updateNetworkStatus(NetworkStatus state) {
+    setState(() {
+      if (state == NetworkStatus.offline) {
+        offline = true;
+        slow = false;
+      } else if (state == NetworkStatus.slow) {
+        offline = false;
+        slow = true;
+      } else {
+        offline = false;
+        slow = false;
+      }
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocListener<NetworkCubit, NetworkStatus>(
       listener: (context, state) {
-        if (state == NetworkStatus.network && loadDataAgain != null) {
-          loadDataAgain!();
+        _updateNetworkStatus(state);
+        if (state == NetworkStatus.network && widget.loadDataAgain != null) {
+          widget.loadDataAgain!();
         }
       },
       child: LayoutBuilder(
@@ -41,8 +72,10 @@ class ScaffoldWidget extends StatelessWidget {
               constraints.maxWidth > KPlatformConstants.minWidthThresholdDesk;
           final isTablet =
               constraints.maxWidth > KPlatformConstants.minWidthThresholdTablet;
-          final mainChildWidget =
-              mainChildWidgetsFunction(isDesk: isDesk, isTablet: isTablet);
+          final mainChildWidget = widget.mainChildWidgetsFunction(
+            isDesk: isDesk,
+            isTablet: isTablet,
+          );
           final padding = EdgeInsets.symmetric(
             horizontal: (isDesk
                 ? KPadding.kPaddingSize90 +
@@ -57,7 +90,7 @@ class ScaffoldWidget extends StatelessWidget {
                     : KPadding.kPaddingSize16),
           );
           final footerWidget = <Widget>[];
-          if (hasFooter) {
+          if (widget.hasFooter) {
             footerWidget.addAll(
               FooterWidget.get(
                 context: context,
@@ -71,15 +104,31 @@ class ScaffoldWidget extends StatelessWidget {
             child: Semantics(
               child: Scaffold(
                 bottomNavigationBar:
-                    KTest.testIsWeb || !(showMobBottomNavigation ?? true)
+                    KTest.testIsWeb || !(widget.showMobBottomNavigation ?? true)
                         ? null
                         : const MobNavigationWidget(
                             index: 2,
                           ),
-                appBar: AppBar(
-                  backgroundColor: AppColors.materialThemeWhite,
-                  toolbarHeight: KSize.kAppBarHeight,
-                ),
+                appBar: !KTest.testIsWeb && (offline || slow)
+                    ? PreferredSize(
+                        preferredSize: const Size.fromHeight(KSize.kFont48),
+                        child: Column(
+                          children: [
+                            NetworkStatusBanner(
+                              offline: offline,
+                              slow: slow,
+                            ),
+                            AppBar(
+                              backgroundColor: AppColors.materialThemeWhite,
+                              toolbarHeight: KSize.kAppBarHeight,
+                            ),
+                          ],
+                        ),
+                      )
+                    : AppBar(
+                        backgroundColor: AppColors.materialThemeWhite,
+                        toolbarHeight: KSize.kAppBarHeight,
+                      ),
                 body: KeyboardScrollView(
                   widgetKey: KWidgetkeys.widget.scaffold.scroll,
                   //physics: KTest.scroll,
@@ -88,28 +137,30 @@ class ScaffoldWidget extends StatelessWidget {
                       delegate: NawbarWidget(
                         isDesk: isDesk,
                         isTablet: isTablet,
-                        pageName: pageName,
-                        showMobBackButton: showMobNawbarBackButton,
+                        pageName: widget.pageName,
+                        showMobBackButton: widget.showMobNawbarBackButton,
                         // showMobileNawbar: showMobileNawbar,
                       ),
                     ),
-                    if (titleChildWidgetsFunction != null)
+                    if (widget.titleChildWidgetsFunction != null)
                       SliverPadding(
                         padding: padding,
                         sliver: SliverList.builder(
                           addAutomaticKeepAlives: false,
                           addRepaintBoundaries: false,
                           itemBuilder: (context, index) {
-                            return titleChildWidgetsFunction!(isDesk: isDesk)
+                            return widget.titleChildWidgetsFunction!
+                                    (isDesk: isDesk)
                                 .elementAt(index);
                           },
-                          itemCount:
-                              titleChildWidgetsFunction!(isDesk: isDesk).length,
+                          itemCount: widget
+                              .titleChildWidgetsFunction!(isDesk: isDesk)
+                              .length,
                         ),
                       ),
                     SliverPadding(
-                      padding: isDesk && mainDeskPadding != null
-                          ? padding.add(mainDeskPadding!)
+                      padding: isDesk && widget.mainDeskPadding != null
+                          ? padding.add(widget.mainDeskPadding!)
                           : padding,
                       sliver: SliverList.builder(
                         addAutomaticKeepAlives: false,
@@ -120,7 +171,7 @@ class ScaffoldWidget extends StatelessWidget {
                         itemCount: mainChildWidget.length,
                       ),
                     ),
-                    if (hasFooter)
+                    if (widget.hasFooter)
                       SliverPadding(
                         padding: padding.copyWith(
                           bottom: KPadding.kPaddingSize40,
@@ -153,7 +204,7 @@ class ScaffoldWidget extends StatelessWidget {
                       ),
                   ],
                   semanticChildCount: mainChildWidget.length +
-                      (hasFooter ? (footerWidget.length + 1) : 1),
+                      (widget.hasFooter ? (footerWidget.length + 1) : 1),
                   maxHeight: constraints.maxHeight,
                 ),
               ),

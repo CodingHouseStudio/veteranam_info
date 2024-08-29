@@ -46,6 +46,7 @@ export 'mob_feedback_widget.dart';
 export 'mob_navigation_widget.dart';
 export 'mock_button_widget.dart';
 export 'nawbar_widget.dart';
+export 'network_banner.dart';
 export 'network_image_widget.dart';
 export 'news_card_widget.dart';
 export 'notification_link_widget.dart';
