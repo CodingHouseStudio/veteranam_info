@@ -16,6 +16,10 @@ abstract class KPlatformConstants {
           defaultTargetPlatform == TargetPlatform.linux ||
           defaultTargetPlatform == TargetPlatform.macOS ||
           defaultTargetPlatform == TargetPlatform.windows);
+
+  static final isWebSaffari = kIsWeb &&
+      (defaultTargetPlatform == TargetPlatform.iOS ||
+          defaultTargetPlatform == TargetPlatform.macOS);
   // static const minWidthThresholdMobile = 800; // Example threshold for mobile
   static const minWidthThresholdDesk = 1024; // Existing threshold for tablet
   static const minWidthThresholdTablet = 768; // Existing threshold for tablet

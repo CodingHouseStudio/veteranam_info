@@ -38,4 +38,8 @@ abstract class IAppAuthenticationRepository {
   Future<Either<SomeFailure, bool>> updateUserSetting(
     UserSetting userSetting,
   );
+
+  Future<Either<SomeFailure, bool>> startCreateUserSetting(
+    String userId,
+  );
 }
