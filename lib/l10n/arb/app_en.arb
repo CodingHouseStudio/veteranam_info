@@ -1076,5 +1076,13 @@
   "aboutNewDiscountsSubtitle": "Write us your email. We promise not to send spam! 😌",
   "@aboutNewDiscountsSubtitle": {
     "examples": "Text for a discount subscription"
+  },
+  "noInternet": "No internet",
+  "@noInternet": {
+    "examples": "Text for message about no internet"
+  },
+  "slowInternet": "Slow internet",
+  "@slowInternet": {
+    "examples": "Text for message about slow internet"
   }
 }

@@ -39,6 +39,10 @@ class NetworkCubit extends Cubit<NetworkStatus> {
         return emit(
           NetworkStatus.offline,
         );
+      case NetworkStatus.slow:
+        return emit(
+          NetworkStatus.slow,
+        );
     }
   }
 

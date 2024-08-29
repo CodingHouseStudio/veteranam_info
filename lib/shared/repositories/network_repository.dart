@@ -7,6 +7,7 @@ import 'package:veteranam/shared/shared.dart';
 enum NetworkStatus {
   network,
   offline,
+  slow,
 }
 
 @singleton
@@ -26,10 +27,16 @@ class NetworkRepository {
       _listConnectivityResultSubscription;
 
   void _onListConnectivityResultStreamListen() {
-    _listConnectivityResultSubscription ??=
-        appNetworkRepository.connectivityResults.listen((connectivityResults) {
+    _listConnectivityResultSubscription ??= appNetworkRepository
+        .connectivityResults
+        .listen((connectivityResults) async {
       if (connectivityResults.hasNetwork) {
-        _networkStatuscontroller.add(NetworkStatus.network);
+        final isSlow = await appNetworkRepository.isSlow();
+        if (isSlow) {
+          _networkStatuscontroller.add(NetworkStatus.slow);
+        } else {
+          _networkStatuscontroller.add(NetworkStatus.network);
+        }
       } else {
         _networkStatuscontroller.add(NetworkStatus.offline);
       }
@@ -46,6 +53,10 @@ class NetworkRepository {
   NetworkStatus get currentNetwork {
     final connectivityResults = appNetworkRepository.currentConnectivityResults;
     if (connectivityResults.hasNetwork) {
+      if (appNetworkRepository.isSlowSync()) {
+        // Assuming a synchronous check
+        return NetworkStatus.slow;
+      }
       return NetworkStatus.network;
     } else {
       return NetworkStatus.offline;
