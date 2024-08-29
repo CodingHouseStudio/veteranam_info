@@ -178,8 +178,6 @@ extension GetItInjectableX on _i174.GetIt {
         ));
     gh.factory<_i319.UrlCubit>(
         () => _i319.UrlCubit(urlRepository: gh<_i1001.IUrlRepository>()));
-    gh.singleton<_i777.FirebaseAnalyticsService>(
-        () => _i777.FirebaseAnalyticsService(gh<_i398.FirebaseAnalytics>()));
     gh.factory<_i227.DiscountLinkCubit>(() => _i227.DiscountLinkCubit(
           discountRepository: gh<_i1001.IDiscountRepository>(),
           appAuthenticationRepository:
@@ -258,13 +256,6 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i76.WorkRepository(),
       registerFor: {_development},
     );
-    gh.factory<_i441.DiscountUserEmailFormBloc>(
-        () => _i441.DiscountUserEmailFormBloc(
-              discountRepository: gh<_i1001.IDiscountRepository>(),
-              appAuthenticationRepository:
-                  gh<_i1001.IAppAuthenticationRepository>(),
-              firebaseAnalyticsService: gh<_i1001.FirebaseAnalyticsService>(),
-            ));
     gh.factory<_i922.MyStoryWatcherBloc>(
       () => _i922.MyStoryWatcherBloc(
         storyRepository: gh<_i1001.IStoryRepository>(),
@@ -302,6 +293,11 @@ extension GetItInjectableX on _i174.GetIt {
       ),
       registerFor: {_development},
     );
+    gh.singleton<_i777.FirebaseAnalyticsService>(
+        () => _i777.FirebaseAnalyticsService(
+              gh<_i398.FirebaseAnalytics>(),
+              gh<_i1001.AuthenticationRepository>(),
+            ));
     gh.factory<_i408.InformationWatcherBloc>(
       () => _i408.InformationWatcherBloc(
         informationRepository: gh<_i1001.IInformationRepository>(),
@@ -320,6 +316,13 @@ extension GetItInjectableX on _i174.GetIt {
           employeeRespondRepository: gh<_i1001.IWorkRepository>()),
       registerFor: {_development},
     );
+    gh.factory<_i441.DiscountUserEmailFormBloc>(
+        () => _i441.DiscountUserEmailFormBloc(
+              discountRepository: gh<_i1001.IDiscountRepository>(),
+              appAuthenticationRepository:
+                  gh<_i1001.IAppAuthenticationRepository>(),
+              firebaseAnalyticsService: gh<_i1001.FirebaseAnalyticsService>(),
+            ));
     gh.singleton<_i891.NetworkCubit>(() =>
         _i891.NetworkCubit(networkRepository: gh<_i1001.NetworkRepository>()));
     return this;

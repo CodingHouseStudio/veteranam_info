@@ -93,22 +93,22 @@ jobs:
           mv build/web/flutter_bootstrap.js build/web/$dt.flutter_bootstrap.js
           sed "s/flutter_bootstrap.js/$dt.flutter_bootstrap.js/g" build/web/index.html >build/web/newindex.html
           mv build/web/newindex.html build/web/index.html
-      - name: Configure AWS Credentials Action for GitHub Actions
-        uses: aws-actions/configure-aws-credentials@v4.0.1
-        with:
-          role-to-assume: ${{ secrets.AWS_ASSUME_ROLE_S3_SYNC }} # we use Github OIDC authentication for this action
-          aws-region: us-east-1
-      - name: Clean up S3 bucket
-        run: aws s3 rm ${{ secrets.S3_WEB_BUCKET }} --recursive
-      - name: Deploy static site to S3 bucket # we will use delete option so that we can replace any of the same files
-        run: aws s3 sync ./build/web ${{ secrets.S3_WEB_BUCKET }} --delete
-      - name: Configure AWS Credentials Action for GitHub Actions
-        uses: aws-actions/configure-aws-credentials@v4.0.1
-        with:
-          role-to-assume: ${{ secrets.AWS_ASSUME_ROLE_CLOUDFRONT_INVALIDATE }}
-          aws-region: us-east-1
-      - name: Invalidate CloudFront
-        run: aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
+      # - name: Configure AWS Credentials Action for GitHub Actions
+      #   uses: aws-actions/configure-aws-credentials@v4.0.1
+      #   with:
+      #     role-to-assume: ${{ secrets.AWS_ASSUME_ROLE_S3_SYNC }} # we use Github OIDC authentication for this action
+      #     aws-region: us-east-1
+      # - name: Clean up S3 bucket
+      #   run: aws s3 rm ${{ secrets.S3_WEB_BUCKET }} --recursive
+      # - name: Deploy static site to S3 bucket # we will use delete option so that we can replace any of the same files
+      #   run: aws s3 sync ./build/web ${{ secrets.S3_WEB_BUCKET }} --delete
+      # - name: Configure AWS Credentials Action for GitHub Actions
+      #   uses: aws-actions/configure-aws-credentials@v4.0.1
+      #   with:
+      #     role-to-assume: ${{ secrets.AWS_ASSUME_ROLE_CLOUDFRONT_INVALIDATE }}
+      #     aws-region: us-east-1
+      # - name: Invalidate CloudFront
+      #   run: aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/pages-action@v1
         with:
