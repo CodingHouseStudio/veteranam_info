@@ -17,17 +17,36 @@ class FirebaseAnalyticsService {
   final FirebaseAnalytics _firebaseAnalytics;
   final AuthenticationRepository _authenticationRepository;
 
-  Future<void> _initUserId() async {
+  void _initUserId() {
     // Add user properties when we'll add login and sign up page
     if (kReleaseMode && Config.isProduction) {
-      await _firebaseAnalytics.setUserId(
-        id: _authenticationRepository.currentUser.id,
-        callOptions: AnalyticsCallOptions(global: true),
-      );
-      await _firebaseAnalytics.setUserProperty(
-        name: 'Language',
-        value: _authenticationRepository.currentUserSetting.locale.text,
-      );
+      try {
+        unawaited(
+          _firebaseAnalytics.setUserId(
+            id: _authenticationRepository.currentUser.id,
+            callOptions: AnalyticsCallOptions(global: true),
+          ),
+        );
+        unawaited(
+          _firebaseAnalytics.setUserProperty(
+            name: 'Language',
+            value: _authenticationRepository.currentUserSetting.locale.text,
+          ),
+        );
+      } catch (e) {
+        unawaited(
+          _firebaseAnalytics.setUserId(
+            id: User.empty.id,
+            callOptions: AnalyticsCallOptions(global: true),
+          ),
+        );
+        unawaited(
+          _firebaseAnalytics.setUserProperty(
+            name: 'Language',
+            value: UserSetting.empty.locale.text,
+          ),
+        );
+      }
     }
   }
 
