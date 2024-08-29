@@ -9,9 +9,46 @@ import 'package:veteranam/shared/shared.dart';
 class FirebaseAnalyticsService {
   FirebaseAnalyticsService(
     this._firebaseAnalytics,
-  );
+    this._authenticationRepository,
+  ) {
+    _initUserId();
+  }
 
   final FirebaseAnalytics _firebaseAnalytics;
+  final AuthenticationRepository _authenticationRepository;
+
+  void _initUserId() {
+    // Add user properties when we'll add login and sign up page
+    if (kReleaseMode && Config.isProduction) {
+      try {
+        unawaited(
+          _firebaseAnalytics.setUserId(
+            id: _authenticationRepository.currentUser.id,
+            callOptions: AnalyticsCallOptions(global: true),
+          ),
+        );
+        unawaited(
+          _firebaseAnalytics.setUserProperty(
+            name: 'Language',
+            value: _authenticationRepository.currentUserSetting.locale.text,
+          ),
+        );
+      } catch (e) {
+        // unawaited(
+        //   _firebaseAnalytics.setUserId(
+        //     id: User.empty.id,
+        //     callOptions: AnalyticsCallOptions(global: true),
+        //   ),
+        // );
+        // unawaited(
+        //   _firebaseAnalytics.setUserProperty(
+        //     name: 'Language',
+        //     value: UserSetting.empty.locale.text,
+        //   ),
+        // );
+      }
+    }
+  }
 
   void addEvent({
     required String name,
