@@ -15,51 +15,121 @@ void main() {
     late DiscountUserEmailCubit discountUserEmailCubit;
     late IDiscountRepository mockdiscountRepository;
     late IAppAuthenticationRepository mockAppAuthenticationRepository;
-    late FirebaseRemoteConfigProvider mockFirebaseRemoteConfigProvider;
+    // late FirebaseRemoteConfigProvider mockFirebaseRemoteConfigProvider;
 
     setUp(() {
       mockdiscountRepository = MockIDiscountRepository();
       mockAppAuthenticationRepository = MockIAppAuthenticationRepository();
-      mockFirebaseRemoteConfigProvider = MockFirebaseRemoteConfigProvider();
+      // mockFirebaseRemoteConfigProvider = MockFirebaseRemoteConfigProvider();
 
-      when(mockdiscountRepository.userCanSendUserEmail(KTestText.user.id))
-          .thenAnswer(
-        (_) async => const Right(true),
-      );
+      // when(mockdiscountRepository.userCanSendUserEmail(KTestText.user.id))
+      //     .thenAnswer(
+      //   (_) async => const Right(0),
+      // );
       when(mockAppAuthenticationRepository.currentUser).thenAnswer(
         (invocation) => KTestText.user,
       );
       discountUserEmailCubit = DiscountUserEmailCubit(
         discountRepository: mockdiscountRepository,
         appAuthenticationRepository: mockAppAuthenticationRepository,
-        firebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
+        // firebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
       );
     });
 
     blocTest<DiscountUserEmailCubit, DiscountUserEmailState>(
-      'emits [DiscountUserEmailState()] when '
-      'check need to show and get emailScrollCount',
+      'emits [UserEmailPropery()] when '
+      'check need to show first time',
       build: () => discountUserEmailCubit,
       act: (bloc) async {
-        when(
-          mockFirebaseRemoteConfigProvider
-              .getInt(DiscountUserEmailCubit.emailScrollKey),
-        ).thenAnswer(
-          (invocation) => KDimensions.loadItems,
+        when(mockdiscountRepository.userCanSendUserEmail(KTestText.user.id))
+            .thenAnswer(
+          (_) async => const Right(0),
         );
         await bloc.started();
       },
       expect: () async => [
         const DiscountUserEmailState(
-          show: true,
-          emailScrollCount: KDimensions.loadItems,
+          UserEmailEnum.discountEmailAbandon,
+          count: 0,
         ),
       ],
     );
 
     blocTest<DiscountUserEmailCubit, DiscountUserEmailState>(
-      'emits [DiscountUserEmailState()] when '
-      'check need to show failure and get emailScrollCount == 0',
+      'emits [UserEmailPropery()] when '
+      'check need to show first time',
+      build: () => discountUserEmailCubit,
+      act: (bloc) async {
+        when(mockdiscountRepository.userCanSendUserEmail(KTestText.user.id))
+            .thenAnswer(
+          (_) async => const Right(1),
+        );
+        await bloc.started();
+      },
+      expect: () async => [
+        const DiscountUserEmailState(
+          UserEmailEnum.discountEmailAbandonSecondary,
+          count: 1,
+        ),
+      ],
+    );
+    blocTest<DiscountUserEmailCubit, DiscountUserEmailState>(
+      'emits [UserEmailPropery()] when '
+      'check need to show first time',
+      build: () => discountUserEmailCubit,
+      act: (bloc) async {
+        when(mockdiscountRepository.userCanSendUserEmail(KTestText.user.id))
+            .thenAnswer(
+          (_) async => const Right(2),
+        );
+        await bloc.started();
+      },
+      expect: () async => [
+        const DiscountUserEmailState(
+          UserEmailEnum.discountEmailAbandonRepeat,
+          count: 2,
+        ),
+      ],
+    );
+    blocTest<DiscountUserEmailCubit, DiscountUserEmailState>(
+      'emits [UserEmailPropery()] when '
+      'check need to show first time',
+      build: () => discountUserEmailCubit,
+      act: (bloc) async {
+        when(mockdiscountRepository.userCanSendUserEmail(KTestText.user.id))
+            .thenAnswer(
+          (_) async => const Right(5),
+        );
+        await bloc.started();
+      },
+      expect: () async => [
+        const DiscountUserEmailState(
+          UserEmailEnum.discountEmailAbandonRepeat,
+          count: 5,
+        ),
+      ],
+    );
+    blocTest<DiscountUserEmailCubit, DiscountUserEmailState>(
+      'emits [UserEmailPropery()] when '
+      'check need to show first time',
+      build: () => discountUserEmailCubit,
+      act: (bloc) async {
+        when(mockdiscountRepository.userCanSendUserEmail(KTestText.user.id))
+            .thenAnswer(
+          (_) async => const Right(-1),
+        );
+        await bloc.started();
+      },
+      expect: () async => [
+        const DiscountUserEmailState(
+          UserEmailEnum.discountEmailNotShow,
+          count: -1,
+        ),
+      ],
+    );
+    blocTest<DiscountUserEmailCubit, DiscountUserEmailState>(
+      'emits [UserEmailPropery()] when '
+      'check need to show first time',
       build: () => discountUserEmailCubit,
       act: (bloc) async {
         when(mockdiscountRepository.userCanSendUserEmail(KTestText.user.id))
@@ -70,8 +140,7 @@ void main() {
       },
       expect: () async => [
         const DiscountUserEmailState(
-          show: false,
-          emailScrollCount: KDimensions.emailScrollCount,
+          UserEmailEnum.discountEmailNotShow,
         ),
       ],
     );

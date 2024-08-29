@@ -9,19 +9,13 @@ class DiscountUserEmailCubit extends Cubit<DiscountUserEmailState> {
   DiscountUserEmailCubit({
     required IDiscountRepository discountRepository,
     required IAppAuthenticationRepository appAuthenticationRepository,
-    required FirebaseRemoteConfigProvider firebaseRemoteConfigProvider,
   })  : _discountRepository = discountRepository,
         _appAuthenticationRepository = appAuthenticationRepository,
-        _firebaseRemoteConfigProvider = firebaseRemoteConfigProvider,
         super(
-          const DiscountUserEmailState(
-            show: true,
-            emailScrollCount: KDimensions.emailScrollCount,
-          ),
+          const DiscountUserEmailState(UserEmailEnum.initial),
         );
   final IDiscountRepository _discountRepository;
   final IAppAuthenticationRepository _appAuthenticationRepository;
-  final FirebaseRemoteConfigProvider _firebaseRemoteConfigProvider;
 
   @visibleForTesting
   static const emailScrollKey = '__email_scroll_count_key__';
@@ -29,35 +23,58 @@ class DiscountUserEmailCubit extends Cubit<DiscountUserEmailState> {
   Future<void> started() async {
     final result = await _discountRepository
         .userCanSendUserEmail(_appAuthenticationRepository.currentUser.id);
-    final emailScrollCount =
-        _firebaseRemoteConfigProvider.getInt(emailScrollKey);
-    late bool show;
+    late DiscountUserEmailState userEmailPropery;
     result.fold(
-      (l) => show = false,
-      (r) => show = r,
+      (l) => userEmailPropery =
+          const DiscountUserEmailState(UserEmailEnum.discountEmailNotShow),
+      (r) => userEmailPropery =
+          DiscountUserEmailState(UserEmailEnum.get(r), count: r),
     );
 
     emit(
-      DiscountUserEmailState(
-        show: show,
-        emailScrollCount: emailScrollCount == 0
-            ? KDimensions.emailScrollCount
-            : emailScrollCount,
-      ),
+      userEmailPropery,
     );
   }
 }
 
-// I think it's bad idea to use here recored. It'll be not comfortable for tests
-// because I create a very simple state
+enum UserEmailEnum {
+  initial(),
+  discountEmailNotShow(),
+  discountEmailAbandon(text: 'discount_email_abandon'),
+  discountEmailAbandonSecondary(text: 'discount_email_abandon_secondary'),
+  discountEmailAbandonRepeat(text: 'discount_email_abandon_repeat');
+
+  const UserEmailEnum({this.text});
+
+  final String? text;
+
+  static UserEmailEnum get(int count) {
+    if (count < 0) {
+      return UserEmailEnum.discountEmailNotShow;
+    }
+    switch (count) {
+      case 0:
+        return UserEmailEnum.discountEmailAbandon;
+      case 1:
+        return UserEmailEnum.discountEmailAbandonSecondary;
+      default:
+        return UserEmailEnum.discountEmailAbandonRepeat;
+    }
+  }
+
+  bool get show =>
+      this != UserEmailEnum.initial &&
+      this != UserEmailEnum.discountEmailNotShow;
+
+  bool get closeEnable => show && this == UserEmailEnum.discountEmailAbandon;
+}
+
 class DiscountUserEmailState extends Equatable {
-  const DiscountUserEmailState({
-    required this.show,
-    required this.emailScrollCount,
-  });
-  final bool show;
-  final int emailScrollCount;
+  const DiscountUserEmailState(this.value, {this.count});
+
+  final UserEmailEnum value;
+  final int? count;
 
   @override
-  List<Object?> get props => [show, emailScrollCount];
+  List<Object?> get props => [value, count];
 }
