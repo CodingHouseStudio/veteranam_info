@@ -21,7 +21,7 @@ List<Widget> discountsWidgetList({
       //     .add(const DiscountWatcherEvent.getReport()),
     ),
     isDesk: isDesk,
-    shimmerItemsNumber: KDimensions.shimmerDiscountsItems,
+    shimmerItemsNumber: context.read<DiscountConfigCubit>().state.loadingItems,
     isNotFailure: context.read<DiscountWatcherBloc>().state.failure == null,
     shimmerItem: KMockText.discountModel,
   );
@@ -29,7 +29,11 @@ List<Widget> discountsWidgetList({
   final finalList = <Widget>[];
   for (var i = 0; i < items.length; i++) {
     finalList.add(items[i]);
-    if ((i + 1) % (KDimensions.loadItems * 3) == 0 &&
+    if ((i + 1) %
+                (KDimensions.loadItems *
+                    (context.read<DiscountConfigCubit>().state.linkScrollCount +
+                        1)) ==
+            0 &&
         context.read<DiscountWatcherBloc>().state.loadingStatus !=
             LoadingStatus.listLoadedFull) {
       finalList.add(

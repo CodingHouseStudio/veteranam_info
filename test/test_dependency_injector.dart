@@ -143,6 +143,7 @@ void configureDependenciesTest() {
       discountRepository: GetIt.I.get<IDiscountRepository>(),
       appAuthenticationRepository: GetIt.I.get<IAppAuthenticationRepository>(),
       reportRepository: GetIt.I.get<IReportRepository>(),
+      firebaseRemoteConfigProvider: GetIt.I.get<FirebaseRemoteConfigProvider>(),
     ),
   );
   GetIt.I.registerSingleton<UrlCubit>(
