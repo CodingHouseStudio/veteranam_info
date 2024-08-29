@@ -7268,15 +7268,15 @@ class MockIDiscountRepository extends _i1.Mock
       ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
 
   @override
-  _i8.Future<_i2.Either<_i3.SomeFailure, bool>> userCanSendUserEmail(
+  _i8.Future<_i2.Either<_i3.SomeFailure, int>> userCanSendUserEmail(
           String? userId) =>
       (super.noSuchMethod(
         Invocation.method(
           #userCanSendUserEmail,
           [userId],
         ),
-        returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
-            _FakeEither_0<_i3.SomeFailure, bool>(
+        returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, int>>.value(
+            _FakeEither_0<_i3.SomeFailure, int>(
           this,
           Invocation.method(
             #userCanSendUserEmail,
@@ -7284,15 +7284,15 @@ class MockIDiscountRepository extends _i1.Mock
           ),
         )),
         returnValueForMissingStub:
-            _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
-                _FakeEither_0<_i3.SomeFailure, bool>(
+            _i8.Future<_i2.Either<_i3.SomeFailure, int>>.value(
+                _FakeEither_0<_i3.SomeFailure, int>(
           this,
           Invocation.method(
             #userCanSendUserEmail,
             [userId],
           ),
         )),
-      ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
+      ) as _i8.Future<_i2.Either<_i3.SomeFailure, int>>);
 }
 
 /// A class which mocks [Query].

@@ -328,6 +328,8 @@ class InformationWatcherBloc
   @override
   Future<void> close() {
     _informationItemsSubscription?.cancel();
+    _debounceTimer?.cancel();
+    _debounceTimer = null;
     return super.close();
   }
 }
