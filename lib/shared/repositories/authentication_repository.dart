@@ -38,6 +38,9 @@ class AuthenticationRepository {
     _userSubscription ??=
         iAppAuthenticationRepository.user.listen((currentUser) {
       if (currentUser.isNotEmpty) {
+        if (currentUserSetting.isDeviceEmpty) {
+          unawaited(_startCreateUserSetting(currentUser.id));
+        }
         if (currentUserSetting.id != currentUser.id &&
             _userSettingSubscription != null) {
           _userSettingSubscription?.cancel();
@@ -127,6 +130,22 @@ class AuthenticationRepository {
       (r) {
         // debugPrint('authenticated');
         _authenticationStatuscontroller.add(AuthenticationStatus.authenticated);
+        return Right(r);
+      },
+    );
+  }
+
+  Future<Either<SomeFailure, bool>> _startCreateUserSetting(
+      String userId) async {
+    final result =
+        await iAppAuthenticationRepository.startCreateUserSetting(userId);
+    return result.fold(
+      (l) {
+        // debugPrint('error: $l');
+        return Left(l);
+      },
+      (r) {
+        // debugPrint('created');
         return Right(r);
       },
     );

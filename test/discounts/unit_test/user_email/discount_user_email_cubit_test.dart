@@ -11,14 +11,17 @@ void main() {
   setupFirebaseAuthMocks();
 
   setUpAll(setUpGlobal);
-  group('${KScreenBlocName.discount} Email ${KGroupText.bloc}', () {
+  group('${KScreenBlocName.discount} Email ${KGroupText.cubit}', () {
     late DiscountUserEmailCubit discountUserEmailCubit;
     late IDiscountRepository mockdiscountRepository;
     late IAppAuthenticationRepository mockAppAuthenticationRepository;
+    late FirebaseRemoteConfigProvider mockFirebaseRemoteConfigProvider;
 
     setUp(() {
       mockdiscountRepository = MockIDiscountRepository();
       mockAppAuthenticationRepository = MockIAppAuthenticationRepository();
+      mockFirebaseRemoteConfigProvider = MockFirebaseRemoteConfigProvider();
+
       when(mockdiscountRepository.userCanSendUserEmail(KTestText.user.id))
           .thenAnswer(
         (_) async => const Right(true),
@@ -29,22 +32,34 @@ void main() {
       discountUserEmailCubit = DiscountUserEmailCubit(
         discountRepository: mockdiscountRepository,
         appAuthenticationRepository: mockAppAuthenticationRepository,
+        firebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
       );
     });
 
-    blocTest<DiscountUserEmailCubit, bool>(
-      'emits [discountWatcherState()]'
-      ' when load discountModel list',
+    blocTest<DiscountUserEmailCubit, DiscountUserEmailState>(
+      'emits [DiscountUserEmailState()] when '
+      'check need to show and get emailScrollCount',
       build: () => discountUserEmailCubit,
-      act: (bloc) async => bloc.started(),
+      act: (bloc) async {
+        when(
+          mockFirebaseRemoteConfigProvider
+              .getInt(DiscountUserEmailCubit.emailScrollKey),
+        ).thenAnswer(
+          (invocation) => KDimensions.loadItems,
+        );
+        await bloc.started();
+      },
       expect: () async => [
-        true,
+        const DiscountUserEmailState(
+          show: true,
+          emailScrollCount: KDimensions.loadItems,
+        ),
       ],
     );
 
-    blocTest<DiscountUserEmailCubit, bool>(
-      'emits [discountWatcherState()]'
-      ' when load discountModel list',
+    blocTest<DiscountUserEmailCubit, DiscountUserEmailState>(
+      'emits [DiscountUserEmailState()] when '
+      'check need to show failure and get emailScrollCount == 0',
       build: () => discountUserEmailCubit,
       act: (bloc) async {
         when(mockdiscountRepository.userCanSendUserEmail(KTestText.user.id))
@@ -54,7 +69,10 @@ void main() {
         await bloc.started();
       },
       expect: () async => [
-        false,
+        const DiscountUserEmailState(
+          show: false,
+          emailScrollCount: KDimensions.emailScrollCount,
+        ),
       ],
     );
   });

@@ -19,7 +19,6 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
     this._firebaseAuth,
     this._googleSignIn,
     this._cache,
-    this._firebaseMessaging,
   ) {
     _updateAuthStatusBasedOnCache();
     _updateUserSettingBasedOnCache();
@@ -30,7 +29,7 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   final GoogleSignIn _googleSignIn;
   final CacheClient _cache;
   final FirestoreService _firestoreService = GetIt.I.get<FirestoreService>();
-  final FirebaseMessaging _firebaseMessaging;
+  final DeviceRepository _deviceRepository = GetIt.I.get<DeviceRepository>();
 
   /// Whether or not the current environment is web
   /// Should only be overridden for testing purposes. Otherwise,
@@ -177,7 +176,7 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
           final userCredential = await _firebaseAuth.signInAnonymously();
           final user = userCredential.user?.toUser;
           if (user != null) {
-            await _startCreateUserSetting(user.id);
+            await startCreateUserSetting(user.id);
           }
         },
         (e) => SendFailure.fromCode(e).status,
@@ -360,18 +359,26 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
     }
   }
 
-  Future<Either<SomeFailure, bool>> _startCreateUserSetting(
+  @override
+  Future<Either<SomeFailure, bool>> startCreateUserSetting(
     String userId,
   ) async {
-    final fcm = await _firebaseMessaging.getToken(
-      vapidKey: SecurityKeys.firebaseVapidKey,
-    );
+    try {
+      final result = await _deviceRepository.getDevice();
 
-    final userSetting = UserSetting(
-      id: userId,
-      fcm: fcm,
-    );
-    return updateUserSetting(userSetting);
+      return result.fold(
+        Left.new,
+        (r) {
+          final userSetting = UserSetting(
+            id: userId,
+            deviceSetting: r,
+          );
+          return updateUserSetting(userSetting);
+        },
+      );
+    } catch (e) {
+      return const Left(SomeFailure.serverError());
+    }
   }
 }
 
