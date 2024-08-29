@@ -1,5 +1,7 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -19,6 +21,8 @@ void configureDependenciesTest() {
   GetIt.I.registerSingleton<FirebaseAuth>(MockFirebaseAuth());
   GetIt.I.registerSingleton<GoogleSignIn>(GoogleSignIn());
   GetIt.I.registerSingleton<FakeClient>(FakeClient());
+  GetIt.I.registerSingleton<FirebaseAnalytics>(MockFirebaseAnalytics());
+  GetIt.I.registerSingleton<FirebaseRemoteConfig>(MockFirebaseRemoteConfig());
   GetIt.I.registerSingleton<FirebaseMessaging>(MockFirebaseMessaging());
   GetIt.I.registerSingleton<StorageService>(
     MockStorageService(),
@@ -29,6 +33,16 @@ void configureDependenciesTest() {
   GetIt.I.registerSingleton<FirestoreService>(
     FirestoreService(
       CacheClient(),
+    ),
+  );
+  GetIt.I.registerSingleton<FirebaseAnalyticsService>(
+    FirebaseAnalyticsService(
+      GetIt.I.get<FirebaseAnalytics>(),
+    ),
+  );
+  GetIt.I.registerSingleton<FirebaseRemoteConfigProvider>(
+    FirebaseRemoteConfigProvider(
+      GetIt.I.get<FirebaseRemoteConfig>(),
     ),
   );
 

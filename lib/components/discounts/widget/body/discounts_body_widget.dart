@@ -12,8 +12,8 @@ class DiscountBodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<DiscountUserEmailCubit, bool>(
-      builder: (context, showEmail) {
+    return BlocBuilder<DiscountUserEmailCubit, DiscountUserEmailState>(
+      builder: (context, emailState) {
         return BlocBuilder<DiscountLinkCubit, bool>(
           builder: (context, state) {
             return BlocConsumer<DiscountWatcherBloc, DiscountWatcherState>(
@@ -31,8 +31,10 @@ class DiscountBodyWidget extends StatelessWidget {
                     //     .add(const DiscountWatcherEvent.started()),
                   );
                 }
-                if (state.itemsLoaded == (KDimensions.loadItems * 4) &&
-                    showEmail) {
+                if (state.itemsLoaded ==
+                        (KDimensions.loadItems *
+                            (emailState.emailScrollCount + 1)) &&
+                    emailState.show) {
                   context.dialog.showUserEmailDialog();
                 }
               },

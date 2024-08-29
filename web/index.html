@@ -203,18 +203,17 @@
   <!--  <div id="splash">-->
   <!--    <img src="icons/logo_192.svg" alt="Loading indicator..." />-->
   <!--  </div>-->
-  <button id="retry-button" class="retry-button" onclick="location.reload()">Перезавантажити</button>
   <div class="splash">
     <img id="splash-image" src="icons/logo-192.svg" alt="Loading indicator..." class="bouncing-image">
   </div>
   <script>
     // var retryButton = document.getElementById('retry-button');
 
-    function removeSplashFromWeb() {
-      document.getElementById("splash")?.remove();
-      document.getElementById("splash-branding")?.remove();
-      document.body.style.background = "transparent";
-    }
+    // function removeSplashFromWeb() {
+    //   document.getElementById("splash")?.remove();
+    //   document.getElementById("splash-branding")?.remove();
+    //   document.body.style.background = "transparent";
+    // }
 
     setTimeout(() => {
       document.getElementById('retry-button').style.display = "block";
@@ -238,6 +237,14 @@
   </script>
 
   <script src="flutter_bootstrap.js" async>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function () {
+        navigator.serviceWorker.register('firebase-messaging-sw.js', {
+          scope: '/firebase-cloud-messaging-push-scope',
+        });
+      });
+    }
+
     // var serviceWorkerVersion = '{{flutter_service_worker_version}}';
     // var scriptLoaded = false;
     // var image_reloaded = false;
@@ -318,6 +325,11 @@
     // loadMainDartJs();
     // }
   </script>
+
+  <script
+    type="text/javascript">(function (w, s) { var e = document.createElement("script"); e.type = "text/javascript"; e.async = true; e.src = "https://cdn-eu.pagesense.io/js/20100665591/f86baf60b9834168906b20b979563f80.js"; var x = document.getElementsByTagName("script")[0]; x.parentNode.insertBefore(e, x); })(window, "script");</script>
+
+  <button id="retry-button" class="retry-button" onclick="location.reload()">Перезавантажити</button>
 </body>
 
 </html>

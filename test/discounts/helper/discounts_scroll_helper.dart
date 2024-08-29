@@ -12,30 +12,26 @@ Future<void> discountsScrollHelper({
     await changeWindowSizeHelper(
       tester: tester,
       test: () async {
-        if (showEmailDialog) {
-          await scrollingHelper(
-            tester: tester,
-            offset: KTestConstants.scrollingDown,
-          );
+        await scrollingHelper(
+          tester: tester,
+          offset: KTestConstants.scrollingDown,
+        );
 
+        await scaffoldLoadingButtonHelper(tester: tester);
+
+        await scrollingHelper(
+          tester: tester,
+          offset: KTestConstants.scrollingDown,
+        );
+
+        if (showEmailDialog) {
           await scaffoldLoadingButtonHelper(
             tester: tester,
             hoverOnButton: true,
           );
+        } else {
+          await scaffoldLoadingButtonHelper(tester: tester);
         }
-        await scrollingHelper(
-          tester: tester,
-          offset: KTestConstants.scrollingDown,
-        );
-
-        await scaffoldLoadingButtonHelper(tester: tester);
-
-        await scrollingHelper(
-          tester: tester,
-          offset: KTestConstants.scrollingDown,
-        );
-
-        await scaffoldLoadingButtonHelper(tester: tester);
 
         await scrollingHelper(
           tester: tester,
