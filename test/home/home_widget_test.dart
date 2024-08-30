@@ -19,6 +19,7 @@ void main() {
     late AuthenticationRepository mockAuthenticationRepository;
     late IFaqRepository mockFaqRepository;
     late IUrlRepository mockUrlRepository;
+    late BuildRepository mockBuildRepository;
     // late IFeedbackRepository mockFeedbackRepository;
     // late IAppAuthenticationRepository mockAppAuthenticationRepository;
     setUp(() {
@@ -28,6 +29,7 @@ void main() {
       mockFaqRepository = MockIFaqRepository();
       mockAuthenticationRepository = MockAuthenticationRepository();
       mockUrlRepository = MockIUrlRepository();
+      mockBuildRepository = MockBuildRepository();
       // mockAppAuthenticationRepository = MockAppAuthenticationRepository();
 
       when(mockAuthenticationRepository.currentUser).thenAnswer(
@@ -35,6 +37,9 @@ void main() {
       );
       when(mockUrlRepository.copy(KAppText.email)).thenAnswer(
         (invocation) async => const Right(true),
+      );
+      when(mockBuildRepository.getBuildInfo()).thenAnswer(
+        (invocation) async => BuildRepository.defaultValue,
       );
       // when(mockAppAuthenticationRepository.currentUserSetting).thenAnswer(
       //   (realInvocation) => UserSetting.empty,
@@ -95,7 +100,8 @@ void main() {
           // mockFeedbackRepository: mockFeedbackRepository,
           mockFaqRepository: mockFaqRepository,
           mockAuthenticationRepository: mockAuthenticationRepository,
-          tester: tester, mockUrlRepository: mockUrlRepository,
+          mockBuildRepository: mockBuildRepository, tester: tester,
+          mockUrlRepository: mockUrlRepository,
           // mockAppAuthenticationRepository:
           // mockAppAuthenticationRepository,
         );
@@ -110,7 +116,7 @@ void main() {
           // mockFeedbackRepository: mockFeedbackRepository,
           mockFaqRepository: mockFaqRepository,
           mockAuthenticationRepository: mockAuthenticationRepository,
-          tester: tester,
+          mockBuildRepository: mockBuildRepository, tester: tester,
           mockUrlRepository: mockUrlRepository,
           // mockAppAuthenticationRepository:
           // mockAppAuthenticationRepository,
@@ -126,7 +132,7 @@ void main() {
           // mockFeedbackRepository: mockFeedbackRepository,
           mockFaqRepository: mockFaqRepository,
           mockAuthenticationRepository: mockAuthenticationRepository,
-          tester: tester,
+          mockBuildRepository: mockBuildRepository, tester: tester,
           mockUrlRepository: mockUrlRepository,
           // mockAppAuthenticationRepository:
           // mockAppAuthenticationRepository,
@@ -153,7 +159,7 @@ void main() {
           // mockFeedbackRepository: mockFeedbackRepository,
           mockFaqRepository: mockFaqRepository,
           mockAuthenticationRepository: mockAuthenticationRepository,
-          tester: tester,
+          mockBuildRepository: mockBuildRepository, tester: tester,
           mockUrlRepository: mockUrlRepository,
           // mockAppAuthenticationRepository:
           // mockAppAuthenticationRepository,
@@ -174,7 +180,7 @@ void main() {
           // mockFeedbackRepository: mockFeedbackRepository,
           mockFaqRepository: mockFaqRepository,
           mockAuthenticationRepository: mockAuthenticationRepository,
-          tester: tester,
+          mockBuildRepository: mockBuildRepository, tester: tester,
           mockUrlRepository: mockUrlRepository,
           // mockAppAuthenticationRepository:
           // mockAppAuthenticationRepository,
@@ -190,6 +196,7 @@ void main() {
             mockFaqRepository: mockFaqRepository,
             mockAuthenticationRepository: mockAuthenticationRepository,
             tester: tester,
+            mockBuildRepository: mockBuildRepository,
             mockUrlRepository: mockUrlRepository,
           ),
         );
@@ -205,7 +212,7 @@ void main() {
             // mockFeedbackRepository: mockFeedbackRepository,
             mockFaqRepository: mockFaqRepository,
             mockAuthenticationRepository: mockAuthenticationRepository,
-            tester: tester,
+            mockBuildRepository: mockBuildRepository, tester: tester,
             mockGoRouter: mockGoRouter,
             mockUrlRepository: mockUrlRepository,
             // mockAppAuthenticationRepository:
@@ -219,6 +226,7 @@ void main() {
             tester: tester,
             mockGoRouter: mockGoRouter,
             mockAuthenticationRepository: mockAuthenticationRepository,
+            mockBuildRepository: mockBuildRepository,
             // mockFeedbackRepository: mockFeedbackRepository,
             mockFaqRepository: mockFaqRepository,
             mockUrlRepository: mockUrlRepository,
@@ -244,7 +252,7 @@ void main() {
               // mockFeedbackRepository: mockFeedbackRepository,
               mockFaqRepository: mockFaqRepository,
               mockAuthenticationRepository: mockAuthenticationRepository,
-              tester: tester,
+              mockBuildRepository: mockBuildRepository, tester: tester,
               mockGoRouter: mockGoRouter,
               mockUrlRepository: mockUrlRepository,
               // mockAppAuthenticationRepository:
@@ -273,7 +281,7 @@ void main() {
                 // mockFeedbackRepository: mockFeedbackRepository,
                 mockFaqRepository: mockFaqRepository,
                 mockAuthenticationRepository: mockAuthenticationRepository,
-                tester: tester,
+                mockBuildRepository: mockBuildRepository, tester: tester,
                 mockGoRouter: mockGoRouter,
                 mockUrlRepository: mockUrlRepository,
                 // mockAppAuthenticationRepository:
@@ -294,7 +302,9 @@ void main() {
             //       tester: tester,
             //       mockGoRouter: mockGoRouter,
             //       mockAuthenticationRepository: mockAuthenticationRepository,
-            //       // mockFeedbackRepository: mockFeedbackRepository,
+            //   mockBuildRepository:
+            //  mockBuildRepository,
+            //   // mockFeedbackRepository: mockFeedbackRepository,
             //       mockFaqRepository: mockFaqRepository,
             //       mockAppAuthenticationRepository:
             //           mockAppAuthenticationRepository,
@@ -312,7 +322,7 @@ void main() {
               // mockFeedbackRepository: mockFeedbackRepository,
               mockFaqRepository: mockFaqRepository,
               mockAuthenticationRepository: mockAuthenticationRepository,
-              tester: tester,
+              mockBuildRepository: mockBuildRepository, tester: tester,
               mockGoRouter: mockGoRouter,
               mockUrlRepository: mockUrlRepository,
               // mockAppAuthenticationRepository:
@@ -330,7 +340,7 @@ void main() {
               // mockFeedbackRepository: mockFeedbackRepository,
               mockFaqRepository: mockFaqRepository,
               mockAuthenticationRepository: mockAuthenticationRepository,
-              tester: tester,
+              mockBuildRepository: mockBuildRepository, tester: tester,
               mockGoRouter: mockGoRouter,
               mockUrlRepository: mockUrlRepository,
               // mockAppAuthenticationRepository:
@@ -348,6 +358,7 @@ void main() {
               tester: tester,
               mockGoRouter: mockGoRouter,
               mockAuthenticationRepository: mockAuthenticationRepository,
+              mockBuildRepository: mockBuildRepository,
               // mockFeedbackRepository: mockFeedbackRepository,
               mockFaqRepository: mockFaqRepository,
               mockUrlRepository: mockUrlRepository,
@@ -366,6 +377,7 @@ void main() {
               tester: tester,
               mockGoRouter: mockGoRouter,
               mockAuthenticationRepository: mockAuthenticationRepository,
+              mockBuildRepository: mockBuildRepository,
               // mockFeedbackRepository: mockFeedbackRepository,
               mockFaqRepository: mockFaqRepository,
               mockUrlRepository: mockUrlRepository,
@@ -383,6 +395,7 @@ void main() {
               tester: tester,
               mockGoRouter: mockGoRouter,
               mockAuthenticationRepository: mockAuthenticationRepository,
+              mockBuildRepository: mockBuildRepository,
               // mockFeedbackRepository: mockFeedbackRepository,
               mockFaqRepository: mockFaqRepository,
               mockUrlRepository: mockUrlRepository,
@@ -409,6 +422,7 @@ void main() {
                   tester: tester,
                   mockGoRouter: mockGoRouter,
                   mockAuthenticationRepository: mockAuthenticationRepository,
+                  mockBuildRepository: mockBuildRepository,
                   mockFaqRepository: mockFaqRepository,
                   mockUrlRepository: mockUrlRepository,
                 );

@@ -19,6 +19,7 @@ void main() {
     late AuthenticationRepository mockAuthenticationRepository;
     late IFaqRepository mockFaqRepository;
     late IUrlRepository mockUrlRepository;
+    late BuildRepository mockBuildRepository;
     setUp(() {
       Config.value = Config.production;
       ExtendedDateTime.current = KTestText.dateTime;
@@ -26,6 +27,7 @@ void main() {
       mockFaqRepository = MockIFaqRepository();
       mockAuthenticationRepository = MockAuthenticationRepository();
       mockUrlRepository = MockIUrlRepository();
+      mockBuildRepository = MockBuildRepository();
 
       when(mockAuthenticationRepository.currentUser).thenAnswer(
         (realInvocation) => User.empty,
@@ -42,6 +44,9 @@ void main() {
       when(mockUrlRepository.copy(KAppText.email)).thenAnswer(
         (invocation) async => const Right(true),
       );
+      when(mockBuildRepository.getBuildInfo()).thenAnswer(
+        (invocation) async => BuildRepository.defaultValue,
+      );
     });
 
     testWidgets('${KGroupText.intial} ', (tester) async {
@@ -50,6 +55,7 @@ void main() {
         mockFaqRepository: mockFaqRepository,
         mockAuthenticationRepository: mockAuthenticationRepository,
         tester: tester,
+        mockBuildRepository: mockBuildRepository,
         mockUrlRepository: mockUrlRepository,
         // mockAppAuthenticationRepository:
         // mockAppAuthenticationRepository,
@@ -67,7 +73,7 @@ void main() {
           mockFaqRepository: mockFaqRepository,
           mockAuthenticationRepository: mockAuthenticationRepository,
           tester: tester,
-          mockGoRouter: mockGoRouter,
+          mockBuildRepository: mockBuildRepository, mockGoRouter: mockGoRouter,
           mockUrlRepository: mockUrlRepository,
           // mockAppAuthenticationRepository:
           // mockAppAuthenticationRepository,
@@ -82,6 +88,7 @@ void main() {
             mockFaqRepository: mockFaqRepository,
             mockAuthenticationRepository: mockAuthenticationRepository,
             tester: tester,
+            mockBuildRepository: mockBuildRepository,
             mockGoRouter: mockGoRouter,
             mockUrlRepository: mockUrlRepository,
             // mockAppAuthenticationRepository:

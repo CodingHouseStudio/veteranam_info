@@ -14,7 +14,7 @@ void main() {
   group(
       '${KScreenBlocName.appRepository} ${KScreenBlocName.authentication}'
       ' ${KGroupText.repository} ${KGroupText.successful} isWeb false', () {
-    late AppAuthenticationRepository appAuthenticationRepository;
+    late IAppAuthenticationRepository appAuthenticationRepository;
     late IStorage mockSecureStorageRepository;
     late firebase_auth.FirebaseAuth mockFirebaseAuth;
     late GoogleSignIn mockGoogleSignIn;
@@ -24,6 +24,8 @@ void main() {
     late FirestoreService mockFirestoreService;
     late GoogleSignInAccount mockGoogleSignInAccount;
     late GoogleSignInAuthentication mockGoogleSignInAuthentication;
+
+    late IDeviceRepository mockDeviceRepository;
     setUp(() {
       mockSecureStorageRepository = MockIStorage();
       mockFirebaseAuth = MockFirebaseAuth();
@@ -34,6 +36,8 @@ void main() {
       mockGoogleSignInAuthentication = MockGoogleSignInAuthentication();
       mockGoogleAuthProvider = MockGoogleAuthProvider();
       mockUserCredential = MockUserCredential();
+
+      mockDeviceRepository = MockIDeviceRepository();
 
       when(mockGoogleSignInAuthentication.idToken).thenAnswer(
         (_) => KTestText.token,
@@ -74,6 +78,10 @@ void main() {
         GetIt.I.unregister<FirestoreService>();
       }
       GetIt.I.registerSingleton(mockFirestoreService);
+      if (GetIt.I.isRegistered<IDeviceRepository>()) {
+        GetIt.I.unregister<IDeviceRepository>();
+      }
+      GetIt.I.registerSingleton(mockDeviceRepository);
       appAuthenticationRepository = AppAuthenticationRepository(
         mockSecureStorageRepository,
         mockFirebaseAuth,
@@ -94,7 +102,10 @@ void main() {
         UserSetting.empty,
       );
       verifyNever(
-        mockFirestoreService.updateUserSetting(UserSetting.empty),
+        mockFirestoreService.setUserSetting(
+          userSetting: UserSetting.empty,
+          userId: User.empty.id,
+        ),
       );
       verify(
         mockFirestoreService.setUserSetting(

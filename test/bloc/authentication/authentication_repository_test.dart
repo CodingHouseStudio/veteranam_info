@@ -24,8 +24,6 @@ void main() {
         ).thenAnswer(
           (_) async => const Right(true),
         );
-        authenticationRepository =
-            AuthenticationRepository(mockAppAuthenticationRepository);
         when(
           mockAppAuthenticationRepository.logInWithEmailAndPassword(
             email: KTestText.userEmail,
@@ -73,6 +71,14 @@ void main() {
         ).thenAnswer(
           (_) => false,
         );
+        when(
+          mockAppAuthenticationRepository.createFcmUserSetting(),
+        ).thenAnswer(
+          (_) async => const Right(true),
+        );
+
+        authenticationRepository =
+            AuthenticationRepository(mockAppAuthenticationRepository);
       });
       test('Log in', () async {
         expect(
