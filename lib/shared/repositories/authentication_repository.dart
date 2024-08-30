@@ -38,31 +38,34 @@ class AuthenticationRepository {
     _userSubscription ??=
         iAppAuthenticationRepository.user.listen((currentUser) {
       if (currentUser.isNotEmpty) {
-        if (currentUserSetting.isDeviceEmpty) {
-          unawaited(_startCreateUserSetting(currentUser.id));
-        }
         if (currentUserSetting.id != currentUser.id &&
             _userSettingSubscription != null) {
           _userSettingSubscription?.cancel();
           _userSettingSubscription = null;
         }
+        var userSettingIsNew = _userSettingSubscription == null;
         _userSettingSubscription ??=
             iAppAuthenticationRepository.userSetting.listen(
           (currentUserSetting) {
+            if (userSettingIsNew) {
+              unawaited(_createUserSettingIfNeed());
+              userSettingIsNew = false;
+            }
             _userSettingController.add(
               currentUserSetting,
             );
-            if (isAnonymously()) {
-              _authenticationStatuscontroller.add(
-                AuthenticationStatus.anonymous,
-              );
-              return;
-            }
-            _authenticationStatuscontroller.add(
-              AuthenticationStatus.authenticated,
-            );
           },
         );
+        if (isAnonymously()) {
+          _authenticationStatuscontroller.add(
+            AuthenticationStatus.anonymous,
+          );
+          return;
+        }
+        _authenticationStatuscontroller.add(
+          AuthenticationStatus.authenticated,
+        );
+
         return;
       }
       unawaited(_logInAnonymously());
@@ -135,11 +138,8 @@ class AuthenticationRepository {
     );
   }
 
-  Future<Either<SomeFailure, bool>> _startCreateUserSetting(
-    String userId,
-  ) async {
-    final result =
-        await iAppAuthenticationRepository.startCreateUserSetting(userId);
+  Future<Either<SomeFailure, bool>> _createUserSettingIfNeed() async {
+    final result = await iAppAuthenticationRepository.createUserSetting();
     return result.fold(
       (l) {
         // debugPrint('error: $l');
