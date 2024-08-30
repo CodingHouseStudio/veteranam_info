@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -15,7 +14,7 @@ void main() {
   group(
       '${KScreenBlocName.appRepository} ${KScreenBlocName.authentication}'
       ' ${KGroupText.repository} ${KGroupText.successful}', () {
-    late AppAuthenticationRepository appAuthenticationRepository;
+    late IAppAuthenticationRepository appAuthenticationRepository;
     late IStorage mockSecureStorageRepository;
     late firebase_auth.FirebaseAuth mockFirebaseAuth;
     late GoogleSignIn mockGoogleSignIn;
@@ -24,7 +23,7 @@ void main() {
     late firebase_auth.UserCredential mockUserCredential;
     late FirestoreService mockFirestoreService;
     late firebase_auth.User mockUser;
-    late FirebaseMessaging mockFirebaseMessaging;
+    late IDeviceRepository mockDeviceRepository;
     late GoogleSignInAccount mockGoogleSignInAccount;
     setUp(() {
       mockSecureStorageRepository = MockIStorage();
@@ -36,7 +35,7 @@ void main() {
       mockFirestoreService = MockFirestoreService();
       mockUser = MockUser();
       mockGoogleSignInAccount = MockGoogleSignInAccount();
-      mockFirebaseMessaging = MockFirebaseMessaging();
+      mockDeviceRepository = MockIDeviceRepository();
 
       when(mockUserCredential.credential).thenAnswer(
         (_) => KTestText.authCredential,
@@ -123,7 +122,7 @@ void main() {
           key: AppAuthenticationRepository.userSettingCacheKey,
         ),
       ).thenAnswer(
-        (_) => KTestText.userSetting,
+        (_) => KTestText.userSettingModel,
       );
       when(
         mockCache.clear(),
@@ -148,10 +147,10 @@ void main() {
       when(
         mockFirestoreService.getUserSetting(KTestText.user.id),
       ).thenAnswer(
-        (_) => Stream.value(KTestText.userSetting),
+        (_) => Stream.value(KTestText.userSettingModel),
       );
       // when(
-      //   mockFirestoreService.updateUserSetting(KTestText.userSetting),
+      //   mockFirestoreService.updateUserSetting(KTestText.userSettingModel),
       // ).thenAnswer(
       //   (_) async {},
       // );
@@ -162,6 +161,14 @@ void main() {
         ),
       ).thenAnswer(
         (_) async {},
+      );
+
+      when(
+        mockDeviceRepository.getDevice(
+          initialList: KTestText.userSettingModel.devicesInfo,
+        ),
+      ).thenAnswer(
+        (_) async => Right(KTestText.deviceInfoModel),
       );
 
       when(
@@ -189,12 +196,15 @@ void main() {
         GetIt.I.unregister<FirestoreService>();
       }
       GetIt.I.registerSingleton(mockFirestoreService);
+      if (GetIt.I.isRegistered<IDeviceRepository>()) {
+        GetIt.I.unregister<IDeviceRepository>();
+      }
+      GetIt.I.registerSingleton(mockDeviceRepository);
       appAuthenticationRepository = AppAuthenticationRepository(
         mockSecureStorageRepository,
         mockFirebaseAuth,
         mockGoogleSignIn,
         mockCache,
-        mockFirebaseMessaging,
       )
         ..isWeb = true
         ..googleAuthProvider = mockGoogleAuthProvider;
@@ -246,26 +256,26 @@ void main() {
     test('Current User Setting', () async {
       expect(
         appAuthenticationRepository.currentUserSetting,
-        KTestText.userSetting,
+        KTestText.userSettingModel,
       );
     });
     test('User Setting', () async {
       await expectLater(
         appAuthenticationRepository.userSetting,
         emitsInOrder([
-          KTestText.userSetting,
+          KTestText.userSettingModel,
         ]),
         reason: 'Wait for getting user setting',
       );
       verify(
         mockCache.write(
           key: AppAuthenticationRepository.userSettingCacheKey,
-          value: KTestText.userSetting,
+          value: KTestText.userSettingModel,
         ),
       ).called(1);
       // expect(
       //   appAuthenticationRepository.userSetting,
-      //   emits(KTestText.userSetting),
+      //   emits(KTestText.userSettingModel),
       // );
     });
     test('Get User', () async {
@@ -320,20 +330,20 @@ void main() {
     });
     test('Update user Setting', () async {
       final result = await appAuthenticationRepository.updateUserSetting(
-        KTestText.userSetting,
+        KTestText.userSettingModel,
       );
+      // verifyNever(
+      //   mockFirestoreService.setUserSetting(
+      //     userSetting: KTestText.userSettingModel,
+      //     userId: User.empty.id,
+      //   ),
+      // );
       verify(
         mockFirestoreService.setUserSetting(
-          userSetting: KTestText.userSetting,
-          userId: User.empty.id,
-        ),
-      ).called(1);
-      verifyNever(
-        mockFirestoreService.setUserSetting(
-          userSetting: KTestText.userSetting,
+          userSetting: KTestText.userSettingModel,
           userId: KTestText.user.id,
         ),
-      );
+      ).called(1);
       expect(
         result,
         isA<Right<SomeFailure, bool>>().having((e) => e.value, 'value', isTrue),
@@ -353,6 +363,18 @@ void main() {
       expect(
         appAuthenticationRepository.isAnonymously(),
         true,
+      );
+    });
+    test('Create FCM Token for user setting', () async {
+      final result = await appAuthenticationRepository.createFcmUserSetting();
+      verify(
+        mockDeviceRepository.getDevice(
+          initialList: KTestText.userSettingModel.devicesInfo,
+        ),
+      ).called(1);
+      expect(
+        result,
+        isA<Right<SomeFailure, bool>>().having((e) => e.value, 'value', isTrue),
       );
     });
   });
