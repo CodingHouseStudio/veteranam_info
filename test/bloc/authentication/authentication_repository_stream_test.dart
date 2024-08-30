@@ -40,6 +40,10 @@ void main() {
         (_) => userSettingStreamController.stream,
       );
 
+      when(mockAppAuthenticationRepository.createFcmUserSetting()).thenAnswer(
+        (_) async => const Right(true),
+      );
+
       authenticationRepository =
           AuthenticationRepository(mockAppAuthenticationRepository);
     });
@@ -118,6 +122,9 @@ void main() {
       setUp(() {
         when(mockAppAuthenticationRepository.isAnonymously()).thenAnswer(
           (_) => false,
+        );
+        when(mockAppAuthenticationRepository.createFcmUserSetting()).thenAnswer(
+          (_) async => const Left(SomeFailure.serverError()),
         );
       });
 

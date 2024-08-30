@@ -27,7 +27,7 @@ abstract class IDiscountRepository {
     EmailModel userEmail,
   );
 
-  Future<Either<SomeFailure, bool>> userCanSendUserEmail(
+  Future<Either<SomeFailure, int>> userCanSendUserEmail(
     String userId,
   );
 }

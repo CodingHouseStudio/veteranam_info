@@ -2,11 +2,11 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:veteranam/shared/shared.dart';
 
 class DeviceConverter
-    implements JsonConverter<List<DeviceInfoModel?>?, List<dynamic>?> {
+    implements JsonConverter<List<DeviceInfoModel>?, List<dynamic>?> {
   const DeviceConverter();
 
   @override
-  List<DeviceInfoModel?>? fromJson(List<dynamic>? json) {
+  List<DeviceInfoModel>? fromJson(List<dynamic>? json) {
     final list = json
         ?.map((e) => DeviceInfoModel?.fromJson(e as Map<String, dynamic>))
         .toList();
@@ -18,10 +18,10 @@ class DeviceConverter
   }
 
   @override
-  List<dynamic>? toJson(List<DeviceInfoModel?>? object) {
+  List<dynamic>? toJson(List<DeviceInfoModel>? object) {
     return object
         ?.map(
-          (e) => e?.toJson(),
+          (e) => e.toJson(),
         )
         .toList();
   }
