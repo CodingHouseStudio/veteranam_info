@@ -40,6 +40,7 @@ void main() {
     });
     group('${KGroupText.successful} ', () {
       setUp(() {
+        KTest.testReleaseMode = true;
         when(
           mockFirebaseMessaging.setAutoInitEnabled(true),
         ).thenAnswer(
@@ -96,6 +97,17 @@ void main() {
               platform: PlatformEnum.unknown,
               build: BuildRepository.defaultValue.buildNumber,
             ),
+          ),
+        );
+      });
+      test('Get device whne is not release mode', () async {
+        KTest.testReleaseMode = false;
+        expect(
+          await deviceRepository.getDevice(),
+          isA<Right<SomeFailure, DeviceInfoModel?>>().having(
+            (e) => e.value,
+            'value',
+            null,
           ),
         );
       });
