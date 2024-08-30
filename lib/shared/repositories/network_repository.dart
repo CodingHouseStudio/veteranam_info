@@ -7,7 +7,10 @@ import 'package:veteranam/shared/shared.dart';
 enum NetworkStatus {
   network,
   offline,
-  slow,
+  slow;
+
+  bool get isOffline => this == NetworkStatus.offline;
+  bool get isSlow => this == NetworkStatus.slow;
 }
 
 @singleton

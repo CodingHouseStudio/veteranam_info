@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:veteranam/shared/shared.dart';
 
-class ScaffoldWidget extends StatefulWidget {
+class ScaffoldWidget extends StatelessWidget {
   const ScaffoldWidget({
     required this.mainChildWidgetsFunction,
     super.key,
@@ -28,51 +28,20 @@ class ScaffoldWidget extends StatefulWidget {
   final bool? showMobNawbarBackButton;
 
   @override
-  State<ScaffoldWidget> createState() => _ScaffoldWidgetState();
-}
-
-class _ScaffoldWidgetState extends State<ScaffoldWidget> {
-  bool offline = false;
-  bool slow = false;
-
-  @override
-  void initState() {
-    super.initState();
-    final initialState = context.read<NetworkCubit>().state;
-    _updateNetworkStatus(initialState);
-  }
-
-  void _updateNetworkStatus(NetworkStatus state) {
-    setState(() {
-      if (state == NetworkStatus.offline) {
-        offline = true;
-        slow = false;
-      } else if (state == NetworkStatus.slow) {
-        offline = false;
-        slow = true;
-      } else {
-        offline = false;
-        slow = false;
-      }
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return BlocListener<NetworkCubit, NetworkStatus>(
+    return BlocConsumer<NetworkCubit, NetworkStatus>(
       listener: (context, state) {
-        _updateNetworkStatus(state);
-        if (state == NetworkStatus.network && widget.loadDataAgain != null) {
-          widget.loadDataAgain!();
+        if (state == NetworkStatus.network && loadDataAgain != null) {
+          loadDataAgain!();
         }
       },
-      child: LayoutBuilder(
+      builder: (context, state) => LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
           final isDesk =
               constraints.maxWidth > KPlatformConstants.minWidthThresholdDesk;
           final isTablet =
               constraints.maxWidth > KPlatformConstants.minWidthThresholdTablet;
-          final mainChildWidget = widget.mainChildWidgetsFunction(
+          final mainChildWidget = mainChildWidgetsFunction(
             isDesk: isDesk,
             isTablet: isTablet,
           );
@@ -90,7 +59,7 @@ class _ScaffoldWidgetState extends State<ScaffoldWidget> {
                     : KPadding.kPaddingSize16),
           );
           final footerWidget = <Widget>[];
-          if (widget.hasFooter) {
+          if (hasFooter) {
             footerWidget.addAll(
               FooterWidget.get(
                 context: context,
@@ -104,63 +73,52 @@ class _ScaffoldWidgetState extends State<ScaffoldWidget> {
             child: Semantics(
               child: Scaffold(
                 bottomNavigationBar:
-                    KTest.testIsWeb || !(widget.showMobBottomNavigation ?? true)
+                    KTest.testIsWeb || !(showMobBottomNavigation ?? true)
                         ? null
                         : const MobNavigationWidget(
                             index: 2,
                           ),
-                appBar: !KTest.testIsWeb && (offline || slow)
-                    ? PreferredSize(
-                        preferredSize: const Size.fromHeight(KSize.kFont48),
-                        child: Column(
-                          children: [
-                            NetworkStatusBanner(
-                              offline: offline,
-                              slow: slow,
-                            ),
-                            AppBar(
-                              backgroundColor: AppColors.materialThemeWhite,
-                              toolbarHeight: KSize.kAppBarHeight,
-                            ),
-                          ],
-                        ),
-                      )
-                    : AppBar(
-                        backgroundColor: AppColors.materialThemeWhite,
-                        toolbarHeight: KSize.kAppBarHeight,
-                      ),
+                appBar: AppBar(
+                  backgroundColor: AppColors.materialThemeWhite,
+                  toolbarHeight: KSize.kAppBarHeight,
+                ),
                 body: KeyboardScrollView(
                   widgetKey: KWidgetkeys.widget.scaffold.scroll,
                   //physics: KTest.scroll,
                   slivers: [
+                    if (!KTest.testIsWeb && (state.isOffline || state.isSlow))
+                      SliverPersistentHeader(
+                        delegate: NetworkStatusBanner(
+                          networkStatus: state,
+                        ),
+                      ),
                     SliverPersistentHeader(
                       delegate: NawbarWidget(
                         isDesk: isDesk,
                         isTablet: isTablet,
-                        pageName: widget.pageName,
-                        showMobBackButton: widget.showMobNawbarBackButton,
+                        pageName: pageName,
+                        showMobBackButton: showMobNawbarBackButton,
+                        networkStatus: state,
                         // showMobileNawbar: showMobileNawbar,
                       ),
                     ),
-                    if (widget.titleChildWidgetsFunction != null)
+                    if (titleChildWidgetsFunction != null)
                       SliverPadding(
                         padding: padding,
                         sliver: SliverList.builder(
                           addAutomaticKeepAlives: false,
                           addRepaintBoundaries: false,
                           itemBuilder: (context, index) {
-                            return widget.titleChildWidgetsFunction!
-                                    (isDesk: isDesk)
+                            return titleChildWidgetsFunction!(isDesk: isDesk)
                                 .elementAt(index);
                           },
-                          itemCount: widget
-                              .titleChildWidgetsFunction!(isDesk: isDesk)
-                              .length,
+                          itemCount:
+                              titleChildWidgetsFunction!(isDesk: isDesk).length,
                         ),
                       ),
                     SliverPadding(
-                      padding: isDesk && widget.mainDeskPadding != null
-                          ? padding.add(widget.mainDeskPadding!)
+                      padding: isDesk && mainDeskPadding != null
+                          ? padding.add(mainDeskPadding!)
                           : padding,
                       sliver: SliverList.builder(
                         addAutomaticKeepAlives: false,
@@ -171,7 +129,7 @@ class _ScaffoldWidgetState extends State<ScaffoldWidget> {
                         itemCount: mainChildWidget.length,
                       ),
                     ),
-                    if (widget.hasFooter)
+                    if (hasFooter)
                       SliverPadding(
                         padding: padding.copyWith(
                           bottom: KPadding.kPaddingSize40,
@@ -204,7 +162,7 @@ class _ScaffoldWidgetState extends State<ScaffoldWidget> {
                       ),
                   ],
                   semanticChildCount: mainChildWidget.length +
-                      (widget.hasFooter ? (footerWidget.length + 1) : 1),
+                      (hasFooter ? (footerWidget.length + 1) : 1),
                   maxHeight: constraints.maxHeight,
                 ),
               ),

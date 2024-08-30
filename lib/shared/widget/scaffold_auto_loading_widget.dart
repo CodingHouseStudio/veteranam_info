@@ -51,35 +51,17 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
     if (!KPlatformConstants.isWebDesktop) {
       _scrollController.addListener(_onScroll);
     }
-    final initialState = context.read<NetworkCubit>().state;
-    _updateNetworkStatus(initialState);
-  }
-
-  void _updateNetworkStatus(NetworkStatus state) {
-    setState(() {
-      if (state == NetworkStatus.offline) {
-        offline = true;
-        slow = false;
-      } else if (state == NetworkStatus.slow) {
-        offline = false;
-        slow = true;
-      } else {
-        offline = false;
-        slow = false;
-      }
-    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<NetworkCubit, NetworkStatus>(
+    return BlocConsumer<NetworkCubit, NetworkStatus>(
       listener: (context, state) {
-        _updateNetworkStatus(state);
         if (state == NetworkStatus.network) {
           widget.loadDataAgain?.call();
         }
       },
-      child: LayoutBuilder(
+      builder: (context, state) => LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
           final isDesk =
               constraints.maxWidth > KPlatformConstants.minWidthThresholdDesk;
@@ -171,36 +153,27 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
                         index:
                             context.l10n.discounts == widget.pageName ? 0 : 1,
                       ),
-                appBar: !KTest.testIsWeb && (offline || slow)
-                    ? PreferredSize(
-                        preferredSize: const Size.fromHeight(KSize.kFont48),
-                        child: Column(
-                          children: [
-                            NetworkStatusBanner(
-                              offline: offline,
-                              slow: slow,
-                            ),
-                            AppBar(
-                              backgroundColor: AppColors.materialThemeWhite,
-                              toolbarHeight: KSize.kAppBarHeight,
-                            ),
-                          ],
-                        ),
-                      )
-                    : AppBar(
-                        backgroundColor: AppColors.materialThemeWhite,
-                        toolbarHeight: KSize.kAppBarHeight,
-                      ),
+                appBar: AppBar(
+                  backgroundColor: AppColors.materialThemeWhite,
+                  toolbarHeight: KSize.kAppBarHeight,
+                ),
                 body: KeyboardScrollView(
                   widgetKey: KWidgetkeys.widget.scaffold.scroll,
                   // physics: KTest.scroll,
                   slivers: [
+                    if (!KTest.testIsWeb && (state.isOffline || state.isSlow))
+                      SliverPersistentHeader(
+                        delegate: NetworkStatusBanner(
+                          networkStatus: state,
+                        ),
+                      ),
                     if (KTest.testIsWeb || widget.pageName != null)
                       SliverPersistentHeader(
                         delegate: NawbarWidget(
                           isDesk: isDesk,
                           isTablet: isTablet,
                           pageName: widget.pageName,
+                          networkStatus: state,
                           // showMobileNawbar: widget.showMobileNawbar,
                         ),
                       ),

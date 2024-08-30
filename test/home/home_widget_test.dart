@@ -197,6 +197,53 @@ void main() {
         verify(mockFaqRepository.getQuestions()).called(2);
       });
 
+      testWidgets('${KGroupText.network} mob offline', (tester) async {
+        await networkOfflineMobHelper(
+          tester: tester,
+          pumpApp: () async => homePumpAppHelper(
+            //mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+            // mockInvestorsRepository: mockInvestorsRepository,
+            mockFaqRepository: mockFaqRepository,
+            mockAuthenticationRepository: mockAuthenticationRepository,
+            mockUrlRepository: mockUrlRepository,
+            tester: tester,
+          ),
+        );
+        if (KTest.testIsWeb) {
+          expect(
+            find.byKey(KWidgetkeys.widget.networkBanner.widget),
+            findsNothing,
+          );
+          expect(
+            find.byKey(KWidgetkeys.widget.networkBanner.iconNoInternet),
+            findsNothing,
+          );
+        }
+      });
+      testWidgets('${KGroupText.network} mob slow', (tester) async {
+        await networkSlowMobHelper(
+          tester: tester,
+          pumpApp: () async => homePumpAppHelper(
+            //mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+            // mockInvestorsRepository: mockInvestorsRepository,
+            mockFaqRepository: mockFaqRepository,
+            mockAuthenticationRepository: mockAuthenticationRepository,
+            mockUrlRepository: mockUrlRepository,
+            tester: tester,
+          ),
+        );
+        if (KTest.testIsWeb) {
+          expect(
+            find.byKey(KWidgetkeys.widget.networkBanner.widget),
+            findsNothing,
+          );
+          expect(
+            find.byKey(KWidgetkeys.widget.networkBanner.iconSlowInternet),
+            findsNothing,
+          );
+        }
+      });
+
       group('${KGroupText.goRouter} ', () {
         late MockGoRouter mockGoRouter;
         setUp(() => mockGoRouter = MockGoRouter());

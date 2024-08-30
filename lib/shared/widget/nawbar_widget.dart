@@ -8,6 +8,7 @@ class NawbarWidget extends SliverPersistentHeaderDelegate {
   const NawbarWidget({
     required this.isDesk,
     required this.isTablet,
+    this.networkStatus,
     this.widgetKey,
     this.childWidget,
     this.maxMinHeight,
@@ -23,6 +24,7 @@ class NawbarWidget extends SliverPersistentHeaderDelegate {
   final String? pageName;
   // final bool? showMobileNawbar;
   final bool? showMobBackButton;
+  final NetworkStatus? networkStatus;
 
   @override
   double get maxExtent => maxMinHeight ?? KMinMaxSize.minmaxHeight94;
@@ -50,6 +52,8 @@ class NawbarWidget extends SliverPersistentHeaderDelegate {
       pageName: pageName,
       // showMobileNawbar: showMobileNawbar ?? false,
       showBackButton: showMobBackButton,
+      shrinkOffset: shrinkOffset,
+      networkStatus: networkStatus,
     );
   }
 }
@@ -58,6 +62,8 @@ class _NawbarWidgetImplematation extends StatefulWidget {
   const _NawbarWidgetImplematation({
     required this.isDesk,
     required this.isTablet,
+    required this.shrinkOffset,
+    this.networkStatus,
     // required this.showMobileNawbar,
     super.key,
     this.childWidget,
@@ -70,6 +76,8 @@ class _NawbarWidgetImplematation extends StatefulWidget {
   final String? pageName;
   // final bool showMobileNawbar;
   final bool? showBackButton;
+  final double shrinkOffset;
+  final NetworkStatus? networkStatus;
 
   @override
   State<_NawbarWidgetImplematation> createState() =>
@@ -96,6 +104,7 @@ class _NawbarWidgetImplematationState
 
   @override
   Widget build(BuildContext context) {
+    final isShrunk = widget.shrinkOffset > 0;
     return widget.childWidget ??
         Container(
           key: KWidgetkeys.widget.nawbar.widget,
@@ -294,6 +303,7 @@ class _NawbarWidgetImplematationState
                 )
               : widget.showBackButton ?? false
                   ? Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         TextButton(
                           key: KWidgetkeys.widget.nawbar.backButton,
@@ -309,26 +319,64 @@ class _NawbarWidgetImplematationState
                           child: KIcon.arrowBack,
                         ),
                         Expanded(
-                          child: pageName,
+                          child: pageName(
+                            showBackButton: true,
+                            isShrunk: isShrunk,
+                            state: widget.networkStatus,
+                          ),
                         ),
-                        KSizedBox.kWidthSizedBox56,
+                        //KSizedBox.kWidthSizedBox56,
+                        if (isShrunk &&
+                            !KTest.testIsWeb &&
+                            (widget.networkStatus!.isOffline ||
+                                widget.networkStatus!.isSlow))
+                          internetBanner(widget.networkStatus!),
                       ],
                     )
                   : Padding(
                       padding: const EdgeInsets.symmetric(
                         vertical: KPadding.kPaddingSize12,
                       ),
-                      child: pageName,
+                      child: pageName(
+                        isShrunk: isShrunk,
+                        state: widget.networkStatus,
+                        showBackButton: false,
+                      ),
                     ),
         );
   }
 
-  Widget get pageName => Text(
-        '${widget.pageName}',
-        key: KWidgetkeys.widget.nawbar.pageName,
-        style: AppTextStyle.materialThemeTitleMedium,
-        textAlign: TextAlign.center,
-      );
+  Widget pageName({
+    required bool isShrunk,
+    required bool showBackButton,
+    NetworkStatus? state,
+  }) {
+    return Row(
+      key: KWidgetkeys.widget.nawbar.pageName,
+      //mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Expanded(
+          child: Text(
+            '${widget.pageName}',
+            style: AppTextStyle.materialThemeTitleMedium,
+            textAlign: TextAlign.center,
+          ),
+        ),
+        if (!showBackButton &&
+            isShrunk &&
+            !KTest.testIsWeb &&
+            (state!.isOffline || state.isSlow))
+          internetBanner(state),
+      ],
+    );
+  }
+
+  Padding internetBanner(NetworkStatus state) {
+    return Padding(
+      padding: const EdgeInsets.only(right: KPadding.kPaddingSize16),
+      child: state.isOffline ? KIcon.noInternet : KIcon.slowInternet,
+    );
+  }
 
   double get padding => widget.isDesk
       ? KPadding.kPaddingSize90
