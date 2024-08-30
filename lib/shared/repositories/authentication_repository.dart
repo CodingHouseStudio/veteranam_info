@@ -38,30 +38,37 @@ class AuthenticationRepository {
     _userSubscription ??=
         iAppAuthenticationRepository.user.listen((currentUser) {
       if (currentUser.isNotEmpty) {
-        if (currentUserSetting.id != currentUser.id) {
+        if (currentUserSetting.id != currentUser.id &&
+            _userSettingSubscription != null) {
           _userSettingSubscription?.cancel();
           _userSettingSubscription = null;
         }
+        var userSettingIsNew = _userSettingSubscription == null;
         _userSettingSubscription ??=
             iAppAuthenticationRepository.userSetting.listen(
           (currentUserSetting) {
+            if (userSettingIsNew) {
+              unawaited(_createFcmUserSetting());
+              userSettingIsNew = false;
+            }
             _userSettingController.add(
               currentUserSetting,
             );
-            if (isAnonymously()) {
-              _authenticationStatuscontroller.add(
-                AuthenticationStatus.anonymous,
-              );
-              return;
-            }
-            _authenticationStatuscontroller.add(
-              AuthenticationStatus.authenticated,
-            );
           },
         );
+        if (isAnonymously()) {
+          _authenticationStatuscontroller.add(
+            AuthenticationStatus.anonymous,
+          );
+          return;
+        }
+        _authenticationStatuscontroller.add(
+          AuthenticationStatus.authenticated,
+        );
+
         return;
       }
-      _logInAnonymously();
+      unawaited(_logInAnonymously());
       _userSettingSubscription?.cancel();
       _userSettingSubscription = null;
     });
@@ -126,6 +133,20 @@ class AuthenticationRepository {
       (r) {
         // debugPrint('authenticated');
         _authenticationStatuscontroller.add(AuthenticationStatus.authenticated);
+        return Right(r);
+      },
+    );
+  }
+
+  Future<Either<SomeFailure, bool>> _createFcmUserSetting() async {
+    final result = await iAppAuthenticationRepository.createFcmUserSetting();
+    return result.fold(
+      (l) {
+        // debugPrint('error: $l');
+        return Left(l);
+      },
+      (r) {
+        // debugPrint('created');
         return Right(r);
       },
     );

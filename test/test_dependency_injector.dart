@@ -1,6 +1,8 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -22,16 +24,12 @@ void configureDependenciesTest() {
   GetIt.I.registerSingleton<FakeClient>(FakeClient());
   GetIt.I.registerSingleton<FirebaseAnalytics>(MockFirebaseAnalytics());
   GetIt.I.registerSingleton<FirebaseRemoteConfig>(MockFirebaseRemoteConfig());
-  GetIt.I.registerSingleton<StorageService>(
-    MockStorageService(),
-  );
-  GetIt.I.registerSingleton<Connectivity>(
-    Connectivity(),
-  );
+  GetIt.I.registerSingleton<FirebaseMessaging>(MockFirebaseMessaging());
+  GetIt.I.registerSingleton<StorageService>(MockStorageService());
+  GetIt.I.registerSingleton<Connectivity>(Connectivity());
+  GetIt.I.registerSingleton<DeviceInfoPlugin>(DeviceInfoPlugin());
   GetIt.I.registerSingleton<FirestoreService>(
-    FirestoreService(
-      CacheClient(),
-    ),
+    FirestoreService(CacheClient()),
   );
   GetIt.I.registerSingleton<FirebaseRemoteConfigProvider>(
     FirebaseRemoteConfigProvider(
@@ -41,7 +39,15 @@ void configureDependenciesTest() {
 
   // Repositories
   GetIt.I.registerLazySingleton<IStorage>(SecureStorageRepository.new);
+  GetIt.I.registerSingleton<BuildRepository>(BuildRepository());
   GetIt.I.registerSingleton<IFeedbackRepository>(FeedbackRepository());
+  GetIt.I.registerSingleton<IDeviceRepository>(
+    DeviceRepository(
+      GetIt.I.get<FirebaseMessaging>(),
+      GetIt.I.get<DeviceInfoPlugin>(),
+      GetIt.I.get<BuildRepository>(),
+    ),
+  );
   GetIt.I.registerSingleton<IFaqRepository>(FaqRepository());
   GetIt.I.registerSingleton<IAppAuthenticationRepository>(
     AppAuthenticationRepository(
