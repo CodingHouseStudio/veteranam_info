@@ -32,49 +32,49 @@ class DeviceRepository implements IDeviceRepository {
   Future<Either<SomeFailure, DeviceInfoModel?>> getDevice({
     List<DeviceInfoModel>? initialList,
   }) async {
-    // if (kReleaseMode) {
-    var id = '';
-    SomeFailure? failure;
-    String? fcm;
-    final platform = PlatformEnum.getPlatform;
+    if (KTest.testReleaseMode) {
+      var id = '';
+      SomeFailure? failure;
+      String? fcm;
+      final platform = PlatformEnum.getPlatform;
 
-    final idResult = await getDeviceId(platformValue: platform);
-    idResult.fold(
-      (l) => failure = l,
-      (r) => id = r,
-    );
-    if (failure != null) return Left(failure!);
+      final idResult = await getDeviceId(platformValue: platform);
+      idResult.fold(
+        (l) => failure = l,
+        (r) => id = r,
+      );
+      if (failure != null) return Left(failure!);
 
-    final deviceInfoExist = initialList?.any(
-      (deviceInfo) => deviceInfo.deviceId == id && deviceInfo.fcmToken != null,
-    );
+      final deviceInfoExist = initialList?.any(
+        (deviceInfo) =>
+            deviceInfo.deviceId == id && deviceInfo.fcmToken != null,
+      );
 
-    if (deviceInfoExist ?? false) {
+      if (deviceInfoExist ?? false) {
+        return const Right(null);
+      }
+
+      final fcmResult = await getFcm(platformValue: platform);
+      fcmResult.fold(
+        (l) => failure = l,
+        (r) => fcm = r,
+      );
+      if (failure != null) return Left(failure!);
+
+      final buildInfo = await _buildRepository.getBuildInfo();
+
+      return Right(
+        DeviceInfoModel(
+          deviceId: id,
+          fcmToken: fcm,
+          date: ExtendedDateTime.current,
+          build: buildInfo.buildNumber,
+          platform: platform,
+        ),
+      );
+    } else {
       return const Right(null);
     }
-
-    final fcmResult = await getFcm(platformValue: platform);
-    fcmResult.fold(
-      (l) => failure = l,
-      (r) => fcm = r,
-    );
-    if (failure != null) return Left(failure!);
-
-    final buildInfo = await _buildRepository.getBuildInfo();
-
-    return Right(
-      DeviceInfoModel(
-        deviceId: id,
-        fcmToken: fcm,
-        date: ExtendedDateTime.current,
-        build: buildInfo.buildNumber,
-        platform: platform,
-      ),
-    );
-    // }
-    // else{
-    //   return Right(null);
-    // }
     // if (kReleaseMode) {
     // if (Platform.isIOS || Platform.isAndroid) {
     //   // String? temp2;
