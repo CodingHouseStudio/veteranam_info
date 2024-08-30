@@ -20,6 +20,8 @@ void main() {
     late IAppAuthenticationRepository mockAppAuthenticationRepository;
     late IReportRepository mockReportRepository;
     late AuthenticationRepository mockAuthenticationRepository;
+    late FirebaseAnalyticsService mockFirebaseAnalyticsService;
+    late FirebaseRemoteConfigProvider mockFirebaseRemoteConfigProvider;
     setUp(() {
       KTest.testIsWeb = false;
       KPlatformConstants.isWebDesktop = true;
@@ -29,6 +31,8 @@ void main() {
       mockDiscountRepository = MockIDiscountRepository();
       mockAppAuthenticationRepository = MockAppAuthenticationRepository();
       mockAuthenticationRepository = MockAuthenticationRepository();
+      mockFirebaseAnalyticsService = MockFirebaseAnalyticsService();
+      mockFirebaseRemoteConfigProvider = MockFirebaseRemoteConfigProvider();
 
       when(mockAuthenticationRepository.currentUser).thenAnswer(
         (realInvocation) => User.empty,
@@ -60,7 +64,7 @@ void main() {
       );
       when(mockDiscountRepository.userCanSendUserEmail(KTestText.user.id))
           .thenAnswer(
-        (invocation) async => const Right(false),
+        (invocation) async => const Right(-1),
       );
       when(
         mockDiscountRepository.getDiscountItems(
@@ -82,7 +86,9 @@ void main() {
         mockDiscountRepository: mockDiscountRepository,
         mockAppAuthenticationRepository: mockAppAuthenticationRepository,
         mockReportRepository: mockReportRepository,
+        mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
         mockAuthenticationRepository: mockAuthenticationRepository,
+        mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
       );
 
       await discountsInitialHelper(tester);
@@ -97,8 +103,10 @@ void main() {
           mockDiscountRepository: mockDiscountRepository,
           mockGoRouter: mockGoRouter,
           mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
           mockReportRepository: mockReportRepository,
           mockAuthenticationRepository: mockAuthenticationRepository,
+          mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
         );
 
         await discountsInitialHelper(tester);
@@ -110,8 +118,10 @@ void main() {
             mockDiscountRepository: mockDiscountRepository,
             mockGoRouter: mockGoRouter,
             mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+            mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
             mockReportRepository: mockReportRepository,
             mockAuthenticationRepository: mockAuthenticationRepository,
+            mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
           );
 
           await mobNavigationButtonsHelper(

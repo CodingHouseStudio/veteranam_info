@@ -12,6 +12,7 @@ Future<void> appPumpAppHelper({
   required IFaqRepository mockFaqRepository,
   required IReportRepository mockReportRepository,
   required IInvestorsRepository mockInvestorsReportisory,
+  required FirebaseRemoteConfigProvider mockFirebaseRemoteConfigProvider,
 }) async {
   _registerAuthenticationBloc(mockAuthenticationRepository);
   _registerHomeBloc(mockFaqRepository);
@@ -19,6 +20,7 @@ Future<void> appPumpAppHelper({
     mockDiscountRepository: mockDiscountRepository,
     mockAppAuthenticationRepository: mockAppAuthenticationRepository,
     mockReportRepository: mockReportRepository,
+    mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
   );
   _registerDiscountLinkCubit(
     mockDiscountRepository: mockDiscountRepository,
@@ -27,13 +29,15 @@ Future<void> appPumpAppHelper({
   _registerDiscountUserEmailCubit(
     mockDiscountRepository: mockDiscountRepository,
     mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+    // mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
   );
-  _registreInvestorsBloc(
+  _registerInvestorsBloc(
     mockInvestorsReportisory: mockInvestorsReportisory,
     mockAppAuthenticationRepository: mockAppAuthenticationRepository,
     mockReportRepository: mockReportRepository,
   );
-  _registremMobFaqBloc(mockFaqRepository);
+  _registerMobFaqBloc(mockFaqRepository);
+  _registerDiscountConfigCubit(mockFirebaseRemoteConfigProvider);
   await tester.pumpWidget(const App());
 
   await tester.pumpAndSettle();
@@ -81,10 +85,12 @@ void _registerDiscountLinkCubit({
 void _registerDiscountUserEmailCubit({
   required IDiscountRepository mockDiscountRepository,
   required IAppAuthenticationRepository mockAppAuthenticationRepository,
+  // required FirebaseRemoteConfigProvider mockFirebaseRemoteConfigProvider,
 }) {
   final authenticationBloc = DiscountUserEmailCubit(
     discountRepository: mockDiscountRepository,
     appAuthenticationRepository: mockAppAuthenticationRepository,
+    // firebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
   );
   if (GetIt.I.isRegistered<DiscountUserEmailCubit>()) {
     GetIt.I.unregister<DiscountUserEmailCubit>();
@@ -96,11 +102,13 @@ void _registerDiscountBloc({
   required IDiscountRepository mockDiscountRepository,
   required IAppAuthenticationRepository mockAppAuthenticationRepository,
   required IReportRepository mockReportRepository,
+  required FirebaseRemoteConfigProvider mockFirebaseRemoteConfigProvider,
 }) {
   final discountBloc = DiscountWatcherBloc(
     discountRepository: mockDiscountRepository,
     reportRepository: mockReportRepository,
     appAuthenticationRepository: mockAppAuthenticationRepository,
+    firebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
   );
   if (GetIt.I.isRegistered<DiscountWatcherBloc>()) {
     GetIt.I.unregister<DiscountWatcherBloc>();
@@ -108,7 +116,7 @@ void _registerDiscountBloc({
   GetIt.I.registerSingleton<DiscountWatcherBloc>(discountBloc);
 }
 
-void _registreInvestorsBloc({
+void _registerInvestorsBloc({
   required IInvestorsRepository mockInvestorsReportisory,
   required IAppAuthenticationRepository mockAppAuthenticationRepository,
   required IReportRepository mockReportRepository,
@@ -124,7 +132,7 @@ void _registreInvestorsBloc({
   GetIt.I.registerSingleton<InvestorsWatcherBloc>(investorsBloc);
 }
 
-void _registremMobFaqBloc(IFaqRepository mockFaqRepository) {
+void _registerMobFaqBloc(IFaqRepository mockFaqRepository) {
   final mobFaqBloc = MobFaqWatcherBloc(
     faqRepository: mockFaqRepository,
   );
@@ -132,4 +140,16 @@ void _registremMobFaqBloc(IFaqRepository mockFaqRepository) {
     GetIt.I.unregister<MobFaqWatcherBloc>();
   }
   GetIt.I.registerSingleton<MobFaqWatcherBloc>(mobFaqBloc);
+}
+
+void _registerDiscountConfigCubit(
+  FirebaseRemoteConfigProvider mockFirebaseRemoteConfigProvider,
+) {
+  final discountConfigCubit = DiscountConfigCubit(
+    firebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
+  );
+  if (GetIt.I.isRegistered<DiscountConfigCubit>()) {
+    GetIt.I.unregister<DiscountConfigCubit>();
+  }
+  GetIt.I.registerSingleton<DiscountConfigCubit>(discountConfigCubit);
 }

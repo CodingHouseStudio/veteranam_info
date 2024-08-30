@@ -109,8 +109,8 @@ class _NetworkImageWidgetState extends State<NetworkImageWidget> {
   }
 
   String get _url {
-    final url = kIsWeb ? Uri.base.origin : 'https://veteranam.info';
     if ((Config.isProduction && kReleaseMode) || !kIsWeb) {
+      final url = kIsWeb ? Uri.base.origin : 'https://veteranam.info';
       return '$url$_urlPrefix${widget.imageUrl}';
     } else {
       return widget.imageUrl;
@@ -121,7 +121,7 @@ class _NetworkImageWidgetState extends State<NetworkImageWidget> {
     // widget.size == null
     // ?
     final quality = widget.highQuality ?? false ? '100' : '85';
-    const format = 'auto';
+    const format = 'auto'; // KPlatformConstants.isWebSaffari ? 'jpeg' : 'auto';
     return '/cdn-cgi/image/quality=$quality,format=$format/';
   }
   // : '/cdn-cgi/image/${kIsWeb ? 'quality=100' : 'quality=85'}'

@@ -22,12 +22,14 @@ void main() {
     late IInvestorsRepository mockInvestorsReportisory;
     late IAppAuthenticationRepository mockAppAuthenticationRepository;
     late IReportRepository mockReportRepository;
+    late FirebaseRemoteConfigProvider mockFirebaseRemoteConfigProvider;
     setUp(() {
       mockAuthenticationRepository = MockAuthenticationRepository();
       mockDiscountRepository = MockIDiscountRepository();
       mockAppAuthenticationRepository = MockAppAuthenticationRepository();
       mockFaqRepository = MockIFaqRepository();
       mockInvestorsReportisory = MockIInvestorsRepository();
+      mockFirebaseRemoteConfigProvider = MockFirebaseRemoteConfigProvider();
 
       when(mockAuthenticationRepository.userSetting).thenAnswer(
         (realInvocation) => Stream.value(UserSetting.empty),
@@ -64,7 +66,7 @@ void main() {
       );
       when(mockDiscountRepository.userCanSendUserEmail(KTestText.user.id))
           .thenAnswer(
-        (invocation) async => const Right(true),
+        (invocation) async => const Right(-1),
       );
       when(
         mockDiscountRepository.getDiscountItems(
@@ -94,6 +96,7 @@ void main() {
           mockFaqRepository: mockFaqRepository,
           mockReportRepository: mockReportRepository,
           mockInvestorsReportisory: mockInvestorsReportisory,
+          mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
         );
       });
     });
@@ -109,6 +112,7 @@ void main() {
           mockFaqRepository: mockFaqRepository,
           mockReportRepository: mockReportRepository,
           mockInvestorsReportisory: mockInvestorsReportisory,
+          mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
         );
       });
     });

@@ -74,6 +74,7 @@ class AppWidget extends StatelessWidget {
             : BetterFeedback(
                 localizationsDelegates: locale,
                 localeOverride: localeValue,
+                themeMode: ThemeMode.light,
                 mode: FeedbackMode.navigate,
                 feedbackBuilder: (context, onSubmit, scrollController) =>
                     MobFeedbackWidget(onSubmit: onSubmit),
@@ -87,15 +88,13 @@ class AppWidget extends StatelessWidget {
     );
   }
 
-  Widget body(Locale localeValue) {
-    return MaterialApp.router(
-      key: KWidgetkeys.screen.app.screen,
-      theme: themeData,
-      scrollBehavior: CustomScrollBehavior(),
-      localizationsDelegates: locale,
-      locale: localeValue,
-      supportedLocales: supportedLocales,
-      routerConfig: router,
-    );
-  }
+  Widget body(Locale localeValue) => MaterialApp.router(
+        key: KWidgetkeys.screen.app.screen,
+        theme: themeData,
+        // scrollBehavior: CustomScrollBehavior(),
+        localizationsDelegates: locale,
+        locale: localeValue,
+        supportedLocales: supportedLocales,
+        routerConfig: router,
+      );
 }

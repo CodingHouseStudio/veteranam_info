@@ -16,11 +16,14 @@ void main() {
     late IDiscountRepository mockdiscountRepository;
     late IAppAuthenticationRepository mockAppAuthenticationRepository;
     late IReportRepository mockReportRepository;
+    late FirebaseRemoteConfigProvider mockFirebaseRemoteConfigProvider;
 
     setUp(() {
       mockdiscountRepository = MockIDiscountRepository();
       mockAppAuthenticationRepository = MockIAppAuthenticationRepository();
       mockReportRepository = MockIReportRepository();
+      mockFirebaseRemoteConfigProvider = MockFirebaseRemoteConfigProvider();
+
       when(
         mockdiscountRepository.getDiscountItems(
           reportIdItems: KTestText.reportItems.getIdCard,
@@ -39,10 +42,17 @@ void main() {
       ).thenAnswer(
         (invocation) async => Right(KTestText.reportItems),
       );
+      when(
+        mockFirebaseRemoteConfigProvider
+            .getInt(DiscountWatcherBloc.loadingItemsKey),
+      ).thenAnswer(
+        (invocation) => KDimensions.loadItems,
+      );
       discountWatcherBloc = DiscountWatcherBloc(
         discountRepository: mockdiscountRepository,
         reportRepository: mockReportRepository,
         appAuthenticationRepository: mockAppAuthenticationRepository,
+        firebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
       );
     });
 

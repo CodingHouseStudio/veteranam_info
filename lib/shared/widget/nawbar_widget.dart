@@ -335,7 +335,7 @@ class _NawbarWidgetImplematationState
                     )
                   : Padding(
                       padding: const EdgeInsets.symmetric(
-                        vertical: KPadding.kPaddingSize12,
+                        vertical: KPadding.kPaddingSize8,
                       ),
                       child: pageName(
                         isShrunk: isShrunk,

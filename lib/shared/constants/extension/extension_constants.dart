@@ -1,8 +1,9 @@
+import 'dart:async';
 import 'dart:math';
-import 'dart:typed_data';
 import 'package:collection/collection.dart';
 import 'package:feedback/feedback.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/foundation.dart' show Uint8List;
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -101,32 +102,37 @@ extension StringExtension on String {
     if (fullText) {
       return this;
     }
-    late String value;
-    if (fullText) {
-      value = this;
-    } else {
-      final lengthValue = isDesk
-          ? KDimensions.descriptionDeskHideLength
-          : KDimensions.descriptionMobHideLength;
-      final end = length > lengthValue ? lengthValue : length;
-      value = '${markdownSubstring(end)}...';
-    }
-    return value.replaceAllMapped(RegExp(r'(https?://[^\s]+)'), (match) {
-      final url = match.group(0);
+    // late String value;
+    // if (fullText) {
+    //   value = this;
+    // } else {
+    final lengthValue = isDesk
+        ? KDimensions.descriptionDeskHideLength
+        : KDimensions.descriptionMobHideLength;
+    final end = length > lengthValue ? lengthValue : length;
+    return '${markdownSubstring(end)}...';
+    // }
+    // return value;
+    // .replaceAllMapped(RegExp(r'(https?://[^\s]+)'), (match) {
+    //   final url = match.group(0);
 
-      final hasEllipsis = match.end > value.length - 3;
-      return url != null
-          ? hasEllipsis
-              ? url
-              : '[$url]($url)'
-          : '';
-    }).substring(
-      0,
-    );
+    //   final hasEllipsis = match.end > value.length - 3;
+    //   return url != null
+    //       ? hasEllipsis
+    //           ? url
+    //           : '[$url]($url)'
+    //       : '';
+    // }).substring(
+    //   0,
+    // );
   }
 
   String markdownSubstring(int end) {
-    late var substringValue = substring(0, end).trim();
+    final match = RegExp(r'([^\s]*https?://[^\s]+)').allMatches(this).where(
+          (element) => element.start < end && element.end > end,
+        );
+    late var substringValue =
+        substring(0, match.isEmpty ? end : match.first.start).trim();
     while (substringValue.endsWith('*')) {
       substringValue = substringValue.substring(0, substringValue.length - 1);
     }
@@ -362,3 +368,21 @@ extension StoryExtensions on StoryModel {
         background: AppColors.materialThemeKeyColorsNeutralVariant,
       );
 }
+
+// extension FirebaseAnalyticsExtensions on FirebaseAnalytics {
+//   void releaseLogEvent({
+//     required String name,
+//     Map<String, Object>? parameters,
+//     AnalyticsCallOptions? callOptions,
+//   }) {
+//     if (kReleaseMode && Config.isProduction) {
+//       unawaited(
+//         logEvent(
+//           name: name,
+//           callOptions: callOptions,
+//           parameters: parameters,
+//         ),
+//       );
+//     }
+//   }
+// }

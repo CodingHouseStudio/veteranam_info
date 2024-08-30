@@ -95,6 +95,7 @@ class AdvancedFilterMobDialog extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  KSizedBox.kWidthSizedBox8,
                   AdvancedFilterResetButton(
                     isDesk: false,
                     resetEvent:
@@ -125,6 +126,7 @@ class AdvancedFilterMobDialog extends StatelessWidget {
                     color: AppColors.materialThemeKeyColorsSecondary,
                     textColor: AppColors.materialThemeWhite,
                   ),
+                  KSizedBox.kWidthSizedBox16,
                 ],
               ),
               KSizedBox.kHeightSizedBox8,

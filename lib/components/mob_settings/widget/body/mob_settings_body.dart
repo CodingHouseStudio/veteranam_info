@@ -11,6 +11,7 @@ class MobSettingsBodyWidget extends StatelessWidget {
     return ScaffoldWidget(
       pageName: context.l10n.settings,
       mainChildWidgetsFunction: ({required isDesk, required isTablet}) => [
+        KSizedBox.kHeightSizedBox16,
         Text(
           key: KWidgetkeys.screen.mobSettings.title,
           context.l10n.general,
@@ -56,12 +57,20 @@ class MobSettingsBodyWidget extends StatelessWidget {
           ),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
                 context.l10n.offline,
                 style: AppTextStyle.materialThemeTitleMedium,
               ),
+              KSizedBox.kWidthSizedBox8,
+              TooltipWidget(
+                key: KWidgetkeys.screen.mobSettings.offlinesIcon,
+                text: context.l10n.mobOfflineHint,
+                duration: const Duration(seconds: 8),
+                verticalOffset: KSize.kPixel40,
+              ),
+              const Spacer(),
               BlocBuilder<MobOfflineModeCubit, MobMode>(
                 builder: (context, _) => SwitchWidget(
                   key: KWidgetkeys.screen.mobSettings.offlinesSwitcher,
@@ -114,21 +123,7 @@ class MobSettingsBodyWidget extends StatelessWidget {
             textColor: AppColors.materialThemeWhite,
             mobVerticalTextPadding: KPadding.kPaddingSize12,
             mobIconPadding: KPadding.kPaddingSize12,
-            isDesk: false,
-          ),
-        ),
-        KSizedBox.kHeightSizedBox16,
-        Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: KPadding.kPaddingSize16,
-          ),
-          child: DoubleButtonWidget(
-            widgetKey: KWidgetkeys.screen.mobSettings.bugButton,
-            text: context.l10n.reportBugs,
-            onPressed: () async => context.dialog.showMobFeedback(),
-            color: AppColors.materialThemeBlack,
-            textColor: AppColors.materialThemeWhite,
-            mobVerticalTextPadding: KPadding.kPaddingSize12,
+            mobHorizontalTextPadding: KPadding.kPaddingSize64,
             isDesk: false,
           ),
         ),
@@ -148,12 +143,26 @@ class MobSettingsBodyWidget extends StatelessWidget {
             ),
           ),
         ),
-        KSizedBox.kHeightSizedBox24,
+        KSizedBox.kHeightSizedBox8,
+        BoxWidget(
+          key: KWidgetkeys.screen.mobSettings.bugButton,
+          isDesk: false,
+          onTap: () async => context.dialog.showMobFeedback(),
+          text: context.l10n.reportBugs,
+          textStyle: AppTextStyle.materialThemeTitleMediumBlack,
+          icon: KIcon.arrowUpRight,
+          padding: const EdgeInsets.only(
+            left: KPadding.kPaddingSize8,
+          ),
+          background: AppColors.materialThemeWhite,
+        ),
+        KSizedBox.kHeightSizedBox8,
         const Divider(
           color: AppColors.materialThemeKeyColorsNeutral,
           height: KSize.kPixel1,
           thickness: KSize.kPixel1,
         ),
+        KSizedBox.kHeightSizedBox8,
         TextButton(
           key: KWidgetkeys.screen.mobSettings.privacyPolicy,
           onPressed: () => context.goNamed(KRoute.privacyPolicy.name),
@@ -161,11 +170,12 @@ class MobSettingsBodyWidget extends StatelessWidget {
               .copyWith(alignment: Alignment.bottomLeft),
           child: Text(
             context.l10n.privacyPolicy,
-            style: AppTextStyle.materialThemeBodyLargeNeutralVariant35,
+            style: AppTextStyle.materialThemeTitleMediumNeutralVariant50,
           ),
         ),
         KSizedBox.kHeightSizedBox16,
         const InfoVersionWidget(isDesk: true),
+        KSizedBox.kHeightSizedBox16,
       ],
     );
 
