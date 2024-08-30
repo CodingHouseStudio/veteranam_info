@@ -1,22 +1,52 @@
-import 'package:firebase_analytics/firebase_analytics.dart';
+import 'dart:async' show Timer;
+
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:veteranam/components/components.dart';
 import 'package:veteranam/shared/shared.dart';
 
-class UserEmailDialog extends StatelessWidget {
+class UserEmailDialog extends StatefulWidget {
   const UserEmailDialog({
     required this.onChanged,
     required this.isDesk,
     required this.sendOnPressed,
     required this.closeOnPressed,
+    required this.userEmailEnum,
+    required this.emailCloseDelay,
     super.key,
   });
   final void Function(String) onChanged;
   final bool isDesk;
   final void Function() sendOnPressed;
   final void Function() closeOnPressed;
+  final UserEmailEnum userEmailEnum;
+  final int emailCloseDelay;
+
+  @override
+  State<UserEmailDialog> createState() => _UserEmailDialogState();
+}
+
+class _UserEmailDialogState extends State<UserEmailDialog> {
+  late bool _isCloseEnabled;
+  Timer? _timer;
+  @override
+  void initState() {
+    if (widget.userEmailEnum.closeEnable) {
+      _isCloseEnabled = true;
+    } else {
+      _isCloseEnabled = false;
+      _timer = Timer(
+          Duration(
+            seconds: widget.emailCloseDelay,
+          ), () {
+        setState(() {
+          _isCloseEnabled = true;
+        });
+      });
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,25 +54,25 @@ class UserEmailDialog extends StatelessWidget {
       listener: (context, state) {
         if (state.formState == EmailEnum.success ||
             state.formState == EmailEnum.close) {
-          if (state.formState == EmailEnum.close) {
-            FirebaseAnalytics.instance.releaseLogEvent(
-              name: 'discount_email_abandon',
-            );
-          } else {
-            FirebaseAnalytics.instance.releaseLogEvent(
-              name: 'discount_email_acquire',
-              parameters: {
-                'isValid': '${state.email.isValid}',
-              },
-            );
-          }
+          // if (state.formState == EmailEnum.close) {
+          //   FirebaseAnalytics.instance.logEvent(
+          //     name: 'discount_email_abandon',
+          //   );
+          // } else {
+          //   FirebaseAnalytics.instance.logEvent(
+          //     name: 'discount_email_acquire',
+          //     parameters: {
+          //       'isValid': '${state.email.isValid}',
+          //     },
+          //   );
+          // }
           context.pop();
         }
       },
       builder: (context, state) => DecoratedBox(
         decoration: KWidgetTheme.boxDecorationDiscountContainer,
         child: Padding(
-          padding: isDesk
+          padding: widget.isDesk
               ? const EdgeInsets.only(
                   top: KPadding.kPaddingSize8,
                   right: KPadding.kPaddingSize40,
@@ -63,7 +93,7 @@ class UserEmailDialog extends StatelessWidget {
                 child: IconButtonWidget(
                   icon: KIcon.close,
                   key: KWidgetkeys.widget.userEmailDialog.icon,
-                  onPressed: closeOnPressed,
+                  onPressed: _isCloseEnabled ? widget.closeOnPressed : null,
                   padding: 0,
                   color: AppColors.materialThemeKeyColorsNeutralVariant,
                   background: AppColors.materialThemeWhite,
@@ -74,7 +104,7 @@ class UserEmailDialog extends StatelessWidget {
                 children: [
                   IconWidget(
                     icon: KIcon.arrowDownRight,
-                    padding: isDesk
+                    padding: widget.isDesk
                         ? KPadding.kPaddingSize20
                         : KPadding.kPaddingSize8,
                   ),
@@ -87,20 +117,20 @@ class UserEmailDialog extends StatelessWidget {
                           key: KWidgetkeys
                               .widget.userEmailDialog.emailDialogTitle,
                           context.l10n.aboutNewDiscounts,
-                          style: isDesk
+                          style: widget.isDesk
                               ? AppTextStyle.materialThemeHeadlineLarge
                               : AppTextStyle.materialThemeHeadlineMedium,
                         ),
-                        if (isDesk)
+                        if (widget.isDesk)
                           KSizedBox.kHeightSizedBox16
                         else
                           KSizedBox.kHeightSizedBox8,
-                        if (isDesk)
+                        if (widget.isDesk)
                           Text(
                             key: KWidgetkeys
                                 .widget.userEmailDialog.emailDialogSubtitle,
                             _text(context),
-                            style: isDesk
+                            style: widget.isDesk
                                 ? AppTextStyle.materialThemeBodyLarge
                                 : AppTextStyle.materialThemeBodyMedium,
                           ),
@@ -109,19 +139,19 @@ class UserEmailDialog extends StatelessWidget {
                   ),
                 ],
               ),
-              if (!isDesk)
+              if (!widget.isDesk)
                 Text(
                   key: KWidgetkeys.widget.userEmailDialog.emailDialogSubtitle,
                   _text(context),
-                  style: isDesk
+                  style: widget.isDesk
                       ? AppTextStyle.materialThemeBodyLarge
                       : AppTextStyle.materialThemeBodyMedium,
                 ),
-              if (isDesk)
+              if (widget.isDesk)
                 KSizedBox.kHeightSizedBox32
               else
                 KSizedBox.kHeightSizedBox24,
-              if (isDesk)
+              if (widget.isDesk)
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -154,8 +184,8 @@ class UserEmailDialog extends StatelessWidget {
   ) =>
       TextFieldWidget(
         widgetKey: KWidgetkeys.widget.userEmailDialog.field,
-        onChanged: onChanged,
-        isDesk: isDesk,
+        onChanged: widget.onChanged,
+        isDesk: widget.isDesk,
         labelText: context.l10n.email,
         errorText: context
             .read<DiscountUserEmailFormBloc>()
@@ -168,16 +198,23 @@ class UserEmailDialog extends StatelessWidget {
                 EmailEnum.invalidData,
         inputFormatterList: [EmailInputFormatter()],
       );
+
   Widget button(BuildContext context) => DoubleButtonWidget(
         text: context.l10n.send,
-        isDesk: isDesk,
-        onPressed: sendOnPressed,
+        isDesk: widget.isDesk,
+        onPressed: widget.sendOnPressed,
         widgetKey: KWidgetkeys.widget.userEmailDialog.button,
         color: AppColors.materialThemeBlack,
         textColor: AppColors.materialThemeWhite,
-        hasAlign: isDesk,
+        hasAlign: widget.isDesk,
         mobTextWidth: double.infinity,
         mobVerticalTextPadding: KPadding.kPaddingSize16,
         mobIconPadding: KPadding.kPaddingSize16,
       );
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
 }

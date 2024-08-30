@@ -35,7 +35,6 @@ class MobSettingsBodyWidget extends StatelessWidget {
             horizontal: KPadding.kPaddingSize16,
           ),
           child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
@@ -56,26 +55,15 @@ class MobSettingsBodyWidget extends StatelessWidget {
             horizontal: KPadding.kPaddingSize16,
           ),
           child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                context.l10n.offline,
-                style: AppTextStyle.materialThemeTitleMedium,
-              ),
-              KSizedBox.kWidthSizedBox8,
               TooltipWidget(
-                key: KWidgetkeys.screen.mobSettings.offlinesIcon,
-                text: context.l10n.mobOfflineHint,
+                key: KWidgetkeys.screen.mobSettings.offlinesTitle,
+                description: context.l10n.mobOfflineHint,
+                text: context.l10n.offline,
                 duration: const Duration(seconds: 8),
-                verticalOffset: KSize.kPixel40,
-                padding: const EdgeInsets.only(
-                  bottom: KPadding.kPaddingSize24,
-                  right: KPadding.kPaddingSize12,
-                  left: KPadding.kPaddingSize12,
-                ),
+                verticalOffset: KSize.kPixel20,
               ),
-              const Spacer(),
               BlocBuilder<MobOfflineModeCubit, MobMode>(
                 builder: (context, _) => SwitchWidget(
                   key: KWidgetkeys.screen.mobSettings.offlinesSwitcher,

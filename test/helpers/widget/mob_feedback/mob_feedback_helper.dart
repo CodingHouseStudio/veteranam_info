@@ -10,21 +10,9 @@ Future<void> mobFeedbackHelper(
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.mobFeedback.text),
+    find.byKey(KWidgetkeys.widget.mobFeedback.title),
     findsOneWidget,
   );
-
-  expect(
-    find.byKey(KWidgetkeys.widget.mobFeedback.icon),
-    findsOneWidget,
-  );
-
-  await tester.tap(
-    find.byKey(KWidgetkeys.widget.mobFeedback.icon),
-    warnIfMissed: false,
-  );
-
-  await tester.pumpAndSettle(const Duration(seconds: 15));
 
   expect(
     find.byKey(KWidgetkeys.widget.mobFeedback.field),

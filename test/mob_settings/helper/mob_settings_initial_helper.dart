@@ -37,12 +37,12 @@ Future<void> mobSettingsInitialHelper(
   await switchHelper(tester: tester, enabled: false, isActive: true);
 
   expect(
-    find.byKey(KWidgetkeys.screen.mobSettings.offlinesIcon),
+    find.byKey(KWidgetkeys.screen.mobSettings.offlinesTitle),
     findsOneWidget,
   );
 
   await tester.tap(
-    find.byKey(KWidgetkeys.screen.mobSettings.offlinesIcon),
+    find.byKey(KWidgetkeys.screen.mobSettings.offlinesTitle),
     // warnIfMissed: false,
   );
 

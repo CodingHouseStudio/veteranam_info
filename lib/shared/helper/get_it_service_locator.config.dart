@@ -19,6 +19,8 @@ import 'package:veteranam/components/discount_card/bloc/discount_card_watcher_bl
     as _i334;
 import 'package:veteranam/components/discounts/bloc/advanced_filter/advanced_filter_mob_cubit.dart'
     as _i189;
+import 'package:veteranam/components/discounts/bloc/config/discount_config_cubit.dart'
+    as _i43;
 import 'package:veteranam/components/discounts/bloc/link/discount_link_cubit.dart'
     as _i227;
 import 'package:veteranam/components/discounts/bloc/link/discount_link_form_bloc.dart'
@@ -173,14 +175,17 @@ extension GetItInjectableX on _i174.GetIt {
         ));
     gh.factory<_i319.UrlCubit>(
         () => _i319.UrlCubit(urlRepository: gh<_i1001.IUrlRepository>()));
-    gh.singleton<_i777.FirebaseAnalyticsService>(
-        () => _i777.FirebaseAnalyticsService(gh<_i398.FirebaseAnalytics>()));
     gh.factory<_i227.DiscountLinkCubit>(() => _i227.DiscountLinkCubit(
           discountRepository: gh<_i1001.IDiscountRepository>(),
           appAuthenticationRepository:
               gh<_i1001.IAppAuthenticationRepository>(),
         ));
     gh.factory<_i372.DiscountLinkFormBloc>(() => _i372.DiscountLinkFormBloc(
+          discountRepository: gh<_i1001.IDiscountRepository>(),
+          appAuthenticationRepository:
+              gh<_i1001.IAppAuthenticationRepository>(),
+        ));
+    gh.factory<_i432.DiscountUserEmailCubit>(() => _i432.DiscountUserEmailCubit(
           discountRepository: gh<_i1001.IDiscountRepository>(),
           appAuthenticationRepository:
               gh<_i1001.IAppAuthenticationRepository>(),
@@ -192,12 +197,6 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i801.StoryRepository(),
       registerFor: {_development},
     );
-    gh.factory<_i1006.DiscountWatcherBloc>(() => _i1006.DiscountWatcherBloc(
-          discountRepository: gh<_i1001.IDiscountRepository>(),
-          reportRepository: gh<_i1001.IReportRepository>(),
-          appAuthenticationRepository:
-              gh<_i1001.IAppAuthenticationRepository>(),
-        ));
     gh.factory<_i609.InvestorsWatcherBloc>(() => _i609.InvestorsWatcherBloc(
           investorsRepository: gh<_i1001.IInvestorsRepository>(),
           reportRepository: gh<_i1001.IReportRepository>(),
@@ -253,13 +252,6 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i76.WorkRepository(),
       registerFor: {_development},
     );
-    gh.factory<_i441.DiscountUserEmailFormBloc>(
-        () => _i441.DiscountUserEmailFormBloc(
-              discountRepository: gh<_i1001.IDiscountRepository>(),
-              appAuthenticationRepository:
-                  gh<_i1001.IAppAuthenticationRepository>(),
-              firebaseAnalyticsService: gh<_i1001.FirebaseAnalyticsService>(),
-            ));
     gh.factory<_i922.MyStoryWatcherBloc>(
       () => _i922.MyStoryWatcherBloc(
         storyRepository: gh<_i1001.IStoryRepository>(),
@@ -272,6 +264,14 @@ extension GetItInjectableX on _i174.GetIt {
           informationRepository: gh<_i1001.IInformationRepository>()),
       registerFor: {_development},
     );
+    gh.factory<_i1006.DiscountWatcherBloc>(() => _i1006.DiscountWatcherBloc(
+          discountRepository: gh<_i1001.IDiscountRepository>(),
+          reportRepository: gh<_i1001.IReportRepository>(),
+          appAuthenticationRepository:
+              gh<_i1001.IAppAuthenticationRepository>(),
+          firebaseRemoteConfigProvider:
+              gh<_i1001.FirebaseRemoteConfigProvider>(),
+        ));
     gh.factory<_i43.MobOfflineModeCubit>(() => _i43.MobOfflineModeCubit(
         firestoreService: gh<_i1001.FirestoreService>()));
     gh.singleton<_i570.AuthenticationBloc>(() => _i570.AuthenticationBloc(
@@ -283,13 +283,9 @@ extension GetItInjectableX on _i174.GetIt {
         ));
     gh.singleton<_i997.NetworkRepository>(
         () => _i997.NetworkRepository(gh<_i1001.IAppNetworkRepository>()));
-    gh.factory<_i432.DiscountUserEmailCubit>(() => _i432.DiscountUserEmailCubit(
-          discountRepository: gh<_i1001.IDiscountRepository>(),
-          appAuthenticationRepository:
-              gh<_i1001.IAppAuthenticationRepository>(),
-          firebaseRemoteConfigProvider:
-              gh<_i1001.FirebaseRemoteConfigProvider>(),
-        ));
+    gh.factory<_i43.DiscountConfigCubit>(() => _i43.DiscountConfigCubit(
+        firebaseRemoteConfigProvider:
+            gh<_i1001.FirebaseRemoteConfigProvider>()));
     gh.factory<_i716.StoryAddBloc>(
       () => _i716.StoryAddBloc(
         storyRepository: gh<_i1001.IStoryRepository>(),
@@ -297,6 +293,11 @@ extension GetItInjectableX on _i174.GetIt {
       ),
       registerFor: {_development},
     );
+    gh.singleton<_i777.FirebaseAnalyticsService>(
+        () => _i777.FirebaseAnalyticsService(
+              gh<_i398.FirebaseAnalytics>(),
+              gh<_i1001.AuthenticationRepository>(),
+            ));
     gh.factory<_i408.InformationWatcherBloc>(
       () => _i408.InformationWatcherBloc(
         informationRepository: gh<_i1001.IInformationRepository>(),
@@ -315,6 +316,13 @@ extension GetItInjectableX on _i174.GetIt {
           employeeRespondRepository: gh<_i1001.IWorkRepository>()),
       registerFor: {_development},
     );
+    gh.factory<_i441.DiscountUserEmailFormBloc>(
+        () => _i441.DiscountUserEmailFormBloc(
+              discountRepository: gh<_i1001.IDiscountRepository>(),
+              appAuthenticationRepository:
+                  gh<_i1001.IAppAuthenticationRepository>(),
+              firebaseAnalyticsService: gh<_i1001.FirebaseAnalyticsService>(),
+            ));
     gh.singleton<_i891.NetworkCubit>(() =>
         _i891.NetworkCubit(networkRepository: gh<_i1001.NetworkRepository>()));
     return this;
