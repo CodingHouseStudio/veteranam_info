@@ -213,6 +213,7 @@ abstract class KAppText {
   static const String cache = 'local cache';
   static const String server = 'server';
   static const String site = 'https://veteranam.info';
+  static const String unknown = 'Unknown';
   static List<String> get routes => [
         KRoute.discounts.name,
         KRoute.support.name,

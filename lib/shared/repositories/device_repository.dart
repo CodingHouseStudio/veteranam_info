@@ -1,55 +1,83 @@
-import 'dart:io' show Platform;
-
 import 'package:dartz/dartz.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/foundation.dart' show kIsWeb, kReleaseMode;
+// import 'package:flutter/foundation.dart' show kIsWeb, kReleaseMode;
 import 'package:injectable/injectable.dart';
 import 'package:veteranam/shared/shared.dart';
 
-@Singleton(as: IDeviceRepository)
+@Singleton(as: IDeviceRepository, order: -1)
 class DeviceRepository implements IDeviceRepository {
-  DeviceRepository(this._firebaseMessaging, this._deviceInfoPlugin) {
+  DeviceRepository(
+    this._firebaseMessaging,
+    this._deviceInfoPlugin,
+    this._buildRepository,
+  ) {
     // Initialization logic can't use await directly in constructor
-    _messagingAutoInit();
+    _messagingInit();
   }
 
   final FirebaseMessaging _firebaseMessaging;
   final DeviceInfoPlugin _deviceInfoPlugin;
+  final BuildRepository _buildRepository;
 
-  Future<void> _messagingAutoInit() async {
+  Future<void> _messagingInit() async {
     await _firebaseMessaging.setAutoInitEnabled(true);
+    // You may set the permission requests to "provisional" which allows the
+    // user to choose what type
+    // of notifications they would like to receive once the user receives a
+    // notification.
+    await _firebaseMessaging.requestPermission(
+      provisional: PlatformEnum.getPlatform.isIOS,
+    );
   }
 
   @override
-  Future<Either<SomeFailure, DeviceModel?>> getDevice() async {
+  Future<Either<SomeFailure, DeviceInfoModel?>> getDevice({
+    List<DeviceInfoModel?>? initialList,
+  }) async {
+    // if (kReleaseMode) {
     late var id = '';
     SomeFailure? failure;
     String? fcm;
     final platform = PlatformEnum.getPlatform;
 
-    final fcmResult = await getFcm();
+    final idResult = await getDeviceId(platformValue: platform);
+    idResult.fold(
+      (l) => failure = l,
+      (r) => id = r,
+    );
+
+    final deviceInfoExist = initialList?.any(
+      (deviceInfo) =>
+          deviceInfo?.deviceId == id && deviceInfo?.fcmToken != null,
+    );
+
+    if (deviceInfoExist ?? false) {
+      return const Right(null);
+    }
+
+    final fcmResult = await getFcm(platformValue: platform);
     fcmResult.fold(
       (l) => failure = l,
       (r) => fcm = r,
     );
     if (failure != null) return Left(failure!);
 
-    final idResult = await getDeviceId();
-    idResult.fold(
-      (l) => failure = l,
-      (r) => id = r,
-    );
+    final buildInfo = await _buildRepository.getBuildInfo();
 
     return Right(
-      DeviceModel(
+      DeviceInfoModel(
         deviceId: id,
         fcmToken: fcm,
         date: ExtendedDateTime.current,
-        build: '',
-        platform: PlatformEnum.android,
+        build: buildInfo.buildNumber,
+        platform: platform,
       ),
     );
+    // }
+    // else{
+    //   return Right(null);
+    // }
     // if (kReleaseMode) {
     // if (Platform.isIOS || Platform.isAndroid) {
     //   // String? temp2;
@@ -110,7 +138,9 @@ class DeviceRepository implements IDeviceRepository {
         case PlatformEnum.web:
           final dev = await _deviceInfoPlugin.webBrowserInfo;
 
-          deviceId = dev.userAgent ?? dev.vendor ?? 'unknown';
+          // Get the user's browser name and platform
+          // (I think it will be unique enough for one user)
+          deviceId = '${dev.browserName} Platform: ${dev.platform}';
         case PlatformEnum.unknown:
           final dev = await _deviceInfoPlugin.deviceInfo;
           deviceId = dev.toString();
@@ -127,52 +157,25 @@ class DeviceRepository implements IDeviceRepository {
   }) async {
     try {
       final platform = platformValue ?? PlatformEnum.getPlatform;
-      String? temp2;
+      String? fcmToken;
       final notificationSettings =
           await _firebaseMessaging.getNotificationSettings();
-      switch (platform) {
-        case PlatformEnum.android:
-          final dev = await _deviceInfoPlugin.androidInfo;
-          temp2 = dev.id;
-        case PlatformEnum.ios:
-          final dev = await _deviceInfoPlugin.iosInfo;
-
-          temp2 = dev.identifierForVendor ?? 'unknown';
-        case PlatformEnum.web:
-          final dev = await _deviceInfoPlugin.webBrowserInfo;
-
-          temp2 = dev.userAgent ?? dev.vendor ?? 'unknown';
-        case PlatformEnum.unknown:
-          final dev = await _deviceInfoPlugin.deviceInfo;
-          temp2 = dev.toString();
-      }
-
-      /// Do we need this?
-
-      // You may set the permission requests to "provisional" which allows the
-      // user to choose what type
-      // of notifications they would like to receive once the user receives a
-      // notification.
-      // final notificationSettings = await FirebaseMessaging.instance.
-      // requestPermission(provisional: true);
 
       // For apple platforms, ensure the APNS token is available before making
       // any FCM plugin API calls
       final apnsToken = await _firebaseMessaging.getAPNSToken();
-      if (!kIsWeb && Platform.isIOS) {
-        await FirebaseMessaging.instance.requestPermission(provisional: true);
-      }
 
       if (notificationSettings.authorizationStatus ==
               AuthorizationStatus.authorized &&
-          (kIsWeb || !Platform.isIOS || apnsToken != null)) {
-        temp2 = await _firebaseMessaging.getToken(
+          (!platform.isIOS || apnsToken != null)) {
+        fcmToken = await _firebaseMessaging.getToken(
           vapidKey: Config.isProduction
               ? KSecurityKeys.firebaseProdVapidKey
               : KSecurityKeys.firebaseDevVapidKey,
         );
       }
-      return Right(temp2);
+
+      return Right(fcmToken);
     } catch (e) {
       return const Left(SomeFailure.serverError());
     }

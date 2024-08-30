@@ -1,6 +1,7 @@
 export 'app_authentication_repository.dart';
 export 'app_nerwork_repository.dart';
 export 'authentication_repository.dart';
+export 'build_repository.dart';
 export 'device_repository.dart';
 export 'discount_repository.dart';
 export 'faq_repository.dart';

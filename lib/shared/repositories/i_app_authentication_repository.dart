@@ -39,7 +39,5 @@ abstract class IAppAuthenticationRepository {
     UserSetting userSetting,
   );
 
-  Future<Either<SomeFailure, bool>> startCreateUserSetting(
-    String userId,
-  );
+  Future<Either<SomeFailure, bool>> createUserSetting();
 }

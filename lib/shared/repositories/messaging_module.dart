@@ -4,9 +4,9 @@ import 'package:injectable/injectable.dart';
 
 @module
 abstract class MessagingModule {
-  @singleton
+  @Singleton(order: -2)
   FirebaseMessaging get firebaseMessaging => FirebaseMessaging.instance;
 
-  @singleton
+  @Singleton(order: -2)
   DeviceInfoPlugin get deviceInfoPlugin => DeviceInfoPlugin();
 }
