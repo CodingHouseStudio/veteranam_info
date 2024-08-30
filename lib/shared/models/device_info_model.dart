@@ -1,27 +1,26 @@
-import 'package:flutter/foundation.dart' show kIsWeb;
 import 'dart:io' show Platform;
+
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'device_model.freezed.dart';
-part 'device_model.g.dart';
+part 'device_info_model.freezed.dart';
+part 'device_info_model.g.dart';
 
 @freezed
-class DeviceModel with _$DeviceModel {
-  const factory DeviceModel({
+class DeviceInfoModel with _$DeviceInfoModel {
+  const factory DeviceInfoModel({
     required String deviceId,
     required DateTime date,
     required String build,
     required PlatformEnum platform,
     required String? fcmToken,
-  }) = _DeviceModel;
+  }) = _DeviceInfoModel;
 
   // Add this private constructor
-  const DeviceModel._();
+  const DeviceInfoModel._();
 
-  factory DeviceModel.fromJson(Map<String, dynamic> json) =>
-      _$DeviceModelFromJson(json);
-
-  // static const empty = DeviceModel(deviceId: '', fcmToken: null);
+  factory DeviceInfoModel.fromJson(Map<String, dynamic> json) =>
+      _$DeviceInfoModelFromJson(json);
 
   bool get isEmpty => fcmToken == null || fcmToken!.isEmpty;
 }
@@ -34,7 +33,7 @@ enum PlatformEnum {
 
   bool get isAndroid => this == PlatformEnum.android;
   bool get isIOS => this == PlatformEnum.ios;
-  bool get isWeb => this == PlatformEnum.android;
+  bool get isWeb => this == PlatformEnum.web;
   bool get isUnkown => this == PlatformEnum.unknown;
 
   static PlatformEnum get getPlatform {
@@ -53,7 +52,7 @@ enum PlatformEnum {
   }
 }
 
-abstract class DeviceModelJsonField {
+abstract class DeviceInfoModelJsonField {
   static const deviceId = 'deviceId';
   static const fcmToken = 'fcmToken';
 }

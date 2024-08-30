@@ -10,7 +10,7 @@ part 'user_setting_model.g.dart';
 class UserSetting with _$UserSetting {
   const factory UserSetting({
     required String id,
-    List<DeviceModel?>? devicesSetting,
+    @DeviceConverter() List<DeviceInfoModel?>? devicesInfo,
     @Default(Language.ukrain) Language locale,
     UserRole? userRole,
     @Default(false) bool roleIsConfirmed,
@@ -35,9 +35,9 @@ class UserSetting with _$UserSetting {
 
   /// Convenience getter to determine whether the current user is not empty.
   bool get isDeviceEmpty =>
-      devicesSetting == null ||
-      devicesSetting!.isEmpty ||
-      devicesSetting!.every(
+      devicesInfo == null ||
+      devicesInfo!.isEmpty ||
+      devicesInfo!.every(
         (deviceSetting) => deviceSetting == null || deviceSetting.isEmpty,
       );
 }

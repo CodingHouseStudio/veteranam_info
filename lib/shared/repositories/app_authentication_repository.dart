@@ -171,13 +171,7 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   @override
   Future<Either<SomeFailure, bool>> logInAnonymously() async =>
       _handleAuthOperation(
-        () async {
-          final userCredential = await _firebaseAuth.signInAnonymously();
-          final user = userCredential.user?.toUser;
-          if (user != null) {
-            await startCreateUserSetting(user.id);
-          }
-        },
+        () async => _firebaseAuth.signInAnonymously(),
         (e) => SendFailure.fromCode(e).status,
       );
 
@@ -359,18 +353,27 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   }
 
   @override
-  Future<Either<SomeFailure, bool>> startCreateUserSetting(
-    String userId,
-  ) async {
+  Future<Either<SomeFailure, bool>> createUserSetting() async {
     try {
-      final result = await _deviceRepository.getDevice();
+      final result = await _deviceRepository.getDevice(
+        initialList: currentUserSetting.devicesInfo,
+      );
 
       return result.fold(
         Left.new,
         (r) {
-          final userSetting = UserSetting(
-            id: userId,
-            devicesSetting: (currentUserSetting.devicesSetting ?? [])..add(r),
+          if (r == null) {
+            return const Right(false);
+          }
+          final devicesInfo =
+              List<DeviceInfoModel?>.of(currentUserSetting.devicesInfo ?? [])
+                ..removeWhere(
+                  (deviceInfo) => deviceInfo?.deviceId == r.deviceId,
+                )
+                ..add(r);
+          final userSetting = currentUserSetting.copyWith(
+            id: currentUser.id,
+            devicesInfo: devicesInfo,
           );
           return updateUserSetting(userSetting);
         },

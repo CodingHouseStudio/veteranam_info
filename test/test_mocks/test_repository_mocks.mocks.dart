@@ -1641,7 +1641,7 @@ class MockIAppAuthenticationRepository extends _i1.Mock
       ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
 
   @override
-  _i8.Future<_i2.Either<_i3.SomeFailure, bool>> startCreateUserSetting(
+  _i8.Future<_i2.Either<_i3.SomeFailure, bool>> createUserSetting(
           String? userId) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -2025,7 +2025,7 @@ class MockAppAuthenticationRepository extends _i1.Mock
       ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
 
   @override
-  _i8.Future<_i2.Either<_i3.SomeFailure, bool>> startCreateUserSetting(
+  _i8.Future<_i2.Either<_i3.SomeFailure, bool>> createUserSetting(
           String? userId) =>
       (super.noSuchMethod(
         Invocation.method(
