@@ -8,7 +8,7 @@ import 'package:veteranam/shared/shared.dart';
 
 @Singleton(
   as: IDiscountRepository,
-  signalsReady: true,
+  // signalsReady: true,
 )
 class DiscountRepository implements IDiscountRepository {
   final FirestoreService _firestoreService = GetIt.I.get<FirestoreService>();

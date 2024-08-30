@@ -14,7 +14,7 @@ void main() {
   group(
       '${KScreenBlocName.appRepository} ${KScreenBlocName.authentication}'
       ' ${KGroupText.repository}', () {
-    late AppAuthenticationRepository appAuthenticationRepository;
+    late IAppAuthenticationRepository appAuthenticationRepository;
     late IStorage mockSecureStorageRepository;
     late firebase_auth.FirebaseAuth mockFirebaseAuth;
     late GoogleSignIn mockGoogleSignIn;
@@ -23,6 +23,8 @@ void main() {
     late firebase_auth.UserCredential mockUserCredential;
     late FirestoreService mockFirestoreService;
     late GoogleSignInAccount mockGoogleSignInAccount;
+
+    late IDeviceRepository mockDeviceRepository;
     late firebase_auth.User mockUser;
     group('${KGroupText.firebaseFailure} ', () {
       setUp(() {
@@ -35,6 +37,7 @@ void main() {
         mockUserCredential = MockUserCredential();
         mockFirestoreService = MockFirestoreService();
         mockUser = MockUser();
+        mockDeviceRepository = MockIDeviceRepository();
 
         when(
           mockCache.read<User>(
@@ -149,6 +152,10 @@ void main() {
           GetIt.I.unregister<FirestoreService>();
         }
         GetIt.I.registerSingleton(mockFirestoreService);
+        if (GetIt.I.isRegistered<IDeviceRepository>()) {
+          GetIt.I.unregister<IDeviceRepository>();
+        }
+        GetIt.I.registerSingleton(mockDeviceRepository);
         appAuthenticationRepository = AppAuthenticationRepository(
           mockSecureStorageRepository,
           mockFirebaseAuth,

@@ -28,6 +28,7 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   final GoogleSignIn _googleSignIn;
   final CacheClient _cache;
   final FirestoreService _firestoreService = GetIt.I.get<FirestoreService>();
+  final IDeviceRepository _deviceRepository = GetIt.I.get<IDeviceRepository>();
 
   /// Whether or not the current environment is web
   /// Should only be overridden for testing purposes. Otherwise,
@@ -170,7 +171,7 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   @override
   Future<Either<SomeFailure, bool>> logInAnonymously() async =>
       _handleAuthOperation(
-        _firebaseAuth.signInAnonymously,
+        () async => _firebaseAuth.signInAnonymously(),
         (e) => SendFailure.fromCode(e).status,
       );
 
@@ -328,17 +329,17 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   ) async {
     try {
       if (currentUser.isNotEmpty) {
-        if (currentUserSetting.id.isEmpty ||
-            currentUserSetting.id != currentUser.id) {
-          await _firestoreService.setUserSetting(
-            userSetting: userSetting,
-            userId: currentUser.id,
-          );
-        } else {
-          await _firestoreService.updateUserSetting(
-            userSetting,
-          );
-        }
+        // if (currentUserSetting.id.isEmpty ||
+        //     currentUserSetting.id != currentUser.id) {
+        await _firestoreService.setUserSetting(
+          userSetting: userSetting,
+          userId: currentUser.id,
+        );
+        // } else {
+        //   await _firestoreService.updateUserSetting(
+        //     userSetting,
+        //   );
+        // }
         return const Right(true);
       }
       return const Right(false);
@@ -349,6 +350,33 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
     } finally {
       _updateUserSettingBasedOnCache();
     }
+  }
+
+  @override
+  Future<Either<SomeFailure, bool>> createFcmUserSetting() async {
+    final result = await _deviceRepository.getDevice(
+      initialList: currentUserSetting.devicesInfo,
+    );
+
+    return result.fold(
+      Left.new,
+      (r) {
+        if (r == null) {
+          return const Right(false);
+        }
+        final devicesInfo =
+            List<DeviceInfoModel>.of(currentUserSetting.devicesInfo ?? [])
+              ..removeWhere(
+                (deviceInfo) => deviceInfo.deviceId == r.deviceId,
+              )
+              ..add(r);
+        final userSetting = currentUserSetting.copyWith(
+          id: currentUser.id,
+          devicesInfo: devicesInfo,
+        );
+        return updateUserSetting(userSetting);
+      },
+    );
   }
 }
 
