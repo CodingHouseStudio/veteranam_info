@@ -12,6 +12,7 @@ import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:veteranam/app.dart';
 import 'package:veteranam/bootstrap.dart';
 import 'package:veteranam/firebase_options_production.dart';
+import 'package:veteranam/shared/shared.dart';
 
 /// COMMENT: PROD main file
 Future<void> main() async {
@@ -25,8 +26,7 @@ Future<void> main() async {
       await SentryFlutter.init(
         (options) {
           options
-            ..dsn =
-                'REDACTED'
+            ..dsn = KSecurityKeys.sentryDSN
             // Set tracesSampleRate to 1.0 to capture 100% of transactions for
             // performance monitoring.
             // We recommend adjusting this value in production.

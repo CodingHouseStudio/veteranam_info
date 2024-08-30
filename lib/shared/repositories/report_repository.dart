@@ -6,7 +6,7 @@ import 'package:veteranam/shared/shared.dart';
 
 @Singleton(
   as: IReportRepository,
-  signalsReady: true,
+  // signalsReady: true,
 )
 class ReportRepository implements IReportRepository {
   final FirestoreService _firestoreService = GetIt.I.get<FirestoreService>();

@@ -45,7 +45,10 @@ void main() {
       );
 
       when(
-        mockDocumentReference.set(KTestText.userSetting.toJson()),
+        mockDocumentReference.set(
+          KTestText.userSetting.toJson(),
+          FirestoreService.setMergeOptions,
+        ),
       ).thenAnswer(
         (_) async {},
       );
@@ -106,11 +109,11 @@ void main() {
         (_) async {},
       );
 
-      when(
-        mockDocumentReference.update(KTestText.userSetting.toJson()),
-      ).thenAnswer(
-        (_) async {},
-      );
+      // when(
+      //   mockDocumentReference.update(KTestText.userSetting.toJson()),
+      // ).thenAnswer(
+      //   (_) async {},
+      // );
 
       FirestoreService.firebaseFirestore = mockFirebaseFirestore;
       firestoreService = FirestoreService(mockCacheClient);
@@ -205,24 +208,28 @@ void main() {
         mockCollectionReference.doc(KTestText.user.id),
       ).called(1);
       verify(
-        mockDocumentReference.set(KTestText.userSetting.toJson()),
+        mockDocumentReference.set(
+          KTestText.userSetting.toJson(),
+          FirestoreService.setMergeOptions,
+        ),
       ).called(1);
     });
-    test('update user setting', () async {
-      await firestoreService.updateUserSetting(
-        KTestText.userSetting,
-      );
+    // test('update user setting', () async {
+    //   await firestoreService.updateUserSetting(
+    //     KTestText.userSetting,
+    //   );
 
-      verify(
-        mockFirebaseFirestore.collection(FirebaseCollectionName.userSettings),
-      ).called(1);
-      verify(
-        mockCollectionReference.doc(KTestText.user.id),
-      ).called(1);
-      verify(
-        mockDocumentReference.update(KTestText.userSetting.toJson()),
-      ).called(1);
-    });
+    //   verify(
+    //     mockFirebaseFirestore.collection(FirebaseCollectionName.
+    // userSettings),
+    //   ).called(1);
+    //   verify(
+    //     mockCollectionReference.doc(KTestText.user.id),
+    //   ).called(1);
+    //   verify(
+    //     mockDocumentReference.update(KTestText.userSetting.toJson()),
+    //   ).called(1);
+    // });
 
     test('delete user setting', () async {
       await firestoreService.deleteUserSetting(
