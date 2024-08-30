@@ -353,34 +353,30 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   }
 
   @override
-  Future<Either<SomeFailure, bool>> createUserSetting() async {
-    try {
-      final result = await _deviceRepository.getDevice(
-        initialList: currentUserSetting.devicesInfo,
-      );
+  Future<Either<SomeFailure, bool>> createFcmUserSetting() async {
+    final result = await _deviceRepository.getDevice(
+      initialList: currentUserSetting.devicesInfo,
+    );
 
-      return result.fold(
-        Left.new,
-        (r) {
-          if (r == null) {
-            return const Right(false);
-          }
-          final devicesInfo =
-              List<DeviceInfoModel?>.of(currentUserSetting.devicesInfo ?? [])
-                ..removeWhere(
-                  (deviceInfo) => deviceInfo?.deviceId == r.deviceId,
-                )
-                ..add(r);
-          final userSetting = currentUserSetting.copyWith(
-            id: currentUser.id,
-            devicesInfo: devicesInfo,
-          );
-          return updateUserSetting(userSetting);
-        },
-      );
-    } catch (e) {
-      return const Left(SomeFailure.serverError());
-    }
+    return result.fold(
+      Left.new,
+      (r) {
+        if (r == null) {
+          return const Right(false);
+        }
+        final devicesInfo =
+            List<DeviceInfoModel>.of(currentUserSetting.devicesInfo ?? [])
+              ..removeWhere(
+                (deviceInfo) => deviceInfo.deviceId == r.deviceId,
+              )
+              ..add(r);
+        final userSetting = currentUserSetting.copyWith(
+          id: currentUser.id,
+          devicesInfo: devicesInfo,
+        );
+        return updateUserSetting(userSetting);
+      },
+    );
   }
 }
 

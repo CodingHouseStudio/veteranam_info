@@ -2,10 +2,11 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
-import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -67,6 +68,9 @@ import 'package:veteranam/shared/shared.dart';
     MockSpec<FirebaseRemoteConfigProvider>(),
     MockSpec<FirebaseRemoteConfig>(),
     MockSpec<FirebaseMessaging>(),
+    MockSpec<IDeviceRepository>(),
+    MockSpec<BuildRepository>(),
+    MockSpec<DeviceInfoPlugin>(),
   ],
 )
 void load() => debugPrint('loaded');

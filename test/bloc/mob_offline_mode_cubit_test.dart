@@ -9,8 +9,8 @@ void main() {
   setupFirebaseAuthMocks();
 
   setUpAll(setUpGlobal);
-  group('${KScreenBlocName.url} ', () {
-    late MobOfflineModeCubit mockOfflineModeCubit;
+  group('${KScreenBlocName.url} ${KGroupText.cubit}', () {
+    late MobOfflineModeCubit mobOfflineModeCubit;
     late FirestoreService mockFirestoreService;
     late CacheClient mockCache;
 
@@ -33,14 +33,14 @@ void main() {
         (_) {},
       );
       mockFirestoreService = FirestoreService(mockCache);
-      mockOfflineModeCubit = MobOfflineModeCubit(
+      mobOfflineModeCubit = MobOfflineModeCubit(
         firestoreService: mockFirestoreService,
       );
     });
     blocTest<MobOfflineModeCubit, MobMode>(
       'emits [MobMode()]'
       ' when initial and switch mode',
-      build: () => mockOfflineModeCubit,
+      build: () => mobOfflineModeCubit,
       act: (bloc) async => bloc
         ..started()
         ..switchMode()

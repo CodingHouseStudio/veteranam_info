@@ -39,5 +39,5 @@ abstract class IAppAuthenticationRepository {
     UserSetting userSetting,
   );
 
-  Future<Either<SomeFailure, bool>> createUserSetting();
+  Future<Either<SomeFailure, bool>> createFcmUserSetting();
 }

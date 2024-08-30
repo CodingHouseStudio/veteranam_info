@@ -42,6 +42,8 @@ lcov --remove coverage/lcov.info \
     'lib/shared/widget/info_version_widget.dart' \
     'lib/shared/widget/viewpager_indicator_widget.dart' \
     'lib/shared/widget/row_sliver_widget.dart' \
+    'lib/shared/repositories/messaging_module.dart' \
+    'lib/shared/repositories/build_repository.dart' \
     --output-file coverage/lcov.info
 
 # Generate the final HTML coverage report after exclusions

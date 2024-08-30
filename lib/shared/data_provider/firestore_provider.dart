@@ -41,6 +41,8 @@ class FirestoreService {
   @visibleForTesting
   static const getCacheOptions = GetOptions(source: Source.cache);
   @visibleForTesting
+  static final setMergeOptions = SetOptions(merge: true);
+  @visibleForTesting
   static const offlineModeCacheKey = '__offline_mode_cache_key__';
 
   void _initFirestoreSettings() {
@@ -227,7 +229,7 @@ class FirestoreService {
   }) {
     return _db.collection(FirebaseCollectionName.userSettings).doc(userId).set(
           userSetting.copyWith(id: userId).toJson(),
-          SetOptions(merge: true),
+          setMergeOptions,
         );
   }
 

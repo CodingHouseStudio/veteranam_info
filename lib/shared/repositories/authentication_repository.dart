@@ -48,7 +48,7 @@ class AuthenticationRepository {
             iAppAuthenticationRepository.userSetting.listen(
           (currentUserSetting) {
             if (userSettingIsNew) {
-              unawaited(_createUserSettingIfNeed());
+              unawaited(_createFcmUserSetting());
               userSettingIsNew = false;
             }
             _userSettingController.add(
@@ -138,8 +138,8 @@ class AuthenticationRepository {
     );
   }
 
-  Future<Either<SomeFailure, bool>> _createUserSettingIfNeed() async {
-    final result = await iAppAuthenticationRepository.createUserSetting();
+  Future<Either<SomeFailure, bool>> _createFcmUserSetting() async {
+    final result = await iAppAuthenticationRepository.createFcmUserSetting();
     return result.fold(
       (l) {
         // debugPrint('error: $l');

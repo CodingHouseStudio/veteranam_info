@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:veteranam/components/components.dart';
 import 'package:veteranam/shared/shared.dart';
 
 part 'discount_watcher_bloc.freezed.dart';
@@ -18,9 +19,11 @@ class DiscountWatcherBloc
     required IDiscountRepository discountRepository,
     required IReportRepository reportRepository,
     required IAppAuthenticationRepository appAuthenticationRepository,
+    required FirebaseRemoteConfigProvider firebaseRemoteConfigProvider,
   })  : _discountRepository = discountRepository,
         _reportRepository = reportRepository,
         _appAuthenticationRepository = appAuthenticationRepository,
+        _firebaseRemoteConfigProvider = firebaseRemoteConfigProvider,
         super(
           const _Initial(
             discountModelItems: [],
@@ -51,6 +54,10 @@ class DiscountWatcherBloc
   StreamSubscription<List<DiscountModel>>? _discountItemsSubscription;
   final IReportRepository _reportRepository;
   final IAppAuthenticationRepository _appAuthenticationRepository;
+  final FirebaseRemoteConfigProvider _firebaseRemoteConfigProvider;
+
+  @visibleForTesting
+  static const loadingItemsKey = DiscountConfigCubit.loadingItemsKey;
 
   Future<void> _onStarted(
     _Started event,
@@ -119,7 +126,10 @@ class DiscountWatcherBloc
     final (:list, :loadingStatus) = _filter(
       categoryList: categoryFilter,
       locationList: locationList,
-      itemsLoaded: state.itemsLoaded,
+      itemsLoaded: state.itemsLoaded.getLoaded(
+        list: event.discountItemsModel,
+        loadItems: getItemsLoading,
+      ),
     );
     emit(
       _Initial(
@@ -127,7 +137,10 @@ class DiscountWatcherBloc
         loadingStatus: loadingStatus,
         filteredDiscountModelItems: list,
         filtersCategories: state.filtersCategories,
-        itemsLoaded: state.itemsLoaded.getLoaded(list: list),
+        itemsLoaded: state.itemsLoaded.getLoaded(
+          list: list,
+          loadItems: getItemsLoading,
+        ),
         failure: null,
         filtersLocation: state.filtersLocation,
         // reportItems: event.reportItems,
@@ -151,19 +164,21 @@ class DiscountWatcherBloc
     // final (:list, :loadingStatus) = _filterLocation(
     //   itemsLoaded: state.itemsLoaded,
     //   locationIndex: state.filtersLocationIndex,
-    //   loadItems: KDimensions.loadItems,
+    //   loadItems: getItemsLoading,
     // );
     final (:list, :loadingStatus) = _filter(
       categoryList: state.categoryDiscountModelItems,
       locationList: state.locationDiscountModelItems,
       itemsLoaded: state.itemsLoaded,
-      loadItems: KDimensions.loadItems,
+      loadItems: getItemsLoading,
     );
     emit(
       state.copyWith(
         filteredDiscountModelItems: list,
-        itemsLoaded:
-            (state.itemsLoaded + KDimensions.loadItems).getLoaded(list: list),
+        itemsLoaded: (state.itemsLoaded + getItemsLoading).getLoaded(
+          list: list,
+          loadItems: getItemsLoading,
+        ),
         loadingStatus: loadingStatus,
       ),
     );
@@ -217,7 +232,10 @@ class DiscountWatcherBloc
       state.copyWith(
         filteredDiscountModelItems: list,
         filtersCategories: selectedFilters,
-        itemsLoaded: state.itemsLoaded.getLoaded(list: list),
+        itemsLoaded: state.itemsLoaded.getLoaded(
+          list: list,
+          loadItems: getItemsLoading,
+        ),
         loadingStatus: loadingStatus,
         categoryDiscountModelItems: categoryItems,
       ),
@@ -248,7 +266,10 @@ class DiscountWatcherBloc
         filteredDiscountModelItems: list,
         locationDiscountModelItems: locationList,
         filtersLocation: selectedFilters,
-        itemsLoaded: state.itemsLoaded.getLoaded(list: list),
+        itemsLoaded: state.itemsLoaded.getLoaded(
+          list: list,
+          loadItems: getItemsLoading,
+        ),
         loadingStatus: loadingStatus,
       ),
     );
@@ -278,7 +299,10 @@ class DiscountWatcherBloc
       state.copyWith(
         loadingStatus: loadingStatus,
         filteredDiscountModelItems: list,
-        itemsLoaded: state.itemsLoaded.getLoaded(list: list),
+        itemsLoaded: state.itemsLoaded.getLoaded(
+          list: list,
+          loadItems: getItemsLoading,
+        ),
         // reportItems: event.reportItems,
         categoryDiscountModelItems: categoryFilter,
         locationDiscountModelItems: locationList,
@@ -317,7 +341,10 @@ class DiscountWatcherBloc
       state.copyWith(
         loadingStatus: loadingStatus,
         filteredDiscountModelItems: list,
-        itemsLoaded: state.itemsLoaded.getLoaded(list: list),
+        itemsLoaded: state.itemsLoaded.getLoaded(
+          list: list,
+          loadItems: getItemsLoading,
+        ),
         // reportItems: event.reportItems,
         categoryDiscountModelItems: categoryFilter,
         locationDiscountModelItems: locationList,
@@ -466,6 +493,15 @@ class DiscountWatcherBloc
       (l) => null,
       (r) => r.isEmpty ? null : r,
     );
+  }
+
+  int get getItemsLoading {
+    final loadingItems = _firebaseRemoteConfigProvider.getInt(loadingItemsKey);
+    if (loadingItems > 0) {
+      return loadingItems;
+    } else {
+      return KDimensions.loadItems;
+    }
   }
 
   void _onFailure(

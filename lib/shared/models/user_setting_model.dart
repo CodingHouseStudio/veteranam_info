@@ -10,7 +10,7 @@ part 'user_setting_model.g.dart';
 class UserSetting with _$UserSetting {
   const factory UserSetting({
     required String id,
-    @DeviceConverter() List<DeviceInfoModel?>? devicesInfo,
+    @DeviceConverter() List<DeviceInfoModel>? devicesInfo,
     @Default(Language.ukrain) Language locale,
     UserRole? userRole,
     @Default(false) bool roleIsConfirmed,
@@ -38,7 +38,7 @@ class UserSetting with _$UserSetting {
       devicesInfo == null ||
       devicesInfo!.isEmpty ||
       devicesInfo!.every(
-        (deviceSetting) => deviceSetting == null || deviceSetting.isEmpty,
+        (deviceSetting) => deviceSetting.isEmpty,
       );
 }
 
@@ -97,4 +97,5 @@ abstract class UserSettingModelJsonField {
   static const locale = 'locale';
   static const userRole = 'userRole';
   static const roleIsConfirmed = 'roleIsConfirmed';
+  static const devicesInfo = 'devicesInfo';
 }

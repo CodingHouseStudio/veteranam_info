@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -15,7 +14,7 @@ void main() {
   group(
       '${KScreenBlocName.appRepository} ${KScreenBlocName.authentication}'
       ' ${KGroupText.repository} ${KGroupText.successful} isWeb false', () {
-    late AppAuthenticationRepository appAuthenticationRepository;
+    late IAppAuthenticationRepository appAuthenticationRepository;
     late IStorage mockSecureStorageRepository;
     late firebase_auth.FirebaseAuth mockFirebaseAuth;
     late GoogleSignIn mockGoogleSignIn;
@@ -25,7 +24,8 @@ void main() {
     late FirestoreService mockFirestoreService;
     late GoogleSignInAccount mockGoogleSignInAccount;
     late GoogleSignInAuthentication mockGoogleSignInAuthentication;
-    late FirebaseMessaging mockFirebaseMessaging;
+
+    late IDeviceRepository mockDeviceRepository;
     setUp(() {
       mockSecureStorageRepository = MockIStorage();
       mockFirebaseAuth = MockFirebaseAuth();
@@ -36,7 +36,8 @@ void main() {
       mockGoogleSignInAuthentication = MockGoogleSignInAuthentication();
       mockGoogleAuthProvider = MockGoogleAuthProvider();
       mockUserCredential = MockUserCredential();
-      mockFirebaseMessaging = MockFirebaseMessaging();
+
+      mockDeviceRepository = MockIDeviceRepository();
 
       when(mockGoogleSignInAuthentication.idToken).thenAnswer(
         (_) => KTestText.token,
@@ -77,12 +78,15 @@ void main() {
         GetIt.I.unregister<FirestoreService>();
       }
       GetIt.I.registerSingleton(mockFirestoreService);
+      if (GetIt.I.isRegistered<IDeviceRepository>()) {
+        GetIt.I.unregister<IDeviceRepository>();
+      }
+      GetIt.I.registerSingleton(mockDeviceRepository);
       appAuthenticationRepository = AppAuthenticationRepository(
         mockSecureStorageRepository,
         mockFirebaseAuth,
         mockGoogleSignIn,
         mockCache,
-        mockFirebaseMessaging,
       )
         ..isWeb = false
         ..googleAuthProvider = mockGoogleAuthProvider;

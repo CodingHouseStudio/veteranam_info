@@ -13,8 +13,23 @@ void main() {
         isFalse,
       );
 
+      expect(KTestText.userSettingModel.isDeviceEmpty, isFalse);
+
       expect(
         UserSetting.empty.isEmpty,
+        isTrue,
+      );
+
+      expect(UserSetting.empty.isDeviceEmpty, isTrue);
+
+      expect(UserSetting.empty.copyWith(devicesInfo: []).isDeviceEmpty, isTrue);
+
+      expect(
+        UserSetting.empty.copyWith(
+          devicesInfo: [
+            KTestText.deviceInfoModel.copyWith(fcmToken: ''),
+          ],
+        ).isDeviceEmpty,
         isTrue,
       );
     });
@@ -37,6 +52,9 @@ void main() {
           _$UserRoleEnumMap[KTestText.userSettingModel.userRole],
       UserSettingModelJsonField.roleIsConfirmed:
           KTestText.userSettingModel.roleIsConfirmed,
+      UserSettingModelJsonField.devicesInfo: [
+        KTestText.userSettingModel.devicesInfo!.first.toJson(),
+      ],
     };
     final nullableJson = {
       UserSettingModelJsonField.id: KTestText.userSettingModel.id,
@@ -45,6 +63,7 @@ void main() {
       UserSettingModelJsonField.userRole: null,
       UserSettingModelJsonField.roleIsConfirmed:
           KTestText.userSettingModel.roleIsConfirmed,
+      UserSettingModelJsonField.devicesInfo: null,
     };
     group('${KGroupText.modelJson} ', () {
       test('${KGroupText.full} ', () {
@@ -57,6 +76,10 @@ void main() {
           userSettingModel.roleIsConfirmed,
           KTestText.userSettingModel.roleIsConfirmed,
         );
+        expect(
+          userSettingModel.devicesInfo,
+          KTestText.userSettingModel.devicesInfo,
+        );
       });
       test('${KGroupText.nullable} ', () {
         final userSettingModel = UserSetting.fromJson(nullableJson);
@@ -68,6 +91,7 @@ void main() {
           userSettingModel.roleIsConfirmed,
           KTestText.userSettingModel.roleIsConfirmed,
         );
+        expect(userSettingModel.devicesInfo, isNull);
       });
 
       test('${KGroupText.failure} ', () {
@@ -78,6 +102,8 @@ void main() {
               KTestText.userSettingModel.userRole,
           UserSettingModelJsonField.roleIsConfirmed:
               KTestText.userSettingModel.roleIsConfirmed,
+          UserSettingModelJsonField.devicesInfo:
+              KTestText.userSettingModel.devicesInfo,
         };
 
         expect(
@@ -97,6 +123,7 @@ void main() {
         final userModelJson = KTestText.userSettingModel
             .copyWith(
               userRole: null,
+              devicesInfo: null,
             )
             .toJson();
 

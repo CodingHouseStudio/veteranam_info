@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -15,14 +14,15 @@ void main() {
   group(
       '${KScreenBlocName.appRepository} ${KScreenBlocName.authentication}'
       ' ${KGroupText.repository} ${KGroupText.failureGet}', () {
-    late AppAuthenticationRepository appAuthenticationRepository;
+    late IAppAuthenticationRepository appAuthenticationRepository;
     late IStorage mockSecureStorageRepository;
     late firebase_auth.FirebaseAuth mockFirebaseAuth;
     late GoogleSignIn mockGoogleSignIn;
     late CacheClient mockCache;
     late firebase_auth.GoogleAuthProvider mockGoogleAuthProvider;
     late FirestoreService mockFirestoreService;
-    late FirebaseMessaging mockFirebaseMessaging;
+
+    late IDeviceRepository mockDeviceRepository;
     late firebase_auth.UserCredential mockUserCredential;
     setUp(() {
       mockSecureStorageRepository = MockIStorage();
@@ -32,7 +32,8 @@ void main() {
       mockFirestoreService = MockFirestoreService();
       mockGoogleAuthProvider = MockGoogleAuthProvider();
       mockUserCredential = MockUserCredential();
-      mockFirebaseMessaging = MockFirebaseMessaging();
+
+      mockDeviceRepository = MockIDeviceRepository();
       when(
         mockFirebaseAuth.currentUser,
       ).thenAnswer(
@@ -71,17 +72,27 @@ void main() {
       ).thenAnswer(
         (_) async => mockUserCredential,
       );
+      when(
+        mockDeviceRepository.getDevice(
+          initialList: KTestText.userSetting.devicesInfo,
+        ),
+      ).thenAnswer(
+        (_) async => const Right(null),
+      );
 
       if (GetIt.I.isRegistered<FirestoreService>()) {
         GetIt.I.unregister<FirestoreService>();
       }
       GetIt.I.registerSingleton(mockFirestoreService);
+      if (GetIt.I.isRegistered<IDeviceRepository>()) {
+        GetIt.I.unregister<IDeviceRepository>();
+      }
+      GetIt.I.registerSingleton(mockDeviceRepository);
       appAuthenticationRepository = AppAuthenticationRepository(
         mockSecureStorageRepository,
         mockFirebaseAuth,
         mockGoogleSignIn,
         mockCache,
-        mockFirebaseMessaging,
       )
         ..isWeb = true
         ..googleAuthProvider = mockGoogleAuthProvider;
@@ -171,6 +182,22 @@ void main() {
           password: KTestText.passwordCorrect,
         ),
         isA<Right<SomeFailure, bool>>().having((e) => e.value, 'value', isTrue),
+      );
+    });
+    test('Create FCM Token for user setting when get null', () async {
+      final result = await appAuthenticationRepository.createFcmUserSetting();
+      verify(
+        mockDeviceRepository.getDevice(
+          initialList: KTestText.userSetting.devicesInfo,
+        ),
+      ).called(1);
+      expect(
+        result,
+        isA<Right<SomeFailure, bool>>().having(
+          (e) => e.value,
+          'value',
+          isFalse,
+        ),
       );
     });
   });

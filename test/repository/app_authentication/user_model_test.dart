@@ -73,7 +73,7 @@ void main() {
         };
 
         expect(
-          () => UserSetting.fromJson(json),
+          () => User.fromJson(json),
           throwsA(isA<TypeError>()),
         );
       });

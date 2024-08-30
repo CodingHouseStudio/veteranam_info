@@ -55,4 +55,7 @@ enum PlatformEnum {
 abstract class DeviceInfoModelJsonField {
   static const deviceId = 'deviceId';
   static const fcmToken = 'fcmToken';
+  static const date = 'date';
+  static const build = 'build';
+  static const platform = 'platform';
 }
