@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:veteranam/bootstrap.dart';
 import 'package:veteranam/firebase_options_development.dart';
@@ -156,12 +157,22 @@ abstract class KTestText {
     userRole: UserRole.civilian,
   );
 
-  static const userSettingModel = UserSetting(
+  static final userSettingModel = UserSetting(
     id: '1',
     userRole: UserRole.civilian,
     locale: Language.english,
     roleIsConfirmed: true,
+    devicesInfo: [deviceInfoModel],
   );
+  static final deviceInfoModel = DeviceInfoModel(
+    deviceId: deviceId,
+    date: dateTime,
+    build: 'test_build',
+    platform: PlatformEnum.unknown,
+    fcmToken: fcmToken,
+  );
+  static const deviceId = 'test_device_id';
+  static const fcmToken = 'test_fcm_token';
   static const imageModel = ImageModel(
     downloadURL: image,
     lastModifiedTS: 1,
@@ -384,6 +395,32 @@ abstract class KTestText {
     phoneNumber: phoneNumber,
     noResume: true,
   );
+  static const notificationSettings = NotificationSettings(
+    alert: AppleNotificationSetting.enabled,
+    announcement: AppleNotificationSetting.enabled,
+    authorizationStatus: AuthorizationStatus.authorized,
+    badge: AppleNotificationSetting.enabled,
+    carPlay: AppleNotificationSetting.enabled,
+    lockScreen: AppleNotificationSetting.enabled,
+    notificationCenter: AppleNotificationSetting.enabled,
+    showPreviews: AppleShowPreviewSetting.always,
+    timeSensitive: AppleNotificationSetting.enabled,
+    criticalAlert: AppleNotificationSetting.enabled,
+    sound: AppleNotificationSetting.enabled,
+  );
+  static const notificationSettingsDenied = NotificationSettings(
+    alert: AppleNotificationSetting.disabled,
+    announcement: AppleNotificationSetting.disabled,
+    authorizationStatus: AuthorizationStatus.denied,
+    badge: AppleNotificationSetting.disabled,
+    carPlay: AppleNotificationSetting.disabled,
+    lockScreen: AppleNotificationSetting.disabled,
+    notificationCenter: AppleNotificationSetting.disabled,
+    showPreviews: AppleShowPreviewSetting.never,
+    timeSensitive: AppleNotificationSetting.disabled,
+    criticalAlert: AppleNotificationSetting.disabled,
+    sound: AppleNotificationSetting.disabled,
+  );
   static final linkModel = LinkModel(
     id: id,
     userId: user.id,
@@ -470,6 +507,8 @@ abstract class KScreenBlocName {
   static const image = 'image';
   static const casheClient = 'cashe client';
   static const url = 'URL';
+  static const build = 'Build';
+  static const device = 'Device';
 
   static const report = 'Report Dialog';
   static const privacyPolicy = 'Privacy Policy Dialog';

@@ -35,6 +35,8 @@ exclude_patterns = [
     r'lib/shared/models/failure_model/exceptions.dart',
     r'lib/shared/widget/info_version_widget.dart',
     r'lib/shared/widget/viewpager_indicator_widget.dart',
+    r'lib/shared/repositories/messaging_module.dart',
+    r'lib/shared/repositories/build_repository.dart',
     r'lib/shared/widget/row_sliver_widget.dart'
 ]
 

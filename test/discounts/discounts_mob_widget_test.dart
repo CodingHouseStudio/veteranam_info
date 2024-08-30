@@ -64,7 +64,7 @@ void main() {
       );
       when(mockDiscountRepository.userCanSendUserEmail(KTestText.user.id))
           .thenAnswer(
-        (invocation) async => const Right(false),
+        (invocation) async => const Right(-1),
       );
       when(
         mockDiscountRepository.getDiscountItems(

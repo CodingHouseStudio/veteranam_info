@@ -274,7 +274,11 @@ class _DialogsWidget {
     BetterFeedback.of(context).show(context.onMobFeedback);
   }
 
-  void showUserEmailDialog() {
+  void showUserEmailDialog({
+    required UserEmailEnum userEmailEnum,
+    required int? count,
+    required int emailCloseDelay,
+  }) {
     showDialog<void>(
       context: context,
       builder: (BuildContext context) {
@@ -297,6 +301,7 @@ class _DialogsWidget {
                   contentPadding: EdgeInsets.zero,
                   scrollable: true,
                   content: UserEmailDialog(
+                    key: KWidgetkeys.screen.discounts.userEmailDialog,
                     isDesk: isTablet,
                     sendOnPressed: () =>
                         context.read<DiscountUserEmailFormBloc>().add(
@@ -304,14 +309,17 @@ class _DialogsWidget {
                             ),
                     closeOnPressed: () =>
                         context.read<DiscountUserEmailFormBloc>().add(
-                              const DiscountUserEmailFormEvent
-                                  .sendEmailAfterClose(),
+                              DiscountUserEmailFormEvent.sendEmailAfterClose(
+                                userEmailEnum: userEmailEnum,
+                                count: count,
+                              ),
                             ),
                     onChanged: (text) =>
                         context.read<DiscountUserEmailFormBloc>().add(
                               DiscountUserEmailFormEvent.updatedEmail(text),
                             ),
-                    key: KWidgetkeys.screen.discounts.userEmailDialog,
+                    userEmailEnum: userEmailEnum,
+                    emailCloseDelay: emailCloseDelay,
                   ),
                 ),
               );

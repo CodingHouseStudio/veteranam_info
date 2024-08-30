@@ -45,7 +45,10 @@ void main() {
       );
 
       when(
-        mockDocumentReference.set(KTestText.userSetting.toJson()),
+        mockDocumentReference.set(
+          KTestText.userSetting.toJson(),
+          FirestoreService.setMergeOptions,
+        ),
       ).thenAnswer(
         (_) async {},
       );
@@ -205,7 +208,10 @@ void main() {
         mockCollectionReference.doc(KTestText.user.id),
       ).called(1);
       verify(
-        mockDocumentReference.set(KTestText.userSetting.toJson()),
+        mockDocumentReference.set(
+          KTestText.userSetting.toJson(),
+          FirestoreService.setMergeOptions,
+        ),
       ).called(1);
     });
     // test('update user setting', () async {
