@@ -21,8 +21,9 @@ class DeviceRepository implements IDeviceRepository {
   final BuildRepository _buildRepository;
 
   Future<void> _messagingInit() async {
-    try{
-    await _firebaseMessaging.setAutoInitEnabled(true);}catch(e){
+    try {
+      await _firebaseMessaging.setAutoInitEnabled(true);
+    } catch (e) {
       // catch if setAutoInitEnabled failure
     }
   }
