@@ -207,6 +207,17 @@ extension StringExtension on String {
             (additional ?? 0);
     return textLength / KSize.kPixel2;
   }
+
+  String? get getUserPlatform {
+    final startIndex = indexOf('(');
+    final endIndex = indexOf(')');
+
+    if (startIndex == -1 || endIndex == -1 || startIndex > endIndex) {
+      return null;
+    }
+
+    return substring(startIndex + 1, endIndex);
+  }
 }
 
 extension InformationModelExtension on InformationModel {
