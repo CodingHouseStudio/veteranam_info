@@ -137,7 +137,8 @@ class DeviceRepository implements IDeviceRepository {
 
           // Get the user's browser name and platform
           // (I think it will be enough unique for one user)
-          deviceId = '${dev.browserName} Platform: null';
+          deviceId = '${dev.browserName} Platform: '
+              '${dev.platform ?? dev.userAgent?.getUserPlatform ?? 'unkown'}';
         case PlatformEnum.unknown:
           final dev = await _deviceInfoPlugin.deviceInfo;
           deviceId = dev.toString();
