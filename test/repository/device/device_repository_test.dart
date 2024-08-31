@@ -32,6 +32,7 @@ void main() {
     late DeviceInfoPlugin mockDeviceInfoPlugin;
     late BuildRepository mockBuildRepository;
     setUp(() {
+      KTest.testReleaseMode = true;
       ExtendedDateTime.current = KTestText.dateTime;
 
       mockFirebaseMessaging = MockFirebaseMessaging();
@@ -40,7 +41,6 @@ void main() {
     });
     group('${KGroupText.successful} ', () {
       setUp(() {
-        KTest.testReleaseMode = true;
         when(
           mockFirebaseMessaging.setAutoInitEnabled(true),
         ).thenAnswer(
