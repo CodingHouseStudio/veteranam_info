@@ -43,9 +43,9 @@ class StoryWatcherBloc extends Bloc<StoryWatcherEvent, StoryWatcherState> {
           story,
         ),
       ),
-      onError: (dynamic error) {
+      onError: (Object error, StackTrace stack) {
         // debugPrint('error is $error');
-        add(StoryWatcherEvent.failure(error));
+        add(StoryWatcherEvent.failure(error: error, stack: stack));
       },
     );
   }
@@ -100,7 +100,8 @@ class StoryWatcherBloc extends Bloc<StoryWatcherEvent, StoryWatcherState> {
     emit(
       state.copyWith(
         loadingStatus: LoadingStatus.error,
-        failure: StoryFailure.error,
+        failure: SomeFailure.serverError(error: event.error, stack: event.stack)
+            ._toStory(),
       ),
     );
   }

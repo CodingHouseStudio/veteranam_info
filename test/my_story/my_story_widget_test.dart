@@ -28,9 +28,14 @@ void main() {
 
     group('${KGroupText.failure} ', () {
       testWidgets('${KGroupText.error} ', (tester) async {
-        when(mockStoryRepository.getStoriesById(KTestText.userWithoutPhoto.id))
-            .thenAnswer(
-          (invocation) async => const Left(SomeFailure.serverError()),
+        when(
+          mockStoryRepository.getStoriesByUserId(KTestText.userWithoutPhoto.id),
+        ).thenAnswer(
+          (invocation) async => Left(
+            SomeFailure.serverError(
+              error: null,
+            ),
+          ),
         );
         await myStoryPumpAppHelper(
           mockStoryRepository: mockStoryRepository,
@@ -41,9 +46,10 @@ void main() {
         await myStoryFailureHelper(tester);
       });
       testWidgets('${KGroupText.failureNetwork} ', (tester) async {
-        when(mockStoryRepository.getStoriesById(KTestText.userWithoutPhoto.id))
-            .thenAnswer(
-          (invocation) async => const Left(SomeFailure.network()),
+        when(
+          mockStoryRepository.getStoriesByUserId(KTestText.userWithoutPhoto.id),
+        ).thenAnswer(
+          (invocation) async => Left(SomeFailure.network(error: null)),
         );
         await myStoryPumpAppHelper(
           mockStoryRepository: mockStoryRepository,
@@ -54,9 +60,10 @@ void main() {
         await myStoryFailureHelper(tester);
       });
       testWidgets('${KGroupText.failureGet} ', (tester) async {
-        when(mockStoryRepository.getStoriesById(KTestText.userWithoutPhoto.id))
-            .thenAnswer(
-          (invocation) async => const Left(SomeFailure.get()),
+        when(
+          mockStoryRepository.getStoriesByUserId(KTestText.userWithoutPhoto.id),
+        ).thenAnswer(
+          (invocation) async => Left(SomeFailure.get(error: null)),
         );
         await myStoryPumpAppHelper(
           mockStoryRepository: mockStoryRepository,
@@ -70,8 +77,9 @@ void main() {
 
     group('${KGroupText.getList} ', () {
       setUp(() {
-        when(mockStoryRepository.getStoriesById(KTestText.userWithoutPhoto.id))
-            .thenAnswer(
+        when(
+          mockStoryRepository.getStoriesByUserId(KTestText.userWithoutPhoto.id),
+        ).thenAnswer(
           (invocation) async => Right(
             KTestText.storyModelItems,
           ),

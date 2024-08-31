@@ -27,7 +27,11 @@ void main() {
     group('${KGroupText.failure} ', () {
       testWidgets('${KGroupText.error} ', (tester) async {
         when(mockFaqRepository.getQuestions()).thenAnswer(
-          (invocation) async => const Left(SomeFailure.serverError()),
+          (invocation) async => Left(
+            SomeFailure.serverError(
+              error: null,
+            ),
+          ),
         );
         await mobFaqPumpAppHelper(
           mockFaqRepository: mockFaqRepository,
@@ -38,7 +42,7 @@ void main() {
       });
       testWidgets('${KGroupText.failureNetwork} ', (tester) async {
         when(mockFaqRepository.getQuestions()).thenAnswer(
-          (invocation) async => const Left(SomeFailure.network()),
+          (invocation) async => Left(SomeFailure.network(error: null)),
         );
         await mobFaqPumpAppHelper(
           mockFaqRepository: mockFaqRepository,
@@ -49,7 +53,7 @@ void main() {
       });
       testWidgets('${KGroupText.failureGet} ', (tester) async {
         when(mockFaqRepository.getQuestions()).thenAnswer(
-          (invocation) async => const Left(SomeFailure.get()),
+          (invocation) async => Left(SomeFailure.get(error: null)),
         );
         await mobFaqPumpAppHelper(
           mockFaqRepository: mockFaqRepository,

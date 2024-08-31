@@ -43,10 +43,10 @@ class WorkRepository implements IWorkRepository {
       await _firestoreService.sendRespond(respond);
 
       return const Right(true);
-    } on FirebaseException catch (e) {
-      return Left(SendFailure.fromCode(e).status);
-    } catch (e) {
-      return const Left(SomeFailure.serverError());
+    } on FirebaseException catch (e, stack) {
+      return Left(SendFailure.fromCode(error: e, stack: stack).status);
+    } catch (e, stack) {
+      return Left(SomeFailure.serverError(error: e, stack: stack));
     }
   }
 }

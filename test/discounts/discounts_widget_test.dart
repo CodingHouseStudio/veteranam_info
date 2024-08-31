@@ -472,7 +472,11 @@ void main() {
                 when(
                   mockDiscountRepository.sendEmail(KTestText.emailModel),
                 ).thenAnswer(
-                  (invocation) async => const Left(SomeFailure.serverError()),
+                  (invocation) async => Left(
+                    SomeFailure.serverError(
+                      error: null,
+                    ),
+                  ),
                 );
               },
             );
