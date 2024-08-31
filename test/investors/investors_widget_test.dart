@@ -81,7 +81,11 @@ void main() {
             reportIdItems: KTestText.reportItems.getIdCard,
           ),
         ).thenAnswer(
-          (invocation) async => const Left(SomeFailure.serverError()),
+          (invocation) async => Left(
+            SomeFailure.serverError(
+              error: null,
+            ),
+          ),
         );
         await investorsPumpAppHelper(
           mockAppAuthenticationRepository: mockAppAuthenticationRepository,
@@ -100,7 +104,7 @@ void main() {
             reportIdItems: KTestText.reportItems.getIdCard,
           ),
         ).thenAnswer(
-          (invocation) async => const Left(SomeFailure.network()),
+          (invocation) async => Left(SomeFailure.network(error: null)),
         );
         await investorsPumpAppHelper(
           mockAppAuthenticationRepository: mockAppAuthenticationRepository,
@@ -119,7 +123,7 @@ void main() {
             reportIdItems: KTestText.reportItems.getIdCard,
           ),
         ).thenAnswer(
-          (invocation) async => const Left(SomeFailure.get()),
+          (invocation) async => Left(SomeFailure.get(error: null)),
         );
         await investorsPumpAppHelper(
           mockAppAuthenticationRepository: mockAppAuthenticationRepository,

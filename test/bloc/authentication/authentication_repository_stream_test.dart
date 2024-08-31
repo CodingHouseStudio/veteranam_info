@@ -4,6 +4,7 @@ import 'dart:async';
 
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:get_it/get_it.dart';
 import 'package:mockito/mockito.dart';
 import 'package:veteranam/components/components.dart';
 import 'package:veteranam/shared/shared.dart';
@@ -11,7 +12,11 @@ import 'package:veteranam/shared/shared.dart';
 import '../../test_dependency.dart';
 
 void main() {
+  setUp(configureFailureDependenciesTest);
+
   setupFirebaseAuthMocks();
+
+  tearDown(GetIt.I.reset);
 
   group(
       '${KScreenBlocName.authentication} ${KGroupText.repository} '
@@ -124,7 +129,7 @@ void main() {
           (_) => false,
         );
         when(mockAppAuthenticationRepository.createFcmUserSetting()).thenAnswer(
-          (_) async => const Left(SomeFailure.serverError()),
+          (_) async => Left(SomeFailure.serverError(error: null)),
         );
       });
 
@@ -146,7 +151,7 @@ void main() {
         when(
           mockAppAuthenticationRepository.logInAnonymously(),
         ).thenAnswer(
-          (_) async => const Left(SomeFailure.serverError()),
+          (_) async => Left(SomeFailure.serverError(error: null)),
         );
       });
 

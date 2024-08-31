@@ -61,7 +61,7 @@ Future<void> main() async {
       await FirebasePerformance.instance
           .setPerformanceCollectionEnabled(kReleaseMode);
     }
-    // } catch (e) {}
+    // } catch (e, stack) {}
     try {
       if (!kIsWeb)
       // {

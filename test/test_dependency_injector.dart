@@ -2,6 +2,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:get_it/get_it.dart';
@@ -17,8 +18,10 @@ void configureDependenciesTest() {
   userSetting();
   KTest.testIsWeb = true;
   Config.value = Config.development;
+  KTest.isTest = true;
   // KTest.scroll = null;
   // Services
+  GetIt.I.registerSingleton<FirebaseCrashlytics>(MockFirebaseCrashlytics());
   GetIt.I.registerSingleton<FirebaseAuth>(MockFirebaseAuth());
   GetIt.I.registerSingleton<GoogleSignIn>(GoogleSignIn());
   GetIt.I.registerSingleton<FakeClient>(FakeClient());
@@ -38,6 +41,9 @@ void configureDependenciesTest() {
   );
 
   // Repositories
+  GetIt.I.registerLazySingleton<FailureRepository>(
+    () => FailureRepository(GetIt.I.get<FirebaseCrashlytics>()),
+  );
   GetIt.I.registerLazySingleton<IStorage>(SecureStorageRepository.new);
   GetIt.I.registerSingleton<BuildRepository>(BuildRepository());
   GetIt.I.registerSingleton<IFeedbackRepository>(FeedbackRepository());
@@ -175,4 +181,20 @@ void configureDependenciesTest() {
   // (),
   //   ),
   // );
+}
+
+void configureFailureDependenciesTest() {
+  // register logic if user id empty user setting is also empty
+  userSetting();
+  KTest.testIsWeb = true;
+  Config.value = Config.development;
+  KTest.isTest = true;
+  // KTest.scroll = null;
+  // Services
+  GetIt.I.registerSingleton<FirebaseCrashlytics>(MockFirebaseCrashlytics());
+
+  // Repositories
+  GetIt.I.registerLazySingleton<FailureRepository>(
+    () => FailureRepository(GetIt.I.get<FirebaseCrashlytics>()),
+  );
 }

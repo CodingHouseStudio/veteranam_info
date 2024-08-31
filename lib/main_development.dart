@@ -20,7 +20,7 @@ void main() async {
   //   await FirebasePerformance.instance
   //       .setPerformanceCollectionEnabled(kReleaseMode);
   // }
-  // } catch (e) {
+  // } catch (e, stack) {
   //   print('firebase performance issue');
   //   print(e);
   // }
@@ -42,7 +42,7 @@ void main() async {
   //         : AppleProvider.debug,
   //   );
   // }
-  // } catch (e) {
+  // } catch (e, stack) {
   //   print('firebase app check issue');
   //   print(e);
   // }

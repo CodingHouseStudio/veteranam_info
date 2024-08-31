@@ -1,29 +1,84 @@
+import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:get_it/get_it.dart';
+import 'package:veteranam/shared/shared.dart';
 
 part 'some_failure_model.freezed.dart';
 
-/// COMMENT: Class for adding an error name
 @freezed
+@immutable
 class SomeFailure with _$SomeFailure {
-  const factory SomeFailure.initial() = FailureInitial;
+  factory SomeFailure({
+    required Object? error,
+    StackTrace? stack,
+  }) = _SomeFailure;
 
-  const factory SomeFailure.serverError() = FailureServerError;
+  SomeFailure._() {
+    failureRepository.sendError(this);
+  }
+  // factory SomeFailure.initial() = FailureInitial;
 
-  const factory SomeFailure.get() = FailureGet;
+  factory SomeFailure.serverError({
+    required Object? error,
+    StackTrace? stack,
+  }) = FailureServerError;
 
-  const factory SomeFailure.send() = FailureSend;
+  factory SomeFailure.get({
+    required Object? error,
+    StackTrace? stack,
+  }) = FailureGet;
 
-  const factory SomeFailure.network() = FailureNetwork;
+  factory SomeFailure.send({
+    required Object? error,
+    StackTrace? stack,
+  }) = FailureSend;
+
+  factory SomeFailure.network({
+    required Object? error,
+    StackTrace? stack,
+  }) = FailureNetwork;
 
   // authentication
-  const factory SomeFailure.unauthorized() = FailureUnauthorized;
-  const factory SomeFailure.notFound() = FailureNotFound;
-  const factory SomeFailure.duplicate() = FailureDuplicate;
-  const factory SomeFailure.tooManyRequests() = FailureTooManyRequests;
-  const factory SomeFailure.emailSendingFailed() = FailureEmailSendingFailed;
+  factory SomeFailure.unauthorized({
+    required Object? error,
+    StackTrace? stack,
+  }) = FailureUnauthorized;
+
+  factory SomeFailure.notFound({
+    required Object? error,
+    StackTrace? stack,
+  }) = FailureNotFound;
+
+  factory SomeFailure.duplicate({
+    required Object? error,
+    StackTrace? stack,
+  }) = FailureDuplicate;
+
+  factory SomeFailure.tooManyRequests({
+    required Object? error,
+    StackTrace? stack,
+  }) = FailureTooManyRequests;
+
+  factory SomeFailure.emailSendingFailed({
+    required Object? error,
+    StackTrace? stack,
+  }) = FailureEmailSendingFailed;
 
   // Url
-  const factory SomeFailure.share() = FailureShare;
-  const factory SomeFailure.link() = FailureLink;
-  const factory SomeFailure.copy() = FailureCopy;
+  factory SomeFailure.share({
+    required Object? error,
+    StackTrace? stack,
+  }) = FailureShare;
+
+  factory SomeFailure.link({
+    required Object? error,
+    StackTrace? stack,
+  }) = FailureLink;
+
+  factory SomeFailure.copy({
+    required Object? error,
+    StackTrace? stack,
+  }) = FailureCopy;
+
+  final FailureRepository failureRepository = GetIt.I.get<FailureRepository>();
 }

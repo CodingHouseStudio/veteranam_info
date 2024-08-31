@@ -4,6 +4,12 @@ enum WorkFailure {
   error,
 }
 
+extension WorkFailureExtension on SomeFailure {
+  WorkFailure _toWork() {
+    return WorkFailure.error;
+  }
+}
+
 @freezed
 class WorkEmployeeWatcherState with _$WorkEmployeeWatcherState {
   const factory WorkEmployeeWatcherState({

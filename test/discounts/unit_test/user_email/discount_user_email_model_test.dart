@@ -1,12 +1,17 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:get_it/get_it.dart';
 import 'package:veteranam/shared/shared.dart';
 
 import '../../../test_dependency.dart';
 
 void main() {
+  setUp(configureFailureDependenciesTest);
+
   setupFirebaseAuthMocks();
 
   setUpAll(setUpGlobal);
+
+  tearDown(GetIt.I.reset);
   group('Email ${KGroupText.model} ', () {
     final fullJson = {
       EmailModelJsonField.id: KTestText.emailModel.id,

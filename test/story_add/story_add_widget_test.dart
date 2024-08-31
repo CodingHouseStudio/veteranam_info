@@ -35,7 +35,11 @@ void main() {
       testWidgets('${KGroupText.error} ', (tester) async {
         when(mockStoryRepository.addStory(KTestText.storyModelItems.first))
             .thenAnswer(
-          (invocation) async => const Left(SomeFailure.serverError()),
+          (invocation) async => Left(
+            SomeFailure.serverError(
+              error: null,
+            ),
+          ),
         );
         await storyAddPumpAppHelper(
           tester: tester,
@@ -48,7 +52,7 @@ void main() {
       testWidgets('${KGroupText.failureNetwork} ', (tester) async {
         when(mockStoryRepository.addStory(KTestText.storyModelItems.first))
             .thenAnswer(
-          (invocation) async => const Left(SomeFailure.network()),
+          (invocation) async => Left(SomeFailure.network(error: null)),
         );
         await storyAddPumpAppHelper(
           tester: tester,
@@ -61,7 +65,7 @@ void main() {
       testWidgets('${KGroupText.failureSend} ', (tester) async {
         when(mockStoryRepository.addStory(KTestText.storyModelItems.first))
             .thenAnswer(
-          (invocation) async => const Left(SomeFailure.send()),
+          (invocation) async => Left(SomeFailure.send(error: null)),
         );
         await storyAddPumpAppHelper(
           tester: tester,

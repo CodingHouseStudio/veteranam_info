@@ -3,6 +3,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:get_it/get_it.dart';
 import 'package:mockito/mockito.dart';
 import 'package:veteranam/components/components.dart';
 import 'package:veteranam/shared/shared.dart';
@@ -10,8 +11,13 @@ import 'package:veteranam/shared/shared.dart';
 import '../test_dependency.dart';
 
 /// FOLDER FILES COMMENT: Tests blocks that are used on several pages
+
 void main() {
+  setUp(configureFailureDependenciesTest);
+
   setupFirebaseAuthMocks();
+
+  tearDown(GetIt.I.reset);
 
   group('${KScreenBlocName.authenticationServices} ${KGroupText.cubit}', () {
     late IAppAuthenticationRepository mockAppAuthenticationRepository;
@@ -44,7 +50,7 @@ void main() {
         when(
           mockAppAuthenticationRepository.signUpWithGoogle(),
         ).thenAnswer(
-          (_) async => const Left(SomeFailure.serverError()),
+          (_) async => Left(SomeFailure.serverError(error: null)),
         );
         await cubit.authenticationUseGoogle();
       },
