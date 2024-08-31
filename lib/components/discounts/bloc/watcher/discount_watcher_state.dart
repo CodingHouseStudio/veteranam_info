@@ -2,7 +2,13 @@ part of 'discount_watcher_bloc.dart';
 
 enum DiscountFailure {
   error,
-  report,
+  report;
+}
+
+extension DiscountFailureExtension on SomeFailure {
+  DiscountFailure _toDiscount() {
+    return DiscountFailure.error;
+  }
 }
 
 enum DiscountEnum {

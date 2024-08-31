@@ -4,6 +4,8 @@ export 'authentication_repository.dart';
 export 'build_repository.dart';
 export 'device_repository.dart';
 export 'discount_repository.dart';
+export 'failure_module.dart';
+export 'failure_repository.dart';
 export 'faq_repository.dart';
 export 'feedback_repository.dart';
 export 'firebase_module.dart';

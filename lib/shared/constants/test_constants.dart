@@ -17,6 +17,11 @@ class KTest {
   @visibleForTesting
   static set testReleaseMode(bool releaseMode) => _kReleaseMode = releaseMode;
 
+  static bool _isTest = false;
+  static bool get isTest => _isTest;
+  @visibleForTesting
+  static set isTest(bool value) => _isTest = value;
+
   // static double? _animatioRepeat;
   // static double? get animatioRepeat => _animatioRepeat;
   // @visibleForTesting

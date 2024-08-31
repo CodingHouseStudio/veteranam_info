@@ -42,7 +42,11 @@ void main() {
             password: KTestText.passwordWrong,
           ),
         ).thenAnswer(
-          (invocation) async => const Left(SomeFailure.serverError()),
+          (invocation) async => Left(
+            SomeFailure.serverError(
+              error: null,
+            ),
+          ),
         );
         await signUpPumpAppHelper(
           mockAppAuthenticationRepository: mockAppAuthenticationRepository,
@@ -58,7 +62,7 @@ void main() {
             password: KTestText.passwordWrong,
           ),
         ).thenAnswer(
-          (invocation) async => const Left(SomeFailure.network()),
+          (invocation) async => Left(SomeFailure.network(error: null)),
         );
         await signUpPumpAppHelper(
           mockAppAuthenticationRepository: mockAppAuthenticationRepository,
@@ -74,7 +78,7 @@ void main() {
             password: KTestText.passwordWrong,
           ),
         ).thenAnswer(
-          (invocation) async => const Left(SomeFailure.send()),
+          (invocation) async => Left(SomeFailure.send(error: null)),
         );
         await signUpPumpAppHelper(
           mockAppAuthenticationRepository: mockAppAuthenticationRepository,
@@ -90,7 +94,7 @@ void main() {
             password: KTestText.passwordWrong,
           ),
         ).thenAnswer(
-          (invocation) async => const Left(SomeFailure.duplicate()),
+          (invocation) async => Left(SomeFailure.duplicate(error: null)),
         );
         await signUpPumpAppHelper(
           mockAppAuthenticationRepository: mockAppAuthenticationRepository,

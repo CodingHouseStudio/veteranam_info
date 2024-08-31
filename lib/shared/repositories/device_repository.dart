@@ -85,7 +85,7 @@ class DeviceRepository implements IDeviceRepository {
     //       AuthorizationStatus.authorized) {
     //     try {
     //       temp2 = await messaging.getToken();
-    //     } catch (e) {
+    //     } catch (e, stack) {
     //       return null;
     //     }
     //   }
@@ -144,8 +144,8 @@ class DeviceRepository implements IDeviceRepository {
           deviceId = dev.toString();
       }
       return Right(deviceId);
-    } catch (e) {
-      return const Left(SomeFailure.serverError());
+    } catch (e, stack) {
+      return Left(SomeFailure.serverError(error: e, stack: stack));
     }
   }
 
@@ -183,8 +183,8 @@ class DeviceRepository implements IDeviceRepository {
       }
 
       return Right(fcmToken);
-    } catch (e) {
-      return const Left(SomeFailure.serverError());
+    } catch (e, stack) {
+      return Left(SomeFailure.serverError(error: e, stack: stack));
     }
   }
 }

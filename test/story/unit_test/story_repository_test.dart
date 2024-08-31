@@ -1,3 +1,5 @@
+import 'package:dartz/dartz.dart';
+import 'package:firebase_core/firebase_core.dart' show FirebaseException;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mockito/mockito.dart';
@@ -6,6 +8,8 @@ import 'package:veteranam/shared/shared.dart';
 import '../../test_dependency.dart';
 
 void main() {
+  setUp(configureFailureDependenciesTest);
+
   setupFirebaseAuthMocks();
 
   setUpAll(setUpGlobal);
@@ -26,6 +30,14 @@ void main() {
         when(mockFirestoreService.getStories()).thenAnswer(
           (_) => Stream.value(KTestText.storyModelItems),
         );
+        when(mockFirestoreService.addStory(KTestText.storyModelItems.first))
+            .thenAnswer(
+          (_) async {},
+        );
+        when(mockFirestoreService.getStoriesByUserId(KTestText.user.id))
+            .thenAnswer(
+          (_) async => KTestText.storyModelItems,
+        );
         if (GetIt.I.isRegistered<FirestoreService>()) {
           GetIt.I.unregister<FirestoreService>();
         }
@@ -43,6 +55,19 @@ void main() {
           emits(KTestText.storyModelItems),
         );
       });
+      test('Get Story by user id', () async {
+        expect(
+          await mockStoryRepository.getStoriesByUserId(KTestText.user.id),
+          isA<Right<SomeFailure, List<StoryModel>>>()
+              .having((e) => e.value, 'value', KTestText.storyModelItems),
+        );
+      });
+      test('Add story', () async {
+        expect(
+          await mockStoryRepository.addStory(KTestText.storyModelItems.first),
+          isA<Right<SomeFailure, bool>>().having((e) => e.value, 'value', true),
+        );
+      });
     });
     group('${KGroupText.failureGet} ', () {
       setUp(() {
@@ -50,6 +75,14 @@ void main() {
           (realInvocation) => Stream.error(
             KGroupText.failureGet,
           ),
+        );
+        when(mockFirestoreService.addStory(KTestText.storyModelItems.first))
+            .thenThrow(
+          Exception(KGroupText.failureSend),
+        );
+        when(mockFirestoreService.getStoriesByUserId(KTestText.user.id))
+            .thenThrow(
+          Exception(KGroupText.failureGet),
         );
         if (GetIt.I.isRegistered<FirestoreService>()) {
           GetIt.I.unregister<FirestoreService>();
@@ -66,6 +99,63 @@ void main() {
         expect(
           mockStoryRepository.getStoryItems(),
           emitsError(KGroupText.failureGet),
+        );
+      });
+      test('Get Story by user id', () async {
+        expect(
+          await mockStoryRepository.getStoriesByUserId(KTestText.user.id),
+          isA<Left<SomeFailure, List<StoryModel>>>(),
+        );
+      });
+      test('Add story', () async {
+        expect(
+          await mockStoryRepository.addStory(KTestText.storyModelItems.first),
+          isA<Left<SomeFailure, bool>>(),
+        );
+      });
+    });
+    group('${KGroupText.failureGet} ', () {
+      setUp(() {
+        when(mockFirestoreService.getStories()).thenAnswer(
+          (realInvocation) => Stream.error(
+            KGroupText.failureGet,
+          ),
+        );
+        when(mockFirestoreService.addStory(KTestText.storyModelItems.first))
+            .thenThrow(
+          FirebaseException(plugin: KGroupText.failureSend),
+        );
+        when(mockFirestoreService.getStoriesByUserId(KTestText.user.id))
+            .thenThrow(
+          FirebaseException(plugin: KGroupText.failureGet),
+        );
+        if (GetIt.I.isRegistered<FirestoreService>()) {
+          GetIt.I.unregister<FirestoreService>();
+        }
+        GetIt.I.registerSingleton(mockFirestoreService);
+        if (GetIt.I.isRegistered<StorageService>()) {
+          GetIt.I.unregister<StorageService>();
+        }
+        GetIt.I.registerSingleton(mockStorageService);
+
+        mockStoryRepository = StoryRepository();
+      });
+      test('Get Story', () async {
+        expect(
+          mockStoryRepository.getStoryItems(),
+          emitsError(KGroupText.failureGet),
+        );
+      });
+      test('Get Story by user id', () async {
+        expect(
+          await mockStoryRepository.getStoriesByUserId(KTestText.user.id),
+          isA<Left<SomeFailure, List<StoryModel>>>(),
+        );
+      });
+      test('Add story', () async {
+        expect(
+          await mockStoryRepository.addStory(KTestText.storyModelItems.first),
+          isA<Left<SomeFailure, bool>>(),
         );
       });
     });
