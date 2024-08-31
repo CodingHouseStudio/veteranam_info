@@ -6,7 +6,7 @@ class _MobSettingsKeys {
   final faq = const Key('mob_settings_screen_faq');
   final languagesSwitcher = const Key('mob_settings_screen_languages_switcher');
   final offlinesSwitcher = const Key('mob_settings_screen_offline_switcher');
-  final offlinesIcon = const Key('mob_settings_screen_offline_icon');
+  final offlinesTitle = const Key('mob_settings_screen_offline_title');
   final subtitle = const Key('mob_settings_screen_subtitle');
   final email = const Key('mob_settings_screen_email');
   final feedbackButton = const Key('mob_settings_screen_feedback_button');
