@@ -32,15 +32,15 @@ class StoryRepository implements IStoryRepository {
       }
       await _firestoreService.addStory(methodStoryModel);
       return const Right(true);
-    } on FirebaseException catch (e) {
-      return Left(GetFailur.fromCode(e).status);
-    } catch (e) {
-      return const Left(SomeFailure.serverError());
+    } on FirebaseException catch (e, stack) {
+      return Left(GetFailur.fromCode(error: e, stack: stack).status);
+    } catch (e, stack) {
+      return Left(SomeFailure.serverError(error: e, stack: stack));
     }
   }
 
   @override
-  Future<Either<SomeFailure, List<StoryModel>>> getStoriesById(
+  Future<Either<SomeFailure, List<StoryModel>>> getStoriesByUserId(
     String userId,
   ) async {
     try {
@@ -48,10 +48,10 @@ class StoryRepository implements IStoryRepository {
           await _firestoreService.getStoriesByUserId(userId);
 
       return Right(userStoriesItems);
-    } on FirebaseException catch (e) {
-      return Left(GetFailur.fromCode(e).status);
-    } catch (e) {
-      return const Left(SomeFailure.serverError());
+    } on FirebaseException catch (e, stack) {
+      return Left(GetFailur.fromCode(error: e, stack: stack).status);
+    } catch (e, stack) {
+      return Left(SomeFailure.serverError(error: e, stack: stack));
     }
   }
 }

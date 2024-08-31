@@ -9,6 +9,8 @@ import 'package:veteranam/shared/shared.dart';
 import '../../test_dependency.dart';
 
 void main() {
+  setUp(configureFailureDependenciesTest);
+
   tearDown(GetIt.I.reset);
 
   group(

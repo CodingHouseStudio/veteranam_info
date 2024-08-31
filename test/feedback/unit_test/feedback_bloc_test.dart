@@ -1,6 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:get_it/get_it.dart';
 import 'package:mockito/mockito.dart';
 import 'package:veteranam/components/components.dart';
 import 'package:veteranam/shared/shared.dart';
@@ -8,6 +9,9 @@ import 'package:veteranam/shared/shared.dart';
 import '../../test_dependency.dart';
 
 void main() {
+  setUp(configureFailureDependenciesTest);
+
+  tearDown(GetIt.I.reset);
   group('${KScreenBlocName.feedback} ${KGroupText.bloc} ', () {
     late FeedbackBloc feedbackBloc;
     late IFeedbackRepository mockFeedbackRepository;
@@ -134,7 +138,11 @@ void main() {
         when(
           mockFeedbackRepository.checkUserNeedShowFeedback(KTestText.user.id),
         ).thenAnswer(
-          (realInvocation) async => const Left(SomeFailure.serverError()),
+          (realInvocation) async => Left(
+            SomeFailure.serverError(
+              error: null,
+            ),
+          ),
         );
         bloc
           ..add(const FeedbackEvent.started())
@@ -298,7 +306,7 @@ void main() {
         when(
           mockFeedbackRepository.sendFeedback(KTestText.feedbackModel),
         ).thenAnswer(
-          (_) async => const Left(SomeFailure.serverError()),
+          (_) async => Left(SomeFailure.serverError(error: null)),
         );
         bloc
           ..add(const FeedbackEvent.nameUpdated(KTestText.field))
@@ -352,7 +360,7 @@ void main() {
     //     when(
     //       mockFeedbackRepository.sendFeedback(KTestText.feedbackModel),
     //     ).thenAnswer(
-    //       (_) async => const Left(SomeFailure.serverError()),
+    //       (_) async => Left(SomeFailure.serverError(error: null)),
     //     );
     //     bloc
     //       ..add(const FeedbackEvent.nameUpdated(KTestText.field))

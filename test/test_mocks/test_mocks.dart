@@ -5,3 +5,4 @@ export 'mock_blocs.dart';
 export 'test_extension.dart';
 export 'test_repository_mocks.dart';
 export 'test_repository_mocks.mocks.dart';
+export 'user_setting_register.dart';

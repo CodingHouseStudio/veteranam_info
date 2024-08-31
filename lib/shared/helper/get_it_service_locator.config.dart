@@ -12,6 +12,7 @@ import 'package:connectivity_plus/connectivity_plus.dart' as _i895;
 import 'package:device_info_plus/device_info_plus.dart' as _i833;
 import 'package:firebase_analytics/firebase_analytics.dart' as _i398;
 import 'package:firebase_auth/firebase_auth.dart' as _i59;
+import 'package:firebase_crashlytics/firebase_crashlytics.dart' as _i141;
 import 'package:firebase_messaging/firebase_messaging.dart' as _i892;
 import 'package:firebase_remote_config/firebase_remote_config.dart' as _i627;
 import 'package:get_it/get_it.dart' as _i174;
@@ -93,6 +94,8 @@ import 'package:veteranam/shared/repositories/build_repository.dart' as _i105;
 import 'package:veteranam/shared/repositories/device_repository.dart' as _i712;
 import 'package:veteranam/shared/repositories/discount_repository.dart'
     as _i452;
+import 'package:veteranam/shared/repositories/failure_module.dart' as _i531;
+import 'package:veteranam/shared/repositories/failure_repository.dart' as _i960;
 import 'package:veteranam/shared/repositories/faq_repository.dart' as _i1007;
 import 'package:veteranam/shared/repositories/feedback_repository.dart'
     as _i361;
@@ -125,17 +128,22 @@ extension GetItInjectableX on _i174.GetIt {
       environment,
       environmentFilter,
     );
+    final failureModule = _$FailureModule();
     final messagingModule = _$MessagingModule();
     final analytucsModule = _$AnalytucsModule();
     final remoteConfigModule = _$RemoteConfigModule();
     final firebaseModule = _$FirebaseModule();
     final networkModule = _$NetworkModule();
+    gh.singleton<_i141.FirebaseCrashlytics>(
+        () => failureModule.firebaseCrashlytics);
     gh.factory<_i37.CacheClient>(() => _i37.CacheClient());
     gh.singleton<_i105.BuildRepository>(() => _i105.BuildRepository());
     gh.singleton<_i892.FirebaseMessaging>(
         () => messagingModule.firebaseMessaging);
     gh.singleton<_i833.DeviceInfoPlugin>(
         () => messagingModule.deviceInfoPlugin);
+    gh.lazySingleton<_i960.FailureRepository>(
+        () => _i960.FailureRepository(gh<_i141.FirebaseCrashlytics>()));
     gh.singleton<_i1033.FirestoreService>(
         () => _i1033.FirestoreService(gh<_i1001.CacheClient>()));
     gh.singleton<_i1001.IDeviceRepository>(() => _i712.DeviceRepository(
@@ -339,6 +347,8 @@ extension GetItInjectableX on _i174.GetIt {
     return this;
   }
 }
+
+class _$FailureModule extends _i531.FailureModule {}
 
 class _$MessagingModule extends _i967.MessagingModule {}
 

@@ -80,9 +80,9 @@ class DiscountWatcherBloc
           ),
         );
       },
-      onError: (dynamic error) {
+      onError: (Object error, StackTrace stack) {
         // debugPrint('error is $error');
-        add(DiscountWatcherEvent.failure(error));
+        add(DiscountWatcherEvent.failure(error: error, stack: stack));
       },
     );
   }
@@ -512,7 +512,10 @@ class DiscountWatcherBloc
     emit(
       state.copyWith(
         loadingStatus: LoadingStatus.error,
-        failure: DiscountFailure.error,
+        failure: SomeFailure.serverError(
+          error: event.error,
+          stack: event.stack,
+        )._toDiscount(),
       ),
     );
   }

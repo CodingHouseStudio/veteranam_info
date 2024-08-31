@@ -16,10 +16,10 @@ class FeedbackRepository implements IFeedbackRepository {
     try {
       await _firestoreService.addFeedback(feedback);
       return const Right(true);
-    } on FirebaseException catch (e) {
-      return Left(SendFailure.fromCode(e).status);
-    } catch (e) {
-      return const Left(SomeFailure.serverError());
+    } on FirebaseException catch (e, stack) {
+      return Left(SendFailure.fromCode(error: e, stack: stack).status);
+    } catch (e, stack) {
+      return Left(SomeFailure.serverError(error: e, stack: stack));
     }
   }
 
@@ -35,10 +35,10 @@ class FeedbackRepository implements IFeedbackRepository {
       );
       await _firestoreService.addMobFeedback(feedbackModel);
       return const Right(true);
-    } on FirebaseException catch (e) {
-      return Left(SendFailure.fromCode(e).status);
-    } catch (e) {
-      return const Left(SomeFailure.serverError());
+    } on FirebaseException catch (e, stack) {
+      return Left(SendFailure.fromCode(error: e, stack: stack).status);
+    } catch (e, stack) {
+      return Left(SomeFailure.serverError(error: e, stack: stack));
     }
   }
 
@@ -57,10 +57,10 @@ class FeedbackRepository implements IFeedbackRepository {
       } else {
         return const Right(true);
       }
-    } on FirebaseException catch (e) {
-      return Left(SendFailure.fromCode(e).status);
-    } catch (e) {
-      return const Left(SomeFailure.serverError());
+    } on FirebaseException catch (e, stack) {
+      return Left(SendFailure.fromCode(error: e, stack: stack).status);
+    } catch (e, stack) {
+      return Left(SomeFailure.serverError(error: e, stack: stack));
     }
   }
 
