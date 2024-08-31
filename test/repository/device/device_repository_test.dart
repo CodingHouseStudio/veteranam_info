@@ -18,7 +18,7 @@ void main() {
       'deviceMemory': 64,
       'language': 'en',
       'languages': ['en', 'es'],
-      'platform': KTestText.deviceId,
+      'platform': null,
       'product': 'PRODUCT',
       'productSub': 'PRODUCTSUB',
       'userAgent': KTestText.deviceId,
@@ -146,6 +146,20 @@ void main() {
         ).called(1);
       });
       test('Get device id web', () async {
+        await deviceRepository.getDeviceId(
+          platformValue: PlatformEnum.web,
+        );
+
+        verify(
+          mockDeviceInfoPlugin.webBrowserInfo,
+        ).called(1);
+      });
+      test('Get device id web when platform null', () async {
+        when(
+          mockDeviceInfoPlugin.webBrowserInfo,
+        ).thenAnswer(
+          (_) async => webInfo,
+        );
         await deviceRepository.getDeviceId(
           platformValue: PlatformEnum.web,
         );
