@@ -46,7 +46,7 @@ class MobFeedbackBloc extends Bloc<MobFeedbackEvent, MobFeedbackState> {
     _Send event,
     Emitter<MobFeedbackState> emit,
   ) async {
-    if (state.message.isValid) {
+    if (state.message.isValid && event.image != null) {
       final feedbackModel = FeedbackModel(
         id: ExtendedDateTime.id,
         guestId: _appAuthenticationRepository.currentUser.id,
@@ -57,7 +57,7 @@ class MobFeedbackBloc extends Bloc<MobFeedbackEvent, MobFeedbackState> {
       );
       final result = await _feedbackRepository.sendMobFeedback(
         feedback: feedbackModel,
-        image: event.image,
+        image: event.image!,
       );
       result.fold(
         (l) => emit(state.copyWith(failure: l._toMobFeedback())),
