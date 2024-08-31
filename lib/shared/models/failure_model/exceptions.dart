@@ -3,13 +3,14 @@ import 'package:veteranam/shared/shared.dart';
 
 /// COMMENT: Error handling classes
 class SendFailure {
-  const SendFailure([
-    this.status = const SomeFailure.initial(),
-  ]);
+  SendFailure({
+    required this.status,
+  });
 
-  factory SendFailure.fromCode(
-    FirebaseException error,
-  ) {
+  factory SendFailure.fromCode({
+    required FirebaseException error,
+    StackTrace? stack,
+  }) {
     // debugPrint('SomeFailure: ${error.code}');
     switch (error.code) {
       case 'invalid-argument':
@@ -21,11 +22,17 @@ class SendFailure {
       case 'internal-error':
       case 'invalid-file-type':
       case 'file-too-large':
-        return const SendFailure(SomeFailure.send());
+        return SendFailure(
+          status: SomeFailure.send(error: error, stack: stack),
+        );
       case 'network-error':
-        return const SendFailure(SomeFailure.network());
+        return SendFailure(
+          status: SomeFailure.network(error: error, stack: stack),
+        );
       default:
-        return const SendFailure(SomeFailure.serverError());
+        return SendFailure(
+          status: SomeFailure.serverError(error: error, stack: stack),
+        );
     }
   }
 
@@ -33,13 +40,14 @@ class SendFailure {
 }
 
 class GetFailur {
-  const GetFailur([
-    this.status = const SomeFailure.initial(),
-  ]);
+  GetFailur({
+    required this.status,
+  });
 
-  factory GetFailur.fromCode(
-    FirebaseException error,
-  ) {
+  factory GetFailur.fromCode({
+    required FirebaseException error,
+    StackTrace? stack,
+  }) {
     // debugPrint('SomeFailure: ${error.code}');
     switch (error.code) {
       case 'missing-argument':
@@ -51,11 +59,29 @@ class GetFailur {
       case 'data-error':
       case 'internal-error':
       case 'invalid-argument':
-        return const GetFailur(SomeFailure.get());
+        return GetFailur(status: SomeFailure.get(error: error, stack: stack));
       case 'network-error':
-        return const GetFailur(SomeFailure.network());
+        return GetFailur(
+          status: SomeFailure.network(error: error, stack: stack),
+        );
       default:
-        return const GetFailur(SomeFailure.serverError());
+        return GetFailur(
+          status: SomeFailure.serverError(error: error, stack: stack),
+        );
+    }
+  }
+  factory GetFailur.fromMessage({
+    required Object error,
+    StackTrace? stack,
+  }) {
+    if (error is TypeError) {
+      return GetFailur(
+        status: SomeFailure.serverError(error: error, stack: stack),
+      );
+    } else {
+      return GetFailur(
+        status: SomeFailure.serverError(error: error, stack: stack),
+      );
     }
   }
 
@@ -67,30 +93,33 @@ class GetFailur {
 /// {@endtemplate}
 class SignUpWithEmailAndPasswordFailure {
   /// {@macro sign_up_with_email_and_password_failure}
-  const SignUpWithEmailAndPasswordFailure([
-    this.status = const SomeFailure.initial(),
-  ]);
+  const SignUpWithEmailAndPasswordFailure({required this.status});
 
-  factory SignUpWithEmailAndPasswordFailure.fromCode(
-    FirebaseAuthException error,
-  ) {
+  factory SignUpWithEmailAndPasswordFailure.fromCode({
+    required FirebaseAuthException error,
+    StackTrace? stack,
+  }) {
     // debugPrint('SomeFailure: ${error.code}');
     switch (error.code) {
       case 'email-already-in-use':
-        return const SignUpWithEmailAndPasswordFailure(
-          SomeFailure.duplicate(),
+        return SignUpWithEmailAndPasswordFailure(
+          status: SomeFailure.duplicate(error: error, stack: stack),
         );
       case 'operation-not-allowed':
       case 'invalid-email':
       case 'user-disabled':
       case 'weak-password':
-        return const SignUpWithEmailAndPasswordFailure(
-          SomeFailure.serverError(),
+        return SignUpWithEmailAndPasswordFailure(
+          status: SomeFailure.serverError(error: error, stack: stack),
         );
       case 'network-error':
-        return const SignUpWithEmailAndPasswordFailure(SomeFailure.network());
+        return SignUpWithEmailAndPasswordFailure(
+          status: SomeFailure.network(error: error, stack: stack),
+        );
       default:
-        return const SignUpWithEmailAndPasswordFailure();
+        return SignUpWithEmailAndPasswordFailure(
+          status: SomeFailure.serverError(error: error, stack: stack),
+        );
     }
   }
 
@@ -99,13 +128,12 @@ class SignUpWithEmailAndPasswordFailure {
 
 class LogInWithEmailAndPasswordFailure {
   /// {@macro log_in_with_email_and_password_failure}
-  const LogInWithEmailAndPasswordFailure([
-    this.status = const SomeFailure.initial(),
-  ]);
+  const LogInWithEmailAndPasswordFailure({required this.status});
 
-  factory LogInWithEmailAndPasswordFailure.fromCode(
-    FirebaseAuthException error,
-  ) {
+  factory LogInWithEmailAndPasswordFailure.fromCode({
+    required FirebaseAuthException error,
+    StackTrace? stack,
+  }) {
     // debugPrint('SomeFailure: ${error.code}');
     switch (error.code) {
       case 'user-disabled':
@@ -113,13 +141,17 @@ class LogInWithEmailAndPasswordFailure {
       case 'user-not-found':
       case 'wrong-password':
       case 'invalid-credential':
-        return const LogInWithEmailAndPasswordFailure(
-          SomeFailure.notFound(),
+        return LogInWithEmailAndPasswordFailure(
+          status: SomeFailure.notFound(error: error, stack: stack),
         );
       case 'network-error':
-        return const LogInWithEmailAndPasswordFailure(SomeFailure.network());
+        return LogInWithEmailAndPasswordFailure(
+          status: SomeFailure.network(error: error, stack: stack),
+        );
       default:
-        return const LogInWithEmailAndPasswordFailure();
+        return LogInWithEmailAndPasswordFailure(
+          status: SomeFailure.serverError(error: error, stack: stack),
+        );
     }
   }
 
@@ -129,13 +161,12 @@ class LogInWithEmailAndPasswordFailure {
 /// Thrown during the logout process if a failure occurs.
 // class LogOutFailure  {}
 class LogOutFailure {
-  const LogOutFailure([
-    this.status = const SomeFailure.initial(),
-  ]);
+  const LogOutFailure({required this.status});
 
-  factory LogOutFailure.fromCode(
-    FirebaseException error,
-  ) {
+  factory LogOutFailure.fromCode({
+    required FirebaseException error,
+    StackTrace? stack,
+  }) {
     // debugPrint('SomeFailure: ${error.code}');
     switch (error.code) {
       case 'missing-argument':
@@ -146,11 +177,17 @@ class LogOutFailure {
       case 'invalid-token':
       case 'user-not-found':
       case 'internal-error':
-        return const LogOutFailure(SomeFailure.unauthorized());
+        return LogOutFailure(
+          status: SomeFailure.unauthorized(error: error, stack: stack),
+        );
       case 'network-error':
-        return const LogOutFailure(SomeFailure.network());
+        return LogOutFailure(
+          status: SomeFailure.network(error: error, stack: stack),
+        );
       default:
-        return const LogOutFailure(SomeFailure.serverError());
+        return LogOutFailure(
+          status: SomeFailure.serverError(error: error, stack: stack),
+        );
     }
   }
 
@@ -158,11 +195,12 @@ class LogOutFailure {
 }
 
 class SignUpWithGoogleFailure {
-  const SignUpWithGoogleFailure([
-    this.status = const SomeFailure.initial(),
-  ]);
+  const SignUpWithGoogleFailure({required this.status});
 
-  factory SignUpWithGoogleFailure.fromCode(FirebaseAuthException error) {
+  factory SignUpWithGoogleFailure.fromCode({
+    required FirebaseAuthException error,
+    StackTrace? stack,
+  }) {
     // debugPrint('SomeFailure: ${error.code}');
     switch (error.code) {
       case 'account-exists-with-different-credential':
@@ -172,17 +210,21 @@ class SignUpWithGoogleFailure {
       case 'user-disabled':
       case 'invalid-verification-code':
       case 'invalid-verification-id':
-        return const SignUpWithGoogleFailure(
-          SomeFailure.notFound(),
+        return SignUpWithGoogleFailure(
+          status: SomeFailure.notFound(error: error, stack: stack),
         );
       case 'operation-not-allowed':
-        return const SignUpWithGoogleFailure(
-          SomeFailure.serverError(),
+        return SignUpWithGoogleFailure(
+          status: SomeFailure.serverError(error: error, stack: stack),
         );
       case 'network-error':
-        return const SignUpWithGoogleFailure(SomeFailure.network());
+        return SignUpWithGoogleFailure(
+          status: SomeFailure.network(error: error, stack: stack),
+        );
       default:
-        return const SignUpWithGoogleFailure();
+        return SignUpWithGoogleFailure(
+          status: SomeFailure.serverError(error: error, stack: stack),
+        );
     }
   }
 
@@ -190,27 +232,30 @@ class SignUpWithGoogleFailure {
 }
 
 class ShareFailure {
-  const ShareFailure([
-    this.status = const SomeFailure.initial(),
-  ]);
+  const ShareFailure({required this.status});
 
-  factory ShareFailure.fromCode(Object error) {
+  factory ShareFailure.fromCode({
+    required Object error,
+    StackTrace? stack,
+  }) {
     // debugPrint('SomeFailure: ${error.code}');
     if (error is Exception) {
       switch (error.toString()) {
         case 'Exception: Navigator.canShare() is unavailable':
-          return const ShareFailure();
-        default:
           return const ShareFailure(
-            SomeFailure.share(),
+            status: null,
+          );
+        default:
+          return ShareFailure(
+            status: SomeFailure.share(error: error, stack: stack),
           );
       }
     } else {
-      return const ShareFailure(
-        SomeFailure.serverError(),
+      return ShareFailure(
+        status: SomeFailure.serverError(error: error, stack: stack),
       );
     }
   }
 
-  final SomeFailure status;
+  final SomeFailure? status;
 }

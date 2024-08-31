@@ -3,12 +3,16 @@ import 'dart:typed_data';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:get_it/get_it.dart';
 import 'package:mockito/mockito.dart';
 import 'package:veteranam/shared/shared.dart';
 
 import '../test_dependency.dart';
 
 void main() {
+  setUp(configureFailureDependenciesTest);
+
+  tearDown(GetIt.I.reset);
   group('${KScreenBlocName.feedback} ${KGroupText.bloc} ', () {
     late MobFeedbackBloc mobFeedbackBloc;
     late IFeedbackRepository mockFeedbackRepository;
@@ -36,7 +40,11 @@ void main() {
           image: wrongImage,
         ),
       ).thenAnswer(
-        (realInvocation) async => const Left(SomeFailure.serverError()),
+        (realInvocation) async => Left(
+          SomeFailure.serverError(
+            error: null,
+          ),
+        ),
       );
       when(mockAppAuthenticationRepository.currentUser).thenAnswer(
         (realInvocation) => KTestText.user,

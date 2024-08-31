@@ -1,6 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:get_it/get_it.dart';
 import 'package:mockito/mockito.dart';
 import 'package:veteranam/components/components.dart';
 import 'package:veteranam/shared/shared.dart';
@@ -8,9 +9,13 @@ import 'package:veteranam/shared/shared.dart';
 import '../../../test_dependency.dart';
 
 void main() {
+  setUp(configureFailureDependenciesTest);
+
   setupFirebaseAuthMocks();
 
   setUpAll(setUpGlobal);
+
+  tearDown(GetIt.I.reset);
   group('${KScreenBlocName.discount} Link From ${KGroupText.bloc}', () {
     late DiscountLinkFormBloc discountLinkFormBloc;
     late IDiscountRepository mockdiscountRepository;
@@ -29,7 +34,7 @@ void main() {
           KTestText.linkModelWrong,
         ),
       ).thenAnswer(
-        (_) async => const Left(SomeFailure.serverError()),
+        (_) async => Left(SomeFailure.serverError(error: null)),
       );
       when(mockAppAuthenticationRepository.currentUser).thenAnswer(
         (invocation) => KTestText.user,

@@ -1,15 +1,20 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:get_it/get_it.dart';
 import 'package:mockito/mockito.dart';
 import 'package:veteranam/shared/shared.dart';
 
 import '../test_dependency.dart';
 
 void main() {
+  setUp(configureFailureDependenciesTest);
+
   setupFirebaseAuthMocks();
 
   setUpAll(setUpGlobal);
+
+  tearDown(GetIt.I.reset);
   group('${KScreenBlocName.url} ', () {
     late UrlCubit mockUrlCubit;
     late IUrlRepository mockUrlRepository;
@@ -96,13 +101,13 @@ void main() {
       setUp(() {
         when(mockUrlRepository.launchUrl(url: KTestText.downloadURL))
             .thenAnswer(
-          (invocation) async => const Left(SomeFailure.link()),
+          (invocation) async => Left(SomeFailure.link(error: null)),
         );
         when(mockUrlRepository.share(KTestText.downloadURL)).thenAnswer(
-          (invocation) async => const Left(SomeFailure.share()),
+          (invocation) async => Left(SomeFailure.share(error: null)),
         );
         when(mockUrlRepository.copy(KAppText.email)).thenAnswer(
-          (invocation) async => const Left(SomeFailure.copy()),
+          (invocation) async => Left(SomeFailure.copy(error: null)),
         );
       });
       blocTest<UrlCubit, UrlEnum?>(

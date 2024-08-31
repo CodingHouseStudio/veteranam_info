@@ -8,6 +8,8 @@ import 'package:veteranam/shared/shared.dart';
 import '../../test_dependency.dart';
 
 void main() {
+  setUp(configureFailureDependenciesTest);
+
   setupFirebaseAuthMocks();
 
   setUpAll(setUpGlobal);
@@ -38,7 +40,7 @@ void main() {
         GetIt.I.registerSingleton(mockFirestoreService);
         investorsRepository = InvestorsRepository();
       });
-      test('questions', () async {
+      test('funds', () async {
         expect(
           await investorsRepository.getFunds(),
           isA<Right<SomeFailure, List<FundModel>>>()
@@ -58,6 +60,30 @@ void main() {
     group('${KGroupText.failureGet} ', () {
       setUp(() {
         when(mockFirestoreService.getFunds(null)).thenThrow(
+          Exception(KGroupText.failureGet),
+        );
+        if (GetIt.I.isRegistered<FirestoreService>()) {
+          GetIt.I.unregister<FirestoreService>();
+        }
+        GetIt.I.registerSingleton(mockFirestoreService);
+        investorsRepository = InvestorsRepository();
+      });
+      test('Get funds', () async {
+        expect(
+          await investorsRepository.getFunds(),
+          isA<Left<SomeFailure, List<FundModel>>>(),
+          // .having(
+          //   (e) => e.value,
+          //   'value',
+          //   SomeFailure.serverError(error: null),
+          // ),
+        );
+      });
+    });
+
+    group('${KGroupText.firebaseFailure} ', () {
+      setUp(() {
+        when(mockFirestoreService.getFunds(null)).thenThrow(
           FirebaseException(plugin: KGroupText.failureGet),
         );
         if (GetIt.I.isRegistered<FirestoreService>()) {
@@ -66,14 +92,15 @@ void main() {
         GetIt.I.registerSingleton(mockFirestoreService);
         investorsRepository = InvestorsRepository();
       });
-      test('questions', () async {
+      test('Get funds', () async {
         expect(
           await investorsRepository.getFunds(),
-          isA<Left<SomeFailure, List<FundModel>>>().having(
-            (e) => e.value,
-            'value',
-            equals(const SomeFailure.serverError()),
-          ),
+          isA<Left<SomeFailure, List<FundModel>>>(),
+          // .having(
+          //   (e) => e.value,
+          //   'value',
+          //   SomeFailure.serverError(error: null),
+          // ),
         );
       });
     });

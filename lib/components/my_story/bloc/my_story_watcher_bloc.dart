@@ -34,7 +34,7 @@ class MyStoryWatcherBloc
   ) async {
     emit(state.copyWith(loadingStatus: LoadingStatus.loading));
 
-    final result = await _storyRepository.getStoriesById(
+    final result = await _storyRepository.getStoriesByUserId(
       _appAuthenticationRepository.currentUser.id,
     );
     result.fold(
