@@ -67,6 +67,10 @@ jobs:
       id-token: write
       contents: read
     steps:
+          
+      - name: 📡 Run Sentry Dart Plugin
+        run: flutter packages pub run sentry_dart_plugin
+        
       - name: Checkout
         uses: actions/checkout@v4.1.5
       - uses: subosito/flutter-action@v2.12.0
