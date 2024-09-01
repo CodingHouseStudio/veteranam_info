@@ -66,11 +66,7 @@ jobs:
     permissions: # set permissions for AWS creentials specifically
       id-token: write
       contents: read
-    steps:
-          
-      - name: 📡 Run Sentry Dart Plugin
-        run: flutter packages pub run sentry_dart_plugin
-        
+    steps:        
       - name: Checkout
         uses: actions/checkout@v4.1.5
       - uses: subosito/flutter-action@v2.12.0
@@ -81,6 +77,8 @@ jobs:
           cache-path: "${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:" # optional, change this to specify the cache path
           architecture: x64 # optional, x64 or arm64
           flutter-version: ${{ secrets.FLUTTER_FRAMEWORK_VERSION }}
+      - name: 📡 Run Sentry Dart Plugin
+        run: flutter packages pub run sentry_dart_plugin
       - run: flutter config --no-analytics
       - run: flutter config --no-cli-animations
       - name: Flutter Pub Get # get flutter packages information
