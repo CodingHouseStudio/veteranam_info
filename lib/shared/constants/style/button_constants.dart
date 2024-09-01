@@ -81,6 +81,7 @@ abstract class KButtonStyles {
   static const withoutStyle = ButtonStyle(
     alignment: Alignment.centerLeft,
     padding: WidgetStatePropertyAll(EdgeInsets.zero),
+    shape: WidgetStatePropertyAll(LinearBorder.none),
     overlayColor: WidgetStatePropertyAll(Colors.transparent),
   );
   static const boxButtonStyle = ButtonStyle(
