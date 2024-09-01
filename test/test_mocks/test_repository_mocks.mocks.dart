@@ -5959,7 +5959,7 @@ class MockIStoryRepository extends _i1.Mock implements _i3.IStoryRepository {
           String? userId) =>
       (super.noSuchMethod(
         Invocation.method(
-          #getStoriesById,
+          #getStoriesByUserId,
           [userId],
         ),
         returnValue:
@@ -5967,7 +5967,7 @@ class MockIStoryRepository extends _i1.Mock implements _i3.IStoryRepository {
                 _FakeEither_0<_i3.SomeFailure, List<_i3.StoryModel>>(
           this,
           Invocation.method(
-            #getStoriesById,
+            #getStoriesByUserId,
             [userId],
           ),
         )),
@@ -5976,7 +5976,7 @@ class MockIStoryRepository extends _i1.Mock implements _i3.IStoryRepository {
                 _FakeEither_0<_i3.SomeFailure, List<_i3.StoryModel>>(
           this,
           Invocation.method(
-            #getStoriesById,
+            #getStoriesByUserId,
             [userId],
           ),
         )),
