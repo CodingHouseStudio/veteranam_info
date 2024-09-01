@@ -199,7 +199,7 @@ abstract class FooterWidget {
               ),
               KSizedBox.kHeightSizedBox4,
               Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
+                // crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Expanded(
                     child: Text(
@@ -452,12 +452,12 @@ abstract class FooterWidget {
     required bool isDesk,
   }) =>
       TextButton(
-        key: KWidgetkeys.widget.footer.privacyPolicy,
         onPressed: () => context.goNamed(KRoute.privacyPolicy.name),
         style: KButtonStyles.withoutStyle
-            .copyWith(alignment: Alignment.bottomLeft),
+            .copyWith(alignment: isDesk ? Alignment.bottomLeft : null),
         child: Text(
           context.l10n.privacyPolicy,
+          textAlign: TextAlign.end,
           style: isDesk
               ? AppTextStyle.materialThemeBodyLargeNeutralVariant35
               : AppTextStyle.materialThemeLabelSmallNeutralVariant35,
