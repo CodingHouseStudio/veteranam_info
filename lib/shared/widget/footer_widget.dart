@@ -452,6 +452,7 @@ abstract class FooterWidget {
     required bool isDesk,
   }) =>
       TextButton(
+        key: KWidgetkeys.widget.footer.privacyPolicy,
         onPressed: () => context.goNamed(KRoute.privacyPolicy.name),
         style: KButtonStyles.withoutStyle
             .copyWith(alignment: isDesk ? Alignment.bottomLeft : null),
