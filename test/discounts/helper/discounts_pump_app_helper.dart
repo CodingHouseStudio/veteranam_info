@@ -13,7 +13,7 @@ Future<void> discountsPumpAppHelper({
   required AuthenticationRepository mockAuthenticationRepository,
   required FirebaseAnalyticsService mockFirebaseAnalyticsService,
   required FirebaseRemoteConfigProvider mockFirebaseRemoteConfigProvider,
-  required BuildRepository mockBuildRepository,
+  required AppInfoRepository mockBuildRepository,
   MockGoRouter? mockGoRouter,
 }) async {
   _registerReportBloc(
@@ -194,15 +194,15 @@ void _registerDiscountConfigCubit(
 }
 
 void _registerBuildCubit({
-  required BuildRepository mockBuildRepository,
+  required AppInfoRepository mockBuildRepository,
   required FirebaseRemoteConfigProvider mockFirebaseRemoteConfigProvider,
 }) {
-  final buildCubit = BuildCubit(
+  final buildCubit = AppVersionCubit(
     buildRepository: mockBuildRepository,
     firebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
   );
-  if (GetIt.I.isRegistered<BuildCubit>()) {
-    GetIt.I.unregister<BuildCubit>();
+  if (GetIt.I.isRegistered<AppVersionCubit>()) {
+    GetIt.I.unregister<AppVersionCubit>();
   }
-  GetIt.I.registerSingleton<BuildCubit>(buildCubit);
+  GetIt.I.registerSingleton<AppVersionCubit>(buildCubit);
 }

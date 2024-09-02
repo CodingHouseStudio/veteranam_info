@@ -8,7 +8,7 @@ class InfoVersionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<BuildCubit, BuildState>(
+    return BlocBuilder<AppVersionCubit, AppVersionState>(
       builder: (context, _) {
         return Text(
           ' v${_.build.version} ${isDesk ? '' : '\n'}'

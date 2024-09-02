@@ -5,32 +5,33 @@ import 'package:injectable/injectable.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:veteranam/shared/shared.dart';
 
-part 'buid_state.dart';
+part 'app_version_state.dart';
 
 @injectable
-class BuildCubit extends Cubit<BuildState> {
-  BuildCubit({
-    required BuildRepository buildRepository,
+class AppVersionCubit extends Cubit<AppVersionState> {
+  AppVersionCubit({
+    required AppInfoRepository buildRepository,
     required FirebaseRemoteConfigProvider firebaseRemoteConfigProvider,
   })  : _buildRepository = buildRepository,
         _firebaseRemoteConfigProvider = firebaseRemoteConfigProvider,
         super(
-          BuildState(
-            build: BuildRepository.defaultValue,
+          AppVersionState(
+            build: AppInfoRepository.defaultValue,
             mobHasNewBuild: false,
           ),
         );
-  final BuildRepository _buildRepository;
+  final AppInfoRepository _buildRepository;
   final FirebaseRemoteConfigProvider _firebaseRemoteConfigProvider;
 
   @visibleForTesting
-  static const mobBuildKey = '__mob_build_key__';
+  static const mobAppVersionKey = '__mob_app_version_key__';
 
   Future<void> started() async {
     final buildInfo = await _buildRepository.getBuildInfo();
-    final mobLastBuild = _firebaseRemoteConfigProvider.getString(mobBuildKey);
+    final mobLastBuild =
+        _firebaseRemoteConfigProvider.getString(mobAppVersionKey);
     emit(
-      BuildState(
+      AppVersionState(
         build: buildInfo,
         mobHasNewBuild:
             KTest.testReleaseMode && buildInfo.buildNumber != mobLastBuild,
