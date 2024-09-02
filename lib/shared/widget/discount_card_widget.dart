@@ -143,7 +143,10 @@ class DiscountCardWidget extends StatelessWidget {
                     children: [
                       _expiration(
                         context: context,
-                        expiration: discountItem.expiration,
+                        expiration: discountItem.expiration.getTrnslation(
+                          en: discountItem.expirationEN,
+                          context: context,
+                        ),
                       ),
                       KSizedBox.kWidthSizedBox16,
                       Expanded(
@@ -158,7 +161,10 @@ class DiscountCardWidget extends StatelessWidget {
                 else ...[
                   _expiration(
                     context: context,
-                    expiration: discountItem.expiration,
+                    expiration: discountItem.expiration.getTrnslation(
+                      en: discountItem.expirationEN,
+                      context: context,
+                    ),
                   ),
                   KSizedBox.kHeightSizedBox8,
                   CityListWidget(
