@@ -16,16 +16,24 @@ void main() {
     final fullJson = {
       QuestionModelJsonField.id: KTestText.questionModelItems.first.id,
       QuestionModelJsonField.title: KTestText.questionModelItems.first.title,
+      QuestionModelJsonField.titleEN:
+          KTestText.questionModelItems.first.titleEN,
       QuestionModelJsonField.subtitle:
           KTestText.questionModelItems.first.subtitle,
+      QuestionModelJsonField.subtitleEN:
+          KTestText.questionModelItems.first.subtitleEN,
       QuestionModelJsonField.navigationLink:
           KTestText.questionModelItems.first.navigationLink,
     };
     final nullableJson = {
       QuestionModelJsonField.id: KTestText.questionModelItems.first.id,
       QuestionModelJsonField.title: KTestText.questionModelItems.first.title,
+      QuestionModelJsonField.titleEN:
+          KTestText.questionModelItems.first.titleEN,
       QuestionModelJsonField.subtitle:
           KTestText.questionModelItems.first.subtitle,
+      QuestionModelJsonField.subtitleEN:
+          KTestText.questionModelItems.first.subtitleEN,
       QuestionModelJsonField.navigationLink: null,
     };
     group('${KGroupText.modelJson} ', () {
@@ -38,8 +46,16 @@ void main() {
           KTestText.questionModelItems.first.title,
         );
         expect(
+          questionModel.titleEN,
+          KTestText.questionModelItems.first.titleEN,
+        );
+        expect(
           questionModel.subtitle,
           KTestText.questionModelItems.first.subtitle,
+        );
+        expect(
+          questionModel.subtitleEN,
+          KTestText.questionModelItems.first.subtitleEN,
         );
         expect(
           questionModel.navigationLink,
@@ -56,8 +72,16 @@ void main() {
           KTestText.questionModelItems.first.title,
         );
         expect(
+          questionModel.titleEN,
+          KTestText.questionModelItems.first.titleEN,
+        );
+        expect(
           questionModel.subtitle,
           KTestText.questionModelItems.first.subtitle,
+        );
+        expect(
+          questionModel.subtitleEN,
+          KTestText.questionModelItems.first.subtitleEN,
         );
         expect(questionModel.navigationLink, null);
       });
@@ -66,8 +90,12 @@ void main() {
         final json = {
           QuestionModelJsonField.id: KTestText.questionModelItems.first.id,
           // title is missing
+          QuestionModelJsonField.titleEN:
+              KTestText.questionModelItems.first.titleEN,
           QuestionModelJsonField.subtitle:
               KTestText.questionModelItems.first.subtitle,
+          QuestionModelJsonField.subtitleEN:
+              KTestText.questionModelItems.first.subtitleEN,
           QuestionModelJsonField.navigationLink:
               KTestText.questionModelItems.first.navigationLink,
         };
@@ -86,10 +114,20 @@ void main() {
             (_) => KTestText.questionModelItems.first.title
                 .split(KTestText.questionModelItems.first.title),
           ).join(),
+          QuestionModelJsonField.titleEN: List.generate(
+            KMinMaxSize.titleMaxLength,
+            (_) => KTestText.questionModelItems.first.titleEN
+                .split(KTestText.questionModelItems.first.titleEN),
+          ).join(),
           QuestionModelJsonField.subtitle: List.generate(
             KMinMaxSize.subtitleMaxLength,
             (_) => KTestText.questionModelItems.first.subtitle
                 .split(KTestText.questionModelItems.first.subtitle),
+          ).join(),
+          QuestionModelJsonField.subtitleEN: List.generate(
+            KMinMaxSize.subtitleMaxLength,
+            (_) => KTestText.questionModelItems.first.subtitleEN
+                .split(KTestText.questionModelItems.first.subtitleEN),
           ).join(),
           QuestionModelJsonField.navigationLink:
               KTestText.questionModelItems.first.navigationLink,
@@ -103,7 +141,15 @@ void main() {
           KMinMaxSize.titleMaxLength,
         );
         expect(
+          questionModel.titleEN.length,
+          KMinMaxSize.titleMaxLength,
+        );
+        expect(
           questionModel.subtitle.length,
+          KMinMaxSize.subtitleMaxLength,
+        );
+        expect(
+          questionModel.subtitleEN.length,
           KMinMaxSize.subtitleMaxLength,
         );
         expect(
@@ -135,10 +181,20 @@ void main() {
             (_) => KTestText.questionModelItems.first.title
                 .split(KTestText.questionModelItems.first.title),
           ).join().substring(0, KMinMaxSize.titleMaxLength),
+          QuestionModelJsonField.titleEN: List.generate(
+            KMinMaxSize.titleMaxLength,
+            (_) => KTestText.questionModelItems.first.titleEN
+                .split(KTestText.questionModelItems.first.titleEN),
+          ).join().substring(0, KMinMaxSize.titleMaxLength),
           QuestionModelJsonField.subtitle: List.generate(
             KMinMaxSize.subtitleMaxLength,
             (_) => KTestText.questionModelItems.first.subtitle
                 .split(KTestText.questionModelItems.first.subtitle),
+          ).join().substring(0, KMinMaxSize.subtitleMaxLength),
+          QuestionModelJsonField.subtitleEN: List.generate(
+            KMinMaxSize.subtitleMaxLength,
+            (_) => KTestText.questionModelItems.first.subtitleEN
+                .split(KTestText.questionModelItems.first.subtitleEN),
           ).join().substring(0, KMinMaxSize.subtitleMaxLength),
           QuestionModelJsonField.navigationLink:
               KTestText.questionModelItems.first.navigationLink,
@@ -150,10 +206,20 @@ void main() {
             (_) => KTestText.questionModelItems.first.title
                 .split(KTestText.questionModelItems.first.title),
           ).join(),
+          titleEN: List.generate(
+            KMinMaxSize.titleMaxLength,
+            (_) => KTestText.questionModelItems.first.titleEN
+                .split(KTestText.questionModelItems.first.titleEN),
+          ).join(),
           subtitle: List.generate(
             KMinMaxSize.subtitleMaxLength,
             (_) => KTestText.questionModelItems.first.subtitle
                 .split(KTestText.questionModelItems.first.subtitle),
+          ).join(),
+          subtitleEN: List.generate(
+            KMinMaxSize.subtitleMaxLength,
+            (_) => KTestText.questionModelItems.first.subtitleEN
+                .split(KTestText.questionModelItems.first.subtitleEN),
           ).join(),
           navigationLink: KTestText.questionModelItems.first.navigationLink,
         ).toJson();
