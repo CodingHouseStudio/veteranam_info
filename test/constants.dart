@@ -92,12 +92,7 @@ abstract class KTestText {
   static const phoneNumber = '+3809900000';
 
   static final questionModelItems = <QuestionModel>[
-    QuestionModel(
-      id: '0',
-      title: KMockText.questionTitle.first,
-      subtitle: KMockText.questionSubtitle,
-      navigationLink: 'test_link',
-    ),
+    KMockText.questionModel,
   ];
 
   static final workModelItems = <WorkModel>[
