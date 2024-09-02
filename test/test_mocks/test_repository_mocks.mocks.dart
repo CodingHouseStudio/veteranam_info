@@ -11345,6 +11345,28 @@ class MockFirebaseRemoteConfigProvider extends _i1.Mock
         returnValue: 0,
         returnValueForMissingStub: 0,
       ) as int);
+
+  @override
+  String getString(String? key) => (super.noSuchMethod(
+        Invocation.method(
+          #getString,
+          [key],
+        ),
+        returnValue: _i28.dummyValue<String>(
+          this,
+          Invocation.method(
+            #getString,
+            [key],
+          ),
+        ),
+        returnValueForMissingStub: _i28.dummyValue<String>(
+          this,
+          Invocation.method(
+            #getString,
+            [key],
+          ),
+        ),
+      ) as String);
 }
 
 /// A class which mocks [FirebaseRemoteConfig].
@@ -11928,10 +11950,10 @@ class MockIDeviceRepository extends _i1.Mock implements _i3.IDeviceRepository {
       ) as _i8.Future<_i2.Either<_i3.SomeFailure, String?>>);
 }
 
-/// A class which mocks [BuildRepository].
+/// A class which mocks [AppInfoRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockBuildRepository extends _i1.Mock implements _i3.BuildRepository {
+class MockAppInfoRepository extends _i1.Mock implements _i3.AppInfoRepository {
   @override
   _i8.Future<_i18.PackageInfo> getBuildInfo() => (super.noSuchMethod(
         Invocation.method(

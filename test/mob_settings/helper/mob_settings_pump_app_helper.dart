@@ -9,14 +9,12 @@ Future<void> mobSettingsPumpAppHelper({
   required WidgetTester tester,
   required IFeedbackRepository mockFeedbackRepository,
   required IAppAuthenticationRepository mockAppAuthenticationRepository,
-  required BuildRepository mockBuildRepository,
   MockGoRouter? mockGoRouter,
 }) async {
   _registerMobFeedbackBloc(
     mockFeedbackRepository: mockFeedbackRepository,
     mockAppAuthenticationRepository: mockAppAuthenticationRepository,
   );
-  _registerBuildCubit(mockBuildRepository);
   await tester.pumpApp(
     const MobSettingsScreen(),
     mockGoRouter: mockGoRouter,
@@ -45,16 +43,4 @@ void _registerMobFeedbackBloc({
   GetIt.I.registerSingleton<MobFeedbackBloc>(
     mobFeedbackBloc,
   );
-}
-
-void _registerBuildCubit(
-  BuildRepository mockBuildRepository,
-) {
-  final urlCubit = BuildCubit(
-    buildRepository: mockBuildRepository,
-  );
-  if (GetIt.I.isRegistered<BuildCubit>()) {
-    GetIt.I.unregister<BuildCubit>();
-  }
-  GetIt.I.registerSingleton<BuildCubit>(urlCubit);
 }
