@@ -1084,9 +1084,5 @@
   "noInternet": "No internet",
   "@noInternet": {
     "examples": "Text for message about no internet"
-  },
-  "slowInternet": "Slow internet",
-  "@slowInternet": {
-    "examples": "Text for message about slow internet"
   }
 }

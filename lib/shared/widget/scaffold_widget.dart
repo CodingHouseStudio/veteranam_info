@@ -87,7 +87,7 @@ class ScaffoldWidget extends StatelessWidget {
                   widgetKey: KWidgetkeys.widget.scaffold.scroll,
                   //physics: KTest.scroll,
                   slivers: [
-                    if (!KTest.testIsWeb && (state.isOffline || state.isSlow))
+                    if (!KTest.testIsWeb && state.isOffline)
                       SliverPersistentHeader(
                         delegate: NetworkStatusBanner(
                           networkStatus: state,

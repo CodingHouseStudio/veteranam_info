@@ -138,11 +138,6 @@ abstract class KIcon {
     color: AppColors.materialThemeSysLightError,
     size: KSize.kFont20,
   );
-  static const _KIcon slowInternet = _KIcon(
-    Symbols.speed,
-    color: Colors.orange,
-    size: KSize.kFont20,
-  );
   static List<Icon> get icons => [
         KIcon.tag,
         KIcon.briefcase,

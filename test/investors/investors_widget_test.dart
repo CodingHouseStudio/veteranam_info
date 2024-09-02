@@ -211,7 +211,7 @@ void main() {
       });
 
       testWidgets('${KGroupText.network} mob offline', (tester) async {
-        await networkOfflineMobHelper(
+        await networkHelper(
           tester: tester,
           pumpApp: () async => investorsPumpAppHelper(
             mockAppAuthenticationRepository: mockAppAuthenticationRepository,
@@ -229,29 +229,6 @@ void main() {
           );
           expect(
             find.byKey(KWidgetkeys.widget.networkBanner.iconNoInternet),
-            findsNothing,
-          );
-        }
-      });
-      testWidgets('${KGroupText.network} mob slow', (tester) async {
-        await networkSlowMobHelper(
-          tester: tester,
-          pumpApp: () async => investorsPumpAppHelper(
-            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-            mockInvestorsRepository: mockInvestorsRepository,
-            mockReportRepository: mockReportRepository,
-            mockAuthenticationRepository: mockAuthenticationRepository,
-            mockUrlRepository: mockUrlRepository,
-            tester: tester,
-          ),
-        );
-        if (KTest.testIsWeb) {
-          expect(
-            find.byKey(KWidgetkeys.widget.networkBanner.widget),
-            findsNothing,
-          );
-          expect(
-            find.byKey(KWidgetkeys.widget.networkBanner.iconSlowInternet),
             findsNothing,
           );
         }

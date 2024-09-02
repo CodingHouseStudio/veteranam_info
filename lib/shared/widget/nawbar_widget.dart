@@ -328,8 +328,7 @@ class _NawbarWidgetImplematationState
                         //KSizedBox.kWidthSizedBox56,
                         if (isShrunk &&
                             !KTest.testIsWeb &&
-                            (widget.networkStatus!.isOffline ||
-                                widget.networkStatus!.isSlow))
+                            widget.networkStatus!.isOffline)
                           internetBanner(widget.networkStatus!),
                       ],
                     )
@@ -362,19 +361,18 @@ class _NawbarWidgetImplematationState
             textAlign: TextAlign.center,
           ),
         ),
-        if (!showBackButton &&
-            isShrunk &&
-            !KTest.testIsWeb &&
-            (state!.isOffline || state.isSlow))
+        if (!showBackButton && isShrunk && !KTest.testIsWeb && state!.isOffline)
           internetBanner(state),
       ],
     );
   }
 
-  Padding internetBanner(NetworkStatus state) {
-    return Padding(
-      padding: const EdgeInsets.only(right: KPadding.kPaddingSize16),
-      child: state.isOffline ? KIcon.noInternet : KIcon.slowInternet,
+  Widget internetBanner(NetworkStatus state) {
+    return const Padding(
+      padding: EdgeInsets.only(
+        right: KPadding.kPaddingSize16,
+      ),
+      child: KIcon.noInternet,
     );
   }
 

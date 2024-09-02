@@ -42,37 +42,22 @@ class _NetworkStatusBannerImplamentation extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: KPadding.kPaddingSize10),
-      child: Column(
+      child: Row(
+        key: KWidgetkeys.widget.networkBanner.widget,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Row(
-            key: KWidgetkeys.widget.networkBanner.widget,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              if (networkStatus.isOffline)
-                Container(
-                  key: KWidgetkeys.widget.networkBanner.iconNoInternet,
-                  child: KIcon.noInternet,
-                )
-              else
-                Container(
-                  key: KWidgetkeys.widget.networkBanner.iconSlowInternet,
-                  child: KIcon.slowInternet,
-                ),
-              KSizedBox.kWidthSizedBox10,
-              Flexible(
-                child: Text(
-                  networkStatus.isOffline
-                      ? context.l10n.noInternet
-                      : context.l10n.slowInternet,
-                  style: AppTextStyle.materialThemeLabelMedium.copyWith(
-                    color: networkStatus.isOffline
-                        ? AppColors.materialThemeSysLightError
-                        : Colors.orange,
-                  ),
-                ),
+          Container(
+            key: KWidgetkeys.widget.networkBanner.iconNoInternet,
+            child: KIcon.noInternet,
+          ),
+          KSizedBox.kWidthSizedBox10,
+          Flexible(
+            child: Text(
+              context.l10n.noInternet,
+              style: AppTextStyle.materialThemeLabelLarge.copyWith(
+                color: AppColors.materialThemeSysLightError,
               ),
-            ],
+            ),
           ),
         ],
       ),
