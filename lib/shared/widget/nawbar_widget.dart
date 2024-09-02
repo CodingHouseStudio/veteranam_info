@@ -191,11 +191,17 @@ class _NawbarWidgetImplematationState
                                   ? KSize.kPixel72
                                   : KSize.kPixel56,
                             ),
-                            KSizedBox.kWidthSizedBox32,
+                            if (widget.isDesk)
+                              KSizedBox.kWidthSizedBox32
+                            else
+                              KSizedBox.kWidthSizedBox16,
                             const CircleAvatar(
                               radius: KPadding.kPaddingSize2,
                             ),
-                            KSizedBox.kWidthSizedBox32,
+                            if (widget.isDesk)
+                              KSizedBox.kWidthSizedBox32
+                            else
+                              KSizedBox.kWidthSizedBox16,
                             _button(
                               key: KWidgetkeys.widget.nawbar.investorsButton,
                               ruoteName: KRoute.support.name,
@@ -204,11 +210,17 @@ class _NawbarWidgetImplematationState
                                   ? KSize.kPixel60
                                   : KSize.kPixel80,
                             ),
-                            KSizedBox.kWidthSizedBox32,
+                            if (widget.isDesk)
+                              KSizedBox.kWidthSizedBox32
+                            else
+                              KSizedBox.kWidthSizedBox16,
                             const CircleAvatar(
                               radius: KPadding.kPaddingSize2,
                             ),
-                            KSizedBox.kWidthSizedBox32,
+                            if (widget.isDesk)
+                              KSizedBox.kWidthSizedBox32
+                            else
+                              KSizedBox.kWidthSizedBox16,
                             _button(
                               key: KWidgetkeys.widget.nawbar.feedbackButton,
                               ruoteName: KRoute.feedback.name,
@@ -255,20 +267,21 @@ class _NawbarWidgetImplematationState
                             context.dialog.showMobileMenuDialog(),
                       ),
                     if (context.read<AuthenticationBloc>().state.status !=
-                            AuthenticationStatus.authenticated &&
-                        Config.isDevelopment) ...[
-                      KSizedBox.kWidthSizedBox16,
-                      if (widget.isTablet)
-                        TextButton(
-                          key: KWidgetkeys.widget.nawbar.loginButton,
-                          style: KButtonStyles.whiteButtonStyle,
+                            AuthenticationStatus.authenticated
+                        //     &&
+                        // Config.isDevelopment
+                        ) ...[
+                      if (widget.isDesk) ...[
+                        KSizedBox.kWidthSizedBox16,
+                        DoubleButtonWidget(
+                          widgetKey: KWidgetkeys.widget.nawbar.loginButton,
                           onPressed: () => loginNavigation(context),
-                          child: Text(
-                            context.l10n.login,
-                            style: AppTextStyle.text24,
-                          ),
-                        )
-                      else if (!isFocused)
+                          text: context.l10n.login,
+                          isDesk: true,
+                          useBlackStyle: true,
+                        ),
+                      ] else if (!isFocused) ...[
+                        KSizedBox.kWidthSizedBox4,
                         IconButtonWidget(
                           key: KWidgetkeys.widget.nawbar.loginIcon,
                           onPressed: () => loginNavigation(context),
@@ -276,6 +289,7 @@ class _NawbarWidgetImplematationState
                               .copyWith(color: AppColors.materialThemeWhite),
                           background: AppColors.materialThemeKeyColorsSecondary,
                         ),
+                      ],
                     ],
                     if (context.read<AuthenticationBloc>().state.status ==
                             AuthenticationStatus.authenticated &&
