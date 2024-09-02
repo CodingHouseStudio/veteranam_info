@@ -52,6 +52,9 @@ extension PumpApp on WidgetTester {
             BlocProvider(
               create: (context) => GetIt.I.get<MobOfflineModeCubit>(),
             ),
+            BlocProvider(
+              create: (context) => GetIt.I.get<AppVersionCubit>()..started(),
+            ),
           ],
         ],
         child: BlocBuilder<AuthenticationBloc, AuthenticationState>(

@@ -51,7 +51,7 @@ void main() {
         faqRepository.addMockQuestions();
         verify(
           mockFirestoreService.addQuestion(
-            KTestText.questionModelItems.first.copyWith(navigationLink: null),
+            KTestText.questionModelItems.first,
           ),
         ).called(1);
       });
