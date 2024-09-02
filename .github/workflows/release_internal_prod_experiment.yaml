@@ -119,7 +119,6 @@ jobs:
           accountId: 4e407d1da94857668f6ede7dcfeed9d5
           projectName: veteran-production
           directory: ./build/web
-          wait_for_processing: true
 #  android-build:
 #    runs-on: ubuntu-latest
 #    timeout-minutes: 30
