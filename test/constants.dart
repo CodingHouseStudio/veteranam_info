@@ -90,14 +90,10 @@ abstract class KTestText {
   static const fieldEmpty = '';
 
   static const phoneNumber = '+3809900000';
+  static const build = '50';
 
   static final questionModelItems = <QuestionModel>[
-    QuestionModel(
-      id: '0',
-      title: KMockText.questionTitle.first,
-      subtitle: KMockText.questionSubtitle,
-      navigationLink: 'test_link',
-    ),
+    KMockText.questionModel,
   ];
 
   static final workModelItems = <WorkModel>[

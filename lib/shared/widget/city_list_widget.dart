@@ -35,16 +35,22 @@ class CityListWidget extends StatelessWidget {
                 KSizedBox.kWidthSizedBox8,
                 if (cityList.isNotEmpty)
                   Expanded(
-                    child: cityList.length == 1
-                        ? Text(
-                            cityList.first,
-                            key: KWidgetkeys.widget.cityList.text,
-                            style: AppTextStyle.materialThemeLabelLarge,
-                          )
-                        : CityWidgetListExpanded(
-                            cityList: cityList,
-                            isDesk: isDesk,
-                          ),
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                        top: KPadding.kPaddingSize2,
+                        right: KPadding.kPaddingSize5,
+                      ),
+                      child: cityList.length == 1
+                          ? Text(
+                              cityList.first,
+                              key: KWidgetkeys.widget.cityList.text,
+                              style: AppTextStyle.materialThemeLabelLarge,
+                            )
+                          : CityWidgetListExpanded(
+                              cityList: cityList,
+                              isDesk: isDesk,
+                            ),
+                    ),
                   ),
               ],
             ),
