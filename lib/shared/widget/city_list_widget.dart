@@ -25,9 +25,34 @@ class CityListWidget extends StatelessWidget {
             vertical: KPadding.kPaddingSize4,
           ),
           child: IntrinsicWidth(
-            child: CityWidgetListExpanded(
-              cityList: cityList,
-              isDesk: isDesk,
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                KIcon.distance.copyWith(
+                  key: KWidgetkeys.widget.cityList.icon,
+                ),
+                KSizedBox.kWidthSizedBox8,
+                if (cityList.isNotEmpty)
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                        top: KPadding.kPaddingSize2,
+                        right: KPadding.kPaddingSize5,
+                      ),
+                      child: cityList.length == 1
+                          ? Text(
+                              cityList.first,
+                              key: KWidgetkeys.widget.cityList.text,
+                              style: AppTextStyle.materialThemeLabelLarge,
+                            )
+                          : CityWidgetListExpanded(
+                              cityList: cityList,
+                              isDesk: isDesk,
+                            ),
+                    ),
+                  ),
+              ],
             ),
           ),
         ),
@@ -60,41 +85,19 @@ class _CityWidgetListExpandedState extends State<CityWidgetListExpanded> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment:
-          isExpanded ? CrossAxisAlignment.start : CrossAxisAlignment.center,
-      children: [
-        KIcon.distance.copyWith(
-          key: KWidgetkeys.widget.cityList.icon,
-        ),
-        KSizedBox.kWidthSizedBox8,
-        if (widget.cityList.isNotEmpty)
-          Expanded(
-            child: widget.cityList.length == 1
-                ? Text(
-                    widget.cityList.first,
-                    key: KWidgetkeys.widget.cityList.text,
-                    style: AppTextStyle.materialThemeLabelLarge,
-                  )
-                : MarkdownBody(
-                    key: isExpanded
-                        ? KWidgetkeys.widget.cityList.markdownFulllList
-                        : KWidgetkeys.widget.cityList.markdown,
-                    data: widget.cityList.getCityList(
-                      showFullText: !isExpanded,
-                      context: context,
-                    ),
-                    onTapLink: (text, href, title) => setState(() {
-                      isExpanded = !isExpanded;
-                    }),
-                    styleSheet: MarkdownStyleSheet(
-                      a: AppTextStyle.materialThemeLabelLargeRef,
-                      p: AppTextStyle.materialThemeLabelLarge,
-                    ),
-                  ),
-          ),
-      ],
+    return MarkdownBody(
+      key: isExpanded
+          ? KWidgetkeys.widget.cityList.markdownFulllList
+          : KWidgetkeys.widget.cityList.markdown,
+      data: widget.cityList
+          .getCityList(showFullText: !isExpanded, context: context),
+      onTapLink: (text, href, title) => setState(() {
+        isExpanded = !isExpanded;
+      }),
+      styleSheet: MarkdownStyleSheet(
+        a: AppTextStyle.materialThemeLabelLargeRef,
+        p: AppTextStyle.materialThemeLabelLarge,
+      ),
     );
   }
 }
