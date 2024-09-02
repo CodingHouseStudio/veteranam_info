@@ -278,16 +278,16 @@ GoRouter router = GoRouter(
               child: const AboutUsScreen(),
             ),
           ),
-        // if (Config.isDevelopment)
-        GoRoute(
-          name: KRoute.consultation.name,
-          path: KRoute.consultation.path,
-          pageBuilder: (context, state) => NoTransitionPage(
-            key: state.pageKey,
-            name: state.name,
-            child: const ConsultationScreen(),
+        if (Config.isDevelopment)
+          GoRoute(
+            name: KRoute.consultation.name,
+            path: KRoute.consultation.path,
+            pageBuilder: (context, state) => NoTransitionPage(
+              key: state.pageKey,
+              name: state.name,
+              child: const ConsultationScreen(),
+            ),
           ),
-        ),
         //         GoRoute(
         //   name: KRoute.contact.name,
         //   path: KRoute.contact.path,
