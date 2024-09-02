@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 import 'package:veteranam/shared/shared.dart';
 
 class InfoVersionWidget extends StatelessWidget {
@@ -9,11 +8,11 @@ class InfoVersionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<BuildCubit, PackageInfo>(
+    return BlocBuilder<AppVersionCubit, AppVersionState>(
       builder: (context, _) {
         return Text(
-          ' v${_.version} ${isDesk ? '' : '\n'}'
-          ' build ${_.buildNumber}',
+          ' v${_.build.version} ${isDesk ? '' : '\n'}'
+          ' build ${_.build.buildNumber}',
           style: isDesk && KTest.testIsWeb
               ? AppTextStyle.materialThemeBodyLarge
               : AppTextStyle.materialThemeBodySmall,
