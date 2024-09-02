@@ -167,8 +167,6 @@ sentry:
   # disabled by default
   wait_for_processing: true
 
-  ignore_missing: true
-
   # default 'warning'
   log_level: error
 
