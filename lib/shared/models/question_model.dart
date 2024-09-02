@@ -9,7 +9,9 @@ class QuestionModel with _$QuestionModel {
   const factory QuestionModel({
     required String id,
     @TitleConverter() required String title,
+    @TitleConverter() required String titleEN,
     @SubtitleConverter() required String subtitle,
+    @SubtitleConverter() required String subtitleEN,
     String? navigationLink,
   }) = _QuestionModel;
 
@@ -20,6 +22,8 @@ class QuestionModel with _$QuestionModel {
 abstract class QuestionModelJsonField {
   static const id = 'id';
   static const title = 'title';
+  static const titleEN = 'titleEN';
   static const subtitle = 'subtitle';
+  static const subtitleEN = 'subtitleEN';
   static const navigationLink = 'navigationLink';
 }
