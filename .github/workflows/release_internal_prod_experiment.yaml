@@ -94,8 +94,8 @@ jobs:
           mv build/web/flutter_bootstrap.js build/web/$dt.flutter_bootstrap.js
           sed "s/flutter_bootstrap.js/$dt.flutter_bootstrap.js/g" build/web/index.html >build/web/newindex.html
           mv build/web/newindex.html build/web/index.html
-      # - name: 📡 Run Sentry Dart Plugin
-      #   run: flutter packages pub run sentry_dart_plugin --ignore-missing
+      - name: 📡 Run Sentry Dart Plugin
+        run: flutter packages pub run sentry_dart_plugin
       # - name: Configure AWS Credentials Action for GitHub Actions
       #   uses: aws-actions/configure-aws-credentials@v4.0.1
       #   with:
@@ -119,6 +119,7 @@ jobs:
           accountId: 4e407d1da94857668f6ede7dcfeed9d5
           projectName: veteran-production
           directory: ./build/web
+          wait_for_processing: true
 #  android-build:
 #    runs-on: ubuntu-latest
 #    timeout-minutes: 30
