@@ -165,7 +165,9 @@ sentry:
   auth_token: REDACTED
 
   # disabled by default
-  # wait_for_processing: true
+  wait_for_processing: true
+
+  ignore_missing: true
 
   # default 'warning'
   log_level: error
