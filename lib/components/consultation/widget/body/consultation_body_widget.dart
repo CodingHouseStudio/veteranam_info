@@ -9,6 +9,10 @@ class ConsultationBodyWidget extends StatelessWidget {
     return ScaffoldWidget(
       mainChildWidgetsFunction: ({required isDesk, required isTablet}) => [
         KSizedBox.kHeightSizedBox30,
+        TextButton(
+          onPressed: () => throw Exception('TEST'),
+          child: const Text('ERROR'),
+        ),
       ],
     );
   }
