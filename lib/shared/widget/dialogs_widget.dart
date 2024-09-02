@@ -258,11 +258,12 @@ class _DialogsWidget {
     if (text != null) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
+          backgroundColor: AppColors.materialThemeKeyColorsSecondary,
           // key: KWidgetkeys.widget.dialogs.failure,
           content: Text(
             text,
             key: KWidgetkeys.widget.dialogs.snackBarText,
-            style: AppTextStyle.materialThemeBodyLarge,
+            style: AppTextStyle.materialThemeBodyLargeNeutral,
           ),
           duration: duration,
         ),

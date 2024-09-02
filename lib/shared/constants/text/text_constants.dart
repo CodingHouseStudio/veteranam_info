@@ -47,17 +47,18 @@ abstract class KMockText {
   static const workCity = 'м.Одеса';
   static const workEmployer = 'ТОВ Сільпо';
   static const title = 'Заголовок дуже довгий';
-  static const questionTitle = [
-    'Як мені знайти роботу за допомогою цього сайту?',
-    'Де я можу використати знижки і купони?',
-    'Як інформація потрапляє на ваш веб-сайт?',
-    'Які документи мені потрібно показати, щоб отримати допомогу від партнерів?',
-  ];
+  static const questionTitle =
+      'Як мені знайти роботу за допомогою цього сайту?';
+  static const questionTitleEN = 'How do I find a job using this site?';
   static const questionSubtitle =
       'Використовуйте веб-сайти спеціалізованих сервісів для пошуку роботи, '
       'таких як Indeed, LinkedIn, Glassdoor, Monster, або регіональні '
       'ресурси. Виберіть свою область інтересів та регіон, і шукайте '
       'вакансії, які відповідають вашим критеріям.';
+  static const questionSubtitleEN = 'Use specialized job search websites, '
+      'such as Indeed, LinkedIn, Glassdoor, Monster, or regional '
+      'resources. Select your area of interest and region, and search for '
+      'jobs that match your criteria.';
   static const workDescription = '''
 **Ми шукаємо відповідальну та організовану особу на посаду комплектувальника товару в наш магазин.** Це надзвичайно важлива роль, яка допоможе нам забезпечити ефективну роботу нашого магазину та задоволення потреб наших клієнтів.
 
@@ -114,6 +115,15 @@ abstract class KMockText {
 
   static const image =
       'https://static.vecteezy.com/system/resources/thumbnails/008/492/251/small/back-to-school-illustration-cartoon-character-children-kid-png.png';
+
+  static const questionModel = QuestionModel(
+    id: '0',
+    title: questionTitle,
+    titleEN: questionTitleEN,
+    subtitle: questionSubtitle,
+    subtitleEN: questionSubtitleEN,
+    navigationLink: 'null',
+  );
 
   static final discountModel = DiscountModel(
     id: '',
@@ -213,6 +223,7 @@ abstract class KAppText {
   static const String cache = 'local cache';
   static const String server = 'server';
   static const String site = 'https://veteranam.info';
+  static const String unknown = 'Unknown';
   static List<String> get routes => [
         KRoute.discounts.name,
         KRoute.support.name,

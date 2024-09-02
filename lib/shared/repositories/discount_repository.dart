@@ -8,7 +8,7 @@ import 'package:veteranam/shared/shared.dart';
 
 @Singleton(
   as: IDiscountRepository,
-  signalsReady: true,
+  // signalsReady: true,
 )
 class DiscountRepository implements IDiscountRepository {
   final FirestoreService _firestoreService = GetIt.I.get<FirestoreService>();
@@ -45,10 +45,10 @@ class DiscountRepository implements IDiscountRepository {
           await _firestoreService.getDiscountsByUserId(userId);
 
       return Right(userDiscountsItems);
-    } on FirebaseException catch (e) {
-      return Left(GetFailur.fromCode(e).status);
-    } catch (e) {
-      return const Left(SomeFailure.serverError());
+    } on FirebaseException catch (e, stack) {
+      return Left(GetFailur.fromCode(error: e, stack: stack).status);
+    } catch (e, stack) {
+      return Left(SomeFailure.serverError(error: e, stack: stack));
     }
   }
 
@@ -59,10 +59,10 @@ class DiscountRepository implements IDiscountRepository {
     try {
       await _firestoreService.deleteDiscountById(discountId);
       return const Right(true);
-    } on FirebaseException catch (e) {
-      return Left(GetFailur.fromCode(e).status);
-    } catch (e) {
-      return const Left(SomeFailure.serverError());
+    } on FirebaseException catch (e, stack) {
+      return Left(GetFailur.fromCode(error: e, stack: stack).status);
+    } catch (e, stack) {
+      return Left(SomeFailure.serverError(error: e, stack: stack));
     }
   }
 
@@ -73,10 +73,10 @@ class DiscountRepository implements IDiscountRepository {
     try {
       final discountModel = await _firestoreService.getDiscount(id);
       return Right(discountModel);
-    } on FirebaseException catch (e) {
-      return Left(GetFailur.fromCode(e).status);
-    } catch (e) {
-      return const Left(SomeFailure.serverError());
+    } on FirebaseException catch (e, stack) {
+      return Left(GetFailur.fromCode(error: e, stack: stack).status);
+    } catch (e, stack) {
+      return Left(SomeFailure.serverError(error: e, stack: stack));
     }
   }
 
@@ -87,10 +87,10 @@ class DiscountRepository implements IDiscountRepository {
     try {
       await _firestoreService.sendLink(discountLink);
       return const Right(true);
-    } on FirebaseException catch (e) {
-      return Left(SendFailure.fromCode(e).status);
-    } catch (e) {
-      return const Left(SomeFailure.serverError());
+    } on FirebaseException catch (e, stack) {
+      return Left(SendFailure.fromCode(error: e, stack: stack).status);
+    } catch (e, stack) {
+      return Left(SomeFailure.serverError(error: e, stack: stack));
     }
   }
 
@@ -108,10 +108,10 @@ class DiscountRepository implements IDiscountRepository {
           )
           .toList();
       return Right(oneDayUserLink.length < KDimensions.maxLinkPerDay);
-    } on FirebaseException catch (e) {
-      return Left(GetFailur.fromCode(e).status);
-    } catch (e) {
-      return const Left(SomeFailure.serverError());
+    } on FirebaseException catch (e, stack) {
+      return Left(GetFailur.fromCode(error: e, stack: stack).status);
+    } catch (e, stack) {
+      return Left(SomeFailure.serverError(error: e, stack: stack));
     }
   }
 
@@ -122,10 +122,10 @@ class DiscountRepository implements IDiscountRepository {
     try {
       await _firestoreService.sendEmail(userEmail);
       return const Right(true);
-    } on FirebaseException catch (e) {
-      return Left(SendFailure.fromCode(e).status);
-    } catch (e) {
-      return const Left(SomeFailure.serverError());
+    } on FirebaseException catch (e, stack) {
+      return Left(SendFailure.fromCode(error: e, stack: stack).status);
+    } catch (e, stack) {
+      return Left(SomeFailure.serverError(error: e, stack: stack));
     }
   }
 
@@ -148,10 +148,10 @@ class DiscountRepository implements IDiscountRepository {
       }
 
       return Right(userEmails.length);
-    } on FirebaseException catch (e) {
-      return Left(GetFailur.fromCode(e).status);
-    } catch (e) {
-      return const Left(SomeFailure.serverError());
+    } on FirebaseException catch (e, stack) {
+      return Left(GetFailur.fromCode(error: e, stack: stack).status);
+    } catch (e, stack) {
+      return Left(SomeFailure.serverError(error: e, stack: stack));
     }
   }
 }

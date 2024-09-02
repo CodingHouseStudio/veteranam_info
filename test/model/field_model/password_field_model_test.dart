@@ -1,10 +1,15 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:get_it/get_it.dart';
 import 'package:veteranam/shared/shared.dart';
 
 import '../../test_dependency.dart';
 
 void main() {
+  setUp(configureFailureDependenciesTest);
+
   setupFirebaseAuthMocks();
+
+  tearDown(GetIt.I.reset);
 
   group('Password ${KGroupText.fiedlModel} ${KGroupText.validationError}', () {
     test('${KGroupText.shouldBe} ${KGroupText.empty}', () {

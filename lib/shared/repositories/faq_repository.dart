@@ -13,10 +13,10 @@ class FaqRepository implements IFaqRepository {
     try {
       final questionItems = await _firestoreService.getQuestions();
       return Right(questionItems);
-    } on FirebaseException catch (e) {
-      return Left(GetFailur.fromCode(e).status);
-    } catch (e) {
-      return const Left(SomeFailure.serverError());
+    } on FirebaseException catch (e, stack) {
+      return Left(GetFailur.fromCode(error: e, stack: stack).status);
+    } catch (e, stack) {
+      return Left(SomeFailure.serverError(error: e, stack: stack));
     }
   }
 
@@ -24,11 +24,7 @@ class FaqRepository implements IFaqRepository {
   void addMockQuestions() {
     for (var i = 0; i < KMockText.questionTitle.length; i++) {
       _firestoreService.addQuestion(
-        QuestionModel(
-          id: '${ExtendedDateTime.id}$i',
-          title: KMockText.questionTitle[i],
-          subtitle: KMockText.questionSubtitle,
-        ),
+        KMockText.questionModel.copyWith(id: '${ExtendedDateTime.id}$i'),
       );
     }
   }

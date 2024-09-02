@@ -1,16 +1,21 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:get_it/get_it.dart';
 import 'package:mockito/mockito.dart';
 import 'package:veteranam/shared/shared.dart';
 
 import '../test_dependency.dart';
 
 void main() {
+  setUp(configureFailureDependenciesTest);
+
   setupFirebaseAuthMocks();
 
   setUpAll(setUpGlobal);
-  group('${KScreenBlocName.url} ', () {
-    late MobOfflineModeCubit mockOfflineModeCubit;
+
+  tearDown(GetIt.I.reset);
+  group('${KScreenBlocName.url} ${KGroupText.cubit}', () {
+    late MobOfflineModeCubit mobOfflineModeCubit;
     late FirestoreService mockFirestoreService;
     late CacheClient mockCache;
 
@@ -33,14 +38,14 @@ void main() {
         (_) {},
       );
       mockFirestoreService = FirestoreService(mockCache);
-      mockOfflineModeCubit = MobOfflineModeCubit(
+      mobOfflineModeCubit = MobOfflineModeCubit(
         firestoreService: mockFirestoreService,
       );
     });
     blocTest<MobOfflineModeCubit, MobMode>(
       'emits [MobMode()]'
       ' when initial and switch mode',
-      build: () => mockOfflineModeCubit,
+      build: () => mobOfflineModeCubit,
       act: (bloc) async => bloc
         ..started()
         ..switchMode()

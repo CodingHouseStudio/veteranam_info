@@ -22,9 +22,15 @@ class UrlRepository extends IUrlRepository {
       //   );
       // }
       return const Right(true);
-    } catch (e) {
-      final error = ShareFailure.fromCode(e).status;
-      if (error == const SomeFailure.initial()) {
+    } catch (e, stack) {
+      // Error if user closes the sharing dialog in Safari
+      if (e.toString() ==
+          'Exception: Navigator.share() failed: Abort due to cancellation'
+              ' of share.') {
+        return const Right(true);
+      }
+      final error = ShareFailure.fromCode(error: e, stack: stack).status;
+      if (error == null) {
         final resault = await copy(
           baseUrl + url,
         );
@@ -61,9 +67,9 @@ class UrlRepository extends IUrlRepository {
         );
         return const Right(true);
       }
-      return const Left(SomeFailure.link());
-    } catch (e) {
-      return const Left(SomeFailure.link());
+      return const Right(false);
+    } catch (e, stack) {
+      return Left(SomeFailure.link(error: e, stack: stack));
     }
   }
 
@@ -74,8 +80,8 @@ class UrlRepository extends IUrlRepository {
         ClipboardData(text: text),
       );
       return const Right(true);
-    } catch (e) {
-      return const Left(SomeFailure.copy());
+    } catch (e, stack) {
+      return Left(SomeFailure.copy(error: e, stack: stack));
     }
   }
 }

@@ -8,6 +8,18 @@ Future<void> mobFeedbackEnterTextHelper({
   required String text,
 }) async {
   expect(
+    find.byKey(KWidgetkeys.widget.mobFeedback.title),
+    findsOneWidget,
+  );
+
+  await tester.tap(
+    find.byKey(KWidgetkeys.widget.mobFeedback.title),
+    warnIfMissed: false,
+  );
+
+  await tester.pumpAndSettle(const Duration(seconds: 15));
+
+  expect(
     find.byKey(KWidgetkeys.widget.mobFeedback.field),
     findsOneWidget,
   );

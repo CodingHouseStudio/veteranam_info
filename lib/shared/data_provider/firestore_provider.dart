@@ -41,6 +41,8 @@ class FirestoreService {
   @visibleForTesting
   static const getCacheOptions = GetOptions(source: Source.cache);
   @visibleForTesting
+  static final setMergeOptions = SetOptions(merge: true);
+  @visibleForTesting
   static const offlineModeCacheKey = '__offline_mode_cache_key__';
 
   void _initFirestoreSettings() {
@@ -166,12 +168,12 @@ class FirestoreService {
         .set(fund.toJson());
   }
 
-  Future<void> updateUserSetting(UserSetting userSetting) {
-    return _db
-        .collection(FirebaseCollectionName.userSettings)
-        .doc(userSetting.id)
-        .update(userSetting.toJson());
-  }
+  // Future<void> updateUserSetting(UserSetting userSetting) {
+  //   return _db
+  //       .collection(FirebaseCollectionName.userSettings)
+  //       .doc(userSetting.id)
+  //       .update(userSetting.toJson());
+  // }
 
   Stream<List<InformationModel>> getInformations(List<String>? reportIdItems) =>
       _db
@@ -225,10 +227,10 @@ class FirestoreService {
     required UserSetting userSetting,
     required String userId,
   }) {
-    return _db
-        .collection(FirebaseCollectionName.userSettings)
-        .doc(userId)
-        .set(userSetting.copyWith(id: userId).toJson());
+    return _db.collection(FirebaseCollectionName.userSettings).doc(userId).set(
+          userSetting.copyWith(id: userId).toJson(),
+          setMergeOptions,
+        );
   }
 
   Stream<UserSetting> getUserSetting(String userId) => _db
