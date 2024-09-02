@@ -165,7 +165,9 @@ sentry:
   auth_token: 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
 
   # disabled by default
-  # wait_for_processing: true
+  wait_for_processing: true
+
+  ignore_missing: true
 
   # default 'warning'
   log_level: error
