@@ -32,7 +32,7 @@ void main() {
       mockFirebaseRemoteConfigProvider = MockFirebaseRemoteConfigProvider();
 
       when(mockAuthenticationRepository.userSetting).thenAnswer(
-        (realInvocation) => Stream.value(UserSetting.empty),
+        (realInvocation) => Stream.value(KTestText.userSetting),
       );
       when(mockAuthenticationRepository.status).thenAnswer(
         (realInvocation) => Stream.value(AuthenticationStatus.anonymous),
@@ -41,7 +41,7 @@ void main() {
         (realInvocation) => User.empty,
       );
       when(mockAuthenticationRepository.currentUserSetting).thenAnswer(
-        (realInvocation) => UserSetting.empty,
+        (realInvocation) => KTestText.userSetting,
       );
       when(mockFaqRepository.getQuestions()).thenAnswer(
         (invocation) async => Right(KTestText.questionModelItems),
