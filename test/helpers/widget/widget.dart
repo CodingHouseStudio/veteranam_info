@@ -20,6 +20,7 @@ export 'menu_dialog_helper.dart';
 export 'message_field_helper.dart';
 export 'mob_feedback/mob_feedback.dart';
 export 'mob_navigation/mob_navigation.dart';
+export 'mob_update_dialog/mob_update_dialog.dart';
 export 'mock_button_helper.dart';
 export 'nawbar/nawbar.dart';
 export 'news_card_helper.dart';

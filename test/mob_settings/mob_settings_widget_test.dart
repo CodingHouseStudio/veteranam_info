@@ -17,7 +17,7 @@ void main() {
   group('${KScreenBlocName.mobSettings} ', () {
     late IFeedbackRepository mockFeedbackRepository;
     late IAppAuthenticationRepository mockAppAuthenticationRepository;
-    late BuildRepository mockBuildRepository;
+    // late BuildRepository mockBuildRepository;
     setUp(() {
       KTest.testIsWeb = false;
       ExtendedDateTime.id = KTestText.id;
@@ -25,14 +25,14 @@ void main() {
 
       mockFeedbackRepository = MockIFeedbackRepository();
       mockAppAuthenticationRepository = MockAppAuthenticationRepository();
-      mockBuildRepository = MockBuildRepository();
+      // mockBuildRepository = MockBuildRepository();
 
       when(
         mockAppAuthenticationRepository.currentUser,
       ).thenAnswer((realInvocation) => KTestText.user);
-      when(mockBuildRepository.getBuildInfo()).thenAnswer(
-        (invocation) async => BuildRepository.defaultValue,
-      );
+      // when(mockBuildRepository.getBuildInfo()).thenAnswer(
+      //   (invocation) async => BuildRepository.defaultValue,
+      // );
 
       // when(
       //   mockFeedbackRepository.sendMobFeedback(
@@ -54,7 +54,7 @@ void main() {
       await mobSettingsPumpAppHelper(
         tester: tester,
         mockFeedbackRepository: mockFeedbackRepository,
-        mockBuildRepository: mockBuildRepository,
+        // mockBuildRepository: mockBuildRepository,
         mockAppAuthenticationRepository: mockAppAuthenticationRepository,
       );
 
@@ -64,7 +64,7 @@ void main() {
       await mobSettingsPumpAppHelper(
         tester: tester,
         mockFeedbackRepository: mockFeedbackRepository,
-        mockBuildRepository: mockBuildRepository,
+        // mockBuildRepository: mockBuildRepository,
         mockAppAuthenticationRepository: mockAppAuthenticationRepository,
       );
 
@@ -80,7 +80,7 @@ void main() {
         await mobSettingsPumpAppHelper(
           tester: tester,
           mockFeedbackRepository: mockFeedbackRepository,
-          mockBuildRepository: mockBuildRepository,
+          // mockBuildRepository: mockBuildRepository,
           mockAppAuthenticationRepository: mockAppAuthenticationRepository,
           mockGoRouter: mockGoRouter,
         );
@@ -91,7 +91,7 @@ void main() {
         await mobSettingsPumpAppHelper(
           tester: tester,
           mockFeedbackRepository: mockFeedbackRepository,
-          mockBuildRepository: mockBuildRepository,
+          // mockBuildRepository: mockBuildRepository,
           mockAppAuthenticationRepository: mockAppAuthenticationRepository,
           mockGoRouter: mockGoRouter,
         );
@@ -106,7 +106,7 @@ void main() {
           await mobSettingsPumpAppHelper(
             tester: tester,
             mockFeedbackRepository: mockFeedbackRepository,
-            mockBuildRepository: mockBuildRepository,
+            // mockBuildRepository: mockBuildRepository,
             mockAppAuthenticationRepository: mockAppAuthenticationRepository,
             mockGoRouter: mockGoRouter,
           );
@@ -121,7 +121,7 @@ void main() {
           await mobSettingsPumpAppHelper(
             tester: tester,
             mockFeedbackRepository: mockFeedbackRepository,
-            mockBuildRepository: mockBuildRepository,
+            // mockBuildRepository: mockBuildRepository,
             mockAppAuthenticationRepository: mockAppAuthenticationRepository,
             mockGoRouter: mockGoRouter,
           );
@@ -136,7 +136,7 @@ void main() {
           await mobSettingsPumpAppHelper(
             tester: tester,
             mockFeedbackRepository: mockFeedbackRepository,
-            mockBuildRepository: mockBuildRepository,
+            // mockBuildRepository: mockBuildRepository,
             mockAppAuthenticationRepository: mockAppAuthenticationRepository,
             mockGoRouter: mockGoRouter,
           );
