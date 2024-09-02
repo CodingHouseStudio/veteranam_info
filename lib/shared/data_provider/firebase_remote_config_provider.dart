@@ -34,4 +34,14 @@ class FirebaseRemoteConfigProvider {
       return 0;
     }
   }
+
+  String getString(String key) {
+    try {
+      return _firebaseRemoteConfig.getString(
+        key,
+      );
+    } catch (e) {
+      return '';
+    }
+  }
 }

@@ -70,7 +70,7 @@ import 'package:veteranam/shared/shared.dart';
     MockSpec<FirebaseRemoteConfig>(),
     MockSpec<FirebaseMessaging>(),
     MockSpec<IDeviceRepository>(),
-    MockSpec<BuildRepository>(),
+    MockSpec<AppInfoRepository>(),
     MockSpec<DeviceInfoPlugin>(),
     MockSpec<FirebaseCrashlytics>(),
     MockSpec<FailureRepository>(),

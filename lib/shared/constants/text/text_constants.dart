@@ -224,6 +224,10 @@ abstract class KAppText {
   static const String server = 'server';
   static const String site = 'https://veteranam.info';
   static const String unknown = 'Unknown';
+  static const String androidInstallUrl = 'market://details?id=$_mobAppId';
+  static const String iphoneInstallUrl =
+      'https://apps.apple.com/app/id$_mobAppId';
+  static const String _mobAppId = 'info.veteranam';
   static List<String> get routes => [
         KRoute.discounts.name,
         KRoute.support.name,
