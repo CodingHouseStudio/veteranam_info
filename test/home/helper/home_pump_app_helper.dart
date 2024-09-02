@@ -12,7 +12,7 @@ Future<void> homePumpAppHelper({
   // required IAppAuthenticationRepository mockAppAuthenticationRepository,
   required WidgetTester tester,
   required IUrlRepository mockUrlRepository,
-  required BuildRepository mockBuildRepository,
+  required AppInfoRepository mockBuildRepository,
   required FirebaseRemoteConfigProvider mockFirebaseRemoteConfigProvider,
   MockGoRouter? mockGoRouter,
 }) async {
@@ -88,15 +88,15 @@ void _registerUrlCubit(
 }
 
 void _registerBuildCubit({
-  required BuildRepository mockBuildRepository,
+  required AppInfoRepository mockBuildRepository,
   required FirebaseRemoteConfigProvider mockFirebaseRemoteConfigProvider,
 }) {
-  final urlCubit = BuildCubit(
+  final urlCubit = AppVersionCubit(
     buildRepository: mockBuildRepository,
     firebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
   );
-  if (GetIt.I.isRegistered<BuildCubit>()) {
-    GetIt.I.unregister<BuildCubit>();
+  if (GetIt.I.isRegistered<AppVersionCubit>()) {
+    GetIt.I.unregister<AppVersionCubit>();
   }
-  GetIt.I.registerSingleton<BuildCubit>(urlCubit);
+  GetIt.I.registerSingleton<AppVersionCubit>(urlCubit);
 }

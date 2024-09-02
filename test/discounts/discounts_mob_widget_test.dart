@@ -22,7 +22,7 @@ void main() {
     late AuthenticationRepository mockAuthenticationRepository;
     late FirebaseAnalyticsService mockFirebaseAnalyticsService;
     late FirebaseRemoteConfigProvider mockFirebaseRemoteConfigProvider;
-    late BuildRepository mockBuildRepository;
+    late AppInfoRepository mockBuildRepository;
     setUp(() {
       KTest.testIsWeb = false;
       KPlatformConstants.isWebDesktop = true;
@@ -35,7 +35,7 @@ void main() {
       mockAuthenticationRepository = MockAuthenticationRepository();
       mockFirebaseAnalyticsService = MockFirebaseAnalyticsService();
       mockFirebaseRemoteConfigProvider = MockFirebaseRemoteConfigProvider();
-      mockBuildRepository = MockBuildRepository();
+      mockBuildRepository = MockAppInfoRepository();
 
       when(mockAuthenticationRepository.currentUser).thenAnswer(
         (realInvocation) => User.empty,
@@ -84,13 +84,14 @@ void main() {
       );
 
       when(
-        mockFirebaseRemoteConfigProvider.getString(BuildCubit.mobBuildKey),
+        mockFirebaseRemoteConfigProvider
+            .getString(AppVersionCubit.mobAppVersionKey),
       ).thenAnswer(
-        (_) => BuildRepository.defaultValue.buildNumber,
+        (_) => AppInfoRepository.defaultValue.buildNumber,
       );
 
       when(mockBuildRepository.getBuildInfo()).thenAnswer(
-        (invocation) async => BuildRepository.defaultValue,
+        (invocation) async => AppInfoRepository.defaultValue,
       );
     });
     testWidgets('${KGroupText.intial} ', (tester) async {
@@ -130,7 +131,8 @@ void main() {
         setUp(() {
           KPlatformConstants.isWebDesktop = false;
           when(
-            mockFirebaseRemoteConfigProvider.getString(BuildCubit.mobBuildKey),
+            mockFirebaseRemoteConfigProvider
+                .getString(AppVersionCubit.mobAppVersionKey),
           ).thenAnswer(
             (_) => KTestText.build,
           );

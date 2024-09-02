@@ -16,7 +16,7 @@ class HomeBlocprovider extends StatelessWidget {
             ..add(const HomeWatcherEvent.started()),
         ),
         BlocProvider(
-          create: (context) => GetIt.I.get<BuildCubit>()..started(),
+          create: (context) => GetIt.I.get<AppVersionCubit>()..started(),
         ),
       ],
       child: childWidget,

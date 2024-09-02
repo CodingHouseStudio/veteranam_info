@@ -19,7 +19,7 @@ void main() {
     late AuthenticationRepository mockAuthenticationRepository;
     late IFaqRepository mockFaqRepository;
     late IUrlRepository mockUrlRepository;
-    late BuildRepository mockBuildRepository;
+    late AppInfoRepository mockBuildRepository;
     late FirebaseRemoteConfigProvider mockFirebaseRemoteConfigProvider;
     // late IFeedbackRepository mockFeedbackRepository;
     // late IAppAuthenticationRepository mockAppAuthenticationRepository;
@@ -30,7 +30,7 @@ void main() {
       mockFaqRepository = MockIFaqRepository();
       mockAuthenticationRepository = MockAuthenticationRepository();
       mockUrlRepository = MockIUrlRepository();
-      mockBuildRepository = MockBuildRepository();
+      mockBuildRepository = MockAppInfoRepository();
       mockFirebaseRemoteConfigProvider = MockFirebaseRemoteConfigProvider();
       // mockAppAuthenticationRepository = MockAppAuthenticationRepository();
 
@@ -41,7 +41,7 @@ void main() {
         (invocation) async => const Right(true),
       );
       when(mockBuildRepository.getBuildInfo()).thenAnswer(
-        (invocation) async => BuildRepository.defaultValue,
+        (invocation) async => AppInfoRepository.defaultValue,
       );
       // when(mockAppAuthenticationRepository.currentUserSetting).thenAnswer(
       //   (realInvocation) => UserSetting.empty,
@@ -83,7 +83,8 @@ void main() {
         ),
       );
       when(
-        mockFirebaseRemoteConfigProvider.getString(BuildCubit.mobBuildKey),
+        mockFirebaseRemoteConfigProvider
+            .getString(AppVersionCubit.mobAppVersionKey),
       ).thenAnswer(
         (_) => KTestText.build,
       );

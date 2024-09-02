@@ -35,14 +35,14 @@ void main() {
     late IDeviceRepository deviceRepository;
     late FirebaseMessaging mockFirebaseMessaging;
     late DeviceInfoPlugin mockDeviceInfoPlugin;
-    late BuildRepository mockBuildRepository;
+    late AppInfoRepository mockBuildRepository;
     setUp(() {
       KTest.testReleaseMode = true;
       ExtendedDateTime.current = KTestText.dateTime;
 
       mockFirebaseMessaging = MockFirebaseMessaging();
       mockDeviceInfoPlugin = MockDeviceInfoPlugin();
-      mockBuildRepository = MockBuildRepository();
+      mockBuildRepository = MockAppInfoRepository();
     });
     group('${KGroupText.successful} ', () {
       setUp(() {
@@ -75,7 +75,7 @@ void main() {
         when(
           mockBuildRepository.getBuildInfo(),
         ).thenAnswer(
-          (_) async => BuildRepository.defaultValue,
+          (_) async => AppInfoRepository.defaultValue,
         );
 
         when(
@@ -100,7 +100,7 @@ void main() {
             KTestText.deviceInfoModel.copyWith(
               deviceId: webInfo.toString(),
               platform: PlatformEnum.unknown,
-              build: BuildRepository.defaultValue.buildNumber,
+              build: AppInfoRepository.defaultValue.buildNumber,
             ),
           ),
         );
