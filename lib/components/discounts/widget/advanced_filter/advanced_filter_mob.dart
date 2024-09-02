@@ -59,7 +59,7 @@ class AdvancedFilterMobDialog extends StatelessWidget {
       builder: (context, _) {
         return FractionallySizedBox(
           key: KWidgetkeys.screen.discounts.advancedFilterDialog,
-          heightFactor: 0.9,
+          heightFactor: KDimensions.bottomDialogHeightFactor,
           child: Column(
             children: [
               // Row(
