@@ -89,7 +89,7 @@ jobs:
       - name: Build the Web static pages # generate deployment files
         run: |
           buildNumber=$(date +%s)
-          flutter build web --release -t lib/main_production.dart --wasm --build-name=1.0.2 --build-number=$buildNumber --dart-define=FLAVOUR=production
+          flutter build web --release -t lib/main_production.dart --wasm --build-name=1.0.2 --build-number=$buildNumber --dart-define=FLAVOUR=production --source-maps
           dt="$(date "+%s000")"
           mv build/web/flutter_bootstrap.js build/web/$dt.flutter_bootstrap.js
           sed "s/flutter_bootstrap.js/$dt.flutter_bootstrap.js/g" build/web/index.html >build/web/newindex.html
