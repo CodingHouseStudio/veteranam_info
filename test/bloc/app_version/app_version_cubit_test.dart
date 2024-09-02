@@ -15,34 +15,38 @@ void main() {
 
   tearDown(GetIt.I.reset);
   group('${KScreenBlocName.build} ${KGroupText.cubit}', () {
-    late BuildCubit buildCubit;
-    late BuildRepository mockBuildRepository;
+    late AppVersionCubit buildCubit;
+    late AppInfoRepository mockBuildRepository;
     late FirebaseRemoteConfigProvider mockFirebaseRemoteConfigProvider;
 
     setUp(() {
-      mockBuildRepository = MockBuildRepository();
+      mockBuildRepository = MockAppInfoRepository();
       mockFirebaseRemoteConfigProvider = MockFirebaseRemoteConfigProvider();
       when(
         mockBuildRepository.getBuildInfo(),
       ).thenAnswer(
-        (_) async => BuildRepository.defaultValue,
+        (_) async => AppInfoRepository.defaultValue,
       );
       when(
-        mockFirebaseRemoteConfigProvider.getString(BuildCubit.mobBuildKey),
+        mockFirebaseRemoteConfigProvider
+            .getString(AppVersionCubit.mobAppVersionKey),
       ).thenAnswer(
         (_) => KTestText.build,
       );
-      buildCubit = BuildCubit(
+      buildCubit = AppVersionCubit(
         buildRepository: mockBuildRepository,
         firebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
       );
     });
-    blocTest<BuildCubit, BuildState>(
+    blocTest<AppVersionCubit, AppVersionState>(
       'emits [PackageInfo()] when initial',
       build: () => buildCubit,
       act: (bloc) async => bloc.started(),
       expect: () async => [
-        BuildState(build: BuildRepository.defaultValue, mobHasNewBuild: true),
+        AppVersionState(
+          build: AppInfoRepository.defaultValue,
+          mobHasNewBuild: true,
+        ),
       ],
     );
   });

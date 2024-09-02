@@ -1,7 +1,7 @@
-part of 'build_cubit.dart';
+part of 'app_version_cubit.dart';
 
-class BuildState extends Equatable {
-  const BuildState({
+class AppVersionState extends Equatable {
+  const AppVersionState({
     required this.build,
     required this.mobHasNewBuild,
   });
