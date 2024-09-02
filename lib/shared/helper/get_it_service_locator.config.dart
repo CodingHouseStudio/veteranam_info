@@ -214,8 +214,6 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i801.StoryRepository(),
       registerFor: {_development},
     );
-    gh.factory<_i870.BuildCubit>(
-        () => _i870.BuildCubit(buildRepository: gh<_i1001.BuildRepository>()));
     gh.factory<_i609.InvestorsWatcherBloc>(() => _i609.InvestorsWatcherBloc(
           investorsRepository: gh<_i1001.IInvestorsRepository>(),
           reportRepository: gh<_i1001.IReportRepository>(),
@@ -330,6 +328,11 @@ extension GetItInjectableX on _i174.GetIt {
           workRepository: gh<_i1001.IWorkRepository>()),
       registerFor: {_development},
     );
+    gh.factory<_i870.BuildCubit>(() => _i870.BuildCubit(
+          buildRepository: gh<_i1001.BuildRepository>(),
+          firebaseRemoteConfigProvider:
+              gh<_i1001.FirebaseRemoteConfigProvider>(),
+        ));
     gh.factory<_i675.EmployeeRespondBloc>(
       () => _i675.EmployeeRespondBloc(
           employeeRespondRepository: gh<_i1001.IWorkRepository>()),

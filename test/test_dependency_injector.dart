@@ -16,6 +16,7 @@ import 'test_dependency.dart';
 void configureDependenciesTest() {
   // register logic if user id empty user setting is also empty
   userSetting();
+  mobBuild();
   KTest.testIsWeb = true;
   Config.value = Config.development;
   KTest.isTest = true;

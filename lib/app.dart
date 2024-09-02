@@ -49,6 +49,9 @@ class App extends StatelessWidget {
                 const MobFaqWatcherEvent.started(),
               ),
           ),
+          BlocProvider(
+            create: (context) => GetIt.I.get<BuildCubit>()..started(),
+          ),
         ],
       ],
       child: const AppWidget(),
