@@ -42,15 +42,25 @@ class KeyboardScrollView extends StatelessWidget {
               scrollController: scrollController,
               maxHeight: maxHeight,
             )
-          : CustomScrollView(
-              key: widgetKey,
-              controller: scrollController,
-              slivers: slivers,
-              physics: physics,
-              semanticChildCount: semanticChildCount,
-            ),
+          : KTest.testIsWeb
+              ? _body
+              : BlocListener<BuildCubit, BuildState>(
+                  listener: (context, state) =>
+                      context.dialog.showMobUpdateAppDialog(
+                    hasNewVersion: state.mobHasNewBuild,
+                  ),
+                  child: _body,
+                ),
     );
   }
+
+  Widget get _body => CustomScrollView(
+        key: widgetKey,
+        controller: scrollController,
+        slivers: slivers,
+        physics: physics,
+        semanticChildCount: semanticChildCount,
+      );
 }
 
 class _KeyboardScrollViewWebDesk extends StatefulWidget {

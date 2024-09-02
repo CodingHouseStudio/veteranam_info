@@ -13,6 +13,7 @@ Future<void> homePumpAppHelper({
   required WidgetTester tester,
   required IUrlRepository mockUrlRepository,
   required BuildRepository mockBuildRepository,
+  required FirebaseRemoteConfigProvider mockFirebaseRemoteConfigProvider,
   MockGoRouter? mockGoRouter,
 }) async {
   // _registerFeedbackBloc(
@@ -24,7 +25,10 @@ Future<void> homePumpAppHelper({
     mockAuthenticationRepository: mockAuthenticationRepository,
   );
   _registerUrlCubit(mockUrlRepository);
-  _registerBuildCubit(mockBuildRepository);
+  _registerBuildCubit(
+    mockBuildRepository: mockBuildRepository,
+    mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
+  );
   await tester.pumpApp(
     const HomeScreen(),
     mockGoRouter: mockGoRouter,
@@ -83,11 +87,13 @@ void _registerUrlCubit(
   GetIt.I.registerSingleton<UrlCubit>(urlCubit);
 }
 
-void _registerBuildCubit(
-  BuildRepository mockBuildRepository,
-) {
+void _registerBuildCubit({
+  required BuildRepository mockBuildRepository,
+  required FirebaseRemoteConfigProvider mockFirebaseRemoteConfigProvider,
+}) {
   final urlCubit = BuildCubit(
     buildRepository: mockBuildRepository,
+    firebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
   );
   if (GetIt.I.isRegistered<BuildCubit>()) {
     GetIt.I.unregister<BuildCubit>();

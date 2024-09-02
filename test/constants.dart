@@ -90,6 +90,7 @@ abstract class KTestText {
   static const fieldEmpty = '';
 
   static const phoneNumber = '+3809900000';
+  static const build = '50';
 
   static final questionModelItems = <QuestionModel>[
     QuestionModel(
