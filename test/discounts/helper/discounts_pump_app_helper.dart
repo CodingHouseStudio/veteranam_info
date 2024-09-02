@@ -13,6 +13,7 @@ Future<void> discountsPumpAppHelper({
   required AuthenticationRepository mockAuthenticationRepository,
   required FirebaseAnalyticsService mockFirebaseAnalyticsService,
   required FirebaseRemoteConfigProvider mockFirebaseRemoteConfigProvider,
+  required BuildRepository mockBuildRepository,
   MockGoRouter? mockGoRouter,
 }) async {
   _registerReportBloc(
@@ -48,6 +49,10 @@ Future<void> discountsPumpAppHelper({
   );
   _registerAdvancedFilterMobCubit();
   _registerDiscountConfigCubit(mockFirebaseRemoteConfigProvider);
+  _registerBuildCubit(
+    mockBuildRepository: mockBuildRepository,
+    mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
+  );
 
   await tester.pumpApp(const DiscountsScreen(), mockGoRouter: mockGoRouter);
 
@@ -186,4 +191,18 @@ void _registerDiscountConfigCubit(
     GetIt.I.unregister<DiscountConfigCubit>();
   }
   GetIt.I.registerSingleton<DiscountConfigCubit>(discountConfigCubit);
+}
+
+void _registerBuildCubit({
+  required BuildRepository mockBuildRepository,
+  required FirebaseRemoteConfigProvider mockFirebaseRemoteConfigProvider,
+}) {
+  final buildCubit = BuildCubit(
+    buildRepository: mockBuildRepository,
+    firebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
+  );
+  if (GetIt.I.isRegistered<BuildCubit>()) {
+    GetIt.I.unregister<BuildCubit>();
+  }
+  GetIt.I.registerSingleton<BuildCubit>(buildCubit);
 }

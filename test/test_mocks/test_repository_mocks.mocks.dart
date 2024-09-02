@@ -11345,6 +11345,28 @@ class MockFirebaseRemoteConfigProvider extends _i1.Mock
         returnValue: 0,
         returnValueForMissingStub: 0,
       ) as int);
+
+  @override
+  String getString(String? key) => (super.noSuchMethod(
+        Invocation.method(
+          #getString,
+          [key],
+        ),
+        returnValue: _i28.dummyValue<String>(
+          this,
+          Invocation.method(
+            #getString,
+            [key],
+          ),
+        ),
+        returnValueForMissingStub: _i28.dummyValue<String>(
+          this,
+          Invocation.method(
+            #getString,
+            [key],
+          ),
+        ),
+      ) as String);
 }
 
 /// A class which mocks [FirebaseRemoteConfig].

@@ -330,4 +330,31 @@ class _DialogsWidget {
       },
     );
   }
+
+  void showMobUpdateAppDialog({
+    required bool hasNewVersion,
+  }) {
+    if (hasNewVersion) {
+      showDialog<void>(
+        context: context,
+        builder: (BuildContext context) {
+          return Center(
+            child: AlertDialog(
+              key: KWidgetkeys.screen.discountCard.dialog,
+              insetPadding: const EdgeInsets.symmetric(
+                horizontal: KPadding.kPaddingSize20,
+              ),
+              shape: const RoundedRectangleBorder(
+                borderRadius: KBorderRadius.kBorderRadius32,
+              ),
+              backgroundColor: AppColors.materialThemeKeyColorsSecondary,
+              contentPadding: const EdgeInsets.all(KPadding.kPaddingSize16),
+              scrollable: true,
+              content: const MobUpdateDialog(),
+            ),
+          );
+        },
+      );
+    }
+  }
 }
