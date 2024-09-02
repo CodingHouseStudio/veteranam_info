@@ -1083,6 +1083,6 @@
   },
   "noInternet": "No internet",
   "@noInternet": {
-    "examples": "Text for message about no internet"
+    "examples": "Text for message on mobile version about no internet"
   }
 }

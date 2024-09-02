@@ -262,8 +262,8 @@ void main() {
       //   );
       // });
 
-      testWidgets('${KGroupText.network} mob offline', (tester) async {
-        await networkHelper(
+      testWidgets('${KGroupText.offlineNetwork} ', (tester) async {
+        await networkMobHelper(
           tester: tester,
           pumpApp: () async => discountsPumpAppHelper(
             mockAppAuthenticationRepository: mockAppAuthenticationRepository,
@@ -275,16 +275,6 @@ void main() {
             tester: tester,
           ),
         );
-        if (KTest.testIsWeb) {
-          expect(
-            find.byKey(KWidgetkeys.widget.networkBanner.widget),
-            findsNothing,
-          );
-          expect(
-            find.byKey(KWidgetkeys.widget.networkBanner.iconNoInternet),
-            findsNothing,
-          );
-        }
       });
 
       group(

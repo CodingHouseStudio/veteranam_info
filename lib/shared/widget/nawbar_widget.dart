@@ -303,7 +303,6 @@ class _NawbarWidgetImplematationState
                 )
               : widget.showBackButton ?? false
                   ? Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         TextButton(
                           key: KWidgetkeys.widget.nawbar.backButton,
@@ -368,8 +367,9 @@ class _NawbarWidgetImplematationState
   }
 
   Widget internetBanner(NetworkStatus state) {
-    return const Padding(
-      padding: EdgeInsets.only(
+    return Padding(
+      key: KWidgetkeys.widget.networkBanner.iconNoInternet,
+      padding: const EdgeInsets.only(
         right: KPadding.kPaddingSize16,
       ),
       child: KIcon.noInternet,
