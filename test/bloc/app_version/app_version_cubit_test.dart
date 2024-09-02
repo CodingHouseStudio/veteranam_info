@@ -45,7 +45,7 @@ void main() {
       expect: () async => [
         AppVersionState(
           build: AppInfoRepository.defaultValue,
-          mobHasNewBuild: false,
+          mobHasNewBuild: true,
         ),
       ],
     );
