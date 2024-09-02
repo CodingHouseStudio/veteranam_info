@@ -167,8 +167,10 @@ sentry:
   # disabled by default
   wait_for_processing: true
 
+  ignore_missing: true
+
   # default 'warning'
-  log_level: info
+  log_level: error
 
   # default to build/web
   #web_build_path: ...
