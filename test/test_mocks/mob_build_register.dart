@@ -5,26 +5,27 @@ import 'package:veteranam/shared/shared.dart';
 import '../test_dependency.dart';
 
 void mobBuild() {
-  final BuildRepository mockBuildRepository = MockBuildRepository();
+  final AppInfoRepository mockBuildRepository = MockAppInfoRepository();
   final FirebaseRemoteConfigProvider mockFirebaseRemoteConfigProvider =
       MockFirebaseRemoteConfigProvider();
 
   when(
     mockBuildRepository.getBuildInfo(),
-  ).thenAnswer((realInvocation) async => BuildRepository.defaultValue);
+  ).thenAnswer((realInvocation) async => AppInfoRepository.defaultValue);
 
   when(
-    mockFirebaseRemoteConfigProvider.getString(BuildCubit.mobBuildKey),
+    mockFirebaseRemoteConfigProvider
+        .getString(AppVersionCubit.mobAppVersionKey),
   ).thenAnswer(
-    (_) => BuildRepository.defaultValue.buildNumber,
+    (_) => AppInfoRepository.defaultValue.buildNumber,
   );
 
-  final buildCubit = BuildCubit(
+  final buildCubit = AppVersionCubit(
     buildRepository: mockBuildRepository,
     firebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
   );
-  if (GetIt.I.isRegistered<BuildCubit>()) {
-    GetIt.I.unregister<BuildCubit>();
+  if (GetIt.I.isRegistered<AppVersionCubit>()) {
+    GetIt.I.unregister<AppVersionCubit>();
   }
-  GetIt.I.registerSingleton<BuildCubit>(buildCubit);
+  GetIt.I.registerSingleton<AppVersionCubit>(buildCubit);
 }

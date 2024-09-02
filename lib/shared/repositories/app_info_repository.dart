@@ -4,7 +4,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:veteranam/shared/shared.dart';
 
 @Singleton(order: -2)
-class BuildRepository {
+class AppInfoRepository {
   static PackageInfo defaultValue = PackageInfo(
     appName: KAppText.unknown,
     packageName: KAppText.unknown,

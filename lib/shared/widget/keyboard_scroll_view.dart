@@ -44,7 +44,7 @@ class KeyboardScrollView extends StatelessWidget {
             )
           : KTest.testIsWeb
               ? _body
-              : BlocListener<BuildCubit, BuildState>(
+              : BlocListener<AppVersionCubit, AppVersionState>(
                   listener: (context, state) =>
                       context.dialog.showMobUpdateAppDialog(
                     hasNewVersion: state.mobHasNewBuild,

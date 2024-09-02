@@ -46,13 +46,13 @@ void configureDependenciesTest() {
     () => FailureRepository(GetIt.I.get<FirebaseCrashlytics>()),
   );
   GetIt.I.registerLazySingleton<IStorage>(SecureStorageRepository.new);
-  GetIt.I.registerSingleton<BuildRepository>(BuildRepository());
+  GetIt.I.registerSingleton<AppInfoRepository>(AppInfoRepository());
   GetIt.I.registerSingleton<IFeedbackRepository>(FeedbackRepository());
   GetIt.I.registerSingleton<IDeviceRepository>(
     DeviceRepository(
       GetIt.I.get<FirebaseMessaging>(),
       GetIt.I.get<DeviceInfoPlugin>(),
-      GetIt.I.get<BuildRepository>(),
+      GetIt.I.get<AppInfoRepository>(),
     ),
   );
   GetIt.I.registerSingleton<IFaqRepository>(FaqRepository());

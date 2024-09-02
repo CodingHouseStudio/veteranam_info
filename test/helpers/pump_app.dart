@@ -53,7 +53,7 @@ extension PumpApp on WidgetTester {
               create: (context) => GetIt.I.get<MobOfflineModeCubit>(),
             ),
             BlocProvider(
-              create: (context) => GetIt.I.get<BuildCubit>()..started(),
+              create: (context) => GetIt.I.get<AppVersionCubit>()..started(),
             ),
           ],
         ],
