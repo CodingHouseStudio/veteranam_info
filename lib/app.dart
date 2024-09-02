@@ -68,7 +68,7 @@ class AppWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<AuthenticationBloc, AuthenticationState>(
       builder: (context, _) {
-        if (_.status == AuthenticationStatus.unknown || _.userSetting.isEmpty) {
+        if (_.status == AuthenticationStatus.unknown) {
           return const SizedBox.shrink();
         }
         final localeValue = _.userSetting.locale.value;
