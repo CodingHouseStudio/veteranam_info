@@ -50,4 +50,5 @@ class _WidgetKeys {
   final donateButton = _DonateButtonKeys();
   final doubleButton = _DoubleButtonKeys();
   final loadingButton = _LoadingButtonKeys();
+  final mobUpdate = _MobUpdateKeys();
 }

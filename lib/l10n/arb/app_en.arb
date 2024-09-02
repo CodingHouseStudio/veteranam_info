@@ -1077,6 +1077,24 @@
   "@aboutNewDiscounts": {
     "examples": "Text for a discount subscription"
   },
+  "appUpdateAvailable": "App Update Available!",
+  "@appUpdateAvailable": {
+    "examples": "Text for the app update dialog on a mobile phone"
+  },
+  "appUpdateAvailableDescription": "A new version of the app is available for download. Please update the app to improve its performance and access new features.",
+  "@appUpdateAvailableDescription": {
+    "examples": "Text for the app update dialog on a mobile phone"
+  },
+  "later": "Later",
+  "@later": {
+    "examples": "Text for the button in the app update dialog on a mobile phone",
+    "description": "The button is used to postpone the app update for one session."
+  },
+  "update": "Update Now",
+  "@update": {
+    "examples": "Text for the button in the app update dialog on a mobile phone",
+    "description": "The button is used to direct the user to the app where they can update it."
+  },
   "aboutNewDiscountsSubtitle": "Write us your email. We promise not to send spam!",
   "@aboutNewDiscountsSubtitle": {
     "examples": "Text for a discount subscription"

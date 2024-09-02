@@ -20,6 +20,7 @@ void main() {
     late IFaqRepository mockFaqRepository;
     late IUrlRepository mockUrlRepository;
     late BuildRepository mockBuildRepository;
+    late FirebaseRemoteConfigProvider mockFirebaseRemoteConfigProvider;
     setUp(() {
       Config.value = Config.production;
       ExtendedDateTime.current = KTestText.dateTime;
@@ -28,6 +29,7 @@ void main() {
       mockAuthenticationRepository = MockAuthenticationRepository();
       mockUrlRepository = MockIUrlRepository();
       mockBuildRepository = MockBuildRepository();
+      mockFirebaseRemoteConfigProvider = MockFirebaseRemoteConfigProvider();
 
       when(mockAuthenticationRepository.currentUser).thenAnswer(
         (realInvocation) => User.empty,
@@ -47,6 +49,11 @@ void main() {
       when(mockBuildRepository.getBuildInfo()).thenAnswer(
         (invocation) async => BuildRepository.defaultValue,
       );
+      when(
+        mockFirebaseRemoteConfigProvider.getString(BuildCubit.mobBuildKey),
+      ).thenAnswer(
+        (_) => KTestText.build,
+      );
     });
 
     testWidgets('${KGroupText.intial} ', (tester) async {
@@ -56,6 +63,7 @@ void main() {
         mockAuthenticationRepository: mockAuthenticationRepository,
         tester: tester,
         mockBuildRepository: mockBuildRepository,
+        mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
         mockUrlRepository: mockUrlRepository,
         // mockAppAuthenticationRepository:
         // mockAppAuthenticationRepository,
@@ -74,6 +82,7 @@ void main() {
           mockAuthenticationRepository: mockAuthenticationRepository,
           tester: tester,
           mockBuildRepository: mockBuildRepository, mockGoRouter: mockGoRouter,
+          mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
           mockUrlRepository: mockUrlRepository,
           // mockAppAuthenticationRepository:
           // mockAppAuthenticationRepository,
@@ -89,6 +98,7 @@ void main() {
             mockAuthenticationRepository: mockAuthenticationRepository,
             tester: tester,
             mockBuildRepository: mockBuildRepository,
+            mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
             mockGoRouter: mockGoRouter,
             mockUrlRepository: mockUrlRepository,
             // mockAppAuthenticationRepository:
