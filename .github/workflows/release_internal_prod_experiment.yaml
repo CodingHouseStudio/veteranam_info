@@ -77,7 +77,15 @@ jobs:
           cache-path: "${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:" # optional, change this to specify the cache path
           architecture: x64 # optional, x64 or arm64
           flutter-version: ${{ secrets.FLUTTER_FRAMEWORK_VERSION }}
-          fetch-depth: 0 # fetch the entire history to ensure Sentry can find the previous commit
+      - name: Set Version
+        id: set_version
+        
+        run: |
+          buildNumber=$(date +%s)
+          echo "buildNumber=$buildNumber" >> $GITHUB_ENV
+      - name: Update pubspec.yaml
+        run: |
+          sed -i "s/^version: .*/version: 1.0.2+$buildNumber/" pubspec.yaml
       - run: flutter config --no-analytics
       - run: flutter config --no-cli-animations
       - name: Flutter Pub Get # get flutter packages information
@@ -88,9 +96,8 @@ jobs:
       #   run: flutter pub get
       - name: Build the Web static pages # generate deployment files
         run: |
-          buildNumber=$(date +%s)
-          flutter build web --release -t lib/main_production.dart --wasm --build-name=1.0.2 --build-number=$buildNumber --dart-define=FLAVOUR=production --source-maps
-          dt=$(date "+%s000")
+          flutter build web --release -t lib/main_production.dart --wasm --build-name=1.0.2 --build-number=${{ env.buildNumber }} --dart-define=FLAVOUR=production --source-maps
+          dt="$(date "+%s000")"
           echo "dt=$dt" >> $GITHUB_ENV
           mv build/web/flutter_bootstrap.js build/web/$dt.flutter_bootstrap.js
           sed "s/flutter_bootstrap.js/$dt.flutter_bootstrap.js/g" build/web/index.html >build/web/newindex.html
@@ -99,7 +106,7 @@ jobs:
       #   run: |
       #     dart run sentry_dart_plugin
       - name: 📡 Run Sentry Dart Plugin
-        run: flutter packages pub run sentry_dart_plugin --release 1.0.2+${{ env.dt }}
+        run: flutter packages pub run sentry_dart_plugin
       # - name: Configure AWS Credentials Action for GitHub Actions
       #   uses: aws-actions/configure-aws-credentials@v4.0.1
       #   with:
