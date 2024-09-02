@@ -90,12 +90,16 @@ jobs:
         run: |
           buildNumber=$(date +%s)
           flutter build web --release -t lib/main_production.dart --wasm --build-name=1.0.2 --build-number=$buildNumber --dart-define=FLAVOUR=production --source-maps
-          dt="$(date "+%s000")"
+          dt=$(date "+%s000")
+          echo "dt=$dt" >> $GITHUB_ENV
           mv build/web/flutter_bootstrap.js build/web/$dt.flutter_bootstrap.js
           sed "s/flutter_bootstrap.js/$dt.flutter_bootstrap.js/g" build/web/index.html >build/web/newindex.html
           mv build/web/newindex.html build/web/index.html
+      # - name: Upload source maps
+      #   run: |
+      #     dart run sentry_dart_plugin
       - name: 📡 Run Sentry Dart Plugin
-        run: flutter packages pub run sentry_dart_plugin
+        run: flutter packages pub run sentry_dart_plugin --release 1.0.2+${{ env.dt }}
       # - name: Configure AWS Credentials Action for GitHub Actions
       #   uses: aws-actions/configure-aws-credentials@v4.0.1
       #   with:
