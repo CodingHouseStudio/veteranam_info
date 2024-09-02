@@ -44,6 +44,7 @@ export 'menu_dialog_widget.dart';
 export 'message_field_widget.dart';
 export 'mob_feedback_widget.dart';
 export 'mob_navigation_widget.dart';
+export 'mob_update_dialog.dart';
 export 'mock_button_widget.dart';
 export 'nawbar_widget.dart';
 export 'network_image_widget.dart';

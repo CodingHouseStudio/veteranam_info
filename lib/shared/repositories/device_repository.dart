@@ -18,7 +18,7 @@ class DeviceRepository implements IDeviceRepository {
 
   final FirebaseMessaging _firebaseMessaging;
   final DeviceInfoPlugin _deviceInfoPlugin;
-  final BuildRepository _buildRepository;
+  final AppInfoRepository _buildRepository;
 
   Future<void> _messagingInit() async {
     try {

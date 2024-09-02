@@ -248,8 +248,8 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
   void scrollUp() {
     _scrollController.animateTo(
       0,
-      duration: const Duration(milliseconds: 300),
-      curve: Curves.easeInOut,
+      duration: Duration(milliseconds: (_scrollController.offset / 10).toInt()),
+      curve: Curves.linear,
     );
   }
 
