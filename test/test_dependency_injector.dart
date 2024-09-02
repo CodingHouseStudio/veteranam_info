@@ -20,6 +20,7 @@ void configureDependenciesTest() {
   KTest.testIsWeb = true;
   Config.value = Config.development;
   KTest.isTest = true;
+  KTest.testReleaseMode = true;
   // KTest.scroll = null;
   // Services
   GetIt.I.registerSingleton<FirebaseCrashlytics>(MockFirebaseCrashlytics());
@@ -190,6 +191,7 @@ void configureFailureDependenciesTest() {
   KTest.testIsWeb = true;
   Config.value = Config.development;
   KTest.isTest = true;
+  KTest.testReleaseMode = true;
   // KTest.scroll = null;
   // Services
   GetIt.I.registerSingleton<FirebaseCrashlytics>(MockFirebaseCrashlytics());
