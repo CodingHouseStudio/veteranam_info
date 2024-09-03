@@ -98,8 +98,7 @@ class DiscountUserEmailFormBloc
     unawaited(_discountRepository.sendEmail(discountUserEmailFormModel));
 
     _firebaseAnalyticsService.addEvent(
-      name: event.userEmailEnum.text ??
-          UserEmailEnum.discountEmailAbandonRepeat.text!,
+      name: event.userEmailEnum.text,
       parameters: {
         'count': event.count.toString(),
       },
