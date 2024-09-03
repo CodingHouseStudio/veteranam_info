@@ -283,11 +283,12 @@ class _DialogsWidget {
     required int? count,
     required int emailCloseDelay,
   }) {
-    showDialog<void>(
+    final bloc = context.read<DiscountUserEmailFormBloc>();
+    showDialog<bool>(
       context: context,
       builder: (BuildContext context) {
-        return BlocProvider(
-          create: (context) => GetIt.I.get<DiscountUserEmailFormBloc>(),
+        return BlocProvider.value(
+          value: bloc,
           child: LayoutBuilder(
             builder: (context, constraints) {
               final isTablet = constraints.maxWidth >
@@ -310,13 +311,13 @@ class _DialogsWidget {
                       context.read<DiscountUserEmailFormBloc>().add(
                             const DiscountUserEmailFormEvent.sendEmail(),
                           ),
-                  closeOnPressed: () =>
-                      context.read<DiscountUserEmailFormBloc>().add(
-                            DiscountUserEmailFormEvent.sendEmailAfterClose(
-                              userEmailEnum: userEmailEnum,
-                              count: count,
-                            ),
-                          ),
+                  // closeOnPressed: () =>
+                  //     context.read<DiscountUserEmailFormBloc>().add(
+                  //           DiscountUserEmailFormEvent.sendEmailAfterClose(
+                  //             userEmailEnum: userEmailEnum,
+                  //             count: count,
+                  //           ),
+                  //         ),
                   onChanged: (text) =>
                       context.read<DiscountUserEmailFormBloc>().add(
                             DiscountUserEmailFormEvent.updatedEmail(text),
@@ -329,7 +330,17 @@ class _DialogsWidget {
           ),
         );
       },
-    );
+    ).then((value) {
+      if (!context.mounted) return;
+      if (!(value ?? false)) {
+        context.read<DiscountUserEmailFormBloc>().add(
+              DiscountUserEmailFormEvent.sendEmailAfterClose(
+                userEmailEnum: userEmailEnum,
+                count: count,
+              ),
+            );
+      }
+    });
   }
 
   void showMobUpdateAppDialog({

@@ -15,6 +15,6 @@ Future<void> userEmailCorrectHelper({
   );
 
   verify(
-    () => mockGoRouter.pop(),
+    () => mockGoRouter.pop<bool>(true),
   ).called(1);
 }

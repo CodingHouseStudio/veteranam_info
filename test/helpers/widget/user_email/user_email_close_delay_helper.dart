@@ -36,7 +36,7 @@ Future<void> userEmailCloseDelayHelper({
       await tester.pumpAndSettle();
 
       verify(
-        () => mockGoRouter.pop(),
+        () => mockGoRouter.pop<bool>(false),
       ).called(1);
     },
   );
