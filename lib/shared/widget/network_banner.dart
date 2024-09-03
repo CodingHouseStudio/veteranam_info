@@ -46,9 +46,8 @@ class _NetworkStatusBannerImplamentation extends StatelessWidget {
         key: KWidgetkeys.widget.networkBanner.widget,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Container(
+          KIcon.noInternet.copyWith(
             key: KWidgetkeys.widget.networkBanner.iconNoInternet,
-            child: KIcon.noInternet,
           ),
           KSizedBox.kWidthSizedBox10,
           Flexible(

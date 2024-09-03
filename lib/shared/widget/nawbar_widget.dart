@@ -8,7 +8,6 @@ class NawbarWidget extends SliverPersistentHeaderDelegate {
   const NawbarWidget({
     required this.isDesk,
     required this.isTablet,
-    this.networkStatus,
     this.widgetKey,
     this.childWidget,
     this.maxMinHeight,
@@ -24,7 +23,6 @@ class NawbarWidget extends SliverPersistentHeaderDelegate {
   final String? pageName;
   // final bool? showMobileNawbar;
   final bool? showMobBackButton;
-  final NetworkStatus? networkStatus;
 
   @override
   double get maxExtent => maxMinHeight ?? KMinMaxSize.minmaxHeight94;
@@ -53,7 +51,6 @@ class NawbarWidget extends SliverPersistentHeaderDelegate {
       // showMobileNawbar: showMobileNawbar ?? false,
       showBackButton: showMobBackButton,
       shrinkOffset: shrinkOffset,
-      networkStatus: networkStatus,
     );
   }
 }
@@ -63,7 +60,6 @@ class _NawbarWidgetImplematation extends StatefulWidget {
     required this.isDesk,
     required this.isTablet,
     required this.shrinkOffset,
-    this.networkStatus,
     // required this.showMobileNawbar,
     super.key,
     this.childWidget,
@@ -77,7 +73,6 @@ class _NawbarWidgetImplematation extends StatefulWidget {
   // final bool showMobileNawbar;
   final bool? showBackButton;
   final double shrinkOffset;
-  final NetworkStatus? networkStatus;
 
   @override
   State<_NawbarWidgetImplematation> createState() =>
@@ -321,14 +316,12 @@ class _NawbarWidgetImplematationState
                           child: pageName(
                             showBackButton: true,
                             isShrunk: isShrunk,
-                            state: widget.networkStatus,
+                            offline: context
+                                .read<NetworkCubit>()
+                                .state
+                                .isOffline, // widget.networkStatus,
                           ),
                         ),
-                        //KSizedBox.kWidthSizedBox56,
-                        if (isShrunk &&
-                            !KTest.testIsWeb &&
-                            widget.networkStatus!.isOffline)
-                          internetBanner(widget.networkStatus!),
                       ],
                     )
                   : Padding(
@@ -337,8 +330,8 @@ class _NawbarWidgetImplematationState
                       ),
                       child: pageName(
                         isShrunk: isShrunk,
-                        state: widget.networkStatus,
                         showBackButton: false,
+                        offline: context.read<NetworkCubit>().state.isOffline,
                       ),
                     ),
         );
@@ -347,7 +340,7 @@ class _NawbarWidgetImplematationState
   Widget pageName({
     required bool isShrunk,
     required bool showBackButton,
-    NetworkStatus? state,
+    required bool offline,
   }) {
     return Row(
       key: KWidgetkeys.widget.nawbar.pageName,
@@ -360,19 +353,15 @@ class _NawbarWidgetImplematationState
             textAlign: TextAlign.center,
           ),
         ),
-        if (!showBackButton && isShrunk && !KTest.testIsWeb && state!.isOffline)
-          internetBanner(state),
+        if (isShrunk && !KTest.testIsWeb && offline)
+          Padding(
+            key: KWidgetkeys.widget.networkBanner.iconNoInternet,
+            padding: const EdgeInsets.only(
+              right: KPadding.kPaddingSize16,
+            ),
+            child: KIcon.noInternet,
+          ),
       ],
-    );
-  }
-
-  Widget internetBanner(NetworkStatus state) {
-    return Padding(
-      key: KWidgetkeys.widget.networkBanner.iconNoInternet,
-      padding: const EdgeInsets.only(
-        right: KPadding.kPaddingSize16,
-      ),
-      child: KIcon.noInternet,
     );
   }
 

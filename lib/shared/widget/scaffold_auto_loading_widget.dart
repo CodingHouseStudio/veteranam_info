@@ -174,7 +174,6 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
                           isDesk: isDesk,
                           isTablet: isTablet,
                           pageName: widget.pageName,
-                          networkStatus: state,
                           // showMobileNawbar: widget.showMobileNawbar,
                         ),
                       ),

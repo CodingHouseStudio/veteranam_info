@@ -99,7 +99,6 @@ class ScaffoldWidget extends StatelessWidget {
                         isTablet: isTablet,
                         pageName: pageName,
                         showMobBackButton: showMobNawbarBackButton,
-                        networkStatus: state,
                         // showMobileNawbar: showMobileNawbar,
                       ),
                     ),

@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/foundation.dart' show visibleForTesting;
@@ -55,5 +54,4 @@ class AppNetworkRepository implements IAppNetworkRepository {
     // ignore: unused_local_variable
     final connectivityResults = currentConnectivityResults.isEmpty;
   }
-
 }
