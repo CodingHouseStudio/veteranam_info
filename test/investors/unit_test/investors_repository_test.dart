@@ -26,7 +26,10 @@ void main() {
 
     group('${KGroupText.successfulGet} ', () {
       setUp(() {
-        when(mockFirestoreService.getFunds(null)).thenAnswer(
+        when(
+          mockFirestoreService.getFunds(//null
+              ),
+        ).thenAnswer(
           (_) async => KTestText.fundItems,
         );
         when(
@@ -59,7 +62,10 @@ void main() {
 
     group('${KGroupText.failureGet} ', () {
       setUp(() {
-        when(mockFirestoreService.getFunds(null)).thenThrow(
+        when(
+          mockFirestoreService.getFunds(//null
+              ),
+        ).thenThrow(
           Exception(KGroupText.failureGet),
         );
         if (GetIt.I.isRegistered<FirestoreService>()) {
@@ -83,7 +89,10 @@ void main() {
 
     group('${KGroupText.firebaseFailure} ', () {
       setUp(() {
-        when(mockFirestoreService.getFunds(null)).thenThrow(
+        when(
+          mockFirestoreService.getFunds(//null,
+              ),
+        ).thenThrow(
           FirebaseException(plugin: KGroupText.failureGet),
         );
         if (GetIt.I.isRegistered<FirestoreService>()) {
