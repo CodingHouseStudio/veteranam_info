@@ -22,8 +22,8 @@ Future<void> discountsPumpAppHelper({
   );
   _registerDiscountBloc(
     mockDiscountRepository: mockDiscountRepository,
-    mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-    mockReportRepository: mockReportRepository,
+    // mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+    // mockReportRepository: mockReportRepository,
     mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
   );
   _registerAuthenticationBloc(
@@ -80,14 +80,14 @@ void _registerReportBloc({
 
 void _registerDiscountBloc({
   required IDiscountRepository mockDiscountRepository,
-  required IAppAuthenticationRepository mockAppAuthenticationRepository,
-  required IReportRepository mockReportRepository,
+  // required IAppAuthenticationRepository mockAppAuthenticationRepository,
+  // required IReportRepository mockReportRepository,
   required FirebaseRemoteConfigProvider mockFirebaseRemoteConfigProvider,
 }) {
   final discountBloc = DiscountWatcherBloc(
     discountRepository: mockDiscountRepository,
-    reportRepository: mockReportRepository,
-    appAuthenticationRepository: mockAppAuthenticationRepository,
+    // reportRepository: mockReportRepository,
+    // appAuthenticationRepository: mockAppAuthenticationRepository,
     firebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
   );
   if (GetIt.I.isRegistered<DiscountWatcherBloc>()) {

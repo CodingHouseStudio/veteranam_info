@@ -24,7 +24,7 @@ class ReportState with _$ReportState {
   const factory ReportState({
     required ReasonComplaint? reasonComplaint,
     // required EmailFieldModel? email,
-    required ReportFieldModel? message,
+    required ReportFieldModel message,
     required ReportEnum formState,
     required ReportFailure? failure,
     required String cardId,

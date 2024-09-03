@@ -94,8 +94,7 @@ class ReportDialogWidget extends StatelessWidget {
                     .add(ReportEvent.messageUpdated(text)),
                 isDesk: isDesk,
                 labelText: context.l10n.writeYourMessage,
-                errorText: _.message?.error.value(context) ??
-                    context.l10n.fieldCannotBeEmpty,
+                errorText: _.message.error.value(context),
                 showErrorText: _.formState == ReportEnum.nextInvalidData,
               ),
             ] else ...[
