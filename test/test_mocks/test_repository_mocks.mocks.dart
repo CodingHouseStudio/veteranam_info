@@ -1057,11 +1057,10 @@ class MockFirestoreService extends _i1.Mock implements _i3.FirestoreService {
       ) as _i8.Future<List<_i3.QuestionModel>>);
 
   @override
-  _i8.Future<List<_i3.FundModel>> getFunds(List<String>? reportIdItems) =>
-      (super.noSuchMethod(
+  _i8.Future<List<_i3.FundModel>> getFunds() => (super.noSuchMethod(
         Invocation.method(
           #getFunds,
-          [reportIdItems],
+          [],
         ),
         returnValue: _i8.Future<List<_i3.FundModel>>.value(<_i3.FundModel>[]),
         returnValueForMissingStub:
@@ -1219,12 +1218,10 @@ class MockFirestoreService extends _i1.Mock implements _i3.FirestoreService {
       ) as _i8.Future<List<_i3.StoryModel>>);
 
   @override
-  _i8.Stream<List<_i3.DiscountModel>> getDiscounts(
-          List<String>? reportIdItems) =>
-      (super.noSuchMethod(
+  _i8.Stream<List<_i3.DiscountModel>> getDiscounts() => (super.noSuchMethod(
         Invocation.method(
           #getDiscounts,
-          [reportIdItems],
+          [],
         ),
         returnValue: _i8.Stream<List<_i3.DiscountModel>>.empty(),
         returnValueForMissingStub: _i8.Stream<List<_i3.DiscountModel>>.empty(),
@@ -1392,13 +1389,11 @@ class MockFirestoreService extends _i1.Mock implements _i3.FirestoreService {
 class MockIInvestorsRepository extends _i1.Mock
     implements _i3.IInvestorsRepository {
   @override
-  _i8.Future<_i2.Either<_i3.SomeFailure, List<_i3.FundModel>>> getFunds(
-          {List<String>? reportIdItems}) =>
+  _i8.Future<_i2.Either<_i3.SomeFailure, List<_i3.FundModel>>> getFunds() =>
       (super.noSuchMethod(
         Invocation.method(
           #getFunds,
           [],
-          {#reportIdItems: reportIdItems},
         ),
         returnValue:
             _i8.Future<_i2.Either<_i3.SomeFailure, List<_i3.FundModel>>>.value(
@@ -1407,7 +1402,6 @@ class MockIInvestorsRepository extends _i1.Mock
           Invocation.method(
             #getFunds,
             [],
-            {#reportIdItems: reportIdItems},
           ),
         )),
         returnValueForMissingStub:
@@ -1417,7 +1411,6 @@ class MockIInvestorsRepository extends _i1.Mock
           Invocation.method(
             #getFunds,
             [],
-            {#reportIdItems: reportIdItems},
           ),
         )),
       ) as _i8.Future<_i2.Either<_i3.SomeFailure, List<_i3.FundModel>>>);
@@ -7245,13 +7238,10 @@ class MockXFile extends _i1.Mock implements _i11.XFile {
 class MockIDiscountRepository extends _i1.Mock
     implements _i3.IDiscountRepository {
   @override
-  _i8.Stream<List<_i3.DiscountModel>> getDiscountItems(
-          {List<String>? reportIdItems}) =>
-      (super.noSuchMethod(
+  _i8.Stream<List<_i3.DiscountModel>> getDiscountItems() => (super.noSuchMethod(
         Invocation.method(
           #getDiscountItems,
           [],
-          {#reportIdItems: reportIdItems},
         ),
         returnValue: _i8.Stream<List<_i3.DiscountModel>>.empty(),
         returnValueForMissingStub: _i8.Stream<List<_i3.DiscountModel>>.empty(),
