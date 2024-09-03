@@ -21,7 +21,7 @@ void main() {
     late IDiscountRepository mockDiscountRepository;
     late IInvestorsRepository mockInvestorsReportisory;
     late IAppAuthenticationRepository mockAppAuthenticationRepository;
-    late IReportRepository mockReportRepository;
+    // late IReportRepository mockReportRepository;
     late FirebaseRemoteConfigProvider mockFirebaseRemoteConfigProvider;
     setUp(() {
       mockAuthenticationRepository = MockAuthenticationRepository();
@@ -50,15 +50,15 @@ void main() {
         (invocation) => KTestText.user,
       );
 
-      mockReportRepository = MockIReportRepository();
-      when(
-        mockReportRepository.getCardReportById(
-          cardEnum: CardEnum.discount,
-          userId: KTestText.user.id,
-        ),
-      ).thenAnswer(
-        (invocation) async => Right(KTestText.reportItems),
-      );
+      // mockReportRepository = MockIReportRepository();
+      // when(
+      //   mockReportRepository.getCardReportById(
+      //     cardEnum: CardEnum.discount,
+      //     userId: KTestText.user.id,
+      //   ),
+      // ).thenAnswer(
+      //   (invocation) async => Right(KTestText.reportItems),
+      // );
 
       when(mockDiscountRepository.userCanSendLink(KTestText.user.id))
           .thenAnswer(
@@ -70,16 +70,16 @@ void main() {
       );
       when(
         mockDiscountRepository.getDiscountItems(
-          reportIdItems: KTestText.reportItems.getIdCard,
-        ),
+            // reportIdItems: KTestText.reportItems.getIdCard,
+            ),
       ).thenAnswer(
         (invocation) => Stream.value(KTestText.discountModelItemsModify),
       );
 
       when(
         mockInvestorsReportisory.getFunds(
-          reportIdItems: KTestText.reportItems.getIdCard,
-        ),
+            // reportIdItems: KTestText.reportItems.getIdCard,
+            ),
       ).thenAnswer(
         (invocation) async => Right(KTestText.fundItems),
       );
@@ -94,7 +94,7 @@ void main() {
           mockAuthenticationRepository: mockAuthenticationRepository,
           tester: tester,
           mockFaqRepository: mockFaqRepository,
-          mockReportRepository: mockReportRepository,
+          // mockReportRepository: mockReportRepository,
           mockInvestorsReportisory: mockInvestorsReportisory,
           mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
         );
@@ -110,7 +110,7 @@ void main() {
           mockAuthenticationRepository: mockAuthenticationRepository,
           tester: tester,
           mockFaqRepository: mockFaqRepository,
-          mockReportRepository: mockReportRepository,
+          // mockReportRepository: mockReportRepository,
           mockInvestorsReportisory: mockInvestorsReportisory,
           mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
         );

@@ -92,7 +92,8 @@ void main() {
 
     test('get funds', () async {
       expect(
-        await firestoreService.getFunds(null),
+        await firestoreService.getFunds(//null
+            ),
         [KTestText.fundItemsWithImage.first],
       );
 

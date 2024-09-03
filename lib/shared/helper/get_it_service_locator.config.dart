@@ -216,12 +216,6 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i801.StoryRepository(),
       registerFor: {_development},
     );
-    gh.factory<_i609.InvestorsWatcherBloc>(() => _i609.InvestorsWatcherBloc(
-          investorsRepository: gh<_i1001.IInvestorsRepository>(),
-          reportRepository: gh<_i1001.IReportRepository>(),
-          appAuthenticationRepository:
-              gh<_i1001.IAppAuthenticationRepository>(),
-        ));
     gh.factory<_i1032.MyDiscountsWatcherBloc>(
       () => _i1032.MyDiscountsWatcherBloc(
         discountRepository: gh<_i1001.IDiscountRepository>(),
@@ -250,6 +244,8 @@ extension GetItInjectableX on _i174.GetIt {
           storyRepository: gh<_i1001.IStoryRepository>()),
       registerFor: {_development},
     );
+    gh.factory<_i609.InvestorsWatcherBloc>(() => _i609.InvestorsWatcherBloc(
+        investorsRepository: gh<_i1001.IInvestorsRepository>()));
     gh.singleton<_i208.AuthenticationRepository>(() =>
         _i208.AuthenticationRepository(
             gh<_i1001.IAppAuthenticationRepository>()));
@@ -271,6 +267,11 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i76.WorkRepository(),
       registerFor: {_development},
     );
+    gh.factory<_i1006.DiscountWatcherBloc>(() => _i1006.DiscountWatcherBloc(
+          discountRepository: gh<_i1001.IDiscountRepository>(),
+          firebaseRemoteConfigProvider:
+              gh<_i1001.FirebaseRemoteConfigProvider>(),
+        ));
     gh.factory<_i922.MyStoryWatcherBloc>(
       () => _i922.MyStoryWatcherBloc(
         storyRepository: gh<_i1001.IStoryRepository>(),
@@ -283,14 +284,6 @@ extension GetItInjectableX on _i174.GetIt {
           informationRepository: gh<_i1001.IInformationRepository>()),
       registerFor: {_development},
     );
-    gh.factory<_i1006.DiscountWatcherBloc>(() => _i1006.DiscountWatcherBloc(
-          discountRepository: gh<_i1001.IDiscountRepository>(),
-          reportRepository: gh<_i1001.IReportRepository>(),
-          appAuthenticationRepository:
-              gh<_i1001.IAppAuthenticationRepository>(),
-          firebaseRemoteConfigProvider:
-              gh<_i1001.FirebaseRemoteConfigProvider>(),
-        ));
     gh.factory<_i43.MobOfflineModeCubit>(() => _i43.MobOfflineModeCubit(
         firestoreService: gh<_i1001.FirestoreService>()));
     gh.singleton<_i570.AuthenticationBloc>(() => _i570.AuthenticationBloc(
