@@ -17,12 +17,12 @@ class DiscountWatcherBloc
     extends Bloc<DiscountWatcherEvent, DiscountWatcherState> {
   DiscountWatcherBloc({
     required IDiscountRepository discountRepository,
-    required IReportRepository reportRepository,
-    required IAppAuthenticationRepository appAuthenticationRepository,
+    // required IReportRepository reportRepository,
+    // required IAppAuthenticationRepository appAuthenticationRepository,
     required FirebaseRemoteConfigProvider firebaseRemoteConfigProvider,
   })  : _discountRepository = discountRepository,
-        _reportRepository = reportRepository,
-        _appAuthenticationRepository = appAuthenticationRepository,
+        // _reportRepository = reportRepository,
+        // _appAuthenticationRepository = appAuthenticationRepository,
         _firebaseRemoteConfigProvider = firebaseRemoteConfigProvider,
         super(
           const _Initial(
@@ -52,8 +52,8 @@ class DiscountWatcherBloc
 
   final IDiscountRepository _discountRepository;
   StreamSubscription<List<DiscountModel>>? _discountItemsSubscription;
-  final IReportRepository _reportRepository;
-  final IAppAuthenticationRepository _appAuthenticationRepository;
+  // final IReportRepository _reportRepository;
+  // final IAppAuthenticationRepository _appAuthenticationRepository;
   final FirebaseRemoteConfigProvider _firebaseRemoteConfigProvider;
 
   @visibleForTesting
@@ -65,13 +65,13 @@ class DiscountWatcherBloc
   ) async {
     emit(state.copyWith(loadingStatus: LoadingStatus.loading));
 
-    final reportItems = await _getReport();
+    // final reportItems = await _getReport();
 
     await _discountItemsSubscription?.cancel();
     _discountItemsSubscription = _discountRepository
         .getDiscountItems(
-      reportIdItems: reportItems?.getIdCard,
-    )
+            // reportIdItems: reportItems?.getIdCard,
+            )
         .listen(
       (discount) {
         add(
@@ -484,16 +484,16 @@ class DiscountWatcherBloc
   //   );
   // }
 
-  Future<List<ReportModel>?> _getReport() async {
-    final reportItems = await _reportRepository.getCardReportById(
-      cardEnum: CardEnum.discount,
-      userId: _appAuthenticationRepository.currentUser.id,
-    );
-    return reportItems.fold(
-      (l) => null,
-      (r) => r.isEmpty ? null : r,
-    );
-  }
+  // Future<List<ReportModel>?> _getReport() async {
+  //   final reportItems = await _reportRepository.getCardReportById(
+  //     cardEnum: CardEnum.discount,
+  //     userId: _appAuthenticationRepository.currentUser.id,
+  //   );
+  //   return reportItems.fold(
+  //     (l) => null,
+  //     (r) => r.isEmpty ? null : r,
+  //   );
+  // }
 
   int get getItemsLoading {
     final loadingItems = _firebaseRemoteConfigProvider.getInt(loadingItemsKey);

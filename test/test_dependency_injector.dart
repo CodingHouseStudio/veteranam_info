@@ -138,8 +138,9 @@ void configureDependenciesTest() {
   GetIt.I.registerSingleton<InvestorsWatcherBloc>(
     InvestorsWatcherBloc(
       investorsRepository: GetIt.I.get<IInvestorsRepository>(),
-      reportRepository: GetIt.I.get<IReportRepository>(),
-      appAuthenticationRepository: GetIt.I.get<IAppAuthenticationRepository>(),
+      // reportRepository: GetIt.I.get<IReportRepository>(),
+      // appAuthenticationRepository: GetIt.I.get<IAppAuthenticationRepository>
+      // (),
     ),
   );
   // GetIt.I.registerSingleton<WorkEmployeeWatcherBloc>(
@@ -155,8 +156,9 @@ void configureDependenciesTest() {
   GetIt.I.registerSingleton<DiscountWatcherBloc>(
     DiscountWatcherBloc(
       discountRepository: GetIt.I.get<IDiscountRepository>(),
-      appAuthenticationRepository: GetIt.I.get<IAppAuthenticationRepository>(),
-      reportRepository: GetIt.I.get<IReportRepository>(),
+      // appAuthenticationRepository: GetIt.I.get<IAppAuthenticationRepository>
+      // (),
+      // reportRepository: GetIt.I.get<IReportRepository>(),
       firebaseRemoteConfigProvider: GetIt.I.get<FirebaseRemoteConfigProvider>(),
     ),
   );
