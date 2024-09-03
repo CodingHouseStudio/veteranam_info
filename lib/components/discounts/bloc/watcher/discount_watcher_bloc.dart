@@ -80,7 +80,7 @@ class DiscountWatcherBloc
           ),
         );
       },
-      onError: (Object error, StackTrace stack) {
+      onError: (dynamic error, StackTrace stack) {
         // debugPrint('error is $error');
         add(DiscountWatcherEvent.failure(error: error, stack: stack));
       },

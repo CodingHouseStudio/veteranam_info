@@ -49,7 +49,7 @@ class WorkEmployeeWatcherBloc
           work,
         ),
       ),
-      onError: (Object error, StackTrace stack) {
+      onError: (dynamic error, StackTrace stack) {
         // debugPrint('error is $error');
         add(WorkEmployeeWatcherEvent.failure(error: error, stack: stack));
       },
