@@ -33,7 +33,24 @@ Future<void> main() async {
             ..tracesSampleRate = 1.0
             // The sampling rate for profiling is relative to tracesSampleRate
             // Setting to 1.0 will profile 100% of sampled transactions:
-            ..profilesSampleRate = 1.0;
+            ..profilesSampleRate = 1.0
+            // ignore package error
+            ..reportPackages = false
+            // add information about threads
+            ..attachThreads = true
+            ..reportSilentFlutterErrors = true
+            // Add screenshot for error
+            ..attachScreenshot = true
+            // Optimization screenshot
+            ..screenshotQuality = SentryScreenshotQuality.low
+            // Add hierarchy for error report
+            ..attachViewHierarchy = true
+            // Turns on Spotlight functionality, which can help you track
+            // certain events or conditions.
+            ..spotlight = Spotlight(enabled: true)
+            // Turns on time tracking until full display to help you understand
+            // the performance of the app's loading.
+            ..enableTimeToFullDisplayTracing = true;
         },
       );
     }
