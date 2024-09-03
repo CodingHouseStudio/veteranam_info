@@ -20,7 +20,7 @@ class ReportBloc extends Bloc<ReportEvent, ReportState> {
           const ReportState(
             reasonComplaint: null,
             // email: null,
-            message: null,
+            message: ReportFieldModel.pure(),
             formState: ReportEnum.initial,
             failure: null,
             cardId: '',
@@ -43,7 +43,7 @@ class ReportBloc extends Bloc<ReportEvent, ReportState> {
       ReportState(
         reasonComplaint: null,
         // email: null,
-        message: null,
+        message: const ReportFieldModel.pure(),
         formState: ReportEnum.initial,
         failure: null,
         cardId: event.cardId,
@@ -69,10 +69,10 @@ class ReportBloc extends Bloc<ReportEvent, ReportState> {
     _MessageUpdated event,
     Emitter<ReportState> emit,
   ) {
-    final messageFieldModel = MessageFieldModel.dirty(event.message);
+    final reportFieldModel = ReportFieldModel.dirty(event.message);
     emit(
       state.copyWith(
-        message: messageFieldModel,
+        message: reportFieldModel,
         formState: ReportEnum.nextInProgress,
         failure: null,
       ),
@@ -113,6 +113,16 @@ class ReportBloc extends Bloc<ReportEvent, ReportState> {
     //         (state.message == null || state.message!.isNotValid) &&
     //             state.reasonComplaint == ReasonComplaint.other)
     // ) {
+    if (state.reasonComplaint == ReasonComplaint.other &&
+        (state.message.isNotValid)) {
+      emit(
+        state.copyWith(
+          failure: null,
+          formState: ReportEnum.nextInvalidData,
+        ),
+      );
+      return;
+    }
     emit(
       state.copyWith(
         failure: null,
@@ -128,9 +138,7 @@ class ReportBloc extends Bloc<ReportEvent, ReportState> {
           // email: state.email?.value.isEmpty ?? true
           //     ? _appAuthenticationRepository.currentUser.email!
           //     : state.email!.value,
-          message: state.message?.value.isEmpty ?? true
-              ? null
-              : state.message?.value,
+          message: state.message.value.isEmpty ? null : state.message.value,
           date: ExtendedDateTime.current,
           card: event.card,
           userId: _appAuthenticationRepository.currentUser.id,
