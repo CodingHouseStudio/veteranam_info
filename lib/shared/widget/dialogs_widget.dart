@@ -180,32 +180,35 @@ class _DialogsWidget {
         builder: (context) => BlocProvider(
           create: (context) =>
               GetIt.I.get<ReportBloc>()..add(ReportEvent.started(cardId)),
-          child: LayoutBuilder(
-            builder: (BuildContext context, BoxConstraints constraints) {
-              final isDeskValue =
-                  constraints.maxWidth >= KMinMaxSize.maxWidth600;
-              return Padding(
-                padding: EdgeInsets.only(
-                  bottom: MediaQuery.of(context).viewInsets.bottom,
-                ), // padding if mobile keyboard open
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: KPadding.kPaddingSize16,
-                    vertical: KPadding.kPaddingSize32,
-                  ),
-                  child: SizedBox(
-                    width: double.infinity,
-                    child: SingleChildScrollView(
-                      child: ReportDialogWidget(
-                        isDesk: isDeskValue,
-                        cardEnum: cardEnum,
-                        // afterEvent: afterEvent,
+          child: FractionallySizedBox(
+            heightFactor: KDimensions.bottomDialogHeightFactor,
+            child: LayoutBuilder(
+              builder: (BuildContext context, BoxConstraints constraints) {
+                final isDeskValue =
+                    constraints.maxWidth >= KMinMaxSize.maxWidth600;
+                return Padding(
+                  padding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).viewInsets.bottom,
+                  ), // padding if mobile keyboard open
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: KPadding.kPaddingSize16,
+                      vertical: KPadding.kPaddingSize32,
+                    ),
+                    child: SizedBox(
+                      width: double.infinity,
+                      child: SingleChildScrollView(
+                        child: ReportDialogWidget(
+                          isDesk: isDeskValue,
+                          cardEnum: cardEnum,
+                          // afterEvent: afterEvent,
+                        ),
                       ),
                     ),
                   ),
-                ),
-              );
-            },
+                );
+              },
+            ),
           ),
         ),
       );
