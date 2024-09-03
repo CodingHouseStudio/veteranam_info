@@ -51,11 +51,11 @@ class FirebaseAnalyticsService {
   }
 
   void addEvent({
-    required String name,
+    required String? name,
     Map<String, Object>? parameters,
     AnalyticsCallOptions? callOptions,
   }) {
-    if (kReleaseMode && Config.isProduction) {
+    if (kReleaseMode && Config.isProduction && name != null) {
       unawaited(
         _firebaseAnalytics.logEvent(
           name: name,

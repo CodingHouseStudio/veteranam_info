@@ -10,7 +10,7 @@ Future<void> appPumpAppHelper({
   required AuthenticationRepository mockAuthenticationRepository,
   required WidgetTester tester,
   required IFaqRepository mockFaqRepository,
-  required IReportRepository mockReportRepository,
+  // required IReportRepository mockReportRepository,
   required IInvestorsRepository mockInvestorsReportisory,
   required FirebaseRemoteConfigProvider mockFirebaseRemoteConfigProvider,
 }) async {
@@ -18,8 +18,8 @@ Future<void> appPumpAppHelper({
   _registerHomeBloc(mockFaqRepository);
   _registerDiscountBloc(
     mockDiscountRepository: mockDiscountRepository,
-    mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-    mockReportRepository: mockReportRepository,
+    // mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+    // mockReportRepository: mockReportRepository,
     mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
   );
   _registerDiscountLinkCubit(
@@ -33,8 +33,8 @@ Future<void> appPumpAppHelper({
   );
   _registerInvestorsBloc(
     mockInvestorsReportisory: mockInvestorsReportisory,
-    mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-    mockReportRepository: mockReportRepository,
+    // mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+    // mockReportRepository: mockReportRepository,
   );
   _registerMobFaqBloc(mockFaqRepository);
   _registerDiscountConfigCubit(mockFirebaseRemoteConfigProvider);
@@ -100,14 +100,14 @@ void _registerDiscountUserEmailCubit({
 
 void _registerDiscountBloc({
   required IDiscountRepository mockDiscountRepository,
-  required IAppAuthenticationRepository mockAppAuthenticationRepository,
-  required IReportRepository mockReportRepository,
+  // required IAppAuthenticationRepository mockAppAuthenticationRepository,
+  // required IReportRepository mockReportRepository,
   required FirebaseRemoteConfigProvider mockFirebaseRemoteConfigProvider,
 }) {
   final discountBloc = DiscountWatcherBloc(
     discountRepository: mockDiscountRepository,
-    reportRepository: mockReportRepository,
-    appAuthenticationRepository: mockAppAuthenticationRepository,
+    // reportRepository: mockReportRepository,
+    // appAuthenticationRepository: mockAppAuthenticationRepository,
     firebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
   );
   if (GetIt.I.isRegistered<DiscountWatcherBloc>()) {
@@ -118,13 +118,13 @@ void _registerDiscountBloc({
 
 void _registerInvestorsBloc({
   required IInvestorsRepository mockInvestorsReportisory,
-  required IAppAuthenticationRepository mockAppAuthenticationRepository,
-  required IReportRepository mockReportRepository,
+  // required IAppAuthenticationRepository mockAppAuthenticationRepository,
+  // required IReportRepository mockReportRepository,
 }) {
   final investorsBloc = InvestorsWatcherBloc(
     investorsRepository: mockInvestorsReportisory,
-    reportRepository: mockReportRepository,
-    appAuthenticationRepository: mockAppAuthenticationRepository,
+    // reportRepository: mockReportRepository,
+    // appAuthenticationRepository: mockAppAuthenticationRepository,
   );
   if (GetIt.I.isRegistered<InvestorsWatcherBloc>()) {
     GetIt.I.unregister<InvestorsWatcherBloc>();
