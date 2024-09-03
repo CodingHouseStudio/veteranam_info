@@ -86,3 +86,19 @@ extension PhoneNumberFieldModelValidationErrorEmpl
     }
   }
 }
+
+extension ReportFieldModelValidationErrorEmpl
+    on ReportFieldModelValidationError? {
+  String? value(BuildContext context) {
+    switch (this) {
+      case ReportFieldModelValidationError.empty:
+        return context.l10n.fieldCannotBeEmpty;
+      // case ReportFieldModelValidationError.invalid:
+      //   return context.l10n.isWrongReport;
+      case ReportFieldModelValidationError.invalidLength:
+        return '${context.l10n.message} ${context.l10n.tooshort}';
+      case null:
+        return null;
+    }
+  }
+}
