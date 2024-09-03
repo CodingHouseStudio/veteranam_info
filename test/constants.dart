@@ -360,7 +360,7 @@ abstract class KTestText {
         id: i.toString(),
         reasonComplaint: ReasonComplaint.fraudOrSpam,
         // email: userEmail,
-        message: field,
+        message: field + field + field + field,
         date: dateTime,
         card: CardEnum.discount,
         userId: user.id,
