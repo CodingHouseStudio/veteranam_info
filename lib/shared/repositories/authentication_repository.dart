@@ -154,6 +154,7 @@ class AuthenticationRepository {
 
   Future<Either<SomeFailure, bool>> _logInAnonymously() async {
     final result = await iAppAuthenticationRepository.logInAnonymously();
+    unawaited(_createFcmUserSetting());
     return result.fold(
       (l) {
         // debugPrint('error: $l');

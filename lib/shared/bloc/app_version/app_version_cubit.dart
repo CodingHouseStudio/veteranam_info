@@ -28,13 +28,13 @@ class AppVersionCubit extends Cubit<AppVersionState> {
 
   Future<void> started() async {
     final buildInfo = await _buildRepository.getBuildInfo();
-    final mobLastBuild =
+    final mobAppVersion =
         _firebaseRemoteConfigProvider.getString(mobAppVersionKey);
     emit(
       AppVersionState(
         build: buildInfo,
         mobHasNewBuild:
-            KTest.testReleaseMode && buildInfo.buildNumber != mobLastBuild,
+            KTest.testReleaseMode && buildInfo.version != mobAppVersion,
       ),
     );
   }
