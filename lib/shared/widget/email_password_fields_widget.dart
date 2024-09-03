@@ -56,7 +56,8 @@ class _EmailPasswordFieldsWidgetState extends State<EmailPasswordFieldsWidget>
       children: [
         if (widget.showPassword)
           Padding(
-            padding: const EdgeInsets.only(top: KPadding.kPaddingSize16),
+            padding: const EdgeInsets.only(
+                top: KPadding.kPaddingSize16, bottom: KPadding.kPaddingSize16),
             child: ButtonWidget(
               key: KWidgetkeys.widget.emailPasswordFields.buttonHidePassword,
               onPressed: () {
@@ -76,22 +77,23 @@ class _EmailPasswordFieldsWidgetState extends State<EmailPasswordFieldsWidget>
               // backgroundColor: AppColors.white,
               icon: KIcon.trailing,
               iconRightMerge: KSizedBox.kWidthSizedBox8,
-              textStyle:
-                  widget.isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
+              textStyle: widget.isDesk
+                  ? AppTextStyle.materialThemeTitleMedium
+                  : AppTextStyle.text16,
             ),
           ),
-        KSizedBox.kHeightSizedBox40,
-        Text(
-          widget.showPassword ? context.l10n.password : context.l10n.fullEmail,
-          key: widget.showPassword
-              ? KWidgetkeys.widget.emailPasswordFields.textPassword
-              : KWidgetkeys.widget.emailPasswordFields.textEmail,
-          style: widget.isDesk ? AppTextStyle.text40 : AppTextStyle.text24,
-        ),
-        if (widget.isDesk)
-          KSizedBox.kHeightSizedBox24
-        else
-          KSizedBox.kHeightSizedBox8,
+        //KSizedBox.kHeightSizedBox40,
+        // Text(
+        //   widget.showPassword ? context.l10n.password : context.l10n.fullEmail,
+        //   key: widget.showPassword
+        //       ? KWidgetkeys.widget.emailPasswordFields.textPassword
+        //       : KWidgetkeys.widget.emailPasswordFields.textEmail,
+        //   style: widget.isDesk ? AppTextStyle.text40 : AppTextStyle.text24,
+        // ),
+        // if (widget.isDesk)
+        //   KSizedBox.kHeightSizedBox24
+        // else
+        //   KSizedBox.kHeightSizedBox8,
         if (widget.showPassword)
           TextFieldWidget(
             widgetKey: KWidgetkeys.widget.emailPasswordFields.fieldPassword,
@@ -123,7 +125,7 @@ class _EmailPasswordFieldsWidgetState extends State<EmailPasswordFieldsWidget>
             widgetKey: KWidgetkeys.widget.emailPasswordFields.fieldEmail,
             onChanged: widget.onChangedEmail,
             errorText: widget.errorTextEmail,
-            hintText: context.l10n.writeYourEmail,
+            hintText: context.l10n.email,
             isDesk: widget.isDesk,
             controller: emailController,
           ),
