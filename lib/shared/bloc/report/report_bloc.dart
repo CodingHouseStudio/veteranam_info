@@ -69,10 +69,10 @@ class ReportBloc extends Bloc<ReportEvent, ReportState> {
     _MessageUpdated event,
     Emitter<ReportState> emit,
   ) {
-    final messageFieldModel = MessageFieldModel.dirty(event.message);
+    final reportFieldModel = ReportFieldModel.dirty(event.message);
     emit(
       state.copyWith(
-        message: messageFieldModel,
+        message: reportFieldModel,
         formState: ReportEnum.nextInProgress,
         failure: null,
       ),
@@ -113,6 +113,16 @@ class ReportBloc extends Bloc<ReportEvent, ReportState> {
     //         (state.message == null || state.message!.isNotValid) &&
     //             state.reasonComplaint == ReasonComplaint.other)
     // ) {
+    if (state.reasonComplaint == ReasonComplaint.other &&
+        (state.message?.isNotValid ?? true)) {
+      emit(
+        state.copyWith(
+          failure: null,
+          formState: ReportEnum.nextInvalidData,
+        ),
+      );
+      return;
+    }
     emit(
       state.copyWith(
         failure: null,

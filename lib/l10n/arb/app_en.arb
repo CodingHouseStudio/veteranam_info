@@ -200,6 +200,10 @@
   "@isWrongEmail": {
     "examples": "Error text for the email field if its value is incorrect."
   },
+  "isWrongReport": "The message should contain only letters",
+  "@isWrongReport": {
+    "examples": "Error text for the message field in the Report dialog, if the value is incorrect."
+  },
   "logOut": " Log out",
   "@logOut": {
     "examples": "Text for the button on the Profile page.",
@@ -683,6 +687,10 @@
   "aMessage": "a message",
   "@aMessage": {
     "examples": "The text of the title part of the Feedback page."
+  },
+  "message": "Message",
+  "@Message": {
+    "examples": "Error text for the Report dialog when the message is too short."
   },
   "us": "us",
   "@us": {
