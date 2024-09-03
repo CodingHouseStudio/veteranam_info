@@ -76,6 +76,10 @@ void main() {
           email: EmailFieldModel.pure(),
           formState: EmailEnum.success,
         ),
+        const DiscountUserEmailFormState(
+          email: EmailFieldModel.pure(),
+          formState: EmailEnum.initial,
+        ),
       ],
     );
 
@@ -140,6 +144,10 @@ void main() {
         const DiscountUserEmailFormState(
           email: EmailFieldModel.pure(),
           formState: EmailEnum.success,
+        ),
+        const DiscountUserEmailFormState(
+          email: EmailFieldModel.pure(),
+          formState: EmailEnum.initial,
         ),
       ],
     );
