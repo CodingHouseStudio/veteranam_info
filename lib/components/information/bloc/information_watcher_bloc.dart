@@ -67,7 +67,7 @@ class InformationWatcherBloc
           // reportItems: reportItems,
         ),
       ),
-      onError: (Object error, StackTrace stack) {
+      onError: (dynamic error, StackTrace stack) {
         // debugPrint('error is $error');
         add(InformationWatcherEvent.failure(error: error, stack: stack));
       },
