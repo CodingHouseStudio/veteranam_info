@@ -73,6 +73,20 @@ void main() {
         tester: tester,
       );
     });
+
+    testWidgets('${KGroupText.offlineNetwork} ', (tester) async {
+      await networkMobHelper(
+        tester: tester,
+        pumpApp: () async => mobSettingsPumpAppHelper(
+          //mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          // mockInvestorsRepository: mockInvestorsRepository,
+          mockFeedbackRepository: mockFeedbackRepository,
+          mockBuildRepository: mockBuildRepository,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          tester: tester,
+        ),
+      );
+    });
     group('${KGroupText.goRouter} ', () {
       late MockGoRouter mockGoRouter;
       setUp(() => mockGoRouter = MockGoRouter());

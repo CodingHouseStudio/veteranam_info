@@ -208,20 +208,6 @@ void main() {
         verify(mockFaqRepository.getQuestions()).called(2);
       });
 
-      testWidgets('${KGroupText.offlineNetwork} ', (tester) async {
-        await networkMobHelper(
-          tester: tester,
-          pumpApp: () async => homePumpAppHelper(
-            //mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-            // mockInvestorsRepository: mockInvestorsRepository,
-            mockFaqRepository: mockFaqRepository,
-            mockAuthenticationRepository: mockAuthenticationRepository,
-            mockUrlRepository: mockUrlRepository,
-            tester: tester, mockBuildRepository: mockBuildRepository,
-          ),
-        );
-      });
-
       group('${KGroupText.goRouter} ', () {
         late MockGoRouter mockGoRouter;
         setUp(() => mockGoRouter = MockGoRouter());

@@ -68,6 +68,7 @@ class ScaffoldWidget extends StatelessWidget {
               ),
             );
           }
+
           final scaffold = FocusTraversalGroup(
             // policy: WidgetOrderTraversalPolicy(),
             child: Semantics(
@@ -82,6 +83,7 @@ class ScaffoldWidget extends StatelessWidget {
                 appBar: AppBar(
                   backgroundColor: AppColors.materialThemeWhite,
                   toolbarHeight: KSize.kAppBarHeight,
+                  //title: KIcon.noInternet,
                 ),
                 body: KeyboardScrollView(
                   widgetKey: KWidgetkeys.widget.scaffold.scroll,

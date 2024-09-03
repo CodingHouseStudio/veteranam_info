@@ -8,14 +8,14 @@ class NetworkStatusBanner extends SliverPersistentHeaderDelegate {
   final NetworkStatus networkStatus;
 
   @override
-  double get maxExtent => KSize.kFont30;
+  double get maxExtent => KSize.kPixel36;
 
   @override
-  double get minExtent => KSize.kFont30;
+  double get minExtent => KSize.kPixel36;
 
   @override
   bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) =>
-      true;
+      false;
 
   @override
   Widget build(
@@ -25,7 +25,7 @@ class NetworkStatusBanner extends SliverPersistentHeaderDelegate {
   ) {
     return AnimatedOpacity(
       opacity:
-          shrinkOffset < KSize.kFont20 ? (1 - shrinkOffset / maxExtent) : 0,
+          shrinkOffset < KSize.kPixel24 ? (1 - shrinkOffset / maxExtent) : 0,
       duration: const Duration(milliseconds: 500),
       child: _NetworkStatusBannerImplamentation(networkStatus: networkStatus),
     );
@@ -50,13 +50,12 @@ class _NetworkStatusBannerImplamentation extends StatelessWidget {
             key: KWidgetkeys.widget.networkBanner.iconNoInternet,
           ),
           KSizedBox.kWidthSizedBox10,
-          Flexible(
-            child: Text(
-              context.l10n.noInternet,
-              style: AppTextStyle.materialThemeLabelLarge.copyWith(
-                color: AppColors.materialThemeSysLightError,
-              ),
+          Text(
+            context.l10n.noInternet,
+            style: AppTextStyle.materialThemeLabelLarge.copyWith(
+              color: AppColors.materialThemeSysLightError,
             ),
+            textAlign: TextAlign.center,
           ),
         ],
       ),

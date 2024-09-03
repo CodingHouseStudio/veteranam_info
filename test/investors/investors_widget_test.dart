@@ -214,20 +214,6 @@ void main() {
         ).called(2);
       });
 
-      testWidgets('${KGroupText.offlineNetwork} ', (tester) async {
-        await networkMobHelper(
-          tester: tester,
-          pumpApp: () async => investorsPumpAppHelper(
-            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-            mockInvestorsRepository: mockInvestorsRepository,
-            mockReportRepository: mockReportRepository,
-            mockAuthenticationRepository: mockAuthenticationRepository,
-            mockUrlRepository: mockUrlRepository,
-            tester: tester,
-          ),
-        );
-      });
-
       loadingList(
         (tester) async => investorsPumpAppHelper(
           mockAppAuthenticationRepository: mockAppAuthenticationRepository,
