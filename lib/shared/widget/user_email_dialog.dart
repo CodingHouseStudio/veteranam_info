@@ -204,7 +204,7 @@ class _UserEmailDialogState extends State<UserEmailDialog> {
         isDesk: widget.isDesk,
         onPressed: widget.sendOnPressed,
         widgetKey: KWidgetkeys.widget.userEmailDialog.button,
-        useBlackStyle: true,
+        darkMode: true,
         hasAlign: widget.isDesk,
         mobTextWidth: double.infinity,
         mobVerticalTextPadding: KPadding.kPaddingSize16,

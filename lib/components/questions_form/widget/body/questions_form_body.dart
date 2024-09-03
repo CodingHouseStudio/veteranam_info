@@ -19,8 +19,8 @@ class _QuestionsFormBodyState extends State<QuestionsFormBody> {
 
   @override
   Widget build(BuildContext context) {
-    return LeftCardWidget(
-      widgetListFunction: ({required isDesk}) => [
+    return ScaffoldDecorationWidget(
+      mainChildWidgetsFunction: ({required isDesk}) => [
         Text(
           context.l10n.fillInForm,
           key: KWidgetkeys.screen.questionsForm.title,

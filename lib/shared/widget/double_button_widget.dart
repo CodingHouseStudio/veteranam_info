@@ -18,7 +18,7 @@ class DoubleButtonWidget extends StatelessWidget {
     this.mobIconPadding,
     this.align,
     this.mobHorizontalTextPadding,
-    this.useBlackStyle,
+    this.darkMode,
   });
   final String text;
   final Color? color;
@@ -32,7 +32,7 @@ class DoubleButtonWidget extends StatelessWidget {
   final double? mobTextWidth;
   final double? mobIconPadding;
   final Alignment? align;
-  final bool? useBlackStyle;
+  final bool? darkMode;
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +53,7 @@ class DoubleButtonWidget extends StatelessWidget {
           color: color,
           textColor: textColor,
           widgetKey: widgetKey,
-          useBlackStyle: useBlackStyle,
+          useBlackStyle: darkMode,
         )
       : _DoubleButtonWidgetMob(
           text: text,
@@ -65,7 +65,7 @@ class DoubleButtonWidget extends StatelessWidget {
           horizontalTextPadding: mobHorizontalTextPadding,
           textWidth: mobTextWidth,
           iconPadding: mobIconPadding,
-          useBlackStyle: useBlackStyle,
+          useBlackStyle: darkMode,
         );
 }
 

@@ -62,7 +62,7 @@ List<Widget> _feedbackBoxWidgetList({
                             isDesk: true,
                             onPressed: () => _navMain(context),
                             align: Alignment.center,
-                            useBlackStyle: true,
+                            darkMode: true,
                           ),
                           KSizedBox.kWidthSizedBox24,
                           TextButton(
@@ -102,7 +102,7 @@ List<Widget> _feedbackBoxWidgetList({
               text: context.l10n.toTheMainPage,
               isDesk: false,
               onPressed: () => _navMain(context),
-              useBlackStyle: true,
+              darkMode: true,
               mobTextWidth: double.infinity,
               mobVerticalTextPadding: KPadding.kPaddingSize16,
               mobIconPadding: KPadding.kPaddingSize16,

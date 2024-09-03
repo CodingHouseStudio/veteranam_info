@@ -112,7 +112,7 @@ class MobSettingsBodyWidget extends StatelessWidget {
             widgetKey: KWidgetkeys.screen.mobSettings.feedbackButton,
             text: context.l10n.contact,
             onPressed: () => context.goNamed(KRoute.feedback.name),
-            useBlackStyle: true,
+            darkMode: true,
             mobVerticalTextPadding: KPadding.kPaddingSize12,
             mobIconPadding: KPadding.kPaddingSize12,
             mobHorizontalTextPadding: KPadding.kPaddingSize64,

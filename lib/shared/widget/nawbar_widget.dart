@@ -278,7 +278,7 @@ class _NawbarWidgetImplematationState
                           onPressed: () => loginNavigation(context),
                           text: context.l10n.login,
                           isDesk: true,
-                          useBlackStyle: true,
+                          darkMode: true,
                         ),
                       ] else if (!isFocused) ...[
                         KSizedBox.kWidthSizedBox4,

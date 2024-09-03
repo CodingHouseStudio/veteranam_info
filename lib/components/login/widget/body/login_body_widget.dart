@@ -14,9 +14,9 @@ class LoginBodyWidget extends StatelessWidget {
         state.failure?.value(context),
       ),
       builder: (context, _) {
-        return LeftCardWidget(
+        return ScaffoldDecorationWidget(
           key: KWidgetkeys.screen.login.card,
-          widgetListFunction: ({required isDesk}) => [
+          mainChildWidgetsFunction: ({required isDesk}) => [
             Align(
               alignment: isDesk ? Alignment.centerLeft : Alignment.center,
               child: Text(
