@@ -12,11 +12,11 @@ class InvestorsWatcherBloc
     extends Bloc<InvestorsWatcherEvent, InvestorsWatcherState> {
   InvestorsWatcherBloc({
     required IInvestorsRepository investorsRepository,
-    required IReportRepository reportRepository,
-    required IAppAuthenticationRepository appAuthenticationRepository,
+    // required IReportRepository reportRepository,
+    // required IAppAuthenticationRepository appAuthenticationRepository,
   })  : _investorsRepository = investorsRepository,
-        _reportRepository = reportRepository,
-        _appAuthenticationRepository = appAuthenticationRepository,
+        // _reportRepository = reportRepository,
+        // _appAuthenticationRepository = appAuthenticationRepository,
         super(
           const InvestorsWatcherState(
             fundItems: [],
@@ -32,19 +32,19 @@ class InvestorsWatcherBloc
     // on<_GetReport>(_onGetReport);
   }
   final IInvestorsRepository _investorsRepository;
-  final IReportRepository _reportRepository;
-  final IAppAuthenticationRepository _appAuthenticationRepository;
+  // final IReportRepository _reportRepository;
+  // final IAppAuthenticationRepository _appAuthenticationRepository;
   Future<void> _onStarted(
     _Started event,
     Emitter<InvestorsWatcherState> emit,
   ) async {
     emit(state.copyWith(loadingStatus: LoadingStatus.loading));
 
-    final reportItems = await _getReport();
+    // final reportItems = await _getReport();
 
     final result = await _investorsRepository.getFunds(
-      reportIdItems: reportItems?.getIdCard,
-    );
+        // reportIdItems: reportItems?.getIdCard,
+        );
     result.fold(
       (l) => emit(
         state.copyWith(
@@ -66,7 +66,7 @@ class InvestorsWatcherBloc
             loadingFundItems: _filter(
               itemsLoaded: state.itemsLoaded,
               loadItems: KDimensions.investorsLoadItems,
-              reportItems: reportItems,
+              // reportItems: reportItems,
               list: r,
             ),
             itemsLoaded: KDimensions.investorsLoadItems,
@@ -132,22 +132,22 @@ class InvestorsWatcherBloc
   //   );
   // }
 
-  Future<List<ReportModel>?> _getReport() async {
-    final reportItems = await _reportRepository.getCardReportById(
-      cardEnum: CardEnum.funds,
-      userId: _appAuthenticationRepository.currentUser.id,
-    );
-    return reportItems.fold(
-      (l) => null,
-      (r) => r.isEmpty ? null : r,
-    );
-  }
+  // Future<List<ReportModel>?> _getReport() async {
+  //   final reportItems = await _reportRepository.getCardReportById(
+  //     cardEnum: CardEnum.funds,
+  //     userId: _appAuthenticationRepository.currentUser.id,
+  //   );
+  //   return reportItems.fold(
+  //     (l) => null,
+  //     (r) => r.isEmpty ? null : r,
+  //   );
+  // }
 
   List<FundModel> _filter({
     required int itemsLoaded,
     required int? loadItems,
     List<FundModel>? list,
-    List<ReportModel>? reportItems,
+    // List<ReportModel>? reportItems,
   }) {
     // final reportItemsValue = reportItems ?? state.reportItems;
     return (list ?? state.fundItems)
