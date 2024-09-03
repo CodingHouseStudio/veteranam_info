@@ -71,6 +71,13 @@ class DiscountUserEmailFormBloc
       unawaited(_discountRepository.sendEmail(discountUserEmailFormModel));
 
       _firebaseAnalyticsService.addEvent(name: 'discount_email_acquire');
+
+      emit(
+        const _Initial(
+          email: EmailFieldModel.pure(),
+          formState: EmailEnum.initial,
+        ),
+      );
     } else {
       emit(state.copyWith(formState: EmailEnum.invalidData));
     }
@@ -83,7 +90,7 @@ class DiscountUserEmailFormBloc
     emit(
       const _Initial(
         email: EmailFieldModel.pure(),
-        formState: EmailEnum.close,
+        formState: EmailEnum.initial,
       ),
     );
 
