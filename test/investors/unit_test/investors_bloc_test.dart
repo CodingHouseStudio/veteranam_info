@@ -19,34 +19,34 @@ void main() {
   group('${KScreenBlocName.investors} ${KGroupText.bloc}', () {
     late InvestorsWatcherBloc investorsWatcherBloc;
     late IInvestorsRepository mockInvestorsRepository;
-    late IAppAuthenticationRepository mockAppAuthenticationRepository;
-    late IReportRepository mockReportRepository;
+    // late IAppAuthenticationRepository mockAppAuthenticationRepository;
+    // late IReportRepository mockReportRepository;
     setUp(() {
       mockInvestorsRepository = MockIInvestorsRepository();
-      mockAppAuthenticationRepository = MockIAppAuthenticationRepository();
-      mockReportRepository = MockIReportRepository();
+      // mockAppAuthenticationRepository = MockIAppAuthenticationRepository();
+      // mockReportRepository = MockIReportRepository();
       when(
         mockInvestorsRepository.getFunds(
-          reportIdItems: KTestText.reportItems.getIdCard,
-        ),
+            // reportIdItems: KTestText.reportItems.getIdCard,
+            ),
       ).thenAnswer(
         (_) async => Right(KTestText.fundItems),
       );
-      when(mockAppAuthenticationRepository.currentUser).thenAnswer(
-        (invocation) => KTestText.user,
-      );
-      when(
-        mockReportRepository.getCardReportById(
-          cardEnum: CardEnum.funds,
-          userId: KTestText.user.id,
-        ),
-      ).thenAnswer(
-        (invocation) async => Right(KTestText.reportItems),
-      );
+      // when(mockAppAuthenticationRepository.currentUser).thenAnswer(
+      //   (invocation) => KTestText.user,
+      // );
+      // when(
+      //   mockReportRepository.getCardReportById(
+      //     cardEnum: CardEnum.funds,
+      //     userId: KTestText.user.id,
+      //   ),
+      // ).thenAnswer(
+      //   (invocation) async => Right(KTestText.reportItems),
+      // );
       investorsWatcherBloc = InvestorsWatcherBloc(
         investorsRepository: mockInvestorsRepository,
-        reportRepository: mockReportRepository,
-        appAuthenticationRepository: mockAppAuthenticationRepository,
+        // reportRepository: mockReportRepository,
+        // appAuthenticationRepository: mockAppAuthenticationRepository,
       );
     });
 
@@ -72,8 +72,8 @@ void main() {
       act: (bloc) async {
         when(
           mockInvestorsRepository.getFunds(
-            reportIdItems: KTestText.reportItems.getIdCard,
-          ),
+              // reportIdItems: KTestText.reportItems.getIdCard,
+              ),
         ).thenAnswer(
           (_) async => Left(SomeFailure.serverError(error: null)),
         );
@@ -109,14 +109,14 @@ void main() {
         bloc.add(
           const InvestorsWatcherEvent.loadNextItems(),
         );
-        when(
-          mockReportRepository.getCardReportById(
-            cardEnum: CardEnum.funds,
-            userId: KTestText.user.id,
-          ),
-        ).thenAnswer(
-          (invocation) async => Right([KTestText.reportItems.first]),
-        );
+        // when(
+        //   mockReportRepository.getCardReportById(
+        //     cardEnum: CardEnum.funds,
+        //     userId: KTestText.user.id,
+        //   ),
+        // ).thenAnswer(
+        //   (invocation) async => Right([KTestText.reportItems.first]),
+        // );
         // bloc.add(
         //   const InvestorsWatcherEvent.getReport(),
         // );
@@ -163,18 +163,18 @@ void main() {
       ' when get report failure and load nex with listLoadedFull',
       build: () => investorsWatcherBloc,
       act: (bloc) async {
-        when(
-          mockReportRepository.getCardReportById(
-            cardEnum: CardEnum.funds,
-            userId: KTestText.user.id,
-          ),
-        ).thenAnswer(
-          (invocation) async => Left(
-            SomeFailure.serverError(
-              error: null,
-            ),
-          ),
-        );
+        // when(
+        //   mockReportRepository.getCardReportById(
+        //     cardEnum: CardEnum.funds,
+        //     userId: KTestText.user.id,
+        //   ),
+        // ).thenAnswer(
+        //   (invocation) async => Left(
+        //     SomeFailure.serverError(
+        //       error: null,
+        //     ),
+        //   ),
+        // );
         when(
           mockInvestorsRepository.getFunds(),
         ).thenAnswer(

@@ -98,7 +98,7 @@ class DiscountUserEmailFormBloc
     unawaited(_discountRepository.sendEmail(discountUserEmailFormModel));
 
     _firebaseAnalyticsService.addEvent(
-      name: event.userEmailEnum.name,
+      name: event.userEmailEnum.text,
       parameters: {
         'count': event.count.toString(),
       },

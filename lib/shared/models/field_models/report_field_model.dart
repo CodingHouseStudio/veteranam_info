@@ -20,7 +20,7 @@ class ReportFieldModel
     if (value.trim().isEmpty) {
       return ReportFieldModelValidationError.empty;
     }
-    if (value.replaceAll(' ', '').length <= 5) {
+    if (value.length <= 15) {
       return ReportFieldModelValidationError.invalidLength;
     }
     // if (value.contains(RegExp(r'[^a-zA-Z0-9\s]')) ||
