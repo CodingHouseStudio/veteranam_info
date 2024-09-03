@@ -102,7 +102,7 @@ void main() {
         ),
         const DiscountUserEmailFormState(
           email: EmailFieldModel.pure(),
-          formState: EmailEnum.close,
+          formState: EmailEnum.initial,
         ),
       ],
     );
