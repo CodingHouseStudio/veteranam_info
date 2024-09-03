@@ -4,8 +4,4 @@ abstract class IAppNetworkRepository {
   Stream<List<ConnectivityResult>> get connectivityResults;
 
   List<ConnectivityResult> get currentConnectivityResults;
-
-  Future<bool> isSlow();
-
-  bool isSlowSync();
 }

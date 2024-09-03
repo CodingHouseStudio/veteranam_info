@@ -56,48 +56,4 @@ class AppNetworkRepository implements IAppNetworkRepository {
     final connectivityResults = currentConnectivityResults.isEmpty;
   }
 
-  /// Checks if the internet connection is slow based on a threshold for
-  /// response time.
-  bool _isSlowCached = false;
-  DateTime _lastSpeedCheckTime = DateTime.fromMillisecondsSinceEpoch(0);
-
-  // Check for slow connection and cache the result.
-  @override
-  Future<bool> isSlow() async {
-    const slowThreshold = Duration(milliseconds: 300);
-    const cacheDuration = Duration(seconds: 30); // Cache result for 30 seconds
-
-    final currentTime = DateTime.now();
-    if (currentTime.difference(_lastSpeedCheckTime) < cacheDuration) {
-      return _isSlowCached;
-    }
-
-    try {
-      final stopwatch = Stopwatch()..start();
-      await InternetAddress.lookup('example.com');
-      stopwatch.stop();
-      _isSlowCached = stopwatch.elapsed > slowThreshold;
-    } catch (_) {
-      _isSlowCached = false;
-    }
-
-    _lastSpeedCheckTime = currentTime;
-    return _isSlowCached;
-  }
-
-  // Synchronous check using the cached result.
-  @override
-  bool isSlowSync() {
-    const cacheDuration =
-        Duration(seconds: 30); // Same cache duration as async check
-    final currentTime = DateTime.now();
-
-    // If the cache is still valid, return the cached value.
-    if (currentTime.difference(_lastSpeedCheckTime) < cacheDuration) {
-      return _isSlowCached;
-    }
-
-    // If the cache is outdated, return false
-    return false;
-  }
 }

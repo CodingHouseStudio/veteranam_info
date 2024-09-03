@@ -10172,26 +10172,6 @@ class MockIAppNetworkRepository extends _i1.Mock
         returnValue: <_i29.ConnectivityResult>[],
         returnValueForMissingStub: <_i29.ConnectivityResult>[],
       ) as List<_i29.ConnectivityResult>);
-
-  @override
-  _i8.Future<bool> isSlow() => (super.noSuchMethod(
-        Invocation.method(
-          #isSlow,
-          [],
-        ),
-        returnValue: _i8.Future<bool>.value(false),
-        returnValueForMissingStub: _i8.Future<bool>.value(false),
-      ) as _i8.Future<bool>);
-
-  @override
-  bool isSlowSync() => (super.noSuchMethod(
-        Invocation.method(
-          #isSlowSync,
-          [],
-        ),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
 }
 
 /// A class which mocks [Connectivity].
