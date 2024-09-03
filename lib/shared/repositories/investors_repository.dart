@@ -11,11 +11,15 @@ import 'package:veteranam/shared/shared.dart';
 class InvestorsRepository implements IInvestorsRepository {
   final FirestoreService _firestoreService = GetIt.I.get<FirestoreService>();
   @override
-  Future<Either<SomeFailure, List<FundModel>>> getFunds({
-    List<String>? reportIdItems,
-  }) async {
+  Future<Either<SomeFailure, List<FundModel>>> getFunds(
+      //   {
+      //   List<String>? reportIdItems,
+      // }
+      ) async {
     try {
-      final fundItems = await _firestoreService.getFunds(reportIdItems);
+      final fundItems = await _firestoreService.getFunds(
+          //reportIdItems
+          );
       return Right(fundItems);
     } on FirebaseException catch (e, stack) {
       return Left(GetFailur.fromCode(error: e, stack: stack).status);

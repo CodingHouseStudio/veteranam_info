@@ -71,8 +71,8 @@ void main() {
       );
       when(
         mockDiscountRepository.getDiscountItems(
-          reportIdItems: KTestText.reportItems.getIdCard,
-        ),
+            // reportIdItems: KTestText.reportItems.getIdCard,
+            ),
       ).thenAnswer(
         (invocation) => Stream.value(KTestText.discountModelItemsModify),
       );
