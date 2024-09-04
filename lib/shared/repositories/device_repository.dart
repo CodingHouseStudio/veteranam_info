@@ -170,11 +170,12 @@ class DeviceRepository implements IDeviceRepository {
 
       // For apple platforms, ensure the APNS token is available before making
       // any FCM plugin API calls
-      final apnsToken = await _firebaseMessaging.getAPNSToken();
+      // final apnsToken = await _firebaseMessaging.getAPNSToken();
 
       if (notificationSettings.authorizationStatus ==
               AuthorizationStatus.authorized &&
-          (!platform.isIOS || apnsToken != null)) {
+          (!platform.isIOS //|| apnsToken != null
+          )) {
         fcmToken = await _firebaseMessaging.getToken(
           vapidKey: Config.isProduction
               ? KSecurityKeys.firebaseProdVapidKey

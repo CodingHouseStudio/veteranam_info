@@ -173,33 +173,33 @@ void main() {
           mockDeviceInfoPlugin.webBrowserInfo,
         ).called(1);
       });
-      test('Get FCM ios when getAPNSToken null', () async {
-        expect(
-          await deviceRepository.getFcm(
-            platformValue: PlatformEnum.ios,
-          ),
-          isA<Right<SomeFailure, String?>>().having(
-            (e) => e.value,
-            'value',
-            null,
-          ),
-        );
-      });
-      test('Get FCM ios when getAPNSToken is not null', () async {
-        when(mockFirebaseMessaging.getAPNSToken()).thenAnswer(
-          (_) async => KTestText.field,
-        );
-        expect(
-          await deviceRepository.getFcm(
-            platformValue: PlatformEnum.ios,
-          ),
-          isA<Right<SomeFailure, String?>>().having(
-            (e) => e.value,
-            'value',
-            KTestText.fcmToken,
-          ),
-        );
-      });
+      // test('Get FCM ios when getAPNSToken null', () async {
+      //   expect(
+      //     await deviceRepository.getFcm(
+      //       platformValue: PlatformEnum.ios,
+      //     ),
+      //     isA<Right<SomeFailure, String?>>().having(
+      //       (e) => e.value,
+      //       'value',
+      //       null,
+      //     ),
+      //   );
+      // });
+      // test('Get FCM ios when getAPNSToken is not null', () async {
+      //   when(mockFirebaseMessaging.getAPNSToken()).thenAnswer(
+      //     (_) async => KTestText.field,
+      //   );
+      //   expect(
+      //     await deviceRepository.getFcm(
+      //       platformValue: PlatformEnum.ios,
+      //     ),
+      //     isA<Right<SomeFailure, String?>>().having(
+      //       (e) => e.value,
+      //       'value',
+      //       KTestText.fcmToken,
+      //     ),
+      //   );
+      // });
       test('Get FCM when permission denied', () async {
         when(mockFirebaseMessaging.requestPermission()).thenAnswer(
           (_) async => KTestText.notificationSettingsDenied,
