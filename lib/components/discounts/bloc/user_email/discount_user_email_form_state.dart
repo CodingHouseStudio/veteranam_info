@@ -24,6 +24,8 @@ class DiscountUserEmailFormState with _$DiscountUserEmailFormState {
   const factory DiscountUserEmailFormState({
     required EmailFieldModel email,
     required EmailEnum formState,
+    required UserEmailEnum emailEnum,
+    // int? count,
     //DiscountUserEmailFormFailure? failure,
   }) = _Initial;
 }
@@ -33,4 +35,36 @@ enum EmailEnum {
   inProgress,
   success,
   invalidData, //close
+}
+
+enum UserEmailEnum {
+  initial(),
+  discountEmailNotShow(),
+  discountEmailAbandon(text: 'discount_email_abandon'),
+  discountEmailAbandonSecondary(text: 'discount_email_abandon_secondary'),
+  discountEmailAbandonRepeat(text: 'discount_email_abandon_repeat');
+
+  const UserEmailEnum({this.text});
+
+  final String? text;
+
+  static UserEmailEnum get(int count) {
+    if (count < 0) {
+      return UserEmailEnum.discountEmailNotShow;
+    }
+    switch (count) {
+      case 0:
+        return UserEmailEnum.discountEmailAbandon;
+      case 1:
+        return UserEmailEnum.discountEmailAbandonSecondary;
+      default:
+        return UserEmailEnum.discountEmailAbandonRepeat;
+    }
+  }
+
+  bool get show =>
+      this != UserEmailEnum.initial &&
+      this != UserEmailEnum.discountEmailNotShow;
+
+  bool get closeEnable => show && this == UserEmailEnum.discountEmailAbandon;
 }

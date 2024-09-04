@@ -13,6 +13,7 @@ Future<void> appPumpAppHelper({
   // required IReportRepository mockReportRepository,
   required IInvestorsRepository mockInvestorsReportisory,
   required FirebaseRemoteConfigProvider mockFirebaseRemoteConfigProvider,
+  required FirebaseAnalyticsService mockFirebaseAnalyticsService,
 }) async {
   _registerAuthenticationBloc(mockAuthenticationRepository);
   _registerHomeBloc(mockFaqRepository);
@@ -26,9 +27,10 @@ Future<void> appPumpAppHelper({
     mockDiscountRepository: mockDiscountRepository,
     mockAppAuthenticationRepository: mockAppAuthenticationRepository,
   );
-  _registerDiscountUserEmailCubit(
+  _registerDiscountUserEmailFormBloc(
     mockDiscountRepository: mockDiscountRepository,
     mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+    mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
     // mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
   );
   _registerInvestorsBloc(
@@ -82,20 +84,22 @@ void _registerDiscountLinkCubit({
   GetIt.I.registerSingleton<DiscountLinkCubit>(authenticationBloc);
 }
 
-void _registerDiscountUserEmailCubit({
+void _registerDiscountUserEmailFormBloc({
   required IDiscountRepository mockDiscountRepository,
   required IAppAuthenticationRepository mockAppAuthenticationRepository,
-  // required FirebaseRemoteConfigProvider mockFirebaseRemoteConfigProvider,
+  required FirebaseAnalyticsService mockFirebaseAnalyticsService,
 }) {
-  final authenticationBloc = DiscountUserEmailCubit(
+  final discountUserEmailFormBloc = DiscountUserEmailFormBloc(
     discountRepository: mockDiscountRepository,
     appAuthenticationRepository: mockAppAuthenticationRepository,
+    firebaseAnalyticsService: mockFirebaseAnalyticsService,
     // firebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
   );
-  if (GetIt.I.isRegistered<DiscountUserEmailCubit>()) {
-    GetIt.I.unregister<DiscountUserEmailCubit>();
+  if (GetIt.I.isRegistered<DiscountUserEmailFormBloc>()) {
+    GetIt.I.unregister<DiscountUserEmailFormBloc>();
   }
-  GetIt.I.registerSingleton<DiscountUserEmailCubit>(authenticationBloc);
+  GetIt.I
+      .registerSingleton<DiscountUserEmailFormBloc>(discountUserEmailFormBloc);
 }
 
 void _registerDiscountBloc({

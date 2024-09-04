@@ -278,11 +278,9 @@ class _DialogsWidget {
     BetterFeedback.of(context).show(context.onMobFeedback);
   }
 
-  void showUserEmailDialog({
-    required UserEmailEnum userEmailEnum,
-    required int? count,
-    required int emailCloseDelay,
-  }) {
+  void showUserEmailDialog(
+    int emailCloseDelay,
+  ) {
     final bloc = context.read<DiscountUserEmailFormBloc>();
     showDialog<bool>(
       context: context,
@@ -322,7 +320,8 @@ class _DialogsWidget {
                       context.read<DiscountUserEmailFormBloc>().add(
                             DiscountUserEmailFormEvent.updatedEmail(text),
                           ),
-                  userEmailEnum: userEmailEnum,
+                  userEmailEnum:
+                      context.read<DiscountUserEmailFormBloc>().state.emailEnum,
                   emailCloseDelay: emailCloseDelay,
                 ),
               );
@@ -330,17 +329,20 @@ class _DialogsWidget {
           ),
         );
       },
-    ).then((value) {
-      if (!context.mounted) return;
-      if (!(value ?? false)) {
-        context.read<DiscountUserEmailFormBloc>().add(
-              DiscountUserEmailFormEvent.sendEmailAfterClose(
-                userEmailEnum: userEmailEnum,
-                count: count,
-              ),
-            );
-      }
-    });
+    ).then(
+      context.emailDialogCloseEvent,
+      //   (value) {
+      //   if (!context.mounted) return;
+      //   if (!(value ?? false)) {
+      //     context.read<DiscountUserEmailFormBloc>().add(
+      //           DiscountUserEmailFormEvent.sendEmailAfterClose(
+      //             userEmailEnum: userEmailEnum,
+      //             count: count,
+      //           ),
+      //         );
+      //   }
+      // }
+    );
   }
 
   void showMobUpdateAppDialog({
