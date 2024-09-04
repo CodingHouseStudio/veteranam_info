@@ -28,8 +28,6 @@ import 'package:veteranam/components/discounts/bloc/link/discount_link_cubit.dar
     as _i227;
 import 'package:veteranam/components/discounts/bloc/link/discount_link_form_bloc.dart'
     as _i372;
-import 'package:veteranam/components/discounts/bloc/user_email/discount_user_email_cubit.dart'
-    as _i432;
 import 'package:veteranam/components/discounts/bloc/user_email/discount_user_email_form_bloc.dart'
     as _i441;
 import 'package:veteranam/components/discounts/bloc/watcher/discount_watcher_bloc.dart'
@@ -200,11 +198,6 @@ extension GetItInjectableX on _i174.GetIt {
               gh<_i1001.IAppAuthenticationRepository>(),
         ));
     gh.factory<_i372.DiscountLinkFormBloc>(() => _i372.DiscountLinkFormBloc(
-          discountRepository: gh<_i1001.IDiscountRepository>(),
-          appAuthenticationRepository:
-              gh<_i1001.IAppAuthenticationRepository>(),
-        ));
-    gh.factory<_i432.DiscountUserEmailCubit>(() => _i432.DiscountUserEmailCubit(
           discountRepository: gh<_i1001.IDiscountRepository>(),
           appAuthenticationRepository:
               gh<_i1001.IAppAuthenticationRepository>(),

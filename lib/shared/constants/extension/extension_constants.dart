@@ -251,6 +251,15 @@ extension ContextExtensions on BuildContext {
   //     read<UrlCubit>().copy(text);
 
   // void launchUrl(String? url) => read<UrlCubit>().launchUrl(url: url);
+  // ignore: avoid_positional_boolean_parameters
+  void emailDialogCloseEvent(bool? value) {
+    if (!mounted) return;
+    if (!(value ?? false)) {
+      read<DiscountUserEmailFormBloc>().add(
+        const DiscountUserEmailFormEvent.sendEmailAfterClose(),
+      );
+    }
+  }
 }
 
 extension DiscountEnumExtensions on DiscountEnum {

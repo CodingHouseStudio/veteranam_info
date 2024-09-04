@@ -330,7 +330,8 @@ void main() {
           );
 
           await reportDialogCorrectSaveHelper(
-            tester,
+            tester: tester,
+            mockGoRouter: mockGoRouter,
           );
         });
         group('${KGroupText.goTo} ', () {

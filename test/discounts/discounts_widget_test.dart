@@ -192,61 +192,6 @@ void main() {
 
         await reportDialogCheckFailureHelper(tester);
       });
-      testWidgets('Report Dialog Incorect Send', (tester) async {
-        await discountsPumpAppHelper(
-          tester: tester,
-          mockDiscountRepository: mockDiscountRepository,
-          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-          mockReportRepository: mockReportRepository,
-          mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
-          mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
-          mockBuildRepository: mockBuildRepository,
-          mockAuthenticationRepository: mockAuthenticationRepository,
-        );
-
-        await reportDialogIncorrectSendHelper(
-          tester: tester,
-        );
-      });
-      testWidgets('Report Dialog Incorect Send(field null and user)',
-          (tester) async {
-        when(mockAuthenticationRepository.isAnonymouslyOrEmty()).thenAnswer(
-          (realInvocation) => false,
-        );
-
-        await discountsPumpAppHelper(
-          tester: tester,
-          mockDiscountRepository: mockDiscountRepository,
-          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-          mockReportRepository: mockReportRepository,
-          mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
-          mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
-          mockBuildRepository: mockBuildRepository,
-          mockAuthenticationRepository: mockAuthenticationRepository,
-        );
-
-        await reportDialogIncorrectSendHelper(
-          tester: tester,
-          fieldNull: true,
-        );
-      });
-      testWidgets('Report Dialog Incorect Send(field null)', (tester) async {
-        await discountsPumpAppHelper(
-          tester: tester,
-          mockDiscountRepository: mockDiscountRepository,
-          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-          mockReportRepository: mockReportRepository,
-          mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
-          mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
-          mockBuildRepository: mockBuildRepository,
-          mockAuthenticationRepository: mockAuthenticationRepository,
-        );
-
-        await reportDialogIncorrectSendHelper(
-          tester: tester,
-          fieldNull: true,
-        );
-      });
       testWidgets('Notification Link Correct Send', (tester) async {
         await discountsPumpAppHelper(
           tester: tester,
@@ -347,6 +292,67 @@ void main() {
 
           await advancedFilterResetMobHelper(
             tester: tester,
+            mockGoRouter: mockGoRouter,
+          );
+        });
+        testWidgets('Report Dialog Incorect Send', (tester) async {
+          await discountsPumpAppHelper(
+            tester: tester,
+            mockDiscountRepository: mockDiscountRepository,
+            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+            mockReportRepository: mockReportRepository,
+            mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
+            mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
+            mockBuildRepository: mockBuildRepository,
+            mockAuthenticationRepository: mockAuthenticationRepository,
+            mockGoRouter: mockGoRouter,
+          );
+
+          await reportDialogIncorrectSendHelper(
+            tester: tester,
+            mockGoRouter: mockGoRouter,
+          );
+        });
+        testWidgets('Report Dialog Incorect Send(field null and user)',
+            (tester) async {
+          when(mockAuthenticationRepository.isAnonymouslyOrEmty()).thenAnswer(
+            (realInvocation) => false,
+          );
+
+          await discountsPumpAppHelper(
+            tester: tester,
+            mockDiscountRepository: mockDiscountRepository,
+            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+            mockReportRepository: mockReportRepository,
+            mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
+            mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
+            mockBuildRepository: mockBuildRepository,
+            mockAuthenticationRepository: mockAuthenticationRepository,
+            mockGoRouter: mockGoRouter,
+          );
+
+          await reportDialogIncorrectSendHelper(
+            tester: tester,
+            fieldNull: true,
+            mockGoRouter: mockGoRouter,
+          );
+        });
+        testWidgets('Report Dialog Incorect Send(field null)', (tester) async {
+          await discountsPumpAppHelper(
+            tester: tester,
+            mockDiscountRepository: mockDiscountRepository,
+            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+            mockReportRepository: mockReportRepository,
+            mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
+            mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
+            mockBuildRepository: mockBuildRepository,
+            mockAuthenticationRepository: mockAuthenticationRepository,
+            mockGoRouter: mockGoRouter,
+          );
+
+          await reportDialogIncorrectSendHelper(
+            tester: tester,
+            fieldNull: true,
             mockGoRouter: mockGoRouter,
           );
         });
