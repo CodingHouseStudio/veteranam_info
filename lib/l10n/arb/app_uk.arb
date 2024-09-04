@@ -228,7 +228,7 @@
   "@doYouHavenAccount": {
     "examples": "Текст на сторінці SignUp."
   },
-  "donotYouHavenAccount": "Створити аккаунт можно тут",
+  "donotYouHavenAccount": "Не маєте акаунт?",
   "@donotYouHavenAccount": {
     "examples": "Текст на сторінці Login."
   },
@@ -1084,5 +1084,9 @@
   "aboutNewDiscountsSubtitle": "Напишіть нам Ваш е-майл. Обіцяємо не слати спам!",
   "@aboutNewDiscountsSubtitle": {
     "examples": "Текст для підписки на розсилку знижок"
+  },
+  "dontRememberPassword": "Не пам'ятаю пароль",
+  "@dontRememberPassword": {
+    "examples": "Текст для кнопки відновлення паролю на сторінці Login"
   }
 }

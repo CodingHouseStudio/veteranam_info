@@ -11,20 +11,20 @@ Future<void> emailPasswordFieldsHelper({
       findsNothing,
     );
 
-    expect(
-      find.byKey(KWidgetkeys.widget.emailPasswordFields.textEmail),
-      findsNothing,
-    );
+    // expect(
+    //   find.byKey(KWidgetkeys.widget.emailPasswordFields.textEmail),
+    //   findsNothing,
+    // );
 
     expect(
       find.byKey(KWidgetkeys.widget.emailPasswordFields.fieldPassword),
       findsWidgets,
     );
 
-    expect(
-      find.byKey(KWidgetkeys.widget.emailPasswordFields.textPassword),
-      findsWidgets,
-    );
+    // expect(
+    //   find.byKey(KWidgetkeys.widget.emailPasswordFields.textPassword),
+    //   findsWidgets,
+    // );
 
     expect(
       find.byKey(KWidgetkeys.widget.emailPasswordFields.buttonHidePassword),
@@ -41,20 +41,20 @@ Future<void> emailPasswordFieldsHelper({
       findsWidgets,
     );
 
-    expect(
-      find.byKey(KWidgetkeys.widget.emailPasswordFields.textEmail),
-      findsWidgets,
-    );
+    // expect(
+    //   find.byKey(KWidgetkeys.widget.emailPasswordFields.textEmail),
+    //   findsWidgets,
+    // );
 
     expect(
       find.byKey(KWidgetkeys.widget.emailPasswordFields.fieldPassword),
       findsNothing,
     );
 
-    expect(
-      find.byKey(KWidgetkeys.widget.emailPasswordFields.textPassword),
-      findsNothing,
-    );
+    // expect(
+    //   find.byKey(KWidgetkeys.widget.emailPasswordFields.textPassword),
+    //   findsNothing,
+    //);
 
     expect(
       find.byKey(KWidgetkeys.widget.emailPasswordFields.buttonHidePassword),

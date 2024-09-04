@@ -17,7 +17,8 @@
 //         final isDesk =
 //             constraints.maxWidth > KPlatformConstants.minWidthThresholdDesk;
 //         final isTablet =
-//             constraints.maxWidth > KPlatformConstants.minWidthThresholdTablet;
+//             constraints.maxWidth > 
+// KPlatformConstants.minWidthThresholdTablet;
 //         final widgetList = widgetListFunction(isDesk: isDesk);
 //         return Scaffold(
 //           backgroundColor:
@@ -60,7 +61,8 @@
 //                               addAutomaticKeepAlives: false,
 //                               addRepaintBoundaries: false,
 //                               itemCount: widgetList.length,
-//                               itemBuilder: (BuildContext context, int index) =>
+//                               itemBuilder: (BuildContext context, 
+//int index) =>
 //                                   widgetList.elementAt(index),
 //                             ),
 //                           ),

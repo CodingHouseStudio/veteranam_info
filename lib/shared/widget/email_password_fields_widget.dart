@@ -33,13 +33,13 @@ class _EmailPasswordFieldsWidgetState extends State<EmailPasswordFieldsWidget>
   late TextEditingController emailController;
   late TextEditingController passwordController;
   bool obscurePassword = true;
-  late FocusNode focusNode;
+  late FocusNode passwordFocusNode;
 
   @override
   void initState() {
     emailController = TextEditingController();
     passwordController = TextEditingController();
-    focusNode = FocusNode();
+    passwordFocusNode = FocusNode();
     super.initState();
   }
 
@@ -57,34 +57,37 @@ class _EmailPasswordFieldsWidgetState extends State<EmailPasswordFieldsWidget>
         if (widget.showPassword)
           Padding(
             padding: const EdgeInsets.only(
-                top: KPadding.kPaddingSize16, bottom: KPadding.kPaddingSize16),
+              top: KPadding.kPaddingSize16,
+              bottom: KPadding.kPaddingSize16,
+            ),
             child: ButtonWidget(
               key: KWidgetkeys.widget.emailPasswordFields.buttonHidePassword,
               onPressed: () {
                 widget.backPassword();
-                focusNode.requestFocus();
+                passwordFocusNode.requestFocus();
               },
               text: widget.email,
               padding: widget.isDesk
-                  ? const EdgeInsets.symmetric(
-                      vertical: KPadding.kPaddingSize16,
-                      horizontal: KPadding.kPaddingSize32,
+                  ? const EdgeInsets.only(
+                      top: KPadding.kPaddingSize8,
+                      bottom: KPadding.kPaddingSize8,
+                      right: KPadding.kPaddingSize16,
+                      left: KPadding.kPaddingSize8,
                     )
                   : const EdgeInsets.all(
                       KPadding.kPaddingSize16,
                     ),
               isDesk: widget.isDesk,
               // backgroundColor: AppColors.white,
-              icon: KIcon.trailing,
+              icon: KIcon.arrowBackIOS,
               iconRightMerge: KSizedBox.kWidthSizedBox8,
-              textStyle: widget.isDesk
-                  ? AppTextStyle.materialThemeTitleMedium
-                  : AppTextStyle.text16,
+              textStyle: AppTextStyle.materialThemeTitleMedium,
             ),
           ),
         //KSizedBox.kHeightSizedBox40,
         // Text(
-        //   widget.showPassword ? context.l10n.password : context.l10n.fullEmail,
+        //   widget.showPassword ? context.l10n.password
+        //: context.l10n.fullEmail,
         //   key: widget.showPassword
         //       ? KWidgetkeys.widget.emailPasswordFields.textPassword
         //       : KWidgetkeys.widget.emailPasswordFields.textEmail,
@@ -94,7 +97,7 @@ class _EmailPasswordFieldsWidgetState extends State<EmailPasswordFieldsWidget>
         //   KSizedBox.kHeightSizedBox24
         // else
         //   KSizedBox.kHeightSizedBox8,
-        if (widget.showPassword)
+        if (widget.showPassword) ...[
           TextFieldWidget(
             widgetKey: KWidgetkeys.widget.emailPasswordFields.fieldPassword,
             onChanged: widget.onChangedPassword,
@@ -117,10 +120,28 @@ class _EmailPasswordFieldsWidgetState extends State<EmailPasswordFieldsWidget>
                     setState(() => obscurePassword = !obscurePassword),
               ),
             ),
-            focusNode: focusNode,
+            focusNode: passwordFocusNode,
+            disposeFocusNode: false,
             obscureText: obscurePassword,
-          )
-        else
+          ),
+          KSizedBox.kHeightSizedBox8,
+          Padding(
+            padding: const EdgeInsets.only(
+              left: KPadding.kPaddingSize32,
+            ),
+            child: TextButton(
+              key: KWidgetkeys.widget.emailPasswordFields.recoveryButton,
+              style: KButtonStyles.withoutStyle,
+              onPressed: null,
+              child: Text(
+                context.l10n.dontRememberPassword,
+                style: AppTextStyle.materialThemeTitleMedium.copyWith(
+                  decoration: TextDecoration.underline,
+                ),
+              ),
+            ),
+          ),
+        ] else
           TextFieldWidget(
             widgetKey: KWidgetkeys.widget.emailPasswordFields.fieldEmail,
             onChanged: widget.onChangedEmail,
@@ -138,6 +159,7 @@ class _EmailPasswordFieldsWidgetState extends State<EmailPasswordFieldsWidget>
   void dispose() {
     emailController.dispose();
     passwordController.dispose();
+    passwordFocusNode.dispose();
     super.dispose();
   }
 

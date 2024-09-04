@@ -267,10 +267,8 @@ class _NawbarWidgetImplematationState
                             context.dialog.showMobileMenuDialog(),
                       ),
                     if (context.read<AuthenticationBloc>().state.status !=
-                            AuthenticationStatus.authenticated
-                        //     &&
-                        // Config.isDevelopment
-                        ) ...[
+                            AuthenticationStatus.authenticated &&
+                        Config.isDevelopment) ...[
                       if (widget.isDesk) ...[
                         KSizedBox.kWidthSizedBox16,
                         DoubleButtonWidget(

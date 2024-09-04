@@ -270,6 +270,7 @@ abstract class KButtonStyles {
     ),
     foregroundColor:
         WidgetStatePropertyAll(AppColors.materialThemeKeyColorsSecondary),
+    alignment: Alignment.centerLeft,
   );
 
   static const filterButtonStyleBorder = ButtonStyle(
