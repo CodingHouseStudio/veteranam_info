@@ -29,13 +29,9 @@ List<Widget> discountsWidgetList({
   final finalList = <Widget>[];
   for (var i = 0; i < items.length; i++) {
     finalList.add(items[i]);
-    if ((i + 1) %
-                (KDimensions.loadItems *
-                    (context.read<DiscountConfigCubit>().state.linkScrollCount +
-                        1)) ==
-            0 &&
-        context.read<DiscountWatcherBloc>().state.loadingStatus !=
-            LoadingStatus.listLoadedFull) {
+    if ((context.read<DiscountConfigCubit>().state.linkScrollCount + 1) *
+            context.read<DiscountConfigCubit>().state.loadingItems ==
+        i + 1) {
       finalList.add(
         DiscountNotificationWidget(key: ValueKey(i), isDesk: isDesk),
       );
