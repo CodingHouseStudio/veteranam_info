@@ -1,9 +1,11 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
 
 import '../../../test_dependency.dart';
 
 Future<void> reportDialogIncorrectSendHelper({
   required WidgetTester tester,
+  required MockGoRouter mockGoRouter,
   bool fieldNull = false,
 }) async {
   await reportDialogOpenHelper(tester);
@@ -15,4 +17,6 @@ Future<void> reportDialogIncorrectSendHelper({
   );
 
   await reportDialogFieldHelper(tester);
+
+  verifyNever(() => mockGoRouter.pop());
 }

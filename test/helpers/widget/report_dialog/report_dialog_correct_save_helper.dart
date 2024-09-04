@@ -1,11 +1,13 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:veteranam/shared/shared.dart';
 
 import '../../../test_dependency.dart';
 
-Future<void> reportDialogCorrectSaveHelper(
-  WidgetTester tester,
-) async {
+Future<void> reportDialogCorrectSaveHelper({
+  required WidgetTester tester,
+  required MockGoRouter mockGoRouter,
+}) async {
   await changeWindowSizeHelper(
     tester: tester,
     test: () async {
@@ -20,6 +22,8 @@ Future<void> reportDialogCorrectSaveHelper(
 
       await tester.pumpAndSettle();
 
+      verify(() => mockGoRouter.pop()).called(1);
+
       // expect(
       //   find.byKey(KWidgetkeys.widget.reportDialog.cancel),
       //   findsNothing,
@@ -29,8 +33,10 @@ Future<void> reportDialogCorrectSaveHelper(
       await reportDialogEnterTextHelper(
         tester: tester,
         // email: KTestText.userEmail,
-        message: KTestText.field,
+        message: KTestText.reportItems.first.message,
       );
+
+      verify(() => mockGoRouter.pop()).called(1);
     },
   );
 }
