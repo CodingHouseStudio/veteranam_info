@@ -113,14 +113,14 @@ void main() {
       await networkMobHelper(
         tester: tester,
         pumpApp: () async => discountsPumpAppHelper(
-           tester: tester,
-        mockDiscountRepository: mockDiscountRepository,
-        mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-        mockReportRepository: mockReportRepository,
-        mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
-        mockAuthenticationRepository: mockAuthenticationRepository,
-        mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
-        mockBuildRepository: mockBuildRepository,
+          tester: tester,
+          mockDiscountRepository: mockDiscountRepository,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          mockReportRepository: mockReportRepository,
+          mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
+          mockAuthenticationRepository: mockAuthenticationRepository,
+          mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
+          mockBuildRepository: mockBuildRepository,
         ),
       );
     });
