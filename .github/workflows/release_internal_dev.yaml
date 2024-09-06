@@ -16,7 +16,7 @@ jobs:
   web_build:
     uses: CodingHouseStudio/flutter_workflows/.github/workflows/release_build.yml@main
     with:
-      flavour: "development"
+      FLAVOUR: "development"
   web_push:
     needs:
       - web_build
