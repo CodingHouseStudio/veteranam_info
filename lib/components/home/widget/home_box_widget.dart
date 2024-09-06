@@ -128,9 +128,7 @@ class HomeBoxWidget extends StatelessWidget {
           //           KSizedBox.kHeightSizedBox16,
           //           DoubleButtonWidget(
           //             widgetKey: KWidgetkeys.screen.home.boxButton,
-          //             text: context.l10n.detail,
-          //             textColor: AppColors.materialThemeWhite,
-          //             color: AppColors.materialThemeKeyColorsSecondary,
+          //             text: context.l10n.detail,useBlackStyle: true,
           //             onPressed: () => Scrollable.ensureVisible(
           //               aboutProjectKey.currentContext!,
           //               duration: const Duration(microseconds: 1000),
@@ -227,8 +225,7 @@ class HomeBoxWidget extends StatelessWidget {
     //                   child: DoubleButtonWidget(
     //                     widgetKey: KWidgetkeys.screen.home.boxButton,
     //                     text: context.l10n.detail,
-    //                     textColor: AppColors.materialThemeWhite,
-    //                     color: AppColors.materialThemeKeyColorsSecondary,
+    // useBlackStyle:true,
     //                     onPressed: () => Scrollable.ensureVisible(
     //                       aboutProjectKey.currentContext!,
     //                       duration: const Duration(microseconds: 1000),

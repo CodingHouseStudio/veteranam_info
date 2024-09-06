@@ -144,8 +144,7 @@ class ReportDialogWidget extends StatelessWidget {
               isDesk: isDesk,
               onPressed: () =>
                   context.read<ReportBloc>().add(ReportEvent.send(cardEnum)),
-              color: AppColors.materialThemeKeyColorsSecondary,
-              textColor: AppColors.materialThemeWhite,
+              darkMode: true,
               hasAlign: isDesk,
               mobTextWidth: double.infinity,
               mobVerticalTextPadding: KPadding.kPaddingSize16,

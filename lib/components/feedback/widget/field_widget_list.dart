@@ -111,7 +111,6 @@ List<Widget> _fieldWidgetList({
             context.read<FeedbackBloc>().add(const FeedbackEvent.save()),
         mobVerticalTextPadding: KPadding.kPaddingSize16,
         mobIconPadding: KPadding.kPaddingSize16,
-        color: AppColors.materialThemeKeyColorsSecondary,
-        textColor: AppColors.materialThemeWhite,
+        darkMode: true,
       ),
     ];

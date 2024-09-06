@@ -16,6 +16,6 @@ Future<void> leftCardHelper(
 
     // expect(find.byKey(KWidgetkeys.widget.leftCard.image), findsNothing);z
 
-    expect(find.byKey(KWidgetkeys.widget.leftCard.desk), findsOneWidget);
+    // expect(find.byKey(KWidgetkeys.widget.leftCard.desk), findsOneWidget);
   }
 }

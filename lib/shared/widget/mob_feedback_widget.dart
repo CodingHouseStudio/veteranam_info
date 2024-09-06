@@ -46,9 +46,7 @@ class MobFeedbackWidget extends StatelessWidget {
             //   const FeedbackSheetDragHandle(),
             DoubleButtonWidget(
               widgetKey: KWidgetkeys.widget.mobFeedback.button,
-              text: context.l10n.send,
-              color: AppColors.materialThemeBlack,
-              textColor: AppColors.materialThemeWhite,
+              text: context.l10n.send, darkMode: true,
               isDesk: false, mobVerticalTextPadding: KPadding.kPaddingSize12,
               mobIconPadding: KPadding.kPaddingSize12,
               mobHorizontalTextPadding: KPadding.kPaddingSize64,

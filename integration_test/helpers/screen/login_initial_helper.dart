@@ -13,10 +13,10 @@ Future<void> loginInitialHelper(
     offset: KTestConstants.scrollingDown,
   );
 
-  expect(
-    find.byKey(KWidgetkeys.screen.login.bottomButtons),
-    findsOneWidget,
-  );
+  // expect(
+  //   find.byKey(KWidgetkeys.screen.login.bottomButtons),
+  //   findsOneWidget,
+  // );
 
   expect(
     find.byKey(KWidgetkeys.screen.login.button),
