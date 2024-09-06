@@ -330,6 +330,7 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                         showBackButton: true, // widget.networkStatus,
                       ),
                     ),
+                    KSizedBox.kWidthSizedBox56,
                   ],
                 )
               : Padding(

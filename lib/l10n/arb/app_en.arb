@@ -200,6 +200,10 @@
   "@isWrongEmail": {
     "examples": "Error text for the email field if its value is incorrect."
   },
+  "isWrongReport": "The message should contain only letters",
+  "@isWrongReport": {
+    "examples": "Error text for the message field in the Report dialog, if the value is incorrect."
+  },
   "logOut": " Log out",
   "@logOut": {
     "examples": "Text for the button on the Profile page.",
@@ -684,6 +688,10 @@
   "@aMessage": {
     "examples": "The text of the title part of the Feedback page."
   },
+  "message": "Message",
+  "@Message": {
+    "examples": "Error text for the Report dialog when the message is too short."
+  },
   "us": "us",
   "@us": {
     "examples": "The text of the title part of the Feedback page."
@@ -1077,9 +1085,31 @@
   "@aboutNewDiscounts": {
     "examples": "Text for a discount subscription"
   },
+  "appUpdateAvailable": "App Update Available!",
+  "@appUpdateAvailable": {
+    "examples": "Text for the app update dialog on a mobile phone"
+  },
+  "appUpdateAvailableDescription": "A new version of the app is available for download. Please update the app to improve its performance and access new features.",
+  "@appUpdateAvailableDescription": {
+    "examples": "Text for the app update dialog on a mobile phone"
+  },
+  "later": "Later",
+  "@later": {
+    "examples": "Text for the button in the app update dialog on a mobile phone",
+    "description": "The button is used to postpone the app update for one session."
+  },
+  "update": "Update Now",
+  "@update": {
+    "examples": "Text for the button in the app update dialog on a mobile phone",
+    "description": "The button is used to direct the user to the app where they can update it."
+  },
   "aboutNewDiscountsSubtitle": "Write us your email. We promise not to send spam!",
   "@aboutNewDiscountsSubtitle": {
     "examples": "Text for a discount subscription"
+  },
+  "dontRememberPassword": "Don't remember the password",
+  "@dontRememberPassword": {
+    "examples": "Text for the password recovery button on the Login page"
   },
   "noInternet": "No internet",
   "@noInternet": {

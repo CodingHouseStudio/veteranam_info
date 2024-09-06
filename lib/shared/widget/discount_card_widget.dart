@@ -143,7 +143,10 @@ class DiscountCardWidget extends StatelessWidget {
                     children: [
                       _expiration(
                         context: context,
-                        expiration: discountItem.expiration,
+                        expiration: discountItem.expiration.getTrnslation(
+                          en: discountItem.expirationEN,
+                          context: context,
+                        ),
                       ),
                       KSizedBox.kWidthSizedBox16,
                       Expanded(
@@ -158,7 +161,10 @@ class DiscountCardWidget extends StatelessWidget {
                 else ...[
                   _expiration(
                     context: context,
-                    expiration: discountItem.expiration,
+                    expiration: discountItem.expiration.getTrnslation(
+                      en: discountItem.expirationEN,
+                      context: context,
+                    ),
                   ),
                   KSizedBox.kHeightSizedBox8,
                   CityListWidget(
@@ -222,15 +228,20 @@ class DiscountCardWidget extends StatelessWidget {
             children: [
               KIcon.check,
               KSizedBox.kWidthSizedBox8,
-              Text(
-                key: KWidgetkeys.widget.discountCard.category,
-                discountItem.category
-                    .getTrnslation(
-                      en: discountItem.categoryEN,
-                      context: context,
-                    )
-                    .elementAt(index),
-                style: AppTextStyle.materialThemeLabelLarge,
+              Padding(
+                padding: const EdgeInsets.only(
+                  right: KPadding.kPaddingSize5,
+                ),
+                child: Text(
+                  key: KWidgetkeys.widget.discountCard.category,
+                  discountItem.category
+                      .getTrnslation(
+                        en: discountItem.categoryEN,
+                        context: context,
+                      )
+                      .elementAt(index),
+                  style: AppTextStyle.materialThemeLabelLarge,
+                ),
               ),
             ],
           ),
@@ -252,10 +263,15 @@ class DiscountCardWidget extends StatelessWidget {
           children: [
             KIcon.calendarClock,
             KSizedBox.kWidthSizedBox8,
-            Text(
-              expiration ?? context.l10n.itIsValidAllTime,
-              key: KWidgetkeys.widget.discountCard.expiration,
-              style: AppTextStyle.materialThemeLabelLarge,
+            Padding(
+              padding: const EdgeInsets.only(
+                right: KPadding.kPaddingSize4,
+              ),
+              child: Text(
+                expiration ?? context.l10n.itIsValidAllTime,
+                key: KWidgetkeys.widget.discountCard.expiration,
+                style: AppTextStyle.materialThemeLabelLarge,
+              ),
             ),
           ],
         ),

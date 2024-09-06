@@ -91,6 +91,7 @@ abstract class KTestText {
   static const fieldEmpty = '';
 
   static const phoneNumber = '+3809900000';
+  static const build = '50';
 
   static final questionModelItems = <QuestionModel>[
     KMockText.questionModel,
@@ -360,7 +361,7 @@ abstract class KTestText {
         id: i.toString(),
         reasonComplaint: ReasonComplaint.fraudOrSpam,
         // email: userEmail,
-        message: field,
+        message: field + field + field + field,
         date: dateTime,
         card: CardEnum.discount,
         userId: user.id,

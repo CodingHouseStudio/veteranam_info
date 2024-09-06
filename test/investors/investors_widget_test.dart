@@ -78,8 +78,8 @@ void main() {
       testWidgets('${KGroupText.error} ', (tester) async {
         when(
           mockInvestorsRepository.getFunds(
-            reportIdItems: KTestText.reportItems.getIdCard,
-          ),
+              // reportIdItems: KTestText.reportItems.getIdCard,
+              ),
         ).thenAnswer(
           (invocation) async => Left(
             SomeFailure.serverError(
@@ -101,8 +101,8 @@ void main() {
       testWidgets('${KGroupText.failureNetwork} ', (tester) async {
         when(
           mockInvestorsRepository.getFunds(
-            reportIdItems: KTestText.reportItems.getIdCard,
-          ),
+              // reportIdItems: KTestText.reportItems.getIdCard,
+              ),
         ).thenAnswer(
           (invocation) async => Left(SomeFailure.network(error: null)),
         );
@@ -120,8 +120,8 @@ void main() {
       testWidgets('${KGroupText.failureGet} ', (tester) async {
         when(
           mockInvestorsRepository.getFunds(
-            reportIdItems: KTestText.reportItems.getIdCard,
-          ),
+              // reportIdItems: KTestText.reportItems.getIdCard,
+              ),
         ).thenAnswer(
           (invocation) async => Left(SomeFailure.get(error: null)),
         );
@@ -141,8 +141,8 @@ void main() {
       setUp(() {
         when(
           mockInvestorsRepository.getFunds(
-            reportIdItems: KTestText.reportItems.getIdCard,
-          ),
+              // reportIdItems: KTestText.reportItems.getIdCard,
+              ),
         ).thenAnswer(
           (invocation) async => const Right([]),
         );
@@ -174,8 +174,8 @@ void main() {
       setUp(() {
         when(
           mockInvestorsRepository.getFunds(
-            reportIdItems: KTestText.reportItems.getIdCard,
-          ),
+              // reportIdItems: KTestText.reportItems.getIdCard,
+              ),
         ).thenAnswer(
           (invocation) async => Right(KTestText.fundItems),
         );
@@ -209,8 +209,8 @@ void main() {
 
         verify(
           mockInvestorsRepository.getFunds(
-            reportIdItems: KTestText.reportItems.getIdCard,
-          ),
+              // reportIdItems: KTestText.reportItems.getIdCard,
+              ),
         ).called(2);
       });
 
@@ -330,7 +330,8 @@ void main() {
           );
 
           await reportDialogCorrectSaveHelper(
-            tester,
+            tester: tester,
+            mockGoRouter: mockGoRouter,
           );
         });
         group('${KGroupText.goTo} ', () {
@@ -356,8 +357,8 @@ void main() {
         setUp(() {
           when(
             mockInvestorsRepository.getFunds(
-              reportIdItems: KTestText.reportItems.getIdCard,
-            ),
+                // reportIdItems: KTestText.reportItems.getIdCard,
+                ),
           ).thenAnswer(
             (invocation) async => Right(KTestText.fundItems.sublist(0, 2)),
           );

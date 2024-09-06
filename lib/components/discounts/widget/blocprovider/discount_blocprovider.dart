@@ -15,11 +15,16 @@ class DiscountBlocprovider extends StatelessWidget {
         BlocProvider(
           create: (context) => GetIt.I.get<DiscountLinkCubit>()..started(),
         ),
-        BlocProvider(
-          create: (context) => GetIt.I.get<DiscountUserEmailCubit>()..started(),
-        ),
+        // BlocProvider(
+        //   create: (context) => GetIt.I.get<DiscountUserEmailCubit>()..
+        // started(),
+        // ),
         BlocProvider(
           create: (context) => GetIt.I.get<DiscountConfigCubit>()..started(),
+        ),
+        BlocProvider(
+          create: (context) => GetIt.I.get<DiscountUserEmailFormBloc>()
+            ..add(const DiscountUserEmailFormEvent.started()),
         ),
       ],
       child: childWidget,

@@ -25,7 +25,7 @@
   <meta name="description" content="Veteran UA">
 
   <!-- iOS meta tags & icons -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="apple-mobile-web-app-title" content="Veteranam">
   <link rel="apple-touch-icon" href="icons/logo-192.svg">
@@ -183,10 +183,12 @@
     }*/
     }
 
-    .retry-button {
+    .button {
       display: none;
       position: absolute;
       top: 75%;
+      left: 50%;
+      transform: translateX(-50%);
       background-color: white;
       color: black;
       border: 1px solid grey;
@@ -194,6 +196,37 @@
       cursor: pointer;
       font-size: 32px;
       border-radius: 32px;
+      transition: background-color 0.3s ease, color 0.3s ease, border 0.3s ease, top 0.5s ease;
+    }
+
+    .button.loading {
+      background-color: #d3d3d3;
+      color: #7a7a7a;
+      border: 1px solid #b0b0b0;
+      cursor: wait;
+      top: 50%;
+    }
+
+    .button.loading::after {
+      content: "";
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      margin-left: 8px;
+      border: 2px solid #7a7a7a;
+      border-radius: 50%;
+      border-top-color: transparent;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
     }
   </style>
 
@@ -206,35 +239,6 @@
   <div class="splash">
     <img id="splash-image" src="icons/logo-192.svg" alt="Loading indicator..." class="bouncing-image">
   </div>
-  <script>
-    // var retryButton = document.getElementById('retry-button');
-
-    // function removeSplashFromWeb() {
-    //   document.getElementById("splash")?.remove();
-    //   document.getElementById("splash-branding")?.remove();
-    //   document.body.style.background = "transparent";
-    // }
-
-    setTimeout(() => {
-      document.getElementById('retry-button').style.display = "block";
-    }, 8000);
-
-    // window.addEventListener('offline', function () {
-    //   retryButton.style.display = 'block';
-    // });
-
-    // window.addEventListener('online', function () {
-    //   location.reload()
-    //   retryButton.style.display = 'none';
-    // });
-
-    // window.addEventListener('error', function () {
-    //   // if (retryButton.style.display != 'block') {
-    //   //   location.reload()
-    //   // }
-    //   retryButton.style.display = 'block';
-    // });
-  </script>
 
   <script src="flutter_bootstrap.js" async>
     if ('serviceWorker' in navigator) {
@@ -330,7 +334,46 @@
   <script
     type="text/javascript">(function (w, s) { var e = document.createElement("script"); e.type = "text/javascript"; e.async = true; e.src = "https://cdn-eu.pagesense.io/js/20100665591/f86baf60b9834168906b20b979563f80.js"; var x = document.getElementsByTagName("script")[0]; x.parentNode.insertBefore(e, x); })(window, "script");</script>
 
-  <button id="retry-button" class="retry-button" onclick="location.reload()">Перезавантажити</button>
+
+  <button id="retry-button" class="button">Перезавантажити</button>
+
+  <script>
+    var retryButton = document.getElementById('retry-button');
+
+    // function removeSplashFromWeb() {
+    //   document.getElementById("splash")?.remove();
+    //   document.getElementById("splash-branding")?.remove();
+    //   document.body.style.background = "transparent";
+    // }
+    retryButton.style.display = "none";
+    setTimeout(() => {
+      retryButton.style.display = "block";
+    }, 8000);
+
+
+    retryButton.addEventListener('click', function () {
+      retryButton.classList.add('loading'); // Add a loading class
+      document.getElementById("splash-image").style.display = "none";
+      console.log("Reloading...");
+      location.reload();
+    });
+
+    // window.addEventListener('offline', function () {
+    //   retryButton.style.display = 'block';
+    // });
+
+    // window.addEventListener('online', function () {
+    //   location.reload()
+    //   retryButton.style.display = 'none';
+    // });
+
+    // window.addEventListener('error', function () {
+    //   // if (retryButton.style.display != 'block') {
+    //   //   location.reload()
+    //   // }
+    //   retryButton.style.display = 'block';
+    // });
+  </script>
 </body>
 
 </html>

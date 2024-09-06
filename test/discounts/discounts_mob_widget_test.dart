@@ -22,9 +22,11 @@ void main() {
     late AuthenticationRepository mockAuthenticationRepository;
     late FirebaseAnalyticsService mockFirebaseAnalyticsService;
     late FirebaseRemoteConfigProvider mockFirebaseRemoteConfigProvider;
+    late AppInfoRepository mockBuildRepository;
     setUp(() {
       KTest.testIsWeb = false;
       KPlatformConstants.isWebDesktop = true;
+      KTest.testReleaseMode = true;
       Config.value = Config.production;
       ExtendedDateTime.id = KTestText.id;
       ExtendedDateTime.current = KTestText.dateTime;
@@ -33,6 +35,7 @@ void main() {
       mockAuthenticationRepository = MockAuthenticationRepository();
       mockFirebaseAnalyticsService = MockFirebaseAnalyticsService();
       mockFirebaseRemoteConfigProvider = MockFirebaseRemoteConfigProvider();
+      mockBuildRepository = MockAppInfoRepository();
 
       when(mockAuthenticationRepository.currentUser).thenAnswer(
         (realInvocation) => User.empty,
@@ -68,8 +71,8 @@ void main() {
       );
       when(
         mockDiscountRepository.getDiscountItems(
-          reportIdItems: KTestText.reportItems.getIdCard,
-        ),
+            // reportIdItems: KTestText.reportItems.getIdCard,
+            ),
       ).thenAnswer(
         (invocation) => Stream.value(KTestText.discountModelItemsModify),
       );
@@ -78,6 +81,17 @@ void main() {
       );
       when(mockDiscountRepository.sendEmail(KTestText.emailModel)).thenAnswer(
         (invocation) async => const Right(true),
+      );
+
+      when(
+        mockFirebaseRemoteConfigProvider
+            .getString(AppVersionCubit.mobAppVersionKey),
+      ).thenAnswer(
+        (_) => AppInfoRepository.defaultValue.buildNumber,
+      );
+
+      when(mockBuildRepository.getBuildInfo()).thenAnswer(
+        (invocation) async => AppInfoRepository.defaultValue,
       );
     });
     testWidgets('${KGroupText.intial} ', (tester) async {
@@ -89,6 +103,7 @@ void main() {
         mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
         mockAuthenticationRepository: mockAuthenticationRepository,
         mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
+        mockBuildRepository: mockBuildRepository,
       );
 
       await discountsInitialHelper(tester);
@@ -98,13 +113,14 @@ void main() {
       await networkMobHelper(
         tester: tester,
         pumpApp: () async => discountsPumpAppHelper(
-          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-          mockDiscountRepository: mockDiscountRepository,
-          mockReportRepository: mockReportRepository,
-          mockAuthenticationRepository: mockAuthenticationRepository,
-          mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
-          mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
-          tester: tester,
+           tester: tester,
+        mockDiscountRepository: mockDiscountRepository,
+        mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+        mockReportRepository: mockReportRepository,
+        mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
+        mockAuthenticationRepository: mockAuthenticationRepository,
+        mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
+        mockBuildRepository: mockBuildRepository,
         ),
       );
     });
@@ -122,9 +138,39 @@ void main() {
           mockReportRepository: mockReportRepository,
           mockAuthenticationRepository: mockAuthenticationRepository,
           mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
+          mockBuildRepository: mockBuildRepository,
         );
 
         await discountsInitialHelper(tester);
+      });
+      group('Open Update dialog', () {
+        setUp(() {
+          KPlatformConstants.isWebDesktop = false;
+          when(
+            mockFirebaseRemoteConfigProvider
+                .getString(AppVersionCubit.mobAppVersionKey),
+          ).thenAnswer(
+            (_) => KTestText.build,
+          );
+        });
+        testWidgets('${KGroupText.intial} ', (tester) async {
+          await discountsPumpAppHelper(
+            tester: tester,
+            mockDiscountRepository: mockDiscountRepository,
+            mockGoRouter: mockGoRouter,
+            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+            mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
+            mockReportRepository: mockReportRepository,
+            mockAuthenticationRepository: mockAuthenticationRepository,
+            mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
+            mockBuildRepository: mockBuildRepository,
+          );
+
+          await mobUpdateDialogButtonsHelper(
+            tester: tester,
+            mockGoRouter: mockGoRouter,
+          );
+        });
       });
       group('${KGroupText.goTo} ', () {
         testWidgets('bottom navigations ', (tester) async {
@@ -137,6 +183,7 @@ void main() {
             mockReportRepository: mockReportRepository,
             mockAuthenticationRepository: mockAuthenticationRepository,
             mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
+            mockBuildRepository: mockBuildRepository,
           );
 
           await mobNavigationButtonsHelper(

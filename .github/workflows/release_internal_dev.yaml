@@ -9,10 +9,21 @@ concurrency:
   group: dev-$
   cancel-in-progress: true
 
-permissions:
-  id-token: write # This is required for requesting the JWT
-  contents: read # This is required for actions/checkout
+# permissions:
+#   id-token: write # This is required for requesting the JWT
+#   contents: read # This is required for actions/checkout
 jobs:
+  web_build:
+    uses: CodingHouseStudio/flutter_workflows/.github/workflows/release_build.yml@main
+    with:
+      FLAVOUR: "development"
+      run_sentry_plugin: false
+  web_push:
+    needs:
+      - web_build
+    uses: CodingHouseStudio/flutter_workflows/.github/workflows/release_push.yml@main
+    with:
+      project_name: "veteran-development"
   #  ios-build:
   #    name: Deploy beta build to TestFlight
   #    runs-on: macOS-latest
@@ -59,61 +70,60 @@ jobs:
   #          TEMP_KEYCHAIN_PASSWORD: '${{ secrets.TEMP_KEYCHAIN_PASSWORD }}'
   #          GIT_AUTHORIZATION: '${{ secrets.GIT_AUTHORIZATION }}'
   #          MATCH_PASSWORD: '${{ secrets.MATCH_PASSWORD }}'
-  web_build:
-    runs-on: ubuntu-latest # We are using ubuntu to deploy flutter web
-    timeout-minutes: 20
-    environment: development # We specify development since Web Production and Web Development are using the same environment variable names
-    permissions: # set permissions for AWS creentials specifically
-      id-token: write
-      contents: read
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4.1.5
-      - uses: subosito/flutter-action@v2.12.0
-        with:
-          channel: "stable"
-          cache: true
-          cache-key: "flutter-:os:-:channel:-:version:-:arch:-:hash:" # optional, change this to force refresh cache
-          cache-path: "${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:" # optional, change this to specify the cache path
-          architecture: x64 # optional, x64 or arm64
-          flutter-version: ${{ secrets.FLUTTER_FRAMEWORK_VERSION }}
-      - run: flutter config --no-analytics
-      - run: flutter config --no-cli-animations
-      - name: Flutter Pub Get # get flutter packages information
-        run: flutter pub get
-      - name: Flutter code generation # generate any missing code from source code
-        run: flutter pub run build_runner build --delete-conflicting-outputs
-      - name: Flutter Pub Get # get flutter packages information
-        run: flutter pub get
-      - name: Build the Web static pages # generate deployment files
-        run: |
-          buildNumber=$(date +%s)
-          flutter build web --release -t lib/main_development.dart --wasm --build-name=1.0.2 --build-number=$buildNumber --dart-define=FLAVOUR=development
-          dt="$(date "+%s000")"
-          mv build/web/flutter_bootstrap.js build/web/$dt.flutter_bootstrap.js
-          sed "s/flutter_bootstrap.js/$dt.flutter_bootstrap.js/g" build/web/index.html >build/web/newindex.html
-          mv build/web/newindex.html build/web/index.html
-      # - name: Configure AWS Credentials Action for GitHub Actions
-      #   uses: aws-actions/configure-aws-credentials@v4.0.1
-      #   with:
-      #     role-to-assume: ${{ secrets.AWS_ASSUME_ROLE_S3_SYNC }} # we use Github OIDC authentication for this action
-      #     aws-region: us-east-1
-      # - name: Deploy static site to S3 bucket # we will use delete option so that we can replace any of the same files
-      #   run: aws s3 sync ./build/web ${{ secrets.S3_WEB_BUCKET }} --delete
-      # - name: Configure AWS Credentials Action for GitHub Actions
-      #   uses: aws-actions/configure-aws-credentials@v4.0.1
-      #   with:
-      #     role-to-assume: ${{ secrets.AWS_ASSUME_ROLE_CLOUDFRONT_INVALIDATE }}
-      #     aws-region: us-east-1
-      # - name: Invalidate CloudFront
-      #   run: aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
-      - name: Deploy to Cloudflare Pages
-        uses: cloudflare/pages-action@v1
-        with:
-          apiToken: FIH-0pRctaX_DSMG9g-oI95wZ0Ha990EjZy5IuU_
-          accountId: 4e407d1da94857668f6ede7dcfeed9d5
-          projectName: veteran-development
-          directory: ./build/web
+    # runs-on: ubuntu-latest # We are using ubuntu to deploy flutter web
+    # timeout-minutes: 20
+    # environment: development # We specify development since Web Production and Web Development are using the same environment variable names
+    # permissions: # set permissions for AWS creentials specifically
+    #   id-token: write
+    #   contents: read
+    # steps:
+    #   - name: Checkout
+    #     uses: actions/checkout@v4.1.5
+    #   - uses: subosito/flutter-action@v2.12.0
+    #     with:
+    #       channel: "stable"
+    #       cache: true
+    #       cache-key: "flutter-:os:-:channel:-:version:-:arch:-:hash:" # optional, change this to force refresh cache
+    #       cache-path: "${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:" # optional, change this to specify the cache path
+    #       architecture: x64 # optional, x64 or arm64
+    #       flutter-version: ${{ secrets.FLUTTER_FRAMEWORK_VERSION }}
+    #   - run: flutter config --no-analytics
+    #   - run: flutter config --no-cli-animations
+    #   - name: Flutter Pub Get # get flutter packages information
+    #     run: flutter pub get
+    #   - name: Flutter code generation # generate any missing code from source code
+    #     run: flutter pub run build_runner build --delete-conflicting-outputs
+    #   - name: Flutter Pub Get # get flutter packages information
+    #     run: flutter pub get
+    #   - name: Build the Web static pages # generate deployment files
+    #     run: |
+    #       buildNumber=$(date +%s)
+    #       flutter build web --release -t lib/main_development.dart --wasm --build-name=1.0.2 --build-number=$buildNumber --dart-define=FLAVOUR=development
+    #       dt="$(date "+%s000")"
+    #       mv build/web/flutter_bootstrap.js build/web/$dt.flutter_bootstrap.js
+    #       sed "s/flutter_bootstrap.js/$dt.flutter_bootstrap.js/g" build/web/index.html >build/web/newindex.html
+    #       mv build/web/newindex.html build/web/index.html
+    #   # - name: Configure AWS Credentials Action for GitHub Actions
+    #   #   uses: aws-actions/configure-aws-credentials@v4.0.1
+    #   #   with:
+    #   #     role-to-assume: ${{ secrets.AWS_ASSUME_ROLE_S3_SYNC }} # we use Github OIDC authentication for this action
+    #   #     aws-region: us-east-1
+    #   # - name: Deploy static site to S3 bucket # we will use delete option so that we can replace any of the same files
+    #   #   run: aws s3 sync ./build/web ${{ secrets.S3_WEB_BUCKET }} --delete
+    #   # - name: Configure AWS Credentials Action for GitHub Actions
+    #   #   uses: aws-actions/configure-aws-credentials@v4.0.1
+    #   #   with:
+    #   #     role-to-assume: ${{ secrets.AWS_ASSUME_ROLE_CLOUDFRONT_INVALIDATE }}
+    #   #     aws-region: us-east-1
+    #   # - name: Invalidate CloudFront
+    #   #   run: aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
+    #   - name: Deploy to Cloudflare Pages
+    #     uses: cloudflare/pages-action@v1
+    #     with:
+    #       apiToken: FIH-0pRctaX_DSMG9g-oI95wZ0Ha990EjZy5IuU_
+    #       accountId: 4e407d1da94857668f6ede7dcfeed9d5
+    #       projectName: veteran-development
+    #       directory: ./build/web
 #  android-build:
 #    runs-on: ubuntu-latest
 #    timeout-minutes: 30

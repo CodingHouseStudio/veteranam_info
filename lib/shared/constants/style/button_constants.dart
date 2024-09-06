@@ -49,9 +49,9 @@ abstract class KButtonStyles {
 
   static const whiteButtonStyle = ButtonStyle(
     backgroundColor: WidgetStatePropertyAll(AppColors.materialThemeWhite),
-    minimumSize: WidgetStatePropertyAll(
-      Size(KMinMaxSize.minWidth100, KMinMaxSize.minHeight50),
-    ),
+    // minimumSize: WidgetStatePropertyAll(
+    //   Size(KMinMaxSize.minWidth100, KMinMaxSize.minHeight50),
+    // ),
     padding: WidgetStatePropertyAll(EdgeInsets.all(KPadding.kPaddingSize8)),
     // side: WidgetStatePropertyAll( BorderSide(
     //   color: KColorTheme.white,
@@ -270,6 +270,7 @@ abstract class KButtonStyles {
     ),
     foregroundColor:
         WidgetStatePropertyAll(AppColors.materialThemeKeyColorsSecondary),
+    alignment: Alignment.centerLeft,
   );
 
   static const filterButtonStyleBorder = ButtonStyle(
