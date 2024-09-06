@@ -42,7 +42,6 @@ class ScaffoldAutoLoadingWidget extends StatefulWidget {
 class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
   late ScrollController _scrollController;
   bool offline = false;
-  bool _isScrolled = false;
 
   @override
   void initState() {
@@ -161,14 +160,6 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
                     appBar: AppBar(
                       backgroundColor: AppColors.materialThemeWhite,
                       toolbarHeight: KSize.kAppBarHeight,
-                      //!_isScrolled ? KSize.kAppBarHeight : null,
-                      // actions: [
-                      //   if (_isScrolled)
-                      //     const Align(
-                      //       alignment: Alignment.centerRight,
-                      //       child: KIcon.noInternet,
-                      //     ),
-                      //],
                     ),
                     body: KeyboardScrollView(
                       widgetKey: KWidgetkeys.widget.scaffold.scroll,
@@ -176,13 +167,16 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
                       slivers: [
                         if (!KTest.testIsWeb && state.isOffline)
                           SliverPersistentHeader(
-                            delegate: NetworkStatusBanner(
+                            pinned: true,
+                            delegate: NetworkStatusBanner.getSliverHeader(
+                              isDesk: isDesk,
+                              isTablet: isTablet,
                               networkStatus: state,
                             ),
                           ),
                         if (KTest.testIsWeb || widget.pageName != null)
                           SliverPersistentHeader(
-                            delegate: NawbarWidget(
+                            delegate: NawbarWidget.getSliverHeader(
                               isDesk: isDesk,
                               isTablet: isTablet,
                               pageName: widget.pageName,
@@ -214,11 +208,15 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
                                   right: mainBody(mainChildWidget),
                                   left: SliverPersistentHeader(
                                     pinned: true,
-                                    delegate: NawbarWidget(
-                                      isDesk: isDesk,
-                                      childWidget: widget.mainRightChildWidget,
+                                    delegate: SliverHeaderWidget(
+                                      // isDesk: isDesk,
+                                      childWidget: ({
+                                        required overlapsContent,
+                                        required shrinkOffset,
+                                      }) =>
+                                          widget.mainRightChildWidget!,
                                       maxMinHeight: constraints.maxHeight,
-                                      isTablet: isTablet,
+                                      // isTablet: isTablet,
                                     ),
                                   ),
                                   leftWidthPercent: 0.3,
@@ -233,17 +231,17 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
                       maxHeight: constraints.maxHeight,
                     ),
                   ),
-                  if (_isScrolled)
-                    const Padding(
-                      padding: EdgeInsets.only(
-                        top: KPadding.kPaddingSize10,
-                        right: KPadding.kPaddingSize10,
-                      ),
-                      child: Align(
-                        alignment: Alignment.topRight,
-                        child: KIcon.noInternet,
-                      ),
-                    ),
+                  // if (_isScrolled)
+                  //   const Padding(
+                  //     padding: EdgeInsets.only(
+                  //       top: KPadding.kPaddingSize10,
+                  //       right: KPadding.kPaddingSize10,
+                  //     ),
+                  //     child: Align(
+                  //       alignment: Alignment.topRight,
+                  //       child: KIcon.noInternet,
+                  //     ),
+                  //   ),
                 ],
               ),
             ),
@@ -264,16 +262,6 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
       );
 
   void _onScroll() {
-    if (_scrollController.position.pixels >= KSize.kPixel36) {
-      setState(() {
-        _isScrolled = true;
-      });
-    } else {
-      setState(() {
-        _isScrolled = false;
-      });
-    }
-
     if (_isBottom &&
         widget.loadingStatus != LoadingStatus.listLoadedFull &&
         !(widget.cardListIsEmpty ?? false)) {

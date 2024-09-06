@@ -26,7 +26,10 @@ class LeftCardWidget extends StatelessWidget {
             key: KWidgetkeys.widget.scaffold.scroll,
             slivers: [
               SliverPersistentHeader(
-                delegate: NawbarWidget(isDesk: isDesk, isTablet: isTablet),
+                delegate: NawbarWidget.getSliverHeader(
+                  isDesk: isDesk,
+                  isTablet: isTablet,
+                ),
               ),
 
               SliverPadding(

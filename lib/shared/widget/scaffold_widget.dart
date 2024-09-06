@@ -83,7 +83,6 @@ class ScaffoldWidget extends StatelessWidget {
                 appBar: AppBar(
                   backgroundColor: AppColors.materialThemeWhite,
                   toolbarHeight: KSize.kAppBarHeight,
-                  //title: KIcon.noInternet,
                 ),
                 body: KeyboardScrollView(
                   widgetKey: KWidgetkeys.widget.scaffold.scroll,
@@ -91,12 +90,15 @@ class ScaffoldWidget extends StatelessWidget {
                   slivers: [
                     if (!KTest.testIsWeb && state.isOffline)
                       SliverPersistentHeader(
-                        delegate: NetworkStatusBanner(
+                        pinned: true,
+                        delegate: NetworkStatusBanner.getSliverHeader(
+                          isDesk: isDesk,
+                          isTablet: isTablet,
                           networkStatus: state,
                         ),
                       ),
                     SliverPersistentHeader(
-                      delegate: NawbarWidget(
+                      delegate: NawbarWidget.getSliverHeader(
                         isDesk: isDesk,
                         isTablet: isTablet,
                         pageName: pageName,
