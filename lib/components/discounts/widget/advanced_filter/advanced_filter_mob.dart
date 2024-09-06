@@ -123,8 +123,7 @@ class AdvancedFilterMobDialog extends StatelessWidget {
                     },
                     widgetKey: KWidgetkeys
                         .screen.discounts.advancedFilterMobAppliedButton,
-                    color: AppColors.materialThemeKeyColorsSecondary,
-                    textColor: AppColors.materialThemeWhite,
+                    darkMode: true,
                   ),
                   KSizedBox.kWidthSizedBox16,
                 ],

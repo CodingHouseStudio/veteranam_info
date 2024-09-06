@@ -179,12 +179,9 @@ extension GetItInjectableX on _i174.GetIt {
               gh<_i116.GoogleSignIn>(),
               gh<_i1001.CacheClient>(),
             ));
-    gh.factory<_i1025.LoginBloc>(
-      () => _i1025.LoginBloc(
-          appAuthenticationRepository:
-              gh<_i1001.IAppAuthenticationRepository>()),
-      registerFor: {_development},
-    );
+    gh.factory<_i785.SignUpBloc>(() => _i785.SignUpBloc(
+        iAppAuthenticationRepository:
+            gh<_i1001.IAppAuthenticationRepository>()));
     gh.singleton<_i1001.IReportRepository>(() => _i205.ReportRepository());
     gh.singleton<_i1001.IAppNetworkRepository>(() => _i336.AppNetworkRepository(
           gh<_i895.Connectivity>(),
@@ -242,12 +239,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i208.AuthenticationRepository>(() =>
         _i208.AuthenticationRepository(
             gh<_i1001.IAppAuthenticationRepository>()));
-    gh.factory<_i785.SignUpBloc>(
-      () => _i785.SignUpBloc(
-          iAppAuthenticationRepository:
-              gh<_i1001.IAppAuthenticationRepository>()),
-      registerFor: {_development},
-    );
+    gh.factory<_i1025.LoginBloc>(() => _i1025.LoginBloc(
+        appAuthenticationRepository:
+            gh<_i1001.IAppAuthenticationRepository>()));
     gh.factory<_i686.PrivacyPolicyMarkdownCubit>(() =>
         _i686.PrivacyPolicyMarkdownCubit(
             appAuthenticationRepository:
