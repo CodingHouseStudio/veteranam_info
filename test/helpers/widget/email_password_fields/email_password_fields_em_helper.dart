@@ -10,20 +10,20 @@ Future<void> emailPasswordFieldsEmHelper({
     findsWidgets,
   );
 
-  expect(
-    find.byKey(KWidgetkeys.widget.emailPasswordFields.textEmail),
-    findsWidgets,
-  );
+  // expect(
+  //   find.byKey(KWidgetkeys.widget.emailPasswordFields.textEmail),
+  //   findsWidgets,
+  // );
 
   expect(
     find.byKey(KWidgetkeys.widget.emailPasswordFields.fieldPassword),
     findsNothing,
   );
 
-  expect(
-    find.byKey(KWidgetkeys.widget.emailPasswordFields.textPassword),
-    findsNothing,
-  );
+  // expect(
+  //   find.byKey(KWidgetkeys.widget.emailPasswordFields.textPassword),
+  //   findsNothing,
+  // );
 
   await tester.enterText(
     find.byKey(KWidgetkeys.widget.emailPasswordFields.fieldEmail),

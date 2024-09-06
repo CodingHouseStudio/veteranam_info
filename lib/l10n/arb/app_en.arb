@@ -1106,5 +1106,9 @@
   "aboutNewDiscountsSubtitle": "Write us your email. We promise not to send spam!",
   "@aboutNewDiscountsSubtitle": {
     "examples": "Text for a discount subscription"
+  },
+  "dontRememberPassword": "Don't remember the password",
+  "@dontRememberPassword": {
+    "examples": "Text for the password recovery button on the Login page"
   }
 }
