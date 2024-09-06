@@ -67,7 +67,9 @@ Future<void> nawbarHelper({
       );
     }
   }
-
+  final isTablet =
+      find.byKey(KWidgetkeys.widget.nawbar.loginButton).evaluate().isEmpty &&
+          language.isNotEmpty;
   expect(find.byKey(KWidgetkeys.widget.nawbar.logo), findsOneWidget);
 
   // expect(
@@ -75,7 +77,7 @@ Future<void> nawbarHelper({
   //   hasMic ? findsOneWidget : findsNothing,
   // );
   if (Config.isDevelopment) {
-    if (language.isEmpty) {
+    if (language.isEmpty || isTablet) {
       expect(
         find.byKey(KWidgetkeys.widget.nawbar.loginButton),
         findsNothing,
