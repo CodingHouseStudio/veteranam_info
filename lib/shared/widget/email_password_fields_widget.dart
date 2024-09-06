@@ -120,6 +120,7 @@ class _EmailPasswordFieldsWidgetState extends State<EmailPasswordFieldsWidget>
                     setState(() => obscurePassword = !obscurePassword),
               ),
             ),
+            suffixIconPadding: 0,
             focusNode: passwordFocusNode,
             disposeFocusNode: false,
             obscureText: obscurePassword,

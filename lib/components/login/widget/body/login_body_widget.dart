@@ -23,25 +23,10 @@ class LoginBodyWidget extends StatelessWidget {
                 isDesk ? KPadding.kPaddingSize80 : KPadding.kPaddingSize24,
           ),
           mainChildWidgetsFunction: ({required isDesk}) => [
-            Row(
-              children: [
-                Text(
-                  context.l10n.login,
-                  key: KWidgetkeys.screen.login.title,
-                  style: isDesk
-                      ? AppTextStyle.materialThemeDisplayLarge
-                      : AppTextStyle.materialThemeDisplaySmall,
-                ),
-                if (isDesk)
-                  KSizedBox.kWidthSizedBox32
-                else
-                  KSizedBox.kWidthSizedBox24,
-                IconWidget(
-                  icon: KIcon.arrowDownLeft,
-                  padding:
-                      isDesk ? KPadding.kPaddingSize20 : KPadding.kPaddingSize8,
-                ),
-              ],
+            ShortTitleIconWidget(
+              title: context.l10n.login,
+              titleKey: KWidgetkeys.screen.login.title,
+              isDesk: isDesk,
             ),
             if (isDesk)
               KSizedBox.kHeightSizedBox40
