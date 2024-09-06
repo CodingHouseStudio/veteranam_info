@@ -50,7 +50,6 @@ class NawbarWidget extends SliverPersistentHeaderDelegate {
       pageName: pageName,
       // showMobileNawbar: showMobileNawbar ?? false,
       showBackButton: showMobBackButton,
-      shrinkOffset: shrinkOffset,
     );
   }
 }
@@ -59,7 +58,6 @@ class _NawbarWidgetImplematation extends StatefulWidget {
   const _NawbarWidgetImplematation({
     required this.isDesk,
     required this.isTablet,
-    required this.shrinkOffset,
     // required this.showMobileNawbar,
     super.key,
     this.childWidget,
@@ -72,7 +70,6 @@ class _NawbarWidgetImplematation extends StatefulWidget {
   final String? pageName;
   // final bool showMobileNawbar;
   final bool? showBackButton;
-  final double shrinkOffset;
 
   @override
   State<_NawbarWidgetImplematation> createState() =>
@@ -99,7 +96,6 @@ class _NawbarWidgetImplematationState
 
   @override
   Widget build(BuildContext context) {
-    final isShrunk = widget.shrinkOffset > 0;
     return widget.childWidget ??
         Container(
           key: KWidgetkeys.widget.nawbar.widget,
@@ -314,12 +310,7 @@ class _NawbarWidgetImplematationState
                         ),
                         Expanded(
                           child: pageName(
-                            showBackButton: true,
-                            isShrunk: isShrunk,
-                            offline: context
-                                .read<NetworkCubit>()
-                                .state
-                                .isOffline, // widget.networkStatus,
+                            showBackButton: true, // widget.networkStatus,
                           ),
                         ),
                       ],
@@ -329,18 +320,14 @@ class _NawbarWidgetImplematationState
                         vertical: KPadding.kPaddingSize8,
                       ),
                       child: pageName(
-                        isShrunk: isShrunk,
                         showBackButton: false,
-                        offline: context.read<NetworkCubit>().state.isOffline,
                       ),
                     ),
         );
   }
 
   Widget pageName({
-    required bool isShrunk,
     required bool showBackButton,
-    required bool offline,
   }) {
     return Row(
       key: KWidgetkeys.widget.nawbar.pageName,
@@ -353,14 +340,6 @@ class _NawbarWidgetImplematationState
             textAlign: TextAlign.center,
           ),
         ),
-        if (isShrunk && !KTest.testIsWeb && offline)
-          Padding(
-            key: KWidgetkeys.widget.networkBanner.iconNoInternet,
-            padding: const EdgeInsets.only(
-              right: KPadding.kPaddingSize16,
-            ),
-            child: KIcon.noInternet,
-          ),
       ],
     );
   }
