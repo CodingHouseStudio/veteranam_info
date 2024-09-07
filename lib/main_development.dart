@@ -16,7 +16,7 @@ void main() async {
 
   await FirebaseAppCheck.instanceFor(app: app).activate(
     webProvider: ReCaptchaV3Provider(
-      '6LfKGjcqAAAAAIUz_yV0cTKcPA54o5VFXz64_3di',
+      '6LevUCsqAAAAAEG431Qk2NsMNXurWJ8vs89UkrEG',
     ),
     androidProvider:
         kReleaseMode ? AndroidProvider.playIntegrity : AndroidProvider.debug,
