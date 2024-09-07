@@ -1114,5 +1114,9 @@
   "dontRememberPassword": "Не пам'ятаю пароль",
   "@dontRememberPassword": {
     "examples": "Текст для кнопки відновлення паролю на сторінці Login"
+  },
+  "noInternet": "Інтернет відсутній",
+  "@noInternet": {
+    "examples": "Текст для повідомлення на телефоні про відсутність інтернету"
   }
 }

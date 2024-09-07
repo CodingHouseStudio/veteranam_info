@@ -29,20 +29,22 @@ class ScaffoldWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<NetworkCubit, NetworkStatus>(
+    return BlocConsumer<NetworkCubit, NetworkStatus>(
       listener: (context, state) {
         if (state == NetworkStatus.network && loadDataAgain != null) {
           loadDataAgain!();
         }
       },
-      child: LayoutBuilder(
+      builder: (context, state) => LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
           final isDesk =
               constraints.maxWidth > KPlatformConstants.minWidthThresholdDesk;
           final isTablet =
               constraints.maxWidth > KPlatformConstants.minWidthThresholdTablet;
-          final mainChildWidget =
-              mainChildWidgetsFunction(isDesk: isDesk, isTablet: isTablet);
+          final mainChildWidget = mainChildWidgetsFunction(
+            isDesk: isDesk,
+            isTablet: isTablet,
+          );
           final padding = EdgeInsets.symmetric(
             horizontal: (isDesk
                 ? KPadding.kPaddingSize90 +
@@ -66,6 +68,7 @@ class ScaffoldWidget extends StatelessWidget {
               ),
             );
           }
+
           final scaffold = FocusTraversalGroup(
             // policy: WidgetOrderTraversalPolicy(),
             child: Semantics(
@@ -85,8 +88,17 @@ class ScaffoldWidget extends StatelessWidget {
                   widgetKey: KWidgetkeys.widget.scaffold.scroll,
                   //physics: KTest.scroll,
                   slivers: [
+                    if (!KTest.testIsWeb && state.isOffline)
+                      SliverPersistentHeader(
+                        pinned: true,
+                        delegate: NetworkStatusBanner.getSliverHeader(
+                          isDesk: isDesk,
+                          isTablet: isTablet,
+                          networkStatus: state,
+                        ),
+                      ),
                     SliverPersistentHeader(
-                      delegate: NawbarWidget(
+                      delegate: NawbarWidget.getSliverHeader(
                         isDesk: isDesk,
                         isTablet: isTablet,
                         pageName: pageName,
