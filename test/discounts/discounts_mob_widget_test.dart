@@ -109,6 +109,22 @@ void main() {
       await discountsInitialHelper(tester);
     });
 
+    testWidgets('${KGroupText.offlineNetwork} ', (tester) async {
+      await networkMobHelper(
+        tester: tester,
+        pumpApp: () async => discountsPumpAppHelper(
+          tester: tester,
+          mockDiscountRepository: mockDiscountRepository,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          mockReportRepository: mockReportRepository,
+          mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
+          mockAuthenticationRepository: mockAuthenticationRepository,
+          mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
+          mockBuildRepository: mockBuildRepository,
+        ),
+      );
+    });
+
     group('${KGroupText.goRouter} ', () {
       late MockGoRouter mockGoRouter;
       setUp(() => mockGoRouter = MockGoRouter());
