@@ -24,15 +24,15 @@ void main() async {
         kReleaseMode ? AppleProvider.deviceCheck : AppleProvider.debug,
   );
 
-  await FirebaseAppCheck.instance.activate(
-    webProvider: ReCaptchaV3Provider(
-      '6LevUCsqAAAAAEG431Qk2NsMNXurWJ8vs89UkrEG',
-    ),
-    androidProvider:
-        kReleaseMode ? AndroidProvider.playIntegrity : AndroidProvider.debug,
-    appleProvider:
-        kReleaseMode ? AppleProvider.deviceCheck : AppleProvider.debug,
-  );
+  // await FirebaseAppCheck.instance.activate(
+  //   webProvider: ReCaptchaV3Provider(
+  //     '6LevUCsqAAAAAEG431Qk2NsMNXurWJ8vs89UkrEG',
+  //   ),
+  //   androidProvider:
+  //       kReleaseMode ? AndroidProvider.playIntegrity : AndroidProvider.debug,
+  //   appleProvider:
+  //       kReleaseMode ? AppleProvider.deviceCheck : AppleProvider.debug,
+  // );
 
   // try {
   // if (kIsWeb) {
