@@ -24,6 +24,16 @@ void main() async {
         kReleaseMode ? AppleProvider.deviceCheck : AppleProvider.debug,
   );
 
+  await FirebaseAppCheck.instance.activate(
+    webProvider: ReCaptchaV3Provider(
+      'REDACTED',
+    ),
+    androidProvider:
+        kReleaseMode ? AndroidProvider.playIntegrity : AndroidProvider.debug,
+    appleProvider:
+        kReleaseMode ? AppleProvider.deviceCheck : AppleProvider.debug,
+  );
+
   // try {
   // if (kIsWeb) {
   //   await FirebasePerformance.instanceFor(app: app)
