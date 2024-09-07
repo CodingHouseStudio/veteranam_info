@@ -136,6 +136,10 @@ abstract class KIcon {
   );
 
   static const _KIcon copy = _KIcon(Symbols.content_copy);
+  static const _KIcon noInternet = _KIcon(
+    Symbols.signal_cellular_connected_no_internet_0_bar,
+    color: AppColors.materialThemeSysLightError,
+  );
   static List<Icon> get icons => [
         KIcon.tag,
         KIcon.briefcase,

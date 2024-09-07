@@ -52,6 +52,7 @@ abstract class KSize {
   static const kFont18 = 18.0;
   static const kFont20 = 20.0;
   static const kFont24 = 24.0;
+  static const kFont30 = 30.0;
   static const kFont32 = 32.0;
   static const kFont36 = 36.0;
   static const kFont40 = 40.0;
