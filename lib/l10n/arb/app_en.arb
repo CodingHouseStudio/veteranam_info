@@ -1110,5 +1110,9 @@
   "dontRememberPassword": "Don't remember the password",
   "@dontRememberPassword": {
     "examples": "Text for the password recovery button on the Login page"
+  },
+  "noInternet": "No internet",
+  "@noInternet": {
+    "examples": "Text for message on mobile version about no internet"
   }
 }
