@@ -330,6 +330,41 @@
     // loadMainDartJs();
     // }
   </script>
+  <script type="module">
+
+    // Import the functions you need from the SDKs you need
+
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
+
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-analytics.js";
+
+    // TODO: Add SDKs for Firebase products that you want to use
+
+    // https://firebase.google.com/docs/web/setup#available-libraries
+
+
+    // Your web app's Firebase configuration
+
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+
+    const firebaseConfig = {
+      apiKey: 'AIzaSyBEyjiJOQxksq81cI865BN4T28i-P1gGGo',
+      appId: '1:32851885972:web:c0230fc5a9606103ecd981',
+      messagingSenderId: '32851885972',
+      projectId: 'veteran-development',
+      authDomain: 'veteran-development.firebaseapp.com',
+      storageBucket: 'veteran-development.appspot.com',
+      measurementId: 'G-CWWP8DND1D',
+    };
+
+
+    // Initialize Firebase
+
+    const app = initializeApp(firebaseConfig);
+
+    const analytics = getAnalytics(app);
+
+  </script>
 
   <script
     type="text/javascript">(function (w, s) { var e = document.createElement("script"); e.type = "text/javascript"; e.async = true; e.src = "https://cdn-eu.pagesense.io/js/20100665591/f86baf60b9834168906b20b979563f80.js"; var x = document.getElementsByTagName("script")[0]; x.parentNode.insertBefore(e, x); })(window, "script");</script>
