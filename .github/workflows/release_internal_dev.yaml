@@ -18,11 +18,6 @@ jobs:
     with:
       FLAVOUR: "development"
       run_sentry_plugin: false
-  web_push:
-    needs:
-      - web_build
-    uses: CodingHouseStudio/flutter_workflows/.github/workflows/release_push.yml@main
-    with:
       project_name: "veteran-development"
   #  ios-build:
   #    name: Deploy beta build to TestFlight
