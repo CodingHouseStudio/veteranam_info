@@ -1,40 +1,40 @@
 {
   "project_info": {
-    "project_number": "326120302123",
-    "project_id": "veteran-production",
-    "storage_bucket": "veteran-production.appspot.com"
+    "project_number": "32851885972",
+    "project_id": "veteran-development",
+    "storage_bucket": "veteran-development.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:326120302123:android:bc4862ae5990f5c0edac6e",
+        "mobilesdk_app_id": "1:32851885972:android:d920f90e0bb70673ecd981",
         "android_client_info": {
-          "package_name": "info.veteranam"
+          "package_name": "info.veteranam.dev"
         }
       },
       "oauth_client": [
         {
-          "client_id": "326120302123-0u4vg4crj4viek7sb7f5aho19icfarbc.apps.googleusercontent.com",
+          "client_id": "32851885972-ns3197k0hi2lv14a4ib6s6p3h4e0jler.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCMWzGq_-aa1c-ywngHWm-1gL_R9uBYsFg"
+          "current_key": "AIzaSyA8CbivBU82h3WhxgoZ0mkdMq5y1OEfbQk"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "326120302123-0u4vg4crj4viek7sb7f5aho19icfarbc.apps.googleusercontent.com",
+              "client_id": "32851885972-ns3197k0hi2lv14a4ib6s6p3h4e0jler.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "326120302123-6imcoq7lddeov8i8dcicp15cjn6a418u.apps.googleusercontent.com",
+              "client_id": "32851885972-39m4c4lb48qj9p40542l7o0d8hebfoaa.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "info.veteranam"
+                "bundle_id": "info.veteranam.dev"
               }
             }
           ]
