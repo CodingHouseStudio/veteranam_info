@@ -151,6 +151,31 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
     );
   }
 
+  /// Starts the Sign In with Facebook Flow.
+  ///
+  /// Throws a [signUpWithFacebook] if an exception occurs.
+  @override
+  Future<Either<SomeFailure, bool>> signUpWithFacebook() async {
+    try {
+      final credential = await _getGoogleAuthCredential();
+      if (credential != null) {
+        await _firebaseAuth.signInWithCredential(credential);
+
+        return const Right(true);
+      }
+      return const Right(false);
+    } on firebase_auth.FirebaseAuthException catch (e, stack) {
+      return Left(
+        SignUpWithGoogleFailure.fromCode(error: e, stack: stack).status,
+      );
+    } catch (_, stack) {
+      return Left(SomeFailure.serverError(error: _, stack: stack));
+    } finally {
+      _updateAuthStatusBasedOnCache();
+      _updateUserSettingBasedOnCache();
+    }
+  }
+
   /// Signs in with the provided [email] and [password].
   ///
   /// Throws a [LogInWithEmailAndPasswordFailure] if an exception occurs.
