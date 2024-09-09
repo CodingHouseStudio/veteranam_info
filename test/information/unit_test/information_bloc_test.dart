@@ -407,7 +407,7 @@ void main() {
     // );
 
     blocTest<InformationWatcherBloc, InformationWatcherState>(
-      'emits [InformationWatcherState()] whene like',
+      'emits [InformationWatcherState()] when like',
       build: () => informationWatcherBloc,
       act: (bloc) async {
         bloc.add(const InformationWatcherEvent.started());
