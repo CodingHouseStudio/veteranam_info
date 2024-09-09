@@ -27,12 +27,6 @@ void main() {
       ).thenAnswer(
         (_) async => AppInfoRepository.defaultValue,
       );
-      when(
-        mockFirebaseRemoteConfigProvider
-            .getString(AppVersionCubit.mobAppVersionKey),
-      ).thenAnswer(
-        (_) => KTestText.build,
-      );
       buildCubit = AppVersionCubit(
         buildRepository: mockBuildRepository,
         firebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
@@ -41,7 +35,34 @@ void main() {
     blocTest<AppVersionCubit, AppVersionState>(
       'emits [PackageInfo()] when initial',
       build: () => buildCubit,
-      act: (bloc) async => bloc.started(),
+      act: (bloc) async {
+        await bloc.started();
+        when(
+          mockFirebaseRemoteConfigProvider
+              .getString(AppVersionCubit.mobAppVersionKey),
+        ).thenAnswer(
+          (_) => KTestText.build,
+        );
+      },
+      expect: () async => [
+        AppVersionState(
+          build: AppInfoRepository.defaultValue,
+          mobHasNewBuild: true,
+        ),
+      ],
+    );
+    blocTest<AppVersionCubit, AppVersionState>(
+      'emits [PackageInfo()] when initial and config empty',
+      build: () => buildCubit,
+      act: (bloc) async {
+        when(
+          mockFirebaseRemoteConfigProvider
+              .getString(AppVersionCubit.mobAppVersionKey),
+        ).thenAnswer(
+          (_) => '',
+        );
+        await bloc.started();
+      },
       expect: () async => [
         AppVersionState(
           build: AppInfoRepository.defaultValue,
