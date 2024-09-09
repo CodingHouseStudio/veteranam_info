@@ -96,6 +96,7 @@ class ReportDialogWidget extends StatelessWidget {
                 labelText: context.l10n.writeYourMessage,
                 errorText: _.message.error.value(context),
                 showErrorText: _.formState == ReportEnum.nextInvalidData,
+                errorMaxLines: 3,
               ),
             ] else ...[
               Text(
