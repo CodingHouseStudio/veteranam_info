@@ -1,6 +1,6 @@
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/foundation.dart';
+import 'package:flutter/foundation.dart' show kReleaseMode;
 import 'package:flutter/material.dart';
 import 'package:veteranam/app.dart';
 import 'package:veteranam/bootstrap.dart';
@@ -14,25 +14,19 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  await FirebaseAppCheck.instanceFor(app: app).activate(
-    webProvider: ReCaptchaV3Provider(
-      'REDACTED',
-    ),
-    androidProvider:
-        kReleaseMode ? AndroidProvider.playIntegrity : AndroidProvider.debug,
-    appleProvider:
-        kReleaseMode ? AppleProvider.deviceCheck : AppleProvider.debug,
-  );
+  if (kReleaseMode) {
+    await FirebaseAppCheck.instanceFor(app: app).activate(
+      webProvider: ReCaptchaV3Provider(
+        'REDACTED',
+      ),
+    );
 
-  await FirebaseAppCheck.instance.activate(
-    webProvider: ReCaptchaV3Provider(
-      'REDACTED',
-    ),
-    androidProvider:
-        kReleaseMode ? AndroidProvider.playIntegrity : AndroidProvider.debug,
-    appleProvider:
-        kReleaseMode ? AppleProvider.deviceCheck : AppleProvider.debug,
-  );
+    await FirebaseAppCheck.instance.activate(
+      webProvider: ReCaptchaV3Provider(
+        'REDACTED',
+      ),
+    );
+  }
 
   // try {
   // if (kIsWeb) {
