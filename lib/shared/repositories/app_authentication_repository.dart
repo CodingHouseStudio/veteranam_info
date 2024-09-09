@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:firebase_core/firebase_core.dart' as firebase_core;
 import 'package:flutter/foundation.dart'
     show kIsWeb, visibleForTesting; //debugPrint
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
@@ -18,6 +19,7 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
     this._firebaseAuth,
     this._googleSignIn,
     this._cache,
+    this._facebookSignIn,
   ) {
     _updateAuthStatusBasedOnCache();
     _updateUserSettingBasedOnCache();
@@ -26,6 +28,7 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   final IStorage _secureStorageRepository;
   final firebase_auth.FirebaseAuth _firebaseAuth;
   final GoogleSignIn _googleSignIn;
+  final FacebookAuth _facebookSignIn;
   final CacheClient _cache;
   final FirestoreService _firestoreService = GetIt.I.get<FirestoreService>();
   final IDeviceRepository _deviceRepository = GetIt.I.get<IDeviceRepository>();
@@ -38,6 +41,9 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   @visibleForTesting
   firebase_auth.GoogleAuthProvider googleAuthProvider =
       firebase_auth.GoogleAuthProvider();
+  @visibleForTesting
+  firebase_auth.FacebookAuthProvider facebookAuthProvider =
+      firebase_auth.FacebookAuthProvider();
 
   /// User cache key.
   /// Should only be used for testing purposes.
@@ -157,7 +163,7 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   @override
   Future<Either<SomeFailure, bool>> signUpWithFacebook() async {
     try {
-      final credential = await _getGoogleAuthCredential();
+      final credential = await _getFacebookAuthCredential();
       if (credential != null) {
         await _firebaseAuth.signInWithCredential(credential);
 
@@ -166,7 +172,7 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
       return const Right(false);
     } on firebase_auth.FirebaseAuthException catch (e, stack) {
       return Left(
-        SignUpWithGoogleFailure.fromCode(error: e, stack: stack).status,
+        SignUpWithFacebookFailure.fromCode(error: e, stack: stack).status,
       );
     } catch (_, stack) {
       return Left(SomeFailure.serverError(error: _, stack: stack));
@@ -174,6 +180,36 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
       _updateAuthStatusBasedOnCache();
       _updateUserSettingBasedOnCache();
     }
+  }
+
+  Future<firebase_auth.AuthCredential?> _getFacebookAuthCredential() async {
+    if (isWeb) {
+      return _getFacebookAuthCredentialWeb();
+    } else {
+      return _getFacebookAuthCredentialMobile();
+    }
+  }
+
+  Future<firebase_auth.AuthCredential?> _getFacebookAuthCredentialWeb() async {
+    final userCredential = await _firebaseAuth.signInWithPopup(
+      facebookAuthProvider,
+    );
+    return userCredential.credential;
+  }
+
+  Future<firebase_auth.AuthCredential?>
+      _getFacebookAuthCredentialMobile() async {
+    // Trigger the sign-in flow
+    final loginResult = await _facebookSignIn.login();
+
+    if (loginResult.accessToken == null) {
+      return null;
+    }
+
+    // Create a credential from the access token
+    return firebase_auth.FacebookAuthProvider.credential(
+      loginResult.accessToken!.tokenString,
+    );
   }
 
   /// Signs in with the provided [email] and [password].
@@ -259,6 +295,7 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
       await Future.wait([
         _firebaseAuth.signOut(),
         _googleSignIn.signOut(),
+        _facebookSignIn.logOut(),
         _secureStorageRepository.deleteAll(),
       ]);
       return logInAnonymously();
@@ -413,6 +450,30 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
         return updateUserSetting(userSetting);
       },
     );
+  }
+
+  @override
+  Future<Either<SomeFailure, bool>> sendSignInLinkToEmail(String email) async {
+    try {
+      await _firebaseAuth.sendSignInLinkToEmail(
+        email: email,
+        actionCodeSettings: firebase_auth.ActionCodeSettings(
+          url: 'http://veteranam.info/login',
+          androidPackageName: KAppText.androidInstallUrl,
+          handleCodeInApp: true,
+          // TODO(iOSBundleId): set value
+          iOSBundleId: 'com.yourapp.bundle', // Replace with your iOS bundle ID
+        ),
+      );
+      return const Right(true);
+    } on firebase_core.FirebaseException catch (e, stack) {
+      return Left(SendFailure.fromCode(error: e, stack: stack).status);
+    } catch (e, stack) {
+      return Left(SomeFailure.serverError(error: e, stack: stack));
+    } finally {
+      _updateAuthStatusBasedOnCache();
+      _updateUserSettingBasedOnCache();
+    }
   }
 }
 

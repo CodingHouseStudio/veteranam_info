@@ -35,22 +35,20 @@ class LoginBodyWidget extends StatelessWidget {
             EmailPasswordFieldsWidget(
               key: KWidgetkeys.screen.login.fields,
               isDesk: isDesk,
-              showPassword: _.showPasswordField,
+              showPassword: showPassword(_.formState),
               onChangedEmail: (value) =>
                   context.read<LoginBloc>().add(LoginEvent.emailUpdated(value)),
               onChangedPassword: (value) => context
                   .read<LoginBloc>()
                   .add(LoginEvent.passwordUpdated(value)),
-              errorTextEmail: _.fieldsIsCorrect ?? true
-                  ? null
-                  : _.email.error.value(context),
-              errorTextPassword: _.fieldsIsCorrect ?? true
-                  ? null
-                  : _.password.error.value(context),
+              errorTextEmail: _.email.error.value(context),
+              errorTextPassword: _.password.error.value(context),
               email: context.read<LoginBloc>().state.email.value,
               backPassword: () => context.read<LoginBloc>().add(
                     const LoginEvent.passwordFieldHide(),
                   ),
+              showErrorText: _.formState == LoginEnum.invalidData ||
+                  _.formState == LoginEnum.passwordInvalidData,
             ),
             if (isDesk)
               KSizedBox.kHeightSizedBox24
@@ -60,7 +58,7 @@ class LoginBodyWidget extends StatelessWidget {
               alignment: Alignment.centerLeft,
               child: DoubleButtonWidget(
                 widgetKey: KWidgetkeys.screen.login.button,
-                text: _.showPasswordField
+                text: showPassword(_.formState)
                     ? context.l10n.login
                     : context.l10n.next,
                 onPressed: () => context.read<LoginBloc>().add(
@@ -75,6 +73,28 @@ class LoginBodyWidget extends StatelessWidget {
                 mobIconPadding: KPadding.kPaddingSize12,
               ),
             ),
+            if (isDesk)
+              KSizedBox.kHeightSizedBox24
+            else
+              KSizedBox.kHeightSizedBox16,
+            if (showPassword(_.formState))
+              Align(
+                alignment: Alignment.centerLeft,
+                child: DoubleButtonWidget(
+                  widgetKey: KWidgetkeys.screen.login.sendEmailButton,
+                  text: context.l10n.loginWithoutPassword,
+                  onPressed: () => context.read<LoginBloc>().add(
+                        const LoginEvent.sendSignInLinkToEmail(),
+                      ),
+                  isDesk: false,
+                  color: AppColors.materialThemeKeyColorsSecondary,
+                  textColor: AppColors.materialThemeWhite,
+                  mobTextWidth: isDesk ? null : double.infinity,
+                  mobHorizontalTextPadding: KPadding.kPaddingSize60,
+                  mobVerticalTextPadding: KPadding.kPaddingSize12,
+                  mobIconPadding: KPadding.kPaddingSize12,
+                ),
+              ),
             if (isDesk)
               KSizedBox.kHeightSizedBox24
             else
@@ -128,21 +148,27 @@ class LoginBodyWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
             ),
             KSizedBox.kHeightSizedBox16,
-            Align(
-              alignment: Alignment.centerLeft,
-              child: ButtonAdditionalWidget(
-                key: KWidgetkeys.widget.signUpBottomButtons.google,
-                text: context.l10n.google,
-                picture: KImage.google(),
-                onPressed: () => context
-                    .read<AuthenticationServicesCubit>()
-                    .authenticationUseGoogle(),
-                isDesk: isDesk,
-              ),
+            // Align(
+            //   alignment: Alignment.centerLeft,
+            //   child:
+            SignUpLoginServiceWidget(
+              // key: KWidgetkeys.widget.signUpBottomButtons.google,
+              // text: context.l10n.google,
+              // picture: KImage.google(),
+              // onPressed: () => context
+              //     .read<AuthenticationServicesCubit>()
+              //     .authenticationUseGoogle(),
+              isDesk: isDesk,
             ),
+            // ),
           ],
         );
       },
     );
   }
+
+  bool showPassword(LoginEnum current) =>
+      current == LoginEnum.passwordInProgress ||
+      current == LoginEnum.showPassword ||
+      current == LoginEnum.passwordInvalidData;
 }

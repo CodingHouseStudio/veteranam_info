@@ -20,39 +20,71 @@ void main() {
   tearDown(GetIt.I.reset);
 
   group('${KScreenBlocName.authenticationServices} ${KGroupText.cubit}', () {
-    late IAppAuthenticationRepository mockAppAuthenticationRepository;
+    late AuthenticationRepository mockAuthenticationRepository;
     late AuthenticationServicesCubit authenticationServicesCubit;
     setUp(() {
-      mockAppAuthenticationRepository = MockIAppAuthenticationRepository();
+      mockAuthenticationRepository = MockAuthenticationRepository();
       authenticationServicesCubit = AuthenticationServicesCubit(
-        appAuthenticationRepository: mockAppAuthenticationRepository,
+        authenticationRepository: mockAuthenticationRepository,
       );
     });
-    blocTest<AuthenticationServicesCubit, AuthenticationServicesFailure>(
-      'emits [AuthenticationServicesFailure] when failure none',
+    blocTest<AuthenticationServicesCubit, AuthenticationServicesFailure?>(
+      'emits [AuthenticationServicesFailure?] when google sign up',
       build: () => authenticationServicesCubit,
       act: (cubit) async {
         when(
-          mockAppAuthenticationRepository.signUpWithGoogle(),
+          mockAuthenticationRepository.signUpWithGoogle(),
         ).thenAnswer(
           (_) async => const Right(true),
         );
         await cubit.authenticationUseGoogle();
       },
       expect: () async => [
-        AuthenticationServicesFailure.none,
+        null,
       ],
     );
-    blocTest<AuthenticationServicesCubit, AuthenticationServicesFailure>(
-      'emits [AuthenticationServicesFailure] when failure serverError',
+    blocTest<AuthenticationServicesCubit, AuthenticationServicesFailure?>(
+      'emits [AuthenticationServicesFailure?] when facebook sign up',
       build: () => authenticationServicesCubit,
       act: (cubit) async {
         when(
-          mockAppAuthenticationRepository.signUpWithGoogle(),
+          mockAuthenticationRepository.signUpWithFacebook(),
+        ).thenAnswer(
+          (_) async => const Right(true),
+        );
+        await cubit.authenticationUseFacebook();
+      },
+      expect: () async => [
+        null,
+      ],
+    );
+    blocTest<AuthenticationServicesCubit, AuthenticationServicesFailure?>(
+      'emits [AuthenticationServicesFailure?] when google sign up'
+      ' failure serverError',
+      build: () => authenticationServicesCubit,
+      act: (cubit) async {
+        when(
+          mockAuthenticationRepository.signUpWithGoogle(),
         ).thenAnswer(
           (_) async => Left(SomeFailure.serverError(error: null)),
         );
         await cubit.authenticationUseGoogle();
+      },
+      expect: () async => [
+        AuthenticationServicesFailure.error,
+      ],
+    );
+    blocTest<AuthenticationServicesCubit, AuthenticationServicesFailure?>(
+      'emits [AuthenticationServicesFailure?] when google sign up'
+      ' failure serverError',
+      build: () => authenticationServicesCubit,
+      act: (cubit) async {
+        when(
+          mockAuthenticationRepository.signUpWithFacebook(),
+        ).thenAnswer(
+          (_) async => Left(SomeFailure.serverError(error: null)),
+        );
+        await cubit.authenticationUseFacebook();
       },
       expect: () async => [
         AuthenticationServicesFailure.error,

@@ -1111,6 +1111,10 @@
   "@dontRememberPassword": {
     "examples": "Text for the password recovery button on the Login page"
   },
+  "loginWithoutPassword": "Login without password",
+  "@loginWithoutPassword": {
+    "documentation": "Text for the button to send an email login link on the Login page."
+  },
   "noInternet": "No internet",
   "@noInternet": {
     "examples": "Text for message on mobile version about no internet"

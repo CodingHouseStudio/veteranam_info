@@ -14,12 +14,12 @@ void main() {
   tearDown(GetIt.I.reset);
   group('${KScreenBlocName.login} ${KGroupText.bloc}', () {
     late LoginBloc loginBloc;
-    late IAppAuthenticationRepository mockAppAuthenticationRepository;
+    late AuthenticationRepository mockAuthenticationRepository;
     setUp(() {
       ExtendedDateTime.current = KTestText.feedbackModel.timestamp;
-      mockAppAuthenticationRepository = MockIAppAuthenticationRepository();
+      mockAuthenticationRepository = MockAuthenticationRepository();
       when(
-        mockAppAuthenticationRepository.logInWithEmailAndPassword(
+        mockAuthenticationRepository.logIn(
           email: KTestText.userEmail,
           password: KTestText.passwordCorrect,
         ),
@@ -27,7 +27,7 @@ void main() {
         (realInvocation) async => const Right(true),
       );
       loginBloc = LoginBloc(
-        appAuthenticationRepository: mockAppAuthenticationRepository,
+        authenticationRepository: mockAuthenticationRepository,
       );
     });
 
@@ -141,7 +141,7 @@ void main() {
       build: () => loginBloc,
       act: (bloc) {
         when(
-          mockAppAuthenticationRepository.logInWithEmailAndPassword(
+          mockAuthenticationRepository.logIn(
             email: KTestText.userEmail,
             password: KTestText.passwordCorrect,
           ),

@@ -9,6 +9,7 @@ class EmailPasswordFieldsWidget extends StatefulWidget {
     required this.onChangedPassword,
     required this.email,
     required this.backPassword,
+    required this.showErrorText,
     super.key,
     this.errorTextEmail,
     this.errorTextPassword,
@@ -19,6 +20,7 @@ class EmailPasswordFieldsWidget extends StatefulWidget {
   final void Function(String) onChangedEmail;
   final void Function(String) onChangedPassword;
   final String? errorTextEmail;
+  final bool showErrorText;
   final String? errorTextPassword;
   final String email;
   final void Function() backPassword;
@@ -124,6 +126,7 @@ class _EmailPasswordFieldsWidgetState extends State<EmailPasswordFieldsWidget>
             focusNode: passwordFocusNode,
             disposeFocusNode: false,
             obscureText: obscurePassword,
+            showErrorText: widget.showErrorText,
           ),
           KSizedBox.kHeightSizedBox8,
           Padding(
@@ -150,6 +153,7 @@ class _EmailPasswordFieldsWidgetState extends State<EmailPasswordFieldsWidget>
             hintText: context.l10n.email,
             isDesk: widget.isDesk,
             controller: emailController,
+            showErrorText: widget.showErrorText,
           ),
       ],
       // ),

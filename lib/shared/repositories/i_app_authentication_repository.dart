@@ -42,4 +42,6 @@ abstract class IAppAuthenticationRepository {
   );
 
   Future<Either<SomeFailure, bool>> createFcmUserSetting();
+
+  Future<Either<SomeFailure, bool>> sendSignInLinkToEmail(String email);
 }
