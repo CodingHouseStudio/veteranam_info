@@ -255,8 +255,9 @@ class _NawbarWidgetImplematationState
                             context.dialog.showMobileMenuDialog(),
                       ),
                     if (context.read<AuthenticationBloc>().state.status !=
-                            AuthenticationStatus.authenticated &&
-                        Config.isDevelopment) ...[
+                            AuthenticationStatus.authenticated
+                        //&&Config.isDevelopment
+                        ) ...[
                       KSizedBox.kWidthSizedBox16,
                       if (widget.isTablet)
                         TextButton(
@@ -351,5 +352,5 @@ class _NawbarWidgetImplematationState
         widgetKey: key,
       );
   void loginNavigation(BuildContext context) =>
-      context.goNamed(KRoute.login.name);
+      context.goNamed(KRoute.userRole.name);
 }

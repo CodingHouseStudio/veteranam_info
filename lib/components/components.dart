@@ -23,6 +23,7 @@ export 'sign_up/sign_up.dart';
 export 'story/story.dart';
 export 'story_add/story_add.dart';
 export 'thanks/thanks.dart';
+export 'user_role/user_role.dart';
 export 'work/work.dart';
 export 'work_employee/work_employee.dart';
 export 'work_employer/employer.dart';

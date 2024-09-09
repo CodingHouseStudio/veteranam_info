@@ -118,4 +118,8 @@ abstract class KRoute {
     path: 'FAQ',
     name: 'FAQ',
   );
+  static const _RouteItem userRole = _RouteItem(
+    path: '/userRole',
+    name: 'UserRole',
+  );
 }

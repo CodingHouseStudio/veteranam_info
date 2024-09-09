@@ -62,6 +62,16 @@ GoRouter router = GoRouter(
           child: const SignUpScreen(),
         ),
       ),
+    // if (Config.isDevelopment)
+    GoRoute(
+      name: KRoute.userRole.name,
+      path: KRoute.userRole.path,
+      pageBuilder: (context, state) => NoTransitionPage(
+        key: state.pageKey,
+        name: state.name,
+        child: const UserRoleScreen(),
+      ),
+    ),
     if (Config.isDevelopment)
       GoRoute(
         name: KRoute.questionsForm.name,
