@@ -1084,5 +1084,9 @@
   "dontRememberPassword": "Don't remember the password",
   "@dontRememberPassword": {
     "examples": "Text for the password recovery button on the Login page"
+  },
+  "signUpInWith": "Sign up with",
+  "@signUpInWith": {
+    "examples": "The text on the SignUp page before the login button with google, facebook, apple."
   }
 }

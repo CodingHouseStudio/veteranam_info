@@ -1088,5 +1088,9 @@
   "dontRememberPassword": "Не пам'ятаю пароль",
   "@dontRememberPassword": {
     "examples": "Текст для кнопки відновлення паролю на сторінці Login"
+  },
+  "signUpInWith": "Зареєструватись через",
+  "@signUpInWith": {
+    "examples": "Текст на сторінці SignUp перед кнопкою увійти за допомогою google, facebook, apple."
   }
 }
