@@ -3,7 +3,6 @@ import 'package:flutter/foundation.dart';
 import 'package:formz/formz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:veteranam/components/components.dart';
 import 'package:veteranam/shared/shared.dart';
 
 part 'sign_up_bloc.freezed.dart';
@@ -39,6 +38,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
       state.copyWith(
         email: EmailFieldModel.dirty(event.email),
         failure: null,
+        formState: SignUpEnum.inProgress,
       ),
     );
   }
@@ -51,6 +51,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
       state.copyWith(
         password: PasswordFieldModel.dirty(event.password),
         failure: null,
+        formState: SignUpEnum.passwordInProgress,
       ),
     );
   }
@@ -81,11 +82,13 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
         result.fold(
           (l) => state.copyWith(
             failure: l._toSignUpError(),
-            formState: SignUpEnum.inProgress,
+            formState: SignUpEnum.initial,
           ),
-          (r) => state.copyWith(
+          (r) => const SignUpState(
+            email: EmailFieldModel.pure(),
+            password: PasswordFieldModel.pure(),
             failure: null,
-            formState: SignUpEnum.inProgress,
+            formState: SignUpEnum.success,
           ),
         ),
       );

@@ -25,7 +25,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     on<_PasswordUpdated>(_onPasswordUpdated);
     on<_LoginSubmitted>(_onLoginSubmitted);
     on<_PasswordFieldHide>(_onPasswordFieldHide);
-    on<_SendSignInLinkToEmail>(_onSendSignInLinkToEmail);
   }
 
   final AuthenticationRepository _authenticationRepository;
@@ -83,13 +82,15 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         (l) => emit(
           state.copyWith(
             failure: l._toLogInError(),
-            formState: LoginEnum.inProgress,
+            formState: LoginEnum.initial,
           ),
         ),
         (r) => emit(
-          state.copyWith(
+          const LoginState(
+            email: EmailFieldModel.pure(),
+            password: PasswordFieldModel.pure(),
             failure: null,
-            formState: LoginEnum.inProgress,
+            formState: LoginEnum.success,
           ),
         ),
       );
@@ -111,37 +112,5 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     emit(
       state.copyWith(formState: LoginEnum.inProgress),
     );
-  }
-
-  Future<void> _onSendSignInLinkToEmail(
-    _SendSignInLinkToEmail event,
-    Emitter<LoginState> emit,
-  ) async {
-    if (state.email.isValid) {
-      final result = await _authenticationRepository.sendSignInLinkToEmail(
-        state.email.value,
-      );
-
-      result.fold(
-        (l) => emit(
-          state.copyWith(
-            failure: l._toLogInError(),
-            formState: LoginEnum.inProgress,
-          ),
-        ),
-        (r) => emit(
-          state.copyWith(
-            failure: null,
-            formState: LoginEnum.inProgress,
-          ),
-        ),
-      );
-    } else {
-      emit(
-        state.copyWith(
-          formState: LoginEnum.invalidData,
-        ),
-      );
-    }
   }
 }

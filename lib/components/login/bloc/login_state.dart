@@ -39,4 +39,5 @@ enum LoginEnum {
   invalidData,
   passwordInProgress,
   passwordInvalidData,
+  success
 }

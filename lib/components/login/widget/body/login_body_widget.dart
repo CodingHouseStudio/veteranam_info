@@ -77,24 +77,6 @@ class LoginBodyWidget extends StatelessWidget {
               KSizedBox.kHeightSizedBox24
             else
               KSizedBox.kHeightSizedBox16,
-            if (showPassword(_.formState))
-              Align(
-                alignment: Alignment.centerLeft,
-                child: DoubleButtonWidget(
-                  widgetKey: KWidgetkeys.screen.login.sendEmailButton,
-                  text: context.l10n.loginWithoutPassword,
-                  onPressed: () => context.read<LoginBloc>().add(
-                        const LoginEvent.sendSignInLinkToEmail(),
-                      ),
-                  isDesk: false,
-                  color: AppColors.materialThemeKeyColorsSecondary,
-                  textColor: AppColors.materialThemeWhite,
-                  mobTextWidth: isDesk ? null : double.infinity,
-                  mobHorizontalTextPadding: KPadding.kPaddingSize60,
-                  mobVerticalTextPadding: KPadding.kPaddingSize12,
-                  mobIconPadding: KPadding.kPaddingSize12,
-                ),
-              ),
             if (isDesk)
               KSizedBox.kHeightSizedBox24
             else

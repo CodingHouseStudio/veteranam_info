@@ -1815,33 +1815,6 @@ class MockIAppAuthenticationRepository extends _i1.Mock
           ),
         )),
       ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
-
-  @override
-  _i8.Future<_i2.Either<_i3.SomeFailure, bool>> sendSignInLinkToEmail(
-          String? email) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #sendSignInLinkToEmail,
-          [email],
-        ),
-        returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
-            _FakeEither_0<_i3.SomeFailure, bool>(
-          this,
-          Invocation.method(
-            #sendSignInLinkToEmail,
-            [email],
-          ),
-        )),
-        returnValueForMissingStub:
-            _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
-                _FakeEither_0<_i3.SomeFailure, bool>(
-          this,
-          Invocation.method(
-            #sendSignInLinkToEmail,
-            [email],
-          ),
-        )),
-      ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
 }
 
 /// A class which mocks [AppAuthenticationRepository].
@@ -2274,33 +2247,6 @@ class MockAppAuthenticationRepository extends _i1.Mock
           ),
         )),
       ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
-
-  @override
-  _i8.Future<_i2.Either<_i3.SomeFailure, bool>> sendSignInLinkToEmail(
-          String? email) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #sendSignInLinkToEmail,
-          [email],
-        ),
-        returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
-            _FakeEither_0<_i3.SomeFailure, bool>(
-          this,
-          Invocation.method(
-            #sendSignInLinkToEmail,
-            [email],
-          ),
-        )),
-        returnValueForMissingStub:
-            _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
-                _FakeEither_0<_i3.SomeFailure, bool>(
-          this,
-          Invocation.method(
-            #sendSignInLinkToEmail,
-            [email],
-          ),
-        )),
-      ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
 }
 
 /// A class which mocks [AuthenticationRepository].
@@ -2603,33 +2549,6 @@ class MockAuthenticationRepository extends _i1.Mock
             #updateUserSetting,
             [],
             {#userSetting: userSetting},
-          ),
-        )),
-      ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
-
-  @override
-  _i8.Future<_i2.Either<_i3.SomeFailure, bool>> sendSignInLinkToEmail(
-          String? email) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #sendSignInLinkToEmail,
-          [email],
-        ),
-        returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
-            _FakeEither_0<_i3.SomeFailure, bool>(
-          this,
-          Invocation.method(
-            #sendSignInLinkToEmail,
-            [email],
-          ),
-        )),
-        returnValueForMissingStub:
-            _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
-                _FakeEither_0<_i3.SomeFailure, bool>(
-          this,
-          Invocation.method(
-            #sendSignInLinkToEmail,
-            [email],
           ),
         )),
       ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);

@@ -451,30 +451,6 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
       },
     );
   }
-
-  @override
-  Future<Either<SomeFailure, bool>> sendSignInLinkToEmail(String email) async {
-    try {
-      await _firebaseAuth.sendSignInLinkToEmail(
-        email: email,
-        actionCodeSettings: firebase_auth.ActionCodeSettings(
-          url: 'http://veteranam.info/login',
-          androidPackageName: KAppText.androidInstallUrl,
-          handleCodeInApp: true,
-          // TODO(iOSBundleId): set value
-          iOSBundleId: 'com.yourapp.bundle', // Replace with your iOS bundle ID
-        ),
-      );
-      return const Right(true);
-    } on firebase_core.FirebaseException catch (e, stack) {
-      return Left(SendFailure.fromCode(error: e, stack: stack).status);
-    } catch (e, stack) {
-      return Left(SomeFailure.serverError(error: e, stack: stack));
-    } finally {
-      _updateAuthStatusBasedOnCache();
-      _updateUserSettingBasedOnCache();
-    }
-  }
 }
 
 extension on firebase_auth.User {

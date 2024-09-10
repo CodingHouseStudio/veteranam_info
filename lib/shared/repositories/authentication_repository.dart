@@ -283,27 +283,6 @@ class AuthenticationRepository {
     return result;
   }
 
-  Future<Either<SomeFailure, bool>> sendSignInLinkToEmail(String email) async {
-    final result = await iAppAuthenticationRepository.sendSignInLinkToEmail(
-      email,
-    );
-
-    return result.fold(
-      (l) {
-        // debugPrint('error: $l');
-        _authenticationStatuscontroller.add(
-          AuthenticationStatus.anonymous,
-        );
-        return Left(l);
-      },
-      (r) {
-        // debugPrint('authenticated');
-        _authenticationStatuscontroller.add(AuthenticationStatus.authenticated);
-        return Right(r);
-      },
-    );
-  }
-
   bool isAnonymously() => iAppAuthenticationRepository.isAnonymously();
 
   bool isAnonymouslyOrEmty() =>

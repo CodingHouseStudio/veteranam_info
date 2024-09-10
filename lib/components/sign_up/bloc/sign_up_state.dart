@@ -37,6 +37,7 @@ enum SignUpEnum {
   showPassword,
   inProgress,
   invalidData,
+  success,
   passwordInProgress,
   passwordInvalidData,
 }
