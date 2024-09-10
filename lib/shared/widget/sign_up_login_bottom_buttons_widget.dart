@@ -48,24 +48,25 @@ class SignUpLoginServiceWidget extends StatelessWidget {
       //   style: isDesk ? AppTextStyle.text40 : AppTextStyle.text24,
       // ),
       // KSizedBox.kHeightSizedBox16,
-      return Row(
-        children: [
-          googleButton(context: context, isDesk: true),
-          KSizedBox.kWidthSizedBox16,
-          facebookButton(
-            context: context,
-            isDesk: true,
-          ),
-          // KSizedBox.kWidthSizedBox16,
-          // Expanded(
-          //   child: buildBottomButton(
-          //     key: KWidgetkeys.widget.signUpBottomButtons.apple,
-          //     text: context.l10n.apple,
-          //     icon: KImage.apple(),
-          //   ),
-          // ),
-        ],
-      );
+      return
+          // Row(
+          //   children: [
+          googleButton(context: context, isDesk: true);
+      // KSizedBox.kWidthSizedBox16,
+      // facebookButton(
+      //   context: context,
+      //   isDesk: true,
+      // ),
+      // KSizedBox.kWidthSizedBox16,
+      // Expanded(
+      //   child: buildBottomButton(
+      //     key: KWidgetkeys.widget.signUpBottomButtons.apple,
+      //     text: context.l10n.apple,
+      //     icon: KImage.apple(),
+      //   ),
+      // ),
+      //   ],
+      // );
       //   ],
       // );
     } else {
@@ -83,16 +84,16 @@ class SignUpLoginServiceWidget extends StatelessWidget {
           //   key: KWidgetkeys.widget.signUpBottomButtons.title,
           //   style: isDesk ? AppTextStyle.text40 : AppTextStyle.text24,
           // ),
-          KSizedBox.kHeightSizedBox16,
+          // KSizedBox.kHeightSizedBox16,
           googleButton(
             context: context,
             isDesk: false,
           ),
-          KSizedBox.kHeightSizedBox16,
-          facebookButton(
-            context: context,
-            isDesk: false,
-          ),
+          // KSizedBox.kHeightSizedBox16,
+          // facebookButton(
+          //   context: context,
+          //   isDesk: false,
+          // ),
           // KSizedBox.kHeightSizedBox16,
           // buildBottomButton(
           //   key: KWidgetkeys.widget.signUpBottomButtons.apple,
@@ -108,31 +109,34 @@ class SignUpLoginServiceWidget extends StatelessWidget {
     required BuildContext context,
     required bool isDesk,
   }) =>
-      _button(
-        key: KWidgetkeys.widget.signUpBottomButtons.google,
-        context: context,
-        isDesk: isDesk,
-        text: context.l10n.google,
-        icon: KImage.google(),
-        onPressed: () => context
-            .read<AuthenticationServicesCubit>()
-            .authenticationUseGoogle(),
+      Align(
+        alignment: Alignment.bottomLeft,
+        child: _button(
+          key: KWidgetkeys.widget.signUpBottomButtons.google,
+          context: context,
+          isDesk: isDesk,
+          text: context.l10n.google,
+          icon: KImage.google(),
+          onPressed: () => context
+              .read<AuthenticationServicesCubit>()
+              .authenticationUseGoogle(),
+        ),
       );
 
-  Widget facebookButton({
-    required BuildContext context,
-    required bool isDesk,
-  }) =>
-      _button(
-        key: KWidgetkeys.widget.signUpBottomButtons.facebook,
-        context: context,
-        isDesk: isDesk,
-        text: context.l10n.facebook,
-        icon: KImage.facebook(),
-        onPressed: () => context
-            .read<AuthenticationServicesCubit>()
-            .authenticationUseFacebook(),
-      );
+  // Widget facebookButton({
+  //   required BuildContext context,
+  //   required bool isDesk,
+  // }) =>
+  //     _button(
+  //       key: KWidgetkeys.widget.signUpBottomButtons.facebook,
+  //       context: context,
+  //       isDesk: isDesk,
+  //       text: context.l10n.facebook,
+  //       icon: KImage.facebookLogin(),
+  //       onPressed: () => context
+  //           .read<AuthenticationServicesCubit>()
+  //           .authenticationUseFacebook(),
+  //     );
 
   Widget _button({
     required BuildContext context,
