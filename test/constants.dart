@@ -42,6 +42,7 @@ abstract class KGroupText {
   static const failureSend = 'Failure set';
   static const intial = 'renders initial';
   static const network = 'Reload network';
+  static const offlineNetwork = 'offline network banner';
   static const goRouter = 'Mock Go Router';
   static const goTo = 'go to';
   static const validationError = 'Validation error';
@@ -90,14 +91,10 @@ abstract class KTestText {
   static const fieldEmpty = '';
 
   static const phoneNumber = '+3809900000';
+  static const build = '50';
 
   static final questionModelItems = <QuestionModel>[
-    QuestionModel(
-      id: '0',
-      title: KMockText.questionTitle.first,
-      subtitle: KMockText.questionSubtitle,
-      navigationLink: 'test_link',
-    ),
+    KMockText.questionModel,
   ];
 
   static final workModelItems = <WorkModel>[
@@ -364,7 +361,7 @@ abstract class KTestText {
         id: i.toString(),
         reasonComplaint: ReasonComplaint.fraudOrSpam,
         // email: userEmail,
-        message: field,
+        message: field + field + field + field,
         date: dateTime,
         card: CardEnum.discount,
         userId: user.id,

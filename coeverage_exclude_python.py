@@ -39,7 +39,8 @@ exclude_patterns = [
     r'lib/shared/repositories/build_repository.dart',
     r'lib/shared/widget/row_sliver_widget.dart',
     r'lib/shared/repositories/failure_repository.dart',
-    r'lib/shared/repositories/failure_module.dart'
+    r'lib/shared/repositories/failure_module.dart',
+    r'lib/shared/repositories/app_info_repository.dart'
 ]
 
 def exclude_files(input_file, temp_file, exclude_patterns):

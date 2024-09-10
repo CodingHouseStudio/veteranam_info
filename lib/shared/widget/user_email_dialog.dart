@@ -11,7 +11,7 @@ class UserEmailDialog extends StatefulWidget {
     required this.onChanged,
     required this.isDesk,
     required this.sendOnPressed,
-    required this.closeOnPressed,
+    // required this.closeOnPressed,
     required this.userEmailEnum,
     required this.emailCloseDelay,
     super.key,
@@ -19,7 +19,7 @@ class UserEmailDialog extends StatefulWidget {
   final void Function(String) onChanged;
   final bool isDesk;
   final void Function() sendOnPressed;
-  final void Function() closeOnPressed;
+  // final void Function() closeOnPressed;
   final UserEmailEnum userEmailEnum;
   final int emailCloseDelay;
 
@@ -52,8 +52,10 @@ class _UserEmailDialogState extends State<UserEmailDialog> {
   Widget build(BuildContext context) {
     return BlocConsumer<DiscountUserEmailFormBloc, DiscountUserEmailFormState>(
       listener: (context, state) {
-        if (state.formState == EmailEnum.success ||
-            state.formState == EmailEnum.close) {
+        if (state.formState == EmailEnum.success
+            // ||
+            //     state.formState == EmailEnum.close
+            ) {
           // if (state.formState == EmailEnum.close) {
           //   FirebaseAnalytics.instance.logEvent(
           //     name: 'discount_email_abandon',
@@ -66,7 +68,7 @@ class _UserEmailDialogState extends State<UserEmailDialog> {
           //     },
           //   );
           // }
-          context.pop();
+          context.pop<bool>(true);
         }
       },
       builder: (context, state) => DecoratedBox(
@@ -93,7 +95,8 @@ class _UserEmailDialogState extends State<UserEmailDialog> {
                 child: IconButtonWidget(
                   icon: KIcon.close,
                   key: KWidgetkeys.widget.userEmailDialog.icon,
-                  onPressed: _isCloseEnabled ? widget.closeOnPressed : null,
+                  onPressed:
+                      _isCloseEnabled ? () => context.pop<bool>(false) : null,
                   padding: 0,
                   color: AppColors.materialThemeKeyColorsNeutralVariant,
                   background: AppColors.materialThemeWhite,

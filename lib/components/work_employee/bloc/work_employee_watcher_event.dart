@@ -21,7 +21,7 @@ class WorkEmployeeWatcherEvent with _$WorkEmployeeWatcherEvent {
   const factory WorkEmployeeWatcherEvent.filterReset() = _FilterReset;
 
   const factory WorkEmployeeWatcherEvent.failure({
-    required Object error,
+    required Object? error,
     required StackTrace stack,
   }) = _Failure;
 }

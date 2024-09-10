@@ -130,8 +130,8 @@ class FirestoreService {
   }
 
   Future<List<FundModel>> getFunds(
-    List<String>? reportIdItems,
-  ) async {
+      // List<String>? reportIdItems,
+      ) async {
     try {
       // Try to get the data from the server first
       final docSnapshot = await _db
@@ -343,8 +343,8 @@ class FirestoreService {
   }
 
   Stream<List<DiscountModel>> getDiscounts(
-    List<String>? reportIdItems,
-  ) {
+      // List<String>? reportIdItems,
+      ) {
     return _db
         .collection(FirebaseCollectionName.discount)
         .orderBy(DiscountModelJsonField.dateVerified, descending: true)

@@ -14,8 +14,12 @@ class DiscountRepository implements IDiscountRepository {
   final FirestoreService _firestoreService = GetIt.I.get<FirestoreService>();
 
   @override
-  Stream<List<DiscountModel>> getDiscountItems({List<String>? reportIdItems}) =>
-      _firestoreService.getDiscounts(reportIdItems);
+  Stream<List<DiscountModel>> getDiscountItems(
+          //{List<String>? reportIdItems}
+          ) =>
+      _firestoreService.getDiscounts(
+          //reportIdItems
+          );
 
   @override
   Future<void> addMockDiscountItems() async {

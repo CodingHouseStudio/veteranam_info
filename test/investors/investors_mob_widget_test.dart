@@ -68,8 +68,8 @@ void main() {
       );
       when(
         mockInvestorsRepository.getFunds(
-          reportIdItems: KTestText.reportItems.getIdCard,
-        ),
+            // reportIdItems: KTestText.reportItems.getIdCard,
+            ),
       ).thenAnswer(
         (invocation) async => Right(KTestText.fundItems),
       );
@@ -93,6 +93,20 @@ void main() {
       );
 
       await investorsInitialHelper(tester);
+    });
+
+    testWidgets('${KGroupText.offlineNetwork} ', (tester) async {
+      await networkMobHelper(
+        tester: tester,
+        pumpApp: () async => investorsPumpAppHelper(
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          mockInvestorsRepository: mockInvestorsRepository,
+          mockReportRepository: mockReportRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
+          mockUrlRepository: mockUrlRepository,
+          tester: tester,
+        ),
+      );
     });
 
     group('${KGroupText.goRouter} ', () {

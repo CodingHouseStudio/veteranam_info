@@ -49,9 +49,9 @@ abstract class KButtonStyles {
 
   static const whiteButtonStyle = ButtonStyle(
     backgroundColor: WidgetStatePropertyAll(AppColors.materialThemeWhite),
-    minimumSize: WidgetStatePropertyAll(
-      Size(KMinMaxSize.minWidth100, KMinMaxSize.minHeight50),
-    ),
+    // minimumSize: WidgetStatePropertyAll(
+    //   Size(KMinMaxSize.minWidth100, KMinMaxSize.minHeight50),
+    // ),
     padding: WidgetStatePropertyAll(EdgeInsets.all(KPadding.kPaddingSize8)),
     // side: WidgetStatePropertyAll( BorderSide(
     //   color: KColorTheme.white,

@@ -6,7 +6,9 @@ import 'package:veteranam/shared/shared.dart';
 
 enum NetworkStatus {
   network,
-  offline,
+  offline;
+
+  bool get isOffline => this == NetworkStatus.offline;
 }
 
 @singleton

@@ -31,6 +31,8 @@ abstract class KDimensions {
   static const emailScrollCount = 2;
   static const emailCloseDelay = 3;
 
+  static const bottomDialogHeightFactor = 0.9;
+
   static const descriptionMobHideLength = 100;
   static const descriptionDeskHideLength = 200;
 }

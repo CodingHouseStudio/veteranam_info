@@ -43,7 +43,7 @@ class StoryWatcherBloc extends Bloc<StoryWatcherEvent, StoryWatcherState> {
           story,
         ),
       ),
-      onError: (Object error, StackTrace stack) {
+      onError: (dynamic error, StackTrace stack) {
         // debugPrint('error is $error');
         add(StoryWatcherEvent.failure(error: error, stack: stack));
       },

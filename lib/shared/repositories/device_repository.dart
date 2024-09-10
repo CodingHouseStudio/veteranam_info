@@ -18,7 +18,7 @@ class DeviceRepository implements IDeviceRepository {
 
   final FirebaseMessaging _firebaseMessaging;
   final DeviceInfoPlugin _deviceInfoPlugin;
-  final BuildRepository _buildRepository;
+  final AppInfoRepository _buildRepository;
 
   Future<void> _messagingInit() async {
     try {
@@ -170,11 +170,12 @@ class DeviceRepository implements IDeviceRepository {
 
       // For apple platforms, ensure the APNS token is available before making
       // any FCM plugin API calls
-      final apnsToken = await _firebaseMessaging.getAPNSToken();
+      // final apnsToken = await _firebaseMessaging.getAPNSToken();
 
       if (notificationSettings.authorizationStatus ==
-              AuthorizationStatus.authorized &&
-          (!platform.isIOS || apnsToken != null)) {
+              AuthorizationStatus.authorized
+          //&& (!platform.isIOS || apnsToken != null)
+          ) {
         fcmToken = await _firebaseMessaging.getToken(
           vapidKey: Config.isProduction
               ? KSecurityKeys.firebaseProdVapidKey
