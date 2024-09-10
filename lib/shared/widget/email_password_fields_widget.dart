@@ -9,6 +9,7 @@ class EmailPasswordFieldsWidget extends StatefulWidget {
     required this.onChangedPassword,
     required this.email,
     required this.backPassword,
+    required this.isLogin,
     super.key,
     this.errorTextEmail,
     this.errorTextPassword,
@@ -22,6 +23,7 @@ class EmailPasswordFieldsWidget extends StatefulWidget {
   final String? errorTextPassword;
   final String email;
   final void Function() backPassword;
+  final bool isLogin;
 
   @override
   State<EmailPasswordFieldsWidget> createState() =>
@@ -126,22 +128,23 @@ class _EmailPasswordFieldsWidgetState extends State<EmailPasswordFieldsWidget>
             obscureText: obscurePassword,
           ),
           KSizedBox.kHeightSizedBox8,
-          Padding(
-            padding: const EdgeInsets.only(
-              left: KPadding.kPaddingSize32,
-            ),
-            child: TextButton(
-              key: KWidgetkeys.widget.emailPasswordFields.recoveryButton,
-              style: KButtonStyles.withoutStyle,
-              onPressed: null,
-              child: Text(
-                context.l10n.dontRememberPassword,
-                style: AppTextStyle.materialThemeTitleMedium.copyWith(
-                  decoration: TextDecoration.underline,
+          if (widget.isLogin)
+            Padding(
+              padding: const EdgeInsets.only(
+                left: KPadding.kPaddingSize32,
+              ),
+              child: TextButton(
+                key: KWidgetkeys.widget.emailPasswordFields.recoveryButton,
+                style: KButtonStyles.withoutStyle,
+                onPressed: null,
+                child: Text(
+                  context.l10n.dontRememberPassword,
+                  style: AppTextStyle.materialThemeTitleMedium.copyWith(
+                    decoration: TextDecoration.underline,
+                  ),
                 ),
               ),
             ),
-          ),
         ] else
           TextFieldWidget(
             widgetKey: KWidgetkeys.widget.emailPasswordFields.fieldEmail,
