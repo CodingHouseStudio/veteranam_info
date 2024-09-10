@@ -11,15 +11,59 @@ import 'package:veteranam/shared/shared.dart';
   // signalsReady: true,
 )
 class DiscountRepository implements IDiscountRepository {
+  DiscountRepository() {
+    // Listen to currentUser changes and emit auth status
+    _discountsController = StreamController<List<DiscountModel>>.broadcast(
+      onListen: _getDiscountItems,
+      onCancel: _onDiscountStreamClose,
+    );
+  }
   final FirestoreService _firestoreService = GetIt.I.get<FirestoreService>();
+  final ArtifactDownloadHelper _artifactDownloadHelper =
+      GetIt.I.get<ArtifactDownloadHelper>();
+  late StreamController<List<DiscountModel>> _discountsController;
+  StreamSubscription<List<DiscountModel>>? _discountSubscription;
 
   @override
-  Stream<List<DiscountModel>> getDiscountItems(
-          //{List<String>? reportIdItems}
-          ) =>
-      _firestoreService.getDiscounts(
-          //reportIdItems
-          );
+  Stream<List<DiscountModel>> get discounts => _discountsController.stream;
+
+  void _getDiscountItems(
+      //{List<String>? reportIdItems}
+      ) {
+    final discountModelsStream = _firestoreService.getDiscounts(
+        //reportIdItems
+        );
+    _discountSubscription ??= discountModelsStream.listen(
+      (discountModels) {
+        _discountsController.add(discountModels);
+      },
+    );
+    if (!KTest.testIsWeb) {
+      discountModelsStream.asyncMap(
+        (discountModels) async {
+          final models = <DiscountModel>[];
+          for (final discountModel in discountModels) {
+            if (discountModel.userPhoto != null) {
+              // Await for the userPhoto download and update the discountModel
+              final updatedPhoto =
+                  await _artifactDownloadHelper.downloadArtifacts(
+                discountModel.userPhoto!,
+              );
+              models.add(discountModel.copyWith(userPhoto: updatedPhoto));
+            } else {
+              models.add(discountModel);
+            }
+          }
+          _discountsController.add(models);
+          return models;
+        },
+      );
+    }
+  }
+
+  void _onDiscountStreamClose() {
+    _discountSubscription?.cancel();
+  }
 
   @override
   Future<void> addMockDiscountItems() async {

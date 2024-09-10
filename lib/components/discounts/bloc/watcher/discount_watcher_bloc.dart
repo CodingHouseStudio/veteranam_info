@@ -63,16 +63,15 @@ class DiscountWatcherBloc
     _Started event,
     Emitter<DiscountWatcherState> emit,
   ) async {
+    // _discountRepository.getDiscountItems(
+    //     // reportIdItems: reportItems?.getIdCard,
+    //     );
     emit(state.copyWith(loadingStatus: LoadingStatus.loading));
 
     // final reportItems = await _getReport();
 
     await _discountItemsSubscription?.cancel();
-    _discountItemsSubscription = _discountRepository
-        .getDiscountItems(
-            // reportIdItems: reportItems?.getIdCard,
-            )
-        .listen(
+    _discountItemsSubscription = _discountRepository.discounts.listen(
       (discount) {
         add(
           DiscountWatcherEvent.updated(

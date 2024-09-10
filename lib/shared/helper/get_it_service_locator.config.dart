@@ -17,6 +17,7 @@ import 'package:firebase_messaging/firebase_messaging.dart' as _i892;
 import 'package:firebase_remote_config/firebase_remote_config.dart' as _i627;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:google_sign_in/google_sign_in.dart' as _i116;
+import 'package:http/http.dart' as _i519;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:veteranam/components/discount_card/bloc/discount_card_watcher_bloc.dart'
     as _i334;
@@ -73,6 +74,9 @@ import 'package:veteranam/shared/bloc/network/network_cubit.dart' as _i891;
 import 'package:veteranam/shared/bloc/report/report_bloc.dart' as _i765;
 import 'package:veteranam/shared/bloc/url/url_cubit.dart' as _i319;
 import 'package:veteranam/shared/data_provider/analytics_module.dart' as _i606;
+import 'package:veteranam/shared/data_provider/artifact_download_helper.dart'
+    as _i815;
+import 'package:veteranam/shared/data_provider/artifact_module.dart' as _i331;
 import 'package:veteranam/shared/data_provider/cache_provider.dart' as _i37;
 import 'package:veteranam/shared/data_provider/firebase_analytics_provider.dart'
     as _i777;
@@ -129,6 +133,7 @@ extension GetItInjectableX on _i174.GetIt {
       environmentFilter,
     );
     final failureModule = _$FailureModule();
+    final artifactModule = _$ArtifactModule();
     final messagingModule = _$MessagingModule();
     final analytucsModule = _$AnalytucsModule();
     final remoteConfigModule = _$RemoteConfigModule();
@@ -137,6 +142,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i141.FirebaseCrashlytics>(
         () => failureModule.firebaseCrashlytics);
     gh.factory<_i37.CacheClient>(() => _i37.CacheClient());
+    gh.singleton<_i519.Client>(() => artifactModule.http);
     gh.singleton<_i1008.AppInfoRepository>(() => _i1008.AppInfoRepository());
     gh.singleton<_i892.FirebaseMessaging>(
         () => messagingModule.firebaseMessaging);
@@ -144,6 +150,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => messagingModule.deviceInfoPlugin);
     gh.lazySingleton<_i960.FailureRepository>(
         () => _i960.FailureRepository(gh<_i141.FirebaseCrashlytics>()));
+    gh.singleton<_i815.ArtifactDownloadHelper>(
+        () => _i815.ArtifactDownloadHelper(http: gh<_i519.Client>()));
     gh.singleton<_i1033.FirestoreService>(
         () => _i1033.FirestoreService(gh<_i1001.CacheClient>()));
     gh.singleton<_i1001.IDeviceRepository>(() => _i712.DeviceRepository(
@@ -334,6 +342,8 @@ extension GetItInjectableX on _i174.GetIt {
 }
 
 class _$FailureModule extends _i531.FailureModule {}
+
+class _$ArtifactModule extends _i331.ArtifactModule {}
 
 class _$MessagingModule extends _i967.MessagingModule {}
 
