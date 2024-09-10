@@ -1122,5 +1122,9 @@
   "noInternet": "Інтернет відсутній",
   "@noInternet": {
     "examples": "Текст для повідомлення на телефоні про відсутність інтернету"
+  },
+  "signUpInWith": "Зареєструватись через",
+  "@signUpInWith": {
+    "examples": "Текст на сторінці SignUp перед кнопкою увійти за допомогою google, facebook, apple."
   }
 }
