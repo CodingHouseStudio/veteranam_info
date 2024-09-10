@@ -1111,6 +1111,10 @@
   "@dontRememberPassword": {
     "examples": "Text for the password recovery button on the Login page"
   },
+  "contain15Charcters": "It must contain at least 15 characters.",
+  "@contain15Charcters": {
+    "examples": "Error text for the Report dialog when the message is too short."
+  },
   "loginWithoutPassword": "Login without password",
   "@loginWithoutPassword": {
     "documentation": "Text for the button to send an email login link on the Login page."

@@ -1115,6 +1115,10 @@
   "@dontRememberPassword": {
     "examples": "Текст для кнопки відновлення паролю на сторінці Login"
   },
+  "contain15Charcters": "Воно повинно містити хоча б 15 знаків.",
+  "@contain15Charcters": {
+    "examples": "Текст помилки для діалогу Report при закороткому повідомленні."
+  },
   "loginWithoutPassword": "Увійти без параля",
   "@loginWithoutPassword": {
     "examples": "Текст для кнопки надсилання посилання входу на електронну пошту на сторінці Login"
