@@ -2,6 +2,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:get_it/get_it.dart';
 import 'package:mockito/mockito.dart';
 import 'package:veteranam/components/components.dart';
 import 'package:veteranam/shared/shared.dart';
@@ -9,6 +10,9 @@ import 'package:veteranam/shared/shared.dart';
 import '../../test_dependency.dart';
 
 void main() {
+  setUp(configureFailureDependenciesTest);
+
+  tearDown(GetIt.I.reset);
   group(
       '${KScreenBlocName.discount} ${KScreenBlocName.firestoreService}'
       ' ${KGroupText.provider} ', () {
@@ -158,7 +162,8 @@ void main() {
     });
     test('get discounts', () async {
       await expectLater(
-        firestoreService.getDiscounts(null),
+        firestoreService.getDiscounts(//null
+            ),
         emitsInOrder([
           [KTestText.discountModelItems.last],
         ]),

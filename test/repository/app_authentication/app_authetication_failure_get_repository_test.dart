@@ -9,18 +9,22 @@ import 'package:veteranam/shared/shared.dart';
 import '../../test_dependency.dart';
 
 void main() {
+  setUp(configureFailureDependenciesTest);
+
   tearDown(GetIt.I.reset);
 
   group(
       '${KScreenBlocName.appRepository} ${KScreenBlocName.authentication}'
       ' ${KGroupText.repository} ${KGroupText.failureGet}', () {
-    late AppAuthenticationRepository appAuthenticationRepository;
+    late IAppAuthenticationRepository appAuthenticationRepository;
     late IStorage mockSecureStorageRepository;
     late firebase_auth.FirebaseAuth mockFirebaseAuth;
     late GoogleSignIn mockGoogleSignIn;
     late CacheClient mockCache;
     late firebase_auth.GoogleAuthProvider mockGoogleAuthProvider;
     late FirestoreService mockFirestoreService;
+
+    late IDeviceRepository mockDeviceRepository;
     late firebase_auth.UserCredential mockUserCredential;
     setUp(() {
       mockSecureStorageRepository = MockIStorage();
@@ -30,6 +34,8 @@ void main() {
       mockFirestoreService = MockFirestoreService();
       mockGoogleAuthProvider = MockGoogleAuthProvider();
       mockUserCredential = MockUserCredential();
+
+      mockDeviceRepository = MockIDeviceRepository();
       when(
         mockFirebaseAuth.currentUser,
       ).thenAnswer(
@@ -68,11 +74,22 @@ void main() {
       ).thenAnswer(
         (_) async => mockUserCredential,
       );
+      when(
+        mockDeviceRepository.getDevice(
+          initialList: KTestText.userSetting.devicesInfo,
+        ),
+      ).thenAnswer(
+        (_) async => const Right(null),
+      );
 
       if (GetIt.I.isRegistered<FirestoreService>()) {
         GetIt.I.unregister<FirestoreService>();
       }
       GetIt.I.registerSingleton(mockFirestoreService);
+      if (GetIt.I.isRegistered<IDeviceRepository>()) {
+        GetIt.I.unregister<IDeviceRepository>();
+      }
+      GetIt.I.registerSingleton(mockDeviceRepository);
       appAuthenticationRepository = AppAuthenticationRepository(
         mockSecureStorageRepository,
         mockFirebaseAuth,
@@ -137,7 +154,10 @@ void main() {
         UserSetting.empty,
       );
       verifyNever(
-        mockFirestoreService.updateUserSetting(UserSetting.empty),
+        mockFirestoreService.setUserSetting(
+          userSetting: UserSetting.empty,
+          userId: User.empty.id,
+        ),
       );
       verifyNever(
         mockFirestoreService.setUserSetting(
@@ -164,6 +184,22 @@ void main() {
           password: KTestText.passwordCorrect,
         ),
         isA<Right<SomeFailure, bool>>().having((e) => e.value, 'value', isTrue),
+      );
+    });
+    test('Create FCM Token for user setting when get null', () async {
+      final result = await appAuthenticationRepository.createFcmUserSetting();
+      verify(
+        mockDeviceRepository.getDevice(
+          initialList: KTestText.userSetting.devicesInfo,
+        ),
+      ).called(1);
+      expect(
+        result,
+        isA<Right<SomeFailure, bool>>().having(
+          (e) => e.value,
+          'value',
+          isFalse,
+        ),
       );
     });
   });

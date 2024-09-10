@@ -1,12 +1,16 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:get_it/get_it.dart';
 import 'package:mockito/mockito.dart';
 import 'package:veteranam/shared/shared.dart';
 
 import '../../test_dependency.dart';
 
 void main() {
+  setUp(configureFailureDependenciesTest);
+
+  tearDown(GetIt.I.reset);
   group('${KScreenBlocName.report} ${KGroupText.bloc} ', () {
     late ReportBloc reportBloc;
     late IReportRepository mockReportRepository;
@@ -21,7 +25,11 @@ void main() {
           KTestText.reportModel.copyWith(card: CardEnum.discount),
         ),
       ).thenAnswer(
-        (realInvocation) async => const Left(SomeFailure.serverError()),
+        (realInvocation) async => Left(
+          SomeFailure.serverError(
+            error: null,
+          ),
+        ),
       );
       when(
         mockReportRepository.sendReport(
@@ -82,7 +90,7 @@ void main() {
           formState: ReportEnum.initial,
           reasonComplaint: null,
           // email: null,
-          message: null,
+          message: ReportFieldModel.pure(),
           failure: null,
           cardId: KTestText.id,
         ),
@@ -90,7 +98,7 @@ void main() {
           formState: ReportEnum.invalidData,
           reasonComplaint: null,
           // email: null,
-          message: null,
+          message: ReportFieldModel.pure(),
           failure: null,
           cardId: KTestText.id,
         ),
@@ -98,7 +106,7 @@ void main() {
           formState: ReportEnum.inProgress,
           reasonComplaint: ReasonComplaint.other,
           // email: null,
-          message: null,
+          message: ReportFieldModel.pure(),
           failure: null,
           cardId: KTestText.id,
         ),
@@ -106,7 +114,7 @@ void main() {
         //   formState: ReportEnum.nextInProgress,
         //   reasonComplaint: ReasonComplaint.other,
         //   // email: EmailFieldModel.dirty(KTestText.userEmail),
-        //   message: null,
+        //   message: ReportFieldModel.pure(),
         //   failure: null,
         //   cardId: KTestText.id,
         // ),
@@ -114,15 +122,15 @@ void main() {
           formState: ReportEnum.nextInProgress,
           reasonComplaint: ReasonComplaint.other,
           // email: EmailFieldModel.dirty(KTestText.userEmail),
-          message: MessageFieldModel.dirty(),
+          message: ReportFieldModel.dirty(),
           failure: null,
           cardId: KTestText.id,
         ),
         const ReportState(
-          formState: ReportEnum.success,
+          formState: ReportEnum.nextInvalidData,
           reasonComplaint: ReasonComplaint.other,
           // email: EmailFieldModel.dirty(KTestText.userEmail),
-          message: MessageFieldModel.dirty(),
+          message: ReportFieldModel.dirty(),
           failure: null,
           cardId: KTestText.id,
         ),
@@ -147,7 +155,7 @@ void main() {
           formState: ReportEnum.initial,
           reasonComplaint: null,
           // email: null,
-          message: null,
+          message: ReportFieldModel.pure(),
           failure: null,
           cardId: KTestText.id,
         ),
@@ -155,7 +163,7 @@ void main() {
           formState: ReportEnum.inProgress,
           reasonComplaint: ReasonComplaint.fraudOrSpam,
           // email: null,
-          message: null,
+          message: ReportFieldModel.pure(),
           failure: null,
           cardId: KTestText.id,
         ),
@@ -163,7 +171,7 @@ void main() {
         //   formState: ReportEnum.nextInProgress,
         //   reasonComplaint: ReasonComplaint.fraudOrSpam,
         //   // email: EmailFieldModel.dirty(KTestText.userEmailIncorrect),
-        //   message: null,
+        //   message: ReportFieldModel.pure(),
         //   failure: null,
         //   cardId: KTestText.id,
         // ),
@@ -171,7 +179,7 @@ void main() {
         //   formState: ReportEnum.nextInProgress,
         //   reasonComplaint: ReasonComplaint.fraudOrSpam,
         //   // email: EmailFieldModel.dirty(KTestText.userEmailIncorrect),
-        //   message: MessageFieldModel.dirty(KTestText.field),
+        //   message: ReportFieldModel.dirty(KTestText.field),
         //   failure: null,
         //   cardId: KTestText.id,
         // ),
@@ -179,7 +187,7 @@ void main() {
           formState: ReportEnum.success,
           reasonComplaint: ReasonComplaint.fraudOrSpam,
           // email: EmailFieldModel.dirty(KTestText.userEmailIncorrect),
-          message: null,
+          message: ReportFieldModel.pure(),
           failure: null,
           cardId: KTestText.id,
         ),
@@ -193,14 +201,14 @@ void main() {
         ..add(const ReportEvent.started(KTestText.id))
         ..add(const ReportEvent.reasonComplaintUpdated(ReasonComplaint.other))
         // ..add(const ReportEvent.emailUpdated(KTestText.userEmail))
-        ..add(const ReportEvent.messageUpdated(KTestText.field))
+        ..add(ReportEvent.messageUpdated(KTestText.reportItems.first.message!))
         ..add(const ReportEvent.send(CardEnum.funds)),
       expect: () => [
         const ReportState(
           formState: ReportEnum.initial,
           reasonComplaint: null,
           // email: null,
-          message: null,
+          message: ReportFieldModel.pure(),
           failure: null,
           cardId: KTestText.id,
         ),
@@ -208,7 +216,7 @@ void main() {
           formState: ReportEnum.inProgress,
           reasonComplaint: ReasonComplaint.other,
           // email: null,
-          message: null,
+          message: ReportFieldModel.pure(),
           failure: null,
           cardId: KTestText.id,
         ),
@@ -216,22 +224,22 @@ void main() {
         //   formState: ReportEnum.nextInProgress,
         //   reasonComplaint: ReasonComplaint.other,
         //   // email: EmailFieldModel.dirty(KTestText.userEmail),
-        //   message: null,
+        //   message: ReportFieldModel.pure(),
         //   failure: null,
         //   cardId: KTestText.id,
         // ),
-        const ReportState(
+        ReportState(
           formState: ReportEnum.nextInProgress,
           reasonComplaint: ReasonComplaint.other,
           // email: EmailFieldModel.dirty(KTestText.userEmail),
-          message: MessageFieldModel.dirty(KTestText.field),
+          message: ReportFieldModel.dirty(KTestText.reportItems.first.message!),
           failure: null,
           cardId: KTestText.id,
         ),
-        const ReportState(
+        ReportState(
           reasonComplaint: ReasonComplaint.other,
           // email: EmailFieldModel.dirty(KTestText.userEmail),
-          message: MessageFieldModel.dirty(KTestText.field),
+          message: ReportFieldModel.dirty(KTestText.reportItems.first.message!),
           formState: ReportEnum.success,
           failure: null,
           cardId: KTestText.id,
@@ -261,7 +269,7 @@ void main() {
     //       formState: ReportEnum.initial,
     //       reasonComplaint: null,
     //       // email: null,
-    //       message: null,
+    //       message: ReportFieldModel.pure(),
     //       failure: null,
     //       cardId: KTestText.id,
     //     ),
@@ -269,7 +277,7 @@ void main() {
     //       formState: ReportEnum.inProgress,
     //       reasonComplaint: ReasonComplaint.other,
     //       // email: null,
-    //       message: null,
+    //       message: ReportFieldModel.pure(),
     //       failure: null,
     //       cardId: KTestText.id,
     //     ),
@@ -277,14 +285,14 @@ void main() {
     //       formState: ReportEnum.nextInProgress,
     //       reasonComplaint: ReasonComplaint.other,
     //       // email: null,
-    //       message: MessageFieldModel.dirty(KTestText.field),
+    //       message: ReportFieldModel.dirty(KTestText.field),
     //       failure: null,
     //       cardId: KTestText.id,
     //     ),
     //     const ReportState(
     //       reasonComplaint: ReasonComplaint.other,
     //       // email: null,
-    //       message: MessageFieldModel.dirty(KTestText.field),
+    //       message: ReportFieldModel.dirty(KTestText.field),
     //       formState: ReportEnum.success,
     //       failure: null,
     //       cardId: KTestText.id,
@@ -310,7 +318,7 @@ void main() {
           formState: ReportEnum.initial,
           reasonComplaint: null,
           // email: null,
-          message: null,
+          message: ReportFieldModel.pure(),
           failure: null,
           cardId: KTestText.id,
         ),
@@ -318,7 +326,7 @@ void main() {
           formState: ReportEnum.inProgress,
           reasonComplaint: ReasonComplaint.fraudOrSpam,
           // email: null,
-          message: null,
+          message: ReportFieldModel.pure(),
           failure: null,
           cardId: KTestText.id,
         ),
@@ -326,7 +334,7 @@ void main() {
         //   formState: ReportEnum.nextInProgress,
         //   reasonComplaint: ReasonComplaint.fraudOrSpam,
         //   // email: EmailFieldModel.dirty(KTestText.userEmail),
-        //   message: null,
+        //   message: ReportFieldModel.pure(),
         //   failure: null,
         //   cardId: KTestText.id,
         // ),
@@ -334,14 +342,14 @@ void main() {
           formState: ReportEnum.nextInProgress,
           reasonComplaint: ReasonComplaint.fraudOrSpam,
           // email: EmailFieldModel.dirty(KTestText.userEmail),
-          message: MessageFieldModel.dirty(KTestText.field),
+          message: ReportFieldModel.dirty(KTestText.field),
           failure: null,
           cardId: KTestText.id,
         ),
         const ReportState(
           reasonComplaint: ReasonComplaint.fraudOrSpam,
           // email: EmailFieldModel.dirty(KTestText.userEmail),
-          message: MessageFieldModel.dirty(KTestText.field),
+          message: ReportFieldModel.dirty(KTestText.field),
           formState: ReportEnum.success,
           failure: null,
           cardId: KTestText.id,

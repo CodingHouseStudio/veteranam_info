@@ -12,6 +12,7 @@ import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:veteranam/app.dart';
 import 'package:veteranam/bootstrap.dart';
 import 'package:veteranam/firebase_options_production.dart';
+import 'package:veteranam/shared/shared.dart';
 
 /// COMMENT: PROD main file
 Future<void> main() async {
@@ -25,15 +26,31 @@ Future<void> main() async {
       await SentryFlutter.init(
         (options) {
           options
-            ..dsn =
-                'https://3bbae5f2c67d49a886e0594ae84de31a@o4504073954590720.ingest.us.sentry.io/4504073955704832'
+            ..dsn = KSecurityKeys.sentryDSN
             // Set tracesSampleRate to 1.0 to capture 100% of transactions for
             // performance monitoring.
             // We recommend adjusting this value in production.
             ..tracesSampleRate = 1.0
             // The sampling rate for profiling is relative to tracesSampleRate
             // Setting to 1.0 will profile 100% of sampled transactions:
-            ..profilesSampleRate = 1.0;
+            ..profilesSampleRate = 1.0
+            // ignore package error
+            ..reportPackages = false
+            // add information about threads
+            ..attachThreads = true
+            ..reportSilentFlutterErrors = true
+            // Add screenshot for error
+            ..attachScreenshot = true
+            // Optimization screenshot
+            ..screenshotQuality = SentryScreenshotQuality.low
+            // Add hierarchy for error report
+            ..attachViewHierarchy = true
+            // Turns on Spotlight functionality, which can help you track
+            // certain events or conditions.
+            ..spotlight = Spotlight(enabled: true)
+            // Turns on time tracking until full display to help you understand
+            // the performance of the app's loading.
+            ..enableTimeToFullDisplayTracing = true;
         },
       );
     }
@@ -61,33 +78,38 @@ Future<void> main() async {
       await FirebasePerformance.instance
           .setPerformanceCollectionEnabled(kReleaseMode);
     }
-    // } catch (e) {}
+    // } catch (e, stack) {}
     try {
-      if (!kIsWeb)
+      // if (!kIsWeb)
       // {
-      //   if (kReleaseMode) {
-      //     await FirebaseAppCheck.instanceFor(app: app).activate(
-      //       webProvider: ReCaptchaV3Provider(
-      //         '6LevUCsqAAAAAEG431Qk2NsMNXurWJ8vs89UkrEG',
-      //       ),
-      //     );
-      //   } else {
-      //     await FirebaseAppCheck.instanceFor(app: app).activate(
-      //       webProvider: ReCaptchaV3Provider(
-      //         '326946D7-ABAE-4F1A-AEE7-395C5E23F0D4',
-      //       ),
-      //     );
-      //   }
+      // if (kReleaseMode) {
+      await FirebaseAppCheck.instanceFor(app: app).activate(
+        webProvider: ReCaptchaV3Provider(
+          '6LcHRzkqAAAAACJhOV9aPEb3tcA8wAzS-a5Qww_J',
+        ),
+      );
+      await FirebaseAppCheck.instance.activate(
+        webProvider: ReCaptchaV3Provider(
+          '6LcHRzkqAAAAACJhOV9aPEb3tcA8wAzS-a5Qww_J',
+        ),
+      );
+      // } else {
+      //   await FirebaseAppCheck.instanceFor(app: app).activate(
+      //     webProvider: ReCaptchaV3Provider(
+      //       '326946D7-ABAE-4F1A-AEE7-395C5E23F0D4',
+      //     ),
+      //   );
+      // }
       // } else
-      {
-        await FirebaseAppCheck.instance.activate(
-          androidProvider: kReleaseMode
-              ? AndroidProvider.playIntegrity
-              : AndroidProvider.debug,
-          appleProvider:
-              kReleaseMode ? AppleProvider.deviceCheck : AppleProvider.debug,
-        );
-      }
+      // {
+      //   await FirebaseAppCheck.instance.activate(
+      //     androidProvider: kReleaseMode
+      //         ? AndroidProvider.playIntegrity
+      //         : AndroidProvider.debug,
+      //     appleProvider:
+      //         kReleaseMode ? AppleProvider.deviceCheck : AppleProvider.debug,
+      //   );
+      // }
     } catch (e) {}
 
     // Non-async exceptions

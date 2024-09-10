@@ -38,6 +38,7 @@ abstract class KSize {
   static const kPixel140 = 140.0;
   static const kPixel160 = 160.0;
   static const kPixel200 = 200.0;
+  static const kPixel220 = 220.0;
   static const kPixel400 = 400.0;
   static const kPixel794 = 794.0;
 
@@ -52,6 +53,7 @@ abstract class KSize {
   static const kFont18 = 18.0;
   static const kFont20 = 20.0;
   static const kFont24 = 24.0;
+  static const kFont30 = 30.0;
   static const kFont32 = 32.0;
   static const kFont36 = 36.0;
   static const kFont40 = 40.0;

@@ -9,10 +9,8 @@ List<Widget> _questionWidgetList({
   final questionModelItems = isLoading
       ? List.generate(
           KDimensions.shimmerQuestionItems,
-          (index) => QuestionModel(
+          (index) => KMockText.questionModel.copyWith(
             id: index.toString(),
-            title: KMockText.questionTitle.elementAt(0),
-            subtitle: KMockText.questionSubtitle,
           ),
         )
       : context.read<HomeWatcherBloc>().state.questionModelItems;

@@ -67,9 +67,9 @@ class InformationWatcherBloc
           // reportItems: reportItems,
         ),
       ),
-      onError: (dynamic error) {
+      onError: (dynamic error, StackTrace stack) {
         // debugPrint('error is $error');
-        add(InformationWatcherEvent.failure(error));
+        add(InformationWatcherEvent.failure(error: error, stack: stack));
       },
     );
   }
@@ -232,19 +232,6 @@ class InformationWatcherBloc
     );
   }
 
-  void _onFailure(
-    _Failure event,
-    Emitter<InformationWatcherState> emit,
-  ) {
-    // debugPrint('error is ${event.failure}');
-    emit(
-      state.copyWith(
-        loadingStatus: LoadingStatus.error,
-        failure: InformationFailure.error,
-      ),
-    );
-  }
-
   Future<void> _onLike(
     _Like event,
     Emitter<InformationWatcherState> emit,
@@ -324,6 +311,20 @@ class InformationWatcherBloc
   // });
 
   // stream.throttle(const Duration(seconds: 5)).listen((_) {});
+
+  void _onFailure(
+    _Failure event,
+    Emitter<InformationWatcherState> emit,
+  ) {
+    // debugPrint('error is ${event.failure}');
+    emit(
+      state.copyWith(
+        loadingStatus: LoadingStatus.error,
+        failure: SomeFailure.serverError(error: event.error, stack: event.stack)
+            ._toInformation(),
+      ),
+    );
+  }
 
   @override
   Future<void> close() {

@@ -10,10 +10,10 @@ Future<void> signUpInitialHelper(
     tester: tester,
     windowsTest: true,
     test: () async {
-      expect(
-        find.byKey(KWidgetkeys.screen.signUp.bottomButtons),
-        findsOneWidget,
-      );
+      // expect(
+      //   find.byKey(KWidgetkeys.screen.signUp.bottomButtons),
+      //   findsOneWidget,
+      // );
 
       expect(
         find.byKey(KWidgetkeys.screen.signUp.button),

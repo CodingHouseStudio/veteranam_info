@@ -10,5 +10,8 @@ class StoryWatcherEvent with _$StoryWatcherEvent {
 
   const factory StoryWatcherEvent.loadNextItems() = _LoadNextItems;
 
-  const factory StoryWatcherEvent.failure(dynamic failure) = _Failure;
+  const factory StoryWatcherEvent.failure({
+    required Object? error,
+    required StackTrace stack,
+  }) = _Failure;
 }

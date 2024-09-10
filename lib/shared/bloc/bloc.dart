@@ -1,3 +1,4 @@
+export 'app_version/app_version_cubit.dart';
 export 'authentication/authentication_bloc.dart';
 export 'authentication/listenable.dart';
 export 'authentication_services/authentication_services_cubit.dart';

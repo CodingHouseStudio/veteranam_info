@@ -1,6 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
-import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:get_it/get_it.dart';
 import 'package:mockito/mockito.dart';
 import 'package:veteranam/components/components.dart';
 import 'package:veteranam/shared/shared.dart';
@@ -8,40 +8,44 @@ import 'package:veteranam/shared/shared.dart';
 import '../../test_dependency.dart';
 
 void main() {
+  setUp(configureFailureDependenciesTest);
+
   setupFirebaseAuthMocks();
 
   setUpAll(setUpGlobal);
+
+  tearDown(GetIt.I.reset);
   group('${KScreenBlocName.discount} ${KGroupText.bloc}', () {
     late DiscountWatcherBloc discountWatcherBloc;
     late IDiscountRepository mockdiscountRepository;
-    late IAppAuthenticationRepository mockAppAuthenticationRepository;
-    late IReportRepository mockReportRepository;
+    // late IAppAuthenticationRepository mockAppAuthenticationRepository;
+    // late IReportRepository mockReportRepository;
     late FirebaseRemoteConfigProvider mockFirebaseRemoteConfigProvider;
 
     setUp(() {
       mockdiscountRepository = MockIDiscountRepository();
-      mockAppAuthenticationRepository = MockIAppAuthenticationRepository();
-      mockReportRepository = MockIReportRepository();
+      // mockAppAuthenticationRepository = MockIAppAuthenticationRepository();
+      // mockReportRepository = MockIReportRepository();
       mockFirebaseRemoteConfigProvider = MockFirebaseRemoteConfigProvider();
 
       when(
         mockdiscountRepository.getDiscountItems(
-          reportIdItems: KTestText.reportItems.getIdCard,
-        ),
+            // reportIdItems: KTestText.reportItems.getIdCard,
+            ),
       ).thenAnswer(
         (_) => Stream.value(KTestText.discountModelItemsModify),
       );
-      when(mockAppAuthenticationRepository.currentUser).thenAnswer(
-        (invocation) => KTestText.user,
-      );
-      when(
-        mockReportRepository.getCardReportById(
-          cardEnum: CardEnum.discount,
-          userId: KTestText.user.id,
-        ),
-      ).thenAnswer(
-        (invocation) async => Right(KTestText.reportItems),
-      );
+      // when(mockAppAuthenticationRepository.currentUser).thenAnswer(
+      //   (invocation) => KTestText.user,
+      // );
+      // when(
+      //   mockReportRepository.getCardReportById(
+      //     cardEnum: CardEnum.discount,
+      //     userId: KTestText.user.id,
+      //   ),
+      // ).thenAnswer(
+      //   (invocation) async => Right(KTestText.reportItems),
+      // );
       when(
         mockFirebaseRemoteConfigProvider
             .getInt(DiscountWatcherBloc.loadingItemsKey),
@@ -50,8 +54,8 @@ void main() {
       );
       discountWatcherBloc = DiscountWatcherBloc(
         discountRepository: mockdiscountRepository,
-        reportRepository: mockReportRepository,
-        appAuthenticationRepository: mockAppAuthenticationRepository,
+        // reportRepository: mockReportRepository,
+        // appAuthenticationRepository: mockAppAuthenticationRepository,
         firebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
       );
     });
@@ -77,8 +81,8 @@ void main() {
       act: (bloc) async {
         when(
           mockdiscountRepository.getDiscountItems(
-            reportIdItems: KTestText.reportItems.getIdCard,
-          ),
+              // reportIdItems: KTestText.reportItems.getIdCard,
+              ),
         ).thenAnswer(
           (_) => Stream.error(KGroupText.failureGet),
         );
@@ -297,14 +301,14 @@ void main() {
         bloc.add(
           const DiscountWatcherEvent.loadNextItems(),
         );
-        when(
-          mockReportRepository.getCardReportById(
-            cardEnum: CardEnum.discount,
-            userId: KTestText.user.id,
-          ),
-        ).thenAnswer(
-          (invocation) async => Right([KTestText.reportItems.first]),
-        );
+        // when(
+        //   mockReportRepository.getCardReportById(
+        //     cardEnum: CardEnum.discount,
+        //     userId: KTestText.user.id,
+        //   ),
+        // ).thenAnswer(
+        //   (invocation) async => Right([KTestText.reportItems.first]),
+        // );
         // bloc.add(const DiscountWatcherEvent.getReport());
       },
       expect: () => [
@@ -497,14 +501,18 @@ void main() {
       ' locations',
       build: () => discountWatcherBloc,
       act: (bloc) async {
-        when(
-          mockReportRepository.getCardReportById(
-            cardEnum: CardEnum.discount,
-            userId: KTestText.user.id,
-          ),
-        ).thenAnswer(
-          (invocation) async => const Left(SomeFailure.serverError()),
-        );
+        // when(
+        //   mockReportRepository.getCardReportById(
+        //     cardEnum: CardEnum.discount,
+        //     userId: KTestText.user.id,
+        //   ),
+        // ).thenAnswer(
+        //   (invocation) async => Left(
+        //     SomeFailure.serverError(
+        //       error: null,
+        //     ),
+        //   ),
+        // );
         when(
           mockdiscountRepository.getDiscountItems(),
         ).thenAnswer(

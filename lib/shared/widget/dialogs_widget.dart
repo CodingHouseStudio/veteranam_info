@@ -180,32 +180,35 @@ class _DialogsWidget {
         builder: (context) => BlocProvider(
           create: (context) =>
               GetIt.I.get<ReportBloc>()..add(ReportEvent.started(cardId)),
-          child: LayoutBuilder(
-            builder: (BuildContext context, BoxConstraints constraints) {
-              final isDeskValue =
-                  constraints.maxWidth >= KMinMaxSize.maxWidth600;
-              return Padding(
-                padding: EdgeInsets.only(
-                  bottom: MediaQuery.of(context).viewInsets.bottom,
-                ), // padding if mobile keyboard open
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: KPadding.kPaddingSize16,
-                    vertical: KPadding.kPaddingSize32,
-                  ),
-                  child: SizedBox(
-                    width: double.infinity,
-                    child: SingleChildScrollView(
-                      child: ReportDialogWidget(
-                        isDesk: isDeskValue,
-                        cardEnum: cardEnum,
-                        // afterEvent: afterEvent,
+          child: FractionallySizedBox(
+            heightFactor: KDimensions.bottomDialogHeightFactor,
+            child: LayoutBuilder(
+              builder: (BuildContext context, BoxConstraints constraints) {
+                final isDeskValue =
+                    constraints.maxWidth >= KMinMaxSize.maxWidth600;
+                return Padding(
+                  padding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).viewInsets.bottom,
+                  ), // padding if mobile keyboard open
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: KPadding.kPaddingSize16,
+                      vertical: KPadding.kPaddingSize32,
+                    ),
+                    child: SizedBox(
+                      width: double.infinity,
+                      child: SingleChildScrollView(
+                        child: ReportDialogWidget(
+                          isDesk: isDeskValue,
+                          cardEnum: cardEnum,
+                          // afterEvent: afterEvent,
+                        ),
                       ),
                     ),
                   ),
-                ),
-              );
-            },
+                );
+              },
+            ),
           ),
         ),
       );
@@ -258,11 +261,12 @@ class _DialogsWidget {
     if (text != null) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
+          backgroundColor: AppColors.materialThemeKeyColorsSecondary,
           // key: KWidgetkeys.widget.dialogs.failure,
           content: Text(
             text,
             key: KWidgetkeys.widget.dialogs.snackBarText,
-            style: AppTextStyle.materialThemeBodyLarge,
+            style: AppTextStyle.materialThemeBodyLargeNeutral,
           ),
           duration: duration,
         ),
@@ -274,59 +278,95 @@ class _DialogsWidget {
     BetterFeedback.of(context).show(context.onMobFeedback);
   }
 
-  void showUserEmailDialog({
-    required UserEmailEnum userEmailEnum,
-    required int? count,
-    required int emailCloseDelay,
-  }) {
-    showDialog<void>(
+  void showUserEmailDialog(
+    int emailCloseDelay,
+  ) {
+    final bloc = context.read<DiscountUserEmailFormBloc>();
+    showDialog<bool>(
       context: context,
       builder: (BuildContext context) {
-        return BlocProvider(
-          create: (context) => GetIt.I.get<DiscountUserEmailFormBloc>(),
+        return BlocProvider.value(
+          value: bloc,
           child: LayoutBuilder(
             builder: (context, constraints) {
               final isTablet = constraints.maxWidth >
                   KPlatformConstants.minWidthThresholdTablet;
-              return Center(
-                child: AlertDialog(
-                  key: KWidgetkeys.screen.discountCard.dialog,
-                  insetPadding: const EdgeInsets.symmetric(
-                    horizontal: KPadding.kPaddingSize20,
-                  ),
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: KBorderRadius.kBorderRadius32,
-                  ),
-                  backgroundColor: AppColors.materialThemeKeyColorsNeutral,
-                  contentPadding: EdgeInsets.zero,
-                  scrollable: true,
-                  content: UserEmailDialog(
-                    key: KWidgetkeys.screen.discounts.userEmailDialog,
-                    isDesk: isTablet,
-                    sendOnPressed: () =>
-                        context.read<DiscountUserEmailFormBloc>().add(
-                              const DiscountUserEmailFormEvent.sendEmail(),
-                            ),
-                    closeOnPressed: () =>
-                        context.read<DiscountUserEmailFormBloc>().add(
-                              DiscountUserEmailFormEvent.sendEmailAfterClose(
-                                userEmailEnum: userEmailEnum,
-                                count: count,
-                              ),
-                            ),
-                    onChanged: (text) =>
-                        context.read<DiscountUserEmailFormBloc>().add(
-                              DiscountUserEmailFormEvent.updatedEmail(text),
-                            ),
-                    userEmailEnum: userEmailEnum,
-                    emailCloseDelay: emailCloseDelay,
-                  ),
+              return AlertDialog(
+                key: KWidgetkeys.screen.discountCard.dialog,
+                insetPadding: const EdgeInsets.symmetric(
+                  horizontal: KPadding.kPaddingSize20,
+                ),
+                shape: const RoundedRectangleBorder(
+                  borderRadius: KBorderRadius.kBorderRadius32,
+                ),
+                backgroundColor: AppColors.materialThemeKeyColorsNeutral,
+                contentPadding: EdgeInsets.zero,
+                scrollable: true,
+                content: UserEmailDialog(
+                  key: KWidgetkeys.screen.discounts.userEmailDialog,
+                  isDesk: isTablet,
+                  sendOnPressed: () =>
+                      context.read<DiscountUserEmailFormBloc>().add(
+                            const DiscountUserEmailFormEvent.sendEmail(),
+                          ),
+                  // closeOnPressed: () =>
+                  //     context.read<DiscountUserEmailFormBloc>().add(
+                  //           DiscountUserEmailFormEvent.sendEmailAfterClose(
+                  //             userEmailEnum: userEmailEnum,
+                  //             count: count,
+                  //           ),
+                  //         ),
+                  onChanged: (text) =>
+                      context.read<DiscountUserEmailFormBloc>().add(
+                            DiscountUserEmailFormEvent.updatedEmail(text),
+                          ),
+                  userEmailEnum:
+                      context.read<DiscountUserEmailFormBloc>().state.emailEnum,
+                  emailCloseDelay: emailCloseDelay,
                 ),
               );
             },
           ),
         );
       },
+    ).then(
+      context.emailDialogCloseEvent,
+      //   (value) {
+      //   if (!context.mounted) return;
+      //   if (!(value ?? false)) {
+      //     context.read<DiscountUserEmailFormBloc>().add(
+      //           DiscountUserEmailFormEvent.sendEmailAfterClose(
+      //             userEmailEnum: userEmailEnum,
+      //             count: count,
+      //           ),
+      //         );
+      //   }
+      // }
     );
+  }
+
+  void showMobUpdateAppDialog({
+    required bool hasNewVersion,
+  }) {
+    if (hasNewVersion) {
+      showDialog<void>(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            key: KWidgetkeys.screen.discountCard.dialog,
+            insetPadding: const EdgeInsets.symmetric(
+              horizontal: KPadding.kPaddingSize20,
+            ),
+            shape: const RoundedRectangleBorder(
+              borderRadius: KBorderRadius.kBorderRadius32,
+            ),
+            backgroundColor: AppColors.materialThemeKeyColorsSecondary,
+            contentPadding: const EdgeInsets.all(KPadding.kPaddingSize16),
+            scrollable: true,
+            content: const MobUpdateDialog(),
+          );
+        },
+      );
+    }
   }
 }

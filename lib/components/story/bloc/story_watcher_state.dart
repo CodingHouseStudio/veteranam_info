@@ -4,6 +4,12 @@ enum StoryFailure {
   error,
 }
 
+extension StoryFailureExtension on SomeFailure {
+  StoryFailure _toStory() {
+    return StoryFailure.error;
+  }
+}
+
 @freezed
 class StoryWatcherState with _$StoryWatcherState {
   const factory StoryWatcherState({

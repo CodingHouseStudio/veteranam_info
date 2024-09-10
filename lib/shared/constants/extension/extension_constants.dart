@@ -207,6 +207,17 @@ extension StringExtension on String {
             (additional ?? 0);
     return textLength / KSize.kPixel2;
   }
+
+  String? get getUserPlatform {
+    final startIndex = indexOf('(');
+    final endIndex = indexOf(')');
+
+    if (startIndex == -1 || endIndex == -1 || startIndex > endIndex) {
+      return null;
+    }
+
+    return substring(startIndex + 1, endIndex);
+  }
 }
 
 extension InformationModelExtension on InformationModel {
@@ -240,6 +251,15 @@ extension ContextExtensions on BuildContext {
   //     read<UrlCubit>().copy(text);
 
   // void launchUrl(String? url) => read<UrlCubit>().launchUrl(url: url);
+  // ignore: avoid_positional_boolean_parameters
+  void emailDialogCloseEvent(bool? value) {
+    if (!mounted) return;
+    if (!(value ?? false)) {
+      read<DiscountUserEmailFormBloc>().add(
+        const DiscountUserEmailFormEvent.sendEmailAfterClose(),
+      );
+    }
+  }
 }
 
 extension DiscountEnumExtensions on DiscountEnum {

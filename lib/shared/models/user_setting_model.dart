@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:veteranam/shared/shared.dart';
 
 part 'user_setting_model.freezed.dart';
 part 'user_setting_model.g.dart';
@@ -9,6 +10,7 @@ part 'user_setting_model.g.dart';
 class UserSetting with _$UserSetting {
   const factory UserSetting({
     required String id,
+    @DeviceConverter() List<DeviceInfoModel>? devicesInfo,
     @Default(Language.ukrain) Language locale,
     UserRole? userRole,
     @Default(false) bool roleIsConfirmed,
@@ -23,11 +25,21 @@ class UserSetting with _$UserSetting {
   /// Empty userSetting which represents an unauthenticated user.
   static const empty = UserSetting(id: '');
 
-  /// Convenience getter to determine whether the current user is empty.
-  bool get isEmpty => this == UserSetting.empty.copyWith(locale: locale);
+  /// Convenience getter to determine whether the current user setting is empty.
+  bool get isEmpty => this == UserSetting.empty.copyWith(locale: this.locale);
+
+  /// Convenience getter to determine whether the current user setting is
+  /// not empty.
+  bool get isNotEmpty =>
+      this != UserSetting.empty.copyWith(locale: this.locale);
 
   /// Convenience getter to determine whether the current user is not empty.
-  bool get isNotEmpty => this != UserSetting.empty.copyWith(locale: locale);
+  bool get isDeviceEmpty =>
+      devicesInfo == null ||
+      devicesInfo!.isEmpty ||
+      devicesInfo!.every(
+        (deviceSetting) => deviceSetting.isEmpty,
+      );
 }
 
 enum UserRole {
@@ -85,4 +97,5 @@ abstract class UserSettingModelJsonField {
   static const locale = 'locale';
   static const userRole = 'userRole';
   static const roleIsConfirmed = 'roleIsConfirmed';
+  static const devicesInfo = 'devicesInfo';
 }

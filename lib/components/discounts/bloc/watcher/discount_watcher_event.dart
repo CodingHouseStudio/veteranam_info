@@ -29,7 +29,10 @@ class DiscountWatcherEvent with _$DiscountWatcherEvent {
 
   const factory DiscountWatcherEvent.filterReset() = _FilterReset;
 
-  const factory DiscountWatcherEvent.failure(dynamic failure) = _Failure;
+  const factory DiscountWatcherEvent.failure({
+    required Object? error,
+    required StackTrace stack,
+  }) = _Failure;
 
   // const factory DiscountWatcherEvent.getReport() = _GetReport;
 }

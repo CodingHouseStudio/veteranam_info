@@ -63,7 +63,7 @@ class TextFieldWidget extends StatefulWidget {
   final InputBorder? focusedBorder;
   final int? errorMaxLines;
   final bool? readOnly;
-  final bool? disposeFocusNode;
+  final bool disposeFocusNode;
   final bool? expands;
   final String? labelText;
   final TextStyle? hintStyle;
@@ -160,7 +160,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
 
   @override
   void dispose() {
-    if (widget.disposeFocusNode ?? false) {
+    if (widget.disposeFocusNode) {
       widget.focusNode?.dispose();
     }
     // if (widget.text != null) {

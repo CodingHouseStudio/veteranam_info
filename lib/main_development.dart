@@ -1,4 +1,6 @@
+import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart' show kReleaseMode;
 import 'package:flutter/material.dart';
 import 'package:veteranam/app.dart';
 import 'package:veteranam/bootstrap.dart';
@@ -8,9 +10,23 @@ import 'package:veteranam/firebase_options_development.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // final app =
-  await Firebase.initializeApp(
+  final app = await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  if (kReleaseMode) {
+    await FirebaseAppCheck.instanceFor(app: app).activate(
+      webProvider: ReCaptchaV3Provider(
+        '6LevUCsqAAAAAEG431Qk2NsMNXurWJ8vs89UkrEG',
+      ),
+    );
+
+    await FirebaseAppCheck.instance.activate(
+      webProvider: ReCaptchaV3Provider(
+        '6LevUCsqAAAAAEG431Qk2NsMNXurWJ8vs89UkrEG',
+      ),
+    );
+  }
 
   // try {
   // if (kIsWeb) {
@@ -20,7 +36,7 @@ void main() async {
   //   await FirebasePerformance.instance
   //       .setPerformanceCollectionEnabled(kReleaseMode);
   // }
-  // } catch (e) {
+  // } catch (e, stack) {
   //   print('firebase performance issue');
   //   print(e);
   // }
@@ -42,7 +58,7 @@ void main() async {
   //         : AppleProvider.debug,
   //   );
   // }
-  // } catch (e) {
+  // } catch (e, stack) {
   //   print('firebase app check issue');
   //   print(e);
   // }

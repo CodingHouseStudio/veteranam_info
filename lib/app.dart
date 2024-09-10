@@ -41,13 +41,16 @@ class App extends StatelessWidget {
             create: (context) => GetIt.I.get<MobFeedbackBloc>(),
           ),
           BlocProvider(
-            create: (context) => GetIt.I.get<MobOfflineModeCubit>(),
+            create: (context) => GetIt.I.get<MobOfflineModeCubit>()..started(),
           ),
           BlocProvider(
             create: (context) => GetIt.I.get<MobFaqWatcherBloc>()
               ..add(
                 const MobFaqWatcherEvent.started(),
               ),
+          ),
+          BlocProvider(
+            create: (context) => GetIt.I.get<AppVersionCubit>()..started(),
           ),
         ],
       ],
@@ -64,11 +67,11 @@ class AppWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AuthenticationBloc, AuthenticationState>(
-      builder: (context, _) {
-        if (_.status == AuthenticationStatus.unknown) {
+      builder: (context, state) {
+        if (state.status == AuthenticationStatus.unknown) {
           return const SizedBox.shrink();
         }
-        final localeValue = _.userSetting.locale.value;
+        final localeValue = state.userSetting.locale.value;
         return kIsWeb
             ? body(localeValue)
             : BetterFeedback(
@@ -77,12 +80,9 @@ class AppWidget extends StatelessWidget {
                 themeMode: ThemeMode.light,
                 mode: FeedbackMode.navigate,
                 feedbackBuilder: (context, onSubmit, scrollController) =>
-                    MobFeedbackWidget(
-                  onSubmit: onSubmit,
-                  // scrollController: scrollController,
-                ),
+                    MobFeedbackWidget(onSubmit: onSubmit),
                 child: BlocBuilder<MobOfflineModeCubit, MobMode>(
-                  builder: (context, state) {
+                  builder: (context, _) {
                     return body(localeValue);
                   },
                 ),

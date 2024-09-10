@@ -28,6 +28,7 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   final GoogleSignIn _googleSignIn;
   final CacheClient _cache;
   final FirestoreService _firestoreService = GetIt.I.get<FirestoreService>();
+  final IDeviceRepository _deviceRepository = GetIt.I.get<IDeviceRepository>();
 
   /// Whether or not the current environment is web
   /// Should only be overridden for testing purposes. Otherwise,
@@ -114,10 +115,12 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
         return const Right(true);
       }
       return const Right(false);
-    } on firebase_auth.FirebaseAuthException catch (e) {
-      return Left(SignUpWithGoogleFailure.fromCode(e).status);
-    } catch (_) {
-      return const Left(SomeFailure.serverError());
+    } on firebase_auth.FirebaseAuthException catch (e, stack) {
+      return Left(
+        SignUpWithGoogleFailure.fromCode(error: e, stack: stack).status,
+      );
+    } catch (_, stack) {
+      return Left(SomeFailure.serverError(error: _, stack: stack));
     } finally {
       _updateAuthStatusBasedOnCache();
       _updateUserSettingBasedOnCache();
@@ -161,7 +164,10 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
           email: email,
           password: password,
         ),
-        (e) => LogInWithEmailAndPasswordFailure.fromCode(e).status,
+        ({required error, stack}) => LogInWithEmailAndPasswordFailure.fromCode(
+          error: error,
+          stack: stack,
+        ).status,
       );
 
   /// Signs in with the anonymously.
@@ -170,8 +176,9 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   @override
   Future<Either<SomeFailure, bool>> logInAnonymously() async =>
       _handleAuthOperation(
-        _firebaseAuth.signInAnonymously,
-        (e) => SendFailure.fromCode(e).status,
+        () async => _firebaseAuth.signInAnonymously(),
+        ({required error, stack}) =>
+            SendFailure.fromCode(error: error, stack: stack).status,
       );
 
   /// Creates a new user with the provided [email] and [password].
@@ -202,7 +209,9 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
           );
         }
       },
-      (e) => SignUpWithEmailAndPasswordFailure.fromCode(e).status,
+      ({required error, stack}) =>
+          SignUpWithEmailAndPasswordFailure.fromCode(error: error, stack: stack)
+              .status,
     );
   }
 
@@ -228,12 +237,12 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
         _secureStorageRepository.deleteAll(),
       ]);
       return logInAnonymously();
-    } on firebase_auth.FirebaseAuthException {
+    } on firebase_auth.FirebaseAuthException catch (e, stack) {
       // debugPrint('Firebase Auth Error: ${e.message}');
-      return Left(const LogOutFailure().status);
-    } catch (e) {
+      return Left(LogOutFailure.fromCode(error: e, stack: stack).status);
+    } catch (e, stack) {
       // debugPrint('Logout error: $e');
-      return const Left(SomeFailure.serverError());
+      return Left(SomeFailure.serverError(error: e, stack: stack));
     }
     // finally {
     //   _updateAuthStatusBasedOnCache();
@@ -251,17 +260,20 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
 
   Future<Either<SomeFailure, bool>> _handleAuthOperation(
     Future<void> Function() operation,
-    SomeFailure Function(firebase_auth.FirebaseAuthException error) exception,
+    SomeFailure Function({
+      required firebase_auth.FirebaseAuthException error,
+      StackTrace? stack,
+    }) exception,
   ) async {
     try {
       await operation();
       return const Right(true);
-    } on firebase_auth.FirebaseAuthException catch (e) {
+    } on firebase_auth.FirebaseAuthException catch (e, stack) {
       // debugPrint('Firebase Auth Error: ${e.message}');
-      return Left(exception(e));
-    } catch (e) {
+      return Left(exception(error: e, stack: stack));
+    } catch (e, stack) {
       // debugPrint('General Auth Error: $e');
-      return const Left(SomeFailure.serverError());
+      return Left(SomeFailure.serverError(error: e, stack: stack));
     } finally {
       _updateAuthStatusBasedOnCache();
       _updateUserSettingBasedOnCache();
@@ -293,12 +305,12 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
     try {
       await _firebaseAuth.sendPasswordResetEmail(email: email);
       return const Right(true);
-    } on firebase_auth.FirebaseAuthException {
+    } on firebase_auth.FirebaseAuthException catch (e, stack) {
       // debugPrint('Sendig error: ${e.message}');
-      return const Left(SomeFailure.emailSendingFailed());
-    } catch (e) {
+      return Left(SomeFailure.emailSendingFailed(error: e, stack: stack));
+    } catch (e, stack) {
       // debugPrint('Unknown error: $e');
-      return const Left(SomeFailure.serverError());
+      return Left(SomeFailure.serverError(error: e, stack: stack));
     }
   }
 
@@ -309,12 +321,12 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
       await _firebaseAuth.currentUser?.delete();
       _cache.clear(); // Clear the cache after user deletion
       return logInAnonymously();
-    } on firebase_auth.FirebaseAuthException {
+    } on firebase_auth.FirebaseAuthException catch (e, stack) {
       // debugPrint('Firebase Auth Error: ${e.message}');
-      return const Left(SomeFailure.serverError());
-    } catch (e) {
+      return Left(SomeFailure.serverError(error: e, stack: stack));
+    } catch (e, stack) {
       // debugPrint('General Auth Error: $e');
-      return const Left(SomeFailure.serverError());
+      return Left(SomeFailure.serverError(error: e, stack: stack));
     }
     // finally {
     //   _updateAuthStatusBasedOnCache();
@@ -328,27 +340,54 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   ) async {
     try {
       if (currentUser.isNotEmpty) {
-        if (currentUserSetting.id.isEmpty ||
-            currentUserSetting.id != currentUser.id) {
-          await _firestoreService.setUserSetting(
-            userSetting: userSetting,
-            userId: currentUser.id,
-          );
-        } else {
-          await _firestoreService.updateUserSetting(
-            userSetting,
-          );
-        }
+        // if (currentUserSetting.id.isEmpty ||
+        //     currentUserSetting.id != currentUser.id) {
+        await _firestoreService.setUserSetting(
+          userSetting: userSetting,
+          userId: currentUser.id,
+        );
+        // } else {
+        //   await _firestoreService.updateUserSetting(
+        //     userSetting,
+        //   );
+        // }
         return const Right(true);
       }
       return const Right(false);
-    } on firebase_core.FirebaseException catch (e) {
-      return Left(SendFailure.fromCode(e).status);
-    } catch (e) {
-      return const Left(SomeFailure.serverError());
+    } on firebase_core.FirebaseException catch (e, stack) {
+      return Left(SendFailure.fromCode(error: e, stack: stack).status);
+    } catch (e, stack) {
+      return Left(SomeFailure.serverError(error: e, stack: stack));
     } finally {
       _updateUserSettingBasedOnCache();
     }
+  }
+
+  @override
+  Future<Either<SomeFailure, bool>> createFcmUserSetting() async {
+    final result = await _deviceRepository.getDevice(
+      initialList: currentUserSetting.devicesInfo,
+    );
+
+    return result.fold(
+      Left.new,
+      (r) {
+        if (r == null) {
+          return const Right(false);
+        }
+        final devicesInfo =
+            List<DeviceInfoModel>.of(currentUserSetting.devicesInfo ?? [])
+              ..removeWhere(
+                (deviceInfo) => deviceInfo.deviceId == r.deviceId,
+              )
+              ..add(r);
+        final userSetting = currentUserSetting.copyWith(
+          id: currentUser.id,
+          devicesInfo: devicesInfo,
+        );
+        return updateUserSetting(userSetting);
+      },
+    );
   }
 }
 

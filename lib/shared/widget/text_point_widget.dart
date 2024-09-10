@@ -6,19 +6,26 @@ class TextPointWidget extends StatelessWidget {
     this.text, {
     super.key,
     this.textAlign,
+    this.pointColor,
+    this.textStyle,
+    this.mainAxisAlignment,
     // this.hasExpanded = true,
   });
   final String text;
   final TextAlign? textAlign;
+  final Color? pointColor;
+  final TextStyle? textStyle;
+  final MainAxisAlignment? mainAxisAlignment;
   // final bool hasExpanded;
 
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.center,
       children: [
-        const CircleAvatar(
+        CircleAvatar(
           radius: KPadding.kPaddingSize4,
+          backgroundColor: pointColor,
         ),
         KSizedBox.kWidthSizedBox8,
         // if (hasExpanded)
@@ -32,7 +39,7 @@ class TextPointWidget extends StatelessWidget {
         // else
         Text(
           text,
-          style: AppTextStyle.materialThemeTitleSmall,
+          style: textStyle ?? AppTextStyle.materialThemeTitleSmall,
           textAlign: textAlign,
         ),
       ],

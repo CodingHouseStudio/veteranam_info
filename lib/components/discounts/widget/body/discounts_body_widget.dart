@@ -14,7 +14,10 @@ class DiscountBodyWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<DiscountConfigCubit, DiscountConfigState>(
       builder: (context, config) {
-        return BlocBuilder<DiscountUserEmailCubit, DiscountUserEmailState>(
+        return BlocBuilder<DiscountUserEmailFormBloc,
+            DiscountUserEmailFormState>(
+          buildWhen: (previous, current) =>
+              previous.emailEnum != current.emailEnum,
           builder: (context, emailState) {
             return BlocBuilder<DiscountLinkCubit, bool>(
               builder: (context, state) {
@@ -34,13 +37,13 @@ class DiscountBodyWidget extends StatelessWidget {
                       );
                     }
                     if (state.itemsLoaded ==
-                            (KDimensions.loadItems *
+                            (config.loadingItems *
                                 (config.emailScrollCount + 1)) &&
-                        emailState.value.show) {
+                        emailState.emailEnum.show) {
                       context.dialog.showUserEmailDialog(
-                        emailCloseDelay: config.emailCloseDelay,
-                        userEmailEnum: emailState.value,
-                        count: emailState.count,
+                        config.emailCloseDelay,
+                        // userEmailEnum: emailState.value,
+                        // count: emailState.count,
                       );
                     }
                   },

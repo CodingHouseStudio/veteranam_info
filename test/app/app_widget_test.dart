@@ -21,8 +21,9 @@ void main() {
     late IDiscountRepository mockDiscountRepository;
     late IInvestorsRepository mockInvestorsReportisory;
     late IAppAuthenticationRepository mockAppAuthenticationRepository;
-    late IReportRepository mockReportRepository;
+    // late IReportRepository mockReportRepository;
     late FirebaseRemoteConfigProvider mockFirebaseRemoteConfigProvider;
+    late FirebaseAnalyticsService mockFirebaseAnalyticsService;
     setUp(() {
       mockAuthenticationRepository = MockAuthenticationRepository();
       mockDiscountRepository = MockIDiscountRepository();
@@ -30,9 +31,10 @@ void main() {
       mockFaqRepository = MockIFaqRepository();
       mockInvestorsReportisory = MockIInvestorsRepository();
       mockFirebaseRemoteConfigProvider = MockFirebaseRemoteConfigProvider();
+      mockFirebaseAnalyticsService = MockFirebaseAnalyticsService();
 
       when(mockAuthenticationRepository.userSetting).thenAnswer(
-        (realInvocation) => Stream.value(UserSetting.empty),
+        (realInvocation) => Stream.value(KTestText.userSetting),
       );
       when(mockAuthenticationRepository.status).thenAnswer(
         (realInvocation) => Stream.value(AuthenticationStatus.anonymous),
@@ -41,7 +43,7 @@ void main() {
         (realInvocation) => User.empty,
       );
       when(mockAuthenticationRepository.currentUserSetting).thenAnswer(
-        (realInvocation) => UserSetting.empty,
+        (realInvocation) => KTestText.userSetting,
       );
       when(mockFaqRepository.getQuestions()).thenAnswer(
         (invocation) async => Right(KTestText.questionModelItems),
@@ -50,15 +52,15 @@ void main() {
         (invocation) => KTestText.user,
       );
 
-      mockReportRepository = MockIReportRepository();
-      when(
-        mockReportRepository.getCardReportById(
-          cardEnum: CardEnum.discount,
-          userId: KTestText.user.id,
-        ),
-      ).thenAnswer(
-        (invocation) async => Right(KTestText.reportItems),
-      );
+      // mockReportRepository = MockIReportRepository();
+      // when(
+      //   mockReportRepository.getCardReportById(
+      //     cardEnum: CardEnum.discount,
+      //     userId: KTestText.user.id,
+      //   ),
+      // ).thenAnswer(
+      //   (invocation) async => Right(KTestText.reportItems),
+      // );
 
       when(mockDiscountRepository.userCanSendLink(KTestText.user.id))
           .thenAnswer(
@@ -70,16 +72,16 @@ void main() {
       );
       when(
         mockDiscountRepository.getDiscountItems(
-          reportIdItems: KTestText.reportItems.getIdCard,
-        ),
+            // reportIdItems: KTestText.reportItems.getIdCard,
+            ),
       ).thenAnswer(
         (invocation) => Stream.value(KTestText.discountModelItemsModify),
       );
 
       when(
         mockInvestorsReportisory.getFunds(
-          reportIdItems: KTestText.reportItems.getIdCard,
-        ),
+            // reportIdItems: KTestText.reportItems.getIdCard,
+            ),
       ).thenAnswer(
         (invocation) async => Right(KTestText.fundItems),
       );
@@ -94,9 +96,10 @@ void main() {
           mockAuthenticationRepository: mockAuthenticationRepository,
           tester: tester,
           mockFaqRepository: mockFaqRepository,
-          mockReportRepository: mockReportRepository,
+          // mockReportRepository: mockReportRepository,
           mockInvestorsReportisory: mockInvestorsReportisory,
           mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
+          mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
         );
       });
     });
@@ -110,9 +113,10 @@ void main() {
           mockAuthenticationRepository: mockAuthenticationRepository,
           tester: tester,
           mockFaqRepository: mockFaqRepository,
-          mockReportRepository: mockReportRepository,
+          // mockReportRepository: mockReportRepository,
           mockInvestorsReportisory: mockInvestorsReportisory,
           mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
+          mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
         );
       });
     });

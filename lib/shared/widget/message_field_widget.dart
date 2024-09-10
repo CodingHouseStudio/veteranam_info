@@ -11,7 +11,7 @@ class MessageFieldWidget extends StatelessWidget {
     this.controller,
     this.errorText,
     this.focusNode,
-    this.disposeFocusNode,
+    this.disposeFocusNode = true,
     this.labelText,
     this.showErrorText,
   });
@@ -21,7 +21,7 @@ class MessageFieldWidget extends StatelessWidget {
   final TextEditingController? controller;
   final String? errorText;
   final FocusNode? focusNode;
-  final bool? disposeFocusNode;
+  final bool disposeFocusNode;
   final TextStyle? hintStyle;
   final bool isDesk;
   final bool? showErrorText;

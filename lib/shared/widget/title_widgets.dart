@@ -114,8 +114,8 @@ class TitleIconWidget extends StatelessWidget {
   }
 }
 
-class ShortTitleIconWidget extends StatelessWidget {
-  const ShortTitleIconWidget({
+class LineTitleIconWidget extends StatelessWidget {
+  const LineTitleIconWidget({
     required this.title,
     required this.titleKey,
     // required this.isDesk,
@@ -277,6 +277,41 @@ class TitlePointWidget extends StatelessWidget {
         KSizedBox.kHeightSizedBox32,
         const Divider(
           color: AppColors.materialThemeKeyColorsNeutral,
+        ),
+      ],
+    );
+  }
+}
+
+class ShortTitleIconWidget extends StatelessWidget {
+  const ShortTitleIconWidget({
+    required this.title,
+    required this.titleKey,
+    required this.isDesk,
+    this.iconCrossAxisAlignment = CrossAxisAlignment.end,
+    super.key,
+  });
+  final String title;
+  final Key titleKey;
+  final bool isDesk;
+  final CrossAxisAlignment iconCrossAxisAlignment;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          key: titleKey,
+          style: isDesk
+              ? AppTextStyle.materialThemeDisplayLarge
+              : AppTextStyle.materialThemeDisplaySmall,
+        ),
+        if (isDesk) KSizedBox.kWidthSizedBox32 else KSizedBox.kWidthSizedBox24,
+        IconWidget(
+          icon: KIcon.arrowDownLeft,
+          padding: isDesk ? KPadding.kPaddingSize20 : KPadding.kPaddingSize8,
         ),
       ],
     );

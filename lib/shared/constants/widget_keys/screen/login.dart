@@ -8,5 +8,5 @@ class _LoginKeys {
   final button = const Key('login_screen_button');
   final signUpText = const Key('login_screen_sign_up_text');
   final signUpButton = const Key('login_screen_sign_up_button');
-  final bottomButtons = const Key('login_screen_bottom_buttons');
+  //final bottomButtons = const Key('login_screen_bottom_buttons');
 }

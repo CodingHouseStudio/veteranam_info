@@ -22,6 +22,7 @@ void main() {
     late AuthenticationRepository mockAuthenticationRepository;
     late FirebaseAnalyticsService mockFirebaseAnalyticsService;
     late FirebaseRemoteConfigProvider mockFirebaseRemoteConfigProvider;
+    late AppInfoRepository mockBuildRepository;
     setUp(() {
       // KTest.animatioRepeat=1;
       ExtendedDateTime.id = KTestText.id;
@@ -33,6 +34,7 @@ void main() {
       mockFirebaseAnalyticsService = MockFirebaseAnalyticsService();
       mockFirebaseRemoteConfigProvider = MockFirebaseRemoteConfigProvider();
       mockReportRepository = MockIReportRepository();
+      mockBuildRepository = MockAppInfoRepository();
 
       when(mockAuthenticationRepository.currentUser).thenAnswer(
         (realInvocation) => User.empty,
@@ -70,8 +72,8 @@ void main() {
       setUp(() {
         when(
           mockDiscountRepository.getDiscountItems(
-            reportIdItems: KTestText.reportItems.getIdCard,
-          ),
+              // reportIdItems: KTestText.reportItems.getIdCard,
+              ),
         ).thenAnswer(
           (invocation) => Stream.error(Exception(KGroupText.failureGet)),
         );
@@ -84,6 +86,7 @@ void main() {
           mockReportRepository: mockReportRepository,
           mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
           mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
+          mockBuildRepository: mockBuildRepository,
           mockAuthenticationRepository: mockAuthenticationRepository,
         );
 
@@ -98,8 +101,8 @@ void main() {
       setUp(() {
         when(
           mockDiscountRepository.getDiscountItems(
-            reportIdItems: KTestText.reportItems.getIdCard,
-          ),
+              // reportIdItems: KTestText.reportItems.getIdCard,
+              ),
         ).thenAnswer(
           (invocation) => Stream.value([]),
         );
@@ -119,6 +122,7 @@ void main() {
           mockReportRepository: mockReportRepository,
           mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
           mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
+          mockBuildRepository: mockBuildRepository,
           mockAuthenticationRepository: mockAuthenticationRepository,
         );
 
@@ -133,8 +137,8 @@ void main() {
       setUp(() {
         when(
           mockDiscountRepository.getDiscountItems(
-            reportIdItems: KTestText.reportItems.getIdCard,
-          ),
+              // reportIdItems: KTestText.reportItems.getIdCard,
+              ),
         ).thenAnswer(
           (invocation) => Stream.value(KTestText.discountModelItemsModify),
         );
@@ -153,6 +157,7 @@ void main() {
           mockReportRepository: mockReportRepository,
           mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
           mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
+          mockBuildRepository: mockBuildRepository,
           mockAuthenticationRepository: mockAuthenticationRepository,
         );
 
@@ -168,6 +173,7 @@ void main() {
           mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
           mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
           mockAuthenticationRepository: mockAuthenticationRepository,
+          mockBuildRepository: mockBuildRepository,
         ),
         // lastCard: KWidgetkeys.screen.discounts.cardLast,
       );
@@ -180,57 +186,12 @@ void main() {
           mockReportRepository: mockReportRepository,
           mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
           mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
+          mockBuildRepository: mockBuildRepository,
           mockAuthenticationRepository: mockAuthenticationRepository,
         );
 
         await reportDialogCheckFailureHelper(tester);
       });
-      // testWidgets('Report Dialog Incorect Send', (tester) async {
-      //   await discountsPumpAppHelper(
-      //     tester: tester,
-      //     mockDiscountRepository: mockDiscountRepository,
-      //     mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-      //     mockReportRepository: mockReportRepository,
-      //     mockAuthenticationRepository: mockAuthenticationRepository,
-      //   );
-
-      //   await reportDialogIncorrectSendHelper(
-      //     tester: tester,
-      //   );
-      // });
-      // testWidgets('Report Dialog Incorect Send(field null and user)',
-      //     (tester) async {
-      //   when(mockAuthenticationRepository.isAnonymouslyOrEmty()).thenAnswer(
-      //     (realInvocation) => false,
-      //   );
-
-      //   await discountsPumpAppHelper(
-      //     tester: tester,
-      //     mockDiscountRepository: mockDiscountRepository,
-      //     mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-      //     mockReportRepository: mockReportRepository,
-      //     mockAuthenticationRepository: mockAuthenticationRepository,
-      //   );
-
-      //   await reportDialogIncorrectSendHelper(
-      //     tester: tester,
-      //     fieldNull: true,
-      //   );
-      // });
-      // testWidgets('Report Dialog Incorect Send(field null)', (tester) async {
-      //   await discountsPumpAppHelper(
-      //     tester: tester,
-      //     mockDiscountRepository: mockDiscountRepository,
-      //     mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-      //     mockReportRepository: mockReportRepository,,
-      //     mockAuthenticationRepository: mockAuthenticationRepository,
-      //   );
-
-      //   await reportDialogIncorrectSendHelper(
-      //     tester: tester,
-      //     fieldNull: true,
-      //   );
-      // });
       testWidgets('Notification Link Correct Send', (tester) async {
         await discountsPumpAppHelper(
           tester: tester,
@@ -239,6 +200,7 @@ void main() {
           mockReportRepository: mockReportRepository,
           mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
           mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
+          mockBuildRepository: mockBuildRepository,
           mockAuthenticationRepository: mockAuthenticationRepository,
         );
 
@@ -281,6 +243,7 @@ void main() {
               mockReportRepository: mockReportRepository,
               mockFirebaseRemoteConfigProvider:
                   mockFirebaseRemoteConfigProvider,
+              mockBuildRepository: mockBuildRepository,
               mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
               mockAuthenticationRepository: mockAuthenticationRepository,
             );
@@ -307,6 +270,7 @@ void main() {
             mockAppAuthenticationRepository: mockAppAuthenticationRepository,
             mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
             mockReportRepository: mockReportRepository,
+            mockBuildRepository: mockBuildRepository,
             mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
             mockAuthenticationRepository: mockAuthenticationRepository,
           );
@@ -321,12 +285,74 @@ void main() {
             mockAppAuthenticationRepository: mockAppAuthenticationRepository,
             mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
             mockReportRepository: mockReportRepository,
+            mockBuildRepository: mockBuildRepository,
             mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
             mockAuthenticationRepository: mockAuthenticationRepository,
           );
 
           await advancedFilterResetMobHelper(
             tester: tester,
+            mockGoRouter: mockGoRouter,
+          );
+        });
+        testWidgets('Report Dialog Incorect Send', (tester) async {
+          await discountsPumpAppHelper(
+            tester: tester,
+            mockDiscountRepository: mockDiscountRepository,
+            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+            mockReportRepository: mockReportRepository,
+            mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
+            mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
+            mockBuildRepository: mockBuildRepository,
+            mockAuthenticationRepository: mockAuthenticationRepository,
+            mockGoRouter: mockGoRouter,
+          );
+
+          await reportDialogIncorrectSendHelper(
+            tester: tester,
+            mockGoRouter: mockGoRouter,
+          );
+        });
+        testWidgets('Report Dialog Incorect Send(field null and user)',
+            (tester) async {
+          when(mockAuthenticationRepository.isAnonymouslyOrEmty()).thenAnswer(
+            (realInvocation) => false,
+          );
+
+          await discountsPumpAppHelper(
+            tester: tester,
+            mockDiscountRepository: mockDiscountRepository,
+            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+            mockReportRepository: mockReportRepository,
+            mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
+            mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
+            mockBuildRepository: mockBuildRepository,
+            mockAuthenticationRepository: mockAuthenticationRepository,
+            mockGoRouter: mockGoRouter,
+          );
+
+          await reportDialogIncorrectSendHelper(
+            tester: tester,
+            fieldNull: true,
+            mockGoRouter: mockGoRouter,
+          );
+        });
+        testWidgets('Report Dialog Incorect Send(field null)', (tester) async {
+          await discountsPumpAppHelper(
+            tester: tester,
+            mockDiscountRepository: mockDiscountRepository,
+            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+            mockReportRepository: mockReportRepository,
+            mockFirebaseRemoteConfigProvider: mockFirebaseRemoteConfigProvider,
+            mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
+            mockBuildRepository: mockBuildRepository,
+            mockAuthenticationRepository: mockAuthenticationRepository,
+            mockGoRouter: mockGoRouter,
+          );
+
+          await reportDialogIncorrectSendHelper(
+            tester: tester,
+            fieldNull: true,
             mockGoRouter: mockGoRouter,
           );
         });
@@ -339,6 +365,7 @@ void main() {
               mockAppAuthenticationRepository: mockAppAuthenticationRepository,
               mockFirebaseRemoteConfigProvider:
                   mockFirebaseRemoteConfigProvider,
+              mockBuildRepository: mockBuildRepository,
               mockReportRepository: mockReportRepository,
               mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
               mockAuthenticationRepository: mockAuthenticationRepository,
@@ -358,6 +385,7 @@ void main() {
               mockAppAuthenticationRepository: mockAppAuthenticationRepository,
               mockFirebaseRemoteConfigProvider:
                   mockFirebaseRemoteConfigProvider,
+              mockBuildRepository: mockBuildRepository,
               mockReportRepository: mockReportRepository,
               mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
               mockAuthenticationRepository: mockAuthenticationRepository,
@@ -388,6 +416,7 @@ void main() {
               mockAppAuthenticationRepository: mockAppAuthenticationRepository,
               mockFirebaseRemoteConfigProvider:
                   mockFirebaseRemoteConfigProvider,
+              mockBuildRepository: mockBuildRepository,
               mockReportRepository: mockReportRepository,
               mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
               mockAuthenticationRepository: mockAuthenticationRepository,
@@ -410,6 +439,7 @@ void main() {
               mockAppAuthenticationRepository: mockAppAuthenticationRepository,
               mockFirebaseRemoteConfigProvider:
                   mockFirebaseRemoteConfigProvider,
+              mockBuildRepository: mockBuildRepository,
               mockReportRepository: mockReportRepository,
               mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
               mockAuthenticationRepository: mockAuthenticationRepository,
@@ -432,6 +462,7 @@ void main() {
               mockAppAuthenticationRepository: mockAppAuthenticationRepository,
               mockFirebaseRemoteConfigProvider:
                   mockFirebaseRemoteConfigProvider,
+              mockBuildRepository: mockBuildRepository,
               mockReportRepository: mockReportRepository,
               mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
               mockAuthenticationRepository: mockAuthenticationRepository,
@@ -451,6 +482,7 @@ void main() {
               mockAppAuthenticationRepository: mockAppAuthenticationRepository,
               mockFirebaseRemoteConfigProvider:
                   mockFirebaseRemoteConfigProvider,
+              mockBuildRepository: mockBuildRepository,
               mockReportRepository: mockReportRepository,
               mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
               mockAuthenticationRepository: mockAuthenticationRepository,
@@ -472,7 +504,11 @@ void main() {
                 when(
                   mockDiscountRepository.sendEmail(KTestText.emailModel),
                 ).thenAnswer(
-                  (invocation) async => const Left(SomeFailure.serverError()),
+                  (invocation) async => Left(
+                    SomeFailure.serverError(
+                      error: null,
+                    ),
+                  ),
                 );
               },
             );
@@ -483,6 +519,7 @@ void main() {
                 mockGoRouter: mockGoRouter,
                 mockAppAuthenticationRepository:
                     mockAppAuthenticationRepository,
+                mockBuildRepository: mockBuildRepository,
                 mockFirebaseRemoteConfigProvider:
                     mockFirebaseRemoteConfigProvider,
                 mockReportRepository: mockReportRepository,
@@ -519,6 +556,7 @@ void main() {
               mockAppAuthenticationRepository: mockAppAuthenticationRepository,
               mockFirebaseRemoteConfigProvider:
                   mockFirebaseRemoteConfigProvider,
+              mockBuildRepository: mockBuildRepository,
               mockReportRepository: mockReportRepository,
               mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
               mockAuthenticationRepository: mockAuthenticationRepository,

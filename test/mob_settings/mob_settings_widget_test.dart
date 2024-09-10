@@ -1,6 +1,3 @@
-import 'dart:typed_data';
-
-import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mockito/mockito.dart';
@@ -20,6 +17,7 @@ void main() {
   group('${KScreenBlocName.mobSettings} ', () {
     late IFeedbackRepository mockFeedbackRepository;
     late IAppAuthenticationRepository mockAppAuthenticationRepository;
+    // late BuildRepository mockBuildRepository;
     setUp(() {
       KTest.testIsWeb = false;
       ExtendedDateTime.id = KTestText.id;
@@ -27,31 +25,36 @@ void main() {
 
       mockFeedbackRepository = MockIFeedbackRepository();
       mockAppAuthenticationRepository = MockAppAuthenticationRepository();
+      // mockBuildRepository = MockBuildRepository();
 
       when(
         mockAppAuthenticationRepository.currentUser,
       ).thenAnswer((realInvocation) => KTestText.user);
+      // when(mockBuildRepository.getBuildInfo()).thenAnswer(
+      //   (invocation) async => BuildRepository.defaultValue,
+      // );
 
-      when(
-        mockFeedbackRepository.sendMobFeedback(
-          feedback: FeedbackModel(
-            id: KTestText.id,
-            message: KTestText.field,
-            guestId: KTestText.user.id,
-            guestName: null,
-            email: null,
-            timestamp: KTestText.dateTime,
-          ),
-          image: Uint8List(1),
-        ),
-      ).thenAnswer(
-        (realInvocation) async => const Right(true),
-      );
+      // when(
+      //   mockFeedbackRepository.sendMobFeedback(
+      //     feedback: FeedbackModel(
+      //       id: KTestText.id,
+      //       message: KTestText.field,
+      //       guestId: KTestText.user.id,
+      //       guestName: null,
+      //       email: null,
+      //       timestamp: KTestText.dateTime,
+      //     ),
+      //     image: Uint8List(1),
+      //   ),
+      // ).thenAnswer(
+      //   (realInvocation) async => const Right(true),
+      // );
     });
     testWidgets('${KGroupText.intial} ', (tester) async {
       await mobSettingsPumpAppHelper(
         tester: tester,
         mockFeedbackRepository: mockFeedbackRepository,
+        // mockBuildRepository: mockBuildRepository,
         mockAppAuthenticationRepository: mockAppAuthenticationRepository,
       );
 
@@ -61,12 +64,27 @@ void main() {
       await mobSettingsPumpAppHelper(
         tester: tester,
         mockFeedbackRepository: mockFeedbackRepository,
+        // mockBuildRepository: mockBuildRepository,
         mockAppAuthenticationRepository: mockAppAuthenticationRepository,
       );
 
       await mobFeedbackOpenHelper(
         test: mobFeedbackWrongTextHelper,
         tester: tester,
+      );
+    });
+
+    testWidgets('${KGroupText.offlineNetwork} ', (tester) async {
+      await networkMobHelper(
+        tester: tester,
+        pumpApp: () async => mobSettingsPumpAppHelper(
+          //mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          // mockInvestorsRepository: mockInvestorsRepository,
+          mockFeedbackRepository: mockFeedbackRepository,
+          //mockBuildRepository: mockBuildRepository,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          tester: tester,
+        ),
       );
     });
     group('${KGroupText.goRouter} ', () {
@@ -76,6 +94,7 @@ void main() {
         await mobSettingsPumpAppHelper(
           tester: tester,
           mockFeedbackRepository: mockFeedbackRepository,
+          // mockBuildRepository: mockBuildRepository,
           mockAppAuthenticationRepository: mockAppAuthenticationRepository,
           mockGoRouter: mockGoRouter,
         );
@@ -86,6 +105,7 @@ void main() {
         await mobSettingsPumpAppHelper(
           tester: tester,
           mockFeedbackRepository: mockFeedbackRepository,
+          // mockBuildRepository: mockBuildRepository,
           mockAppAuthenticationRepository: mockAppAuthenticationRepository,
           mockGoRouter: mockGoRouter,
         );
@@ -100,6 +120,7 @@ void main() {
           await mobSettingsPumpAppHelper(
             tester: tester,
             mockFeedbackRepository: mockFeedbackRepository,
+            // mockBuildRepository: mockBuildRepository,
             mockAppAuthenticationRepository: mockAppAuthenticationRepository,
             mockGoRouter: mockGoRouter,
           );
@@ -114,6 +135,7 @@ void main() {
           await mobSettingsPumpAppHelper(
             tester: tester,
             mockFeedbackRepository: mockFeedbackRepository,
+            // mockBuildRepository: mockBuildRepository,
             mockAppAuthenticationRepository: mockAppAuthenticationRepository,
             mockGoRouter: mockGoRouter,
           );
@@ -128,6 +150,7 @@ void main() {
           await mobSettingsPumpAppHelper(
             tester: tester,
             mockFeedbackRepository: mockFeedbackRepository,
+            // mockBuildRepository: mockBuildRepository,
             mockAppAuthenticationRepository: mockAppAuthenticationRepository,
             mockGoRouter: mockGoRouter,
           );
