@@ -10,7 +10,8 @@ Future<void> dropDownButtonNavigationHelper({
 }) async {
   await scrollingHelper(
     tester: tester,
-    offset: KTestConstants.scrollingDown100,
+    offset: KTestConstants.scrollingDown,
+    itemKey: KWidgetkeys.widget.dropDownButton.loginButton,
   );
 
   expect(
@@ -27,17 +28,24 @@ Future<void> dropDownButtonNavigationHelper({
     findsOneWidget,
   );
 
-  await tester
-      .tap(find.byKey(KWidgetkeys.widget.dropDownButton.businessButton));
+  // await tester
+  //     .tap(find.byKey(KWidgetkeys.widget.dropDownButton.businessButton));
 
-  await tester.pumpAndSettle();
+  // await tester.pumpAndSettle();
 
   expect(
     find.byKey(KWidgetkeys.widget.dropDownButton.userButton),
     findsOneWidget,
   );
 
+  await scrollingHelper(
+    tester: tester,
+    itemKey: KWidgetkeys.widget.dropDownButton.userButton,
+  );
+
   await tester.tap(find.byKey(KWidgetkeys.widget.dropDownButton.userButton));
+
+  await tester.pumpAndSettle();
 
   verify(
     () => mockGoRouter.goNamed(KRoute.login.name),

@@ -57,16 +57,17 @@ void main() {
           );
         });
 
-        // testWidgets('Drop down buttons', (tester) async {
-        //   await userRolePumpAppHelper(
-        //     tester: tester,
-        //   );
+        testWidgets('Drop down buttons', (tester) async {
+          await userRolePumpAppHelper(
+            tester: tester,
+            mockGoRouter: mockGoRouter,
+          );
 
-        //   await dropDownButtonNavigationHelper(
-        //     tester: tester,
-        //     mockGoRouter: mockGoRouter,
-        //   );
-        // });
+          await dropDownButtonNavigationHelper(
+            tester: tester,
+            mockGoRouter: mockGoRouter,
+          );
+        });
       });
     });
   });

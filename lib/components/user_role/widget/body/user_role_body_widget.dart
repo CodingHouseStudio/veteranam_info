@@ -48,7 +48,8 @@ class UserRoleBodyWidget extends StatelessWidget {
                   onPressed: null,
                   color: AppColors.materialThemeKeyColorsPrimary,
                   textColor: AppColors.materialThemeBlack,
-                  mobHorizontalTextPadding: KPadding.kPaddingSize24,
+                  mobHorizontalTextPadding: KPadding.kPaddingSize40,
+                  mobVerticalTextPadding: KPadding.kPaddingSize16,
                 ),
                 KSizedBox.kHeightSizedBox24,
                 TextButton(
@@ -75,35 +76,21 @@ class UserRoleBodyWidget extends StatelessWidget {
           KSizedBox.kHeightSizedBox24
         else
           KSizedBox.kHeightSizedBox32,
-        Padding(
-          padding: isDesk
-              ? const EdgeInsets.only(
-                  left: KPadding.kPaddingSize120,
-                )
-              : EdgeInsets.zero,
-          child: Row(
-            key: KWidgetkeys.screen.userRole.loginButton,
-            mainAxisAlignment:
-                isDesk ? MainAxisAlignment.center : MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: KPadding.kPaddingSize5),
-                child: Text(
-                  context.l10n.doYouHavenAccount,
-                  key: KWidgetkeys.screen.signUp.loginText,
-                  style: AppTextStyle.materialThemeTitleMedium,
-                ),
-              ),
-              KSizedBox.kWidthSizedBox16,
-              SizedBox(
-                width: isDesk ? KSize.kPixel220 : null,
-                child: DropDownButton(
-                  isDesk: isDesk,
-                ),
-              ),
-            ],
-          ),
+        Row(
+          key: KWidgetkeys.screen.userRole.loginButton,
+          mainAxisAlignment:
+              isDesk ? MainAxisAlignment.center : MainAxisAlignment.start,
+          children: [
+            Text(
+              context.l10n.doYouHavenAccount,
+              key: KWidgetkeys.screen.signUp.loginText,
+              style: AppTextStyle.materialThemeTitleMedium,
+            ),
+            KSizedBox.kWidthSizedBox16,
+            DropDownButton(
+              isDesk: isDesk,
+            ),
+          ],
         ),
       ],
     );
