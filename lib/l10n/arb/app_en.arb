@@ -1111,9 +1111,17 @@
   "@dontRememberPassword": {
     "examples": "Text for the password recovery button on the Login page"
   },
+  "contain15Charcters": "It must contain at least 15 characters.",
+  "@contain15Charcters": {
+    "examples": "Error text for the Report dialog when the message is too short."
+  },
   "noInternet": "No internet",
   "@noInternet": {
     "examples": "Text for message on mobile version about no internet"
+  },
+  "signUpInWith": "Sign up with",
+  "@signUpInWith": {
+    "examples": "The text on the SignUp page before the login button with google, facebook, apple."
   },
   "userRole": "Manage discounts in your business account \"Veteranam\"",
   "@userRole": {

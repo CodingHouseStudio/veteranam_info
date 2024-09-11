@@ -1115,9 +1115,17 @@
   "@dontRememberPassword": {
     "examples": "Текст для кнопки відновлення паролю на сторінці Login"
   },
+  "contain15Charcters": "Воно повинно містити хоча б 15 знаків.",
+  "@contain15Charcters": {
+    "examples": "Текст помилки для діалогу Report при закороткому повідомленні."
+  },
   "noInternet": "Інтернет відсутній",
   "@noInternet": {
     "examples": "Текст для повідомлення на телефоні про відсутність інтернету"
+  },
+  "signUpInWith": "Зареєструватись через",
+  "@signUpInWith": {
+    "examples": "Текст на сторінці SignUp перед кнопкою увійти за допомогою google, facebook, apple."
   },
   "userRole": "Керуйте знижками у бізнес-кабінеті \"Veteranam\"",
   "@userRole": {

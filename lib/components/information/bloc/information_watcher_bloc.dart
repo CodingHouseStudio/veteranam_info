@@ -242,7 +242,7 @@ class InformationWatcherBloc
       return;
     }
     if (!(_debounceTimer?.isActive ?? false)) {
-      _debounceTimer = Timer(const Duration(seconds: 5), () async {
+      _debounceTimer = Timer(Duration(seconds: KTest.isTest ? 0 : 5), () async {
         add(
           InformationWatcherEvent.changeLike(
             informationModel: event.informationModel,

@@ -96,7 +96,8 @@ extension ReportFieldModelValidationErrorEmpl
       // case ReportFieldModelValidationError.invalid:
       //   return context.l10n.isWrongReport;
       case ReportFieldModelValidationError.invalidLength:
-        return '${context.l10n.message} ${context.l10n.tooshort}';
+        return '${context.l10n.message} ${context.l10n.tooshort}.'
+            ' ${context.l10n.contain15Charcters}';
       case null:
         return null;
     }

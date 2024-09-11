@@ -211,11 +211,17 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                               ? KSize.kPixel72
                               : KSize.kPixel56,
                         ),
-                        KSizedBox.kWidthSizedBox32,
+                        if (widget.isDesk)
+                          KSizedBox.kWidthSizedBox32
+                        else
+                          KSizedBox.kWidthSizedBox16,
                         const CircleAvatar(
                           radius: KPadding.kPaddingSize2,
                         ),
-                        KSizedBox.kWidthSizedBox32,
+                        if (widget.isDesk)
+                          KSizedBox.kWidthSizedBox32
+                        else
+                          KSizedBox.kWidthSizedBox16,
                         _button(
                           key: KWidgetkeys.widget.nawbar.investorsButton,
                           ruoteName: KRoute.support.name,
@@ -224,11 +230,17 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                               ? KSize.kPixel60
                               : KSize.kPixel80,
                         ),
-                        KSizedBox.kWidthSizedBox32,
+                        if (widget.isDesk)
+                          KSizedBox.kWidthSizedBox32
+                        else
+                          KSizedBox.kWidthSizedBox16,
                         const CircleAvatar(
                           radius: KPadding.kPaddingSize2,
                         ),
-                        KSizedBox.kWidthSizedBox32,
+                        if (widget.isDesk)
+                          KSizedBox.kWidthSizedBox32
+                        else
+                          KSizedBox.kWidthSizedBox16,
                         _button(
                           key: KWidgetkeys.widget.nawbar.feedbackButton,
                           ruoteName: KRoute.feedback.name,
@@ -250,7 +262,6 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                   //       )
                   //     :
                   const Spacer(),
-
                 // if (widget.isDesk && widget.hasMicrophone)
                 //   Padding(
                 //     padding: const EdgeInsets.only(right:
@@ -277,18 +288,17 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                 if (context.read<AuthenticationBloc>().state.status !=
                         AuthenticationStatus.authenticated &&
                     Config.isDevelopment) ...[
-                  KSizedBox.kWidthSizedBox16,
-                  if (widget.isTablet)
-                    TextButton(
-                      key: KWidgetkeys.widget.nawbar.loginButton,
-                      style: KButtonStyles.whiteButtonStyle,
+                  if (widget.isDesk) ...[
+                    KSizedBox.kWidthSizedBox16,
+                    DoubleButtonWidget(
+                      widgetKey: KWidgetkeys.widget.nawbar.loginButton,
                       onPressed: () => loginNavigation(context),
-                      child: Text(
-                        context.l10n.login,
-                        style: AppTextStyle.text24,
-                      ),
-                    )
-                  else if (!isFocused)
+                      text: context.l10n.login,
+                      isDesk: true,
+                      darkMode: true,
+                    ),
+                  ] else if (!isFocused) ...[
+                    KSizedBox.kWidthSizedBox4,
                     IconButtonWidget(
                       key: KWidgetkeys.widget.nawbar.loginIcon,
                       onPressed: () => loginNavigation(context),
@@ -296,6 +306,7 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                           .copyWith(color: AppColors.materialThemeWhite),
                       background: AppColors.materialThemeKeyColorsSecondary,
                     ),
+                  ],
                 ],
                 if (context.read<AuthenticationBloc>().state.status ==
                         AuthenticationStatus.authenticated &&

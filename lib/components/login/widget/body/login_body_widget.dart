@@ -51,6 +51,7 @@ class LoginBodyWidget extends StatelessWidget {
               backPassword: () => context.read<LoginBloc>().add(
                     const LoginEvent.passwordFieldHide(),
                   ),
+              isLogin: true,
             ),
             if (isDesk)
               KSizedBox.kHeightSizedBox24
