@@ -66,6 +66,7 @@ class SignUpBodyWidget extends StatelessWidget {
               backPassword: () => context.read<SignUpBloc>().add(
                     const SignUpEvent.passwordFieldHide(),
                   ),
+              isLogin: false,
               showErrorText: _.formState == SignUpEnum.invalidData ||
                   _.formState == SignUpEnum.passwordInvalidData,
             ),
@@ -139,7 +140,7 @@ class SignUpBodyWidget extends StatelessWidget {
               KSizedBox.kHeightSizedBox24,
             TextPointWidget(
               //key: ,
-              context.l10n.logInWith,
+              context.l10n.signUpInWith,
               pointColor: AppColors.materialThemeKeyColorsPrimary,
               textStyle: AppTextStyle.materialThemeTitleMedium,
               mainAxisAlignment: MainAxisAlignment.start,

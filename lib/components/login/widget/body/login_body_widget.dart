@@ -49,6 +49,7 @@ class LoginBodyWidget extends StatelessWidget {
                   ),
               showErrorText: _.formState == LoginEnum.invalidData ||
                   _.formState == LoginEnum.passwordInvalidData,
+              isLogin: true,
             ),
             if (isDesk)
               KSizedBox.kHeightSizedBox24
