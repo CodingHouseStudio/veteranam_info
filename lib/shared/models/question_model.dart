@@ -12,7 +12,7 @@ class QuestionModel with _$QuestionModel {
     @TitleConverter() required String titleEN,
     @SubtitleConverter() required String subtitle,
     @SubtitleConverter() required String subtitleEN,
-    String? navigationLink,
+    // String? navigationLink,
   }) = _QuestionModel;
 
   factory QuestionModel.fromJson(Map<String, dynamic> json) =>
@@ -25,5 +25,5 @@ abstract class QuestionModelJsonField {
   static const titleEN = 'titleEN';
   static const subtitle = 'subtitle';
   static const subtitleEN = 'subtitleEN';
-  static const navigationLink = 'navigationLink';
+  // static const navigationLink = 'navigationLink';
 }

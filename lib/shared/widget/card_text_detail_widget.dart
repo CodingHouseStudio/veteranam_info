@@ -44,17 +44,10 @@ class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         if (widget.hasMarkdown)
-          MarkdownBody(
+          MarkdownLinkWidget(
             key: KWidgetkeys.widget.cardTextDetail.text,
-            data: widget.text
+            text: widget.text
                 .markdownCard(isDesk: widget.isDesk, fullText: fullText),
-
-            // selectable: true,
-            styleSheet: MarkdownStyleSheet(
-              a: AppTextStyle.materialThemeBodyLarge,
-            ),
-            onTapLink: (text, href, title) =>
-                context.read<UrlCubit>().launchUrl(url: href),
           )
         else
           Text(

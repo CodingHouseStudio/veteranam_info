@@ -122,7 +122,7 @@ abstract class KMockText {
     titleEN: questionTitleEN,
     subtitle: questionSubtitle,
     subtitleEN: questionSubtitleEN,
-    navigationLink: 'null',
+    // navigationLink: 'null',
   );
 
   static final discountModel = DiscountModel(
