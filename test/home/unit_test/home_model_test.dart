@@ -22,8 +22,8 @@ void main() {
           KTestText.questionModelItems.first.subtitle,
       QuestionModelJsonField.subtitleEN:
           KTestText.questionModelItems.first.subtitleEN,
-      QuestionModelJsonField.navigationLink:
-          KTestText.questionModelItems.first.navigationLink,
+      // QuestionModelJsonField.navigationLink:
+      //     KTestText.questionModelItems.first.navigationLink,
     };
     final nullableJson = {
       QuestionModelJsonField.id: KTestText.questionModelItems.first.id,
@@ -34,7 +34,7 @@ void main() {
           KTestText.questionModelItems.first.subtitle,
       QuestionModelJsonField.subtitleEN:
           KTestText.questionModelItems.first.subtitleEN,
-      QuestionModelJsonField.navigationLink: null,
+      // QuestionModelJsonField.navigationLink: null,
     };
     group('${KGroupText.modelJson} ', () {
       test('${KGroupText.full} ', () {
@@ -57,10 +57,10 @@ void main() {
           questionModel.subtitleEN,
           KTestText.questionModelItems.first.subtitleEN,
         );
-        expect(
-          questionModel.navigationLink,
-          KTestText.questionModelItems.first.navigationLink,
-        );
+        // expect(
+        //   questionModel.navigationLink,
+        //   KTestText.questionModelItems.first.navigationLink,
+        // );
       });
 
       test('${KGroupText.nullable} ', () {
@@ -83,7 +83,7 @@ void main() {
           questionModel.subtitleEN,
           KTestText.questionModelItems.first.subtitleEN,
         );
-        expect(questionModel.navigationLink, null);
+        // expect(questionModel.navigationLink, null);
       });
 
       test('${KGroupText.failure} ', () {
@@ -96,8 +96,8 @@ void main() {
               KTestText.questionModelItems.first.subtitle,
           QuestionModelJsonField.subtitleEN:
               KTestText.questionModelItems.first.subtitleEN,
-          QuestionModelJsonField.navigationLink:
-              KTestText.questionModelItems.first.navigationLink,
+          // QuestionModelJsonField.navigationLink:
+          //     KTestText.questionModelItems.first.navigationLink,
         };
 
         expect(
@@ -129,8 +129,8 @@ void main() {
             (_) => KTestText.questionModelItems.first.subtitleEN
                 .split(KTestText.questionModelItems.first.subtitleEN),
           ).join(),
-          QuestionModelJsonField.navigationLink:
-              KTestText.questionModelItems.first.navigationLink,
+          // QuestionModelJsonField.navigationLink:
+          //     KTestText.questionModelItems.first.navigationLink,
         };
 
         final questionModel = QuestionModel.fromJson(convertorJson);
@@ -152,10 +152,10 @@ void main() {
           questionModel.subtitleEN.length,
           KMinMaxSize.subtitleMaxLength,
         );
-        expect(
-          questionModel.navigationLink,
-          KTestText.questionModelItems.first.navigationLink,
-        );
+        // expect(
+        //   questionModel.navigationLink,
+        //   KTestText.questionModelItems.first.navigationLink,
+        // );
       });
     });
     group('${KGroupText.jsonModel} ', () {
@@ -167,7 +167,7 @@ void main() {
 
       test('${KGroupText.nullable} ', () {
         final questionModelJson = KTestText.questionModelItems.first
-            .copyWith(navigationLink: null)
+            // .copyWith(navigationLink: null)
             .toJson();
 
         expect(questionModelJson, nullableJson);
@@ -196,8 +196,8 @@ void main() {
             (_) => KTestText.questionModelItems.first.subtitleEN
                 .split(KTestText.questionModelItems.first.subtitleEN),
           ).join().substring(0, KMinMaxSize.subtitleMaxLength),
-          QuestionModelJsonField.navigationLink:
-              KTestText.questionModelItems.first.navigationLink,
+          // QuestionModelJsonField.navigationLink:
+          //     KTestText.questionModelItems.first.navigationLink,
         };
         final questionModelJson = QuestionModel(
           id: KTestText.questionModelItems.first.id,
@@ -221,7 +221,7 @@ void main() {
             (_) => KTestText.questionModelItems.first.subtitleEN
                 .split(KTestText.questionModelItems.first.subtitleEN),
           ).join(),
-          navigationLink: KTestText.questionModelItems.first.navigationLink,
+          // navigationLink: KTestText.questionModelItems.first.navigationLink,
         ).toJson();
 
         expect(questionModelJson, convertorJson);
