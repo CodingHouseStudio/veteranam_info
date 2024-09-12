@@ -1,5 +1,6 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:dio/dio.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
@@ -24,6 +25,7 @@ void configureDependenciesTest() {
   // KTest.scroll = null;
   // Services
   GetIt.I.registerSingleton<FirebaseCrashlytics>(MockFirebaseCrashlytics());
+  GetIt.I.registerSingleton<Dio>(Dio());
   GetIt.I.registerSingleton<FirebaseAuth>(MockFirebaseAuth());
   GetIt.I.registerSingleton<GoogleSignIn>(GoogleSignIn());
   GetIt.I.registerSingleton<FakeClient>(FakeClient());
@@ -39,6 +41,11 @@ void configureDependenciesTest() {
   GetIt.I.registerSingleton<FirebaseRemoteConfigProvider>(
     FirebaseRemoteConfigProvider(
       GetIt.I.get<FirebaseRemoteConfig>(),
+    ),
+  );
+  GetIt.I.registerSingleton<ArtifactDownloadHelper>(
+    ArtifactDownloadHelper(
+      GetIt.I.get<Dio>(),
     ),
   );
 
@@ -196,7 +203,13 @@ void configureFailureDependenciesTest() {
   KTest.testReleaseMode = true;
   // KTest.scroll = null;
   // Services
+  GetIt.I.registerSingleton<Dio>(Dio());
   GetIt.I.registerSingleton<FirebaseCrashlytics>(MockFirebaseCrashlytics());
+  GetIt.I.registerSingleton<ArtifactDownloadHelper>(
+    ArtifactDownloadHelper(
+      GetIt.I.get<Dio>(),
+    ),
+  );
 
   // Repositories
   GetIt.I.registerLazySingleton<FailureRepository>(
