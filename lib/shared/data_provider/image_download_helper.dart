@@ -1,9 +1,9 @@
 import 'dart:async';
-import 'dart:io' as io;
+import 'dart:io' as io; // Use io for platform-agnostic file operations
 import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart' show kIsWeb, kReleaseMode;
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:injectable/injectable.dart';
 import 'package:path_provider/path_provider.dart'; // For mobile file handling
 import 'package:veteranam/shared/shared.dart';
@@ -13,9 +13,10 @@ class ArtifactDownloadHelper {
   ArtifactDownloadHelper(this.dio);
   final Dio dio;
 
-  final String imagesDir = 'assets/images'; // Use assets directory for web
+  final String imagesDir = 'assets/images'; // Use assets directory for mobile
 
   static final Map<String, Uint8List> _imageMemmoryDir = {};
+  final _options = Options(responseType: ResponseType.bytes);
 
   static Uint8List? getBytestExist(String key) =>
       _imageMemmoryDir.containsKey(key) ? _imageMemmoryDir[key] : null;
@@ -28,10 +29,8 @@ class ArtifactDownloadHelper {
           {imageModel.name ?? imageModel.downloadURL: byte},
         );
       }
-      // return image;
     } catch (error) {
-      // Handle download errors gracefully (e.g., logging, UI feedback)
-      // return imageModel; // Return original image or provide a placeholder
+      // Handle download errors
     }
   }
 
@@ -40,19 +39,28 @@ class ArtifactDownloadHelper {
       return null; // No URL, no download
     }
 
+    // Check memory cache first
+    final cachedBytes = getBytestExist(image.downloadURL);
+    if (cachedBytes != null) {
+      return cachedBytes;
+    }
+
     // Handle differently for web vs mobile
     if (kIsWeb) {
       // On web, just download and keep in memory
-      final imgResponse = await dio.get<Uint8List>(
-        _url(image.downloadURL),
-        options: Options(responseType: ResponseType.bytes),
+
+      final response = await dio.get<Uint8List>(
+        image.downloadURL.getImageUrl,
+        options: _options,
       );
-      if (imgResponse.data == null || imgResponse.data!.lengthInBytes < 2000) {
+      if (response.data == null ||
+          response.data!.lengthInBytes < KMinMaxSize.imageMinBytes) {
         // Likely a 404 image, handle error or provide a placeholder
         return null;
       }
 
-      return imgResponse.data;
+      _imageMemmoryDir[image.downloadURL] = response.data!;
+      return response.data;
     } else {
       // On mobile, use the local filesystem
       final filePath = await _getLocalImagePath(image);
@@ -64,42 +72,26 @@ class ArtifactDownloadHelper {
       }
 
       // Download the image
-      final imgResponse = await dio.get<Uint8List>(
-        _url(image.downloadURL),
-        options: Options(responseType: ResponseType.bytes),
+      final response = await dio.get<Uint8List>(
+        image.downloadURL.getImageUrl,
+        options: _options,
       );
-      if (imgResponse.data == null || imgResponse.data!.lengthInBytes < 2000) {
+      if (response.data == null ||
+          response.data!.lengthInBytes < KMinMaxSize.imageMinBytes) {
         // Likely a 404 image, handle error or provide a placeholder
         return null;
       }
 
       // Save to local file system
-      await _saveDownloadedImage(filePath, imgResponse.data);
+      await _saveDownloadedImage(filePath, response.data);
       return io.File(filePath).readAsBytes();
     }
-  }
-
-  String _url(String imageUrl) {
-    if ((Config.isProduction && kReleaseMode) || !kIsWeb) {
-      final url = kIsWeb ? Uri.base.origin : 'https://veteranam.info';
-      return '$url$_urlPrefix$imageUrl';
-    } else {
-      return imageUrl;
-    }
-  }
-
-  String get _urlPrefix {
-    // widget.size == null
-    // ?
-    const quality = '85';
-    const format = 'auto'; // KPlatformConstants.isWebSaffari ? 'jpeg' : 'auto';
-    return '/cdn-cgi/image/quality=$quality,format=$format/';
   }
 
   Future<String> _getLocalImagePath(ImageModel image) async {
     final directory = await getApplicationDocumentsDirectory();
     // Use app directory for mobile
-    return '${directory.path}/$imagesDir/${image.name ?? image.downloadURL}.jpg';
+    return '${directory.path}/$imagesDir/${image.name ?? image.downloadURL}.txt';
   }
 
   Future<void> _saveDownloadedImage(String filePath, Uint8List? bytes) async {

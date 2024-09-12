@@ -47,7 +47,7 @@ class _NetworkImageWidgetState extends State<NetworkImageWidget> {
         bytes == null) {
       precacheImage(
         CachedNetworkImageProvider(
-          _url, // widget.imageUrl,
+          widget.imageUrl.getImageUrl, // widget.imageUrl,
           headers: const {
             'Cache-Control': 'max-age=3600',
           },
@@ -60,10 +60,11 @@ class _NetworkImageWidgetState extends State<NetworkImageWidget> {
 
   @override
   Widget build(BuildContext context) {
+    // return Text('${bytes == null}');
     if (bytes == null) {
       if (kIsWeb || context.read<MobOfflineModeCubit>().state.isOffline) {
         return CachedNetworkImage(
-          imageUrl: _url, // widget.imageUrl,
+          imageUrl: widget.imageUrl.getImageUrl, // widget.imageUrl,
           fit: widget.fit,
           height: widget.size,
           width: widget.size,
@@ -135,25 +136,6 @@ class _NetworkImageWidgetState extends State<NetworkImageWidget> {
     //   // loadingIndicatorColor: loadingIndicatorColor,
     // );
   }
-
-  String get _url {
-    if ((Config.isProduction && kReleaseMode) || !kIsWeb) {
-      final url = kIsWeb ? Uri.base.origin : 'https://veteranam.info';
-      return '$url$_urlPrefix${widget.imageUrl}';
-    } else {
-      return widget.imageUrl;
-    }
-  }
-
-  String get _urlPrefix {
-    // widget.size == null
-    // ?
-    final quality = widget.highQuality ?? false ? '100' : '85';
-    const format = 'auto'; // KPlatformConstants.isWebSaffari ? 'jpeg' : 'auto';
-    return '/cdn-cgi/image/quality=$quality,format=$format/';
-  }
-  // : '/cdn-cgi/image/${kIsWeb ? 'quality=100' : 'quality=85'}'
-  //     ',width=${widget.size! * 10},${widget.size! * 10}/';
 }
 
 // class _NetworkMobileImageWidget extends StatelessWidget {
