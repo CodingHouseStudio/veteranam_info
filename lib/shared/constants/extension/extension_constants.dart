@@ -357,6 +357,7 @@ extension ImageExtensions on ImageModel? {
         imageUrl: this!.downloadURL,
         fit: fit,
         size: size,
+        imageName: this!.name,
       ),
     );
   }

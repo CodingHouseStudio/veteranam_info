@@ -1118,5 +1118,9 @@
   "noInternet": "No internet",
   "@noInternet": {
     "examples": "Text for message on mobile version about no internet"
+  },
+  "signUpInWith": "Sign up with",
+  "@signUpInWith": {
+    "examples": "The text on the SignUp page before the login button with google, facebook, apple."
   }
 }

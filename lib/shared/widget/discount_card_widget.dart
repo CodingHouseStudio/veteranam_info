@@ -41,24 +41,11 @@ class DiscountCardWidget extends StatelessWidget {
             ),
             child: Row(
               children: [
-                if (discountItem.userPhoto?.bytes == null)
-                  UserPhotoWidget(
-                    imageUrl: discountItem.userPhoto?.downloadURL,
-                    onPressed: null,
-                  )
-                else
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(KSize.kUserPhoto),
-                    child: Image.memory(
-                      discountItem.userPhoto!.bytes!,
-                      fit: BoxFit.contain,
-                      width: KSize.kUserPhoto,
-                      height: KSize.kUserPhoto,
-                      // size: KSize.kUserPhoto,
-                      // highQuality: true,
-                      // skeletonizerLoading: false,
-                    ),
-                  ),
+                UserPhotoWidget(
+                  imageUrl: discountItem.userPhoto?.downloadURL,
+                  onPressed: null,
+                  imageName: discountItem.userPhoto?.name,
+                ),
                 KSizedBox.kWidthSizedBox16,
                 Expanded(
                   child: Column(

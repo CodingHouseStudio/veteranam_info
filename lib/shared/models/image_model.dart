@@ -1,7 +1,4 @@
-import 'dart:typed_data';
-
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:veteranam/shared/shared.dart';
 
 part 'image_model.freezed.dart';
 part 'image_model.g.dart';
@@ -14,7 +11,6 @@ class ImageModel with _$ImageModel {
     String? name,
     String? ref,
     String? type,
-    @ImageMemoryConverter() Uint8List? bytes,
   }) = _ImageModel;
 
   factory ImageModel.fromJson(Map<String, dynamic> json) =>

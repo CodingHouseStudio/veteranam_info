@@ -15,6 +15,7 @@ dependencies:
   connectivity_plus: ^6.0.4
   dartz: ^0.10.1
   device_info_plus: ^10.1.2
+  dio: ^5.7.0
   easy_debounce: ^2.0.3
   email_validator: ^3.0.0
   equatable: ^2.0.5
@@ -43,7 +44,6 @@ dependencies:
   get_it: ^7.7.0 # Used for dependency injection
   go_router: ^14.2.7 # Decoupled routing  package which is a must for any app
   google_sign_in: ^6.2.1
-  http: ^1.2.2
   image_picker: ^1.1.2
   injectable: ^2.4.4 # Used for dependency injection
   intl: ^0.19.0
