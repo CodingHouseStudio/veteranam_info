@@ -27,4 +27,6 @@ abstract class KMinMaxSize {
 
   static const kImageMaxSize = 480;
   static const kHomeImageMaxSize = 640;
+
+  static const imageMinBytes = 2000;
 }

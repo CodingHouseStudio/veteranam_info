@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart' show kIsWeb, kReleaseMode;
 import 'package:flutter/material.dart';
@@ -13,6 +15,7 @@ class NetworkImageWidget extends StatefulWidget {
     this.fit,
     this.size,
     this.highQuality,
+    this.imageName,
     // this.skeletonizerLoading = true,
     // this.loadingIndicatorColor,
   });
@@ -20,6 +23,7 @@ class NetworkImageWidget extends StatefulWidget {
   final BoxFit? fit;
   final double? size;
   final bool? highQuality;
+  final String? imageName;
   // final bool skeletonizerLoading;
 
   @override
@@ -27,16 +31,30 @@ class NetworkImageWidget extends StatefulWidget {
 }
 
 class _NetworkImageWidgetState extends State<NetworkImageWidget> {
+  late Uint8List? bytes;
+
+  @override
+  void initState() {
+    super.initState();
+    bytes = ArtifactDownloadHelper.getBytestExist(
+      widget.imageName ?? widget.imageUrl,
+    );
+  }
+
   @override
   void didChangeDependencies() {
     if (kIsWeb || context.read<MobOfflineModeCubit>().state.isOffline) {
       precacheImage(
-        CachedNetworkImageProvider(
-          _url, // widget.imageUrl,
-          headers: const {
-            'Cache-Control': 'max-age=3600',
-          },
-        ),
+        bytes == null
+            ? CachedNetworkImageProvider(
+                widget.imageUrl.getImageUrl, // widget.imageUrl,
+                headers: const {
+                  'Cache-Control': 'max-age=3600',
+                },
+              )
+            : MemoryImage(
+                bytes!,
+              ),
         context,
       );
     }
@@ -45,49 +63,63 @@ class _NetworkImageWidgetState extends State<NetworkImageWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (kIsWeb || context.read<MobOfflineModeCubit>().state.isOffline) {
-      return CachedNetworkImage(
-        imageUrl: _url, // widget.imageUrl,
-        fit: widget.fit,
-        height: widget.size,
-        width: widget.size,
-        errorWidget: (context, url, error) => KIcon.error,
-        httpHeaders: const {
-          'Cache-Control': 'max-age=3600',
-        },
-        filterQuality: widget.highQuality ?? false
-            ? FilterQuality.high
-            : FilterQuality.low,
-        placeholder: (context, url) =>
-            // skeletonizerLoading
-            //     ? const SkeletonizerWidget(
-            //         isLoading: true,
-            //         child: CircularProgressIndicator.adaptive(),
-            //       )
-            //     :
-            const CircularProgressIndicator.adaptive(
-          valueColor:
-              AlwaysStoppedAnimation(AppColors.materialThemeKeyColorsPrimary),
-          strokeWidth: 5,
-        ),
-      );
+    // return Text('${bytes == null}');
+    if (bytes == null) {
+      if (kIsWeb || context.read<MobOfflineModeCubit>().state.isOffline) {
+        return CachedNetworkImage(
+          imageUrl: widget.imageUrl.getImageUrl, // widget.imageUrl,
+          fit: widget.fit,
+          height: widget.size,
+          width: widget.size,
+          errorWidget: (context, url, error) => KIcon.error,
+          httpHeaders: const {
+            'Cache-Control': 'max-age=3600',
+          },
+          filterQuality: widget.highQuality ?? false
+              ? FilterQuality.high
+              : FilterQuality.low,
+          placeholder: (context, url) =>
+              // skeletonizerLoading
+              //     ? const SkeletonizerWidget(
+              //         isLoading: true,
+              //         child: CircularProgressIndicator.adaptive(),
+              //       )
+              //     :
+              const CircularProgressIndicator.adaptive(
+            valueColor:
+                AlwaysStoppedAnimation(AppColors.materialThemeKeyColorsPrimary),
+            strokeWidth: 5,
+          ),
+        );
+      } else {
+        return Image.network(
+          widget.imageUrl,
+          fit: widget.fit,
+          height: widget.size,
+          width: widget.size,
+          errorBuilder: (context, url, error) => KIcon.error,
+          loadingBuilder: (context, child, loadingProgress) {
+            if (loadingProgress == null) {
+              return child;
+            }
+            return const CircularProgressIndicator.adaptive(
+              valueColor: AlwaysStoppedAnimation(
+                AppColors.materialThemeKeyColorsPrimary,
+              ),
+              strokeWidth: 5,
+            );
+          },
+        );
+      }
     } else {
-      return Image.network(
-        widget.imageUrl,
+      return Image.memory(
+        bytes!,
         fit: widget.fit,
         height: widget.size,
         width: widget.size,
         errorBuilder: (context, url, error) => KIcon.error,
-        loadingBuilder: (context, child, loadingProgress) {
-          if (loadingProgress == null) {
-            return child;
-          }
-          return const CircularProgressIndicator.adaptive(
-            valueColor:
-                AlwaysStoppedAnimation(AppColors.materialThemeKeyColorsPrimary),
-            strokeWidth: 5,
-          );
-        },
+        cacheHeight: widget.size?.toInt() ?? KMinMaxSize.kImageMaxSize,
+        cacheWidth: widget.size?.toInt() ?? KMinMaxSize.kImageMaxSize,
       );
     }
     // if (KTest.testIsWeb) {
@@ -107,25 +139,6 @@ class _NetworkImageWidgetState extends State<NetworkImageWidget> {
     //   // loadingIndicatorColor: loadingIndicatorColor,
     // );
   }
-
-  String get _url {
-    if ((Config.isProduction && kReleaseMode) || !kIsWeb) {
-      final url = kIsWeb ? Uri.base.origin : 'https://veteranam.info';
-      return '$url$_urlPrefix${widget.imageUrl}';
-    } else {
-      return widget.imageUrl;
-    }
-  }
-
-  String get _urlPrefix {
-    // widget.size == null
-    // ?
-    final quality = widget.highQuality ?? false ? '100' : '85';
-    const format = 'auto'; // KPlatformConstants.isWebSaffari ? 'jpeg' : 'auto';
-    return '/cdn-cgi/image/quality=$quality,format=$format/';
-  }
-  // : '/cdn-cgi/image/${kIsWeb ? 'quality=100' : 'quality=85'}'
-  //     ',width=${widget.size! * 10},${widget.size! * 10}/';
 }
 
 // class _NetworkMobileImageWidget extends StatelessWidget {
