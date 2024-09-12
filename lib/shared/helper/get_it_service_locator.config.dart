@@ -10,6 +10,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:connectivity_plus/connectivity_plus.dart' as _i895;
 import 'package:device_info_plus/device_info_plus.dart' as _i833;
+import 'package:dio/dio.dart' as _i361;
 import 'package:firebase_analytics/firebase_analytics.dart' as _i398;
 import 'package:firebase_auth/firebase_auth.dart' as _i59;
 import 'package:firebase_crashlytics/firebase_crashlytics.dart' as _i141;
@@ -73,6 +74,7 @@ import 'package:veteranam/shared/bloc/network/network_cubit.dart' as _i891;
 import 'package:veteranam/shared/bloc/report/report_bloc.dart' as _i765;
 import 'package:veteranam/shared/bloc/url/url_cubit.dart' as _i319;
 import 'package:veteranam/shared/data_provider/analytics_module.dart' as _i606;
+import 'package:veteranam/shared/data_provider/artifact_module.dart' as _i331;
 import 'package:veteranam/shared/data_provider/cache_provider.dart' as _i37;
 import 'package:veteranam/shared/data_provider/firebase_analytics_provider.dart'
     as _i777;
@@ -80,6 +82,8 @@ import 'package:veteranam/shared/data_provider/firebase_remote_config_provider.d
     as _i187;
 import 'package:veteranam/shared/data_provider/firestore_provider.dart'
     as _i1033;
+import 'package:veteranam/shared/data_provider/image_download_helper.dart'
+    as _i423;
 import 'package:veteranam/shared/data_provider/remote_config_module.dart'
     as _i769;
 import 'package:veteranam/shared/data_provider/storage_provider.dart' as _i99;
@@ -129,6 +133,7 @@ extension GetItInjectableX on _i174.GetIt {
       environmentFilter,
     );
     final failureModule = _$FailureModule();
+    final artifactModule = _$ArtifactModule();
     final messagingModule = _$MessagingModule();
     final analytucsModule = _$AnalytucsModule();
     final remoteConfigModule = _$RemoteConfigModule();
@@ -137,6 +142,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i141.FirebaseCrashlytics>(
         () => failureModule.firebaseCrashlytics);
     gh.factory<_i37.CacheClient>(() => _i37.CacheClient());
+    gh.singleton<_i361.Dio>(() => artifactModule.dio);
     gh.singleton<_i1008.AppInfoRepository>(() => _i1008.AppInfoRepository());
     gh.singleton<_i892.FirebaseMessaging>(
         () => messagingModule.firebaseMessaging);
@@ -144,6 +150,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => messagingModule.deviceInfoPlugin);
     gh.lazySingleton<_i960.FailureRepository>(
         () => _i960.FailureRepository(gh<_i141.FirebaseCrashlytics>()));
+    gh.singleton<_i423.ArtifactDownloadHelper>(
+        () => _i423.ArtifactDownloadHelper(gh<_i361.Dio>()));
     gh.singleton<_i1033.FirestoreService>(
         () => _i1033.FirestoreService(gh<_i1001.CacheClient>()));
     gh.singleton<_i1001.IDeviceRepository>(() => _i712.DeviceRepository(
@@ -334,6 +342,8 @@ extension GetItInjectableX on _i174.GetIt {
 }
 
 class _$FailureModule extends _i531.FailureModule {}
+
+class _$ArtifactModule extends _i331.ArtifactModule {}
 
 class _$MessagingModule extends _i967.MessagingModule {}
 

@@ -1,8 +1,13 @@
+import 'dart:async';
+
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:get_it/get_it.dart';
 import 'package:veteranam/shared/shared.dart';
 
 class ImageConverter implements JsonConverter<ImageModel?, List<dynamic>?> {
   const ImageConverter();
+  static final ArtifactDownloadHelper _artifactDownloadHelper =
+      GetIt.I.get<ArtifactDownloadHelper>();
 
   @override
   ImageModel? fromJson(List<dynamic>? json) {
@@ -12,7 +17,8 @@ class ImageConverter implements JsonConverter<ImageModel?, List<dynamic>?> {
     if (list?.isEmpty ?? true) {
       return null;
     } else {
-      return list?.first;
+      unawaited(_artifactDownloadHelper.downloadArtifacts(list!.first));
+      return list.first;
     }
   }
 

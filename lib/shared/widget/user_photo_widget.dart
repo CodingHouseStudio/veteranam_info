@@ -6,9 +6,11 @@ class UserPhotoWidget extends StatelessWidget {
     required this.onPressed,
     required this.imageUrl,
     super.key,
+    this.imageName,
   });
   final String? imageUrl;
   final VoidCallback? onPressed;
+  final String? imageName;
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +40,7 @@ class UserPhotoWidget extends StatelessWidget {
             fit: BoxFit.contain,
             size: KSize.kUserPhoto,
             highQuality: true,
+            imageName: imageName,
             // skeletonizerLoading: false,
           ),
         )
