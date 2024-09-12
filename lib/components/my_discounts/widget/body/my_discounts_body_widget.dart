@@ -38,7 +38,8 @@ class MyDiscountsBodyWidget extends StatelessWidget {
             KSizedBox.kHeightSizedBox32,
           KSizedBox.kHeightSizedBox24,
         ],
-        mainDeskPadding: const EdgeInsets.symmetric(
+        mainDeskPadding: ({required isDesk, required maxWidth}) =>
+            const EdgeInsets.symmetric(
           horizontal: KPadding.kPaddingSize100,
         ),
         mainChildWidgetsFunction: ({required isDesk, required isTablet}) => [

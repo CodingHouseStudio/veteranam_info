@@ -8,12 +8,8 @@ Future<void> userRoleInitialHelper(
 ) async {
   await changeWindowSizeHelper(
     tester: tester,
+    windowsTest: true,
     test: () async {
-      expect(
-        find.byKey(KWidgetkeys.screen.userRole.widget),
-        findsOneWidget,
-      );
-
       expect(
         find.byKey(KWidgetkeys.screen.userRole.title),
         findsOneWidget,
@@ -41,10 +37,6 @@ Future<void> userRoleInitialHelper(
       expect(
         find.byKey(KWidgetkeys.screen.userRole.loginButton),
         findsOneWidget,
-      );
-
-      await dropDownButtonHelper(
-        tester: tester,
       );
     },
   );

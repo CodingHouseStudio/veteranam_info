@@ -1133,18 +1133,22 @@
   },
   "signUpBusiness": "Registration as a BUSINESS",
   "@signUpBusiness": {
-    "examples": "Subtitle on the UserRole page"
+    "examples": "Text for the business registration button on the UserRole page",
+    "description": "The button is used to go to the business SignUp page"
   },
   "signUpUser": "Registration as a USER",
   "@signUpUser": {
-    "examples": "Subtitle on the UserRole page"
+    "examples": "Text for button on the UserRole page",
+    "description": "The button is used to go to the user SignUp page"
   },
   "asUser": "as a PRIVATE person",
   "@asUser": {
-    "examples": "User login button on the UserRole page"
+    "examples": "Text for the user login button on the UserRole page",
+    "description": "User login button on the UserRole page"
   },
   "asBusiness": "as a BUSINESS user",
   "@asBusiness": {
-    "examples": "Business login button on the UserRole page"
+    "examples": "Text for the business login button on the UserRole page.",
+    "description": "Business login button on the UserRole page"
   }
 }

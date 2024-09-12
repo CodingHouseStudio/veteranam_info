@@ -24,7 +24,8 @@ class ProfileSavesBody extends StatelessWidget {
         else
           KSizedBox.kHeightSizedBox24,
       ],
-      mainDeskPadding: const EdgeInsets.symmetric(
+      mainDeskPadding: ({required isDesk, required maxWidth}) =>
+          const EdgeInsets.symmetric(
         horizontal: KPadding.kPaddingSize220,
       ),
       mainChildWidgetsFunction: ({required isDesk, required isTablet}) => [

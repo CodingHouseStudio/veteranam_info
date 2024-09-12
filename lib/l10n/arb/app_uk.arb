@@ -1137,18 +1137,22 @@
   },
   "signUpBusiness": "Реєстрація як БІЗНЕС",
   "@signUpBusiness": {
-    "examples": "Кнопка реєстрації бізнесу на сторінці UserRole"
+    "examples": "Текст для кнопки реєстрації бізнесу на сторінці UserRole",
+    "description": "Кнопка реєстрації бізнесу на сторінці UserRole"
   },
   "signUpUser": "Реєстрація як КОРИСТУВАЧ",
   "@signUpUser": {
-    "examples": "Кнопка реєстрації користувача на сторінці UserRole"
+    "examples": "Текст для кнопки реєстрації користувача на сторінці UserRole",
+    "description": "Кнопка реєстрації користувача на сторінці UserRole"
   },
   "asUser": "як ПРИВАТНА особа",
   "@asUser": {
-    "examples": "Кнопка входу користувача на сторінці UserRole"
+    "examples": "Текст для кнопки входу користувача на сторінці UserRole",
+    "description": "Кнопка для входу користувача на сторінці UserRole"
   },
   "asBusiness": "як БІЗНЕС користувач",
   "@asBusiness": {
-    "examples": "Кнопка входу для бізнесу на сторінці UserRole"
+    "examples": "Текст для кнопки входу для бізнесу на сторінці UserRole",
+    "description": "Кнопка для входу бізнесу на сторінці UserRole"
   }
 }

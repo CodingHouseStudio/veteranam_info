@@ -39,9 +39,10 @@ void main() {
             mockGoRouter: mockGoRouter,
           );
 
-          await signUpBusinessButtonNavigationHelper(
+          await signUpButtonsNavigationHelper(
             tester: tester,
             mockGoRouter: mockGoRouter,
+            isUser: false,
           );
         });
 
@@ -51,9 +52,10 @@ void main() {
             mockGoRouter: mockGoRouter,
           );
 
-          await signUpUserButtonNavigationHelper(
+          await signUpButtonsNavigationHelper(
             tester: tester,
             mockGoRouter: mockGoRouter,
+            isUser: true,
           );
         });
 
@@ -61,6 +63,10 @@ void main() {
           await userRolePumpAppHelper(
             tester: tester,
             mockGoRouter: mockGoRouter,
+          );
+
+          await dropDownButtonHelper(
+            tester: tester,
           );
 
           await dropDownButtonNavigationHelper(

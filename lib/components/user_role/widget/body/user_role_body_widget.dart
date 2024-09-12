@@ -7,19 +7,20 @@ class UserRoleBodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScaffoldDecorationWidget(
-      key: KWidgetkeys.screen.userRole.widget,
-      mainPadding: ({required isDesk, required maxWidth}) =>
+    return ScaffoldWidget(
+      mainDeskPadding: ({required isDesk, required maxWidth}) =>
           EdgeInsets.symmetric(
-        horizontal: maxWidth > KMinMaxSize.maxWidth640 ? maxWidth * 0.2 : 0,
+        horizontal: maxWidth > KMinMaxSize.maxWidth640 ? maxWidth * 0.3 : 0,
         vertical: isDesk ? KPadding.kPaddingSize80 : KPadding.kPaddingSize24,
       ),
-      mainChildWidgetsFunction: ({required isDesk}) => [
+      mainChildWidgetsFunction: ({required isDesk, required isTablet}) => [
         DecoratedBox(
           decoration: KWidgetTheme.boxDecorationHome,
           child: Padding(
             padding: const EdgeInsets.all(KPadding.kPaddingSize32),
             child: Column(
+              crossAxisAlignment:
+                  isDesk ? CrossAxisAlignment.center : CrossAxisAlignment.start,
               children: [
                 Text(
                   key: KWidgetkeys.screen.userRole.title,
@@ -27,14 +28,12 @@ class UserRoleBodyWidget extends StatelessWidget {
                   style: isDesk
                       ? AppTextStyle.materialThemeHeadlineLarge
                       : AppTextStyle.materialThemeHeadlineSmall,
-                  textAlign: isDesk ? TextAlign.center : TextAlign.start,
                 ),
                 KSizedBox.kHeightSizedBox16,
                 Text(
                   key: KWidgetkeys.screen.userRole.subtitle,
                   context.l10n.userRoleSubtitle,
                   style: AppTextStyle.materialThemeBodyLarge,
-                  textAlign: isDesk ? TextAlign.center : TextAlign.start,
                 ),
                 if (isDesk)
                   KSizedBox.kHeightSizedBox24
@@ -52,19 +51,21 @@ class UserRoleBodyWidget extends StatelessWidget {
                   mobVerticalTextPadding: KPadding.kPaddingSize16,
                 ),
                 KSizedBox.kHeightSizedBox24,
-                TextButton(
-                  key: KWidgetkeys.screen.userRole.userButton,
-                  onPressed: () => context.goNamed(KRoute.signUp.name),
-                  style: KButtonStyles.borderBlackButtonStyle,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: KPadding.kPaddingSize12,
-                      horizontal: KPadding.kPaddingSize12,
-                    ),
-                    child: Text(
-                      context.l10n.signUpUser,
-                      style: AppTextStyle.materialThemeTitleMedium,
-                      textAlign: TextAlign.center,
+                Center(
+                  child: TextButton(
+                    key: KWidgetkeys.screen.userRole.userButton,
+                    onPressed: () => context.goNamed(KRoute.signUp.name),
+                    style: KButtonStyles.borderBlackButtonStyle,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: KPadding.kPaddingSize12,
+                        horizontal: KPadding.kPaddingSize12,
+                      ),
+                      child: Text(
+                        context.l10n.signUpUser,
+                        style: AppTextStyle.materialThemeTitleMedium,
+                        textAlign: TextAlign.center,
+                      ),
                     ),
                   ),
                 ),
@@ -89,6 +90,11 @@ class UserRoleBodyWidget extends StatelessWidget {
             KSizedBox.kWidthSizedBox16,
             DropDownButton(
               isDesk: isDesk,
+              buttonText: context.l10n.login,
+              textItems: [
+                context.l10n.asBusiness,
+                context.l10n.asUser,
+              ],
             ),
           ],
         ),

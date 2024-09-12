@@ -19,7 +19,10 @@ class ScaffoldWidget extends StatelessWidget {
       titleChildWidgetsFunction;
   final List<Widget> Function({required bool isDesk, required bool isTablet})
       mainChildWidgetsFunction;
-  final EdgeInsetsGeometry? mainDeskPadding;
+  final EdgeInsetsGeometry Function({
+    required bool isDesk,
+    required double maxWidth,
+  })? mainDeskPadding;
   final bool hasFooter;
   final String? pageName;
   // final bool? showMobileNawbar;
@@ -122,7 +125,10 @@ class ScaffoldWidget extends StatelessWidget {
                       ),
                     SliverPadding(
                       padding: isDesk && mainDeskPadding != null
-                          ? padding.add(mainDeskPadding!)
+                          ? mainDeskPadding!(
+                              isDesk: isDesk,
+                              maxWidth: constraints.maxWidth,
+                            )
                           : padding,
                       sliver: SliverList.builder(
                         addAutomaticKeepAlives: false,
