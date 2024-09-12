@@ -74,7 +74,7 @@ import 'package:veteranam/shared/bloc/network/network_cubit.dart' as _i891;
 import 'package:veteranam/shared/bloc/report/report_bloc.dart' as _i765;
 import 'package:veteranam/shared/bloc/url/url_cubit.dart' as _i319;
 import 'package:veteranam/shared/data_provider/analytics_module.dart' as _i606;
-import 'package:veteranam/shared/data_provider/artifact_download_helper.dart'
+import 'package:veteranam/shared/data_provider/image_download_helper.dart'
     as _i815;
 import 'package:veteranam/shared/data_provider/artifact_module.dart' as _i331;
 import 'package:veteranam/shared/data_provider/cache_provider.dart' as _i37;
