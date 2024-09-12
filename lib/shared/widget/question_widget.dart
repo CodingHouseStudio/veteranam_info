@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:veteranam/shared/shared.dart';
 
 class QuestionWidget extends StatefulWidget {
@@ -73,25 +72,25 @@ class _QuestionWidgetState extends State<QuestionWidget> {
                 ? KPadding.kPaddingSize16
                 : KPadding.kPaddingSize8,
           ),
-          childrenPadding: EdgeInsets.symmetric(
-            horizontal: widget.isDesk
+          childrenPadding: EdgeInsets.only(
+            right: widget.isDesk
                 ? KPadding.kPaddingSize16
                 : KPadding.kPaddingSize4,
-            vertical: KPadding.kPaddingSize16,
-          ).copyWith(top: 0),
+            left: widget.isDesk
+                ? KPadding.kPaddingSize32
+                : KPadding.kPaddingSize16,
+            bottom: KPadding.kPaddingSize16,
+          ),
           children: [
-            Markdown(
+            MarkdownLinkWidget(
               key: KWidgetkeys.widget.question.subtitle,
-              data: widget.questionModel.subtitle.getTrnslation(
+              text: widget.questionModel.subtitle.getTrnslation(
                 en: widget.questionModel.subtitleEN,
                 context: context,
               ),
-              styleSheet: MarkdownStyleSheet(
-                p: widget.isDesk
-                    ? AppTextStyle.materialThemeBodyLarge
-                    : AppTextStyle.materialThemeBodyMedium,
-              ),
-              shrinkWrap: true,
+              textStyle: widget.isDesk
+                  ? AppTextStyle.materialThemeBodyLarge
+                  : AppTextStyle.materialThemeBodyMedium,
             ),
           ],
         ),
