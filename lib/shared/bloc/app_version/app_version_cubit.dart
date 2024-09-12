@@ -50,10 +50,12 @@ class AppVersionCubit extends Cubit<AppVersionState> {
   }) {
     var mobHasNewBuild = false;
     if (KTest.testReleaseMode) {
-      mobHasNewBuild = int.parse(mobAppVersion.replaceAll('.', '')) >
-          int.parse(buildInfo.version.replaceAll('.', ''));
-    } else {
-      mobHasNewBuild = buildInfo.version != mobAppVersion;
+      try {
+        mobHasNewBuild = int.parse(mobAppVersion.replaceAll('.', '')) >
+            int.parse(buildInfo.version.replaceAll('.', ''));
+      } catch (e) {
+        mobHasNewBuild = buildInfo.version != mobAppVersion;
+      }
     }
     emit(
       AppVersionState(

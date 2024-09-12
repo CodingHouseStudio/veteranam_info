@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:collection/collection.dart';
 import 'package:feedback/feedback.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/foundation.dart' show Uint8List;
+import 'package:flutter/foundation.dart' show Uint8List, kIsWeb, kReleaseMode;
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -218,6 +218,27 @@ extension StringExtension on String {
 
     return substring(startIndex + 1, endIndex);
   }
+
+  String get getImageUrl //({bool? highQuality})
+  {
+    if ((Config.isProduction && kReleaseMode) || !kIsWeb) {
+      final url = kIsWeb ? Uri.base.origin : 'https://veteranam.info';
+      return '$url$_urlPrefix$this';
+    } else {
+      return this;
+    }
+  }
+
+  String get _urlPrefix //({bool? highQuality})
+  {
+    // widget.size == null
+    // ?
+    const quality = '85'; // highQuality ?? false ? '100' : '85';
+    const format = 'auto'; // KPlatformConstants.isWebSaffari ? 'jpeg' : 'auto';
+    return '/cdn-cgi/image/quality=$quality,format=$format/';
+  }
+  // : '/cdn-cgi/image/${kIsWeb ? 'quality=100' : 'quality=85'}'
+  //     ',width=${widget.size! * 10},${widget.size! * 10}/';
 }
 
 extension InformationModelExtension on InformationModel {
@@ -343,7 +364,7 @@ extension UserRoleExtensions on UserRole {
   }
 }
 
-extension ImageExtensions on ImageModel? {
+extension ImageNullableExtensions on ImageModel? {
   Widget? getImage({
     required Widget Function(Widget child) parent,
     Key? key,
@@ -357,6 +378,7 @@ extension ImageExtensions on ImageModel? {
         imageUrl: this!.downloadURL,
         fit: fit,
         size: size,
+        imageName: this!.name,
       ),
     );
   }

@@ -44,6 +44,7 @@ class DiscountCardWidget extends StatelessWidget {
                 UserPhotoWidget(
                   imageUrl: discountItem.userPhoto?.downloadURL,
                   onPressed: null,
+                  imageName: discountItem.userPhoto?.name,
                 ),
                 KSizedBox.kWidthSizedBox16,
                 Expanded(
