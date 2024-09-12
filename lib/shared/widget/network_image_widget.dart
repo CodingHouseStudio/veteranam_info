@@ -43,15 +43,18 @@ class _NetworkImageWidgetState extends State<NetworkImageWidget> {
 
   @override
   void didChangeDependencies() {
-    if ((kIsWeb || context.read<MobOfflineModeCubit>().state.isOffline) &&
-        bytes == null) {
+    if (kIsWeb || context.read<MobOfflineModeCubit>().state.isOffline) {
       precacheImage(
-        CachedNetworkImageProvider(
-          widget.imageUrl.getImageUrl, // widget.imageUrl,
-          headers: const {
-            'Cache-Control': 'max-age=3600',
-          },
-        ),
+        bytes == null
+            ? CachedNetworkImageProvider(
+                widget.imageUrl.getImageUrl, // widget.imageUrl,
+                headers: const {
+                  'Cache-Control': 'max-age=3600',
+                },
+              )
+            : MemoryImage(
+                bytes!,
+              ),
         context,
       );
     }
