@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:veteranam/shared/shared.dart';
 
 import '../../../test_dependency.dart';
 import '../helper.dart';
@@ -13,5 +14,6 @@ Future<void> wrongSubmitedHelper(
     dataIsCorrect: true,
   );
 
-  await dialogSnackBarTextHelper(tester: tester);
+  expect(find.byKey(KWidgetkeys.screen.signUp.errorText), findsOneWidget);
+  // await dialogSnackBarTextHelper(tester: tester);
 }

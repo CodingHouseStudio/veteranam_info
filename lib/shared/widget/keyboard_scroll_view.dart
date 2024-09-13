@@ -169,8 +169,8 @@ class _KeyboardScrollViewWebDeskState
         shortcuts: {
           LogicalKeySet(LogicalKeyboardKey.arrowUp): ScrollUpIntent(),
           LogicalKeySet(LogicalKeyboardKey.arrowDown): ScrollDownIntent(),
-          LogicalKeySet(LogicalKeyboardKey.arrowLeft): ScrollLeftIntent(),
-          LogicalKeySet(LogicalKeyboardKey.arrowRight): ScrollRightIntent(),
+          // LogicalKeySet(LogicalKeyboardKey.arrowLeft): ScrollLeftIntent(),
+          // LogicalKeySet(LogicalKeyboardKey.arrowRight): ScrollRightIntent(),
           LogicalKeySet(LogicalKeyboardKey.pageDown): PageDownIntent(),
           LogicalKeySet(LogicalKeyboardKey.pageUp): PageUpIntent(),
           LogicalKeySet(LogicalKeyboardKey.home): HomeIntent(),

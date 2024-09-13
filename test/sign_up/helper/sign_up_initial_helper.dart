@@ -45,7 +45,9 @@ Future<void> signUpInitialHelper(
         findsOneWidget,
       );
 
-      await dialogSnackBarTextHelper(tester: tester, showDialog: false);
+      expect(find.byKey(KWidgetkeys.screen.signUp.errorText), findsNothing);
+
+      // await dialogSnackBarTextHelper(tester: tester, showDialog: false);
 
       await leftCardHelper(tester);
 
