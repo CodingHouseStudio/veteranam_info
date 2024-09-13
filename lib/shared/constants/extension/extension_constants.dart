@@ -233,7 +233,7 @@ extension StringExtension on String {
   {
     // widget.size == null
     // ?
-    const quality = '85'; // highQuality ?? false ? '100' : '85';
+    const quality = '100'; // highQuality ?? false ? '100' : '85';
     const format = 'auto'; // KPlatformConstants.isWebSaffari ? 'jpeg' : 'auto';
     return '/cdn-cgi/image/quality=$quality,format=$format/';
   }
