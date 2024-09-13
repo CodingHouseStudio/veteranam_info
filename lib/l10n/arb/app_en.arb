@@ -1131,6 +1131,10 @@
   "@signingUpWait": {
     "examples": "Text indicating that the sign-up process is in progress, and the user needs to wait on the Sign up page"
   },
+  "cardNotFoundText": "Unfortunately, the link was not found. Please check the accuracy of the input or try another link.",
+  "@cardNotFoundText": {
+    "examples": "Text for a dialog that notifies that a card with the specified ID was not found."
+  },
   "signUpInWith": "Sign up with",
   "@signUpInWith": {
     "examples": "The text on the SignUp page before the login button with google, facebook, apple."
