@@ -13,12 +13,12 @@ Future<void> additionalButtonHelper(
 
   expect(
     find.byKey(KWidgetkeys.widget.buttonAdditional.desk),
-    isDesk ? findsOneWidget : findsNothing,
+    isDesk ? findsWidgets : findsNothing,
   );
 
   expect(
     find.byKey(KWidgetkeys.widget.buttonAdditional.mob),
-    isDesk ? findsNothing : findsOneWidget,
+    isDesk ? findsNothing : findsWidgets,
   );
 
   await scrollingHelper(
@@ -29,11 +29,11 @@ Future<void> additionalButtonHelper(
   );
   expect(
     find.byKey(KWidgetkeys.widget.buttonAdditional.icon),
-    findsOneWidget,
+    findsWidgets,
   );
   expect(
     find.byKey(KWidgetkeys.widget.buttonAdditional.text),
-    findsOneWidget,
+    findsWidgets,
   );
 
   if (isDesk) {

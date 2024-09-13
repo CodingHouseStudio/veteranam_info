@@ -1,10 +1,7 @@
-// ignore_for_file: unused_import
-
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mockito/mockito.dart';
-import 'package:veteranam/components/components.dart';
 import 'package:veteranam/shared/shared.dart';
 
 import '../../test_dependency.dart';
@@ -37,7 +34,18 @@ void main() {
         ).thenAnswer(
           (_) async => const Right(true),
         );
+        when(
+          mockAppAuthenticationRepository.signUp(
+            email: KTestText.userEmail,
+            password: KTestText.passwordCorrect,
+          ),
+        ).thenAnswer(
+          (_) async => const Right(true),
+        );
         when(mockAppAuthenticationRepository.signUpWithGoogle()).thenAnswer(
+          (_) async => const Right(true),
+        );
+        when(mockAppAuthenticationRepository.signUpWithFacebook()).thenAnswer(
           (_) async => const Right(true),
         );
         when(mockAppAuthenticationRepository.currentUserSetting).thenAnswer(
@@ -95,9 +103,26 @@ void main() {
               .having((e) => e.value, 'value', isTrue),
         );
       });
+      test('Log in', () async {
+        expect(
+          await authenticationRepository.signUp(
+            email: KTestText.userEmail,
+            password: KTestText.passwordCorrect,
+          ),
+          isA<Right<SomeFailure, bool>>()
+              .having((e) => e.value, 'value', isTrue),
+        );
+      });
       test('Sign up with google', () async {
         expect(
           await authenticationRepository.signUpWithGoogle(),
+          isA<Right<SomeFailure, bool>>()
+              .having((e) => e.value, 'value', isTrue),
+        );
+      });
+      test('Sign up with facebook', () async {
+        expect(
+          await authenticationRepository.signUpWithFacebook(),
           isA<Right<SomeFailure, bool>>()
               .having((e) => e.value, 'value', isTrue),
         );
@@ -170,7 +195,18 @@ void main() {
         ).thenAnswer(
           (_) async => Left(SomeFailure.serverError(error: null)),
         );
+        when(
+          mockAppAuthenticationRepository.signUp(
+            email: KTestText.userEmail,
+            password: KTestText.passwordCorrect,
+          ),
+        ).thenAnswer(
+          (_) async => Left(SomeFailure.serverError(error: null)),
+        );
         when(mockAppAuthenticationRepository.signUpWithGoogle()).thenAnswer(
+          (_) async => Left(SomeFailure.serverError(error: null)),
+        );
+        when(mockAppAuthenticationRepository.signUpWithFacebook()).thenAnswer(
           (_) async => Left(SomeFailure.serverError(error: null)),
         );
         when(mockAppAuthenticationRepository.logOut()).thenAnswer(
@@ -210,6 +246,15 @@ void main() {
           // ),
         );
       });
+      test('Log in', () async {
+        expect(
+          await authenticationRepository.signUp(
+            email: KTestText.userEmail,
+            password: KTestText.passwordCorrect,
+          ),
+          isA<Left<SomeFailure, bool>>(),
+        );
+      });
       test('Sign up with google', () async {
         expect(
           await authenticationRepository.signUpWithGoogle(),
@@ -219,6 +264,12 @@ void main() {
           //   'value',
           //   SomeFailure.serverError(error: null),
           // ),
+        );
+      });
+      test('Sign up with facebook', () async {
+        expect(
+          await authenticationRepository.signUpWithFacebook(),
+          isA<Left<SomeFailure, bool>>(),
         );
       });
       test('Log Out', () async {

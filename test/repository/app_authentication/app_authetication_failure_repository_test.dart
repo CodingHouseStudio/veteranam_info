@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -25,9 +26,11 @@ void main() {
     late firebase_auth.UserCredential mockUserCredential;
     late FirestoreService mockFirestoreService;
     late GoogleSignInAccount mockGoogleSignInAccount;
+    late firebase_auth.FacebookAuthProvider mockFacebookAuthProvider;
 
     late IDeviceRepository mockDeviceRepository;
     late firebase_auth.User mockUser;
+    late FacebookAuth mockFacebookAuth;
     setUp(() {
       mockSecureStorageRepository = MockIStorage();
       mockFirebaseAuth = MockFirebaseAuth();
@@ -38,6 +41,8 @@ void main() {
       mockUserCredential = MockUserCredential();
       mockFirestoreService = MockFirestoreService();
       mockUser = MockUser();
+      mockFacebookAuth = MockFacebookAuth();
+      mockFacebookAuthProvider = MockFacebookAuthProvider();
 
       mockDeviceRepository = MockIDeviceRepository();
 
@@ -53,6 +58,10 @@ void main() {
         (_) => KTestText.authCredential,
       );
       when(mockFirebaseAuth.signInWithPopup(mockGoogleAuthProvider)).thenAnswer(
+        (_) async => mockUserCredential,
+      );
+      when(mockFirebaseAuth.signInWithPopup(mockFacebookAuthProvider))
+          .thenAnswer(
         (_) async => mockUserCredential,
       );
       when(
@@ -97,6 +106,11 @@ void main() {
         mockGoogleSignIn.signOut(),
       ).thenAnswer(
         (_) async => mockGoogleSignInAccount,
+      );
+      when(
+        mockFacebookAuth.logOut(),
+      ).thenAnswer(
+        (_) async {},
       );
       when(
         mockSecureStorageRepository.deleteAll(),
@@ -155,6 +169,7 @@ void main() {
         mockFirebaseAuth,
         mockGoogleSignIn,
         mockCache,
+        mockFacebookAuth,
       )
         ..isWeb = true
         ..googleAuthProvider = mockGoogleAuthProvider;
@@ -162,6 +177,17 @@ void main() {
     test('Sign up with google', () async {
       expect(
         await appAuthenticationRepository.signUpWithGoogle(),
+        isA<Left<SomeFailure, bool>>(),
+        // .having(
+        //   (e) => e.value,
+        //   'value',
+        //   SomeFailure.serverError(error: null),
+        // ),
+      );
+    });
+    test('Sign up with facebook', () async {
+      expect(
+        await appAuthenticationRepository.signUpWithFacebook(),
         isA<Left<SomeFailure, bool>>(),
         // .having(
         //   (e) => e.value,

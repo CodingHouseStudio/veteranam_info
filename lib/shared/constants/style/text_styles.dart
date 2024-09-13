@@ -286,6 +286,14 @@ abstract class AppTextStyle {
     letterSpacing: 0.25,
     color: AppColors.materialThemeKeyColorsNeutral,
   );
+  static const TextStyle materialThemeBodyMediumError = TextStyle(
+    fontFamily: 'Gilroy',
+    fontSize: 14,
+    height: 1.43,
+    fontWeight: FontWeight.w400,
+    letterSpacing: 0.25,
+    color: AppColors.materialThemeRefErrorError50,
+  );
 
   /// materialThemeBodySmall figma properties
   /// fontFamily: Gilroy
