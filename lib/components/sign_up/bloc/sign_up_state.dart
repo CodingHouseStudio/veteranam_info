@@ -28,7 +28,17 @@ class SignUpState with _$SignUpState {
     required EmailFieldModel email,
     required PasswordFieldModel password,
     required SignUpError? failure,
-    required bool? fieldsIsCorrect,
-    required bool showPasswordField,
+    required SignUpEnum formState,
   }) = _SignUpState;
+}
+
+enum SignUpEnum {
+  initial,
+  showPassword,
+  inProgress,
+  invalidData,
+  success,
+  // singUpLoading,
+  passwordInProgress,
+  passwordInvalidData,
 }
