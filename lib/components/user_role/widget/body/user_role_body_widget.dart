@@ -10,7 +10,7 @@ class UserRoleBodyWidget extends StatelessWidget {
     return ScaffoldWidget(
       mainDeskPadding: ({required maxWidth}) => EdgeInsets.symmetric(
         horizontal: maxWidth > KMinMaxSize.maxWidth640
-            ? maxWidth * KSize.kUserRoleWidth
+            ? maxWidth * KDimensions.kUserRoleWidth
             : 0,
         vertical: KPadding.kPaddingSize80,
       ),
@@ -47,7 +47,7 @@ class UserRoleBodyWidget extends StatelessWidget {
                   isDesk: isDesk,
                   onPressed: null,
                   color: AppColors.materialThemeKeyColorsPrimary,
-                  textColor: AppColors.materialThemeBlack,
+                  textColor: AppColors.materialThemeKeyColorsSecondary,
                   mobHorizontalTextPadding: KPadding.kPaddingSize40,
                   mobVerticalTextPadding: KPadding.kPaddingSize16,
                 ),
