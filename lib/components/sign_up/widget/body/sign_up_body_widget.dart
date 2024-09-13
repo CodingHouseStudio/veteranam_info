@@ -81,18 +81,23 @@ class SignUpBodyWidget extends StatelessWidget {
               child: DoubleButtonWidget(
                 widgetKey: KWidgetkeys.screen.signUp.button,
                 text: _.showPasswordField
-                    ? context.l10n.login
+                    ? context.l10n.register
                     : context.l10n.next,
                 onPressed: () => context.read<SignUpBloc>().add(
                       const SignUpEvent.signUpSubmitted(),
                     ),
-                isDesk: false,
+                isDesk: isDesk,
                 color: AppColors.materialThemeKeyColorsSecondary,
                 textColor: AppColors.materialThemeWhite,
-                mobTextWidth: isDesk ? null : double.infinity,
+                deskPadding: const EdgeInsets.symmetric(
+                  horizontal: KPadding.kPaddingSize64,
+                  vertical: KPadding.kPaddingSize12,
+                ),
+                mobTextWidth: double.infinity,
                 mobHorizontalTextPadding: KPadding.kPaddingSize60,
                 mobVerticalTextPadding: KPadding.kPaddingSize12,
                 mobIconPadding: KPadding.kPaddingSize12,
+                darkMode: true,
               ),
             ),
             if (isDesk)

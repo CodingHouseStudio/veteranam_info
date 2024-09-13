@@ -19,6 +19,7 @@ class DoubleButtonWidget extends StatelessWidget {
     this.align,
     this.mobHorizontalTextPadding,
     this.darkMode,
+    this.deskPadding,
   });
   final String text;
   final Color? color;
@@ -33,6 +34,7 @@ class DoubleButtonWidget extends StatelessWidget {
   final double? mobIconPadding;
   final Alignment? align;
   final bool? darkMode;
+  final EdgeInsets? deskPadding;
 
   @override
   Widget build(BuildContext context) {
@@ -54,6 +56,7 @@ class DoubleButtonWidget extends StatelessWidget {
           textColor: textColor,
           widgetKey: widgetKey,
           useBlackStyle: darkMode,
+          padding: deskPadding,
         )
       : _DoubleButtonWidgetMob(
           text: text,
@@ -77,6 +80,7 @@ class _DoubleButtonWidgetDesk extends StatefulWidget {
     this.textColor,
     this.color,
     this.useBlackStyle,
+    this.padding,
   });
   final String text;
   final Color? color;
@@ -84,6 +88,7 @@ class _DoubleButtonWidgetDesk extends StatefulWidget {
   final void Function()? onPressed;
   final Key widgetKey;
   final bool? useBlackStyle;
+  final EdgeInsets? padding;
 
   @override
   State<_DoubleButtonWidgetDesk> createState() =>
@@ -124,10 +129,11 @@ class _DoubleButtonWidgetDeskState extends State<_DoubleButtonWidgetDesk> {
                         ? AppColors.materialThemeKeyColorsSecondary
                         : null),
               ),
-              padding: const EdgeInsets.symmetric(
-                horizontal: KPadding.kPaddingSize30,
-                vertical: KPadding.kPaddingSize12,
-              ),
+              padding: widget.padding ??
+                  const EdgeInsets.symmetric(
+                    horizontal: KPadding.kPaddingSize30,
+                    vertical: KPadding.kPaddingSize12,
+                  ),
               child: Text(
                 widget.text,
                 key: KWidgetkeys.widget.doubleButton.text,
