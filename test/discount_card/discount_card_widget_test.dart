@@ -19,44 +19,90 @@ void main() {
     late IDiscountRepository mockDiscountRepository;
     setUp(() {
       mockDiscountRepository = MockIDiscountRepository();
-
-      when(
-        mockDiscountRepository
-            .getDiscount(KTestText.discountModelItems.first.id),
-      ).thenAnswer(
-        (realInvocation) async => Right(KTestText.discountModelItems.first),
-      );
     });
-    testWidgets('${KGroupText.intial} ', (tester) async {
-      await discountCardPumpAppHelper(
-        tester: tester,
-        mockDiscountRepository: mockDiscountRepository,
-      );
-
-      await discountCardInitialHelper(tester);
-    });
-
-    group('${KGroupText.goRouter} ', () {
-      late MockGoRouter mockGoRouter;
-      setUp(() => mockGoRouter = MockGoRouter());
+    group('${KGroupText.failureGet} ', () {
+      setUp(() {
+        when(
+          mockDiscountRepository
+              .getDiscount(KTestText.discountModelItems.first.id),
+        ).thenAnswer(
+          (realInvocation) async =>
+              Left(SomeFailure.serverError(error: KGroupText.failure)),
+        );
+      });
       testWidgets('${KGroupText.intial} ', (tester) async {
         await discountCardPumpAppHelper(
           tester: tester,
-          mockGoRouter: mockGoRouter,
           mockDiscountRepository: mockDiscountRepository,
         );
 
-        await discountCardInitialHelper(tester);
+        await discountCardInitialHelper(tester: tester, cardIsEmpty: true);
       });
-      group('${KGroupText.goTo} ', () {
-        testWidgets('${KRoute.discounts.name} ', (tester) async {
+    });
+    group('${KGroupText.successfulGet} ', () {
+      setUp(() {
+        when(
+          mockDiscountRepository
+              .getDiscount(KTestText.discountModelItems.first.id),
+        ).thenAnswer(
+          (realInvocation) async => Right(KTestText.discountModelItems.first),
+        );
+      });
+      testWidgets('${KGroupText.intial} ', (tester) async {
+        await discountCardPumpAppHelper(
+          tester: tester,
+          mockDiscountRepository: mockDiscountRepository,
+        );
+
+        await discountCardInitialHelper(tester: tester);
+      });
+
+      group('${KGroupText.goRouter} ', () {
+        late MockGoRouter mockGoRouter;
+        setUp(() => mockGoRouter = MockGoRouter());
+        testWidgets('${KGroupText.intial} ', (tester) async {
           await discountCardPumpAppHelper(
             tester: tester,
             mockGoRouter: mockGoRouter,
             mockDiscountRepository: mockDiscountRepository,
           );
 
-          await cancelHelper(tester: tester, mockGoRouter: mockGoRouter);
+          await discountCardInitialHelper(tester: tester);
+        });
+        group('${KGroupText.goTo} ', () {
+          group('${KGroupText.failureGet} ', () {
+            setUp(() {
+              when(
+                mockDiscountRepository
+                    .getDiscount(KTestText.discountModelItems.first.id),
+              ).thenAnswer(
+                (realInvocation) async =>
+                    Left(SomeFailure.notFound(error: KGroupText.failure)),
+              );
+            });
+            testWidgets('Empty Card close', (tester) async {
+              await discountCardPumpAppHelper(
+                tester: tester,
+                mockDiscountRepository: mockDiscountRepository,
+                mockGoRouter: mockGoRouter,
+              );
+
+              await cardEmptyCloseHelper(
+                tester: tester,
+                mockGoRouter: mockGoRouter,
+                routeName: KRoute.discounts.name,
+              );
+            });
+          });
+          testWidgets('${KRoute.discounts.name} ', (tester) async {
+            await discountCardPumpAppHelper(
+              tester: tester,
+              mockGoRouter: mockGoRouter,
+              mockDiscountRepository: mockDiscountRepository,
+            );
+
+            await cancelHelper(tester: tester, mockGoRouter: mockGoRouter);
+          });
         });
       });
     });
