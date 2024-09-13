@@ -23,10 +23,10 @@ class DropDownButton extends StatefulWidget {
   DropDownButtonState createState() => DropDownButtonState();
 }
 
-enum LoginButtonsEnum {
-  business,
-  user,
-}
+// enum LoginButtonsEnum {
+//   business,
+//   user,
+// }
 
 class DropDownButtonState extends State<DropDownButton> {
   bool _showButtons = false;
