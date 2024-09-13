@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:veteranam/shared/shared.dart';
 
 import '../../../test_dependency.dart';
 import '../helper.dart';
@@ -12,4 +13,7 @@ Future<void> wrongSubmitedHelper(
     email: KTestText.useremailWrong,
     dataIsCorrect: true,
   );
+
+  expect(find.byKey(KWidgetkeys.screen.login.errorText), findsOneWidget);
+  // await dialogSnackBarTextHelper(tester: tester);
 }
