@@ -3,5 +3,7 @@ export 'cache_provider.dart';
 export 'firebase_analytics_provider.dart';
 export 'firebase_remote_config_provider.dart';
 export 'firestore_provider.dart';
+export 'image_load_helper.dart';
+export 'image_load_module.dart';
 export 'remote_config_module.dart';
 export 'storage_provider.dart';
