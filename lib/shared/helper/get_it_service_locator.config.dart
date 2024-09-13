@@ -74,7 +74,6 @@ import 'package:veteranam/shared/bloc/network/network_cubit.dart' as _i891;
 import 'package:veteranam/shared/bloc/report/report_bloc.dart' as _i765;
 import 'package:veteranam/shared/bloc/url/url_cubit.dart' as _i319;
 import 'package:veteranam/shared/data_provider/analytics_module.dart' as _i606;
-import 'package:veteranam/shared/data_provider/artifact_module.dart' as _i331;
 import 'package:veteranam/shared/data_provider/cache_provider.dart' as _i37;
 import 'package:veteranam/shared/data_provider/firebase_analytics_provider.dart'
     as _i777;
@@ -82,8 +81,8 @@ import 'package:veteranam/shared/data_provider/firebase_remote_config_provider.d
     as _i187;
 import 'package:veteranam/shared/data_provider/firestore_provider.dart'
     as _i1033;
-import 'package:veteranam/shared/data_provider/image_download_helper.dart'
-    as _i423;
+import 'package:veteranam/shared/data_provider/image_load_helper.dart' as _i369;
+import 'package:veteranam/shared/data_provider/image_load_module.dart' as _i163;
 import 'package:veteranam/shared/data_provider/remote_config_module.dart'
     as _i769;
 import 'package:veteranam/shared/data_provider/storage_provider.dart' as _i99;
@@ -150,8 +149,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => messagingModule.deviceInfoPlugin);
     gh.lazySingleton<_i960.FailureRepository>(
         () => _i960.FailureRepository(gh<_i141.FirebaseCrashlytics>()));
-    gh.singleton<_i423.ArtifactDownloadHelper>(
-        () => _i423.ArtifactDownloadHelper(gh<_i361.Dio>()));
+    gh.singleton<_i369.ArtifactDownloadHelper>(
+        () => _i369.ArtifactDownloadHelper(gh<_i361.Dio>()));
     gh.singleton<_i1033.FirestoreService>(
         () => _i1033.FirestoreService(gh<_i1001.CacheClient>()));
     gh.singleton<_i1001.IDeviceRepository>(() => _i712.DeviceRepository(
@@ -343,7 +342,7 @@ extension GetItInjectableX on _i174.GetIt {
 
 class _$FailureModule extends _i531.FailureModule {}
 
-class _$ArtifactModule extends _i331.ArtifactModule {}
+class _$ArtifactModule extends _i163.ArtifactModule {}
 
 class _$MessagingModule extends _i967.MessagingModule {}
 
