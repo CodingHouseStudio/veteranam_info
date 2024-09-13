@@ -22,7 +22,7 @@ class ArtifactDownloadHelper {
     headers: {
       Headers.contentTypeHeader: 'image/*',
       // 'Cache-Control': 'max-age=3600',
-      'Accept': 'image/webp,image/apng,image/*,*/*;q=0.8',
+      // 'Accept': 'image/webp,image/apng,image/*,*/*;q=0.8',
       'Connection': 'close',
     },
     receiveTimeout: const Duration(seconds: 5),
