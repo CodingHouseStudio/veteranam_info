@@ -154,4 +154,8 @@ class KImage {
   //   ),
   //   context,
   // );
+  static SvgPicture found({Key? key}) => SvgPicture.asset(
+        'assets/icons/found_icon.svg',
+        key: key,
+      );
 }
