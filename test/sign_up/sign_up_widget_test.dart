@@ -16,12 +16,12 @@ void main() {
 
   tearDown(GetIt.I.reset);
   group('${KScreenBlocName.signUp} ', () {
-    late IAppAuthenticationRepository mockAppAuthenticationRepository;
+    late AuthenticationRepository mockAuthenticationRepository;
     setUp(() {
       ExtendedDateTime.current = KTestText.feedbackModel.timestamp;
-      mockAppAuthenticationRepository = MockIAppAuthenticationRepository();
+      mockAuthenticationRepository = MockAuthenticationRepository();
       when(
-        mockAppAuthenticationRepository.signUp(
+        mockAuthenticationRepository.signUp(
           email: KTestText.userEmail,
           password: KTestText.passwordCorrect,
         ),
@@ -29,7 +29,13 @@ void main() {
         (invocation) async => const Right(true),
       );
       when(
-        mockAppAuthenticationRepository.signUpWithGoogle(),
+        mockAuthenticationRepository.signUpWithGoogle(),
+      ).thenAnswer(
+        (invocation) async => const Right(true),
+      );
+
+      when(
+        mockAuthenticationRepository.signUpWithFacebook(),
       ).thenAnswer(
         (invocation) async => const Right(true),
       );
@@ -37,7 +43,7 @@ void main() {
     group('${KGroupText.failure} ', () {
       testWidgets('${KGroupText.error} ', (tester) async {
         when(
-          mockAppAuthenticationRepository.signUp(
+          mockAuthenticationRepository.signUp(
             email: KTestText.useremailWrong,
             password: KTestText.passwordWrong,
           ),
@@ -49,15 +55,15 @@ void main() {
           ),
         );
         await signUpPumpAppHelper(
-          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
           tester: tester,
         );
 
-        await signUpFailureHelper(tester);
+        await wrongSubmitedHelper(tester);
       });
       testWidgets('${KGroupText.failureNetwork} ', (tester) async {
         when(
-          mockAppAuthenticationRepository.signUp(
+          mockAuthenticationRepository.signUp(
             email: KTestText.useremailWrong,
             password: KTestText.passwordWrong,
           ),
@@ -65,15 +71,15 @@ void main() {
           (invocation) async => Left(SomeFailure.network(error: null)),
         );
         await signUpPumpAppHelper(
-          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
           tester: tester,
         );
 
-        await signUpFailureHelper(tester);
+        await wrongSubmitedHelper(tester);
       });
       testWidgets('${KGroupText.failureSend} ', (tester) async {
         when(
-          mockAppAuthenticationRepository.signUp(
+          mockAuthenticationRepository.signUp(
             email: KTestText.useremailWrong,
             password: KTestText.passwordWrong,
           ),
@@ -81,15 +87,15 @@ void main() {
           (invocation) async => Left(SomeFailure.send(error: null)),
         );
         await signUpPumpAppHelper(
-          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
           tester: tester,
         );
 
-        await signUpFailureHelper(tester);
+        await wrongSubmitedHelper(tester);
       });
       testWidgets('${KGroupText.failure} dublicate', (tester) async {
         when(
-          mockAppAuthenticationRepository.signUp(
+          mockAuthenticationRepository.signUp(
             email: KTestText.useremailWrong,
             password: KTestText.passwordWrong,
           ),
@@ -97,17 +103,17 @@ void main() {
           (invocation) async => Left(SomeFailure.duplicate(error: null)),
         );
         await signUpPumpAppHelper(
-          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
           tester: tester,
         );
 
-        await signUpFailureHelper(tester);
+        await wrongSubmitedHelper(tester);
       });
     });
 
     testWidgets('${KGroupText.intial} ', (tester) async {
       await signUpPumpAppHelper(
-        mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+        mockAuthenticationRepository: mockAuthenticationRepository,
         tester: tester,
       );
 
@@ -115,7 +121,7 @@ void main() {
     });
     testWidgets('Write incorrect email', (tester) async {
       await signUpPumpAppHelper(
-        mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+        mockAuthenticationRepository: mockAuthenticationRepository,
         tester: tester,
       );
 
@@ -124,7 +130,7 @@ void main() {
 
     testWidgets('Write correct email and hide password', (tester) async {
       await signUpPumpAppHelper(
-        mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+        mockAuthenticationRepository: mockAuthenticationRepository,
         tester: tester,
       );
 
@@ -134,7 +140,7 @@ void main() {
         'Write correct email and incorect password and'
         ' tap submited', (tester) async {
       await signUpPumpAppHelper(
-        mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+        mockAuthenticationRepository: mockAuthenticationRepository,
         tester: tester,
       );
 
@@ -145,7 +151,7 @@ void main() {
         'Write correct email and password and'
         ' tap submited', (tester) async {
       await signUpPumpAppHelper(
-        mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+        mockAuthenticationRepository: mockAuthenticationRepository,
         tester: tester,
       );
 
@@ -157,7 +163,7 @@ void main() {
       setUp(() => mockGoRouter = MockGoRouter());
       testWidgets('${KGroupText.intial} ', (tester) async {
         await signUpPumpAppHelper(
-          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          mockAuthenticationRepository: mockAuthenticationRepository,
           tester: tester,
           mockGoRouter: mockGoRouter,
         );
@@ -167,7 +173,7 @@ void main() {
       group('${KGroupText.goTo} ', () {
         testWidgets('Navigate to ${KScreenBlocName.signUp}', (tester) async {
           await signUpPumpAppHelper(
-            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+            mockAuthenticationRepository: mockAuthenticationRepository,
             tester: tester,
             mockGoRouter: mockGoRouter,
           );

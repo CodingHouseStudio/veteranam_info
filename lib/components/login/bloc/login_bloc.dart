@@ -11,15 +11,14 @@ part 'login_state.dart';
 
 @injectable
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  LoginBloc({required IAppAuthenticationRepository appAuthenticationRepository})
-      : _appAuthenticationRepository = appAuthenticationRepository,
+  LoginBloc({required AuthenticationRepository authenticationRepository})
+      : _authenticationRepository = authenticationRepository,
         super(
           const LoginState(
             email: EmailFieldModel.pure(),
             password: PasswordFieldModel.pure(),
             failure: null,
-            fieldsIsCorrect: null,
-            showPasswordField: false,
+            formState: LoginEnum.initial,
           ),
         ) {
     on<_EmailUpdated>(_onEmailUpdated);
@@ -28,7 +27,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     on<_PasswordFieldHide>(_onPasswordFieldHide);
   }
 
-  final IAppAuthenticationRepository _appAuthenticationRepository;
+  final AuthenticationRepository _authenticationRepository;
 
   Future<void> _onEmailUpdated(
     _EmailUpdated event,
@@ -38,6 +37,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       state.copyWith(
         email: EmailFieldModel.dirty(event.email),
         failure: null,
+        formState: LoginEnum.inProgress,
       ),
     );
   }
@@ -50,6 +50,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       state.copyWith(
         password: PasswordFieldModel.dirty(event.password),
         failure: null,
+        formState: LoginEnum.passwordInProgress,
       ),
     );
   }
@@ -58,12 +59,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     _LoginSubmitted event,
     Emitter<LoginState> emit,
   ) async {
-    if (state.email.isValid && !state.showPasswordField) {
+    if (state.email.isValid && state.formState == LoginEnum.inProgress) {
       emit(
         state.copyWith(
-          showPasswordField: true,
+          formState: LoginEnum.showPassword,
           failure: null,
-          fieldsIsCorrect: null,
         ),
       );
       return;
@@ -72,9 +72,13 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       state.password,
       state.email,
     ])) {
-      emit(state.copyWith(fieldsIsCorrect: true));
-      final result =
-          await _appAuthenticationRepository.logInWithEmailAndPassword(
+      emit(
+        state.copyWith(
+          formState: LoginEnum.success,
+        ),
+      );
+      // emit(state.copyWith(fieldsIsCorrect: true));
+      final result = await _authenticationRepository.logIn(
         email: state.email.value,
         password: state.password.value,
       );
@@ -83,18 +87,26 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         (l) => emit(
           state.copyWith(
             failure: l._toLogInError(),
-            showPasswordField: false,
+            formState: LoginEnum.initial,
           ),
         ),
         (r) => emit(
-          state.copyWith(
+          const LoginState(
+            email: EmailFieldModel.pure(),
+            password: PasswordFieldModel.pure(),
             failure: null,
-            showPasswordField: false,
+            formState: LoginEnum.success,
           ),
         ),
       );
     } else {
-      emit(state.copyWith(fieldsIsCorrect: false));
+      emit(
+        state.copyWith(
+          formState: state.email.isValid
+              ? LoginEnum.passwordInvalidData
+              : LoginEnum.invalidData,
+        ),
+      );
     }
   }
 
@@ -103,7 +115,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     Emitter<LoginState> emit,
   ) async {
     emit(
-      state.copyWith(showPasswordField: false),
+      state.copyWith(formState: LoginEnum.inProgress),
     );
   }
 }
