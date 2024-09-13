@@ -17,6 +17,7 @@ class NewsCardDialog extends StatelessWidget {
           shape: const RoundedRectangleBorder(
             borderRadius: KBorderRadius.kBorderRadius32,
           ),
+          insetPadding: const EdgeInsets.all(KPadding.kPaddingSize16),
           backgroundColor: AppColors.materialThemeKeyColorsNeutral,
           contentPadding: EdgeInsets.zero,
           scrollable: true,
