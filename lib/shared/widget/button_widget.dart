@@ -13,6 +13,7 @@ class ButtonWidget extends StatelessWidget {
     this.backgroundColor,
     this.padding,
     this.textMaxLines,
+    this.textButtonStyle,
   });
   final Widget? icon;
   final TextStyle? textStyle;
@@ -23,19 +24,21 @@ class ButtonWidget extends StatelessWidget {
   final EdgeInsets? padding;
   final Widget? iconRightMerge;
   final int? textMaxLines;
+  final ButtonStyle? textButtonStyle;
 
   @override
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: onPressed,
-      style: (isDesk
-              ? KButtonStyles.lightGrayButtonStyle
-              : KButtonStyles.lightGrayButtonStyleWInf)
-          .copyWith(
-        backgroundColor: backgroundColor != null
-            ? WidgetStatePropertyAll(backgroundColor)
-            : null,
-      ),
+      style: textButtonStyle ??
+          (isDesk
+                  ? KButtonStyles.lightGrayButtonStyle
+                  : KButtonStyles.lightGrayButtonStyleWInf)
+              .copyWith(
+            backgroundColor: backgroundColor != null
+                ? WidgetStatePropertyAll(backgroundColor)
+                : null,
+          ),
       child: Padding(
         padding: padding ??
             (isDesk

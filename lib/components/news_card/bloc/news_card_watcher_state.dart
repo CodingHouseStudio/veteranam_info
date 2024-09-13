@@ -5,6 +5,7 @@ enum NewsCardFailure {
   error,
   get,
   network,
+  notFound,
 }
 
 extension NewsCardExtension on SomeFailure {
@@ -14,6 +15,8 @@ extension NewsCardExtension on SomeFailure {
         return NewsCardFailure.get;
       case FailureNetwork():
         return NewsCardFailure.network;
+      case FailureNotFound():
+        return NewsCardFailure.notFound;
       default:
         return NewsCardFailure.error;
     }

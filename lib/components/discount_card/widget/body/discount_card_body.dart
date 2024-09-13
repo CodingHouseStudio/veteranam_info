@@ -12,8 +12,9 @@ class DiscountCardBody extends StatelessWidget {
     return BlocBuilder<DiscountCardWatcherBloc, DiscountCardWatcherState>(
       builder: (context, _) => ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: KMinMaxSize.maxWidth640),
-        child: EmptyCardWidget(
+        child: CardEmptyWidget(
           cardIsEmpty: _.failure != null,
+          popRouteName: KRoute.discounts.name,
           chilcWidget: SkeletonizerWidget(
             isLoading: _.loadingStatus != LoadingStatus.loaded,
             child: DiscountCardWidget(
