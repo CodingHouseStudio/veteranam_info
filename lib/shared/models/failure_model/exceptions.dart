@@ -50,10 +50,16 @@ class GetFailur {
   }) {
     // debugPrint('SomeFailure: ${error.code}');
     switch (error.code) {
+      case 'not-found':
+        return GetFailur(
+          status: SomeFailure.notFound(
+            error: error,
+            stack: stack,
+          ),
+        );
       case 'missing-argument':
       case 'timeout':
       case 'canceled':
-      case 'not-found':
       case 'permission-denied':
       case 'out-of-range':
       case 'data-error':

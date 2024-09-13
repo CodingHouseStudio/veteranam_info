@@ -10,10 +10,11 @@ class DiscountCardBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<DiscountCardWatcherBloc, DiscountCardWatcherState>(
-      builder: (context, _) {
-        return ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: KMinMaxSize.maxWidth640),
-          child: SkeletonizerWidget(
+      builder: (context, _) => ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: KMinMaxSize.maxWidth640),
+        child: EmptyCardWidget(
+          cardIsEmpty: _.failure != null,
+          chilcWidget: SkeletonizerWidget(
             isLoading: _.loadingStatus != LoadingStatus.loaded,
             child: DiscountCardWidget(
               key: KWidgetkeys.screen.discountCard.widget,
@@ -36,8 +37,8 @@ class DiscountCardBody extends StatelessWidget {
               // '-' symbol (I tried several things to fix it but nothing helps)
             ),
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 }
