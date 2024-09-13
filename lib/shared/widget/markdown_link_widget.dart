@@ -16,6 +16,7 @@ class MarkdownLinkWidget extends StatelessWidget {
       // selectable: true,
       styleSheet: MarkdownStyleSheet(
         a: textStyle ?? AppTextStyle.materialThemeBodyLarge,
+        p: textStyle,
       ),
       onTapLink: (text, href, title) =>
           context.read<UrlCubit>().launchUrl(url: href),
