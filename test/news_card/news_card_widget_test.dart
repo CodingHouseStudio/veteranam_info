@@ -19,44 +19,91 @@ void main() {
     late IInformationRepository mockInformationRepository;
     setUp(() {
       mockInformationRepository = MockIInformationRepository();
-
-      when(
-        mockInformationRepository
-            .getInformation(KTestText.informationModelItems.first.id),
-      ).thenAnswer(
-        (realInvocation) async => Right(KTestText.informationModelItems.first),
-      );
     });
-    testWidgets('${KGroupText.intial} ', (tester) async {
-      await newsCardPumpAppHelper(
-        tester: tester,
-        mockNewsRepository: mockInformationRepository,
-      );
-
-      await newsCardInitialHelper(tester);
-    });
-
-    group('${KGroupText.goRouter} ', () {
-      late MockGoRouter mockGoRouter;
-      setUp(() => mockGoRouter = MockGoRouter());
+    group('${KGroupText.failureGet} ', () {
+      setUp(() {
+        when(
+          mockInformationRepository
+              .getInformation(KTestText.informationModelItems.first.id),
+        ).thenAnswer(
+          (realInvocation) async =>
+              Left(SomeFailure.serverError(error: KGroupText.failure)),
+        );
+      });
       testWidgets('${KGroupText.intial} ', (tester) async {
         await newsCardPumpAppHelper(
           tester: tester,
-          mockGoRouter: mockGoRouter,
           mockNewsRepository: mockInformationRepository,
         );
 
-        await newsCardInitialHelper(tester);
+        await newsCardInitialHelper(tester: tester, cardIsEmpty: true);
       });
-      group('${KGroupText.goTo} ', () {
-        testWidgets('${KRoute.information.name} ', (tester) async {
+    });
+    group('${KGroupText.successfulGet} ', () {
+      setUp(() {
+        when(
+          mockInformationRepository
+              .getInformation(KTestText.informationModelItems.first.id),
+        ).thenAnswer(
+          (realInvocation) async =>
+              Right(KTestText.informationModelItems.first),
+        );
+      });
+      testWidgets('${KGroupText.intial} ', (tester) async {
+        await newsCardPumpAppHelper(
+          tester: tester,
+          mockNewsRepository: mockInformationRepository,
+        );
+
+        await newsCardInitialHelper(tester: tester);
+      });
+
+      group('${KGroupText.goRouter} ', () {
+        late MockGoRouter mockGoRouter;
+        setUp(() => mockGoRouter = MockGoRouter());
+        testWidgets('${KGroupText.intial} ', (tester) async {
           await newsCardPumpAppHelper(
             tester: tester,
             mockGoRouter: mockGoRouter,
             mockNewsRepository: mockInformationRepository,
           );
 
-          await cancelHelper(tester: tester, mockGoRouter: mockGoRouter);
+          await newsCardInitialHelper(tester: tester);
+        });
+        group('${KGroupText.goTo} ', () {
+          group('${KGroupText.failureGet} ', () {
+            setUp(() {
+              when(
+                mockInformationRepository
+                    .getInformation(KTestText.informationModelItems.first.id),
+              ).thenAnswer(
+                (realInvocation) async =>
+                    Left(SomeFailure.notFound(error: KGroupText.failure)),
+              );
+            });
+            testWidgets('Empty Card close', (tester) async {
+              await newsCardPumpAppHelper(
+                tester: tester,
+                mockGoRouter: mockGoRouter,
+                mockNewsRepository: mockInformationRepository,
+              );
+
+              await cardEmptyCloseHelper(
+                tester: tester,
+                mockGoRouter: mockGoRouter,
+                routeName: KRoute.information.name,
+              );
+            });
+          });
+          testWidgets('${KRoute.information.name} ', (tester) async {
+            await newsCardPumpAppHelper(
+              tester: tester,
+              mockGoRouter: mockGoRouter,
+              mockNewsRepository: mockInformationRepository,
+            );
+
+            await cancelHelper(tester: tester, mockGoRouter: mockGoRouter);
+          });
         });
       });
     });
