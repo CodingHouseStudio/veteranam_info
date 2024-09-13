@@ -19,12 +19,12 @@ Future<void> dropDownButtonHelper({
   await tester.pumpAndSettle();
 
   expect(
-    find.byKey(KWidgetkeys.widget.dropDownButton.businessButton),
+    find.byKey(KWidgetkeys.screen.userRole.loginBusinessButton),
     findsOneWidget,
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.dropDownButton.userButton),
+    find.byKey(KWidgetkeys.screen.userRole.loginUserButton),
     findsOneWidget,
   );
 

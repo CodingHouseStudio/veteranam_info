@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 /// COMMENT: Variables with dimensions that don't have a specific group
 abstract class KDimensions {
   static const storyCardMaxLines = 10;
@@ -35,4 +37,6 @@ abstract class KDimensions {
 
   static const descriptionMobHideLength = 100;
   static const descriptionDeskHideLength = 200;
+
+  static const offset = Offset(140, 45);
 }

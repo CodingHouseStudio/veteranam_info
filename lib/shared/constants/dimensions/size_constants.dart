@@ -78,4 +78,6 @@ abstract class KSize {
   static const kPercentOfScreen = 0.80;
 
   static const kAppBarHeight = 0.1;
+
+  static const kUserRoleWidth = 0.3;
 }

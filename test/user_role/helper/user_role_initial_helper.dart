@@ -21,16 +21,16 @@ Future<void> userRoleInitialHelper(
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.userRole.businessButton),
+        find.byKey(KWidgetkeys.screen.userRole.signUpBusinessButton),
         findsOneWidget,
       );
 
       await scrollingHelper(
         tester: tester,
-        itemKey: KWidgetkeys.screen.userRole.userButton,
+        itemKey: KWidgetkeys.screen.userRole.signUpUserButton,
       );
       expect(
-        find.byKey(KWidgetkeys.screen.userRole.userButton),
+        find.byKey(KWidgetkeys.screen.userRole.signUpUserButton),
         findsOneWidget,
       );
 

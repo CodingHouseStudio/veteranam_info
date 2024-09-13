@@ -9,7 +9,9 @@ class UserRoleBodyWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScaffoldWidget(
       mainDeskPadding: ({required maxWidth}) => EdgeInsets.symmetric(
-        horizontal: maxWidth > KMinMaxSize.maxWidth640 ? maxWidth * 0.3 : 0,
+        horizontal: maxWidth > KMinMaxSize.maxWidth640
+            ? maxWidth * KSize.kUserRoleWidth
+            : 0,
         vertical: KPadding.kPaddingSize80,
       ),
       mainChildWidgetsFunction: ({required isDesk, required isTablet}) => [
@@ -40,7 +42,7 @@ class UserRoleBodyWidget extends StatelessWidget {
                   KSizedBox.kHeightSizedBox32,
                 DoubleButtonWidget(
                   align: Alignment.center,
-                  widgetKey: KWidgetkeys.screen.userRole.businessButton,
+                  widgetKey: KWidgetkeys.screen.userRole.signUpBusinessButton,
                   text: context.l10n.signUpBusiness,
                   isDesk: isDesk,
                   onPressed: null,
@@ -52,7 +54,7 @@ class UserRoleBodyWidget extends StatelessWidget {
                 KSizedBox.kHeightSizedBox24,
                 Center(
                   child: TextButton(
-                    key: KWidgetkeys.screen.userRole.userButton,
+                    key: KWidgetkeys.screen.userRole.signUpUserButton,
                     onPressed: () => context.goNamed(KRoute.signUp.name),
                     style: KButtonStyles.borderBlackButtonStyle,
                     child: Padding(
@@ -90,19 +92,19 @@ class UserRoleBodyWidget extends StatelessWidget {
             DropDownButton(
               isDesk: isDesk,
               buttonText: context.l10n.login,
-              textItems: [
-                context.l10n.asBusiness,
-                context.l10n.asUser,
+              items: [
+                DropDownItem(
+                  text: context.l10n.asBusiness,
+                  action: null,
+                  key: KWidgetkeys.screen.userRole.loginBusinessButton,
+                ),
+                DropDownItem(
+                  text: context.l10n.asUser,
+                  action: () => context.goNamed(KRoute.login.name),
+                  key: KWidgetkeys.screen.userRole.loginUserButton,
+                ),
               ],
-              actions: [
-                () {},
-                () => context.goNamed(KRoute.login.name),
-              ],
-              keys: [
-                KWidgetkeys.widget.dropDownButton.businessButton,
-                KWidgetkeys.widget.dropDownButton.userButton,
-              ],
-              offset: const Offset(140, 45),
+              offset: KDimensions.offset,
             ),
           ],
         ),

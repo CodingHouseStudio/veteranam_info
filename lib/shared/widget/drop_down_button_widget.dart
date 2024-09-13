@@ -5,18 +5,14 @@ class DropDownButton extends StatefulWidget {
   const DropDownButton({
     required this.isDesk,
     required this.buttonText,
-    required this.textItems,
+    required this.items,
     required this.offset,
-    required this.actions,
-    required this.keys,
     super.key,
   });
 
   final bool isDesk;
   final String buttonText;
-  final List<String> textItems;
-  final List<VoidCallback> actions;
-  final List<Key> keys;
+  final List<DropDownItem> items;
   final Offset offset;
 
   @override
@@ -50,47 +46,21 @@ class DropDownButtonState extends State<DropDownButton> {
       onCanceled: onTap,
       onOpened: onTap,
       onSelected: (index) {
-        widget.actions[index]();
+        widget.items.elementAt(index).action?.call();
       },
-      // itemBuilder: (context) => [
-      //   PopupMenuItem(
-      //     key: KWidgetkeys.widget.dropDownButton.businessButton,
-      //     value: LoginButtonsEnum.business,
-      //     enabled: false,
-      //     padding: const EdgeInsets.only(
-      //       bottom: KPadding.kPaddingSize8,
-      //     ),
-      //     height: AppTextStyle.materialThemeBodyMedium.fontSize!,
-      //     child: Text(
-      //       widget.textItems[0],
-      //       style: AppTextStyle.materialThemeBodyMedium,
-      //     ),
-      //   ),
-      //   PopupMenuItem(
-      //     key: KWidgetkeys.widget.dropDownButton.userButton,
-      //     value: LoginButtonsEnum.user,
-      //     padding: EdgeInsets.zero,
-      //     height: AppTextStyle.materialThemeBodyMedium.fontSize!,
-      //     child: Text(
-      //       widget.textItems[1],
-      //       style: AppTextStyle.materialThemeBodyMedium,
-      //     ),
-      //   ),
-      // ],
-
       itemBuilder: (context) {
-        return List.generate(widget.textItems.length, (index) {
+        return List.generate(widget.items.length, (index) {
           return PopupMenuItem(
-            key: widget.keys[index],
+            key: widget.items.elementAt(index).key,
             value: index,
-            padding: index != widget.textItems.length
+            padding: index != widget.items.length
                 ? const EdgeInsets.only(
                     bottom: KPadding.kPaddingSize8,
                   )
                 : EdgeInsets.zero,
             height: AppTextStyle.materialThemeBodyMedium.fontSize!,
             child: Text(
-              widget.textItems[index],
+              widget.items.elementAt(index).text,
               style: AppTextStyle.materialThemeBodyMedium,
             ),
           );
