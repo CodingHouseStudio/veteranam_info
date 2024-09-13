@@ -23,18 +23,11 @@ class DropDownButton extends StatefulWidget {
   DropDownButtonState createState() => DropDownButtonState();
 }
 
-// enum LoginButtonsEnum {
-//   business,
-//   user,
-// }
-
 class DropDownButtonState extends State<DropDownButton> {
   bool _showButtons = false;
 
   @override
   Widget build(BuildContext context) {
-    //After the implementation of the login page as a Business account,
-    //change enum to LoginButtonsEnum
     return PopupMenuButton<int>(
       key: KWidgetkeys.widget.dropDownButton.widget,
       offset: widget.offset,
