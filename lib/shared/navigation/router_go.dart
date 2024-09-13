@@ -52,26 +52,24 @@ GoRouter router = GoRouter(
           child: const UserRoleScreen(),
         ),
         routes: [
-          if (Config.isDevelopment)
-            GoRoute(
-              name: KRoute.login.name,
-              path: KRoute.login.path,
-              pageBuilder: (context, state) => NoTransitionPage(
-                key: state.pageKey,
-                name: state.name,
-                child: const LoginScreen(),
-              ),
+          GoRoute(
+            name: KRoute.login.name,
+            path: KRoute.login.path,
+            pageBuilder: (context, state) => NoTransitionPage(
+              key: state.pageKey,
+              name: state.name,
+              child: const LoginScreen(),
             ),
-          if (Config.isDevelopment)
-            GoRoute(
-              name: KRoute.signUp.name,
-              path: KRoute.signUp.path,
-              pageBuilder: (context, state) => NoTransitionPage(
-                key: state.pageKey,
-                name: state.name,
-                child: const SignUpScreen(),
-              ),
+          ),
+          GoRoute(
+            name: KRoute.signUp.name,
+            path: KRoute.signUp.path,
+            pageBuilder: (context, state) => NoTransitionPage(
+              key: state.pageKey,
+              name: state.name,
+              child: const SignUpScreen(),
             ),
+          ),
         ],
       ),
     if (Config.isDevelopment)

@@ -8,10 +8,9 @@ class UserRoleBodyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScaffoldWidget(
-      mainDeskPadding: ({required isDesk, required maxWidth}) =>
-          EdgeInsets.symmetric(
+      mainDeskPadding: ({required maxWidth}) => EdgeInsets.symmetric(
         horizontal: maxWidth > KMinMaxSize.maxWidth640 ? maxWidth * 0.3 : 0,
-        vertical: isDesk ? KPadding.kPaddingSize80 : KPadding.kPaddingSize24,
+        vertical: KPadding.kPaddingSize80,
       ),
       mainChildWidgetsFunction: ({required isDesk, required isTablet}) => [
         DecoratedBox(
@@ -95,6 +94,7 @@ class UserRoleBodyWidget extends StatelessWidget {
                 context.l10n.asBusiness,
                 context.l10n.asUser,
               ],
+              offset: const Offset(140, 45),
             ),
           ],
         ),

@@ -9,32 +9,29 @@ import '../../test_mocks/go_router_provider_mocks.dart';
 Future<void> signUpButtonsNavigationHelper({
   required WidgetTester tester,
   required MockGoRouter mockGoRouter,
-  required bool isUser,
 }) async {
-  if (isUser) {
-    expect(
-      find.byKey(KWidgetkeys.screen.userRole.userButton),
-      findsOneWidget,
-    );
+  expect(
+    find.byKey(KWidgetkeys.screen.userRole.businessButton),
+    findsOneWidget,
+  );
 
-    await tester.tap(find.byKey(KWidgetkeys.screen.userRole.userButton));
+  await tester.tap(find.byKey(KWidgetkeys.screen.userRole.businessButton));
 
-    verify(
-      () => mockGoRouter.goNamed(KRoute.signUp.name),
-    ).called(1);
-  } else {
-    expect(
-      find.byKey(KWidgetkeys.screen.userRole.businessButton),
-      findsOneWidget,
-    );
+  await tester.pumpAndSettle();
 
-    await tester.tap(find.byKey(KWidgetkeys.screen.userRole.businessButton));
+  // Uncomment the following lines if you want to verify the route change
+  // verify(
+  //   () => mockGoRouter.goNamed(KRoute.signUp.name),
+  // ).called(1);
 
-    await tester.pumpAndSettle();
+  expect(
+    find.byKey(KWidgetkeys.screen.userRole.userButton),
+    findsOneWidget,
+  );
 
-    // Uncomment the following lines if you want to verify the route change
-    // verify(
-    //   () => mockGoRouter.goNamed(KRoute.signUp.name),
-    // ).called(1);
-  }
+  await tester.tap(find.byKey(KWidgetkeys.screen.userRole.userButton));
+
+  verify(
+    () => mockGoRouter.goNamed(KRoute.signUp.name),
+  ).called(1);
 }

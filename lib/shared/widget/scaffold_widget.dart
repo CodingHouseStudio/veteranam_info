@@ -20,7 +20,6 @@ class ScaffoldWidget extends StatelessWidget {
   final List<Widget> Function({required bool isDesk, required bool isTablet})
       mainChildWidgetsFunction;
   final EdgeInsetsGeometry Function({
-    required bool isDesk,
     required double maxWidth,
   })? mainDeskPadding;
   final bool hasFooter;
@@ -126,7 +125,6 @@ class ScaffoldWidget extends StatelessWidget {
                     SliverPadding(
                       padding: isDesk && mainDeskPadding != null
                           ? mainDeskPadding!(
-                              isDesk: isDesk,
                               maxWidth: constraints.maxWidth,
                             )
                           : padding,

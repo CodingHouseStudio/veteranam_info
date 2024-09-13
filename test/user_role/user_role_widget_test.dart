@@ -42,23 +42,8 @@ void main() {
           await signUpButtonsNavigationHelper(
             tester: tester,
             mockGoRouter: mockGoRouter,
-            isUser: false,
           );
         });
-
-        testWidgets('Sign Up user button ', (tester) async {
-          await userRolePumpAppHelper(
-            tester: tester,
-            mockGoRouter: mockGoRouter,
-          );
-
-          await signUpButtonsNavigationHelper(
-            tester: tester,
-            mockGoRouter: mockGoRouter,
-            isUser: true,
-          );
-        });
-
         testWidgets('Drop down buttons', (tester) async {
           await userRolePumpAppHelper(
             tester: tester,
