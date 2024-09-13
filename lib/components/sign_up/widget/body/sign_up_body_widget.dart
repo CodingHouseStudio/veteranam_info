@@ -9,10 +9,10 @@ class SignUpBodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<SignUpBloc, SignUpState>(
-      listener: (context, state) => context.dialog.showSnackBardTextDialog(
-        state.failure?.value(context),
-      ),
+    return BlocBuilder<SignUpBloc, SignUpState>(
+      // listener: (context, state) => context.dialog.showSnackBardTextDialog(
+      //   state.failure?.value(context),
+      // ),
       builder: (context, _) {
         return ScaffoldDecorationWidget(
           key: KWidgetkeys.screen.signUp.card,
@@ -69,6 +69,8 @@ class SignUpBodyWidget extends StatelessWidget {
               isLogin: false,
               showErrorText: _.formState == SignUpEnum.invalidData ||
                   _.formState == SignUpEnum.passwordInvalidData,
+              bottomError: _.failure?.value(context),
+              bottomTextKey: KWidgetkeys.screen.signUp.errorText,
             ),
             if (isDesk)
               KSizedBox.kHeightSizedBox24
@@ -93,6 +95,19 @@ class SignUpBodyWidget extends StatelessWidget {
                 mobIconPadding: KPadding.kPaddingSize12,
               ),
             ),
+            if (_.formState == SignUpEnum.success) ...[
+              KSizedBox.kHeightSizedBox16,
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: KPadding.kPaddingSize16,
+                ),
+                child: Text(
+                  context.l10n.loggingInWait,
+                  key: KWidgetkeys.screen.signUp.loadingText,
+                  style: AppTextStyle.materialThemeBodyMediumNeutralVariant60,
+                ),
+              ),
+            ],
             if (isDesk)
               KSizedBox.kHeightSizedBox24
             else

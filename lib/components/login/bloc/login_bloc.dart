@@ -72,6 +72,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       state.password,
       state.email,
     ])) {
+      emit(
+        state.copyWith(
+          formState: LoginEnum.success,
+        ),
+      );
       // emit(state.copyWith(fieldsIsCorrect: true));
       final result = await _authenticationRepository.logIn(
         email: state.email.value,

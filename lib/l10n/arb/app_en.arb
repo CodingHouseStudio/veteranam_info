@@ -1123,6 +1123,14 @@
   "@noInternet": {
     "examples": "Text for message on mobile version about no internet"
   },
+  "loggingInWait": "Logging in, please wait...",
+  "@loggingIn": {
+    "examples": "Text indicating that the login process is in progress, and the user needs to wait on the Login page"
+  },
+  "signingUp": "Signing up, please wait...",
+  "@signingUpWait": {
+    "examples": "Text indicating that the sign-up process is in progress, and the user needs to wait on the Sign up page"
+  },
   "signUpInWith": "Sign up with",
   "@signUpInWith": {
     "examples": "The text on the SignUp page before the login button with google, facebook, apple."

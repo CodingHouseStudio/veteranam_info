@@ -73,6 +73,11 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
       state.password,
       state.email,
     ])) {
+      emit(
+        state.copyWith(
+          formState: SignUpEnum.success,
+        ),
+      );
       // emit(state.copyWith(fieldsIsCorrect: true));
       final result = await _authenticationRepository.signUp(
         email: state.email.value,

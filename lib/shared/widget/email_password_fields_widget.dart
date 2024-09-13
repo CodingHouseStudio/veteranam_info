@@ -11,9 +11,11 @@ class EmailPasswordFieldsWidget extends StatefulWidget {
     required this.backPassword,
     required this.isLogin,
     required this.showErrorText,
+    this.bottomTextKey,
     super.key,
     this.errorTextEmail,
     this.errorTextPassword,
+    this.bottomError,
   });
 
   final bool showPassword;
@@ -26,6 +28,8 @@ class EmailPasswordFieldsWidget extends StatefulWidget {
   final String email;
   final void Function() backPassword;
   final bool isLogin;
+  final String? bottomError;
+  final Key? bottomTextKey;
 
   @override
   State<EmailPasswordFieldsWidget> createState() =>
@@ -159,6 +163,14 @@ class _EmailPasswordFieldsWidgetState extends State<EmailPasswordFieldsWidget>
             showErrorText: widget.showErrorText,
             inputFormatterList: [EmailInputFormatter()],
           ),
+        if (widget.bottomError != null) ...[
+          KSizedBox.kHeightSizedBox8,
+          Text(
+            widget.bottomError!,
+            key: widget.bottomTextKey,
+            style: AppTextStyle.materialThemeBodyMediumError,
+          ),
+        ],
       ],
       // ),
     );

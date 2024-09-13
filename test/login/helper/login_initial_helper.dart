@@ -55,7 +55,8 @@ Future<void> loginInitialHelper(
         findsOneWidget,
       );
 
-      await dialogSnackBarTextHelper(tester: tester, showDialog: false);
+      expect(find.byKey(KWidgetkeys.screen.login.errorText), findsNothing);
+      // await dialogSnackBarTextHelper(tester: tester, showDialog: false);
 
       await leftCardHelper(tester);
 

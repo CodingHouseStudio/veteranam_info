@@ -118,6 +118,12 @@ void main() {
           formState: SignUpEnum.passwordInProgress,
         ),
         const SignUpState(
+          email: EmailFieldModel.dirty(KTestText.userEmail),
+          password: PasswordFieldModel.dirty(KTestText.passwordCorrect),
+          failure: null,
+          formState: SignUpEnum.success,
+        ),
+        const SignUpState(
           email: EmailFieldModel.pure(),
           password: PasswordFieldModel.pure(),
           failure: null,
@@ -166,6 +172,12 @@ void main() {
           password: PasswordFieldModel.dirty(KTestText.passwordCorrect),
           failure: null,
           formState: SignUpEnum.passwordInProgress,
+        ),
+        const SignUpState(
+          email: EmailFieldModel.dirty(KTestText.userEmail),
+          password: PasswordFieldModel.dirty(KTestText.passwordCorrect),
+          failure: null,
+          formState: SignUpEnum.success,
         ),
         const SignUpState(
           email: EmailFieldModel.dirty(KTestText.userEmail),

@@ -38,6 +38,7 @@ enum SignUpEnum {
   inProgress,
   invalidData,
   success,
+  // singUpLoading,
   passwordInProgress,
   passwordInvalidData,
 }

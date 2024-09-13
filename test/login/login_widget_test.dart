@@ -59,7 +59,7 @@ void main() {
           tester: tester,
         );
 
-        await loginFailureHelper(tester);
+        await wrongSubmitedHelper(tester);
       });
       testWidgets('${KGroupText.failureNetwork} ', (tester) async {
         when(
@@ -75,7 +75,7 @@ void main() {
           tester: tester,
         );
 
-        await loginFailureHelper(tester);
+        await wrongSubmitedHelper(tester);
       });
       testWidgets('${KGroupText.failureSend} ', (tester) async {
         when(
@@ -91,7 +91,7 @@ void main() {
           tester: tester,
         );
 
-        await loginFailureHelper(tester);
+        await wrongSubmitedHelper(tester);
       });
       testWidgets('${KGroupText.failure} not found', (tester) async {
         when(
@@ -107,7 +107,7 @@ void main() {
           tester: tester,
         );
 
-        await loginFailureHelper(tester);
+        await wrongSubmitedHelper(tester);
       });
     });
 
