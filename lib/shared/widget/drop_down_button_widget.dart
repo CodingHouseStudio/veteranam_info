@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:veteranam/shared/shared.dart';
 
 class DropDownButton extends StatefulWidget {
@@ -8,12 +7,16 @@ class DropDownButton extends StatefulWidget {
     required this.buttonText,
     required this.textItems,
     required this.offset,
+    required this.actions,
+    required this.keys,
     super.key,
   });
 
   final bool isDesk;
   final String buttonText;
   final List<String> textItems;
+  final List<VoidCallback> actions;
+  final List<Key> keys;
   final Offset offset;
 
   @override
@@ -32,7 +35,7 @@ class DropDownButtonState extends State<DropDownButton> {
   Widget build(BuildContext context) {
     //After the implementation of the login page as a Business account,
     //change enum to LoginButtonsEnum
-    return PopupMenuButton<Enum>(
+    return PopupMenuButton<int>(
       key: KWidgetkeys.widget.dropDownButton.widget,
       offset: widget.offset,
       shape: const RoundedRectangleBorder(
@@ -53,12 +56,8 @@ class DropDownButtonState extends State<DropDownButton> {
       padding: EdgeInsets.zero,
       onCanceled: onTap,
       onOpened: onTap,
-      onSelected: (value) {
-        switch (value) {
-          case LoginButtonsEnum.user:
-            context.goNamed(KRoute.login.name);
-          //case LoginButtonsEnum.business:
-        }
+      onSelected: (index) {
+        widget.actions[index]();
       },
       // itemBuilder: (context) => [
       //   PopupMenuItem(
@@ -85,27 +84,25 @@ class DropDownButtonState extends State<DropDownButton> {
       //     ),
       //   ),
       // ],
-      itemBuilder: (context) => List.generate(widget.textItems.length, (index) {
-        final value =
-            index == 0 ? LoginButtonsEnum.business : LoginButtonsEnum.user;
-        final isEnabled = index != 0;
 
-        return PopupMenuItem(
-          key: index == 0
-              ? KWidgetkeys.widget.dropDownButton.businessButton
-              : KWidgetkeys.widget.dropDownButton.userButton,
-          value: value,
-          enabled: isEnabled,
-          padding: EdgeInsets.only(
-            bottom: index == 0 ? KPadding.kPaddingSize8 : 0,
-          ),
-          height: AppTextStyle.materialThemeBodyMedium.fontSize!,
-          child: Text(
-            widget.textItems[index],
-            style: AppTextStyle.materialThemeBodyMedium,
-          ),
-        );
-      }),
+      itemBuilder: (context) {
+        return List.generate(widget.textItems.length, (index) {
+          return PopupMenuItem(
+            key: widget.keys[index],
+            value: index,
+            padding: index != widget.textItems.length
+                ? const EdgeInsets.only(
+                    bottom: KPadding.kPaddingSize8,
+                  )
+                : EdgeInsets.zero,
+            height: AppTextStyle.materialThemeBodyMedium.fontSize!,
+            child: Text(
+              widget.textItems[index],
+              style: AppTextStyle.materialThemeBodyMedium,
+            ),
+          );
+        });
+      },
       icon: Row(
         key: KWidgetkeys.widget.dropDownButton.loginButton,
         children: [

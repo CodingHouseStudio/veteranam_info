@@ -94,6 +94,14 @@ class UserRoleBodyWidget extends StatelessWidget {
                 context.l10n.asBusiness,
                 context.l10n.asUser,
               ],
+              actions: [
+                () {},
+                () => context.goNamed(KRoute.login.name),
+              ],
+              keys: [
+                KWidgetkeys.widget.dropDownButton.businessButton,
+                KWidgetkeys.widget.dropDownButton.userButton,
+              ],
               offset: const Offset(140, 45),
             ),
           ],

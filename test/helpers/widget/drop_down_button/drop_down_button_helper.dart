@@ -27,4 +27,8 @@ Future<void> dropDownButtonHelper({
     find.byKey(KWidgetkeys.widget.dropDownButton.userButton),
     findsOneWidget,
   );
+
+  await tester.tap(find.byKey(KWidgetkeys.widget.dropDownButton.loginButton));
+
+  await tester.pumpAndSettle();
 }
