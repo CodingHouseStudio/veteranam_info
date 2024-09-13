@@ -61,8 +61,12 @@ class KImage {
         'assets/icons/facebook.svg',
         key: key,
       );
+  // static SvgPicture facebookLogin({Key? key}) => SvgPicture.asset(
+  //       'assets/icons/Social_Icons_F.svg',
+  //       key: key,
+  //     );
   // static SvgPicture apple({Key? key}) => SvgPicture.asset(
-  //       'assets/icons/social_icons.svg',
+  //       'assets/icons/Social_Icons.svg',
   //       key: key,
   //     );
   static SvgPicture google({Key? key}) => SvgPicture.asset(
