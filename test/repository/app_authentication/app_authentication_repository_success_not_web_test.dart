@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -25,7 +26,10 @@ void main() {
     late firebase_auth.UserCredential mockUserCredential;
     late FirestoreService mockFirestoreService;
     late GoogleSignInAccount mockGoogleSignInAccount;
+    late FacebookAuth mockFacebookAuth;
     late GoogleSignInAuthentication mockGoogleSignInAuthentication;
+    late LoginResult mockLoginResult;
+    late firebase_auth.FacebookAuthProvider mockFacebookAuthProvider;
 
     late IDeviceRepository mockDeviceRepository;
     setUp(() {
@@ -38,6 +42,9 @@ void main() {
       mockGoogleSignInAuthentication = MockGoogleSignInAuthentication();
       mockGoogleAuthProvider = MockGoogleAuthProvider();
       mockUserCredential = MockUserCredential();
+      mockFacebookAuth = MockFacebookAuth();
+      mockLoginResult = MockLoginResult();
+      mockFacebookAuthProvider = MockFacebookAuthProvider();
 
       mockDeviceRepository = MockIDeviceRepository();
 
@@ -55,6 +62,9 @@ void main() {
       );
       when(mockGoogleSignIn.signIn()).thenAnswer(
         (_) async => mockGoogleSignInAccount,
+      );
+      when(mockFacebookAuth.login()).thenAnswer(
+        (_) async => mockLoginResult,
       );
       when(mockFirebaseAuth.signInWithCredential(KTestText.oAuthCredential))
           .thenAnswer(
@@ -89,13 +99,37 @@ void main() {
         mockFirebaseAuth,
         mockGoogleSignIn,
         mockCache,
+        mockFacebookAuth,
       )
         ..isWeb = false
-        ..googleAuthProvider = mockGoogleAuthProvider;
+        ..googleAuthProvider = mockGoogleAuthProvider
+        ..facebookAuthProvider = mockFacebookAuthProvider;
     });
     test('Sign up with google', () async {
       expect(
         await appAuthenticationRepository.signUpWithGoogle(),
+        isA<Right<SomeFailure, bool>>().having((e) => e.value, 'value', isTrue),
+      );
+    });
+    test('Sign up with facebook(credential null)', () async {
+      expect(
+        await appAuthenticationRepository.signUpWithFacebook(),
+        isA<Right<SomeFailure, bool>>()
+            .having((e) => e.value, 'value', isFalse),
+      );
+    });
+    test('Sign up with facebook', () async {
+      when(mockLoginResult.accessToken).thenAnswer(
+        (_) => LimitedToken(
+          userId: KTestText.user.id,
+          userName: KTestText.user.name!,
+          userEmail: KTestText.user.email,
+          nonce: KTestText.field,
+          tokenString: KTestText.token,
+        ),
+      );
+      expect(
+        await appAuthenticationRepository.signUpWithFacebook(),
         isA<Right<SomeFailure, bool>>().having((e) => e.value, 'value', isTrue),
       );
     });

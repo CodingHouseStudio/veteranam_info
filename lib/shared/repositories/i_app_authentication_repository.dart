@@ -10,6 +10,8 @@ abstract class IAppAuthenticationRepository {
 
   Future<Either<SomeFailure, bool>> signUpWithGoogle();
 
+  Future<Either<SomeFailure, bool>> signUpWithFacebook();
+
   Future<Either<SomeFailure, bool>> logInWithEmailAndPassword({
     required String email,
     required String password,

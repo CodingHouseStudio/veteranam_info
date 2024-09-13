@@ -14,12 +14,12 @@ void main() {
   tearDown(GetIt.I.reset);
   group('${KScreenBlocName.signUp} ${KGroupText.bloc}', () {
     late SignUpBloc signUpBloc;
-    late IAppAuthenticationRepository mockAppAuthenticationRepository;
+    late AuthenticationRepository mockAuthenticationRepository;
     setUp(() {
       ExtendedDateTime.current = KTestText.feedbackModel.timestamp;
-      mockAppAuthenticationRepository = MockIAppAuthenticationRepository();
+      mockAuthenticationRepository = MockAuthenticationRepository();
       when(
-        mockAppAuthenticationRepository.signUp(
+        mockAuthenticationRepository.signUp(
           email: KTestText.userEmail,
           password: KTestText.passwordCorrect,
         ),
@@ -27,7 +27,7 @@ void main() {
         (realInvocation) async => const Right(true),
       );
       signUpBloc = SignUpBloc(
-        iAppAuthenticationRepository: mockAppAuthenticationRepository,
+        authenticationRepository: mockAuthenticationRepository,
       );
     });
 
@@ -38,28 +38,32 @@ void main() {
       act: (bloc) => bloc
         ..add(const SignUpEvent.emailUpdated(KTestText.userEmail))
         ..add(const SignUpEvent.signUpSubmitted())
-        ..add(const SignUpEvent.passwordUpdated(KTestText.passwordCorrect)),
+        ..add(const SignUpEvent.passwordUpdated(KTestText.passwordIncorrect))
+        ..add(const SignUpEvent.signUpSubmitted()),
       expect: () => [
         const SignUpState(
           email: EmailFieldModel.dirty(KTestText.userEmail),
           password: PasswordFieldModel.pure(),
           failure: null,
-          fieldsIsCorrect: null,
-          showPasswordField: false,
+          formState: SignUpEnum.inProgress,
         ),
         const SignUpState(
           email: EmailFieldModel.dirty(KTestText.userEmail),
           password: PasswordFieldModel.pure(),
           failure: null,
-          fieldsIsCorrect: null,
-          showPasswordField: true,
+          formState: SignUpEnum.showPassword,
         ),
         const SignUpState(
           email: EmailFieldModel.dirty(KTestText.userEmail),
-          password: PasswordFieldModel.dirty(KTestText.passwordCorrect),
+          password: PasswordFieldModel.dirty(KTestText.passwordIncorrect),
           failure: null,
-          fieldsIsCorrect: null,
-          showPasswordField: true,
+          formState: SignUpEnum.passwordInProgress,
+        ),
+        const SignUpState(
+          email: EmailFieldModel.dirty(KTestText.userEmail),
+          password: PasswordFieldModel.dirty(KTestText.passwordIncorrect),
+          failure: null,
+          formState: SignUpEnum.passwordInvalidData,
         ),
       ],
     );
@@ -74,15 +78,13 @@ void main() {
           email: EmailFieldModel.dirty(KTestText.userEmailIncorrect),
           password: PasswordFieldModel.pure(),
           failure: null,
-          fieldsIsCorrect: null,
-          showPasswordField: false,
+          formState: SignUpEnum.inProgress,
         ),
         const SignUpState(
           email: EmailFieldModel.dirty(KTestText.userEmailIncorrect),
           password: PasswordFieldModel.pure(),
           failure: null,
-          fieldsIsCorrect: false,
-          showPasswordField: false,
+          formState: SignUpEnum.invalidData,
         ),
       ],
     );
@@ -101,36 +103,31 @@ void main() {
           email: EmailFieldModel.dirty(KTestText.userEmail),
           password: PasswordFieldModel.pure(),
           failure: null,
-          fieldsIsCorrect: null,
-          showPasswordField: false,
+          formState: SignUpEnum.inProgress,
         ),
         const SignUpState(
           email: EmailFieldModel.dirty(KTestText.userEmail),
           password: PasswordFieldModel.pure(),
           failure: null,
-          fieldsIsCorrect: null,
-          showPasswordField: true,
+          formState: SignUpEnum.showPassword,
         ),
         const SignUpState(
           email: EmailFieldModel.dirty(KTestText.userEmail),
           password: PasswordFieldModel.dirty(KTestText.passwordCorrect),
           failure: null,
-          fieldsIsCorrect: null,
-          showPasswordField: true,
+          formState: SignUpEnum.passwordInProgress,
         ),
         const SignUpState(
           email: EmailFieldModel.dirty(KTestText.userEmail),
           password: PasswordFieldModel.dirty(KTestText.passwordCorrect),
           failure: null,
-          fieldsIsCorrect: true,
-          showPasswordField: true,
+          formState: SignUpEnum.success,
         ),
         const SignUpState(
-          email: EmailFieldModel.dirty(KTestText.userEmail),
-          password: PasswordFieldModel.dirty(KTestText.passwordCorrect),
+          email: EmailFieldModel.pure(),
+          password: PasswordFieldModel.pure(),
           failure: null,
-          fieldsIsCorrect: true,
-          showPasswordField: false,
+          formState: SignUpEnum.success,
         ),
       ],
     );
@@ -140,7 +137,7 @@ void main() {
       build: () => signUpBloc,
       act: (bloc) {
         when(
-          mockAppAuthenticationRepository.signUp(
+          mockAuthenticationRepository.signUp(
             email: KTestText.userEmail,
             password: KTestText.passwordCorrect,
           ),
@@ -162,36 +159,31 @@ void main() {
           email: EmailFieldModel.dirty(KTestText.userEmail),
           password: PasswordFieldModel.pure(),
           failure: null,
-          fieldsIsCorrect: null,
-          showPasswordField: false,
+          formState: SignUpEnum.inProgress,
         ),
         const SignUpState(
           email: EmailFieldModel.dirty(KTestText.userEmail),
           password: PasswordFieldModel.pure(),
           failure: null,
-          fieldsIsCorrect: null,
-          showPasswordField: true,
+          formState: SignUpEnum.showPassword,
         ),
         const SignUpState(
           email: EmailFieldModel.dirty(KTestText.userEmail),
           password: PasswordFieldModel.dirty(KTestText.passwordCorrect),
           failure: null,
-          fieldsIsCorrect: null,
-          showPasswordField: true,
+          formState: SignUpEnum.passwordInProgress,
         ),
         const SignUpState(
           email: EmailFieldModel.dirty(KTestText.userEmail),
           password: PasswordFieldModel.dirty(KTestText.passwordCorrect),
           failure: null,
-          fieldsIsCorrect: true,
-          showPasswordField: true,
+          formState: SignUpEnum.success,
         ),
         const SignUpState(
           email: EmailFieldModel.dirty(KTestText.userEmail),
           password: PasswordFieldModel.dirty(KTestText.passwordCorrect),
           failure: SignUpError.error,
-          fieldsIsCorrect: true,
-          showPasswordField: false,
+          formState: SignUpEnum.initial,
         ),
       ],
     );
@@ -209,22 +201,19 @@ void main() {
           email: EmailFieldModel.dirty(KTestText.userEmail),
           password: PasswordFieldModel.pure(),
           failure: null,
-          fieldsIsCorrect: null,
-          showPasswordField: false,
+          formState: SignUpEnum.inProgress,
         ),
         const SignUpState(
           email: EmailFieldModel.dirty(KTestText.userEmail),
           password: PasswordFieldModel.pure(),
           failure: null,
-          fieldsIsCorrect: null,
-          showPasswordField: true,
+          formState: SignUpEnum.showPassword,
         ),
         const SignUpState(
           email: EmailFieldModel.dirty(KTestText.userEmail),
           password: PasswordFieldModel.pure(),
           failure: null,
-          fieldsIsCorrect: null,
-          showPasswordField: false,
+          formState: SignUpEnum.inProgress,
         ),
       ],
     );
