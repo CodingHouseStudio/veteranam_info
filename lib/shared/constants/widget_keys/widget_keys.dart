@@ -88,6 +88,7 @@ part 'widget/double_button.dart';
 part 'widget/loading_button.dart';
 part 'widget/mob_update.dart';
 part 'widget/network_banner.dart';
+part 'widget/card_epmty.dart';
 
 abstract class KWidgetkeys {
   static _ScreenKeys get screen => _ScreenKeys();

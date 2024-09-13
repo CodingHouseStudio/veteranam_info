@@ -7,6 +7,7 @@ export 'button_widget.dart';
 export 'buy_me_a_coffee.dart';
 export 'cancel_widget.dart';
 export 'card_add_image_widget.dart';
+export 'card_empty_widget.dart';
 export 'card_text_detail_evaluate_widget.dart';
 export 'card_text_detail_widget.dart';
 export 'card_widget_list.dart';
