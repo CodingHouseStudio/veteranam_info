@@ -10,9 +10,12 @@ class EmailPasswordFieldsWidget extends StatefulWidget {
     required this.email,
     required this.backPassword,
     required this.isLogin,
+    required this.showErrorText,
+    this.bottomTextKey,
     super.key,
     this.errorTextEmail,
     this.errorTextPassword,
+    this.bottomError,
   });
 
   final bool showPassword;
@@ -20,10 +23,13 @@ class EmailPasswordFieldsWidget extends StatefulWidget {
   final void Function(String) onChangedEmail;
   final void Function(String) onChangedPassword;
   final String? errorTextEmail;
+  final bool showErrorText;
   final String? errorTextPassword;
   final String email;
   final void Function() backPassword;
   final bool isLogin;
+  final String? bottomError;
+  final Key? bottomTextKey;
 
   @override
   State<EmailPasswordFieldsWidget> createState() =>
@@ -126,6 +132,7 @@ class _EmailPasswordFieldsWidgetState extends State<EmailPasswordFieldsWidget>
             focusNode: passwordFocusNode,
             disposeFocusNode: false,
             obscureText: obscurePassword,
+            showErrorText: widget.showErrorText,
           ),
           KSizedBox.kHeightSizedBox8,
           if (widget.isLogin)
@@ -160,7 +167,17 @@ class _EmailPasswordFieldsWidgetState extends State<EmailPasswordFieldsWidget>
             hintText: context.l10n.email,
             isDesk: widget.isDesk,
             controller: emailController,
+            showErrorText: widget.showErrorText,
+            inputFormatterList: [EmailInputFormatter()],
           ),
+        if (widget.bottomError != null) ...[
+          KSizedBox.kHeightSizedBox8,
+          Text(
+            widget.bottomError!,
+            key: widget.bottomTextKey,
+            style: AppTextStyle.materialThemeBodyMediumError,
+          ),
+        ],
       ],
       // ),
     );

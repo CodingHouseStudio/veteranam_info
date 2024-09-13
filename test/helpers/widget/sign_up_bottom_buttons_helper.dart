@@ -48,6 +48,11 @@ Future<void> signUpBottomButtonsHelper(
       //   findsWidgets,
       // );
 
+      // await tester
+      //     .tap(find.byKey(KWidgetkeys.widget.signUpBottomButtons.facebook));
+
+      // await tester.pumpAndSettle();
+
       // expect(
       //   find.byKey(KWidgetkeys.widget.signUpBottomButtons.apple),
       //   findsWidgets,
