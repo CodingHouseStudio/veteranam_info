@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io' as io; // Use io for platform-agnostic file operations
 import 'dart:typed_data';
 
+// import 'package:dio/browser.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:injectable/injectable.dart';
@@ -10,46 +11,51 @@ import 'package:veteranam/shared/shared.dart';
 
 @Singleton(order: -1)
 class ArtifactDownloadHelper {
-  ArtifactDownloadHelper(this.dio);
-  final Dio dio;
+  ArtifactDownloadHelper(this._dio);
+  final Dio _dio;
 
-  final String imagesDir = 'assets/images'; // Use assets directory for mobile
+  final String _imagesDir = 'assets/images'; // Use assets directory for mobile
 
   static final Map<String, Uint8List> _imageMemmoryDir = {};
-  final _options = Options(responseType: ResponseType.bytes);
+  final _options = Options(
+    responseType: ResponseType.bytes,
+    headers: {
+      Headers.contentTypeHeader: 'image/*',
+      // 'Cache-Control': 'max-age=3600',
+      'Accept': 'image/webp,image/apng,image/*,*/*;q=0.8',
+      'Connection': 'close',
+    },
+    receiveTimeout: const Duration(seconds: 5),
+    followRedirects: true,
+  );
 
   static Uint8List? getBytestExist(String key) =>
       _imageMemmoryDir.containsKey(key) ? _imageMemmoryDir[key] : null;
 
   Future<void> downloadArtifacts(ImageModel imageModel) async {
     try {
-      final byte = await _downloadImage(imageModel);
-      if (byte != null) {
-        _imageMemmoryDir.addAll(
-          {imageModel.name ?? imageModel.downloadURL: byte},
-        );
+      if (!_imageMemmoryDir
+              .containsKey(imageModel.name ?? imageModel.downloadURL) &&
+          imageModel.downloadURL.isNotEmpty) {
+        final byte = await _downloadImage(imageModel);
+        if (byte != null) {
+          _imageMemmoryDir.addAll(
+            {imageModel.name ?? imageModel.downloadURL: byte},
+          );
+        }
       }
     } catch (error) {
-      // Handle download errors
+      // Handle download errors\
     }
   }
 
   Future<Uint8List?> _downloadImage(ImageModel image) async {
-    if (image.downloadURL.isEmpty) {
-      return null; // No URL, no download
-    }
-
-    // Check memory cache first
-    final cachedBytes = getBytestExist(image.downloadURL);
-    if (cachedBytes != null) {
-      return cachedBytes;
-    }
-
     // Handle differently for web vs mobile
     if (kIsWeb) {
-      // On web, just download and keep in memory
+      // _dio.httpClientAdapter = BrowserHttpClientAdapter
+      // (withCredentials: true);
 
-      final response = await dio.get<Uint8List>(
+      final response = await _dio.get<Uint8List>(
         image.downloadURL.getImageUrl,
         options: _options,
       );
@@ -59,7 +65,6 @@ class ArtifactDownloadHelper {
         return null;
       }
 
-      _imageMemmoryDir[image.downloadURL] = response.data!;
       return response.data;
     } else {
       // On mobile, use the local filesystem
@@ -72,7 +77,7 @@ class ArtifactDownloadHelper {
       }
 
       // Download the image
-      final response = await dio.get<Uint8List>(
+      final response = await _dio.get<Uint8List>(
         image.downloadURL.getImageUrl,
         options: _options,
       );
@@ -91,7 +96,7 @@ class ArtifactDownloadHelper {
   Future<String> _getLocalImagePath(ImageModel image) async {
     final directory = await getApplicationDocumentsDirectory();
     // Use app directory for mobile
-    return '${directory.path}/$imagesDir/${image.name ?? image.downloadURL}.txt';
+    return '${directory.path}/$_imagesDir/${image.name ?? image.downloadURL}.txt';
   }
 
   Future<void> _saveDownloadedImage(String filePath, Uint8List? bytes) async {
