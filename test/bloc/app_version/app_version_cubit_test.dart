@@ -36,18 +36,66 @@ void main() {
       'emits [PackageInfo()] when initial',
       build: () => buildCubit,
       act: (bloc) async {
-        await bloc.started();
         when(
           mockFirebaseRemoteConfigProvider
               .getString(AppVersionCubit.mobAppVersionKey),
         ).thenAnswer(
           (_) => KTestText.build,
         );
+        await bloc.started();
       },
       expect: () async => [
         AppVersionState(
           build: AppInfoRepository.defaultValue,
           mobHasNewBuild: true,
+        ),
+      ],
+    );
+    blocTest<AppVersionCubit, AppVersionState>(
+      'emits [PackageInfo()] when initial equale version',
+      build: () => buildCubit,
+      act: (bloc) async {
+        when(
+          mockFirebaseRemoteConfigProvider
+              .getString(AppVersionCubit.mobAppVersionKey),
+        ).thenAnswer(
+          (_) => KTestText.version,
+        );
+        when(
+          mockBuildRepository.getBuildInfo(),
+        ).thenAnswer(
+          (_) async => KTestText.packageInfo,
+        );
+        await bloc.started();
+      },
+      expect: () async => [
+        AppVersionState(
+          build: KTestText.packageInfo,
+          mobHasNewBuild: false,
+        ),
+      ],
+    );
+    blocTest<AppVersionCubit, AppVersionState>(
+      'emits [PackageInfo()] when initial config version low',
+      build: () => buildCubit,
+      act: (bloc) async {
+        when(
+          mockFirebaseRemoteConfigProvider
+              .getString(AppVersionCubit.mobAppVersionKey),
+        ).thenAnswer(
+          (_) => KTestText.oldVersion,
+        );
+        when(
+          mockBuildRepository.getBuildInfo(),
+        ).thenAnswer(
+          (_) async => KTestText.packageInfo,
+        );
+        await bloc.started();
+      },
+      expect: () async => [
+        AppVersionState(
+          build: KTestText.packageInfo,
+          mobHasNewBuild: false,
         ),
       ],
     );
