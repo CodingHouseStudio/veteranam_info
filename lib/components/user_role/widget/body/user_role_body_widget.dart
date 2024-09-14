@@ -52,9 +52,9 @@ class UserRoleBodyWidget extends StatelessWidget {
                   mobVerticalTextPadding: KPadding.kPaddingSize16,
                   deskIconPadding: KPadding.kPaddingSize16,
                   deskPadding: const EdgeInsets.symmetric(
-                        vertical: KPadding.kPaddingSize16,
-                        horizontal: KPadding.kPaddingSize30,
-                      ),
+                    vertical: KPadding.kPaddingSize16,
+                    horizontal: KPadding.kPaddingSize30,
+                  ),
                 ),
                 KSizedBox.kHeightSizedBox24,
                 Center(
