@@ -122,7 +122,7 @@ abstract class KMockText {
     titleEN: questionTitleEN,
     subtitle: questionSubtitle,
     subtitleEN: questionSubtitleEN,
-    navigationLink: 'null',
+    // navigationLink: 'null',
   );
 
   static final discountModel = DiscountModel(
@@ -228,6 +228,7 @@ abstract class KAppText {
   static const String iphoneInstallUrl =
       'https://apps.apple.com/app/id$_mobAppId';
   static const String _mobAppId = 'info.veteranam';
+  static const String androidPackageName = 'com.veteranam.package';
   static List<String> get routes => [
         KRoute.discounts.name,
         KRoute.support.name,

@@ -50,10 +50,16 @@ class GetFailur {
   }) {
     // debugPrint('SomeFailure: ${error.code}');
     switch (error.code) {
+      case 'not-found':
+        return GetFailur(
+          status: SomeFailure.notFound(
+            error: error,
+            stack: stack,
+          ),
+        );
       case 'missing-argument':
       case 'timeout':
       case 'canceled':
-      case 'not-found':
       case 'permission-denied':
       case 'out-of-range':
       case 'data-error':
@@ -223,6 +229,43 @@ class SignUpWithGoogleFailure {
         );
       default:
         return SignUpWithGoogleFailure(
+          status: SomeFailure.serverError(error: error, stack: stack),
+        );
+    }
+  }
+
+  final SomeFailure status;
+}
+
+class SignUpWithFacebookFailure {
+  const SignUpWithFacebookFailure({required this.status});
+
+  factory SignUpWithFacebookFailure.fromCode({
+    required FirebaseAuthException error,
+    StackTrace? stack,
+  }) {
+    // debugPrint('SomeFailure: ${error.code}');
+    switch (error.code) {
+      case 'account-exists-with-different-credential':
+      case 'user-not-found':
+      case 'wrong-password':
+      case 'invalid-credential':
+      case 'user-disabled':
+      case 'invalid-verification-code':
+      case 'invalid-verification-id':
+        return SignUpWithFacebookFailure(
+          status: SomeFailure.notFound(error: error, stack: stack),
+        );
+      case 'operation-not-allowed':
+        return SignUpWithFacebookFailure(
+          status: SomeFailure.serverError(error: error, stack: stack),
+        );
+      case 'network-error':
+        return SignUpWithFacebookFailure(
+          status: SomeFailure.network(error: error, stack: stack),
+        );
+      default:
+        return SignUpWithFacebookFailure(
           status: SomeFailure.serverError(error: error, stack: stack),
         );
     }

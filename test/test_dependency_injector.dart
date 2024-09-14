@@ -1,10 +1,12 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:dio/dio.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:veteranam/components/components.dart';
@@ -24,8 +26,10 @@ void configureDependenciesTest() {
   // KTest.scroll = null;
   // Services
   GetIt.I.registerSingleton<FirebaseCrashlytics>(MockFirebaseCrashlytics());
+  GetIt.I.registerSingleton<Dio>(Dio());
   GetIt.I.registerSingleton<FirebaseAuth>(MockFirebaseAuth());
   GetIt.I.registerSingleton<GoogleSignIn>(GoogleSignIn());
+  GetIt.I.registerSingleton<FacebookAuth>(MockFacebookAuth());
   GetIt.I.registerSingleton<FakeClient>(FakeClient());
   GetIt.I.registerSingleton<FirebaseAnalytics>(MockFirebaseAnalytics());
   GetIt.I.registerSingleton<FirebaseRemoteConfig>(MockFirebaseRemoteConfig());
@@ -39,6 +43,11 @@ void configureDependenciesTest() {
   GetIt.I.registerSingleton<FirebaseRemoteConfigProvider>(
     FirebaseRemoteConfigProvider(
       GetIt.I.get<FirebaseRemoteConfig>(),
+    ),
+  );
+  GetIt.I.registerSingleton<ArtifactDownloadHelper>(
+    ArtifactDownloadHelper(
+      GetIt.I.get<Dio>(),
     ),
   );
 
@@ -63,6 +72,7 @@ void configureDependenciesTest() {
       GetIt.I.get<FirebaseAuth>(),
       GetIt.I.get<GoogleSignIn>(),
       CacheClient(),
+      GetIt.I.get<FacebookAuth>(),
     ),
   );
   GetIt.I.registerSingleton<AuthenticationRepository>(
@@ -196,7 +206,13 @@ void configureFailureDependenciesTest() {
   KTest.testReleaseMode = true;
   // KTest.scroll = null;
   // Services
+  GetIt.I.registerSingleton<Dio>(Dio());
   GetIt.I.registerSingleton<FirebaseCrashlytics>(MockFirebaseCrashlytics());
+  GetIt.I.registerSingleton<ArtifactDownloadHelper>(
+    ArtifactDownloadHelper(
+      GetIt.I.get<Dio>(),
+    ),
+  );
 
   // Repositories
   GetIt.I.registerLazySingleton<FailureRepository>(

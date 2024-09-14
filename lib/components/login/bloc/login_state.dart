@@ -28,7 +28,17 @@ class LoginState with _$LoginState {
     required EmailFieldModel email,
     required PasswordFieldModel password,
     required LoginError? failure,
-    required bool? fieldsIsCorrect,
-    required bool showPasswordField,
+    required LoginEnum formState,
   }) = _LoginState;
+}
+
+enum LoginEnum {
+  initial,
+  showPassword,
+  inProgress,
+  invalidData,
+  passwordInProgress,
+  passwordInvalidData,
+  // loginLoading,
+  success
 }

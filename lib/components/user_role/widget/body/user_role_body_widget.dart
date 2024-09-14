@@ -50,6 +50,11 @@ class UserRoleBodyWidget extends StatelessWidget {
                   textColor: AppColors.materialThemeKeyColorsSecondary,
                   mobHorizontalTextPadding: KPadding.kPaddingSize40,
                   mobVerticalTextPadding: KPadding.kPaddingSize16,
+                  deskIconPadding: KPadding.kPaddingSize16,
+                  deskPadding: const EdgeInsets.symmetric(
+                        vertical: KPadding.kPaddingSize16,
+                        horizontal: KPadding.kPaddingSize30,
+                      ),
                 ),
                 KSizedBox.kHeightSizedBox24,
                 Center(
@@ -59,7 +64,7 @@ class UserRoleBodyWidget extends StatelessWidget {
                     style: KButtonStyles.borderBlackButtonStyle,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
-                        vertical: KPadding.kPaddingSize12,
+                        vertical: KPadding.kPaddingSize16,
                         horizontal: KPadding.kPaddingSize12,
                       ),
                       child: Text(

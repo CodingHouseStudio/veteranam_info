@@ -10,9 +10,12 @@ class EmailPasswordFieldsWidget extends StatefulWidget {
     required this.email,
     required this.backPassword,
     required this.isLogin,
+    required this.showErrorText,
+    this.bottomTextKey,
     super.key,
     this.errorTextEmail,
     this.errorTextPassword,
+    this.bottomError,
   });
 
   final bool showPassword;
@@ -20,10 +23,13 @@ class EmailPasswordFieldsWidget extends StatefulWidget {
   final void Function(String) onChangedEmail;
   final void Function(String) onChangedPassword;
   final String? errorTextEmail;
+  final bool showErrorText;
   final String? errorTextPassword;
   final String email;
   final void Function() backPassword;
   final bool isLogin;
+  final String? bottomError;
+  final Key? bottomTextKey;
 
   @override
   State<EmailPasswordFieldsWidget> createState() =>
@@ -62,28 +68,28 @@ class _EmailPasswordFieldsWidgetState extends State<EmailPasswordFieldsWidget>
               top: KPadding.kPaddingSize16,
               bottom: KPadding.kPaddingSize16,
             ),
-            child: ButtonWidget(
-              key: KWidgetkeys.widget.emailPasswordFields.buttonHidePassword,
-              onPressed: () {
-                widget.backPassword();
-                passwordFocusNode.requestFocus();
-              },
-              text: widget.email,
-              padding: widget.isDesk
-                  ? const EdgeInsets.only(
-                      top: KPadding.kPaddingSize8,
-                      bottom: KPadding.kPaddingSize8,
-                      right: KPadding.kPaddingSize16,
-                      left: KPadding.kPaddingSize8,
-                    )
-                  : const EdgeInsets.all(
-                      KPadding.kPaddingSize16,
-                    ),
-              isDesk: widget.isDesk,
-              // backgroundColor: AppColors.white,
-              icon: KIcon.arrowBackIOS,
-              iconRightMerge: KSizedBox.kWidthSizedBox8,
-              textStyle: AppTextStyle.materialThemeTitleMedium,
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: ButtonWidget(
+                key: KWidgetkeys.widget.emailPasswordFields.buttonHidePassword,
+                onPressed: () {
+                  widget.backPassword();
+                  passwordFocusNode.requestFocus();
+                },
+                text: widget.email,
+                padding: const EdgeInsets.only(
+                  top: KPadding.kPaddingSize8,
+                  bottom: KPadding.kPaddingSize8,
+                  right: KPadding.kPaddingSize16,
+                  left: KPadding.kPaddingSize8,
+                ),
+                isDesk: widget.isDesk,
+                textButtonStyle: KButtonStyles.lightGrayButtonStyle,
+                // backgroundColor: AppColors.white,
+                icon: KIcon.arrowBackIOS,
+                iconRightMerge: KSizedBox.kWidthSizedBox8,
+                textStyle: AppTextStyle.materialThemeTitleMedium,
+              ),
             ),
           ),
         //KSizedBox.kHeightSizedBox40,
@@ -104,7 +110,7 @@ class _EmailPasswordFieldsWidgetState extends State<EmailPasswordFieldsWidget>
             widgetKey: KWidgetkeys.widget.emailPasswordFields.fieldPassword,
             onChanged: widget.onChangedPassword,
             errorText: widget.errorTextPassword,
-            hintText: context.l10n.createSecurePassword,
+            hintText: context.l10n.password,
             isDesk: widget.isDesk,
             controller: passwordController,
             suffixIcon: Padding(
@@ -126,21 +132,29 @@ class _EmailPasswordFieldsWidgetState extends State<EmailPasswordFieldsWidget>
             focusNode: passwordFocusNode,
             disposeFocusNode: false,
             obscureText: obscurePassword,
+            showErrorText: widget.showErrorText,
           ),
           KSizedBox.kHeightSizedBox8,
           if (widget.isLogin)
-            Padding(
-              padding: const EdgeInsets.only(
-                left: KPadding.kPaddingSize32,
-              ),
-              child: TextButton(
-                key: KWidgetkeys.widget.emailPasswordFields.recoveryButton,
-                style: KButtonStyles.withoutStyle,
-                onPressed: null,
-                child: Text(
-                  context.l10n.dontRememberPassword,
-                  style: AppTextStyle.materialThemeTitleMedium.copyWith(
-                    decoration: TextDecoration.underline,
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Padding(
+                padding: widget.isDesk
+                    ? const EdgeInsets.only(
+                        left: KPadding.kPaddingSize32,
+                      )
+                    : const EdgeInsets.only(
+                        left: KPadding.kPaddingSize16,
+                      ),
+                child: TextButton(
+                  key: KWidgetkeys.widget.emailPasswordFields.recoveryButton,
+                  style: KButtonStyles.withoutStyle,
+                  onPressed: null,
+                  child: Text(
+                    context.l10n.dontRememberPassword,
+                    style: AppTextStyle.materialThemeTitleMedium.copyWith(
+                      decoration: TextDecoration.underline,
+                    ),
                   ),
                 ),
               ),
@@ -153,7 +167,17 @@ class _EmailPasswordFieldsWidgetState extends State<EmailPasswordFieldsWidget>
             hintText: context.l10n.email,
             isDesk: widget.isDesk,
             controller: emailController,
+            showErrorText: widget.showErrorText,
+            inputFormatterList: [EmailInputFormatter()],
           ),
+        if (widget.bottomError != null) ...[
+          KSizedBox.kHeightSizedBox8,
+          Text(
+            widget.bottomError!,
+            key: widget.bottomTextKey,
+            style: AppTextStyle.materialThemeBodyMediumError,
+          ),
+        ],
       ],
       // ),
     );

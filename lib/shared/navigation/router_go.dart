@@ -147,6 +147,16 @@ GoRouter router = GoRouter(
             child: const DiscountsScreen(),
           ),
           routes: [
+            if (Config.isDevelopment)
+              GoRoute(
+                name: KRoute.myDiscounts.name,
+                path: KRoute.myDiscounts.path,
+                pageBuilder: (context, state) => NoTransitionPage(
+                  key: state.pageKey,
+                  name: state.name,
+                  child: const MyDiscountsScreen(),
+                ),
+              ),
             GoRoute(
               name: KRoute.discountCard.name,
               path: ':cardId',
@@ -160,16 +170,6 @@ GoRouter router = GoRouter(
                 ),
               ),
             ),
-            if (Config.isDevelopment)
-              GoRoute(
-                name: KRoute.myDiscounts.name,
-                path: KRoute.myDiscounts.path,
-                pageBuilder: (context, state) => NoTransitionPage(
-                  key: state.pageKey,
-                  name: state.name,
-                  child: const MyDiscountsScreen(),
-                ),
-              ),
           ],
         ),
         if (Config.isDevelopment)

@@ -138,6 +138,30 @@ class AuthenticationRepository {
     );
   }
 
+  Future<Either<SomeFailure, bool>> signUp({
+    required String email,
+    required String password,
+  }) async {
+    final result = await iAppAuthenticationRepository.signUp(
+      email: email,
+      password: password,
+    );
+    return result.fold(
+      (l) {
+        // debugPrint('error: $l');
+        _authenticationStatuscontroller.add(
+          AuthenticationStatus.anonymous,
+        );
+        return Left(l);
+      },
+      (r) {
+        // debugPrint('authenticated');
+        _authenticationStatuscontroller.add(AuthenticationStatus.authenticated);
+        return Right(r);
+      },
+    );
+  }
+
   Future<Either<SomeFailure, bool>> _createFcmUserSetting() async {
     final result = await iAppAuthenticationRepository.createFcmUserSetting();
     return result.fold(
@@ -158,10 +182,12 @@ class AuthenticationRepository {
     return result.fold(
       (l) {
         // debugPrint('error: $l');
+        _authenticationStatuscontroller.add(AuthenticationStatus.unknown);
         return Left(l);
       },
       (r) {
         // debugPrint('authenticated');
+        _authenticationStatuscontroller.add(AuthenticationStatus.anonymous);
         return Right(r);
       },
     );
@@ -185,13 +211,44 @@ class AuthenticationRepository {
     );
   }
 
+  Future<Either<SomeFailure, bool>> signUpWithFacebook() async {
+    final result = await iAppAuthenticationRepository.signUpWithFacebook();
+    return result.fold(
+      (l) {
+        // debugPrint('error: $l');
+        _authenticationStatuscontroller.add(
+          AuthenticationStatus.anonymous,
+        );
+        return Left(l);
+      },
+      (r) {
+        // debugPrint('authenticated');
+        _authenticationStatuscontroller.add(AuthenticationStatus.authenticated);
+        return Right(r);
+      },
+    );
+  }
+
   Future<Either<SomeFailure, bool>> logOut() async {
     final result = await iAppAuthenticationRepository.logOut();
+    return result.fold(
+      (l) {
+        // debugPrint('error: $l');
+        // _authenticationStatuscontroller.add(
+        //   AuthenticationStatus.anonymous,
+        // );
+        return Left(l);
+      },
+      (r) {
+        // debugPrint('authenticated');
+        _authenticationStatuscontroller.add(AuthenticationStatus.unknown);
+        return Right(r);
+      },
+    );
     // resault.fold(
     //   (l) => debugPrint(l.toString()),
     //   (r) => debugPrint('ever reached here?'),
     // );
-    return result;
   }
 
   Future<Either<SomeFailure, bool>> sendVerificationCodeToEmail({

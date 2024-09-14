@@ -48,14 +48,27 @@ class AppVersionCubit extends Cubit<AppVersionState> {
     required String mobAppVersion,
     required PackageInfo buildInfo,
   }) {
+    var mobHasNewBuild = false;
+    if (KTest.testReleaseMode) {
+      try {
+        final configVersion = _parseVersionToInt(mobAppVersion);
+        final currentVersion = _parseVersionToInt(buildInfo.version);
+        mobHasNewBuild = configVersion > currentVersion;
+      } catch (e) {
+        mobHasNewBuild = buildInfo.version != mobAppVersion;
+      }
+    }
     emit(
       AppVersionState(
         build: buildInfo,
-        mobHasNewBuild:
-            KTest.testReleaseMode && buildInfo.version != mobAppVersion,
+        mobHasNewBuild: mobHasNewBuild,
       ),
     );
   }
+
+  /// Parse version for example if we have 0.2.0 this method parse it to 20
+  int _parseVersionToInt(String version) =>
+      int.parse(version.replaceAll('.', ''));
 
   @override
   Future<void> close() {

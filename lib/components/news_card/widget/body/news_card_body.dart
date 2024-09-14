@@ -13,19 +13,24 @@ class NewsCardBody extends StatelessWidget {
       builder: (context, _) {
         return ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: KMinMaxSize.maxWidth640),
-          child: SkeletonizerWidget(
-            isLoading: _.loadingStatus != LoadingStatus.loaded,
-            child: NewsCardWidget(
-              key: KWidgetkeys.screen.newsCard.widget,
-              informationItem: _.informationModel ?? KMockText.informationModel,
-              isDesk: isDesk,
-              closeWidget: CloseButtonWidget(
-                widgetKey: KWidgetkeys.screen.newsCard.closeButton,
+          child: CardEmptyWidget(
+            cardIsEmpty: _.failure != null,
+            popRouteName: KRoute.information.name,
+            chilcWidget: SkeletonizerWidget(
+              isLoading: _.loadingStatus != LoadingStatus.loaded,
+              child: NewsCardWidget(
+                key: KWidgetkeys.screen.newsCard.widget,
+                informationItem:
+                    _.informationModel ?? KMockText.informationModel,
                 isDesk: isDesk,
-                routeName: KRoute.information.name,
+                closeWidget: CloseButtonWidget(
+                  widgetKey: KWidgetkeys.screen.newsCard.closeButton,
+                  isDesk: isDesk,
+                  routeName: KRoute.information.name,
+                ),
+                share:
+                    '${KRoute.home.path}${KRoute.information.path}/${_.informationModel?.id}',
               ),
-              share:
-                  '${KRoute.home.path}${KRoute.information.path}/${_.informationModel?.id}',
             ),
           ),
         );

@@ -3,27 +3,39 @@ import 'package:injectable/injectable.dart';
 import 'package:veteranam/shared/shared.dart';
 
 @Injectable()
-class AuthenticationServicesCubit extends Cubit<AuthenticationServicesFailure> {
+class AuthenticationServicesCubit
+    extends Cubit<AuthenticationServicesFailure?> {
   AuthenticationServicesCubit({
-    required IAppAuthenticationRepository appAuthenticationRepository,
-  })  : _appAuthenticationRepository = appAuthenticationRepository,
+    required AuthenticationRepository authenticationRepository,
+  })  : _authenticationRepository = authenticationRepository,
         super(AuthenticationServicesFailure.initial);
-  final IAppAuthenticationRepository _appAuthenticationRepository;
+  final AuthenticationRepository _authenticationRepository;
   Future<void> authenticationUseGoogle() async {
-    final result = await _appAuthenticationRepository.signUpWithGoogle();
+    final result = await _authenticationRepository.signUpWithGoogle();
     result.fold(
       (l) => emit(
         l._toAuthenticationServicesFailure(),
       ),
       (r) => emit(
-        AuthenticationServicesFailure.none,
+        null,
+      ),
+    );
+  }
+
+  Future<void> authenticationUseFacebook() async {
+    final result = await _authenticationRepository.signUpWithFacebook();
+    result.fold(
+      (l) => emit(
+        l._toAuthenticationServicesFailure(),
+      ),
+      (r) => emit(
+        null,
       ),
     );
   }
 }
 
 enum AuthenticationServicesFailure {
-  none,
   error,
   initial,
 }

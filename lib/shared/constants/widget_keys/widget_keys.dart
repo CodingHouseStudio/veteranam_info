@@ -89,6 +89,7 @@ part 'widget/double_button.dart';
 part 'widget/loading_button.dart';
 part 'widget/mob_update.dart';
 part 'widget/network_banner.dart';
+part 'widget/card_epmty.dart';
 part 'widget/drop_down_button.dart';
 
 abstract class KWidgetkeys {
