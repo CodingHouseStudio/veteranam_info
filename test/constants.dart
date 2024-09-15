@@ -503,6 +503,7 @@ abstract class KScreenBlocName {
   static const feedback = 'Feedback Screen';
   static const mobSettings = 'Settings Screen';
   static const mobFaq = 'Mob FAQ Screen';
+  static const userRole = 'User Role Screen';
 
   static const authenticationServices = 'Authentication Services';
   static const appRepository = 'App';

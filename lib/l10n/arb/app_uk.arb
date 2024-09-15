@@ -1146,5 +1146,33 @@
   "signUpInWith": "Зареєструватись через",
   "@signUpInWith": {
     "examples": "Текст на сторінці SignUp перед кнопкою увійти за допомогою google, facebook, apple."
+  },
+  "userRole": "Керуйте знижками у бізнес-кабінеті \"Veteranam\"",
+  "@userRole": {
+    "examples": "Заголовок на сторінці UserRole"
+  },
+  "userRoleSubtitle": "Реєструйтесь як бізнес-користувач і самостійно додавайте, редагуйте нові пропозиції",
+  "@userRoleSubtitle": {
+    "examples": "Підзаголовок на сторінці UserRole"
+  },
+  "signUpBusiness": "Реєстрація як БІЗНЕС",
+  "@signUpBusiness": {
+    "examples": "Текст для кнопки реєстрації бізнесу на сторінці UserRole",
+    "description": "Кнопка реєстрації бізнесу на сторінці UserRole"
+  },
+  "signUpUser": "Реєстрація як КОРИСТУВАЧ",
+  "@signUpUser": {
+    "examples": "Текст для кнопки реєстрації користувача на сторінці UserRole",
+    "description": "Кнопка реєстрації користувача на сторінці UserRole"
+  },
+  "asUser": "як ПРИВАТНА особа",
+  "@asUser": {
+    "examples": "Текст для кнопки входу користувача на сторінці UserRole",
+    "description": "Кнопка для входу користувача на сторінці UserRole"
+  },
+  "asBusiness": "як БІЗНЕС користувач",
+  "@asBusiness": {
+    "examples": "Текст для кнопки входу для бізнесу на сторінці UserRole",
+    "description": "Кнопка для входу бізнесу на сторінці UserRole"
   }
 }

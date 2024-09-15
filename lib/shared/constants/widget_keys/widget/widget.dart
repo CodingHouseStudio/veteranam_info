@@ -53,4 +53,5 @@ class _WidgetKeys {
   final mobUpdate = _MobUpdateKeys();
   final networkBanner = _NetworkBannerKeys();
   final cardEmpty = _CardEmptyKeys();
+  final dropDownButton = _DropDownButtonKeys();
 }

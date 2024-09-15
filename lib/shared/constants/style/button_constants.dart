@@ -91,9 +91,6 @@ abstract class KButtonStyles {
     overlayColor: WidgetStatePropertyAll(Colors.transparent),
   );
   static const borderButtonStyle = ButtonStyle(
-    minimumSize: WidgetStatePropertyAll(
-      Size(KMinMaxSize.minWidth100, KMinMaxSize.minHeight50),
-    ),
     shape: WidgetStatePropertyAll(
       RoundedRectangleBorder(
         borderRadius: KBorderRadius.kBorderRadius32,
