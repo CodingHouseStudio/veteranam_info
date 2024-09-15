@@ -292,7 +292,7 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                     KSizedBox.kWidthSizedBox16,
                     DoubleButtonWidget(
                       widgetKey: KWidgetkeys.widget.nawbar.loginButton,
-                      onPressed: () => loginNavigation(context),
+                      onPressed: () => userRoleNavigation(context),
                       text: context.l10n.login,
                       isDesk: true,
                       darkMode: true,
@@ -301,7 +301,7 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                     KSizedBox.kWidthSizedBox4,
                     IconButtonWidget(
                       key: KWidgetkeys.widget.nawbar.loginIcon,
-                      onPressed: () => loginNavigation(context),
+                      onPressed: () => userRoleNavigation(context),
                       icon: KIcon.person
                           .copyWith(color: AppColors.materialThemeWhite),
                       background: AppColors.materialThemeKeyColorsSecondary,
@@ -393,6 +393,6 @@ class _NawbarWidgetState extends State<NawbarWidget> {
         icon: icon,
         widgetKey: key,
       );
-  void loginNavigation(BuildContext context) =>
-      context.goNamed(KRoute.login.name);
+  void userRoleNavigation(BuildContext context) =>
+      context.goNamed(KRoute.userRole.name);
 }
