@@ -8,6 +8,7 @@ export 'dialogs/dialogs.dart';
 export 'discount/discount.dart';
 export 'donate/donate.dart';
 export 'double_button_helper.dart';
+export 'drop_down_button/drop_down_button.dart';
 export 'drop_list_field_helper.dart';
 export 'email_button_helper.dart';
 export 'email_password_fields/email_password_fields.dart';

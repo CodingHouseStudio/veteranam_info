@@ -32,4 +32,5 @@ class _ScreenKeys {
   final newsCard = _NewsCardDialogKeys();
   final mobSettings = _MobSettingsKeys();
   final mobFaq = _MobFaqKeys();
+  final userRole = _UserRoleKeys();
 }

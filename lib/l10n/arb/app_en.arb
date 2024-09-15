@@ -1138,5 +1138,33 @@
   "signUpInWith": "Sign up with",
   "@signUpInWith": {
     "examples": "The text on the SignUp page before the login button with google, facebook, apple."
+  },
+  "userRole": "Manage discounts in your business account \"Veteranam\"",
+  "@userRole": {
+    "examples": "Title on the UserRole page"
+  },
+  "userRoleSubtitle": "Register as a business user and add and edit new offers on your own",
+  "@userRoleSubtitle": {
+    "examples": "Subtitle on the UserRole page"
+  },
+  "signUpBusiness": "Registration as a BUSINESS",
+  "@signUpBusiness": {
+    "examples": "Text for the business registration button on the UserRole page",
+    "description": "The button is used to go to the business SignUp page"
+  },
+  "signUpUser": "Registration as a USER",
+  "@signUpUser": {
+    "examples": "Text for button on the UserRole page",
+    "description": "The button is used to go to the user SignUp page"
+  },
+  "asUser": "as a PRIVATE person",
+  "@asUser": {
+    "examples": "Text for the user login button on the UserRole page",
+    "description": "User login button on the UserRole page"
+  },
+  "asBusiness": "as a BUSINESS user",
+  "@asBusiness": {
+    "examples": "Text for the business login button on the UserRole page.",
+    "description": "Business login button on the UserRole page"
   }
 }
