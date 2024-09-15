@@ -26,7 +26,7 @@ Future<void> nawbarLoginNavigationHelper({
 
   verify(
     () => mockGoRouter.goNamed(
-      KRoute.login.name,
+      KRoute.userRole.name,
     ),
   ).called(1);
 
@@ -46,7 +46,7 @@ Future<void> nawbarLoginNavigationHelper({
 
       verify(
         () => mockGoRouter.goNamed(
-          KRoute.login.name,
+          KRoute.userRole.name,
         ),
       ).called(1);
     },

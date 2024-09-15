@@ -42,24 +42,36 @@ GoRouter router = GoRouter(
     return null;
   },
   routes: [
-    GoRoute(
-      name: KRoute.login.name,
-      path: KRoute.login.path,
-      pageBuilder: (context, state) => NoTransitionPage(
-        key: state.pageKey,
-        name: state.name,
-        child: const LoginScreen(),
+    if (Config.isDevelopment)
+      GoRoute(
+        name: KRoute.userRole.name,
+        path: KRoute.userRole.path,
+        pageBuilder: (context, state) => NoTransitionPage(
+          key: state.pageKey,
+          name: state.name,
+          child: const UserRoleScreen(),
+        ),
+        routes: [
+          GoRoute(
+            name: KRoute.login.name,
+            path: KRoute.login.path,
+            pageBuilder: (context, state) => NoTransitionPage(
+              key: state.pageKey,
+              name: state.name,
+              child: const LoginScreen(),
+            ),
+          ),
+          GoRoute(
+            name: KRoute.signUp.name,
+            path: KRoute.signUp.path,
+            pageBuilder: (context, state) => NoTransitionPage(
+              key: state.pageKey,
+              name: state.name,
+              child: const SignUpScreen(),
+            ),
+          ),
+        ],
       ),
-    ),
-    GoRoute(
-      name: KRoute.signUp.name,
-      path: KRoute.signUp.path,
-      pageBuilder: (context, state) => NoTransitionPage(
-        key: state.pageKey,
-        name: state.name,
-        child: const SignUpScreen(),
-      ),
-    ),
     if (Config.isDevelopment)
       GoRoute(
         name: KRoute.questionsForm.name,

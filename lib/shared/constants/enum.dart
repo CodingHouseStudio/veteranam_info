@@ -26,3 +26,15 @@ enum UrlEnum {
 }
 
 enum CategoryEnum { all }
+
+class DropDownItem {
+  DropDownItem({
+    required this.text,
+    required this.action,
+    required this.key,
+  });
+
+  final String text;
+  final VoidCallback? action;
+  final Key key;
+}

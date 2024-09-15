@@ -197,4 +197,13 @@ abstract class KWidgetTheme {
   );
   static const boxShadow =
       BoxShadow(color: AppColors.materialThemeBlackShadow, blurRadius: 12);
+
+  static const boxDecorationBorderBlack = BoxDecoration(
+    borderRadius: KBorderRadius.kBorderRadius32,
+    border: Border.fromBorderSide(
+      BorderSide(
+        color: AppColors.materialThemeKeyColorsSecondary,
+      ),
+    ),
+  );
 }
