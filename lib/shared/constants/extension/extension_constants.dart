@@ -225,7 +225,7 @@ extension StringExtension on String {
   }) {
     if ((Config.isProduction && kReleaseMode) || !kIsWeb) {
       final url = kIsWeb ? Uri.base.origin : 'https://veteranam.info';
-      return '$url$_urlPrefix$this';
+      return '$url${_urlPrefix(width: width, height: height)}$this';
     } else {
       return this;
     }
