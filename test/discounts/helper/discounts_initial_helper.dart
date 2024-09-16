@@ -41,7 +41,7 @@ Future<void> discountsInitialHelper(
 
       await filterChipHelper(tester);
 
-      if (Config.isDevelopment) {
+      if (Config.isBusiness) {
         expect(
           find.byKey(KWidgetkeys.screen.discounts.addDiscountButton),
           findsOneWidget,

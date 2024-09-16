@@ -21,7 +21,7 @@ void main() {
     late IUrlRepository mockUrlRepository;
     setUp(() {
       KTest.testIsWeb = false;
-      Config.value = Config.production;
+      Config.falvourValue = Config.production;
       ExtendedDateTime.current = KTestText.dateTime;
       ExtendedDateTime.id = KTestText.feedbackModel.id;
 

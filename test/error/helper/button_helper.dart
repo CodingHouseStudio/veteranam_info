@@ -7,6 +7,7 @@ import '../../test_dependency.dart';
 Future<void> buttonHelper({
   required WidgetTester tester,
   required MockGoRouter mockGoRouter,
+  required String routeName,
 }) async {
   expect(
     find.byKey(KWidgetkeys.screen.error.button),
@@ -17,7 +18,7 @@ Future<void> buttonHelper({
 
   verify(
     () => mockGoRouter.goNamed(
-      KRoute.home.name,
+      routeName,
     ),
   ).called(1);
 }
