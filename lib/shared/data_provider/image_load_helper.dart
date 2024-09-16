@@ -20,9 +20,9 @@ class ArtifactDownloadHelper {
   final _options = Options(
     responseType: ResponseType.bytes,
     headers: {
-      Headers.contentTypeHeader: 'image/*',
+      // Headers.contentTypeHeader: 'image/*',
       // 'Cache-Control': 'max-age=3600',
-      'Accept': 'image/webp,image/apng,image/*,*/*;q=1.0',
+      // 'Accept': 'image/webp,image/apng,image/*,*/*;q=1.0',
       'Connection': 'close',
     },
     receiveTimeout: const Duration(seconds: 5),
