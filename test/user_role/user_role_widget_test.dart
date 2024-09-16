@@ -32,6 +32,16 @@ void main() {
 
         await userRoleInitialHelper(tester);
       });
+      testWidgets('Drop down buttons intial', (tester) async {
+        await userRolePumpAppHelper(
+          tester: tester,
+          mockGoRouter: mockGoRouter,
+        );
+
+        await dropDownButtonHelper(
+          tester: tester,
+        );
+      });
       group('${KGroupText.goTo} ', () {
         testWidgets('Sign Up business button ', (tester) async {
           await userRolePumpAppHelper(
@@ -48,10 +58,6 @@ void main() {
           await userRolePumpAppHelper(
             tester: tester,
             mockGoRouter: mockGoRouter,
-          );
-
-          await dropDownButtonHelper(
-            tester: tester,
           );
 
           await dropDownButtonNavigationHelper(
