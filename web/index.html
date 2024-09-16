@@ -47,6 +47,7 @@
       justify-content: center;
       align-items: center;
       height: 100vh;
+      width: 100 vw;
     }
 
     .splash {
@@ -76,7 +77,6 @@
     }
 
     #splash img {
-      animation: appear 1s ease-in-out forwards;
       /* New animation for disappearing */
       opacity: 1;
       /* Initial opacity set to 1 */
@@ -84,18 +84,6 @@
       /* Increase image size to 25% of viewport width */
       height: 25vh;
       /* Increase image size to 25% of viewport height */
-    }
-
-    @keyframes appear {
-      from {
-        opacity: 0;
-      }
-
-      to {
-        opacity: 1;
-        transform: scale(1);
-        /* Optional: Remove scaling for no size change */
-      }
     }
 
     .image-container {
@@ -108,16 +96,16 @@
     }
 
     .bouncing-image {
-      width: 100%;
+      width: 75%;
       height: auto;
-      animation: bounce 2s infinite;
+      /* animation: bounce 2s infinite; */
     }
 
-    .image-container:hover .bouncing-image {
-      animation: bounce 1s infinite;
+    /* .image-container:hover .bouncing-image {
+      animation: slowBounce 4s cubic-bezier(0.25, 0.1, 0.25, 1) infinite;
     }
 
-    @keyframes bounce {
+    @keyframes slowBounce {
 
       0%,
       20%,
@@ -128,13 +116,13 @@
       }
 
       40% {
-        transform: translateY(-40px);
+        transform: translateY(-20px);
       }
 
       60% {
-        transform: translateY(-20px);
+        transform: translateY(-10px);
       }
-    }
+    } */
 
     .button {
       display: none;
@@ -169,7 +157,7 @@
       border: 2px solid #7a7a7a;
       border-radius: 50%;
       border-top-color: transparent;
-      animation: spin 1s linear infinite;
+      animation: spin 2s linear infinite;
     }
 
     @keyframes spin {
