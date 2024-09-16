@@ -146,17 +146,19 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                 if (widget.isTablet || !isFocused)
                   IconButton(
                     padding: EdgeInsets.zero,
-                    onPressed: () => EasyDebounce.debounce(
-                      KAppText.logo,
-                      Duration.zero,
-                      () {
-                        if (KTest.testIsWeb
-                            // || !widget.showMobileNawbar
-                            ) {
-                          context.goNamed(KRoute.home.name);
-                        }
-                      },
-                    ),
+                    onPressed: Config.isUser
+                        ? () => EasyDebounce.debounce(
+                              KAppText.logo,
+                              Duration.zero,
+                              () {
+                                if (KTest.testIsWeb
+                                    // || !widget.showMobileNawbar
+                                    ) {
+                                  context.goNamed(KRoute.home.name);
+                                }
+                              },
+                            )
+                        : null,
                     icon: KImage.logo(
                       key: KWidgetkeys.widget.nawbar.logo,
                       // width: 78,

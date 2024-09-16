@@ -20,7 +20,7 @@ void configureDependenciesTest() {
   userSetting();
   mobBuild();
   KTest.testIsWeb = true;
-  Config.value = Config.development;
+  Config.falvourValue = Config.development;
   KTest.isTest = true;
   KTest.testReleaseMode = true;
   // KTest.scroll = null;
@@ -201,7 +201,7 @@ void configureFailureDependenciesTest() {
   // register logic if user id empty user setting is also empty
   userSetting();
   KTest.testIsWeb = true;
-  Config.value = Config.development;
+  Config.falvourValue = Config.development;
   KTest.isTest = true;
   KTest.testReleaseMode = true;
   // KTest.scroll = null;

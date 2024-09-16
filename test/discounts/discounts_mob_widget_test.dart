@@ -27,7 +27,7 @@ void main() {
       KTest.testIsWeb = false;
       KPlatformConstants.isWebDesktop = true;
       KTest.testReleaseMode = true;
-      Config.value = Config.production;
+      Config.falvourValue = Config.production;
       ExtendedDateTime.id = KTestText.id;
       ExtendedDateTime.current = KTestText.dateTime;
       mockDiscountRepository = MockIDiscountRepository();
