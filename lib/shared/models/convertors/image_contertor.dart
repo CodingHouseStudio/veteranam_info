@@ -18,6 +18,7 @@ class ImageConverter implements JsonConverter<ImageModel?, List<dynamic>?> {
       return null;
     } else {
       unawaited(_artifactDownloadHelper.downloadArtifacts(list!.first));
+
       return list.first;
     }
   }
