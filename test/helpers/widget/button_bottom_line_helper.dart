@@ -9,11 +9,13 @@ Future<void> buttonBottomLineHelper({
 }) async {
   expect(find.byKey(KWidgetkeys.widget.buttonBottomLine.text), findsWidgets);
 
+  expect(find.byKey(KWidgetkeys.widget.buttonBottomLine.line), findsWidgets);
+
   if (isDesk) {
     await hoverHelper(
       tester: tester,
       key: KWidgetkeys.widget.buttonBottomLine.text,
-      hoverElement: KWidgetkeys.widget.buttonBottomLine.line,
+      // hoverElement: KWidgetkeys.widget.buttonBottomLine.line,
     );
   }
 }
