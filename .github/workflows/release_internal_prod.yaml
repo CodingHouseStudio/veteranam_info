@@ -19,6 +19,7 @@ jobs:
       FLAVOUR: "production"
       run_sentry_plugin: true
       project_name: "veteran-production"
+      ROLE: "user"
   #  ios-build:
   #    name: Deploy beta build to TestFlight
   #    runs-on: macOS-latest
