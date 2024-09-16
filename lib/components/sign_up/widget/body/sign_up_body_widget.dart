@@ -24,17 +24,25 @@ class SignUpBodyWidget extends StatelessWidget {
           ),
           mainChildWidgetsFunction: ({required isDesk}) => [
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Expanded(
-                  child: Text(
+                if (isDesk)
+                  Expanded(
+                    child: Text(
+                      context.l10n.signUp,
+                      key: KWidgetkeys.screen.signUp.title,
+                      style: isDesk
+                          ? AppTextStyle.materialThemeDisplayLarge
+                          : AppTextStyle.materialThemeDisplaySmall,
+                    ),
+                  )
+                else
+                  Text(
                     context.l10n.signUp,
                     key: KWidgetkeys.screen.signUp.title,
                     style: isDesk
                         ? AppTextStyle.materialThemeDisplayLarge
                         : AppTextStyle.materialThemeDisplaySmall,
                   ),
-                ),
                 if (isDesk)
                   KSizedBox.kWidthSizedBox32
                 else
