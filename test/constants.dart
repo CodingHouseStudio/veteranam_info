@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:veteranam/bootstrap.dart';
 import 'package:veteranam/firebase_options_development.dart';
 import 'package:veteranam/shared/shared.dart';
@@ -92,6 +93,9 @@ abstract class KTestText {
 
   static const phoneNumber = '+3809900000';
   static const build = '50';
+
+  static const version = '0.5.0';
+  static const oldVersion = '0.2.0';
 
   static final questionModelItems = <QuestionModel>[
     KMockText.questionModel,
@@ -287,6 +291,13 @@ abstract class KTestText {
         image: imageModel,
       ),
   ];
+
+  static final packageInfo = PackageInfo(
+    appName: 'test',
+    packageName: 'test',
+    version: version,
+    buildNumber: '1',
+  );
 
   static final feedbackModelIncorect = FeedbackModel(
     id: dateTime.microsecondsSinceEpoch.toString(),
@@ -492,6 +503,7 @@ abstract class KScreenBlocName {
   static const feedback = 'Feedback Screen';
   static const mobSettings = 'Settings Screen';
   static const mobFaq = 'Mob FAQ Screen';
+  static const userRole = 'User Role Screen';
 
   static const authenticationServices = 'Authentication Services';
   static const appRepository = 'App';

@@ -1,6 +1,6 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:flutter/foundation.dart' deferred as foundation;
-import 'package:flutter/foundation.dart';
+// import 'package:flutter/foundation.dart' deferred as foundation;
+import 'package:flutter/foundation.dart' show kIsWeb, kReleaseMode;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -23,9 +23,11 @@ GoRouter router = GoRouter(
     if (Config.isProduction && kReleaseMode)
       FirebaseAnalyticsObserver(
         analytics: FirebaseAnalytics.instance,
-        onError: (_) => foundation.kDebugMode
-            ? debugPrint('FirebaseAnalyticsObserver error $_')
-            : null,
+        // We have in the if kReleaseMode
+        // onError: (_) =>
+        // foundation.kDebugMode
+        //     ? debugPrint('FirebaseAnalyticsObserver error $_')
+        //     : null,
       ),
   ],
   redirect: (BuildContext context, GoRouterState state) async {
@@ -42,24 +44,36 @@ GoRouter router = GoRouter(
     return null;
   },
   routes: [
-    GoRoute(
-      name: KRoute.login.name,
-      path: KRoute.login.path,
-      pageBuilder: (context, state) => NoTransitionPage(
-        key: state.pageKey,
-        name: state.name,
-        child: const LoginScreen(),
+    if (Config.isDevelopment)
+      GoRoute(
+        name: KRoute.userRole.name,
+        path: KRoute.userRole.path,
+        pageBuilder: (context, state) => NoTransitionPage(
+          key: state.pageKey,
+          name: state.name,
+          child: const UserRoleScreen(),
+        ),
+        routes: [
+          GoRoute(
+            name: KRoute.login.name,
+            path: KRoute.login.path,
+            pageBuilder: (context, state) => NoTransitionPage(
+              key: state.pageKey,
+              name: state.name,
+              child: const LoginScreen(),
+            ),
+          ),
+          GoRoute(
+            name: KRoute.signUp.name,
+            path: KRoute.signUp.path,
+            pageBuilder: (context, state) => NoTransitionPage(
+              key: state.pageKey,
+              name: state.name,
+              child: const SignUpScreen(),
+            ),
+          ),
+        ],
       ),
-    ),
-    GoRoute(
-      name: KRoute.signUp.name,
-      path: KRoute.signUp.path,
-      pageBuilder: (context, state) => NoTransitionPage(
-        key: state.pageKey,
-        name: state.name,
-        child: const SignUpScreen(),
-      ),
-    ),
     if (Config.isDevelopment)
       GoRoute(
         name: KRoute.questionsForm.name,
@@ -86,12 +100,12 @@ GoRouter router = GoRouter(
         ),
       ),
     GoRoute(
-      name: KTest.testIsWeb ? KRoute.home.name : KRoute.settings.name,
+      name: kIsWeb ? KRoute.home.name : KRoute.settings.name,
       path: KRoute.home.path,
       pageBuilder: (context, state) => NoTransitionPage(
         key: state.pageKey,
         name: state.name,
-        child: KTest.testIsWeb ? const HomeScreen() : const MobSettingsScreen(),
+        child: kIsWeb ? const HomeScreen() : const MobSettingsScreen(),
       ),
       routes: [
         GoRoute(
@@ -135,29 +149,27 @@ GoRouter router = GoRouter(
             child: const DiscountsScreen(),
           ),
           routes: [
+            // if (Config.isDevelopment)
+            //   GoRoute(
+            //     name: KRoute.myDiscounts.name,
+            //     path: KRoute.myDiscounts.path,
+            //     pageBuilder: (context, state) => NoTransitionPage(
+            //       key: state.pageKey,
+            //       name: state.name,
+            //       child: const MyDiscountsScreen(),
+            //     ),
+            //   ),
             GoRoute(
               name: KRoute.discountCard.name,
               path: ':cardId',
               pageBuilder: (context, state) => DialogPage(
                 key: state.pageKey,
                 name: state.name,
-                builder: (_) => SizedBox(
-                  child: DiscountCardDialog(
-                    id: state.pathParameters['cardId'],
-                  ),
+                builder: (_) => DiscountCardDialog(
+                  id: state.pathParameters['cardId'],
                 ),
               ),
             ),
-            if (Config.isDevelopment)
-              GoRoute(
-                name: KRoute.myDiscounts.name,
-                path: KRoute.myDiscounts.path,
-                pageBuilder: (context, state) => NoTransitionPage(
-                  key: state.pageKey,
-                  name: state.name,
-                  child: const MyDiscountsScreen(),
-                ),
-              ),
           ],
         ),
         if (Config.isDevelopment)

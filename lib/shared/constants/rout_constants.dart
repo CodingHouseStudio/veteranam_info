@@ -18,6 +18,10 @@ abstract class KRoute {
     path: 'discounts',
     name: 'Discounts',
   );
+  static const _RouteItem businessDiscounts = _RouteItem(
+    path: '/',
+    name: 'Discounts',
+  );
   static const _RouteItem stories = _RouteItem(
     path: 'stories',
     name: 'Stories',
@@ -47,11 +51,11 @@ abstract class KRoute {
   //   name: 'Contact',
   // );
   static const _RouteItem login = _RouteItem(
-    path: '/login',
+    path: 'login',
     name: 'Login',
   );
   static const _RouteItem signUp = _RouteItem(
-    path: '/signUp',
+    path: 'signUp',
     name: 'SignUp',
   );
   static const _RouteItem thanks = _RouteItem(
@@ -117,5 +121,9 @@ abstract class KRoute {
   static const _RouteItem mobFAQ = _RouteItem(
     path: 'FAQ',
     name: 'FAQ',
+  );
+  static const _RouteItem userRole = _RouteItem(
+    path: '/userRole',
+    name: 'UserRole',
   );
 }

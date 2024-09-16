@@ -1,4 +1,4 @@
-name: DEVELOPMENT Cloudflare Deployments Cleaner
+name: DEVELOPMENT Cloudflare Cleaner
 
 # Controls when the workflow will run
 on:
@@ -9,7 +9,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  web_build:
+  cloudflare_deployments_cleaner:
     uses: CodingHouseStudio/flutter_workflows/.github/workflows/cloudflare_deployments_cleaner.yml@main
     with:
       project_name: "veteran-development"

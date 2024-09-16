@@ -3,24 +3,31 @@ import 'package:veteranam/shared/shared.dart';
 
 import '../../helpers/helpers.dart';
 
-Future<void> newsCardInitialHelper(
-  WidgetTester tester,
-) async {
+Future<void> newsCardInitialHelper({
+  required WidgetTester tester,
+  bool cardIsEmpty = false,
+}) async {
   await changeWindowSizeHelper(
     windowsTest: true,
     scrollUp: false,
     tester: tester,
     test: () async {
+      final matcher = cardIsEmpty ? findsNothing : findsOneWidget;
       expect(
         find.byKey(KWidgetkeys.screen.newsCard.widget),
-        findsWidgets,
+        matcher,
       );
 
       expect(
         find.byKey(KWidgetkeys.screen.newsCard.closeButton),
-        findsWidgets,
+        matcher,
       );
-      await newsCardHelper(tester: tester);
+
+      if (cardIsEmpty) {
+        await cardEmptyHelper(tester);
+      } else {
+        await newsCardHelper(tester: tester);
+      }
     },
   );
 }

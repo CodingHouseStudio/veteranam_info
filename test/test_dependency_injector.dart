@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:veteranam/components/components.dart';
@@ -19,7 +20,8 @@ void configureDependenciesTest() {
   userSetting();
   mobBuild();
   KTest.testIsWeb = true;
-  Config.value = Config.development;
+  Config.falvourValue = Config.development;
+  Config.roleValue = Config.user;
   KTest.isTest = true;
   KTest.testReleaseMode = true;
   // KTest.scroll = null;
@@ -28,6 +30,7 @@ void configureDependenciesTest() {
   GetIt.I.registerSingleton<Dio>(Dio());
   GetIt.I.registerSingleton<FirebaseAuth>(MockFirebaseAuth());
   GetIt.I.registerSingleton<GoogleSignIn>(GoogleSignIn());
+  GetIt.I.registerSingleton<FacebookAuth>(MockFacebookAuth());
   GetIt.I.registerSingleton<FakeClient>(FakeClient());
   GetIt.I.registerSingleton<FirebaseAnalytics>(MockFirebaseAnalytics());
   GetIt.I.registerSingleton<FirebaseRemoteConfig>(MockFirebaseRemoteConfig());
@@ -70,6 +73,7 @@ void configureDependenciesTest() {
       GetIt.I.get<FirebaseAuth>(),
       GetIt.I.get<GoogleSignIn>(),
       CacheClient(),
+      GetIt.I.get<FacebookAuth>(),
     ),
   );
   GetIt.I.registerSingleton<AuthenticationRepository>(
@@ -198,7 +202,7 @@ void configureFailureDependenciesTest() {
   // register logic if user id empty user setting is also empty
   userSetting();
   KTest.testIsWeb = true;
-  Config.value = Config.development;
+  Config.falvourValue = Config.development;
   KTest.isTest = true;
   KTest.testReleaseMode = true;
   // KTest.scroll = null;

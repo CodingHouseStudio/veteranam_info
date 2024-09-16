@@ -146,17 +146,19 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                 if (widget.isTablet || !isFocused)
                   IconButton(
                     padding: EdgeInsets.zero,
-                    onPressed: () => EasyDebounce.debounce(
-                      KAppText.logo,
-                      Duration.zero,
-                      () {
-                        if (KTest.testIsWeb
-                            // || !widget.showMobileNawbar
-                            ) {
-                          context.goNamed(KRoute.home.name);
-                        }
-                      },
-                    ),
+                    onPressed: Config.isUser
+                        ? () => EasyDebounce.debounce(
+                              KAppText.logo,
+                              Duration.zero,
+                              () {
+                                if (KTest.testIsWeb
+                                    // || !widget.showMobileNawbar
+                                    ) {
+                                  context.goNamed(KRoute.home.name);
+                                }
+                              },
+                            )
+                        : null,
                     icon: KImage.logo(
                       key: KWidgetkeys.widget.nawbar.logo,
                       // width: 78,
@@ -211,25 +213,27 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                               ? KSize.kPixel72
                               : KSize.kPixel56,
                         ),
-                        if (widget.isDesk)
-                          KSizedBox.kWidthSizedBox32
-                        else
-                          KSizedBox.kWidthSizedBox16,
-                        const CircleAvatar(
-                          radius: KPadding.kPaddingSize2,
-                        ),
-                        if (widget.isDesk)
-                          KSizedBox.kWidthSizedBox32
-                        else
-                          KSizedBox.kWidthSizedBox16,
-                        _button(
-                          key: KWidgetkeys.widget.nawbar.investorsButton,
-                          ruoteName: KRoute.support.name,
-                          text: context.l10n.investors,
-                          width: context.isEnglish
-                              ? KSize.kPixel60
-                              : KSize.kPixel80,
-                        ),
+                        if (Config.isUser) ...[
+                          if (widget.isDesk)
+                            KSizedBox.kWidthSizedBox32
+                          else
+                            KSizedBox.kWidthSizedBox16,
+                          const CircleAvatar(
+                            radius: KPadding.kPaddingSize2,
+                          ),
+                          if (widget.isDesk)
+                            KSizedBox.kWidthSizedBox32
+                          else
+                            KSizedBox.kWidthSizedBox16,
+                          _button(
+                            key: KWidgetkeys.widget.nawbar.investorsButton,
+                            ruoteName: KRoute.support.name,
+                            text: context.l10n.investors,
+                            width: context.isEnglish
+                                ? KSize.kPixel60
+                                : KSize.kPixel80,
+                          ),
+                        ],
                         if (widget.isDesk)
                           KSizedBox.kWidthSizedBox32
                         else
@@ -292,7 +296,7 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                     KSizedBox.kWidthSizedBox16,
                     DoubleButtonWidget(
                       widgetKey: KWidgetkeys.widget.nawbar.loginButton,
-                      onPressed: () => loginNavigation(context),
+                      onPressed: () => userRoleNavigation(context),
                       text: context.l10n.login,
                       isDesk: true,
                       darkMode: true,
@@ -301,7 +305,7 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                     KSizedBox.kWidthSizedBox4,
                     IconButtonWidget(
                       key: KWidgetkeys.widget.nawbar.loginIcon,
-                      onPressed: () => loginNavigation(context),
+                      onPressed: () => userRoleNavigation(context),
                       icon: KIcon.person
                           .copyWith(color: AppColors.materialThemeWhite),
                       background: AppColors.materialThemeKeyColorsSecondary,
@@ -393,6 +397,6 @@ class _NawbarWidgetState extends State<NawbarWidget> {
         icon: icon,
         widgetKey: key,
       );
-  void loginNavigation(BuildContext context) =>
-      context.goNamed(KRoute.login.name);
+  void userRoleNavigation(BuildContext context) =>
+      context.goNamed(KRoute.userRole.name);
 }

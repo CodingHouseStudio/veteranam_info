@@ -4,6 +4,7 @@ enum DiscountCardFailure {
   wrongID,
   error,
   get,
+  notFound,
   network,
 }
 
@@ -14,6 +15,8 @@ extension DiscountCardExtension on SomeFailure {
         return DiscountCardFailure.get;
       case FailureNetwork():
         return DiscountCardFailure.network;
+      case FailureNotFound():
+        return DiscountCardFailure.notFound;
       default:
         return DiscountCardFailure.error;
     }

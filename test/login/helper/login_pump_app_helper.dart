@@ -6,15 +6,15 @@ import 'package:veteranam/shared/shared.dart';
 import '../../test_dependency.dart';
 
 Future<void> loginPumpAppHelper({
-  required IAppAuthenticationRepository mockAppAuthenticationRepository,
+  required AuthenticationRepository mockAuthenticationRepository,
   required WidgetTester tester,
   MockGoRouter? mockGoRouter,
 }) async {
   _registerLoginBloc(
-    mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+    mockAppAuthenticationRepository: mockAuthenticationRepository,
   );
   _registerAuthenticationServicesCubit(
-    mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+    mockAppAuthenticationRepository: mockAuthenticationRepository,
   );
   await tester.pumpApp(const LoginScreen(), mockGoRouter: mockGoRouter);
 
@@ -27,10 +27,10 @@ Future<void> loginPumpAppHelper({
 }
 
 void _registerLoginBloc({
-  required IAppAuthenticationRepository mockAppAuthenticationRepository,
+  required AuthenticationRepository mockAppAuthenticationRepository,
 }) {
   final loginBloc = LoginBloc(
-    appAuthenticationRepository: mockAppAuthenticationRepository,
+    authenticationRepository: mockAppAuthenticationRepository,
   );
   if (GetIt.I.isRegistered<LoginBloc>()) {
     GetIt.I.unregister<LoginBloc>();
@@ -39,10 +39,10 @@ void _registerLoginBloc({
 }
 
 void _registerAuthenticationServicesCubit({
-  required IAppAuthenticationRepository mockAppAuthenticationRepository,
+  required AuthenticationRepository mockAppAuthenticationRepository,
 }) {
   final authenticationServicesCubit = AuthenticationServicesCubit(
-    appAuthenticationRepository: mockAppAuthenticationRepository,
+    authenticationRepository: mockAppAuthenticationRepository,
   );
   if (GetIt.I.isRegistered<AuthenticationServicesCubit>()) {
     GetIt.I.unregister<AuthenticationServicesCubit>();
