@@ -19,7 +19,10 @@ Future<void> dropDownButtonNavigationHelper({
     findsOneWidget,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.widget.dropDownButton.loginButton));
+  await tester.tap(
+    find.byKey(KWidgetkeys.widget.dropDownButton.loginButton),
+    warnIfMissed: false,
+  );
 
   await tester.pumpAndSettle();
 
