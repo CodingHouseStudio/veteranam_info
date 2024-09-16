@@ -47,7 +47,6 @@
       justify-content: center;
       align-items: center;
       height: 100vh;
-      width: 100 vw;
     }
 
     .splash {
@@ -59,25 +58,10 @@
       justify-content: center;
       width: 25vw;
       /* Set width to 25% of the viewport width */
-      color: grey;
-      mask: linear-gradient(-60deg, #000 30%, #0004, #000 70%) right/300% 100%;
-      -webkit-mask: linear-gradient(-60deg, #000 30%, #0004, #000 70%) right/300% 100%;
-      background-repeat: no-repeat;
-      animation: splash 4.0s infinite;
-    }
-
-    @keyframes splash {
-      0% {
-        -webkit-mask-position: 85%;
-      }
-
-
-      100% {
-        -webkit-mask-position: 0%;
-      }
     }
 
     #splash img {
+      animation: appear 1s ease-in-out forwards;
       /* New animation for disappearing */
       opacity: 1;
       /* Initial opacity set to 1 */
@@ -85,6 +69,18 @@
       /* Increase image size to 25% of viewport width */
       height: 25vh;
       /* Increase image size to 25% of viewport height */
+    }
+
+    @keyframes appear {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+        /* Optional: Remove scaling for no size change */
+      }
     }
 
     .image-container {
@@ -97,16 +93,16 @@
     }
 
     .bouncing-image {
-      width: 75%;
+      width: 100%;
       height: auto;
-      /* animation: bounce 2s infinite; */
+      animation: bounce 2s infinite;
     }
 
-    /* .image-container:hover .bouncing-image {
-      animation: slowBounce 4s cubic-bezier(0.25, 0.1, 0.25, 1) infinite;
+    .image-container:hover .bouncing-image {
+      animation: bounce 1s infinite;
     }
 
-    @keyframes slowBounce {
+    @keyframes bounce {
 
       0%,
       20%,
@@ -117,13 +113,13 @@
       }
 
       40% {
-        transform: translateY(-20px);
+        transform: translateY(-40px);
       }
 
       60% {
-        transform: translateY(-10px);
+        transform: translateY(-20px);
       }
-    } */
+    }
 
     .button {
       display: none;
@@ -158,7 +154,7 @@
       border: 2px solid #7a7a7a;
       border-radius: 50%;
       border-top-color: transparent;
-      animation: spin 2s linear infinite;
+      animation: spin 1s linear infinite;
     }
 
     @keyframes spin {
