@@ -24,9 +24,6 @@ class SignUpBodyWidget extends StatelessWidget {
           ),
           mainChildWidgetsFunction: ({required isDesk}) => [
             Row(
-              mainAxisAlignment: isDesk
-                  ? MainAxisAlignment.spaceBetween
-                  : MainAxisAlignment.start,
               children: [
                 if (isDesk)
                   Expanded(
