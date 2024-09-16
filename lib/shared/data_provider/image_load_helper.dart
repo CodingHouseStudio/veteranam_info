@@ -20,9 +20,9 @@ class ArtifactDownloadHelper {
   final _options = Options(
     responseType: ResponseType.bytes,
     headers: {
-      // Headers.contentTypeHeader: 'image/*',
+      Headers.contentTypeHeader: 'image/*',
       // 'Cache-Control': 'max-age=3600',
-      // 'Accept': 'image/webp,image/apng,image/*,*/*;q=0.8',
+      'Accept': 'image/webp,image/apng,image/*,*/*;q=1.0',
       'Connection': 'close',
     },
     receiveTimeout: const Duration(seconds: 5),
@@ -56,7 +56,7 @@ class ArtifactDownloadHelper {
       // (withCredentials: true);
 
       final response = await _dio.get<Uint8List>(
-        image.downloadURL.getImageUrl(height: 5000, width: 5000),
+        image.downloadURL.getImageUrl,
         options: _options,
       );
       if (response.data == null ||
@@ -78,7 +78,7 @@ class ArtifactDownloadHelper {
 
       // Download the image
       final response = await _dio.get<Uint8List>(
-        image.downloadURL.getImageUrl(),
+        image.downloadURL.getImageUrl,
         options: _options,
       );
       if (response.data == null ||
