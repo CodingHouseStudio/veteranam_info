@@ -1,47 +1,47 @@
 import 'package:flutter/material.dart';
 import 'package:veteranam/shared/shared.dart';
 
-class ButtonBottomLineWidget extends StatelessWidget {
+// class ButtonBottomLineWidget extends StatelessWidget {
+//   const ButtonBottomLineWidget({
+//     required this.text,
+//     required this.onPressed,
+//     // required this.isDesk,
+//     required this.widgetKey,
+//     super.key,
+//     this.icon,
+//     this.width,
+//   });
+
+//   final String text;
+//   final Widget? icon;
+//   final void Function() onPressed;
+//   final double? width;
+//   // final bool isDesk;
+//   final Key widgetKey;
+
+//   @override
+//   Widget build(BuildContext context) {
+//     // if (isDesk) {
+//     return ButtonBottomLineDeskWidget(
+//       text: text,
+//       onPressed: onPressed,
+//       width: width,
+//       icon: icon,
+//       widgetKey: widgetKey,
+//     );
+//     // } else {
+//     //   return ButtonBottomLineMobileWidget(
+//     //     text: text,
+//     //     onPressed: onPressed,
+//     //     icon: icon,
+//     //     widgetKey: widgetKey,
+//     //   );
+//     // }
+//   }
+// }
+
+class ButtonBottomLineWidget extends StatefulWidget {
   const ButtonBottomLineWidget({
-    required this.text,
-    required this.onPressed,
-    // required this.isDesk,
-    required this.widgetKey,
-    super.key,
-    this.icon,
-    this.width,
-  });
-
-  final String text;
-  final Widget? icon;
-  final void Function() onPressed;
-  final double? width;
-  // final bool isDesk;
-  final Key widgetKey;
-
-  @override
-  Widget build(BuildContext context) {
-    // if (isDesk) {
-    return ButtonBottomLineDeskWidget(
-      text: text,
-      onPressed: onPressed,
-      width: width,
-      icon: icon,
-      widgetKey: widgetKey,
-    );
-    // } else {
-    //   return ButtonBottomLineMobileWidget(
-    //     text: text,
-    //     onPressed: onPressed,
-    //     icon: icon,
-    //     widgetKey: widgetKey,
-    //   );
-    // }
-  }
-}
-
-class ButtonBottomLineDeskWidget extends StatefulWidget {
-  const ButtonBottomLineDeskWidget({
     required this.text,
     required this.onPressed,
     required this.width,
@@ -57,12 +57,10 @@ class ButtonBottomLineDeskWidget extends StatefulWidget {
   final Key widgetKey;
 
   @override
-  State<ButtonBottomLineDeskWidget> createState() =>
-      _ButtonBottomLineDeskWidgetState();
+  State<ButtonBottomLineWidget> createState() => _ButtonBottomLineWidgetState();
 }
 
-class _ButtonBottomLineDeskWidgetState
-    extends State<ButtonBottomLineDeskWidget> {
+class _ButtonBottomLineWidgetState extends State<ButtonBottomLineWidget> {
   late bool _isHovered;
   @override
   void initState() {
@@ -88,7 +86,7 @@ class _ButtonBottomLineDeskWidgetState
             style: AppTextStyle.materialThemeTitleMedium,
           ),
           AnimatedContainer(
-            key: _isHovered ? KWidgetkeys.widget.buttonBottomLine.line : null,
+            key: KWidgetkeys.widget.buttonBottomLine.line,
             duration: const Duration(milliseconds: 300),
             width: _isHovered
                 ? widget.text.getTextLength(
