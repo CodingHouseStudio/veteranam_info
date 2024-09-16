@@ -1127,7 +1127,7 @@
   "@loggingIn": {
     "examples": "Text indicating that the login process is in progress, and the user needs to wait on the Login page"
   },
-  "signingUp": "Signing up, please wait...",
+  "signingUpWait": "Signing up, please wait...",
   "@signingUpWait": {
     "examples": "Text indicating that the sign-up process is in progress, and the user needs to wait on the Sign up page"
   },
