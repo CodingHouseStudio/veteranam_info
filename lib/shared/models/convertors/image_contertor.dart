@@ -17,10 +17,9 @@ class ImageConverter implements JsonConverter<ImageModel?, List<dynamic>?> {
     if (list?.isEmpty ?? true) {
       return null;
     } else {
-      if (KTest.testIsWeb) {
-        unawaited(_artifactDownloadHelper.downloadArtifacts(list!.first));
-      }
-      return list!.first;
+      unawaited(_artifactDownloadHelper.downloadArtifacts(list!.first));
+
+      return list.first;
     }
   }
 
