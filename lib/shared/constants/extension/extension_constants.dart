@@ -219,32 +219,23 @@ extension StringExtension on String {
     return substring(startIndex + 1, endIndex);
   }
 
-  String getImageUrl({
-    double? height,
-    double? width,
-  }) {
+  String get getImageUrl //({bool? highQuality})
+  {
     if ((Config.isProduction && kReleaseMode) || !kIsWeb) {
       final url = kIsWeb ? Uri.base.origin : 'https://veteranam.info';
-      return '$url${_urlPrefix(width: width, height: height)}$this';
+      return '$url$_urlPrefix$this';
     } else {
       return this;
     }
   }
 
-  String _urlPrefix({
-    double? height,
-    double? width,
-  }) {
+  String get _urlPrefix //({bool? highQuality})
+  {
     // widget.size == null
     // ?
-
     const quality = '100'; // highQuality ?? false ? '100' : '85';
     const format = 'auto'; // KPlatformConstants.isWebSaffari ? 'jpeg' : 'auto';
-    if (height == null && width == null) {
-      return '/cdn-cgi/image/quality=$quality,format=$format/';
-    } else {
-      return '/cdn-cgi/image/quality=$quality,format=$format,width=$width,height=$height/';
-    }
+    return '/cdn-cgi/image/quality=$quality,format=$format/';
   }
   // : '/cdn-cgi/image/${kIsWeb ? 'quality=100' : 'quality=85'}'
   //     ',width=${widget.size! * 10},${widget.size! * 10}/';
