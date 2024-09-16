@@ -1,12 +1,12 @@
 # ios_cd.yaml
-name: DEVELOPMENT build
+name: BUSINESS build
 
 # Controls when the workflow will run
 on:
   workflow_dispatch:
     branches: [main]
 concurrency:
-  group: dev-$
+  group: business-$
   cancel-in-progress: true
 
 # permissions:
@@ -16,10 +16,10 @@ jobs:
   web_build:
     uses: CodingHouseStudio/flutter_workflows/.github/workflows/release_build.yml@main
     with:
-      FLAVOUR: "development"
-      run_sentry_plugin: false
-      project_name: "veteran-development"
-      ROLE: "user"
+      FLAVOUR: "production"
+      run_sentry_plugin: true
+      project_name: "veteran-business"
+      ROLE: "business"
   #  ios-build:
   #    name: Deploy beta build to TestFlight
   #    runs-on: macOS-latest
