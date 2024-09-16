@@ -40,7 +40,8 @@ exclude_patterns = [
     r'lib/shared/widget/row_sliver_widget.dart',
     r'lib/shared/repositories/failure_repository.dart',
     r'lib/shared/repositories/failure_module.dart',
-    r'lib/shared/repositories/app_info_repository.dart'
+    r'lib/shared/repositories/app_info_repository.dart',
+    r'lib/shared/widget/popup_menu_item_widget.dart'
 ]
 
 def exclude_files(input_file, temp_file, exclude_patterns):
