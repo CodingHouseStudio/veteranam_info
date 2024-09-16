@@ -219,8 +219,10 @@ extension StringExtension on String {
     return substring(startIndex + 1, endIndex);
   }
 
-  String get getImageUrl //({bool? highQuality})
-  {
+  String getImageUrl({
+    double? height,
+    double? width,
+  }) {
     if ((Config.isProduction && kReleaseMode) || !kIsWeb) {
       final url = kIsWeb ? Uri.base.origin : 'https://veteranam.info';
       return '$url$_urlPrefix$this';
@@ -229,13 +231,20 @@ extension StringExtension on String {
     }
   }
 
-  String get _urlPrefix //({bool? highQuality})
-  {
+  String _urlPrefix({
+    double? height,
+    double? width,
+  }) {
     // widget.size == null
     // ?
+
     const quality = '100'; // highQuality ?? false ? '100' : '85';
     const format = 'auto'; // KPlatformConstants.isWebSaffari ? 'jpeg' : 'auto';
-    return '/cdn-cgi/image/quality=$quality,format=$format/';
+    if (height == null && width == null) {
+      return '/cdn-cgi/image/quality=$quality,format=$format/';
+    } else {
+      return '/cdn-cgi/image/quality=$quality,format=$format,width=$width,height=$height/';
+    }
   }
   // : '/cdn-cgi/image/${kIsWeb ? 'quality=100' : 'quality=85'}'
   //     ',width=${widget.size! * 10},${widget.size! * 10}/';
