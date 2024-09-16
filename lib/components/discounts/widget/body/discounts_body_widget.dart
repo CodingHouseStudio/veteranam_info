@@ -95,8 +95,7 @@ class DiscountBodyWidget extends StatelessWidget {
                                   isDesk: isDesk,
                                 ),
                               ),
-                              if (Config.isDevelopment)
-                                _myDiscountButton(context),
+                              if (Config.isBusiness) _myDiscountButton(context),
                             ],
                           )
                         else ...[
@@ -104,7 +103,7 @@ class DiscountBodyWidget extends StatelessWidget {
                             context: context,
                             isDesk: isDesk,
                           ),
-                          if (Config.isDevelopment) ...[
+                          if (Config.isBusiness) ...[
                             KSizedBox.kHeightSizedBox8,
                             _myDiscountButton(context),
                           ],
