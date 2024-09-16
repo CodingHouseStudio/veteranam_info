@@ -38,10 +38,10 @@ Future<void> dropDownButtonNavigationHelper({
     findsOneWidget,
   );
 
-  await scrollingHelper(
-    tester: tester,
-    itemKey: KWidgetkeys.screen.userRole.loginUserButton,
-  );
+  // await scrollingHelper(
+  //   tester: tester,
+  //   itemKey: KWidgetkeys.screen.userRole.loginUserButton,
+  // );
 
   await tester.tap(find.byKey(KWidgetkeys.screen.userRole.loginUserButton));
 

@@ -9,12 +9,11 @@ class UserRoleBodyWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScaffoldWidget(
       mainDeskPadding: ({required maxWidth}) => EdgeInsets.symmetric(
-        horizontal: maxWidth > KMinMaxSize.maxWidth640
-            ? maxWidth * KDimensions.kUserRoleWidth
-            : 0,
-        vertical: KPadding.kPaddingSize80,
+        horizontal: maxWidth * KDimensions.kUserRoleWidth,
+        vertical: KPadding.kPaddingSize120,
       ),
       mainChildWidgetsFunction: ({required isDesk, required isTablet}) => [
+        if (!isDesk) KSizedBox.kHeightSizedBox24,
         DecoratedBox(
           decoration: KWidgetTheme.boxDecorationHome,
           child: Padding(
