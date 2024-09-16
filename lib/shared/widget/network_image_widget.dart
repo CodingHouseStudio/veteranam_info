@@ -118,8 +118,8 @@ class _NetworkImageWidgetState extends State<NetworkImageWidget> {
         height: widget.size,
         width: widget.size,
         errorBuilder: (context, url, error) => KIcon.error,
-        // cacheHeight: widget.size?.toInt() ?? KMinMaxSize.kImageMaxSize,
-        // cacheWidth: widget.size?.toInt() ?? KMinMaxSize.kImageMaxSize,
+        cacheHeight: widget.size?.toInt() ?? KMinMaxSize.kImageMaxSize,
+        cacheWidth: widget.size?.toInt() ?? KMinMaxSize.kImageMaxSize,
         filterQuality: widget.highQuality ?? false
             ? FilterQuality.high
             : FilterQuality.medium,
