@@ -56,6 +56,7 @@ export 'news_card_widget.dart';
 export 'notification_link_widget.dart';
 export 'page_indicator_control.dart';
 export 'pagination_widget.dart';
+export 'popup_menu_item_widget.dart';
 export 'profile_card_widget.dart';
 export 'question_widget.dart';
 export 'rate_widget.dart';
