@@ -20,8 +20,6 @@ class UserRoleBodyWidget extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(KPadding.kPaddingSize32),
             child: Column(
-              crossAxisAlignment:
-                  isDesk ? CrossAxisAlignment.center : CrossAxisAlignment.start,
               children: [
                 Text(
                   key: KWidgetkeys.screen.userRole.title,
@@ -29,12 +27,14 @@ class UserRoleBodyWidget extends StatelessWidget {
                   style: isDesk
                       ? AppTextStyle.materialThemeHeadlineLarge
                       : AppTextStyle.materialThemeHeadlineSmall,
+                  textAlign: isDesk ? TextAlign.center : TextAlign.start,
                 ),
                 KSizedBox.kHeightSizedBox16,
                 Text(
                   key: KWidgetkeys.screen.userRole.subtitle,
                   context.l10n.userRoleSubtitle,
                   style: AppTextStyle.materialThemeBodyLarge,
+                  textAlign: isDesk ? TextAlign.center : TextAlign.start,
                 ),
                 if (isDesk)
                   KSizedBox.kHeightSizedBox24
@@ -50,10 +50,11 @@ class UserRoleBodyWidget extends StatelessWidget {
                   textColor: AppColors.materialThemeKeyColorsSecondary,
                   mobHorizontalTextPadding: KPadding.kPaddingSize40,
                   mobVerticalTextPadding: KPadding.kPaddingSize16,
+                  mobIconPadding: KPadding.kPaddingSize16,
                   deskIconPadding: KPadding.kPaddingSize16,
                   deskPadding: const EdgeInsets.symmetric(
                     vertical: KPadding.kPaddingSize16,
-                    horizontal: KPadding.kPaddingSize30,
+                    horizontal: KPadding.kPaddingSize56,
                   ),
                 ),
                 KSizedBox.kHeightSizedBox24,
@@ -63,10 +64,15 @@ class UserRoleBodyWidget extends StatelessWidget {
                     onPressed: () => context.goNamed(KRoute.signUp.name),
                     style: KButtonStyles.borderBlackButtonStyle,
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: KPadding.kPaddingSize16,
-                        horizontal: KPadding.kPaddingSize12,
-                      ),
+                      padding: isDesk
+                          ? const EdgeInsets.symmetric(
+                              vertical: KPadding.kPaddingSize16,
+                              horizontal: KPadding.kPaddingSize30,
+                            )
+                          : const EdgeInsets.symmetric(
+                              vertical: KPadding.kPaddingSize12,
+                              horizontal: KPadding.kPaddingSize24,
+                            ),
                       child: Text(
                         context.l10n.signUpUser,
                         style: AppTextStyle.materialThemeTitleMedium,
