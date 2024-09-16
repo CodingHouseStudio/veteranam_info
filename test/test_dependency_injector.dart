@@ -21,6 +21,7 @@ void configureDependenciesTest() {
   mobBuild();
   KTest.testIsWeb = true;
   Config.falvourValue = Config.development;
+  Config.roleValue = Config.user;
   KTest.isTest = true;
   KTest.testReleaseMode = true;
   // KTest.scroll = null;

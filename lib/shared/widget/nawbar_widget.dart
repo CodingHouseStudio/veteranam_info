@@ -213,25 +213,27 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                               ? KSize.kPixel72
                               : KSize.kPixel56,
                         ),
-                        if (widget.isDesk)
-                          KSizedBox.kWidthSizedBox32
-                        else
-                          KSizedBox.kWidthSizedBox16,
-                        const CircleAvatar(
-                          radius: KPadding.kPaddingSize2,
-                        ),
-                        if (widget.isDesk)
-                          KSizedBox.kWidthSizedBox32
-                        else
-                          KSizedBox.kWidthSizedBox16,
-                        _button(
-                          key: KWidgetkeys.widget.nawbar.investorsButton,
-                          ruoteName: KRoute.support.name,
-                          text: context.l10n.investors,
-                          width: context.isEnglish
-                              ? KSize.kPixel60
-                              : KSize.kPixel80,
-                        ),
+                        if (Config.isUser) ...[
+                          if (widget.isDesk)
+                            KSizedBox.kWidthSizedBox32
+                          else
+                            KSizedBox.kWidthSizedBox16,
+                          const CircleAvatar(
+                            radius: KPadding.kPaddingSize2,
+                          ),
+                          if (widget.isDesk)
+                            KSizedBox.kWidthSizedBox32
+                          else
+                            KSizedBox.kWidthSizedBox16,
+                          _button(
+                            key: KWidgetkeys.widget.nawbar.investorsButton,
+                            ruoteName: KRoute.support.name,
+                            text: context.l10n.investors,
+                            width: context.isEnglish
+                                ? KSize.kPixel60
+                                : KSize.kPixel80,
+                          ),
+                        ],
                         if (widget.isDesk)
                           KSizedBox.kWidthSizedBox32
                         else

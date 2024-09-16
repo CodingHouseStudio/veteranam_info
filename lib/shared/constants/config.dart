@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart' show visibleForTesting;
 abstract class Config {
   static const flavour =
       String.fromEnvironment('FLAVOUR', defaultValue: development);
-  static const role = String.fromEnvironment('ROLE', defaultValue: _user);
+  static const role = String.fromEnvironment('ROLE', defaultValue: user);
 
   @visibleForTesting
   static String? falvourValue;
@@ -21,8 +21,10 @@ abstract class Config {
   // @visibleForTesting
   static const _staging = 'staging';
 
-  static bool get isUser => (roleValue ?? role) == _user;
-  static bool get isBusiness => (roleValue ?? role) == _business;
-  static const _user = 'user';
-  static const _business = 'business';
+  static bool get isUser => (roleValue ?? role) == user;
+  static bool get isBusiness => (roleValue ?? role) == business;
+  @visibleForTesting
+  static const user = 'user';
+  @visibleForTesting
+  static const business = 'business';
 }

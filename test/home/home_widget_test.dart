@@ -101,6 +101,7 @@ void main() {
     });
     group('${KGroupText.failure} ', () {
       testWidgets('${KGroupText.error} ', (tester) async {
+        Config.roleValue = Config.business;
         when(mockFaqRepository.getQuestions()).thenAnswer(
           (invocation) async => Left(
             SomeFailure.serverError(
@@ -186,6 +187,7 @@ void main() {
     });
     group('${KGroupText.getList} ', () {
       setUp(() {
+        Config.roleValue = Config.user;
         when(mockFaqRepository.getQuestions()).thenAnswer(
           (invocation) async => Right(KTestText.questionModelItems),
         );
