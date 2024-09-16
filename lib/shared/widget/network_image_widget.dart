@@ -122,7 +122,7 @@ class _NetworkImageWidgetState extends State<NetworkImageWidget> {
         // cacheWidth: widget.size?.toInt() ?? KMinMaxSize.kImageMaxSize,
         filterQuality: widget.highQuality ?? false
             ? FilterQuality.high
-            : FilterQuality.low,
+            : FilterQuality.medium,
       );
     }
     // if (KTest.testIsWeb) {
