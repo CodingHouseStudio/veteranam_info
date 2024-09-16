@@ -357,44 +357,51 @@ void main() {
           );
         });
         group('${KGroupText.goTo} ', () {
-          testWidgets('${KRoute.myDiscounts.name} ', (tester) async {
-            await discountsPumpAppHelper(
-              tester: tester,
-              mockDiscountRepository: mockDiscountRepository,
-              mockGoRouter: mockGoRouter,
-              mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-              mockFirebaseRemoteConfigProvider:
-                  mockFirebaseRemoteConfigProvider,
-              mockBuildRepository: mockBuildRepository,
-              mockReportRepository: mockReportRepository,
-              mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
-              mockAuthenticationRepository: mockAuthenticationRepository,
+          group('${Config.business} ', () {
+            setUp(
+              () => Config.roleValue = Config.business,
             );
+            testWidgets('${KRoute.myDiscounts.name} ', (tester) async {
+              await discountsPumpAppHelper(
+                tester: tester,
+                mockDiscountRepository: mockDiscountRepository,
+                mockGoRouter: mockGoRouter,
+                mockAppAuthenticationRepository:
+                    mockAppAuthenticationRepository,
+                mockFirebaseRemoteConfigProvider:
+                    mockFirebaseRemoteConfigProvider,
+                mockBuildRepository: mockBuildRepository,
+                mockReportRepository: mockReportRepository,
+                mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
+                mockAuthenticationRepository: mockAuthenticationRepository,
+              );
 
-            await myDiscountHelper(
-              tester: tester,
-              mockGoRouter: mockGoRouter,
-            );
-          });
-          testWidgets('Dialog pop to ${KRoute.discounts.name} ',
-              (tester) async {
-            await discountsPumpAppHelper(
-              tester: tester,
-              mockDiscountRepository: mockDiscountRepository,
-              mockGoRouter: mockGoRouter,
-              mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-              mockFirebaseRemoteConfigProvider:
-                  mockFirebaseRemoteConfigProvider,
-              mockBuildRepository: mockBuildRepository,
-              mockReportRepository: mockReportRepository,
-              mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
-              mockAuthenticationRepository: mockAuthenticationRepository,
-            );
+              await myDiscountHelper(
+                tester: tester,
+                mockGoRouter: mockGoRouter,
+              );
+            });
+            testWidgets('Dialog pop to ${KRoute.discounts.name} ',
+                (tester) async {
+              await discountsPumpAppHelper(
+                tester: tester,
+                mockDiscountRepository: mockDiscountRepository,
+                mockGoRouter: mockGoRouter,
+                mockAppAuthenticationRepository:
+                    mockAppAuthenticationRepository,
+                mockFirebaseRemoteConfigProvider:
+                    mockFirebaseRemoteConfigProvider,
+                mockBuildRepository: mockBuildRepository,
+                mockReportRepository: mockReportRepository,
+                mockFirebaseAnalyticsService: mockFirebaseAnalyticsService,
+                mockAuthenticationRepository: mockAuthenticationRepository,
+              );
 
-            await advancedFilterAppliedHelper(
-              tester: tester,
-              mockGoRouter: mockGoRouter,
-            );
+              await advancedFilterAppliedHelper(
+                tester: tester,
+                mockGoRouter: mockGoRouter,
+              );
+            });
           });
         });
 

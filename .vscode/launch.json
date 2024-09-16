@@ -11,6 +11,7 @@
       "program": "lib/main_development.dart",
       "args": [
         "--dart-define=FLAVOUR=development",
+        "--dart-define=ROLE=user",
         "localhost",
         "--web-port",
         "4001",
@@ -27,6 +28,7 @@
       "program": "lib/main_staging.dart",
       "args": [
         "--dart-define=FLAVOUR=staging",
+        "--dart-define=ROLE=user",
         "localhost",
         "--web-port",
         "8080",
@@ -43,6 +45,24 @@
       "program": "lib/main_production.dart",
       "args": [
         "--dart-define=FLAVOUR=production",
+        "--dart-define=ROLE=user",
+        "localhost",
+        "--web-port",
+        "4001",
+        "--flavor",
+        "production",
+        "--target",
+        "lib/main_production.dart"
+      ],
+    },
+    {
+      "name": "Launch Business production",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main_production.dart",
+      "args": [
+        "--dart-define=FLAVOUR=production",
+        "--dart-define=ROLE=business",
         "localhost",
         "--web-port",
         "4001",

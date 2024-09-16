@@ -22,7 +22,7 @@ void main() {
     late AppInfoRepository mockBuildRepository;
     late FirebaseRemoteConfigProvider mockFirebaseRemoteConfigProvider;
     setUp(() {
-      Config.value = Config.production;
+      Config.falvourValue = Config.production;
       ExtendedDateTime.current = KTestText.dateTime;
       ExtendedDateTime.id = KTestText.feedbackModel.id;
       mockFaqRepository = MockIFaqRepository();
