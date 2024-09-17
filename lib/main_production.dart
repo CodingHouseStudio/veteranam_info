@@ -8,7 +8,6 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_performance/firebase_performance.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:veteranam/app.dart';
 import 'package:veteranam/bootstrap.dart';
@@ -141,16 +140,16 @@ Future<void> main() async {
     };
   }
 
-  if (kIsWeb) {
-    // initialize the facebook javascript SDK
-    // TODO(appId): set value
-    await FacebookAuth.i.webAndDesktopInitialize(
-      appId: 'YOUR_FACEBOOK_APP_ID',
-      cookie: true,
-      xfbml: true,
-      version: 'v15.0',
-    );
-  }
+  // if (kIsWeb) {
+  // initialize the facebook javascript SDK
+  // TODO(appId): set value
+  // await FacebookAuth.i.webAndDesktopInitialize(
+  //   appId: 'YOUR_FACEBOOK_APP_ID',
+  //   cookie: true,
+  //   xfbml: true,
+  //   version: 'v15.0',
+  // );
+  // }
 
   await bootstrap(App.new);
 }
