@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:veteranam/components/components.dart';
 import 'package:veteranam/shared/shared.dart';
 
@@ -49,12 +50,13 @@ class MyDiscountsBodyWidget extends StatelessWidget {
                 context.l10n.myPublications,
                 style: isDesk ? AppTextStyle.text64 : AppTextStyle.text24,
               ),
-              IconWidget(
+              IconButtonWidget(
                 key: KWidgetkeys.screen.myDiscounts.icon,
                 padding:
                     isDesk ? KPadding.kPaddingSize20 : KPadding.kPaddingSize12,
                 icon: KIcon.plus,
                 background: AppColors.materialThemeKeyColorsNeutralVariant,
+                onPressed: () => context.goNamed(KRoute.discountsAdd.name),
               ),
             ],
           ),

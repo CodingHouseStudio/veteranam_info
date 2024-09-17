@@ -24,10 +24,10 @@ void main() {
     late FirebaseRemoteConfigProvider mockFirebaseRemoteConfigProvider;
     late AppInfoRepository mockBuildRepository;
     setUp(() {
-      KTest.testIsWeb = false;
+      Config.isWeb = false;
       KPlatformConstants.isWebDesktop = true;
       KTest.testReleaseMode = true;
-      Config.value = Config.production;
+      Config.falvourValue = Config.production;
       ExtendedDateTime.id = KTestText.id;
       ExtendedDateTime.current = KTestText.dateTime;
       mockDiscountRepository = MockIDiscountRepository();

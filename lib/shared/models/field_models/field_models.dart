@@ -1,3 +1,5 @@
+export 'cities_field_model.dart';
+export 'discounts_field_model.dart';
 export 'email_field_model.dart';
 export 'field_models_error_get.dart';
 export 'image_field_model.dart';

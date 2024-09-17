@@ -65,7 +65,7 @@ class DiscountBodyWidget extends StatelessWidget {
                       //     .add(const DiscountWatcherEvent.started()),
                       titleChildWidgetsFunction: ({required isDesk}) => [
                         KSizedBox.kHeightSizedBox24,
-                        if (KTest.testIsWeb) ...[
+                        if (Config.isWeb) ...[
                           TitlePointWidget(
                             title: context.l10n.specialOffers,
                             titleKey: KWidgetkeys.screen.discounts.title,
@@ -95,8 +95,7 @@ class DiscountBodyWidget extends StatelessWidget {
                                   isDesk: isDesk,
                                 ),
                               ),
-                              if (Config.isDevelopment)
-                                _myDiscountButton(context),
+                              if (Config.isBusiness) _myDiscountButton(context),
                             ],
                           )
                         else ...[
@@ -104,7 +103,7 @@ class DiscountBodyWidget extends StatelessWidget {
                             context: context,
                             isDesk: isDesk,
                           ),
-                          if (Config.isDevelopment) ...[
+                          if (Config.isBusiness) ...[
                             KSizedBox.kHeightSizedBox8,
                             _myDiscountButton(context),
                           ],

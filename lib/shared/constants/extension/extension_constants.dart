@@ -305,7 +305,7 @@ extension CategoryEnumExtensions on CategoryEnum {
 
 extension ReferenceExtension on Reference {
   UploadTask putImage(Uint8List data, [SettableMetadata? metadata]) {
-    if (KTest.testIsWeb) {
+    if (Config.isWeb) {
       return putBlob(data, metadata);
     } else {
       return putData(data, metadata);

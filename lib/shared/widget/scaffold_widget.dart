@@ -75,9 +75,9 @@ class ScaffoldWidget extends StatelessWidget {
             // policy: WidgetOrderTraversalPolicy(),
             child: Semantics(
               child: Scaffold(
-                resizeToAvoidBottomInset: !KTest.testIsWeb,
+                resizeToAvoidBottomInset: !Config.isWeb,
                 bottomNavigationBar:
-                    KTest.testIsWeb || !(showMobBottomNavigation ?? true)
+                    Config.isWeb || !(showMobBottomNavigation ?? true)
                         ? null
                         : const MobNavigationWidget(
                             index: 2,
@@ -90,7 +90,7 @@ class ScaffoldWidget extends StatelessWidget {
                   widgetKey: KWidgetkeys.widget.scaffold.scroll,
                   //physics: KTest.scroll,
                   slivers: [
-                    if (!KTest.testIsWeb && state.isOffline)
+                    if (!Config.isWeb && state.isOffline)
                       SliverPersistentHeader(
                         pinned: true,
                         delegate: NetworkStatusBanner.getSliverHeader(
@@ -176,7 +176,7 @@ class ScaffoldWidget extends StatelessWidget {
               ),
             ),
           );
-          return KTest.testIsWeb ? scaffold : SafeArea(child: scaffold);
+          return Config.isWeb ? scaffold : SafeArea(child: scaffold);
         },
       ),
     );

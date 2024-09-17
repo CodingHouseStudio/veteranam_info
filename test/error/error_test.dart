@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
+import 'package:veteranam/shared/shared.dart';
 
 import '../test_dependency.dart';
 import 'helper/helper.dart';
@@ -28,10 +29,35 @@ void main() {
       });
 
       group('${KGroupText.goTo} ', () {
-        testWidgets(KScreenBlocName.home, (tester) async {
+        testWidgets('${KScreenBlocName.home} ', (tester) async {
           await errorPumpAppHelper(tester: tester, mockGoRouter: mockGoRouter);
 
-          await buttonHelper(tester: tester, mockGoRouter: mockGoRouter);
+          await buttonHelper(
+            tester: tester,
+            mockGoRouter: mockGoRouter,
+            routeName: KRoute.home.name,
+          );
+        });
+        testWidgets('${KScreenBlocName.home} ', (tester) async {
+          Config.isWeb = false;
+
+          await errorPumpAppHelper(tester: tester, mockGoRouter: mockGoRouter);
+
+          await buttonHelper(
+            tester: tester,
+            mockGoRouter: mockGoRouter,
+            routeName: KRoute.settings.name,
+          );
+        });
+        testWidgets('${KScreenBlocName.home} ', (tester) async {
+          Config.roleValue = Config.business;
+          await errorPumpAppHelper(tester: tester, mockGoRouter: mockGoRouter);
+
+          await buttonHelper(
+            tester: tester,
+            mockGoRouter: mockGoRouter,
+            routeName: KRoute.businessDiscounts.name,
+          );
         });
       });
     });

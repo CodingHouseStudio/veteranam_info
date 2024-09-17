@@ -374,7 +374,7 @@ abstract class FooterWidget {
               : AppTextStyle.materialThemeHeadlineMedium,
         ),
         KSizedBox.kHeightSizedBox16,
-        // if (KTest.testIsWeb)
+        // if (Config.isWeb)
         //   Align(
         //     alignment: Alignment.centerLeft,
         //     child: BuyMeACoffeeWidget(

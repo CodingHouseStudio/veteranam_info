@@ -7,7 +7,7 @@ part 'mob_faq_wathcer_event.dart';
 part 'mob_faq_watcher_state.dart';
 part 'mob_faq_watcher_bloc.freezed.dart';
 
-@injectable
+@Injectable(env: [Config.mobile])
 class MobFaqWatcherBloc extends Bloc<MobFaqWatcherEvent, MobFaqWatcherState> {
   MobFaqWatcherBloc({required IFaqRepository faqRepository})
       : _faqRepository = faqRepository,

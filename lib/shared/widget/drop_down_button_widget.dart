@@ -27,19 +27,20 @@ class DropDownButtonState extends State<DropDownButton> {
     return PopupMenuButton<int>(
       key: KWidgetkeys.widget.dropDownButton.widget,
       offset: widget.offset,
+      position: PopupMenuPosition.under,
       shape: const RoundedRectangleBorder(
         borderRadius: KBorderRadius.kBorderRadius32,
       ),
       style: KButtonStyles.borderBlackButtonStyle.copyWith(
         padding: const WidgetStatePropertyAll(
           EdgeInsets.only(
-            left: KPadding.kPaddingSize4,
-            right: KPadding.kPaddingSize12,
+            left: KPadding.kPaddingSize10,
+            right: KPadding.kPaddingSize22,
           ),
         ),
       ),
-      menuPadding: const EdgeInsets.all(
-        KPadding.kPaddingSize16,
+      menuPadding: const EdgeInsets.symmetric(
+        vertical: KPadding.kPaddingSize8,
       ),
       color: AppColors.materialThemeKeyColorsNeutral,
       padding: EdgeInsets.zero,
@@ -50,15 +51,10 @@ class DropDownButtonState extends State<DropDownButton> {
       },
       itemBuilder: (context) {
         return List.generate(widget.items.length, (index) {
-          return PopupMenuItem(
+          return PopupMenuItemWidget(
             key: widget.items.elementAt(index).key,
+            //onTap: widget.items.elementAt(index).action,
             value: index,
-            padding: index != widget.items.length
-                ? const EdgeInsets.only(
-                    bottom: KPadding.kPaddingSize8,
-                  )
-                : EdgeInsets.zero,
-            height: AppTextStyle.materialThemeBodyMedium.fontSize!,
             child: Text(
               widget.items.elementAt(index).text,
               style: AppTextStyle.materialThemeBodyMedium,

@@ -138,7 +138,7 @@ class _NawbarWidgetState extends State<NawbarWidget> {
               top: KPadding.kPaddingSize8,
               bottom: KPadding.kPaddingSize8,
             ),
-      child: KTest.testIsWeb
+      child: Config.isWeb
           // || widget.showMobileNawbar
           ? Row(
               // mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -146,17 +146,19 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                 if (widget.isTablet || !isFocused)
                   IconButton(
                     padding: EdgeInsets.zero,
-                    onPressed: () => EasyDebounce.debounce(
-                      KAppText.logo,
-                      Duration.zero,
-                      () {
-                        if (KTest.testIsWeb
-                            // || !widget.showMobileNawbar
-                            ) {
-                          context.goNamed(KRoute.home.name);
-                        }
-                      },
-                    ),
+                    onPressed: Config.isUser
+                        ? () => EasyDebounce.debounce(
+                              KAppText.logo,
+                              Duration.zero,
+                              () {
+                                if (Config.isWeb
+                                    // || !widget.showMobileNawbar
+                                    ) {
+                                  context.goNamed(KRoute.home.name);
+                                }
+                              },
+                            )
+                        : null,
                     icon: KImage.logo(
                       key: KWidgetkeys.widget.nawbar.logo,
                       // width: 78,
@@ -211,25 +213,27 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                               ? KSize.kPixel72
                               : KSize.kPixel56,
                         ),
-                        if (widget.isDesk)
-                          KSizedBox.kWidthSizedBox32
-                        else
-                          KSizedBox.kWidthSizedBox16,
-                        const CircleAvatar(
-                          radius: KPadding.kPaddingSize2,
-                        ),
-                        if (widget.isDesk)
-                          KSizedBox.kWidthSizedBox32
-                        else
-                          KSizedBox.kWidthSizedBox16,
-                        _button(
-                          key: KWidgetkeys.widget.nawbar.investorsButton,
-                          ruoteName: KRoute.support.name,
-                          text: context.l10n.investors,
-                          width: context.isEnglish
-                              ? KSize.kPixel60
-                              : KSize.kPixel80,
-                        ),
+                        if (Config.isUser) ...[
+                          if (widget.isDesk)
+                            KSizedBox.kWidthSizedBox32
+                          else
+                            KSizedBox.kWidthSizedBox16,
+                          const CircleAvatar(
+                            radius: KPadding.kPaddingSize2,
+                          ),
+                          if (widget.isDesk)
+                            KSizedBox.kWidthSizedBox32
+                          else
+                            KSizedBox.kWidthSizedBox16,
+                          _button(
+                            key: KWidgetkeys.widget.nawbar.investorsButton,
+                            ruoteName: KRoute.support.name,
+                            text: context.l10n.investors,
+                            width: context.isEnglish
+                                ? KSize.kPixel60
+                                : KSize.kPixel80,
+                          ),
+                        ],
                         if (widget.isDesk)
                           KSizedBox.kWidthSizedBox32
                         else
@@ -251,7 +255,7 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                     ),
                   )
                 else
-                  // widget.pageName != null && !KTest.testIsWeb
+                  // widget.pageName != null && !Config.isWeb
                   //     ? Expanded(
                   //         child: Text(
                   //           '${widget.pageName}',

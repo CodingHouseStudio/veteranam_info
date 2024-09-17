@@ -20,8 +20,8 @@ void main() {
     late IAppAuthenticationRepository mockAppAuthenticationRepository;
     late IUrlRepository mockUrlRepository;
     setUp(() {
-      KTest.testIsWeb = false;
-      Config.value = Config.production;
+      Config.isWeb = false;
+      Config.falvourValue = Config.production;
       ExtendedDateTime.current = KTestText.dateTime;
       ExtendedDateTime.id = KTestText.feedbackModel.id;
 

@@ -98,6 +98,6 @@ class AppWidget extends StatelessWidget {
         localizationsDelegates: locale,
         locale: localeValue,
         supportedLocales: supportedLocales,
-        routerConfig: router,
+        routerConfig: Config.isUser ? router : businessRouter,
       );
 }

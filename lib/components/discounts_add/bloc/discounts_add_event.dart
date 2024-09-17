@@ -10,9 +10,9 @@ class DiscountsAddEvent with _$DiscountsAddEvent {
   const factory DiscountsAddEvent.updateTitle(String title) = _UpdateTitle;
   const factory DiscountsAddEvent.updateDiscount(int discount) =
       _UpdateDiscount;
-  const factory DiscountsAddEvent.updateLink(int link) = _UpdateLink;
-  const factory DiscountsAddEvent.updateDescription(int description) =
+  const factory DiscountsAddEvent.updateLink(String link) = _UpdateLink;
+  const factory DiscountsAddEvent.updateDescription(String description) =
       _UpdateDescription;
-  const factory DiscountsAddEvent.updateExclusions(int exclusions) =
+  const factory DiscountsAddEvent.updateExclusions(String exclusions) =
       _UpdatExclusions;
 }

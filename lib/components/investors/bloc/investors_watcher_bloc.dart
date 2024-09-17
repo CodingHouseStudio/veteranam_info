@@ -7,7 +7,7 @@ part 'investors_watcher_bloc.freezed.dart';
 part 'investors_watcher_event.dart';
 part 'investors_watcher_state.dart';
 
-@Injectable()
+@Injectable(env: [Config.user])
 class InvestorsWatcherBloc
     extends Bloc<InvestorsWatcherEvent, InvestorsWatcherState> {
   InvestorsWatcherBloc({

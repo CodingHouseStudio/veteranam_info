@@ -47,7 +47,7 @@ class FirestoreService {
 
   void _initFirestoreSettings() {
     // Set settings for persistence based on platform
-    if (KTest.testIsWeb) {
+    if (Config.isWeb) {
       _db.settings = const Settings(
         persistenceEnabled: true,
       );
