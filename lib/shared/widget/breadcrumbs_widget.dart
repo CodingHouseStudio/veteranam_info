@@ -66,7 +66,7 @@ class BreadcrumbsWidget extends StatelessWidget {
   });
 
   final List<String> pageName;
-  final String selectedPage;
+  final int selectedPage;
   final double unselectedCircleRadius;
   final double selectedCircleRadius;
   final double selectedLineHeight;
@@ -93,7 +93,7 @@ class BreadcrumbsWidget extends StatelessWidget {
           size: const Size(double.infinity, KSize.kPixel30),
           painter: ViewpagerIndicatorWidget(
             pageName: pageName,
-            selectedPage: pageName.indexOf(selectedPage),
+            selectedPage: selectedPage - 1,
             unselectedCircleRadius: unselectedCircleRadius,
             selectedCircleRadius: selectedCircleRadius,
             selectedLineHeight: selectedLineHeight,

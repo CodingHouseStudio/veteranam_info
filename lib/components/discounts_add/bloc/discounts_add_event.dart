@@ -3,17 +3,17 @@ part of 'discounts_add_bloc.dart';
 @freezed
 class DiscountsAddEvent with _$DiscountsAddEvent {
   const factory DiscountsAddEvent.started() = _Started;
-  const factory DiscountsAddEvent.updateCategory(String category) =
-      _UpdateCategory;
-  const factory DiscountsAddEvent.updateCity(String city) = _UpdateCity;
-  const factory DiscountsAddEvent.updatePeriod(String? period) = _UpdatePeriod;
-  const factory DiscountsAddEvent.updateTitle(String title) = _UpdateTitle;
-  const factory DiscountsAddEvent.updateDiscount(int discount) =
-      _UpdateDiscount;
-  const factory DiscountsAddEvent.updateLink(String link) = _UpdateLink;
-  const factory DiscountsAddEvent.updateDescription(String description) =
-      _UpdateDescription;
-  const factory DiscountsAddEvent.updateExclusions(String exclusions) =
-      _UpdatExclusions;
+  const factory DiscountsAddEvent.categoryUpdate(String category) =
+      _CategoryUpdate;
+  const factory DiscountsAddEvent.cityUpdate(String city) = _CityUpdate;
+  const factory DiscountsAddEvent.periodUpdate(String? period) = _PeriodUpdate;
+  const factory DiscountsAddEvent.titleUpdate(String title) = _TitleUpdate;
+  const factory DiscountsAddEvent.discountUpdate(int discount) =
+      _DiscountUpdate;
+  const factory DiscountsAddEvent.linkUpdate(String link) = _LinkUpdate;
+  const factory DiscountsAddEvent.descriptionUpdate(String description) =
+      _DescriptionUpdate;
+  const factory DiscountsAddEvent.exclusionsUpdate(String exclusions) =
+      _ExclusionsUpdate;
   const factory DiscountsAddEvent.send() = _Send;
 }

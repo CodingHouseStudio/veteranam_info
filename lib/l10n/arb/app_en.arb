@@ -1179,6 +1179,37 @@
     "examples": "Text near the switch on the Discounts add page",
     "description": "The switch is used to make the discount indefinite or not"
   },
+  "period": "Validity period",
+  "@period": {
+    "examples": "Text on the Discount Add page",
+    "description": "The field where the validity period of the discount is entered"
+  },
+  "title": "Title",
+  "@title": {
+    "examples": "Text on the Discount Add page for the title field",
+    "description": "This field is for entering the title of the discount"
+  },
+  "titleExample": "E.g.: Rehabilitation Massage",
+  "@titleExample": {
+    "examples": "Text on the Discount Add page for the title field (example)"
+  },
+  "discountDescription": "You can add multiple discounts. After entering each discount, press Enter to confirm.",
+  "@discountDescription": {
+    "examples": "Text on the Discount Add page for the description field"
+  },
+  "linkDescription": "Insert a link to the page where more information about the discount can be found",
+  "@linkDescription": {
+    "examples": "Text on the Discount Add page for the link field (description)"
+  },
+  "getYouNeed": "To receive, you need",
+  "@getYouNeed": {
+    "examples": "Text on the Discount Add page for the field describing requirements for receiving the discount",
+    "description": "This field is for entering what the user needs to do to receive the discount"
+  },
+  "getYouNeedDescription": "Describe the requirements for receiving the service",
+  "@getYouNeedDescription": {
+    "examples": "Text on the Discount Add page for the requirements field (description)"
+  },
   "asBusiness": "as a BUSINESS user",
   "@asBusiness": {
     "examples": "Text for the business login button on the UserRole page.",

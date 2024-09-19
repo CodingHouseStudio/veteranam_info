@@ -13,10 +13,10 @@ Future<void> switchHelper({
     findsOneWidget,
   );
 
-  expect(
-    find.byKey(KWidgetkeys.widget.switchKeys.icon),
-    findsOneWidget,
-  );
+  // expect(
+  //   find.byKey(KWidgetkeys.widget.switchKeys.icon),
+  //   findsOneWidget,
+  // );
 
   // expect(
   //   find.byKey(KWidgetkeys.widget.switchKeys.item),

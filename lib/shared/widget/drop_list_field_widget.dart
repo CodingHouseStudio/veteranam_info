@@ -4,7 +4,7 @@ import 'package:veteranam/shared/shared.dart';
 class DropListFieldWidget extends StatelessWidget {
   const DropListFieldWidget({
     required this.onChanged,
-    required this.hintText,
+    required this.labelText,
     required this.dropDownList,
     required this.isDesk,
     super.key,
@@ -13,7 +13,7 @@ class DropListFieldWidget extends StatelessWidget {
   });
 
   final void Function(String text)? onChanged;
-  final String hintText;
+  final String labelText;
   final List<String> dropDownList;
   final bool isDesk;
   final bool? showErrorText;
@@ -24,7 +24,7 @@ class DropListFieldWidget extends StatelessWidget {
     return DropdownMenu<String>(
       key: KWidgetkeys.widget.dropListField.widget,
       label: Text(
-        hintText,
+        labelText,
         key: KWidgetkeys.widget.dropListField.field,
       ),
       requestFocusOnTap: true,

@@ -65,7 +65,7 @@ class MobSettingsBodyWidget extends StatelessWidget {
                 verticalOffset: KSize.kPixel20,
               ),
               BlocBuilder<MobOfflineModeCubit, MobMode>(
-                builder: (context, _) => SwitchWidget(
+                builder: (context, _) => SwitchOfflineWidget(
                   key: KWidgetkeys.screen.mobSettings.offlinesSwitcher,
                   isSelected: _.isOffline,
                   onChanged: null,
