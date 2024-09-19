@@ -121,9 +121,9 @@ import 'package:veteranam/shared/repositories/url_repository.dart' as _i929;
 import 'package:veteranam/shared/repositories/work_repository.dart' as _i76;
 import 'package:veteranam/shared/shared.dart' as _i1001;
 
-const String _business = 'business';
-const String _mobile = 'mobile';
 const String _user = 'user';
+const String _mobile = 'mobile';
+const String _business = 'business';
 const String _development = 'development';
 
 extension GetItInjectableX on _i174.GetIt {
@@ -179,6 +179,13 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i1001.IFeedbackRepository>(() => _i361.FeedbackRepository());
     gh.lazySingleton<_i1001.IUrlRepository>(() => _i929.UrlRepository());
     gh.singleton<_i1001.IStorage>(() => _i949.SecureStorageRepository());
+    gh.singleton<_i1001.IFaqRepository>(
+      () => _i1007.FaqRepository(),
+      registerFor: {
+        _user,
+        _mobile,
+      },
+    );
     gh.factory<_i855.DiscountsAddBloc>(
       () => _i855.DiscountsAddBloc(
           discountRepository: gh<_i1001.IDiscountRepository>()),
@@ -211,10 +218,6 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.singleton<_i187.FirebaseRemoteConfigProvider>(() =>
         _i187.FirebaseRemoteConfigProvider(gh<_i627.FirebaseRemoteConfig>()));
-    gh.singleton<_i1001.IFaqRepository>(
-      () => _i1007.FaqRepository(),
-      registerFor: {_user},
-    );
     gh.singleton<_i1001.IInformationRepository>(
       () => _i154.InformationRepository(),
       registerFor: {_development},
@@ -246,6 +249,11 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i609.InvestorsWatcherBloc(
           investorsRepository: gh<_i1001.IInvestorsRepository>()),
       registerFor: {_user},
+    );
+    gh.factory<_i408.InformationWatcherBloc>(
+      () => _i408.InformationWatcherBloc(
+          informationRepository: gh<_i1001.IInformationRepository>()),
+      registerFor: {_development},
     );
     gh.factory<_i688.NewsCardWatcherBloc>(
       () => _i688.NewsCardWatcherBloc(
@@ -290,14 +298,6 @@ extension GetItInjectableX on _i174.GetIt {
         appAuthenticationRepository: gh<_i1001.IAppAuthenticationRepository>(),
       ),
       registerFor: {_user},
-    );
-    gh.factory<_i408.InformationWatcherBloc>(
-      () => _i408.InformationWatcherBloc(
-        informationRepository: gh<_i1001.IInformationRepository>(),
-        reportRepository: gh<_i1001.IReportRepository>(),
-        appAuthenticationRepository: gh<_i1001.IAppAuthenticationRepository>(),
-      ),
-      registerFor: {_development},
     );
     gh.factory<_i227.DiscountLinkCubit>(() => _i227.DiscountLinkCubit(
           discountRepository: gh<_i1001.IDiscountRepository>(),

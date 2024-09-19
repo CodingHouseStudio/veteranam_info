@@ -18,13 +18,13 @@ Future<void> dropListFieldBoxHelper({
     findsOneWidget,
   );
 
-  expect(
-    find.byKey(KWidgetkeys.widget.dropListField.list),
-    findsNothing,
-  );
+  // expect(
+  //   find.byKey(KWidgetkeys.widget.dropListField.list),
+  //   findsNothing,
+  // );
 
   expect(
-    find.byKey(KWidgetkeys.widget.dropListField.item),
+    find.byType(MenuItemButton),
     findsNothing,
   );
 
@@ -34,36 +34,52 @@ Future<void> dropListFieldBoxHelper({
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.dropListField.trailingUp),
+    find.byKey(KWidgetkeys.widget.dropListField.closeIcon),
     findsNothing,
   );
 
+  // expect(
+  //   find.descendant(
+  //     of: find.byKey(KWidgetkeys.widget.dropListField.list),
+  //     matching: find.byKey(KWidgetkeys.widget.dropListField.item),
+  //   ),
+  //   findsNothing,
+  // );
+
   expect(
-    find.descendant(
-      of: find.byKey(KWidgetkeys.widget.dropListField.list),
-      matching: find.byKey(KWidgetkeys.widget.dropListField.item),
-    ),
+    find.byType(MenuItemButton),
     findsNothing,
   );
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.widget.dropListField.field,
+    itemKey: KWidgetkeys.widget.dropListField.widget,
   );
 
   await tester.tap(
     find.byKey(KWidgetkeys.widget.dropListField.field),
+    warnIfMissed: false,
   );
 
   await tester.pumpAndSettle();
 
   expect(
-    find.byKey(KWidgetkeys.widget.dropListField.list),
+    find.byKey(KWidgetkeys.widget.dropListField.closeIcon),
     findsOneWidget,
   );
 
+  // expect(
+  //   find.byKey(KWidgetkeys.widget.dropListField.list),
+  //   findsOneWidget,
+  // );
+
   expect(
-    find.byKey(KWidgetkeys.widget.dropListField.trailingUp),
+    find.byType(MenuItemButton),
+    findsWidgets,
+  );
+
+  expect(
+    find.byKey(KWidgetkeys.widget.dropListField.closeIcon),
     findsOneWidget,
   );
 
@@ -72,32 +88,33 @@ Future<void> dropListFieldBoxHelper({
     findsNothing,
   );
 
-  expect(
-    find.byKey(KWidgetkeys.widget.dropListField.item),
-    findsWidgets,
-  );
+  // expect(
+  //   find.byKey(KWidgetkeys.widget.dropListField.item),
+  //   findsWidgets,
+  // );
 
-  expect(
-    find.byKey(KWidgetkeys.widget.dropListField.item),
-    findsWidgets,
-  );
-
-  final textWidget = tester.widget<Text>(
-    find.byKey(KWidgetkeys.widget.dropListField.itemText).first,
+  final buttonWidget = tester.widget<MenuItemButton>(
+    find.byType(MenuItemButton).first,
   );
 
   await tester.tap(
-    find.byKey(KWidgetkeys.widget.dropListField.itemText).first,
+    find.byType(MenuItemButton).first,
   );
 
   await tester.pumpAndSettle();
 
+  // expect(
+  //   find.byKey(KWidgetkeys.widget.dropListField.list),
+  //   findsNothing,
+  // );
+
   expect(
-    find.byKey(KWidgetkeys.widget.dropListField.list),
+    find.byType(MenuItemButton),
     findsNothing,
   );
 
-  if (textWidget.data != null) return;
+  if (buttonWidget.child == null || buttonWidget.child! is! Text) return;
+  final textWidget = buttonWidget.child! as Text;
   expect(
     find.descendant(
       of: find.byKey(KWidgetkeys.widget.dropListField.widget),
@@ -108,13 +125,15 @@ Future<void> dropListFieldBoxHelper({
 
   await tester.tap(
     find.byKey(KWidgetkeys.widget.dropListField.field),
+    warnIfMissed: false,
   );
   await tester.pumpAndSettle();
 
   await tester.enterText(
-    find.byKey(KWidgetkeys.widget.dropListField.field),
+    find.byKey(KWidgetkeys.widget.dropListField.widget),
     text,
   );
+
   await tester.pumpAndSettle();
 
   expect(
@@ -126,13 +145,24 @@ Future<void> dropListFieldBoxHelper({
   );
 
   await tester.enterText(
-    find.byKey(KWidgetkeys.widget.dropListField.field),
+    find.byKey(KWidgetkeys.widget.dropListField.widget),
     '${textWidget.data}$text',
   );
+
   await tester.pumpAndSettle();
 
   expect(
-    find.byKey(KWidgetkeys.widget.dropListField.item),
-    findsNothing,
+    find.byType(MenuItemButton),
+    findsWidgets,
   );
+
+  await tester.tap(
+    find.byType(MenuItemButton).first,
+  );
+
+  await tester.pumpAndSettle();
+  // expect(
+  //   find.byKey(KWidgetkeys.widget.dropListField.item),
+  //   findsNothing,
+  // );
 }

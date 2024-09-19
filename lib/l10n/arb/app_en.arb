@@ -1162,6 +1162,23 @@
     "examples": "Text for the user login button on the UserRole page",
     "description": "User login button on the UserRole page"
   },
+  "main": "Main",
+  "@main": {
+    "examples": "Text for the page indicator on the Discount Add Screen"
+  },
+  "details": "Details",
+  "@details": {
+    "examples": "Text for the page indicator on the Discount Add Screen"
+  },
+  "description": "Description",
+  "@description": {
+    "examples": "Text for the page indicator on the Discount Add Screen"
+  },
+  "indefinitely": "Indefinitely",
+  "@indefinitely": {
+    "examples": "Text near the switch on the Discounts add page",
+    "description": "The switch is used to make the discount indefinite or not"
+  },
   "asBusiness": "as a BUSINESS user",
   "@asBusiness": {
     "examples": "Text for the business login button on the UserRole page.",

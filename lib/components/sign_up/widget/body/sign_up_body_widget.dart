@@ -17,42 +17,19 @@ class SignUpBodyWidget extends StatelessWidget {
         return ScaffoldDecorationWidget(
           key: KWidgetkeys.screen.signUp.card,
           mainPadding: ({required isDesk, required maxWidth}) =>
-              EdgeInsets.symmetric(
-            horizontal: maxWidth > KMinMaxSize.maxWidth640 ? maxWidth * 0.2 : 0,
-            vertical:
+              maxWidth.screenPadding(
+            precent:
+                isDesk ? KDimensions.thirtyPercent : KDimensions.fifteenPercent,
+            verticalPadding:
                 isDesk ? KPadding.kPaddingSize80 : KPadding.kPaddingSize24,
+            notUseHorizontal: maxWidth > KMinMaxSize.maxWidth640,
           ),
           mainChildWidgetsFunction: ({required isDesk}) => [
-            Row(
-              children: [
-                if (isDesk)
-                  Expanded(
-                    child: Text(
-                      context.l10n.signUp,
-                      key: KWidgetkeys.screen.signUp.title,
-                      style: isDesk
-                          ? AppTextStyle.materialThemeDisplayLarge
-                          : AppTextStyle.materialThemeDisplaySmall,
-                    ),
-                  )
-                else
-                  Text(
-                    context.l10n.signUp,
-                    key: KWidgetkeys.screen.signUp.title,
-                    style: isDesk
-                        ? AppTextStyle.materialThemeDisplayLarge
-                        : AppTextStyle.materialThemeDisplaySmall,
-                  ),
-                if (isDesk)
-                  KSizedBox.kWidthSizedBox32
-                else
-                  KSizedBox.kWidthSizedBox24,
-                IconWidget(
-                  icon: KIcon.arrowDownLeft,
-                  padding:
-                      isDesk ? KPadding.kPaddingSize20 : KPadding.kPaddingSize8,
-                ),
-              ],
+            ShortTitleIconWidget(
+              title: context.l10n.signUp,
+              titleKey: KWidgetkeys.screen.signUp.title,
+              isDesk: isDesk,
+              expanded: isDesk,
             ),
             if (isDesk)
               KSizedBox.kHeightSizedBox40

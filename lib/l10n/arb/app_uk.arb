@@ -1170,6 +1170,23 @@
     "examples": "Текст для кнопки входу користувача на сторінці UserRole",
     "description": "Кнопка для входу користувача на сторінці UserRole"
   },
+  "main": "Основне",
+  "@main": {
+    "examples": "Текст для індикатора сторінки для Discount Add Screen"
+  },
+  "details": "Деталі",
+  "@details": {
+    "examples": "Текст для індикатора сторінки для Discount Add Screen"
+  },
+  "description": "Опис",
+  "@description": {
+    "examples": "Текст для індикатора сторінки для Discount Add Screen"
+  },
+  "indefinitely": "Безстроково",
+  "@indefinitely": {
+    "examples": "Текст біля перемикача на сторінці Discounts add",
+    "description": "Перемикач використовується для роблення знижки безстроковою або ні"
+  },
   "asBusiness": "як БІЗНЕС користувач",
   "@asBusiness": {
     "examples": "Текст для кнопки входу для бізнесу на сторінці UserRole",

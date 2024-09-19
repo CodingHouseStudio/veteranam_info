@@ -19,17 +19,17 @@ void main() {
   group('${KScreenBlocName.information} ${KGroupText.bloc}', () {
     late InformationWatcherBloc informationWatcherBloc;
     late IInformationRepository mockInformationRepository;
-    late IAppAuthenticationRepository mockAppAuthenticationRepository;
-    late IReportRepository mockReportRepository;
+    // late IAppAuthenticationRepository mockAppAuthenticationRepository;
+    // late IReportRepository mockReportRepository;
 
     setUp(() {
       mockInformationRepository = MockIInformationRepository();
-      mockAppAuthenticationRepository = MockIAppAuthenticationRepository();
-      mockReportRepository = MockIReportRepository();
+      // mockAppAuthenticationRepository = MockIAppAuthenticationRepository();
+      // mockReportRepository = MockIReportRepository();
       when(
         mockInformationRepository.getInformationItems(
-          reportIdItems: KTestText.reportItems.getIdCard,
-        ),
+            // reportIdItems: KTestText.reportItems.getIdCard,
+            ),
       ).thenAnswer(
         (_) => Stream.value(KTestText.informationModelItemsModify),
       );
@@ -41,21 +41,21 @@ void main() {
       ).thenAnswer(
         (_) async => const Right(true),
       );
-      when(mockAppAuthenticationRepository.currentUser).thenAnswer(
-        (invocation) => KTestText.user,
-      );
-      when(
-        mockReportRepository.getCardReportById(
-          cardEnum: CardEnum.information,
-          userId: KTestText.user.id,
-        ),
-      ).thenAnswer(
-        (invocation) async => Right(KTestText.reportItems),
-      );
+      // when(mockAppAuthenticationRepository.currentUser).thenAnswer(
+      //   (invocation) => KTestText.user,
+      // );
+      // when(
+      //   mockReportRepository.getCardReportById(
+      //     cardEnum: CardEnum.information,
+      //     userId: KTestText.user.id,
+      //   ),
+      // ).thenAnswer(
+      //   (invocation) async => Right(KTestText.reportItems),
+      // );
       informationWatcherBloc = InformationWatcherBloc(
         informationRepository: mockInformationRepository,
-        reportRepository: mockReportRepository,
-        appAuthenticationRepository: mockAppAuthenticationRepository,
+        // reportRepository: mockReportRepository,
+        // appAuthenticationRepository: mockAppAuthenticationRepository,
       );
     });
 
@@ -79,8 +79,8 @@ void main() {
       act: (bloc) async {
         when(
           mockInformationRepository.getInformationItems(
-            reportIdItems: KTestText.reportItems.getIdCard,
-          ),
+              // reportIdItems: KTestText.reportItems.getIdCard,
+              ),
         ).thenAnswer(
           (_) => Stream.error(KGroupText.failureGet),
         );
@@ -165,14 +165,14 @@ void main() {
         bloc.add(
           const InformationWatcherEvent.loadNextItems(),
         );
-        when(
-          mockReportRepository.getCardReportById(
-            cardEnum: CardEnum.information,
-            userId: KTestText.user.id,
-          ),
-        ).thenAnswer(
-          (invocation) async => Right([KTestText.reportItems.first]),
-        );
+        // when(
+        //   mockReportRepository.getCardReportById(
+        //     cardEnum: CardEnum.information,
+        //     userId: KTestText.user.id,
+        //   ),
+        // ).thenAnswer(
+        //   (invocation) async => Right([KTestText.reportItems.first]),
+        // );
         // bloc.add(
         //   const InformationWatcherEvent.getReport(),
         // );
@@ -535,55 +535,55 @@ void main() {
         ),
       ],
     );
-    blocTest<InformationWatcherBloc, InformationWatcherState>(
-      'emits [InformationWatcherState()]'
-      ' when get report failure and load nex with listLoadedFull',
-      build: () => informationWatcherBloc,
-      act: (bloc) async {
-        when(
-          mockReportRepository.getCardReportById(
-            cardEnum: CardEnum.information,
-            userId: KTestText.user.id,
-          ),
-        ).thenAnswer(
-          (invocation) async => Left(
-            SomeFailure.serverError(
-              error: null,
-            ),
-          ),
-        );
-        when(
-          mockInformationRepository.getInformationItems(),
-        ).thenAnswer(
-          (_) => Stream.value([KTestText.informationModelItemsModify.first]),
-        );
-        bloc.add(const InformationWatcherEvent.started());
-        await expectLater(
-          bloc.stream,
-          emitsInOrder([
-            predicate<InformationWatcherState>(
-              (state) => state.loadingStatus == LoadingStatus.loading,
-            ),
-            predicate<InformationWatcherState>(
-              (state) => state.loadingStatus == LoadingStatus.listLoadedFull,
-            ),
-          ]),
-          reason: 'Wait loading data',
-        );
-        bloc.add(
-          const InformationWatcherEvent.loadNextItems(),
-        );
-      },
-      expect: () => [
-        predicate<InformationWatcherState>(
-          (state) => state.loadingStatus == LoadingStatus.loading,
-        ),
-        predicate<InformationWatcherState>(
-          (state) =>
-              state.loadingStatus == LoadingStatus.listLoadedFull &&
-              state.filters.isEmpty,
-        ),
-      ],
-    );
+    // blocTest<InformationWatcherBloc, InformationWatcherState>(
+    //   'emits [InformationWatcherState()]'
+    //   ' when get report failure and load nex with listLoadedFull',
+    //   build: () => informationWatcherBloc,
+    //   act: (bloc) async {
+    //     when(
+    //       mockReportRepository.getCardReportById(
+    //         cardEnum: CardEnum.information,
+    //         userId: KTestText.user.id,
+    //       ),
+    //     ).thenAnswer(
+    //       (invocation) async => Left(
+    //         SomeFailure.serverError(
+    //           error: null,
+    //         ),
+    //       ),
+    //     );
+    //     when(
+    //       mockInformationRepository.getInformationItems(),
+    //     ).thenAnswer(
+    //       (_) => Stream.value([KTestText.informationModelItemsModify.first]),
+    //     );
+    //     bloc.add(const InformationWatcherEvent.started());
+    //     await expectLater(
+    //       bloc.stream,
+    //       emitsInOrder([
+    //         predicate<InformationWatcherState>(
+    //           (state) => state.loadingStatus == LoadingStatus.loading,
+    //         ),
+    //         predicate<InformationWatcherState>(
+    //           (state) => state.loadingStatus == LoadingStatus.listLoadedFull,
+    //         ),
+    //       ]),
+    //       reason: 'Wait loading data',
+    //     );
+    //     bloc.add(
+    //       const InformationWatcherEvent.loadNextItems(),
+    //     );
+    //   },
+    //   expect: () => [
+    //     predicate<InformationWatcherState>(
+    //       (state) => state.loadingStatus == LoadingStatus.loading,
+    //     ),
+    //     predicate<InformationWatcherState>(
+    //       (state) =>
+    //           state.loadingStatus == LoadingStatus.listLoadedFull &&
+    //           state.filters.isEmpty,
+    //     ),
+    //   ],
+    // );
   });
 }

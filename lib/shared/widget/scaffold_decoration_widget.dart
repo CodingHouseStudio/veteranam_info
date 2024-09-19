@@ -9,6 +9,7 @@ class ScaffoldDecorationWidget extends StatelessWidget {
     this.titleChildWidgetsFunction,
     this.mainPadding,
     this.mainDecorationPadding,
+    this.titlePadding,
     // this.loadDataAgain,
   });
   final List<Widget> Function({required bool isDesk})?
@@ -18,6 +19,10 @@ class ScaffoldDecorationWidget extends StatelessWidget {
     required bool isDesk,
     required double maxWidth,
   })? mainPadding;
+  final EdgeInsetsGeometry Function({
+    required bool isDesk,
+    required double maxWidth,
+  })? titlePadding;
   final EdgeInsetsGeometry Function({required bool isDesk})?
       mainDecorationPadding;
   final BoxDecoration? mainDecoration;
@@ -76,7 +81,12 @@ class ScaffoldDecorationWidget extends StatelessWidget {
                   ),
                   if (titleChildWidgetsFunction != null)
                     SliverPadding(
-                      padding: padding,
+                      padding: titlePadding != null
+                          ? titlePadding!(
+                              isDesk: isDesk,
+                              maxWidth: constraints.maxWidth,
+                            ) //.add(padding)
+                          : padding,
                       sliver: SliverList.builder(
                         addAutomaticKeepAlives: false,
                         addRepaintBoundaries: false,
@@ -93,7 +103,7 @@ class ScaffoldDecorationWidget extends StatelessWidget {
                         ? mainPadding!(
                             isDesk: isDesk,
                             maxWidth: constraints.maxWidth,
-                          ).add(padding)
+                          ) //.add(padding)
                         : padding,
                     sliver: DecoratedSliver(
                       decoration: mainDecoration ?? const BoxDecoration(),

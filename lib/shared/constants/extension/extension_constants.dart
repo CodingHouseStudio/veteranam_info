@@ -411,6 +411,27 @@ extension StoryExtensions on StoryModel {
       );
 }
 
+extension DoubleExtensions on double {
+  EdgeInsetsGeometry screenPadding({
+    required double precent,
+    double? verticalPadding,
+    double? horizontalPadding,
+    bool notUseHorizontal = true,
+  }) {
+    const threshold = KPlatformConstants.maxWidthThresholdTablet;
+    final horizontalPaddingValue = this <= threshold
+        ? this * precent
+        : threshold * precent + ((this - threshold) / 2);
+
+    return EdgeInsets.symmetric(
+      horizontal: notUseHorizontal
+          ? horizontalPaddingValue
+          : horizontalPadding ?? KPadding.kPaddingSize16,
+      vertical: verticalPadding ?? 0,
+    );
+  }
+}
+
 // extension FirebaseAnalyticsExtensions on FirebaseAnalytics {
 //   void releaseLogEvent({
 //     required String name,

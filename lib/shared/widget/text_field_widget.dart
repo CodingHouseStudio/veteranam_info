@@ -147,7 +147,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
           errorText: widget.showErrorText ?? true ? widget.errorText : null,
           suffixIcon: Padding(
             padding: EdgeInsets.only(
-              right: widget.suffixIconPadding ?? KPadding.kPaddingSize16,
+              right: widget.suffixIconPadding ?? KPadding.kPaddingSize4,
             ),
             child: widget.suffixIcon,
           ),

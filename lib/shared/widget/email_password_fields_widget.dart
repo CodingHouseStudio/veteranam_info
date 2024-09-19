@@ -113,22 +113,18 @@ class _EmailPasswordFieldsWidgetState extends State<EmailPasswordFieldsWidget>
             hintText: context.l10n.password,
             isDesk: widget.isDesk,
             controller: passwordController,
-            suffixIcon: Padding(
-              padding: const EdgeInsets.only(right: KPadding.kPaddingSize12),
-              child: IconButton(
-                key: KWidgetkeys.widget.emailPasswordFields.iconHidePassword,
-                icon: obscurePassword
-                    ? KIcon.eyeOff.copyWith(
-                        key: KWidgetkeys.widget.emailPasswordFields.iconEyeOff,
-                      )
-                    : KIcon.eye.copyWith(
-                        key: KWidgetkeys.widget.emailPasswordFields.iconEye,
-                      ),
-                onPressed: () =>
-                    setState(() => obscurePassword = !obscurePassword),
-              ),
+            suffixIcon: IconButton(
+              key: KWidgetkeys.widget.emailPasswordFields.iconHidePassword,
+              icon: obscurePassword
+                  ? KIcon.eyeOff.copyWith(
+                      key: KWidgetkeys.widget.emailPasswordFields.iconEyeOff,
+                    )
+                  : KIcon.eye.copyWith(
+                      key: KWidgetkeys.widget.emailPasswordFields.iconEye,
+                    ),
+              onPressed: () =>
+                  setState(() => obscurePassword = !obscurePassword),
             ),
-            suffixIconPadding: 0,
             focusNode: passwordFocusNode,
             disposeFocusNode: false,
             obscureText: obscurePassword,

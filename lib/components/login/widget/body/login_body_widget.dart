@@ -17,10 +17,12 @@ class LoginBodyWidget extends StatelessWidget {
         return ScaffoldDecorationWidget(
           key: KWidgetkeys.screen.login.card,
           mainPadding: ({required isDesk, required maxWidth}) =>
-              EdgeInsets.symmetric(
-            horizontal: maxWidth > KMinMaxSize.maxWidth640 ? maxWidth * 0.2 : 0,
-            vertical:
+              maxWidth.screenPadding(
+            precent:
+                isDesk ? KDimensions.thirtyPercent : KDimensions.fifteenPercent,
+            verticalPadding:
                 isDesk ? KPadding.kPaddingSize80 : KPadding.kPaddingSize24,
+            notUseHorizontal: maxWidth > KMinMaxSize.maxWidth640,
           ),
           mainChildWidgetsFunction: ({required isDesk}) => [
             ShortTitleIconWidget(
