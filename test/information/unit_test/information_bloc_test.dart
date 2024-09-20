@@ -535,55 +535,55 @@ void main() {
         ),
       ],
     );
-    // blocTest<InformationWatcherBloc, InformationWatcherState>(
-    //   'emits [InformationWatcherState()]'
-    //   ' when get report failure and load nex with listLoadedFull',
-    //   build: () => informationWatcherBloc,
-    //   act: (bloc) async {
-    //     when(
-    //       mockReportRepository.getCardReportById(
-    //         cardEnum: CardEnum.information,
-    //         userId: KTestText.user.id,
-    //       ),
-    //     ).thenAnswer(
-    //       (invocation) async => Left(
-    //         SomeFailure.serverError(
-    //           error: null,
-    //         ),
-    //       ),
-    //     );
-    //     when(
-    //       mockInformationRepository.getInformationItems(),
-    //     ).thenAnswer(
-    //       (_) => Stream.value([KTestText.informationModelItemsModify.first]),
-    //     );
-    //     bloc.add(const InformationWatcherEvent.started());
-    //     await expectLater(
-    //       bloc.stream,
-    //       emitsInOrder([
-    //         predicate<InformationWatcherState>(
-    //           (state) => state.loadingStatus == LoadingStatus.loading,
-    //         ),
-    //         predicate<InformationWatcherState>(
-    //           (state) => state.loadingStatus == LoadingStatus.listLoadedFull,
-    //         ),
-    //       ]),
-    //       reason: 'Wait loading data',
-    //     );
-    //     bloc.add(
-    //       const InformationWatcherEvent.loadNextItems(),
-    //     );
-    //   },
-    //   expect: () => [
-    //     predicate<InformationWatcherState>(
-    //       (state) => state.loadingStatus == LoadingStatus.loading,
-    //     ),
-    //     predicate<InformationWatcherState>(
-    //       (state) =>
-    //           state.loadingStatus == LoadingStatus.listLoadedFull &&
-    //           state.filters.isEmpty,
-    //     ),
-    //   ],
-    // );
+    blocTest<InformationWatcherBloc, InformationWatcherState>(
+      'emits [InformationWatcherState()]'
+      ' when load nex with listLoadedFull',
+      build: () => informationWatcherBloc,
+      act: (bloc) async {
+        // when(
+        //   mockReportRepository.getCardReportById(
+        //     cardEnum: CardEnum.information,
+        //     userId: KTestText.user.id,
+        //   ),
+        // ).thenAnswer(
+        //   (invocation) async => Left(
+        //     SomeFailure.serverError(
+        //       error: null,
+        //     ),
+        //   ),
+        // );
+        when(
+          mockInformationRepository.getInformationItems(),
+        ).thenAnswer(
+          (_) => Stream.value([KTestText.informationModelItemsModify.first]),
+        );
+        bloc.add(const InformationWatcherEvent.started());
+        await expectLater(
+          bloc.stream,
+          emitsInOrder([
+            predicate<InformationWatcherState>(
+              (state) => state.loadingStatus == LoadingStatus.loading,
+            ),
+            predicate<InformationWatcherState>(
+              (state) => state.loadingStatus == LoadingStatus.listLoadedFull,
+            ),
+          ]),
+          reason: 'Wait loading data',
+        );
+        bloc.add(
+          const InformationWatcherEvent.loadNextItems(),
+        );
+      },
+      expect: () => [
+        predicate<InformationWatcherState>(
+          (state) => state.loadingStatus == LoadingStatus.loading,
+        ),
+        predicate<InformationWatcherState>(
+          (state) =>
+              state.loadingStatus == LoadingStatus.listLoadedFull &&
+              state.filters.isEmpty,
+        ),
+      ],
+    );
   });
 }
