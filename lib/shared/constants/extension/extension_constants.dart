@@ -255,10 +255,10 @@ extension InformationModelExtension on InformationModel {
 
 extension GenericsExtensions<T> on T {
   T getTrnslation({
-    required T en,
+    required T? en,
     required BuildContext context,
   }) =>
-      context.isEnglish ? en : this;
+      context.isEnglish ? en ?? this : this;
 }
 
 extension ContextExtensions on BuildContext {
@@ -449,3 +449,37 @@ extension DoubleExtensions on double {
 //     }
 //   }
 // }
+
+extension CardEnumExtention on CardEnum {
+  String get getValue {
+    switch (this) {
+      case CardEnum.funds:
+        return 'funds';
+      case CardEnum.discount:
+        return 'discount';
+      case CardEnum.information:
+        return 'information';
+      case CardEnum.story:
+        return 'story';
+    }
+  }
+}
+
+extension DiscountStateExtention on DiscountState {
+  String get enumString {
+    switch (this) {
+      case DiscountState.isNew:
+        return 'isNew';
+      case DiscountState.underReview:
+        return 'underReview';
+      case DiscountState.overdue:
+        return 'overdue';
+      case DiscountState.rejected:
+        return 'rejected';
+      case DiscountState.published:
+        return 'published';
+      case DiscountState.deactivated:
+        return 'deactivated';
+    }
+  }
+}

@@ -214,7 +214,7 @@ class DiscountCardWidget extends StatelessWidget {
       .getTrnslation(en: discountItem.titleEN, context: context);
 
   List<Widget> _category(BuildContext context) =>
-      List.generate(discountItem.categoryEN.length, (int index) {
+      List.generate(discountItem.category.length, (int index) {
         return Container(
           constraints: const BoxConstraints(minHeight: KMinMaxSize.minHeight30),
           padding: const EdgeInsets.symmetric(

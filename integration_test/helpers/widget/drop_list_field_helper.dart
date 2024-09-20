@@ -7,9 +7,10 @@ import '../../test_dependency.dart';
 Future<void> dropListFieldBoxHelper({
   required WidgetTester tester,
   required String text,
+  required Key widgetKey,
 }) async {
   expect(
-    find.byKey(KWidgetkeys.widget.dropListField.widget),
+    find.byKey(widgetKey),
     findsOneWidget,
   );
 
@@ -110,7 +111,7 @@ Future<void> dropListFieldBoxHelper({
   if (textWidget.data != null) return;
   expect(
     find.descendant(
-      of: find.byKey(KWidgetkeys.widget.dropListField.widget),
+      of: find.byKey(widgetKey),
       matching: find.text(textWidget.data!),
     ),
     findsOneWidget,
@@ -129,7 +130,7 @@ Future<void> dropListFieldBoxHelper({
 
   expect(
     find.descendant(
-      of: find.byKey(KWidgetkeys.widget.dropListField.widget),
+      of: find.byKey(widgetKey),
       matching: find.text(text),
     ),
     findsWidgets,

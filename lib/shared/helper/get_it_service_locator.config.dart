@@ -123,8 +123,8 @@ import 'package:veteranam/shared/shared.dart' as _i1001;
 
 const String _user = 'user';
 const String _mobile = 'mobile';
-const String _business = 'business';
 const String _development = 'development';
+const String _business = 'business';
 
 extension GetItInjectableX on _i174.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -185,11 +185,6 @@ extension GetItInjectableX on _i174.GetIt {
         _user,
         _mobile,
       },
-    );
-    gh.factory<_i855.DiscountsAddBloc>(
-      () => _i855.DiscountsAddBloc(
-          discountRepository: gh<_i1001.IDiscountRepository>()),
-      registerFor: {_business},
     );
     gh.factory<_i687.MobFaqWatcherBloc>(
       () => _i687.MobFaqWatcherBloc(faqRepository: gh<_i1001.IFaqRepository>()),
@@ -268,6 +263,13 @@ extension GetItInjectableX on _i174.GetIt {
               gh<_i1001.CacheClient>(),
               gh<_i806.FacebookAuth>(),
             ));
+    gh.factory<_i855.DiscountsAddBloc>(
+      () => _i855.DiscountsAddBloc(
+        discountRepository: gh<_i1001.IDiscountRepository>(),
+        appAuthenticationBloc: gh<_i1001.IAppAuthenticationRepository>(),
+      ),
+      registerFor: {_business},
+    );
     gh.singleton<_i997.NetworkRepository>(
         () => _i997.NetworkRepository(gh<_i1001.IAppNetworkRepository>()));
     gh.factory<_i43.DiscountConfigCubit>(() => _i43.DiscountConfigCubit(

@@ -8,6 +8,15 @@ class CitiesFieldModel
 
   const CitiesFieldModel.dirty([super.value]) : super.dirty();
 
+  CitiesFieldModel addValue(String discount) {
+    if (value == null) {
+      return CitiesFieldModel.dirty([discount]);
+    } else {
+      value!.add(discount);
+      return this;
+    }
+  }
+
   @override
   CitiesFieldModelValidationError? validator(List<String>? value) {
     if (value == null ||

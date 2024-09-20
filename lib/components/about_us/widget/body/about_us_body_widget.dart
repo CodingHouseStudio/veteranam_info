@@ -1,8 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:veteranam/shared/shared.dart';
 
-class AboutUsBodyWidget extends StatelessWidget {
+class AboutUsBodyWidget extends StatefulWidget {
   const AboutUsBodyWidget({super.key});
+
+  @override
+  State<AboutUsBodyWidget> createState() => _AboutUsBodyWidgetState();
+}
+
+class _AboutUsBodyWidgetState extends State<AboutUsBodyWidget> {
+  late bool switcherIsSelected;
+  @override
+  void initState() {
+    switcherIsSelected = false;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +36,11 @@ class AboutUsBodyWidget extends StatelessWidget {
           messageIcon: KIcon.person,
         ),
         KSizedBox.kHeightSizedBox30,
+        SwitchOfflineWidget(
+          isSelected: switcherIsSelected,
+          onChanged: () =>
+              setState(() => switcherIsSelected = !switcherIsSelected),
+        ),
       ],
     );
   }

@@ -29,7 +29,7 @@ Future<void> myDiscountsInitialHelper(
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.myDiscounts.icon),
+        find.byKey(KWidgetkeys.screen.myDiscounts.iconAdd),
         findsOneWidget,
       );
 

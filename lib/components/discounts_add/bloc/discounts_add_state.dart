@@ -1,10 +1,28 @@
 part of 'discounts_add_bloc.dart';
 
+enum DiscountsAddFailure {
+  error,
+  network,
+  send,
+}
+
+extension DiscountsAddFailureExtension on SomeFailure {
+  DiscountsAddFailure _toDiscountsAdd() {
+    switch (this) {
+      case FailureSend():
+        return DiscountsAddFailure.send;
+      case FailureNetwork():
+        return DiscountsAddFailure.network;
+      default:
+        return DiscountsAddFailure.error;
+    }
+  }
+}
+
 @freezed
 class DiscountsAddState with _$DiscountsAddState {
   const factory DiscountsAddState({
     // required DiscountModel discountModel,
-    required List<String> cityList,
     required List<String> categoryList,
     required MessageFieldModel category,
     required CitiesFieldModel city,
@@ -15,6 +33,7 @@ class DiscountsAddState with _$DiscountsAddState {
     required MessageFieldModel description,
     required MessageFieldModel exclusions,
     required DiscountsAddEnum formState,
+    DiscountsAddFailure? failure,
   }) = _Initial;
 }
 

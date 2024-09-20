@@ -10,6 +10,7 @@ class DropListFieldWidget extends StatelessWidget {
     super.key,
     this.showErrorText,
     this.errorText,
+    this.controller,
   });
 
   final void Function(String text)? onChanged;
@@ -18,11 +19,13 @@ class DropListFieldWidget extends StatelessWidget {
   final bool isDesk;
   final bool? showErrorText;
   final String? errorText;
+  final TextEditingController? controller;
 
   @override
   Widget build(BuildContext context) {
     return DropdownMenu<String>(
       key: KWidgetkeys.widget.dropListField.widget,
+      controller: controller,
       label: Text(
         labelText,
         key: KWidgetkeys.widget.dropListField.field,

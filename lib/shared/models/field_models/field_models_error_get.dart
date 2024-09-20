@@ -122,6 +122,8 @@ extension DiscountsFieldModelValidationErrorEmpl
     switch (this) {
       case DiscountsFieldModelValidationError.empty:
         return context.l10n.fieldCannotBeEmpty;
+      case DiscountsFieldModelValidationError.wrongFormat:
+        return context.l10n.discountsWrongFormat;
       case null:
         return null;
     }

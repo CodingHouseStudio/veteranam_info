@@ -9,6 +9,6 @@ final getIt = GetIt.instance;
 void configureDependencies() => getIt.init(
       // environment: Config.flavour,
       environmentFilter: const NoEnvOrContainsAny(
-        {Config.flavour, Config.role,Config.platform},
+        {Config.flavour, Config.role, Config.platform},
       ),
     );

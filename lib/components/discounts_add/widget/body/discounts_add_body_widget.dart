@@ -4,12 +4,56 @@ import 'package:go_router/go_router.dart';
 import 'package:veteranam/components/components.dart';
 import 'package:veteranam/shared/shared.dart';
 
-class DiscountsAddBodyWidget extends StatelessWidget {
+class DiscountsAddBodyWidget extends StatefulWidget {
   const DiscountsAddBodyWidget({super.key});
 
   @override
+  State<DiscountsAddBodyWidget> createState() => _DiscountsAddBodyWidgetState();
+}
+
+class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
+  late TextEditingController discountsController;
+  late TextEditingController titleController;
+  late TextEditingController linkController;
+  late TextEditingController categoryController;
+  late TextEditingController cityController;
+  late TextEditingController periodController;
+  late TextEditingController exclusionController;
+  late TextEditingController descriptionController;
+  @override
+  void initState() {
+    super.initState();
+    discountsController = TextEditingController();
+    titleController = TextEditingController();
+    linkController = TextEditingController();
+    categoryController = TextEditingController();
+    cityController = TextEditingController();
+    periodController = TextEditingController();
+    exclusionController = TextEditingController();
+    descriptionController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    discountsController.dispose();
+    titleController.dispose();
+    linkController.dispose();
+    categoryController.dispose();
+    cityController.dispose();
+    periodController.dispose();
+    exclusionController.dispose();
+    descriptionController.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return BlocBuilder<DiscountsAddBloc, DiscountsAddState>(
+    return BlocConsumer<DiscountsAddBloc, DiscountsAddState>(
+      listener: (context, state) {
+        if (state.formState == DiscountsAddEnum.success) {
+          context.goNamed(KRoute.myDiscounts.name);
+        }
+      },
       builder: (context, _) => ScaffoldWidget(
         titleDeskPadding: ({required maxWidth}) => maxWidth.screenPadding(
           precent: KDimensions.fifteenPercent,
@@ -18,7 +62,7 @@ class DiscountsAddBodyWidget extends StatelessWidget {
           KSizedBox.kHeightSizedBox24,
           ShortTitleIconWidget(
             title: context.l10n.offerDiscount,
-            titleKey: KWidgetkeys.screen.signUp.title,
+            titleKey: KWidgetkeys.screen.discountsAdd.title,
             isDesk: isDesk,
             expanded: true,
           ),
@@ -28,6 +72,7 @@ class DiscountsAddBodyWidget extends StatelessWidget {
         mainChildWidgetsFunction: ({required isDesk, required isTablet}) => [
           KSizedBox.kHeightSizedBox40,
           BreadcrumbsWidget(
+            key: KWidgetkeys.screen.discountsAdd.pageIndicator,
             pageName: [
               context.l10n.main,
               context.l10n.details,
@@ -38,6 +83,8 @@ class DiscountsAddBodyWidget extends StatelessWidget {
           KSizedBox.kHeightSizedBox40,
           if (_.formState.isMain)
             DropListFieldWidget(
+              key: KWidgetkeys.screen.discountsAdd.categoryField,
+              controller: categoryController,
               onChanged: (text) => context
                   .read<DiscountsAddBloc>()
                   .add(DiscountsAddEvent.categoryUpdate(text)),
@@ -49,19 +96,22 @@ class DiscountsAddBodyWidget extends StatelessWidget {
             )
           else if (_.formState.isDetail)
             TextFieldDescriptionWidget(
-              widgetKey: const Key(''),
+              widgetKey: KWidgetkeys.screen.discountsAdd.titleField,
+              controller: titleController,
               isDesk: isDesk,
               description: context.l10n.titleExample,
               labelText: context.l10n.title,
-              suffixIcon: KIcon.distance,
               showErrorText: _.formState.hasError,
-              errorText: _.city.error.value(context),
+              errorText: _.title.error.value(context),
               onChanged: (text) => context
                   .read<DiscountsAddBloc>()
                   .add(DiscountsAddEvent.titleUpdate(text)),
+              maxLength: KMinMaxSize.titleMaxLength,
             )
           else
             MessageFieldWidget(
+              key: KWidgetkeys.screen.discountsAdd.descriptionField,
+              controller: descriptionController,
               changeMessage: (text) => context
                   .read<DiscountsAddBloc>()
                   .add(DiscountsAddEvent.descriptionUpdate(text)),
@@ -73,7 +123,8 @@ class DiscountsAddBodyWidget extends StatelessWidget {
           KSizedBox.kHeightSizedBox32,
           if (_.formState.isMain)
             TextFieldWidget(
-              widgetKey: const Key(''),
+              widgetKey: KWidgetkeys.screen.discountsAdd.cityField,
+              controller: cityController,
               labelText: context.l10n.city,
               onChanged: (value) => context
                   .read<DiscountsAddBloc>()
@@ -85,7 +136,8 @@ class DiscountsAddBodyWidget extends StatelessWidget {
             )
           else if (_.formState.isDetail)
             TextFieldDescriptionWidget(
-              widgetKey: const Key(''),
+              widgetKey: KWidgetkeys.screen.discountsAdd.discountsField,
+              controller: discountsController,
               isDesk: isDesk,
               labelText: context.l10n.discount,
               description: context.l10n.discountDescription,
@@ -94,15 +146,16 @@ class DiscountsAddBodyWidget extends StatelessWidget {
               errorText: _.discounts.error.value(context),
               onChanged: (text) => context
                   .read<DiscountsAddBloc>()
-                  .add(DiscountsAddEvent.discountUpdate(int.parse(text))),
+                  .add(DiscountsAddEvent.discountUpdate(text)),
+              errorMaxLines: 3,
             )
           else
             TextFieldDescriptionWidget(
-              widgetKey: const Key(''),
+              widgetKey: KWidgetkeys.screen.discountsAdd.exclusionField,
+              controller: exclusionController,
               isDesk: isDesk,
-              labelText: context.l10n.discount,
-              description: context.l10n.discountDescription,
-              suffixIcon: KIcon.distance,
+              labelText: context.l10n.getYouNeed,
+              description: context.l10n.getYouNeedDescription,
               showErrorText: _.formState.hasError,
               errorText: _.exclusions.error.value(context),
               onChanged: (text) => context
@@ -113,7 +166,8 @@ class DiscountsAddBodyWidget extends StatelessWidget {
           KSizedBox.kHeightSizedBox32,
           if (_.formState.isMain)
             TextFieldWidget(
-              widgetKey: const Key(''),
+              widgetKey: KWidgetkeys.screen.discountsAdd.periodField,
+              controller: periodController,
               labelText: context.l10n.period,
               onChanged: (value) => context
                   .read<DiscountsAddBloc>()
@@ -126,22 +180,22 @@ class DiscountsAddBodyWidget extends StatelessWidget {
             )
           else if (_.formState.isDetail)
             TextFieldDescriptionWidget(
-              widgetKey: const Key(''),
+              widgetKey: KWidgetkeys.screen.discountsAdd.linkField,
+              controller: linkController,
               isDesk: isDesk,
               labelText: context.l10n.link,
               description: context.l10n.linkDescription,
-              suffixIcon: KIcon.distance,
               showErrorText: _.formState.hasError,
-              errorText: _.discounts.error.value(context),
+              errorText: _.link.error.value(context),
               onChanged: (text) => context
                   .read<DiscountsAddBloc>()
                   .add(DiscountsAddEvent.linkUpdate(text)),
             ),
-          if (!_.formState.isDescription) KSizedBox.kHeightSizedBox8,
-          if (_.formState.isMain)
+          if (_.formState.isMain) ...[
             Row(
               children: [
                 SwitchWidgetWithoutBloc(
+                  key: KWidgetkeys.screen.discountsAdd.indefinitelySwitcher,
                   onSelected: ({required isSelected}) => context
                       .read<DiscountsAddBloc>()
                       .add(
@@ -149,48 +203,91 @@ class DiscountsAddBodyWidget extends StatelessWidget {
                       ),
                 ),
                 KSizedBox.kWidthSizedBox16,
-                Text(
-                  context.l10n.indefinitely,
-                  style: AppTextStyle.materialThemeBodyLarge,
+                Expanded(
+                  child: Text(
+                    context.l10n.indefinitely,
+                    key: KWidgetkeys.screen.discountsAdd.indefinitelyText,
+                    style: AppTextStyle.materialThemeBodyLarge,
+                  ),
                 ),
               ],
             ),
-          KSizedBox.kHeightSizedBox40,
-          Row(
-            children: [
-              Expanded(
-                child: TextButton(
-                  onPressed: () => context.pop(),
-                  style: KButtonStyles.borderBlackButtonStyle.copyWith(
-                    padding: const WidgetStatePropertyAll(
-                      EdgeInsets.symmetric(
-                        vertical: KPadding.kPaddingSize16,
-                      ),
-                    ),
-                  ),
-                  child: Text(
-                    context.l10n.cancel,
-                    style: AppTextStyle.materialThemeTitleMedium,
-                  ),
-                ),
-              ),
-              KSizedBox.kWidthSizedBox40,
-              Expanded(
-                child: DoubleButtonWidget(
-                  text: context.l10n.next,
-                  isDesk: isDesk,
-                  onPressed: () => context.read<DiscountsAddBloc>().add(
-                        const DiscountsAddEvent.send(),
-                      ),
-                  mobTextWidth: double.infinity,
-                  widgetKey: const Key(''),
-                  deskTextWidth: double.infinity,
-                ),
-              ),
-            ],
-          ),
+            KSizedBox.kHeightSizedBox8,
+          ],
+          if (!_.formState.isDescription) KSizedBox.kHeightSizedBox40,
+          if (isDesk)
+            Row(
+              children: _buttons(context: context, isDesk: true),
+            )
+          else
+            ..._buttons(context: context, isDesk: false).reversed,
         ],
       ),
     );
   }
+
+  List<Widget> _buttons({
+    required BuildContext context,
+    required bool isDesk,
+  }) =>
+      [
+        if (isDesk)
+          Expanded(
+            child: _cancelButton(context: context, isDesk: isDesk),
+          )
+        else
+          _cancelButton(context: context, isDesk: isDesk),
+        if (isDesk) KSizedBox.kWidthSizedBox40 else KSizedBox.kHeightSizedBox24,
+        if (isDesk)
+          Expanded(
+            child: _sendButton(context: context, isDesk: isDesk),
+          )
+        else
+          _sendButton(context: context, isDesk: isDesk),
+      ];
+  Widget _cancelButton({
+    required BuildContext context,
+    required bool isDesk,
+  }) =>
+      TextButton(
+        key: KWidgetkeys.screen.discountsAdd.cancelButton,
+        onPressed: () => context.read<DiscountsAddBloc>().state.formState.isMain
+            ? context.pop()
+            : context.read<DiscountsAddBloc>().add(
+                  const DiscountsAddEvent.back(),
+                ),
+        style: KButtonStyles.borderBlackButtonStyle.copyWith(
+          padding: const WidgetStatePropertyAll(
+            EdgeInsets.symmetric(
+              vertical: KPadding.kPaddingSize16,
+            ),
+          ),
+        ),
+        child: Text(
+          context.read<DiscountsAddBloc>().state.formState.isMain
+              ? context.l10n.cancel
+              : context.l10n.back,
+          style: AppTextStyle.materialThemeTitleMedium,
+        ),
+      );
+  Widget _sendButton({
+    required BuildContext context,
+    required bool isDesk,
+  }) =>
+      DoubleButtonWidget(
+        key: KWidgetkeys.screen.discountsAdd.sendButton,
+        text: context.read<DiscountsAddBloc>().state.formState.isDescription
+            ? context.l10n.publish
+            : context.l10n.next,
+        isDesk: isDesk,
+        onPressed: () => context.read<DiscountsAddBloc>().add(
+              const DiscountsAddEvent.send(),
+            ),
+        mobTextWidth: double.infinity,
+        widgetKey: const Key(''),
+        deskTextWidth: double.infinity,
+        darkMode: true,
+        mobVerticalTextPadding: KPadding.kPaddingSize16,
+        mobIconPadding: KPadding.kPaddingSize16,
+      );
 }

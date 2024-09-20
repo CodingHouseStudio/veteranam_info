@@ -13,6 +13,7 @@ class SwitchWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Switch(
+      key: KWidgetkeys.widget.switchKeys.widget,
       value: isSelected,
       onChanged: (value) => onChanged?.call(),
       trackColor: const WidgetStatePropertyAll(
@@ -73,11 +74,11 @@ class SwitchWidget extends StatelessWidget {
     // );
   }
 
-  double horizontalMergin({required bool isRight}) => isRight
-      ? isSelected
-          ? KPadding.kPaddingSize4
-          : KPadding.kPaddingSize52
-      : isSelected
-          ? KPadding.kPaddingSize52
-          : KPadding.kPaddingSize4;
+  // double horizontalMergin({required bool isRight}) => isRight
+  //     ? isSelected
+  //         ? KPadding.kPaddingSize4
+  //         : KPadding.kPaddingSize52
+  //     : isSelected
+  //         ? KPadding.kPaddingSize52
+  //         : KPadding.kPaddingSize4;
 }

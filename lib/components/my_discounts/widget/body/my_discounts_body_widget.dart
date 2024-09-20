@@ -51,7 +51,7 @@ class MyDiscountsBodyWidget extends StatelessWidget {
                 style: isDesk ? AppTextStyle.text64 : AppTextStyle.text24,
               ),
               IconButtonWidget(
-                key: KWidgetkeys.screen.myDiscounts.icon,
+                key: KWidgetkeys.screen.myDiscounts.iconAdd,
                 padding:
                     isDesk ? KPadding.kPaddingSize20 : KPadding.kPaddingSize12,
                 icon: KIcon.plus,

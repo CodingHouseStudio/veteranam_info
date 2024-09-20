@@ -13,14 +13,13 @@ class SwitchOfflineWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      key: KWidgetkeys.widget.switchKeys.widget,
+      key: KWidgetkeys.widget.switchOffline.widget,
       style: KButtonStyles.withoutStyle,
       onPressed: onChanged,
       icon: DecoratedBox(
         decoration: KWidgetTheme.boxDecorationNawbar,
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),
-          // key: KWidgetkeys.widget.switchKeys.item,
           constraints: const BoxConstraints(
             minWidth: KSize.kPixel40,
             minHeight: KSize.kPixel40,
@@ -42,7 +41,9 @@ class SwitchOfflineWidget extends StatelessWidget {
             KPadding.kPaddingSize8,
           ),
           child: KIcon.modeOffOn.copyWith(
-            key: isSelected ? KWidgetkeys.widget.switchKeys.active : null,
+            key: isSelected
+                ? KWidgetkeys.widget.switchOffline.active
+                : KWidgetkeys.widget.switchOffline.icon,
             color: isSelected
                 ? onChanged == null
                     ? AppColors.materialThemeKeyColorsNeutral

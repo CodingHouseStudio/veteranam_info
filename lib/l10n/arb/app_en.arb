@@ -1210,6 +1210,15 @@
   "@getYouNeedDescription": {
     "examples": "Text on the Discount Add page for the requirements field (description)"
   },
+  "discountsWrongFormat": "Invalid discount format: only percentages or the word 'Free' are allowed.",
+  "@discountsWrongFormat": {
+    "examples": "Error message for the discount field on the Discounts Add page if the user enters an invalid discount format."
+  },
+  "back": "Back",
+  "@back": {
+    "examples": "Text for the button on the Discount Add page.",
+    "description": "The button is used to return to the previous steps of the form."
+  },
   "asBusiness": "as a BUSINESS user",
   "@asBusiness": {
     "examples": "Text for the business login button on the UserRole page.",

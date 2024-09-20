@@ -12,10 +12,11 @@ part 'discounts_add_bloc.freezed.dart';
 class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
   DiscountsAddBloc({
     required IDiscountRepository discountRepository,
+    required IAppAuthenticationRepository appAuthenticationBloc,
   })  : _discountRepository = discountRepository,
+        _appAuthenticationReporsitory = appAuthenticationBloc,
         super(
           const _Initial(
-            cityList: [],
             categoryList: [],
             category: MessageFieldModel.pure(),
             city: CitiesFieldModel.pure(),
@@ -38,9 +39,13 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
     on<_DescriptionUpdate>(_onDescriptionUpdated);
     on<_ExclusionsUpdate>(_onExclusionsUpdated);
     on<_Send>(_onSend);
+    on<_Back>(_onBack);
   }
   final IDiscountRepository _discountRepository;
+  final IAppAuthenticationRepository _appAuthenticationReporsitory;
 
+  @visibleForTesting
+  static DiscountModel? sendDiscountModel;
   Future<void> _onStarted(
     _Started event,
     Emitter<DiscountsAddState> emit,
@@ -50,14 +55,8 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
     final uniqueCategories =
         discounts.expand((discount) => discount.category).toSet().toList();
 
-    final uniqueLocations = discounts
-        .expand((discount) => discount.location ?? <String>[])
-        .toSet()
-        .toList();
-
     emit(
       _Initial(
-        cityList: uniqueLocations,
         categoryList: uniqueCategories,
         category: const MessageFieldModel.pure(),
         city: const CitiesFieldModel.pure(),
@@ -90,9 +89,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
     _CityUpdate event,
     Emitter<DiscountsAddState> emit,
   ) {
-    final cityFieldModel = CitiesFieldModel.dirty(
-      (state.city.value ?? <String>[])..add(event.city),
-    );
+    final cityFieldModel = state.city.addValue(event.city);
 
     emit(
       state.copyWith(
@@ -135,8 +132,8 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
     _DiscountUpdate event,
     Emitter<DiscountsAddState> emit,
   ) {
-    final discountsFieldModel = DiscountsFieldModel.dirty(
-      (state.discounts.value ?? <int>[])..add(event.discount),
+    final discountsFieldModel = state.discounts.addValue(
+      event.discount,
     );
 
     emit(
@@ -189,10 +186,25 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
     );
   }
 
-  void _onSend(
-    _Send event,
+  void _onBack(
+    _Back event,
     Emitter<DiscountsAddState> emit,
   ) {
+    final discountsAddEnum = state.formState.isDescription
+        ? DiscountsAddEnum.detailInProgress
+        : DiscountsAddEnum.inProgress;
+
+    emit(
+      state.copyWith(
+        formState: discountsAddEnum,
+      ),
+    );
+  }
+
+  Future<void> _onSend(
+    _Send event,
+    Emitter<DiscountsAddState> emit,
+  ) async {
     if (state.formState.isMain) {
       if (Formz.validate([state.category, state.city]) &&
           (state.period?.isValid ?? true)) {
@@ -203,22 +215,52 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
       return;
     }
     if (state.formState.isDetail) {
-      if (Formz.validate([state.title, state.city, state.link])) {
+      if (Formz.validate([state.title, state.discounts, state.link])) {
         emit(state.copyWith(formState: DiscountsAddEnum.description));
       } else {
         emit(state.copyWith(formState: DiscountsAddEnum.detailInvalidData));
       }
       return;
     }
-    if (state.formState.isDescription) {
-      if (Formz.validate([state.description, state.exclusions])) {
-        emit(state.copyWith(formState: DiscountsAddEnum.description));
-      } else {
-        emit(
-          state.copyWith(formState: DiscountsAddEnum.descriptionInvalidData),
-        );
-      }
-      return;
+    if (Formz.validate([state.description, state.exclusions])) {
+      final discount = DiscountModel(
+        id: ExtendedDateTime.id,
+        discount: state.discounts.getValue,
+        title: state.title.value,
+        titleEN: null,
+        category: [state.category.value],
+        categoryEN: null,
+        subcategory: null,
+        subcategoryEN: null,
+        location: state.city.value,
+        description: state.description.value,
+        descriptionEN: null,
+        requirements: null,
+        requirementsEN: null,
+        territory: null,
+        territoryEN: null,
+        exclusions: state.exclusions.value,
+        expiration: state.period?.value,
+        dateVerified: ExtendedDateTime.current,
+        link: state.link.value,
+        userId: _appAuthenticationReporsitory.currentUser.id,
+        userName: _appAuthenticationReporsitory.currentUser.name,
+      );
+      final result =
+          await _discountRepository.addDiscount(sendDiscountModel ?? discount);
+      result.fold(
+        (l) => emit(state.copyWith(failure: l._toDiscountsAdd())),
+        (r) => emit(
+          state.copyWith(
+            formState: DiscountsAddEnum.success,
+            failure: null,
+          ),
+        ),
+      );
+    } else {
+      emit(
+        state.copyWith(formState: DiscountsAddEnum.descriptionInvalidData),
+      );
     }
   }
 }

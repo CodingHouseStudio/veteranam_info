@@ -13,6 +13,9 @@ class TextFieldDescriptionWidget extends StatelessWidget {
     this.showErrorText,
     this.errorText,
     this.isMessage,
+    this.errorMaxLines,
+    this.maxLength,
+    this.controller,
   });
   final String? labelText;
   final Key widgetKey;
@@ -23,6 +26,9 @@ class TextFieldDescriptionWidget extends StatelessWidget {
   final String? errorText;
   final String description;
   final bool? isMessage;
+  final int? errorMaxLines;
+  final int? maxLength;
+  final TextEditingController? controller;
 
   @override
   Widget build(BuildContext context) {
@@ -32,21 +38,26 @@ class TextFieldDescriptionWidget extends StatelessWidget {
         if (isMessage ?? false)
           MessageFieldWidget(
             key: widgetKey,
+            controller: controller,
             labelText: labelText,
             changeMessage: onChanged,
             isDesk: isDesk,
             showErrorText: showErrorText,
             errorText: errorText,
+            errorMaxLines: errorMaxLines,
           )
         else
           TextFieldWidget(
             widgetKey: widgetKey,
+            controller: controller,
             labelText: labelText,
             onChanged: onChanged,
             isDesk: isDesk,
             suffixIcon: suffixIcon,
             showErrorText: showErrorText,
             errorText: errorText,
+            errorMaxLines: errorMaxLines,
+            maxLength: maxLength,
           ),
         KSizedBox.kHeightSizedBox8,
         Padding(
