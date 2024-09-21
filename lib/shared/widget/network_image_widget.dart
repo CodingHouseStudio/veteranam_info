@@ -125,7 +125,7 @@ class _NetworkImageWidgetState extends State<NetworkImageWidget> {
             : FilterQuality.medium,
       );
     }
-    // if (KTest.testIsWeb) {
+    // if (Config.isWeb) {
     //   return _NetworkWebImageWidget(
     //     imageUrl: imageUrl,
     //     fit: fit,

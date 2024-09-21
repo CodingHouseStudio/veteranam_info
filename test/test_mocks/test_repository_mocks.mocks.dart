@@ -7613,6 +7613,33 @@ class MockIDiscountRepository extends _i1.Mock
           ),
         )),
       ) as _i8.Future<_i2.Either<_i3.SomeFailure, int>>);
+
+  @override
+  _i8.Future<_i2.Either<_i3.SomeFailure, bool>> addDiscount(
+          _i3.DiscountModel? discount) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #addDiscount,
+          [discount],
+        ),
+        returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
+            _FakeEither_0<_i3.SomeFailure, bool>(
+          this,
+          Invocation.method(
+            #addDiscount,
+            [discount],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
+                _FakeEither_0<_i3.SomeFailure, bool>(
+          this,
+          Invocation.method(
+            #addDiscount,
+            [discount],
+          ),
+        )),
+      ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
 }
 
 /// A class which mocks [Query].

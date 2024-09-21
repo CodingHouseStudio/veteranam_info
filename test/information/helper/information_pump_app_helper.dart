@@ -15,8 +15,8 @@ Future<void> informationPumpAppHelper({
 }) async {
   _registerInformationBloc(
     mockInformationRepository: mockInformationRepository,
-    mockAppAuthenticationRepository: mockAppAuthenticationRepository,
-    mockReportRepository: mockReportRepository,
+    // mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+    // mockReportRepository: mockReportRepository,
   );
   _registerReportBloc(
     mockReportRepository: mockReportRepository,
@@ -51,13 +51,13 @@ void _registerReportBloc({
 
 void _registerInformationBloc({
   required IInformationRepository mockInformationRepository,
-  required IAppAuthenticationRepository mockAppAuthenticationRepository,
-  required IReportRepository mockReportRepository,
+  // required IAppAuthenticationRepository mockAppAuthenticationRepository,
+  // required IReportRepository mockReportRepository,
 }) {
   final informationBloc = InformationWatcherBloc(
     informationRepository: mockInformationRepository,
-    reportRepository: mockReportRepository,
-    appAuthenticationRepository: mockAppAuthenticationRepository,
+    // reportRepository: mockReportRepository,
+    // appAuthenticationRepository: mockAppAuthenticationRepository,
   );
   if (GetIt.I.isRegistered<InformationWatcherBloc>()) {
     GetIt.I.unregister<InformationWatcherBloc>();

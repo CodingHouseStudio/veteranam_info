@@ -38,7 +38,10 @@ void main() {
           mockGoRouter: mockGoRouter,
         );
 
-        await dropDownButtonHelper(
+        await dropDownScrollHelper(
+          test: () async => dropDownButtonHelper(
+            tester: tester,
+          ),
           tester: tester,
         );
       });

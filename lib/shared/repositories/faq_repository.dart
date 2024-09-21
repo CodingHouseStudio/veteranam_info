@@ -4,7 +4,7 @@ import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:veteranam/shared/shared.dart';
 
-@Singleton(as: IFaqRepository)
+@Singleton(as: IFaqRepository, env: [Config.user, Config.mobile])
 class FaqRepository implements IFaqRepository {
   final FirestoreService _firestoreService = GetIt.I.get<FirestoreService>();
 

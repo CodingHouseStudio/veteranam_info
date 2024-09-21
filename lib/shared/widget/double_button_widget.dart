@@ -21,6 +21,7 @@ class DoubleButtonWidget extends StatelessWidget {
     this.darkMode,
     this.deskPadding,
     this.deskIconPadding,
+    this.deskTextWidth,
   });
   final String text;
   final Color? color;
@@ -32,6 +33,7 @@ class DoubleButtonWidget extends StatelessWidget {
   final double? mobVerticalTextPadding;
   final double? mobHorizontalTextPadding;
   final double? mobTextWidth;
+  final double? deskTextWidth;
   final double? mobIconPadding;
   final Alignment? align;
   final bool? darkMode;
@@ -60,6 +62,7 @@ class DoubleButtonWidget extends StatelessWidget {
           useBlackStyle: darkMode,
           padding: deskPadding,
           iconPadding: deskIconPadding,
+          textWidth: deskTextWidth,
         )
       : _DoubleButtonWidgetMob(
           text: text,
@@ -85,6 +88,7 @@ class _DoubleButtonWidgetDesk extends StatefulWidget {
     this.useBlackStyle,
     this.padding,
     this.iconPadding,
+    this.textWidth,
   });
   final String text;
   final Color? color;
@@ -94,6 +98,7 @@ class _DoubleButtonWidgetDesk extends StatefulWidget {
   final bool? useBlackStyle;
   final EdgeInsets? padding;
   final double? iconPadding;
+  final double? textWidth;
 
   @override
   State<_DoubleButtonWidgetDesk> createState() =>
@@ -127,6 +132,7 @@ class _DoubleButtonWidgetDeskState extends State<_DoubleButtonWidgetDesk> {
                 ? const EdgeInsets.only(right: KPadding.kPaddingSize12)
                 : EdgeInsets.zero,
             child: Container(
+              width: widget.textWidth,
               margin: const EdgeInsets.only(right: KPadding.kPaddingSize40),
               decoration: KWidgetTheme.boxDecorationGreen.copyWith(
                 color: widget.color ??
@@ -148,6 +154,7 @@ class _DoubleButtonWidgetDeskState extends State<_DoubleButtonWidgetDesk> {
                           ? AppColors.materialThemeWhite
                           : AppColors.materialThemeKeyColorsSecondary),
                 ),
+                textAlign: TextAlign.center,
               ),
             ),
           ),

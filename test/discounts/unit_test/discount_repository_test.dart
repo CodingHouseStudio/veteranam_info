@@ -162,6 +162,18 @@ void main() {
           ),
         );
       });
+
+      test('Add Discount', () async {
+        expect(
+          await mockDiscountRepository
+              .addDiscount(KTestText.repositoryDiscountModelItems.first),
+          isA<Right<SomeFailure, bool>>().having(
+            (e) => e.value,
+            'value',
+            true,
+          ),
+        );
+      });
     });
     group('${KGroupText.failure} ', () {
       setUp(() {
@@ -220,6 +232,13 @@ void main() {
         when(
           mockFirestoreService.deleteDiscountById(
             KTestText.discountModelItems.first.id,
+          ),
+        ).thenThrow(
+          Exception(KGroupText.failureGet),
+        );
+        when(
+          mockFirestoreService.addDiscount(
+            KTestText.repositoryDiscountModelItems.first,
           ),
         ).thenThrow(
           Exception(KGroupText.failureGet),
@@ -316,6 +335,24 @@ void main() {
           // ),
         );
       });
+      test('Get discount use User Id', () async {
+        expect(
+          await mockDiscountRepository.getDiscountsByUserId(KTestText.user.id),
+          isA<Left<SomeFailure, List<DiscountModel>>>(),
+          // .having(
+          //   (e) => e.value,
+          //   'value',
+          //   SomeFailure.serverError(error: null),
+          // ),
+        );
+      });
+      test('Add Discount', () async {
+        expect(
+          await mockDiscountRepository
+              .addDiscount(KTestText.repositoryDiscountModelItems.first),
+          isA<Left<SomeFailure, bool>>(),
+        );
+      });
     });
     group('${KGroupText.firebaseFailure} ', () {
       setUp(() {
@@ -350,6 +387,13 @@ void main() {
         when(
           mockFirestoreService.getDiscount(
             KTestText.discountModelItems.first.id,
+          ),
+        ).thenThrow(
+          FirebaseException(plugin: KGroupText.failureGet),
+        );
+        when(
+          mockFirestoreService.addDiscount(
+            KTestText.repositoryDiscountModelItems.first,
           ),
         ).thenThrow(
           FirebaseException(plugin: KGroupText.failureGet),
@@ -415,6 +459,13 @@ void main() {
           //   'value',
           //   SomeFailure.serverError(error: null),
           // ),
+        );
+      });
+      test('Add Discount', () async {
+        expect(
+          await mockDiscountRepository
+              .addDiscount(KTestText.repositoryDiscountModelItems.first),
+          isA<Left<SomeFailure, bool>>(),
         );
       });
     });

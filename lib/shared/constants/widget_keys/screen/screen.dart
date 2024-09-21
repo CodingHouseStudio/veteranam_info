@@ -33,4 +33,5 @@ class _ScreenKeys {
   final mobSettings = _MobSettingsKeys();
   final mobFaq = _MobFaqKeys();
   final userRole = _UserRoleKeys();
+  final discountsAdd = _DiscountsAddKeys();
 }

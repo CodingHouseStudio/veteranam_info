@@ -27,10 +27,8 @@ class DropDownButtonState extends State<DropDownButton> {
     return PopupMenuButton<int>(
       key: KWidgetkeys.widget.dropDownButton.widget,
       offset: widget.offset,
-      position: PopupMenuPosition.under,
-      shape: const RoundedRectangleBorder(
-        borderRadius: KBorderRadius.kBorderRadius32,
-      ),
+      // position: PopupMenuPosition.under,
+      shape: KWidgetTheme.outlineBorder,
       style: KButtonStyles.borderBlackButtonStyle.copyWith(
         padding: const WidgetStatePropertyAll(
           EdgeInsets.only(
@@ -65,7 +63,7 @@ class DropDownButtonState extends State<DropDownButton> {
       icon: Row(
         key: KWidgetkeys.widget.dropDownButton.loginButton,
         children: [
-          if (_showButtons) KIcon.trailingUp else KIcon.trailing,
+          if (_showButtons) KIcon.trailingUp else KIcon.keyboardArrowDown,
           KSizedBox.kWidthSizedBox8,
           Text(
             widget.buttonText,

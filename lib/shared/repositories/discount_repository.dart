@@ -158,4 +158,17 @@ class DiscountRepository implements IDiscountRepository {
       return Left(SomeFailure.serverError(error: e, stack: stack));
     }
   }
+
+  @override
+  Future<Either<SomeFailure, bool>> addDiscount(DiscountModel discount) async {
+    try {
+      await _firestoreService.addDiscount(discount);
+
+      return const Right(true);
+    } on FirebaseException catch (e, stack) {
+      return Left(SendFailure.fromCode(error: e, stack: stack).status);
+    } catch (e, stack) {
+      return Left(SomeFailure.serverError(error: e, stack: stack));
+    }
+  }
 }

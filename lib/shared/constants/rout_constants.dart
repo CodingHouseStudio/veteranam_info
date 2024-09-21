@@ -126,4 +126,8 @@ abstract class KRoute {
     path: '/userRole',
     name: 'UserRole',
   );
+  static const _RouteItem discountsAdd = _RouteItem(
+    path: 'add',
+    name: 'DiscountsAdd',
+  );
 }

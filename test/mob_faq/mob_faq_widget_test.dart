@@ -18,7 +18,7 @@ void main() {
   group('${KScreenBlocName.mobFaq} ', () {
     late IFaqRepository mockFaqRepository;
     setUp(() {
-      KTest.testIsWeb = false;
+      Config.isWeb = false;
       ExtendedDateTime.current = KTestText.dateTime;
       ExtendedDateTime.id = KTestText.feedbackModel.id;
       KPlatformConstants.isWebDesktop = true;

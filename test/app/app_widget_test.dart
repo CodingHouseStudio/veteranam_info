@@ -88,7 +88,7 @@ void main() {
     });
 
     group('Mobile', () {
-      setUp(() => KTest.testIsWeb = false);
+      setUp(() => Config.isWeb = false);
       testWidgets('${KGroupText.intial} ', (tester) async {
         await appPumpAppHelper(
           mockDiscountRepository: mockDiscountRepository,
@@ -105,7 +105,7 @@ void main() {
     });
 
     group('Web', () {
-      setUp(() => KTest.testIsWeb = true);
+      setUp(() => Config.isWeb = true);
       testWidgets('${KGroupText.intial} ', (tester) async {
         await appPumpAppHelper(
           mockDiscountRepository: mockDiscountRepository,

@@ -38,7 +38,13 @@ abstract class KDimensions {
   static const descriptionMobHideLength = 100;
   static const descriptionDeskHideLength = 200;
 
-  static const offset = Offset(130, 45);
+  static const offset = Offset(110, 45);
 
-  static const kUserRoleWidth = 0.3;
+  // static const kUserRoleWidth = 0.3;
+
+  static const fifteenPercent = 0.15;
+
+  static const twentyPercent = 0.2;
+
+  static const thirtyPercent = 0.3;
 }

@@ -12,23 +12,23 @@ class DiscountModel with _$DiscountModel {
     // required DateTime date,
     required List<int> discount,
     required String title,
-    required String titleEN,
+    required String? titleEN,
     required List<String> category,
-    required List<String> categoryEN,
-    required List<String> subcategory,
-    required List<String> subcategoryEN,
+    required List<String>? categoryEN,
+    required List<String>? subcategory,
+    required List<String>? subcategoryEN,
     // required String eligibility,
     // required String eligibilityEN,
     required String description,
-    required String descriptionEN,
-    required String requirements,
-    required String requirementsEN,
-    required String territory,
-    required String territoryEN,
-    required String exclusions,
-    required String exclusionsEN,
+    required String? descriptionEN,
+    required String? requirements,
+    required String? requirementsEN,
+    required String? territory,
+    required String? territoryEN,
     required DateTime dateVerified,
     required String link,
+    String? exclusions,
+    String? exclusionsEN,
     String? phoneNumber,
     String? expiration,
     String? expirationEN,
@@ -39,6 +39,7 @@ class DiscountModel with _$DiscountModel {
     String? userName,
     @ImageConverter() ImageModel? userPhoto,
     String? company,
+    @Default(DiscountState.isNew) DiscountState status,
     String? companyEN,
     String? directLink,
     String? additionalDetails,
@@ -52,6 +53,15 @@ class DiscountModel with _$DiscountModel {
 }
 
 enum SubLocation { all, allStoresOfChain, online }
+
+enum DiscountState {
+  isNew,
+  underReview,
+  overdue,
+  rejected,
+  published,
+  deactivated;
+}
 
 extension SubLocationString on SubLocation {
   List<String> getList(BuildContext context) {
@@ -115,4 +125,5 @@ abstract class DiscountModelJsonField {
   // static const date = 'date';
   static const subLocation = 'subLocation';
   // static const hasMarkdown = 'hasMarkdown';
+  static const status = 'status';
 }

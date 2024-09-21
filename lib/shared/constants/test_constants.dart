@@ -7,11 +7,6 @@ class KTest {
   @visibleForTesting
   static set cashe(bool casheValue) => _cashe = casheValue;
 
-  static bool _kIsWeb = kIsWeb;
-  static bool get testIsWeb => _kIsWeb;
-  @visibleForTesting
-  static set testIsWeb(bool isWeb) => _kIsWeb = isWeb;
-
   static bool _kReleaseMode = kReleaseMode;
   static bool get testReleaseMode => _kReleaseMode;
   @visibleForTesting

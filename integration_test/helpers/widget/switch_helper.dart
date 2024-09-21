@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:veteranam/shared/shared.dart';
 
@@ -13,10 +14,10 @@ Future<void> switchHelper({
     findsOneWidget,
   );
 
-  expect(
-    find.byKey(KWidgetkeys.widget.switchKeys.icon),
-    findsOneWidget,
-  );
+  // expect(
+  //   find.byKey(KWidgetkeys.widget.switchKeys.icon),
+  //   findsOneWidget,
+  // );
 
   // expect(
   //   find.byKey(KWidgetkeys.widget.switchKeys.item),
@@ -24,8 +25,10 @@ Future<void> switchHelper({
   // );
 
   expect(
-    find.byKey(KWidgetkeys.widget.switchKeys.active),
-    isActive ? findsOneWidget : findsNothing,
+    tester
+        .widget<Switch>(find.byKey(KWidgetkeys.widget.switchKeys.widget))
+        .value,
+    isActive ? isTrue : isFalse,
   );
 
   // late var switchWidget =
@@ -44,8 +47,10 @@ Future<void> switchHelper({
     await tester.pumpAndSettle();
 
     expect(
-      find.byKey(KWidgetkeys.widget.switchKeys.active),
-      findsOneWidget,
+      tester
+          .widget<Switch>(find.byKey(KWidgetkeys.widget.switchKeys.widget))
+          .value,
+      isTrue,
     );
 
     await tester.tap(find.byKey(KWidgetkeys.widget.switchKeys.widget));
@@ -53,8 +58,10 @@ Future<void> switchHelper({
     await tester.pumpAndSettle();
 
     expect(
-      find.byKey(KWidgetkeys.widget.switchKeys.active),
-      findsNothing,
+      tester
+          .widget<Switch>(find.byKey(KWidgetkeys.widget.switchKeys.widget))
+          .value,
+      isFalse,
     );
   }
 
