@@ -59,7 +59,7 @@ Future<void> employerInitialHelper(
         findsOneWidget,
       );
 
-      await dropListFieldBoxHelper(
+      await dropListFieldHelper(
         tester: tester,
         text: KMockText.dropDownList.first,
       );

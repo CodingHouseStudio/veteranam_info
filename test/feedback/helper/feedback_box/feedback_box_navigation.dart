@@ -24,7 +24,7 @@ Future<void> feedbackBoxNavigationHelper({
 
       await tester.tap(find.byKey(KWidgetkeys.screen.feedback.boxBackButton));
 
-      if (KTest.testIsWeb) {
+      if (Config.isWeb) {
         verify(
           () => mockGoRouter.goNamed(
             KRoute.home.name,

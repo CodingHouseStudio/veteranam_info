@@ -34,7 +34,7 @@ Future<void> mobSettingsInitialHelper(
     findsOneWidget,
   );
 
-  await switchHelper(tester: tester, enabled: false, isActive: true);
+  await switchOfflineHelper(tester: tester, enabled: false, isActive: true);
 
   expect(
     find.byKey(KWidgetkeys.screen.mobSettings.offlinesTitle),

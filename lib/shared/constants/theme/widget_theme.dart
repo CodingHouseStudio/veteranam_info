@@ -32,6 +32,26 @@ abstract class KWidgetTheme {
     borderSide: BorderSide(color: AppColors.materialThemeRefErrorError30),
     borderRadius: KBorderRadius.kBorderRadius32,
   );
+  static const outlineBorder = RoundedRectangleBorder(
+    borderRadius: KBorderRadius.kBorderRadius32,
+  );
+  static const outlineBorderSide = RoundedRectangleBorder(
+    borderRadius: KBorderRadius.kBorderRadius32,
+    side: BorderSide(),
+  );
+  static const outlineBorder40 = RoundedRectangleBorder(
+    borderRadius: KBorderRadius.kBorderRadius40,
+  );
+  static const outlineBorder48 = RoundedRectangleBorder(
+    borderRadius: KBorderRadius.kBorderRadius48,
+  );
+  static const outlineBorder16 = RoundedRectangleBorder(
+    borderRadius: KBorderRadius.kBorderRadius16,
+  );
+  static const outlineBorderZero = RoundedRectangleBorder(
+    // ignore: avoid_redundant_argument_values
+    borderRadius: BorderRadius.zero,
+  );
 
   static const boxDecorationWidget = BoxDecoration(
     borderRadius: KBorderRadius.kBorderRadius32,
@@ -139,6 +159,26 @@ abstract class KWidgetTheme {
     color: AppColors.materialThemeBlackOpacity,
     borderRadius: KBorderRadius.kBorderRadius32,
   );
+
+  static const inputDecorationTheme = InputDecorationTheme(
+    hintStyle: AppTextStyle.materialThemeTitleMediumNeutralVariant35,
+    contentPadding: EdgeInsets.symmetric(
+      horizontal: KPadding.kPaddingSize20,
+    ),
+    border: outlineInputBorder,
+    enabledBorder: outlineInputBorderEnabled,
+    disabledBorder: outlineInputBorderDisabled,
+    focusedBorder: outlineInputBorderFocused,
+    focusedErrorBorder: outlineInputBorderErrorFocused,
+    filled: true,
+    fillColor: AppColors.materialThemeWhite,
+    labelStyle: AppTextStyle.materialThemeTitleMedium,
+    alignLabelWithHint: true,
+    errorStyle: AppTextStyle.error14,
+    hoverColor: AppColors.materialThemeWhite,
+    errorBorder: outlineInputBorderError,
+  );
+
   static const inputDecoration = InputDecoration(
     hintStyle: AppTextStyle.materialThemeTitleMediumNeutralVariant35,
     contentPadding: EdgeInsets.symmetric(
@@ -205,5 +245,14 @@ abstract class KWidgetTheme {
         color: AppColors.materialThemeKeyColorsSecondary,
       ),
     ),
+  );
+  static const dropTextMenuStyle = MenuStyle(
+    backgroundColor:
+        WidgetStatePropertyAll(AppColors.materialThemeKeyColorsNeutral),
+    shape: WidgetStatePropertyAll(KWidgetTheme.outlineBorder),
+    padding: WidgetStatePropertyAll(
+      EdgeInsets.symmetric(vertical: KPadding.kPaddingSize16),
+    ),
+    visualDensity: VisualDensity.comfortable,
   );
 }

@@ -42,7 +42,7 @@ class KeyboardScrollView extends StatelessWidget {
               scrollController: scrollController,
               maxHeight: maxHeight,
             )
-          : KTest.testIsWeb
+          : Config.isWeb
               ? _body
               : BlocListener<AppVersionCubit, AppVersionState>(
                   listener: (context, state) =>

@@ -143,5 +143,5 @@ List<Widget> _feedbackBoxWidgetList({
           ];
 
 void _navMain(BuildContext context) => context.goNamed(
-      KTest.testIsWeb ? KRoute.home.name : KRoute.discounts.name,
+      Config.isWeb ? KRoute.home.name : KRoute.discounts.name,
     );

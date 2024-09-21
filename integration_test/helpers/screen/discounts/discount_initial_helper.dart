@@ -8,7 +8,7 @@ Future<void> discountsInitialHelper(
 ) async {
   expect(find.byKey(KWidgetkeys.screen.discounts.screen), findsOneWidget);
 
-  if (!KTest.testIsWeb) {
+  if (!Config.isWeb) {
     expect(
       find.byKey(KWidgetkeys.widget.nawbar.pageName),
       findsOneWidget,

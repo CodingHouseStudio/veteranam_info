@@ -12,9 +12,7 @@ class PrivacyPolicyDialog extends StatelessWidget {
         constraints: const BoxConstraints(maxWidth: KMinMaxSize.maxWidth768),
         child: Dialog(
           key: KWidgetkeys.screen.privacyPolicy.dialog,
-          shape: const RoundedRectangleBorder(
-            borderRadius: KBorderRadius.kBorderRadius32,
-          ),
+          shape: KWidgetTheme.outlineBorder,
           backgroundColor: AppColors.materialThemeKeyColorsNeutral,
           insetPadding: const EdgeInsets.all(KPadding.kPaddingSize16),
           child: const PrivacyPolicyBlocprovider(

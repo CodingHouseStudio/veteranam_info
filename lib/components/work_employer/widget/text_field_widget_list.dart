@@ -58,7 +58,7 @@ List<Widget> _textFieldWidgetList({
       DropListFieldWidget(
         key: KWidgetkeys.screen.employer.fieldCity,
         onChanged: null,
-        hintText: context.l10n.selectCity,
+        labelText: context.l10n.selectCity,
         dropDownList: KMockText.dropDownList,
         isDesk: isDesk,
       ),

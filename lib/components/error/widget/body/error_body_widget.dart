@@ -11,7 +11,7 @@ class ErrorBodyWidget extends StatelessWidget {
       child: ElevatedButton(
         key: KWidgetkeys.screen.error.button,
         onPressed: () => Config.isUser
-            ? KTest.testIsWeb
+            ? Config.isWeb
                 ? context.goNamed(KRoute.home.name)
                 : context.goNamed(KRoute.settings.name)
             : context.goNamed(KRoute.businessDiscounts.name),

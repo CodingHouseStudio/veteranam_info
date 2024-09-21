@@ -12,7 +12,7 @@ class UrlRepository extends IUrlRepository {
   Future<Either<SomeFailure, bool>> share(String url) async {
     final baseUrl = kIsWeb ? Uri.base.origin : KAppText.site;
     try {
-      // if (KTest.testIsWeb) {
+      // if (Config.isWeb) {
       await Share.shareUri(
         Uri.parse(baseUrl + url),
       );

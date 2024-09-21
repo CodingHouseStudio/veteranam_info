@@ -47,7 +47,7 @@ class FirestoreService {
 
   void _initFirestoreSettings() {
     // Set settings for persistence based on platform
-    if (KTest.testIsWeb) {
+    if (Config.isWeb) {
       _db.settings = const Settings(
         persistenceEnabled: true,
       );
@@ -134,16 +134,27 @@ class FirestoreService {
       ) async {
     try {
       // Try to get the data from the server first
-      final docSnapshot = await _db
-          .collection(FirebaseCollectionName.funds)
-          // .where(DiscountModelJsonField.id, whereNotIn: reportIdItems?
-          // .toSet())
-          .get(getOptions);
+      late QuerySnapshot<Map<String, dynamic>> docSnapshot;
+      if (Config.isDevelopment) {
+        docSnapshot = await _db
+            .collection(FirebaseCollectionName.funds)
+            // .where(DiscountModelJsonField.id, whereNotIn: reportIdItems?
+            // .toSet())
+            .get(getOptions);
+      } else {
+        docSnapshot = await _db
+            .collection(FirebaseCollectionName.funds)
+            .where(FundModelJsonField.image, isNotEqualTo: null)
+            .where(FundModelJsonField.image, isNotEqualTo: [])
+            // .where(DiscountModelJsonField.id, whereNotIn: reportIdItems?
+            // .toSet())
+            .get(getOptions);
+      }
 
       // If the server fetch is successful, return the data
       return docSnapshot.docs
           .map((doc) => FundModel.fromJson(doc.data()))
-          .where((e) => e.image != null || !Config.isProduction)
+          // .where((e) => e.image != null || !Config.isProduction)
           .toList();
     } on FirebaseException catch (e) {
       if (e.code == 'unavailable' && offlineMode.isOffline) {
@@ -345,13 +356,23 @@ class FirestoreService {
   Stream<List<DiscountModel>> getDiscounts(
       // List<String>? reportIdItems,
       ) {
-    return _db
+    var query = _db
         .collection(FirebaseCollectionName.discount)
-        .orderBy(DiscountModelJsonField.dateVerified, descending: true)
-        // .where(DiscountModelJsonField.id, whereNotIn: reportIdItems?.toSet())
+        .orderBy(DiscountModelJsonField.dateVerified, descending: true);
+    if (Config.isProduction) {
+      query = query.where(
+        DiscountModelJsonField.status,
+        isEqualTo: DiscountState.published.enumString,
+      );
+    }
+
+    // .where(DiscountModelJsonField.id, whereNotIn: reportIdItems?.toSet
+    //())
+
+    return query
         .snapshots(
-          includeMetadataChanges: offlineMode.isOffline,
-        ) // Enable caching
+      includeMetadataChanges: offlineMode.isOffline,
+    ) // Enable caching
         .map(
       (snapshot) {
         late var isFromCache = false;
@@ -551,21 +572,6 @@ class FirestoreService {
       }
     } else {
       return event();
-    }
-  }
-}
-
-extension CardEnumExtention on CardEnum {
-  String get getValue {
-    switch (this) {
-      case CardEnum.funds:
-        return 'funds';
-      case CardEnum.discount:
-        return 'discount';
-      case CardEnum.information:
-        return 'information';
-      case CardEnum.story:
-        return 'story';
     }
   }
 }

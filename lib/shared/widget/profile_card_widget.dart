@@ -37,7 +37,7 @@ class ProfileCardWidgetState extends State<ProfileCardWidget> {
                       width: 60,
                       height: 60,
                       decoration: const BoxDecoration(
-                        borderRadius: KBorderRadius.kBorderRadiusL,
+                        borderRadius: KBorderRadius.kBorderRadius48,
                         // color: AppColors.widgetBackground,
                       ),
                       child: Center(

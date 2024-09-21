@@ -9,7 +9,7 @@ part 'home_watcher_bloc.freezed.dart';
 part 'home_watcher_event.dart';
 part 'home_watcher_state.dart';
 
-@Injectable()
+@Injectable(env: [Config.user])
 class HomeWatcherBloc extends Bloc<HomeWatcherEvent, HomeWatcherState> {
   HomeWatcherBloc({required IFaqRepository faqRepository})
       : _faqRepository = faqRepository,

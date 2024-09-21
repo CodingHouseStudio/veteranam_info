@@ -138,7 +138,7 @@ class _NawbarWidgetState extends State<NawbarWidget> {
               top: KPadding.kPaddingSize8,
               bottom: KPadding.kPaddingSize8,
             ),
-      child: KTest.testIsWeb
+      child: Config.isWeb
           // || widget.showMobileNawbar
           ? Row(
               // mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -151,7 +151,7 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                               KAppText.logo,
                               Duration.zero,
                               () {
-                                if (KTest.testIsWeb
+                                if (Config.isWeb
                                     // || !widget.showMobileNawbar
                                     ) {
                                   context.goNamed(KRoute.home.name);
@@ -255,7 +255,7 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                     ),
                   )
                 else
-                  // widget.pageName != null && !KTest.testIsWeb
+                  // widget.pageName != null && !Config.isWeb
                   //     ? Expanded(
                   //         child: Text(
                   //           '${widget.pageName}',

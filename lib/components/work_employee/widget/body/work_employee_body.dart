@@ -43,12 +43,12 @@ class WorkEmployeeBody extends StatelessWidget {
           else
             KSizedBox.kHeightSizedBox24,
         ],
-        mainPadding: ({required isDesk, required maxWidth}) => isDesk
-            ? EdgeInsets.symmetric(
-                horizontal: maxWidth * KDimensions.paddingMultiply,
-                vertical: KPadding.kPaddingSize56,
-              )
-            : EdgeInsets.zero,
+        mainPadding: ({required isDesk, required maxWidth}) =>
+            maxWidth.screenPadding(
+          precent: KDimensions.paddingMultiply,
+          notUseHorizontal: isDesk,
+          verticalPadding: KPadding.kPaddingSize56,
+        ),
         mainChildWidgetsFunction: ({required isDesk}) => [
           if (_.loadingStatus == LoadingStatus.loaded &&
               _.workModelItems.isNotEmpty)

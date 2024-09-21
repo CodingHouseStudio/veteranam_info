@@ -9,7 +9,7 @@ part 'report_bloc.freezed.dart';
 part 'report_event.dart';
 part 'report_state.dart';
 
-@Injectable()
+@Injectable(env: [Config.user])
 class ReportBloc extends Bloc<ReportEvent, ReportState> {
   ReportBloc({
     required IReportRepository reportRepository,
