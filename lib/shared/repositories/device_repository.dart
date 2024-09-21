@@ -11,22 +11,11 @@ class DeviceRepository implements IDeviceRepository {
     this._firebaseMessaging,
     this._deviceInfoPlugin,
     this._buildRepository,
-  ) {
-    // Initialization logic can't use await directly in constructor
-    _messagingInit();
-  }
+  );
 
   final FirebaseMessaging _firebaseMessaging;
   final DeviceInfoPlugin _deviceInfoPlugin;
   final AppInfoRepository _buildRepository;
-
-  Future<void> _messagingInit() async {
-    try {
-      await _firebaseMessaging.setAutoInitEnabled(true);
-    } catch (e) {
-      // catch if setAutoInitEnabled failure
-    }
-  }
 
   @override
   Future<Either<SomeFailure, DeviceInfoModel?>> getDevice({
@@ -75,46 +64,6 @@ class DeviceRepository implements IDeviceRepository {
     } else {
       return const Right(null);
     }
-    // if (kReleaseMode) {
-    // if (Platform.isIOS || Platform.isAndroid) {
-    //   // String? temp2;
-    //   // final temp = DeviceInfoPlugin();
-    //   // final messaging = FirebaseMessaging.instance;
-    //   final notificationSettings = await messaging.getNotificationSettings();
-    //   if (notificationSettings.authorizationStatus ==
-    //       AuthorizationStatus.authorized) {
-    //     try {
-    //       temp2 = await messaging.getToken();
-    //     } catch (e, stack) {
-    //       return null;
-    //     }
-    //   }
-    //   String deviceId;
-    //   if (Platform.isAndroid) {
-    //     final dev = await temp.androidInfo;
-    //     deviceId = dev.id;
-    //   } else {
-    //     final dev = await temp.iosInfo;
-    //     if (dev.identifierForVendor != null) {
-    //       deviceId = dev.identifierForVendor!;
-    //     } else {
-    //       deviceId = 'unknown';
-    //     }
-    //   }
-    //   if (temp2 != null) {
-    //     final result = DeviceModel(
-    //       fcmToken: temp2,
-    //       deviceId: deviceId,
-    //     );
-    //     // debugPrint('device is $result');
-    //     return result;
-    //   } else {
-    //     return null;
-    //   }
-    // }
-    // return null;
-    // }
-    // return null;
   }
 
   @override
@@ -157,13 +106,31 @@ class DeviceRepository implements IDeviceRepository {
       final platform = platformValue ?? PlatformEnum.getPlatform;
       String? fcmToken;
 
+      final messaging = FirebaseMessaging.instance;
+      final notificationSettings = await messaging.getNotificationSettings();
+
+      if (notificationSettings.authorizationStatus ==
+          AuthorizationStatus.denied) {
+        if (platform.isAndroid) {
+          await handleRequestPermission(platform);
+        }
+      } else if (notificationSettings.authorizationStatus ==
+          AuthorizationStatus.notDetermined) {
+        await handleRequestPermission(
+          platform,
+          provisional: platform.isIOS,
+        );
+      } else {
+        await handleRequestPermission(platform);
+      }
+
       // You may set the permission requests to "provisional" which allows the
       // user to choose what type
       // of notifications they would like to receive once the user receives a
       // notification.
-      final notificationSettings = await _firebaseMessaging.requestPermission(
-        provisional: platform.isIOS,
-      );
+      // final notificationSettings = await _firebaseMessaging.requestPermission(
+      //   provisional: platform.isIOS,
+      // );
 
       // final notificationSettings =
       //     await _firebaseMessaging.getNotificationSettings();
@@ -173,9 +140,10 @@ class DeviceRepository implements IDeviceRepository {
       // final apnsToken = await _firebaseMessaging.getAPNSToken();
 
       if (notificationSettings.authorizationStatus ==
-              AuthorizationStatus.authorized
-          //&& (!platform.isIOS || apnsToken != null)
-          ) {
+              AuthorizationStatus.authorized ||
+          (platform.isIOS &&
+              notificationSettings.authorizationStatus ==
+                  AuthorizationStatus.provisional)) {
         fcmToken = await _firebaseMessaging.getToken(
           vapidKey: Config.isProduction
               ? KSecurityKeys.firebaseProdVapidKey
@@ -187,5 +155,14 @@ class DeviceRepository implements IDeviceRepository {
     } catch (e, stack) {
       return Left(SomeFailure.serverError(error: e, stack: stack));
     }
+  }
+
+  Future<void> handleRequestPermission(
+    PlatformEnum platformValue, {
+    bool provisional = false,
+  }) async {
+    await _firebaseMessaging.requestPermission(
+      provisional: platformValue.isIOS && provisional,
+    );
   }
 }
