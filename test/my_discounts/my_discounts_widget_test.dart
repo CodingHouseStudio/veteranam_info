@@ -124,6 +124,25 @@ void main() {
 
           await myDiscountsInitialHelper(tester);
         });
+        group(
+          '${KGroupText.goTo} ',
+          () {
+            testWidgets('${KRoute.discountsAdd.name} ', (tester) async {
+              await myDiscountsPumpAppHelper(
+                mockDiscountRepository: mockDiscountRepository,
+                mockAppAuthenticationRepository:
+                    mockAppAuthenticationRepository,
+                tester: tester,
+                mockGoRouter: mockGoRouter,
+              );
+
+              await addDiscountsNavigationHelper(
+                tester: tester,
+                mockGoRouter: mockGoRouter,
+              );
+            });
+          },
+        );
       });
     });
   });

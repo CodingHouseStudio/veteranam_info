@@ -397,7 +397,7 @@ extension ListExtensions<T> on List<T> {
   List<FilterItem> overallItems({
     required BuildContext? context,
     required List<dynamic> Function(T) getUAFilter,
-    List<dynamic> Function(T)? getENFilter,
+    List<dynamic>? Function(T)? getENFilter,
     List<T>? fullList,
     List<T>? numberGetList,
   }) {
@@ -408,7 +408,7 @@ extension ListExtensions<T> on List<T> {
           FilterItem(
             getUAFilter(item).elementAt(i),
             valueEN:
-                getENFilter == null ? null : getENFilter(item).elementAt(i),
+                getENFilter == null ? null : getENFilter(item)?.elementAt(i),
           ),
         );
       }

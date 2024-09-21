@@ -20,9 +20,7 @@ abstract class KButtonStyles {
       EdgeInsets.all(KPadding.kPaddingSize24),
     ),
     shape: WidgetStatePropertyAll(
-      RoundedRectangleBorder(
-        borderRadius: KBorderRadius.kBorderRadius40,
-      ),
+      KWidgetTheme.outlineBorder40,
     ),
   );
 
@@ -41,9 +39,7 @@ abstract class KButtonStyles {
       EdgeInsets.all(KPadding.kPaddingSize4),
     ),
     shape: WidgetStatePropertyAll(
-      RoundedRectangleBorder(
-        borderRadius: KBorderRadius.kBorderRadius32,
-      ),
+      KWidgetTheme.outlineBorder,
     ),
   );
 
@@ -57,9 +53,7 @@ abstract class KButtonStyles {
     //   color: KColorTheme.white,
     // ),
     shape: WidgetStatePropertyAll(
-      RoundedRectangleBorder(
-        borderRadius: KBorderRadius.kBorderRadius32,
-      ),
+      KWidgetTheme.outlineBorder,
     ),
   );
 
@@ -73,9 +67,7 @@ abstract class KButtonStyles {
     //   color: KColorTheme.white,
     // ),
     shape: WidgetStatePropertyAll(
-      RoundedRectangleBorder(
-        borderRadius: KBorderRadius.kBorderRadius32,
-      ),
+      KWidgetTheme.outlineBorder,
     ),
   );
   static const withoutStyle = ButtonStyle(
@@ -105,9 +97,7 @@ abstract class KButtonStyles {
     ),
     padding: WidgetStatePropertyAll(EdgeInsets.all(KPadding.kPaddingSize8)),
     shape: WidgetStatePropertyAll(
-      RoundedRectangleBorder(
-        borderRadius: KBorderRadius.kBorderRadius32,
-      ),
+      KWidgetTheme.outlineBorder,
     ),
   );
   static const whiteButtonStyleBorder = ButtonStyle(
@@ -121,9 +111,7 @@ abstract class KButtonStyles {
       ),
     ),
     shape: WidgetStatePropertyAll(
-      RoundedRectangleBorder(
-        borderRadius: KBorderRadius.kBorderRadius32,
-      ),
+      KWidgetTheme.outlineBorder,
     ),
     backgroundColor: WidgetStatePropertyAll(AppColors.materialThemeWhite),
   );
@@ -135,9 +123,7 @@ abstract class KButtonStyles {
     ),
     padding: WidgetStatePropertyAll(EdgeInsets.all(KPadding.kPaddingSize8)),
     shape: WidgetStatePropertyAll(
-      RoundedRectangleBorder(
-        borderRadius: KBorderRadius.kBorderRadius32,
-      ),
+      KWidgetTheme.outlineBorder,
     ),
   );
   static const lightGrayButtonStyleWInf = ButtonStyle(
@@ -148,9 +134,7 @@ abstract class KButtonStyles {
     ),
     padding: WidgetStatePropertyAll(EdgeInsets.all(KPadding.kPaddingSize8)),
     shape: WidgetStatePropertyAll(
-      RoundedRectangleBorder(
-        borderRadius: KBorderRadius.kBorderRadius32,
-      ),
+      KWidgetTheme.outlineBorder,
     ),
   );
   static const transparentButtonStyleBottomBorder = ButtonStyle(
@@ -171,10 +155,7 @@ abstract class KButtonStyles {
       ),
     ),
     shape: WidgetStatePropertyAll(
-      RoundedRectangleBorder(
-        borderRadius: KBorderRadius.kBorderRadius32,
-        side: BorderSide(),
-      ),
+      KWidgetTheme.outlineBorderSide,
     ),
   );
 
@@ -186,10 +167,7 @@ abstract class KButtonStyles {
       ),
     ),
     shape: WidgetStatePropertyAll(
-      RoundedRectangleBorder(
-        borderRadius: KBorderRadius.kBorderRadius32,
-        side: BorderSide(),
-      ),
+      KWidgetTheme.outlineBorderSide,
     ),
   );
 
@@ -202,12 +180,10 @@ abstract class KButtonStyles {
     ),
     alignment: Alignment.centerLeft,
     shape: WidgetStatePropertyAll(
-      RoundedRectangleBorder(
-        // ignore: avoid_redundant_argument_values
-        borderRadius: BorderRadius.zero,
-      ),
+      KWidgetTheme.outlineBorderZero,
     ),
-    backgroundColor: WidgetStatePropertyAll(AppColors.materialThemeWhite),
+    // backgroundColor:
+    //     WidgetStatePropertyAll(AppColors.materialThemeKeyColorsNeutral),
   );
 
   static const imageButton = ButtonStyle(
@@ -219,16 +195,12 @@ abstract class KButtonStyles {
     iconSize: WidgetStatePropertyAll(KSize.kPixel70),
     backgroundColor: WidgetStatePropertyAll(AppColors.materialThemeWhite),
     shape: WidgetStatePropertyAll(
-      RoundedRectangleBorder(
-        borderRadius: KBorderRadius.kBorderRadius32,
-      ),
+      KWidgetTheme.outlineBorder,
     ),
   );
   static const iconButtonStyle = ButtonStyle(
     shape: WidgetStatePropertyAll(
-      RoundedRectangleBorder(
-        borderRadius: KBorderRadius.kBorderRadiusL,
-      ),
+      KWidgetTheme.outlineBorder48,
     ),
     backgroundColor: WidgetStatePropertyAll(AppColors.materialThemeWhite),
   );
@@ -237,9 +209,7 @@ abstract class KButtonStyles {
     padding:
         WidgetStatePropertyAll(EdgeInsets.only(right: KPadding.kPaddingSize8)),
     shape: WidgetStatePropertyAll(
-      RoundedRectangleBorder(
-        borderRadius: KBorderRadius.kBorderRadius32,
-      ),
+      KWidgetTheme.outlineBorder,
     ),
   );
   static const advancedFilterButtonStyle = ButtonStyle(
@@ -251,9 +221,7 @@ abstract class KButtonStyles {
     ),
     backgroundColor: WidgetStatePropertyAll(AppColors.materialThemeSourceSeed),
     shape: WidgetStatePropertyAll(
-      RoundedRectangleBorder(
-        borderRadius: KBorderRadius.kBorderRadius32,
-      ),
+      KWidgetTheme.outlineBorder,
     ),
   );
 
@@ -261,9 +229,7 @@ abstract class KButtonStyles {
     padding: WidgetStatePropertyAll(EdgeInsets.zero),
     overlayColor: WidgetStatePropertyAll(Colors.transparent),
     shape: WidgetStatePropertyAll(
-      RoundedRectangleBorder(
-        borderRadius: KBorderRadius.kBorderRadius32,
-      ),
+      KWidgetTheme.outlineBorder,
     ),
     foregroundColor:
         WidgetStatePropertyAll(AppColors.materialThemeKeyColorsSecondary),
@@ -279,9 +245,7 @@ abstract class KButtonStyles {
       BorderSide(),
     ),
     shape: WidgetStatePropertyAll(
-      RoundedRectangleBorder(
-        borderRadius: KBorderRadius.kBorderRadius32,
-      ),
+      KWidgetTheme.outlineBorder,
     ),
     backgroundColor: WidgetStatePropertyAll(AppColors.materialThemeSourceSeed),
   );
@@ -295,9 +259,7 @@ abstract class KButtonStyles {
       BorderSide(),
     ),
     shape: WidgetStatePropertyAll(
-      RoundedRectangleBorder(
-        borderRadius: KBorderRadius.kBorderRadius32,
-      ),
+      KWidgetTheme.outlineBorder,
     ),
     backgroundColor: WidgetStatePropertyAll(AppColors.materialThemeWhite),
   );
@@ -326,18 +288,14 @@ abstract class KButtonStyles {
     ),
     padding: WidgetStatePropertyAll(EdgeInsets.all(KPadding.kPaddingSize16)),
     shape: WidgetStatePropertyAll(
-      RoundedRectangleBorder(
-        borderRadius: KBorderRadius.kBorderRadius16,
-      ),
+      KWidgetTheme.outlineBorder16,
     ),
     backgroundColor: WidgetStatePropertyAll(AppColors.materialThemeBlack),
   );
   static const discountCityButtonStyle = ButtonStyle(
     backgroundColor: WidgetStatePropertyAll(AppColors.materialThemeWhite),
     shape: WidgetStatePropertyAll(
-      RoundedRectangleBorder(
-        borderRadius: KBorderRadius.kBorderRadius32,
-      ),
+      KWidgetTheme.outlineBorder,
     ),
     side: WidgetStatePropertyAll(
       BorderSide(color: AppColors.materialThemeKeyColorsNeutral),
@@ -363,6 +321,12 @@ abstract class KButtonStyles {
         borderRadius: KBorderRadius.kBorderRadius32,
         side: BorderSide(color: AppColors.materialThemeWhite),
       ),
+    ),
+  );
+  static const dropFieldButtonStyle = ButtonStyle(
+    textStyle: WidgetStatePropertyAll(AppTextStyle.materialThemeBodyLarge),
+    padding: WidgetStatePropertyAll(
+      EdgeInsets.symmetric(horizontal: KPadding.kPaddingSize16),
     ),
   );
 }

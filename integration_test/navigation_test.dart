@@ -16,12 +16,12 @@ void main() {
   testWidgets('Navigation test', (tester) async {
     await tester.pumpApp(tester, routeName: null);
 
-    if (KTest.testIsWeb) {
+    if (Config.isWeb) {
       await homeInitialHelper(tester);
     } else {
       await discountsInitialHelper(tester);
     }
-    final buttonsKey = KTest.testIsWeb
+    final buttonsKey = Config.isWeb
         ? Config.isDevelopment
             ? KWidgetkeys.widget.footer.buttonsKey
             : KWidgetkeys.widget.footer.buttonsProdKey
@@ -36,7 +36,7 @@ void main() {
 
       // await tester.pumpAndSettle();
       // }
-      if (KTest.testIsWeb) {
+      if (Config.isWeb) {
         await footerButtonHelper(
           tester: tester,
           buttonKey: buttonsKey.elementAt(i),

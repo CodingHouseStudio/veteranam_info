@@ -39,7 +39,7 @@ extension PumpApp on WidgetTester {
             create: (context) =>
                 GetIt.I.get<NetworkCubit>()..networkInitialized(),
           ),
-          if (!KTest.testIsWeb) ...[
+          if (!Config.isWeb) ...[
             BlocProvider(
               create: (context) => GetIt.I.get<MobFeedbackBloc>(),
             ),
@@ -82,7 +82,7 @@ extension PumpApp on WidgetTester {
     required Locale currentLocale,
     required bool addFeedback,
   }) =>
-      KTest.testIsWeb || !addFeedback
+      Config.isWeb || !addFeedback
           ? _materialApp(
               widget: widget,
               currentLocale: currentLocale,

@@ -71,6 +71,23 @@
         "--target",
         "lib/main_production.dart"
       ],
+    },
+    {
+      "name": "Launch Business development",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main_development.dart",
+      "args": [
+        "--dart-define=FLAVOUR=development",
+        "--dart-define=ROLE=business",
+        "localhost",
+        "--web-port",
+        "4001",
+        "--flavor",
+        "development",
+        "--target",
+        "lib/main_development.dart"
+      ],
     }
   ]
 }

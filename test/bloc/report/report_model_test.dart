@@ -14,7 +14,7 @@ void main() {
       // ReportModelJsonField.email: KTestText.reportModel.email,
       ReportModelJsonField.message: KTestText.reportModel.message,
       ReportModelJsonField.date: KTestText.reportModel.date.toIso8601String(),
-      ReportModelJsonField.card: _$CardEnumEnumMap[KTestText.reportModel.card],
+      ReportModelJsonField.card: KTestText.reportModel.card.getValue,
       ReportModelJsonField.reasonComplaint:
           _$ReasonComplaintEnumMap[KTestText.reportModel.reasonComplaint],
       ReportModelJsonField.cardId: KTestText.reportModel.cardId,
@@ -27,7 +27,7 @@ void main() {
       // ReportModelJsonField.email: KTestText.reportModel.email,
       ReportModelJsonField.message: null,
       ReportModelJsonField.date: KTestText.reportModel.date.toIso8601String(),
-      ReportModelJsonField.card: _$CardEnumEnumMap[KTestText.reportModel.card],
+      ReportModelJsonField.card: KTestText.reportModel.card.getValue,
       ReportModelJsonField.reasonComplaint:
           _$ReasonComplaintEnumMap[KTestText.reportModel.reasonComplaint],
       ReportModelJsonField.cardId: KTestText.reportModel.cardId,
@@ -75,8 +75,7 @@ void main() {
           ReportModelJsonField.message: KTestText.reportModel.message,
           ReportModelJsonField.date:
               KTestText.reportModel.date.toIso8601String(),
-          ReportModelJsonField.card:
-              _$CardEnumEnumMap[KTestText.reportModel.card],
+          ReportModelJsonField.card: KTestText.reportModel.card.getValue,
           ReportModelJsonField.reasonComplaint:
               _$ReasonComplaintEnumMap[KTestText.reportModel.reasonComplaint],
         };
@@ -108,12 +107,6 @@ const _$ReasonComplaintEnumMap = {
   ReasonComplaint.fakeNewsOrDisinformation: 'fakeNewsOrDisinformation',
   ReasonComplaint.offensiveOrHatefulContent: 'offensiveOrHatefulContent',
   ReasonComplaint.other: 'other',
-};
-
-const _$CardEnumEnumMap = {
-  CardEnum.funds: 'funds',
-  CardEnum.discount: 'discount',
-  CardEnum.information: 'information',
 };
 
 const _$ReportStatusEnumMap = {

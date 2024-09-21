@@ -1,13 +1,15 @@
 // ignore_for_file: empty_catches
 
-import 'dart:developer';
+import 'dart:developer' show log;
 
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_performance/firebase_performance.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart'
+    show PlatformDispatcher, kIsWeb, kReleaseMode;
+import 'package:flutter/material.dart' show FlutterError, WidgetsFlutterBinding;
+// import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:veteranam/app.dart';
 import 'package:veteranam/bootstrap.dart';
@@ -111,9 +113,11 @@ Future<void> main() async {
       //   );
       // }
     } catch (e) {}
+  }
 
-    // Non-async exceptions
-    FlutterError.onError = (details) {
+  // Non-async exceptions
+  FlutterError.onError = (details) {
+    if (kReleaseMode) {
       if (kIsWeb) {
         Sentry.captureException(
           details.exceptionAsString(),
@@ -122,10 +126,12 @@ Future<void> main() async {
       } else {
         FirebaseCrashlytics.instance.recordFlutterError(details);
       }
-      log(details.exceptionAsString(), stackTrace: details.stack);
-    };
-    // Async exceptions
-    PlatformDispatcher.instance.onError = (error, stack) {
+    }
+    log(details.exceptionAsString(), stackTrace: details.stack);
+  };
+  // Async exceptions
+  PlatformDispatcher.instance.onError = (error, stack) {
+    if (kReleaseMode) {
       if (kIsWeb) {
         Sentry.captureException(
           error,
@@ -134,11 +140,11 @@ Future<void> main() async {
       } else {
         FirebaseCrashlytics.instance.recordError(error, stack);
       }
-      log(error.toString(), stackTrace: stack);
+    }
+    log(error.toString(), stackTrace: stack);
 
-      return true;
-    };
-  }
+    return true;
+  };
 
   // if (kIsWeb) {
   // initialize the facebook javascript SDK

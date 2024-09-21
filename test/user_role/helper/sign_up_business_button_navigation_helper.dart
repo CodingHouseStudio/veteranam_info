@@ -3,7 +3,6 @@ import 'package:mocktail/mocktail.dart';
 import 'package:veteranam/shared/shared.dart';
 
 import '../../test_dependency.dart';
-import '../../test_mocks/go_router_provider_mocks.dart';
 
 // Helper function for navigating using the user button
 Future<void> signUpButtonsNavigationHelper({
@@ -13,6 +12,11 @@ Future<void> signUpButtonsNavigationHelper({
   expect(
     find.byKey(KWidgetkeys.screen.userRole.signUpBusinessButton),
     findsOneWidget,
+  );
+
+  await scrollingHelper(
+    tester: tester,
+    itemKey: KWidgetkeys.screen.userRole.signUpBusinessButton,
   );
 
   await tester

@@ -149,8 +149,8 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
               child: Stack(
                 children: [
                   Scaffold(
-                    resizeToAvoidBottomInset: !KTest.testIsWeb,
-                    bottomNavigationBar: KTest.testIsWeb
+                    resizeToAvoidBottomInset: !Config.isWeb,
+                    bottomNavigationBar: Config.isWeb
                         ? null
                         : MobNavigationWidget(
                             index: context.l10n.discounts == widget.pageName
@@ -165,7 +165,7 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
                       widgetKey: KWidgetkeys.widget.scaffold.scroll,
                       // physics: KTest.scroll,
                       slivers: [
-                        if (!KTest.testIsWeb && state.isOffline)
+                        if (!Config.isWeb && state.isOffline)
                           SliverPersistentHeader(
                             pinned: true,
                             delegate: NetworkStatusBanner.getSliverHeader(
@@ -174,7 +174,7 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
                               networkStatus: state,
                             ),
                           ),
-                        if (KTest.testIsWeb || widget.pageName != null)
+                        if (Config.isWeb || widget.pageName != null)
                           SliverPersistentHeader(
                             delegate: NawbarWidget.getSliverHeader(
                               isDesk: isDesk,
@@ -246,7 +246,7 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
               ),
             ),
           );
-          return KTest.testIsWeb ? scaffold : SafeArea(child: scaffold);
+          return Config.isWeb ? scaffold : SafeArea(child: scaffold);
         },
       ),
     );

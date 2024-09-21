@@ -54,4 +54,5 @@ class _WidgetKeys {
   final networkBanner = _NetworkBannerKeys();
   final cardEmpty = _CardEmptyKeys();
   final dropDownButton = _DropDownButtonKeys();
+  final switchOffline = _SwitchOfflineKeys();
 }

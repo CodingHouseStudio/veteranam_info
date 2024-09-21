@@ -24,9 +24,8 @@ class ProfileSavesBody extends StatelessWidget {
         else
           KSizedBox.kHeightSizedBox24,
       ],
-      mainDeskPadding: ({required maxWidth}) => const EdgeInsets.symmetric(
-        horizontal: KPadding.kPaddingSize220,
-      ),
+      mainDeskPadding: ({required maxWidth}) =>
+          maxWidth.screenPadding(precent: KDimensions.fifteenPercent),
       mainChildWidgetsFunction: ({required isDesk, required isTablet}) => [
         DiscountCardWidget(
           key: KWidgetkeys.screen.profileSaves.discountCard,

@@ -33,4 +33,6 @@ abstract class IDiscountRepository {
   Future<Either<SomeFailure, int>> userCanSendUserEmail(
     String userId,
   );
+
+  Future<Either<SomeFailure, bool>> addDiscount(DiscountModel discount);
 }

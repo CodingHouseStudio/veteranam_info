@@ -13,7 +13,7 @@ class InfoVersionWidget extends StatelessWidget {
         return Text(
           ' v${_.build.version} ${isDesk ? '' : '\n'}'
           ' build ${_.build.buildNumber}',
-          style: isDesk && KTest.testIsWeb
+          style: isDesk && Config.isWeb
               ? AppTextStyle.materialThemeBodyLarge
               : AppTextStyle.materialThemeBodySmall,
         );

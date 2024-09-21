@@ -238,6 +238,25 @@ abstract class KTestText {
       ),
   ];
 
+  static final sendDiscountModel = discountModelItems.first.copyWith(
+    directLink: null,
+    additionalDetails: null,
+    // html: null,
+    userId: user.id,
+    userName: user.name,
+    company: null,
+    subLocation: null,
+    userPhoto: null,
+    locationEN: null,
+    expirationEN: null,
+    additionalDetailsEN: null, companyEN: null,
+    phoneNumber: null, categoryEN: null, descriptionEN: null,
+    exclusionsEN: null, requirementsEN: null, requirements: null,
+    territoryEN: null,
+    titleEN: null, status: DiscountState.isNew, subcategory: null,
+    subcategoryEN: null,
+  );
+
   static final userDiscountModelItems = <DiscountModel>[
     for (var i = 0; i < 5; i++)
       KMockText.discountModel.copyWith(
@@ -504,6 +523,7 @@ abstract class KScreenBlocName {
   static const mobSettings = 'Settings Screen';
   static const mobFaq = 'Mob FAQ Screen';
   static const userRole = 'User Role Screen';
+  static const discountsAdd = 'Discounts Add Screen';
 
   static const authenticationServices = 'Authentication Services';
   static const appRepository = 'App';

@@ -9,7 +9,7 @@ part 'mob_feedback_event.dart';
 part 'mob_feedback_state.dart';
 part 'mob_feedback_bloc.freezed.dart';
 
-@injectable
+@Injectable(env: [Config.mobile])
 class MobFeedbackBloc extends Bloc<MobFeedbackEvent, MobFeedbackState> {
   MobFeedbackBloc({
     required IFeedbackRepository feedbackRepository,
