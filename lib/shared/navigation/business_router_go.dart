@@ -134,16 +134,26 @@ GoRouter businessRouter = GoRouter(
             child: const FeedbackScreen(),
           ),
         ),
-        if (Config.isDevelopment)
-          GoRoute(
-            name: KRoute.myDiscounts.name,
-            path: KRoute.myDiscounts.path,
-            pageBuilder: (context, state) => NoTransitionPage(
-              key: state.pageKey,
-              name: state.name,
-              child: const MyDiscountsScreen(),
-            ),
+        GoRoute(
+          name: KRoute.myDiscounts.name,
+          path: KRoute.myDiscounts.path,
+          pageBuilder: (context, state) => NoTransitionPage(
+            key: state.pageKey,
+            name: state.name,
+            child: const MyDiscountsScreen(),
           ),
+          routes: [
+            GoRoute(
+              name: KRoute.discountsAdd.name,
+              path: KRoute.discountsAdd.path,
+              pageBuilder: (context, state) => NoTransitionPage(
+                key: state.pageKey,
+                name: state.name,
+                child: const DiscountsAddScreen(),
+              ),
+            ),
+          ],
+        ),
         GoRoute(
           name: KRoute.discountCard.name,
           path: ':cardId',

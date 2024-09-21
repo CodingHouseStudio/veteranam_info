@@ -103,3 +103,29 @@ extension ReportFieldModelValidationErrorEmpl
     }
   }
 }
+
+extension CitiesFieldModelValidationErrorEmpl
+    on CitiesFieldModelValidationError? {
+  String? value(BuildContext context) {
+    switch (this) {
+      case CitiesFieldModelValidationError.empty:
+        return context.l10n.fieldCannotBeEmpty;
+      case null:
+        return null;
+    }
+  }
+}
+
+extension DiscountsFieldModelValidationErrorEmpl
+    on DiscountsFieldModelValidationError? {
+  String? value(BuildContext context) {
+    switch (this) {
+      case DiscountsFieldModelValidationError.empty:
+        return context.l10n.fieldCannotBeEmpty;
+      case DiscountsFieldModelValidationError.wrongFormat:
+        return context.l10n.discountsWrongFormat;
+      case null:
+        return null;
+    }
+  }
+}

@@ -14,11 +14,11 @@ class InformationWatcherBloc
     extends Bloc<InformationWatcherEvent, InformationWatcherState> {
   InformationWatcherBloc({
     required IInformationRepository informationRepository,
-    required IReportRepository reportRepository,
-    required IAppAuthenticationRepository appAuthenticationRepository,
+    // required IReportRepository reportRepository,
+    // required IAppAuthenticationRepository appAuthenticationRepository,
   })  : _informationRepository = informationRepository,
-        _reportRepository = reportRepository,
-        _appAuthenticationRepository = appAuthenticationRepository,
+        // _reportRepository = reportRepository,
+        // _appAuthenticationRepository = appAuthenticationRepository,
         super(
           const InformationWatcherState(
             informationModelItems: [],
@@ -43,8 +43,8 @@ class InformationWatcherBloc
 
   final IInformationRepository _informationRepository;
   StreamSubscription<List<InformationModel>>? _informationItemsSubscription;
-  final IReportRepository _reportRepository;
-  final IAppAuthenticationRepository _appAuthenticationRepository;
+  // final IReportRepository _reportRepository;
+  // final IAppAuthenticationRepository _appAuthenticationRepository;
   Timer? _debounceTimer;
 
   Future<void> _onStarted(
@@ -53,13 +53,13 @@ class InformationWatcherBloc
   ) async {
     emit(state.copyWith(loadingStatus: LoadingStatus.loading));
 
-    final reportItems = await _getReport();
+    // final reportItems = await _getReport();
 
     await _informationItemsSubscription?.cancel();
     _informationItemsSubscription = _informationRepository
         .getInformationItems(
-      reportIdItems: reportItems?.getIdCard,
-    )
+            // reportIdItems: reportItems?.getIdCard,
+            )
         .listen(
       (information) => add(
         InformationWatcherEvent.updated(
@@ -221,16 +221,16 @@ class InformationWatcherBloc
   //   );
   // }
 
-  Future<List<ReportModel>?> _getReport() async {
-    final reportItems = await _reportRepository.getCardReportById(
-      cardEnum: CardEnum.information,
-      userId: _appAuthenticationRepository.currentUser.id,
-    );
-    return reportItems.fold(
-      (l) => null,
-      (r) => r.isEmpty ? null : r,
-    );
-  }
+  // Future<List<ReportModel>?> _getReport() async {
+  //   final reportItems = await _reportRepository.getCardReportById(
+  //     cardEnum: CardEnum.information,
+  //     userId: _appAuthenticationRepository.currentUser.id,
+  //   );
+  //   return reportItems.fold(
+  //     (l) => null,
+  //     (r) => r.isEmpty ? null : r,
+  //   );
+  // }
 
   Future<void> _onLike(
     _Like event,

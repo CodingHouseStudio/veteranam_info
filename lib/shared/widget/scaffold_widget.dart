@@ -14,6 +14,7 @@ class ScaffoldWidget extends StatelessWidget {
     this.showMobBottomNavigation,
     this.loadDataAgain,
     this.showMobNawbarBackButton,
+    this.titleDeskPadding,
   });
   final List<Widget> Function({required bool isDesk})?
       titleChildWidgetsFunction;
@@ -22,6 +23,9 @@ class ScaffoldWidget extends StatelessWidget {
   final EdgeInsetsGeometry Function({
     required double maxWidth,
   })? mainDeskPadding;
+  final EdgeInsetsGeometry Function({
+    required double maxWidth,
+  })? titleDeskPadding;
   final bool hasFooter;
   final String? pageName;
   // final bool? showMobileNawbar;
@@ -75,9 +79,9 @@ class ScaffoldWidget extends StatelessWidget {
             // policy: WidgetOrderTraversalPolicy(),
             child: Semantics(
               child: Scaffold(
-                resizeToAvoidBottomInset: !KTest.testIsWeb,
+                resizeToAvoidBottomInset: !Config.isWeb,
                 bottomNavigationBar:
-                    KTest.testIsWeb || !(showMobBottomNavigation ?? true)
+                    Config.isWeb || !(showMobBottomNavigation ?? true)
                         ? null
                         : const MobNavigationWidget(
                             index: 2,
@@ -90,7 +94,7 @@ class ScaffoldWidget extends StatelessWidget {
                   widgetKey: KWidgetkeys.widget.scaffold.scroll,
                   //physics: KTest.scroll,
                   slivers: [
-                    if (!KTest.testIsWeb && state.isOffline)
+                    if (!Config.isWeb && state.isOffline)
                       SliverPersistentHeader(
                         pinned: true,
                         delegate: NetworkStatusBanner.getSliverHeader(
@@ -110,7 +114,11 @@ class ScaffoldWidget extends StatelessWidget {
                     ),
                     if (titleChildWidgetsFunction != null)
                       SliverPadding(
-                        padding: padding,
+                        padding: isTablet && titleDeskPadding != null
+                            ? titleDeskPadding!(
+                                maxWidth: constraints.maxWidth,
+                              )
+                            : padding,
                         sliver: SliverList.builder(
                           addAutomaticKeepAlives: false,
                           addRepaintBoundaries: false,
@@ -123,7 +131,7 @@ class ScaffoldWidget extends StatelessWidget {
                         ),
                       ),
                     SliverPadding(
-                      padding: isDesk && mainDeskPadding != null
+                      padding: isTablet && mainDeskPadding != null
                           ? mainDeskPadding!(
                               maxWidth: constraints.maxWidth,
                             )
@@ -176,7 +184,7 @@ class ScaffoldWidget extends StatelessWidget {
               ),
             ),
           );
-          return KTest.testIsWeb ? scaffold : SafeArea(child: scaffold);
+          return Config.isWeb ? scaffold : SafeArea(child: scaffold);
         },
       ),
     );

@@ -5,7 +5,7 @@ import 'package:injectable/injectable.dart';
 import 'package:veteranam/shared/shared.dart';
 
 @Singleton(
-  as: IReportRepository,
+  as: IReportRepository, env: [Config.user],
   // signalsReady: true,
 )
 class ReportRepository implements IReportRepository {
