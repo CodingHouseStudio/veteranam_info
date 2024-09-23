@@ -55,4 +55,5 @@ class _WidgetKeys {
   final cardEmpty = _CardEmptyKeys();
   final dropDownButton = _DropDownButtonKeys();
   final switchOffline = _SwitchOfflineKeys();
+  final multiDropField = _MultiDropFieldKeys();
 }

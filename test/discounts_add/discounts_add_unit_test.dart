@@ -80,7 +80,22 @@ void main() {
             ),
           )
           ..add(
-            DiscountsAddEvent.discountUpdate(
+            DiscountsAddEvent.discountAddItem(
+              KTestText.sendDiscountModel.discount.first.toString(),
+            ),
+          )
+          ..add(
+            DiscountsAddEvent.discountAddItem(
+              KTestText.sendDiscountModel.discount.first.toString(),
+            ),
+          )
+          ..add(
+            DiscountsAddEvent.discountRemoveItem(
+              KTestText.sendDiscountModel.discount.first.toString(),
+            ),
+          )
+          ..add(
+            DiscountsAddEvent.discountAddItem(
               KTestText.sendDiscountModel.discount.first.toString(),
             ),
           )
@@ -161,6 +176,19 @@ void main() {
         predicate<DiscountsAddState>(
           (state) =>
               state.discounts.isValid &&
+              state.discounts.value!.length == 1 &&
+              state.formState == DiscountsAddEnum.detailInProgress,
+        ),
+        predicate<DiscountsAddState>(
+          (state) =>
+              state.discounts.isNotValid &&
+              state.discounts.value!.isEmpty &&
+              state.formState == DiscountsAddEnum.detailInProgress,
+        ),
+        predicate<DiscountsAddState>(
+          (state) =>
+              state.discounts.isValid &&
+              state.discounts.value!.length == 1 &&
               state.formState == DiscountsAddEnum.detailInProgress,
         ),
         predicate<DiscountsAddState>(
@@ -220,7 +248,7 @@ void main() {
             ),
           )
           ..add(
-            DiscountsAddEvent.discountUpdate(
+            DiscountsAddEvent.discountAddItem(
               KTestText.sendDiscountModel.discount.first.toString(),
             ),
           )
@@ -385,7 +413,7 @@ void main() {
             ),
           )
           ..add(
-            DiscountsAddEvent.discountUpdate(
+            DiscountsAddEvent.discountAddItem(
               KTestText.sendDiscountModel.discount.first.toString(),
             ),
           )
