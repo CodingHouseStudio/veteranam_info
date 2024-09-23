@@ -120,7 +120,8 @@ class DeviceRepository implements IDeviceRepository {
           platform,
           provisional: platform.isIOS,
         );
-      } else {
+      } else if (notificationSettings.authorizationStatus ==
+          AuthorizationStatus.provisional) {
         await handleRequestPermission(platform);
       }
 
