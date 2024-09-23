@@ -141,15 +141,14 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
                 controller: discountsController,
                 isDesk: isDesk,
                 labelText: context.l10n.discount,
-                dropDownList: [
-                  context.l10n.free,
+                dropDownList: const [
+                  '100%',
                   '5%',
                   '10%',
                   '15%',
                   '20%',
                   '50%',
                 ],
-                // suffixIcon: KIcon.distance,
                 showErrorText: _.formState.hasError,
                 errorText: _.discounts.error.value(context),
                 onChanged: (text) => context

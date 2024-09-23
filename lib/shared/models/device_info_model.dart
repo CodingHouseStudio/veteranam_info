@@ -36,11 +36,7 @@ enum PlatformEnum {
   bool get isWeb => this == PlatformEnum.web;
   bool get isUnkown => this == PlatformEnum.unknown;
 
-  @visibleForTesting
-  static PlatformEnum? value;
-
   static PlatformEnum get getPlatform {
-    if (value != null) return value!;
     try {
       if (kIsWeb) {
         return PlatformEnum.web;

@@ -102,6 +102,9 @@ class _MultiDropFieldWidgetState extends State<MultiDropFieldWidget> {
 
   @override
   void dispose() {
+    if (widget.controller == null) {
+      textController.dispose();
+    }
     _focusNode.dispose();
     super.dispose();
   }

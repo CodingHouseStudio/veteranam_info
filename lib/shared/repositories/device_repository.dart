@@ -106,27 +106,23 @@ class DeviceRepository implements IDeviceRepository {
       final platform = platformValue ?? PlatformEnum.getPlatform;
       String? fcmToken;
 
-      var notificationSettings =
+      final notificationSettings =
           await _firebaseMessaging.getNotificationSettings();
 
       if (notificationSettings.authorizationStatus ==
           AuthorizationStatus.denied) {
         if (platform.isAndroid) {
-          notificationSettings = await handleRequestPermission(platform);
+          await handleRequestPermission(platform);
         }
       } else if (notificationSettings.authorizationStatus ==
           AuthorizationStatus.notDetermined) {
-        notificationSettings = await handleRequestPermission(
+        await handleRequestPermission(
           platform,
           provisional: platform.isIOS,
         );
+      } else {
+        await handleRequestPermission(platform);
       }
-      // I think we don't need to call this method when the user has
-      // AuthorizationStatus authorized or provisional
-      // else {
-
-      //   await handleRequestPermission(platform);
-      // }
 
       // You may set the permission requests to "provisional" which allows the
       // user to choose what type
@@ -162,11 +158,11 @@ class DeviceRepository implements IDeviceRepository {
     }
   }
 
-  Future<NotificationSettings> handleRequestPermission(
+  Future<void> handleRequestPermission(
     PlatformEnum platformValue, {
     bool provisional = false,
   }) async {
-    return _firebaseMessaging.requestPermission(
+    await _firebaseMessaging.requestPermission(
       provisional: platformValue.isIOS && provisional,
     );
   }

@@ -76,6 +76,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
     _CategoryUpdate event,
     Emitter<DiscountsAddState> emit,
   ) {
+    if (event.category == state.category.value) return;
     final categoryFieldModel = MessageFieldModel.dirty(event.category);
 
     emit(
