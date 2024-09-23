@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:veteranam/shared/shared.dart';
 
@@ -41,6 +42,10 @@ Future<void> discountsAddDetailEnterHelper({
     find.byKey(KWidgetkeys.screen.discountsAdd.discountsField),
     discountsText,
   );
+
+  await tester.pumpAndSettle();
+
+  await tester.sendKeyEvent(LogicalKeyboardKey.enter);
 
   await tester.pumpAndSettle();
 

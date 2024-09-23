@@ -136,18 +136,35 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
             )
           else if (_.formState.isDetail)
             TextFieldDescriptionWidget(
-              widgetKey: KWidgetkeys.screen.discountsAdd.discountsField,
-              controller: discountsController,
+              childWidget: MultiDropFieldWidget(
+                key: KWidgetkeys.screen.discountsAdd.discountsField,
+                controller: discountsController,
+                isDesk: isDesk,
+                labelText: context.l10n.discount,
+                dropDownList: const [
+                  '100%',
+                  '5%',
+                  '10%',
+                  '15%',
+                  '20%',
+                  '50%',
+                ],
+                showErrorText: _.formState.hasError,
+                errorText: _.discounts.error.value(context),
+                onChanged: (text) => context
+                    .read<DiscountsAddBloc>()
+                    .add(DiscountsAddEvent.discountAddItem(text)),
+                values: _.discounts.value,
+                removeEvent: (String value) =>
+                    context.read<DiscountsAddBloc>().add(
+                          DiscountsAddEvent.discountRemoveItem(value),
+                        ),
+                // errorMaxLines: 3,
+              ),
+              widgetKey: null,
               isDesk: isDesk,
-              labelText: context.l10n.discount,
               description: context.l10n.discountDescription,
-              suffixIcon: KIcon.distance,
-              showErrorText: _.formState.hasError,
-              errorText: _.discounts.error.value(context),
-              onChanged: (text) => context
-                  .read<DiscountsAddBloc>()
-                  .add(DiscountsAddEvent.discountUpdate(text)),
-              errorMaxLines: 3,
+              labelText: null,
             )
           else
             TextFieldDescriptionWidget(

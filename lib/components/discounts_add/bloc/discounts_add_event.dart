@@ -8,8 +8,10 @@ class DiscountsAddEvent with _$DiscountsAddEvent {
   const factory DiscountsAddEvent.cityUpdate(String city) = _CityUpdate;
   const factory DiscountsAddEvent.periodUpdate(String? period) = _PeriodUpdate;
   const factory DiscountsAddEvent.titleUpdate(String title) = _TitleUpdate;
-  const factory DiscountsAddEvent.discountUpdate(String discount) =
-      _DiscountUpdate;
+  const factory DiscountsAddEvent.discountAddItem(String discount) =
+      _DiscountAddItem;
+  const factory DiscountsAddEvent.discountRemoveItem(String discount) =
+      _DiscountRemoveItem;
   const factory DiscountsAddEvent.linkUpdate(String link) = _LinkUpdate;
   const factory DiscountsAddEvent.descriptionUpdate(String description) =
       _DescriptionUpdate;

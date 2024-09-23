@@ -34,7 +34,8 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
     on<_CityUpdate>(_onCityUpdated);
     on<_PeriodUpdate>(_onPeriodUpdated);
     on<_TitleUpdate>(_onTitleUpdated);
-    on<_DiscountUpdate>(_onDiscountUpdated);
+    on<_DiscountAddItem>(_onDiscountAddItem);
+    on<_DiscountRemoveItem>(_onDiscountRemoveItem);
     on<_LinkUpdate>(_onLinkUpdated);
     on<_DescriptionUpdate>(_onDescriptionUpdated);
     on<_ExclusionsUpdate>(_onExclusionsUpdated);
@@ -75,6 +76,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
     _CategoryUpdate event,
     Emitter<DiscountsAddState> emit,
   ) {
+    if (event.category == state.category.value) return;
     final categoryFieldModel = MessageFieldModel.dirty(event.category);
 
     emit(
@@ -128,11 +130,27 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
     );
   }
 
-  void _onDiscountUpdated(
-    _DiscountUpdate event,
+  void _onDiscountAddItem(
+    _DiscountAddItem event,
     Emitter<DiscountsAddState> emit,
   ) {
-    final discountsFieldModel = state.discounts.addValue(
+    final discountsFieldModel = state.discounts.add(
+      event.discount,
+    );
+
+    emit(
+      state.copyWith(
+        discounts: discountsFieldModel,
+        formState: DiscountsAddEnum.detailInProgress,
+      ),
+    );
+  }
+
+  void _onDiscountRemoveItem(
+    _DiscountRemoveItem event,
+    Emitter<DiscountsAddState> emit,
+  ) {
+    final discountsFieldModel = state.discounts.remove(
       event.discount,
     );
 

@@ -422,32 +422,22 @@ abstract class KTestText {
     phoneNumber: phoneNumber,
     noResume: true,
   );
-  static const notificationSettings = NotificationSettings(
-    alert: AppleNotificationSetting.enabled,
-    announcement: AppleNotificationSetting.enabled,
-    authorizationStatus: AuthorizationStatus.authorized,
-    badge: AppleNotificationSetting.enabled,
-    carPlay: AppleNotificationSetting.enabled,
-    lockScreen: AppleNotificationSetting.enabled,
-    notificationCenter: AppleNotificationSetting.enabled,
-    showPreviews: AppleShowPreviewSetting.always,
-    timeSensitive: AppleNotificationSetting.enabled,
-    criticalAlert: AppleNotificationSetting.enabled,
-    sound: AppleNotificationSetting.enabled,
-  );
-  static const notificationSettingsDenied = NotificationSettings(
-    alert: AppleNotificationSetting.disabled,
-    announcement: AppleNotificationSetting.disabled,
-    authorizationStatus: AuthorizationStatus.denied,
-    badge: AppleNotificationSetting.disabled,
-    carPlay: AppleNotificationSetting.disabled,
-    lockScreen: AppleNotificationSetting.disabled,
-    notificationCenter: AppleNotificationSetting.disabled,
-    showPreviews: AppleShowPreviewSetting.never,
-    timeSensitive: AppleNotificationSetting.disabled,
-    criticalAlert: AppleNotificationSetting.disabled,
-    sound: AppleNotificationSetting.disabled,
-  );
+  static NotificationSettings notificationSettings({
+    AuthorizationStatus authorizationStatus = AuthorizationStatus.authorized,
+  }) =>
+      NotificationSettings(
+        alert: AppleNotificationSetting.disabled,
+        announcement: AppleNotificationSetting.disabled,
+        authorizationStatus: authorizationStatus,
+        badge: AppleNotificationSetting.disabled,
+        carPlay: AppleNotificationSetting.disabled,
+        lockScreen: AppleNotificationSetting.disabled,
+        notificationCenter: AppleNotificationSetting.disabled,
+        showPreviews: AppleShowPreviewSetting.never,
+        timeSensitive: AppleNotificationSetting.disabled,
+        criticalAlert: AppleNotificationSetting.disabled,
+        sound: AppleNotificationSetting.disabled,
+      );
   static final linkModel = LinkModel(
     id: id,
     userId: user.id,

@@ -401,54 +401,59 @@ extension ListExtensions<T> on List<T> {
     List<T>? fullList,
     List<T>? numberGetList,
   }) {
-    final allFilters = <FilterItem>[];
-    for (final item in fullList ?? this) {
-      for (var i = 0; i < (getUAFilter(item).length); i++) {
-        allFilters.add(
-          FilterItem(
-            getUAFilter(item).elementAt(i),
-            valueEN:
-                getENFilter == null ? null : getENFilter(item)?.elementAt(i),
-          ),
-        );
+    try {
+      final allFilters = <FilterItem>[];
+      for (final item in fullList ?? this) {
+        for (var i = 0; i < (getUAFilter(item).length); i++) {
+          allFilters.add(
+            FilterItem(
+              getUAFilter(item).elementAt(i),
+              valueEN: getENFilter == null
+                  ? null
+                  : getENFilter(item)?.elementAtOrNull(i),
+            ),
+          );
+        }
       }
-    }
-    final allNumberFilters = numberGetList == null ? null : <FilterItem>[];
-    if (numberGetList != null) {
-      for (final item in numberGetList) {
-        allNumberFilters!.addAll(
-          getUAFilter(item).map(
-            FilterItem.new,
-          ),
-        );
+      final allNumberFilters = numberGetList == null ? null : <FilterItem>[];
+      if (numberGetList != null) {
+        for (final item in numberGetList) {
+          allNumberFilters!.addAll(
+            getUAFilter(item).map(
+              FilterItem.new,
+            ),
+          );
+        }
       }
-    }
-    final allFiltersList = allFilters.getToSet(allNumberFilters).toList()
-      ..sort((a, b) {
-        final numberSort = b.number.compareTo(a.number);
-        if (numberSort == 0) {
-          return a.alphabeteCompare(
+      final allFiltersList = allFilters.getToSet(allNumberFilters).toList()
+        ..sort((a, b) {
+          final numberSort = b.number.compareTo(a.number);
+          if (numberSort == 0) {
+            return a.alphabeteCompare(
+              b: b,
+              context: context,
+              addEnglish: getENFilter != null,
+            );
+          }
+          return numberSort;
+        });
+
+      final firstFive = allFiltersList.take(5).toList();
+      final remaining = allFiltersList.skip(5).toList()
+        ..sort(
+          (a, b) => a.alphabeteCompare(
             b: b,
             context: context,
             addEnglish: getENFilter != null,
-          );
-        }
-        return numberSort;
-      });
+          ),
+        );
 
-    final firstFive = allFiltersList.take(5).toList();
-    final remaining = allFiltersList.skip(5).toList()
-      ..sort(
-        (a, b) => a.alphabeteCompare(
-          b: b,
-          context: context,
-          addEnglish: getENFilter != null,
-        ),
-      );
+      final sortedList = [...firstFive, ...remaining];
 
-    final sortedList = [...firstFive, ...remaining];
-
-    return sortedList;
+      return sortedList;
+    } catch (e) {
+      return [];
+    }
   }
 
   /// Method to determine loading status based on previous list length.
