@@ -10,10 +10,10 @@ class MultiDropFieldWidget extends StatefulWidget {
     required this.isDesk,
     required this.values,
     required this.removeEvent,
+    required this.controller,
     super.key,
     this.showErrorText,
     this.errorText,
-    this.controller,
   });
 
   final void Function(String text)? onChanged;
@@ -22,7 +22,7 @@ class MultiDropFieldWidget extends StatefulWidget {
   final bool isDesk;
   final bool? showErrorText;
   final String? errorText;
-  final TextEditingController? controller;
+  final TextEditingController controller;
   final List<String>? values;
   final void Function(String value) removeEvent;
 
@@ -41,7 +41,7 @@ class _MultiDropFieldWidgetState extends State<MultiDropFieldWidget> {
     listFocusManager = false;
     _focusNode = FocusNode();
     labelText = (widget.values?.isEmpty ?? true) ? widget.labelText : '';
-    textController = widget.controller ?? TextEditingController();
+    textController = widget.controller; //?? TextEditingController();
     _focusNode.onKeyEvent = _handleKeyEvent;
   }
 
@@ -102,9 +102,9 @@ class _MultiDropFieldWidgetState extends State<MultiDropFieldWidget> {
 
   @override
   void dispose() {
-    if (widget.controller == null) {
-      textController.dispose();
-    }
+    // if (widget.controller == null) {
+    //   textController.dispose();
+    // }
     _focusNode.dispose();
     super.dispose();
   }
