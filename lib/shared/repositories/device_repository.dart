@@ -106,8 +106,8 @@ class DeviceRepository implements IDeviceRepository {
       final platform = platformValue ?? PlatformEnum.getPlatform;
       String? fcmToken;
 
-      final messaging = FirebaseMessaging.instance;
-      final notificationSettings = await messaging.getNotificationSettings();
+      final notificationSettings =
+          await _firebaseMessaging.getNotificationSettings();
 
       if (notificationSettings.authorizationStatus ==
           AuthorizationStatus.denied) {
@@ -120,7 +120,8 @@ class DeviceRepository implements IDeviceRepository {
           platform,
           provisional: platform.isIOS,
         );
-      } else {
+      } else if (notificationSettings.authorizationStatus ==
+          AuthorizationStatus.provisional) {
         await handleRequestPermission(platform);
       }
 
@@ -128,7 +129,8 @@ class DeviceRepository implements IDeviceRepository {
       // user to choose what type
       // of notifications they would like to receive once the user receives a
       // notification.
-      // final notificationSettings = await _firebaseMessaging.requestPermission(
+      // final notificationSettings = await _firebaseMessaging
+      // .requestPermission(
       //   provisional: platform.isIOS,
       // );
 

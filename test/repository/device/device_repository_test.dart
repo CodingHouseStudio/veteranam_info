@@ -32,6 +32,47 @@ void main() {
       'hardwareConcurrency': 1,
       'maxTouchPoints': 2,
     });
+    const fakeAndroidBuildVersion = <String, dynamic>{
+      'sdkInt': 16,
+      'baseOS': 'baseOS',
+      'previewSdkInt': 30,
+      'release': 'release',
+      'codename': 'codename',
+      'incremental': 'incremental',
+      'securityPatch': 'securityPatch',
+    };
+
+    const fakeSupportedAbis = <String>['arm64-v8a', 'x86', 'x86_64'];
+    const fakeSupported32BitAbis = <String?>['x86 (IA-32)', 'MMX'];
+    const fakeSupported64BitAbis = <String?>['x86-64', 'MMX', 'SSSE3'];
+    const fakeSystemFeatures = ['FEATURE_AUDIO_PRO', 'FEATURE_AUDIO_OUTPUT'];
+
+    final androidInfo = AndroidDeviceInfo.fromMap(
+      <String, dynamic>{
+        'id': KTestText.deviceId,
+        'host': 'host',
+        'tags': 'tags',
+        'type': 'type',
+        'model': 'model',
+        'board': 'board',
+        'brand': 'Google',
+        'device': 'device',
+        'product': 'product',
+        'display': 'display',
+        'hardware': 'hardware',
+        'isPhysicalDevice': true,
+        'bootloader': 'bootloader',
+        'fingerprint': 'fingerprint',
+        'manufacturer': 'manufacturer',
+        'supportedAbis': fakeSupportedAbis,
+        'systemFeatures': fakeSystemFeatures,
+        'version': fakeAndroidBuildVersion,
+        'supported64BitAbis': fakeSupported64BitAbis,
+        'supported32BitAbis': fakeSupported32BitAbis,
+        'serialNumber': 'SERIAL',
+        'isLowRamDevice': false,
+      },
+    );
     late IDeviceRepository deviceRepository;
     late FirebaseMessaging mockFirebaseMessaging;
     late DeviceInfoPlugin mockDeviceInfoPlugin;
@@ -47,19 +88,14 @@ void main() {
     group('${KGroupText.successful} ', () {
       setUp(() {
         when(
-          mockFirebaseMessaging.setAutoInitEnabled(true),
-        ).thenAnswer(
-          (_) async {},
-        );
-        when(
           mockFirebaseMessaging.requestPermission(),
         ).thenAnswer(
-          (_) async => KTestText.notificationSettings,
+          (_) async => KTestText.notificationSettings(),
         );
         when(
           mockFirebaseMessaging.requestPermission(provisional: true),
         ).thenAnswer(
-          (_) async => KTestText.notificationSettings,
+          (_) async => KTestText.notificationSettings(),
         );
         when(mockFirebaseMessaging.getAPNSToken()).thenAnswer(
           (_) async => null,
@@ -70,6 +106,11 @@ void main() {
           ),
         ).thenAnswer(
           (_) async => KTestText.fcmToken,
+        );
+        when(
+          mockFirebaseMessaging.getNotificationSettings(),
+        ).thenAnswer(
+          (_) async => KTestText.notificationSettings(),
         );
 
         when(
@@ -82,6 +123,11 @@ void main() {
           mockDeviceInfoPlugin.deviceInfo,
         ).thenAnswer(
           (_) async => webInfo,
+        );
+        when(
+          mockDeviceInfoPlugin.androidInfo,
+        ).thenAnswer(
+          (_) async => androidInfo,
         );
 
         deviceRepository = DeviceRepository(
@@ -105,6 +151,51 @@ void main() {
           ),
         );
       });
+
+      // test('Get device Not Determined', () async {
+      //   when(
+      //     mockFirebaseMessaging.getNotificationSettings(),
+      //   ).thenAnswer(
+      //     (_) async => KTestText.notificationSettingsnotDetermined,
+      //   );
+
+      //   expect(
+      //     await deviceRepository.getDevice(),
+      //     isA<Right<SomeFailure, DeviceInfoModel?>>().having(
+      //       (e) => e.value,
+      //       'value',
+      //       KTestText.deviceInfoModel.copyWith(
+      //         deviceId: webInfo.toString(),
+      //         platform: PlatformEnum.unknown,
+      //         build: AppInfoRepository.defaultValue.buildNumber,
+      //         fcmToken: null,
+      //       ),
+      //     ),
+      //   );
+      // });
+
+      // test('Get device Notification settings denied and isAndroid', () async
+      // {
+      //   PlatformEnum.value = PlatformEnum.android;
+      //   when(
+      //     mockFirebaseMessaging.getNotificationSettings(),
+      //   ).thenAnswer(
+      //     (_) async => KTestText.notificationSettingsDenied,
+      //   );
+      //   expect(
+      //     await deviceRepository.getDevice(),
+      //     isA<Right<SomeFailure, DeviceInfoModel?>>().having(
+      //       (e) => e.value,
+      //       'value',
+      //       KTestText.deviceInfoModel.copyWith(
+      //         deviceId: androidInfo.id,
+      //         platform: PlatformEnum.android,
+      //         build: AppInfoRepository.defaultValue.buildNumber,
+      //         fcmToken: null,
+      //       ),
+      //     ),
+      //   );
+      // });
       test('Get device whne is not release mode', () async {
         KTest.testReleaseMode = false;
         expect(
@@ -200,9 +291,13 @@ void main() {
       //     ),
       //   );
       // });
-      test('Get FCM when permission denied', () async {
-        when(mockFirebaseMessaging.requestPermission()).thenAnswer(
-          (_) async => KTestText.notificationSettingsDenied,
+      test('Get FCM when permission Not Determined', () async {
+        when(
+          mockFirebaseMessaging.getNotificationSettings(),
+        ).thenAnswer(
+          (_) async => KTestText.notificationSettings(
+            authorizationStatus: AuthorizationStatus.notDetermined,
+          ),
         );
         expect(
           await deviceRepository.getFcm(),
@@ -210,6 +305,36 @@ void main() {
             (e) => e.value,
             'value',
             null,
+          ),
+        );
+      });
+      test('Get FCM when permission denied', () async {
+        when(mockFirebaseMessaging.getNotificationSettings()).thenAnswer(
+          (_) async => KTestText.notificationSettings(
+            authorizationStatus: AuthorizationStatus.denied,
+          ),
+        );
+        expect(
+          await deviceRepository.getFcm(platformValue: PlatformEnum.android),
+          isA<Right<SomeFailure, String?>>().having(
+            (e) => e.value,
+            'value',
+            null,
+          ),
+        );
+      });
+      test('Get FCM when permission provisional', () async {
+        when(mockFirebaseMessaging.getNotificationSettings()).thenAnswer(
+          (_) async => KTestText.notificationSettings(
+            authorizationStatus: AuthorizationStatus.provisional,
+          ),
+        );
+        expect(
+          await deviceRepository.getFcm(platformValue: PlatformEnum.ios),
+          isA<Right<SomeFailure, String?>>().having(
+            (e) => e.value,
+            'value',
+            KTestText.fcmToken,
           ),
         );
       });
