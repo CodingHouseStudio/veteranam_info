@@ -448,6 +448,19 @@ abstract class KTestText {
     criticalAlert: AppleNotificationSetting.disabled,
     sound: AppleNotificationSetting.disabled,
   );
+  static const notificationSettingsnotDetermined = NotificationSettings(
+    alert: AppleNotificationSetting.disabled,
+    announcement: AppleNotificationSetting.disabled,
+    authorizationStatus: AuthorizationStatus.notDetermined,
+    badge: AppleNotificationSetting.disabled,
+    carPlay: AppleNotificationSetting.disabled,
+    lockScreen: AppleNotificationSetting.disabled,
+    notificationCenter: AppleNotificationSetting.disabled,
+    showPreviews: AppleShowPreviewSetting.never,
+    timeSensitive: AppleNotificationSetting.disabled,
+    criticalAlert: AppleNotificationSetting.disabled,
+    sound: AppleNotificationSetting.disabled,
+  );
   static final linkModel = LinkModel(
     id: id,
     userId: user.id,

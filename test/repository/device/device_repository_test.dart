@@ -32,6 +32,47 @@ void main() {
       'hardwareConcurrency': 1,
       'maxTouchPoints': 2,
     });
+    const fakeAndroidBuildVersion = <String, dynamic>{
+      'sdkInt': 16,
+      'baseOS': 'baseOS',
+      'previewSdkInt': 30,
+      'release': 'release',
+      'codename': 'codename',
+      'incremental': 'incremental',
+      'securityPatch': 'securityPatch',
+    };
+
+    const fakeSupportedAbis = <String>['arm64-v8a', 'x86', 'x86_64'];
+    const fakeSupported32BitAbis = <String?>['x86 (IA-32)', 'MMX'];
+    const fakeSupported64BitAbis = <String?>['x86-64', 'MMX', 'SSSE3'];
+    const fakeSystemFeatures = ['FEATURE_AUDIO_PRO', 'FEATURE_AUDIO_OUTPUT'];
+
+    final androidInfo = AndroidDeviceInfo.fromMap(
+      <String, dynamic>{
+        'id': KTestText.deviceId,
+        'host': 'host',
+        'tags': 'tags',
+        'type': 'type',
+        'model': 'model',
+        'board': 'board',
+        'brand': 'Google',
+        'device': 'device',
+        'product': 'product',
+        'display': 'display',
+        'hardware': 'hardware',
+        'isPhysicalDevice': true,
+        'bootloader': 'bootloader',
+        'fingerprint': 'fingerprint',
+        'manufacturer': 'manufacturer',
+        'supportedAbis': fakeSupportedAbis,
+        'systemFeatures': fakeSystemFeatures,
+        'version': fakeAndroidBuildVersion,
+        'supported64BitAbis': fakeSupported64BitAbis,
+        'supported32BitAbis': fakeSupported32BitAbis,
+        'serialNumber': 'SERIAL',
+        'isLowRamDevice': false,
+      },
+    );
     late IDeviceRepository deviceRepository;
     late FirebaseMessaging mockFirebaseMessaging;
     late DeviceInfoPlugin mockDeviceInfoPlugin;
@@ -46,11 +87,7 @@ void main() {
     });
     group('${KGroupText.successful} ', () {
       setUp(() {
-        when(
-          mockFirebaseMessaging.setAutoInitEnabled(true),
-        ).thenAnswer(
-          (_) async {},
-        );
+        PlatformEnum.value = PlatformEnum.unknown;
         when(
           mockFirebaseMessaging.requestPermission(),
         ).thenAnswer(
@@ -71,6 +108,11 @@ void main() {
         ).thenAnswer(
           (_) async => KTestText.fcmToken,
         );
+        when(
+          mockFirebaseMessaging.getNotificationSettings(),
+        ).thenAnswer(
+          (_) async => KTestText.notificationSettingsnotDetermined,
+        );
 
         when(
           mockBuildRepository.getBuildInfo(),
@@ -82,6 +124,11 @@ void main() {
           mockDeviceInfoPlugin.deviceInfo,
         ).thenAnswer(
           (_) async => webInfo,
+        );
+        when(
+          mockDeviceInfoPlugin.androidInfo,
+        ).thenAnswer(
+          (_) async => androidInfo,
         );
 
         deviceRepository = DeviceRepository(
@@ -100,6 +147,27 @@ void main() {
             KTestText.deviceInfoModel.copyWith(
               deviceId: webInfo.toString(),
               platform: PlatformEnum.unknown,
+              build: AppInfoRepository.defaultValue.buildNumber,
+            ),
+          ),
+        );
+      });
+
+      test('Get device Notification settings denied and isAndroid', () async {
+        PlatformEnum.value = PlatformEnum.android;
+        when(
+          mockFirebaseMessaging.getNotificationSettings(),
+        ).thenAnswer(
+          (_) async => KTestText.notificationSettingsDenied,
+        );
+        expect(
+          await deviceRepository.getDevice(),
+          isA<Right<SomeFailure, DeviceInfoModel?>>().having(
+            (e) => e.value,
+            'value',
+            KTestText.deviceInfoModel.copyWith(
+              deviceId: androidInfo.id,
+              platform: PlatformEnum.android,
               build: AppInfoRepository.defaultValue.buildNumber,
             ),
           ),
