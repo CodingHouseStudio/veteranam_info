@@ -16,9 +16,10 @@ class TextFieldDescriptionWidget extends StatelessWidget {
     this.errorMaxLines,
     this.maxLength,
     this.controller,
+    this.childWidget,
   });
   final String? labelText;
-  final Key widgetKey;
+  final Key? widgetKey;
   final void Function(String)? onChanged;
   final bool isDesk;
   final Widget? suffixIcon;
@@ -29,13 +30,16 @@ class TextFieldDescriptionWidget extends StatelessWidget {
   final int? errorMaxLines;
   final int? maxLength;
   final TextEditingController? controller;
+  final Widget? childWidget;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (isMessage ?? false)
+        if (childWidget != null)
+          childWidget!
+        else if (isMessage ?? false)
           MessageFieldWidget(
             key: widgetKey,
             controller: controller,
@@ -48,7 +52,7 @@ class TextFieldDescriptionWidget extends StatelessWidget {
           )
         else
           TextFieldWidget(
-            widgetKey: widgetKey,
+            widgetKey: widgetKey ?? ValueKey(labelText),
             controller: controller,
             labelText: labelText,
             onChanged: onChanged,

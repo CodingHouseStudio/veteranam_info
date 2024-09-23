@@ -219,6 +219,7 @@ abstract class KButtonStyles {
         vertical: KPadding.kPaddingSize8,
       ),
     ),
+    alignment: Alignment.center,
     backgroundColor: WidgetStatePropertyAll(AppColors.materialThemeSourceSeed),
     shape: WidgetStatePropertyAll(
       KWidgetTheme.outlineBorder,
