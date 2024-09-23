@@ -23,6 +23,55 @@ class DropListFieldWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return DropListFieldImplementationWidget(
+      labelText: labelText,
+      dropDownList: dropDownList,
+      isDesk: isDesk,
+      controller: controller,
+      errorText: errorText,
+      onChanged: onChanged,
+      showErrorText: showErrorText,
+      searchCallback: (entries, query) {
+        onChanged?.call(query);
+        final index = entries.indexWhere(
+          (entry) => entry.label.toLowerCase().contains(query.toLowerCase()),
+        );
+        return index == -1 ? null : index;
+      },
+    );
+  }
+}
+
+class DropListFieldImplementationWidget extends StatelessWidget {
+  const DropListFieldImplementationWidget({
+    required this.labelText,
+    required this.dropDownList,
+    required this.isDesk,
+    super.key,
+    this.onChanged,
+    this.showErrorText,
+    this.errorText,
+    this.controller,
+    this.focusNode,
+    this.elementList,
+    this.enabled,
+    this.searchCallback,
+  });
+
+  final void Function(String text)? onChanged;
+  final String labelText;
+  final List<String> dropDownList;
+  final bool isDesk;
+  final bool? showErrorText;
+  final String? errorText;
+  final TextEditingController? controller;
+  final FocusNode? focusNode;
+  final List<Widget>? elementList;
+  final bool? enabled;
+  final int? Function(List<DropdownMenuEntry<String>>, String)? searchCallback;
+
+  @override
+  Widget build(BuildContext context) {
     return DropdownMenu<String>(
       key: KWidgetkeys.widget.dropListField.widget,
       controller: controller,
@@ -31,13 +80,17 @@ class DropListFieldWidget extends StatelessWidget {
         key: KWidgetkeys.widget.dropListField.field,
       ),
       requestFocusOnTap: true,
-      trailingIcon: KIcon.trailing.copyWith(
-        key: KWidgetkeys.widget.dropListField.trailing,
+      searchCallback: searchCallback,
+      trailingIcon: _getElementWidget(
+        KIcon.trailing.copyWith(
+          key: KWidgetkeys.widget.dropListField.trailing,
+        ),
       ),
       selectedTrailingIcon: KIcon.close.copyWith(
         key: KWidgetkeys.widget.dropListField.closeIcon,
       ),
       onSelected: (value) => onChanged?.call(value ?? ''),
+      enabled: enabled ?? true,
       dropdownMenuEntries: List.generate(
         dropDownList.length,
         (int index) => DropdownMenuEntry<String>(
@@ -50,8 +103,19 @@ class DropListFieldWidget extends StatelessWidget {
       menuHeight: KMinMaxSize.maxHeight220,
       menuStyle: KWidgetTheme.dropTextMenuStyle,
       expandedInsets: EdgeInsets.zero,
-      inputDecorationTheme: KWidgetTheme.inputDecorationTheme,
+      inputDecorationTheme: KWidgetTheme.inputDecorationTheme.copyWith(
+        contentPadding: (isDesk
+            ? const EdgeInsets.symmetric(
+                horizontal: KPadding.kPaddingSize32,
+                vertical: KPadding.kPaddingSize20,
+              )
+            : const EdgeInsets.all(KPadding.kPaddingSize20)),
+        floatingLabelBehavior: (elementList?.isEmpty ?? true)
+            ? null
+            : FloatingLabelBehavior.always,
+      ),
       errorText: showErrorText ?? true ? errorText : null,
+      focusNode: focusNode,
     );
     // return Autocomplete<String>(
     //   key: KWidgetkeys.widget.dropListField.widget,
@@ -131,4 +195,26 @@ class DropListFieldWidget extends StatelessWidget {
     //   },
     // );
   }
+
+  Widget _getElementWidget(Icon icon) =>
+      elementList != null && elementList!.isNotEmpty
+          ? Row(
+              children: [
+                const Spacer(),
+                Expanded(
+                  flex: 4,
+                  child: ScrollConfiguration(
+                    behavior: CustomScrollBehavior(),
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: elementList!,
+                      ),
+                    ),
+                  ),
+                ),
+                icon,
+              ],
+            )
+          : icon;
 }

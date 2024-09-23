@@ -38,6 +38,8 @@ Future<void> discountsAddUncorectHelper({
 
   await discountsAddMainHelper(tester: tester, hasField: false);
 
+  await discountsAddDetailHelper(tester: tester, useDiscountsHelper: true);
+
   await discountsAddDetailEnterHelper(
     tester: tester,
     titleText: KTestText.fieldEmpty,
