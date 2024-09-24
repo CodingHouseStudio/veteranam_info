@@ -16,31 +16,46 @@ Future<void> profileInitialHelper(
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.profile.subtitle),
+        find.byKey(KWidgetkeys.screen.profile.photo),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.profile.profileCard),
-        findsWidgets,
-      );
-
-      expect(
-        find.byKey(KWidgetkeys.screen.profile.boxSaves),
+        find.byKey(KWidgetkeys.screen.profile.nameField),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.profile.boxStory),
+        find.byKey(KWidgetkeys.screen.profile.emailFied),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.profile.boxFeedback),
+        find.byKey(KWidgetkeys.screen.profile.lastNameField),
         findsOneWidget,
       );
 
-      await profileCardHelper(tester);
+      expect(
+        find.byKey(KWidgetkeys.screen.profile.nickNameField),
+        findsOneWidget,
+      );
+
+      expect(
+        find.byKey(KWidgetkeys.screen.profile.saveButton),
+        findsOneWidget,
+      );
+
+      expect(
+        find.byKey(KWidgetkeys.screen.profile.deleteButton),
+        findsOneWidget,
+      );
+
+      expect(
+        find.byKey(KWidgetkeys.screen.profile.logOutButton),
+        findsOneWidget,
+      );
+
+      //await profileCardHelper(tester);
     },
   );
 }

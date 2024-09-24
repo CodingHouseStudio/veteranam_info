@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mockito/mockito.dart';
@@ -24,8 +25,26 @@ void main() {
         (realInvocation) => KTestText.userWithoutPhoto,
       );
       when(mockAuthenticationRepository.currentUserSetting).thenAnswer(
-        (realInvocation) => UserSetting.empty,
+        (realInvocation) => KTestText.userSettingModel,
       );
+      when(
+        mockAuthenticationRepository.updateUserSetting(
+          userSetting: KTestText.userSettingModel,
+        ),
+      ).thenAnswer(
+        (realInvocation) async => const Right(true),
+      );
+
+      when(
+        mockAuthenticationRepository.updateUserData(
+          user: KTestText.profileUser,
+          image: KTestText.imageModels,
+          nickname: KTestText.nicknameCorrect,
+        ),
+      ).thenAnswer(
+        (realInvocation) async => const Right(true),
+      );
+
       when(mockAuthenticationRepository.isAnonymouslyOrEmty()).thenAnswer(
         (realInvocation) => false,
       );
@@ -127,20 +146,35 @@ void main() {
         );
       });
 
-      group('${KGroupText.goTo} ', () {
-        testWidgets('Profile Navigation', (tester) async {
-          await profilePumpAppHelper(
-            tester: tester,
-            mockGoRouter: mockGoRouter,
-            mockAuthenticationRepository: mockAuthenticationRepository,
-          );
+      testWidgets('Send profile data', (tester) async {
+        await profilePumpAppHelper(
+          tester: tester,
+          //mockGoRouter: mockGoRouter,
+          mockAuthenticationRepository: mockAuthenticationRepository,
+        );
 
-          await profileNavigationHelper(
-            tester: tester,
-            mockGoRouter: mockGoRouter,
-          );
-        });
+        await profileformsHelper(
+          tester: tester,
+          name: KTestText.nameCorrect,
+          surname: KTestText.surnameCorrect,
+          nickname: KTestText.nicknameCorrect,
+        );
       });
+
+      // group('${KGroupText.goTo} ', () {
+      //   testWidgets('Profile Navigation', (tester) async {
+      //     await profilePumpAppHelper(
+      //       tester: tester,
+      //       mockGoRouter: mockGoRouter,
+      //       mockAuthenticationRepository: mockAuthenticationRepository,
+      //     );
+
+      //     await profileNavigationHelper(
+      //       tester: tester,
+      //       mockGoRouter: mockGoRouter,
+      //     );
+      //   });
+      // });
     });
   });
 }

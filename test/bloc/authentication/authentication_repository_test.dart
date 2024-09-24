@@ -89,6 +89,17 @@ void main() {
         ).thenAnswer(
           (_) async => const Right(true),
         );
+        // when(mockAppAuthenticationRepository.currentUserSetting).thenAnswer(
+        //   (_) => KTestText.userSettingModel,
+        // );
+        when(
+          mockAppAuthenticationRepository.updateUserData(
+            user: KTestText.profileUser,
+            image: KTestText.imageModels,
+          ),
+        ).thenAnswer(
+          (_) async => const Right(true),
+        );
 
         authenticationRepository =
             AuthenticationRepository(mockAppAuthenticationRepository);
@@ -177,6 +188,35 @@ void main() {
           true,
         );
       });
+      test('Update data', () async {
+        when(mockAppAuthenticationRepository.currentUserSetting).thenAnswer(
+          (_) => KTestText.userSettingModel,
+        );
+        if (KTestText.imageModels != null) {
+          expect(
+            await authenticationRepository.updateUserData(
+              user: KTestText.profileUser,
+              image: KTestText.imageModels,
+              nickname: KTestText.nicknameCorrect,
+            ),
+            isA<Right<SomeFailure, bool>>()
+                .having((e) => e.value, 'value', isTrue),
+          );
+        }
+      });
+      test('Update user settings', () async {
+        when(mockAppAuthenticationRepository.currentUserSetting).thenAnswer(
+          (_) => KTestText.userSettingModel,
+        );
+
+        expect(
+          await authenticationRepository.updateUserSetting(
+            userSetting: KTestText.userSetting,
+          ),
+          isA<Right<SomeFailure, bool>>()
+              .having((e) => e.value, 'value', isTrue),
+        );
+      });
     });
     group('${KGroupText.failure} ', () {
       setUp(() {
@@ -228,6 +268,17 @@ void main() {
         );
         when(
           mockAppAuthenticationRepository.deleteUser(),
+        ).thenAnswer(
+          (_) async => Left(SomeFailure.serverError(error: null)),
+        );
+        when(mockAppAuthenticationRepository.currentUserSetting).thenAnswer(
+          (_) => KTestText.userSettingModel,
+        );
+        when(
+          mockAppAuthenticationRepository.updateUserData(
+            user: KTestText.profileUser,
+            image: KTestText.imageModels,
+          ),
         ).thenAnswer(
           (_) async => Left(SomeFailure.serverError(error: null)),
         );
@@ -318,6 +369,17 @@ void main() {
           //   'value',
           //   SomeFailure.serverError(error: null),
           // ),
+        );
+      });
+      test('Update data (Right(false))', () async {
+        expect(
+          await authenticationRepository.updateUserData(
+            user: KTestText.profileUser,
+            image: KTestText.imageModels,
+            nickname: KTestText.nicknameCorrect,
+          ),
+          isA<Right<SomeFailure, bool>>()
+              .having((e) => e.value, 'value', isFalse),
         );
       });
     });

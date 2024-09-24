@@ -25,11 +25,16 @@ class AuthenticationRepository {
       onListen: _onUserStreamListen,
       onCancel: _onUserStreamCancel,
     );
+    _userController = StreamController<User>.broadcast(
+      onListen: _onUserStreamListen,
+      onCancel: _onUserStreamCancel,
+    );
   }
 
   final IAppAuthenticationRepository iAppAuthenticationRepository;
   late StreamController<AuthenticationStatus> _authenticationStatuscontroller;
   late StreamController<UserSetting> _userSettingController;
+  late StreamController<User> _userController;
   StreamSubscription<User>? _statusUserSubscription;
   StreamSubscription<User>? _userSubscription;
   StreamSubscription<UserSetting>? _userSettingSubscription;
@@ -38,6 +43,9 @@ class AuthenticationRepository {
     _userSubscription ??=
         iAppAuthenticationRepository.user.listen((currentUser) {
       if (currentUser.isNotEmpty) {
+        _userController.add(
+          currentUser,
+        );
         if (currentUserSetting.id != currentUser.id &&
             _userSettingSubscription != null) {
           _userSettingSubscription?.cancel();
@@ -84,6 +92,7 @@ class AuthenticationRepository {
   Stream<AuthenticationStatus> get status =>
       _authenticationStatuscontroller.stream;
   Stream<UserSetting> get userSetting => _userSettingController.stream;
+  Stream<User> get user => _userController.stream;
 
   // /// Stream of [User] which will emit the current user when
   // /// the authentication state changes.
@@ -272,15 +281,66 @@ class AuthenticationRepository {
   }) async {
     final result =
         await iAppAuthenticationRepository.updateUserSetting(userSetting);
-    // result.fold(
-    //   (failure) {
-    //     debugPrint('Sending error: $failure');
-    //   },
-    //   (success) {
-    //     debugPrint('Sending succeses $userSetting');
-    //   },
-    // );
+    result.fold(
+      (failure) {
+        // debugPrint('Sending error: $failure');
+      },
+      (success) {
+        _userSettingController.add(userSetting);
+        // debugPrint('Sending succeses $userSetting');
+      },
+    );
     return result;
+  }
+
+  Future<Either<SomeFailure, bool>> updateUserData({
+    required User user,
+    required ImageModel? image,
+    required String? nickname,
+  }) async {
+    SomeFailure? failure;
+    bool? right;
+
+    if (image != null || user.name != currentUser.name) {
+      final result = await iAppAuthenticationRepository.updateUserData(
+        user: user,
+        image: image,
+      );
+
+      result.fold(
+        (failure) {
+          failure = failure;
+          // debugPrint('Sending error: $failure');
+        },
+        (success) {
+          _userController.add(user);
+          right = true;
+          // debugPrint('Sending succeses $userSetting');
+        },
+      );
+    }
+    if (nickname != currentUserSetting.nickname) {
+      final result = await updateUserSetting(
+        userSetting: currentUserSetting.copyWith(nickname: nickname),
+      );
+
+      result.fold(
+        (failure) {
+          failure = failure;
+          // debugPrint('Sending error: $failure');
+        },
+        (success) {
+          right = true;
+          // debugPrint('Sending succeses $userSetting');
+        },
+      );
+    }
+
+    if (failure != null) {
+      return Left(failure);
+    } else {
+      return Right(right ?? false);
+    }
   }
 
   bool isAnonymously() => iAppAuthenticationRepository.isAnonymously();

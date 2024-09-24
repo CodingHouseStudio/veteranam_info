@@ -289,18 +289,29 @@ class ShortTitleIconWidget extends StatelessWidget {
     required this.titleKey,
     required this.isDesk,
     this.iconCrossAxisAlignment = CrossAxisAlignment.end,
+    this.firstIcon = false,
+    this.icon,
     super.key,
   });
   final String title;
   final Key titleKey;
   final bool isDesk;
   final CrossAxisAlignment iconCrossAxisAlignment;
+  final Icon? icon;
+  final bool firstIcon;
 
   @override
   Widget build(BuildContext context) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        if (firstIcon) ...[
+          iconWidget,
+          if (isDesk)
+            KSizedBox.kWidthSizedBox32
+          else
+            KSizedBox.kWidthSizedBox16,
+        ],
         Text(
           title,
           key: titleKey,
@@ -309,11 +320,13 @@ class ShortTitleIconWidget extends StatelessWidget {
               : AppTextStyle.materialThemeDisplaySmall,
         ),
         if (isDesk) KSizedBox.kWidthSizedBox32 else KSizedBox.kWidthSizedBox24,
-        IconWidget(
-          icon: KIcon.arrowDownLeft,
-          padding: isDesk ? KPadding.kPaddingSize20 : KPadding.kPaddingSize8,
-        ),
+        if (!firstIcon) iconWidget,
       ],
     );
   }
+
+  Widget get iconWidget => IconWidget(
+        icon: icon ?? KIcon.arrowDownLeft,
+        padding: isDesk ? KPadding.kPaddingSize20 : KPadding.kPaddingSize8,
+      );
 }

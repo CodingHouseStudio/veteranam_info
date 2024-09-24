@@ -428,3 +428,41 @@ extension StoryExtensions on StoryModel {
 //     }
 //   }
 // }
+
+extension DoubleExtensions on double {
+  EdgeInsetsGeometry screenPadding({
+    required double precent,
+    double? verticalPadding,
+  }) {
+    const threshold = KPlatformConstants.maxWidthThresholdTablet;
+    final horizontalPadding = this <= threshold
+        ? this * precent
+        : threshold * precent + ((this - threshold) / 2);
+
+    return EdgeInsets.symmetric(
+      horizontal: horizontalPadding,
+      vertical: verticalPadding ?? 0,
+    );
+  }
+}
+
+extension UserExtensions on User? {
+  String? get firstName => this?.name?.split(' ').first;
+
+  String? get lastName => this?.name?.split(' ').last;
+}
+
+extension ProfileEnumExtensions on ProfileEnum {
+  String loadingMessage(BuildContext context) {
+    if (this == ProfileEnum.success) {
+      return context.l10n.dataIsUpdatedSuccess;
+    }
+    if (this == ProfileEnum.sendInProgress) {
+      return context.l10n.dataSendInProgress;
+    }
+    if (this == ProfileEnum.succesesUnmodified) {
+      return context.l10n.dataUnmodified;
+    }
+    return '';
+  }
+}

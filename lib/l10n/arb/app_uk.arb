@@ -1174,5 +1174,30 @@
   "@asBusiness": {
     "examples": "Текст для кнопки входу для бізнесу на сторінці UserRole",
     "description": "Кнопка для входу бізнесу на сторінці UserRole"
+  },
+  "myProfileTitle": "Мій профіль",
+  "@myProfileTitle": {
+    "examples": "Заголовок на сторінці Profile."
+  },
+  "saveChangesProfile": "Зберегти зміни",
+  "@saveChangesProfile": {
+    "examples": "Текст для кнопки, яка знаходиться на сторінці Profile.",
+    "description": "Кнопка використовується для збереження змін користувача"
+  },
+  "dataEditing": "Редагування даних",
+  "@dataEditing": {
+    "examples": "Заголовок на на Profile Card."
+  },
+  "dataIsUpdatedSuccess": "Ваші дані успішно змінено!",
+  "@dataIsUpdatedSuccess": {
+    "examples": "Повідомлення після успішної зміни даних користувачем."
+  },
+  "dataSendInProgress": "Зміни зберігаються, будь ласка, зачекайте...",
+  "@dataSendInProgress": {
+    "examples": "Повідомлення під час збереження змін."
+  },
+  "dataUnmodified": "Зміни не збережено, бо дані не відрізняються.",
+  "@dataUnmodified": {
+    "examples": "Повідомлення, коли дані не були змінені."
   }
 }

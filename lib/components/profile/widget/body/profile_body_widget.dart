@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:veteranam/components/components.dart';
 import 'package:veteranam/shared/shared.dart';
 
 class ProfileBodyWidget extends StatelessWidget {
@@ -8,120 +8,167 @@ class ProfileBodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScaffoldWidget(
-      mainChildWidgetsFunction: ({required isDesk, required isTablet}) => [
-        KSizedBox.kHeightSizedBox30,
-        TitleWidget(
-          title: context.l10n.myProfile,
-          titleKey: KWidgetkeys.screen.profile.title,
-          subtitle: context.l10n.profileDetails,
-          subtitleKey: KWidgetkeys.screen.profile.subtitle,
-          isDesk: isDesk,
-        ),
-        if (isDesk)
-          KSizedBox.kHeightSizedBox56
-        else
-          KSizedBox.kHeightSizedBox24,
-        if (isDesk)
-          ..._buildDesktopLayout(context, isDesk)
-        else
-          ..._buildMobileLayout(context, isDesk),
-      ],
-    );
-  }
-
-  List<Widget> _buildDesktopLayout(BuildContext context, bool isDesk) {
-    return [
-      Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            flex: 2,
-            child: ProfileCardWidget(
-              key: KWidgetkeys.screen.profile.profileCard,
-              isDesk: isDesk,
-            ),
+    return BlocBuilder<ProfileBloc, ProfileState>(
+      buildWhen: (previous, current) => previous.formState != current.formState,
+      builder: (context, state) {
+        return ScaffoldWidget(
+          mainDeskPadding: ({required maxWidth}) => maxWidth.screenPadding(
+            precent: KDimensions.paddingMultiply02,
+            verticalPadding: KPadding.kPaddingSize48,
           ),
-          KSizedBox.kWidthSizedBox80,
-          Expanded(
-            child: IntrinsicHeight(
-              child: Column(
-                children: _buildBoxWidgets(context, isDesk),
-              ),
-            ),
-          ),
-        ],
-      ),
-      KSizedBox.kHeightSizedBox56,
-    ];
-  }
-
-  List<Widget> _buildMobileLayout(BuildContext context, bool isDesk) {
-    return [
-      ..._buildBoxWidgets(context, isDesk),
-      ProfileCardWidget(
-        key: KWidgetkeys.screen.profile.profileCard,
-        isDesk: isDesk,
-      ),
-      KSizedBox.kHeightSizedBox24,
-    ];
-  }
-
-  List<Widget> _buildBoxWidgets(BuildContext context, bool isDesk) {
-    // if (isDesk) {
-    return [
-      Padding(
-        padding: isDesk
-            ? const EdgeInsets.all(KPadding.kPaddingSize8)
-            : EdgeInsets.zero,
-        child: Column(
-          children: [
-            BoxWidget(
-              key: KWidgetkeys.screen.profile.boxSaves,
-              text: context.l10n.saved,
-              isDesk: isDesk,
-              onTap: () => context.goNamed(
-                KRoute.profileSaves.name,
-              ),
-            ),
-            KSizedBox.kHeightSizedBox30,
-            BoxWidget(
-              key: KWidgetkeys.screen.profile.boxStory,
-              text: context.l10n.myStory,
-              isDesk: isDesk,
-              textIconPaddingWidget: KSizedBox.kHeightSizedBox56,
-              onTap: () => context.goNamed(KRoute.profileMyStory.name),
-            ),
-            KSizedBox.kHeightSizedBox30,
-            BoxWidget(
-              key: KWidgetkeys.screen.profile.boxFeedback,
-              text: context.l10n.myFeedback,
-              isDesk: isDesk,
-              textIconPaddingWidget: KSizedBox.kHeightSizedBox56,
-              onTap: null,
+          titleChildWidgetsFunction: ({required isDesk}) => [
+            Padding(
+              padding: isDesk
+                  ? const EdgeInsets.only(
+                      top: KPadding.kPaddingSize40,
+                    )
+                  : const EdgeInsets.only(
+                      top: KPadding.kPaddingSize24,
+                    ),
+              child: isDesk
+                  ? ShortTitleIconWidget(
+                      title: context.l10n.myProfileTitle,
+                      titleKey: KWidgetkeys.screen.profile.title,
+                      isDesk: true,
+                      icon: KIcon.arrowDownRight,
+                    )
+                  : ShortTitleIconWidget(
+                      title: context.l10n.myProfileTitle,
+                      titleKey: KWidgetkeys.screen.profile.title,
+                      isDesk: false,
+                      icon: KIcon.arrowDownRight,
+                      firstIcon: true,
+                    ),
             ),
           ],
-        ),
-      ),
-    ];
-    // } else {
-    //   return [
-    //     BoxWidget(
-    //       text: context.l10n.saved,
-    //       isDesk: isDesk,
-    //       onTap: () => context.goNamed(
-    //         KRoute.profileSaves.name,
-    //       ),
-    //     ),
-    //     KSizedBox.kHeightSizedBox30,
-    //     BoxWidget(
-    //       text: context.l10n.myStory,
-    //       isDesk: isDesk,
-    //       textIconPaddingWidget: KSizedBox.kHeightSizedBox56,
-    //       onTap: () => context.goNamed(KRoute.profileMyStory.name),
-    //     ),
-    //     KSizedBox.kHeightSizedBox30,
-    //   ];
-    // }
+          mainChildWidgetsFunction: ({required isDesk, required isTablet}) => [
+            Padding(
+              padding: isDesk
+                  ? const EdgeInsets.symmetric(
+                      horizontal: KPadding.kPaddingSize60,
+                      vertical: KPadding.kPaddingSize48,
+                    )
+                  : const EdgeInsets.symmetric(
+                      vertical: KPadding.kPaddingSize72,
+                    ),
+              child: Column(
+                children: [
+                  Container(
+                    decoration: KWidgetTheme.boxDecorationHome,
+                    padding: const EdgeInsets.all(KPadding.kPaddingSize16),
+                    child: ProfileFormWidget(
+                      isDesk: isDesk,
+                      photoURL:
+                          context.read<AuthenticationBloc>().state.user?.photo,
+                      initialName: context
+                          .read<AuthenticationBloc>()
+                          .state
+                          .user
+                          ?.firstName,
+                      initialEmail:
+                          context.read<AuthenticationBloc>().state.user?.email,
+                      initialSurname: context
+                          .read<AuthenticationBloc>()
+                          .state
+                          .user
+                          ?.lastName,
+                      initialNickname: context
+                          .read<AuthenticationBloc>()
+                          .state
+                          .userSetting
+                          .nickname,
+                    ),
+                  ),
+                  if (isDesk)
+                    KSizedBox.kHeightSizedBox32
+                  else
+                    KSizedBox.kHeightSizedBox48,
+                  if (isDesk)
+                    Row(
+                      children: [
+                        Expanded(
+                          child: ButtonAdditionalWidget(
+                            key: KWidgetkeys.screen.profile.logOutButton,
+                            text: context.l10n.logOut,
+                            picture: KIcon.logOut,
+                            onPressed: () =>
+                                context.dialog.showLogoutConfirmationDialog(
+                              isDesk: true,
+                            ),
+                            isDesk: isDesk,
+                            expanded: true,
+                          ),
+                        ),
+                        KSizedBox.kWidthSizedBox40,
+                        Expanded(
+                          child: TextButton(
+                            key: KWidgetkeys.screen.profile.deleteButton,
+                            style: KButtonStyles.borderSecondaryButtonStyle,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                vertical: KPadding.kPaddingSize12,
+                              ),
+                              child: Text(
+                                context.l10n.deleteAccount,
+                                style: AppTextStyle.materialThemeTitleMedium,
+                              ),
+                            ),
+                            onPressed: () =>
+                                context.dialog.showDeleteConfirmationDialog(
+                              isDesk: isDesk,
+                            ),
+                            //isDesk: true,
+                          ),
+                        ),
+                      ],
+                    )
+                  else ...[
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        ButtonAdditionalWidget(
+                          key: KWidgetkeys.screen.profile.logOutButton,
+                          text: context.l10n.logOut,
+                          picture: KIcon.logOut,
+                          onPressed: () =>
+                              context.dialog.showLogoutConfirmationDialog(
+                            isDesk: true,
+                          ),
+                          isDesk: isDesk,
+                          expanded: true,
+                          mobPadding: const EdgeInsets.symmetric(
+                            vertical: KPadding.kPaddingSize16,
+                          ),
+                          iconPadding: KPadding.kPaddingSize16,
+                        ),
+                        KSizedBox.kHeightSizedBox16,
+                        TextButton(
+                          key: KWidgetkeys.screen.profile.deleteButton,
+                          style: KButtonStyles.borderSecondaryButtonStyle,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                              vertical: KPadding.kPaddingSize16,
+                            ),
+                            child: Text(
+                              context.l10n.deleteAccount,
+                              style: AppTextStyle.materialThemeTitleMedium,
+                            ),
+                          ),
+                          onPressed: () =>
+                              context.dialog.showDeleteConfirmationDialog(
+                            isDesk: isDesk,
+                          ),
+                          //isDesk: true,
+                        ),
+                      ],
+                    ),
+                  ],
+                ],
+              ),
+            ),
+          ],
+        );
+      },
+    );
   }
 }

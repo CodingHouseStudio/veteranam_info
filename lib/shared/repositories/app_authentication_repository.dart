@@ -32,6 +32,7 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   final CacheClient _cache;
   final FirestoreService _firestoreService = GetIt.I.get<FirestoreService>();
   final IDeviceRepository _deviceRepository = GetIt.I.get<IDeviceRepository>();
+  final StorageService _storageService = GetIt.I.get<StorageService>();
 
   /// Whether or not the current environment is web
   /// Should only be overridden for testing purposes. Otherwise,
@@ -450,6 +451,43 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
         return updateUserSetting(userSetting);
       },
     );
+  }
+
+  @override
+  Future<Either<SomeFailure, bool>> updateUserData({
+    required User user,
+    required ImageModel? image,
+  }) async {
+    try {
+      await _firebaseAuth.currentUser?.updateDisplayName(user.name);
+
+      if (image != null) {
+        final userPhoto = await _updatePhoto(image: image, userId: user.id);
+        await _firebaseAuth.currentUser?.updatePhotoURL(userPhoto);
+      }
+
+      return const Right(true);
+    } on firebase_auth.FirebaseAuthException catch (e, stack) {
+      // debugPrint('Firebase Auth Error: ${e.message}');
+      return Left(SomeFailure.serverError(error: e, stack: stack));
+    } catch (e, stack) {
+      // debugPrint('General Auth Error: $e');
+      return Left(SomeFailure.serverError(error: e, stack: stack));
+    } finally {
+      _updateAuthStatusBasedOnCache();
+    }
+  }
+
+  Future<String?> _updatePhoto({
+    required ImageModel image,
+    required String userId,
+  }) async {
+    final downloadURL = await _storageService.saveImage(
+      imageModel: image,
+      id: userId,
+      collecltionName: FirebaseCollectionName.user,
+    );
+    return downloadURL;
   }
 }
 

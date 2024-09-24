@@ -42,4 +42,9 @@ abstract class IAppAuthenticationRepository {
   );
 
   Future<Either<SomeFailure, bool>> createFcmUserSetting();
+
+  Future<Either<SomeFailure, bool>> updateUserData({
+    required User user,
+    required ImageModel? image,
+  });
 }

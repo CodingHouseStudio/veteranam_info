@@ -1815,6 +1815,47 @@ class MockIAppAuthenticationRepository extends _i1.Mock
           ),
         )),
       ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
+
+  @override
+  _i8.Future<_i2.Either<_i3.SomeFailure, bool>> updateUserData({
+    required _i3.User? user,
+    required _i3.ImageModel? image,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateUserData,
+          [],
+          {
+            #user: user,
+            #image: image,
+          },
+        ),
+        returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
+            _FakeEither_0<_i3.SomeFailure, bool>(
+          this,
+          Invocation.method(
+            #updateUserData,
+            [],
+            {
+              #user: user,
+              #image: image,
+            },
+          ),
+        )),
+        returnValueForMissingStub:
+            _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
+                _FakeEither_0<_i3.SomeFailure, bool>(
+          this,
+          Invocation.method(
+            #updateUserData,
+            [],
+            {
+              #user: user,
+              #image: image,
+            },
+          ),
+        )),
+      ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
 }
 
 /// A class which mocks [AppAuthenticationRepository].
@@ -2247,6 +2288,47 @@ class MockAppAuthenticationRepository extends _i1.Mock
           ),
         )),
       ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
+
+  @override
+  _i8.Future<_i2.Either<_i3.SomeFailure, bool>> updateUserData({
+    required _i3.User? user,
+    required _i3.ImageModel? image,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateUserData,
+          [],
+          {
+            #user: user,
+            #image: image,
+          },
+        ),
+        returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
+            _FakeEither_0<_i3.SomeFailure, bool>(
+          this,
+          Invocation.method(
+            #updateUserData,
+            [],
+            {
+              #user: user,
+              #image: image,
+            },
+          ),
+        )),
+        returnValueForMissingStub:
+            _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
+                _FakeEither_0<_i3.SomeFailure, bool>(
+          this,
+          Invocation.method(
+            #updateUserData,
+            [],
+            {
+              #user: user,
+              #image: image,
+            },
+          ),
+        )),
+      ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
 }
 
 /// A class which mocks [AuthenticationRepository].
@@ -2281,6 +2363,13 @@ class MockAuthenticationRepository extends _i1.Mock
         returnValue: _i8.Stream<_i3.UserSetting>.empty(),
         returnValueForMissingStub: _i8.Stream<_i3.UserSetting>.empty(),
       ) as _i8.Stream<_i3.UserSetting>);
+
+  @override
+  _i8.Stream<_i3.User> get user => (super.noSuchMethod(
+        Invocation.getter(#user),
+        returnValue: _i8.Stream<_i3.User>.empty(),
+        returnValueForMissingStub: _i8.Stream<_i3.User>.empty(),
+      ) as _i8.Stream<_i3.User>);
 
   @override
   _i3.User get currentUser => (super.noSuchMethod(
@@ -2549,6 +2638,51 @@ class MockAuthenticationRepository extends _i1.Mock
             #updateUserSetting,
             [],
             {#userSetting: userSetting},
+          ),
+        )),
+      ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
+
+  @override
+  _i8.Future<_i2.Either<_i3.SomeFailure, bool>> updateUserData({
+    required _i3.User? user,
+    required _i3.ImageModel? image,
+    required String? nickname,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateUserData,
+          [],
+          {
+            #user: user,
+            #image: image,
+            #nickname: nickname,
+          },
+        ),
+        returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
+            _FakeEither_0<_i3.SomeFailure, bool>(
+          this,
+          Invocation.method(
+            #updateUserData,
+            [],
+            {
+              #user: user,
+              #image: image,
+              #nickname: nickname,
+            },
+          ),
+        )),
+        returnValueForMissingStub:
+            _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
+                _FakeEither_0<_i3.SomeFailure, bool>(
+          this,
+          Invocation.method(
+            #updateUserData,
+            [],
+            {
+              #user: user,
+              #image: image,
+              #nickname: nickname,
+            },
           ),
         )),
       ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);

@@ -69,8 +69,14 @@ abstract class KGroupText {
 abstract class KTestText {
   static const filter = 'filter_test';
   static const key = 'key_test';
+  static const nickname = 'nickname';
 
   static const usernameCorrect = 'test_username';
+  static const nameCorrect = 'testName';
+  static const nameIncorrect = 'testName**';
+  static const surnameCorrect = 'testSurname';
+  static const nicknameCorrect = 'testNickname';
+  static const nicknameIncorrect = 'test@Nickname!';
   static const passwordCorrect = 'test_Password1';
   static const passwordWrong = 'test_Password1_wrong';
   static const usernameEmpty = '';
@@ -140,6 +146,22 @@ abstract class KTestText {
     photo: image,
   );
 
+  static const profileUser = User(
+    id: '1',
+    email: userEmail,
+    name: '$nameCorrect $surnameCorrect',
+    phoneNumber: 'test_phone_number',
+    photo: image,
+  );
+
+  static const profileIncorrectUser = User(
+    id: '1',
+    email: userEmail,
+    name: '$nameIncorrect $surnameCorrect',
+    phoneNumber: 'test_phone_number',
+    photo: image,
+  );
+
   static const image = 'test';
 
   static const userWithoutPhoto = User(
@@ -164,6 +186,7 @@ abstract class KTestText {
     locale: Language.english,
     roleIsConfirmed: true,
     devicesInfo: [deviceInfoModel],
+    nickname: nicknameCorrect,
   );
   static final deviceInfoModel = DeviceInfoModel(
     deviceId: deviceId,

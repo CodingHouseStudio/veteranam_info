@@ -18,11 +18,11 @@ class AuthenticationStatusChanged extends AuthenticationEvent {
   List<Object> get props => [status];
 }
 
-// final class _AppUserChanged extends AuthenticationEvent {
-//   const _AppUserChanged(this.user);
+final class _AppUserChanged extends AuthenticationEvent {
+  const _AppUserChanged(this.user);
 
-//   final User user;
-// }
+  final User user;
+}
 
 class AuthenticationLogoutRequested extends AuthenticationEvent {}
 

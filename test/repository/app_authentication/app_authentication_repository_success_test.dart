@@ -30,6 +30,7 @@ void main() {
     late GoogleSignInAccount mockGoogleSignInAccount;
     late FacebookAuth mockFacebookAuth;
     late firebase_auth.FacebookAuthProvider mockFacebookAuthProvider;
+    late MockStorageService mockStorageService;
     setUp(() {
       mockSecureStorageRepository = MockIStorage();
       mockFirebaseAuth = MockFirebaseAuth();
@@ -43,6 +44,7 @@ void main() {
       mockDeviceRepository = MockIDeviceRepository();
       mockFacebookAuth = MockFacebookAuth();
       mockFacebookAuthProvider = MockFacebookAuthProvider();
+      mockStorageService = MockStorageService();
 
       when(mockUserCredential.credential).thenAnswer(
         (_) => KTestText.authCredential,
@@ -207,11 +209,27 @@ void main() {
       ).thenAnswer(
         (_) async {},
       );
+      when(
+        mockFirebaseAuth.currentUser?.updateDisplayName(
+          KTestText.profileUser.name,
+        ),
+      ).thenAnswer(
+        (_) async {},
+      );
+
+      when(
+        mockUser.updatePhotoURL(KTestText.downloadURL),
+      ).thenAnswer(
+        (_) async {},
+      );
 
       if (GetIt.I.isRegistered<FirestoreService>()) {
         GetIt.I.unregister<FirestoreService>();
       }
       GetIt.I.registerSingleton(mockFirestoreService);
+      //GetIt.I.registerSingleton(mockStorageService);
+      GetIt.I.registerSingleton<StorageService>(mockStorageService);
+
       if (GetIt.I.isRegistered<IDeviceRepository>()) {
         GetIt.I.unregister<IDeviceRepository>();
       }
@@ -401,5 +419,35 @@ void main() {
         isA<Right<SomeFailure, bool>>().having((e) => e.value, 'value', isTrue),
       );
     });
+
+    // test('update', () async {
+    //   final result = await appAuthenticationRepository.updateUserData(
+    //     user: KTestText.profileUser,
+    //     image: KTestText.imageModel,
+    //   );
+
+    //   // Перевірка результату
+    //   expect(
+    //     result,
+    //     isA<Right<SomeFailure, bool>>().having((e) => e.value, 'value', isTrue),
+    //   );
+
+    //   // Перевірка, що методи були викликані з правильними аргументами
+    //   verify(
+    //     mockUser.updateDisplayName(KTestText.profileUser.name),
+    //   ).called(1);
+
+    //   verify(
+    //     mockStorageService.saveImage(
+    //       imageModel: KTestText.imageModel,
+    //       id: KTestText.profileUser.id,
+    //       collecltionName: FirebaseCollectionName.user,
+    //     ),
+    //   ).called(1);
+
+    //   verify(
+    //     mockUser.updatePhotoURL(KTestText.downloadURL),
+    //   ).called(1);
+    // });
   });
 }

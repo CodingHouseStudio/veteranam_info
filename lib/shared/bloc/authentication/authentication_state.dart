@@ -47,5 +47,5 @@ class AuthenticationState extends Equatable {
   final User? user;
 
   @override
-  List<Object> get props => [status, userSetting];
+  List<Object> get props => [status, userSetting, user ?? User.empty];
 }

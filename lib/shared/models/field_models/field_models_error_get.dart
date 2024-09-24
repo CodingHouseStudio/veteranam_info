@@ -49,6 +49,8 @@ extension NameFieldModelValidationErrorEmpl on NameFieldModelValidationError? {
     switch (this) {
       case NameFieldModelValidationError.empty:
         return context.l10n.fieldCannotBeEmpty;
+      case NameFieldModelValidationError.wrong:
+        return '${context.l10n.name} ${context.l10n.isWrong}';
       case null:
         return null;
     }
@@ -98,6 +100,32 @@ extension ReportFieldModelValidationErrorEmpl
       case ReportFieldModelValidationError.invalidLength:
         return '${context.l10n.message} ${context.l10n.tooshort}.'
             ' ${context.l10n.contain15Charcters}';
+      case null:
+        return null;
+    }
+  }
+}
+
+extension SurnameFieldModelValidationErrorEmpl
+    on SurnameFieldModelValidationError? {
+  String? value(BuildContext context) {
+    switch (this) {
+      case SurnameFieldModelValidationError.empty:
+        return context.l10n.fieldCannotBeEmpty;
+      case SurnameFieldModelValidationError.wrong:
+        return '${context.l10n.lastName} ${context.l10n.isWrong}';
+      case null:
+        return null;
+    }
+  }
+}
+
+extension NicknameFieldModelValidationErrorEmpl
+    on NicknameFieldModelValidationError? {
+  String? value(BuildContext context) {
+    switch (this) {
+      case NicknameFieldModelValidationError.wrong:
+        return '${KAppText.nickname} ${context.l10n.isWrong}';
       case null:
         return null;
     }

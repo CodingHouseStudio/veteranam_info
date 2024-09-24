@@ -28,7 +28,7 @@ class AuthenticationBloc
     on<AuthenticationLogoutRequested>(_onAuthenticationLogoutRequested);
     on<AuthenticationDeleteRequested>(_onAuthenticationDeleteRequested);
     on<AuthenticationInitialized>(_onAuthenticationInitialized);
-    // on<_AppUserChanged>(_onUserChanged);
+    on<_AppUserChanged>(_onUserChanged);
     on<_AppUserSettingChanged>(_onUserSettingChanged);
     on<AppLanguageChanged>(_onAppLanguageChanged);
     on<AppUserRoleChanged>(_onAppUserRoleChanged);
@@ -38,12 +38,14 @@ class AuthenticationBloc
   late StreamSubscription<AuthenticationStatus>
       authenticationStatusSubscription;
   late StreamSubscription<UserSetting> userSettingSubscription;
+  late StreamSubscription<User> userSubscription;
   static const String tokenKey = KAppText.authTokenKey;
 
   @override
   Future<void> close() {
     authenticationStatusSubscription.cancel();
     userSettingSubscription.cancel();
+    userSubscription.cancel();
     _authenticationRepository.dispose();
     return super.close();
   }
@@ -101,19 +103,23 @@ class AuthenticationBloc
     authenticationStatusSubscription = _authenticationRepository.status.listen(
       (status) => add(AuthenticationStatusChanged(status)),
     );
+    userSubscription = _authenticationRepository.user.listen(
+      (user) => add(
+        _AppUserChanged(user),
+      ),
+    );
   }
 
-  // void _onUserChanged(
-  //   _AppUserChanged event,
-  //   Emitter<AuthenticationState> emit,
-  // ) {
-  //   emit(
-  //     AuthenticationState.authenticated(
-  //       currentUser: event.user,
-  //       currentUserSetting: state.userSetting,
-  //     ),
-  //   );
-  // }
+  void _onUserChanged(
+    _AppUserChanged event,
+    Emitter<AuthenticationState> emit,
+  ) {
+    emit(
+      state.copyWith(
+        user: event.user,
+      ),
+    );
+  }
 
   void _onUserSettingChanged(
     _AppUserSettingChanged event,
@@ -121,9 +127,7 @@ class AuthenticationBloc
   ) {
     emit(
       state.copyWith(
-        userSetting: event.userSetting.copyWith(
-          id: _authenticationRepository.currentUser.id,
-        ),
+        userSetting: event.userSetting,
       ),
     );
   }
