@@ -8,7 +8,7 @@ Future<void> investorsInitialHelper(
 ) async {
   expect(find.byKey(KWidgetkeys.screen.investors.screen), findsOneWidget);
 
-  if (KTest.testIsWeb) {
+  if (Config.isWeb) {
     expect(find.byKey(KWidgetkeys.screen.investors.title), findsOneWidget);
     // expect(find.byKey(KWidgetkeys.screen.investors.point),
     // findsOneWidget);

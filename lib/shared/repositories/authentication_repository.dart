@@ -298,7 +298,7 @@ class AuthenticationRepository {
     required ImageModel? image,
     required String? nickname,
   }) async {
-    SomeFailure? failure;
+    SomeFailure? failureValue;
     bool? right;
 
     if (image != null || user.name != currentUser.name) {
@@ -309,7 +309,7 @@ class AuthenticationRepository {
 
       result.fold(
         (failure) {
-          failure = failure;
+          failureValue = failure;
           // debugPrint('Sending error: $failure');
         },
         (success) {
@@ -326,7 +326,7 @@ class AuthenticationRepository {
 
       result.fold(
         (failure) {
-          failure = failure;
+          failureValue = failure;
           // debugPrint('Sending error: $failure');
         },
         (success) {
@@ -336,8 +336,8 @@ class AuthenticationRepository {
       );
     }
 
-    if (failure != null) {
-      return Left(failure);
+    if (failureValue != null) {
+      return Left(failureValue!);
     } else {
       return Right(right ?? false);
     }

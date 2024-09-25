@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:veteranam/shared/shared.dart';
 
-@injectable
+@Injectable(env: [Config.mobile])
 class MobOfflineModeCubit extends Cubit<MobMode> {
   MobOfflineModeCubit({
     required FirestoreService firestoreService,

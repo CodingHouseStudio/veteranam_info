@@ -5,7 +5,7 @@ import 'package:injectable/injectable.dart';
 import 'package:veteranam/shared/shared.dart';
 
 @Singleton(
-  as: IInvestorsRepository,
+  as: IInvestorsRepository, env: [Config.user],
   // signalsReady: true,
 )
 class InvestorsRepository implements IInvestorsRepository {

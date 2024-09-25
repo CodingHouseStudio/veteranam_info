@@ -76,6 +76,7 @@ class TextFieldWidget extends StatefulWidget {
 }
 
 class _TextFieldWidgetState extends State<TextFieldWidget> {
+  // TextEditingController? controller;
   late bool isHovered;
 
   @override
@@ -107,7 +108,8 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
         onEditingComplete: widget.onEditingCompleted,
         obscureText: widget.obscureText,
         autocorrect: !widget.obscureText,
-        controller: widget.controller,
+        controller: //controller ??
+            widget.controller,
         maxLines: widget.expands == null ? widget.maxLines ?? 1 : null,
         maxLength: widget.maxLength,
         keyboardType: widget.keyboardType ?? TextInputType.text,
@@ -141,7 +143,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
           errorText: widget.showErrorText ?? true ? widget.errorText : null,
           suffixIcon: Padding(
             padding: EdgeInsets.only(
-              right: widget.suffixIconPadding ?? KPadding.kPaddingSize16,
+              right: widget.suffixIconPadding ?? KPadding.kPaddingSize4,
             ),
             child: widget.suffixIcon,
           ),

@@ -27,7 +27,7 @@ void main() {
     late FirestoreService mockFirestoreService;
     late GoogleSignInAccount mockGoogleSignInAccount;
     late firebase_auth.FacebookAuthProvider mockFacebookAuthProvider;
-
+    late StorageService mockStorageService;
     late IDeviceRepository mockDeviceRepository;
     late firebase_auth.User mockUser;
     late FacebookAuth mockFacebookAuth;
@@ -45,7 +45,7 @@ void main() {
         mockDeviceRepository = MockIDeviceRepository();
         mockFacebookAuth = MockFacebookAuth();
         mockFacebookAuthProvider = MockFacebookAuthProvider();
-
+        mockStorageService = MockStorageService();
         when(
           mockCache.read<User>(
             key: AppAuthenticationRepository.userCacheKey,
@@ -168,6 +168,12 @@ void main() {
           GetIt.I.unregister<FirestoreService>();
         }
         GetIt.I.registerSingleton(mockFirestoreService);
+
+        if (GetIt.I.isRegistered<StorageService>()) {
+          GetIt.I.unregister<StorageService>();
+        }
+        GetIt.I.registerSingleton(mockStorageService);
+
         if (GetIt.I.isRegistered<IDeviceRepository>()) {
           GetIt.I.unregister<IDeviceRepository>();
         }

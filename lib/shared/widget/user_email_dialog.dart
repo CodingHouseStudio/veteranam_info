@@ -179,7 +179,7 @@ class _UserEmailDialogState extends State<UserEmailDialog> {
 
   String _text(BuildContext context) {
     return '${context.l10n.aboutNewDiscountsSubtitle}'
-        '${KTest.testIsWeb ? ')' : '😀'}';
+        '${Config.isWeb ? ')' : '😀'}';
   }
 
   Widget field(

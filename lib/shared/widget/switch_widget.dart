@@ -8,60 +8,77 @@ class SwitchWidget extends StatelessWidget {
     super.key,
   });
   final bool isSelected;
-  // ignore: avoid_positional_boolean_parameters
   final void Function()? onChanged;
 
   @override
   Widget build(BuildContext context) {
-    return IconButton(
+    return Switch(
       key: KWidgetkeys.widget.switchKeys.widget,
-      style: KButtonStyles.withoutStyle,
-      onPressed: onChanged,
-      icon: DecoratedBox(
-        key: isSelected ? KWidgetkeys.widget.switchKeys.active : null,
-        decoration: KWidgetTheme.boxDecorationNawbar,
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: List.generate(
-            2,
-            _switch,
-          ),
-        ),
+      value: isSelected,
+      onChanged: (value) => onChanged?.call(),
+      trackColor: const WidgetStatePropertyAll(
+        AppColors.materialThemeKeyColorsNeutralVariant,
+      ),
+      trackOutlineWidth: const WidgetStatePropertyAll(0),
+      trackOutlineColor: const WidgetStatePropertyAll(
+        AppColors.materialThemeKeyColorsNeutralVariant,
+      ),
+      thumbColor: WidgetStatePropertyAll(
+        isSelected
+            ? AppColors.materialThemeKeyColorsSecondary
+            : AppColors.materialThemeWhite,
       ),
     );
+    // return IconButton(
+    //   key: KWidgetkeys.widget.switchKeys.widget,
+    //   style: KButtonStyles.withoutStyle,
+    //   onPressed: onChanged,
+    //   icon: DecoratedBox(
+    //     decoration: KWidgetTheme.boxDecorationNawbar,
+    //     child: AnimatedContainer(
+    //       duration: const Duration(milliseconds: 200),
+    //       // key: KWidgetkeys.widget.switchKeys.item,
+    //       constraints: const BoxConstraints(
+    //         minWidth: KSize.kPixel40,
+    //         minHeight: KSize.kPixel40,
+    //       ),
+    //       decoration: isSelected
+    //           ? KWidgetTheme.boxDecorationBlackCircular.copyWith(
+    //               color: onChanged == null
+    //                   ? AppColors.
+    // materialThemeRefNeutralVariantNeutralVariant70
+    //                   : null,
+    //             )
+    //           : KWidgetTheme.boxDecorationWhiteCircular,
+    //       margin: EdgeInsets.only(
+    //         top: KPadding.kPaddingSize4,
+    //         bottom: KPadding.kPaddingSize4,
+    //         left: horizontalMergin(isRight: false),
+    //         right: horizontalMergin(isRight: true),
+    //       ),
+    //       padding: const EdgeInsets.all(
+    //         KPadding.kPaddingSize8,
+    //       ),
+    //       child: KIcon.modeOffOn.copyWith(
+    //         key: isSelected ? KWidgetkeys.widget.switchKeys.active : null,
+    //         color: isSelected
+    //             ? onChanged == null
+    //                 ? AppColors.materialThemeKeyColorsNeutral
+    //                 : AppColors.materialThemeWhite
+    //             : onChanged == null
+    //                 ? AppColors.materialThemeRefNeutralNeutral70
+    //                 : AppColors.materialThemeKeyColorsSecondary,
+    //       ),
+    //     ),
+    //   ),
+    // );
   }
 
-  Widget _switch(int index) => Container(
-        // key: KWidgetkeys.widget.switchKeys.item,
-        constraints: const BoxConstraints(
-          minWidth: KSize.kPixel40,
-          minHeight: KSize.kPixel40,
-        ),
-        decoration: (isSelected && index == 0) || (!isSelected && index == 1)
-            ? KWidgetTheme.boxDecorationGrayCircular
-            : isSelected
-                ? KWidgetTheme.boxDecorationBlackCircular.copyWith(
-                    color: onChanged == null
-                        ? AppColors
-                            .materialThemeRefNeutralVariantNeutralVariant70
-                        : null,
-                  )
-                : KWidgetTheme.boxDecorationWhiteCircular,
-        margin: const EdgeInsets.all(KPadding.kPaddingSize4),
-        padding: const EdgeInsets.all(
-          KPadding.kPaddingSize8,
-        ),
-        child: (isSelected && index == 0) || (!isSelected && index == 1)
-            ? KSizedBox.kWidthSizedBox24
-            : KIcon.modeOffOn.copyWith(
-                key: KWidgetkeys.widget.switchKeys.icon,
-                color: isSelected
-                    ? onChanged == null
-                        ? AppColors.materialThemeKeyColorsNeutral
-                        : AppColors.materialThemeWhite
-                    : onChanged == null
-                        ? AppColors.materialThemeRefNeutralNeutral70
-                        : AppColors.materialThemeKeyColorsSecondary,
-              ),
-      );
+  // double horizontalMergin({required bool isRight}) => isRight
+  //     ? isSelected
+  //         ? KPadding.kPaddingSize4
+  //         : KPadding.kPaddingSize52
+  //     : isSelected
+  //         ? KPadding.kPaddingSize52
+  //         : KPadding.kPaddingSize4;
 }

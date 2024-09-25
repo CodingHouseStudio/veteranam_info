@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:veteranam/shared/shared.dart';
 
 class SwitchWidgetWithoutBloc extends StatefulWidget {
-  const SwitchWidgetWithoutBloc({super.key});
+  const SwitchWidgetWithoutBloc({super.key, this.onSelected});
+  final void Function({required bool isSelected})? onSelected;
 
   @override
   State<SwitchWidgetWithoutBloc> createState() =>
@@ -33,6 +34,7 @@ class _SwitchWidgetWithoutBlocState extends State<SwitchWidgetWithoutBloc> {
         setState(() {
           isSelected = !isSelected;
         });
+        widget.onSelected?.call(isSelected: isSelected);
       },
     );
   }

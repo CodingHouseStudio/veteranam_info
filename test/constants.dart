@@ -225,7 +225,7 @@ abstract class KTestText {
   static final feedbackModel = FeedbackModel(
     id: '',
     guestId: user.id,
-    guestName: field,
+    guestName: nameCorrect,
     email: userEmail,
     timestamp: dateTime,
     message: field,
@@ -260,6 +260,25 @@ abstract class KTestText {
         userPhoto: i > _itemsPhoto ? imageModels : null,
       ),
   ];
+
+  static final sendDiscountModel = discountModelItems.first.copyWith(
+    directLink: null,
+    additionalDetails: null,
+    // html: null,
+    userId: user.id,
+    userName: user.name,
+    company: null,
+    subLocation: null,
+    userPhoto: null,
+    locationEN: null,
+    expirationEN: null,
+    additionalDetailsEN: null, companyEN: null,
+    phoneNumber: null, categoryEN: null, descriptionEN: null,
+    exclusionsEN: null, requirementsEN: null, requirements: null,
+    territoryEN: null,
+    titleEN: null, status: DiscountState.isNew, subcategory: null,
+    subcategoryEN: null,
+  );
 
   static final userDiscountModelItems = <DiscountModel>[
     for (var i = 0; i < 5; i++)
@@ -426,32 +445,22 @@ abstract class KTestText {
     phoneNumber: phoneNumber,
     noResume: true,
   );
-  static const notificationSettings = NotificationSettings(
-    alert: AppleNotificationSetting.enabled,
-    announcement: AppleNotificationSetting.enabled,
-    authorizationStatus: AuthorizationStatus.authorized,
-    badge: AppleNotificationSetting.enabled,
-    carPlay: AppleNotificationSetting.enabled,
-    lockScreen: AppleNotificationSetting.enabled,
-    notificationCenter: AppleNotificationSetting.enabled,
-    showPreviews: AppleShowPreviewSetting.always,
-    timeSensitive: AppleNotificationSetting.enabled,
-    criticalAlert: AppleNotificationSetting.enabled,
-    sound: AppleNotificationSetting.enabled,
-  );
-  static const notificationSettingsDenied = NotificationSettings(
-    alert: AppleNotificationSetting.disabled,
-    announcement: AppleNotificationSetting.disabled,
-    authorizationStatus: AuthorizationStatus.denied,
-    badge: AppleNotificationSetting.disabled,
-    carPlay: AppleNotificationSetting.disabled,
-    lockScreen: AppleNotificationSetting.disabled,
-    notificationCenter: AppleNotificationSetting.disabled,
-    showPreviews: AppleShowPreviewSetting.never,
-    timeSensitive: AppleNotificationSetting.disabled,
-    criticalAlert: AppleNotificationSetting.disabled,
-    sound: AppleNotificationSetting.disabled,
-  );
+  static NotificationSettings notificationSettings({
+    AuthorizationStatus authorizationStatus = AuthorizationStatus.authorized,
+  }) =>
+      NotificationSettings(
+        alert: AppleNotificationSetting.disabled,
+        announcement: AppleNotificationSetting.disabled,
+        authorizationStatus: authorizationStatus,
+        badge: AppleNotificationSetting.disabled,
+        carPlay: AppleNotificationSetting.disabled,
+        lockScreen: AppleNotificationSetting.disabled,
+        notificationCenter: AppleNotificationSetting.disabled,
+        showPreviews: AppleShowPreviewSetting.never,
+        timeSensitive: AppleNotificationSetting.disabled,
+        criticalAlert: AppleNotificationSetting.disabled,
+        sound: AppleNotificationSetting.disabled,
+      );
   static final linkModel = LinkModel(
     id: id,
     userId: user.id,
@@ -527,6 +536,7 @@ abstract class KScreenBlocName {
   static const mobSettings = 'Settings Screen';
   static const mobFaq = 'Mob FAQ Screen';
   static const userRole = 'User Role Screen';
+  static const discountsAdd = 'Discounts Add Screen';
 
   static const authenticationServices = 'Authentication Services';
   static const appRepository = 'App';

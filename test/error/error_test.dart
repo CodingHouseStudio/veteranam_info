@@ -39,7 +39,7 @@ void main() {
           );
         });
         testWidgets('${KScreenBlocName.home} ', (tester) async {
-          KTest.testIsWeb = false;
+          Config.isWeb = false;
 
           await errorPumpAppHelper(tester: tester, mockGoRouter: mockGoRouter);
 

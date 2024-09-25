@@ -188,21 +188,37 @@ void main() {
           true,
         );
       });
-      test('Update data', () async {
-        when(mockAppAuthenticationRepository.currentUserSetting).thenAnswer(
-          (_) => KTestText.userSettingModel,
-        );
-        if (KTestText.imageModels != null) {
-          expect(
-            await authenticationRepository.updateUserData(
-              user: KTestText.profileUser,
-              image: KTestText.imageModels,
+      test('Update user data', () async {
+        when(
+          mockAppAuthenticationRepository.updateUserSetting(
+            const UserSetting(
+              id: KTestText.field,
               nickname: KTestText.nicknameCorrect,
             ),
-            isA<Right<SomeFailure, bool>>()
-                .having((e) => e.value, 'value', isTrue),
-          );
-        }
+          ),
+        ).thenAnswer(
+          (_) async => const Right(true),
+        );
+        expect(
+          await authenticationRepository.updateUserData(
+            user: KTestText.profileUser,
+            image: KTestText.imageModels,
+            nickname: KTestText.nicknameCorrect,
+          ),
+          isA<Right<SomeFailure, bool>>()
+              .having((e) => e.value, 'value', isTrue),
+        );
+      });
+      test('Update data unmodify data', () async {
+        expect(
+          await authenticationRepository.updateUserData(
+            user: User.empty,
+            image: null,
+            nickname: null,
+          ),
+          isA<Right<SomeFailure, bool>>()
+              .having((e) => e.value, 'value', isFalse),
+        );
       });
       test('Update user settings', () async {
         when(mockAppAuthenticationRepository.currentUserSetting).thenAnswer(
@@ -371,15 +387,14 @@ void main() {
           // ),
         );
       });
-      test('Update data (Right(false))', () async {
+      test('Update data', () async {
         expect(
           await authenticationRepository.updateUserData(
             user: KTestText.profileUser,
             image: KTestText.imageModels,
             nickname: KTestText.nicknameCorrect,
           ),
-          isA<Right<SomeFailure, bool>>()
-              .having((e) => e.value, 'value', isFalse),
+          isA<Left<SomeFailure, bool>>(),
         );
       });
     });

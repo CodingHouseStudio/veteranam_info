@@ -1,9 +1,10 @@
-import 'package:flutter/foundation.dart' show visibleForTesting;
+import 'package:flutter/foundation.dart' show kIsWeb, visibleForTesting;
 
 abstract class Config {
   static const flavour =
       String.fromEnvironment('FLAVOUR', defaultValue: development);
   static const role = String.fromEnvironment('ROLE', defaultValue: user);
+  static const platform = kIsWeb ? web : mobile;
 
   @visibleForTesting
   static String? falvourValue;
@@ -23,8 +24,17 @@ abstract class Config {
 
   static bool get isUser => (roleValue ?? role) == user;
   static bool get isBusiness => (roleValue ?? role) == business;
-  @visibleForTesting
+  // @visibleForTesting
   static const user = 'user';
-  @visibleForTesting
+  // @visibleForTesting
   static const business = 'business';
+
+  static bool? _kIsWeb;
+  static bool get isWeb => _kIsWeb ?? platform == web;
+  @visibleForTesting
+  static set isWeb(bool isWeb) => _kIsWeb = isWeb;
+  // @visibleForTesting
+  static const web = 'web';
+  // @visibleForTesting
+  static const mobile = 'mobile';
 }

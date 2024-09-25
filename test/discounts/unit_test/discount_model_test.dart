@@ -78,6 +78,8 @@ void main() {
       DiscountModelJsonField.userPhoto: [
         KTestText.discountModelItems.last.userPhoto!.toJson(),
       ],
+      DiscountModelJsonField.status:
+          KTestText.discountModelItems.last.status.enumString,
       // DiscountModelJsonField.hasMarkdown:
       //     KTestText.discountModelItems.last.hasMarkdown,
       // DiscountModelJsonField.date:
@@ -88,8 +90,7 @@ void main() {
       DiscountModelJsonField.userId: null,
       DiscountModelJsonField.category:
           KTestText.discountModelItems.last.category,
-      DiscountModelJsonField.categoryEN:
-          KTestText.discountModelItems.last.categoryEN,
+      DiscountModelJsonField.categoryEN: null,
       DiscountModelJsonField.company: null,
       DiscountModelJsonField.dateVerified:
           KTestText.discountModelItems.last.dateVerified.toIso8601String(),
@@ -100,31 +101,22 @@ void main() {
           KTestText.discountModelItems.last.discount,
       // DiscountModelJsonField.eligibility:
       //     KTestText.discountModelItems.last.eligibility,
-      DiscountModelJsonField.exclusions:
-          KTestText.discountModelItems.last.exclusions,
-      DiscountModelJsonField.expiration:
-          KTestText.discountModelItems.last.expiration,
+      DiscountModelJsonField.exclusions: null,
+      DiscountModelJsonField.expiration: null,
       DiscountModelJsonField.phoneNumber: null,
-      DiscountModelJsonField.requirements:
-          KTestText.discountModelItems.last.requirements,
-      DiscountModelJsonField.subcategory:
-          KTestText.discountModelItems.last.subcategory,
-      DiscountModelJsonField.subcategoryEN:
-          KTestText.discountModelItems.last.subcategoryEN,
+      DiscountModelJsonField.requirements: null,
+      DiscountModelJsonField.subcategory: null,
+      DiscountModelJsonField.subcategoryEN: null,
       DiscountModelJsonField.territory:
           KTestText.discountModelItems.last.territory,
       DiscountModelJsonField.title: KTestText.discountModelItems.last.title,
-      DiscountModelJsonField.titleEN: KTestText.discountModelItems.last.titleEN,
-      DiscountModelJsonField.territoryEN:
-          KTestText.discountModelItems.last.territoryEN,
-      DiscountModelJsonField.exclusionsEN:
-          KTestText.discountModelItems.last.exclusionsEN,
-      DiscountModelJsonField.descriptionEN:
-          KTestText.discountModelItems.last.descriptionEN,
+      DiscountModelJsonField.titleEN: null,
+      DiscountModelJsonField.territoryEN: null,
+      DiscountModelJsonField.exclusionsEN: null,
+      DiscountModelJsonField.descriptionEN: null,
       // DiscountModelJsonField.eligibilityEN:
       //     KTestText.discountModelItems.last.eligibilityEN,
-      DiscountModelJsonField.requirementsEN:
-          KTestText.discountModelItems.last.requirementsEN,
+      DiscountModelJsonField.requirementsEN: null,
       DiscountModelJsonField.expirationEN: null,
       DiscountModelJsonField.locationEN: null,
       // DiscountModelJsonField.hasMarkdown:
@@ -140,6 +132,7 @@ void main() {
       DiscountModelJsonField.userName: null,
       DiscountModelJsonField.additionalDetailsEN: null,
       DiscountModelJsonField.companyEN: null,
+      DiscountModelJsonField.status: null,
     };
     group('${KGroupText.modelJson} ', () {
       test('${KGroupText.full} ', () {
@@ -281,6 +274,10 @@ void main() {
           discountModel.requirementsEN,
           KTestText.discountModelItems.last.requirementsEN,
         );
+        expect(
+          discountModel.status,
+          KTestText.discountModelItems.last.status,
+        );
         // expect(
         //   discountModel.date,
         //   KTestText.discountModelItems.last.date,
@@ -312,7 +309,7 @@ void main() {
         );
         expect(
           discountModel.categoryEN,
-          KTestText.discountModelItems.last.categoryEN,
+          null,
         );
         expect(
           discountModel.company,
@@ -340,11 +337,11 @@ void main() {
         // );
         expect(
           discountModel.exclusions,
-          KTestText.discountModelItems.last.exclusions,
+          null,
         );
         expect(
           discountModel.expiration,
-          KTestText.discountModelItems.last.expiration,
+          null,
         );
         // expect(
         //   discountModel.html,
@@ -364,7 +361,7 @@ void main() {
         );
         expect(
           discountModel.requirements,
-          KTestText.discountModelItems.last.requirements,
+          null,
         );
         expect(
           discountModel.subLocation,
@@ -372,11 +369,11 @@ void main() {
         );
         expect(
           discountModel.subcategory,
-          KTestText.discountModelItems.last.subcategory,
+          null,
         );
         expect(
           discountModel.subcategoryEN,
-          KTestText.discountModelItems.last.subcategoryEN,
+          null,
         );
         expect(
           discountModel.territory,
@@ -392,7 +389,7 @@ void main() {
         );
         expect(
           discountModel.titleEN,
-          KTestText.discountModelItems.last.titleEN,
+          null,
         );
         expect(
           discountModel.locationEN,
@@ -400,11 +397,11 @@ void main() {
         );
         expect(
           discountModel.territoryEN,
-          KTestText.discountModelItems.last.territoryEN,
+          null,
         );
         expect(
           discountModel.exclusionsEN,
-          KTestText.discountModelItems.last.exclusionsEN,
+          null,
         );
         expect(
           discountModel.expirationEN,
@@ -412,7 +409,7 @@ void main() {
         );
         expect(
           discountModel.descriptionEN,
-          KTestText.discountModelItems.last.descriptionEN,
+          null,
         );
         // expect(
         //   discountModel.eligibilityEN,
@@ -420,11 +417,15 @@ void main() {
         // );
         expect(
           discountModel.requirementsEN,
-          KTestText.discountModelItems.last.requirementsEN,
+          null,
         );
         expect(
           discountModel.companyEN,
           null,
+        );
+        expect(
+          discountModel.status,
+          DiscountState.isNew,
         );
         // expect(
         //   discountModel.date,
@@ -529,12 +530,32 @@ void main() {
               userPhoto: null,
               locationEN: null,
               expirationEN: null,
-              additionalDetailsEN: null, companyEN: null,
+              additionalDetailsEN: null,
+              companyEN: null,
               phoneNumber: null,
+              categoryEN: null,
+              descriptionEN: null,
+              exclusionsEN: null,
+              requirementsEN: null,
+              expiration: null,
+              requirements: null,
+              territoryEN: null,
+              titleEN: null,
+              status: DiscountState.isNew,
+              subcategory: null,
+              subcategoryEN: null,
+              exclusions: null,
             )
             .toJson();
 
-        expect(discountModelJson, nullableJson);
+        expect(
+          discountModelJson,
+          nullableJson
+            ..update(
+              DiscountModelJsonField.status,
+              (value) => DiscountState.isNew.enumString,
+            ),
+        );
       });
     });
   });

@@ -255,10 +255,10 @@ extension InformationModelExtension on InformationModel {
 
 extension GenericsExtensions<T> on T {
   T getTrnslation({
-    required T en,
+    required T? en,
     required BuildContext context,
   }) =>
-      context.isEnglish ? en : this;
+      context.isEnglish ? en ?? this : this;
 }
 
 extension ContextExtensions on BuildContext {
@@ -305,7 +305,7 @@ extension CategoryEnumExtensions on CategoryEnum {
 
 extension ReferenceExtension on Reference {
   UploadTask putImage(Uint8List data, [SettableMetadata? metadata]) {
-    if (KTest.testIsWeb) {
+    if (Config.isWeb) {
       return putBlob(data, metadata);
     } else {
       return putData(data, metadata);
@@ -411,6 +411,27 @@ extension StoryExtensions on StoryModel {
       );
 }
 
+extension DoubleExtensions on double {
+  EdgeInsetsGeometry screenPadding({
+    required double precent,
+    double? verticalPadding,
+    double? horizontalPadding,
+    bool notUseHorizontal = true,
+  }) {
+    const threshold = KPlatformConstants.maxWidthThresholdTablet;
+    final horizontalPaddingValue = this <= threshold
+        ? this * precent
+        : threshold * precent + ((this - threshold) / 2);
+
+    return EdgeInsets.symmetric(
+      horizontal: notUseHorizontal
+          ? horizontalPaddingValue
+          : horizontalPadding ?? KPadding.kPaddingSize16,
+      vertical: verticalPadding ?? 0,
+    );
+  }
+}
+
 // extension FirebaseAnalyticsExtensions on FirebaseAnalytics {
 //   void releaseLogEvent({
 //     required String name,
@@ -429,20 +450,37 @@ extension StoryExtensions on StoryModel {
 //   }
 // }
 
-extension DoubleExtensions on double {
-  EdgeInsetsGeometry screenPadding({
-    required double precent,
-    double? verticalPadding,
-  }) {
-    const threshold = KPlatformConstants.maxWidthThresholdTablet;
-    final horizontalPadding = this <= threshold
-        ? this * precent
-        : threshold * precent + ((this - threshold) / 2);
+extension CardEnumExtention on CardEnum {
+  String get getValue {
+    switch (this) {
+      case CardEnum.funds:
+        return 'funds';
+      case CardEnum.discount:
+        return 'discount';
+      case CardEnum.information:
+        return 'information';
+      case CardEnum.story:
+        return 'story';
+    }
+  }
+}
 
-    return EdgeInsets.symmetric(
-      horizontal: horizontalPadding,
-      vertical: verticalPadding ?? 0,
-    );
+extension DiscountStateExtention on DiscountState {
+  String get enumString {
+    switch (this) {
+      case DiscountState.isNew:
+        return 'isNew';
+      case DiscountState.underReview:
+        return 'underReview';
+      case DiscountState.overdue:
+        return 'overdue';
+      case DiscountState.rejected:
+        return 'rejected';
+      case DiscountState.published:
+        return 'published';
+      case DiscountState.deactivated:
+        return 'deactivated';
+    }
   }
 }
 

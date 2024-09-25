@@ -24,7 +24,7 @@ void main() {
     late CacheClient mockCache;
     late firebase_auth.GoogleAuthProvider mockGoogleAuthProvider;
     late FirestoreService mockFirestoreService;
-
+    late StorageService mockStorageService;
     late IDeviceRepository mockDeviceRepository;
     late firebase_auth.UserCredential mockUserCredential;
     late FacebookAuth mockFacebookAuth;
@@ -37,7 +37,7 @@ void main() {
       mockGoogleAuthProvider = MockGoogleAuthProvider();
       mockUserCredential = MockUserCredential();
       mockFacebookAuth = MockFacebookAuth();
-
+      mockStorageService = MockStorageService();
       mockDeviceRepository = MockIDeviceRepository();
       when(
         mockFirebaseAuth.currentUser,
@@ -89,6 +89,12 @@ void main() {
         GetIt.I.unregister<FirestoreService>();
       }
       GetIt.I.registerSingleton(mockFirestoreService);
+
+      if (GetIt.I.isRegistered<StorageService>()) {
+        GetIt.I.unregister<StorageService>();
+      }
+      GetIt.I.registerSingleton(mockStorageService);
+
       if (GetIt.I.isRegistered<IDeviceRepository>()) {
         GetIt.I.unregister<IDeviceRepository>();
       }

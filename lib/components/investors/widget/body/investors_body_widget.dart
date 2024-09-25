@@ -30,7 +30,7 @@ class InvestorsBodyWidget extends StatelessWidget {
             .add(const InvestorsWatcherEvent.started()),
         mainChildWidgetsFunction: ({required isDesk}) => [
           KSizedBox.kHeightSizedBox24,
-          if (KTest.testIsWeb)
+          if (Config.isWeb)
             TitlePointWidget(
               title: context.l10n.provideSuggestionsFromBusinesses,
               titleKey: KWidgetkeys.screen.investors.title,
@@ -44,7 +44,7 @@ class InvestorsBodyWidget extends StatelessWidget {
             ),
           if (isDesk)
             KSizedBox.kHeightSizedBox40
-          else if (KTest.testIsWeb)
+          else if (Config.isWeb)
             KSizedBox.kHeightSizedBox24,
           if (isDesk)
             Row(
@@ -74,7 +74,7 @@ class InvestorsBodyWidget extends StatelessWidget {
                 ),
               ],
             )
-          else if (KTest.testIsWeb) ...[
+          else if (Config.isWeb) ...[
             ...SectionWidget.get(
               isTablet: isDesk,
               // textPoint: null,
@@ -94,7 +94,7 @@ class InvestorsBodyWidget extends StatelessWidget {
           ],
           if (isDesk)
             KSizedBox.kHeightSizedBox40
-          else if (KTest.testIsWeb)
+          else if (Config.isWeb)
             KSizedBox.kHeightSizedBox24,
           // TextPointWidget(
           //   context.l10n.donateHere,

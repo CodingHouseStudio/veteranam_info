@@ -3,6 +3,7 @@ export 'consultation/consultation.dart';
 export 'contact/contact.dart';
 export 'discount_card/discount_card.dart';
 export 'discounts/discounts.dart';
+export 'discounts_add/discounts_add.dart';
 export 'employee_respond/employee_respond.dart';
 export 'error/error.dart';
 export 'feedback/feedback.dart';

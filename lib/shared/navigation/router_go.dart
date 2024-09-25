@@ -230,15 +230,6 @@ GoRouter router = GoRouter(
                       child: const EmployeeRespondScreen(),
                     ),
                   ),
-                  GoRoute(
-                    name: KRoute.profileSaves.name,
-                    path: KRoute.profileSaves.path,
-                    pageBuilder: (context, state) => NoTransitionPage(
-                      key: state.pageKey,
-                      name: state.name,
-                      child: const ProfileSavesScreen(),
-                    ),
-                  ),
                 ],
               ),
             ],
@@ -260,6 +251,15 @@ GoRouter router = GoRouter(
                   key: state.pageKey,
                   name: state.name,
                   child: const ProfileMyStoryScreen(),
+                ),
+              ),
+              GoRoute(
+                name: KRoute.profileSaves.name,
+                path: KRoute.profileSaves.path,
+                pageBuilder: (context, state) => NoTransitionPage(
+                  key: state.pageKey,
+                  name: state.name,
+                  child: const ProfileSavesScreen(),
                 ),
               ),
             ],

@@ -36,6 +36,7 @@ part 'screen/news_card_dialog.dart';
 part 'screen/mob_settings.dart';
 part 'screen/mob_faq.dart';
 part 'screen/user_role.dart';
+part 'screen/discounts_add.dart';
 
 //WIDGET
 part 'widget/widget.dart';
@@ -91,6 +92,8 @@ part 'widget/mob_update.dart';
 part 'widget/network_banner.dart';
 part 'widget/card_epmty.dart';
 part 'widget/drop_down_button.dart';
+part 'widget/switch_offline.dart';
+part 'widget/multi_drop_field.dart';
 
 abstract class KWidgetkeys {
   static _ScreenKeys get screen => _ScreenKeys();

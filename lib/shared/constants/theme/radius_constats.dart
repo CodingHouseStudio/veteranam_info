@@ -12,7 +12,7 @@ abstract class KBorderRadius {
       BorderRadius.all(Radius.circular(KSize.kRadius40));
   static const kBorderRadius8 =
       BorderRadius.all(Radius.circular(KSize.kPixel8));
-  static const kBorderRadiusL =
+  static const kBorderRadius48 =
       BorderRadius.all(Radius.circular(KSize.kPixel48));
   static const kBorderRadiusLeft32 =
       BorderRadius.horizontal(left: Radius.circular(KSize.kRadius32));

@@ -30,7 +30,7 @@ void main() {
     late GoogleSignInAuthentication mockGoogleSignInAuthentication;
     late LoginResult mockLoginResult;
     late firebase_auth.FacebookAuthProvider mockFacebookAuthProvider;
-
+    late StorageService mockStorageService;
     late IDeviceRepository mockDeviceRepository;
     setUp(() {
       mockSecureStorageRepository = MockIStorage();
@@ -45,7 +45,7 @@ void main() {
       mockFacebookAuth = MockFacebookAuth();
       mockLoginResult = MockLoginResult();
       mockFacebookAuthProvider = MockFacebookAuthProvider();
-
+      mockStorageService = MockStorageService();
       mockDeviceRepository = MockIDeviceRepository();
 
       when(mockGoogleSignInAuthentication.idToken).thenAnswer(
@@ -90,6 +90,12 @@ void main() {
         GetIt.I.unregister<FirestoreService>();
       }
       GetIt.I.registerSingleton(mockFirestoreService);
+
+      if (GetIt.I.isRegistered<StorageService>()) {
+        GetIt.I.unregister<StorageService>();
+      }
+      GetIt.I.registerSingleton(mockStorageService);
+
       if (GetIt.I.isRegistered<IDeviceRepository>()) {
         GetIt.I.unregister<IDeviceRepository>();
       }

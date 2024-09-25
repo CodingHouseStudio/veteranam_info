@@ -18,9 +18,9 @@ void main() {
         const result = NameFieldModel.dirty();
         expect(result.error, NameFieldModelValidationError.empty);
       });
-      test('${KGroupText.shouldNotBe} ${KGroupText.empty}', () {
+      test('${KGroupText.shouldBe} wrong', () {
         const result = NameFieldModel.dirty(KTestText.field);
-        expect(result.error, null);
+        expect(result.error, NameFieldModelValidationError.wrong);
       });
     });
     group('Email ${KGroupText.validationError}', () {

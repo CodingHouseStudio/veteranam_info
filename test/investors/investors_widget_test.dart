@@ -24,7 +24,7 @@ void main() {
     setUp(() {
       ExtendedDateTime.current = KTestText.dateTime;
       ExtendedDateTime.id = '';
-      KTest.testIsWeb = true;
+      Config.isWeb = true;
 
       mockInvestorsRepository = MockIInvestorsRepository();
       mockReportRepository = MockIReportRepository();
