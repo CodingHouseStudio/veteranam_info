@@ -1,13 +1,16 @@
+// ignore_for_file: empty_catches
+
 import 'dart:developer' show log;
 
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/foundation.dart';
+import 'package:flutter/foundation.dart' show PlatformDispatcher, kReleaseMode;
 // import 'package:flutter/foundation.dart' show kReleaseMode;
 import 'package:flutter/material.dart' show FlutterError, WidgetsFlutterBinding;
 import 'package:veteranam/app.dart';
 import 'package:veteranam/bootstrap.dart';
 import 'package:veteranam/firebase_options_development.dart';
+import 'package:veteranam/shared/shared.dart';
 
 /// COMMENT: DEV main file
 void main() async {
@@ -17,18 +20,26 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  // if (kReleaseMode) {
-  await FirebaseAppCheck.instanceFor(app: app).activate(
-    webProvider: ReCaptchaV3Provider(
-      'REDACTED',
-    ),
-  );
-
-  await FirebaseAppCheck.instance.activate(
-    webProvider: ReCaptchaV3Provider(
-      'REDACTED',
-    ),
-  );
+  try {
+    await FirebaseAppCheck.instanceFor(app: app).activate(
+      webProvider: ReCaptchaV3Provider(
+        KSecurityKeys.firebaseAppCheckDev,
+      ),
+      androidProvider:
+          kReleaseMode ? AndroidProvider.playIntegrity : AndroidProvider.debug,
+      appleProvider:
+          kReleaseMode ? AppleProvider.deviceCheck : AppleProvider.debug,
+    );
+    await FirebaseAppCheck.instance.activate(
+      webProvider: ReCaptchaV3Provider(
+        KSecurityKeys.firebaseAppCheckDev,
+      ),
+      androidProvider:
+          kReleaseMode ? AndroidProvider.playIntegrity : AndroidProvider.debug,
+      appleProvider:
+          kReleaseMode ? AppleProvider.deviceCheck : AppleProvider.debug,
+    );
+  } catch (e) {}
 
   // Non-async exceptions
   FlutterError.onError = (details) {
