@@ -354,12 +354,25 @@ abstract class KTestText {
         id: i.toString(),
         date: dateTime,
         image: i > _itemsPhoto ? imageModels : null,
-        story: KMockText.cardData.substring(0, 200),
+        story: KMockText.cardData.substring(0, 250),
         userName: user.name,
         userId: user.id,
         userPhoto: i > _itemsPhoto ? userPhotoModel : null,
       ),
   ];
+
+  // static final storyModelItems = <StoryModel>[
+  //   for (var i = 0; i < _items; i++)
+  //     StoryModel(
+  //       id: i.toString(),
+  //       date: dateTime,
+  //       image: i > _itemsPhoto ? imageModels : null,
+  //       story: KMockText.cardData.substring(0, 250),
+  //       userName: user.name,
+  //       userId: user.id,
+  //       userPhoto: i > _itemsPhoto ? userPhotoModel : null,
+  //     ),
+  // ];
   static const _items = 40;
   static const _itemsPhoto = 30;
 
