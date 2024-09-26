@@ -59,6 +59,7 @@ void main() {
       UserSettingModelJsonField.devicesInfo: [
         KTestText.userSettingModel.devicesInfo!.first.toJson(),
       ],
+      UserSettingModelJsonField.nickname: KTestText.nicknameCorrect,
     };
     final nullableJson = {
       UserSettingModelJsonField.id: KTestText.userSettingModel.id,
@@ -68,6 +69,7 @@ void main() {
       UserSettingModelJsonField.roleIsConfirmed:
           KTestText.userSettingModel.roleIsConfirmed,
       UserSettingModelJsonField.devicesInfo: null,
+      UserSettingModelJsonField.nickname: null,
     };
     group('${KGroupText.modelJson} ', () {
       test('${KGroupText.full} ', () {
@@ -84,6 +86,10 @@ void main() {
           userSettingModel.devicesInfo,
           KTestText.userSettingModel.devicesInfo,
         );
+        expect(
+          userSettingModel.nickname,
+          KTestText.nicknameCorrect,
+        );
       });
       test('${KGroupText.nullable} ', () {
         final userSettingModel = UserSetting.fromJson(nullableJson);
@@ -96,6 +102,10 @@ void main() {
           KTestText.userSettingModel.roleIsConfirmed,
         );
         expect(userSettingModel.devicesInfo, isNull);
+        expect(
+          userSettingModel.nickname,
+          isNull,
+        );
       });
 
       test('${KGroupText.failure} ', () {
@@ -108,6 +118,7 @@ void main() {
               KTestText.userSettingModel.roleIsConfirmed,
           UserSettingModelJsonField.devicesInfo:
               KTestText.userSettingModel.devicesInfo,
+          UserSettingModelJsonField.nickname: KTestText.nicknameCorrect,
         };
 
         expect(
@@ -128,6 +139,7 @@ void main() {
             .copyWith(
               userRole: null,
               devicesInfo: null,
+              nickname: null,
             )
             .toJson();
 

@@ -155,7 +155,7 @@ void main() {
     });
     test('Is logged in', () async {
       expect(
-        appAuthenticationRepository.isLoggedIn(),
+        appAuthenticationRepository.isLoggedIn,
         isFalse,
       );
     });
@@ -183,7 +183,7 @@ void main() {
     });
     test('Is Anonymously', () async {
       expect(
-        appAuthenticationRepository.isAnonymously(),
+        appAuthenticationRepository.isAnonymously,
         false,
       );
     });

@@ -59,12 +59,12 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   /// Emits [User.empty] if the user is not authenticated.
   @override
   Stream<User> get user => _firebaseAuth.authStateChanges().map(
-        (firebaseUser) {
+        (userCredentional) {
           // debugPrint('================================================');
-          if (firebaseUser != null) {
+          if (userCredentional != null) {
             // debugPrint('Firebase Auth State Changed: User is authenticated');
-            // debugPrint('Firebase User Details: $firebaseUser');
-            final user = firebaseUser.toUser;
+            // debugPrint('Firebase User Details: $userCredentional');
+            final user = userCredentional.toUser;
             _cache.write(key: userCacheKey, value: user);
             return user;
           } else {
@@ -80,17 +80,18 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
         _firebaseAuth.currentUser?.uid ?? currentUser.id,
       )
           .map(
-        (firebaseUserSetting) {
-          if (firebaseUserSetting.isNotEmpty) {
+        (userCredentionalSetting) {
+          if (userCredentionalSetting.isNotEmpty) {
             // debugPrint('================================================');
             // debugPrint('Firebase Auth State Changed: User is authenticated');
-            // debugPrint('Firebase User Details: $firebaseUserSetting');
-            _cache.write(key: userSettingCacheKey, value: firebaseUserSetting);
+            // debugPrint('Firebase User Details: $userCredentionalSetting');
+            _cache.write(
+                key: userSettingCacheKey, value: userCredentionalSetting);
           } else {
             // debugPrint('Firebase Auth State Changed: '
             //     'User is unauthenticated (User.empty)');
           }
-          return firebaseUserSetting;
+          return userCredentionalSetting;
         },
       );
 
@@ -113,15 +114,16 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   ///
   /// Throws a [signUpWithGoogle] if an exception occurs.
   @override
-  Future<Either<SomeFailure, bool>> signUpWithGoogle() async {
+  Future<Either<SomeFailure, User?>> signUpWithGoogle() async {
     try {
       final credential = await _getGoogleAuthCredential();
       if (credential != null) {
-        await _firebaseAuth.signInWithCredential(credential);
+        final userCredentional =
+            await _firebaseAuth.signInWithCredential(credential);
 
-        return const Right(true);
+        return Right(userCredentional.user?.toUser);
       }
-      return const Right(false);
+      return const Right(null);
     } on firebase_auth.FirebaseAuthException catch (e, stack) {
       return Left(
         SignUpWithGoogleFailure.fromCode(error: e, stack: stack).status,
@@ -162,15 +164,16 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   ///
   /// Throws a [signUpWithFacebook] if an exception occurs.
   @override
-  Future<Either<SomeFailure, bool>> signUpWithFacebook() async {
+  Future<Either<SomeFailure, User?>> signUpWithFacebook() async {
     try {
       final credential = await _getFacebookAuthCredential();
       if (credential != null) {
-        await _firebaseAuth.signInWithCredential(credential);
+        final userCredentional =
+            await _firebaseAuth.signInWithCredential(credential);
 
-        return const Right(true);
+        return Right(userCredentional.user?.toUser);
       }
-      return const Right(false);
+      return const Right(null);
     } on firebase_auth.FirebaseAuthException catch (e, stack) {
       return Left(
         SignUpWithFacebookFailure.fromCode(error: e, stack: stack).status,
@@ -217,7 +220,7 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   ///
   /// Throws a [LogInWithEmailAndPasswordFailure] if an exception occurs.
   @override
-  Future<Either<SomeFailure, bool>> logInWithEmailAndPassword({
+  Future<Either<SomeFailure, User?>> logInWithEmailAndPassword({
     required String email,
     required String password,
   }) async =>
@@ -236,7 +239,7 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   ///
   /// Throws a [SendFailure] if an exception occurs.
   @override
-  Future<Either<SomeFailure, bool>> logInAnonymously() async =>
+  Future<Either<SomeFailure, User?>> logInAnonymously() async =>
       _handleAuthOperation(
         () async => _firebaseAuth.signInAnonymously(),
         ({required error, stack}) =>
@@ -247,41 +250,41 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   ///
   /// Throws a [SignUpWithEmailAndPasswordFailure] if an exception occurs.
   @override
-  Future<Either<SomeFailure, bool>> signUp({
+  Future<Either<SomeFailure, User?>> signUp({
     required String email,
     required String password,
-  }) async {
-    return _handleAuthOperation(
-      () async {
-        if (currentUser.isEmpty) {
-          await _firebaseAuth.createUserWithEmailAndPassword(
-            email: email,
-            password: password,
-          );
-        } else {
-          await _firebaseAuth.currentUser?.linkWithCredential(
-            firebase_auth.EmailAuthProvider.credential(
+  }) async =>
+      _handleAuthOperation(
+        () async {
+          if (currentUser.isEmpty) {
+            return _firebaseAuth.createUserWithEmailAndPassword(
               email: email,
               password: password,
-            ),
-          );
-          await _firebaseAuth.signInWithEmailAndPassword(
-            email: email,
-            password: password,
-          );
-        }
-      },
-      ({required error, stack}) =>
-          SignUpWithEmailAndPasswordFailure.fromCode(error: error, stack: stack)
-              .status,
-    );
-  }
+            );
+          } else {
+            await _firebaseAuth.currentUser?.linkWithCredential(
+              firebase_auth.EmailAuthProvider.credential(
+                email: email,
+                password: password,
+              ),
+            );
+            return _firebaseAuth.signInWithEmailAndPassword(
+              email: email,
+              password: password,
+            );
+          }
+        },
+        ({required error, stack}) => SignUpWithEmailAndPasswordFailure.fromCode(
+          error: error,
+          stack: stack,
+        ).status,
+      );
 
   @override
-  bool isLoggedIn() => currentUser != User.empty;
+  bool get isLoggedIn => currentUser != User.empty;
 
   @override
-  bool isAnonymously() =>
+  bool get isAnonymously =>
       _firebaseAuth.currentUser != null &&
       _firebaseAuth.currentUser!.isAnonymous;
 
@@ -299,7 +302,8 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
         _facebookSignIn.logOut(),
         _secureStorageRepository.deleteAll(),
       ]);
-      return logInAnonymously();
+      unawaited(logInAnonymously());
+      return const Right(true);
     } on firebase_auth.FirebaseAuthException catch (e, stack) {
       // debugPrint('Firebase Auth Error: ${e.message}');
       return Left(LogOutFailure.fromCode(error: e, stack: stack).status);
@@ -321,16 +325,16 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
     return token;
   }
 
-  Future<Either<SomeFailure, bool>> _handleAuthOperation(
-    Future<void> Function() operation,
+  Future<Either<SomeFailure, User?>> _handleAuthOperation(
+    Future<firebase_auth.UserCredential> Function() operation,
     SomeFailure Function({
       required firebase_auth.FirebaseAuthException error,
       StackTrace? stack,
     }) exception,
   ) async {
     try {
-      await operation();
-      return const Right(true);
+      final userCredentional = await operation();
+      return Right(userCredentional.user?.toUser);
     } on firebase_auth.FirebaseAuthException catch (e, stack) {
       // debugPrint('Firebase Auth Error: ${e.message}');
       return Left(exception(error: e, stack: stack));
@@ -383,7 +387,8 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
       await _firestoreService.deleteUserSetting(currentUser.id);
       await _firebaseAuth.currentUser?.delete();
       _cache.clear(); // Clear the cache after user deletion
-      return logInAnonymously();
+      unawaited(logInAnonymously());
+      return const Right(true);
     } on firebase_auth.FirebaseAuthException catch (e, stack) {
       // debugPrint('Firebase Auth Error: ${e.message}');
       return Left(SomeFailure.serverError(error: e, stack: stack));

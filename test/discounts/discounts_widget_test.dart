@@ -42,7 +42,7 @@ void main() {
       when(mockAuthenticationRepository.currentUserSetting).thenAnswer(
         (realInvocation) => UserSetting.empty,
       );
-      when(mockAuthenticationRepository.isAnonymouslyOrEmty()).thenAnswer(
+      when(mockAuthenticationRepository.isAnonymouslyOrEmty).thenAnswer(
         (realInvocation) => true,
       );
 
@@ -315,7 +315,7 @@ void main() {
         });
         testWidgets('Report Dialog Incorect Send(field null and user)',
             (tester) async {
-          when(mockAuthenticationRepository.isAnonymouslyOrEmty()).thenAnswer(
+          when(mockAuthenticationRepository.isAnonymouslyOrEmty).thenAnswer(
             (realInvocation) => false,
           );
 

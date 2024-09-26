@@ -24,7 +24,7 @@ void main() {
         when(
           mockAppAuthenticationRepository.logInAnonymously(),
         ).thenAnswer(
-          (_) async => const Right(true),
+          (_) async => const Right(KTestText.userAnonymous),
         );
         when(
           mockAppAuthenticationRepository.logInWithEmailAndPassword(
@@ -32,7 +32,7 @@ void main() {
             password: KTestText.passwordCorrect,
           ),
         ).thenAnswer(
-          (_) async => const Right(true),
+          (_) async => const Right(KTestText.user),
         );
         when(
           mockAppAuthenticationRepository.signUp(
@@ -40,13 +40,13 @@ void main() {
             password: KTestText.passwordCorrect,
           ),
         ).thenAnswer(
-          (_) async => const Right(true),
+          (_) async => const Right(KTestText.user),
         );
         when(mockAppAuthenticationRepository.signUpWithGoogle()).thenAnswer(
-          (_) async => const Right(true),
+          (_) async => const Right(KTestText.user),
         );
         when(mockAppAuthenticationRepository.signUpWithFacebook()).thenAnswer(
-          (_) async => const Right(true),
+          (_) async => const Right(KTestText.user),
         );
         when(mockAppAuthenticationRepository.currentUserSetting).thenAnswer(
           (_) => const UserSetting(id: KTestText.field),
@@ -80,7 +80,7 @@ void main() {
           (_) async => const Right(true),
         );
         when(
-          mockAppAuthenticationRepository.isAnonymously(),
+          mockAppAuthenticationRepository.isAnonymously,
         ).thenAnswer(
           (_) => false,
         );
@@ -178,13 +178,13 @@ void main() {
       });
       test('Is Anonymously', () async {
         expect(
-          authenticationRepository.isAnonymously(),
+          authenticationRepository.isAnonymously,
           false,
         );
       });
       test('Is Anonymously Or Emty', () async {
         expect(
-          authenticationRepository.isAnonymouslyOrEmty(),
+          authenticationRepository.isAnonymouslyOrEmty,
           true,
         );
       });

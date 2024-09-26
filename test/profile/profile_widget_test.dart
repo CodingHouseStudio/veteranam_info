@@ -45,7 +45,7 @@ void main() {
         (realInvocation) async => const Right(true),
       );
 
-      when(mockAuthenticationRepository.isAnonymouslyOrEmty()).thenAnswer(
+      when(mockAuthenticationRepository.isAnonymouslyOrEmty).thenAnswer(
         (realInvocation) => false,
       );
     });

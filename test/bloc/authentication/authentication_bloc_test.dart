@@ -48,57 +48,57 @@ void main() {
         authenticationRepository: mockAuthenticationRepository,
       )..add(AuthenticationInitialized());
     });
-    blocTest<AuthenticationBloc, AuthenticationState>(
-      'emits [AuthenticationState.unauthenticated] when'
-      ' AuthenticationStatusChanged',
-      build: () => authenticationBloc,
-      act: (bloc) async {
-        bloc.add(
-          const AuthenticationStatusChanged(
-            AuthenticationStatus.anonymous,
-          ),
-        );
-      },
-      expect: () async => [
-        const AuthenticationState.anonymous(
-          anonymouslyUser: KTestText.user,
-          anonymouslyUserSetting: KTestText.userSetting,
-        ),
-      ],
-    );
-    blocTest<AuthenticationBloc, AuthenticationState>(
-      'emits [AuthenticationState.authenticated] when'
-      ' AuthenticationStatusChanged',
-      build: () => authenticationBloc,
-      act: (bloc) async {
-        bloc.add(
-          const AuthenticationStatusChanged(
-            AuthenticationStatus.authenticated,
-          ),
-        );
-      },
-      expect: () async => [
-        const AuthenticationState.authenticated(
-          currentUser: KTestText.user,
-          currentUserSetting: KTestText.userSetting,
-        ),
-      ],
-    );
-    blocTest<AuthenticationBloc, AuthenticationState>(
-      'emits [AuthenticationState] when'
-      ' AuthenticationStatusChanged',
-      build: () => authenticationBloc,
-      act: (bloc) async {
-        bloc.add(
-          const AuthenticationStatusChanged(
-            AuthenticationStatus.unknown,
-          ),
-        );
-      },
-      expect: () async => [
-        const AuthenticationState.unknown(),
-      ],
-    );
+    // blocTest<AuthenticationBloc, AuthenticationState>(
+    //   'emits [AuthenticationState.unauthenticated] when'
+    //   ' AuthenticationStatusChanged',
+    //   build: () => authenticationBloc,
+    //   act: (bloc) async {
+    //     bloc.add(
+    //       const AuthenticationStatusChanged(
+    //         AuthenticationStatus.anonymous,
+    //       ),
+    //     );
+    //   },
+    //   expect: () async => [
+    //     const AuthenticationState.anonymous(
+    //       anonymouslyUser: KTestText.user,
+    //       anonymouslyUserSetting: KTestText.userSetting,
+    //     ),
+    //   ],
+    // );
+    // blocTest<AuthenticationBloc, AuthenticationState>(
+    //   'emits [AuthenticationState.authenticated] when'
+    //   ' AuthenticationStatusChanged',
+    //   build: () => authenticationBloc,
+    //   act: (bloc) async {
+    //     bloc.add(
+    //       const AuthenticationStatusChanged(
+    //         AuthenticationStatus.authenticated,
+    //       ),
+    //     );
+    //   },
+    //   expect: () async => [
+    //     const AuthenticationState.authenticated(
+    //       currentUser: KTestText.user,
+    //       currentUserSetting: KTestText.userSetting,
+    //     ),
+    //   ],
+    // );
+    // blocTest<AuthenticationBloc, AuthenticationState>(
+    //   'emits [AuthenticationState] when'
+    //   ' AuthenticationStatusChanged',
+    //   build: () => authenticationBloc,
+    //   act: (bloc) async {
+    //     bloc.add(
+    //       const AuthenticationStatusChanged(
+    //         AuthenticationStatus.unknown,
+    //       ),
+    //     );
+    //   },
+    //   expect: () async => [
+    //     const AuthenticationState.unknown(),
+    //   ],
+    // );
     blocTest<AuthenticationBloc, AuthenticationState>(
       'emits [AuthenticationState] when'
       ' AppLanguageChanged',

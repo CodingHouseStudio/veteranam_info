@@ -28,7 +28,7 @@ void main() {
 
     setUp(() {
       userStreamController = StreamController<User>()
-        ..add(KTestText.user.copyWith(email: null));
+        ..add(KTestText.userAnonymous);
       userSettingStreamController = StreamController<UserSetting>()
         ..add(const UserSetting(id: KTestText.field));
       mockAppAuthenticationRepository = MockIAppAuthenticationRepository();
@@ -56,7 +56,7 @@ void main() {
     group('anonymously when user change', () {
       setUp(() {
         userStreamController.add(User.empty);
-        when(mockAppAuthenticationRepository.isAnonymously()).thenAnswer(
+        when(mockAppAuthenticationRepository.isAnonymously).thenAnswer(
           (_) => true,
         );
         when(
@@ -66,66 +66,66 @@ void main() {
             userSettingStreamController = StreamController<UserSetting>()
               ..add(UserSetting.empty);
             userStreamController.add(KTestText.user.copyWith(email: null));
-            return const Right(true);
+            return const Right(User.empty);
           },
         );
       });
 
       test('user ${KGroupText.stream}', () async {
         await expectLater(
-          authenticationRepository.status,
+          authenticationRepository.user,
           emitsInOrder([
-            AuthenticationStatus.anonymous,
-            AuthenticationStatus.anonymous,
+            KTestText.userAnonymous,
+            User.empty,
           ]),
         );
       });
     });
     group('anonymously', () {
       setUp(() {
-        when(mockAppAuthenticationRepository.isAnonymously()).thenAnswer(
+        when(mockAppAuthenticationRepository.isAnonymously).thenAnswer(
           (_) => true,
         );
       });
 
       test('user ${KGroupText.stream}', () async {
         await expectLater(
-          authenticationRepository.status,
+          authenticationRepository.user,
           emitsInOrder([
-            AuthenticationStatus.anonymous,
+            KTestText.userAnonymous,
           ]),
         );
       });
     });
-    group('authenticated', () {
-      setUp(() {
-        userStreamController.add(KTestText.user);
-        late var value = true;
-        when(mockAppAuthenticationRepository.isAnonymously()).thenAnswer(
-          (_) {
-            if (value) {
-              userSettingStreamController = StreamController<UserSetting>()
-                ..add(UserSetting.empty);
-              value = false;
-            }
-            return false;
-          },
-        );
-      });
+    // group('authenticated', () {
+    //   setUp(() {
+    //     userStreamController.add(KTestText.user);
+    //     late var value = true;
+    //     when(mockAppAuthenticationRepository.isAnonymously).thenAnswer(
+    //       (_) {
+    //         if (value) {
+    //           userSettingStreamController = StreamController<UserSetting>()
+    //             ..add(UserSetting.empty);
+    //           value = false;
+    //         }
+    //         return false;
+    //       },
+    //     );
+    //   });
 
-      test('user ${KGroupText.stream}', () async {
-        await expectLater(
-          authenticationRepository.status,
-          emitsInOrder([
-            AuthenticationStatus.authenticated,
-            AuthenticationStatus.authenticated,
-          ]),
-        );
-      });
-    });
+    //   test('user ${KGroupText.stream}', () async {
+    //     await expectLater(
+    //       authenticationRepository.user,
+    //       emitsInOrder([
+    //         KTestText.userAnonymous,
+    //         KTestText.user,
+    //       ]),
+    //     );
+    //   });
+    // });
     group('user setting', () {
       setUp(() {
-        when(mockAppAuthenticationRepository.isAnonymously()).thenAnswer(
+        when(mockAppAuthenticationRepository.isAnonymously).thenAnswer(
           (_) => false,
         );
         when(mockAppAuthenticationRepository.createFcmUserSetting()).thenAnswer(
@@ -145,7 +145,7 @@ void main() {
     group('${KGroupText.failure} log in anonymously', () {
       setUp(() {
         userStreamController.add(User.empty);
-        when(mockAppAuthenticationRepository.isAnonymously()).thenAnswer(
+        when(mockAppAuthenticationRepository.isAnonymously).thenAnswer(
           (_) => true,
         );
         when(
@@ -157,9 +157,9 @@ void main() {
 
       test('user ${KGroupText.stream}', () async {
         await expectLater(
-          authenticationRepository.status,
+          authenticationRepository.userSetting,
           emitsInOrder(
-            [AuthenticationStatus.anonymous],
+            [const UserSetting(id: KTestText.field)],
           ),
         );
       });

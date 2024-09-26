@@ -16,11 +16,11 @@ class AuthenticationRepository {
     this.iAppAuthenticationRepository,
   ) {
     // Listen to currentUser changes and emit auth status
-    _authenticationStatuscontroller =
-        StreamController<AuthenticationStatus>.broadcast(
-      onListen: _onUserStreamListen,
-      onCancel: _onUserStreamCancel,
-    );
+    // _authenticationStatuscontroller =
+    //     StreamController<AuthenticationStatus>.broadcast(
+    //   onListen: _onUserStreamListen,
+    //   onCancel: _onUserStreamCancel,
+    // );
     _userSettingController = StreamController<UserSetting>.broadcast(
       onListen: _onUserStreamListen,
       onCancel: _onUserStreamCancel,
@@ -32,10 +32,11 @@ class AuthenticationRepository {
   }
 
   final IAppAuthenticationRepository iAppAuthenticationRepository;
-  late StreamController<AuthenticationStatus> _authenticationStatuscontroller;
+  // late StreamController<AuthenticationStatus>
+  // _authenticationStatuscontroller;
   late StreamController<UserSetting> _userSettingController;
   late StreamController<User> _userController;
-  StreamSubscription<User>? _statusUserSubscription;
+  // StreamSubscription<User>? _statusUserSubscription;
   StreamSubscription<User>? _userSubscription;
   StreamSubscription<UserSetting>? _userSettingSubscription;
 
@@ -64,15 +65,15 @@ class AuthenticationRepository {
             );
           },
         );
-        if (isAnonymously()) {
-          _authenticationStatuscontroller.add(
-            AuthenticationStatus.anonymous,
-          );
-          return;
-        }
-        _authenticationStatuscontroller.add(
-          AuthenticationStatus.authenticated,
-        );
+        // if (isAnonymously()) {
+        //   _authenticationStatuscontroller.add(
+        //     AuthenticationStatus.anonymous,
+        //   );
+        //   return;
+        // }
+        // _authenticationStatuscontroller.add(
+        //   AuthenticationStatus.authenticated,
+        // );
 
         return;
       }
@@ -89,8 +90,8 @@ class AuthenticationRepository {
     _userSubscription = null;
   }
 
-  Stream<AuthenticationStatus> get status =>
-      _authenticationStatuscontroller.stream;
+  // Stream<AuthenticationStatus> get status =>
+  //     _authenticationStatuscontroller.stream;
   Stream<UserSetting> get userSetting => _userSettingController.stream;
   Stream<User> get user => _userController.stream;
 
@@ -112,11 +113,15 @@ class AuthenticationRepository {
 
   Future<Either<SomeFailure, bool>> deleteUser() async {
     final result = await iAppAuthenticationRepository.deleteUser();
-    // resault.fold(
-    //   (l) => debugPrint(l.toString()),
-    //   (r) => debugPrint('ever reached here?'),
-    // );
-    return result;
+    return result.fold(
+      (l) {
+        return Left(l); // debugPrint(l.toString())
+      },
+      (r) {
+        _userController.add(User.empty);
+        return Right(r); //debugPrint('ever reached here?')
+      },
+    );
   }
 
   UserSetting get currentUserSetting {
@@ -134,15 +139,17 @@ class AuthenticationRepository {
     return result.fold(
       (l) {
         // debugPrint('error: $l');
-        _authenticationStatuscontroller.add(
-          AuthenticationStatus.anonymous,
-        );
+        // _authenticationStatuscontroller.add(
+        //   AuthenticationStatus.anonymous,
+        // );
         return Left(l);
       },
       (r) {
         // debugPrint('authenticated');
-        _authenticationStatuscontroller.add(AuthenticationStatus.authenticated);
-        return Right(r);
+        if (r != null) {
+          _userController.add(r);
+        }
+        return const Right(true);
       },
     );
   }
@@ -158,15 +165,17 @@ class AuthenticationRepository {
     return result.fold(
       (l) {
         // debugPrint('error: $l');
-        _authenticationStatuscontroller.add(
-          AuthenticationStatus.anonymous,
-        );
+        // _authenticationStatuscontroller.add(
+        //   AuthenticationStatus.anonymous,
+        // );
         return Left(l);
       },
       (r) {
         // debugPrint('authenticated');
-        _authenticationStatuscontroller.add(AuthenticationStatus.authenticated);
-        return Right(r);
+        if (r != null) {
+          _userController.add(r);
+        }
+        return const Right(true);
       },
     );
   }
@@ -191,13 +200,15 @@ class AuthenticationRepository {
     return result.fold(
       (l) {
         // debugPrint('error: $l');
-        _authenticationStatuscontroller.add(AuthenticationStatus.unknown);
+        // _authenticationStatuscontroller.add(AuthenticationStatus.unknown);
         return Left(l);
       },
       (r) {
         // debugPrint('authenticated');
-        _authenticationStatuscontroller.add(AuthenticationStatus.anonymous);
-        return Right(r);
+        if (r != null) {
+          _userController.add(r);
+        }
+        return const Right(true);
       },
     );
   }
@@ -207,15 +218,17 @@ class AuthenticationRepository {
     return result.fold(
       (l) {
         // debugPrint('error: $l');
-        _authenticationStatuscontroller.add(
-          AuthenticationStatus.anonymous,
-        );
+        // _authenticationStatuscontroller.add(
+        //   AuthenticationStatus.anonymous,
+        // );
         return Left(l);
       },
       (r) {
         // debugPrint('authenticated');
-        _authenticationStatuscontroller.add(AuthenticationStatus.authenticated);
-        return Right(r);
+        if (r != null) {
+          _userController.add(r);
+        }
+        return const Right(true);
       },
     );
   }
@@ -225,15 +238,17 @@ class AuthenticationRepository {
     return result.fold(
       (l) {
         // debugPrint('error: $l');
-        _authenticationStatuscontroller.add(
-          AuthenticationStatus.anonymous,
-        );
+        // _authenticationStatuscontroller.add(
+        //   AuthenticationStatus.anonymous,
+        // );
         return Left(l);
       },
       (r) {
         // debugPrint('authenticated');
-        _authenticationStatuscontroller.add(AuthenticationStatus.authenticated);
-        return Right(r);
+        if (r != null) {
+          _userController.add(r);
+        }
+        return const Right(true);
       },
     );
   }
@@ -250,7 +265,8 @@ class AuthenticationRepository {
       },
       (r) {
         // debugPrint('authenticated');
-        _authenticationStatuscontroller.add(AuthenticationStatus.unknown);
+        _userController.add(User.empty);
+
         return Right(r);
       },
     );
@@ -343,15 +359,15 @@ class AuthenticationRepository {
     }
   }
 
-  bool isAnonymously() => iAppAuthenticationRepository.isAnonymously();
+  bool get isAnonymously => iAppAuthenticationRepository.isAnonymously;
 
-  bool isAnonymouslyOrEmty() =>
-      iAppAuthenticationRepository.isAnonymously() || currentUser.isEmpty;
+  bool get isAnonymouslyOrEmty =>
+      iAppAuthenticationRepository.isAnonymously || currentUser.isEmpty;
 
   // @disposeMethod
   void dispose() {
-    _authenticationStatuscontroller.close();
-    _statusUserSubscription?.cancel();
+    _userController.close();
+    _userSubscription?.cancel();
 
     _userSettingController.close();
     _userSettingSubscription?.cancel();

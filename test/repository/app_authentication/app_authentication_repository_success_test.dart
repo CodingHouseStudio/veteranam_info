@@ -209,19 +209,19 @@ void main() {
       ).thenAnswer(
         (_) async {},
       );
-      when(
-        mockFirebaseAuth.currentUser?.updateDisplayName(
-          KTestText.profileUser.name,
-        ),
-      ).thenAnswer(
-        (_) async {},
-      );
+      // when(
+      //   mockFirebaseAuth.currentUser?.updateDisplayName(
+      //     KTestText.profileUser.name,
+      //   ),
+      // ).thenAnswer(
+      //   (_) async {},
+      // );
 
-      when(
-        mockUser.updatePhotoURL(KTestText.downloadURL),
-      ).thenAnswer(
-        (_) async {},
-      );
+      // when(
+      //   mockUser.updatePhotoURL(KTestText.downloadURL),
+      // ).thenAnswer(
+      //   (_) async {},
+      // );
 
       if (GetIt.I.isRegistered<FirestoreService>()) {
         GetIt.I.unregister<FirestoreService>();
@@ -280,7 +280,7 @@ void main() {
     });
     test('Is logged in', () {
       expect(
-        appAuthenticationRepository.isLoggedIn(),
+        appAuthenticationRepository.isLoggedIn,
         isTrue,
       );
     });
@@ -406,7 +406,7 @@ void main() {
     });
     test('Is Anonymously', () async {
       expect(
-        appAuthenticationRepository.isAnonymously(),
+        appAuthenticationRepository.isAnonymously,
         true,
       );
     });

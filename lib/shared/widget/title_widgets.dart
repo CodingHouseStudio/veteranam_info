@@ -307,31 +307,20 @@ class ShortTitleIconWidget extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        if (firstIcon) ...[
+          iconWidget,
+          if (!expanded)
+            if (isDesk)
+              KSizedBox.kWidthSizedBox32
+            else
+              KSizedBox.kWidthSizedBox16,
+        ],
         if (expanded) Expanded(child: text) else text,
         if (!expanded)
           if (isDesk)
             KSizedBox.kWidthSizedBox32
           else
             KSizedBox.kWidthSizedBox24,
-        IconWidget(
-          icon: KIcon.arrowDownLeft,
-          padding: isDesk ? KPadding.kPaddingSize20 : KPadding.kPaddingSize8,
-        ),
-        if (firstIcon) ...[
-          iconWidget,
-          if (isDesk)
-            KSizedBox.kWidthSizedBox32
-          else
-            KSizedBox.kWidthSizedBox16,
-        ],
-        Text(
-          title,
-          key: titleKey,
-          style: isDesk
-              ? AppTextStyle.materialThemeDisplayLarge
-              : AppTextStyle.materialThemeDisplaySmall,
-        ),
-        if (isDesk) KSizedBox.kWidthSizedBox32 else KSizedBox.kWidthSizedBox24,
         if (!firstIcon) iconWidget,
       ],
     );

@@ -60,6 +60,10 @@ void main() {
       when(mockUserCredential.credential).thenAnswer(
         (_) => KTestText.authCredential,
       );
+
+      when(mockUserCredential.user).thenAnswer(
+        (_) => null,
+      );
       when(mockGoogleSignIn.signIn()).thenAnswer(
         (_) async => mockGoogleSignInAccount,
       );
@@ -114,7 +118,8 @@ void main() {
     test('Sign up with google', () async {
       expect(
         await appAuthenticationRepository.signUpWithGoogle(),
-        isA<Right<SomeFailure, bool>>().having((e) => e.value, 'value', isTrue),
+        isA<Right<SomeFailure, User?>>()
+            .having((e) => e.value, 'value', isNull),
       );
     });
     test('Sign up with facebook(credential null)', () async {

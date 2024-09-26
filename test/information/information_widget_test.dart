@@ -32,7 +32,7 @@ void main() {
       when(mockAuthenticationRepository.currentUserSetting).thenAnswer(
         (realInvocation) => UserSetting.empty,
       );
-      when(mockAuthenticationRepository.isAnonymouslyOrEmty()).thenAnswer(
+      when(mockAuthenticationRepository.isAnonymouslyOrEmty).thenAnswer(
         (realInvocation) => true,
       );
       for (var i = 0; i < 5; i++) {

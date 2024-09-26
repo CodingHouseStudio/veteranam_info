@@ -41,19 +41,33 @@ class _ProfileFormWidgetState extends State<ProfileFormWidget> {
     surnameController = TextEditingController(text: widget.initialSurname);
     emailController = TextEditingController(text: widget.initialEmail);
     nicknameController = TextEditingController(text: widget.initialNickname);
+
+    super.initState();
+    nickname();
+  }
+
+  void nickname() {
     var counter = 0;
     timer = Timer.periodic(
       const Duration(seconds: 1),
       (Timer timer) {
-        if (counter < 5 && (widget.initialNickname?.isEmpty ?? true)) {
+        if (counter < 5 &&
+            (context
+                    .read<AuthenticationBloc>()
+                    .state
+                    .userSetting
+                    .nickname
+                    ?.isEmpty ??
+                true)) {
           counter++;
         } else {
-          nicknameController.text = widget.initialNickname ?? '';
+          nicknameController.text =
+              context.read<AuthenticationBloc>().state.userSetting.nickname ??
+                  '';
           timer.cancel();
         }
       },
     );
-    super.initState();
   }
 
   @override

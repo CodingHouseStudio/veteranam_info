@@ -146,6 +146,10 @@ abstract class KTestText {
     photo: image,
   );
 
+  static const userAnonymous = User(
+    id: '1',
+  );
+
   static const profileUser = User(
     id: '1',
     email: userEmail,
