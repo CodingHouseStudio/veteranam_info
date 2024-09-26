@@ -7,4 +7,11 @@ abstract class KSecurityKeys {
       'BEf26OVDQTPQ2mVfsq6bE3ef1QFEIRJ5jmgT8BCPYQV4_IiheGU7sd3bxwEj8c-LaAZ6gqY8X3os_KV0wndt8oc';
   static const sentryDSN =
       'https://3bbae5f2c67d49a886e0594ae84de31a@o4504073954590720.ingest.us.sentry.io/4504073955704832';
+  static const firebaseAppCheckProd =
+      '6LcHRzkqAAAAACJhOV9aPEb3tcA8wAzS-a5Qww_J';
+  static const firebaseAppCheckProdDebug =
+      '326946D7-ABAE-4F1A-AEE7-395C5E23F0D4';
+  static const firebaseAppCheckDev = '6LevUCsqAAAAAEG431Qk2NsMNXurWJ8vs89UkrEG';
+  static const firebaseAppCheckDevDebug =
+      'ADD8F712-B8F6-417F-8502-27E91EDC76B4';
 }
