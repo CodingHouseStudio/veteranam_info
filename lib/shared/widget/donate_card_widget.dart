@@ -51,7 +51,8 @@ class DonateCardWidget extends StatelessWidget {
                     )
                   : EdgeInsets.zero,
               child: Text(
-                context.isEnglish ? fundModel.titleEN : fundModel.title,
+                fundModel.title
+                    .getTrnslation(en: fundModel.titleEN, context: context),
                 key: KWidgetkeys.widget.donateCard.title,
                 style: titleStyle ?? AppTextStyle.materialThemeHeadlineLarge,
               ),
