@@ -48,7 +48,7 @@ void main() {
 
       discountsAddBloc = DiscountsAddBloc(
         discountRepository: mockDiscountsRepository,
-        appAuthenticationBloc: mockAppAuthenticationRepository,
+        appAuthenticationRepository: mockAppAuthenticationRepository,
       );
     });
     blocTest<DiscountsAddBloc, DiscountsAddState>(

@@ -38,6 +38,8 @@ class TextFieldWidget extends StatefulWidget {
     this.suffixIconPadding,
     this.inputFormatterList,
     this.showErrorText,
+    this.labelTextStyle,
+    this.textStyle,
   });
   final Key widgetKey;
   final TextAlign? textAlign;
@@ -72,6 +74,8 @@ class TextFieldWidget extends StatefulWidget {
   final double? suffixIconPadding;
   final List<TextInputFormatter>? inputFormatterList;
   final bool? showErrorText;
+  final TextStyle? labelTextStyle;
+  final TextStyle? textStyle;
 
   @override
   State<TextFieldWidget> createState() => _TextFieldWidgetState();
@@ -120,10 +124,10 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
         keyboardType: widget.keyboardType ?? TextInputType.text,
         textInputAction: TextInputAction.done,
         textAlign: widget.textAlign ?? TextAlign.start,
-        style: AppTextStyle.materialThemeTitleMedium,
+        style: widget.textStyle ?? AppTextStyle.materialThemeTitleMedium,
         // context.theme.textTheme.headlineSmall,
         inputFormatters: widget.inputFormatterList,
-        onChanged: widget.onChanged,
+        onChanged: widget.onChanged, mouseCursor: SystemMouseCursors.click,
         decoration: KWidgetTheme.inputDecoration.copyWith(
           hintStyle: widget.hintStyle,
           contentPadding: widget.contentPadding ??
@@ -154,6 +158,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
           ),
           prefixIcon: widget.prefixIcon,
           errorMaxLines: widget.errorMaxLines,
+          labelStyle: widget.labelTextStyle,
         ),
       ),
     );

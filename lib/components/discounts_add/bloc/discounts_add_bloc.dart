@@ -12,27 +12,32 @@ part 'discounts_add_bloc.freezed.dart';
 class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
   DiscountsAddBloc({
     required IDiscountRepository discountRepository,
-    required IAppAuthenticationRepository appAuthenticationBloc,
+    required IAppAuthenticationRepository appAuthenticationRepository,
+    required ICitiesRepository citiesRepository,
   })  : _discountRepository = discountRepository,
-        _appAuthenticationReporsitory = appAuthenticationBloc,
+        _appAuthenticationReporsitory = appAuthenticationRepository,
+        _citiesRepository = citiesRepository,
         super(
           const _Initial(
             categoryList: [],
             category: MessageFieldModel.pure(),
             city: CitiesFieldModel.pure(),
-            period: MessageFieldModel.pure(),
+            period: DateFieldModel.pure(),
             title: MessageFieldModel.pure(),
             discounts: DiscountsFieldModel.pure(),
             link: LinkFieldModel.pure(),
             description: MessageFieldModel.pure(),
             exclusions: MessageFieldModel.pure(),
             formState: DiscountsAddEnum.initial,
+            citiesList: [],
+            isIndefinitely: false,
           ),
         ) {
     on<_Started>(_onStarted);
     on<_CategoryUpdate>(_onCategoryUpdated);
     on<_CityUpdate>(_onCityUpdated);
     on<_PeriodUpdate>(_onPeriodUpdated);
+    on<_IndefinitelyUpdate>(_onIndefinitelyUpdate);
     on<_TitleUpdate>(_onTitleUpdated);
     on<_DiscountAddItem>(_onDiscountAddItem);
     on<_DiscountRemoveItem>(_onDiscountRemoveItem);
@@ -44,6 +49,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
   }
   final IDiscountRepository _discountRepository;
   final IAppAuthenticationRepository _appAuthenticationReporsitory;
+  final ICitiesRepository _citiesRepository;
 
   @visibleForTesting
   static DiscountModel? sendDiscountModel;
@@ -61,14 +67,23 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
         categoryList: uniqueCategories,
         category: const MessageFieldModel.pure(),
         city: const CitiesFieldModel.pure(),
-        period: const MessageFieldModel.pure(),
+        period: const DateFieldModel.pure(),
         title: const MessageFieldModel.pure(),
         discounts: const DiscountsFieldModel.pure(),
         link: const LinkFieldModel.pure(),
         description: const MessageFieldModel.pure(),
         exclusions: const MessageFieldModel.pure(),
         formState: DiscountsAddEnum.initial,
+        isIndefinitely: false,
+        citiesList: [],
       ),
+    );
+
+    final result = await _citiesRepository.getCities();
+
+    result.fold(
+      (l) => emit(state.copyWith(failure: l._toDiscountsAdd())),
+      (r) => emit(state.copyWith(citiesList: r)),
     );
   }
 
@@ -101,12 +116,29 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
     );
   }
 
-  void _onPeriodUpdated(
+  Future<void> _onIndefinitelyUpdate(
+    _IndefinitelyUpdate event,
+    Emitter<DiscountsAddState> emit,
+  ) async {
+    emit(
+      state.copyWith(
+        isIndefinitely: !state.isIndefinitely,
+        formState: DiscountsAddEnum.inProgress,
+      ),
+    );
+  }
+
+  Future<void> _onPeriodUpdated(
     _PeriodUpdate event,
     Emitter<DiscountsAddState> emit,
-  ) {
-    final periodFieldModel =
-        event.period == null ? null : MessageFieldModel.dirty(event.period!);
+  ) async {
+    late DateTime? date;
+    try {
+      date = await event.period;
+    } catch (e) {
+      date = null;
+    }
+    final periodFieldModel = DateFieldModel.dirty(date);
 
     emit(
       state.copyWith(
@@ -225,7 +257,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
   ) async {
     if (state.formState.isMain) {
       if (Formz.validate([state.category, state.city]) &&
-          (state.period?.isValid ?? true)) {
+          (state.period.isValid || state.isIndefinitely)) {
         emit(state.copyWith(formState: DiscountsAddEnum.detail));
       } else {
         emit(state.copyWith(formState: DiscountsAddEnum.invalidData));
@@ -258,7 +290,13 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
         territory: null,
         territoryEN: null,
         exclusions: state.exclusions.value,
-        expiration: state.period?.value,
+        expiration:
+            // ignore: lines_longer_than_80_chars
+            'До ${state.isIndefinitely ? null : state.period.value?.toLocalDateString(
+                context: null,
+                localeValue: Language.ukrain.value.languageCode,
+                showDay: true,
+              )}',
         dateVerified: ExtendedDateTime.current,
         link: state.link.value,
         userId: _appAuthenticationReporsitory.currentUser.id,

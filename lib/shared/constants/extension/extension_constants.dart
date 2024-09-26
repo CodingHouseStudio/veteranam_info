@@ -4,9 +4,8 @@ import 'package:collection/collection.dart';
 import 'package:feedback/feedback.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart' show Uint8List, kIsWeb, kReleaseMode;
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:veteranam/components/components.dart';
 import 'package:veteranam/shared/shared.dart';
@@ -42,16 +41,25 @@ extension ItemLoadedExtensions on int {
 }
 
 extension LocalizedDateTime on DateTime {
-  String toLocalDateString(BuildContext context) {
+  String toLocalDateString({
+    required BuildContext? context,
+    String? localeValue,
+    bool showDay = false,
+  }) {
     final locale = context
-        .read<AuthenticationBloc>()
-        .state
-        .userSetting
-        .locale
-        .value
-        .languageCode;
-    initializeDateFormatting(locale);
-    return DateFormat.yMMMM(locale).format(toLocal());
+            ?.read<AuthenticationBloc>()
+            .state
+            .userSetting
+            .locale
+            .value
+            .languageCode ??
+        localeValue;
+    // initializeDateFormatting(locale);
+    if (showDay) {
+      return DateFormat.yMMMMd(locale).format(toLocal());
+    } else {
+      return DateFormat.yMMMM(locale).format(toLocal());
+    }
   }
 }
 
@@ -281,6 +289,13 @@ extension ContextExtensions on BuildContext {
       );
     }
   }
+
+  Future<DateTime?> get getDate => showDatePicker(
+        context: this,
+        initialDate: ExtendedDateTime.current,
+        firstDate: ExtendedDateTime.current,
+        lastDate: DateTime(2026),
+      );
 }
 
 extension DiscountEnumExtensions on DiscountEnum {

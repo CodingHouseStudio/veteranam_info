@@ -1403,6 +1403,17 @@ class MockFirestoreService extends _i1.Mock implements _i3.FirestoreService {
         returnValue: _i8.Future<void>.value(),
         returnValueForMissingStub: _i8.Future<void>.value(),
       ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<List<_i3.CityModel>> getCities() => (super.noSuchMethod(
+        Invocation.method(
+          #getCities,
+          [],
+        ),
+        returnValue: _i8.Future<List<_i3.CityModel>>.value(<_i3.CityModel>[]),
+        returnValueForMissingStub:
+            _i8.Future<List<_i3.CityModel>>.value(<_i3.CityModel>[]),
+      ) as _i8.Future<List<_i3.CityModel>>);
 }
 
 /// A class which mocks [IInvestorsRepository].

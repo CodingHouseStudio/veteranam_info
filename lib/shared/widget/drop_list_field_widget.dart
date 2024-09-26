@@ -107,9 +107,9 @@ class DropListFieldImplementationWidget extends StatelessWidget {
         contentPadding: (isDesk
             ? const EdgeInsets.symmetric(
                 horizontal: KPadding.kPaddingSize32,
-                vertical: KPadding.kPaddingSize20,
+                vertical: KPadding.kPaddingSize16,
               )
-            : const EdgeInsets.all(KPadding.kPaddingSize20)),
+            : const EdgeInsets.all(KPadding.kPaddingSize16)),
         floatingLabelBehavior: (elementList?.isEmpty ?? true)
             ? null
             : FloatingLabelBehavior.always,
@@ -200,9 +200,8 @@ class DropListFieldImplementationWidget extends StatelessWidget {
       elementList != null && elementList!.isNotEmpty
           ? Row(
               children: [
-                const Spacer(),
+                // const Spacer(),
                 Expanded(
-                  flex: 4,
                   child: ScrollConfiguration(
                     behavior: CustomScrollBehavior(),
                     child: SingleChildScrollView(

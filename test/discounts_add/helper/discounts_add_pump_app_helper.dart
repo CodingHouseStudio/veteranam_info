@@ -34,7 +34,7 @@ void _registerDiscountsAddBloc({
 }) {
   final discountsAddBloc = DiscountsAddBloc(
     discountRepository: mockDiscountRepository,
-    appAuthenticationBloc: mockAppAuthenticationRepository,
+    appAuthenticationRepository: mockAppAuthenticationRepository,
   );
   if (GetIt.I.isRegistered<DiscountsAddBloc>()) {
     GetIt.I.unregister<DiscountsAddBloc>();
