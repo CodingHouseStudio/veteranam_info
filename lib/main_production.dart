@@ -87,9 +87,7 @@ Future<void> main() async {
     // {
     await FirebaseAppCheck.instanceFor(app: app).activate(
       webProvider: ReCaptchaV3Provider(
-        kReleaseMode
-            ? KSecurityKeys.firebaseAppCheckProd
-            : KSecurityKeys.firebaseAppCheckProdDebug,
+        KSecurityKeys.firebaseAppCheckProd,
       ),
       androidProvider:
           kReleaseMode ? AndroidProvider.playIntegrity : AndroidProvider.debug,
@@ -98,9 +96,7 @@ Future<void> main() async {
     );
     await FirebaseAppCheck.instance.activate(
       webProvider: ReCaptchaV3Provider(
-        kReleaseMode
-            ? KSecurityKeys.firebaseAppCheckProd
-            : KSecurityKeys.firebaseAppCheckProdDebug,
+        KSecurityKeys.firebaseAppCheckProd,
       ),
       androidProvider:
           kReleaseMode ? AndroidProvider.playIntegrity : AndroidProvider.debug,
