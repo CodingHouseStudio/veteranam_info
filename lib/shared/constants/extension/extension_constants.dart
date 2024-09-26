@@ -61,23 +61,33 @@ extension DiscountModelLocation on DiscountModel {
   //       if (subLocation != null) ...subLocation!.getList(context),
   //     ];
   String getDescription(BuildContext context) =>
-      '${context.isEnglish ? descriptionEN : description}\n'
+      '${description.getTrnslation(en: descriptionEN, context: context)}\n'
       '\n***${context.l10n.toGetItYouNeed}***\n'
-      '\n- ${context.isEnglish ? requirementsEN : requirements}\n'
-      '\n${context.isEnglish ? exclusionsEN : exclusions}'
+      '\n- ${requirements.getTrnslation(en: requirementsEN, context: context)}'
+      '${exclusions != null ? _getMarkdownExclusions : ''}\n'
       '${additionalDetails != null ? _getMarkdownAdditionalDetails : ''}'
       '${phoneNumber != null ? _getMarkdownPhoneNumber(context) : ''}';
 
-  String _getMarkdownAdditionalDetails(BuildContext context) => '\n\n'
-      '${context.isEnglish ? additionalDetailsEN : additionalDetails ?? ''}';
+  String _getMarkdownAdditionalDetails(BuildContext context) =>
+      '\n\n${additionalDetails.getTrnslation(
+            en: additionalDetailsEN,
+            context: context,
+          ) ?? ''}';
 
   String _getMarkdownPhoneNumber(BuildContext context) =>
       '\n\n***${context.l10n.callForDetails}:***'
       ' ${KPlatformConstants.isWebDesktop ? '***' : '['}'
       '$phoneNumber'
       '${KPlatformConstants.isWebDesktop ? '***' : '](tel:'
-          // ignore: lines_longer_than_80_chars
-          '${phoneNumber!.replaceAll('(', '').replaceAll(')', '').replaceAll(' ', '')})'}';
+          '${phoneNumber!.replaceAll('(', '').replaceAll(
+                ')',
+                '',
+              ).replaceAll(' ', '')})'}';
+  String _getMarkdownExclusions(BuildContext context) => '\n\n'
+      '${exclusions.getTrnslation(
+            en: exclusionsEN,
+            context: context,
+          ) ?? ''}';
 
   List<String> getCityList(BuildContext context) => [
         if (context.isEnglish)
