@@ -31,11 +31,16 @@ class CardTextDetailWidget extends StatefulWidget {
 
 class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
   late bool fullText;
+  late bool isSmallText;
 
   @override
   void initState() {
     super.initState();
-    fullText = false;
+    isSmallText = widget.text.length <=
+        (widget.isDesk
+            ? KDimensions.descriptionDeskHideLength
+            : KDimensions.descriptionMobHideLength);
+    fullText = isSmallText;
   }
 
   @override
@@ -67,9 +72,11 @@ class _CardTextDetailWidgetState extends State<CardTextDetailWidget> {
                 alignment: Alignment.centerLeft,
                 child: TextButton(
                   key: KWidgetkeys.widget.cardTextDetail.button,
-                  onPressed: () => setState(() {
-                    fullText = !fullText;
-                  }),
+                  onPressed: isSmallText
+                      ? null
+                      : () => setState(() {
+                            fullText = !fullText;
+                          }),
                   style: widget.buttonStyle ??
                       KButtonStyles.borderBlackButtonStyle,
                   child: Text(

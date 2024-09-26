@@ -61,11 +61,13 @@ extension DiscountModelLocation on DiscountModel {
   //       if (subLocation != null) ...subLocation!.getList(context),
   //     ];
   String getDescription(BuildContext context) =>
-      '${description.getTrnslation(en: descriptionEN, context: context)}\n'
-      '\n***${context.l10n.toGetItYouNeed}***\n'
-      '\n- ${requirements.getTrnslation(en: requirementsEN, context: context)}'
-      '${exclusions != null ? _getMarkdownExclusions : ''}\n'
-      '${additionalDetails != null ? _getMarkdownAdditionalDetails : ''}'
+      '${description.getTrnslation(en: descriptionEN, context: context)}'
+      '${requirements != null ? _getMarkdownToGetIfYouNeed(context) : ''}'
+      '${requirements != null ? _getMarkdownRequirements(context) : ''}'
+      '${exclusions != null ? _getMarkdownExclusions(context) : ''}\n'
+      '${additionalDetails != null ? _getMarkdownAdditionalDetails(
+          context,
+        ) : ''}'
       '${phoneNumber != null ? _getMarkdownPhoneNumber(context) : ''}';
 
   String _getMarkdownAdditionalDetails(BuildContext context) =>
@@ -88,6 +90,13 @@ extension DiscountModelLocation on DiscountModel {
             en: exclusionsEN,
             context: context,
           ) ?? ''}';
+  String _getMarkdownRequirements(BuildContext context) => '\n\n- '
+      '${requirements.getTrnslation(
+            en: requirementsEN,
+            context: context,
+          ) ?? ''}';
+  String _getMarkdownToGetIfYouNeed(BuildContext context) =>
+      '\n\n***${context.l10n.toGetItYouNeed}***';
 
   List<String> getCityList(BuildContext context) => [
         if (context.isEnglish)
