@@ -192,7 +192,7 @@ void main() {
       test('Sign up with google', () async {
         expect(
           await appAuthenticationRepository.signUpWithGoogle(),
-          isA<Left<SomeFailure, bool>>(),
+          isA<Left<SomeFailure, User?>>(),
           // .having(
           //   (e) => e.value,
           //   'value',
@@ -204,7 +204,7 @@ void main() {
       test('Sign up with facebook', () async {
         expect(
           await appAuthenticationRepository.signUpWithFacebook(),
-          isA<Left<SomeFailure, bool>>(),
+          isA<Left<SomeFailure, User?>>(),
           // .having(
           //   (e) => e.value,
           //   'value',
@@ -219,7 +219,7 @@ void main() {
             email: KTestText.userEmailIncorrect,
             password: KTestText.passwordIncorrect,
           ),
-          isA<Left<SomeFailure, bool>>(),
+          isA<Left<SomeFailure, User?>>(),
           // .having(
           //   (e) => e.value,
           //   'value',
@@ -233,7 +233,7 @@ void main() {
             email: KTestText.userEmailIncorrect,
             password: KTestText.passwordIncorrect,
           ),
-          isA<Left<SomeFailure, bool>>(),
+          isA<Left<SomeFailure, User?>>(),
           // .having(
           //   (e) => e.value,
           //   'value',
@@ -287,7 +287,7 @@ void main() {
         ).called(1);
         expect(
           result,
-          isA<Left<SomeFailure, bool>>(),
+          isA<Left<SomeFailure, User?>>(),
           // .having(
           //   (e) => e.value,
           //   'value',

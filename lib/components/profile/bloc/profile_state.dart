@@ -2,7 +2,6 @@ part of 'profile_bloc.dart';
 
 enum ProfileError {
   error,
-  notFound,
   network,
   send,
 }
@@ -12,8 +11,6 @@ extension AuthFailureToProfileError on SomeFailure {
     switch (this) {
       case FailureSend():
         return ProfileError.send;
-      case FailureNotFound():
-        return ProfileError.notFound;
       case FailureNetwork():
         return ProfileError.network;
       default:

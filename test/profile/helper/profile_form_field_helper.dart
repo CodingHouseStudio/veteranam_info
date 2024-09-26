@@ -7,6 +7,11 @@ Future<void> profileFormFieldHelper(
   WidgetTester tester,
 ) async {
   expect(
+    find.byKey(KWidgetkeys.screen.profile.photo),
+    findsOneWidget,
+  );
+
+  expect(
     find.byKey(KWidgetkeys.screen.profile.nameField),
     findsOneWidget,
   );

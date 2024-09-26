@@ -12,6 +12,8 @@ Future<void> profileformsHelper({
 }) async {
   await profileFormFieldHelper(tester);
 
+  await tester.tap(find.byKey(KWidgetkeys.screen.profile.photo));
+
   await scrollingHelper(
     tester: tester,
     itemKey: KWidgetkeys.screen.profile.nameField,

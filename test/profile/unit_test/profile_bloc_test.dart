@@ -128,7 +128,7 @@ void main() {
           name: NameFieldModel.dirty(KTestText.nameCorrect),
           surname: SurnameFieldModel.dirty(KTestText.surnameCorrect),
           image: ImageFieldModel.pure(),
-          nickname: NicknameFieldModel.pure(), 
+          nickname: NicknameFieldModel.pure(),
           failure: null,
           formState: ProfileEnum.inProgress,
         ),
@@ -138,7 +138,7 @@ void main() {
           image: ImageFieldModel.pure(),
           nickname: NicknameFieldModel.dirty(KTestText.nicknameCorrect),
           failure: null,
-          formState: ProfileEnum.inProgress, 
+          formState: ProfileEnum.inProgress,
         ),
         ProfileState(
           name: const NameFieldModel.dirty(KTestText.nameCorrect),
@@ -146,14 +146,7 @@ void main() {
           image: ImageFieldModel.dirty(image),
           nickname: const NicknameFieldModel.dirty(KTestText.nicknameCorrect),
           failure: null,
-          formState: ProfileEnum.inProgress,         ),
-        ProfileState(
-          name: const NameFieldModel.dirty(KTestText.nameCorrect),
-          surname: const SurnameFieldModel.dirty(KTestText.surnameCorrect),
-          image: ImageFieldModel.dirty(image),
-          nickname: const NicknameFieldModel.dirty(KTestText.nicknameCorrect),
-          failure: null,
-          formState: ProfileEnum.sendInProgress, 
+          formState: ProfileEnum.inProgress,
         ),
         ProfileState(
           name: const NameFieldModel.dirty(KTestText.nameCorrect),
@@ -161,7 +154,15 @@ void main() {
           image: ImageFieldModel.dirty(image),
           nickname: const NicknameFieldModel.dirty(KTestText.nicknameCorrect),
           failure: null,
-          formState: ProfileEnum.success, 
+          formState: ProfileEnum.sendInProgress,
+        ),
+        ProfileState(
+          name: const NameFieldModel.dirty(KTestText.nameCorrect),
+          surname: const SurnameFieldModel.dirty(KTestText.surnameCorrect),
+          image: ImageFieldModel.dirty(image),
+          nickname: const NicknameFieldModel.dirty(KTestText.nicknameCorrect),
+          failure: null,
+          formState: ProfileEnum.success,
         ),
       ],
     );
@@ -188,7 +189,7 @@ void main() {
           name: NameFieldModel.dirty(KTestText.nameIncorrect),
           surname: SurnameFieldModel.dirty(KTestText.surnameCorrect),
           image: ImageFieldModel.pure(),
-          nickname: NicknameFieldModel.pure(), 
+          nickname: NicknameFieldModel.pure(),
           failure: null,
           formState: ProfileEnum.inProgress,
         ),
@@ -198,7 +199,7 @@ void main() {
           image: ImageFieldModel.pure(),
           nickname: NicknameFieldModel.dirty(KTestText.nicknameCorrect),
           failure: null,
-          formState: ProfileEnum.inProgress, 
+          formState: ProfileEnum.inProgress,
         ),
         ProfileState(
           name: const NameFieldModel.dirty(KTestText.nameIncorrect),
@@ -242,14 +243,13 @@ void main() {
         ..add(const ProfileEvent.started())
         ..add(const ProfileEvent.save()),
       expect: () => [
-
         const ProfileState(
           name: NameFieldModel.dirty(KTestText.nameCorrect),
           surname: SurnameFieldModel.dirty(KTestText.surnameCorrect),
           image: ImageFieldModel.pure(),
           nickname: NicknameFieldModel.pure(),
           failure: null,
-          formState: ProfileEnum.initial, 
+          formState: ProfileEnum.initial,
         ),
         const ProfileState(
           name: NameFieldModel.dirty(KTestText.nameCorrect),

@@ -56,7 +56,7 @@ void main() {
           .thenAnswer(
         (_) async => mockUserCredential,
       );
-      when(mockFirebaseAuth.signInWithCredential(KTestText.authCredential))
+      when(mockFirebaseAuth.signInWithCredential(KTestText.oAuthCredential))
           .thenAnswer(
         (_) async => mockUserCredential,
       );
@@ -251,13 +251,37 @@ void main() {
     test('Sign up with google', () async {
       expect(
         await appAuthenticationRepository.signUpWithGoogle(),
-        isA<Right<SomeFailure, bool>>().having((e) => e.value, 'value', isTrue),
+        isA<Right<SomeFailure, User?>>()
+            .having((e) => e.value, 'value', isTrue),
+      );
+    });
+    test('Sign up with google(credential null)', () async {
+      when(mockUserCredential.credential).thenAnswer(
+        (_) => null,
+      );
+
+      expect(
+        await appAuthenticationRepository.signUpWithGoogle(),
+        isA<Right<SomeFailure, User?>>()
+            .having((e) => e.value, 'value', isNull),
+      );
+    });
+    test('Sign up with facebook(credential null)', () async {
+      when(mockUserCredential.credential).thenAnswer(
+        (_) => null,
+      );
+
+      expect(
+        await appAuthenticationRepository.signUpWithFacebook(),
+        isA<Right<SomeFailure, User?>>()
+            .having((e) => e.value, 'value', isNull),
       );
     });
     test('Sign up with facebook', () async {
       expect(
         await appAuthenticationRepository.signUpWithFacebook(),
-        isA<Right<SomeFailure, bool>>().having((e) => e.value, 'value', isTrue),
+        isA<Right<SomeFailure, User?>>()
+            .having((e) => e.value, 'value', isTrue),
       );
     });
     test('LogIn with email and password', () async {

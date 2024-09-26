@@ -43,6 +43,8 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   firebase_auth.GoogleAuthProvider googleAuthProvider =
       firebase_auth.GoogleAuthProvider();
   @visibleForTesting
+  firebase_auth.OAuthCredential? oAuthCredential;
+  @visibleForTesting
   firebase_auth.FacebookAuthProvider facebookAuthProvider =
       firebase_auth.FacebookAuthProvider();
 
@@ -154,10 +156,11 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   Future<firebase_auth.AuthCredential> _getGoogleAuthCredentialMobile() async {
     final googleUser = await _googleSignIn.signIn();
     final googleAuth = await googleUser!.authentication;
-    return firebase_auth.GoogleAuthProvider.credential(
-      accessToken: googleAuth.accessToken,
-      idToken: googleAuth.idToken,
-    );
+    return oAuthCredential ??
+        firebase_auth.GoogleAuthProvider.credential(
+          accessToken: googleAuth.accessToken,
+          idToken: googleAuth.idToken,
+        );
   }
 
   /// Starts the Sign In with Facebook Flow.
@@ -211,9 +214,10 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
     }
 
     // Create a credential from the access token
-    return firebase_auth.FacebookAuthProvider.credential(
-      loginResult.accessToken!.tokenString,
-    );
+    return oAuthCredential ??
+        firebase_auth.FacebookAuthProvider.credential(
+          loginResult.accessToken!.tokenString,
+        );
   }
 
   /// Signs in with the provided [email] and [password].

@@ -74,6 +74,9 @@ void main() {
           .thenAnswer(
         (_) async => mockUserCredential,
       );
+      when(mockUserCredential.user).thenAnswer(
+        (_) => null,
+      );
       when(
         mockFirestoreService.setUserSetting(
           userSetting: KTestText.userSetting,
@@ -113,7 +116,8 @@ void main() {
       )
         ..isWeb = false
         ..googleAuthProvider = mockGoogleAuthProvider
-        ..facebookAuthProvider = mockFacebookAuthProvider;
+        ..facebookAuthProvider = mockFacebookAuthProvider
+        ..oAuthCredential = KTestText.oAuthCredential;
     });
     test('Sign up with google', () async {
       expect(
@@ -122,13 +126,7 @@ void main() {
             .having((e) => e.value, 'value', isNull),
       );
     });
-    test('Sign up with facebook(credential null)', () async {
-      expect(
-        await appAuthenticationRepository.signUpWithFacebook(),
-        isA<Right<SomeFailure, bool>>()
-            .having((e) => e.value, 'value', isFalse),
-      );
-    });
+
     test('Sign up with facebook', () async {
       when(mockLoginResult.accessToken).thenAnswer(
         (_) => LimitedToken(
@@ -141,7 +139,8 @@ void main() {
       );
       expect(
         await appAuthenticationRepository.signUpWithFacebook(),
-        isA<Right<SomeFailure, bool>>().having((e) => e.value, 'value', isTrue),
+        isA<Right<SomeFailure, User?>>()
+            .having((e) => e.value, 'value', isNull),
       );
     });
     test('Update user Setting(Set)', () async {

@@ -193,7 +193,8 @@ void main() {
           email: KTestText.userEmail,
           password: KTestText.passwordCorrect,
         ),
-        isA<Right<SomeFailure, bool>>().having((e) => e.value, 'value', isTrue),
+        isA<Right<SomeFailure, User?>>()
+            .having((e) => e.value, 'value', isNull),
       );
     });
     test('Create FCM Token for user setting when get null', () async {
