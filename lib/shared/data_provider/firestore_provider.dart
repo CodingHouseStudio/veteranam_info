@@ -581,7 +581,6 @@ class FirestoreService {
       final docSnapshot = await _db
           .collection(FirebaseCollectionName.cities)
           .where('type', isEqualTo: 'CITY')
-          //TODO: CAPITAP CITY
           .get(getOptions);
 
       // If the server fetch is successful, return the data
