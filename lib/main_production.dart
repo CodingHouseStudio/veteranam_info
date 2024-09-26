@@ -81,39 +81,33 @@ Future<void> main() async {
           .setPerformanceCollectionEnabled(kReleaseMode);
     }
     // } catch (e, stack) {}
-    try {
-      // if (!kIsWeb)
-      // {
-      // if (kReleaseMode) {
-      await FirebaseAppCheck.instanceFor(app: app).activate(
-        webProvider: ReCaptchaV3Provider(
-          'REDACTED',
-        ),
-      );
-      await FirebaseAppCheck.instance.activate(
-        webProvider: ReCaptchaV3Provider(
-          'REDACTED',
-        ),
-      );
-      // } else {
-      //   await FirebaseAppCheck.instanceFor(app: app).activate(
-      //     webProvider: ReCaptchaV3Provider(
-      //       '326946D7-ABAE-4F1A-AEE7-395C5E23F0D4',
-      //     ),
-      //   );
-      // }
-      // } else
-      // {
-      //   await FirebaseAppCheck.instance.activate(
-      //     androidProvider: kReleaseMode
-      //         ? AndroidProvider.playIntegrity
-      //         : AndroidProvider.debug,
-      //     appleProvider:
-      //         kReleaseMode ? AppleProvider.deviceCheck : AppleProvider.debug,
-      //   );
-      // }
-    } catch (e) {}
   }
+  try {
+    // if (!kIsWeb)
+    // {
+    await FirebaseAppCheck.instanceFor(app: app).activate(
+      webProvider: ReCaptchaV3Provider(
+        kReleaseMode
+            ? KSecurityKeys.firebaseAppCheckProd
+            : KSecurityKeys.firebaseAppCheckProdDebug,
+      ),
+      androidProvider:
+          kReleaseMode ? AndroidProvider.playIntegrity : AndroidProvider.debug,
+      appleProvider:
+          kReleaseMode ? AppleProvider.deviceCheck : AppleProvider.debug,
+    );
+    await FirebaseAppCheck.instance.activate(
+      webProvider: ReCaptchaV3Provider(
+        kReleaseMode
+            ? KSecurityKeys.firebaseAppCheckProd
+            : KSecurityKeys.firebaseAppCheckProdDebug,
+      ),
+      androidProvider:
+          kReleaseMode ? AndroidProvider.playIntegrity : AndroidProvider.debug,
+      appleProvider:
+          kReleaseMode ? AppleProvider.deviceCheck : AppleProvider.debug,
+    );
+  } catch (e) {}
 
   // Non-async exceptions
   FlutterError.onError = (details) {

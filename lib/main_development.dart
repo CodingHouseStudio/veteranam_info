@@ -8,6 +8,7 @@ import 'package:flutter/material.dart' show FlutterError, WidgetsFlutterBinding;
 import 'package:veteranam/app.dart';
 import 'package:veteranam/bootstrap.dart';
 import 'package:veteranam/firebase_options_development.dart';
+import 'package:veteranam/shared/shared.dart';
 
 /// COMMENT: DEV main file
 void main() async {
@@ -17,17 +18,27 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  // if (kReleaseMode) {
   await FirebaseAppCheck.instanceFor(app: app).activate(
     webProvider: ReCaptchaV3Provider(
-      'REDACTED',
+      kReleaseMode
+          ? KSecurityKeys.firebaseAppCheckDev
+          : KSecurityKeys.firebaseAppCheckDevDebug,
     ),
+    androidProvider:
+        kReleaseMode ? AndroidProvider.playIntegrity : AndroidProvider.debug,
+    appleProvider:
+        kReleaseMode ? AppleProvider.deviceCheck : AppleProvider.debug,
   );
-
   await FirebaseAppCheck.instance.activate(
     webProvider: ReCaptchaV3Provider(
-      'REDACTED',
+      kReleaseMode
+          ? KSecurityKeys.firebaseAppCheckDev
+          : KSecurityKeys.firebaseAppCheckDevDebug,
     ),
+    androidProvider:
+        kReleaseMode ? AndroidProvider.playIntegrity : AndroidProvider.debug,
+    appleProvider:
+        kReleaseMode ? AppleProvider.deviceCheck : AppleProvider.debug,
   );
 
   // Non-async exceptions
