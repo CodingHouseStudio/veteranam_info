@@ -35,7 +35,8 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
         ) {
     on<_Started>(_onStarted);
     on<_CategoryUpdate>(_onCategoryUpdated);
-    on<_CityUpdate>(_onCityUpdated);
+    on<_CityAdd>(_onCityAdd);
+    on<_CityRemove>(_onCityRemove);
     on<_PeriodUpdate>(_onPeriodUpdated);
     on<_IndefinitelyUpdate>(_onIndefinitelyUpdate);
     on<_TitleUpdate>(_onTitleUpdated);
@@ -97,20 +98,37 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
     emit(
       state.copyWith(
         category: categoryFieldModel,
+        failure: null,
         formState: DiscountsAddEnum.inProgress,
       ),
     );
   }
 
-  void _onCityUpdated(
-    _CityUpdate event,
+  void _onCityAdd(
+    _CityAdd event,
     Emitter<DiscountsAddState> emit,
   ) {
-    final cityFieldModel = state.city.addValue(event.city);
+    final cityFieldModel = state.city.add(event.city);
 
     emit(
       state.copyWith(
         city: cityFieldModel,
+        failure: null,
+        formState: DiscountsAddEnum.inProgress,
+      ),
+    );
+  }
+
+  void _onCityRemove(
+    _CityRemove event,
+    Emitter<DiscountsAddState> emit,
+  ) {
+    final cityFieldModel = state.city.remove(event.city);
+
+    emit(
+      state.copyWith(
+        city: cityFieldModel,
+        failure: null,
         formState: DiscountsAddEnum.inProgress,
       ),
     );
@@ -123,6 +141,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
     emit(
       state.copyWith(
         isIndefinitely: !state.isIndefinitely,
+        failure: null,
         formState: DiscountsAddEnum.inProgress,
       ),
     );
@@ -143,6 +162,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
     emit(
       state.copyWith(
         period: periodFieldModel,
+        failure: null,
         formState: DiscountsAddEnum.inProgress,
       ),
     );
@@ -157,6 +177,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
     emit(
       state.copyWith(
         title: titleFieldModel,
+        failure: null,
         formState: DiscountsAddEnum.detailInProgress,
       ),
     );
@@ -173,6 +194,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
     emit(
       state.copyWith(
         discounts: discountsFieldModel,
+        failure: null,
         formState: DiscountsAddEnum.detailInProgress,
       ),
     );
@@ -189,6 +211,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
     emit(
       state.copyWith(
         discounts: discountsFieldModel,
+        failure: null,
         formState: DiscountsAddEnum.detailInProgress,
       ),
     );
@@ -203,6 +226,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
     emit(
       state.copyWith(
         link: linkFieldModel,
+        failure: null,
         formState: DiscountsAddEnum.detailInProgress,
       ),
     );
@@ -217,6 +241,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
     emit(
       state.copyWith(
         description: descriptionFieldModel,
+        failure: null,
         formState: DiscountsAddEnum.descriptionInProgress,
       ),
     );
@@ -231,6 +256,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
     emit(
       state.copyWith(
         exclusions: exclusionsFieldModel,
+        failure: null,
         formState: DiscountsAddEnum.descriptionInProgress,
       ),
     );
@@ -275,7 +301,12 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
     if (Formz.validate([state.description, state.exclusions])) {
       final discount = DiscountModel(
         id: ExtendedDateTime.id,
-        discount: state.discounts.getValue,
+        discount: state.discounts.getValue
+            .where(
+              (element) => element != null,
+            )
+            .cast<int>()
+            .toList(),
         title: state.title.value,
         titleEN: null,
         category: [state.category.value],
@@ -290,13 +321,8 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
         territory: null,
         territoryEN: null,
         exclusions: state.exclusions.value,
-        expiration:
-            // ignore: lines_longer_than_80_chars
-            'До ${state.isIndefinitely ? null : state.period.value?.toLocalDateString(
-                context: null,
-                localeValue: Language.ukrain.value.languageCode,
-                showDay: true,
-              )}',
+        expiration: _getExpiration(Language.ukrain),
+        expirationEN: _getExpiration(Language.english),
         dateVerified: ExtendedDateTime.current,
         link: state.link.value,
         userId: _appAuthenticationReporsitory.currentUser.id,
@@ -319,4 +345,9 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
       );
     }
   }
+
+  String? _getExpiration(
+    Language language,
+  ) =>
+      state.isIndefinitely ? null : state.period.getString(language);
 }

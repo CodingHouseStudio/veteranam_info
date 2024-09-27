@@ -13,3 +13,8 @@ class TranslateModel with _$TranslateModel {
   factory TranslateModel.fromJson(Map<String, dynamic> json) =>
       _$TranslateModelFromJson(json);
 }
+
+abstract class TranslateModelJsonField {
+  static const uk = 'uk';
+  static const en = 'en';
+}

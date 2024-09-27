@@ -59,10 +59,7 @@ class EmailInputFormatter extends TextInputFormatter {
   ) {
     // delete all spaces
     final newText = newValue.text.replaceAll(RegExp(r'\s+'), '');
-    return TextEditingValue(
-      text: newText,
-      selection: newValue.selection,
-    );
+    return newValue.copyWith(text: newText);
   }
 }
 

@@ -56,4 +56,5 @@ class _WidgetKeys {
   final dropDownButton = _DropDownButtonKeys();
   final switchOffline = _SwitchOfflineKeys();
   final multiDropField = _MultiDropFieldKeys();
+  final citiesDropField = _CitiesDropFieldKeys();
 }

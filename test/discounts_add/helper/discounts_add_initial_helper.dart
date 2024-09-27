@@ -23,6 +23,18 @@ Future<void> discountsAddInitialHelper(
 
       await discountsAddMainHelper(tester: tester);
 
+      await scrollingHelper(
+        tester: tester,
+        itemKey: KWidgetkeys.screen.discountsAdd.categoryField,
+      );
+
+      await citiesDropFieldHelper(
+        tester: tester,
+        text: KTestText.field,
+        textFieldKey: KWidgetkeys.screen.discountsAdd.cityField,
+        fieldIndex: 1,
+      );
+
       expect(
         find.byKey(KWidgetkeys.screen.discountsAdd.indefinitelySwitcher),
         findsOneWidget,

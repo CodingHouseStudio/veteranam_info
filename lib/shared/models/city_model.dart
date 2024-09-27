@@ -19,5 +19,5 @@ class CityModel with _$CityModel {
 abstract class CitiesModelJsonField {
   static const id = 'id';
   static const name = 'name';
-  static const area = 'area';
+  static const region = 'region';
 }

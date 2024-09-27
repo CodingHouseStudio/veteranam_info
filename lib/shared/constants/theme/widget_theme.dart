@@ -160,24 +160,24 @@ abstract class KWidgetTheme {
     borderRadius: KBorderRadius.kBorderRadius32,
   );
 
-  static const inputDecorationTheme = InputDecorationTheme(
-    hintStyle: AppTextStyle.materialThemeTitleMediumNeutralVariant35,
-    contentPadding: EdgeInsets.symmetric(
-      horizontal: KPadding.kPaddingSize20,
-    ),
-    border: outlineInputBorder,
-    enabledBorder: outlineInputBorderEnabled,
-    disabledBorder: outlineInputBorderDisabled,
-    focusedBorder: outlineInputBorderFocused,
-    focusedErrorBorder: outlineInputBorderErrorFocused,
-    filled: true,
-    fillColor: AppColors.materialThemeWhite,
-    labelStyle: AppTextStyle.materialThemeTitleMedium,
-    alignLabelWithHint: true,
-    errorStyle: AppTextStyle.error14,
-    hoverColor: AppColors.materialThemeWhite,
-    errorBorder: outlineInputBorderError,
-  );
+  // static const inputDecorationTheme = InputDecorationTheme(
+  //   hintStyle: AppTextStyle.materialThemeTitleMediumNeutralVariant35,
+  //   contentPadding: EdgeInsets.symmetric(
+  //     horizontal: KPadding.kPaddingSize20,
+  //   ),
+  //   border: outlineInputBorder,
+  //   enabledBorder: outlineInputBorderEnabled,
+  //   disabledBorder: outlineInputBorderDisabled,
+  //   focusedBorder: outlineInputBorderFocused,
+  //   focusedErrorBorder: outlineInputBorderErrorFocused,
+  //   filled: true,
+  //   fillColor: AppColors.materialThemeWhite,
+  //   labelStyle: AppTextStyle.materialThemeTitleMedium,
+  //   alignLabelWithHint: true,
+  //   errorStyle: AppTextStyle.error14,
+  //   hoverColor: AppColors.materialThemeWhite,
+  //   errorBorder: outlineInputBorderError,
+  // );
 
   static const inputDecoration = InputDecoration(
     hintStyle: AppTextStyle.materialThemeTitleMediumNeutralVariant35,

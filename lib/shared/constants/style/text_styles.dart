@@ -383,6 +383,14 @@ abstract class AppTextStyle {
     letterSpacing: 0.5,
     color: AppColors.materialThemeRefNeutralVariantNeutralVariant35,
   );
+  static const TextStyle materialThemeLabelSmallNeutralVariant70 = TextStyle(
+    fontFamily: 'Gilroy',
+    fontSize: 11,
+    height: 1.45,
+    fontWeight: FontWeight.w500,
+    letterSpacing: 0.5,
+    color: AppColors.materialThemeRefNeutralVariantNeutralVariant70,
+  );
 
   /// materialThemeTitleLarge figma properties
   /// fontFamily: Gilroy

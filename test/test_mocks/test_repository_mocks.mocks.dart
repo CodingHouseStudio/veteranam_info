@@ -12747,3 +12747,35 @@ class MockFacebookAuthProvider extends _i1.Mock
         ),
       ) as _i4.FacebookAuthProvider);
 }
+
+/// A class which mocks [ICitiesRepository].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockICitiesRepository extends _i1.Mock implements _i3.ICitiesRepository {
+  @override
+  _i8.Future<_i2.Either<_i3.SomeFailure, List<_i3.CityModel>>> getCities() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getCities,
+          [],
+        ),
+        returnValue:
+            _i8.Future<_i2.Either<_i3.SomeFailure, List<_i3.CityModel>>>.value(
+                _FakeEither_0<_i3.SomeFailure, List<_i3.CityModel>>(
+          this,
+          Invocation.method(
+            #getCities,
+            [],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i8.Future<_i2.Either<_i3.SomeFailure, List<_i3.CityModel>>>.value(
+                _FakeEither_0<_i3.SomeFailure, List<_i3.CityModel>>(
+          this,
+          Invocation.method(
+            #getCities,
+            [],
+          ),
+        )),
+      ) as _i8.Future<_i2.Either<_i3.SomeFailure, List<_i3.CityModel>>>);
+}

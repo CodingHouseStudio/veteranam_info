@@ -57,8 +57,9 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
           context.goNamed(KRoute.myDiscounts.name);
         }
         if (state.formState.isMain) {
-          periodController.text =
-              state.period.value?.toLocalDateString(context: context) ?? '';
+          periodController.text = state.period.value
+                  ?.toLocalDateString(context: context, showDay: true) ??
+              '';
         }
       },
       buildWhen: (previous, current) =>
@@ -68,7 +69,8 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
           previous.failure != current.failure ||
           previous.period != current.period ||
           previous.isIndefinitely != current.isIndefinitely ||
-          previous.discounts != current.discounts,
+          previous.discounts != current.discounts ||
+          previous.city != current.city,
       builder: (context, _) => ScaffoldWidget(
         titleDeskPadding: ({required maxWidth}) => maxWidth.screenPadding(
           precent: KDimensions.fifteenPercent,
@@ -98,7 +100,7 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
           KSizedBox.kHeightSizedBox40,
           if (_.formState.isMain)
             DropListFieldWidget(
-              key: KWidgetkeys.screen.discountsAdd.categoryField,
+              textFieldKey: KWidgetkeys.screen.discountsAdd.categoryField,
               controller: categoryController,
               onChanged: (text) => context
                   .read<DiscountsAddBloc>()
@@ -137,27 +139,25 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
             ),
           KSizedBox.kHeightSizedBox32,
           if (_.formState.isMain)
-            DropListFieldWidget(
-              // widgetKey: KWidgetkeys.screen.discountsAdd.cityField,
+            CitiesDropFieldWidget(
+              textFieldKey: KWidgetkeys.screen.discountsAdd.cityField,
+              removeCity: (value) => context
+                  .read<DiscountsAddBloc>()
+                  .add(DiscountsAddEvent.cityRemove(value)),
               controller: cityController,
-              labelText: context.l10n.city,
               onChanged: (value) => context
                   .read<DiscountsAddBloc>()
-                  .add(DiscountsAddEvent.cityUpdate(value)),
+                  .add(DiscountsAddEvent.cityAdd(value)),
               isDesk: isDesk,
-              dropDownList: _.citiesList
-                  .map(
-                    (e) => e.name.uk,
-                  )
-                  .toList(),
-              // suffixIcon: KIcon.distance,
+              citiesList: _.citiesList,
               showErrorText: _.formState.hasError,
               errorText: _.city.error.value(context),
+              selectedCities: _.city.value,
             )
           else if (_.formState.isDetail)
             TextFieldDescriptionWidget(
               childWidget: MultiDropFieldWidget(
-                key: KWidgetkeys.screen.discountsAdd.discountsField,
+                textFieldKey: KWidgetkeys.screen.discountsAdd.discountsField,
                 controller: discountsController,
                 isDesk: isDesk,
                 labelText: context.l10n.discount,
@@ -208,7 +208,7 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
                   : () => context
                       .read<DiscountsAddBloc>()
                       .add(DiscountsAddEvent.periodUpdate(context.getDate)),
-              style: KButtonStyles.borderGrayButtonStyle.copyWith(
+              style: KButtonStyles.footerButtonTransparent.copyWith(
                 padding: const WidgetStatePropertyAll(
                   EdgeInsets.zero,
                 ),
@@ -224,6 +224,8 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
                       ? AppColors.materialThemeRefNeutralVariantNeutralVariant70
                       : null,
                 ),
+                disabledBorder: KWidgetTheme.outlineInputBorderEnabled,
+                cursor: SystemMouseCursors.click,
                 enabled: false,
                 showErrorText: _.formState.hasError,
                 errorText: _.period.error.value(context),

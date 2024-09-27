@@ -53,7 +53,8 @@ extension LocalizedDateTime on DateTime {
             .locale
             .value
             .languageCode ??
-        localeValue;
+        localeValue ??
+        Language.ukrain;
     // initializeDateFormatting(locale);
     if (showDay) {
       return DateFormat.yMMMMd(locale).format(toLocal());
@@ -69,23 +70,42 @@ extension DiscountModelLocation on DiscountModel {
   //       if (subLocation != null) ...subLocation!.getList(context),
   //     ];
   String getDescription(BuildContext context) =>
-      '${context.isEnglish ? descriptionEN : description}\n'
-      '\n***${context.l10n.toGetItYouNeed}***\n'
-      '\n- ${context.isEnglish ? requirementsEN : requirements}\n'
-      '\n${context.isEnglish ? exclusionsEN : exclusions}'
-      '${additionalDetails != null ? _getMarkdownAdditionalDetails : ''}'
+      '${description.getTrnslation(en: descriptionEN, context: context)}'
+      '${requirements != null ? _getMarkdownToGetIfYouNeed(context) : ''}'
+      '${requirements != null ? _getMarkdownRequirements(context) : ''}'
+      '${exclusions != null ? _getMarkdownExclusions(context) : ''}\n'
+      '${additionalDetails != null ? _getMarkdownAdditionalDetails(
+          context,
+        ) : ''}'
       '${phoneNumber != null ? _getMarkdownPhoneNumber(context) : ''}';
 
-  String _getMarkdownAdditionalDetails(BuildContext context) => '\n\n'
-      '${context.isEnglish ? additionalDetailsEN : additionalDetails ?? ''}';
+  String _getMarkdownAdditionalDetails(BuildContext context) =>
+      '\n\n${additionalDetails.getTrnslation(
+            en: additionalDetailsEN,
+            context: context,
+          ) ?? ''}';
 
   String _getMarkdownPhoneNumber(BuildContext context) =>
       '\n\n***${context.l10n.callForDetails}:***'
       ' ${KPlatformConstants.isWebDesktop ? '***' : '['}'
       '$phoneNumber'
       '${KPlatformConstants.isWebDesktop ? '***' : '](tel:'
-          // ignore: lines_longer_than_80_chars
-          '${phoneNumber!.replaceAll('(', '').replaceAll(')', '').replaceAll(' ', '')})'}';
+          '${phoneNumber!.replaceAll('(', '').replaceAll(
+                ')',
+                '',
+              ).replaceAll(' ', '')})'}';
+  String _getMarkdownExclusions(BuildContext context) => '\n\n'
+      '${exclusions.getTrnslation(
+            en: exclusionsEN,
+            context: context,
+          ) ?? ''}';
+  String _getMarkdownRequirements(BuildContext context) => '\n\n- '
+      '${requirements.getTrnslation(
+            en: requirementsEN,
+            context: context,
+          ) ?? ''}';
+  String _getMarkdownToGetIfYouNeed(BuildContext context) =>
+      '\n\n***${context.l10n.toGetItYouNeed}***';
 
   List<String> getCityList(BuildContext context) => [
         if (context.isEnglish)
@@ -290,7 +310,12 @@ extension ContextExtensions on BuildContext {
     }
   }
 
-  Future<DateTime?> get getDate => showDatePicker(
+  @visibleForTesting
+  static DateTime? textPieckerData;
+
+  Future<DateTime?> get getDate async =>
+      textPieckerData ??
+      showDatePicker(
         context: this,
         initialDate: ExtendedDateTime.current,
         firstDate: ExtendedDateTime.current,

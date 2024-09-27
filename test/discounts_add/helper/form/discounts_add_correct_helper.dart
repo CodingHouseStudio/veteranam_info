@@ -13,7 +13,7 @@ Future<void> discountsAddCorectHelper({
     tester: tester,
     categoryText: KTestText.sendDiscountModel.category.first,
     cityText: KTestText.sendDiscountModel.location!.first,
-    periodText: KTestText.sendDiscountModel.expiration!,
+    // periodText: KTestText.sendDiscountModel.expiration!,
   );
 
   await discountsAddMainHelper(tester: tester, hasField: false);

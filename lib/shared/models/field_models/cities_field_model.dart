@@ -1,4 +1,5 @@
 import 'package:formz/formz.dart';
+import 'package:veteranam/shared/shared.dart';
 
 enum CitiesFieldModelValidationError { empty }
 
@@ -8,13 +9,12 @@ class CitiesFieldModel
 
   const CitiesFieldModel.dirty([super.value]) : super.dirty();
 
-  CitiesFieldModel addValue(String discount) {
-    if (value == null) {
-      return CitiesFieldModel.dirty([discount]);
-    } else {
-      value!.add(discount);
-      return this;
-    }
+  CitiesFieldModel add(String city) {
+    return CitiesFieldModel.dirty(value.addFieldModel(city));
+  }
+
+  CitiesFieldModel remove(String city) {
+    return CitiesFieldModel.dirty(value.removeFieldModel(city));
   }
 
   @override

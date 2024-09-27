@@ -1,4 +1,5 @@
 import 'package:formz/formz.dart';
+import 'package:veteranam/shared/shared.dart';
 
 enum DateFieldModelValidationError { empty }
 
@@ -17,9 +18,17 @@ class DateFieldModel
     // Here, value cannot be null, so you might want to check for a specific
     // date range or other criteria instead
     // Example: Check if the date is in the future
-    if (value == null || value.isBefore(DateTime.now())) {
+    if (value == null || value.isBefore(ExtendedDateTime.current)) {
       return DateFieldModelValidationError.empty;
     }
     return null;
   }
+
+  String getString(Language language) =>
+      '${language.isEnglish ? 'Up to' : 'До'}'
+      ' ${value?.toLocalDateString(
+        context: null,
+        localeValue: language.value.languageCode,
+        showDay: true,
+      )}';
 }
