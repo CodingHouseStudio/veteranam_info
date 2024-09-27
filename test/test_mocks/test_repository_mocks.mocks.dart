@@ -1858,22 +1858,6 @@ class MockIAppAuthenticationRepository extends _i1.Mock
 class MockAppAuthenticationRepository extends _i1.Mock
     implements _i3.AppAuthenticationRepository {
   @override
-  bool get isWeb => (super.noSuchMethod(
-        Invocation.getter(#isWeb),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
-
-  @override
-  set isWeb(bool? _isWeb) => super.noSuchMethod(
-        Invocation.setter(
-          #isWeb,
-          _isWeb,
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
   _i4.GoogleAuthProvider get googleAuthProvider => (super.noSuchMethod(
         Invocation.getter(#googleAuthProvider),
         returnValue: _FakeGoogleAuthProvider_5(
@@ -1892,6 +1876,15 @@ class MockAppAuthenticationRepository extends _i1.Mock
         Invocation.setter(
           #googleAuthProvider,
           _googleAuthProvider,
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  set authCredential(_i4.AuthCredential? _authCredential) => super.noSuchMethod(
+        Invocation.setter(
+          #authCredential,
+          _authCredential,
         ),
         returnValueForMissingStub: null,
       );

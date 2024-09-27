@@ -3,7 +3,6 @@ import 'dart:math';
 
 import 'package:collection/collection.dart';
 import 'package:feedback/feedback.dart';
-import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart' show Uint8List, kIsWeb, kReleaseMode;
 import 'package:flutter/widgets.dart';

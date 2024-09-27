@@ -52,8 +52,29 @@ void main() {
       authenticationRepository =
           AuthenticationRepository(mockAppAuthenticationRepository);
     });
+    group('authenticated', () {
+      setUp(() async {
+        Timer(
+          const Duration(milliseconds: 30),
+          () {
+            userSettingStreamController = StreamController<UserSetting>()
+              ..add(const UserSetting(id: KTestText.field));
+            userStreamController.add(KTestText.user);
+          },
+        );
+      });
 
-    group('anonymously when user change', () {
+      test('user ${KGroupText.stream}', () async {
+        await expectLater(
+          authenticationRepository.user,
+          emitsInOrder([
+            KTestText.userAnonymous,
+            KTestText.user,
+          ]),
+        );
+      });
+    });
+    group('test anonymously when user change', () {
       setUp(() {
         userStreamController.add(User.empty);
         when(mockAppAuthenticationRepository.isAnonymously).thenAnswer(
@@ -77,6 +98,7 @@ void main() {
           emitsInOrder([
             KTestText.userAnonymous,
             User.empty,
+            KTestText.user.copyWith(email: null),
           ]),
         );
       });
@@ -97,32 +119,6 @@ void main() {
         );
       });
     });
-    // group('authenticated', () {
-    //   setUp(() {
-    //     userStreamController.add(KTestText.user);
-    //     late var value = true;
-    //     when(mockAppAuthenticationRepository.isAnonymously).thenAnswer(
-    //       (_) {
-    //         if (value) {
-    //           userSettingStreamController = StreamController<UserSetting>()
-    //             ..add(UserSetting.empty);
-    //           value = false;
-    //         }
-    //         return false;
-    //       },
-    //     );
-    //   });
-
-    //   test('user ${KGroupText.stream}', () async {
-    //     await expectLater(
-    //       authenticationRepository.user,
-    //       emitsInOrder([
-    //         KTestText.userAnonymous,
-    //         KTestText.user,
-    //       ]),
-    //     );
-    //   });
-    // });
     group('user setting', () {
       setUp(() {
         when(mockAppAuthenticationRepository.isAnonymously).thenAnswer(
@@ -168,6 +164,7 @@ void main() {
     tearDown(() async {
       await userStreamController.close();
       await userSettingStreamController.close();
+      authenticationRepository.dispose();
     });
   });
 }

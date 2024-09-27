@@ -177,9 +177,7 @@ void main() {
         mockGoogleSignIn,
         mockCache,
         mockFacebookAuth,
-      )
-        ..isWeb = true
-        ..googleAuthProvider = mockGoogleAuthProvider;
+      )..googleAuthProvider = mockGoogleAuthProvider;
     });
     test('Sign up with google', () async {
       expect(

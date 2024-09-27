@@ -105,9 +105,7 @@ void main() {
         mockGoogleSignIn,
         mockCache,
         mockFacebookAuth,
-      )
-        ..isWeb = true
-        ..googleAuthProvider = mockGoogleAuthProvider;
+      )..googleAuthProvider = mockGoogleAuthProvider;
     });
     test('User Setting', () async {
       await expectLater(

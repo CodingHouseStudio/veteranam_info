@@ -33,6 +33,7 @@ void main() {
     late StorageService mockStorageService;
     late IDeviceRepository mockDeviceRepository;
     setUp(() {
+      Config.isWeb = false;
       mockSecureStorageRepository = MockIStorage();
       mockFirebaseAuth = MockFirebaseAuth();
       mockGoogleSignIn = MockGoogleSignIn();
@@ -70,7 +71,7 @@ void main() {
       when(mockFacebookAuth.login()).thenAnswer(
         (_) async => mockLoginResult,
       );
-      when(mockFirebaseAuth.signInWithCredential(KTestText.oAuthCredential))
+      when(mockFirebaseAuth.signInWithCredential(KTestText.authCredential))
           .thenAnswer(
         (_) async => mockUserCredential,
       );
@@ -114,10 +115,9 @@ void main() {
         mockCache,
         mockFacebookAuth,
       )
-        ..isWeb = false
         ..googleAuthProvider = mockGoogleAuthProvider
         ..facebookAuthProvider = mockFacebookAuthProvider
-        ..oAuthCredential = KTestText.oAuthCredential;
+        ..authCredential = KTestText.authCredential;
     });
     test('Sign up with google', () async {
       expect(

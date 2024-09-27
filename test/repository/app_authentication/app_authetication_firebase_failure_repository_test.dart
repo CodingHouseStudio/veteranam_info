@@ -185,7 +185,6 @@ void main() {
           mockCache,
           mockFacebookAuth,
         )
-          ..isWeb = true
           ..googleAuthProvider = mockGoogleAuthProvider
           ..facebookAuthProvider = mockFacebookAuthProvider;
       });

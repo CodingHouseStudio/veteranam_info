@@ -3,8 +3,6 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mockito/mockito.dart';
-// ignore: unused_import
-import 'package:veteranam/components/components.dart';
 import 'package:veteranam/shared/shared.dart';
 
 import '../../test_dependency.dart';
@@ -23,6 +21,9 @@ void main() {
       mockAuthenticationRepository = MockAuthenticationRepository();
       when(mockAuthenticationRepository.currentUser).thenAnswer(
         (realInvocation) => KTestText.user,
+      );
+      when(mockAuthenticationRepository.user).thenAnswer(
+        (realInvocation) => Stream.value(KTestText.user),
       );
       when(mockAuthenticationRepository.currentUserSetting).thenAnswer(
         (realInvocation) => KTestText.userSetting,
@@ -46,113 +47,125 @@ void main() {
       );
       authenticationBloc = AuthenticationBloc(
         authenticationRepository: mockAuthenticationRepository,
-      )..add(AuthenticationInitialized());
+      );
     });
-    // blocTest<AuthenticationBloc, AuthenticationState>(
-    //   'emits [AuthenticationState.unauthenticated] when'
-    //   ' AuthenticationStatusChanged',
-    //   build: () => authenticationBloc,
-    //   act: (bloc) async {
-    //     bloc.add(
-    //       const AuthenticationStatusChanged(
-    //         AuthenticationStatus.anonymous,
-    //       ),
-    //     );
-    //   },
-    //   expect: () async => [
-    //     const AuthenticationState.anonymous(
-    //       anonymouslyUser: KTestText.user,
-    //       anonymouslyUserSetting: KTestText.userSetting,
-    //     ),
-    //   ],
-    // );
-    // blocTest<AuthenticationBloc, AuthenticationState>(
-    //   'emits [AuthenticationState.authenticated] when'
-    //   ' AuthenticationStatusChanged',
-    //   build: () => authenticationBloc,
-    //   act: (bloc) async {
-    //     bloc.add(
-    //       const AuthenticationStatusChanged(
-    //         AuthenticationStatus.authenticated,
-    //       ),
-    //     );
-    //   },
-    //   expect: () async => [
-    //     const AuthenticationState.authenticated(
-    //       currentUser: KTestText.user,
-    //       currentUserSetting: KTestText.userSetting,
-    //     ),
-    //   ],
-    // );
-    // blocTest<AuthenticationBloc, AuthenticationState>(
-    //   'emits [AuthenticationState] when'
-    //   ' AuthenticationStatusChanged',
-    //   build: () => authenticationBloc,
-    //   act: (bloc) async {
-    //     bloc.add(
-    //       const AuthenticationStatusChanged(
-    //         AuthenticationStatus.unknown,
-    //       ),
-    //     );
-    //   },
-    //   expect: () async => [
-    //     const AuthenticationState.unknown(),
-    //   ],
-    // );
     blocTest<AuthenticationBloc, AuthenticationState>(
-      'emits [AuthenticationState] when'
-      ' AppLanguageChanged',
+      'emits [AuthenticationState.anonymous] when'
+      ' AuthenticationInitialized',
       build: () => authenticationBloc,
       act: (bloc) async {
+        when(mockAuthenticationRepository.isAnonymously).thenAnswer(
+          (realInvocation) => true,
+        );
         bloc.add(
-          const AppLanguageChanged(),
+          AuthenticationInitialized(),
         );
       },
       expect: () async => [
-        AuthenticationState.authenticated(
-          currentUser: KTestText.user,
-          currentUserSetting:
-              KTestText.userSetting.copyWith(locale: Language.english),
+        const AuthenticationState.anonymous(
+          anonymouslyUser: KTestText.user,
+          anonymouslyUserSetting: KTestText.userSetting,
         ),
       ],
     );
+
     blocTest<AuthenticationBloc, AuthenticationState>(
-      'emits [AuthenticationState] when'
-      ' AuthenticationLogoutRequested',
+      'emits [AuthenticationState.unknown] when'
+      ' AuthenticationStatusChanged',
       build: () => authenticationBloc,
       act: (bloc) async {
+        when(mockAuthenticationRepository.user).thenAnswer(
+          (realInvocation) => Stream.value(User.empty),
+        );
         bloc.add(
-          AuthenticationLogoutRequested(),
+          AuthenticationInitialized(),
         );
       },
-      expect: () => <dynamic>[],
-    );
-    blocTest<AuthenticationBloc, AuthenticationState>(
-      'emits [AuthenticationState] when'
-      ' AppUserRoleChanged',
-      build: () => authenticationBloc,
-      act: (bloc) async {
-        bloc.add(
-          const AppUserRoleChanged(UserRole.civilian),
-        );
-      },
-      expect: () => [
-        AuthenticationState.authenticated(
-          currentUser: KTestText.user,
-          currentUserSetting:
-              KTestText.userSetting.copyWith(userRole: UserRole.civilian),
-        ),
+      expect: () async => [
+        const AuthenticationState.unknown(),
       ],
     );
-    blocTest<AuthenticationBloc, AuthenticationState>(
-      'emits [AuthenticationState] when'
-      ' AuthenticationDeleteRequested',
-      build: () => authenticationBloc,
-      act: (bloc) async {
-        bloc.add(
-          AuthenticationDeleteRequested(),
+    group('Call AuthenticationInitialized auto', () {
+      setUp(() {
+        when(mockAuthenticationRepository.isAnonymously).thenAnswer(
+          (realInvocation) => false,
         );
-      },
-    );
+        authenticationBloc.add(AuthenticationInitialized());
+      });
+      blocTest<AuthenticationBloc, AuthenticationState>(
+        'emits [AuthenticationState] when'
+        ' AppLanguageChanged',
+        build: () => authenticationBloc,
+        act: (bloc) async {
+          bloc.add(
+            const AppLanguageChanged(),
+          );
+        },
+        expect: () async => [
+          const AuthenticationState.authenticated(
+            currentUser: KTestText.user,
+            currentUserSetting: KTestText.userSetting,
+          ),
+          AuthenticationState.authenticated(
+            currentUser: KTestText.user,
+            currentUserSetting:
+                KTestText.userSetting.copyWith(locale: Language.english),
+          ),
+        ],
+      );
+      blocTest<AuthenticationBloc, AuthenticationState>(
+        'emits [AuthenticationState] when'
+        ' AuthenticationLogoutRequested',
+        build: () => authenticationBloc,
+        act: (bloc) async {
+          bloc.add(
+            AuthenticationLogoutRequested(),
+          );
+        },
+        expect: () => [
+          const AuthenticationState.authenticated(
+            currentUser: KTestText.user,
+            currentUserSetting: KTestText.userSetting,
+          ),
+        ],
+      );
+      blocTest<AuthenticationBloc, AuthenticationState>(
+        'emits [AuthenticationState] when'
+        ' AppUserRoleChanged',
+        build: () => authenticationBloc,
+        act: (bloc) async {
+          bloc.add(
+            const AppUserRoleChanged(UserRole.veteran),
+          );
+        },
+        expect: () => [
+          const AuthenticationState.authenticated(
+            currentUser: KTestText.user,
+            currentUserSetting: KTestText.userSetting,
+          ),
+          AuthenticationState.authenticated(
+            currentUser: KTestText.user,
+            currentUserSetting:
+                KTestText.userSetting.copyWith(userRole: UserRole.veteran),
+          ),
+        ],
+      );
+      blocTest<AuthenticationBloc, AuthenticationState>(
+        'emits [AuthenticationState] when'
+        ' AuthenticationDeleteRequested',
+        build: () => authenticationBloc,
+        act: (bloc) async {
+          bloc.add(
+            AuthenticationDeleteRequested(),
+          );
+        },
+        expect: () => [
+          const AuthenticationState.authenticated(
+            currentUser: KTestText.user,
+            currentUserSetting: KTestText.userSetting,
+          ),
+        ],
+      );
+    });
   });
 }

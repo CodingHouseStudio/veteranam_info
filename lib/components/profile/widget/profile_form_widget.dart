@@ -135,7 +135,7 @@ class _ProfileFormWidgetState extends State<ProfileFormWidget> {
           fieldKey: KWidgetkeys.screen.profile.emailFied,
           controller: emailController,
           hint: KMockText.email,
-          readOnly: true,
+          enabled: true,
           isDesk: widget.isDesk,
         ),
         KSizedBox.kHeightSizedBox32,
@@ -182,11 +182,11 @@ class _ProfileFormWidgetState extends State<ProfileFormWidget> {
     required TextEditingController controller,
     required bool isDesk,
     void Function(String text)? onChanged,
-    bool readOnly = false,
+    bool enabled = false,
   }) {
     return TextFieldWidget(
       widgetKey: fieldKey,
-      readOnly: readOnly,
+      enabled: enabled,
       controller: controller,
       labelText: hint,
       hintStyle: isDesk

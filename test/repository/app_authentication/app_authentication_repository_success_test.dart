@@ -56,9 +56,12 @@ void main() {
           .thenAnswer(
         (_) async => mockUserCredential,
       );
-      when(mockFirebaseAuth.signInWithCredential(KTestText.oAuthCredential))
+      when(mockFirebaseAuth.signInWithCredential(KTestText.authCredential))
           .thenAnswer(
         (_) async => mockUserCredential,
+      );
+      when(mockUserCredential.user).thenAnswer(
+        (_) => null,
       );
       when(
         mockFirebaseAuth.signInWithEmailAndPassword(
@@ -244,7 +247,6 @@ void main() {
         mockCache,
         mockFacebookAuth,
       )
-        ..isWeb = true
         ..googleAuthProvider = mockGoogleAuthProvider
         ..facebookAuthProvider = mockFacebookAuthProvider;
     });
@@ -252,7 +254,7 @@ void main() {
       expect(
         await appAuthenticationRepository.signUpWithGoogle(),
         isA<Right<SomeFailure, User?>>()
-            .having((e) => e.value, 'value', isTrue),
+            .having((e) => e.value, 'value', isNull),
       );
     });
     test('Sign up with google(credential null)', () async {
@@ -281,7 +283,7 @@ void main() {
       expect(
         await appAuthenticationRepository.signUpWithFacebook(),
         isA<Right<SomeFailure, User?>>()
-            .having((e) => e.value, 'value', isTrue),
+            .having((e) => e.value, 'value', isNull),
       );
     });
     test('LogIn with email and password', () async {
@@ -290,7 +292,8 @@ void main() {
           email: KTestText.userEmail,
           password: KTestText.passwordCorrect,
         ),
-        isA<Right<SomeFailure, bool>>().having((e) => e.value, 'value', isTrue),
+        isA<Right<SomeFailure, User?>>()
+            .having((e) => e.value, 'value', isNull),
       );
     });
     test('Sign up', () async {
@@ -299,7 +302,8 @@ void main() {
           email: KTestText.userEmail,
           password: KTestText.passwordCorrect,
         ),
-        isA<Right<SomeFailure, bool>>().having((e) => e.value, 'value', isTrue),
+        isA<Right<SomeFailure, User?>>()
+            .having((e) => e.value, 'value', isNull),
       );
     });
     test('Is logged in', () {
@@ -425,7 +429,8 @@ void main() {
       ).called(1);
       expect(
         result,
-        isA<Right<SomeFailure, bool>>().having((e) => e.value, 'value', isTrue),
+        isA<Right<SomeFailure, User?>>()
+            .having((e) => e.value, 'value', isNull),
       );
     });
     test('Is Anonymously', () async {

@@ -3,8 +3,7 @@ import 'dart:async';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:firebase_core/firebase_core.dart' as firebase_core;
-import 'package:flutter/foundation.dart'
-    show kIsWeb, visibleForTesting; //debugPrint
+import 'package:flutter/foundation.dart' show visibleForTesting; //debugPrint
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -36,14 +35,11 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
 
   /// Whether or not the current environment is web
   /// Should only be overridden for testing purposes. Otherwise,
-  /// defaults to [kIsWeb]
-  @visibleForTesting
-  bool isWeb = kIsWeb;
   @visibleForTesting
   firebase_auth.GoogleAuthProvider googleAuthProvider =
       firebase_auth.GoogleAuthProvider();
   @visibleForTesting
-  firebase_auth.OAuthCredential? oAuthCredential;
+  firebase_auth.AuthCredential? authCredential;
   @visibleForTesting
   firebase_auth.FacebookAuthProvider facebookAuthProvider =
       firebase_auth.FacebookAuthProvider();
@@ -88,7 +84,9 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
             // debugPrint('Firebase Auth State Changed: User is authenticated');
             // debugPrint('Firebase User Details: $userCredentionalSetting');
             _cache.write(
-                key: userSettingCacheKey, value: userCredentionalSetting);
+              key: userSettingCacheKey,
+              value: userCredentionalSetting,
+            );
           } else {
             // debugPrint('Firebase Auth State Changed: '
             //     'User is unauthenticated (User.empty)');
@@ -120,8 +118,8 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
     try {
       final credential = await _getGoogleAuthCredential();
       if (credential != null) {
-        final userCredentional =
-            await _firebaseAuth.signInWithCredential(credential);
+        final userCredentional = await _firebaseAuth
+            .signInWithCredential(authCredential ?? credential);
 
         return Right(userCredentional.user?.toUser);
       }
@@ -139,7 +137,7 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   }
 
   Future<firebase_auth.AuthCredential?> _getGoogleAuthCredential() async {
-    if (isWeb) {
+    if (Config.isWeb) {
       return _getGoogleAuthCredentialWeb();
     } else {
       return _getGoogleAuthCredentialMobile();
@@ -156,11 +154,10 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   Future<firebase_auth.AuthCredential> _getGoogleAuthCredentialMobile() async {
     final googleUser = await _googleSignIn.signIn();
     final googleAuth = await googleUser!.authentication;
-    return oAuthCredential ??
-        firebase_auth.GoogleAuthProvider.credential(
-          accessToken: googleAuth.accessToken,
-          idToken: googleAuth.idToken,
-        );
+    return firebase_auth.GoogleAuthProvider.credential(
+      accessToken: googleAuth.accessToken,
+      idToken: googleAuth.idToken,
+    );
   }
 
   /// Starts the Sign In with Facebook Flow.
@@ -171,8 +168,8 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
     try {
       final credential = await _getFacebookAuthCredential();
       if (credential != null) {
-        final userCredentional =
-            await _firebaseAuth.signInWithCredential(credential);
+        final userCredentional = await _firebaseAuth
+            .signInWithCredential(authCredential ?? credential);
 
         return Right(userCredentional.user?.toUser);
       }
@@ -190,7 +187,7 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   }
 
   Future<firebase_auth.AuthCredential?> _getFacebookAuthCredential() async {
-    if (isWeb) {
+    if (Config.isWeb) {
       return _getFacebookAuthCredentialWeb();
     } else {
       return _getFacebookAuthCredentialMobile();
@@ -214,10 +211,9 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
     }
 
     // Create a credential from the access token
-    return oAuthCredential ??
-        firebase_auth.FacebookAuthProvider.credential(
-          loginResult.accessToken!.tokenString,
-        );
+    return firebase_auth.FacebookAuthProvider.credential(
+      loginResult.accessToken!.tokenString,
+    );
   }
 
   /// Signs in with the provided [email] and [password].

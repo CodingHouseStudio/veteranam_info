@@ -100,7 +100,8 @@ class AuthenticationBloc
   ) {
     userSettingSubscription = _authenticationRepository.userSetting
         .listen((userSetting) => add(_AppUserSettingChanged(userSetting)));
-    // authenticationStatusSubscription = _authenticationRepository.status.listen(
+    // authenticationStatusSubscription = _authenticationRepository.
+    // status.listen(
     //   (status) => add(AuthenticationStatusChanged(status)),
     // );
     userSubscription = _authenticationRepository.user.listen(
@@ -117,7 +118,7 @@ class AuthenticationBloc
     late AuthenticationStatus status;
     if (event.user.isEmpty) {
       status = AuthenticationStatus.unknown;
-    } else if (_authenticationRepository.isAnonymouslyOrEmty) {
+    } else if (_authenticationRepository.isAnonymously) {
       status = AuthenticationStatus.anonymous;
     } else {
       status = AuthenticationStatus.authenticated;
