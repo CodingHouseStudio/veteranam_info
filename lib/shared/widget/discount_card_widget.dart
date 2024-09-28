@@ -73,7 +73,7 @@ class DiscountCardWidget extends StatelessWidget {
                           Text(
                             key: KWidgetkeys.widget.discountCard.date,
                             discountItem.dateVerified
-                                .toLocalDateString(context),
+                                .toLocalDateString(context: context),
                             style: AppTextStyle.materialThemeLabelSmall,
                             overflow: TextOverflow.clip,
                           ),

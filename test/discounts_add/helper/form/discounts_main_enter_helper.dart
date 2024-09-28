@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:veteranam/shared/shared.dart';
 
@@ -8,7 +9,8 @@ Future<void> discountsAddMainEnterHelper({
   required WidgetTester tester,
   required String categoryText,
   required String cityText,
-  required String periodText,
+  bool tapOnperiod = true,
+  bool tapIndefinitely = false,
 }) async {
   expect(
     find.byKey(KWidgetkeys.screen.discountsAdd.categoryField),
@@ -20,12 +22,10 @@ Future<void> discountsAddMainEnterHelper({
     itemKey: KWidgetkeys.screen.discountsAdd.categoryField,
   );
 
-  // await tester.enterText(
-  //   find.byKey(KWidgetkeys.screen.discountsAdd.categoryField),
-  //   categoryText,
-  // );
-
-  await dropListFieldItemHelper(tester: tester);
+  await tester.enterText(
+    find.byKey(KWidgetkeys.screen.discountsAdd.categoryField),
+    categoryText,
+  );
 
   expect(
     find.byKey(KWidgetkeys.screen.discountsAdd.cityField),
@@ -44,6 +44,10 @@ Future<void> discountsAddMainEnterHelper({
 
   await tester.pumpAndSettle();
 
+  await tester.sendKeyEvent(LogicalKeyboardKey.enter);
+
+  await tester.pumpAndSettle();
+
   expect(
     find.byKey(KWidgetkeys.screen.discountsAdd.periodField),
     findsOneWidget,
@@ -54,12 +58,22 @@ Future<void> discountsAddMainEnterHelper({
     itemKey: KWidgetkeys.screen.discountsAdd.periodField,
   );
 
-  await tester.enterText(
-    find.byKey(KWidgetkeys.screen.discountsAdd.periodField),
-    periodText,
-  );
+  if (tapIndefinitely) {
+    await tester.tap(
+      find.byKey(KWidgetkeys.screen.discountsAdd.indefinitelySwitcher),
+      warnIfMissed: false,
+    );
 
-  await tester.pumpAndSettle();
+    await tester.pumpAndSettle();
+  }
+
+  if (tapOnperiod) {
+    await tester.tap(
+      find.byKey(KWidgetkeys.screen.discountsAdd.periodField),
+    );
+
+    await tester.pumpAndSettle();
+  }
 
   await discountsAddSendHelper(tester);
 }

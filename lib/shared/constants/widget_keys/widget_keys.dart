@@ -94,6 +94,7 @@ part 'widget/card_epmty.dart';
 part 'widget/drop_down_button.dart';
 part 'widget/switch_offline.dart';
 part 'widget/multi_drop_field.dart';
+part 'widget/cities_drop_field.dart';
 
 abstract class KWidgetkeys {
   static _ScreenKeys get screen => _ScreenKeys();

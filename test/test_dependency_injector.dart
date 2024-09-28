@@ -9,6 +9,7 @@ import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:veteranam/components/components.dart';
 import 'package:veteranam/shared/shared.dart';
 
@@ -17,6 +18,8 @@ import 'test_dependency.dart';
 /// COMMENT: Method register Services, Repositories and Blocs in tests
 void configureDependenciesTest() {
   // register logic if user id empty user setting is also empty
+  initializeDateFormatting(Language.english.value.languageCode);
+  initializeDateFormatting(Language.ukrain.value.languageCode);
   userSetting();
   mobBuild();
   Config.isWeb = true;
@@ -201,6 +204,8 @@ void configureDependenciesTest() {
 void configureFailureDependenciesTest() {
   // register logic if user id empty user setting is also empty
   userSetting();
+  initializeDateFormatting(Language.english.value.languageCode);
+  initializeDateFormatting(Language.ukrain.value.languageCode);
   Config.isWeb = true;
   Config.falvourValue = Config.development;
   KTest.isTest = true;

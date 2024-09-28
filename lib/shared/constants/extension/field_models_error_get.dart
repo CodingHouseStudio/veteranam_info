@@ -129,3 +129,14 @@ extension DiscountsFieldModelValidationErrorEmpl
     }
   }
 }
+
+extension DateFieldModelValidationErrorEmpl on DateFieldModelValidationError? {
+  String? value(BuildContext context) {
+    switch (this) {
+      case DateFieldModelValidationError.empty:
+        return context.l10n.fieldCannotBeEmpty;
+      case null:
+        return null;
+    }
+  }
+}

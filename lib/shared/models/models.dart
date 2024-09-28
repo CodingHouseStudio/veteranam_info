@@ -1,3 +1,4 @@
+export 'city_model.dart';
 export 'convertors/convertors.dart';
 export 'device_info_model.dart';
 export 'discount_model.dart';
@@ -15,6 +16,7 @@ export 'report_model.dart';
 export 'resume_model.dart';
 export 'story_model.dart';
 export 'tag_model.dart';
+export 'translate_model.dart';
 export 'user_model.dart';
 export 'user_setting_model.dart';
 export 'work_model.dart';

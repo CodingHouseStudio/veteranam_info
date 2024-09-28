@@ -7,7 +7,6 @@ import 'package:veteranam/shared/shared.dart';
 
 import '../../test_dependency.dart';
 
-/// COMMENT: exmaple for either repository
 void main() {
   setUp(configureFailureDependenciesTest);
 
@@ -17,8 +16,8 @@ void main() {
 
   tearDown(GetIt.I.reset);
 
-  group('${KScreenBlocName.home} ${KGroupText.repository} ', () {
-    late IFaqRepository faqRepository;
+  group('Cities ${KGroupText.repository} ', () {
+    late ICitiesRepository citiesRepostory;
     late FirestoreService mockFirestoreService;
     setUp(() {
       ExtendedDateTime.id = '';
@@ -26,77 +25,54 @@ void main() {
     });
     group('${KGroupText.successfulGet} ', () {
       setUp(() {
-        when(mockFirestoreService.getQuestions()).thenAnswer(
-          (_) async => KTestText.questionModelItems,
-        );
-        when(
-          mockFirestoreService.addQuestion(KTestText.questionModelItems.first),
-        ).thenAnswer(
-          (realInvocation) async {},
+        when(mockFirestoreService.getCities()).thenAnswer(
+          (_) async => KTestText.cityModelItems,
         );
         if (GetIt.I.isRegistered<FirestoreService>()) {
           GetIt.I.unregister<FirestoreService>();
         }
         GetIt.I.registerSingleton(mockFirestoreService);
-        faqRepository = FaqRepository();
+        citiesRepostory = CitiesRepository();
       });
       test('questions', () async {
         expect(
-          await faqRepository.getQuestions(),
-          isA<Right<SomeFailure, List<QuestionModel>>>()
-              .having((e) => e.value, 'value', KTestText.questionModelItems),
+          await citiesRepostory.getCities(),
+          isA<Right<SomeFailure, List<CityModel>>>()
+              .having((e) => e.value, 'value', KTestText.cityModelItems),
         );
-      });
-      test('mock', () async {
-        faqRepository.addMockQuestions();
-        verify(
-          mockFirestoreService.addQuestion(
-            KTestText.questionModelItems.first,
-          ),
-        ).called(1);
       });
     });
     group('${KGroupText.failure} ', () {
       setUp(() {
-        when(mockFirestoreService.getQuestions())
+        when(mockFirestoreService.getCities())
             .thenThrow(Exception(KGroupText.failureGet));
         if (GetIt.I.isRegistered<FirestoreService>()) {
           GetIt.I.unregister<FirestoreService>();
         }
         GetIt.I.registerSingleton(mockFirestoreService);
-        faqRepository = FaqRepository();
+        citiesRepostory = CitiesRepository();
       });
       test('Get questions', () async {
         expect(
-          await faqRepository.getQuestions(),
-          isA<Left<SomeFailure, List<QuestionModel>>>(),
-          // .having(
-          //   (e) => e.value,
-          //   'value',
-          //   isA<SomeFailure>,
-          // ),
+          await citiesRepostory.getCities(),
+          isA<Left<SomeFailure, List<CityModel>>>(),
         );
       });
     });
     group('${KGroupText.firebaseFailure} ', () {
       setUp(() {
-        when(mockFirestoreService.getQuestions())
+        when(mockFirestoreService.getCities())
             .thenThrow(FirebaseException(plugin: KGroupText.failureGet));
         if (GetIt.I.isRegistered<FirestoreService>()) {
           GetIt.I.unregister<FirestoreService>();
         }
         GetIt.I.registerSingleton(mockFirestoreService);
-        faqRepository = FaqRepository();
+        citiesRepostory = CitiesRepository();
       });
       test('Get questions', () async {
         expect(
-          await faqRepository.getQuestions(),
-          isA<Left<SomeFailure, List<QuestionModel>>>(),
-          // .having(
-          //   (e) => e.value,
-          //   'value',
-          //   isA<SomeFailure>,
-          // ),
+          await citiesRepostory.getCities(),
+          isA<Left<SomeFailure, List<CityModel>>>(),
         );
       });
     });

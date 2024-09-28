@@ -15,18 +15,19 @@ class PasswordFieldModel
 
   @override
   PasswordFieldModelValidationError? validator(String value) {
-    if (value.isEmpty) {
+    final text = value.trim();
+    if (text.isEmpty) {
       return PasswordFieldModelValidationError.empty;
     }
 
     // Check for minimum and maximum length
-    if (value.length < 8) {
+    if (text.length < 8) {
       return PasswordFieldModelValidationError.invalidLength;
     }
-    if (!RegExp('[A-Z]').hasMatch(value)) {
+    if (!RegExp('[A-Z]').hasMatch(text)) {
       return PasswordFieldModelValidationError.capitalLetter;
     }
-    if (!RegExp(r'\d').hasMatch(value)) {
+    if (!RegExp(r'\d').hasMatch(text)) {
       return PasswordFieldModelValidationError.oneNumber;
     }
 
