@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:feedback/feedback.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -72,14 +74,14 @@ class AppWidget extends StatelessWidget {
       listenWhen: (previous, current) =>
           previous.userSetting.locale != current.userSetting.locale ||
           (previous.user?.isEmpty ?? true),
-      listener: (context, state) async =>
-          initializeDateFormatting(state.userSetting.locale.value.languageCode),
+      listener: (context, state) => unawaited(
+        initializeDateFormatting(state.userSetting.locale.value.languageCode),
+      ),
       builder: (context, state) {
         if (state.status == AuthenticationStatus.unknown) {
           return const SizedBox.shrink();
         }
         final localeValue = state.userSetting.locale.value;
-
         return kIsWeb
             ? body(localeValue)
             : BetterFeedback(

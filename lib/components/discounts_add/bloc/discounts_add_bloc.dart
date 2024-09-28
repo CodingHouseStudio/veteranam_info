@@ -30,7 +30,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
             exclusions: MessageFieldModel.pure(),
             formState: DiscountsAddEnum.initial,
             citiesList: [],
-            isIndefinitely: false,
+            isIndefinitely: true,
           ),
         ) {
     on<_Started>(_onStarted);
@@ -75,7 +75,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
         description: const MessageFieldModel.pure(),
         exclusions: const MessageFieldModel.pure(),
         formState: DiscountsAddEnum.initial,
-        isIndefinitely: false,
+        isIndefinitely: true,
         citiesList: [],
       ),
     );
@@ -108,7 +108,8 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
     _CityAdd event,
     Emitter<DiscountsAddState> emit,
   ) {
-    final cityFieldModel = state.city.add(event.city);
+    final cityFieldModel =
+        CitiesFieldModel.dirty(state.city.value.addFieldModel(event.city));
 
     emit(
       state.copyWith(
@@ -123,7 +124,10 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
     _CityRemove event,
     Emitter<DiscountsAddState> emit,
   ) {
-    final cityFieldModel = state.city.remove(event.city);
+    final citiesList = state.city.value.removeFieldModel(event.city);
+    final cityFieldModel = citiesList.isEmpty
+        ? const CitiesFieldModel.pure()
+        : CitiesFieldModel.dirty(citiesList);
 
     emit(
       state.copyWith(
@@ -187,8 +191,8 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
     _DiscountAddItem event,
     Emitter<DiscountsAddState> emit,
   ) {
-    final discountsFieldModel = state.discounts.add(
-      event.discount,
+    final discountsFieldModel = DiscountsFieldModel.dirty(
+      state.discounts.value.addFieldModel(_getAddPercent(event.discount)),
     );
 
     emit(
@@ -204,9 +208,11 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
     _DiscountRemoveItem event,
     Emitter<DiscountsAddState> emit,
   ) {
-    final discountsFieldModel = state.discounts.remove(
-      event.discount,
-    );
+    final discountsList =
+        state.discounts.value.removeFieldModel(_getAddPercent(event.discount));
+    final discountsFieldModel = discountsList.isEmpty
+        ? const DiscountsFieldModel.pure()
+        : DiscountsFieldModel.dirty(discountsList);
 
     emit(
       state.copyWith(
@@ -215,6 +221,11 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
         formState: DiscountsAddEnum.detailInProgress,
       ),
     );
+  }
+
+  String _getAddPercent(String value) {
+    final intValue = int.tryParse(value);
+    return intValue == null ? value : '$intValue%';
   }
 
   void _onLinkUpdated(
@@ -300,7 +311,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
     }
     if (Formz.validate([state.description, state.exclusions])) {
       final discount = DiscountModel(
-        id: ExtendedDateTime.id,
+        id: ExtendedDateTime.id.customSubstring(0, 6),
         discount: state.discounts.getValue
             .where(
               (element) => element != null,

@@ -13,6 +13,7 @@ Future<void> discountsAddCorectHelper({
     tester: tester,
     categoryText: KTestText.sendDiscountModel.category.first,
     cityText: KTestText.sendDiscountModel.location!.first,
+    tapIndefinitely: true,
     // periodText: KTestText.sendDiscountModel.expiration!,
   );
 

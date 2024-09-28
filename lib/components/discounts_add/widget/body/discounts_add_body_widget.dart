@@ -226,7 +226,9 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
                       : null,
                 ),
                 disabledBorder: KWidgetTheme.outlineInputBorderEnabled,
-                cursor: SystemMouseCursors.click,
+                cursor: _.isIndefinitely
+                    ? SystemMouseCursors.basic
+                    : SystemMouseCursors.click,
                 enabled: false,
                 showErrorText: _.formState.hasError,
                 errorText: _.period.error.value(context),

@@ -40,7 +40,7 @@ Future<void> discountsAddInitialHelper(
         findsOneWidget,
       );
 
-      await switchHelper(tester: tester);
+      await switchHelper(tester: tester, isActive: true);
 
       expect(
         find.byKey(KWidgetkeys.screen.discountsAdd.indefinitelyText),

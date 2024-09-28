@@ -15,6 +15,7 @@ Future<void> discountsAddUncorectHelper({
     cityText: KTestText.fieldEmpty,
     // periodText: KTestText.fieldEmpty,
     tapOnperiod: false,
+    tapIndefinitely: true,
   );
 
   await discountsAddMainHelper(tester: tester);

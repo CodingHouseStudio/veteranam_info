@@ -127,7 +127,16 @@ class _MultiDropFieldImplementationWidgetState<T extends Object>
   void initState() {
     super.initState();
     controller = widget.controller ?? TextEditingController();
-    focusNode = (widget.focusNode ?? FocusNode())..onKeyEvent = _handleKeyEvent;
+    focusNode = (widget.focusNode ?? FocusNode())
+      ..onKeyEvent = _handleKeyEvent
+      ..addListener(_unFocusData);
+  }
+
+  void _unFocusData() {
+    if (!focusNode.hasFocus) {
+      widget.onChanged?.call(controller.text);
+      controller.clear();
+    }
   }
 
   KeyEventResult _handleKeyEvent(
@@ -240,6 +249,7 @@ class _MultiDropFieldImplementationWidgetState<T extends Object>
 
   @override
   void dispose() {
+    focusNode.removeListener(_unFocusData);
     if (widget.controller == null) controller.dispose();
     if (widget.focusNode == null) focusNode.dispose();
     super.dispose();

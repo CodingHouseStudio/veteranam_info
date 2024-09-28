@@ -117,6 +117,10 @@ extension DiscountModelLocation on DiscountModel {
 }
 
 extension StringExtension on String {
+  String customSubstring(int start, [int? end]) {
+    return substring(start, end != null ? min(end, length) : null);
+  }
+
   bool get isUrlValid {
     const urlPattern = r'(https?://[^\s]+)';
     final regex = RegExp(
