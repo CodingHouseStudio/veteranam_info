@@ -8,12 +8,14 @@ import '../../test_dependency.dart';
 Future<void> discountsAddPumpAppHelper({
   required IDiscountRepository mockDiscountRepository,
   required IAppAuthenticationRepository mockAppAuthenticationRepository,
+  required ICitiesRepository mockCitiesRepository,
   required WidgetTester tester,
   MockGoRouter? mockGoRouter,
 }) async {
   _registerDiscountsAddBloc(
     mockDiscountRepository: mockDiscountRepository,
     mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+    mockCitiesRepository: mockCitiesRepository,
   );
   await tester.pumpApp(
     const DiscountsAddScreen(),
@@ -31,10 +33,12 @@ Future<void> discountsAddPumpAppHelper({
 void _registerDiscountsAddBloc({
   required IDiscountRepository mockDiscountRepository,
   required IAppAuthenticationRepository mockAppAuthenticationRepository,
+  required ICitiesRepository mockCitiesRepository,
 }) {
   final discountsAddBloc = DiscountsAddBloc(
     discountRepository: mockDiscountRepository,
-    appAuthenticationBloc: mockAppAuthenticationRepository,
+    appAuthenticationRepository: mockAppAuthenticationRepository,
+    citiesRepository: mockCitiesRepository,
   );
   if (GetIt.I.isRegistered<DiscountsAddBloc>()) {
     GetIt.I.unregister<DiscountsAddBloc>();

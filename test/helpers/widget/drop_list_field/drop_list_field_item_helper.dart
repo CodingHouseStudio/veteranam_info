@@ -6,15 +6,17 @@ import '../../../test_dependency.dart';
 
 Future<void> dropListFieldItemHelper({
   required WidgetTester tester,
-  int itemIndex = 0,
+  required Key textFieldKey,
+  String? Function()? itemTextWidget,
+  int fieldIndex = 0,
 }) async {
   expect(
     find.byKey(KWidgetkeys.widget.dropListField.widget),
-    findsOneWidget,
+    findsWidgets,
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.dropListField.field),
+    find.byKey(textFieldKey),
     findsOneWidget,
   );
 
@@ -29,12 +31,12 @@ Future<void> dropListFieldItemHelper({
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.dropListField.trailing),
-    findsOneWidget,
+    find.byKey(KWidgetkeys.widget.dropListField.icon),
+    findsWidgets,
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.dropListField.closeIcon),
+    find.byKey(KWidgetkeys.widget.dropListField.activeIcon),
     findsNothing,
   );
 
@@ -57,35 +59,37 @@ Future<void> dropListFieldItemHelper({
   );
 
   await tester.tap(
-    find.byKey(KWidgetkeys.widget.dropListField.field),
+    find.byKey(textFieldKey),
     warnIfMissed: false,
   );
 
   await tester.pumpAndSettle();
 
   expect(
-    find.byKey(KWidgetkeys.widget.dropListField.closeIcon),
+    find.byKey(KWidgetkeys.widget.dropListField.activeIcon),
     findsOneWidget,
   );
 
-  // expect(
-  //   find.byKey(KWidgetkeys.widget.dropListField.list),
-  //   findsOneWidget,
-  // );
+  expect(
+    find.byKey(KWidgetkeys.widget.dropListField.list),
+    findsOneWidget,
+  );
 
   expect(
-    find.byType(MenuItemButton),
+    find.byKey(KWidgetkeys.widget.dropListField.item),
     findsWidgets,
   );
 
-  expect(
-    find.byKey(KWidgetkeys.widget.dropListField.closeIcon),
-    findsOneWidget,
-  );
+  if (itemTextWidget == null) {
+    expect(
+      find.byKey(KWidgetkeys.widget.dropListField.itemText),
+      findsWidgets,
+    );
+  }
 
   expect(
-    find.byKey(KWidgetkeys.widget.dropListField.trailing),
-    findsNothing,
+    find.byKey(KWidgetkeys.widget.dropListField.activeIcon),
+    findsOneWidget,
   );
 
   // expect(
@@ -93,32 +97,38 @@ Future<void> dropListFieldItemHelper({
   //   findsWidgets,
   // );
 
-  final buttonWidget = tester.widget<MenuItemButton>(
-    find.byType(MenuItemButton).at(itemIndex),
-  );
+  final text = itemTextWidget?.call() ??
+      tester
+          .widget<Text>(
+            find.byKey(KWidgetkeys.widget.dropListField.itemText).first,
+          )
+          .data;
 
   await tester.tap(
-    find.byType(MenuItemButton).at(itemIndex),
+    find.byKey(KWidgetkeys.widget.dropListField.item).first,
   );
 
   await tester.pumpAndSettle();
 
-  // expect(
-  //   find.byKey(KWidgetkeys.widget.dropListField.list),
-  //   findsNothing,
-  // );
-
   expect(
-    find.byType(MenuItemButton),
+    find.byKey(KWidgetkeys.widget.dropListField.activeIcon),
     findsNothing,
   );
 
-  if (buttonWidget.child == null || buttonWidget.child! is! Text) return;
-  final textWidget = buttonWidget.child! as Text;
+  expect(
+    find.byKey(KWidgetkeys.widget.dropListField.item),
+    findsNothing,
+  );
+
+  expect(
+    find.byKey(KWidgetkeys.widget.dropListField.list),
+    findsNothing,
+  );
+
   expect(
     find.descendant(
       of: find.byKey(KWidgetkeys.widget.dropListField.widget),
-      matching: find.text(textWidget.data!),
+      matching: find.text(text ?? ''),
     ),
     findsOneWidget,
   );

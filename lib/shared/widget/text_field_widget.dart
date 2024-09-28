@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:veteranam/shared/shared.dart';
 
 class TextFieldWidget extends StatefulWidget {
@@ -36,8 +35,13 @@ class TextFieldWidget extends StatefulWidget {
     this.hintStyle,
     // this.text,
     this.suffixIconPadding,
-    this.inputFormatterList,
     this.showErrorText,
+    this.labelTextStyle,
+    this.textStyle,
+    this.cursor,
+    this.disabledBorder,
+    this.floatingLabelBehavior,
+    this.borderHoverColor = AppColors.materialThemeRefNeutralNeutral40,
   });
   final Key widgetKey;
   final TextAlign? textAlign;
@@ -59,7 +63,8 @@ class TextFieldWidget extends StatefulWidget {
   final void Function(String)? onSubmitted;
   final bool? enabled;
   final FocusNode? focusNode;
-  final InputBorder? enabledBorder;
+  final OutlineInputBorder? enabledBorder;
+  final OutlineInputBorder? disabledBorder;
   final InputBorder? focusedBorder;
   final int? errorMaxLines;
   final bool? readOnly;
@@ -70,8 +75,12 @@ class TextFieldWidget extends StatefulWidget {
   final bool isDesk;
   // final String? text;
   final double? suffixIconPadding;
-  final List<TextInputFormatter>? inputFormatterList;
   final bool? showErrorText;
+  final TextStyle? labelTextStyle;
+  final TextStyle? textStyle;
+  final MouseCursor? cursor;
+  final FloatingLabelBehavior? floatingLabelBehavior;
+  final Color? borderHoverColor;
 
   @override
   State<TextFieldWidget> createState() => _TextFieldWidgetState();
@@ -120,10 +129,9 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
         keyboardType: widget.keyboardType ?? TextInputType.text,
         textInputAction: TextInputAction.done,
         textAlign: widget.textAlign ?? TextAlign.start,
-        style: AppTextStyle.materialThemeTitleMedium,
+        style: widget.textStyle ?? AppTextStyle.materialThemeTitleMedium,
         // context.theme.textTheme.headlineSmall,
-        inputFormatters: widget.inputFormatterList,
-        onChanged: widget.onChanged,
+        onChanged: widget.onChanged, mouseCursor: widget.cursor,
         decoration: KWidgetTheme.inputDecoration.copyWith(
           hintStyle: widget.hintStyle,
           contentPadding: widget.contentPadding ??
@@ -135,25 +143,29 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
                   : const EdgeInsets.all(KPadding.kPaddingSize16)),
           labelText: widget.labelText,
           border: widget.border,
-          enabledBorder: KWidgetTheme.outlineInputBorderEnabled.copyWith(
-            borderSide: isHovered
-                ? const BorderSide(
-                    color: AppColors.materialThemeRefNeutralNeutral40,
-                  )
-                : null,
-          ),
+          enabledBorder: widget.enabledBorder ??
+              KWidgetTheme.outlineInputBorderEnabled.copyWith(
+                borderSide: isHovered && widget.borderHoverColor != null
+                    ? BorderSide(
+                        color: widget.borderHoverColor!,
+                      )
+                    : null,
+              ),
           focusedErrorBorder: widget.border,
           fillColor: widget.fillColor,
           hintText: widget.hintText,
           errorText: widget.showErrorText ?? true ? widget.errorText : null,
           suffixIcon: Padding(
-            padding: EdgeInsets.only(
-              right: widget.suffixIconPadding ?? KPadding.kPaddingSize4,
+            padding: EdgeInsets.symmetric(
+              horizontal: widget.suffixIconPadding ?? KPadding.kPaddingSize4,
             ),
             child: widget.suffixIcon,
           ),
           prefixIcon: widget.prefixIcon,
           errorMaxLines: widget.errorMaxLines,
+          labelStyle: widget.labelTextStyle,
+          disabledBorder: widget.disabledBorder,
+          floatingLabelBehavior: widget.floatingLabelBehavior,
         ),
       ),
     );
