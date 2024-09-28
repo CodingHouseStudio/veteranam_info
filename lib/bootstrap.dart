@@ -7,7 +7,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 // ignore: depend_on_referenced_packages
 import 'package:flutter_web_plugins/url_strategy.dart' show usePathUrlStrategy;
-import 'package:intl/date_symbol_data_local.dart';
 import 'package:veteranam/shared/shared.dart';
 
 class AppBlocObserver extends BlocObserver {
