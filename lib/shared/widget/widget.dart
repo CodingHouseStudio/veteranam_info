@@ -18,6 +18,7 @@ export 'chat_input_widget.dart';
 export 'check_point_single_widget.dart';
 export 'check_point_widget.dart';
 export 'chip_widget.dart';
+export 'cities_drop_field_widget.dart';
 export 'city_list_widget.dart';
 export 'closel_button_widget.dart';
 export 'complaint_widget.dart';

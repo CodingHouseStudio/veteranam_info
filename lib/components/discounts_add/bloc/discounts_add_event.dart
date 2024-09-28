@@ -5,8 +5,11 @@ class DiscountsAddEvent with _$DiscountsAddEvent {
   const factory DiscountsAddEvent.started() = _Started;
   const factory DiscountsAddEvent.categoryUpdate(String category) =
       _CategoryUpdate;
-  const factory DiscountsAddEvent.cityUpdate(String city) = _CityUpdate;
-  const factory DiscountsAddEvent.periodUpdate(String? period) = _PeriodUpdate;
+  const factory DiscountsAddEvent.cityAdd(String city) = _CityAdd;
+  const factory DiscountsAddEvent.cityRemove(String city) = _CityRemove;
+  const factory DiscountsAddEvent.periodUpdate(Future<DateTime?> period) =
+      _PeriodUpdate;
+  const factory DiscountsAddEvent.indefinitelyUpdate() = _IndefinitelyUpdate;
   const factory DiscountsAddEvent.titleUpdate(String title) = _TitleUpdate;
   const factory DiscountsAddEvent.discountAddItem(String discount) =
       _DiscountAddItem;

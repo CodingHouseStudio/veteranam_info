@@ -13,7 +13,9 @@ Future<void> discountsAddUncorectHelper({
     tester: tester,
     categoryText: KTestText.fieldEmpty,
     cityText: KTestText.fieldEmpty,
-    periodText: KTestText.fieldEmpty,
+    // periodText: KTestText.fieldEmpty,
+    tapOnperiod: false,
+    tapIndefinitely: true,
   );
 
   await discountsAddMainHelper(tester: tester);
@@ -33,12 +35,12 @@ Future<void> discountsAddUncorectHelper({
     tester: tester,
     categoryText: KTestText.sendDiscountModel.category.first,
     cityText: KTestText.sendDiscountModel.location!.first,
-    periodText: KTestText.sendDiscountModel.expiration!,
+    // periodText: KTestText.sendDiscountModel.expiration!,
   );
 
   await discountsAddMainHelper(tester: tester, hasField: false);
 
-  await discountsAddDetailHelper(tester: tester, useDiscountsHelper: true);
+  await discountsAddDetailHelper(tester: tester);
 
   await discountsAddDetailEnterHelper(
     tester: tester,
@@ -48,6 +50,8 @@ Future<void> discountsAddUncorectHelper({
   );
 
   await discountsAddDetailHelper(tester: tester);
+
+  await multiDropFieldRemoveHelper(tester);
 
   await discountsAddDetailEnterHelper(
     tester: tester,

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:veteranam/shared/shared.dart';
 
@@ -7,19 +7,25 @@ import '../../../test_dependency.dart';
 Future<void> dropListFieldHelper({
   required WidgetTester tester,
   required String text,
+  required Key textFieldKey,
+  String? Function()? itemTextWidget,
+  int fieldIndex = 0,
 }) async {
   await dropListFieldItemHelper(
     tester: tester,
+    textFieldKey: textFieldKey,
+    itemTextWidget: itemTextWidget,
+    fieldIndex: fieldIndex,
   );
 
   await tester.tap(
-    find.byKey(KWidgetkeys.widget.dropListField.field),
+    find.byKey(textFieldKey),
     warnIfMissed: false,
   );
   await tester.pumpAndSettle();
 
   await tester.enterText(
-    find.byKey(KWidgetkeys.widget.dropListField.widget),
+    find.byKey(textFieldKey),
     text,
   );
 
@@ -27,29 +33,23 @@ Future<void> dropListFieldHelper({
 
   expect(
     find.descendant(
-      of: find.byKey(KWidgetkeys.widget.dropListField.widget),
+      of: find.byKey(textFieldKey),
       matching: find.text(text),
     ),
     findsWidgets,
   );
 
   await tester.enterText(
-    find.byKey(KWidgetkeys.widget.dropListField.widget),
-    text,
+    find.byKey(textFieldKey),
+    '',
   );
 
   await tester.pumpAndSettle();
-
-  expect(
-    find.byType(MenuItemButton),
-    findsWidgets,
-  );
 
   await tester.tap(
-    find.byType(MenuItemButton).first,
+    find.byKey(KWidgetkeys.widget.dropListField.activeIcon).first,
   );
 
-  await tester.pumpAndSettle();
   // expect(
   //   find.byKey(KWidgetkeys.widget.dropListField.item),
   //   findsNothing,

@@ -17,7 +17,10 @@ Future<void> discountsAddSendHelper(
     findsOneWidget,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.screen.discountsAdd.sendButton));
+  await tester.tap(
+    find.byKey(KWidgetkeys.screen.discountsAdd.sendButton),
+    warnIfMissed: false,
+  );
 
   await tester.pumpAndSettle();
 

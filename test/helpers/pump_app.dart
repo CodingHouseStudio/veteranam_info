@@ -58,20 +58,25 @@ extension PumpApp on WidgetTester {
           ],
         ],
         child: BlocBuilder<AuthenticationBloc, AuthenticationState>(
-          builder: (context, state) => mockGoRouter == null
-              ? _body(
+          builder: (context, state) {
+            final localeValue = state.userSetting.locale.value;
+            if (mockGoRouter == null) {
+              return _body(
+                widget: widget,
+                currentLocale: localeValue,
+                addFeedback: addFeedback,
+              );
+            } else {
+              return MockGoRouterProvider(
+                goRouter: mockGoRouter,
+                child: _body(
                   widget: widget,
-                  currentLocale: state.userSetting.locale.value,
+                  currentLocale: localeValue,
                   addFeedback: addFeedback,
-                )
-              : MockGoRouterProvider(
-                  goRouter: mockGoRouter,
-                  child: _body(
-                    widget: widget,
-                    currentLocale: state.userSetting.locale.value,
-                    addFeedback: addFeedback,
-                  ),
                 ),
+              );
+            }
+          },
         ),
       ),
     );

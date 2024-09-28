@@ -10,11 +10,12 @@ class PhoneNumberFieldModel
 
   @override
   PhoneNumberFieldModelValidationError? validator(String? value) {
-    if (value == null || value.isEmpty) {
+    final text = value?.trim();
+    if (text == null || text.isEmpty) {
       return PhoneNumberFieldModelValidationError.empty;
     }
     final phoneRegExp = RegExp(r'^\+?[0-9]{7,15}$');
-    if (!phoneRegExp.hasMatch(value)) {
+    if (!phoneRegExp.hasMatch(text)) {
       return PhoneNumberFieldModelValidationError.invalid;
     }
     return null;
