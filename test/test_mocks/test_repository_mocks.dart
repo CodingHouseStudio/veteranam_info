@@ -78,6 +78,7 @@ import 'package:veteranam/shared/shared.dart';
     MockSpec<FacebookAuth>(),
     MockSpec<LoginResult>(),
     MockSpec<firebase_auth.FacebookAuthProvider>(),
+    MockSpec<ICitiesRepository>(),
   ],
 )
 void load() => debugPrint('loaded');

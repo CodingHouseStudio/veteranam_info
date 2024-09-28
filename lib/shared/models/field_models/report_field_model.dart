@@ -14,13 +14,14 @@ class ReportFieldModel
 
   @override
   ReportFieldModelValidationError? validator(String? value) {
-    if (value == null) {
+    final text = value?.trim();
+    if (text == null) {
       return ReportFieldModelValidationError.empty;
     }
-    if (value.trim().isEmpty) {
+    if (text.isEmpty) {
       return ReportFieldModelValidationError.empty;
     }
-    if (value.length <= 15) {
+    if (text.length <= 15) {
       return ReportFieldModelValidationError.invalidLength;
     }
     // if (value.contains(RegExp(r'[^a-zA-Z0-9\s]')) ||

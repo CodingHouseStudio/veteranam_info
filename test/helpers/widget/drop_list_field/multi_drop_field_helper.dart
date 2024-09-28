@@ -7,20 +7,27 @@ import '../../../test_dependency.dart';
 Future<void> multiDropFieldHelper({
   required WidgetTester tester,
   required String text,
+  required Key textFieldKey,
+  String? Function()? itemTextWidget,
+  int fieldIndex = 0,
 }) async {
-  await dropListFieldHelper(tester: tester, text: text);
-
-  expect(find.byKey(KWidgetkeys.widget.multiDropField.chips), findsOneWidget);
+  await dropListFieldHelper(
+    tester: tester,
+    text: text,
+    textFieldKey: textFieldKey,
+    fieldIndex: fieldIndex,
+    itemTextWidget: itemTextWidget,
+  );
 
   await tester.tap(
-    find.byKey(KWidgetkeys.widget.dropListField.field),
+    find.byKey(textFieldKey),
     warnIfMissed: false,
   );
 
   await tester.pumpAndSettle();
 
   await tester.tap(
-    find.byType(MenuItemButton).first,
+    find.byKey(KWidgetkeys.widget.dropListField.item).first,
   );
 
   await tester.pumpAndSettle();
@@ -28,14 +35,29 @@ Future<void> multiDropFieldHelper({
   expect(find.byKey(KWidgetkeys.widget.multiDropField.chips), findsOneWidget);
 
   await tester.tap(
-    find.byKey(KWidgetkeys.widget.dropListField.field),
+    find.byKey(textFieldKey),
     warnIfMissed: false,
   );
 
   await tester.pumpAndSettle();
 
   await tester.tap(
-    find.byType(MenuItemButton).at(1),
+    find.byKey(KWidgetkeys.widget.dropListField.item).first,
+  );
+
+  await tester.pumpAndSettle();
+
+  expect(find.byKey(KWidgetkeys.widget.multiDropField.chips), findsOneWidget);
+
+  await tester.tap(
+    find.byKey(textFieldKey),
+    warnIfMissed: false,
+  );
+
+  await tester.pumpAndSettle();
+
+  await tester.tap(
+    find.byKey(KWidgetkeys.widget.dropListField.item).at(1),
   );
 
   await tester.pumpAndSettle();
@@ -48,7 +70,7 @@ Future<void> multiDropFieldHelper({
 
   expect(find.byKey(KWidgetkeys.widget.multiDropField.chips), findsOneWidget);
 
-  await tester.tap(find.byKey(KWidgetkeys.widget.multiDropField.chips));
+  await tester.tap(find.byKey(KWidgetkeys.widget.multiDropField.chips).first);
 
   await tester.pumpAndSettle();
 

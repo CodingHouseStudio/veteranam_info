@@ -56,7 +56,7 @@ List<Widget> _textFieldWidgetList({
       ),
       if (isDesk) KSizedBox.kHeightSizedBox24 else KSizedBox.kHeightSizedBox8,
       DropListFieldWidget(
-        key: KWidgetkeys.screen.employer.fieldCity,
+        textFieldKey: KWidgetkeys.screen.employer.fieldCity,
         onChanged: null,
         labelText: context.l10n.selectCity,
         dropDownList: KMockText.dropDownList,

@@ -12,7 +12,7 @@ class NameFieldModel extends FormzInput<String, NameFieldModelValidationError> {
     if (value == null) {
       return NameFieldModelValidationError.empty;
     }
-    if (value.isEmpty) {
+    if (value.trim().isEmpty) {
       return NameFieldModelValidationError.empty;
     }
     return null;

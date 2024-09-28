@@ -21,13 +21,6 @@ Future<void> discountsAddMainHelper({
     matcher,
   );
 
-  if (hasField) {
-    await dropListFieldHelper(
-      tester: tester,
-      text: KTestText.field,
-    );
-  }
-
   expect(
     find.byKey(KWidgetkeys.screen.discountsAdd.cityField),
     matcher,

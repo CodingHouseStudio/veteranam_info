@@ -574,4 +574,32 @@ class FirestoreService {
       return event();
     }
   }
+
+  Future<List<CityModel>> getCities() async {
+    try {
+      // Try to get the data from the server first
+      final docSnapshot = await _db
+          .collection(FirebaseCollectionName.cities)
+          .where('type', isEqualTo: 'CITY')
+          .get(getOptions);
+
+      // If the server fetch is successful, return the data
+      return docSnapshot.docs
+          .map((doc) => CityModel.fromJson(doc.data()))
+          .toList();
+    } on FirebaseException catch (e) {
+      if (e.code == 'unavailable' && offlineMode.isOffline) {
+        // If the server is unavailable, fall back to the cache
+        final docSnapshot = await _db
+            .collection(FirebaseCollectionName.questions)
+            .get(getCacheOptions);
+
+        return docSnapshot.docs
+            .map((doc) => CityModel.fromJson(doc.data()))
+            .toList();
+      } else {
+        rethrow;
+      }
+    }
+  }
 }

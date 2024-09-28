@@ -14,7 +14,7 @@ class LinkFieldModel extends FormzInput<String, LinkFieldModelValidationError> {
 
   @override
   LinkFieldModelValidationError? validator(String? value) {
-    if (value == null || value.isEmpty) {
+    if (value == null || value.trim().isEmpty) {
       return LinkFieldModelValidationError.empty;
     }
     if (value.length <= 12) {

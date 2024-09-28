@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:veteranam/shared/shared.dart';
 
@@ -7,10 +9,13 @@ class DropListFieldWidget extends StatelessWidget {
     required this.labelText,
     required this.dropDownList,
     required this.isDesk,
+    required this.textFieldKey,
     super.key,
     this.showErrorText,
     this.errorText,
+    // this.initialValue,
     this.controller,
+    this.focusNode,
   });
 
   final void Function(String text)? onChanged;
@@ -19,11 +24,14 @@ class DropListFieldWidget extends StatelessWidget {
   final bool isDesk;
   final bool? showErrorText;
   final String? errorText;
+  // final String? initialValue;
   final TextEditingController? controller;
+  final FocusNode? focusNode;
+  final Key textFieldKey;
 
   @override
   Widget build(BuildContext context) {
-    return DropListFieldImplementationWidget(
+    return DropListFieldImplementationWidget<String>(
       labelText: labelText,
       dropDownList: dropDownList,
       isDesk: isDesk,
@@ -31,190 +39,268 @@ class DropListFieldWidget extends StatelessWidget {
       errorText: errorText,
       onChanged: onChanged,
       showErrorText: showErrorText,
-      searchCallback: (entries, query) {
-        onChanged?.call(query);
-        final index = entries.indexWhere(
-          (entry) => entry.label.toLowerCase().contains(query.toLowerCase()),
-        );
-        return index == -1 ? null : index;
+      item: (element) => Text(
+        element,
+        key: KWidgetkeys.widget.dropListField.itemText,
+        style: AppTextStyle.materialThemeBodyLarge,
+      ),
+      focusNode: focusNode,
+      optionsBuilder: (TextEditingValue textEditingValue) {
+        if (textEditingValue.text.isEmpty || dropDownList.isEmpty) {
+          return dropDownList;
+        }
+
+        return dropDownList
+            .where(
+              (element) => element.toLowerCase().contains(
+                    textEditingValue.text.toLowerCase(),
+                  ),
+            )
+            .toList();
       },
+      // initialValue: initialValue,
+      onSelectedItem: (String value) => value,
+      onSelected: onChanged, textFieldKey: textFieldKey,
     );
   }
 }
 
-class DropListFieldImplementationWidget extends StatelessWidget {
+class DropListFieldImplementationWidget<T extends Object>
+    extends StatefulWidget {
   const DropListFieldImplementationWidget({
     required this.labelText,
     required this.dropDownList,
     required this.isDesk,
+    required this.optionsBuilder,
+    required this.item,
+    required this.onChanged,
+    required this.onSelected,
+    required this.textFieldKey,
+    this.onSelectedItem,
     super.key,
-    this.onChanged,
     this.showErrorText,
     this.errorText,
     this.controller,
     this.focusNode,
-    this.elementList,
     this.enabled,
-    this.searchCallback,
+    this.unfocusSufixIcon,
+    // this.initialValue,
+    this.suffixIconPadding,
+    this.fieldParentWidget,
   });
 
   final void Function(String text)? onChanged;
   final String labelText;
-  final List<String> dropDownList;
+  final List<T> dropDownList;
   final bool isDesk;
   final bool? showErrorText;
   final String? errorText;
   final TextEditingController? controller;
   final FocusNode? focusNode;
-  final List<Widget>? elementList;
   final bool? enabled;
-  final int? Function(List<DropdownMenuEntry<String>>, String)? searchCallback;
+  final Widget Function(T element) item;
+  final FutureOr<Iterable<T>> Function(TextEditingValue) optionsBuilder;
+  final Icon? unfocusSufixIcon;
+  final void Function(T)? onSelected;
+  final String Function(T value)? onSelectedItem;
+  // final String? initialValue;
+  final double? suffixIconPadding;
+  final Widget Function({
+    required Widget textField,
+    required Widget suffixIcon,
+  })? fieldParentWidget;
+  final Key textFieldKey;
+
+  @override
+  State<DropListFieldImplementationWidget<T>> createState() =>
+      _DropListFieldImplementationWidgetState();
+}
+
+class _DropListFieldImplementationWidgetState<T extends Object>
+    extends State<DropListFieldImplementationWidget<T>> {
+  late GlobalKey _anchorKey;
+  late TextEditingController controller;
+  late FocusNode focusNode;
+  late bool showActiveIcon;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = widget.controller ?? TextEditingController();
+    focusNode = widget.focusNode ?? FocusNode();
+    focusNode.addListener(_changeIcon);
+    showActiveIcon = false;
+
+    _anchorKey = GlobalKey();
+  }
+
+  double? getWidth(GlobalKey key) {
+    final context = key.currentContext;
+    if (context != null) {
+      final box = context.findRenderObject()! as RenderBox;
+      return box.hasSize ? box.size.width : null;
+    }
+    return null;
+  }
+
+  void _changeIcon() => setState(() {
+        showActiveIcon = focusNode.hasFocus;
+      });
 
   @override
   Widget build(BuildContext context) {
-    return DropdownMenu<String>(
+    return RawAutocomplete<T>(
       key: KWidgetkeys.widget.dropListField.widget,
-      controller: controller,
-      label: Text(
-        labelText,
-        key: KWidgetkeys.widget.dropListField.field,
+      optionsBuilder: (textEditingValue) => widget.optionsBuilder(
+        TextEditingValue(text: textEditingValue.text.trim()),
       ),
-      requestFocusOnTap: true,
-      searchCallback: searchCallback,
-      trailingIcon: _getElementWidget(
-        KIcon.trailing.copyWith(
-          key: KWidgetkeys.widget.dropListField.trailing,
-        ),
-      ),
-      selectedTrailingIcon: KIcon.close.copyWith(
-        key: KWidgetkeys.widget.dropListField.closeIcon,
-      ),
-      onSelected: (value) => onChanged?.call(value ?? ''),
-      enabled: enabled ?? true,
-      dropdownMenuEntries: List.generate(
-        dropDownList.length,
-        (int index) => DropdownMenuEntry<String>(
-          // key: KWidgetkeys.widget.dropListField.item,
-          value: dropDownList.elementAt(index),
-          label: dropDownList.elementAt(index),
-          style: KButtonStyles.dropFieldButtonStyle,
-        ),
-      ),
-      menuHeight: KMinMaxSize.maxHeight220,
-      menuStyle: KWidgetTheme.dropTextMenuStyle,
-      expandedInsets: EdgeInsets.zero,
-      inputDecorationTheme: KWidgetTheme.inputDecorationTheme.copyWith(
-        contentPadding: (isDesk
-            ? const EdgeInsets.symmetric(
-                horizontal: KPadding.kPaddingSize32,
-                vertical: KPadding.kPaddingSize20,
-              )
-            : const EdgeInsets.all(KPadding.kPaddingSize20)),
-        floatingLabelBehavior: (elementList?.isEmpty ?? true)
-            ? null
-            : FloatingLabelBehavior.always,
-      ),
-      errorText: showErrorText ?? true ? errorText : null,
       focusNode: focusNode,
+      textEditingController: controller,
+      optionsViewBuilder: (context, onSelected, options) {
+        final anchorWidth = getWidth(_anchorKey);
+        return Align(
+          alignment: Alignment.topLeft,
+          child: Container(
+            constraints: BoxConstraints(
+              maxHeight: widget.isDesk
+                  ? KMinMaxSize.maxHeight400
+                  : KMinMaxSize.maxHeight220,
+              maxWidth: anchorWidth ?? double.infinity,
+            ),
+            margin: const EdgeInsets.only(top: KPadding.kPaddingSize4),
+            decoration: KWidgetTheme.boxDecorationCard,
+            child: ListView.builder(
+              shrinkWrap: true,
+              key: KWidgetkeys.widget.dropListField.list,
+              padding: const EdgeInsets.symmetric(
+                vertical: KPadding.kPaddingSize16,
+              ),
+              itemBuilder: (context, index) => Padding(
+                padding: index == 0
+                    ? EdgeInsets.zero
+                    : const EdgeInsets.only(top: KPadding.kPaddingSize8),
+                child: TextButton(
+                  key: KWidgetkeys.widget.dropListField.item,
+                  onPressed: () {
+                    focusNode.unfocus();
+                    onSelected(options.elementAt(index));
+                  },
+                  style: KButtonStyles.dropListButtonStyle,
+                  child: widget.item(options.elementAt(index)),
+                ),
+              ),
+              // separatorBuilder: (context, index) => const Divider(),
+              itemCount: options.length,
+            ),
+          ),
+        );
+      },
+      // initialValue: TextEditingValue(text: widget.initialValue ?? ''),
+      onSelected: widget.onSelected,
+      displayStringForOption:
+          widget.onSelectedItem ?? RawAutocomplete.defaultStringForOption,
+      fieldViewBuilder:
+          (context, textEditingController, focusNode, onFieldSubmitted) {
+        if (widget.fieldParentWidget != null && !focusNode.hasFocus) {
+          return InkWell(
+            mouseCursor: SystemMouseCursors.text,
+            hoverColor: Colors.transparent,
+            focusColor: Colors.transparent,
+            splashColor: Colors.transparent,
+            onTap: () => focusNode.requestFocus(),
+            child: widget.fieldParentWidget!(
+              textField: _textField(showSuffixIcon: false),
+              suffixIcon: _suffixIcon,
+            ),
+          );
+        }
+        return _textField(showSuffixIcon: true);
+      },
     );
-    // return Autocomplete<String>(
+    // return DropdownMenu<String>(
     //   key: KWidgetkeys.widget.dropListField.widget,
-    //   optionsBuilder: (TextEditingValue textEditingValue) {
-    //     if (textEditingValue.text.isEmpty) {
-    //       return widget.dropDownList;
-    //     }
-
-    //     return widget.dropDownList
-    //         .where(
-    //           (element) => element.toLowerCase().contains(
-    //                 textEditingValue.text.toLowerCase(),
-    //               ),
-    //         )
-    //         .toList();
-    //   },
-    //   optionsViewBuilder: (context, onSelected, options) {
-    //     return Align(
-    //       alignment: Alignment.topLeft,
-    //       child: Container(
-    //         constraints: BoxConstraints(
-    //           maxHeight: widget.isDesk
-    //               ? KMinMaxSize.maxHeight400
-    //               : KMinMaxSize.maxHeight220,
-    //         ),
-    //         decoration: KWidgetTheme.boxDecorationCard,
-    //         clipBehavior: Clip.hardEdge,
-    //         child: ListView.builder(
-    //           shrinkWrap: true,
-    //           key: KWidgetkeys.widget.dropListField.list,
-    //           // padding: EdgeInsets.only(
-    //           //   right: (widget.isDesk
-    //           //           ? KPadding.kPaddingSize90
-    //           //           : KPadding.kPaddingSize16) *
-    //           //       2,
-    //           // ),
-    //           itemBuilder: (context, index) => TextButton(
-    //             key: KWidgetkeys.widget.dropListField.item,
-    //             onPressed: () => onSelected(options.elementAt(index)),
-    //             style: KButtonStyles.dropListButtonStyle,
-    //             child: Text(
-    //               options.elementAt(index),
-    //               key: KWidgetkeys.widget.dropListField.itemText,
-    //               style: AppTextStyle.materialThemeBodyLarge,
-    //             ),
-    //           ),
-    //           // separatorBuilder: (context, index) => const Divider(),
-    //           itemCount: options.length,
-    //         ),
-    //       ),
-    //     );
-    //   },
-    //   fieldViewBuilder:
-    //       (context, textEditingController, focusNode, onFieldSubmitted) {
-    //     focusNode
-    //         .addListener(() => setState(() => isFocused = focusNode.hasFocus
-    // ));
-    //     return TextFieldWidget(
-    //       widgetKey: KWidgetkeys.widget.dropListField.field,
-    //       controller: textEditingController,
-    //       focusNode: focusNode,
-    //       suffixIcon: isFocused
-    //           ? IconButton(
-    //               icon: KIcon.close.copyWith(
-    //                 key: KWidgetkeys.widget.dropListField.trailingUp,
-    //               ),
-    //               onPressed: focusNode.unfocus,
-    //             )
-    //           : KIcon.trailing.copyWith(
-    //               key: KWidgetkeys.widget.dropListField.trailing,
-    //             ),
-    //       onChanged: widget.onChanged,
-    //       hintText: widget.hintText,
-    //       disposeFocusNode: false,
-    //       isDesk: widget.isDesk,
-    //     );
-    //   },
+    //   controller: controller,
+    //   label: Text(
+    //     labelText,
+    //     key: KWidgetkeys.widget.dropListField.field,
+    //   ),
+    //   enableFilter: true,
+    //   requestFocusOnTap: true,
+    //   searchCallback: searchCallback,
+    //   trailingIcon: _getElementWidget(
+    //     KIcon.trailing.copyWith(
+    //       key: KWidgetkeys.widget.dropListField.trailing,
+    //     ),
+    //   ),
+    //   selectedTrailingIcon: KIcon.close.copyWith(
+    //     key: KWidgetkeys.widget.dropListField.closeIcon,
+    //   ),
+    //   onSelected: (value) => onChanged?.call(value ?? ''),
+    //   enabled: enabled ?? true,
+    //   dropdownMenuEntries: List.generate(
+    //     dropDownList.length,
+    //     (int index) => DropdownMenuEntry<String>(
+    //       // key: KWidgetkeys.widget.dropListField.item,
+    //       value: dropDownList.elementAt(index),
+    //       label: dropDownList.elementAt(index),
+    //       style: KButtonStyles.dropFieldButtonStyle,
+    //     ),
+    //   ),
+    //   menuHeight: KMinMaxSize.maxHeight220,
+    //   menuStyle: KWidgetTheme.dropTextMenuStyle,
+    //   expandedInsets: EdgeInsets.zero,
+    //   inputDecorationTheme: KWidgetTheme.inputDecorationTheme.copyWith(
+    //     contentPadding: (isDesk
+    //         ? const EdgeInsets.symmetric(
+    //             horizontal: KPadding.kPaddingSize32,
+    //             vertical: KPadding.kPaddingSize16,
+    //           )
+    //         : const EdgeInsets.all(KPadding.kPaddingSize16)),
+    //     floatingLabelBehavior: (elementList?.isEmpty ?? true)
+    //         ? null
+    //         : FloatingLabelBehavior.always,
+    //   ),
+    //   errorText: showErrorText ?? true ? errorText : null,
+    //   focusNode: focusNode,
     // );
   }
 
-  Widget _getElementWidget(Icon icon) =>
-      elementList != null && elementList!.isNotEmpty
-          ? Row(
-              children: [
-                const Spacer(),
-                Expanded(
-                  flex: 4,
-                  child: ScrollConfiguration(
-                    behavior: CustomScrollBehavior(),
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        children: elementList!,
-                      ),
-                    ),
-                  ),
-                ),
-                icon,
-              ],
-            )
-          : icon;
+  Widget _textField({required bool showSuffixIcon}) => TextFieldWidget(
+        key: _anchorKey, //KWidgetkeys.widget.dropListField.field,
+        widgetKey: widget.textFieldKey,
+        controller: controller,
+        focusNode: focusNode,
+        suffixIcon: showSuffixIcon ? _suffixIcon : null,
+        suffixIconPadding: widget.suffixIconPadding,
+        onChanged: widget.onChanged,
+        labelText: widget.labelText,
+        showErrorText: widget.showErrorText,
+        errorText: widget.errorText,
+        disposeFocusNode: false,
+        isDesk: widget.isDesk,
+        enabled: widget.enabled,
+        borderHoverColor:
+            showSuffixIcon ? AppColors.materialThemeRefNeutralNeutral40 : null,
+        floatingLabelBehavior:
+            showSuffixIcon ? null : FloatingLabelBehavior.always,
+      );
+
+  Widget get _suffixIcon => showActiveIcon
+      ? IconButton(
+          icon: KIcon.close.copyWith(
+            key: KWidgetkeys.widget.dropListField.activeIcon,
+          ),
+          onPressed: focusNode.unfocus,
+        )
+      : (widget.unfocusSufixIcon ?? KIcon.trailing).copyWith(
+          key: KWidgetkeys.widget.dropListField.icon,
+        );
+
+  @override
+  void dispose() {
+    focusNode.removeListener(_changeIcon);
+    if (widget.controller == null) controller.dispose();
+    if (widget.focusNode == null) focusNode.dispose();
+    super.dispose();
+  }
 }

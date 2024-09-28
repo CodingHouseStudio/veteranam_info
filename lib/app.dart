@@ -1,8 +1,11 @@
+import 'dart:async';
+
 import 'package:feedback/feedback.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:veteranam/components/components.dart';
 import 'package:veteranam/shared/shared.dart';
 
@@ -66,7 +69,14 @@ class AppWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AuthenticationBloc, AuthenticationState>(
+    return BlocConsumer<AuthenticationBloc, AuthenticationState>(
+      // Initiliazation date formating when change language and first app init
+      listenWhen: (previous, current) =>
+          previous.userSetting.locale != current.userSetting.locale ||
+          (previous.user?.isEmpty ?? true),
+      listener: (context, state) => unawaited(
+        initializeDateFormatting(state.userSetting.locale.value.languageCode),
+      ),
       builder: (context, state) {
         if (state.status == AuthenticationStatus.unknown) {
           return const SizedBox.shrink();
