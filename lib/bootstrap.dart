@@ -43,9 +43,6 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
     );
   }
 
-  await initializeDateFormatting(Language.ukrain.value.languageCode);
-  unawaited(initializeDateFormatting(Language.english.value.languageCode));
-
   configureDependencies();
 
   // await initializeDateFormatting();

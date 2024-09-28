@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:veteranam/shared/shared.dart';
 
 class TextFieldWidget extends StatefulWidget {
@@ -36,7 +35,6 @@ class TextFieldWidget extends StatefulWidget {
     this.hintStyle,
     // this.text,
     this.suffixIconPadding,
-    this.inputFormatterList,
     this.showErrorText,
     this.labelTextStyle,
     this.textStyle,
@@ -77,7 +75,6 @@ class TextFieldWidget extends StatefulWidget {
   final bool isDesk;
   // final String? text;
   final double? suffixIconPadding;
-  final List<TextInputFormatter>? inputFormatterList;
   final bool? showErrorText;
   final TextStyle? labelTextStyle;
   final TextStyle? textStyle;
@@ -134,7 +131,6 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
         textAlign: widget.textAlign ?? TextAlign.start,
         style: widget.textStyle ?? AppTextStyle.materialThemeTitleMedium,
         // context.theme.textTheme.headlineSmall,
-        inputFormatters: [...widget.inputFormatterList ?? [], InputFormatter()],
         onChanged: widget.onChanged, mouseCursor: widget.cursor,
         decoration: KWidgetTheme.inputDecoration.copyWith(
           hintStyle: widget.hintStyle,
@@ -184,15 +180,5 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
     //   controller?.dispose();
     // }
     super.dispose();
-  }
-}
-
-class InputFormatter extends TextInputFormatter {
-  @override
-  TextEditingValue formatEditUpdate(
-    TextEditingValue oldValue,
-    TextEditingValue newValue,
-  ) {
-    return newValue.copyWith(text: newValue.text.trimLeft());
   }
 }

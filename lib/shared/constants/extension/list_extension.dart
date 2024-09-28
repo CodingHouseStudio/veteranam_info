@@ -85,25 +85,27 @@ extension ListStringExtensions on List<String> {
 
 extension ListStringNullableExtensions on List<String>? {
   List<String> addFieldModel(String value) {
-    final listValue = value.isEmpty ? <String>[] : [value];
+    final text = value.trim();
+    final listValue = text.isEmpty ? <String>[] : [text];
     if (this == null) {
       return listValue;
     } else {
       late List<String> list;
-      if (this!.contains(value) || listValue.isEmpty) {
+      if (this!.contains(text) || listValue.isEmpty) {
         list = this!;
       } else {
-        list = List.from(this!)..add(value);
+        list = List.from(this!)..add(text);
       }
       return list;
     }
   }
 
   List<String> removeFieldModel(String value) {
+    final text = value.trim();
     if (this == null) {
       return [];
     } else {
-      return List.from(this!)..remove(value);
+      return List.from(this!)..remove(text);
     }
   }
 }

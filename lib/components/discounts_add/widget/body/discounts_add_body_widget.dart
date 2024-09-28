@@ -62,6 +62,7 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
               '';
         }
       },
+      // Add because without it we have small lag when fast write some fields
       buildWhen: (previous, current) =>
           previous.formState != current.formState ||
           previous.categoryList != current.categoryList ||

@@ -42,7 +42,7 @@ class DiscountsFieldModel
     if (value == null ||
         value.isEmpty ||
         value.any(
-          (element) => element.isEmpty,
+          (element) => element.trim().isEmpty,
         )) {
       return DiscountsFieldModelValidationError.empty;
     }

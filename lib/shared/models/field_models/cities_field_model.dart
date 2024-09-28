@@ -22,7 +22,7 @@ class CitiesFieldModel
     if (value == null ||
         value.isEmpty ||
         value.every(
-          (element) => element.isEmpty,
+          (element) => element.trim().isEmpty,
         )) {
       return CitiesFieldModelValidationError.empty;
     }

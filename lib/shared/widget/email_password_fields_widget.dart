@@ -164,7 +164,6 @@ class _EmailPasswordFieldsWidgetState extends State<EmailPasswordFieldsWidget>
             isDesk: widget.isDesk,
             controller: emailController,
             showErrorText: widget.showErrorText,
-            inputFormatterList: [EmailInputFormatter()],
           ),
         if (widget.bottomError != null) ...[
           KSizedBox.kHeightSizedBox8,
