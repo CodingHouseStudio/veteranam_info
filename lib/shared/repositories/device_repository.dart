@@ -1,3 +1,4 @@
+import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:dartz/dartz.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -163,8 +164,27 @@ class DeviceRepository implements IDeviceRepository {
     PlatformEnum platformValue, {
     bool provisional = false,
   }) async {
-    await _firebaseMessaging.requestPermission(
-      provisional: platformValue.isIOS && provisional,
-    );
+    if (platformValue.isIOS) {
+      // see if app tracking transparency is enabled
+      if (await AppTrackingTransparency.trackingAuthorizationStatus ==
+          TrackingStatus.notDetermined) {
+        // Request system's tracking authorization dialog
+        try {
+          await AppTrackingTransparency.requestTrackingAuthorization();
+        } catch (e) {
+          // Handle error
+        }
+        await _firebaseMessaging.requestPermission(
+          provisional: platformValue.isIOS && provisional,
+        );
+      } else {
+        await _firebaseMessaging.requestPermission(
+          provisional: platformValue.isIOS && provisional,
+        );
+      }
+    } else {
+      await _firebaseMessaging.requestPermission();
+    }
+    {}
   }
 }
