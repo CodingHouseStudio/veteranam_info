@@ -111,6 +111,39 @@ void main() {
             mockGoRouter: mockGoRouter,
           );
         });
+        group('${Config.business} ', () {
+          setUp(
+            () {
+              when(mockAuthenticationRepository.status).thenAnswer(
+                (realInvocation) =>
+                    Stream.value(AuthenticationStatus.authenticated),
+              );
+              Config.roleValue = Config.business;
+            },
+          );
+          testWidgets('${KRoute.profile.name} ', (tester) async {
+            await homePumpAppHelper(
+              // mockFeedbackRepository: mockFeedbackRepository,
+              mockFaqRepository: mockFaqRepository,
+              mockAuthenticationRepository: mockAuthenticationRepository,
+              mockBuildRepository: mockBuildRepository, tester: tester,
+              mockFirebaseRemoteConfigProvider:
+                  mockFirebaseRemoteConfigProvider,
+              mockGoRouter: mockGoRouter,
+              mockUrlRepository: mockUrlRepository,
+              // mockAppAuthenticationRepository:
+              // mockAppAuthenticationRepository,
+            );
+
+            await homeChangeWindowSizeHelper(
+              tester: tester,
+              test: () async => nawbarBusinessNavigationHelper(
+                tester: tester,
+                mockGoRouter: mockGoRouter,
+              ),
+            );
+          });
+        });
       });
     });
   });

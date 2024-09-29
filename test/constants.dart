@@ -558,6 +558,7 @@ abstract class KScreenBlocName {
   static const mobFaq = 'Mob FAQ Screen';
   static const userRole = 'User Role Screen';
   static const discountsAdd = 'Discounts Add Screen';
+  static const businessDashboard = 'Business Dashboard Screen';
 
   static const authenticationServices = 'Authentication Services';
   static const appRepository = 'App';

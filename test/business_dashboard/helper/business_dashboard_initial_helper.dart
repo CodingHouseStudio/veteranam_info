@@ -3,7 +3,7 @@ import 'package:veteranam/shared/shared.dart';
 
 import '../../test_dependency.dart';
 
-Future<void> thanksInitialHelper(
+Future<void> businessDashboardInitialHelper(
   WidgetTester tester,
 ) async {
   await changeWindowSizeHelper(
@@ -11,22 +11,21 @@ Future<void> thanksInitialHelper(
     windowsTest: true,
     test: () async {
       expect(
-        find.byKey(KWidgetkeys.screen.thanks.title),
+        find.byKey(KWidgetkeys.screen.businessDashboard.title),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.thanks.subtitle),
+        find.byKey(KWidgetkeys.screen.businessDashboard.subtitle),
+        findsOneWidget,
+      );
+      expect(
+        find.byKey(KWidgetkeys.screen.businessDashboard.myProfielBox),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.thanks.myProfielBox),
-        findsOneWidget,
-      );
-
-      expect(
-        find.byKey(KWidgetkeys.screen.thanks.homeBox),
+        find.byKey(KWidgetkeys.screen.businessDashboard.myDiscountsBox),
         findsOneWidget,
       );
     },
