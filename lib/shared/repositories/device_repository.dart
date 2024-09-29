@@ -2,6 +2,7 @@ import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:dartz/dartz.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart' show visibleForTesting;
 // import 'package:flutter/foundation.dart' show kIsWeb, kReleaseMode;
 import 'package:injectable/injectable.dart';
 import 'package:veteranam/shared/shared.dart';
@@ -17,6 +18,9 @@ class DeviceRepository implements IDeviceRepository {
   final FirebaseMessaging _firebaseMessaging;
   final DeviceInfoPlugin _deviceInfoPlugin;
   final AppInfoRepository _buildRepository;
+
+  @visibleForTesting
+  static TrackingStatus? appTrackingTransparency;
 
   @override
   Future<Either<SomeFailure, DeviceInfoModel?>> getDevice({
@@ -165,8 +169,10 @@ class DeviceRepository implements IDeviceRepository {
     bool provisional = false,
   }) async {
     if (platformValue.isIOS) {
+      final trackingAuthorizationStatus =
+          await AppTrackingTransparency.trackingAuthorizationStatus;
       // see if app tracking transparency is enabled
-      if (await AppTrackingTransparency.trackingAuthorizationStatus ==
+      if ((appTrackingTransparency ?? trackingAuthorizationStatus) ==
           TrackingStatus.notDetermined) {
         // Request system's tracking authorization dialog
         try {
