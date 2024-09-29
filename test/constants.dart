@@ -97,7 +97,7 @@ abstract class KTestText {
   static const version = '0.5.0';
   static const oldVersion = '0.2.0';
 
-  static const  developerEmail = 'developer@codinghouse.biz';
+  static const developerEmail = 'developer@codinghouse.biz';
 
   static final questionModelItems = <QuestionModel>[
     KMockText.questionModel,
