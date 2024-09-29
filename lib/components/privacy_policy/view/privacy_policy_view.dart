@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:veteranam/components/components.dart';
+import 'package:veteranam/components/privacy_policy/privacy_policy.dart';
 import 'package:veteranam/shared/shared.dart';
 
 class PrivacyPolicyDialog extends StatelessWidget {

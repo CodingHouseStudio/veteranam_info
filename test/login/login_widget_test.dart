@@ -111,7 +111,7 @@ void main() {
       });
     });
 
-    testWidgets('${KGroupText.intial} ', (tester) async {
+    testWidgets('${KGroupText.initial} ', (tester) async {
       await loginPumpAppHelper(
         mockAuthenticationRepository: mockAuthenticationRepository,
         tester: tester,
@@ -162,7 +162,7 @@ void main() {
     group('${KGroupText.goRouter} ', () {
       late MockGoRouter mockGoRouter;
       setUp(() => mockGoRouter = MockGoRouter());
-      testWidgets('${KGroupText.intial} ', (tester) async {
+      testWidgets('${KGroupText.initial} ', (tester) async {
         await loginPumpAppHelper(
           mockAuthenticationRepository: mockAuthenticationRepository,
           tester: tester,

@@ -35,7 +35,7 @@ void main() {
         (realInvocation) async => const Right(true),
       );
     });
-    testWidgets('${KGroupText.intial} ', (tester) async {
+    testWidgets('${KGroupText.initial} ', (tester) async {
       await questionFormPumpAppHelper(
         tester: tester,
         mockAuthenticationRepository: mockAuthenticationRepository,
@@ -65,7 +65,7 @@ void main() {
     group('${KGroupText.goRouter} ', () {
       late MockGoRouter mockGoRouter;
       setUp(() => mockGoRouter = MockGoRouter());
-      testWidgets('${KGroupText.intial} ', (tester) async {
+      testWidgets('${KGroupText.initial} ', (tester) async {
         await questionFormPumpAppHelper(
           tester: tester,
           mockGoRouter: mockGoRouter,

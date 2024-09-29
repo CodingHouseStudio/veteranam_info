@@ -1227,6 +1227,19 @@
     "examples": "Текст для кнопки на сторінці Discount Add.",
     "description": "Кнопка використовується для певернення на попередні етапи форми."
   },
+  "myDiscounts": "Мої Знижки",
+  "@myDiscounts": {
+    "examples": "Текст для кнопки яка появляється на Profile page та є заголовком My publications page.",
+    "description": "Кнопка використовується для переходу на My Publications page."
+  },
+  "businessDashboard": "Керування знижками",
+  "@businessDashboard": {
+    "examples": "Заголовок для сторінки Business Dashboard page"
+  },
+  "businessDashboardDescription": "Привіт! На цих сторінках ти можеш керувати своїми знижками.",
+  "@businessDashboardescription": {
+    "examples": "Підзаголовок на Business Dashboard page."
+  },
   "asBusiness": "як БІЗНЕС користувач",
   "@asBusiness": {
     "examples": "Текст для кнопки входу для бізнесу на сторінці UserRole",

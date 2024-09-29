@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:veteranam/components/components.dart';
+import 'package:veteranam/components/discount_card/discount_card.dart';
 import 'package:veteranam/shared/shared.dart';
 
 class DiscountCardDialog extends StatelessWidget {
