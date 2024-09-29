@@ -4,9 +4,9 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:veteranam/shared/shared.dart';
 
+part 'discounts_add_bloc.freezed.dart';
 part 'discounts_add_event.dart';
 part 'discounts_add_state.dart';
-part 'discounts_add_bloc.freezed.dart';
 
 @Injectable(env: [Config.business])
 class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
@@ -311,7 +311,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
     }
     if (Formz.validate([state.description, state.exclusions])) {
       final discount = DiscountModel(
-        id: ExtendedDateTime.id.customSubstring(0, 6),
+        id: ExtendedDateTime.id,
         discount: state.discounts.getValue
             .where(
               (element) => element != null,

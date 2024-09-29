@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:veteranam/components/components.dart';
+import 'package:veteranam/components/discounts/discounts.dart';
 import 'package:veteranam/shared/shared.dart';
 
 part 'advanced_filter_mob_state.dart';

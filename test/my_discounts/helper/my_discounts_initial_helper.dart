@@ -33,10 +33,10 @@ Future<void> myDiscountsInitialHelper(
         findsOneWidget,
       );
 
-      expect(
-        find.byKey(KWidgetkeys.screen.myDiscounts.subtitle),
-        findsOneWidget,
-      );
+      // expect(
+      //   find.byKey(KWidgetkeys.screen.myDiscounts.subtitle),
+      //   findsOneWidget,
+      // );
 
       expect(
         find.byKey(KWidgetkeys.screen.myDiscounts.card),

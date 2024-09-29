@@ -14,7 +14,7 @@ class ErrorBodyWidget extends StatelessWidget {
             ? Config.isWeb
                 ? context.goNamed(KRoute.home.name)
                 : context.goNamed(KRoute.settings.name)
-            : context.goNamed(KRoute.businessDiscounts.name),
+            : context.goNamed(KRoute.businessDashboard.name),
         child: Text(context.l10n.errorMessage),
       ),
     );

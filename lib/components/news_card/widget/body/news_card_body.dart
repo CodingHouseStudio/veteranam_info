@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:veteranam/components/components.dart';
+import 'package:veteranam/components/news_card/news_card.dart';
 import 'package:veteranam/shared/shared.dart';
 
 class NewsCardBody extends StatelessWidget {

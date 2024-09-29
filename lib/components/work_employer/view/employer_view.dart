@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:veteranam/components/components.dart';
+import 'package:veteranam/components/work_employer/employer.dart';
 import 'package:veteranam/shared/shared.dart';
 
 class WorkEmployerScreen extends StatelessWidget {
