@@ -19,30 +19,13 @@ class MyDiscountsBodyWidget extends StatelessWidget {
             .read<MyDiscountsWatcherBloc>()
             .add(const MyDiscountsWatcherEvent.started()),
       ),
-      builder: (context, _) => ScaffoldWidget(
-        titleChildWidgetsFunction: ({required isDesk}) => [
-          KSizedBox.kHeightSizedBox24,
-          Text(
-            context.l10n.discountsAndCoupons,
-            key: KWidgetkeys.screen.myDiscounts.title,
-            style: isDesk ? AppTextStyle.text96 : AppTextStyle.text32,
-          ),
-          KSizedBox.kHeightSizedBox8,
-          Text(
-            context.l10n.myDiscountsAndCoupons,
-            key: KWidgetkeys.screen.myDiscounts.subtitle,
-            style: isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
-          ),
-          if (isDesk)
-            KSizedBox.kHeightSizedBox56
-          else
-            KSizedBox.kHeightSizedBox32,
-          KSizedBox.kHeightSizedBox24,
-        ],
+      builder: (context, _) => ScaffoldAutoLoadingWidget(
         // mainDeskPadding: ({required maxWidth}) => const EdgeInsets.symmetric(
         //   horizontal: KPadding.kPaddingSize100,
         // ),
-        mainChildWidgetsFunction: ({required isDesk, required isTablet}) => [
+        loadingButtonText: context.l10n.moreFunds,
+        loadingStatus: _.loadingStatus,
+        mainChildWidgetsFunction: ({required isDesk}) => [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -69,6 +52,11 @@ class MyDiscountsBodyWidget extends StatelessWidget {
           else
             KSizedBox.kHeightSizedBox32,
         ],
+        loadFunction: () {
+          context
+              .read<MyDiscountsWatcherBloc>()
+              .add(const MyDiscountsWatcherEvent.started());
+        },
       ),
     );
   }

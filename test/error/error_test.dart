@@ -14,7 +14,7 @@ void main() {
 
   tearDown(GetIt.I.reset);
   group('${KScreenBlocName.error} ', () {
-    testWidgets('${KGroupText.intial} ', (tester) async {
+    testWidgets('${KGroupText.initial} ', (tester) async {
       await errorPumpAppHelper(tester: tester);
 
       await errorInitialHelper(tester);
@@ -22,7 +22,7 @@ void main() {
     group('${KGroupText.goRouter} ', () {
       late MockGoRouter mockGoRouter;
       setUp(() => mockGoRouter = MockGoRouter());
-      testWidgets('${KGroupText.intial} ', (tester) async {
+      testWidgets('${KGroupText.initial} ', (tester) async {
         await errorPumpAppHelper(tester: tester, mockGoRouter: mockGoRouter);
 
         await errorInitialHelper(tester);
@@ -56,7 +56,7 @@ void main() {
           await buttonHelper(
             tester: tester,
             mockGoRouter: mockGoRouter,
-            routeName: KRoute.businessDiscounts.name,
+            routeName: KRoute.businessDashboard.name,
           );
         });
       });

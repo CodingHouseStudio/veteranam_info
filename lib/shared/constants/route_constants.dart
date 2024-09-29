@@ -18,9 +18,9 @@ abstract class KRoute {
     path: 'discounts',
     name: 'Discounts',
   );
-  static const _RouteItem businessDiscounts = _RouteItem(
+  static const _RouteItem businessDashboard = _RouteItem(
     path: '/',
-    name: 'Discounts',
+    name: 'Business Dashboard',
   );
   static const _RouteItem stories = _RouteItem(
     path: 'stories',
@@ -39,7 +39,7 @@ abstract class KRoute {
     name: 'Support',
   );
   static const _RouteItem aboutUs = _RouteItem(
-    path: 'aboutUs',
+    path: 'about-us',
     name: 'AboutUs',
   );
   static const _RouteItem consultation = _RouteItem(
@@ -55,7 +55,7 @@ abstract class KRoute {
     name: 'Login',
   );
   static const _RouteItem signUp = _RouteItem(
-    path: 'signUp',
+    path: 'sign-up',
     name: 'SignUp',
   );
   static const _RouteItem thanks = _RouteItem(
@@ -75,7 +75,7 @@ abstract class KRoute {
     name: 'discountCard',
   );
   static const _RouteItem questionsForm = _RouteItem(
-    path: '/questionsForm',
+    path: '/questions-form',
     name: 'QuestionsForm',
   );
   static const _RouteItem workEmployee = _RouteItem(
@@ -99,11 +99,11 @@ abstract class KRoute {
     name: 'AddSaves',
   );
   static const _RouteItem profileMyStory = _RouteItem(
-    path: 'myStory',
+    path: 'my-story',
     name: 'MyStory',
   );
   static const _RouteItem underConstruction = _RouteItem(
-    path: '/underConstruction',
+    path: '/under-construction',
     name: 'UnderConstruction',
   );
   static const _RouteItem feedback = _RouteItem(
@@ -111,20 +111,20 @@ abstract class KRoute {
     name: 'Feedback',
   );
   static const _RouteItem myDiscounts = _RouteItem(
-    path: 'my',
+    path: 'discounts/manage',
     name: 'MyDiscounts',
   );
   static const _RouteItem settings = _RouteItem(
-    path: '/',
+    path: '/settings',
     name: 'Settings',
   );
   static const _RouteItem mobFAQ = _RouteItem(
-    path: 'FAQ',
+    path: 'faq',
     name: 'FAQ',
   );
   static const _RouteItem userRole = _RouteItem(
-    path: '/userRole',
-    name: 'UserRole',
+    path: '/intro',
+    name: 'intro',
   );
   static const _RouteItem discountsAdd = _RouteItem(
     path: 'add',

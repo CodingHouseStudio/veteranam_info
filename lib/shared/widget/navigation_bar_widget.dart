@@ -158,7 +158,18 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                                 }
                               },
                             )
-                        : null,
+                        : () => EasyDebounce.debounce(
+                              KAppText.logo,
+                              Duration.zero,
+                              () {
+                                if (Config.isWeb
+                                    // || !widget.showMobileNawbar
+                                    ) {
+                                  context
+                                      .goNamed(KRoute.businessDashboard.name);
+                                }
+                              },
+                            ),
                     icon: KImage.logo(
                       key: KWidgetkeys.widget.nawbar.logo,
                       // width: 78,
@@ -200,19 +211,36 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                       alignment: WrapAlignment.center,
                       crossAxisAlignment: WrapCrossAlignment.center,
                       children: [
-                        _button(
-                          key: KWidgetkeys.widget.nawbar.discountsButton,
-                          ruoteName: KRoute.discounts.name,
-                          text: context.l10n.discounts,
-                          icon: const IconWidget(
-                            icon: KIcon.tag,
-                            background: AppColors.materialThemeSourceSeed,
-                            padding: KPadding.kPaddingSize8,
+                        if (Config.isUser)
+                          _button(
+                            key: KWidgetkeys.widget.nawbar.discountsButton,
+                            ruoteName: KRoute.discounts.name,
+                            text: context.l10n.discounts,
+                            icon: const IconWidget(
+                              icon: KIcon.tag,
+                              background: AppColors.materialThemeSourceSeed,
+                              padding: KPadding.kPaddingSize8,
+                            ),
+                            width: context.isEnglish
+                                ? KSize.kPixel72
+                                : KSize.kPixel56,
                           ),
-                          width: context.isEnglish
-                              ? KSize.kPixel72
-                              : KSize.kPixel56,
-                        ),
+                        if (Config.isBusiness &&
+                            context.read<AuthenticationBloc>().state.status ==
+                                AuthenticationStatus.authenticated)
+                          _button(
+                            key: KWidgetkeys.widget.nawbar.myDiscountsButton,
+                            ruoteName: KRoute.myDiscounts.name,
+                            text: context.l10n.myDiscounts,
+                            icon: const IconWidget(
+                              icon: KIcon.tag,
+                              background: AppColors.materialThemeSourceSeed,
+                              padding: KPadding.kPaddingSize8,
+                            ),
+                            width: context.isEnglish
+                                ? KSize.kPixel72
+                                : KSize.kPixel56,
+                          ),
                         if (Config.isUser) ...[
                           if (widget.isDesk)
                             KSizedBox.kWidthSizedBox32
@@ -238,19 +266,27 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                           KSizedBox.kWidthSizedBox32
                         else
                           KSizedBox.kWidthSizedBox16,
-                        const CircleAvatar(
-                          radius: KPadding.kPaddingSize2,
-                        ),
+                        if (Config.isUser ||
+                            (Config.isBusiness &&
+                                context
+                                        .read<AuthenticationBloc>()
+                                        .state
+                                        .status ==
+                                    AuthenticationStatus.authenticated))
+                          const CircleAvatar(
+                            radius: KPadding.kPaddingSize2,
+                          ),
                         if (widget.isDesk)
                           KSizedBox.kWidthSizedBox32
                         else
                           KSizedBox.kWidthSizedBox16,
-                        _button(
-                          key: KWidgetkeys.widget.nawbar.feedbackButton,
-                          ruoteName: KRoute.feedback.name,
-                          text: context.l10n.contacts,
-                          width: KSize.kPixel70,
-                        ),
+                        if (Config.isUser || Config.isBusiness)
+                          _button(
+                            key: KWidgetkeys.widget.nawbar.feedbackButton,
+                            ruoteName: KRoute.feedback.name,
+                            text: context.l10n.contacts,
+                            width: KSize.kPixel70,
+                          ),
                       ],
                     ),
                   )
@@ -275,11 +311,11 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                 //       icon: KIcon.mic,
                 //     ),
                 //   ),
-                if (widget.isTablet)
+                if (widget.isTablet && !Config.isBusiness)
                   LanguagesSwitcherWidget(
                     key: KWidgetkeys.widget.nawbar.language,
                   )
-                else if (!isFocused)
+                else if (!isFocused && !Config.isBusiness)
                   IconButtonWidget(
                     key: KWidgetkeys.widget.nawbar.menuButton,
                     icon: KIcon.menu.copyWith(
@@ -291,7 +327,7 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                   ),
                 if (context.read<AuthenticationBloc>().state.status !=
                         AuthenticationStatus.authenticated &&
-                    Config.isDevelopment) ...[
+                    (Config.isDevelopment || Config.isBusiness)) ...[
                   if (widget.isDesk) ...[
                     KSizedBox.kWidthSizedBox16,
                     DoubleButtonWidget(
@@ -314,7 +350,7 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                 ],
                 if (context.read<AuthenticationBloc>().state.status ==
                         AuthenticationStatus.authenticated &&
-                    Config.isDevelopment)
+                    (Config.isDevelopment || Config.isBusiness))
                   if (!isFocused || widget.isTablet)
                     UserPhotoWidget(
                       key: KWidgetkeys.widget.nawbar.loginIcon,

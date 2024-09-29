@@ -76,30 +76,48 @@ class ProfileBodyWidget extends StatelessWidget {
             : EdgeInsets.zero,
         child: Column(
           children: [
-            BoxWidget(
-              key: KWidgetkeys.screen.profile.boxSaves,
-              text: context.l10n.saved,
-              isDesk: isDesk,
-              onTap: () => context.goNamed(
-                KRoute.profileSaves.name,
+            if (Config.isBusiness) ...[
+              BoxWidget(
+                key: KWidgetkeys.screen.profile.boxMyDiscounts,
+                text: context.l10n.myDiscounts,
+                isDesk: isDesk,
+                onTap: () => context.goNamed(
+                  KRoute.myDiscounts.name,
+                ),
               ),
-            ),
-            KSizedBox.kHeightSizedBox30,
-            BoxWidget(
-              key: KWidgetkeys.screen.profile.boxStory,
-              text: context.l10n.myStory,
-              isDesk: isDesk,
-              textIconPaddingWidget: KSizedBox.kHeightSizedBox56,
-              onTap: () => context.goNamed(KRoute.profileMyStory.name),
-            ),
-            KSizedBox.kHeightSizedBox30,
-            BoxWidget(
-              key: KWidgetkeys.screen.profile.boxFeedback,
-              text: context.l10n.myFeedback,
-              isDesk: isDesk,
-              textIconPaddingWidget: KSizedBox.kHeightSizedBox56,
-              onTap: null,
-            ),
+              KSizedBox.kHeightSizedBox30,
+            ],
+            if (Config.isUser) ...[
+              BoxWidget(
+                key: KWidgetkeys.screen.profile.boxSaves,
+                text: context.l10n.saved,
+                isDesk: isDesk,
+                onTap: () => context.goNamed(
+                  KRoute.profileSaves.name,
+                ),
+              ),
+              KSizedBox.kHeightSizedBox30,
+            ],
+            if (Config.isUser) ...[
+              BoxWidget(
+                key: KWidgetkeys.screen.profile.boxStory,
+                text: context.l10n.myStory,
+                isDesk: isDesk,
+                textIconPaddingWidget: KSizedBox.kHeightSizedBox56,
+                onTap: () => context.goNamed(KRoute.profileMyStory.name),
+              ),
+              KSizedBox.kHeightSizedBox30,
+            ],
+            if (Config.isUser) ...[
+              BoxWidget(
+                key: KWidgetkeys.screen.profile.boxFeedback,
+                text: context.l10n.myFeedback,
+                isDesk: isDesk,
+                textIconPaddingWidget: KSizedBox.kHeightSizedBox56,
+                onTap: null,
+              ),
+              KSizedBox.kHeightSizedBox30,
+            ],
           ],
         ),
       ),

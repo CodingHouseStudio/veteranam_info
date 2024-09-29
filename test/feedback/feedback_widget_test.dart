@@ -94,7 +94,7 @@ void main() {
       });
     });
 
-    testWidgets('${KGroupText.intial} ', (tester) async {
+    testWidgets('${KGroupText.initial} ', (tester) async {
       await feedbackPumpAppHelper(
         mockFeedbackRepository: mockFeedbackRepository,
         tester: tester,
@@ -155,7 +155,7 @@ void main() {
     group('${KGroupText.goRouter} ', () {
       late MockGoRouter mockGoRouter;
       setUp(() => mockGoRouter = MockGoRouter());
-      testWidgets('${KGroupText.intial} ', (tester) async {
+      testWidgets('${KGroupText.initial} ', (tester) async {
         when(mockUrlRepository.copy(KTestText.downloadURL)).thenAnswer(
           (invocation) async => const Right(true),
         );
