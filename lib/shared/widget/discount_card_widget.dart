@@ -1,5 +1,7 @@
-import 'package:flutter/material.dart';
+import 'dart:io';
 
+import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:flutter/material.dart';
 import 'package:veteranam/shared/shared.dart';
 
 class DiscountCardWidget extends StatelessWidget {
@@ -187,7 +189,14 @@ class DiscountCardWidget extends StatelessWidget {
                   icon: SharedIconListWidget.get(
                     context: context,
                     isDesk: isDesk,
-                    link: discountItem.directLink ?? discountItem.link,
+                    // if this is iOS and medical services, do not offer
+                    // pointing to the website
+                    link: kIsWeb || !Platform.isIOS
+                        ? discountItem.directLink ?? discountItem.link
+                        : discountItem.category.contains('Медицина')
+                            ? null
+                            : discountItem.directLink ?? discountItem.link,
+
                     cardEnum: CardEnum.discount,
                     // afterEvent: reportEvent,
                     cardId: discountItem.id,
