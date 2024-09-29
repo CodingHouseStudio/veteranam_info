@@ -68,7 +68,7 @@ void main() {
             .thenAnswer((invocation) => Stream.value(KTestText.workModelItems));
       });
 
-      testWidgets('${KGroupText.intial} ', (tester) async {
+      testWidgets('${KGroupText.initial} ', (tester) async {
         await workEmployeePumpAppHelper(
           mockWorkRepository: mockWorkRepository,
           tester: tester,
@@ -79,7 +79,7 @@ void main() {
       group('${KGroupText.goRouter} ', () {
         late MockGoRouter mockGoRouter;
         setUp(() => mockGoRouter = MockGoRouter());
-        testWidgets('${KGroupText.intial} ', (tester) async {
+        testWidgets('${KGroupText.initial} ', (tester) async {
           await workEmployeePumpAppHelper(
             mockWorkRepository: mockWorkRepository,
             tester: tester,
