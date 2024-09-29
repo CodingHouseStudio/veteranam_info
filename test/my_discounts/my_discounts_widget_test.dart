@@ -124,6 +124,15 @@ void main() {
 
           await myDiscountsInitialHelper(tester);
         });
+
+        loadingList(
+          (tester) async => myDiscountsPumpAppHelper(
+            mockDiscountRepository: mockDiscountRepository,
+            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+            tester: tester,
+          ),
+          // lastCard: KWidgetkeys.screen.discounts.cardLast,
+        );
         group(
           '${KGroupText.goTo} ',
           () {
