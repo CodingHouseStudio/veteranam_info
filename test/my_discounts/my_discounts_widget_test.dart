@@ -101,6 +101,14 @@ void main() {
 
         await myDiscountsInitialHelper(tester);
       });
+      loadingList(
+        (tester) async => myDiscountsPumpAppHelper(
+          mockDiscountRepository: mockDiscountRepository,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          tester: tester,
+        ),
+        // lastCard: KWidgetkeys.screen.discounts.cardLast,
+      );
 
       testWidgets('Delete discount', (tester) async {
         await myDiscountsPumpAppHelper(
