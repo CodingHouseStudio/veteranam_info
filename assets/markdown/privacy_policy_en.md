@@ -1,8 +1,8 @@
-# Privacy Policy for Veteranam.info
+# Privacy Policy for Coding House Studio LLC
 
 **EFFECTIVE DATE: Jul 11, 2024**
 
-At Veteranam.info, we value your privacy and take it seriously. This privacy policy explains how we handle your personal information when you use our website and services. If you disagree with any part of this policy, please stop using our site and services immediately.
+At Coding House Studio LLC, we value your privacy and take it seriously. This privacy policy explains how we handle your personal information when you use our website and services. If you disagree with any part of this policy, please stop using our site and services immediately.
 
 ## Information Collection
 
@@ -12,9 +12,9 @@ We collect information from you when you subscribe to a newsletter, fill out a f
 
 ## Communications
 
-You may opt out of Veteranam.info communications by clicking the “Unsubscribe” button at the bottom of every email or by emailing our Data Protection Officer at hello@veteranam.info.
+You may opt out of Coding House Studio LLC communications by clicking the “Unsubscribe” button at the bottom of every email or by emailing our Data Protection Officer at developer@codinghouse.biz.
 
-You can update or delete your personal data by unsubscribing from our email list(s) or emailing us at hello@veteranam.info. If you reside or are located in the EEA, you have certain rights regarding your personal information, including the right to request access, updates, deletion, and restriction of processing.
+You can update or delete your personal data by unsubscribing from our email list(s) or emailing us at developer@codinghouse.biz. If you reside or are located in the EEA, you have certain rights regarding your personal information, including the right to request access, updates, deletion, and restriction of processing.
 
 ## Use of Information
 
@@ -36,4 +36,4 @@ We do not sell, trade, or transfer your personally identifiable information to o
 
 ## Contact Us
 
-If you have any questions regarding this privacy policy, please send an email to hello@veteranam.info.
+If you have any questions regarding this privacy policy, please send an email to developer@codinghouse.biz.

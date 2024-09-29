@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:go_router/go_router.dart';
-import 'package:veteranam/components/components.dart';
+import 'package:veteranam/components/privacy_policy/privacy_policy.dart';
 import 'package:veteranam/shared/shared.dart';
 
 class PrivacyPolicyBody extends StatelessWidget {

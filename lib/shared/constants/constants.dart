@@ -3,7 +3,7 @@ export 'dimensions/dimensions.dart';
 export 'enum.dart';
 export 'extension/extension.dart';
 export 'platform_constants.dart';
-export 'rout_constants.dart';
+export 'route_constants.dart';
 export 'scroll_behavior.dart';
 export 'security_keys.dart';
 export 'style/style.dart';

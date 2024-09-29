@@ -41,7 +41,7 @@ abstract class KGroupText {
   static const failure = 'Failure';
   static const firebaseFailure = 'Firebase Failure';
   static const failureSend = 'Failure set';
-  static const intial = 'renders initial';
+  static const initial = 'renders initial';
   static const network = 'Reload network';
   static const offlineNetwork = 'offline network banner';
   static const goRouter = 'Mock Go Router';
@@ -558,6 +558,7 @@ abstract class KScreenBlocName {
   static const mobFaq = 'Mob FAQ Screen';
   static const userRole = 'User Role Screen';
   static const discountsAdd = 'Discounts Add Screen';
+  static const businessDashboard = 'Business Dashboard Screen';
 
   static const authenticationServices = 'Authentication Services';
   static const appRepository = 'App';

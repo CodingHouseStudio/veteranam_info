@@ -2,8 +2,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mockito/mockito.dart';
 import 'package:veteranam/shared/shared.dart';
-import '../test_dependency.dart';
 
+import '../test_dependency.dart';
 import 'helper/helper.dart';
 
 void main() {
@@ -30,7 +30,7 @@ void main() {
         (realInvocation) => false,
       );
     });
-    testWidgets('${KGroupText.intial} ', (tester) async {
+    testWidgets('${KGroupText.initial} ', (tester) async {
       await profilePumpAppHelper(
         tester: tester,
         mockAuthenticationRepository: mockAuthenticationRepository,
@@ -59,7 +59,7 @@ void main() {
     group('${KGroupText.goRouter} ', () {
       late MockGoRouter mockGoRouter;
       setUp(() => mockGoRouter = MockGoRouter());
-      testWidgets('${KGroupText.intial} ', (tester) async {
+      testWidgets('${KGroupText.initial} ', (tester) async {
         await profilePumpAppHelper(
           tester: tester,
           mockGoRouter: mockGoRouter,
@@ -139,6 +139,24 @@ void main() {
             tester: tester,
             mockGoRouter: mockGoRouter,
           );
+        });
+        group('${Config.business} ', () {
+          setUp(
+            () => Config.roleValue = Config.business,
+          );
+
+          testWidgets('${KRoute.myDiscounts.name} ', (tester) async {
+            await profilePumpAppHelper(
+              tester: tester,
+              mockGoRouter: mockGoRouter,
+              mockAuthenticationRepository: mockAuthenticationRepository,
+            );
+
+            await profileMyDiscountsHelper(
+              tester: tester,
+              mockGoRouter: mockGoRouter,
+            );
+          });
         });
       });
     });

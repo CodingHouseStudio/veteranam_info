@@ -76,7 +76,7 @@ void main() {
         await storyAddFailureHelper(tester);
       });
     });
-    testWidgets('${KGroupText.intial} ', (tester) async {
+    testWidgets('${KGroupText.initial} ', (tester) async {
       await storyAddPumpAppHelper(
         tester: tester,
         mockStoryRepository: mockStoryRepository,
@@ -88,7 +88,7 @@ void main() {
     group('${KGroupText.goRouter} ', () {
       late MockGoRouter mockGoRouter;
       setUp(() => mockGoRouter = MockGoRouter());
-      testWidgets('${KGroupText.intial} ', (tester) async {
+      testWidgets('${KGroupText.initial} ', (tester) async {
         await storyAddPumpAppHelper(
           tester: tester,
           mockGoRouter: mockGoRouter,
