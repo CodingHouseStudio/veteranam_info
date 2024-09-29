@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:veteranam/components/components.dart';
+import 'package:veteranam/components/mob_faq/mob_faq.dart';
 import 'package:veteranam/shared/shared.dart';
 
 class MobFaqBodyWidget extends StatelessWidget {

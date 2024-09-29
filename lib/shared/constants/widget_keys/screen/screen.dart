@@ -5,6 +5,7 @@ class _ScreenKeys {
   final home = _HomeKeys();
   final app = _AppKeys();
   final discounts = _DiscountsKeys();
+  final businessDashboard = _BusinessDashboardKeys();
   final information = _InformationKeys();
   final investors = _InvestorsKeys();
   final profile = _ProfileKeys();

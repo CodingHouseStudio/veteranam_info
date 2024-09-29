@@ -94,7 +94,7 @@ void main() {
         (invocation) async => AppInfoRepository.defaultValue,
       );
     });
-    testWidgets('${KGroupText.intial} ', (tester) async {
+    testWidgets('${KGroupText.initial} ', (tester) async {
       await discountsPumpAppHelper(
         tester: tester,
         mockDiscountRepository: mockDiscountRepository,
@@ -128,7 +128,7 @@ void main() {
     group('${KGroupText.goRouter} ', () {
       late MockGoRouter mockGoRouter;
       setUp(() => mockGoRouter = MockGoRouter());
-      testWidgets('${KGroupText.intial} ', (tester) async {
+      testWidgets('${KGroupText.initial} ', (tester) async {
         await discountsPumpAppHelper(
           tester: tester,
           mockDiscountRepository: mockDiscountRepository,
@@ -153,7 +153,7 @@ void main() {
             (_) => KTestText.build,
           );
         });
-        testWidgets('${KGroupText.intial} ', (tester) async {
+        testWidgets('${KGroupText.initial} ', (tester) async {
           await discountsPumpAppHelper(
             tester: tester,
             mockDiscountRepository: mockDiscountRepository,

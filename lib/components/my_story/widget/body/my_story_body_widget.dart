@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:veteranam/components/components.dart';
+import 'package:veteranam/components/my_story/my_story.dart';
 import 'package:veteranam/shared/shared.dart';
 
 part '../stories_widget_list.dart';

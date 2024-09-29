@@ -13,7 +13,7 @@ void main() {
 
   tearDown(GetIt.I.reset);
   group('${KScreenBlocName.aboutUs} ', () {
-    testWidgets('${KGroupText.intial} ', (tester) async {
+    testWidgets('${KGroupText.initial} ', (tester) async {
       await aboutUsPumpAppHelper(tester: tester);
 
       await aboutUsInitialHelper(tester);
@@ -21,7 +21,7 @@ void main() {
     group('${KGroupText.goRouter} ', () {
       late MockGoRouter mockGoRouter;
       setUp(() => mockGoRouter = MockGoRouter());
-      testWidgets('${KGroupText.intial} ', (tester) async {
+      testWidgets('${KGroupText.initial} ', (tester) async {
         await aboutUsPumpAppHelper(tester: tester, mockGoRouter: mockGoRouter);
 
         await aboutUsInitialHelper(tester);

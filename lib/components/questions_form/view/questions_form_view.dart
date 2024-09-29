@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:veteranam/components/components.dart';
+import 'package:veteranam/components/questions_form/questions_form.dart';
 import 'package:veteranam/shared/shared.dart';
 
 class QuestionsFormScreen extends StatelessWidget {

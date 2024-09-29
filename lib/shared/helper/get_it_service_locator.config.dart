@@ -167,11 +167,11 @@ extension GetItInjectableX on _i174.GetIt {
         ));
     gh.factory<_i189.AdvancedFilterMobCubit>(
         () => _i189.AdvancedFilterMobCubit());
+    gh.singleton<_i99.StorageService>(() => _i99.StorageService());
     gh.singleton<_i398.FirebaseAnalytics>(
         () => analytucsModule.firebaseAnalytics);
     gh.singleton<_i627.FirebaseRemoteConfig>(
         () => remoteConfigModule.firebaseRemoteConfig);
-    gh.singleton<_i99.StorageService>(() => _i99.StorageService());
     gh.singleton<_i59.FirebaseAuth>(() => firebaseModule.firebaseAuth);
     gh.singleton<_i116.GoogleSignIn>(() => firebaseModule.googleSignIn);
     gh.singleton<_i806.FacebookAuth>(() => firebaseModule.firebaseSignIn);
@@ -352,13 +352,13 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.singleton<_i891.NetworkCubit>(() =>
         _i891.NetworkCubit(networkRepository: gh<_i1001.NetworkRepository>()));
-    gh.factory<_i1025.LoginBloc>(() => _i1025.LoginBloc(
-        authenticationRepository: gh<_i1001.AuthenticationRepository>()));
-    gh.factory<_i785.SignUpBloc>(() => _i785.SignUpBloc(
-        authenticationRepository: gh<_i1001.AuthenticationRepository>()));
     gh.factory<_i209.AuthenticationServicesCubit>(() =>
         _i209.AuthenticationServicesCubit(
             authenticationRepository: gh<_i1001.AuthenticationRepository>()));
+    gh.factory<_i785.SignUpBloc>(() => _i785.SignUpBloc(
+        authenticationRepository: gh<_i1001.AuthenticationRepository>()));
+    gh.factory<_i1025.LoginBloc>(() => _i1025.LoginBloc(
+        authenticationRepository: gh<_i1001.AuthenticationRepository>()));
     gh.singleton<_i570.AuthenticationBloc>(() => _i570.AuthenticationBloc(
         authenticationRepository: gh<_i1001.AuthenticationRepository>()));
     gh.singleton<_i777.FirebaseAnalyticsService>(
