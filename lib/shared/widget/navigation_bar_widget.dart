@@ -146,30 +146,21 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                 if (widget.isTablet || !isFocused)
                   IconButton(
                     padding: EdgeInsets.zero,
-                    onPressed: Config.isUser
-                        ? () => EasyDebounce.debounce(
-                              KAppText.logo,
-                              Duration.zero,
-                              () {
-                                if (Config.isWeb
-                                    // || !widget.showMobileNawbar
-                                    ) {
-                                  context.goNamed(KRoute.home.name);
-                                }
-                              },
-                            )
-                        : () => EasyDebounce.debounce(
-                              KAppText.logo,
-                              Duration.zero,
-                              () {
-                                if (Config.isWeb
-                                    // || !widget.showMobileNawbar
-                                    ) {
-                                  context
-                                      .goNamed(KRoute.businessDashboard.name);
-                                }
-                              },
-                            ),
+                    onPressed: () => EasyDebounce.debounce(
+                      KAppText.logo,
+                      Duration.zero,
+                      () {
+                        if (Config.isWeb
+                            // || !widget.showMobileNawbar
+                            ) {
+                          context.goNamed(
+                            Config.isUser
+                                ? KRoute.home.name
+                                : KRoute.businessDashboard.name,
+                          );
+                        }
+                      },
+                    ),
                     icon: KImage.logo(
                       key: KWidgetkeys.widget.nawbar.logo,
                       // width: 78,
@@ -426,12 +417,12 @@ class _NawbarWidgetState extends State<NawbarWidget> {
     Widget? icon,
   }) =>
       ButtonBottomLineWidget(
+        widgetKey: key,
         text: text,
         onPressed: () => context.goNamed(ruoteName),
         width: width,
         // isDesk: widget.isTablet,
         icon: icon,
-        widgetKey: key,
       );
   void userRoleNavigation(BuildContext context) =>
       context.goNamed(KRoute.userRole.name);

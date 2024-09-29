@@ -140,6 +140,24 @@ void main() {
             mockGoRouter: mockGoRouter,
           );
         });
+        group('${Config.business} ', () {
+          setUp(
+            () => Config.roleValue = Config.business,
+          );
+
+          testWidgets('${KRoute.myDiscounts.name} ', (tester) async {
+            await profilePumpAppHelper(
+              tester: tester,
+              mockGoRouter: mockGoRouter,
+              mockAuthenticationRepository: mockAuthenticationRepository,
+            );
+
+            await profileMyDiscountsHelper(
+              tester: tester,
+              mockGoRouter: mockGoRouter,
+            );
+          });
+        });
       });
     });
   });

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:veteranam/components/components.dart';
+import 'package:veteranam/components/my_discounts/my_discounts.dart';
 import 'package:veteranam/shared/shared.dart';
 
 part '../my_discounts_box_widget_list.dart';
@@ -31,6 +31,7 @@ class MyDiscountsBodyWidget extends StatelessWidget {
             children: [
               Text(
                 context.l10n.myPublications,
+                key: KWidgetkeys.screen.myDiscounts.title,
                 style: isDesk ? AppTextStyle.text64 : AppTextStyle.text24,
               ),
               IconButtonWidget(

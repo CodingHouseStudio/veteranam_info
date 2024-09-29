@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:veteranam/components/components.dart';
+import 'package:veteranam/components/mob_faq/mob_faq.dart';
 import 'package:veteranam/shared/shared.dart';
 
 class MobFaqScreen extends StatelessWidget {

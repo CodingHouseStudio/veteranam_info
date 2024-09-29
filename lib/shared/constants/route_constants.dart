@@ -68,7 +68,7 @@ abstract class KRoute {
   );
   static const _RouteItem newsCard = _RouteItem(
     path: '',
-    name: 'NewsCard',
+    name: 'News Card',
   );
   static const _RouteItem discountCard = _RouteItem(
     path: '',
@@ -76,7 +76,7 @@ abstract class KRoute {
   );
   static const _RouteItem questionsForm = _RouteItem(
     path: '/questions-form',
-    name: 'QuestionsForm',
+    name: 'Questions Form',
   );
   static const _RouteItem workEmployee = _RouteItem(
     path: 'employee',
@@ -104,7 +104,7 @@ abstract class KRoute {
   );
   static const _RouteItem underConstruction = _RouteItem(
     path: '/under-construction',
-    name: 'UnderConstruction',
+    name: 'Under Construction',
   );
   static const _RouteItem feedback = _RouteItem(
     path: 'feedback',
@@ -112,7 +112,7 @@ abstract class KRoute {
   );
   static const _RouteItem myDiscounts = _RouteItem(
     path: 'discounts/manage',
-    name: 'MyDiscounts',
+    name: 'My Discounts',
   );
   static const _RouteItem settings = _RouteItem(
     path: '/settings',
@@ -128,6 +128,6 @@ abstract class KRoute {
   );
   static const _RouteItem discountsAdd = _RouteItem(
     path: 'add',
-    name: 'DiscountsAdd',
+    name: 'Discounts Add',
   );
 }

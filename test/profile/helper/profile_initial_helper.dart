@@ -20,6 +20,11 @@ Future<void> profileInitialHelper(
         findsOneWidget,
       );
 
+      await scrollingHelper(
+        tester: tester,
+        itemKey: KWidgetkeys.screen.profile.subtitle,
+      );
+
       expect(
         find.byKey(KWidgetkeys.screen.profile.profileCard),
         findsWidgets,

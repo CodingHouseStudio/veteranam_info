@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:veteranam/components/components.dart';
+import 'package:veteranam/components/my_story/my_story.dart';
 import 'package:veteranam/shared/shared.dart';
 
 class ProfileMyStoryScreen extends StatelessWidget {
