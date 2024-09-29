@@ -9,6 +9,7 @@ class _NawbarKeys {
   final loginButton = const Key('nawbar_login_button');
   final loginIcon = const Key('nawbar_login_icon');
   final discountsButton = const Key('nawbar_discounts_button');
+  final myDiscountsButton = const Key('nawbar_myDiscounts_button');
   final investorsButton = const Key('nawbar_investors_button');
   final feedbackButton = const Key('nawbar_feedback_button');
   final menuButton = const Key('nawbar_menu_button');

@@ -56,7 +56,7 @@ void main() {
           await buttonHelper(
             tester: tester,
             mockGoRouter: mockGoRouter,
-            routeName: KRoute.businessDiscounts.name,
+            routeName: KRoute.businessDashboard.name,
           );
         });
       });

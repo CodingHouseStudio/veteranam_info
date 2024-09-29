@@ -103,6 +103,11 @@
     "examples": "Text for the button that appears on the Profile page and the title for the Saves page.",
     "description": "The button used to navigate to the Saves page."
   },
+  "myDiscounts": "My Discounts",
+  "@myDiscounts": {
+    "examples": "Text for the button that appears on the Profile page and the title for the My publications page.",
+    "description": "The button used to navigate to the My Publications page."
+  },
   "profileDetails": "You can add/edit personal information, manage anonymous setting, and find your saved content.",
   "@profileDetails": {
     "examples": "Profile page subtitle text"
@@ -298,6 +303,10 @@
   "@thankYou": {
     "examples": "Part of the text for the title on the Home page"
   },
+  "businessDashboard": "Dashboard",
+  "@businessDashboard": {
+    "examples": "Part of the text for the title on the Business Dashboard page"
+  },
   "feedbackBoxSubtitle": "We've received your message and will respond soon.",
   "@feedbackBoxSubtitle": {
     "examples": "The title text of the FeedbackBox widget on the Feedback page when a user submits a message."
@@ -337,6 +346,10 @@
   "thankYouDescription": "Please note! To access some services, you may need to confirm your identity.",
   "@thankYouDescription": {
     "examples": "The title text on the Thank You page."
+  },
+  "businessDashboardDescription": "Hello! On this page you can manage your discounts.",
+  "@businessDashboardescription": {
+    "examples": "The title text on the Business Dashboard page."
   },
   "mainScreen": "Home",
   "@mainScreen": {
