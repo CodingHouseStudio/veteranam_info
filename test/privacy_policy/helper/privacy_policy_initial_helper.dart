@@ -19,7 +19,7 @@ Future<void> privacyPolicyInitialHelper(
         findsOneWidget,
       );
 
-      await tester.tapOnTextCustom(text: KAppText.email);
+      await tester.tapOnTextCustom(text: KTestText.developerEmail);
 
       await tester.pumpAndSettle();
 
