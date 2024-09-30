@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
@@ -26,7 +25,7 @@ class FirebaseAnalyticsService {
       // Check if platform is iOS and request
       // app tracking transparency permission
       if (!kIsWeb) {
-        if (Platform.isIOS) {
+        if (PlatformEnum.getPlatform.isIOS) {
           // Check if user has granted consent
           final trackingStatus =
               await AppTrackingTransparency.trackingAuthorizationStatus;

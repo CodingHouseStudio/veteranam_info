@@ -104,11 +104,10 @@ extension ReportFieldModelValidationErrorEmpl
   }
 }
 
-extension CitiesFieldModelValidationErrorEmpl
-    on CitiesFieldModelValidationError? {
+extension MultiFieldModelValidationErrorEmpl on ListFieldModelValidationError? {
   String? value(BuildContext context) {
     switch (this) {
-      case CitiesFieldModelValidationError.empty:
+      case ListFieldModelValidationError.empty:
         return context.l10n.fieldCannotBeEmpty;
       case null:
         return null;
