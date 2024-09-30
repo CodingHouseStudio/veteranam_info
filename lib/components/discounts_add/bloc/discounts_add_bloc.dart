@@ -21,10 +21,11 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
           const _Initial(
             categoryList: [],
             category: MessageFieldModel.pure(),
-            city: CitiesFieldModel.pure(),
+            city: ListFieldModel.pure(),
             period: DateFieldModel.pure(),
             title: MessageFieldModel.pure(),
             discounts: DiscountsFieldModel.pure(),
+            eligibility: ListFieldModel.pure(),
             link: LinkFieldModel.pure(),
             description: MessageFieldModel.pure(),
             exclusions: MessageFieldModel.pure(),
@@ -42,6 +43,8 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
     on<_TitleUpdate>(_onTitleUpdated);
     on<_DiscountAddItem>(_onDiscountAddItem);
     on<_DiscountRemoveItem>(_onDiscountRemoveItem);
+    on<_EligibilityAddItem>(_onEligibilityAddItem);
+    on<_EligibilityRemoveItem>(_onEligibilityRemoveItem);
     on<_LinkUpdate>(_onLinkUpdated);
     on<_DescriptionUpdate>(_onDescriptionUpdated);
     on<_ExclusionsUpdate>(_onExclusionsUpdated);
@@ -64,19 +67,8 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
         discounts.expand((discount) => discount.category).toSet().toList();
 
     emit(
-      _Initial(
+      state.copyWith(
         categoryList: uniqueCategories,
-        category: const MessageFieldModel.pure(),
-        city: const CitiesFieldModel.pure(),
-        period: const DateFieldModel.pure(),
-        title: const MessageFieldModel.pure(),
-        discounts: const DiscountsFieldModel.pure(),
-        link: const LinkFieldModel.pure(),
-        description: const MessageFieldModel.pure(),
-        exclusions: const MessageFieldModel.pure(),
-        formState: DiscountsAddEnum.initial,
-        isIndefinitely: true,
-        citiesList: [],
       ),
     );
 
@@ -99,7 +91,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
       state.copyWith(
         category: categoryFieldModel,
         failure: null,
-        formState: DiscountsAddEnum.inProgress,
+        formState: DiscountsAddEnum.detailInProgress,
       ),
     );
   }
@@ -109,13 +101,13 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
     Emitter<DiscountsAddState> emit,
   ) {
     final cityFieldModel =
-        CitiesFieldModel.dirty(state.city.value.addFieldModel(event.city));
+        ListFieldModel.dirty(state.city.value.addFieldModel(event.city));
 
     emit(
       state.copyWith(
         city: cityFieldModel,
         failure: null,
-        formState: DiscountsAddEnum.inProgress,
+        formState: DiscountsAddEnum.detailInProgress,
       ),
     );
   }
@@ -126,14 +118,14 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
   ) {
     final citiesList = state.city.value.removeFieldModel(event.city);
     final cityFieldModel = citiesList.isEmpty
-        ? const CitiesFieldModel.pure()
-        : CitiesFieldModel.dirty(citiesList);
+        ? const ListFieldModel.pure()
+        : ListFieldModel.dirty(citiesList);
 
     emit(
       state.copyWith(
         city: cityFieldModel,
         failure: null,
-        formState: DiscountsAddEnum.inProgress,
+        formState: DiscountsAddEnum.detailInProgress,
       ),
     );
   }
@@ -146,7 +138,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
       state.copyWith(
         isIndefinitely: !state.isIndefinitely,
         failure: null,
-        formState: DiscountsAddEnum.inProgress,
+        formState: DiscountsAddEnum.detailInProgress,
       ),
     );
   }
@@ -167,7 +159,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
       state.copyWith(
         period: periodFieldModel,
         failure: null,
-        formState: DiscountsAddEnum.inProgress,
+        formState: DiscountsAddEnum.detailInProgress,
       ),
     );
   }
@@ -182,7 +174,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
       state.copyWith(
         title: titleFieldModel,
         failure: null,
-        formState: DiscountsAddEnum.detailInProgress,
+        formState: DiscountsAddEnum.inProgress,
       ),
     );
   }
@@ -199,7 +191,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
       state.copyWith(
         discounts: discountsFieldModel,
         failure: null,
-        formState: DiscountsAddEnum.detailInProgress,
+        formState: DiscountsAddEnum.inProgress,
       ),
     );
   }
@@ -218,7 +210,43 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
       state.copyWith(
         discounts: discountsFieldModel,
         failure: null,
-        formState: DiscountsAddEnum.detailInProgress,
+        formState: DiscountsAddEnum.inProgress,
+      ),
+    );
+  }
+
+  void _onEligibilityAddItem(
+    _EligibilityAddItem event,
+    Emitter<DiscountsAddState> emit,
+  ) {
+    final eligibilityFieldModel = ListFieldModel.dirty(
+      state.eligibility.value.addFieldModel(event.eligibility),
+    );
+
+    emit(
+      state.copyWith(
+        eligibility: eligibilityFieldModel,
+        failure: null,
+        formState: DiscountsAddEnum.inProgress,
+      ),
+    );
+  }
+
+  void _onEligibilityRemoveItem(
+    _EligibilityRemoveItem event,
+    Emitter<DiscountsAddState> emit,
+  ) {
+    final eligibilityList =
+        state.eligibility.value.removeFieldModel(event.eligibility);
+    final eligibilityFieldModel = eligibilityList.isEmpty
+        ? const ListFieldModel.pure()
+        : ListFieldModel.dirty(eligibilityList);
+
+    emit(
+      state.copyWith(
+        eligibility: eligibilityFieldModel,
+        failure: null,
+        formState: DiscountsAddEnum.inProgress,
       ),
     );
   }
@@ -238,7 +266,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
       state.copyWith(
         link: linkFieldModel,
         failure: null,
-        formState: DiscountsAddEnum.detailInProgress,
+        formState: DiscountsAddEnum.inProgress,
       ),
     );
   }
@@ -293,8 +321,12 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
     Emitter<DiscountsAddState> emit,
   ) async {
     if (state.formState.isMain) {
-      if (Formz.validate([state.category, state.city]) &&
-          (state.period.isValid || state.isIndefinitely)) {
+      if (Formz.validate([
+        state.title,
+        state.discounts,
+        state.link,
+        state.eligibility,
+      ])) {
         emit(state.copyWith(formState: DiscountsAddEnum.detail));
       } else {
         emit(state.copyWith(formState: DiscountsAddEnum.invalidData));
@@ -302,7 +334,8 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
       return;
     }
     if (state.formState.isDetail) {
-      if (Formz.validate([state.title, state.discounts, state.link])) {
+      if (Formz.validate([state.category, state.city]) &&
+          (state.period.isValid || state.isIndefinitely)) {
         emit(state.copyWith(formState: DiscountsAddEnum.description));
       } else {
         emit(state.copyWith(formState: DiscountsAddEnum.detailInvalidData));
@@ -331,6 +364,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
         requirementsEN: null,
         territory: null,
         territoryEN: null,
+        eligibility: state.eligibility.value,
         exclusions: state.exclusions.value,
         expiration: _getExpiration(Language.ukrain),
         expirationEN: _getExpiration(Language.english),

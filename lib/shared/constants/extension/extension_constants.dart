@@ -87,9 +87,9 @@ extension DiscountModelLocation on DiscountModel {
 
   String _getMarkdownPhoneNumber(BuildContext context) =>
       '\n\n***${context.l10n.callForDetails}:***'
-      ' ${KPlatformConstants.isWebDesktop ? '***' : '['}'
+      ' ${PlatformEnum.isWebDesktop ? '***' : '['}'
       '$phoneNumber'
-      '${KPlatformConstants.isWebDesktop ? '***' : '](tel:'
+      '${PlatformEnum.isWebDesktop ? '***' : '](tel:'
           '${phoneNumber!.replaceAll('(', '').replaceAll(
                 ')',
                 '',
@@ -114,6 +114,12 @@ extension DiscountModelLocation on DiscountModel {
           if (location != null) ...location!,
         if (subLocation != null) ...subLocation!.getCardList(context),
       ];
+
+  String? get getLink => PlatformEnum.getPlatform.isIOS
+      ? category.contains('Медицина')
+          ? null
+          : directLink ?? link
+      : directLink ?? link;
 }
 
 extension StringExtension on String {

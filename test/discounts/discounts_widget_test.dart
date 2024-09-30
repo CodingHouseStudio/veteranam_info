@@ -27,7 +27,7 @@ void main() {
       // KTest.animatioRepeat=1;
       ExtendedDateTime.id = KTestText.id;
       ExtendedDateTime.current = KTestText.dateTime;
-      KPlatformConstants.isWebDesktop = true;
+      PlatformEnum.isWebDesktop = true;
       mockDiscountRepository = MockIDiscountRepository();
       mockAppAuthenticationRepository = MockAppAuthenticationRepository();
       mockAuthenticationRepository = MockAuthenticationRepository();

@@ -21,7 +21,7 @@ void main() {
       Config.isWeb = false;
       ExtendedDateTime.current = KTestText.dateTime;
       ExtendedDateTime.id = KTestText.feedbackModel.id;
-      KPlatformConstants.isWebDesktop = true;
+      PlatformEnum.isWebDesktop = true;
       mockFaqRepository = MockIFaqRepository();
     });
     group('${KGroupText.failure} ', () {
