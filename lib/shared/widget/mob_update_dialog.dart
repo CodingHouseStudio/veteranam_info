@@ -1,5 +1,3 @@
-import 'dart:io' show Platform;
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -40,7 +38,7 @@ class MobUpdateDialog extends StatelessWidget {
               key: KWidgetkeys.widget.mobUpdate.updateButton,
               onPressed: () {
                 context.read<UrlCubit>().launchUrl(
-                      url: Platform.isAndroid
+                      url: PlatformEnum.getPlatform.isAndroid
                           ? KAppText.androidInstallUrl
                           : KAppText.iphoneInstallUrl,
                     );

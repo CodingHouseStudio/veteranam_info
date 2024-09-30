@@ -80,6 +80,10 @@ void main() {
       ],
       DiscountModelJsonField.status:
           KTestText.discountModelItems.last.status.enumString,
+      DiscountModelJsonField.eligibility:
+          KTestText.discountModelItems.last.eligibility,
+      DiscountModelJsonField.eligibilityEN:
+          KTestText.discountModelItems.last.eligibilityEN,
       // DiscountModelJsonField.hasMarkdown:
       //     KTestText.discountModelItems.last.hasMarkdown,
       // DiscountModelJsonField.date:
@@ -133,6 +137,8 @@ void main() {
       DiscountModelJsonField.additionalDetailsEN: null,
       DiscountModelJsonField.companyEN: null,
       DiscountModelJsonField.status: null,
+      DiscountModelJsonField.eligibility: null,
+      DiscountModelJsonField.eligibilityEN: null,
     };
     group('${KGroupText.modelJson} ', () {
       test('${KGroupText.full} ', () {
@@ -277,6 +283,14 @@ void main() {
         expect(
           discountModel.status,
           KTestText.discountModelItems.last.status,
+        );
+        expect(
+          discountModel.eligibility,
+          KTestText.discountModelItems.last.eligibility,
+        );
+        expect(
+          discountModel.eligibilityEN,
+          KTestText.discountModelItems.last.eligibilityEN,
         );
         // expect(
         //   discountModel.date,
@@ -424,6 +438,14 @@ void main() {
           null,
         );
         expect(
+          discountModel.eligibility,
+          null,
+        );
+        expect(
+          discountModel.eligibilityEN,
+          null,
+        );
+        expect(
           discountModel.status,
           DiscountState.isNew,
         );
@@ -545,6 +567,8 @@ void main() {
               subcategory: null,
               subcategoryEN: null,
               exclusions: null,
+              eligibility: null,
+              eligibilityEN: null,
             )
             .toJson();
 

@@ -1232,6 +1232,43 @@
     "examples": "Text for the button on the Discount Add page.",
     "description": "The button is used to return to the previous steps of the form."
   },
+  "eligibility": "Who is eligible",
+  "@eligibility": {
+    "examples": "Text on the Discount Add page for the 'Who is eligible' field",
+    "description": "The field is used to enter the categories of people who are eligible for discounts (can be multiple)"
+  },
+  "eligibilityDescription": "Select one or more options from the list",
+  "@eligibilityDescription": {
+    "examples": "Text on the Discount Add page for the 'Who is eligible' field (description)"
+  },
+  "combatantsEligibility": "Combatants",
+  "@combatantsEligibility": {
+    "examples": "Text on the Discount Add page for the 'Who is eligible' field, one of the options."
+  },
+  "militaryEligibility": "Military Personnel",
+  "@militaryEligibility": {
+    "examples": "Text on the Discount Add page for the 'Who is eligible' field, one of the options."
+  },
+  "fallenFamilyEligibility": "Family Members of the Deceased",
+  "@fallenFamilyEligibility": {
+    "examples": "Text on the Discount Add page for the 'Who is eligible' field, one of the options."
+  },
+  "disabledWarEligibility": "Persons with Disabilities Due to War",
+  "@disabledWarEligibility": {
+    "examples": "Text on the Discount Add page for the 'Who is eligible' field, one of the options."
+  },
+  "dsnsEligibility": "Emergency Service Employees",
+  "@dsnsEligibility": {
+    "examples": "Text on the Discount Add page for the 'Who is eligible' field, one of the options."
+  },
+  "policeEligibility": "Police",
+  "@policeEligibility": {
+    "examples": "Text on the Discount Add page for the 'Who is eligible' field, one of the options."
+  },
+  "idpEligibility": "Internally Displaced Persons",
+  "@idpEligibility": {
+    "examples": "Text on the Discount Add page for the 'Who is eligible' field, one of the options."
+  },
   "asBusiness": "as a BUSINESS user",
   "@asBusiness": {
     "examples": "Text for the business login button on the UserRole page.",
