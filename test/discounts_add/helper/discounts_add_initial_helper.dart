@@ -35,6 +35,14 @@ Future<void> discountsAddInitialHelper(
         fieldIndex: 1,
       );
 
+      await dropListFieldItemHelper(
+        tester: tester,
+        textFieldKey: KWidgetkeys.screen.discountsAdd.eligibilityField,
+        fieldIndex: 2,
+      );
+
+      await multiDropFieldRemoveHelper(tester);
+
       expect(
         find.byKey(KWidgetkeys.screen.discountsAdd.sendButton),
         findsOneWidget,
