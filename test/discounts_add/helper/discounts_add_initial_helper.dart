@@ -25,31 +25,14 @@ Future<void> discountsAddInitialHelper(
 
       await scrollingHelper(
         tester: tester,
-        itemKey: KWidgetkeys.screen.discountsAdd.categoryField,
+        itemKey: KWidgetkeys.screen.discountsAdd.titleField,
       );
 
-      await citiesDropFieldHelper(
+      await multiDropFieldHelper(
         tester: tester,
         text: KTestText.field,
-        textFieldKey: KWidgetkeys.screen.discountsAdd.cityField,
+        textFieldKey: KWidgetkeys.screen.discountsAdd.discountsField,
         fieldIndex: 1,
-      );
-
-      expect(
-        find.byKey(KWidgetkeys.screen.discountsAdd.indefinitelySwitcher),
-        findsOneWidget,
-      );
-
-      await switchHelper(tester: tester, isActive: true);
-
-      expect(
-        find.byKey(KWidgetkeys.screen.discountsAdd.indefinitelyText),
-        findsOneWidget,
-      );
-
-      await scrollingHelper(
-        tester: tester,
-        itemKey: KWidgetkeys.screen.discountsAdd.indefinitelyText,
       );
 
       expect(

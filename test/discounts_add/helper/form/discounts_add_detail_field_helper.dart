@@ -12,22 +12,36 @@ Future<void> discountsAddDetailHelper({
   if (hasField) {
     await scrollingHelper(
       tester: tester,
-      itemKey: KWidgetkeys.screen.discountsAdd.titleField,
+      itemKey: KWidgetkeys.screen.discountsAdd.categoryField,
     );
   }
 
   expect(
-    find.byKey(KWidgetkeys.screen.discountsAdd.titleField),
+    find.byKey(KWidgetkeys.screen.discountsAdd.categoryField),
     matcher,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.discountsAdd.linkField),
+    find.byKey(KWidgetkeys.screen.discountsAdd.cityField),
     matcher,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.discountsAdd.discountsField),
+    find.byKey(KWidgetkeys.screen.discountsAdd.periodField),
     matcher,
   );
+
+  if (hasField) {
+    expect(
+      find.byKey(KWidgetkeys.screen.discountsAdd.indefinitelySwitcher),
+      findsOneWidget,
+    );
+
+    expect(
+      find.byKey(KWidgetkeys.screen.discountsAdd.indefinitelyText),
+      findsOneWidget,
+    );
+
+    await switchHelper(tester: tester, isActive: true);
+  }
 }

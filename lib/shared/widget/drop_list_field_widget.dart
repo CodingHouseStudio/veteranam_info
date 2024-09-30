@@ -16,6 +16,7 @@ class DropListFieldWidget extends StatelessWidget {
     // this.initialValue,
     this.controller,
     this.focusNode,
+    this.isButton,
   });
 
   final void Function(String text)? onChanged;
@@ -28,6 +29,7 @@ class DropListFieldWidget extends StatelessWidget {
   final TextEditingController? controller;
   final FocusNode? focusNode;
   final Key textFieldKey;
+  final bool? isButton;
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +41,7 @@ class DropListFieldWidget extends StatelessWidget {
       errorText: errorText,
       onChanged: onChanged,
       showErrorText: showErrorText,
+      isButton: isButton,
       item: (element) => Text(
         element,
         key: KWidgetkeys.widget.dropListField.itemText,
@@ -82,11 +85,12 @@ class DropListFieldImplementationWidget<T extends Object>
     this.errorText,
     this.controller,
     this.focusNode,
-    this.enabled,
+    this.isButton,
     this.unfocusSufixIcon,
     // this.initialValue,
     this.suffixIconPadding,
     this.fieldParentWidget,
+    this.errorMaxLines,
   });
 
   final void Function(String text)? onChanged;
@@ -97,7 +101,7 @@ class DropListFieldImplementationWidget<T extends Object>
   final String? errorText;
   final TextEditingController? controller;
   final FocusNode? focusNode;
-  final bool? enabled;
+  final bool? isButton;
   final Widget Function(T element) item;
   final FutureOr<Iterable<T>> Function(TextEditingValue) optionsBuilder;
   final Icon? unfocusSufixIcon;
@@ -110,6 +114,7 @@ class DropListFieldImplementationWidget<T extends Object>
     required Widget suffixIcon,
   })? fieldParentWidget;
   final Key textFieldKey;
+  final int? errorMaxLines;
 
   @override
   State<DropListFieldImplementationWidget<T>> createState() =>
@@ -131,7 +136,7 @@ class _DropListFieldImplementationWidgetState<T extends Object>
     focusNode.addListener(_changeIcon);
     showActiveIcon = false;
 
-    _anchorKey = GlobalKey();
+    _anchorKey = GlobalKey(debugLabel: widget.labelText);
   }
 
   double? getWidth(GlobalKey key) {
@@ -201,9 +206,12 @@ class _DropListFieldImplementationWidgetState<T extends Object>
           widget.onSelectedItem ?? RawAutocomplete.defaultStringForOption,
       fieldViewBuilder:
           (context, textEditingController, focusNode, onFieldSubmitted) {
-        if (widget.fieldParentWidget != null && !focusNode.hasFocus) {
+        if (widget.fieldParentWidget != null &&
+            (!focusNode.hasFocus || (widget.isButton ?? false))) {
           return InkWell(
-            mouseCursor: SystemMouseCursors.text,
+            mouseCursor: widget.isButton ?? false
+                ? SystemMouseCursors.click
+                : SystemMouseCursors.text,
             hoverColor: Colors.transparent,
             focusColor: Colors.transparent,
             splashColor: Colors.transparent,
@@ -278,11 +286,14 @@ class _DropListFieldImplementationWidgetState<T extends Object>
         errorText: widget.errorText,
         disposeFocusNode: false,
         isDesk: widget.isDesk,
-        enabled: widget.enabled,
+        readOnly: widget.isButton,
+        cursor: widget.isButton ?? false ? SystemMouseCursors.click : null,
+        disabledBorder: KWidgetTheme.outlineInputBorderEnabled,
         borderHoverColor:
             showSuffixIcon ? AppColors.materialThemeRefNeutralNeutral40 : null,
         floatingLabelBehavior:
             showSuffixIcon ? null : FloatingLabelBehavior.always,
+        errorMaxLines: widget.errorMaxLines,
       );
 
   Widget get _suffixIcon => showActiveIcon
