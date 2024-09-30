@@ -9,7 +9,7 @@ void loadingList(
 ) {
   group('Loading List', () {
     testWidgets('Desk', (tester) async {
-      KPlatformConstants.isWebDesktop = true;
+      PlatformEnum.isWebDesktop = true;
       await pumpApp(tester);
 
       await _deskLoadingHelper(
@@ -18,7 +18,7 @@ void loadingList(
       );
     });
     testWidgets('Mobile', (tester) async {
-      KPlatformConstants.isWebDesktop = false;
+      PlatformEnum.isWebDesktop = false;
       await pumpApp(tester);
 
       await _mobileLoadingHelper(
@@ -35,7 +35,7 @@ void loadingList(
 // }) {
 //   group('Loading List', () {
 //     testWidgets('Desk(isNotDesk)', (tester) async {
-//       KPlatformConstants.isWebDesktop = true;
+//       PlatformEnum.isWebDesktop = true;
 //       await pumpApp(tester);
 
 //       await _deskLoadingHelper(
@@ -44,7 +44,7 @@ void loadingList(
 //       );
 //     });
 //     testWidgets('Desk(isDesk)', (tester) async {
-//       KPlatformConstants.isWebDesktop = true;
+//       PlatformEnum.isWebDesktop = true;
 //       await pumpApp(tester);
 
 //       await changeWindowSizeHelper(
@@ -58,7 +58,7 @@ void loadingList(
 //       );
 //     });
 //     testWidgets('Mobile', (tester) async {
-//       KPlatformConstants.isWebDesktop = false;
+//       PlatformEnum.isWebDesktop = false;
 //       await pumpApp(tester);
 
 //       await _mobileLoadingHelper(
