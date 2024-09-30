@@ -15,6 +15,10 @@ class DiscountsAddEvent with _$DiscountsAddEvent {
       _DiscountAddItem;
   const factory DiscountsAddEvent.discountRemoveItem(String discount) =
       _DiscountRemoveItem;
+  const factory DiscountsAddEvent.eligibilityAddItem(String eligibility) =
+      _EligibilityAddItem;
+  const factory DiscountsAddEvent.eligibilityRemoveItem(String eligibility) =
+      _EligibilityRemoveItem;
   const factory DiscountsAddEvent.linkUpdate(String link) = _LinkUpdate;
   const factory DiscountsAddEvent.descriptionUpdate(String description) =
       _DescriptionUpdate;

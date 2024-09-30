@@ -164,6 +164,7 @@ abstract class KMockText {
         '- when ordering tests and paying for them online on the Esculab website;',
     expirationEN: 'It works all the time',
     locationEN: ['Kyiv'], status: DiscountState.published,
+    eligibility: ['Ветеранам'], eligibilityEN: ['Veterans'],
   );
   static final informationModel = InformationModel(
     id: '',
