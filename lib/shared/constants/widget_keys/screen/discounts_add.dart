@@ -14,6 +14,7 @@ class _DiscountsAddKeys {
   final sendButton = const Key('discounts_add_screen_send_button');
   final titleField = const Key('discounts_add_screen_title_field');
   final discountsField = const Key('discounts_add_screen_discounts_field');
+  final eligibilityField = const Key('discounts_add_screen_eligibility_field');
   final linkField = const Key('discounts_add_screen_link_field');
   final descriptionField = const Key('discounts_add_screen_description_field');
   final exclusionField = const Key('discounts_add_screen_exclusion_field');
