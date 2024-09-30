@@ -87,5 +87,6 @@ export 'title_widgets.dart';
 export 'tooltip_widget.dart';
 export 'user_email_dialog.dart';
 export 'user_photo_widget.dart';
+export 'vertical_scroll_widget.dart';
 export 'work_card_widget.dart';
 export 'work_request_card_widget.dart';
