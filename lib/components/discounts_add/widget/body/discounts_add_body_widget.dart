@@ -45,7 +45,7 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
         if (state.formState == DiscountsAddEnum.success) {
           context.goNamed(KRoute.myDiscounts.name);
         }
-        if (state.formState.isMain) {
+        if (state.formState.isDetail) {
           periodController.text = state.period.value
                   ?.toLocalDateString(context: context, showDay: true) ??
               '';
