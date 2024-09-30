@@ -23,7 +23,7 @@ void main() {
     setUp(() {
       ExtendedDateTime.current = KTestText.dateTime;
       ExtendedDateTime.id = '';
-      KPlatformConstants.isWebDesktop = false;
+      PlatformEnum.isWebDesktop = false;
       mockInformationRepository = MockIInformationRepository();
       mockAuthenticationRepository = MockAuthenticationRepository();
       when(mockAuthenticationRepository.currentUser).thenAnswer(
