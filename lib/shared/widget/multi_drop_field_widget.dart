@@ -17,6 +17,8 @@ class MultiDropFieldWidget extends StatelessWidget {
     this.errorText,
     this.values,
     this.controller,
+    this.errorMaxLines,
+    this.isButton,
   });
 
   final void Function(String text)? onChanged;
@@ -29,6 +31,8 @@ class MultiDropFieldWidget extends StatelessWidget {
   final List<String>? values;
   final void Function(String value) removeEvent;
   final Key textFieldKey;
+  final int? errorMaxLines;
+  final bool? isButton;
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +48,8 @@ class MultiDropFieldWidget extends StatelessWidget {
       showErrorText: showErrorText,
       errorText: errorText,
       getItemText: null,
+      isButton: isButton,
+      errorMaxLines: errorMaxLines,
       optionsBuilder: (TextEditingValue textEditingValue) {
         if (textEditingValue.text.isEmpty || dropDownList.isEmpty) {
           return dropDownList;
@@ -84,11 +90,12 @@ class MultiDropFieldImplementationWidget<T extends Object>
     this.controller,
     super.key,
     this.tralingList,
-    this.enabled,
+    this.isButton,
     this.unfocusSufixIcon,
     this.textFieldChangeEvent,
     this.suffixIconPadding,
     this.focusNode,
+    this.errorMaxLines,
   });
 
   final void Function(String text)? onChanged;
@@ -102,7 +109,7 @@ class MultiDropFieldImplementationWidget<T extends Object>
   final TextEditingController? controller;
   final FocusNode? focusNode;
   final List<Widget>? tralingList;
-  final bool? enabled;
+  final bool? isButton;
   final Widget Function(T element) item;
   final FutureOr<Iterable<T>> Function(TextEditingValue) optionsBuilder;
   final Icon? unfocusSufixIcon;
@@ -113,6 +120,7 @@ class MultiDropFieldImplementationWidget<T extends Object>
   })? textFieldChangeEvent;
   final double? suffixIconPadding;
   final Key textFieldKey;
+  final int? errorMaxLines;
 
   @override
   State<MultiDropFieldImplementationWidget<T>> createState() =>
@@ -172,8 +180,9 @@ class _MultiDropFieldImplementationWidgetState<T extends Object>
       showErrorText: widget.showErrorText,
       optionsBuilder: widget.optionsBuilder,
       unfocusSufixIcon: widget.unfocusSufixIcon,
-      enabled: widget.enabled,
+      isButton: widget.isButton,
       item: widget.item,
+      errorMaxLines: widget.errorMaxLines,
       onSelected: (value) {
         widget.onChanged
             ?.call(widget.getItemText?.call(value) ?? value.toString());
