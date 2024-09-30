@@ -6,7 +6,7 @@ import '../../../test_dependency.dart';
 Future<void> discountsAddDetailHelper({
   required WidgetTester tester,
   bool hasField = true,
-  bool checkCitiesHelper = false,
+  bool checkHelper = false,
 }) async {
   final matcher = hasField ? findsOneWidget : findsNothing;
 
@@ -27,7 +27,7 @@ Future<void> discountsAddDetailHelper({
     matcher,
   );
 
-  if (hasField && checkCitiesHelper) {
+  if (hasField && checkHelper) {
     await citiesDropFieldHelper(
       tester: tester,
       text: KTestText.field,
@@ -41,7 +41,7 @@ Future<void> discountsAddDetailHelper({
     matcher,
   );
 
-  if (hasField) {
+  if (hasField && checkHelper) {
     expect(
       find.byKey(KWidgetkeys.screen.discountsAdd.indefinitelySwitcher),
       findsOneWidget,

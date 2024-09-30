@@ -32,7 +32,7 @@ Future<void> discountsAddUncorectHelper({
 
   await discountsAddMainHelper(tester: tester, hasField: false);
 
-  await discountsAddDetailHelper(tester: tester, checkCitiesHelper: true);
+  await discountsAddDetailHelper(tester: tester, checkHelper: true);
 
   await discountsAddDetailEnterHelper(
     tester: tester,
