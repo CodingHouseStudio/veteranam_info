@@ -195,40 +195,31 @@ class _MultiDropFieldImplementationWidgetState<T extends Object>
                       children: [
                         // const Spacer(),
                         Expanded(
-                          child: ScrollConfiguration(
-                            behavior: CustomScrollBehavior(),
-                            child: SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
-                              child: Row(
-                                children: List.generate(
-                                  widget.values!.length,
-                                  (index) => Padding(
-                                    padding: EdgeInsets.only(
-                                      left: index == 0
-                                          ? 0
-                                          : KPadding.kPaddingSize8,
-                                    ),
-                                    child: CancelChipWidget(
-                                      widgetKey: KWidgetkeys
-                                          .widget.multiDropField.chips,
-                                      isDesk: widget.isDesk,
-                                      labelText:
-                                          widget.values!.elementAt(index),
-                                      style: KButtonStyles.secondaryButtonStyle
-                                          .copyWith(
-                                        padding: const WidgetStatePropertyAll(
-                                          EdgeInsets.symmetric(
-                                            vertical: KPadding.kPaddingSize4,
-                                            horizontal: KPadding.kPaddingSize8,
-                                          ),
-                                        ),
-                                      ),
-                                      textStyle:
-                                          AppTextStyle.materialThemeTitleMedium,
-                                      onPressed: () => widget.removeEvent(
-                                        widget.values!.elementAt(index),
+                          child: VerticalScrollWidget(
+                            children: List.generate(
+                              widget.values!.length,
+                              (index) => Padding(
+                                padding: EdgeInsets.only(
+                                  left: index == 0 ? 0 : KPadding.kPaddingSize8,
+                                ),
+                                child: CancelChipWidget(
+                                  widgetKey:
+                                      KWidgetkeys.widget.multiDropField.chips,
+                                  isDesk: widget.isDesk,
+                                  labelText: widget.values!.elementAt(index),
+                                  style: KButtonStyles.secondaryButtonStyle
+                                      .copyWith(
+                                    padding: const WidgetStatePropertyAll(
+                                      EdgeInsets.symmetric(
+                                        vertical: KPadding.kPaddingSize4,
+                                        horizontal: KPadding.kPaddingSize8,
                                       ),
                                     ),
+                                  ),
+                                  textStyle:
+                                      AppTextStyle.materialThemeTitleMedium,
+                                  onPressed: () => widget.removeEvent(
+                                    widget.values!.elementAt(index),
                                   ),
                                 ),
                               ),

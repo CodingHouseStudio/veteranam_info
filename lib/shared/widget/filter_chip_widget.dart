@@ -58,43 +58,34 @@ class FiltersChipWidget extends StatelessWidget {
     // );
   }
 
-  Widget _body(BuildContext context) => ScrollConfiguration(
-        behavior: CustomScrollBehavior(),
-        child: SingleChildScrollView(
-          key: KWidgetkeys.widget.filterChip.widget,
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            children: List.generate(filtersItems.length + 1, (index) {
-              final i = index - 1;
-              return Padding(
-                padding: EdgeInsets.only(
-                  right:
-                      isDesk ? KPadding.kPaddingSize16 : KPadding.kPaddingSize8,
-                ),
-                child: ChipWidget(
-                  key: KWidgetkeys.widget.filterChip.chips,
-                  filter: i != -1
-                      ? filtersItems.elementAt(i)
-                      : (FilterItem(
-                          CategoryEnum.all.getValue(context),
-                          number: fullLength,
-                        )),
-                  onSelected: (isSelected) => onSelected(
+  Widget _body(BuildContext context) => VerticalScrollWidget(
+        scrollKey: KWidgetkeys.widget.filterChip.widget,
+        children: List.generate(filtersItems.length + 1, (index) {
+          final i = index - 1;
+          return Padding(
+            padding: EdgeInsets.only(
+              right: isDesk ? KPadding.kPaddingSize16 : KPadding.kPaddingSize8,
+            ),
+            child: ChipWidget(
+              key: KWidgetkeys.widget.filterChip.chips,
+              filter: i != -1
+                  ? filtersItems.elementAt(i)
+                  : (FilterItem(
+                      CategoryEnum.all.getValue(context),
+                      number: fullLength,
+                    )),
+              onSelected: (isSelected) => onSelected(
+                i != -1 ? filtersItems.elementAt(i).value : CategoryEnum.all,
+              ),
+              isSelected: isSelected(
                     i != -1
                         ? filtersItems.elementAt(i).value
                         : CategoryEnum.all,
-                  ),
-                  isSelected: isSelected(
-                        i != -1
-                            ? filtersItems.elementAt(i).value
-                            : CategoryEnum.all,
-                      ) ||
-                      (i == -1 && filterIsEmpty),
-                  isDesk: isDesk,
-                ),
-              );
-            }),
-          ),
-        ),
+                  ) ||
+                  (i == -1 && filterIsEmpty),
+              isDesk: isDesk,
+            ),
+          );
+        }),
       );
 }

@@ -25,7 +25,7 @@ void main() {
     late AppInfoRepository mockBuildRepository;
     setUp(() {
       Config.isWeb = false;
-      KPlatformConstants.isWebDesktop = true;
+      PlatformEnum.isWebDesktop = true;
       KTest.testReleaseMode = true;
       Config.falvourValue = Config.production;
       ExtendedDateTime.id = KTestText.id;
@@ -145,7 +145,7 @@ void main() {
       });
       group('Open Update dialog', () {
         setUp(() {
-          KPlatformConstants.isWebDesktop = false;
+          PlatformEnum.isWebDesktop = false;
           when(
             mockFirebaseRemoteConfigProvider
                 .getString(AppVersionCubit.mobAppVersionKey),
