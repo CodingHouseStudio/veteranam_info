@@ -80,7 +80,6 @@ export 'svg_image_widget.dart';
 export 'switch_offline_widget.dart';
 export 'switch_widget.dart';
 export 'switch_widget_withoud_bloc.dart';
-export 'text_field_description_widget.dart';
 export 'text_field_widget.dart';
 export 'text_point_widget.dart';
 export 'title_widgets.dart';

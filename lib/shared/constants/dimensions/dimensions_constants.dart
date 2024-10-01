@@ -47,4 +47,8 @@ abstract class KDimensions {
   static const twentyPercent = 0.2;
 
   static const thirtyPercent = 0.3;
+
+  static const seventyPercent = 0.7;
+
+  static const sixtyPercent = 0.6;
 }
