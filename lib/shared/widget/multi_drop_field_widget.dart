@@ -19,6 +19,7 @@ class MultiDropFieldWidget extends StatelessWidget {
     this.controller,
     this.errorMaxLines,
     this.isButton,
+    this.description,
   });
 
   final void Function(String text)? onChanged;
@@ -33,6 +34,7 @@ class MultiDropFieldWidget extends StatelessWidget {
   final Key textFieldKey;
   final int? errorMaxLines;
   final bool? isButton;
+  final String? description;
 
   @override
   Widget build(BuildContext context) {
@@ -68,6 +70,7 @@ class MultiDropFieldWidget extends StatelessWidget {
         key: KWidgetkeys.widget.dropListField.itemText,
         style: AppTextStyle.materialThemeBodyLarge,
       ),
+      description: description,
     );
   }
 }
@@ -96,6 +99,7 @@ class MultiDropFieldImplementationWidget<T extends Object>
     this.suffixIconPadding,
     this.focusNode,
     this.errorMaxLines,
+    this.description,
   });
 
   final void Function(String text)? onChanged;
@@ -121,6 +125,7 @@ class MultiDropFieldImplementationWidget<T extends Object>
   final double? suffixIconPadding;
   final Key textFieldKey;
   final int? errorMaxLines;
+  final String? description;
 
   @override
   State<MultiDropFieldImplementationWidget<T>> createState() =>
@@ -131,13 +136,24 @@ class _MultiDropFieldImplementationWidgetState<T extends Object>
     extends State<MultiDropFieldImplementationWidget<T>> {
   late TextEditingController controller;
   late FocusNode focusNode;
+  late String fieldText;
   @override
   void initState() {
     super.initState();
-    controller = widget.controller ?? TextEditingController();
+    fieldText = '';
+    controller = (widget.controller ?? TextEditingController())
+      ..addListener(_fieldText);
     focusNode = (widget.focusNode ?? FocusNode())
       ..onKeyEvent = _handleKeyEvent
       ..addListener(_unFocusData);
+  }
+
+  void _fieldText() {
+    if (controller.text != fieldText) {
+      setState(() {
+        fieldText = controller.text;
+      });
+    }
   }
 
   void _unFocusData() {
@@ -183,6 +199,7 @@ class _MultiDropFieldImplementationWidgetState<T extends Object>
       isButton: widget.isButton,
       item: widget.item,
       errorMaxLines: widget.errorMaxLines,
+      description: widget.description,
       onSelected: (value) {
         widget.onChanged
             ?.call(widget.getItemText?.call(value) ?? value.toString());
@@ -192,16 +209,43 @@ class _MultiDropFieldImplementationWidgetState<T extends Object>
         FocusScope.of(context).unfocus();
       },
       fieldParentWidget: widget.values != null && widget.values!.isNotEmpty
-          ? ({required textField, required suffixIcon}) => Stack(
+          ? ({required textField, required suffixIcon, required fieldWidth}) =>
+              Stack(
                 children: [
                   textField,
                   Padding(
-                    padding: const EdgeInsets.symmetric(
+                    padding: EdgeInsets.symmetric(
                       horizontal: KPadding.kPaddingSize8,
-                      vertical: KPadding.kPaddingSize8,
+                      vertical: focusNode.hasFocus
+                          ? KPadding.kPaddingSize4
+                          : (widget.isDesk
+                              ? KPadding.kPaddingSize8
+                              : KPadding.kPaddingSize5),
                     ),
                     child: Row(
                       children: [
+                        if (!(widget.isButton ?? false)) ...[
+                          if (focusNode.hasFocus)
+                            if (widget.isDesk)
+                              KSizedBox.kWidthSizedBox32
+                            else
+                              KSizedBox.kWidthSizedBox24,
+                          ConstrainedBox(
+                            constraints: BoxConstraints(
+                              maxWidth: fieldWidth *
+                                  (widget.isDesk
+                                      ? KDimensions.seventyPercent
+                                      : KDimensions.sixtyPercent),
+                            ),
+                            child: Text(
+                              fieldText,
+                              style: AppTextStyle.materialThemeTitleMedium
+                                  .copyWith(color: Colors.transparent),
+                              maxLines: 1,
+                            ),
+                          ),
+                        ],
+
                         // const Spacer(),
                         Expanded(
                           child: VerticalScrollWidget(
@@ -250,6 +294,7 @@ class _MultiDropFieldImplementationWidgetState<T extends Object>
   @override
   void dispose() {
     focusNode.removeListener(_unFocusData);
+    controller.removeListener(_fieldText);
     if (widget.controller == null) controller.dispose();
     if (widget.focusNode == null) focusNode.dispose();
     super.dispose();

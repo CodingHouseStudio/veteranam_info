@@ -34,7 +34,7 @@ class TextFieldWidget extends StatefulWidget {
     this.minLines,
     this.hintStyle,
     // this.text,
-    this.suffixIconPadding,
+    this.suffixHorizontalIconPadding,
     this.showErrorText,
     this.labelTextStyle,
     this.textStyle,
@@ -42,6 +42,8 @@ class TextFieldWidget extends StatefulWidget {
     this.disabledBorder,
     this.floatingLabelBehavior,
     this.borderHoverColor = AppColors.materialThemeRefNeutralNeutral40,
+    this.suffixIconPadding,
+    this.description,
   });
   final Key widgetKey;
   final TextAlign? textAlign;
@@ -74,13 +76,15 @@ class TextFieldWidget extends StatefulWidget {
   final TextStyle? hintStyle;
   final bool isDesk;
   // final String? text;
-  final double? suffixIconPadding;
+  final double? suffixHorizontalIconPadding;
+  final EdgeInsetsGeometry? suffixIconPadding;
   final bool? showErrorText;
   final TextStyle? labelTextStyle;
   final TextStyle? textStyle;
   final MouseCursor? cursor;
   final FloatingLabelBehavior? floatingLabelBehavior;
   final Color? borderHoverColor;
+  final String? description;
 
   @override
   State<TextFieldWidget> createState() => _TextFieldWidgetState();
@@ -156,9 +160,11 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
           hintText: widget.hintText,
           errorText: widget.showErrorText ?? true ? widget.errorText : null,
           suffixIcon: Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: widget.suffixIconPadding ?? KPadding.kPaddingSize4,
-            ),
+            padding: widget.suffixIconPadding ??
+                EdgeInsets.symmetric(
+                  horizontal: widget.suffixHorizontalIconPadding ??
+                      KPadding.kPaddingSize4,
+                ),
             child: widget.suffixIcon,
           ),
           prefixIcon: widget.prefixIcon,
@@ -166,6 +172,9 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
           labelStyle: widget.labelTextStyle,
           disabledBorder: widget.disabledBorder,
           floatingLabelBehavior: widget.floatingLabelBehavior,
+          helperText: widget.description,
+          helperStyle: AppTextStyle.materialThemeBodySmall,
+          helperMaxLines: KMinMaxSize.messageMinLines,
         ),
       ),
     );
