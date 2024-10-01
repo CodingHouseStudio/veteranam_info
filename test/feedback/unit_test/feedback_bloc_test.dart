@@ -300,7 +300,7 @@ void main() {
     );
     blocTest<FeedbackBloc, FeedbackState>(
       'emits [FeedbackState] when valid data is submitted '
-      'with incorrect credentials',
+      'with failure',
       build: () => feedbackBloc,
       act: (bloc) {
         when(

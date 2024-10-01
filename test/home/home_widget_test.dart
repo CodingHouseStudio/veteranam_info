@@ -26,7 +26,7 @@ void main() {
     setUp(() {
       ExtendedDateTime.current = KTestText.dateTime;
       ExtendedDateTime.id = KTestText.feedbackModel.id;
-      KPlatformConstants.isWebDesktop = true;
+      PlatformEnum.isWebDesktop = true;
       mockFaqRepository = MockIFaqRepository();
       mockAuthenticationRepository = MockAuthenticationRepository();
       mockUrlRepository = MockIUrlRepository();
@@ -193,7 +193,7 @@ void main() {
         );
       });
 
-      testWidgets('${KGroupText.intial} ', (tester) async {
+      testWidgets('${KGroupText.initial} ', (tester) async {
         await homePumpAppHelper(
           // mockFeedbackRepository: mockFeedbackRepository,
           mockFaqRepository: mockFaqRepository,
@@ -227,7 +227,7 @@ void main() {
       group('${KGroupText.goRouter} ', () {
         late MockGoRouter mockGoRouter;
         setUp(() => mockGoRouter = MockGoRouter());
-        testWidgets('${KGroupText.intial} ', (tester) async {
+        testWidgets('${KGroupText.initial} ', (tester) async {
           await homePumpAppHelper(
             // mockFeedbackRepository: mockFeedbackRepository,
             mockFaqRepository: mockFaqRepository,
@@ -300,6 +300,7 @@ void main() {
                 (realInvocation) => false,
               ),
             );
+
             testWidgets('${KRoute.profile.name} ', (tester) async {
               await homePumpAppHelper(
                 // mockFeedbackRepository: mockFeedbackRepository,

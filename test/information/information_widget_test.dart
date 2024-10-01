@@ -23,7 +23,7 @@ void main() {
     setUp(() {
       ExtendedDateTime.current = KTestText.dateTime;
       ExtendedDateTime.id = '';
-      KPlatformConstants.isWebDesktop = false;
+      PlatformEnum.isWebDesktop = false;
       mockInformationRepository = MockIInformationRepository();
       mockAuthenticationRepository = MockAuthenticationRepository();
       when(mockAuthenticationRepository.currentUser).thenAnswer(
@@ -140,7 +140,7 @@ void main() {
         );
       });
 
-      testWidgets('${KGroupText.intial} ', (tester) async {
+      testWidgets('${KGroupText.initial} ', (tester) async {
         await informationPumpAppHelper(
           mockInformationRepository: mockInformationRepository,
           mockAuthenticationRepository: mockAuthenticationRepository,
@@ -178,7 +178,7 @@ void main() {
       group('${KGroupText.goRouter} ', () {
         late MockGoRouter mockGoRouter;
         setUp(() => mockGoRouter = MockGoRouter());
-        testWidgets('${KGroupText.intial} ', (tester) async {
+        testWidgets('${KGroupText.initial} ', (tester) async {
           await informationPumpAppHelper(
             mockInformationRepository: mockInformationRepository,
             mockAuthenticationRepository: mockAuthenticationRepository,

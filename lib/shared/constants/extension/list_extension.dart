@@ -83,6 +83,33 @@ extension ListStringExtensions on List<String> {
   }
 }
 
+extension ListStringNullableExtensions on List<String>? {
+  List<String> addFieldModel(String value) {
+    final text = value.trim();
+    final listValue = text.isEmpty ? <String>[] : [text];
+    if (this == null) {
+      return listValue;
+    } else {
+      late List<String> list;
+      if (this!.contains(text) || listValue.isEmpty) {
+        list = this!;
+      } else {
+        list = List.from(this!)..add(text);
+      }
+      return list;
+    }
+  }
+
+  List<String> removeFieldModel(String value) {
+    final text = value.trim();
+    if (this == null) {
+      return [];
+    } else {
+      return List.from(this!)..remove(text);
+    }
+  }
+}
+
 /// Extension providing utility methods for List<T>.
 extension ListExtensions<T> on List<T> {
   /// Method to get the list of loaded items.

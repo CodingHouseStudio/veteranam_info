@@ -11,10 +11,11 @@ class NameFieldModel extends FormzInput<String, NameFieldModelValidationError> {
 
   @override
   NameFieldModelValidationError? validator(String? value) {
-    if (value == null || value.isEmpty) {
+    final text = value?.trim();
+    if (text == null || text.isEmpty) {
       return NameFieldModelValidationError.empty;
     }
-    if (!_nameRegExp.hasMatch(value)) {
+    if (!_nameRegExp.hasMatch(text)) {
       return NameFieldModelValidationError.wrong;
     }
     return null;

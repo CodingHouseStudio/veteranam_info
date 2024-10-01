@@ -164,6 +164,7 @@ abstract class KMockText {
         '- when ordering tests and paying for them online on the Esculab website;',
     expirationEN: 'It works all the time',
     locationEN: ['Kyiv'], status: DiscountState.published,
+    eligibility: ['Ветеранам'], eligibilityEN: ['Veterans'],
   );
   static final informationModel = InformationModel(
     id: '',
@@ -222,7 +223,7 @@ abstract class KAppText {
   static const String coffee = 'Buy me a Coffee';
   static const String cache = 'local cache';
   static const String server = 'server';
-  static const String site = 'https://veteranam.info';
+  static const String site = 'https://app.veteranam.info';
   static const String unknown = 'Unknown';
   static const String androidInstallUrl = 'market://details?id=$_mobAppId';
   static const String nickname = 'Nickname';

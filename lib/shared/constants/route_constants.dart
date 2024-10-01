@@ -18,9 +18,9 @@ abstract class KRoute {
     path: 'discounts',
     name: 'Discounts',
   );
-  static const _RouteItem businessDiscounts = _RouteItem(
+  static const _RouteItem businessDashboard = _RouteItem(
     path: '/',
-    name: 'Discounts',
+    name: 'Business Dashboard',
   );
   static const _RouteItem stories = _RouteItem(
     path: 'stories',
@@ -39,7 +39,7 @@ abstract class KRoute {
     name: 'Support',
   );
   static const _RouteItem aboutUs = _RouteItem(
-    path: 'aboutUs',
+    path: 'about-us',
     name: 'AboutUs',
   );
   static const _RouteItem consultation = _RouteItem(
@@ -55,7 +55,7 @@ abstract class KRoute {
     name: 'Login',
   );
   static const _RouteItem signUp = _RouteItem(
-    path: 'signUp',
+    path: 'sign-up',
     name: 'SignUp',
   );
   static const _RouteItem thanks = _RouteItem(
@@ -68,15 +68,15 @@ abstract class KRoute {
   );
   static const _RouteItem newsCard = _RouteItem(
     path: '',
-    name: 'NewsCard',
+    name: 'News Card',
   );
   static const _RouteItem discountCard = _RouteItem(
     path: '',
     name: 'discountCard',
   );
   static const _RouteItem questionsForm = _RouteItem(
-    path: '/questionsForm',
-    name: 'QuestionsForm',
+    path: '/questions-form',
+    name: 'Questions Form',
   );
   static const _RouteItem workEmployee = _RouteItem(
     path: 'employee',
@@ -99,35 +99,35 @@ abstract class KRoute {
     name: 'AddSaves',
   );
   static const _RouteItem profileMyStory = _RouteItem(
-    path: 'myStory',
+    path: 'my-story',
     name: 'MyStory',
   );
   static const _RouteItem underConstruction = _RouteItem(
-    path: '/underConstruction',
-    name: 'UnderConstruction',
+    path: '/under-construction',
+    name: 'Under Construction',
   );
   static const _RouteItem feedback = _RouteItem(
     path: 'feedback',
     name: 'Feedback',
   );
   static const _RouteItem myDiscounts = _RouteItem(
-    path: 'my',
-    name: 'MyDiscounts',
+    path: 'discounts/manage',
+    name: 'My Discounts',
   );
   static const _RouteItem settings = _RouteItem(
-    path: '/',
+    path: '/settings',
     name: 'Settings',
   );
   static const _RouteItem mobFAQ = _RouteItem(
-    path: 'FAQ',
+    path: 'faq',
     name: 'FAQ',
   );
   static const _RouteItem userRole = _RouteItem(
-    path: '/userRole',
-    name: 'UserRole',
+    path: '/intro',
+    name: 'intro',
   );
   static const _RouteItem discountsAdd = _RouteItem(
     path: 'add',
-    name: 'DiscountsAdd',
+    name: 'Discounts Add',
   );
 }

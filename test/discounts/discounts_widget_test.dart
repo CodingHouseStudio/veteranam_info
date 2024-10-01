@@ -27,7 +27,7 @@ void main() {
       // KTest.animatioRepeat=1;
       ExtendedDateTime.id = KTestText.id;
       ExtendedDateTime.current = KTestText.dateTime;
-      KPlatformConstants.isWebDesktop = true;
+      PlatformEnum.isWebDesktop = true;
       mockDiscountRepository = MockIDiscountRepository();
       mockAppAuthenticationRepository = MockAppAuthenticationRepository();
       mockAuthenticationRepository = MockAuthenticationRepository();
@@ -149,7 +149,7 @@ void main() {
           (invocation) async => const Right(true),
         );
       });
-      testWidgets('${KGroupText.intial} ', (tester) async {
+      testWidgets('${KGroupText.initial} ', (tester) async {
         await discountsPumpAppHelper(
           tester: tester,
           mockDiscountRepository: mockDiscountRepository,
@@ -262,7 +262,7 @@ void main() {
       group('${KGroupText.goRouter} ', () {
         late MockGoRouter mockGoRouter;
         setUp(() => mockGoRouter = MockGoRouter());
-        testWidgets('${KGroupText.intial} ', (tester) async {
+        testWidgets('${KGroupText.initial} ', (tester) async {
           await discountsPumpAppHelper(
             tester: tester,
             mockDiscountRepository: mockDiscountRepository,

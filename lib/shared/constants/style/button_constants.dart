@@ -172,9 +172,6 @@ abstract class KButtonStyles {
   );
 
   static const dropListButtonStyle = ButtonStyle(
-    minimumSize: WidgetStatePropertyAll(
-      Size(KMinMaxSize.minWidth100, KMinMaxSize.minHeight50),
-    ),
     padding: WidgetStatePropertyAll(
       EdgeInsets.symmetric(horizontal: KPadding.kPaddingSize32),
     ),
@@ -276,6 +273,21 @@ abstract class KButtonStyles {
       RoundedRectangleBorder(
         borderRadius: KBorderRadius.kBorderRadius32,
         side: BorderSide(color: AppColors.materialThemeKeyColorsSecondary),
+      ),
+    ),
+  );
+
+  static const borderGrayButtonStyle = ButtonStyle(
+    padding: WidgetStatePropertyAll(
+      EdgeInsets.symmetric(
+        vertical: KPadding.kPaddingSize4,
+        horizontal: KPadding.kPaddingSize16,
+      ),
+    ),
+    shape: WidgetStatePropertyAll(
+      RoundedRectangleBorder(
+        borderRadius: KBorderRadius.kBorderRadius32,
+        side: BorderSide(color: AppColors.materialThemeKeyColorsNeutralVariant),
       ),
     ),
   );

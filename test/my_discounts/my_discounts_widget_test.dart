@@ -92,7 +92,7 @@ void main() {
           (invocation) async => Right(KTestText.userDiscountModelItems),
         );
       });
-      testWidgets('${KGroupText.intial} ', (tester) async {
+      testWidgets('${KGroupText.initial} ', (tester) async {
         await myDiscountsPumpAppHelper(
           mockDiscountRepository: mockDiscountRepository,
           mockAppAuthenticationRepository: mockAppAuthenticationRepository,
@@ -114,7 +114,7 @@ void main() {
       group('${KGroupText.goRouter} ', () {
         late MockGoRouter mockGoRouter;
         setUp(() => mockGoRouter = MockGoRouter());
-        testWidgets('${KGroupText.intial} ', (tester) async {
+        testWidgets('${KGroupText.initial} ', (tester) async {
           await myDiscountsPumpAppHelper(
             mockDiscountRepository: mockDiscountRepository,
             mockAppAuthenticationRepository: mockAppAuthenticationRepository,
@@ -124,6 +124,15 @@ void main() {
 
           await myDiscountsInitialHelper(tester);
         });
+
+        loadingList(
+          (tester) async => myDiscountsPumpAppHelper(
+            mockDiscountRepository: mockDiscountRepository,
+            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+            tester: tester,
+          ),
+          // lastCard: KWidgetkeys.screen.discounts.cardLast,
+        );
         group(
           '${KGroupText.goTo} ',
           () {

@@ -5,9 +5,8 @@ import 'package:collection/collection.dart';
 import 'package:feedback/feedback.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart' show Uint8List, kIsWeb, kReleaseMode;
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:veteranam/components/components.dart';
 import 'package:veteranam/shared/shared.dart';
@@ -43,16 +42,26 @@ extension ItemLoadedExtensions on int {
 }
 
 extension LocalizedDateTime on DateTime {
-  String toLocalDateString(BuildContext context) {
+  String toLocalDateString({
+    required BuildContext? context,
+    String? localeValue,
+    bool showDay = false,
+  }) {
     final locale = context
-        .read<AuthenticationBloc>()
-        .state
-        .userSetting
-        .locale
-        .value
-        .languageCode;
-    initializeDateFormatting(locale);
-    return DateFormat.yMMMM(locale).format(toLocal());
+            ?.read<AuthenticationBloc>()
+            .state
+            .userSetting
+            .locale
+            .value
+            .languageCode ??
+        localeValue ??
+        Language.ukrain;
+    // initializeDateFormatting(locale);
+    if (showDay) {
+      return DateFormat.yMMMMd(locale).format(toLocal());
+    } else {
+      return DateFormat.yMMMM(locale).format(toLocal());
+    }
   }
 }
 
@@ -62,23 +71,42 @@ extension DiscountModelLocation on DiscountModel {
   //       if (subLocation != null) ...subLocation!.getList(context),
   //     ];
   String getDescription(BuildContext context) =>
-      '${context.isEnglish ? descriptionEN : description}\n'
-      '\n***${context.l10n.toGetItYouNeed}***\n'
-      '\n- ${context.isEnglish ? requirementsEN : requirements}\n'
-      '\n${context.isEnglish ? exclusionsEN : exclusions}'
-      '${additionalDetails != null ? _getMarkdownAdditionalDetails : ''}'
+      '${description.getTrnslation(en: descriptionEN, context: context)}'
+      '${requirements != null ? _getMarkdownToGetIfYouNeed(context) : ''}'
+      '${requirements != null ? _getMarkdownRequirements(context) : ''}'
+      '${exclusions != null ? _getMarkdownExclusions(context) : ''}\n'
+      '${additionalDetails != null ? _getMarkdownAdditionalDetails(
+          context,
+        ) : ''}'
       '${phoneNumber != null ? _getMarkdownPhoneNumber(context) : ''}';
 
-  String _getMarkdownAdditionalDetails(BuildContext context) => '\n\n'
-      '${context.isEnglish ? additionalDetailsEN : additionalDetails ?? ''}';
+  String _getMarkdownAdditionalDetails(BuildContext context) =>
+      '\n\n${additionalDetails.getTrnslation(
+            en: additionalDetailsEN,
+            context: context,
+          ) ?? ''}';
 
   String _getMarkdownPhoneNumber(BuildContext context) =>
       '\n\n***${context.l10n.callForDetails}:***'
-      ' ${KPlatformConstants.isWebDesktop ? '***' : '['}'
+      ' ${PlatformEnum.isWebDesktop ? '***' : '['}'
       '$phoneNumber'
-      '${KPlatformConstants.isWebDesktop ? '***' : '](tel:'
-          // ignore: lines_longer_than_80_chars
-          '${phoneNumber!.replaceAll('(', '').replaceAll(')', '').replaceAll(' ', '')})'}';
+      '${PlatformEnum.isWebDesktop ? '***' : '](tel:'
+          '${phoneNumber!.replaceAll('(', '').replaceAll(
+                ')',
+                '',
+              ).replaceAll(' ', '')})'}';
+  String _getMarkdownExclusions(BuildContext context) => '\n\n'
+      '${exclusions.getTrnslation(
+            en: exclusionsEN,
+            context: context,
+          ) ?? ''}';
+  String _getMarkdownRequirements(BuildContext context) => '\n\n- '
+      '${requirements.getTrnslation(
+            en: requirementsEN,
+            context: context,
+          ) ?? ''}';
+  String _getMarkdownToGetIfYouNeed(BuildContext context) =>
+      '\n\n***${context.l10n.toGetItYouNeed}***';
 
   List<String> getCityList(BuildContext context) => [
         if (context.isEnglish)
@@ -87,9 +115,19 @@ extension DiscountModelLocation on DiscountModel {
           if (location != null) ...location!,
         if (subLocation != null) ...subLocation!.getCardList(context),
       ];
+
+  String? get getLink => PlatformEnum.getPlatform.isIOS
+      ? category.contains('Медицина')
+          ? null
+          : directLink ?? link
+      : directLink ?? link;
 }
 
 extension StringExtension on String {
+  String customSubstring(int start, [int? end]) {
+    return substring(start, end != null ? min(end, length) : null);
+  }
+
   bool get isUrlValid {
     const urlPattern = r'(https?://[^\s]+)';
     final regex = RegExp(
@@ -282,6 +320,18 @@ extension ContextExtensions on BuildContext {
       );
     }
   }
+
+  @visibleForTesting
+  static DateTime? textPieckerData;
+
+  Future<DateTime?> get getDate async =>
+      textPieckerData ??
+      showDatePicker(
+        context: this,
+        initialDate: ExtendedDateTime.current,
+        firstDate: ExtendedDateTime.current,
+        lastDate: DateTime(2026),
+      );
 }
 
 extension DiscountEnumExtensions on DiscountEnum {

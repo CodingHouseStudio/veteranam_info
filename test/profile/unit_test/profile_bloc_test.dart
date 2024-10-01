@@ -156,11 +156,11 @@ void main() {
           failure: null,
           formState: ProfileEnum.sendInProgress,
         ),
-        ProfileState(
-          name: const NameFieldModel.dirty(KTestText.nameCorrect),
-          surname: const SurnameFieldModel.dirty(KTestText.surnameCorrect),
-          image: ImageFieldModel.dirty(image),
-          nickname: const NicknameFieldModel.dirty(KTestText.nicknameCorrect),
+        const ProfileState(
+          name: NameFieldModel.dirty(KTestText.nameCorrect),
+          surname: SurnameFieldModel.dirty(KTestText.surnameCorrect),
+          image: ImageFieldModel.pure(),
+          nickname: NicknameFieldModel.dirty(KTestText.nicknameCorrect),
           failure: null,
           formState: ProfileEnum.success,
         ),
@@ -266,6 +266,84 @@ void main() {
           nickname: NicknameFieldModel.pure(),
           failure: null,
           formState: ProfileEnum.succesesUnmodified,
+        ),
+      ],
+    );
+
+    blocTest<ProfileBloc, ProfileState>(
+      'emits [FeedbackState] when valid data is submitted '
+      'with incorrect credentials',
+      build: () => profileBloc,
+      act: (bloc) {
+        when(
+          mockAuthenticationRepository.updateUserData(
+            user: KTestText.profileUser,
+            image: KTestText.imageModels,
+            nickname: KTestText.nicknameCorrect,
+          ),
+        ).thenAnswer(
+          (realInvocation) async => Left(
+            SomeFailure.serverError(
+              error: KGroupText.failureSend,
+            ),
+          ),
+        );
+
+        bloc
+          ..add(const ProfileEvent.nameUpdated(KTestText.nameCorrect))
+          ..add(const ProfileEvent.surnameUpdated(KTestText.surnameCorrect))
+          ..add(const ProfileEvent.nicknameUpdated(KTestText.nicknameCorrect))
+          ..add(const ProfileEvent.imageUpdated())
+          ..add(const ProfileEvent.save());
+      },
+      expect: () => [
+        const ProfileState(
+          name: NameFieldModel.dirty(KTestText.nameCorrect),
+          surname: SurnameFieldModel.pure(),
+          image: ImageFieldModel.pure(),
+          nickname: NicknameFieldModel.pure(),
+          failure: null,
+          formState: ProfileEnum.inProgress,
+        ),
+        const ProfileState(
+          name: NameFieldModel.dirty(KTestText.nameCorrect),
+          surname: SurnameFieldModel.dirty(KTestText.surnameCorrect),
+          image: ImageFieldModel.pure(),
+          nickname: NicknameFieldModel.pure(),
+          failure: null,
+          formState: ProfileEnum.inProgress,
+        ),
+        const ProfileState(
+          name: NameFieldModel.dirty(KTestText.nameCorrect),
+          surname: SurnameFieldModel.dirty(KTestText.surnameCorrect),
+          image: ImageFieldModel.pure(),
+          nickname: NicknameFieldModel.dirty(KTestText.nicknameCorrect),
+          failure: null,
+          formState: ProfileEnum.inProgress,
+        ),
+        ProfileState(
+          name: const NameFieldModel.dirty(KTestText.nameCorrect),
+          surname: const SurnameFieldModel.dirty(KTestText.surnameCorrect),
+          image: ImageFieldModel.dirty(image),
+          nickname: const NicknameFieldModel.dirty(KTestText.nicknameCorrect),
+          failure: null,
+          formState: ProfileEnum.inProgress,
+        ),
+        ProfileState(
+          name: const NameFieldModel.dirty(KTestText.nameCorrect),
+          surname: const SurnameFieldModel.dirty(KTestText.surnameCorrect),
+          image: ImageFieldModel.dirty(image),
+          nickname: const NicknameFieldModel.dirty(KTestText.nicknameCorrect),
+          failure: null,
+          formState: ProfileEnum.sendInProgress,
+        ),
+        ProfileState(
+          name: const NameFieldModel.dirty(KTestText.nameCorrect),
+          surname: const SurnameFieldModel.dirty(KTestText.surnameCorrect),
+          image: ImageFieldModel.dirty(image),
+          nickname: const NicknameFieldModel.dirty(KTestText.nicknameCorrect),
+          failure: ProfileFailure.error,
+          formState: ProfileEnum.initial,
         ),
       ],
     );

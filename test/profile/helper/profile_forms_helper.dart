@@ -2,41 +2,40 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:veteranam/shared/shared.dart';
 
 import '../../test_dependency.dart';
-import 'helper.dart';
 
 Future<void> profileformsHelper({
   required WidgetTester tester,
-  required String? name,
-  required String? surname,
-  required String? nickname,
+  required String name,
+  required String surname,
+  required String nickname,
 }) async {
-  await profileFormFieldHelper(tester);
-
   await tester.tap(find.byKey(KWidgetkeys.screen.profile.photo));
+
+  await tester.pumpAndSettle();
 
   await scrollingHelper(
     tester: tester,
     itemKey: KWidgetkeys.screen.profile.nameField,
   );
 
-  if (name != null) {
-    await tester.enterText(
-      find.byKey(KWidgetkeys.screen.profile.nameField),
-      name,
-    );
-  }
+  await tester.enterText(
+    find.byKey(KWidgetkeys.screen.profile.nameField),
+    name,
+  );
+
+  await tester.pumpAndSettle();
 
   await scrollingHelper(
     tester: tester,
     itemKey: KWidgetkeys.screen.profile.lastNameField,
   );
 
-  if (surname != null) {
-    await tester.enterText(
-      find.byKey(KWidgetkeys.screen.profile.lastNameField),
-      surname,
-    );
-  }
+  await tester.enterText(
+    find.byKey(KWidgetkeys.screen.profile.lastNameField),
+    surname,
+  );
+
+  await tester.pumpAndSettle();
 
   await scrollingHelper(
     tester: tester,
@@ -48,19 +47,19 @@ Future<void> profileformsHelper({
     itemKey: KWidgetkeys.screen.profile.nickNameField,
   );
 
-  if (nickname != null) {
-    await tester.enterText(
-      find.byKey(KWidgetkeys.screen.profile.nickNameField),
-      nickname,
-    );
-  }
+  await tester.enterText(
+    find.byKey(KWidgetkeys.screen.profile.nickNameField),
+    nickname,
+  );
+
+  await tester.pumpAndSettle();
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.profile.saveButton,
+    itemKey: KWidgetkeys.screen.profile.nickNameField,
   );
 
-  // await tester.tap(find.byKey(KWidgetkeys.screen.profile.saveButton));
+  await tester.tap(find.byKey(KWidgetkeys.screen.profile.saveButton));
 
-  // await tester.pumpAndSettle();
+  await tester.pumpAndSettle();
 }

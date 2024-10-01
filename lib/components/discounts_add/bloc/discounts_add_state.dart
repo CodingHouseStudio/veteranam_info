@@ -22,17 +22,19 @@ extension DiscountsAddFailureExtension on SomeFailure {
 @freezed
 class DiscountsAddState with _$DiscountsAddState {
   const factory DiscountsAddState({
-    // required DiscountModel discountModel,
     required List<String> categoryList,
+    required List<CityModel> citiesList,
     required MessageFieldModel category,
-    required CitiesFieldModel city,
-    required MessageFieldModel? period,
+    required ListFieldModel city,
+    required DateFieldModel period,
     required MessageFieldModel title,
     required DiscountsFieldModel discounts,
+    required ListFieldModel eligibility,
     required LinkFieldModel link,
     required MessageFieldModel description,
     required MessageFieldModel exclusions,
     required DiscountsAddEnum formState,
+    required bool isIndefinitely,
     DiscountsAddFailure? failure,
   }) = _Initial;
 }

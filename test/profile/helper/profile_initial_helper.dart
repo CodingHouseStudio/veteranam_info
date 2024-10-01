@@ -20,6 +20,11 @@ Future<void> profileInitialHelper(
         findsOneWidget,
       );
 
+      // await scrollingHelper(
+      //   tester: tester,
+      //   itemKey: KWidgetkeys.screen.profile.subtitle,
+      // );
+
       expect(
         find.byKey(KWidgetkeys.screen.profile.nameField),
         findsOneWidget,
@@ -43,6 +48,11 @@ Future<void> profileInitialHelper(
       expect(
         find.byKey(KWidgetkeys.screen.profile.saveButton),
         findsOneWidget,
+      );
+
+      await scrollingHelper(
+        tester: tester,
+        itemKey: KWidgetkeys.screen.profile.saveButton,
       );
 
       expect(

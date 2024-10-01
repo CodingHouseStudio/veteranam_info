@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:veteranam/components/components.dart';
+import 'package:veteranam/components/feedback/feedback.dart';
 import 'package:veteranam/shared/shared.dart';
 
 part '../feedback_box_widget.dart';

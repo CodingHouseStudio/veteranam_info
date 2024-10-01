@@ -387,7 +387,17 @@ void main() {
           // ),
         );
       });
-      test('Update data', () async {
+      test('Update user data', () async {
+        when(
+          mockAppAuthenticationRepository.updateUserSetting(
+            const UserSetting(
+              id: KTestText.field,
+              nickname: KTestText.nicknameCorrect,
+            ),
+          ),
+        ).thenAnswer(
+          (_) async => Left(SomeFailure.serverError(error: null)),
+        );
         expect(
           await authenticationRepository.updateUserData(
             user: KTestText.profileUser,

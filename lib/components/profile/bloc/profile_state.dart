@@ -1,20 +1,20 @@
 part of 'profile_bloc.dart';
 
-enum ProfileError {
+enum ProfileFailure {
   error,
   network,
   send,
 }
 
-extension AuthFailureToProfileError on SomeFailure {
-  ProfileError _toProfileError() {
+extension ProfileFailureExtension on SomeFailure {
+  ProfileFailure _toProfileError() {
     switch (this) {
       case FailureSend():
-        return ProfileError.send;
+        return ProfileFailure.send;
       case FailureNetwork():
-        return ProfileError.network;
+        return ProfileFailure.network;
       default:
-        return ProfileError.error;
+        return ProfileFailure.error;
     }
   }
 }
@@ -26,7 +26,7 @@ class ProfileState with _$ProfileState {
     required SurnameFieldModel surname,
     required ImageFieldModel image,
     required NicknameFieldModel nickname,
-    required ProfileError? failure,
+    required ProfileFailure? failure,
     required ProfileEnum formState,
   }) = _ProfileState;
 }

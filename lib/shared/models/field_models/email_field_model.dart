@@ -1,5 +1,4 @@
 import 'package:email_validator/email_validator.dart';
-import 'package:flutter/services.dart';
 import 'package:formz/formz.dart';
 
 enum EmailFieldModelValidationError {
@@ -16,16 +15,17 @@ class EmailFieldModel
 
   @override
   EmailFieldModelValidationError? validator(String value) {
-    if (value.isEmpty) {
+    final text = value.trim();
+    if (text.isEmpty) {
       return EmailFieldModelValidationError.empty;
     }
     // Check for minimum and maximum length
-    if (value.length < 6) {
+    if (text.length < 6) {
       return EmailFieldModelValidationError.invalidLength;
     }
 
     // Additional checks for invalid characters
-    if (!EmailValidator.validate(value)) {
+    if (!EmailValidator.validate(text)) {
       return EmailFieldModelValidationError.wrong;
     }
     final invalidCharacters = [
@@ -42,26 +42,11 @@ class EmailFieldModel
       '/',
       '*',
     ];
-    if (invalidCharacters.any((char) => value.contains(char))) {
+    if (invalidCharacters.any(text.contains)) {
       return EmailFieldModelValidationError.wrong;
     }
 
     return null;
-  }
-}
-
-class EmailInputFormatter extends TextInputFormatter {
-  @override
-  TextEditingValue formatEditUpdate(
-    TextEditingValue oldValue,
-    TextEditingValue newValue,
-  ) {
-    // delete all spaces
-    final newText = newValue.text.replaceAll(RegExp(r'\s+'), '');
-    return TextEditingValue(
-      text: newText,
-      selection: newValue.selection,
-    );
   }
 }
 

@@ -21,7 +21,7 @@ void main() {
       Config.isWeb = false;
       ExtendedDateTime.current = KTestText.dateTime;
       ExtendedDateTime.id = KTestText.feedbackModel.id;
-      KPlatformConstants.isWebDesktop = true;
+      PlatformEnum.isWebDesktop = true;
       mockFaqRepository = MockIFaqRepository();
     });
     group('${KGroupText.failure} ', () {
@@ -92,7 +92,7 @@ void main() {
         );
       });
 
-      testWidgets('${KGroupText.intial} ', (tester) async {
+      testWidgets('${KGroupText.initial} ', (tester) async {
         await mobFaqPumpAppHelper(
           mockFaqRepository: mockFaqRepository,
           tester: tester,
@@ -104,7 +104,7 @@ void main() {
       group('${KGroupText.goRouter} ', () {
         late MockGoRouter mockGoRouter;
         setUp(() => mockGoRouter = MockGoRouter());
-        testWidgets('${KGroupText.intial} ', (tester) async {
+        testWidgets('${KGroupText.initial} ', (tester) async {
           await mobFaqPumpAppHelper(
             mockFaqRepository: mockFaqRepository,
             tester: tester,

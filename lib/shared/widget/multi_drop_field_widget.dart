@@ -1,19 +1,25 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:veteranam/shared/shared.dart';
 
-class MultiDropFieldWidget extends StatefulWidget {
+class MultiDropFieldWidget extends StatelessWidget {
   const MultiDropFieldWidget({
-    required this.onChanged,
     required this.labelText,
     required this.dropDownList,
     required this.isDesk,
-    required this.values,
     required this.removeEvent,
-    required this.controller,
+    required this.textFieldKey,
     super.key,
+    this.onChanged,
     this.showErrorText,
     this.errorText,
+    this.values,
+    this.controller,
+    this.errorMaxLines,
+    this.isButton,
+    this.description,
   });
 
   final void Function(String text)? onChanged;
@@ -22,37 +28,154 @@ class MultiDropFieldWidget extends StatefulWidget {
   final bool isDesk;
   final bool? showErrorText;
   final String? errorText;
-  final TextEditingController controller;
+  final TextEditingController? controller;
   final List<String>? values;
   final void Function(String value) removeEvent;
+  final Key textFieldKey;
+  final int? errorMaxLines;
+  final bool? isButton;
+  final String? description;
 
   @override
-  State<MultiDropFieldWidget> createState() => _MultiDropFieldWidgetState();
+  Widget build(BuildContext context) {
+    return MultiDropFieldImplementationWidget<String>(
+      textFieldKey: textFieldKey,
+      onChanged: onChanged,
+      labelText: labelText,
+      dropDownList: dropDownList,
+      isDesk: isDesk,
+      values: values,
+      controller: controller,
+      removeEvent: removeEvent,
+      showErrorText: showErrorText,
+      errorText: errorText,
+      getItemText: null,
+      isButton: isButton,
+      errorMaxLines: errorMaxLines,
+      optionsBuilder: (TextEditingValue textEditingValue) {
+        if (textEditingValue.text.isEmpty || dropDownList.isEmpty) {
+          return dropDownList;
+        }
+
+        return dropDownList
+            .where(
+              (element) => element.toLowerCase().contains(
+                    textEditingValue.text.toLowerCase(),
+                  ),
+            )
+            .toList();
+      },
+      item: (element) => Text(
+        element,
+        key: KWidgetkeys.widget.dropListField.itemText,
+        style: AppTextStyle.materialThemeBodyLarge,
+      ),
+      description: description,
+    );
+  }
 }
 
-class _MultiDropFieldWidgetState extends State<MultiDropFieldWidget> {
-  late TextEditingController textController;
-  late FocusNode _focusNode;
-  late bool listFocusManager;
-  late String labelText;
+class MultiDropFieldImplementationWidget<T extends Object>
+    extends StatefulWidget {
+  const MultiDropFieldImplementationWidget({
+    required this.onChanged,
+    required this.labelText,
+    required this.dropDownList,
+    required this.isDesk,
+    required this.values,
+    required this.removeEvent,
+    required this.showErrorText,
+    required this.errorText,
+    required this.item,
+    required this.optionsBuilder,
+    required this.getItemText,
+    required this.textFieldKey,
+    this.controller,
+    super.key,
+    this.tralingList,
+    this.isButton,
+    this.unfocusSufixIcon,
+    this.textFieldChangeEvent,
+    this.suffixIconPadding,
+    this.focusNode,
+    this.errorMaxLines,
+    this.description,
+  });
+
+  final void Function(String text)? onChanged;
+  final String labelText;
+  final List<T> dropDownList;
+  final bool isDesk;
+  final bool? showErrorText;
+  final String? errorText;
+  final List<String>? values;
+  final void Function(String value) removeEvent;
+  final TextEditingController? controller;
+  final FocusNode? focusNode;
+  final List<Widget>? tralingList;
+  final bool? isButton;
+  final Widget Function(T element) item;
+  final FutureOr<Iterable<T>> Function(TextEditingValue) optionsBuilder;
+  final Icon? unfocusSufixIcon;
+  final String Function(T value)? getItemText;
+  final void Function({
+    required TextEditingController controller,
+    required FocusNode focusNode,
+  })? textFieldChangeEvent;
+  final double? suffixIconPadding;
+  final Key textFieldKey;
+  final int? errorMaxLines;
+  final String? description;
+
+  @override
+  State<MultiDropFieldImplementationWidget<T>> createState() =>
+      _MultiDropFieldImplementationWidgetState<T>();
+}
+
+class _MultiDropFieldImplementationWidgetState<T extends Object>
+    extends State<MultiDropFieldImplementationWidget<T>> {
+  late TextEditingController controller;
+  late FocusNode focusNode;
+  late String fieldText;
   @override
   void initState() {
     super.initState();
-    listFocusManager = false;
-    _focusNode = FocusNode();
-    labelText = (widget.values?.isEmpty ?? true) ? widget.labelText : '';
-    textController = widget.controller; //?? TextEditingController();
-    _focusNode.onKeyEvent = _handleKeyEvent;
+    fieldText = '';
+    controller = (widget.controller ?? TextEditingController())
+      ..addListener(_fieldText);
+    focusNode = (widget.focusNode ?? FocusNode())
+      ..onKeyEvent = _handleKeyEvent
+      ..addListener(_unFocusData);
   }
 
-  KeyEventResult _handleKeyEvent(FocusNode node, KeyEvent event) {
-    if (event is KeyDownEvent && event.logicalKey == LogicalKeyboardKey.enter) {
-      widget.onChanged?.call(textController.text);
-      _focusNode.unfocus();
-      textController.clear();
+  void _fieldText() {
+    if (controller.text != fieldText) {
       setState(() {
-        listFocusManager = !listFocusManager;
+        fieldText = controller.text;
       });
+    }
+  }
+
+  void _unFocusData() {
+    if (!focusNode.hasFocus) {
+      widget.onChanged?.call(controller.text);
+      controller.clear();
+    }
+  }
+
+  KeyEventResult _handleKeyEvent(
+    FocusNode node,
+    KeyEvent keyEvent,
+  ) {
+    if (controller.text.trim().isNotEmpty &&
+        keyEvent is KeyDownEvent &&
+        keyEvent.logicalKey == LogicalKeyboardKey.enter) {
+      widget.onChanged?.call(controller.text);
+      focusNode.unfocus();
+      controller.value = TextEditingValue.empty;
+      // setState(() {
+      //   changeFieldValue = !changeFieldValue;
+      // });
 
       return KeyEventResult.handled;
     }
@@ -61,51 +184,119 @@ class _MultiDropFieldWidgetState extends State<MultiDropFieldWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return DropListFieldImplementationWidget(
-      key: ValueKey(listFocusManager),
+    return DropListFieldImplementationWidget<T>(
+      textFieldKey: widget.textFieldKey,
       labelText: widget.labelText,
       dropDownList: widget.dropDownList,
       isDesk: widget.isDesk,
-      controller: textController,
+      controller: controller,
       errorText: widget.errorText,
-      onChanged: (text) {
-        widget.onChanged?.call(text);
-        textController.clear();
-      },
-      focusNode: _focusNode,
+      onChanged: null,
+      focusNode: focusNode,
       showErrorText: widget.showErrorText,
-      elementList: List.generate(
-        widget.values?.length ?? 0,
-        (index) => Padding(
-          padding:
-              EdgeInsets.only(left: index == 0 ? 0 : KPadding.kPaddingSize8),
-          child: CancelChipWidget(
-            widgetKey: KWidgetkeys.widget.multiDropField.chips,
-            isDesk: widget.isDesk,
-            labelText: widget.values!.elementAt(index),
-            style: KButtonStyles.secondaryButtonStyle.copyWith(
-              padding: const WidgetStatePropertyAll(
-                EdgeInsets.symmetric(
-                  vertical: KPadding.kPaddingSize4,
-                  horizontal: KPadding.kPaddingSize8,
-                ),
-              ),
-            ),
-            textStyle: AppTextStyle.materialThemeTitleMedium,
-            onPressed: () =>
-                widget.removeEvent(widget.values!.elementAt(index)),
-          ),
-        ),
-      ),
+      optionsBuilder: widget.optionsBuilder,
+      unfocusSufixIcon: widget.unfocusSufixIcon,
+      isButton: widget.isButton,
+      item: widget.item,
+      errorMaxLines: widget.errorMaxLines,
+      description: widget.description,
+      onSelected: (value) {
+        widget.onChanged
+            ?.call(widget.getItemText?.call(value) ?? value.toString());
+        controller
+          ..text = ' '
+          ..clear();
+        FocusScope.of(context).unfocus();
+      },
+      fieldParentWidget: widget.values != null && widget.values!.isNotEmpty
+          ? ({required textField, required suffixIcon, required fieldWidth}) =>
+              Stack(
+                children: [
+                  textField,
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: KPadding.kPaddingSize8,
+                      vertical: focusNode.hasFocus
+                          ? KPadding.kPaddingSize4
+                          : (widget.isDesk
+                              ? KPadding.kPaddingSize8
+                              : KPadding.kPaddingSize5),
+                    ),
+                    child: Row(
+                      children: [
+                        if (!(widget.isButton ?? false)) ...[
+                          if (focusNode.hasFocus)
+                            if (widget.isDesk)
+                              KSizedBox.kWidthSizedBox32
+                            else
+                              KSizedBox.kWidthSizedBox24,
+                          ConstrainedBox(
+                            constraints: BoxConstraints(
+                              maxWidth: fieldWidth *
+                                  (widget.isDesk
+                                      ? KDimensions.seventyPercent
+                                      : KDimensions.sixtyPercent),
+                            ),
+                            child: Text(
+                              fieldText,
+                              style: AppTextStyle.materialThemeTitleMedium
+                                  .copyWith(color: Colors.transparent),
+                              maxLines: 1,
+                            ),
+                          ),
+                        ],
+
+                        // const Spacer(),
+                        Expanded(
+                          child: VerticalScrollWidget(
+                            children: List.generate(
+                              widget.values!.length,
+                              (index) => Padding(
+                                padding: EdgeInsets.only(
+                                  left: index == 0 ? 0 : KPadding.kPaddingSize8,
+                                ),
+                                child: CancelChipWidget(
+                                  widgetKey:
+                                      KWidgetkeys.widget.multiDropField.chips,
+                                  isDesk: widget.isDesk,
+                                  labelText: widget.values!.elementAt(index),
+                                  style: KButtonStyles.secondaryButtonStyle
+                                      .copyWith(
+                                    padding: const WidgetStatePropertyAll(
+                                      EdgeInsets.symmetric(
+                                        vertical: KPadding.kPaddingSize4,
+                                        horizontal: KPadding.kPaddingSize8,
+                                      ),
+                                    ),
+                                  ),
+                                  textStyle:
+                                      AppTextStyle.materialThemeTitleMedium,
+                                  onPressed: () => widget.removeEvent(
+                                    widget.values!.elementAt(index),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        KSizedBox.kWidthSizedBox16,
+                        suffixIcon,
+                      ],
+                    ),
+                  ),
+                ],
+              )
+          : null,
+      suffixIconPadding: KPadding.kPaddingSize8,
     );
   }
 
   @override
   void dispose() {
-    // if (widget.controller == null) {
-    //   textController.dispose();
-    // }
-    _focusNode.dispose();
+    focusNode.removeListener(_unFocusData);
+    controller.removeListener(_fieldText);
+    if (widget.controller == null) controller.dispose();
+    if (widget.focusNode == null) focusNode.dispose();
     super.dispose();
   }
 }

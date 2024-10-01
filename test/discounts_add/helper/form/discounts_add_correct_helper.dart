@@ -11,18 +11,20 @@ Future<void> discountsAddCorectHelper({
 }) async {
   await discountsAddMainEnterHelper(
     tester: tester,
-    categoryText: KTestText.sendDiscountModel.category.first,
-    cityText: KTestText.sendDiscountModel.location!.first,
-    periodText: KTestText.sendDiscountModel.expiration!,
+    titleText: KTestText.sendDiscountModel.title,
+    linkText: KTestText.sendDiscountModel.link,
+    discountsText: KTestText.sendDiscountModel.discount.first.toString(),
+    eligibilityTap: true,
+    // periodText: KTestText.sendDiscountModel.expiration!,
   );
 
   await discountsAddMainHelper(tester: tester, hasField: false);
 
   await discountsAddDetailEnterHelper(
     tester: tester,
-    titleText: KTestText.sendDiscountModel.title,
-    linkText: KTestText.sendDiscountModel.link,
-    discountsText: KTestText.sendDiscountModel.discount.first.toString(),
+    categoryText: KTestText.sendDiscountModel.category.first,
+    cityText: KTestText.sendDiscountModel.location!.first,
+    tapIndefinitely: true,
   );
 
   await discountsAddDetailHelper(tester: tester, hasField: false);

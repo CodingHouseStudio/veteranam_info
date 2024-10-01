@@ -98,6 +98,7 @@ import 'package:veteranam/shared/repositories/app_nerwork_repository.dart'
     as _i336;
 import 'package:veteranam/shared/repositories/authentication_repository.dart'
     as _i208;
+import 'package:veteranam/shared/repositories/cities_repository.dart' as _i751;
 import 'package:veteranam/shared/repositories/device_repository.dart' as _i712;
 import 'package:veteranam/shared/repositories/discount_repository.dart'
     as _i452;
@@ -178,6 +179,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i895.Connectivity>(() => networkModule.connectivity);
     gh.singleton<_i1001.IDiscountRepository>(() => _i452.DiscountRepository());
     gh.singleton<_i1001.IFeedbackRepository>(() => _i361.FeedbackRepository());
+    gh.singleton<_i1001.ICitiesRepository>(() => _i751.CitiesRepository());
     gh.lazySingleton<_i1001.IUrlRepository>(() => _i929.UrlRepository());
     gh.singleton<_i1001.IStorage>(() => _i949.SecureStorageRepository());
     gh.singleton<_i1001.IFaqRepository>(
@@ -264,13 +266,6 @@ extension GetItInjectableX on _i174.GetIt {
               gh<_i1001.CacheClient>(),
               gh<_i806.FacebookAuth>(),
             ));
-    gh.factory<_i855.DiscountsAddBloc>(
-      () => _i855.DiscountsAddBloc(
-        discountRepository: gh<_i1001.IDiscountRepository>(),
-        appAuthenticationBloc: gh<_i1001.IAppAuthenticationRepository>(),
-      ),
-      registerFor: {_business},
-    );
     gh.singleton<_i997.NetworkRepository>(
         () => _i997.NetworkRepository(gh<_i1001.IAppNetworkRepository>()));
     gh.factory<_i43.DiscountConfigCubit>(() => _i43.DiscountConfigCubit(
@@ -294,6 +289,14 @@ extension GetItInjectableX on _i174.GetIt {
         iAppAuthenticationRepository: gh<_i1001.IAppAuthenticationRepository>(),
       ),
       registerFor: {_development},
+    );
+    gh.factory<_i855.DiscountsAddBloc>(
+      () => _i855.DiscountsAddBloc(
+        discountRepository: gh<_i1001.IDiscountRepository>(),
+        appAuthenticationRepository: gh<_i1001.IAppAuthenticationRepository>(),
+        citiesRepository: gh<_i1001.ICitiesRepository>(),
+      ),
+      registerFor: {_business},
     );
     gh.factory<_i765.ReportBloc>(
       () => _i765.ReportBloc(

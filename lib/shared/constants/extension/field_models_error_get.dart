@@ -106,6 +106,42 @@ extension ReportFieldModelValidationErrorEmpl
   }
 }
 
+extension MultiFieldModelValidationErrorEmpl on ListFieldModelValidationError? {
+  String? value(BuildContext context) {
+    switch (this) {
+      case ListFieldModelValidationError.empty:
+        return context.l10n.fieldCannotBeEmpty;
+      case null:
+        return null;
+    }
+  }
+}
+
+extension DiscountsFieldModelValidationErrorEmpl
+    on DiscountsFieldModelValidationError? {
+  String? value(BuildContext context) {
+    switch (this) {
+      case DiscountsFieldModelValidationError.empty:
+        return context.l10n.fieldCannotBeEmpty;
+      case DiscountsFieldModelValidationError.wrongFormat:
+        return context.l10n.discountsWrongFormat;
+      case null:
+        return null;
+    }
+  }
+}
+
+extension DateFieldModelValidationErrorEmpl on DateFieldModelValidationError? {
+  String? value(BuildContext context) {
+    switch (this) {
+      case DateFieldModelValidationError.empty:
+        return context.l10n.fieldCannotBeEmpty;
+      case null:
+        return null;
+    }
+  }
+}
+
 extension SurnameFieldModelValidationErrorEmpl
     on SurnameFieldModelValidationError? {
   String? value(BuildContext context) {
@@ -126,32 +162,6 @@ extension NicknameFieldModelValidationErrorEmpl
     switch (this) {
       case NicknameFieldModelValidationError.wrong:
         return '${KAppText.nickname} ${context.l10n.isWrong}';
-      case null:
-        return null;
-    }
-  }
-}
-
-extension CitiesFieldModelValidationErrorEmpl
-    on CitiesFieldModelValidationError? {
-  String? value(BuildContext context) {
-    switch (this) {
-      case CitiesFieldModelValidationError.empty:
-        return context.l10n.fieldCannotBeEmpty;
-      case null:
-        return null;
-    }
-  }
-}
-
-extension DiscountsFieldModelValidationErrorEmpl
-    on DiscountsFieldModelValidationError? {
-  String? value(BuildContext context) {
-    switch (this) {
-      case DiscountsFieldModelValidationError.empty:
-        return context.l10n.fieldCannotBeEmpty;
-      case DiscountsFieldModelValidationError.wrongFormat:
-        return context.l10n.discountsWrongFormat;
       case null:
         return null;
     }

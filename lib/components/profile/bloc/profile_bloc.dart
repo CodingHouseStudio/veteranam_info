@@ -157,6 +157,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         (r) => emit(
           state.copyWith(
             failure: null,
+            image: const ImageFieldModel.pure(),
             formState: r ? ProfileEnum.success : ProfileEnum.succesesUnmodified,
           ),
         ),

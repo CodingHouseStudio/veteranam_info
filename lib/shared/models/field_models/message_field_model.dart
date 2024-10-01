@@ -10,7 +10,7 @@ class MessageFieldModel
 
   @override
   MessageFieldModelValidationError? validator(String? value) {
-    if (value == null || value.isEmpty) {
+    if (value == null || value.trim().isEmpty) {
       return MessageFieldModelValidationError.empty;
     }
     return null;
