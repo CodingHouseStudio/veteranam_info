@@ -103,7 +103,7 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
               errorText: _.category.error.value(context),
             )
           else if (_.formState.isMain)
-            TextFieldDescriptionWidget(
+            TextFieldWidget(
               widgetKey: KWidgetkeys.screen.discountsAdd.titleField,
               controller: titleController,
               isDesk: isDesk,
@@ -146,85 +146,74 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
               selectedCities: _.city.value,
             )
           else if (_.formState.isMain)
-            TextFieldDescriptionWidget(
-              childWidget: MultiDropFieldWidget(
-                textFieldKey: KWidgetkeys.screen.discountsAdd.discountsField,
-                controller: discountsController,
-                isDesk: isDesk,
-                labelText: context.l10n.discount,
-                dropDownList: const [
-                  '100%',
-                  '5%',
-                  '10%',
-                  '15%',
-                  '20%',
-                  '50%',
-                ],
-                showErrorText: _.formState.hasError,
-                errorText: _.discounts.error.value(context),
-                onChanged: (text) => context
-                    .read<DiscountsAddBloc>()
-                    .add(DiscountsAddEvent.discountAddItem(text)),
-                values: _.discounts.value,
-                removeEvent: (String value) =>
-                    context.read<DiscountsAddBloc>().add(
-                          DiscountsAddEvent.discountRemoveItem(value),
-                        ),
-                errorMaxLines: 3,
-              ),
-              widgetKey: null,
+            MultiDropFieldWidget(
+              textFieldKey: KWidgetkeys.screen.discountsAdd.discountsField,
+              controller: discountsController,
               isDesk: isDesk,
+              labelText: context.l10n.discount,
+              dropDownList: const [
+                '100%',
+                '5%',
+                '10%',
+                '15%',
+                '20%',
+                '50%',
+              ],
+              showErrorText: _.formState.hasError,
+              errorText: _.discounts.error.value(context),
+              onChanged: (text) => context
+                  .read<DiscountsAddBloc>()
+                  .add(DiscountsAddEvent.discountAddItem(text)),
+              values: _.discounts.value,
+              removeEvent: (String value) =>
+                  context.read<DiscountsAddBloc>().add(
+                        DiscountsAddEvent.discountRemoveItem(value),
+                      ),
+              errorMaxLines: 3,
               description: context.l10n.discountDescription,
-              labelText: null,
             )
           else
-            TextFieldDescriptionWidget(
-              widgetKey: KWidgetkeys.screen.discountsAdd.exclusionField,
+            MessageFieldWidget(
+              key: KWidgetkeys.screen.discountsAdd.exclusionField,
               controller: exclusionController,
               isDesk: isDesk,
               labelText: context.l10n.getYouNeed,
               description: context.l10n.getYouNeedDescription,
               showErrorText: _.formState.hasError,
               errorText: _.exclusions.error.value(context),
-              onChanged: (text) => context
+              changeMessage: (text) => context
                   .read<DiscountsAddBloc>()
                   .add(DiscountsAddEvent.exclusionsUpdate(text)),
-              isMessage: true,
             ),
           if (_.formState.isMain) ...[
             KSizedBox.kHeightSizedBox32,
-            TextFieldDescriptionWidget(
-              childWidget: MultiDropFieldWidget(
-                textFieldKey: KWidgetkeys.screen.discountsAdd.eligibilityField,
-                controller: eligibilityController,
-                isDesk: isDesk,
-                labelText: context.l10n.eligibility,
-                isButton: true,
-                dropDownList: [
-                  context.l10n.veterans,
-                  context.l10n.combatantsEligibility,
-                  context.l10n.militaryEligibility,
-                  context.l10n.fallenFamilyEligibility,
-                  context.l10n.disabledWarEligibility,
-                  context.l10n.dsnsEligibility,
-                  context.l10n.policeEligibility,
-                  context.l10n.idpEligibility,
-                ],
-                showErrorText: _.formState.hasError,
-                errorText: _.eligibility.error.value(context),
-                onChanged: (text) => context
-                    .read<DiscountsAddBloc>()
-                    .add(DiscountsAddEvent.eligibilityAddItem(text)),
-                values: _.eligibility.value,
-                removeEvent: (String value) =>
-                    context.read<DiscountsAddBloc>().add(
-                          DiscountsAddEvent.eligibilityRemoveItem(value),
-                        ),
-              ),
-              widgetKey: null,
+            MultiDropFieldWidget(
+              textFieldKey: KWidgetkeys.screen.discountsAdd.eligibilityField,
+              controller: eligibilityController,
               isDesk: isDesk,
+              labelText: context.l10n.eligibility,
+              isButton: true,
+              dropDownList: [
+                context.l10n.veterans,
+                context.l10n.combatantsEligibility,
+                context.l10n.militaryEligibility,
+                context.l10n.fallenFamilyEligibility,
+                context.l10n.disabledWarEligibility,
+                context.l10n.dsnsEligibility,
+                context.l10n.policeEligibility,
+                context.l10n.idpEligibility,
+              ],
+              showErrorText: _.formState.hasError,
+              errorText: _.eligibility.error.value(context),
+              onChanged: (text) => context
+                  .read<DiscountsAddBloc>()
+                  .add(DiscountsAddEvent.eligibilityAddItem(text)),
+              values: _.eligibility.value,
+              removeEvent: (String value) =>
+                  context.read<DiscountsAddBloc>().add(
+                        DiscountsAddEvent.eligibilityRemoveItem(value),
+                      ),
               description: context.l10n.eligibilityDescription,
-              labelText: null,
             ),
           ],
           KSizedBox.kHeightSizedBox32,
@@ -258,7 +247,7 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
                 enabled: false,
                 showErrorText: _.formState.hasError,
                 errorText: _.period.error.value(context),
-                suffixIconPadding: KPadding.kPaddingSize16,
+                suffixHorizontalIconPadding: KPadding.kPaddingSize16,
                 labelTextStyle: _.isIndefinitely
                     ? AppTextStyle.materialThemeTitleMediumNeutralVariant70
                     : null,
@@ -304,7 +293,7 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
           // ),
 
           else if (_.formState.isMain)
-            TextFieldDescriptionWidget(
+            TextFieldWidget(
               widgetKey: KWidgetkeys.screen.discountsAdd.linkField,
               controller: linkController,
               isDesk: isDesk,
