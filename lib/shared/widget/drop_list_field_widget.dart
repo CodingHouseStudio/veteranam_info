@@ -139,8 +139,8 @@ class _DropListFieldImplementationWidgetState<T extends Object>
     _anchorKey = GlobalKey(debugLabel: widget.labelText);
   }
 
-  double? getWidth(GlobalKey key) {
-    final context = key.currentContext;
+  double? get getWidth {
+    final context = _anchorKey.currentContext;
     if (context != null) {
       final box = context.findRenderObject()! as RenderBox;
       return box.hasSize ? box.size.width : null;
@@ -152,6 +152,24 @@ class _DropListFieldImplementationWidgetState<T extends Object>
         showActiveIcon = focusNode.hasFocus;
       });
 
+  double get menuHeight =>
+      widget.isDesk ? KMinMaxSize.maxHeight400 : KMinMaxSize.maxHeight220;
+
+  OptionsViewOpenDirection get optionsViewOpenDirection {
+    if (context.findRenderObject() == null) {
+      return OptionsViewOpenDirection.down;
+    }
+
+    final renderBox = context.findRenderObject()! as RenderBox;
+    final screenHeight = MediaQuery.of(context).size.height;
+    final availableHeight = screenHeight -
+        renderBox.localToGlobal(Offset.zero).dy -
+        (widget.isDesk ? -KSize.kPixel36 : KSize.kPixel64);
+    return availableHeight > menuHeight
+        ? OptionsViewOpenDirection.down
+        : OptionsViewOpenDirection.up;
+  }
+
   @override
   Widget build(BuildContext context) {
     return RawAutocomplete<T>(
@@ -161,24 +179,34 @@ class _DropListFieldImplementationWidgetState<T extends Object>
       ),
       focusNode: focusNode,
       textEditingController: controller,
+      optionsViewOpenDirection: optionsViewOpenDirection,
       optionsViewBuilder: (context, onSelected, options) {
-        final anchorWidth = getWidth(_anchorKey);
         return Align(
-          alignment: Alignment.topLeft,
+          alignment: optionsViewOpenDirection == OptionsViewOpenDirection.down
+              ? Alignment.topLeft
+              : Alignment.bottomLeft,
           child: Container(
             constraints: BoxConstraints(
-              maxHeight: widget.isDesk
-                  ? KMinMaxSize.maxHeight400
-                  : KMinMaxSize.maxHeight220,
-              maxWidth: anchorWidth ?? double.infinity,
+              maxHeight: menuHeight,
+              maxWidth: getWidth ?? double.infinity,
             ),
-            margin: const EdgeInsets.only(top: KPadding.kPaddingSize4),
+            margin: const EdgeInsets.only(
+              top: KPadding.kPaddingSize4,
+              bottom: KPadding.kPaddingSize8,
+            ),
             decoration: KWidgetTheme.boxDecorationCard,
             child: ListView.builder(
-              shrinkWrap: true,
               key: KWidgetkeys.widget.dropListField.list,
+              shrinkWrap: true,
+              addAutomaticKeepAlives: false,
+              addRepaintBoundaries: false,
               padding: const EdgeInsets.symmetric(
                 vertical: KPadding.kPaddingSize16,
+              ),
+              prototypeItem: TextButton(
+                onPressed: null,
+                style: KButtonStyles.dropListButtonStyle,
+                child: widget.item(options.elementAt(0)),
               ),
               itemBuilder: (context, index) => Padding(
                 padding: index == 0
