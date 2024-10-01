@@ -16,6 +16,7 @@ class ScaffoldAutoLoadingWidget extends StatefulWidget {
     super.key,
     // this.resetFilter,
     this.pageName,
+    this.emptyWidget,
     // this.showMobileNawbar,
   });
 
@@ -33,6 +34,7 @@ class ScaffoldAutoLoadingWidget extends StatefulWidget {
   final void Function()? loadDataAgain;
   final String? pageName;
   // final bool? showMobileNawbar;
+  final Widget Function({required bool isDesk})? emptyWidget;
 
   @override
   State<ScaffoldAutoLoadingWidget> createState() =>
@@ -73,62 +75,67 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
           final mainChildWidget = widget.mainChildWidgetsFunction(
             isDesk: isDesk,
           )..addAll([
-              if (widget.loadingStatus != LoadingStatus.listLoadedFull &&
-                  KPlatformConstants.isWebDesktop &&
-                  !(widget.cardListIsEmpty ?? false) &&
-                  widget.loadingStatus != LoadingStatus.loading)
-                LoadingButtonWidget(
-                  isDesk: isDesk,
-                  onPressed: widget.loadFunction,
-                  text: widget.loadingButtonText,
-                  widgetKey: KWidgetkeys.widget.scaffold.loadingButton,
-                ),
-              // if ((widget.cardListIsEmpty ?? false) &&
-              //     widget.loadingStatus != LoadingStatus.loading) ...[
-              //   KSizedBox.kHeightSizedBox100,
-              //   // const Center(child: KImage.emptyList),
-              //   Center(
-              //     child: Text(
-              //       context.l10n.cardListEmptyText,
-              //       key: KWidgetkeys.widget.scaffold.emptyListText,
-              //       style:
-              //           AppTextStyle.materialThemeTitleMediumNeutralVariant70
-              // ,
-              //     ),
-              //   ),
-              //   KSizedBox.kHeightSizedBox36,
-              //   Center(
-              //     child: TextButton(
-              //       onPressed: widget.resetFilter,
-              //       child: Text(
-              //         context.l10n.resetAll,
-              //         style: AppTextStyle.materialThemeTitleLarge,
-              //       ),
-              //     ),
-              //   ),
-              // ],
-              if (widget.loadingStatus == LoadingStatus.listLoadedFull &&
-                  !(widget.cardListIsEmpty ?? false)) ...[
-                Center(
-                  child: Text(
-                    context.l10n.thatEndOfList,
-                    key: KWidgetkeys.widget.scaffold.endListText,
-                    style:
-                        AppTextStyle.materialThemeTitleMediumNeutralVariant70,
+              if ((widget.cardListIsEmpty ?? false) &&
+                  widget.loadingStatus != LoadingStatus.loading &&
+                  widget.emptyWidget != null)
+                widget.emptyWidget!.call(isDesk: isDesk)
+              else ...[
+                if (widget.loadingStatus != LoadingStatus.listLoadedFull &&
+                    KPlatformConstants.isWebDesktop &&
+                    !(widget.cardListIsEmpty ?? false) &&
+                    widget.loadingStatus != LoadingStatus.loading)
+                  LoadingButtonWidget(
+                    isDesk: isDesk,
+                    onPressed: widget.loadFunction,
+                    text: widget.loadingButtonText,
+                    widgetKey: KWidgetkeys.widget.scaffold.loadingButton,
                   ),
-                ),
-                KSizedBox.kHeightSizedBox24,
-                Center(
-                  child: TextButton(
-                    key: KWidgetkeys.widget.scaffold.endListButton,
-                    style: KButtonStyles.endListButtonStyle,
-                    onPressed: scrollUp,
+                //     ...[
+                //   KSizedBox.kHeightSizedBox100,
+                //   // const Center(child: KImage.emptyList),
+                //   Center(
+                //     child: Text(
+                //       context.l10n.cardListEmptyText,
+                //       key: KWidgetkeys.widget.scaffold.emptyListText,
+                //       style:
+                //           AppTextStyle.materialThemeTitleMediumNeutralVariant70
+                // ,
+                //     ),
+                //   ),
+                //   KSizedBox.kHeightSizedBox36,
+                //   Center(
+                //     child: TextButton(
+                //       onPressed: widget.resetFilter,
+                //       child: Text(
+                //         context.l10n.resetAll,
+                //         style: AppTextStyle.materialThemeTitleLarge,
+                //       ),
+                //     ),
+                //   ),
+                // ],
+                if (widget.loadingStatus == LoadingStatus.listLoadedFull &&
+                    !(widget.cardListIsEmpty ?? false)) ...[
+                  Center(
                     child: Text(
-                      context.l10n.returnToTop,
-                      style: AppTextStyle.materialThemeTitleMedium,
+                      context.l10n.thatEndOfList,
+                      key: KWidgetkeys.widget.scaffold.endListText,
+                      style:
+                          AppTextStyle.materialThemeTitleMediumNeutralVariant70,
                     ),
                   ),
-                ),
+                  KSizedBox.kHeightSizedBox24,
+                  Center(
+                    child: TextButton(
+                      key: KWidgetkeys.widget.scaffold.endListButton,
+                      style: KButtonStyles.endListButtonStyle,
+                      onPressed: scrollUp,
+                      child: Text(
+                        context.l10n.returnToTop,
+                        style: AppTextStyle.materialThemeTitleMedium,
+                      ),
+                    ),
+                  ),
+                ],
               ],
               KSizedBox.kHeightSizedBox40,
             ]);

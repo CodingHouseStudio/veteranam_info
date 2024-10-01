@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:veteranam/components/components.dart';
+import 'package:veteranam/components/my_discounts/widget/my_discount_page_with_an_empty_profile.dart';
 import 'package:veteranam/shared/shared.dart';
 
 part '../my_discounts_box_widget_list.dart';
-part '../my_discounts_box_widgets.dart';
 
 class MyDiscountsBodyWidget extends StatelessWidget {
   const MyDiscountsBodyWidget({super.key});
@@ -19,51 +19,39 @@ class MyDiscountsBodyWidget extends StatelessWidget {
             .read<MyDiscountsWatcherBloc>()
             .add(const MyDiscountsWatcherEvent.started()),
       ),
-      builder: (context, _) => ScaffoldWidget(
-        titleChildWidgetsFunction: ({required isDesk}) => [
-          KSizedBox.kHeightSizedBox24,
-          Text(
-            context.l10n.discountsAndCoupons,
-            key: KWidgetkeys.screen.myDiscounts.title,
-            style: isDesk ? AppTextStyle.text96 : AppTextStyle.text32,
-          ),
-          KSizedBox.kHeightSizedBox8,
-          Text(
-            context.l10n.myDiscountsAndCoupons,
-            key: KWidgetkeys.screen.myDiscounts.subtitle,
-            style: isDesk ? AppTextStyle.text24 : AppTextStyle.text16,
-          ),
-          if (isDesk)
-            KSizedBox.kHeightSizedBox56
-          else
-            KSizedBox.kHeightSizedBox32,
-          KSizedBox.kHeightSizedBox24,
-        ],
-        // mainDeskPadding: ({required maxWidth}) => const EdgeInsets.symmetric(
-        //   horizontal: KPadding.kPaddingSize100,
-        // ),
-        mainChildWidgetsFunction: ({required isDesk, required isTablet}) => [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                context.l10n.myPublications,
-                style: isDesk ? AppTextStyle.text64 : AppTextStyle.text24,
-              ),
-              IconButtonWidget(
-                key: KWidgetkeys.screen.myDiscounts.iconAdd,
-                padding:
-                    isDesk ? KPadding.kPaddingSize20 : KPadding.kPaddingSize12,
-                icon: KIcon.plus,
-                background: AppColors.materialThemeKeyColorsNeutralVariant,
-                onPressed: () => context.goNamed(KRoute.discountsAdd.name),
-              ),
-            ],
-          ),
-          ..._discountsboxWidgetList(
-            context: context,
+      builder: (context, _) => ScaffoldAutoLoadingWidget(
+        mainDeskPadding: ({required maxWidth}) => const EdgeInsets.symmetric(
+          horizontal: KPadding.kPaddingSize100,
+          vertical: KPadding.kPaddingSize24,
+        ),
+        loadingButtonText: context.l10n.moreDiscounts,
+        loadingStatus: _.loadingStatus,
+        cardListIsEmpty: _.loadedDiscountsModelItems.isEmpty,
+        loadFunction: () => context
+            .read<MyDiscountsWatcherBloc>()
+            .add(const MyDiscountsWatcherEvent.loadNextItems()),
+        emptyWidget: context.read<AuthenticationBloc>().state.user.isFullProfile
+            ? ({required isDesk}) {
+                return MyDiscountEmptyWidget(isDesk: isDesk);
+              }
+            : null,
+        mainChildWidgetsFunction: ({required isDesk}) => [
+          LineTitleIconButtonWidget(
+            title: context.l10n.myPublications,
+            titleKey: KWidgetkeys.screen.myDiscounts.title,
+            icon: KIcon.plus,
+            iconButtonKey: KWidgetkeys.screen.myDiscounts.iconAdd,
             isDesk: isDesk,
+            onPressed: () => context.goNamed(KRoute.discountsAdd.name),
           ),
+          KSizedBox.kHeightSizedBox40,
+          if (context.read<AuthenticationBloc>().state.user.isFullProfile)
+            ..._discountsboxWidgetList(
+              context: context,
+              isDesk: isDesk,
+            )
+          else
+            MyDiscountPageWithEmptyProfileWidget(isDesk: isDesk),
           if (isDesk)
             KSizedBox.kHeightSizedBox56
           else

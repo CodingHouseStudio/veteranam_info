@@ -83,6 +83,136 @@ void main() {
       });
     });
 
+    group('${KGroupText.getEmptyList} ', () {
+      setUp(() {
+        when(
+          mockDiscountRepository.getDiscountsByUserId(
+            KTestText.userWithoutPhoto.id,
+          ),
+        ).thenAnswer(
+          (invocation) async => const Right([]),
+        );
+
+        if (GetIt.I.isRegistered<IDiscountRepository>()) {
+          GetIt.I.unregister<IDiscountRepository>();
+        }
+        GetIt.I.registerSingleton<IDiscountRepository>(
+          mockDiscountRepository,
+        );
+      });
+      testWidgets('${KGroupText.mockButton} ', (tester) async {
+        await myDiscountsPumpAppHelper(
+          mockDiscountRepository: mockDiscountRepository,
+          mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+          tester: tester,
+        );
+
+        await myDiscountsEmptyPageHelper(tester);
+      });
+
+      group('${KGroupText.goRouter} ', () {
+        late MockGoRouter mockGoRouter;
+        setUp(() => mockGoRouter = MockGoRouter());
+        testWidgets('${KGroupText.intial} ', (tester) async {
+          await myDiscountsPumpAppHelper(
+            mockDiscountRepository: mockDiscountRepository,
+            mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+            tester: tester,
+            mockGoRouter: mockGoRouter,
+          );
+
+          await myDiscountsEmptyPageHelper(tester);
+        });
+        group(
+          '${KGroupText.goTo} ',
+          () {
+            testWidgets('${KRoute.discountsAdd.name} ', (tester) async {
+              await myDiscountsPumpAppHelper(
+                mockDiscountRepository: mockDiscountRepository,
+                mockAppAuthenticationRepository:
+                    mockAppAuthenticationRepository,
+                tester: tester,
+                mockGoRouter: mockGoRouter,
+              );
+
+              await addButtonDiscountsNavigationHelper(
+                tester: tester,
+                mockGoRouter: mockGoRouter,
+              );
+            });
+          },
+        );
+      });
+    });
+
+    ////////
+    // group('${KGroupText.getEmptyList} for empty profile', () {
+    //   setUp(() {
+    //     when(mockAppAuthenticationRepository.currentUser)
+    //         .thenAnswer((invocation) => KTestText.userWithoutPhotoWithEmail);
+
+    //     when(
+    //       mockDiscountRepository.getDiscountsByUserId(
+    //         KTestText.userWithoutPhotoWithEmail.id,
+    //       ),
+    //     ).thenAnswer(
+    //       (invocation) async => const Right([]),
+    //     );
+
+    //     if (GetIt.I.isRegistered<IDiscountRepository>()) {
+    //       GetIt.I.unregister<IDiscountRepository>();
+    //     }
+    //     GetIt.I.registerSingleton<IDiscountRepository>(
+    //       mockDiscountRepository,
+    //     );
+    //   });
+    //   testWidgets('${KGroupText.mockButton} ', (tester) async {
+    //     await myDiscountsPumpAppHelper(
+    //       mockDiscountRepository: mockDiscountRepository,
+    //       mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+    //       tester: tester,
+    //     );
+
+    //     await myDiscountsEmptyProfilePageHelper(tester);
+    //   });
+
+    //   group('${KGroupText.goRouter} ', () {
+    //     late MockGoRouter mockGoRouter;
+    //     setUp(() => mockGoRouter = MockGoRouter());
+    //     testWidgets('${KGroupText.intial} ', (tester) async {
+    //       await myDiscountsPumpAppHelper(
+    //         mockDiscountRepository: mockDiscountRepository,
+    //         mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+    //         tester: tester,
+    //         mockGoRouter: mockGoRouter,
+    //       );
+
+    //       await myDiscountsEmptyProfilePageHelper(tester);
+    //     });
+    //     group(
+    //       '${KGroupText.goTo} ',
+    //       () {
+    //         testWidgets('${KRoute.profile.name} ', (tester) async {
+    //           await myDiscountsPumpAppHelper(
+    //             mockDiscountRepository: mockDiscountRepository,
+    //             mockAppAuthenticationRepository:
+    //                 mockAppAuthenticationRepository,
+    //             tester: tester,
+    //             mockGoRouter: mockGoRouter,
+    //           );
+
+    //           await profileButtonDiscountsNavigationHelper(
+    //             tester: tester,
+    //             mockGoRouter: mockGoRouter,
+    //           );
+    //         });
+    //       },
+    //     );
+    //   });
+    // });
+
+    /////////
+
     group('${KGroupText.getList} ', () {
       setUp(() {
         when(

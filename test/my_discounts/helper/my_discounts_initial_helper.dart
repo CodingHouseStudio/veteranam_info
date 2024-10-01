@@ -6,19 +6,6 @@ import '../../test_dependency.dart';
 Future<void> myDiscountsInitialHelper(
   WidgetTester tester,
 ) async {
-  expect(
-    find.byKey(KWidgetkeys.screen.myDiscounts.iconEdit),
-    findsNothing,
-  );
-
-  await changeWindowSizeHelper(
-    tester: tester,
-    test: () async => expect(
-      find.byKey(KWidgetkeys.screen.myDiscounts.iconEdit),
-      findsWidgets,
-    ),
-  );
-
   await changeWindowSizeHelper(
     tester: tester,
     windowsTest: true,
@@ -32,15 +19,20 @@ Future<void> myDiscountsInitialHelper(
         find.byKey(KWidgetkeys.screen.myDiscounts.iconAdd),
         findsOneWidget,
       );
-
-      expect(
-        find.byKey(KWidgetkeys.screen.myDiscounts.subtitle),
-        findsOneWidget,
-      );
-
       expect(
         find.byKey(KWidgetkeys.screen.myDiscounts.card),
         findsWidgets,
+      );
+
+      await discountCardHelper(tester);
+
+      expect(
+        find.byKey(KWidgetkeys.screen.myDiscounts.status),
+        findsWidgets,
+      );
+      await scrollingHelper(
+        tester: tester,
+        itemKey: KWidgetkeys.screen.myDiscounts.status,
       );
 
       expect(
@@ -49,21 +41,14 @@ Future<void> myDiscountsInitialHelper(
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.myDiscounts.iconShare),
+        find.byKey(KWidgetkeys.screen.myDiscounts.iconEdit),
         findsWidgets,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.myDiscounts.diactivate),
+        find.byKey(KWidgetkeys.screen.myDiscounts.deactivate),
         findsWidgets,
       );
-
-      await scrollingHelper(
-        tester: tester,
-        itemKey: KWidgetkeys.screen.myDiscounts.diactivate,
-      );
-
-      await statisticBoxHelper(tester: tester);
     },
   );
 }

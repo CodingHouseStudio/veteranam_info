@@ -133,5 +133,43 @@ void main() {
         ),
       ],
     );
+
+    blocTest<MyDiscountsWatcherBloc, MyDiscountsWatcherState>(
+      'emits [InvestorsWatcherState()]'
+      ' when get report failure and load nex with listLoadedFull',
+      build: () => myDiscountsWatcherBloc,
+      act: (bloc) async {
+        when(
+          mockDiscountRepository
+              .getDiscountsByUserId(KTestText.userWithoutPhoto.id),
+        ).thenAnswer(
+          (_) async => Right([KTestText.discountModelItems.first]),
+        );
+        bloc.add(const MyDiscountsWatcherEvent.started());
+        await expectLater(
+          bloc.stream,
+          emitsInOrder([
+            predicate<MyDiscountsWatcherState>(
+              (state) => state.loadingStatus == LoadingStatus.loading,
+            ),
+            predicate<MyDiscountsWatcherState>(
+              (state) => state.loadingStatus == LoadingStatus.listLoadedFull,
+            ),
+          ]),
+          reason: 'Wait loading data',
+        );
+        bloc.add(
+          const MyDiscountsWatcherEvent.loadNextItems(),
+        );
+      },
+      expect: () => [
+        predicate<MyDiscountsWatcherState>(
+          (state) => state.loadingStatus == LoadingStatus.loading,
+        ),
+        predicate<MyDiscountsWatcherState>(
+          (state) => state.loadingStatus == LoadingStatus.listLoadedFull,
+        ),
+      ],
+    );
   });
 }

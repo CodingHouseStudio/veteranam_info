@@ -22,6 +22,8 @@ class DoubleButtonWidget extends StatelessWidget {
     this.deskPadding,
     this.deskIconPadding,
     this.deskTextWidth,
+    this.icon,
+    this.angle,
   });
   final String text;
   final Color? color;
@@ -39,6 +41,8 @@ class DoubleButtonWidget extends StatelessWidget {
   final bool? darkMode;
   final EdgeInsets? deskPadding;
   final double? deskIconPadding;
+  final Icon? icon;
+  final double? angle;
 
   @override
   Widget build(BuildContext context) {
@@ -63,6 +67,8 @@ class DoubleButtonWidget extends StatelessWidget {
           padding: deskPadding,
           iconPadding: deskIconPadding,
           textWidth: deskTextWidth,
+          icon: icon,
+          angle: angle,
         )
       : _DoubleButtonWidgetMob(
           text: text,
@@ -75,6 +81,7 @@ class DoubleButtonWidget extends StatelessWidget {
           textWidth: mobTextWidth,
           iconPadding: mobIconPadding,
           useBlackStyle: darkMode,
+          icon: icon,
         );
 }
 
@@ -89,6 +96,8 @@ class _DoubleButtonWidgetDesk extends StatefulWidget {
     this.padding,
     this.iconPadding,
     this.textWidth,
+    this.icon,
+    this.angle,
   });
   final String text;
   final Color? color;
@@ -99,6 +108,8 @@ class _DoubleButtonWidgetDesk extends StatefulWidget {
   final EdgeInsets? padding;
   final double? iconPadding;
   final double? textWidth;
+  final Icon? icon;
+  final double? angle;
 
   @override
   State<_DoubleButtonWidgetDesk> createState() =>
@@ -161,7 +172,7 @@ class _DoubleButtonWidgetDeskState extends State<_DoubleButtonWidgetDesk> {
           TweenAnimationBuilder<double>(
             tween: Tween<double>(
               begin: 0,
-              end: isHovering ? pi / 4 : 0,
+              end: isHovering ? widget.angle ?? (pi / 4) : 0,
             ),
             duration: const Duration(
               milliseconds: KDimensions.doubleButtonAnimationDuration,
@@ -176,12 +187,13 @@ class _DoubleButtonWidgetDeskState extends State<_DoubleButtonWidgetDesk> {
               key: isHovering
                   ? KWidgetkeys.widget.doubleButton.rotateIcon
                   : KWidgetkeys.widget.doubleButton.icon,
-              icon: KIcon.arrowUpRight.copyWith(
-                color: widget.textColor ??
-                    (widget.useBlackStyle ?? false
-                        ? AppColors.materialThemeWhite
-                        : AppColors.materialThemeKeyColorsSecondary),
-              ),
+              icon: widget.icon ??
+                  KIcon.arrowUpRight.copyWith(
+                    color: widget.textColor ??
+                        (widget.useBlackStyle ?? false
+                            ? AppColors.materialThemeWhite
+                            : AppColors.materialThemeKeyColorsSecondary),
+                  ),
               background: widget.color ??
                   (widget.useBlackStyle ?? false
                       ? AppColors.materialThemeKeyColorsSecondary
@@ -207,6 +219,7 @@ class _DoubleButtonWidgetMob extends StatelessWidget {
     this.iconPadding,
     this.horizontalTextPadding,
     this.useBlackStyle,
+    this.icon,
   });
   final String text;
   final Color? color;
@@ -218,6 +231,7 @@ class _DoubleButtonWidgetMob extends StatelessWidget {
   final double? textWidth;
   final double? iconPadding;
   final bool? useBlackStyle;
+  final Icon? icon;
 
   @override
   Widget build(BuildContext context) {
@@ -261,12 +275,13 @@ class _DoubleButtonWidgetMob extends StatelessWidget {
           ),
           IconWidget(
             key: KWidgetkeys.widget.doubleButton.icon,
-            icon: KIcon.arrowUpRight.copyWith(
-              color: textColor ??
-                  (useBlackStyle ?? false
-                      ? AppColors.materialThemeWhite
-                      : AppColors.materialThemeKeyColorsSecondary),
-            ),
+            icon: icon ??
+                KIcon.arrowUpRight.copyWith(
+                  color: textColor ??
+                      (useBlackStyle ?? false
+                          ? AppColors.materialThemeWhite
+                          : AppColors.materialThemeKeyColorsSecondary),
+                ),
             background: color ??
                 (useBlackStyle ?? false
                     ? AppColors.materialThemeKeyColorsSecondary
