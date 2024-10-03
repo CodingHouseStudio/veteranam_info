@@ -309,21 +309,25 @@ class ShortTitleIconWidget extends StatelessWidget {
       children: [
         if (firstIcon) ...[
           iconWidget,
-          if (!expanded)
-            if (isDesk)
-              KSizedBox.kWidthSizedBox32
-            else
-              KSizedBox.kWidthSizedBox16,
+          if (!expanded) spacer,
         ],
         if (expanded) Expanded(child: text) else text,
-        if (!expanded)
-          if (isDesk)
-            KSizedBox.kWidthSizedBox32
-          else
-            KSizedBox.kWidthSizedBox24,
+        if (!expanded) spacer,
         if (!firstIcon) iconWidget,
       ],
     );
+  }
+
+  Widget get spacer {
+    if (isDesk) {
+      return KSizedBox.kWidthSizedBox32;
+    } else {
+      if (firstIcon) {
+        return KSizedBox.kWidthSizedBox16;
+      } else {
+        return KSizedBox.kWidthSizedBox24;
+      }
+    }
   }
 
   Widget get text => Text(
