@@ -17,6 +17,7 @@ class DropListFieldWidget extends StatelessWidget {
     this.controller,
     this.focusNode,
     this.isButton,
+    this.description,
   });
 
   final void Function(String text)? onChanged;
@@ -30,6 +31,7 @@ class DropListFieldWidget extends StatelessWidget {
   final FocusNode? focusNode;
   final Key textFieldKey;
   final bool? isButton;
+  final String? description;
 
   @override
   Widget build(BuildContext context) {
@@ -64,6 +66,7 @@ class DropListFieldWidget extends StatelessWidget {
       // initialValue: initialValue,
       onSelectedItem: (String value) => value,
       onSelected: onChanged, textFieldKey: textFieldKey,
+      description: description,
     );
   }
 }
@@ -91,6 +94,7 @@ class DropListFieldImplementationWidget<T extends Object>
     this.suffixIconPadding,
     this.fieldParentWidget,
     this.errorMaxLines,
+    this.description,
   });
 
   final void Function(String text)? onChanged;
@@ -112,9 +116,11 @@ class DropListFieldImplementationWidget<T extends Object>
   final Widget Function({
     required Widget textField,
     required Widget suffixIcon,
+    required double fieldWidth,
   })? fieldParentWidget;
   final Key textFieldKey;
   final int? errorMaxLines;
+  final String? description;
 
   @override
   State<DropListFieldImplementationWidget<T>> createState() =>
@@ -139,18 +145,45 @@ class _DropListFieldImplementationWidgetState<T extends Object>
     _anchorKey = GlobalKey(debugLabel: widget.labelText);
   }
 
-  double? getWidth(GlobalKey key) {
-    final context = key.currentContext;
+  double get getWidth {
+    final context = _anchorKey.currentContext;
     if (context != null) {
       final box = context.findRenderObject()! as RenderBox;
-      return box.hasSize ? box.size.width : null;
+      return box.hasSize ? box.size.width : double.infinity;
     }
-    return null;
+    return double.infinity;
+  }
+
+  double get getHeight {
+    final context = _anchorKey.currentContext;
+    if (context != null) {
+      final box = context.findRenderObject()! as RenderBox;
+      return box.hasSize ? box.size.height : 0;
+    }
+    return 0;
   }
 
   void _changeIcon() => setState(() {
         showActiveIcon = focusNode.hasFocus;
       });
+
+  double get menuHeight =>
+      widget.isDesk ? KMinMaxSize.maxHeight400 : KMinMaxSize.maxHeight220;
+
+  OptionsViewOpenDirection get optionsViewOpenDirection {
+    if (context.findRenderObject() == null) {
+      return OptionsViewOpenDirection.down;
+    }
+
+    final renderBox = context.findRenderObject()! as RenderBox;
+    final screenHeight = MediaQuery.of(context).size.height;
+    final availableHeight = screenHeight -
+        renderBox.localToGlobal(Offset.zero).dy +
+        ((getHeight * (widget.isDesk ? 1 : -1)) - KSize.kPixel32);
+    return availableHeight > menuHeight
+        ? OptionsViewOpenDirection.down
+        : OptionsViewOpenDirection.up;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -161,24 +194,34 @@ class _DropListFieldImplementationWidgetState<T extends Object>
       ),
       focusNode: focusNode,
       textEditingController: controller,
+      optionsViewOpenDirection: optionsViewOpenDirection,
       optionsViewBuilder: (context, onSelected, options) {
-        final anchorWidth = getWidth(_anchorKey);
         return Align(
-          alignment: Alignment.topLeft,
+          alignment: optionsViewOpenDirection == OptionsViewOpenDirection.down
+              ? Alignment.topLeft
+              : Alignment.bottomLeft,
           child: Container(
             constraints: BoxConstraints(
-              maxHeight: widget.isDesk
-                  ? KMinMaxSize.maxHeight400
-                  : KMinMaxSize.maxHeight220,
-              maxWidth: anchorWidth ?? double.infinity,
+              maxHeight: menuHeight,
+              maxWidth: getWidth,
             ),
-            margin: const EdgeInsets.only(top: KPadding.kPaddingSize4),
+            margin: const EdgeInsets.only(
+              top: KPadding.kPaddingSize4,
+              bottom: KPadding.kPaddingSize8,
+            ),
             decoration: KWidgetTheme.boxDecorationCard,
             child: ListView.builder(
-              shrinkWrap: true,
               key: KWidgetkeys.widget.dropListField.list,
+              shrinkWrap: true,
+              addAutomaticKeepAlives: false,
+              addRepaintBoundaries: false,
               padding: const EdgeInsets.symmetric(
                 vertical: KPadding.kPaddingSize16,
+              ),
+              prototypeItem: TextButton(
+                onPressed: null,
+                style: KButtonStyles.dropListButtonStyle,
+                child: widget.item(options.elementAt(0)),
               ),
               itemBuilder: (context, index) => Padding(
                 padding: index == 0
@@ -206,8 +249,7 @@ class _DropListFieldImplementationWidgetState<T extends Object>
           widget.onSelectedItem ?? RawAutocomplete.defaultStringForOption,
       fieldViewBuilder:
           (context, textEditingController, focusNode, onFieldSubmitted) {
-        if (widget.fieldParentWidget != null &&
-            (!focusNode.hasFocus || (widget.isButton ?? false))) {
+        if (widget.fieldParentWidget != null) {
           return InkWell(
             mouseCursor: widget.isButton ?? false
                 ? SystemMouseCursors.click
@@ -219,6 +261,7 @@ class _DropListFieldImplementationWidgetState<T extends Object>
             child: widget.fieldParentWidget!(
               textField: _textField(showSuffixIcon: false),
               suffixIcon: _suffixIcon,
+              fieldWidth: getWidth,
             ),
           );
         }
@@ -273,28 +316,43 @@ class _DropListFieldImplementationWidgetState<T extends Object>
     // );
   }
 
-  Widget _textField({required bool showSuffixIcon}) => TextFieldWidget(
-        key: _anchorKey, //KWidgetkeys.widget.dropListField.field,
-        widgetKey: widget.textFieldKey,
-        controller: controller,
-        focusNode: focusNode,
-        suffixIcon: showSuffixIcon ? _suffixIcon : null,
-        suffixIconPadding: widget.suffixIconPadding,
-        onChanged: widget.onChanged,
-        labelText: widget.labelText,
-        showErrorText: widget.showErrorText,
-        errorText: widget.errorText,
-        disposeFocusNode: false,
-        isDesk: widget.isDesk,
-        readOnly: widget.isButton,
-        cursor: widget.isButton ?? false ? SystemMouseCursors.click : null,
-        disabledBorder: KWidgetTheme.outlineInputBorderEnabled,
-        borderHoverColor:
-            showSuffixIcon ? AppColors.materialThemeRefNeutralNeutral40 : null,
-        floatingLabelBehavior:
-            showSuffixIcon ? null : FloatingLabelBehavior.always,
-        errorMaxLines: widget.errorMaxLines,
-      );
+  Widget _textField({required bool showSuffixIcon}) {
+    final suffixHorizontalIconPadding =
+        widget.suffixIconPadding ?? KPadding.kPaddingSize4;
+    return TextFieldWidget(
+      key: _anchorKey, //KWidgetkeys.widget.dropListField.field,
+      widgetKey: widget.textFieldKey,
+      controller: controller,
+      focusNode: focusNode,
+      suffixIcon: showSuffixIcon ? _suffixIcon : null,
+      suffixHorizontalIconPadding: suffixHorizontalIconPadding,
+      suffixIconPadding: EdgeInsets.only(
+        left: suffixHorizontalIconPadding,
+        right: suffixHorizontalIconPadding +
+            (widget.fieldParentWidget == null
+                ? 0
+                : (getWidth *
+                        (widget.isDesk
+                            ? KDimensions.twentyPercent
+                            : KDimensions.thirtyPercent)) +
+                    KPadding.kPaddingSize8),
+      ),
+      onChanged: widget.onChanged,
+      labelText: widget.labelText,
+      showErrorText: widget.showErrorText,
+      errorText: widget.errorText,
+      disposeFocusNode: false,
+      isDesk: widget.isDesk,
+      readOnly: widget.isButton,
+      cursor: widget.isButton ?? false ? SystemMouseCursors.click : null,
+      disabledBorder: KWidgetTheme.outlineInputBorderEnabled,
+      borderHoverColor:
+          showSuffixIcon ? AppColors.materialThemeRefNeutralNeutral40 : null,
+      floatingLabelBehavior:
+          showSuffixIcon ? null : FloatingLabelBehavior.always,
+      errorMaxLines: widget.errorMaxLines, description: widget.description,
+    );
+  }
 
   Widget get _suffixIcon => showActiveIcon
       ? IconButton(
