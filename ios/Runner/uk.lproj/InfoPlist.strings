@@ -1,0 +1,9 @@
+/* 
+  InfoPlist.strings
+  Runner
+
+  Created by Herman Kravchenko on 2024-09-30.
+  
+*/
+"NSPhotoLibraryUsageDescription"="Бібліотека фото використовується для вибору зображення для фото профілю в додатку.";
+"NSUserTrackingUsageDescription"="Цей ідентифікатор буде використовуватися для аналітики.";
