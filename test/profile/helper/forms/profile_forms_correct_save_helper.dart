@@ -1,14 +1,19 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:veteranam/shared/shared.dart';
 
-import '../../test_dependency.dart';
+import '../../../test_dependency.dart';
 
-Future<void> profileformsHelper({
+Future<void> profileFormsCorrectSaveHelper({
   required WidgetTester tester,
   required String name,
   required String surname,
   required String nickname,
 }) async {
+  await scrollingHelper(
+    tester: tester,
+    itemKey: KWidgetkeys.screen.profile.photo,
+  );
+
   await tester.tap(find.byKey(KWidgetkeys.screen.profile.photo));
 
   await tester.pumpAndSettle();
@@ -62,4 +67,14 @@ Future<void> profileformsHelper({
   await tester.tap(find.byKey(KWidgetkeys.screen.profile.saveButton));
 
   await tester.pumpAndSettle();
+
+  expect(
+    find.byKey(KWidgetkeys.screen.profile.message),
+    findsOneWidget,
+  );
+
+  final context =
+      tester.element(find.byKey(KWidgetkeys.screen.profile.message));
+  final expectedMessage = context.l10n.dataIsUpdatedSuccess;
+  expect(find.text(expectedMessage), findsOneWidget);
 }

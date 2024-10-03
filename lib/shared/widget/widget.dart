@@ -60,7 +60,6 @@ export 'news_card_widget.dart';
 export 'notification_link_widget.dart';
 export 'pagination_widget.dart';
 export 'popup_menu_item_widget.dart';
-export 'profile_card_widget.dart';
 export 'question_widget.dart';
 export 'rate_widget.dart';
 export 'report_dialog_widget.dart';

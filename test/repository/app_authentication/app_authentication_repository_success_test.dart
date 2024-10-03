@@ -212,6 +212,18 @@ void main() {
       ).thenAnswer(
         (_) async {},
       );
+
+      when(
+        mockUser.updateDisplayName(KTestText.profileUser.name),
+      ).thenAnswer(
+        (_) async {},
+      );
+      when(
+        mockUser.updatePhotoURL(KTestText.imageModels.downloadURL),
+      ).thenAnswer(
+        (_) async {},
+      );
+
       // when(
       //   mockFirebaseAuth.currentUser?.updateDisplayName(
       //     KTestText.profileUser.name,
@@ -452,18 +464,16 @@ void main() {
       );
     });
 
-    // test('update', () async {
-    //   final result = await appAuthenticationRepository.updateUserData(
-    //     user: KTestText.profileUser,
-    //     image: KTestText.imageModel,
-    //   );
-
-    //   // Перевірка результату
-    //   expect(
-    //     result,
-    //     isA<Right<SomeFailure, bool>>().having((e) => e.value, 'value', isTrue),
-    //   );
-
+    test('Update user data', () async {
+      final result = await appAuthenticationRepository.updateUserData(
+        user: KTestText.profileUser,
+        image: KTestText.imageModels,
+      );
+      expect(
+        result,
+        isA<Right<SomeFailure, bool>>().having((e) => e.value, 'value', isTrue),
+      );
+    });
     //   // Перевірка, що методи були викликані з правильними аргументами
     //   verify(
     //     mockUser.updateDisplayName(KTestText.profileUser.name),

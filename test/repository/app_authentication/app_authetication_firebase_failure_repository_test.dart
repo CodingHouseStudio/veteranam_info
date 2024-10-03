@@ -46,6 +46,7 @@ void main() {
         mockFacebookAuth = MockFacebookAuth();
         mockFacebookAuthProvider = MockFacebookAuthProvider();
         mockStorageService = MockStorageService();
+
         when(
           mockCache.read<User>(
             key: AppAuthenticationRepository.userCacheKey,
@@ -162,6 +163,14 @@ void main() {
           mockFirestoreService.deleteUserSetting(KTestText.user.id),
         ).thenAnswer(
           (_) async {},
+        );
+
+        when(
+          mockUser.updateDisplayName(KTestText.profileUser.name),
+        ).thenThrow(
+          firebase_auth.FirebaseAuthException(
+            code: KGroupText.firebaseFailure,
+          ),
         );
 
         if (GetIt.I.isRegistered<FirestoreService>()) {
@@ -316,6 +325,16 @@ void main() {
           //   'value',
           //   SomeFailure.serverError(error: null),
           // ),
+        );
+      });
+      test('Update user data', () async {
+        final result = await appAuthenticationRepository.updateUserData(
+          user: KTestText.profileUser,
+          image: KTestText.imageModels,
+        );
+        expect(
+          result,
+          isA<Left<SomeFailure, bool>>(),
         );
       });
     });

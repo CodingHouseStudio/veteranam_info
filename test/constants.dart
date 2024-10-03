@@ -160,6 +160,13 @@ abstract class KTestText {
     photo: image,
   );
 
+  static const profileUserWithoutPhoto = User(
+    id: '1',
+    email: userEmail,
+    name: '$nameCorrect $surnameCorrect',
+    phoneNumber: 'test_phone_number',
+  );
+
   static const profileIncorrectUser = User(
     id: '1',
     email: userEmail,
@@ -193,6 +200,15 @@ abstract class KTestText {
     roleIsConfirmed: true,
     devicesInfo: [deviceInfoModel],
     nickname: nicknameCorrect,
+  );
+
+  static final userSettingModelIncorrect = UserSetting(
+    id: '1',
+    userRole: UserRole.civilian,
+    locale: Language.english,
+    roleIsConfirmed: true,
+    devicesInfo: [deviceInfoModel],
+    nickname: nicknameIncorrect,
   );
   static final deviceInfoModel = DeviceInfoModel(
     deviceId: deviceId,

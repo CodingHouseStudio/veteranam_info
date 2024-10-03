@@ -277,7 +277,7 @@ void main() {
         );
         when(
           mockAppAuthenticationRepository.updateUserSetting(
-            KTestText.userSetting,
+            KTestText.userSettingModel,
           ),
         ).thenAnswer(
           (_) async => Left(SomeFailure.serverError(error: null)),
@@ -288,7 +288,7 @@ void main() {
           (_) async => Left(SomeFailure.serverError(error: null)),
         );
         when(mockAppAuthenticationRepository.currentUserSetting).thenAnswer(
-          (_) => KTestText.userSettingModel,
+          (_) => KTestText.userSettingModelIncorrect,
         );
         when(
           mockAppAuthenticationRepository.updateUserData(
@@ -366,7 +366,7 @@ void main() {
       test('Update User Setting', () async {
         expect(
           await authenticationRepository.updateUserSetting(
-            userSetting: KTestText.userSetting,
+            userSetting: KTestText.userSettingModel,
           ),
           isA<Left<SomeFailure, bool>>(),
           // .having(

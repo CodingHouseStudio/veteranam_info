@@ -156,6 +156,12 @@ void main() {
         (_) async => Left(SomeFailure.serverError(error: null)),
       );
 
+      when(
+        mockUser.updateDisplayName(KTestText.profileUser.name),
+      ).thenThrow(
+        Exception(KGroupText.failure),
+      );
+
       if (GetIt.I.isRegistered<FirestoreService>()) {
         GetIt.I.unregister<FirestoreService>();
       }
@@ -329,6 +335,16 @@ void main() {
         //   'value',
         //   SomeFailure.serverError(error: null),
         // ),
+      );
+    });
+    test('Update user data', () async {
+      final result = await appAuthenticationRepository.updateUserData(
+        user: KTestText.profileUser,
+        image: KTestText.imageModels,
+      );
+      expect(
+        result,
+        isA<Left<SomeFailure, bool>>(),
       );
     });
   });

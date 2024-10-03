@@ -76,6 +76,7 @@ class _ProfileFormWidgetState extends State<ProfileFormWidget> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
+          mainAxisSize: MainAxisSize.min,
           children: [
             UserPhotoWidget(
               key: KWidgetkeys.screen.profile.photo,
@@ -90,12 +91,14 @@ class _ProfileFormWidgetState extends State<ProfileFormWidget> {
             ),
             KSizedBox.kWidthSizedBox32,
             if (widget.isDesk)
-              Text(
-                context.l10n.dataEditing,
-                key: KWidgetkeys.widget.profileCard.editText,
-                style: widget.isDesk
-                    ? AppTextStyle.materialThemeHeadlineLarge
-                    : AppTextStyle.materialThemeHeadlineSmall,
+              Expanded(
+                child: Text(
+                  context.l10n.dataEditing,
+                  key: KWidgetkeys.widget.profileCard.editText,
+                  style: widget.isDesk
+                      ? AppTextStyle.materialThemeHeadlineLarge
+                      : AppTextStyle.materialThemeHeadlineSmall,
+                ),
               )
             else
               Expanded(
@@ -135,7 +138,7 @@ class _ProfileFormWidgetState extends State<ProfileFormWidget> {
           fieldKey: KWidgetkeys.screen.profile.emailFied,
           controller: emailController,
           hint: KMockText.email,
-          enabled: true,
+          enabled: false,
           isDesk: widget.isDesk,
         ),
         KSizedBox.kHeightSizedBox32,
@@ -151,6 +154,7 @@ class _ProfileFormWidgetState extends State<ProfileFormWidget> {
         KSizedBox.kHeightSizedBox16,
         if (context.read<ProfileBloc>().state.formState.showMessage)
           Text(
+            key: KWidgetkeys.screen.profile.message,
             context.read<ProfileBloc>().state.formState.loadingMessage(context),
             style: AppTextStyle.materialThemeBodyMediumNeutralVariant60,
           ),
@@ -160,6 +164,7 @@ class _ProfileFormWidgetState extends State<ProfileFormWidget> {
           text: context.l10n.saveChangesProfile,
           color: AppColors.materialThemeKeyColorsSecondary,
           textColor: AppColors.materialThemeWhite,
+          icon: KIcon.check.copyWith(color: AppColors.materialThemeWhite),
           deskPadding: const EdgeInsets.symmetric(
             vertical: KPadding.kPaddingSize12,
             horizontal: KPadding.kPaddingSize32,
@@ -182,7 +187,7 @@ class _ProfileFormWidgetState extends State<ProfileFormWidget> {
     required TextEditingController controller,
     required bool isDesk,
     void Function(String text)? onChanged,
-    bool enabled = false,
+    bool enabled = true,
   }) {
     return TextFieldWidget(
       widgetKey: fieldKey,
