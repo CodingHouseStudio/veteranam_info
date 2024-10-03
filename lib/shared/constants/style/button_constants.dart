@@ -172,9 +172,6 @@ abstract class KButtonStyles {
   );
 
   static const dropListButtonStyle = ButtonStyle(
-    minimumSize: WidgetStatePropertyAll(
-      Size(KMinMaxSize.minWidth100, KMinMaxSize.minHeight50),
-    ),
     padding: WidgetStatePropertyAll(
       EdgeInsets.symmetric(horizontal: KPadding.kPaddingSize32),
     ),
