@@ -37,14 +37,13 @@ class DropListFieldWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return DropListFieldImplementationWidget<String>(
       labelText: labelText,
-      dropDownList: dropDownList,
       isDesk: isDesk,
       controller: controller,
       errorText: errorText,
       onChanged: onChanged,
       showErrorText: showErrorText,
       isButton: isButton,
-      item: (element) => Text(
+      items: (element) => Text(
         element,
         key: KWidgetkeys.widget.dropListField.itemText,
         style: AppTextStyle.materialThemeBodyLarge,
@@ -75,10 +74,9 @@ class DropListFieldImplementationWidget<T extends Object>
     extends StatefulWidget {
   const DropListFieldImplementationWidget({
     required this.labelText,
-    required this.dropDownList,
     required this.isDesk,
     required this.optionsBuilder,
-    required this.item,
+    required this.items,
     required this.onChanged,
     required this.onSelected,
     required this.textFieldKey,
@@ -95,18 +93,21 @@ class DropListFieldImplementationWidget<T extends Object>
     this.fieldParentWidget,
     this.errorMaxLines,
     this.description,
+    this.lines,
+    this.textStyle,
+    this.unenabledList = const [],
+    this.allElemts,
   });
 
   final void Function(String text)? onChanged;
   final String labelText;
-  final List<T> dropDownList;
   final bool isDesk;
   final bool? showErrorText;
   final String? errorText;
   final TextEditingController? controller;
   final FocusNode? focusNode;
   final bool? isButton;
-  final Widget Function(T element) item;
+  final Widget Function(T element) items;
   final FutureOr<Iterable<T>> Function(TextEditingValue) optionsBuilder;
   final Icon? unfocusSufixIcon;
   final void Function(T)? onSelected;
@@ -116,11 +117,14 @@ class DropListFieldImplementationWidget<T extends Object>
   final Widget Function({
     required Widget textField,
     required Widget suffixIcon,
-    required double fieldWidth,
   })? fieldParentWidget;
   final Key textFieldKey;
   final int? errorMaxLines;
   final String? description;
+  final int? lines;
+  final TextStyle? textStyle;
+  final List<T>? unenabledList;
+  final T? allElemts;
 
   @override
   State<DropListFieldImplementationWidget<T>> createState() =>
@@ -177,13 +181,29 @@ class _DropListFieldImplementationWidgetState<T extends Object>
 
     final renderBox = context.findRenderObject()! as RenderBox;
     final screenHeight = MediaQuery.of(context).size.height;
-    final availableHeight = screenHeight -
-        renderBox.localToGlobal(Offset.zero).dy +
-        ((getHeight * (widget.isDesk ? 1 : -1)) - KSize.kPixel32);
+    final availableHeight =
+        (screenHeight - (renderBox.localToGlobal(Offset.zero).dy + getHeight)) +
+            (widget.isDesk ? KSize.kPixel70 : -KSize.kPixel20);
     return availableHeight > menuHeight
         ? OptionsViewOpenDirection.down
         : OptionsViewOpenDirection.up;
   }
+
+  // @override
+  // void didUpdateWidget(
+  //   covariant DropListFieldImplementationWidget<T> oldWidget,
+  // ) {
+  //   if (widget.lines != null &&
+  //       widget.controller != null &&
+  //       widget.controller!.text.length < 30 &&
+  //       (oldWidget.lines ?? 0) > widget.lines!) {
+  //     final value = controller.text;
+  //     controller
+  //       ..text = '$value '
+  //       ..text = value;
+  //   }
+  //   super.didUpdateWidget(oldWidget);
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -221,22 +241,30 @@ class _DropListFieldImplementationWidgetState<T extends Object>
               // prototypeItem: TextButton(
               //   onPressed: null,
               //   style: KButtonStyles.dropListButtonStyle,
-              //   child: widget.item(options.elementAt(0)),
+              //   child: widget.items(options.elementAt(0)),
               // ),
-              itemBuilder: (context, index) => Padding(
-                padding: index == 0
-                    ? EdgeInsets.zero
-                    : const EdgeInsets.only(top: KPadding.kPaddingSize8),
-                child: TextButton(
-                  key: KWidgetkeys.widget.dropListField.item,
-                  onPressed: () {
-                    focusNode.unfocus();
-                    onSelected(options.elementAt(index));
-                  },
-                  style: KButtonStyles.dropListButtonStyle,
-                  child: widget.item(options.elementAt(index)),
-                ),
-              ),
+              itemBuilder: (context, index) {
+                final option = options.elementAt(index);
+                return Padding(
+                  padding: index == 0
+                      ? EdgeInsets.zero
+                      : const EdgeInsets.only(top: KPadding.kPaddingSize8),
+                  child: TextButton(
+                    key: KWidgetkeys.widget.dropListField.item,
+                    onPressed: widget.unenabledList == null ||
+                            (widget.unenabledList != null &&
+                                (widget.unenabledList!.isNotEmpty &&
+                                    widget.unenabledList!.contains(option)))
+                        ? null
+                        : () {
+                            focusNode.unfocus();
+                            onSelected(option);
+                          },
+                    style: KButtonStyles.dropListButtonStyle,
+                    child: widget.items(options.elementAt(index)),
+                  ),
+                );
+              },
               // separatorBuilder: (context, index) => const Divider(),
               itemCount: options.length,
             ),
@@ -250,6 +278,8 @@ class _DropListFieldImplementationWidgetState<T extends Object>
       fieldViewBuilder:
           (context, textEditingController, focusNode, onFieldSubmitted) {
         if (widget.fieldParentWidget != null) {
+          final suffixHorizontalIconPadding =
+              widget.suffixIconPadding ?? KPadding.kPaddingSize4;
           return InkWell(
             mouseCursor: widget.isButton ?? false
                 ? SystemMouseCursors.click
@@ -257,11 +287,18 @@ class _DropListFieldImplementationWidgetState<T extends Object>
             hoverColor: Colors.transparent,
             focusColor: Colors.transparent,
             splashColor: Colors.transparent,
+            overlayColor: const WidgetStatePropertyAll(Colors.transparent),
             onTap: () => focusNode.requestFocus(),
             child: widget.fieldParentWidget!(
-              textField: _textField(showSuffixIcon: false),
+              textField: _textField(
+                showSuffixIcon: false,
+                suffixHorizontalIconPadding: (suffixHorizontalIconPadding * 2) +
+                    (widget.isDesk
+                        ? KPadding.kPaddingSize4
+                        : KPadding.kPaddingSize10),
+                lines: widget.lines,
+              ),
               suffixIcon: _suffixIcon,
-              fieldWidth: getWidth,
             ),
           );
         }
@@ -316,43 +353,33 @@ class _DropListFieldImplementationWidgetState<T extends Object>
     // );
   }
 
-  Widget _textField({required bool showSuffixIcon}) {
-    final suffixHorizontalIconPadding =
-        widget.suffixIconPadding ?? KPadding.kPaddingSize4;
-    return TextFieldWidget(
-      key: _anchorKey, //KWidgetkeys.widget.dropListField.field,
-      widgetKey: widget.textFieldKey,
-      controller: controller,
-      focusNode: focusNode,
-      suffixIcon: showSuffixIcon ? _suffixIcon : null,
-      suffixHorizontalIconPadding: suffixHorizontalIconPadding,
-      suffixIconPadding: EdgeInsets.only(
-        left: suffixHorizontalIconPadding,
-        right: suffixHorizontalIconPadding +
-            (widget.fieldParentWidget == null
-                ? 0
-                : (getWidth *
-                        (widget.isDesk
-                            ? KDimensions.twentyPercent
-                            : KDimensions.thirtyPercent)) +
-                    KPadding.kPaddingSize8),
-      ),
-      onChanged: widget.onChanged,
-      labelText: widget.labelText,
-      showErrorText: widget.showErrorText,
-      errorText: widget.errorText,
-      disposeFocusNode: false,
-      isDesk: widget.isDesk,
-      readOnly: widget.isButton,
-      cursor: widget.isButton ?? false ? SystemMouseCursors.click : null,
-      disabledBorder: KWidgetTheme.outlineInputBorderEnabled,
-      borderHoverColor:
-          showSuffixIcon ? AppColors.materialThemeRefNeutralNeutral40 : null,
-      floatingLabelBehavior:
-          showSuffixIcon ? null : FloatingLabelBehavior.always,
-      errorMaxLines: widget.errorMaxLines, description: widget.description,
-    );
-  }
+  Widget _textField({
+    required bool showSuffixIcon,
+    double? suffixHorizontalIconPadding,
+    int? lines,
+  }) =>
+      TextFieldWidget(
+        key: _anchorKey, //KWidgetkeys.widget.dropListField.field,
+        widgetKey: widget.textFieldKey,
+        controller: controller, maxLines: lines, minLines: lines,
+        focusNode: focusNode,
+        suffixIcon: showSuffixIcon ? _suffixIcon : null,
+        suffixIconPadding: suffixHorizontalIconPadding,
+        onChanged: widget.onChanged,
+        labelText: widget.labelText,
+        showErrorText: widget.showErrorText,
+        errorText: widget.errorText,
+        disposeFocusNode: false,
+        isDesk: widget.isDesk, textStyle: widget.textStyle,
+        readOnly: widget.isButton,
+        cursor: widget.isButton ?? false ? SystemMouseCursors.click : null,
+        disabledBorder: KWidgetTheme.outlineInputBorderEnabled,
+        borderHoverColor:
+            showSuffixIcon ? AppColors.materialThemeRefNeutralNeutral40 : null,
+        floatingLabelBehavior:
+            showSuffixIcon ? null : FloatingLabelBehavior.always,
+        errorMaxLines: widget.errorMaxLines, description: widget.description,
+      );
 
   Widget get _suffixIcon => showActiveIcon
       ? IconButton(

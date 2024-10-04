@@ -3,10 +3,10 @@ import 'package:formz/formz.dart';
 enum ListFieldModelValidationError { empty }
 
 class ListFieldModel
-    extends FormzInput<List<String>?, ListFieldModelValidationError> {
-  const ListFieldModel.pure() : super.pure(null);
+    extends FormzInput<List<String>, ListFieldModelValidationError> {
+  const ListFieldModel.pure() : super.pure(const []);
 
-  const ListFieldModel.dirty([super.value]) : super.dirty();
+  const ListFieldModel.dirty([super.value = const []]) : super.dirty();
 
   @override
   ListFieldModelValidationError? validator(List<String>? value) {

@@ -12,7 +12,7 @@ class CitiesDropFieldWidget extends StatelessWidget {
     this.showErrorText,
     this.errorText,
     this.selectedCities,
-    this.controller,
+    // this.controller,
   });
   final void Function(String text)? onChanged;
   final List<CityModel> citiesList;
@@ -21,7 +21,7 @@ class CitiesDropFieldWidget extends StatelessWidget {
   final String? errorText;
   final void Function(String value) removeCity;
   final List<String>? selectedCities;
-  final TextEditingController? controller;
+  // final TextEditingController? controller;
   final Key textFieldKey;
 
   @override
@@ -36,7 +36,7 @@ class CitiesDropFieldWidget extends StatelessWidget {
       onChanged: onChanged,
       values: selectedCities,
       showErrorText: showErrorText,
-      controller: controller,
+      // controller: controller,
       optionsBuilder: (TextEditingValue textEditingValue) {
         if (textEditingValue.text.isEmpty) {
           return citiesList;
