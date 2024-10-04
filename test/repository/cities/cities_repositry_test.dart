@@ -26,7 +26,8 @@ void main() {
     group('${KGroupText.successfulGet} ', () {
       setUp(() {
         when(mockFirestoreService.getCities()).thenAnswer(
-          (_) async => [KTestText.cityModelItems.first],
+          (_) async => KTestText.cityModelItems
+              .sublist(1, KTestText.cityModelItems.length),
         );
         if (GetIt.I.isRegistered<FirestoreService>()) {
           GetIt.I.unregister<FirestoreService>();
@@ -40,7 +41,8 @@ void main() {
           isA<Right<SomeFailure, List<CityModel>>>().having(
             (e) => e.value,
             'value',
-            [KTestText.cityModelItems.first],
+            KTestText.cityModelItems
+                .sublist(1, KTestText.cityModelItems.length),
           ),
         );
       });
