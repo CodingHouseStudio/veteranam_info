@@ -1269,6 +1269,10 @@
   "@idpEligibility": {
     "examples": "Text on the Discount Add page for the 'Who is eligible' field, one of the options."
   },
+  "allOfBelowMentioned": "To all of the below-mentioned",
+  "@allOfBelowMentioned": {
+    "examples": "Text on the Discount Add page for the 'Who is eligible' field, one of the options."
+  },
   "asBusiness": "as a BUSINESS user",
   "@asBusiness": {
     "examples": "Text for the business login button on the UserRole page.",

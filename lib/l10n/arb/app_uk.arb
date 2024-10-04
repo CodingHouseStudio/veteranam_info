@@ -1277,6 +1277,10 @@
   "@idpEligibility": {
     "examples": "Текст на сторінці Discount Add для поля Кому надається, один з варіантів вибору."
   },
+  "allOfBelowMentioned": "Усім нище перечисленим",
+  "@allOfBelowMentioned": {
+    "examples": "Текст на сторінці Discount Add для поля Кому надається, один з варіантів вибору."
+  },
   "asBusiness": "як БІЗНЕС користувач",
   "@asBusiness": {
     "examples": "Текст для кнопки входу для бізнесу на сторінці UserRole",

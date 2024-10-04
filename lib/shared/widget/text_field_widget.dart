@@ -29,12 +29,12 @@ class TextFieldWidget extends StatefulWidget {
     this.errorMaxLines,
     this.readOnly,
     this.disposeFocusNode = true,
-    this.expands,
+    this.expands = false,
     this.labelText,
     this.minLines,
     this.hintStyle,
     // this.text,
-    this.suffixHorizontalIconPadding,
+    this.suffixIconPadding,
     this.showErrorText,
     this.labelTextStyle,
     this.textStyle,
@@ -42,7 +42,6 @@ class TextFieldWidget extends StatefulWidget {
     this.disabledBorder,
     this.floatingLabelBehavior,
     this.borderHoverColor = AppColors.materialThemeRefNeutralNeutral40,
-    this.suffixIconPadding,
     this.description,
   });
   final Key widgetKey;
@@ -71,13 +70,12 @@ class TextFieldWidget extends StatefulWidget {
   final int? errorMaxLines;
   final bool? readOnly;
   final bool disposeFocusNode;
-  final bool? expands;
+  final bool expands;
   final String? labelText;
   final TextStyle? hintStyle;
   final bool isDesk;
   // final String? text;
-  final double? suffixHorizontalIconPadding;
-  final EdgeInsetsGeometry? suffixIconPadding;
+  final double? suffixIconPadding;
   final bool? showErrorText;
   final TextStyle? labelTextStyle;
   final TextStyle? textStyle;
@@ -118,7 +116,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
       },
       child: TextField(
         key: widget.widgetKey,
-        expands: widget.expands ?? false,
+        expands: widget.expands,
         focusNode: widget.focusNode,
         enabled: widget.enabled,
         readOnly: widget.readOnly ?? false,
@@ -128,7 +126,8 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
         autocorrect: !widget.obscureText,
         controller: //controller ??
             widget.controller,
-        maxLines: widget.expands == null ? widget.maxLines ?? 1 : null,
+        maxLines: widget.expands ? null : widget.maxLines ?? 1,
+        minLines: widget.expands ? null : widget.minLines ?? 1,
         maxLength: widget.maxLength,
         keyboardType: widget.keyboardType ?? TextInputType.text,
         textInputAction: TextInputAction.done,
@@ -160,11 +159,9 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
           hintText: widget.hintText,
           errorText: widget.showErrorText ?? true ? widget.errorText : null,
           suffixIcon: Padding(
-            padding: widget.suffixIconPadding ??
-                EdgeInsets.symmetric(
-                  horizontal: widget.suffixHorizontalIconPadding ??
-                      KPadding.kPaddingSize4,
-                ),
+            padding: EdgeInsets.symmetric(
+              horizontal: widget.suffixIconPadding ?? KPadding.kPaddingSize4,
+            ),
             child: widget.suffixIcon,
           ),
           prefixIcon: widget.prefixIcon,

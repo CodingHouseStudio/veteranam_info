@@ -86,29 +86,32 @@ class AdvancedFilterContent extends StatelessWidget {
               : sorting.elementAt(index);
           return Padding(
             padding: const EdgeInsets.only(top: KPadding.kPaddingSize16),
-            child: CancelChipWidget(
-              widgetKey: KWidgetkeys.screen.discounts.appliedFilterItems,
-              isDesk: isDesk,
-              labelText: filter is SubLocation
-                  ? filter.getList(context).first
-                  : filter is DiscountEnum
-                      ? filter.getValue(context)
-                      : locationes
-                          .firstWhere(
-                            (element) =>
-                                element.value == filter ||
-                                element.valueEN == filter,
-                          )
-                          .getString(context),
-              onPressed: () {
-                if (filter is DiscountEnum) {
-                  onChangeSorting(filter);
-                } else {
-                  onChange(
-                    filter,
-                  );
-                }
-              },
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: CancelChipWidget(
+                widgetKey: KWidgetkeys.screen.discounts.appliedFilterItems,
+                isDesk: isDesk,
+                labelText: filter is SubLocation
+                    ? filter.getList(context).first
+                    : filter is DiscountEnum
+                        ? filter.getValue(context)
+                        : locationes
+                            .firstWhere(
+                              (element) =>
+                                  element.value == filter ||
+                                  element.valueEN == filter,
+                            )
+                            .getString(context),
+                onPressed: () {
+                  if (filter is DiscountEnum) {
+                    onChangeSorting(filter);
+                  } else {
+                    onChange(
+                      filter,
+                    );
+                  }
+                },
+              ),
             ),
           );
         }),

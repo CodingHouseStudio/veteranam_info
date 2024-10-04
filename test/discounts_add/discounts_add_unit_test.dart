@@ -311,61 +311,61 @@ void main() {
         predicate<DiscountsAddState>(
           (state) =>
               state.discounts.isValid &&
-              state.discounts.value!.length == 1 &&
+              state.discounts.value.length == 1 &&
               state.formState == DiscountsAddEnum.inProgress,
         ),
         predicate<DiscountsAddState>(
           (state) =>
               state.discounts.isValid &&
-              state.discounts.value!.length == 2 &&
+              state.discounts.value.length == 2 &&
               state.formState == DiscountsAddEnum.inProgress,
         ),
         predicate<DiscountsAddState>(
           (state) =>
               state.discounts.isValid &&
-              state.discounts.value!.length == 1 &&
+              state.discounts.value.length == 1 &&
               state.formState == DiscountsAddEnum.inProgress,
         ),
         predicate<DiscountsAddState>(
           (state) =>
               state.discounts.isNotValid &&
-              state.discounts.value == null &&
+              state.discounts.value.isEmpty &&
               state.formState == DiscountsAddEnum.inProgress,
         ),
         predicate<DiscountsAddState>(
           (state) =>
               state.discounts.isValid &&
-              state.discounts.value!.length == 1 &&
+              state.discounts.value.length == 1 &&
               state.formState == DiscountsAddEnum.inProgress,
         ),
         predicate<DiscountsAddState>(
           (state) =>
               state.discounts.isValid &&
-              state.discounts.value!.length == 1 &&
+              state.discounts.value.length == 1 &&
               state.formState == DiscountsAddEnum.inProgress,
         ),
         predicate<DiscountsAddState>(
           (state) =>
-              state.eligibility.isValid &&
-              state.eligibility.value!.length == 2 &&
+              state.eligibility!.isValid &&
+              state.eligibility!.value.length == 2 &&
               state.formState == DiscountsAddEnum.inProgress,
         ),
         predicate<DiscountsAddState>(
           (state) =>
-              state.eligibility.isValid &&
-              state.eligibility.value!.length == 1 &&
+              state.eligibility!.isValid &&
+              state.eligibility!.value.length == 1 &&
               state.formState == DiscountsAddEnum.inProgress,
         ),
         predicate<DiscountsAddState>(
           (state) =>
-              state.eligibility.isNotValid &&
-              state.eligibility.value == null &&
+              state.eligibility!.isNotValid &&
+              state.eligibility!.value.isEmpty &&
               state.formState == DiscountsAddEnum.inProgress,
         ),
         predicate<DiscountsAddState>(
           (state) =>
-              state.eligibility.isValid &&
-              state.eligibility.value!.length == 1 &&
+              state.eligibility!.isValid &&
+              state.eligibility!.value.length == 1 &&
               state.formState == DiscountsAddEnum.inProgress,
         ),
         predicate<DiscountsAddState>(
@@ -379,31 +379,31 @@ void main() {
         predicate<DiscountsAddState>(
           (state) =>
               state.city.isValid &&
-              state.city.value!.length == 1 &&
+              state.city.value.length == 1 &&
               state.formState == DiscountsAddEnum.detailInProgress,
         ),
         predicate<DiscountsAddState>(
           (state) =>
               state.city.isValid &&
-              state.city.value!.length == 2 &&
+              state.city.value.length == 2 &&
               state.formState == DiscountsAddEnum.detailInProgress,
         ),
         predicate<DiscountsAddState>(
           (state) =>
               state.city.isValid &&
-              state.city.value!.length == 1 &&
+              state.city.value.length == 1 &&
               state.formState == DiscountsAddEnum.detailInProgress,
         ),
         predicate<DiscountsAddState>(
           (state) =>
               state.city.isNotValid &&
-              state.city.value == null &&
+              state.city.value.isEmpty &&
               state.formState == DiscountsAddEnum.detailInProgress,
         ),
         predicate<DiscountsAddState>(
           (state) =>
               state.city.isValid &&
-              state.city.value!.length == 1 &&
+              state.city.value.length == 1 &&
               state.formState == DiscountsAddEnum.detailInProgress,
         ),
         predicate<DiscountsAddState>(
@@ -607,7 +607,7 @@ void main() {
         ),
         predicate<DiscountsAddState>(
           (state) =>
-              state.eligibility.isValid &&
+              state.eligibility!.isValid &&
               state.formState == DiscountsAddEnum.inProgress,
         ),
         predicate<DiscountsAddState>(
@@ -721,6 +721,21 @@ void main() {
           ..add(
             DiscountsAddEvent.discountAddItem(
               KTestText.sendDiscountModel.discount.first.toString(),
+            ),
+          )
+          ..add(
+            DiscountsAddEvent.eligibilityAddItem(
+              KTestText.sendDiscountModel.eligibility!.first,
+            ),
+          )
+          ..add(
+            const DiscountsAddEvent.eligibilityAddItem(
+              'Усім нище перечисленим',
+            ),
+          )
+          ..add(
+            const DiscountsAddEvent.eligibilityRemoveItem(
+              'Усім нище перечисленим',
             ),
           )
           ..add(
@@ -847,7 +862,23 @@ void main() {
         ),
         predicate<DiscountsAddState>(
           (state) =>
-              state.eligibility.isValid &&
+              state.eligibility!.isValid &&
+              state.formState == DiscountsAddEnum.inProgress,
+        ),
+        predicate<DiscountsAddState>(
+          (state) =>
+              state.eligibility == null &&
+              state.formState == DiscountsAddEnum.inProgress,
+        ),
+        predicate<DiscountsAddState>(
+          (state) =>
+              state.eligibility!.isNotValid &&
+              state.eligibility!.value.isEmpty &&
+              state.formState == DiscountsAddEnum.inProgress,
+        ),
+        predicate<DiscountsAddState>(
+          (state) =>
+              state.eligibility!.isValid &&
               state.formState == DiscountsAddEnum.inProgress,
         ),
         predicate<DiscountsAddState>(
