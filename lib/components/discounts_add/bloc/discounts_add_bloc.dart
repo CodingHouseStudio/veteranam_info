@@ -220,13 +220,13 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
     Emitter<DiscountsAddState> emit,
   ) {
     final value = event.eligibility;
-    final eligibilityFieldModel = value == 'To all of the below-mentioned' ||
-            value == 'Усім нище перечисленим'
-        ? null
-        : ListFieldModel.dirty(
-            state.eligibility?.value.addFieldModel(event.eligibility) ??
-                [event.eligibility],
-          );
+    final eligibilityFieldModel =
+        value == KAppText.eligibilityAllEN || value == KAppText.eligibilityAll
+            ? null
+            : ListFieldModel.dirty(
+                state.eligibility?.value.addFieldModel(event.eligibility) ??
+                    [event.eligibility],
+              );
 
     emit(
       state.copyWith(

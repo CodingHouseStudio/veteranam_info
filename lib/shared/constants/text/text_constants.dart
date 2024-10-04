@@ -225,6 +225,8 @@ abstract class KAppText {
   static const String server = 'server';
   static const String site = 'https://app.veteranam.info';
   static const String unknown = 'Unknown';
+  static const String eligibilityAll = 'Усім нище перечисленим';
+  static const String eligibilityAllEN = 'To all of the below-mentioned';
   static const String androidInstallUrl = 'market://details?id=$_mobAppId';
   static const String iphoneInstallUrl =
       'https://apps.apple.com/app/id$_mobAppId';

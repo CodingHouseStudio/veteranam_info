@@ -730,12 +730,17 @@ void main() {
           )
           ..add(
             const DiscountsAddEvent.eligibilityAddItem(
-              'Усім нище перечисленим',
+              KAppText.eligibilityAll,
             ),
           )
           ..add(
             const DiscountsAddEvent.eligibilityRemoveItem(
-              'Усім нище перечисленим',
+              KAppText.eligibilityAll,
+            ),
+          )
+          ..add(
+            const DiscountsAddEvent.eligibilityAddItem(
+              KAppText.eligibilityAll,
             ),
           )
           ..add(
@@ -874,6 +879,11 @@ void main() {
           (state) =>
               state.eligibility!.isNotValid &&
               state.eligibility!.value.isEmpty &&
+              state.formState == DiscountsAddEnum.inProgress,
+        ),
+        predicate<DiscountsAddState>(
+          (state) =>
+              state.eligibility == null &&
               state.formState == DiscountsAddEnum.inProgress,
         ),
         predicate<DiscountsAddState>(
