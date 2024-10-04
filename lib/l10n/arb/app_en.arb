@@ -1210,7 +1210,7 @@
   "@discountDescription": {
     "examples": "Text on the Discount Add page for the description field"
   },
-  "linkDescription": "Insert a link to the page where more information about the discount can be found",
+  "linkDescription": "Insert a link to the page where more information about the discount can be found.Providing link to the webpage with discount will increase speed verification of your discount. We may be reaching out to you with additional questions to confirm entered information is accurate.",
   "@linkDescription": {
     "examples": "Text on the Discount Add page for the link field (description)"
   },
