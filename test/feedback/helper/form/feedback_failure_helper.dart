@@ -12,6 +12,7 @@ Future<void> feedbackFailureHelper(
       await feedbackEnterTextHelper(
         tester: tester,
         email: KTestText.userEmail,
+        name: KTestText.nameCorrect,
         field: KTestText.field,
       );
 

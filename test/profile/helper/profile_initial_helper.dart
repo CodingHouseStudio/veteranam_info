@@ -16,36 +16,56 @@ Future<void> profileInitialHelper(
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.profile.subtitle),
+        find.byKey(KWidgetkeys.screen.profile.photo),
+        findsOneWidget,
+      );
+
+      // await scrollingHelper(
+      //   tester: tester,
+      //   itemKey: KWidgetkeys.screen.profile.subtitle,
+      // );
+
+      expect(
+        find.byKey(KWidgetkeys.screen.profile.nameField),
+        findsOneWidget,
+      );
+
+      expect(
+        find.byKey(KWidgetkeys.screen.profile.emailFied),
+        findsOneWidget,
+      );
+
+      expect(
+        find.byKey(KWidgetkeys.screen.profile.lastNameField),
+        findsOneWidget,
+      );
+
+      expect(
+        find.byKey(KWidgetkeys.screen.profile.nickNameField),
+        findsOneWidget,
+      );
+
+      expect(
+        find.byKey(KWidgetkeys.screen.profile.saveButton),
         findsOneWidget,
       );
 
       await scrollingHelper(
         tester: tester,
-        itemKey: KWidgetkeys.screen.profile.subtitle,
+        itemKey: KWidgetkeys.screen.profile.saveButton,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.profile.profileCard),
-        findsWidgets,
-      );
-
-      expect(
-        find.byKey(KWidgetkeys.screen.profile.boxSaves),
+        find.byKey(KWidgetkeys.screen.profile.deleteButton),
         findsOneWidget,
       );
 
       expect(
-        find.byKey(KWidgetkeys.screen.profile.boxStory),
+        find.byKey(KWidgetkeys.screen.profile.logOutButton),
         findsOneWidget,
       );
 
-      expect(
-        find.byKey(KWidgetkeys.screen.profile.boxFeedback),
-        findsOneWidget,
-      );
-
-      await profileCardHelper(tester);
+      //await profileCardHelper(tester);
     },
   );
 }

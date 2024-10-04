@@ -11,6 +11,11 @@ Future<void> profilePumpAppHelper({
   MockGoRouter? mockGoRouter,
 }) async {
   _registerAuthenticationBloc(mockAuthenticationRepository);
+
+  _registerProfileBloc(
+    mockAuthenticationRepository: mockAuthenticationRepository,
+  );
+
   await tester.pumpApp(const ProfileScreen(), mockGoRouter: mockGoRouter);
 
   expect(
@@ -31,4 +36,16 @@ void _registerAuthenticationBloc(
     GetIt.I.unregister<AuthenticationBloc>();
   }
   GetIt.I.registerSingleton<AuthenticationBloc>(authenticationBloc);
+}
+
+void _registerProfileBloc({
+  required AuthenticationRepository mockAuthenticationRepository,
+}) {
+  final profileBloc = ProfileBloc(
+    authenticationRepository: mockAuthenticationRepository,
+  );
+  if (GetIt.I.isRegistered<ProfileBloc>()) {
+    GetIt.I.unregister<ProfileBloc>();
+  }
+  GetIt.I.registerSingleton<ProfileBloc>(profileBloc);
 }

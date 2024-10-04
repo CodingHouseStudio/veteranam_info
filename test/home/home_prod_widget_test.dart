@@ -37,7 +37,7 @@ void main() {
       when(mockAuthenticationRepository.currentUserSetting).thenAnswer(
         (realInvocation) => UserSetting.empty,
       );
-      when(mockAuthenticationRepository.isAnonymouslyOrEmty()).thenAnswer(
+      when(mockAuthenticationRepository.isAnonymouslyOrEmty).thenAnswer(
         (realInvocation) => true,
       );
       when(mockFaqRepository.getQuestions()).thenAnswer(
@@ -114,9 +114,8 @@ void main() {
         group('${Config.business} ', () {
           setUp(
             () {
-              when(mockAuthenticationRepository.status).thenAnswer(
-                (realInvocation) =>
-                    Stream.value(AuthenticationStatus.authenticated),
+              when(mockAuthenticationRepository.user).thenAnswer(
+                (realInvocation) => Stream.value(KTestText.userWithoutPhoto),
               );
               Config.roleValue = Config.business;
             },

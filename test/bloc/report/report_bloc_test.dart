@@ -63,7 +63,7 @@ void main() {
       when(mockAppAuthenticationRepository.currentUser).thenAnswer(
         (realInvocation) => KTestText.user,
       );
-      when(mockAppAuthenticationRepository.isAnonymously()).thenAnswer(
+      when(mockAppAuthenticationRepository.isAnonymously).thenAnswer(
         (realInvocation) => true,
       );
       reportBloc = ReportBloc(
@@ -254,7 +254,7 @@ void main() {
     //     when(mockAppAuthenticationRepository.currentUser).thenAnswer(
     //       (realInvocation) => KTestText.user,
     //     );
-    //     when(mockAppAuthenticationRepository.isAnonymously()).thenAnswer(
+    //     when(mockAppAuthenticationRepository.isAnonymously).thenAnswer(
     //       (realInvocation) => false,
     //     );
     //     bloc
