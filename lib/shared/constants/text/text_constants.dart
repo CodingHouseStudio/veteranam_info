@@ -228,6 +228,7 @@ abstract class KAppText {
   static const String eligibilityAll = 'Усім нище перечисленим';
   static const String eligibilityAllEN = 'To all of the below-mentioned';
   static const String androidInstallUrl = 'market://details?id=$_mobAppId';
+  static const String nickname = 'Nickname';
   static const String iphoneInstallUrl =
       'https://apps.apple.com/app/id$_mobAppId';
   static const String _mobAppId = 'info.veteranam';

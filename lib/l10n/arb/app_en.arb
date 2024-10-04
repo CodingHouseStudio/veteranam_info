@@ -1210,7 +1210,7 @@
   "@discountDescription": {
     "examples": "Text on the Discount Add page for the description field"
   },
-  "linkDescription": "Insert a link to the page where more information about the discount can be found",
+  "linkDescription": "Insert a link to the page where more information about the discount can be found.Providing link to the webpage with discount will increase speed verification of your discount. We may be reaching out to you with additional questions to confirm entered information is accurate.",
   "@linkDescription": {
     "examples": "Text on the Discount Add page for the link field (description)"
   },
@@ -1277,5 +1277,30 @@
   "@asBusiness": {
     "examples": "Text for the business login button on the UserRole page.",
     "description": "Business login button on the UserRole page"
+  },
+  "myProfileTitle": "My Profile",
+  "@myProfileTitle": {
+    "examples": "Profile page header."
+  },
+  "saveChangesProfile": "Save Changes",
+  "@saveChangesProfile": {
+    "examples": "Text for the button that is on the Profile page.",
+    "description": "The button is used to save user changes"
+  },
+  "dataEditing": "Data Editing",
+  "@dataEditing": {
+    "examples": "Heading on Profile Card."
+  },
+  "dataIsUpdatedSuccess": "Your data has been successfully updated!",
+  "@dataIsUpdatedSuccess": {
+    "examples": "Message after the user has successfully updated their data."
+  },
+  "dataSendInProgress": "Changes are being saved, please wait...",
+  "@dataSendInProgress": {
+    "examples": "Message while changes are being saved."
+  },
+  "dataUnmodified": "No changes were made because the data is identical.",
+  "@dataUnmodified": {
+    "examples": "Message when no changes were made to the data."
   }
 }

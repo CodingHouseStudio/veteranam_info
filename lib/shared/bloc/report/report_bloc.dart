@@ -109,7 +109,7 @@ class ReportBloc extends Bloc<ReportEvent, ReportState> {
     // if (state.cardId != null
     // &&
     //     !((state.email == null || state.email!.isNotValid) &&
-    //             _appAuthenticationRepository.isAnonymously() ||
+    //             _appAuthenticationRepository.isAnonymously ||
     //         (state.message == null || state.message!.isNotValid) &&
     //             state.reasonComplaint == ReasonComplaint.other)
     // ) {

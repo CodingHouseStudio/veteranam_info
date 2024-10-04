@@ -20,6 +20,7 @@ Future<void> incorrectSaveHelper(
   await feedbackEnterTextHelper(
     tester: tester,
     email: KTestText.userEmailIncorrect,
+    name: KTestText.nameIncorrect,
     field: KTestText.field,
   );
 

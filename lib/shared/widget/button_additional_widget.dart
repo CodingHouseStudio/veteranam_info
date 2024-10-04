@@ -9,8 +9,11 @@ class ButtonAdditionalWidget extends StatefulWidget {
     required this.picture,
     required this.text,
     required this.isDesk,
+    required this.expanded,
     this.onPressed,
     this.backgroundColor,
+    this.mobPadding,
+    this.iconPadding,
     super.key,
   });
 
@@ -19,6 +22,9 @@ class ButtonAdditionalWidget extends StatefulWidget {
   final Widget picture;
   final String text;
   final bool isDesk;
+  final bool expanded;
+  final EdgeInsets? mobPadding;
+  final double? iconPadding;
 
   @override
   State<ButtonAdditionalWidget> createState() =>
@@ -55,21 +61,39 @@ class _ButtonAdditionalDeskWidgetState extends State<ButtonAdditionalWidget> {
           IconWidget(
             key: KWidgetkeys.widget.buttonAdditional.icon,
             icon: widget.picture,
-            padding: KPadding.kPaddingSize12,
+            padding: widget.iconPadding ?? KPadding.kPaddingSize12,
             background: AppColors.materialThemeKeyColorsSecondary,
           ),
           if (widget.isDesk)
-            Padding(
-              padding: const EdgeInsets.only(
-                top: KPadding.kPaddingSize12,
-                bottom: KPadding.kPaddingSize12,
-                left: KPadding.kPaddingSize5,
-                right: KPadding.kPaddingSize16,
-              ),
-              child: text,
-            )
+            if (widget.expanded)
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                    top: KPadding.kPaddingSize12,
+                    bottom: KPadding.kPaddingSize12,
+                    left: KPadding.kPaddingSize5,
+                    right: KPadding.kPaddingSize16,
+                  ),
+                  child: text,
+                ),
+              )
+            else
+              Padding(
+                padding: const EdgeInsets.only(
+                  top: KPadding.kPaddingSize12,
+                  bottom: KPadding.kPaddingSize12,
+                  left: KPadding.kPaddingSize5,
+                  right: KPadding.kPaddingSize16,
+                ),
+                child: text,
+              )
           else
-            Expanded(child: text),
+            Expanded(
+              child: Padding(
+                padding: widget.mobPadding ?? EdgeInsets.zero,
+                child: text,
+              ),
+            ),
         ],
       ),
     );

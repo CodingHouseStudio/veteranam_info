@@ -347,7 +347,7 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                       key: KWidgetkeys.widget.nawbar.loginIcon,
                       onPressed: () => context.goNamed(KRoute.profile.name),
                       imageUrl:
-                          context.read<AuthenticationBloc>().state.user?.photo,
+                          context.read<AuthenticationBloc>().state.user.photo,
                     ),
               ],
             )

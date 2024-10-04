@@ -94,9 +94,6 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
 
   @override
   void initState() {
-    // if (widget.text != null) {
-    //   controller = TextEditingController(text: widget.text);
-    // }
     isHovered = false;
     super.initState();
   }
@@ -182,9 +179,6 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
     if (widget.disposeFocusNode) {
       widget.focusNode?.dispose();
     }
-    // if (widget.text != null) {
-    //   controller?.dispose();
-    // }
     super.dispose();
   }
 }

@@ -83,7 +83,7 @@ class StoryAddBloc extends Bloc<StoryAddEvent, StoryAddState> {
   ) async {
     if (!Formz.validate([state.story, state.image]) ||
         _iAppAuthenticationRepository.currentUser.name == null ||
-        _iAppAuthenticationRepository.isAnonymously()) {
+        _iAppAuthenticationRepository.isAnonymously) {
       emit(state.copyWith(formStatus: FormzSubmissionStatus.failure));
       return;
     }
