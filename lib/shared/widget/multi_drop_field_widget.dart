@@ -11,15 +11,16 @@ class MultiDropFieldWidget extends StatelessWidget {
     required this.isDesk,
     required this.removeEvent,
     required this.textFieldKey,
+    required this.values,
     super.key,
     this.onChanged,
     this.showErrorText,
     this.errorText,
-    this.values,
-    this.controller,
+    // this.controller,
     this.errorMaxLines,
     this.isButton,
     this.description,
+    this.allElemts,
   });
 
   final void Function(String text)? onChanged;
@@ -28,13 +29,14 @@ class MultiDropFieldWidget extends StatelessWidget {
   final bool isDesk;
   final bool? showErrorText;
   final String? errorText;
-  final TextEditingController? controller;
+  // final TextEditingController? controller;
   final List<String>? values;
   final void Function(String value) removeEvent;
   final Key textFieldKey;
   final int? errorMaxLines;
   final bool? isButton;
   final String? description;
+  final String? allElemts;
 
   @override
   Widget build(BuildContext context) {
@@ -42,10 +44,10 @@ class MultiDropFieldWidget extends StatelessWidget {
       textFieldKey: textFieldKey,
       onChanged: onChanged,
       labelText: labelText,
-      dropDownList: dropDownList,
+      dropDownList: dropDownList, allElemts: allElemts,
       isDesk: isDesk,
       values: values,
-      controller: controller,
+      // controller: controller,
       removeEvent: removeEvent,
       showErrorText: showErrorText,
       errorText: errorText,
@@ -90,7 +92,7 @@ class MultiDropFieldImplementationWidget<T extends Object>
     required this.optionsBuilder,
     required this.getItemText,
     required this.textFieldKey,
-    this.controller,
+    // this.controller,
     super.key,
     this.tralingList,
     this.isButton,
@@ -100,6 +102,7 @@ class MultiDropFieldImplementationWidget<T extends Object>
     this.focusNode,
     this.errorMaxLines,
     this.description,
+    this.allElemts,
   });
 
   final void Function(String text)? onChanged;
@@ -110,7 +113,7 @@ class MultiDropFieldImplementationWidget<T extends Object>
   final String? errorText;
   final List<String>? values;
   final void Function(String value) removeEvent;
-  final TextEditingController? controller;
+  // final TextEditingController? controller;
   final FocusNode? focusNode;
   final List<Widget>? tralingList;
   final bool? isButton;
@@ -126,6 +129,7 @@ class MultiDropFieldImplementationWidget<T extends Object>
   final Key textFieldKey;
   final int? errorMaxLines;
   final String? description;
+  final T? allElemts;
 
   @override
   State<MultiDropFieldImplementationWidget<T>> createState() =>
@@ -136,31 +140,42 @@ class _MultiDropFieldImplementationWidgetState<T extends Object>
     extends State<MultiDropFieldImplementationWidget<T>> {
   late TextEditingController controller;
   late FocusNode focusNode;
-  late String fieldText;
+  late GlobalKey _anchorKey;
+  late int lines;
   @override
   void initState() {
     super.initState();
-    fieldText = '';
-    controller = (widget.controller ?? TextEditingController())
-      ..addListener(_fieldText);
+    lines = 1;
+    controller = TextEditingController();
     focusNode = (widget.focusNode ?? FocusNode())
       ..onKeyEvent = _handleKeyEvent
       ..addListener(_unFocusData);
-  }
-
-  void _fieldText() {
-    if (controller.text != fieldText) {
-      setState(() {
-        fieldText = controller.text;
-      });
-    }
+    _anchorKey = GlobalKey(debugLabel: 'multi ${widget.labelText}');
   }
 
   void _unFocusData() {
-    if (!focusNode.hasFocus) {
+    if (!focusNode.hasFocus && controller.text.isNotEmpty) {
       widget.onChanged?.call(controller.text);
       controller.clear();
     }
+  }
+
+  void getLines() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final context = _anchorKey.currentContext;
+      if (context != null) {
+        final box = context.findRenderObject()! as RenderBox;
+        if (box.hasSize) {
+          final linesValue =
+              ((box.size.height - KSize.kPixel80) / KSize.kPixel30).ceil() + 1;
+          if (linesValue >= 1 && lines != linesValue) {
+            setState(() {
+              lines = linesValue;
+            });
+          }
+        }
+      }
+    });
   }
 
   KeyEventResult _handleKeyEvent(
@@ -187,7 +202,6 @@ class _MultiDropFieldImplementationWidgetState<T extends Object>
     return DropListFieldImplementationWidget<T>(
       textFieldKey: widget.textFieldKey,
       labelText: widget.labelText,
-      dropDownList: widget.dropDownList,
       isDesk: widget.isDesk,
       controller: controller,
       errorText: widget.errorText,
@@ -197,105 +211,161 @@ class _MultiDropFieldImplementationWidgetState<T extends Object>
       optionsBuilder: widget.optionsBuilder,
       unfocusSufixIcon: widget.unfocusSufixIcon,
       isButton: widget.isButton,
-      item: widget.item,
+      items: widget.item,
       errorMaxLines: widget.errorMaxLines,
       description: widget.description,
+      allElemts: widget.allElemts,
+      unenabledList: widget.values == null
+          ? null
+          : widget.dropDownList
+              .where(
+                (element) => widget.values!.any(
+                  (value) => (getItemText(element)) == value,
+                ),
+              )
+              .toList(),
       onSelected: (value) {
-        widget.onChanged
-            ?.call(widget.getItemText?.call(value) ?? value.toString());
+        widget.onChanged?.call(getItemText(value));
         controller
           ..text = ' '
           ..clear();
         FocusScope.of(context).unfocus();
       },
-      fieldParentWidget: widget.values != null && widget.values!.isNotEmpty
-          ? ({required textField, required suffixIcon, required fieldWidth}) =>
-              Stack(
+      textStyle: AppTextStyle.materialThemeTitleMedium.copyWith(
+        height: lines > 1 ? 1.9 : 1.5,
+      ),
+      fieldParentWidget: (widget.values == null && widget.allElemts != null) ||
+              widget.values!.isNotEmpty
+          ? ({required textField, required suffixIcon}) {
+              return Stack(
                 children: [
                   textField,
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: KPadding.kPaddingSize8,
-                      vertical: focusNode.hasFocus
-                          ? KPadding.kPaddingSize4
-                          : (widget.isDesk
-                              ? KPadding.kPaddingSize8
-                              : KPadding.kPaddingSize5),
-                    ),
-                    child: Row(
-                      children: [
-                        if (!(widget.isButton ?? false)) ...[
-                          if (focusNode.hasFocus)
-                            if (widget.isDesk)
-                              KSizedBox.kWidthSizedBox32
-                            else
-                              KSizedBox.kWidthSizedBox24,
-                          ConstrainedBox(
-                            constraints: BoxConstraints(
-                              maxWidth: fieldWidth *
-                                  (widget.isDesk
-                                      ? KDimensions.seventyPercent
-                                      : KDimensions.sixtyPercent),
-                            ),
-                            child: Text(
-                              fieldText,
-                              style: AppTextStyle.materialThemeTitleMedium
-                                  .copyWith(color: Colors.transparent),
-                              maxLines: 1,
-                            ),
+                  Row(
+                    key: _anchorKey,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.only(
+                            left: focusNode.hasFocus &&
+                                    !(widget.isButton ?? false)
+                                ? widget.isDesk
+                                    ? KPadding.kPaddingSize32
+                                    : KPadding.kPaddingSize16
+                                : KPadding.kPaddingSize8,
+                            top: KPadding.kPaddingSize4,
+                            bottom: widget.isDesk ? KPadding.kPaddingSize16 : 0,
                           ),
-                        ],
-
-                        // const Spacer(),
-                        Expanded(
-                          child: VerticalScrollWidget(
-                            children: List.generate(
-                              widget.values!.length,
-                              (index) => Padding(
-                                padding: EdgeInsets.only(
-                                  left: index == 0 ? 0 : KPadding.kPaddingSize8,
-                                ),
-                                child: CancelChipWidget(
-                                  widgetKey:
-                                      KWidgetkeys.widget.multiDropField.chips,
-                                  isDesk: widget.isDesk,
-                                  labelText: widget.values!.elementAt(index),
-                                  style: KButtonStyles.secondaryButtonStyle
+                          child: ValueListenableBuilder<TextEditingValue>(
+                            valueListenable: controller,
+                            builder: (context, value, child) {
+                              getLines();
+                              return RichText(
+                                text: TextSpan(
+                                  text: value.text,
+                                  style: AppTextStyle.materialThemeTitleMedium
                                       .copyWith(
-                                    padding: const WidgetStatePropertyAll(
-                                      EdgeInsets.symmetric(
-                                        vertical: KPadding.kPaddingSize4,
-                                        horizontal: KPadding.kPaddingSize8,
+                                    height: lines > 1 ? 1.9 : 1.5,
+                                    color: Colors.transparent,
+                                  ),
+                                  children: [
+                                    if (focusNode.hasFocus &&
+                                        !(widget.isButton ?? false))
+                                      const WidgetSpan(
+                                        alignment:
+                                            PlaceholderAlignment.baseline,
+                                        baseline: TextBaseline.alphabetic,
+                                        child: KSizedBox.kWidthSizedBox8,
+                                      ),
+                                    ...List.generate(
+                                      widget.values?.length ?? 1,
+                                      (index) => WidgetSpan(
+                                        style: const TextStyle(height: 1),
+                                        child: Padding(
+                                          padding: EdgeInsets.only(
+                                            right: KPadding.kPaddingSize8,
+                                            top: widget.isDesk
+                                                ? KPadding.kPaddingSize4
+                                                : 0,
+                                          ),
+                                          child: CancelChipWidget(
+                                            widgetKey: KWidgetkeys
+                                                .widget.multiDropField.chips,
+                                            isDesk: widget.isDesk,
+                                            labelText: getValue(index),
+                                            style: KButtonStyles
+                                                .secondaryButtonStyle
+                                                .copyWith(
+                                              alignment: Alignment.centerLeft,
+                                              padding:
+                                                  const WidgetStatePropertyAll(
+                                                EdgeInsets.only(
+                                                  left: KPadding.kPaddingSize12,
+                                                  right:
+                                                      KPadding.kPaddingSize24,
+                                                ),
+                                              ),
+                                            ),
+                                            textStyle: widget.isDesk
+                                                ? AppTextStyle
+                                                    .materialThemeTitleMedium
+                                                : AppTextStyle
+                                                    .materialThemeTitleSmall,
+                                            onPressed: () => widget.removeEvent(
+                                              getValue(index),
+                                            ),
+                                          ),
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  textStyle:
-                                      AppTextStyle.materialThemeTitleMedium,
-                                  onPressed: () => widget.removeEvent(
-                                    widget.values!.elementAt(index),
-                                  ),
+                                  ],
                                 ),
-                              ),
-                            ),
+                              );
+                            },
                           ),
                         ),
-                        KSizedBox.kWidthSizedBox16,
-                        suffixIcon,
-                      ],
-                    ),
+                      ),
+                      KSizedBox.kWidthSizedBox4,
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                          vertical: focusNode.hasFocus
+                              ? KPadding.kPaddingSize4
+                              : widget.isDesk
+                                  ? KPadding.kPaddingSize12
+                                  : KPadding.kPaddingSize16,
+                        ),
+                        child: suffixIcon,
+                      ),
+                      if (focusNode.hasFocus)
+                        KSizedBox.kWidthSizedBox4
+                      else if (widget.isDesk)
+                        KSizedBox.kWidthSizedBox8
+                      else
+                        KSizedBox.kWidthSizedBox12,
+                    ],
                   ),
                 ],
-              )
+              );
+            }
           : null,
       suffixIconPadding: KPadding.kPaddingSize8,
+      lines: lines,
     );
   }
+
+  String getValue(int index) => widget.values == null
+      ? getItemText(widget.allElemts!)
+      : widget.values!.elementAt(index);
+
+  String getItemText(T value) =>
+      widget.getItemText?.call(value) ?? value.toString();
 
   @override
   void dispose() {
     focusNode.removeListener(_unFocusData);
-    controller.removeListener(_fieldText);
-    if (widget.controller == null) controller.dispose();
+    controller
+        // if (widget.controller == null)
+        .dispose();
     if (widget.focusNode == null) focusNode.dispose();
     super.dispose();
   }

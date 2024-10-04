@@ -219,9 +219,14 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
     _EligibilityAddItem event,
     Emitter<DiscountsAddState> emit,
   ) {
-    final eligibilityFieldModel = ListFieldModel.dirty(
-      state.eligibility.value.addFieldModel(event.eligibility),
-    );
+    final value = event.eligibility;
+    final eligibilityFieldModel =
+        value == KAppText.eligibilityAllEN || value == KAppText.eligibilityAll
+            ? null
+            : ListFieldModel.dirty(
+                state.eligibility?.value.addFieldModel(event.eligibility) ??
+                    [event.eligibility],
+              );
 
     emit(
       state.copyWith(
@@ -237,7 +242,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
     Emitter<DiscountsAddState> emit,
   ) {
     final eligibilityList =
-        state.eligibility.value.removeFieldModel(event.eligibility);
+        state.eligibility?.value.removeFieldModel(event.eligibility) ?? [];
     final eligibilityFieldModel = eligibilityList.isEmpty
         ? const ListFieldModel.pure()
         : ListFieldModel.dirty(eligibilityList);
@@ -322,11 +327,12 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
   ) async {
     if (state.formState.isMain) {
       if (Formz.validate([
-        state.title,
-        state.discounts,
-        state.link,
-        state.eligibility,
-      ])) {
+                state.title,
+                state.discounts,
+                state.link,
+              ]) &&
+              state.eligibility == null ||
+          state.eligibility!.isValid) {
         emit(state.copyWith(formState: DiscountsAddEnum.detail));
       } else {
         emit(state.copyWith(formState: DiscountsAddEnum.invalidData));
@@ -366,7 +372,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
         territoryEN: null,
         // TODO(Profile): Add Link from profile
         link: '',
-        eligibility: state.eligibility.value,
+        eligibility: state.eligibility?.value,
         exclusions: state.exclusions.value,
         expiration: _getExpiration(Language.ukrain),
         expirationEN: _getExpiration(Language.english),
