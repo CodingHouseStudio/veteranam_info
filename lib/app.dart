@@ -73,7 +73,7 @@ class AppWidget extends StatelessWidget {
       // Initiliazation date formating when change language and first app init
       listenWhen: (previous, current) =>
           previous.userSetting.locale != current.userSetting.locale ||
-          (previous.user?.isEmpty ?? true),
+          (previous.user.isEmpty),
       listener: (context, state) => unawaited(
         initializeDateFormatting(state.userSetting.locale.value.languageCode),
       ),

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:math';
+
 import 'package:collection/collection.dart';
 import 'package:feedback/feedback.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -531,5 +532,26 @@ extension DiscountStateExtention on DiscountState {
       case DiscountState.deactivated:
         return 'deactivated';
     }
+  }
+}
+
+extension UserExtensions on User? {
+  String? get firstName => this?.name?.split(' ').first;
+
+  String? get lastName => this?.name?.split(' ').last;
+}
+
+extension ProfileEnumExtensions on ProfileEnum {
+  String loadingMessage(BuildContext context) {
+    if (this == ProfileEnum.success) {
+      return context.l10n.dataIsUpdatedSuccess;
+    }
+    if (this == ProfileEnum.sendInProgress) {
+      return context.l10n.dataSendInProgress;
+    }
+    if (this == ProfileEnum.succesesUnmodified) {
+      return context.l10n.dataUnmodified;
+    }
+    return '';
   }
 }

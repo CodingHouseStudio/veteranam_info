@@ -152,6 +152,7 @@ class SignUpLoginServiceWidget extends StatelessWidget {
         picture: icon,
         onPressed: onPressed,
         isDesk: isDesk,
+        expanded: false,
       );
 
   // Widget buildBottomButton({

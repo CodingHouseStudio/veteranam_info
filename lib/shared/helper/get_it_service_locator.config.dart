@@ -56,6 +56,7 @@ import 'package:veteranam/components/news_card/bloc/news_card_watcher_bloc.dart'
     as _i688;
 import 'package:veteranam/components/privacy_policy/bloc/privacy_policy_markdown_cubit.dart'
     as _i686;
+import 'package:veteranam/components/profile/bloc/profile_bloc.dart' as _i492;
 import 'package:veteranam/components/sign_up/bloc/sign_up_bloc.dart' as _i785;
 import 'package:veteranam/components/story/bloc/story_watcher_bloc.dart'
     as _i763;
@@ -353,6 +354,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i891.NetworkCubit>(() =>
         _i891.NetworkCubit(networkRepository: gh<_i1001.NetworkRepository>()));
     gh.factory<_i1025.LoginBloc>(() => _i1025.LoginBloc(
+        authenticationRepository: gh<_i1001.AuthenticationRepository>()));
+    gh.factory<_i492.ProfileBloc>(() => _i492.ProfileBloc(
         authenticationRepository: gh<_i1001.AuthenticationRepository>()));
     gh.factory<_i785.SignUpBloc>(() => _i785.SignUpBloc(
         authenticationRepository: gh<_i1001.AuthenticationRepository>()));

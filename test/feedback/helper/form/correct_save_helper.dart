@@ -19,6 +19,7 @@ Future<void> correctSaveHelper(
   await feedbackEnterTextHelper(
     tester: tester,
     email: KTestText.userEmail,
+    name: KTestText.nameCorrect,
     field: KTestText.field,
   );
 

@@ -27,7 +27,7 @@ void main() {
     late FirestoreService mockFirestoreService;
     late GoogleSignInAccount mockGoogleSignInAccount;
     late firebase_auth.FacebookAuthProvider mockFacebookAuthProvider;
-
+    late StorageService mockStorageService;
     late IDeviceRepository mockDeviceRepository;
     late firebase_auth.User mockUser;
     late FacebookAuth mockFacebookAuth;
@@ -43,7 +43,7 @@ void main() {
       mockUser = MockUser();
       mockFacebookAuth = MockFacebookAuth();
       mockFacebookAuthProvider = MockFacebookAuthProvider();
-
+      mockStorageService = MockStorageService();
       mockDeviceRepository = MockIDeviceRepository();
 
       when(
@@ -156,28 +156,39 @@ void main() {
         (_) async => Left(SomeFailure.serverError(error: null)),
       );
 
+      when(
+        mockUser.updateDisplayName(KTestText.profileUser.name),
+      ).thenThrow(
+        Exception(KGroupText.failure),
+      );
+
       if (GetIt.I.isRegistered<FirestoreService>()) {
         GetIt.I.unregister<FirestoreService>();
       }
       GetIt.I.registerSingleton(mockFirestoreService);
+
+      if (GetIt.I.isRegistered<StorageService>()) {
+        GetIt.I.unregister<StorageService>();
+      }
+      GetIt.I.registerSingleton(mockStorageService);
+
       if (GetIt.I.isRegistered<IDeviceRepository>()) {
         GetIt.I.unregister<IDeviceRepository>();
       }
       GetIt.I.registerSingleton(mockDeviceRepository);
+
       appAuthenticationRepository = AppAuthenticationRepository(
         mockSecureStorageRepository,
         mockFirebaseAuth,
         mockGoogleSignIn,
         mockCache,
         mockFacebookAuth,
-      )
-        ..isWeb = true
-        ..googleAuthProvider = mockGoogleAuthProvider;
+      )..googleAuthProvider = mockGoogleAuthProvider;
     });
     test('Sign up with google', () async {
       expect(
         await appAuthenticationRepository.signUpWithGoogle(),
-        isA<Left<SomeFailure, bool>>(),
+        isA<Left<SomeFailure, User?>>(),
         // .having(
         //   (e) => e.value,
         //   'value',
@@ -188,7 +199,7 @@ void main() {
     test('Sign up with facebook', () async {
       expect(
         await appAuthenticationRepository.signUpWithFacebook(),
-        isA<Left<SomeFailure, bool>>(),
+        isA<Left<SomeFailure, User?>>(),
         // .having(
         //   (e) => e.value,
         //   'value',
@@ -202,7 +213,7 @@ void main() {
           email: KTestText.userEmailIncorrect,
           password: KTestText.passwordIncorrect,
         ),
-        isA<Left<SomeFailure, bool>>(),
+        isA<Left<SomeFailure, User?>>(),
         // .having(
         //   (e) => e.value,
         //   'value',
@@ -216,7 +227,7 @@ void main() {
           email: KTestText.userEmailIncorrect,
           password: KTestText.passwordIncorrect,
         ),
-        isA<Left<SomeFailure, bool>>(),
+        isA<Left<SomeFailure, User?>>(),
         // .having(
         //   (e) => e.value,
         //   'value',
@@ -278,7 +289,7 @@ void main() {
         mockFirebaseAuth.signInAnonymously(),
       ).called(1);
       expect(
-        result, isA<Left<SomeFailure, bool>>(),
+        result, isA<Left<SomeFailure, User?>>(),
         // .having(
         //   (e) => e.value,
         //   'value',
@@ -324,6 +335,16 @@ void main() {
         //   'value',
         //   SomeFailure.serverError(error: null),
         // ),
+      );
+    });
+    test('Update user data', () async {
+      final result = await appAuthenticationRepository.updateUserData(
+        user: KTestText.profileUser,
+        image: KTestText.imageModels,
+      );
+      expect(
+        result,
+        isA<Left<SomeFailure, bool>>(),
       );
     });
   });
