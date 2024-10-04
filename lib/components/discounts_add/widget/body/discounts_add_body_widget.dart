@@ -247,7 +247,7 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
                     ? SystemMouseCursors.basic
                     : SystemMouseCursors.click,
                 enabled: false,
-                showErrorText: _.formState.hasError,
+                showErrorText: !_.isIndefinitely && _.formState.hasError,
                 errorText: _.period.error.value(context),
                 suffixIconPadding: KPadding.kPaddingSize16,
                 labelTextStyle: _.isIndefinitely
