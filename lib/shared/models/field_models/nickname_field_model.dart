@@ -12,7 +12,8 @@ class NicknameFieldModel
 
   @override
   NicknameFieldModelValidationError? validator(String? value) {
-    if (value != null && value.isNotEmpty && !_nicknameRegExp.hasMatch(value)) {
+    final text = value?.trim();
+    if (text != null && text.isNotEmpty && !_nicknameRegExp.hasMatch(text)) {
       return NicknameFieldModelValidationError.wrong;
     }
     return null;

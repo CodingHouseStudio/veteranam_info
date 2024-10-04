@@ -11,12 +11,6 @@ class _ProfileKeys {
   final saveButton = const Key('profile_save_button');
   final deleteButton = const Key('profile_delete_button');
   final logOutButton = const Key('profile_log_out_button');
-
-  // final profileCard = const Key('profile_card');
-  // final subtitle = const Key('profile_subtitle');
-  // final boxSaves = const Key('profile_box_saves');
-  // final boxStory = const Key('profile_box_story');
-  // final boxFeedback = const Key('profile_box_feedback');
   final subtitle = const Key('profile_subtitle');
   final boxSaves = const Key('profile_box_saves');
   final boxStory = const Key('profile_box_story');

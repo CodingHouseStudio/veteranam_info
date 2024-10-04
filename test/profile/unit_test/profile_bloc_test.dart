@@ -50,7 +50,7 @@ void main() {
 
       profileBloc = ProfileBloc(
         authenticationRepository: mockAuthenticationRepository,
-      );
+      )..add(const ProfileEvent.started());
     });
 
     blocTest<ProfileBloc, ProfileState>(
@@ -61,7 +61,7 @@ void main() {
       expect: () => [
         const ProfileState(
           name: NameFieldModel.dirty(KTestText.nameCorrect),
-          surname: SurnameFieldModel.pure(),
+          surname: SurnameFieldModel.dirty(KTestText.usernameCorrect),
           image: ImageFieldModel.pure(),
           nickname: NicknameFieldModel.pure(),
           failure: null,
@@ -77,7 +77,7 @@ void main() {
           bloc.add(const ProfileEvent.surnameUpdated(KTestText.surnameCorrect)),
       expect: () => [
         const ProfileState(
-          name: NameFieldModel.pure(),
+          name: NameFieldModel.dirty(KTestText.usernameCorrect),
           surname: SurnameFieldModel.dirty(KTestText.surnameCorrect),
           image: ImageFieldModel.pure(),
           nickname: NicknameFieldModel.pure(),
@@ -94,8 +94,8 @@ void main() {
           .add(const ProfileEvent.nicknameUpdated(KTestText.nicknameCorrect)),
       expect: () => [
         const ProfileState(
-          name: NameFieldModel.pure(),
-          surname: SurnameFieldModel.pure(),
+          name: NameFieldModel.dirty(KTestText.usernameCorrect),
+          surname: SurnameFieldModel.dirty(KTestText.usernameCorrect),
           image: ImageFieldModel.pure(),
           nickname: NicknameFieldModel.dirty(KTestText.nicknameCorrect),
           failure: null,
@@ -118,7 +118,7 @@ void main() {
       expect: () => [
         const ProfileState(
           name: NameFieldModel.dirty(KTestText.nameCorrect),
-          surname: SurnameFieldModel.pure(),
+          surname: SurnameFieldModel.dirty(KTestText.usernameCorrect),
           image: ImageFieldModel.pure(),
           nickname: NicknameFieldModel.pure(),
           failure: null,
@@ -179,7 +179,7 @@ void main() {
       expect: () => [
         const ProfileState(
           name: NameFieldModel.dirty(KTestText.nameIncorrect),
-          surname: SurnameFieldModel.pure(),
+          surname: SurnameFieldModel.dirty(KTestText.usernameCorrect),
           image: ImageFieldModel.pure(),
           nickname: NicknameFieldModel.pure(),
           failure: null,
@@ -299,7 +299,7 @@ void main() {
       expect: () => [
         const ProfileState(
           name: NameFieldModel.dirty(KTestText.nameCorrect),
-          surname: SurnameFieldModel.pure(),
+          surname: SurnameFieldModel.dirty(KTestText.usernameCorrect),
           image: ImageFieldModel.pure(),
           nickname: NicknameFieldModel.pure(),
           failure: null,

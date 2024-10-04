@@ -71,7 +71,7 @@ abstract class KTestText {
   static const key = 'key_test';
   static const nickname = 'nickname';
 
-  static const usernameCorrect = 'test_username';
+  static const usernameCorrect = 'testUsername';
   static const nameCorrect = 'testName';
   static const nameIncorrect = 'testName**';
   static const surnameCorrect = 'testSurname';

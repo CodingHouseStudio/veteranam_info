@@ -51,6 +51,8 @@ extension NameFieldModelValidationErrorEmpl on NameFieldModelValidationError? {
         return context.l10n.fieldCannotBeEmpty;
       case NameFieldModelValidationError.wrong:
         return '${context.l10n.name} ${context.l10n.isWrong}';
+      case NameFieldModelValidationError.tooShort:
+        return '${context.l10n.name} ${context.l10n.tooshort}';
       case null:
         return null;
     }

@@ -2,6 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:veteranam/shared/shared.dart';
 
 import '../../../test_dependency.dart';
+import '../helper.dart';
 
 Future<void> profileFormsCorrectSaveHelper({
   required WidgetTester tester,
@@ -9,72 +10,26 @@ Future<void> profileFormsCorrectSaveHelper({
   required String surname,
   required String nickname,
 }) async {
-  await scrollingHelper(
+  await profileFormsEnterTextHelper(
     tester: tester,
-    itemKey: KWidgetkeys.screen.profile.photo,
-  );
-
-  await tester.tap(find.byKey(KWidgetkeys.screen.profile.photo));
-
-  await tester.pumpAndSettle();
-
-  await scrollingHelper(
-    tester: tester,
-    itemKey: KWidgetkeys.screen.profile.nameField,
-  );
-
-  await tester.enterText(
-    find.byKey(KWidgetkeys.screen.profile.nameField),
-    name,
-  );
-
-  await tester.pumpAndSettle();
-
-  await scrollingHelper(
-    tester: tester,
-    itemKey: KWidgetkeys.screen.profile.lastNameField,
-  );
-
-  await tester.enterText(
-    find.byKey(KWidgetkeys.screen.profile.lastNameField),
-    surname,
-  );
-
-  await tester.pumpAndSettle();
-
-  await scrollingHelper(
-    tester: tester,
-    itemKey: KWidgetkeys.screen.profile.emailFied,
-  );
-
-  await scrollingHelper(
-    tester: tester,
-    itemKey: KWidgetkeys.screen.profile.nickNameField,
-  );
-
-  await tester.enterText(
-    find.byKey(KWidgetkeys.screen.profile.nickNameField),
-    nickname,
-  );
-
-  await tester.pumpAndSettle();
-
-  await scrollingHelper(
-    tester: tester,
-    itemKey: KWidgetkeys.screen.profile.nickNameField,
+    name: name,
+    surname: surname,
+    nickname: nickname,
   );
 
   await tester.tap(find.byKey(KWidgetkeys.screen.profile.saveButton));
 
   await tester.pumpAndSettle();
 
+  await scrollingHelper(
+    tester: tester,
+    itemKey: KWidgetkeys.screen.profile.saveButton,
+  );
+
   expect(
     find.byKey(KWidgetkeys.screen.profile.message),
     findsOneWidget,
   );
 
-  final context =
-      tester.element(find.byKey(KWidgetkeys.screen.profile.message));
-  final expectedMessage = context.l10n.dataIsUpdatedSuccess;
-  expect(find.text(expectedMessage), findsOneWidget);
+  expect(find.text('Your data has been successfully updated!'), findsOneWidget);
 }

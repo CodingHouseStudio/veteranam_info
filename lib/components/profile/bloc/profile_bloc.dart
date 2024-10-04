@@ -33,7 +33,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   }
 
   final AuthenticationRepository _authenticationRepository;
-  final imagePicker = imagePickerValue;
+  //final imagePicker = imagePickerValue;
   @visibleForTesting
   static ImagePicker imagePickerValue = ImagePicker();
 
@@ -43,10 +43,10 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   ) async {
     final user = _authenticationRepository.currentUser;
     final nameFieldModel = NameFieldModel.dirty(
-      user.name?.split(' ').first ?? '',
+      user.firstName ?? '',
     );
     final surnameFieldModel = SurnameFieldModel.dirty(
-      user.name?.split(' ').last ?? '',
+      user.lastName ?? '',
     );
     emit(
       ProfileState(
@@ -93,7 +93,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     Emitter<ProfileState> emit,
   ) async {
     final imageFieldModel = ImageFieldModel.dirty(
-      await imagePicker.pickImage(source: ImageSource.gallery),
+      await imagePickerValue.pickImage(source: ImageSource.gallery),
     );
     if (imageFieldModel.value == null) return;
 
@@ -101,6 +101,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       state.copyWith(
         image: imageFieldModel,
         formState: ProfileEnum.inProgress,
+        failure: null,
       ),
     );
   }
