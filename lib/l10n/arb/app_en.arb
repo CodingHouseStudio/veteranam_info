@@ -1273,5 +1273,30 @@
   "@asBusiness": {
     "examples": "Text for the business login button on the UserRole page.",
     "description": "Business login button on the UserRole page"
+  },
+  "myProfileTitle": "My Profile",
+  "@myProfileTitle": {
+    "examples": "Profile page header."
+  },
+  "saveChangesProfile": "Save Changes",
+  "@saveChangesProfile": {
+    "examples": "Text for the button that is on the Profile page.",
+    "description": "The button is used to save user changes"
+  },
+  "dataEditing": "Data Editing",
+  "@dataEditing": {
+    "examples": "Heading on Profile Card."
+  },
+  "dataIsUpdatedSuccess": "Your data has been successfully updated!",
+  "@dataIsUpdatedSuccess": {
+    "examples": "Message after the user has successfully updated their data."
+  },
+  "dataSendInProgress": "Changes are being saved, please wait...",
+  "@dataSendInProgress": {
+    "examples": "Message while changes are being saved."
+  },
+  "dataUnmodified": "No changes were made because the data is identical.",
+  "@dataUnmodified": {
+    "examples": "Message when no changes were made to the data."
   }
 }

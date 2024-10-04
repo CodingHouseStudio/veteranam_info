@@ -24,7 +24,7 @@ void main() {
     late CacheClient mockCache;
     late firebase_auth.GoogleAuthProvider mockGoogleAuthProvider;
     late FirestoreService mockFirestoreService;
-
+    late StorageService mockStorageService;
     late IDeviceRepository mockDeviceRepository;
     late firebase_auth.UserCredential mockUserCredential;
     late FacebookAuth mockFacebookAuth;
@@ -37,7 +37,7 @@ void main() {
       mockGoogleAuthProvider = MockGoogleAuthProvider();
       mockUserCredential = MockUserCredential();
       mockFacebookAuth = MockFacebookAuth();
-
+      mockStorageService = MockStorageService();
       mockDeviceRepository = MockIDeviceRepository();
       when(
         mockFirebaseAuth.currentUser,
@@ -89,6 +89,12 @@ void main() {
         GetIt.I.unregister<FirestoreService>();
       }
       GetIt.I.registerSingleton(mockFirestoreService);
+
+      if (GetIt.I.isRegistered<StorageService>()) {
+        GetIt.I.unregister<StorageService>();
+      }
+      GetIt.I.registerSingleton(mockStorageService);
+
       if (GetIt.I.isRegistered<IDeviceRepository>()) {
         GetIt.I.unregister<IDeviceRepository>();
       }
@@ -99,9 +105,7 @@ void main() {
         mockGoogleSignIn,
         mockCache,
         mockFacebookAuth,
-      )
-        ..isWeb = true
-        ..googleAuthProvider = mockGoogleAuthProvider;
+      )..googleAuthProvider = mockGoogleAuthProvider;
     });
     test('User Setting', () async {
       await expectLater(
@@ -149,7 +153,7 @@ void main() {
     });
     test('Is logged in', () async {
       expect(
-        appAuthenticationRepository.isLoggedIn(),
+        appAuthenticationRepository.isLoggedIn,
         isFalse,
       );
     });
@@ -177,7 +181,7 @@ void main() {
     });
     test('Is Anonymously', () async {
       expect(
-        appAuthenticationRepository.isAnonymously(),
+        appAuthenticationRepository.isAnonymously,
         false,
       );
     });
@@ -187,7 +191,8 @@ void main() {
           email: KTestText.userEmail,
           password: KTestText.passwordCorrect,
         ),
-        isA<Right<SomeFailure, bool>>().having((e) => e.value, 'value', isTrue),
+        isA<Right<SomeFailure, User?>>()
+            .having((e) => e.value, 'value', isNull),
       );
     });
     test('Create FCM Token for user setting when get null', () async {

@@ -7,10 +7,18 @@ class UserPhotoWidget extends StatelessWidget {
     required this.imageUrl,
     super.key,
     this.imageName,
+    this.icon,
+    this.perimeter,
+    this.background,
+    this.iconColor,
   });
   final String? imageUrl;
   final VoidCallback? onPressed;
   final String? imageName;
+  final Icon? icon;
+  final double? perimeter;
+  final Color? background;
+  final Color? iconColor;
 
   @override
   Widget build(BuildContext context) {
@@ -19,14 +27,15 @@ class UserPhotoWidget extends StatelessWidget {
         // decoration: KWidgetTheme.boxDecorationCircular
         //     .copyWith(color: AppColors.materialThemeKeyColorsSecondary),
         // padding: EdgeInsets.all(_padding),
-        radius: KSize.kUserPhoto / 2,
+        radius: (perimeter ?? KSize.kUserPhoto) / 2,
+        backgroundColor: background,
         child: _body,
       );
     } else {
       return IconButtonWidget(
         icon: _body,
         onPressed: onPressed,
-        background: AppColors.materialThemeKeyColorsSecondary,
+        background: background ?? AppColors.materialThemeKeyColorsSecondary,
         padding: _padding,
       );
     }
@@ -34,16 +43,17 @@ class UserPhotoWidget extends StatelessWidget {
 
   Widget get _body => imageUrl != null
       ? ClipRRect(
-          borderRadius: BorderRadius.circular(KSize.kUserPhoto),
+          borderRadius: BorderRadius.circular(perimeter ?? KSize.kUserPhoto),
           child: NetworkImageWidget(
             imageUrl: imageUrl!,
             fit: BoxFit.contain,
-            size: KSize.kUserPhoto,
+            size: perimeter ?? KSize.kUserPhoto,
             highQuality: true,
             imageName: imageName,
             // skeletonizerLoading: false,
           ),
         )
-      : KIcon.user.copyWith(color: AppColors.materialThemeWhite);
+      : (icon ?? KIcon.user)
+          .copyWith(color: iconColor ?? AppColors.materialThemeWhite);
   double get _padding => imageUrl != null ? 0 : KPadding.kPaddingSize12;
 }

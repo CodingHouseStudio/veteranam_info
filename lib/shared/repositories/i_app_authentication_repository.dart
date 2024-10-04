@@ -8,24 +8,24 @@ abstract class IAppAuthenticationRepository {
   User get currentUser;
   UserSetting get currentUserSetting;
 
-  Future<Either<SomeFailure, bool>> signUpWithGoogle();
+  Future<Either<SomeFailure, User?>> signUpWithGoogle();
 
-  Future<Either<SomeFailure, bool>> signUpWithFacebook();
+  Future<Either<SomeFailure, User?>> signUpWithFacebook();
 
-  Future<Either<SomeFailure, bool>> logInWithEmailAndPassword({
+  Future<Either<SomeFailure, User?>> logInWithEmailAndPassword({
     required String email,
     required String password,
   });
 
-  Future<Either<SomeFailure, bool>> logInAnonymously();
+  Future<Either<SomeFailure, User?>> logInAnonymously();
 
-  Future<Either<SomeFailure, bool>> signUp({
+  Future<Either<SomeFailure, User?>> signUp({
     required String email,
     required String password,
   });
 
-  bool isLoggedIn();
-  bool isAnonymously();
+  bool get isLoggedIn;
+  bool get isAnonymously;
 
   Future<Either<SomeFailure, bool>> logOut();
 
@@ -42,4 +42,9 @@ abstract class IAppAuthenticationRepository {
   );
 
   Future<Either<SomeFailure, bool>> createFcmUserSetting();
+
+  Future<Either<SomeFailure, bool>> updateUserData({
+    required User user,
+    required ImageModel? image,
+  });
 }

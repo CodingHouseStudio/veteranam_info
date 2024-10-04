@@ -6,6 +6,7 @@ import '../../../test_dependency.dart';
 Future<void> feedbackEnterTextHelper({
   required WidgetTester tester,
   required String field,
+  required String name,
   required String email,
 }) async {
   expect(
@@ -20,7 +21,7 @@ Future<void> feedbackEnterTextHelper({
 
   await tester.enterText(
     find.byKey(KWidgetkeys.screen.feedback.nameField),
-    field,
+    name,
   );
 
   expect(

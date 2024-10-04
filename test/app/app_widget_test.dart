@@ -36,8 +36,8 @@ void main() {
       when(mockAuthenticationRepository.userSetting).thenAnswer(
         (realInvocation) => Stream.value(KTestText.userSetting),
       );
-      when(mockAuthenticationRepository.status).thenAnswer(
-        (realInvocation) => Stream.value(AuthenticationStatus.anonymous),
+      when(mockAuthenticationRepository.user).thenAnswer(
+        (realInvocation) => Stream.value(KTestText.userAnonymous),
       );
       when(mockAuthenticationRepository.currentUser).thenAnswer(
         (realInvocation) => User.empty,

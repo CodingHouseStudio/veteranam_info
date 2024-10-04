@@ -30,6 +30,7 @@ void main() {
     late GoogleSignInAccount mockGoogleSignInAccount;
     late FacebookAuth mockFacebookAuth;
     late firebase_auth.FacebookAuthProvider mockFacebookAuthProvider;
+    late StorageService mockStorageService;
     setUp(() {
       mockSecureStorageRepository = MockIStorage();
       mockFirebaseAuth = MockFirebaseAuth();
@@ -43,6 +44,7 @@ void main() {
       mockDeviceRepository = MockIDeviceRepository();
       mockFacebookAuth = MockFacebookAuth();
       mockFacebookAuthProvider = MockFacebookAuthProvider();
+      mockStorageService = MockStorageService();
 
       when(mockUserCredential.credential).thenAnswer(
         (_) => KTestText.authCredential,
@@ -57,6 +59,9 @@ void main() {
       when(mockFirebaseAuth.signInWithCredential(KTestText.authCredential))
           .thenAnswer(
         (_) async => mockUserCredential,
+      );
+      when(mockUserCredential.user).thenAnswer(
+        (_) => null,
       );
       when(
         mockFirebaseAuth.signInWithEmailAndPassword(
@@ -208,10 +213,41 @@ void main() {
         (_) async {},
       );
 
+      when(
+        mockUser.updateDisplayName(KTestText.profileUser.name),
+      ).thenAnswer(
+        (_) async {},
+      );
+      when(
+        mockUser.updatePhotoURL(KTestText.imageModels.downloadURL),
+      ).thenAnswer(
+        (_) async {},
+      );
+
+      // when(
+      //   mockFirebaseAuth.currentUser?.updateDisplayName(
+      //     KTestText.profileUser.name,
+      //   ),
+      // ).thenAnswer(
+      //   (_) async {},
+      // );
+
+      // when(
+      //   mockUser.updatePhotoURL(KTestText.downloadURL),
+      // ).thenAnswer(
+      //   (_) async {},
+      // );
+
       if (GetIt.I.isRegistered<FirestoreService>()) {
         GetIt.I.unregister<FirestoreService>();
       }
       GetIt.I.registerSingleton(mockFirestoreService);
+
+      if (GetIt.I.isRegistered<StorageService>()) {
+        GetIt.I.unregister<StorageService>();
+      }
+      GetIt.I.registerSingleton(mockStorageService);
+
       if (GetIt.I.isRegistered<IDeviceRepository>()) {
         GetIt.I.unregister<IDeviceRepository>();
       }
@@ -223,20 +259,43 @@ void main() {
         mockCache,
         mockFacebookAuth,
       )
-        ..isWeb = true
         ..googleAuthProvider = mockGoogleAuthProvider
         ..facebookAuthProvider = mockFacebookAuthProvider;
     });
     test('Sign up with google', () async {
       expect(
         await appAuthenticationRepository.signUpWithGoogle(),
-        isA<Right<SomeFailure, bool>>().having((e) => e.value, 'value', isTrue),
+        isA<Right<SomeFailure, User?>>()
+            .having((e) => e.value, 'value', isNull),
+      );
+    });
+    test('Sign up with google(credential null)', () async {
+      when(mockUserCredential.credential).thenAnswer(
+        (_) => null,
+      );
+
+      expect(
+        await appAuthenticationRepository.signUpWithGoogle(),
+        isA<Right<SomeFailure, User?>>()
+            .having((e) => e.value, 'value', isNull),
+      );
+    });
+    test('Sign up with facebook(credential null)', () async {
+      when(mockUserCredential.credential).thenAnswer(
+        (_) => null,
+      );
+
+      expect(
+        await appAuthenticationRepository.signUpWithFacebook(),
+        isA<Right<SomeFailure, User?>>()
+            .having((e) => e.value, 'value', isNull),
       );
     });
     test('Sign up with facebook', () async {
       expect(
         await appAuthenticationRepository.signUpWithFacebook(),
-        isA<Right<SomeFailure, bool>>().having((e) => e.value, 'value', isTrue),
+        isA<Right<SomeFailure, User?>>()
+            .having((e) => e.value, 'value', isNull),
       );
     });
     test('LogIn with email and password', () async {
@@ -245,7 +304,8 @@ void main() {
           email: KTestText.userEmail,
           password: KTestText.passwordCorrect,
         ),
-        isA<Right<SomeFailure, bool>>().having((e) => e.value, 'value', isTrue),
+        isA<Right<SomeFailure, User?>>()
+            .having((e) => e.value, 'value', isNull),
       );
     });
     test('Sign up', () async {
@@ -254,12 +314,13 @@ void main() {
           email: KTestText.userEmail,
           password: KTestText.passwordCorrect,
         ),
-        isA<Right<SomeFailure, bool>>().having((e) => e.value, 'value', isTrue),
+        isA<Right<SomeFailure, User?>>()
+            .having((e) => e.value, 'value', isNull),
       );
     });
     test('Is logged in', () {
       expect(
-        appAuthenticationRepository.isLoggedIn(),
+        appAuthenticationRepository.isLoggedIn,
         isTrue,
       );
     });
@@ -380,12 +441,13 @@ void main() {
       ).called(1);
       expect(
         result,
-        isA<Right<SomeFailure, bool>>().having((e) => e.value, 'value', isTrue),
+        isA<Right<SomeFailure, User?>>()
+            .having((e) => e.value, 'value', isNull),
       );
     });
     test('Is Anonymously', () async {
       expect(
-        appAuthenticationRepository.isAnonymously(),
+        appAuthenticationRepository.isAnonymously,
         true,
       );
     });
@@ -401,5 +463,33 @@ void main() {
         isA<Right<SomeFailure, bool>>().having((e) => e.value, 'value', isTrue),
       );
     });
+
+    test('Update user data', () async {
+      final result = await appAuthenticationRepository.updateUserData(
+        user: KTestText.profileUser,
+        image: KTestText.imageModels,
+      );
+      expect(
+        result,
+        isA<Right<SomeFailure, bool>>().having((e) => e.value, 'value', isTrue),
+      );
+    });
+    //   // Перевірка, що методи були викликані з правильними аргументами
+    //   verify(
+    //     mockUser.updateDisplayName(KTestText.profileUser.name),
+    //   ).called(1);
+
+    //   verify(
+    //     mockStorageService.saveImage(
+    //       imageModel: KTestText.imageModel,
+    //       id: KTestText.profileUser.id,
+    //       collecltionName: FirebaseCollectionName.user,
+    //     ),
+    //   ).called(1);
+
+    //   verify(
+    //     mockUser.updatePhotoURL(KTestText.downloadURL),
+    //   ).called(1);
+    // });
   });
 }
