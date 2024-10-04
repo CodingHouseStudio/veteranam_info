@@ -20,8 +20,8 @@ extension EmailFieldModelValidationErrorEmpl
 extension LinkFieldModelValidationErrorEmpl on LinkFieldModelValidationError? {
   String? value(BuildContext context) {
     switch (this) {
-      case LinkFieldModelValidationError.empty:
-        return context.l10n.fieldCannotBeEmpty;
+      // case LinkFieldModelValidationError.empty:
+      //   return context.l10n.fieldCannotBeEmpty;
       case LinkFieldModelValidationError.invalidLink:
         return context.l10n.invalidLink;
       case LinkFieldModelValidationError.invalidLength:

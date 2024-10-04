@@ -62,12 +62,14 @@ class CitiesDropFieldWidget extends StatelessWidget {
             key: KWidgetkeys.widget.citiesDropField.city,
             style: AppTextStyle.materialThemeBodyLarge,
           ),
+          KSizedBox.kHeightSizedBox4,
           Text(
             element.region.uk
                 .getTrnslation(en: element.region.en, context: context),
             key: KWidgetkeys.widget.citiesDropField.region,
             style: AppTextStyle.materialThemeLabelSmallNeutralVariant70,
           ),
+          KSizedBox.kHeightSizedBox4,
         ],
       ),
       getItemText: (CityModel value) =>
