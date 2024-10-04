@@ -11,7 +11,12 @@ class CitiesRepository implements ICitiesRepository {
     try {
       final cities = await _firestoreService.getCities();
 
-      return Right(cities);
+      final srotedCities = cities
+        ..sort(
+          (a, b) => a.name.uk.compareUkrain(b.name.uk),
+        );
+
+      return Right(srotedCities);
     } catch (e, stack) {
       return Left(SomeFailure.serverError(error: e, stack: stack));
     }

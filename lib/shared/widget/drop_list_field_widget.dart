@@ -238,11 +238,11 @@ class _DropListFieldImplementationWidgetState<T extends Object>
               padding: const EdgeInsets.symmetric(
                 vertical: KPadding.kPaddingSize16,
               ),
-              prototypeItem: TextButton(
-                onPressed: null,
-                style: KButtonStyles.dropListButtonStyle,
-                child: widget.items(options.elementAt(0)),
-              ),
+              // prototypeItem: TextButton(
+              //   onPressed: null,
+              //   style: KButtonStyles.dropListButtonStyle,
+              //   child: widget.items(options.elementAt(0)),
+              // ),
               itemBuilder: (context, index) {
                 final option = options.elementAt(index);
                 return Padding(
