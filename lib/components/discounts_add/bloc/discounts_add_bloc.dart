@@ -364,12 +364,14 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
         requirementsEN: null,
         territory: null,
         territoryEN: null,
+        // TODO(Profile): Add Link from profile
+        link: '',
         eligibility: state.eligibility.value,
         exclusions: state.exclusions.value,
         expiration: _getExpiration(Language.ukrain),
         expirationEN: _getExpiration(Language.english),
         dateVerified: ExtendedDateTime.current,
-        link: state.link.value,
+        directLink: state.link.value,
         userId: _appAuthenticationReporsitory.currentUser.id,
         userName: _appAuthenticationReporsitory.currentUser.name,
       );
