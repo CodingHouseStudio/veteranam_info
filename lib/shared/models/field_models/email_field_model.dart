@@ -19,7 +19,6 @@ class EmailFieldModel
     if (text.isEmpty) {
       return EmailFieldModelValidationError.empty;
     }
-
     // Check for minimum and maximum length
     if (text.length < 6) {
       return EmailFieldModelValidationError.invalidLength;

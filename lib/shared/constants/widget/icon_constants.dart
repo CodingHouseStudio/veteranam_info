@@ -141,6 +141,11 @@ abstract class KIcon {
     Symbols.signal_cellular_connected_no_internet_0_bar,
     color: AppColors.materialThemeSysLightError,
   );
+  static const _KIcon personEdit = _KIcon(Symbols.person_edit);
+  static const _KIcon logOut = _KIcon(
+    Symbols.logout,
+    color: AppColors.materialThemeWhite,
+  );
   static List<Icon> get icons => [
         KIcon.tag,
         KIcon.briefcase,

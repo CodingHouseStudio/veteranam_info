@@ -52,7 +52,7 @@ void main() {
       when(mockAuthenticationRepository.currentUserSetting).thenAnswer(
         (realInvocation) => UserSetting.empty,
       );
-      when(mockAuthenticationRepository.isAnonymouslyOrEmty()).thenAnswer(
+      when(mockAuthenticationRepository.isAnonymouslyOrEmty).thenAnswer(
         (realInvocation) => true,
       );
       when(
@@ -295,7 +295,7 @@ void main() {
           });
           group("user isn't anonymously", () {
             setUp(
-              () => when(mockAuthenticationRepository.isAnonymouslyOrEmty())
+              () => when(mockAuthenticationRepository.isAnonymouslyOrEmty)
                   .thenAnswer(
                 (realInvocation) => false,
               ),
@@ -449,12 +449,15 @@ void main() {
           group(
             'User authentication',
             () {
-              setUp(
-                () => when(mockAuthenticationRepository.status).thenAnswer(
-                  (realInvocation) =>
-                      Stream.value(AuthenticationStatus.authenticated),
-                ),
-              );
+              setUp(() {
+                when(mockAuthenticationRepository.isAnonymouslyOrEmty)
+                    .thenAnswer(
+                  (realInvocation) => false,
+                );
+                when(mockAuthenticationRepository.user).thenAnswer(
+                  (realInvocation) => Stream.value(KTestText.userWithoutPhoto),
+                );
+              });
               testWidgets('${KRoute.profile.name} ', (tester) async {
                 await homePumpAppHelper(
                   tester: tester,

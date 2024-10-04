@@ -38,7 +38,7 @@ void main() {
       when(mockAuthenticationRepository.currentUserSetting).thenAnswer(
         (realInvocation) => UserSetting.empty,
       );
-      when(mockAuthenticationRepository.isAnonymouslyOrEmty()).thenAnswer(
+      when(mockAuthenticationRepository.isAnonymouslyOrEmty).thenAnswer(
         (realInvocation) => true,
       );
       when(mockAppAuthenticationRepository.currentUserSetting).thenAnswer(
@@ -47,7 +47,7 @@ void main() {
       when(mockAppAuthenticationRepository.currentUser).thenAnswer(
         (realInvocation) => KTestText.user,
       );
-      when(mockAppAuthenticationRepository.isAnonymously()).thenAnswer(
+      when(mockAppAuthenticationRepository.isAnonymously).thenAnswer(
         (realInvocation) => true,
       );
       when(
@@ -252,7 +252,7 @@ void main() {
       // });
       // testWidgets('Report Dialog Incorect Send(field null and user)',
       //     (tester) async {
-      //   when(mockAuthenticationRepository.isAnonymouslyOrEmty()).thenAnswer(
+      //   when(mockAuthenticationRepository.isAnonymouslyOrEmty).thenAnswer(
       //     (realInvocation) => false,
       //   );
 

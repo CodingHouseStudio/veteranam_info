@@ -12,16 +12,16 @@ Future<void> profileCardDeleteAccountHelper(
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.profileCard.deleteButton),
+    find.byKey(KWidgetkeys.screen.profile.deleteButton),
     findsOneWidget,
   );
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.widget.profileCard.deleteButton,
+    itemKey: KWidgetkeys.screen.profile.deleteButton,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.widget.profileCard.deleteButton));
+  await tester.tap(find.byKey(KWidgetkeys.screen.profile.deleteButton));
 
   await tester.pumpAndSettle();
 

@@ -45,7 +45,7 @@ class WorkEmployeeBody extends StatelessWidget {
         ],
         mainPadding: ({required isDesk, required maxWidth}) =>
             maxWidth.screenPadding(
-          precent: KDimensions.paddingMultiply,
+          precent: KDimensions.tenPercent,
           notUseHorizontal: isDesk,
           verticalPadding: KPadding.kPaddingSize56,
         ),
