@@ -2,7 +2,7 @@ import 'package:formz/formz.dart';
 import 'package:veteranam/shared/shared.dart';
 
 enum LinkFieldModelValidationError {
-  empty,
+  // empty,
   invalidLink,
   invalidLength,
 }
@@ -15,10 +15,10 @@ class LinkFieldModel
 
   @override
   LinkFieldModelValidationError? validator(String? value) {
-    if (value == null) return null;
-    if (value.trim().isEmpty) {
-      return LinkFieldModelValidationError.empty;
-    }
+    if (value == null || value.trim().isEmpty) return null;
+    // if (value.trim().isEmpty) {
+    //   return LinkFieldModelValidationError.empty;
+    // }
     if (value.length <= 12) {
       return LinkFieldModelValidationError.invalidLength;
     }
