@@ -20,22 +20,20 @@ class CancelChipWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Align(
-      alignment: Alignment.centerLeft,
-      child: TextButton.icon(
-        key: widgetKey,
-        style: style ?? KButtonStyles.advancedFilterButtonStyle,
-        icon: KIcon.close,
-        label: Text(
-          labelText,
-          textAlign: TextAlign.center,
-          style: textStyle ??
-              (isDesk
-                  ? AppTextStyle.materialThemeBodyLarge
-                  : AppTextStyle.materialThemeBodyMedium),
-        ),
-        onPressed: onPressed,
+    return TextButton.icon(
+      key: widgetKey,
+      style: style ?? KButtonStyles.advancedFilterButtonStyle,
+      icon: KIcon.close,
+      clipBehavior: Clip.hardEdge,
+      label: Text(
+        labelText,
+        textAlign: TextAlign.center,
+        style: textStyle ??
+            (isDesk
+                ? AppTextStyle.materialThemeBodyLarge
+                : AppTextStyle.materialThemeBodyMedium),
       ),
+      onPressed: onPressed,
     );
   }
 }
