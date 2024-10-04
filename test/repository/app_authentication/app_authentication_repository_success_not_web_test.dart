@@ -30,9 +30,10 @@ void main() {
     late GoogleSignInAuthentication mockGoogleSignInAuthentication;
     late LoginResult mockLoginResult;
     late firebase_auth.FacebookAuthProvider mockFacebookAuthProvider;
-
+    late StorageService mockStorageService;
     late IDeviceRepository mockDeviceRepository;
     setUp(() {
+      Config.isWeb = false;
       mockSecureStorageRepository = MockIStorage();
       mockFirebaseAuth = MockFirebaseAuth();
       mockGoogleSignIn = MockGoogleSignIn();
@@ -45,7 +46,7 @@ void main() {
       mockFacebookAuth = MockFacebookAuth();
       mockLoginResult = MockLoginResult();
       mockFacebookAuthProvider = MockFacebookAuthProvider();
-
+      mockStorageService = MockStorageService();
       mockDeviceRepository = MockIDeviceRepository();
 
       when(mockGoogleSignInAuthentication.idToken).thenAnswer(
@@ -60,15 +61,22 @@ void main() {
       when(mockUserCredential.credential).thenAnswer(
         (_) => KTestText.authCredential,
       );
+
+      when(mockUserCredential.user).thenAnswer(
+        (_) => null,
+      );
       when(mockGoogleSignIn.signIn()).thenAnswer(
         (_) async => mockGoogleSignInAccount,
       );
       when(mockFacebookAuth.login()).thenAnswer(
         (_) async => mockLoginResult,
       );
-      when(mockFirebaseAuth.signInWithCredential(KTestText.oAuthCredential))
+      when(mockFirebaseAuth.signInWithCredential(KTestText.authCredential))
           .thenAnswer(
         (_) async => mockUserCredential,
+      );
+      when(mockUserCredential.user).thenAnswer(
+        (_) => null,
       );
       when(
         mockFirestoreService.setUserSetting(
@@ -90,6 +98,12 @@ void main() {
         GetIt.I.unregister<FirestoreService>();
       }
       GetIt.I.registerSingleton(mockFirestoreService);
+
+      if (GetIt.I.isRegistered<StorageService>()) {
+        GetIt.I.unregister<StorageService>();
+      }
+      GetIt.I.registerSingleton(mockStorageService);
+
       if (GetIt.I.isRegistered<IDeviceRepository>()) {
         GetIt.I.unregister<IDeviceRepository>();
       }
@@ -101,23 +115,18 @@ void main() {
         mockCache,
         mockFacebookAuth,
       )
-        ..isWeb = false
         ..googleAuthProvider = mockGoogleAuthProvider
-        ..facebookAuthProvider = mockFacebookAuthProvider;
+        ..facebookAuthProvider = mockFacebookAuthProvider
+        ..authCredential = KTestText.authCredential;
     });
     test('Sign up with google', () async {
       expect(
         await appAuthenticationRepository.signUpWithGoogle(),
-        isA<Right<SomeFailure, bool>>().having((e) => e.value, 'value', isTrue),
+        isA<Right<SomeFailure, User?>>()
+            .having((e) => e.value, 'value', isNull),
       );
     });
-    test('Sign up with facebook(credential null)', () async {
-      expect(
-        await appAuthenticationRepository.signUpWithFacebook(),
-        isA<Right<SomeFailure, bool>>()
-            .having((e) => e.value, 'value', isFalse),
-      );
-    });
+
     test('Sign up with facebook', () async {
       when(mockLoginResult.accessToken).thenAnswer(
         (_) => LimitedToken(
@@ -130,7 +139,8 @@ void main() {
       );
       expect(
         await appAuthenticationRepository.signUpWithFacebook(),
-        isA<Right<SomeFailure, bool>>().having((e) => e.value, 'value', isTrue),
+        isA<Right<SomeFailure, User?>>()
+            .having((e) => e.value, 'value', isNull),
       );
     });
     test('Update user Setting(Set)', () async {

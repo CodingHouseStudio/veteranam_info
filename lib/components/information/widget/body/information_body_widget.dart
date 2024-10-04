@@ -70,7 +70,7 @@ class InformationBodyWidget extends StatelessWidget {
             KSizedBox.kHeightSizedBox24,
         ],
         mainDeskPadding: ({required maxWidth}) => EdgeInsets.symmetric(
-          horizontal: maxWidth * KDimensions.paddingMultiply,
+          horizontal: maxWidth * KDimensions.tenPercent,
         ),
         mainChildWidgetsFunction: ({required isDesk}) => [
           if (_.informationModelItems.isEmpty &&

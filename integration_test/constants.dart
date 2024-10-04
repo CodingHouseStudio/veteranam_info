@@ -65,7 +65,7 @@ abstract class KTestText {
   static const filter = 'filter_test';
   static const key = 'key_test';
 
-  static const usernameCorrect = 'test_username';
+  static const usernameCorrect = 'testUsername';
   static const passwordCorrect = 'test_Password1';
   static const passwordWrong = 'test_Password1_wrong';
   static const usernameEmpty = '';

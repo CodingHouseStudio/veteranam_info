@@ -14,6 +14,7 @@ class UserSetting with _$UserSetting {
     @Default(Language.ukrain) Language locale,
     UserRole? userRole,
     @Default(false) bool roleIsConfirmed,
+    String? nickname,
   }) = _UserSetting;
 
   // Add this private constructor
@@ -98,4 +99,5 @@ abstract class UserSettingModelJsonField {
   static const userRole = 'userRole';
   static const roleIsConfirmed = 'roleIsConfirmed';
   static const devicesInfo = 'devicesInfo';
+  static const nickname = 'nickname';
 }
