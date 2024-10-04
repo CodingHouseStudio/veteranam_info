@@ -3,13 +3,13 @@ import 'package:formz/formz.dart';
 enum DiscountsFieldModelValidationError { empty, wrongFormat }
 
 class DiscountsFieldModel
-    extends FormzInput<List<String>?, DiscountsFieldModelValidationError> {
-  const DiscountsFieldModel.pure() : super.pure(null);
+    extends FormzInput<List<String>, DiscountsFieldModelValidationError> {
+  const DiscountsFieldModel.pure() : super.pure(const []);
 
-  const DiscountsFieldModel.dirty([super.value]) : super.dirty();
+  const DiscountsFieldModel.dirty([super.value = const []]) : super.dirty();
 
   List<int?> get getValue {
-    return value!.map(
+    return value.map(
       (discount) {
         if (discount.toLowerCase() == 'безкоштовно' ||
             discount.toLowerCase() == 'free') {

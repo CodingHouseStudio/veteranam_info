@@ -12,26 +12,26 @@ class DiscountsAddBodyWidget extends StatefulWidget {
 }
 
 class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
-  late TextEditingController discountsController;
+  // late TextEditingController discountsController;
   late TextEditingController titleController;
   late TextEditingController linkController;
   late TextEditingController categoryController;
-  late TextEditingController cityController;
+  // late TextEditingController cityController;
   late TextEditingController periodController;
   late TextEditingController exclusionController;
   late TextEditingController descriptionController;
-  late TextEditingController eligibilityController;
+  // late TextEditingController eligibilityController;
   @override
   void initState() {
-    discountsController = TextEditingController();
+    // discountsController = TextEditingController();
     titleController = TextEditingController();
     linkController = TextEditingController();
     categoryController = TextEditingController();
-    cityController = TextEditingController();
+    // cityController = TextEditingController();
     periodController = TextEditingController();
     exclusionController = TextEditingController();
     descriptionController = TextEditingController();
-    eligibilityController = TextEditingController();
+    // eligibilityController = TextEditingController();
     super.initState();
   }
 
@@ -135,7 +135,7 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
               removeCity: (value) => context
                   .read<DiscountsAddBloc>()
                   .add(DiscountsAddEvent.cityRemove(value)),
-              controller: cityController,
+              // controller: cityController,
               onChanged: (value) => context
                   .read<DiscountsAddBloc>()
                   .add(DiscountsAddEvent.cityAdd(value)),
@@ -148,7 +148,7 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
           else if (_.formState.isMain)
             MultiDropFieldWidget(
               textFieldKey: KWidgetkeys.screen.discountsAdd.discountsField,
-              controller: discountsController,
+              // controller: discountsController,
               isDesk: isDesk,
               labelText: context.l10n.discount,
               dropDownList: const [
@@ -189,11 +189,12 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
             KSizedBox.kHeightSizedBox32,
             MultiDropFieldWidget(
               textFieldKey: KWidgetkeys.screen.discountsAdd.eligibilityField,
-              controller: eligibilityController,
+              // controller: eligibilityController,
               isDesk: isDesk,
               labelText: context.l10n.eligibility,
               isButton: true,
               dropDownList: [
+                context.l10n.allOfBelowMentioned,
                 context.l10n.veterans,
                 context.l10n.combatantsEligibility,
                 context.l10n.militaryEligibility,
@@ -203,12 +204,13 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
                 context.l10n.policeEligibility,
                 context.l10n.idpEligibility,
               ],
+              allElemts: context.l10n.allOfBelowMentioned,
               showErrorText: _.formState.hasError,
-              errorText: _.eligibility.error.value(context),
+              errorText: _.eligibility?.error.value(context),
               onChanged: (text) => context
                   .read<DiscountsAddBloc>()
                   .add(DiscountsAddEvent.eligibilityAddItem(text)),
-              values: _.eligibility.value,
+              values: _.eligibility?.value,
               removeEvent: (String value) =>
                   context.read<DiscountsAddBloc>().add(
                         DiscountsAddEvent.eligibilityRemoveItem(value),
@@ -247,7 +249,7 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
                 enabled: false,
                 showErrorText: _.formState.hasError,
                 errorText: _.period.error.value(context),
-                suffixHorizontalIconPadding: KPadding.kPaddingSize16,
+                suffixIconPadding: KPadding.kPaddingSize16,
                 labelTextStyle: _.isIndefinitely
                     ? AppTextStyle.materialThemeTitleMediumNeutralVariant70
                     : null,
@@ -409,14 +411,14 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
   @override
   void dispose() {
     super.dispose();
-    discountsController.dispose();
+    // discountsController.dispose();
     titleController.dispose();
     linkController.dispose();
     categoryController.dispose();
-    cityController.dispose();
+    // cityController.dispose();
     periodController.dispose();
     exclusionController.dispose();
     descriptionController.dispose();
-    eligibilityController.dispose();
+    // eligibilityController.dispose();
   }
 }
