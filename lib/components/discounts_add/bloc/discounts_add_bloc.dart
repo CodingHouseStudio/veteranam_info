@@ -372,7 +372,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
         territoryEN: null,
         // TODO(Profile): Add Link from profile
         link: '',
-        eligibility: state.eligibility.value,
+        eligibility: state.eligibility?.value,
         exclusions: state.exclusions.value,
         expiration: _getExpiration(Language.ukrain),
         expirationEN: _getExpiration(Language.english),
