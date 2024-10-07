@@ -212,9 +212,9 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                               background: AppColors.materialThemeSourceSeed,
                               padding: KPadding.kPaddingSize8,
                             ),
-                            width: context.isEnglish
-                                ? KSize.kPixel72
-                                : KSize.kPixel56,
+                            // width: context.isEnglish
+                            //     ? KSize.kPixel72
+                            //     : KSize.kPixel56,
                           ),
                         if (Config.isBusiness &&
                             context.read<AuthenticationBloc>().state.status ==
@@ -228,9 +228,9 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                               background: AppColors.materialThemeSourceSeed,
                               padding: KPadding.kPaddingSize8,
                             ),
-                            width: context.isEnglish
-                                ? KSize.kPixel72
-                                : KSize.kPixel56,
+                            // width: context.isEnglish
+                            //     ? KSize.kPixel72
+                            //     : KSize.kPixel56,
                           ),
                         if (Config.isUser) ...[
                           if (widget.isDesk)
@@ -248,9 +248,9 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                             key: KWidgetkeys.widget.nawbar.investorsButton,
                             ruoteName: KRoute.support.name,
                             text: context.l10n.investors,
-                            width: context.isEnglish
-                                ? KSize.kPixel60
-                                : KSize.kPixel80,
+                            // width: context.isEnglish
+                            //     ? KSize.kPixel60
+                            //     : KSize.kPixel80,
                           ),
                         ],
                         if (widget.isDesk)
@@ -276,7 +276,7 @@ class _NawbarWidgetState extends State<NawbarWidget> {
                             key: KWidgetkeys.widget.nawbar.feedbackButton,
                             ruoteName: KRoute.feedback.name,
                             text: context.l10n.contacts,
-                            width: KSize.kPixel70,
+                            // width: KSize.kPixel70,
                           ),
                       ],
                     ),
@@ -412,7 +412,7 @@ class _NawbarWidgetState extends State<NawbarWidget> {
   Widget _button({
     required String ruoteName,
     required String text,
-    required double width,
+    // required double width,
     required Key key,
     Widget? icon,
   }) =>
@@ -420,7 +420,7 @@ class _NawbarWidgetState extends State<NawbarWidget> {
         widgetKey: key,
         text: text,
         onPressed: () => context.goNamed(ruoteName),
-        width: width,
+        // width: width,
         // isDesk: widget.isTablet,
         icon: icon,
       );

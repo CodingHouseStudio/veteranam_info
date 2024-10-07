@@ -7,7 +7,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart' show Uint8List, kIsWeb, kReleaseMode;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
+import 'package:intl/intl.dart' show DateFormat;
 import 'package:veteranam/components/components.dart';
 import 'package:veteranam/shared/shared.dart';
 
@@ -235,16 +235,13 @@ extension StringExtension on String {
 
   int get _ukraineIndex => KAppText.ukrainianAlphabet.indexOf(this);
 
-  double getTextLength({
-    required double? width,
+  double getTextWidth({
     required TextStyle textStyle,
-    double? additional,
   }) {
-    if (width != null) return width;
-    final textLength =
-        length * (textStyle.fontSize! + textStyle.letterSpacing!) +
-            (additional ?? 0);
-    return textLength / KSize.kPixel2;
+    return TextPainter.computeWidth(
+      text: TextSpan(text: this, style: textStyle),
+      textDirection: TextDirection.ltr,
+    );
   }
 
   String? get getUserPlatform {
