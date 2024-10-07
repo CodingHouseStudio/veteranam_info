@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:veteranam/shared/constants/constants.dart';
 import 'package:veteranam/shared/shared.dart';
 
 abstract class KButtonStyles {
