@@ -44,8 +44,8 @@ class ButtonBottomLineWidget extends StatefulWidget {
   const ButtonBottomLineWidget({
     required this.text,
     required this.onPressed,
-    required this.width,
     required this.widgetKey,
+    // required this.width,
     super.key,
     this.icon,
   });
@@ -53,8 +53,8 @@ class ButtonBottomLineWidget extends StatefulWidget {
   final String text;
   final Widget? icon;
   final void Function() onPressed;
-  final double? width;
   final Key widgetKey;
+  // final double width;
 
   @override
   State<ButtonBottomLineWidget> createState() => _ButtonBottomLineWidgetState();
@@ -62,9 +62,14 @@ class ButtonBottomLineWidget extends StatefulWidget {
 
 class _ButtonBottomLineWidgetState extends State<ButtonBottomLineWidget> {
   late bool _isHovered;
+  late double textWidth;
   @override
   void initState() {
     _isHovered = false;
+    textWidth = widget.text.getTextWidth(
+      textStyle: AppTextStyle.materialThemeTitleMedium,
+      // width: widget.width,
+    );
     super.initState();
   }
 
@@ -88,13 +93,7 @@ class _ButtonBottomLineWidgetState extends State<ButtonBottomLineWidget> {
           AnimatedContainer(
             key: KWidgetkeys.widget.buttonBottomLine.line,
             duration: const Duration(milliseconds: 300),
-            width: _isHovered
-                ? widget.text.getTextLength(
-                    width: widget.width,
-                    textStyle: AppTextStyle.materialThemeTitleMedium,
-                    additional: widget.icon != null ? KSize.kPixel8 : null,
-                  )
-                : 0,
+            width: _isHovered ? textWidth : 0,
             height: 1,
             decoration: const BoxDecoration(color: Colors.black),
           ),
