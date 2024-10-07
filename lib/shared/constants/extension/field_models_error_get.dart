@@ -20,8 +20,8 @@ extension EmailFieldModelValidationErrorEmpl
 extension LinkFieldModelValidationErrorEmpl on LinkFieldModelValidationError? {
   String? value(BuildContext context) {
     switch (this) {
-      case LinkFieldModelValidationError.empty:
-        return context.l10n.fieldCannotBeEmpty;
+      // case LinkFieldModelValidationError.empty:
+      //   return context.l10n.fieldCannotBeEmpty;
       case LinkFieldModelValidationError.invalidLink:
         return context.l10n.invalidLink;
       case LinkFieldModelValidationError.invalidLength:
@@ -49,6 +49,10 @@ extension NameFieldModelValidationErrorEmpl on NameFieldModelValidationError? {
     switch (this) {
       case NameFieldModelValidationError.empty:
         return context.l10n.fieldCannotBeEmpty;
+      case NameFieldModelValidationError.wrong:
+        return '${context.l10n.name} ${context.l10n.isWrong}';
+      case NameFieldModelValidationError.tooShort:
+        return '${context.l10n.name} ${context.l10n.tooshort}';
       case null:
         return null;
     }
@@ -104,11 +108,10 @@ extension ReportFieldModelValidationErrorEmpl
   }
 }
 
-extension CitiesFieldModelValidationErrorEmpl
-    on CitiesFieldModelValidationError? {
+extension MultiFieldModelValidationErrorEmpl on ListFieldModelValidationError? {
   String? value(BuildContext context) {
     switch (this) {
-      case CitiesFieldModelValidationError.empty:
+      case ListFieldModelValidationError.empty:
         return context.l10n.fieldCannotBeEmpty;
       case null:
         return null;
@@ -124,6 +127,43 @@ extension DiscountsFieldModelValidationErrorEmpl
         return context.l10n.fieldCannotBeEmpty;
       case DiscountsFieldModelValidationError.wrongFormat:
         return context.l10n.discountsWrongFormat;
+      case null:
+        return null;
+    }
+  }
+}
+
+extension DateFieldModelValidationErrorEmpl on DateFieldModelValidationError? {
+  String? value(BuildContext context) {
+    switch (this) {
+      case DateFieldModelValidationError.empty:
+        return context.l10n.fieldCannotBeEmpty;
+      case null:
+        return null;
+    }
+  }
+}
+
+extension SurnameFieldModelValidationErrorEmpl
+    on SurnameFieldModelValidationError? {
+  String? value(BuildContext context) {
+    switch (this) {
+      case SurnameFieldModelValidationError.empty:
+        return context.l10n.fieldCannotBeEmpty;
+      case SurnameFieldModelValidationError.wrong:
+        return '${context.l10n.lastName} ${context.l10n.isWrong}';
+      case null:
+        return null;
+    }
+  }
+}
+
+extension NicknameFieldModelValidationErrorEmpl
+    on NicknameFieldModelValidationError? {
+  String? value(BuildContext context) {
+    switch (this) {
+      case NicknameFieldModelValidationError.wrong:
+        return '${KAppText.nickname} ${context.l10n.isWrong}';
       case null:
         return null;
     }

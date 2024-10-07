@@ -18,7 +18,7 @@ GoRouter businessRouter = GoRouter(
   errorBuilder: (context, state) => const ErrorScreen(),
   refreshListenable:
       GoRouterRefreshStream(GetIt.instance<AuthenticationBloc>().stream),
-  initialLocation: KRoute.businessDiscounts.path,
+  initialLocation: KRoute.businessDashboard.path,
   observers: [
     if (Config.isProduction && kReleaseMode)
       FirebaseAnalyticsObserver(
@@ -31,11 +31,10 @@ GoRouter businessRouter = GoRouter(
   redirect: (BuildContext context, GoRouterState state) async {
     if (context.read<AuthenticationBloc>().state.status ==
         AuthenticationStatus.authenticated) {
-      return state.uri.toString().contains(KRoute.login.path)
-          ? KRoute.businessDiscounts.path
-          : state.uri.toString().contains(KRoute.signUp.path)
-              ? KRoute.thanks.path
-              : null;
+      return state.uri.toString().contains(KRoute.login.path) ||
+              state.uri.toString().contains(KRoute.signUp.path)
+          ? KRoute.businessDashboard.path
+          : null;
     }
     return null;
   },
@@ -68,38 +67,47 @@ GoRouter businessRouter = GoRouter(
         child: const SignUpScreen(),
       ),
     ),
+    GoRoute(
+      name: KRoute.feedback.name,
+      path: '/${KRoute.feedback.path}',
+      pageBuilder: (context, state) => NoTransitionPage(
+        key: state.pageKey,
+        name: state.name,
+        child: const FeedbackScreen(),
+      ),
+    ),
     //   ],
     // ),
     // if (Config.isDevelopment)
+    // GoRoute(
+    //   name: KRoute.thanks.name,
+    //   path: KRoute.thanks.path,
+    //   pageBuilder: (context, state) => NoTransitionPage(
+    //     key: state.pageKey,
+    //     name: state.name,
+    //     child: const ThanksScreen(),
+    //   ),
+    // ),
     GoRoute(
-      name: KRoute.thanks.name,
-      path: KRoute.thanks.path,
+      name: KRoute.businessDashboard.name,
+      path: KRoute.businessDashboard.path,
       pageBuilder: (context, state) => NoTransitionPage(
         key: state.pageKey,
         name: state.name,
-        child: const ThanksScreen(),
-      ),
-    ),
-    GoRoute(
-      name: KRoute.businessDiscounts.name,
-      path: KRoute.businessDiscounts.path,
-      pageBuilder: (context, state) => NoTransitionPage(
-        key: state.pageKey,
-        name: state.name,
-        child: const DiscountsScreen(),
+        child: const BusinessDashboardScreen(),
       ),
       redirect: businessRedirect,
       routes: [
-        GoRoute(
-          name: KRoute.privacyPolicy.name,
-          path: KRoute.privacyPolicy.path,
-          pageBuilder: (context, state) => DialogPage(
-            key: state.pageKey,
-            name: state.name,
-            builder: (_) => const PrivacyPolicyDialog(),
-          ),
-        ),
-        if (Config.isDevelopment)
+        // GoRoute(
+        //   name: KRoute.privacyPolicy.name,
+        //   path: KRoute.privacyPolicy.path,
+        //   pageBuilder: (context, state) => DialogPage(
+        //     key: state.pageKey,
+        //     name: state.name,
+        //     builder: (_) => const PrivacyPolicyDialog(),
+        //   ),
+        // ),
+        if (Config.isDevelopment || Config.isBusiness)
           GoRoute(
             name: KRoute.profile.name,
             path: KRoute.profile.path,
@@ -125,15 +133,7 @@ GoRouter businessRouter = GoRouter(
                     ? KRoute.home.path
                     : null,
           ),
-        GoRoute(
-          name: KRoute.feedback.name,
-          path: KRoute.feedback.path,
-          pageBuilder: (context, state) => NoTransitionPage(
-            key: state.pageKey,
-            name: state.name,
-            child: const FeedbackScreen(),
-          ),
-        ),
+
         GoRoute(
           name: KRoute.myDiscounts.name,
           path: KRoute.myDiscounts.path,
@@ -152,18 +152,18 @@ GoRouter businessRouter = GoRouter(
                 child: const DiscountsAddScreen(),
               ),
             ),
-          ],
-        ),
-        GoRoute(
-          name: KRoute.discountCard.name,
-          path: ':cardId',
-          pageBuilder: (context, state) => DialogPage(
-            key: state.pageKey,
-            name: state.name,
-            builder: (_) => DiscountCardDialog(
-              id: state.pathParameters['cardId'],
+            GoRoute(
+              name: KRoute.discountCard.name,
+              path: ':cardId',
+              pageBuilder: (context, state) => DialogPage(
+                key: state.pageKey,
+                name: state.name,
+                builder: (_) => DiscountCardDialog(
+                  id: state.pathParameters['cardId'],
+                ),
+              ),
             ),
-          ),
+          ],
         ),
       ],
     ),

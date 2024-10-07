@@ -310,6 +310,14 @@ abstract class AppTextStyle {
     fontWeight: FontWeight.w400,
     letterSpacing: 0.4,
   );
+  static const TextStyle materialThemeBodySmallNeutralVariant50 = TextStyle(
+    fontFamily: 'Gilroy',
+    fontSize: 12,
+    height: 1.33,
+    fontWeight: FontWeight.w400,
+    letterSpacing: 0.4,
+    color: AppColors.materialThemeRefNeutralVariantNeutralVariant50,
+  );
   static const TextStyle materialThemeBodySmallError = TextStyle(
     fontFamily: 'Gilroy',
     fontSize: 12,
@@ -382,6 +390,14 @@ abstract class AppTextStyle {
     fontWeight: FontWeight.w500,
     letterSpacing: 0.5,
     color: AppColors.materialThemeRefNeutralVariantNeutralVariant35,
+  );
+  static const TextStyle materialThemeLabelSmallNeutralVariant70 = TextStyle(
+    fontFamily: 'Gilroy',
+    fontSize: 11,
+    height: 1.45,
+    fontWeight: FontWeight.w500,
+    letterSpacing: 0.5,
+    color: AppColors.materialThemeRefNeutralVariantNeutralVariant70,
   );
 
   /// materialThemeTitleLarge figma properties

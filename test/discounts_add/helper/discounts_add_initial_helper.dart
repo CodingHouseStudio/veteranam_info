@@ -23,22 +23,25 @@ Future<void> discountsAddInitialHelper(
 
       await discountsAddMainHelper(tester: tester);
 
-      expect(
-        find.byKey(KWidgetkeys.screen.discountsAdd.indefinitelySwitcher),
-        findsOneWidget,
-      );
-
-      await switchHelper(tester: tester);
-
-      expect(
-        find.byKey(KWidgetkeys.screen.discountsAdd.indefinitelyText),
-        findsOneWidget,
-      );
-
       await scrollingHelper(
         tester: tester,
-        itemKey: KWidgetkeys.screen.discountsAdd.indefinitelyText,
+        itemKey: KWidgetkeys.screen.discountsAdd.titleField,
       );
+
+      await multiDropFieldHelper(
+        tester: tester,
+        text: KTestText.field,
+        textFieldKey: KWidgetkeys.screen.discountsAdd.discountsField,
+        fieldIndex: 1,
+      );
+
+      await dropListFieldItemHelper(
+        tester: tester,
+        textFieldKey: KWidgetkeys.screen.discountsAdd.eligibilityField,
+        fieldIndex: 2,
+      );
+
+      await multiDropFieldRemoveHelper(tester);
 
       expect(
         find.byKey(KWidgetkeys.screen.discountsAdd.sendButton),

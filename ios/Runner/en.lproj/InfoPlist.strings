@@ -1,0 +1,9 @@
+/* 
+  InfoPlist.strings
+  Runner
+
+  Created by Herman Kravchenko on 2024-09-30.
+  
+*/
+"NSPhotoLibraryUsageDescription"="Photo library is used to pick a picture for the profile photo in the app";
+"NSUserTrackingUsageDescription"="This identifier will be used to use for analytics purposes.";

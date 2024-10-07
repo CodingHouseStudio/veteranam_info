@@ -15,6 +15,7 @@ class MessageFieldWidget extends StatelessWidget {
     this.labelText,
     this.showErrorText,
     this.errorMaxLines,
+    this.description,
   });
   final void Function(String text)? changeMessage;
   final String? hintText;
@@ -27,6 +28,7 @@ class MessageFieldWidget extends StatelessWidget {
   final bool isDesk;
   final bool? showErrorText;
   final int? errorMaxLines;
+  final String? description;
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +44,7 @@ class MessageFieldWidget extends StatelessWidget {
       maxLines: isDesk ? KMinMaxSize.messageMaxLines : null,
       maxLength: KMinMaxSize.messageMaxLength,
       labelText: labelText, errorMaxLines: errorMaxLines,
+      description: description,
       // suffixIcon: Column(
       //   mainAxisAlignment: MainAxisAlignment.end,
       //   children: [

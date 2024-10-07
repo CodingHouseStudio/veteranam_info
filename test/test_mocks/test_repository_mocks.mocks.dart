@@ -1403,6 +1403,17 @@ class MockFirestoreService extends _i1.Mock implements _i3.FirestoreService {
         returnValue: _i8.Future<void>.value(),
         returnValueForMissingStub: _i8.Future<void>.value(),
       ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<List<_i3.CityModel>> getCities() => (super.noSuchMethod(
+        Invocation.method(
+          #getCities,
+          [],
+        ),
+        returnValue: _i8.Future<List<_i3.CityModel>>.value(<_i3.CityModel>[]),
+        returnValueForMissingStub:
+            _i8.Future<List<_i3.CityModel>>.value(<_i3.CityModel>[]),
+      ) as _i8.Future<List<_i3.CityModel>>);
 }
 
 /// A class which mocks [IInvestorsRepository].
@@ -1493,14 +1504,28 @@ class MockIAppAuthenticationRepository extends _i1.Mock
       ) as _i3.UserSetting);
 
   @override
-  _i8.Future<_i2.Either<_i3.SomeFailure, bool>> signUpWithGoogle() =>
+  bool get isLoggedIn => (super.noSuchMethod(
+        Invocation.getter(#isLoggedIn),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
+
+  @override
+  bool get isAnonymously => (super.noSuchMethod(
+        Invocation.getter(#isAnonymously),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
+
+  @override
+  _i8.Future<_i2.Either<_i3.SomeFailure, _i3.User?>> signUpWithGoogle() =>
       (super.noSuchMethod(
         Invocation.method(
           #signUpWithGoogle,
           [],
         ),
-        returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
-            _FakeEither_0<_i3.SomeFailure, bool>(
+        returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, _i3.User?>>.value(
+            _FakeEither_0<_i3.SomeFailure, _i3.User?>(
           this,
           Invocation.method(
             #signUpWithGoogle,
@@ -1508,25 +1533,25 @@ class MockIAppAuthenticationRepository extends _i1.Mock
           ),
         )),
         returnValueForMissingStub:
-            _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
-                _FakeEither_0<_i3.SomeFailure, bool>(
+            _i8.Future<_i2.Either<_i3.SomeFailure, _i3.User?>>.value(
+                _FakeEither_0<_i3.SomeFailure, _i3.User?>(
           this,
           Invocation.method(
             #signUpWithGoogle,
             [],
           ),
         )),
-      ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
+      ) as _i8.Future<_i2.Either<_i3.SomeFailure, _i3.User?>>);
 
   @override
-  _i8.Future<_i2.Either<_i3.SomeFailure, bool>> signUpWithFacebook() =>
+  _i8.Future<_i2.Either<_i3.SomeFailure, _i3.User?>> signUpWithFacebook() =>
       (super.noSuchMethod(
         Invocation.method(
           #signUpWithFacebook,
           [],
         ),
-        returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
-            _FakeEither_0<_i3.SomeFailure, bool>(
+        returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, _i3.User?>>.value(
+            _FakeEither_0<_i3.SomeFailure, _i3.User?>(
           this,
           Invocation.method(
             #signUpWithFacebook,
@@ -1534,18 +1559,18 @@ class MockIAppAuthenticationRepository extends _i1.Mock
           ),
         )),
         returnValueForMissingStub:
-            _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
-                _FakeEither_0<_i3.SomeFailure, bool>(
+            _i8.Future<_i2.Either<_i3.SomeFailure, _i3.User?>>.value(
+                _FakeEither_0<_i3.SomeFailure, _i3.User?>(
           this,
           Invocation.method(
             #signUpWithFacebook,
             [],
           ),
         )),
-      ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
+      ) as _i8.Future<_i2.Either<_i3.SomeFailure, _i3.User?>>);
 
   @override
-  _i8.Future<_i2.Either<_i3.SomeFailure, bool>> logInWithEmailAndPassword({
+  _i8.Future<_i2.Either<_i3.SomeFailure, _i3.User?>> logInWithEmailAndPassword({
     required String? email,
     required String? password,
   }) =>
@@ -1558,8 +1583,8 @@ class MockIAppAuthenticationRepository extends _i1.Mock
             #password: password,
           },
         ),
-        returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
-            _FakeEither_0<_i3.SomeFailure, bool>(
+        returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, _i3.User?>>.value(
+            _FakeEither_0<_i3.SomeFailure, _i3.User?>(
           this,
           Invocation.method(
             #logInWithEmailAndPassword,
@@ -1571,8 +1596,8 @@ class MockIAppAuthenticationRepository extends _i1.Mock
           ),
         )),
         returnValueForMissingStub:
-            _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
-                _FakeEither_0<_i3.SomeFailure, bool>(
+            _i8.Future<_i2.Either<_i3.SomeFailure, _i3.User?>>.value(
+                _FakeEither_0<_i3.SomeFailure, _i3.User?>(
           this,
           Invocation.method(
             #logInWithEmailAndPassword,
@@ -1583,17 +1608,17 @@ class MockIAppAuthenticationRepository extends _i1.Mock
             },
           ),
         )),
-      ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
+      ) as _i8.Future<_i2.Either<_i3.SomeFailure, _i3.User?>>);
 
   @override
-  _i8.Future<_i2.Either<_i3.SomeFailure, bool>> logInAnonymously() =>
+  _i8.Future<_i2.Either<_i3.SomeFailure, _i3.User?>> logInAnonymously() =>
       (super.noSuchMethod(
         Invocation.method(
           #logInAnonymously,
           [],
         ),
-        returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
-            _FakeEither_0<_i3.SomeFailure, bool>(
+        returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, _i3.User?>>.value(
+            _FakeEither_0<_i3.SomeFailure, _i3.User?>(
           this,
           Invocation.method(
             #logInAnonymously,
@@ -1601,18 +1626,18 @@ class MockIAppAuthenticationRepository extends _i1.Mock
           ),
         )),
         returnValueForMissingStub:
-            _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
-                _FakeEither_0<_i3.SomeFailure, bool>(
+            _i8.Future<_i2.Either<_i3.SomeFailure, _i3.User?>>.value(
+                _FakeEither_0<_i3.SomeFailure, _i3.User?>(
           this,
           Invocation.method(
             #logInAnonymously,
             [],
           ),
         )),
-      ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
+      ) as _i8.Future<_i2.Either<_i3.SomeFailure, _i3.User?>>);
 
   @override
-  _i8.Future<_i2.Either<_i3.SomeFailure, bool>> signUp({
+  _i8.Future<_i2.Either<_i3.SomeFailure, _i3.User?>> signUp({
     required String? email,
     required String? password,
   }) =>
@@ -1625,8 +1650,8 @@ class MockIAppAuthenticationRepository extends _i1.Mock
             #password: password,
           },
         ),
-        returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
-            _FakeEither_0<_i3.SomeFailure, bool>(
+        returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, _i3.User?>>.value(
+            _FakeEither_0<_i3.SomeFailure, _i3.User?>(
           this,
           Invocation.method(
             #signUp,
@@ -1638,8 +1663,8 @@ class MockIAppAuthenticationRepository extends _i1.Mock
           ),
         )),
         returnValueForMissingStub:
-            _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
-                _FakeEither_0<_i3.SomeFailure, bool>(
+            _i8.Future<_i2.Either<_i3.SomeFailure, _i3.User?>>.value(
+                _FakeEither_0<_i3.SomeFailure, _i3.User?>(
           this,
           Invocation.method(
             #signUp,
@@ -1650,27 +1675,7 @@ class MockIAppAuthenticationRepository extends _i1.Mock
             },
           ),
         )),
-      ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
-
-  @override
-  bool isLoggedIn() => (super.noSuchMethod(
-        Invocation.method(
-          #isLoggedIn,
-          [],
-        ),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
-
-  @override
-  bool isAnonymously() => (super.noSuchMethod(
-        Invocation.method(
-          #isAnonymously,
-          [],
-        ),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
+      ) as _i8.Future<_i2.Either<_i3.SomeFailure, _i3.User?>>);
 
   @override
   _i8.Future<_i2.Either<_i3.SomeFailure, bool>> logOut() => (super.noSuchMethod(
@@ -1815,6 +1820,47 @@ class MockIAppAuthenticationRepository extends _i1.Mock
           ),
         )),
       ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
+
+  @override
+  _i8.Future<_i2.Either<_i3.SomeFailure, bool>> updateUserData({
+    required _i3.User? user,
+    required _i3.ImageModel? image,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateUserData,
+          [],
+          {
+            #user: user,
+            #image: image,
+          },
+        ),
+        returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
+            _FakeEither_0<_i3.SomeFailure, bool>(
+          this,
+          Invocation.method(
+            #updateUserData,
+            [],
+            {
+              #user: user,
+              #image: image,
+            },
+          ),
+        )),
+        returnValueForMissingStub:
+            _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
+                _FakeEither_0<_i3.SomeFailure, bool>(
+          this,
+          Invocation.method(
+            #updateUserData,
+            [],
+            {
+              #user: user,
+              #image: image,
+            },
+          ),
+        )),
+      ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
 }
 
 /// A class which mocks [AppAuthenticationRepository].
@@ -1822,22 +1868,6 @@ class MockIAppAuthenticationRepository extends _i1.Mock
 /// See the documentation for Mockito's code generation for more information.
 class MockAppAuthenticationRepository extends _i1.Mock
     implements _i3.AppAuthenticationRepository {
-  @override
-  bool get isWeb => (super.noSuchMethod(
-        Invocation.getter(#isWeb),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
-
-  @override
-  set isWeb(bool? _isWeb) => super.noSuchMethod(
-        Invocation.setter(
-          #isWeb,
-          _isWeb,
-        ),
-        returnValueForMissingStub: null,
-      );
-
   @override
   _i4.GoogleAuthProvider get googleAuthProvider => (super.noSuchMethod(
         Invocation.getter(#googleAuthProvider),
@@ -1857,6 +1887,15 @@ class MockAppAuthenticationRepository extends _i1.Mock
         Invocation.setter(
           #googleAuthProvider,
           _googleAuthProvider,
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  set authCredential(_i4.AuthCredential? _authCredential) => super.noSuchMethod(
+        Invocation.setter(
+          #authCredential,
+          _authCredential,
         ),
         returnValueForMissingStub: null,
       );
@@ -1925,14 +1964,28 @@ class MockAppAuthenticationRepository extends _i1.Mock
       ) as _i3.UserSetting);
 
   @override
-  _i8.Future<_i2.Either<_i3.SomeFailure, bool>> signUpWithGoogle() =>
+  bool get isLoggedIn => (super.noSuchMethod(
+        Invocation.getter(#isLoggedIn),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
+
+  @override
+  bool get isAnonymously => (super.noSuchMethod(
+        Invocation.getter(#isAnonymously),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
+
+  @override
+  _i8.Future<_i2.Either<_i3.SomeFailure, _i3.User?>> signUpWithGoogle() =>
       (super.noSuchMethod(
         Invocation.method(
           #signUpWithGoogle,
           [],
         ),
-        returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
-            _FakeEither_0<_i3.SomeFailure, bool>(
+        returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, _i3.User?>>.value(
+            _FakeEither_0<_i3.SomeFailure, _i3.User?>(
           this,
           Invocation.method(
             #signUpWithGoogle,
@@ -1940,25 +1993,25 @@ class MockAppAuthenticationRepository extends _i1.Mock
           ),
         )),
         returnValueForMissingStub:
-            _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
-                _FakeEither_0<_i3.SomeFailure, bool>(
+            _i8.Future<_i2.Either<_i3.SomeFailure, _i3.User?>>.value(
+                _FakeEither_0<_i3.SomeFailure, _i3.User?>(
           this,
           Invocation.method(
             #signUpWithGoogle,
             [],
           ),
         )),
-      ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
+      ) as _i8.Future<_i2.Either<_i3.SomeFailure, _i3.User?>>);
 
   @override
-  _i8.Future<_i2.Either<_i3.SomeFailure, bool>> signUpWithFacebook() =>
+  _i8.Future<_i2.Either<_i3.SomeFailure, _i3.User?>> signUpWithFacebook() =>
       (super.noSuchMethod(
         Invocation.method(
           #signUpWithFacebook,
           [],
         ),
-        returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
-            _FakeEither_0<_i3.SomeFailure, bool>(
+        returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, _i3.User?>>.value(
+            _FakeEither_0<_i3.SomeFailure, _i3.User?>(
           this,
           Invocation.method(
             #signUpWithFacebook,
@@ -1966,18 +2019,18 @@ class MockAppAuthenticationRepository extends _i1.Mock
           ),
         )),
         returnValueForMissingStub:
-            _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
-                _FakeEither_0<_i3.SomeFailure, bool>(
+            _i8.Future<_i2.Either<_i3.SomeFailure, _i3.User?>>.value(
+                _FakeEither_0<_i3.SomeFailure, _i3.User?>(
           this,
           Invocation.method(
             #signUpWithFacebook,
             [],
           ),
         )),
-      ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
+      ) as _i8.Future<_i2.Either<_i3.SomeFailure, _i3.User?>>);
 
   @override
-  _i8.Future<_i2.Either<_i3.SomeFailure, bool>> logInWithEmailAndPassword({
+  _i8.Future<_i2.Either<_i3.SomeFailure, _i3.User?>> logInWithEmailAndPassword({
     required String? email,
     required String? password,
   }) =>
@@ -1990,8 +2043,8 @@ class MockAppAuthenticationRepository extends _i1.Mock
             #password: password,
           },
         ),
-        returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
-            _FakeEither_0<_i3.SomeFailure, bool>(
+        returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, _i3.User?>>.value(
+            _FakeEither_0<_i3.SomeFailure, _i3.User?>(
           this,
           Invocation.method(
             #logInWithEmailAndPassword,
@@ -2003,8 +2056,8 @@ class MockAppAuthenticationRepository extends _i1.Mock
           ),
         )),
         returnValueForMissingStub:
-            _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
-                _FakeEither_0<_i3.SomeFailure, bool>(
+            _i8.Future<_i2.Either<_i3.SomeFailure, _i3.User?>>.value(
+                _FakeEither_0<_i3.SomeFailure, _i3.User?>(
           this,
           Invocation.method(
             #logInWithEmailAndPassword,
@@ -2015,17 +2068,17 @@ class MockAppAuthenticationRepository extends _i1.Mock
             },
           ),
         )),
-      ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
+      ) as _i8.Future<_i2.Either<_i3.SomeFailure, _i3.User?>>);
 
   @override
-  _i8.Future<_i2.Either<_i3.SomeFailure, bool>> logInAnonymously() =>
+  _i8.Future<_i2.Either<_i3.SomeFailure, _i3.User?>> logInAnonymously() =>
       (super.noSuchMethod(
         Invocation.method(
           #logInAnonymously,
           [],
         ),
-        returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
-            _FakeEither_0<_i3.SomeFailure, bool>(
+        returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, _i3.User?>>.value(
+            _FakeEither_0<_i3.SomeFailure, _i3.User?>(
           this,
           Invocation.method(
             #logInAnonymously,
@@ -2033,18 +2086,18 @@ class MockAppAuthenticationRepository extends _i1.Mock
           ),
         )),
         returnValueForMissingStub:
-            _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
-                _FakeEither_0<_i3.SomeFailure, bool>(
+            _i8.Future<_i2.Either<_i3.SomeFailure, _i3.User?>>.value(
+                _FakeEither_0<_i3.SomeFailure, _i3.User?>(
           this,
           Invocation.method(
             #logInAnonymously,
             [],
           ),
         )),
-      ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
+      ) as _i8.Future<_i2.Either<_i3.SomeFailure, _i3.User?>>);
 
   @override
-  _i8.Future<_i2.Either<_i3.SomeFailure, bool>> signUp({
+  _i8.Future<_i2.Either<_i3.SomeFailure, _i3.User?>> signUp({
     required String? email,
     required String? password,
   }) =>
@@ -2057,8 +2110,8 @@ class MockAppAuthenticationRepository extends _i1.Mock
             #password: password,
           },
         ),
-        returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
-            _FakeEither_0<_i3.SomeFailure, bool>(
+        returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, _i3.User?>>.value(
+            _FakeEither_0<_i3.SomeFailure, _i3.User?>(
           this,
           Invocation.method(
             #signUp,
@@ -2070,8 +2123,8 @@ class MockAppAuthenticationRepository extends _i1.Mock
           ),
         )),
         returnValueForMissingStub:
-            _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
-                _FakeEither_0<_i3.SomeFailure, bool>(
+            _i8.Future<_i2.Either<_i3.SomeFailure, _i3.User?>>.value(
+                _FakeEither_0<_i3.SomeFailure, _i3.User?>(
           this,
           Invocation.method(
             #signUp,
@@ -2082,27 +2135,7 @@ class MockAppAuthenticationRepository extends _i1.Mock
             },
           ),
         )),
-      ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
-
-  @override
-  bool isLoggedIn() => (super.noSuchMethod(
-        Invocation.method(
-          #isLoggedIn,
-          [],
-        ),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
-
-  @override
-  bool isAnonymously() => (super.noSuchMethod(
-        Invocation.method(
-          #isAnonymously,
-          [],
-        ),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
+      ) as _i8.Future<_i2.Either<_i3.SomeFailure, _i3.User?>>);
 
   @override
   _i8.Future<_i2.Either<_i3.SomeFailure, bool>> logOut() => (super.noSuchMethod(
@@ -2247,6 +2280,47 @@ class MockAppAuthenticationRepository extends _i1.Mock
           ),
         )),
       ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
+
+  @override
+  _i8.Future<_i2.Either<_i3.SomeFailure, bool>> updateUserData({
+    required _i3.User? user,
+    required _i3.ImageModel? image,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateUserData,
+          [],
+          {
+            #user: user,
+            #image: image,
+          },
+        ),
+        returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
+            _FakeEither_0<_i3.SomeFailure, bool>(
+          this,
+          Invocation.method(
+            #updateUserData,
+            [],
+            {
+              #user: user,
+              #image: image,
+            },
+          ),
+        )),
+        returnValueForMissingStub:
+            _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
+                _FakeEither_0<_i3.SomeFailure, bool>(
+          this,
+          Invocation.method(
+            #updateUserData,
+            [],
+            {
+              #user: user,
+              #image: image,
+            },
+          ),
+        )),
+      ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
 }
 
 /// A class which mocks [AuthenticationRepository].
@@ -2269,18 +2343,18 @@ class MockAuthenticationRepository extends _i1.Mock
       ) as _i3.IAppAuthenticationRepository);
 
   @override
-  _i8.Stream<_i3.AuthenticationStatus> get status => (super.noSuchMethod(
-        Invocation.getter(#status),
-        returnValue: _i8.Stream<_i3.AuthenticationStatus>.empty(),
-        returnValueForMissingStub: _i8.Stream<_i3.AuthenticationStatus>.empty(),
-      ) as _i8.Stream<_i3.AuthenticationStatus>);
-
-  @override
   _i8.Stream<_i3.UserSetting> get userSetting => (super.noSuchMethod(
         Invocation.getter(#userSetting),
         returnValue: _i8.Stream<_i3.UserSetting>.empty(),
         returnValueForMissingStub: _i8.Stream<_i3.UserSetting>.empty(),
       ) as _i8.Stream<_i3.UserSetting>);
+
+  @override
+  _i8.Stream<_i3.User> get user => (super.noSuchMethod(
+        Invocation.getter(#user),
+        returnValue: _i8.Stream<_i3.User>.empty(),
+        returnValueForMissingStub: _i8.Stream<_i3.User>.empty(),
+      ) as _i8.Stream<_i3.User>);
 
   @override
   _i3.User get currentUser => (super.noSuchMethod(
@@ -2307,6 +2381,20 @@ class MockAuthenticationRepository extends _i1.Mock
           Invocation.getter(#currentUserSetting),
         ),
       ) as _i3.UserSetting);
+
+  @override
+  bool get isAnonymously => (super.noSuchMethod(
+        Invocation.getter(#isAnonymously),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
+
+  @override
+  bool get isAnonymouslyOrEmty => (super.noSuchMethod(
+        Invocation.getter(#isAnonymouslyOrEmty),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
 
   @override
   _i8.Future<_i2.Either<_i3.SomeFailure, bool>> deleteUser() =>
@@ -2554,24 +2642,49 @@ class MockAuthenticationRepository extends _i1.Mock
       ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
 
   @override
-  bool isAnonymously() => (super.noSuchMethod(
+  _i8.Future<_i2.Either<_i3.SomeFailure, bool>> updateUserData({
+    required _i3.User? user,
+    required _i3.ImageModel? image,
+    required String? nickname,
+  }) =>
+      (super.noSuchMethod(
         Invocation.method(
-          #isAnonymously,
+          #updateUserData,
           [],
+          {
+            #user: user,
+            #image: image,
+            #nickname: nickname,
+          },
         ),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
-
-  @override
-  bool isAnonymouslyOrEmty() => (super.noSuchMethod(
-        Invocation.method(
-          #isAnonymouslyOrEmty,
-          [],
-        ),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
+        returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
+            _FakeEither_0<_i3.SomeFailure, bool>(
+          this,
+          Invocation.method(
+            #updateUserData,
+            [],
+            {
+              #user: user,
+              #image: image,
+              #nickname: nickname,
+            },
+          ),
+        )),
+        returnValueForMissingStub:
+            _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
+                _FakeEither_0<_i3.SomeFailure, bool>(
+          this,
+          Invocation.method(
+            #updateUserData,
+            [],
+            {
+              #user: user,
+              #image: image,
+              #nickname: nickname,
+            },
+          ),
+        )),
+      ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
 
   @override
   void dispose() => super.noSuchMethod(
@@ -12757,4 +12870,36 @@ class MockFacebookAuthProvider extends _i1.Mock
           ),
         ),
       ) as _i4.FacebookAuthProvider);
+}
+
+/// A class which mocks [ICitiesRepository].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockICitiesRepository extends _i1.Mock implements _i3.ICitiesRepository {
+  @override
+  _i8.Future<_i2.Either<_i3.SomeFailure, List<_i3.CityModel>>> getCities() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getCities,
+          [],
+        ),
+        returnValue:
+            _i8.Future<_i2.Either<_i3.SomeFailure, List<_i3.CityModel>>>.value(
+                _FakeEither_0<_i3.SomeFailure, List<_i3.CityModel>>(
+          this,
+          Invocation.method(
+            #getCities,
+            [],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i8.Future<_i2.Either<_i3.SomeFailure, List<_i3.CityModel>>>.value(
+                _FakeEither_0<_i3.SomeFailure, List<_i3.CityModel>>(
+          this,
+          Invocation.method(
+            #getCities,
+            [],
+          ),
+        )),
+      ) as _i8.Future<_i2.Either<_i3.SomeFailure, List<_i3.CityModel>>>);
 }

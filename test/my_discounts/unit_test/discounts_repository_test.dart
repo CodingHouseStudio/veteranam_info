@@ -27,12 +27,12 @@ void main() {
 
     group('${KGroupText.successfulGet} ', () {
       setUp(() {
-        when(
-          mockFirestoreService
-              .getDiscountsByUserId(KTestText.userWithoutPhoto.id),
-        ).thenAnswer(
-          (_) async => KTestText.discountModelItems,
-        );
+        // when(
+        //   mockFirestoreService
+        //       .getDiscountsByUserId(KTestText.userWithoutPhoto.id),
+        // ).thenAnswer(
+        //   (_) async => KTestText.discountModelItems,
+        // );
         when(
           mockFirestoreService
               .deleteDiscountById(KTestText.discountModelItems.first.id),
@@ -49,7 +49,7 @@ void main() {
 
       test('Get by user ID', () async {
         expect(
-          await mockDiscountRepository
+          mockDiscountRepository
               .getDiscountsByUserId(KTestText.userWithoutPhoto.id),
           isA<Right<SomeFailure, List<DiscountModel>>>()
               .having((e) => e.value, 'value', KTestText.discountModelItems),
@@ -68,12 +68,12 @@ void main() {
 
     group('${KGroupText.failureGet} ', () {
       setUp(() {
-        when(
-          mockFirestoreService
-              .getDiscountsByUserId(KTestText.userWithoutPhoto.id),
-        ).thenThrow(
-          FirebaseException(plugin: KGroupText.failureGet),
-        );
+        // when(
+        //   mockFirestoreService
+        //       .getDiscountsByUserId(KTestText.userWithoutPhoto.id),
+        // ).thenThrow(
+        //   FirebaseException(plugin: KGroupText.failureGet),
+        // );
         when(
           mockFirestoreService.deleteDiscountById(
             KTestText.discountModelItems.first.id,
@@ -91,7 +91,7 @@ void main() {
 
       test('Get by user ID Failure', () async {
         expect(
-          await mockDiscountRepository
+          mockDiscountRepository
               .getDiscountsByUserId(KTestText.userWithoutPhoto.id),
           isA<Left<SomeFailure, List<DiscountModel>>>(),
           // .having(

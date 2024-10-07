@@ -1,13 +1,13 @@
 import 'dart:async';
 import 'dart:math';
+
 import 'package:collection/collection.dart';
 import 'package:feedback/feedback.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart' show Uint8List, kIsWeb, kReleaseMode;
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/date_symbol_data_local.dart';
-import 'package:intl/intl.dart';
+import 'package:intl/intl.dart' show DateFormat;
 import 'package:veteranam/components/components.dart';
 import 'package:veteranam/shared/shared.dart';
 
@@ -42,16 +42,26 @@ extension ItemLoadedExtensions on int {
 }
 
 extension LocalizedDateTime on DateTime {
-  String toLocalDateString(BuildContext context) {
+  String toLocalDateString({
+    required BuildContext? context,
+    String? localeValue,
+    bool showDay = false,
+  }) {
     final locale = context
-        .read<AuthenticationBloc>()
-        .state
-        .userSetting
-        .locale
-        .value
-        .languageCode;
-    initializeDateFormatting(locale);
-    return DateFormat.yMMMM(locale).format(toLocal());
+            ?.read<AuthenticationBloc>()
+            .state
+            .userSetting
+            .locale
+            .value
+            .languageCode ??
+        localeValue ??
+        Language.ukrain;
+    // initializeDateFormatting(locale);
+    if (showDay) {
+      return DateFormat.yMMMMd(locale).format(toLocal());
+    } else {
+      return DateFormat.yMMMM(locale).format(toLocal());
+    }
   }
 }
 
@@ -78,9 +88,9 @@ extension DiscountModelLocation on DiscountModel {
 
   String _getMarkdownPhoneNumber(BuildContext context) =>
       '\n\n***${context.l10n.callForDetails}:***'
-      ' ${KPlatformConstants.isWebDesktop ? '***' : '['}'
+      ' ${PlatformEnum.isWebDesktop ? '***' : '['}'
       '$phoneNumber'
-      '${KPlatformConstants.isWebDesktop ? '***' : '](tel:'
+      '${PlatformEnum.isWebDesktop ? '***' : '](tel:'
           '${phoneNumber!.replaceAll('(', '').replaceAll(
                 ')',
                 '',
@@ -105,9 +115,19 @@ extension DiscountModelLocation on DiscountModel {
           if (location != null) ...location!,
         if (subLocation != null) ...subLocation!.getCardList(context),
       ];
+
+  String? get getLink => PlatformEnum.getPlatform.isIOS
+      ? category.contains('Медицина')
+          ? null
+          : directLink ?? link
+      : directLink ?? link;
 }
 
 extension StringExtension on String {
+  String customSubstring(int start, [int? end]) {
+    return substring(start, end != null ? min(end, length) : null);
+  }
+
   bool get isUrlValid {
     const urlPattern = r'(https?://[^\s]+)';
     final regex = RegExp(
@@ -215,16 +235,13 @@ extension StringExtension on String {
 
   int get _ukraineIndex => KAppText.ukrainianAlphabet.indexOf(this);
 
-  double getTextLength({
-    required double? width,
+  double getTextWidth({
     required TextStyle textStyle,
-    double? additional,
   }) {
-    if (width != null) return width;
-    final textLength =
-        length * (textStyle.fontSize! + textStyle.letterSpacing!) +
-            (additional ?? 0);
-    return textLength / KSize.kPixel2;
+    return TextPainter.computeWidth(
+      text: TextSpan(text: this, style: textStyle),
+      textDirection: TextDirection.ltr,
+    );
   }
 
   String? get getUserPlatform {
@@ -300,6 +317,18 @@ extension ContextExtensions on BuildContext {
       );
     }
   }
+
+  @visibleForTesting
+  static DateTime? textPieckerData;
+
+  Future<DateTime?> get getDate async =>
+      textPieckerData ??
+      showDatePicker(
+        context: this,
+        initialDate: ExtendedDateTime.current,
+        firstDate: ExtendedDateTime.current,
+        lastDate: DateTime(2026),
+      );
 }
 
 extension DiscountEnumExtensions on DiscountEnum {
@@ -561,5 +590,30 @@ extension UserExtensions on User? {
     } else {
       return true;
     }
+  }
+
+  String? get firstName => this?.name?.split(' ').first;
+
+  String? get lastName => this?.name?.split(' ').last;
+}
+
+// extension UserExtensions on User? {
+//   String? get firstName => this?.name?.split(' ').first;
+
+//   String? get lastName => this?.name?.split(' ').last;
+// }
+
+extension ProfileEnumExtensions on ProfileEnum {
+  String loadingMessage(BuildContext context) {
+    if (this == ProfileEnum.success) {
+      return context.l10n.dataIsUpdatedSuccess;
+    }
+    if (this == ProfileEnum.sendInProgress) {
+      return context.l10n.dataSendInProgress;
+    }
+    if (this == ProfileEnum.succesesUnmodified) {
+      return context.l10n.dataUnmodified;
+    }
+    return '';
   }
 }

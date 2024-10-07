@@ -15,7 +15,6 @@ abstract class KDimensions {
 
   static const leftCardPaddingMultiply = 0.5;
   static const respondPaddingMultiply = 0.1;
-  static const paddingMultiply = 0.1;
   static const daysBetweenFeedback = 7;
 
   static const doubleButtonAnimationDuration = 200;
@@ -42,9 +41,15 @@ abstract class KDimensions {
 
   // static const kUserRoleWidth = 0.3;
 
+  static const tenPercent = 0.1;
+
   static const fifteenPercent = 0.15;
 
   static const twentyPercent = 0.2;
 
   static const thirtyPercent = 0.3;
+
+  static const seventyPercent = 0.7;
+
+  static const sixtyPercent = 0.6;
 }

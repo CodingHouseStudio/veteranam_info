@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:veteranam/components/components.dart';
+import 'package:veteranam/components/work_employee/work_employee.dart';
 import 'package:veteranam/shared/shared.dart';
 
 part '../works_widget_list.dart';
@@ -45,7 +45,7 @@ class WorkEmployeeBody extends StatelessWidget {
         ],
         mainPadding: ({required isDesk, required maxWidth}) =>
             maxWidth.screenPadding(
-          precent: KDimensions.paddingMultiply,
+          precent: KDimensions.tenPercent,
           notUseHorizontal: isDesk,
           verticalPadding: KPadding.kPaddingSize56,
         ),

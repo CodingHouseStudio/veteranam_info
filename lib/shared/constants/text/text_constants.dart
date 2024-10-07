@@ -165,6 +165,7 @@ abstract class KMockText {
     expirationEN: 'It works all the time',
     locationEN: ['Kyiv'],
     status: DiscountState.published,
+    eligibility: ['Ветеранам'], eligibilityEN: ['Veterans'],
   );
   static final informationModel = InformationModel(
     id: '',
@@ -223,9 +224,12 @@ abstract class KAppText {
   static const String coffee = 'Buy me a Coffee';
   static const String cache = 'local cache';
   static const String server = 'server';
-  static const String site = 'https://veteranam.info';
+  static const String site = 'https://app.veteranam.info';
   static const String unknown = 'Unknown';
+  static const String eligibilityAll = 'Усім нище перечисленим';
+  static const String eligibilityAllEN = 'To all of the below-mentioned';
   static const String androidInstallUrl = 'market://details?id=$_mobAppId';
+  static const String nickname = 'Nickname';
   static const String iphoneInstallUrl =
       'https://apps.apple.com/app/id$_mobAppId';
   static const String _mobAppId = 'info.veteranam';

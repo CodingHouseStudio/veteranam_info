@@ -6,17 +6,22 @@ import '../../../test_dependency.dart';
 Future<void> profileCardLogOutHelper(
   WidgetTester tester,
 ) async {
+  await scrollingHelper(
+    tester: tester,
+    offset: KTestConstants.scrollingDown,
+  );
+
   expect(
-    find.byKey(KWidgetkeys.widget.profileCard.logOutButton),
+    find.byKey(KWidgetkeys.screen.profile.logOutButton),
     findsOneWidget,
   );
 
   await scrollingHelper(
     tester: tester,
-    itemKey: KWidgetkeys.widget.profileCard.logOutButton,
+    itemKey: KWidgetkeys.screen.profile.logOutButton,
   );
 
-  await tester.tap(find.byKey(KWidgetkeys.widget.profileCard.logOutButton));
+  await tester.tap(find.byKey(KWidgetkeys.screen.profile.logOutButton));
 
   await tester.pumpAndSettle();
 

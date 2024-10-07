@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:veteranam/components/components.dart';
+import 'package:veteranam/components/profile/profile.dart';
 import 'package:veteranam/shared/shared.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -7,8 +7,10 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ProfileBodyWidget(
-      key: KWidgetkeys.screen.profile.screen,
+    return ProfileBlocprovider(
+      childWidget: ProfileBodyWidget(
+        key: KWidgetkeys.screen.profile.screen,
+      ),
     );
   }
 }

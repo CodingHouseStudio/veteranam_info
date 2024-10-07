@@ -1,6 +1,6 @@
 name: veteranam
 description: veteran
-version: 0.0.4+53
+version: 0.0.5+59
 publish_to: none
 
 environment:
@@ -8,6 +8,7 @@ environment:
 
 dependencies:
   animated_text_kit: ^4.2.2
+  app_tracking_transparency: ^2.0.6
   bloc: ^8.1.4
   cached_network_image: ^3.4.0
   cloud_firestore: ^5.2.1

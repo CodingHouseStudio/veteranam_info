@@ -11,12 +11,39 @@ Future<void> discountsAddUncorectHelper({
 }) async {
   await discountsAddMainEnterHelper(
     tester: tester,
-    categoryText: KTestText.fieldEmpty,
-    cityText: KTestText.fieldEmpty,
-    periodText: KTestText.fieldEmpty,
+    titleText: KTestText.fieldEmpty,
+    linkText: KTestText.sendDiscountModel.discount.first.toString(),
+    discountsText: KTestText.sendDiscountModel.link,
+    eligibilityTap: false,
   );
 
   await discountsAddMainHelper(tester: tester);
+
+  await multiDropFieldRemoveHelper(tester);
+
+  await discountsAddMainEnterHelper(
+    tester: tester,
+    titleText: KTestText.sendDiscountModel.title,
+    linkText: KTestText.sendDiscountModel.link,
+    discountsText: KTestText.sendDiscountModel.discount.first.toString(),
+    eligibilityTap: true,
+    // periodText: KTestText.sendDiscountModel.expiration!,
+  );
+
+  await discountsAddMainHelper(tester: tester, hasField: false);
+
+  await discountsAddDetailHelper(tester: tester, checkHelper: true);
+
+  await discountsAddDetailEnterHelper(
+    tester: tester,
+    categoryText: KTestText.fieldEmpty,
+    cityText: KTestText.fieldEmpty,
+    // periodText: KTestText.fieldEmpty,
+    tapOnperiod: false,
+    tapIndefinitely: true,
+  );
+
+  await discountsAddDetailHelper(tester: tester);
 
   await scrollingHelper(
     tester: tester,
@@ -29,31 +56,10 @@ Future<void> discountsAddUncorectHelper({
     KTestText.field,
   );
 
-  await discountsAddMainEnterHelper(
+  await discountsAddDetailEnterHelper(
     tester: tester,
     categoryText: KTestText.sendDiscountModel.category.first,
     cityText: KTestText.sendDiscountModel.location!.first,
-    periodText: KTestText.sendDiscountModel.expiration!,
-  );
-
-  await discountsAddMainHelper(tester: tester, hasField: false);
-
-  await discountsAddDetailHelper(tester: tester, useDiscountsHelper: true);
-
-  await discountsAddDetailEnterHelper(
-    tester: tester,
-    titleText: KTestText.fieldEmpty,
-    linkText: KTestText.sendDiscountModel.discount.first.toString(),
-    discountsText: KTestText.sendDiscountModel.link,
-  );
-
-  await discountsAddDetailHelper(tester: tester);
-
-  await discountsAddDetailEnterHelper(
-    tester: tester,
-    titleText: KTestText.sendDiscountModel.title,
-    linkText: KTestText.sendDiscountModel.link,
-    discountsText: KTestText.sendDiscountModel.discount.first.toString(),
   );
 
   await discountsAddDetailHelper(tester: tester, hasField: false);

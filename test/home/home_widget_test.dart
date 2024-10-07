@@ -26,7 +26,7 @@ void main() {
     setUp(() {
       ExtendedDateTime.current = KTestText.dateTime;
       ExtendedDateTime.id = KTestText.feedbackModel.id;
-      KPlatformConstants.isWebDesktop = true;
+      PlatformEnum.isWebDesktop = true;
       mockFaqRepository = MockIFaqRepository();
       mockAuthenticationRepository = MockAuthenticationRepository();
       mockUrlRepository = MockIUrlRepository();
@@ -52,7 +52,7 @@ void main() {
       when(mockAuthenticationRepository.currentUserSetting).thenAnswer(
         (realInvocation) => UserSetting.empty,
       );
-      when(mockAuthenticationRepository.isAnonymouslyOrEmty()).thenAnswer(
+      when(mockAuthenticationRepository.isAnonymouslyOrEmty).thenAnswer(
         (realInvocation) => true,
       );
       when(
@@ -193,7 +193,7 @@ void main() {
         );
       });
 
-      testWidgets('${KGroupText.intial} ', (tester) async {
+      testWidgets('${KGroupText.initial} ', (tester) async {
         await homePumpAppHelper(
           // mockFeedbackRepository: mockFeedbackRepository,
           mockFaqRepository: mockFaqRepository,
@@ -227,7 +227,7 @@ void main() {
       group('${KGroupText.goRouter} ', () {
         late MockGoRouter mockGoRouter;
         setUp(() => mockGoRouter = MockGoRouter());
-        testWidgets('${KGroupText.intial} ', (tester) async {
+        testWidgets('${KGroupText.initial} ', (tester) async {
           await homePumpAppHelper(
             // mockFeedbackRepository: mockFeedbackRepository,
             mockFaqRepository: mockFaqRepository,
@@ -295,11 +295,12 @@ void main() {
           });
           group("user isn't anonymously", () {
             setUp(
-              () => when(mockAuthenticationRepository.isAnonymouslyOrEmty())
+              () => when(mockAuthenticationRepository.isAnonymouslyOrEmty)
                   .thenAnswer(
                 (realInvocation) => false,
               ),
             );
+
             testWidgets('${KRoute.profile.name} ', (tester) async {
               await homePumpAppHelper(
                 // mockFeedbackRepository: mockFeedbackRepository,
@@ -448,12 +449,15 @@ void main() {
           group(
             'User authentication',
             () {
-              setUp(
-                () => when(mockAuthenticationRepository.status).thenAnswer(
-                  (realInvocation) =>
-                      Stream.value(AuthenticationStatus.authenticated),
-                ),
-              );
+              setUp(() {
+                when(mockAuthenticationRepository.isAnonymouslyOrEmty)
+                    .thenAnswer(
+                  (realInvocation) => false,
+                );
+                when(mockAuthenticationRepository.user).thenAnswer(
+                  (realInvocation) => Stream.value(KTestText.userWithoutPhoto),
+                );
+              });
               testWidgets('${KRoute.profile.name} ', (tester) async {
                 await homePumpAppHelper(
                   tester: tester,

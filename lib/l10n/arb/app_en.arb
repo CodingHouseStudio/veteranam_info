@@ -103,6 +103,11 @@
     "examples": "Text for the button that appears on the Profile page and the title for the Saves page.",
     "description": "The button used to navigate to the Saves page."
   },
+  "myDiscounts": "My Discounts",
+  "@myDiscounts": {
+    "examples": "Text for the button that appears on the Profile page and the title for the My publications page.",
+    "description": "The button used to navigate to the My Publications page."
+  },
   "profileDetails": "You can add/edit personal information, manage anonymous setting, and find your saved content.",
   "@profileDetails": {
     "examples": "Profile page subtitle text"
@@ -298,6 +303,10 @@
   "@thankYou": {
     "examples": "Part of the text for the title on the Home page"
   },
+  "businessDashboard": "Dashboard",
+  "@businessDashboard": {
+    "examples": "Part of the text for the title on the Business Dashboard page"
+  },
   "feedbackBoxSubtitle": "We've received your message and will respond soon.",
   "@feedbackBoxSubtitle": {
     "examples": "The title text of the FeedbackBox widget on the Feedback page when a user submits a message."
@@ -337,6 +346,10 @@
   "thankYouDescription": "Please note! To access some services, you may need to confirm your identity.",
   "@thankYouDescription": {
     "examples": "The title text on the Thank You page."
+  },
+  "businessDashboardDescription": "Hello! On this page you can manage your discounts.",
+  "@businessDashboardescription": {
+    "examples": "The title text on the Business Dashboard page."
   },
   "mainScreen": "Home",
   "@mainScreen": {
@@ -1197,7 +1210,7 @@
   "@discountDescription": {
     "examples": "Text on the Discount Add page for the description field"
   },
-  "linkDescription": "Insert a link to the page where more information about the discount can be found",
+  "linkDescription": "Insert a link to the page where more information about the discount can be found.Providing link to the webpage with discount will increase speed verification of your discount. We may be reaching out to you with additional questions to confirm entered information is accurate.",
   "@linkDescription": {
     "examples": "Text on the Discount Add page for the link field (description)"
   },
@@ -1219,10 +1232,76 @@
     "examples": "Text for the button on the Discount Add page.",
     "description": "The button is used to return to the previous steps of the form."
   },
+  "eligibility": "Who is eligible",
+  "@eligibility": {
+    "examples": "Text on the Discount Add page for the 'Who is eligible' field",
+    "description": "The field is used to enter the categories of people who are eligible for discounts (can be multiple)"
+  },
+  "eligibilityDescription": "Select one or more options from the list",
+  "@eligibilityDescription": {
+    "examples": "Text on the Discount Add page for the 'Who is eligible' field (description)"
+  },
+  "combatantsEligibility": "Combatants",
+  "@combatantsEligibility": {
+    "examples": "Text on the Discount Add page for the 'Who is eligible' field, one of the options."
+  },
+  "militaryEligibility": "Military Personnel",
+  "@militaryEligibility": {
+    "examples": "Text on the Discount Add page for the 'Who is eligible' field, one of the options."
+  },
+  "fallenFamilyEligibility": "Family Members of the Deceased",
+  "@fallenFamilyEligibility": {
+    "examples": "Text on the Discount Add page for the 'Who is eligible' field, one of the options."
+  },
+  "disabledWarEligibility": "Persons with Disabilities Due to War",
+  "@disabledWarEligibility": {
+    "examples": "Text on the Discount Add page for the 'Who is eligible' field, one of the options."
+  },
+  "dsnsEligibility": "Emergency Service Employees",
+  "@dsnsEligibility": {
+    "examples": "Text on the Discount Add page for the 'Who is eligible' field, one of the options."
+  },
+  "policeEligibility": "Police",
+  "@policeEligibility": {
+    "examples": "Text on the Discount Add page for the 'Who is eligible' field, one of the options."
+  },
+  "idpEligibility": "Internally Displaced Persons",
+  "@idpEligibility": {
+    "examples": "Text on the Discount Add page for the 'Who is eligible' field, one of the options."
+  },
+  "allOfBelowMentioned": "To all of the below-mentioned",
+  "@allOfBelowMentioned": {
+    "examples": "Text on the Discount Add page for the 'Who is eligible' field, one of the options."
+  },
   "asBusiness": "as a BUSINESS user",
   "@asBusiness": {
     "examples": "Text for the business login button on the UserRole page.",
     "description": "Business login button on the UserRole page"
+  },
+  "myProfileTitle": "My Profile",
+  "@myProfileTitle": {
+    "examples": "Profile page header."
+  },
+  "saveChangesProfile": "Save Changes",
+  "@saveChangesProfile": {
+    "examples": "Text for the button that is on the Profile page.",
+    "description": "The button is used to save user changes"
+  },
+  "dataEditing": "Data Editing",
+  "@dataEditing": {
+    "examples": "Heading on Profile Card."
+  },
+  "dataIsUpdatedSuccess": "Your data has been successfully updated!",
+  "@dataIsUpdatedSuccess": {
+    "examples": "Message after the user has successfully updated their data."
+  },
+  "dataSendInProgress": "Changes are being saved, please wait...",
+  "@dataSendInProgress": {
+    "examples": "Message while changes are being saved."
+  },
+  "dataUnmodified": "No changes were made because the data is identical.",
+  "@dataUnmodified": {
+    "examples": "Message when no changes were made to the data."
   },
   "publishDiscount": "Publish your first discount",
   "@publishDiscount": {

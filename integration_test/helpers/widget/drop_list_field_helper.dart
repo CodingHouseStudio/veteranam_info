@@ -7,15 +7,15 @@ import '../../test_dependency.dart';
 Future<void> dropListFieldBoxHelper({
   required WidgetTester tester,
   required String text,
-  required Key widgetKey,
+  required Key fieldKey,
 }) async {
   expect(
-    find.byKey(widgetKey),
+    find.byKey(KWidgetkeys.widget.dropListField.widget),
     findsOneWidget,
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.dropListField.field),
+    fieldKey,
     findsOneWidget,
   );
 
@@ -30,12 +30,12 @@ Future<void> dropListFieldBoxHelper({
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.dropListField.trailing),
+    find.byKey(KWidgetkeys.widget.dropListField.icon),
     findsOneWidget,
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.dropListField.closeIcon),
+    find.byKey(KWidgetkeys.widget.dropListField.activeIcon),
     findsNothing,
   );
 
@@ -54,11 +54,11 @@ Future<void> dropListFieldBoxHelper({
 
   await scrollingHelperInt(
     tester: tester,
-    itemKey: KWidgetkeys.widget.dropListField.field,
+    itemKey: fieldKey,
   );
 
   await tester.tap(
-    find.byKey(KWidgetkeys.widget.dropListField.field),
+    find.byKey(fieldKey),
   );
 
   await tester.pumpAndSettle();
@@ -74,12 +74,12 @@ Future<void> dropListFieldBoxHelper({
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.dropListField.closeIcon),
+    find.byKey(KWidgetkeys.widget.dropListField.activeIcon),
     findsOneWidget,
   );
 
   expect(
-    find.byKey(KWidgetkeys.widget.dropListField.trailing),
+    find.byKey(KWidgetkeys.widget.dropListField.icon),
     findsNothing,
   );
 
@@ -111,33 +111,33 @@ Future<void> dropListFieldBoxHelper({
   if (textWidget.data != null) return;
   expect(
     find.descendant(
-      of: find.byKey(widgetKey),
+      of: find.byKey(KWidgetkeys.widget.dropListField.widget),
       matching: find.text(textWidget.data!),
     ),
     findsOneWidget,
   );
 
   await tester.tap(
-    find.byKey(KWidgetkeys.widget.dropListField.field),
+    find.byKey(fieldKey),
   );
   await tester.pumpAndSettle();
 
   await tester.enterText(
-    find.byKey(KWidgetkeys.widget.dropListField.field),
+    find.byKey(fieldKey),
     text,
   );
   await tester.pumpAndSettle();
 
   expect(
     find.descendant(
-      of: find.byKey(widgetKey),
+      of: find.byKey(KWidgetkeys.widget.dropListField.widget),
       matching: find.text(text),
     ),
     findsWidgets,
   );
 
   await tester.enterText(
-    find.byKey(KWidgetkeys.widget.dropListField.field),
+    find.byKey(fieldKey),
     '${textWidget.data}$text',
   );
 

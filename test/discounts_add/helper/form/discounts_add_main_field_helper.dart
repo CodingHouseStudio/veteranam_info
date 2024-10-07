@@ -12,29 +12,27 @@ Future<void> discountsAddMainHelper({
   if (hasField) {
     await scrollingHelper(
       tester: tester,
-      itemKey: KWidgetkeys.screen.discountsAdd.categoryField,
+      itemKey: KWidgetkeys.screen.discountsAdd.titleField,
     );
   }
 
   expect(
-    find.byKey(KWidgetkeys.screen.discountsAdd.categoryField),
-    matcher,
-  );
-
-  if (hasField) {
-    await dropListFieldHelper(
-      tester: tester,
-      text: KTestText.field,
-    );
-  }
-
-  expect(
-    find.byKey(KWidgetkeys.screen.discountsAdd.cityField),
+    find.byKey(KWidgetkeys.screen.discountsAdd.titleField),
     matcher,
   );
 
   expect(
-    find.byKey(KWidgetkeys.screen.discountsAdd.periodField),
+    find.byKey(KWidgetkeys.screen.discountsAdd.discountsField),
+    matcher,
+  );
+
+  expect(
+    find.byKey(KWidgetkeys.screen.discountsAdd.eligibilityField),
+    matcher,
+  );
+
+  expect(
+    find.byKey(KWidgetkeys.screen.discountsAdd.linkField),
     matcher,
   );
 }

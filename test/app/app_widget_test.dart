@@ -36,8 +36,8 @@ void main() {
       when(mockAuthenticationRepository.userSetting).thenAnswer(
         (realInvocation) => Stream.value(KTestText.userSetting),
       );
-      when(mockAuthenticationRepository.status).thenAnswer(
-        (realInvocation) => Stream.value(AuthenticationStatus.anonymous),
+      when(mockAuthenticationRepository.user).thenAnswer(
+        (realInvocation) => Stream.value(KTestText.userAnonymous),
       );
       when(mockAuthenticationRepository.currentUser).thenAnswer(
         (realInvocation) => User.empty,
@@ -89,7 +89,7 @@ void main() {
 
     group('Mobile', () {
       setUp(() => Config.isWeb = false);
-      testWidgets('${KGroupText.intial} ', (tester) async {
+      testWidgets('${KGroupText.initial} ', (tester) async {
         await appPumpAppHelper(
           mockDiscountRepository: mockDiscountRepository,
           mockAppAuthenticationRepository: mockAppAuthenticationRepository,
@@ -106,7 +106,7 @@ void main() {
 
     group('Web', () {
       setUp(() => Config.isWeb = true);
-      testWidgets('${KGroupText.intial} ', (tester) async {
+      testWidgets('${KGroupText.initial} ', (tester) async {
         await appPumpAppHelper(
           mockDiscountRepository: mockDiscountRepository,
           mockAppAuthenticationRepository: mockAppAuthenticationRepository,

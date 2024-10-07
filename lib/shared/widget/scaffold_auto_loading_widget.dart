@@ -50,7 +50,7 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
     super.initState();
 
     _scrollController = ScrollController();
-    if (!KPlatformConstants.isWebDesktop) {
+    if (!PlatformEnum.isWebDesktop) {
       _scrollController.addListener(_onScroll);
     }
   }
@@ -81,7 +81,7 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
                 widget.emptyWidget!.call(isDesk: isDesk)
               else ...[
                 if (widget.loadingStatus != LoadingStatus.listLoadedFull &&
-                    KPlatformConstants.isWebDesktop &&
+                    PlatformEnum.isWebDesktop &&
                     !(widget.cardListIsEmpty ?? false) &&
                     widget.loadingStatus != LoadingStatus.loading)
                   LoadingButtonWidget(
@@ -293,7 +293,7 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
 
   @override
   void dispose() {
-    if (KPlatformConstants.isWebDesktop) {
+    if (PlatformEnum.isWebDesktop) {
       _scrollController.dispose();
     } else {
       _scrollController

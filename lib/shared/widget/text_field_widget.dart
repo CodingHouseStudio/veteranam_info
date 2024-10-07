@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:veteranam/shared/shared.dart';
 
 class TextFieldWidget extends StatefulWidget {
@@ -30,14 +29,20 @@ class TextFieldWidget extends StatefulWidget {
     this.errorMaxLines,
     this.readOnly,
     this.disposeFocusNode = true,
-    this.expands,
+    this.expands = false,
     this.labelText,
     this.minLines,
     this.hintStyle,
     // this.text,
     this.suffixIconPadding,
-    this.inputFormatterList,
     this.showErrorText,
+    this.labelTextStyle,
+    this.textStyle,
+    this.cursor,
+    this.disabledBorder,
+    this.floatingLabelBehavior,
+    this.borderHoverColor = AppColors.materialThemeRefNeutralNeutral40,
+    this.description,
   });
   final Key widgetKey;
   final TextAlign? textAlign;
@@ -59,19 +64,25 @@ class TextFieldWidget extends StatefulWidget {
   final void Function(String)? onSubmitted;
   final bool? enabled;
   final FocusNode? focusNode;
-  final InputBorder? enabledBorder;
+  final OutlineInputBorder? enabledBorder;
+  final OutlineInputBorder? disabledBorder;
   final InputBorder? focusedBorder;
   final int? errorMaxLines;
   final bool? readOnly;
   final bool disposeFocusNode;
-  final bool? expands;
+  final bool expands;
   final String? labelText;
   final TextStyle? hintStyle;
   final bool isDesk;
   // final String? text;
   final double? suffixIconPadding;
-  final List<TextInputFormatter>? inputFormatterList;
   final bool? showErrorText;
+  final TextStyle? labelTextStyle;
+  final TextStyle? textStyle;
+  final MouseCursor? cursor;
+  final FloatingLabelBehavior? floatingLabelBehavior;
+  final Color? borderHoverColor;
+  final String? description;
 
   @override
   State<TextFieldWidget> createState() => _TextFieldWidgetState();
@@ -83,9 +94,6 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
 
   @override
   void initState() {
-    // if (widget.text != null) {
-    //   controller = TextEditingController(text: widget.text);
-    // }
     isHovered = false;
     super.initState();
   }
@@ -105,7 +113,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
       },
       child: TextField(
         key: widget.widgetKey,
-        expands: widget.expands ?? false,
+        expands: widget.expands,
         focusNode: widget.focusNode,
         enabled: widget.enabled,
         readOnly: widget.readOnly ?? false,
@@ -115,15 +123,15 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
         autocorrect: !widget.obscureText,
         controller: //controller ??
             widget.controller,
-        maxLines: widget.expands == null ? widget.maxLines ?? 1 : null,
+        maxLines: widget.expands ? null : widget.maxLines ?? 1,
+        minLines: widget.expands ? null : widget.minLines ?? 1,
         maxLength: widget.maxLength,
         keyboardType: widget.keyboardType ?? TextInputType.text,
         textInputAction: TextInputAction.done,
         textAlign: widget.textAlign ?? TextAlign.start,
-        style: AppTextStyle.materialThemeTitleMedium,
+        style: widget.textStyle ?? AppTextStyle.materialThemeTitleMedium,
         // context.theme.textTheme.headlineSmall,
-        inputFormatters: widget.inputFormatterList,
-        onChanged: widget.onChanged,
+        onChanged: widget.onChanged, mouseCursor: widget.cursor,
         decoration: KWidgetTheme.inputDecoration.copyWith(
           hintStyle: widget.hintStyle,
           contentPadding: widget.contentPadding ??
@@ -135,25 +143,32 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
                   : const EdgeInsets.all(KPadding.kPaddingSize16)),
           labelText: widget.labelText,
           border: widget.border,
-          enabledBorder: KWidgetTheme.outlineInputBorderEnabled.copyWith(
-            borderSide: isHovered
-                ? const BorderSide(
-                    color: AppColors.materialThemeRefNeutralNeutral40,
-                  )
-                : null,
-          ),
+          enabledBorder: widget.enabledBorder ??
+              KWidgetTheme.outlineInputBorderEnabled.copyWith(
+                borderSide: isHovered && widget.borderHoverColor != null
+                    ? BorderSide(
+                        color: widget.borderHoverColor!,
+                      )
+                    : null,
+              ),
           focusedErrorBorder: widget.border,
           fillColor: widget.fillColor,
           hintText: widget.hintText,
           errorText: widget.showErrorText ?? true ? widget.errorText : null,
           suffixIcon: Padding(
-            padding: EdgeInsets.only(
-              right: widget.suffixIconPadding ?? KPadding.kPaddingSize4,
+            padding: EdgeInsets.symmetric(
+              horizontal: widget.suffixIconPadding ?? KPadding.kPaddingSize4,
             ),
             child: widget.suffixIcon,
           ),
           prefixIcon: widget.prefixIcon,
           errorMaxLines: widget.errorMaxLines,
+          labelStyle: widget.labelTextStyle,
+          disabledBorder: widget.disabledBorder,
+          floatingLabelBehavior: widget.floatingLabelBehavior,
+          helperText: widget.description,
+          helperStyle: AppTextStyle.materialThemeBodySmall,
+          helperMaxLines: KMinMaxSize.messageMinLines,
         ),
       ),
     );
@@ -164,9 +179,6 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
     if (widget.disposeFocusNode) {
       widget.focusNode?.dispose();
     }
-    // if (widget.text != null) {
-    //   controller?.dispose();
-    // }
     super.dispose();
   }
 }

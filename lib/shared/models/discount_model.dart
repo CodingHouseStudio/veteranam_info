@@ -17,8 +17,6 @@ class DiscountModel with _$DiscountModel {
     required List<String>? categoryEN,
     required List<String>? subcategory,
     required List<String>? subcategoryEN,
-    // required String eligibility,
-    // required String eligibilityEN,
     required String description,
     required String? descriptionEN,
     required String? requirements,
@@ -27,6 +25,8 @@ class DiscountModel with _$DiscountModel {
     required String? territoryEN,
     required DateTime dateVerified,
     required String link,
+    List<String>? eligibility,
+    List<String>? eligibilityEN,
     String? exclusions,
     String? exclusionsEN,
     String? phoneNumber,
@@ -99,8 +99,8 @@ abstract class DiscountModelJsonField {
   static const categoryEN = 'categoryEN';
   static const subcategory = 'subcategory';
   static const subcategoryEN = 'subcategoryEN';
-  // static const eligibility = 'eligibility';
-  // static const eligibilityEN = 'eligibilityEN';
+  static const eligibility = 'eligibility';
+  static const eligibilityEN = 'eligibilityEN';
   static const description = 'description';
   static const descriptionEN = 'descriptionEN';
   static const requirements = 'requirements';

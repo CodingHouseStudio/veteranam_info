@@ -41,7 +41,7 @@ abstract class KGroupText {
   static const failure = 'Failure';
   static const firebaseFailure = 'Firebase Failure';
   static const failureSend = 'Failure set';
-  static const intial = 'renders initial';
+  static const initial = 'renders initial';
   static const network = 'Reload network';
   static const offlineNetwork = 'offline network banner';
   static const goRouter = 'Mock Go Router';
@@ -69,8 +69,14 @@ abstract class KGroupText {
 abstract class KTestText {
   static const filter = 'filter_test';
   static const key = 'key_test';
+  static const nickname = 'nickname';
 
-  static const usernameCorrect = 'test_username';
+  static const usernameCorrect = 'testUsername';
+  static const nameCorrect = 'testName';
+  static const nameIncorrect = 'testName**';
+  static const surnameCorrect = 'testSurname';
+  static const nicknameCorrect = 'testNickname';
+  static const nicknameIncorrect = 'test@Nickname!';
   static const passwordCorrect = 'test_Password1';
   static const passwordWrong = 'test_Password1_wrong';
   static const usernameEmpty = '';
@@ -97,12 +103,14 @@ abstract class KTestText {
   static const version = '0.5.0';
   static const oldVersion = '0.2.0';
 
+  static const developerEmail = 'developer@codinghouse.biz';
+
   static final questionModelItems = <QuestionModel>[
     KMockText.questionModel,
   ];
 
   static final workModelItems = <WorkModel>[
-    for (var i = 0; i < 50; i++)
+    for (var i = 0; i < _items; i++)
       const WorkModel(
         id: '1',
         title: KMockText.workTitle,
@@ -140,6 +148,33 @@ abstract class KTestText {
     photo: image,
   );
 
+  static const userAnonymous = User(
+    id: '1',
+  );
+
+  static const profileUser = User(
+    id: '1',
+    email: userEmail,
+    name: '$nameCorrect $surnameCorrect',
+    phoneNumber: 'test_phone_number',
+    photo: image,
+  );
+
+  static const profileUserWithoutPhoto = User(
+    id: '1',
+    email: userEmail,
+    name: '$nameCorrect $surnameCorrect',
+    phoneNumber: 'test_phone_number',
+  );
+
+  static const profileIncorrectUser = User(
+    id: '1',
+    email: userEmail,
+    name: '$nameIncorrect $surnameCorrect',
+    phoneNumber: 'test_phone_number',
+    photo: image,
+  );
+
   static const image = 'test';
 
   static const userWithoutPhoto = User(
@@ -164,6 +199,16 @@ abstract class KTestText {
     locale: Language.english,
     roleIsConfirmed: true,
     devicesInfo: [deviceInfoModel],
+    nickname: nicknameCorrect,
+  );
+
+  static final userSettingModelIncorrect = UserSetting(
+    id: '1',
+    userRole: UserRole.civilian,
+    locale: Language.english,
+    roleIsConfirmed: true,
+    devicesInfo: [deviceInfoModel],
+    nickname: nicknameIncorrect,
   );
   static final deviceInfoModel = DeviceInfoModel(
     deviceId: deviceId,
@@ -198,11 +243,15 @@ abstract class KTestText {
     name: downloadURL,
     ref: downloadURL,
   );
+  static const translateModel = TranslateModel(
+    uk: 'тест',
+    en: 'text',
+  );
 
   static final feedbackModel = FeedbackModel(
     id: '',
     guestId: user.id,
-    guestName: field,
+    guestName: nameCorrect,
     email: userEmail,
     timestamp: dateTime,
     message: field,
@@ -217,12 +266,13 @@ abstract class KTestText {
     image: imageModel,
   );
   static final dateTime = DateTime(2024, 4, 12);
+  static final previousDateTime = DateTime(2024, 3, 12);
   static final dateTimeId = DateTime(0, 0, 0, 0, 1, 1, 1, 1);
   static const downloadURL = 'test_URL.test';
   static const id = '1';
 
   static final discountModelItems = <DiscountModel>[
-    for (var i = 0; i < 50; i++)
+    for (var i = 0; i < _items; i++)
       KMockText.discountModel.copyWith(
         id: i.toString(),
         userId: i.toString(),
@@ -238,6 +288,23 @@ abstract class KTestText {
       ),
   ];
 
+  static final cityModelItems = <CityModel>[
+    for (var i = 0; i < 5; i++)
+      CityModel(
+        id: i.toString(),
+        name: i == 0
+            ? translateModel
+            : TranslateModel(
+                uk: KMockText.discountModel.location!.first,
+                en: KMockText.discountModel.locationEN!.first,
+              ),
+        region: TranslateModel(
+          uk: KMockText.discountModel.location!.last,
+          en: KMockText.discountModel.locationEN!.last,
+        ),
+      ),
+  ];
+
   static final sendDiscountModel = discountModelItems.first.copyWith(
     directLink: null,
     additionalDetails: null,
@@ -249,12 +316,21 @@ abstract class KTestText {
     userPhoto: null,
     locationEN: null,
     expirationEN: null,
-    additionalDetailsEN: null, companyEN: null,
-    phoneNumber: null, categoryEN: null, descriptionEN: null,
-    exclusionsEN: null, requirementsEN: null, requirements: null,
+    additionalDetailsEN: null,
+    companyEN: null,
+    exclusions: DateFieldModel.dirty(dateTime).getString(Language.ukrain),
+    exclusionsEN: DateFieldModel.dirty(dateTime).getString(Language.english),
+    phoneNumber: null,
+    categoryEN: null,
+    descriptionEN: null,
+    requirementsEN: null,
+    requirements: null,
     territoryEN: null,
-    titleEN: null, status: DiscountState.isNew, subcategory: null,
+    titleEN: null,
+    status: DiscountState.isNew,
+    subcategory: null,
     subcategoryEN: null,
+    dateVerified: previousDateTime,
   );
 
   static final userDiscountModelItems = <DiscountModel>[
@@ -276,7 +352,7 @@ abstract class KTestText {
   ];
 
   static final discountModelItemsModify = <DiscountModel>[
-    for (var i = 0; i < 50; i++)
+    for (var i = 0; i < _items; i++)
       KMockText.discountModel.copyWith(
         company: i == 0 ? null : KMockText.discountModel.company,
         expiration: i == 0 ? null : KMockText.discountModel.expiration,
@@ -527,6 +603,7 @@ abstract class KScreenBlocName {
   static const mobFaq = 'Mob FAQ Screen';
   static const userRole = 'User Role Screen';
   static const discountsAdd = 'Discounts Add Screen';
+  static const businessDashboard = 'Business Dashboard Screen';
 
   static const authenticationServices = 'Authentication Services';
   static const appRepository = 'App';

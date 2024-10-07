@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:veteranam/components/components.dart';
+import 'package:veteranam/components/error/error.dart';
 import 'package:veteranam/shared/shared.dart';
 
 class ErrorScreen extends StatelessWidget {

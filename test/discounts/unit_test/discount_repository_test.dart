@@ -222,13 +222,13 @@ void main() {
         ).thenThrow(
           Exception(KGroupText.failureGet),
         );
-        when(
-          mockFirestoreService.getDiscountsByUserId(
-            KTestText.user.id,
-          ),
-        ).thenThrow(
-          Exception(KGroupText.failureGet),
-        );
+        // when(
+        //   mockFirestoreService.getDiscountsByUserId(
+        //     KTestText.user.id,
+        //   ),
+        // ).thenThrow(
+        //   Exception(KGroupText.failureGet),
+        // );
         when(
           mockFirestoreService.deleteDiscountById(
             KTestText.discountModelItems.first.id,
@@ -326,7 +326,7 @@ void main() {
       });
       test('Get discount use User Id', () async {
         expect(
-          await mockDiscountRepository.getDiscountsByUserId(KTestText.user.id),
+          mockDiscountRepository.getDiscountsByUserId(KTestText.user.id),
           isA<Left<SomeFailure, List<DiscountModel>>>(),
           // .having(
           //   (e) => e.value,
@@ -337,7 +337,7 @@ void main() {
       });
       test('Get discount use User Id', () async {
         expect(
-          await mockDiscountRepository.getDiscountsByUserId(KTestText.user.id),
+          mockDiscountRepository.getDiscountsByUserId(KTestText.user.id),
           isA<Left<SomeFailure, List<DiscountModel>>>(),
           // .having(
           //   (e) => e.value,

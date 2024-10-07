@@ -24,7 +24,7 @@ void main() {
         when(
           mockAppAuthenticationRepository.logInAnonymously(),
         ).thenAnswer(
-          (_) async => const Right(true),
+          (_) async => const Right(KTestText.userAnonymous),
         );
         when(
           mockAppAuthenticationRepository.logInWithEmailAndPassword(
@@ -32,7 +32,7 @@ void main() {
             password: KTestText.passwordCorrect,
           ),
         ).thenAnswer(
-          (_) async => const Right(true),
+          (_) async => const Right(KTestText.user),
         );
         when(
           mockAppAuthenticationRepository.signUp(
@@ -40,13 +40,13 @@ void main() {
             password: KTestText.passwordCorrect,
           ),
         ).thenAnswer(
-          (_) async => const Right(true),
+          (_) async => const Right(KTestText.user),
         );
         when(mockAppAuthenticationRepository.signUpWithGoogle()).thenAnswer(
-          (_) async => const Right(true),
+          (_) async => const Right(KTestText.user),
         );
         when(mockAppAuthenticationRepository.signUpWithFacebook()).thenAnswer(
-          (_) async => const Right(true),
+          (_) async => const Right(KTestText.user),
         );
         when(mockAppAuthenticationRepository.currentUserSetting).thenAnswer(
           (_) => const UserSetting(id: KTestText.field),
@@ -80,12 +80,23 @@ void main() {
           (_) async => const Right(true),
         );
         when(
-          mockAppAuthenticationRepository.isAnonymously(),
+          mockAppAuthenticationRepository.isAnonymously,
         ).thenAnswer(
           (_) => false,
         );
         when(
           mockAppAuthenticationRepository.createFcmUserSetting(),
+        ).thenAnswer(
+          (_) async => const Right(true),
+        );
+        // when(mockAppAuthenticationRepository.currentUserSetting).thenAnswer(
+        //   (_) => KTestText.userSettingModel,
+        // );
+        when(
+          mockAppAuthenticationRepository.updateUserData(
+            user: KTestText.profileUser,
+            image: KTestText.imageModels,
+          ),
         ).thenAnswer(
           (_) async => const Right(true),
         );
@@ -167,14 +178,59 @@ void main() {
       });
       test('Is Anonymously', () async {
         expect(
-          authenticationRepository.isAnonymously(),
+          authenticationRepository.isAnonymously,
           false,
         );
       });
       test('Is Anonymously Or Emty', () async {
         expect(
-          authenticationRepository.isAnonymouslyOrEmty(),
+          authenticationRepository.isAnonymouslyOrEmty,
           true,
+        );
+      });
+      test('Update user data', () async {
+        when(
+          mockAppAuthenticationRepository.updateUserSetting(
+            const UserSetting(
+              id: KTestText.field,
+              nickname: KTestText.nicknameCorrect,
+            ),
+          ),
+        ).thenAnswer(
+          (_) async => const Right(true),
+        );
+        expect(
+          await authenticationRepository.updateUserData(
+            user: KTestText.profileUser,
+            image: KTestText.imageModels,
+            nickname: KTestText.nicknameCorrect,
+          ),
+          isA<Right<SomeFailure, bool>>()
+              .having((e) => e.value, 'value', isTrue),
+        );
+      });
+      test('Update data unmodify data', () async {
+        expect(
+          await authenticationRepository.updateUserData(
+            user: User.empty,
+            image: null,
+            nickname: null,
+          ),
+          isA<Right<SomeFailure, bool>>()
+              .having((e) => e.value, 'value', isFalse),
+        );
+      });
+      test('Update user settings', () async {
+        when(mockAppAuthenticationRepository.currentUserSetting).thenAnswer(
+          (_) => KTestText.userSettingModel,
+        );
+
+        expect(
+          await authenticationRepository.updateUserSetting(
+            userSetting: KTestText.userSetting,
+          ),
+          isA<Right<SomeFailure, bool>>()
+              .having((e) => e.value, 'value', isTrue),
         );
       });
     });
@@ -221,13 +277,24 @@ void main() {
         );
         when(
           mockAppAuthenticationRepository.updateUserSetting(
-            KTestText.userSetting,
+            KTestText.userSettingModel,
           ),
         ).thenAnswer(
           (_) async => Left(SomeFailure.serverError(error: null)),
         );
         when(
           mockAppAuthenticationRepository.deleteUser(),
+        ).thenAnswer(
+          (_) async => Left(SomeFailure.serverError(error: null)),
+        );
+        when(mockAppAuthenticationRepository.currentUserSetting).thenAnswer(
+          (_) => KTestText.userSettingModelIncorrect,
+        );
+        when(
+          mockAppAuthenticationRepository.updateUserData(
+            user: KTestText.profileUser,
+            image: KTestText.imageModels,
+          ),
         ).thenAnswer(
           (_) async => Left(SomeFailure.serverError(error: null)),
         );
@@ -299,7 +366,7 @@ void main() {
       test('Update User Setting', () async {
         expect(
           await authenticationRepository.updateUserSetting(
-            userSetting: KTestText.userSetting,
+            userSetting: KTestText.userSettingModel,
           ),
           isA<Left<SomeFailure, bool>>(),
           // .having(
@@ -318,6 +385,26 @@ void main() {
           //   'value',
           //   SomeFailure.serverError(error: null),
           // ),
+        );
+      });
+      test('Update user data', () async {
+        when(
+          mockAppAuthenticationRepository.updateUserSetting(
+            const UserSetting(
+              id: KTestText.field,
+              nickname: KTestText.nicknameCorrect,
+            ),
+          ),
+        ).thenAnswer(
+          (_) async => Left(SomeFailure.serverError(error: null)),
+        );
+        expect(
+          await authenticationRepository.updateUserData(
+            user: KTestText.profileUser,
+            image: KTestText.imageModels,
+            nickname: KTestText.nicknameCorrect,
+          ),
+          isA<Left<SomeFailure, bool>>(),
         );
       });
     });

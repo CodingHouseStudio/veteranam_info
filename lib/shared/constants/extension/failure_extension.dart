@@ -1,5 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:veteranam/components/components.dart';
+import 'package:veteranam/components/components.dart'
+    show
+        DiscountFailure,
+        FeedbackFailure,
+        HomeFailure,
+        InformationFailure,
+        InvestorsFailure,
+        LoginError,
+        MobFAQFailure,
+        MyDiscountFailure,
+        MyStoryFailure,
+        SignUpError,
+        StoryAddFailure,
+        StoryFailure,
+        WorkFailure;
 import 'package:veteranam/shared/shared.dart';
 
 extension DiscountFailureValue on DiscountFailure {

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:veteranam/components/components.dart';
+import 'package:veteranam/components/information/information.dart';
 import 'package:veteranam/shared/shared.dart';
 
 part '../news_widget_list.dart';
@@ -70,7 +70,7 @@ class InformationBodyWidget extends StatelessWidget {
             KSizedBox.kHeightSizedBox24,
         ],
         mainDeskPadding: ({required maxWidth}) => EdgeInsets.symmetric(
-          horizontal: maxWidth * KDimensions.paddingMultiply,
+          horizontal: maxWidth * KDimensions.tenPercent,
         ),
         mainChildWidgetsFunction: ({required isDesk}) => [
           if (_.informationModelItems.isEmpty &&

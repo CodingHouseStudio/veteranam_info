@@ -1000,7 +1000,7 @@
   "@linkFailure": {
     "examples": "повідомлення про помилку при спробі перейти за посиланням."
   },
-  "apply": "Зстосувати",
+  "apply": "Застосувати",
   "@apply": {
     "examples": "Текст для кнопки в діалозі AdvancedFilter для мобільної версії"
   },
@@ -1020,7 +1020,7 @@
   "@mobOfflineHint": {
     "examples": "Текст опису для офлайн режима на сторінці налаштування(телефон)"
   },
-  "reportBugs": "Повідомити про баги",
+  "reportBugs": "Знайшли баги?",
   "@reportBugs": {
     "examples": "Текст для кнопки на сторінці Settings.",
     "description": "Кнопка використовується для переходу до режиму фідбеку для мобільних присторійв."
@@ -1205,7 +1205,7 @@
   "@discountDescription": {
     "examples": "Текст на сторінці Discount Add для поля з заголовку(опис)"
   },
-  "linkDescription": "Вставте посилання на сторінку, де можна дізнатися детальніше про знижку",
+  "linkDescription": "Вставте посилання на сторінку, де можна дізнатися детальніше про знижку. Це допоможе пришвидшити перевірку, і ми можемо зв’язатися з вами для уточнення деталей, якщо виникнуть додаткові питання щодо введеної інформації.",
   "@linkDescription": {
     "examples": "Текст на сторінці Discount Add для поля з посиланням(опис)"
   },
@@ -1227,10 +1227,89 @@
     "examples": "Текст для кнопки на сторінці Discount Add.",
     "description": "Кнопка використовується для певернення на попередні етапи форми."
   },
+  "myDiscounts": "Мої Знижки",
+  "@myDiscounts": {
+    "examples": "Текст для кнопки яка появляється на Profile page та є заголовком My publications page.",
+    "description": "Кнопка використовується для переходу на My Publications page."
+  },
+  "businessDashboard": "Керування знижками",
+  "@businessDashboard": {
+    "examples": "Заголовок для сторінки Business Dashboard page"
+  },
+  "businessDashboardDescription": "Привіт! На цих сторінках ти можеш керувати своїми знижками.",
+  "@businessDashboardescription": {
+    "examples": "Підзаголовок на Business Dashboard page."
+  },
+  "eligibility": "Кому надається",
+  "@eligibility": {
+    "examples": "Текст на сторінці Discount Add для поля Кому надається",
+    "description": "В полі записуються категорії людей кому надаються знижки(може бути діклька)"
+  },
+  "eligibilityDescription": "Виберіть зі списку один, або декілька варіантів",
+  "@eligibilityDescription": {
+    "examples": "Текст на сторінці Discount Add для поля Кому надається(опис)"
+  },
+  "combatantsEligibility": "Учасники бойових дій",
+  "@combatantsEligibility": {
+    "examples": "Текст на сторінці Discount Add для поля Кому надається, один з варіантів вибору."
+  },
+  "militaryEligibility": "Військовослужбовці",
+  "@militaryEligibility": {
+    "examples": "Текст на сторінці Discount Add для поля Кому надається, один з варіантів вибору."
+  },
+  "fallenFamilyEligibility": "Члени сімей загиблих",
+  "@fallenFamilyEligibility": {
+    "examples": "Текст на сторінці Discount Add для поля Кому надається, один з варіантів вибору."
+  },
+  "disabledWarEligibility": "Особи з інвалідністю внаслідок війни",
+  "@disabledWarEligibility": {
+    "examples": "Текст на сторінці Discount Add для поля Кому надається, один з варіантів вибору."
+  },
+  "dsnsEligibility": "Співробітники ДСНС",
+  "@dsnsEligibility": {
+    "examples": "Текст на сторінці Discount Add для поля Кому надається, один з варіантів вибору."
+  },
+  "policeEligibility": "Поліція",
+  "@policeEligibility": {
+    "examples": "Текст на сторінці Discount Add для поля Кому надається, один з варіантів вибору."
+  },
+  "idpEligibility": "Внутрішньо переміщені особи",
+  "@idpEligibility": {
+    "examples": "Текст на сторінці Discount Add для поля Кому надається, один з варіантів вибору."
+  },
+  "allOfBelowMentioned": "Усім нище перечисленим",
+  "@allOfBelowMentioned": {
+    "examples": "Текст на сторінці Discount Add для поля Кому надається, один з варіантів вибору."
+  },
   "asBusiness": "як БІЗНЕС користувач",
   "@asBusiness": {
     "examples": "Текст для кнопки входу для бізнесу на сторінці UserRole",
     "description": "Кнопка для входу бізнесу на сторінці UserRole"
+  },
+  "myProfileTitle": "Мій профіль",
+  "@myProfileTitle": {
+    "examples": "Заголовок на сторінці Profile."
+  },
+  "saveChangesProfile": "Зберегти зміни",
+  "@saveChangesProfile": {
+    "examples": "Текст для кнопки, яка знаходиться на сторінці Profile.",
+    "description": "Кнопка використовується для збереження змін користувача"
+  },
+  "dataEditing": "Редагування даних",
+  "@dataEditing": {
+    "examples": "Заголовок на на Profile Card."
+  },
+  "dataIsUpdatedSuccess": "Ваші дані успішно змінено!",
+  "@dataIsUpdatedSuccess": {
+    "examples": "Повідомлення після успішної зміни даних користувачем."
+  },
+  "dataSendInProgress": "Зміни зберігаються, будь ласка, зачекайте...",
+  "@dataSendInProgress": {
+    "examples": "Повідомлення під час збереження змін."
+  },
+  "dataUnmodified": "Зміни не збережено, бо дані не відрізняються.",
+  "@dataUnmodified": {
+    "examples": "Повідомлення, коли дані не були змінені."
   },
   "publishDiscount": "Опублікуйте Вашу першу знижку",
   "@publishDiscount": {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:veteranam/components/components.dart';
+import 'package:veteranam/components/discounts_add/discounts_add.dart';
 import 'package:veteranam/shared/shared.dart';
 
 class DiscountsAddBodyWidget extends StatefulWidget {
@@ -12,48 +12,56 @@ class DiscountsAddBodyWidget extends StatefulWidget {
 }
 
 class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
-  late TextEditingController discountsController;
+  // late TextEditingController discountsController;
   late TextEditingController titleController;
   late TextEditingController linkController;
   late TextEditingController categoryController;
-  late TextEditingController cityController;
+  // late TextEditingController cityController;
   late TextEditingController periodController;
   late TextEditingController exclusionController;
   late TextEditingController descriptionController;
+  // late TextEditingController eligibilityController;
   @override
   void initState() {
-    super.initState();
-    discountsController = TextEditingController();
+    // discountsController = TextEditingController();
     titleController = TextEditingController();
     linkController = TextEditingController();
     categoryController = TextEditingController();
-    cityController = TextEditingController();
+    // cityController = TextEditingController();
     periodController = TextEditingController();
     exclusionController = TextEditingController();
     descriptionController = TextEditingController();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    discountsController.dispose();
-    titleController.dispose();
-    linkController.dispose();
-    categoryController.dispose();
-    cityController.dispose();
-    periodController.dispose();
-    exclusionController.dispose();
-    descriptionController.dispose();
+    // eligibilityController = TextEditingController();
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<DiscountsAddBloc, DiscountsAddState>(
+      listenWhen: (previous, current) =>
+          previous.formState != current.formState ||
+          previous.period != current.period,
       listener: (context, state) {
         if (state.formState == DiscountsAddEnum.success) {
           context.goNamed(KRoute.myDiscounts.name);
         }
+        if (state.formState.isDetail) {
+          periodController.text = state.period.value
+                  ?.toLocalDateString(context: context, showDay: true) ??
+              '';
+        }
       },
+      // Add because without it we have small lag when fast write some fields
+      buildWhen: (previous, current) =>
+          previous.formState != current.formState ||
+          previous.categoryList != current.categoryList ||
+          previous.citiesList != current.citiesList ||
+          previous.failure != current.failure ||
+          previous.period != current.period ||
+          previous.isIndefinitely != current.isIndefinitely ||
+          previous.discounts != current.discounts ||
+          previous.city != current.city ||
+          previous.eligibility != current.eligibility,
       builder: (context, _) => ScaffoldWidget(
         titleDeskPadding: ({required maxWidth}) => maxWidth.screenPadding(
           precent: KDimensions.fifteenPercent,
@@ -81,9 +89,9 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
             selectedPage: _.formState.pageNumber,
           ),
           KSizedBox.kHeightSizedBox40,
-          if (_.formState.isMain)
+          if (_.formState.isDetail)
             DropListFieldWidget(
-              key: KWidgetkeys.screen.discountsAdd.categoryField,
+              textFieldKey: KWidgetkeys.screen.discountsAdd.categoryField,
               controller: categoryController,
               onChanged: (text) => context
                   .read<DiscountsAddBloc>()
@@ -94,8 +102,8 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
               showErrorText: _.formState.hasError,
               errorText: _.category.error.value(context),
             )
-          else if (_.formState.isDetail)
-            TextFieldDescriptionWidget(
+          else if (_.formState.isMain)
+            TextFieldWidget(
               widgetKey: KWidgetkeys.screen.discountsAdd.titleField,
               controller: titleController,
               isDesk: isDesk,
@@ -121,82 +129,173 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
               errorText: _.description.error.value(context),
             ),
           KSizedBox.kHeightSizedBox32,
-          if (_.formState.isMain)
-            TextFieldWidget(
-              widgetKey: KWidgetkeys.screen.discountsAdd.cityField,
-              controller: cityController,
-              labelText: context.l10n.city,
+          if (_.formState.isDetail)
+            CitiesDropFieldWidget(
+              textFieldKey: KWidgetkeys.screen.discountsAdd.cityField,
+              removeCity: (value) => context
+                  .read<DiscountsAddBloc>()
+                  .add(DiscountsAddEvent.cityRemove(value)),
+              // controller: cityController,
               onChanged: (value) => context
                   .read<DiscountsAddBloc>()
-                  .add(DiscountsAddEvent.cityUpdate(value)),
+                  .add(DiscountsAddEvent.cityAdd(value)),
               isDesk: isDesk,
-              suffixIcon: KIcon.distance,
+              citiesList: _.citiesList,
               showErrorText: _.formState.hasError,
               errorText: _.city.error.value(context),
+              selectedCities: _.city.value,
             )
-          else if (_.formState.isDetail)
-            TextFieldDescriptionWidget(
-              childWidget: MultiDropFieldWidget(
-                key: KWidgetkeys.screen.discountsAdd.discountsField,
-                controller: discountsController,
-                isDesk: isDesk,
-                labelText: context.l10n.discount,
-                dropDownList: const [
-                  '100%',
-                  '5%',
-                  '10%',
-                  '15%',
-                  '20%',
-                  '50%',
-                ],
-                showErrorText: _.formState.hasError,
-                errorText: _.discounts.error.value(context),
-                onChanged: (text) => context
-                    .read<DiscountsAddBloc>()
-                    .add(DiscountsAddEvent.discountAddItem(text)),
-                values: _.discounts.value,
-                removeEvent: (String value) =>
-                    context.read<DiscountsAddBloc>().add(
-                          DiscountsAddEvent.discountRemoveItem(value),
-                        ),
-                // errorMaxLines: 3,
-              ),
-              widgetKey: null,
+          else if (_.formState.isMain)
+            MultiDropFieldWidget(
+              textFieldKey: KWidgetkeys.screen.discountsAdd.discountsField,
+              // controller: discountsController,
               isDesk: isDesk,
+              labelText: context.l10n.discount,
+              dropDownList: const [
+                '100%',
+                '5%',
+                '10%',
+                '15%',
+                '20%',
+                '50%',
+              ],
+              showErrorText: _.formState.hasError,
+              errorText: _.discounts.error.value(context),
+              onChanged: (text) => context
+                  .read<DiscountsAddBloc>()
+                  .add(DiscountsAddEvent.discountAddItem(text)),
+              values: _.discounts.value,
+              removeEvent: (String value) =>
+                  context.read<DiscountsAddBloc>().add(
+                        DiscountsAddEvent.discountRemoveItem(value),
+                      ),
+              errorMaxLines: 3,
               description: context.l10n.discountDescription,
-              labelText: null,
             )
           else
-            TextFieldDescriptionWidget(
-              widgetKey: KWidgetkeys.screen.discountsAdd.exclusionField,
+            MessageFieldWidget(
+              key: KWidgetkeys.screen.discountsAdd.exclusionField,
               controller: exclusionController,
               isDesk: isDesk,
               labelText: context.l10n.getYouNeed,
               description: context.l10n.getYouNeedDescription,
               showErrorText: _.formState.hasError,
               errorText: _.exclusions.error.value(context),
-              onChanged: (text) => context
+              changeMessage: (text) => context
                   .read<DiscountsAddBloc>()
                   .add(DiscountsAddEvent.exclusionsUpdate(text)),
-              isMessage: true,
             ),
-          KSizedBox.kHeightSizedBox32,
-          if (_.formState.isMain)
-            TextFieldWidget(
-              widgetKey: KWidgetkeys.screen.discountsAdd.periodField,
-              controller: periodController,
-              labelText: context.l10n.period,
-              onChanged: (value) => context
-                  .read<DiscountsAddBloc>()
-                  .add(DiscountsAddEvent.periodUpdate(value)),
+          if (_.formState.isMain) ...[
+            KSizedBox.kHeightSizedBox32,
+            MultiDropFieldWidget(
+              textFieldKey: KWidgetkeys.screen.discountsAdd.eligibilityField,
+              // controller: eligibilityController,
               isDesk: isDesk,
-              suffixIcon: KIcon.calendarClock,
-              enabled: _.period != null,
+              labelText: context.l10n.eligibility,
+              isButton: true,
+              dropDownList: [
+                context.l10n.allOfBelowMentioned,
+                context.l10n.veterans,
+                context.l10n.combatantsEligibility,
+                context.l10n.militaryEligibility,
+                context.l10n.fallenFamilyEligibility,
+                context.l10n.disabledWarEligibility,
+                context.l10n.dsnsEligibility,
+                context.l10n.policeEligibility,
+                context.l10n.idpEligibility,
+              ],
+              allElemts: context.l10n.allOfBelowMentioned,
               showErrorText: _.formState.hasError,
-              errorText: _.period?.error.value(context),
+              errorText: _.eligibility?.error.value(context),
+              onChanged: (text) => context
+                  .read<DiscountsAddBloc>()
+                  .add(DiscountsAddEvent.eligibilityAddItem(text)),
+              values: _.eligibility?.value,
+              removeEvent: (String value) =>
+                  context.read<DiscountsAddBloc>().add(
+                        DiscountsAddEvent.eligibilityRemoveItem(value),
+                      ),
+              description: context.l10n.eligibilityDescription,
+            ),
+          ],
+          KSizedBox.kHeightSizedBox32,
+          if (_.formState.isDetail)
+            TextButton(
+              onPressed: _.isIndefinitely
+                  ? null
+                  : () => context
+                      .read<DiscountsAddBloc>()
+                      .add(DiscountsAddEvent.periodUpdate(context.getDate)),
+              style: KButtonStyles.footerButtonTransparent.copyWith(
+                padding: const WidgetStatePropertyAll(
+                  EdgeInsets.zero,
+                ),
+              ),
+              child: TextFieldWidget(
+                widgetKey: KWidgetkeys.screen.discountsAdd.periodField,
+                controller: periodController,
+                labelText: context.l10n.period,
+                onChanged: null,
+                isDesk: isDesk,
+                suffixIcon: KIcon.calendarClock.copyWith(
+                  color: _.isIndefinitely
+                      ? AppColors.materialThemeRefNeutralVariantNeutralVariant70
+                      : null,
+                ),
+                disabledBorder: KWidgetTheme.outlineInputBorderEnabled,
+                cursor: _.isIndefinitely
+                    ? SystemMouseCursors.basic
+                    : SystemMouseCursors.click,
+                enabled: false,
+                showErrorText: !_.isIndefinitely && _.formState.hasError,
+                errorText: _.period.error.value(context),
+                suffixIconPadding: KPadding.kPaddingSize16,
+                labelTextStyle: _.isIndefinitely
+                    ? AppTextStyle.materialThemeTitleMediumNeutralVariant70
+                    : null,
+                textStyle: _.isIndefinitely
+                    ? AppTextStyle.materialThemeTitleMediumNeutralVariant70
+                    : null,
+                // text: _.period.value?.toLocalDateString(
+                //   context: context,
+                //   showDay: true,
+                // ),
+              ),
+              // [
+              //   Text(
+              //     context.l10n.period,
+              //     style: _.isIndefinitely
+              //         ? AppTextStyle.materialThemeTitleMediumNeutralVariant70
+              //         : AppTextStyle.materialThemeTitleMedium,
+              //   ),
+              //   Text(
+              //     _.period.value?.toLocalDateString(
+              //           context: context,
+              //           showDay: true,
+              //         ) ??
+              //         '',
+              //     style: _.isIndefinitely
+              //         ? AppTextStyle.materialThemeTitleMediumNeutralVariant70
+              //         : AppTextStyle.materialThemeTitleMedium,
+              //     textAlign: TextAlign.center,
+              //   ),
+              //   KIcon.calendarClock,
+              // ],
             )
-          else if (_.formState.isDetail)
-            TextFieldDescriptionWidget(
+          // child: TextFieldWidget(
+          //   widgetKey: KWidgetkeys.screen.discountsAdd.periodField,
+          //   controller: periodController,
+          //   labelText: context.l10n.period,
+          //   onChanged: (value) {},
+          //   isDesk: isDesk,
+          //   suffixIcon: KIcon.calendarClock,
+          //   enabled: _.period != null,
+          //   showErrorText: _.formState.hasError,
+          //   errorText: _.period?.error.value(context),
+          // ),
+
+          else if (_.formState.isMain)
+            TextFieldWidget(
               widgetKey: KWidgetkeys.screen.discountsAdd.linkField,
               controller: linkController,
               isDesk: isDesk,
@@ -208,16 +307,15 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
                   .read<DiscountsAddBloc>()
                   .add(DiscountsAddEvent.linkUpdate(text)),
             ),
-          if (_.formState.isMain) ...[
+          if (_.formState.isDetail) ...[
             Row(
               children: [
-                SwitchWidgetWithoutBloc(
+                SwitchWidget(
                   key: KWidgetkeys.screen.discountsAdd.indefinitelySwitcher,
-                  onSelected: ({required isSelected}) => context
-                      .read<DiscountsAddBloc>()
-                      .add(
-                        DiscountsAddEvent.periodUpdate(isSelected ? null : ''),
+                  onChanged: () => context.read<DiscountsAddBloc>().add(
+                        const DiscountsAddEvent.indefinitelyUpdate(),
                       ),
+                  isSelected: _.isIndefinitely,
                 ),
                 KSizedBox.kWidthSizedBox16,
                 Expanded(
@@ -238,6 +336,7 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
             )
           else
             ..._buttons(context: context, isDesk: false).reversed,
+          KSizedBox.kHeightSizedBox32,
         ],
       ),
     );
@@ -274,9 +373,10 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
                   const DiscountsAddEvent.back(),
                 ),
         style: KButtonStyles.borderBlackButtonStyle.copyWith(
-          padding: const WidgetStatePropertyAll(
+          padding: WidgetStatePropertyAll(
             EdgeInsets.symmetric(
-              vertical: KPadding.kPaddingSize16,
+              vertical:
+                  isDesk ? KPadding.kPaddingSize20 : KPadding.kPaddingSize16,
             ),
           ),
         ),
@@ -307,4 +407,18 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
         mobVerticalTextPadding: KPadding.kPaddingSize16,
         mobIconPadding: KPadding.kPaddingSize16,
       );
+
+  @override
+  void dispose() {
+    super.dispose();
+    // discountsController.dispose();
+    titleController.dispose();
+    linkController.dispose();
+    categoryController.dispose();
+    // cityController.dispose();
+    periodController.dispose();
+    exclusionController.dispose();
+    descriptionController.dispose();
+    // eligibilityController.dispose();
+  }
 }

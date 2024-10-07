@@ -5,7 +5,7 @@ import 'package:get_it/get_it.dart';
 import 'package:mockito/mockito.dart';
 import 'package:veteranam/shared/shared.dart';
 
-import '../../test_dependency.dart';
+import '../test_dependency.dart';
 
 /// COMMENT: exmaple for either repository
 void main() {
@@ -17,7 +17,7 @@ void main() {
 
   tearDown(GetIt.I.reset);
 
-  group('${KScreenBlocName.home} ${KGroupText.repository} ', () {
+  group('FAQ ${KGroupText.repository} ', () {
     late IFaqRepository faqRepository;
     late FirestoreService mockFirestoreService;
     setUp(() {

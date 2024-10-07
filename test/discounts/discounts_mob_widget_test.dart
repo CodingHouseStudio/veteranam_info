@@ -25,7 +25,7 @@ void main() {
     late AppInfoRepository mockBuildRepository;
     setUp(() {
       Config.isWeb = false;
-      KPlatformConstants.isWebDesktop = true;
+      PlatformEnum.isWebDesktop = true;
       KTest.testReleaseMode = true;
       Config.falvourValue = Config.production;
       ExtendedDateTime.id = KTestText.id;
@@ -43,7 +43,7 @@ void main() {
       when(mockAuthenticationRepository.currentUserSetting).thenAnswer(
         (realInvocation) => UserSetting.empty,
       );
-      when(mockAuthenticationRepository.isAnonymouslyOrEmty()).thenAnswer(
+      when(mockAuthenticationRepository.isAnonymouslyOrEmty).thenAnswer(
         (realInvocation) => true,
       );
 
@@ -94,7 +94,7 @@ void main() {
         (invocation) async => AppInfoRepository.defaultValue,
       );
     });
-    testWidgets('${KGroupText.intial} ', (tester) async {
+    testWidgets('${KGroupText.initial} ', (tester) async {
       await discountsPumpAppHelper(
         tester: tester,
         mockDiscountRepository: mockDiscountRepository,
@@ -128,7 +128,7 @@ void main() {
     group('${KGroupText.goRouter} ', () {
       late MockGoRouter mockGoRouter;
       setUp(() => mockGoRouter = MockGoRouter());
-      testWidgets('${KGroupText.intial} ', (tester) async {
+      testWidgets('${KGroupText.initial} ', (tester) async {
         await discountsPumpAppHelper(
           tester: tester,
           mockDiscountRepository: mockDiscountRepository,
@@ -145,7 +145,7 @@ void main() {
       });
       group('Open Update dialog', () {
         setUp(() {
-          KPlatformConstants.isWebDesktop = false;
+          PlatformEnum.isWebDesktop = false;
           when(
             mockFirebaseRemoteConfigProvider
                 .getString(AppVersionCubit.mobAppVersionKey),
@@ -153,7 +153,7 @@ void main() {
             (_) => KTestText.build,
           );
         });
-        testWidgets('${KGroupText.intial} ', (tester) async {
+        testWidgets('${KGroupText.initial} ', (tester) async {
           await discountsPumpAppHelper(
             tester: tester,
             mockDiscountRepository: mockDiscountRepository,

@@ -1,7 +1,8 @@
 import 'dart:async';
 
+import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:flutter/foundation.dart' show kReleaseMode;
+import 'package:flutter/foundation.dart' show kIsWeb, kReleaseMode;
 import 'package:injectable/injectable.dart';
 import 'package:veteranam/shared/shared.dart';
 
@@ -16,36 +17,58 @@ class FirebaseAnalyticsService {
 
   final FirebaseAnalytics _firebaseAnalytics;
   final AuthenticationRepository _authenticationRepository;
+  bool _userConsentGranted = false;
 
-  void _initUserId() {
+  Future<void> _initUserId() async {
     // Add user properties when we'll add login and sign up page
     if (kReleaseMode && Config.isProduction) {
-      try {
-        unawaited(
-          _firebaseAnalytics.setUserId(
-            id: _authenticationRepository.currentUser.id,
-            callOptions: AnalyticsCallOptions(global: true),
-          ),
-        );
-        unawaited(
-          _firebaseAnalytics.setUserProperty(
-            name: 'Language',
-            value: _authenticationRepository.currentUserSetting.locale.text,
-          ),
-        );
-      } catch (e) {
-        // unawaited(
-        //   _firebaseAnalytics.setUserId(
-        //     id: User.empty.id,
-        //     callOptions: AnalyticsCallOptions(global: true),
-        //   ),
-        // );
-        // unawaited(
-        //   _firebaseAnalytics.setUserProperty(
-        //     name: 'Language',
-        //     value: UserSetting.empty.locale.text,
-        //   ),
-        // );
+      // Check if platform is iOS and request
+      // app tracking transparency permission
+      if (!kIsWeb) {
+        if (PlatformEnum.getPlatform.isIOS) {
+          // Check if user has granted consent
+          final trackingStatus =
+              await AppTrackingTransparency.trackingAuthorizationStatus;
+
+          // If not determined, request authorization
+          if (trackingStatus == TrackingStatus.authorized) {
+            _userConsentGranted = true;
+          }
+        } else {
+          // For platforms other than iOS, assume
+          // consent is granted (or adjust based on your policy)
+          _userConsentGranted = true;
+        }
+
+        if (_userConsentGranted) {
+          try {
+            unawaited(
+              _firebaseAnalytics.setUserId(
+                id: _authenticationRepository.currentUser.id,
+                callOptions: AnalyticsCallOptions(global: true),
+              ),
+            );
+            unawaited(
+              _firebaseAnalytics.setUserProperty(
+                name: 'Language',
+                value: _authenticationRepository.currentUserSetting.locale.text,
+              ),
+            );
+          } catch (e) {
+            // unawaited(
+            //   _firebaseAnalytics.setUserId(
+            //     id: User.empty.id,
+            //     callOptions: AnalyticsCallOptions(global: true),
+            //   ),
+            // );
+            // unawaited(
+            //   _firebaseAnalytics.setUserProperty(
+            //     name: 'Language',
+            //     value: UserSetting.empty.locale.text,
+            //   ),
+            // );
+          }
+        }
       }
     }
   }
@@ -55,7 +78,10 @@ class FirebaseAnalyticsService {
     Map<String, Object>? parameters,
     AnalyticsCallOptions? callOptions,
   }) {
-    if (kReleaseMode && Config.isProduction && name != null) {
+    if (kReleaseMode &&
+        Config.isProduction &&
+        name != null &&
+        _userConsentGranted) {
       unawaited(
         _firebaseAnalytics.logEvent(
           name: name,

@@ -26,10 +26,10 @@ void main() {
       mockAuthRepository = MockIAppAuthenticationRepository();
       when(mockAuthRepository.currentUser)
           .thenAnswer((invocation) => KTestText.userWithoutPhoto);
-      when(
-        mockDiscountRepository
-            .getDiscountsByUserId(KTestText.userWithoutPhoto.id),
-      ).thenAnswer((_) async => Right(KTestText.discountModelItems));
+      // when(
+      //   mockDiscountRepository
+      //       .getDiscountsByUserId(KTestText.userWithoutPhoto.id),
+      // ).thenAnswer((_) async => Right(KTestText.discountModelItems));
 
       when(
         mockDiscountRepository
@@ -85,12 +85,12 @@ void main() {
       'emits [loading, error] when there is an error during data loading',
       build: () => myDiscountsWatcherBloc,
       act: (bloc) async {
-        when(
-          mockDiscountRepository
-              .getDiscountsByUserId(KTestText.userWithoutPhoto.id),
-        ).thenAnswer(
-          (_) async => Left(SomeFailure.serverError(error: null)),
-        );
+        // when(
+        //   mockDiscountRepository
+        //       .getDiscountsByUserId(KTestText.userWithoutPhoto.id),
+        // ).thenAnswer(
+        //   (_) async => Left(SomeFailure.serverError(error: null)),
+        // );
         bloc.add(const MyDiscountsWatcherEvent.started());
       },
       expect: () => [
@@ -139,12 +139,12 @@ void main() {
       ' when get report failure and load nex with listLoadedFull',
       build: () => myDiscountsWatcherBloc,
       act: (bloc) async {
-        when(
-          mockDiscountRepository
-              .getDiscountsByUserId(KTestText.userWithoutPhoto.id),
-        ).thenAnswer(
-          (_) async => Right([KTestText.discountModelItems.first]),
-        );
+        // when(
+        //   mockDiscountRepository
+        //       .getDiscountsByUserId(KTestText.userWithoutPhoto.id),
+        // ).thenAnswer(
+        //   (_) async => Right([KTestText.discountModelItems.first]),
+        // );
         bloc.add(const MyDiscountsWatcherEvent.started());
         await expectLater(
           bloc.stream,

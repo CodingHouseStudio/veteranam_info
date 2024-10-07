@@ -19,6 +19,12 @@ Future<void> myDiscountsInitialHelper(
         find.byKey(KWidgetkeys.screen.myDiscounts.iconAdd),
         findsOneWidget,
       );
+
+      // expect(
+      //   find.byKey(KWidgetkeys.screen.myDiscounts.subtitle),
+      //   findsOneWidget,
+      // );
+
       expect(
         find.byKey(KWidgetkeys.screen.myDiscounts.card),
         findsWidgets,
