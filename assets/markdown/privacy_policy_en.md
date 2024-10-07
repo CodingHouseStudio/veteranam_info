@@ -34,6 +34,14 @@ You may choose to have your computer warn you each time a cookie is being sent o
 
 We do not sell, trade, or transfer your personally identifiable information to outside parties unless we provide advance notice. Non-personally identifiable visitor information may be provided to other parties for marketing, advertising, or other uses.
 
+## Public Access to Privacy Policy
+
+This privacy policy is publicly available on an active, publicly accessible, and non-geofenced URL, which can be accessed through our app’s Google Play listing and the app itself. It is non-editable and is viewable directly in a standard web browser without the need for any plugins or special handlers.
+
+## Changes to the Privacy Policy
+
+We may update this policy from time to time. When we do, we will update the effective date above and provide a link to the new policy in our app’s store listing and within the app itself.
+
 ## Contact Us
 
 If you have any questions regarding this privacy policy, please send an email to developer@codinghouse.biz.
