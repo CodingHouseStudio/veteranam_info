@@ -61,14 +61,14 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
     _Started event,
     Emitter<DiscountsAddState> emit,
   ) async {
-    final discounts = await _discountRepository.getDiscountItems().first;
+    // final discounts = await _discountRepository.getDiscountItems().first;
 
-    final uniqueCategories =
-        discounts.expand((discount) => discount.category).toSet().toList();
+    // final uniqueCategories =
+    //     discounts.expand((discount) => discount.category).toSet().toList();
 
     emit(
       state.copyWith(
-        categoryList: uniqueCategories,
+        categoryList: KAppText.discountsCategories,
       ),
     );
 
