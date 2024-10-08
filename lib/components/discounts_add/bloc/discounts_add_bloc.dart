@@ -331,8 +331,8 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
                 state.discounts,
                 state.link,
               ]) &&
-              state.eligibility == null ||
-          state.eligibility!.isValid) {
+              (state.eligibility == null ||
+          state.eligibility!.isValid)) {
         emit(state.copyWith(formState: DiscountsAddEnum.detail));
       } else {
         emit(state.copyWith(formState: DiscountsAddEnum.invalidData));

@@ -107,7 +107,7 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
               widgetKey: KWidgetkeys.screen.discountsAdd.titleField,
               controller: titleController,
               isDesk: isDesk,
-              description: context.l10n.titleExample,
+              // description: context.l10n.titleExample,
               labelText: context.l10n.title,
               showErrorText: _.formState.hasError,
               errorText: _.title.error.value(context),

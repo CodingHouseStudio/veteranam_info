@@ -147,7 +147,7 @@ class MyDiscountsWatcherBloc
       (r) => emit(
         state.copyWith(
           failure: null,
-          loadingStatus: LoadingStatus.loaded,
+          // loadingStatus: LoadingStatus.loaded,
         ),
       ),
     );
