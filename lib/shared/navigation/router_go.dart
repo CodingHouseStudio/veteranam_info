@@ -1,11 +1,40 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
-// import 'package:flutter/foundation.dart' deferred as foundation;
 import 'package:flutter/foundation.dart' show kIsWeb, kReleaseMode;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
-import 'package:veteranam/components/components.dart';
+import 'package:veteranam/components/components.dart'
+    show
+        AboutUsScreen,
+        ConsultationScreen,
+        DiscountCardDialog,
+        DiscountsScreen,
+        EmployeeRespondScreen,
+        ErrorScreen,
+        FeedbackScreen,
+        HomeScreen,
+        InformationScreen,
+        InvestorsScreen,
+        LoginScreen,
+        MobFaqScreen,
+        MobSettingsScreen,
+        NewsCardDialog,
+        PasswordResetScreen,
+        PrivacyPolicyDialog,
+        ProfileMyStoryScreen,
+        ProfileSavesScreen,
+        ProfileScreen,
+        PwResetEmailScreen,
+        QuestionsFormScreen,
+        SignUpScreen,
+        StoryAddScreen,
+        StoryScreen,
+        ThanksScreen,
+        UserRoleScreen,
+        WorkEmployeeScreen,
+        WorkEmployerScreen,
+        WorkScreen;
 import 'package:veteranam/shared/shared.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -62,6 +91,30 @@ GoRouter router = GoRouter(
               name: state.name,
               child: const LoginScreen(),
             ),
+            routes: [
+              GoRoute(
+                name: KRoute.passwordReset.name,
+                path: KRoute.passwordReset.path,
+                pageBuilder: (context, state) => NoTransitionPage(
+                  key: state.pageKey,
+                  name: state.name,
+                  child: PasswordResetScreen(
+                    code: state.uri.queryParameters['oobCode'],
+                  ),
+                ),
+                routes: [
+                  GoRoute(
+                    name: KRoute.pwResetEmail.name,
+                    path: KRoute.pwResetEmail.path,
+                    pageBuilder: (context, state) => NoTransitionPage(
+                      key: state.pageKey,
+                      name: state.name,
+                      child: const PwResetEmailScreen(),
+                    ),
+                  ),
+                ],
+              ),
+            ],
           ),
           GoRoute(
             name: KRoute.signUp.name,

@@ -80,5 +80,10 @@ class SomeFailure with _$SomeFailure {
     StackTrace? stack,
   }) = FailureCopy;
 
+  factory SomeFailure.wrongVerifyCode({
+    Object? error,
+    StackTrace? stack,
+  }) = FailureWrongVerifyCode;
+
   final FailureRepository failureRepository = GetIt.I.get<FailureRepository>();
 }

@@ -86,6 +86,7 @@ abstract class KTestText {
   static const passwordIncorrectNumber = 'test_Password';
   static const shortPassword = 'Pas1';
   static const token = 'test_token';
+  static const code = 'test_code';
 
   static const userEmail = 'example@gmail.com';
   static const useremailWrong = 'examplewrong@gmail.com';
@@ -604,6 +605,8 @@ abstract class KScreenBlocName {
   static const userRole = 'User Role Screen';
   static const discountsAdd = 'Discounts Add Screen';
   static const businessDashboard = 'Business Dashboard Screen';
+  static const pwResetEmail = 'Password Reset Email Screen';
+  static const passwordReset = 'Password Reset Screen';
 
   static const authenticationServices = 'Authentication Services';
   static const appRepository = 'App';

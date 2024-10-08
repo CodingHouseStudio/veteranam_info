@@ -1307,6 +1307,88 @@
   "@dataSendInProgress": {
     "examples": "Повідомлення під час збереження змін."
   },
+  "passwordReset": "Відновлення паролю",
+  "@passwordReset": {
+    "examples": "Текст на сторінці Password Reset Email"
+  },
+  "passwordResetDescription": "Введіть е-маіл, вказаний при реєстрації, і ми надішлемо код для відновлення паролю.",
+  "@passwordResetDescription": {
+    "examples": "Текст на сторінці Password Reset Email"
+  },
+  "passwordResetCodeSending": "Ми надсилаємо вам лист для відновлення пароля. Це може зайняти кілька секунд.",
+  "@passwordResetCodeSending": {
+    "examples": "Текст на сторінці Password Reset Email, з'являється після того як користувач ввій свою пштову скриньку та натиснув на кнопку. Сповіщає про очікування листа на електронній пошті."
+  },
+  "passwordResetCodeSendFirst": "Ми надіслали інформацію на",
+  "@passwordResetCodeSend": {
+    "examples": "Текст на сторінці Password Reset Email, з'являється після того як користувач ввій свою пштову скриньку та натиснув на кнопку. Сповіщає про очікування листа на електронній пошті. Перша частина."
+  },
+  "passwordResetCodeSendSecond": "\nСлідуйте інструкціям вказаним в листі.",
+  "@passwordResetCodeSendSecond": {
+    "examples": "Текст на сторінці Password Reset Email, з'являється після того як користувач ввій свою пштову скриньку та натиснув на кнопку. Сповіщає про очікування листа на електронній пошті. Друга частина."
+  },
+  "passwordResetCodeSendThirty": "\nПеревірте папки Спам і Пропозиції.",
+  "@passwordResetCodeSendThirty": {
+    "examples": "Текст на сторінці Password Reset Email, з'являється після того як користувач ввій свою пштову скриньку та натиснув на кнопку. Сповіщає про очікування листа на електронній пошті. Третя частина."
+  },
+  "confirmPassword": "Підтвердити пароль",
+  "@confirmPassword": {
+    "examples": "Текст на сторінці Password Reset для поля підтвердження пароля",
+    "description": "В полі користувач повинен написати щераз пароль"
+  },
+  "successfully": "Успішно!",
+  "@successfully": {
+    "examples": "Текст на сторінці Password Reset"
+  },
+  "successfullyDescruption": "Ви успішно підтвердили свій доступ. Тепер придумайте новий пароль",
+  "@successfullyDescruption": {
+    "examples": "Текст на сторінці Password Reset"
+  },
+  "confirm": "Підтвердити",
+  "@confirm": {
+    "examples": "Текст для кнопки на сторінці Password Reset",
+    "description": "Кнопка використовується для підтвердження зміни пароля."
+  },
+  "changePasswordWaiting": "Змінюємо ваш пароль. Зачекайте трохи.",
+  "@changePasswordWaiting": {
+    "examples": "Текст на сторінці Password Reset, з'являється коли користувач натиснув на кнопку підтвердити і очікує зміни пароля"
+  },
+  "changedPassword": "Пароль змінено! Тепер ви можете увійти.",
+  "@changedPassword": {
+    "examples": "Текст на сторінці Password Reset, з'являється коли користувач натиснув на кнопку підтвердити і пароль змінився"
+  },
+  "passwordMismatch": "Паролі не збігаються. Переконайтеся, що обидва паролі однакові.",
+  "@passwordMismatch": {
+    "examples": "Повідомлення, яке відображається, коли користувач вводить різні паролі в полях пароля та підтвердження пароля."
+  },
+  "passwordResetWaiting": "Зачекайте, ми перевіряємо вашу інформацію.",
+  "@passwordResetWaiting": {
+    "examples": "Текст на сторінці Reset Password, появляється під час перевірки правильності коду"
+  },
+  "passwordResetWrongDescriptionFirst": "Термін дії цього посилання закінчився або посилання не дійсне.\n Спробуйте ",
+  "@passwordResetWrongDescriptionFirst": {
+    "examples": "Текст на сторінці Reset Password, появляється якщо код в посиланні не вірний. Перша частина"
+  },
+  "passwordResetWrongDescriptionSecond": "надіслати посилання ще раз",
+  "@passwordResetWrongDescriptionSecond": {
+    "examples": "Текст на сторінці Reset Password, появляється якщо код в посиланні не вірний. Друга частина"
+  },
+  "sendAgain": "Надіслати ще раз",
+  "@sendAgain": {
+    "examples": "Текст для кнопки на сторінці Reset Password, появляється якщо код веріфікації не вірний.",
+    "description": "Кнопка використовується для переходу на сторінку Password Reset Email."
+  },
+  "notReceiveLetter": "Не отримали лист?",
+  "@notReceiveLetter": {
+    "examples": "Текст для кнопки на сторінці Reset Password Email, появляється після того як користувач ввів email і йому прийшов лист."
+  },
+  "resendWait": "Ви зможете надіслати лист ще раз через {remainingSeconds} секунд.",
+  "@resendWait": {
+    "placeholders": {
+      "remainingSeconds": {}
+    },
+    "examples": "Текст на сторінці Password Reset Email, зявляється коли користувач натиснув надіслати, і очікує хвилину перед наступною відправкою"
+  },
   "dataUnmodified": "Зміни не збережено, бо дані не відрізняються.",
   "@dataUnmodified": {
     "examples": "Повідомлення, коли дані не були змінені."

@@ -292,6 +292,41 @@ class AuthenticationRepository {
     return result;
   }
 
+  Future<Either<SomeFailure, bool>> checkVerificationCode({
+    required String? code,
+  }) async {
+    final result =
+        await iAppAuthenticationRepository.checkVerificationCode(code: code);
+    // result.fold(
+    //   (failure) {
+    //     debugPrint('Sending error: $failure');
+    //   },
+    //   (success) {
+    //     debugPrint('Sending succeses $email');
+    //   },
+    // );
+    return result;
+  }
+
+  Future<Either<SomeFailure, bool>> resetPasswordUseCode({
+    required String code,
+    required String newPassword,
+  }) async {
+    final result = await iAppAuthenticationRepository.resetPasswordUseCode(
+      code: code,
+      newPassword: newPassword,
+    );
+    // result.fold(
+    //   (failure) {
+    //     debugPrint('Sending error: $failure');
+    //   },
+    //   (success) {
+    //     debugPrint('Sending succeses $email');
+    //   },
+    // );
+    return result;
+  }
+
   Future<Either<SomeFailure, bool>> updateUserSetting({
     required UserSetting userSetting,
   }) async {

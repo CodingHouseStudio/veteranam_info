@@ -35,4 +35,6 @@ class _ScreenKeys {
   final mobFaq = _MobFaqKeys();
   final userRole = _UserRoleKeys();
   final discountsAdd = _DiscountsAddKeys();
+  final pwResetEmail = _PwResetEmailKeys();
+  final passwordReset = _PasswordResetKeys();
 }

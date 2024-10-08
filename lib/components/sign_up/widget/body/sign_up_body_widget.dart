@@ -54,8 +54,8 @@ class SignUpBodyWidget extends StatelessWidget {
               isLogin: false,
               showErrorText: _.formState == SignUpEnum.invalidData ||
                   _.formState == SignUpEnum.passwordInvalidData,
-              bottomError: _.failure?.value(context),
-              bottomTextKey: KWidgetkeys.screen.signUp.errorText,
+              // bottomError: _.failure?.value(context),
+              // bottomTextKey: KWidgetkeys.screen.signUp.errorText,
             ),
             if (isDesk)
               KSizedBox.kHeightSizedBox24
@@ -85,19 +85,28 @@ class SignUpBodyWidget extends StatelessWidget {
                 darkMode: true,
               ),
             ),
-            if (_.formState == SignUpEnum.success) ...[
-              KSizedBox.kHeightSizedBox16,
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: KPadding.kPaddingSize16,
-                ),
-                child: Text(
-                  context.l10n.loggingInWait,
-                  key: KWidgetkeys.screen.signUp.loadingText,
-                  style: AppTextStyle.materialThemeBodyMediumNeutralVariant60,
-                ),
-              ),
-            ],
+            SendingTextWidget(
+              textKey: KWidgetkeys.screen.signUp.submitingText,
+              failureText: _.failure?.value(context),
+              sendingText: _.formState == SignUpEnum.success
+                  ? context.l10n.loggingInWait
+                  : null,
+              successText: null,
+            ),
+            // if (_.formState == SignUpEnum.success) ...[
+            //   KSizedBox.kHeightSizedBox16,
+            //   Padding(
+            //     padding: const EdgeInsets.symmetric(
+            //       horizontal: KPadding.kPaddingSize16,
+            //     ),
+            //     child: Text(
+            //       context.l10n.loggingInWait,
+            //       key: KWidgetkeys.screen.signUp.loadingText,
+            //       style:
+            // AppTextStyle.materialThemeBodyMediumNeutralVariant60,
+            //     ),
+            //   ),
+            // ],
             if (isDesk)
               KSizedBox.kHeightSizedBox24
             else

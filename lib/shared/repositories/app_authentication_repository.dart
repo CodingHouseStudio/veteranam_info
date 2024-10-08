@@ -370,11 +370,62 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
     required String email,
   }) async {
     try {
-      await _firebaseAuth.sendPasswordResetEmail(email: email);
+      await _firebaseAuth.sendPasswordResetEmail(
+        email: email,
+        // actionCodeSettings: firebase_auth.ActionCodeSettings(
+        //   url: '${Uri.base.origin}/${KRoute.login.path}',
+        //   handleCodeInApp: true,
+        // ),
+      );
       return const Right(true);
     } on firebase_auth.FirebaseAuthException catch (e, stack) {
       // debugPrint('Sendig error: ${e.message}');
       return Left(SomeFailure.emailSendingFailed(error: e, stack: stack));
+    } catch (e, stack) {
+      // debugPrint('Unknown error: $e');
+      return Left(SomeFailure.serverError(error: e, stack: stack));
+    }
+  }
+
+  @override
+  Future<Either<SomeFailure, bool>> checkVerificationCode({
+    required String? code,
+  }) async {
+    try {
+      if (code == null) {
+        return Left(SomeFailure.wrongVerifyCode());
+      }
+      final email = await _firebaseAuth.verifyPasswordResetCode(
+        code,
+        // actionCodeSettings: firebase_auth.ActionCodeSettings(
+        //   url: '${Uri.base.origin}/${KRoute.login.path}',
+        //   handleCodeInApp: true,
+        // ),
+      );
+      return Right(email.isNotEmpty);
+    } on firebase_auth.FirebaseAuthException catch (e, stack) {
+      // debugPrint('Sendig error: ${e.message}');
+      return Left(VerifyCodeFailure.fromCode(error: e, stack: stack).status);
+    } catch (e, stack) {
+      // debugPrint('Unknown error: $e');
+      return Left(SomeFailure.serverError(error: e, stack: stack));
+    }
+  }
+
+  @override
+  Future<Either<SomeFailure, bool>> resetPasswordUseCode({
+    required String code,
+    required String newPassword,
+  }) async {
+    try {
+      await _firebaseAuth.confirmPasswordReset(
+        code: code,
+        newPassword: newPassword,
+      );
+      return const Right(true);
+    } on firebase_auth.FirebaseAuthException catch (e, stack) {
+      // debugPrint('Sendig error: ${e.message}');
+      return Left(SomeFailure.serverError(error: e, stack: stack));
     } catch (e, stack) {
       // debugPrint('Unknown error: $e');
       return Left(SomeFailure.serverError(error: e, stack: stack));

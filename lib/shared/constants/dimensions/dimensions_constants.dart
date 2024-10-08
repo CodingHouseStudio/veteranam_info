@@ -49,7 +49,11 @@ abstract class KDimensions {
 
   static const thirtyPercent = 0.3;
 
+  static const thirtyThreePercent = 0.33;
+
   static const seventyPercent = 0.7;
 
   static const sixtyPercent = 0.6;
+
+  static const sendingDelay = 6;
 }
