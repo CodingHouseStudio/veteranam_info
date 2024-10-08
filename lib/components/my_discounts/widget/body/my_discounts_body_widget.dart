@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:veteranam/components/components.dart';
 import 'package:veteranam/components/my_discounts/my_discounts.dart';
+import 'package:veteranam/components/my_discounts/widget/my_discount_page_with_an_empty_profile.dart';
 import 'package:veteranam/shared/shared.dart';
 
 part '../my_discounts_box_widget_list.dart';
-part '../my_discounts_box_widgets.dart';
 
 class MyDiscountsBodyWidget extends StatelessWidget {
   const MyDiscountsBodyWidget({super.key});
@@ -20,44 +21,48 @@ class MyDiscountsBodyWidget extends StatelessWidget {
             .add(const MyDiscountsWatcherEvent.started()),
       ),
       builder: (context, _) => ScaffoldAutoLoadingWidget(
-        // mainDeskPadding: ({required maxWidth}) => const EdgeInsets.symmetric(
-        //   horizontal: KPadding.kPaddingSize100,
-        // ),
-        loadingButtonText: context.l10n.moreFunds,
+        mainDeskPadding: ({required maxWidth}) => const EdgeInsets.symmetric(
+          horizontal: KPadding.kPaddingSize100,
+          vertical: KPadding.kPaddingSize24,
+        ),
+        loadingButtonText: context.l10n.moreDiscounts,
         loadingStatus: _.loadingStatus,
+        cardListIsEmpty: _.loadedDiscountsModelItems.isEmpty,
+        loadFunction: () => context
+            .read<MyDiscountsWatcherBloc>()
+            .add(const MyDiscountsWatcherEvent.loadNextItems()),
+        emptyWidget: context.read<AuthenticationBloc>().state.user.isFullProfile
+            ? ({required isDesk}) {
+                return MyDiscountEmptyWidget(isDesk: isDesk);
+              }
+            : null,
         mainChildWidgetsFunction: ({required isDesk}) => [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                context.l10n.myPublications,
-                key: KWidgetkeys.screen.myDiscounts.title,
-                style: isDesk ? AppTextStyle.text64 : AppTextStyle.text24,
-              ),
-              IconButtonWidget(
-                key: KWidgetkeys.screen.myDiscounts.iconAdd,
-                padding:
-                    isDesk ? KPadding.kPaddingSize20 : KPadding.kPaddingSize12,
-                icon: KIcon.plus,
-                background: AppColors.materialThemeKeyColorsNeutralVariant,
-                onPressed: () => context.goNamed(KRoute.discountsAdd.name),
-              ),
-            ],
-          ),
-          ..._discountsboxWidgetList(
-            context: context,
+          LineTitleIconButtonWidget(
+            title: context.l10n.myPublications,
+            titleKey: KWidgetkeys.screen.myDiscounts.title,
+            icon: KIcon.plus,
+            iconButtonKey: KWidgetkeys.screen.myDiscounts.iconAdd,
             isDesk: isDesk,
+            onPressed: () => context.goNamed(KRoute.discountsAdd.name),
           ),
+          KSizedBox.kHeightSizedBox40,
+          if (context.read<AuthenticationBloc>().state.user.isFullProfile)
+            ..._discountsboxWidgetList(
+              context: context,
+              isDesk: isDesk,
+            )
+          else
+            MyDiscountPageWithEmptyProfileWidget(isDesk: isDesk),
           if (isDesk)
             KSizedBox.kHeightSizedBox56
           else
             KSizedBox.kHeightSizedBox32,
         ],
-        loadFunction: () {
-          context
-              .read<MyDiscountsWatcherBloc>()
-              .add(const MyDiscountsWatcherEvent.started());
-        },
+        // loadFunction: () {
+        //   context
+        //       .read<MyDiscountsWatcherBloc>()
+        //       .add(const MyDiscountsWatcherEvent.started());
+        // },
       ),
     );
   }

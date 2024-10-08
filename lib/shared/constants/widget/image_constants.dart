@@ -77,6 +77,11 @@ class KImage {
         'assets/images/logo.svg',
         key: key,
       );
+
+  static SvgPicture discountEmpty({Key? key}) => SvgPicture.asset(
+        'assets/icons/discount_icon.svg',
+        key: key,
+      );
   // AssetImageWidget(
   //       'assets/images/logo.png',
   //       key: key,
@@ -140,6 +145,7 @@ class KImage {
         'assets/images/veteran5.png',
         widgetKey: key,
       );
+
   // static const SvgPicture emptyList({Key? key}) =>SvgPicture(
   //   SvgAssetLoader('assets/images/empty_list.svg'),
   // );

@@ -334,11 +334,21 @@ abstract class KTestText {
   );
 
   static final userDiscountModelItems = <DiscountModel>[
-    for (var i = 0; i < 5; i++)
+    for (var i = 0; i < 30; i++)
       KMockText.discountModel.copyWith(
         id: i.toString(),
         userId: userWithoutPhoto.id,
         dateVerified: dateTime,
+      ),
+  ];
+
+  static final userDiscountModelItemsWidget = <DiscountModel>[
+    for (var i = 0; i < 30; i++)
+      KMockText.discountModel.copyWith(
+        id: i.toString(),
+        userId: userWithoutPhoto.id,
+        dateVerified: dateTime,
+        status: i == 0 ? DiscountState.rejected : DiscountState.published,
       ),
   ];
 

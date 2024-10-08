@@ -1310,5 +1310,51 @@
   "dataUnmodified": "Зміни не збережено, бо дані не відрізняються.",
   "@dataUnmodified": {
     "examples": "Повідомлення, коли дані не були змінені."
+  },
+  "publishDiscount": "Опублікуйте Вашу першу знижку",
+  "@publishDiscount": {
+    "examples": "Текст про відсутність знижок на сторінці MyDiscounts"
+  },
+  "addDiscount": "Додати знижку",
+  "@addDiscount": {
+    "examples": "Текст для кнопки на сторінці MyDiscount.",
+    "description": "Кнопка використовується для додавання знижки"
+  },
+  "thatEndOfMyDiscounts": "Це кінець списку! Сподіваємось ви знайшли те, що шукали.",
+  "@thatEndOfMyDiscounts": {
+    "examples": "Текст в кінці списку знижок на сторінці MyDiscounts"
+  },
+  "profileNotFilledOut": "Щоб додати знижку, заповніть, будь ласка, інформацію про компанію в особистому кабінеті",
+  "@profileNotFilledOut": {
+    "examples": "Текст на сторінці MyDiscounts, коли не заповнений профіль"
+  },
+  "underReview": "Перевіряється",
+  "@underReview": {
+    "examples": "Текст для статуса знижки"
+  },
+  "overdue": "Протерміновано",
+  "@overdue": {
+    "examples": "Текст для статуса знижки"
+  },
+  "rejected": "Відхилено",
+  "@rejected": {
+    "examples": "Текст для статуса знижки"
+  },
+  "published": "Опубліковано",
+  "@published": {
+    "examples": "Текст для статуса знижки"
+  },
+  "deactivated": "Деактивовано",
+  "@deactivated": {
+    "examples": "Текст для статуса знижки"
+  },
+  "toProfile": "До кабінету",
+  "@toProfile": {
+    "examples": "Текст для кнопки на сторінці MyDiscount.",
+    "description": "Кнопка використовується для переходу в кабнет"
+  },
+  "descriptionForRejectedStatus": "Ваше оголошення не може бути опубліковане через деякі помилки.\nБудь ласка, зверніться за деталями на наш емайл: hello@veteranam.info",
+  "@descriptionForRejectedStatus": {
+    "examples": "Текст для опису відхиленного статусу знижки на сторінці MyDiscount."
   }
 }
