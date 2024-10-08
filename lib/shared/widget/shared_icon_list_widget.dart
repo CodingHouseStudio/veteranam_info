@@ -14,6 +14,7 @@ abstract class SharedIconListWidget {
     required Key shareKey,
     required Key complaintKey,
     required String? share,
+    bool complaint = true,
     Color background = AppColors.materialThemeWhite,
   }) {
     return [
@@ -45,6 +46,7 @@ abstract class SharedIconListWidget {
         // afterEvent: afterEvent,
         cardId: cardId,
         background: background,
+        canTap: complaint,
       ),
     ];
   }

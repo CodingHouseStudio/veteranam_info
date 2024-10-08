@@ -530,9 +530,68 @@ extension DiscountStateExtention on DiscountState {
         return 'deactivated';
     }
   }
+
+  String text(BuildContext context) {
+    switch (this) {
+      case DiscountState.isNew:
+      case DiscountState.underReview:
+        return context.l10n.underReview;
+      case DiscountState.overdue:
+        return context.l10n.overdue;
+      case DiscountState.rejected:
+        return context.l10n.rejected;
+      case DiscountState.published:
+        return context.l10n.published;
+      case DiscountState.deactivated:
+        return context.l10n.deactivated;
+    }
+  }
+
+  Color get color {
+    switch (this) {
+      case DiscountState.isNew:
+      case DiscountState.underReview:
+        return AppColors.materialThemeRefNeutralNeutral99;
+      case DiscountState.overdue:
+        return AppColors.materialThemeRefTertiaryTertiary98;
+      case DiscountState.rejected:
+        return AppColors.materialThemeRefErrorError98;
+      case DiscountState.published:
+        return AppColors.materialThemeRefSecondarySecondary99;
+      case DiscountState.deactivated:
+        return AppColors.materialThemeRefTertiaryTertiary90;
+    }
+  }
+
+  Color get pointColor {
+    switch (this) {
+      case DiscountState.isNew:
+      case DiscountState.underReview:
+        return AppColors.materialThemeSysLightTertiary;
+      case DiscountState.overdue:
+        return AppColors.materialThemeRefTertiaryTertiary60;
+      case DiscountState.rejected:
+        return AppColors.materialThemeRefErrorError40;
+      case DiscountState.published:
+        return AppColors.materialThemeRefPrimaryPrimary80;
+      case DiscountState.deactivated:
+        return AppColors.materialThemeRefTertiaryTertiary70;
+    }
+  }
 }
 
 extension UserExtensions on User? {
+  bool get isFullProfile {
+    if (this == null ||
+        this!.email == null ||
+        this!.name == null ||
+        (this!.photo == null && !KTest.isTest)) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   String? get firstName => this?.name?.split(' ').first;
 
   String? get lastName => this?.name?.split(' ').last;
