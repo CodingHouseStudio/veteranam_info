@@ -355,11 +355,18 @@ class FirestoreService {
 
   Stream<List<DiscountModel>> getDiscounts(
       // List<String>? reportIdItems,
-      ) {
+      {
+    String? userId,
+  }) {
     var query = _db
         .collection(FirebaseCollectionName.discount)
         .orderBy(DiscountModelJsonField.dateVerified, descending: true);
-    if (Config.isProduction) {
+    if (userId != null) {
+      query = query.where(
+        DiscountModelJsonField.userId,
+        isEqualTo: userId,
+      );
+    } else if (Config.isProduction) {
       query = query.where(
         DiscountModelJsonField.status,
         isEqualTo: DiscountState.published.enumString,
@@ -407,6 +414,15 @@ class FirestoreService {
     } else {
       throw FirebaseException(code: 'not-found', plugin: 'not-found');
     }
+  }
+
+  Future<void> updateDiscountModel(
+    DiscountModel discountModel,
+  ) async {
+    return _db
+        .collection(FirebaseCollectionName.discount)
+        .doc(discountModel.id)
+        .update(discountModel.toJson());
   }
 
   Future<void> sendLink(
@@ -484,16 +500,16 @@ class FirestoreService {
   //       .set(tags.toJson());
   // }
 
-  Future<List<DiscountModel>> getDiscountsByUserId(String userId) async {
-    final querySnapshot = await _db
-        .collection(FirebaseCollectionName.discount)
-        .where(DiscountModelJsonField.userId, isEqualTo: userId)
-        .get();
+  // Future<List<DiscountModel>> getDiscountsByUserId(String userId) async {
+  //   final querySnapshot = await _db
+  //       .collection(FirebaseCollectionName.discount)
+  //       .where(DiscountModelJsonField.userId, isEqualTo: userId)
+  //       .get();
 
-    return querySnapshot.docs
-        .map((doc) => DiscountModel.fromJson(doc.data()))
-        .toList();
-  }
+  //   return querySnapshot.docs
+  //       .map((doc) => DiscountModel.fromJson(doc.data()))
+  //       .toList();
+  // }
 
   Future<void> deleteDiscountById(String discountId) {
     return _db

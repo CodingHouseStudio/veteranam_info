@@ -11,6 +11,7 @@ class DiscountCardWidget extends StatelessWidget {
     super.key,
     this.closeWidget,
     this.descriptionMethod,
+    this.complaint,
   });
 
   final DiscountModel discountItem;
@@ -20,6 +21,7 @@ class DiscountCardWidget extends StatelessWidget {
   final String? share;
   final bool isLoading;
   final String Function(String)? descriptionMethod;
+  final bool? complaint;
 
   @override
   Widget build(BuildContext context) {
@@ -202,6 +204,7 @@ class DiscountCardWidget extends StatelessWidget {
                     complaintKey: KWidgetkeys.widget.discountCard.iconComplaint,
                     shareKey: KWidgetkeys.widget.discountCard.iconShare,
                     webSiteKey: KWidgetkeys.widget.discountCard.iconWebsite,
+                    complaint: complaint ?? true,
                   ),
                 ),
                 KSizedBox.kHeightSizedBox16,

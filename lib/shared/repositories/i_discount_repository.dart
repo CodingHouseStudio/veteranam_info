@@ -10,7 +10,7 @@ abstract class IDiscountRepository {
 
   void addMockDiscountItems();
 
-  Future<Either<SomeFailure, List<DiscountModel>>> getDiscountsByUserId(
+  Stream<List<DiscountModel>> getDiscountsByUserId(
     String userId,
   );
 
@@ -35,4 +35,8 @@ abstract class IDiscountRepository {
   );
 
   Future<Either<SomeFailure, bool>> addDiscount(DiscountModel discount);
+
+  Future<Either<SomeFailure, bool>> deactivateDiscount({
+    required DiscountModel discountModel,
+  });
 }

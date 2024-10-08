@@ -8,12 +8,17 @@ import '../../test_dependency.dart';
 Future<void> myDiscountsPumpAppHelper({
   required IDiscountRepository mockDiscountRepository,
   required IAppAuthenticationRepository mockAppAuthenticationRepository,
+  required AuthenticationRepository mockAuthenticationRepository,
   required WidgetTester tester,
   MockGoRouter? mockGoRouter,
 }) async {
   _registerMyDiscountsBloc(
     mockDiscountRepository: mockDiscountRepository,
     mockAppAuthenticationRepository: mockAppAuthenticationRepository,
+  );
+
+  _registerAuthenticationBloc(
+    mockAuthenticationRepository: mockAuthenticationRepository,
   );
 
   await tester.pumpApp(
@@ -43,4 +48,16 @@ void _registerMyDiscountsBloc({
   GetIt.I.registerSingleton<MyDiscountsWatcherBloc>(
     myDiscountsWatcherBloc,
   );
+}
+
+void _registerAuthenticationBloc({
+  required AuthenticationRepository mockAuthenticationRepository,
+}) {
+  final authenticationBloc = AuthenticationBloc(
+    authenticationRepository: mockAuthenticationRepository,
+  );
+  if (GetIt.I.isRegistered<AuthenticationBloc>()) {
+    GetIt.I.unregister<AuthenticationBloc>();
+  }
+  GetIt.I.registerSingleton<AuthenticationBloc>(authenticationBloc);
 }
