@@ -239,6 +239,19 @@ abstract class KAppText {
         KRoute.support.name,
         KRoute.settings.name,
       ];
+  static const discountsCategories = [
+    'Спорт',
+    'Медицина',
+    'Салони краси',
+    'Перевезення',
+    'Магазини',
+    'Військторг',
+    'Відпочинок',
+    'Житло',
+    'Автосервіс',
+    'Освіта',
+    'Ресторани',
+  ];
   static const ukrainianAlphabet = [
     'а',
     'б',
