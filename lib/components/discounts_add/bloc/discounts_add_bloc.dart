@@ -327,12 +327,11 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
   ) async {
     if (state.formState.isMain) {
       if (Formz.validate([
-                state.title,
-                state.discounts,
-                state.link,
-              ]) &&
-              (state.eligibility == null ||
-          state.eligibility!.isValid)) {
+            state.title,
+            state.discounts,
+            state.link,
+          ]) &&
+          (state.eligibility == null || state.eligibility!.isValid)) {
         emit(state.copyWith(formState: DiscountsAddEnum.detail));
       } else {
         emit(state.copyWith(formState: DiscountsAddEnum.invalidData));
