@@ -80,7 +80,7 @@ void main() {
           mockDiscountRepository,
         );
       });
-      testWidgets('${KGroupText.mockButton} ', (tester) async {
+      testWidgets('${KGroupText.initial} ', (tester) async {
         await myDiscountsPumpAppHelper(
           mockDiscountRepository: mockDiscountRepository,
           mockAppAuthenticationRepository: mockAppAuthenticationRepository,
@@ -146,7 +146,7 @@ void main() {
           mockDiscountRepository,
         );
       });
-      testWidgets('${KGroupText.mockButton} ', (tester) async {
+      testWidgets('${KGroupText.initial} ', (tester) async {
         await myDiscountsPumpAppHelper(
           mockDiscountRepository: mockDiscountRepository,
           mockAppAuthenticationRepository: mockAppAuthenticationRepository,

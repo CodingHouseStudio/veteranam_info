@@ -241,7 +241,7 @@ class MyDiscountsWatcherBloc
     result.fold(
       (l) => emit(
         state.copyWith(
-          failure: MyDiscountFailure.error,
+          // failure: MyDiscountFailure.error,
           loadingStatus: LoadingStatus.error,
         ),
       ),

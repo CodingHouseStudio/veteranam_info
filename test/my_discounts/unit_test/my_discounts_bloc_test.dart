@@ -427,9 +427,7 @@ void main() {
           (state) => state.loadingStatus == LoadingStatus.loaded,
         ),
         predicate<MyDiscountsWatcherState>(
-          (state) =>
-              state.loadingStatus == LoadingStatus.error &&
-              state.failure == MyDiscountFailure.error,
+          (state) => state.loadingStatus == LoadingStatus.error,
         ),
       ],
     );
