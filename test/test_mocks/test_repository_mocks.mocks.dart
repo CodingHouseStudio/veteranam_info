@@ -7736,18 +7736,13 @@ class MockIDiscountRepository extends _i1.Mock
       ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
 
   @override
-  _i8.Future<_i2.Either<_i3.SomeFailure, bool>> deactivateDiscount({
-    required _i3.DiscountModel? discountModel,
-    required bool? isDeactivate,
-  }) =>
+  _i8.Future<_i2.Either<_i3.SomeFailure, bool>> deactivateDiscount(
+          {required _i3.DiscountModel? discountModel}) =>
       (super.noSuchMethod(
         Invocation.method(
           #deactivateDiscount,
           [],
-          {
-            #discountModel: discountModel,
-            #isDeactivate: isDeactivate,
-          },
+          {#discountModel: discountModel},
         ),
         returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
             _FakeEither_0<_i3.SomeFailure, bool>(
@@ -7755,10 +7750,7 @@ class MockIDiscountRepository extends _i1.Mock
           Invocation.method(
             #deactivateDiscount,
             [],
-            {
-              #discountModel: discountModel,
-              #isDeactivate: isDeactivate,
-            },
+            {#discountModel: discountModel},
           ),
         )),
         returnValueForMissingStub:
@@ -7768,10 +7760,7 @@ class MockIDiscountRepository extends _i1.Mock
           Invocation.method(
             #deactivateDiscount,
             [],
-            {
-              #discountModel: discountModel,
-              #isDeactivate: isDeactivate,
-            },
+            {#discountModel: discountModel},
           ),
         )),
       ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);

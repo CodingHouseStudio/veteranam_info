@@ -37,7 +37,7 @@ class MyDiscountsWatcherBloc
   final IDiscountRepository _discountRepository;
   StreamSubscription<List<DiscountModel>>? _discountItemsSubscription;
   final IAppAuthenticationRepository _iAppAuthenticationRepository;
-  Timer? _debounceTimer;
+  // Timer? _debounceTimer;
 
   // Future<void> _onStarted(
   //   _Started event,
@@ -141,7 +141,7 @@ class MyDiscountsWatcherBloc
       (l) => emit(
         state.copyWith(
           failure: l._toMyDiscount(),
-          loadingStatus: LoadingStatus.error,
+          // loadingStatus: LoadingStatus.error,
         ),
       ),
       (r) => emit(
@@ -206,21 +206,28 @@ class MyDiscountsWatcherBloc
     _Deactivate event,
     Emitter<MyDiscountsWatcherState> emit,
   ) async {
-    if (_debounceTimer?.isActive ?? false) {
-      _debounceTimer?.cancel();
-      _debounceTimer = null;
-      return;
-    }
-    if (!(_debounceTimer?.isActive ?? false)) {
-      _debounceTimer = Timer(Duration(seconds: KTest.isTest ? 0 : 5), () async {
-        add(
-          MyDiscountsWatcherEvent.changeDeactivate(
-            discountModel: event.discountModel,
-            isDeactivate: event.isDeactivate,
-          ),
-        );
-      });
-    }
+    add(
+      MyDiscountsWatcherEvent.changeDeactivate(
+        discountModel: event.discountModel,
+        isDeactivate: event.isDeactivate,
+      ),
+    );
+    // if (_debounceTimer?.isActive ?? false) {
+    //   _debounceTimer?.cancel();
+    //   _debounceTimer = null;
+    //   return;
+    // }
+    // if (!(_debounceTimer?.isActive ?? false)) {
+    //   _debounceTimer = Timer(Duration(seconds: KTest.isTest ? 0 : 5),
+    //() async {
+    //     add(
+    //       MyDiscountsWatcherEvent.changeDeactivate(
+    //         discountModel: event.discountModel,
+    //         isDeactivate: event.isDeactivate,
+    //       ),
+    //     );
+    //   });
+    // }
   }
 
   Future<void> _onChangeDeactivate(
@@ -229,7 +236,6 @@ class MyDiscountsWatcherBloc
   ) async {
     final result = await _discountRepository.deactivateDiscount(
       discountModel: event.discountModel,
-      isDeactivate: event.isDeactivate,
     );
 
     result.fold(
@@ -267,6 +273,7 @@ class MyDiscountsWatcherBloc
   @override
   Future<void> close() {
     _discountItemsSubscription?.cancel();
+    // timer.close();
     return super.close();
   }
 }

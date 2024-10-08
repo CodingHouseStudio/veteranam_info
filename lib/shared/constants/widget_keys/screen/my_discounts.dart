@@ -24,4 +24,5 @@ class _MyDiscountsKeys {
   final overdue = const Key('my_discounts_screen_status_overdue');
   final deactivated = const Key('my_discounts_screen_status_deactivated');
   final defaultSt = const Key('my_discounts_screen_status_defaultSt');
+  final rejectedText = const Key('my_discounts_screen_rejected_text');
 }

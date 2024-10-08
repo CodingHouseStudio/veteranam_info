@@ -38,6 +38,5 @@ abstract class IDiscountRepository {
 
   Future<Either<SomeFailure, bool>> deactivateDiscount({
     required DiscountModel discountModel,
-    required bool isDeactivate,
   });
 }

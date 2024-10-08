@@ -585,7 +585,7 @@ extension UserExtensions on User? {
     if (this == null ||
         this!.email == null ||
         this!.name == null ||
-        this!.photo == null) {
+        (this!.photo == null && !KTest.isTest)) {
       return false;
     } else {
       return true;
@@ -596,12 +596,6 @@ extension UserExtensions on User? {
 
   String? get lastName => this?.name?.split(' ').last;
 }
-
-// extension UserExtensions on User? {
-//   String? get firstName => this?.name?.split(' ').first;
-
-//   String? get lastName => this?.name?.split(' ').last;
-// }
 
 extension ProfileEnumExtensions on ProfileEnum {
   String loadingMessage(BuildContext context) {

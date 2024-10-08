@@ -8,14 +8,14 @@ class MyDiscountsCard extends StatefulWidget {
     required this.discountModel,
     required this.isDesk,
     required this.isLoading,
-    this.onDeactivate,
+    // this.onDeactivate,
     super.key,
   });
 
   final bool isDesk;
   final DiscountModel discountModel;
   final bool isLoading;
-  final void Function({required bool deactivate})? onDeactivate;
+  // final void Function({required bool deactivate})? onDeactivate;
 
   @override
   State<MyDiscountsCard> createState() => _MyDiscountsCardState();
@@ -50,6 +50,7 @@ class _MyDiscountsCardState extends State<MyDiscountsCard> {
               DiscountStatusWidget(
                 key: KWidgetkeys.screen.myDiscounts.status,
                 status: widget.discountModel.status,
+                isDesk: widget.isDesk,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -78,32 +79,40 @@ class _MyDiscountsCardState extends State<MyDiscountsCard> {
                     icon: KIcon.edit,
                     decoration: KWidgetTheme.boxDecorationBorderBlack,
                   ),
-                  KSizedBox.kWidthSizedBox8,
-                  TextButton.icon(
-                    onPressed: () {
-                      widget.onDeactivate?.call(
-                        deactivate: widget.discountModel.status !=
-                            DiscountState.deactivated,
-                      );
-                    },
-                    style: KButtonStyles.borderBlackButtonStyle.copyWith(
-                      padding: const WidgetStatePropertyAll(
-                        EdgeInsets.only(
-                          top: KPadding.kPaddingSize20,
-                          bottom: KPadding.kPaddingSize20,
-                          right: KPadding.kPaddingSize16,
-                          left: KPadding.kPaddingSize8,
+                  if (widget.discountModel.status != DiscountState.rejected)
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(left: KPadding.kPaddingSize8),
+                      child: TextButton.icon(
+                        onPressed: null,
+                        // () {
+                        //   widget.discountModel.status ==
+                        // DiscountState.published
+                        //       ? widget.onDeactivate?.call(
+                        //           deactivate: widget.discountModel.status !=
+                        //               DiscountState.deactivated,
+                        //         )
+                        //       : null;
+                        // },
+                        style: KButtonStyles.borderBlackButtonStyle.copyWith(
+                          padding: const WidgetStatePropertyAll(
+                            EdgeInsets.only(
+                              top: KPadding.kPaddingSize20,
+                              bottom: KPadding.kPaddingSize20,
+                              right: KPadding.kPaddingSize16,
+                              left: KPadding.kPaddingSize8,
+                            ),
+                          ),
+                          alignment: Alignment.centerLeft,
+                        ),
+                        icon: KIcon.close,
+                        label: Text(
+                          key: KWidgetkeys.screen.myDiscounts.deactivate,
+                          context.l10n.deactivate,
+                          style: AppTextStyle.materialThemeTitleMedium,
                         ),
                       ),
-                      alignment: Alignment.centerLeft,
                     ),
-                    icon: KIcon.close,
-                    label: Text(
-                      key: KWidgetkeys.screen.myDiscounts.deactivate,
-                      context.l10n.deactivate,
-                      style: AppTextStyle.materialThemeTitleMedium,
-                    ),
-                  ),
                 ],
               ),
             ],
@@ -112,18 +121,24 @@ class _MyDiscountsCardState extends State<MyDiscountsCard> {
           DiscountStatusWidget(
             key: KWidgetkeys.screen.myDiscounts.status,
             status: widget.discountModel.status,
+            isDesk: widget.isDesk,
           ),
           KSizedBox.kHeightSizedBox16,
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              // if (widget.discountModel.status != DiscountState.rejected)
               TextButton.icon(
-                onPressed: () {
-                  widget.onDeactivate?.call(
-                    deactivate: widget.discountModel.status !=
-                        DiscountState.deactivated,
-                  );
-                },
+                key: KWidgetkeys.screen.myDiscounts.deactivate,
+                onPressed: null,
+                // () {
+                //   widget.discountModel.status == DiscountState.published
+                //       ? widget.onDeactivate?.call(
+                //           deactivate: widget.discountModel.status !=
+                //               DiscountState.deactivated,
+                //         )
+                //       : null;
+                // },
                 style: KButtonStyles.borderBlackButtonStyle.copyWith(
                   padding: const WidgetStatePropertyAll(
                     EdgeInsets.only(
@@ -137,7 +152,6 @@ class _MyDiscountsCardState extends State<MyDiscountsCard> {
                 ),
                 icon: KIcon.close,
                 label: Text(
-                  key: KWidgetkeys.screen.myDiscounts.deactivate,
                   context.l10n.deactivate,
                   style: AppTextStyle.materialThemeTitleMedium,
                 ),

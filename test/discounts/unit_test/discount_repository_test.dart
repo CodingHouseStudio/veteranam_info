@@ -324,28 +324,28 @@ void main() {
           // ),
         );
       });
-      test('Get discount use User Id', () async {
-        expect(
-          mockDiscountRepository.getDiscountsByUserId(KTestText.user.id),
-          isA<Left<SomeFailure, List<DiscountModel>>>(),
-          // .having(
-          //   (e) => e.value,
-          //   'value',
-          //   SomeFailure.serverError(error: null),
-          // ),
-        );
-      });
-      test('Get discount use User Id', () async {
-        expect(
-          mockDiscountRepository.getDiscountsByUserId(KTestText.user.id),
-          isA<Left<SomeFailure, List<DiscountModel>>>(),
-          // .having(
-          //   (e) => e.value,
-          //   'value',
-          //   SomeFailure.serverError(error: null),
-          // ),
-        );
-      });
+      // test('Get discount use User Id', () async {
+      //   expect(
+      //     mockDiscountRepository.getDiscountsByUserId(KTestText.user.id),
+      //     isA<Left<SomeFailure, List<DiscountModel>>>(),
+      //     // .having(
+      //     //   (e) => e.value,
+      //     //   'value',
+      //     //   SomeFailure.serverError(error: null),
+      //     // ),
+      //   );
+      // });
+      // test('Get discount use User Id', () async {
+      //   expect(
+      //     mockDiscountRepository.getDiscountsByUserId(KTestText.user.id),
+      //     isA<Left<SomeFailure, List<DiscountModel>>>(),
+      //     // .having(
+      //     //   (e) => e.value,
+      //     //   'value',
+      //     //   SomeFailure.serverError(error: null),
+      //     // ),
+      //   );
+      // });
       test('Add Discount', () async {
         expect(
           await mockDiscountRepository

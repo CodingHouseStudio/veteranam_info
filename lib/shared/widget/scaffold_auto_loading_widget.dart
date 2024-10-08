@@ -98,7 +98,8 @@ class _ScaffoldAutoLoadingWidgetState extends State<ScaffoldAutoLoadingWidget> {
                 //       context.l10n.cardListEmptyText,
                 //       key: KWidgetkeys.widget.scaffold.emptyListText,
                 //       style:
-                //           AppTextStyle.materialThemeTitleMediumNeutralVariant70
+                //           AppTextStyle.
+                // materialThemeTitleMediumNeutralVariant70
                 // ,
                 //     ),
                 //   ),

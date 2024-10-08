@@ -165,12 +165,13 @@ class DiscountRepository implements IDiscountRepository {
   @override
   Future<Either<SomeFailure, bool>> deactivateDiscount({
     required DiscountModel discountModel,
-    required bool isDeactivate,
   }) async {
     try {
       await _firestoreService.updateDiscountModel(
         discountModel.copyWith(
-          status: DiscountState.deactivated,
+          status: discountModel.status == DiscountState.deactivated
+              ? DiscountState.published
+              : DiscountState.deactivated,
         ),
       );
       return const Right(true);

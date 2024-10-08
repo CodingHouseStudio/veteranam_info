@@ -15,13 +15,13 @@ List<Widget> _discountsboxWidgetList({
         discountModel: modelItem,
         isDesk: isDesk,
         isLoading: isLoading,
-        onDeactivate: ({required deactivate}) =>
-            context.read<MyDiscountsWatcherBloc>().add(
-                  MyDiscountsWatcherEvent.deactivate(
-                    discountModel: modelItem,
-                    isDeactivate: deactivate,
-                  ),
-                ),
+        // onDeactivate: ({required deactivate}) =>
+        //     context.read<MyDiscountsWatcherBloc>().add(
+        //           MyDiscountsWatcherEvent.deactivate(
+        //             discountModel: modelItem,
+        //             isDeactivate: deactivate,
+        //           ),
+        //         ),
         // reportEvent: null,
         // () => context
         //     .read<DiscountWatcherBloc>()

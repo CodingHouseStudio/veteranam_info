@@ -36,6 +36,7 @@ Future<void> myDiscountsInitialHelper(
         find.byKey(KWidgetkeys.screen.myDiscounts.status),
         findsWidgets,
       );
+
       await scrollingHelper(
         tester: tester,
         itemKey: KWidgetkeys.screen.myDiscounts.status,
@@ -46,6 +47,16 @@ Future<void> myDiscountsInitialHelper(
         findsWidgets,
       );
 
+      await scrollingHelper(
+        tester: tester,
+        itemKey: KWidgetkeys.screen.myDiscounts.iconTrash,
+      );
+
+      await tester
+          .tap(find.byKey(KWidgetkeys.screen.myDiscounts.iconTrash).first);
+
+      await tester.pumpAndSettle();
+
       expect(
         find.byKey(KWidgetkeys.screen.myDiscounts.iconEdit),
         findsWidgets,
@@ -55,6 +66,8 @@ Future<void> myDiscountsInitialHelper(
         find.byKey(KWidgetkeys.screen.myDiscounts.deactivate),
         findsWidgets,
       );
+
+      await scrollingHelper(tester: tester, offset: KTestConstants.scrollingUp);
     },
   );
 }
