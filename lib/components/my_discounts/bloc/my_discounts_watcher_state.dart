@@ -23,6 +23,8 @@ extension MyDiscountFailureExtension on SomeFailure {
 class MyDiscountsWatcherState with _$MyDiscountsWatcherState {
   const factory MyDiscountsWatcherState({
     required List<DiscountModel> discountsModelItems,
+    required List<DiscountModel> loadedDiscountsModelItems,
+    required int itemsLoaded,
     required LoadingStatus loadingStatus,
     MyDiscountFailure? failure,
   }) = _Initial;

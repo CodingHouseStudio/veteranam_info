@@ -415,6 +415,14 @@ abstract class AppTextStyle {
     fontWeight: FontWeight.w400,
   );
 
+  static const TextStyle materialThemeTitleLargeNeutral80 = TextStyle(
+    fontFamily: 'Gilroy',
+    fontSize: 22,
+    height: 1.27,
+    fontWeight: FontWeight.w400,
+    color: AppColors.materialThemeRefNeutralNeutral80,
+  );
+
   /// materialThemeTitleMedium figma properties
   /// fontFamily: Gilroy
   /// fontSize: 16px
@@ -430,6 +438,14 @@ abstract class AppTextStyle {
     fontWeight: FontWeight.w500,
     letterSpacing: 0.15,
     color: AppColors.materialThemeKeyColorsSecondary,
+  );
+  static const TextStyle materialThemeTitleMediumNeutral70 = TextStyle(
+    fontFamily: 'Gilroy',
+    fontSize: 16,
+    height: 1.5,
+    fontWeight: FontWeight.w500,
+    letterSpacing: 0.15,
+    color: AppColors.materialThemeRefNeutralNeutral70,
   );
   static const TextStyle materialThemeTitleMediumBlack = TextStyle(
     fontFamily: 'Gilroy',
@@ -495,6 +511,15 @@ abstract class AppTextStyle {
     fontWeight: FontWeight.w500,
     letterSpacing: 0.1,
     color: AppColors.materialThemeKeyColorsNeutral,
+  );
+
+  static const TextStyle materialThemeTitleSmallNeutral80 = TextStyle(
+    fontFamily: 'Gilroy',
+    fontSize: 14,
+    height: 1.43,
+    fontWeight: FontWeight.w500,
+    letterSpacing: 0.1,
+    color: AppColors.materialThemeRefNeutralNeutral80,
   );
 
   /// h1 figma properties

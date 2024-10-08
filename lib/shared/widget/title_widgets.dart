@@ -343,3 +343,44 @@ class ShortTitleIconWidget extends StatelessWidget {
         padding: isDesk ? KPadding.kPaddingSize20 : KPadding.kPaddingSize8,
       );
 }
+
+class LineTitleIconButtonWidget extends StatelessWidget {
+  const LineTitleIconButtonWidget({
+    required this.title,
+    required this.titleKey,
+    required this.icon,
+    required this.iconButtonKey,
+    required this.isDesk,
+    this.onPressed,
+    super.key,
+  });
+  final String title;
+  final Key titleKey;
+  final Key iconButtonKey;
+  final bool isDesk;
+  final Icon icon;
+  final void Function()? onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      key: titleKey,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          title,
+          style: isDesk
+              ? AppTextStyle.materialThemeDisplayLarge
+              : AppTextStyle.materialThemeDisplaySmall,
+        ),
+        IconButtonWidget(
+          key: iconButtonKey,
+          padding: isDesk ? KPadding.kPaddingSize20 : KPadding.kPaddingSize12,
+          icon: icon,
+          background: AppColors.materialThemeKeyColorsPrimary,
+          onPressed: onPressed,
+        ),
+      ],
+    );
+  }
+}

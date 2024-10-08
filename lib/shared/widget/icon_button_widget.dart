@@ -9,6 +9,7 @@ class IconButtonWidget extends StatelessWidget {
     this.color,
     super.key,
     this.padding,
+    this.buttonStyle,
   });
 
   final Color? background;
@@ -16,14 +17,16 @@ class IconButtonWidget extends StatelessWidget {
   final Widget icon;
   final double? padding;
   final void Function()? onPressed;
+  final ButtonStyle? buttonStyle;
 
   @override
   Widget build(BuildContext context) {
     return IconButton(
       onPressed: onPressed,
-      style: KButtonStyles.iconButtonStyle.copyWith(
-        backgroundColor: WidgetStatePropertyAll(background),
-      ),
+      style: buttonStyle ??
+          KButtonStyles.iconButtonStyle.copyWith(
+            backgroundColor: WidgetStatePropertyAll(background),
+          ),
       padding: EdgeInsets.all(padding ?? KPadding.kPaddingSize12),
       icon: icon,
       color: color,
