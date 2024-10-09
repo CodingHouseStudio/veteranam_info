@@ -388,9 +388,9 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   }
 
   @override
-  Future<Either<SomeFailure, bool>> checkVerificationCode({
-    required String? code,
-  }) async {
+  Future<Either<SomeFailure, bool>> checkVerificationCode(
+    String? code,
+  ) async {
     try {
       if (code == null) {
         return Left(SomeFailure.wrongVerifyCode());

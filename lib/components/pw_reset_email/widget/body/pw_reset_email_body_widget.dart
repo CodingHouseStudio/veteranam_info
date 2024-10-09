@@ -88,10 +88,9 @@ class PwResetEmailBodyWidget extends StatelessWidget {
             SendingTextWidget(
               textKey: KWidgetkeys.screen.pwResetEmail.submitingText,
               failureText: _.failure?.value(context),
-              sendingText: _.formState.isSending
-                  ? context.l10n.passwordResetCodeSending
-                  : null,
+              sendingText: context.l10n.passwordResetCodeSending,
               successText: null,
+              showSendingText: _.formState.isSending,
             ),
             if (isDesk)
               KSizedBox.kHeightSizedBox80

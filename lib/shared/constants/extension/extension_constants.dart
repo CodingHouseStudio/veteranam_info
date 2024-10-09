@@ -7,7 +7,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart' show Uint8List, kIsWeb, kReleaseMode;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
+import 'package:intl/intl.dart' show DateFormat;
 import 'package:veteranam/components/components.dart';
 import 'package:veteranam/shared/shared.dart';
 
@@ -235,16 +235,13 @@ extension StringExtension on String {
 
   int get _ukraineIndex => KAppText.ukrainianAlphabet.indexOf(this);
 
-  double getTextLength({
-    required double? width,
+  double getTextWidth({
     required TextStyle textStyle,
-    double? additional,
   }) {
-    if (width != null) return width;
-    final textLength =
-        length * (textStyle.fontSize! + textStyle.letterSpacing!) +
-            (additional ?? 0);
-    return textLength / KSize.kPixel2;
+    return TextPainter.computeWidth(
+      text: TextSpan(text: this, style: textStyle),
+      textDirection: TextDirection.ltr,
+    );
   }
 
   String? get getUserPlatform {
@@ -533,9 +530,68 @@ extension DiscountStateExtention on DiscountState {
         return 'deactivated';
     }
   }
+
+  String text(BuildContext context) {
+    switch (this) {
+      case DiscountState.isNew:
+      case DiscountState.underReview:
+        return context.l10n.underReview;
+      case DiscountState.overdue:
+        return context.l10n.overdue;
+      case DiscountState.rejected:
+        return context.l10n.rejected;
+      case DiscountState.published:
+        return context.l10n.published;
+      case DiscountState.deactivated:
+        return context.l10n.deactivated;
+    }
+  }
+
+  Color get color {
+    switch (this) {
+      case DiscountState.isNew:
+      case DiscountState.underReview:
+        return AppColors.materialThemeRefNeutralNeutral99;
+      case DiscountState.overdue:
+        return AppColors.materialThemeRefTertiaryTertiary98;
+      case DiscountState.rejected:
+        return AppColors.materialThemeRefErrorError98;
+      case DiscountState.published:
+        return AppColors.materialThemeRefSecondarySecondary99;
+      case DiscountState.deactivated:
+        return AppColors.materialThemeRefTertiaryTertiary90;
+    }
+  }
+
+  Color get pointColor {
+    switch (this) {
+      case DiscountState.isNew:
+      case DiscountState.underReview:
+        return AppColors.materialThemeSysLightTertiary;
+      case DiscountState.overdue:
+        return AppColors.materialThemeRefTertiaryTertiary60;
+      case DiscountState.rejected:
+        return AppColors.materialThemeRefErrorError40;
+      case DiscountState.published:
+        return AppColors.materialThemeRefPrimaryPrimary80;
+      case DiscountState.deactivated:
+        return AppColors.materialThemeRefTertiaryTertiary70;
+    }
+  }
 }
 
 extension UserExtensions on User? {
+  bool get isFullProfile {
+    if (this == null ||
+        this!.email == null ||
+        this!.name == null ||
+        (this!.photo == null && !KTest.isTest)) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   String? get firstName => this?.name?.split(' ').first;
 
   String? get lastName => this?.name?.split(' ').last;

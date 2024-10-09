@@ -88,10 +88,9 @@ class SignUpBodyWidget extends StatelessWidget {
             SendingTextWidget(
               textKey: KWidgetkeys.screen.signUp.submitingText,
               failureText: _.failure?.value(context),
-              sendingText: _.formState == SignUpEnum.success
-                  ? context.l10n.loggingInWait
-                  : null,
+              sendingText: context.l10n.loggingInWait,
               successText: null,
+              showSendingText: _.formState == SignUpEnum.success,
             ),
             // if (_.formState == SignUpEnum.success) ...[
             //   KSizedBox.kHeightSizedBox16,

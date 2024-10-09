@@ -15,9 +15,16 @@ class PasswordResetBlocprovider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => GetIt.I.get<PasswordResetBloc>()
-        ..add(PasswordResetEvent.started(code)),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => GetIt.I.get<PasswordResetBloc>(),
+        ),
+        BlocProvider(
+          create: (context) =>
+              GetIt.I.get<CheckVerificationCodeCubit>()..started(code),
+        ),
+      ],
       child: childWidget,
     );
   }

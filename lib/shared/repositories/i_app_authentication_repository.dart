@@ -35,9 +35,9 @@ abstract class IAppAuthenticationRepository {
     required String email,
   });
 
-  Future<Either<SomeFailure, bool>> checkVerificationCode({
-    required String? code,
-  });
+  Future<Either<SomeFailure, bool>> checkVerificationCode(
+    String? code,
+  );
 
   Future<Either<SomeFailure, bool>> resetPasswordUseCode({
     required String code,

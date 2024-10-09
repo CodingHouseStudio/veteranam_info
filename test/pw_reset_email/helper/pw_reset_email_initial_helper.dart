@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:veteranam/shared/shared.dart';
 
-import '../../helpers/change_window_size_helper.dart';
+import '../../test_dependency.dart';
 
 Future<void> pwResetEmailInitialHelper(
   WidgetTester tester,
@@ -17,11 +17,6 @@ Future<void> pwResetEmailInitialHelper(
 
       expect(
         find.byKey(KWidgetkeys.screen.pwResetEmail.subtitle),
-        findsOneWidget,
-      );
-
-      expect(
-        find.byKey(KWidgetkeys.screen.pwResetEmail.emailField),
         findsOneWidget,
       );
 

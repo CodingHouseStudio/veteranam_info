@@ -54,8 +54,10 @@ import 'package:veteranam/components/my_story/bloc/my_story_watcher_bloc.dart'
     as _i922;
 import 'package:veteranam/components/news_card/bloc/news_card_watcher_bloc.dart'
     as _i688;
-import 'package:veteranam/components/password_reset/bloc/password_reset_bloc.dart'
-    as _i400;
+import 'package:veteranam/components/password_reset/bloc/check_code/check_verification_code_cubit.dart'
+    as _i846;
+import 'package:veteranam/components/password_reset/bloc/form/password_reset_bloc.dart'
+    as _i335;
 import 'package:veteranam/components/privacy_policy/bloc/privacy_policy_markdown_cubit.dart'
     as _i686;
 import 'package:veteranam/components/profile/bloc/profile_bloc.dart' as _i492;
@@ -359,7 +361,10 @@ extension GetItInjectableX on _i174.GetIt {
         _i891.NetworkCubit(networkRepository: gh<_i1001.NetworkRepository>()));
     gh.factory<_i1025.LoginBloc>(() => _i1025.LoginBloc(
         authenticationRepository: gh<_i1001.AuthenticationRepository>()));
-    gh.factory<_i400.PasswordResetBloc>(() => _i400.PasswordResetBloc(
+    gh.factory<_i846.CheckVerificationCodeCubit>(() =>
+        _i846.CheckVerificationCodeCubit(
+            authenticationRepository: gh<_i1001.AuthenticationRepository>()));
+    gh.factory<_i335.PasswordResetBloc>(() => _i335.PasswordResetBloc(
         authenticationRepository: gh<_i1001.AuthenticationRepository>()));
     gh.factory<_i492.ProfileBloc>(() => _i492.ProfileBloc(
         authenticationRepository: gh<_i1001.AuthenticationRepository>()));

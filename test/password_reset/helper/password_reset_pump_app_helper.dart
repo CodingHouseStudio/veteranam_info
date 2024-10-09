@@ -9,14 +9,18 @@ Future<void> passwordResetPumpAppHelper({
   required WidgetTester tester,
   required AuthenticationRepository mockAuthenticationRepository,
   MockGoRouter? mockGoRouter,
+  String? code = KTestText.code,
 }) async {
   _registerPasswordResetBloc(
     mockAuthenticationRepository: mockAuthenticationRepository,
   );
+  _registerCheckVerificationCodeCubit(
+    mockAuthenticationRepository: mockAuthenticationRepository,
+  );
 
   await tester.pumpApp(
-    const PasswordResetScreen(
-      code: KTestText.code,
+    PasswordResetScreen(
+      code: code,
     ),
     mockGoRouter: mockGoRouter,
   );
@@ -39,4 +43,18 @@ void _registerPasswordResetBloc({
     GetIt.I.unregister<PasswordResetBloc>();
   }
   GetIt.I.registerSingleton<PasswordResetBloc>(pwResetEmailBloc);
+}
+
+void _registerCheckVerificationCodeCubit({
+  required AuthenticationRepository mockAuthenticationRepository,
+}) {
+  final checkVerificationCodeCubit = CheckVerificationCodeCubit(
+    authenticationRepository: mockAuthenticationRepository,
+  );
+  if (GetIt.I.isRegistered<CheckVerificationCodeCubit>()) {
+    GetIt.I.unregister<CheckVerificationCodeCubit>();
+  }
+  GetIt.I.registerSingleton<CheckVerificationCodeCubit>(
+    checkVerificationCodeCubit,
+  );
 }

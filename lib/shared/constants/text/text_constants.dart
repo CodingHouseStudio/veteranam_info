@@ -163,7 +163,8 @@ abstract class KMockText {
     exclusionsEN:
         '- when ordering tests and paying for them online on the Esculab website;',
     expirationEN: 'It works all the time',
-    locationEN: ['Kyiv'], status: DiscountState.published,
+    locationEN: ['Kyiv'],
+    status: DiscountState.published,
     eligibility: ['Ветеранам'], eligibilityEN: ['Veterans'],
   );
   static final informationModel = InformationModel(
@@ -238,6 +239,19 @@ abstract class KAppText {
         KRoute.support.name,
         KRoute.settings.name,
       ];
+  static const discountsCategories = [
+    'Спорт',
+    'Медицина',
+    'Салони краси',
+    'Перевезення',
+    'Магазини',
+    'Військторг',
+    'Відпочинок',
+    'Житло',
+    'Автосервіс',
+    'Освіта',
+    'Ресторани',
+  ];
   static const ukrainianAlphabet = [
     'а',
     'б',

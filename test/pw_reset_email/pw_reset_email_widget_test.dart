@@ -18,9 +18,33 @@ void main() {
 
   group('${KScreenBlocName.pwResetEmail} ', () {
     late AuthenticationRepository mockAuthenticationRepository;
-    setUp(
-      () {
-        mockAuthenticationRepository = MockAuthenticationRepository();
+    setUp(() {
+      mockAuthenticationRepository = MockAuthenticationRepository();
+    });
+
+    group('${KGroupText.failureSend} ', () {
+      setUp(() {
+        when(
+          mockAuthenticationRepository.sendVerificationCodeToEmail(
+            email: KTestText.userEmail,
+          ),
+        ).thenAnswer(
+          (invocation) async =>
+              Left(SomeFailure.serverError(error: KGroupText.failureSend)),
+        );
+      });
+      testWidgets('Enter correct email', (tester) async {
+        await pwResetEmailPumpAppHelper(
+          tester: tester,
+          mockAuthenticationRepository: mockAuthenticationRepository,
+        );
+
+        await emailFailureHelper(tester);
+      });
+    });
+
+    group('${KGroupText.successful} ', () {
+      setUp(() {
         when(
           mockAuthenticationRepository.sendVerificationCodeToEmail(
             email: KTestText.userEmail,
@@ -28,30 +52,47 @@ void main() {
         ).thenAnswer(
           (invocation) async => const Right(true),
         );
-      },
-    );
-
-    testWidgets('${KGroupText.initial} ', (tester) async {
-      await pwResetEmailPumpAppHelper(
-        tester: tester,
-        mockAuthenticationRepository: mockAuthenticationRepository,
-      );
-
-      await pwResetEmailInitialHelper(tester);
-    });
-
-    group('${KGroupText.goRouter} ', () {
-      late MockGoRouter mockGoRouter;
-      setUp(() => mockGoRouter = MockGoRouter());
-
+      });
       testWidgets('${KGroupText.initial} ', (tester) async {
         await pwResetEmailPumpAppHelper(
           tester: tester,
-          mockGoRouter: mockGoRouter,
           mockAuthenticationRepository: mockAuthenticationRepository,
         );
 
         await pwResetEmailInitialHelper(tester);
+      });
+
+      testWidgets('Enter wrong email', (tester) async {
+        await pwResetEmailPumpAppHelper(
+          tester: tester,
+          mockAuthenticationRepository: mockAuthenticationRepository,
+        );
+
+        await emailWrongHelper(tester);
+      });
+
+      testWidgets('Enter correct email', (tester) async {
+        await pwResetEmailPumpAppHelper(
+          tester: tester,
+          mockAuthenticationRepository: mockAuthenticationRepository,
+        );
+
+        await emailCorrectHelper(tester);
+      });
+
+      group('${KGroupText.goRouter} ', () {
+        late MockGoRouter mockGoRouter;
+        setUp(() => mockGoRouter = MockGoRouter());
+
+        testWidgets('${KGroupText.initial} ', (tester) async {
+          await pwResetEmailPumpAppHelper(
+            tester: tester,
+            mockGoRouter: mockGoRouter,
+            mockAuthenticationRepository: mockAuthenticationRepository,
+          );
+
+          await pwResetEmailInitialHelper(tester);
+        });
       });
     });
   });

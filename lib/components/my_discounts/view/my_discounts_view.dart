@@ -8,8 +8,9 @@ class MyDiscountsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MyDiscountsBlocprovider(
-      key: KWidgetkeys.screen.myDiscounts.screen,
-      childWidget: const MyDiscountsBodyWidget(),
+      childWidget: MyDiscountsBodyWidget(
+        key: KWidgetkeys.screen.myDiscounts.screen,
+      ),
     );
   }
 }

@@ -7,16 +7,24 @@ class SendingTextWidget extends StatelessWidget {
     required this.sendingText,
     required this.successText,
     required this.textKey,
+    this.showSendingText = false,
+    this.showSuccessText = false,
     super.key,
   });
   final String? failureText;
   final String? sendingText;
+  final bool showSendingText;
   final String? successText;
+  final bool showSuccessText;
   final Key textKey;
 
   @override
   Widget build(BuildContext context) {
-    if (failureText == null && sendingText == null && successText == null) {
+    final sendingTextValue = showSendingText ? sendingText : null;
+    final successTextValue = showSuccessText ? successText : null;
+    if (failureText == null &&
+        sendingTextValue == null &&
+        successTextValue == null) {
       return const SizedBox.shrink();
     } else {
       return Column(
@@ -27,7 +35,7 @@ class SendingTextWidget extends StatelessWidget {
               horizontal: KPadding.kPaddingSize16,
             ),
             child: Text(
-              (failureText ?? sendingText ?? successText)!,
+              (failureText ?? sendingTextValue ?? successTextValue)!,
               key: textKey,
               textAlign: TextAlign.center,
               style: failureText != null

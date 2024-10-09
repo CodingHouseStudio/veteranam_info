@@ -1384,5 +1384,51 @@
   "dataUnmodified": "No changes were made because the data is identical.",
   "@dataUnmodified": {
     "examples": "Message when no changes were made to the data."
+  },
+  "publishDiscount": "Publish your first discount",
+  "@publishDiscount": {
+    "examples": "Text about no discounts on the MyDiscounts page"
+  },
+  "addDiscount": "Add discount",
+  "@addDiscount": {
+    "examples": "Text for the button on the MyDiscount page.",
+    "description": "The button is used to add a discount"
+  },
+  "thatEndOfMyDiscounts": "This is the end of the list! We hope you found what you were looking for.",
+  "@thatEndOfMyDiscounts": {
+    "examples": "Text at the end of the discount list on the MyDiscounts page"
+  },
+  "profileNotFilledOut": "To add a discount, please fill in the company information in your personal account",
+  "@profileNotFilledOut": {
+    "examples": "Text on the MyDiscounts page when the profile is not filled in"
+  },
+  "underReview": "Under Review",
+  "@underReview": {
+    "examples": "Text for discount status"
+  },
+  "overdue": "Overdue",
+  "@overdue": {
+    "examples": "Text for discount status"
+  },
+  "rejected": "Rejected",
+  "@rejected": {
+    "examples": "Text for discount status"
+  },
+  "published": "Published",
+  "@published": {
+    "examples": "Text for discount status"
+  },
+  "deactivated": "Deactivated",
+  "@deactivated": {
+    "examples": "Text for discount status"
+  },
+  "toProfile": "To profile",
+  "@toProfile": {
+    "examples": "Text for the button on the MyDiscount page.",
+    "description": "The button is used to go to the cabinet"
+  },
+  "descriptionForRejectedStatus": "Your ad could not be published due to some errors.\nPlease contact our email: hello@veteranam.info for details",
+  "@descriptionForRejectedStatus": {
+    "examples": "Text to describe the rejected discount status on the MyDiscount page."
   }
 }

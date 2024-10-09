@@ -4,7 +4,6 @@ enum PasswordResetFailure {
   error,
   network,
   send,
-  wrongCode,
 }
 
 extension AuthFailureToPasswordResetFailure on SomeFailure {
@@ -14,8 +13,6 @@ extension AuthFailureToPasswordResetFailure on SomeFailure {
         return PasswordResetFailure.send;
       case FailureNetwork():
         return PasswordResetFailure.network;
-      case FailureWrongVerifyCode():
-        return PasswordResetFailure.wrongCode;
       default:
         return PasswordResetFailure.error;
     }
@@ -34,7 +31,6 @@ class PasswordResetState with _$PasswordResetState {
 
 enum PasswordResetEnum {
   initial,
-  codeValid,
   inProgress,
   invalidData,
   sending,

@@ -215,8 +215,6 @@ extension PasswordResetFailureValue on PasswordResetFailure {
         return context.l10n.sendFailure;
       case PasswordResetFailure.network:
         return context.l10n.networkFailure;
-      case PasswordResetFailure.wrongCode:
-        return null;
     }
   }
 }

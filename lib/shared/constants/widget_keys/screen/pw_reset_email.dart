@@ -10,5 +10,5 @@ class _PwResetEmailKeys {
   final delayText = const Key('pw_reset_email_delay_text');
   final resendText = const Key('pw_reset_email_resend_text');
   final resendButton = const Key('pw_reset_email_resend_button');
-  final resendSubtitle = const Key('pw_reset_email_subtitle');
+  final resendSubtitle = const Key('pw_reset_email_resend_subtitle');
 }

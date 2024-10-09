@@ -292,11 +292,11 @@ class AuthenticationRepository {
     return result;
   }
 
-  Future<Either<SomeFailure, bool>> checkVerificationCode({
-    required String? code,
-  }) async {
+  Future<Either<SomeFailure, bool>> checkVerificationCode(
+    String? code,
+  ) async {
     final result =
-        await iAppAuthenticationRepository.checkVerificationCode(code: code);
+        await iAppAuthenticationRepository.checkVerificationCode(code);
     // result.fold(
     //   (failure) {
     //     debugPrint('Sending error: $failure');

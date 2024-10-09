@@ -61,14 +61,15 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
     _Started event,
     Emitter<DiscountsAddState> emit,
   ) async {
-    final discounts = await _discountRepository.getDiscountItems().first;
+    // final discounts = await _discountRepository.getDiscountItems().first;
 
-    final uniqueCategories =
-        discounts.expand((discount) => discount.category).toSet().toList();
+    // final uniqueCategories =
+    //     discounts.expand((discount) => discount.category).toSet().toList();
 
+    // TODO(firebase): add categories spreadsheet, remove hardcode categories
     emit(
       state.copyWith(
-        categoryList: uniqueCategories,
+        categoryList: KAppText.discountsCategories,
       ),
     );
 
@@ -327,12 +328,11 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
   ) async {
     if (state.formState.isMain) {
       if (Formz.validate([
-                state.title,
-                state.discounts,
-                state.link,
-              ]) &&
-              state.eligibility == null ||
-          state.eligibility!.isValid) {
+            state.title,
+            state.discounts,
+            state.link,
+          ]) &&
+          (state.eligibility == null || state.eligibility!.isValid)) {
         emit(state.copyWith(formState: DiscountsAddEnum.detail));
       } else {
         emit(state.copyWith(formState: DiscountsAddEnum.invalidData));

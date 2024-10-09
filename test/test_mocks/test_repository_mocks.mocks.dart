@@ -1240,10 +1240,12 @@ class MockFirestoreService extends _i1.Mock implements _i3.FirestoreService {
       ) as _i8.Future<List<_i3.StoryModel>>);
 
   @override
-  _i8.Stream<List<_i3.DiscountModel>> getDiscounts() => (super.noSuchMethod(
+  _i8.Stream<List<_i3.DiscountModel>> getDiscounts({String? userId}) =>
+      (super.noSuchMethod(
         Invocation.method(
           #getDiscounts,
           [],
+          {#userId: userId},
         ),
         returnValue: _i8.Stream<List<_i3.DiscountModel>>.empty(),
         returnValueForMissingStub: _i8.Stream<List<_i3.DiscountModel>>.empty(),
@@ -1271,6 +1273,17 @@ class MockFirestoreService extends _i1.Mock implements _i3.FirestoreService {
           ),
         )),
       ) as _i8.Future<_i3.DiscountModel>);
+
+  @override
+  _i8.Future<void> updateDiscountModel(_i3.DiscountModel? discountModel) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateDiscountModel,
+          [discountModel],
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
 
   @override
   _i8.Future<void> sendLink(_i3.LinkModel? discountLink) => (super.noSuchMethod(
@@ -1326,19 +1339,6 @@ class MockFirestoreService extends _i1.Mock implements _i3.FirestoreService {
         returnValue: _i8.Future<void>.value(),
         returnValueForMissingStub: _i8.Future<void>.value(),
       ) as _i8.Future<void>);
-
-  @override
-  _i8.Future<List<_i3.DiscountModel>> getDiscountsByUserId(String? userId) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #getDiscountsByUserId,
-          [userId],
-        ),
-        returnValue:
-            _i8.Future<List<_i3.DiscountModel>>.value(<_i3.DiscountModel>[]),
-        returnValueForMissingStub:
-            _i8.Future<List<_i3.DiscountModel>>.value(<_i3.DiscountModel>[]),
-      ) as _i8.Future<List<_i3.DiscountModel>>);
 
   @override
   _i8.Future<void> deleteDiscountById(String? discountId) =>
@@ -1744,20 +1744,18 @@ class MockIAppAuthenticationRepository extends _i1.Mock
 
   @override
   _i8.Future<_i2.Either<_i3.SomeFailure, bool>> checkVerificationCode(
-          {required String? code}) =>
+          String? code) =>
       (super.noSuchMethod(
         Invocation.method(
           #checkVerificationCode,
-          [],
-          {#code: code},
+          [code],
         ),
         returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
             _FakeEither_0<_i3.SomeFailure, bool>(
           this,
           Invocation.method(
             #checkVerificationCode,
-            [],
-            {#code: code},
+            [code],
           ),
         )),
         returnValueForMissingStub:
@@ -1766,8 +1764,7 @@ class MockIAppAuthenticationRepository extends _i1.Mock
           this,
           Invocation.method(
             #checkVerificationCode,
-            [],
-            {#code: code},
+            [code],
           ),
         )),
       ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
@@ -2275,20 +2272,18 @@ class MockAppAuthenticationRepository extends _i1.Mock
 
   @override
   _i8.Future<_i2.Either<_i3.SomeFailure, bool>> checkVerificationCode(
-          {required String? code}) =>
+          String? code) =>
       (super.noSuchMethod(
         Invocation.method(
           #checkVerificationCode,
-          [],
-          {#code: code},
+          [code],
         ),
         returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
             _FakeEither_0<_i3.SomeFailure, bool>(
           this,
           Invocation.method(
             #checkVerificationCode,
-            [],
-            {#code: code},
+            [code],
           ),
         )),
         returnValueForMissingStub:
@@ -2297,8 +2292,7 @@ class MockAppAuthenticationRepository extends _i1.Mock
           this,
           Invocation.method(
             #checkVerificationCode,
-            [],
-            {#code: code},
+            [code],
           ),
         )),
       ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
@@ -2755,20 +2749,18 @@ class MockAuthenticationRepository extends _i1.Mock
 
   @override
   _i8.Future<_i2.Either<_i3.SomeFailure, bool>> checkVerificationCode(
-          {required String? code}) =>
+          String? code) =>
       (super.noSuchMethod(
         Invocation.method(
           #checkVerificationCode,
-          [],
-          {#code: code},
+          [code],
         ),
         returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
             _FakeEither_0<_i3.SomeFailure, bool>(
           this,
           Invocation.method(
             #checkVerificationCode,
-            [],
-            {#code: code},
+            [code],
           ),
         )),
         returnValueForMissingStub:
@@ -2777,8 +2769,7 @@ class MockAuthenticationRepository extends _i1.Mock
           this,
           Invocation.method(
             #checkVerificationCode,
-            [],
-            {#code: code},
+            [code],
           ),
         )),
       ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
@@ -7776,34 +7767,15 @@ class MockIDiscountRepository extends _i1.Mock
       );
 
   @override
-  _i8.Future<
-      _i2
-      .Either<_i3.SomeFailure, List<_i3.DiscountModel>>> getDiscountsByUserId(
-          String? userId) =>
+  _i8.Stream<List<_i3.DiscountModel>> getDiscountsByUserId(String? userId) =>
       (super.noSuchMethod(
         Invocation.method(
           #getDiscountsByUserId,
           [userId],
         ),
-        returnValue: _i8
-            .Future<_i2.Either<_i3.SomeFailure, List<_i3.DiscountModel>>>.value(
-            _FakeEither_0<_i3.SomeFailure, List<_i3.DiscountModel>>(
-          this,
-          Invocation.method(
-            #getDiscountsByUserId,
-            [userId],
-          ),
-        )),
-        returnValueForMissingStub: _i8
-            .Future<_i2.Either<_i3.SomeFailure, List<_i3.DiscountModel>>>.value(
-            _FakeEither_0<_i3.SomeFailure, List<_i3.DiscountModel>>(
-          this,
-          Invocation.method(
-            #getDiscountsByUserId,
-            [userId],
-          ),
-        )),
-      ) as _i8.Future<_i2.Either<_i3.SomeFailure, List<_i3.DiscountModel>>>);
+        returnValue: _i8.Stream<List<_i3.DiscountModel>>.empty(),
+        returnValueForMissingStub: _i8.Stream<List<_i3.DiscountModel>>.empty(),
+      ) as _i8.Stream<List<_i3.DiscountModel>>);
 
   @override
   _i8.Future<_i2.Either<_i3.SomeFailure, bool>> deleteDiscountsById(
@@ -7963,6 +7935,36 @@ class MockIDiscountRepository extends _i1.Mock
           Invocation.method(
             #addDiscount,
             [discount],
+          ),
+        )),
+      ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
+
+  @override
+  _i8.Future<_i2.Either<_i3.SomeFailure, bool>> deactivateDiscount(
+          {required _i3.DiscountModel? discountModel}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #deactivateDiscount,
+          [],
+          {#discountModel: discountModel},
+        ),
+        returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
+            _FakeEither_0<_i3.SomeFailure, bool>(
+          this,
+          Invocation.method(
+            #deactivateDiscount,
+            [],
+            {#discountModel: discountModel},
+          ),
+        )),
+        returnValueForMissingStub:
+            _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
+                _FakeEither_0<_i3.SomeFailure, bool>(
+          this,
+          Invocation.method(
+            #deactivateDiscount,
+            [],
+            {#discountModel: discountModel},
           ),
         )),
       ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
