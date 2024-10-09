@@ -24,7 +24,7 @@ Future<void> emailCorrectHelper(
     findsNothing,
   );
 
-  await tester.pumpAndSettle(const Duration(minutes: 1));
+  await tester.pumpAndSettle(const Duration(minutes: 2));
 
   expect(
     find.byKey(KWidgetkeys.screen.pwResetEmail.resendText),
