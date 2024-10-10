@@ -7,9 +7,10 @@ class SecondaryButtonWidget extends StatelessWidget {
     required this.text,
     required this.onPressed,
     required this.widgetKey,
-    super.key,
     this.align,
     this.padding,
+    this.style,
+    super.key,
   });
   final Key widgetKey;
   final bool isDesk;
@@ -17,6 +18,7 @@ class SecondaryButtonWidget extends StatelessWidget {
   final void Function()? onPressed;
   final Alignment? align;
   final EdgeInsetsGeometry? padding;
+  final ButtonStyle? style;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +26,7 @@ class SecondaryButtonWidget extends StatelessWidget {
       alignment: align ?? Alignment.centerLeft,
       child: TextButton(
         key: widgetKey,
-        style: KButtonStyles.borderSecondaryButtonStyle.copyWith(
+        style: (style ?? KButtonStyles.borderSecondaryButtonStyle).copyWith(
           minimumSize: const WidgetStatePropertyAll(
             Size(
               KMinMaxSize.maxWidth328,

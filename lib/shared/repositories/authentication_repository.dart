@@ -364,7 +364,7 @@ class AuthenticationRepository {
           // debugPrint('Sending error: $failure');
         },
         (success) {
-          _userController.add(user);
+          _userController.add(success);
           right = true;
           // debugPrint('Sending succeses $userSetting');
         },

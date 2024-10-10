@@ -9,7 +9,9 @@ class ProfileBodyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ProfileBloc, ProfileState>(
-      buildWhen: (previous, current) => previous.formState != current.formState,
+      buildWhen: (previous, current) =>
+          previous.formState != current.formState ||
+          previous.image != current.image,
       builder: (context, state) {
         return ScaffoldWidget(
           mainDeskPadding: ({required maxWidth}) => maxWidth.screenPadding(
@@ -33,7 +35,8 @@ class ProfileBodyWidget extends StatelessWidget {
           mainChildWidgetsFunction: ({required isDesk, required isTablet}) => [
             KSizedBox.kHeightSizedBox48,
             DecoratedBox(
-              decoration: KWidgetTheme.boxDecorationHome,
+              decoration: KWidgetTheme.boxDecorationHome
+                  .copyWith(color: AppColors.materialThemeKeyColorsNeutral),
               child: Padding(
                 padding: isDesk
                     ? const EdgeInsets.symmetric(
@@ -47,7 +50,7 @@ class ProfileBodyWidget extends StatelessWidget {
                   children: [
                     ProfileFormWidget(
                       isDesk: isDesk,
-                      photoURL:
+                      photoURL: state.image.value?.path ??
                           context.read<AuthenticationBloc>().state.user.photo,
                       initialName: context
                           .read<AuthenticationBloc>()
@@ -125,9 +128,17 @@ class ProfileBodyWidget extends StatelessWidget {
           isDesk: true,
         ),
         isDesk: isDesk,
+        deskPadding: const EdgeInsets.only(
+          top: KPadding.kPaddingSize16,
+          bottom: KPadding.kPaddingSize16,
+          right: KPadding.kPaddingSize40,
+        ),
         expanded: true,
-        mobPadding: const EdgeInsets.symmetric(
-          vertical: KPadding.kPaddingSize16,
+        borderColor: AppColors.materialThemeRefNeutralNeutral80,
+        mobPadding: const EdgeInsets.only(
+          top: KPadding.kPaddingSize16,
+          bottom: KPadding.kPaddingSize16,
+          right: KPadding.kPaddingSize40,
         ),
         iconPadding: KPadding.kPaddingSize16,
       );
@@ -140,6 +151,7 @@ class ProfileBodyWidget extends StatelessWidget {
         widgetKey: KWidgetkeys.screen.profile.deleteButton,
         isDesk: isDesk,
         align: Alignment.center,
+        style: KButtonStyles.borderNeutralButtonStyle,
         padding: const EdgeInsets.symmetric(
           vertical: KPadding.kPaddingSize16,
         ),
