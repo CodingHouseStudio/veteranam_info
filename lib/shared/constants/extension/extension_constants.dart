@@ -1,14 +1,36 @@
-import 'dart:async';
-import 'dart:math';
+import 'dart:math' show max, min;
 
-import 'package:collection/collection.dart';
-import 'package:feedback/feedback.dart';
-import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/foundation.dart' show Uint8List, kIsWeb, kReleaseMode;
-import 'package:flutter/material.dart';
+import 'package:collection/collection.dart' show IterableExtension;
+import 'package:feedback/feedback.dart' show UserFeedback;
+import 'package:firebase_storage/firebase_storage.dart'
+    show Reference, SettableMetadata, UploadTask;
+import 'package:flutter/foundation.dart'
+    show Key, Uint8List, kIsWeb, kReleaseMode, visibleForTesting;
+import 'package:flutter/material.dart'
+    show
+        BorderRadius,
+        BoxFit,
+        BuildContext,
+        ClipRRect,
+        Color,
+        EdgeInsets,
+        EdgeInsetsGeometry,
+        Expanded,
+        Spacer,
+        TextDirection,
+        TextPainter,
+        TextSpan,
+        TextStyle,
+        Widget,
+        showDatePicker;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart' show DateFormat;
-import 'package:veteranam/components/components.dart';
+import 'package:veteranam/components/components.dart'
+    show
+        DiscountEnum,
+        DiscountUserEmailFormBloc,
+        DiscountUserEmailFormEvent,
+        ProfileEnum;
 import 'package:veteranam/shared/shared.dart';
 
 extension ExtendedDateTime on DateTime {

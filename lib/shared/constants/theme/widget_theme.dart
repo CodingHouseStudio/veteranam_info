@@ -1,4 +1,19 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart'
+    show
+        Border,
+        BorderRadius,
+        BorderSide,
+        BoxDecoration,
+        BoxShadow,
+        BoxShape,
+        EdgeInsets,
+        FloatingLabelBehavior,
+        InputDecoration,
+        MenuStyle,
+        OutlineInputBorder,
+        RoundedRectangleBorder,
+        VisualDensity,
+        WidgetStatePropertyAll;
 import 'package:veteranam/shared/shared.dart';
 
 /// COMMENT: Variables with widget theme that don't have a specific group
