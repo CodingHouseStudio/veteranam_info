@@ -1,4 +1,4 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/widgets.dart' show BuildContext;
 import 'package:veteranam/shared/shared.dart';
 
 extension EmailFieldModelValidationErrorEmpl
