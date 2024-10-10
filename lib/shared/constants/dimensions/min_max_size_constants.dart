@@ -29,4 +29,6 @@ abstract class KMinMaxSize {
   static const kHomeImageMaxSize = 640;
 
   static const imageMinBytes = 2000;
+
+  static const formMobileMaxWidth = 476;
 }

@@ -70,6 +70,12 @@ abstract class KButtonStyles {
     ),
   );
   static const withoutStyle = ButtonStyle(
+    maximumSize: WidgetStatePropertyAll(
+      Size(
+        KMinMaxSize.maxWidth328,
+        double.infinity,
+      ),
+    ),
     alignment: Alignment.centerLeft,
     padding: WidgetStatePropertyAll(EdgeInsets.zero),
     shape: WidgetStatePropertyAll(LinearBorder.none),
@@ -353,6 +359,21 @@ abstract class KButtonStyles {
       RoundedRectangleBorder(
         borderRadius: KBorderRadius.kBorderRadius32,
         side: BorderSide(color: AppColors.materialThemeRefNeutralNeutral80),
+      ),
+    ),
+  );
+
+  static const borderSecondaryButtonStyle = ButtonStyle(
+    padding: WidgetStatePropertyAll(
+      EdgeInsets.symmetric(
+        vertical: KPadding.kPaddingSize4,
+        horizontal: KPadding.kPaddingSize16,
+      ),
+    ),
+    shape: WidgetStatePropertyAll(
+      RoundedRectangleBorder(
+        borderRadius: KBorderRadius.kBorderRadius32,
+        side: BorderSide(color: AppColors.materialThemeRefSecondarySecondary70),
       ),
     ),
   );

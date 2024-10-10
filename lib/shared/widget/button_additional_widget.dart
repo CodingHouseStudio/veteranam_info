@@ -13,9 +13,11 @@ class ButtonAdditionalWidget extends StatefulWidget {
     this.onPressed,
     this.backgroundColor,
     this.mobPadding,
+    this.deskPadding,
     this.iconPadding,
     this.borderColor,
     super.key,
+    this.align,
   });
 
   final void Function()? onPressed;
@@ -25,7 +27,9 @@ class ButtonAdditionalWidget extends StatefulWidget {
   final bool isDesk;
   final bool expanded;
   final EdgeInsets? mobPadding;
+  final EdgeInsets? deskPadding;
   final double? iconPadding;
+  final Alignment? align;
   final Color? borderColor;
 
   @override
@@ -43,61 +47,72 @@ class _ButtonAdditionalDeskWidgetState extends State<ButtonAdditionalWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(
-      key: KWidgetkeys.widget.buttonAdditional.desk,
-      onHover: (value) => setState(() => isHover = value),
-      style: KButtonStyles.additionalButtonStyle.copyWith(
-        backgroundColor: WidgetStatePropertyAll(widget.backgroundColor),
-        side: isHover
-            ? const WidgetStatePropertyAll(BorderSide())
-            : WidgetStatePropertyAll(
-                BorderSide(
-                  color: widget.borderColor ??
-                      AppColors.materialThemeRefSecondarySecondary70,
-                ),
-              ),
-      ),
-      onPressed: widget.onPressed,
-      child: Row(
-        mainAxisSize: widget.isDesk ? MainAxisSize.min : MainAxisSize.max,
-        children: [
-          IconWidget(
-            key: KWidgetkeys.widget.buttonAdditional.icon,
-            icon: widget.picture,
-            padding: widget.iconPadding ?? KPadding.kPaddingSize12,
-            background: AppColors.materialThemeKeyColorsSecondary,
+    return Align(
+      alignment: widget.align ?? Alignment.centerLeft,
+      child: TextButton(
+        key: KWidgetkeys.widget.buttonAdditional.desk,
+        onHover: (value) => setState(() => isHover = value),
+        style: KButtonStyles.additionalButtonStyle.copyWith(
+          maximumSize: const WidgetStatePropertyAll(
+            Size(
+              KMinMaxSize.maxWidth328,
+              double.infinity,
+            ),
           ),
-          if (widget.isDesk)
-            if (widget.expanded)
+          backgroundColor: WidgetStatePropertyAll(widget.backgroundColor),
+          side: WidgetStatePropertyAll(
+            isHover
+                ? const BorderSide()
+                : BorderSide(
+                    color: widget.borderColor ??
+                        AppColors.materialThemeRefSecondarySecondary70,
+                  ),
+          ),
+        ),
+        onPressed: widget.onPressed,
+        child: Row(
+          mainAxisSize: widget.isDesk ? MainAxisSize.min : MainAxisSize.max,
+          children: [
+            IconWidget(
+              key: KWidgetkeys.widget.buttonAdditional.icon,
+              icon: widget.picture,
+              padding: widget.iconPadding ?? KPadding.kPaddingSize12,
+              background: AppColors.materialThemeKeyColorsSecondary,
+            ),
+            if (widget.isDesk)
+              if (widget.expanded)
+                Expanded(
+                  child: Padding(
+                    padding: widget.deskPadding ??
+                        const EdgeInsets.only(
+                          top: KPadding.kPaddingSize12,
+                          bottom: KPadding.kPaddingSize12,
+                          left: KPadding.kPaddingSize5,
+                          right: KPadding.kPaddingSize16,
+                        ),
+                    child: text,
+                  ),
+                )
+              else
+                Padding(
+                  padding: widget.deskPadding ??
+                      const EdgeInsets.only(
+                        top: KPadding.kPaddingSize12,
+                        bottom: KPadding.kPaddingSize12,
+                        left: KPadding.kPaddingSize5,
+                        right: KPadding.kPaddingSize16,
+                      ),
+                  child: text,
+                )
+            else
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.only(
-                    top: KPadding.kPaddingSize12,
-                    bottom: KPadding.kPaddingSize12,
-                    left: KPadding.kPaddingSize5,
-                    right: KPadding.kPaddingSize16,
-                  ),
-                  child: text,
+                  padding: widget.mobPadding ?? EdgeInsets.zero,
+                  child: Center(child: text),
                 ),
-              )
-            else
-              Padding(
-                padding: const EdgeInsets.only(
-                  top: KPadding.kPaddingSize12,
-                  bottom: KPadding.kPaddingSize12,
-                  left: KPadding.kPaddingSize5,
-                  right: KPadding.kPaddingSize16,
-                ),
-                child: text,
-              )
-          else
-            Expanded(
-              child: Padding(
-                padding: widget.mobPadding ?? EdgeInsets.zero,
-                child: text,
               ),
-            ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -107,7 +122,7 @@ class _ButtonAdditionalDeskWidgetState extends State<ButtonAdditionalWidget> {
       widget.text,
       key: KWidgetkeys.widget.buttonAdditional.text,
       style: AppTextStyle.materialThemeTitleMedium,
-      textAlign: TextAlign.center,
+      //textAlign: TextAlign.center,
     );
   }
 }

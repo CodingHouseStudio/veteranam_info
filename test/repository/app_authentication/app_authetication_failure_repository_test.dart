@@ -344,7 +344,7 @@ void main() {
       );
       expect(
         result,
-        isA<Left<SomeFailure, bool>>(),
+        isA<Left<SomeFailure, User>>(),
       );
     });
   });

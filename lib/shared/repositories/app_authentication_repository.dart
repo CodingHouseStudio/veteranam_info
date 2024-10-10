@@ -459,19 +459,20 @@ class AppAuthenticationRepository implements IAppAuthenticationRepository {
   }
 
   @override
-  Future<Either<SomeFailure, bool>> updateUserData({
+  Future<Either<SomeFailure, User>> updateUserData({
     required User user,
     required ImageModel? image,
   }) async {
     try {
+      late var userPhoto = user.photo;
       await _firebaseAuth.currentUser?.updateDisplayName(user.name);
 
       if (image != null) {
-        final userPhoto = await _updatePhoto(image: image, userId: user.id);
+        userPhoto = await _updatePhoto(image: image, userId: user.id);
         await _firebaseAuth.currentUser?.updatePhotoURL(userPhoto);
       }
 
-      return const Right(true);
+      return Right(user.copyWith(photo: userPhoto));
     } on firebase_auth.FirebaseAuthException catch (e, stack) {
       // debugPrint('Firebase Auth Error: ${e.message}');
       return Left(SomeFailure.serverError(error: e, stack: stack));
