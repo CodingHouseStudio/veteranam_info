@@ -293,6 +293,8 @@ class ShortTitleIconWidget extends StatelessWidget {
     this.icon,
     super.key,
     this.expanded = false,
+    this.titleAlign,
+    this.mainAxisAlignment,
   });
   final String title;
   final Key titleKey;
@@ -301,24 +303,27 @@ class ShortTitleIconWidget extends StatelessWidget {
   final bool expanded;
   final Icon? icon;
   final bool firstIcon;
+  final TextAlign? titleAlign;
+  final MainAxisAlignment? mainAxisAlignment;
 
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (firstIcon) ...[
           iconWidget,
-          if (!expanded) spacer,
+          if (!expanded) spacerGet,
         ],
         if (expanded) Expanded(child: text) else text,
-        if (!expanded) spacer,
+        if (!expanded) spacerGet,
         if (!firstIcon) iconWidget,
       ],
     );
   }
 
-  Widget get spacer {
+  Widget get spacerGet {
     if (isDesk) {
       return KSizedBox.kWidthSizedBox32;
     } else {
@@ -336,6 +341,7 @@ class ShortTitleIconWidget extends StatelessWidget {
         style: isDesk
             ? AppTextStyle.materialThemeDisplayLarge
             : AppTextStyle.materialThemeDisplaySmall,
+        textAlign: titleAlign,
       );
 
   Widget get iconWidget => IconWidget(

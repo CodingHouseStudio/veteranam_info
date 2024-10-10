@@ -66,6 +66,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
     // final uniqueCategories =
     //     discounts.expand((discount) => discount.category).toSet().toList();
 
+    // TODO(firebase): add categories spreadsheet, remove hardcode categories
     emit(
       state.copyWith(
         categoryList: KAppText.discountsCategories,
