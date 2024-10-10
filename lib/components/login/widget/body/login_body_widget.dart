@@ -51,8 +51,7 @@ class LoginBodyWidget extends StatelessWidget {
               showErrorText: _.formState == LoginEnum.invalidData ||
                   _.formState == LoginEnum.passwordInvalidData,
               isLogin: true,
-              bottomError: _.failure?.value(context),
-              bottomTextKey: KWidgetkeys.screen.login.errorText,
+              // bottomError: _.failure?.value(context),
             ),
             if (isDesk)
               KSizedBox.kHeightSizedBox24
@@ -79,19 +78,27 @@ class LoginBodyWidget extends StatelessWidget {
               mobIconPadding: KPadding.kPaddingSize12,
               darkMode: true,
             ),
-            if (_.formState == LoginEnum.success) ...[
-              KSizedBox.kHeightSizedBox16,
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: KPadding.kPaddingSize16,
-                ),
-                child: Text(
-                  context.l10n.loggingInWait,
-                  key: KWidgetkeys.screen.login.loadingText,
-                  style: AppTextStyle.materialThemeBodyMediumNeutralVariant60,
-                ),
-              ),
-            ],
+            SendingTextWidget(
+              textKey: KWidgetkeys.screen.login.submitingText,
+              failureText: _.failure?.value(context),
+              sendingText: context.l10n.loggingInWait,
+              successText: null,
+              showSendingText: _.formState == LoginEnum.success,
+            ),
+            // if (_.formState == LoginEnum.success) ...[
+            //   KSizedBox.kHeightSizedBox16,
+            //   Padding(
+            //     padding: const EdgeInsets.symmetric(
+            //       horizontal: KPadding.kPaddingSize16,
+            //     ),
+            //     child: Text(
+            //       context.l10n.loggingInWait,
+            //       key: KWidgetkeys.screen.login.loadingText,
+            //       style:
+            // AppTextStyle.materialThemeBodyMediumNeutralVariant60,
+            //     ),
+            //   ),
+            // ],
             if (isDesk)
               KSizedBox.kHeightSizedBox24
             else

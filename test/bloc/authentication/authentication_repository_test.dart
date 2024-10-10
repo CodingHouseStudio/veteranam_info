@@ -100,6 +100,21 @@ void main() {
         ).thenAnswer(
           (_) async => const Right(true),
         );
+        when(
+          mockAppAuthenticationRepository.checkVerificationCode(
+            KTestText.code,
+          ),
+        ).thenAnswer(
+          (_) async => const Right(true),
+        );
+        when(
+          mockAppAuthenticationRepository.resetPasswordUseCode(
+            code: KTestText.code,
+            newPassword: KTestText.passwordCorrect,
+          ),
+        ).thenAnswer(
+          (_) async => const Right(true),
+        );
 
         authenticationRepository =
             AuthenticationRepository(mockAppAuthenticationRepository);
@@ -233,6 +248,27 @@ void main() {
               .having((e) => e.value, 'value', isTrue),
         );
       });
+
+      test('Check verification code', () async {
+        expect(
+          await authenticationRepository.checkVerificationCode(
+            KTestText.code,
+          ),
+          isA<Right<SomeFailure, bool>>()
+              .having((e) => e.value, 'value', isTrue),
+        );
+      });
+
+      test('Reset password use code', () async {
+        expect(
+          await authenticationRepository.resetPasswordUseCode(
+            code: KTestText.code,
+            newPassword: KTestText.passwordCorrect,
+          ),
+          isA<Right<SomeFailure, bool>>()
+              .having((e) => e.value, 'value', isTrue),
+        );
+      });
     });
     group('${KGroupText.failure} ', () {
       setUp(() {
@@ -294,6 +330,21 @@ void main() {
           mockAppAuthenticationRepository.updateUserData(
             user: KTestText.profileUser,
             image: KTestText.imageModels,
+          ),
+        ).thenAnswer(
+          (_) async => Left(SomeFailure.serverError(error: null)),
+        );
+        when(
+          mockAppAuthenticationRepository.checkVerificationCode(
+            KTestText.code,
+          ),
+        ).thenAnswer(
+          (_) async => Left(SomeFailure.serverError(error: null)),
+        );
+        when(
+          mockAppAuthenticationRepository.resetPasswordUseCode(
+            code: KTestText.code,
+            newPassword: KTestText.passwordCorrect,
           ),
         ).thenAnswer(
           (_) async => Left(SomeFailure.serverError(error: null)),
@@ -403,6 +454,25 @@ void main() {
             user: KTestText.profileUser,
             image: KTestText.imageModels,
             nickname: KTestText.nicknameCorrect,
+          ),
+          isA<Left<SomeFailure, bool>>(),
+        );
+      });
+
+      test('Check verification code', () async {
+        expect(
+          await authenticationRepository.checkVerificationCode(
+            KTestText.code,
+          ),
+          isA<Left<SomeFailure, bool>>(),
+        );
+      });
+
+      test('Reset password use code', () async {
+        expect(
+          await authenticationRepository.resetPasswordUseCode(
+            code: KTestText.code,
+            newPassword: KTestText.passwordCorrect,
           ),
           isA<Left<SomeFailure, bool>>(),
         );
