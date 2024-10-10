@@ -108,6 +108,7 @@ class _DonateButtonDeskWidgetState extends State<_DonateButtonWidgetDesk> {
                     KIcon.arrowUpRight.copyWith(
                       color: AppColors.materialThemeWhite,
                     ),
+                padding: KPadding.kPaddingSize12,
                 background: AppColors.materialThemeKeyColorsSecondary,
               ),
             ),
@@ -139,7 +140,7 @@ class _DonateButtonWidgetMob extends StatelessWidget {
         padding: const EdgeInsets.only(
           left: KPadding.kPaddingSize32,
           bottom: KPadding.kPaddingSize8,
-          right: KPadding.kPaddingSize8,
+          right: KPadding.kPaddingSize16,
           top: KPadding.kPaddingSize8,
         ),
         child: Row(
@@ -154,7 +155,7 @@ class _DonateButtonWidgetMob extends StatelessWidget {
             ),
             IconWidget(
               key: KWidgetkeys.widget.donateButton.icon,
-              padding: KPadding.kPaddingSize16,
+              padding: KPadding.kPaddingSize12,
               icon: icon ??
                   KIcon.arrowUpRight.copyWith(
                     color: AppColors.materialThemeKeyColorsNeutral,

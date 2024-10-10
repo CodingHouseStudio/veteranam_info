@@ -38,8 +38,10 @@ Future<void> signUpBottomButtonsHelper(
 
       await additionalButtonHelper(tester);
 
-      await tester
-          .tap(find.byKey(KWidgetkeys.widget.signUpBottomButtons.google));
+      await tester.tap(
+        find.byKey(KWidgetkeys.widget.signUpBottomButtons.google),
+        warnIfMissed: false,
+      );
 
       await tester.pumpAndSettle();
 
