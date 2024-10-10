@@ -14,6 +14,7 @@ class ButtonAdditionalWidget extends StatefulWidget {
     this.backgroundColor,
     this.mobPadding,
     this.iconPadding,
+    this.borderColor,
     super.key,
   });
 
@@ -25,6 +26,7 @@ class ButtonAdditionalWidget extends StatefulWidget {
   final bool expanded;
   final EdgeInsets? mobPadding;
   final double? iconPadding;
+  final Color? borderColor;
 
   @override
   State<ButtonAdditionalWidget> createState() =>
@@ -48,9 +50,10 @@ class _ButtonAdditionalDeskWidgetState extends State<ButtonAdditionalWidget> {
         backgroundColor: WidgetStatePropertyAll(widget.backgroundColor),
         side: isHover
             ? const WidgetStatePropertyAll(BorderSide())
-            : const WidgetStatePropertyAll(
+            : WidgetStatePropertyAll(
                 BorderSide(
-                  color: AppColors.materialThemeRefSecondarySecondary70,
+                  color: widget.borderColor ??
+                      AppColors.materialThemeRefSecondarySecondary70,
                 ),
               ),
       ),

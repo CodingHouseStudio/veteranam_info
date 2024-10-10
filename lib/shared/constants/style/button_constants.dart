@@ -342,7 +342,7 @@ abstract class KButtonStyles {
     ),
   );
 
-  static const borderSecondaryButtonStyle = ButtonStyle(
+  static const borderNeutralButtonStyle = ButtonStyle(
     padding: WidgetStatePropertyAll(
       EdgeInsets.symmetric(
         vertical: KPadding.kPaddingSize4,
@@ -352,7 +352,7 @@ abstract class KButtonStyles {
     shape: WidgetStatePropertyAll(
       RoundedRectangleBorder(
         borderRadius: KBorderRadius.kBorderRadius32,
-        side: BorderSide(color: AppColors.materialThemeRefSecondarySecondary70),
+        side: BorderSide(color: AppColors.materialThemeRefNeutralNeutral80),
       ),
     ),
   );

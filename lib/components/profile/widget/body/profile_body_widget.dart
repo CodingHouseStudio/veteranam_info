@@ -32,7 +32,8 @@ class ProfileBodyWidget extends StatelessWidget {
           mainChildWidgetsFunction: ({required isDesk, required isTablet}) => [
             KSizedBox.kHeightSizedBox48,
             DecoratedBox(
-              decoration: KWidgetTheme.boxDecorationHome,
+              decoration: KWidgetTheme.boxDecorationHome
+                  .copyWith(color: AppColors.materialThemeKeyColorsNeutral),
               child: Padding(
                 padding: isDesk
                     ? const EdgeInsets.symmetric(
@@ -42,22 +43,18 @@ class ProfileBodyWidget extends StatelessWidget {
                     : const EdgeInsets.all(
                         KPadding.kPaddingSize16,
                       ),
-                child: Column(
-                  children: [
-                    profileForm(isDesk: isDesk, context: context),
-                    if (isDesk)
-                      KSizedBox.kHeightSizedBox32
-                    else
-                      KSizedBox.kHeightSizedBox48,
-                    if (isDesk)
-                      profileButtonsDesk(context: context, isDesk: isDesk)
-                    else ...[
-                      profileButtonsMob(context: context, isDesk: isDesk),
-                    ],
-                  ],
-                ),
+                child: profileForm(isDesk: isDesk, context: context),
               ),
             ),
+            if (isDesk)
+              KSizedBox.kHeightSizedBox32
+            else
+              KSizedBox.kHeightSizedBox48,
+            if (isDesk)
+              profileButtonsDesk(context: context, isDesk: isDesk)
+            else ...[
+              profileButtonsMob(context: context, isDesk: isDesk),
+            ],
           ],
         );
       },
@@ -80,6 +77,7 @@ class ProfileBodyWidget extends StatelessWidget {
           ),
           isDesk: isDesk,
           expanded: true,
+          borderColor: AppColors.materialThemeRefNeutralNeutral80,
           mobPadding: const EdgeInsets.symmetric(
             vertical: KPadding.kPaddingSize16,
           ),
@@ -88,7 +86,7 @@ class ProfileBodyWidget extends StatelessWidget {
         KSizedBox.kHeightSizedBox16,
         TextButton(
           key: KWidgetkeys.screen.profile.deleteButton,
-          style: KButtonStyles.borderSecondaryButtonStyle,
+          style: KButtonStyles.borderNeutralButtonStyle,
           child: Padding(
             padding: const EdgeInsets.symmetric(
               vertical: KPadding.kPaddingSize16,
@@ -123,13 +121,14 @@ class ProfileBodyWidget extends StatelessWidget {
             ),
             isDesk: isDesk,
             expanded: true,
+            borderColor: AppColors.materialThemeRefNeutralNeutral80,
           ),
         ),
         KSizedBox.kWidthSizedBox40, // Keep a constant width here
         Expanded(
           child: TextButton(
             key: KWidgetkeys.screen.profile.deleteButton,
-            style: KButtonStyles.borderSecondaryButtonStyle,
+            style: KButtonStyles.borderNeutralButtonStyle,
             child: Padding(
               padding: const EdgeInsets.symmetric(
                 vertical: KPadding.kPaddingSize12,
