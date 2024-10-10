@@ -98,7 +98,7 @@ void main() {
             image: KTestText.imageModels,
           ),
         ).thenAnswer(
-          (_) async => const Right(true),
+          (_) async => const Right(KTestText.profileUser),
         );
         when(
           mockAppAuthenticationRepository.checkVerificationCode(
