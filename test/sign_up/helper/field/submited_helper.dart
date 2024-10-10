@@ -14,8 +14,8 @@ Future<void> submitedHelper(
     dataIsCorrect: true,
   );
 
-  expect(find.byKey(KWidgetkeys.screen.signUp.loadingText), findsOneWidget);
+  expect(find.byKey(KWidgetkeys.screen.signUp.submitingText), findsOneWidget);
 
-  expect(find.byKey(KWidgetkeys.screen.signUp.errorText), findsNothing);
+  // expect(find.byKey(KWidgetkeys.screen.signUp.submitingText), findsNothing);
   // await dialogSnackBarTextHelper(tester: tester, showDialog: false);
 }

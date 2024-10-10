@@ -183,7 +183,7 @@ void main() {
         const LoginState(
           email: EmailFieldModel.dirty(KTestText.userEmail),
           password: PasswordFieldModel.dirty(KTestText.passwordCorrect),
-          failure: LoginError.error,
+          failure: LoginFailure.error,
           formState: LoginEnum.initial,
         ),
       ],
