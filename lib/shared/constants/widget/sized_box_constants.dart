@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' show SizedBox;
 import 'package:veteranam/shared/shared.dart';
 
 abstract class KSizedBox {
