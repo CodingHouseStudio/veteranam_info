@@ -70,6 +70,12 @@ abstract class KButtonStyles {
     ),
   );
   static const withoutStyle = ButtonStyle(
+    maximumSize: WidgetStatePropertyAll(
+      Size(
+        KMinMaxSize.maxWidth328,
+        double.infinity,
+      ),
+    ),
     alignment: Alignment.centerLeft,
     padding: WidgetStatePropertyAll(EdgeInsets.zero),
     shape: WidgetStatePropertyAll(LinearBorder.none),

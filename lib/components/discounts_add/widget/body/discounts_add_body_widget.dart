@@ -75,6 +75,7 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
             expanded: true,
           ),
         ],
+        isForm: true,
         mainDeskPadding: ({required double maxWidth}) =>
             maxWidth.screenPadding(precent: KDimensions.thirtyPercent),
         mainChildWidgetsFunction: ({required isDesk, required isTablet}) => [
@@ -348,9 +349,7 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
   }) =>
       [
         if (isDesk)
-          Expanded(
-            child: _cancelButton(context: context, isDesk: isDesk),
-          )
+          Expanded(child: _cancelButton(context: context, isDesk: isDesk))
         else
           _cancelButton(context: context, isDesk: isDesk),
         if (isDesk) KSizedBox.kWidthSizedBox40 else KSizedBox.kHeightSizedBox24,
@@ -365,27 +364,18 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
     required BuildContext context,
     required bool isDesk,
   }) =>
-      TextButton(
-        key: KWidgetkeys.screen.discountsAdd.cancelButton,
+      SecondaryButtonWidget(
+        widgetKey: KWidgetkeys.screen.discountsAdd.cancelButton,
+        align: Alignment.center,
         onPressed: () => context.read<DiscountsAddBloc>().state.formState.isMain
             ? context.pop()
             : context.read<DiscountsAddBloc>().add(
                   const DiscountsAddEvent.back(),
                 ),
-        style: KButtonStyles.borderBlackButtonStyle.copyWith(
-          padding: WidgetStatePropertyAll(
-            EdgeInsets.symmetric(
-              vertical:
-                  isDesk ? KPadding.kPaddingSize20 : KPadding.kPaddingSize16,
-            ),
-          ),
-        ),
-        child: Text(
-          context.read<DiscountsAddBloc>().state.formState.isMain
-              ? context.l10n.cancel
-              : context.l10n.back,
-          style: AppTextStyle.materialThemeTitleMedium,
-        ),
+        text: context.read<DiscountsAddBloc>().state.formState.isMain
+            ? context.l10n.cancel
+            : context.l10n.back,
+        isDesk: isDesk,
       );
   Widget _sendButton({
     required BuildContext context,
@@ -393,6 +383,7 @@ class _DiscountsAddBodyWidgetState extends State<DiscountsAddBodyWidget> {
   }) =>
       DoubleButtonWidget(
         key: KWidgetkeys.screen.discountsAdd.sendButton,
+        align: Alignment.center,
         text: context.read<DiscountsAddBloc>().state.formState.isDescription
             ? context.l10n.publish
             : context.l10n.next,
