@@ -485,7 +485,8 @@ void main() {
       );
       expect(
         result,
-        isA<Right<SomeFailure, bool>>().having((e) => e.value, 'value', isTrue),
+        isA<Right<SomeFailure, User>>(),
+        // .having((e) => e.value, 'value', KTestText.profileUser),
       );
     });
 

@@ -13,7 +13,9 @@ class ButtonAdditionalWidget extends StatefulWidget {
     this.onPressed,
     this.backgroundColor,
     this.mobPadding,
+    this.deskPadding,
     this.iconPadding,
+    this.borderColor,
     super.key,
     this.align,
   });
@@ -25,8 +27,10 @@ class ButtonAdditionalWidget extends StatefulWidget {
   final bool isDesk;
   final bool expanded;
   final EdgeInsets? mobPadding;
+  final EdgeInsets? deskPadding;
   final double? iconPadding;
   final Alignment? align;
+  final Color? borderColor;
 
   @override
   State<ButtonAdditionalWidget> createState() =>
@@ -59,8 +63,9 @@ class _ButtonAdditionalDeskWidgetState extends State<ButtonAdditionalWidget> {
           side: WidgetStatePropertyAll(
             isHover
                 ? const BorderSide()
-                : const BorderSide(
-                    color: AppColors.materialThemeRefSecondarySecondary70,
+                : BorderSide(
+                    color: widget.borderColor ??
+                        AppColors.materialThemeRefSecondarySecondary70,
                   ),
           ),
         ),
@@ -78,30 +83,32 @@ class _ButtonAdditionalDeskWidgetState extends State<ButtonAdditionalWidget> {
               if (widget.expanded)
                 Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.only(
-                      top: KPadding.kPaddingSize12,
-                      bottom: KPadding.kPaddingSize12,
-                      left: KPadding.kPaddingSize5,
-                      right: KPadding.kPaddingSize16,
-                    ),
+                    padding: widget.deskPadding ??
+                        const EdgeInsets.only(
+                          top: KPadding.kPaddingSize12,
+                          bottom: KPadding.kPaddingSize12,
+                          left: KPadding.kPaddingSize5,
+                          right: KPadding.kPaddingSize16,
+                        ),
                     child: text,
                   ),
                 )
               else
                 Padding(
-                  padding: const EdgeInsets.only(
-                    top: KPadding.kPaddingSize12,
-                    bottom: KPadding.kPaddingSize12,
-                    left: KPadding.kPaddingSize5,
-                    right: KPadding.kPaddingSize16,
-                  ),
+                  padding: widget.deskPadding ??
+                      const EdgeInsets.only(
+                        top: KPadding.kPaddingSize12,
+                        bottom: KPadding.kPaddingSize12,
+                        left: KPadding.kPaddingSize5,
+                        right: KPadding.kPaddingSize16,
+                      ),
                   child: text,
                 )
             else
               Expanded(
                 child: Padding(
                   padding: widget.mobPadding ?? EdgeInsets.zero,
-                  child: text,
+                  child: Center(child: text),
                 ),
               ),
           ],
@@ -115,7 +122,7 @@ class _ButtonAdditionalDeskWidgetState extends State<ButtonAdditionalWidget> {
       widget.text,
       key: KWidgetkeys.widget.buttonAdditional.text,
       style: AppTextStyle.materialThemeTitleMedium,
-      textAlign: TextAlign.center,
+      //textAlign: TextAlign.center,
     );
   }
 }

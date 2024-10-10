@@ -141,16 +141,16 @@ class _ProfileFormWidgetState extends State<ProfileFormWidget> {
           enabled: false,
           isDesk: widget.isDesk,
         ),
-        KSizedBox.kHeightSizedBox32,
-        _textField(
-          fieldKey: KWidgetkeys.screen.profile.nickNameField,
-          hint: KAppText.nickname,
-          controller: nicknameController,
-          onChanged: (text) => context
-              .read<ProfileBloc>()
-              .add(ProfileEvent.nicknameUpdated(text)),
-          isDesk: widget.isDesk,
-        ),
+        // KSizedBox.kHeightSizedBox32,
+        // _textField(
+        //   fieldKey: KWidgetkeys.screen.profile.nickNameField,
+        //   hint: KAppText.nickname,
+        //   controller: nicknameController,
+        //   onChanged: (text) => context
+        //       .read<ProfileBloc>()
+        //       .add(ProfileEvent.nicknameUpdated(text)),
+        //   isDesk: widget.isDesk,
+        // ),
         KSizedBox.kHeightSizedBox16,
         if (context.read<ProfileBloc>().state.formState.showMessage)
           Text(

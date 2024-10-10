@@ -1890,7 +1890,7 @@ class MockIAppAuthenticationRepository extends _i1.Mock
       ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
 
   @override
-  _i8.Future<_i2.Either<_i3.SomeFailure, bool>> updateUserData({
+  _i8.Future<_i2.Either<_i3.SomeFailure, _i3.User>> updateUserData({
     required _i3.User? user,
     required _i3.ImageModel? image,
   }) =>
@@ -1903,8 +1903,8 @@ class MockIAppAuthenticationRepository extends _i1.Mock
             #image: image,
           },
         ),
-        returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
-            _FakeEither_0<_i3.SomeFailure, bool>(
+        returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, _i3.User>>.value(
+            _FakeEither_0<_i3.SomeFailure, _i3.User>(
           this,
           Invocation.method(
             #updateUserData,
@@ -1916,8 +1916,8 @@ class MockIAppAuthenticationRepository extends _i1.Mock
           ),
         )),
         returnValueForMissingStub:
-            _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
-                _FakeEither_0<_i3.SomeFailure, bool>(
+            _i8.Future<_i2.Either<_i3.SomeFailure, _i3.User>>.value(
+                _FakeEither_0<_i3.SomeFailure, _i3.User>(
           this,
           Invocation.method(
             #updateUserData,
@@ -1928,7 +1928,7 @@ class MockIAppAuthenticationRepository extends _i1.Mock
             },
           ),
         )),
-      ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
+      ) as _i8.Future<_i2.Either<_i3.SomeFailure, _i3.User>>);
 }
 
 /// A class which mocks [AppAuthenticationRepository].
@@ -2418,7 +2418,7 @@ class MockAppAuthenticationRepository extends _i1.Mock
       ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
 
   @override
-  _i8.Future<_i2.Either<_i3.SomeFailure, bool>> updateUserData({
+  _i8.Future<_i2.Either<_i3.SomeFailure, _i3.User>> updateUserData({
     required _i3.User? user,
     required _i3.ImageModel? image,
   }) =>
@@ -2431,8 +2431,8 @@ class MockAppAuthenticationRepository extends _i1.Mock
             #image: image,
           },
         ),
-        returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
-            _FakeEither_0<_i3.SomeFailure, bool>(
+        returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, _i3.User>>.value(
+            _FakeEither_0<_i3.SomeFailure, _i3.User>(
           this,
           Invocation.method(
             #updateUserData,
@@ -2444,8 +2444,8 @@ class MockAppAuthenticationRepository extends _i1.Mock
           ),
         )),
         returnValueForMissingStub:
-            _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
-                _FakeEither_0<_i3.SomeFailure, bool>(
+            _i8.Future<_i2.Either<_i3.SomeFailure, _i3.User>>.value(
+                _FakeEither_0<_i3.SomeFailure, _i3.User>(
           this,
           Invocation.method(
             #updateUserData,
@@ -2456,7 +2456,7 @@ class MockAppAuthenticationRepository extends _i1.Mock
             },
           ),
         )),
-      ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);
+      ) as _i8.Future<_i2.Either<_i3.SomeFailure, _i3.User>>);
 }
 
 /// A class which mocks [AuthenticationRepository].

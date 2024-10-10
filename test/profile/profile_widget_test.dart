@@ -20,11 +20,11 @@ void main() {
   group('${KScreenBlocName.profile} ', () {
     late ImagePicker imagePickerValue;
     late AuthenticationRepository mockAuthenticationRepository;
-    late XFile image;
+    // late XFile image;
     setUp(() {
       mockAuthenticationRepository = MockAuthenticationRepository();
       imagePickerValue = MockImagePicker();
-      image = XFile(KTestText.imageModels.downloadURL);
+      // image = XFile(KTestText.imageModels.downloadURL);
       // mockAppAuthenticationRepository = MockAppAuthenticationRepository();
 
       when(mockAuthenticationRepository.currentUser).thenAnswer(
@@ -41,15 +41,16 @@ void main() {
         (realInvocation) async => const Right(true),
       );
 
-      when(imagePickerValue.pickImage(source: ImageSource.gallery)).thenAnswer(
-        (realInvocation) async => image,
-      );
+      // when(imagePickerValue.pickImage(source: ImageSource.gallery)).
+      // thenAnswer(
+      //   (realInvocation) async => image,
+      // );
       ProfileBloc.imagePickerValue = imagePickerValue;
 
       when(
         mockAuthenticationRepository.updateUserData(
           user: KTestText.profileUserWithoutPhoto,
-          image: KTestText.imageModels,
+          image: null,
           nickname: KTestText.nicknameCorrect,
         ),
       ).thenAnswer(

@@ -40,10 +40,10 @@ Future<void> profileInitialHelper(
         findsOneWidget,
       );
 
-      expect(
-        find.byKey(KWidgetkeys.screen.profile.nickNameField),
-        findsOneWidget,
-      );
+      // expect(
+      //   find.byKey(KWidgetkeys.screen.profile.nickNameField),
+      //   findsOneWidget,
+      // );
 
       expect(
         find.byKey(KWidgetkeys.screen.profile.saveButton),
