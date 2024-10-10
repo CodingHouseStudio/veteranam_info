@@ -1,6 +1,6 @@
 // ignore_for_file: lines_longer_than_80_chars
 
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' show Color;
 
 abstract class AppColors {
   static const Color materialThemeWhite = Color(0xffffffff);
