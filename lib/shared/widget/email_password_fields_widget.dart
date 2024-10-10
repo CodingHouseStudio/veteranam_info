@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:veteranam/shared/shared.dart';
 
 class EmailPasswordFieldsWidget extends StatefulWidget {
@@ -11,11 +12,11 @@ class EmailPasswordFieldsWidget extends StatefulWidget {
     required this.backPassword,
     required this.isLogin,
     required this.showErrorText,
-    this.bottomTextKey,
+    // this.bottomTextKey,
     super.key,
     this.errorTextEmail,
     this.errorTextPassword,
-    this.bottomError,
+    // this.bottomError,
   });
 
   final bool showPassword;
@@ -28,19 +29,17 @@ class EmailPasswordFieldsWidget extends StatefulWidget {
   final String email;
   final void Function() backPassword;
   final bool isLogin;
-  final String? bottomError;
-  final Key? bottomTextKey;
+  // final String? bottomError;
+  // final Key? bottomTextKey;
 
   @override
   State<EmailPasswordFieldsWidget> createState() =>
       _EmailPasswordFieldsWidgetState();
 }
 
-class _EmailPasswordFieldsWidgetState extends State<EmailPasswordFieldsWidget>
-    with AutomaticKeepAliveClientMixin {
+class _EmailPasswordFieldsWidgetState extends State<EmailPasswordFieldsWidget> {
   late TextEditingController emailController;
   late TextEditingController passwordController;
-  bool obscurePassword = true;
   late FocusNode passwordFocusNode;
 
   @override
@@ -53,7 +52,6 @@ class _EmailPasswordFieldsWidgetState extends State<EmailPasswordFieldsWidget>
 
   @override
   Widget build(BuildContext context) {
-    super.build(context);
     return
         // GestureDetector(
         //   onTap: () => FocusScope.of(context).unfocus(),
@@ -106,28 +104,15 @@ class _EmailPasswordFieldsWidgetState extends State<EmailPasswordFieldsWidget>
         // else
         //   KSizedBox.kHeightSizedBox8,
         if (widget.showPassword) ...[
-          TextFieldWidget(
+          PasswordFieldWidget(
             widgetKey: KWidgetkeys.widget.emailPasswordFields.fieldPassword,
             onChanged: widget.onChangedPassword,
             errorText: widget.errorTextPassword,
-            hintText: context.l10n.password,
+            labelText: context.l10n.password,
             isDesk: widget.isDesk,
             controller: passwordController,
-            suffixIcon: IconButton(
-              key: KWidgetkeys.widget.emailPasswordFields.iconHidePassword,
-              icon: obscurePassword
-                  ? KIcon.eyeOff.copyWith(
-                      key: KWidgetkeys.widget.emailPasswordFields.iconEyeOff,
-                    )
-                  : KIcon.eye.copyWith(
-                      key: KWidgetkeys.widget.emailPasswordFields.iconEye,
-                    ),
-              onPressed: () =>
-                  setState(() => obscurePassword = !obscurePassword),
-            ),
             focusNode: passwordFocusNode,
             disposeFocusNode: false,
-            obscureText: obscurePassword,
             showErrorText: widget.showErrorText,
           ),
           KSizedBox.kHeightSizedBox8,
@@ -145,7 +130,7 @@ class _EmailPasswordFieldsWidgetState extends State<EmailPasswordFieldsWidget>
                 child: TextButton(
                   key: KWidgetkeys.widget.emailPasswordFields.recoveryButton,
                   style: KButtonStyles.withoutStyle,
-                  onPressed: null,
+                  onPressed: () => context.goNamed(KRoute.pwResetEmail.name),
                   child: Text(
                     context.l10n.dontRememberPassword,
                     style: AppTextStyle.materialThemeTitleMedium.copyWith(
@@ -160,19 +145,19 @@ class _EmailPasswordFieldsWidgetState extends State<EmailPasswordFieldsWidget>
             widgetKey: KWidgetkeys.widget.emailPasswordFields.fieldEmail,
             onChanged: widget.onChangedEmail,
             errorText: widget.errorTextEmail,
-            hintText: context.l10n.email,
+            labelText: context.l10n.email,
             isDesk: widget.isDesk,
             controller: emailController,
             showErrorText: widget.showErrorText,
           ),
-        if (widget.bottomError != null) ...[
-          KSizedBox.kHeightSizedBox8,
-          Text(
-            widget.bottomError!,
-            key: widget.bottomTextKey,
-            style: AppTextStyle.materialThemeBodyMediumError,
-          ),
-        ],
+        // if (widget.bottomError != null) ...[
+        //   KSizedBox.kHeightSizedBox8,
+        //   Text(
+        //     widget.bottomError!,
+        //     key: widget.bottomTextKey,
+        //     style: AppTextStyle.materialThemeBodyMediumError,
+        //   ),
+        // ],
       ],
       // ),
     );
@@ -185,7 +170,4 @@ class _EmailPasswordFieldsWidgetState extends State<EmailPasswordFieldsWidget>
     passwordFocusNode.dispose();
     super.dispose();
   }
-
-  @override
-  bool get wantKeepAlive => true;
 }

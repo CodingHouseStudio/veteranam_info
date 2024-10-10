@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' show Offset;
 
 /// COMMENT: Variables with dimensions that don't have a specific group
 abstract class KDimensions {
@@ -49,7 +49,11 @@ abstract class KDimensions {
 
   static const thirtyPercent = 0.3;
 
+  static const thirtyThreePercent = 0.33;
+
   static const seventyPercent = 0.7;
 
   static const sixtyPercent = 0.6;
+
+  static const sendingDelay = 60;
 }

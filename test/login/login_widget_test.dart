@@ -172,7 +172,7 @@ void main() {
         await loginInitialHelper(tester);
       });
       group('${KGroupText.goTo} ', () {
-        testWidgets('Navigate to ${KScreenBlocName.signUp}', (tester) async {
+        testWidgets('${KRoute.signUp.name} ', (tester) async {
           await loginPumpAppHelper(
             mockAuthenticationRepository: mockAuthenticationRepository,
             tester: tester,
@@ -180,6 +180,18 @@ void main() {
           );
 
           await loginNavigationHelper(
+            tester: tester,
+            mockGoRouter: mockGoRouter,
+          );
+        });
+        testWidgets('${KRoute.pwResetEmail.name} ', (tester) async {
+          await loginPumpAppHelper(
+            mockAuthenticationRepository: mockAuthenticationRepository,
+            tester: tester,
+            mockGoRouter: mockGoRouter,
+          );
+
+          await loginFormNavigationHelper(
             tester: tester,
             mockGoRouter: mockGoRouter,
           );

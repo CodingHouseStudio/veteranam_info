@@ -14,17 +14,16 @@ class LoginBodyWidget extends StatelessWidget {
       //   state.failure?.value(context),
       // ),
       builder: (context, _) {
-        return ScaffoldDecorationWidget(
+        return ScaffoldWidget(
           key: KWidgetkeys.screen.login.card,
-          mainPadding: ({required isDesk, required maxWidth}) =>
-              maxWidth.screenPadding(
-            precent:
-                isDesk ? KDimensions.thirtyPercent : KDimensions.fifteenPercent,
-            verticalPadding:
-                isDesk ? KPadding.kPaddingSize80 : KPadding.kPaddingSize24,
+          mainDeskPadding: ({required maxWidth}) => maxWidth.screenPadding(
+            precent: KDimensions.thirtyPercent,
+            verticalPadding: KPadding.kPaddingSize80,
             notUseHorizontal: maxWidth > KMinMaxSize.maxWidth640,
           ),
-          mainChildWidgetsFunction: ({required isDesk}) => [
+          isForm: true,
+          mainChildWidgetsFunction: ({required isDesk, required isTablet}) => [
+            if (!isDesk) KSizedBox.kHeightSizedBox24,
             ShortTitleIconWidget(
               title: context.l10n.login,
               titleKey: KWidgetkeys.screen.login.title,
@@ -52,8 +51,7 @@ class LoginBodyWidget extends StatelessWidget {
               showErrorText: _.formState == LoginEnum.invalidData ||
                   _.formState == LoginEnum.passwordInvalidData,
               isLogin: true,
-              bottomError: _.failure?.value(context),
-              bottomTextKey: KWidgetkeys.screen.login.errorText,
+              // bottomError: _.failure?.value(context),
             ),
             if (isDesk)
               KSizedBox.kHeightSizedBox24
@@ -80,19 +78,27 @@ class LoginBodyWidget extends StatelessWidget {
               mobIconPadding: KPadding.kPaddingSize12,
               darkMode: true,
             ),
-            if (_.formState == LoginEnum.success) ...[
-              KSizedBox.kHeightSizedBox16,
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: KPadding.kPaddingSize16,
-                ),
-                child: Text(
-                  context.l10n.loggingInWait,
-                  key: KWidgetkeys.screen.login.loadingText,
-                  style: AppTextStyle.materialThemeBodyMediumNeutralVariant60,
-                ),
-              ),
-            ],
+            SendingTextWidget(
+              textKey: KWidgetkeys.screen.login.submitingText,
+              failureText: _.failure?.value(context),
+              sendingText: context.l10n.loggingInWait,
+              successText: null,
+              showSendingText: _.formState == LoginEnum.success,
+            ),
+            // if (_.formState == LoginEnum.success) ...[
+            //   KSizedBox.kHeightSizedBox16,
+            //   Padding(
+            //     padding: const EdgeInsets.symmetric(
+            //       horizontal: KPadding.kPaddingSize16,
+            //     ),
+            //     child: Text(
+            //       context.l10n.loggingInWait,
+            //       key: KWidgetkeys.screen.login.loadingText,
+            //       style:
+            // AppTextStyle.materialThemeBodyMediumNeutralVariant60,
+            //     ),
+            //   ),
+            // ],
             if (isDesk)
               KSizedBox.kHeightSizedBox24
             else
@@ -159,6 +165,7 @@ class LoginBodyWidget extends StatelessWidget {
               isDesk: isDesk,
             ),
             // ),
+            if (!isDesk) KSizedBox.kHeightSizedBox24,
           ],
         );
       },

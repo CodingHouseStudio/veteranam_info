@@ -1299,6 +1299,88 @@
   "@dataSendInProgress": {
     "examples": "Message while changes are being saved."
   },
+  "passwordReset": "Password Reset",
+  "@passwordReset": {
+    "examples": "Text on the Password Reset Email page"
+  },
+  "passwordResetDescription": "Enter the email address you registered with, and we will send a code to reset your password.",
+  "@passwordResetDescription": {
+    "examples": "Text on the Password Reset Email page"
+  },
+  "passwordResetCodeSending": "We are sending you an email to reset your password. This might take a few seconds.",
+  "@passwordResetCodeSending": {
+    "examples": "Text on the Password Reset Email page, appears after the user enters their email address and clicks the button. Notifies the user about waiting for the email."
+  },
+  "passwordResetCodeSendFirst": "We’ve sent the information to",
+  "@passwordResetCodeSendFirst": {
+    "examples": "Text on the Password Reset Email page, appears after the user enters their email address and clicks the button. Notifies the user to expect an email. First part."
+  },
+  "passwordResetCodeSendSecond": "\nFollow the instructions in the email.",
+  "@passwordResetCodeSendSecond": {
+    "examples": "Text on the Password Reset Email page, appears after the user enters their email address and clicks the button. Notifies the user to follow the instructions in the email. Second part."
+  },
+  "passwordResetCodeSendThirty": "\nCheck your Spam and Promotions folders.",
+  "@passwordResetCodeSendThirty": {
+    "examples": "Text on the Password Reset Email page, appears after the user enters their email address and clicks the button. Notifies the user to check spam and promotions folders. Third part."
+  },
+  "confirmPassword": "Confirm Password",
+  "@confirmPassword": {
+    "examples": "Text on the Password Reset page for the password confirmation field",
+    "description": "In this field, the user needs to re-enter their password"
+  },
+  "successfully": "Successfully!",
+  "@successfully": {
+    "examples": "Text on the Password Reset page"
+  },
+  "successfullyDescruption": "You have successfully confirmed your access. Now, create a new password.",
+  "@successfullyDescruption": {
+    "examples": "Text on the Password Reset page"
+  },
+  "confirm": "Confirm",
+  "@confirm": {
+    "examples": "Text for the button on the Password Reset page",
+    "description": "The button is used to confirm the password change."
+  },
+  "changePasswordWaiting": "Changing your password. Please wait a moment.",
+  "@changePasswordWaiting": {
+    "examples": "Text on the Password Reset page, appears when the user has clicked the confirm button and is waiting for the password to be changed."
+  },
+  "changedPassword": "Your password has been changed! You can now log in.",
+  "@changedPassword": {
+    "examples": "Text on the Password Reset page, appears when the user has clicked the confirm button and the password has been successfully changed."
+  },
+  "passwordMismatch": "The passwords do not match. Please make sure both passwords are the same.",
+  "@passwordMismatch": {
+    "examples": "Message shown when the user enters different passwords in the password and confirm password fields."
+  },
+  "passwordResetWaiting": "Please wait, we are verifying your information.",
+  "@passwordResetWaiting": {
+    "examples": "Text on the Reset Password page, appears during the verification of the code."
+  },
+  "passwordResetWrongDescriptionFirst": "The link has expired or is invalid.\n Please try ",
+  "@passwordResetWrongDescriptionFirst": {
+    "examples": "Text on the Reset Password page, displayed if the code in the link is incorrect. First part."
+  },
+  "passwordResetWrongDescriptionSecond": "to send the link again.",
+  "@passwordResetWrongDescriptionSecond": {
+    "examples": "Text on the Reset Password page, displayed if the code in the link is incorrect. Second part."
+  },
+  "sendAgain": "Send Again",
+  "@sendAgain": {
+    "examples": "Text for the button on the Reset Password page, appears if the verification code is incorrect.",
+    "description": "The button is used to navigate to the Password Reset Email page."
+  },
+  "notReceiveLetter": "Didn't receive the email?",
+  "@notReceiveLetter": {
+    "examples": "Text for the button on the Reset Password Email page, appears after the user has entered their email and the email has been sent."
+  },
+  "resendWait": "You can resend the email in {remainingSeconds} seconds.",
+  "@resendWait": {
+    "placeholders": {
+      "remainingSeconds": {}
+    },
+    "examples": "Text on the Password Reset Email page, appears when the user has clicked send and is waiting for a minute before the next send."
+  },
   "dataUnmodified": "No changes were made because the data is identical.",
   "@dataUnmodified": {
     "examples": "Message when no changes were made to the data."
