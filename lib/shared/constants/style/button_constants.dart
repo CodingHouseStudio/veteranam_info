@@ -359,6 +359,21 @@ abstract class KButtonStyles {
     ),
   );
 
+  static const borderNeutralButtonStyle = ButtonStyle(
+    padding: WidgetStatePropertyAll(
+      EdgeInsets.symmetric(
+        vertical: KPadding.kPaddingSize4,
+        horizontal: KPadding.kPaddingSize16,
+      ),
+    ),
+    shape: WidgetStatePropertyAll(
+      RoundedRectangleBorder(
+        borderRadius: KBorderRadius.kBorderRadius32,
+        side: BorderSide(color: AppColors.materialThemeRefNeutralNeutral80),
+      ),
+    ),
+  );
+
   static const borderSecondaryButtonStyle = ButtonStyle(
     padding: WidgetStatePropertyAll(
       EdgeInsets.symmetric(
