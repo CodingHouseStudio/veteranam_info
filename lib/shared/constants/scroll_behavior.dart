@@ -1,6 +1,6 @@
-import 'dart:ui';
+import 'dart:ui' show PointerDeviceKind;
 
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' show MaterialScrollBehavior;
 
 class CustomScrollBehavior extends MaterialScrollBehavior {
   @override
