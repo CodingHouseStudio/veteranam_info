@@ -8,6 +8,7 @@ class BusinessDashboardBodyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScaffoldWidget(
+      isForm: true,
       mainChildWidgetsFunction: ({required isDesk, required isTablet}) => [
         KSizedBox.kHeightSizedBox30,
         TitleWidget(
