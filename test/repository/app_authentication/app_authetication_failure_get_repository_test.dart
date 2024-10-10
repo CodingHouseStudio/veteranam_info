@@ -211,5 +211,13 @@ void main() {
         ),
       );
     });
+    test('Sign up', () async {
+      expect(
+        await appAuthenticationRepository.checkVerificationCode(
+          null,
+        ),
+        isA<Left<SomeFailure, bool>>(),
+      );
+    });
   });
 }

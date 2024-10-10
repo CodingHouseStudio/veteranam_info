@@ -247,6 +247,13 @@ abstract class AppTextStyle {
     letterSpacing: 0.5,
     color: AppColors.materialThemeKeyColorsNeutral,
   );
+  static const TextStyle materialThemeBodyLargeBold = TextStyle(
+    fontFamily: 'Gilroy',
+    fontSize: 16,
+    height: 1.5,
+    fontWeight: FontWeight.bold,
+    letterSpacing: 0.5,
+  );
 
   /// materialThemeBodyMedium figma properties
   /// fontFamily: Gilroy
@@ -270,6 +277,14 @@ abstract class AppTextStyle {
     fontWeight: FontWeight.w400,
     letterSpacing: 0.25,
     color: AppColors.materialThemeRefNeutralVariantNeutralVariant35,
+  );
+  static const TextStyle materialThemeBodyMediumNeutralVariant50 = TextStyle(
+    fontFamily: 'Gilroy',
+    fontSize: 14,
+    height: 1.43,
+    fontWeight: FontWeight.w400,
+    letterSpacing: 0.25,
+    color: AppColors.materialThemeRefNeutralVariantNeutralVariant50,
   );
   static const TextStyle materialThemeBodyMediumNeutralVariant60 = TextStyle(
     fontFamily: 'Gilroy',

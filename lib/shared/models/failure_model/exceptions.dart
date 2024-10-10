@@ -302,3 +302,29 @@ class ShareFailure {
 
   final SomeFailure? status;
 }
+
+class VerifyCodeFailure {
+  const VerifyCodeFailure({required this.status});
+
+  factory VerifyCodeFailure.fromCode({
+    required FirebaseException error,
+    StackTrace? stack,
+  }) {
+    // debugPrint('SomeFailure: ${error.code}');
+    switch (error.code) {
+      case 'invalid-action-code':
+        return VerifyCodeFailure(
+          status: SomeFailure.wrongVerifyCode(),
+        );
+      default:
+        return VerifyCodeFailure(
+          status: SomeFailure.serverError(error: error, stack: stack),
+        );
+    }
+    // return VerifyCodeFailure(
+    //   status: SomeFailure.serverError(error: error, stack: stack),
+    // );
+  }
+
+  final SomeFailure status;
+}

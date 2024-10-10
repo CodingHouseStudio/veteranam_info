@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:veteranam/shared/shared.dart';
 
-import '../../helpers/change_window_size_helper.dart';
+import '../../test_dependency.dart';
 
 Future<void> profileSavesInitialHelper(
   WidgetTester tester,
