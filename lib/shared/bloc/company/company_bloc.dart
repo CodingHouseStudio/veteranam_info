@@ -23,7 +23,6 @@ class CompanyBloc extends Bloc<CompanyEvent, CompanyState> {
         ) {
     on<_Started>(_onStarted);
     on<_Updated>(_onUpdated);
-    on<_DeleteCompany>(_onDeleteCompany);
     on<_Failure>(_onFailure);
   }
 
@@ -55,13 +54,6 @@ class CompanyBloc extends Bloc<CompanyEvent, CompanyState> {
     Emitter<CompanyState> emit,
   ) async {
     emit(_Initial(company: event.company, failure: null));
-  }
-
-  Future<void> _onDeleteCompany(
-    _DeleteCompany event,
-    Emitter<CompanyState> emit,
-  ) async {
-    await _companyRepository.deleteCompany();
   }
 
   void _onFailure(

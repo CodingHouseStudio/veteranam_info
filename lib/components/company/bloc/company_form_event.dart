@@ -16,5 +16,7 @@ class CompanyFormEvent with _$CompanyFormEvent {
 
   const factory CompanyFormEvent.imageUpdated() = _ImageUpdated;
 
+  const factory CompanyFormEvent.deleteCompany() = _DeleteCompany;
+
   const factory CompanyFormEvent.save() = _Save;
 }

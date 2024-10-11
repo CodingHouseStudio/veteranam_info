@@ -33,6 +33,7 @@ class CompanyFormBloc extends Bloc<CompanyFormEvent, CompanyFormState> {
     on<_CodeUpdated>(_onCodeUpdated);
     on<_ImageUpdated>(_onImageUpdated);
     on<_LinkUpdated>(_onLinkUpdated);
+    on<_DeleteCompany>(_onDeleteCompany);
     on<_Save>(_onSave);
   }
 
@@ -100,6 +101,13 @@ class CompanyFormBloc extends Bloc<CompanyFormEvent, CompanyFormState> {
         failure: null,
       ),
     );
+  }
+
+  Future<void> _onDeleteCompany(
+    _DeleteCompany event,
+    Emitter<CompanyFormState> emit,
+  ) async {
+    await _companyRepository.deleteCompany();
   }
 
   Future<void> _onSave(
