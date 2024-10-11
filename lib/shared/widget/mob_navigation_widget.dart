@@ -16,13 +16,10 @@ class MobNavigationWidget extends StatelessWidget {
 
     return DecoratedBox(
       decoration: const BoxDecoration(
-        boxShadow: [KWidgetTheme.boxShadow],
+        boxShadow: KWidgetTheme.boxShadow,
       ),
       child: ClipRRect(
-        borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(KSize.kPixel32),
-          topRight: Radius.circular(KSize.kPixel32),
-        ),
+        borderRadius: KBorderRadius.kBorderRadiusTop32,
         clipBehavior: Clip.hardEdge,
         child: ConstrainedBox(
           constraints: const BoxConstraints(minHeight: KSize.kPixel80),
