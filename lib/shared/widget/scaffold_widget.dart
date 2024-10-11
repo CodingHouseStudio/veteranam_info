@@ -81,7 +81,7 @@ class ScaffoldWidget extends StatelessWidget {
             // policy: WidgetOrderTraversalPolicy(),
             child: Semantics(
               child: Scaffold(
-                resizeToAvoidBottomInset: !Config.isWeb,
+                resizeToAvoidBottomInset: true,
                 bottomNavigationBar:
                     Config.isWeb || !(showMobBottomNavigation ?? true)
                         ? null

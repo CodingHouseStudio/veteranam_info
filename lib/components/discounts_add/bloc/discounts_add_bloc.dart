@@ -20,7 +20,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
         super(
           const _Initial(
             categoryList: [],
-            category: MessageFieldModel.pure(),
+            category: ListFieldModel.pure(),
             city: ListFieldModel.pure(),
             period: DateFieldModel.pure(),
             title: MessageFieldModel.pure(),
@@ -35,7 +35,8 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
           ),
         ) {
     on<_Started>(_onStarted);
-    on<_CategoryUpdate>(_onCategoryUpdated);
+    on<_CategoryAdd>(_onCategoryAdd);
+    on<_CategoryRemove>(_onCategoryRemove);
     on<_CityAdd>(_onCityAdd);
     on<_CityRemove>(_onCityRemove);
     on<_PeriodUpdate>(_onPeriodUpdated);
@@ -80,12 +81,32 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
     );
   }
 
-  void _onCategoryUpdated(
-    _CategoryUpdate event,
+  void _onCategoryAdd(
+    _CategoryAdd event,
     Emitter<DiscountsAddState> emit,
   ) {
-    if (event.category == state.category.value) return;
-    final categoryFieldModel = MessageFieldModel.dirty(event.category);
+    final categoryFieldModel = ListFieldModel.dirty(
+      state.category.value.addFieldModel(event.category),
+    );
+
+    emit(
+      state.copyWith(
+        category: categoryFieldModel,
+        failure: null,
+        formState: DiscountsAddEnum.detailInProgress,
+      ),
+    );
+  }
+
+  void _onCategoryRemove(
+    _CategoryRemove event,
+    Emitter<DiscountsAddState> emit,
+  ) {
+    final categotiesList =
+        state.category.value.removeFieldModel(event.category);
+    final categoryFieldModel = categotiesList.isEmpty
+        ? const ListFieldModel.pure()
+        : ListFieldModel.dirty(categotiesList);
 
     emit(
       state.copyWith(
@@ -358,7 +379,7 @@ class DiscountsAddBloc extends Bloc<DiscountsAddEvent, DiscountsAddState> {
             .toList(),
         title: state.title.value,
         titleEN: null,
-        category: [state.category.value],
+        category: state.category.value,
         categoryEN: null,
         subcategory: null,
         subcategoryEN: null,
