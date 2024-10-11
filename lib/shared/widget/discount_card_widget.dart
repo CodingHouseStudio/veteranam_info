@@ -12,6 +12,7 @@ class DiscountCardWidget extends StatelessWidget {
     this.closeWidget,
     this.descriptionMethod,
     this.complaint,
+    this.useSiteUrl,
   });
 
   final DiscountModel discountItem;
@@ -22,6 +23,7 @@ class DiscountCardWidget extends StatelessWidget {
   final bool isLoading;
   final String Function(String)? descriptionMethod;
   final bool? complaint;
+  final bool? useSiteUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -196,7 +198,7 @@ class DiscountCardWidget extends StatelessWidget {
                     // if this is iOS and medical services, do not offer
                     // pointing to the website
                     link: discountItem.getLink,
-
+                    useSiteUrl: useSiteUrl,
                     cardEnum: CardEnum.discount,
                     // afterEvent: reportEvent,
                     cardId: discountItem.id,

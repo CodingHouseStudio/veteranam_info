@@ -10527,11 +10527,15 @@ class MockIReportRepository extends _i1.Mock implements _i3.IReportRepository {
 /// See the documentation for Mockito's code generation for more information.
 class MockIUrlRepository extends _i1.Mock implements _i3.IUrlRepository {
   @override
-  _i8.Future<_i2.Either<_i3.SomeFailure, bool>> share(String? url) =>
+  _i8.Future<_i2.Either<_i3.SomeFailure, bool>> share(
+    String? url, {
+    bool? useSiteUrl,
+  }) =>
       (super.noSuchMethod(
         Invocation.method(
           #share,
           [url],
+          {#useSiteUrl: useSiteUrl},
         ),
         returnValue: _i8.Future<_i2.Either<_i3.SomeFailure, bool>>.value(
             _FakeEither_0<_i3.SomeFailure, bool>(
@@ -10539,6 +10543,7 @@ class MockIUrlRepository extends _i1.Mock implements _i3.IUrlRepository {
           Invocation.method(
             #share,
             [url],
+            {#useSiteUrl: useSiteUrl},
           ),
         )),
         returnValueForMissingStub:
@@ -10548,6 +10553,7 @@ class MockIUrlRepository extends _i1.Mock implements _i3.IUrlRepository {
           Invocation.method(
             #share,
             [url],
+            {#useSiteUrl: useSiteUrl},
           ),
         )),
       ) as _i8.Future<_i2.Either<_i3.SomeFailure, bool>>);

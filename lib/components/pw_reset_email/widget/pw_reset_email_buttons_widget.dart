@@ -3,22 +3,26 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:veteranam/components/pw_reset_email/pw_reset_email.dart';
 import 'package:veteranam/shared/shared.dart';
 
-class PwResetEmailButtonsWidget extends StatefulWidget {
-  const PwResetEmailButtonsWidget({required this.isDesk, super.key});
+class PwResetEmailFormWidget extends StatefulWidget {
+  const PwResetEmailFormWidget({
+    required this.isDesk,
+    required this.email,
+    super.key,
+  });
   final bool isDesk;
+  final String? email;
 
   @override
-  State<PwResetEmailButtonsWidget> createState() =>
-      _PwResetEmailButtonsWidgetState();
+  State<PwResetEmailFormWidget> createState() => _PwResetEmailFormWidgetState();
 }
 
-class _PwResetEmailButtonsWidgetState extends State<PwResetEmailButtonsWidget> {
+class _PwResetEmailFormWidgetState extends State<PwResetEmailFormWidget> {
   late TextEditingController controller;
 
   @override
   void initState() {
     super.initState();
-    controller = TextEditingController();
+    controller = TextEditingController(text: widget.email);
   }
 
   @override
