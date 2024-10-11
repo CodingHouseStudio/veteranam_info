@@ -56,12 +56,17 @@ class _CompanyFormWidgetState extends State<CompanyFormWidget> {
             (context.read<CompanyBloc>().state.company.id.isEmpty)) {
           counter++;
         } else {
-          companyNameController.text =
-              context.read<CompanyBloc>().state.company.companyName ?? '';
-          codeController.text =
-              context.read<CompanyBloc>().state.company.code ?? '';
-          linkController.text =
-              context.read<CompanyBloc>().state.company.link ?? '';
+          if (context.read<CompanyBloc>().state.company.id.isNotEmpty) {
+            companyNameController.text =
+                context.read<CompanyBloc>().state.company.companyName ??
+                    companyNameController.text;
+            codeController.text =
+                context.read<CompanyBloc>().state.company.code ??
+                    codeController.text;
+            linkController.text =
+                context.read<CompanyBloc>().state.company.link ??
+                    linkController.text;
+          }
           timer.cancel();
         }
       },
