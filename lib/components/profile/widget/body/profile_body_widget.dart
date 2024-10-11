@@ -131,7 +131,7 @@ class ProfileBodyWidget extends StatelessWidget {
         deskPadding: const EdgeInsets.only(
           top: KPadding.kPaddingSize16,
           bottom: KPadding.kPaddingSize16,
-          right: KPadding.kPaddingSize40,
+          left: KPadding.kPaddingSize60,
         ),
         expanded: true,
         borderColor: AppColors.materialThemeRefNeutralNeutral80,
