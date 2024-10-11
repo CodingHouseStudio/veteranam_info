@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:veteranam/components/business_dashboard/widget/body/business_dashboard_body_widget.dart';
 import 'package:veteranam/components/components.dart';
 import 'package:veteranam/shared/shared.dart';
 
@@ -56,23 +58,7 @@ class _MyDiscountsCardState extends State<MyDiscountsCard> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  IconButtonWidget(
-                    onPressed: () => context.read<MyDiscountsWatcherBloc>().add(
-                          MyDiscountsWatcherEvent.deleteDiscount(
-                            widget.discountModel.id,
-                          ),
-                        ),
-                    key: KWidgetkeys.screen.myDiscounts.iconTrash,
-                    padding: KPadding.kPaddingSize12,
-                    icon: KIcon.trash,
-                    buttonStyle: KButtonStyles.borderBlackButtonStyle.copyWith(
-                      padding: const WidgetStatePropertyAll(
-                        EdgeInsets.all(
-                          KPadding.kPaddingSize12,
-                        ),
-                      ),
-                    ),
-                  ),
+                  trashButton(context),
                   KSizedBox.kWidthSizedBox8,
                   IconWidget(
                     key: KWidgetkeys.screen.myDiscounts.iconEdit,
@@ -159,23 +145,7 @@ class _MyDiscountsCardState extends State<MyDiscountsCard> {
               ),
               Row(
                 children: [
-                  IconButtonWidget(
-                    onPressed: () => context.read<MyDiscountsWatcherBloc>().add(
-                          MyDiscountsWatcherEvent.deleteDiscount(
-                            widget.discountModel.id,
-                          ),
-                        ),
-                    key: KWidgetkeys.screen.myDiscounts.iconTrash,
-                    padding: KPadding.kPaddingSize12,
-                    icon: KIcon.trash,
-                    buttonStyle: KButtonStyles.borderBlackButtonStyle.copyWith(
-                      padding: const WidgetStatePropertyAll(
-                        EdgeInsets.all(
-                          KPadding.kPaddingSize12,
-                        ),
-                      ),
-                    ),
-                  ),
+                  trashButton(context),
                   KSizedBox.kWidthSizedBox8,
                   IconWidget(
                     key: KWidgetkeys.screen.myDiscounts.iconEdit,
@@ -189,6 +159,36 @@ class _MyDiscountsCardState extends State<MyDiscountsCard> {
           ),
         ],
       ],
+    );
+  }
+
+  Widget trashButton(BuildContext context) {
+    return IconButtonWidget(
+      onPressed: () => context.dialog.showConfirmationDialog(
+        isDesk: widget.isDesk,
+        title: context.l10n.deleteDiscount,
+        subtitle: context.l10n.deleteDiscountQuestion,
+        confirmText: context.l10n.delete,
+        background: AppColors.materialThemeKeyColorsSecondary,
+        onPressed: () {
+          context.read<MyDiscountsWatcherBloc>().add(
+                MyDiscountsWatcherEvent.deleteDiscount(
+                  widget.discountModel.id,
+                ),
+              );
+          context.pop();
+        },
+      ),
+      key: KWidgetkeys.screen.myDiscounts.iconTrash,
+      padding: KPadding.kPaddingSize12,
+      icon: KIcon.trash,
+      buttonStyle: KButtonStyles.borderBlackButtonStyle.copyWith(
+        padding: const WidgetStatePropertyAll(
+          EdgeInsets.all(
+            KPadding.kPaddingSize12,
+          ),
+        ),
+      ),
     );
   }
 }
